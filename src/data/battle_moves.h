@@ -10142,7 +10142,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BEAK_BLAST] =
     {
-        .effect = EFFECT_PLACEHOLDER,
+        .effect = EFFECT_BEAK_BLAST,
         .power = 100,
         .type = TYPE_FLYING,
         .accuracy = 100,
@@ -10212,13 +10212,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SHELL_TRAP] =
     {
-        .effect = EFFECT_PLACEHOLDER,
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_SHELL_TRAP,
         .power = 150,
         .type = TYPE_FIRE,
         .accuracy = 100,
         .pp = 5,
         .secondaryEffectChance = 0,
-        .target = MOVE_TARGET_SELECTED,
+        .target = MOVE_TARGET_BOTH,
         .priority = -3,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         .split = SPLIT_SPECIAL,
@@ -10913,7 +10913,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_COURT_CHANGE] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_COURT_CHANGE,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 100,
@@ -10983,7 +10983,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SNAP_TRAP] =
     {
-        .effect = EFFECT_TRAP,  //TODO: add case/effect
+        .effect = EFFECT_TRAP,
         .power = 35,
         .type = TYPE_GRASS,
         .accuracy = 100,
@@ -11235,7 +11235,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_EXPANDING_FORCE] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_EXPANDING_FORCE,
         .power = 80,
         .type = TYPE_PSYCHIC,
         .accuracy = 100,
@@ -11263,12 +11263,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SCALE_SHOT] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO (EFFECT_MULTI_HIT + ABILITY_WEAK_ARMOR,
+        .effect = EFFECT_SCALE_SHOT,
         .power = 25,
         .type = TYPE_DRAGON,
         .accuracy = 90,
         .pp = 20,
-        .secondaryEffectChance = 0,
+        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
@@ -11277,7 +11277,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_METEOR_BEAM] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_METEOR_BEAM,
         .power = 120,
         .type = TYPE_ROCK,
         .accuracy = 90,
@@ -11333,7 +11333,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_RISING_VOLTAGE] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_RISING_VOLTAGE,
         .power = 70,
         .type = TYPE_ELECTRIC,
         .accuracy = 100,
@@ -11417,7 +11417,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_CORROSIVE_GAS] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_CORROSIVE_GAS, TODO
         .power = 0,
         .type = TYPE_POISON,
         .accuracy = 100,

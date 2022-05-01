@@ -144,6 +144,7 @@ static const u8 sText_PkmnDugHole[] = _("{B_ATK_NAME_WITH_PREFIX} dug a hole!");
 static const u8 sText_PkmnHidUnderwater[] = _("{B_ATK_NAME_WITH_PREFIX} hid\nunderwater!");
 static const u8 sText_PkmnSprangUp[] = _("{B_ATK_NAME_WITH_PREFIX} sprang up!");
 static const u8 sText_PkmnSqueezedByBind[] = _("{B_DEF_NAME_WITH_PREFIX} was squeezed by\n{B_ATK_NAME_WITH_PREFIX}'s BIND!");
+static const u8 sText_PkmnInSnapTrap[] = _("{B_DEF_NAME_WITH_PREFIX} got trapped\nby a snap trap!");
 static const u8 sText_PkmnTrappedInVortex[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped\nin the vortex!");
 static const u8 sText_PkmnTrappedBySandTomb[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped\nby SAND TOMB!");
 static const u8 sText_PkmnWrappedBy[] = _("{B_DEF_NAME_WITH_PREFIX} was WRAPPED by\n{B_ATK_NAME_WITH_PREFIX}!");
@@ -734,9 +735,16 @@ static const u8 sText_NeutralizingGasEnters[] = _("Neutralizing Gas filled the a
 static const u8 sText_NeutralizingGasOver[] = _("The effects of Neutralizing\nGas wore off!");
 static const u8 sText_PkmnTookTargetHigh[] = _("{B_ATK_NAME_WITH_PREFIX} took {B_DEF_NAME_WITH_PREFIX}\ninto the air!");
 static const u8 sText_TargetTooHeavy[] = _("But the target\nwas too heavy!");
+static const u8 sText_MeteorBeamCharging[] = _("{B_ATK_NAME_WITH_PREFIX} is overflowing\nwith space energy!");
+static const u8 sText_HeatingUpBeak[] = _("{B_ATK_NAME_WITH_PREFIX} started\nheating up its beak!");
+static const u8 sText_CourtChange[] = _("{B_ATK_NAME_WITH_PREFIX} swapped the battle\neffects affecting each side!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_COURTCHANGE - BATTLESTRINGS_TABLE_START] = sText_CourtChange,
+    [STRINGID_HEATUPBEAK - BATTLESTRINGS_TABLE_START] = sText_HeatingUpBeak,
+    [STRINGID_METEORBEAMCHARGING - BATTLESTRINGS_TABLE_START] = sText_MeteorBeamCharging,
+    [STRINGID_PKMNINSNAPTRAP - BATTLESTRINGS_TABLE_START] = sText_PkmnInSnapTrap,
     [STRINGID_NEUTRALIZINGGASOVER - BATTLESTRINGS_TABLE_START] = sText_NeutralizingGasOver,
     [STRINGID_NEUTRALIZINGGASENTERS - BATTLESTRINGS_TABLE_START] = sText_NeutralizingGasEnters,
     [STRINGID_BATTLERTYPECHANGEDTO - BATTLESTRINGS_TABLE_START] = sText_BattlerTypeChangedTo,
@@ -1550,6 +1558,7 @@ const u16 gFirstTurnOfTwoStringIds[] =
     [B_MSG_TURN1_GEOMANCY]      = STRINGID_PKNMABSORBINGPOWER,
     [B_MSG_TURN1_FREEZE_SHOCK]  = STRINGID_CLOAKEDINAFREEZINGLIGHT,
     [B_MSG_TURN1_SKY_DROP]      = STRINGID_PKMNTOOKTARGETHIGH,
+    [B_MSG_TURN1_METEOR_BEAM]   = STRINGID_METEORBEAMCHARGING,
 };
 
 // Index copied from move's index in sTrappingMoves
@@ -1563,6 +1572,7 @@ const u16 gWrappedStringIds[] =
     STRINGID_PKMNTRAPPEDBYSANDTOMB,  // MOVE_SAND_TOMB
     STRINGID_TRAPPEDBYSWIRLINGMAGMA, // MOVE_MAGMA_STORM
     STRINGID_INFESTATION,            // MOVE_INFESTATION
+    STRINGID_PKMNINSNAPTRAP,         // MOVE_SNAPTRAP
 };
 
 const u16 gMistUsedStringIds[] =

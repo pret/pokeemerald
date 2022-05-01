@@ -609,8 +609,12 @@
 #define STRINGID_NEUTRALIZINGGASOVER                  607
 #define STRINGID_TARGETTOOHEAVY                       608
 #define STRINGID_PKMNTOOKTARGETHIGH                   609
+#define STRINGID_PKMNINSNAPTRAP                       610
+#define STRINGID_METEORBEAMCHARGING                   611
+#define STRINGID_HEATUPBEAK                           612
+#define STRINGID_COURTCHANGE                          613
 
-#define BATTLESTRINGS_COUNT                           610
+#define BATTLESTRINGS_COUNT                           614
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -667,6 +671,7 @@
 #define B_MSG_TURN1_GEOMANCY       9
 #define B_MSG_TURN1_FREEZE_SHOCK   10
 #define B_MSG_TURN1_SKY_DROP       11
+#define B_MSG_TURN1_METEOR_BEAM    12
 
 // gMoveWeatherChangeStringIds
 #define B_MSG_STARTED_RAIN      0

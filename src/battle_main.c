@@ -4820,13 +4820,19 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
         {
             gActiveBattler = gBattlerAttacker = gBattleStruct->focusPunchBattlerId;
             gBattleStruct->focusPunchBattlerId++;
-            if (gChosenMoveByBattler[gActiveBattler] == MOVE_FOCUS_PUNCH
-                && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
+            if (!(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
                 && !(gDisableStructs[gBattlerAttacker].truantCounter)
                 && !(gProtectStructs[gActiveBattler].noValidMoves))
             {
-                BattleScriptExecute(BattleScript_FocusPunchSetUp);
-                return;
+                switch(gChosenMoveByBattler[gActiveBattler])
+                {
+                case MOVE_FOCUS_PUNCH:
+                    BattleScriptExecute(BattleScript_FocusPunchSetUp);
+                    return;
+                case MOVE_BEAK_BLAST:
+                    BattleScriptExecute(BattleScript_BeakBlastSetUp);
+                    return;
+                }
             }
         }
     }

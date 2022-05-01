@@ -1584,9 +1584,9 @@ static void OpponentHandleChooseMove(void)
                 BtlController_EmitTwoReturnValues(BUFFER_B, 15, gBattlerTarget);
                 break;
             default:
-                if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
+                if (GetBattlerMoveTargetType(gActiveBattler, moveInfo->moves[chosenMoveId]) & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
                     gBattlerTarget = gActiveBattler;
-                if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
+                if (GetBattlerMoveTargetType(gActiveBattler, moveInfo->moves[chosenMoveId]) & MOVE_TARGET_BOTH)
                 {
                     gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
                     if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
@@ -1611,7 +1611,7 @@ static void OpponentHandleChooseMove(void)
                 move = moveInfo->moves[chosenMoveId];
             } while (move == MOVE_NONE);
 
-            if (gBattleMoves[move].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
+            if (GetBattlerMoveTargetType(gActiveBattler, move) & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
                 BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (gActiveBattler << 8));
             else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
             {

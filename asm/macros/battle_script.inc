@@ -1968,6 +1968,14 @@
 	various \battler, VARIOUS_BATTLER_ITEM_TO_LAST_USED_ITEM
 	.endm
 
+	.macro setbeakblast battler:req
+	various \battler, VARIOUS_SET_BEAK_BLAST
+	.endm
+
+	.macro swapsidestatuses
+	various BS_ATTACKER, VARIOUS_SWAP_SIDE_STATUSES
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER, \stat | \stages << 3 | \down << 7

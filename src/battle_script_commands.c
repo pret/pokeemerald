@@ -281,7 +281,7 @@ static const s32 sExperienceScalingFactors[] =
 
 static const u16 sTrappingMoves[] =
 {
-    MOVE_BIND, MOVE_WRAP, MOVE_FIRE_SPIN, MOVE_CLAMP, MOVE_WHIRLPOOL, MOVE_SAND_TOMB, MOVE_MAGMA_STORM, MOVE_INFESTATION, 0xFFFF
+    MOVE_BIND, MOVE_WRAP, MOVE_FIRE_SPIN, MOVE_CLAMP, MOVE_WHIRLPOOL, MOVE_SAND_TOMB, MOVE_MAGMA_STORM, MOVE_INFESTATION, MOVE_SNAP_TRAP, 0xFFFF
 };
 
 #define STAT_CHANGE_WORKED      0
@@ -1296,12 +1296,12 @@ static const u8 sBattlePalaceNatureToFlavorTextId[NUM_NATURES] =
     [NATURE_QUIRKY]  = B_MSG_EAGER_FOR_MORE,
 };
 
-static bool32 NoTargetPresent(u32 move)
+static bool32 NoTargetPresent(u8 battlerId, u32 move)
 {
     if (!IsBattlerAlive(gBattlerTarget))
         gBattlerTarget = GetMoveTarget(move, NO_TARGET_OVERRIDE);
 
-    switch (gBattleMoves[move].target)
+    switch (GetBattlerMoveTargetType(battlerId, move))
     {
     case MOVE_TARGET_SELECTED:
     case MOVE_TARGET_DEPENDS:
@@ -1446,7 +1446,7 @@ static void Cmd_attackcanceler(void)
     }
 
     gHitMarker |= HITMARKER_OBEYS;
-    if (NoTargetPresent(gCurrentMove) && (!IsTwoTurnsMove(gCurrentMove) || (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)))
+    if (NoTargetPresent(gBattlerAttacker, gCurrentMove) && (!IsTwoTurnsMove(gCurrentMove) || (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)))
     {
         gBattlescriptCurrInstr = BattleScript_ButItFailedAtkStringPpReduce;
         if (!IsTwoTurnsMove(gCurrentMove) || (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS))
@@ -1528,6 +1528,11 @@ static void Cmd_attackcanceler(void)
         gLastLandedMoves[gBattlerTarget] = 0;
         gLastHitByType[gBattlerTarget] = 0;
         gBattleCommunication[MISS_TYPE] = B_MSG_PROTECTED;
+        gBattlescriptCurrInstr++;
+    }
+    else if (gProtectStructs[gBattlerTarget].beakBlastCharge && IsMoveMakingContact(gCurrentMove, gBattlerAttacker))
+    {
+        gProtectStructs[gBattlerAttacker].touchedProtectLike = TRUE;
         gBattlescriptCurrInstr++;
     }
     else
@@ -1724,6 +1729,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move)
 static void Cmd_accuracycheck(void)
 {
     u16 type, move = T2_READ_16(gBattlescriptCurrInstr + 5);
+    u16 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, move);
 
     if (move == ACC_CURR_MOVE)
         move = gCurrentMove;
@@ -1753,7 +1759,7 @@ static void Cmd_accuracycheck(void)
                 gBattleStruct->blunderPolicy = TRUE;    // Only activates from missing through acc/evasion checks
             
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE &&
-                (gBattleMoves[move].target == MOVE_TARGET_BOTH || gBattleMoves[move].target == MOVE_TARGET_FOES_AND_ALLY))
+                (moveTarget == MOVE_TARGET_BOTH || moveTarget == MOVE_TARGET_FOES_AND_ALLY))
                 gBattleCommunication[MISS_TYPE] = B_MSG_AVOIDED_ATK;
             else
                 gBattleCommunication[MISS_TYPE] = B_MSG_MISSED;
@@ -1787,7 +1793,7 @@ static void Cmd_ppreduce(void)
 
     if (!gSpecialStatuses[gBattlerAttacker].ppNotAffectedByPressure)
     {
-        switch (gBattleMoves[gCurrentMove].target)
+        switch (GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove))
         {
         case MOVE_TARGET_FOES_AND_ALLY:
             for (i = 0; i < gBattlersCount; i++)
@@ -2087,6 +2093,8 @@ static void Cmd_multihitresultmessage(void)
 
 static void Cmd_attackanimation(void)
 {
+    u16 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
+
     if (gBattleControllerExecFlags)
         return;
 
@@ -2103,9 +2111,9 @@ static void Cmd_attackanimation(void)
     }
     else
     {
-        if ((gBattleMoves[gCurrentMove].target & MOVE_TARGET_BOTH
-             || gBattleMoves[gCurrentMove].target & MOVE_TARGET_FOES_AND_ALLY
-             || gBattleMoves[gCurrentMove].target & MOVE_TARGET_DEPENDS)
+        if ((moveTarget & MOVE_TARGET_BOTH
+             || moveTarget & MOVE_TARGET_FOES_AND_ALLY
+             || moveTarget & MOVE_TARGET_DEPENDS)
             && gBattleScripting.animTargetsHit)
         {
             gBattlescriptCurrInstr++;
@@ -3159,7 +3167,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                            | BATTLE_TYPE_LINK
                            | BATTLE_TYPE_RECORDED_LINK
                            | BATTLE_TYPE_SECRET_BASE))
-                        && (gWishFutureKnock.knockedOffMons[side] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]))
+                         && (gWishFutureKnock.knockedOffMons[side] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]))
                     {
                         gBattlescriptCurrInstr++;
                     }
@@ -3494,6 +3502,13 @@ void SetMoveEffect(bool32 primary, u32 certain)
 
                 gBattleMons[gBattlerTarget].status2 |= STATUS2_ESCAPE_PREVENTION;
                 gBattleMons[gBattlerAttacker].status2 |= STATUS2_ESCAPE_PREVENTION;
+                break;
+            case MOVE_EFFECT_SCALE_SHOT:
+                if (!NoAliveMonsForEitherParty())
+                {
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_DefDownSpeedUp;
+                }
                 break;
             }
         }
@@ -5014,13 +5029,24 @@ static void Cmd_moveend(void)
                 }
                 else if (gProtectStructs[gBattlerTarget].obstructed && gCurrentMove != MOVE_SUCKER_PUNCH)
                 {
-                    gProtectStructs[gBattlerAttacker].touchedProtectLike = 0;
+                    gProtectStructs[gBattlerAttacker].touchedProtectLike = FALSE;
                     i = gBattlerAttacker;
                     gBattlerAttacker = gBattlerTarget;
                     gBattlerTarget = i; // gBattlerTarget and gBattlerAttacker are swapped in order to activate Defiant, if applicable
                     gBattleScripting.moveEffect = MOVE_EFFECT_DEF_MINUS_2;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_KingsShieldEffect;
+                    effect = 1;
+                }
+                // Not strictly a protect effect, but works the same way
+                else if (gProtectStructs[gBattlerTarget].beakBlastCharge
+                         && CanBeBurned(gBattlerAttacker)
+                         && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+                {
+                    gProtectStructs[gBattlerAttacker].touchedProtectLike = FALSE;
+                    gBattleMons[gBattlerAttacker].status1 = STATUS1_BURN;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_BeakBlastBurn;
                     effect = 1;
                 }
             }
@@ -5318,6 +5344,8 @@ static void Cmd_moveend(void)
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_NEXT_TARGET: // For moves hitting two opposing Pokemon.
+        {
+            u16 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
             // Set a flag if move hits either target (for throat spray that can't check damage)
             if (!(gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE)
              && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
@@ -5326,12 +5354,13 @@ static void Cmd_moveend(void)
             if (!(gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE)
                 && gBattleTypeFlags & BATTLE_TYPE_DOUBLE
                 && !gProtectStructs[gBattlerAttacker].chargingTurn
-                && (gBattleMoves[gCurrentMove].target == MOVE_TARGET_BOTH || gBattleMoves[gCurrentMove].target == MOVE_TARGET_FOES_AND_ALLY)
+                && (moveTarget == MOVE_TARGET_BOTH
+                    || moveTarget == MOVE_TARGET_FOES_AND_ALLY)
                 && !(gHitMarker & HITMARKER_NO_ATTACKSTRING))
             {
                 u8 battlerId;
 
-                if (gBattleMoves[gCurrentMove].target == MOVE_TARGET_FOES_AND_ALLY)
+                if (moveTarget == MOVE_TARGET_FOES_AND_ALLY)
                 {
                     gHitMarker |= HITMARKER_NO_PPDEDUCT;
                     for (battlerId = gBattlerTarget + 1; battlerId < gBattlersCount; battlerId++)
@@ -5367,6 +5396,7 @@ static void Cmd_moveend(void)
             RecordLastUsedMoveBy(gBattlerAttacker, gCurrentMove);
             gBattleScripting.moveendState++;
             break;
+        }
         case MOVEEND_EJECT_BUTTON:
             if (gCurrentMove != MOVE_DRAGON_TAIL
               && gCurrentMove != MOVE_CIRCLE_THROW
@@ -7621,6 +7651,66 @@ static bool32 IsRototillerAffected(u32 battlerId)
     return TRUE;
 }
 
+#define COURTCHANGE_SWAP(status, structField, temp)                     \
+{                                                                       \
+    temp = gSideStatuses[B_SIDE_PLAYER];                                \
+    if (gSideStatuses[B_SIDE_OPPONENT] & status)                        \
+        gSideStatuses[B_SIDE_PLAYER] |= status;                         \
+    else                                                                \
+        gSideStatuses[B_SIDE_PLAYER] &= ~(status);                      \
+    if (temp & status)                                                  \
+        gSideStatuses[B_SIDE_OPPONENT] |= status;                       \
+    else                                                                \
+        gSideStatuses[B_SIDE_OPPONENT] &= ~(status);                    \
+    SWAP(sideTimerPlayer->structField, sideTimerOpp->structField, temp);\
+}                                                                       \
+
+#define UPDATE_COURTCHANGED_BATTLER(structField)\
+{                                               \
+    sideTimerPlayer->structField ^= BIT_SIDE;        \
+    sideTimerOpp->structField ^= BIT_SIDE;        \
+}                                               \
+
+static bool32 CourtChangeSwapSideStatuses(void)
+{
+    struct SideTimer *sideTimerPlayer = &gSideTimers[B_SIDE_PLAYER];
+    struct SideTimer *sideTimerOpp = &gSideTimers[B_SIDE_OPPONENT];
+    u32 temp;
+
+    // TODO: add Pledge-related effects
+    // TODO: add Gigantamax-related effects
+
+    // Swap timers and statuses
+    COURTCHANGE_SWAP(SIDE_STATUS_REFLECT, reflectTimer, temp)
+    COURTCHANGE_SWAP(SIDE_STATUS_LIGHTSCREEN, lightscreenTimer, temp)
+    COURTCHANGE_SWAP(SIDE_STATUS_MIST, mistTimer, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_SAFEGUARD, safeguardTimer, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_AURORA_VEIL, auroraVeilTimer, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_TAILWIND, tailwindTimer, temp);
+    // Lucky Chant doesn't exist in gen 8, but seems like it should be affected by Court Change
+    COURTCHANGE_SWAP(SIDE_STATUS_LUCKY_CHANT, luckyChantTimer, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_SPIKES, spikesAmount, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_STEALTH_ROCK, stealthRockAmount, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_TOXIC_SPIKES, toxicSpikesAmount, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_STICKY_WEB, stickyWebAmount, temp);
+
+    // Change battler IDs of swapped effects. Needed for the correct string when they expire
+    // E.g. "Foe's Reflect wore off!"
+    UPDATE_COURTCHANGED_BATTLER(reflectBattlerId);
+    UPDATE_COURTCHANGED_BATTLER(lightscreenBattlerId);
+    UPDATE_COURTCHANGED_BATTLER(mistBattlerId);
+    UPDATE_COURTCHANGED_BATTLER(safeguardBattlerId);
+    UPDATE_COURTCHANGED_BATTLER(auroraVeilBattlerId);
+    UPDATE_COURTCHANGED_BATTLER(tailwindBattlerId);
+    UPDATE_COURTCHANGED_BATTLER(luckyChantBattlerId);
+
+    // For Mirror Armor only
+    gBattleStruct->stickyWebUser = gBattlerAttacker;
+
+    // Track which side originally set the Sticky Web
+    SWAP(sideTimerPlayer->stickyWebBattlerSide, sideTimerOpp->stickyWebBattlerSide, temp);
+}
+
 static void Cmd_various(void)
 {
     struct Pokemon *mon;
@@ -8322,6 +8412,7 @@ static void Cmd_various(void)
             case MOVE_MIRROR_COAT:
             case MOVE_METAL_BURST:
             case MOVE_ME_FIRST:
+            case MOVE_BEAK_BLAST:
                 gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
                 break;
             default:
@@ -9474,6 +9565,12 @@ static void Cmd_various(void)
     case VARIOUS_BATTLER_ITEM_TO_LAST_USED_ITEM:
         gBattleMons[gActiveBattler].item = gLastUsedItem;
         break;
+    case VARIOUS_SET_BEAK_BLAST:    
+        gProtectStructs[gBattlerAttacker].beakBlastCharge = TRUE;
+        break;
+    case VARIOUS_SWAP_SIDE_STATUSES:
+        CourtChangeSwapSideStatuses();
+        break;
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;
@@ -9618,7 +9715,7 @@ static void Cmd_jumpifnexttargetvalid(void)
 
     for (gBattlerTarget++; gBattlerTarget < gBattlersCount; gBattlerTarget++)
     {
-        if (gBattlerTarget == gBattlerAttacker && !(gBattleMoves[gCurrentMove].target & MOVE_TARGET_USER))
+        if (gBattlerTarget == gBattlerAttacker && !(GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove) & MOVE_TARGET_USER))
             continue;
         if (IsBattlerAlive(gBattlerTarget))
             break;
@@ -11429,7 +11526,8 @@ static bool8 IsTwoTurnsMove(u16 move)
         || gBattleMoves[move].effect == EFFECT_TWO_TURNS_ATTACK
         || gBattleMoves[move].effect == EFFECT_SOLAR_BEAM
         || gBattleMoves[move].effect == EFFECT_SEMI_INVULNERABLE
-        || gBattleMoves[move].effect == EFFECT_BIDE)
+        || gBattleMoves[move].effect == EFFECT_BIDE
+        || gBattleMoves[move].effect == EFFECT_METEOR_BEAM)
         return TRUE;
     else
         return FALSE;
@@ -12123,6 +12221,7 @@ static void Cmd_recoverbasedonsunlight(void)
 static void Cmd_setstickyweb(void)
 {
     u8 targetSide = GetBattlerSide(gBattlerTarget);
+
     if (gSideStatuses[targetSide] & SIDE_STATUS_STICKY_WEB)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
@@ -12130,6 +12229,7 @@ static void Cmd_setstickyweb(void)
     else
     {
         gSideStatuses[targetSide] |= SIDE_STATUS_STICKY_WEB;
+        gSideTimers[targetSide].stickyWebBattlerSide = GetBattlerSide(gBattlerAttacker); // For Court Change/Defiant - set this to the user's side
         gSideTimers[targetSide].stickyWebAmount = 1;
         gBattleStruct->stickyWebUser = gBattlerAttacker;    // For Mirror Armor
         gBattlescriptCurrInstr += 5;
@@ -12140,7 +12240,7 @@ static void Cmd_selectfirstvalidtarget(void)
 {
     for (gBattlerTarget = 0; gBattlerTarget < gBattlersCount; gBattlerTarget++)
     {
-        if (gBattlerTarget == gBattlerAttacker && !(gBattleMoves[gCurrentMove].target & MOVE_TARGET_USER))
+        if (gBattlerTarget == gBattlerAttacker && !(GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove) & MOVE_TARGET_USER))
             continue;
         if (IsBattlerAlive(gBattlerTarget))
             break;
@@ -12441,7 +12541,7 @@ static void Cmd_tryswapitems(void) // trick
         u8 sideAttacker = GetBattlerSide(gBattlerAttacker);
         u8 sideTarget = GetBattlerSide(gBattlerTarget);
 
-        // you can't swap items if they were knocked off in regular battles
+        // You can't swap items if they were knocked off in regular battles
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
                              | BATTLE_TYPE_EREADER_TRAINER
                              | BATTLE_TYPE_FRONTIER
