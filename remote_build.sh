@@ -12,6 +12,6 @@ make_cmd=$(git config --local remake.make)
 make_product=$(git config --local remake.src)
 make_dest=$(git config --local remake.dest)
 set -x
-git push build --force
+git push build --force-with-lease
 ssh $remote_host "cd $remote_path && git reset --hard && git checkout $git_branch && $make_cmd"
 scp "$remote_host:$remote_path/$make_product" $make_dest
