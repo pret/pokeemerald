@@ -24,6 +24,8 @@ extern const u8 EventScript_FollowerFastHopping[];
 extern const u8 EventScript_FollowerDizzy[];
 extern const u8 EventScript_FollowerLookAroundScared[];
 extern const u8 EventScript_FollowerDance[];
+extern const u8 EventScript_FollowerFaceUp[];
+extern const u8 EventScript_FollowerFaceResult[];
 extern const u8 EnterPokeballMovement[];
 
 extern const u8 EventScript_TestSignpostMsg[];

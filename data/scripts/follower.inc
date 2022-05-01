@@ -27,7 +27,6 @@ callfunc ScrFunc_emote
 
 EventScript_Follower::
   lock
-  faceplayer
   bufferlivemonspeciesname 0
   playfirstmoncry
   callfunc ScrFunc_getfolloweraction
@@ -56,6 +55,8 @@ EventScript_FollowerLovesYou::
 
 @ Message address must be loaded into bank 0
 EventScript_FollowerGeneric:: @ similar to Std_MsgboxDefault
+  faceplayer
+EventScript_FollowerGenericSkipFace:
   waitfieldeffect FLDEFF_EMOTE
   message 0x0
   waitmessage
@@ -63,6 +64,7 @@ EventScript_FollowerGeneric:: @ similar to Std_MsgboxDefault
   return
 
 EventScript_FollowerJump::
+  faceplayer
   applymovement 0xFE FollowerSplashMovement
   waitmovement 0xFE
   waitfieldeffect FLDEFF_EMOTE
@@ -403,6 +405,7 @@ FollowerDance:
 @ Movement scripts
 
 EventScript_FollowerIsShivering::
+  faceplayer
   compare VAR_FACING, DIR_NORTH
   call_if_eq ShiverVertical
   compare VAR_FACING, DIR_SOUTH
@@ -429,6 +432,7 @@ EventScript_FollowerNostalgia::
   goto EventScript_FollowerGeneric
 
 EventScript_FollowerHopping::
+  faceplayer
   applymovement 0xFE FollowerSkippingMovement
   waitmovement 0xFE
   goto EventScript_FollowerGeneric
@@ -454,6 +458,7 @@ JumpOnW:
   return
 
 EventScript_FollowerJumpOnPlayer::
+  faceplayer
   compare VAR_FACING, DIR_NORTH
   call_if_eq JumpOnS
   compare VAR_FACING, DIR_SOUTH
@@ -485,6 +490,7 @@ CuddleW:
   return
 
 EventScript_FollowerCuddling:: @ similar to Std_MsgboxDefault
+  faceplayer
   compare VAR_FACING, DIR_NORTH
   call_if_eq CuddleS
   compare VAR_FACING, DIR_SOUTH
@@ -524,6 +530,7 @@ ShCuddleW:
   return
 
 EventScript_FollowerShiverCuddling::
+  faceplayer
   compare VAR_FACING, DIR_NORTH
   call_if_eq ShCuddleS
   compare VAR_FACING, DIR_SOUTH
@@ -555,6 +562,7 @@ CreepCloserW:
   return
 
 EventScript_FollowerGetCloser::
+  faceplayer
   compare VAR_FACING, DIR_NORTH
   call_if_eq CreepCloserS
   compare VAR_FACING, DIR_SOUTH
@@ -586,6 +594,7 @@ PokePlayerW:
   return
 
 EventScript_FollowerPokingPlayer::
+  faceplayer
   compare VAR_FACING, DIR_NORTH
   call_if_eq PokePlayerS
   compare VAR_FACING, DIR_SOUTH
@@ -604,19 +613,20 @@ EventScript_FollowerLookAround::
 EventScript_FollowerLookAway::
   applymovement 0xFE FollowerLookAway
   waitmovement 0xFE
-  goto EventScript_FollowerGeneric
+  goto EventScript_FollowerGenericSkipFace
 
 EventScript_FollowerLookAwayBark::
   applymovement 0xFE FollowerLookAwayBark
   waitmovement 0xFE
-  goto EventScript_FollowerGeneric
+  goto EventScript_FollowerGenericSkipFace
 
 EventScript_FollowerLookAwayPoke::
   applymovement 0xFE FollowerLookAwayPokeG
   waitmovement 0xFE
-  goto EventScript_FollowerGeneric
+  goto EventScript_FollowerGenericSkipFace
 
 EventScript_FollowerPokeGround::
+  faceplayer
   applymovement 0xFE FollowerPokeGround
   waitmovement 0xFE
   goto EventScript_FollowerGeneric
@@ -624,17 +634,17 @@ EventScript_FollowerPokeGround::
 EventScript_FollowerStartled::
   applymovement 0xFE FollowerStartled
   waitmovement 0xFE
-  goto EventScript_FollowerGeneric
+  goto EventScript_FollowerGenericSkipFace
 
 EventScript_FollowerFastHopping::
   applymovement 0xFE FollowerHopFast
   waitmovement 0xFE
-  goto EventScript_FollowerGeneric
+  goto EventScript_FollowerGenericSkipFace
 
 EventScript_FollowerDizzy::
   applymovement 0xFE FollowerDizzy
   waitmovement 0
-  goto EventScript_FollowerGeneric
+  goto EventScript_FollowerGenericSkipFace
 
 EventScript_FollowerLookAroundScared::
   applymovement 0xFE FollowerLookAroundScared
@@ -642,6 +652,35 @@ EventScript_FollowerLookAroundScared::
   goto EventScript_FollowerGeneric
 
 EventScript_FollowerDance::
+  faceplayer
   applymovement 0xFE FollowerDance
   waitmovement 0
+  goto EventScript_FollowerGenericSkipFace
+
+EventScript_FollowerFaceUp::
+  applymovement 0xFE Common_Movement_FaceUp
+  waitmovement 0xFE
+  goto EventScript_FollowerGenericSkipFace
+
+EventScript_FollowerFaceResult:: @ Face towards direction in VAR_RESULT
+  switch VAR_RESULT
+  case DIR_SOUTH, EventScript_FollowerFaceDown
+	case DIR_NORTH, EventScript_FollowerFaceUp
+	case DIR_WEST, EventScript_FollowerFaceLeft
+	case DIR_EAST, EventScript_FollowerFaceRight
   goto EventScript_FollowerGeneric
+
+EventScript_FollowerFaceDown:
+  applymovement 0xFE Common_Movement_FaceDown
+  waitmovement 0xFE
+  goto EventScript_FollowerGenericSkipFace
+
+EventScript_FollowerFaceLeft:
+  applymovement 0xFE Common_Movement_FaceLeft
+  waitmovement 0xFE
+  goto EventScript_FollowerGenericSkipFace
+
+EventScript_FollowerFaceRight:
+  applymovement 0xFE Common_Movement_FaceRight
+  waitmovement 0xFE
+  goto EventScript_FollowerGenericSkipFace

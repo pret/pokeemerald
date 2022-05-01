@@ -34,17 +34,17 @@ def prepare_string(s):
 
 
 # Exports up to n messages in C format to outfile
-def export_messages(infile, outfile, n=None, indent=2):
+def export_messages(infile, outfile, n=None, indent=0, start=0):
     with open(infile, 'r') as f_in:
         lines = f_in.readlines()
         if n is not None:
             lines = lines[:n]
     with open(outfile, 'w') as f_out:
-        codelines = [' '*indent + f'(const char []) _("{prepare_string(s)}"),' for s in lines]
+        codelines = [' '*indent + f'static const u8 sCondMsg{start+i:02d}[] = _("{prepare_string(s)}");' for i, s in enumerate(lines)]
         f_out.write('\n'.join(codelines))
     print(f'{len(lines)} lines written')
     return len(lines)
 
 
 if __name__ == '__main__':
-    export_messages('emotions.txt', 'emotions.h', n=15)
+    export_messages('emotions.txt', 'emotions.h', n=1, start=7)

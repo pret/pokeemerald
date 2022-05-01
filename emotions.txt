@@ -1,102 +1,94 @@
 Happy (Special):
+Specific map:
 {STR_VAR_1} greeted your mom.
-Your pokemon is staring intently at the mountain peak.
-{STR_VAR_1} is staring straight at the pokemon league.
-{STR_VAR_1} is staring at the sea.
+
+Landscape/map feature:
 {STR_VAR_1} greeted everyone!
 {STR_VAR_1} greeted the two. (when standing in front of 2 trainers).
 {STR_VAR_1} is very eager! ( gym ) must have type advantage.
-{STR_VAR_1} is very composed and sure of itself (in a gym with a type advantage).
 {STR_VAR_1} greeted Amphy!
+
 Neutral (Special):
-(CELEBI) danced happily ( Pokemon Exclusive ).
-(CELEBI) danced beautiful ( Pokemon Exclusive ).
-Sniff sniff, something smells good! ( Day care center ).
-{STR_VAR_1} seems dazzled after seeing the sky.
-Your pokemon is surveying the shelves restlessly ( In pokemart ).
-Your pokemon is smelling the scent of the flowers. (When next to flowers in Cherrygrove City).
-Your pokemon is staring intently at the sea! (On the beach).
+Specific map:
 Why is it doing warm-up exercises? (Cerulean Gym).
 {STR_VAR_1} is running along the side of the pool! (Cerulean Gym).
-{STR_VAR_1} is vigorously producing fire (must be a fire type).
-{STR_VAR_1} spat fire (must be a fire type).
-{STR_VAR_1} is staring intently at the shelves.
-(TYPHLOSION) emitted fire and shouted ( Pokemon Exclusive ).
-{STR_VAR_1} is vigorously breathing fire ( must be fire type).
-(MAGIKARP) is leaping around more than usual (lake of rage, During team rockets broadcast) ( Pokemon Exclusive ).
+
+Map feature:
+Your pokemon is smelling the scent of the flowers. (When next to flowers in Cherrygrove City).
 {STR_VAR_1} Greeted Slowbro (Cerulean city, in front of Slowbro).
-{STR_VAR_1} seems happy to have taken a shower! (Celadon gym) (Grass,Water type).
-{STR_VAR_1} is fidgeting in front of everyone (maybe baby pokemon).
-{STR_VAR_1} roared!
-Your pokemon is staring intently at the sea!
-{STR_VAR_1} is looking at the surging sea.
 {STR_VAR_1} is playing on the sand.
 {STR_VAR_1} is staring fixedly at the sea.
-{STR_VAR_1} Cried out, looking at the tall mountain!
 {STR_VAR_1} is stomping on the grass!
-{STR_VAR_1} seems highly interested in the tree.
 {STR_VAR_1} is playing around, Picking bits of grass.
+{STR_VAR_1} seems highly interested in the tree.
 {STR_VAR_1} is looking outside and frolicking!
+
+Pokemon exclusive:
+(MAGIKARP) is leaping around more than usual (lake of rage, During team rockets broadcast) ( Pokemon Exclusive ).
+
+Pokemon feature:
+{STR_VAR_1} seems happy to have taken a shower! (Celadon gym) (Grass,Water type).
+
+Misc:
+{STR_VAR_1} seems dazzled after seeing the sky.
+{STR_VAR_1} is fidgeting in front of everyone (maybe baby pokemon).
+{STR_VAR_1} roared!
 {STR_VAR_1} spun around in a circle!
+
 Sad (Special):
-{STR_VAR_1}'s burn looks painful! (when burnt).
+Pokemon feature:
+
 Upset (Special):
-{STR_VAR_1} is taking shelter in the grass from the rain.
-{STR_VAR_1} is splashing around in the wet grass.
+Specific map(s):
 It seems to have eaten something strange. It's making an odd face... (Olivine Cafe).
 {STR_VAR_1} is staring at the crumbling floor (burnt tower).
 {STR_VAR_1} seems to think that (Player) has disappeared! ( Morty's Gym ).
-{STR_VAR_1} seems to feel a little claustrophobic.
-{STR_VAR_1} is a bit nervous about the narrow space!
-{STR_VAR_1} is splashing around in the grass (must be fire type).
+
+Map feature:
+{STR_VAR_1} is splashing around in the wet grass.
+
+Pokemon feature:
 Your pokemon doesn't like splashing around on the ground (must be fire type).
 
-{STR_VAR_1} seems very cold (when frozen).
+Misc:
+{STR_VAR_1} seems to feel a little claustrophobic.
+{STR_VAR_1} is a bit nervous about the narrow space!
 {STR_VAR_1} seems uneasy and is poking (PLAYER).
-{STR_VAR_1} is trembling with fear (Cemetery).
-{STR_VAR_1} seems somehow sad... (Cemetery).
-{STR_VAR_1} is growling softly (Dragon type in Dragons Den).
+
 Angry (Special):
+Map feature:
 {STR_VAR_1} is staring at the Persian statue and glaring.
 {STR_VAR_1} is glaring at the PERSIAN statue!
 {STR_VAR_1} is glaring at your foe!
 {STR_VAR_1} is intimidating your foe!
+
 Pensive (Special):
-{STR_VAR_1} is staring intently at the goods on display!
-{STR_VAR_1} is staring at its reflection in the water.
-{STR_VAR_1} is staring intently at the reflection of its face.
-{STR_VAR_1} is gnawing at the ice.
-{STR_VAR_1} seems interested in Amphy...
-{STR_VAR_1} has a sleepy look on its face... (Near Jigglypuff in Radio Tower.).
-{STR_VAR_1} seems to relax as it hears the sound of rustling leaves...
+Specific map(s):
 {STR_VAR_1} seems to be listening to the sound of rustling leaves.
-Your pokemon turned to face the other way, showing a defiant expression.
 {STR_VAR_1} is preoccupied by the ceiling, which seems like it may collapse (burnt tower).
-{STR_VAR_1} focused with a sharp gaze! (On the way to Victory Road.).
-{STR_VAR_1} emitted fire and shouted! (must be a fire type).
 {STR_VAR_1} is concerned about the swaying pillar (sprout tower).
 Your pokemon is drooling a little (Olivine Cafe).
-{STR_VAR_1} seems very interested in the bicycles (bike shop).
 {STR_VAR_1} is preoccupied by the floor, which seems like it may collapse (burnt tower).
-{STR_VAR_1} is nervous ( in a gym before beating gym leader ) ( must have type disadvantage ).
+
+Map feature:
+{STR_VAR_1} is staring intently at the reflection of its face.
+{STR_VAR_1} seems interested in Amphy...
+{STR_VAR_1} has a sleepy look on its face... (Near Jigglypuff in Radio Tower.).
+
+Misc:
+Your pokemon turned to face the other way, showing a defiant expression.
+
 Music (Special):
+Map feature:
 {STR_VAR_1} is pulling out the grass.
-Waah! your pokemon suddenly splashed water! (on a shore).
 {STR_VAR_1} is happy to see what's out doors!
-{STR_VAR_1} seems to want to touch the machine! (Power plant).
 {STR_VAR_1} is listening intently to the sound of the waves.
-{STR_VAR_1} is swaying with the boat!
-{STR_VAR_1} is dancing along with the rolling of the ship.
-{STR_VAR_1} doesn't want to get off the boat yet!
-{STR_VAR_1} is listening to the sound of the machine.
-{STR_VAR_1} seems happy at the sight of water on the window!
-Your pokemon is blowing sand in the air!
 Your pokemon is staring spellbound at the night sky!
 Your pokemon seems to be enjoying sliding around!
-{STR_VAR_1} is touching the ice.
 {STR_VAR_1} is steadily observing the flow of the river.
 {STR_VAR_1} is noticing the scent of the grass.
-{STR_VAR_1} is playing around, plucking bits of grass.
+Misc:
+{STR_VAR_1} seems happy at the sight of water on the window!
 {STR_VAR_1} is looking up at the ceiling.
 {STR_VAR_1} seems to be enjoying this a little bit!
 {STR_VAR_1} is wandering around enjoying the forest scenery.
@@ -104,25 +96,20 @@ Your pokemon seems to be enjoying sliding around!
 {STR_VAR_1} is playing around with a leaf.
 {STR_VAR_1} is playing around, touching the leaves.
 Your pokemon is happily gazing at the beautiful, starry sky!
-{STR_VAR_1} is pulling out the grass.
 {STR_VAR_1} is rolling around in the grass.
 {STR_VAR_1} seems to want to return to the lab (after you receive the Mystery egg).
 Your pokemon is staring at the various items.
-{STR_VAR_1} is listening to the sound of the waterfall ( Mt. Mortar).
 {STR_VAR_1} is looking up the tall mountain... (Mt. Mortar).
 {STR_VAR_1} seems concerned about the waterfall.
 {STR_VAR_1} is sniffing around the room. (Inside Hero's Room).
 {STR_VAR_1} is dancing around the pillar! (Seems to occur more for Bellsprout)(sprout tower).
 {STR_VAR_1} swayed around, dancing in a strange manner.(Seems to occur more for Bellsprout)(sprout tower).
 {STR_VAR_1} swayed and danced around as it pleased (Seems to occur more for Bellsprout)(sprout tower).
-Your Pokemon is happily looking at (Player)'s footprints! (Sandy area).
 Your Pokemon is playing around and splashing in the water! (Water's edge).
-Your Pokemon is blowing sand in the air! (Sandy area).
 {STR_VAR_1} is looking up at the sky.
 {STR_VAR_1} is poking at garbage (Goldenrods underground path).
 Your pokemon is rolling a screw from a bicycle around.
 {STR_VAR_1} is looking up at the sky.
-{STR_VAR_1} seems to be happy about the rain! ( during rain, must not have type disadvantage to water).
 {STR_VAR_1} is clawing the grass!
 {STR_VAR_1} is looking around restlessly at the Forest.
 {STR_VAR_1} is playfully nibbling at the ground.
@@ -136,7 +123,6 @@ Your pokemon is rolling a screw from a bicycle around.
 {STR_VAR_1} is gazing restlessly at the building ( in goldenrod).
 
 Surprised (Special):
-Your pokemon has a flower petal on its face! (Newbark Town).
 {STR_VAR_1} seems to have gotten caught in the clumps of grass.
 {STR_VAR_1} slipped on the floor and seems likely to fall!
 Your pokemon is very concerned about the room below ( Burnt tower ).
@@ -144,19 +130,14 @@ Careful! seems like the floor could collapse, and it might fall.
 {STR_VAR_1} seems to think that (Player) has disappeared! ( Morty's Gym ).
 {STR_VAR_1} gazed surprisingly at the rock!
 Huh? your pokemon found something in top of the mountain ( outside Mt. Mortar) (!).
-{STR_VAR_1} is cautious about the confined area!
 {STR_VAR_1} got tangled up in the branches and almost fell down!
 {STR_VAR_1} looked up at the sky and shouted loudly.
 {STR_VAR_1} seems to have found something!
-{STR_VAR_1} is feeling nervous and a touch claustrophobic. (while inside an elevator).
 {STR_VAR_1} almost forgot it was holding that (Held item).
 {STR_VAR_1} is happy at the sight of the water on the window!
 {STR_VAR_1} was surprised by the sounds in the thicket!
 Seems the breeze is coming from here.
 Oh! its slipping and came over here for support (on ice).
-Your pokemon almost slipped and fell over! (on ice).
-A cold wind suddenly blew by!
-Your pokemon seems surprised to touch ice. (TODO: Regice)
 {STR_VAR_1} seems to have gotten a bit of zap! (Power plant).
 {STR_VAR_1} is dazzled by the shiny brightness of the bridge! (Standing on Nugget Bridge).
 {STR_VAR_1} is slipping on the water and almost fell over!
