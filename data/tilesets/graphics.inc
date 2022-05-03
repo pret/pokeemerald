@@ -1729,3 +1729,123 @@ gTilesetPalettes_UnionRoom::
 	.align 2
 gTilesetTiles_UnionRoom::
 	.incbin "data/tilesets/secondary/union_room/tiles.4bpp.lz"
+
+	.align 2
+gTilesetPalettes_Digimundo_Primary::
+	.incbin "data/tilesets/primary/digimundo_primary/palettes/00.gbapal"
+	.incbin "data/tilesets/primary/digimundo_primary/palettes/01.gbapal"
+	.incbin "data/tilesets/primary/digimundo_primary/palettes/02.gbapal"
+	.incbin "data/tilesets/primary/digimundo_primary/palettes/03.gbapal"
+	.incbin "data/tilesets/primary/digimundo_primary/palettes/04.gbapal"
+	.incbin "data/tilesets/primary/digimundo_primary/palettes/05.gbapal"
+	.incbin "data/tilesets/primary/digimundo_primary/palettes/06.gbapal"
+	.incbin "data/tilesets/primary/digimundo_primary/palettes/07.gbapal"
+	.incbin "data/tilesets/primary/digimundo_primary/palettes/08.gbapal"
+	.incbin "data/tilesets/primary/digimundo_primary/palettes/09.gbapal"
+	.incbin "data/tilesets/primary/digimundo_primary/palettes/10.gbapal"
+	.incbin "data/tilesets/primary/digimundo_primary/palettes/11.gbapal"
+	.incbin "data/tilesets/primary/digimundo_primary/palettes/12.gbapal"
+
+	.align 2
+gTilesetTiles_Digimundo_Primary::
+	.incbin "data/tilesets/primary/digimundo_primary/tiles.4bpp.lz"
+
+	.align 2
+gTilesetPalettes_Digimundo_Secondary::
+	.incbin "data/tilesets/secondary/digimundo_secondary/palettes/00.gbapal"
+	.incbin "data/tilesets/secondary/digimundo_secondary/palettes/01.gbapal"
+	.incbin "data/tilesets/secondary/digimundo_secondary/palettes/02.gbapal"
+	.incbin "data/tilesets/secondary/digimundo_secondary/palettes/03.gbapal"
+	.incbin "data/tilesets/secondary/digimundo_secondary/palettes/04.gbapal"
+	.incbin "data/tilesets/secondary/digimundo_secondary/palettes/05.gbapal"
+	.incbin "data/tilesets/secondary/digimundo_secondary/palettes/06.gbapal"
+	.incbin "data/tilesets/secondary/digimundo_secondary/palettes/07.gbapal"
+	.incbin "data/tilesets/secondary/digimundo_secondary/palettes/08.gbapal"
+	.incbin "data/tilesets/secondary/digimundo_secondary/palettes/09.gbapal"
+	.incbin "data/tilesets/secondary/digimundo_secondary/palettes/10.gbapal"
+	.incbin "data/tilesets/secondary/digimundo_secondary/palettes/11.gbapal"
+	.incbin "data/tilesets/secondary/digimundo_secondary/palettes/12.gbapal"
+
+	.align 2
+gTilesetTiles_Digimundo_Secondary::
+	.incbin "data/tilesets/secondary/digimundo_secondary/tiles.4bpp.lz"
+
+	.align 2
+gTilesetPalettes_Mundo_real::
+	.incbin "data/tilesets/primary/mundo_real/palettes/00.gbapal"
+	.incbin "data/tilesets/primary/mundo_real/palettes/01.gbapal"
+	.incbin "data/tilesets/primary/mundo_real/palettes/02.gbapal"
+	.incbin "data/tilesets/primary/mundo_real/palettes/03.gbapal"
+	.incbin "data/tilesets/primary/mundo_real/palettes/04.gbapal"
+	.incbin "data/tilesets/primary/mundo_real/palettes/05.gbapal"
+	.incbin "data/tilesets/primary/mundo_real/palettes/06.gbapal"
+	.incbin "data/tilesets/primary/mundo_real/palettes/07.gbapal"
+	.incbin "data/tilesets/primary/mundo_real/palettes/08.gbapal"
+	.incbin "data/tilesets/primary/mundo_real/palettes/09.gbapal"
+	.incbin "data/tilesets/primary/mundo_real/palettes/10.gbapal"
+	.incbin "data/tilesets/primary/mundo_real/palettes/11.gbapal"
+	.incbin "data/tilesets/primary/mundo_real/palettes/12.gbapal"
+
+	.align 2
+gTilesetTiles_Mundo_real::
+	.incbin "data/tilesets/primary/mundo_real/tiles.4bpp.lz"
+
+	.align 2
+gTilesetPalettes_Mundo_Real_Pueblo::
+	.incbin "data/tilesets/secondary/mundo_real_pueblo/palettes/00.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_pueblo/palettes/01.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_pueblo/palettes/02.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_pueblo/palettes/03.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_pueblo/palettes/04.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_pueblo/palettes/05.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_pueblo/palettes/06.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_pueblo/palettes/07.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_pueblo/palettes/08.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_pueblo/palettes/09.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_pueblo/palettes/10.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_pueblo/palettes/11.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_pueblo/palettes/12.gbapal"
+
+	.align 2
+gTilesetTiles_Mundo_Real_Pueblo::
+	.incbin "data/tilesets/secondary/mundo_real_pueblo/tiles.4bpp.lz"
+
+	.align 2
+gTilesetPalettes_Mundo_Real_Ciudad::
+	.incbin "data/tilesets/primary/mundo_real_ciudad/palettes/00.gbapal"
+	.incbin "data/tilesets/primary/mundo_real_ciudad/palettes/01.gbapal"
+	.incbin "data/tilesets/primary/mundo_real_ciudad/palettes/02.gbapal"
+	.incbin "data/tilesets/primary/mundo_real_ciudad/palettes/03.gbapal"
+	.incbin "data/tilesets/primary/mundo_real_ciudad/palettes/04.gbapal"
+	.incbin "data/tilesets/primary/mundo_real_ciudad/palettes/05.gbapal"
+	.incbin "data/tilesets/primary/mundo_real_ciudad/palettes/06.gbapal"
+	.incbin "data/tilesets/primary/mundo_real_ciudad/palettes/07.gbapal"
+	.incbin "data/tilesets/primary/mundo_real_ciudad/palettes/08.gbapal"
+	.incbin "data/tilesets/primary/mundo_real_ciudad/palettes/09.gbapal"
+	.incbin "data/tilesets/primary/mundo_real_ciudad/palettes/10.gbapal"
+	.incbin "data/tilesets/primary/mundo_real_ciudad/palettes/11.gbapal"
+	.incbin "data/tilesets/primary/mundo_real_ciudad/palettes/12.gbapal"
+
+	.align 2
+gTilesetTiles_Mundo_Real_Ciudad::
+	.incbin "data/tilesets/primary/mundo_real_ciudad/tiles.4bpp.lz"
+
+	.align 2
+gTilesetPalettes_Mundo_Real_City::
+	.incbin "data/tilesets/secondary/mundo_real_city/palettes/00.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_city/palettes/01.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_city/palettes/02.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_city/palettes/03.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_city/palettes/04.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_city/palettes/05.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_city/palettes/06.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_city/palettes/07.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_city/palettes/08.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_city/palettes/09.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_city/palettes/10.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_city/palettes/11.gbapal"
+	.incbin "data/tilesets/secondary/mundo_real_city/palettes/12.gbapal"
+
+	.align 2
+gTilesetTiles_Mundo_Real_City::
+	.incbin "data/tilesets/secondary/mundo_real_city/tiles.4bpp.lz"

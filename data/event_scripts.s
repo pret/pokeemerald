@@ -1055,3 +1055,15 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
+
+	.include "data/maps/Pueblo_Looper/scripts.inc"
+
+	.include "data/maps/Ciudad_Afesh/scripts.inc"
+
+	.include "data/maps/Ruta_5/scripts.inc"
+
+	.include "data/maps/Hogar/scripts.inc"
+
+	.include "data/maps/Escuela/scripts.inc"
+
+	.include "data/maps/Vivienda/scripts.inc"

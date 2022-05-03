@@ -557,3 +557,46 @@ gMetatiles_UnionRoom::
 	.align 1
 gMetatileAttributes_UnionRoom::
 	.incbin "data/tilesets/secondary/union_room/metatile_attributes.bin"
+
+	.align 1
+gMetatiles_Digimundo_Primary::
+	.incbin "data/tilesets/primary/digimundo_primary/metatiles.bin"
+
+	.align 1
+gMetatileAttributes_Digimundo_Primary::
+	.incbin "data/tilesets/primary/digimundo_primary/metatile_attributes.bin"
+	.align 1
+gMetatiles_Digimundo_Secondary::
+	.incbin "data/tilesets/secondary/digimundo_secondary/metatiles.bin"
+
+	.align 1
+gMetatileAttributes_Digimundo_Secondary::
+	.incbin "data/tilesets/secondary/digimundo_secondary/metatile_attributes.bin"
+	.align 1
+gMetatiles_Mundo_real::
+	.incbin "data/tilesets/primary/mundo_real/metatiles.bin"
+
+	.align 1
+gMetatileAttributes_Mundo_real::
+	.incbin "data/tilesets/primary/mundo_real/metatile_attributes.bin"
+	.align 1
+gMetatiles_Mundo_Real_Pueblo::
+	.incbin "data/tilesets/secondary/mundo_real_pueblo/metatiles.bin"
+
+	.align 1
+gMetatileAttributes_Mundo_Real_Pueblo::
+	.incbin "data/tilesets/secondary/mundo_real_pueblo/metatile_attributes.bin"
+	.align 1
+gMetatiles_Mundo_Real_Ciudad::
+	.incbin "data/tilesets/primary/mundo_real_ciudad/metatiles.bin"
+
+	.align 1
+gMetatileAttributes_Mundo_Real_Ciudad::
+	.incbin "data/tilesets/primary/mundo_real_ciudad/metatile_attributes.bin"
+	.align 1
+gMetatiles_Mundo_Real_City::
+	.incbin "data/tilesets/secondary/mundo_real_city/metatiles.bin"
+
+	.align 1
+gMetatileAttributes_Mundo_Real_City::
+	.incbin "data/tilesets/secondary/mundo_real_city/metatile_attributes.bin"

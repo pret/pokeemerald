@@ -4410,6 +4410,66 @@
       "secondary_tileset": "gTileset_MysteryEventsHouse",
       "border_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/border.bin",
       "blockdata_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/map.bin"
+    },
+    {
+      "id": "LAYOUT_PUEBLO_LOOPER",
+      "name": "Pueblo_Looper_Layout",
+      "width": 60,
+      "height": 42,
+      "primary_tileset": "gTileset_Mundo_real",
+      "secondary_tileset": "gTileset_Mundo_Real_Pueblo",
+      "border_filepath": "data/layouts/Pueblo_Looper/border.bin",
+      "blockdata_filepath": "data/layouts/Pueblo_Looper/map.bin"
+    },
+    {
+      "id": "LAYOUT_CIUDAD_AFESH",
+      "name": "Ciudad_Afesh_Layout",
+      "width": 55,
+      "height": 55,
+      "primary_tileset": "gTileset_Mundo_real",
+      "secondary_tileset": "gTileset_Mundo_Real_City",
+      "border_filepath": "data/layouts/Ciudad_Afesh/border.bin",
+      "blockdata_filepath": "data/layouts/Ciudad_Afesh/map.bin"
+    },
+    {
+      "id": "LAYOUT_RUTA_5",
+      "name": "Ruta_5_Layout",
+      "width": 40,
+      "height": 30,
+      "primary_tileset": "gTileset_Mundo_real",
+      "secondary_tileset": "gTileset_Mundo_Real_City",
+      "border_filepath": "data/layouts/Ruta_5/border.bin",
+      "blockdata_filepath": "data/layouts/Ruta_5/map.bin"
+    },
+    {
+      "id": "LAYOUT_HOGAR",
+      "name": "Hogar_Layout",
+      "width": 60,
+      "height": 20,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BrendansMaysHouse",
+      "border_filepath": "data/layouts/Hogar/border.bin",
+      "blockdata_filepath": "data/layouts/Hogar/map.bin"
+    },
+    {
+      "id": "LAYOUT_ESCUELA",
+      "name": "Escuela_Layout",
+      "width": 40,
+      "height": 25,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Facility",
+      "border_filepath": "data/layouts/Escuela/border.bin",
+      "blockdata_filepath": "data/layouts/Escuela/map.bin"
+    },
+    {
+      "id": "LAYOUT_VIVIENDA",
+      "name": "Vivienda_Layout",
+      "width": 70,
+      "height": 70,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BrendansMaysHouse",
+      "border_filepath": "data/layouts/Vivienda/border.bin",
+      "blockdata_filepath": "data/layouts/Vivienda/map.bin"
     }
   ]
 }

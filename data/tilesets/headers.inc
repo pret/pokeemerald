@@ -830,3 +830,69 @@ gTileset_UnionRoom::
 	.4byte gMetatiles_UnionRoom
 	.4byte gMetatileAttributes_UnionRoom
 	.4byte NULL @ animation callback
+
+	.align 2
+gTileset_Digimundo_Primary::
+	.byte TRUE @ is compressed
+	.byte FALSE @ is secondary
+	.2byte 0
+	.4byte gTilesetTiles_Digimundo_Primary
+	.4byte gTilesetPalettes_Digimundo_Primary
+	.4byte gMetatiles_Digimundo_Primary
+	.4byte gMetatileAttributes_Digimundo_Primary
+	.4byte NULL
+
+	.align 2
+gTileset_Digimundo_Secondary::
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0
+	.4byte gTilesetTiles_Digimundo_Secondary
+	.4byte gTilesetPalettes_Digimundo_Secondary
+	.4byte gMetatiles_Digimundo_Secondary
+	.4byte gMetatileAttributes_Digimundo_Secondary
+	.4byte NULL
+
+	.align 2
+gTileset_Mundo_real::
+	.byte TRUE @ is compressed
+	.byte FALSE @ is secondary
+	.2byte 0
+	.4byte gTilesetTiles_Mundo_real
+	.4byte gTilesetPalettes_Mundo_real
+	.4byte gMetatiles_Mundo_real
+	.4byte gMetatileAttributes_Mundo_real
+	.4byte NULL
+
+	.align 2
+gTileset_Mundo_Real_Pueblo::
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0
+	.4byte gTilesetTiles_Mundo_Real_Pueblo
+	.4byte gTilesetPalettes_Mundo_Real_Pueblo
+	.4byte gMetatiles_Mundo_Real_Pueblo
+	.4byte gMetatileAttributes_Mundo_Real_Pueblo
+	.4byte NULL
+
+	.align 2
+gTileset_Mundo_Real_Ciudad::
+	.byte TRUE @ is compressed
+	.byte FALSE @ is secondary
+	.2byte 0
+	.4byte gTilesetTiles_Mundo_Real_Ciudad
+	.4byte gTilesetPalettes_Mundo_Real_Ciudad
+	.4byte gMetatiles_Mundo_Real_Ciudad
+	.4byte gMetatileAttributes_Mundo_Real_Ciudad
+	.4byte NULL
+
+	.align 2
+gTileset_Mundo_Real_City::
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0
+	.4byte gTilesetTiles_Mundo_Real_City
+	.4byte gTilesetPalettes_Mundo_Real_City
+	.4byte gMetatiles_Mundo_Real_City
+	.4byte gMetatileAttributes_Mundo_Real_City
+	.4byte NULL
