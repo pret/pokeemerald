@@ -1581,6 +1581,16 @@ void PrepareStringBattle(u16 stringId, u8 battler)
         else
             SET_STATCHANGER(STAT_SPATK, 2, FALSE);
     }
+#if  B_UPDATED_INTIMIDATE >= GEN_8
+    else if (stringId == STRINGID_PKMNCUTSATTACKWITH && targetAbility == ABILITY_RATTLED
+            && CompareStat(gBattlerTarget, STAT_SPEED, MAX_STAT_STAGE, CMP_LESS_THAN))
+    {
+        gBattlerAbility = gBattlerTarget;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_DefiantActivates;
+        SET_STATCHANGER(STAT_SPEED, 1, FALSE);
+    }
+#endif
 
     gActiveBattler = battler;
     BtlController_EmitPrintString(BUFFER_A, stringId);
