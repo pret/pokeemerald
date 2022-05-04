@@ -17,7 +17,41 @@
 
   ],
   "warp_events": [
-
+    {
+      "x": 4,
+      "y": 31,
+      "elevation": 0,
+      "dest_map": "MAP_HOGAR",
+      "dest_warp_id": 4
+    },
+    {
+      "x": 2,
+      "y": 14,
+      "elevation": 0,
+      "dest_map": "MAP_PUEBLO_LOOPER",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 22,
+      "y": 23,
+      "elevation": 0,
+      "dest_map": "MAP_PUEBLO_LOOPER",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 48,
+      "y": 23,
+      "elevation": 0,
+      "dest_map": "MAP_PUEBLO_LOOPER",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 48,
+      "y": 35,
+      "elevation": 0,
+      "dest_map": "MAP_PUEBLO_LOOPER",
+      "dest_warp_id": 0
+    }
   ],
   "coord_events": [
 
