@@ -1939,3 +1939,12 @@
 	setvar VAR_0x8006, \item
 	special CreateEventLegalEnemyMon
 	.endm
+
+	@ Attempts to trigger a special evolution method.
+	@ 'evoMethod' is the evolution you want to trigger.
+	@ There may be other conditions required which are coded for in GetEvolutionTargetSpecies.
+	@ EX: tryspecialevo EVO_WATER_SCROLL will trigger an evolution for Kubfu.
+	.macro tryspecialevo evoMethod:req
+	setvar VAR_0x8000, \evoMethod
+	special TrySpecialOverworldEvo
+	.endm
