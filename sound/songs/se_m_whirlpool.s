@@ -106,7 +106,7 @@ se_m_whirlpool_1:
 	.byte	W01
 	.byte		BEND  , c_v-28
 	.byte	W04
-	.byte		EOT   
+	.byte		EOT
 	.byte	FINE
 
 @******************************************************@

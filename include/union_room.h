@@ -5,50 +5,58 @@
 #include "link.h"
 #include "constants/union_room.h"
 
-// Exported type declarations
+// In the Union Room the player is only ever connected to ≤ 4 other players.
+// However, there can be up to MAX_UNION_ROOM_LEADERS (8) object events to
+// represent leaders of recently discovered link groups, and each of those groups 
+// may have up to MAX_RFU_PLAYERS (5) players in it including the leader.
+// These players are represented on-screen by NPC sprites drawn around the leader.
+// Thus there can be 40 sprites of other players on-screen, in 8 groups of 5.
+#define NUM_UNION_ROOM_SPRITES (MAX_UNION_ROOM_LEADERS * MAX_RFU_PLAYERS)
 
-struct WirelessGnameUnamePair
+// The maximum number of recently connected players that can be tracked.
+// Note that this is significantly less than NUM_UNION_ROOM_SPRITES, i.e. not
+// every player that can be shown in the Union Room can be tracked at once.
+// Information such as a group member's gender can instead be read from partnerInfo  
+// of the leader's RfuGameData by tracking at least all of the group leaders.
+#define MAX_RFU_PLAYER_LIST_SIZE 16
+
+struct RfuPlayerData
 {
-    struct GFtgtGname gname;
-    u8 ALIGNED(4) playerName[PLAYER_NAME_LENGTH + 1];
+    struct RfuGameData data;
+    u8 ALIGNED(4) name[RFU_USER_NAME_LENGTH];
 };
 
-struct UnkStruct_x1C
+struct RfuPlayer
 {
-    struct WirelessGnameUnamePair gname_uname;
-    u8 active:1;
-};
-
-struct UnkStruct_x20
-{
-    struct WirelessGnameUnamePair gname_uname;
+    struct RfuPlayerData rfu;
     u16 timeoutCounter;
     u8 groupScheduledAnim:2;
     bool8 useRedText:1; // Never set
-    u8 field_1B;
-    u8 filler[3];
+    u8 newPlayerCountdown;
+    u8 unused;
 };
 
-struct UnkStruct_Main0
+struct RfuPlayerList
 {
-    struct UnkStruct_x20 arr[MAX_UNION_ROOM_PLAYERS];
+    struct RfuPlayer players[MAX_RFU_PLAYER_LIST_SIZE];
 };
 
-struct UnkStruct_Main4
+struct RfuIncomingPlayer
 {
-    struct UnkStruct_x1C arr[MAX_RFU_PLAYERS];
+    struct RfuPlayerData rfu;
+    bool8 active:1;
 };
 
-struct UnkStruct_Main8
+struct RfuIncomingPlayerList
 {
-    struct UnkStruct_x20 arr[MAX_RFU_PLAYERS];
+    struct RfuIncomingPlayer players[MAX_RFU_PLAYERS];
 };
 
 struct WirelessLink_Leader
 {
-    struct UnkStruct_Main0 *field_0;
-    struct UnkStruct_Main4 *field_4;
-    struct UnkStruct_Main8 *field_8;
+    struct RfuPlayerList *playerList;
+    struct RfuIncomingPlayerList *incomingPlayerList;
+    struct RfuPlayerList *playerListBackup;
     u8 state;
     u8 textState;
     u8 delayTimerAfterOk;
@@ -57,8 +65,8 @@ struct WirelessLink_Leader
     u8 nPlayerModeWindowId;
     u8 listTaskId;
     u8 playerCount;
-    u16 field_14;
-    u8 field_16;
+    u16 yesNoWindowId;
+    u8 unused;
     u8 listenTaskId;
     u8 activity;
     u8 joinRequestAnswer;
@@ -67,20 +75,20 @@ struct WirelessLink_Leader
 
 struct WirelessLink_Group
 {
-    struct UnkStruct_Main0 *field_0;
-    struct UnkStruct_Main4 *field_4;
+    struct RfuPlayerList *playerList;
+    struct RfuIncomingPlayerList *incomingPlayerList;
     u8 state;
     u8 textState;
-    u8 field_A;
+    u8 delayTimerAfterOk; // Unused
     u8 listWindowId;
     u8 bButtonCancelWindowId;
     u8 playerNameAndIdWindowId;
     u8 listTaskId;
     u8 leaderId;
-    u8 field_10;
+    u8 unused;
     u8 listenTaskId;
-    u8 isWonderNews;
-    u8 field_13;
+    bool8 isWonderNews;
+    bool8 showListMenu; // Never set
     u8 refreshTimer;
     u8 delayBeforePrint;
 };
@@ -95,40 +103,33 @@ struct UnionRoomObject
 
 struct WirelessLink_URoom
 {
-    struct UnkStruct_Main0 *field_0;
-    struct UnkStruct_Main4 *field_4;
-    struct UnkStruct_Main0 *field_8;
-    struct UnkStruct_Main4 *field_C;
+    struct RfuPlayerList *playerList;
+    struct RfuIncomingPlayerList *incomingChildList;
+    struct RfuPlayerList *spawnPlayer;
+    struct RfuIncomingPlayerList *incomingParentList;
     u16 unknown; // Never read
-    u16 field_12;
+    u16 unreadPlayerId;
     u8 state;
     u8 stateAfterPrint;
     u8 textState;
     u8 filler[4];
     u8 topListMenuWindowId;
     u8 topListMenuId;
-    u8 tradeBoardSelectWindowId;
-    u8 tradeBoardDetailsWindowId;
+    u8 tradeBoardMainWindowId;
+    u8 tradeBoardHeaderWindowId;
     u8 unused1;
     u8 searchTaskId;
-    u8 spriteIds[40];
+    u8 spriteIds[NUM_UNION_ROOM_SPRITES];
     u8 unused2;
     u8 tradeBoardListMenuId;
     u16 playerSendBuffer[6];
     u8 activityRequestStrbufs[4][16];
     u16 partnerYesNoResponse;
     u16 recvActivityRequest[3];
-    struct UnionRoomObject objects[MAX_UNION_ROOM_PLAYERS];
+    struct UnionRoomObject objects[MAX_UNION_ROOM_LEADERS];
     u8 trainerCardStrBuffer[12][15];
     u8 trainerCardColorStrBuffer[48];
     u8 trainerCardMsgStrBuffer[200];
-};
-
-union WirelessLink_Main
-{
-    struct WirelessLink_Leader *leader;
-    struct WirelessLink_Group *group;
-    struct WirelessLink_URoom *uRoom;
 };
 
 struct UnionRoomTrade
@@ -137,31 +138,24 @@ struct UnionRoomTrade
     u16 type;
     u32 playerPersonality;
     u8 offerPlayerId;
-    u8 filler1;
     u16 playerSpecies;
     u16 playerLevel;
     u16 species;
     u16 level;
-    u16 filler2;
     u32 personality;
 };
 
-// Exported RAM declarations
-
 extern u8 gPlayerCurrActivity;
-extern union WirelessLink_Main gUnknown_02022C30;
-extern struct GFtgtGnameSub gPartnerTgtGnameSub;
+extern struct RfuGameCompatibilityData gRfuPartnerCompatibilityData;
 
 extern u16 gUnionRoomOfferedSpecies;
 extern u8 gUnionRoomRequestedMonType;
 
-// Exported ROM declarations
-
 u8 CreateTask_CreateTradeMenu(void);
 void SetUsingUnionRoomStartMenu(void);
-void MEvent_CreateTask_CardOrNewsWithFriend(u32 arg0);
-void MEvent_CreateTask_CardOrNewsOverWireless(u32 arg0);
-void MEvent_CreateTask_Leader(u32 arg0);
+void CreateTask_LinkMysteryGiftWithFriend(u32 activity);
+void CreateTask_LinkMysteryGiftOverWireless(u32 activity);
+void CreateTask_SendMysteryGift(u32 activity);
 u8 CreateTask_ListenToWireless(void);
 void StartUnionRoomBattle(u16 battleFlags);
 

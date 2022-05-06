@@ -37,7 +37,7 @@ se_m_bubble_1:
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v-1
-	.byte		N03   , En3 
+	.byte		N03   , En3
 	.byte	W15
 	.byte	FINE
 

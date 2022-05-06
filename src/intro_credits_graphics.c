@@ -13,7 +13,7 @@
     and the credit sequence, where the player bikes along a grassy path.
 
     These graphics are placed in graphics/intro/scene_2 to keep
-    all of the intro graphics files together, though it includes 
+    all of the intro graphics files together, though it includes
     the related graphics that are used only by the credits.
 */
 
@@ -79,7 +79,7 @@ static void SpriteCB_FlygonLeftHalf(struct Sprite *sprite);
 static const struct SpriteTemplate sSpriteTemplate_MovingScenery =
 {
     .tileTag = TAG_MOVING_SCENERY,
-    .paletteTag = 0xFFFF,
+    .paletteTag = TAG_NONE,
     .oam = &gDummyOamData,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -1039,7 +1039,7 @@ static void SpriteCB_MovingScenery(struct Sprite *sprite)
 {
     s32 x;
     s16 state = gIntroCredits_MovingSceneryState;
-    
+
     if (state != INTROCRED_SCENERY_FROZEN)
     {
         switch (state)

@@ -449,14 +449,14 @@ static void DoHorizontalLunge(struct Sprite *sprite)
     sprite->data[3] = gBattlerSpriteIds[gBattleAnimAttacker];
     sprite->data[4] = gBattleAnimArgs[0];
     StoreSpriteCallbackInData6(sprite, ReverseHorizontalLungeDirection);
-    sprite->callback = TranslateMonSpriteLinear;
+    sprite->callback = TranslateSpriteLinearById;
 }
 
 static void ReverseHorizontalLungeDirection(struct Sprite *sprite)
 {
     sprite->data[0] = sprite->data[4];
     sprite->data[1] = -sprite->data[1];
-    sprite->callback = TranslateMonSpriteLinear;
+    sprite->callback = TranslateSpriteLinearById;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
@@ -476,14 +476,14 @@ static void DoVerticalDip(struct Sprite *sprite)
     sprite->data[3] = spriteId;
     sprite->data[4] = gBattleAnimArgs[0];
     StoreSpriteCallbackInData6(sprite, ReverseVerticalDipDirection);
-    sprite->callback = TranslateMonSpriteLinear;
+    sprite->callback = TranslateSpriteLinearById;
 }
 
 static void ReverseVerticalDipDirection(struct Sprite *sprite)
 {
     sprite->data[0] = sprite->data[4];
     sprite->data[2] = -sprite->data[2];
-    sprite->callback = TranslateMonSpriteLinear;
+    sprite->callback = TranslateSpriteLinearById;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
@@ -589,7 +589,7 @@ static void SlideMonToOffset(struct Sprite *sprite)
     sprite->data[5] = monSpriteId;
     sprite->invisible = TRUE;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
-    sprite->callback = TranslateMonSpriteLinearFixedPoint;
+    sprite->callback = TranslateSpriteLinearByIdFixedPoint;
 }
 
 static void SlideMonToOffsetAndBack(struct Sprite *sprite)
@@ -630,7 +630,7 @@ static void SlideMonToOffsetAndBack(struct Sprite *sprite)
     {
         StoreSpriteCallbackInData6(sprite, SlideMonToOffsetAndBack_End);
     }
-    sprite->callback = TranslateMonSpriteLinearFixedPoint;
+    sprite->callback = TranslateSpriteLinearByIdFixedPoint;
 }
 
 
@@ -992,7 +992,7 @@ static void AnimTask_RotateMonSpriteToSide_Step(u8 taskId)
     }
 }
 
-void AnimTask_ShakeTargetBasedOnMovePowerOrDmg(u8 taskId)
+void SetupShakeBattlerBasedOnMovePowerOrDmg(u8 taskId, u8 animBattlerId)
 {
     if (!gBattleAnimArgs[0])
     {
@@ -1023,12 +1023,23 @@ void AnimTask_ShakeTargetBasedOnMovePowerOrDmg(u8 taskId)
     gTasks[taskId].data[12] = 0;
     gTasks[taskId].data[10] = gBattleAnimArgs[3];
     gTasks[taskId].data[11] = gBattleAnimArgs[4];
-    gTasks[taskId].data[7] = GetAnimBattlerSpriteId(ANIM_TARGET);
+    gTasks[taskId].data[7] = GetAnimBattlerSpriteId(animBattlerId);
     gTasks[taskId].data[8] = gSprites[gTasks[taskId].data[7]].x2;
     gTasks[taskId].data[9] = gSprites[gTasks[taskId].data[7]].y2;
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = gBattleAnimArgs[1];
     gTasks[taskId].data[2] = gBattleAnimArgs[2];
+}
+
+void AnimTask_ShakeTargetPartnerBasedOnMovePowerOrDmg(u8 taskId)
+{
+    SetupShakeBattlerBasedOnMovePowerOrDmg(taskId, ANIM_DEF_PARTNER);
+    gTasks[taskId].func = AnimTask_ShakeTargetBasedOnMovePowerOrDmg_Step;
+}
+
+void AnimTask_ShakeTargetBasedOnMovePowerOrDmg(u8 taskId)
+{
+    SetupShakeBattlerBasedOnMovePowerOrDmg(taskId, ANIM_TARGET);
     gTasks[taskId].func = AnimTask_ShakeTargetBasedOnMovePowerOrDmg_Step;
 }
 
