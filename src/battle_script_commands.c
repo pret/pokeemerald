@@ -7030,6 +7030,53 @@ static bool32 TryCheekPouch(u32 battlerId, u32 itemId)
     return FALSE;
 }
 
+// Notes:
+// Symbiosis applies before a move and after a gem is used in Gen 6.
+// Symbiosis applies if an ally consumes a berry through Bug Bite / Pluck and doesn't have an item.
+// Symbiosis does not apply if an ally has an item stolen, knocked off, or destroyed by Incinerate.
+// Symbiosis does not apply after Eject Button (except in Gen 6, where it is bugged).
+// Symbiosis does not apply if an ally tricks away their item and does not receive one in return.
+
+//itemId is used to check Eject Button or Eject Pack
+static bool32 TrySymbiosis(u32 battler, u32 itemId)
+{
+    u32 ally = battler ^ BIT_FLANK;
+
+    if (!gBattleStruct->itemStolen[gBattlerPartyIndexes[battler]].stolen
+        && gBattleStruct->changedItems[battler] == ITEM_NONE
+        && ItemId_GetHoldEffect(itemId) != HOLD_EFFECT_EJECT_BUTTON
+        && ItemId_GetHoldEffect(itemId) != HOLD_EFFECT_EJECT_PACK
+        && GetBattlerAbility(ally) == ABILITY_SYMBIOSIS
+        && gBattleMons[battler].item == ITEM_NONE
+        && gBattleMons[ally].item != ITEM_NONE
+        && CanBattlerGetOrLoseItem(battler, gBattleMons[ally].item)
+        && CanBattlerGetOrLoseItem(ally, gBattleMons[ally].item)
+        && gBattleMons[battler].hp != 0
+        && gBattleMons[ally].hp != 0)
+    {
+        gLastUsedItem = gBattleMons[ally].item;
+
+        gActiveBattler = ally;
+        gBattleMons[ally].item = ITEM_NONE;
+        BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battler].item), &gBattleMons[battler].item);
+        MarkBattlerForControllerExec(ally);
+
+        gActiveBattler = battler;
+        gBattleMons[battler].item = gLastUsedItem;
+        BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battler].item), &gBattleMons[battler].item);
+        MarkBattlerForControllerExec(battler);
+        gBattleResources->flags->flags[battler] &= ~RESOURCE_FLAG_UNBURDEN;
+
+        gLastUsedAbility = gBattleMons[ally].ability;
+        gBattleScripting.battler = gBattlerAbility = ally;
+        gBattlerTarget = battler;
+        BattleScriptPush(gBattlescriptCurrInstr + 2);
+        gBattlescriptCurrInstr = BattleScript_SymbiosisActivates;
+        return TRUE;
+    }
+    return FALSE;
+}
+
 static void Cmd_removeitem(void)
 {
     u16 itemId = 0;
@@ -7048,7 +7095,7 @@ static void Cmd_removeitem(void)
     MarkBattlerForControllerExec(gActiveBattler);
 
     ClearBattlerItemEffectHistory(gActiveBattler);
-    if (!TryCheekPouch(gActiveBattler, itemId))
+    if (!TryCheekPouch(gActiveBattler, itemId) && !TrySymbiosis(gActiveBattler, itemId))
         gBattlescriptCurrInstr += 2;
 }
 
@@ -8830,7 +8877,8 @@ static void Cmd_various(void)
             MarkBattlerForControllerExec(gActiveBattler);
             gBattleResources->flags->flags[gBattlerTarget] &= ~RESOURCE_FLAG_UNBURDEN;
 
-            gBattlescriptCurrInstr += 7;
+            if (!TrySymbiosis(gBattlerAttacker, gLastUsedItem))
+                gBattlescriptCurrInstr += 7;
         }
         return;
     case VARIOUS_ARGUMENT_TO_MOVE_EFFECT:
@@ -12623,6 +12671,7 @@ static void Cmd_tryswapitems(void) // trick
             else
             {
                 CheckSetUnburden(gBattlerAttacker);
+                
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ITEM_SWAP_GIVEN; // attacker's item -> <- nothing
             }
         }
