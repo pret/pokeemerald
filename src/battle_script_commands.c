@@ -7720,6 +7720,7 @@ static bool32 CanTeleport(u8 battlerId)
         party = gPlayerParty;
     else
         party = gEnemyParty;
+
     for (i = 0; i < PARTY_SIZE; i++)
     {
         species = GetMonData(&party[i], MON_DATA_SPECIES2);
@@ -7730,16 +7731,16 @@ static bool32 CanTeleport(u8 battlerId)
     switch (GetBattlerSide(battlerId))
     {
     case B_SIDE_OPPONENT:
-        if (WILD_DOUBLE_BATTLE || gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
             return FALSE;
     case B_SIDE_PLAYER:
-        if (((gBattleTypeFlags & BATTLE_TYPE_DOUBLE && count >= 3) || (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && count >= 2)))
-            return TRUE;
+        if (count <= 2 && gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            return FALSE;
     default:
         break;
     }
 
-    return FALSE;
+    return TRUE;
 }
 
 static void Cmd_various(void)
