@@ -306,7 +306,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCloseCombat             @ EFFECT_CLOSE_COMBAT
 	.4byte BattleScript_EffectLastResort              @ EFFECT_LAST_RESORT
 	.4byte BattleScript_EffectHit                     @ EFFECT_RECOIL_33_STATUS
-	.4byte BattleScript_EffectFlinchWithStatus        @ EFFECT_FLINCH_STATUS
+	.4byte BattleScript_EffectFlinchStatus            @ EFFECT_FLINCH_STATUS
 	.4byte BattleScript_EffectHit                     @ EFFECT_RECOIL_50
 	.4byte BattleScript_EffectShellSmash              @ EFFECT_SHELL_SMASH
 	.4byte BattleScript_EffectShiftGear               @ EFFECT_SHIFT_GEAR
@@ -1907,7 +1907,7 @@ BattleScript_EffectHitSwitchTarget:
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	tryfaintmon BS_TARGET
-	isparentalbondlaststrike BattleScript_EffectHitSwitchTargetMoveEnd
+	checkparentalbondcounter 2, BattleScript_EffectHitSwitchTargetMoveEnd
 	moveendcase MOVEEND_MAGICIAN	@ possibly others?
 	jumpifability BS_TARGET, ABILITY_SUCTION_CUPS, BattleScript_AbilityPreventsPhasingOut
 	jumpifstatus3 BS_TARGET, STATUS3_ROOTED, BattleScript_PrintMonIsRooted
@@ -2913,7 +2913,7 @@ BattleScript_EffectNaturalGift:
 	waitmessage B_WAIT_TIME_LONG
 	seteffectwithchance
 	jumpifmovehadnoeffect BattleScript_EffectNaturalGiftEnd
-	isparentalbondlaststrike BattleScript_EffectNaturalGiftEnd
+	checkparentalbondcounter 2, BattleScript_EffectNaturalGiftEnd
 	removeitem BS_ATTACKER
 BattleScript_EffectNaturalGiftEnd:
 	tryfaintmon BS_TARGET
@@ -4380,11 +4380,11 @@ BattleScript_EffectTripleKick::
 	attackstring
 	ppreduce
 	jumpifmove MOVE_TRIPLE_AXEL BS_TripleAxel
-	addbyte sTRIPLE_KICK_POWER 10 @ triple kick gets +10 power
+	addbyte sTRIPLE_KICK_POWER, 10 @ triple kick gets +10 power
 	goto BattleScript_HitFromAtkString
 
 BS_TripleAxel:
-	addbyte sTRIPLE_KICK_POWER 20 @ triple axel gets +20 power
+	addbyte sTRIPLE_KICK_POWER, 20 @ triple axel gets +20 power
 	goto BattleScript_HitFromAtkString
 
 BattleScript_EffectThief::
@@ -5193,7 +5193,7 @@ BattleScript_EffectSpitUp::
 	stockpiletobasedamage BattleScript_SpitUpFail
 	goto BattleScript_HitFromAtkAnimation
 BattleScript_SpitUpFail::
-	isparentalbondlaststrike BattleScript_SpitUpEnd
+	checkparentalbondcounter 2, BattleScript_SpitUpEnd
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_FAILEDTOSPITUP
 	waitmessage B_WAIT_TIME_LONG

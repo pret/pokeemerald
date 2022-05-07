@@ -241,7 +241,7 @@
 #define VARIOUS_BATTLER_ITEM_TO_LAST_USED_ITEM      150
 #define VARIOUS_SET_BEAK_BLAST                      151
 #define VARIOUS_SWAP_SIDE_STATUSES                  152
-#define VARIOUS_IS_PARENTAL_BOND_LAST_STRIKE        153
+#define VARIOUS_CHECK_PARENTAL_BOND_COUNTER         153
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

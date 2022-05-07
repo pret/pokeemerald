@@ -9727,12 +9727,17 @@ static void Cmd_various(void)
     case VARIOUS_SWAP_SIDE_STATUSES:
         CourtChangeSwapSideStatuses();
         break;
-    case VARIOUS_IS_PARENTAL_BOND_LAST_STRIKE:
-        if (gSpecialStatuses[gBattlerAttacker].parentalBondOn == 2 && gBattleMons[gBattlerTarget].hp != 0)
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+    case VARIOUS_CHECK_PARENTAL_BOND_COUNTER:
+    {
+        // Some effects should only happen on the first or second strike of Parental Bond,
+        // so a way to check this in battle scripts is useful
+        u8 counter = T1_READ_8(gBattlescriptCurrInstr + 3);
+        if (gSpecialStatuses[gBattlerAttacker].parentalBondOn == counter && gBattleMons[gBattlerTarget].hp != 0)
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 4);
         else
-            gBattlescriptCurrInstr += 7;
+            gBattlescriptCurrInstr += 8;
         return;
+    }
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;
@@ -14468,8 +14473,7 @@ static bool32 CriticalCapture(u32 odds)
 bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId)
 {
     if (gBattleMoves[move].split != SPLIT_STATUS 
-        && !(sForbiddenMoves[move] & FORBIDDEN_PARENTAL_BOND)
-        && gBattleMons[gBattlerAttacker].status2 & STATUS2_BIDE)
+        && !(sForbiddenMoves[move] & FORBIDDEN_PARENTAL_BOND))
     {
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         {

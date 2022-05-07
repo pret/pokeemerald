@@ -1976,8 +1976,9 @@
 	various BS_ATTACKER, VARIOUS_SWAP_SIDE_STATUSES
 	.endm
 
-	.macro isparentalbondlaststrike ptr:req
-	various BS_ATTACKER, VARIOUS_IS_PARENTAL_BOND_LAST_STRIKE
+	.macro checkparentalbondcounter counter:req, ptr:req
+	various BS_ATTACKER, VARIOUS_CHECK_PARENTAL_BOND_COUNTER
+	.byte \counter
 	.4byte \ptr
 	.endm
 
