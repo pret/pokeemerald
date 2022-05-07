@@ -40,20 +40,18 @@ struct LinkPlayerObjectEvent
     u8 movementMode;
 };
 
-// Exported RAM declarations
 extern struct WarpData gLastUsedWarp;
 extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
 
-extern u16 *gBGTilemapBuffers1;
-extern u16 *gBGTilemapBuffers2;
-extern u16 *gBGTilemapBuffers3;
+extern u16 *gOverworldTilemapBuffer_Bg2;
+extern u16 *gOverworldTilemapBuffer_Bg1;
+extern u16 *gOverworldTilemapBuffer_Bg3;
 extern u16 gHeldKeyCodeToSend;
 extern void (*gFieldCallback)(void);
 extern bool8 (*gFieldCallback2)(void);
 extern u8 gLocalLinkPlayerId;
 extern u8 gFieldLinkPlayerCount;
 
-// Exported ROM declarations
 extern const struct UCoords32 gDirectionToVectors[];
 
 void DoWhiteOut(void);

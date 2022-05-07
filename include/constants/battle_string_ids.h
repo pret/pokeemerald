@@ -1,8 +1,6 @@
 #ifndef GUARD_CONSTANTS_BATTLE_STRING_IDS_H
 #define GUARD_CONSTANTS_BATTLE_STRING_IDS_H
 
-#define BATTLESTRINGS_ID_ADDER  12 // all battlestrings have its ID + 12, because first 5 are reserved
-
 #define STRINGID_INTROMSG       0
 #define STRINGID_INTROSENDOUT   1
 #define STRINGID_RETURNMON      2
@@ -592,27 +590,38 @@
 #define STRINGID_STRONGWINDSDISSIPATED                588
 #define STRINGID_MYSTERIOUSAIRCURRENTBLOWSON          589
 #define STRINGID_ATTACKWEAKENEDBSTRONGWINDS           590
-#define STRINGID_STUFFCHEEKSCANTSELECT                592
-#define STRINGID_PKMNREVERTEDTOPRIMAL                 593
-#define STRINGID_BUTPOKEMONCANTUSETHEMOVE             594
-#define STRINGID_BUTHOOPACANTUSEIT                    595
-#define STRINGID_BROKETHROUGHPROTECTION               596
-#define STRINGID_ABILITYALLOWSONLYMOVE                597
-#define STRINGID_SWAPPEDABILITIES                     598
-#define STRINGID_PASTELVEILPROTECTED                  599
-#define STRINGID_PASTELVEILENTERS                     600
-#define STRINGID_BATTLERTYPECHANGEDTO                 601
-#define STRINGID_BOTHCANNOLONGERESCAPE                602
-#define STRINGID_CANTESCAPEDUETOUSEDMOVE              603
-#define STRINGID_PKMNBECAMEWEAKERTOFIRE               604
-#define STRINGID_ABOUTTOUSEPOLTERGEIST                605
-#define STRINGID_CANTESCAPEBECAUSEOFCURRENTMOVE       606
-#define STRINGID_NEUTRALIZINGGASENTERS                607
-#define STRINGID_NEUTRALIZINGGASOVER                  608
-#define STRINGID_PLAYERLOSTTOENEMYTRAINER             609
-#define STRINGID_PLAYERPAIDPRIZEMONEY                 610
+#define STRINGID_STUFFCHEEKSCANTSELECT                591
+#define STRINGID_PKMNREVERTEDTOPRIMAL                 592
+#define STRINGID_BUTPOKEMONCANTUSETHEMOVE             593
+#define STRINGID_BUTHOOPACANTUSEIT                    594
+#define STRINGID_BROKETHROUGHPROTECTION               595
+#define STRINGID_ABILITYALLOWSONLYMOVE                596
+#define STRINGID_SWAPPEDABILITIES                     597
+#define STRINGID_PASTELVEILPROTECTED                  598
+#define STRINGID_PASTELVEILENTERS                     599
+#define STRINGID_BATTLERTYPECHANGEDTO                 600
+#define STRINGID_BOTHCANNOLONGERESCAPE                601
+#define STRINGID_CANTESCAPEDUETOUSEDMOVE              602
+#define STRINGID_PKMNBECAMEWEAKERTOFIRE               603
+#define STRINGID_ABOUTTOUSEPOLTERGEIST                604
+#define STRINGID_CANTESCAPEBECAUSEOFCURRENTMOVE       605
+#define STRINGID_NEUTRALIZINGGASENTERS                606
+#define STRINGID_NEUTRALIZINGGASOVER                  607
+#define STRINGID_TARGETTOOHEAVY                       608
+#define STRINGID_PKMNTOOKTARGETHIGH                   609
+#define STRINGID_PKMNINSNAPTRAP                       610
+#define STRINGID_METEORBEAMCHARGING                   611
+#define STRINGID_HEATUPBEAK                           612
+#define STRINGID_COURTCHANGE                          613
+#define STRINGID_PLAYERLOSTTOENEMYTRAINER             614
+#define STRINGID_PLAYERPAIDPRIZEMONEY                 615
 
-#define BATTLESTRINGS_COUNT                           611
+#define BATTLESTRINGS_COUNT                           616
+
+// This is the string id that gBattleStringsTable starts with.
+// String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
+// and are instead handled explicitly by BufferStringBattle.
+#define BATTLESTRINGS_TABLE_START  STRINGID_TRAINER1LOSETEXT
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.
@@ -663,6 +672,8 @@
 #define B_MSG_TURN1_PHANTOM_FORCE  8
 #define B_MSG_TURN1_GEOMANCY       9
 #define B_MSG_TURN1_FREEZE_SHOCK   10
+#define B_MSG_TURN1_SKY_DROP       11
+#define B_MSG_TURN1_METEOR_BEAM    12
 
 // gMoveWeatherChangeStringIds
 #define B_MSG_STARTED_RAIN      0

@@ -183,9 +183,9 @@ static u16 (*sPlayerKeyInterceptCallback)(u32);
 static bool8 sReceivingFromLink;
 static u8 sRfuKeepAliveTimer;
 
-u16 *gBGTilemapBuffers1;
-u16 *gBGTilemapBuffers2;
-u16 *gBGTilemapBuffers3;
+u16 *gOverworldTilemapBuffer_Bg2;
+u16 *gOverworldTilemapBuffer_Bg1;
+u16 *gOverworldTilemapBuffer_Bg3;
 u16 gHeldKeyCodeToSend;
 void (*gFieldCallback)(void);
 bool8 (*gFieldCallback2)(void);
@@ -1399,12 +1399,12 @@ static void InitOverworldBgs(void)
     SetBgAttribute(1, BG_ATTR_MOSAIC, 1);
     SetBgAttribute(2, BG_ATTR_MOSAIC, 1);
     SetBgAttribute(3, BG_ATTR_MOSAIC, 1);
-    gBGTilemapBuffers2 = AllocZeroed(BG_SCREEN_SIZE);
-    gBGTilemapBuffers1 = AllocZeroed(BG_SCREEN_SIZE);
-    gBGTilemapBuffers3 = AllocZeroed(BG_SCREEN_SIZE);
-    SetBgTilemapBuffer(1, gBGTilemapBuffers2);
-    SetBgTilemapBuffer(2, gBGTilemapBuffers1);
-    SetBgTilemapBuffer(3, gBGTilemapBuffers3);
+    gOverworldTilemapBuffer_Bg1 = AllocZeroed(BG_SCREEN_SIZE);
+    gOverworldTilemapBuffer_Bg2 = AllocZeroed(BG_SCREEN_SIZE);
+    gOverworldTilemapBuffer_Bg3 = AllocZeroed(BG_SCREEN_SIZE);
+    SetBgTilemapBuffer(1, gOverworldTilemapBuffer_Bg1);
+    SetBgTilemapBuffer(2, gOverworldTilemapBuffer_Bg2);
+    SetBgTilemapBuffer(3, gOverworldTilemapBuffer_Bg3);
     InitStandardTextBoxWindows();
 }
 
@@ -1412,12 +1412,9 @@ void CleanupOverworldWindowsAndTilemaps(void)
 {
     ClearMirageTowerPulseBlendEffect();
     FreeAllOverworldWindowBuffers();
-    if (gBGTilemapBuffers3)
-        FREE_AND_SET_NULL(gBGTilemapBuffers3);
-    if (gBGTilemapBuffers1)
-        FREE_AND_SET_NULL(gBGTilemapBuffers1);
-    if (gBGTilemapBuffers2)
-        FREE_AND_SET_NULL(gBGTilemapBuffers2);
+    TRY_FREE_AND_SET_NULL(gOverworldTilemapBuffer_Bg3);
+    TRY_FREE_AND_SET_NULL(gOverworldTilemapBuffer_Bg2);
+    TRY_FREE_AND_SET_NULL(gOverworldTilemapBuffer_Bg1);
 }
 
 static void ResetSafariZoneFlag_(void)
@@ -2700,7 +2697,7 @@ static void LoadCableClubPlayer(s32 linkPlayerId, s32 myPlayerId, struct CableCl
     GetLinkPlayerCoords(linkPlayerId, &x, &y);
     trainer->pos.x = x;
     trainer->pos.y = y;
-    trainer->pos.height = GetLinkPlayerElevation(linkPlayerId);
+    trainer->pos.elevation = GetLinkPlayerElevation(linkPlayerId);
     trainer->metatileBehavior = MapGridGetMetatileBehaviorAt(x, y);
 }
 
@@ -2753,7 +2750,7 @@ static const u8 *TryInteractWithPlayer(struct CableClubPlayer *player)
     otherPlayerPos = player->pos;
     otherPlayerPos.x += gDirectionToVectors[player->facing].x;
     otherPlayerPos.y += gDirectionToVectors[player->facing].y;
-    otherPlayerPos.height = 0;
+    otherPlayerPos.elevation = 0;
     linkPlayerId = GetLinkPlayerIdAt(otherPlayerPos.x, otherPlayerPos.y);
 
     if (linkPlayerId != MAX_LINK_PLAYERS)
@@ -2963,7 +2960,7 @@ static void InitLinkPlayerObjectEventPos(struct ObjectEvent *objEvent, s16 x, s1
     objEvent->previousCoords.y = y;
     SetSpritePosToMapCoords(x, y, &objEvent->initialCoords.x, &objEvent->initialCoords.y);
     objEvent->initialCoords.x += 8;
-    ObjectEventUpdateZCoord(objEvent);
+    ObjectEventUpdateElevation(objEvent);
 }
 
 static void SetLinkPlayerObjectRange(u8 linkPlayerId, u8 dir)
@@ -3103,7 +3100,7 @@ static bool8 FacingHandler_DpadMovement(struct LinkPlayerObjectEvent *linkPlayer
     {
         objEvent->directionSequenceIndex = 16;
         ShiftObjectEventCoords(objEvent, x, y);
-        ObjectEventUpdateZCoord(objEvent);
+        ObjectEventUpdateElevation(objEvent);
         return TRUE;
     }
 }
@@ -3209,8 +3206,8 @@ static void SpriteCB_LinkPlayer(struct Sprite *sprite)
     struct ObjectEvent *objEvent = &gObjectEvents[linkPlayerObjEvent->objEventId];
     sprite->x = objEvent->initialCoords.x;
     sprite->y = objEvent->initialCoords.y;
-    SetObjectSubpriorityByZCoord(objEvent->previousElevation, sprite, 1);
-    sprite->oam.priority = ZCoordToPriority(objEvent->previousElevation);
+    SetObjectSubpriorityByElevation(objEvent->previousElevation, sprite, 1);
+    sprite->oam.priority = ElevationToPriority(objEvent->previousElevation);
 
     if (linkPlayerObjEvent->movementMode == MOVEMENT_MODE_FREE)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(linkDirection(objEvent)));
