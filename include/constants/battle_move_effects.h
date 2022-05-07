@@ -150,7 +150,7 @@
 #define EFFECT_FUTURE_SIGHT                 146
 #define EFFECT_GUST                         147
 #define EFFECT_FLINCH_MINIMIZE_HIT          148
-#define EFFECT_SOLARBEAM                    149
+#define EFFECT_SOLAR_BEAM                   149
 #define EFFECT_THUNDER                      150
 #define EFFECT_TELEPORT                     151
 #define EFFECT_BEAT_UP                      152
