@@ -7037,13 +7037,12 @@ const struct Item gItems[] =
         .flingPower = 10,
     },
 
-#ifndef BATTLE_ENGINE
-    #define CONFUSE_BERRY_HEAL_FRACTION 8
+#if defined(BATTLE_ENGINE) && B_CONFUSE_BERRIES_HEAL >= GEN_8
+    #define CONFUSE_BERRY_HEAL_FRACTION 3
+#else if defined(BATTLE_ENGINE) && B_CONFUSE_BERRIES_HEAL == GEN_7
+    #define CONFUSE_BERRY_HEAL_FRACTION 2
 #else
-    #if B_CONFUSE_BERRIES_HEAL >= GEN_8
-        #define CONFUSE_BERRY_HEAL_FRACTION 3
-    #elseif B_CONFUSE_BERRIES_HEAL == GEN_7
-        #define CONFUSE_BERRY_HEAL_FRACTION 2
+    #define CONFUSE_BERRY_HEAL_FRACTION 8
 #endif
 
     [ITEM_FIGY_BERRY] =
