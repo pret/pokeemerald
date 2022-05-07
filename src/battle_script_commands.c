@@ -7094,7 +7094,7 @@ static bool32 TrySymbiosis(u32 battler, u32 itemId)
         BestowItem(ally, battler);
         gLastUsedAbility = gBattleMons[ally].ability;
         gBattleScripting.battler = gBattlerAbility = ally;
-        gBattlerTarget = battler;
+        gBattlerAttacker = battler;
         BattleScriptPush(gBattlescriptCurrInstr + 2);
         gBattlescriptCurrInstr = BattleScript_SymbiosisActivates;
         return TRUE;
@@ -9636,7 +9636,7 @@ static void Cmd_various(void)
             BestowItem(gActiveBattler ^ BIT_FLANK, gActiveBattler);
             gLastUsedAbility = gBattleMons[gActiveBattler ^ BIT_FLANK].ability;
             gBattleScripting.battler = gBattlerAbility = gActiveBattler ^ BIT_FLANK;
-            gBattlerTarget = gActiveBattler;
+            gBattlerAttacker = gActiveBattler;
             BattleScriptPushCursor();
             gBattlescriptCurrInstr = BattleScript_SymbiosisActivates;
             return;
@@ -12694,7 +12694,6 @@ static void Cmd_tryswapitems(void) // trick
             else
             {
                 CheckSetUnburden(gBattlerAttacker);
-                
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ITEM_SWAP_GIVEN; // attacker's item -> <- nothing
             }
         }
