@@ -2128,3 +2128,8 @@
 	.macro skydropyawn
 	various 0, VARIOUS_SKY_DROP_YAWN
 	.endm
+
+	@ Used by effects that may proc Symbiosis but do not call removeitem.
+	.macro trysymbiosis
+	various BS_ATTACKER, VARIOUS_TRY_SYMBIOSIS
+	.endm

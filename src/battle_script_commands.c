@@ -7030,14 +7030,34 @@ static bool32 TryCheekPouch(u32 battlerId, u32 itemId)
     return FALSE;
 }
 
-// Notes:
-// Symbiosis applies before a move and after a gem is used in Gen 6.
-// Symbiosis applies if an ally consumes a berry through Bug Bite / Pluck and doesn't have an item.
-// Symbiosis does not apply if an ally has an item stolen, knocked off, or destroyed by Incinerate.
-// Symbiosis does not apply after Eject Button (except in Gen 6, where it is bugged).
-// Symbiosis does not apply if an ally tricks away their item and does not receive one in return.
+#define SYMBIOSIS_CHECK(battler, ally)                                                                                               \
+    GetBattlerAbility(ally) == ABILITY_SYMBIOSIS                   \
+    && gBattleMons[battler].item == ITEM_NONE                      \
+    && gBattleMons[ally].item != ITEM_NONE                         \
+    && CanBattlerGetOrLoseItem(battler, gBattleMons[ally].item)    \
+    && CanBattlerGetOrLoseItem(ally, gBattleMons[ally].item)       \
+    && gBattleMons[battler].hp != 0                                \
+    && gBattleMons[ally].hp != 0
 
-//itemId is used to check Eject Button or Eject Pack
+// Used by Bestow and Symbiosis to take an item from one battler and give to another.
+static void BestowItem(u32 battlerAtk, u32 battlerDef)
+{
+    gLastUsedItem = gBattleMons[battlerAtk].item;
+
+    gActiveBattler = battlerAtk;
+    gBattleMons[battlerAtk].item = ITEM_NONE;
+    BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battlerAtk].item), &gBattleMons[battlerAtk].item);
+    MarkBattlerForControllerExec(battlerAtk);
+    CheckSetUnburden(battlerAtk);
+
+    gActiveBattler = battlerDef;
+    gBattleMons[battlerDef].item = gLastUsedItem;
+    BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battlerDef].item), &gBattleMons[battlerDef].item);
+    MarkBattlerForControllerExec(battlerDef);
+    gBattleResources->flags->flags[battlerDef] &= ~RESOURCE_FLAG_UNBURDEN;
+}
+
+// Called by Cmd_removeitem. itemId represents the item that was removed, not being given.
 static bool32 TrySymbiosis(u32 battler, u32 itemId)
 {
     u32 ally = battler ^ BIT_FLANK;
@@ -7046,27 +7066,9 @@ static bool32 TrySymbiosis(u32 battler, u32 itemId)
         && gBattleStruct->changedItems[battler] == ITEM_NONE
         && ItemId_GetHoldEffect(itemId) != HOLD_EFFECT_EJECT_BUTTON
         && ItemId_GetHoldEffect(itemId) != HOLD_EFFECT_EJECT_PACK
-        && GetBattlerAbility(ally) == ABILITY_SYMBIOSIS
-        && gBattleMons[battler].item == ITEM_NONE
-        && gBattleMons[ally].item != ITEM_NONE
-        && CanBattlerGetOrLoseItem(battler, gBattleMons[ally].item)
-        && CanBattlerGetOrLoseItem(ally, gBattleMons[ally].item)
-        && gBattleMons[battler].hp != 0
-        && gBattleMons[ally].hp != 0)
+        && SYMBIOSIS_CHECK(battler, ally))
     {
-        gLastUsedItem = gBattleMons[ally].item;
-
-        gActiveBattler = ally;
-        gBattleMons[ally].item = ITEM_NONE;
-        BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battler].item), &gBattleMons[battler].item);
-        MarkBattlerForControllerExec(ally);
-
-        gActiveBattler = battler;
-        gBattleMons[battler].item = gLastUsedItem;
-        BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battler].item), &gBattleMons[battler].item);
-        MarkBattlerForControllerExec(battler);
-        gBattleResources->flags->flags[battler] &= ~RESOURCE_FLAG_UNBURDEN;
-
+        BestowItem(ally, battler);
         gLastUsedAbility = gBattleMons[ally].ability;
         gBattleScripting.battler = gBattlerAbility = ally;
         gBattlerTarget = battler;
@@ -8863,22 +8865,8 @@ static void Cmd_various(void)
         }
         else
         {
-            gLastUsedItem = gBattleMons[gBattlerAttacker].item;
-
-            gActiveBattler = gBattlerAttacker;
-            gBattleMons[gActiveBattler].item = ITEM_NONE;
-            BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gActiveBattler].item), &gBattleMons[gActiveBattler].item);
-            MarkBattlerForControllerExec(gActiveBattler);
-            CheckSetUnburden(gBattlerAttacker);
-
-            gActiveBattler = gBattlerTarget;
-            gBattleMons[gActiveBattler].item = gLastUsedItem;
-            BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gActiveBattler].item), &gBattleMons[gActiveBattler].item);
-            MarkBattlerForControllerExec(gActiveBattler);
-            gBattleResources->flags->flags[gBattlerTarget] &= ~RESOURCE_FLAG_UNBURDEN;
-
-            if (!TrySymbiosis(gBattlerAttacker, gLastUsedItem))
-                gBattlescriptCurrInstr += 7;
+            BestowItem(gBattlerAttacker, gBattlerTarget);
+            gBattlescriptCurrInstr += 7;
         }
         return;
     case VARIOUS_ARGUMENT_TO_MOVE_EFFECT:
@@ -9618,6 +9606,18 @@ static void Cmd_various(void)
         break;
     case VARIOUS_SWAP_SIDE_STATUSES:
         CourtChangeSwapSideStatuses();
+        break;
+    case VARIOUS_TRY_SYMBIOSIS: //called by Bestow and Bug Bite, which have cases that don't call Cmd_removeitem.
+        if (SYMBIOSIS_CHECK(gActiveBattler, gActiveBattler ^ BIT_FLANK))
+        {
+            BestowItem(gActiveBattler ^ BIT_FLANK, gActiveBattler);
+            gLastUsedAbility = gBattleMons[gActiveBattler ^ BIT_FLANK].ability;
+            gBattleScripting.battler = gBattlerAbility = gActiveBattler ^ BIT_FLANK;
+            gBattlerTarget = gActiveBattler;
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_SymbiosisActivates;
+            return;
+        }
         break;
     } // End of switch (gBattlescriptCurrInstr[2])
 
