@@ -7768,8 +7768,10 @@ bool32 IsBattlerGrounded(u8 battlerId)
         return TRUE;
     else if (gFieldStatuses & STATUS_FIELD_GRAVITY)
         return TRUE;
+#if B_ROOTED_GROUNDING >= GEN_4
     else if (gStatuses3[battlerId] & STATUS3_ROOTED)
         return TRUE;
+#endif
     else if (gStatuses3[battlerId] & STATUS3_SMACKED_DOWN)
         return TRUE;
 
@@ -8910,7 +8912,8 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
 
     // check burn
     if (gBattleMons[battlerAtk].status1 & STATUS1_BURN && IS_MOVE_PHYSICAL(move)
-        && gBattleMoves[move].effect != EFFECT_FACADE && abilityAtk != ABILITY_GUTS)
+        && (gBattleMoves[move].effect != EFFECT_FACADE || B_BURN_FACADE_DMG < GEN_6)
+        && abilityAtk != ABILITY_GUTS)
         dmg = ApplyModifier(UQ_4_12(0.5), dmg);
 
     // check sunny/rain weather
