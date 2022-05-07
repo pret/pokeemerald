@@ -21,8 +21,7 @@ SafariZone_South_EventScript_EnterSafariZone::
 	end
 
 SafariZone_South_OnTransition:
-	compare VAR_SAFARI_ZONE_STATE, 2
-	call_if_eq SafariZone_South_EventScript_SetExitAttendantAside
+	call_if_eq VAR_SAFARI_ZONE_STATE, 2, SafariZone_South_EventScript_SetExitAttendantAside
 	end
 
 SafariZone_South_EventScript_SetExitAttendantAside::
@@ -35,7 +34,7 @@ SafariZone_South_Movement_PlayerEnter:
 
 SafariZone_South_Movement_ExitAttendantBlockDoor:
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 SafariZone_South_EventScript_Boy::
@@ -55,8 +54,7 @@ SafariZone_South_EventScript_ExitAttendant::
 	faceplayer
 	goto_if_unset FLAG_GOOD_LUCK_SAFARI_ZONE, SafariZone_South_EventScript_GoodLuck
 	msgbox SafariZone_South_Text_StillHaveTimeExit, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq SafariZone_South_EventScript_ExitEarly
+	goto_if_eq VAR_RESULT, YES, SafariZone_South_EventScript_ExitEarly
 	msgbox SafariZone_South_Text_EnjoyTheRestOfYourAdventure, MSGBOX_DEFAULT
 	release
 	end
@@ -94,7 +92,7 @@ SafariZone_South_EventScript_ExitEarlyEast::
 SafariZone_South_EventScript_Exit::
 	setvar VAR_SAFARI_ZONE_STATE, 1
 	special ExitSafariMode
-	warpdoor MAP_ROUTE121_SAFARI_ZONE_ENTRANCE, 255, 2, 5
+	warpdoor MAP_ROUTE121_SAFARI_ZONE_ENTRANCE, 2, 5
 	waitstate
 	end
 
@@ -104,17 +102,17 @@ SafariZone_South_Movement_PlayerExitNorth:
 
 SafariZone_South_Movement_PlayerExitEast:
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 SafariZone_South_Movement_MoveExitAttendantNorth:
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 SafariZone_South_Movement_MoveExitAttendantEast:
 	walk_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 SafariZone_South_EventScript_ConstructionWorker1::

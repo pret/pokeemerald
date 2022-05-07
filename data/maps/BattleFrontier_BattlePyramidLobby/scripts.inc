@@ -45,8 +45,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_QuitWithoutSaving::
 BattleFrontier_BattlePyramidLobby_EventScript_WonChallenge::
 	lockall
 	frontier_isbrain
-	compare VAR_RESULT, TRUE
-	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_DefeatedKing
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattlePyramidLobby_EventScript_DefeatedKing
 	msgbox BattleFrontier_BattlePyramidLobby_Text_YouveConqueredPyramid, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePyramidLobby_EventScript_GiveBattlePoints
 
@@ -54,8 +53,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_DefeatedKing::
 	msgbox BattleFrontier_BattlePyramidLobby_Text_YouveDefeatedPyramidKing, MSGBOX_DEFAULT
 BattleFrontier_BattlePyramidLobby_EventScript_GiveBattlePoints::
 	special DoBattlePyramidMonsHaveHeldItem
-	compare VAR_RESULT, TRUE
-	call_if_eq BattleFrontier_BattlePyramidLobby_EventScript_StoreHeldItemsInPyramidBag
+	call_if_eq VAR_RESULT, TRUE, BattleFrontier_BattlePyramidLobby_EventScript_StoreHeldItemsInPyramidBag
 	clearflag FLAG_STORING_ITEMS_IN_PYRAMID_BAG
 	frontier_checkairshow
 	special LoadPlayerParty
@@ -130,8 +128,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_TryEnterChallenge::
 	case FRONTIER_LVL_TENT, BattleFrontier_BattlePyramidLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattlePyramidLobby_EventScript_CancelChallenge
 	frontier_checkineligible
-	compare VAR_0x8004, TRUE
-	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_NotEnoughValidMons
+	goto_if_eq VAR_0x8004, TRUE, BattleFrontier_BattlePyramidLobby_EventScript_NotEnoughValidMons
 	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
 	msgbox BattleFrontier_BattlePyramidLobby_Text_SelectThreeMons, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
@@ -140,8 +137,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_TryEnterChallenge::
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
 	waitstate
-	compare VAR_RESULT, 0
-	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_LoadPartyAndCancelChallenge
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattlePyramidLobby_EventScript_LoadPartyAndCancelChallenge
 	msgbox BattleFrontier_BattlePyramidLobby_Text_OkayToSaveBeforeChallenge, MSGBOX_YESNO
 	switch VAR_RESULT
 	case NO, BattleFrontier_BattlePyramidLobby_EventScript_LoadPartyAndCancelChallenge
@@ -162,8 +158,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_SaveBeforeChallenge::
 	delay 2
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
-	compare VAR_RESULT, 0
-	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_CancelChallengeSaveFailed
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattlePyramidLobby_EventScript_CancelChallengeSaveFailed
 BattleFrontier_BattlePyramidLobby_EventScript_EnterChallenge::
 	special SavePlayerParty
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
@@ -173,7 +168,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_EnterChallenge::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_RESULT, 0
 	special HealPlayerParty
-	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR, 255, 1, 1
+	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR, 1, 1
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end
@@ -233,8 +228,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_NoHint::
 BattleFrontier_BattlePyramidLobby_EventScript_GiveHintLv50::
 	msgbox BattleFrontier_BattlePyramidLobby_Text_Aah, MSGBOX_DEFAULT
 	pyramid_get PYRAMID_DATA_WIN_STREAK_ACTIVE_50
-	compare VAR_RESULT, FALSE
-	goto_if_ne BattleFrontier_BattlePyramidLobby_EventScript_GiveHintGetLv50Streak
+	goto_if_ne VAR_RESULT, FALSE, BattleFrontier_BattlePyramidLobby_EventScript_GiveHintGetLv50Streak
 	setvar VAR_RESULT, 0
 	goto BattleFrontier_BattlePyramidLobby_EventScript_DoHintComment
 	return
@@ -247,8 +241,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_GiveHintGetLv50Streak::
 BattleFrontier_BattlePyramidLobby_EventScript_GiveHintLvOpen::
 	msgbox BattleFrontier_BattlePyramidLobby_Text_Aah, MSGBOX_DEFAULT
 	pyramid_get PYRAMID_DATA_WIN_STREAK_ACTIVE_OPEN
-	compare VAR_RESULT, FALSE
-	goto_if_ne BattleFrontier_BattlePyramidLobby_EventScript_GiveHintGetLvOpenStreak
+	goto_if_ne VAR_RESULT, FALSE, BattleFrontier_BattlePyramidLobby_EventScript_GiveHintGetLvOpenStreak
 	setvar VAR_RESULT, 0
 	goto BattleFrontier_BattlePyramidLobby_EventScript_DoHintComment
 	return
@@ -378,8 +371,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_WalkToPanelAndReceiveBag::
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidLobby_Text_WeWillHoldBagForSafekeeping, MSGBOX_DEFAULT
 	pyramid_get PYRAMID_DATA_WIN_STREAK
-	compare VAR_RESULT, 0
-	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_ReceiveNewBattleBag
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattlePyramidLobby_EventScript_ReceiveNewBattleBag
 	msgbox BattleFrontier_BattlePyramidLobby_Text_PleaseTakePreviousBattleBag, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePyramidLobby_EventScript_ReceiveBattleBag
 
@@ -433,8 +425,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_StoreHeldItemsInPyramidBag::
 	msgbox BattleFrontier_BattlePyramidLobby_Text_MonHoldingItemCannotTake, MSGBOX_DEFAULT
 	setflag FLAG_STORING_ITEMS_IN_PYRAMID_BAG
 	special TryStoreHeldItemsInPyramidBag
-	compare VAR_RESULT, 0
-	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_HeldItemsStoredInPyramidBag
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattlePyramidLobby_EventScript_HeldItemsStoredInPyramidBag
 	message BattleFrontier_BattlePyramidLobby_Text_BagCannotHoldPickItemsToKeep
 	waitmessage
 	goto BattleFrontier_BattlePyramidLobby_EventScript_PickItemsToKeep
@@ -472,8 +463,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_PickItemsFromParty::
 
 BattleFrontier_BattlePyramidLobby_EventScript_ExitPickItems::
 	special DoBattlePyramidMonsHaveHeldItem
-	compare VAR_RESULT, TRUE
-	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_PartyStillHasHeldItems
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattlePyramidLobby_EventScript_PartyStillHasHeldItems
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_PartyStillHasHeldItems::

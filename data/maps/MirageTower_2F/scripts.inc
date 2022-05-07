@@ -6,6 +6,6 @@ MirageTower_2F_MapScripts::
 
 MirageTower_2F_SetHoleWarp:
 	setstepcallback STEP_CB_CRACKED_FLOOR
-	setholewarp MAP_MIRAGE_TOWER_1F, 255, 0, 0
+	setholewarp MAP_MIRAGE_TOWER_1F
 	end
 

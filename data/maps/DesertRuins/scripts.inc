@@ -10,8 +10,7 @@ DesertRuins_OnResume:
 
 DesertRuins_EventScript_TryRemoveRegirock::
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_ne Common_EventScript_NopReturn
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -20,12 +19,12 @@ DesertRuins_OnLoad:
 	end
 
 DesertRuins_EventScript_HideRegiEntrance::
-	setmetatile 7, 19, METATILE_Cave_EntranceCover, 1
-	setmetatile 8, 19, METATILE_Cave_EntranceCover, 1
-	setmetatile 9, 19, METATILE_Cave_EntranceCover, 1
-	setmetatile 7, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
-	setmetatile 8, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
-	setmetatile 9, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
+	setmetatile 7, 19, METATILE_Cave_EntranceCover, TRUE
+	setmetatile 8, 19, METATILE_Cave_EntranceCover, TRUE
+	setmetatile 9, 19, METATILE_Cave_EntranceCover, TRUE
+	setmetatile 7, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE
+	setmetatile 8, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE
+	setmetatile 9, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE
 	return
 
 DesertRuins_OnTransition:
@@ -40,9 +39,7 @@ DesertRuins_EventScript_ShowRegirock::
 DesertRuins_EventScript_CaveEntranceMiddle::
 	lockall
 	goto_if_set FLAG_SYS_REGIROCK_PUZZLE_COMPLETED, DesertRuins_EventScript_BigHoleInWall
-	braillemessage DesertRuins_Braille_UseRockSmash
-	waitbuttonpress
-	closebraillemessage
+	braillemsgbox DesertRuins_Braille_UseRockSmash
 	releaseall
 	end
 
@@ -53,9 +50,7 @@ DesertRuins_EventScript_BigHoleInWall::
 
 DesertRuins_EventScript_CaveEntranceSide::
 	lockall
-	braillemessage DesertRuins_Braille_UseRockSmash
-	waitbuttonpress
-	closebraillemessage
+	braillemsgbox DesertRuins_Braille_UseRockSmash
 	releaseall
 	end
 
@@ -63,21 +58,18 @@ DesertRuins_EventScript_Regirock::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_REGIROCK, 2
+	playmoncry SPECIES_REGIROCK, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
-	setwildbattle SPECIES_REGIROCK, 40, ITEM_NONE
+	setwildbattle SPECIES_REGIROCK, 40
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq DesertRuins_EventScript_DefeatedRegirock
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq DesertRuins_EventScript_RanFromRegirock
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq DesertRuins_EventScript_RanFromRegirock
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, DesertRuins_EventScript_DefeatedRegirock
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, DesertRuins_EventScript_RanFromRegirock
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, DesertRuins_EventScript_RanFromRegirock
 	setflag FLAG_DEFEATED_REGIROCK
 	release
 	end

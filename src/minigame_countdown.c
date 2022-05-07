@@ -48,8 +48,8 @@ static void Task_StaticCountdown_Free(u8 taskId);
 static void Task_StaticCountdown_Start(u8 taskId);
 static void Task_StaticCountdown_Run(u8 taskId);
 
-static const u16 s321Start_Static_Pal[] = INCBIN_U16("graphics/minigame_countdown/321start_static.gbapal");
-static const u32 s321Start_Static_Gfx[] = INCBIN_U32("graphics/minigame_countdown/321start_static.4bpp.lz");
+static const u16 s321Start_Static_Pal[] = INCBIN_U16("graphics/link/321start_static.gbapal");
+static const u32 s321Start_Static_Gfx[] = INCBIN_U32("graphics/link/321start_static.4bpp.lz");
 
 static const struct CompressedSpriteSheet sSpriteSheet_321Start_Static[] =
 {
@@ -374,8 +374,8 @@ static void CreateStartSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u8 subprior
 static void InitStartGraphic(u8 spriteId1, u8 spriteId2, u8 spriteId3);
 static void SpriteCB_Start(struct Sprite *sprite);
 
-static const u16 s321Start_Pal[] = INCBIN_U16("graphics/minigame_countdown/321start.gbapal");
-static const u32 s321Start_Gfx[] = INCBIN_U32("graphics/minigame_countdown/321start.4bpp.lz");
+static const u16 s321Start_Pal[] = INCBIN_U16("graphics/link/321start.gbapal");
+static const u32 s321Start_Gfx[] = INCBIN_U32("graphics/link/321start.4bpp.lz");
 
 #define tState       data[0]
 #define tTilesTag    data[2]
@@ -447,13 +447,13 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
     switch (sprite->sState)
     {
     case 0:
-        sub_8007E18(sprite, 0x800, 0x1A);
+        SetSpriteMatrixAnchor(sprite, NO_ANCHOR, 26);
         sprite->sState++;
         // fallthrough
     case 1:
         if (sprite->sTimer == 0)
             PlaySE(SE_BALL_BOUNCE_2);
-        
+
         if (++sprite->sTimer >= 20)
         {
             // Ready for jump

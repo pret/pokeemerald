@@ -313,6 +313,8 @@ struct MusicPlayerTrack
 
 #define MAX_MUSICPLAYER_TRACKS 16
 
+#define TRACKS_ALL 0xFFFF
+
 #define TEMPORARY_FADE  0x0001
 #define FADE_IN         0x0002
 #define FADE_VOL_MAX    64
@@ -347,7 +349,7 @@ struct MusicPlayer
 {
     struct MusicPlayerInfo *info;
     struct MusicPlayerTrack *track;
-    u8 unk_8;
+    u8 numTracks;
     u16 unk_A;
 };
 

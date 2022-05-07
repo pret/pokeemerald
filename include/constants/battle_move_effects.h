@@ -382,7 +382,14 @@
 #define EFFECT_OCTOLOCK                     376
 #define EFFECT_CLANGOROUS_SOUL              377
 #define EFFECT_BOLT_BEAK                    378
+#define EFFECT_SKY_DROP                     379
+#define EFFECT_EXPANDING_FORCE              380
+#define EFFECT_SCALE_SHOT                   381
+#define EFFECT_METEOR_BEAM                  382
+#define EFFECT_RISING_VOLTAGE               383
+#define EFFECT_BEAK_BLAST                   384
+#define EFFECT_COURT_CHANGE                 385
 
-#define NUM_BATTLE_MOVE_EFFECTS  	        379
+#define NUM_BATTLE_MOVE_EFFECTS  	        386
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H
