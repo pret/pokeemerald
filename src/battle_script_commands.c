@@ -9882,7 +9882,7 @@ static void Cmd_manipulatedamage(void)
         gBattleMoveDamage = GetDrainedBigRootHp(gBattlerAttacker, gBattleMoveDamage);
         break;
     case DMG_1_2_ATTACKER_HP:
-        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
+        gBattleMoveDamage = (gBattleMons[gBattlerAttacker].maxHP + 1) / 2; // Half of Max HP Rounded UP
         break;
     case DMG_RECOIL_FROM_IMMUNE:
         gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 2;
