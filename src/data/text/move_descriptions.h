@@ -1802,7 +1802,7 @@ static const u8 sChargeBeamDescription[] = _(
     "May raise Sp. Atk.");
 
 static const u8 sWoodHammerDescription[] = _(
-    "Slams the body into a foe\n"
+    "Slams the body into a foe.\n"
     "The user gets hurt too.");
 
 static const u8 sAquaJetDescription[] = _(
@@ -2335,7 +2335,7 @@ static const u8 sWaterShurikenDescription[] = _(
 
 static const u8 sMysticalFireDescription[] = _(
     "Breathes a special, hot\n"
-    "fire. May lower Sp. Atk.");
+    "fire. Lowers Sp. Atk.");
 
 static const u8 sSpikyShieldDescription[] = _(
     "Evades attack, and damages\n"
@@ -2795,7 +2795,7 @@ static const u8 sBehemothBladeDescription[] = _(
     "2x damage to Dynamaxed foes.");
     
 static const u8 sBehemothBashDescription[] = _(
-    "Attacks as a sheild. Deals\n"
+    "Attacks as a shield. Deals\n"
     "2x damage to Dynamaxed foes.");
     
 static const u8 sAuraWheelDescription[] = _(
@@ -2968,11 +2968,11 @@ static const u8 sThunderousKickDescription[] = _(
 
 static const u8 sGlacialLanceDescription[] = _(
     "Strikes by hurling a blizzard-\n"
-    "cloaked icicle lance at a foe.");
+    "cloaked icicle lance at foes.");
 
 static const u8 sAstralBarrageDescription[] = _(
     "Strikes by sending a frightful\n"
-    "amount of ghosts at a foe.");
+    "amount of ghosts at foes.");
 
 static const u8 sEerieSpellDescription[] = _(
     "Attacks with psychic power.\n"
@@ -3392,7 +3392,7 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_DRAGON_PULSE - 1] = sDragonPulseDescription,
     [MOVE_DRAGON_RUSH - 1] = sDragonRushDescription,
     [MOVE_POWER_GEM - 1] = sPowerGemDescription,
-    [MOVE_DRAIN_PUNCH - 1] = sDrainingKissDescription,
+    [MOVE_DRAIN_PUNCH - 1] = sMegaDrainDescription,
     [MOVE_VACUUM_WAVE - 1] = sVacuumWaveDescription,
     [MOVE_FOCUS_BLAST - 1] = sFocusBlastDescription,
     [MOVE_ENERGY_BALL - 1] = sEnergyBallDescription,

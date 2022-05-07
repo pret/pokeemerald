@@ -133,7 +133,7 @@ SecretBase_EventScript_InitSecretBase::
 	closemessage
 	playse SE_EXIT
 	setvar VAR_INIT_SECRET_BASE, 0
-	setflag FLAG_DECORATION_0
+	setflag FLAG_HIDE_SECRET_BASE_TRAINER
 	special SetPlayerSecretBase
 	special EnterSecretBase
 	setvar VAR_0x8004, 0
@@ -172,14 +172,14 @@ SecretBase_EventScript_Enter::
 	playse SE_EXIT
 	special IsCurSecretBaseOwnedByAnotherPlayer
 	goto_if_eq VAR_RESULT, FALSE, SecretBase_EventScript_EnterPlayersBase
-	clearflag FLAG_DECORATION_0
+	clearflag FLAG_HIDE_SECRET_BASE_TRAINER
 	special EnterSecretBase
 	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	waitstate
 	end
 
 SecretBase_EventScript_EnterPlayersBase::
-	setflag FLAG_DECORATION_0
+	setflag FLAG_HIDE_SECRET_BASE_TRAINER
 	special EnterSecretBase
 	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	waitstate

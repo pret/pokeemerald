@@ -308,7 +308,7 @@ extern const u8 BattleScript_MistySurgeActivates[];
 extern const u8 BattleScript_ElectricSurgeActivates[];
 extern const u8 BattleScript_SpectralThiefSteal[];
 extern const u8 BattleScript_StatUpMsg[];
-extern const u8 BattleScript_DefiantActivates[];
+extern const u8 BattleScript_AbilityRaisesDefenderStat[];
 extern const u8 BattleScript_PowderMoveNoEffect[];
 extern const u8 BattleScript_GrassyTerrainHeals[];
 extern const u8 BattleScript_VCreateStatLoss[];
@@ -416,5 +416,8 @@ extern const u8 BattleScript_BothCanNoLongerEscape[];
 extern const u8 BattleScript_OctolockEndTurn[];
 extern const u8 BattleScript_NeutralizingGasExits[];
 extern const u8 BattleScript_MagicianActivates[];
+extern const u8 BattleScript_BeakBlastSetUp[];
+extern const u8 BattleScript_BeakBlastBurn[];
+extern const u8 BattleScript_DefDownSpeedUp[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

@@ -720,17 +720,25 @@ static void RestorePlayerPartyHeldItems(void)
     }
 }
 
-u8 GetFactoryMonFixedIV(u8 arg0, u8 arg1)
+// Get the IV to use for the opponent's pokémon.
+// The IVs get higher for each subsequent challenge and for
+// the last trainer in each challenge. Noland is an exception
+// to this, as he uses the IVs that would be used by the regular
+// trainers 2 challenges ahead of the current one.
+// Due to a mistake in FillFactoryFrontierTrainerParty, the
+// challenge number used to determine the IVs for regular trainers
+// is Battle Tower's instead of Battle Factory's.
+u8 GetFactoryMonFixedIV(u8 challengeNum, bool8 isLastBattle)
 {
-    u8 a1;
-    u8 a2 = (arg1 != 0) ? 1 : 0;
+    u8 ivSet;
+    bool8 useHigherIV = isLastBattle ? TRUE : FALSE;
 
-    if (arg0 > 8)
-        a1 = 7;
+    if (challengeNum > 8)
+        ivSet = 7;
     else
-        a1 = arg0;
+        ivSet = challengeNum;
 
-    return sFixedIVTable[a1][a2];
+    return sFixedIVTable[ivSet][useHigherIV];
 }
 
 void FillFactoryBrainParty(void)
@@ -746,7 +754,7 @@ void FillFactoryBrainParty(void)
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u8 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / 7;
-    fixedIV = GetFactoryMonFixedIV(challengeNum + 2, 0);
+    fixedIV = GetFactoryMonFixedIV(challengeNum + 2, FALSE);
     monLevel = SetFacilityPtrsGetLevel();
     i = 0;
     otId = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);

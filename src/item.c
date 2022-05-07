@@ -913,9 +913,9 @@ u8 ItemId_GetImportance(u16 itemId)
 }
 
 // unused
-u8 ItemId_GetUnknownValue(u16 itemId)
+u8 ItemId_GetRegistrability(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].unk19;
+    return gItems[SanitizeItemId(itemId)].registrability;
 }
 
 u8 ItemId_GetPocket(u16 itemId)
@@ -965,4 +965,9 @@ bool32 IsPinchBerryItemEffect(u16 holdEffect)
     }
 
     return FALSE;
+}
+
+u8 ItemId_GetFlingPower(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].flingPower;
 }

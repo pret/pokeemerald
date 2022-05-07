@@ -18,7 +18,6 @@
 #include "constants/frontier_util.h"
 #include "constants/abilities.h"
 #include "constants/battle_config.h"
-#include "constants/easy_chat.h"
 #include "constants/layouts.h"
 #include "constants/rgb.h"
 #include "constants/trainers.h"

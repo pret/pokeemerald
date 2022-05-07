@@ -1239,7 +1239,7 @@ static u8 GetPostBattleDirectionHintTextIndex(int *hintType, u8 minDistanceForEx
     {
         for (x = 0; x < 32; x++)
         {
-            if ((map[x] & METATILE_ID_MASK) == METATILE_BattlePyramid_Exit)
+            if ((map[x] & MAPGRID_METATILE_ID_MASK) == METATILE_BattlePyramid_Exit)
             {
                 x += MAP_OFFSET - gObjectEvents[gSelectedObjectEvent].initialCoords.x;
                 y += MAP_OFFSET - gObjectEvents[gSelectedObjectEvent].initialCoords.y;
@@ -1465,7 +1465,7 @@ void CopyPyramidTrainerLoseSpeech(u16 trainerId)
     FrontierSpeechToString(gFacilityTrainers[trainerId].speechLose);
 }
 
-u8 GetBattlePyramindTrainerEncounterMusicId(u16 trainerId)
+u8 GetTrainerEncounterMusicIdInBattlePyramid(u16 trainerId)
 {
     int i;
 
@@ -1545,7 +1545,7 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
         {
             for (x = 0; x < mapLayout->width; x++)
             {
-                if ((layoutMap[x] & METATILE_ID_MASK) != METATILE_BattlePyramid_Exit)
+                if ((layoutMap[x] & MAPGRID_METATILE_ID_MASK) != METATILE_BattlePyramid_Exit)
                 {
                     map[x] = layoutMap[x];
                 }
@@ -1556,7 +1556,7 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
                         gSaveBlock1Ptr->pos.x = (mapLayout->width * (i % 4)) + x;
                         gSaveBlock1Ptr->pos.y = (mapLayout->height * (i / 4)) + y;
                     }
-                    map[x] = (layoutMap[x] & (METATILE_ELEVATION_MASK | METATILE_COLLISION_MASK)) | METATILE_BattlePyramid_Floor;
+                    map[x] = (layoutMap[x] & (MAPGRID_ELEVATION_MASK | MAPGRID_COLLISION_MASK)) | METATILE_BattlePyramid_Floor;
                 }
                 else
                 {

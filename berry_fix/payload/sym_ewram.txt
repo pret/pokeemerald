@@ -1,3 +1,0 @@
-    .include "src/main.o"
-    .include "src/rtc.o"
-    .include "src/flash.o"

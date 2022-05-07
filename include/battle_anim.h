@@ -492,5 +492,6 @@ void AnimOverheatFlame(struct Sprite *sprite);
 
 // battle_anim_new.c
 void CoreEnforcerLoadBeamTarget(struct Sprite* sprite);
+void SpriteCB_RandomCentredHits(struct Sprite* sprite);
 
 #endif // GUARD_BATTLE_ANIM_H
