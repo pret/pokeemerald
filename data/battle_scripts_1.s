@@ -622,6 +622,7 @@ BattleScript_EffectFlingConsumeBerry:
 	restorebattleritem BS_TARGET
 BattleScript_FlingEnd:
 	tryfaintmon BS_TARGET
+	trysymbiosis
 	goto BattleScript_MoveEnd
 
 BattleScript_FlingFlameOrb:

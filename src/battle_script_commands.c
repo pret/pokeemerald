@@ -7066,6 +7066,7 @@ static bool32 TrySymbiosis(u32 battler, u32 itemId)
         && gBattleStruct->changedItems[battler] == ITEM_NONE
         && ItemId_GetHoldEffect(itemId) != HOLD_EFFECT_EJECT_BUTTON
         && ItemId_GetHoldEffect(itemId) != HOLD_EFFECT_EJECT_PACK
+        && gCurrentMove != MOVE_FLING
         && SYMBIOSIS_CHECK(battler, ally))
     {
         BestowItem(ally, battler);
@@ -9607,7 +9608,7 @@ static void Cmd_various(void)
     case VARIOUS_SWAP_SIDE_STATUSES:
         CourtChangeSwapSideStatuses();
         break;
-    case VARIOUS_TRY_SYMBIOSIS: //called by Bestow and Bug Bite, which have cases that don't call Cmd_removeitem.
+    case VARIOUS_TRY_SYMBIOSIS: //called by Bestow, Fling, and Bug Bite, which don't work with Cmd_removeitem.
         if (SYMBIOSIS_CHECK(gActiveBattler, gActiveBattler ^ BIT_FLANK))
         {
             BestowItem(gActiveBattler ^ BIT_FLANK, gActiveBattler);
