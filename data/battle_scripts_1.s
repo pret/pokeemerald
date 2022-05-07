@@ -8256,8 +8256,10 @@ BattleScript_DesolateLandEvaporatesWaterTypeMoves::
 	attackstring
 	pause B_WAIT_TIME_SHORT
 	ppreduce
+	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_STRING_PRINTED, BattleScript_MoveEnd
 	printstring STRINGID_MOVEEVAPORATEDINTHEHARSHSUNLIGHT
 	waitmessage B_WAIT_TIME_LONG
+	orword gHitMarker, HITMARKER_STRING_PRINTED
 	goto BattleScript_MoveEnd
 
 BattleScript_PrimordialSeaActivates::
@@ -8274,8 +8276,10 @@ BattleScript_PrimordialSeaFizzlesOutFireTypeMoves::
 	attackstring
 	pause B_WAIT_TIME_SHORT
 	ppreduce
+	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_STRING_PRINTED, BattleScript_MoveEnd
 	printstring STRINGID_MOVEFIZZLEDOUTINTHEHEAVYRAIN
 	waitmessage B_WAIT_TIME_LONG
+	orword gHitMarker, HITMARKER_STRING_PRINTED
 	goto BattleScript_MoveEnd
 
 BattleScript_DeltaStreamActivates::
