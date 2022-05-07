@@ -6098,12 +6098,18 @@ bool32 HasEnoughHpToEatBerry(u32 battlerId, u32 hpFraction, u32 itemId)
     return FALSE;
 }
 
+#if defined(ITEM_EXPANSION) && B_CONFUSE_BERRIES_HEAL >= GEN_7
+    #define CONFUSE_BERRY_HP_FRACTION 4
+#else
+    #define CONFUSE_BERRY_HP_FRACTION 2
+#endif
+
 static u8 HealConfuseBerry(u32 battlerId, u32 itemId, u8 flavorId, bool32 end2)
 {
 #if B_HEAL_BLOCKING >= GEN_5
-    if (HasEnoughHpToEatBerry(battlerId, 2, itemId) && !(gStatuses3[battlerId] & STATUS3_HEAL_BLOCK))
+    if (HasEnoughHpToEatBerry(battlerId, CONFUSE_BERRY_HP_FRACTION, itemId) && !(gStatuses3[battlerId] & STATUS3_HEAL_BLOCK))
 #else
-    if (HasEnoughHpToEatBerry(battlerId, 2, itemId))
+    if (HasEnoughHpToEatBerry(battlerId, CONFUSE_BERRY_HP_FRACTION, itemId))
 #endif
     {
         PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, flavorId);
@@ -6139,6 +6145,8 @@ static u8 HealConfuseBerry(u32 battlerId, u32 itemId, u8 flavorId, bool32 end2)
     }
     return 0;
 }
+
+#undef CONFUSE_BERRY_HP_FRACTION
 
 static u8 StatRaiseBerry(u32 battlerId, u32 itemId, u32 statId, bool32 end2)
 {
