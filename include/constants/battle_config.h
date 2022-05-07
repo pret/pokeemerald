@@ -181,7 +181,7 @@
 #define B_FLASH_FIRE_FROZEN         GEN_7 // In Gen5+, Flash Fire can trigger even when frozen, when it couldn't before.
 #define B_SYNCHRONIZE_NATURE        GEN_8 // In Gen8, if a Pokémon with Synchronize is leading the party, it's 100% guaranteed that wild Pokémon will have the same ability, as opposed to 50% previously.
 #define B_SYNCHRONIZE_TOXIC         GEN_8 // In Gen5+, if a Pokémon with Synchronize is badly poisoned, the opponent will also become badly poisoned. Previously, the opponent would become regular poisoned.
-#define B_UPDATED_INTIMIDATE        GEN_8 // In Gen8, Intimidate doesn't work on opponents with the Inner Focus, Scrappy, Own Tempo or Oblivious abilities.
+#define B_UPDATED_INTIMIDATE        GEN_8 // In Gen8, Intimidate doesn't work on opponents with the Inner Focus, Scrappy, Own Tempo or Oblivious abilities. It also activates Rattled.
 
 // Item settings
 #define B_HP_BERRIES                GEN_7 // In Gen4+, berries which restore hp activate immediately after HP drops to half. In Gen3, the effect occurs at the end of the turn.

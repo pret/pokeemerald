@@ -1575,12 +1575,22 @@ void PrepareStringBattle(u16 stringId, u8 battler)
         gBattleScripting.stickyWebStatDrop = 0;
         gBattlerAbility = gBattlerTarget;
         BattleScriptPushCursor();
-        gBattlescriptCurrInstr = BattleScript_DefiantActivates;
+        gBattlescriptCurrInstr = BattleScript_AbilityRaisesDefenderStat;
         if (targetAbility == ABILITY_DEFIANT)
             SET_STATCHANGER(STAT_ATK, 2, FALSE);
         else
             SET_STATCHANGER(STAT_SPATK, 2, FALSE);
     }
+#if  B_UPDATED_INTIMIDATE >= GEN_8
+    else if (stringId == STRINGID_PKMNCUTSATTACKWITH && targetAbility == ABILITY_RATTLED
+            && CompareStat(gBattlerTarget, STAT_SPEED, MAX_STAT_STAGE, CMP_LESS_THAN))
+    {
+        gBattlerAbility = gBattlerTarget;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_AbilityRaisesDefenderStat;
+        SET_STATCHANGER(STAT_SPEED, 1, FALSE);
+    }
+#endif
 
     gActiveBattler = battler;
     BtlController_EmitPrintString(BUFFER_A, stringId);
