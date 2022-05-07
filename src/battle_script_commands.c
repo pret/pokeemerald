@@ -306,6 +306,7 @@ static void PutMonIconOnLvlUpBanner(void);
 static void DrawLevelUpBannerText(void);
 static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite* sprite);
 static bool32 CriticalCapture(u32 odds);
+static void BestowItem(u32 battlerAtk, u32 battlerDef);
 
 static void Cmd_attackcanceler(void);
 static void Cmd_accuracycheck(void);
@@ -4967,6 +4968,15 @@ static bool32 TryKnockOffBattleScript(u32 battlerDef)
     return FALSE;
 }
 
+#define SYMBIOSIS_CHECK(battler, ally)                                                                                               \
+    GetBattlerAbility(ally) == ABILITY_SYMBIOSIS                   \
+    && gBattleMons[battler].item == ITEM_NONE                      \
+    && gBattleMons[ally].item != ITEM_NONE                         \
+    && CanBattlerGetOrLoseItem(battler, gBattleMons[ally].item)    \
+    && CanBattlerGetOrLoseItem(ally, gBattleMons[ally].item)       \
+    && gBattleMons[battler].hp != 0                                \
+    && gBattleMons[ally].hp != 0
+
 static void Cmd_moveend(void)
 {
     s32 i;
@@ -5588,6 +5598,23 @@ static void Cmd_moveend(void)
                             gBattlescriptCurrInstr = BattleScript_EmergencyExitWildNoPopUp;
                     }
                     return;
+                }
+            }
+            gBattleScripting.moveendState++;
+            break;
+        case MOVEEND_SYMBIOSIS:
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (((B_SYMBIOSIS_GEMS >= GEN_7 && gSpecialStatuses[i].gemBoost) || gSpecialStatuses[i].berryReduced)
+                    && SYMBIOSIS_CHECK(i, i ^ BIT_FLANK))
+                {
+                    BestowItem(i ^ BIT_FLANK, i);
+                    gLastUsedAbility = gBattleMons[i ^ BIT_FLANK].ability;
+                    gBattleScripting.battler = gBattlerAbility = i ^ BIT_FLANK;
+                    gBattlerAttacker = i;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_SymbiosisActivates;
+                    effect = TRUE;
                 }
             }
             gBattleScripting.moveendState++;
@@ -7030,15 +7057,6 @@ static bool32 TryCheekPouch(u32 battlerId, u32 itemId)
     return FALSE;
 }
 
-#define SYMBIOSIS_CHECK(battler, ally)                                                                                               \
-    GetBattlerAbility(ally) == ABILITY_SYMBIOSIS                   \
-    && gBattleMons[battler].item == ITEM_NONE                      \
-    && gBattleMons[ally].item != ITEM_NONE                         \
-    && CanBattlerGetOrLoseItem(battler, gBattleMons[ally].item)    \
-    && CanBattlerGetOrLoseItem(ally, gBattleMons[ally].item)       \
-    && gBattleMons[battler].hp != 0                                \
-    && gBattleMons[ally].hp != 0
-
 // Used by Bestow and Symbiosis to take an item from one battler and give to another.
 static void BestowItem(u32 battlerAtk, u32 battlerDef)
 {
@@ -7066,7 +7084,11 @@ static bool32 TrySymbiosis(u32 battler, u32 itemId)
         && gBattleStruct->changedItems[battler] == ITEM_NONE
         && ItemId_GetHoldEffect(itemId) != HOLD_EFFECT_EJECT_BUTTON
         && ItemId_GetHoldEffect(itemId) != HOLD_EFFECT_EJECT_PACK
-        && gCurrentMove != MOVE_FLING
+        && gBattleStruct->debugHoldEffects[battler] != HOLD_EFFECT_EJECT_BUTTON
+        && gBattleStruct->debugHoldEffects[battler] != HOLD_EFFECT_EJECT_BUTTON
+        && !(B_SYMBIOSIS_GEMS >= GEN_7 && gSpecialStatuses[battler].gemBoost)
+        && gCurrentMove != MOVE_FLING //Fling and damage-reducing berries are handled separately.
+        && !gSpecialStatuses[battler].berryReduced
         && SYMBIOSIS_CHECK(battler, ally))
     {
         BestowItem(ally, battler);
