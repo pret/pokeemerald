@@ -251,11 +251,11 @@
 	.4byte \param1
 	.endm
 
-	.macro nullsub_2A
+	.macro nop_2A
 	.byte 0x2a
 	.endm
 
-	.macro nullsub_2B
+	.macro nop_2B
 	.byte 0x2b
 	.endm
 
@@ -287,11 +287,11 @@
 	.4byte \param1
 	.endm
 
-	.macro nullsub_32
+	.macro nop_32
 	.byte 0x32
 	.endm
 
-	.macro nullsub_33
+	.macro nop_33
 	.byte 0x33
 	.endm
 
@@ -467,27 +467,27 @@
 	.byte \battler
 	.endm
 
-	.macro nullsub_52
+	.macro nop_52
 	.byte 0x52
 	.endm
 
-	.macro nullsub_53
+	.macro nop_53
 	.byte 0x53
 	.endm
 
-	.macro nullsub_54
+	.macro nop_54
 	.byte 0x54
 	.endm
 
-	.macro nullsub_55
+	.macro nop_55
 	.byte 0x55
 	.endm
 
-	.macro nullsub_56
+	.macro nop_56
 	.byte 0x56
 	.endm
 
-	.macro nullsub_57
+	.macro nop_57
 	.byte 0x57
 	.endm
 

@@ -1,27 +1,37 @@
 #ifndef GUARD_GLOBAL_FIELDMAP_H
 #define GUARD_GLOBAL_FIELDMAP_H
 
-#define METATILE_BEHAVIOR_MASK 0x00FF
-#define METATILE_COLLISION_MASK 0x0C00
-#define METATILE_ID_MASK 0x03FF
-#define METATILE_ID_UNDEFINED 0x03FF
-#define METATILE_ELEVATION_SHIFT 12
-#define METATILE_COLLISION_SHIFT 10
-#define METATILE_ELEVATION_MASK 0xF000
+// Masks/shifts for blocks in the map grid
+// Map grid blocks consist of a 10 bit metatile id, a 2 bit collision value, and a 4 bit elevation value
+// This is the data stored in each data/layouts/*/map.bin file
+#define MAPGRID_METATILE_ID_MASK 0x03FF // Bits 1-10
+#define MAPGRID_COLLISION_MASK   0x0C00 // Bits 11-12
+#define MAPGRID_ELEVATION_MASK   0xF000 // Bits 13-16
+#define MAPGRID_COLLISION_SHIFT  10
+#define MAPGRID_ELEVATION_SHIFT  12
+
+// An undefined map grid block has all metatile id bits set and nothing else
+#define MAPGRID_UNDEFINED   MAPGRID_METATILE_ID_MASK
+
+// Masks/shifts for metatile attributes
+// Metatile attributes consist of an 8 bit behavior value, 4 unused bits, and a 4 bit layer type value
+// This is the data stored in each data/tilesets/*/*/metatile_attributes.bin file
+#define METATILE_ATTR_BEHAVIOR_MASK 0x00FF // Bits 1-8
+#define METATILE_ATTR_LAYER_MASK    0xF000 // Bits 13-16
+#define METATILE_ATTR_LAYER_SHIFT   12
+
+enum {
+    METATILE_LAYER_TYPE_NORMAL,  // Metatile uses middle and top bg layers
+    METATILE_LAYER_TYPE_COVERED, // Metatile uses bottom and middle bg layers
+    METATILE_LAYER_TYPE_SPLIT,   // Metatile uses bottom and top bg layers
+};
 
 #define METATILE_ID(tileset, name) (METATILE_##tileset##_##name)
 
-enum
-{
-    CONNECTION_INVALID = -1,
-    CONNECTION_NONE,
-    CONNECTION_SOUTH,
-    CONNECTION_NORTH,
-    CONNECTION_WEST,
-    CONNECTION_EAST,
-    CONNECTION_DIVE,
-    CONNECTION_EMERGE
-};
+// Rows of metatiles do not actually have a strict width.
+// This constant is used for calculations for finding the next row of metatiles
+// for constructing large tiles, such as the Battle Pike's curtain tile.
+#define METATILE_ROW_WIDTH 8
 
 typedef void (*TilesetCB)(void);
 
@@ -146,7 +156,7 @@ struct MapHeader
     /* 0x1A */ bool8 allowCycling:1;
                bool8 allowEscaping:1; // Escape Rope and Dig
                bool8 allowRunning:1;
-               bool8 showMapName:5; // the last 4 bits are unused 
+               bool8 showMapName:5; // the last 4 bits are unused
                                     // but the 5 bit sized bitfield is required to match
     /* 0x1B */ u8 battleType;
 };
@@ -206,7 +216,7 @@ struct ObjectEvent
     /*0x1F*/ u8 previousMetatileBehavior;
     /*0x20*/ u8 previousMovementDirection;
     /*0x21*/ u8 directionSequenceIndex;
-    /*0x22*/ u8 playerCopyableMovement;
+    /*0x22*/ u8 playerCopyableMovement; // COPY_MOVE_*
     /*size = 0x24*/
 };
 
@@ -241,14 +251,14 @@ enum {
     PLAYER_AVATAR_STATE_WATERING,
 };
 
-#define PLAYER_AVATAR_FLAG_ON_FOOT     (1 << 0)
-#define PLAYER_AVATAR_FLAG_MACH_BIKE   (1 << 1)
-#define PLAYER_AVATAR_FLAG_ACRO_BIKE   (1 << 2)
-#define PLAYER_AVATAR_FLAG_SURFING     (1 << 3)
-#define PLAYER_AVATAR_FLAG_UNDERWATER  (1 << 4)
-#define PLAYER_AVATAR_FLAG_5           (1 << 5)
-#define PLAYER_AVATAR_FLAG_FORCED_MOVE (1 << 6)
-#define PLAYER_AVATAR_FLAG_DASH        (1 << 7)
+#define PLAYER_AVATAR_FLAG_ON_FOOT      (1 << 0)
+#define PLAYER_AVATAR_FLAG_MACH_BIKE    (1 << 1)
+#define PLAYER_AVATAR_FLAG_ACRO_BIKE    (1 << 2)
+#define PLAYER_AVATAR_FLAG_SURFING      (1 << 3)
+#define PLAYER_AVATAR_FLAG_UNDERWATER   (1 << 4)
+#define PLAYER_AVATAR_FLAG_CONTROLLABLE (1 << 5)
+#define PLAYER_AVATAR_FLAG_FORCED_MOVE  (1 << 6)
+#define PLAYER_AVATAR_FLAG_DASH         (1 << 7)
 
 enum
 {

@@ -538,7 +538,7 @@ static void AnimUnusedIceCrystalThrow(struct Sprite *sprite)
     sprite->data[2] = gBattleAnimArgs[2] + targetX;
     sprite->data[3] = gBattleAnimArgs[1] + attackerY;
     sprite->data[4] = gBattleAnimArgs[3] + targetY;
-    sub_80A64EC(sprite);
+    ConvertPosDataToTranslateLinearData(sprite);
 
     for (;(targetX >= -32 && targetX <= DISPLAY_WIDTH + 32) && (targetY >= -32 && targetY <= DISPLAY_HEIGHT + 32);
            targetX += sprite->data[1], targetY += sprite->data[2])
@@ -557,7 +557,7 @@ static void AnimUnusedIceCrystalThrow(struct Sprite *sprite)
     sprite->data[2] = targetX;
     sprite->data[3] = attackerY;
     sprite->data[4] = targetY;
-    sub_80A64EC(sprite);
+    ConvertPosDataToTranslateLinearData(sprite);
     sprite->data[3] = gBattleAnimArgs[5];
     sprite->data[4] = gBattleAnimArgs[6];
     sprite->callback = AnimUnusedIceCrystalThrow_Step;
@@ -592,7 +592,7 @@ static void AnimIcePunchSwirlingParticle(struct Sprite *sprite)
     sprite->data[3] = 30;
     sprite->data[4] = -512;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
-    sprite->callback = TranslateSpriteInGrowingCircleOverDuration;
+    sprite->callback = TranslateSpriteInGrowingCircle;
     sprite->callback(sprite);
 }
 
@@ -1000,7 +1000,7 @@ void AnimTask_HazeScrollingFog(u8 taskId)
 
     GetBattleAnimBg1Data(&animBg);
     LoadBgTiles(animBg.bgId, gWeatherFogHorizontalTiles, 0x800, animBg.tilesOffset);
-    AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimFogTilemap, 0);
+    AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimFogTilemap, FALSE);
     LoadPalette(&gFogPalette, animBg.paletteId * 16, 32);
 
     gTasks[taskId].func = AnimTask_HazeScrollingFog_Step;
@@ -1105,7 +1105,7 @@ void AnimTask_LoadMistTiles(u8 taskId)
 
     GetBattleAnimBg1Data(&animBg);
     LoadBgTiles(animBg.bgId, gWeatherFogHorizontalTiles, 0x800, animBg.tilesOffset);
-    AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimFogTilemap, 0);
+    AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimFogTilemap, FALSE);
     LoadPalette(&gFogPalette, animBg.paletteId * 16, 32);
 
     gTasks[taskId].data[15] = -1;

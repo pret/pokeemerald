@@ -32,7 +32,7 @@ se_m_dig_1:
 	.byte		BEND  , c_v+4
 	.byte	W01
 	.byte		        c_v+16
-	.byte		N03   
+	.byte		N03
 	.byte	W01
 	.byte		PAN   , c_v-8
 	.byte		BEND  , c_v+28

@@ -2546,8 +2546,7 @@ const u8 gAmbipomPokedexText[] = _(
     "They live on large trees. Split into two,\n"
     "the tails are so adept at handling and\n"
     "doing things, Ambipom rarely uses\n"
-    "its hands now.\n"
-    "");
+    "its hands now.");
 
 const u8 gDrifloonPokedexText[] = _(
     "Because of the way it floats aimlessly,\n"
@@ -3045,8 +3044,7 @@ const u8 gHerdierPokedexText[] = _(
     "Its dense black fur grows continuously.\n"
     "The high cost of keeping its hard fur\n"
     "properly groomed makes this a\n"
-    "troublesome Pokémon to train.\n"
-    "");
+    "troublesome Pokémon to train.");
 
 const u8 gStoutlandPokedexText[] = _(
     "Intelligent, good-natured, and valiant,\n"
@@ -3190,8 +3188,7 @@ const u8 gAudinoPokedexText[] = _(
     "Its auditory sense is astounding.\n"
     "Using the feelers on its ears, it can tell\n"
     "how someone is feeling or when an egg\n"
-    "might hatch.\n"
-    "");
+    "might hatch.");
 
 const u8 gTimburrPokedexText[] = _(
     "These Pokémon appear at building\n"
@@ -3383,8 +3380,7 @@ const u8 gCofagrigusPokedexText[] = _(
     "Grave robbers who mistake them for\n"
     "real coffins and get too close end up\n"
     "trapped inside their bodies. Their bodies\n"
-    "are covered in pure gold.\n"
-    "");
+    "are covered in pure gold.");
 
 const u8 gTirtougaPokedexText[] = _(
     "Reputed to be the ancestor of most\n"
@@ -4260,15 +4256,13 @@ const u8 gTrevenantPokedexText[] = _(
     "Through its roots, it exerts control over\n"
     "other trees. A deadly curse falls upon\n"
     "anyone cutting down trees in forests\n"
-    "where Trevenant dwell.\n"
-    "");
+    "where Trevenant dwell.");
 
 const u8 gPumpkabooPokedexText[] = _(
     "It is said to carry wandering spirits to\n"
     "the place where they belong so they can\n"
     "move on. As the sun sets, it becomes\n"
-    "restless and active.\n"
-    "");
+    "restless and active.");
 
 const u8 gGourgeistPokedexText[] = _(
     "Singing in eerie voices, they wander town\n"
@@ -4514,8 +4508,7 @@ const u8 gDewpiderPokedexText[] = _(
     "It crawls onto the land in search of food.\n"
     "When it comes across enemies or potential\n"
     "prey, this Pokémon smashes its\n"
-    "water-bubble-covered head into them.\n"
-    "");
+    "water-bubble-covered head into them.");
 
 const u8 gAraquanidPokedexText[] = _(
     "Despite what its appearance suggests,\n"

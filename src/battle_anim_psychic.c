@@ -493,7 +493,7 @@ static void AnimDefensiveWall_Step1(struct Sprite *sprite)
 
     if (IsBattlerSpriteVisible(battler))
         gSprites[gBattlerSpriteIds[battler]].invisible = TRUE;
-    
+
     battler = BATTLE_PARTNER(battler);
     if (IsBattlerSpriteVisible(battler))
         gSprites[gBattlerSpriteIds[battler]].invisible = TRUE;
@@ -650,8 +650,8 @@ static void AnimQuestionMark(struct Sprite *sprite)
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
         x = -x;
 
-    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + x;
-    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + y;
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2) + x;
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET) + y;
 
     if (sprite->y < 16)
         sprite->y = 16;
@@ -957,7 +957,7 @@ void AnimTask_ExtrasensoryDistortion(u8 taskId)
     u8 yOffset;
     struct ScanlineEffectParams scanlineParams;
     struct Task *task = &gTasks[taskId];
-    
+
     yOffset = GetBattlerYCoordWithElevation(gBattleAnimTarget);
     task->data[14] = yOffset - 32;
 
@@ -1056,7 +1056,7 @@ void AnimTask_TransparentCloneGrowAndShrink(u8 taskId)
     s16 spriteId;
     s16 matrixNum;
     struct Task *task = &gTasks[taskId];
-    
+
     matrixNum = AllocOamMatrix();
     if (matrixNum == 0xFF)
     {
@@ -1108,7 +1108,7 @@ static void AnimTask_TransparentCloneGrowAndShrink_Step(u8 taskId)
             task->data[0]++;
         break;
     case 2:
-        obj_delete_but_dont_free_vram(&gSprites[task->data[15]]);
+        DestroySpriteWithActiveSheet(&gSprites[task->data[15]]);
         task->data[0]++;
         break;
     case 3:

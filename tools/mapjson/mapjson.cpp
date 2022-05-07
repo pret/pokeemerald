@@ -230,7 +230,7 @@ string generate_map_events_text(Json map_data) {
         text << bgs_label << ":\n";
         for (auto &bg_event : map_data["bg_events"].array_items()) {
             if (bg_event["type"] == "sign") {
-                text << "\tbg_event "
+                text << "\tbg_sign_event "
                      << bg_event["x"].int_value() << ", "
                      << bg_event["y"].int_value() << ", "
                      << bg_event["elevation"].int_value() << ", "

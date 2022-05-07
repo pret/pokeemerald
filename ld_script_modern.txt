@@ -27,6 +27,7 @@ SECTIONS {
         /* .bss starts at 0x3000000 */
         src/*.o(.bss);
         gflib/*.o(.bss);
+        data/*.o(.bss);
         *libc.a:*.o(.bss*);
         *libnosys.a:*.o(.bss*);
 
@@ -47,7 +48,7 @@ SECTIONS {
     .text :
     ALIGN(4)
     {
-        src/crt0.o(.text*);
+        src/rom_header.o(.text*);
         src/*.o(.text*);
         gflib/*.o(.text*);
         asm/*.o(.text*);
@@ -111,10 +112,10 @@ SECTIONS {
         src/libisagbprn.o(.rodata);
     } =0
 
-    other_data :
+    multiboot_data :
     ALIGN(4)
     {
-        data/unknown_serial_data.o(.rodata);
+        data/multiboot_ereader.o(.rodata);
         data/multiboot_berry_glitch_fix.o(.rodata);
         data/multiboot_pokemon_colosseum.o(.rodata);
     } =0

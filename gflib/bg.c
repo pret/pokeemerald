@@ -42,9 +42,11 @@ static struct BgControl sGpuBgConfigs;
 static struct BgConfig2 sGpuBgConfigs2[NUM_BACKGROUNDS];
 static u32 sDmaBusyBitfield[NUM_BACKGROUNDS];
 
-u32 gUnneededFireRedVariable;
+u32 gWindowTileAutoAllocEnabled;
 
 static const struct BgConfig sZeroedBgControlStruct = { 0 };
+
+static u32 GetBgType(u8 bg);
 
 void ResetBgs(void)
 {
@@ -288,7 +290,8 @@ bool8 IsInvalidBg(u8 bg)
         return FALSE;
 }
 
-int DummiedOutFireRedLeafGreenTileAllocFunc(int a1, int a2, int a3, int a4)
+// From FRLG. Dummied out.
+int BgTileAllocOp(int bg, int offset, int count, int mode)
 {
     return 0;
 }
@@ -303,7 +306,7 @@ void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable)
         sDmaBusyBitfield[i] = 0;
     }
 
-    gUnneededFireRedVariable = leftoverFireRedLeafGreenVariable;
+    gWindowTileAutoAllocEnabled = leftoverFireRedLeafGreenVariable;
 }
 
 void InitBgsFromTemplates(u8 bgMode, const struct BgTemplate *templates, u8 numTemplates)
@@ -392,10 +395,8 @@ u16 LoadBgTiles(u8 bg, const void* src, u16 size, u16 destOffset)
 
     sDmaBusyBitfield[cursor / 0x20] |= (1 << (cursor % 0x20));
 
-    if (gUnneededFireRedVariable == 1)
-    {
-        DummiedOutFireRedLeafGreenTileAllocFunc(bg, tileOffset / 0x20, size / 0x20, 1);
-    }
+    if (gWindowTileAutoAllocEnabled == TRUE)
+        BgTileAllocOp(bg, tileOffset / 0x20, size / 0x20, 1);
 
     return cursor;
 }
@@ -523,9 +524,9 @@ u16 GetBgAttribute(u8 bg, u8 attributeId)
     case BG_ATTR_METRIC:
         switch (GetBgType(bg))
         {
-        case 0:
+        case BG_TYPE_NORMAL:
             return GetBgMetricTextMode(bg, 0) * 0x800;
-        case 1:
+        case BG_TYPE_AFFINE:
             return GetBgMetricAffineMode(bg, 0) * 0x100;
         default:
             return 0;
@@ -552,14 +553,14 @@ s32 ChangeBgX(u8 bg, s32 value, u8 op)
 
     switch (op)
     {
-    case 0:
+    case BG_COORD_SET:
     default:
         sGpuBgConfigs2[bg].bg_x = value;
         break;
-    case 1:
+    case BG_COORD_ADD:
         sGpuBgConfigs2[bg].bg_x += value;
         break;
-    case 2:
+    case BG_COORD_SUB:
         sGpuBgConfigs2[bg].bg_x -= value;
         break;
     }
@@ -632,14 +633,14 @@ s32 ChangeBgY(u8 bg, s32 value, u8 op)
 
     switch (op)
     {
-    case 0:
+    case BG_COORD_SET:
     default:
         sGpuBgConfigs2[bg].bg_y = value;
         break;
-    case 1:
+    case BG_COORD_ADD:
         sGpuBgConfigs2[bg].bg_y += value;
         break;
-    case 2:
+    case BG_COORD_SUB:
         sGpuBgConfigs2[bg].bg_y -= value;
         break;
     }
@@ -702,14 +703,14 @@ s32 ChangeBgY_ScreenOff(u8 bg, s32 value, u8 op)
 
     switch (op)
     {
-    case 0:
+    case BG_COORD_SET:
     default:
         sGpuBgConfigs2[bg].bg_y = value;
         break;
-    case 1:
+    case BG_COORD_ADD:
         sGpuBgConfigs2[bg].bg_y += value;
         break;
-    case 2:
+    case BG_COORD_SUB:
         sGpuBgConfigs2[bg].bg_y -= value;
         break;
     }
@@ -775,75 +776,75 @@ void SetBgAffine(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispCenterX, s16 dis
     SetBgAffineInternal(bg, srcCenterX, srcCenterY, dispCenterX, dispCenterY, scaleX, scaleY, rotationAngle);
 }
 
-u8 Unused_AdjustBgMosaic(u8 a1, u8 a2)
+u8 Unused_AdjustBgMosaic(u8 val, u8 mode)
 {
-    u16 result = GetGpuReg(REG_OFFSET_MOSAIC);
-    s16 test1 = result & 0xF;
-    s16 test2 = (result >> 4) & 0xF;
+    u16 mosaic = GetGpuReg(REG_OFFSET_MOSAIC);
+    s16 bgH = mosaic & 0xF;
+    s16 bgV = (mosaic >> 4) & 0xF;
 
-    result &= 0xFF00;
+    mosaic &= 0xFF00; // clear background mosaic sizes
 
-    switch (a2)
+    switch (mode)
     {
-    case 0:
+    case BG_MOSAIC_SET_HV:
     default:
-        test1 = a1 & 0xF;
-        test2 = a1 >> 0x4;
+        bgH = val & 0xF;
+        bgV = val >> 0x4;
         break;
-    case 1:
-        test1 = a1 & 0xF;
+    case BG_MOSAIC_SET_H:
+        bgH = val & 0xF;
         break;
-    case 2:
-        if ((test1 + a1) > 0xF)
+    case BG_MOSAIC_ADD_H:
+        if ((bgH + val) > 0xF)
         {
-            test1 = 0xF;
+            bgH = 0xF;
         }
         else
         {
-            test1 += a1;
+            bgH += val;
         }
         break;
-    case 3:
-        if ((test1 - a1) < 0)
+    case BG_MOSAIC_SUB_H:
+        if ((bgH - val) < 0)
         {
-            test1 = 0x0;
+            bgH = 0x0;
         }
         else
         {
-            test1 -= a1;
+            bgH -= val;
         }
         break;
-    case 4:
-        test2 = a1 & 0xF;
+    case BG_MOSAIC_SET_V:
+        bgV = val & 0xF;
         break;
-    case 5:
-        if ((test2 + a1) > 0xF)
+    case BG_MOSAIC_ADD_V:
+        if ((bgV + val) > 0xF)
         {
-            test2 = 0xF;
+            bgV = 0xF;
         }
         else
         {
-            test2 += a1;
+            bgV += val;
         }
         break;
-    case 6:
-        if ((test2 - a1) < 0)
+    case BG_MOSAIC_SUB_V:
+        if ((bgV - val) < 0)
         {
-            test2 = 0x0;
+            bgV = 0x0;
         }
         else
         {
-            test2 -= a1;
+            bgV -= val;
         }
         break;
     }
 
-    result |= ((test2 << 0x4) & 0xF0);
-    result |= (test1 & 0xF);
+    mosaic |= ((bgV << 0x4) & 0xF0);
+    mosaic |= (bgH & 0xF);
 
-    SetGpuReg(REG_OFFSET_MOSAIC, result);
+    SetGpuReg(REG_OFFSET_MOSAIC, mosaic);
 
-    return result;
+    return mosaic;
 }
 
 void SetBgTilemapBuffer(u8 bg, void *tilemap)
@@ -891,10 +892,10 @@ void CopyBgTilemapBufferToVram(u8 bg)
     {
         switch (GetBgType(bg))
         {
-        case 0:
+        case BG_TYPE_NORMAL:
             sizeToLoad = GetBgMetricTextMode(bg, 0) * 0x800;
             break;
-        case 1:
+        case BG_TYPE_AFFINE:
             sizeToLoad = GetBgMetricAffineMode(bg, 0) * 0x100;
             break;
         default:
@@ -915,7 +916,7 @@ void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 wi
     {
         switch (GetBgType(bg))
         {
-        case 0:
+        case BG_TYPE_NORMAL:
         {
             const u16 * srcCopy = src;
             for (destY16 = destY; destY16 < (destY + height); destY16++)
@@ -927,7 +928,7 @@ void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 wi
             }
             break;
         }
-        case 1:
+        case BG_TYPE_AFFINE:
         {
             const u8 * srcCopy = src;
             mode = GetBgMetricAffineMode(bg, 0x1);
@@ -949,7 +950,7 @@ void CopyToBgTilemapBufferRect_ChangePalette(u8 bg, const void *src, u8 destX, u
     CopyRectToBgTilemapBufferRect(bg, src, 0, 0, rectWidth, rectHeight, destX, destY, rectWidth, rectHeight, palette, 0, 0);
 }
 
-void CopyRectToBgTilemapBufferRect(u8 bg, const void *src, u8 srcX, u8 srcY, u8 srcWidth, u8 unused, u8 srcHeight, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, s16 palette1, s16 tileOffset)
+void CopyRectToBgTilemapBufferRect(u8 bg, const void *src, u8 srcX, u8 srcY, u8 srcWidth, u8 srcHeight, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette1, s16 tileOffset, s16 palette2)
 {
     u16 screenWidth, screenHeight, screenSize;
     u16 var;
@@ -963,30 +964,30 @@ void CopyRectToBgTilemapBufferRect(u8 bg, const void *src, u8 srcX, u8 srcY, u8 
         screenHeight = GetBgMetricTextMode(bg, 0x2) * 0x20;
         switch (GetBgType(bg))
         {
-        case 0:
+        case BG_TYPE_NORMAL:
             srcPtr = src + ((srcY * srcWidth) + srcX) * 2;
-            for (i = destX; i < (destX + rectWidth); i++)
+            for (i = destY; i < (destY + rectHeight); i++)
             {
-                for (j = srcHeight; j < (srcHeight + destY); j++)
+                for (j = destX; j < (destX + rectWidth); j++)
                 {
                     u16 index = GetTileMapIndexFromCoords(j, i, screenSize, screenWidth, screenHeight);
-                    CopyTileMapEntry(srcPtr, sGpuBgConfigs2[bg].tilemap + (index * 2), rectHeight, palette1, tileOffset);
+                    CopyTileMapEntry(srcPtr, sGpuBgConfigs2[bg].tilemap + (index * 2), palette1, tileOffset, palette2);
                     srcPtr += 2;
                 }
-                srcPtr += (srcWidth - destY) * 2;
+                srcPtr += (srcWidth - rectWidth) * 2;
             }
             break;
-        case 1:
+        case BG_TYPE_AFFINE:
             srcPtr = src + ((srcY * srcWidth) + srcX);
             var = GetBgMetricAffineMode(bg, 0x1);
-            for (i = destX; i < (destX + rectWidth); i++)
+            for (i = destY; i < (destY + rectHeight); i++)
             {
-                for (j = srcHeight; j < (srcHeight + destY); j++)
+                for (j = destX; j < (destX + rectWidth); j++)
                 {
-                    *(u8*)(sGpuBgConfigs2[bg].tilemap + ((var * i) + j)) = *(u8*)(srcPtr) + palette1;
+                    *(u8*)(sGpuBgConfigs2[bg].tilemap + ((var * i) + j)) = *(u8*)(srcPtr) + tileOffset;
                     srcPtr++;
                 }
-                srcPtr += (srcWidth - destY);
+                srcPtr += (srcWidth - rectWidth);
             }
             break;
         }
@@ -1003,7 +1004,7 @@ void FillBgTilemapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, 
     {
         switch (GetBgType(bg))
         {
-        case 0:
+        case BG_TYPE_NORMAL:
             for (y16 = y; y16 < (y + height); y16++)
             {
                 for (x16 = x; x16 < (x + width); x16++)
@@ -1012,7 +1013,7 @@ void FillBgTilemapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, 
                 }
             }
             break;
-        case 1:
+        case BG_TYPE_AFFINE:
             mode = GetBgMetricAffineMode(bg, 0x1);
             for (y16 = y; y16 < (y + height); y16++)
             {
@@ -1046,24 +1047,24 @@ void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 widt
         mode2 = GetBgMetricTextMode(bg, 0x2) * 0x20;
         switch (GetBgType(bg))
         {
-        case 0:
+        case BG_TYPE_NORMAL:
             for (y16 = y; y16 < (y + height); y16++)
             {
                 for (x16 = x; x16 < (x + width); x16++)
                 {
                     CopyTileMapEntry(&firstTileNum, &((u16*)sGpuBgConfigs2[bg].tilemap)[(u16)GetTileMapIndexFromCoords(x16, y16, attribute, mode, mode2)], paletteSlot, 0, 0);
-                    firstTileNum = (firstTileNum & (METATILE_COLLISION_MASK | METATILE_ELEVATION_MASK)) + ((firstTileNum + tileNumDelta) & METATILE_ID_MASK);
+                    firstTileNum = (firstTileNum & (MAPGRID_COLLISION_MASK | MAPGRID_ELEVATION_MASK)) + ((firstTileNum + tileNumDelta) & MAPGRID_METATILE_ID_MASK);
                 }
             }
             break;
-        case 1:
+        case BG_TYPE_AFFINE:
             mode3 = GetBgMetricAffineMode(bg, 0x1);
             for (y16 = y; y16 < (y + height); y16++)
             {
                 for (x16 = x; x16 < (x + width); x16++)
                 {
                     ((u8*)sGpuBgConfigs2[bg].tilemap)[(y16 * mode3) + x16] = firstTileNum;
-                    firstTileNum = (firstTileNum & (METATILE_COLLISION_MASK | METATILE_ELEVATION_MASK)) + ((firstTileNum + tileNumDelta) & METATILE_ID_MASK);
+                    firstTileNum = (firstTileNum & (MAPGRID_COLLISION_MASK | MAPGRID_ELEVATION_MASK)) + ((firstTileNum + tileNumDelta) & MAPGRID_METATILE_ID_MASK);
                 }
             }
             break;
@@ -1190,7 +1191,7 @@ void CopyTileMapEntry(const u16 *src, u16 *dest, s32 palette1, s32 tileOffset, s
     *dest = var;
 }
 
-u32 GetBgType(u8 bg)
+static u32 GetBgType(u8 bg)
 {
     u8 mode = GetBgMode();
 
@@ -1202,31 +1203,31 @@ u32 GetBgType(u8 bg)
         {
         case 0:
         case 1:
-            return 0;
+            return BG_TYPE_NORMAL;
         }
         break;
     case 2:
         switch (mode)
         {
         case 0:
-            return 0;
+            return BG_TYPE_NORMAL;
         case 1:
         case 2:
-            return 1;
+            return BG_TYPE_AFFINE;
         }
         break;
     case 3:
         switch (mode)
         {
         case 0:
-            return 0;
+            return BG_TYPE_NORMAL;
         case 2:
-            return 1;
+            return BG_TYPE_AFFINE;
         }
         break;
     }
 
-    return 0xFFFF;
+    return BG_TYPE_NONE;
 }
 
 bool32 IsInvalidBg32(u8 bg)
