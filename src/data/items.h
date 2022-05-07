@@ -1095,7 +1095,7 @@ const struct Item gItems[] =
         .description = sAbilityPatchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_AbilityPatch,
     },
 
 // Mints
