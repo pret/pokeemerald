@@ -14477,7 +14477,7 @@ bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         {
-            switch (gBattleMoves[move].target)
+            switch (GetBattlerMoveTargetType(battlerId, move))
             {
                 case MOVE_TARGET_BOTH:
                     if (CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) >= 2) // Check for single target
@@ -14487,12 +14487,12 @@ bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId)
                     if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) >= 2) // Count mons on both sides; ignore attacker
                         return FALSE;
                     break;
+                default:
+                break;
             }
         }
-
         return TRUE;
     }
-
     return FALSE;
 }
 
