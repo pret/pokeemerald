@@ -2941,7 +2941,17 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_FLINCH:
                 if (battlerAbility == ABILITY_INNER_FOCUS)
                 {
-                    gBattlescriptCurrInstr++;
+                    if (primary == TRUE || certain == MOVE_EFFECT_CERTAIN)
+                    {
+                        gLastUsedAbility = ABILITY_INNER_FOCUS;
+                        gBattlerAbility = gEffectBattler;
+                        RecordAbilityBattle(gEffectBattler, ABILITY_INNER_FOCUS);
+                        gBattlescriptCurrInstr = BattleScript_FlinchPrevention;
+                    }
+                    else
+                    {
+                        gBattlescriptCurrInstr++;
+                    }
                 }
                 else
                 {
