@@ -7039,7 +7039,7 @@ const struct Item gItems[] =
 
 #if defined(BATTLE_ENGINE) && B_CONFUSE_BERRIES_HEAL >= GEN_8
     #define CONFUSE_BERRY_HEAL_FRACTION 3
-#elseif defined(BATTLE_ENGINE) && B_CONFUSE_BERRIES_HEAL == GEN_7
+#elif defined(BATTLE_ENGINE) && B_CONFUSE_BERRIES_HEAL == GEN_7
     #define CONFUSE_BERRY_HEAL_FRACTION 2
 #else
     #define CONFUSE_BERRY_HEAL_FRACTION 8
