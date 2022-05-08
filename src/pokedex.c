@@ -5277,7 +5277,7 @@ bool8  SpeciesCanLearnLvlUpMove(u16 species, u16 move) //Move search PokedexPlus
     #if defined (BATTLE_ENGINE) || defined (POKEMON_EXPANSION)
         for (j = 0; j < MAX_LEVEL_UP_MOVES && gLevelUpLearnsets[species][j].move != LEVEL_UP_END; j++)
         {
-            if (move == (gLevelUpLearnsets[species][j].move & LEVEL_UP_MOVE_ID))
+            if (move == (gLevelUpLearnsets[species][j].move))
             {
                 return TRUE;
             }
