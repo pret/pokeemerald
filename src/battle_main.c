@@ -5174,7 +5174,11 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
                                   | BATTLE_TYPE_FRONTIER
                                   | BATTLE_TYPE_EREADER_TRAINER
                                   | BATTLE_TYPE_WALLY_TUTORIAL))
+#if !B_EVOLUTION_AFTER_WHITEOUT
             && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT))
+#else
+                                  )
+#endif
         {
             gBattleMainFunc = TrySpecialEvolution;
         }
