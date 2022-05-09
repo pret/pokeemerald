@@ -6789,12 +6789,12 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
             }
             case EVO_DARK_SCROLL:
                 if (evolutionItem == EVO_DARK_SCROLL)
-                        targetSpecies = gEvolutionTable[species][i].targetSpecies;
-                    break;
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
             case EVO_WATER_SCROLL:
-                    if (evolutionItem == EVO_WATER_SCROLL)
-                        targetSpecies = gEvolutionTable[species][i].targetSpecies;
-                    break;
+                if (evolutionItem == EVO_WATER_SCROLL)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
             }
         }
         break;
