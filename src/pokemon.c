@@ -6757,6 +6757,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
             }
         }
         break;
+    #ifdef BATTLE_ENGINE
     // Battle evolution without leveling; party slot is being passed into the evolutionItem arg.
     case EVO_MODE_BATTLE_SPECIAL:
         for (i = 0; i < EVOS_PER_MON; i++)
@@ -6770,6 +6771,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
             }
         }
         break;
+    #endif
     // Overworld evolution without leveling; evolution method is being passed into the evolutionItem arg.
     case EVO_MODE_OVERWORLD_SPECIAL:
         for (i = 0; i < EVOS_PER_MON; i++)
@@ -8473,11 +8475,6 @@ static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
     }
 }
 
-static void CB2_DoSpecialOverworldEvo(void)
-{
-    TrySpecialOverworldEvo();
-}
-
 // Attempts to perform non-level/item related overworld evolutions; called by tryspecialevo command.
 void TrySpecialOverworldEvo(void)
 {
@@ -8491,14 +8488,15 @@ void TrySpecialOverworldEvo(void)
         u16 targetSpecies = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_OVERWORLD_SPECIAL, evoMethod, SPECIES_NONE);
         if (targetSpecies != SPECIES_NONE && !(sTriedEvolving & gBitTable[i]))
         {
+            sTriedEvolving |= gBitTable[i];
+            if(gMain.callback2 == TrySpecialOverworldEvo) // This fixes small graphics glitches.
+                EvolutionScene(&gPlayerParty[i], targetSpecies, canStopEvo, i);
+            else
+                BeginEvolutionScene(&gPlayerParty[i], targetSpecies, canStopEvo, i);
             if (tryMultiple)
-            {
-                gCB2_AfterEvolution = CB2_DoSpecialOverworldEvo;
-                sTriedEvolving |= gBitTable[i];
-            }
+                gCB2_AfterEvolution = TrySpecialOverworldEvo;
             else
                 gCB2_AfterEvolution = CB2_ReturnToField;
-            BeginEvolutionScene(&gPlayerParty[i], targetSpecies, canStopEvo, i);
             return;
         }   
     }
