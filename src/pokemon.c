@@ -66,6 +66,7 @@ static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static bool8 ShouldSkipFriendshipChange(void);
 static u8 SendMonToPC(struct Pokemon* mon);
 static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
+void TrySpecialOverworldEvo();
 
 EWRAM_DATA static u8 sLearningMoveTableID = 0;
 EWRAM_DATA u8 gPlayerPartyCount = 0;
@@ -74,6 +75,7 @@ EWRAM_DATA struct Pokemon gPlayerParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct Pokemon gEnemyParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GFX_MANAGERS_COUNT] = {NULL};
+EWRAM_DATA static u8 sTriedEvolving = 0;
 
 #include "data/battle_moves.h"
 
@@ -6777,10 +6779,14 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
             switch (gEvolutionTable[species][i].method)
             {
             case EVO_SCRIPT_TRIGGER_DMG:
-                if (evolutionItem == EVO_SCRIPT_TRIGGER_DMG 
-                    && (GetMonData(mon, MON_DATA_MAX_HP, NULL) - GetMonData(mon, MON_DATA_HP, NULL) >= gEvolutionTable[species][i].param))
+            {
+                u16 currentHp = GetMonData(mon, MON_DATA_HP, NULL);
+                if (evolutionItem == EVO_SCRIPT_TRIGGER_DMG
+                    && currentHp != 0
+                    && (GetMonData(mon, MON_DATA_MAX_HP, NULL) - currentHp >= gEvolutionTable[species][i].param))
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
+            }
             case EVO_DARK_SCROLL:
                 if (evolutionItem == EVO_DARK_SCROLL)
                         targetSpecies = gEvolutionTable[species][i].targetSpecies;
@@ -8469,19 +8475,36 @@ static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
     }
 }
 
+static void CB2_DoSpecialOverworldEvo(void)
+{
+    TrySpecialOverworldEvo();
+}
+
 // Attempts to perform non-level/item related overworld evolutions; called by tryspecialevo command.
 void TrySpecialOverworldEvo(void)
 {
     u8 i;
     u8 evoMethod = gSpecialVar_0x8000;
+    u16 canStopEvo = gSpecialVar_0x8001;
+    u16 tryMultiple = gSpecialVar_0x8002;    
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
         u16 targetSpecies = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_OVERWORLD_SPECIAL, evoMethod, SPECIES_NONE);
-        if (targetSpecies != SPECIES_NONE)
+        if (targetSpecies != SPECIES_NONE && !(sTriedEvolving & gBitTable[i]))
         {
-            gCB2_AfterEvolution = CB2_ReturnToField;
-            BeginEvolutionScene(&gPlayerParty[i], targetSpecies, TRUE, i);
+            if (tryMultiple)
+            {
+                gCB2_AfterEvolution = CB2_DoSpecialOverworldEvo;
+                sTriedEvolving |= gBitTable[i];
+            }
+            else
+                gCB2_AfterEvolution = CB2_ReturnToField;
+            BeginEvolutionScene(&gPlayerParty[i], targetSpecies, canStopEvo, i);
+            return;
         }   
     }
+
+    sTriedEvolving = 0;
+    SetMainCallback2(CB2_ReturnToField);
 }
