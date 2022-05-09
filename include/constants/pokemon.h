@@ -387,7 +387,6 @@
 #define EVOS_PER_MON 10
 
 // Evolution 'modes,' for GetEvolutionTargetSpecies
-#define EVO_MODE_NORMAL     0
 #define EVO_MODE_NORMAL            0
 #define EVO_MODE_TRADE             1
 #define EVO_MODE_ITEM_USE          2
