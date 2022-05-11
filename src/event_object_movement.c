@@ -511,7 +511,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
     {gObjectEventPal_Npc1, OBJ_EVENT_PAL_TAG_DYNAMIC},
     {gObjectEventPaletteEmotes, OBJ_EVENT_PAL_TAG_EMOTES},
-    {NULL,                  0x0000},
+    {NULL,                  OBJ_EVENT_PAL_TAG_NONE},
 };
 
 static const u16 sReflectionPaletteTags_Brendan[] = {

@@ -303,7 +303,7 @@ static const struct SpriteTemplate sSpriteTemplate_ExclamationQuestionMark =
 static const struct SpriteTemplate sSpriteTemplate_HeartIcon =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
+    .paletteTag = FLDEFF_PAL_TAG_NPC_1,
     .oam = &sOamData_Icons,
     .anims = sSpriteAnimTable_Icons,
     .images = sSpriteImageTable_HeartIcon,
@@ -870,7 +870,7 @@ u8 FldEff_HeartIcon(void)
         struct Sprite *sprite = &gSprites[spriteId];
 
         SetIconSpriteData(sprite, FLDEFF_HEART_ICON, 0);
-        sprite->oam.paletteNum = 2; // TODO: What palette should this use?
+        UpdateSpritePaletteByTemplate(&sSpriteTemplate_HeartIcon, sprite);
     }
 
     return 0;

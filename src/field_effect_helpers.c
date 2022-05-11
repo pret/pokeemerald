@@ -1438,7 +1438,7 @@ u32 FldEff_BerryTreeGrowthSparkle(void)
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
-        sprite->oam.paletteNum = 5; // TODO: What paletteTag does this use?
+        UpdateSpritePaletteByTemplate(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SPARKLE], sprite);
         sprite->data[0] = FLDEFF_BERRY_TREE_GROWTH_SPARKLE;
     }
     return 0;
