@@ -659,11 +659,11 @@ BattleScript_EffectFling:
 BattleScript_EffectFlingConsumeBerry:
 	savebattleritem BS_TARGET
 	battleritemtolastuseditem BS_TARGET
-	setbyte sBERRY_OVERRIDE, TRUE @ override the requirements for eating berries
+	setbyte sBERRY_OVERRIDE, 1 @ override the requirements for eating berries
 	orword gHitMarker, HITMARKER_NO_ANIMATIONS
 	consumeberry BS_TARGET
 	bicword gHitMarker, HITMARKER_NO_ANIMATIONS
-	setbyte sBERRY_OVERRIDE, FALSE
+	setbyte sBERRY_OVERRIDE, 0
 	restorebattleritem BS_TARGET
 BattleScript_FlingEnd:
 	tryfaintmon BS_TARGET
@@ -1350,7 +1350,7 @@ BattleScript_MoveEffectBugBite::
 	waitmessage B_WAIT_TIME_LONG
 	orword gHitMarker, HITMARKER_NO_ANIMATIONS
 	setbyte sBERRY_OVERRIDE, TRUE   @ override the requirements for eating berries
-	consumeberry BS_ATTACKER, TRUE  @ consume the berry, then restore the item from changedItems
+	consumeberry BS_ATTACKER
 	bicword gHitMarker, HITMARKER_NO_ANIMATIONS
 	setbyte sBERRY_OVERRIDE, FALSE
 	return
