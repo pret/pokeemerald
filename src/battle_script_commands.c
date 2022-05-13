@@ -9276,12 +9276,19 @@ static void Cmd_various(void)
         break;
     case VARIOUS_CONSUME_BERRY:
         if (gBattleScripting.overrideBerryRequirements == 2)
-            break;
+        {
+            gBattlescriptCurrInstr += 4;
+            return;
+        }
+        
+        if (gBattlescriptCurrInstr[3])
+            gLastUsedItem = gBattleMons[gActiveBattler].item;
         
         gBattleScripting.battler = gEffectBattler = gBattlerTarget = gActiveBattler;    // Cover all berry effect battlerId cases. e.g. ChangeStatBuffs uses target ID
         if (ItemBattleEffects(ITEMEFFECT_USE_LAST_ITEM, gActiveBattler, FALSE))
             return;
-        break;
+        gBattlescriptCurrInstr += 4;
+        return;
     case VARIOUS_JUMP_IF_CANT_REVERT_TO_PRIMAL:
     {
         bool8 canDoPrimalReversion = FALSE;

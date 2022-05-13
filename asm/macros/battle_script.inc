@@ -1785,8 +1785,9 @@
 	various \battler, VARIOUS_TRY_ACTIVATE_GRIM_NEIGH
 	.endm
 
-	.macro consumeberry battler:req
+	.macro consumeberry battler:req, frombattler:req
 	various \battler, VARIOUS_CONSUME_BERRY
+	.byte \frombattler
 	.endm
 
 	.macro activateitemeffects battler:req
