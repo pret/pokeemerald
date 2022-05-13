@@ -561,7 +561,7 @@ To compile the `modern` target with this toolchain, the subdirectories `lib`, `i
 
 To build **pokeemerald.elf** with debug symbols under a modern toolchain:
 ```bash
-make DINFO=1
+make modern DINFO=1
 ```
 Note that this is not necessary for a non-modern build since those are built with debug symbols by default.
 
