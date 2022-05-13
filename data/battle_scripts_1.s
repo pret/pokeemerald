@@ -1351,9 +1351,11 @@ BattleScript_MoveEffectBugBite::
 	waitmessage B_WAIT_TIME_LONG
 	orword gHitMarker, HITMARKER_NO_ANIMATIONS
 	setbyte sBERRY_OVERRIDE, 1   @ override the requirements for eating berries
+	savetarget
 	consumeberry BS_ATTACKER, FALSE
 	bicword gHitMarker, HITMARKER_NO_ANIMATIONS
 	setbyte sBERRY_OVERRIDE, 0
+	restoretarget
 	return
 
 BattleScript_EffectCoreEnforcer:
