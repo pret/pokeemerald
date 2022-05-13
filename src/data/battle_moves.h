@@ -11221,7 +11221,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_STEEL_BEAM] =
     {
-        .effect = EFFECT_RECOIL_50,
+        .effect = EFFECT_STEEL_BEAM,
         .power = 140,
         .type = TYPE_STEEL,
         .accuracy = 95,

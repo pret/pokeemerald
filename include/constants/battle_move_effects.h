@@ -389,7 +389,8 @@
 #define EFFECT_RISING_VOLTAGE               383
 #define EFFECT_BEAK_BLAST                   384
 #define EFFECT_COURT_CHANGE                 385
+#define EFFECT_STEEL_BEAM                   386
 
-#define NUM_BATTLE_MOVE_EFFECTS  	        386
+#define NUM_BATTLE_MOVE_EFFECTS  	        387
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H
