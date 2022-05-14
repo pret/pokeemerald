@@ -14,8 +14,8 @@ gText_WantsToFly::
 callfunc ScrFunc_playfirstmoncry
 .endm
 
-.macro bufferlivemonspeciesname out:req
-callfunc ScrFunc_bufferlivemonspeciesname
+.macro bufferlivemonnickname out:req
+callfunc ScrFunc_bufferlivemonnickname
 .byte \out
 .endm
 
@@ -27,13 +27,13 @@ callfunc ScrFunc_emote
 
 EventScript_Follower::
   lock
-  bufferlivemonspeciesname 0
+  bufferlivemonnickname 0
   playfirstmoncry
   callfunc ScrFunc_getfolloweraction
   checkpartymove MOVE_FLY
   compare VAR_RESULT 6
   goto_if_eq EventScript_FollowerEnd
-  bufferlivemonspeciesname 0
+  bufferlivemonnickname 0
   msgbox gText_WantsToFly, MSGBOX_YESNO
   switch VAR_RESULT
   case NO, EventScript_FollowerEnd

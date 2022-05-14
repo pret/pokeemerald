@@ -1606,13 +1606,12 @@ bool8 ScrCmd_bufferleadmonspeciesname(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrFunc_bufferlivemonspeciesname(struct ScriptContext *ctx)
+bool8 ScrFunc_bufferlivemonnickname(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
 
-    u8 *dest = sScriptStringVars[stringVarIndex];
-    u32 species = GetMonData(GetFirstLiveMon(), MON_DATA_SPECIES);
-    StringCopy(dest, gSpeciesNames[species]);
+    GetMonData(GetFirstLiveMon(), MON_DATA_NICKNAME, sScriptStringVars[stringVarIndex]);
+    StringGet_Nickname(sScriptStringVars[stringVarIndex]);
     return FALSE;
 }
 
