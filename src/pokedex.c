@@ -4421,7 +4421,7 @@ static void HighlightSubmenuScreenSelectBarItem(u8 a, u16 b)
 }
 
 #define tState         data[0]
-#define tDexNum        data[1]
+#define tSpecies       data[1]
 #define tPalTimer      data[2]
 #define tMonSpriteId   data[3]
 #define tOtIdLo        data[12]
@@ -4429,12 +4429,12 @@ static void HighlightSubmenuScreenSelectBarItem(u8 a, u16 b)
 #define tPersonalityLo data[14]
 #define tPersonalityHi data[15]
 
-u8 DisplayCaughtMonDexPage(u16 dexNum, u32 otId, u32 personality)
+u8 DisplayCaughtMonDexPage(u16 species, u32 otId, u32 personality)
 {
     u8 taskId = CreateTask(Task_DisplayCaughtMonDexPage, 0);
 
     gTasks[taskId].tState = 0;
-    gTasks[taskId].tDexNum = dexNum;
+    gTasks[taskId].tSpecies = species;
     gTasks[taskId].tOtIdLo = otId;
     gTasks[taskId].tOtIdHi = otId >> 16;
     gTasks[taskId].tPersonalityLo = personality;
@@ -4445,7 +4445,8 @@ u8 DisplayCaughtMonDexPage(u16 dexNum, u32 otId, u32 personality)
 static void Task_DisplayCaughtMonDexPage(u8 taskId)
 {
     u8 spriteId;
-    u16 dexNum = gTasks[taskId].tDexNum;
+    u16 species = gTasks[taskId].tSpecies;
+    u16 dexNum = SpeciesToNationalPokedexNum(species);
 
     switch (gTasks[taskId].tState)
     {
@@ -4469,11 +4470,18 @@ static void Task_DisplayCaughtMonDexPage(u8 taskId)
         sPokedexView = AllocZeroed(sizeof(struct PokedexView)); //for type icons
         ResetPokedexView(sPokedexView);
 
+        #ifdef POKEMON_EXPANSION
+        if (gFormSpeciesIdTables[species] != NULL)
+            sPokedexView->formSpecies = species;
+        else
+            sPokedexView->formSpecies = 0;
+        #endif
+
         LoadTilesetTilemapHGSS(INFO_SCREEN);
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
         PutWindowTilemap(WIN_FOOTPRINT);
-        DrawFootprint(WIN_FOOTPRINT, gTasks[taskId].tDexNum);
+        DrawFootprint(WIN_FOOTPRINT, dexNum);
         CopyWindowToVram(WIN_FOOTPRINT, COPYWIN_GFX);
         ResetPaletteFade();
         LoadPokedexBgPalette(FALSE);
@@ -4567,7 +4575,7 @@ static void Task_ExitCaughtMonPage(u8 taskId)
         if (buffer)
             Free(buffer);
 
-        species = NationalPokedexNumToSpecies(gTasks[taskId].tDexNum);
+        species = gTasks[taskId].tSpecies;
         otId = ((u16)gTasks[taskId].tOtIdHi << 16) | (u16)gTasks[taskId].tOtIdLo;
         personality = ((u16)gTasks[taskId].tPersonalityHi << 16) | (u16)gTasks[taskId].tPersonalityLo;
         paletteNum = gSprites[gTasks[taskId].tMonSpriteId].oam.paletteNum;
@@ -5262,7 +5270,11 @@ static u32 GetPokedexMonPersonality(u16 species)
 u16 CreateMonSpriteFromNationalDexNumber(u16 nationalNum, s16 x, s16 y, u16 paletteSlot)
 {
     nationalNum = NationalPokedexNumToSpeciesHGSS(nationalNum);
+    #ifndef POKEMON_EXPANSION
     return CreateMonPicSprite_HandleDeoxys(nationalNum, SHINY_ODDS, GetPokedexMonPersonality(nationalNum), TRUE, x, y, paletteSlot, TAG_NONE);
+    #else
+    return CreateMonPicSprite(nationalNum, SHINY_ODDS, GetPokedexMonPersonality(nationalNum), TRUE, x, y, paletteSlot, TAG_NONE);
+    #endif
 }
 
 static u16 CreateSizeScreenTrainerPic(u16 species, s16 x, s16 y, s8 paletteSlot)
