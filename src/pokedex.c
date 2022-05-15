@@ -8031,16 +8031,16 @@ static u8 PrintPreEvolutions(u8 taskId, u16 species)
     }
 
     #ifdef POKEMON_EXPANSION
-        if (isMega)
-        {
-            sPokedexView->numPreEvolutions = numPreEvolutions;
-            sPokedexView->sEvoScreenData.numAllEvolutions += numPreEvolutions;
-            sPokedexView->sEvoScreenData.isMega = isMega;
+    if (isMega)
+    {
+        sPokedexView->numPreEvolutions = numPreEvolutions;
+        sPokedexView->sEvoScreenData.numAllEvolutions += numPreEvolutions;
+        sPokedexView->sEvoScreenData.isMega = isMega;
 
-            CreateCaughtBallEvolutionScreen(preEvolutionOne, base_x - 9 - 8, base_y + base_y_offset*(numPreEvolutions - 1), 0);
-            HandlePreEvolutionSpeciesPrint(taskId, preEvolutionOne, species, base_x - 8, base_y, base_y_offset, numPreEvolutions - 1);
-            return numPreEvolutions;
-        }
+        CreateCaughtBallEvolutionScreen(preEvolutionOne, base_x - 9 - 8, base_y + base_y_offset*(numPreEvolutions - 1), 0);
+        HandlePreEvolutionSpeciesPrint(taskId, preEvolutionOne, species, base_x - 8, base_y, base_y_offset, numPreEvolutions - 1);
+        return numPreEvolutions;
+    }
     #endif
 
     //Calculate if previous evolution also has a previous evolution
@@ -8111,8 +8111,8 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
     bool8 isEevee = FALSE;
 
     #ifdef POKEMON_EXPANSION
-        if (sPokedexView->sEvoScreenData.isMega)
-            return 0;
+    if (sPokedexView->sEvoScreenData.isMega)
+        return 0;
     #endif
 
     StringCopy(gStringVar1, gSpeciesNames[species]);
@@ -8140,6 +8140,7 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
         #endif
     }
     gTasks[taskId].data[3] = times;
+    sPokedexView->sEvoScreenData.numAllEvolutions += times;
 
     //If there are no evolutions print text
     if (times == 0 && depth == 0)
@@ -8156,6 +8157,7 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
 
         previousTargetSpecies = targetSpecies;
         targetSpecies = gEvolutionTable[species][i].targetSpecies;
+        sPokedexView->sEvoScreenData.targetSpecies[base_i] = targetSpecies;
         #ifdef TX_DIFFICULTY_CHALLENGES_USED
             if (gSaveBlock1Ptr->txRandEvolutions && targetSpecies != SPECIES_NONE) //tx_difficulty_challenges
                 targetSpecies = GetSpeciesRandomSeeded(targetSpecies, TX_RANDOM_T_EVO);
