@@ -64,6 +64,8 @@
 #include "constants/trainers.h"
 #include "cable_club.h"
 
+extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
+
 extern const struct BgTemplate gBattleBgTemplates[];
 extern const struct WindowTemplate *const gBattleWindowTemplates[];
 
@@ -3635,12 +3637,18 @@ static void TryDoEventsBeforeFirstTurn(void)
     // Primal Reversion
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (CanMegaEvolve(i)
-         && GetBattlerHoldEffect(i, TRUE) == HOLD_EFFECT_PRIMAL_ORB)
+        if (GetBattlerHoldEffect(i, TRUE) == HOLD_EFFECT_PRIMAL_ORB)
         {
-            gBattlerAttacker = i;
-            BattleScriptExecute(BattleScript_PrimalReversion);
-            return;
+            for (j = 0; j < EVOS_PER_MON; j++)
+            {
+                if (gEvolutionTable[gBattleMons[i].species][j].targetSpecies != SPECIES_NONE
+                 && gEvolutionTable[gBattleMons[i].species][j].method == EVO_PRIMAL_REVERSION)
+                {
+                    gBattlerAttacker = i;
+                    BattleScriptExecute(BattleScript_PrimalReversion);
+                    return;
+                }
+            }
         }
     }
 
@@ -4020,7 +4028,8 @@ static void HandleTurnActionSelectionState(void)
                     {
                         BtlController_EmitChoosePokemon(BUFFER_A, PARTY_ACTION_CANT_SWITCH, PARTY_SIZE, ABILITY_NONE, gBattleStruct->battlerPartyOrders[gActiveBattler]);
                     }
-                    else if ((i = IsAbilityPreventingEscape(gActiveBattler)))
+                    else if ((i = IsAbilityPreventingEscape(gActiveBattler)
+                              && ItemId_GetHoldEffect(gBattleMons[gActiveBattler].item) != HOLD_EFFECT_SHED_SHELL))
                     {
                         BtlController_EmitChoosePokemon(BUFFER_A, ((i - 1) << 4) | PARTY_ACTION_ABILITY_PREVENTS, PARTY_SIZE, gBattleMons[i - 1].ability, gBattleStruct->battlerPartyOrders[gActiveBattler]);
                     }
