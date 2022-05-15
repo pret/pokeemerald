@@ -7082,10 +7082,8 @@ static bool32 TrySymbiosis(u32 battler, u32 itemId)
 
     if (!gBattleStruct->itemStolen[gBattlerPartyIndexes[battler]].stolen
         && gBattleStruct->changedItems[battler] == ITEM_NONE
-        && ItemId_GetHoldEffect(itemId) != HOLD_EFFECT_EJECT_BUTTON
-        && ItemId_GetHoldEffect(itemId) != HOLD_EFFECT_EJECT_PACK
-        && gBattleStruct->debugHoldEffects[battler] != HOLD_EFFECT_EJECT_BUTTON
-        && gBattleStruct->debugHoldEffects[battler] != HOLD_EFFECT_EJECT_BUTTON
+        && GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_EJECT_BUTTON
+        && GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_EJECT_PACK
         && !(B_SYMBIOSIS_GEMS >= GEN_7 && gSpecialStatuses[battler].gemBoost)
         && gCurrentMove != MOVE_FLING //Fling and damage-reducing berries are handled separately.
         && !gSpecialStatuses[battler].berryReduced
