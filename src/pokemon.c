@@ -4873,15 +4873,39 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                 retVal = FALSE;
             }
 
+#define ONE_HUNDRED 1 << 4
+#define ONE_THOUSAND 1 << 5
+#define TEN_THOUSAND 1 << 6
+#define FULL_LEVEL 1 << 7
+
             // Rare Candy
             if ((itemEffect[i] & ITEM3_LEVEL_UP)
              && GetMonData(mon, MON_DATA_LEVEL, NULL) != MAX_LEVEL)
             {
-                dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL) + 1];
+                if (ItemId_GetHoldEffectParam(item) & FULL_LEVEL)
+                    dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL) + 1];
+                else
+                {
+                    temp1 = ItemId_GetHoldEffectParam(item) & 0x0F;
+                    if (ItemId_GetHoldEffectParam(item) & ONE_HUNDRED)
+                        temp1 *= 100;
+                    if (ItemId_GetHoldEffectParam(item) & ONE_THOUSAND)
+                        temp1 *= 1000;
+                    if (ItemId_GetHoldEffectParam(item) & TEN_THOUSAND)
+                        temp1 *= 10000;
+                    dataUnsigned = temp1 + gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL)];
+                    if (dataUnsigned > gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][MAX_LEVEL])
+                        dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][MAX_LEVEL];
+                }
                 SetMonData(mon, MON_DATA_EXP, &dataUnsigned);
                 CalculateMonStats(mon);
                 retVal = FALSE;
             }
+
+#undef ONE_HUNDRED
+#undef ONE_THOUSAND
+#undef TEN_THOUSAND
+#undef FULL_LEVEL
 
             // Cure status
             if ((itemEffect[i] & ITEM3_SLEEP)

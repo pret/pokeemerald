@@ -1354,11 +1354,17 @@ const struct Item gItems[] =
 
 // Candy
 
+#define ONE_HUNDRED 1 << 4
+#define ONE_THOUSAND 1 << 5
+#define TEN_THOUSAND 1 << 6
+#define FULL_LEVEL 1 << 7
+
     [ITEM_RARE_CANDY] =
     {
         .name = _("Rare Candy"),
         .itemId = ITEM_RARE_CANDY,
         .price = 10000,
+        .holdEffectParam = FULL_LEVEL,
         .description = sRareCandyDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
@@ -1371,10 +1377,11 @@ const struct Item gItems[] =
         .name = _("Exp.Candy XS"),
         .itemId = ITEM_EXP_CANDY_XS,
         .price = 20,
+        .holdEffectParam = 1 | ONE_HUNDRED,
         .description = sExpCandyXSDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy, // Todo
         .flingPower = 30,
     },
 
@@ -1383,10 +1390,11 @@ const struct Item gItems[] =
         .name = _("Exp.Candy S"),
         .itemId = ITEM_EXP_CANDY_S,
         .price = 240,
+        .holdEffectParam = 8 | ONE_HUNDRED,
         .description = sExpCandyXSDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy, // Todo
         .flingPower = 30,
     },
 
@@ -1395,10 +1403,11 @@ const struct Item gItems[] =
         .name = _("Exp.Candy M"),
         .itemId = ITEM_EXP_CANDY_M,
         .price = 1000,
+        .holdEffectParam = 3 | ONE_THOUSAND,
         .description = sExpCandyMDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy, // Todo
         .flingPower = 30,
     },
 
@@ -1407,10 +1416,11 @@ const struct Item gItems[] =
         .name = _("Exp.Candy L"),
         .itemId = ITEM_EXP_CANDY_L,
         .price = 3000,
+        .holdEffectParam = 1 | TEN_THOUSAND,
         .description = sExpCandyLDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy, // Todo
         .flingPower = 30,
     },
 
@@ -1419,10 +1429,11 @@ const struct Item gItems[] =
         .name = _("Exp.Candy XL"),
         .itemId = ITEM_EXP_CANDY_XL,
         .price = 10000,
+        .holdEffectParam = 3 | TEN_THOUSAND,
         .description = sExpCandyXLDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy, // Todo
         .flingPower = 30,
     },
 
@@ -1437,6 +1448,11 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
         .flingPower = 30,
     },
+
+#undef ONE_HUNDRED
+#undef ONE_THOUSAND
+#undef TEN_THOUSAND
+#undef FULL_LEVEL
 
 // Medicinal Flutes
 
