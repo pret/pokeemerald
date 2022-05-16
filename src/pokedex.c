@@ -5443,6 +5443,12 @@ static int DoPokedexSearch(u8 dexMode, u8 order, u8 abcGroup, u8 bodyColor, u8 t
         {
             species = NationalPokedexNumToSpecies(sPokedexView->pokedexList[i].dexNum);
 
+            #ifdef POKEMON_EXPANSION
+            // Mega pokemon don't have distinct learnsets from their base form; so use base species for calculation
+            if (species >= SPECIES_VENUSAUR_MEGA && species <= SPECIES_GROUDON_PRIMAL)
+                species = GetFormSpeciesId(species, 0);
+            #endif
+
             //LevelUp
             if (SpeciesCanLearnLvlUpMove(species, move))
             {
@@ -6763,12 +6769,22 @@ static bool8 CalculateMoves(void)
     u16 statsMovesTMHM[NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES] = {0};
     u16 statsMovesTutor[TUTOR_MOVE_COUNT] = {0};
 
-    u8 numEggMoves = GetEggMovesSpecies(species, statsMovesEgg);
-    u8 numLevelUpMoves = GetLevelUpMovesBySpecies(species, statsMovesLevelUp);
+    u8 numEggMoves = 0;
+    u8 numLevelUpMoves = 0;
     u8 numTMHMMoves = 0;
     u8 numTutorMoves = 0;
     u16 movesTotal = 0;
     u8 i,j;
+
+    #ifdef POKEMON_EXPANSION
+    // Mega pokemon don't have distinct learnsets from their base form; so use base species for calculation
+    if (species >= SPECIES_VENUSAUR_MEGA && species <= SPECIES_GROUDON_PRIMAL)
+        species = GetFormSpeciesId(species, 0);
+    #endif
+
+    //Calculate amount of Egg and LevelUp moves
+    numEggMoves = GetEggMovesSpecies(species, statsMovesEgg);
+    numLevelUpMoves = GetLevelUpMovesBySpecies(species, statsMovesLevelUp);
 
     //Egg moves
     for (i=0; i < numEggMoves; i++)
