@@ -5075,7 +5075,6 @@ static void DisplayLevelUpStatsPg2(u8 taskId)
 
 static void Task_TryLearnNewMoves(u8 taskId)
 {
-    u8 i;
     u16 learnMove;
 
     if (WaitFanfare(0) && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
@@ -5110,7 +5109,6 @@ static void Task_TryLearnNewMoves(u8 taskId)
 
 static void Task_TryLearningNextMove(u8 taskId)
 {
-    u8 i;
     u16 result;
     for (; sInitialLevel < sFinalLevel; sInitialLevel++)
     {
