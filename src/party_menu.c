@@ -4824,10 +4824,7 @@ static void Task_LearnNextMoveOrClosePartyMenu(u8 taskId)
     if (IsFanfareTaskInactive() && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
     {
         if (gPartyMenu.learnMoveState == 1)
-            if (sInitialLevel < sFinalLevel)
-                Task_TryLearnNewMoves(taskId);
-            else
-                Task_TryLearningNextMove(taskId);
+            Task_TryLearningNextMove(taskId);
         else
         {
             if (gPartyMenu.learnMoveState == 2) // never occurs
@@ -5088,7 +5085,7 @@ static void Task_TryLearnNewMoves(u8 taskId)
             switch (learnMove)
             {
             case 0: // No moves to learn
-                if(sInitialLevel >= sFinalLevel)
+                if (sInitialLevel >= sFinalLevel)
                     PartyMenuTryEvolution(taskId);
                 break;
             case MON_HAS_MAX_MOVES:
@@ -5114,12 +5111,9 @@ static void Task_TryLearningNextMove(u8 taskId)
     {
         SetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_LEVEL, &sInitialLevel);
         result = MonTryLearningNewMove(&gPlayerParty[gPartyMenu.slotId], FALSE);
-        gPartyMenu.learnMoveState = 1;
         switch (result)
         {
         case 0: // No moves to learn
-            if(sInitialLevel >= sFinalLevel)
-                PartyMenuTryEvolution(taskId);
             break;
         case MON_HAS_MAX_MOVES:
             DisplayMonNeedsToReplaceMove(taskId);
@@ -5133,7 +5127,7 @@ static void Task_TryLearningNextMove(u8 taskId)
         if (result)
             break;
     }
-    if(sInitialLevel >= sFinalLevel)
+    if (sInitialLevel >= sFinalLevel)
         PartyMenuTryEvolution(taskId);
 }
 
