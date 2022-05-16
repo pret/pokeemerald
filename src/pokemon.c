@@ -4895,7 +4895,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                         temp1 *= 1000;
                     if (ItemId_GetHoldEffectParam(item) & TEN_THOUSAND)
                         temp1 *= 10000;
-                    dataUnsigned = temp1 + gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL)];
+                    dataUnsigned = temp1 + GetMonData(mon, MON_DATA_EXP, NULL);
                     if (dataUnsigned > gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][MAX_LEVEL])
                         dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][MAX_LEVEL];
                 }
