@@ -4885,9 +4885,13 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                 if (ItemId_GetHoldEffectParam(item) & FULL_LEVEL)
                 {
                     dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL) + 1];
+                    SetMonData(mon, MON_DATA_EXP, &dataUnsigned);
+                    CalculateMonStats(mon);
                 }
                 else
                 {
+                    u32 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+
                     temp1 = ItemId_GetHoldEffectParam(item) & 0x0F;
                     if (ItemId_GetHoldEffectParam(item) & ONE_HUNDRED)
                         temp1 *= 100;
@@ -4896,11 +4900,12 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                     if (ItemId_GetHoldEffectParam(item) & TEN_THOUSAND)
                         temp1 *= 10000;
                     dataUnsigned = temp1 + GetMonData(mon, MON_DATA_EXP, NULL);
-                    if (dataUnsigned > gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][MAX_LEVEL])
-                        dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][MAX_LEVEL];
+                    if (dataUnsigned > gExperienceTables[gBaseStats[species].growthRate][MAX_LEVEL])
+                        dataUnsigned = gExperienceTables[gBaseStats[species].growthRate][MAX_LEVEL];
+                    SetMonData(mon, MON_DATA_EXP, &dataUnsigned);
+                    if (dataUnsigned >= gExperienceTables[gBaseStats[species].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL) + 1])
+                        CalculateMonStats(mon);
                 }
-                SetMonData(mon, MON_DATA_EXP, &dataUnsigned);
-                CalculateMonStats(mon);
                 retVal = FALSE;
             }
 
