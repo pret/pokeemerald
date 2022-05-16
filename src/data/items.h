@@ -1445,7 +1445,7 @@ const struct Item gItems[] =
         .description = sDynamaxCandyDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
         .flingPower = 30,
     },
 
