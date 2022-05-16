@@ -4708,6 +4708,11 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
     }                                                                                                   \
 }
 
+#define ONE_HUNDRED 1 << 4
+#define ONE_THOUSAND 1 << 5
+#define TEN_THOUSAND 1 << 6
+#define FULL_LEVEL 1 << 7
+
 // Returns TRUE if the item has no effect on the Pokémon, FALSE otherwise
 bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex, bool8 usedByAI)
 {
@@ -4873,11 +4878,6 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                 retVal = FALSE;
             }
 
-#define ONE_HUNDRED 1 << 4
-#define ONE_THOUSAND 1 << 5
-#define TEN_THOUSAND 1 << 6
-#define FULL_LEVEL 1 << 7
-
             // Rare Candy
             if ((itemEffect[i] & ITEM3_LEVEL_UP)
              && GetMonData(mon, MON_DATA_LEVEL, NULL) != MAX_LEVEL)
@@ -4901,11 +4901,6 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                 CalculateMonStats(mon);
                 retVal = FALSE;
             }
-
-#undef ONE_HUNDRED
-#undef ONE_THOUSAND
-#undef TEN_THOUSAND
-#undef FULL_LEVEL
 
             // Cure status
             if ((itemEffect[i] & ITEM3_SLEEP)
@@ -5300,6 +5295,11 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
     }
     return retVal;
 }
+
+#undef ONE_HUNDRED
+#undef ONE_THOUSAND
+#undef TEN_THOUSAND
+#undef FULL_LEVEL
 
 bool8 HealStatusConditions(struct Pokemon *mon, u32 battlePartyId, u32 healMask, u8 battlerId)
 {
