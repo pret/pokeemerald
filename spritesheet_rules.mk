@@ -1820,6 +1820,15 @@ $(OBJEVENTGFXDIR)/pokemon/milotic.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/pokemon/castform.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
+$(OBJEVENTGFXDIR)/pokemon/castform_sunny.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OBJEVENTGFXDIR)/pokemon/castform_rainy.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OBJEVENTGFXDIR)/pokemon/castform_snowy.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
 $(OBJEVENTGFXDIR)/pokemon/kecleon.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 

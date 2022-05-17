@@ -26,6 +26,13 @@ enum ReflectionTypes
     NUM_REFLECTION_TYPES
 };
 
+enum FollowerTransformTypes
+{
+    TRANSFORM_TYPE_NONE,
+    TRANSFORM_TYPE_PERMANENT,
+    TRANSFORM_TYPE_RANDOM_WILD,
+};
+
 #define FIGURE_8_LENGTH 72
 
 #define GROUND_EFFECT_FLAG_TALL_GRASS_ON_SPAWN   (1 << 0)

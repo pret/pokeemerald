@@ -688,12 +688,8 @@ static void Task_DoDoorWarp(u8 taskId)
         PlayerGetDestCoords(x, y);
         PlaySE(GetDoorSoundEffect(*x, *y - 1));
         if (followerObject) { // Put follower into pokeball
-          // TODO: ClearObjectEventMovement (
-          followerObject->singleMovementActive = 0;
-          ObjectEventClearHeldMovement(followerObject);
-          gSprites[followerObject->spriteId].data[1] = 0;
+          ClearObjectEventMovement(followerObject, &gSprites[followerObject->spriteId]);
           gSprites[followerObject->spriteId].animCmdIndex = 0; // Needed because of weird animCmdIndex stuff
-          // )
           ObjectEventSetHeldMovement(followerObject, MOVEMENT_ACTION_ENTER_POKEBALL);
         }
         task->data[1] = FieldAnimateDoorOpen(*x, *y - 1);

@@ -2998,12 +2998,8 @@ static void SurfFieldEffect_Init(struct Task *task)
     FreezeObjectEvents();
     // Put follower into pokeball before using Surf
     if (followerObject && !followerObject->invisible) {
-      // TODO: ClearObjectEventMovement (
-      followerObject->singleMovementActive = 0;
-      ObjectEventClearHeldMovement(followerObject);
-      gSprites[followerObject->spriteId].data[1] = 0;
+      ClearObjectEventMovement(followerObject, &gSprites[followerObject->spriteId]);
       gSprites[followerObject->spriteId].animCmdIndex = 0; // Needed because of weird animCmdIndex stuff
-      // )
       ObjectEventSetHeldMovement(followerObject, MOVEMENT_ACTION_ENTER_POKEBALL);
     }
     gPlayerAvatar.preventStep = TRUE;
