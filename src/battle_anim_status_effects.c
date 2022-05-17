@@ -248,7 +248,7 @@ static const struct SubspriteTable sFrozenIceCubeSubspriteTable[] =
     {ARRAY_COUNT(sFrozenIceCubeSubsprites), sFrozenIceCubeSubsprites},
 };
 
-static const struct SpriteTemplate gFrozenIceCubeSpriteTemplate =
+static const struct SpriteTemplate sFrozenIceCubeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CUBE,
     .paletteTag = ANIM_TAG_ICE_CUBE,
@@ -389,7 +389,7 @@ void AnimTask_FrozenIceCube(u8 taskId)
         x -= 6;
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
-    spriteId = CreateSprite(&gFrozenIceCubeSpriteTemplate, x, y, 4);
+    spriteId = CreateSprite(&sFrozenIceCubeSpriteTemplate, x, y, 4);
     if (GetSpriteTileStartByTag(ANIM_TAG_ICE_CUBE) == 0xFFFF)
         gSprites[spriteId].invisible = TRUE;
     SetSubspriteTables(&gSprites[spriteId], sFrozenIceCubeSubspriteTable);

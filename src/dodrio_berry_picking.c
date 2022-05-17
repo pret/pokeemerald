@@ -4546,7 +4546,7 @@ struct
 {
     u8 id;
     void (*func)(void);
-} const sGfxFuncs[] =
+} static const sGfxFuncs[] =
 {
     {GFXFUNC_LOAD,               LoadGfx}, // Element not used, LoadGfx is passed directly to SetGfxFunc
     {GFXFUNC_SHOW_NAMES,         ShowNames},

@@ -31,7 +31,7 @@ enum
 };
 
 //. rodata
-static const s8 gTruckCamera_HorizontalTable[] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, -1, -1, -1, 0};
+static const s8 sTruckCamera_HorizontalTable[] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, -1, -1, -1, 0};
 
 static const u8 sSSTidalSailEastMovementScript[] =
 {
@@ -109,10 +109,10 @@ void Task_Truck2(u8 taskId)
     }
     else
     {
-        if (gTruckCamera_HorizontalTable[data[1]] == 2)
+        if (sTruckCamera_HorizontalTable[data[1]] == 2)
             gTasks[taskId].func = Task_Truck3;
 
-        cameraXpan = gTruckCamera_HorizontalTable[data[1]];
+        cameraXpan = sTruckCamera_HorizontalTable[data[1]];
         cameraYpan = GetTruckCameraBobbingY(data[2]);
         SetCameraPanning(cameraXpan, cameraYpan);
         box1 = GetTruckBoxMovement(data[2] + 30) * 4;
@@ -144,7 +144,7 @@ static void Task_Truck3(u8 taskId)
    }
    else
    {
-       cameraXpan = gTruckCamera_HorizontalTable[data[1]];
+       cameraXpan = sTruckCamera_HorizontalTable[data[1]];
        cameraYpan = 0;
        SetCameraPanning(cameraXpan, 0);
        SetObjectEventSpritePosByLocalIdAndMap(LOCALID_TRUCK_BOX_TOP, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 3 - cameraXpan, cameraYpan + 3);

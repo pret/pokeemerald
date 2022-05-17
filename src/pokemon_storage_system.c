@@ -1040,7 +1040,7 @@ static const struct BgTemplate sBgTemplates[] =
     },
 };
 
-static const struct SpritePalette gWaveformSpritePalette =
+static const struct SpritePalette sWaveformSpritePalette =
 {
     sWaveform_Pal, PALTAG_MISC_2
 };
@@ -3844,7 +3844,7 @@ static bool8 InitPokeStorageWindows(void)
 
 static void LoadWaveformSpritePalette(void)
 {
-    LoadSpritePalette(&gWaveformSpritePalette);
+    LoadSpritePalette(&sWaveformSpritePalette);
 }
 
 static void InitPalettesAndSprites(void)

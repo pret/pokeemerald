@@ -2195,7 +2195,7 @@ static bool8 LoadTradeMenuSpriteSheetsAndPalettes(void)
         sTradeMenuData->timer++;
         break;
     case GFXTAG_MENU_TEXT_COUNT:
-        LoadSpritePalette(&gSpritePalette_TradeScreenText);
+        LoadSpritePalette(&sSpritePalette_TradeScreenText);
         sTradeMenuData->timer++;
         break;
     case GFXTAG_MENU_TEXT_COUNT + 1:
