@@ -18,7 +18,7 @@ struct DoorGraphics
     u8 sound;
     u8 size;
     const void *tiles;
-    const void *palette;
+    const void *palettes;
 };
 
 struct DoorAnimFrame
@@ -278,52 +278,68 @@ static const struct DoorGraphics sDoorAnimGraphicsTable[] =
     {},
 };
 
+#define DOOR_TILE_START_SIZE1 (NUM_TILES_TOTAL - 8)
+#define DOOR_TILE_START_SIZE2 (NUM_TILES_TOTAL - 16)
+
 static void CopyDoorTilesToVram(const struct DoorGraphics *gfx, const struct DoorAnimFrame *frame)
 {
     if (gfx->size == 2)
-        CpuFastSet(gfx->tiles + frame->offset, (void *)(VRAM + 0x7E00), 0x80);
+        CpuFastCopy(gfx->tiles + frame->offset, (void *)(VRAM + TILE_OFFSET_4BPP(DOOR_TILE_START_SIZE2)), 16 * TILE_SIZE_4BPP);
     else
-        CpuFastSet(gfx->tiles + frame->offset, (void *)(VRAM + 0x7F00), 0x40);
+        CpuFastCopy(gfx->tiles + frame->offset, (void *)(VRAM + TILE_OFFSET_4BPP(DOOR_TILE_START_SIZE1)), 8 * TILE_SIZE_4BPP);
 }
 
-static void door_build_blockdef(u16 *a, u16 b, const u8 *c)
+static void BuildDoorTiles(u16 *tiles, u16 tileNum, const u8 *paletteNums)
 {
     int i;
-    u16 unk;
+    u16 tile;
 
+    // Only the first 4 tiles of each metatile (bottom layer) actually use the door tiles
     for (i = 0; i < 4; i++)
     {
-        unk = *(c++) << 12;
-        a[i] = unk | (b + i);
+        tile = *(paletteNums++) << 12;
+        tiles[i] = tile | (tileNum + i);
     }
+
+    // The remaining layers are left as tile 0 (with the same palette)
     for (; i < 8; i++)
     {
-        unk = *(c++) << 12;
-        a[i] = unk;
+        tile = *(paletteNums++) << 12;
+        tiles[i] = tile;
     }
 }
 
-static void DrawCurrentDoorAnimFrame(const struct DoorGraphics *gfx, u32 x, u32 y, const u8 *pal)
+static void DrawCurrentDoorAnimFrame(const struct DoorGraphics *gfx, u32 x, u32 y, const u8 *paletteNums)
 {
-    u16 arr[24];
+    u16 tiles[24];
 
     if (gfx->size == 2)
     {
-        door_build_blockdef(&arr[8], 0x3F0, pal);
-        DrawDoorMetatileAt(x, y - 1, &arr[8]);
-        door_build_blockdef(&arr[8], 0x3F4, pal + 4);
-        DrawDoorMetatileAt(x, y, &arr[8]);
-        door_build_blockdef(&arr[8], 0x3F8, pal);
-        DrawDoorMetatileAt(x + 1, y - 1, &arr[8]);
-        door_build_blockdef(&arr[8], 0x3FC, pal + 4);
-        DrawDoorMetatileAt(x + 1, y, &arr[8]);
+        // Top left metatile
+        BuildDoorTiles(&tiles[8], DOOR_TILE_START_SIZE2 + 0, &paletteNums[0]);
+        DrawDoorMetatileAt(x, y - 1, &tiles[8]);
+
+        // Bottom left metatile
+        BuildDoorTiles(&tiles[8], DOOR_TILE_START_SIZE2 + 4, &paletteNums[4]);
+        DrawDoorMetatileAt(x, y, &tiles[8]);
+
+        // Top right metatile
+        BuildDoorTiles(&tiles[8], DOOR_TILE_START_SIZE2 + 8, &paletteNums[0]);
+        DrawDoorMetatileAt(x + 1, y - 1, &tiles[8]);
+
+        // Bottom right metatile
+        BuildDoorTiles(&tiles[8], DOOR_TILE_START_SIZE2 + 12, &paletteNums[4]);
+        DrawDoorMetatileAt(x + 1, y, &tiles[8]);
     }
     else
     {
-        door_build_blockdef(&arr[0], 0x3F8, pal);
-        DrawDoorMetatileAt(x, y - 1, &arr[0]);
-        door_build_blockdef(&arr[0], 0x3FC, pal + 4);
-        DrawDoorMetatileAt(x, y, &arr[0]);
+        // Top metatile
+        BuildDoorTiles(&tiles[0], DOOR_TILE_START_SIZE1 + 0, &paletteNums[0]);
+        DrawDoorMetatileAt(x, y - 1, &tiles[0]);
+
+        // Bottom metatile
+        BuildDoorTiles(&tiles[0], DOOR_TILE_START_SIZE1 + 4, &paletteNums[4]);
+        DrawDoorMetatileAt(x, y, &tiles[0]);
     }
 }
 
@@ -350,9 +366,9 @@ static void DrawDoor(const struct DoorGraphics *gfx, const struct DoorAnimFrame 
     else
     {
         CopyDoorTilesToVram(gfx, frame);
-        DrawCurrentDoorAnimFrame(gfx, x, y, gfx->palette);
+        DrawCurrentDoorAnimFrame(gfx, x, y, gfx->palettes);
         if (ShouldUseMultiCorridorDoor())
-            DrawCurrentDoorAnimFrame(gfx, gSpecialVar_0x8004 + MAP_OFFSET, gSpecialVar_0x8005 + MAP_OFFSET, gfx->palette);
+            DrawCurrentDoorAnimFrame(gfx, gSpecialVar_0x8004 + MAP_OFFSET, gSpecialVar_0x8005 + MAP_OFFSET, gfx->palettes);
     }
 }
 
