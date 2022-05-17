@@ -665,9 +665,6 @@ $(WALLPAPERGFXDIR)/ludicolo/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame2.4bpp $
 $(WALLPAPERGFXDIR)/whiscash/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame2.4bpp $(WALLPAPERGFXDIR)/whiscash/bg.4bpp
 	@cat $^ >$@
 
-$(OBJEVENTGFXDIR)/pics/effects/unknown_4F6D38/0.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 11
-
 $(INTERFACEGFXDIR)/selector_outline.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 8
 	
