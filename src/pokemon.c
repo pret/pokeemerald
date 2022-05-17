@@ -4892,6 +4892,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                 {
                     u32 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
 
+                    gBattleScripting.levelUpHP = 0; // Prevents reviving mons that don't level up.
                     temp1 = ItemId_GetHoldEffectParam(item) & 0x0F;
                     if (ItemId_GetHoldEffectParam(item) & ONE_HUNDRED)
                         temp1 *= 100;
