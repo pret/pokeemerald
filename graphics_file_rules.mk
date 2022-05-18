@@ -46,15 +46,15 @@ $(CASTFORMGFXDIR)/anim_front.4bpp: $(CASTFORMGFXDIR)/normal/anim_front.4bpp \
 	@cat $^ >$@
 
 $(CASTFORMGFXDIR)/normal.gbapal: $(CASTFORMGFXDIR)/normal/normal.gbapal \
-                              $(CASTFORMGFXDIR)/sunny/normal.4bpp \
-                              $(CASTFORMGFXDIR)/rainy/normal.4bpp \
-                              $(CASTFORMGFXDIR)/snowy/normal.4bpp
+                              $(CASTFORMGFXDIR)/sunny/normal.gbapal \
+                              $(CASTFORMGFXDIR)/rainy/normal.gbapal \
+                              $(CASTFORMGFXDIR)/snowy/normal.gbapal
 	@cat $^ >$@
 
 $(CASTFORMGFXDIR)/shiny.gbapal: $(CASTFORMGFXDIR)/normal/shiny.gbapal \
-                              $(CASTFORMGFXDIR)/sunny/shiny.4bpp \
-                              $(CASTFORMGFXDIR)/rainy/shiny.4bpp \
-                              $(CASTFORMGFXDIR)/snowy/shiny.4bpp
+                              $(CASTFORMGFXDIR)/sunny/shiny.gbapal \
+                              $(CASTFORMGFXDIR)/rainy/shiny.gbapal \
+                              $(CASTFORMGFXDIR)/snowy/shiny.gbapal
 	@cat $^ >$@
 
 ### Tilesets ###
