@@ -8143,7 +8143,10 @@ bool8 HasTwoFramesAnimation(u16 species)
     return (species != SPECIES_CASTFORM
          && species != SPECIES_SPINDA
          && species != SPECIES_UNOWN
-         && species != SPECIES_CHERRIM);
+         && species != SPECIES_CHERRIM
+         && species != SPECIES_CASTFORM_SUNNY
+         && species != SPECIES_CASTFORM_RAINY
+         && species != SPECIES_CASTFORM_SNOWY);
 }
 
 static bool8 ShouldSkipFriendshipChange(void)
