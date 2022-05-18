@@ -25,6 +25,28 @@ STARTERGFXDIR := graphics/starter_choose
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark fairy
 contest_types := cool beauty cute smart tough
 
+### Cherrim ###
+
+$(CHERRIMGFXDIR)/front.4bpp: $(CHERRIMGFXDIR)/normal/front.4bpp \
+                              $(CHERRIMGFXDIR)/sunshine/front.4bpp
+	@cat $^ >$@
+
+$(CHERRIMGFXDIR)/back.4bpp: $(CHERRIMGFXDIR)/normal/back.4bpp \
+                              $(CHERRIMGFXDIR)/sunshine/back.4bpp
+	@cat $^ >$@
+
+$(CHERRIMGFXDIR)/anim_front.4bpp: $(CHERRIMGFXDIR)/normal/anim_front.4bpp \
+                              $(CHERRIMGFXDIR)/sunshine/anim_front.4bpp
+	@cat $^ >$@
+
+$(CHERRIMGFXDIR)/normal.gbapal: $(CHERRIMGFXDIR)/normal/normal.gbapal \
+                              $(CHERRIMGFXDIR)/sunshine/normal.gbapal
+	@cat $^ >$@
+
+$(CHERRIMGFXDIR)/shiny.gbapal: $(CHERRIMGFXDIR)/normal/shiny.gbapal \
+                              $(CHERRIMGFXDIR)/sunshine/shiny.gbapal
+	@cat $^ >$@
+
 ### Castform ###
 
 $(CASTFORMGFXDIR)/front.4bpp: $(CASTFORMGFXDIR)/normal/front.4bpp \
