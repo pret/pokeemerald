@@ -161,8 +161,8 @@
 
     //FORM_ITEM_USE
     #define ITEM_GRACIDEA            10125
-    // #define ITEM_REVEAL_GLASS        10126
-    // #define ITEM_PRISON_BOTTLE       10127
+    #define ITEM_REVEAL_GLASS        10126
+    #define ITEM_PRISON_BOTTLE       10127
     #define ITEM_RED_NECTAR          10128
     #define ITEM_YELLOW_NECTAR       10129
     #define ITEM_PINK_NECTAR         10130

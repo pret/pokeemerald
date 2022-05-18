@@ -37,12 +37,7 @@ const u16 gTutorMoves[] =
 
 static const u32 sTutorLearnsets[] =
 {
-    [SPECIES_NONE]          = TUTOR_LEARNSET(TUTOR(MOVE_DOUBLE_EDGE)
-                                            | TUTOR(MOVE_MEGA_KICK)
-                                            | TUTOR(MOVE_MEGA_PUNCH)
-                                            | TUTOR(MOVE_SEISMIC_TOSS)
-                                            | TUTOR(MOVE_SWORDS_DANCE)
-                                            | TUTOR(MOVE_THUNDER_WAVE)),
+    [SPECIES_NONE]          = (0),
 
     [SPECIES_BULBASAUR]     = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
                                             | TUTOR(MOVE_DEFENSE_CURL)
