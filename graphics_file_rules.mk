@@ -33,7 +33,7 @@ $(CASTFORMGFXDIR)/front.4bpp: $(CASTFORMGFXDIR)/normal/front.4bpp \
                               $(CASTFORMGFXDIR)/snowy/front.4bpp
 	@cat $^ >$@
 
-$(CASTFORMGFXDIR)/back.4bpp: $(CASTFORMGFXDIR)/back_normal.4bpp \
+$(CASTFORMGFXDIR)/back.4bpp: $(CASTFORMGFXDIR)/normal/back.4bpp \
                               $(CASTFORMGFXDIR)/sunny/back.4bpp \
                               $(CASTFORMGFXDIR)/rainy/back.4bpp \
                               $(CASTFORMGFXDIR)/snowy/back.4bpp
