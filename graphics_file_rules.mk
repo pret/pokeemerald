@@ -25,7 +25,37 @@ STARTERGFXDIR := graphics/starter_choose
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark fairy
 contest_types := cool beauty cute smart tough
 
+### Castform ###
 
+$(CASTFORMGFXDIR)/front.4bpp: $(CASTFORMGFXDIR)/normal/front.4bpp \
+                              $(CASTFORMGFXDIR)/sunny/front.4bpp \
+                              $(CASTFORMGFXDIR)/rainy/front.4bpp \
+                              $(CASTFORMGFXDIR)/snowy/front.4bpp
+	@cat $^ >$@
+
+$(CASTFORMGFXDIR)/back.4bpp: $(CASTFORMGFXDIR)/back_normal.4bpp \
+                              $(CASTFORMGFXDIR)/sunny/back.4bpp \
+                              $(CASTFORMGFXDIR)/rainy/back.4bpp \
+                              $(CASTFORMGFXDIR)/snowy/back.4bpp
+	@cat $^ >$@
+
+$(CASTFORMGFXDIR)/anim_front.4bpp: $(CASTFORMGFXDIR)/normal/anim_front.4bpp \
+                              $(CASTFORMGFXDIR)/sunny/anim_front.4bpp \
+                              $(CASTFORMGFXDIR)/rainy/anim_front.4bpp \
+                              $(CASTFORMGFXDIR)/snowy/anim_front.4bpp
+	@cat $^ >$@
+
+$(CASTFORMGFXDIR)/normal.gbapal: $(CASTFORMGFXDIR)/normal/normal.gbapal \
+                              $(CASTFORMGFXDIR)/sunny/normal.4bpp \
+                              $(CASTFORMGFXDIR)/rainy/normal.4bpp \
+                              $(CASTFORMGFXDIR)/snowy/normal.4bpp
+	@cat $^ >$@
+
+$(CASTFORMGFXDIR)/shiny.gbapal: $(CASTFORMGFXDIR)/normal/shiny.gbapal \
+                              $(CASTFORMGFXDIR)/sunny/shiny.4bpp \
+                              $(CASTFORMGFXDIR)/rainy/shiny.4bpp \
+                              $(CASTFORMGFXDIR)/snowy/shiny.4bpp
+	@cat $^ >$@
 
 ### Tilesets ###
 
