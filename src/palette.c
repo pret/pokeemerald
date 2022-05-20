@@ -60,13 +60,13 @@ static void Task_BlendPalettesGradually(u8 taskId);
 // unaligned word reads are issued in BlendPalette otherwise
 ALIGNED(4) EWRAM_DATA u16 gPlttBufferUnfaded[PLTT_BUFFER_SIZE] = {0};
 ALIGNED(4) EWRAM_DATA u16 gPlttBufferFaded[PLTT_BUFFER_SIZE] = {0};
-EWRAM_DATA struct PaletteStruct sPaletteStructs[NUM_PALETTE_STRUCTS] = {0};
+static EWRAM_DATA struct PaletteStruct sPaletteStructs[NUM_PALETTE_STRUCTS] = {0};
 EWRAM_DATA struct PaletteFadeControl gPaletteFade = {0};
 static EWRAM_DATA u32 sFiller = 0;
 static EWRAM_DATA u32 sPlttBufferTransferPending = 0;
 EWRAM_DATA u8 gPaletteDecompressionBuffer[PLTT_DECOMP_BUFFER_SIZE] = {0};
 
-static const struct PaletteStructTemplate gDummyPaletteStructTemplate = {
+static const struct PaletteStructTemplate sDummyPaletteStructTemplate = {
     .id = 0xFFFF,
     .state = 1
 };
@@ -352,7 +352,7 @@ void PaletteStruct_ResetById(u16 id)
 
 static void PaletteStruct_Reset(u8 paletteNum)
 {
-    sPaletteStructs[paletteNum].template = &gDummyPaletteStructTemplate;
+    sPaletteStructs[paletteNum].template = &sDummyPaletteStructTemplate;
     sPaletteStructs[paletteNum].active = FALSE;
     sPaletteStructs[paletteNum].baseDestOffset = 0;
     sPaletteStructs[paletteNum].destOffset = 0;

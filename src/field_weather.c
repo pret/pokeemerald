@@ -72,7 +72,7 @@ static const u8 *sPaletteGammaTypes;
 
 // The drought weather effect uses a precalculated color lookup table. Presumably this
 // is because the underlying color shift calculation is slow.
-const u16 sDroughtWeatherColors[][0x1000] = {
+static const u16 sDroughtWeatherColors[][0x1000] = {
     INCBIN_U16("graphics/weather/drought/colors_0.bin"),
     INCBIN_U16("graphics/weather/drought/colors_1.bin"),
     INCBIN_U16("graphics/weather/drought/colors_2.bin"),
