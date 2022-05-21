@@ -310,8 +310,9 @@
 #define MOVEEND_PICKPOCKET                        27
 #define MOVEEND_DANCER                            28
 #define MOVEEND_EMERGENCY_EXIT                    29
-#define MOVEEND_CLEAR_BITS                        30
-#define MOVEEND_COUNT                             31
+#define MOVEEND_WEATHER_FORM                      30
+#define MOVEEND_CLEAR_BITS                        31
+#define MOVEEND_COUNT                             32
 
 // switch cases
 #define B_SWITCH_NORMAL     0

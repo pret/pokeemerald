@@ -16,7 +16,7 @@
 #define ABILITYEFFECT_MOVE_END_ATTACKER          4
 #define ABILITYEFFECT_MOVE_END                   5
 #define ABILITYEFFECT_IMMUNITY                   6
-#define ABILITYEFFECT_FORECAST                   7
+#define ABILITYEFFECT_WEATHER_FORM               7
 #define ABILITYEFFECT_SYNCHRONIZE                8
 #define ABILITYEFFECT_ATK_SYNCHRONIZE            9
 #define ABILITYEFFECT_INTIMIDATE1                10
