@@ -353,12 +353,12 @@ void SpriteCB_WaitForBattlerBallReleaseAnim(struct Sprite *sprite)
     }
 }
 
-static void UnusedDoBattleSpriteAffineAnim(struct Sprite *sprite, bool8 arg1)
+static void UnusedDoBattleSpriteAffineAnim(struct Sprite *sprite, bool8 pointless)
 {
     sprite->animPaused = TRUE;
     sprite->callback = SpriteCallbackDummy;
 
-    if (!arg1)
+    if (!pointless)
         StartSpriteAffineAnim(sprite, 1);
     else
         StartSpriteAffineAnim(sprite, 1);
@@ -783,7 +783,7 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
     return retVal;
 }
 
-void LoadBattleBarGfx(u8 arg0)
+void LoadBattleBarGfx(u8 unused)
 {
     LZDecompressWram(gBattleInterfaceGfx_BattleBar, gMonSpritesGfxPtr->barFontGfx);
 }

@@ -109,7 +109,7 @@ void *LoadPointerFromVars(s16 bottom, s16 top);
 void StorePointerInVars(s16 *bottom, s16 *top, const void *ptr);
 void InitPrioritiesForVisibleBattlers(void);
 void GetBattleAnimBg1Data(struct BattleAnimBgData*);
-void GetBattleAnimBgData(struct BattleAnimBgData*, u32 arg1);
+void GetBattleAnimBgData(struct BattleAnimBgData*, u32 bgId);
 u8 GetBattlerSpriteSubpriority(u8 battlerId);
 bool8 TranslateAnimHorizontalArc(struct Sprite *sprite);
 void TranslateSpriteLinearByIdFixedPoint(struct Sprite *sprite);
@@ -181,7 +181,7 @@ enum
 u8 GetBattlerSpriteCoord(u8 battlerId, u8 attributeId);
 
 bool8 IsBattlerSpritePresent(u8 battlerId);
-void ClearBattleAnimBg(u32 arg0);
+void ClearBattleAnimBg(u32 bgId);
 u8 GetAnimBattlerSpriteId(u8 wantedBattler);
 bool8 IsDoubleBattle(void);
 u8 GetBattleBgPaletteNum(void);
@@ -213,7 +213,7 @@ u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 selectedPalettes, 
 
 // battle_anim_utility_funcs.c
 void InitStatsChangeAnimation(u8);
-void StartMonScrollingBgMask(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u32 *arg8, const u32 *arg9, const u32 *palette);
+void StartMonScrollingBgMask(u8 taskId, int unused, u16 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u32 *palette);
 
 // battle_anim_effects_1.c
 void SetSpriteNextToMonHead(u8 battler, struct Sprite* sprite);

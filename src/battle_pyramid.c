@@ -83,18 +83,18 @@ static void ClearPyramidPartyHeldItems(void);
 static void SetPyramidFloorPalette(void);
 static void BattlePyramidStartMenu(void);
 static void RestorePyramidPlayerParty(void);
-static void InitPyramidBagItems(u8 lvlMode);
+static void InitPyramidBagItems(u8);
 static u8 GetPyramidFloorTemplateId(void);
 static u8 GetPostBattleDirectionHintTextIndex(int *, u8, u8);
-static void Task_SetPyramidFloorPalette(u8 taskId);
-static void MarkPyramidTrainerAsBattled(u16 trainerId);
-static void GetPyramidFloorLayoutOffsets(u8 *layoutOffsets);
+static void Task_SetPyramidFloorPalette(u8);
+static void MarkPyramidTrainerAsBattled(u16);
+static void GetPyramidFloorLayoutOffsets(u8 *);
 static void GetPyramidEntranceAndExitSquareIds(u8 *, u8 *);
 static void SetPyramidObjectPositionsUniformly(u8);
 static bool8 SetPyramidObjectPositionsInAndNearSquare(u8, u8);
 static bool8 SetPyramidObjectPositionsNearSquare(u8, u8);
-static bool8 TrySetPyramidObjectEventPositionInSquare(u8 arg0, u8 *floorLayoutOffsets, u8 squareId, u8 objectEventId);
-static bool8 TrySetPyramidObjectEventPositionAtCoords(bool8 objType, u8 x, u8 y, u8 *floorLayoutOffsets, u8 squareId, u8 objectEventId);
+static bool8 TrySetPyramidObjectEventPositionInSquare(u8, u8 *, u8, u8);
+static bool8 TrySetPyramidObjectEventPositionAtCoords(bool8, u8, u8, u8 *, u8, u8);
 
 // Const rom data.
 #define ABILITY_RANDOM 2 // For wild mons data.

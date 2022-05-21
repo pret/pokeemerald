@@ -438,7 +438,7 @@ static void SpriteCB_BallThrow(struct Sprite *sprite)
         sprite->y2 = 0;
         sprite->data[5] = 0;
         ballId = ItemIdToBallId(GetBattlerPokeballItemId(opponentBattler));
-        AnimateBallOpenParticles(sprite->x, sprite->y - 5, 1, 0x1C, ballId);
+        AnimateBallOpenParticles(sprite->x, sprite->y - 5, 1, 28, ballId);
         sprite->data[0] = LaunchBallFadeMonTask(FALSE, opponentBattler, 14, ballId);
         sprite->sBattler = opponentBattler;
         sprite->data[7] = noOfShakes;
@@ -752,7 +752,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
 
     StartSpriteAnim(sprite, 1);
     ballId = ItemIdToBallId(GetBattlerPokeballItemId(battlerId));
-    AnimateBallOpenParticles(sprite->x, sprite->y - 5, 1, 0x1C, ballId);
+    AnimateBallOpenParticles(sprite->x, sprite->y - 5, 1, 28, ballId);
     sprite->data[0] = LaunchBallFadeMonTask(TRUE, sprite->sBattler, 14, ballId);
     sprite->callback = HandleBallAnimEnd;
 
@@ -1000,14 +1000,14 @@ static void SpriteCB_OpponentMonSendOut(struct Sprite *sprite)
 
 #undef sBattler
 
-static u8 AnimateBallOpenParticlesForPokeball(u8 x, u8 y, u8 kindOfStars, u8 d)
+static u8 AnimateBallOpenParticlesForPokeball(u8 x, u8 y, u8 kindOfStars, u8 subpriority)
 {
-    return AnimateBallOpenParticles(x, y, kindOfStars, d, BALL_POKE);
+    return AnimateBallOpenParticles(x, y, kindOfStars, subpriority, BALL_POKE);
 }
 
-static u8 LaunchBallFadeMonTaskForPokeball(bool8 unFadeLater, u8 battlerId, u32 arg2)
+static u8 LaunchBallFadeMonTaskForPokeball(bool8 unFadeLater, u8 battlerId, u32 selectedPalettes)
 {
-    return LaunchBallFadeMonTask(unFadeLater, battlerId, arg2, BALL_POKE);
+    return LaunchBallFadeMonTask(unFadeLater, battlerId, selectedPalettes, BALL_POKE);
 }
 
 // Pokeball in Birch intro, and when receiving via trade
@@ -1041,24 +1041,24 @@ static void SpriteCB_PokeballReleaseMon(struct Sprite *sprite)
 {
     if (sprite->data[1] == 0)
     {
-        u8 r5;
-        u8 r7 = sprite->data[0];
+        u8 subpriority;
+        u8 spriteId = sprite->data[0];
         u8 battlerId = sprite->data[2];
-        u32 r4 = (u16)sprite->data[3] | ((u16)sprite->data[4] << 16);
+        u32 selectedPalettes = (u16)sprite->data[3] | ((u16)sprite->data[4] << 16);
 
         if (sprite->subpriority != 0)
-            r5 = sprite->subpriority - 1;
+            subpriority = sprite->subpriority - 1;
         else
-            r5 = 0;
+            subpriority = 0;
 
         StartSpriteAnim(sprite, 1);
-        AnimateBallOpenParticlesForPokeball(sprite->x, sprite->y - 5, sprite->oam.priority, r5);
-        sprite->data[1] = LaunchBallFadeMonTaskForPokeball(1, battlerId, r4);
+        AnimateBallOpenParticlesForPokeball(sprite->x, sprite->y - 5, sprite->oam.priority, subpriority);
+        sprite->data[1] = LaunchBallFadeMonTaskForPokeball(1, battlerId, selectedPalettes);
         sprite->callback = SpriteCB_ReleasedMonFlyOut;
-        gSprites[r7].invisible = FALSE;
-        StartSpriteAffineAnim(&gSprites[r7], BATTLER_AFFINE_EMERGE);
-        AnimateSprite(&gSprites[r7]);
-        gSprites[r7].data[1] = 0x1000;
+        gSprites[spriteId].invisible = FALSE;
+        StartSpriteAffineAnim(&gSprites[spriteId], BATTLER_AFFINE_EMERGE);
+        AnimateSprite(&gSprites[spriteId]);
+        gSprites[spriteId].data[1] = 0x1000;
         sprite->data[7] = 0;
     }
     else
@@ -1134,19 +1134,19 @@ static void SpriteCB_TradePokeball(struct Sprite *sprite)
 {
     if (sprite->data[1] == 0)
     {
-        u8 r6;
+        u8 subpriority;
         u8 monSpriteId = sprite->data[0];
-        u8 r8 = sprite->data[2];
-        u32 r5 = (u16)sprite->data[3] | ((u16)sprite->data[4] << 16);
+        u8 battlerId = sprite->data[2];
+        u32 selectedPalettes = (u16)sprite->data[3] | ((u16)sprite->data[4] << 16);
 
         if (sprite->subpriority != 0)
-            r6 = sprite->subpriority - 1;
+            subpriority = sprite->subpriority - 1;
         else
-            r6 = 0;
+            subpriority = 0;
 
         StartSpriteAnim(sprite, 1);
-        AnimateBallOpenParticlesForPokeball(sprite->x, sprite->y - 5, sprite->oam.priority, r6);
-        sprite->data[1] = LaunchBallFadeMonTaskForPokeball(1, r8, r5);
+        AnimateBallOpenParticlesForPokeball(sprite->x, sprite->y - 5, sprite->oam.priority, subpriority);
+        sprite->data[1] = LaunchBallFadeMonTaskForPokeball(1, battlerId, selectedPalettes);
         sprite->callback = SpriteCB_TradePokeballSendOff;
 #ifdef BUGFIX
         // FIX: If this is used on a sprite that has previously had an affine animation, it will not

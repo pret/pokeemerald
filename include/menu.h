@@ -56,7 +56,7 @@ void SetStandardWindowBorderStyle(u8 windowId, bool8 copyToVram);
 void DisplayYesNoMenuDefaultYes(void);
 u32 GetPlayerTextSpeed(void);
 u8 GetPlayerTextSpeedDelay(void);
-void Menu_LoadStdPalAt(u16 arg0);
+void Menu_LoadStdPalAt(u16 offset);
 void AddTextPrinterWithCallbackForMessage(bool8 a1, void (*callback)(struct TextPrinterTemplate *, u16));
 void BgDmaFill(u32 bg, u8 a1, int a2, int a3);
 void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 left, u8 top, const u8 *color, s8 speed, const u8 *str);

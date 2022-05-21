@@ -158,36 +158,36 @@ enum
     HEALTHBOX_GFX_FRAME_END_BAR,
 };
 
-static const u8 *GetHealthboxElementGfxPtr(u8 elementId);
-static u8* AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y, u32 bgColor, u32 *windowId);
+static const u8 *GetHealthboxElementGfxPtr(u8);
+static u8* AddTextPrinterAndCreateWindowOnHealthbox(const u8 *, u32, u32, u32, u32 *);
 
 static void RemoveWindowOnHealthbox(u32 windowId);
-static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
-static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId);
+static void UpdateHpTextInHealthboxInDoubles(u8, s16, u8);
+static void UpdateStatusIconInHealthbox(u8);
 
-static void TextIntoHealthboxObject(void *dest, u8 *windowTileData, s32 windowWidth);
-static void SafariTextIntoHealthboxObject(void *dest, u8 *windowTileData, u32 windowWidth);
-static void HpTextIntoHealthboxObject(void *dest, u8 *windowTileData, u32 windowWidth);
-static void FillHealthboxObject(void *dest, u32 arg1, u32 arg2);
+static void TextIntoHealthboxObject(void *, u8 *, s32);
+static void SafariTextIntoHealthboxObject(void *, u8 *, u32);
+static void HpTextIntoHealthboxObject(void *, u8 *, u32);
+static void FillHealthboxObject(void *, u32, u32);
 
-static void Task_HidePartyStatusSummary_BattleStart_1(u8 taskId);
-static void Task_HidePartyStatusSummary_BattleStart_2(u8 taskId);
-static void Task_HidePartyStatusSummary_DuringBattle(u8 taskId);
+static void Task_HidePartyStatusSummary_BattleStart_1(u8);
+static void Task_HidePartyStatusSummary_BattleStart_2(u8);
+static void Task_HidePartyStatusSummary_DuringBattle(u8);
 
-static void SpriteCB_HealthBoxOther(struct Sprite *sprite);
-static void SpriteCB_HealthBar(struct Sprite *sprite);
-static void SpriteCB_StatusSummaryBar_Enter(struct Sprite *sprite);
-static void SpriteCB_StatusSummaryBar_Exit(struct Sprite *sprite);
-static void SpriteCB_StatusSummaryBalls_Enter(struct Sprite *sprite);
-static void SpriteCB_StatusSummaryBalls_Exit(struct Sprite *sprite);
-static void SpriteCB_StatusSummaryBalls_OnSwitchout(struct Sprite *sprite);
+static void SpriteCB_HealthBoxOther(struct Sprite *);
+static void SpriteCB_HealthBar(struct Sprite *);
+static void SpriteCB_StatusSummaryBar_Enter(struct Sprite *);
+static void SpriteCB_StatusSummaryBar_Exit(struct Sprite *);
+static void SpriteCB_StatusSummaryBalls_Enter(struct Sprite *);
+static void SpriteCB_StatusSummaryBalls_Exit(struct Sprite *);
+static void SpriteCB_StatusSummaryBalls_OnSwitchout(struct Sprite *);
 
-static u8 GetStatusIconForBattlerId(u8 statusElementId, u8 battlerId);
-static s32 CalcNewBarValue(s32 maxValue, s32 currValue, s32 receivedValue, s32 *arg3, u8 arg4, u16 arg5);
-static u8 GetScaledExpFraction(s32 currValue, s32 receivedValue, s32 maxValue, u8 scale);
-static void MoveBattleBarGraphically(u8 battlerId, u8 whichBar);
-static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *currValue, u8 *arg4, u8 scale);
-static void Debug_TestHealthBar_Helper(struct TestingBar *barInfo, s32 *arg1, u16 *arg2);
+static u8 GetStatusIconForBattlerId(u8, u8);
+static s32 CalcNewBarValue(s32, s32, s32, s32 *, u8, u16);
+static u8 GetScaledExpFraction(s32, s32, s32, u8);
+static void MoveBattleBarGraphically(u8, u8);
+static u8 CalcBarFilledPixels(s32, s32, s32, s32 *, u8 *, u8);
+static void Debug_TestHealthBar_Helper(struct TestingBar *, s32 *, u16 *);
 
 static const struct OamData sOamData_64x32 =
 {
@@ -814,11 +814,11 @@ static void Debug_DrawNumber(s16 number, u16 *dest, bool8 unk)
 }
 
 // Unused
-static void Debug_DrawNumberPair(s16 number1, s16 number2, u16 *arg2)
+static void Debug_DrawNumberPair(s16 number1, s16 number2, u16 *dest)
 {
-    arg2[4] = 0x1E;
-    Debug_DrawNumber(number2, arg2, 0);
-    Debug_DrawNumber(number1, arg2 + 5, 1);
+    dest[4] = 0x1E;
+    Debug_DrawNumber(number2, dest, 0);
+    Debug_DrawNumber(number1, dest + 5, 1);
 }
 
 // Because the healthbox is too large to fit into one sprite, it is divided into two sprites.
@@ -2453,19 +2453,19 @@ static s16 Debug_TestHealthBar(struct TestingBar *barInfo, s32 *currValue, u16 *
     return ret;
 }
 
-static void Debug_TestHealthBar_Helper(struct TestingBar *barInfo, s32 *currValue, u16 *arg2)
+static void Debug_TestHealthBar_Helper(struct TestingBar *barInfo, s32 *currValue, u16 *dest)
 {
     u8 sp8[6];
-    u16 sp10[6];
+    u16 src[6];
     u8 i;
 
     CalcBarFilledPixels(barInfo->maxValue, barInfo->oldValue,
                 barInfo->receivedValue, currValue, sp8, B_HEALTHBAR_PIXELS / 8);
 
     for (i = 0; i < 6; i++)
-        sp10[i] = (barInfo->unkC_0 << 12) | (barInfo->unk10 + sp8[i]);
+        src[i] = (barInfo->unkC_0 << 12) | (barInfo->unk10 + sp8[i]);
 
-    CpuCopy16(sp10, arg2, sizeof(sp10));
+    CpuCopy16(src, dest, sizeof(src));
 }
 
 static u8 GetScaledExpFraction(s32 oldValue, s32 receivedValue, s32 maxValue, u8 scale)

@@ -2205,7 +2205,7 @@ static bool32 AreLinkQueuesEmpty(void)
     return !gRfu.recvQueue.count && !gRfu.sendQueue.count;
 }
 
-static int GetNumPlayersForBonus(u8 *arg0)
+static int GetNumPlayersForBonus(u8 *atJumpPeak)
 {
     int i = 0;
     int flags = 0;
@@ -2213,7 +2213,7 @@ static int GetNumPlayersForBonus(u8 *arg0)
 
     for (; i < MAX_RFU_PLAYERS; i++)
     {
-        if (arg0[i])
+        if (atJumpPeak[i])
         {
             flags |= 1 << i;
             count++;

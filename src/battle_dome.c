@@ -73,40 +73,39 @@ struct TourneyTreeLineSection
 #define tMode               data[2]
 #define tPrevTaskId         data[3]
 
-// This file's functions.
-static u8 GetDomeTrainerMonIvs(u16 trainerId);
-static void SwapDomeTrainers(int id1, int id2, u16 *statsArray);
-static void CalcDomeMonStats(u16 species, int level, int ivs, u8 evBits, u8 nature, int *stats);
-static void CreateDomeOpponentMons(u16 tournamentTrainerId);
-static int SelectOpponentMonsUsingPersonality(u16 tournamentTrainerId, bool8 arg1);
-static int SelectOpponentMonsUsingOtId(u16 tournamentTrainerId, bool8 arg1);
-static int GetTypeEffectivenessPoints(int move, int species, int arg2);
-static int SelectOpponentMonsFromParty(int *arr, bool8 arg1);
-static void Task_ShowTourneyInfoCard(u8 taskId);
-static void Task_HandleInfoCardInput(u8 taskId);
-static u8 Task_GetInfoCardInput(u8 taskId);
+static u8 GetDomeTrainerMonIvs(u16);
+static void SwapDomeTrainers(int, int, u16 *);
+static void CalcDomeMonStats(u16, int, int, u8, u8, int *);
+static void CreateDomeOpponentMons(u16);
+static int SelectOpponentMonsUsingPersonality(u16, bool8);
+static int SelectOpponentMonsUsingOtId(u16, bool8);
+static int GetTypeEffectivenessPoints(int, int, int);
+static int SelectOpponentMonsFromParty(int *, bool8);
+static void Task_ShowTourneyInfoCard(u8);
+static void Task_HandleInfoCardInput(u8);
+static u8 Task_GetInfoCardInput(u8);
 static void SetFacilityTrainerAndMonPtrs(void);
-static int TrainerIdToTournamentId(u16 trainerId);
+static int TrainerIdToTournamentId(u16);
 static u16 TrainerIdOfPlayerOpponent(void);
-static void Task_ShowTourneyTree(u8 taskId);
-static void Task_HandleStaticTourneyTreeInput(u8 taskId);
+static void Task_ShowTourneyTree(u8);
+static void Task_HandleStaticTourneyTreeInput(u8);
 static void CB2_TourneyTree(void);
 static void VblankCb_TourneyInfoCard(void);
-static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo);
-static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId);
+static void DisplayMatchInfoOnCard(u8, u8);
+static void DisplayTrainerInfoOnCard(u8, u8);
 static int BufferDomeWinString(u8, u8*);
 static u8 GetDomeBrainTrainerPicId(void);
 static u8 GetDomeBrainTrainerClass(void);
-static void CopyDomeBrainTrainerName(u8 *str);
-static void CopyDomeTrainerName(u8 *str, u16 trainerId);
+static void CopyDomeBrainTrainerName(u8 *);
+static void CopyDomeTrainerName(u8 *, u16);
 static void HblankCb_TourneyTree(void);
 static void VblankCb_TourneyTree(void);
-static u8 UpdateTourneyTreeCursor(u8 taskId);
-static void DecideRoundWinners(u8 roundId);
-static u8 GetOpposingNPCTournamentIdByRound(u8 tournamentId, u8);
+static u8 UpdateTourneyTreeCursor(u8);
+static void DecideRoundWinners(u8);
+static u8 GetOpposingNPCTournamentIdByRound(u8, u8);
 static void DrawTourneyAdvancementLine(u8, u8);
-static void SpriteCb_HorizontalScrollArrow(struct Sprite *sprite);
-static void SpriteCb_VerticalScrollArrow(struct Sprite *sprite);
+static void SpriteCb_HorizontalScrollArrow(struct Sprite *);
+static void SpriteCb_VerticalScrollArrow(struct Sprite *);
 static void InitDomeChallenge(void);
 static void GetDomeData(void);
 static void SetDomeData(void);
@@ -130,7 +129,6 @@ static void BufferLastDomeWinnerName(void);
 static void InitRandomTourneyTreeResults(void);
 static void InitDomeTrainers(void);
 
-// EWRAM variables.
 EWRAM_DATA u32 gPlayerPartyLostHP = 0; // never read
 static EWRAM_DATA u32 sPlayerPartyMaxHP = 0; // never read
 static EWRAM_DATA struct TourneyTreeInfoCard *sInfoCard = {0};
@@ -2080,7 +2078,6 @@ static const u8 sTourneyTreeLineSectionArrayCounts[DOME_TOURNAMENT_TRAINERS_COUN
     {ARRAY_COUNT(sLineSectionTrainer16Round1), ARRAY_COUNT(sLineSectionTrainer16Round2), ARRAY_COUNT(sLineSectionTrainer16Semifinal), ARRAY_COUNT(sLineSectionTrainer16Final)},
 };
 
-// code
 void CallBattleDomeFunction(void)
 {
     sBattleDomeFunctions[gSpecialVar_0x8004]();

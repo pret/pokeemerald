@@ -8476,11 +8476,11 @@ static void MultiMove_ClearIconFromBg(u8 x, u8 y)
     }
 }
 
-static void MultiMove_InitMove(u16 x, u16 y, u16 arg2)
+static void MultiMove_InitMove(u16 x, u16 y, u16 moveSteps)
 {
     sMultiMove->bgX = x;
     sMultiMove->bgY = y;
-    sMultiMove->bgMoveSteps = arg2;
+    sMultiMove->bgMoveSteps = moveSteps;
 }
 
 static u8 MultiMove_UpdateMove(void)

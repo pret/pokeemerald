@@ -22,7 +22,7 @@ void PlaySecretBaseMusicNoteMatSound(s16 metatileId);
 void DoSecretBaseGlitterMatSparkle(void);
 bool8 FldEff_SandPillar(void);
 void InteractWithShieldOrTVDecoration(void);
-bool8 IsLargeBreakableDecoration(u16 arg0, u8 arg1);
+bool8 IsLargeBreakableDecoration(u16 metatileId, bool8 checkBase);
 void FldEffPoison_Start(void);
 bool32 FldEffPoison_IsActive(void);
 void DoWateringBerryTreeAnim(void);
