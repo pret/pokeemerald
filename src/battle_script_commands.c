@@ -14479,16 +14479,16 @@ bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId)
         {
             switch (GetBattlerMoveTargetType(battlerId, move))
             {
-                case MOVE_TARGET_BOTH:
-                    if (CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) >= 2) // Check for single target
-                        return FALSE;
-                    break;
-                case MOVE_TARGET_FOES_AND_ALLY:
-                    if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) >= 2) // Count mons on both sides; ignore attacker
-                        return FALSE;
-                    break;
-                default:
+            case MOVE_TARGET_BOTH:
+                if (CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) >= 2) // Check for single target
+                    return FALSE;
                 break;
+            case MOVE_TARGET_FOES_AND_ALLY:
+                if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) >= 2) // Count mons on both sides; ignore attacker
+                    return FALSE;
+                break;
+            default:
+            break;
             }
         }
         return TRUE;
