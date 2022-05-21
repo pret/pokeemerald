@@ -8140,7 +8140,7 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
     if (EvolutionBlockedByEvoLimit(species)) //No Evos already previously checked
         species = SPECIES_NONE;
     else if (gSaveBlock1Ptr->tx_Random_EvolutionMethods) 
-        species = GetSpeciesRandomSeeded(species, TX_RANDOM_T_EVO_METH);
+        species = GetSpeciesRandomSeeded(species, TX_RANDOM_T_EVO_METH, 0);
     #endif
 
     //Calculate number of possible direct evolutions (e.g. Eevee has 5 but torchic has 1)
@@ -8176,7 +8176,7 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
         sPokedexView->sEvoScreenData.targetSpecies[base_i] = targetSpecies;
         #ifdef TX_DIFFICULTY_CHALLENGES_USED
             if (gSaveBlock1Ptr->txRandEvolutions && targetSpecies != SPECIES_NONE) //tx_difficulty_challenges
-                targetSpecies = GetSpeciesRandomSeeded(targetSpecies, TX_RANDOM_T_EVO);
+                targetSpecies = GetSpeciesRandomSeeded(targetSpecies, TX_RANDOM_T_EVO, 0);
         #endif
         CreateCaughtBallEvolutionScreen(targetSpecies, base_x + depth_x*depth-9, base_y + base_y_offset*base_i, 0);
         HandleTargetSpeciesPrint(taskId, targetSpecies, previousTargetSpecies, base_x + depth_x*depth, base_y, base_y_offset, base_i, isEevee); //evolution mon name
