@@ -1402,24 +1402,20 @@ static void Cmd_attackcanceler(void)
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
 
-    if (moveType == TYPE_FIRE
-     && (gBattleWeather & B_WEATHER_RAIN_PRIMAL)
-     && WEATHER_HAS_EFFECT
-     && gBattleMoves[gCurrentMove].power)
+    if (WEATHER_HAS_EFFECT && gBattleMoves[gCurrentMove].power)
     {
-        BattleScriptPushCursor();
-        gBattlescriptCurrInstr = BattleScript_PrimordialSeaFizzlesOutFireTypeMoves;
-        return;
-    }
-
-    if (moveType == TYPE_WATER
-     && (gBattleWeather & B_WEATHER_SUN_PRIMAL)
-     && WEATHER_HAS_EFFECT
-     && gBattleMoves[gCurrentMove].power)
-    {
-        BattleScriptPushCursor();
-        gBattlescriptCurrInstr = BattleScript_DesolateLandEvaporatesWaterTypeMoves;
-        return;
+        if (moveType == TYPE_FIRE && (gBattleWeather & B_WEATHER_RAIN_PRIMAL))
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_PrimordialSeaFizzlesOutFireTypeMoves;
+            return;
+        }
+        else if (moveType == TYPE_WATER && (gBattleWeather & B_WEATHER_SUN_PRIMAL))
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_DesolateLandEvaporatesWaterTypeMoves;
+            return;
+        }
     }
 
     if (gBattleOutcome != 0)
@@ -1942,11 +1938,7 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
     else if (gStatuses3[battlerAtk] & STATUS3_LASER_FOCUS
              || gBattleMoves[move].effect == EFFECT_ALWAYS_CRIT
              || (abilityAtk == ABILITY_MERCILESS && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY)
-             || move == MOVE_SURGING_STRIKES
-            #if B_LEEK_ALWAYS_CRIT >= GEN_6
-             || ((gBattleMoves[gCurrentMove].flags & FLAG_HIGH_CRIT) && BENEFITS_FROM_LEEK(battlerAtk, holdEffectAtk))
-            #endif
-             )
+             || move == MOVE_SURGING_STRIKES)
     {
         critChance = -2;
     }
@@ -1978,6 +1970,7 @@ s8 GetInverseCritChance(u8 battlerAtk, u8 battlerDef, u32 move)
 
 static void Cmd_critcalc(void)
 {
+    u16 partySlot;
     s32 critChance = CalcCritChanceStage(gBattlerAttacker, gBattlerTarget, gCurrentMove, TRUE);
     gPotentialItemEffectBattler = gBattlerAttacker;
 
@@ -1991,6 +1984,12 @@ static void Cmd_critcalc(void)
         gIsCriticalHit = TRUE;
     else
         gIsCriticalHit = FALSE;
+
+    // Counter for EVO_CRITICAL_HITS.
+    partySlot = gBattlerPartyIndexes[gBattlerAttacker];
+    if (gIsCriticalHit && GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER
+        && !(gBattleTypeFlags & BATTLE_TYPE_MULTI && GetBattlerPosition(gBattlerAttacker) == B_POSITION_PLAYER_LEFT))
+        gPartyCriticalHits[partySlot]++;
 
     gBattlescriptCurrInstr++;
 }
@@ -3030,7 +3029,17 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_FLINCH:
                 if (battlerAbility == ABILITY_INNER_FOCUS)
                 {
-                    gBattlescriptCurrInstr++;
+                    if (primary == TRUE || certain == MOVE_EFFECT_CERTAIN)
+                    {
+                        gLastUsedAbility = ABILITY_INNER_FOCUS;
+                        gBattlerAbility = gEffectBattler;
+                        RecordAbilityBattle(gEffectBattler, ABILITY_INNER_FOCUS);
+                        gBattlescriptCurrInstr = BattleScript_FlinchPrevention;
+                    }
+                    else
+                    {
+                        gBattlescriptCurrInstr++;
+                    }
                 }
                 else
                 {
@@ -8703,7 +8712,7 @@ static void Cmd_various(void)
                 gBattleStruct->mega.playerPrimalRevertedSpecies = gBattleStruct->mega.primalRevertedSpecies[gActiveBattler];
             }
             // Checks Primal Reversion
-            primalSpecies = GetMegaEvolutionSpecies(gBattleStruct->mega.primalRevertedSpecies[gActiveBattler], gBattleMons[gActiveBattler].item);
+            primalSpecies = GetPrimalReversionSpecies(gBattleStruct->mega.primalRevertedSpecies[gActiveBattler], gBattleMons[gActiveBattler].item);
 
             gBattleMons[gActiveBattler].species = primalSpecies;
             PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].species);
@@ -11072,6 +11081,10 @@ static void Cmd_tryKO(void)
         else
         {
             u16 odds = gBattleMoves[gCurrentMove].accuracy + (gBattleMons[gBattlerAttacker].level - gBattleMons[gBattlerTarget].level);
+            #if B_SHEER_COLD_ACC >= GEN_7
+                if (gCurrentMove == MOVE_SHEER_COLD && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE))
+                    odds -= 10;
+            #endif
             if (Random() % 100 + 1 < odds && gBattleMons[gBattlerAttacker].level >= gBattleMons[gBattlerTarget].level)
                 lands = TRUE;
         }
@@ -12655,13 +12668,16 @@ static void Cmd_jumpifnodamage(void)
 
 static void Cmd_settaunt(void)
 {
+#if B_OBLIVIOUS_TAUNT >= GEN_6
     if (GetBattlerAbility(gBattlerTarget) == ABILITY_OBLIVIOUS)
     {
         gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
         gLastUsedAbility = ABILITY_OBLIVIOUS;
         RecordAbilityBattle(gBattlerTarget, ABILITY_OBLIVIOUS);
     }
-    else if (gDisableStructs[gBattlerTarget].tauntTimer == 0)
+    else
+#endif
+    if (gDisableStructs[gBattlerTarget].tauntTimer == 0)
     {
         #if B_TAUNT_TURNS >= GEN_5
             u8 turns = 4;

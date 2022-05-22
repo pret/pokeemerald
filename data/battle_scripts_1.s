@@ -2128,7 +2128,9 @@ BattleScript_GrowthDoMoveAnim::
 	waitanimation
 	setbyte sSTAT_ANIM_PLAYED, FALSE
 	playstatchangeanimation BS_ATTACKER, BIT_ATK | BIT_SPATK, 0
+.if B_GROWTH_UNDER_SUN >= GEN_5
 	jumpifweatheraffected BS_ATTACKER, B_WEATHER_SUN, BattleScript_GrowthAtk2
+.endif
 	setstatchanger STAT_ATK, 1, FALSE
 	goto BattleScript_GrowthAtk
 BattleScript_GrowthAtk2:
@@ -2139,7 +2141,9 @@ BattleScript_GrowthAtk:
 	printfromtable gStatUpStringIds
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_GrowthTrySpAtk::
+.if B_GROWTH_UNDER_SUN >= GEN_5
 	jumpifweatheraffected BS_ATTACKER, B_WEATHER_SUN, BattleScript_GrowthSpAtk2
+.endif
 	setstatchanger STAT_SPATK, 1, FALSE
 	goto BattleScript_GrowthSpAtk
 BattleScript_GrowthSpAtk2:
@@ -4485,7 +4489,11 @@ BattleScript_NightmareWorked::
 BattleScript_EffectMinimize::
 	attackcanceler
 	setminimize
+.if B_MINIMIZE_EVASION >= GEN_5
+	setstatchanger STAT_EVASION, 2, FALSE
+.else
 	setstatchanger STAT_EVASION, 1, FALSE
+.endif
 	goto BattleScript_EffectStatUpAfterAtkCanceler
 
 BattleScript_EffectCurse::
@@ -6396,9 +6404,11 @@ BattleScript_LearnMoveReturn::
 BattleScript_RainContinuesOrEnds::
 	printfromtable gRainContinuesStringIds
 	waitmessage B_WAIT_TIME_LONG
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_RAIN_STOPPED, BattleScript_RainContinuesOrEndsEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_RAIN_STOPPED, BattleScript_RainEnds
 	playanimation BS_ATTACKER, B_ANIM_RAIN_CONTINUES
-BattleScript_RainContinuesOrEndsEnd::
+	end2
+BattleScript_RainEnds::
+	call BattleScript_WeatherFormChanges
 	end2
 
 BattleScript_DamagingWeatherContinues::
@@ -6437,6 +6447,7 @@ BattleScript_DamagingWeatherContinuesEnd::
 BattleScript_SandStormHailEnds::
 	printfromtable gSandStormHailEndStringIds
 	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_WeatherFormChanges
 	end2
 
 BattleScript_SunlightContinues::
@@ -6448,6 +6459,7 @@ BattleScript_SunlightContinues::
 BattleScript_SunlightFaded::
 	printstring STRINGID_SUNLIGHTFADED
 	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_WeatherFormChanges
 	end2
 
 BattleScript_OverworldWeatherStarts::
@@ -8148,8 +8160,10 @@ BattleScript_DesolateLandEvaporatesWaterTypeMoves::
 	attackstring
 	pause B_WAIT_TIME_SHORT
 	ppreduce
+	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_STRING_PRINTED, BattleScript_MoveEnd
 	printstring STRINGID_MOVEEVAPORATEDINTHEHARSHSUNLIGHT
 	waitmessage B_WAIT_TIME_LONG
+	orword gHitMarker, HITMARKER_STRING_PRINTED
 	goto BattleScript_MoveEnd
 
 BattleScript_PrimordialSeaActivates::
@@ -8166,8 +8180,10 @@ BattleScript_PrimordialSeaFizzlesOutFireTypeMoves::
 	attackstring
 	pause B_WAIT_TIME_SHORT
 	ppreduce
+	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_STRING_PRINTED, BattleScript_MoveEnd
 	printstring STRINGID_MOVEFIZZLEDOUTINTHEHEAVYRAIN
 	waitmessage B_WAIT_TIME_LONG
+	orword gHitMarker, HITMARKER_STRING_PRINTED
 	goto BattleScript_MoveEnd
 
 BattleScript_DeltaStreamActivates::
@@ -8375,6 +8391,13 @@ BattleScript_ObliviousPreventsAttraction::
 	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_PKMNPREVENTSROMANCEWITH
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_FlinchPrevention::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNSXPREVENTSFLINCHING
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
