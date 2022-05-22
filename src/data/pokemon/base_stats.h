@@ -90,7 +90,7 @@
         .noFlip = flip,                               \
     }
 
-#define CASTFORM_BASE_STATS(type)                     \
+#define CASTFORM_BASE_STATS(type, color)              \
     {                                                 \
         .baseHP        = 70,                          \
         .baseAttack    = 70,                          \
@@ -112,7 +112,7 @@
         .eggGroup1 = EGG_GROUP_FAIRY,                 \
         .eggGroup2 = EGG_GROUP_AMORPHOUS,             \
         .abilities = {ABILITY_FORECAST, ABILITY_NONE},\
-        .bodyColor = BODY_COLOR_GRAY,                 \
+        .bodyColor = color,                           \
         .noFlip = FALSE,                              \
     }
 
@@ -9823,7 +9823,7 @@ const struct BaseStats gBaseStats[] =
         .noFlip = FALSE,
     },
 
-    [SPECIES_CASTFORM] = CASTFORM_BASE_STATS(TYPE_NORMAL),
+    [SPECIES_CASTFORM] = CASTFORM_BASE_STATS(TYPE_NORMAL, BODY_COLOR_GRAY),
 
     [SPECIES_KECLEON] =
     {
@@ -25068,9 +25068,9 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_UNOWN_EMARK] = UNOWN_BASE_STATS(FLIP),
     [SPECIES_UNOWN_QMARK] = UNOWN_BASE_STATS(NO_FLIP),
 
-    [SPECIES_CASTFORM_SUNNY] = CASTFORM_BASE_STATS(TYPE_FIRE),
-    [SPECIES_CASTFORM_RAINY] = CASTFORM_BASE_STATS(TYPE_WATER),
-    [SPECIES_CASTFORM_SNOWY] = CASTFORM_BASE_STATS(TYPE_ICE),
+    [SPECIES_CASTFORM_SUNNY] = CASTFORM_BASE_STATS(TYPE_FIRE, BODY_COLOR_RED),
+    [SPECIES_CASTFORM_RAINY] = CASTFORM_BASE_STATS(TYPE_WATER, BODY_COLOR_BLUE),
+    [SPECIES_CASTFORM_SNOWY] = CASTFORM_BASE_STATS(TYPE_ICE, BODY_COLOR_WHITE),
 
     [SPECIES_DEOXYS_ATTACK] =
     {
