@@ -3910,11 +3910,10 @@ u8 TryWeatherFormChange(u8 battler)
     switch (gBattleMons[battler].species)
     {
     case SPECIES_CASTFORM:
-#ifdef POKEMON_EXPANSION
+/*  Placeholder
     case SPECIES_CASTFORM_RAINY:
     case SPECIES_CASTFORM_SNOWY:
-    case SPECIES_CASTFORM_SUNNY:
-#endif
+    case SPECIES_CASTFORM_SUNNY:*/
 #if B_WEATHER_FORMS >= GEN_5
         if (gBattleMons[battler].hp == 0)
         {
@@ -3972,9 +3971,7 @@ u8 TryWeatherFormChange(u8 battler)
         }
         break;
     case SPECIES_CHERRIM:
-#ifdef POKEMON_EXPANSION
-    case SPECIES_CHERRIM_SUNSHINE:
-#endif
+//  case SPECIES_CHERRIM_SUNSHINE:
         if (gBattleMons[battler].hp == 0)
             ret = 0; // No change
 #if B_WEATHER_FORMS >= GEN_5
