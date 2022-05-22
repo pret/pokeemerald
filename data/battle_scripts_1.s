@@ -8174,10 +8174,12 @@ BattleScript_WeatherFormChange::
 
 BattleScript_DoWeatherFormChange::
 	copybyte gBattlerAbility, sBATTLER
+.if B_WEATHER_FORMS >= GEN_5
 	jumpifspecies BS_SCRIPTING, SPECIES_CASTFORM, BattleScript_DoWeatherFormChange_ForecastCheck
 BattleScript_DoWeatherFormChange_FlowerGiftCheck:
 	jumpifability BS_SCRIPTING, ABILITY_FLOWER_GIFT, BattleScript_DoWeatherFormChange_PopUp
 	goto BattleScript_DoWeatherFormChange_AfterPopUp
+.endif
 BattleScript_DoWeatherFormChange_ForecastCheck:
 	jumpifability BS_SCRIPTING, ABILITY_FORECAST, BattleScript_DoWeatherFormChange_PopUp
 	goto BattleScript_DoWeatherFormChange_AfterPopUp
