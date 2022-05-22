@@ -8176,11 +8176,11 @@ BattleScript_DoWeatherFormChange::
 	copybyte gBattlerAbility, sBATTLER
 	jumpifspecies BS_SCRIPTING, SPECIES_CASTFORM, BattleScript_DoWeatherFormChange_ForecastCheck
 BattleScript_DoWeatherFormChange_FlowerGiftCheck:
-    jumpifability BS_SCRIPTING, ABILITY_FLOWER_GIFT, BattleScript_DoWeatherFormChange_PopUp
-    goto BattleScript_DoWeatherFormChange_AfterPopUp
+	jumpifability BS_SCRIPTING, ABILITY_FLOWER_GIFT, BattleScript_DoWeatherFormChange_PopUp
+	goto BattleScript_DoWeatherFormChange_AfterPopUp
 BattleScript_DoWeatherFormChange_ForecastCheck:
-    jumpifability BS_SCRIPTING, ABILITY_FORECAST, BattleScript_DoWeatherFormChange_PopUp
-    goto BattleScript_DoWeatherFormChange_AfterPopUp
+	jumpifability BS_SCRIPTING, ABILITY_FORECAST, BattleScript_DoWeatherFormChange_PopUp
+	goto BattleScript_DoWeatherFormChange_AfterPopUp
 BattleScript_DoWeatherFormChange_PopUp:
 	call BattleScript_AbilityPopUp
 BattleScript_DoWeatherFormChange_AfterPopUp:
