@@ -287,28 +287,28 @@
         .noFlip = FALSE,                                                             \
     }
 
-#define SAWSBUCK_BASE_STATS                                                    \
-    {                                                                          \
-        .baseHP        = 80,                                                   \
-        .baseAttack    = 100,                                                  \
-        .baseDefense   = 70,                                                   \
-        .baseSpeed     = 95,                                                   \
-        .baseSpAttack  = 60,                                                   \
-        .baseSpDefense = 70,                                                   \
-        .type1 = TYPE_NORMAL,                                                  \
-        .type2 = TYPE_GRASS,                                                   \
-        .catchRate = 75,                                                       \
-        .expYield = 166,                                                       \
-        .evYield_Attack    = 2,                                                \
-        .genderRatio = PERCENT_FEMALE(50),                                     \
-        .eggCycles = 20,                                                       \
-        .friendship = 70,                                                      \
-        .growthRate = GROWTH_MEDIUM_FAST,                                      \
-        .eggGroup1 = EGG_GROUP_FIELD,                                          \
-        .eggGroup2 = EGG_GROUP_FIELD,                                          \
-        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_SERENE_GRACE},\
-        .bodyColor = BODY_COLOR_BROWN,                                         \
-        .noFlip = FALSE,                                                       \
+#define SAWSBUCK_BASE_STATS                                                          \
+    {                                                                                \
+        .baseHP        = 80,                                                         \
+        .baseAttack    = 100,                                                        \
+        .baseDefense   = 70,                                                         \
+        .baseSpeed     = 95,                                                         \
+        .baseSpAttack  = 60,                                                         \
+        .baseSpDefense = 70,                                                         \
+        .type1 = TYPE_NORMAL,                                                        \
+        .type2 = TYPE_GRASS,                                                         \
+        .catchRate = 75,                                                             \
+        .expYield = 166,                                                             \
+        .evYield_Attack    = 2,                                                      \
+        .genderRatio = PERCENT_FEMALE(50),                                           \
+        .eggCycles = 20,                                                             \
+        .friendship = 70,                                                            \
+        .growthRate = GROWTH_MEDIUM_FAST,                                            \
+        .eggGroup1 = EGG_GROUP_FIELD,                                                \
+        .eggGroup2 = EGG_GROUP_FIELD,                                                \
+        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_SAP_SIPPER, ABILITY_SERENE_GRACE},\
+        .bodyColor = BODY_COLOR_BROWN,                                               \
+        .noFlip = FALSE,                                                             \
     }
 
 #define GENESECT_BASE_STATS                           \
