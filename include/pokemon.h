@@ -212,8 +212,8 @@ struct BaseStats
  /* 0x0A */ u16 evYield_Speed:2;
  /* 0x0B */ u16 evYield_SpAttack:2;
  /* 0x0B */ u16 evYield_SpDefense:2;
- /* 0x0C */ u16 item1;
- /* 0x0E */ u16 item2;
+ /* 0x0C */ u16 itemCommon;
+ /* 0x0E */ u16 itemRare;
  /* 0x10 */ u8 genderRatio;
  /* 0x11 */ u8 eggCycles;
  /* 0x12 */ u8 friendship;
