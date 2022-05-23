@@ -643,11 +643,11 @@
 
 #define MINIOR_METEOR_ATTRIBUTES\
         .baseHP        = 60,    \
-        .baseAttack    = 100,   \
-        .baseDefense   = 60,    \
-        .baseSpeed     = 120,   \
-        .baseSpAttack  = 100,   \
-        .baseSpDefense = 60
+        .baseAttack    = 60,    \
+        .baseDefense   = 100,   \
+        .baseSpeed     = 60,    \
+        .baseSpAttack  = 60,    \
+        .baseSpDefense = 100
 
 #define MINIOR_CORE_ATTRIBUTES\
         .baseHP        = 60,  \
