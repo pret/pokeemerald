@@ -7514,8 +7514,12 @@ void ClearBattleMonForms(void)
 
 u16 GetBattleBGM(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON)
+    if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
+    {
+        if (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL) == SPECIES_RAYQUAZA)
+            return MUS_VS_RAYQUAZA;
         return MUS_VS_KYOGRE_GROUDON;
+    }
     else if (gBattleTypeFlags & BATTLE_TYPE_REGI)
         return MUS_VS_REGI;
     else if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
