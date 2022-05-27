@@ -1390,7 +1390,7 @@ static bool8 SlotTask_HandleBetInput(struct Task *task)
 // SLOTTASK_MSG_NEED_3_COINS
 static bool8 SlotTask_PrintMsg_Need3Coins(struct Task *task)
 {
-    DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouDontHaveThreeCoins, 0, 1, 0, 0);
     CopyWindowToVram(0, COPYWIN_FULL);
     sSlotMachine->state = SLOTTASK_WAIT_MSG_NEED_3_COINS;
@@ -1655,7 +1655,7 @@ static bool8 SlotTask_NoMatches(struct Task *task)
 // SLOTTASK_ASK_QUIT
 static bool8 SlotTask_AskQuit(struct Task *task)
 {
-    DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, gText_QuitTheGame, 0, 1, 0, 0);
     CopyWindowToVram(0, COPYWIN_FULL);
     CreateYesNoMenuParameterized(0x15, 7, 0x214, 0x180, 0xE, 0xF);
@@ -1687,7 +1687,7 @@ static bool8 SlotTask_HandleQuitInput(struct Task *task)
 // SLOTTASK_MSG_MAX_COINS
 static bool8 SlotTask_PrintMsg_MaxCoins(struct Task *task)
 {
-    DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouveGot9999Coins, 0, 1, 0, 0);
     CopyWindowToVram(0, COPYWIN_FULL);
     sSlotMachine->state = SLOTTASK_WAIT_MSG_MAX_COINS;
@@ -1708,7 +1708,7 @@ static bool8 SlotTask_WaitMsg_MaxCoins(struct Task *task)
 // SLOTTASK_MSG_NO_MORE_COINS
 static bool8 SlotTask_PrintMsg_NoMoreCoins(struct Task *task)
 {
-    DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouveRunOutOfCoins, 0, 1, 0, 0);
     CopyWindowToVram(0, COPYWIN_FULL);
     sSlotMachine->state = SLOTTASK_WAIT_MSG_NO_MORE_COINS;

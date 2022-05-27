@@ -817,8 +817,8 @@ static void Debug_DrawNumber(s16 number, u16 *dest, bool8 unk)
 static void Debug_DrawNumberPair(s16 number1, s16 number2, u16 *arg2)
 {
     arg2[4] = 0x1E;
-    Debug_DrawNumber(number2, arg2, 0);
-    Debug_DrawNumber(number1, arg2 + 5, 1);
+    Debug_DrawNumber(number2, arg2, FALSE);
+    Debug_DrawNumber(number1, arg2 + 5, TRUE);
 }
 
 // Because the healthbox is too large to fit into one sprite, it is divided into two sprites.
