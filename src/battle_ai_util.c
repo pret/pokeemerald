@@ -950,10 +950,9 @@ u16 AI_GetTypeEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef)
     return typeEffectiveness;
 }
 
-u8 AI_GetMoveEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef)
+u32 AI_GetMoveEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef)
 {
-    u8 damageVar;
-    u32 effectivenessMultiplier;
+    u32 damageVar, effectivenessMultiplier;
 
     gMoveResultFlags = 0;
     gCurrentMove = move;
@@ -964,6 +963,9 @@ u8 AI_GetMoveEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef)
     case UQ_4_12(0.0):
     default:
         damageVar = AI_EFFECTIVENESS_x0;
+        break;
+    case UQ_4_12(0.125):
+        damageVar = AI_EFFECTIVENESS_x0_125;
         break;
     case UQ_4_12(0.25):
         damageVar = AI_EFFECTIVENESS_x0_25;
@@ -979,6 +981,9 @@ u8 AI_GetMoveEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef)
         break;
     case UQ_4_12(4.0):
         damageVar = AI_EFFECTIVENESS_x4;
+        break;
+    case UQ_4_12(8.0):
+        damageVar = AI_EFFECTIVENESS_x8;
         break;
     }
 

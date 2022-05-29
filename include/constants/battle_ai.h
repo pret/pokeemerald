@@ -15,11 +15,13 @@
 #define AI_TYPE_MOVE 4
 
 // type effectiveness
+#define AI_EFFECTIVENESS_x8     320
 #define AI_EFFECTIVENESS_x4     160
 #define AI_EFFECTIVENESS_x2     80
 #define AI_EFFECTIVENESS_x1     40
 #define AI_EFFECTIVENESS_x0_5   20
 #define AI_EFFECTIVENESS_x0_25  10
+#define AI_EFFECTIVENESS_x0_125 5
 #define AI_EFFECTIVENESS_x0     0
 
 // ai weather
