@@ -25,6 +25,7 @@ EventScript_UseCut::
 	end
 
 EventScript_CutTreeDown::
+  setflag FLAG_SAFE_FOLLOWER_MOVEMENT
 	applymovement VAR_LAST_TALKED, Movement_CutTreeDown
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
