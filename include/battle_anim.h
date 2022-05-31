@@ -118,7 +118,7 @@ void SetSpriteRotScale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation);
 void InitSpriteDataForLinearTranslation(struct Sprite *sprite);
 void PrepareBattlerSpriteForRotScale(u8 spriteId, u8 objMode);
 void SetBattlerSpriteYOffsetFromRotation(u8 spriteId);
-u32 GetBattleBgPalettesMask(u8 battleBackground, u8 attacker, u8 target, u8 attackerPartner, u8 targetPartner, u8 a6, u8 a7);
+u32 GetBattlePalettesMask(bool8 battleBackground, bool8 attacker, bool8 target, bool8 attackerPartner, bool8 targetPartner, bool8 anim1, bool8 anim2);
 u32 GetBattleMonSpritePalettesMask(u8 playerLeft, u8 playerRight, u8 opponentLeft, u8 opponentRight);
 u8 AnimDummyReturnArg(u8 battler);
 s16 CloneBattlerSpriteWithBlend(u8);
@@ -229,7 +229,7 @@ void DestroyAnimSpriteAfterTimer(struct Sprite *sprite);
 // battle_anim_smokescreen.c
 u8 SmokescreenImpact(s16 x, s16 y, u8 a3);
 
-u32 UnpackSelectedBattleBgPalettes(s16);
+u32 UnpackSelectedBattlePalettes(s16);
 
 u8 GetBattlerSpriteFinal_Y(u8, u16, u8);
 

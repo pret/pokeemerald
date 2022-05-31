@@ -4343,7 +4343,7 @@ static void AnimLockOnTarget_Step4(struct Sprite* sprite)
         sprite->data[1] = 0;
     }
 
-    BlendPalettes(GetBattleBgPalettesMask(1, 1, 1, 1, 1, 0, 0), sprite->data[1], RGB(31, 31, 31));
+    BlendPalettes(GetBattlePalettesMask(TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE), sprite->data[1], RGB(31, 31, 31));
     if (sprite->data[1] == 16)
     {
         int pal;
@@ -4998,7 +4998,7 @@ static void AnimMoonlightSparkle_Step(struct Sprite* sprite)
 
 void AnimTask_MoonlightEndFade(u8 taskId)
 {
-    int a = GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0) & 0xFFFF;
+    int a = GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE) & 0xFFFF;
     int b;
     int c;
     int d;
