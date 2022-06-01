@@ -438,7 +438,7 @@ static void EnableTextPrinters(void)
     gDisableTextPrinters = FALSE;
 }
 
-static void DisableTextPrinters(struct TextPrinterTemplate * printer, u16 a1)
+static void DisableTextPrinters(struct TextPrinterTemplate * printer, u16 renderCmd)
 {
     gDisableTextPrinters = TRUE;
 }

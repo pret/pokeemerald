@@ -2879,10 +2879,10 @@ static u8 TryGivePrize(void)
     return PRIZE_RECEIVED;
 }
 
-static u32 IncrementWithLimit(u32 a, u32 max)
+static u32 IncrementWithLimit(u32 num, u32 max)
 {
-    if (a < max)
-        return a + 1;
+    if (num < max)
+        return num + 1;
     else
         return max;
 }

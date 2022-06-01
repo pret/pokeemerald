@@ -1213,7 +1213,7 @@ void AnimTask_SmokescreenImpact(u8 taskId)
     SmokescreenImpact(
         GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) + 8,
         GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + 8,
-        0);
+        FALSE);
     DestroyAnimVisualTask(taskId);
 }
 

@@ -412,7 +412,7 @@ int GetNumberRegistered(void);
 struct PokenavMatchCallEntry *GetMatchCallList(void);
 u16 GetMatchCallMapSec(int);
 bool32 ShouldDrawRematchPokeballIcon(int index);
-void ClearRematchPokeballIcon(u16 windowId, u32 a1);
+void ClearRematchPokeballIcon(u16 windowId, u32 tileOffset);
 int GetMatchCallTrainerPic(int index);
 const u8 *GetMatchCallFlavorText(int index, int textType);
 const u8 *GetMatchCallMessageText(int index, bool8 *newRematchRequest);

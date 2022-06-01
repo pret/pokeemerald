@@ -817,8 +817,8 @@ static void Debug_DrawNumber(s16 number, u16 *dest, bool8 unk)
 static void Debug_DrawNumberPair(s16 number1, s16 number2, u16 *dest)
 {
     dest[4] = 0x1E;
-    Debug_DrawNumber(number2, dest, 0);
-    Debug_DrawNumber(number1, dest + 5, 1);
+    Debug_DrawNumber(number2, dest, FALSE);
+    Debug_DrawNumber(number1, dest + 5, TRUE);
 }
 
 // Because the healthbox is too large to fit into one sprite, it is divided into two sprites.
@@ -1420,7 +1420,7 @@ void SwapHpBarsWithHpText(void)
 #define tIsBattleStart          data[10]
 #define tBlend                  data[15]
 
-u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, u8 arg2, bool8 isBattleStart)
+u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, bool8 skipPlayer, bool8 isBattleStart)
 {
     bool8 isOpponent;
     s16 bar_X, bar_Y, bar_pos2_X, bar_data0;
@@ -1429,7 +1429,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
     u8 ballIconSpritesIds[PARTY_SIZE];
     u8 taskId;
 
-    if (!arg2 || GetBattlerPosition(battlerId) != B_POSITION_OPPONENT_RIGHT)
+    if (!skipPlayer || GetBattlerPosition(battlerId) != B_POSITION_OPPONENT_RIGHT)
     {
         if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
         {
@@ -1442,7 +1442,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         {
             isOpponent = TRUE;
 
-            if (!arg2 || !IsDoubleBattle())
+            if (!skipPlayer || !IsDoubleBattle())
                 bar_X = 104, bar_Y = 40;
             else
                 bar_X = 104, bar_Y = 16;
@@ -2383,7 +2383,7 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
     return ret;
 }
 
-static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *currValue, u8 *arg4, u8 scale)
+static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *currValue, u8 *pixelsArray, u8 scale)
 {
     u8 pixels, filledPixels, totalPixels;
     u8 i;
@@ -2397,7 +2397,7 @@ static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32
     totalPixels = scale * 8;
 
     for (i = 0; i < scale; i++)
-        arg4[i] = 0;
+        pixelsArray[i] = 0;
 
     if (maxValue < totalPixels)
         pixels = (*currValue * totalPixels / maxValue) >> 8;
@@ -2408,7 +2408,7 @@ static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32
 
     if (filledPixels == 0 && newValue > 0)
     {
-        arg4[0] = 1;
+        pixelsArray[0] = 1;
         filledPixels = 1;
     }
     else
@@ -2417,11 +2417,11 @@ static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32
         {
             if (pixels >= 8)
             {
-                arg4[i] = 8;
+                pixelsArray[i] = 8;
             }
             else
             {
-                arg4[i] = pixels;
+                pixelsArray[i] = pixels;
                 break;
             }
             pixels -= 8;
@@ -2433,7 +2433,7 @@ static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32
 
 // Unused
 // These two functions seem as if they were made for testing the health bar.
-static s16 Debug_TestHealthBar(struct TestingBar *barInfo, s32 *currValue, u16 *arg2, s32 arg3)
+static s16 Debug_TestHealthBar(struct TestingBar *barInfo, s32 *currValue, u16 *dest, s32 unused)
 {
     s16 ret, var;
 
@@ -2441,29 +2441,29 @@ static s16 Debug_TestHealthBar(struct TestingBar *barInfo, s32 *currValue, u16 *
                     barInfo->oldValue,
                     barInfo->receivedValue,
                     currValue, B_HEALTHBAR_PIXELS / 8, 1);
-    Debug_TestHealthBar_Helper(barInfo, currValue, arg2);
+    Debug_TestHealthBar_Helper(barInfo, currValue, dest);
 
     if (barInfo->maxValue < B_HEALTHBAR_PIXELS)
         var = *currValue >> 8;
     else
         var = *currValue;
 
-    DummiedOutFunction(barInfo->maxValue, var, arg3);
+    DummiedOutFunction(barInfo->maxValue, var, unused);
 
     return ret;
 }
 
 static void Debug_TestHealthBar_Helper(struct TestingBar *barInfo, s32 *currValue, u16 *dest)
 {
-    u8 sp8[6];
+    u8 pixels[6];
     u16 src[6];
     u8 i;
 
     CalcBarFilledPixels(barInfo->maxValue, barInfo->oldValue,
-                barInfo->receivedValue, currValue, sp8, B_HEALTHBAR_PIXELS / 8);
+                barInfo->receivedValue, currValue, pixels, B_HEALTHBAR_PIXELS / 8);
 
     for (i = 0; i < 6; i++)
-        src[i] = (barInfo->unkC_0 << 12) | (barInfo->unk10 + sp8[i]);
+        src[i] = (barInfo->unkC_0 << 12) | (barInfo->unk10 + pixels[i]);
 
     CpuCopy16(src, dest, sizeof(src));
 }
@@ -2546,9 +2546,9 @@ static void RemoveWindowOnHealthbox(u32 windowId)
     RemoveWindow(windowId);
 }
 
-static void FillHealthboxObject(void *dest, u32 arg1, u32 arg2)
+static void FillHealthboxObject(void *dest, u32 valMult, u32 numTiles)
 {
-    CpuFill32(0x11111111 * arg1, dest, arg2 * TILE_SIZE_4BPP);
+    CpuFill32(0x11111111 * valMult, dest, numTiles * TILE_SIZE_4BPP);
 }
 
 static void HpTextIntoHealthboxObject(void *dest, u8 *windowTileData, u32 windowWidth)
