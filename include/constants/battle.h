@@ -475,4 +475,7 @@
 // For the second argument of GetMoveTarget, when no target override is needed
 #define NO_TARGET_OVERRIDE 0
 
+// Makes sure gWrappedStringIds and sTrappingMoves have the same size
+#define TRAPPING_MOVES_COUNT 9
+
 #endif // GUARD_CONSTANTS_BATTLE_H
