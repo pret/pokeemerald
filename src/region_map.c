@@ -2024,11 +2024,7 @@ static void CB_ExitFlyMap(void)
             {
                 SetMainCallback2(CB2_ReturnToPartyMenuFromFlyMap);
             }
-            if (sFlyMap != NULL)
-            {
-                free(sFlyMap);
-                sFlyMap = NULL;
-            }
+            TRY_FREE_AND_SET_NULL(sFlyMap);
             FreeAllWindowBuffers();
         }
         break;
