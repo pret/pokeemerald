@@ -1131,8 +1131,7 @@ static void CB2_InitSelectScreen(void)
     switch (gMain.state)
     {
     case 0:
-        if (sFactorySelectMons != NULL)
-            FREE_AND_SET_NULL(sFactorySelectMons);
+        TRY_FREE_AND_SET_NULL(sFactorySelectMons);
         SetHBlankCallback(NULL);
         SetVBlankCallback(NULL);
         CpuFill32(0, (void *)VRAM, VRAM_SIZE);

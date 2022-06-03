@@ -5417,8 +5417,7 @@ static bool32 WaitForWallpaperGfxLoad(void)
     if (IsDma3ManagerBusyWithBgCopy())
         return FALSE;
 
-    if (sStorage->wallpaperTiles != NULL)
-        FREE_AND_SET_NULL(sStorage->wallpaperTiles);
+    TRY_FREE_AND_SET_NULL(sStorage->wallpaperTiles);
 
     return TRUE;
 }

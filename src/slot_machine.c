@@ -1756,14 +1756,10 @@ static bool8 SlotTask_FreeDataStructures(struct Task *task)
         FREE_AND_SET_NULL(sImageTable_DigitalDisplay_Number);
         FREE_AND_SET_NULL(sImageTable_DigitalDisplay_Pokeball);
         FREE_AND_SET_NULL(sImageTable_DigitalDisplay_DPad);
-        if (sImageTable_ReelTimePikachu != NULL)
-            FREE_AND_SET_NULL(sImageTable_ReelTimePikachu);
-        if (sImageTable_ReelTimeMachineAntennae != NULL)
-            FREE_AND_SET_NULL(sImageTable_ReelTimeMachineAntennae);
-        if (sImageTable_ReelTimeMachine != NULL)
-            FREE_AND_SET_NULL(sImageTable_ReelTimeMachine);
-        if (sImageTable_BrokenReelTimeMachine != NULL)
-            FREE_AND_SET_NULL(sImageTable_BrokenReelTimeMachine);
+        TRY_FREE_AND_SET_NULL(sImageTable_ReelTimePikachu);
+        TRY_FREE_AND_SET_NULL(sImageTable_ReelTimeMachineAntennae);
+        TRY_FREE_AND_SET_NULL(sImageTable_ReelTimeMachine);
+        TRY_FREE_AND_SET_NULL(sImageTable_BrokenReelTimeMachine);
         FREE_AND_SET_NULL(sMenuGfx);
         FREE_AND_SET_NULL(sSelectedPikaPowerTile);
         FREE_AND_SET_NULL(sReelOverlay_Tilemap);
@@ -4178,8 +4174,7 @@ static void CreateReelTimePikachuSprite(void)
 static void DestroyReelTimePikachuSprite(void)
 {
     DestroySprite(&gSprites[sSlotMachine->reelTimePikachuSpriteId]);
-    if (sImageTable_ReelTimePikachu != NULL)
-        FREE_AND_SET_NULL(sImageTable_ReelTimePikachu);
+    TRY_FREE_AND_SET_NULL(sImageTable_ReelTimePikachu);
 }
 
 static void SpriteCB_ReelTimePikachu(struct Sprite *sprite)
@@ -4308,10 +4303,8 @@ static void DestroyReelTimeMachineSprites(void)
     for (i = 0; i < ARRAY_COUNT(sSlotMachine->reelTimeMachineSpriteIds); i++)
         DestroySprite(&gSprites[sSlotMachine->reelTimeMachineSpriteIds[i]]);
 
-    if (sImageTable_ReelTimeMachineAntennae != NULL)
-        FREE_AND_SET_NULL(sImageTable_ReelTimeMachineAntennae);
-    if (sImageTable_ReelTimeMachine != NULL)
-        FREE_AND_SET_NULL(sImageTable_ReelTimeMachine);
+    TRY_FREE_AND_SET_NULL(sImageTable_ReelTimeMachineAntennae);
+    TRY_FREE_AND_SET_NULL(sImageTable_ReelTimeMachine);
 
     for (i = 0; i < ARRAY_COUNT(sSlotMachine->reelTimeNumberSpriteIds); i++)
         DestroySprite(&gSprites[sSlotMachine->reelTimeNumberSpriteIds[i]]);
@@ -4328,8 +4321,7 @@ static void DestroyReelTimeShadowSprites(void)
 static void DestroyBrokenReelTimeMachineSprite(void)
 {
     DestroySprite(&gSprites[sSlotMachine->reelTimeBrokenMachineSpriteId]);
-    if (sImageTable_BrokenReelTimeMachine != NULL)
-        FREE_AND_SET_NULL(sImageTable_BrokenReelTimeMachine);
+    TRY_FREE_AND_SET_NULL(sImageTable_BrokenReelTimeMachine);
 }
 
 #define sDelayTimer data[0]

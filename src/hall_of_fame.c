@@ -529,10 +529,8 @@ static void Task_Hof_TrySaveData(u8 taskId)
         UnsetBgTilemapBuffer(3);
         FreeAllWindowBuffers();
 
-        if (sHofGfxPtr != NULL)
-            FREE_AND_SET_NULL(sHofGfxPtr);
-        if (sHofMonPtr != NULL)
-            FREE_AND_SET_NULL(sHofMonPtr);
+        TRY_FREE_AND_SET_NULL(sHofGfxPtr);
+        TRY_FREE_AND_SET_NULL(sHofMonPtr);
 
         DestroyTask(taskId);
     }
@@ -773,10 +771,8 @@ static void Task_Hof_HandleExit(u8 taskId)
         ResetBgsAndClearDma3BusyFlags(0);
         DestroyTask(taskId);
 
-        if (sHofGfxPtr != NULL)
-            FREE_AND_SET_NULL(sHofGfxPtr);
-        if (sHofMonPtr != NULL)
-            FREE_AND_SET_NULL(sHofMonPtr);
+        TRY_FREE_AND_SET_NULL(sHofGfxPtr);
+        TRY_FREE_AND_SET_NULL(sHofMonPtr);
 
         StartCredits();
     }
@@ -1081,10 +1077,8 @@ static void Task_HofPC_HandleExit(u8 taskId)
         ResetBgsAndClearDma3BusyFlags(0);
         DestroyTask(taskId);
 
-        if (sHofGfxPtr != NULL)
-            FREE_AND_SET_NULL(sHofGfxPtr);
-        if (sHofMonPtr != NULL)
-            FREE_AND_SET_NULL(sHofMonPtr);
+        TRY_FREE_AND_SET_NULL(sHofGfxPtr);
+        TRY_FREE_AND_SET_NULL(sHofMonPtr);
 
         ReturnFromHallOfFamePC();
     }
