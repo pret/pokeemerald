@@ -1390,7 +1390,7 @@ static bool8 SlotTask_HandleBetInput(struct Task *task)
 // SLOTTASK_MSG_NEED_3_COINS
 static bool8 SlotTask_PrintMsg_Need3Coins(struct Task *task)
 {
-    DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouDontHaveThreeCoins, 0, 1, 0, 0);
     CopyWindowToVram(0, COPYWIN_FULL);
     sSlotMachine->state = SLOTTASK_WAIT_MSG_NEED_3_COINS;
@@ -1655,7 +1655,7 @@ static bool8 SlotTask_NoMatches(struct Task *task)
 // SLOTTASK_ASK_QUIT
 static bool8 SlotTask_AskQuit(struct Task *task)
 {
-    DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, gText_QuitTheGame, 0, 1, 0, 0);
     CopyWindowToVram(0, COPYWIN_FULL);
     CreateYesNoMenuParameterized(0x15, 7, 0x214, 0x180, 0xE, 0xF);
@@ -1687,7 +1687,7 @@ static bool8 SlotTask_HandleQuitInput(struct Task *task)
 // SLOTTASK_MSG_MAX_COINS
 static bool8 SlotTask_PrintMsg_MaxCoins(struct Task *task)
 {
-    DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouveGot9999Coins, 0, 1, 0, 0);
     CopyWindowToVram(0, COPYWIN_FULL);
     sSlotMachine->state = SLOTTASK_WAIT_MSG_MAX_COINS;
@@ -1708,7 +1708,7 @@ static bool8 SlotTask_WaitMsg_MaxCoins(struct Task *task)
 // SLOTTASK_MSG_NO_MORE_COINS
 static bool8 SlotTask_PrintMsg_NoMoreCoins(struct Task *task)
 {
-    DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouveRunOutOfCoins, 0, 1, 0, 0);
     CopyWindowToVram(0, COPYWIN_FULL);
     sSlotMachine->state = SLOTTASK_WAIT_MSG_NO_MORE_COINS;
@@ -1756,14 +1756,10 @@ static bool8 SlotTask_FreeDataStructures(struct Task *task)
         FREE_AND_SET_NULL(sImageTable_DigitalDisplay_Number);
         FREE_AND_SET_NULL(sImageTable_DigitalDisplay_Pokeball);
         FREE_AND_SET_NULL(sImageTable_DigitalDisplay_DPad);
-        if (sImageTable_ReelTimePikachu != NULL)
-            FREE_AND_SET_NULL(sImageTable_ReelTimePikachu);
-        if (sImageTable_ReelTimeMachineAntennae != NULL)
-            FREE_AND_SET_NULL(sImageTable_ReelTimeMachineAntennae);
-        if (sImageTable_ReelTimeMachine != NULL)
-            FREE_AND_SET_NULL(sImageTable_ReelTimeMachine);
-        if (sImageTable_BrokenReelTimeMachine != NULL)
-            FREE_AND_SET_NULL(sImageTable_BrokenReelTimeMachine);
+        TRY_FREE_AND_SET_NULL(sImageTable_ReelTimePikachu);
+        TRY_FREE_AND_SET_NULL(sImageTable_ReelTimeMachineAntennae);
+        TRY_FREE_AND_SET_NULL(sImageTable_ReelTimeMachine);
+        TRY_FREE_AND_SET_NULL(sImageTable_BrokenReelTimeMachine);
         FREE_AND_SET_NULL(sMenuGfx);
         FREE_AND_SET_NULL(sSelectedPikaPowerTile);
         FREE_AND_SET_NULL(sReelOverlay_Tilemap);
@@ -4184,8 +4180,7 @@ static void CreateReelTimePikachuSprite(void)
 static void DestroyReelTimePikachuSprite(void)
 {
     DestroySprite(&gSprites[sSlotMachine->reelTimePikachuSpriteId]);
-    if (sImageTable_ReelTimePikachu != NULL)
-        FREE_AND_SET_NULL(sImageTable_ReelTimePikachu);
+    TRY_FREE_AND_SET_NULL(sImageTable_ReelTimePikachu);
 }
 
 static void SpriteCB_ReelTimePikachu(struct Sprite *sprite)
@@ -4314,10 +4309,8 @@ static void DestroyReelTimeMachineSprites(void)
     for (i = 0; i < ARRAY_COUNT(sSlotMachine->reelTimeMachineSpriteIds); i++)
         DestroySprite(&gSprites[sSlotMachine->reelTimeMachineSpriteIds[i]]);
 
-    if (sImageTable_ReelTimeMachineAntennae != NULL)
-        FREE_AND_SET_NULL(sImageTable_ReelTimeMachineAntennae);
-    if (sImageTable_ReelTimeMachine != NULL)
-        FREE_AND_SET_NULL(sImageTable_ReelTimeMachine);
+    TRY_FREE_AND_SET_NULL(sImageTable_ReelTimeMachineAntennae);
+    TRY_FREE_AND_SET_NULL(sImageTable_ReelTimeMachine);
 
     for (i = 0; i < ARRAY_COUNT(sSlotMachine->reelTimeNumberSpriteIds); i++)
         DestroySprite(&gSprites[sSlotMachine->reelTimeNumberSpriteIds[i]]);
@@ -4334,8 +4327,7 @@ static void DestroyReelTimeShadowSprites(void)
 static void DestroyBrokenReelTimeMachineSprite(void)
 {
     DestroySprite(&gSprites[sSlotMachine->reelTimeBrokenMachineSpriteId]);
-    if (sImageTable_BrokenReelTimeMachine != NULL)
-        FREE_AND_SET_NULL(sImageTable_BrokenReelTimeMachine);
+    TRY_FREE_AND_SET_NULL(sImageTable_BrokenReelTimeMachine);
 }
 
 #define sDelayTimer data[0]

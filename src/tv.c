@@ -723,7 +723,7 @@ static const u8 *const sTVInSearchOfTrainersTextGroup[] = {
 
 // Secret Base Secrets TV Show states for actions that can be taken in a secret base
 // The flags that determine whether or not the action was taken are commented
-const u8 sTVSecretBaseSecretsActions[NUM_SECRET_BASE_FLAGS] =
+static const u8 sTVSecretBaseSecretsActions[NUM_SECRET_BASE_FLAGS] =
 {
     SBSECRETS_STATE_USED_CHAIR,             // SECRET_BASE_USED_CHAIR
     SBSECRETS_STATE_USED_BALLOON,           // SECRET_BASE_USED_BALLOON

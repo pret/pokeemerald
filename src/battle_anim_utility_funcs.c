@@ -594,8 +594,7 @@ static void StatsChangeAnimation_Step3(u8 taskId)
         if (gTasks[taskId].data[6] == 1)
             gSprites[gTasks[taskId].data[7]].oam.priority++;
 
-        Free(sAnimStatsChangeData);
-        sAnimStatsChangeData = NULL;
+        FREE_AND_SET_NULL(sAnimStatsChangeData);
         DestroyAnimVisualTask(taskId);
         break;
     }

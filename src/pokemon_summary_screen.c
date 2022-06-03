@@ -2314,69 +2314,69 @@ u8 GetMoveSlotToReplace(void)
 
 static void DrawPagination(void) // Updates the pagination dots at the top of the summary screen
 {
-    u16 *alloced = Alloc(32);
+    u16 *tilemap = Alloc(8 * PSS_PAGE_COUNT);
     u8 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < PSS_PAGE_COUNT; i++)
     {
         u8 j = i * 2;
 
         if (i < sMonSummaryScreen->minPageIndex)
         {
-            alloced[j + 0] = 0x40;
-            alloced[j + 1] = 0x40;
-            alloced[j + 8] = 0x50;
-            alloced[j + 9] = 0x50;
+            tilemap[j + 0] = 0x40;
+            tilemap[j + 1] = 0x40;
+            tilemap[j + 2 * PSS_PAGE_COUNT] = 0x50;
+            tilemap[j + 2 * PSS_PAGE_COUNT + 1] = 0x50;
         }
         else if (i > sMonSummaryScreen->maxPageIndex)
         {
-            alloced[j + 0] = 0x4A;
-            alloced[j + 1] = 0x4A;
-            alloced[j + 8] = 0x5A;
-            alloced[j + 9] = 0x5A;
+            tilemap[j + 0] = 0x4A;
+            tilemap[j + 1] = 0x4A;
+            tilemap[j + 2 * PSS_PAGE_COUNT] = 0x5A;
+            tilemap[j + 2 * PSS_PAGE_COUNT + 1] = 0x5A;
         }
         else if (i < sMonSummaryScreen->currPageIndex)
         {
-            alloced[j + 0] = 0x46;
-            alloced[j + 1] = 0x47;
-            alloced[j + 8] = 0x56;
-            alloced[j + 9] = 0x57;
+            tilemap[j + 0] = 0x46;
+            tilemap[j + 1] = 0x47;
+            tilemap[j + 2 * PSS_PAGE_COUNT] = 0x56;
+            tilemap[j + 2 * PSS_PAGE_COUNT + 1] = 0x57;
         }
         else if (i == sMonSummaryScreen->currPageIndex)
         {
             if (i != sMonSummaryScreen->maxPageIndex)
             {
-                alloced[j + 0] = 0x41;
-                alloced[j + 1] = 0x42;
-                alloced[j + 8] = 0x51;
-                alloced[j + 9] = 0x52;
+                tilemap[j + 0] = 0x41;
+                tilemap[j + 1] = 0x42;
+                tilemap[j + 2 * PSS_PAGE_COUNT] = 0x51;
+                tilemap[j + 2 * PSS_PAGE_COUNT + 1] = 0x52;
             }
             else
             {
-                alloced[j + 0] = 0x4B;
-                alloced[j + 1] = 0x4C;
-                alloced[j + 8] = 0x5B;
-                alloced[j + 9] = 0x5C;
+                tilemap[j + 0] = 0x4B;
+                tilemap[j + 1] = 0x4C;
+                tilemap[j + 2 * PSS_PAGE_COUNT] = 0x5B;
+                tilemap[j + 2 * PSS_PAGE_COUNT + 1] = 0x5C;
             }
         }
         else if (i != sMonSummaryScreen->maxPageIndex)
         {
-            alloced[j + 0] = 0x43;
-            alloced[j + 1] = 0x44;
-            alloced[j + 8] = 0x53;
-            alloced[j + 9] = 0x54;
+            tilemap[j + 0] = 0x43;
+            tilemap[j + 1] = 0x44;
+            tilemap[j + 2 * PSS_PAGE_COUNT] = 0x53;
+            tilemap[j + 2 * PSS_PAGE_COUNT + 1] = 0x54;
         }
         else
         {
-            alloced[j + 0] = 0x48;
-            alloced[j + 1] = 0x49;
-            alloced[j + 8] = 0x58;
-            alloced[j + 9] = 0x59;
+            tilemap[j + 0] = 0x48;
+            tilemap[j + 1] = 0x49;
+            tilemap[j + 2 * PSS_PAGE_COUNT] = 0x58;
+            tilemap[j + 2 * PSS_PAGE_COUNT + 1] = 0x59;
         }
     }
-    CopyToBgTilemapBufferRect_ChangePalette(3, alloced, 11, 0, 8, 2, 16);
+    CopyToBgTilemapBufferRect_ChangePalette(3, tilemap, 11, 0, PSS_PAGE_COUNT * 2, 2, 16);
     ScheduleBgCopyTilemapToVram(3);
-    Free(alloced);
+    Free(tilemap);
 }
 
 static void ChangeTilemap(const struct TilemapCtrl *unkStruct, u16 *dest, u8 c, bool8 d)
@@ -2439,7 +2439,7 @@ static void Task_ShowPowerAccWindow(u8 taskId)
     {
         if (data[0] < 0)
         {
-            if (sMonSummaryScreen->currPageIndex == 2)
+            if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES)
                 PutWindowTilemap(PSS_LABEL_WINDOW_MOVES_POWER_ACC);
         }
         else
@@ -2492,7 +2492,7 @@ static void Task_ShowAppealJamWindow(u8 taskId)
     {
         if (data[0] < 0)
         {
-            if (sMonSummaryScreen->currPageIndex == 3 && FuncIsActiveTask(PssScrollRight) == 0)
+            if (sMonSummaryScreen->currPageIndex == PSS_PAGE_CONTEST_MOVES && FuncIsActiveTask(PssScrollRight) == 0)
                 PutWindowTilemap(PSS_LABEL_WINDOW_MOVES_APPEAL_JAM);
             DrawContestMoveHearts(data[2]);
         }

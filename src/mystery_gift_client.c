@@ -44,8 +44,7 @@ u32 MysteryGiftClient_Run(u16 * endVal)
     {
         *endVal = sClient->param;
         MysteryGiftClient_Free(sClient);
-        Free(sClient);
-        sClient = NULL;
+        FREE_AND_SET_NULL(sClient);
     }
     return result;
 }

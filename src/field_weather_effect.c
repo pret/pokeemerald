@@ -14,8 +14,8 @@
 #include "trig.h"
 #include "gpu_regs.h"
 
-EWRAM_DATA static u8 gCurrentAbnormalWeather = 0;
-EWRAM_DATA static u16 gUnusedWeatherRelated = 0;
+EWRAM_DATA static u8 sCurrentAbnormalWeather = 0;
+EWRAM_DATA static u16 sUnusedWeatherRelated = 0;
 
 const u16 gCloudsWeatherPalette[] = INCBIN_U16("graphics/weather/cloud.gbapal");
 const u16 gSandstormWeatherPalette[] = INCBIN_U16("graphics/weather/sandstorm.gbapal");
@@ -1813,7 +1813,7 @@ static void UpdateFogDiagonalMovement(void)
     gWeatherPtr->fogDPosY = gSpriteCoordOffsetY + gWeatherPtr->fogDYOffset;
 }
 
-static const struct SpriteSheet gFogDiagonalSpriteSheet =
+static const struct SpriteSheet sFogDiagonalSpriteSheet =
 {
     .data = gWeatherFogDiagonalTiles,
     .size = sizeof(gWeatherFogDiagonalTiles),
@@ -1868,7 +1868,7 @@ static void CreateFogDiagonalSprites(void)
 
     if (!gWeatherPtr->fogDSpritesCreated)
     {
-        fogDiagonalSpriteSheet = gFogDiagonalSpriteSheet;
+        fogDiagonalSpriteSheet = sFogDiagonalSpriteSheet;
         LoadSpriteSheet(&fogDiagonalSpriteSheet);
         for (i = 0; i < NUM_FOG_DIAGONAL_SPRITES; i++)
         {
@@ -2427,8 +2427,8 @@ static void UpdateBubbleSprite(struct Sprite *sprite)
 // Unused function.
 static void UnusedSetCurrentAbnormalWeather(u32 weather, u32 unknown)
 {
-    gCurrentAbnormalWeather = weather;
-    gUnusedWeatherRelated = unknown;
+    sCurrentAbnormalWeather = weather;
+    sUnusedWeatherRelated = unknown;
 }
 
 #define tState         data[0]
@@ -2446,7 +2446,7 @@ static void Task_DoAbnormalWeather(u8 taskId)
         if (tDelay-- <= 0)
         {
             SetNextWeather(tWeatherA);
-            gCurrentAbnormalWeather = tWeatherA;
+            sCurrentAbnormalWeather = tWeatherA;
             tDelay = 600;
             tState++;
         }
@@ -2455,7 +2455,7 @@ static void Task_DoAbnormalWeather(u8 taskId)
         if (tDelay-- <= 0)
         {
             SetNextWeather(tWeatherB);
-            gCurrentAbnormalWeather = tWeatherB;
+            sCurrentAbnormalWeather = tWeatherB;
             tDelay = 600;
             tState = 0;
         }
@@ -2469,13 +2469,13 @@ static void CreateAbnormalWeatherTask(void)
     s16 *data = gTasks[taskId].data;
 
     tDelay = 600;
-    if (gCurrentAbnormalWeather == WEATHER_DOWNPOUR)
+    if (sCurrentAbnormalWeather == WEATHER_DOWNPOUR)
     {
         // Currently Downpour, next will be Drought
         tWeatherA = WEATHER_DROUGHT;
         tWeatherB = WEATHER_DOWNPOUR;
     }
-    else if (gCurrentAbnormalWeather == WEATHER_DROUGHT)
+    else if (sCurrentAbnormalWeather == WEATHER_DROUGHT)
     {
         // Currently Drought, next will be Downpour
         tWeatherA = WEATHER_DOWNPOUR;
@@ -2484,7 +2484,7 @@ static void CreateAbnormalWeatherTask(void)
     else
     {
         // Default to starting with Downpour
-        gCurrentAbnormalWeather = WEATHER_DOWNPOUR;
+        sCurrentAbnormalWeather = WEATHER_DOWNPOUR;
         tWeatherA = WEATHER_DROUGHT;
         tWeatherB = WEATHER_DOWNPOUR;
     }
@@ -2537,13 +2537,13 @@ void DoCurrentWeather(void)
     {
         if (!FuncIsActiveTask(Task_DoAbnormalWeather))
             CreateAbnormalWeatherTask();
-        weather = gCurrentAbnormalWeather;
+        weather = sCurrentAbnormalWeather;
     }
     else
     {
         if (FuncIsActiveTask(Task_DoAbnormalWeather))
             DestroyTask(FindTaskIdByFunc(Task_DoAbnormalWeather));
-        gCurrentAbnormalWeather = WEATHER_DOWNPOUR;
+        sCurrentAbnormalWeather = WEATHER_DOWNPOUR;
     }
     SetNextWeather(weather);
 }
@@ -2556,13 +2556,13 @@ void ResumePausedWeather(void)
     {
         if (!FuncIsActiveTask(Task_DoAbnormalWeather))
             CreateAbnormalWeatherTask();
-        weather = gCurrentAbnormalWeather;
+        weather = sCurrentAbnormalWeather;
     }
     else
     {
         if (FuncIsActiveTask(Task_DoAbnormalWeather))
             DestroyTask(FindTaskIdByFunc(Task_DoAbnormalWeather));
-        gCurrentAbnormalWeather = WEATHER_DOWNPOUR;
+        sCurrentAbnormalWeather = WEATHER_DOWNPOUR;
     }
     SetCurrentAndNextWeather(weather);
 }

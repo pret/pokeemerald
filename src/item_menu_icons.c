@@ -35,8 +35,8 @@ static void SpriteCB_SwitchPocketRotatingBallContinue(struct Sprite *sprite);
 // static const rom data
 static const u16 sRotatingBall_Pal[] = INCBIN_U16("graphics/bag/rotating_ball.gbapal");
 static const u8 sRotatingBall_Gfx[] = INCBIN_U8("graphics/bag/rotating_ball.4bpp");
-static const u8 gCherryUnused[] = INCBIN_U8("graphics/unused/cherry.4bpp");
-static const u16 gCherryUnused_Pal[] = INCBIN_U16("graphics/unused/cherry.gbapal");
+static const u8 sCherryUnused[] = INCBIN_U8("graphics/unused/cherry.4bpp");
+static const u16 sCherryUnused_Pal[] = INCBIN_U16("graphics/unused/cherry.gbapal");
 
 static const struct OamData sBagOamData =
 {
@@ -269,7 +269,7 @@ static const struct SpriteFrameImage sBerryPicSpriteImageTable[] =
     {&gDecompressionBuffer[0], 0x800},
 };
 
-static const struct SpriteTemplate gBerryPicSpriteTemplate =
+static const struct SpriteTemplate sBerryPicSpriteTemplate =
 {
     .tileTag = TAG_NONE,
     .paletteTag = TAG_BERRY_PIC_PAL,
@@ -308,7 +308,7 @@ static const union AffineAnimCmd *const sBerryPicRotatingAnimCmds[] =
     sSpriteAffineAnim_BerryPicRotation2
 };
 
-static const struct SpriteTemplate gBerryPicRotatingSpriteTemplate =
+static const struct SpriteTemplate sBerryPicRotatingSpriteTemplate =
 {
     .tileTag = TAG_NONE,
     .paletteTag = TAG_BERRY_PIC_PAL,
@@ -404,7 +404,7 @@ static const union AnimCmd *const sBerryCheckCircleSpriteAnimTable[] =
     sSpriteAnim_BerryCheckCircle
 };
 
-static const struct SpriteTemplate gBerryCheckCircleSpriteTemplate =
+static const struct SpriteTemplate sBerryCheckCircleSpriteTemplate =
 {
     .tileTag = TAG_BERRY_CHECK_CIRCLE_GFX,
     .paletteTag = TAG_BERRY_CHECK_CIRCLE_GFX,
@@ -609,7 +609,7 @@ static void LoadBerryGfx(u8 berryId)
 u8 CreateBerryTagSprite(u8 id, s16 x, s16 y)
 {
     LoadBerryGfx(id);
-    return CreateSprite(&gBerryPicSpriteTemplate, x, y, 0);
+    return CreateSprite(&sBerryPicSpriteTemplate, x, y, 0);
 }
 
 void FreeBerryTagSpritePalette(void)
@@ -624,7 +624,7 @@ u8 CreateSpinningBerrySprite(u8 berryId, u8 x, u8 y, bool8 startAffine)
 
     FreeSpritePaletteByTag(TAG_BERRY_PIC_PAL);
     LoadBerryGfx(berryId);
-    spriteId = CreateSprite(&gBerryPicRotatingSpriteTemplate, x, y, 0);
+    spriteId = CreateSprite(&sBerryPicRotatingSpriteTemplate, x, y, 0);
     if (startAffine == TRUE)
         StartSpriteAffineAnim(&gSprites[spriteId], 1);
 
@@ -633,5 +633,5 @@ u8 CreateSpinningBerrySprite(u8 berryId, u8 x, u8 y, bool8 startAffine)
 
 u8 CreateBerryFlavorCircleSprite(s16 x)
 {
-    return CreateSprite(&gBerryCheckCircleSpriteTemplate, x, 116, 0);
+    return CreateSprite(&sBerryCheckCircleSpriteTemplate, x, 116, 0);
 }

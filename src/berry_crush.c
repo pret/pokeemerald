@@ -2254,7 +2254,7 @@ static u32 Cmd_PrintMessage(struct BerryCrushGame *game, u8 *args)
     switch (game->cmdState)
     {
     case 0:
-        DrawDialogueFrame(0, 0);
+        DrawDialogueFrame(0, FALSE);
         if (args[1] & F_MSG_EXPAND)
         {
             StringExpandPlaceholders(gStringVar4, sMessages[args[0]]);
@@ -3241,7 +3241,7 @@ static u32 Cmd_SaveGame(struct BerryCrushGame *game, u8 *args)
     case 2:
         if (!IsLinkTaskFinished())
             return 0;
-        DrawDialogueFrame(0, 0);
+        DrawDialogueFrame(0, FALSE);
         AddTextPrinterParameterized2(0, FONT_NORMAL, gText_SavingDontTurnOffPower, 0, 0, 2, 1, 3);
         CopyWindowToVram(0, COPYWIN_FULL);
         CreateTask(Task_LinkFullSave, 0);
@@ -3389,7 +3389,7 @@ static u32 Cmd_StopGame(struct BerryCrushGame *game, u8 *args)
     switch (game->cmdState)
     {
     case 0:
-        DrawDialogueFrame(0, 0);
+        DrawDialogueFrame(0, FALSE);
         if (game->playAgainState == PLAY_AGAIN_NO_BERRIES)
             AddTextPrinterParameterized2(0, FONT_NORMAL, sMessages[MSG_NO_BERRIES], game->textSpeed, 0, 2, 1, 3);
         else

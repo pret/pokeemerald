@@ -98,8 +98,7 @@ void FreeRotatingTilePuzzle(void)
 {
     u8 id;
 
-    if (sRotatingTilePuzzle != NULL)
-        FREE_AND_SET_NULL(sRotatingTilePuzzle);
+    TRY_FREE_AND_SET_NULL(sRotatingTilePuzzle);
 
     id = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[id]);

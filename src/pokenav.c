@@ -557,8 +557,7 @@ void *GetSubstructPtr(u32 index)
 
 void FreePokenavSubstruct(u32 index)
 {
-    if (gPokenavResources->substructPtrs[index] != NULL)
-        FREE_AND_SET_NULL(gPokenavResources->substructPtrs[index]);
+    TRY_FREE_AND_SET_NULL(gPokenavResources->substructPtrs[index]);
 }
 
 u32 GetPokenavMode(void)
