@@ -1672,8 +1672,7 @@ static bool8 InitEasyChatScreenStruct(u8 type, u16 *words, u8 displayedPersonTyp
 
 static void FreeEasyChatScreenStruct(void)
 {
-    if (sEasyChatScreen != NULL)
-        FREE_AND_SET_NULL(sEasyChatScreen);
+    TRY_FREE_AND_SET_NULL(sEasyChatScreen);
 }
 
 // Returns the function ID of the action to take as a result of player's input.
@@ -3075,8 +3074,7 @@ static bool8 LoadEasyChatScreen(void)
 
 static void FreeEasyChatScreenControl(void)
 {
-    if (sScreenControl)
-        FREE_AND_SET_NULL(sScreenControl);
+    TRY_FREE_AND_SET_NULL(sScreenControl);
 }
 
 static void StartEasyChatFunction(u16 funcId)
@@ -5573,8 +5571,7 @@ static bool8 InitEasyChatScreenWordData(void)
 
 static void FreeEasyChatScreenWordData(void)
 {
-    if (sWordData)
-        FREE_AND_SET_NULL(sWordData);
+    TRY_FREE_AND_SET_NULL(sWordData);
 }
 
 static void SetUnlockedEasyChatGroups(void)
