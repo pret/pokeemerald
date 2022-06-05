@@ -20,6 +20,7 @@ void ClearBattlerItemEffectHistory(u8 battlerId);
 void SaveBattlerData(u8 battlerId);
 void SetBattlerData(u8 battlerId);
 void RestoreBattlerData(u8 battlerId);
+u16 GetAIChosenMove(u8 battlerId);
 
 bool32 WillAIStrikeFirst(void);
 u32 GetTotalBaseStat(u32 species);
@@ -27,7 +28,7 @@ bool32 IsTruantMonVulnerable(u32 battlerAI, u32 opposingBattler);
 bool32 AtMaxHp(u8 battler);
 u32 GetHealthPercentage(u8 battler);
 bool32 IsBattlerTrapped(u8 battler, bool8 switching);
-u8 AI_WhoStrikesFirst(u8 battlerAI, u8 battler2);
+u8 AI_WhoStrikesFirst(u8 battlerAI, u8 battler2, u16 consideredMove);
 bool32 CanTargetFaintAi(u8 battlerDef, u8 battlerAtk);
 bool32 CanMoveFaintBattler(u16 move, u8 battlerDef, u8 battlerAtk, u8 nHits);
 bool32 CanTargetFaintAiWithMod(u8 battlerDef, u8 battlerAtk, s32 hpMod, s32 dmgMod);

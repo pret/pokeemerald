@@ -174,11 +174,12 @@ void BattleAI_SetupFlags(void)
         AI_THINKING_STRUCT->aiFlags |= AI_FLAG_DOUBLE_BATTLE; // Act smart in doubles and don't attack your partner.
 }
 
+// sBattler_AI set in ComputeBattleAiScores
 void BattleAI_SetupAIData(u8 defaultScoreMoves)
 {
     s32 i, move, dmg;
     u8 moveLimitations;
-
+    
     // Clear AI data but preserve the flags.
     u32 flags = AI_THINKING_STRUCT->aiFlags;
     memset(AI_THINKING_STRUCT, 0, sizeof(struct AI_ThinkingStruct));
@@ -204,8 +205,9 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
             AI_THINKING_STRUCT->score[i] = 0;
     }
 
-    sBattler_AI = gActiveBattler;
+    //sBattler_AI = gActiveBattler;
     gBattlerTarget = SetRandomTarget(sBattler_AI);
+    gBattleStruct->aiChosenTarget[sBattler_AI] = gBattlerTarget;
 }
 
 u8 BattleAI_ChooseMoveOrAction(void)
@@ -226,53 +228,73 @@ u8 BattleAI_ChooseMoveOrAction(void)
     return ret;
 }
 
+// damages/other info computed in GetAIDataAndCalcDmg
+u8 ComputeBattleAiScores(u8 battler)
+{
+    sBattler_AI = battler;
+    BattleAI_SetupAIData(0xF);
+    return BattleAI_ChooseMoveOrAction();
+}
+
+static void SetBattlerAiData(u8 battlerId)
+{
+    AI_DATA->abilities[battlerId] = AI_GetAbility(battlerId);
+    AI_DATA->items[battlerId] = gBattleMons[battlerId].item;
+    AI_DATA->holdEffects[battlerId] = AI_GetHoldEffect(battlerId);
+    AI_DATA->holdEffectParams[battlerId] = GetBattlerHoldEffectParam(battlerId);
+    AI_DATA->predictedMoves[battlerId] = gLastMoves[battlerId];
+    AI_DATA->hpPercents[battlerId] = GetHealthPercentage(battlerId);
+    AI_DATA->moveLimitations[battlerId] = CheckMoveLimitations(battlerId, 0, 0xFF);
+}
+
 void GetAiLogicData(void)
 {
     u32 battlerAtk, battlerDef, i, move;
     u8 effectiveness;
     s32 dmg;
     
+    memset(AI_DATA, 0, sizeof(struct AiLogicData));
+    
     if (!(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER)
       && !IsWildMonSmart()))
         return;
     
-    memset(AI_DATA, 0, sizeof(struct AiLogicData));
-    for (battlerAtk = 0; battlerAtk < MAX_BATTLERS_COUNT; battlerAtk++)
+    // get/assume all battler data
+    for (i = 0; i < gBattlersCount; i++)
     {
-        if (IsBattlerAlive(battlerAtk)) {
-            AI_DATA->abilities[battlerAtk] = AI_GetAbility(battlerAtk);
-            AI_DATA->items[battlerAtk] = gBattleMons[battlerAtk].item;
-            AI_DATA->holdEffects[battlerAtk] = AI_GetHoldEffect(battlerAtk);
-            AI_DATA->holdEffectParams[battlerAtk] = GetBattlerHoldEffectParam(battlerAtk);
-            AI_DATA->predictedMoves[battlerAtk] = gLastMoves[battlerAtk];
-            AI_DATA->hpPercents[battlerAtk] = GetHealthPercentage(battlerAtk);
-            AI_DATA->moveLimitations[battlerAtk] = CheckMoveLimitations(battlerAtk, 0, MOVE_LIMITATIONS_ALL);
+        if (IsBattlerAlive(i)) {
+            SetBattlerAiData(i);
+        }
+    }
+    
+    // simulate AI damage
+    for (battlerAtk = 0; battlerAtk < gBattlersCount; battlerAtk++)
+    {
+        if (!IsBattlerAlive(battlerAtk)
+          || !IsBattlerAIControlled(battlerAtk)) {
+            continue;
+        }
+        for (battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
+        {
+            if (battlerAtk == battlerDef)
+                continue;
             
-            // Simulate dmg for all AI moves against all other targets
-            for (battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
+            RecordKnownMove(battlerDef, gLastMoves[battlerDef]);
+            for (i = 0; i < MAX_MON_MOVES; i++)
             {
-                if (battlerAtk == battlerDef)
-                    continue;
+                dmg = 0;
+                effectiveness = AI_EFFECTIVENESS_x0;
+                move = gBattleMons[battlerAtk].moves[i];
                 
-                RecordKnownMove(battlerDef, gLastMoves[battlerDef]);
-                for (i = 0; i < MAX_MON_MOVES; i++)
-                {
-                    dmg = 0;
-                    effectiveness = AI_EFFECTIVENESS_x0;
-                    move = gBattleMons[battlerAtk].moves[i];
-                    if (move != 0
-                     && move != 0xFFFF
-                     && gBattleMoves[move].power != 0
-                     && !(AI_DATA->moveLimitations[battlerAtk] & gBitTable[i]))
-                    {
-                        dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness);
-                        if (dmg == 0)
-                            dmg = 1;
-                    }
-                    
-                    AI_DATA->simulatedDmg[battlerAtk][battlerDef][i] = dmg;
-                    AI_DATA->effectiveness[battlerAtk][battlerDef][i] = effectiveness;
+                if (move != 0
+                 && move != 0xFFFF
+                 //&& gBattleMoves[move].power != 0  /* we want to get effectiveness of status moves */
+                 && !(AI_DATA->moveLimitations[battlerAtk] & gBitTable[i])) {
+                    dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness);
                 }
+                
+                AI_DATA->simulatedDmg[battlerAtk][battlerDef][i] = dmg;
+                AI_DATA->effectiveness[battlerAtk][battlerDef][i] = effectiveness;
             }
         }
     }
@@ -495,6 +517,7 @@ static u8 ChooseMoveOrAction_Doubles(void)
     }
 
     gBattlerTarget = mostViableTargetsArray[Random() % mostViableTargetsNo];
+    gBattleStruct->aiChosenTarget[sBattler_AI] = gBattlerTarget;
     return actionOrMoveIndex[gBattlerTarget];
 }
 
@@ -556,7 +579,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     u16 moveEffect = gBattleMoves[move].effect;
     s32 moveType;
     u16 moveTarget = AI_GetBattlerMoveTargetType(battlerAtk, move);
-    u16 accuracy = AI_GetMoveAccuracy(battlerAtk, battlerDef, AI_DATA->atkAbility, AI_DATA->defAbility, AI_DATA->atkHoldEffect, AI_DATA->defHoldEffect, move);
+    u16 accuracy = AI_GetMoveAccuracy(battlerAtk, battlerDef, move);
     u8 effectiveness = AI_DATA->effectiveness[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex];
     bool32 isDoubleBattle = IsValidDoubleBattle(battlerAtk);
     u32 i;
@@ -593,7 +616,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         }
         
         // check off screen
-        if (IsSemiInvulnerable(battlerDef, move) && moveEffect != EFFECT_SEMI_INVULNERABLE && AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER)
+        if (IsSemiInvulnerable(battlerDef, move) && moveEffect != EFFECT_SEMI_INVULNERABLE && AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER)
             RETURN_SCORE_MINUS(20);    // if target off screen and we go first, don't use move
         
         // check if negates type
@@ -1292,7 +1315,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
               && (B_MENTAL_HERB >= GEN_5 && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_MENTAL_HERB)
               && !PartnerHasSameMoveEffectWithoutTarget(BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove))
             {
-                if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER) // Attacker should go first
+                if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER) // Attacker should go first
                 {
                     if (gLastMoves[battlerDef] == MOVE_NONE || gLastMoves[battlerDef] == 0xFFFF)
                         score -= 10;    // no anticipated move to disable
@@ -1312,7 +1335,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
               && (B_MENTAL_HERB >= GEN_5 && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_MENTAL_HERB)
               && !DoesPartnerHaveSameMoveEffect(BATTLE_PARTNER(battlerAtk), battlerDef, move, AI_DATA->partnerMove))
             {
-                if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER) // Attacker should go first
+                if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER) // Attacker should go first
                 {
                     if (gLastMoves[battlerDef] == MOVE_NONE || gLastMoves[battlerDef] == 0xFFFF)
                         score -= 10;    // no anticipated move to encore
@@ -1755,7 +1778,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             break;
         case EFFECT_SPITE:
         case EFFECT_MIMIC:
-            if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER) // Attacker should go first
+            if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER) // Attacker should go first
             {
                 if (gLastMoves[battlerDef] == MOVE_NONE
                   || gLastMoves[battlerDef] == 0xFFFF)
@@ -1912,7 +1935,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             if (isDoubleBattle)
             {
                 if (IsHazardMoveEffect(gBattleMoves[AI_DATA->partnerMove].effect) // partner is going to set up hazards
-                  && AI_WhoStrikesFirst(BATTLE_PARTNER(battlerAtk), battlerAtk) == AI_IS_FASTER) // partner is going to set up before the potential Defog
+                  && AI_WhoStrikesFirst(BATTLE_PARTNER(battlerAtk), battlerAtk, AI_DATA->partnerMove) == AI_IS_FASTER) // partner is going to set up before the potential Defog
                 {
                     score -= 10;
                     break; // Don't use Defog if partner is going to set up hazards
@@ -1950,7 +1973,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             break;
         case EFFECT_SEMI_INVULNERABLE:
             if (predictedMove != MOVE_NONE
-              && AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_SLOWER
+              && AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER
               && gBattleMoves[predictedMove].effect == EFFECT_SEMI_INVULNERABLE)
                 score -= 10; // Don't Fly/dig/etc if opponent is going to fly/dig/etc after you
 
@@ -2131,7 +2154,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_ME_FIRST:
             if (predictedMove != MOVE_NONE)
             {
-                if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_SLOWER)
+                if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER)
                     score -= 10;    // Target is predicted to go first, Me First will fail
                 else
                     return AI_CheckBadMove(battlerAtk, battlerDef, predictedMove, score);
@@ -2320,7 +2343,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             }
             break;
         case EFFECT_ELECTRIFY:
-            if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER
+            if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER
               //|| GetMoveTypeSpecial(battlerDef, predictedMove) == TYPE_ELECTRIC // Move will already be electric type
               || PartnerMoveIsSameAsAttacker(BATTLE_PARTNER(battlerAtk), battlerDef, move, AI_DATA->partnerMove))
                 score -= 10;
@@ -2349,7 +2372,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_INSTRUCT:
             {
                 u16 instructedMove;
-                if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_SLOWER)
+                if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER)
                     instructedMove = predictedMove;
                 else
                     instructedMove = gLastMoves[battlerDef];
@@ -2389,21 +2412,21 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             break;
         case EFFECT_QUASH:
             if (!isDoubleBattle
-            || AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_SLOWER
+            || AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER
             || PartnerMoveIsSameAsAttacker(BATTLE_PARTNER(battlerAtk), battlerDef, move, AI_DATA->partnerMove))
                 score -= 10;
             break;
         case EFFECT_AFTER_YOU:
             if (!IsTargetingPartner(battlerAtk, battlerDef)
               || !isDoubleBattle
-              || AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_SLOWER
+              || AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER
               || PartnerMoveIsSameAsAttacker(BATTLE_PARTNER(battlerAtk), battlerDef, move, AI_DATA->partnerMove))
                 score -= 10;
             break;
         case EFFECT_SUCKER_PUNCH:
             if (predictedMove != MOVE_NONE)
             {
-                if (IS_MOVE_STATUS(predictedMove) || AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_SLOWER) // Opponent going first
+                if (IS_MOVE_STATUS(predictedMove) || AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER) // Opponent going first
                     score -= 10;
             }
             break;
@@ -2455,7 +2478,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score--;    // don't want to move last
             break;
         case EFFECT_FLAIL:
-            if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_SLOWER // Opponent should go first
+            if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER // Opponent should go first
               || AI_DATA->hpPercents[battlerAtk] > 50)
                 score -= 4;
             break;
@@ -2604,7 +2627,7 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             // Ally decided to use Frost Breath on us. we must have Anger Point as our ability
             if (AI_DATA->abilities[battlerAtk] == ABILITY_ANGER_POINT)
             {
-                if (AI_WhoStrikesFirst(battlerAtk, battlerAtkPartner) == AI_IS_SLOWER)   // Partner moving first
+                if (AI_WhoStrikesFirst(battlerAtk, battlerAtkPartner, move) == AI_IS_SLOWER)   // Partner moving first
                 {
                     // discourage raising our attack since it's about to be maxed out
                     if (IsAttackBoostMoveEffect(effect))
@@ -2871,7 +2894,7 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             case EFFECT_INSTRUCT:
                 {
                     u16 instructedMove;
-                    if (AI_WhoStrikesFirst(battlerAtk, battlerAtkPartner) == AI_IS_FASTER)
+                    if (AI_WhoStrikesFirst(battlerAtk, battlerAtkPartner, move) == AI_IS_FASTER)
                         instructedMove = AI_DATA->partnerMove;
                     else
                         instructedMove = gLastMoves[battlerAtkPartner];
@@ -2885,8 +2908,8 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 }
                 break;
             case EFFECT_AFTER_YOU:
-                if (AI_WhoStrikesFirst(battlerAtkPartner, FOE(battlerAtkPartner) == AI_IS_SLOWER)  // Opponent mon 1 goes before partner
-                  || AI_WhoStrikesFirst(battlerAtkPartner, BATTLE_PARTNER(FOE(battlerAtkPartner)) == AI_IS_SLOWER)) // Opponent mon 2 goes before partner
+                if (AI_WhoStrikesFirst(battlerAtkPartner, FOE(battlerAtkPartner), AI_DATA->partnerMove) == AI_IS_SLOWER  // Opponent mon 1 goes before partner
+                  || AI_WhoStrikesFirst(battlerAtkPartner, BATTLE_PARTNER(FOE(battlerAtkPartner)), AI_DATA->partnerMove) == AI_IS_SLOWER) // Opponent mon 2 goes before partner
                 {
                     if (gBattleMoves[AI_DATA->partnerMove].effect == EFFECT_COUNTER || gBattleMoves[AI_DATA->partnerMove].effect == EFFECT_MIRROR_COAT)
                         break; // These moves need to go last
@@ -2913,7 +2936,7 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_MAGNITUDE:
             if (!IsBattlerGrounded(battlerAtkPartner)
              || (IsBattlerGrounded(battlerAtkPartner)
-               && AI_WhoStrikesFirst(battlerAtk, battlerAtkPartner) == AI_IS_SLOWER
+               && AI_WhoStrikesFirst(battlerAtk, battlerAtkPartner, move) == AI_IS_SLOWER
                && IsUngroundingEffect(gBattleMoves[AI_DATA->partnerMove].effect)))
                 score += 2;
             else if (IS_BATTLER_OF_TYPE(battlerAtkPartner, TYPE_FIRE)
@@ -2986,7 +3009,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     // check already dead
     if (!IsBattlerIncapacitated(battlerDef, AI_DATA->abilities[battlerDef])
       && CanTargetFaintAi(battlerAtk, battlerDef)
-      && AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_SLOWER) // Opponent should go first
+      && AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER) // Opponent should go first
     {
         if (atkPriority > 0)
             score++;
@@ -3034,7 +3057,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case ABILITY_GRIM_NEIGH:
     case ABILITY_AS_ONE_ICE_RIDER:
     case ABILITY_AS_ONE_SHADOW_RIDER:
-        if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER) // Attacker should go first
+        if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER) // Attacker should go first
         {
             if (CanIndexMoveFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex, 0))
                 score += 8; // prioritize killing target for stat boost
@@ -3481,7 +3504,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score++;
         break;
     case EFFECT_MIMIC:
-        if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER)
+        if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER)
         {
             if (gLastMoves[battlerDef] != MOVE_NONE && gLastMoves[battlerDef] != 0xFFFF)
                 return AI_CheckViability(battlerAtk, battlerDef, gLastMoves[battlerDef], score);
@@ -3540,7 +3563,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (gDisableStructs[battlerDef].disableTimer == 0
           && (B_MENTAL_HERB >= GEN_5 && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_MENTAL_HERB))    // mental herb
         {
-            if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER) // AI goes first
+            if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER) // AI goes first
             {
                 if (gLastMoves[battlerDef] != MOVE_NONE
                   && gLastMoves[battlerDef] != 0xFFFF)
@@ -3594,7 +3617,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score += 3;
         break;
     case EFFECT_DESTINY_BOND:
-        if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER && CanTargetFaintAi(battlerDef, battlerAtk))
+        if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER && CanTargetFaintAi(battlerDef, battlerAtk))
             score += 3;
         break;
     case EFFECT_SPITE:
@@ -3703,7 +3726,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             {
                 ProtectChecks(battlerAtk, battlerDef, move, predictedMove, &score);
             }
-            else if (isDoubleBattle && AI_GetBattlerMoveTargetType(AI_DATA->battlerAtkPartner, AI_DATA->partnerMove) & MOVE_TARGET_FOES_AND_ALLY)
+            else if (isDoubleBattle && AI_GetBattlerMoveTargetType(BATTLE_PARTNER(battlerAtk), AI_DATA->partnerMove) & MOVE_TARGET_FOES_AND_ALLY)
             {
                 if (AI_DATA->abilities[battlerAtk] != ABILITY_TELEPATHY)
                   ProtectChecks(battlerAtk, battlerDef, move, predictedMove, &score);
@@ -3842,7 +3865,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
           && AI_DATA->abilities[battlerAtk] != ABILITY_CONTRARY
           && CanIndexMoveFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex, 0))
         {
-            if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER) // Attacker goes first
+            if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER) // Attacker goes first
                 score += 9;
             else
                 score += 3;
@@ -3887,7 +3910,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         score++;
         if (predictedMove != MOVE_NONE && !isDoubleBattle)
         {
-            if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER) // Attacker goes first
+            if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER) // Attacker goes first
             {
                 if (gBattleMoves[predictedMove].effect == EFFECT_EXPLOSION
                   || gBattleMoves[predictedMove].effect == EFFECT_PROTECT)
@@ -3954,7 +3977,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
     case EFFECT_ATTRACT:
         if (!isDoubleBattle && BattlerWillFaintFromSecondaryDamage(battlerDef, AI_DATA->abilities[battlerDef])
-          && AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_SLOWER) // Target goes first
+          && AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER) // Target goes first
             break; // Don't use if the attract won't have a change to activate
 
         if (gBattleMons[battlerDef].status1 & STATUS1_ANY
@@ -3999,7 +4022,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 if (isDoubleBattle)
                 {
                     if (IsHazardMoveEffect(gBattleMoves[AI_DATA->partnerMove].effect) // Partner is going to set up hazards
-                      && AI_WhoStrikesFirst(battlerAtk, BATTLE_PARTNER(battlerAtk)) == AI_IS_SLOWER) // Partner going first
+                      && AI_WhoStrikesFirst(battlerAtk, BATTLE_PARTNER(battlerAtk), move) == AI_IS_SLOWER) // Partner going first
                         break; // Don't use Defog if partner is going to set up hazards
                 }
                 
@@ -4488,13 +4511,13 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score++;
         break;
     case EFFECT_THROAT_CHOP:
-        if (predictedMove != MOVE_NONE && TestMoveFlags(predictedMove, FLAG_SOUND) && AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER)
+        if (predictedMove != MOVE_NONE && TestMoveFlags(predictedMove, FLAG_SOUND) && AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER)
             score += 3; // Ai goes first and predicts the target will use a sound move
         else if (TestMoveFlagsInMoveset(battlerDef, FLAG_SOUND))
             score += 3;
         break;
     case EFFECT_HEAL_BLOCK:
-        if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER && predictedMove != MOVE_NONE && IsHealingMoveEffect(gBattleMoves[predictedMove].effect))
+        if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER && predictedMove != MOVE_NONE && IsHealingMoveEffect(gBattleMoves[predictedMove].effect))
             score += 3; // Try to cancel healing move
         else if (HasHealingEffect(battlerDef) || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_LEFTOVERS
           || (AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_BLACK_SLUDGE && IS_BATTLER_OF_TYPE(battlerDef, TYPE_POISON)))
@@ -4530,7 +4553,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
     case EFFECT_QUASH:
         if (isDoubleBattle
-          && AI_WhoStrikesFirst(BATTLE_PARTNER(battlerAtk), battlerDef) == AI_IS_SLOWER) // Attacker partner wouldn't go before target
+          && AI_WhoStrikesFirst(BATTLE_PARTNER(battlerAtk), battlerDef, AI_DATA->partnerMove) == AI_IS_SLOWER) // Attacker partner wouldn't go before target
             score++;
         break;
     case EFFECT_TAILWIND:
@@ -4552,7 +4575,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (IsBattlerGrounded(battlerAtk) && HasDamagingMoveOfType(battlerDef, TYPE_ELECTRIC)
           && !(AI_GetTypeEffectiveness(MOVE_EARTHQUAKE, battlerDef, battlerAtk) == AI_EFFECTIVENESS_x0)) // Doesn't resist ground move
         {
-            if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER) // Attacker goes first
+            if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER) // Attacker goes first
            {
                 if (gBattleMoves[predictedMove].type == TYPE_GROUND)
                     score += 3; // Cause the enemy's move to fail
@@ -4567,7 +4590,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         }
         break;
     case EFFECT_CAMOUFLAGE:
-        if (predictedMove != MOVE_NONE && AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER // Attacker goes first
+        if (predictedMove != MOVE_NONE && AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER // Attacker goes first
           && !IS_MOVE_STATUS(move) && AI_GetTypeEffectiveness(predictedMove, battlerDef, battlerAtk) != AI_EFFECTIVENESS_x0)
             score++;
         break;
@@ -4610,7 +4633,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         }
         break;
     case EFFECT_FLAIL:
-        if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER)  // Ai goes first
+        if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER)  // Ai goes first
         {
             if (AI_DATA->hpPercents[battlerAtk] < 20)
                 score++;
@@ -4652,7 +4675,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score += 2;
         break;
     case EFFECT_ENDEAVOR:
-        if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_SLOWER)  // Opponent faster
+        if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER)  // Opponent faster
         {
             if (AI_DATA->hpPercents[battlerAtk] < 40)
                 score++;
@@ -4683,7 +4706,7 @@ static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         return score;
     
     if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_SMART_SWITCHING 
-      && AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_SLOWER
+      && AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER
       && CanTargetFaintAi(battlerDef, battlerAtk)
       && GetMovePriority(battlerAtk, move) == 0)
     {

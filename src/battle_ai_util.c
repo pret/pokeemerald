@@ -440,9 +440,14 @@ static const u16 sOtherMoveCallingMoves[] =
 };
 
 // Functions
+u16 GetAIChosenMove(u8 battlerId)
+{
+    return (gBattleMons[battlerId].moves[gBattleStruct->aiMoveOrAction[battlerId]]);
+}
+
 bool32 WillAIStrikeFirst(void)
 {
-    return (AI_WhoStrikesFirst(sBattler_AI, gBattlerTarget) == AI_IS_FASTER);
+    return (AI_WhoStrikesFirst(sBattler_AI, gBattlerTarget, AI_THINKING_STRUCT->moveConsidered) == AI_IS_FASTER);
 }
 
 bool32 AI_RandLessThan(u8 val)
@@ -638,7 +643,7 @@ bool32 IsTruantMonVulnerable(u32 battlerAI, u32 opposingBattler)
         u32 move = gBattleResources->battleHistory->usedMoves[opposingBattler][i];
         if (gBattleMoves[move].effect == EFFECT_PROTECT && move != MOVE_ENDURE)
             return TRUE;
-        if (gBattleMoves[move].effect == EFFECT_SEMI_INVULNERABLE && AI_WhoStrikesFirst(battlerAI, opposingBattler) == AI_IS_SLOWER)
+        if (gBattleMoves[move].effect == EFFECT_SEMI_INVULNERABLE && AI_WhoStrikesFirst(battlerAI, opposingBattler, GetAIChosenMove(battlerAI)) == AI_IS_SLOWER)
             return TRUE;
     }
     return FALSE;
@@ -987,23 +992,25 @@ static u8 AI_GetEffectiveness(u16 multiplier)
     * AI_IS_FASTER: is user(ai) faster
     * AI_IS_SLOWER: is target faster
 */
-u8 AI_WhoStrikesFirst(u8 battlerAI, u8 battler2)
+u8 AI_WhoStrikesFirst(u8 battlerAI, u8 battler2, u16 moveConsidered)
 {
     u32 fasterAI = 0, fasterPlayer = 0, i;
     s8 prioAI = 0;
     s8 prioPlayer = 0;
+    s8 prioBattler2 = 0;
+    u16 *battler2Moves = GetMovesArray(battler2);
 
     // Check move priorities first.
-    prioAI = GetMovePriority(battlerAI, AI_THINKING_STRUCT->moveConsidered);
+    prioAI = GetMovePriority(battlerAI, moveConsidered);
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (gBattleMons[battler2].moves[i] == 0 || gBattleMons[battler2].moves[i] == 0xFFFF)
+        if (battler2Moves[i] == 0 || battler2Moves[i] == 0xFFFF)
             continue;
 
-        prioPlayer = GetMovePriority(battler2, gBattleMons[battler2].moves[i]);
-        if (prioAI > prioPlayer)
+        prioBattler2 = GetMovePriority(battler2, battler2Moves[i]);
+        if (prioAI > prioBattler2)
             fasterAI++;
-        else if (prioPlayer > prioAI)
+        else if (prioBattler2 > prioAI)
             fasterPlayer++;
     }
 
@@ -1017,6 +1024,8 @@ u8 AI_WhoStrikesFirst(u8 battlerAI, u8 battler2)
     }
     else
     {
+        if (prioAI > prioBattler2)
+            return AI_IS_FASTER;    // if we didn't know any of battler 2's moves to compare priorities, assume they don't have a prio+ move
         // Priorities are the same(at least comparing to moves the AI is aware of), decide by speed.
         if (GetWhoStrikesFirst(battlerAI, battler2, TRUE) == 0)
             return AI_IS_FASTER;
@@ -2422,7 +2431,7 @@ bool32 ShouldPivot(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u8 mo
         /*if (IsPredictedToSwitch(battlerDef, battlerAtk) && !hasStatBoost)
             return PIVOT; // Try pivoting so you can switch to a better matchup to counter your new opponent*/
 
-        if (AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER) // Attacker goes first
+        if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER) // Attacker goes first
         {
             if (!CanAIFaintTarget(battlerAtk, battlerDef, 0)) // Can't KO foe otherwise
             {
@@ -2782,7 +2791,7 @@ u32 ShouldTryToFlinch(u8 battlerAtk, u8 battlerDef, u16 atkAbility, u16 defAbili
 {
     if (defAbility == ABILITY_INNER_FOCUS
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
-      || AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_SLOWER) // Opponent goes first
+      || AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER) // Opponent goes first
     {
         return 0;   // don't try to flinch
     }
@@ -2906,7 +2915,7 @@ bool32 ShouldUseRecoilMove(u8 battlerAtk, u8 battlerDef, u32 recoilDmg, u8 moveI
 
 bool32 ShouldAbsorb(u8 battlerAtk, u8 battlerDef, u16 move, s32 damage)
 {
-    if (move == 0xFFFF || AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER)
+    if (move == 0xFFFF || AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER)
     {
         // using item or user goes first
         u8 healPercent = (gBattleMoves[move].argument == 0) ? 50 : gBattleMoves[move].argument;
@@ -2933,7 +2942,7 @@ bool32 ShouldAbsorb(u8 battlerAtk, u8 battlerDef, u16 move, s32 damage)
 
 bool32 ShouldRecover(u8 battlerAtk, u8 battlerDef, u16 move, u8 healPercent)
 {
-    if (move == 0xFFFF || AI_WhoStrikesFirst(battlerAtk, battlerDef) == AI_IS_FASTER)
+    if (move == 0xFFFF || AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER)
     {
         // using item or user going first
         s32 damage = AI_DATA->simulatedDmg[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex];
