@@ -45,6 +45,7 @@
 #include "constants/layouts.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
+#include "constants/tms_hms.h"
 #include "constants/trainers.h"
 
 struct SpeciesItem
@@ -6186,12 +6187,12 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
     else if (tm < 32)
     {
         u32 mask = 1 << tm;
-        return gTMHMLearnsets[species][0] & mask;
+        return gTMHMLearnsets[species].as_u32s[0] & mask;
     }
     else
     {
         u32 mask = 1 << (tm - 32);
-        return gTMHMLearnsets[species][1] & mask;
+        return gTMHMLearnsets[species].as_u32s[1] & mask;
     }
 }
 
@@ -6204,12 +6205,12 @@ u32 CanSpeciesLearnTMHM(u16 species, u8 tm)
     else if (tm < 32)
     {
         u32 mask = 1 << tm;
-        return gTMHMLearnsets[species][0] & mask;
+        return gTMHMLearnsets[species].as_u32s[0] & mask;
     }
     else
     {
         u32 mask = 1 << (tm - 32);
-        return gTMHMLearnsets[species][1] & mask;
+        return gTMHMLearnsets[species].as_u32s[1] & mask;
     }
 }
 
