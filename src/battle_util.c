@@ -1696,6 +1696,7 @@ bool32 IsHealBlockPreventingMove(u32 battler, u32 move)
     case EFFECT_DREAM_EATER:
 #endif
     case EFFECT_MORNING_SUN:
+    case EFFECT_SYNTHESIS:
     case EFFECT_MOONLIGHT:
     case EFFECT_RESTORE_HP:
     case EFFECT_REST:
