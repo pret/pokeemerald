@@ -992,7 +992,7 @@ static void AnimTask_RotateMonSpriteToSide_Step(u8 taskId)
     }
 }
 
-void AnimTask_ShakeTargetBasedOnMovePowerOrDmg(u8 taskId)
+void SetupShakeBattlerBasedOnMovePowerOrDmg(u8 taskId, u8 animBattlerId)
 {
     if (!gBattleAnimArgs[0])
     {
@@ -1023,12 +1023,23 @@ void AnimTask_ShakeTargetBasedOnMovePowerOrDmg(u8 taskId)
     gTasks[taskId].data[12] = 0;
     gTasks[taskId].data[10] = gBattleAnimArgs[3];
     gTasks[taskId].data[11] = gBattleAnimArgs[4];
-    gTasks[taskId].data[7] = GetAnimBattlerSpriteId(ANIM_TARGET);
+    gTasks[taskId].data[7] = GetAnimBattlerSpriteId(animBattlerId);
     gTasks[taskId].data[8] = gSprites[gTasks[taskId].data[7]].x2;
     gTasks[taskId].data[9] = gSprites[gTasks[taskId].data[7]].y2;
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = gBattleAnimArgs[1];
     gTasks[taskId].data[2] = gBattleAnimArgs[2];
+}
+
+void AnimTask_ShakeTargetPartnerBasedOnMovePowerOrDmg(u8 taskId)
+{
+    SetupShakeBattlerBasedOnMovePowerOrDmg(taskId, ANIM_DEF_PARTNER);
+    gTasks[taskId].func = AnimTask_ShakeTargetBasedOnMovePowerOrDmg_Step;
+}
+
+void AnimTask_ShakeTargetBasedOnMovePowerOrDmg(u8 taskId)
+{
+    SetupShakeBattlerBasedOnMovePowerOrDmg(taskId, ANIM_TARGET);
     gTasks[taskId].func = AnimTask_ShakeTargetBasedOnMovePowerOrDmg_Step;
 }
 

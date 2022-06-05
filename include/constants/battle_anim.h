@@ -532,6 +532,8 @@
 #define B_ANIM_STRONG_WINDS             30
 #define B_ANIM_PRIMAL_REVERSION         31
 #define B_ANIM_AQUA_RING_HEAL           32
+#define B_ANIM_BEAK_BLAST_SETUP         33
+#define B_ANIM_SHELL_TRAP_SETUP         34
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
@@ -570,6 +572,7 @@
 #define TRAP_ANIM_SAND_TOMB 4
 #define TRAP_ANIM_MAGMA_STORM 5
 #define TRAP_ANIM_INFESTATION 6
+#define TRAP_ANIM_SNAP_TRAP 7
 
 // Weather defines for battle animation scripts.
 #define ANIM_WEATHER_NONE 0

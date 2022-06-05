@@ -1,4 +1,3 @@
-#include "constants/easy_chat.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
 #include "constants/moves.h"

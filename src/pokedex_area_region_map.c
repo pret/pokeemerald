@@ -8,11 +8,11 @@
 
 static EWRAM_DATA u8 *sPokedexAreaMapBgNum = NULL;
 
-static const u16 sPokedexAreaMap_Pal[] = INCBIN_U16("graphics/interface/region_map.gbapal");
-static const u32 sPokedexAreaMap_Gfx[] = INCBIN_U32("graphics/interface/region_map.8bpp.lz");
-static const u32 sPokedexAreaMap_Tilemap[] = INCBIN_U32("graphics/interface/region_map.bin.lz");
-static const u32 sPokedexAreaMapAffine_Gfx[] = INCBIN_U32("graphics/interface/region_map_affine.8bpp.lz");
-static const u32 sPokedexAreaMapAffine_Tilemap[] = INCBIN_U32("graphics/interface/region_map_affine.bin.lz");
+static const u16 sPokedexAreaMap_Pal[] = INCBIN_U16("graphics/pokedex/region_map.gbapal");
+static const u32 sPokedexAreaMap_Gfx[] = INCBIN_U32("graphics/pokedex/region_map.8bpp.lz");
+static const u32 sPokedexAreaMap_Tilemap[] = INCBIN_U32("graphics/pokedex/region_map.bin.lz");
+static const u32 sPokedexAreaMapAffine_Gfx[] = INCBIN_U32("graphics/pokedex/region_map_affine.8bpp.lz");
+static const u32 sPokedexAreaMapAffine_Tilemap[] = INCBIN_U32("graphics/pokedex/region_map_affine.bin.lz");
 
 void LoadPokedexAreaMapGfx(const struct PokedexAreaMapTemplate *template)
 {
@@ -41,7 +41,7 @@ void LoadPokedexAreaMapGfx(const struct PokedexAreaMapTemplate *template)
     ChangeBgX(template->bg, 0, BG_COORD_SET);
     ChangeBgY(template->bg, 0, BG_COORD_SET);
     SetBgAttribute(template->bg, BG_ATTR_PALETTEMODE, 1);
-    CpuCopy32(sPokedexAreaMap_Pal, &gPlttBufferUnfaded[0x70], 0x60);
+    CpuCopy32(sPokedexAreaMap_Pal, &gPlttBufferUnfaded[0x70], sizeof(sPokedexAreaMap_Pal));
     *sPokedexAreaMapBgNum = template->bg;
 }
 

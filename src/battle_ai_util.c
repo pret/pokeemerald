@@ -1019,9 +1019,9 @@ u8 AI_WhoStrikesFirst(u8 battlerAI, u8 battler2)
     {
         // Priorities are the same(at least comparing to moves the AI is aware of), decide by speed.
         if (GetWhoStrikesFirst(battlerAI, battler2, TRUE) == 0)
-            return TRUE;
+            return AI_IS_FASTER;
         else
-            return FALSE;
+            return AI_IS_SLOWER;
     }
 }
 
@@ -1245,6 +1245,16 @@ bool32 AI_WeatherHasEffect(void)
     return WEATHER_HAS_EFFECT;  // weather damping abilities are announced
 }
 
+u32 AI_GetBattlerMoveTargetType(u8 battlerId, u16 move)
+{
+    u32 target;
+
+    if (gBattleMoves[move].effect == EFFECT_EXPANDING_FORCE && AI_IsTerrainAffected(battlerId, STATUS_FIELD_PSYCHIC_TERRAIN))
+        return MOVE_TARGET_BOTH;
+    else
+        return gBattleMoves[move].target;
+}
+
 bool32 IsAromaVeilProtectedMove(u16 move)
 {
     u32 i;
@@ -1424,6 +1434,10 @@ bool32 ShouldTryOHKO(u8 battlerAtk, u8 battlerDef, u16 atkAbility, u16 defAbilit
     else    // test the odds
     {
         u16 odds = accuracy + (gBattleMons[battlerAtk].level - gBattleMons[battlerDef].level);
+        #if B_SHEER_COLD_ACC >= GEN_7
+            if (gCurrentMove == MOVE_SHEER_COLD && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE))
+                odds -= 10;
+        #endif
         if (Random() % 100 + 1 < odds && gBattleMons[battlerAtk].level >= gBattleMons[battlerDef].level)
             return TRUE;
     }
@@ -1439,7 +1453,6 @@ bool32 ShouldSetSandstorm(u8 battler, u16 ability, u16 holdEffect)
 
     if (ability == ABILITY_SAND_VEIL
       || ability == ABILITY_SAND_RUSH
-      || ability == ABILITY_SAND_FORCE
       || ability == ABILITY_SAND_FORCE
       || ability == ABILITY_OVERCOAT
       || ability == ABILITY_MAGIC_GUARD
@@ -1855,7 +1868,7 @@ bool32 HasMoveWithLowAccuracy(u8 battlerAtk, u8 battlerDef, u8 accCheck, bool32 
             if (ignoreStatus && IS_MOVE_STATUS(moves[i]))
                 continue;
             else if ((!IS_MOVE_STATUS(moves[i]) && gBattleMoves[moves[i]].accuracy == 0)
-              || gBattleMoves[moves[i]].target & (MOVE_TARGET_USER | MOVE_TARGET_OPPONENTS_FIELD))
+              || AI_GetBattlerMoveTargetType(battlerAtk, moves[i]) & (MOVE_TARGET_USER | MOVE_TARGET_OPPONENTS_FIELD))
                 continue;
 
             if (AI_GetMoveAccuracy(battlerAtk, battlerDef, moves[i]) <= accCheck)

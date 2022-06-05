@@ -357,6 +357,7 @@ static void HandleInputChooseTarget(void)
     s32 i;
     static const u8 identities[MAX_BATTLERS_COUNT] = {B_POSITION_PLAYER_LEFT, B_POSITION_PLAYER_RIGHT, B_POSITION_OPPONENT_RIGHT, B_POSITION_OPPONENT_LEFT};
     u16 move = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + gMoveSelectionCursor[gActiveBattler]);
+    u16 moveTarget = GetBattlerMoveTargetType(gActiveBattler, move);
 
     DoBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX, 15, 1);
     for (i = 0; i < gBattlersCount; i++)
@@ -397,7 +398,7 @@ static void HandleInputChooseTarget(void)
         PlaySE(SE_SELECT);
         gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCb_HideAsMoveTarget;
 
-        if (gBattleMoves[move].target == (MOVE_TARGET_USER | MOVE_TARGET_ALLY))
+        if (moveTarget == (MOVE_TARGET_USER | MOVE_TARGET_ALLY))
         {
             gMultiUsePlayerCursor ^= BIT_FLANK;
         }
@@ -426,7 +427,7 @@ static void HandleInputChooseTarget(void)
                 case B_POSITION_PLAYER_RIGHT:
                     if (gActiveBattler != gMultiUsePlayerCursor)
                         i++;
-                    else if (gBattleMoves[move].target & MOVE_TARGET_USER_OR_SELECTED)
+                    else if (moveTarget & MOVE_TARGET_USER_OR_SELECTED)
                         i++;
                     break;
                 case B_POSITION_OPPONENT_LEFT:
@@ -435,7 +436,8 @@ static void HandleInputChooseTarget(void)
                     break;
                 }
 
-                if (gAbsentBattlerFlags & gBitTable[gMultiUsePlayerCursor])
+                if (gAbsentBattlerFlags & gBitTable[gMultiUsePlayerCursor]
+                 || !CanTargetBattler(gActiveBattler, gMultiUsePlayerCursor, move))
                     i = 0;
             } while (i == 0);
         }
@@ -446,7 +448,7 @@ static void HandleInputChooseTarget(void)
         PlaySE(SE_SELECT);
         gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCb_HideAsMoveTarget;
 
-        if (gBattleMoves[move].target == (MOVE_TARGET_USER | MOVE_TARGET_ALLY))
+        if (moveTarget == (MOVE_TARGET_USER | MOVE_TARGET_ALLY))
         {
             gMultiUsePlayerCursor ^= BIT_FLANK;
         }
@@ -475,7 +477,7 @@ static void HandleInputChooseTarget(void)
                 case B_POSITION_PLAYER_RIGHT:
                     if (gActiveBattler != gMultiUsePlayerCursor)
                         i++;
-                    else if (gBattleMoves[move].target & MOVE_TARGET_USER_OR_SELECTED)
+                    else if (moveTarget & MOVE_TARGET_USER_OR_SELECTED)
                         i++;
                     break;
                 case B_POSITION_OPPONENT_LEFT:
@@ -484,7 +486,8 @@ static void HandleInputChooseTarget(void)
                     break;
                 }
 
-                if (gAbsentBattlerFlags & gBitTable[gMultiUsePlayerCursor])
+                if (gAbsentBattlerFlags & gBitTable[gMultiUsePlayerCursor]
+                 || !CanTargetBattler(gActiveBattler, gMultiUsePlayerCursor, move))
                     i = 0;
             } while (i == 0);
         }
@@ -608,7 +611,7 @@ static void HandleInputChooseMove(void)
         }
         else
         {
-            moveTarget = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].target;
+            moveTarget = GetBattlerMoveTargetType(gActiveBattler, moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]);
         }
 
         if (moveTarget & MOVE_TARGET_USER)
@@ -2659,16 +2662,9 @@ static void PlayerHandleMoveAnimation(void)
         gWeatherMoveAnim = gBattleResources->bufferA[gActiveBattler][12] | (gBattleResources->bufferA[gActiveBattler][13] << 8);
         gAnimDisableStructPtr = (struct DisableStruct *)&gBattleResources->bufferA[gActiveBattler][16];
         gTransformedPersonalities[gActiveBattler] = gAnimDisableStructPtr->transformedMonPersonality;
-        if (IsMoveWithoutAnimation(move, gAnimMoveTurn)) // Always returns FALSE.
-        {
-            PlayerBufferExecCompleted();
-        }
-        else
-        {
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
-            gBattlerControllerFuncs[gActiveBattler] = PlayerDoMoveAnimation;
-            BattleTv_SetDataBasedOnMove(move, gWeatherMoveAnim, gAnimDisableStructPtr);
-        }
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
+        gBattlerControllerFuncs[gActiveBattler] = PlayerDoMoveAnimation;
+        BattleTv_SetDataBasedOnMove(move, gWeatherMoveAnim, gAnimDisableStructPtr);
     }
 }
 
@@ -2732,7 +2728,7 @@ static void PlayerHandlePrintString(void)
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter2;
     BattleTv_SetDataBasedOnString(*stringId);
-    BattleArena_DeductMindPoints(gActiveBattler, *stringId);
+    BattleArena_DeductSkillPoints(gActiveBattler, *stringId);
 }
 
 static void PlayerHandlePrintSelectionString(void)

@@ -60,6 +60,7 @@ bool32 IsAbilityOfRating(u16 ability, s8 rating);
 s8 GetAbilityRating(u16 ability);
 bool32 AI_IsAbilityOnSide(u32 battlerId, u32 ability);
 bool32 AI_MoveMakesContact(u32 ability, u32 holdEffect, u16 move);
+u32 AI_GetBattlerMoveTargetType(u8 battlerId, u16 move);
 
 // stat stage checks
 bool32 AnyStatIsRaised(u8 battlerId);
