@@ -29,6 +29,7 @@
 #include "load_save.h"
 #include "battle_dome.h"
 #include "constants/battle_frontier.h"
+#include "constants/battle_pike.h"
 #include "constants/frontier_util.h"
 #include "constants/trainers.h"
 #include "constants/game_stat.h"
@@ -968,7 +969,7 @@ static void PrintHyphens(s32 y)
     s32 i;
     u8 text[37];
 
-    for (i = 0; i < 36; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(text) - 1; i++)
         text[i] = CHAR_HYPHEN;
     text[i] = EOS;
 
@@ -1860,25 +1861,25 @@ static void GiveBattlePoints(void)
     switch (facility)
     {
     case FRONTIER_FACILITY_TOWER:
-        challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] / 7;
+        challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
         break;
     case FRONTIER_FACILITY_DOME:
         challengeNum = gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode];
         break;
     case FRONTIER_FACILITY_PALACE:
-        challengeNum = gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] / 7;
+        challengeNum = gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
         break;
     case FRONTIER_FACILITY_ARENA:
-        challengeNum = gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] / 7;
+        challengeNum = gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
         break;
     case FRONTIER_FACILITY_FACTORY:
-        challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / 7;
+        challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
         break;
     case FRONTIER_FACILITY_PIKE:
-        challengeNum = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] / 14;
+        challengeNum = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] / NUM_PIKE_ROOMS;
         break;
     case FRONTIER_FACILITY_PYRAMID:
-        challengeNum = gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] / 7;
+        challengeNum = gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
         break;
     }
 
@@ -1982,7 +1983,7 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
 
     if (gFrontierBannedSpecies[i] != 0xFFFF)
         return;
-    if (lvlMode == FRONTIER_LVL_50 && monLevel > 50)
+    if (lvlMode == FRONTIER_LVL_50 && monLevel > FRONTIER_MAX_LEVEL_50)
         return;
 
     for (i = 0; i < *count && speciesArray[i] != species; i++)
