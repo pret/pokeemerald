@@ -47,7 +47,7 @@ const u8 gBattleAnimBgCntGet[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFS
 
 void AnimTask_BlendBattleAnimPal(u8 taskId)
 {
-    u32 selectedPalettes = UnpackSelectedBattleBgPalettes(gBattleAnimArgs[0]);
+    u32 selectedPalettes = UnpackSelectedBattlePalettes(gBattleAnimArgs[0]);
     selectedPalettes |= GetBattleMonSpritePalettesMask((gBattleAnimArgs[0] >>  7) & 1,
                                     (gBattleAnimArgs[0] >>  8) & 1,
                                     (gBattleAnimArgs[0] >>  9) & 1,
@@ -62,7 +62,7 @@ void AnimTask_BlendBattleAnimPalExclude(u8 taskId)
     u8 animBattlers[2];
 
     animBattlers[1] = 0xFF;
-    selectedPalettes = UnpackSelectedBattleBgPalettes(1);
+    selectedPalettes = UnpackSelectedBattlePalettes(F_PAL_BG);
     switch (gBattleAnimArgs[0])
     {
     case 2:
@@ -105,7 +105,7 @@ void AnimTask_BlendBattleAnimPalExclude(u8 taskId)
 
 void AnimTask_SetCamouflageBlend(u8 taskId)
 {
-    u32 selectedPalettes = UnpackSelectedBattleBgPalettes(gBattleAnimArgs[0]);
+    u32 selectedPalettes = UnpackSelectedBattlePalettes(gBattleAnimArgs[0]);
     switch (gBattleTerrain)
     {
     case BATTLE_TERRAIN_GRASS:
@@ -606,7 +606,7 @@ void AnimTask_Flash(u8 taskId)
     SetPalettesToColor(selectedPalettes, RGB_BLACK);
     gTasks[taskId].data[14] = selectedPalettes >> 16;
 
-    selectedPalettes = GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0) & 0xFFFF;
+    selectedPalettes = GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE) & 0xFFFF;
     SetPalettesToColor(selectedPalettes, RGB_WHITEALPHA);
     gTasks[taskId].data[15] = selectedPalettes;
 
@@ -922,7 +922,7 @@ void AnimTask_CopyPalUnfadedToBackup(u8 taskId)
 
     if (gBattleAnimArgs[0] == 0)
     {
-        selectedPalettes = GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0);
+        selectedPalettes = GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);
         while ((selectedPalettes & 1) == 0)
         {
             selectedPalettes >>= 1;
@@ -949,7 +949,7 @@ void AnimTask_CopyPalUnfadedFromBackup(u8 taskId)
 
     if (gBattleAnimArgs[0] == 0)
     {
-        selectedPalettes = GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0);
+        selectedPalettes = GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);
         while ((selectedPalettes & 1) == 0)
         {
             selectedPalettes >>= 1;
@@ -976,7 +976,7 @@ void AnimTask_CopyPalFadedToUnfaded(u8 taskId)
 
     if (gBattleAnimArgs[0] == 0)
     {
-        selectedPalettes = GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0);
+        selectedPalettes = GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);
         while ((selectedPalettes & 1) == 0)
         {
             selectedPalettes >>= 1;

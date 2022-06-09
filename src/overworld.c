@@ -2477,9 +2477,9 @@ static u16 KeyInterCB_ReadButtons(u32 key)
     return LINK_KEY_CODE_EMPTY;
 }
 
-static u16 GetDirectionForDpadKey(u16 a1)
+static u16 GetDirectionForDpadKey(u16 key)
 {
-    switch (a1)
+    switch (key)
     {
     case LINK_KEY_CODE_DPAD_RIGHT:
         return FACING_RIGHT;
@@ -2598,7 +2598,7 @@ static u16 KeyInterCB_Ready(u32 keyOrPlayerId)
     }
 }
 
-static u16 KeyInterCB_SetReady(u32 a1)
+static u16 KeyInterCB_SetReady(u32 key)
 {
     SetKeyInterceptCallback(KeyInterCB_Ready);
     return LINK_KEY_CODE_READY;

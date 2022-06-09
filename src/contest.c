@@ -93,7 +93,7 @@ static void Task_ContestReturnToField(u8);
 static void FieldCB_ContestReturnToField(void);
 static bool8 IsPlayerLinkLeader(void);
 static void PrintContestantTrainerName(u8);
-static void PrintContestantTrainerNameWithColor(u8 a0, u8 a1);
+static void PrintContestantTrainerNameWithColor(u8, u8);
 static void PrintContestantMonName(u8);
 static void PrintContestantMonNameWithColor(u8, u8);
 static u8 CreateJudgeSprite(void);
@@ -3186,14 +3186,14 @@ static u16 GetMoveEffectSymbolTileOffset(u16 move, u8 contestant)
     return offset;
 }
 
-static void PrintContestMoveDescription(u16 a)
+static void PrintContestMoveDescription(u16 move)
 {
     u8 category;
     u16 categoryTile;
     u8 numHearts;
 
     // The contest category icon is implemented as a 5x2 group of tiles.
-    category = gContestMoves[a].contestCategory;
+    category = gContestMoves[move].contestCategory;
     if      (category == CONTEST_CATEGORY_COOL)
         categoryTile = 0x4040;
     else if (category == CONTEST_CATEGORY_BEAUTY)
@@ -3209,27 +3209,27 @@ static void PrintContestMoveDescription(u16 a)
     ContestBG_FillBoxWithIncrementingTile(0, categoryTile + 0x10, 0x0b, 0x20, 0x05, 0x01, 0x11, 0x01);
 
     // Appeal hearts
-    if (gContestEffects[gContestMoves[a].effect].appeal == 0xFF)
+    if (gContestEffects[gContestMoves[move].effect].appeal == 0xFF)
         numHearts = 0;
     else
-        numHearts = gContestEffects[gContestMoves[a].effect].appeal / 10;
+        numHearts = gContestEffects[gContestMoves[move].effect].appeal / 10;
     if (numHearts > MAX_CONTEST_MOVE_HEARTS)
         numHearts = MAX_CONTEST_MOVE_HEARTS;
     ContestBG_FillBoxWithTile(0, TILE_EMPTY_APPEAL_HEART, 0x15, 0x1f, MAX_CONTEST_MOVE_HEARTS, 0x01, 0x11);
     ContestBG_FillBoxWithTile(0, TILE_FILLED_APPEAL_HEART, 0x15, 0x1f, numHearts, 0x01, 0x11);
 
     // Jam hearts
-    if (gContestEffects[gContestMoves[a].effect].jam == 0xFF)
+    if (gContestEffects[gContestMoves[move].effect].jam == 0xFF)
         numHearts = 0;
     else
-        numHearts = gContestEffects[gContestMoves[a].effect].jam / 10;
+        numHearts = gContestEffects[gContestMoves[move].effect].jam / 10;
     if (numHearts > MAX_CONTEST_MOVE_HEARTS)
         numHearts = MAX_CONTEST_MOVE_HEARTS;
     ContestBG_FillBoxWithTile(0, TILE_EMPTY_JAM_HEART, 0x15, 0x20, MAX_CONTEST_MOVE_HEARTS, 0x01, 0x11);
     ContestBG_FillBoxWithTile(0, TILE_FILLED_JAM_HEART, 0x15, 0x20, numHearts, 0x01, 0x11);
 
     FillWindowPixelBuffer(WIN_MOVE_DESCRIPTION, PIXEL_FILL(0));
-    Contest_PrintTextToBg0WindowStd(WIN_MOVE_DESCRIPTION, gContestEffectDescriptionPointers[gContestMoves[a].effect]);
+    Contest_PrintTextToBg0WindowStd(WIN_MOVE_DESCRIPTION, gContestEffectDescriptionPointers[gContestMoves[move].effect]);
     Contest_PrintTextToBg0WindowStd(WIN_SLASH, gText_Slash);
 }
 
@@ -4537,14 +4537,14 @@ static void CalculateAppealMoveImpact(u8 contestant)
     eContestantStatus[contestant].contestantAnimTarget = i;
 }
 
-void SetContestantEffectStringID(u8 a, u8 b)
+void SetContestantEffectStringID(u8 contestant, u8 effectStringId)
 {
-    eContestantStatus[a].effectStringId = b;
+    eContestantStatus[contestant].effectStringId = effectStringId;
 }
 
-void SetContestantEffectStringID2(u8 a, u8 b)
+void SetContestantEffectStringID2(u8 contestant, u8 effectStringId)
 {
-    eContestantStatus[a].effectStringId2 = b;
+    eContestantStatus[contestant].effectStringId2 = effectStringId;
 }
 
 void SetStartledString(u8 contestant, u8 jam)
