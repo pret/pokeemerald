@@ -1158,11 +1158,11 @@ u8 GetBattlePikeWildMonHeaderId(void)
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
 
-    if (winStreak <= 280)
+    if (winStreak <= 20 * NUM_PIKE_ROOMS)
         headerId = 0;
-    else if (winStreak <= 560)
+    else if (winStreak <= 40 * NUM_PIKE_ROOMS)
         headerId = 1;
-    else if (winStreak <= 840)
+    else if (winStreak <= 60 * NUM_PIKE_ROOMS)
         headerId = 2;
     else
         headerId = 3;
@@ -1392,7 +1392,7 @@ static void PrepareOneTrainer(bool8 difficult)
     if (!difficult)
         battleNum = 1;
     else
-        battleNum = 6;
+        battleNum = FRONTIER_STAGES_PER_CHALLENGE - 1;
 
     lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     challengeNum = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] / NUM_PIKE_ROOMS;

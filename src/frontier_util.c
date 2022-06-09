@@ -595,13 +595,13 @@ static const u8 sBattlePointAwards[][NUM_FRONTIER_FACILITIES][FRONTIER_MODE_COUN
 // First bit is has battled them before and not won yet, second bit is has battled them and won (obtained a Symbol)
 static const u16 sBattledBrainBitFlags[NUM_FRONTIER_FACILITIES][2] =
 {
-    [FRONTIER_FACILITY_TOWER]   = {0x0001, 0x0002},
-    [FRONTIER_FACILITY_DOME]    = {0x0004, 0x0008},
-    [FRONTIER_FACILITY_PALACE]  = {0x0010, 0x0020},
-    [FRONTIER_FACILITY_ARENA]   = {0x0040, 0x0080},
-    [FRONTIER_FACILITY_FACTORY] = {0x0100, 0x0200},
-    [FRONTIER_FACILITY_PIKE]    = {0x0400, 0x0800},
-    [FRONTIER_FACILITY_PYRAMID] = {0x1000, 0x2000},
+    [FRONTIER_FACILITY_TOWER]   = {1 << 0, 1 << 1},
+    [FRONTIER_FACILITY_DOME]    = {1 << 2, 1 << 3},
+    [FRONTIER_FACILITY_PALACE]  = {1 << 4, 1 << 5},
+    [FRONTIER_FACILITY_ARENA]   = {1 << 6, 1 << 7},
+    [FRONTIER_FACILITY_FACTORY] = {1 << 8, 1 << 9},
+    [FRONTIER_FACILITY_PIKE]    = {1 << 10, 1 << 11},
+    [FRONTIER_FACILITY_PYRAMID] = {1 << 12, 1 << 13},
 };
 
 static void (* const sFrontierUtilFuncs[])(void) =
@@ -636,8 +636,8 @@ static const struct WindowTemplate sFrontierResultsWindowTemplate =
     .bg = 0,
     .tilemapLeft = 1,
     .tilemapTop = 1,
-    .width = 0x1c,
-    .height = 0x12,
+    .width = 28,
+    .height = 18,
     .paletteNum = 15,
     .baseBlock = 1
 };
@@ -647,7 +647,7 @@ static const struct WindowTemplate sLinkContestResultsWindowTemplate =
     .bg = 0,
     .tilemapLeft = 2,
     .tilemapTop = 2,
-    .width = 0x1a,
+    .width = 26,
     .height = 15,
     .paletteNum = 15,
     .baseBlock = 1
@@ -658,7 +658,7 @@ static const struct WindowTemplate sRankingHallRecordsWindowTemplate =
     .bg = 0,
     .tilemapLeft = 2,
     .tilemapTop = 1,
-    .width = 0x1a,
+    .width = 26,
     .height = 17,
     .paletteNum = 15,
     .baseBlock = 1
@@ -959,7 +959,7 @@ static bool8 IsWinStreakActive(u32 challenge)
 
 static void PrintAligned(const u8 *str, s32 y)
 {
-    s32 x = GetStringCenterAlignXOffset(FONT_NORMAL, str, 224);
+    s32 x = GetStringCenterAlignXOffset(FONT_NORMAL, str, DISPLAY_WIDTH - 16);
     y = (y * 8) + 1;
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, str, x, y, TEXT_SKIP_DRAW, NULL);
 }
@@ -2345,7 +2345,7 @@ static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
     StringCopy(gStringVar1, sRecordsWindowChallengeTexts[hallFacilityId][0]);
     StringExpandPlaceholders(gStringVar4, sRecordsWindowChallengeTexts[hallFacilityId][1]);
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
-    x = GetStringRightAlignXOffset(FONT_NORMAL, sLevelModeText[lvlMode], 0xD0);
+    x = GetStringRightAlignXOffset(FONT_NORMAL, sLevelModeText[lvlMode], DISPLAY_WIDTH - 32);
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, sLevelModeText[lvlMode], x, 1, TEXT_SKIP_DRAW, NULL);
     if (hallFacilityId == RANKING_HALL_TOWER_LINK)
     {

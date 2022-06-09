@@ -1327,19 +1327,19 @@ void PutNewBattleTowerRecord(struct EmeraldBattleTowerRecord *newRecordEm)
             if (gSaveBlock2Ptr->frontier.towerRecords[i].trainerId[j] != newRecord->trainerId[j])
                 break;
         }
-        if (j == 4)
+        if (j == TRAINER_ID_LENGTH)
         {
             for (k = 0; k < PLAYER_NAME_LENGTH; k++)
             {
-                #ifdef BUGFIX
-                if (gSaveBlock2Ptr->frontier.towerRecords[i].name[k] != newRecord->name[k])
+            // Incorrect index being used
+            #ifdef BUGFIX
+                #define INDEX k
+            #else
+                #define INDEX j
+            #endif
+                if (gSaveBlock2Ptr->frontier.towerRecords[i].name[INDEX] != newRecord->name[INDEX])
                     break;
-                if (newRecord->name[k] == EOS)
-                #else
-                if (gSaveBlock2Ptr->frontier.towerRecords[i].name[j] != newRecord->name[j])
-                    break;
-                if (newRecord->name[j] == EOS)
-                #endif
+                if (newRecord->name[INDEX] == EOS)
                 {
                     k = PLAYER_NAME_LENGTH;
                     break;
@@ -1635,7 +1635,7 @@ static void FillTentTrainerParty(u8 monsCount)
 static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
 {
     s32 i, j;
-    u16 chosenMonIndices[4];
+    u16 chosenMonIndices[MAX_FRONTIER_PARTY_SIZE];
     u8 friendship = MAX_FRIENDSHIP;
     u8 level = SetFacilityPtrsGetLevel();
     u8 fixedIV = 0;
@@ -1651,7 +1651,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
     }
     else if (trainerId == TRAINER_EREADER)
     {
-        for (i = firstMonId; i < firstMonId + 3; i++)
+        for (i = firstMonId; i < firstMonId + FRONTIER_PARTY_SIZE; i++)
             CreateBattleTowerMon(&gEnemyParty[i], &gSaveBlock2Ptr->frontier.ereaderTrainer.party[i - firstMonId]);
         return;
     }
@@ -1676,7 +1676,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
     else
     {
         // Apprentice.
-        for (i = firstMonId; i < firstMonId + 3; i++)
+        for (i = firstMonId; i < firstMonId + FRONTIER_PARTY_SIZE; i++)
             CreateApprenticeMon(&gEnemyParty[i], &gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE], i - firstMonId);
         return;
     }
@@ -1775,7 +1775,7 @@ static void Unused_CreateApprenticeMons(u16 trainerId, u8 firstMonId)
     else
         level = FRONTIER_MAX_LEVEL_50;
 
-    for (i = 0; i != 3; i++)
+    for (i = 0; i != FRONTIER_PARTY_SIZE; i++)
     {
         CreateMonWithEVSpread(&gEnemyParty[firstMonId + i], apprentice->party[i].species, level, fixedIV, 8);
         friendship = MAX_FRIENDSHIP;
@@ -1848,7 +1848,7 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
     }
     else if (trainerId == TRAINER_EREADER)
     {
-        for (i = firstMonId; i < firstMonId + 3; i++)
+        for (i = firstMonId; i < firstMonId + FRONTIER_PARTY_SIZE; i++)
             CreateBattleTowerMon(&gEnemyParty[i], &gSaveBlock2Ptr->frontier.ereaderTrainer.party[i - firstMonId]);
         return;
     }
@@ -2743,8 +2743,8 @@ u16 GetCurrentBattleTowerWinStreak(u8 lvlMode, u8 battleMode)
 {
     u16 winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode];
 
-    if (winStreak > 9999)
-        return 9999;
+    if (winStreak > MAX_STREAK)
+        return MAX_STREAK;
     else
         return winStreak;
 }
