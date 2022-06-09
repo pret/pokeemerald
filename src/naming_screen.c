@@ -1043,7 +1043,7 @@ static void SpriteCB_Cursor(struct Sprite *sprite)
        || sprite->sX != sprite->sPrevX
        || sprite->sY != sprite->sPrevY)
     {
-        sprite->sColor = TEXT_COLOR_TRANSPARENT;
+        sprite->sColor = 0;
         sprite->sColorIncr = 2;
         sprite->sColorDelay = 2;
     }
