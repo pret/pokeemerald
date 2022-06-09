@@ -5324,13 +5324,13 @@ static void AnimWavyMusicNotes_CalcVelocity(s16 x, s16 y, s16* velocX, s16* velo
     if (x < 0)
         xSpeedFactor = -xSpeedFactor;
 
-    x2 = x << 8;
+    x2 = x * 256;
     time = x2 / xSpeedFactor;
     if (time == 0)
         time = 1;
 
     *velocX = x2 / time;
-    *velocY = (y << 8) / time;
+    *velocY = (y * 256) / time;
 }
 
 static void AnimWavyMusicNotes_Step(struct Sprite* sprite)
