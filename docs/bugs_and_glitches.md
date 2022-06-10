@@ -54,14 +54,14 @@ Then edit `BagMenu_MoveCursorCallback` in [src/item_menu.c](https://github.com/p
 Then edit `struct Sprite` in [gflib/sprite.h](https://github.com/pret/pokeemerald/blob/master/gflib/sprite.h):
 
 ```diff
-       /*0x40*/ u16 sheetTileStart;
+    /*0x40*/ u16 sheetTileStart;
 
-       /*0x42*/ u8 subspriteTableNum:6;
-                u8 subspriteMode:2;
+    /*0x42*/ u8 subspriteTableNum:6;
+             u8 subspriteMode:2;
 
-       /*0x43*/ u8 subpriority;
-+		u16 tileTag;
-+		u16 paletteTag;
+    /*0x43*/ u8 subpriority;
++            u16 tileTag;
++            u16 paletteTag;
 ```
 
 and add the following to `CreateSpriteAt` in [gflib/sprite.c](https://github.com/pret/pokeemerald/blob/master/gflib/sprite.c):
