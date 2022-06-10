@@ -22,10 +22,10 @@ Fixes are written in the `diff` format. If you've used Git before, this should l
 ```diff
 +void HideBagItemIconSprite(u8 id)
 +{
-+	u8 *spriteId = &gBagMenu->spriteId[10];
-+	if (spriteId[id] != 0xFF)
++	u8 *spriteId = &gBagMenu->spriteIds[10];
++	if (spriteIds[id] != 0xFF)
 +	{
-+		gSprites[spriteId[id]].invisible = TRUE;
++		gSprites[spriteIds[id]].invisible = TRUE;
 +	}
 +}
 
@@ -48,4 +48,53 @@ Then edit `BagMenu_MoveCursorCallback` in [src/item_menu.c](https://github.com/p
 +	RemoveBagItemIconSprite(gBagMenu->itemIconSlot);
 	if (itemIndex != LIST_CANCEL)
 	...
+```
+
+
+Then edit `struct Sprite` in [gflib/sprite.h](https://github.com/pret/pokeemerald/blob/master/gflib/sprite.h):
+
+```diff
+-	struct Sprite;
++	struct Sprite
++	{
++		u16 tileTag;
++		u16 paletteTag;
++	};
+```
+
+and add the following to `CreateSpriteAt` in [gflib/sprite.c](https://github.com/pret/pokeemerald/blob/master/gflib/sprite.c):
+
+```diff
+	sprite->template = template;
+	sprite->callback = template->callback;
+	sprite->x = x;
+	sprite->y = y;
++	sprite->tileTag = template->tileTag;
++	sprite->paletteTag = template->paletteTag;
+```
+
+Then edit `FreeSpriteTiles` in the same file:
+
+```diff
+	#ifdef UBFIX
+	if (!sprite || !sprite->template)
+	    return;
+	#endif
+
+-	if (sprite->template->tileTag != TAG_NONE)
+-	    FreeSpriteTilesByTag(sprite->template->tileTag);
++	if (sprite->tileTag != TAG_NONE)
++	    FreeSpriteTilesByTag(sprite->tileTag);
+```
+
+as well as `FreeSpritePalette`, also in the same file:
+
+```diff
+	#ifdef UBFIX
+	if (!sprite || !sprite->template)
+	    return;
+	#endif
+
+-	FreeSpritePaletteByTag(sprite->template->paletteTag);
++	FreeSpritePaletteByTag(sprite->paletteTag);
 ```
