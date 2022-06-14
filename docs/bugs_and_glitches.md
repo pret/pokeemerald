@@ -23,7 +23,7 @@ Fixes are written in the `diff` format. If you've used Git before, this should l
 +void HideBagItemIconSprite(u8 id)
 +{
 +	u8 *spriteId = &gBagMenu->spriteIds[10];
-+	if (*spriteId == SPRITE_NONE)
++	if (*spriteId != SPRITE_NONE)
 +	{
 +		gSprites[spriteId[id]].invisible = TRUE;
 +	}
