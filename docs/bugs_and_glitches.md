@@ -21,7 +21,7 @@ Fixes are written in the `diff` format. If you've used Git before, this should l
 **Fix:** Edit `RemoveBagItemIconSprite` in [src/item_menu_icons.c](https://github.com/pret/pokeemerald/blob/master/src/item_menu_icons.c):
 ```diff
 -    RemoveBagSprite(id + ITEMMENUSPRITE_ITEM);
-+    u8 *spriteId = &gBagMenu->spriteIds[10];
++    u8 *spriteId = &gBagMenu->spriteIds[ITEMMENUSPRITE_ITEM];
 +
 +    if (spriteId[id ^ 1] != SPRITE_NONE)
 +        gSprites[spriteId[id ^ 1]].invisible = TRUE;
