@@ -138,7 +138,7 @@ Note that in msys2, Copy is Ctrl+Insert and Paste is Shift+Insert.
     >   This command will ask for confirmation, just enter the yes action when prompted.
     </details>
 
-    If `mingw-w64-x86_64-libpng` gives you errors during compilation, download [libpng source](https://sourceforge.net/projects/libpng/files/latest/download) and proceed to step 3. If not, you're ready to install pokkemerald!
+    If `mingw-w64-x86_64-libpng` gives you errors during compilation, download [libpng source](https://sourceforge.net/projects/libpng/files/latest/download) and proceed to step 3. If not, you're ready to install pokeemerald!
 
 3. Change directories to the `libpng` folder:
     
