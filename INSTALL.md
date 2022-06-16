@@ -138,6 +138,23 @@ Note that in msys2, Copy is Ctrl+Insert and Paste is Shift+Insert.
     >   This command will ask for confirmation, just enter the yes action when prompted.
     </details>
 
+    If `mingw-w64-x86_64-libpng` gives you errors during compilation, download [libpng source](https://sourceforge.net/projects/libpng/files/latest/download) and proceed to step 3. If not, you're ready to install pokkemerald!
+
+3. Change directories to the `libpng` folder:
+    
+    ```bash
+    cd lpng(xxxx)
+    ```
+
+where `xxxx` is the version of `libpng` you downloaded.
+
+4. Build libpng by typing in:
+
+    ```bash
+    ./configure --prefix=/usr && make check && make install
+    ```
+Once the build has completed, you're ready to install pokeemerald!
+
 ### Choosing where to store pokeemerald (msys2)
 At this point, you can choose a folder to store pokeemerald into. If you're okay with storing pokeemerald in the user profile folder, then proceed to [Installation](#installation). Otherwise, you'll need to account for where pokeemerald is stored when changing directory to the pokeemerald folder.
 
