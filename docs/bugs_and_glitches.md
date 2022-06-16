@@ -20,15 +20,19 @@ Fixes are written in the `diff` format. If you've used Git before, this should l
 
 **Fix:** Add the following function to [src/item_menu_icons.c](https://github.com/pret/pokeemerald/blob/master/src/item_menu_icons.c):
 ```diff
-+void HideBagItemIconSprite(u8 id)
++void RemoveBagItemIconSprite(u8 id)
 +{
-+	u8 *spriteId = &gBagMenu->spriteIds[10];
-+	if (*spriteId != SPRITE_NONE)
-+	{
-+		gSprites[spriteId[id]].invisible = TRUE;
-+	}
++    u8 *spriteId = &gBagMenu->spriteIds[10];
++
++    if (spriteId[id ^ 1] != SPRITE_NONE)
++        gSprites[spriteId[id ^ 1]].invisible = TRUE;
++
++    if (spriteId[id] != SPRITE_NONE)
++    {
++        DestroySpriteAndFreeResources(&gSprites[spriteId[id]]);
++        spriteId[id] = SPRITE_NONE;
++    }
 +}
-
 ```
 
 and its corresponding declaration in [include/item_menu_icons.h](https://github.com/pret/pokeemerald/blob/master/include/item_menu_icons.h):
