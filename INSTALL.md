@@ -146,7 +146,7 @@ Note that in msys2, Copy is Ctrl+Insert and Paste is Shift+Insert.
     cd lpng(xxxx)
     ```
 
-where `xxxx` is the version of `libpng` you downloaded.
+where `(xxxx)` is the version of `libpng` you downloaded.
 
 4. Build libpng by typing in:
 
