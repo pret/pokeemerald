@@ -33,26 +33,6 @@ Fixes are written in the `diff` format. If you've used Git before, this should l
 +    }
 ```
 
-and its corresponding declaration in [include/item_menu_icons.h](https://github.com/pret/pokeemerald/blob/master/include/item_menu_icons.h):
-
-```diff
-+void HideBagItemIconSprite(u8 id);
-
-```
-
-Then edit `BagMenu_MoveCursorCallback` in [src/item_menu.c](https://github.com/pret/pokeemerald/blob/master/src/item_menu.c):
-
-```diff
-	...
-{
--	RemoveBagItemIconSprite(1 ^ gBagMenu->itemIconSlot);
-+	HideBagItemIconSprite(gBagMenu->itemIconSlot ^ 1);
-+	RemoveBagItemIconSprite(gBagMenu->itemIconSlot);
-	if (itemIndex != LIST_CANCEL)
-	...
-```
-
-
 Then edit `struct Sprite` in [gflib/sprite.h](https://github.com/pret/pokeemerald/blob/master/gflib/sprite.h):
 
 ```diff
