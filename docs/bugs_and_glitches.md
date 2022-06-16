@@ -18,10 +18,9 @@ Fixes are written in the `diff` format. If you've used Git before, this should l
 
 ## Scrolling through items in the bag causes the image to flicker
 
-**Fix:** Add the following function to [src/item_menu_icons.c](https://github.com/pret/pokeemerald/blob/master/src/item_menu_icons.c):
+**Fix:** Edit `RemoveBagItemIconSprite` in [src/item_menu_icons.c](https://github.com/pret/pokeemerald/blob/master/src/item_menu_icons.c):
 ```diff
-+void RemoveBagItemIconSprite(u8 id)
-+{
+-    RemoveBagSprite(id + ITEMMENUSPRITE_ITEM);
 +    u8 *spriteId = &gBagMenu->spriteIds[10];
 +
 +    if (spriteId[id ^ 1] != SPRITE_NONE)
@@ -32,7 +31,6 @@ Fixes are written in the `diff` format. If you've used Git before, this should l
 +        DestroySpriteAndFreeResources(&gSprites[spriteId[id]]);
 +        spriteId[id] = SPRITE_NONE;
 +    }
-+}
 ```
 
 and its corresponding declaration in [include/item_menu_icons.h](https://github.com/pret/pokeemerald/blob/master/include/item_menu_icons.h):
