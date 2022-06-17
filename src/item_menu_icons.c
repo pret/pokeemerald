@@ -544,6 +544,8 @@ void AddBagItemIconSprite(u16 itemId, u8 id)
 
 void RemoveBagItemIconSprite(u8 id)
 {
+// BUG: For one frame, the item you scroll to in the Bag menu
+// will have an incorrect palette and may be seen as a flicker.
 #ifdef BUGFIX
     u8 *spriteId = &gBagMenu->spriteIds[ITEMMENUSPRITE_ITEM];
 
