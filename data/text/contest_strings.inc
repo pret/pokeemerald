@@ -12,7 +12,8 @@ gText_GreatAppealButNoMoreToEnd::
 	.string "allows no more to the end.$"
 
 gText_UsedRepeatedlyWithoutBoringJudge::
-	.string "Can be repeatedly used\nwithout boring the JUDGE.$"
+	.string "Can be repeatedly used\n"
+	.string "without boring the JUDGE.$"
 
 gText_AvoidStartledByOthersOnce::
 	.string "Can avoid being startled\n"
@@ -135,7 +136,8 @@ gText_AppealBetterLaterItsPerformed::
 	.string "the later it is performed.$"
 
 gText_AppealVariesDependingOnTiming::
-	.string "The appeal's quality varies\ndepending on its timing.$"
+	.string "The appeal's quality varies\n"
+	.string "depending on its timing.$"
 
 gText_WorksWellIfSameTypeAsBefore::
 	.string "Works well if it's the same\n"
