@@ -202,7 +202,7 @@ static u32 Client_Run(struct MysteryGiftClient * client)
         MysteryGiftLink_InitSend(&client->link, MG_LINKID_GAME_DATA, client->sendBuffer, sizeof(struct MysteryGiftLinkGameData));
         break;
     case CLI_LOAD_TOSS_RESPONSE:
-        // param here is set by MG_STATE_LINK_ASK_TOSS or MG_STATE_LINK_ASK_TOSS_UNRECEIVED
+        // param here is set by MG_STATE_CLIENT_ASK_TOSS or MG_STATE_CLIENT_ASK_TOSS_UNRECEIVED
         MysteryGiftClient_InitSendWord(client, MG_LINKID_RESPONSE, client->param);
         break;
     case CLI_SAVE_CARD:

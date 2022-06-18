@@ -5863,7 +5863,7 @@ static void InitRandomTourneyTreeResults(void)
         DOME_TRAINERS[i].forfeited = FALSE;
     }
 
-    monLevel = 50;
+    monLevel = FRONTIER_MAX_LEVEL_50;
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
     {
         monTypesBits = 0;
