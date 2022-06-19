@@ -412,6 +412,61 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCourtChange             @ EFFECT_COURT_CHANGE
 	.4byte BattleScript_EffectSteelBeam               @ EFFECT_STEEL_BEAM
 
+BattleScript_AffectionBasedEndurance::
+	playanimation BS_TARGET, B_ANIM_AFFECTION_HANGED_ON
+	printstring STRINGID_TARGETTOUGHEDITOUT
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_AffectionBasedStatusHeal::
+	jumpifstatus BS_ATTACKER, STATUS1_POISON, BattleScript_AffectionBasedStatusHeal_Poison
+	jumpifstatus BS_ATTACKER, STATUS1_TOXIC_POISON, BattleScript_AffectionBasedStatusHeal_Poison
+	jumpifstatus BS_ATTACKER, STATUS1_SLEEP, BattleScript_AffectionBasedStatusHeal_Sleep
+	jumpifstatus BS_ATTACKER, STATUS1_PARALYSIS, BattleScript_AffectionBasedStatusHeal_Paralysis
+	jumpifstatus BS_ATTACKER, STATUS1_BURN, BattleScript_AffectionBasedStatusHeal_Burn
+	jumpifstatus BS_ATTACKER, STATUS1_FREEZE, BattleScript_AffectionBasedStatusHeal_Freeze
+	end2
+BattleScript_AffectionBasedStatusHeal_Poison:
+	printstring STRINGID_ATTACKEREXPELLEDTHEPOISON
+	waitmessage B_WAIT_TIME_LONG
+	clearstatus BS_ATTACKER
+	waitstate
+	updatestatusicon BS_ATTACKER
+	waitstate
+	end2
+BattleScript_AffectionBasedStatusHeal_Sleep:
+	printstring STRINGID_ATTACKERSHOOKITSELFAWAKE
+	waitmessage B_WAIT_TIME_LONG
+	clearstatus BS_ATTACKER
+	waitstate
+	updatestatusicon BS_ATTACKER
+	waitstate
+	end2
+BattleScript_AffectionBasedStatusHeal_Paralysis:
+	printstring STRINGID_ATTACKERBROKETHROUGHPARALYSIS
+	waitmessage B_WAIT_TIME_LONG
+	clearstatus BS_ATTACKER
+	waitstate
+	updatestatusicon BS_ATTACKER
+	waitstate
+	end2
+BattleScript_AffectionBasedStatusHeal_Burn:
+	printstring STRINGID_ATTACKERHEALEDITSBURN
+	waitmessage B_WAIT_TIME_LONG
+	clearstatus BS_ATTACKER
+	waitstate
+	updatestatusicon BS_ATTACKER
+	waitstate
+	end2
+BattleScript_AffectionBasedStatusHeal_Freeze:
+	printstring STRINGID_ATTACKERMELTEDTHEICE
+	waitmessage B_WAIT_TIME_LONG
+	clearstatus BS_ATTACKER
+	waitstate
+	updatestatusicon BS_ATTACKER
+	waitstate
+	end2
+
 BattleScript_EffectSteelBeam::
 	attackcanceler
 	attackstring

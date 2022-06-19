@@ -613,8 +613,14 @@
 #define STRINGID_METEORBEAMCHARGING                   611
 #define STRINGID_HEATUPBEAK                           612
 #define STRINGID_COURTCHANGE                          613
+#define STRINGID_ATTACKEREXPELLEDTHEPOISON            614
+#define STRINGID_ATTACKERSHOOKITSELFAWAKE             615
+#define STRINGID_ATTACKERBROKETHROUGHPARALYSIS        616
+#define STRINGID_ATTACKERHEALEDITSBURN                617
+#define STRINGID_ATTACKERMELTEDTHEICE                 618
+#define STRINGID_TARGETTOUGHEDITOUT                   619
 
-#define BATTLESTRINGS_COUNT                           614
+#define BATTLESTRINGS_COUNT                           620
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

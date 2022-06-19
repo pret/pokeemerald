@@ -184,6 +184,7 @@ struct SpecialStatus
     u8 physicalBattlerId;
     u8 specialBattlerId;
     u8 changedStatsBattlerId; // Battler that was responsible for the latest stat change. Can be self.
+    bool8 affectionEndured:1;
 };
 
 struct SideTimer

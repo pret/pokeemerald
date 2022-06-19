@@ -2077,6 +2077,24 @@ void TryToRevertMimicry(void)
     }
 }
 
+u32 GetMonFriendshipScore(struct Pokemon *pokemon) // Based on GetLeadMonFriendshipScore
+{
+    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) == 255)
+        return 6;
+    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 200)
+        return 5;
+    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 150)
+        return 4;
+    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 100)
+        return 3;
+    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 50)
+        return 2;
+    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 1)
+        return 1;
+
+    return 0;
+}
+
 enum
 {
     ENDTURN_ORDER,
@@ -2105,6 +2123,9 @@ enum
     ENDTURN_ION_DELUGE,
     ENDTURN_FAIRY_LOCK,
     ENDTURN_RETALIATE,
+#if B_AFFECTION_MECHANICS == TRUE
+    ENDTURN_STATUS_HEAL,
+#endif
     ENDTURN_FIELD_COUNT,
 };
 
@@ -2552,6 +2573,22 @@ u8 DoFieldEndTurnEffects(void)
                 gSideTimers[B_SIDE_OPPONENT].retaliateTimer--;
             gBattleStruct->turnCountersTracker++;
             break;
+    #if B_AFFECTION_MECHANICS == TRUE
+        case ENDTURN_STATUS_HEAL:
+            for (gBattlerAttacker = 0; gBattlerAttacker < gBattlersCount; gBattlerAttacker++)
+            {
+                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER
+                 && GetMonFriendshipScore(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]) >= 4
+                 && (Random() % 100 < 20))
+                {
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                    BattleScriptExecute(BattleScript_AffectionBasedStatusHeal);
+                    break;
+                }
+            }
+            gBattleStruct->turnCountersTracker++;
+            break;
+    #endif
         case ENDTURN_FIELD_COUNT:
             effect++;
             break;
