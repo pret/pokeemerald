@@ -7624,6 +7624,15 @@ static bool8 SetMenuTexts_Mon(void)
 {
     u16 species = GetSpeciesAtCursorPosition();
 
+    if (sCursorArea == CURSOR_AREA_IN_PARTY)
+    {
+        if (GetMonData(&gPlayerParty[GetCursorPosition()], MON_DATA_HP) == 0){
+            SetMenuText(MENU_SUMMARY);
+            SetMenuText(MENU_RELEASE);
+            SetMenuText(MENU_CANCEL);
+            return TRUE;
+        }
+    }
     switch (sStorage->boxOption)
     {
     case OPTION_DEPOSIT:

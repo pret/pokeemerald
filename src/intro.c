@@ -1113,7 +1113,7 @@ static u8 SetUpCopyrightScreen(void)
         if (UpdatePaletteFade())
             break;
         CreateTask(Task_Scene1_Load, 0);
-        SetMainCallback2(MainCB2_Intro);
+        SetMainCallback2(CB2_InitTitleScreen);
         if (gMultibootProgramStruct.gcmb_field_2 != 0)
         {
             if (gMultibootProgramStruct.gcmb_field_2 == 2)

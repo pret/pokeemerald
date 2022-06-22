@@ -1053,32 +1053,7 @@ void ClearBehindSubstituteBit(u8 battlerId)
 
 void HandleLowHpMusicChange(struct Pokemon *mon, u8 battlerId)
 {
-    u16 hp = GetMonData(mon, MON_DATA_HP);
-    u16 maxHP = GetMonData(mon, MON_DATA_MAX_HP);
-
-    if (GetHPBarLevel(hp, maxHP) == HP_BAR_RED)
-    {
-        if (!gBattleSpritesDataPtr->battlerData[battlerId].lowHpSong)
-        {
-            if (!gBattleSpritesDataPtr->battlerData[battlerId ^ BIT_FLANK].lowHpSong)
-                PlaySE(SE_LOW_HEALTH);
-            gBattleSpritesDataPtr->battlerData[battlerId].lowHpSong = 1;
-        }
-    }
-    else
-    {
-        gBattleSpritesDataPtr->battlerData[battlerId].lowHpSong = 0;
-        if (!IsDoubleBattle())
-        {
-            m4aSongNumStop(SE_LOW_HEALTH);
-            return;
-        }
-        if (IsDoubleBattle() && !gBattleSpritesDataPtr->battlerData[battlerId ^ BIT_FLANK].lowHpSong)
-        {
-            m4aSongNumStop(SE_LOW_HEALTH);
-            return;
-        }
-    }
+    return;
 }
 
 void BattleStopLowHpSound(void)

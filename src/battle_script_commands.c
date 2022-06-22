@@ -326,6 +326,24 @@ static void Cmd_finishaction(void);
 static void Cmd_finishturn(void);
 static void Cmd_trainerslideout(void);
 
+const u16 sExpCapFlags[NUM_SOFT_CAPS] =
+{
+    FLAG_BADGE01_GET, FLAG_BADGE02_GET, FLAG_BADGE03_GET, FLAG_BADGE04_GET,
+    FLAG_BADGE05_GET, FLAG_BADGE06_GET, FLAG_BADGE07_GET, FLAG_BADGE08_GET,
+    FLAG_DEFEATED_ELITE_4_SIDNEY, FLAG_DEFEATED_ELITE_4_PHOEBE, FLAG_DEFEATED_ELITE_4_GLACIA, FLAG_DEFEATED_ELITE_4_DRAKE,
+    FLAG_IS_CHAMPION
+};
+
+//Each exp cap is based on the gym leader/E4 member's ace
+//E.g. Roxanne has a level 15 nosepass, and 3375 is the amount of exp needed for a pokemon in the most common experience group to get to level 15
+const u32 sExpCaps[NUM_SOFT_CAPS] = 
+{
+    2500, 6859, 13824, 24389,
+    29791, 35937, 74088, 97336,
+    117649, 132651, 148877, 166375,
+    195112
+};
+
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
     Cmd_attackcanceler,                          //0x0
@@ -3222,6 +3240,7 @@ static void Cmd_getexp(void)
     u16 item;
     s32 i; // also used as stringId
     u8 holdEffect;
+    u8 j;
     s32 sentIn;
     s32 viaExpShare = 0;
     u16 *exp = &gBattleStruct->expValue;
@@ -3239,7 +3258,8 @@ static void Cmd_getexp(void)
               | BATTLE_TYPE_FRONTIER
               | BATTLE_TYPE_SAFARI
               | BATTLE_TYPE_BATTLE_TOWER
-              | BATTLE_TYPE_EREADER_TRAINER)))
+              | BATTLE_TYPE_EREADER_TRAINER))
+			  || !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
         {
             gBattleScripting.getexpState = 6; // goto last case
         }
@@ -3321,6 +3341,19 @@ static void Cmd_getexp(void)
             }
             else
             {
+                for (j = 0; j < NUM_SOFT_CAPS; j++)
+                {
+                    if (!FlagGet(sExpCapFlags[j]) && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_EXP) >= sExpCaps[j])
+                    {
+                        *(&gBattleStruct->sentInPokes) >>= 1;
+                        gBattleScripting.getexpState = 5;
+                        gBattleMoveDamage = 0; // used for exp
+                        break;
+                    }
+                }
+            }
+            if (gBattleMoveDamage != 0)
+            {
                 // music change in wild battle after fainting a poke
                 if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) && gBattleMons[0].hp && !gBattleStruct->wildVictorySong)
                 {
@@ -3341,7 +3374,8 @@ static void Cmd_getexp(void)
                     if (holdEffect == HOLD_EFFECT_LUCKY_EGG)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
                     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                        gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
+                        gBattleMoveDamage = (gBattleMoveDamage * 300) / 100;
+
 
                     if (IsTradedMon(&gPlayerParty[gBattleStruct->expGetterMonId]))
                     {
@@ -3359,6 +3393,16 @@ static void Cmd_getexp(void)
                     else
                     {
                         i = STRINGID_EMPTYSTRING4;
+                    }
+
+                    //If you would gain exp to go over the cap, instead gain the difference.
+                    for (j = 0; j < NUM_SOFT_CAPS; j++)
+                    {
+                        if (!FlagGet(sExpCapFlags[j]) && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_EXP) + gBattleMoveDamage > sExpCaps[j])
+                        {
+                            gBattleMoveDamage = sExpCaps[j] - GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_EXP);
+                            break;
+                        }
                     }
 
                     // get exp getter battlerId
