@@ -338,7 +338,7 @@ const u16 sExpCapFlags[NUM_SOFT_CAPS] =
 //E.g. Roxanne has a level 15 nosepass, and 3375 is the amount of exp needed for a pokemon in the most common experience group to get to level 15
 const u32 sExpCaps[NUM_SOFT_CAPS] = 
 {
-    2500, 6859, 13824, 24389,
+    3375, 6859, 13824, 24389,
     29791, 35937, 74088, 97336,
     117649, 132651, 148877, 166375,
     195112
@@ -3352,7 +3352,7 @@ static void Cmd_getexp(void)
                     }
                 }
             }
-            if (gBattleMoveDamage != 0)
+            if (gBattleScripting.getexpState != 5)
             {
                 // music change in wild battle after fainting a poke
                 if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) && gBattleMons[0].hp && !gBattleStruct->wildVictorySong)

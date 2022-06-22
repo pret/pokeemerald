@@ -1369,9 +1369,9 @@ static const u8 sTM50Desc[] = _(
 
 
 static const u8 sHM01Desc[] = _(
-    "Attacks the foe\n"
-    "with sharp blades\n"
-    "or claws.");
+    "Cuts the foe.\n"
+    "High critical\n"
+    "hit rate.");
 
 static const u8 sHM02Desc[] = _(
     "Flies up on the\n"
@@ -1391,7 +1391,7 @@ static const u8 sHM04Desc[] = _(
 static const u8 sHM05Desc[] = _(
     "Looses a powerful\n"
     "blast of light that\n"
-    "reduces accuracy.");
+    "raises special.");
 
 static const u8 sHM06Desc[] = _(
     "A rock-crushingly\n"
@@ -1399,12 +1399,12 @@ static const u8 sHM06Desc[] = _(
     "may lower DEFENSE.");
 
 static const u8 sHM07Desc[] = _(
-    "Attacks the foe\n"
-    "with enough power\n"
-    "to climb waterfalls.");
+    "Attacks the foe.\n"
+    "May cause the\n"
+    "target to flinch.");
 
 static const u8 sHM08Desc[] = _(
-    "Dives underwater\n"
+    "Dives evilly\n"
     "the 1st turn, then\n"
     "attacks next turn.");
 

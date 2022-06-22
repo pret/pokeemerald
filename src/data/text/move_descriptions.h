@@ -58,8 +58,8 @@ static const u8 sSwordsDanceDescription[] = _(
     "sharply raises ATTACK.");
 
 static const u8 sCutDescription[] = _(
-    "Cuts the foe with sharp\n"
-    "scythes, claws, etc.");
+    "Cuts the foe. High\n"
+    "critical hit rate.");
 
 static const u8 sGustDescription[] = _(
     "Strikes the foe with a gust\n"
@@ -506,8 +506,8 @@ static const u8 sFireBlastDescription[] = _(
     "strikes. May cause a burn.");
 
 static const u8 sWaterfallDescription[] = _(
-    "Charges the foe with speed\n"
-    "to climb waterfalls.");
+    "Charges the foe. May\n"
+    "cause flinching.");
 
 static const u8 sClampDescription[] = _(
     "Traps and squeezes the\n"
@@ -591,7 +591,7 @@ static const u8 sSporeDescription[] = _(
 
 static const u8 sFlashDescription[] = _(
     "Looses a powerful blast of\n"
-    "light that cuts accuracy.");
+    "light that raises special.");
 
 static const u8 sPsywaveDescription[] = _(
     "Attacks with a psychic\n"
@@ -1162,7 +1162,7 @@ static const u8 sSecretPowerDescription[] = _(
     "that vary by location.");
 
 static const u8 sDiveDescription[] = _(
-    "Dives underwater the first\n"
+    "Dives evilly the first\n"
     "turn and strikes next turn.");
 
 static const u8 sArmThrustDescription[] = _(
