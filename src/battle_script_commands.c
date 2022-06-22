@@ -1892,9 +1892,11 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
                     + (holdEffectAtk == HOLD_EFFECT_SCOPE_LENS)
                     + 2 * (holdEffectAtk == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBattlerAttacker].species == SPECIES_CHANSEY)
                     + 2 * BENEFITS_FROM_LEEK(battlerAtk, holdEffectAtk)
-                    + (abilityAtk == ABILITY_SUPER_LUCK)
                 #if B_AFFECTION_MECHANICS == TRUE
+                    + (abilityAtk == ABILITY_SUPER_LUCK)
                    *= 2 (GetMonFriendshipScore(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]) >= 5);
+                #else
+                    + (abilityAtk == ABILITY_SUPER_LUCK);
                 #endif
 
         if (critChance >= ARRAY_COUNT(sCriticalHitChance))
