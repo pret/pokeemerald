@@ -7626,7 +7626,7 @@ static bool8 SetMenuTexts_Mon(void)
 
     if (sCursorArea == CURSOR_AREA_IN_PARTY)
     {
-        if (GetMonData(&gPlayerParty[GetCursorPosition()], MON_DATA_HP) == 0){
+        if (species != SPECIES_NONE && GetMonData(&gPlayerParty[GetCursorPosition()], MON_DATA_HP) == 0){
             SetMenuText(MENU_SUMMARY);
             SetMenuText(MENU_RELEASE);
             SetMenuText(MENU_CANCEL);
