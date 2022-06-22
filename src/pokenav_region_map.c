@@ -146,7 +146,7 @@ static const struct WindowTemplate sMapSecInfoWindowTemplate =
 
 #include "data/region_map/city_map_entries.h"
 
-const struct OamData sCityZoomTextSprite_OamData =
+static const struct OamData sCityZoomTextSprite_OamData =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,

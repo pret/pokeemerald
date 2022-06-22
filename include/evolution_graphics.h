@@ -3,7 +3,7 @@
 
 void LoadEvoSparkleSpriteAndPal(void);
 
-u8 EvolutionSparkles_SpiralUpward(u16 arg0);
+u8 EvolutionSparkles_SpiralUpward(u16 palNum);
 u8 EvolutionSparkles_ArcDown(void);
 u8 EvolutionSparkles_CircleInward(void);
 u8 EvolutionSparkles_SprayAndFlash(u16 species);

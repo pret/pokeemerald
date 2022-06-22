@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
+#include "battle_main.h"
 #include "data.h"
 #include "pokemon.h"
 #include "random.h"
@@ -66,13 +67,13 @@ static bool8 ShouldSwitchIfWonderGuard(void)
     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
     {
         if ((gActiveBattler & BIT_FLANK) == B_FLANK_LEFT)
-            firstId = 0, lastId = 3;
+            firstId = 0, lastId = PARTY_SIZE / 2;
         else
-            firstId = 3, lastId = 6;
+            firstId = PARTY_SIZE / 2, lastId = PARTY_SIZE;
     }
     else
     {
-        firstId = 0, lastId = 6;
+        firstId = 0, lastId = PARTY_SIZE;
     }
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
@@ -162,13 +163,13 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
     {
         if ((gActiveBattler & BIT_FLANK) == B_FLANK_LEFT)
-            firstId = 0, lastId = 3;
+            firstId = 0, lastId = PARTY_SIZE / 2;
         else
-            firstId = 3, lastId = 6;
+            firstId = PARTY_SIZE / 2, lastId = PARTY_SIZE;
     }
     else
     {
-        firstId = 0, lastId = 6;
+        firstId = 0, lastId = PARTY_SIZE;
     }
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
@@ -357,13 +358,13 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
     {
         if ((gActiveBattler & BIT_FLANK) == 0)
-            firstId = 0, lastId = 3;
+            firstId = 0, lastId = PARTY_SIZE / 2;
         else
-            firstId = 3, lastId = 6;
+            firstId = PARTY_SIZE / 2, lastId = PARTY_SIZE;
     }
     else
     {
-        firstId = 0, lastId = 6;
+        firstId = 0, lastId = PARTY_SIZE;
     }
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
@@ -468,13 +469,13 @@ static bool8 ShouldSwitch(void)
     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
     {
         if ((gActiveBattler & BIT_FLANK) == B_FLANK_LEFT)
-            firstId = 0, lastId = 3;
+            firstId = 0, lastId = PARTY_SIZE / 2;
         else
-            firstId = 3, lastId = 6;
+            firstId = PARTY_SIZE / 2, lastId = PARTY_SIZE;
     }
     else
     {
-        firstId = 0, lastId = 6;
+        firstId = 0, lastId = PARTY_SIZE;
     }
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
@@ -559,13 +560,13 @@ void AI_TrySwitchOrUseItem(void)
                     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
                     {
                         if ((gActiveBattler & BIT_FLANK) == B_FLANK_LEFT)
-                            firstId = 0, lastId = 3;
+                            firstId = 0, lastId = PARTY_SIZE / 2;
                         else
-                            firstId = 3, lastId = 6;
+                            firstId = PARTY_SIZE / 2, lastId = PARTY_SIZE;
                     }
                     else
                     {
-                        firstId = 0, lastId = 6;
+                        firstId = 0, lastId = PARTY_SIZE;
                     }
 
                     for (monToSwitchId = firstId; monToSwitchId < lastId; monToSwitchId++)
@@ -615,10 +616,10 @@ static void ModulateByTypeEffectiveness(u8 atkType, u8 defType1, u8 defType2, u8
         {
             // Check type1.
             if (TYPE_EFFECT_DEF_TYPE(i) == defType1)
-                *var = (*var * TYPE_EFFECT_MULTIPLIER(i)) / 10;
+                *var = (*var * TYPE_EFFECT_MULTIPLIER(i)) / TYPE_MUL_NORMAL;
             // Check type2.
             if (TYPE_EFFECT_DEF_TYPE(i) == defType2 && defType1 != defType2)
-                *var = (*var * TYPE_EFFECT_MULTIPLIER(i)) / 10;
+                *var = (*var * TYPE_EFFECT_MULTIPLIER(i)) / TYPE_MUL_NORMAL;
         }
         i += 3;
     }
@@ -627,7 +628,11 @@ static void ModulateByTypeEffectiveness(u8 atkType, u8 defType1, u8 defType2, u8
 u8 GetMostSuitableMonToSwitchInto(void)
 {
     u8 opposingBattler;
-    u8 bestDmg; // Note : should be changed to u32 for obvious reasons.
+#ifdef BUGFIX
+    s32 bestDmg;
+#else
+    u8 bestDmg; // Note: should be changed to s32 since it is also used for the actual damage done later
+#endif
     u8 bestMonId;
     u8 battlerIn1, battlerIn2;
     s32 firstId;
@@ -665,13 +670,13 @@ u8 GetMostSuitableMonToSwitchInto(void)
     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
     {
         if ((gActiveBattler & BIT_FLANK) == B_FLANK_LEFT)
-            firstId = 0, lastId = 3;
+            firstId = 0, lastId = PARTY_SIZE / 2;
         else
-            firstId = 3, lastId = 6;
+            firstId = PARTY_SIZE / 2, lastId = PARTY_SIZE;
     }
     else
     {
-        firstId = 0, lastId = 6;
+        firstId = 0, lastId = PARTY_SIZE;
     }
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
@@ -683,8 +688,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
 
     while (invalidMons != 0x3F) // All mons are invalid.
     {
-        bestDmg = 0;
-        bestMonId = 6;
+        bestDmg = TYPE_MUL_NO_EFFECT;
+        bestMonId = PARTY_SIZE;
         // Find the mon whose type is the most suitable offensively.
         for (i = firstId; i < lastId; i++)
         {
@@ -699,9 +704,13 @@ u8 GetMostSuitableMonToSwitchInto(void)
             {
                 u8 type1 = gBaseStats[species].type1;
                 u8 type2 = gBaseStats[species].type2;
-                u8 typeDmg = 10;
+                u8 typeDmg = TYPE_MUL_NORMAL;
                 ModulateByTypeEffectiveness(gBattleMons[opposingBattler].type1, type1, type2, &typeDmg);
                 ModulateByTypeEffectiveness(gBattleMons[opposingBattler].type2, type1, type2, &typeDmg);
+
+                /* Possible bug: this comparison gives the type that takes the most damage, when
+                a "good" AI would want to select the type that takes the least damage. Unknown if this
+                is a legitimate mistake or if it's an intentional, if weird, design choice */
                 if (bestDmg < typeDmg)
                 {
                     bestDmg = typeDmg;

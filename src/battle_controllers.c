@@ -1168,13 +1168,13 @@ void BtlController_EmitChooseMove(u8 bufferId, bool8 isDoubleBattle, bool8 NoPpN
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, sizeof(*movePpData) + 4);
 }
 
-void BtlController_EmitChooseItem(u8 bufferId, u8 *arg1)
+void BtlController_EmitChooseItem(u8 bufferId, u8 *battlePartyOrder)
 {
     s32 i;
 
     sBattleBuffersTransferData[0] = CONTROLLER_OPENBAG;
-    for (i = 0; i < 3; i++)
-        sBattleBuffersTransferData[1 + i] = arg1[i];
+    for (i = 0; i < PARTY_SIZE / 2; i++)
+        sBattleBuffersTransferData[1 + i] = battlePartyOrder[i];
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
@@ -1309,12 +1309,12 @@ void BtlController_EmitCmd32(u8 bufferId, u16 size, void *data)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, size + 3);
 }
 
-void BtlController_EmitTwoReturnValues(u8 bufferId, u8 arg1, u16 arg2)
+void BtlController_EmitTwoReturnValues(u8 bufferId, u8 ret8, u16 ret16)
 {
     sBattleBuffersTransferData[0] = CONTROLLER_TWORETURNVALUES;
-    sBattleBuffersTransferData[1] = arg1;
-    sBattleBuffersTransferData[2] = arg2;
-    sBattleBuffersTransferData[3] = (arg2 & 0xFF00) >> 8;
+    sBattleBuffersTransferData[1] = ret8;
+    sBattleBuffersTransferData[2] = ret16;
+    sBattleBuffersTransferData[3] = (ret16 & 0xFF00) >> 8;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
@@ -1329,20 +1329,20 @@ void BtlController_EmitChosenMonReturnValue(u8 bufferId, u8 partyId, u8 *battleP
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 5);
 }
 
-void BtlController_EmitOneReturnValue(u8 bufferId, u16 arg1)
+void BtlController_EmitOneReturnValue(u8 bufferId, u16 ret)
 {
     sBattleBuffersTransferData[0] = CONTROLLER_ONERETURNVALUE;
-    sBattleBuffersTransferData[1] = arg1;
-    sBattleBuffersTransferData[2] = (arg1 & 0xFF00) >> 8;
+    sBattleBuffersTransferData[1] = ret;
+    sBattleBuffersTransferData[2] = (ret & 0xFF00) >> 8;
     sBattleBuffersTransferData[3] = 0;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitOneReturnValue_Duplicate(u8 bufferId, u16 b)
+void BtlController_EmitOneReturnValue_Duplicate(u8 bufferId, u16 ret)
 {
     sBattleBuffersTransferData[0] = CONTROLLER_ONERETURNVALUE_DUPLICATE;
-    sBattleBuffersTransferData[1] = b;
-    sBattleBuffersTransferData[2] = (b & 0xFF00) >> 8;
+    sBattleBuffersTransferData[1] = ret;
+    sBattleBuffersTransferData[2] = (ret & 0xFF00) >> 8;
     sBattleBuffersTransferData[3] = 0;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }

@@ -212,13 +212,13 @@ void CurrentMapDrawMetatileAt(int x, int y)
     }
 }
 
-void DrawDoorMetatileAt(int x, int y, u16 *arr)
+void DrawDoorMetatileAt(int x, int y, u16 *tiles)
 {
     int offset = MapPosToBgTilemapOffset(&sFieldCameraOffset, x, y);
 
     if (offset >= 0)
     {
-        DrawMetatile(METATILE_LAYER_TYPE_COVERED, arr, offset);
+        DrawMetatile(METATILE_LAYER_TYPE_COVERED, tiles, offset);
         sFieldCameraOffset.copyBGToVRAM = TRUE;
     }
 }
@@ -437,10 +437,10 @@ void SetCameraPanningCallback(void (*callback)(void))
     sFieldCameraPanningCallback = callback;
 }
 
-void SetCameraPanning(s16 a, s16 b)
+void SetCameraPanning(s16 horizontal, s16 vertical)
 {
-    sHorizontalCameraPan = a;
-    sVerticalCameraPan = b + 32;
+    sHorizontalCameraPan = horizontal;
+    sVerticalCameraPan = vertical + 32;
 }
 
 void InstallCameraPanAheadCallback(void)
