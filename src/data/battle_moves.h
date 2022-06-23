@@ -366,7 +366,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SAND_ATTACK] =
     {
-        .effect = EFFECT_ACCURACY_DOWN,
+        .effect = EFFECT_DEFENSE_DOWN,
         .power = 0,
         .type = TYPE_GROUND,
         .accuracy = 100,
@@ -1354,7 +1354,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DOUBLE_TEAM] =
     {
-        .effect = EFFECT_EVASION_UP,
+        .effect = EFFECT_COSMIC_POWER,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
@@ -1393,7 +1393,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_MINIMIZE] =
     {
-        .effect = EFFECT_MINIMIZE,
+        .effect = EFFECT_COSMIC_POWER,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
@@ -1406,7 +1406,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SMOKESCREEN] =
     {
-        .effect = EFFECT_ACCURACY_DOWN,
+        .effect = EFFECT_SPECIAL_DEFENSE_DOWN,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 100,
@@ -1744,10 +1744,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_KINESIS] =
     {
-        .effect = EFFECT_ACCURACY_DOWN,
+        .effect = EFFECT_SPECIAL_DEFENSE_DOWN,
         .power = 0,
         .type = TYPE_PSYCHIC,
-        .accuracy = 80,
+        .accuracy = 100,
         .pp = 15,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
@@ -2460,11 +2460,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_MUD_SLAP] =
     {
         .effect = EFFECT_ACCURACY_DOWN_HIT,
-        .power = 20,
+        .power = 40,
         .type = TYPE_GROUND,
         .accuracy = 100,
         .pp = 10,
-        .secondaryEffectChance = 100,
+        .secondaryEffectChance = 30,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
