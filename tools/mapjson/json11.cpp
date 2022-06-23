@@ -1,4 +1,6 @@
-/* Permission is hereby granted, free of charge, to any person obtaining a copy
+/* Copyright (c) 2013 Dropbox, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -17,7 +19,7 @@
  * THE SOFTWARE.
  */
 
-#include "json11.h"
+#include "json11.hpp"
 #include <cassert>
 #include <cmath>
 #include <cstdlib>
@@ -267,8 +269,8 @@ Json::Json(Json::object &&values)      : m_ptr(make_shared<JsonObject>(move(valu
 
 Json::Type Json::type()                           const { return m_ptr->type();         }
 double Json::number_value()                       const { return m_ptr->number_value(); }
-int    Json::int_value()                          const { return m_ptr->int_value();    }
-bool   Json::bool_value()                         const { return m_ptr->bool_value();   }
+int Json::int_value()                             const { return m_ptr->int_value();    }
+bool Json::bool_value()                           const { return m_ptr->bool_value();   }
 const string & Json::string_value()               const { return m_ptr->string_value(); }
 const vector<Json> & Json::array_items()          const { return m_ptr->array_items();  }
 const map<string, Json> & Json::object_items()    const { return m_ptr->object_items(); }
@@ -773,8 +775,10 @@ bool Json::has_shape(const shape & types, string & err) const {
         return false;
     }
 
+    const auto& obj_items = object_items();
     for (auto & item : types) {
-        if ((*this)[item.first].type() != item.second) {
+        const auto it = obj_items.find(item.first);
+        if (it == obj_items.cend() || it->second.type() != item.second) {
             err = "bad type for " + item.first + " in " + dump();
             return false;
         }

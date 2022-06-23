@@ -1,6 +1,6 @@
 CXX ?= g++
 
-CXXFLAGS := -std=c++11 -O2 -Wall -Wno-switch -Werror
+CXXFLAGS := -Wall -Werror -std=c++11 -O2
 
 SRCS := asm_file.cpp c_file.cpp charmap.cpp preproc.cpp string_parser.cpp \
 	utf8.cpp

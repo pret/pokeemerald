@@ -593,7 +593,7 @@ int main(int argc, char **argv)
         if (outputPath == NULL)
             FATAL_ERROR("Failed to allocate memory for new output path.\n");
 
-        for (int i = 0; i < newOutputPathSize; i++)
+        for (size_t i = 0; i < newOutputPathSize; i++)
         {
             outputPath[i] = inputPath[i];
 

@@ -1,6 +1,6 @@
 CXX ?= g++
 
-CXXFLAGS := -std=c++11 -O2 -Wall -Wno-switch -Werror
+CXXFLAGS := -Wall -Werror -std=c++11 -O2 
 
 SRCS := main.cpp sym_file.cpp elf.cpp
 

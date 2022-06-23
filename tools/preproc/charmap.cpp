@@ -401,6 +401,8 @@ Charmap::Charmap(std::string filename)
                 reader.RaiseError("redefining constant");
             m_constants[lhs.name] = sequence;
             break;
+        case None:
+            break;
         }
 
         reader.ExpectEmptyRestOfLine();

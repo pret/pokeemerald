@@ -1,4 +1,7 @@
 CC ?= gcc
+
+CFLAGS = -Wall -Wextra -Werror -std=c11 -O2
+
 .PHONY: all clean
 
 SRCS = gbafix.c

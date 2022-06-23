@@ -1,6 +1,6 @@
 CXX ?= g++
 
-CXXFLAGS := -std=c++11 -O2 -Wall -Wno-switch -Werror
+CXXFLAGS := -Wall -Werror -std=c++11 -O2
 
 SRCS := agb.cpp error.cpp main.cpp midi.cpp tables.cpp
 
