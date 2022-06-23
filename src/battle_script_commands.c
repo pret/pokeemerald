@@ -3375,6 +3375,10 @@ static void Cmd_getexp(void)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
                     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                         gBattleMoveDamage = (gBattleMoveDamage * 300) / 100;
+                    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_ELITE_FOUR)
+                    {
+                        gBattleMoveDamage = gBattleMoveDamage * 2;
+                    }
 
 
                     if (IsTradedMon(&gPlayerParty[gBattleStruct->expGetterMonId]))
