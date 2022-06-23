@@ -7,6 +7,7 @@ static const struct FlashSetupInfo * const sSetupInfos[] =
 {
     &MX29L010,
     &LE26FV10N1TS,
+    
     &DefaultFlash
 };
 
