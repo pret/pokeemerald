@@ -326,8 +326,8 @@ const struct Item gItems[] =
         .price = 1500,
         .description = sReviveDesc,
         .pocket = POCKET_MEDICINE,
-        .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
     [ITEM_MAX_REVIVE] =
@@ -337,7 +337,7 @@ const struct Item gItems[] =
         .price = 4000,
         .description = sMaxReviveDesc,
         .pocket = POCKET_MEDICINE,
-        .type = ITEM_USE_PARTY_MENU,
+        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
     },
 
