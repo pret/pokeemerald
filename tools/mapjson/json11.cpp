@@ -267,8 +267,8 @@ Json::Json(Json::object &&values)      : m_ptr(make_shared<JsonObject>(move(valu
 
 Json::Type Json::type()                           const { return m_ptr->type();         }
 double Json::number_value()                       const { return m_ptr->number_value(); }
-int Json::int_value()                             const { return m_ptr->int_value();    }
-bool Json::bool_value()                           const { return m_ptr->bool_value();   }
+int    Json::int_value()                          const { return m_ptr->int_value();    }
+bool   Json::bool_value()                         const { return m_ptr->bool_value();   }
 const string & Json::string_value()               const { return m_ptr->string_value(); }
 const vector<Json> & Json::array_items()          const { return m_ptr->array_items();  }
 const map<string, Json> & Json::object_items()    const { return m_ptr->object_items(); }
