@@ -2,7 +2,7 @@
 
 	.equ	se_m_rain_dance_grp, voicegroup128
 	.equ	se_m_rain_dance_pri, 4
-	.equ	se_m_rain_dance_rev, reverb_set+50
+	.equ	se_m_rain_dance_rev, 0
 	.equ	se_m_rain_dance_mvl, 127
 	.equ	se_m_rain_dance_key, 0
 	.equ	se_m_rain_dance_tbs, 1

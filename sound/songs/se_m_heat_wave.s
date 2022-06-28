@@ -2,7 +2,7 @@
 
 	.equ	se_m_heat_wave_grp, voicegroup128
 	.equ	se_m_heat_wave_pri, 4
-	.equ	se_m_heat_wave_rev, reverb_set+50
+	.equ	se_m_heat_wave_rev, 0
 	.equ	se_m_heat_wave_mvl, 127
 	.equ	se_m_heat_wave_key, 0
 	.equ	se_m_heat_wave_tbs, 1

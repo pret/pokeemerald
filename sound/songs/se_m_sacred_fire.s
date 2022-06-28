@@ -2,7 +2,7 @@
 
 	.equ	se_m_sacred_fire_grp, voicegroup128
 	.equ	se_m_sacred_fire_pri, 4
-	.equ	se_m_sacred_fire_rev, reverb_set+50
+	.equ	se_m_sacred_fire_rev, 0
 	.equ	se_m_sacred_fire_mvl, 127
 	.equ	se_m_sacred_fire_key, 0
 	.equ	se_m_sacred_fire_tbs, 1

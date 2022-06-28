@@ -2,7 +2,7 @@
 
 	.equ	se_m_strength_grp, voicegroup128
 	.equ	se_m_strength_pri, 4
-	.equ	se_m_strength_rev, reverb_set+50
+	.equ	se_m_strength_rev, 0
 	.equ	se_m_strength_mvl, 127
 	.equ	se_m_strength_key, 0
 	.equ	se_m_strength_tbs, 1

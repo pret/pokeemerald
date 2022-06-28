@@ -2,7 +2,7 @@
 
 	.equ	se_m_stat_increase_grp, voicegroup128
 	.equ	se_m_stat_increase_pri, 4
-	.equ	se_m_stat_increase_rev, reverb_set+50
+	.equ	se_m_stat_increase_rev, 0
 	.equ	se_m_stat_increase_mvl, 127
 	.equ	se_m_stat_increase_key, 0
 	.equ	se_m_stat_increase_tbs, 1

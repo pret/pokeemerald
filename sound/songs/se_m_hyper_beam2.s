@@ -2,7 +2,7 @@
 
 	.equ	se_m_hyper_beam2_grp, voicegroup128
 	.equ	se_m_hyper_beam2_pri, 4
-	.equ	se_m_hyper_beam2_rev, reverb_set+50
+	.equ	se_m_hyper_beam2_rev, 0
 	.equ	se_m_hyper_beam2_mvl, 127
 	.equ	se_m_hyper_beam2_key, 0
 	.equ	se_m_hyper_beam2_tbs, 1

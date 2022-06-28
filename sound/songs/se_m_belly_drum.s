@@ -2,7 +2,7 @@
 
 	.equ	se_m_belly_drum_grp, voicegroup128
 	.equ	se_m_belly_drum_pri, 4
-	.equ	se_m_belly_drum_rev, reverb_set+50
+	.equ	se_m_belly_drum_rev, 0
 	.equ	se_m_belly_drum_mvl, 127
 	.equ	se_m_belly_drum_key, 0
 	.equ	se_m_belly_drum_tbs, 1

@@ -2,7 +2,7 @@
 
 	.equ	se_m_moonlight_grp, voicegroup128
 	.equ	se_m_moonlight_pri, 4
-	.equ	se_m_moonlight_rev, reverb_set+50
+	.equ	se_m_moonlight_rev, 0
 	.equ	se_m_moonlight_mvl, 127
 	.equ	se_m_moonlight_key, 0
 	.equ	se_m_moonlight_tbs, 1

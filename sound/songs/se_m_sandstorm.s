@@ -2,7 +2,7 @@
 
 	.equ	se_m_sandstorm_grp, voicegroup128
 	.equ	se_m_sandstorm_pri, 4
-	.equ	se_m_sandstorm_rev, reverb_set+50
+	.equ	se_m_sandstorm_rev, 0
 	.equ	se_m_sandstorm_mvl, 127
 	.equ	se_m_sandstorm_key, 0
 	.equ	se_m_sandstorm_tbs, 1

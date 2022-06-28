@@ -2,7 +2,7 @@
 
 	.equ	se_m_sweet_scent_grp, voicegroup128
 	.equ	se_m_sweet_scent_pri, 4
-	.equ	se_m_sweet_scent_rev, reverb_set+50
+	.equ	se_m_sweet_scent_rev, 0
 	.equ	se_m_sweet_scent_mvl, 127
 	.equ	se_m_sweet_scent_key, 0
 	.equ	se_m_sweet_scent_tbs, 1

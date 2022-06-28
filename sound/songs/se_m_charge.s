@@ -2,7 +2,7 @@
 
 	.equ	se_m_charge_grp, voicegroup128
 	.equ	se_m_charge_pri, 4
-	.equ	se_m_charge_rev, reverb_set+50
+	.equ	se_m_charge_rev, 0
 	.equ	se_m_charge_mvl, 127
 	.equ	se_m_charge_key, 0
 	.equ	se_m_charge_tbs, 1

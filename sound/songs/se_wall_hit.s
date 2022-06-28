@@ -2,7 +2,7 @@
 
 	.equ	se_wall_hit_grp, voicegroup127
 	.equ	se_wall_hit_pri, 2
-	.equ	se_wall_hit_rev, reverb_set+50
+	.equ	se_wall_hit_rev, 0
 	.equ	se_wall_hit_mvl, 127
 	.equ	se_wall_hit_key, 0
 	.equ	se_wall_hit_tbs, 1
