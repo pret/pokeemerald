@@ -975,6 +975,7 @@ static void Task_UseStatIncreaseItem(u8 taskId)
     {
         PlaySE(SE_USE_ITEM);
         RemoveBagItem(gSpecialVar_ItemId, 1);
+        FlagSet(FLAG_DISABLE_BAG);
         if (!InBattlePyramid())
             DisplayItemMessage(taskId, FONT_NORMAL, UseStatIncreaseItem(gSpecialVar_ItemId), Task_CloseStatIncreaseMessage);
         else

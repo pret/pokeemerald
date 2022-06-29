@@ -4184,7 +4184,7 @@ static void HandleTurnActionSelectionState(void)
                     }
                     break;
                 case B_ACTION_USE_ITEM:
-                    if (gBattleTypeFlags & (BATTLE_TYPE_LINK
+                    if ((FlagGet(FLAG_DISABLE_BAG) && (gBattleTypeFlags & BATTLE_TYPE_TRAINER)) || gBattleTypeFlags & (BATTLE_TYPE_LINK
                                             | BATTLE_TYPE_FRONTIER_NO_PYRAMID
                                             | BATTLE_TYPE_EREADER_TRAINER
                                             | BATTLE_TYPE_RECORDED_LINK))
@@ -5190,6 +5190,7 @@ static void ReturnFromBattleToOverworld(void)
 
     gSpecialVar_Result = gBattleOutcome;
     gMain.inBattle = FALSE;
+    FlagClear(FLAG_DISABLE_BAG);
     gMain.callback1 = gPreBattleCallback1;
 
     if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
