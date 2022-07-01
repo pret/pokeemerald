@@ -382,7 +382,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Archie[] = {
     .iv = 150,
     .lvl = 54,
     .species = SPECIES_GYARADOS,
-    }
+    },
     {
     .iv = 150,
     .lvl = 55,
@@ -8259,7 +8259,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_MaxieMagmaHideout[] = {
     .iv = 150,
     .lvl = 49,
     .species = SPECIES_WHISCASH,
-    }
+    },
     {
     .iv = 150,
     .lvl = 50,
@@ -8286,7 +8286,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_MaxieMtChimney[] = {
     {
     .iv = 150,
     .lvl = 33,
-    .species = SPECIES_slugma,
+    .species = SPECIES_SLUGMA,
     },
     {
     .iv = 150,
