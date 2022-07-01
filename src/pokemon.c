@@ -6669,21 +6669,21 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     u8 nature = GetNature(mon);
                     switch (nature)
                     {
-                        case NATURE_HARDY:
-                        case NATURE_BRAVE:
-                        case NATURE_ADAMANT:
-                        case NATURE_NAUGHTY:
-                        case NATURE_DOCILE:
-                        case NATURE_IMPISH:
-                        case NATURE_LAX:
-                        case NATURE_HASTY:
-                        case NATURE_JOLLY:
-                        case NATURE_NAIVE:
-                        case NATURE_RASH:
-                        case NATURE_SASSY:
-                        case NATURE_QUIRKY:
-                            targetSpecies = gEvolutionTable[species][i].targetSpecies;
-                            break;
+                    case NATURE_HARDY:
+                    case NATURE_BRAVE:
+                    case NATURE_ADAMANT:
+                    case NATURE_NAUGHTY:
+                    case NATURE_DOCILE:
+                    case NATURE_IMPISH:
+                    case NATURE_LAX:
+                    case NATURE_HASTY:
+                    case NATURE_JOLLY:
+                    case NATURE_NAIVE:
+                    case NATURE_RASH:
+                    case NATURE_SASSY:
+                    case NATURE_QUIRKY:
+                        targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                        break;
                     }
                 }
                 break;
@@ -6693,20 +6693,20 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     u8 nature = GetNature(mon);
                     switch (nature)
                     {
-                        case NATURE_LONELY:
-                        case NATURE_BOLD:
-                        case NATURE_RELAXED:
-                        case NATURE_TIMID:
-                        case NATURE_SERIOUS:
-                        case NATURE_MODEST:
-                        case NATURE_MILD:
-                        case NATURE_QUIET:
-                        case NATURE_BASHFUL:
-                        case NATURE_CALM:
-                        case NATURE_GENTLE:
-                        case NATURE_CAREFUL:
-                            targetSpecies = gEvolutionTable[species][i].targetSpecies;
-                            break;
+                    case NATURE_LONELY:
+                    case NATURE_BOLD:
+                    case NATURE_RELAXED:
+                    case NATURE_TIMID:
+                    case NATURE_SERIOUS:
+                    case NATURE_MODEST:
+                    case NATURE_MILD:
+                    case NATURE_QUIET:
+                    case NATURE_BASHFUL:
+                    case NATURE_CALM:
+                    case NATURE_GENTLE:
+                    case NATURE_CAREFUL:
+                        targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                        break;
                     }
                 }
                 break;
