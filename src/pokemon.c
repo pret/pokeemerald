@@ -6683,6 +6683,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     case NATURE_SASSY:
                     case NATURE_QUIRKY:
                         targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                        break;
                     }
                 }
                 break;
@@ -6705,6 +6706,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     case NATURE_GENTLE:
                     case NATURE_CAREFUL:
                         targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                        break;
                     }
                 }
                 break;
