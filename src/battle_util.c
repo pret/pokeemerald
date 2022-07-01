@@ -1704,6 +1704,7 @@ bool32 IsHealBlockPreventingMove(u32 battler, u32 move)
     case EFFECT_HEALING_WISH:
     case EFFECT_WISH:
     case EFFECT_HEAL_PULSE:
+    case EFFECT_JUNGLE_HEALING:
         return TRUE;
     default:
         return FALSE;
