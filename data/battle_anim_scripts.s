@@ -14193,7 +14193,42 @@ Move_LASH_OUT::
 	end @to do:
 
 Move_POLTERGEIST::
-	end @to do:
+	loadspritegfx ANIM_TAG_EYE_SPARKLE
+	loadspritegfx ANIM_TAG_WHITE_SHADOW @Destiny Bond
+	loadspritegfx ANIM_TAG_QUICK_GUARD_HAND @Black Colour
+	loadspritegfx ANIM_TAG_IMPACT
+	loadspritegfx ANIM_TAG_POLTERGEIST
+	fadetobg BG_NIGHTMARE
+	waitbgfadein
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 2, 0, 0, 16, RGB_BLACK
+	waitforvisualfinish
+	createsprite gEyeSparkleSpriteTemplate, ANIM_ATTACKER, 0, -16, -8
+	createsprite gEyeSparkleSpriteTemplate, ANIM_ATTACKER, 0, 16, -8
+	playsewithpan SE_M_DETECT, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 2, 0, 16, 0, RGB_BLACK
+	playsewithpan SE_M_FAINT_ATTACK, SOUND_PAN_ATTACKER
+	delay 0x1
+	launchtask AnimTask_DestinyBondWhiteShadow 0x5 0x2 0x0 0x24
+	delay 0x30
+	playsewithpan SE_M_SAND_ATTACK, SOUND_PAN_TARGET
+	createvisualtask AnimTask_PoltergeistItem, 2
+	waitforvisualfinish
+	setalpha 12, 8
+	launchtemplate gBasicHitSplatSpriteTemplate 0x2 0x4 0x0 0x0 0x1 0x1
+	launchtask AnimTask_ShakeMon 0x5 0x5 0x1 0x0 0x5 0x5 0x1
+	launchtemplate gComplexPaletteBlendSpriteTemplate 0x2 0x7 0x7 0x5 0x1 0x0 0xa 0x0 0x0
+	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	waitforvisualfinish
+	launchtask AnimTask_NightmareClone 0x2 0x0
+	launchtask AnimTask_ShakeMon 0x2 0x5 0x1 0x3 0x0 0x28 0x1
+	playsewithpan SE_M_NIGHTMARE, SOUND_PAN_TARGET
+	waitforvisualfinish
+	restorebg
+	waitbgfadein
+	clearmonbg 0x3
+	blendoff
+	end
 
 Move_CORROSIVE_GAS::
 	end @to do:

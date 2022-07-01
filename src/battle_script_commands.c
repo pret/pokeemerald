@@ -9448,6 +9448,7 @@ static void Cmd_various(void)
         else
         {
             PREPARE_ITEM_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].item);
+            gLastUsedItem = gBattleMons[gActiveBattler].item;
             gBattlescriptCurrInstr += 7;
         }
         return;
