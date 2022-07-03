@@ -1461,15 +1461,8 @@ static void OpponentHandleMoveAnimation(void)
         gWeatherMoveAnim = gBattleResources->bufferA[gActiveBattler][12] | (gBattleResources->bufferA[gActiveBattler][13] << 8);
         gAnimDisableStructPtr = (struct DisableStruct *)&gBattleResources->bufferA[gActiveBattler][16];
         gTransformedPersonalities[gActiveBattler] = gAnimDisableStructPtr->transformedMonPersonality;
-        if (IsMoveWithoutAnimation(move, gAnimMoveTurn)) // always returns FALSE
-        {
-            OpponentBufferExecCompleted();
-        }
-        else
-        {
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
-            gBattlerControllerFuncs[gActiveBattler] = OpponentDoMoveAnimation;
-        }
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
+        gBattlerControllerFuncs[gActiveBattler] = OpponentDoMoveAnimation;
     }
 }
 
@@ -1605,6 +1598,7 @@ static void OpponentHandleChooseMove(void)
         else // Wild pokemon - use random move
         {
             u16 move;
+            u8 target;
             do
             {
                 chosenMoveId = Random() & 3;
@@ -1615,6 +1609,10 @@ static void OpponentHandleChooseMove(void)
                 BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (gActiveBattler << 8));
             else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
             {
+                do {
+                    target = GetBattlerAtPosition(Random() & 2);
+                } while (!CanTargetBattler(gActiveBattler, target, move));
+                
                 #if B_WILD_NATURAL_ENEMIES == TRUE
                 // Don't bother to loop through table if the move can't attack ally
                 if (!(gBattleMoves[move].target & MOVE_TARGET_BOTH))
@@ -1641,14 +1639,14 @@ static void OpponentHandleChooseMove(void)
                             break;
                         }
                     }
-                    if (isPartnerEnemy)
+                    if (isPartnerEnemy && CanTargetBattler(gActiveBattler, target, move))
                         BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (GetBattlerAtPosition(BATTLE_PARTNER(gActiveBattler)) << 8));
                     else
-                        BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (GetBattlerAtPosition(Random() & 2) << 8));
+                        BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (target << 8));
                 }
                 else
                 #endif
-                    BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (GetBattlerAtPosition(Random() & 2) << 8));
+                    BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (target << 8));
             }
             else
                 BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) << 8));

@@ -613,8 +613,10 @@
 #define STRINGID_METEORBEAMCHARGING                   611
 #define STRINGID_HEATUPBEAK                           612
 #define STRINGID_COURTCHANGE                          613
+#define STRINGID_PLAYERLOSTTOENEMYTRAINER             614
+#define STRINGID_PLAYERPAIDPRIZEMONEY                 615
 
-#define BATTLESTRINGS_COUNT                           614
+#define BATTLESTRINGS_COUNT                           616
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -871,5 +873,17 @@
 #define B_MSG_TERRAINPREVENTS_MISTY     0
 #define B_MSG_TERRAINPREVENTS_ELECTRIC  1
 #define B_MSG_TERRAINPREVENTS_PSYCHIC   2
+
+// gWrappedStringIds
+#define B_MSG_WRAPPED_BIND        0
+#define B_MSG_WRAPPED_WRAP        1
+#define B_MSG_WRAPPED_FIRE_SPIN   2
+#define B_MSG_WRAPPED_CLAMP       3
+#define B_MSG_WRAPPED_WHIRLPOOL   4
+#define B_MSG_WRAPPED_SAND_TOMB   5
+#define B_MSG_WRAPPED_MAGMA_STORM 6
+#define B_MSG_WRAPPED_INFESTATION 7
+#define B_MSG_WRAPPED_SNAP_TRAP   8
+#define TRAPPING_MOVES_COUNT      9
 
 #endif // GUARD_CONSTANTS_BATTLE_STRING_IDS_H
