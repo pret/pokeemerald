@@ -10188,6 +10188,20 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_SUBSTITUTE)
                                             | TUTOR(MOVE_SWIFT)),
 
+    [SPECIES_WYRDEER]          = (0),
+
+    [SPECIES_KLEAVOR]          = (0),
+
+    [SPECIES_URSALUNA]          = (0),
+
+    [SPECIES_BASCULEGION]          = (0),
+
+    [SPECIES_SNEASLER]          = (0),
+
+    [SPECIES_OVERQWIL]          = (0),
+
+    [SPECIES_ENAMORUS]          = (0),
+
     [SPECIES_MEOWTH_GALARIAN]  = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
                                             | TUTOR(MOVE_DOUBLE_EDGE)
                                             | TUTOR(MOVE_ENDURE)
@@ -10365,6 +10379,38 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_SNORE)
                                             | TUTOR(MOVE_SUBSTITUTE)
                                             | TUTOR(MOVE_THUNDER_WAVE)),
+
+    [SPECIES_GROWLITHE_HISUIAN]          = (0),
+
+    [SPECIES_ARCANINE_HISUIAN]          = (0),
+
+    [SPECIES_VOLTORB_HISUIAN]          = (0),
+
+    [SPECIES_ELECTRODE_HISUIAN]          = (0),
+
+    [SPECIES_TYPHLOSION_HISUIAN]          = (0),
+
+    [SPECIES_QWILFISH_HISUIAN]          = (0),
+
+    [SPECIES_SNEASEL_HISUIAN]          = (0),
+
+    [SPECIES_SAMUROTT_HISUIAN]          = (0),
+
+    [SPECIES_LILLIGANT_HISUIAN]          = (0),
+
+    [SPECIES_ZORUA_HISUIAN]          = (0),
+
+    [SPECIES_ZOROARK_HISUIAN]          = (0),
+
+    [SPECIES_BRAVIARY_HISUIAN]          = (0),
+
+    [SPECIES_SLIGGOO_HISUIAN]          = (0),
+
+    [SPECIES_GOODRA_HISUIAN]          = (0),
+
+    [SPECIES_AVALUGG_HISUIAN]          = (0),
+
+    [SPECIES_DECIDUEYE_HISUIAN]          = (0),
 
     [SPECIES_BURMY_SANDY_CLOAK]  = TUTOR_LEARNSET(TUTOR(MOVE_SNORE)),
 

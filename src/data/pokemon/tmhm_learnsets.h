@@ -20193,6 +20193,20 @@ const u32 gTMHMLearnsets[][2] =
                                             | TMHM(TM22_SOLAR_BEAM)
                                             | TMHM(TM11_SUNNY_DAY)),
 
+    [SPECIES_WYRDEER]  = TMHM_LEARNSET(0),
+
+    [SPECIES_KLEAVOR]  = TMHM_LEARNSET(0),
+
+    [SPECIES_URSALUNA]  = TMHM_LEARNSET(0),
+
+    [SPECIES_BASCULEGION]  = TMHM_LEARNSET(0),
+
+    [SPECIES_SNEASLER]  = TMHM_LEARNSET(0),
+
+    [SPECIES_OVERQWIL]  = TMHM_LEARNSET(0),
+
+    [SPECIES_ENAMORUS]  = TMHM_LEARNSET(0),
+
     [SPECIES_RATTATA_ALOLAN]  = TMHM_LEARNSET(TMHM(TM14_BLIZZARD)
                                                | TMHM(HM01_CUT)
                                                | TMHM(TM28_DIG)
@@ -20760,6 +20774,38 @@ const u32 gTMHMLearnsets[][2] =
                                             | TMHM(TM37_SANDSTORM)
                                             | TMHM(TM36_SLUDGE_BOMB)
                                             | TMHM(HM03_SURF)),
+											
+    [SPECIES_GROWLITHE_HISUIAN]  = TMHM_LEARNSET(0),
+
+    [SPECIES_ARCANINE_HISUIAN]  = TMHM_LEARNSET(0),
+
+    [SPECIES_VOLTORB_HISUIAN]  = TMHM_LEARNSET(0),
+
+    [SPECIES_ELECTRODE_HISUIAN]  = TMHM_LEARNSET(0),
+
+    [SPECIES_TYPHLOSION_HISUIAN]  = TMHM_LEARNSET(0),
+
+    [SPECIES_QWILFISH_HISUIAN]  = TMHM_LEARNSET(0),
+
+    [SPECIES_SNEASEL_HISUIAN]  = TMHM_LEARNSET(0),
+
+    [SPECIES_SAMUROTT_HISUIAN]  = TMHM_LEARNSET(0),
+
+    [SPECIES_LILLIGANT_HISUIAN]  = TMHM_LEARNSET(0),
+
+    [SPECIES_ZORUA_HISUIAN]  = TMHM_LEARNSET(0),
+
+    [SPECIES_ZOROARK_HISUIAN]  = TMHM_LEARNSET(0),
+
+    [SPECIES_BRAVIARY_HISUIAN]  = TMHM_LEARNSET(0),
+
+    [SPECIES_SLIGGOO_HISUIAN]  = TMHM_LEARNSET(0),
+
+    [SPECIES_GOODRA_HISUIAN]  = TMHM_LEARNSET(0),
+
+    [SPECIES_AVALUGG_HISUIAN]  = TMHM_LEARNSET(0),
+
+    [SPECIES_DECIDUEYE_HISUIAN]  = TMHM_LEARNSET(0),
 
     [SPECIES_PIKACHU_COSPLAY]  = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
                                             | TMHM(TM31_BRICK_BREAK)
@@ -21388,6 +21434,78 @@ const u32 gTMHMLearnsets[][2] =
     [SPECIES_ROTOM_FAN]   = TMHM_LEARNSET(0),
 
     [SPECIES_ROTOM_MOW]   = TMHM_LEARNSET(0),
+
+    [SPECIES_DIALGA_ORIGIN]      = TMHM_LEARNSET(TMHM(TM40_AERIAL_ACE)
+                                            | TMHM(TM14_BLIZZARD)
+                                            | TMHM(TM31_BRICK_BREAK)
+                                            | TMHM(TM08_BULK_UP)
+                                            | TMHM(HM01_CUT)
+                                            | TMHM(TM32_DOUBLE_TEAM)
+                                            | TMHM(TM02_DRAGON_CLAW)
+                                            | TMHM(TM26_EARTHQUAKE)
+                                            | TMHM(TM42_FACADE)
+                                            | TMHM(TM38_FIRE_BLAST)
+                                            | TMHM(TM35_FLAMETHROWER)
+                                            | TMHM(HM05_FLASH)
+                                            | TMHM(TM21_FRUSTRATION)
+                                            | TMHM(TM10_HIDDEN_POWER)
+                                            | TMHM(TM15_HYPER_BEAM)
+                                            | TMHM(TM13_ICE_BEAM)
+                                            | TMHM(TM23_IRON_TAIL)
+                                            | TMHM(TM50_OVERHEAT)
+                                            | TMHM(TM17_PROTECT)
+                                            | TMHM(TM18_RAIN_DANCE)
+                                            | TMHM(TM44_REST)
+                                            | TMHM(TM27_RETURN)
+                                            | TMHM(TM05_ROAR)
+                                            | TMHM(HM06_ROCK_SMASH)
+                                            | TMHM(TM39_ROCK_TOMB)
+                                            | TMHM(TM20_SAFEGUARD)
+                                            | TMHM(TM37_SANDSTORM)
+                                            | TMHM(TM43_SECRET_POWER)
+                                            | TMHM(TM34_SHOCK_WAVE)
+                                            | TMHM(HM04_STRENGTH)
+                                            | TMHM(TM11_SUNNY_DAY)
+                                            | TMHM(TM25_THUNDER)
+                                            | TMHM(TM24_THUNDERBOLT)
+                                            | TMHM(TM06_TOXIC)),
+
+    [SPECIES_PALKIA_ORIGIN]      = TMHM_LEARNSET(TMHM(TM40_AERIAL_ACE)
+                                            | TMHM(TM14_BLIZZARD)
+                                            | TMHM(TM31_BRICK_BREAK)
+                                            | TMHM(TM08_BULK_UP)
+                                            | TMHM(HM01_CUT)
+                                            | TMHM(HM08_DIVE)
+                                            | TMHM(TM32_DOUBLE_TEAM)
+                                            | TMHM(TM02_DRAGON_CLAW)
+                                            | TMHM(TM26_EARTHQUAKE)
+                                            | TMHM(TM42_FACADE)
+                                            | TMHM(TM38_FIRE_BLAST)
+                                            | TMHM(TM35_FLAMETHROWER)
+                                            | TMHM(TM01_FOCUS_PUNCH)
+                                            | TMHM(TM21_FRUSTRATION)
+                                            | TMHM(TM07_HAIL)
+                                            | TMHM(TM10_HIDDEN_POWER)
+                                            | TMHM(TM15_HYPER_BEAM)
+                                            | TMHM(TM13_ICE_BEAM)
+                                            | TMHM(TM17_PROTECT)
+                                            | TMHM(TM18_RAIN_DANCE)
+                                            | TMHM(TM44_REST)
+                                            | TMHM(TM27_RETURN)
+                                            | TMHM(TM05_ROAR)
+                                            | TMHM(HM06_ROCK_SMASH)
+                                            | TMHM(TM39_ROCK_TOMB)
+                                            | TMHM(TM20_SAFEGUARD)
+                                            | TMHM(TM37_SANDSTORM)
+                                            | TMHM(TM43_SECRET_POWER)
+                                            | TMHM(TM34_SHOCK_WAVE)
+                                            | TMHM(HM04_STRENGTH)
+                                            | TMHM(TM11_SUNNY_DAY)
+                                            | TMHM(HM03_SURF)
+                                            | TMHM(TM25_THUNDER)
+                                            | TMHM(TM24_THUNDERBOLT)
+                                            | TMHM(TM06_TOXIC)
+                                            | TMHM(TM03_WATER_PULSE)),
 
     [SPECIES_GIRATINA_ORIGIN]  = TMHM_LEARNSET(TMHM(TM40_AERIAL_ACE)
                                             | TMHM(TM04_CALM_MIND)
@@ -22289,6 +22407,25 @@ const u32 gTMHMLearnsets[][2] =
                                             | TMHM(TM06_TOXIC)
                                             | TMHM(HM07_WATERFALL)),
 
+    [SPECIES_BASCULIN_WHITE_STRIPED]  = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
+                                            | TMHM(HM01_CUT)
+                                            | TMHM(HM08_DIVE)
+                                            | TMHM(TM32_DOUBLE_TEAM)
+                                            | TMHM(TM42_FACADE)
+                                            | TMHM(TM21_FRUSTRATION)
+                                            | TMHM(TM07_HAIL)
+                                            | TMHM(TM10_HIDDEN_POWER)
+                                            | TMHM(TM13_ICE_BEAM)
+                                            | TMHM(TM17_PROTECT)
+                                            | TMHM(TM18_RAIN_DANCE)
+                                            | TMHM(TM44_REST)
+                                            | TMHM(TM27_RETURN)
+                                            | TMHM(TM43_SECRET_POWER)
+                                            | TMHM(HM03_SURF)
+                                            | TMHM(TM12_TAUNT)
+                                            | TMHM(TM06_TOXIC)
+                                            | TMHM(HM07_WATERFALL)),
+
     [SPECIES_DEERLING_SUMMER]  = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
                                             | TMHM(TM32_DOUBLE_TEAM)
                                             | TMHM(TM42_FACADE)
@@ -22488,6 +22625,8 @@ const u32 gTMHMLearnsets[][2] =
                                             | TMHM(TM36_SLUDGE_BOMB)
                                             | TMHM(HM04_STRENGTH)
                                             | TMHM(TM06_TOXIC)),
+
+    [SPECIES_ENAMORUS_THERIAN]  = TMHM_LEARNSET(0),
 
     [SPECIES_KYUREM_WHITE]  = TMHM_LEARNSET(TMHM(TM14_BLIZZARD)
                                             | TMHM(HM01_CUT)
