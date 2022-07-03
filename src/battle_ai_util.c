@@ -736,53 +736,63 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness)
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
 
-    critChance = GetInverseCritChance(battlerAtk, battlerDef, move);
-    normalDmg = CalculateMoveDamageAndEffectiveness(move, battlerAtk, battlerDef, moveType, &effectivenessMultiplier);
-    critDmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, TRUE, FALSE, FALSE);
-
-    if(critChance == -1)
-        dmg = normalDmg;
-    else
-        dmg = (critDmg + normalDmg * (critChance - 1)) / critChance;
-
-    // Handle dynamic move damage
-    switch (gBattleMoves[move].effect)
+    if (gBattleMoves[move].power)
     {
-    case EFFECT_LEVEL_DAMAGE:
-    case EFFECT_PSYWAVE:
-        dmg = gBattleMons[battlerAtk].level * (AI_DATA->abilities[battlerAtk] == ABILITY_PARENTAL_BOND ? 2 : 1);
-        break;
-    case EFFECT_DRAGON_RAGE:
-        dmg = 40 * (AI_DATA->abilities[battlerAtk] == ABILITY_PARENTAL_BOND ? 2 : 1);
-        break;
-    case EFFECT_SONICBOOM:
-        dmg = 20 * (AI_DATA->abilities[battlerAtk] == ABILITY_PARENTAL_BOND ? 2 : 1);
-        break;
-    case EFFECT_MULTI_HIT:
-        dmg *= (AI_DATA->abilities[battlerAtk] == ABILITY_SKILL_LINK ? 5 : 3);
-        break;
-    case EFFECT_TRIPLE_KICK:
-        dmg *= (AI_DATA->abilities[battlerAtk] == ABILITY_SKILL_LINK ? 6 : 5);
-        break;
-    case EFFECT_ENDEAVOR:
-        // If target has less HP than user, Endeavor does no damage
-        dmg = max(0, gBattleMons[battlerDef].hp - gBattleMons[battlerAtk].hp);
-        break;
-    case EFFECT_SUPER_FANG:
-        dmg = (AI_DATA->abilities[battlerAtk] == ABILITY_PARENTAL_BOND
-            ? max(2, gBattleMons[battlerDef].hp * 3 / 4)
-            : max(1, gBattleMons[battlerDef].hp / 2));
-        break;
-    case EFFECT_FINAL_GAMBIT:
-        dmg = gBattleMons[battlerAtk].hp;
-        break;
-    }
+        critChance = GetInverseCritChance(battlerAtk, battlerDef, move);
+        normalDmg = CalculateMoveDamageAndEffectiveness(move, battlerAtk, battlerDef, moveType, &effectivenessMultiplier);
+        critDmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, TRUE, FALSE, FALSE);
 
-    // Handle other multi-strike moves
-    if (gBattleMoves[move].flags & FLAG_TWO_STRIKES)
-        dmg *= 2;
-    else if (move == MOVE_SURGING_STRIKES || (move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH))
-        dmg *= 3;
+        if (critChance == -1)
+            dmg = normalDmg;
+        else
+            dmg = (critDmg + normalDmg * (critChance - 1)) / critChance;
+
+        // Handle dynamic move damage
+        switch (gBattleMoves[move].effect)
+        {
+        case EFFECT_LEVEL_DAMAGE:
+        case EFFECT_PSYWAVE:
+            dmg = gBattleMons[battlerAtk].level * (AI_DATA->abilities[battlerAtk] == ABILITY_PARENTAL_BOND ? 2 : 1);
+            break;
+        case EFFECT_DRAGON_RAGE:
+            dmg = 40 * (AI_DATA->abilities[battlerAtk] == ABILITY_PARENTAL_BOND ? 2 : 1);
+            break;
+        case EFFECT_SONICBOOM:
+            dmg = 20 * (AI_DATA->abilities[battlerAtk] == ABILITY_PARENTAL_BOND ? 2 : 1);
+            break;
+        case EFFECT_MULTI_HIT:
+            dmg *= (AI_DATA->abilities[battlerAtk] == ABILITY_SKILL_LINK ? 5 : 3);
+            break;
+        case EFFECT_TRIPLE_KICK:
+            dmg *= (AI_DATA->abilities[battlerAtk] == ABILITY_SKILL_LINK ? 6 : 5);
+            break;
+        case EFFECT_ENDEAVOR:
+            // If target has less HP than user, Endeavor does no damage
+            dmg = max(0, gBattleMons[battlerDef].hp - gBattleMons[battlerAtk].hp);
+            break;
+        case EFFECT_SUPER_FANG:
+            dmg = (AI_DATA->abilities[battlerAtk] == ABILITY_PARENTAL_BOND
+                ? max(2, gBattleMons[battlerDef].hp * 3 / 4)
+                : max(1, gBattleMons[battlerDef].hp / 2));
+            break;
+        case EFFECT_FINAL_GAMBIT:
+            dmg = gBattleMons[battlerAtk].hp;
+            break;
+        }
+
+        // Handle other multi-strike moves
+        if (gBattleMoves[move].flags & FLAG_TWO_STRIKES)
+            dmg *= 2;
+        else if (move == MOVE_SURGING_STRIKES || (move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH))
+            dmg *= 3;
+        
+        if (dmg == 0)
+            dmg = 1;
+    }
+    else
+    {
+        dmg = 0;
+    }
 
     RestoreBattlerData(battlerAtk);
     RestoreBattlerData(battlerDef);
