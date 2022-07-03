@@ -961,29 +961,33 @@ u16 AI_GetTypeEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef)
     return typeEffectiveness;
 }
 
-u8 AI_GetMoveEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef)
+u32 AI_GetMoveEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef)
 {
     gMoveResultFlags = 0;
     return AI_GetEffectiveness(AI_GetTypeEffectiveness(move, battlerAtk, battlerDef));
 }
 
-static u8 AI_GetEffectiveness(u16 multiplier)
+static u32 AI_GetEffectiveness(u16 multiplier)
 {
     switch (multiplier)
     {
     case UQ_4_12(0.0):
-    default:
         return AI_EFFECTIVENESS_x0;
+    case UQ_4_12(0.125):
+        return AI_EFFECTIVENESS_x0_125;
     case UQ_4_12(0.25):
         return AI_EFFECTIVENESS_x0_25;
     case UQ_4_12(0.5):
         return AI_EFFECTIVENESS_x0_5;
     case UQ_4_12(1.0):
+    default:
         return AI_EFFECTIVENESS_x1;
     case UQ_4_12(2.0):
         return AI_EFFECTIVENESS_x2;
     case UQ_4_12(4.0):
         return AI_EFFECTIVENESS_x4;
+    case UQ_4_12(8.0):
+        return AI_EFFECTIVENESS_x8;
     }
 }
 

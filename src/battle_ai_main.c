@@ -580,7 +580,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     s32 moveType;
     u16 moveTarget = AI_GetBattlerMoveTargetType(battlerAtk, move);
     u16 accuracy = AI_GetMoveAccuracy(battlerAtk, battlerDef, move);
-    u8 effectiveness = AI_DATA->effectiveness[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex];
+    u32 effectiveness = AI_DATA->effectiveness[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex];
     bool32 isDoubleBattle = IsValidDoubleBattle(battlerAtk);
     u32 i;
     u16 predictedMove = AI_DATA->predictedMoves[battlerDef];
@@ -625,6 +625,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case AI_EFFECTIVENESS_x0:
             RETURN_SCORE_MINUS(20);
             break;
+        case AI_EFFECTIVENESS_x0_125:
         case AI_EFFECTIVENESS_x0_25:
             RETURN_SCORE_MINUS(10);
             break;
@@ -667,7 +668,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                     RETURN_SCORE_MINUS(20);
                 break;
             case ABILITY_WONDER_GUARD:
-                if (effectiveness != AI_EFFECTIVENESS_x2 && effectiveness != AI_EFFECTIVENESS_x4)
+                if (effectiveness < AI_EFFECTIVENESS_x2)
                     return 0;
                 break;
             case ABILITY_SAP_SIPPER:
@@ -2545,33 +2546,17 @@ static s16 AI_TryToFaint(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         
         switch (AI_DATA->effectiveness[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex])
         {
+        case AI_EFFECTIVENESS_x8:
+            score += 8;
+            break;
         case AI_EFFECTIVENESS_x4:
-            if (WEATHER_HAS_EFFECT
-             && gBattleWeather & B_WEATHER_STRONG_WINDS
-             && IS_BATTLER_OF_TYPE(battlerDef, TYPE_FLYING))
-            {
-                if (AI_RandLessThan(176)) //Consider it supereffective instead of hypereffective.
-                    score += 2;
-                else
-                    score++;
-            }
-            else
-                score += 4;
+            score += 4;
             break;
         case AI_EFFECTIVENESS_x2:
-            if (WEATHER_HAS_EFFECT
-             && gBattleWeather & B_WEATHER_STRONG_WINDS
-             && IS_BATTLER_OF_TYPE(battlerDef, TYPE_FLYING))
-            {
-                break; // Don't increase score, consider it neutral.
-            }
+            if (AI_RandLessThan(176))
+                score += 2;
             else
-            {
-                if (AI_RandLessThan(176))
-                    score += 2;
-                else
-                    score++;
-            }
+                score++;
             break;
         }
     }
@@ -2983,7 +2968,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
     // move data
     u16 moveEffect = gBattleMoves[move].effect;
-    u8 effectiveness = AI_DATA->effectiveness[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex];
+    u32 effectiveness = AI_DATA->effectiveness[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex];
     u8 atkPriority = GetMovePriority(battlerAtk, move);
     u16 predictedMove = AI_DATA->predictedMoves[battlerDef];
     bool32 isDoubleBattle = IsValidDoubleBattle(battlerAtk);
