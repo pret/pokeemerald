@@ -274,6 +274,7 @@ void GetAiLogicData(void)
           || !IsBattlerAIControlled(battlerAtk)) {
             continue;
         }
+        
         for (battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
         {
             if (battlerAtk == battlerDef)
