@@ -20,7 +20,7 @@
 #include "constants/moves.h"
 #include "constants/items.h"
 
-static u8 AI_GetEffectiveness(u16 multiplier);
+static u32 AI_GetEffectiveness(u16 multiplier);
 
 // Const Data
 static const s8 sAiAbilityRatings[ABILITIES_COUNT] =
