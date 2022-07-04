@@ -1644,20 +1644,14 @@ static bool32 AccuracyCalcHelper(u16 move)
     return FALSE;
 }
 
-u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move)
+u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u32 defAbility, u32 atkHoldEffect, u32 defHoldEffect)
 {
-    u32 calc, moveAcc, atkHoldEffect, atkParam, defHoldEffect, defParam, atkAbility, defAbility;
+    u32 calc, moveAcc;
     s8 buff, accStage, evasionStage;
+    u8 atkParam = GetBattlerHoldEffectParam(battlerAtk);
+    u8 defParam = GetBattlerHoldEffectParam(battlerDef);
 
-    atkAbility = GetBattlerAbility(battlerAtk);
-    atkHoldEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
-    atkParam = GetBattlerHoldEffectParam(battlerAtk);
-
-    defAbility = GetBattlerAbility(battlerDef);
-    defHoldEffect = GetBattlerHoldEffect(battlerDef, TRUE);
-    defParam = GetBattlerHoldEffectParam(battlerDef);
     gPotentialItemEffectBattler = battlerDef;
-
     accStage = gBattleMons[battlerAtk].statStages[STAT_ACC];
     evasionStage = gBattleMons[battlerDef].statStages[STAT_EVASION];
     if (atkAbility == ABILITY_UNAWARE || atkAbility == ABILITY_KEEN_EYE)
@@ -1755,7 +1749,8 @@ static void Cmd_accuracycheck(void)
             return;
 
         // final calculation
-        if ((Random() % 100 + 1) > GetTotalAccuracy(gBattlerAttacker, gBattlerTarget, move))
+        if ((Random() % 100 + 1) > GetTotalAccuracy(gBattlerAttacker, gBattlerTarget, move, GetBattlerAbility(gBattlerAttacker), GetBattlerAbility(gBattlerTarget),
+                                                    GetBattlerHoldEffect(gBattlerAttacker, TRUE), GetBattlerHoldEffect(gBattlerTarget, TRUE)))
         {
             gMoveResultFlags |= MOVE_RESULT_MISSED;
             if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_BLUNDER_POLICY)
