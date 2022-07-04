@@ -7772,10 +7772,10 @@ static bool32 CanTeleport(u8 battlerId)
     case B_SIDE_OPPONENT:
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
             return FALSE;
+        break;
     case B_SIDE_PLAYER:
-        if (count <= 2 && gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        if (count == 1 || (count <= 2 && gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
             return FALSE;
-    default:
         break;
     }
 
