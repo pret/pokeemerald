@@ -2205,7 +2205,7 @@ static bool32 AreLinkQueuesEmpty(void)
     return !gRfu.recvQueue.count && !gRfu.sendQueue.count;
 }
 
-static int GetNumPlayersForBonus(u8 *arg0)
+static int GetNumPlayersForBonus(u8 *atJumpPeak)
 {
     int i = 0;
     int flags = 0;
@@ -2213,7 +2213,7 @@ static int GetNumPlayersForBonus(u8 *arg0)
 
     for (; i < MAX_RFU_PLAYERS; i++)
     {
-        if (arg0[i])
+        if (atJumpPeak[i])
         {
             flags |= 1 << i;
             count++;
@@ -3612,7 +3612,6 @@ static u32 AddMessageWindow(u32 left, u32 top, u32 width, u32 height)
 static void CreatePokeJumpYesNoMenu(u16 left, u16 top, u8 cursorPos)
 {
     struct WindowTemplate window;
-    u8 a = cursorPos;
 
     window.bg = BG_INTERFACE;
     window.tilemapLeft = left;
@@ -3622,7 +3621,7 @@ static void CreatePokeJumpYesNoMenu(u16 left, u16 top, u8 cursorPos)
     window.paletteNum = 2;
     window.baseBlock = 0x2B;
 
-    CreateYesNoMenu(&window, 1, 0xD, a);
+    CreateYesNoMenu(&window, 1, 0xD, cursorPos);
 }
 
 // "Points" for jump score and "times" for number of jumps in a row
