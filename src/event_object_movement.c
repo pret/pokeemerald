@@ -8731,6 +8731,9 @@ static void DoFlaggedGroundEffects(struct ObjectEvent *objEvent, struct Sprite *
 
     if (ObjectEventIsFarawayIslandMew(objEvent) == TRUE && !ShouldMewShakeGrass(objEvent))
         return;
+    
+    if (gSaveBlock2Ptr->follower.inProgress && objEvent == &gObjectEvents[gSaveBlock2Ptr->follower.objId] && objEvent->invisible == TRUE)
+        return;
 
     for (i = 0; i < ARRAY_COUNT(sGroundEffectFuncs); i++, flags >>= 1)
         if (flags & 1)
