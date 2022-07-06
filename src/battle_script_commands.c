@@ -6510,7 +6510,7 @@ static void Cmd_tryexplosion(void)
         MarkBattlerForControllerExec(gActiveBattler);
         gBattlescriptCurrInstr++;
 
-        // Mark Explosion user as absent
+        // Find first target
         for (gBattlerTarget = 0; gBattlerTarget < gBattlersCount; gBattlerTarget++)
         {
             if (gBattlerTarget == gBattlerAttacker)
