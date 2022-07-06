@@ -15,7 +15,7 @@ static void AnimOverheatFlame_Step(struct Sprite *);
 static void AnimTask_DragonDanceWaver_Step(u8);
 static void UpdateDragonDanceScanlineEffect(struct Task *);
 
-EWRAM_DATA static u16 gUnusedOverheatData[7] = {0};
+EWRAM_DATA static u16 sUnusedOverheatData[7] = {0};
 
 static const union AnimCmd sAnim_OutrageOverheatFire_0[] =
 {
@@ -426,7 +426,7 @@ static void AnimOverheatFlame(struct Sprite *sprite)
     sprite->data[3] = gBattleAnimArgs[3];
     sprite->callback = AnimOverheatFlame_Step;
     for (i = 0; i < 7; i++)
-        gUnusedOverheatData[i] = sprite->data[i];
+        sUnusedOverheatData[i] = sprite->data[i];
 }
 
 static void AnimOverheatFlame_Step(struct Sprite *sprite)

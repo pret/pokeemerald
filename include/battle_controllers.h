@@ -222,7 +222,7 @@ void BtlController_EmitPrintSelectionString(u8 bufferId, u16 stringId);
 void BtlController_EmitChooseAction(u8 bufferId, u8 action, u16 itemId);
 void BtlController_EmitYesNoBox(u8 bufferId);
 void BtlController_EmitChooseMove(u8 bufferId, bool8 isDoubleBattle, bool8 NoPpNumber, struct ChooseMoveStruct *movePpData);
-void BtlController_EmitChooseItem(u8 bufferId, u8* arg1);
+void BtlController_EmitChooseItem(u8 bufferId, u8* battlePartyOrder);
 void BtlController_EmitChoosePokemon(u8 bufferId, u8 caseId, u8 slotId, u8 abilityId, u8* data);
 void BtlController_EmitCmd23(u8 bufferId); // unused
 void BtlController_EmitHealthBarUpdate(u8 bufferId, u16 hpValue);
@@ -233,11 +233,11 @@ void BtlController_EmitStatusXor(u8 bufferId, u8 b); // unused
 void BtlController_EmitDataTransfer(u8 bufferId, u16 size, void *data);
 void BtlController_EmitDMA3Transfer(u8 bufferId, void *dst, u16 size, void *data); // unused
 void BtlController_EmitPlayBGM(u8 bufferId, u16 songId, void *data); // unused
-void BtlController_EmitCmd32(u8 bufferId, u16 size, void *c); // unused
-void BtlController_EmitTwoReturnValues(u8 bufferId, u8 arg1, u16 arg2);
-void BtlController_EmitChosenMonReturnValue(u8 bufferId, u8 b, u8 *c);
-void BtlController_EmitOneReturnValue(u8 bufferId, u16 arg1);
-void BtlController_EmitOneReturnValue_Duplicate(u8 bufferId, u16 b);
+void BtlController_EmitCmd32(u8 bufferId, u16 size, void *data); // unused
+void BtlController_EmitTwoReturnValues(u8 bufferId, u8 ret8, u16 ret16);
+void BtlController_EmitChosenMonReturnValue(u8 bufferId, u8 partyId, u8 *battlePartyOrder);
+void BtlController_EmitOneReturnValue(u8 bufferId, u16 ret);
+void BtlController_EmitOneReturnValue_Duplicate(u8 bufferId, u16 ret);
 void BtlController_EmitClearUnkVar(u8 bufferId); // unused
 void BtlController_EmitSetUnkVar(u8 bufferId, u8 b); // unused
 void BtlController_EmitClearUnkFlag(u8 bufferId); // unused
@@ -254,7 +254,7 @@ void BtlController_EmitHidePartyStatusSummary(u8 bufferId);
 void BtlController_EmitEndBounceEffect(u8 bufferId);
 void BtlController_EmitSpriteInvisibility(u8 bufferId, bool8 isInvisible);
 void BtlController_EmitBattleAnimation(u8 bufferId, u8 animationId, u16 argument);
-void BtlController_EmitLinkStandbyMsg(u8 bufferId, u8 arg1, bool32 record);
+void BtlController_EmitLinkStandbyMsg(u8 bufferId, u8 mode, bool32 record);
 void BtlController_EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
 void BtlController_EmitEndLinkBattle(u8 bufferId, u8 battleOutcome);
 

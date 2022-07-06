@@ -978,7 +978,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_FEAROW] =                   &gObjectEventGraphicsInfo_Fearow,
     [OBJ_EVENT_GFX_EKANS] =                    &gObjectEventGraphicsInfo_Ekans,
     [OBJ_EVENT_GFX_ARBOK] =                    &gObjectEventGraphicsInfo_Arbok,
-    [OBJ_EVENT_GFX_PIKACHU_FOLLOWER] =           &gObjectEventGraphicsInfo_Pikachu_Follower,
+    [OBJ_EVENT_GFX_PIKACHU_FOLLOWER] =         &gObjectEventGraphicsInfo_Pikachu_Follower,
     [OBJ_EVENT_GFX_RAICHU] =                   &gObjectEventGraphicsInfo_Raichu,
     [OBJ_EVENT_GFX_SANDSHREW] =                &gObjectEventGraphicsInfo_Sandshrew,
     [OBJ_EVENT_GFX_SANDSLASH] =                &gObjectEventGraphicsInfo_Sandslash,

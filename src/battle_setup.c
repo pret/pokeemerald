@@ -611,7 +611,6 @@ static void CB2_EndWildBattle(void)
     {
         SetMainCallback2(CB2_ReturnToField);
         gFieldCallback = FieldCB_ReturnToFieldNoScriptCheckMusic;
-        UpdateFollowerPokemonGraphic();
     }
 }
 
@@ -630,7 +629,6 @@ static void CB2_EndScriptedWildBattle(void)
     else
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-        UpdateFollowerPokemonGraphic();
     }
 }
 
@@ -701,21 +699,22 @@ static u8 GetBattleTransitionTypeByMap(void)
 
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
+
     if (GetFlashLevel())
         return TRANSITION_TYPE_FLASH;
-    if (!MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
+
+    if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
+        return TRANSITION_TYPE_WATER;
+
+    switch (gMapHeader.mapType)
     {
-        switch (gMapHeader.mapType)
-        {
-        case MAP_TYPE_UNDERGROUND:
-            return TRANSITION_TYPE_CAVE;
-        case MAP_TYPE_UNDERWATER:
-            return TRANSITION_TYPE_WATER;
-        default:
-            return TRANSITION_TYPE_NORMAL;
-        }
+    case MAP_TYPE_UNDERGROUND:
+        return TRANSITION_TYPE_CAVE;
+    case MAP_TYPE_UNDERWATER:
+        return TRANSITION_TYPE_WATER;
+    default:
+        return TRANSITION_TYPE_NORMAL;
     }
-    return TRANSITION_TYPE_WATER;
 }
 
 static u16 GetSumOfPlayerPartyLevel(u8 numMons)
@@ -1340,7 +1339,6 @@ static void CB2_EndTrainerBattle(void)
     else
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-        UpdateFollowerPokemonGraphic();
         if (!InBattlePyramid() && !InTrainerHillChallenge())
         {
             RegisterTrainerInMatchCall();
@@ -1362,7 +1360,6 @@ static void CB2_EndRematchBattle(void)
     else
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-        UpdateFollowerPokemonGraphic();
         RegisterTrainerInMatchCall();
         SetBattledTrainersFlags();
         HandleRematchVarsOnBattleEnd();
