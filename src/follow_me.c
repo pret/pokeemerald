@@ -251,20 +251,25 @@ void FollowMe(struct ObjectEvent* npc, u8 state, bool8 ignoreScriptActive)
 
         if (gSaveBlock2Ptr->follower.comeOutDoorStairs == 1)
         {
-            gPlayerAvatar.preventStep = TRUE;
-            taskId = CreateTask(Task_FollowerOutOfDoor, 1);
-            gTasks[taskId].data[0] = 0;
-            gTasks[taskId].data[2] = follower->currentCoords.x;
-            gTasks[taskId].data[3] = follower->currentCoords.y;
-            goto RESET;
+            if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_BIKE))
+                gSaveBlock2Ptr->follower.comeOutDoorStairs = 0;
+            else
+            {
+                gPlayerAvatar.preventStep = TRUE;
+                taskId = CreateTask(Task_FollowerOutOfDoor, 1);
+                gTasks[taskId].data[0] = 0;
+                gTasks[taskId].data[2] = follower->currentCoords.x;
+                gTasks[taskId].data[3] = follower->currentCoords.y;
+                goto RESET;
+            }
         }
         else if (gSaveBlock2Ptr->follower.comeOutDoorStairs == 2)
         {
             gSaveBlock2Ptr->follower.comeOutDoorStairs = 0;
         }
         
-		// This makes sure the follower is still invisible after diving or surfacing
-		if(!(TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_UNDERWATER) || TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING)))
+		// This makes sure the follower is still invisible after diving or surfacing or exiting a door while player is on a bike
+		if(!(TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_UNDERWATER) || TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) || TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_BIKE)))
 			follower->invisible = FALSE;
         MoveObjectEventToMapCoords(follower, player->currentCoords.x, player->currentCoords.y);
         ObjectEventTurn(follower, player->facingDirection); //The follower should be facing the same direction as the player when it comes out of hiding

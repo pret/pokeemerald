@@ -3867,6 +3867,11 @@ bool8 IsBigSprite(u16 graphicsId)
         case OBJ_EVENT_GFX_LUGIA_FOLLOWER:
         case OBJ_EVENT_GFX_HOOH_FOLLOWER:
         case OBJ_EVENT_GFX_WAILORD:
+        case OBJ_EVENT_GFX_DIALGA:
+        case OBJ_EVENT_GFX_PALKIA:
+        case OBJ_EVENT_GFX_REGIGIGAS:
+        case OBJ_EVENT_GFX_GIRATINA_NORMAL:
+        case OBJ_EVENT_GFX_ARCEUS_NORMAL:
             return TRUE;
         default:
             return FALSE;
@@ -4284,6 +4289,7 @@ void FollowerPokeballSparkle(void)
             gSprites[gPlayerAvatar.spriteId].subpriority = 0; 
         }
         player->fixedPriority = TRUE;
+        gPlayerAvatar.preventStep = TRUE;
         
         SeekSpriteAnim(&gSprites[follower->spriteId], 0);        
         ObjectEventForceSetHeldMovement(follower, MOVEMENT_ACTION_FOLLOWING_POKEMON_GROW);
@@ -4292,8 +4298,10 @@ void FollowerPokeballSparkle(void)
 
 void FollowerIntoPokeball(void)
 {
-    if (gObjectEvents[gSaveBlock2Ptr->follower.objId].invisible == FALSE && gSaveBlock2Ptr->follower.comeOutDoorStairs == 0 && gSaveBlock2Ptr->follower.inProgress)
+    if (gObjectEvents[gSaveBlock2Ptr->follower.objId].invisible == FALSE && gSaveBlock2Ptr->follower.inProgress)
     {
+        gSaveBlock2Ptr->follower.comeOutDoorStairs = 0;
+        gPlayerAvatar.preventStep = TRUE;
         ObjectEventForceSetHeldMovement(&gObjectEvents[gSaveBlock2Ptr->follower.objId], MOVEMENT_ACTION_FOLLOWING_POKEMON_SHRINK);
         gSpecialVar_Unused_0x8014 = 1;
     }
