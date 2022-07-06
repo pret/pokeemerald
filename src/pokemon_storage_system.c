@@ -654,6 +654,7 @@ static void SetMovingMonPriority(u8);
 static void SpriteCB_HeldMon(struct Sprite *);
 static struct Sprite *CreateMonIconSprite(u16, u32, s16, s16, u8, u8);
 static void DestroyBoxMonIcon(struct Sprite *);
+extern void UpdateFollowerPokemonGraphic(void);
 
 // Pokémon data
 static void MoveMon(void);
@@ -1695,6 +1696,7 @@ static void CB2_ExitPokeStorage(void)
 {
     sPreviousBoxOption = GetCurrentBoxOption();
     gFieldCallback = FieldTask_ReturnToPcMenu;
+    UpdateFollowerPokemonGraphic();
     SetMainCallback2(CB2_ReturnToField);
 }
 
