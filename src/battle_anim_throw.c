@@ -690,7 +690,7 @@ void AnimTask_SwitchOutBallEffect(u8 taskId)
         priority = gSprites[spriteId].oam.priority;
         subpriority = gSprites[spriteId].subpriority;
         gTasks[taskId].data[10] = AnimateBallOpenParticles(x, y + 32, priority, subpriority, ballId);
-        selectedPalettes = GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0);
+        selectedPalettes = GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);
         gTasks[taskId].data[11] = LaunchBallFadeMonTask(FALSE, gBattleAnimAttacker, selectedPalettes, ballId);
         gTasks[taskId].data[0]++;
         break;
@@ -2018,24 +2018,24 @@ static void DestroyBallOpenAnimationParticle(struct Sprite *sprite)
 #define tPaletteHi data[11]
 #define tBallId    data[15]
 
-u8 LaunchBallFadeMonTask(bool8 unfadeLater, u8 battler, u32 selectedPalettes, u8 ballId)
+u8 LaunchBallFadeMonTask(bool8 unfadeLater, u8 spritePalNum, u32 selectedPalettes, u8 ballId)
 {
     u8 taskId;
 
     taskId = CreateTask(Task_FadeMon_ToBallColor, 5);
     gTasks[taskId].tBallId = ballId;
-    gTasks[taskId].tPalOffset = battler;
+    gTasks[taskId].tPalOffset = spritePalNum;
     gTasks[taskId].tPaletteLo = selectedPalettes;
     gTasks[taskId].tPaletteHi = selectedPalettes >> 16;
 
     if (!unfadeLater)
     {
-        BlendPalette(battler * 16 + 0x100, 16, 0, gBallOpenFadeColors[ballId]);
+        BlendPalette(spritePalNum * 16 + 0x100, 16, 0, gBallOpenFadeColors[ballId]);
         gTasks[taskId].tdCoeff = 1;
     }
     else
     {
-        BlendPalette(battler * 16 + 0x100, 16, 16, gBallOpenFadeColors[ballId]);
+        BlendPalette(spritePalNum * 16 + 0x100, 16, 16, gBallOpenFadeColors[ballId]);
         gTasks[taskId].tCoeff = 16;
         gTasks[taskId].tdCoeff = -1;
         gTasks[taskId].func = Task_FadeMon_ToNormal;

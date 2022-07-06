@@ -135,10 +135,12 @@ void SoundTask_PlayCryHighPitch(u8 taskId)
     {
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
             species = gContestResources->moveAnim->species;
-        #ifndef UBFIX
+    // Destroying the task twice (here and at end of function)
+    // results in an incorrect value for gAnimVisualTaskCount
+    #ifndef BUGFIX
         else
-            DestroyAnimVisualTask(taskId); // UB: task gets destroyed twice.
-        #endif
+            DestroyAnimVisualTask(taskId);
+    #endif
     }
     else
     {
@@ -181,10 +183,12 @@ void SoundTask_PlayDoubleCry(u8 taskId)
     {
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
             species = gContestResources->moveAnim->species;
-        #ifndef UBFIX
+    // Destroying the task twice (here and at end of function)
+    // results in an incorrect value for gAnimVisualTaskCount
+    #ifndef BUGFIX
         else
-            DestroyAnimVisualTask(taskId); // UB: task gets destroyed twice.
-        #endif
+            DestroyAnimVisualTask(taskId);
+    #endif
     }
     else
     {

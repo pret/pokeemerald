@@ -18,6 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#include <cmath>
 #include <cstdio>
 #include <cstdarg>
 #include <cstring>
@@ -503,7 +504,7 @@ void PrintAgbTrack(std::vector<Event>& events)
             ResetTrackVars();
             break;
         case EventType::Tempo:
-            PrintByte("TEMPO , %u*%s_tbs/2", 60000000 / event.param2, g_asmLabel.c_str());
+            PrintByte("TEMPO , %u*%s_tbs/2", static_cast<int>(round(60000000.0f / static_cast<float>(event.param2))), g_asmLabel.c_str());
             PrintWait(event.time);
             break;
         case EventType::InstrumentChange:

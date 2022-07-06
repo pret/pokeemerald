@@ -166,7 +166,7 @@ BattleFrontier_BattleTowerLobby_Text_LookingForwardToNextBattle::
 	.string "I'll be looking forward to your\n"
 	.string "next battle!$"
 
-gTVBravoTrainerBattleTowerText00::
+BravoTrainerBattleTower_Text_Intro::
 	.string "Yeah!\n"
 	.string "It's BRAVO TRAINER time!\p"
 	.string "Today, we're going to profile {STR_VAR_1},\n"
@@ -174,12 +174,12 @@ gTVBravoTrainerBattleTowerText00::
 	.string "For the challenge, {STR_VAR_1} entered\n"
 	.string "one wicked {STR_VAR_2}.$"
 
-gTVBravoTrainerBattleTowerText01::
+BravoTrainerBattleTower_Text_NewRecord::
 	.string "The pair set a new record of {STR_VAR_2} wins\n"
 	.string "in a row in {STR_VAR_1} competition!\l"
 	.string "Bravo, TRAINER!$"
 
-gTVBravoTrainerBattleTowerText02::
+BravoTrainerBattleTower_Text_Lost::
 	.string "The twosome finally succumbed to\n"
 	.string "{STR_VAR_1} in match number {STR_VAR_2}.\l"
 	.string "Nice try, TRAINER!\p"
@@ -188,7 +188,7 @@ gTVBravoTrainerBattleTowerText02::
 	.string "We asked the TRAINER for impressions\n"
 	.string "on the match with {STR_VAR_1}.$"
 
-gTVBravoTrainerBattleTowerText03::
+BravoTrainerBattleTower_Text_Won::
 	.string "The twosome won it all by defeating\n"
 	.string "{STR_VAR_1}'s {STR_VAR_2} thoroughly.\l"
 	.string "Bravo, TRAINER!\p"
@@ -197,7 +197,7 @@ gTVBravoTrainerBattleTowerText03::
 	.string "We asked the TRAINER for impressions\n"
 	.string "on the moment of glory.$"
 
-gTVBravoTrainerBattleTowerText04::
+BravoTrainerBattleTower_Text_LostFinal::
 	.string "After a string of wins, the pair finally\n"
 	.string "succumbed to {STR_VAR_1}'s {STR_VAR_2},\l"
 	.string "their final hurdle.\p"
@@ -208,7 +208,7 @@ gTVBravoTrainerBattleTowerText04::
 	.string "We asked the TRAINER for impressions\n"
 	.string "on battling the celebrity pair.$"
 
-gTVBravoTrainerBattleTowerText05::
+BravoTrainerBattleTower_Text_Satisfied::
 	.string "This is what the TRAINER had to say:\n"
 	.string "“I'm satisfied!”\p"
 	.string "Now isn't that a refreshing reply?\n"
@@ -218,7 +218,7 @@ gTVBravoTrainerBattleTowerText05::
 	.string "I found out exactly how satisfied\n"
 	.string "when I heard the TRAINER say this:$"
 
-gTVBravoTrainerBattleTowerText06::
+BravoTrainerBattleTower_Text_Unsatisfied::
 	.string "This is what the TRAINER had to say:\n"
 	.string "“I'm not satisfied…”\p"
 	.string "Our TRAINER was obviously a little down\n"
@@ -228,22 +228,22 @@ gTVBravoTrainerBattleTowerText06::
 	.string "Anyway, I found out how dissatisfied\n"
 	.string "our TRAINER was when I heard this:$"
 
-gTVBravoTrainerBattleTowerText07::
+BravoTrainerBattleTower_Text_None1::
 	.string "None$"
 
-gTVBravoTrainerBattleTowerText08::
+BravoTrainerBattleTower_Text_None2::
 	.string "None$"
 
-gTVBravoTrainerBattleTowerText09::
+BravoTrainerBattleTower_Text_None3::
 	.string "None$"
 
-gTVBravoTrainerBattleTowerText10::
+BravoTrainerBattleTower_Text_None4::
 	.string "None$"
 
-gTVBravoTrainerBattleTowerText11::
+BravoTrainerBattleTower_Text_Response::
 	.string "“{STR_VAR_1}.”$"
 
-gTVBravoTrainerBattleTowerText12::
+BravoTrainerBattleTower_Text_ResponseSatisfied::
 	.string "“{STR_VAR_1}.”\n"
 	.string "Now isn't that great?\p"
 	.string "It really expresses {STR_VAR_2}'s joy,\n"
@@ -252,7 +252,7 @@ gTVBravoTrainerBattleTowerText12::
 	.string "end… It really was what you'd call\l"
 	.string "“{STR_VAR_1}”!$"
 
-gTVBravoTrainerBattleTowerText13::
+BravoTrainerBattleTower_Text_ResponseUnsatisfied::
 	.string "“{STR_VAR_1}.”\n"
 	.string "Now isn't that fitting?\p"
 	.string "That battle with {STR_VAR_3} at the\n"
@@ -261,7 +261,7 @@ gTVBravoTrainerBattleTowerText13::
 	.string "{STR_VAR_2}'s disappointment comes across\n"
 	.string "loud and clear, I'd say!$"
 
-gTVBravoTrainerBattleTowerText14::
+BravoTrainerBattleTower_Text_Outro::
 	.string "Bravo, {STR_VAR_1}!\n"
 	.string "Bravo, {STR_VAR_2}!\p"
 	.string "I hope we can count on seeing\n"
