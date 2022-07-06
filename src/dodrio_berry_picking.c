@@ -2879,10 +2879,10 @@ static u8 TryGivePrize(void)
     return PRIZE_RECEIVED;
 }
 
-static u32 IncrementWithLimit(u32 num, u32 max)
+static u32 IncrementWithLimit(u32 a, u32 max)
 {
-    if (num < max)
-        return num + 1;
+    if (a < max)
+        return a + 1;
     else
         return max;
 }
@@ -4546,7 +4546,7 @@ struct
 {
     u8 id;
     void (*func)(void);
-} static const sGfxFuncs[] =
+} const sGfxFuncs[] =
 {
     {GFXFUNC_LOAD,               LoadGfx}, // Element not used, LoadGfx is passed directly to SetGfxFunc
     {GFXFUNC_SHOW_NAMES,         ShowNames},

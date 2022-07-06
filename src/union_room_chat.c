@@ -2160,7 +2160,8 @@ static bool32 IsDisplaySubtask0Active(void)
 static void FreeDisplay(void)
 {
     FreeSprites();
-    TRY_FREE_AND_SET_NULL(sDisplay);
+    if (sDisplay)
+        FREE_AND_SET_NULL(sDisplay);
 
     FreeAllWindowBuffers();
     gScanlineEffect.state = 3;

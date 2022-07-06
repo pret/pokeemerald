@@ -69,7 +69,7 @@ u8 gLinkVSyncDisabled;
 u32 IntrMain_Buffer[0x200];
 s8 gPcmDmaCounter;
 
-static EWRAM_DATA u16 sTrainerId = 0;
+static EWRAM_DATA u16 gTrainerId = 0;
 
 //EWRAM_DATA void (**gFlashTimerIntrFunc)(void) = NULL;
 
@@ -201,12 +201,12 @@ void SeedRngAndSetTrainerId(void)
     u16 val = REG_TM1CNT_L;
     SeedRng(val);
     REG_TM1CNT_H = 0;
-    sTrainerId = val;
+    gTrainerId = val;
 }
 
 u16 GetGeneratedTrainerIdLower(void)
 {
-    return sTrainerId;
+    return gTrainerId;
 }
 
 void EnableVCountIntrAtLine150(void)

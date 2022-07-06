@@ -30,7 +30,7 @@ EWRAM_DATA u16 gSpecialVar_Facing = 0;
 EWRAM_DATA u16 gSpecialVar_MonBoxId = 0;
 EWRAM_DATA u16 gSpecialVar_MonBoxPos = 0;
 EWRAM_DATA u16 gSpecialVar_Unused_0x8014 = 0;
-EWRAM_DATA static u8 sSpecialFlags[SPECIAL_FLAGS_SIZE] = {0};
+EWRAM_DATA static u8 gSpecialFlags[SPECIAL_FLAGS_SIZE] = {0};
 
 extern u16 *const gSpecialVars[];
 
@@ -38,7 +38,7 @@ void InitEventData(void)
 {
     memset(gSaveBlock1Ptr->flags, 0, sizeof(gSaveBlock1Ptr->flags));
     memset(gSaveBlock1Ptr->vars, 0, sizeof(gSaveBlock1Ptr->vars));
-    memset(sSpecialFlags, 0, sizeof(sSpecialFlags));
+    memset(gSpecialFlags, 0, sizeof(gSpecialFlags));
 }
 
 void ClearTempFieldEventData(void)
@@ -193,7 +193,7 @@ bool8 VarSet(u16 id, u16 value)
     return TRUE;
 }
 
-u8 VarGetObjectEventGraphicsId(u8 id)
+u16 VarGetObjectEventGraphicsId(u8 id)
 {
     return VarGet(VAR_OBJ_GFX_ID_0 + id);
 }
@@ -205,7 +205,7 @@ u8 *GetFlagPointer(u16 id)
     else if (id < SPECIAL_FLAGS_START)
         return &gSaveBlock1Ptr->flags[id / 8];
     else
-        return &sSpecialFlags[(id - SPECIAL_FLAGS_START) / 8];
+        return &gSpecialFlags[(id - SPECIAL_FLAGS_START) / 8];
 }
 
 u8 FlagSet(u16 id)

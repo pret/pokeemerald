@@ -35,7 +35,7 @@ struct EReaderTrainerHillTrainer
 {
     u8 trainerNum;
     struct TrainerHillTrainer trainer;
-    struct TrainerHillFloorMap map;
+    struct TrHillDisplay display;
     u32 checksum;
 }; // size=0x274
 

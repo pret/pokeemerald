@@ -336,7 +336,7 @@ static const struct Landmark *const Landmarks_MtChimney_2[]  =
     NULL,
 };
 
-static const struct LandmarkList sLandmarkLists[] =
+static const struct LandmarkList gLandmarkLists[] =
 {
     {MAPSEC_ROUTE_103, 2, Landmarks_Route103_2},
     {MAPSEC_ROUTE_104, 0, Landmarks_Route104_0},
@@ -420,21 +420,21 @@ static const struct Landmark *const *GetLandmarks(u8 mapSection, u8 id)
 {
     u16 i = 0;
 
-    for (; sLandmarkLists[i].mapSection != MAPSEC_NONE; i++)
+    for (; gLandmarkLists[i].mapSection != MAPSEC_NONE; i++)
     {
-        if (sLandmarkLists[i].mapSection > mapSection)
+        if (gLandmarkLists[i].mapSection > mapSection)
             return NULL;
-        if (sLandmarkLists[i].mapSection == mapSection)
+        if (gLandmarkLists[i].mapSection == mapSection)
             break;
     }
 
-    if (sLandmarkLists[i].mapSection == MAPSEC_NONE)
+    if (gLandmarkLists[i].mapSection == MAPSEC_NONE)
         return NULL;
 
-    for (; sLandmarkLists[i].mapSection == mapSection; i++)
+    for (; gLandmarkLists[i].mapSection == mapSection; i++)
     {
-        if (sLandmarkLists[i].id == id)
-            return sLandmarkLists[i].landmarks;
+        if (gLandmarkLists[i].id == id)
+            return gLandmarkLists[i].landmarks;
     }
 
     return NULL;

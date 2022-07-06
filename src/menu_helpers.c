@@ -153,7 +153,7 @@ void DoYesNoFuncWithChoice(u8 taskId, const struct YesNoFuncTable *data)
     gTasks[taskId].func = Task_CallYesOrNoCallback;
 }
 
-void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 unused1, u8 unused2, u8 unused3, u16 tileStart, u8 palette, const struct YesNoFuncTable *yesNo)
+void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 arg2, u8 arg3, u8 arg4, u16 tileStart, u8 palette, const struct YesNoFuncTable *yesNo)
 {
     CreateYesNoMenu(template, tileStart, palette, 0);
     sYesNo = *yesNo;
@@ -176,18 +176,17 @@ static void Task_CallYesOrNoCallback(u8 taskId)
     }
 }
 
-// Returns TRUE if the quantity was changed, FALSE if it remained the same
-bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity, u16 max)
+bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
 {
-    s16 valBefore = *quantity;
+    s16 valBefore = (*arg0);
 
-    if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
+    if ((JOY_REPEAT(DPAD_ANY)) == DPAD_UP)
     {
-        (*quantity)++;
-        if (*quantity > max)
-            *quantity = 1;
+        (*arg0)++;
+        if ((*arg0) > arg1)
+            (*arg0) = 1;
 
-        if (*quantity == valBefore)
+        if ((*arg0) == valBefore)
         {
             return FALSE;
         }
@@ -197,13 +196,13 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity, u16 max)
             return TRUE;
         }
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_DOWN)
     {
-        (*quantity)--;
-        if (*quantity <= 0)
-            *quantity = max;
+        (*arg0)--;
+        if ((*arg0) <= 0)
+            (*arg0) = arg1;
 
-        if (*quantity == valBefore)
+        if ((*arg0) == valBefore)
         {
             return FALSE;
         }
@@ -213,13 +212,13 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity, u16 max)
             return TRUE;
         }
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_RIGHT)
     {
-        *quantity += 10;
-        if (*quantity > max)
-            *quantity = max;
+        (*arg0) += 10;
+        if ((*arg0) > arg1)
+            (*arg0) = arg1;
 
-        if (*quantity == valBefore)
+        if ((*arg0) == valBefore)
         {
             return FALSE;
         }
@@ -229,13 +228,13 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity, u16 max)
             return TRUE;
         }
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_LEFT)
     {
-        *quantity -= 10;
-        if (*quantity <= 0)
-            *quantity = 1;
+        (*arg0) -= 10;
+        if ((*arg0) <= 0)
+            (*arg0) = 1;
 
-        if (*quantity == valBefore)
+        if ((*arg0) == valBefore)
         {
             return FALSE;
         }

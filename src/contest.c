@@ -93,7 +93,7 @@ static void Task_ContestReturnToField(u8);
 static void FieldCB_ContestReturnToField(void);
 static bool8 IsPlayerLinkLeader(void);
 static void PrintContestantTrainerName(u8);
-static void PrintContestantTrainerNameWithColor(u8, u8);
+static void PrintContestantTrainerNameWithColor(u8 a0, u8 a1);
 static void PrintContestantMonName(u8);
 static void PrintContestantMonNameWithColor(u8, u8);
 static u8 CreateJudgeSprite(void);
@@ -352,7 +352,7 @@ EWRAM_DATA u16 gSpecialVar_ContestRank = 0;
 EWRAM_DATA u8 gNumLinkContestPlayers = 0;
 EWRAM_DATA u8 gHighestRibbonRank = 0;
 EWRAM_DATA struct ContestResources *gContestResources = NULL;
-static EWRAM_DATA u8 sContestBgCopyFlags = 0;
+EWRAM_DATA u8 sContestBgCopyFlags = 0;
 EWRAM_DATA struct ContestWinner gCurContestWinner = {0};
 EWRAM_DATA bool8 gCurContestWinnerIsForArtist = 0;
 EWRAM_DATA u8 gCurContestWinnerSaveIdx = 0;
@@ -625,7 +625,7 @@ static const struct SpriteTemplate sSpriteTemplate_ApplauseMeter =
     .callback = SpriteCallbackDummy
 };
 
-static const struct OamData sOam_Judge =
+const struct OamData sOam_Judge =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -639,7 +639,7 @@ static const struct OamData sOam_Judge =
     .paletteNum = 2,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_Judge =
+const struct SpriteTemplate sSpriteTemplate_Judge =
 {
     .tileTag = TAG_JUDGE,
     .paletteTag = TAG_JUDGE,
@@ -650,7 +650,7 @@ static const struct SpriteTemplate sSpriteTemplate_Judge =
     .callback = SpriteCallbackDummy
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_Judge =
+const struct CompressedSpriteSheet sSpriteSheet_Judge =
 {
     .data = gContestJudgeGfx,
     .size = 0x800,
@@ -664,13 +664,13 @@ static const struct CompressedSpriteSheet sSpriteSheet_JudgeSymbols =
     .tag = TAG_JUDGE_SYMBOLS_GFX
 };
 
-static const struct CompressedSpritePalette sSpritePalette_JudgeSymbols =
+const struct CompressedSpritePalette sSpritePalette_JudgeSymbols =
 {
     .data = gContestJudgeSymbolsPal,
     .tag = TAG_CONTEST_SYMBOLS_PAL
 };
 
-static const struct SpriteTemplate sSpriteTemplate_JudgeSpeechBubble =
+const struct SpriteTemplate sSpriteTemplate_JudgeSpeechBubble =
 {
     .tileTag = TAG_JUDGE_SYMBOLS_GFX,
     .paletteTag = TAG_CONTEST_SYMBOLS_PAL,
@@ -876,7 +876,7 @@ static const struct SpritePalette sSpritePalettes_ContestantsTurnBlinkEffect[CON
     }
 };
 
-static const struct OamData sOam_ContestantsTurnBlinkEffect =
+const struct OamData sOam_ContestantsTurnBlinkEffect =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -891,13 +891,13 @@ static const struct OamData sOam_ContestantsTurnBlinkEffect =
     .affineParam = 0,
 };
 
-static const union AffineAnimCmd sAffineAnim_ContestantsTurnBlinkEffect_0[] =
+const union AffineAnimCmd sAffineAnim_ContestantsTurnBlinkEffect_0[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd sAffineAnim_ContestantsTurnBlinkEffect_1[] =
+const union AffineAnimCmd sAffineAnim_ContestantsTurnBlinkEffect_1[] =
 {
     AFFINEANIMCMD_FRAME(3, 3, 0, 15),
     AFFINEANIMCMD_FRAME(-3, -3, 0, 15),
@@ -906,13 +906,13 @@ static const union AffineAnimCmd sAffineAnim_ContestantsTurnBlinkEffect_1[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const sAffineAnims_ContestantsTurnBlinkEffect[] =
+const union AffineAnimCmd *const sAffineAnims_ContestantsTurnBlinkEffect[] =
 {
     sAffineAnim_ContestantsTurnBlinkEffect_0,
     sAffineAnim_ContestantsTurnBlinkEffect_1
 };
 
-static const struct SpriteTemplate sSpriteTemplates_ContestantsTurnBlinkEffect[CONTESTANT_COUNT] =
+const struct SpriteTemplate sSpriteTemplates_ContestantsTurnBlinkEffect[CONTESTANT_COUNT] =
 {
     {
         .tileTag = TAG_BLINK_EFFECT_CONTESTANT0,
@@ -952,7 +952,7 @@ static const struct SpriteTemplate sSpriteTemplates_ContestantsTurnBlinkEffect[C
     }
 };
 
-static const s8 sContestExcitementTable[CONTEST_CATEGORIES_COUNT][CONTEST_CATEGORIES_COUNT] =
+static const s8 gContestExcitementTable[CONTEST_CATEGORIES_COUNT][CONTEST_CATEGORIES_COUNT] =
 {
     [CONTEST_CATEGORY_COOL] = {
         [CONTEST_CATEGORY_COOL]   = +1,
@@ -3186,14 +3186,14 @@ static u16 GetMoveEffectSymbolTileOffset(u16 move, u8 contestant)
     return offset;
 }
 
-static void PrintContestMoveDescription(u16 move)
+static void PrintContestMoveDescription(u16 a)
 {
     u8 category;
     u16 categoryTile;
     u8 numHearts;
 
     // The contest category icon is implemented as a 5x2 group of tiles.
-    category = gContestMoves[move].contestCategory;
+    category = gContestMoves[a].contestCategory;
     if      (category == CONTEST_CATEGORY_COOL)
         categoryTile = 0x4040;
     else if (category == CONTEST_CATEGORY_BEAUTY)
@@ -3209,27 +3209,27 @@ static void PrintContestMoveDescription(u16 move)
     ContestBG_FillBoxWithIncrementingTile(0, categoryTile + 0x10, 0x0b, 0x20, 0x05, 0x01, 0x11, 0x01);
 
     // Appeal hearts
-    if (gContestEffects[gContestMoves[move].effect].appeal == 0xFF)
+    if (gContestEffects[gContestMoves[a].effect].appeal == 0xFF)
         numHearts = 0;
     else
-        numHearts = gContestEffects[gContestMoves[move].effect].appeal / 10;
+        numHearts = gContestEffects[gContestMoves[a].effect].appeal / 10;
     if (numHearts > MAX_CONTEST_MOVE_HEARTS)
         numHearts = MAX_CONTEST_MOVE_HEARTS;
     ContestBG_FillBoxWithTile(0, TILE_EMPTY_APPEAL_HEART, 0x15, 0x1f, MAX_CONTEST_MOVE_HEARTS, 0x01, 0x11);
     ContestBG_FillBoxWithTile(0, TILE_FILLED_APPEAL_HEART, 0x15, 0x1f, numHearts, 0x01, 0x11);
 
     // Jam hearts
-    if (gContestEffects[gContestMoves[move].effect].jam == 0xFF)
+    if (gContestEffects[gContestMoves[a].effect].jam == 0xFF)
         numHearts = 0;
     else
-        numHearts = gContestEffects[gContestMoves[move].effect].jam / 10;
+        numHearts = gContestEffects[gContestMoves[a].effect].jam / 10;
     if (numHearts > MAX_CONTEST_MOVE_HEARTS)
         numHearts = MAX_CONTEST_MOVE_HEARTS;
     ContestBG_FillBoxWithTile(0, TILE_EMPTY_JAM_HEART, 0x15, 0x20, MAX_CONTEST_MOVE_HEARTS, 0x01, 0x11);
     ContestBG_FillBoxWithTile(0, TILE_FILLED_JAM_HEART, 0x15, 0x20, numHearts, 0x01, 0x11);
 
     FillWindowPixelBuffer(WIN_MOVE_DESCRIPTION, PIXEL_FILL(0));
-    Contest_PrintTextToBg0WindowStd(WIN_MOVE_DESCRIPTION, gContestEffectDescriptionPointers[gContestMoves[move].effect]);
+    Contest_PrintTextToBg0WindowStd(WIN_MOVE_DESCRIPTION, gContestEffectDescriptionPointers[gContestMoves[a].effect]);
     Contest_PrintTextToBg0WindowStd(WIN_SLASH, gText_Slash);
 }
 
@@ -4537,14 +4537,14 @@ static void CalculateAppealMoveImpact(u8 contestant)
     eContestantStatus[contestant].contestantAnimTarget = i;
 }
 
-void SetContestantEffectStringID(u8 contestant, u8 effectStringId)
+void SetContestantEffectStringID(u8 a, u8 b)
 {
-    eContestantStatus[contestant].effectStringId = effectStringId;
+    eContestantStatus[a].effectStringId = b;
 }
 
-void SetContestantEffectStringID2(u8 contestant, u8 effectStringId)
+void SetContestantEffectStringID2(u8 a, u8 b)
 {
-    eContestantStatus[contestant].effectStringId2 = effectStringId;
+    eContestantStatus[a].effectStringId2 = b;
 }
 
 void SetStartledString(u8 contestant, u8 jam)
@@ -4744,7 +4744,7 @@ static void UpdateApplauseMeter(void)
 
 s8 Contest_GetMoveExcitement(u16 move)
 {
-    return sContestExcitementTable[gSpecialVar_ContestCategory][gContestMoves[move].contestCategory];
+    return gContestExcitementTable[gSpecialVar_ContestCategory][gContestMoves[move].contestCategory];
 }
 
 static u8 StartApplauseOverflowAnimation(void)

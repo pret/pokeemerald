@@ -506,13 +506,9 @@ static void IncrementCardStat(u32 statType)
         }
 
         if (stat == NULL)
-        {
             AGB_ASSERT(0);
-        }
         else if (++(*stat) > MAX_WONDER_CARD_STAT)
-        {
             *stat = MAX_WONDER_CARD_STAT;
-        }
     }
 }
 

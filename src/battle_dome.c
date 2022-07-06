@@ -73,43 +73,40 @@ struct TourneyTreeLineSection
 #define tMode               data[2]
 #define tPrevTaskId         data[3]
 
-#define EFFECTIVENESS_MODE_GOOD     0
-#define EFFECTIVENESS_MODE_BAD      1
-#define EFFECTIVENESS_MODE_AI_VS_AI 2
-
-static u8 GetDomeTrainerMonIvs(u16);
-static void SwapDomeTrainers(int, int, u16 *);
-static void CalcDomeMonStats(u16, int, int, u8, u8, int *);
-static void CreateDomeOpponentMons(u16);
-static int SelectOpponentMons_Good(u16, bool8);
-static int SelectOpponentMons_Bad(u16, bool8);
-static int GetTypeEffectivenessPoints(int, int, int);
-static int SelectOpponentMonsFromParty(int *, bool8);
-static void Task_ShowTourneyInfoCard(u8);
-static void Task_HandleInfoCardInput(u8);
-static u8 Task_GetInfoCardInput(u8);
+// This file's functions.
+static u8 GetDomeTrainerMonIvs(u16 trainerId);
+static void SwapDomeTrainers(int id1, int id2, u16 *statsArray);
+static void CalcDomeMonStats(u16 species, int level, int ivs, u8 evBits, u8 nature, int *stats);
+static void CreateDomeOpponentMons(u16 tournamentTrainerId);
+static int SelectOpponentMonsUsingPersonality(u16 tournamentTrainerId, bool8 arg1);
+static int SelectOpponentMonsUsingOtId(u16 tournamentTrainerId, bool8 arg1);
+static int GetTypeEffectivenessPoints(int move, int species, int arg2);
+static int SelectOpponentMonsFromParty(int *arr, bool8 arg1);
+static void Task_ShowTourneyInfoCard(u8 taskId);
+static void Task_HandleInfoCardInput(u8 taskId);
+static u8 Task_GetInfoCardInput(u8 taskId);
 static void SetFacilityTrainerAndMonPtrs(void);
-static int TrainerIdToTournamentId(u16);
+static int TrainerIdToTournamentId(u16 trainerId);
 static u16 TrainerIdOfPlayerOpponent(void);
-static void Task_ShowTourneyTree(u8);
-static void Task_HandleStaticTourneyTreeInput(u8);
+static void Task_ShowTourneyTree(u8 taskId);
+static void Task_HandleStaticTourneyTreeInput(u8 taskId);
 static void CB2_TourneyTree(void);
 static void VblankCb_TourneyInfoCard(void);
-static void DisplayMatchInfoOnCard(u8, u8);
-static void DisplayTrainerInfoOnCard(u8, u8);
+static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo);
+static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId);
 static int BufferDomeWinString(u8, u8*);
 static u8 GetDomeBrainTrainerPicId(void);
 static u8 GetDomeBrainTrainerClass(void);
-static void CopyDomeBrainTrainerName(u8 *);
-static void CopyDomeTrainerName(u8 *, u16);
+static void CopyDomeBrainTrainerName(u8 *str);
+static void CopyDomeTrainerName(u8 *str, u16 trainerId);
 static void HblankCb_TourneyTree(void);
 static void VblankCb_TourneyTree(void);
-static u8 UpdateTourneyTreeCursor(u8);
-static void DecideRoundWinners(u8);
-static u8 GetOpposingNPCTournamentIdByRound(u8, u8);
+static u8 UpdateTourneyTreeCursor(u8 taskId);
+static void DecideRoundWinners(u8 roundId);
+static u8 GetOpposingNPCTournamentIdByRound(u8 tournamentId, u8);
 static void DrawTourneyAdvancementLine(u8, u8);
-static void SpriteCb_HorizontalScrollArrow(struct Sprite *);
-static void SpriteCb_VerticalScrollArrow(struct Sprite *);
+static void SpriteCb_HorizontalScrollArrow(struct Sprite *sprite);
+static void SpriteCb_VerticalScrollArrow(struct Sprite *sprite);
 static void InitDomeChallenge(void);
 static void GetDomeData(void);
 static void SetDomeData(void);
@@ -133,6 +130,7 @@ static void BufferLastDomeWinnerName(void);
 static void InitRandomTourneyTreeResults(void);
 static void InitDomeTrainers(void);
 
+// EWRAM variables.
 EWRAM_DATA u32 gPlayerPartyLostHP = 0; // never read
 static EWRAM_DATA u32 sPlayerPartyMaxHP = 0; // never read
 static EWRAM_DATA struct TourneyTreeInfoCard *sInfoCard = {0};
@@ -2082,6 +2080,7 @@ static const u8 sTourneyTreeLineSectionArrayCounts[DOME_TOURNAMENT_TRAINERS_COUN
     {ARRAY_COUNT(sLineSectionTrainer16Round1), ARRAY_COUNT(sLineSectionTrainer16Round2), ARRAY_COUNT(sLineSectionTrainer16Semifinal), ARRAY_COUNT(sLineSectionTrainer16Final)},
 };
 
+// code
 void CallBattleDomeFunction(void)
 {
     sBattleDomeFunctions[gSpecialVar_0x8004]();
@@ -2593,33 +2592,28 @@ static void CreateDomeOpponentMons(u16 tournamentTrainerId)
     }
 }
 
-// Returns a bitmask representing which 2 of the trainer's 3 pokemon to select.
-// The choice is calculated solely depending on the type effectiveness of their
-// movesets against the player's pokemon.
-// There is a 50% chance of either a "good" or "bad" selection mode being used.
-// In the good mode movesets are preferred which are more effective against the
-// player, and in the bad mode the opposite is true. If all 3 pokemon tie, the
-// other mode will be tried. If they tie again, the pokemon selection is random.
 int GetDomeTrainerSelectedMons(u16 tournamentTrainerId)
 {
     int selectedMonBits;
     if (Random() & 1)
     {
-        selectedMonBits = SelectOpponentMons_Good(tournamentTrainerId, FALSE);
+        selectedMonBits = SelectOpponentMonsUsingPersonality(tournamentTrainerId, FALSE);
         if (selectedMonBits == 0)
-            selectedMonBits = SelectOpponentMons_Bad(tournamentTrainerId, TRUE);
+            selectedMonBits = SelectOpponentMonsUsingOtId(tournamentTrainerId, TRUE);
     }
     else
     {
-        selectedMonBits = SelectOpponentMons_Bad(tournamentTrainerId, FALSE);
+        selectedMonBits = SelectOpponentMonsUsingOtId(tournamentTrainerId, FALSE);
         if (selectedMonBits == 0)
-            selectedMonBits = SelectOpponentMons_Good(tournamentTrainerId, TRUE);
+            selectedMonBits = SelectOpponentMonsUsingPersonality(tournamentTrainerId, TRUE);
     }
 
     return selectedMonBits;
 }
 
-static int SelectOpponentMons_Good(u16 tournamentTrainerId, bool8 allowRandom)
+// Could probably use a better name once GetTypeEffectivenessPoints is clarified
+// Personality seems to be used to select a different weighting system for type effectiveness points
+static int SelectOpponentMonsUsingPersonality(u16 tournamentTrainerId, bool8 allowRandom)
 {
     int i, moveId, playerMonId;
     int partyMovePoints[FRONTIER_PARTY_SIZE];
@@ -2634,12 +2628,12 @@ static int SelectOpponentMons_Good(u16 tournamentTrainerId, bool8 allowRandom)
                 if (DOME_TRAINERS[tournamentTrainerId].trainerId == TRAINER_FRONTIER_BRAIN)
                 {
                     partyMovePoints[i] += GetTypeEffectivenessPoints(GetFrontierBrainMonMove(i, moveId),
-                                            GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), EFFECTIVENESS_MODE_GOOD);
+                                            GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), MON_DATA_PERSONALITY);
                 }
                 else
                 {
                     partyMovePoints[i] += GetTypeEffectivenessPoints(gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][i]].moves[moveId],
-                                            GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), EFFECTIVENESS_MODE_GOOD);
+                                            GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), MON_DATA_PERSONALITY);
                 }
             }
         }
@@ -2647,8 +2641,8 @@ static int SelectOpponentMons_Good(u16 tournamentTrainerId, bool8 allowRandom)
     return SelectOpponentMonsFromParty(partyMovePoints, allowRandom);
 }
 
-// Identical to function above, but uses EFFECTIVENESS_MODE_BAD
-static int SelectOpponentMons_Bad(u16 tournamentTrainerId, bool8 allowRandom)
+// See above function, identical but uses MON_DATA_OT_ID
+static int SelectOpponentMonsUsingOtId(u16 tournamentTrainerId, bool8 allowRandom)
 {
     int i, moveId, playerMonId;
     int partyMovePoints[FRONTIER_PARTY_SIZE];
@@ -2663,12 +2657,12 @@ static int SelectOpponentMons_Bad(u16 tournamentTrainerId, bool8 allowRandom)
                 if (DOME_TRAINERS[tournamentTrainerId].trainerId == TRAINER_FRONTIER_BRAIN)
                 {
                     partyMovePoints[i] += GetTypeEffectivenessPoints(GetFrontierBrainMonMove(i, moveId),
-                                            GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), EFFECTIVENESS_MODE_BAD);
+                                            GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), MON_DATA_OT_ID);
                 }
                 else
                 {
                     partyMovePoints[i] += GetTypeEffectivenessPoints(gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][i]].moves[moveId],
-                                            GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), EFFECTIVENESS_MODE_BAD);
+                                            GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), MON_DATA_OT_ID);
                 }
             }
         }
@@ -2741,7 +2735,7 @@ static int SelectOpponentMonsFromParty(int *partyMovePoints, bool8 allowRandom)
 #define TYPE_x2     40
 #define TYPE_x4     80
 
-static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
+static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
 {
     int defType1, defType2, defAbility, moveType;
     int i = 0;
@@ -2757,20 +2751,11 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
 
     if (defAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
     {
-        // They likely meant to return here, as 8 is the number of points normally used in this mode for moves with no effect.
-        // Because there's no return the value instead gets interpreted by the switch, and the number of points becomes 0.
-        if (mode == EFFECTIVENESS_MODE_BAD)
-        {
+        if (arg2 == 1)
             typePower = 8;
-        #ifdef BUGFIX
-            return;
-        #endif
-        }
     }
     else
     {
-        // Calculate a "type power" value to determine the benefit of using this type move against the target.
-        // This value will then be used to get the number of points to assign to the move.
         while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
         {
             if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
@@ -2782,30 +2767,33 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
             {
                 // BUG: the value of TYPE_x2 does not exist in gTypeEffectiveness, so if defAbility is ABILITY_WONDER_GUARD, the conditional always fails
                 #ifndef BUGFIX
-                    #define WONDER_GUARD_EFFECTIVENESS TYPE_x2
-                #else
-                    #define WONDER_GUARD_EFFECTIVENESS TYPE_MUL_SUPER_EFFECTIVE
-                #endif
                 if (TYPE_EFFECT_DEF_TYPE(i) == defType1)
-                    if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == WONDER_GUARD_EFFECTIVENESS) || defAbility != ABILITY_WONDER_GUARD)
+                    if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == TYPE_x2) || defAbility != ABILITY_WONDER_GUARD)
                         typePower = (typePower * TYPE_EFFECT_MULTIPLIER(i)) / 10;
                 if (TYPE_EFFECT_DEF_TYPE(i) == defType2 && defType1 != defType2)
-                    if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == WONDER_GUARD_EFFECTIVENESS) || defAbility != ABILITY_WONDER_GUARD)
+                    if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == TYPE_x2) || defAbility != ABILITY_WONDER_GUARD)
                         typePower = (typePower * TYPE_EFFECT_MULTIPLIER(i)) / 10;
+                #else
+                if (TYPE_EFFECT_DEF_TYPE(i) == defType1)
+                    if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE) || defAbility != ABILITY_WONDER_GUARD)
+                        typePower = (typePower * TYPE_EFFECT_MULTIPLIER(i)) / 10;
+                if (TYPE_EFFECT_DEF_TYPE(i) == defType2 && defType1 != defType2)
+                    if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE) || defAbility != ABILITY_WONDER_GUARD)
+                        typePower = (typePower * TYPE_EFFECT_MULTIPLIER(i)) / 10;
+                #endif
             }
             i += 3;
         }
     }
 
-    switch (mode)
+    switch (arg2)
     {
-    case EFFECTIVENESS_MODE_GOOD:
-        // Weights moves that more effective.
+    case 0:
         switch (typePower)
         {
-        case TYPE_x0:
-        case TYPE_x0_25:
         case TYPE_x0_50:
+        case TYPE_x0_25:
+        case TYPE_x0:
         default:
             typePower = 0;
             break;
@@ -2820,23 +2808,21 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
             break;
         }
         break;
-    case EFFECTIVENESS_MODE_BAD:
-        // Weights moves that are less effective.
-        // Odd that there's no limit on this being used, even the Frontier Brain could end up using this.
+    case 1:
         switch (typePower)
         {
-        case TYPE_x0:
-            typePower = 8;
+        default:
+        case TYPE_x1:
+            typePower = 0;
             break;
         case TYPE_x0_25:
             typePower = 4;
             break;
+        case TYPE_x0:
+            typePower = 8;
+            break;
         case TYPE_x0_50:
             typePower = 2;
-            break;
-        default:
-        case TYPE_x1:
-            typePower = 0;
             break;
         case TYPE_x2:
             typePower = -2;
@@ -2846,9 +2832,7 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
             break;
         }
         break;
-    case EFFECTIVENESS_MODE_AI_VS_AI:
-        // Used as part of calculating the winner in a battle between two AIs.
-        // Weights moves that are more effective much more strongly in both directions.
+    case 2:
         switch (typePower)
         {
         case TYPE_x0:
@@ -5863,7 +5847,7 @@ static void InitRandomTourneyTreeResults(void)
         DOME_TRAINERS[i].forfeited = FALSE;
     }
 
-    monLevel = FRONTIER_MAX_LEVEL_50;
+    monLevel = 50;
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
     {
         monTypesBits = 0;
@@ -6006,7 +5990,7 @@ static void DecideRoundWinners(u8 roundId)
                     for (monId2 = 0; monId2 < FRONTIER_PARTY_SIZE; monId2++)
                     {
                         points1 += GetTypeEffectivenessPoints(gFacilityTrainerMons[DOME_MONS[tournamentId1][monId1]].moves[moveSlot],
-                                                gFacilityTrainerMons[DOME_MONS[tournamentId2][monId2]].species, EFFECTIVENESS_MODE_AI_VS_AI);
+                                                gFacilityTrainerMons[DOME_MONS[tournamentId2][monId2]].species, 2);
                     }
                 }
                 species = gFacilityTrainerMons[DOME_MONS[tournamentId1][monId1]].species;
@@ -6029,7 +6013,7 @@ static void DecideRoundWinners(u8 roundId)
                     for (monId2 = 0; monId2 < FRONTIER_PARTY_SIZE; monId2++)
                     {
                         points2 += GetTypeEffectivenessPoints(gFacilityTrainerMons[DOME_MONS[tournamentId2][monId1]].moves[moveSlot],
-                                                gFacilityTrainerMons[DOME_MONS[tournamentId1][monId2]].species, EFFECTIVENESS_MODE_AI_VS_AI);
+                                                gFacilityTrainerMons[DOME_MONS[tournamentId1][monId2]].species, 2);
                     }
                 }
                 species = gFacilityTrainerMons[DOME_MONS[tournamentId2][monId1]].species;

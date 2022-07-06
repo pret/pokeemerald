@@ -438,14 +438,14 @@ static void EnableTextPrinters(void)
     gDisableTextPrinters = FALSE;
 }
 
-static void DisableTextPrinters(struct TextPrinterTemplate * printer, u16 renderCmd)
+static void DisableTextPrinters(struct TextPrinterTemplate * printer, u16 a1)
 {
     gDisableTextPrinters = TRUE;
 }
 
 static void DrawSongTextWindow(const u8 * str)
 {
-    DrawDialogueFrame(0, FALSE);
+    DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, FONT_NORMAL, str, 0, 1, 1, DisableTextPrinters);
     gDisableTextPrinters = TRUE;
     CopyWindowToVram(0, COPYWIN_FULL);

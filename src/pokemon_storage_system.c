@@ -654,6 +654,7 @@ static void SetMovingMonPriority(u8);
 static void SpriteCB_HeldMon(struct Sprite *);
 static struct Sprite *CreateMonIconSprite(u16, u32, s16, s16, u8, u8);
 static void DestroyBoxMonIcon(struct Sprite *);
+extern void UpdateFollowerPokemonGraphic(void);
 
 // Pokémon data
 static void MoveMon(void);
@@ -1040,7 +1041,7 @@ static const struct BgTemplate sBgTemplates[] =
     },
 };
 
-static const struct SpritePalette sWaveformSpritePalette =
+static const struct SpritePalette gWaveformSpritePalette =
 {
     sWaveform_Pal, PALTAG_MISC_2
 };
@@ -1695,6 +1696,7 @@ static void CB2_ExitPokeStorage(void)
 {
     sPreviousBoxOption = GetCurrentBoxOption();
     gFieldCallback = FieldTask_ReturnToPcMenu;
+    UpdateFollowerPokemonGraphic();
     SetMainCallback2(CB2_ReturnToField);
 }
 
@@ -3844,7 +3846,7 @@ static bool8 InitPokeStorageWindows(void)
 
 static void LoadWaveformSpritePalette(void)
 {
-    LoadSpritePalette(&sWaveformSpritePalette);
+    LoadSpritePalette(&gWaveformSpritePalette);
 }
 
 static void InitPalettesAndSprites(void)
@@ -5417,7 +5419,8 @@ static bool32 WaitForWallpaperGfxLoad(void)
     if (IsDma3ManagerBusyWithBgCopy())
         return FALSE;
 
-    TRY_FREE_AND_SET_NULL(sStorage->wallpaperTiles);
+    if (sStorage->wallpaperTiles != NULL)
+        FREE_AND_SET_NULL(sStorage->wallpaperTiles);
 
     return TRUE;
 }
@@ -8475,11 +8478,11 @@ static void MultiMove_ClearIconFromBg(u8 x, u8 y)
     }
 }
 
-static void MultiMove_InitMove(u16 x, u16 y, u16 moveSteps)
+static void MultiMove_InitMove(u16 x, u16 y, u16 arg2)
 {
     sMultiMove->bgX = x;
     sMultiMove->bgY = y;
-    sMultiMove->bgMoveSteps = moveSteps;
+    sMultiMove->bgMoveSteps = arg2;
 }
 
 static u8 MultiMove_UpdateMove(void)

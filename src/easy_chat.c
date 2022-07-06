@@ -1492,7 +1492,7 @@ void ShowEasyChatScreen(void)
         displayedPersonType = EASY_CHAT_PERSON_REPORTER_MALE;
         break;
     case EASY_CHAT_TYPE_BATTLE_TOWER_INTERVIEW:
-        words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].bravoTrainerTower.words;
+        words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].fanclubOpinions.words18;
         displayedPersonType = EASY_CHAT_PERSON_REPORTER_FEMALE;
         break;
     case EASY_CHAT_TYPE_GOOD_SAYING:
@@ -1672,7 +1672,8 @@ static bool8 InitEasyChatScreenStruct(u8 type, u16 *words, u8 displayedPersonTyp
 
 static void FreeEasyChatScreenStruct(void)
 {
-    TRY_FREE_AND_SET_NULL(sEasyChatScreen);
+    if (sEasyChatScreen != NULL)
+        FREE_AND_SET_NULL(sEasyChatScreen);
 }
 
 // Returns the function ID of the action to take as a result of player's input.
@@ -3074,7 +3075,8 @@ static bool8 LoadEasyChatScreen(void)
 
 static void FreeEasyChatScreenControl(void)
 {
-    TRY_FREE_AND_SET_NULL(sScreenControl);
+    if (sScreenControl)
+        FREE_AND_SET_NULL(sScreenControl);
 }
 
 static void StartEasyChatFunction(u16 funcId)
@@ -5571,7 +5573,8 @@ static bool8 InitEasyChatScreenWordData(void)
 
 static void FreeEasyChatScreenWordData(void)
 {
-    TRY_FREE_AND_SET_NULL(sWordData);
+    if (sWordData)
+        FREE_AND_SET_NULL(sWordData);
 }
 
 static void SetUnlockedEasyChatGroups(void)

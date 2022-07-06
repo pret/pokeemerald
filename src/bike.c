@@ -7,6 +7,8 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "sound.h"
+#include "event_data.h"
+#include "sprite.h"
 #include "constants/map_types.h"
 #include "constants/songs.h"
 
@@ -982,7 +984,7 @@ void GetOnOffBike(u8 transitionFlags)
     else
     {
         FollowerIntoPokeball();
-
+        
         SetPlayerAvatarTransitionFlags(transitionFlags);
         Overworld_SetSavedMusic(MUS_CYCLING);
         Overworld_ChangeMusicTo(MUS_CYCLING);

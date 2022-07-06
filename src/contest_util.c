@@ -77,10 +77,7 @@ enum {
 #define TAG_CONFETTI 3017
 #define TAG_WIRELESS_INDICATOR_WINDOW 22222
 
-// Length of the score bar on the results screen
-#define NUM_BAR_SEGMENTS 11
-#define BAR_SEGMENT_LENGTH 8 // Each segment of the results bar is a single tile, so 8 pixels long
-#define MAX_BAR_LENGTH (NUM_BAR_SEGMENTS * BAR_SEGMENT_LENGTH)
+#define MAX_BAR_LENGTH 87
 
 // Starting x/y for the sliding results screen text box
 #define TEXT_BOX_X (DISPLAY_WIDTH + 32)
@@ -99,7 +96,7 @@ struct ContestResultsInternal
     u8 winnerMonSpriteId;
     bool8 destroyConfetti;
     bool8 pointsFlashing;
-    s16 barLength[CONTESTANT_COUNT];
+    s16 unkC[CONTESTANT_COUNT];
     u8 numBarsUpdating;
 };
 
@@ -1751,7 +1748,7 @@ static void CalculateContestantsResultData(void)
             if ((*sContestResults->monResults)[i].lostPoints)
                 barLengthRound2 *= -1;
 
-            if (barLengthPreliminary + barLengthRound2 == MAX_BAR_LENGTH)
+            if (barLengthPreliminary + barLengthRound2 == MAX_BAR_LENGTH + 1)
             {
                 if (barLengthRound2 > 0)
                     (*sContestResults->monResults)[i].barLengthRound2--;
@@ -1844,52 +1841,47 @@ static void Task_UpdateContestResultBar(u8 taskId)
     s16 target = gTasks[taskId].tTarget;
     s16 decreasing = gTasks[taskId].tDecreasing;
 
-    // Has the results bar reached the limit?
     if (decreasing)
     {
-        if (sContestResults->data->barLength[monId] <= 0)
+        if (sContestResults->data->unkC[monId] <= 0)
             minMaxReached = TRUE;
     }
     else
     {
-        if (sContestResults->data->barLength[monId] >= MAX_BAR_LENGTH)
+        if (sContestResults->data->unkC[monId] > MAX_BAR_LENGTH)
             minMaxReached = TRUE;
     }
 
-    if (sContestResults->data->barLength[monId] == target)
+    if (sContestResults->data->unkC[monId] == target)
         targetReached = TRUE;
 
     if (!targetReached)
     {
-        // Target length has not been reached, update bar length
         if (minMaxReached)
-            sContestResults->data->barLength[monId] = target;
+            sContestResults->data->unkC[monId] = target;
         else if (decreasing)
-            sContestResults->data->barLength[monId]--;
+            sContestResults->data->unkC[monId] = sContestResults->data->unkC[monId] - 1;
         else
-            sContestResults->data->barLength[monId]++;
+            sContestResults->data->unkC[monId] = sContestResults->data->unkC[monId] + 1;
     }
 
-    // Update the tiles of the results bar if it's still changing
     if (!minMaxReached && !targetReached)
     {
-        u8 tileOffset;
+        u8 var0;
         u16 tileNum;
-        for (i = 0; i < NUM_BAR_SEGMENTS; i++)
+        for (i = 0; i < 11; i++)
         {
-            if (sContestResults->data->barLength[monId] >= (i + 1) * BAR_SEGMENT_LENGTH)
-                tileOffset = 8; // Bar segment is full
-            else if (sContestResults->data->barLength[monId] >= i * BAR_SEGMENT_LENGTH)
-                tileOffset = sContestResults->data->barLength[monId] % 8; // Bar segment is between full and empty
+            if (sContestResults->data->unkC[monId] >= (i + 1) * 8)
+                var0 = 8;
+            else if (sContestResults->data->unkC[monId] >= i * 8)
+                var0 = sContestResults->data->unkC[monId] % 8;
             else
-                tileOffset = 0; // Bar segment is empty
+                var0 = 0;
 
-            // The first 4 bar segment tiles are not adjacent in the tileset to the
-            // remaining bar segment tiles; choose the base tile number accordingly.
-            if (tileOffset < 4)
-                tileNum = 0x504C + tileOffset;
+            if (var0 < 4)
+                tileNum = 0x504C + var0;
             else
-                tileNum = 0x5057 + tileOffset;
+                tileNum = 0x5057 + var0;
 
             FillBgTilemapBufferRect_Palette0(2, tileNum, i + 7, monId * 3 + 6, 1, 1);
         }

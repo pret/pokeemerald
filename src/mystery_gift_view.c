@@ -207,7 +207,8 @@ void WonderCard_Destroy(void)
     if (sWonderCardData != NULL)
     {
         *sWonderCardData = (struct WonderCardData){};
-        FREE_AND_SET_NULL(sWonderCardData);
+        Free(sWonderCardData);
+        sWonderCardData = NULL;
     }
 }
 
@@ -659,7 +660,8 @@ void WonderNews_Destroy(void)
     if (sWonderNewsData != NULL)
     {
         *sWonderNewsData = (struct WonderNewsData){};
-        FREE_AND_SET_NULL(sWonderNewsData);
+        Free(sWonderNewsData);
+        sWonderNewsData = NULL;
     }
 }
 

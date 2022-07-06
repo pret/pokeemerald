@@ -926,11 +926,15 @@
 #define TRACKS_NONE       0
 #define TRACKS_FOOT       1
 #define TRACKS_BIKE_TIRE  2
+#define TRACKS_SLITHER    3
+#define TRACKS_SPOT       4
+#define TRACKS_BUG        5
 
 #define FIRST_DECORATION_SPRITE_GFX OBJ_EVENT_GFX_PICHU_DOLL
 
 // Special object event local ids
 #define OBJ_EVENT_ID_PLAYER 0xFF
+#define OBJ_EVENT_ID_FOLLOWER 0xFE
 #define OBJ_EVENT_ID_CAMERA 0x7F
 
 // Object event local ids referenced in C files

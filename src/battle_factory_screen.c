@@ -1131,7 +1131,8 @@ static void CB2_InitSelectScreen(void)
     switch (gMain.state)
     {
     case 0:
-        TRY_FREE_AND_SET_NULL(sFactorySelectMons);
+        if (sFactorySelectMons != NULL)
+            FREE_AND_SET_NULL(sFactorySelectMons);
         SetHBlankCallback(NULL);
         SetVBlankCallback(NULL);
         CpuFill32(0, (void *)VRAM, VRAM_SIZE);
@@ -4220,12 +4221,17 @@ static void Task_OpenMonPic(u8 taskId)
             return;
         break;
     default:
+        #ifndef UBFIX
         DestroyTask(taskId);
-        // Accessing data of destroyed task. Task data isn't reset until a new task needs that task id.
+        #endif
+        // UB: Should not use the task after it has been deleted.
         if (gTasks[taskId].tIsSwapScreen == TRUE)
             Swap_CreateMonSprite();
         else
             Select_CreateMonSprite();
+        #ifdef UBFIX
+        DestroyTask(taskId);
+        #endif
         return;
     }
     task->tState++;

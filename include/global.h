@@ -14,7 +14,6 @@
 #include "constants/maps.h"
 #include "constants/pokemon.h"
 #include "constants/easy_chat.h"
-#include "constants/trainer_hill.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -134,10 +133,6 @@
 #define NUM_DEX_FLAG_BYTES ROUND_BITS_TO_BYTES(NUM_SPECIES)
 #define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
 #define NUM_ADDITIONAL_PHRASE_BYTES ROUND_BITS_TO_BYTES(NUM_ADDITIONAL_PHRASES)
-
-// This produces an error at compile-time if expr is zero.
-// It looks like file.c:line: size of array `id' is negative
-#define STATIC_ASSERT(expr, id) typedef char id[(expr) ? 1 : -1];
 
 struct Coords8
 {
@@ -284,6 +279,8 @@ struct BattleTowerPokemon
     u8 friendship;
 };
 
+#define NULL_BATTLE_TOWER_POKEMON { .nickname = __("$$$$$$$$$$$") }
+
 struct EmeraldBattleTowerRecord
 {
     /*0x00*/ u8 lvlMode; // 0 = level 50, 1 = level 100
@@ -409,7 +406,7 @@ struct BattleFrontier
     /*0xE1A*/ u16 pyramidWinStreaks[FRONTIER_LVL_MODE_COUNT];
     /*0xE1E*/ u16 pyramidRecordStreaks[FRONTIER_LVL_MODE_COUNT];
     /*0xE22*/ u16 pyramidRandoms[4];
-    /*0xE2A*/ u8 pyramidTrainerFlags; // 1 bit for each trainer (MAX_PYRAMID_TRAINERS)
+    /*0xE2A*/ u8 pyramidTrainerFlags;
     /*0xE2C*/ struct PyramidBag pyramidBag;
     /*0xE68*/ u8 pyramidLightRadius;
     /*0xE6A*/ u16 verdanturfTentPrize;
@@ -460,6 +457,31 @@ struct RankingHall1P
     u8 language;
 };
 
+// follow me
+struct FollowerMapData
+{
+    /*0x0*/ u8 id;
+    /*0x1*/ u8 number;
+    /*0x2*/ u8 group;
+}; /* size = 0x4 */
+struct Follower
+{
+    /*0x00*/ u8 inProgress:1;
+             u8 warpEnd:1;
+             u8 createSurfBlob:3;
+             u8 comeOutDoorStairs:3;
+    /*0x01*/ u8 objId;
+    /*0x02*/ u8 currentSprite;
+    /*0x03*/ u8 delayedState;
+    /*0x04*/ struct FollowerMapData map;
+    /*0x08*/ struct Coords16 log;
+    /*0x0C*/ const u8* script;
+    /*0x10*/ u16 flag;
+    /*0x12*/ u16 graphicsId;
+    /*0x14*/ u16 flags;
+    /*0x15*/ u8 locked;
+}; /* size = 0x18 */
+
 struct RankingHall2P
 {
     u8 id1[TRAINER_ID_LENGTH];
@@ -502,6 +524,7 @@ struct SaveBlock2
     /*0x57C*/ struct RankingHall2P hallRecords2P[FRONTIER_LVL_MODE_COUNT][HALL_RECORDS_COUNT]; // From record mixing.
     /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
     /*0x64C*/ struct BattleFrontier frontier;
+              struct Follower follower;
 }; // sizeof=0xF2C
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
@@ -811,7 +834,7 @@ struct TrainerNameRecord
     u8 trainerName[PLAYER_NAME_LENGTH + 1];
 };
 
-struct TrainerHillSave
+struct SaveTrainerHill
 {
     /*0x3D64*/ u32 timer;
     /*0x3D68*/ u32 bestTime;
@@ -823,7 +846,7 @@ struct TrainerHillSave
     /*0x3D6E*/ u16 hasLost:1;
     /*0x3D6E*/ u16 maybeECardScanDuringChallenge:1;
     /*0x3D6E*/ u16 field_3D6E_0f:1;
-    /*0x3D6E*/ u16 mode:2; // HILL_MODE_*
+    /*0x3D6E*/ u16 tag:2;
 };
 
 struct WonderNewsMetadata
@@ -1006,7 +1029,7 @@ struct SaveBlock1
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
     /*0x322C*/ struct MysteryGiftSave mysteryGift;
     /*0x3598*/ u8 unused_3598[0x180];
-    /*0x3718*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
+    /*0x3718*/ u32 trainerHillTimes[4];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     /*0x3B24*/ u8 seen2[NUM_DEX_FLAG_BYTES];
@@ -1014,7 +1037,7 @@ struct SaveBlock1
     /*0x3B98*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x3C88*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
     /*0x3D5A*/ u8 unused_3D5A[10];
-    /*0x3D64*/ struct TrainerHillSave trainerHill;
+    /*0x3D64*/ struct SaveTrainerHill trainerHill;
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
     // sizeof: 0x3D88
 };
