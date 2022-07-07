@@ -4318,7 +4318,7 @@ static bool32 HasAtLeastTwoMonsOfLevel30OrLower(void)
 
     for (i = 0; i < gPlayerPartyCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) <= 30
+        if (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) <= UNION_ROOM_MAX_LEVEL
          && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
             count++;
     }

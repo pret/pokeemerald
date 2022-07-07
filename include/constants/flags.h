@@ -1634,7 +1634,7 @@
 
 #define FLAGS_COUNT (DAILY_FLAGS_END + 1)
 
-// Special Flags (Stored in EWRAM (gSpecialFlags), not in the SaveBlock)
+// Special Flags (Stored in EWRAM (sSpecialFlags), not in the SaveBlock)
 #define SPECIAL_FLAGS_START                     0x4000
 #define FLAG_HIDE_MAP_NAME_POPUP                (SPECIAL_FLAGS_START + 0x0)
 #define FLAG_DONT_TRANSITION_MUSIC              (SPECIAL_FLAGS_START + 0x1)
