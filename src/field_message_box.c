@@ -33,7 +33,7 @@ static void Task_DrawFieldMessage(u8 taskId)
            task->tState++;
            break;
         case 1:
-           DrawDialogueFrame(0, 1);
+           DrawDialogueFrame(0, TRUE);
            task->tState++;
            break;
         case 2:

@@ -141,8 +141,6 @@ static u16 GetObjectEventFlagIdByObjectEventId(u8);
 static void UpdateObjectEventVisibility(struct ObjectEvent *, struct Sprite *);
 static void MakeSpriteTemplateFromObjectEventTemplate(struct ObjectEventTemplate *, struct SpriteTemplate *, const struct SubspriteTable **);
 static void GetObjectEventMovingCameraOffset(s16 *, s16 *);
-static void LoadObjectEventPalette(u16);
-static struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8, u8, u8);
 static void RemoveObjectEventIfOutsideView(struct ObjectEvent *);
 static void SpawnObjectEventOnReturnToField(u8, s16, s16);
 static void SetPlayerAvatarObjectEventIdAndObjectId(u8, u8);
@@ -172,7 +170,7 @@ static void CreateLevitateMovementTask(struct ObjectEvent *);
 static void DestroyLevitateMovementTask(u8);
 static bool8 NpcTakeStep(struct Sprite *);
 static bool8 IsElevationMismatchAt(u8, s16, s16);
-static bool8 AreElevationsCompatible(u8 a, u8 b);
+static bool8 AreElevationsCompatible(u8, u8);
 
 static const struct SpriteFrameImage sPicTable_PechaBerryTree[];
 
@@ -2130,7 +2128,7 @@ u8 CreateVirtualObject(u16 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 z, u8 d
         sprite->oam.paletteNum = IndexOfSpritePaletteTag(spriteTemplate.paletteTag);
         sprite->coordOffsetEnabled = TRUE;
         sprite->sVirtualObjId = virtualObjId;
-        sprite->sVirtualObjElev = elevation;
+        sprite->sVirtualObjElev = z;
         if (subspriteTables != NULL)
         {
             SetSubspriteTables(sprite, subspriteTables);
@@ -8478,7 +8476,7 @@ void GroundEffect_FlowingWater(struct ObjectEvent *objEvent, struct Sprite *spri
     StartFieldEffectForObjectEvent(FLDEFF_FEET_IN_FLOWING_WATER, objEvent);
 }
 
-static void (*const sGroundEffectTracksFuncs[])(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a) = {
+static void (*const sGroundEffectTracksFuncs[])(struct ObjectEvent *objEvent, struct Sprite *sprite, bool8 isDeepSand) = {
     [TRACKS_NONE] = DoTracksGroundEffect_None,
     [TRACKS_FOOT] = DoTracksGroundEffect_Footprints,
     [TRACKS_BIKE_TIRE] = DoTracksGroundEffect_BikeTireTracks,
@@ -8490,20 +8488,20 @@ static void (*const sGroundEffectTracksFuncs[])(struct ObjectEvent *objEvent, st
 void GroundEffect_SandTracks(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
     const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
-    sGroundEffectTracksFuncs[info->tracks](objEvent, sprite, 0);
+    sGroundEffectTracksFuncs[info->tracks](objEvent, sprite, FALSE);
 }
 
 void GroundEffect_DeepSandTracks(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
     const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
-    sGroundEffectTracksFuncs[info->tracks](objEvent, sprite, 1);
+    sGroundEffectTracksFuncs[info->tracks](objEvent, sprite, TRUE);
 }
 
-static void DoTracksGroundEffect_None(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a)
+static void DoTracksGroundEffect_None(struct ObjectEvent *objEvent, struct Sprite *sprite, bool8 isDeepSand)
 {
 }
 
-static void DoTracksGroundEffect_Footprints(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a)
+static void DoTracksGroundEffect_Footprints(struct ObjectEvent *objEvent, struct Sprite *sprite, bool8 isDeepSand)
 {
     // First half-word is a Field Effect script id. (gFieldEffectScriptPointers)
     u16 sandFootprints_FieldEffectData[2] = {
@@ -8516,7 +8514,7 @@ static void DoTracksGroundEffect_Footprints(struct ObjectEvent *objEvent, struct
     gFieldEffectArguments[2] = 149;
     gFieldEffectArguments[3] = 2;
     gFieldEffectArguments[4] = objEvent->facingDirection;
-    FieldEffectStart(sandFootprints_FieldEffectData[a]);
+    FieldEffectStart(sandFootprints_FieldEffectData[isDeepSand]);
 }
 
 static void DoTracksGroundEffect_FootprintsSpot(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a)
@@ -8965,11 +8963,11 @@ static const SpriteStepFunc *const sNpcStepFuncTables[] = {
 };
 
 static const s16 sStepTimes[] = {
-    [MOVE_SPEED_NORMAL] = 16,
-    [MOVE_SPEED_FAST_1] = 8,
-    [MOVE_SPEED_FAST_2] = 6,
-    [MOVE_SPEED_FASTER] = 4,
-    [MOVE_SPEED_FASTEST] = 2,
+    [MOVE_SPEED_NORMAL] = ARRAY_COUNT(sStep1Funcs),
+    [MOVE_SPEED_FAST_1] = ARRAY_COUNT(sStep2Funcs),
+    [MOVE_SPEED_FAST_2] = ARRAY_COUNT(sStep3Funcs),
+    [MOVE_SPEED_FASTER] = ARRAY_COUNT(sStep4Funcs),
+    [MOVE_SPEED_FASTEST] = ARRAY_COUNT(sStep8Funcs),
 };
 
 static bool8 NpcTakeStep(struct Sprite *sprite)
@@ -10091,6 +10089,7 @@ u8 MovementAction_FollowingPokemon_Shrink_Step1(struct ObjectEvent *objectEvent,
     {
         FreeSpriteOamMatrix(sprite);
         gObjectEvents[gPlayerAvatar.objectEventId].fixedPriority = FALSE;
+        gPlayerAvatar.preventStep = FALSE;
         objectEvent->invisible = TRUE;
         sprite->data[2]++;
     }
@@ -10224,7 +10223,7 @@ u8 MovementAction_FollowingPokemon_Grow_Step1(struct ObjectEvent *objectEvent, s
             objectEvent->inShallowFlowingWater = TRUE;
             StartFieldEffectForObjectEvent(FLDEFF_FEET_IN_FLOWING_WATER, objectEvent);
         }
-        
+        gPlayerAvatar.preventStep = FALSE;
         sprite->data[2]++;
     }
 

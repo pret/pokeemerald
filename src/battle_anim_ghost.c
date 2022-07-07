@@ -653,9 +653,9 @@ static void AnimTask_SpiteTargetShadow_Step1(u8 taskId)
             startLine = 0;
 
         if (position == 1)
-            task->data[10] = ScanlineEffect_InitWave(startLine, startLine + 64, 2, 6, 0, SCANLINE_EFFECT_REG_BG1HOFS, 1);
+            task->data[10] = ScanlineEffect_InitWave(startLine, startLine + 64, 2, 6, 0, SCANLINE_EFFECT_REG_BG1HOFS, TRUE);
         else
-            task->data[10] = ScanlineEffect_InitWave(startLine, startLine + 64, 2, 6, 0, SCANLINE_EFFECT_REG_BG2HOFS, 1);
+            task->data[10] = ScanlineEffect_InitWave(startLine, startLine + 64, 2, 6, 0, SCANLINE_EFFECT_REG_BG2HOFS, TRUE);
 
         task->data[15]++;
         break;
@@ -1004,7 +1004,7 @@ static void AnimTask_CurseStretchingBlackBg_Step1(u8 taskId)
         right = DISPLAY_WIDTH;
         top = 0;
         bottom = 112;
-        selectedPalettes = GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0);
+        selectedPalettes = GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);
         BeginNormalPaletteFade(selectedPalettes, 0, 16, 16, RGB(0, 0, 0));
         gTasks[taskId].func = AnimTask_CurseStretchingBlackBg_Step2;
     }
