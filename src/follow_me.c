@@ -268,7 +268,7 @@ void FollowMe(struct ObjectEvent* npc, u8 state, bool8 ignoreScriptActive)
             gSaveBlock2Ptr->follower.comeOutDoorStairs = 0;
         }
         
-		// This makes sure the follower is still invisible after diving or surfacing
+		// This makes sure the follower is still invisible after diving or surfacing or on a bike
 		if(!(TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_UNDERWATER) || TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) || TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_BIKE)))
 			follower->invisible = FALSE;
         MoveObjectEventToMapCoords(follower, player->currentCoords.x, player->currentCoords.y);

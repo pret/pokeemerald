@@ -3758,12 +3758,13 @@ void UpdateFollowerPokemonGraphic(void)
     struct ObjectEvent *follower = &gObjectEvents[gSaveBlock2Ptr->follower.objId];
 
     // If the lead Pokemon is Unown, use the correct sprite
-    if (leadMonGraphicId == 439)
+    if (leadMonGraphicId == OBJ_EVENT_GFX_UNOWN_A)
     {
         u8 unownLetter = GET_UNOWN_LETTER(GetMonData(&gPlayerParty[GetLeadMonNotFaintedIndex()], MON_DATA_PERSONALITY));
         
+        // If the Unown is not A, set the graphics id to the proper Unown
         if (unownLetter)
-            leadMonGraphicId = 652 + unownLetter;
+            leadMonGraphicId = OBJ_EVENT_GFX_DEOXYS_SPEED + unownLetter;
     }
     
     if(gSaveBlock2Ptr->follower.inProgress && leadMonGraphicId != gSaveBlock2Ptr->follower.graphicsId)
