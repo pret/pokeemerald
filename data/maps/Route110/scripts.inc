@@ -481,6 +481,7 @@ Route110_EventScript_RivalExit::
 	call_if_eq VAR_0x8008, 3, Route110_EventScript_RivalExit3
 	removeobject LOCALID_RIVAL_ON_BIKE
 	setvar VAR_ROUTE110_STATE, 1
+	setflag FLAG_DEFEATED_RIVAL_ROUTE_110
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall
