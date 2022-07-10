@@ -28,6 +28,7 @@ u8 FlagClear(u16 id);
 bool8 FlagGet(u16 id);
 
 #define NUM_SOFT_CAPS 20
+#define NUM_MAPSEC 214
 
 extern u16 gSpecialVar_0x8000;
 extern u16 gSpecialVar_0x8001;
@@ -50,5 +51,8 @@ extern u16 gSpecialVar_Unused_0x8014;
 
 extern const u16 sExpCapFlags[NUM_SOFT_CAPS];
 extern const u32 sExpCaps[NUM_SOFT_CAPS];
+
+extern const u16 sEncounterFlags[NUM_MAPSEC];
+extern const u16 gLineTable[NUM_SPECIES][EVOS_PER_MON + 1];
 
 #endif // GUARD_EVENT_DATA_H

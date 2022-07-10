@@ -29,6 +29,7 @@
 #include "palette.h"
 #include "party_menu.h"
 #include "pokeblock.h"
+#include "pokedex.h"
 #include "pokemon.h"
 #include "script.h"
 #include "sound.h"
@@ -942,20 +943,55 @@ void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
 
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
-    if (IsPlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
+    u8 sectionId = GetCurrentRegionMapSectionId();
+    u16 flag = sEncounterFlags[sectionId];
+    u16 targetSpecies;
+    u8 j;
+    int cantCatch = FALSE;
+
+    if (FlagGet(flag))
     {
-        RemoveBagItem(gSpecialVar_ItemId, 1);
-        if (!InBattlePyramid())
-            Task_FadeAndCloseBagMenu(taskId);
-        else
-            CloseBattlePyramidBag(taskId);
-    }
-    else if (!InBattlePyramid())
-    {
-        DisplayItemMessage(taskId, FONT_NORMAL, gText_BoxFull, CloseItemMessage);
+        DisplayItemMessage(taskId, FONT_NORMAL, gText_NuzlockeAlreadyEncountered, CloseItemMessage);
     }
     else
-        DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, Task_CloseBattlePyramidBagMessage);
+    {
+        for (j = 0; j < gActiveBattler; j++)
+        {
+            if ((gBattlerPositions[j] & BIT_SIDE) == B_SIDE_OPPONENT)
+            {
+                targetSpecies = gBattleMons[j].species;
+            }
+        }
+        for (j = 0; j < EVOS_PER_MON + 1; j++)
+        {
+            if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gLineTable[targetSpecies][j]), FLAG_GET_CAUGHT))
+            {
+                cantCatch = TRUE;
+                break;
+            } 
+        }
+        if (cantCatch)
+        {
+            DisplayItemMessage(taskId, FONT_NORMAL, gText_NuzlockeSpeciesClause, CloseItemMessage);
+        }
+        else 
+        {
+            if (IsPlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
+            {
+                RemoveBagItem(gSpecialVar_ItemId, 1);
+                if (!InBattlePyramid())
+                    Task_FadeAndCloseBagMenu(taskId);
+                else
+                    CloseBattlePyramidBag(taskId);
+            }
+            else if (!InBattlePyramid())
+            {
+                DisplayItemMessage(taskId, FONT_NORMAL, gText_BoxFull, CloseItemMessage);
+            }
+            else
+                DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, Task_CloseBattlePyramidBagMessage);
+        }
+    }
 }
 
 static void Task_CloseStatIncreaseMessage(u8 taskId)
