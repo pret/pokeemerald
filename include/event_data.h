@@ -53,5 +53,6 @@ extern const u16 sExpCapFlags[NUM_SOFT_CAPS];
 extern const u32 sExpCaps[NUM_SOFT_CAPS];
 
 extern const u16 sEncounterFlags[NUM_MAPSEC];
+extern const u16 gLineTable[NUM_SPECIES][EVOS_PER_MON + 1];
 
 #endif // GUARD_EVENT_DATA_H
