@@ -29,6 +29,7 @@
 #include "main.h"
 #include "malloc.h"
 #include "m4a.h"
+#include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "pokeball.h"
@@ -5321,9 +5322,13 @@ static void HandleEndTurn_FinishBattle(void)
 
         if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
         {
-            u8 sectionId = GetCurrentRegionMapSectionId();
-            u16 flag = sEncounterFlags[sectionId];
-            FlagSet(flag);
+            gBattlerTarget = gBattlerAttacker ^ BIT_SIDE;
+            if (!(GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), FLAG_GET_CAUGHT)))
+            {
+                u8 sectionId = GetCurrentRegionMapSectionId();
+                u16 flag = sEncounterFlags[sectionId];
+                FlagSet(flag);
+            }
         }
 
         RecordedBattle_SetPlaybackFinished();
