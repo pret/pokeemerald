@@ -5694,6 +5694,8 @@ static void SetContestLiveUpdateFlags(u8 contestant)
     }
 }
 
+#define APPEAL_MOVES_END 0xFFFF
+
 static void CalculateContestLiveUpdateData(void)
 {
     u8 loser;
@@ -5758,7 +5760,7 @@ static void CalculateContestLiveUpdateData(void)
         appealMoves[i] = MOVE_NONE;
         numMoveUses[i] = 0;
     }
-    appealMoves[CONTEST_NUM_APPEALS] = 0xFFFF;
+    appealMoves[CONTEST_NUM_APPEALS] = APPEAL_MOVES_END;
     numMoveUses[CONTEST_NUM_APPEALS] = 0;
 
     for (i = 0; i < CONTEST_NUM_APPEALS; i++)
@@ -5787,7 +5789,7 @@ static void CalculateContestLiveUpdateData(void)
     moveCandidates[0] = appealMoves[0];
     mostUses = numMoveUses[0];
     numMoveCandidates = 0;
-    for (i = 1; appealMoves[i] != 0xFFFF; i++)
+    for (i = 1; appealMoves[i] != APPEAL_MOVES_END; i++)
     {
         if (mostUses < numMoveUses[i])
         {
