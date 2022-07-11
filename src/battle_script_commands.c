@@ -2553,9 +2553,9 @@ void SetMoveEffect(bool8 primary, u8 certain)
             case MOVE_EFFECT_PAYDAY:
                 if (GET_BATTLER_SIDE(gBattlerAttacker) == B_SIDE_PLAYER)
                 {
-                    u16 payDay = gPaydayMoney;
+                    u16 payday = gPaydayMoney;
                     gPaydayMoney += (gBattleMons[gBattlerAttacker].level * 5);
-                    if (payDay > gPaydayMoney)
+                    if (payday > gPaydayMoney)
                         gPaydayMoney = 0xFFFF;
                 }
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
@@ -7938,11 +7938,11 @@ static void Cmd_trysetencore(void)
         || gLastMoves[gBattlerTarget] == MOVE_ENCORE
         || gLastMoves[gBattlerTarget] == MOVE_MIRROR_MOVE)
     {
-        i = 4;
+        i = MAX_MON_MOVES;
     }
 
     if (gDisableStructs[gBattlerTarget].encoredMove == MOVE_NONE
-        && i != 4 && gBattleMons[gBattlerTarget].pp[i] != 0)
+        && i != MAX_MON_MOVES && gBattleMons[gBattlerTarget].pp[i] != 0)
     {
         gDisableStructs[gBattlerTarget].encoredMove = gBattleMons[gBattlerTarget].moves[i];
         gDisableStructs[gBattlerTarget].encoredMovePos = i;
