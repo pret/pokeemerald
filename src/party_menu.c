@@ -4354,7 +4354,10 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
     else
     {
         gPartyMenuUseExitCallback = TRUE;
-        FlagSet(FLAG_DISABLE_BAG);
+        if (gMain.inBattle)
+        {
+            FlagSet(FLAG_DISABLE_BAG);
+        }
         if (!IsItemFlute(item))
         {
             PlaySE(SE_USE_ITEM);
@@ -4602,7 +4605,10 @@ static void TryUsePPItem(u8 taskId)
         mon = &gPlayerParty[ptr->slotId];
         PlaySE(SE_USE_ITEM);
         RemoveBagItem(item, 1);
-        FlagSet(FLAG_DISABLE_BAG);
+        if (gMain.inBattle)
+        {
+            FlagSet(FLAG_DISABLE_BAG);
+        }
         move = GetMonData(mon, MON_DATA_MOVE1 + *moveSlot);
         StringCopy(gStringVar1, gMoveNames[move]);
         GetMedicineItemEffectMessage(item);
