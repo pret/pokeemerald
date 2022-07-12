@@ -5,16 +5,16 @@
 .set LOCALID_PLAYER, 13
 .set LOCALID_OPPONENT, 15
 
+.set NO_DRAW,       0
+.set DRAW_TRAINER,  1
+.set DRAW_TUCKER,   2
+
 BattleFrontier_BattleDomeBattleRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleDomeBattleRoom_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleDomeBattleRoom_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleDomeBattleRoom_OnWarp
 	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattleDomeBattleRoom_OnResume
 	.byte 0
-
-	.set NO_DRAW,       0
-	.set DRAW_TRAINER,  1
-	.set DRAW_TUCKER,   2
 
 BattleFrontier_BattleDomeBattleRoom_OnTransition:
 	dome_setopponentgfx
