@@ -2093,10 +2093,12 @@ static const s8 sFriendshipEventModifiers[][3] =
     [FRIENDSHIP_EVENT_FAINT_LARGE]     = {-5, -5, -10},
 };
 
+#define HM_MOVES_END 0xFFFF
+
 static const u16 sHMMoves[] =
 {
     MOVE_CUT, MOVE_FLY, MOVE_SURF, MOVE_STRENGTH, MOVE_FLASH,
-    MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_DIVE, 0xFFFF
+    MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_DIVE, HM_MOVES_END
 };
 
 static const struct SpeciesItem sAlteringCaveWildMonHeldItems[] =
@@ -6479,7 +6481,7 @@ const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u
 bool32 IsHMMove2(u16 move)
 {
     int i = 0;
-    while (sHMMoves[i] != 0xFFFF)
+    while (sHMMoves[i] != HM_MOVES_END)
     {
         if (sHMMoves[i++] == move)
             return TRUE;
