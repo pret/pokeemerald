@@ -37,16 +37,16 @@ struct PokenavCallbacks
 
 static u32 GetCurrentMenuCB(void);
 static u32 IsActiveMenuLoopTaskActive_(void);
-static bool32 SetActivePokenavMenu(u32 menuId);
+static bool32 SetActivePokenavMenu(u32);
 static bool32 AnyMonHasRibbon(void);
-static void InitPokenavResources(struct PokenavResources *a0);
+static void InitPokenavResources(struct PokenavResources *);
 static void InitKeys_(void);
 static void FreePokenavResources(void);
 static void VBlankCB_Pokenav(void);
 static void CB2_Pokenav(void);
-static void Task_RunLoopedTask_LinkMode(u8 a0);
-static void Task_RunLoopedTask(u8 taskId);
-static void Task_Pokenav(u8 taskId);
+static void Task_RunLoopedTask_LinkMode(u8);
+static void Task_RunLoopedTask(u8);
+static void Task_Pokenav(u8);
 static void CB2_InitPokenavForTutorial(void);
 
 const struct PokenavCallbacks PokenavMenuCallbacks[15] =
@@ -557,8 +557,7 @@ void *GetSubstructPtr(u32 index)
 
 void FreePokenavSubstruct(u32 index)
 {
-    if (gPokenavResources->substructPtrs[index] != NULL)
-        FREE_AND_SET_NULL(gPokenavResources->substructPtrs[index]);
+    TRY_FREE_AND_SET_NULL(gPokenavResources->substructPtrs[index]);
 }
 
 u32 GetPokenavMode(void)

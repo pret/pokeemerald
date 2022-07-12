@@ -2095,10 +2095,12 @@ static const s8 sFriendshipEventModifiers[][3] =
     [FRIENDSHIP_EVENT_FAINT_LARGE]     = {-5, -5, -10},
 };
 
+#define HM_MOVES_END 0xFFFF
+
 static const u16 sHMMoves[] =
 {
     MOVE_CUT, MOVE_FLY, MOVE_SURF, MOVE_STRENGTH, MOVE_FLASH,
-    MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_DIVE, 0xFFFF
+    MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_DIVE, HM_MOVES_END
 };
 
 static const struct SpeciesItem sAlteringCaveWildMonHeldItems[] =
@@ -2477,7 +2479,7 @@ void CreateBattleTowerMon_HandleLevel(struct Pokemon *mon, struct BattleTowerPok
     if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_50)
         level = GetFrontierEnemyMonLevel(gSaveBlock2Ptr->frontier.lvlMode);
     else if (lvl50)
-        level = 50;
+        level = FRONTIER_MAX_LEVEL_50;
     else
         level = src->level;
 
@@ -5409,10 +5411,10 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
     return offset;
 }
 
-static void BufferStatRoseMessage(s32 arg0)
+static void BufferStatRoseMessage(s32 statIdx)
 {
     gBattlerTarget = gBattlerInMenuId;
-    StringCopy(gBattleTextBuff1, gStatNamesTable[sStatsToRaise[arg0]]);
+    StringCopy(gBattleTextBuff1, gStatNamesTable[sStatsToRaise[statIdx]]);
     StringCopy(gBattleTextBuff2, gText_StatRose);
     BattleStringExpandPlaceholdersToDisplayedString(gText_DefendersStatRose);
 }
@@ -5828,13 +5830,13 @@ u16 GetLinkTrainerFlankId(u8 linkPlayerId)
     return flankId;
 }
 
-s32 GetBattlerMultiplayerId(u16 a1)
+s32 GetBattlerMultiplayerId(u16 id)
 {
-    s32 id;
-    for (id = 0; id < MAX_LINK_PLAYERS; id++)
-        if (gLinkPlayers[id].id == a1)
+    s32 multiplayerId;
+    for (multiplayerId = 0; multiplayerId < MAX_LINK_PLAYERS; multiplayerId++)
+        if (gLinkPlayers[multiplayerId].id == id)
             break;
-    return id;
+    return multiplayerId;
 }
 
 u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)
@@ -6509,7 +6511,7 @@ const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u
 bool32 IsHMMove2(u16 move)
 {
     int i = 0;
-    while (sHMMoves[i] != 0xFFFF)
+    while (sHMMoves[i] != HM_MOVES_END)
     {
         if (sHMMoves[i++] == move)
             return TRUE;
@@ -6617,12 +6619,12 @@ void SetWildMonHeldItem(void)
         u16 rnd = Random() % 100;
         u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, 0);
         u16 chanceNoItem = 45;
-        u16 chanceCommon = 95;
+        u16 chanceNotRare = 95;
         if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG, 0)
             && GetMonAbility(&gPlayerParty[0]) == ABILITY_COMPOUND_EYES)
         {
             chanceNoItem = 20;
-            chanceCommon = 80;
+            chanceNotRare = 80;
         }
         if (gMapHeader.mapLayoutId == LAYOUT_ALTERING_CAVE)
         {
@@ -6630,7 +6632,7 @@ void SetWildMonHeldItem(void)
             if (alteringCaveId != 0)
             {
                 // In active Altering Cave, use special item list
-                if (rnd < chanceCommon)
+                if (rnd < chanceNotRare)
                     return;
                 SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &sAlteringCaveWildMonHeldItems[alteringCaveId].item);
             }
@@ -6639,27 +6641,27 @@ void SetWildMonHeldItem(void)
                 // In inactive Altering Cave, use normal items
                 if (rnd < chanceNoItem)
                     return;
-                if (rnd < chanceCommon)
-                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item1);
+                if (rnd < chanceNotRare)
+                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].itemCommon);
                 else
-                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item2);
+                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].itemRare);
             }
         }
         else
         {
-            if (gBaseStats[species].item1 == gBaseStats[species].item2 && gBaseStats[species].item1 != ITEM_NONE)
+            if (gBaseStats[species].itemCommon == gBaseStats[species].itemRare && gBaseStats[species].itemCommon != ITEM_NONE)
             {
                 // Both held items are the same, 100% chance to hold item
-                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item1);
+                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].itemCommon);
             }
             else
             {
                 if (rnd < chanceNoItem)
                     return;
-                if (rnd < chanceCommon)
-                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item1);
+                if (rnd < chanceNotRare)
+                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].itemCommon);
                 else
-                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item2);
+                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].itemRare);
             }
         }
     }

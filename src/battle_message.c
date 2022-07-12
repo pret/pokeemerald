@@ -1035,7 +1035,7 @@ const u16 gFirstTurnOfTwoStringIds[] =
 };
 
 // Index copied from move's index in gTrappingMoves
-const u16 gWrappedStringIds[] =
+const u16 gWrappedStringIds[NUM_TRAPPING_MOVES] =
 {
     STRINGID_PKMNSQUEEZEDBYBIND,   // MOVE_BIND
     STRINGID_PKMNWRAPPEDBY,        // MOVE_WRAP
@@ -1253,7 +1253,7 @@ const u16 gCaughtMonStringIds[] =
     [B_MSG_LANETTES_BOX_FULL] = STRINGID_PKMNBOXLANETTESPCFULL,
 };
 
-const u16 gTrappingMoves[] =
+const u16 gTrappingMoves[NUM_TRAPPING_MOVES + 1] =
 {
     MOVE_BIND,
     MOVE_WRAP,
@@ -1261,7 +1261,7 @@ const u16 gTrappingMoves[] =
     MOVE_CLAMP,
     MOVE_WHIRLPOOL,
     MOVE_SAND_TOMB,
-    0xFFFF
+    0xFFFF // Never read
 };
 
 const u8 gText_PkmnIsEvolving[] = _("What?\n{STR_VAR_1} is evolving!");

@@ -83,18 +83,18 @@ static void ClearPyramidPartyHeldItems(void);
 static void SetPyramidFloorPalette(void);
 static void BattlePyramidStartMenu(void);
 static void RestorePyramidPlayerParty(void);
-static void InitPyramidBagItems(u8 lvlMode);
+static void InitPyramidBagItems(u8);
 static u8 GetPyramidFloorTemplateId(void);
 static u8 GetPostBattleDirectionHintTextIndex(int *, u8, u8);
-static void Task_SetPyramidFloorPalette(u8 taskId);
-static void MarkPyramidTrainerAsBattled(u16 trainerId);
-static void GetPyramidFloorLayoutOffsets(u8 *layoutOffsets);
+static void Task_SetPyramidFloorPalette(u8);
+static void MarkPyramidTrainerAsBattled(u16);
+static void GetPyramidFloorLayoutOffsets(u8 *);
 static void GetPyramidEntranceAndExitSquareIds(u8 *, u8 *);
 static void SetPyramidObjectPositionsUniformly(u8);
 static bool8 SetPyramidObjectPositionsInAndNearSquare(u8, u8);
 static bool8 SetPyramidObjectPositionsNearSquare(u8, u8);
-static bool8 TrySetPyramidObjectEventPositionInSquare(u8 arg0, u8 *floorLayoutOffsets, u8 squareId, u8 objectEventId);
-static bool8 TrySetPyramidObjectEventPositionAtCoords(bool8 objType, u8 x, u8 y, u8 *floorLayoutOffsets, u8 squareId, u8 objectEventId);
+static bool8 TrySetPyramidObjectEventPositionInSquare(u8, u8 *, u8, u8);
+static bool8 TrySetPyramidObjectEventPositionAtCoords(bool8, u8, u8, u8 *, u8, u8);
 
 // Const rom data.
 #define ABILITY_RANDOM 2 // For wild mons data.
@@ -279,9 +279,9 @@ static const u8 sPyramidFloorTemplateOptions[][2] =
     {100, 15}
 };
 
-static const u8 sFloorTemplateOffsets[] =
+static const u8 sFloorTemplateOffsets[FRONTIER_STAGES_PER_CHALLENGE] =
 {
-    0, 4, 9, 14, 19, 24, 29, 0
+    0, 4, 9, 14, 19, 24, 29
 };
 
 static const u16 sPickupItemsLvl50[TOTAL_ROUNDS][PICKUP_ITEMS_PER_ROUND] =
@@ -406,7 +406,7 @@ static const u8 sPickupItemSlots[][2] =
     {100, 9},
 };
 
-static const u8 sPickupItemOffsets[] = {0, 9, 18, 27, 36, 45, 54};
+static const u8 sPickupItemOffsets[FRONTIER_STAGES_PER_CHALLENGE] = {0, 9, 18, 27, 36, 45, 54};
 
 static const struct PyramidTrainerEncounterMusic sTrainerClassEncounterMusic[54] =
 {
@@ -963,7 +963,7 @@ static void SeedPyramidFloor(void)
 {
     int i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.pyramidRandoms); i++)
         gSaveBlock2Ptr->frontier.pyramidRandoms[i] = Random();
 
     gSaveBlock2Ptr->frontier.pyramidTrainerFlags = 0;
@@ -977,7 +977,7 @@ static void SetPickupItem(void)
     u8 id;
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 floor = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
-    u32 round = (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] / 7) % TOTAL_ROUNDS;
+    u32 round = (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] / FRONTIER_STAGES_PER_CHALLENGE) % TOTAL_ROUNDS;
 
     if (round >= TOTAL_ROUNDS)
         round = TOTAL_ROUNDS - 1;
@@ -1016,8 +1016,8 @@ static void HidePyramidItem(void)
         {
             // Rather than using event flags to hide the item object event,
             // it moves them far off the map bounds.
-            events[i].x = 0x7FFF;
-            events[i].y = 0x7FFF;
+            events[i].x = SHRT_MAX;
+            events[i].y = SHRT_MAX;
             break;
         }
         i++;
@@ -1063,7 +1063,7 @@ static void ShowPostBattleHintText(void)
         case HINT_REMAINING_ITEMS:
             for (i = 0; i < GetNumBattlePyramidObjectEvents(); i++)
             {
-                if (events[i].graphicsId == OBJ_EVENT_GFX_ITEM_BALL && events[i].x != 0x7FFF && events[i].y != 0x7FFF)
+                if (events[i].graphicsId == OBJ_EVENT_GFX_ITEM_BALL && events[i].x != SHRT_MAX && events[i].y != SHRT_MAX)
                     textIndex++;
             }
             i = 1;
@@ -1071,7 +1071,7 @@ static void ShowPostBattleHintText(void)
         case HINT_REMAINING_TRAINERS:
             id = GetPyramidFloorTemplateId();
             textIndex = sPyramidFloorTemplates[id].numTrainers;
-            for (i = 0; i < 8; i++)
+            for (i = 0; i < MAX_PYRAMID_TRAINERS; i++)
             {
                 if (gBitTable[i] & gSaveBlock2Ptr->frontier.pyramidTrainerFlags)
                     textIndex--;
@@ -1326,7 +1326,7 @@ static void MarkPyramidTrainerAsBattled(u16 trainerId)
 {
     int i;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < MAX_PYRAMID_TRAINERS; i++)
     {
         if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
             gSaveBlock2Ptr->frontier.pyramidTrainerFlags |= gBitTable[i];
@@ -1345,7 +1345,7 @@ void GenerateBattlePyramidWildMon(void)
     const struct PyramidWildMon *wildMons;
     u32 id;
     u32 lvl = gSaveBlock2Ptr->frontier.lvlMode;
-    u16 round = (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvl] / 7) % TOTAL_ROUNDS;
+    u16 round = (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvl] / FRONTIER_STAGES_PER_CHALLENGE) % TOTAL_ROUNDS;
 
     if (round >= TOTAL_ROUNDS)
         round = TOTAL_ROUNDS - 1;
@@ -1488,13 +1488,13 @@ static u16 GetUniqueTrainerId(u8 objectEventId)
     int i;
     u16 trainerId;
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    u32 challengeNum = gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] / 7;
-    u32 battleNum = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
-    if (battleNum == 7)
+    u32 challengeNum = gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
+    u32 floor = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
+    if (floor == FRONTIER_STAGES_PER_CHALLENGE)
     {
         do
         {
-            trainerId = GetRandomScaledFrontierTrainerId(challengeNum + 1, battleNum);
+            trainerId = GetRandomScaledFrontierTrainerId(challengeNum + 1, floor);
             for (i = 0; i < objectEventId; i++)
             {
                 if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
@@ -1506,7 +1506,7 @@ static u16 GetUniqueTrainerId(u8 objectEventId)
     {
         do
         {
-            trainerId = GetRandomScaledFrontierTrainerId(challengeNum, battleNum);
+            trainerId = GetRandomScaledFrontierTrainerId(challengeNum, floor);
             for (i = 0; i < objectEventId; i++)
             {
                 if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
@@ -1523,11 +1523,11 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
     int y, x;
     int i;
     u8 entranceSquareId, exitSquareId;
-    u8 *floorLayoutOffsets = AllocZeroed(16);
+    u8 *floorLayoutOffsets = AllocZeroed(NUM_PYRAMID_FLOOR_SQUARES);
 
     GetPyramidFloorLayoutOffsets(floorLayoutOffsets);
     GetPyramidEntranceAndExitSquareIds(&entranceSquareId, &exitSquareId);
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < NUM_PYRAMID_FLOOR_SQUARES; i++)
     {
         u16 *map;
         int yOffset, xOffset;
@@ -1535,11 +1535,11 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
         const u16 *layoutMap = mapLayout->map;
 
         gBackupMapLayout.map = backupMapData;
-        gBackupMapLayout.width = mapLayout->width * 4 + MAP_OFFSET_W;
-        gBackupMapLayout.height = mapLayout->height * 4 + MAP_OFFSET_H;
+        gBackupMapLayout.width = mapLayout->width * PYRAMID_FLOOR_SQUARES_WIDE + MAP_OFFSET_W;
+        gBackupMapLayout.height = mapLayout->height * PYRAMID_FLOOR_SQUARES_HIGH + MAP_OFFSET_H;
         map = backupMapData;
-        yOffset = ((i / 4 * mapLayout->height) + MAP_OFFSET) * gBackupMapLayout.width;
-        xOffset = (i % 4 * mapLayout->width) + MAP_OFFSET;
+        yOffset = ((i / PYRAMID_FLOOR_SQUARES_WIDE * mapLayout->height) + MAP_OFFSET) * gBackupMapLayout.width;
+        xOffset = (i % PYRAMID_FLOOR_SQUARES_WIDE * mapLayout->width) + MAP_OFFSET;
         map += yOffset + xOffset;
         for (y = 0; y < mapLayout->height; y++)
         {
@@ -1553,8 +1553,8 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
                 {
                     if (i == entranceSquareId && setPlayerPosition == FALSE)
                     {
-                        gSaveBlock1Ptr->pos.x = (mapLayout->width * (i % 4)) + x;
-                        gSaveBlock1Ptr->pos.y = (mapLayout->height * (i / 4)) + y;
+                        gSaveBlock1Ptr->pos.x = (mapLayout->width * (i % PYRAMID_FLOOR_SQUARES_WIDE)) + x;
+                        gSaveBlock1Ptr->pos.y = (mapLayout->height * (i / PYRAMID_FLOOR_SQUARES_WIDE)) + y;
                     }
                     map[x] = (layoutMap[x] & (MAPGRID_ELEVATION_MASK | MAPGRID_COLLISION_MASK)) | METATILE_BattlePyramid_Floor;
                 }
@@ -1563,7 +1563,7 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
                     map[x] = layoutMap[x];
                 }
             }
-            map += MAP_OFFSET_W + (mapLayout->width * 4);
+            map += MAP_OFFSET_W + (mapLayout->width * PYRAMID_FLOOR_SQUARES_WIDE);
             layoutMap += mapLayout->width;
         }
     }
@@ -1577,7 +1577,7 @@ void LoadBattlePyramidObjectEventTemplates(void)
     u8 id;
     u8 entranceSquareId, exitSquareId;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < MAX_PYRAMID_TRAINERS; i++)
         gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
 
     id = GetPyramidFloorTemplateId();
@@ -1633,13 +1633,13 @@ void LoadBattlePyramidFloorObjectEventScripts(void)
 
 static void GetPyramidEntranceAndExitSquareIds(u8 *entranceSquareId, u8 *exitSquareId)
 {
-    *entranceSquareId = gSaveBlock2Ptr->frontier.pyramidRandoms[3] % 16;
-    *exitSquareId = gSaveBlock2Ptr->frontier.pyramidRandoms[0] % 16;
+    *entranceSquareId = gSaveBlock2Ptr->frontier.pyramidRandoms[3] % NUM_PYRAMID_FLOOR_SQUARES;
+    *exitSquareId = gSaveBlock2Ptr->frontier.pyramidRandoms[0] % NUM_PYRAMID_FLOOR_SQUARES;
 
     if (*entranceSquareId == *exitSquareId)
     {
-        *entranceSquareId = (gSaveBlock2Ptr->frontier.pyramidRandoms[3] + 1 ) % 16;
-        *exitSquareId = (gSaveBlock2Ptr->frontier.pyramidRandoms[0] + 15) % 16;
+        *entranceSquareId = (gSaveBlock2Ptr->frontier.pyramidRandoms[3] + 1 ) % NUM_PYRAMID_FLOOR_SQUARES;
+        *exitSquareId = (gSaveBlock2Ptr->frontier.pyramidRandoms[0] + NUM_PYRAMID_FLOOR_SQUARES - 1) % NUM_PYRAMID_FLOOR_SQUARES;
     }
 }
 
@@ -1651,10 +1651,10 @@ static void SetPyramidObjectPositionsUniformly(u8 objType)
     int squareId;
     u32 bits = 0;
     u8 id = GetPyramidFloorTemplateId();
-    u8 *floorLayoutOffsets = AllocZeroed(16);
+    u8 *floorLayoutOffsets = AllocZeroed(NUM_PYRAMID_FLOOR_SQUARES);
 
     GetPyramidFloorLayoutOffsets(floorLayoutOffsets);
-    squareId = gSaveBlock2Ptr->frontier.pyramidRandoms[2] % 16;
+    squareId = gSaveBlock2Ptr->frontier.pyramidRandoms[2] % NUM_PYRAMID_FLOOR_SQUARES;
     if (objType == OBJ_TRAINERS)
     {
         numObjects = sPyramidFloorTemplates[id].numTrainers;
@@ -1682,10 +1682,10 @@ static void SetPyramidObjectPositionsUniformly(u8 objType)
                     if (gBitTable[squareId] & gSaveBlock2Ptr->frontier.pyramidRandoms[3])
                         bits |= 2;
                 }
-                if (++squareId >= 16)
+                if (++squareId >= NUM_PYRAMID_FLOOR_SQUARES)
                     squareId = 0;
 
-                if (squareId == gSaveBlock2Ptr->frontier.pyramidRandoms[2] % 16)
+                if (squareId == gSaveBlock2Ptr->frontier.pyramidRandoms[2] % NUM_PYRAMID_FLOOR_SQUARES)
                 {
                     if (bits & 1)
                         bits |= 6;
@@ -1709,7 +1709,7 @@ static bool8 SetPyramidObjectPositionsInAndNearSquare(u8 objType, u8 squareId)
     int numPlacedObjects = 0;
     int numObjects;
     u8 id = GetPyramidFloorTemplateId();
-    u8 *floorLayoutOffsets = AllocZeroed(16);
+    u8 *floorLayoutOffsets = AllocZeroed(NUM_PYRAMID_FLOOR_SQUARES);
 
     GetPyramidFloorLayoutOffsets(floorLayoutOffsets);
     if (objType == OBJ_TRAINERS)
@@ -1775,7 +1775,7 @@ static bool8 SetPyramidObjectPositionsNearSquare(u8 objType, u8 squareId)
     int r8 = 0;
     int numObjects;
     u8 id = GetPyramidFloorTemplateId();
-    u8 *floorLayoutOffsets = AllocZeroed(16);
+    u8 *floorLayoutOffsets = AllocZeroed(NUM_PYRAMID_FLOOR_SQUARES);
 
     GetPyramidFloorLayoutOffsets(floorLayoutOffsets);
     if (objType == OBJ_TRAINERS)
@@ -1900,7 +1900,7 @@ static void GetPyramidFloorLayoutOffsets(u8 *layoutOffsets)
     int rand = (gSaveBlock2Ptr->frontier.pyramidRandoms[0]) | (gSaveBlock2Ptr->frontier.pyramidRandoms[1] << 16);
     u8 id = GetPyramidFloorTemplateId();
 
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < NUM_PYRAMID_FLOOR_SQUARES; i++)
     {
         layoutOffsets[i] = sPyramidFloorTemplates[id].layoutOffsets[rand & 0x7];
         rand >>= 3;
@@ -1931,7 +1931,7 @@ u8 GetNumBattlePyramidObjectEvents(void)
     u8 i;
     struct ObjectEventTemplate *events = gSaveBlock1Ptr->objectEventTemplates;
 
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         if (events[i].localId == 0)
             break;
@@ -1959,7 +1959,7 @@ u16 GetBattlePyramidPickupItemId(void)
     int rand;
     u32 i;
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    int round = (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] / 7);
+    int round = (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] / FRONTIER_STAGES_PER_CHALLENGE);
 
     if (round >= TOTAL_ROUNDS)
         round = TOTAL_ROUNDS - 1;
