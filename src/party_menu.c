@@ -4905,7 +4905,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     u32 nextLevelExp = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES)].growthRate][GetMonData(mon, MON_DATA_LEVEL) + 1];
     u8 j;
 
-    if (GetMonData(mon, MON_DATA_LEVEL) != MAX_LEVEL)
+    if (GetMonData(mon, MON_DATA_LEVEL) != MAX_LEVEL && GetMonData(mon, MON_DATA_HP) != 0)
     {
         for (j = 0; j < NUM_SOFT_CAPS; j++)
             {
