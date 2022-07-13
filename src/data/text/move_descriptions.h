@@ -110,7 +110,7 @@ static const u8 sRollingKickDescription[] = _(
     "a rapid spin.");
 
 static const u8 sSandAttackDescription[] = _(
-    "Reduces the foe's accuracy\n"
+    "Reduces the foe's defense\n"
     "by hurling sand in its face.");
 
 static const u8 sHeadbuttDescription[] = _(
@@ -415,7 +415,7 @@ static const u8 sScreechDescription[] = _(
 
 static const u8 sDoubleTeamDescription[] = _(
     "Creates illusory copies to\n"
-    "raise evasiveness.");
+    "raise defenses.");
 
 static const u8 sRecoverDescription[] = _(
     "Recovers up to half the\n"
@@ -427,10 +427,10 @@ static const u8 sHardenDescription[] = _(
 
 static const u8 sMinimizeDescription[] = _(
     "Minimizes the user's size\n"
-    "to raise evasiveness.");
+    "to raise defenses.");
 
 static const u8 sSmokescreenDescription[] = _(
-    "Lowers the foe's accuracy\n"
+    "Lowers the foe's attack\n"
     "using smoke, ink, etc.");
 
 static const u8 sConfuseRayDescription[] = _(
@@ -535,7 +535,7 @@ static const u8 sAmnesiaDescription[] = _(
 
 static const u8 sKinesisDescription[] = _(
     "Distracts the foe.\n"
-    "May lower accuracy.");
+    "Lowers attack harshly.");
 
 static const u8 sSoftBoiledDescription[] = _(
     "Recovers up to half the\n"
@@ -754,8 +754,8 @@ static const u8 sSludgeBombDescription[] = _(
     "damage. May also poison.");
 
 static const u8 sMudSlapDescription[] = _(
-    "Hurls mud in the foe's face\n"
-    "to reduce its accuracy.");
+    "Hurls mud in the foe's\n"
+    "face. May reduce accuracy.");
 
 static const u8 sOctazookaDescription[] = _(
     "Fires a lump of ink to\n"
