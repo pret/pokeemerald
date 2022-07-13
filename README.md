@@ -1,3 +1,21 @@
+# Changes
+- Enforce Nuzlocke Rules
+    - Pokemon die forever
+    - Catch only the first encounter on each route (with species clause)
+- One item per battle
+- Exp cap
+- Improved HMs
+- Improved trainer level curve and evolutions
+- Minor Changes
+    - Removed accuracy/evasion moves
+    - Instant text
+    - Removed Shadow Tag
+    - Better Repels
+    - More Bag Pockets
+    - Show EVs, IVs, Natures on status screen
+    - Faster Health Bar
+    - Shorter HM usage, Berry picking
+    
 # Pokémon Emerald
 
 This is a decompilation of Pokémon Emerald.
@@ -29,3 +47,4 @@ Other disassembly and/or decompilation projects:
 ## Contacts
 
 You can find us on [Discord](https://discord.gg/d5dubZ3) and [IRC](https://web.libera.chat/?#pret).
+
