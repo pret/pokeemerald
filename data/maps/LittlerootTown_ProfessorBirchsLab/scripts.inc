@@ -528,7 +528,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
 	clearflag FLAG_ENCOUNTER_ROUTE_103
 	setvar VAR_OLDALE_TOWN_STATE, 1
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 4
-	setvar VAR_LITTLEROOT_TOWN_STATE, 3
+	setvar VAR_LITTLEROOT_TOWN_STATE, 4
 	releaseall
 	end
 
