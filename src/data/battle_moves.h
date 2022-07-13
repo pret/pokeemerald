@@ -1406,7 +1406,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SMOKESCREEN] =
     {
-        .effect = EFFECT_SPECIAL_DEFENSE_DOWN,
+        .effect = EFFECT_ATTACK_DOWN,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 100,
@@ -1744,7 +1744,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_KINESIS] =
     {
-        .effect = EFFECT_SPECIAL_DEFENSE_DOWN,
+        .effect = EFFECT_ATTACK_DOWN_2,
         .power = 0,
         .type = TYPE_PSYCHIC,
         .accuracy = 100,
