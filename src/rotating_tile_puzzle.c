@@ -81,14 +81,11 @@ static const u8 sMovement_FaceUp[] =
     MOVEMENT_ACTION_STEP_END
 };
 
-// This file's functions.
-static void SaveRotatingTileObject(u8 eventTemplateId, u8 arg1);
-static void TurnUnsavedRotatingTileObject(u8 eventTemplateId, u8 arg1);
+static void SaveRotatingTileObject(u8, u8);
+static void TurnUnsavedRotatingTileObject(u8, u8);
 
-// EWRAM vars
 EWRAM_DATA static struct RotatingTilePuzzle *sRotatingTilePuzzle = NULL;
 
-// code
 void InitRotatingTilePuzzle(bool8 isTrickHouse)
 {
     if (sRotatingTilePuzzle == NULL)
@@ -101,8 +98,7 @@ void FreeRotatingTilePuzzle(void)
 {
     u8 id;
 
-    if (sRotatingTilePuzzle != NULL)
-        FREE_AND_SET_NULL(sRotatingTilePuzzle);
+    TRY_FREE_AND_SET_NULL(sRotatingTilePuzzle);
 
     id = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[id]);

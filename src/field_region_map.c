@@ -192,10 +192,7 @@ static void FieldUpdateRegionMap(void)
             {
                 FreeRegionMapIconResources();
                 SetMainCallback2(sFieldRegionMapHandler->callback);
-                if (sFieldRegionMapHandler != NULL)
-                {
-                    FREE_AND_SET_NULL(sFieldRegionMapHandler);
-                }
+                TRY_FREE_AND_SET_NULL(sFieldRegionMapHandler);
                 FreeAllWindowBuffers();
             }
             break;

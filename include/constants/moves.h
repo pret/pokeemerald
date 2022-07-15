@@ -786,4 +786,7 @@
 
 #define MOVES_COUNT MOVES_COUNT_GEN8
 
+// Used for checks for moves affected by Disable, Mimic, etc.
+#define MOVE_UNAVAILABLE 0xFFFF
+
 #endif  // GUARD_CONSTANTS_MOVES_H
