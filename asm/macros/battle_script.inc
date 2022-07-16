@@ -668,7 +668,7 @@
 	.byte 0x77
 	.endm
 
-	.macro faintifabilitynotdamp
+	.macro tryexplosion
 	.byte 0x78
 	.endm
 
@@ -1031,7 +1031,7 @@
 	.byte 0xc8
 	.endm
 
-	.macro jumpifattackandspecialattackcannotfall ptr:req
+	.macro trymemento ptr:req
 	.byte 0xc9
 	.4byte \ptr
 	.endm
