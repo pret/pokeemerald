@@ -13586,7 +13586,7 @@ static void Cmd_handleballthrow(void)
         else
             catchRate = gBaseStats[gBattleMons[gBattlerTarget].species].catchRate;
 
-        #ifdef POKEMON_EXPANSION
+        #if defined POKEMON_EXPANSION && defined ITEM_EXPANSION
         if (gBaseStats[gBattleMons[gBattlerTarget].species].flags & FLAG_ULTRA_BEAST)
         {
             if (gLastUsedItem == ITEM_BEAST_BALL)
@@ -13764,7 +13764,7 @@ static void Cmd_handleballthrow(void)
         #endif
         }
 
-        #ifdef POKEMON_EXPANSION
+        #if defined POKEMON_EXPANSION && defined ITEM_EXPANSION
         }
         #endif
 
