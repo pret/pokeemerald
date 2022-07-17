@@ -9628,6 +9628,7 @@ BattleScript_EffectTerrainHit:
 	resultmessage
 	waitmessage 0x40
 	setterrain BattleScript_TryFaint
+	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG
 	printfromtable gTerrainStringIds
 BattleScript_TryFaint:
 	tryfaintmon BS_TARGET
