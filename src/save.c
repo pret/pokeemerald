@@ -73,6 +73,12 @@ struct
     SAVEBLOCK_CHUNK(struct PokemonStorage, 8), // SECTOR_ID_PKMN_STORAGE_END
 };
 
+// These will produce an error if a save struct is larger than the space
+// alloted for it in the flash.
+STATIC_ASSERT(sizeof(struct SaveBlock2) <= SECTOR_DATA_SIZE, SaveBlock2FreeSpace);
+STATIC_ASSERT(sizeof(struct SaveBlock1) <= SECTOR_DATA_SIZE * (SECTOR_ID_SAVEBLOCK1_END - SECTOR_ID_SAVEBLOCK1_START + 1), SaveBlock1FreeSpace);
+STATIC_ASSERT(sizeof(struct PokemonStorage) <= SECTOR_DATA_SIZE * (SECTOR_ID_PKMN_STORAGE_END - SECTOR_ID_PKMN_STORAGE_START + 1), PokemonStorageFreeSpace);
+
 u16 gLastWrittenSector;
 u32 gLastSaveCounter;
 u16 gLastKnownGoodSector;
@@ -428,7 +434,7 @@ static u8 CopySectorSecurityByte(u16 sectorId, const struct SaveSectorLocation *
     }
     else
     {
-        // Succeded
+        // Succeeded
         SetDamagedSectorBits(DISABLE, sector);
         return SAVE_STATUS_OK;
     }
@@ -734,7 +740,7 @@ u8 HandleSavingData(u8 saveType)
         WriteSaveSectorOrSlot(FULL_SAVE_SLOT, gRamSaveSectorLocations);
         break;
     case SAVE_LINK:
-    case SAVE_LINK2:
+    case SAVE_EREADER: // Dummied, now duplicate of SAVE_LINK
         // Used by link / Battle Frontier
         // Write only SaveBlocks 1 and 2 (skips the PC)
         CopyPartyAndObjectsToSave();

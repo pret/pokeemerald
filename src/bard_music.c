@@ -1,6 +1,5 @@
 #include "global.h"
 #include "bard_music.h"
-#include "constants/easy_chat.h"
 #include "easy_chat.h"
 
 #include "data/bard_music/bard_sounds.h"
@@ -8,9 +7,9 @@
 #include "data/bard_music/default_sound.h"
 #include "data/bard_music/length_table.h"
 
-static s16 CalcWordPitch(int arg0, int songPos)
+static s16 CalcWordPitch(int pitchIdx, int songPos)
 {
-    return sBardSoundPitchTables[arg0][songPos];
+    return sBardSoundPitchTables[pitchIdx][songPos];
 }
 
 const struct BardSound *GetWordSounds(u16 word)

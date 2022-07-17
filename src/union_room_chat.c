@@ -2160,8 +2160,7 @@ static bool32 IsDisplaySubtask0Active(void)
 static void FreeDisplay(void)
 {
     FreeSprites();
-    if (sDisplay)
-        FREE_AND_SET_NULL(sDisplay);
+    TRY_FREE_AND_SET_NULL(sDisplay);
 
     FreeAllWindowBuffers();
     gScanlineEffect.state = 3;
@@ -2987,7 +2986,7 @@ static void ShowKeyboardSwapMenu(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     DrawTextBorderOuter(3, 1, 13);
-    PrintMenuActionTextsAtPos(3, FONT_SHORT, 8, 1, 14, 5, sKeyboardPageTitleTexts);
+    PrintMenuActionTextsAtPos(3, FONT_SHORT, 8, 1, 14, ARRAY_COUNT(sKeyboardPageTitleTexts), sKeyboardPageTitleTexts);
     InitMenuNormal(3, FONT_SHORT, 0, 1, 14, 5, GetCurrentKeyboardPage());
     PutWindowTilemap(3);
 }

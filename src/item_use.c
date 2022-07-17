@@ -42,33 +42,33 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 
-static void SetUpItemUseCallback(u8 taskId);
+static void SetUpItemUseCallback(u8);
 static void FieldCB_UseItemOnField(void);
-static void Task_CallItemUseOnFieldCallback(u8 taskId);
-static void Task_UseItemfinder(u8 taskId);
-static void Task_CloseItemfinderMessage(u8 taskId);
-static void Task_HiddenItemNearby(u8 taskId);
-static void Task_StandingOnHiddenItem(u8 taskId);
+static void Task_CallItemUseOnFieldCallback(u8);
+static void Task_UseItemfinder(u8);
+static void Task_CloseItemfinderMessage(u8);
+static void Task_HiddenItemNearby(u8);
+static void Task_StandingOnHiddenItem(u8);
 static bool8 ItemfinderCheckForHiddenItems(const struct MapEvents *, u8);
-static u8 GetDirectionToHiddenItem(s16 distanceX, s16 distanceY);
-static void PlayerFaceHiddenItem(u8 a);
-static void CheckForHiddenItemsInMapConnection(u8 taskId);
-static void Task_OpenRegisteredPokeblockCase(u8 taskId);
-static void ItemUseOnFieldCB_Bike(u8 taskId);
+static u8 GetDirectionToHiddenItem(s16, s16);
+static void PlayerFaceHiddenItem(u8);
+static void CheckForHiddenItemsInMapConnection(u8);
+static void Task_OpenRegisteredPokeblockCase(u8);
+static void ItemUseOnFieldCB_Bike(u8);
 static void ItemUseOnFieldCB_Rod(u8);
 static void ItemUseOnFieldCB_Itemfinder(u8);
-static void ItemUseOnFieldCB_Berry(u8 taskId);
-static void ItemUseOnFieldCB_WailmerPailBerry(u8 taskId);
-static void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId);
+static void ItemUseOnFieldCB_Berry(u8);
+static void ItemUseOnFieldCB_WailmerPailBerry(u8);
+static void ItemUseOnFieldCB_WailmerPailSudowoodo(u8);
 static bool8 TryToWaterSudowoodo(void);
-static void BootUpSoundTMHM(u8 taskId);
-static void Task_ShowTMHMContainedMessage(u8 taskId);
-static void UseTMHMYesNo(u8 taskId);
-static void UseTMHM(u8 taskId);
-static void Task_StartUseRepel(u8 taskId);
-static void Task_UseRepel(u8 taskId);
-static void Task_CloseCantUseKeyItemMessage(u8 taskId);
-static void SetDistanceOfClosestHiddenItem(u8 taskId, s16 x, s16 y);
+static void BootUpSoundTMHM(u8);
+static void Task_ShowTMHMContainedMessage(u8);
+static void UseTMHMYesNo(u8);
+static void UseTMHM(u8);
+static void Task_StartUseRepel(u8);
+static void Task_UseRepel(u8);
+static void Task_CloseCantUseKeyItemMessage(u8);
+static void SetDistanceOfClosestHiddenItem(u8, s16, s16);
 static void CB2_OpenPokeblockFromBag(void);
 
 // EWRAM variables
@@ -403,25 +403,25 @@ static bool8 IsHiddenItemPresentInConnection(struct MapConnection *connection, i
     switch (connection->direction)
     {
     // same weird temp variable behavior seen in IsHiddenItemPresentAtCoords
-    case 2:
+    case CONNECTION_NORTH:
         localOffset = connection->offset + MAP_OFFSET;
         localX = x - localOffset;
         localLength = mapHeader->mapLayout->height - MAP_OFFSET;
         localY = localLength + y; // additions are reversed for some reason
         break;
-    case 1:
+    case CONNECTION_SOUTH:
         localOffset = connection->offset + MAP_OFFSET;
         localX = x - localOffset;
         localLength = gMapHeader.mapLayout->height + MAP_OFFSET;
         localY = y - localLength;
         break;
-    case 3:
+    case CONNECTION_WEST:
         localLength = mapHeader->mapLayout->width - MAP_OFFSET;
         localX = localLength + x; // additions are reversed for some reason
         localOffset = connection->offset + MAP_OFFSET;
         localY = y - localOffset;
         break;
-    case 4:
+    case CONNECTION_EAST:
         localLength = gMapHeader.mapLayout->width + MAP_OFFSET;
         localX = x - localLength;
         localOffset = connection->offset + MAP_OFFSET;
@@ -725,11 +725,11 @@ static void ItemUseOnFieldCB_WailmerPailBerry(u8 taskId)
 static bool8 TryToWaterSudowoodo(void)
 {
     u16 x, y;
-    u8 z;
+    u8 elevation;
     u8 objId;
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-    z = PlayerGetZCoord();
-    objId = GetObjectEventIdByXYZ(x, y, z);
+    elevation = PlayerGetElevation();
+    objId = GetObjectEventIdByPosition(x, y, elevation);
     if (objId == OBJECT_EVENTS_COUNT || gObjectEvents[objId].graphicsId != OBJ_EVENT_GFX_SUDOWOODO)
         return FALSE;
     else

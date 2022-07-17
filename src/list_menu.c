@@ -312,14 +312,14 @@ static void ListMenuDummyTask(u8 taskId)
 
 }
 
-s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 arg2, u16 tileNum, u16 palNum)
+s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 drawMode, u16 tileNum, u16 palNum)
 {
     switch (sMysteryGiftLinkMenu.state)
     {
     case 0:
     default:
         sMysteryGiftLinkMenu.windowId = AddWindow(windowTemplate);
-        switch (arg2)
+        switch (drawMode)
         {
         case 2:
             LoadUserWindowBorderGfx(sMysteryGiftLinkMenu.windowId, tileNum, palNum);
@@ -346,13 +346,13 @@ s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const str
         }
         if (sMysteryGiftLinkMenu.state == 2)
         {
-            if (arg2 == 0)
+            if (drawMode == 0)
             {
                 ClearWindowTilemap(sMysteryGiftLinkMenu.windowId);
             }
             else
             {
-                switch (arg2)
+                switch (drawMode)
                 {
                 case 0: // can never be reached, because of the if statement above
                     ClearStdWindowAndFrame(sMysteryGiftLinkMenu.windowId, FALSE);

@@ -94,7 +94,7 @@ static void ApplyAffineAnimFrame(u8 matrixNum, struct AffineAnimFrameCmd *frameC
 static u8 IndexOfSpriteTileTag(u16 tag);
 static void AllocSpriteTileRange(u16 tag, u16 start, u16 count);
 static void DoLoadSpritePalette(const u16 *src, u16 paletteOffset);
-static void UpdateSpriteMatrixAnchorPos(struct Sprite* sprite, s32 a1, s32 a2);
+static void UpdateSpriteMatrixAnchorPos(struct Sprite*, s32, s32);
 
 typedef void (*AnimFunc)(struct Sprite *);
 typedef void (*AnimCmdFunc)(struct Sprite *);
@@ -632,14 +632,11 @@ void DestroySprite(struct Sprite *sprite)
     }
 }
 
-void ResetOamRange(u8 a, u8 b)
+void ResetOamRange(u8 start, u8 end)
 {
     u8 i;
-
-    for (i = a; i < b; i++)
-    {
+    for (i = start; i < end; i++)
         gMain.oamBuffer[i] = *(struct OamData *)&gDummyOamData;
-    }
 }
 
 void LoadOam(void)

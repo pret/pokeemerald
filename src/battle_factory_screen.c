@@ -1131,8 +1131,7 @@ static void CB2_InitSelectScreen(void)
     switch (gMain.state)
     {
     case 0:
-        if (sFactorySelectMons != NULL)
-            FREE_AND_SET_NULL(sFactorySelectMons);
+        TRY_FREE_AND_SET_NULL(sFactorySelectMons);
         SetHBlankCallback(NULL);
         SetVBlankCallback(NULL);
         CpuFill32(0, (void *)VRAM, VRAM_SIZE);
@@ -2509,7 +2508,7 @@ static void Swap_Task_HandleYesNo(u8 taskId)
     }
 }
 
-static void Swap_HandleQuitSwappingResposne(u8 taskId)
+static void Swap_HandleQuitSwappingResponse(u8 taskId)
 {
     if (gTasks[taskId].tSaidYes == TRUE)
     {
@@ -2533,8 +2532,8 @@ static void Swap_AskQuitSwapping(u8 taskId)
         Swap_PrintOnInfoWindow(gText_QuitSwapping);
         sFactorySwapScreen->monSwapped = FALSE;
         gTasks[taskId].tState = STATE_YESNO_SHOW;
-        gTasks[taskId].tFollowUpTaskPtrHi = (u32)(Swap_HandleQuitSwappingResposne) >> 16;
-        gTasks[taskId].tFollowUpTaskPtrLo = (u32)(Swap_HandleQuitSwappingResposne);
+        gTasks[taskId].tFollowUpTaskPtrHi = (u32)(Swap_HandleQuitSwappingResponse) >> 16;
+        gTasks[taskId].tFollowUpTaskPtrLo = (u32)(Swap_HandleQuitSwappingResponse);
         gTasks[taskId].func = Swap_Task_HandleYesNo;
     }
 }
@@ -4221,17 +4220,12 @@ static void Task_OpenMonPic(u8 taskId)
             return;
         break;
     default:
-        #ifndef UBFIX
         DestroyTask(taskId);
-        #endif
-        // UB: Should not use the task after it has been deleted.
+        // Accessing data of destroyed task. Task data isn't reset until a new task needs that task id.
         if (gTasks[taskId].tIsSwapScreen == TRUE)
             Swap_CreateMonSprite();
         else
             Select_CreateMonSprite();
-        #ifdef UBFIX
-        DestroyTask(taskId);
-        #endif
         return;
     }
     task->tState++;

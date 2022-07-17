@@ -28,6 +28,17 @@ enum {
 	BG_COORD_SUB,
 };
 
+// Modes for Unused_AdjustBgMosaic
+enum {
+    BG_MOSAIC_SET_HV,
+    BG_MOSAIC_SET_H,
+    BG_MOSAIC_ADD_H,
+    BG_MOSAIC_SUB_H,
+    BG_MOSAIC_SET_V,
+    BG_MOSAIC_ADD_V,
+    BG_MOSAIC_SUB_V,
+};
+
 struct BgTemplate
 {
     u16 bg:2;                   // 0x1, 0x2 -> 0x3
@@ -65,7 +76,7 @@ s32 ChangeBgY(u8 bg, s32 value, u8 op);
 s32 ChangeBgY_ScreenOff(u8 bg, s32 value, u8 op);
 s32 GetBgY(u8 bg);
 void SetBgAffine(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle);
-u8 Unused_AdjustBgMosaic(u8 a1, u8 a2);
+u8 Unused_AdjustBgMosaic(u8 val, u8 mode);
 void SetBgTilemapBuffer(u8 bg, void *tilemap);
 void UnsetBgTilemapBuffer(u8 bg);
 void* GetBgTilemapBuffer(u8 bg);

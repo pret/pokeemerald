@@ -300,7 +300,7 @@ void LocalLinkPlayerToBlock(void);
 void LinkPlayerFromBlock(u32 who);
 bool32 Link_AnyPartnersPlayingFRLG_JP(void);
 void ResetLinkPlayerCount(void);
-void SaveLinkPlayers(u8 a0);
+void SaveLinkPlayers(u8 playerCount);
 void SetWirelessCommType0(void);
 bool32 IsLinkRecvQueueAtOverworldMax(void);
 

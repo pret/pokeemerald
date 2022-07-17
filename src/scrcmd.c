@@ -1020,7 +1020,7 @@ bool8 ScrCmd_applymovement(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_applymovement_at(struct ScriptContext *ctx)
+bool8 ScrCmd_applymovementat(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     const void *movementScript = (const void *)ScriptReadWord(ctx);
@@ -1057,7 +1057,7 @@ bool8 ScrCmd_waitmovement(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_waitmovement_at(struct ScriptContext *ctx)
+bool8 ScrCmd_waitmovementat(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup;
@@ -1081,7 +1081,7 @@ bool8 ScrCmd_removeobject(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_removeobject_at(struct ScriptContext *ctx)
+bool8 ScrCmd_removeobjectat(struct ScriptContext *ctx)
 {
     u16 objectId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
@@ -1099,7 +1099,7 @@ bool8 ScrCmd_addobject(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_addobject_at(struct ScriptContext *ctx)
+bool8 ScrCmd_addobjectat(struct ScriptContext *ctx)
 {
     u16 objectId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
@@ -1137,7 +1137,7 @@ bool8 ScrCmd_copyobjectxytoperm(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_showobject_at(struct ScriptContext *ctx)
+bool8 ScrCmd_showobjectat(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
@@ -1147,7 +1147,7 @@ bool8 ScrCmd_showobject_at(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_hideobject_at(struct ScriptContext *ctx)
+bool8 ScrCmd_hideobjectat(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
@@ -1962,9 +1962,9 @@ bool8 ScrCmd_pokemartdecoration2(struct ScriptContext *ctx)
 
 bool8 ScrCmd_playslotmachine(struct ScriptContext *ctx)
 {
-    u8 slotMachineIndex = VarGet(ScriptReadHalfword(ctx));
+    u8 machineId = VarGet(ScriptReadHalfword(ctx));
 
-    PlaySlotMachine(slotMachineIndex, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    PlaySlotMachine(machineId, CB2_ReturnToFieldContinueScriptPlayMapMusic);
     ScriptContext1_Stop();
     return TRUE;
 }
@@ -2099,7 +2099,7 @@ bool8 ScrCmd_setmetatile(struct ScriptContext *ctx)
     if (!isImpassable)
         MapGridSetMetatileIdAt(x, y, tileId);
     else
-        MapGridSetMetatileIdAt(x, y, tileId | METATILE_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x, y, tileId | MAPGRID_COLLISION_MASK);
     return FALSE;
 }
 

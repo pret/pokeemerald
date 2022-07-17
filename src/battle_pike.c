@@ -17,7 +17,6 @@
 #include "constants/battle_frontier.h"
 #include "constants/frontier_util.h"
 #include "constants/abilities.h"
-#include "constants/easy_chat.h"
 #include "constants/layouts.h"
 #include "constants/rgb.h"
 #include "constants/trainers.h"
@@ -685,7 +684,7 @@ static void SetBattlePikeData(void)
 
 static void IsNextRoomFinal(void)
 {
-    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum > 14)
+    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum > NUM_PIKE_ROOMS)
         gSpecialVar_Result = TRUE;
     else
         gSpecialVar_Result = FALSE;
@@ -1118,20 +1117,20 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
     if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_50)
     {
         monLevel = GetHighestLevelInPlayerParty();
-        if (monLevel < 60)
+        if (monLevel < FRONTIER_MIN_LEVEL_OPEN)
         {
-            monLevel = 60;
+            monLevel = FRONTIER_MIN_LEVEL_OPEN;
         }
         else
         {
             monLevel -= wildMons[headerId][pikeMonId].levelDelta;
-            if (monLevel < 60)
-                monLevel = 60;
+            if (monLevel < FRONTIER_MIN_LEVEL_OPEN)
+                monLevel = FRONTIER_MIN_LEVEL_OPEN;
         }
     }
     else
     {
-        monLevel = 50 - wildMons[headerId][pikeMonId].levelDelta;
+        monLevel = FRONTIER_MAX_LEVEL_50 - wildMons[headerId][pikeMonId].levelDelta;
     }
 
     if (checkKeenEyeIntimidate == TRUE && !CanEncounterWildMon(monLevel))
@@ -1159,11 +1158,11 @@ u8 GetBattlePikeWildMonHeaderId(void)
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
 
-    if (winStreak <= 280)
+    if (winStreak <= 20 * NUM_PIKE_ROOMS)
         headerId = 0;
-    else if (winStreak <= 560)
+    else if (winStreak <= 40 * NUM_PIKE_ROOMS)
         headerId = 1;
-    else if (winStreak <= 840)
+    else if (winStreak <= 60 * NUM_PIKE_ROOMS)
         headerId = 2;
     else
         headerId = 3;
@@ -1393,10 +1392,10 @@ static void PrepareOneTrainer(bool8 difficult)
     if (!difficult)
         battleNum = 1;
     else
-        battleNum = 6;
+        battleNum = FRONTIER_STAGES_PER_CHALLENGE - 1;
 
     lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    challengeNum = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] / 14;
+    challengeNum = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] / NUM_PIKE_ROOMS;
     do
     {
         trainerId = GetRandomScaledFrontierTrainerId(challengeNum, battleNum);
@@ -1410,7 +1409,7 @@ static void PrepareOneTrainer(bool8 difficult)
     gTrainerBattleOpponent_A = trainerId;
     gFacilityTrainers = gBattleFrontierTrainers;
     SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
-    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 14)
+    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < NUM_PIKE_ROOMS)
         gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1] = gTrainerBattleOpponent_A;
 }
 
@@ -1419,7 +1418,7 @@ static void PrepareTwoTrainers(void)
     int i;
     u16 trainerId;
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    u16 challengeNum = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] / 14;
+    u16 challengeNum = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] / NUM_PIKE_ROOMS;
 
     gFacilityTrainers = gBattleFrontierTrainers;
     do
@@ -1434,7 +1433,7 @@ static void PrepareTwoTrainers(void)
 
     gTrainerBattleOpponent_A = trainerId;
     SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
-    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 14)
+    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= NUM_PIKE_ROOMS)
         gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1] = gTrainerBattleOpponent_A;
 
     do
@@ -1449,7 +1448,7 @@ static void PrepareTwoTrainers(void)
 
     gTrainerBattleOpponent_B = trainerId;
     SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_B, 1);
-    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 14)
+    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < NUM_PIKE_ROOMS)
         gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 2] = gTrainerBattleOpponent_B;
 }
 
@@ -1457,7 +1456,7 @@ static void ClearPikeTrainerIds(void)
 {
     u8 i;
 
-    for (i = 0; i < 14; i++)
+    for (i = 0; i < NUM_PIKE_ROOMS; i++)
         gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
 }
 
