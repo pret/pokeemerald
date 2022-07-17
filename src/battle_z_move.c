@@ -581,8 +581,10 @@ void SetZEffect(void)
         else
             gBattleStruct->zmove.effect = Z_EFFECT_ATK_UP_1;
     }
-
+    
+    gBattleScripting.savedStatChanger = gBattleScripting.statChanger;   // save used move's stat changer (e.g. for Z-Growl)
     gBattleScripting.battler = gBattlerAttacker;
+    
     switch (gBattleStruct->zmove.effect) 
     {
     case Z_EFFECT_RESET_STATS:
@@ -639,42 +641,18 @@ void SetZEffect(void)
         gBattleCommunication[MULTISTRING_CHOOSER] = MULTISTRING_Z_HP_TRAP;
         gBattlescriptCurrInstr = BattleScript_ZEffectPrintString;
         break;
-    case Z_EFFECT_ATK_UP_1:
-    case Z_EFFECT_DEF_UP_1:
-    case Z_EFFECT_SPD_UP_1:
-    case Z_EFFECT_SPATK_UP_1:
-    case Z_EFFECT_SPDEF_UP_1:
-    case Z_EFFECT_ACC_UP_1:
-    case Z_EFFECT_EVSN_UP_1:
-        SET_STATCHANGER(gBattleStruct->zmove.effect - Z_EFFECT_ATK_UP_1 + 1, 1, FALSE);
-        gBattleScripting.animArg1 = 0xE + (gBattleStruct->zmove.effect - Z_EFFECT_ATK_UP_1 + 1);
-        gBattleScripting.animArg2 = 0;
+    case Z_EFFECT_ATK_UP_1 ... Z_EFFECT_EVSN_UP_1:
+        SET_STATCHANGER(gBattleStruct->zmove.effect - Z_EFFECT_ATK_UP_1 + 1, 1, FALSE);       
         BattleScriptPush(gBattlescriptCurrInstr + Z_EFFECT_BS_LENGTH);
         gBattlescriptCurrInstr = BattleScript_StatUpZMove;
         break;
-    case Z_EFFECT_ATK_UP_2:
-    case Z_EFFECT_DEF_UP_2:
-    case Z_EFFECT_SPD_UP_2:
-    case Z_EFFECT_SPATK_UP_2:
-    case Z_EFFECT_SPDEF_UP_2:
-    case Z_EFFECT_ACC_UP_2:
-    case Z_EFFECT_EVSN_UP_2:
+    case Z_EFFECT_ATK_UP_2 ... Z_EFFECT_EVSN_UP_2:
         SET_STATCHANGER(gBattleStruct->zmove.effect - Z_EFFECT_ATK_UP_2 + 1, 2, FALSE);
-        gBattleScripting.animArg1 = 0xE + (gBattleStruct->zmove.effect - Z_EFFECT_ATK_UP_2 + 1);
-        gBattleScripting.animArg2 = 0;
         BattleScriptPush(gBattlescriptCurrInstr + Z_EFFECT_BS_LENGTH);
         gBattlescriptCurrInstr = BattleScript_StatUpZMove;
         break;
-    case Z_EFFECT_ATK_UP_3:
-    case Z_EFFECT_DEF_UP_3:
-    case Z_EFFECT_SPD_UP_3:
-    case Z_EFFECT_SPATK_UP_3:
-    case Z_EFFECT_SPDEF_UP_3:
-    case Z_EFFECT_ACC_UP_3:
-    case Z_EFFECT_EVSN_UP_3:
+    case Z_EFFECT_ATK_UP_3 ... Z_EFFECT_EVSN_UP_3:
         SET_STATCHANGER(gBattleStruct->zmove.effect - Z_EFFECT_ATK_UP_3 + 1, 3, FALSE);
-        gBattleScripting.animArg1 = 0xE + (gBattleStruct->zmove.effect - Z_EFFECT_ATK_UP_3 + 1);
-        gBattleScripting.animArg2 = 0;
         BattleScriptPush(gBattlescriptCurrInstr + Z_EFFECT_BS_LENGTH);
         gBattlescriptCurrInstr = BattleScript_StatUpZMove;
         break;
