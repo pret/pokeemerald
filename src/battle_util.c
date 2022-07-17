@@ -9733,7 +9733,7 @@ static bool32 IsUnnerveAbilityOnOpposingSide(u8 battlerId)
     return FALSE;
 }
 
-// photon geyser & light that burns the sky
+// Photon geyser & light that burns the sky
 u8 GetSplitBasedOnStats(u8 battlerId)
 {
     u32 attack = gBattleMons[battlerId].attack;
@@ -9769,7 +9769,7 @@ struct Pokemon *GetBattlerPartyData(u8 battlerId)
     return mon;
 }
 
-//Make sure the input bank is any bank on the specific mon's side
+// Make sure the input bank is any bank on the specific mon's side
 bool32 CanFling(u8 battlerId)
 {
     u16 item = gBattleMons[battlerId].item;
@@ -9788,7 +9788,7 @@ bool32 CanFling(u8 battlerId)
     return TRUE;
 }
 
-// ability checks
+// Ability checks
 bool32 IsRolePlayBannedAbilityAtk(u16 ability)
 {
     u32 i;

@@ -181,18 +181,18 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
     #endif
     
     if (mega->alreadyEvolved[battlerPosition])
-        return FALSE;   // trainer has mega evolved
+        return FALSE;   // Trainer has mega evolved
     
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         if (IsPartnerMonFromSameTrainer(battlerId) && (mega->alreadyEvolved[partnerPosition] || (mega->toEvolve & gBitTable[BATTLE_PARTNER(battlerId)])))
-            return FALSE;   //partner has mega evolved or is about to mega evolve
+            return FALSE;   // Partner has mega evolved or is about to mega evolve
     }
     
     if (B_ENABLE_DEBUG && gBattleStruct->debugHoldEffects[battlerId])
         holdEffect = gBattleStruct->debugHoldEffects[battlerId];
     else if (item == ITEM_ENIGMA_BERRY)
-        return FALSE;   //holdEffect = gEnigmaBerries[battlerId].holdEffect; 
+        return FALSE;   // HoldEffect = gEnigmaBerries[battlerId].holdEffect; 
     else
         holdEffect = ItemId_GetHoldEffect(item);
     
@@ -205,7 +205,7 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
         u16 zMove = GetSignatureZMove(move, gBattleMons[battlerId].species, item);
         if (zMove != MOVE_NONE)
         {
-            gBattleStruct->zmove.chosenZMove = zMove;  //signature z move exists
+            gBattleStruct->zmove.chosenZMove = zMove;  // Signature z move exists
             return TRUE;
         }
         
@@ -237,7 +237,7 @@ void GetUsableZMoves(u8 battlerId, u16 *moves)
 bool32 IsZMoveUsable(u8 battlerId, u16 moveIndex)
 {
     if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && IsPartnerMonFromSameTrainer(battlerId) && gBattleStruct->zmove.toBeUsed[BATTLE_PARTNER(battlerId)] != MOVE_NONE)
-        return FALSE;   //player's other mon has a z move queued up already
+        return FALSE;   // Player's other mon has a z move queued up already
     if (gBattleStruct->zmove.possibleZMoves[battlerId] & (1 << moveIndex))
         return TRUE;
     return FALSE;
@@ -248,9 +248,9 @@ bool32 TryChangeZIndicator(u8 battlerId, u8 moveIndex)
     bool32 viableZMove = IsZMoveUsable(battlerId, moveIndex);
     
     if (gBattleStruct->zmove.viable && !viableZMove)
-        HideZMoveTriggerSprite();   //was a viable z move, now is not -> slide out
+        HideZMoveTriggerSprite();   // Was a viable z move, now is not -> slide out
     else if (!gBattleStruct->zmove.viable && viableZMove)
-        ShowZMoveTriggerSprite();   //was not a viable z move, now is -> slide back in
+        ShowZMoveTriggerSprite();   // Was not a viable z move, now is -> slide back in
 }
 
 #define SINGLES_Z_TRIGGER_POS_X_OPTIMAL (30)
@@ -380,7 +380,7 @@ static u16 GetSignatureZMove(u16 move, u16 species, u16 item)
 {
     u32 i;
     
-    // check signature z move
+    // Check signature z move
     for (i = 0; i < ARRAY_COUNT(sSignatureZMoves); ++i)
     {
         if (sSignatureZMoves[i].item == item && sSignatureZMoves[i].species == species &&  sSignatureZMoves[i].move == move)
@@ -394,7 +394,7 @@ static u16 GetTypeBasedZMove(u16 move, u8 battler)
 {
     u8 moveType = gBattleMoves[move].type;
     
-    // get z move from type
+    // Get z move from type
     if (moveType < TYPE_FIRE)
         return MOVE_BREAKNECK_BLITZ + moveType;
     else if (moveType >= TYPE_FAIRY)
@@ -413,7 +413,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove)
     gBattleStruct->zmove.viewing = TRUE;
     if (zmove != MOVE_NONE)
     {
-        // clear move slots
+        // Clear move slots
         for (i = 0; i < MAX_MON_MOVES; ++i)
         {
             MoveSelectionDestroyCursorAt(i);
@@ -499,16 +499,16 @@ bool32 MoveSelectionDisplayZMove(u16 zmove)
                 break;
             }
             
-            BattlePutTextOnWindow(gDisplayedStringBattle, 5); //Slot of Move 3
+            BattlePutTextOnWindow(gDisplayedStringBattle, 5); // Slot of Move 3
             gDisplayedStringBattle[0] = CHAR_Z;
             gDisplayedStringBattle[1] = CHAR_HYPHEN;
             StringCopy(gDisplayedStringBattle + 2, gMoveNames[move]);
         }
         else if (zmove == MOVE_EXTREME_EVOBOOST)
         {
-            //damaging move -> status z move
+            // Damaging move -> status z move
             StringCopy(gDisplayedStringBattle, sText_StatsPlus2);
-            BattlePutTextOnWindow(gDisplayedStringBattle, 5); //Slot of Move 3
+            BattlePutTextOnWindow(gDisplayedStringBattle, 5); // Slot of Move 3
             StringCopy(gDisplayedStringBattle, GetZMoveName(zmove));
         }
         else
@@ -516,7 +516,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove)
             ZMoveSelectionDisplayPower(move, zmove);
             StringCopy(gDisplayedStringBattle, GetZMoveName(zmove));
         }
-        BattlePutTextOnWindow(gDisplayedStringBattle, 3);   //first move slot
+        BattlePutTextOnWindow(gDisplayedStringBattle, 3);   // First move slot
 
         ZMoveSelectionDisplayPpNumber();
         MoveSelectionCreateCursorAt(0, 0);
@@ -538,7 +538,7 @@ static void ZMoveSelectionDisplayPower(u16 move, u16 zMove)
     {
         txtPtr = StringCopy(gDisplayedStringBattle, sText_PowerColon);
         ConvertIntToDecimalStringN(txtPtr, power, STR_CONV_MODE_LEFT_ALIGN, 3);
-        BattlePutTextOnWindow(gDisplayedStringBattle, 5); //bottom left
+        BattlePutTextOnWindow(gDisplayedStringBattle, 5); // Bottom left
     }
 }
 
@@ -547,7 +547,7 @@ static void ZMoveSelectionDisplayPpNumber(void)
     u8 *txtPtr;
     struct ChooseMoveStruct *moveInfo;
 
-    if (gBattleResources->bufferA[gActiveBattler][2] == TRUE) // check if we didn't want to display pp number
+    if (gBattleResources->bufferA[gActiveBattler][2] == TRUE) // Check if we didn't want to display pp number
         return;
 
     SetPpNumbersPaletteInMoveSelection();
@@ -563,7 +563,7 @@ const u8* GetZMoveName(u16 move)
     if (IsZMove(move))
         return gZMoveNames[move - MOVE_BREAKNECK_BLITZ];
     else
-        return gZMoveNames[0];   //failsafe
+        return gZMoveNames[0];   // Failsafe
 }
 
 #define Z_EFFECT_BS_LENGTH  3
@@ -582,7 +582,7 @@ void SetZEffect(void)
             gBattleStruct->zmove.effect = Z_EFFECT_ATK_UP_1;
     }
     
-    gBattleScripting.savedStatChanger = gBattleScripting.statChanger;   // save used move's stat changer (e.g. for Z-Growl)
+    gBattleScripting.savedStatChanger = gBattleScripting.statChanger;   // Save used move's stat changer (e.g. for Z-Growl)
     gBattleScripting.battler = gBattlerAttacker;
     
     switch (gBattleStruct->zmove.effect) 
@@ -600,7 +600,7 @@ void SetZEffect(void)
     case Z_EFFECT_ALL_STATS_UP_1:
         if (!AreStatsMaxed(gBattlerAttacker, STAT_SPDEF))
         {
-            for (i = 0; i < STAT_ACC - 1; i++) //Doesn't increase Acc or Evsn
+            for (i = 0; i < STAT_ACC - 1; i++) // Doesn't increase Acc or Evsn
             {
                 if (gBattleMons[gBattlerAttacker].statStages[i] < 12)
                     ++gBattleMons[gBattlerAttacker].statStages[i];
