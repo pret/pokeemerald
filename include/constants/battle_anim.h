@@ -395,6 +395,7 @@
 #define ANIM_TAG_OMEGA_SYMBOL               (ANIM_SPRITES_START + 383)
 #define ANIM_TAG_PRIMAL_PARTICLES           (ANIM_SPRITES_START + 384)
 #define ANIM_TAG_STEEL_BEAM                 (ANIM_SPRITES_START + 385)
+#define ANIM_TAG_POLTERGEIST                (ANIM_SPRITES_START + 386)
 
 // battlers
 #define ANIM_ATTACKER    0
@@ -532,7 +533,9 @@
 #define B_ANIM_STRONG_WINDS             30
 #define B_ANIM_PRIMAL_REVERSION         31
 #define B_ANIM_AQUA_RING_HEAL           32
-#define B_ANIM_ZMOVE_ACTIVATE           33 // Using Z Moves
+#define B_ANIM_BEAK_BLAST_SETUP         33
+#define B_ANIM_SHELL_TRAP_SETUP         34
+#define B_ANIM_ZMOVE_ACTIVATE           35 // Using Z Moves
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
@@ -571,6 +574,7 @@
 #define TRAP_ANIM_SAND_TOMB 4
 #define TRAP_ANIM_MAGMA_STORM 5
 #define TRAP_ANIM_INFESTATION 6
+#define TRAP_ANIM_SNAP_TRAP 7
 
 // Weather defines for battle animation scripts.
 #define ANIM_WEATHER_NONE 0

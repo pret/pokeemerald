@@ -34,7 +34,7 @@ extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
 
 // this file's functions
-static u8 GetBattlePalaceMoveGroup(u16 move);
+static u8 GetBattlePalaceMoveGroup(u8 battlerId, u16 move);
 static u16 GetBattlePalaceTarget(void);
 static void SpriteCB_TrainerSlideVertical(struct Sprite *sprite);
 static bool8 ShouldAnimBeDoneRegardlessOfSubstitute(u8 animId);
@@ -151,7 +151,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     {
         if (moveInfo->moves[i] == MOVE_NONE)
             break;
-        if (selectedGroup == GetBattlePalaceMoveGroup(moveInfo->moves[i]) && moveInfo->currentPp[i] != 0)
+        if (selectedGroup == GetBattlePalaceMoveGroup(gActiveBattler, moveInfo->moves[i]) && moveInfo->currentPp[i] != 0)
             selectedMoves |= gBitTable[i];
     }
 
@@ -177,11 +177,11 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
             {
                 // validMoveFlags is used here as a bitfield for which moves can be used for each move group type
                 // first 4 bits are for attack (1 for each move), then 4 bits for defense, and 4 for support
-                if (GetBattlePalaceMoveGroup(moveInfo->moves[i]) == PALACE_MOVE_GROUP_ATTACK && !(gBitTable[i] & unusableMovesBits))
+                if (GetBattlePalaceMoveGroup(gActiveBattler, moveInfo->moves[i]) == PALACE_MOVE_GROUP_ATTACK && !(gBitTable[i] & unusableMovesBits))
                     validMoveFlags += (1 << 0);
-                if (GetBattlePalaceMoveGroup(moveInfo->moves[i]) == PALACE_MOVE_GROUP_DEFENSE && !(gBitTable[i] & unusableMovesBits))
+                if (GetBattlePalaceMoveGroup(gActiveBattler, moveInfo->moves[i]) == PALACE_MOVE_GROUP_DEFENSE && !(gBitTable[i] & unusableMovesBits))
                     validMoveFlags += (1 << 4);
-                if (GetBattlePalaceMoveGroup(moveInfo->moves[i]) == PALACE_MOVE_GROUP_SUPPORT && !(gBitTable[i] & unusableMovesBits))
+                if (GetBattlePalaceMoveGroup(gActiveBattler, moveInfo->moves[i]) == PALACE_MOVE_GROUP_SUPPORT && !(gBitTable[i] & unusableMovesBits))
                     validMoveFlags += (1 << 8);
             }
 
@@ -218,7 +218,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
                 do
                 {
                     i = Random() % MAX_MON_MOVES;
-                    if (!(gBitTable[i] & unusableMovesBits) && validMoveGroup == GetBattlePalaceMoveGroup(moveInfo->moves[i]))
+                    if (!(gBitTable[i] & unusableMovesBits) && validMoveGroup == GetBattlePalaceMoveGroup(gActiveBattler, moveInfo->moves[i]))
                         chosenMoveId = i;
                 } while (chosenMoveId == -1);
             }
@@ -247,7 +247,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     }
     else
     {
-        moveTarget = gBattleMoves[moveInfo->moves[chosenMoveId]].target;
+        moveTarget = GetBattlerMoveTargetType(gActiveBattler, moveInfo->moves[chosenMoveId]);
     }
 
     if (moveTarget & MOVE_TARGET_USER)
@@ -269,9 +269,9 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
 #undef numValidMoveGroups
 #undef validMoveGroup
 
-static u8 GetBattlePalaceMoveGroup(u16 move)
+static u8 GetBattlePalaceMoveGroup(u8 battlerId, u16 move)
 {
-    switch (gBattleMoves[move].target)
+    switch (GetBattlerMoveTargetType(battlerId, move))
     {
     case MOVE_TARGET_SELECTED:
     case MOVE_TARGET_USER_OR_SELECTED:
@@ -525,15 +525,6 @@ static void Task_ClearBitWhenSpecialAnimDone(u8 taskId)
 }
 
 #undef tBattlerId
-
-// Great function to include newly added moves that don't have animation yet.
-bool8 IsMoveWithoutAnimation(u16 moveId, u8 animationTurn)
-{
-    if (moveId >= (MOVES_COUNT_Z - 1))
-        return TRUE;
-    else
-        return FALSE;
-}
 
 // Check if SE has finished or 30 calls, whichever comes first
 bool8 IsBattleSEPlaying(u8 battlerId)
@@ -914,6 +905,8 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 castform, bo
     {
         StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerAtk]], gBattleSpritesDataPtr->animationData->animArg);
         paletteOffset = 0x100 + battlerAtk * 16;
+        lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(targetSpecies, otId, personalityValue);
+        LZDecompressWram(lzPaletteData, gBattleStruct->castformPalette);
         LoadPalette(gBattleStruct->castformPalette[gBattleSpritesDataPtr->animationData->animArg], paletteOffset, 32);
         gBattleMonForms[battlerAtk] = gBattleSpritesDataPtr->animationData->animArg;
         if (gBattleSpritesDataPtr->battlerData[battlerAtk].transformSpecies != SPECIES_NONE)

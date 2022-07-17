@@ -1,8 +1,6 @@
 #ifndef GUARD_CONSTANTS_BATTLE_STRING_IDS_H
 #define GUARD_CONSTANTS_BATTLE_STRING_IDS_H
 
-#define BATTLESTRINGS_ID_ADDER  12 // all battlestrings have its ID + 12, because first 5 are reserved
-
 #define STRINGID_INTROMSG       0
 #define STRINGID_INTROSENDOUT   1
 #define STRINGID_RETURNMON      2
@@ -611,17 +609,28 @@
 #define STRINGID_NEUTRALIZINGGASOVER                  607
 #define STRINGID_TARGETTOOHEAVY                       608
 #define STRINGID_PKMNTOOKTARGETHIGH                   609
-#define STRINGID_ZPOWERSURROUNDS                      610
-#define STRINGID_ZMOVEUNLEASHED                       611
-#define STRINGID_ZMOVERESETSSTATS                     612
-#define STRINGID_ZMOVEALLSTATSUP                      613
-#define STRINGID_ZMOVEZBOOSTCRIT                      614
-#define STRINGID_ZMOVERESTOREHP                       615
-#define STRINGID_ZMOVESTATUP                          616
-#define STRINGID_ZMOVEHPTRAP                          617
-#define STRINGID_TERRAINREMOVED                       618
+#define STRINGID_PKMNINSNAPTRAP                       610
+#define STRINGID_METEORBEAMCHARGING                   611
+#define STRINGID_HEATUPBEAK                           612
+#define STRINGID_COURTCHANGE                          613
+#define STRINGID_PLAYERLOSTTOENEMYTRAINER             614
+#define STRINGID_PLAYERPAIDPRIZEMONEY                 615
+#define STRINGID_ZPOWERSURROUNDS                      616
+#define STRINGID_ZMOVEUNLEASHED                       617
+#define STRINGID_ZMOVERESETSSTATS                     618
+#define STRINGID_ZMOVEALLSTATSUP                      619
+#define STRINGID_ZMOVEZBOOSTCRIT                      620
+#define STRINGID_ZMOVERESTOREHP                       621
+#define STRINGID_ZMOVESTATUP                          622
+#define STRINGID_ZMOVEHPTRAP                          623
+#define STRINGID_TERRAINREMOVED                       624
 
-#define BATTLESTRINGS_COUNT                           619
+#define BATTLESTRINGS_COUNT                           625
+
+// This is the string id that gBattleStringsTable starts with.
+// String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
+// and are instead handled explicitly by BufferStringBattle.
+#define BATTLESTRINGS_TABLE_START  STRINGID_TRAINER1LOSETEXT
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.
@@ -673,6 +682,7 @@
 #define B_MSG_TURN1_GEOMANCY       9
 #define B_MSG_TURN1_FREEZE_SHOCK   10
 #define B_MSG_TURN1_SKY_DROP       11
+#define B_MSG_TURN1_METEOR_BEAM    12
 
 // gMoveWeatherChangeStringIds
 #define B_MSG_STARTED_RAIN      0
@@ -873,13 +883,25 @@
 #define B_MSG_TERRAINPREVENTS_ELECTRIC  1
 #define B_MSG_TERRAINPREVENTS_PSYCHIC   2
 
+// gWrappedStringIds
+#define B_MSG_WRAPPED_BIND        0
+#define B_MSG_WRAPPED_WRAP        1
+#define B_MSG_WRAPPED_FIRE_SPIN   2
+#define B_MSG_WRAPPED_CLAMP       3
+#define B_MSG_WRAPPED_WHIRLPOOL   4
+#define B_MSG_WRAPPED_SAND_TOMB   5
+#define B_MSG_WRAPPED_MAGMA_STORM 6
+#define B_MSG_WRAPPED_INFESTATION 7
+#define B_MSG_WRAPPED_SNAP_TRAP   8
+#define TRAPPING_MOVES_COUNT      9
+
 // z effects
-#define MULTISTRING_Z_RESET_STATS   0
-#define MULTISTRING_Z_ALL_STATS_UP  1
-#define MULTISTRING_Z_BOOST_CRITS   2
-#define MULTISTRING_Z_FOLLOW_ME     3
-#define MULTISTRING_Z_RECOVER_HP    4
-#define MULTISTRING_Z_STAT_UP       5
-#define MULTISTRING_Z_HP_TRAP       6
+#define B_MSG_Z_RESET_STATS   0
+#define B_MSG_Z_ALL_STATS_UP  1
+#define B_MSG_Z_BOOST_CRITS   2
+#define B_MSG_Z_FOLLOW_ME     3
+#define B_MSG_Z_RECOVER_HP    4
+#define B_MSG_Z_STAT_UP       5
+#define B_MSG_Z_HP_TRAP       6
 
 #endif // GUARD_CONSTANTS_BATTLE_STRING_IDS_H

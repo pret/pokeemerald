@@ -593,7 +593,7 @@ void SetZEffect(void)
             if (gBattleMons[gBattlerAttacker].statStages[i] < DEFAULT_STAT_STAGE)
                 gBattleMons[gBattlerAttacker].statStages[i] = DEFAULT_STAT_STAGE;
         }
-        gBattleCommunication[MULTISTRING_CHOOSER] = MULTISTRING_Z_RESET_STATS;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_Z_RESET_STATS;
         BattleScriptPush(gBattlescriptCurrInstr + Z_EFFECT_BS_LENGTH);
         gBattlescriptCurrInstr = BattleScript_ZEffectPrintString;
         break;
@@ -605,7 +605,7 @@ void SetZEffect(void)
                 if (gBattleMons[gBattlerAttacker].statStages[i] < 12)
                     ++gBattleMons[gBattlerAttacker].statStages[i];
             }
-            gBattleCommunication[MULTISTRING_CHOOSER] = MULTISTRING_Z_ALL_STATS_UP;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_Z_ALL_STATS_UP;
             BattleScriptPush(gBattlescriptCurrInstr + Z_EFFECT_BS_LENGTH);
             gBattlescriptCurrInstr = BattleScript_ZEffectPrintString;
         }
@@ -614,7 +614,7 @@ void SetZEffect(void)
         if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY))
         {
             gBattleMons[gBattlerAttacker].status2 |= STATUS2_FOCUS_ENERGY;
-            gBattleCommunication[MULTISTRING_CHOOSER] = MULTISTRING_Z_BOOST_CRITS;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_Z_BOOST_CRITS;
             BattleScriptPush(gBattlescriptCurrInstr + Z_EFFECT_BS_LENGTH);
             gBattlescriptCurrInstr = BattleScript_ZEffectPrintString;
         }
@@ -622,7 +622,7 @@ void SetZEffect(void)
     case Z_EFFECT_FOLLOW_ME:
         gSideTimers[GetBattlerSide(gBattlerAttacker)].followmeTimer = 1;
         gSideTimers[GetBattlerSide(gBattlerAttacker)].followmeTarget = gBattlerAttacker;
-        gBattleCommunication[MULTISTRING_CHOOSER] = MULTISTRING_Z_FOLLOW_ME;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_Z_FOLLOW_ME;
         BattleScriptPush(gBattlescriptCurrInstr + Z_EFFECT_BS_LENGTH);
         gBattlescriptCurrInstr = BattleScript_ZEffectPrintString;
         break;
@@ -630,7 +630,7 @@ void SetZEffect(void)
         if (gBattleMons[gBattlerAttacker].hp != gBattleMons[gBattlerAttacker].maxHP)
         {
             gBattleMoveDamage = (-1) * gBattleMons[gBattlerAttacker].maxHP;
-            gBattleCommunication[MULTISTRING_CHOOSER] = MULTISTRING_Z_RECOVER_HP;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_Z_RECOVER_HP;
             BattleScriptPush(gBattlescriptCurrInstr + Z_EFFECT_BS_LENGTH);
             gBattlescriptCurrInstr = BattleScript_RecoverHPZMove;
         }
@@ -638,7 +638,7 @@ void SetZEffect(void)
     case Z_EFFECT_RESTORE_REPLACEMENT_HP:
         gBattleStruct->zmove.healReplacement = TRUE;
         BattleScriptPush(gBattlescriptCurrInstr + Z_EFFECT_BS_LENGTH);
-        gBattleCommunication[MULTISTRING_CHOOSER] = MULTISTRING_Z_HP_TRAP;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_Z_HP_TRAP;
         gBattlescriptCurrInstr = BattleScript_ZEffectPrintString;
         break;
     case Z_EFFECT_ATK_UP_1 ... Z_EFFECT_EVSN_UP_1:

@@ -18,6 +18,8 @@
 static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng);
 static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent);
 static bool8 ShouldUseItem(void);
+static bool32 AI_ShouldHeal(u32 healAmount);
+static bool32 AI_OpponentCanFaintAiWithMod(u32 healAmount);
 
 void GetAIPartyIndexes(u32 battlerId, s32 *firstId, s32 *lastId)
 {
@@ -602,39 +604,39 @@ static u32 GetBestMonBatonPass(struct Pokemon *party, int firstId, int lastId, u
     return PARTY_SIZE;
 }
 
-static u32 GestBestMonOffensive(struct Pokemon *party, int firstId, int lastId, u8 invalidMons, u32 opposingBattler)
+static u32 GetBestMonTypeMatchup(struct Pokemon *party, int firstId, int lastId, u8 invalidMons, u32 opposingBattler)
 {
     int i, bits = 0;
 
     while (bits != 0x3F) // All mons were checked.
     {
-        int bestDmg = 0;
+        u32 bestResist = UQ_4_12(1.0);
         int bestMonId = PARTY_SIZE;
-        // Find the mon whose type is the most suitable offensively.
+        // Find the mon whose type is the most suitable defensively.
         for (i = firstId; i < lastId; i++)
         {
             if (!(gBitTable[i] & invalidMons) && !(gBitTable[i] & bits))
             {
                 u16 species = GetMonData(&party[i], MON_DATA_SPECIES);
-                u32 typeDmg = UQ_4_12(1.0);
+                u32 typeEffectiveness = UQ_4_12(1.0);
 
-                u8 atkType1 = gBaseStats[species].type1;
-                u8 atkType2 = gBaseStats[species].type2;
-                u8 defType1 = gBattleMons[opposingBattler].type1;
-                u8 defType2 = gBattleMons[opposingBattler].type2;
+                u8 atkType1 = gBattleMons[opposingBattler].type1;
+                u8 atkType2 = gBattleMons[opposingBattler].type2;
+                u8 defType1 = gBaseStats[species].type1;
+                u8 defType2 = gBaseStats[species].type2;
 
-                typeDmg *= GetTypeModifier(atkType1, defType1);
+                typeEffectiveness *= GetTypeModifier(atkType1, defType1);
                 if (atkType2 != atkType1)
-                    typeDmg *= GetTypeModifier(atkType2, defType1);
+                    typeEffectiveness *= GetTypeModifier(atkType2, defType1);
                 if (defType2 != defType1)
                 {
-                    typeDmg *= GetTypeModifier(atkType1, defType2);
+                    typeEffectiveness *= GetTypeModifier(atkType1, defType2);
                     if (atkType2 != atkType1)
-                        typeDmg *= GetTypeModifier(atkType2, defType2);
+                        typeEffectiveness *= GetTypeModifier(atkType2, defType2);
                 }
-                if (bestDmg < typeDmg)
+                if (typeEffectiveness < bestResist)
                 {
-                    bestDmg = typeDmg;
+                    bestResist = typeEffectiveness;
                     bestMonId = i;
                 }
             }
@@ -698,7 +700,6 @@ static u32 GetBestMonDmg(struct Pokemon *party, int firstId, int lastId, u8 inva
 u8 GetMostSuitableMonToSwitchInto(void)
 {
     u32 opposingBattler = 0;
-    u32 bestDmg = 0;
     u32 bestMonId = 0;
     u8 battlerIn1 = 0, battlerIn2 = 0;
     s32 firstId = 0;
@@ -757,7 +758,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
     if (bestMonId != PARTY_SIZE)
         return bestMonId;
 
-    bestMonId = GestBestMonOffensive(party, firstId, lastId, invalidMons, opposingBattler);
+    bestMonId = GetBestMonTypeMatchup(party, firstId, lastId, invalidMons, opposingBattler);
     if (bestMonId != PARTY_SIZE)
         return bestMonId;
 
@@ -788,6 +789,25 @@ static u8 GetAI_ItemType(u16 itemId, const u8 *itemEffect)
         return AI_ITEM_NOT_RECOGNIZABLE;
 }
 
+static bool32 AiExpectsToFaintPlayer(void)
+{
+    bool32 canFaintPlayer;
+    u32 i;
+    u8 target = gBattleStruct->aiChosenTarget[gActiveBattler];
+    
+    if (gBattleStruct->aiMoveOrAction[gActiveBattler] > 3)
+        return FALSE; // AI not planning to use move
+    
+    if (GetBattlerSide(target) != GetBattlerSide(gActiveBattler)
+      && CanIndexMoveFaintTarget(gActiveBattler, target, gBattleStruct->aiMoveOrAction[gActiveBattler], 0)
+      && AI_WhoStrikesFirst(gActiveBattler, target, GetAIChosenMove(gActiveBattler)) == AI_IS_FASTER) {
+        // We expect to faint the target and move first -> dont use an item
+        return TRUE;
+    }
+    
+    return FALSE;
+}
+
 static bool8 ShouldUseItem(void)
 {
     struct Pokemon *party;
@@ -801,6 +821,9 @@ static bool8 ShouldUseItem(void)
         return FALSE;
     
     if (gStatuses3[gActiveBattler] & STATUS3_EMBARGO)
+        return FALSE;
+    
+    if (AiExpectsToFaintPlayer())
         return FALSE;
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
@@ -843,21 +866,10 @@ static bool8 ShouldUseItem(void)
         switch (*(gBattleStruct->AI_itemType + gActiveBattler / 2))
         {
         case AI_ITEM_FULL_RESTORE:
-            if (gBattleMons[gActiveBattler].hp >= gBattleMons[gActiveBattler].maxHP / 4)
-                break;
-            if (gBattleMons[gActiveBattler].hp == 0)
-                break;
-            shouldUse = TRUE;
+            shouldUse = AI_ShouldHeal(0);
             break;
         case AI_ITEM_HEAL_HP:
-            paramOffset = GetItemEffectParamOffset(item, 4, 4);
-            if (paramOffset == 0)
-                break;
-            if (gBattleMons[gActiveBattler].hp == 0)
-                break;
-            if (gBattleMons[gActiveBattler].hp < gBattleMons[gActiveBattler].maxHP / 4
-                || gBattleMons[gActiveBattler].maxHP - gBattleMons[gActiveBattler].hp > itemEffects[paramOffset])
-                shouldUse = TRUE;
+            shouldUse = AI_ShouldHeal(itemEffects[GetItemEffectParamOffset(item, 4, 4)]);
             break;
         case AI_ITEM_CURE_CONDITION:
             *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) = 0;
@@ -946,5 +958,34 @@ static bool8 ShouldUseItem(void)
         }
     }
 
+    return FALSE;
+}
+
+static bool32 AI_ShouldHeal(u32 healAmount)
+{
+    bool32 shouldHeal = FALSE;
+    
+    if (gBattleMons[gActiveBattler].hp < gBattleMons[gActiveBattler].maxHP / 4
+     || gBattleMons[gActiveBattler].hp == 0
+     || (healAmount != 0 && gBattleMons[gActiveBattler].maxHP - gBattleMons[gActiveBattler].hp > healAmount)) {
+        // We have low enough HP to consider healing
+        shouldHeal = !AI_OpponentCanFaintAiWithMod(healAmount); // if target can kill us even after we heal, why bother
+    }
+    
+    return shouldHeal;
+}
+
+static bool32 AI_OpponentCanFaintAiWithMod(u32 healAmount)
+{
+    u32 i;
+    // Check special cases to NOT heal
+    for (i = 0; i < gBattlersCount; i++) {
+        if (GetBattlerSide(i) == B_SIDE_PLAYER) {
+            if (CanTargetFaintAiWithMod(i, gActiveBattler, healAmount, 0)) {
+                // Target is expected to faint us
+                return TRUE;
+            }
+        }
+    }
     return FALSE;
 }

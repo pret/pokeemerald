@@ -1430,15 +1430,8 @@ static void PlayerPartnerHandleMoveAnimation(void)
         gWeatherMoveAnim = gBattleResources->bufferA[gActiveBattler][12] | (gBattleResources->bufferA[gActiveBattler][13] << 8);
         gAnimDisableStructPtr = (struct DisableStruct *)&gBattleResources->bufferA[gActiveBattler][16];
         gTransformedPersonalities[gActiveBattler] = gAnimDisableStructPtr->transformedMonPersonality;
-        if (IsMoveWithoutAnimation(move, gAnimMoveTurn)) // always returns FALSE
-        {
-            PlayerPartnerBufferExecCompleted();
-        }
-        else
-        {
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
-            gBattlerControllerFuncs[gActiveBattler] = PlayerPartnerDoMoveAnimation;
-        }
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
+        gBattlerControllerFuncs[gActiveBattler] = PlayerPartnerDoMoveAnimation;
     }
 }
 
@@ -1524,8 +1517,8 @@ static void PlayerPartnerHandleChooseMove(void)
     u8 chosenMoveId;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
 
-    BattleAI_SetupAIData(0xF);
-    chosenMoveId = BattleAI_ChooseMoveOrAction();
+    chosenMoveId = gBattleStruct->aiMoveOrAction[gActiveBattler];
+    gBattlerTarget = gBattleStruct->aiChosenTarget[gActiveBattler];
 
     if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED))
         gBattlerTarget = gActiveBattler;
