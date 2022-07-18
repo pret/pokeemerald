@@ -253,15 +253,15 @@ bool32 TryChangeZIndicator(u8 battlerId, u8 moveIndex)
         ShowZMoveTriggerSprite();   // Was not a viable z move, now is -> slide back in
 }
 
-#define SINGLES_Z_TRIGGER_POS_X_OPTIMAL (30)
-#define SINGLES_Z_TRIGGER_POS_X_PRIORITY (31)
-#define SINGLES_Z_TRIGGER_POS_X_SLIDE (15)
-#define SINGLES_Z_TRIGGER_POS_Y_DIFF (-11)
+#define SINGLES_Z_TRIGGER_POS_X_OPTIMAL     (29)
+#define SINGLES_Z_TRIGGER_POS_X_PRIORITY    (29)
+#define SINGLES_Z_TRIGGER_POS_X_SLIDE       (15)
+#define SINGLES_Z_TRIGGER_POS_Y_DIFF        (-11)
 
-#define DOUBLES_Z_TRIGGER_POS_X_OPTIMAL (30)
-#define DOUBLES_Z_TRIGGER_POS_X_PRIORITY (31)
-#define DOUBLES_Z_TRIGGER_POS_X_SLIDE (15)
-#define DOUBLES_Z_TRIGGER_POS_Y_DIFF (-4)
+#define DOUBLES_Z_TRIGGER_POS_X_OPTIMAL     SINGLES_Z_TRIGGER_POS_X_OPTIMAL
+#define DOUBLES_Z_TRIGGER_POS_X_PRIORITY    SINGLES_Z_TRIGGER_POS_X_PRIORITY
+#define DOUBLES_Z_TRIGGER_POS_X_SLIDE       SINGLES_Z_TRIGGER_POS_X_SLIDE
+#define DOUBLES_Z_TRIGGER_POS_Y_DIFF        (-4)
 
 #define tBattler    data[0]
 #define tHide       data[1]
@@ -330,13 +330,14 @@ static void SpriteCB_ZMoveTrigger(struct Sprite *sprite)
     else
     {
         if (sprite->x != gSprites[gHealthboxSpriteIds[sprite->tBattler]].x - xOptimal)
+        {
             sprite->x--;
-
-        if (sprite->x >= gSprites[gHealthboxSpriteIds[sprite->tBattler]].x - xPriority)
             sprite->oam.priority = 2;
+        }
         else
+        {
             sprite->oam.priority = 1;
-
+        }
         sprite->y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].y - yDiff;
         sprite->y2 = gSprites[gHealthboxSpriteIds[sprite->tBattler]].y2 - yDiff;
     }
