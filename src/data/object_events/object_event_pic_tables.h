@@ -5352,7 +5352,7 @@ static const struct SpriteFrameImage sPicTable_DusclopsOld[] = {
     overworld_frame(gObjectEventPic_DusclopsOld, 2, 4, 5),
     overworld_frame(gObjectEventPic_DusclopsOld, 2, 4, 6),
     overworld_frame(gObjectEventPic_DusclopsOld, 2, 4, 7),
-    overworld_frame(gObjectEventPic_Dusclops, 2, 4, 8),
+    overworld_frame(gObjectEventPic_DusclopsOld, 2, 4, 8),
 };
 
 static const struct SpriteFrameImage sPicTable_AzurillOld[] = {
