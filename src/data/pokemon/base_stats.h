@@ -23,6 +23,8 @@
         .baseSpeed     = 90,                                               \
         .baseSpAttack  = 50,                                               \
         PIKACHU_BASE_DEFENSES,                                             \
+        .type1 = TYPE_ELECTRIC,                                            \
+        .type2 = TYPE_ELECTRIC,                                            \
         .catchRate = 190,                                                  \
         .expYield = 112,                                                   \
         .evYield_Speed     = 2,                                            \
