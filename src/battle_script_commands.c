@@ -9404,24 +9404,8 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 9;
         return;
     case VARIOUS_PHOTON_GEYSER_CHECK:
-    {
-        u32 attackerAtkStat = gBattleMons[gBattlerAttacker].attack;
-        u8 attackerAtkStage = gBattleMons[gBattlerAttacker].statStages[STAT_ATK];
-        u32 attackerSpAtkStat = gBattleMons[gBattlerAttacker].spAttack;
-
-        gSwapDamageCategory = FALSE;
-
-        attackerAtkStat *= gStatStageRatios[attackerAtkStage][0];
-        attackerAtkStat /= gStatStageRatios[attackerAtkStage][1];
-
-        attackerAtkStage = gBattleMons[gBattlerAttacker].statStages[STAT_SPATK];
-        attackerSpAtkStat *= gStatStageRatios[attackerAtkStage][0];
-        attackerSpAtkStat /= gStatStageRatios[attackerAtkStage][1];
-
-        if (attackerAtkStat > attackerSpAtkStat)
-            gSwapDamageCategory = TRUE;
+        gBattleStruct->swapDamageCategory = (GetSplitBasedOnStats(gActiveBattler) == SPLIT_SPECIAL);
         break;
-    }
     case VARIOUS_SHELL_SIDE_ARM_CHECK: // 0% chance GameFreak actually checks this way according to DaWobblefet, but this is the only functional explanation at the moment
     {
         u32 attackerAtkStat = gBattleMons[gBattlerAttacker].attack;
@@ -9432,7 +9416,7 @@ static void Cmd_various(void)
         u32 physical;
         u32 special;
 
-        gSwapDamageCategory = FALSE;
+        gBattleStruct->swapDamageCategory = FALSE;
 
         statStage = gBattleMons[gBattlerAttacker].statStages[STAT_ATK];
         attackerAtkStat *= gStatStageRatios[statStage][0];
@@ -9455,7 +9439,7 @@ static void Cmd_various(void)
         special = ((((2 * gBattleMons[gBattlerAttacker].level / 5 + 2) * gBattleMoves[gCurrentMove].power * attackerSpAtkStat) / targetSpDefStat) / 50);
 
         if (((physical > special) || (physical == special && (Random() % 2) == 0)))
-            gSwapDamageCategory = TRUE;
+            gBattleStruct->swapDamageCategory = TRUE;
         break;
     }
     case VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED:

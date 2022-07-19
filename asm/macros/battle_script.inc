@@ -1928,8 +1928,8 @@
 	.4byte \ptr
 	.endm
 
-	.macro photongeysercheck
-	various BS_ATTACKER, VARIOUS_PHOTON_GEYSER_CHECK
+	.macro photongeysercheck battler:req
+	various \battler, VARIOUS_PHOTON_GEYSER_CHECK
 	.endm
 
 	.macro shellsidearmcheck

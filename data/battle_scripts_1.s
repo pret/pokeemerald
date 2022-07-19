@@ -722,7 +722,7 @@ BattleScript_EffectPhotonGeyser:
 	critcalc
 	damagecalc
 	adjustdamage
-	photongeysercheck
+	photongeysercheck BS_ATTACKER
 	attackanimation
 	waitanimation
 	effectivenesssound
