@@ -241,7 +241,6 @@ static s16 sDebug_GameTimeStage;
 
 u8 gInGameOpponentsNo;
 
-static const u16 sBlenderCenter_Pal[] = INCBIN_U16("graphics/berry_blender/center.gbapal");
 static const u8 sBlenderCenter_Tilemap[] = INCBIN_U8("graphics/berry_blender/center_map.bin");
 static const u16 sBlenderOuter_Pal[] = INCBIN_U16("graphics/berry_blender/outer.gbapal");
 
@@ -249,20 +248,20 @@ static const u16 sUnused_Pal[] = INCBIN_U16("graphics/berry_blender/unused.gbapa
 static const u16 sEmpty_Pal[16 * 14] = {0};
 
 // unused text
-static const u8 sUnusedText_YesNo[] = _("YES\nNO");
+static const u8 sUnusedText_YesNo[] = _("OUI\nNON");
 static const u8 sUnusedText_2[] = _("▶");
 static const u8 sUnusedText_Space[] = _(" ");
-static const u8 sUnusedText_Terminating[] = _("Terminating.");
-static const u8 sUnusedText_LinkPartnerNotFound[] = _("Link partner(s) not found.\nPlease try again.\p");
+static const u8 sUnusedText_Terminating[] = _("Fin.");
+static const u8 sUnusedText_LinkPartnerNotFound[] = _("Partenaire(s) de jeu non trouvé(s).\nVeuillez réessayer.\p");
 
-static const u8 sText_BerryBlenderStart[] = _("Starting up the BERRY BLENDER.\pPlease select a BERRY from your BAG\nto put in the BERRY BLENDER.\p");
+static const u8 sText_BerryBlenderStart[] = _("Démarrage du MIXEUR.\pChoisissez une BAIE dans le SAC\nà mettre dans le MIXEUR.\p");
 static const u8 sText_NewParagraph[] = _("\p");
-static const u8 sText_WasMade[] = _(" was made!");
-static const u8 sText_Mister[] = _("MISTER");
-static const u8 sText_Laddie[] = _("LADDIE");
-static const u8 sText_Lassie[] = _("LASSIE");
-static const u8 sText_Master[] = _("MASTER");
-static const u8 sText_Dude[] = _("DUDE");
+static const u8 sText_WasMade[] = _("{STR_VAR_1} a été fait!");
+static const u8 sText_Mister[] = _("PAPY");
+static const u8 sText_Laddie[] = _("GAMIN");
+static const u8 sText_Lassie[] = _("GAMINE");
+static const u8 sText_Master[] = _("MAITRE");
+static const u8 sText_Dude[] = _("TYPE");
 static const u8 sText_Miss[] = _("MISS");
 
 static const u8* const sBlenderOpponentsNames[] =
@@ -275,28 +274,28 @@ static const u8* const sBlenderOpponentsNames[] =
     [BLENDER_MISS]   = sText_Miss
 };
 
-static const u8 sText_PressAToStart[] = _("Press the A Button to start.");
-static const u8 sText_PleaseWaitAWhile[] = _("Please wait a while.");
-static const u8 sText_CommunicationStandby[] = _("Communication standby…");
-static const u8 sText_WouldLikeToBlendAnotherBerry[] = _("Would you like to blend another BERRY?");
-static const u8 sText_RunOutOfBerriesForBlending[] = _("You've run out of BERRIES for\nblending in the BERRY BLENDER.\p");
-static const u8 sText_YourPokeblockCaseIsFull[] = _("Your {POKEBLOCK} CASE is full.\p");
-static const u8 sText_HasNoBerriesToPut[] = _(" has no BERRIES to put in\nthe BERRY BLENDER.");
-static const u8 sText_ApostropheSPokeblockCaseIsFull[] = _("'s {POKEBLOCK} CASE is full.\p");
-static const u8 sText_BlendingResults[] = _("RESULTS OF BLENDING");
-static const u8 sText_BerryUsed[] = _("BERRY USED");
-static const u8 sText_SpaceBerry[] = _(" BERRY");
-static const u8 sText_Time[] = _("Time:");
-static const u8 sText_Min[] = _(" min. ");
-static const u8 sText_Sec[] = _(" sec.");
-static const u8 sText_MaximumSpeed[] = _("MAXIMUM SPEED");
+static const u8 sText_PressAToStart[] = _("Appuyez sur le bouton A pour démarrer.");
+static const u8 sText_PleaseWaitAWhile[] = _("Veuillez patientez.");
+static const u8 sText_CommunicationStandby[] = _("Connexion en cours…");
+static const u8 sText_WouldLikeToBlendAnotherBerry[] = _("Voulez-vous mixer une autre BAIE?");
+static const u8 sText_RunOutOfBerriesForBlending[] = _("Vous n’avez plus de BAIES à mettre\ndans le MIXEUR.\p");
+static const u8 sText_YourPokeblockCaseIsFull[] = _("Votre BOITE {POKEBLOCK}S est pleine.\p");
+static const u8 sText_HasNoBerriesToPut[] = _("{STR_VAR_1} n’a pas de BAIES à mettre\ndans le MIXEUR.");
+static const u8 sText_ApostropheSPokeblockCaseIsFull[] = _("La BOITE {POKEBLOCK}S de\n{STR_VAR_1} est pleine.\p");
+static const u8 sText_BlendingResults[] = _("RESULTATS DU MIXAGE");
+static const u8 sText_BerryUsed[] = _("BAIE UTIL.");
+static const u8 sText_SpaceBerry[] = _("BAIE {STR_VAR_1}");
+static const u8 sText_Time[] = _("TEMPS");
+static const u8 sText_Min[] = _(" MIN ");
+static const u8 sText_Sec[] = _(" S");
+static const u8 sText_MaximumSpeed[] = _("VITESSE MAXI.");
 static const u8 sText_RPM[] = _(" RPM");
 static const u8 sText_Dot[] = _(".");
 static const u8 sText_NewLine[] = _("\n");
 static const u8 sText_Space[] = _(" ");
-static const u8 sText_Ranking[] = _("RANKING");
-static const u8 sText_TheLevelIs[] = _("The level is ");
-static const u8 sText_TheFeelIs[] = _(", and the feel is ");
+static const u8 sText_Ranking[] = _("CLASSEMENT");
+static const u8 sText_TheLevelIs[] = _("Niveau: ");
+static const u8 sText_TheFeelIs[] = _(" / Onctuosité: ");
 static const u8 sText_Dot2[] = _(".");
 
 static const struct BgTemplate sBgTemplates[3] =
@@ -959,7 +958,7 @@ static bool8 LoadBerryBlenderGfx(void)
     case 1:
         CopyToBgTilemapBuffer(2, sBlenderCenter_Tilemap, 0x400, 0);
         CopyBgTilemapBufferToVram(2);
-        LoadPalette(sBlenderCenter_Pal, 0, 0x100);
+        LoadPalette(gBlenderCenter_Pal, 0, 0x100);
         sBerryBlender->loadGfxState++;
         break;
     case 2:

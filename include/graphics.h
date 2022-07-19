@@ -5068,4 +5068,11 @@ extern const u16 gPokeJumpBonuses_Pal[];
 extern const u32 gPokeJumpBonuses_Gfx[];
 extern const u32 gPokeJumpBonuses_Tilemap[];
 
+extern const u16 g321Start_Pal[];
+extern const u32 g321Start_Gfx[];
+
+extern const u16 gBlenderCenter_Pal[];
+
+extern const u32 gFrontierPassMapScreen_Gfx[];
+
 #endif //GUARD_GRAPHICS_H
