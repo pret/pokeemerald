@@ -1517,6 +1517,9 @@ static void DrawStarsAndBadgesOnCard(void)
 
 static void DrawCardBackStats(void)
 {
+    // difference FR
+    // for some reason this function is emptied out
+    /*
     if (sData->cardType == CARD_TYPE_FRLG)
     {
         if (sData->hasTrades)
@@ -1555,6 +1558,7 @@ static void DrawCardBackStats(void)
             FillBgTilemapBufferRect(3, 156, 27, 16, 1, 1, 0);
         }
     }
+    */
     CopyBgTilemapBufferToVram(3);
 }
 

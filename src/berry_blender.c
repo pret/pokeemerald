@@ -3514,13 +3514,20 @@ static bool8 PrintBlendingResults(void)
 
                 StringCopy(sBerryBlender->stringVar, sBerryBlender->blendedBerries[place].name);
                 ConvertInternationalString(sBerryBlender->stringVar, gLinkPlayers[place].language);
-                StringAppend(sBerryBlender->stringVar, sText_SpaceBerry);
+                // FR version
+                sub_81DB2D8(sBerryBlender->stringVar, sText_SpaceBerry, sBerryBlender->stringVar);
+                // StringAppend(sBerryBlender->stringVar, sText_SpaceBerry); ENGLISH VERSION
                 Blender_AddTextPrinter(5, sBerryBlender->stringVar, 0x54, yPos, TEXT_SKIP_DRAW, 3);
             }
 
             Blender_AddTextPrinter(5, sText_MaximumSpeed, 0, 0x51, TEXT_SKIP_DRAW, 3);
             ConvertIntToDecimalStringN(sBerryBlender->stringVar, sBerryBlender->maxRPM / 100, STR_CONV_MODE_RIGHT_ALIGN, 3);
-            StringAppend(sBerryBlender->stringVar, sText_Dot);
+            // FR version difference using a comma versus a dot
+            {
+                u8 comma[] = _(",");
+                StringAppend(sBerryBlender->stringVar, comma);
+            }
+
 
             ConvertIntToDecimalStringN(text, sBerryBlender->maxRPM % 100, STR_CONV_MODE_LEADING_ZEROS, 2);
             StringAppend(sBerryBlender->stringVar, text);
@@ -3599,7 +3606,8 @@ static void PrintMadePokeblockString(struct Pokeblock *pokeblock, u8 *dst)
 
     dst[0] = EOS;
     StringCopy(dst, gPokeblockNames[pokeblock->color]);
-    StringAppend(dst, sText_WasMade);
+    // FR difference
+    sub_81DB2D8(dst, sText_WasMade, dst);
     StringAppend(dst, sText_NewLine);
 
     flavorLvl = GetHighestPokeblocksFlavorLevel(pokeblock);
@@ -3779,7 +3787,10 @@ void ShowBerryBlenderRecordWindow(void)
         record = gSaveBlock1Ptr->berryBlenderRecords[i];
 
         txtPtr = ConvertIntToDecimalStringN(text, record / 100, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        txtPtr = StringAppend(txtPtr, sText_Dot);
+        // FR Differnce
+        //txtPtr = StringAppend(txtPtr, sText_Dot);
+        *txtPtr++ = CHAR_COMMA;
+        *txtPtr = EOS;
         txtPtr = ConvertIntToDecimalStringN(txtPtr, record % 100, STR_CONV_MODE_LEADING_ZEROS, 2);
         txtPtr = StringAppend(txtPtr, sText_RPM);
 

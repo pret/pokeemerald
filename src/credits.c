@@ -1296,9 +1296,11 @@ static void LoadTheEndScreen(u16 tileOffsetLoad, u16 tileOffsetWrite, u16 palOff
     baseTile = (palOffset / 16) << 12;
 
     for (i = 0; i < 32 * 32; i++)
-        ((u16 *) (VRAM + tileOffsetWrite))[i] = baseTile + 1;
+        ((u16 *) (VRAM + tileOffsetWrite))[i] = baseTile; // difference FR
 }
 
+// difference FR
+/*
 static u16 GetLetterMapTile(u8 baseTiles)
 {
     u16 out = (baseTiles & 0x3F) + 80;
@@ -1325,21 +1327,12 @@ static void DrawLetterMapTiles(const u8 baseTiles[], u8 baseX, u8 baseY, u16 off
             ((u16 *) (VRAM + offset + (baseY + y) * 64))[baseX + x] = tileOffset + GetLetterMapTile(baseTiles[y * 3 + x]);
     }
 }
+*/
 
+// difference FR
 static void DrawTheEnd(u16 offset, u16 palette)
 {
-    u16 pos;
-    u16 baseTile = (palette / 16) << 12;
-
-    for (pos = 0; pos < 32 * 32; pos++)
-        ((u16 *) (VRAM + offset))[pos] = baseTile + 1;
-
-    DrawLetterMapTiles(sTheEnd_LetterMap_T, 3, 7, offset, palette);
-    DrawLetterMapTiles(sTheEnd_LetterMap_H, 7, 7, offset, palette);
-    DrawLetterMapTiles(sTheEnd_LetterMap_E, 11, 7, offset, palette);
-    DrawLetterMapTiles(sTheEnd_LetterMap_E, 16, 7, offset, palette);
-    DrawLetterMapTiles(sTheEnd_LetterMap_N, 20, 7, offset, palette);
-    DrawLetterMapTiles(sTheEnd_LetterMap_D, 24, 7, offset, palette);
+    LZ77UnCompVram(sCreditsCopyrightEnd_Gfx, ((u16 *) (VRAM + offset)));
 }
 
 #define sState data[0]

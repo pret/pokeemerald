@@ -399,16 +399,17 @@ u16 GetMatchCallOptionId(int optionId)
     return state->matchCallOptions[optionId];
 }
 
+// difference FR
 void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry *matchCallEntry, u8 *str)
 {
     const u8 *trainerName;
     const u8 *className;
     if (!matchCallEntry->isSpecialTrainer)
     {
-        int index = GetTrainerIdxByRematchIdx(matchCallEntry->headerId);
-        const struct Trainer *trainer = &gTrainers[index];
+        const struct Trainer *trainer = &gTrainers[GetTrainerIdxByRematchIdx(matchCallEntry->headerId)];
         int class = trainer->trainerClass;
-        className = gTrainerClassNames[class];
+        int gender = trainer->encounterMusic_gender;
+        className = GetTrainerClassNameGenderSpecific(class, gender, trainer->trainerName);
         trainerName = trainer->trainerName;
     }
     else

@@ -20,5 +20,8 @@ void ConvertInternationalPlayerNameStripChar(u8 *, u8);
 void ConvertInternationalContestantName(u8 *);
 int GetNicknameLanguage(u8 *);
 void FillWindowTilesByRow(int windowId, int columnStart, int rowStart, int numFillTiles, int numRows);
+// new functions
+u8 *sub_81DB2D8(u8 *r5, const u8 *r4, u8 *a2);
+const u8 *GetTrainerClassNameGenderSpecific(s32 trainerClassId, u32 trainerGender, const u8 *trainerName);
 
 #endif // GUARD_INTERNATIONAL_STRING_UTIL_H

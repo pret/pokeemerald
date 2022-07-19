@@ -1,4 +1,5 @@
 #include "global.h"
+#include "malloc.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
@@ -1324,7 +1325,7 @@ static const u8 sText_SpaceIs[] = _(" is");
 static const u8 sText_ApostropheS[] = _("'s");
 
 // For displaying names of invalid moves
-static const u8 sATypeMove_Table[NUMBER_OF_MON_TYPES][17] =
+static const u8 sATypeMove_Table[NUMBER_OF_MON_TYPES][22] =
 {
     [TYPE_NORMAL]   = _("a NORMAL move"),
     [TYPE_FIGHTING] = _("a FIGHTING move"),
@@ -2054,10 +2055,13 @@ static const struct BattleWindowText *const sBattleTextOnWindowsInfo[] =
 
 static const u8 sRecordedBattleTextSpeeds[] = {8, 4, 1, 0};
 
+// difference FR
 void BufferStringBattle(u16 stringID)
 {
     s32 i;
     const u8 *stringPtr = NULL;
+    u32 size;
+    u8 *txtBuff;
 
     gBattleMsgDataPtr = (struct BattleMsgData*)(&gBattleBufferA[gActiveBattler][4]);
     gLastUsedItem = gBattleMsgDataPtr->lastItem;
@@ -2343,7 +2347,68 @@ void BufferStringBattle(u16 stringID)
         break;
     }
 
-    BattleStringExpandPlaceholdersToDisplayedString(stringPtr);
+    // added in fr, this swaps team's aqua/magma class / name ; Team Aqua Grunt -> Grunt(sbire in fr) Team Aqua
+
+    size = StringLength(stringPtr) + 1;
+    txtBuff = Alloc(size);
+    memcpy(txtBuff, stringPtr, size);
+    if (!(gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)
+        && gTrainerBattleOpponent_A != TRAINER_UNION_ROOM && gTrainerBattleOpponent_A != TRAINER_FRONTIER_BRAIN
+        && !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER))
+    {
+        u8 *toSwap, *txt;
+        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && gTrainerBattleOpponent_A < TRAINERS_COUNT)
+        {
+            if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_TEAM_MAGMA || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_TEAM_AQUA)
+            {
+                toSwap = NULL, txt = txtBuff;
+                while (*txt != EOS)
+                {
+                    if (*txt == PLACEHOLDER_BEGIN)
+                    {
+                        txt++;
+                        if (*txt == B_TXT_TRAINER1_CLASS)
+                        {
+                            toSwap = txt;
+                        }
+                        else if (*txt == B_TXT_TRAINER1_NAME && toSwap != NULL)
+                        {
+                            *toSwap = B_TXT_TRAINER1_NAME;
+                            *txt = B_TXT_TRAINER1_CLASS;
+                        }
+                    }
+                    txt++;
+                }
+            }
+        }
+        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && gTrainerBattleOpponent_B < TRAINERS_COUNT)
+        {
+            if (gTrainers[gTrainerBattleOpponent_B].trainerClass == TRAINER_CLASS_TEAM_MAGMA || gTrainers[gTrainerBattleOpponent_B].trainerClass == TRAINER_CLASS_TEAM_AQUA)
+            {
+                toSwap = NULL, txt = txtBuff;
+                while (*txt != EOS)
+                {
+                    if (*txt == PLACEHOLDER_BEGIN)
+                    {
+                        txt++;
+                        if (*txt == B_TXT_TRAINER2_CLASS)
+                        {
+                            toSwap = txt;
+                        }
+                        else if (*txt == B_TXT_TRAINER2_NAME && toSwap != NULL)
+                        {
+                            *toSwap = B_TXT_TRAINER2_NAME;
+                            *txt = B_TXT_TRAINER2_CLASS;
+                        }
+                    }
+                    txt++;
+                }
+            }
+        }
+    }
+
+    BattleStringExpandPlaceholdersToDisplayedString(txtBuff);
+    Free(txtBuff);
 }
 
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8* src)
@@ -2381,6 +2446,7 @@ static const u8* TryGetStatusString(u8 *src)
     return NULL;
 }
 
+// difference fr ; wild Pokemon -> Pokemon wild
 #define HANDLE_NICKNAME_STRING_CASE(battlerId, monIndex)                \
     if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)                     \
     {                                                                   \
@@ -2388,20 +2454,19 @@ static const u8* TryGetStatusString(u8 *src)
             toCpy = sText_FoePkmnPrefix;                                \
         else                                                            \
             toCpy = sText_WildPkmnPrefix;                               \
-        while (*toCpy != EOS)                                           \
-        {                                                               \
-            dst[dstID] = *toCpy;                                        \
-            dstID++;                                                    \
-            toCpy++;                                                    \
-        }                                                               \
+                                                                        \
         GetMonData(&gEnemyParty[monIndex], MON_DATA_NICKNAME, text);    \
+        StringGet_Nickname(text);                                       \
+        StringAppend(text, toCpy);                                      \
     }                                                                   \
     else                                                                \
     {                                                                   \
         GetMonData(&gPlayerParty[monIndex], MON_DATA_NICKNAME, text);   \
+        StringGet_Nickname(text);                                       \
     }                                                                   \
-    StringGet_Nickname(text);                                           \
+                                           \
     toCpy = text;
+
 
 u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
 {
@@ -2512,8 +2577,23 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 toCpy = text;
                 break;
             case B_TXT_ATK_NAME_WITH_PREFIX_MON1: // attacker name with prefix, only battlerId 0/1
-                HANDLE_NICKNAME_STRING_CASE(gBattlerAttacker,
-                                            gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattlerAttacker))])
+                if (GetBattlerSide(gBattlerAttacker) != B_SIDE_PLAYER)
+                {
+                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+                        toCpy = sText_FoePkmnPrefix;
+                    else
+                        toCpy = sText_WildPkmnPrefix;
+
+                    GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattlerAttacker))]], MON_DATA_NICKNAME, text);
+                    StringGet_Nickname(text);
+                    StringAppend(text, toCpy);
+                }
+                else
+                {
+                    GetMonData(&gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattlerAttacker))]], MON_DATA_NICKNAME, text);
+                    StringGet_Nickname(text);
+                }
+                toCpy = text;
                 break;
             case B_TXT_ATK_PARTNER_NAME: // attacker partner name
                 if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
@@ -2551,36 +2631,13 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 else
                     toCpy = gMoveNames[gBattleMsgDataPtr->originallyUsedMove];
                 break;
-            case B_TXT_LAST_ITEM: // last used item
+            case B_TXT_LAST_ITEM: // difference fr less enigma berry checks
                 if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
                 {
                     if (gLastUsedItem == ITEM_ENIGMA_BERRY)
                     {
-                        if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
-                        {
-                            if ((gBattleScripting.multiplayerId != 0 && (gPotentialItemEffectBattler & BIT_SIDE))
-                                || (gBattleScripting.multiplayerId == 0 && !(gPotentialItemEffectBattler & BIT_SIDE)))
-                            {
-                                StringCopy(text, gEnigmaBerries[gPotentialItemEffectBattler].name);
-                                StringAppend(text, sText_BerrySuffix);
-                                toCpy = text;
-                            }
-                            else
-                            {
-                                toCpy = sText_EnigmaBerry;
-                            }
-                        }
-                        else
-                        {
-                            if (gLinkPlayers[gBattleScripting.multiplayerId].id == gPotentialItemEffectBattler)
-                            {
-                                StringCopy(text, gEnigmaBerries[gPotentialItemEffectBattler].name);
-                                StringAppend(text, sText_BerrySuffix);
-                                toCpy = text;
-                            }
-                            else
-                                toCpy = sText_EnigmaBerry;
-                        }
+                        CopyItemName(gLastUsedItem, text);
+                        toCpy = text;
                     }
                     else
                     {
@@ -2610,21 +2667,30 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 toCpy = gAbilityNames[sBattlerAbilities[gEffectBattler]];
                 break;
             case B_TXT_TRAINER1_CLASS: // trainer class name
+            {
+                s32 gender = -1, trClass;
+                const u8 *trName = NULL;
                 if (gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)
-                    toCpy = gTrainerClassNames[GetSecretBaseTrainerClass()];
+                    trClass = GetSecretBaseTrainerClass();
                 else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
-                    toCpy = gTrainerClassNames[GetUnionRoomTrainerClass()];
+                    trClass = GetUnionRoomTrainerClass();
                 else if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
-                    toCpy = gTrainerClassNames[GetFrontierBrainTrainerClass()];
+                    trClass = GetFrontierBrainTrainerClass();
                 else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
-                    toCpy = gTrainerClassNames[GetFrontierOpponentClass(gTrainerBattleOpponent_A)];
+                    trClass = GetFrontierOpponentClass(gTrainerBattleOpponent_A), gender = GetFrontierOpponentClass(gTrainerBattleOpponent_A);
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
-                    toCpy = gTrainerClassNames[GetTrainerHillOpponentClass(gTrainerBattleOpponent_A)];
+                    trClass = GetTrainerHillOpponentClass(gTrainerBattleOpponent_A);
                 else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
-                    toCpy = gTrainerClassNames[GetEreaderTrainerClassId()];
+                    trClass = GetEreaderTrainerClassId();
                 else
-                    toCpy = gTrainerClassNames[gTrainers[gTrainerBattleOpponent_A].trainerClass];
+                {
+                    trClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
+                    gender = gTrainers[gTrainerBattleOpponent_A].encounterMusic_gender & 0x7F;
+                    trName = gTrainers[gTrainerBattleOpponent_A].trainerName;
+                }
+                toCpy = GetTrainerClassNameGenderSpecific(trClass, gender, trName);
                 break;
+            }
             case B_TXT_TRAINER1_NAME: // trainer1 name
                 if (gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)
                 {
@@ -2758,13 +2824,22 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     toCpy = sText_FoePkmnPrefix4;
                 break;
             case B_TXT_TRAINER2_CLASS:
+            {
+                s32 gender = -1, trClass;
+                const u8 *trName = NULL;
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
-                    toCpy = gTrainerClassNames[GetFrontierOpponentClass(gTrainerBattleOpponent_B)];
+                    trClass = GetFrontierOpponentClass(gTrainerBattleOpponent_B), gender = GetFrontierOpponentClass(gTrainerBattleOpponent_B);
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
-                    toCpy = gTrainerClassNames[GetTrainerHillOpponentClass(gTrainerBattleOpponent_B)];
+                    trClass = GetTrainerHillOpponentClass(gTrainerBattleOpponent_B);
                 else
-                    toCpy = gTrainerClassNames[gTrainers[gTrainerBattleOpponent_B].trainerClass];
+                {
+                    trClass = gTrainers[gTrainerBattleOpponent_B].trainerClass;
+                    gender = gTrainers[gTrainerBattleOpponent_B].encounterMusic_gender & 0x7F;
+                    trName = gTrainers[gTrainerBattleOpponent_B].trainerName;
+                }
+                toCpy = GetTrainerClassNameGenderSpecific(trClass, gender, trName);
                 break;
+            }
             case B_TXT_TRAINER2_NAME:
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 {
@@ -2810,8 +2885,12 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 }
                 break;
             case B_TXT_PARTNER_CLASS:
-                toCpy = gTrainerClassNames[GetFrontierOpponentClass(gPartnerTrainerId)];
+            {
+                s32 trClass = GetFrontierOpponentClass(gPartnerTrainerId);
+                s32 gender = GetFrontierOpponentClass(gPartnerTrainerId);
+                toCpy = GetTrainerClassNameGenderSpecific(trClass, gender, NULL);
                 break;
+            }
             case B_TXT_PARTNER_NAME:
                 GetFrontierTrainerName(text, gPartnerTrainerId);
                 toCpy = text;
@@ -2848,7 +2927,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
     return dstID;
 }
 
-static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
+static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst) // difference FR
 {
     u32 srcID = 1;
     u32 value = 0;
@@ -2862,6 +2941,8 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
         {
         case B_BUFF_STRING: // battle string
             hword = T1_READ_16(&src[srcID + 1]);
+            if (hword == STRINGID_STATSHARPLY || hword == STRINGID_STATHARSHLY)
+                srcID += 3;
             StringAppend(dst, gBattleStringsTable[hword - BATTLESTRINGS_TABLE_START]);
             srcID += 3;
             break;
@@ -2893,18 +2974,18 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             if (GetBattlerSide(src[srcID + 1]) == B_SIDE_PLAYER)
             {
                 GetMonData(&gPlayerParty[src[srcID + 2]], MON_DATA_NICKNAME, text);
+                StringGet_Nickname(text);
+                StringAppend(dst, text);
             }
             else
             {
+                GetMonData(&gEnemyParty[src[srcID + 2]], MON_DATA_NICKNAME, text);
+                StringGet_Nickname(text);
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                     StringAppend(dst, sText_FoePkmnPrefix);
                 else
                     StringAppend(dst, sText_WildPkmnPrefix);
-
-                GetMonData(&gEnemyParty[src[srcID + 2]], MON_DATA_NICKNAME, text);
             }
-            StringGet_Nickname(text);
-            StringAppend(dst, text);
             srcID += 3;
             break;
         case B_BUFF_STAT: // stats
@@ -2937,15 +3018,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             {
                 if (hword == ITEM_ENIGMA_BERRY)
                 {
-                    if (gLinkPlayers[gBattleScripting.multiplayerId].id == gPotentialItemEffectBattler)
-                    {
-                        StringCopy(dst, gEnigmaBerries[gPotentialItemEffectBattler].name);
-                        StringAppend(dst, sText_BerrySuffix);
-                    }
-                    else
-                    {
-                        StringAppend(dst, sText_EnigmaBerry);
-                    }
+                    CopyItemName(hword, dst);
                 }
                 else
                 {

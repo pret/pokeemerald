@@ -209,6 +209,7 @@ bool8 MailboxMenu_Alloc(u8 count)
     return TRUE;
 }
 
+// difference FR
 u8 MailboxMenu_AddWindow(u8 windowIdx)
 {
     if (sMailboxWindowIds[windowIdx] == WINDOW_NONE)
@@ -217,6 +218,13 @@ u8 MailboxMenu_AddWindow(u8 windowIdx)
         {
             struct WindowTemplate template = sWindowTemplates_MailboxMenu[windowIdx];
             template.width = GetMaxWidthInMenuTable(&gMailboxMailOptions[0], 4);
+            sMailboxWindowIds[windowIdx] = AddWindow(&template);
+        }
+        else if (windowIdx == MAILBOXWIN_TITLE)
+        {
+            struct WindowTemplate template = sWindowTemplates_MailboxMenu[windowIdx];
+            s32 width = GetStringWidth(FONT_NORMAL, gText_Mailbox, 0) + 9;
+            template.width = (width / 8) + 2;
             sMailboxWindowIds[windowIdx] = AddWindow(&template);
         }
         else // MAILBOXWIN_TITLE or MAILBOXWIN_LIST

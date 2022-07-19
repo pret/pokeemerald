@@ -1574,7 +1574,7 @@ void GetFrontierTrainerName(u8 *dst, u16 trainerId)
     dst[i] = EOS;
 }
 
-static bool8 IsFrontierTrainerFemale(u16 trainerId)
+bool8 IsFrontierTrainerFemale(u16 trainerId)
 {
     u32 i;
     u8 facilityClass;
@@ -1916,7 +1916,48 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
     }
 }
 
+// difference FR
 void FrontierSpeechToString(const u16 *words)
+{
+    UnusedConvertEasyChatWordsToString(gStringVar4, words, 2, 3);
+    /*
+    if (GetStringWidth(FONT_NORMAL, gStringVar4, -1) > 204u)
+    {
+        s32 i = 0;
+
+        ConvertEasyChatWordsToString(gStringVar4, words, 2, 3);
+        while (gStringVar4[i++] != CHAR_NEWLINE)
+            ;
+        while (gStringVar4[i] != CHAR_NEWLINE)
+            i++;
+
+        gStringVar4[i] = CHAR_PROMPT_SCROLL;
+    }
+    */
+}
+
+static void GetOpponentIntroSpeech(void)
+{
+    u16 trainerId;
+    SetFacilityPtrsGetLevel();
+
+    if (gSpecialVar_0x8005)
+        trainerId = gTrainerBattleOpponent_B;
+    else
+        trainerId = gTrainerBattleOpponent_A;
+
+    if (trainerId == TRAINER_EREADER)
+        FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.greeting);
+    else if (trainerId < FRONTIER_TRAINERS_COUNT)
+        FrontierSpeechToString(gFacilityTrainers[trainerId].speechBefore);
+    else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
+        FrontierSpeechToString(gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].greeting);
+    else
+        BufferApprenticeChallengeText(trainerId - TRAINER_RECORD_MIXING_APPRENTICE);
+}
+
+// new difference FR
+void FrontierSpeechToString2(const u16 *words)
 {
     ConvertEasyChatWordsToString(gStringVar4, words, 3, 2);
     if (GetStringWidth(FONT_NORMAL, gStringVar4, -1) > 204u)
@@ -1933,7 +1974,7 @@ void FrontierSpeechToString(const u16 *words)
     }
 }
 
-static void GetOpponentIntroSpeech(void)
+void GetOpponentIntroSpeech2(void)
 {
     u16 trainerId;
     SetFacilityPtrsGetLevel();
@@ -2678,6 +2719,7 @@ static void SetTowerInterviewData(void)
 
     GetFrontierTrainerName(text, gTrainerBattleOpponent_A);
     StripExtCtrlCodes(text);
+    text[7] = EOS; // difference FR added this line
     StringCopy(gSaveBlock2Ptr->frontier.towerInterview.opponentName, text);
     GetBattleTowerTrainerLanguage(&gSaveBlock2Ptr->frontier.towerInterview.opponentLanguage, gTrainerBattleOpponent_A);
     gSaveBlock2Ptr->frontier.towerInterview.opponentSpecies = GetMonData(&gEnemyParty[gBattlerPartyIndexes[1]], MON_DATA_SPECIES, NULL);
