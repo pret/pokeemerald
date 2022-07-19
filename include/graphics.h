@@ -5063,4 +5063,9 @@ extern const u8 gMailTilemap_Retro[];
 extern const u8 gMonMarkingsMenu_Gfx[];
 extern const u16 gMonMarkingsMenu_Pal[];
 
+// french version moved gfx
+extern const u16 gPokeJumpBonuses_Pal[];
+extern const u32 gPokeJumpBonuses_Gfx[];
+extern const u32 gPokeJumpBonuses_Tilemap[];
+
 #endif //GUARD_GRAPHICS_H

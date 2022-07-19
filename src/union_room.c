@@ -2469,7 +2469,7 @@ static void ScheduleFieldMessageAndExit(const u8 *src)
 static void CopyPlayerListToBuffer(struct WirelessLink_URoom *uroom)
 {
     memcpy(&gDecompressionBuffer[sizeof(gDecompressionBuffer) - (MAX_UNION_ROOM_LEADERS * sizeof(struct RfuPlayer))],
-            uroom->playerList, 
+            uroom->playerList,
             MAX_UNION_ROOM_LEADERS * sizeof(struct RfuPlayer));
 }
 

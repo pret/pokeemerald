@@ -1523,6 +1523,11 @@ const u16 gBerryCrush_Crusher_Pal[] = INCBIN_U16("graphics/berry_crush/crusher.g
 const u32 gBerryCrush_Crusher_Gfx[] = INCBIN_U32("graphics/berry_crush/crusher.4bpp.lz");
 const u32 gBerryCrush_TextWindows_Tilemap[] = INCBIN_U32("graphics/berry_crush/text_windows.bin.lz");
 
+// Moved from other files in the french version. Todo sort the gfx in the right order
+const u16 gPokeJumpBonuses_Pal[] = INCBIN_U16("graphics/pokemon_jump/bonuses.gbapal");
+const u32 gPokeJumpBonuses_Gfx[] = INCBIN_U32("graphics/pokemon_jump/bonuses.4bpp.lz");
+const u32 gPokeJumpBonuses_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/bonuses.bin.lz");
+
 // random garbage at the end.
 static const u8 sEmpty3[0x54BAC] = {0};
 static const u8 sUnused1[]       = {0x0D, 0x00, 0x58, 0x02};
