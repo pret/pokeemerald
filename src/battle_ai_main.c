@@ -291,7 +291,7 @@ void GetAiLogicData(void)
                  && move != 0xFFFF
                  //&& gBattleMoves[move].power != 0  /* we want to get effectiveness of status moves */
                  && !(AI_DATA->moveLimitations[battlerAtk] & gBitTable[i])) {
-                    dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness);
+                    dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness, TRUE);
                 }
                 
                 AI_DATA->simulatedDmg[battlerAtk][battlerDef][i] = dmg;

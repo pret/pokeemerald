@@ -153,6 +153,8 @@ bool32 CanFling(u8 battlerId);
 bool32 IsTelekinesisBannedSpecies(u16 species);
 bool32 IsHealBlockPreventingMove(u32 battler, u32 move);
 bool32 HasEnoughHpToEatBerry(u32 battlerId, u32 hpFraction, u32 itemId);
+bool32 IsPartnerMonFromSameTrainer(u8 battlerId);
+u8 GetSplitBasedOnStats(u8 battlerId);
 void SortBattlersBySpeed(u8 *battlers, bool8 slowToFast);
 bool32 TestSheerForceFlag(u8 battler, u16 move);
 void TryRestoreStolenItems(void);

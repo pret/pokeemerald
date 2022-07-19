@@ -467,6 +467,25 @@ struct Illusion
     struct Pokemon *mon;
 };
 
+struct ZMoveData
+{
+    u8 viable:1;    // current move can become a z move
+    u8 viewing:1;  // if player is viewing the z move name instead of regular moves
+    u8 active:1;   // is z move being used this turn
+    u8 zStatusActive:1;
+    u8 healReplacement:1;
+    u8 activeSplit:2;  // active z move split
+    u8 zUnused:1;
+    u8 triggerSpriteId;
+    u8 possibleZMoves[MAX_BATTLERS_COUNT];
+    u16 chosenZMove;  // z move of move cursor is on
+    u8 effect;
+    u8 used[MAX_BATTLERS_COUNT];   //one per bank for multi-battles
+    u16 toBeUsed[MAX_BATTLERS_COUNT];  // z moves per battler to be used
+    u16 baseMoves[MAX_BATTLERS_COUNT];
+    u8 splits[MAX_BATTLERS_COUNT];
+};
+
 struct StolenItem
 {
     u16 originalItem:15;
@@ -571,6 +590,7 @@ struct BattleStruct
     u8 abilityPopUpSpriteIds[MAX_BATTLERS_COUNT][2];    // two per battler
     bool8 throwingPokeBall;
     struct MegaEvolutionData mega;
+    struct ZMoveData zmove;
     const u8 *trainerSlideMsg;
     bool8 trainerSlideLowHpMsgDone;
     u8 introState;
@@ -595,6 +615,7 @@ struct BattleStruct
     u8 quickClawBattlerId;
     struct StolenItem itemStolen[PARTY_SIZE];  // Player's team that had items stolen (two bytes per party member)
     u8 blunderPolicy:1; // should blunder policy activate
+    u8 swapDamageCategory:1; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
     u8 ballSpriteIds[2];    // item gfx, window gfx
     u8 stickyWebUser;
     u8 appearedInBattle; // Bitfield to track which Pokemon appeared in battle. Used for Burmy's form change
@@ -811,7 +832,7 @@ extern u16 gBattle_WIN1V;
 extern u8 gDisplayedStringBattle[400];
 extern u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT];
 extern u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT];
-extern u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT];
+extern u8 gBattleTextBuff3[30]; //to handle stupidly large z move names
 extern u32 gBattleTypeFlags;
 extern u8 gBattleTerrain;
 extern u32 gUnusedFirstBattleVar1;
@@ -918,7 +939,6 @@ extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 extern bool8 gHasFetchedBall;
 extern u8 gLastUsedBall;
 extern u16 gLastThrownBall;
-extern bool8 gSwapDamageCategory; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
 extern u8 gPartyCriticalHits[PARTY_SIZE];
 
 #endif // GUARD_BATTLE_H
