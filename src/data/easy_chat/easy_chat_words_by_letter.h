@@ -2567,6 +2567,9 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseWa[] = {
     EC_POKEMON(MACHOP),
 };
 
+// The above need to dumped, this lazy hack is just so the rom matches offset-wise.
+static const u16 sLazyHackToMatch[0x12] = {0};
+
 const struct EasyChatWordsByLetter gEasyChatWordsByLetterPointers[EC_NUM_ALPHABET_GROUPS + 18] = { // 18 unused JP groups
     {
         .words = gEasyChatWordsByLetter_Others,
