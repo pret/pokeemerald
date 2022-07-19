@@ -54,6 +54,7 @@ POKEBLOCK   = 55 56 57 58 59
 '%'         = 5B
 '('         = 5C
 ')'         = 5D
+Pco			= 64 @ Battle Points symbol
 'â'         = 68
 'í'         = 6F
 UNK_SPACER  = 77
