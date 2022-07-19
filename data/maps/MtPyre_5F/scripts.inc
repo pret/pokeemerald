@@ -9,17 +9,17 @@ MtPyre_4F_EventScript_Tasha::
 	end
 
 MtPyre_4F_Text_TashaIntro:
-	.string "I love all things horrifying…\n"
-	.string "It's like a disease…\p"
-	.string "When I'm here…\n"
-	.string "I shiver with fear…$"
+	.string "J’aime tout ce qui fait peur…\n"
+	.string "C’est comme une maladie…\p"
+	.string "Quand je suis ici…\n"
+	.string "Je tremble de peur…$"
 
 MtPyre_4F_Text_TashaDefeat:
-	.string "Losing, I dislike…$"
+	.string "Perdre, je déteste ça…$"
 
 MtPyre_4F_Text_TashaPostBattle:
-	.string "I want to see dreadful things…\n"
-	.string "I can't leave…\p"
-	.string "Stay…\n"
-	.string "Won't you stay with me?$"
+	.string "Je veux voir des choses atroces…\n"
+	.string "Je ne peux pas partir…\p"
+	.string "Reste…\n"
+	.string "Tu ne vas pas rester avec moi?$"
 

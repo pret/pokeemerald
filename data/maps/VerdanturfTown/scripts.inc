@@ -64,64 +64,68 @@ VerdanturfTown_EventScript_RusturfTunnelSign::
 	end
 
 VerdanturfTown_Text_ManTryingToDigTunnel:
-	.string "My papa told me.\p"
-	.string "He says this tunnel is full of\n"
-	.string "timid POKéMON.\p"
-	.string "They get all scared of loud noise and\n"
-	.string "make a big uproar.\p"
-	.string "So they had to stop the big tunnel\n"
-	.string "project.\p"
-	.string "But there's one man. He's trying to dig\n"
-	.string "the tunnel by himself!$"
+	.string "Mon papa m’a tout raconté.\p"
+	.string "Il dit que ce tunnel est rempli de\n"
+	.string "POKéMON craintifs.\p"
+	.string "Ils ont tous peur du bruit et font\n"
+	.string "beaucoup de brouhaha.\p"
+	.string "Alors ils ont été obligés d’arrêter le\n"
+	.string "projet du tunnel.\p"
+	.string "Mais il y a encore un homme. Il essaie de\n"
+	.string "creuser le tunnel tout seul!$"
 
 VerdanturfTown_Text_ManDugTunnelForLove:
-	.string "There was a man who dug a tunnel for\n"
-	.string "a lady he loved.\p"
-	.string "I don't really get it, but hey!$"
+	.string "Il y a un type qui a creusé un\n"
+	.string "tunnel pour la fille qu’il aime.\p"
+	.string "Moi, je n’le ferais pas, mais bon,\n"
+	.string "après tout…$"
 
 VerdanturfTown_Text_AirCleanHere:
-	.string "The way the winds blow, volcanic ash\n"
-	.string "is never blown in this direction.\p"
-	.string "The air is clean and delicious here.\n"
-	.string "Living here should do wonders for even\l"
-	.string "frail and sickly people.$"
+	.string "Le vent n’amène jamais les cendres\n"
+	.string "volcaniques par là.\p"
+	.string "L’air est sain et délicieux ici.\n"
+	.string "Vivre ici est très bénéfique, surtout\l"
+	.string "pour les personnes chétives et malades.$"
 
 VerdanturfTown_Text_MakeBattleTentDebut:
-	.string "My POKéMON and I, we've been riding\n"
-	.string "a hot winning streak.\p"
-	.string "So I decided to make my BATTLE TENT\n"
-	.string "debut in this town.$"
+	.string "Mes POKéMON et moi venons de réussir\n"
+	.string "une grande série de victoires\l"
+	.string "consécutives.\p"
+	.string "Alors j’ai décidé de nous essayer à la\n"
+	.string "TENTE DE COMBAT de cette ville.$"
 
 VerdanturfTown_Text_GuyTryingToBustThroughCave:
-	.string "Did you see the cave next to the\n"
-	.string "POKéMON MART?\p"
-	.string "There's a guy in there who's trying to\n"
-	.string "bust up boulders so he can bust out\l"
-	.string "through to the other side.\p"
-	.string "It'd be great if we could go through…\n"
-	.string "It'll make it easy to visit RUSTBORO.$"
+	.string "As-tu vu la caverne près de la\n"
+	.string "BOUTIQUE POKéMON?\p"
+	.string "Il y a un type là-bas qui essaie de\n"
+	.string "casser des rochers pour pouvoir passer\l"
+	.string "et se rendre de ce côté.\p"
+	.string "Ce serait super de pouvoir passer…\n"
+	.string "Ça serait facile d’aller à MEROUVILLE.$"
 
 VerdanturfTown_Text_EasyToGetToRustboroNow:
-	.string "That cave next to the POKéMON MART\n"
-	.string "is now a tunnel to the other side.\p"
-	.string "It's great--it's easy to go shop for\n"
-	.string "new DEVON products in RUSTBORO now.$"
+	.string "Tu sais, cette caverne près de la\n"
+	.string "BOUTIQUE POKéMON, elle relie\l"
+	.string "désormais les deux côtés.\p"
+	.string "C’est super! Plus de problème pour faire\n"
+	.string "des courses chez DEVON à MEROUVILLE.$"
 
 VerdanturfTown_Text_TownSign:
-	.string "VERDANTURF TOWN\p"
-	.string "“The windswept highlands with the\n"
-	.string "sweet fragrance of grass.”$"
+	.string "VERGAZON\p"
+	.string "“Les montagnes où le vent souffle et\n"
+	.string "où le doux parfum de l’herbe se dégage.”$"
 
 VerdanturfTown_Text_WandasHouse:
-	.string "WANDA'S HOUSE$"
+	.string "MAISON DE SYLVIE$"
 
 VerdanturfTown_Text_BattleTentSign:
-	.string "BATTLE TENT VERDANTURF SITE\n"
-	.string "“Feast Your Eyes on Battles!”$"
+	.string "TENTE DE COMBAT de VERGAZON\n"
+	.string "“Venez admirer nos combats!”$"
 
 VerdanturfTown_Text_RusturfTunnelSign:
-	.string "RUSTURF TUNNEL\n"
-	.string "“Linking RUSTBORO and VERDANTURF\p"
-	.string "“The tunnel project has been\n"
-	.string "canceled.”$"
+	.string "TUNNEL MERAZON\n"
+	.string "“Passage entre MEROUVILLE\l"
+	.string "et VERGAZON”.\p"
+	.string "“Le projet de création du tunnel\n"
+	.string "a été annulé.”$"
 

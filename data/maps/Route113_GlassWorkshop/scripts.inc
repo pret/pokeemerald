@@ -292,89 +292,89 @@ Route113_GlassWorkshop_EventScript_NinjaBoy::
 	end
 
 Route113_GlassWorkshop_Text_GoCollectAshWithThis:
-	.string "This area is covered in volcanic ash,\n"
-	.string "huff-puff!\p"
-	.string "I'm specially gifted, huff-puff.\p"
-	.string "I make glass out of volcanic ash\n"
-	.string "and make items, huff-puff.\p"
-	.string "Go collect ashes with this, huff-puff.$"
+	.string "Cette zone est couverte de cendres\n"
+	.string "volcaniques, rheu-teu!\p"
+	.string "J’ai un talent unique, rheu-teu.\p"
+	.string "Je peux fabriquer du verre avec des\n"
+	.string "cendres volcaniques, rheu-teu.\p"
+	.string "Va ramasser des cendres, rheu-teu.$"
 
 Route113_GlassWorkshop_Text_ExplainSootSack:
-	.string "Just take that SOOT SACK and walk\n"
-	.string "through piles of ash, huff-puff.\p"
-	.string "And it will fill up with the volcanic ash,\n"
-	.string "huff-puff.\p"
-	.string "Once you think you've collected a good\n"
-	.string "amount, come see me, huff-puff.$"
+	.string "Prends ce SAC A SUIE et marche\n"
+	.string "dans les cendres, rheu-teu.\p"
+	.string "Il se remplira de cendres volcaniques,\n"
+	.string "rheu-teu.\p"
+	.string "Lorsque tu penses en avoir ramassé\n"
+	.string "assez, reviens me voir, rheu-teu.$"
 
 Route113_GlassWorkshop_Text_LetsSeeCollectedAshes:
-	.string "Have you collected ashes, huff-puff?\n"
-	.string "Let me see, huff-puff.$"
+	.string "Tu as ramassé des cendres, rheu-teu?\n"
+	.string "Voyons donc, rheu-teu.$"
 
 Route113_GlassWorkshop_Text_NotEnoughAshNeedX:
 	.string "Hmmm…\n"
-	.string "There's not enough ash here, huff-puff.\l"
-	.string "I can't make glass with this, huff-puff.\p"
-	.string "Let's see… {STR_VAR_1} is the number of steps\n"
-	.string "you'll need to walk for me to make you\l"
-	.string "a BLUE FLUTE, huff-puff.$"
+	.string "Il n’y a pas assez de cendres, rheu-teu.\l"
+	.string "Je ne peux pas faire de verre, rheu-teu.\p"
+	.string "Voyons un peu… Tu dois faire {STR_VAR_1} pas\n"
+	.string "dans la cendre si tu veux que je te\l"
+	.string "fabrique une FLUTE BLEUE, rheu-teu.$"
 
 Route113_GlassWorkshop_Text_WhichGlassItemWoudYouLike:
 	.string "Oh!\n"
-	.string "You've got a lot of ashes, huff-puff!\p"
-	.string "I'll make you a glass item, huff-puff!\n"
-	.string "Which one would you like, huff-puff?$"
+	.string "Tu as beaucoup de cendres, rheu-teu!\p"
+	.string "Je vais te faire un objet en verre,\n"
+	.string "rheu-teu! Que veux-tu, rheu-teu?$"
 
 Route113_GlassWorkshop_Text_IsThatTheItemForYou:
-	.string "A {STR_VAR_1}, huff-puff?\n"
-	.string "Is that the one for you, huff-puff?$"
+	.string "Une {STR_VAR_1}, rheu-teu?\n"
+	.string "C’est ce que tu veux, rheu-teu?$"
 
 Route113_GlassWorkshop_Text_WhichWouldYouLike:
-	.string "Which one would you like, huff-puff?$"
+	.string "Que veux-tu, rheu-teu?$"
 
 Route113_GlassWorkshop_Text_IllMakeItemForYou:
-	.string "A {STR_VAR_1} it is, then, huff-puff!\p"
-	.string "Okay! I'll make it for you, huff-puff.\n"
-	.string "Just wait a little while, huff-puff.$"
+	.string "{STR_VAR_1}? Très bien, rheu-teu!\p"
+	.string "Je vais te faire ça, rheu-teu.\n"
+	.string "Attends une minute, rheu-teu.$"
 
 Route113_GlassWorkshop_Text_NotEnoughAshToMakeItem:
-	.string "A {STR_VAR_1}, huff-puff?\p"
-	.string "There's not enough ash here to make\n"
-	.string "that, though, huff-puff.\p"
-	.string "Let's see… {STR_VAR_2} is the number of steps\n"
-	.string "you'll need to walk through volcanic ash\l"
-	.string "for me to make that item, huff-puff.\p"
-	.string "Which item would you rather have me\n"
-	.string "make instead, huff-puff?$"
+	.string "{STR_VAR_1}, rheu-teu?\p"
+	.string "Il n’y a pas assez de cendres pour\n"
+	.string "fabriquer cet objet, rheu-teu.\p"
+	.string "Voyons un peu… Tu dois faire {STR_VAR_2} pas\n"
+	.string "dans la cendre si tu veux que je\l"
+	.string "fabrique cet objet, rheu-teu.\p"
+	.string "Veux-tu que je te fabrique un autre\n"
+	.string "objet à la place, rheu-teu?$"
 
 Route113_GlassWorkshop_Text_AllThatAshButDontWantAnything:
-	.string "You've collected all that ash, but you\n"
-	.string "don't want anything, huff-puff?$"
+	.string "Tu as ramassé toute cette cendre,\n"
+	.string "mais tu ne veux rien, rheu-teu?$"
 
 Route113_GlassWorkshop_Text_IveFinishedGlassItem:
-	.string "Ah, I've finished your {STR_VAR_1}.\n"
-	.string "Take it, huff-puff.$"
+	.string "Ah, j’ai fini {STR_VAR_1}.\n"
+	.string "Prends, rheu-teu.$"
 
 Route113_GlassWorkshop_Text_NoRoomInBag:
-	.string "Oh?\n"
-	.string "You've no room in your BAG, huff-puff.\p"
-	.string "I'll hold on to it, so come back later,\n"
-	.string "huff-puff.$"
+	.string "C’est vraiment bête,\n"
+	.string "rheu-teu.\p"
+	.string "Je vais garder l’objet. Reviens me voir\n"
+	.string "plus tard, rheu-teu.$"
 
 Route113_GlassWorkshop_Text_NoRoomInPC:
-	.string "Oh?\n"
-	.string "You've no room in your PC, huff-puff?\p"
-	.string "I'll hold on to it, so come back later,\n"
-	.string "huff-puff.$"
+	.string "C’est vraiment bête,\n"
+	.string "rheu-teu.\p"
+	.string "Je vais garder l’objet. Reviens me voir\n"
+	.string "plus tard, rheu-teu.$"
 
 Route113_GlassWorkshop_Text_HaventGotYourSootSack:
-	.string "Hah? You haven't got your SOOT SACK\n"
-	.string "with you, huff-puff.\p"
-	.string "You have to keep it with you to collect\n"
-	.string "volcanic ash, huff-puff.$"
+	.string "Hein? Tu n’as pas ton SAC A SUIE sur\n"
+	.string "toi, rheu-teu.\p"
+	.string "Tu dois l’avoir sur toi pour ramasser\n"
+	.string "des cendres volcaniques, rheu-teu.$"
 
 Route113_GlassWorkshop_Text_FunToBlowGlassFlute:
-	.string "It's fun to blow a glass flute while\n"
-	.string "my boss is talking.\p"
-	.string "Huff-huff! Puff-puff!$"
+	.string "C’est rigolo de jouer de la flûte en\n"
+	.string "verre pendant que mon patron discute.\p"
+	.string "Rheu-rheu! Teu-teu!$"
 

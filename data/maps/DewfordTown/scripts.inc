@@ -639,164 +639,165 @@ DewfordTown_EventScript_PhraseNotTrendyEnough::
 	end
 
 DewfordTown_Text_TinyIslandCommunity:
-	.string "DEWFORD is a tiny island community.\n"
-	.string "If something gets trendy here,\l"
-	.string "everyone picks up on it right away.$"
+	.string "Le VILLAGE MYOKARA est une petite\n"
+	.string "communauté insulaire.\p"
+	.string "Ici, quand un truc est à la mode,\n"
+	.string "tout le monde se l’arrache.$"
 
 DewfordTown_Text_TownSign:
-	.string "DEWFORD TOWN\n"
-	.string "“A tiny island in the blue sea.”$"
+	.string "VILLAGE MYOKARA\n"
+	.string "“Une petite île au cœur de la mer.”$"
 
 DewfordTown_Text_GymSign:
-	.string "DEWFORD TOWN POKéMON GYM\n"
-	.string "LEADER: BRAWLY\l"
-	.string "“A big wave in fighting!”$"
+	.string "ARENE POKéMON du VILLAGE MYOKARA\n"
+	.string "CHAMPION: BASTIEN\l"
+	.string "“Une vraie déferlante au combat.”$"
 
 DewfordTown_Text_HallSign:
-	.string "DEWFORD HALL\n"
-	.string "“Everyone's information exchange!”$"
+	.string "CENTRE CULTUREL DE MYOKARA\n"
+	.string "“Echange de tous types\l"
+	.string "d’informations!”$"
 
 Route104_Text_LandedInDewfordDeliverLetter:
-	.string "MR. BRINEY: Ahoy!\n"
-	.string "We've hit land in DEWFORD.\p"
-	.string "I suppose you're off to deliver that\n"
-	.string "LETTER to, who was it now, STEVEN!$"
+	.string "M. MARCO: Oyé!\n"
+	.string "Nous sommes arrivés à MYOKARA.\p"
+	.string "Je suppose que tu vas aller remettre\n"
+	.string "cette LETTRE à ce… comment… PIERRE!$"
 
 DewfordTown_Text_SetSailBackToPetalburg:
-	.string "MR. BRINEY: Have you delivered your\n"
-	.string "LETTER?\p"
-	.string "Or were you meaning to sail back to\n"
-	.string "PETALBURG?$"
+	.string "M. MARCO: As-tu donné ta LETTRE?\p"
+	.string "Ou comptes-tu retourner à CLEMENTI?$"
 
 DewfordTown_Text_PetalburgWereSettingSail2:
-	.string "MR. BRINEY: PETALBURG it is, then!\p"
-	.string "Anchors aweigh!\n"
-	.string "PEEKO, we're setting sail, my darling!$"
+	.string "M. MARCO: Allons-y pour\n"
+	.string "CLEMENTI-VILLE!\p"
+	.string "On lève l’ancre!\n"
+	.string "PIKO, on embarque, mon chou!$"
 
 DewfordTown_Text_GoDeliverIllBeWaiting:
-	.string "MR. BRINEY: Then you go on and deliver\n"
-	.string "the LETTER. I'll be waiting.$"
+	.string "M. MARCO: Alors tu y vas et tu donnes la\n"
+	.string "LETTRE. Je t’attendrai.$"
 
 DewfordTown_Text_BrineyLandedInDewford:
-	.string "MR. BRINEY: Ahoy!\n"
-	.string "We've hit land in DEWFORD!\p"
-	.string "You just go on and tell me whenever\n"
-	.string "you want to set sail again!$"
+	.string "M. MARCO: Oyé!\n"
+	.string "Nous sommes arrivés à MYOKARA!\p"
+	.string "Tu y vas et tu n’auras qu’à me prévenir\n"
+	.string "quand tu voudras repartir en mer!$"
 
 DewfordTown_Text_WhereAreWeBound:
-	.string "MR. BRINEY: Ahoy!\n"
-	.string "For you, I'll go out to sea anytime!\p"
-	.string "Now, my friend, where are we bound?$"
+	.string "M. MARCO: Ohé!\n"
+	.string "Pour toi, je sors en mer quand tu veux!\p"
+	.string "Alors, mon camarade, où partons-nous?$"
 
 DewfordTown_Text_PetalburgWereSettingSail:
-	.string "MR. BRINEY: PETALBURG, is it?\p"
-	.string "Anchors aweigh!\n"
-	.string "PEEKO, we're setting sail, my darling!$"
+	.string "M. MARCO: CLEMENTI-VILLE, c’est ça?\p"
+	.string "On lève l’ancre!\n"
+	.string "PIKO, on embarque, mon chou!$"
 
 DewfordTown_Text_SlateportWereSettingSail:
-	.string "MR. BRINEY: SLATEPORT, is it?\p"
-	.string "Anchors aweigh!\n"
-	.string "PEEKO, we're setting sail, my darling!$"
+	.string "M. MARCO: POIVRESSEL, c’est bien ça?\p"
+	.string "On lève l’ancre!\n"
+	.string "PIKO, on embarque, mon chou!$"
 
 DewfordTown_Text_JustTellMeWhenYouNeedToSetSail:
-	.string "MR. BRINEY: You just tell me whenever\n"
-	.string "you need to set sail again!$"
+	.string "M. MARCO: Tu n’auras qu’à me prévenir\n"
+	.string "quand tu auras besoin d’embarquer!$"
 
 DewfordTown_Text_GettingItchToFish:
-	.string "This is a renowned fishing spot.\n"
-	.string "Are you getting the itch to fish?$"
+	.string "C’est un endroit renommé pour la pêche.\n"
+	.string "T’as attrapé le virus de la pêche?$"
 
 DewfordTown_Text_GiveYouOneOfMyRods:
-	.string "I hear you, and I like what\n"
-	.string "you're saying!\p"
-	.string "I'll give you one of my fishing RODS.$"
+	.string "J’ai entendu ce que tu as dit\n"
+	.string "et j’ai apprécié tes paroles!\p"
+	.string "Je te donne une de mes CANNES à pêche.$"
 
 DewfordTown_Text_ThrowInFishingAdvice:
-	.string "And, as an added bonus, I'll even throw\n"
-	.string "in a little fishing advice!\p"
-	.string "First, you want to face the water,\n"
-	.string "then use the ROD.\p"
-	.string "Focus your mind…\n"
-	.string "If you get a bite, pull on the ROD.\p"
-	.string "Sometimes you can snag something\n"
-	.string "immediately, but with bigger catches,\l"
-	.string "you need to time the pulls on your ROD\l"
-	.string "to haul them in.$"
+	.string "Et en plus, je vais même te donner un\n"
+	.string "petit conseil pour la pêche!\p"
+	.string "Tu dois d’abord te placer face à la mer\n"
+	.string "et ensuite utiliser la CANNE.\p"
+	.string "Concentre-toi…\n"
+	.string "Si ça mord, tire sur la CANNE.\p"
+	.string "Parfois, tu peux attraper quelque\n"
+	.string "chose tout de suite, mais pour les plus\l"
+	.string "grosses prises, il faut prendre le temps\l"
+	.string "de tirer sur la CANNE pour les ramener.$"
 
 DewfordTown_Text_ThatsTooBadThen:
-	.string "Oh, is that so?\n"
-	.string "That's too bad, then.$"
+	.string "Ah, c’est comme ça?\n"
+	.string "C’est vraiment dommage.$"
 
 DewfordTown_Text_HowsYourFishing:
 	.string "Yo!\n"
-	.string "How's your fishing?$"
+	.string "Alors, ça va la pêche?$"
 
 DewfordTown_Text_GreatHaulInSomeBigOnes:
-	.string "Is that right! That's great!\n"
-	.string "Haul in some big ones!$"
+	.string "C’est bien! Super!\n"
+	.string "Ramène de grosses prises!$"
 
 DewfordTown_Text_FishingAdvice:
-	.string "Oh, hey, don't get down on yourself!\n"
-	.string "I'll give you a little fishing advice.\p"
-	.string "First, you want to face the water,\n"
-	.string "then use the ROD.\p"
-	.string "Focus your mind…\n"
-	.string "If you get a bite, pull the ROD.\p"
-	.string "Sometimes you can snag something\n"
-	.string "immediately, but with bigger catches,\l"
-	.string "you need to time the pulls on your ROD\l"
-	.string "to haul them in.$"
+	.string "Oh, hé, ne t’en va pas! Je vais te donner\n"
+	.string "un petit conseil pour la pêche.\p"
+	.string "Tu dois d’abord te placer face à la mer\n"
+	.string "et ensuite utiliser la CANNE.\p"
+	.string "Concentre-toi…\n"
+	.string "Si ça mord, tire sur la CANNE.\p"
+	.string "Parfois, tu peux attraper quelque\n"
+	.string "chose tout de suite, mais pour les plus\l"
+	.string "grosses prises, il faut prendre le temps\l"
+	.string "de tirer sur la CANNE pour les ramener.$"
 
 DewfordTown_Text_XIsTheBiggestHappeningThingRight:
-	.string "I like what's hip, happening, and trendy.\n"
-	.string "I'm always checking it out.\p"
-	.string "Listen, have you heard about this new\n"
+	.string "J’aime ce qui est en vogue, branché et à\n"
+	.string "la mode. Je me tiens toujours informé.\p"
+	.string "Hé, t’as déjà entendu parler de\n"
 	.string "“{STR_VAR_1}”?\p"
-	.string "That's right!\n"
-	.string "Of course you know!\p"
-	.string "I mean, sheesh,\n"
+	.string "C’est ça!\n"
+	.string "Bien sûr que tu connais!\p"
+	.string "Forcément, ouais,\n"
 	.string "“{STR_VAR_1}”…\l"
-	.string "It's the hottest thing in cool!\p"
-	.string "Wherever you're from,\n"
-	.string "“{STR_VAR_1}”\l"
-	.string "is the biggest happening thing, right?$"
+	.string "Y a pas plus cool!\p"
+	.string "Peu importe d’où tu viens,\n"
+	.string "“{STR_VAR_1}”,\l"
+	.string "c’est ce qu’il y a de plus branché, hein?$"
 
 DewfordTown_Text_TellMeWhatsNewAndIn:
-	.string "Hunh?\n"
-	.string "It's not the hip and happening thing?\p"
-	.string "Well, hey, you have to tell me,\n"
-	.string "what's new and what's “in”?$"
+	.string "Hum?\n"
+	.string "C’est pas ce qui est à la mode?\p"
+	.string "Bon, alors dis-moi ce qui est nouveau\n"
+	.string "et “in”?$"
 
 DewfordTown_Text_OfCourseIKnowAboutThat:
-	.string "Hunh?\n"
+	.string "Hum?\n"
 	.string "“{STR_VAR_2}”?\p"
 	.string "… …\p"
-	.string "…Uh… Yeah! That's right!\n"
-	.string "Yeah, I knew that! Knew it all along!\p"
-	.string "Of course I know about that!\n"
-	.string "“{STR_VAR_2},” right?\p"
-	.string "Yeah, that's it, it's there!\n"
-	.string "Isn't “{STR_VAR_2}”\l"
-	.string "the coolest, or what?\p"
-	.string "It's the hippest thing in hip.\n"
-	.string "You think I'd not know about it?\p"
+	.string "… Hum… Ouais, c’est ça!\n"
+	.string "Ouais, je l’savais! Je l’savais déjà!\p"
+	.string "Bien sûr que j’étais au courant!\n"
+	.string "“{STR_VAR_2}”, hein?\p"
+	.string "Ouais, bien sûr, tout juste!\n"
+	.string "Attends, y a pas plus cool que\l"
+	.string "“{STR_VAR_2}”.\p"
+	.string "Y a pas plus branché en vocabulaire\n"
+	.string "branché. Tu croyais que j’savais pas?\p"
 	.string "“{STR_VAR_1}”…\n"
-	.string "It's, like, so five minutes ago.\p"
-	.string "Now, “{STR_VAR_2}” is\n"
-	.string "what's vital and in tune with the times!$"
+	.string "C’était cool il y a cinq minutes.\p"
+	.string "Mais “{STR_VAR_2}”,\n"
+	.string "c’est ce qui est à la mode maintenant!$"
 
 DewfordTown_Text_XHuhIThinkYIsCool:
-	.string "Hmm…\n"
-	.string "“{STR_VAR_2},” huh?\p"
-	.string "But personally, I think\n"
+	.string "Hum…\n"
+	.string "“{STR_VAR_2}”, hein?\p"
+	.string "Mais personnellement, je trouve que\n"
 	.string "“{STR_VAR_1}”\l"
-	.string "is what's real in cool.$"
+	.string "est définitivement plus cool.$"
 
 DewfordTown_Text_HearOfAnyTrendsComeShareWithMe:
-	.string "Well, if you hear of any happening new\n"
-	.string "trends, come share them with me, okay?$"
+	.string "Si tu entends parler de nouvelles\n"
+	.string "modes, viens m’en parler, d’accord?$"
 
 DewfordTown_Text_YeahDefinitionOfInRightNow:
-	.string "Yeah, absolutely right!\p"
-	.string "“{STR_VAR_1}” is the\n"
-	.string "definition of “in” right now.$"
+	.string "Ouais, tout à fait!\p"
+	.string "“{STR_VAR_1}”\n"
+	.string "reflète bien la tendance actuelle.$"

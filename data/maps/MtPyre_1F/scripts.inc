@@ -26,22 +26,23 @@ MtPyre_1F_EventScript_Man::
 	end
 
 MtPyre_1F_Text_TakeThisForYourOwnGood:
-	.string "All sorts of beings wander the slopes\n"
-	.string "of MT. PYRE…\p"
-	.string "There is no telling what may happen.\n"
-	.string "Take this. It's for your own good.$"
+	.string "Toutes sortes d’êtres se promènent sur\n"
+	.string "les versants du MONT MEMORIA…\p"
+	.string "On ne sait jamais ce qui peut arriver.\n"
+	.string "Prends ça. C’est pour ton bien.$"
 
 MtPyre_1F_Text_ExplainCleanseTag:
-	.string "Have a POKéMON hold that\n"
-	.string "CLEANSE TAG.\p"
-	.string "It will help ward off wild POKéMON.$"
+	.string "Fais tenir cette RUNE PURIF. à l’un\n"
+	.string "de tes POKéMON.\p"
+	.string "Ça éloignera les POKéMON sauvages.$"
 
 MtPyre_1F_Text_ComeToPayRespects:
-	.string "Did you come to pay your respect\n"
-	.string "to the spirits of departed POKéMON?\p"
-	.string "You must care for your POKéMON a lot.$"
+	.string "Es-tu là pour présenter tes respects\n"
+	.string "aux esprits des défunts POKéMON?\p"
+	.string "Tu dois prendre grand soin de tes\n"
+	.string "POKéMON.$"
 
 MtPyre_1F_Text_RestingPlaceOfZigzagoon:
-	.string "This is the final resting place of my\n"
-	.string "ZIGZAGOON. I cherished it…$"
+	.string "C’est ici que repose mon ZIGZATON.\n"
+	.string "C’est un endroit que je chéris…$"
 

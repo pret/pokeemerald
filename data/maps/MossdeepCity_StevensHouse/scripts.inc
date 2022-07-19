@@ -151,67 +151,67 @@ MossdeepCity_StevensHouse_EventScript_DiveItemBall::
 	end
 
 MossdeepCity_StevensHouse_Text_YouveEarnedHMDive:
-	.string "STEVEN: {PLAYER}{KUN}…\p"
-	.string "As you can see, there's not much here,\n"
-	.string "but this is my home.\p"
-	.string "Thank you for all that you've done.\p"
-	.string "This is my token of appreciation.\n"
-	.string "It's the HIDDEN MACHINE DIVE.\p"
-	.string "No need to be shy--you've earned\n"
-	.string "this HM.$"
+	.string "PIERRE: {PLAYER}{KUN}…\p"
+	.string "Comme tu vois, il n’y a pas grand\n"
+	.string "chose ici, mais je m’y sens bien.\p"
+	.string "Merci pour tout ce que tu as fait.\p"
+	.string "Pour te prouver ma gratitude, je\n"
+	.string "voudrais te donner cette CS!\p"
+	.string "Elle contient PLONGEE. Tu la mérites\n"
+	.string "vraiment, tu ne peux pas refuser.$"
 
 MossdeepCity_StevensHouse_Text_ExplainDive:
-	.string "STEVEN: While you're using SURF, you\n"
-	.string "should notice dark patches of water.\p"
-	.string "Use DIVE if you come to deep water\n"
-	.string "like it. You'll drop to the seafloor.\p"
-	.string "When you want to come back up, use\n"
-	.string "DIVE again.\p"
-	.string "In some places, it won't be possible\n"
-	.string "for you to surface, though.$"
+	.string "PIERRE: Quand tu utiliseras SURF,\n"
+	.string "tu verras des zones d’eau plus sombres.\p"
+	.string "Utilise PLONGEE si tu es au-dessus des\n"
+	.string "profondeurs. Tu iras au fond de la mer.\p"
+	.string "Si tu veux remonter à la surface,\n"
+	.string "utilise PLONGEE à nouveau.\p"
+	.string "Cependant, à certains endroits, il ne\n"
+	.string "sera pas possible de remonter.$"
 
 MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis:
-	.string "STEVEN: Apparently, there's an\n"
-	.string "underwater cavern between\l"
-	.string "MOSSDEEP and SOOTOPOLIS.\p"
-	.string "You know, the one that CAPT. STERN\n"
-	.string "found in his submarine.$"
+	.string "PIERRE: Apparemment, il y a une caverne\n"
+	.string "sous l’eau entre ALGATIA et\l"
+	.string "ATALANOPOLIS.\p"
+	.string "Tu sais, celle que le CAPT. POUPE\n"
+	.string "a découverte avec son sous-marin.$"
 
 MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum:
-	.string "{PLAYER} checked the POKé BALL.\p"
-	.string "It contained the POKéMON\n"
-	.string "BELDUM.\p"
-	.string "Take the POKé BALL?$"
+	.string "{PLAYER} examine la POKé BALL.\p"
+	.string "Elle contient le POKéMON\n"
+	.string "TERHAL.\p"
+	.string "Prendre la POKé BALL?$"
 
 MossdeepCity_StevensHouse_Text_ObtainedBeldum:
-	.string "{PLAYER} obtained a BELDUM.$"
+	.string "{PLAYER} reçoit un TERHAL.$"
 
 @ Unused
 MossdeepCity_StevensHouse_Text_NoSpaceForAnotherMon:
 	.string "There is no space for another POKéMON.$"
 
 MossdeepCity_StevensHouse_Text_LeftPokeBallWhereItWas:
-	.string "{PLAYER} left the POKé BALL where\n"
-	.string "it was.$"
+	.string "{PLAYER} laisse la POKé BALL à sa place.$"
 
 MossdeepCity_StevensHouse_Text_LetterFromSteven:
-	.string "It's a letter.\p"
+	.string "C’est une lettre.\p"
 	.string "… … … … … …\p"
-	.string "To {PLAYER}{KUN}…\p"
-	.string "I've decided to do a little soul-\n"
-	.string "searching and train on the road.\p"
-	.string "I don't plan to return home for some\n"
-	.string "time.\p"
-	.string "I have a favor to ask of you.\p"
-	.string "I want you to take the POKé BALL on\n"
-	.string "the desk.\p"
-	.string "Inside it is a BELDUM, my favorite\n"
-	.string "POKéMON.\p"
-	.string "I'm counting on you.\p"
-	.string "May our paths cross someday.\p"
-	.string "STEVEN STONE$"
+	.string "Pour {PLAYER}{KUN}…\p"
+	.string "J’ai décidé de faire un petit examen de\n"
+	.string "conscience et de m’entraîner en route.\p"
+	.string "Je ne prévois pas de rentrer chez moi\n"
+	.string "tout de suite.\p"
+	.string "J’ai un service à te demander.\p"
+	.string "Je veux que tu prennes la POKé BALL\n"
+	.string "qui est sur le bureau.\p"
+	.string "A l’intérieur, il y a un TERHAL, mon\n"
+	.string "POKéMON préféré.\p"
+	.string "Je compte sur toi.\p"
+	.string "Nos chemins se croiseront peut-être\n"
+	.string "à nouveau.\p"
+	.string "PIERRE ROCHARD$"
 
 MossdeepCity_StevensHouse_Text_CollectionOfRareRocks:
-	.string "It's a collection of rare rocks and\n"
-	.string "stones assembled by STEVEN.$"
+	.string "C’est une collection de roches et de\n"
+	.string "pierres rares réunies par PIERRE.$"
 

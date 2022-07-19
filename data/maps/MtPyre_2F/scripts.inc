@@ -43,93 +43,94 @@ MtPyre_2F_EventScript_Zander::
 	end
 
 MtPyre_2F_Text_MemoriesOfSkitty:
-	.string "Memories of my darling SKITTY…\n"
-	.string "My eyes overflow thinking about it.$"
+	.string "Souvenirs de mon cher SKITTY…\n"
+	.string "A sa pensée, les larmes me viennent.$"
 
 MtPyre_2F_Text_TumbledFromFloorAbove:
-	.string "Ooch, ouch… There are holes in the\n"
-	.string "ground here and there.\p"
-	.string "I didn't notice and took a tumble from\n"
-	.string "the floor above.$"
+	.string "Ouille, ouille… Des trous parsèment le\n"
+	.string "sol ici et là.\p"
+	.string "J’avais pas fait attention et je suis\n"
+	.string "tombé de l’étage du dessus.$"
 
 MtPyre_2F_Text_MarkIntro:
-	.string "Hey! Are you searching for POKéMON?\n"
-	.string "You came along after me! You're rude!$"
+	.string "Hé! Tu cherches des POKéMON?\n"
+	.string "Alors tu m’as trouvé! Quelle audace!$"
 
 MtPyre_2F_Text_MarkDefeat:
-	.string "Ayieeeeh!\n"
-	.string "I'm sorry, forgive me, please!$"
+	.string "Aïïïïe!\n"
+	.string "Désolé, excuse-moi, je t’en prie!$"
 
 MtPyre_2F_Text_MarkPostBattle:
-	.string "People don't come here often, so\n"
-	.string "I thought there'd be rare POKéMON.$"
+	.string "Les gens venant rarement ici, je me\n"
+	.string "disais qu’il y aurait des POKéMON rares.$"
 
 MtPyre_2F_Text_LukeIntro:
-	.string "LUKE: We're here on a dare.\p"
-	.string "Heheh, if I show her how cool I am,\n"
-	.string "she'll fall for me. I know it!\p"
-	.string "I know! I'll cream you and show her\n"
-	.string "how cool I am!$"
+	.string "KARL: C’est un défi.\p"
+	.string "Hé, si je lui prouve que je suis génial,\n"
+	.string "elle tombera amoureuse de moi. Je l’sais!\p"
+	.string "Je sais! Je vais te mettre la pâtée pour\n"
+	.string "lui montrer que je suis génial!$"
 
 MtPyre_2F_Text_LukeDefeat:
-	.string "LUKE: Whoopsie!$"
+	.string "KARL: Oh là là!$"
 
 MtPyre_2F_Text_LukePostBattle:
-	.string "LUKE: Well, we lost but that's okay!\n"
-	.string "I'm right here by your side.\l"
-	.string "We'll make it through this dare!$"
+	.string "KARL: On a perdu, mais c’est\n"
+	.string "pas grave!\p"
+	.string "Je reste avec toi, on va y arriver!$"
 
 MtPyre_2F_Text_LukeNotEnoughMons:
-	.string "LUKE: If you want to take me on,\n"
-	.string "bring some more POKéMON.\p"
-	.string "If you don't, I won't be able to show\n"
-	.string "off to my girl how cool I am!$"
+	.string "KARL: Si tu veux m’affronter,\n"
+	.string "apporte plus de POKéMON.\p"
+	.string "Sinon, je ne pourrai pas montrer à ma\n"
+	.string "copine à quel point je suis génial!$"
 
 MtPyre_2F_Text_DezIntro:
-	.string "DEZ: I came here on a dare with my\n"
-	.string "boyfriend.\p"
-	.string "It's really scary, but I'm with my\n"
-	.string "boyfriend. It's okay.\p"
-	.string "I know! I'll get my boyfriend to look\n"
-	.string "cool by beating you!$"
+	.string "ANNIE: Si je suis là, c’est parce qu’on\n"
+	.string "a fait un pari avec mon petit ami.\p"
+	.string "C’est effrayant, mais comme je suis\n"
+	.string "avec mon petit ami, ça va.\p"
+	.string "Je sais! Mon petit ami va être craquant\n"
+	.string "quand il va te battre!$"
 
 MtPyre_2F_Text_DezDefeat:
-	.string "DEZ: Waaaah! I'm scared!$"
+	.string "ANNIE: Aaaaah! J’ai peur!$"
 
 MtPyre_2F_Text_DezPostBattle:
-	.string "DEZ: We're lovey-dovey, so we don't\n"
-	.string "care if we lose!$"
+	.string "ANNIE: On s’aime tendrement, alors on\n"
+	.string "s’en fiche de perdre!$"
 
 MtPyre_2F_Text_DezNotEnoughMons:
-	.string "DEZ: If you want to challenge us, you\n"
-	.string "should bring at least two POKéMON.\p"
-	.string "My boyfriend's strong.\n"
-	.string "Just one POKéMON won't do at all.$"
+	.string "ANNIE: Pour nous affronter, il faut\n"
+	.string "que tu aies au moins deux POKéMON.\p"
+	.string "Mon petit ami est fort.\n"
+	.string "Un seul POKéMON, ça ne suffira pas!$"
 
 MtPyre_2F_Text_LeahIntro:
-	.string "You are an unfamiliar sight…\n"
-	.string "Depart before anything befalls you!$"
+	.string "Je pressens un malheur…\n"
+	.string "Pars avant qu’il ne soit trop tard!$"
 
 MtPyre_2F_Text_LeahDefeat:
-	.string "Hmm…\n"
-	.string "You're durable.$"
+	.string "Humm…\n"
+	.string "Plutôt coriace!$"
 
 MtPyre_2F_Text_LeahPostBattle:
-	.string "Our family has been TRAINERS here\n"
-	.string "since my great-grandmother's time…\p"
-	.string "It is my duty to protect this\n"
-	.string "mountain…$"
+	.string "Dans ma famille, nous sommes DRESSEURS\n"
+	.string "depuis des générations…\p"
+	.string "Il est de mon devoir de protéger cette\n"
+	.string "montagne…$"
 
 MtPyre_2F_Text_ZanderIntro:
-	.string "Kiyaaaaah!\n"
-	.string "I'm terrified!$"
+	.string "Aaaaah!\n"
+	.string "Je suis terrifié!$"
 
 MtPyre_2F_Text_ZanderDefeat:
-	.string "Nooooooo!\n"
-	.string "I lost my wits!$"
+	.string "Nooon!\n"
+	.string "J’ai perdu toute confiance en moi!$"
 
 MtPyre_2F_Text_ZanderPostBattle:
-	.string "I get freaked out every time I see\n"
-	.string "anything move…\p"
-	.string "I shouldn't have come here to train…$"
+	.string "J’ai peur dès que je vois quelque chose\n"
+	.string "bouger…\p"
+	.string "Je n’aurais pas dû venir m’entraîner\n"
+	.string "ici…$"
 

@@ -1,772 +1,759 @@
 @ Contest move effect descriptions
 
 gText_HighlyAppealingMove::
-	.string "A highly appealing move.$"
+    .string "Une démonstration qui\n"
+    .string "plaît énormément.$"
 
 gText_UserMoreEasilyStartled::
-	.string "After this move, the user is\n"
-	.string "more easily startled.$"
+    .string "Le POKéMON est facilement\n"
+    .string "effrayé après cette démo.$"
 
 gText_GreatAppealButNoMoreToEnd::
-	.string "Makes a great appeal, but\n"
-	.string "allows no more to the end.$"
+    .string "Plaît énormément, mais ne\n"
+    .string "permet plus aucune démo.$"
 
 gText_UsedRepeatedlyWithoutBoringJudge::
-	.string "Can be repeatedly used\n"
-	.string "without boring the JUDGE.$"
+    .string "Peut être utilisé plusieurs\n"
+    .string "fois sans ennuyer le JUGE.$"
 
 gText_AvoidStartledByOthersOnce::
-	.string "Can avoid being startled\n"
-	.string "by others once.$"
+    .string "Peut éviter une fois d’être\n"
+    .string "effrayé par les autres.$"
 
 gText_AvoidStartledByOthers::
-	.string "Can avoid being startled\n"
-	.string "by others.$"
+    .string "Peut éviter d’être effrayé\n"
+    .string "par les autres.$"
 
 gText_AvoidStartledByOthersLittle::
-	.string "Can avoid being startled\n"
-	.string "by others a little.$"
+    .string "Peut un peu éviter d’être\n"
+    .string "effrayé par les autres.$"
 
 gText_UserLessLikelyStartled::
-	.string "After this move, the user is\n"
-	.string "less likely to be startled.$"
+    .string "Le POKéMON a moins de\n"
+    .string "chances d’être effrayé.$"
 
 gText_SlightlyStartleFrontMon::
-	.string "Slightly startles the\n"
-	.string "POKéMON in front.$"
+    .string "Effraie légèrement le\n"
+    .string "POKéMON précédent.$"
 
 gText_SlightlyStartleAppealed::
-	.string "Slightly startles those\n"
-	.string "that have made appeals.$"
+    .string "Effraie légèrement ceux\n"
+    .string "qui ont déjà fait leur démo.$"
 
 gText_StartleAppealedBeforeUser::
-	.string "Startles the POKéMON that\n"
-	.string "appealed before the user.$"
+    .string "Effraie le POKéMON ayant\n"
+    .string "fait sa démo avant.$"
 
 gText_StartleAllAppealed::
-	.string "Startles all POKéMON that\n"
-	.string "have done their appeals.$"
+    .string "Effraie les POKéMON ayant\n"
+    .string "fait leur démonstration.$"
 
 gText_BadlyStartleFrontMon::
-	.string "Badly startles the\n"
-	.string "POKéMON in front.$"
+    .string "Effraie beaucoup le\n"
+    .string "POKéMON précédent.$"
 
 gText_BadlyStartleAppealed::
-	.string "Badly startles those that\n"
-	.string "have made appeals.$"
+    .string "Effraie beaucoup ceux\n"
+    .string "qui ont déjà fait leur démo.$"
 
 gText_StartleAppealedBeforeUser2::
-	.string "Startles the POKéMON that\n"
-	.string "appealed before the user.$"
+    .string "Effraie le POKéMON ayant\n"
+    .string "fait sa démo avant.$"
 
 gText_StartleAllAppealed2::
-	.string "Startles all POKéMON that\n"
-	.string "have done their appeals.$"
+    .string "Effraie tous les POKéMON\n"
+    .string "ayant fait leur démo avant.$"
 
 gText_ShiftJudgesAttentionFromOthers::
-	.string "Shifts the JUDGE's\n"
-	.string "attention from others.$"
+    .string "Détourne l’attention du\n"
+    .string "JUGE des autres POKéMON.$"
 
 gText_StartleMonHasJudgesAttention::
-	.string "Startles the POKéMON that\n"
-	.string "has the JUDGE's attention.$"
+    .string "Effraie le POKéMON qui\n"
+    .string "a l’attention du JUGE.$"
 
 gText_JamOthersMissesTurn::
-	.string "Jams the others, and misses\n"
-	.string "one turn of appeals.$"
+    .string "Bloque les autres, mais\n"
+    .string "perd un tour de démo.$"
 
 gText_StartleMonsMadeSameTypeAppeal::
-	.string "Startles POKéMON that\n"
-	.string "made a same-type appeal.$"
+    .string "Effraie ceux ayant exécuté\n"
+    .string "une démo du même type.$"
 
 gText_BadlyStartleCoolAppeals::
-	.string "Badly startles POKéMON\n"
-	.string "that made COOL appeals.$"
+    .string "Effraie beaucoup ceux qui\n"
+    .string "ont fait une démo SG-FD.$"
 
 gText_BadlyStartleBeautyAppeals::
-	.string "Badly startles POKéMON\n"
-	.string "that made BEAUTY appeals.$"
+    .string "Effraie beaucoup ceux qui\n"
+    .string "ont fait une démo BEAUTE.$"
 
 gText_BadlyStartleCuteAppeals::
-	.string "Badly startles POKéMON\n"
-	.string "that made CUTE appeals.$"
+    .string "Effraie beaucoup ceux qui\n"
+    .string "ont fait une démo GRACE.$"
 
 gText_BadlyStartleSmartAppeals::
-	.string "Badly startles POKéMON\n"
-	.string "that made SMART appeals.$"
+    .string "Effraie beaucoup ceux qui\n"
+    .string "ont fait une démo INTEL.$"
 
 gText_BadlyStartleToughAppeals::
-	.string "Badly startles POKéMON\n"
-	.string "that made TOUGH appeals.$"
+    .string "Effraie beaucoup ceux qui\n"
+    .string "ont fait une démo ROBUS.$"
 
 gText_MakeMonAfterUserNervous::
-	.string "Makes one POKéMON after\n"
-	.string "the user nervous.$"
+    .string "Rend nerveux le POKéMON\n"
+    .string "suivant.$"
 
 gText_MakeAllMonsAfterUserNervous::
-	.string "Makes all POKéMON after\n"
-	.string "the user nervous.$"
+    .string "Rend nerveux tous les\n"
+    .string "POKéMON suivants.$"
 
 gText_WorsenConditionOfThoseMadeAppeals::
-	.string "Worsens the condition of\n"
-	.string "those that made appeals.$"
+    .string "Diminue la condition de\n"
+    .string "ceux qui ont fait une démo.$"
 
 gText_BadlyStartleMonsGoodCondition::
-	.string "Badly startles POKéMON in\n"
-	.string "good condition.$"
+    .string "Effraie beaucoup ceux qui\n"
+    .string "sont en bonne condition.$"
 
 gText_AppealGreatIfPerformedFirst::
-	.string "The appeal works great if\n"
-	.string "performed first.$"
+    .string "Cette démo plaît beaucoup\n"
+    .string "si on l’exécute en premier.$"
 
 gText_AppealGreatIfPerformedLast::
-	.string "The appeal works great if\n"
-	.string "performed last.$"
+    .string "Cette démo plaît beaucoup\n"
+    .string "si on l’exécute en dernier.$"
 
 gText_AppealAsGoodAsThoseBeforeIt::
-	.string "Makes the appeal as good\n"
-	.string "as those before it.$"
+    .string "Rend la démo aussi réussie\n"
+    .string "que les précédentes.$"
 
 gText_AppealAsGoodAsOneBeforeIt::
-	.string "Makes the appeal as good\n"
-	.string "as the one before it.$"
+    .string "Rend la démo aussi réussie\n"
+    .string "que la précédente.$"
 
 gText_AppealBetterLaterItsPerformed::
-	.string "The appeal works better\n"
-	.string "the later it is performed.$"
+    .string "Plus cette démo est lancée\n"
+    .string "tard, plus elle est réussie.$"
 
 gText_AppealVariesDependingOnTiming::
-	.string "The appeal's quality varies\n"
-	.string "depending on its timing.$"
+    .string "La qualité de la démo\n"
+    .string "dépend de son timing.$"
 
 gText_WorksWellIfSameTypeAsBefore::
-	.string "Works well if it's the same\n"
-	.string "type as the one before.$"
+    .string "Démo réussie si du même\n"
+    .string "type que la précédente.$"
 
 gText_WorksWellIfDifferentTypeAsBefore::
-	.string "Works well if different in\n"
-	.string "type than the one before.$"
+    .string "Démo réussie si de type\n"
+    .string "différent de la précédente.$"
 
 gText_AffectedByAppealInFront::
-	.string "Affected by how well the\n"
-	.string "appeal in front goes.$"
+    .string "Dépend de la façon dont la\n"
+    .string "démo précédente se passe.$"
 
 gText_UpsConditionHelpsPreventNervousness::
-	.string "Ups the user's condition.\n"
-	.string "Helps prevent nervousness.$"
+    .string "Monte la condition.\n"
+    .string "Empêche d’être nerveux.$"
 
 gText_AppealWorksWellIfConditionGood::
-	.string "The appeal works well if the\n"
-	.string "user's condition is good.$"
+    .string "Démo réussie si la condi-\n"
+    .string "tion du POKéMON est bonne.$"
 
 gText_NextAppealMadeEarlier::
-	.string "The next appeal can be\n"
-	.string "made earlier next turn.$"
+    .string "Prochaine démo exécutée\n"
+    .string "plus tôt au tour suivant.$"
 
 gText_NextAppealMadeLater::
-	.string "The next appeal can be\n"
-	.string "made later next turn.$"
+    .string "Prochaine démo exécutée\n"
+    .string "plus tard au tour suivant.$"
 
 gText_TurnOrderMoreEasilyScrambled::
-	.string "Makes the next turn's order\n"
-	.string "more easily scrambled.$"
+    .string "Facilite le changement des\n"
+    .string "passages du prochain tour.$"
 
 gText_ScrambleOrderOfNextAppeals::
-	.string "Scrambles the order of\n"
-	.string "appeals on the next turn.$"
+    .string "Mélange l’ordre de passage\n"
+    .string "des démos du prochain tour.$"
 
 gText_AppealExcitesAudienceInAnyContest::
-	.string "An appeal that excites the\n"
-	.string "audience in any CONTEST.$"
+    .string "Une démo qui enthousiasme\n"
+    .string "le public de tout CONCOURS.$"
 
 gText_BadlyStartlesMonsGoodAppeals::
-	.string "Badly startles all POKéMON\n"
-	.string "that made good appeals.$"
+    .string "Effraie beaucoup tous les\n"
+    .string "POKéMON qui ont plu.$"
 
 gText_AppealBestMoreCrowdExcited::
-	.string "The appeal works best the\n"
-	.string "more the crowd is excited.$"
+    .string "La démo est plus réussie si\n"
+    .string "le public est enthousiaste.$"
 
 gText_TemporarilyStopCrowdExcited::
-	.string "Temporarily stops the\n"
-	.string "crowd from growing excited.$"
-
-@ Unused move names
+    .string "Empêche provisoirement le\n"
+    .string "public d’être enthousiaste.$"
 
 gText_RainDance::
-	.string "RAIN DANCE$"
+    .string "DANSE PLUIE$"
 
 gText_Rage::
-	.string "RAGE$"
+    .string "FRENESIE$"
 
 gText_FocusEnergy::
-	.string "FOCUS ENERGY$"
+    .string "PUISSANCE$"
 
 gText_Hypnosis::
-	.string "HYPNOSIS$"
+    .string "HYPNOSE$"
 
 gText_Softboiled::
-	.string "SOFTBOILED$"
+    .string "E-COQUE$"
 
 gText_HornAttack::
-	.string "HORN ATTACK$"
+    .string "KOUD’KORNE$"
 
 gText_SwordsDance::
-	.string "SWORDS DANCE$"
+    .string "DANSE-LAMES$"
 
 gText_Conversion::
-	.string "CONVERSION$"
+    .string "ADAPTATION$"
 
 gText_SunnyDay::
-	.string "SUNNY DAY$"
+    .string "ZENITH$"
 
 gText_Rest2::
-	.string "REST$"
+    .string "REPOS$"
 
 gText_Vicegrip::
-	.string "VICEGRIP$"
+    .string "FORCE POIGNE$"
 
 gText_DefenseCurl::
-	.string "DEFENSE CURL$"
+    .string "BOUL’ARMURE$"
 
 gText_LockOn::
-	.string "LOCK-ON$"
-
-@ Contest type names
+    .string "VERROUILLAGE$"
 
 gContestMoveTypeCoolText::
-	.string "COOL$"
+    .string "SG-FD$"
 
 gContestMoveTypeBeautyText::
-	.string "BEAUTY$"
+    .string "BEAUTE$"
 
 gContestMoveTypeCuteText::
-	.string "CUTE$"
+    .string "GRACE$"
 
 gContestMoveTypeSmartText::
-	.string "SMART$"
+    .string "INTEL.$"
 
 gContestMoveTypeToughText::
-	.string "TOUGH$"
+    .string "ROBUS.$"
 
 gText_AppealNumWhichMoveWillBePlayed::
-	.string "Appeal no. {STR_VAR_1}!\n"
-	.string "Which move will be played?$"
+    .string "Démonstration nº {STR_VAR_1}!\n"
+    .string "Ce sera quelle capacité?$"
 
 gText_AppealNumButItCantParticipate::
-	.string "Appeal no. {STR_VAR_1}!\n"
-	.string "But it can't participate!$"
+    .string "Démonstration nº {STR_VAR_1}!\n"
+    .string "Il ne peut pas participer!$"
 
 gText_MonAppealedWithMove::
-	.string "{STR_VAR_1} appealed with\n"
-	.string "{STR_VAR_2}!$"
+    .string "{STR_VAR_1} exécute\n"
+    .string "{STR_VAR_2}!$"
 
 gText_MonWasWatchingOthers::
-	.string "{STR_VAR_1} was watching\n"
-	.string "the others.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "{STR_VAR_1} regarde\n"
+    .string "les autres.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_AllOutOfAppealTime::
-	.string "We're all out of\n"
-	.string "Appeal Time!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
-
-@ Unused appeal result texts
+    .string "Le concours est \n"
+    .string "terminé!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_ButAppealWasJammed::
-	.string "But the appeal was\n"
-	.string "jammed.$"
+    .string "Mais la démonstration\n"
+    .string "est bloquée.$"
 
 gText_FollowedAnotherMonsLead::
-	.string "It followed another\n"
-	.string "POKéMON's lead.$"
+    .string "Il a suivi l’exemple d’un\n"
+    .string "autre POKéMON.$"
 
 gText_ButItMessedUp::
-	.string "But it messed up.$"
+    .string "Mais ça n’a pas marché.$"
 
 gText_WentBetterThanUsual::
-	.string "It went better than\n"
-	.string "usual.$"
+    .string "C’est mieux que\n"
+    .string "d’habitude.$"
 
 gText_JudgeLookedAwayForSomeReason::
-	.string "The JUDGE looked away\n"
-	.string "for some reason.$"
+    .string "Le JUGE a détourné\n"
+    .string "le regard.$"
 
 gText_WorkedHardToBuildOnPastMistakes::
-	.string "It worked hard to build on\n"
-	.string "past mistakes.$"
+    .string "Il a travaillé dur pour\n"
+    .string "réparer ses erreurs.$"
 
 gText_CantMakeAnyMoreMoves::
-	.string "It can't make any more\n"
-	.string "moves.$"
+    .string "Il ne peut plus bouger.$"
 
 gText_WorkedFrighteninglyWell::
-	.string "It worked frighteningly\n"
-	.string "well.$"
+    .string "Ça a super bien \n"
+    .string "marché.$"
 
 gText_WorkedHardAsStandoutMon::
-	.string "It worked as hard as the\n"
-	.string "standout POKéMON.$"
+    .string "C’était aussi bien que le\n"
+    .string "POKéMON en tête.$"
 
 gText_JudgedLookedOnExpectantly::
-	.string "The JUDGE looked on\n"
-	.string "expectantly.$"
+    .string "Le JUGE lance un regard\n"
+    .string "intéressé.$"
 
 gText_WorkedRatherWell::
-	.string "It worked rather well.$"
+    .string "Il a plutôt bien réussi.$"
 
 gText_WorkedLittleBetterThanUsual::
-	.string "It worked a little better\n"
-	.string "than usual.$"
-
-@ Round result texts
+    .string "C’était un peu mieux\n"
+    .string "que d’habitude.$"
 
 gText_MonFailedToStandOutAtAll::
-	.string "{STR_VAR_1} failed to\n"
-	.string "stand out at all…{PAUSE_UNTIL_PRESS}$"
+    .string "{STR_VAR_1} n’a pas été\n"
+    .string "convaincant du tout…{PAUSE_UNTIL_PRESS}$"
 
 gText_MonDidntStandOutVeryMuch::
-	.string "{STR_VAR_1} didn't stand\n"
-	.string "out very much…{PAUSE_UNTIL_PRESS}$"
+    .string "{STR_VAR_1} n’a pas été\n"
+    .string "très convaincant…{PAUSE_UNTIL_PRESS}$"
 
 gText_MonCaughtALittleAttention::
-	.string "{STR_VAR_1} caught a\n"
-	.string "little attention.{PAUSE_UNTIL_PRESS}$"
+    .string "{STR_VAR_1} a un peu\n"
+    .string "attiré l’attention.{PAUSE_UNTIL_PRESS}$"
 
 gText_MonAttractedALotOfAttention::
-	.string "{STR_VAR_1} attracted a\n"
-	.string "lot of attention.{PAUSE_UNTIL_PRESS}$"
+    .string "{STR_VAR_1} a beaucoup\n"
+    .string "attiré l’attention.{PAUSE_UNTIL_PRESS}$"
 
 gText_MonCommandedTotalAttention::
-	.string "{STR_VAR_1} commanded\n"
-	.string "total attention.{PAUSE_UNTIL_PRESS}$"
+    .string "{STR_VAR_1} a attiré\n"
+    .string "toute l’attention.{PAUSE_UNTIL_PRESS}$"
 
 gText_MonHasntMadeItsAppeal::
-	.string "{STR_VAR_1} hasn't made\n"
-	.string "its appeal.{PAUSE_UNTIL_PRESS}$"
+    .string "{STR_VAR_1} n’a pas fait\n"
+    .string "sa démonstration.{PAUSE_UNTIL_PRESS}$"
 
-@ Unused
 gText_AnticipationSwelledForMonsAppealNext2::
-	.string "Anticipation swelled for\n"
-	.string "{STR_VAR_1}'s appeal next.$"
+    .string "Anticipation swelled for\n"
+    .string "{STR_VAR_1}’s appeal next.$"
 
 gText_EmptyContestString::
-	.string "$"
+    .string "$"
 
 gText_JudgesViewsOnMonHeldFirm::
-	.string "The JUDGE 's views on\n"
-	.string "{STR_VAR_1} held firm.$"
+    .string "Le JUGE n’a pas changé\n"
+    .string "d’opinion sur {STR_VAR_1}.$"
 
 gText_MonsXChangedPerceptions::
-	.string "{STR_VAR_1}'s {STR_VAR_3}\n"
-	.string "changed perceptions.$"
+    .string "{STR_VAR_3} de {STR_VAR_1}\n"
+    .string "change de perceptions.$"
 
 gText_MonsAppealEffectWoreOff::
-	.string "{STR_VAR_1}'s appeal\n"
-	.string "effect wore off.$"
+    .string "L’effet de la démo du\n"
+    .string "{STR_VAR_1} se dissipe.$"
 
 gText_SpecialAppealsEffectWoreOff::
-	.string "The special appeal's\n"
-	.string "effect wore off.$"
+    .string "L’effet de la démonstra-\n"
+    .string "tion spéciale se dissipe.$"
 
 gText_EveryonesAppealsMadeToLookSame::
-	.string "Everyone's appeals were\n"
-	.string "made to look the same.$"
+    .string "Toutes les démonstra-\n"
+    .string "tions se ressemblent.$"
 
 gText_CheapenedMonsAppeal::
-	.string "It cheapened\n"
-	.string "{STR_VAR_2}'s appeal.$"
+    .string "Ça a déprécié la démons-\n"
+    .string "tration de {STR_VAR_2}.$"
 
 gText_CheapenedAppealOfThoseAhead::
-	.string "It cheapened the appeal\n"
-	.string "of those ahead.$"
+    .string "Les démos des premiers\n"
+    .string "ont été dépréciées.$"
 
 gText_StoleAttentionAwayFromMon::
-	.string "It stole attention away\n"
-	.string "from {STR_VAR_2}.$"
+    .string "Ça a détourné l’attention\n"
+    .string "de {STR_VAR_2}.$"
 
 gText_CheapenedMonsAppeal2::
-	.string "It cheapened\n"
-	.string "{STR_VAR_2}'s appeal.$"
+    .string "Ça a déprécié la démons-\n"
+    .string "tration de {STR_VAR_2}.$"
 
 gText_SeverelyCheapenedOtherAppeals::
-	.string "It severely cheapened\n"
-	.string "other appeals.$"
+    .string "Ça a fortement déprécié\n"
+    .string "les autres démos.$"
 
 gText_AnticipationSwelledForMonsAppealNext::
-	.string "Anticipation swelled for\n"
-	.string "{STR_VAR_1}'s appeal next.$"
+    .string "Le public a hâte de revoir\n"
+    .string "{STR_VAR_1}.$"
 
 gText_CheapenedAppealOfThoseAhead2::
-	.string "It cheapened the appeal\n"
-	.string "of those ahead.$"
+    .string "Les démos des premiers\n"
+    .string "ont été dépréciées.$"
 
 gText_CheapenedJudgesFavoriteAppeal::
-	.string "It cheapened the JUDGE's\n"
-	.string "favorite appeal.$"
+    .string "Ça a déprécié la démo\n"
+    .string "favorite du JUGE.$"
 
 gText_AppealsOfOthersCheapenedByHalf::
-	.string "The appeals of others\n"
-	.string "were cheapened by half.$"
+    .string "Les démos des autres ont\n"
+    .string "été dépréciées de moitié.$"
 
 gText_StoodOutToMakeUpForBeingJammed::
-	.string "It stood out to make up\n"
-	.string "for being jammed.$"
+    .string "Il essaye de compenser \n"
+    .string "car il a été bloqué.$"
 
 gText_CantParticipateInAppealsAnyMore::
-	.string "It can't participate in\n"
-	.string "appeals any more.$"
+    .string "Il ne peut plus participer\n"
+    .string "aux démonstrations.$"
 
 gText_TouchedJudgeForFantasticAppeal::
-	.string "It touched the JUDGE for\n"
-	.string "a fantastic appeal.$"
+    .string "Sa superbe démonstration\n"
+    .string "a ému le JUGE.$"
 
 gText_AnticipationRoseForUpcomingAppeals::
-	.string "Anticipation rose for\n"
-	.string "upcoming appeals.$"
+    .string "Tout le monde a hâte de\n"
+    .string "voir la suite.$"
 
 gText_StoodOutAsMuchAsSpecialAppeals::
-	.string "It stood out as much as\n"
-	.string "special appeals.$"
+    .string "Aussi bien que les dé-\n"
+    .string "monstrations spéciales.$"
 
 gText_StoodOutAsMuchAsMon::
-	.string "It stood out as much as\n"
-	.string "{STR_VAR_1}.$"
+    .string "C’est aussi bien que\n"
+    .string "{STR_VAR_1}.$"
 
 gText_JammedAppealsMadeEvenLessNoticeable::
-	.string "Jammed appeals were made\n"
-	.string "even less noticeable.$"
+    .string "Les démos bloquées\n"
+    .string "passent inaperçues.$"
 
 gText_EveryonesAppealsMadeSame::
-	.string "Everyone's appeals were\n"
-	.string "made the same.$"
-
-@ Appeal result texts
+    .string "Toutes les démonstra-\n"
+    .string "tions se ressemblent.$"
 
 gText_BecameMoreConsciousOfOtherMons::
-	.string "It became more conscious\n"
-	.string "of the other POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Il est plus conscient\n"
+    .string "des autres POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonCantMakeAnAppealAfterThis::
-	.string "{STR_VAR_1} can't make an\n"
-	.string "appeal after this.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "{STR_VAR_1} ne peut rien\n"
+    .string "faire après ça.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_SettledDownJustLittleBit::
-	.string "It settled down just a\n"
-	.string "little bit.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Il s’est un petit\n"
+    .string "peu calmé.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_BecameObliviousToOtherMons::
-	.string "It became oblivious to\n"
-	.string "the other POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Il a oublié la présence\n"
+    .string "des autres POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_BecameLessAwareOfOtherMons::
-	.string "It became less aware of\n"
-	.string "the other POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Il a un peu oublié les\n"
+    .string "autres POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_StoppedCaringAboutOtherMons::
-	.string "It stopped caring about\n"
-	.string "other POKéMON much.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Il a arrêté de penser\n"
+    .string "aux autres POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_TriedToStartleOtherMons::
-	.string "It tried to startle the\n"
-	.string "other POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Il a essayé d’effrayer \n"
+    .string "les autres POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_TriedToDazzleOthers::
-	.string "It tried to dazzle the\n"
-	.string "others.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Il a essayé d’éblouir\n"
+    .string "les autres.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_JudgeLookedAwayFromMon::
-	.string "The JUDGE looked away\n"
-	.string "from {STR_VAR_1}.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Le JUGE n’a pas\n"
+    .string "regardé {STR_VAR_1}.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_TriedToUnnerveNextMon::
-	.string "It tried to unnerve the\n"
-	.string "next POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Il a essayé de troubler\n"
+    .string "le prochain POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonBecameNervous::
-	.string "{STR_VAR_1} became\n"
-	.string "nervous.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "{STR_VAR_1} est devenu\n"
+    .string "nerveux.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_AppealTriedToUnnerveWaitingMons::
-	.string "The appeal tried to\n"
-	.string "unnerve waiting POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Il a essayé de troubler\n"
+    .string "les POKéMON suivants.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_TauntedMonsDoingWell::
-	.string "It taunted POKéMON\n"
-	.string "doing well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Il s’est moqué des\n"
+    .string "POKéMON qui réussissent.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonRegainedItsForm::
-	.string "{STR_VAR_1} regained its\n"
-	.string "form.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "{STR_VAR_1} a repris\n"
+    .string "sa forme.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_TriedToJamMonDoingWell::
-	.string "It tried to jam POKéMON\n"
-	.string "doing well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Il a essayé de bloquer les\n"
+    .string "POKéMON qui réussissent.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_StandoutMonHustledEvenMore::
-	.string "The standout {STR_VAR_1}\n"
-	.string "hustled even more.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "{STR_VAR_1}, en tête,\n"
+    .string "s’est encore plus démené.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_LargelyUnnoticedMonWorkedHard::
-	.string "The largely unnoticed\n"
-	.string "{STR_VAR_1} worked hard.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "{STR_VAR_1} finit par\n"
+    .string "être remarqué.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_WorkedAsMuchAsMonBefore::
-	.string "It worked as much as\n"
-	.string "POKéMON before it.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Il a fait aussi bien que\n"
+    .string "le POKéMON précédent.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsAppealDidNotGoWell::
-	.string "{STR_VAR_1}'s appeal did\n"
-	.string "not go well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "La démo du {STR_VAR_1} \n"
+    .string "était mauvaise.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_WorkedAsMuchAsPrecedingMon::
-	.string "It worked as much as the\n"
-	.string "preceding POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Il a réussi aussi bien que\n"
+    .string "le POKéMON d’avant.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsAppealDidNotGoWell2::
-	.string "{STR_VAR_1}'s appeal did\n"
-	.string "not go well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "La démo du {STR_VAR_1} \n"
+    .string "était mauvaise.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsAppealDidNotGoWell3::
-	.string "{STR_VAR_1}'s appeal did\n"
-	.string "not go well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "La démo du {STR_VAR_1} \n"
+    .string "était mauvaise.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsAppealWentSlightlyWell::
-	.string "{STR_VAR_1}'s appeal\n"
-	.string "went slightly well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "La démo du {STR_VAR_1}\n"
+    .string "était à peu près bonne.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsAppealWentPrettyWell::
-	.string "{STR_VAR_1}'s appeal\n"
-	.string "went pretty well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "La démo du {STR_VAR_1}\n"
+    .string "était plutôt bonne.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsAppealWentExcellently::
-	.string "{STR_VAR_1}'s appeal\n"
-	.string "went excellently.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "La démo du {STR_VAR_1}\n"
+    .string "était excellente.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsAppealWasDud::
-	.string "{STR_VAR_1}'s appeal was\n"
-	.string "a dud.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "La démo du {STR_VAR_1}\n"
+    .string "était ratée.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsAppealDidNotWorkVeryWell::
-	.string "{STR_VAR_1}'s appeal did\n"
-	.string "not work very well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "La démo du {STR_VAR_1}\n"
+    .string "s’est mal passée.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsAppealWentSlightlyWell2::
-	.string "{STR_VAR_1}'s appeal\n"
-	.string "went slightly well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "La démo du {STR_VAR_1}\n"
+    .string "était à peu près bonne.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsAppealWentPrettyWell2::
-	.string "{STR_VAR_1}'s appeal\n"
-	.string "went pretty well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "La démo du {STR_VAR_1}\n"
+    .string "était plutôt bonne.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsAppealWentVeryWell::
-	.string "{STR_VAR_1}'s appeal\n"
-	.string "went very well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "La démo du {STR_VAR_1}\n"
+    .string "était très bonne.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsAppealWentExcellently2::
-	.string "{STR_VAR_1}'s appeal\n"
-	.string "went excellently.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "La démo du {STR_VAR_1}\n"
+    .string "était excellente.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_SameTypeAsOneBeforeGood::
-	.string "It's the same type as the\n"
-	.string "POKéMON before--good!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "C’est le même type que le\n"
+    .string "POKéMON précédent. Bien!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_NotSameTypeAsOneBeforeGood::
-	.string "It's not the same type as\n"
-	.string "the one before--good!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Ce n’est pas le même type\n"
+    .string "que celui d’avant. Bien!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_StoodOutMuchMoreThanMonBefore::
-	.string "It stood out much more\n"
-	.string "than the POKéMON before.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "C’était beaucoup mieux\n"
+    .string "que le POKéMON précédent.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_DidntDoAsWellAsMonBefore::
-	.string "It didn't do as well as the\n"
-	.string "POKéMON before.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "C’était moins bien que\n"
+    .string "le POKéMON précédent.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsConditionRoseAboveUsual::
-	.string "{STR_VAR_1}'s condition\n"
-	.string "rose above usual.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "La condition du\n"
+    .string "{STR_VAR_1} a augmenté!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsHotStatusMadeGreatAppeal::
-	.string "{STR_VAR_1}'s hot status\n"
-	.string "made it a great appeal!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "{STR_VAR_1} a réussi\n"
+    .string "grâce à son super statut!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MovedUpInLineForNextAppeal::
-	.string "It moved up in line for\n"
-	.string "the next appeal.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Il passera en premier\n"
+    .string "au prochain tour.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MovedBackInLineForNextAppeal::
-	.string "It moved back in line once\n"
-	.string "for the next appeal.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Il passera en dernier\n"
+    .string "au prochain tour.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_ScrambledUpOrderForNextTurn::
-	.string "It scrambled up the\n"
-	.string "order for the next turn.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+    .string "Il a changé l’ordre pour\n"
+    .string "le prochain tour.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_JudgeLookedAtMonExpectantly::
-	.string "The JUDGE looked at\n"
-	.string "{STR_VAR_1} expectantly.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "Le JUGE lance un regard\n"
+    .string "intéressé à {STR_VAR_1}.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_AppealComboWentOverWell::
-	.string "The appeal combo went\n"
-	.string "over well.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "C’était un bon\n"
+    .string "combo.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_AppealComboWentOverVeryWell::
-	.string "The appeal combo went\n"
-	.string "over very well.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "C’était un très bon\n"
+    .string "combo.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_AppealComboWentOverExcellently::
-	.string "The appeal combo went\n"
-	.string "over excellently.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "C’était un excellent\n"
+    .string "combo.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonManagedToAvertGaze::
-	.string "{STR_VAR_1} managed to\n"
-	.string "avert its gaze.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "{STR_VAR_1} a réussi à\n"
+    .string "détourner les yeux.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonManagedToAvoidSeeingIt::
-	.string "{STR_VAR_1} managed to\n"
-	.string "avoid seeing it.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "{STR_VAR_1} a réussi à ne\n"
+    .string "pas voir ça.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonIsntFazedByThatSortOfThing::
-	.string "{STR_VAR_1} isn't fazed\n"
-	.string "by that sort of thing.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "Ça ne déstabilise pas\n"
+    .string "{STR_VAR_1}.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonBecameALittleDistracted::
-	.string "{STR_VAR_1} became a\n"
-	.string "little distracted.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "{STR_VAR_1} s’est laissé\n"
+    .string "un peu distraire.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_TriedToStartleOtherPokemon::
-	.string "It tried to startle the\n"
-	.string "other POKéMON.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "Il a essayé d’effrayer \n"
+    .string "les autres POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonLookedDownOutOfDistraction::
-	.string "{STR_VAR_1} looked down\n"
-	.string "out of distraction.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "Distrait, {STR_VAR_1} a\n"
+    .string "baissé la tête.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonTurnedBackOutOfDistraction::
-	.string "{STR_VAR_1} turned back\n"
-	.string "out of distraction.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "Distrait, {STR_VAR_1}\n"
+    .string "s’est retourné.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonCouldntHelpUtteringCry::
-	.string "{STR_VAR_1} couldn't help\n"
-	.string "uttering a cry.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "{STR_VAR_1} n’a pas pu \n"
+    .string "s’empêcher de crier.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonCouldntHelpLeapingUp::
-	.string "{STR_VAR_1} couldn't help\n"
-	.string "leaping up.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "{STR_VAR_1} n’a pas pu\n"
+    .string "s’empêcher de sursauter.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonTrippedOutOfDistraction::
-	.string "{STR_VAR_1} tripped over\n"
-	.string "out of distraction.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "Distrait, {STR_VAR_1} a\n"
+    .string "trébuché.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonWasTooNervousToMove::
-	.string "{STR_VAR_1} was too\n"
-	.string "nervous to move.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "{STR_VAR_1} était trop\n"
+    .string "nerveux pour bouger.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_ButItMessedUp2::
-	.string "But it messed up.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "Mais ça n’a pas marché.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_ButItFailedToMakeTargetNervous::
-	.string "But it failed to make\n"
-	.string "the target nervous.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "Mais il n’a pas rendu\n"
+    .string "sa cible nerveuse.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_ButItFailedToMakeAnyoneNervous::
-	.string "But it failed to make\n"
-	.string "anyone nervous.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "Mais il n’a rendu personne\n"
+    .string "nerveux.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_ButItWasIgnored::
-	.string "But it was ignored…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "Mais il a été ignoré…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_CouldntImproveItsCondition::
-	.string "But it couldn't improve\n"
-	.string "its condition…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "Mais il n’a pas pu\n"
+    .string "améliorer sa condition…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_BadConditionResultedInWeakAppeal::
-	.string "Its bad condition\n"
-	.string "resulted in a weak appeal.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "Sa démo a été mauvaise\n"
+    .string "à cause de sa condition.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonWasUnaffected::
-	.string "{STR_VAR_1} was\n"
-	.string "unaffected.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "Ça n’a eu aucun effet sur\n"
+    .string "{STR_VAR_1}.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_RepeatedAppeal::
-	.string "{STR_VAR_1} disappointed\n"
-	.string "by repeating an appeal.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "{STR_VAR_1}, décevant, a\n"
+    .string "refait la même démo.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsXWentOverGreat::
-	.string "{STR_VAR_1}'s {STR_VAR_3}\n"
-	.string "went over great.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "Succès pour {STR_VAR_3}\n"
+    .string "du {STR_VAR_1}.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsXDidntGoOverWell::
-	.string "{STR_VAR_1}'s {STR_VAR_3}\n"
-	.string "didn't go over well here…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "{STR_VAR_3} du\n"
+    .string "{STR_VAR_1} ne plaît pas.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsXGotTheCrowdGoing::
-	.string "{STR_VAR_1}'s {STR_VAR_3}\n"
-	.string "got the crowd going.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "Ovation pour {STR_VAR_3}\n"
+    .string "du {STR_VAR_1}!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonCantAppealNextTurn::
-	.string "{STR_VAR_1} can't appeal\n"
-	.string "next turn…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "{STR_VAR_1} ne peut par-\n"
+    .string "ticiper au prochain tour…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_AttractedCrowdsAttention::
-	.string "It attracted the crowd's\n"
-	.string "attention.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "Il a captivé la foule.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_CrowdContinuesToWatchMon::
-	.string "The crowd continues to\n"
-	.string "watch {STR_VAR_3}.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "La foule continue de\n"
+    .string "regarder {STR_VAR_3}.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_MonsMoveIsIgnored::
-	.string "{STR_VAR_1}'s\n"
-	.string "{STR_VAR_2} is ignored.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+    .string "{STR_VAR_2} du\n"
+    .string "{STR_VAR_1} est ignoré.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_Contest_Shyness::
-	.string "shyness$"
+    .string "timidité$"
 
 gText_Contest_Anxiety::
-	.string "anxiety$"
+    .string "anxiété$"
 
 gText_Contest_Laziness::
-	.string "laziness$"
+    .string "paresse$"
 
 gText_Contest_Hesitancy::
-	.string "hesitancy$"
+    .string "hésitation$"
 
 gText_Contest_Fear::
-	.string "fear$"
+    .string "peur$"
 
 gText_Contest_Coolness::
-	.string "coolness$"
+    .string "SANG-FROID$"
 
 gText_Contest_Beauty::
-	.string "beauty$"
+    .string "BEAUTE$"
 
 gText_Contest_Cuteness::
-	.string "cuteness$"
+    .string "GRACE$"
 
 gText_Contest_Smartness::
-	.string "smartness$"
+    .string "INTEL.$"
 
 gText_Contest_Toughness::
-	.string "toughness$"
+    .string "ROBUSTESSE$"
 
-@ Unused
 gText_Tension::
-	.string "TENSION$"
+    .string "TENSION$"
 
 gText_CoolMove::
-	.string "COOL Move$"
+    .string "Cap. SG-FD$"
 
 gText_BeautyMove::
-	.string "BEAUTY Move$"
+    .string "Cap. BEAUTE$"
 
 gText_CuteMove::
-	.string "CUTE Move$"
+    .string "Cap. GRACE$"
 
 gText_SmartMove::
-	.string "SMART Move$"
+    .string "Cap. INTEL.$"
 
 gText_ToughMove::
-	.string "TOUGH Move$"
+    .string "Cap. ROBUS.$"
 
 gText_3QuestionMarks::
 	.string "???$"

@@ -29,15 +29,17 @@ SootopolisCity_House1_EventScript_Kecleon::
 	end
 
 SootopolisCity_House1_Text_DevelopedThisTM:
-	.string "For thirty years I've remained in\n"
-	.string "SOOTOPOLIS honing my skills.\p"
-	.string "I developed a shattering TM.\n"
-	.string "I bequeath it to you!$"
+	.string "Je suis resté trente ans à\n"
+	.string "ATALANOPOLIS pour améliorer\l"
+	.string "mes connaissances.\p"
+	.string "J’ai conçu une CT renversante.\n"
+	.string "Je te la lègue!$"
 
 SootopolisCity_House1_Text_ExplainBrickBreak:
-	.string "TM31 contains BRICK BREAK! It's a move\n"
-	.string "so horrible that I can't describe it.$"
+	.string "La CT31 contient CASSE-BRIQUE!\n"
+	.string "Un coup si terrible que je n’peux\l"
+	.string "le décrire.$"
 
 SootopolisCity_House1_Text_Kecleon:
-	.string "KECLEON: Puu puhyaah.$"
+	.string "KECLEON: Eooon.$"
 

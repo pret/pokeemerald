@@ -181,28 +181,28 @@ Route117_EventScript_Aisha::
 	end
 
 Route117_Text_DayCarePokemonHadNewMove:
-	.string "I left my POKéMON at the DAY CARE.\p"
-	.string "When I got it back, it had a new move\n"
-	.string "that I didn't teach it.\l"
-	.string "I was really, really surprised.$"
+	.string "J’ai laissé mon POKéMON à la PENSION.\p"
+	.string "Quand je l’ai récupéré, il avait appris\n"
+	.string "une nouvelle capacité.\l"
+	.string "J’étais vraiment très surprise.$"
 
 Route117_Text_ArentTheseFlowersPretty:
-	.string "What do you think?\n"
-	.string "Aren't these flowers pretty?\p"
-	.string "I planted them all!$"
+	.string "Qu’en penses-tu? Ces fleurs ne\n"
+	.string "sont-elles pas magnifiques?\p"
+	.string "Je les ai toutes plantées moi-même!$"
 
 Route117_Text_AirIsTastyHere:
-	.string "The air is tasty here!$"
+	.string "L’air embaume ici!$"
 
 Route117_Text_RouteSignVerdanturf:
 	.string "ROUTE 117\n"
-	.string "{LEFT_ARROW} VERDANTURF TOWN$"
+	.string "{LEFT_ARROW} VERGAZON$"
 
 Route117_Text_RouteSignMauville:
 	.string "ROUTE 117\n"
-	.string "{RIGHT_ARROW} MAUVILLE CITY$"
+	.string "{RIGHT_ARROW} LAVANDIA$"
 
 Route117_Text_DayCareSign:
-	.string "POKéMON DAY CARE\n"
-	.string "“Let us raise your POKéMON.”$"
+	.string "PENSION POKéMON\n"
+	.string "“Nous élevons vos POKéMON!”$"
 

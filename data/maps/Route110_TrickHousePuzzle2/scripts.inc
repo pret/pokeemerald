@@ -100,42 +100,44 @@ Route110_TrickHousePuzzle2_EventScript_Georgia::
 	end
 
 Route110_TrickHousePuzzle2_Text_WroteSecretCodeLockOpened:
-	.string "{PLAYER} wrote down the secret code\n"
-	.string "on the door.\p"
-	.string "“TRICK MASTER is smart.”\n"
+	.string "{PLAYER} écrit le code secret\n"
+	.string "sur la porte.\p"
+	.string "“Le MAITRE DES PIEGES est malin.”\n"
 	.string "… … … … … … … …\p"
-	.string "The lock clicked open!$"
+	.string "La porte s’ouvre!$"
 
 Route110_TrickHousePuzzle2_Text_TedIntro:
-	.string "Which switch closes which hole?$"
+	.string "Quel interrupteur fonctionne avec\n"
+	.string "quel trou?!$"
 
 Route110_TrickHousePuzzle2_Text_TedDefeat:
-	.string "After that battle, I'm even more\n"
-	.string "confused!$"
+	.string "Après ce combat, je suis encore plus\n"
+	.string "confus!$"
 
 Route110_TrickHousePuzzle2_Text_TedPostBattle:
-	.string "Can I get you to push all the buttons\n"
-	.string "for me?$"
+	.string "Tu ne veux pas appuyer sur ces\n"
+	.string "boutons pour moi?$"
 
 Route110_TrickHousePuzzle2_Text_PaulIntro:
-	.string "Oh! You're on your second TRICK HOUSE\n"
-	.string "challenge!$"
+	.string "Oh! C’est ton deuxième défi dans la\n"
+	.string "MAISON DES PIEGES?$"
 
 Route110_TrickHousePuzzle2_Text_PaulDefeat:
-	.string "You're good at battling too?$"
+	.string "Et en plus, tu sais te battre?$"
 
 Route110_TrickHousePuzzle2_Text_PaulPostBattle:
-	.string "The TRICK MASTER rigged all the tricks\n"
-	.string "in this house all by himself.$"
+	.string "Le MAITRE DES PIEGES a fabriqué tous\n"
+	.string "les pièges de ce bâtiment tout seul.$"
 
 Route110_TrickHousePuzzle2_Text_GeorgiaIntro:
-	.string "I want to make my own GYM one day.\n"
-	.string "So, I'm studying how to set traps.$"
+	.string "Un jour, j’aurai ma propre ARENE.\n"
+	.string "Alors je suis ici pour apprendre à faire\l"
+	.string "des pièges.$"
 
 Route110_TrickHousePuzzle2_Text_GeorgiaDefeat:
-	.string "I didn't study battling enough!$"
+	.string "Je n’ai pas assez étudié les combats!$"
 
 Route110_TrickHousePuzzle2_Text_GeorgiaPostBattle:
-	.string "You're strong, aren't you?\n"
-	.string "Maybe even enough to be a GYM LEADER!$"
+	.string "Pfffiou! Quelle force! Tu pourrais\n"
+	.string "peut-être devenir CHAMPION D’ARENE!$"
 

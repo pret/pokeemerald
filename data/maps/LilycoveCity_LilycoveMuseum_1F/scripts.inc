@@ -162,133 +162,133 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_FatMan::
 	end
 
 LilycoveCity_LilycoveMuseum_1F_Text_WelcomeToLilycoveMuseum:
-	.string "Welcome to LILYCOVE MUSEUM.\p"
-	.string "Please take the time to enjoy our\n"
-	.string "collection of fantastic artwork\l"
-	.string "featuring POKéMON.$"
+	.string "Bienvenue au MUSEE NENUCRIQUE.\p"
+	.string "Prenez le temps d’apprécier notre\n"
+	.string "superbe collection sur les POKéMON.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_ImCuratorHaveYouViewedOurPaintings:
-	.string "I'm the CURATOR of this MUSEUM of\n"
-	.string "fine arts.\p"
-	.string "It's heartening to see someone so\n"
-	.string "young as you in our MUSEUM.\p"
-	.string "Have you viewed our collection of\n"
-	.string "paintings already?$"
+	.string "Je suis le CONSERVATEUR de ce\n"
+	.string "MUSEE des beaux-arts.\p"
+	.string "C’est encourageant de voir quelqu’un\n"
+	.string "d’aussi jeune dans notre MUSEE.\p"
+	.string "As-tu déjà vu notre collection de\n"
+	.string "tableaux?$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_NotDisturbYouTakeYourTime:
-	.string "Ah, then let me not disturb you.\n"
-	.string "Please, do take your time.$"
+	.string "Bon, alors je ne te dérange pas.\n"
+	.string "Prends tout ton temps.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_HaveYouAnInterestInPaintings:
-	.string "Oh? I do believe that you seem to\n"
-	.string "be a POKéMON TRAINER.\p"
-	.string "Have you an interest in paintings,\n"
-	.string "too?$"
+	.string "Oh? Tu m’as tout l’air d’un DRESSEUR\n"
+	.string "de POKéMON.\p"
+	.string "Et tu t’intéresses également à la\n"
+	.string "peinture?$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_HonoredYoudVisitInSpiteOfThat:
-	.string "I see…\p"
-	.string "I'm honored that you would visit\n"
-	.string "us in spite of that.$"
+	.string "Je vois…\p"
+	.string "Je suis honoré que tu nous rendes\n"
+	.string "visite malgré tout.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_ExcellentCanYouComeWithMe:
-	.string "Ah, excellent!\n"
-	.string "You do like paintings!\p"
-	.string "Then, may I ask you to come with me?$"
+	.string "Ah, très bien!\n"
+	.string "Tu aimes effectivement la peinture!\p"
+	.string "Alors peut-être voudrais-tu me suivre?$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_VeryOldPainting:
-	.string "It's a very old painting.\n"
-	.string "The paint is peeling here and there.$"
+	.string "C’est un tableau très ancien.\n"
+	.string "La peinture s’écaille ici et là.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_OddLandscapeFantasticScenery:
-	.string "It's an odd landscape with bizarre\n"
-	.string "and fantastic scenery.$"
+	.string "C’est un curieux paysage avec des vues\n"
+	.string "étranges et fantastiques.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_PaintingOfBeautifulWoman:
-	.string "It's a painting of a beautiful, smiling\n"
-	.string "woman with a POKéMON on her lap.$"
+	.string "C’est la représentation d’une\n"
+	.string "charmante femme avec un POKéMON\l"
+	.string "sur ses genoux.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_PaintingOfLegendaryPokemon:
-	.string "It's a painting of a legendary POKéMON\n"
-	.string "from long ago.\p"
-	.string "The artist painted this from\n"
-	.string "imagination.$"
+	.string "C’est la représentation d’un POKéMON\n"
+	.string "légendaire de l’ancien temps.\p"
+	.string "Il est issu de l’imagination du peintre.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_PaintingOfGrassPokemon:
-	.string "It's a painting of GRASS POKéMON\n"
-	.string "swaying in a breeze.\p"
-	.string "They appear to be enjoying the wind's\n"
-	.string "gentle caress.$"
+	.string "C’est la représentation de POKéMON du\n"
+	.string "type PLANTE qui vacillent au vent.\p"
+	.string "Ils ont l’air d’aimer sentir la caresse\n"
+	.string "du vent.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_PaintingOfBerries:
-	.string "It's a delicious-looking painting\n"
-	.string "of BERRIES.\p"
-	.string "This painting could make you hungry!$"
+	.string "C’est une exquise représentation\n"
+	.string "de BAIES.\p"
+	.string "Ce tableau vous donnerait faim!$"
 
 LilycoveCity_LilycoveMuseum_Text_BirdPokemonSculptureReplica:
-	.string "It's a replica of a famous sculpture.\p"
-	.string "It depicts an ancient BIRD POKéMON.$"
+	.string "C’est une réplique de sculpture connue.\p"
+	.string "C’est un antique POKéMON OISEAU.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_BigPokeBallCarvedFromStone:
-	.string "It's a big POKé BALL carved from\n"
-	.string "a black stone.\p"
-	.string "It was apparently used in festivals\n"
-	.string "in the olden days.$"
+	.string "C’est une grosse POKé BALL sculptée\n"
+	.string "dans une pierre noire.\p"
+	.string "Elle était apparemment utilisée jadis,\n"
+	.string "lors de festivals.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_StoneTabletWithAncientText:
-	.string "It's a huge stone tablet inscribed\n"
-	.string "with POKéMON and dense text in the\l"
-	.string "small characters of an ancient,\l"
-	.string "unreadable language.$"
+	.string "C’est une immense plaque en pierre. \n"
+	.string "Des POKéMON et un texte compact,\l"
+	.string "écrit dans une langue ancienne\l"
+	.string "indéchiffrable, sont gravés dessus.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_WorksOfMagnificence:
 	.string "Hmmm…\n"
 	.string "What works of great magnificence…$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_MustntForgetLoveForFineArts:
-	.string "Battling with POKéMON is fun,\n"
-	.string "I'll grant you that.\p"
-	.string "But one mustn't forget our love for\n"
-	.string "the fine arts.$"
+	.string "C’est un plaisir d’affronter les\n"
+	.string "POKéMON, je te l’accorde.\p"
+	.string "Mais il ne faut pas oublier notre amour\n"
+	.string "pour les beaux-arts.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_ThisMuseumIsInspiration:
-	.string "This ART MUSEUM… Well, you could\n"
-	.string "see many fantastic paintings.\p"
-	.string "And the CURATOR is a wonderful person.\p"
-	.string "Among artists like myself, this MUSEUM\n"
-	.string "is an inspiration.$"
+	.string "Ce MUSEE D’ART… Eh bien, tu peux y\n"
+	.string "voir beaucoup de fabuleux tableaux.\p"
+	.string "Et le CONSERVATEUR est extraordinaire.\p"
+	.string "Pour les artistes tels que moi, ce MUSEE\n"
+	.string "est une véritable source d’inspiration.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_ThisLadyIsPretty:
-	.string "This lady is pretty!\n"
-	.string "She's like Mommy!$"
+	.string "Cette dame est jolie!\n"
+	.string "Elle est comme maman!$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_ThisPokemonIsAdorable:
-	.string "This POKéMON is adorable!\n"
-	.string "Just like our little boy!$"
+	.string "Ce POKéMON est adorable!\n"
+	.string "Tout comme notre petit fiston!$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_HeardMuseumGotNewPaintings:
-	.string "I'd heard that this ART MUSEUM got\n"
-	.string "in some new paintings.\p"
-	.string "So, naturally I hurried over.\p"
-	.string "Are the new paintings up on\n"
-	.string "the second floor?$"
+	.string "J’ai entendu dire que ce MUSEE D’ART\n"
+	.string "avait acquis de nouveaux tableaux.\p"
+	.string "Alors évidemment, je m’y suis\n"
+	.string "précipitée.\p"
+	.string "Les nouveaux tableaux sont-ils en\n"
+	.string "haut, à l’étage?$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_CuratorHasBeenCheerful:
-	.string "Lately, the CURATOR has been\n"
-	.string "unusually cheerful.\p"
-	.string "I bet something good happened for him.\n"
-	.string "Definitely.$"
+	.string "Ces temps-ci, le CONSERVATEUR est\n"
+	.string "plus joyeux que d’habitude.\p"
+	.string "Je parie qu’il lui est arrivé quelque\n"
+	.string "chose de bien. C’est sûr!$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_AimToSeeGreatPaintings:
-	.string "I aim to see many great paintings\n"
-	.string "here and learn from them.\p"
-	.string "I have this dream of one day having\n"
-	.string "my artwork exhibited here.$"
+	.string "Je viens ici pour voir plein de grands\n"
+	.string "tableaux et en tirer des enseignements.\p"
+	.string "Je rêve d’avoir un jour mes œuvres\n"
+	.string "exposées ici.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_MuseumTouristDestination:
-	.string "The ART MUSEUM has become a favorite\n"
-	.string "tourist destination.\p"
-	.string "It's great for LILYCOVE…\n"
-	.string "No, great for the HOENN region!\p"
-	.string "This is what I've heard--a lone TRAINER\n"
-	.string "procured all the paintings upstairs.$"
+	.string "Le MUSEE D’ART est devenu très\n"
+	.string "prisé par les touristes.\p"
+	.string "C’est super pour NENUCRIQUE.\n"
+	.string "Non, super pour la région de HOENN!\p"
+	.string "J’ai entendu dire que tous les tableaux\n"
+	.string "du haut proviennent du même DRESSEUR.$"
 

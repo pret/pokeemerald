@@ -289,67 +289,67 @@ Route103_EventScript_Isabelle::
 	end
 
 Route103_Text_MayRoute103Pokemon:
-	.string "MAY: Let's see… The POKéMON found\n"
-	.string "on ROUTE 103 include…$"
+	.string "FLORA: Voyons… Les POKéMON trouvés\n"
+	.string "sur la ROUTE 103 comprennent…$"
 
 Route103_Text_MayLetsBattle:
-	.string "Oh, hi, {PLAYER}{KUN}!\p"
-	.string "…Oh, I see, my dad gave you\n"
-	.string "a POKéMON as a gift.\p"
-	.string "Since we're here, let's have a quick\n"
-	.string "battle!\p"
-	.string "I'll give you a taste of what being\n"
-	.string "a TRAINER is like.$"
+	.string "Oh, salut {PLAYER}{KUN}!\p"
+	.string "… Oh, je vois. Mon père t’a fait cadeau\n"
+	.string "d’un POKéMON.\p"
+	.string "Puisqu’on est là, on n’a qu’à se faire\n"
+	.string "un petit combat!\p"
+	.string "Je vais te montrer ce que c’est qu’être\n"
+	.string "un DRESSEUR.$"
 
 Route103_Text_MayDefeated:
-	.string "Wow! That's great!\n"
-	.string "{PLAYER}{KUN}, you're pretty good!$"
+	.string "Waouh! C’était génial!\n"
+	.string "{PLAYER}{KUN}, tu as beaucoup de talent!$"
 
 Route103_Text_MayTimeToHeadBack:
-	.string "MAY: I think I know why my dad has\n"
-	.string "an eye out for you now.\p"
-	.string "I mean, you just got that POKéMON,\n"
-	.string "but it already likes you.\p"
-	.string "You might be able to befriend any\n"
-	.string "kind of POKéMON easily.\p"
-	.string "Well, it's time to head back to\n"
-	.string "the LAB.$"
+	.string "FLORA: Maintenant, je crois savoir\n"
+	.string "pourquoi mon père garde un œil sur toi.\p"
+	.string "C’est vrai, tu viens juste d’avoir ce\n"
+	.string "POKéMON et il t’aime déjà.\p"
+	.string "Tu peux peut-être nouer des liens avec\n"
+	.string "n’importe quel type de POKéMON.\p"
+	.string "Bon, il est temps de retourner au\n"
+	.string "LABO.$"
 
 Route103_Text_BrendanRoute103Pokemon:
-	.string "BRENDAN: Okay, so it's this one and\n"
-	.string "that one that live on ROUTE 103…$"
+	.string "BRICE: OK! Alors c’est celui-ci et\n"
+	.string "celui-là qui vivent sur la ROUTE 103…$"
 
 Route103_Text_BrendanLetsBattle:
-	.string "Hey, it's {PLAYER}!\p"
-	.string "…Oh, yeah, Dad gave you a POKéMON.\p"
-	.string "Since we're here, how about a little\n"
-	.string "battle?\p"
-	.string "I'll teach you what being a TRAINER's\n"
-	.string "about!$"
+	.string "Hé, c’est {PLAYER}!\p"
+	.string "… Oh, super, papa t’a donné un POKéMON.\p"
+	.string "Puisqu’on est là, pourquoi ne pas se\n"
+	.string "faire un petit combat?\p"
+	.string "Je vais t’apprendre ce que c’est que\n"
+	.string "d’être DRESSEUR!$"
 
 Route103_Text_BrendanDefeated:
-	.string "Huh, {PLAYER}, you're not too shabby.$"
+	.string "Hum, {PLAYER}, t’es pas si minable que ça.$"
 
 Route103_Text_BrendanTimeToHeadBack:
-	.string "BRENDAN: I think I get it.\n"
-	.string "I think I know why my dad has his eye\l"
-	.string "out for you now.\p"
-	.string "Look, your POKéMON already likes you,\n"
-	.string "even though you just got it.\p"
-	.string "{PLAYER}, I get the feeling that you\n"
-	.string "could befriend any POKéMON with ease.\p"
-	.string "We should head back to the LAB.$"
+	.string "BRICE: Ça y est, je sais.\n"
+	.string "Maintenant, je sais pourquoi mon père\l"
+	.string "garde un œil sur toi.\p"
+	.string "Regarde, ton POKéMON t’aime déjà, alors\n"
+	.string "que tu viens juste de l’avoir.\p"
+	.string "{PLAYER}, il me semble que tu peux nouer\n"
+	.string "des liens avec n’importe quel POKéMON.\p"
+	.string "On devrait retourner au LABO.$"
 
 Route103_Text_ShouldHaveBroughtPotion:
-	.string "My POKéMON is staggeringly tired…\n"
-	.string "I should have brought a POTION…$"
+	.string "Mon POKéMON est terriblement fatigué…\n"
+	.string "J’aurais dû apporter une POTION…$"
 
 Route103_Text_ShortcutToOldale:
-	.string "If you cross the sea from here,\n"
-	.string "it'll be a shortcut to OLDALE TOWN.\p"
-	.string "Fufufu, that's useful, isn't it?$"
+	.string "Si tu traverses la mer ici, tu trouveras\n"
+	.string "un raccourci pour ROSYERES.\p"
+	.string "Hum, hum… Utile, hein?$"
 
 Route103_Text_RouteSign:
 	.string "ROUTE 103\n"
-	.string "{DOWN_ARROW} OLDALE TOWN$"
+	.string "{DOWN_ARROW} ROSYERES$"
 

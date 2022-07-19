@@ -12,28 +12,30 @@ SSTidalLowerDeck_EventScript_Leonard::
 	end
 
 SSTidalLowerDeck_Text_PhillipIntro:
-	.string "Arrrgh! I'm fed up and dog-tired of\n"
-	.string "cleaning this huge place!\p"
-	.string "Let's have a quick battle!$"
+	.string "Arrrg! J’en ai plein le dos de nettoyer\n"
+	.string "cet endroit gigantesque!\p"
+	.string "C’est l’heure de la pause,\n"
+	.string "battons-nous!$"
 
 SSTidalLowerDeck_Text_PhillipDefeat:
-	.string "Little bro, I lost!$"
+	.string "Hé, p’tit frère, j’ai perdu!$"
 
 SSTidalLowerDeck_Text_PhillipPostBattle:
-	.string "We're the CLEANUP BROTHERS!\p"
-	.string "The old one dumps the detergent,\n"
-	.string "and the young one does the scrubbing!$"
+	.string "Nous sommes les FRERES PROPRETE!\p"
+	.string "L’aîné répand le détergent et le\n"
+	.string "benjamin frotte!$"
 
 SSTidalLowerDeck_Text_LeonardIntro:
-	.string "This is the bottom of the ship's hull.\n"
-	.string "There's plenty of room.\l"
-	.string "It'll be alright for a POKéMON battle.$"
+	.string "Nous sommes dans la cale du navire.\n"
+	.string "Il y a beaucoup de place.\l"
+	.string "Profitons-en pour faire un combat\l"
+	.string "de POKéMON.$"
 
 SSTidalLowerDeck_Text_LeonardDefeat:
-	.string "Big bro, I lost!$"
+	.string "Hé, grand frère, j’ai perdu!$"
 
 SSTidalLowerDeck_Text_LeonardPostBattle:
-	.string "We're the CLEANUP BROTHERS!\p"
-	.string "The old one dumps the detergent,\n"
-	.string "and the young one does the scrubbing!$"
+	.string "Nous sommes les FRERES PROPRETE!\p"
+	.string "L’aîné répand le détergent et le\n"
+	.string "benjamin frotte!$"
 
