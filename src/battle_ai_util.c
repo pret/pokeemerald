@@ -2063,7 +2063,9 @@ bool32 IsStatRaisingEffect(u16 effect)
     case EFFECT_EVASION_UP_2:
     case EFFECT_MINIMIZE:
     case EFFECT_DEFENSE_CURL:
+    #if B_CHARGE_SPDEF_RAISE >= GEN_5
     case EFFECT_CHARGE:
+    #endif
 	case EFFECT_CALM_MIND:
     case EFFECT_COSMIC_POWER:
 	case EFFECT_DRAGON_DANCE:
