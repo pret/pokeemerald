@@ -4708,10 +4708,9 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
     }                                                                                                   \
 }
 
-#define ONE_HUNDRED 1 << 4
-#define ONE_THOUSAND 1 << 5
-#define TEN_THOUSAND 1 << 6
-#define FULL_LEVEL 1 << 7
+// EXP candies store an index for this table in their holdEffectParam.
+#define NUM_EXP_CANDY_SIZES     5
+static const u32 sExpCandyExperienceTable[] = {100, 800, 3000, 10000, 30000};
 
 // Returns TRUE if the item has no effect on the Pokémon, FALSE otherwise
 bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex, bool8 usedByAI)
@@ -4878,24 +4877,18 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                 retVal = FALSE;
             }
 
-            // Rare Candy
+            // Rare Candy / EXP Candy
             if ((itemEffect[i] & ITEM3_LEVEL_UP)
              && GetMonData(mon, MON_DATA_LEVEL, NULL) != MAX_LEVEL)
             {
-                if (ItemId_GetHoldEffectParam(item) & FULL_LEVEL)
+                u8 param = ItemId_GetHoldEffectParam(item);
+                if (param == 0xFF) // Rare Candy
                 {
                     dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL) + 1];
                 }
-                else
+                else if (param < NUM_EXP_CANDY_SIZES) // EXP Candies
                 {
-                    temp1 = ItemId_GetHoldEffectParam(item) & 0x0F;
-                    if (ItemId_GetHoldEffectParam(item) & ONE_HUNDRED)
-                        temp1 *= 100;
-                    if (ItemId_GetHoldEffectParam(item) & ONE_THOUSAND)
-                        temp1 *= 1000;
-                    if (ItemId_GetHoldEffectParam(item) & TEN_THOUSAND)
-                        temp1 *= 10000;
-                    dataUnsigned = temp1 + GetMonData(mon, MON_DATA_EXP, NULL);
+                    dataUnsigned = sExpCandyExperienceTable[param] + GetMonData(mon, MON_DATA_EXP, NULL);
                     if (dataUnsigned > gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][MAX_LEVEL])
                         dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][MAX_LEVEL];
                 }
@@ -5297,11 +5290,6 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
     }
     return retVal;
 }
-
-#undef ONE_HUNDRED
-#undef ONE_THOUSAND
-#undef TEN_THOUSAND
-#undef FULL_LEVEL
 
 bool8 HealStatusConditions(struct Pokemon *mon, u32 battlePartyId, u32 healMask, u8 battlerId)
 {
