@@ -9192,7 +9192,7 @@ static void Cmd_various(void)
         break;
     case VARIOUS_JUMP_IF_UNDER_200:
         // If the Pokemon is less than 200 kg, or weighing less than 441 lbs, then Sky Drop will work. Otherwise, it will fail.
-        if (GetPokedexHeightWeight(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), 1) < 441)
+        if (GetBattlerWeight(gBattlerTarget) < 2000)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         else
             gBattlescriptCurrInstr += 7;
