@@ -2154,9 +2154,7 @@ BattleScript_GrowthDoMoveAnim::
 	waitanimation
 	setbyte sSTAT_ANIM_PLAYED, FALSE
 	playstatchangeanimation BS_ATTACKER, BIT_ATK | BIT_SPATK, 0
-.if B_GROWTH_UNDER_SUN >= GEN_5
 	jumpifweatheraffected BS_ATTACKER, B_WEATHER_SUN, BattleScript_GrowthAtk2
-.endif
 	setstatchanger STAT_ATK, 1, FALSE
 	goto BattleScript_GrowthAtk
 BattleScript_GrowthAtk2:
@@ -2167,9 +2165,7 @@ BattleScript_GrowthAtk:
 	printfromtable gStatUpStringIds
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_GrowthTrySpAtk::
-.if B_GROWTH_UNDER_SUN >= GEN_5
 	jumpifweatheraffected BS_ATTACKER, B_WEATHER_SUN, BattleScript_GrowthSpAtk2
-.endif
 	setstatchanger STAT_SPATK, 1, FALSE
 	goto BattleScript_GrowthSpAtk
 BattleScript_GrowthSpAtk2:
