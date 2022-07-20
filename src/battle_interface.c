@@ -4,6 +4,7 @@
 #include "pokemon.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
+#include "battle_z_move.h"
 #include "graphics.h"
 #include "sprite.h"
 #include "window.h"
@@ -1528,6 +1529,12 @@ void HideMegaTriggerSprite(void)
         ChangeMegaTriggerSprite(gBattleStruct->mega.triggerSpriteId, 0);
         gSprites[gBattleStruct->mega.triggerSpriteId].tHide = TRUE;
     }
+}
+
+void HideTriggerSprites(void)
+{
+    HideMegaTriggerSprite();
+    HideZMoveTriggerSprite();
 }
 
 void DestroyMegaTriggerSprite(void)
