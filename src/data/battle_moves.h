@@ -1321,7 +1321,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         #else
             .pp = 40,
         #endif
-        .effect = EFFECT_GROWTH,
+        #if B_GROWTH_STAT_RAISE >= GEN_5
+            .effect = EFFECT_GROWTH,
+        #else
+            .effect = EFFECT_SPECIAL_ATTACK_UP,
+        #endif
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,

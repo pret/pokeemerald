@@ -985,8 +985,10 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 20;
             else if (!HasMoveWithType(battlerAtk, TYPE_ELECTRIC))
                 score -= 10;
+            #if B_CHARGE_SPDEF_RAISE >= GEN_5
             else if (!BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_SPDEF))
                 score -= 5;
+            #endif
             break;
         case EFFECT_QUIVER_DANCE:
         case EFFECT_GEOMANCY:
@@ -4051,8 +4053,9 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_CHARGE:
         if (HasDamagingMoveOfType(battlerAtk, TYPE_ELECTRIC))
             score += 2;
-        
+        #if B_CHARGE_SPDEF_RAISE >= GEN_5
         IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPDEF, &score);
+        #endif
         break;
     case EFFECT_TAUNT:
         if (IS_MOVE_STATUS(predictedMove))
