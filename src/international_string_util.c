@@ -263,22 +263,22 @@ u8 *sub_81DB2D8(u8 *r5, const u8 *r4, u8 *a2)
     return r5;
 }
 
-const u8 *GetTrainerClassNameGenderSpecific(s32 trainerClassId, u32 trainerGender, const u8 *trainerName) // To fix strings, I just put some random ones for now
+const u8 *GetTrainerClassNameGenderSpecific(s32 trainerClassId, u32 trainerGender, const u8 *trainerName)
 {
     switch (trainerClassId)
     {
     case TRAINER_CLASS_SCHOOL_KID:
         if (trainerGender != 0)
-            return gText_10BP; // ELEVE
+            return gText_Eleve; // ELEVE
         return gTrainerClassNames[trainerClassId];
     case TRAINER_CLASS_RIVAL:
     case TRAINER_CLASS_RS_PROTAG:
         if (trainerGender != 0)
-            return gText_TrainerHill4F; // DRESSEUR
+            return gText_Dresseur; // DRESSEUR
         break;
     case TRAINER_CLASS_LEADER:
         if (trainerName != NULL && StringCompare(trainerName, gText_11F) == 0) // LEVY TATA
-            return gText_Championships; // CHAMPION
+            return gText_Champion; // CHAMPION
         break;
     }
     trainerName = gTrainerClassNames[trainerClassId];

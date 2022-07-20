@@ -87,7 +87,6 @@ static EWRAM_DATA bool8 sUsedSpeedUp = 0; // Never read
 static EWRAM_DATA struct CreditsData *sCreditsData = {0};
 
 static const u16 sCredits_Pal[] = INCBIN_U16("graphics/credits/credits.gbapal");
-static const u32 sCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/the_end_copyright.4bpp.lz");
 
 static void SpriteCB_CreditsMonBg(struct Sprite *);
 static void Task_WaitPaletteFade(u8);
@@ -117,51 +116,6 @@ static void SpriteCB_Player(struct Sprite *);
 static void SpriteCB_Rival(struct Sprite *);
 static u8 CreateCreditsMonSprite(u16, s16, s16, u16);
 static void DeterminePokemonToShow(void);
-
-static const u8 sTheEnd_LetterMap_T[] =
-{
-    0,    1, 0,
-    0xFF, 1, 0xFF,
-    0xFF, 1, 0xFF,
-    0xFF, 1, 0xFF,
-    0xFF, 1, 0xFF,
-};
-
-static const u8 sTheEnd_LetterMap_H[] =
-{
-    1, 0xFF, 1,
-    1, 0xFF, 1,
-    1, 2,    1,
-    1, 0xFF, 1,
-    1, 0xFF, 1,
-};
-
-static const u8 sTheEnd_LetterMap_E[] =
-{
-    1, 0, 0,
-    1, 0xFF, 0xFF,
-    1, 2,    2,
-    1, 0xFF, 0xFF,
-    1, 0x80, 0x80,
-};
-
-static const u8 sTheEnd_LetterMap_N[] =
-{
-    1, 3, 1,
-    1, 4, 1,
-    1, 5, 1,
-    1, 0xC4, 1,
-    1, 0xC3, 1,
-};
-
-static const u8 sTheEnd_LetterMap_D[] =
-{
-    1, 6, 7,
-    1, 8, 9,
-    1, 0xFF, 1,
-    1, 0x88, 0x89,
-    1, 0x86, 0x87,
-};
 
 #include "data/credits.h"
 
@@ -1290,7 +1244,7 @@ static void LoadTheEndScreen(u16 tileOffsetLoad, u16 tileOffsetWrite, u16 palOff
     u16 baseTile;
     u16 i;
 
-    LZ77UnCompVram(sCreditsCopyrightEnd_Gfx, (void *)(VRAM + tileOffsetLoad));
+    LZ77UnCompVram(gCreditsCopyrightEnd_Gfx, (void *)(VRAM + tileOffsetLoad));
     LoadPalette(gIntroCopyright_Pal, palOffset, sizeof(gIntroCopyright_Pal));
 
     baseTile = (palOffset / 16) << 12;
@@ -1332,7 +1286,7 @@ static void DrawLetterMapTiles(const u8 baseTiles[], u8 baseX, u8 baseY, u16 off
 // difference FR
 static void DrawTheEnd(u16 offset, u16 palette)
 {
-    LZ77UnCompVram(sCreditsCopyrightEnd_Gfx, ((u16 *) (VRAM + offset)));
+    LZ77UnCompVram(gCreditsCopyrightEnd_Gfx, ((u16 *) (VRAM + offset)));
 }
 
 #define sState data[0]

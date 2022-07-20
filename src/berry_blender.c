@@ -2849,12 +2849,12 @@ static void CB2_CheckPlayAgainLink(void)
     case 1:
         sBerryBlender->gameEndState = 3;
         StringCopy(gStringVar4, gLinkPlayers[sBerryBlender->canceledPlayerId].name);
-        StringAppend(gStringVar4, sText_ApostropheSPokeblockCaseIsFull);
+        sub_81DB2D8(gStringVar4, sText_ApostropheSPokeblockCaseIsFull, gStringVar4);
         break;
     case 2:
         sBerryBlender->gameEndState++;
         StringCopy(gStringVar4, gLinkPlayers[sBerryBlender->canceledPlayerId].name);
-        StringAppend(gStringVar4, sText_HasNoBerriesToPut);
+        sub_81DB2D8(gStringVar4, sText_HasNoBerriesToPut, gStringVar4);
         break;
     case 3:
         if (Blender_PrintText(&sBerryBlender->textState, gStringVar4, GetPlayerTextSpeedDelay()))

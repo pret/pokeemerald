@@ -1415,7 +1415,7 @@ static const u8 sDoomDesireDescription[] = _(
 
 static const u8 sPsychoBoostDescription[] = _(
     "Attaque à pleine puissance,\n"
-    "mais baisse ATQ. SPE");
+    "mais baisse ATQ. SPE.");
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =

@@ -3021,4 +3021,9 @@ extern const u8 gText_PkmnForSwap[];
 extern const u8 gText_SamePkmnInPartyAlready[];
 extern const u8 gText_Cancel3[];
 
+// French specific
+extern const u8 gText_Eleve[];
+extern const u8 gText_Dresseur[];
+extern const u8 gText_Champion[];
+
 #endif // GUARD_STRINGS_H

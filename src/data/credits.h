@@ -63,7 +63,7 @@ enum
 #define ENTRIES_PER_PAGE 5
 
 static const u8 sCreditsText_EmptyString[]                    = _("");
-static const u8 sCreditsText_PkmnEmeraldVersion[]             = _("POKéMON EMERALD VERSION");
+static const u8 sCreditsText_PkmnEmeraldVersion[]             = _("POKéMON VERSION EMERAUDE");
 static const u8 sCreditsText_Credits[]                        = _("Credits");
 static const u8 sCreditsText_ExecutiveDirector[]              = _("Executive Director");
 static const u8 sCreditsText_Director[]                       = _("Director");
@@ -193,12 +193,12 @@ static const u8 sCreditsText_RetsujiNomoto[]                  = _("Retsuji Nomot
 static const u8 sCreditsText_AzusaTajima[]                    = _("Azusa Tajima");
 static const u8 sCreditsText_ShusakuEgami[]                   = _("Shusaku Egami");
 static const u8 sCreditsText_PackageAndManual[]               = _("Package & Manual Illustration");
-static const u8 sCreditsText_EnglishVersion[]                 = _("English Version Coordinators");
-static const u8 sCreditsText_Translator[]                     = _("Translator");
+static const u8 sCreditsText_EnglishVersion[]                 = _("French Version Coordinators");
+static const u8 sCreditsText_Translator[]                     = _("Translators");
 static const u8 sCreditsText_TextEditor[]                     = _("Text Editor");
-static const u8 sCreditsText_NCLCoordinator[]                 = _("NCL Coordinator");
+static const u8 sCreditsText_NCLCoordinator[]                 = _("NCL Coordinators");
 static const u8 sCreditsText_GraphicDesigner[]                = _("Graphic Designer");
-static const u8 sCreditsText_NOAProductTesting[]              = _("NOA Product Testing");
+static const u8 sCreditsText_NOAProductTesting[]              = _("NOE Product Testing");
 static const u8 sCreditsText_HideyukiNakajima[]               = _("Hideyuki Nakajima");
 static const u8 sCreditsText_HidenoriSaeki[]                  = _("Hidenori Saeki");
 static const u8 sCreditsText_YokoWatanabe[]                   = _("Yoko Watanabe");
@@ -216,11 +216,23 @@ static const u8 sCreditsText_NationalFederationBlind[]        = _("National Fede
 static const u8 sCreditsText_PatriciaAMaurer[]                = _("Patricia A. Maurer");
 static const u8 sCreditsText_EuropeanBlindUnion[]             = _("European Blind Union");
 static const u8 sCreditsText_AustralianBrailleAuthority[]     = _("Australian Braille Authority");
-static const u8 sCreditsText_RoyalNewZealandFederationBlind[] = _("Royal New Zealand Federation for the Blind");
+static const u8 sCreditsText_RoyalNewZealandFederationBlind[] = _("European Blind Union");
 static const u8 sCreditsText_MotoyasuTojima[]                 = _("Motoyasu Tojima");
-static const u8 sCreditsText_NicolaPrattBarlow[]              = _("Nicola Pratt-Barlow");
+static const u8 sCreditsText_NicolaPrattBarlow[]              = _("Nicola Wright");
 static const u8 sCreditsText_ShellieDow[]                     = _("Shellie Dow");
 static const u8 sCreditsText_ErikJohnson[]                    = _("Erik Johnson");
+// New
+static const u8 sCreditsText_New1[] = _("Noriko Netley");
+static const u8 sCreditsText_New2[] = _("Pierre Sanchez");
+static const u8 sCreditsText_New3[] = _("Sabrina Bretant");
+static const u8 sCreditsText_New4[] = _("Thomas Fougeray");
+static const u8 sCreditsText_New5[] = _("Alessio Danieli");
+static const u8 sCreditsText_New6[] = _("NOE Testing Team");
+static const u8 sCreditsText_New7[] = _("Stefan Romberg");
+static const u8 sCreditsText_New8[] = _("Miho Kozawa");
+static const u8 sCreditsText_New9[] = _("Toshifumi Sayama");
+static const u8 sCreditsText_New10[] = _("Hiroshi Akune");
+
 static const struct CreditsEntry sCreditsEntry_EmptyString[]                    = { 0, FALSE, sCreditsText_EmptyString};
 static const struct CreditsEntry sCreditsEntry_PkmnEmeraldVersion[]             = { 7,  TRUE, sCreditsText_PkmnEmeraldVersion};
 static const struct CreditsEntry sCreditsEntry_Credits[]                        = {11,  TRUE, sCreditsText_Credits};
@@ -380,9 +392,20 @@ static const struct CreditsEntry sCreditsEntry_MotoyasuTojima[]                 
 static const struct CreditsEntry sCreditsEntry_NicolaPrattBarlow[]              = { 0, FALSE, sCreditsText_NicolaPrattBarlow};
 static const struct CreditsEntry sCreditsEntry_ShellieDow[]                     = { 0, FALSE, sCreditsText_ShellieDow};
 static const struct CreditsEntry sCreditsEntry_ErikJohnson[]                    = { 0, FALSE, sCreditsText_ErikJohnson};
+// New
+static const struct CreditsEntry sCreditsEntry_New1[]                           = { 0, FALSE, sCreditsText_New1};
+static const struct CreditsEntry sCreditsEntry_New2[]                           = { 0, FALSE, sCreditsText_New2};
+static const struct CreditsEntry sCreditsEntry_New3[]                           = { 0, FALSE, sCreditsText_New3};
+static const struct CreditsEntry sCreditsEntry_New4[]                           = { 0, FALSE, sCreditsText_New4};
+static const struct CreditsEntry sCreditsEntry_New5[]                           = { 0, FALSE, sCreditsText_New5};
+static const struct CreditsEntry sCreditsEntry_New6[]                           = { 0, FALSE, sCreditsText_New6};
+static const struct CreditsEntry sCreditsEntry_New7[]                           = { 0, FALSE, sCreditsText_New7};
+static const struct CreditsEntry sCreditsEntry_New8[]                           = { 0, FALSE, sCreditsText_New8};
+static const struct CreditsEntry sCreditsEntry_New9[]                           = { 0, FALSE, sCreditsText_New9};
+static const struct CreditsEntry sCreditsEntry_New10[]                          = { 0, FALSE, sCreditsText_New10};
 
 #define _ sCreditsEntry_EmptyString
-static const struct CreditsEntry *const sCreditsEntryPointerTable[PAGE_COUNT][ENTRIES_PER_PAGE] =
+static const struct CreditsEntry *const sCreditsEntryPointerTable[PAGE_COUNT - 2][ENTRIES_PER_PAGE] =
 {
     [PAGE_TITLE] = {
         _,
@@ -769,6 +792,7 @@ static const struct CreditsEntry *const sCreditsEntryPointerTable[PAGE_COUNT][EN
         _,
         _,
     },
+    /*
     [PAGE_EXECUTIVE_PRODUCERS_1] = {
         _,
         sCreditsEntry_ExecProducers,
@@ -783,5 +807,6 @@ static const struct CreditsEntry *const sCreditsEntryPointerTable[PAGE_COUNT][EN
         _,
         _,
     },
+    */
 };
 #undef _

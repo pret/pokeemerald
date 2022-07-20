@@ -1,5 +1,6 @@
 #include "global.h"
 #include "bg.h"
+#include "graphics.h"
 #include "m4a.h"
 #include "main.h"
 #include "malloc.h"
@@ -68,10 +69,7 @@ static EWRAM_DATA struct PokedexCryMeterNeedle *sCryMeterNeedle = NULL;
 static const u16 sCryMeterNeedle_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter_needle.gbapal");
 static const u8 sCryMeterNeedle_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter_needle.4bpp");
 
-static const u16 sCryMeter_Tilemap[] = INCBIN_U16("graphics/pokedex/cry_meter_map.bin"); // Unused
-static const u16 sCryMeter_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal");
-static const u8 sCryMeter_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
-
+const u16 gCryMeter_Tilemap[] = INCBIN_U16("graphics/pokedex/cry_meter_map.bin"); // Unused
 static const u16 sWaveformOffsets[][72] =
 {
     {
@@ -457,8 +455,8 @@ bool8 LoadCryMeter(struct CryScreenWindow *window, u8 windowId)
         if (!sCryMeterNeedle)
             sCryMeterNeedle = AllocZeroed(sizeof(*sCryMeterNeedle));
 
-        CopyToWindowPixelBuffer(windowId, sCryMeter_Gfx, 0, 0);
-        LoadPalette(sCryMeter_Pal, window->paletteNo * 16, 32);
+        CopyToWindowPixelBuffer(windowId, gCryMeter_Gfx, 0, 0);
+        LoadPalette(gCryMeter_Pal, window->paletteNo * 16, 32);
         gDexCryScreenState++;
         break;
     case 1:

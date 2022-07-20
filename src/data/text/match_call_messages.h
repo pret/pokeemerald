@@ -386,7 +386,7 @@ const u8 gText_MatchCallEliteFour_Drake_Intro2[] = _("qui m’ont sauvé la vie!
 const u8 gText_MatchCallChampion_Wallace_Strategy[] = _("Etre digne et respectueux.");
 const u8 gText_MatchCallChampion_Wallace_Pokemon[] = _("Les PKMN gracieux.");
 const u8 gText_MatchCallChampion_Wallace_Intro1[] = _("Je représente aussi bien la");
-const u8 gText_MatchCallChampion_Wallace_Intro2[] = _("beauté que l’intelligence");
+const u8 gText_MatchCallChampion_Wallace_Intro2[] = _("beauté que l’intelligence.");
 
 const u8 *const gMatchCallFlavorTexts[REMATCH_TABLE_ENTRIES][CHECK_PAGE_ENTRY_COUNT] =
 {

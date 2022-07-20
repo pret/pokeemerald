@@ -1,6 +1,7 @@
 #include "global.h"
 #include "pokenav.h"
 #include "bg.h"
+#include "graphics.h"
 #include "menu.h"
 #include "window.h"
 #include "sound.h"
@@ -76,12 +77,9 @@ static const LoopedTask sConditionSearchLoopedTaskFuncs[] =
     ConvertConditionsToListRanks
 };
 
-static const u16 sConditionSearchResultFramePal[] = INCBIN_U16("graphics/pokenav/condition/search_results.gbapal");
-static const u32 sConditionSearchResultTiles[] = INCBIN_U32("graphics/pokenav/condition/search_results.4bpp.lz");
-static const u32 sConditionSearchResultTilemap[] = INCBIN_U32("graphics/pokenav/condition/search_results.bin.lz");
 static const u16 sListBg_Pal[] = INCBIN_U16("graphics/pokenav/condition/search_results_list.gbapal");
 
-static const struct BgTemplate sConditionSearchResultBgTemplates[] =
+static const struct BgTemplate gConditionSearchResultBgTemplates[] =
 {
     {
         .bg = 1,
@@ -426,12 +424,12 @@ static u32 LoopedTask_OpenConditionSearchResults(s32 state)
     switch (state)
     {
     case 0:
-        InitBgTemplates(sConditionSearchResultBgTemplates, ARRAY_COUNT(sConditionSearchResultBgTemplates));
-        DecompressAndCopyTileDataToVram(1, sConditionSearchResultTiles, 0, 0, 0);
+        InitBgTemplates(gConditionSearchResultBgTemplates, ARRAY_COUNT(gConditionSearchResultBgTemplates));
+        DecompressAndCopyTileDataToVram(1, gConditionSearchResultTiles, 0, 0, 0);
         SetBgTilemapBuffer(1, gfx->buff);
-        CopyToBgTilemapBuffer(1, sConditionSearchResultTilemap, 0, 0);
+        CopyToBgTilemapBuffer(1, gConditionSearchResultTilemap, 0, 0);
         CopyBgTilemapBufferToVram(1);
-        CopyPaletteIntoBufferUnfaded(sConditionSearchResultFramePal, 0x10, 0x20);
+        CopyPaletteIntoBufferUnfaded(gConditionSearchResultFramePal, 0x10, 0x20);
         CopyBgTilemapBufferToVram(1);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -684,7 +682,7 @@ static void CreateSearchResultsList(void)
     template.fontId = FONT_NORMAL;
     template.bufferItemFunc = (PokenavListBufferItemFunc)BufferSearchMonListItem;
     template.iconDrawFunc = NULL;
-    CreatePokenavList(&sConditionSearchResultBgTemplates[1], &template, 0);
+    CreatePokenavList(&gConditionSearchResultBgTemplates[1], &template, 0);
 }
 
 static void BufferSearchMonListItem(struct PokenavMonListItem * item, u8 * dest)

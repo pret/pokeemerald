@@ -1578,6 +1578,46 @@ const u16 gTilesetPalettes_BattleDome[][16] =
 
 const u32 gFrontierPassMapScreen_Gfx[] = INCBIN_U32("graphics/frontier_pass/map_screen.4bpp.lz");
 
+// roulette
+const u16 gRouletteShadow_Pal[] = INCBIN_U16("graphics/roulette/shadow.gbapal");
+const u16 gRouletteBall_Pal[] = INCBIN_U16("graphics/roulette/ball.gbapal");
+const u16 gRouletteBallCounter_Pal[] = INCBIN_U16("graphics/roulette/ball_counter.gbapal");
+const u16 gRouletteCursor_Pal[] = INCBIN_U16("graphics/roulette/cursor.gbapal");
+const u16 gRouletteCredit_Pal[] = INCBIN_U16("graphics/roulette/credit.gbapal");
+const u16 gRouletteShroomish_Pal[] = INCBIN_U16("graphics/roulette/shroomish.gbapal");
+const u16 gRouletteTaillow_Pal[] = INCBIN_U16("graphics/roulette/tailow.gbapal");
+const u16 gRouletteGridIcons_Pal[] = INCBIN_U16("graphics/roulette/grid_icons.gbapal");
+const u16 gRouletteWynaut_Pal[] = INCBIN_U16("graphics/roulette/wynaut.gbapal");
+const u16 gRouletteAzurill_Pal[] = INCBIN_U16("graphics/roulette/azurill.gbapal");
+const u16 gRouletteSkitty_Pal[] = INCBIN_U16("graphics/roulette/skitty.gbapal");
+const u16 gRouletteMakuhita_Pal[] = INCBIN_U16("graphics/roulette/makuhita.gbapal");
+const u16 gRouletteUnused1_Pal[] = INCBIN_U16("graphics/roulette/unused_1.gbapal");
+const u16 gRouletteUnused2_Pal[] = INCBIN_U16("graphics/roulette/unused_2.gbapal");
+const u16 gRouletteUnused3_Pal[] = INCBIN_U16("graphics/roulette/unused_3.gbapal");
+const u16 gRouletteUnused4_Pal[] = INCBIN_U16("graphics/roulette/unused_4.gbapal");
+
+// pokedex
+const u16 gCryMeter_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal");
+const u8 gCryMeter_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
+
+// credits
+const u32 gCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/the_end_copyright.4bpp.lz");
+
+// pokenav match call gfx
+const u16 gMatchCallUI_Pal[] = INCBIN_U16("graphics/pokenav/match_call/ui.gbapal");
+const u32 gMatchCallUI_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/ui.4bpp.lz");
+const u32 gMatchCallUI_Tilemap[] = INCBIN_U32("graphics/pokenav/match_call/ui.bin.lz");
+
+// pokenav conditions search results
+const u16 gConditionSearchResultFramePal[] = INCBIN_U16("graphics/pokenav/condition/search_results.gbapal");
+const u32 gConditionSearchResultTiles[] = INCBIN_U32("graphics/pokenav/condition/search_results.4bpp.lz");
+const u32 gConditionSearchResultTilemap[] = INCBIN_U32("graphics/pokenav/condition/search_results.bin.lz");
+
+// pokenav ribbons list
+const u16 gMonRibbonListFramePal[] = INCBIN_U16("graphics/pokenav/ribbons/list_bg.gbapal");
+const u32 gMonRibbonListFrameTiles[] = INCBIN_U32("graphics/pokenav/ribbons/list_bg.4bpp.lz");
+const u32 gMonRibbonListFrameTilemap[] = INCBIN_U32("graphics/pokenav/ribbons/list_bg.bin.lz");
+
 // random garbage at the end.
 static const u8 sEmpty3[0x54BAC] = {0};
 static const u8 sUnused1[]       = {0x0D, 0x00, 0x58, 0x02};
