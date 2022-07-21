@@ -2469,13 +2469,13 @@ bool32 ShouldPivot(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u8 mo
 
                     if (!IS_MOVE_STATUS(move) && (shouldSwitch
                      || (AtMaxHp(battlerDef) && (AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_FOCUS_SASH
-                      || defAbility == ABILITY_STURDY || defAbility == ABILITY_MULTISCALE || defAbility == ABILITY_SHADOW_SHIELD))))
+                      || (defAbility == ABILITY_STURDY && B_STURDY >= GEN_5) || defAbility == ABILITY_MULTISCALE || defAbility == ABILITY_SHADOW_SHIELD))))
                         return PIVOT;   // pivot to break sash/sturdy/multiscale
                 }
                 else if (!hasStatBoost)
                 {
                     if (!IS_MOVE_STATUS(move) && (AtMaxHp(battlerDef) && (AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_FOCUS_SASH
-                      || defAbility == ABILITY_STURDY || defAbility == ABILITY_MULTISCALE || defAbility == ABILITY_SHADOW_SHIELD)))
+                      || (defAbility == ABILITY_STURDY && B_STURDY >= GEN_5) || defAbility == ABILITY_MULTISCALE || defAbility == ABILITY_SHADOW_SHIELD)))
                         return PIVOT;   // pivot to break sash/sturdy/multiscale
 
                     if (shouldSwitch)
