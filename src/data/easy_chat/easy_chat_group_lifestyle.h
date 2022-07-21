@@ -47,87 +47,87 @@ const u8 gEasyChatWord_World[] = _("MONDE");
 const struct EasyChatWordInfo gEasyChatGroup_Lifestyle[] = {
     {
         .text = gEasyChatWord_Chores,
-        .alphabeticalOrder = 3,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Home,
-        .alphabeticalOrder = 4,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Money,
-        .alphabeticalOrder = 0,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Allowance,
-        .alphabeticalOrder = 16,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Bath,
         .alphabeticalOrder = 7,
         .enabled = TRUE,
     },
     {
+        .text = gEasyChatWord_Home,
+        .alphabeticalOrder = 2,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Money,
+        .alphabeticalOrder = 4,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Allowance,
+        .alphabeticalOrder = 32,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Bath,
+        .alphabeticalOrder = 16,
+        .enabled = TRUE,
+    },
+    {
         .text = gEasyChatWord_Conversation,
-        .alphabeticalOrder = 5,
+        .alphabeticalOrder = 25,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_School,
-        .alphabeticalOrder = 26,
+        .alphabeticalOrder = 5,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Commemorate,
-        .alphabeticalOrder = 24,
+        .alphabeticalOrder = 36,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Habit,
-        .alphabeticalOrder = 39,
+        .alphabeticalOrder = 17,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Group,
-        .alphabeticalOrder = 23,
+        .alphabeticalOrder = 6,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Word,
-        .alphabeticalOrder = 9,
+        .alphabeticalOrder = 26,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Store,
-        .alphabeticalOrder = 8,
+        .alphabeticalOrder = 34,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Service,
-        .alphabeticalOrder = 1,
+        .alphabeticalOrder = 23,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Work,
-        .alphabeticalOrder = 18,
+        .alphabeticalOrder = 33,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_System,
-        .alphabeticalOrder = 29,
+        .alphabeticalOrder = 9,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Train,
-        .alphabeticalOrder = 40,
+        .alphabeticalOrder = 8,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Class,
-        .alphabeticalOrder = 17,
+        .alphabeticalOrder = 18,
         .enabled = TRUE,
     },
     {
@@ -137,22 +137,22 @@ const struct EasyChatWordInfo gEasyChatGroup_Lifestyle[] = {
     },
     {
         .text = gEasyChatWord_Information,
-        .alphabeticalOrder = 41,
+        .alphabeticalOrder = 43,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Living,
-        .alphabeticalOrder = 19,
+        .alphabeticalOrder = 11,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Teacher,
-        .alphabeticalOrder = 35,
+        .alphabeticalOrder = 1,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Tournament,
-        .alphabeticalOrder = 36,
+        .alphabeticalOrder = 40,
         .enabled = TRUE,
     },
     {
@@ -162,87 +162,87 @@ const struct EasyChatWordInfo gEasyChatGroup_Lifestyle[] = {
     },
     {
         .text = gEasyChatWord_Event,
-        .alphabeticalOrder = 2,
+        .alphabeticalOrder = 44,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Digital,
-        .alphabeticalOrder = 30,
+        .alphabeticalOrder = 10,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Test,
-        .alphabeticalOrder = 31,
+        .alphabeticalOrder = 30,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_DeptStore,
-        .alphabeticalOrder = 33,
+        .alphabeticalOrder = 31,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Television,
-        .alphabeticalOrder = 28,
+        .alphabeticalOrder = 24,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Phone,
-        .alphabeticalOrder = 32,
+        .alphabeticalOrder = 29,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Item,
-        .alphabeticalOrder = 38,
+        .alphabeticalOrder = 35,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Name,
-        .alphabeticalOrder = 42,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_News,
-        .alphabeticalOrder = 43,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Popular,
-        .alphabeticalOrder = 6,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Party,
-        .alphabeticalOrder = 12,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Study,
-        .alphabeticalOrder = 11,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Machine,
-        .alphabeticalOrder = 34,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Mail,
-        .alphabeticalOrder = 14,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Message,
         .alphabeticalOrder = 20,
         .enabled = TRUE,
     },
     {
+        .text = gEasyChatWord_News,
+        .alphabeticalOrder = 38,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Popular,
+        .alphabeticalOrder = 19,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Party,
+        .alphabeticalOrder = 42,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Study,
+        .alphabeticalOrder = 39,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Machine,
+        .alphabeticalOrder = 0,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Mail,
+        .alphabeticalOrder = 12,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Message,
+        .alphabeticalOrder = 14,
+        .enabled = TRUE,
+    },
+    {
         .text = gEasyChatWord_Promise,
-        .alphabeticalOrder = 27,
+        .alphabeticalOrder = 28,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Dream,
-        .alphabeticalOrder = 25,
+        .alphabeticalOrder = 27,
         .enabled = TRUE,
     },
     {
@@ -257,7 +257,7 @@ const struct EasyChatWordInfo gEasyChatGroup_Lifestyle[] = {
     },
     {
         .text = gEasyChatWord_Radio,
-        .alphabeticalOrder = 10,
+        .alphabeticalOrder = 3,
         .enabled = TRUE,
     },
     {

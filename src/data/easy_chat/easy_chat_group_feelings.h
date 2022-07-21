@@ -71,77 +71,77 @@ const u8 gEasyChatWord_Understands[] = _("COMPREND");
 const struct EasyChatWordInfo gEasyChatGroup_Feelings[] = {
     {
         .text = gEasyChatWord_Meet,
-        .alphabeticalOrder = 40,
+        .alphabeticalOrder = 22,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Play,
-        .alphabeticalOrder = 39,
+        .alphabeticalOrder = 55,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Hurried,
-        .alphabeticalOrder = 24,
+        .alphabeticalOrder = 48,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Goes,
-        .alphabeticalOrder = 23,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Giddy,
-        .alphabeticalOrder = 46,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Happy,
-        .alphabeticalOrder = 63,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Happiness,
-        .alphabeticalOrder = 36,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Excite,
-        .alphabeticalOrder = 37,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Important,
-        .alphabeticalOrder = 38,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Funny,
-        .alphabeticalOrder = 61,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Got,
-        .alphabeticalOrder = 31,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_GoHome,
         .alphabeticalOrder = 62,
         .enabled = TRUE,
     },
     {
-        .text = gEasyChatWord_Disappointed,
-        .alphabeticalOrder = 27,
+        .text = gEasyChatWord_Giddy,
+        .alphabeticalOrder = 6,
         .enabled = TRUE,
     },
     {
-        .text = gEasyChatWord_Disappoints,
+        .text = gEasyChatWord_Happy,
+        .alphabeticalOrder = 24,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Happiness,
+        .alphabeticalOrder = 68,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Excite,
+        .alphabeticalOrder = 67,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Important,
+        .alphabeticalOrder = 37,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Funny,
+        .alphabeticalOrder = 15,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Got,
+        .alphabeticalOrder = 61,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_GoHome,
+        .alphabeticalOrder = 32,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Disappointed,
         .alphabeticalOrder = 12,
         .enabled = TRUE,
     },
     {
+        .text = gEasyChatWord_Disappoints,
+        .alphabeticalOrder = 17,
+        .enabled = TRUE,
+    },
+    {
         .text = gEasyChatWord_Sad,
-        .alphabeticalOrder = 13,
+        .alphabeticalOrder = 11,
         .enabled = TRUE,
     },
     {
@@ -151,42 +151,42 @@ const struct EasyChatWordInfo gEasyChatGroup_Feelings[] = {
     },
     {
         .text = gEasyChatWord_Tries,
-        .alphabeticalOrder = 22,
+        .alphabeticalOrder = 49,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Hears,
-        .alphabeticalOrder = 35,
+        .alphabeticalOrder = 47,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Think,
-        .alphabeticalOrder = 60,
+        .alphabeticalOrder = 9,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Hear,
-        .alphabeticalOrder = 32,
+        .alphabeticalOrder = 18,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Wants,
-        .alphabeticalOrder = 51,
+        .alphabeticalOrder = 25,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Misheard,
-        .alphabeticalOrder = 44,
+        .alphabeticalOrder = 20,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Dislike,
-        .alphabeticalOrder = 42,
+        .alphabeticalOrder = 63,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Angry,
-        .alphabeticalOrder = 43,
+        .alphabeticalOrder = 23,
         .enabled = TRUE,
     },
     {
@@ -196,82 +196,82 @@ const struct EasyChatWordInfo gEasyChatGroup_Feelings[] = {
     },
     {
         .text = gEasyChatWord_Scary,
-        .alphabeticalOrder = 53,
+        .alphabeticalOrder = 36,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Lonesome,
-        .alphabeticalOrder = 9,
+        .alphabeticalOrder = 39,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Disappoint,
-        .alphabeticalOrder = 29,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Joy,
         .alphabeticalOrder = 4,
         .enabled = TRUE,
     },
     {
+        .text = gEasyChatWord_Joy,
+        .alphabeticalOrder = 45,
+        .enabled = TRUE,
+    },
+    {
         .text = gEasyChatWord_Gets,
-        .alphabeticalOrder = 11,
+        .alphabeticalOrder = 60,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Never,
-        .alphabeticalOrder = 3,
+        .alphabeticalOrder = 27,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Darn,
-        .alphabeticalOrder = 10,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Downcast,
-        .alphabeticalOrder = 64,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Incredible,
-        .alphabeticalOrder = 6,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Likes,
         .alphabeticalOrder = 5,
         .enabled = TRUE,
     },
     {
+        .text = gEasyChatWord_Downcast,
+        .alphabeticalOrder = 51,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Incredible,
+        .alphabeticalOrder = 10,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Likes,
+        .alphabeticalOrder = 44,
+        .enabled = TRUE,
+    },
+    {
         .text = gEasyChatWord_Dislikes,
-        .alphabeticalOrder = 47,
+        .alphabeticalOrder = 35,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Boring,
-        .alphabeticalOrder = 19,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Care,
-        .alphabeticalOrder = 17,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Cares,
-        .alphabeticalOrder = 2,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_AllRight,
         .alphabeticalOrder = 8,
         .enabled = TRUE,
     },
     {
+        .text = gEasyChatWord_Care,
+        .alphabeticalOrder = 34,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Cares,
+        .alphabeticalOrder = 3,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_AllRight,
+        .alphabeticalOrder = 40,
+        .enabled = TRUE,
+    },
+    {
         .text = gEasyChatWord_Adore,
-        .alphabeticalOrder = 33,
+        .alphabeticalOrder = 54,
         .enabled = TRUE,
     },
     {
@@ -281,27 +281,27 @@ const struct EasyChatWordInfo gEasyChatGroup_Feelings[] = {
     },
     {
         .text = gEasyChatWord_Enjoy,
-        .alphabeticalOrder = 45,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Enjoys,
-        .alphabeticalOrder = 34,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Eat,
-        .alphabeticalOrder = 26,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Lacking,
         .alphabeticalOrder = 0,
         .enabled = TRUE,
     },
     {
+        .text = gEasyChatWord_Enjoys,
+        .alphabeticalOrder = 46,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Eat,
+        .alphabeticalOrder = 16,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Lacking,
+        .alphabeticalOrder = 33,
+        .enabled = TRUE,
+    },
+    {
         .text = gEasyChatWord_Bad,
-        .alphabeticalOrder = 21,
+        .alphabeticalOrder = 29,
         .enabled = TRUE,
     },
     {
@@ -311,102 +311,102 @@ const struct EasyChatWordInfo gEasyChatGroup_Feelings[] = {
     },
     {
         .text = gEasyChatWord_Terrible,
-        .alphabeticalOrder = 30,
+        .alphabeticalOrder = 43,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Should,
-        .alphabeticalOrder = 50,
+        .alphabeticalOrder = 21,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Nice,
-        .alphabeticalOrder = 1,
+        .alphabeticalOrder = 53,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Drink,
-        .alphabeticalOrder = 66,
+        .alphabeticalOrder = 2,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Surprise,
-        .alphabeticalOrder = 58,
+        .alphabeticalOrder = 66,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Fear,
-        .alphabeticalOrder = 65,
+        .alphabeticalOrder = 58,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Want,
-        .alphabeticalOrder = 14,
+        .alphabeticalOrder = 19,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Wait,
-        .alphabeticalOrder = 56,
+        .alphabeticalOrder = 13,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Satisfied,
-        .alphabeticalOrder = 25,
+        .alphabeticalOrder = 56,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_See,
-        .alphabeticalOrder = 57,
+        .alphabeticalOrder = 65,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Rare,
-        .alphabeticalOrder = 49,
+        .alphabeticalOrder = 1,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Negative,
-        .alphabeticalOrder = 52,
+        .alphabeticalOrder = 26,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Done,
-        .alphabeticalOrder = 48,
+        .alphabeticalOrder = 30,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Danger,
-        .alphabeticalOrder = 18,
+        .alphabeticalOrder = 64,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Defeated,
-        .alphabeticalOrder = 16,
+        .alphabeticalOrder = 42,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Beat,
-        .alphabeticalOrder = 15,
+        .alphabeticalOrder = 38,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Great,
-        .alphabeticalOrder = 67,
+        .alphabeticalOrder = 52,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Romantic,
-        .alphabeticalOrder = 68,
+        .alphabeticalOrder = 50,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Question,
-        .alphabeticalOrder = 55,
+        .alphabeticalOrder = 14,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Understand,
-        .alphabeticalOrder = 54,
+        .alphabeticalOrder = 57,
         .enabled = TRUE,
     },
     {
