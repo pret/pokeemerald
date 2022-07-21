@@ -375,15 +375,9 @@ static const u16 sIgnoreMoldBreakerMoves[] =
     MOVE_MOONGEIST_BEAM,
     MOVE_SUNSTEEL_STRIKE,
     MOVE_PHOTON_GEYSER,
-    #ifdef MOVE_LIGHT_THAT_BURNS_THE_SKY
     MOVE_LIGHT_THAT_BURNS_THE_SKY,
-    #endif
-    #ifdef MOVE_MENACING_MOONRAZE_MAELSTROM
     MOVE_MENACING_MOONRAZE_MAELSTROM,
-    #endif
-    #ifdef MOVE_SEARING_SUNRAZE_SMASH
     MOVE_SEARING_SUNRAZE_SMASH,
-    #endif
 };
 
 static const u16 sInstructBannedMoves[] =

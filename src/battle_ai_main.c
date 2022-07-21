@@ -2385,9 +2385,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                   || IsInstructBannedMove(instructedMove)
                   || MoveRequiresRecharging(instructedMove)
                   || MoveCallsOtherMove(instructedMove)
-                  #ifdef ITEM_Z_POWER_RING
-                  //|| (IsZMove(instructedMove))
-                  #endif
+                  || IsZMove(instructedMove)
                   || (gLockedMoves[battlerDef] != 0 && gLockedMoves[battlerDef] != 0xFFFF)
                   || gBattleMons[battlerDef].status2 & STATUS2_MULTIPLETURNS
                   || PartnerMoveIsSameAsAttacker(BATTLE_PARTNER(battlerAtk), battlerDef, move, AI_DATA->partnerMove))
