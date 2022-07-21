@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_z_move.h"
 #include "malloc.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -374,15 +375,9 @@ static const u16 sIgnoreMoldBreakerMoves[] =
     MOVE_MOONGEIST_BEAM,
     MOVE_SUNSTEEL_STRIKE,
     MOVE_PHOTON_GEYSER,
-    #ifdef MOVE_LIGHT_THAT_BURNS_THE_SKY
     MOVE_LIGHT_THAT_BURNS_THE_SKY,
-    #endif
-    #ifdef MOVE_MENACING_MOONRAZE_MAELSTROM
     MOVE_MENACING_MOONRAZE_MAELSTROM,
-    #endif
-    #ifdef MOVE_SEARING_SUNRAZE_SMASH
     MOVE_SEARING_SUNRAZE_SMASH,
-    #endif
 };
 
 static const u16 sInstructBannedMoves[] =
@@ -605,7 +600,7 @@ bool32 AtMaxHp(u8 battlerId)
 bool32 IsBattlerTrapped(u8 battler, bool8 checkSwitch)
 {
     u8 holdEffect = AI_DATA->holdEffects[battler];
-    if (IS_BATTLER_OF_TYPE(battler, TYPE_GHOST)
+    if ((B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
       || (checkSwitch && holdEffect == HOLD_EFFECT_SHED_SHELL)
       || (!checkSwitch && GetBattlerAbility(battler) == ABILITY_RUN_AWAY)
       || (!checkSwitch && holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN))
@@ -616,7 +611,7 @@ bool32 IsBattlerTrapped(u8 battler, bool8 checkSwitch)
     {
         if (gBattleMons[battler].status2 & (STATUS2_ESCAPE_PREVENTION | STATUS2_WRAPPED)
           || IsAbilityPreventingEscape(battler)
-          || gStatuses3[battler] & (STATUS3_ROOTED)    // TODO: sky drop target in air
+          || gStatuses3[battler] & (STATUS3_ROOTED | STATUS3_SKY_DROPPED)
           || (gFieldStatuses & STATUS_FIELD_FAIRY_LOCK))
             return TRUE;
     }
@@ -720,11 +715,18 @@ static bool32 AI_GetIfCrit(u32 move, u8 battlerAtk, u8 battlerDef)
     return isCrit;
 }
 
-s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness)
+s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness, bool32 considerZPower)
 {
     s32 dmg, moveType, critDmg, normalDmg;
     s8 critChance;
     u16 effectivenessMultiplier;
+
+    if (considerZPower && IsViableZMove(battlerAtk, move))
+    {
+        //temporarily enable z moves for damage calcs
+        gBattleStruct->zmove.baseMoves[battlerAtk] = move;
+        gBattleStruct->zmove.active = TRUE;
+    }
 
     SaveBattlerData(battlerAtk);
     SaveBattlerData(battlerDef);
@@ -800,6 +802,8 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness)
     // convert multiper to AI_EFFECTIVENESS_xX
     *typeEffectiveness = AI_GetEffectiveness(effectivenessMultiplier);
 
+    gBattleStruct->zmove.active = FALSE;
+    gBattleStruct->zmove.baseMoves[battlerAtk] = MOVE_NONE;
     return dmg;
 }
 
@@ -1102,7 +1106,7 @@ bool32 CanMoveFaintBattler(u16 move, u8 battlerDef, u8 battlerAtk, u8 nHits)
     if (move != MOVE_NONE
       && move != 0xFFFF
       && !(unusable & gBitTable[i])
-      && AI_CalcDamage(move, battlerDef, battlerAtk, &effectiveness) >= gBattleMons[battlerAtk].hp)
+      && AI_CalcDamage(move, battlerDef, battlerAtk, &effectiveness, FALSE) >= gBattleMons[battlerAtk].hp)
         return TRUE;
 
     return FALSE;
@@ -2053,7 +2057,9 @@ bool32 IsStatRaisingEffect(u16 effect)
     case EFFECT_EVASION_UP_2:
     case EFFECT_MINIMIZE:
     case EFFECT_DEFENSE_CURL:
+    #if B_CHARGE_SPDEF_RAISE >= GEN_5
     case EFFECT_CHARGE:
+    #endif
 	case EFFECT_CALM_MIND:
     case EFFECT_COSMIC_POWER:
 	case EFFECT_DRAGON_DANCE:
@@ -2457,13 +2463,13 @@ bool32 ShouldPivot(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u8 mo
 
                     if (!IS_MOVE_STATUS(move) && (shouldSwitch
                      || (AtMaxHp(battlerDef) && (AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_FOCUS_SASH
-                      || defAbility == ABILITY_STURDY || defAbility == ABILITY_MULTISCALE || defAbility == ABILITY_SHADOW_SHIELD))))
+                      || (defAbility == ABILITY_STURDY && B_STURDY >= GEN_5) || defAbility == ABILITY_MULTISCALE || defAbility == ABILITY_SHADOW_SHIELD))))
                         return PIVOT;   // pivot to break sash/sturdy/multiscale
                 }
                 else if (!hasStatBoost)
                 {
                     if (!IS_MOVE_STATUS(move) && (AtMaxHp(battlerDef) && (AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_FOCUS_SASH
-                      || defAbility == ABILITY_STURDY || defAbility == ABILITY_MULTISCALE || defAbility == ABILITY_SHADOW_SHIELD)))
+                      || (defAbility == ABILITY_STURDY && B_STURDY >= GEN_5) || defAbility == ABILITY_MULTISCALE || defAbility == ABILITY_SHADOW_SHIELD)))
                         return PIVOT;   // pivot to break sash/sturdy/multiscale
 
                     if (shouldSwitch)
@@ -3219,7 +3225,7 @@ s32 AI_CalcPartyMonDamage(u16 move, u8 battlerAtk, u8 battlerDef, struct Pokemon
         battleMons[i] = gBattleMons[i];
 
     PokemonToBattleMon(mon, &gBattleMons[battlerAtk]);
-    dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness);
+    dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness, FALSE);
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         gBattleMons[i] = battleMons[i];
@@ -3597,5 +3603,39 @@ bool32 AI_MoveMakesContact(u32 ability, u32 holdEffect, u16 move)
       && ability != ABILITY_LONG_REACH
       && holdEffect != HOLD_EFFECT_PROTECTIVE_PADS)
         return TRUE;
+    return FALSE;
+}
+
+//TODO - this could use some more sophisticated logic
+bool32 ShouldUseZMove(u8 battlerAtk, u8 battlerDef, u16 chosenMove)
+{
+    // simple logic. just upgrades chosen move to z move if possible, unless regular move would kill opponent
+    if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && battlerDef == BATTLE_PARTNER(battlerAtk))
+        return FALSE; //don't use z move on partner
+    if (gBattleStruct->zmove.used[battlerAtk])
+        return FALSE;   //cant use z move twice
+    
+    if (IsViableZMove(battlerAtk, chosenMove))
+    {
+        u8 effectiveness;
+        
+        #ifdef POKEMON_EXPANSION
+        if (gBattleMons[battlerDef].ability == ABILITY_DISGUISE && gBattleMons[battlerDef].species == SPECIES_MIMIKYU)
+            return FALSE; // Don't waste a Z-Move busting disguise
+        if (gBattleMons[battlerDef].ability == ABILITY_ICE_FACE && gBattleMons[battlerDef].species == SPECIES_EISCUE && IS_MOVE_PHYSICAL(chosenMove))
+            return FALSE; // Don't waste a Z-Move busting Ice Face
+        #endif
+        
+        if (IS_MOVE_STATUS(chosenMove) && !IS_MOVE_STATUS(gBattleStruct->zmove.chosenZMove))
+            return FALSE;
+        else if (!IS_MOVE_STATUS(chosenMove) && IS_MOVE_STATUS(gBattleStruct->zmove.chosenZMove))
+            return FALSE;
+        
+        if (!IS_MOVE_STATUS(chosenMove) && AI_CalcDamage(chosenMove, battlerAtk, battlerDef, &effectiveness, FALSE) >= gBattleMons[battlerDef].hp)
+            return FALSE;   // don't waste damaging z move if can otherwise faint target
+        
+        return TRUE;
+    }
+    
     return FALSE;
 }

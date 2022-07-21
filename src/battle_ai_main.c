@@ -6,6 +6,7 @@
 #include "battle_ai_main.h"
 #include "battle_factory.h"
 #include "battle_setup.h"
+#include "battle_z_move.h"
 #include "data.h"
 #include "event_data.h"
 #include "item.h"
@@ -255,8 +256,8 @@ void GetAiLogicData(void)
     
     memset(AI_DATA, 0, sizeof(struct AiLogicData));
     
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER)
-      && !IsWildMonSmart()))
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER))
+      && !IsWildMonSmart())
         return;
     
     // get/assume all battler data
@@ -291,7 +292,7 @@ void GetAiLogicData(void)
                  && move != 0xFFFF
                  //&& gBattleMoves[move].power != 0  /* we want to get effectiveness of status moves */
                  && !(AI_DATA->moveLimitations[battlerAtk] & gBitTable[i])) {
-                    dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness);
+                    dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness, TRUE);
                 }
                 
                 AI_DATA->simulatedDmg[battlerAtk][battlerDef][i] = dmg;
@@ -985,8 +986,10 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 20;
             else if (!HasMoveWithType(battlerAtk, TYPE_ELECTRIC))
                 score -= 10;
+            #if B_CHARGE_SPDEF_RAISE >= GEN_5
             else if (!BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_SPDEF))
                 score -= 5;
+            #endif
             break;
         case EFFECT_QUIVER_DANCE:
         case EFFECT_GEOMANCY:
@@ -2383,9 +2386,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                   || IsInstructBannedMove(instructedMove)
                   || MoveRequiresRecharging(instructedMove)
                   || MoveCallsOtherMove(instructedMove)
-                  #ifdef ITEM_Z_POWER_RING
-                  //|| (IsZMove(instructedMove))
-                  #endif
+                  || IsZMove(instructedMove)
                   || (gLockedMoves[battlerDef] != 0 && gLockedMoves[battlerDef] != 0xFFFF)
                   || gBattleMons[battlerDef].status2 & STATUS2_MULTIPLETURNS
                   || PartnerMoveIsSameAsAttacker(BATTLE_PARTNER(battlerAtk), battlerDef, move, AI_DATA->partnerMove))
@@ -2491,15 +2492,14 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             //break;
         //case EFFECT_BEAK_BLAST:
             //break;
-        /*case EFFECT_SKY_DROP:
+        case EFFECT_SKY_DROP:
             if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_FLYING))
                 score -= 10;
-            if (WillFaintFromWeather(battlerAtk)
-            ||  MoveBlockedBySubstitute(move, battlerAtk, battlerDef)
-            ||  GetSpeciesWeight(gBattleMons[battlerDef].species, AI_DATA->abilities[battlerDef], AI_DATA->holdEffects[battlerDef], battlerDef, TRUE) >= 2000) //200.0 kg
+            if (BattlerWillFaintFromWeather(battlerAtk, AI_DATA->abilities[battlerAtk])
+            ||  DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
+            ||  GetBattlerWeight(battlerDef) >= 2000) //200.0 kg
                 score -= 10;
             break;
-            */
         /*case EFFECT_NO_RETREAT:
             if (TrappedByNoRetreat(battlerAtk))
                 score -= 10;
@@ -4051,8 +4051,9 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_CHARGE:
         if (HasDamagingMoveOfType(battlerAtk, TYPE_ELECTRIC))
             score += 2;
-        
+        #if B_CHARGE_SPDEF_RAISE >= GEN_5
         IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPDEF, &score);
+        #endif
         break;
     case EFFECT_TAUNT:
         if (IS_MOVE_STATUS(predictedMove))

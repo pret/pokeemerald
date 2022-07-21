@@ -5,6 +5,9 @@
 #include "battle_ai_main.h"
 #include "battle_ai_util.h"
 #include "battle_scripts.h"
+#include "battle_z_move.h"
+#include "constants/moves.h"
+#include "constants/abilities.h"
 #include "item.h"
 #include "util.h"
 #include "pokemon.h"
@@ -1618,6 +1621,12 @@ static bool32 AccuracyCalcHelper(u16 move)
             RecordAbilityBattle(gBattlerTarget, ABILITY_NO_GUARD);
         return TRUE;
     }
+    
+    if (gBattleStruct->zmove.active && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE))
+    {
+        JumpIfMoveFailed(7, move);
+        return TRUE;
+    }
 
     if ((gStatuses3[gBattlerTarget] & STATUS3_PHANTOM_FORCE)
         || (!(gBattleMoves[move].flags & (FLAG_DMG_IN_AIR | FLAG_DMG_2X_IN_AIR)) && gStatuses3[gBattlerTarget] & STATUS3_ON_AIR)
@@ -1975,15 +1984,17 @@ static void Cmd_adjustdamage(void)
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
         gSpecialStatuses[gBattlerTarget].focusBanded = TRUE;
     }
-    else if (holdEffect == HOLD_EFFECT_FOCUS_SASH && BATTLER_MAX_HP(gBattlerTarget))
-    {
-        RecordItemEffectBattle(gBattlerTarget, holdEffect);
-        gSpecialStatuses[gBattlerTarget].focusSashed = TRUE;
-    }
+    #if B_STURDY >= GEN_5
     else if (GetBattlerAbility(gBattlerTarget) == ABILITY_STURDY && BATTLER_MAX_HP(gBattlerTarget))
     {
         RecordAbilityBattle(gBattlerTarget, ABILITY_STURDY);
         gSpecialStatuses[gBattlerTarget].sturdied = TRUE;
+    }
+    #endif
+    else if (holdEffect == HOLD_EFFECT_FOCUS_SASH && BATTLER_MAX_HP(gBattlerTarget))
+    {
+        RecordItemEffectBattle(gBattlerTarget, holdEffect);
+        gSpecialStatuses[gBattlerTarget].focusSashed = TRUE;
     }
 
     if (gBattleMoves[gCurrentMove].effect != EFFECT_FALSE_SWIPE
@@ -5622,6 +5633,10 @@ static void Cmd_moveend(void)
             gSpecialStatuses[gBattlerAttacker].damagedMons = 0;
             gSpecialStatuses[gBattlerTarget].berryReduced = FALSE;
             gBattleScripting.moveEffect = 0;
+            // clear attacker z move data
+            gBattleStruct->zmove.active = FALSE;
+            gBattleStruct->zmove.toBeUsed[gBattlerAttacker] = MOVE_NONE;
+            gBattleStruct->zmove.effect = EFFECT_HIT;
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_COUNT:
@@ -6399,6 +6414,16 @@ static void Cmd_switchineffects(void)
         SET_STATCHANGER(STAT_SPEED, 1, TRUE);
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_StickyWebOnSwitchIn;
+    }
+    else if (gBattleMons[gActiveBattler].hp != gBattleMons[gActiveBattler].maxHP && gBattleStruct->zmove.healReplacement)
+    {
+        gBattleStruct->zmove.healReplacement = FALSE;
+        gBattleMoveDamage = -1 * (gBattleMons[gActiveBattler].maxHP);
+        gBattleScripting.battler = gActiveBattler;
+        BattleScriptPushCursor();
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_Z_HP_TRAP;
+        gBattlescriptCurrInstr = BattleScript_HealReplacementZMove;
+        return;
     }
     else
     {
@@ -7498,12 +7523,12 @@ static bool32 HasAttackerFaintedTarget(void)
         return FALSE;
 }
 
-static void HandleTerrainMove(u32 moveEffect)
+static void HandleTerrainMove(u16 move)
 {
     u32 statusFlag = 0;
     u8 *timer = NULL;
 
-    switch (moveEffect)
+    switch (gBattleMoves[move].effect)
     {
     case EFFECT_MISTY_TERRAIN:
         statusFlag = STATUS_FIELD_MISTY_TERRAIN, timer = &gFieldTimers.terrainTimer;
@@ -7520,6 +7545,31 @@ static void HandleTerrainMove(u32 moveEffect)
     case EFFECT_PSYCHIC_TERRAIN:
         statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN, timer = &gFieldTimers.terrainTimer;
         gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+        break;
+    case EFFECT_DAMAGE_SET_TERRAIN:
+        switch (gBattleMoves[move].argument)
+        {
+        case 0: //genesis supernova
+            statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN, timer = &gFieldTimers.terrainTimer;
+            gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+            break;
+        case 1: //splintered stormshards
+            if (!(gFieldStatuses & (STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN)))
+            {
+                //no terrain to remove -> jump to battle script pointer
+                gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+            }
+            else
+            {
+                // remove all terrain
+                gFieldStatuses &= ~(STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN);
+                gBattleCommunication[MULTISTRING_CHOOSER] = 4;
+                gBattlescriptCurrInstr += 7;
+            }
+            return;
+        default:
+            break;
+        }
         break;
     }
 
@@ -8425,7 +8475,7 @@ static void Cmd_various(void)
         }
         break;
     case VARIOUS_SET_TERRAIN:
-        HandleTerrainMove(gBattleMoves[gCurrentMove].effect);
+        HandleTerrainMove(gCurrentMove);
         return;
     case VARIOUS_TRY_ME_FIRST:
         if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget))
@@ -8986,6 +9036,9 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;    // exit if loop failed (failsafe)
         }
         return;
+    case VARIOUS_SET_Z_EFFECT:
+        SetZEffect();   //handles battle script jumping internally
+        return;
     case VARIOUS_MOVEEND_ITEM_EFFECTS:
         if (ItemBattleEffects(ITEMEFFECT_NORMAL, gActiveBattler, FALSE))
             return;
@@ -9141,7 +9194,7 @@ static void Cmd_various(void)
         break;
     case VARIOUS_JUMP_IF_UNDER_200:
         // If the Pokemon is less than 200 kg, or weighing less than 441 lbs, then Sky Drop will work. Otherwise, it will fail.
-        if (GetPokedexHeightWeight(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), 1) < 441)
+        if (GetBattlerWeight(gBattlerTarget) < 2000)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         else
             gBattlescriptCurrInstr += 7;
@@ -9353,24 +9406,8 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 9;
         return;
     case VARIOUS_PHOTON_GEYSER_CHECK:
-    {
-        u32 attackerAtkStat = gBattleMons[gBattlerAttacker].attack;
-        u8 attackerAtkStage = gBattleMons[gBattlerAttacker].statStages[STAT_ATK];
-        u32 attackerSpAtkStat = gBattleMons[gBattlerAttacker].spAttack;
-
-        gSwapDamageCategory = FALSE;
-
-        attackerAtkStat *= gStatStageRatios[attackerAtkStage][0];
-        attackerAtkStat /= gStatStageRatios[attackerAtkStage][1];
-
-        attackerAtkStage = gBattleMons[gBattlerAttacker].statStages[STAT_SPATK];
-        attackerSpAtkStat *= gStatStageRatios[attackerAtkStage][0];
-        attackerSpAtkStat /= gStatStageRatios[attackerAtkStage][1];
-
-        if (attackerAtkStat > attackerSpAtkStat)
-            gSwapDamageCategory = TRUE;
+        gBattleStruct->swapDamageCategory = (GetSplitBasedOnStats(gActiveBattler) == SPLIT_SPECIAL);
         break;
-    }
     case VARIOUS_SHELL_SIDE_ARM_CHECK: // 0% chance GameFreak actually checks this way according to DaWobblefet, but this is the only functional explanation at the moment
     {
         u32 attackerAtkStat = gBattleMons[gBattlerAttacker].attack;
@@ -9381,7 +9418,7 @@ static void Cmd_various(void)
         u32 physical;
         u32 special;
 
-        gSwapDamageCategory = FALSE;
+        gBattleStruct->swapDamageCategory = FALSE;
 
         statStage = gBattleMons[gBattlerAttacker].statStages[STAT_ATK];
         attackerAtkStat *= gStatStageRatios[statStage][0];
@@ -9404,7 +9441,7 @@ static void Cmd_various(void)
         special = ((((2 * gBattleMons[gBattlerAttacker].level / 5 + 2) * gBattleMoves[gCurrentMove].power * attackerSpAtkStat) / targetSpDefStat) / 50);
 
         if (((physical > special) || (physical == special && (Random() % 2) == 0)))
-            gSwapDamageCategory = TRUE;
+            gBattleStruct->swapDamageCategory = TRUE;
         break;
     }
     case VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED:
