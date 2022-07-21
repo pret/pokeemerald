@@ -617,7 +617,7 @@ bool32 IsBattlerTrapped(u8 battler, bool8 checkSwitch)
     {
         if (gBattleMons[battler].status2 & (STATUS2_ESCAPE_PREVENTION | STATUS2_WRAPPED)
           || IsAbilityPreventingEscape(battler)
-          || gStatuses3[battler] & (STATUS3_ROOTED)    // TODO: sky drop target in air
+          || gStatuses3[battler] & (STATUS3_ROOTED | STATUS3_SKY_DROPPED)
           || (gFieldStatuses & STATUS_FIELD_FAIRY_LOCK))
             return TRUE;
     }

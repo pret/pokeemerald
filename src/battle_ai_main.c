@@ -2493,15 +2493,14 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             //break;
         //case EFFECT_BEAK_BLAST:
             //break;
-        /*case EFFECT_SKY_DROP:
+        case EFFECT_SKY_DROP:
             if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_FLYING))
                 score -= 10;
-            if (WillFaintFromWeather(battlerAtk)
-            ||  MoveBlockedBySubstitute(move, battlerAtk, battlerDef)
-            ||  GetSpeciesWeight(gBattleMons[battlerDef].species, AI_DATA->abilities[battlerDef], AI_DATA->holdEffects[battlerDef], battlerDef, TRUE) >= 2000) //200.0 kg
+            if (BattlerWillFaintFromWeather(battlerAtk, AI_DATA->abilities[battlerAtk])
+            ||  DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
+            ||  GetBattlerWeight(battlerDef) >= 2000) //200.0 kg
                 score -= 10;
             break;
-            */
         /*case EFFECT_NO_RETREAT:
             if (TrappedByNoRetreat(battlerAtk))
                 score -= 10;
