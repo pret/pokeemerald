@@ -8831,6 +8831,12 @@ static u32 CalcDefenseStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, 
         usesDefStat = FALSE;
     }
 
+    #if B_EXPLOSION_DEFENSE <= GEN_4
+    // Self-destruct / Explosion cut defense in half
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
+        defStat /= 2;
+    #endif
+
     // critical hits ignore positive stat changes
     if (isCrit && defStage > DEFAULT_STAT_STAGE)
         defStage = DEFAULT_STAT_STAGE;
