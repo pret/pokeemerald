@@ -154,7 +154,8 @@ void QueueZMove(u8 battlerId, u16 baseMove)
     gBattleStruct->zmove.baseMoves[battlerId] = baseMove;
     if (gBattleStruct->zmove.chosenZMove == MOVE_LIGHT_THAT_BURNS_THE_SKY)
         gBattleStruct->zmove.splits[battlerId] = GetSplitBasedOnStats(battlerId);
-    gBattleStruct->zmove.splits[battlerId] = gBattleMoves[baseMove].split;
+    else
+        gBattleStruct->zmove.splits[battlerId] = gBattleMoves[baseMove].split;
 }
 
 bool32 IsViableZMove(u8 battlerId, u16 move)
@@ -562,7 +563,7 @@ static void ZMoveSelectionDisplayPpNumber(void)
 const u8* GetZMoveName(u16 move)
 {
     if (IsZMove(move))
-        return gZMoveNames[move - MOVE_BREAKNECK_BLITZ];
+        return gZMoveNames[move - FIRST_Z_MOVE];
     else
         return gZMoveNames[0];   // Failsafe
 }

@@ -13,6 +13,7 @@ struct SignatureZMove
     u16 zmove;
 };
 
+bool8 IsZMove(u16 move);
 void QueueZMove(u8 battlerId, u16 baseMove);
 bool32 IsViableZMove(u8 battlerId, u16 move);
 bool32 TryChangeZIndicator(u8 battlerId, u8 moveIndex);
