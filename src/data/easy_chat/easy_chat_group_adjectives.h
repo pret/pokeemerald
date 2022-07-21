@@ -38,142 +38,142 @@ const u8 gEasyChatWord_Anticipation[] = _("ATTENDU");
 const struct EasyChatWordInfo gEasyChatGroup_Adjectives[] = {
     {
         .text = gEasyChatWord_Wandering,
-        .alphabeticalOrder = 35,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Rickety,
-        .alphabeticalOrder = 23,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_RockSolid,
-        .alphabeticalOrder = 20,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Hungry,
-        .alphabeticalOrder = 31,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Tight,
         .alphabeticalOrder = 14,
         .enabled = TRUE,
     },
     {
+        .text = gEasyChatWord_Rickety,
+        .alphabeticalOrder = 35,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_RockSolid,
+        .alphabeticalOrder = 25,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Hungry,
+        .alphabeticalOrder = 5,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Tight,
+        .alphabeticalOrder = 20,
+        .enabled = TRUE,
+    },
+    {
         .text = gEasyChatWord_Ticklish,
-        .alphabeticalOrder = 15,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Twirling,
-        .alphabeticalOrder = 32,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Spiraling,
-        .alphabeticalOrder = 34,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Thirsty,
-        .alphabeticalOrder = 12,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Lolling,
-        .alphabeticalOrder = 3,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Silky,
-        .alphabeticalOrder = 29,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Sadly,
-        .alphabeticalOrder = 9,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Hopeless,
-        .alphabeticalOrder = 33,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Useless,
-        .alphabeticalOrder = 1,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Drooling,
         .alphabeticalOrder = 27,
         .enabled = TRUE,
     },
     {
-        .text = gEasyChatWord_Exciting,
-        .alphabeticalOrder = 2,
+        .text = gEasyChatWord_Twirling,
+        .alphabeticalOrder = 31,
         .enabled = TRUE,
     },
     {
-        .text = gEasyChatWord_Thick,
-        .alphabeticalOrder = 11,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Smooth,
+        .text = gEasyChatWord_Spiraling,
         .alphabeticalOrder = 22,
         .enabled = TRUE,
     },
     {
-        .text = gEasyChatWord_Slimy,
-        .alphabeticalOrder = 26,
+        .text = gEasyChatWord_Thirsty,
+        .alphabeticalOrder = 29,
         .enabled = TRUE,
     },
     {
-        .text = gEasyChatWord_Thin,
+        .text = gEasyChatWord_Lolling,
         .alphabeticalOrder = 28,
         .enabled = TRUE,
     },
     {
-        .text = gEasyChatWord_Break,
-        .alphabeticalOrder = 10,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Voracious,
-        .alphabeticalOrder = 18,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Scatter,
-        .alphabeticalOrder = 17,
-        .enabled = TRUE,
-    },
-    {
-        .text = gEasyChatWord_Awesome,
+        .text = gEasyChatWord_Silky,
         .alphabeticalOrder = 7,
         .enabled = TRUE,
     },
     {
-        .text = gEasyChatWord_Wimpy,
+        .text = gEasyChatWord_Sadly,
         .alphabeticalOrder = 16,
         .enabled = TRUE,
     },
     {
-        .text = gEasyChatWord_Wobbly,
+        .text = gEasyChatWord_Hopeless,
+        .alphabeticalOrder = 3,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Useless,
+        .alphabeticalOrder = 32,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Drooling,
+        .alphabeticalOrder = 23,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Exciting,
         .alphabeticalOrder = 19,
         .enabled = TRUE,
     },
     {
+        .text = gEasyChatWord_Thick,
+        .alphabeticalOrder = 34,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Smooth,
+        .alphabeticalOrder = 30,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Slimy,
+        .alphabeticalOrder = 9,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Thin,
+        .alphabeticalOrder = 17,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Break,
+        .alphabeticalOrder = 24,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Voracious,
+        .alphabeticalOrder = 33,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Scatter,
+        .alphabeticalOrder = 18,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Awesome,
+        .alphabeticalOrder = 1,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Wimpy,
+        .alphabeticalOrder = 0,
+        .enabled = TRUE,
+    },
+    {
+        .text = gEasyChatWord_Wobbly,
+        .alphabeticalOrder = 15,
+        .enabled = TRUE,
+    },
+    {
         .text = gEasyChatWord_Shaky,
-        .alphabeticalOrder = 8,
+        .alphabeticalOrder = 12,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Ripped,
-        .alphabeticalOrder = 5,
+        .alphabeticalOrder = 13,
         .enabled = TRUE,
     },
     {
@@ -183,37 +183,37 @@ const struct EasyChatWordInfo gEasyChatGroup_Adjectives[] = {
     },
     {
         .text = gEasyChatWord_Increasing,
-        .alphabeticalOrder = 6,
+        .alphabeticalOrder = 8,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Yet,
-        .alphabeticalOrder = 13,
+        .alphabeticalOrder = 2,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Destroyed,
-        .alphabeticalOrder = 21,
+        .alphabeticalOrder = 10,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Fiery,
-        .alphabeticalOrder = 0,
+        .alphabeticalOrder = 6,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_LoveyDovey,
-        .alphabeticalOrder = 24,
+        .alphabeticalOrder = 26,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Happily,
-        .alphabeticalOrder = 25,
+        .alphabeticalOrder = 11,
         .enabled = TRUE,
     },
     {
         .text = gEasyChatWord_Anticipation,
-        .alphabeticalOrder = 30,
+        .alphabeticalOrder = 21,
         .enabled = TRUE,
     },
 };

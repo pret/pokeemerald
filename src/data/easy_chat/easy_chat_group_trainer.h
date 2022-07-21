@@ -124,7 +124,7 @@ const struct EasyChatWordInfo gEasyChatGroup_Trainer[] = {
     },
     {
         .text = gEasyChatWord_Red,
-        .alphabeticalOrder = 15,
+        .alphabeticalOrder = 14,
         .enabled = FALSE,
     },
     {
