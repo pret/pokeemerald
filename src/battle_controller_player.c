@@ -96,8 +96,8 @@ static void PlayerCmdEnd(void);
 static void PlayerBufferRunCommand(void);
 static void HandleInputChooseTarget(void);
 static void HandleInputChooseMove(void);
-static void MoveSelectionCreateCursorAt(u8 cursorPos, u8 arg1);
-static void MoveSelectionDestroyCursorAt(u8 cursorPos);
+static void MoveSelectionCreateCursorAt(u8, u8);
+static void MoveSelectionDestroyCursorAt(u8);
 static void MoveSelectionDisplayPpNumber(void);
 static void MoveSelectionDisplayPpString(void);
 static void MoveSelectionDisplayMoveType(void);
@@ -106,18 +106,18 @@ static void HandleMoveSwitching(void);
 static void SwitchIn_HandleSoundAndEnd(void);
 static void WaitForMonSelection(void);
 static void CompleteWhenChoseItem(void);
-static void Task_LaunchLvlUpAnim(u8 taskId);
-static void Task_PrepareToGiveExpWithExpBar(u8 taskId);
-static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId);
-static void Task_GiveExpWithExpBar(u8 taskId);
-static void Task_UpdateLvlInHealthbox(u8 taskId);
+static void Task_LaunchLvlUpAnim(u8);
+static void Task_PrepareToGiveExpWithExpBar(u8);
+static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8);
+static void Task_GiveExpWithExpBar(u8);
+static void Task_UpdateLvlInHealthbox(u8);
 static void PrintLinkStandbyMsg(void);
-static u32 CopyPlayerMonData(u8 monId, u8 *dst);
-static void SetPlayerMonData(u8 monId);
-static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit);
+static u32 CopyPlayerMonData(u8, u8 *);
+static void SetPlayerMonData(u8);
+static void StartSendOutAnim(u8, bool8);
 static void DoSwitchOutAnimation(void);
 static void PlayerDoMoveAnimation(void);
-static void Task_StartSendOutAnim(u8 taskId);
+static void Task_StartSendOutAnim(u8);
 static void EndDrawPartyStatusSummary(void);
 
 static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
@@ -1507,11 +1507,11 @@ static void MoveSelectionDisplayMoveType(void)
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
 }
 
-static void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 arg1)
+static void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 baseTileNum)
 {
     u16 src[2];
-    src[0] = arg1 + 1;
-    src[1] = arg1 + 2;
+    src[0] = baseTileNum + 1;
+    src[1] = baseTileNum + 2;
 
     CopyToBgTilemapBufferRect_ChangePalette(0, src, 9 * (cursorPosition & 1) + 1, 55 + (cursorPosition & 2), 1, 2, 0x11);
     CopyBgTilemapBufferToVram(0);
@@ -1527,7 +1527,7 @@ static void MoveSelectionDestroyCursorAt(u8 cursorPosition)
     CopyBgTilemapBufferToVram(0);
 }
 
-void ActionSelectionCreateCursorAt(u8 cursorPosition, u8 arg1)
+void ActionSelectionCreateCursorAt(u8 cursorPosition, u8 baseTileNum)
 {
     u16 src[2];
     src[0] = 1;

@@ -67,6 +67,8 @@ struct RecordedBattleSave
     u32 checksum;
 };
 
+STATIC_ASSERT(sizeof(struct RecordedBattleSave) <= SECTOR_DATA_SIZE, RecordedBattleSaveFreeSpace);
+
 EWRAM_DATA u32 gRecordedBattleRngSeed = 0;
 EWRAM_DATA u32 gBattlePalaceMoveSelectionRngValue = 0;
 EWRAM_DATA static u8 sBattleRecords[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE] = {0};

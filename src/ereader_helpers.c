@@ -15,6 +15,8 @@
 #include "constants/items.h"
 #include "constants/trainer_hill.h"
 
+STATIC_ASSERT(sizeof(struct TrainerHillChallenge) <= SECTOR_DATA_SIZE, TrainerHillChallengeFreeSpace);
+
 struct SendRecvMgr
 {
     bool8 isParent;

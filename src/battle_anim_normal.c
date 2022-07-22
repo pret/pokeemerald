@@ -304,7 +304,7 @@ static void AnimConfusionDuck_Step(struct Sprite *sprite)
 // arg 4: blend color
 static void AnimSimplePaletteBlend(struct Sprite *sprite)
 {
-    u32 selectedPalettes = UnpackSelectedBattleBgPalettes(gBattleAnimArgs[0]);
+    u32 selectedPalettes = UnpackSelectedBattlePalettes(gBattleAnimArgs[0]);
     BeginNormalPaletteFade(selectedPalettes, gBattleAnimArgs[1], gBattleAnimArgs[2], gBattleAnimArgs[3], gBattleAnimArgs[4]);
     sprite->invisible = TRUE;
     sprite->callback = AnimSimplePaletteBlend_Step;
@@ -312,23 +312,23 @@ static void AnimSimplePaletteBlend(struct Sprite *sprite)
 
 // Unpacks a bitfield and returns a bitmask of its selected palettes.
 // Bits 0-6 of the selector parameter result in the following palettes being selected:
-//   0: battle background palettes (BG palettes 1, 2, and 3)
-//   1: gBattleAnimAttacker OBJ palette
-//   2: gBattleAnimTarget OBJ palette
-//   3: gBattleAnimAttacker partner OBJ palette
-//   4: gBattleAnimTarget partner OBJ palette
-//   5: BG palette 4
-//   6: BG palette 5
-u32 UnpackSelectedBattleBgPalettes(s16 selector)
+//   0: F_PAL_BG, battle background palettes (BG palettes 1, 2, and 3)
+//   1: F_PAL_ATTACKER, gBattleAnimAttacker OBJ palette
+//   2: F_PAL_TARGET, gBattleAnimTarget OBJ palette
+//   3: F_PAL_ATK_PARTNER, gBattleAnimAttacker partner OBJ palette
+//   4: F_PAL_DEF_PARTNER, gBattleAnimTarget partner OBJ palette
+//   5: F_PAL_ANIM_1, BG palette 8 (or 14, if in Contest)
+//   6: F_PAL_ANIM_2, BG palette 9
+u32 UnpackSelectedBattlePalettes(s16 selector)
 {
-    u8 battleBackground = selector & 1;
-    u8 attacker = (selector >> 1) & 1;
-    u8 target = (selector >> 2) & 1;
-    u8 attackerPartner = (selector >> 3) & 1;
-    u8 targetPartner = (selector >> 4) & 1;
-    u8 arg5 = (selector >> 5) & 1;
-    u8 arg6 = (selector >> 6) & 1;
-    return GetBattleBgPalettesMask(battleBackground, attacker, target, attackerPartner, targetPartner, arg5, arg6);
+    bool8 battleBackground = selector & 1;
+    bool8 attacker = (selector >> 1) & 1;
+    bool8 target = (selector >> 2) & 1;
+    bool8 attackerPartner = (selector >> 3) & 1;
+    bool8 targetPartner = (selector >> 4) & 1;
+    bool8 anim1 = (selector >> 5) & 1;
+    bool8 anim2 = (selector >> 6) & 1;
+    return GetBattlePalettesMask(battleBackground, attacker, target, attackerPartner, targetPartner, anim1, anim2);
 }
 
 static void AnimSimplePaletteBlend_Step(struct Sprite *sprite)
@@ -350,7 +350,7 @@ static void AnimComplexPaletteBlend(struct Sprite *sprite)
     sprite->data[6] = gBattleAnimArgs[6];
     sprite->data[7] = gBattleAnimArgs[0];
 
-    selectedPalettes = UnpackSelectedBattleBgPalettes(sprite->data[7]);
+    selectedPalettes = UnpackSelectedBattlePalettes(sprite->data[7]);
     BlendPalettes(selectedPalettes, gBattleAnimArgs[4], gBattleAnimArgs[3]);
     sprite->invisible = TRUE;
     sprite->callback = AnimComplexPaletteBlend_Step1;
@@ -375,7 +375,7 @@ static void AnimComplexPaletteBlend_Step1(struct Sprite *sprite)
         return;
     }
 
-    selectedPalettes = UnpackSelectedBattleBgPalettes(sprite->data[7]);
+    selectedPalettes = UnpackSelectedBattlePalettes(sprite->data[7]);
     if (sprite->data[1] & 0x100)
         BlendPalettes(selectedPalettes, sprite->data[4], sprite->data[3]);
     else
@@ -392,7 +392,7 @@ static void AnimComplexPaletteBlend_Step2(struct Sprite *sprite)
 
     if (!gPaletteFade.active)
     {
-        selectedPalettes = UnpackSelectedBattleBgPalettes(sprite->data[7]);
+        selectedPalettes = UnpackSelectedBattlePalettes(sprite->data[7]);
         BlendPalettes(selectedPalettes, 0, 0);
         DestroyAnimSprite(sprite);
     }
@@ -442,7 +442,7 @@ void AnimTask_BlendColorCycle(u8 taskId)
 
 static void BlendColorCycle(u8 taskId, u8 startBlendAmount, u8 targetBlendAmount)
 {
-    u32 selectedPalettes = UnpackSelectedBattleBgPalettes(gTasks[taskId].tPalSelector);
+    u32 selectedPalettes = UnpackSelectedBattlePalettes(gTasks[taskId].tPalSelector);
     BeginNormalPaletteFade(
         selectedPalettes,
         gTasks[taskId].tDelay,
@@ -721,7 +721,7 @@ void AnimTask_InvertScreenColor(u8 taskId)
     u8 targetBattler = gBattleAnimTarget;
 
     if (gBattleAnimArgs[0] & 0x100)
-        selectedPalettes = GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0);
+        selectedPalettes = GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);
 
     if (gBattleAnimArgs[1] & 0x100)
         selectedPalettes |= (0x10000 << attackerBattler);
