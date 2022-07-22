@@ -1599,7 +1599,7 @@ const u16 gFirstTurnOfTwoStringIds[] =
 };
 
 // Index copied from move's index in sTrappingMoves
-const u16 gWrappedStringIds[TRAPPING_MOVES_COUNT] =
+const u16 gWrappedStringIds[NUM_TRAPPING_MOVES] =
 {
     [B_MSG_WRAPPED_BIND]        = STRINGID_PKMNSQUEEZEDBYBIND,     // MOVE_BIND
     [B_MSG_WRAPPED_WRAP]        = STRINGID_PKMNWRAPPEDBY,          // MOVE_WRAP

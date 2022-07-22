@@ -893,7 +893,7 @@
 #define B_MSG_WRAPPED_MAGMA_STORM 6
 #define B_MSG_WRAPPED_INFESTATION 7
 #define B_MSG_WRAPPED_SNAP_TRAP   8
-#define TRAPPING_MOVES_COUNT      9
+#define NUM_TRAPPING_MOVES        9
 
 // z effects
 #define B_MSG_Z_RESET_STATS   0

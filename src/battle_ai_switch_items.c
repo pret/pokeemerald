@@ -4,6 +4,7 @@
 #include "battle_ai_util.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
+#include "battle_main.h"
 #include "battle_setup.h"
 #include "data.h"
 #include "pokemon.h"
@@ -25,18 +26,18 @@ void GetAIPartyIndexes(u32 battlerId, s32 *firstId, s32 *lastId)
 {
     if (BATTLE_TWO_VS_ONE_OPPONENT && (battlerId & BIT_SIDE) == B_SIDE_OPPONENT)
     {
-        *firstId = 0, *lastId = 6;
+        *firstId = 0, *lastId = PARTY_SIZE;
     }
     else if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_TOWER_LINK_MULTI))
     {
         if ((battlerId & BIT_FLANK) == B_FLANK_LEFT)
-            *firstId = 0, *lastId = 3;
+            *firstId = 0, *lastId = PARTY_SIZE / 2;
         else
-            *firstId = 3, *lastId = 6;
+            *firstId = PARTY_SIZE / 2, *lastId = PARTY_SIZE;
     }
     else
     {
-        *firstId = 0, *lastId = 6;
+        *firstId = 0, *lastId = PARTY_SIZE;
     }
 }
 
@@ -149,9 +150,9 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
 
     if (HasSuperEffectiveMoveAgainstOpponents(TRUE) && Random() % 3 != 0)
         return FALSE;
-    if (gLastLandedMoves[gActiveBattler] == 0)
+    if (gLastLandedMoves[gActiveBattler] == MOVE_NONE)
         return FALSE;
-    if (gLastLandedMoves[gActiveBattler] == 0xFFFF)
+    if (gLastLandedMoves[gActiveBattler] == MOVE_UNAVAILABLE)
         return FALSE;
     if (gBattleMoves[gLastLandedMoves[gActiveBattler]].power == 0)
         return FALSE;
@@ -236,13 +237,16 @@ static bool8 ShouldSwitchIfNaturalCure(void)
     if (gBattleMons[gActiveBattler].hp < gBattleMons[gActiveBattler].maxHP / 2)
         return FALSE;
 
-    if ((gLastLandedMoves[gActiveBattler] == 0 || gLastLandedMoves[gActiveBattler] == 0xFFFF) && Random() & 1)
+    if ((gLastLandedMoves[gActiveBattler] == MOVE_NONE
+      || gLastLandedMoves[gActiveBattler] == MOVE_UNAVAILABLE)
+     && Random() & 1)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
         BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_SWITCH, 0);
         return TRUE;
     }
-    else if (gBattleMoves[gLastLandedMoves[gActiveBattler]].power == 0 && Random() & 1)
+    else if (gBattleMoves[gLastLandedMoves[gActiveBattler]].power == 0
+          && Random() & 1)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
         BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_SWITCH, 0);
@@ -340,9 +344,9 @@ static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent)
     s32 i, j;
     u16 move;
 
-    if (gLastLandedMoves[gActiveBattler] == 0)
+    if (gLastLandedMoves[gActiveBattler] == MOVE_NONE)
         return FALSE;
-    if (gLastLandedMoves[gActiveBattler] == 0xFFFF)
+    if (gLastLandedMoves[gActiveBattler] == MOVE_UNAVAILABLE)
         return FALSE;
     if (gLastHitBy[gActiveBattler] == 0xFF)
         return FALSE;

@@ -948,13 +948,17 @@ bool8 IsDoubleBattle(void)
     return IS_DOUBLE_BATTLE();
 }
 
+#define BG_ANIM_PAL_1        8
+#define BG_ANIM_PAL_2        9
+#define BG_ANIM_PAL_CONTEST 14
+
 void GetBattleAnimBg1Data(struct BattleAnimBgData *out)
 {
     if (IsContest())
     {
         out->bgTiles = gBattleAnimBgTileBuffer;
         out->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
-        out->paletteId = 14;
+        out->paletteId = BG_ANIM_PAL_CONTEST;
         out->bgId = 1;
         out->tilesOffset = 0;
         out->unused = 0;
@@ -963,7 +967,7 @@ void GetBattleAnimBg1Data(struct BattleAnimBgData *out)
     {
         out->bgTiles = gBattleAnimBgTileBuffer;
         out->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
-        out->paletteId = 8;
+        out->paletteId = BG_ANIM_PAL_1;
         out->bgId = 1;
         out->tilesOffset = 0x200;
         out->unused = 0;
@@ -976,7 +980,7 @@ void GetBattleAnimBgData(struct BattleAnimBgData *out, u32 bgId)
     {
         out->bgTiles = gBattleAnimBgTileBuffer;
         out->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
-        out->paletteId = 14;
+        out->paletteId = BG_ANIM_PAL_CONTEST;
         out->bgId = 1;
         out->tilesOffset = 0;
         out->unused = 0;
@@ -989,7 +993,7 @@ void GetBattleAnimBgData(struct BattleAnimBgData *out, u32 bgId)
     {
         out->bgTiles = gBattleAnimBgTileBuffer;
         out->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
-        out->paletteId = 9;
+        out->paletteId = BG_ANIM_PAL_2;
         out->bgId = 2;
         out->tilesOffset = 0x300;
         out->unused = 0;
@@ -1002,21 +1006,21 @@ void GetBgDataForTransform(struct BattleAnimBgData *out, u8 battlerId)
     out->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
     if (IsContest())
     {
-        out->paletteId = 14;
+        out->paletteId = BG_ANIM_PAL_CONTEST;
         out->bgId = 1;
         out->tilesOffset = 0;
         out->unused = 0;
     }
     else if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
     {
-        out->paletteId = 8;
+        out->paletteId = BG_ANIM_PAL_1;
         out->bgId = 1;
         out->tilesOffset = 0x200;
         out->unused = 0;
     }
     else
     {
-        out->paletteId = 9;
+        out->paletteId = BG_ANIM_PAL_2;
         out->bgId = 2;
         out->tilesOffset = 0x300;
         out->unused = 0;
@@ -1401,14 +1405,14 @@ void ResetSpriteRotScale_PreserveAffine(struct Sprite *sprite)
     CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
 }
 
-static u16 ArcTan2_(s16 a, s16 b)
+static u16 ArcTan2_(s16 x, s16 y)
 {
-    return ArcTan2(a, b);
+    return ArcTan2(x, y);
 }
 
-u16 ArcTan2Neg(s16 a, s16 b)
+u16 ArcTan2Neg(s16 x, s16 y)
 {
-    u16 var = ArcTan2_(a, b);
+    u16 var = ArcTan2_(x, y);
     return -var;
 }
 
@@ -1441,7 +1445,7 @@ void SetGrayscaleOrOriginalPalette(u16 paletteNum, bool8 restoreOriginalColor)
     }
 }
 
-u32 GetBattleBgPalettesMask(u8 battleBackground, u8 attacker, u8 target, u8 attackerPartner, u8 targetPartner, u8 a6, u8 a7)
+u32 GetBattlePalettesMask(bool8 battleBackground, bool8 attacker, bool8 target, bool8 attackerPartner, bool8 targetPartner, bool8 anim1, bool8 anim2)
 {
     u32 selectedPalettes = 0;
     u32 shift;
@@ -1449,7 +1453,7 @@ u32 GetBattleBgPalettesMask(u8 battleBackground, u8 attacker, u8 target, u8 atta
     if (battleBackground)
     {
         if (!IsContest())
-            selectedPalettes = 0xe;
+            selectedPalettes = 0xe; // Palettes 1, 2, and 3
         else
             selectedPalettes = 1 << GetBattleBgPaletteNum();
     }
@@ -1479,17 +1483,17 @@ u32 GetBattleBgPalettesMask(u8 battleBackground, u8 attacker, u8 target, u8 atta
             selectedPalettes |= 1 << shift;
         }
     }
-    if (a6)
+    if (anim1)
     {
         if (!IsContest())
-            selectedPalettes |= 0x100;
+            selectedPalettes |= 1 << BG_ANIM_PAL_1;
         else
-            selectedPalettes |= 0x4000;
+            selectedPalettes |= 1 << BG_ANIM_PAL_CONTEST;
     }
-    if (a7)
+    if (anim2)
     {
         if (!IsContest())
-            selectedPalettes |= 0x200;
+            selectedPalettes |= 1 << BG_ANIM_PAL_2;
     }
     return selectedPalettes;
 }

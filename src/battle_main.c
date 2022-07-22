@@ -1377,8 +1377,7 @@ static void CB2_PreInitMultiBattle(void)
                 gBattleTypeFlags = *savedBattleTypeFlags;
                 gMain.savedCallback = *savedCallback;
                 SetMainCallback2(CB2_InitBattleInternal);
-                Free(sMultiPartnerPartyBuffer);
-                sMultiPartnerPartyBuffer = NULL;
+                FREE_AND_SET_NULL(sMultiPartnerPartyBuffer);
             }
         }
         else if (gReceivedRemoteLinkPlayers == 0)
@@ -1386,8 +1385,7 @@ static void CB2_PreInitMultiBattle(void)
             gBattleTypeFlags = *savedBattleTypeFlags;
             gMain.savedCallback = *savedCallback;
             SetMainCallback2(CB2_InitBattleInternal);
-            Free(sMultiPartnerPartyBuffer);
-            sMultiPartnerPartyBuffer = NULL;
+            FREE_AND_SET_NULL(sMultiPartnerPartyBuffer);
         }
         break;
     }
@@ -1423,8 +1421,7 @@ static void CB2_PreInitIngamePlayerPartnerBattle(void)
             gBattleTypeFlags = *savedBattleTypeFlags;
             gMain.savedCallback = *savedCallback;
             SetMainCallback2(CB2_InitBattleInternal);
-            Free(sMultiPartnerPartyBuffer);
-            sMultiPartnerPartyBuffer = NULL;
+            FREE_AND_SET_NULL(sMultiPartnerPartyBuffer);
         }
         break;
     }
