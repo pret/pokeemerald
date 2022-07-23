@@ -113,7 +113,7 @@ static void AnimHornHit_Step(struct Sprite *);
 static void AnimSuperFang(struct Sprite *);
 static void AnimWavyMusicNotes(struct Sprite *);
 static void AnimWavyMusicNotes_Step(struct Sprite *);
-static void AnimWavyMusicNotesGetNextPos(s16, s16, s16 *, s16 *, s8);
+static void AnimWavyMusicNotes_CalcVelocity(s16, s16, s16 *, s16 *, s8);
 static void AnimFlyingMusicNotes(struct Sprite *);
 static void AnimFlyingMusicNotes_Step(struct Sprite *);
 static void AnimBellyDrumHand(struct Sprite *);
@@ -5449,7 +5449,7 @@ static void AnimLockOnTarget_Step4(struct Sprite* sprite)
         sprite->data[1] = 0;
     }
 
-    BlendPalettes(GetBattleBgPalettesMask(1, 1, 1, 1, 1, 0, 0), sprite->data[1], RGB(31, 31, 31));
+    BlendPalettes(GetBattlePalettesMask(TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE), sprite->data[1], RGB(31, 31, 31));
     if (sprite->data[1] == 16)
     {
         int pal;
@@ -6104,7 +6104,7 @@ static void AnimMoonlightSparkle_Step(struct Sprite* sprite)
 
 void AnimTask_MoonlightEndFade(u8 taskId)
 {
-    int a = GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0) & 0xFFFF;
+    int a = GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE) & 0xFFFF;
     int b;
     int c;
     int d;
@@ -6385,79 +6385,87 @@ void AnimTask_MusicNotesClearRainbowBlend(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
+#define sMoveTimer      data[0]
+#define sBlendTableIdx  data[1]
+#define sBlendTimer     data[2]
+#define sBlendCycleTime data[3]
+#define sX              data[4]
+#define sY              data[5]
+#define sVelocX         data[6]
+#define sVelocY         data[7]
+
 static void AnimWavyMusicNotes(struct Sprite* sprite)
 {
     u8 index;
-    u8 a;
-    u8 b;
+    u8 x, y;
     SetSpriteCoordsToAnimAttackerCoords(sprite);
     StartSpriteAnim(sprite, gBattleAnimArgs[0]);
     if ((index = IndexOfSpritePaletteTag(gParticlesColorBlendTable[gBattleAnimArgs[1]][0])) != 0xFF)
         sprite->oam.paletteNum = index;
 
-    sprite->data[1] = gBattleAnimArgs[1];
-    sprite->data[2] = 0;
-    sprite->data[3] = gBattleAnimArgs[2];
+    sprite->sBlendTableIdx = gBattleAnimArgs[1];
+    sprite->sBlendTimer = 0;
+    sprite->sBlendCycleTime = gBattleAnimArgs[2];
     if (IsContest())
     {
-        a = 48;
-        b = 40;
+        x = 48;
+        y = 40;
     }
     else
     {
-        a = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
-        b = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
+        x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+        y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
     }
 
-    sprite->data[4] = sprite->x << 4;
-    sprite->data[5] = sprite->y << 4;
-    AnimWavyMusicNotesGetNextPos(a - sprite->x, b - sprite->y, &sprite->data[6], &sprite->data[7], 40);
+    sprite->sX = sprite->x << 4;
+    sprite->sY = sprite->y << 4;
+    AnimWavyMusicNotes_CalcVelocity(x - sprite->x, y - sprite->y, &sprite->sVelocX, &sprite->sVelocY, 40);
     sprite->callback = AnimWavyMusicNotes_Step;
 }
 
-static void AnimWavyMusicNotesGetNextPos(s16 a, s16 b, s16* c, s16* d, s8 e)
+static void AnimWavyMusicNotes_CalcVelocity(s16 x, s16 y, s16* velocX, s16* velocY, s8 xSpeedFactor)
 {
-    int f;
-    int g;
-    if (a < 0)
-        e = -e;
+    int x2;
+    int time;
+    if (x < 0)
+        xSpeedFactor = -xSpeedFactor;
 
-    f = a << 8;
-    g = f / e;
-    if (g == 0)
-        g = 1;
+    x2 = x * 256;
+    time = x2 / xSpeedFactor;
+    if (time == 0)
+        time = 1;
 
-    *c = f / g;
-    *d = (b << 8) / g;
+    *velocX = x2 / time;
+    *velocY = (y * 256) / time;
 }
 
 static void AnimWavyMusicNotes_Step(struct Sprite* sprite)
 {
-    s16 y, yDelta;
+    s16 y, trigIdx;
     u8 index;
 
-    sprite->data[0]++;
-    yDelta = sprite->data[0] * 5 - ((sprite->data[0] * 5 / 256) << 8);
-    sprite->data[4] += sprite->data[6];
-    sprite->data[5] += sprite->data[7];
-    sprite->x = sprite->data[4] >> 4;
-    sprite->y = sprite->data[5] >> 4;
-    sprite->y2 = Sin(yDelta, 15);
+    sprite->sMoveTimer++;
+    trigIdx = sprite->sMoveTimer * 5 - ((sprite->sMoveTimer * 5 / 256) << 8);
+    sprite->sX += sprite->sVelocX;
+    sprite->sY += sprite->sVelocY;
+    sprite->x = sprite->sX >> 4;
+    sprite->y = sprite->sY >> 4;
+    sprite->y2 = Sin(trigIdx, 15);
 
     y = sprite->y;
-    if (sprite->x < -16 || sprite->x > 256 || y < -16 || y > 128)
+    if (sprite->x < -16 || sprite->x > DISPLAY_WIDTH + 16 || y < -16 || y > DISPLAY_HEIGHT - 32)
     {
         DestroySpriteAndMatrix(sprite);
     }
     else
     {
-        if (sprite->data[3] && ++sprite->data[2] > sprite->data[3])
+        if (sprite->sBlendCycleTime && ++sprite->sBlendTimer > sprite->sBlendCycleTime)
         {
-            sprite->data[2] = 0;
-            if (++sprite->data[1] > 3)
-                sprite->data[1] = 0;
+            sprite->sBlendTimer = 0;
+            if (++sprite->sBlendTableIdx > (int)ARRAY_COUNT(gParticlesColorBlendTable) - 1)
+                sprite->sBlendTableIdx = 0;
 
-            index = IndexOfSpritePaletteTag(gParticlesColorBlendTable[sprite->data[1]][0]);
+            index = IndexOfSpritePaletteTag(gParticlesColorBlendTable[sprite->sBlendTableIdx][0]);
             if (index != 0xFF)
                 sprite->oam.paletteNum = index;
         }
@@ -6573,7 +6581,7 @@ void SetSpriteNextToMonHead(u8 battler, struct Sprite* sprite)
 
 void AnimThoughtBubble(struct Sprite* sprite)
 {
-    u8 a;
+    u8 animNum;
     u8 battler;
     if (gBattleAnimArgs[0] == 0)
         battler = gBattleAnimAttacker;
@@ -6581,10 +6589,10 @@ void AnimThoughtBubble(struct Sprite* sprite)
         battler = gBattleAnimTarget;
 
     SetSpriteNextToMonHead(battler, sprite);
-    a = (GetBattlerSide(battler) == B_SIDE_PLAYER) ? 0 : 1;
+    animNum = (GetBattlerSide(battler) == B_SIDE_PLAYER) ? 0 : 1;
     sprite->data[0] = gBattleAnimArgs[1];
-    sprite->data[1] = a + 2;
-    StartSpriteAnim(sprite, a);
+    sprite->data[1] = animNum + 2;
+    StartSpriteAnim(sprite, animNum);
     StoreSpriteCallbackInData6(sprite, AnimThoughtBubble_Step);
     sprite->callback = RunStoredCallbackWhenAnimEnds;
 }

@@ -624,7 +624,7 @@ static void SpriteCB_BallThrow(struct Sprite *sprite)
         sprite->y2 = 0;
         sprite->data[5] = 0;
         ballId = ItemIdToBallId(GetBattlerPokeballItemId(opponentBattler));
-        AnimateBallOpenParticles(sprite->x, sprite->y - 5, 1, 0x1C, ballId);
+        AnimateBallOpenParticles(sprite->x, sprite->y - 5, 1, 28, ballId);
         sprite->data[0] = LaunchBallFadeMonTask(FALSE, opponentBattler, 14, ballId);
         sprite->sBattler = opponentBattler;
         sprite->data[7] = noOfShakes;
@@ -938,7 +938,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
 
     StartSpriteAnim(sprite, 1);
     ballId = ItemIdToBallId(GetBattlerPokeballItemId(battlerId));
-    AnimateBallOpenParticles(sprite->x, sprite->y - 5, 1, 0x1C, ballId);
+    AnimateBallOpenParticles(sprite->x, sprite->y - 5, 1, 28, ballId);
     sprite->data[0] = LaunchBallFadeMonTask(TRUE, sprite->sBattler, 14, ballId);
     sprite->callback = HandleBallAnimEnd;
 
@@ -1190,37 +1190,50 @@ static void SpriteCB_OpponentMonSendOut(struct Sprite *sprite)
 
 #undef sBattler
 
-static u8 AnimateBallOpenParticlesForPokeball(u8 x, u8 y, u8 kindOfStars, u8 d)
+static u8 AnimateBallOpenParticlesForPokeball(u8 x, u8 y, u8 kindOfStars, u8 subpriority)
 {
-    return AnimateBallOpenParticles(x, y, kindOfStars, d, BALL_POKE);
+    return AnimateBallOpenParticles(x, y, kindOfStars, subpriority, BALL_POKE);
 }
 
-static u8 LaunchBallFadeMonTaskForPokeball(bool8 unFadeLater, u8 battlerId, u32 arg2)
+static u8 LaunchBallFadeMonTaskForPokeball(bool8 unFadeLater, u8 spritePalNum, u32 selectedPalettes)
 {
-    return LaunchBallFadeMonTask(unFadeLater, battlerId, arg2, BALL_POKE);
+    return LaunchBallFadeMonTask(unFadeLater, spritePalNum, selectedPalettes, BALL_POKE);
 }
+
+// Sprite data for the pokemon
+#define sSpecies data[7]
+
+// Sprite data for the pokeball
+#define sMonSpriteId data[0]
+#define sDelay       data[1]
+#define sMonPalNum   data[2]
+#define sFadePalsLo  data[3]
+#define sFadePalsHi  data[4]
+#define sFinalMonX   data[5]
+#define sFinalMonY   data[6]
+#define sTrigIdx     data[7]
 
 // Pokeball in Birch intro, and when receiving via trade
-void CreatePokeballSpriteToReleaseMon(u8 monSpriteId, u8 battlerId, u8 x, u8 y, u8 oamPriority, u8 subpriortiy, u8 g, u32 h, u16 species)
+void CreatePokeballSpriteToReleaseMon(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, u8 oamPriority, u8 subpriortiy, u8 delay, u32 fadePalettes, u16 species)
 {
     u8 spriteId;
 
-    LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[0]);
-    LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[0]);
-    spriteId = CreateSprite(&gBallSpriteTemplates[0], x, y, subpriortiy);
+    LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[BALL_POKE]);
+    LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[BALL_POKE]);
+    spriteId = CreateSprite(&gBallSpriteTemplates[BALL_POKE], x, y, subpriortiy);
 
-    gSprites[spriteId].data[0] = monSpriteId;
-    gSprites[spriteId].data[5] = gSprites[monSpriteId].x;
-    gSprites[spriteId].data[6] = gSprites[monSpriteId].y;
+    gSprites[spriteId].sMonSpriteId = monSpriteId;
+    gSprites[spriteId].sFinalMonX = gSprites[monSpriteId].x;
+    gSprites[spriteId].sFinalMonY = gSprites[monSpriteId].y;
 
     gSprites[monSpriteId].x = x;
     gSprites[monSpriteId].y = y;
-    gSprites[monSpriteId].data[7] = species;
+    gSprites[monSpriteId].sSpecies = species;
 
-    gSprites[spriteId].data[1] = g;
-    gSprites[spriteId].data[2] = battlerId;
-    gSprites[spriteId].data[3] = h;
-    gSprites[spriteId].data[4] = h >> 0x10;
+    gSprites[spriteId].sDelay = delay;
+    gSprites[spriteId].sMonPalNum = monPalNum;
+    gSprites[spriteId].sFadePalsLo = fadePalettes;
+    gSprites[spriteId].sFadePalsHi = fadePalettes >> 16;
     gSprites[spriteId].oam.priority = oamPriority;
     gSprites[spriteId].callback = SpriteCB_PokeballReleaseMon;
 
@@ -1229,92 +1242,103 @@ void CreatePokeballSpriteToReleaseMon(u8 monSpriteId, u8 battlerId, u8 x, u8 y, 
 
 static void SpriteCB_PokeballReleaseMon(struct Sprite *sprite)
 {
-    if (sprite->data[1] == 0)
+    if (sprite->sDelay == 0)
     {
-        u8 r5;
-        u8 r7 = sprite->data[0];
-        u8 battlerId = sprite->data[2];
-        u32 r4 = (u16)sprite->data[3] | ((u16)sprite->data[4] << 16);
+        u8 subpriority;
+        u8 spriteId = sprite->sMonSpriteId;
+        u8 monPalNum = sprite->sMonPalNum;
+        u32 selectedPalettes = (u16)sprite->sFadePalsLo | ((u16)sprite->sFadePalsHi << 16);
 
         if (sprite->subpriority != 0)
-            r5 = sprite->subpriority - 1;
+            subpriority = sprite->subpriority - 1;
         else
-            r5 = 0;
+            subpriority = 0;
 
         StartSpriteAnim(sprite, 1);
-        AnimateBallOpenParticlesForPokeball(sprite->x, sprite->y - 5, sprite->oam.priority, r5);
-        sprite->data[1] = LaunchBallFadeMonTaskForPokeball(1, battlerId, r4);
+        AnimateBallOpenParticlesForPokeball(sprite->x, sprite->y - 5, sprite->oam.priority, subpriority);
+        // sDelay re-used to store task id but never read
+        sprite->sDelay = LaunchBallFadeMonTaskForPokeball(1, monPalNum, selectedPalettes);
         sprite->callback = SpriteCB_ReleasedMonFlyOut;
-        gSprites[r7].invisible = FALSE;
-        StartSpriteAffineAnim(&gSprites[r7], BATTLER_AFFINE_EMERGE);
-        AnimateSprite(&gSprites[r7]);
-        gSprites[r7].data[1] = 0x1000;
-        sprite->data[7] = 0;
+        gSprites[spriteId].invisible = FALSE;
+        StartSpriteAffineAnim(&gSprites[spriteId], BATTLER_AFFINE_EMERGE);
+        AnimateSprite(&gSprites[spriteId]);
+        gSprites[spriteId].data[1] = 0x1000;
+        sprite->sTrigIdx = 0;
     }
     else
     {
-        sprite->data[1]--;
+        sprite->sDelay--;
     }
 }
 
 static void SpriteCB_ReleasedMonFlyOut(struct Sprite *sprite)
 {
-    bool8 r12 = FALSE;
-    bool8 r6 = FALSE;
-    u8 monSpriteId = sprite->data[0];
-    u16 var1;
-    u16 var2;
+    bool8 emergeAnimFinished = FALSE;
+    bool8 atFinalPosition = FALSE;
+    u8 monSpriteId = sprite->sMonSpriteId;
+    u16 x, y;
 
     if (sprite->animEnded)
         sprite->invisible = TRUE;
+
     if (gSprites[monSpriteId].affineAnimEnded)
     {
         StartSpriteAffineAnim(&gSprites[monSpriteId], BATTLER_AFFINE_NORMAL);
-        r12 = TRUE;
+        emergeAnimFinished = TRUE;
     }
-    var1 = (sprite->data[5] - sprite->x) * sprite->data[7] / 128 + sprite->x;
-    var2 = (sprite->data[6] - sprite->y) * sprite->data[7] / 128 + sprite->y;
-    gSprites[monSpriteId].x = var1;
-    gSprites[monSpriteId].y = var2;
-    if (sprite->data[7] < 128)
-    {
-        s16 sine = -(gSineTable[(u8)sprite->data[7]] / 8);
 
-        sprite->data[7] += 4;
+    x = (sprite->sFinalMonX - sprite->x) * sprite->sTrigIdx / 128 + sprite->x;
+    y = (sprite->sFinalMonY - sprite->y) * sprite->sTrigIdx / 128 + sprite->y;
+    gSprites[monSpriteId].x = x;
+    gSprites[monSpriteId].y = y;
+
+    if (sprite->sTrigIdx < 128)
+    {
+        s16 sine = -(gSineTable[(u8)sprite->sTrigIdx] / 8);
+
+        sprite->sTrigIdx += 4;
         gSprites[monSpriteId].x2 = sine;
         gSprites[monSpriteId].y2 = sine;
     }
     else
     {
-        gSprites[monSpriteId].x = sprite->data[5];
-        gSprites[monSpriteId].y = sprite->data[6];
+        gSprites[monSpriteId].x = sprite->sFinalMonX;
+        gSprites[monSpriteId].y = sprite->sFinalMonY;
         gSprites[monSpriteId].x2 = 0;
         gSprites[monSpriteId].y2 = 0;
-        r6 = TRUE;
+        atFinalPosition = TRUE;
     }
-    if (sprite->animEnded && r12 && r6)
+    if (sprite->animEnded && emergeAnimFinished && atFinalPosition)
     {
-        if (gSprites[monSpriteId].data[7] == SPECIES_EGG)
-            DoMonFrontSpriteAnimation(&gSprites[monSpriteId], gSprites[monSpriteId].data[7], TRUE, 0);
+        if (gSprites[monSpriteId].sSpecies == SPECIES_EGG)
+            DoMonFrontSpriteAnimation(&gSprites[monSpriteId], gSprites[monSpriteId].sSpecies, TRUE, 0);
         else
-            DoMonFrontSpriteAnimation(&gSprites[monSpriteId], gSprites[monSpriteId].data[7], FALSE, 0);
+            DoMonFrontSpriteAnimation(&gSprites[monSpriteId], gSprites[monSpriteId].sSpecies, FALSE, 0);
 
         DestroySpriteAndFreeResources(sprite);
     }
 }
 
-u8 CreateTradePokeballSprite(u8 a, u8 b, u8 x, u8 y, u8 oamPriority, u8 subPriority, u8 g, u32 h)
+#undef sSpecies
+#undef sFinalMonX
+#undef sFinalMonY
+#undef sTrigIdx
+
+
+#define sTimer       data[5]
+
+u8 CreateTradePokeballSprite(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, u8 oamPriority, u8 subPriority, u8 delay, u32 fadePalettes)
 {
     u8 spriteId;
 
-    LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[0]);
-    LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[0]);
-    spriteId = CreateSprite(&gBallSpriteTemplates[0], x, y, subPriority);
-    gSprites[spriteId].data[0] = a;
-    gSprites[spriteId].data[1] = g;
-    gSprites[spriteId].data[2] = b;
-    gSprites[spriteId].data[3] = h;
-    gSprites[spriteId].data[4] = h >> 16;
+    LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[BALL_POKE]);
+    LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[BALL_POKE]);
+    spriteId = CreateSprite(&gBallSpriteTemplates[BALL_POKE], x, y, subPriority);
+    gSprites[spriteId].sMonSpriteId = monSpriteId;
+    gSprites[spriteId].sDelay = delay;
+    gSprites[spriteId].sMonPalNum = monPalNum;
+    gSprites[spriteId].sFadePalsLo = fadePalettes;
+    gSprites[spriteId].sFadePalsHi = fadePalettes >> 16;
     gSprites[spriteId].oam.priority = oamPriority;
     gSprites[spriteId].callback = SpriteCB_TradePokeball;
     return spriteId;
@@ -1322,21 +1346,22 @@ u8 CreateTradePokeballSprite(u8 a, u8 b, u8 x, u8 y, u8 oamPriority, u8 subPrior
 
 static void SpriteCB_TradePokeball(struct Sprite *sprite)
 {
-    if (sprite->data[1] == 0)
+    if (sprite->sDelay == 0)
     {
-        u8 r6;
-        u8 monSpriteId = sprite->data[0];
-        u8 r8 = sprite->data[2];
-        u32 r5 = (u16)sprite->data[3] | ((u16)sprite->data[4] << 16);
+        u8 subpriority;
+        u8 monSpriteId = sprite->sMonSpriteId;
+        u8 monPalNum = sprite->sMonPalNum;
+        u32 selectedPalettes = (u16)sprite->sFadePalsLo | ((u16)sprite->sFadePalsHi << 16);
 
         if (sprite->subpriority != 0)
-            r6 = sprite->subpriority - 1;
+            subpriority = sprite->subpriority - 1;
         else
-            r6 = 0;
+            subpriority = 0;
 
         StartSpriteAnim(sprite, 1);
-        AnimateBallOpenParticlesForPokeball(sprite->x, sprite->y - 5, sprite->oam.priority, r6);
-        sprite->data[1] = LaunchBallFadeMonTaskForPokeball(1, r8, r5);
+        AnimateBallOpenParticlesForPokeball(sprite->x, sprite->y - 5, sprite->oam.priority, subpriority);
+        // sDelay re-used to store task id but never read
+        sprite->sDelay = LaunchBallFadeMonTaskForPokeball(1, monPalNum, selectedPalettes);
         sprite->callback = SpriteCB_TradePokeballSendOff;
 #ifdef BUGFIX
         // FIX: If this is used on a sprite that has previously had an affine animation, it will not
@@ -1349,7 +1374,7 @@ static void SpriteCB_TradePokeball(struct Sprite *sprite)
     }
     else
     {
-        sprite->data[1]--;
+        sprite->sDelay--;
     }
 }
 
@@ -1357,15 +1382,16 @@ static void SpriteCB_TradePokeballSendOff(struct Sprite *sprite)
 {
     u8 monSpriteId;
 
-    sprite->data[5]++;
-    if (sprite->data[5] == 11)
+    sprite->sTimer++;
+    if (sprite->sTimer == 11)
         PlaySE(SE_BALL_TRADE);
-    monSpriteId = sprite->data[0];
+
+    monSpriteId = sprite->sMonSpriteId;
     if (gSprites[monSpriteId].affineAnimEnded)
     {
         StartSpriteAnim(sprite, 2);
         gSprites[monSpriteId].invisible = TRUE;
-        sprite->data[5] = 0;
+        sprite->sTimer = 0;
         sprite->callback = SpriteCB_TradePokeballEnd;
     }
     else
@@ -1380,6 +1406,13 @@ static void SpriteCB_TradePokeballEnd(struct Sprite *sprite)
     if (sprite->animEnded)
         sprite->callback = SpriteCallbackDummy;
 }
+
+#undef sMonSpriteId
+#undef sDelay
+#undef sMonPalNum
+#undef sFadePalsLo
+#undef sFadePalsHi
+#undef sTimer
 
 static void Unref_DestroySpriteAndFreeResources(struct Sprite *sprite)
 {

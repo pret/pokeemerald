@@ -1345,9 +1345,11 @@
 #define NUM_SPECIES SPECIES_EGG
 
 // Species Flags
-#define FLAG_ULTRA_BEAST        (1 << 0)
-#define FLAG_ALOLAN_FORM        (1 << 1)
-#define FLAG_GALARIAN_FORM      (1 << 2)
-#define FLAG_GENDER_DIFFERENCE  (1 << 3)
+#define FLAG_LEGENDARY          (1 << 0)
+#define FLAG_MYTHICAL           (1 << 1)
+#define FLAG_ULTRA_BEAST        (1 << 2)
+#define FLAG_ALOLAN_FORM        (1 << 3)
+#define FLAG_GALARIAN_FORM      (1 << 4)
+#define FLAG_GENDER_DIFFERENCE  (1 << 5)
 
 #endif  // GUARD_CONSTANTS_SPECIES_H

@@ -824,8 +824,7 @@ static void Task_EvolutionScene(u8 taskId)
 
             DestroyTask(taskId);
             FreeMonSpritesGfx();
-            Free(sEvoStructPtr);
-            sEvoStructPtr = NULL;
+            FREE_AND_SET_NULL(sEvoStructPtr);
             FreeAllWindowBuffers();
             SetMainCallback2(gCB2_AfterEvolution);
         }
@@ -1231,8 +1230,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
         if (!IsTextPrinterActive(0))
         {
             DestroyTask(taskId);
-            Free(sEvoStructPtr);
-            sEvoStructPtr = NULL;
+            FREE_AND_SET_NULL(sEvoStructPtr);
             gTextFlags.useAlternateDownArrow = 0;
             SetMainCallback2(gCB2_AfterEvolution);
         }
