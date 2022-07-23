@@ -9595,7 +9595,7 @@ bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId)
     u16 holdEffect = ItemId_GetHoldEffect(itemId);
 
     // Mail can be stolen now
-    if (itemId == ITEM_ENIGMA_BERRY)
+    if (itemId == ITEM_ENIGMA_BERRY_E_READER)
         return FALSE;
     // Primal Reversion inducing items cannot be lost if pokemon's base species can undergo primal reversion with it.
     else if (holdEffect == HOLD_EFFECT_PRIMAL_ORB && (GetPrimalReversionSpecies(GET_BASE_SPECIES_ID(species), itemId) != SPECIES_NONE))

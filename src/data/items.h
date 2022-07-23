@@ -846,7 +846,7 @@ const struct Item gItems[] =
 
     [ITEM_CASTELIACONE] =
     {
-        .name = _("CasteliaCone"),
+        .name = _("Casteliacone"),
         .itemId = ITEM_CASTELIACONE,
         .price = 350,
         .description = sCasteliaconeDesc,
@@ -1095,7 +1095,7 @@ const struct Item gItems[] =
         .description = sAbilityPatchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_AbilityPatch,
     },
 
 // Mints
@@ -7037,13 +7037,21 @@ const struct Item gItems[] =
         .flingPower = 10,
     },
 
+#if defined(BATTLE_ENGINE) && B_CONFUSE_BERRIES_HEAL >= GEN_8
+    #define CONFUSE_BERRY_HEAL_FRACTION 3
+#elif defined(BATTLE_ENGINE) && B_CONFUSE_BERRIES_HEAL == GEN_7
+    #define CONFUSE_BERRY_HEAL_FRACTION 2
+#else
+    #define CONFUSE_BERRY_HEAL_FRACTION 8
+#endif
+
     [ITEM_FIGY_BERRY] =
     {
         .name = _("Figy Berry"),
         .itemId = ITEM_FIGY_BERRY,
         .price = 20,
         .holdEffect = HOLD_EFFECT_CONFUSE_SPICY,
-        .holdEffectParam = 8,
+        .holdEffectParam = CONFUSE_BERRY_HEAL_FRACTION,
         .description = sFigyBerryDesc,
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
@@ -7057,7 +7065,7 @@ const struct Item gItems[] =
         .itemId = ITEM_WIKI_BERRY,
         .price = 20,
         .holdEffect = HOLD_EFFECT_CONFUSE_DRY,
-        .holdEffectParam = 8,
+        .holdEffectParam = CONFUSE_BERRY_HEAL_FRACTION,
         .description = sWikiBerryDesc,
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
@@ -7071,7 +7079,7 @@ const struct Item gItems[] =
         .itemId = ITEM_MAGO_BERRY,
         .price = 20,
         .holdEffect = HOLD_EFFECT_CONFUSE_SWEET,
-        .holdEffectParam = 8,
+        .holdEffectParam = CONFUSE_BERRY_HEAL_FRACTION,
         .description = sMagoBerryDesc,
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
@@ -7085,7 +7093,7 @@ const struct Item gItems[] =
         .itemId = ITEM_AGUAV_BERRY,
         .price = 20,
         .holdEffect = HOLD_EFFECT_CONFUSE_BITTER,
-        .holdEffectParam = 8,
+        .holdEffectParam = CONFUSE_BERRY_HEAL_FRACTION,
         .description = sAguavBerryDesc,
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
@@ -7099,13 +7107,15 @@ const struct Item gItems[] =
         .itemId = ITEM_IAPAPA_BERRY,
         .price = 20,
         .holdEffect = HOLD_EFFECT_CONFUSE_SOUR,
-        .holdEffectParam = 8,
+        .holdEffectParam = CONFUSE_BERRY_HEAL_FRACTION,
         .description = sIapapaBerryDesc,
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
     },
+
+#undef CONFUSE_BERRY_HEAL_FRACTION
 
     [ITEM_RAZZ_BERRY] =
     {
@@ -7479,7 +7489,7 @@ const struct Item gItems[] =
         .itemId = ITEM_COBA_BERRY,
         .price = 20,
         .holdEffect = HOLD_EFFECT_RESIST_BERRY,
-        .holdEffectParam = TYPE_FIGHTING,
+        .holdEffectParam = TYPE_FLYING,
         .description = sCobaBerryDesc,
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
