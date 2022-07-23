@@ -5856,8 +5856,8 @@ extern const u8 gMonIcon_ZacianCrownedSword[];
 extern const u8 gMonIcon_ZamazentaCrownedShield[];
 extern const u8 gMonIcon_EternatusEternamax[];
 extern const u8 gMonIcon_ZarudeDada[];
-//extern const u8 gMonIcon_CalyrexIceRider[];
-//extern const u8 gMonIcon_CalyrexShadowRider[];
+extern const u8 gMonIcon_CalyrexIceRider[];
+extern const u8 gMonIcon_CalyrexShadowRider[];
 extern const u8 gMonIcon_Egg[];
 
 extern const u8 gMonFootprint_QuestionMark[];
