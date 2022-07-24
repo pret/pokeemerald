@@ -1,6 +1,8 @@
 #ifndef GUARD_CONSTANTS_BATTLE_PIKE_H
 #define GUARD_CONSTANTS_BATTLE_PIKE_H
 
+#define NUM_PIKE_ROOMS 14
+
 #define PIKE_ROOM_SINGLE_BATTLE 0
 #define PIKE_ROOM_HEAL_FULL 1
 #define PIKE_ROOM_NPC 2
@@ -42,8 +44,8 @@
 #define BATTLE_PIKE_FUNC_SET_IN_WILD_MON_ROOM      6
 #define BATTLE_PIKE_FUNC_CLEAR_IN_WILD_MON_ROOM    7
 #define BATTLE_PIKE_FUNC_SAVE                      8
-#define BATTLE_PIKE_FUNC_NULL_9                    9
-#define BATTLE_PIKE_FUNC_NULL_10                   10
+#define BATTLE_PIKE_FUNC_DUMMY_1                   9
+#define BATTLE_PIKE_FUNC_DUMMY_2                   10
 #define BATTLE_PIKE_FUNC_GET_ROOM_STATUS           11
 #define BATTLE_PIKE_FUNC_GET_ROOM_STATUS_MON       12
 #define BATTLE_PIKE_FUNC_HEAL_ONE_TWO_MONS         13

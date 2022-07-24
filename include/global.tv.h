@@ -1,13 +1,15 @@
 #ifndef GUARD_GLOBAL_TV_H
 #define GUARD_GLOBAL_TV_H
 
+#include "constants/tv.h"
+
 typedef union // size = 0x24
 {
     // Common
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 pad02[26];
+        /*0x02*/ u8 data[26];
         /*0x1C*/ u8 srcTrainerId3Lo;
         /*0x1D*/ u8 srcTrainerId3Hi;
         /*0x1E*/ u8 srcTrainerId2Lo;
@@ -22,7 +24,7 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 pad02[34];
+        /*0x02*/ u8 data[34];
     } commonInit;
 
     // Local shows
@@ -40,7 +42,7 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u16 var02;
+        /*0x02*/ u16 species;
         /*0x04*/ u16 words[6];
         /*0x10*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
         /*0x18*/ u8 language;
@@ -59,19 +61,19 @@ typedef union // size = 0x24
         /*0x0F*/ u8 filler_0F[1];
         /*0x10*/ u8 nickname[PLAYER_NAME_LENGTH + 1];
         /*0x18*/ u16 words18[2];
-        /*0x1C*/ u16 words[4];
+        /*0x1C*/ u16 words[2];
     } fanclubOpinions;
 
-    // TVSHOW_UNKN_SHOWTYPE_04 (dummied out)
+    // TVSHOW_DUMMY
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
         /*0x02*/ u16 words[2];
-        /*0x06*/ u16 var06;
+        /*0x06*/ u16 species;
         /*0x08*/ u8 pad_08[3];
-        /*0x0b*/ u8 string_0b[12];
+        /*0x0b*/ u8 name[12];
         /*0x17*/ u8 language;
-    } unkShow04;
+    } dummy;
 
     // TVSHOW_NAME_RATER_SHOW
     struct {
@@ -179,7 +181,7 @@ typedef union // size = 0x24
         /*0x18*/ u8 idolNameLanguage;
     } fanClubSpecial;
 
-    // TVSHOW_CONTEST_LIVE_UPDATES_2
+    // TVSHOW_LILYCOVE_CONTEST_LADY
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
@@ -189,7 +191,7 @@ typedef union // size = 0x24
         /*0x16*/ u8 pokeblockState;
         /*0x17*/ u8 language;
         /*0x18*/ u8 pokemonNameLanguage;
-    } contestLiveUpdates2;
+    } contestLady;
 
     // Record Mixing Shows
     // TVSHOW_POKEMON_TODAY_CAUGHT
@@ -212,8 +214,8 @@ typedef union // size = 0x24
         /*0x02*/ u8 priceReduced;
         /*0x03*/ u8 language;
         /*0x04*/ u8 pad04[2];
-        /*0x06*/ u16 itemIds[3];
-        /*0x0C*/ u16 itemAmounts[3];
+        /*0x06*/ u16 itemIds[SMARTSHOPPER_NUM_ITEMS];
+        /*0x0C*/ u16 itemAmounts[SMARTSHOPPER_NUM_ITEMS];
         /*0x12*/ u8 shopLocation;
         /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } smartshopperShow;
@@ -332,7 +334,7 @@ typedef union // size = 0x24
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
         /*0x02*/ u8 avgLevel;
-        /*0x03*/ u8 nDecorations;
+        /*0x03*/ u8 numDecorations;
         /*0x04*/ u8 decorations[4];
         /*0x08*/ u16 species;
         /*0x0a*/ u16 move;
@@ -401,7 +403,7 @@ typedef union // size = 0x24
         /*0x08*/ u16 species3;
         /*0x0a*/ u16 species4;
         /*0x0c*/ u8 language;
-        /*0x0d*/ u8 facility;
+        /*0x0d*/ u8 facilityAndMode;
         /*0x0e*/ u8 filler_0e[5];
         /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     } frontier;
@@ -435,8 +437,8 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 nMonsCaught;
-        /*0x03*/ u8 nPkblkUsed;
+        /*0x02*/ u8 monsCaught;
+        /*0x03*/ u8 pokeblocksUsed;
         /*0x04*/ u8 language;
         /*0x05*/ u8 filler_05[14];
         /*0x13*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
@@ -447,27 +449,27 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 var02;
-        /*0x03*/ u8 var03;
+        /*0x02*/ u8 unused1;
+        /*0x03*/ u8 unused3;
         /*0x04*/ u16 moves[MAX_MON_MOVES];
         /*0x0C*/ u16 species;
-        /*0x0E*/ u16 var0E;
+        /*0x0E*/ u16 unused2;
         /*0x10*/ u8 locationMapNum;
         /*0x11*/ u8 locationMapGroup;
-        /*0x12*/ u8 var12;
+        /*0x12*/ u8 unused4;
         /*0x13*/ u8 probability;
         /*0x14*/ u8 level;
-        /*0x15*/ u8 var15;
+        /*0x15*/ u8 unused5;
         /*0x16*/ u16 daysLeft;
         /*0x18*/ u8 language;
     } massOutbreak;
 } TVShow;
 
-typedef struct // 2b50
+typedef struct
 {
     u8 kind;
     u8 state;
-    u16 days;
+    u16 dayCountdown;
 } PokeNews;
 
 struct GabbyAndTyData

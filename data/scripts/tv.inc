@@ -1,41 +1,35 @@
-EventScript_TV:: @ 827EE0B
+EventScript_TV::
 	lockall
 	incrementgamestat GAME_STAT_WATCHED_TV
 	special ResetTVShowState
-	specialvar VAR_RESULT, CheckForBigMovieOrEmergencyNewsOnTV
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_PlayersHouseMovie
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_PlayersHouseLatiNewsFlash
+	specialvar VAR_RESULT, CheckForPlayersHouseNews
+	goto_if_eq VAR_RESULT, PLAYERS_HOUSE_TV_MOVIE, EventScript_PlayersHouseMovie
+	goto_if_eq VAR_RESULT, PLAYERS_HOUSE_TV_LATI, EventScript_PlayersHouseLatiNewsFlash
 	goto_if_unset FLAG_SYS_TV_START, EventScript_MomDadMightLikeThis1
 	goto_if_set FLAG_SYS_TV_WATCH, EventScript_MomDadMightLikeThis1
-	specialvar VAR_RESULT, IsTVShowInSearchOfTrainersAiring
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_DoInSearchOfTrainers
+	specialvar VAR_RESULT, IsGabbyAndTyShowOnTheAir
+	goto_if_eq VAR_RESULT, TRUE, EventScript_DoInSearchOfTrainers
 	goto EventScript_TryDoPokeNews
 	end
 
-EventScript_TryDoTVShow:: @ 827EE54
+EventScript_TryDoTVShow::
 	specialvar VAR_0x8004, GetRandomActiveShowIdx
-	compare VAR_0x8004, 255
-	goto_if_eq EventScript_MomDadMightLikeThis2
+	goto_if_eq VAR_0x8004, 255, EventScript_MomDadMightLikeThis2
 	specialvar VAR_RESULT, GetNextActiveShowIfMassOutbreak
-	compare VAR_RESULT, 255
-	goto_if_eq EventScript_MomDadMightLikeThis2
+	goto_if_eq VAR_RESULT, 255, EventScript_MomDadMightLikeThis2
 	copyvar VAR_0x8004, VAR_RESULT
 	specialvar VAR_RESULT, GetSelectedTVShow
-	compare VAR_RESULT, 0
-	goto_if_ne EventScript_DoTVShow
+	goto_if_ne VAR_RESULT, 0, EventScript_DoTVShow
 	end
 
-EventScript_MomDadMightLikeThis1:: @ 827EE8A
+EventScript_MomDadMightLikeThis1::
 	special GetMomOrDadStringForTVMessage
 	msgbox gText_MomOrDadMightLikeThisProgram, MSGBOX_DEFAULT
 	special TurnOffTVScreen
 	releaseall
 	end
 
-EventScript_PlayersHouseMovie:: @ 827EE9A
+EventScript_PlayersHouseMovie::
 	msgbox PlayersHouse_1F_Text_TheresAMovieOnTV, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -43,7 +37,7 @@ EventScript_PlayersHouseMovie:: @ 827EE9A
 @ special InitRoamer is a junk call. Its input var (VAR_0x8004) hasn't been set, and
 @ It's called again when Mom actually asks for the color, overwriting
 @ whatever it does here.
-EventScript_PlayersHouseLatiNewsFlash:: @ 827EEA4
+EventScript_PlayersHouseLatiNewsFlash::
 	msgbox PlayersHouse_1F_Text_LatiEmergencyNewsFlash, MSGBOX_DEFAULT
 	special InitRoamer
 	clearflag FLAG_SYS_TV_LATIAS_LATIOS
@@ -52,41 +46,40 @@ EventScript_PlayersHouseLatiNewsFlash:: @ 827EEA4
 	releaseall
 	end
 
-EventScript_DoTVShow:: @ 827EEBA
+@ The following is a loop for the TV show messages
+@ VAR_RESULT is set to TRUE when the show has printed its final message
+EventScript_DoTVShow::
 	special DoTVShow
 	waitmessage
 	waitbuttonpress
-	compare VAR_RESULT, 1
-	goto_if_ne EventScript_DoTVShow
+	goto_if_ne VAR_RESULT, TRUE, EventScript_DoTVShow
 	goto EventScript_TurnOffTV
 	end
 
-EventScript_TurnOffTV:: @ 827EED0
+EventScript_TurnOffTV::
 	special TurnOffTVScreen
 	setflag FLAG_SYS_TV_WATCH
 	releaseall
 	end
 
-EventScript_MomDadMightLikeThis2:: @ 827EED8
+EventScript_MomDadMightLikeThis2::
 	special GetMomOrDadStringForTVMessage
 	msgbox gText_MomOrDadMightLikeThisProgram, MSGBOX_DEFAULT
 	goto EventScript_TurnOffTV
 	end
 
-EventScript_TryDoPokeNews:: @ 827EEE9
+EventScript_TryDoPokeNews::
 	special DoPokeNews
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_TryDoTVShow
+	goto_if_eq VAR_RESULT, FALSE, EventScript_TryDoTVShow
 	waitmessage
 	waitbuttonpress
 	goto EventScript_TurnOffTV
 	end
 
-EventScript_DoInSearchOfTrainers:: @ 827EEFF
+EventScript_DoInSearchOfTrainers::
 	special DoTVShowInSearchOfTrainers
 	waitmessage
 	waitbuttonpress
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_DoInSearchOfTrainers
+	goto_if_eq VAR_RESULT, 0, EventScript_DoInSearchOfTrainers
 	goto EventScript_TurnOffTV
 	end

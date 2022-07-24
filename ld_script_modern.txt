@@ -27,6 +27,9 @@ SECTIONS {
         /* .bss starts at 0x3000000 */
         src/*.o(.bss);
         gflib/*.o(.bss);
+        data/*.o(.bss);
+        *libc.a:*.o(.bss*);
+        *libnosys.a:*.o(.bss*);
 
         /* .bss.code starts at 0x3001AA8 */
         src/m4a.o(.bss.code);
@@ -34,7 +37,8 @@ SECTIONS {
         /* COMMON starts at 0x30022A8 */
         src/*.o(COMMON);
         gflib/*.o(COMMON);
-        *libc.a:sbrkr.o(COMMON);
+        *libc.a:*.o(COMMON);
+        *libnosys.a:*.o(COMMON);
         end = .;
         . = 0x8000;
     }
@@ -44,10 +48,10 @@ SECTIONS {
     .text :
     ALIGN(4)
     {
-        src/crt0.o(.text);
-        src/*.o(.text);
-        gflib/*.o(.text);
-        asm/*.o(.text);
+        src/rom_header.o(.text*);
+        src/*.o(.text*);
+        gflib/*.o(.text*);
+        asm/*.o(.text*);
     } =0
 
     script_data :
@@ -73,6 +77,7 @@ SECTIONS {
         *libagbsyscall.a:*.o(.text*);
         *libgcc.a:*.o(.text*);
         *libc.a:*.o(.text*);
+        *libnosys.a:*.o(.text*);
         src/libisagbprn.o(.text);
     } =0
 
@@ -107,10 +112,10 @@ SECTIONS {
         src/libisagbprn.o(.rodata);
     } =0
 
-    other_data :
+    multiboot_data :
     ALIGN(4)
     {
-        data/unknown_serial_data.o(.rodata);
+        data/multiboot_ereader.o(.rodata);
         data/multiboot_berry_glitch_fix.o(.rodata);
         data/multiboot_pokemon_colosseum.o(.rodata);
     } =0

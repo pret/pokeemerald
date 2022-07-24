@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MagmaHideout_2F_2R_EventScript_MaxElixir",
+      "script": "MagmaHideout_2F_2R_EventScript_ItemMaxElixir",
       "flag": "FLAG_ITEM_MAGMA_HIDEOUT_2F_2R_MAX_ELIXIR"
     },
     {

@@ -34,7 +34,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "34",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_POMEG_1",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -47,7 +47,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "35",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_POMEG_2",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -60,7 +60,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "36",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_POMEG_3",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -372,7 +372,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "83",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_HONDEW_1",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -385,7 +385,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "84",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_HONDEW_2",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -398,7 +398,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "85",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_SITRUS",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -411,7 +411,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "86",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_LEPPA",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -468,7 +468,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_KECLEON_1",
+      "graphics_id": "OBJ_EVENT_GFX_KECLEON",
       "x": 31,
       "y": 6,
       "elevation": 3,
@@ -481,7 +481,7 @@
       "flag": "FLAG_HIDE_ROUTE_119_KECLEON_1"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_KECLEON_1",
+      "graphics_id": "OBJ_EVENT_GFX_KECLEON",
       "x": 25,
       "y": 15,
       "elevation": 3,

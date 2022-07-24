@@ -40,29 +40,29 @@ static void VBlankCB(void)
 
 static const u16 sDiplomaPalettes[][16] =
 {
-    INCBIN_U16("graphics/misc/diploma_national.gbapal"),
-    INCBIN_U16("graphics/misc/diploma_hoenn.gbapal"),
+    INCBIN_U16("graphics/diploma/national.gbapal"),
+    INCBIN_U16("graphics/diploma/hoenn.gbapal"),
 };
 
-static const u32 sDiplomaTilemap[] = INCBIN_U32("graphics/misc/diploma_map.bin.lz");
-static const u32 sDiplomaTiles[] = INCBIN_U32("graphics/misc/diploma.4bpp.lz");
+static const u32 sDiplomaTilemap[] = INCBIN_U32("graphics/diploma/tilemap.bin.lz");
+static const u32 sDiplomaTiles[] = INCBIN_U32("graphics/diploma/tiles.4bpp.lz");
 
 void CB2_ShowDiploma(void)
 {
     SetVBlankCallback(NULL);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG3CNT, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG2CNT, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG1CNT, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG0CNT, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG3HOFS, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG3VOFS, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG2HOFS, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG2VOFS, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG1HOFS, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG1VOFS, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG0HOFS, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG0VOFS, DISPCNT_MODE_0);
+    SetGpuReg(REG_OFFSET_BG3CNT, 0);
+    SetGpuReg(REG_OFFSET_BG2CNT, 0);
+    SetGpuReg(REG_OFFSET_BG1CNT, 0);
+    SetGpuReg(REG_OFFSET_BG0CNT, 0);
+    SetGpuReg(REG_OFFSET_BG3HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG3VOFS, 0);
+    SetGpuReg(REG_OFFSET_BG2HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG2VOFS, 0);
+    SetGpuReg(REG_OFFSET_BG1HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG1VOFS, 0);
+    SetGpuReg(REG_OFFSET_BG0HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG0VOFS, 0);
     // why doesn't this one use the dma manager either?
     DmaFill16(3, 0, VRAM, VRAM_SIZE);
     DmaFill32(3, 0, OAM, OAM_SIZE);
@@ -83,8 +83,8 @@ void CB2_ShowDiploma(void)
     LZDecompressWram(sDiplomaTilemap, sDiplomaTilemapPtr);
     CopyBgTilemapBufferToVram(1);
     DisplayDiplomaText();
-    BlendPalettes(-1, 16, 0);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     EnableInterrupts(1);
     SetVBlankCallback(VBlankCB);
     SetMainCallback2(MainCB2);
@@ -109,7 +109,7 @@ static void Task_DiplomaWaitForKeyPress(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_DiplomaFadeOut;
     }
 }
@@ -121,7 +121,7 @@ static void Task_DiplomaFadeOut(u8 taskId)
         Free(sDiplomaTilemapPtr);
         FreeAllWindowBuffers();
         DestroyTask(taskId);
-        SetMainCallback2(sub_80861E8);
+        SetMainCallback2(CB2_ReturnToFieldFadeFromBlack);
     }
 }
 
@@ -129,18 +129,18 @@ static void DisplayDiplomaText(void)
 {
     if (HasAllMons())
     {
-        SetGpuReg(REG_OFFSET_BG1HOFS, DISPCNT_BG0_ON);
+        SetGpuReg(REG_OFFSET_BG1HOFS, DISPLAY_WIDTH + 16);
         StringCopy(gStringVar1, gText_DexNational);
     }
     else
     {
-        SetGpuReg(REG_OFFSET_BG1HOFS, DISPCNT_MODE_0);
+        SetGpuReg(REG_OFFSET_BG1HOFS, 0);
         StringCopy(gStringVar1, gText_DexHoenn);
     }
     StringExpandPlaceholders(gStringVar4, gText_PokedexDiploma);
     PrintDiplomaText(gStringVar4, 0, 1);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static const struct BgTemplate sDiplomaBgTemplates[2] =
@@ -168,14 +168,14 @@ static const struct BgTemplate sDiplomaBgTemplates[2] =
 static void InitDiplomaBg(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, sDiplomaBgTemplates, 2);
+    InitBgsFromTemplates(0, sDiplomaBgTemplates, ARRAY_COUNT(sDiplomaBgTemplates));
     SetBgTilemapBuffer(1, sDiplomaTilemapPtr);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     ShowBg(0);
     ShowBg(1);
-    SetGpuReg(REG_OFFSET_BLDCNT, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BLDALPHA, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BLDY, DISPCNT_MODE_0);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+    SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+    SetGpuReg(REG_OFFSET_BLDY, 0);
 }
 
 static const struct WindowTemplate sDiplomaWinTemplates[2] =
@@ -196,7 +196,7 @@ static void InitDiplomaWindow(void)
 {
     InitWindows(sDiplomaWinTemplates);
     DeactivateAllTextPrinters();
-    LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
 }
@@ -205,5 +205,5 @@ static void PrintDiplomaText(u8 *text, u8 var1, u8 var2)
 {
     u8 color[3] = {0, 2, 3};
 
-    AddTextPrinterParameterized4(0, 1, var1, var2, 0, 0, color, -1, text);
+    AddTextPrinterParameterized4(0, FONT_NORMAL, var1, var2, 0, 0, color, TEXT_SKIP_DRAW, text);
 }

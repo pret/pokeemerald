@@ -44,8 +44,11 @@ struct TrainerCard
     /*0x28*/ u16 easyChatProfile[TRAINER_CARD_PROFILE_LENGTH];
     /*0x30*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x38*/ u8 version;
-    /*0x3A*/ bool16 hasAllFrontierSymbols;
-    /*0x3C*/ u32 berryCrushPoints;
+    /*0x3A*/ bool16 linkHasAllFrontierSymbols;
+    /*0x3C*/ union {
+                u32 berryCrush;
+                u32 frontier;
+             } linkPoints; // This field is used differently by FRLG vs Emerald
     /*0x40*/ u32 unionRoomNum;
     /*0x44*/ u8 filler[8];
     /*0x4C*/ bool8 shouldDrawStickers; // FRLG only
@@ -54,7 +57,9 @@ struct TrainerCard
     /*0x4F*/ u8 facilityClass;
     /*0x50*/ u8 stickers[TRAINER_CARD_STICKER_TYPES]; // FRLG only
     /*0x54*/ u16 monSpecies[PARTY_SIZE]; // FRLG only
-    /*0x60*/ bool16 hasAllSymbols;
+             // Note: Link players use linkHasAllFrontierSymbols, not the field below,
+             // which they use for a Wonder Card flag id instead (see CreateTrainerCardInBuffer)
+    /*0x60*/ bool16 hasAllFrontierSymbols;
     /*0x62*/ u16 frontierBP;
 };
 
@@ -62,9 +67,9 @@ extern struct TrainerCard gTrainerCards[4];
 
 u32 CountPlayerTrainerStars(void);
 u8 GetTrainerCardStars(u8 cardId);
-void CopyTrainerCardData(struct TrainerCard *dst, u16 *src, u8 gameVersion);
+void CopyTrainerCardData(struct TrainerCard *dst, struct TrainerCard *src, u8 gameVersion);
 void ShowPlayerTrainerCard(void (*callback)(void));
-void ShowTrainerCardInLink(u8 arg0, void (*callback)(void));
-void TrainerCard_GenerateCardForPlayer(struct TrainerCard *);
+void ShowTrainerCardInLink(u8 cardId, void (*callback)(void));
+void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *);
 
 #endif // GUARD_TRAINER_CARD_H

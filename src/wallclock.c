@@ -41,6 +41,8 @@ static void SpriteCB_HourHand(struct Sprite *sprite);
 static void SpriteCB_PMIndicator(struct Sprite *sprite);
 static void SpriteCB_AMIndicator(struct Sprite *sprite);
 
+#define sTaskId data[0]
+
 #define tMinuteHandAngle data[0]
 #define tHourHandAngle   data[1]
 #define tHours           data[2]
@@ -147,7 +149,7 @@ static const struct SpritePalette sSpritePalettes_Clock[] =
 
 static const struct OamData sOam_ClockHand =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .shape = SPRITE_SHAPE(64x64),
     .size = SPRITE_SIZE(64x64),
     .priority = 1,
@@ -199,7 +201,7 @@ static const struct SpriteTemplate sSpriteTemplate_HourHand =
 
 static const struct OamData sOam_PeriodIndicator =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .shape = SPRITE_SHAPE(16x16),
     .size = SPRITE_SIZE(16x16),
     .priority = 3,
@@ -628,14 +630,14 @@ static void LoadWallClockGraphics(void)
     SetGpuReg(REG_OFFSET_BG2CNT, 0);
     SetGpuReg(REG_OFFSET_BG1CNT, 0);
     SetGpuReg(REG_OFFSET_BG0CNT, 0);
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
-    ChangeBgX(2, 0, 0);
-    ChangeBgY(2, 0, 0);
-    ChangeBgX(3, 0, 0);
-    ChangeBgY(3, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
+    ChangeBgX(2, 0, BG_COORD_SET);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    ChangeBgX(3, 0, BG_COORD_SET);
+    ChangeBgY(3, 0, BG_COORD_SET);
     DmaFillLarge16(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
     DmaClear32(3, (void *)OAM, OAM_SIZE);
     DmaClear16(3, (void *)PLTT, PLTT_SIZE);
@@ -665,7 +667,7 @@ static void LoadWallClockGraphics(void)
 
 static void WallClockInit(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     EnableInterrupts(INTR_FLAG_VBLANK);
     SetVBlankCallback(VBlankCB_WallClock);
     SetMainCallback2(CB2_WallClock);
@@ -696,26 +698,26 @@ void CB2_StartWallClock(void)
     gTasks[taskId].tHourHandAngle = 300;
 
     spriteId = CreateSprite(&sSpriteTemplate_MinuteHand, 120, 80, 1);
-    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
 
     spriteId = CreateSprite(&sSpriteTemplate_HourHand, 120, 80, 0);
-    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
 
     spriteId = CreateSprite(&sSpriteTemplate_PM, 120, 80, 2);
-    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].data[1] = 45;
 
     spriteId = CreateSprite(&sSpriteTemplate_AM, 120, 80, 2);
-    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].data[1] = 90;
 
     WallClockInit();
 
-    AddTextPrinterParameterized(1, 1, gText_Confirm3, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(1, FONT_NORMAL, gText_Confirm3, 0, 1, 0, NULL);
     PutWindowTilemap(1);
     ScheduleBgCopyTilemapToVram(2);
 }
@@ -744,26 +746,26 @@ void CB2_ViewWallClock(void)
     }
 
     spriteId = CreateSprite(&sSpriteTemplate_MinuteHand, 120, 80, 1);
-    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
 
     spriteId = CreateSprite(&sSpriteTemplate_HourHand, 120, 80, 0);
-    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
 
     spriteId = CreateSprite(&sSpriteTemplate_PM, 120, 80, 2);
-    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].data[1] = angle1;
 
     spriteId = CreateSprite(&sSpriteTemplate_AM, 120, 80, 2);
-    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].data[1] = angle2;
 
     WallClockInit();
 
-    AddTextPrinterParameterized(1, 1, gText_Cancel4, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(1, FONT_NORMAL, gText_Cancel4, 0, 1, 0, NULL);
     PutWindowTilemap(1);
     ScheduleBgCopyTilemapToVram(2);
 }
@@ -828,7 +830,7 @@ static void Task_SetClock_HandleInput(u8 taskId)
 static void Task_SetClock_AskConfirm(u8 taskId)
 {
     DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x250, 0x0d);
-    AddTextPrinterParameterized(0, 1, gText_IsThisTheCorrectTime, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, gText_IsThisTheCorrectTime, 0, 1, 0, NULL);
     PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);
     CreateYesNoMenu(&sWindowTemplate_ConfirmYesNo, 0x250, 0x0d, 1);
@@ -856,7 +858,7 @@ static void Task_SetClock_HandleConfirmInput(u8 taskId)
 static void Task_SetClock_Confirmed(u8 taskId)
 {
     RtcInitLocalTimeOffset(gTasks[taskId].tHours, gTasks[taskId].tMinutes);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_SetClock_Exit;
 }
 
@@ -884,7 +886,7 @@ static void Task_ViewClock_HandleInput(u8 taskId)
 
 static void Task_ViewClock_FadeOut(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ViewClock_Exit;
 }
 
@@ -1015,7 +1017,7 @@ static void InitClockWithRtc(u8 taskId)
 
 static void SpriteCB_MinuteHand(struct Sprite *sprite)
 {
-    u16 angle = gTasks[sprite->data[0]].tMinuteHandAngle;
+    u16 angle = gTasks[sprite->sTaskId].tMinuteHandAngle;
     s16 sin = Sin2(angle) / 16;
     s16 cos = Cos2(angle) / 16;
     u16 x, y;
@@ -1029,13 +1031,13 @@ static void SpriteCB_MinuteHand(struct Sprite *sprite)
     if (y > 128)
         y |= 0xff00;
 
-    sprite->pos2.x = x;
-    sprite->pos2.y = y;
+    sprite->x2 = x;
+    sprite->y2 = y;
 }
 
 static void SpriteCB_HourHand(struct Sprite *sprite)
 {
-    u16 angle = gTasks[sprite->data[0]].tHourHandAngle;
+    u16 angle = gTasks[sprite->sTaskId].tHourHandAngle;
     s16 sin = Sin2(angle) / 16;
     s16 cos = Cos2(angle) / 16;
     u16 x, y;
@@ -1049,62 +1051,48 @@ static void SpriteCB_HourHand(struct Sprite *sprite)
     if (y > 128)
         y |= 0xff00;
 
-    sprite->pos2.x = x;
-    sprite->pos2.y = y;
+    sprite->x2 = x;
+    sprite->y2 = y;
 }
+
+#define sAngle data[1]
 
 static void SpriteCB_PMIndicator(struct Sprite *sprite)
 {
-    if (gTasks[sprite->data[0]].tPeriod != PERIOD_AM)
+    if (gTasks[sprite->sTaskId].tPeriod != PERIOD_AM)
     {
-        if (sprite->data[1] >= 60 && sprite->data[1] < 90)
-        {
-            sprite->data[1] += 5;
-        }
-        if (sprite->data[1] < 60)
-        {
-            sprite->data[1]++;
-        }
+        if (sprite->sAngle >= 60 && sprite->sAngle < 90)
+            sprite->sAngle += 5;
+        if (sprite->sAngle < 60)
+            sprite->sAngle++;
     }
     else
     {
-        if (sprite->data[1] >= 46 && sprite->data[1] < 76)
-        {
-            sprite->data[1] -= 5;
-        }
-        if (sprite->data[1] > 75)
-        {
-            sprite->data[1]--;
-        }
+        if (sprite->sAngle >= 46 && sprite->sAngle < 76)
+            sprite->sAngle -= 5;
+        if (sprite->sAngle > 75)
+            sprite->sAngle--;
     }
-    sprite->pos2.x = Cos2(sprite->data[1]) * 30 / 0x1000;
-    sprite->pos2.y = Sin2(sprite->data[1]) * 30 / 0x1000;
+    sprite->x2 = Cos2(sprite->sAngle) * 30 / 0x1000;
+    sprite->y2 = Sin2(sprite->sAngle) * 30 / 0x1000;
 }
 
 static void SpriteCB_AMIndicator(struct Sprite *sprite)
 {
-    if (gTasks[sprite->data[0]].tPeriod != PERIOD_AM)
+    if (gTasks[sprite->sTaskId].tPeriod != PERIOD_AM)
     {
-        if (sprite->data[1] >= 105 && sprite->data[1] < 135)
-        {
-            sprite->data[1] += 5;
-        }
-        if (sprite->data[1] < 105)
-        {
-            sprite->data[1]++;
-        }
+        if (sprite->sAngle >= 105 && sprite->sAngle < 135)
+            sprite->sAngle += 5;
+        if (sprite->sAngle < 105)
+            sprite->sAngle++;
     }
     else
     {
-        if (sprite->data[1] >= 91 && sprite->data[1] < 121)
-        {
-            sprite->data[1] -= 5;
-        }
-        if (sprite->data[1] > 120)
-        {
-            sprite->data[1]--;
-        }
+        if (sprite->sAngle >= 91 && sprite->sAngle < 121)
+            sprite->sAngle -= 5;
+        if (sprite->sAngle > 120)
+            sprite->sAngle--;
     }
-    sprite->pos2.x = Cos2(sprite->data[1]) * 30 / 0x1000;
-    sprite->pos2.y = Sin2(sprite->data[1]) * 30 / 0x1000;
+    sprite->x2 = Cos2(sprite->sAngle) * 30 / 0x1000;
+    sprite->y2 = Sin2(sprite->sAngle) * 30 / 0x1000;
 }
