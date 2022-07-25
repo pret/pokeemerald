@@ -72,7 +72,7 @@ static void InitPokenavListWindowState(struct PokenavListWindowState *, struct P
 static void SpriteCB_UpArrow(struct Sprite *);
 static void SpriteCB_DownArrow(struct Sprite *);
 static void SpriteCB_RightArrow(struct Sprite *);
-static void ToggleListArrows(struct PokenavListSub *, u32);
+static void ToggleListArrows(struct PokenavListSub *, bool32);
 static void DestroyListArrows(struct PokenavListSub *);
 static void CreateListArrowSprites(struct PokenavListWindowState *, struct PokenavListSub *);
 static void LoadListArrowGfx(void);
@@ -503,7 +503,7 @@ static u32 LoopedTask_EraseListForCheckPage(s32 state)
     switch (state)
     {
     case 0:
-        ToggleListArrows(&list->sub, 1);
+        ToggleListArrows(&list->sub, TRUE);
         // fall-through
     case 1:
         if (list->eraseIndex != list->windowState.selectedIndexOffset)
@@ -656,7 +656,7 @@ static u32 LoopedTask_ReshowListFromCheckPage(s32 state)
             return LT_INC_AND_CONTINUE;
         return LT_SET_STATE(4);
     case 6:
-        ToggleListArrows(subPtr, 0);
+        ToggleListArrows(subPtr, FALSE);
         return LT_FINISH;
     }
 

@@ -223,14 +223,14 @@ u8 MailboxMenu_AddWindow(u8 windowIdx)
         {
             sMailboxWindowIds[windowIdx] = AddWindow(&sWindowTemplates_MailboxMenu[windowIdx]);
         }
-        SetStandardWindowBorderStyle(sMailboxWindowIds[windowIdx], 0);
+        SetStandardWindowBorderStyle(sMailboxWindowIds[windowIdx], FALSE);
     }
     return sMailboxWindowIds[windowIdx];
 }
 
 void MailboxMenu_RemoveWindow(u8 windowIdx)
 {
-    ClearStdWindowAndFrameToTransparent(sMailboxWindowIds[windowIdx], 0);
+    ClearStdWindowAndFrameToTransparent(sMailboxWindowIds[windowIdx], FALSE);
     ClearWindowTilemap(sMailboxWindowIds[windowIdx]);
     RemoveWindow(sMailboxWindowIds[windowIdx]);
     sMailboxWindowIds[windowIdx] = WINDOW_NONE;
@@ -716,17 +716,17 @@ void InitMoveRelearnerWindows(bool8 useContextWindow)
     if (!useContextWindow)
     {
         PutWindowTilemap(0);
-        DrawStdFrameWithCustomTileAndPalette(0, 0, 0x1, 0xE);
+        DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x1, 0xE);
     }
     else
     {
         PutWindowTilemap(1);
-        DrawStdFrameWithCustomTileAndPalette(1, 0, 1, 0xE);
+        DrawStdFrameWithCustomTileAndPalette(1, FALSE, 1, 0xE);
     }
     PutWindowTilemap(2);
     PutWindowTilemap(3);
-    DrawStdFrameWithCustomTileAndPalette(2, 0, 1, 0xE);
-    DrawStdFrameWithCustomTileAndPalette(3, 0, 1, 0xE);
+    DrawStdFrameWithCustomTileAndPalette(2, FALSE, 1, 0xE);
+    DrawStdFrameWithCustomTileAndPalette(3, FALSE, 1, 0xE);
     MoveRelearnerDummy();
     ScheduleBgCopyTilemapToVram(1);
 }

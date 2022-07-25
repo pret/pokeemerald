@@ -2709,7 +2709,7 @@ static void AnimTranslateLinearSingleSineWave_Step(struct Sprite* sprite)
 void AnimMoveTwisterParticle(struct Sprite* sprite)
 {
     if (IsDoubleBattle() == TRUE)
-        SetAverageBattlerPositions(gBattleAnimTarget, 1, &sprite->x, &sprite->y);
+        SetAverageBattlerPositions(gBattleAnimTarget, TRUE, &sprite->x, &sprite->y);
 
     sprite->y += 32;
     sprite->data[0] = gBattleAnimArgs[0];
@@ -3716,7 +3716,7 @@ static void AnimNeedleArmSpike(struct Sprite* sprite)
         if (IsContest())
             c -= 0x8000;
 
-        TrySetSpriteRotScale(sprite, 0, 0x100, 0x100, c);
+        TrySetSpriteRotScale(sprite, FALSE, 0x100, 0x100, c);
         sprite->callback = AnimNeedleArmSpike_Step;
     }
 }

@@ -299,8 +299,8 @@ static u32 LoopedTask_OpenConditionGraphMenu(s32 state)
         if (!IsConditionMenuSearchMode())
         {
             LoadLeftHeaderGfxForIndex(POKENAV_GFX_PARTY_MENU);
-            ShowLeftHeaderGfx(POKENAV_GFX_CONDITION_MENU, TRUE, 0);
-            ShowLeftHeaderGfx(POKENAV_GFX_PARTY_MENU, TRUE, 0);
+            ShowLeftHeaderGfx(POKENAV_GFX_CONDITION_MENU, TRUE, FALSE);
+            ShowLeftHeaderGfx(POKENAV_GFX_PARTY_MENU, TRUE, FALSE);
         }
         return LT_INC_AND_PAUSE;
     case 16:

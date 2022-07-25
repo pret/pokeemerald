@@ -1752,7 +1752,7 @@ static bool32 OpenResultsWindow(struct BerryCrushGame *game, struct BerryCrushGa
         break;
     case 2:
         LoadUserWindowBorderGfx_(gfx->resultsWindowId, 541, 208);
-        DrawStdFrameWithCustomTileAndPalette(gfx->resultsWindowId, 0, 541, 13);
+        DrawStdFrameWithCustomTileAndPalette(gfx->resultsWindowId, FALSE, 541, 13);
         break;
     case 3:
         playerCountIdx = game->playerCount - 2;
@@ -1788,7 +1788,7 @@ static bool32 OpenResultsWindow(struct BerryCrushGame *game, struct BerryCrushGa
 
 static void CloseResultsWindow(struct BerryCrushGame *game)
 {
-    ClearStdWindowAndFrameToTransparent(game->gfx.resultsWindowId, 1);
+    ClearStdWindowAndFrameToTransparent(game->gfx.resultsWindowId, TRUE);
     RemoveWindow(game->gfx.resultsWindowId);
     DrawPlayerNameWindows(game);
 }
@@ -1810,7 +1810,7 @@ static void Task_ShowRankings(u8 taskId)
         PutWindowTilemap(tWindowId);
         FillWindowPixelBuffer(tWindowId, PIXEL_FILL(0));
         LoadUserWindowBorderGfx_(tWindowId, 541, 208);
-        DrawStdFrameWithCustomTileAndPalette(tWindowId, 0, 541, 13);
+        DrawStdFrameWithCustomTileAndPalette(tWindowId, FALSE, 541, 13);
         break;
     case 1:
         // Print header text
@@ -1849,7 +1849,7 @@ static void Task_ShowRankings(u8 taskId)
         else
             return;
     case 3:
-        ClearStdWindowAndFrameToTransparent(tWindowId, 1);
+        ClearStdWindowAndFrameToTransparent(tWindowId, TRUE);
         ClearWindowTilemap(tWindowId);
         RemoveWindow(tWindowId);
         DestroyTask(taskId);
@@ -1885,9 +1885,9 @@ static void HideTimer(struct BerryCrushGame_Gfx *gfx)
 {
     gfx->timerSprites[0]->invisible = TRUE;
     gfx->timerSprites[1]->invisible = TRUE;
-    DigitObjUtil_HideOrShow(2, 1);
-    DigitObjUtil_HideOrShow(1, 1);
-    DigitObjUtil_HideOrShow(0, 1);
+    DigitObjUtil_HideOrShow(2, TRUE);
+    DigitObjUtil_HideOrShow(1, TRUE);
+    DigitObjUtil_HideOrShow(0, TRUE);
 }
 
 static void CreatePlayerNameWindows(struct BerryCrushGame *game)
@@ -2282,7 +2282,7 @@ static u32 Cmd_PrintMessage(struct BerryCrushGame *game, u8 *args)
         break;
     case 3:
         if (args[1] & F_MSG_CLEAR)
-            ClearDialogWindowAndFrame(0, 1);
+            ClearDialogWindowAndFrame(0, TRUE);
         RunOrScheduleCommand(game->nextCmd, SCHEDULE_CMD, NULL);
         game->cmdState = args[4];
         return 0;
@@ -2402,7 +2402,7 @@ static u32 Cmd_WaitForOthersToPickBerries(struct BerryCrushGame *game, u8 *args)
         game->targetDepth = MathUtil_Div32(Q_24_8(game->targetAPresses), Q_24_8(32));
         break;
     case 5:
-        ClearDialogWindowAndFrame(0, 1);
+        ClearDialogWindowAndFrame(0, TRUE);
         RunOrScheduleCommand(CMD_DROP_BERRIES, SCHEDULE_CMD, NULL);
         game->gameState = STATE_DROP_BERRIES;
         game->cmdState = 0;
@@ -3295,7 +3295,7 @@ static u32 Cmd_AskPlayAgain(struct BerryCrushGame *game, u8 *args)
             }
 
             // Close Yes/No and start communication
-            ClearDialogWindowAndFrame(0, 1);
+            ClearDialogWindowAndFrame(0, TRUE);
             SetPrintMessageArgs(args, MSG_COMM_STANDBY, 0, 0, 0);
             game->nextCmd = CMD_COMM_PLAY_AGAIN;
             RunOrScheduleCommand(CMD_PRINT_MSG, SCHEDULE_CMD, NULL);
@@ -3367,7 +3367,7 @@ static u32 Cmd_PlayAgain(struct BerryCrushGame *game, u8 *args)
             return 0;
         break;
     case 2:
-        ClearDialogWindowAndFrame(0, 1);
+        ClearDialogWindowAndFrame(0, TRUE);
         ResetCrusherPos(game);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         UpdatePaletteFade();

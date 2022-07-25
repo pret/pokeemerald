@@ -271,7 +271,7 @@ static void AnimTranslateWebThread(struct Sprite *sprite)
     }
     else
     {
-        SetAverageBattlerPositions(gBattleAnimTarget, 1, &sprite->data[2], &sprite->data[4]);
+        SetAverageBattlerPositions(gBattleAnimTarget, TRUE, &sprite->data[2], &sprite->data[4]);
     }
 
     InitAnimLinearTranslationWithSpeed(sprite);
@@ -294,7 +294,7 @@ static void AnimTranslateWebThread_Step(struct Sprite *sprite)
 // Second stage of String Shot
 static void AnimStringWrap(struct Sprite *sprite)
 {
-    SetAverageBattlerPositions(gBattleAnimTarget, 0, &sprite->x, &sprite->y);
+    SetAverageBattlerPositions(gBattleAnimTarget, FALSE, &sprite->x, &sprite->y);
     if (GetBattlerSide(gBattleAnimAttacker))
         sprite->x -= gBattleAnimArgs[0];
     else
@@ -392,7 +392,7 @@ static void AnimTranslateStinger(struct Sprite *sprite)
         }
     }
 
-    InitSpritePosToAnimAttacker(sprite, 1);
+    InitSpritePosToAnimAttacker(sprite, TRUE);
 
     lVarX = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) + gBattleAnimArgs[2];
     lVarY = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[3];
@@ -417,7 +417,7 @@ static void AnimTranslateStinger(struct Sprite *sprite)
 // arg 5: wave amplitude
 static void AnimMissileArc(struct Sprite *sprite)
 {
-    InitSpritePosToAnimAttacker(sprite, 1);
+    InitSpritePosToAnimAttacker(sprite, TRUE);
 
     if (GetBattlerSide(gBattleAnimAttacker))
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];

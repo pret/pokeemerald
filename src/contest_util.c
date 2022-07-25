@@ -2639,7 +2639,7 @@ static void Task_ShowContestEntryMonPic(u8 taskId)
         break;
     case 1:
         task->data[5] = CreateWindowFromRect(10, 3, 8, 8);
-        SetStandardWindowBorderStyle(task->data[5], 1);
+        SetStandardWindowBorderStyle(task->data[5], TRUE);
         task->data[0]++;
         break;
     case 2:

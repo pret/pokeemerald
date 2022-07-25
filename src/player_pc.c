@@ -398,7 +398,7 @@ static void InitPlayerPCMenu(u8 taskId)
 
     windowTemplate.width = GetMaxWidthInSubsetOfMenuTable(sPlayerPCMenuActions, sTopMenuOptionOrder, sTopMenuNumOptions);
     tWindowId = AddWindow(&windowTemplate);
-    SetStandardWindowBorderStyle(tWindowId, 0);
+    SetStandardWindowBorderStyle(tWindowId, FALSE);
     PrintMenuActionTextsInUpperLeftCorner(tWindowId, sTopMenuNumOptions, sPlayerPCMenuActions, sTopMenuOptionOrder);
     InitMenuInUpperLeftCornerNormal(tWindowId, sTopMenuNumOptions, 0);
     ScheduleBgCopyTilemapToVram(0);
@@ -467,7 +467,7 @@ static void PlayerPC_Mailbox(u8 taskId)
         SetPlayerPCListCount(taskId);
         if (MailboxMenu_Alloc(gPlayerPCItemPageInfo.count) == TRUE)
         {
-            ClearDialogWindowAndFrame(0, 0);
+            ClearDialogWindowAndFrame(0, FALSE);
             Mailbox_DrawMailboxMenu(taskId);
             gTasks[taskId].func = Mailbox_ProcessInput;
         }
@@ -509,7 +509,7 @@ static void InitItemStorageMenu(u8 taskId, u8 var)
     windowTemplate = sWindowTemplates_MainMenus[WIN_ITEM_STORAGE_MENU];
     windowTemplate.width = GetMaxWidthInMenuTable(sItemStorage_MenuActions, ARRAY_COUNT(sItemStorage_MenuActions));
     tWindowId = AddWindow(&windowTemplate);
-    SetStandardWindowBorderStyle(tWindowId, 0);
+    SetStandardWindowBorderStyle(tWindowId, FALSE);
     PrintMenuTable(tWindowId, ARRAY_COUNT(sItemStorage_MenuActions), sItemStorage_MenuActions);
     InitMenuInUpperLeftCornerNormal(tWindowId, ARRAY_COUNT(sItemStorage_MenuActions), var);
     ScheduleBgCopyTilemapToVram(0);
@@ -632,7 +632,7 @@ static void ItemStorage_Enter(u8 taskId, bool8 toss)
     FreeAndReserveObjectSpritePalettes();
     LoadListMenuSwapLineGfx();
     CreateSwapLineSprites(sItemStorageMenu->swapLineSpriteIds, SWAP_LINE_LENGTH);
-    ClearDialogWindowAndFrame(0,0);
+    ClearDialogWindowAndFrame(0, FALSE);
     gTasks[taskId].func = ItemStorage_CreateListMenu;
 }
 
@@ -928,7 +928,7 @@ static void Mailbox_NoPokemonForMail(u8 taskId)
 static void Mailbox_Cancel(u8 taskId)
 {
     MailboxMenu_RemoveWindow(MAILBOXWIN_OPTIONS);
-    ClearDialogWindowAndFrame(0, 0);
+    ClearDialogWindowAndFrame(0, FALSE);
     Mailbox_DrawMailboxMenu(taskId);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = Mailbox_ProcessInput;
