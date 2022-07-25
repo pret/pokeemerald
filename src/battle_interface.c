@@ -4,6 +4,7 @@
 #include "pokemon.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
+#include "battle_z_move.h"
 #include "graphics.h"
 #include "sprite.h"
 #include "window.h"
@@ -156,44 +157,44 @@ enum
     HEALTHBOX_GFX_FRAME_END_BAR,
 };
 
-static const u8 *GetHealthboxElementGfxPtr(u8 elementId);
-static u8* AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y, u32 bgColor, u32 *windowId);
+static const u8 *GetHealthboxElementGfxPtr(u8);
+static u8* AddTextPrinterAndCreateWindowOnHealthbox(const u8 *, u32, u32, u32, u32 *);
 
 static void RemoveWindowOnHealthbox(u32 windowId);
-static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
-static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId);
+static void UpdateHpTextInHealthboxInDoubles(u8, s16, u8);
+static void UpdateStatusIconInHealthbox(u8);
 
-static void TextIntoHealthboxObject(void *dest, u8 *windowTileData, s32 windowWidth);
-static void SafariTextIntoHealthboxObject(void *dest, u8 *windowTileData, u32 windowWidth);
-static void HpTextIntoHealthboxObject(void *dest, u8 *windowTileData, u32 windowWidth);
-static void FillHealthboxObject(void *dest, u32 arg1, u32 arg2);
+static void TextIntoHealthboxObject(void *, u8 *, s32);
+static void SafariTextIntoHealthboxObject(void *, u8 *, u32);
+static void HpTextIntoHealthboxObject(void *, u8 *, u32);
+static void FillHealthboxObject(void *, u32, u32);
 
-static void Task_HidePartyStatusSummary_BattleStart_1(u8 taskId);
-static void Task_HidePartyStatusSummary_BattleStart_2(u8 taskId);
-static void Task_HidePartyStatusSummary_DuringBattle(u8 taskId);
+static void Task_HidePartyStatusSummary_BattleStart_1(u8);
+static void Task_HidePartyStatusSummary_BattleStart_2(u8);
+static void Task_HidePartyStatusSummary_DuringBattle(u8);
 
-static void SpriteCB_HealthBoxOther(struct Sprite *sprite);
-static void SpriteCB_HealthBar(struct Sprite *sprite);
-static void SpriteCB_StatusSummaryBar_Enter(struct Sprite *sprite);
-static void SpriteCB_StatusSummaryBar_Exit(struct Sprite *sprite);
-static void SpriteCB_StatusSummaryBalls_Enter(struct Sprite *sprite);
-static void SpriteCB_StatusSummaryBalls_Exit(struct Sprite *sprite);
-static void SpriteCB_StatusSummaryBalls_OnSwitchout(struct Sprite *sprite);
+static void SpriteCB_HealthBoxOther(struct Sprite *);
+static void SpriteCB_HealthBar(struct Sprite *);
+static void SpriteCB_StatusSummaryBar_Enter(struct Sprite *);
+static void SpriteCB_StatusSummaryBar_Exit(struct Sprite *);
+static void SpriteCB_StatusSummaryBalls_Enter(struct Sprite *);
+static void SpriteCB_StatusSummaryBalls_Exit(struct Sprite *);
+static void SpriteCB_StatusSummaryBalls_OnSwitchout(struct Sprite *);
 
-static void SpriteCb_MegaTrigger(struct Sprite *sprite);
-static void SpriteCb_MegaIndicator(struct Sprite *sprite);
+static void SpriteCb_MegaTrigger(struct Sprite *);
+static void SpriteCb_MegaIndicator(struct Sprite *);
 
-static u8 GetStatusIconForBattlerId(u8 statusElementId, u8 battlerId);
-static s32 CalcNewBarValue(s32 maxValue, s32 currValue, s32 receivedValue, s32 *arg3, u8 arg4, u16 arg5);
-static u8 GetScaledExpFraction(s32 currValue, s32 receivedValue, s32 maxValue, u8 scale);
-static void MoveBattleBarGraphically(u8 battlerId, u8 whichBar);
-static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *currValue, u8 *arg4, u8 scale);
+static u8 GetStatusIconForBattlerId(u8, u8);
+static s32 CalcNewBarValue(s32, s32, s32, s32 *, u8, u16);
+static u8 GetScaledExpFraction(s32, s32, s32, u8);
+static void MoveBattleBarGraphically(u8, u8);
+static u8 CalcBarFilledPixels(s32, s32, s32, s32 *, u8 *, u8);
 
-static void SpriteCb_AbilityPopUp(struct Sprite *sprite);
-static void Task_FreeAbilityPopUpGfx(u8 taskId);
+static void SpriteCb_AbilityPopUp(struct Sprite *);
+static void Task_FreeAbilityPopUpGfx(u8);
 
-static void SpriteCB_LastUsedBall(struct Sprite *sprite);
-static void SpriteCB_LastUsedBallWin(struct Sprite *sprite);
+static void SpriteCB_LastUsedBall(struct Sprite *);
+static void SpriteCB_LastUsedBallWin(struct Sprite *);
 
 static const struct OamData sOamData_64x32 =
 {
@@ -1530,6 +1531,12 @@ void HideMegaTriggerSprite(void)
     }
 }
 
+void HideTriggerSprites(void)
+{
+    HideMegaTriggerSprite();
+    HideZMoveTriggerSprite();
+}
+
 void DestroyMegaTriggerSprite(void)
 {
     FreeSpritePaletteByTag(TAG_MEGA_TRIGGER_PAL);
@@ -1637,7 +1644,7 @@ static void SpriteCb_MegaIndicator(struct Sprite *sprite)
 #define tIsBattleStart          data[10]
 #define tBlend                  data[15]
 
-u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, u8 arg2, bool8 isBattleStart)
+u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, bool8 skipPlayer, bool8 isBattleStart)
 {
     bool8 isOpponent;
     s16 bar_X, bar_Y, bar_pos2_X, bar_data0;
@@ -1646,7 +1653,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
     u8 ballIconSpritesIds[PARTY_SIZE];
     u8 taskId;
 
-    if (!arg2 || GetBattlerPosition(battlerId) != B_POSITION_OPPONENT_RIGHT)
+    if (!skipPlayer || GetBattlerPosition(battlerId) != B_POSITION_OPPONENT_RIGHT)
     {
         if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
         {
@@ -1659,7 +1666,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         {
             isOpponent = TRUE;
 
-            if (!arg2 || !IsDoubleBattle())
+            if (!skipPlayer || !IsDoubleBattle())
                 bar_X = 104, bar_Y = 40;
             else
                 bar_X = 104, bar_Y = 16;
@@ -2607,7 +2614,7 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
     return ret;
 }
 
-static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *currValue, u8 *arg4, u8 scale)
+static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *currValue, u8 *pixelsArray, u8 scale)
 {
     u8 pixels, filledPixels, totalPixels;
     u8 i;
@@ -2621,7 +2628,7 @@ static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32
     totalPixels = scale * 8;
 
     for (i = 0; i < scale; i++)
-        arg4[i] = 0;
+        pixelsArray[i] = 0;
 
     if (maxValue < totalPixels)
         pixels = (*currValue * totalPixels / maxValue) >> 8;
@@ -2632,7 +2639,7 @@ static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32
 
     if (filledPixels == 0 && newValue > 0)
     {
-        arg4[0] = 1;
+        pixelsArray[0] = 1;
         filledPixels = 1;
     }
     else
@@ -2641,11 +2648,11 @@ static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32
         {
             if (pixels >= 8)
             {
-                arg4[i] = 8;
+                pixelsArray[i] = 8;
             }
             else
             {
-                arg4[i] = pixels;
+                pixelsArray[i] = pixels;
                 break;
             }
             pixels -= 8;
@@ -2733,9 +2740,9 @@ static void RemoveWindowOnHealthbox(u32 windowId)
     RemoveWindow(windowId);
 }
 
-static void FillHealthboxObject(void *dest, u32 arg1, u32 arg2)
+static void FillHealthboxObject(void *dest, u32 valMult, u32 numTiles)
 {
-    CpuFill32(0x11111111 * arg1, dest, arg2 * TILE_SIZE_4BPP);
+    CpuFill32(0x11111111 * valMult, dest, numTiles * TILE_SIZE_4BPP);
 }
 
 static void HpTextIntoHealthboxObject(void *dest, u8 *windowTileData, u32 windowWidth)

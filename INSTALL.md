@@ -418,20 +418,15 @@ If you aren't in the pokeemerald directory already, then **change directory** to
 ```bash
 cd pokeemerald
 ```
-To build **pokeemerald.gba** for the first time and confirm it matches the official ROM image (Note: to speed up builds, see [Parallel builds](#parallel-builds)):
+To build **pokeemerald.gba** (Note: to speed up builds, see [Parallel builds](#parallel-builds)):
 ```bash
-make compare
+make
 ```
-If an OK is returned, then the installation went smoothly.
+If it has built successfully you will have the output file **pokeemerald.gba** in your project folder.
 <details>
 <summary>Note for Windows...</summary>
 > If you switched terminals since the last build (e.g. from msys2 to WSL1), you must run `make clean-tools` once before any subsequent `make` commands.
 </details>
-
-To build **pokeemerald.gba** with your changes:
-```bash
-make
-```
 
 # Building guidance
 
@@ -451,11 +446,20 @@ Replace `<output of nproc>` with the number that the `nproc` command returned.
 
 `nproc` is not available on macOS. The alternative is `sysctl -n hw.ncpu` ([relevant Stack Overflow thread](https://stackoverflow.com/questions/1715580)).
 
-## Debug info
+## Compare ROM to the original
 
-To build **pokeemerald.elf** with enhanced debug info:
+For contributing, or if you'd simply like to verify that your ROM is identical to the original game, run:
 ```bash
-make DINFO=1
+make compare
+```
+If it matches, you will see the following at the end of the output:
+```bash
+pokeemerald.gba: OK
+```
+If there are any changes from the original game, you will instead see:
+```bash
+pokeemerald.gba: FAILED
+shasum: WARNING: 1 computed checksum did NOT match
 ```
 
 ## devkitARM's C compiler
@@ -534,7 +538,7 @@ devkitARM is now installed.
 
 devkitARM is now installed.
 
-## Installing devkitARM on Arch Linux
+### Installing devkitARM on Arch Linux
         
 1. Follow [devkitPro's instructions](https://devkitpro.org/wiki/devkitPro_pacman#Customising_Existing_Pacman_Install) to configure `pacman` to download devkitPro packages.
 2. Install `gba-dev`: run the following command as root.
@@ -552,7 +556,7 @@ devkitARM is now installed.
 
 devkitARM is now installed.
 
-## Other toolchains
+### Other toolchains
 
 To build using a toolchain other than devkitARM, override the `TOOLCHAIN` environment variable with the path to your toolchain, which must contain the subdirectory `bin`.
 ```bash
@@ -563,6 +567,14 @@ The following is an example:
 make TOOLCHAIN="/usr/local/arm-none-eabi"
 ```
 To compile the `modern` target with this toolchain, the subdirectories `lib`, `include`, and `arm-none-eabi` must also be present.
+
+### Building with debug info under a modern toolchain
+
+To build **pokeemerald.elf** with debug symbols under a modern toolchain:
+```bash
+make modern DINFO=1
+```
+Note that this is not necessary for a non-modern build since those are built with debug symbols by default.
 
 # Useful additional tools
 

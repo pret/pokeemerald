@@ -81,6 +81,8 @@
 
 #define WILD_DOUBLE_BATTLE ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER))))
 #define BATTLE_TWO_VS_ONE_OPPONENT ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gTrainerBattleOpponent_B == 0xFFFF))
+#define BATTLE_TYPE_HAS_AI          (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER)
+
 
 // Battle Outcome defines
 #define B_OUTCOME_WON                  1
@@ -420,7 +422,7 @@
 #define B_WIN_TYPE_NORMAL 0
 #define B_WIN_TYPE_ARENA  1
 
-// Window Ids for gStandardBattleWindowTemplates / gBattleArenaWindowTemplates
+// Window Ids for sStandardBattleWindowTemplates / sBattleArenaWindowTemplates
 #define B_WIN_MSG                 0
 #define B_WIN_ACTION_PROMPT       1 // "What will {x} do?"
 #define B_WIN_ACTION_MENU         2 // "Fight/Pokémon/Bag/Run" menu

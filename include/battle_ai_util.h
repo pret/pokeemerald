@@ -20,6 +20,7 @@ void ClearBattlerItemEffectHistory(u8 battlerId);
 void SaveBattlerData(u8 battlerId);
 void SetBattlerData(u8 battlerId);
 void RestoreBattlerData(u8 battlerId);
+u16 GetAIChosenMove(u8 battlerId);
 
 bool32 WillAIStrikeFirst(void);
 u32 GetTotalBaseStat(u32 species);
@@ -27,13 +28,13 @@ bool32 IsTruantMonVulnerable(u32 battlerAI, u32 opposingBattler);
 bool32 AtMaxHp(u8 battler);
 u32 GetHealthPercentage(u8 battler);
 bool32 IsBattlerTrapped(u8 battler, bool8 switching);
-u8 AI_WhoStrikesFirst(u8 battlerAI, u8 battler2);
+u8 AI_WhoStrikesFirst(u8 battlerAI, u8 battler2, u16 consideredMove);
 bool32 CanTargetFaintAi(u8 battlerDef, u8 battlerAtk);
 bool32 CanMoveFaintBattler(u16 move, u8 battlerDef, u8 battlerAtk, u8 nHits);
 bool32 CanTargetFaintAiWithMod(u8 battlerDef, u8 battlerAtk, s32 hpMod, s32 dmgMod);
 s32 AI_GetAbility(u32 battlerId);
 u16 AI_GetHoldEffect(u32 battlerId);
-u32 AI_GetMoveAccuracy(u8 battlerAtk, u8 battlerDef, u16 atkAbility, u16 defAbility, u8 atkHoldEffect, u8 defHoldEffect, u16 move);
+u32 AI_GetMoveAccuracy(u8 battlerAtk, u8 battlerDef, u16 move);
 bool32 DoesBattlerIgnoreAbilityChecks(u16 atkAbility, u16 move);
 bool32 AI_WeatherHasEffect(void);
 bool32 CanAIFaintTarget(u8 battlerAtk, u8 battlerDef, u8 numHits);
@@ -45,7 +46,7 @@ bool32 HasDamagingMoveOfType(u8 battlerId, u8 type);
 u32 GetBattlerSecondaryDamage(u8 battlerId);
 bool32 BattlerWillFaintFromWeather(u8 battler, u16 ability);
 bool32 BattlerWillFaintFromSecondaryDamage(u8 battler, u16 ability);
-bool32 ShouldTryOHKO(u8 battlerAtk, u8 battlerDef, u16 atkAbility, u16 defAbility, u32 accuracy, u16 move);
+bool32 ShouldTryOHKO(u8 battlerAtk, u8 battlerDef, u16 atkAbility, u16 defAbility, u16 move);
 bool32 ShouldUseRecoilMove(u8 battlerAtk, u8 battlerDef, u32 recoilDmg, u8 moveIndex);
 u16 GetBattlerSideSpeedAverage(u8 battler);
 bool32 ShouldAbsorb(u8 battlerAtk, u8 battlerDef, u16 move, s32 damage);
@@ -61,6 +62,7 @@ s8 GetAbilityRating(u16 ability);
 bool32 AI_IsAbilityOnSide(u32 battlerId, u32 ability);
 bool32 AI_MoveMakesContact(u32 ability, u32 holdEffect, u16 move);
 u32 AI_GetBattlerMoveTargetType(u8 battlerId, u16 move);
+bool32 ShouldUseZMove(u8 activeId, u8 targetId, u16 chosenMove);
 
 // stat stage checks
 bool32 AnyStatIsRaised(u8 battlerId);
@@ -81,11 +83,11 @@ bool32 ShouldLowerEvasion(u8 battlerAtk, u8 battlerDef, u16 defAbility);
 // move checks
 bool32 IsAffectedByPowder(u8 battler, u16 ability, u16 holdEffect);
 bool32 MovesWithSplitUnusable(u32 attacker, u32 target, u32 split);
-s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef);
+s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *effectiveness, bool32 considerZPower);
 u8 GetMoveDamageResult(u16 move);
 u32 GetCurrDamageHpPercent(u8 battlerAtk, u8 battlerDef);
 u16 AI_GetTypeEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef);
-u8 AI_GetMoveEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef);
+u32 AI_GetMoveEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef);
 u16 *GetMovesArray(u32 battler);
 bool32 IsConfusionMoveEffect(u16 moveEffect);
 bool32 HasMove(u32 battlerId, u32 move);
@@ -144,7 +146,7 @@ bool32 ShouldTrap(u8 battlerAtk, u8 battlerDef, u16 move);
 bool32 IsWakeupTurn(u8 battler);
 
 // partner logic
-u16 GetAllyChosenMove(void);
+u16 GetAllyChosenMove(u8 battlerId);
 bool32 IsValidDoubleBattle(u8 battlerAtk);
 bool32 IsTargetingPartner(u8 battlerAtk, u8 battlerDef);
 bool32 DoesPartnerHaveSameMoveEffect(u8 battlerAtkPartner, u8 battlerDef, u16 move, u16 partnerMove);

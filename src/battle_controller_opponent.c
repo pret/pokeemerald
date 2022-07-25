@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_ai_main.h"
+#include "battle_ai_util.h"
 #include "battle_anim.h"
 #include "battle_arena.h"
 #include "battle_controllers.h"
@@ -9,6 +10,7 @@
 #include "battle_setup.h"
 #include "battle_tower.h"
 #include "battle_tv.h"
+#include "battle_z_move.h"
 #include "bg.h"
 #include "data.h"
 #include "frontier_util.h"
@@ -1535,7 +1537,7 @@ static void OpponentHandlePrintSelectionString(void)
 
 static void OpponentHandleChooseAction(void)
 {
-    AI_TrySwitchOrUseItem();    // TODO consider move choice first
+    AI_TrySwitchOrUseItem();
     OpponentBufferExecCompleted();
 }
 
@@ -1559,9 +1561,8 @@ static void OpponentHandleChooseMove(void)
         if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER)
          || IsWildMonSmart())
         {
-            BattleAI_SetupAIData(0xF);
-            chosenMoveId = BattleAI_ChooseMoveOrAction();
-
+            chosenMoveId = gBattleStruct->aiMoveOrAction[gActiveBattler];
+            gBattlerTarget = gBattleStruct->aiChosenTarget[gActiveBattler];
             switch (chosenMoveId)
             {
             case AI_CHOICE_WATCH:
@@ -1581,16 +1582,25 @@ static void OpponentHandleChooseMove(void)
                     gBattlerTarget = gActiveBattler;
                 if (GetBattlerMoveTargetType(gActiveBattler, moveInfo->moves[chosenMoveId]) & MOVE_TARGET_BOTH)
                 {
-                    gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-                    if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
-                        gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+                    u16 chosenMove = moveInfo->moves[chosenMoveId];
+                        
+                    if (gBattleMoves[chosenMove].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
+                        gBattlerTarget = gActiveBattler;
+                    if (gBattleMoves[chosenMove].target & MOVE_TARGET_BOTH)
+                    {
+                        gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+                        if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
+                            gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+                    }
+                    
+                    if (ShouldUseZMove(gActiveBattler, gBattlerTarget, chosenMove))
+                        QueueZMove(gActiveBattler, chosenMove);
+                    
+                    if (CanMegaEvolve(gActiveBattler)) // If opponent can mega evolve, do it.
+                        BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
+                    else
+                        BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
                 }
-
-                // If opponent can mega evolve, do it.
-                if (CanMegaEvolve(gActiveBattler))
-                    BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
-                else
-                    BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
                 break;
             }
             OpponentBufferExecCompleted();

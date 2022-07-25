@@ -1,12 +1,14 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_ai_main.h"
+#include "battle_ai_util.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_message.h"
 #include "battle_interface.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
+#include "battle_z_move.h"
 #include "bg.h"
 #include "data.h"
 #include "item_use.h"
@@ -1515,8 +1517,8 @@ static void PlayerPartnerHandleChooseMove(void)
     u8 chosenMoveId;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
 
-    BattleAI_SetupAIData(0xF);
-    chosenMoveId = BattleAI_ChooseMoveOrAction();
+    chosenMoveId = gBattleStruct->aiMoveOrAction[gActiveBattler];
+    gBattlerTarget = gBattleStruct->aiChosenTarget[gActiveBattler];
 
     if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED))
         gBattlerTarget = gActiveBattler;
@@ -1526,6 +1528,9 @@ static void PlayerPartnerHandleChooseMove(void)
         if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
             gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
     }
+    
+    if (ShouldUseZMove(gActiveBattler, gBattlerTarget, moveInfo->moves[chosenMoveId]))
+        QueueZMove(gActiveBattler, moveInfo->moves[chosenMoveId]);
 
     // If partner can mega evolve, do it.
     if (CanMegaEvolve(gActiveBattler))

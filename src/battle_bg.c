@@ -161,7 +161,7 @@ const struct BgTemplate gBattleBgTemplates[] =
     },
 };
 
-static const struct WindowTemplate gStandardBattleWindowTemplates[] =
+static const struct WindowTemplate sStandardBattleWindowTemplates[] =
 {
     [B_WIN_MSG] = {
         .bg = 0,
@@ -194,7 +194,7 @@ static const struct WindowTemplate gStandardBattleWindowTemplates[] =
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 55,
-        .width = 8,
+        .width = 12,    //for z move names
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x0300,
@@ -206,7 +206,7 @@ static const struct WindowTemplate gStandardBattleWindowTemplates[] =
         .width = 8,
         .height = 2,
         .paletteNum = 5,
-        .baseBlock = 0x0310,
+        .baseBlock = 0x0318,
     },
     [B_WIN_MOVE_NAME_3] = {
         .bg = 0,
@@ -215,7 +215,7 @@ static const struct WindowTemplate gStandardBattleWindowTemplates[] =
         .width = 8,
         .height = 2,
         .paletteNum = 5,
-        .baseBlock = 0x0320,
+        .baseBlock = 0x0328,
     },
     [B_WIN_MOVE_NAME_4] = {
         .bg = 0,
@@ -224,7 +224,7 @@ static const struct WindowTemplate gStandardBattleWindowTemplates[] =
         .width = 8,
         .height = 2,
         .paletteNum = 5,
-        .baseBlock = 0x0330,
+        .baseBlock = 0x0338,
     },
     [B_WIN_PP] = {
         .bg = 0,
@@ -382,7 +382,7 @@ static const struct WindowTemplate gStandardBattleWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate gBattleArenaWindowTemplates[] =
+static const struct WindowTemplate sBattleArenaWindowTemplates[] =
 {
     [B_WIN_MSG] = {
         .bg = 0,
@@ -596,8 +596,8 @@ static const struct WindowTemplate gBattleArenaWindowTemplates[] =
 
 const struct WindowTemplate * const gBattleWindowTemplates[] =
 {
-    [B_WIN_TYPE_NORMAL] = gStandardBattleWindowTemplates,
-    [B_WIN_TYPE_ARENA]  = gBattleArenaWindowTemplates,
+    [B_WIN_TYPE_NORMAL] = sStandardBattleWindowTemplates,
+    [B_WIN_TYPE_ARENA]  = sBattleArenaWindowTemplates,
 };
 
 static const struct BattleBackground sBattleTerrainTable[] =

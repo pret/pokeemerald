@@ -332,7 +332,7 @@ u8 *CopyStringLeftAlignedToConditionData(u8 *dst, const u8 *src, s16 n)
     return dst;
 }
 
-static u8 *CopyConditionMonNameGender(u8 *str, u16 listId, bool8 arg3)
+static u8 *CopyConditionMonNameGender(u8 *str, u16 listId, bool8 skipPadding)
 {
     u16 boxId, monId, gender, species, level, lvlDigits;
     struct BoxPokemon *boxMon;
@@ -412,7 +412,7 @@ static u8 *CopyConditionMonNameGender(u8 *str, u16 listId, bool8 arg3)
     str_ = ConvertIntToDecimalStringN(str_, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     lvlDigits = str_ - txtPtr;
     *(str_++) = CHAR_SPACE;
-    if (!arg3)
+    if (!skipPadding)
     {
         lvlDigits = 3 - lvlDigits;
         while (lvlDigits-- != 0)

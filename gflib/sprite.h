@@ -270,7 +270,7 @@ u8 CreateSpriteAtEnd(const struct SpriteTemplate *template, s16 x, s16 y, u8 sub
 u8 CreateInvisibleSprite(void (*callback)(struct Sprite *));
 u8 CreateSpriteAndAnimate(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
 void DestroySprite(struct Sprite *sprite);
-void ResetOamRange(u8 a, u8 b);
+void ResetOamRange(u8 start, u8 end);
 void LoadOam(void);
 void SetOamMatrix(u8 matrixNum, u16 a, u16 b, u16 c, u16 d);
 void CalcCenterToCornerVec(struct Sprite *sprite, u8 shape, u8 size, u8 affineMode);

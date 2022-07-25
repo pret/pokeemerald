@@ -2195,7 +2195,7 @@ static bool8 LoadTradeMenuSpriteSheetsAndPalettes(void)
         sTradeMenuData->timer++;
         break;
     case GFXTAG_MENU_TEXT_COUNT:
-        LoadSpritePalette(&gSpritePalette_TradeScreenText);
+        LoadSpritePalette(&sSpritePalette_TradeScreenText);
         sTradeMenuData->timer++;
         break;
     case GFXTAG_MENU_TEXT_COUNT + 1:
@@ -2435,7 +2435,7 @@ static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isEventLegal)
     return FALSE;
 }
 
-int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, u8 isEventLegal)
+int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, bool8 isEventLegal)
 {
     bool8 playerHasNationalDex = player.hasNationalDex;
     bool8 playerIsChampion = player.isChampion;
@@ -2496,7 +2496,7 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
     return UR_TRADE_MSG_NONE;
 }
 
-int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 species2, u16 species, u8 isEventLegal)
+int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 species2, u16 species, bool8 isEventLegal)
 {
     bool8 hasNationalDex = player.hasNationalDex;
 
@@ -3744,7 +3744,7 @@ static bool8 AnimateTradeSequenceCable(void)
         gSprites[sTradeData->monSpriteIds[TRADE_PARTNER]].x2 = 0;
         gSprites[sTradeData->monSpriteIds[TRADE_PARTNER]].y2 = 0;
         StartSpriteAnim(&gSprites[sTradeData->monSpriteIds[TRADE_PARTNER]], 0);
-        CreatePokeballSpriteToReleaseMon(sTradeData->monSpriteIds[TRADE_PARTNER], gSprites[sTradeData->monSpriteIds[TRADE_PARTNER]].oam.paletteNum, 120, 84, 2, 1, 20, 0xFFFFF, sTradeData->monSpecies[TRADE_PARTNER]);
+        CreatePokeballSpriteToReleaseMon(sTradeData->monSpriteIds[TRADE_PARTNER], gSprites[sTradeData->monSpriteIds[TRADE_PARTNER]].oam.paletteNum, 120, 84, 2, 1, 20, PALETTES_BG | (0xF << 16), sTradeData->monSpecies[TRADE_PARTNER]);
         FreeSpriteOamMatrix(&gSprites[sTradeData->bouncingPokeballSpriteId]);
         DestroySprite(&gSprites[sTradeData->bouncingPokeballSpriteId]);
         sTradeData->state++;
@@ -4244,7 +4244,7 @@ static bool8 AnimateTradeSequenceWireless(void)
         gSprites[sTradeData->monSpriteIds[TRADE_PARTNER]].x2 = 0;
         gSprites[sTradeData->monSpriteIds[TRADE_PARTNER]].y2 = 0;
         StartSpriteAnim(&gSprites[sTradeData->monSpriteIds[TRADE_PARTNER]], 0);
-        CreatePokeballSpriteToReleaseMon(sTradeData->monSpriteIds[TRADE_PARTNER], gSprites[sTradeData->monSpriteIds[TRADE_PARTNER]].oam.paletteNum, 120, 84, 2, 1, 20, 0xFFFFF, sTradeData->monSpecies[TRADE_PARTNER]);
+        CreatePokeballSpriteToReleaseMon(sTradeData->monSpriteIds[TRADE_PARTNER], gSprites[sTradeData->monSpriteIds[TRADE_PARTNER]].oam.paletteNum, 120, 84, 2, 1, 20, PALETTES_BG | (0xF << 16), sTradeData->monSpecies[TRADE_PARTNER]);
         FreeSpriteOamMatrix(&gSprites[sTradeData->bouncingPokeballSpriteId]);
         DestroySprite(&gSprites[sTradeData->bouncingPokeballSpriteId]);
         sTradeData->state++;
@@ -4813,7 +4813,7 @@ static void CheckPartnersMonForRibbons(void)
 {
     u8 i;
     u8 numRibbons = 0;
-    for (i = 0; i < 12; i ++)
+    for (i = 0; i < (MON_DATA_UNUSED_RIBBONS - MON_DATA_CHAMPION_RIBBON); i ++)
     {
         numRibbons += GetMonData(&gEnemyParty[gSelectedTradeMonPositions[TRADE_PARTNER] % PARTY_SIZE], MON_DATA_CHAMPION_RIBBON + i);
     }
