@@ -206,12 +206,13 @@ void TVShowConvertInternationalString(u8 *dest, const u8 *src, int language)
     ConvertInternationalString(dest, language);
 }
 
+// It's impossible to distinguish between Latin languages just from a string alone, so the function defaults to LANGUAGE_ENGLISH. This is the case in all of the versions of the game.
 int GetNicknameLanguage(u8 *str)
 {
     if (str[0] == EXT_CTRL_CODE_BEGIN && str[1] == EXT_CTRL_CODE_JPN)
         return LANGUAGE_JAPANESE;
     else
-        return GAME_LANGUAGE;
+        return LANGUAGE_ENGLISH;
 }
 
 // Used by Pokénav's Match Call to erase the previous trainer's flavor text when switching between their info pages.
