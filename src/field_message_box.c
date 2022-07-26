@@ -33,7 +33,7 @@ static void Task_DrawFieldMessage(u8 taskId)
            task->tState++;
            break;
         case 1:
-           DrawDialogueFrame(0, 1);
+           DrawDialogueFrame(0, TRUE);
            task->tState++;
            break;
         case 2:
@@ -105,7 +105,7 @@ static bool8 ForceShowFieldAutoScrollMessage(const u8 *str)
     return TRUE;
 }
 
-// Same as ShowFieldMessage, but instead of accepting a 
+// Same as ShowFieldMessage, but instead of accepting a
 // string arg it just prints whats already in gStringVar4
 bool8 ShowFieldMessageFromBuffer(void)
 {

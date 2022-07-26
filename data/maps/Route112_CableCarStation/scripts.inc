@@ -6,9 +6,8 @@ Route112_CableCarStation_MapScripts::
 	.byte 0
 
 Route112_CableCarStation_OnTransition:
-	setescapewarp MAP_ROUTE112, 255, 28, 28
-	compare VAR_CABLE_CAR_STATION_STATE, 2
-	call_if_eq Route112_CableCarStation_EventScript_MoveAttendantAside
+	setescapewarp MAP_ROUTE112, 28, 28
+	call_if_eq VAR_CABLE_CAR_STATION_STATE, 2, Route112_CableCarStation_EventScript_MoveAttendantAside
 	end
 
 Route112_CableCarStation_EventScript_MoveAttendantAside::
@@ -35,10 +34,8 @@ Route112_CableCarStation_EventScript_Attendant::
 	lock
 	faceplayer
 	msgbox Route112_CableCarStation_Text_CableCarReadyGetOn, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq Route112_CableCarStation_EventScript_RideCableCar
-	compare VAR_RESULT, NO
-	goto_if_eq Route112_CableCarStation_EventScript_DeclineRide
+	goto_if_eq VAR_RESULT, YES, Route112_CableCarStation_EventScript_RideCableCar
+	goto_if_eq VAR_RESULT, NO, Route112_CableCarStation_EventScript_DeclineRide
 	end
 
 Route112_CableCarStation_EventScript_RideCableCar::
@@ -65,7 +62,7 @@ Route112_CableCarStation_Movement_LeadPlayerToCableCar:
 	walk_up
 	walk_up
 	walk_right
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 Route112_CableCarStation_Movement_FollowPlayerOutFromCableCar:

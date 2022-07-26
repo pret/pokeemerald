@@ -22,8 +22,7 @@ BerryTree_EventScript_CheckSoil::
 	lock
 	faceplayer
 	specialvar VAR_RESULT, PlayerHasBerries
-	compare VAR_RESULT, TRUE
-	goto_if_eq BerryTree_EventScript_WantToPlant
+	goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_WantToPlant
 	message BerryTree_Text_ItsSoftLoamySoil
 	waitmessage
 	waitbuttonpress
@@ -32,10 +31,8 @@ BerryTree_EventScript_CheckSoil::
 
 BerryTree_EventScript_WantToPlant::
 	msgbox BerryTree_Text_WantToPlant, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq BerryTree_EventScript_ChooseBerryToPlant
-	compare VAR_RESULT, NO
-	goto_if_eq BerryTree_EventScript_CancelPlanting
+	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_ChooseBerryToPlant
+	goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_CancelPlanting
 	end
 
 BerryTree_EventScript_ChooseBerryToPlant::
@@ -43,8 +40,7 @@ BerryTree_EventScript_ChooseBerryToPlant::
 	closemessage
 	special Bag_ChooseBerry
 	waitstate
-	compare VAR_ITEM_ID, 0
-	goto_if_eq BerryTree_EventScript_CancelPlanting
+	goto_if_eq VAR_ITEM_ID, 0, BerryTree_EventScript_CancelPlanting
 	removeitem VAR_ITEM_ID
 	call BerryTree_EventScript_PlantBerry
 
@@ -88,37 +84,32 @@ BerryTree_EventScript_CheckBerryStage4::
 @ VAR_0x8005 here is the number of times watered
 @ Buffered by ObjectEventInteractionGetBerryTreeData
 BerryTree_EventScript_GetCareAdverb::
-	compare VAR_0x8005, 0
-	goto_if_eq BerryTree_EventScript_SetAdverbPoor
-	compare VAR_0x8005, 4
-	goto_if_eq BerryTree_EventScript_SetAdverbGreat
-	bufferstring 1, BerryTree_Text_CareAdverbGood
+	goto_if_eq VAR_0x8005, 0, BerryTree_EventScript_SetAdverbPoor
+	goto_if_eq VAR_0x8005, 4, BerryTree_EventScript_SetAdverbGreat
+	bufferstring STR_VAR_2, BerryTree_Text_CareAdverbGood
 	return
 
 BerryTree_EventScript_SetAdverbGreat::
-	bufferstring 1, BerryTree_Text_CareAdverbGreat
+	bufferstring STR_VAR_2, BerryTree_Text_CareAdverbGreat
 	return
 
 BerryTree_EventScript_SetAdverbPoor::
-	bufferstring 1, BerryTree_Text_CareAdverbPoor
+	bufferstring STR_VAR_2, BerryTree_Text_CareAdverbPoor
 	return
 
 @ VAR_0x8006 here is the number of berries
 BerryTree_EventScript_CheckBerryFullyGrown::
-	buffernumberstring 1, VAR_0x8006
+	buffernumberstring STR_VAR_2, VAR_0x8006
 	lock
 	faceplayer
 	special ObjectEventInteractionGetBerryCountString
 	msgbox BerryTree_Text_WantToPick, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq BerryTree_EventScript_PickBerry
-	compare VAR_RESULT, NO
-	goto_if_eq BerryTree_EventScript_CancelPickingBerry
+	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_PickBerry
+	goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_CancelPickingBerry
 
 BerryTree_EventScript_PickBerry::
 	special ObjectEventInteractionPickBerryTree
-	compare VAR_0x8004, 0
-	goto_if_eq BerryTree_EventScript_BerryPocketFull
+	goto_if_eq VAR_0x8004, 0, BerryTree_EventScript_BerryPocketFull
 	special IncrementDailyPickedBerries
 	special ObjectEventInteractionRemoveBerryTree
 	message BerryTree_Text_PickedTheBerry
@@ -154,15 +145,12 @@ BerryTree_EventScript_ItemUsePlantBerry::
 	end
 
 BerryTree_EventScript_WantToWater::
-	checkitem ITEM_WAILMER_PAIL, 1
-	compare VAR_RESULT, 0
-	goto_if_eq BerryTree_EventScript_DontWater
+	checkitem ITEM_WAILMER_PAIL
+	goto_if_eq VAR_RESULT, FALSE, BerryTree_EventScript_DontWater
 	special ObjectEventInteractionGetBerryName
 	msgbox BerryTree_Text_WantToWater, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq BerryTree_EventScript_WaterBerry
-	compare VAR_RESULT, NO
-	goto_if_eq BerryTree_EventScript_DontWater
+	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_WaterBerry
+	goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_DontWater
 
 BerryTree_EventScript_DontWater::
 	releaseall

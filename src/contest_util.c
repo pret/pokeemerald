@@ -77,7 +77,10 @@ enum {
 #define TAG_CONFETTI 3017
 #define TAG_WIRELESS_INDICATOR_WINDOW 22222
 
-#define MAX_BAR_LENGTH 87
+// Length of the score bar on the results screen
+#define NUM_BAR_SEGMENTS 11
+#define BAR_SEGMENT_LENGTH 8 // Each segment of the results bar is a single tile, so 8 pixels long
+#define MAX_BAR_LENGTH (NUM_BAR_SEGMENTS * BAR_SEGMENT_LENGTH)
 
 // Starting x/y for the sliding results screen text box
 #define TEXT_BOX_X (DISPLAY_WIDTH + 32)
@@ -96,7 +99,7 @@ struct ContestResultsInternal
     u8 winnerMonSpriteId;
     bool8 destroyConfetti;
     bool8 pointsFlashing;
-    s16 unkC[CONTESTANT_COUNT];
+    s16 barLength[CONTESTANT_COUNT];
     u8 numBarsUpdating;
 };
 
@@ -893,7 +896,7 @@ static void Task_ShowWinnerMonBanner(u8 taskId)
         {
             HandleLoadSpecialPokePic_2(
                 &gMonFrontPicTable[species],
-                gMonSpritesGfxPtr->sprites.ptr[1],
+                gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
                 species,
                 personality);
         }
@@ -901,7 +904,7 @@ static void Task_ShowWinnerMonBanner(u8 taskId)
         {
             HandleLoadSpecialPokePic_DontHandleDeoxys(
                 &gMonFrontPicTable[species],
-                gMonSpritesGfxPtr->sprites.ptr[1],
+                gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
                 species,
                 personality);
         }
@@ -1176,12 +1179,12 @@ static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
     windowId = AddWindow(&windowTemplate);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
 
-    origWidth = GetStringWidth(1, text, 0);
+    origWidth = GetStringWidth(FONT_NORMAL, text, 0);
     strWidth = (origWidth + 9) / 8;
     if (strWidth > 30)
      strWidth = 30;
 
-    AddTextPrinterParameterized3(windowId, 1, (strWidth * 8 - origWidth) / 2, 1, sContestLinkTextColors, -1, text);
+    AddTextPrinterParameterized3(windowId, FONT_NORMAL, (strWidth * 8 - origWidth) / 2, 1, sContestLinkTextColors, TEXT_SKIP_DRAW, text);
     {
         s32 i;
         struct Sprite *sprite;
@@ -1194,16 +1197,16 @@ static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
 
         for (i = 1; i < (int)ARRAY_COUNT(spriteTilePtrs); i++)
             spriteTilePtrs[i] = (void*)(gSprites[sprite->data[i - 1]].oam.tileNum * 32 + OBJ_VRAM0);
-    
+
         for (i = 0; i < (int)ARRAY_COUNT(spriteTilePtrs); i++)
             CpuFill32(0, spriteTilePtrs[i], 0x400);
-    
+
         dst = spriteTilePtrs[0];
         CpuCopy32(src, dst, 0x20);
         CpuCopy32(src + 128, dst + 0x100, 0x20);
         CpuCopy32(src + 128, dst + 0x200, 0x20);
         CpuCopy32(src + 64,  dst + 0x300, 0x20);
-    
+
         for (i = 0; i < strWidth; i++)
         {
             dst = &spriteTilePtrs[(i + 1) / 8][((i + 1) % 8) * 32];
@@ -1236,7 +1239,7 @@ static void CreateResultsTextWindowSprites(void)
         LoadSpriteSheet(&sSpriteSheets_ResultsTextWindow[i]);
 
     LoadSpritePalette(&sSpritePalette_ResultsTextWindow);
-    
+
     // Create sprites for the two window types, each made up of 4 sprites
     for (i = 0; i < (int)ARRAY_COUNT(sSpriteSheets_ResultsTextWindow); i++)
     {
@@ -1578,7 +1581,7 @@ static void SpriteCB_WinnerMonSlideIn(struct Sprite *sprite)
     {
         if (++sprite->data[0] == 10)
         {
-            PlayCry1(sprite->data[1], 0);
+            PlayCry_Normal(sprite->data[1], 0);
             sprite->data[1] = 0;
         }
     }
@@ -1748,7 +1751,7 @@ static void CalculateContestantsResultData(void)
             if ((*sContestResults->monResults)[i].lostPoints)
                 barLengthRound2 *= -1;
 
-            if (barLengthPreliminary + barLengthRound2 == MAX_BAR_LENGTH + 1)
+            if (barLengthPreliminary + barLengthRound2 == MAX_BAR_LENGTH)
             {
                 if (barLengthRound2 > 0)
                     (*sContestResults->monResults)[i].barLengthRound2--;
@@ -1841,47 +1844,52 @@ static void Task_UpdateContestResultBar(u8 taskId)
     s16 target = gTasks[taskId].tTarget;
     s16 decreasing = gTasks[taskId].tDecreasing;
 
+    // Has the results bar reached the limit?
     if (decreasing)
     {
-        if (sContestResults->data->unkC[monId] <= 0)
+        if (sContestResults->data->barLength[monId] <= 0)
             minMaxReached = TRUE;
     }
     else
     {
-        if (sContestResults->data->unkC[monId] > MAX_BAR_LENGTH)
+        if (sContestResults->data->barLength[monId] >= MAX_BAR_LENGTH)
             minMaxReached = TRUE;
     }
 
-    if (sContestResults->data->unkC[monId] == target)
+    if (sContestResults->data->barLength[monId] == target)
         targetReached = TRUE;
 
     if (!targetReached)
     {
+        // Target length has not been reached, update bar length
         if (minMaxReached)
-            sContestResults->data->unkC[monId] = target;
+            sContestResults->data->barLength[monId] = target;
         else if (decreasing)
-            sContestResults->data->unkC[monId] = sContestResults->data->unkC[monId] - 1;
+            sContestResults->data->barLength[monId]--;
         else
-            sContestResults->data->unkC[monId] = sContestResults->data->unkC[monId] + 1;
+            sContestResults->data->barLength[monId]++;
     }
 
+    // Update the tiles of the results bar if it's still changing
     if (!minMaxReached && !targetReached)
     {
-        u8 var0;
+        u8 tileOffset;
         u16 tileNum;
-        for (i = 0; i < 11; i++)
+        for (i = 0; i < NUM_BAR_SEGMENTS; i++)
         {
-            if (sContestResults->data->unkC[monId] >= (i + 1) * 8)
-                var0 = 8;
-            else if (sContestResults->data->unkC[monId] >= i * 8)
-                var0 = sContestResults->data->unkC[monId] % 8;
+            if (sContestResults->data->barLength[monId] >= (i + 1) * BAR_SEGMENT_LENGTH)
+                tileOffset = 8; // Bar segment is full
+            else if (sContestResults->data->barLength[monId] >= i * BAR_SEGMENT_LENGTH)
+                tileOffset = sContestResults->data->barLength[monId] % 8; // Bar segment is between full and empty
             else
-                var0 = 0;
+                tileOffset = 0; // Bar segment is empty
 
-            if (var0 < 4)
-                tileNum = 0x504C + var0;
+            // The first 4 bar segment tiles are not adjacent in the tileset to the
+            // remaining bar segment tiles; choose the base tile number accordingly.
+            if (tileOffset < 4)
+                tileNum = 0x504C + tileOffset;
             else
-                tileNum = 0x5057 + var0;
+                tileNum = 0x5057 + tileOffset;
 
             FillBgTilemapBufferRect_Palette0(2, tileNum, i + 7, monId * 3 + 6, 1, 1);
         }
@@ -1931,7 +1939,7 @@ static void AddContestTextPrinter(int windowId, u8 *str, int x)
     struct TextPrinterTemplate textPrinter;
     textPrinter.currentChar = str;
     textPrinter.windowId = windowId;
-    textPrinter.fontId = 7;
+    textPrinter.fontId = FONT_NARROW;
     textPrinter.x = x;
     textPrinter.y = 2;
     textPrinter.currentX = x;
@@ -2253,10 +2261,10 @@ void Task_LinkContest_FinalizeConnection(u8 taskId)
     {
         // Succesfully connected
         for (i = 0; i < CONTESTANT_COUNT; i++)
-            StringGetEnd10(gContestMons[i].nickname);
+            StringGet_Nickname(gContestMons[i].nickname);
 
         DestroyTask(taskId);
-        SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+        SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
         ScriptContext2_Disable();
         EnableBothScriptContexts();
     }
@@ -2581,13 +2589,13 @@ void ShowContestEntryMonPic(void)
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = species;
         if (gSpecialVar_0x8006 == gContestPlayerMonIndex)
-            HandleLoadSpecialPokePic_2(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[1], species, personality);
+            HandleLoadSpecialPokePic_2(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT], species, personality);
         else
-            HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[1], species, personality);
+            HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT], species, personality);
 
         palette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
         LoadCompressedSpritePalette(palette);
-        SetMultiuseSpriteTemplateToPokemon(species, 1);
+        SetMultiuseSpriteTemplateToPokemon(species, B_POSITION_OPPONENT_LEFT);
         gMultiuseSpriteTemplate.paletteTag = palette->tag;
         spriteId = CreateSprite(&gMultiuseSpriteTemplate, (left + 1) * 8 + 32, (top * 8) + 40, 0);
 

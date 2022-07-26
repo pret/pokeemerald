@@ -145,7 +145,7 @@ se_m_heat_wave_1:
 	.byte	W02
 	.byte		VOL   , 17*se_m_heat_wave_mvl/mxv
 	.byte	W03
-	.byte		EOT   
+	.byte		EOT
 	.byte	FINE
 
 @********************** Track  2 **********************@

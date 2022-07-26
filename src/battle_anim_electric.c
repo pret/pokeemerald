@@ -15,7 +15,6 @@ static void AnimZapCannonSpark_Step(struct Sprite *);
 static void AnimThunderboltOrb(struct Sprite *);
 static void AnimThunderboltOrb_Step(struct Sprite *);
 static void AnimSparkElectricityFlashing_Step(struct Sprite *);
-static void AnimElectricity(struct Sprite *);
 static void AnimTask_ElectricBolt_Step(u8 taskId);
 static void AnimElectricBoltSegment(struct Sprite *);
 static void AnimThunderWave_Step(struct Sprite *);
@@ -603,7 +602,7 @@ static void AnimUnusedCirclingShock(struct Sprite *sprite)
     sprite->data[2] = gBattleAnimArgs[3];
     sprite->data[3] = gBattleAnimArgs[4];
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
-    sprite->callback = TranslateSpriteInCircleOverDuration;
+    sprite->callback = TranslateSpriteInCircle;
 }
 
 void AnimSparkElectricity(struct Sprite *sprite)
@@ -758,7 +757,7 @@ static void AnimSparkElectricityFlashing_Step(struct Sprite *sprite)
 }
 
 // Electricity arcs around the target. Used for Paralysis and various electric move hits
-static void AnimElectricity(struct Sprite *sprite)
+void AnimElectricity(struct Sprite *sprite)
 {
     if (!InitSpritePosToAnimBattler(gBattleAnimArgs[4], sprite, FALSE))
         return;
@@ -777,8 +776,8 @@ static void AnimElectricity(struct Sprite *sprite)
 // The vertical falling thunder bolt used in Thunder Wave/Shock/Bolt
 void AnimTask_ElectricBolt(u8 taskId)
 {
-    gTasks[taskId].data[0] = GetBattlerSpriteCoord(gBattleAnimTarget, 0) + gBattleAnimArgs[0];
-    gTasks[taskId].data[1] = GetBattlerSpriteCoord(gBattleAnimTarget, 1) + gBattleAnimArgs[1];
+    gTasks[taskId].data[0] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X) + gBattleAnimArgs[0];
+    gTasks[taskId].data[1] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + gBattleAnimArgs[1];
     gTasks[taskId].data[2] = gBattleAnimArgs[2];
     gTasks[taskId].func = AnimTask_ElectricBolt_Step;
 }
@@ -1410,6 +1409,7 @@ void AnimTask_ShockWaveLightning(u8 taskId)
 static bool8 CreateShockWaveLightningSprite(struct Task *task, u8 taskId)
 {
     u8 spriteId = CreateSprite(&gLightningSpriteTemplate, task->data[13], task->data[14], task->data[12]);
+
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].callback = AnimShockWaveLightning;

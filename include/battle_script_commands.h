@@ -1,10 +1,11 @@
 #ifndef GUARD_BATTLE_SCRIPT_COMMANDS_H
 #define GUARD_BATTLE_SCRIPT_COMMANDS_H
 
-#include "constants/pokemon.h"
+#include "constants/battle_script_commands.h"
 
-#define WINDOW_CLEAR            0x1
-#define WINDOW_x80              0x80
+// Arguments for 'flags' in HandleBattleWindow
+#define WINDOW_CLEAR (1 << 0)
+#define WINDOW_BG1   (1 << 7)
 
 struct StatFractions
 {
@@ -14,7 +15,7 @@ struct StatFractions
 
 s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbility);
 s8 GetInverseCritChance(u8 battlerAtk, u8 battlerDef, u32 move);
-u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move);
+u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u32 defAbility, u32 atkHoldEffect, u32 defHoldEffect);
 u8 GetBattlerTurnOrderNum(u8 battlerId);
 bool32 NoAliveMonsForEitherParty(void);
 void SetMoveEffect(bool32 primary, u32 certain);

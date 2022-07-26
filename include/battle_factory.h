@@ -3,7 +3,7 @@
 
 void CallBattleFactoryFunction(void);
 bool8 InBattleFactory(void);
-u8 GetFactoryMonFixedIV(u8 arg0, u8 arg1);
+u8 GetFactoryMonFixedIV(u8 challengeNum, bool8 isLastBattle);
 void FillFactoryBrainParty(void);
 u8 GetNumPastRentalsRank(u8 battleMode, u8 lvlMode);
 u32 GetAiScriptsInBattleFactory(void);

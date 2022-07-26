@@ -151,8 +151,8 @@ static void FieldUpdateRegionMap(void)
             break;
         case 1:
             DrawStdFrameWithCustomTileAndPalette(1, 0, 0x27, 0xd);
-            offset = GetStringCenterAlignXOffset(1, gText_Hoenn, 0x38);
-            AddTextPrinterParameterized(1, 1, gText_Hoenn, offset, 1, 0, NULL);
+            offset = GetStringCenterAlignXOffset(FONT_NORMAL, gText_Hoenn, 0x38);
+            AddTextPrinterParameterized(1, FONT_NORMAL, gText_Hoenn, offset, 1, 0, NULL);
             ScheduleBgCopyTilemapToVram(0);
             DrawStdFrameWithCustomTileAndPalette(0, 0, 0x27, 0xd);
             PrintRegionMapSecName();
@@ -192,10 +192,7 @@ static void FieldUpdateRegionMap(void)
             {
                 FreeRegionMapIconResources();
                 SetMainCallback2(sFieldRegionMapHandler->callback);
-                if (sFieldRegionMapHandler != NULL)
-                {
-                    FREE_AND_SET_NULL(sFieldRegionMapHandler);
-                }
+                TRY_FREE_AND_SET_NULL(sFieldRegionMapHandler);
                 FreeAllWindowBuffers();
             }
             break;
@@ -207,12 +204,12 @@ static void PrintRegionMapSecName(void)
     if (sFieldRegionMapHandler->regionMap.mapSecType != MAPSECTYPE_NONE)
     {
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized(0, 1, sFieldRegionMapHandler->regionMap.mapSecName, 0, 1, 0, NULL);
+        AddTextPrinterParameterized(0, FONT_NORMAL, sFieldRegionMapHandler->regionMap.mapSecName, 0, 1, 0, NULL);
         ScheduleBgCopyTilemapToVram(0);
     }
     else
     {
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_FULL);
     }
 }

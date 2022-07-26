@@ -4,20 +4,16 @@
 #include "link_rfu.h"
 #include "constants/trade.h"
 
-// Exported type declarations
-
-// Exported RAM declarations
-extern struct MailStruct gTradeMail[PARTY_SIZE];
+extern struct Mail gTradeMail[PARTY_SIZE];
 extern u8 gSelectedTradeMonPositions[2];
 
-// Exported ROM declarations
 extern const struct WindowTemplate gTradeEvolutionSceneYesNoWindowTemplate;
 
 s32 GetGameProgressForLinkTrade(void);
 void CB2_StartCreateTradeMenu(void);
 void CB2_LinkTrade(void);
-int CanRegisterMonForTradingBoard(struct GFtgtGnameSub a0, u16, u16, u8);
-int GetUnionRoomTradeMessageId(struct GFtgtGnameSub a0, struct GFtgtGnameSub a1, u16 a2, u16 a3, u8 a4, u16 a5, u8 a6);
+int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 species2, u16 species, bool8 isEventLegal);
+int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, bool8 isEventLegal);
 int CanSpinTradeMon(struct Pokemon*, u16);
 void InitTradeSequenceBgGpuRegs(void);
 void LinkTradeDrawWindow(void);

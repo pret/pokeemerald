@@ -32,7 +32,7 @@ se_m_string_shot2_1:
 	.byte		        c_v+8
 	.byte	W01
 	.byte		PAN   , c_v+16
-	.byte		N09   , Gn4 
+	.byte		N09   , Gn4
 	.byte	W03
 	.byte		BEND  , c_v-8
 	.byte	W03
@@ -40,7 +40,7 @@ se_m_string_shot2_1:
 	.byte	W06
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v-11
-	.byte		N09   , En4 
+	.byte		N09   , En4
 	.byte	W03
 	.byte		BEND  , c_v-5
 	.byte	W03
@@ -49,7 +49,7 @@ se_m_string_shot2_1:
 	.byte		        c_v-3
 	.byte	W01
 	.byte		PAN   , c_v-16
-	.byte		N09   , Gn4 
+	.byte		N09   , Gn4
 	.byte	W03
 	.byte		BEND  , c_v-19
 	.byte	W03
@@ -57,7 +57,7 @@ se_m_string_shot2_1:
 	.byte	W06
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v-19
-	.byte		N09   , En4 
+	.byte		N09   , En4
 	.byte	W03
 	.byte		BEND  , c_v-13
 	.byte	W03
@@ -101,14 +101,14 @@ se_m_string_shot2_2:
 	.byte		N09   , Cn3 , v052
 	.byte	W12
 	.byte		PAN   , c_v-7
-	.byte		N09   , Gn2 
+	.byte		N09   , Gn2
 	.byte	W12
 se_m_string_shot2_2_000:
 	.byte		PAN   , c_v+9
 	.byte		N09   , Cn3 , v052
 	.byte	W12
 	.byte		PAN   , c_v-6
-	.byte		N09   , Gn2 
+	.byte		N09   , Gn2
 	.byte	W12
 	.byte	PEND
 	.byte	PATT

@@ -1,7 +1,13 @@
 #ifndef GUARD_BATTLE_MESSAGE_H
 #define GUARD_BATTLE_MESSAGE_H
 
-#define TEXT_BUFF_ARRAY_COUNT   16
+#include "constants/battle_config.h"
+
+#if B_EXPANDED_ABILITY_NAMES == TRUE
+    #define TEXT_BUFF_ARRAY_COUNT   17
+#else
+    #define TEXT_BUFF_ARRAY_COUNT   16
+#endif
 
 // for 0xFD
 #define B_TXT_BUFF1 0x0
@@ -234,6 +240,7 @@ void BattlePutTextOnWindow(const u8* text, u8 windowId);
 void SetPpNumbersPaletteInMoveSelection(void);
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
 bool32 ShouldDoTrainerSlide(u32 battlerId, u32 trainerId, u32 which);
+void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
 extern struct BattleMsgData *gBattleMsgDataPtr;
 

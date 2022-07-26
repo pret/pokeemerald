@@ -32,7 +32,7 @@ se_m_charm_1:
 	.byte		VOL   , 62*se_m_charm_mvl/mxv
 	.byte		PAN   , c_v-4
 	.byte		BEND  , c_v+0
-	.byte		N15   
+	.byte		N15
 	.byte	W01
 	.byte		VOL   , 77*se_m_charm_mvl/mxv
 	.byte		PAN   , c_v+0

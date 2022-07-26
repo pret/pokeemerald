@@ -16,50 +16,88 @@
 #include "task.h"
 #include "text.h"
 #include "save.h"
-#include "mystery_gift.h"
+#include "mystery_gift_menu.h"
+
+enum {
+    RFUSTATE_INIT,
+    RFUSTATE_INIT_END,
+    RFUSTATE_PARENT_CONNECT,
+    RFUSTATE_PARENT_CONNECT_END,
+    RFUSTATE_STOP_MANAGER,
+    RFUSTATE_STOP_MANAGER_END,
+    RFUSTATE_CHILD_CONNECT,
+    RFUSTATE_CHILD_CONNECT_END,
+    RFUSTATE_UNUSED,
+    RFUSTATE_RECONNECTED,
+    RFUSTATE_CONNECTED,
+    RFUSTATE_CHILD_TRY_JOIN,
+    RFUSTATE_CHILD_JOINED,
+    RFUSTATE_UR_PLAYER_EXCHANGE,
+    RFUSTATE_UR_STOP_MANAGER,
+    RFUSTATE_UR_STOP_MANAGER_END,
+    RFUSTATE_UR_FINALIZE,
+};
+// These states are used for different purposes
+// depending on the link mode (parent, child, union room)
+#define RFUSTATE_PARENT_FINALIZE_START 17
+#define RFUSTATE_PARENT_FINALIZE       18
+#define RFUSTATE_UR_CONNECT     17
+#define RFUSTATE_UR_CONNECT_END 18
+#define RFUSTATE_FINALIZED 20
+
+// States for the 'receiving' field of RfuBlockSend
+enum {
+    RECV_STATE_READY,
+    RECV_STATE_RECEIVING,
+    RECV_STATE_FINISHED,
+};
 
 struct SioInfo
 {
-    char magic[15]; // PokemonSioInfo
+    char magic[sizeof("PokemonSioInfo")];
     u8 playerCount;
     u8 linkPlayerIdx[RFU_CHILD_MAX];
     struct LinkPlayer linkPlayers[MAX_RFU_PLAYERS];
     u8 filler[92];
 };
 
+// Struct is mostly empty, presumably because usage of 
+// its fields was largely removed before release
 struct RfuDebug
 {
-    u8 filler0[6];
-    u16 unk_06;
-    u8 filler1[6];
-    vu8 unk_0e;
-    u8 unk_0f;
-    u8 filler2[84];
-    u16 unk_64;
-    u8 filler3[29];
-    u8 unk_83;
-    u8 filler4[88];
+    u8 unused0[6];
+    u16 recvCount;
+    u8 unused1[6];
+    vu8 unkFlag;
+    u8 childJoinCount;
+    u8 unused2[84];
+    u16 blockSendFailures;
+    u8 unused3[29];
+    u8 blockSendTime;
+    u8 unused4[88];
 };
 
-u32 gf_rfu_REQ_api[RFU_API_BUFF_SIZE_RAM / 4];
-struct GFRfuManager Rfu;
+u32 gRfuAPIBuffer[RFU_API_BUFF_SIZE_RAM / 4];
+struct RfuManager gRfu;
 
 static u8 sHeldKeyCount;
-static u8 sResendBlock8[16];
-static u16 sResendBlock16[8];
+static u8 sResendBlock8[CMD_LENGTH * 2];
+static u16 sResendBlock16[CMD_LENGTH];
 
-EWRAM_DATA struct GFtgtGname gHostRFUtgtGnameBuffer = {};
-EWRAM_DATA u8 gHostRFUtgtUnameBuffer[PLAYER_NAME_LENGTH + 1] = {};
+EWRAM_DATA struct RfuGameData gHostRfuGameData = {};
+EWRAM_DATA u8 gHostRfuUsername[RFU_USER_NAME_LENGTH] = {};
 static EWRAM_DATA INIT_PARAM sRfuReqConfig = {};
 static EWRAM_DATA struct RfuDebug sRfuDebug = {};
 
 static void ResetSendDataManager(struct RfuBlockSend *);
-static void sub_800EAB4(void);
-static void sub_800EAFC(void);
-static void sub_800ED34(u16);
-static void sub_800EDBC(u16);
+static void InitChildRecvBuffers(void);
+static void InitParentSendData(void);
+static void MSCCallback_Child(u16);
+static void MSCCallback_Parent(u16);
 static void UpdateBackupQueue(void);
-static void Task_ExchangeLinkPlayers(u8);
+static void Task_PlayerExchange(u8);
+static void Task_PlayerExchangeUpdate(u8);
+static void Task_PlayerExchangeChat(u8);
 static void RfuHandleReceiveCommand(u8);
 static void CallRfuFunc(void);
 static void RfuPrepareSendBuffer(u16);
@@ -68,31 +106,29 @@ static void SendNextBlock(void);
 static void SendLastBlock(void);
 static u8 GetPartnerIndexByNameAndTrainerID(const u8 *, u16);
 static void UpdateChildStatuses(void);
-static s32 sub_80107A0(void);
-static void sub_801084C(u8);
+static s32 GetJoinGroupStatus(void);
 static void ClearSelectedLinkPlayerIds(u16);
 static void ValidateAndReceivePokemonSioInfo(void *);
-static void sub_8010D0C(u8);
-static void sub_80115EC(s32);
-static void sub_8011BF8(void);
+static void ParentResetChildRecvMetadata(s32);
+static void CB2_RfuIdle(void);
 static void RfuReqDisconnectSlot(u32);
-static void sub_8011E94(u32, u32);
-static void sub_801209C(u8);
+static void SendDisconnectCommand(u32, u32);
+static void Task_TryConnectToUnionRoomParent(u8);
 static void Debug_PrintEmpty(void);
 static void Task_Idle(u8);
 
 static const INIT_PARAM sRfuReqConfigTemplate = {
-    .maxMFrame = 4, 
+    .maxMFrame = 4,
     .MC_TimerCount = 32,
     .availSlot_flag = 0,
     .mboot_flag = 0,
-    .serialNo = 2,
-    .gameName = (void *)&gHostRFUtgtGnameBuffer,
-    .userName = gHostRFUtgtUnameBuffer,
+    .serialNo = RFU_SERIAL_GAME,
+    .gameName = (void *)&gHostRfuGameData,
+    .userName = gHostRfuUsername,
     .fastSearchParent_flag = TRUE,
     .linkRecovery_enable = FALSE,
-    .linkRecovery_period = 600, 
-    .NI_failCounter_limit = 0x12c
+    .linkRecovery_period = 600,
+    .NI_failCounter_limit = 300
 };
 
 static const u8 sAvailSlots[] = {
@@ -102,64 +138,97 @@ static const u8 sAvailSlots[] = {
     [4] = AVAIL_SLOT4
 };
 
+#define BLOCK_MASK(bitNum)((1 << (bitNum)) - 1)
 static const u32 sAllBlocksReceived[] = {
-    0x000000,
-    0x000001,
-    0x000003,
-    0x000007,
-    0x00000f,
-    0x00001f,
-    0x00003f,
-    0x00007f,
-    0x0000ff,
-    0x0001ff,
-    0x0003ff,
-    0x0007ff,
-    0x000fff,
-    0x001fff,
-    0x003fff,
-    0x007fff,
-    0x00ffff,
-    0x01ffff,
-    0x03ffff,
-    0x07ffff,
-    0x0fffff,
-    0x1fffff,
-    0x3fffff,
-    0x7fffff,
-    0xffffff
+    BLOCK_MASK(0),
+    BLOCK_MASK(1),
+    BLOCK_MASK(2),
+    BLOCK_MASK(3),
+    BLOCK_MASK(4),
+    BLOCK_MASK(5),
+    BLOCK_MASK(6),
+    BLOCK_MASK(7),
+    BLOCK_MASK(8),
+    BLOCK_MASK(9),
+    BLOCK_MASK(10),
+    BLOCK_MASK(11),
+    BLOCK_MASK(12),
+    BLOCK_MASK(13),
+    BLOCK_MASK(14),
+    BLOCK_MASK(15),
+    BLOCK_MASK(16),
+    BLOCK_MASK(17),
+    BLOCK_MASK(18),
+    BLOCK_MASK(19),
+    BLOCK_MASK(20),
+    BLOCK_MASK(21),
+    BLOCK_MASK(22),
+    BLOCK_MASK(23),
+    BLOCK_MASK(24),
 };
+#undef BLOCK_MASK
 
-static const u8 sUnknown_082ED68C[] = {
+static const u8 sSlotToLinkPlayerTableId[] = {
     0, 0, 1,
     1, 2, 2,
     2, 2, 3
 };
 
-static const u8 sUnknown_082ED695[] = {
-    0, 1, 1, 2,
-    1, 2, 2, 3,
-    1, 2, 2, 3,
-    2, 3, 3, 4
+// Effectively just returns the number of bits set in the index value
+// Used for masks of the other players, MAX_RFU_PLAYERS - 1 excludes self
+static const u8 sPlayerBitsToCount[1 << (MAX_RFU_PLAYERS - 1)] = {
+    0, // 0000
+    1, // 0001
+    1, // 0010
+    2, // 0011
+    1, // 0100
+    2, // 0101
+    2, // 0110
+    3, // 0111
+    1, // 1000
+    2, // 1001
+    2, // 1010
+    3, // 1011
+    2, // 1100
+    3, // 1101
+    3, // 1110
+    4  // 1111
 };
 
-static const u8 sUnknown_082ED6A5[] = {
-    0, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0
+// If the 4 bits representing child slots were an array, this table
+// would return the index of the most recently set bit
+static const u8 sPlayerBitsToNewChildIdx[1 << (MAX_RFU_PLAYERS - 1)] = {
+    0, // 0000
+    0, // 0001
+    1, // 0010
+    0, // 0011
+    2, // 0100
+    0, // 0101
+    1, // 0110
+    0, // 0111
+    3, // 1000
+    0, // 1001
+    1, // 1010
+    0, // 1011
+    2, // 1100
+    0, // 1101
+    1, // 1110
+    0  // 1111
 };
 
 static const struct BlockRequest sBlockRequests[] = {
-    { gBlockSendBuffer, 200 },
-    { gBlockSendBuffer, 200 },
-    { gBlockSendBuffer, 100 },
-    { gBlockSendBuffer, 220 },
-    { gBlockSendBuffer,  40 }
+    [BLOCK_REQ_SIZE_NONE] = { gBlockSendBuffer, 200 },
+    [BLOCK_REQ_SIZE_200]  = { gBlockSendBuffer, 200 },
+    [BLOCK_REQ_SIZE_100]  = { gBlockSendBuffer, 100 },
+    [BLOCK_REQ_SIZE_220]  = { gBlockSendBuffer, 220 },
+    [BLOCK_REQ_SIZE_40]   = { gBlockSendBuffer,  40 }
 };
 
 static const u16 sAcceptedSerialNos[] = {
-    0x0002,
-    RFU_SERIAL_7F7D, 
-    0x0000, 
-    0xFFFF
+    RFU_SERIAL_GAME,
+    RFU_SERIAL_WONDER_DISTRIBUTOR,
+    RFU_SERIAL_UNKNOWN,
+    RFU_SERIAL_END
 };
 
 static const char sASCII_RfuCmds[][15] = {
@@ -184,21 +253,22 @@ static const char sASCII_RecoverCmds[][16] = {
     "RECOVER FAILED"
 };
 
-static const TaskFunc sUnknown_082ED7E0[] = {
-    sub_801084C,
-    Task_ExchangeLinkPlayers,
-    sub_8010D0C
+// List of additional tasks to destroy (if active) when the RFU shuts down
+static const TaskFunc sShutdownTasks[] = {
+    Task_PlayerExchange,
+    Task_PlayerExchangeUpdate,
+    Task_PlayerExchangeChat
 };
 
 static const char sASCII_PokemonSioInfo[] = "PokemonSioInfo";
 static const char sASCII_LinkLossDisconnect[] = "LINK LOSS DISCONNECT!";
 static const char sASCII_LinkLossRecoveryNow[] = "LINK LOSS RECOVERY NOW";
-ALIGNED(4) static const char sASCII_30Commas[31] = {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','\0'};
-static const char sASCII_15Commas[16] = {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','\0'};
-static const char sASCII_8Commas[9] = {' ',' ',' ',' ',' ',' ',' ',' ','\0'};
-ALIGNED(4) static const char sASCII_Space[2] = {' ','\0'};
-static const char sASCII_Asterisk[2] = {'*','\0'};
-static const char sASCII_NowSlot[8] = "NOWSLOT";
+ALIGNED(4) static const char sASCII_30Spaces[] = {"                              "};
+static const char sASCII_15Spaces[] = {"               "};
+static const char sASCII_8Spaces[] = {"        "};
+ALIGNED(4) static const char sASCII_Space[] = {" "};
+static const char sASCII_Asterisk[] = {"*"};
+static const char sASCII_NowSlot[] = "NOWSLOT";
 
 static const char sASCII_ClockCmds[][12] = {
     "           ",
@@ -208,7 +278,7 @@ static const char sASCII_ClockCmds[][12] = {
     "CLOCK SLAVE"
 };
 
-static const char sASCII_ChildParentSearch[3][8] = {
+static const char sASCII_ChildParentSearch[][8] = {
     "CHILD ",
     "PARENT",
     "SEARCH"
@@ -227,21 +297,17 @@ static void Debug_PrintNum(u16 num, u8 x, u8 y, u8 numDigits)
 void ResetLinkRfuGFLayer(void)
 {
     s32 i;
-    u8 errorState = Rfu.errorState;
-    CpuFill16(0, &Rfu, sizeof Rfu);
-    Rfu.errorState = errorState;
-    Rfu.parentChild = 0xFF;
-    if (Rfu.errorState != 4)
-    {
-        Rfu.errorState = 0;
-    }
+    u8 errorState = gRfu.errorState;
+    CpuFill16(0, &gRfu, sizeof(gRfu));
+    gRfu.errorState = errorState;
+    gRfu.parentChild = 0xFF;
+    if (gRfu.errorState != RFU_ERROR_STATE_IGNORE)
+        gRfu.errorState = RFU_ERROR_STATE_NONE;
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
-    {
-        ResetSendDataManager(&Rfu.recvBlock[i]);
-    }
-    ResetSendDataManager(&Rfu.sendBlock);
-    RfuRecvQueue_Reset(&Rfu.recvQueue);
-    RfuSendQueue_Reset(&Rfu.sendQueue);
+        ResetSendDataManager(&gRfu.recvBlock[i]);
+    ResetSendDataManager(&gRfu.sendBlock);
+    RfuRecvQueue_Reset(&gRfu.recvQueue);
+    RfuSendQueue_Reset(&gRfu.sendQueue);
     CpuFill16(0, gSendCmd, sizeof gSendCmd);
     CpuFill16(0, gRecvCmds, sizeof gRecvCmds);
     CpuFill16(0, gLinkPlayers, sizeof gLinkPlayers);
@@ -262,158 +328,159 @@ void InitRFU(void)
 
 void InitRFUAPI(void)
 {
-    if (!rfu_initializeAPI((void *)gf_rfu_REQ_api, sizeof gf_rfu_REQ_api, gIntrTable + 1, TRUE))
+    if (!rfu_initializeAPI((void *)gRfuAPIBuffer, sizeof(gRfuAPIBuffer), &gIntrTable[1], TRUE))
     {
         gLinkType = 0;
         ClearSavedLinkPlayers();
-        sub_80111B0(FALSE);
+        RfuSetIgnoreError(FALSE);
         ResetLinkRfuGFLayer();
-        rfu_setTimerInterrupt(3, gIntrTable + 2);
+        rfu_setTimerInterrupt(3, &gIntrTable[2]);
     }
 }
 
-static void Task_LinkLeaderSearchForChildren(u8 taskId)
+static void Task_ParentSearchForChildren(u8 taskId)
 {
     UpdateChildStatuses();
-    switch (Rfu.state)
+    switch (gRfu.state)
     {
-    case 0:
+    case RFUSTATE_INIT:
         rfu_LMAN_initializeRFU(&sRfuReqConfig);
-        Rfu.state = 1;
+        gRfu.state = RFUSTATE_INIT_END;
         gTasks[taskId].data[1] = 1;
         break;
-    case 1:
+    case RFUSTATE_INIT_END:
         break;
-    case 2:
-        rfu_LMAN_establishConnection(Rfu.parentChild, 0, 240, (u16 *)sAcceptedSerialNos);
-        Rfu.state = 3;
+    case RFUSTATE_PARENT_CONNECT:
+        rfu_LMAN_establishConnection(gRfu.parentChild, 0, 240, (u16 *)sAcceptedSerialNos);
+        gRfu.state = RFUSTATE_PARENT_CONNECT_END;
         gTasks[taskId].data[1] = 6;
         break;
-    case 3:
+    case RFUSTATE_PARENT_CONNECT_END:
         break;
-    case 4:
+    case RFUSTATE_STOP_MANAGER:
         rfu_LMAN_stopManager(FALSE);
-        Rfu.state = 5;
+        gRfu.state = RFUSTATE_STOP_MANAGER_END;
         break;
-    case 5:
+    case RFUSTATE_STOP_MANAGER_END:
         break;
-    case 18:
-        Rfu.unk_cdb = FALSE;
-        rfu_LMAN_setMSCCallback(sub_800EDBC);
-        sub_800EAB4();
-        sub_800EAFC();
-        Rfu.state = 20;
+    case RFUSTATE_PARENT_FINALIZE:
+        gRfu.parentFinished = FALSE;
+        rfu_LMAN_setMSCCallback(MSCCallback_Parent);
+        InitChildRecvBuffers();
+        InitParentSendData();
+        gRfu.state = RFUSTATE_FINALIZED;
         gTasks[taskId].data[1] = 8;
-        CreateTask(sub_801084C, 5);
+        CreateTask(Task_PlayerExchange, 5);
         DestroyTask(taskId);
         break;
     }
 }
 
-s32 sub_800E87C(u8 idx)
+s32 Rfu_GetIndexOfNewestChild(u8 bits)
 {
-    return sUnknown_082ED6A5[idx];
+    return sPlayerBitsToNewChildIdx[bits];
 }
 
-void sub_800E88C(s32 r2, s32 r5)
+static void SetLinkPlayerIdsFromSlots(s32 baseSlots, s32 addSlots)
 {
     u8 i;
-    u8 r4 = 1;
-    s32 r1 = r2;
-    s32 r6 = 0;
-    if (r5 == -1)
+    u8 baseId = 1;
+    s32 baseSlotsCopy = baseSlots;
+    s32 newId = 0;
+    if (addSlots == -1)
     {
-        for (i = 0; i < RFU_CHILD_MAX; r2 >>= 1, i++)
+        // Initialize
+        for (i = 0; i < RFU_CHILD_MAX; baseSlots >>= 1, i++)
         {
-            if (r2 & 1)
+            if (baseSlots & 1)
             {
-                Rfu.linkPlayerIdx[i] = r4;
-                r4++;
+                gRfu.linkPlayerIdx[i] = baseId;
+                baseId++;
             }
         }
     }
     else
     {
-        for (i = 0; i < RFU_CHILD_MAX; r1 >>= 1, i++)
+        // Clear id for any empty slot
+        for (i = 0; i < RFU_CHILD_MAX; baseSlotsCopy >>= 1, i++)
         {
-            if (!(r1 & 1))
-            {
-                Rfu.linkPlayerIdx[i] = 0;
-            }
+            if (!(baseSlotsCopy & 1))
+                gRfu.linkPlayerIdx[i] = 0;
         }
-        for (r4 = RFU_CHILD_MAX; r4 != 0; r4--)
+
+        // Get starting id by checking existing slots
+        for (baseId = RFU_CHILD_MAX; baseId != 0; baseId--)
         {
-            for (i = 0; i < RFU_CHILD_MAX && Rfu.linkPlayerIdx[i] != r4; i++);
+            for (i = 0; i < RFU_CHILD_MAX && gRfu.linkPlayerIdx[i] != baseId; i++)
+                ;
             if (i == RFU_CHILD_MAX)
-            {
-                r6 = r4;
-            }
+                newId = baseId;
         }
-        for (r5 &= ~r2, i = 0; i < RFU_CHILD_MAX; r5 >>= 1, i++)
+
+        // Set id for new slots
+        for (addSlots &= ~baseSlots, i = 0; i < RFU_CHILD_MAX; addSlots >>= 1, i++)
         {
-            if (r5 & 1)
-            {
-                Rfu.linkPlayerIdx[i] = r6++;
-            }
+            if (addSlots & 1)
+                gRfu.linkPlayerIdx[i] = newId++;
         }
     }
 }
 
-static void Task_JoinGroupSearchForParent(u8 taskId)
+static void Task_ChildSearchForParent(u8 taskId)
 {
-    switch (Rfu.state)
+    switch (gRfu.state)
     {
-    case 0:
+    case RFUSTATE_INIT:
         rfu_LMAN_initializeRFU((INIT_PARAM *)&sRfuReqConfigTemplate);
-        Rfu.state = 1;
+        gRfu.state = RFUSTATE_INIT_END;
         gTasks[taskId].data[1] = 1;
         break;
-    case 1:
+    case RFUSTATE_INIT_END:
         break;
-    case 6:
-        rfu_LMAN_establishConnection(Rfu.parentChild, 0, 240, (u16 *)sAcceptedSerialNos);
-        Rfu.state = 7;
+    case RFUSTATE_CHILD_CONNECT:
+        rfu_LMAN_establishConnection(gRfu.parentChild, 0, 240, (u16 *)sAcceptedSerialNos);
+        gRfu.state = RFUSTATE_CHILD_CONNECT_END;
         gTasks[taskId].data[1] = 7;
         break;
-    case 7:
+    case RFUSTATE_CHILD_CONNECT_END:
         break;
-    case 9:
+    case RFUSTATE_RECONNECTED:
         gTasks[taskId].data[1] = 10;
         break;
-    case 11:
-        switch (sub_80107A0())
+    case RFUSTATE_CHILD_TRY_JOIN:
+        switch (GetJoinGroupStatus())
         {
         case RFU_STATUS_JOIN_GROUP_OK:
-            Rfu.state = 12;
+            gRfu.state = RFUSTATE_CHILD_JOINED;
             break;
         case RFU_STATUS_JOIN_GROUP_NO:
         case RFU_STATUS_LEAVE_GROUP:
             rfu_LMAN_requestChangeAgbClockMaster();
-            Rfu.unk_ce4 = 2;
+            gRfu.disconnectMode = RFU_DISCONNECT_NORMAL;
             DestroyTask(taskId);
             break;
         }
         break;
-    case 12:
+    case RFUSTATE_CHILD_JOINED:
     {
-        u8 bmChildSlot = 1 << Rfu.childSlot;
-        rfu_clearSlot(TYPE_NI_SEND | TYPE_NI_RECV, Rfu.childSlot);
-        rfu_setRecvBuffer(TYPE_UNI, Rfu.childSlot, Rfu.unk_c3f, 70);
-        rfu_UNI_setSendData(bmChildSlot, Rfu.unk_4c,  sizeof(Rfu.unk_4c));
+        u8 bmChildSlot = 1 << gRfu.childSlot;
+        rfu_clearSlot(TYPE_NI_SEND | TYPE_NI_RECV, gRfu.childSlot);
+        rfu_setRecvBuffer(TYPE_UNI, gRfu.childSlot, gRfu.childRecvQueue, sizeof(gRfu.childRecvQueue));
+        rfu_UNI_setSendData(bmChildSlot, gRfu.childSendBuffer,  sizeof(gRfu.childSendBuffer));
         gTasks[taskId].data[1] = 8;
         DestroyTask(taskId);
-        if (sRfuDebug.unk_0f == 0)
+        if (sRfuDebug.childJoinCount == 0)
         {
             Debug_PrintEmpty();
-            sRfuDebug.unk_0f++;
+            sRfuDebug.childJoinCount++;
         }
-        CreateTask(sub_801084C, 5);
+        CreateTask(Task_PlayerExchange, 5);
         break;
     }
     }
 }
 
-static void sub_800EAB4(void)
+static void InitChildRecvBuffers(void)
 {
     u8 i;
     u8 acceptSlot = lman.acceptSlot_flag;
@@ -421,79 +488,77 @@ static void sub_800EAB4(void)
     {
         if (acceptSlot & 1)
         {
-            rfu_setRecvBuffer(TYPE_UNI, i, Rfu.unk_14[i], 14);
+            rfu_setRecvBuffer(TYPE_UNI, i, gRfu.childRecvBuffer[i], sizeof(gRfu.childRecvBuffer[0]));
             rfu_clearSlot(TYPE_UNI_SEND | TYPE_UNI_RECV, i);
         }
         acceptSlot >>= 1;
     }
 }
 
-static void sub_800EAFC(void)
+static void InitParentSendData(void)
 {
     u8 acceptSlot = lman.acceptSlot_flag;
-    rfu_UNI_setSendData(acceptSlot, Rfu.recvCmds, 70);
-    Rfu.unk_cda = sub_800E87C(acceptSlot);
-    Rfu.unk_ce2 = acceptSlot;
-    sub_800E88C(acceptSlot, -1);
-    Rfu.parentChild = MODE_PARENT;
+    rfu_UNI_setSendData(acceptSlot, gRfu.recvCmds, sizeof(gRfu.recvCmds));
+    gRfu.parentSendSlot = Rfu_GetIndexOfNewestChild(acceptSlot);
+    gRfu.parentSlots = acceptSlot;
+    SetLinkPlayerIdsFromSlots(acceptSlot, -1);
+    gRfu.parentChild = MODE_PARENT;
 }
 
-static void Task_LinkRfu_UnionRoomListen(u8 taskId)
+#define tConnectingForChat data[7]
+
+static void Task_UnionRoomListen(u8 taskId)
 {
-    if (GetHostRFUtgtGname()->activity == (ACTIVITY_PLYRTALK | IN_UNION_ROOM) && RfuGetStatus() == RFU_STATUS_NEW_CHILD_DETECTED)
+    if (GetHostRfuGameData()->activity == (ACTIVITY_PLYRTALK | IN_UNION_ROOM) && RfuGetStatus() == RFU_STATUS_NEW_CHILD_DETECTED)
     {
         rfu_REQ_disconnect(lman.acceptSlot_flag);
         rfu_waitREQComplete();
         RfuSetStatus(RFU_STATUS_OK, 0);
     }
-    switch (Rfu.state)
+    switch (gRfu.state)
     {
-    case 0:
+    case RFUSTATE_INIT:
         rfu_LMAN_initializeRFU(&sRfuReqConfig);
-        Rfu.state = 1;
+        gRfu.state = RFUSTATE_INIT_END;
         gTasks[taskId].data[1] = 1;
         break;
-    case 1:
+    case RFUSTATE_INIT_END:
         break;
-    case 17:
-        rfu_LMAN_establishConnection(2, 0, 240, (u16 *)sAcceptedSerialNos);
-        rfu_LMAN_setMSCCallback(sub_800ED34);
-        Rfu.state = 18;
+    case RFUSTATE_UR_CONNECT:
+        rfu_LMAN_establishConnection(MODE_P_C_SWITCH, 0, 240, (u16 *)sAcceptedSerialNos);
+        rfu_LMAN_setMSCCallback(MSCCallback_Child);
+        gRfu.state = RFUSTATE_UR_CONNECT_END;
         break;
-    case 18:
+    case RFUSTATE_UR_CONNECT_END:
         break;
-    case 13:
-        if (rfu_UNI_setSendData(1 << Rfu.childSlot, Rfu.unk_4c, sizeof(Rfu.unk_4c)) == 0)
+    case RFUSTATE_UR_PLAYER_EXCHANGE:
+        if (rfu_UNI_setSendData(1 << gRfu.childSlot, gRfu.childSendBuffer, sizeof(gRfu.childSendBuffer)) == 0)
         {
-            Rfu.parentChild = MODE_CHILD;
+            gRfu.parentChild = MODE_CHILD;
             DestroyTask(taskId);
-            if (gTasks[taskId].data[7])
-            {
-                CreateTask(sub_8010D0C, 1);
-            }
+            if (gTasks[taskId].tConnectingForChat)
+                CreateTask(Task_PlayerExchangeChat, 1);
             else
-            {
-                CreateTask(sub_801084C, 5);
-            }
+                CreateTask(Task_PlayerExchange, 5);
         }
         break;
-    case 14:
-        rfu_LMAN_stopManager(0);
-        Rfu.state = 15;
+    case RFUSTATE_UR_STOP_MANAGER:
+        rfu_LMAN_stopManager(FALSE);
+        gRfu.state = RFUSTATE_UR_STOP_MANAGER_END;
         break;
-    case 15:
+    case RFUSTATE_UR_STOP_MANAGER_END:
         break;
-    case 16:
-        Rfu.unk_cdb = FALSE;
-        rfu_LMAN_setMSCCallback(sub_800EDBC);
+    case RFUSTATE_UR_FINALIZE:
+        gRfu.parentFinished = FALSE;
+        rfu_LMAN_setMSCCallback(MSCCallback_Parent);
         UpdateGameData_GroupLockedIn(TRUE);
-        sub_800EAB4();
-        sub_800EAFC();
-        Rfu.state = 20;
+        InitChildRecvBuffers();
+        InitParentSendData();
+        gRfu.state = RFUSTATE_FINALIZED;
         gTasks[taskId].data[1] = 8;
-        Rfu.parentChild = MODE_PARENT;
-        CreateTask(sub_801084C, 5);
-        Rfu.unk_ce8 = TRUE;
+        gRfu.parentChild = MODE_PARENT;
+        CreateTask(Task_PlayerExchange, 5);
+        gRfu.playerExchangeActive = TRUE;
         DestroyTask(taskId);
         break;
     }
@@ -509,31 +574,32 @@ void LinkRfu_StopManagerBeforeEnteringChat(void)
     rfu_LMAN_stopManager(FALSE);
 }
 
-static void sub_800ED34(u16 unused)
+// Argument is provided by the RFU and is unused.
+static void MSCCallback_Child(u16 REQ_commandID)
 {
     s32 i;
 
-    for (i = 0; i < (int)ARRAY_COUNT(Rfu.unk_4c); i++)
-    {
-        Rfu.unk_4c[i] = 0;
-    }
+    for (i = 0; i < COMM_SLOT_LENGTH; i++)
+        gRfu.childSendBuffer[i] = 0;
+
     rfu_REQ_recvData();
     rfu_waitREQComplete();
-    if (gRfuSlotStatusUNI[Rfu.childSlot]->recv.newDataFlag)
+    if (gRfuSlotStatusUNI[gRfu.childSlot]->recv.newDataFlag)
     {
-        Rfu.unk_cd0++;
-        RfuRecvQueue_Enqueue(&Rfu.recvQueue, Rfu.unk_c3f);
-        sRfuDebug.unk_06++;
+        gRfu.childSendCount++;
+        RfuRecvQueue_Enqueue(&gRfu.recvQueue, gRfu.childRecvQueue);
+        sRfuDebug.recvCount++;
         UpdateBackupQueue();
-        rfu_UNI_readySendData(Rfu.childSlot);
-        rfu_UNI_clearRecvNewDataFlag(Rfu.childSlot);
+        rfu_UNI_readySendData(gRfu.childSlot);
+        rfu_UNI_clearRecvNewDataFlag(gRfu.childSlot);
     }
     rfu_LMAN_REQ_sendData(TRUE);
 }
 
-static void sub_800EDBC(u16 unused)
+// Argument is provided by the RFU and is unused.
+static void MSCCallback_Parent(u16 REQ_commandID)
 {
-    Rfu.unk_cdb = TRUE;
+    gRfu.parentFinished = TRUE;
 }
 
 void LinkRfu_Shutdown(void)
@@ -541,158 +607,156 @@ void LinkRfu_Shutdown(void)
     u8 i;
 
     rfu_LMAN_powerDownRFU();
-    if (Rfu.parentChild == MODE_PARENT)
+    if (gRfu.parentChild == MODE_PARENT)
     {
-        if (FuncIsActiveTask(Task_LinkLeaderSearchForChildren) == TRUE)
+        // Stop parent searching for children
+        if (FuncIsActiveTask(Task_ParentSearchForChildren) == TRUE)
         {
-            DestroyTask(Rfu.searchTaskId);
+            DestroyTask(gRfu.searchTaskId);
             ResetLinkRfuGFLayer();
         }
     }
-    else if (Rfu.parentChild == MODE_CHILD)
+    else if (gRfu.parentChild == MODE_CHILD)
     {
-        if (FuncIsActiveTask(Task_JoinGroupSearchForParent) == TRUE)
+        // Stop child searching for parent
+        if (FuncIsActiveTask(Task_ChildSearchForParent) == TRUE)
         {
-            DestroyTask(Rfu.searchTaskId);
+            DestroyTask(gRfu.searchTaskId);
             ResetLinkRfuGFLayer();
         }
     }
-    else if (Rfu.parentChild == 2)
+    else if (gRfu.parentChild == MODE_P_C_SWITCH)
     {
-        if (FuncIsActiveTask(Task_LinkRfu_UnionRoomListen) == TRUE)
+        // Stop parent-child switching mode (union room)
+        if (FuncIsActiveTask(Task_UnionRoomListen) == TRUE)
         {
-            DestroyTask(Rfu.searchTaskId);
+            DestroyTask(gRfu.searchTaskId);
             ResetLinkRfuGFLayer();
         }
     }
-    for (i = 0; i < ARRAY_COUNT(sUnknown_082ED7E0); i++)
+
+    // Destroy additional tasks
+    for (i = 0; i < ARRAY_COUNT(sShutdownTasks); i++)
     {
-        if (FuncIsActiveTask(sUnknown_082ED7E0[i]) == TRUE)
-        {
-            DestroyTask(FindTaskIdByFunc(sUnknown_082ED7E0[i]));
-        }
+        if (FuncIsActiveTask(sShutdownTasks[i]) == TRUE)
+            DestroyTask(FindTaskIdByFunc(sShutdownTasks[i]));
     }
 }
 
-static void CreateTask_LinkLeaderSearchForChildren(void)
+static void CreateTask_ParentSearchForChildren(void)
 {
-    Rfu.searchTaskId = CreateTask(Task_LinkLeaderSearchForChildren, 1);
+    gRfu.searchTaskId = CreateTask(Task_ParentSearchForChildren, 1);
 }
 
-static bool8 sub_800EE94(void)
+// If no parent ID (or if child connection not ready) can't reconnect with parent yet
+static bool8 CanTryReconnectParent(void)
 {
-    if (Rfu.state == 7 && Rfu.parentId)
+    if (gRfu.state == RFUSTATE_CHILD_CONNECT_END && gRfu.parentId)
+        return TRUE;
+    return FALSE;
+}
+
+static bool32 TryReconnectParent(void)
+{
+    if (gRfu.state == RFUSTATE_CHILD_CONNECT_END && !rfu_LMAN_CHILD_connectParent(gRfuLinkStatus->partner[gRfu.reconnectParentId].id, 240))
     {
+        gRfu.state = RFUSTATE_RECONNECTED;
         return TRUE;
     }
     return FALSE;
 }
 
-static bool32 IsParentSuccessfullyReconnected(void)
+static void CreateTask_ChildSearchForParent(void)
 {
-    if (Rfu.state == 7 && !rfu_LMAN_CHILD_connectParent(gRfuLinkStatus->partner[Rfu.unk_c3d].id, 240))
-    {
-        Rfu.state = 9;
-        return TRUE;
-    }
-    return FALSE;
-}
-
-static void CreateTask_JoinGroupSearchForParent(void)
-{
-    Rfu.searchTaskId = CreateTask(Task_JoinGroupSearchForParent, 1);
+    gRfu.searchTaskId = CreateTask(Task_ChildSearchForParent, 1);
 }
 
 bool8 LmanAcceptSlotFlagIsNotZero(void)
 {
     if (lman.acceptSlot_flag)
-    {
         return TRUE;
-    }
     return FALSE;
 }
 
 void LinkRfu_StopManagerAndFinalizeSlots(void)
 {
-    Rfu.state = 4;
-    Rfu.acceptSlot_flag = lman.acceptSlot_flag;
+    gRfu.state = RFUSTATE_STOP_MANAGER;
+    gRfu.acceptSlot_flag = lman.acceptSlot_flag;
 }
 
 bool32 WaitRfuState(bool32 force)
 {
-    if (Rfu.state == 17 || force)
+    if (gRfu.state == RFUSTATE_PARENT_FINALIZE_START || force)
     {
-        Rfu.state = 18;
+        gRfu.state = RFUSTATE_PARENT_FINALIZE;
         return TRUE;
     }
     return FALSE;
 }
 
-void sub_800EF7C(void)
+void StopUnionRoomLinkManager(void)
 {
-    Rfu.state = 14;
+    gRfu.state = RFUSTATE_UR_STOP_MANAGER;
 }
 
-static void sub_800EF88(u8 a0)
+// Unused
+static void ReadySendDataForSlots(u8 slots)
 {
     u8 i;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (a0 & 1)
+        if (slots & 1)
         {
             rfu_UNI_readySendData(i);
             break;
         }
-        a0 >>= 1;
+        slots >>= 1;
     }
 }
 
-static void sub_800EFB0(void)
+static void ReadAllPlayerRecvCmds(void)
 {
     s32 i, j;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
-        struct GFRfuManager *ptr = &Rfu;
-        for (j = 0; j < 7; j++)
+        struct RfuManager *rfu = &gRfu;
+        for (j = 0; j < CMD_LENGTH - 1; j++)
         {
-            ptr->recvCmds[i][j][1] = gRecvCmds[i][j] >> 8;
-            ptr->recvCmds[i][j][0] = gRecvCmds[i][j];
+            rfu->recvCmds[i][j][1] = gRecvCmds[i][j] >> 8;
+            rfu->recvCmds[i][j][0] = gRecvCmds[i][j];
         }
     }
     CpuFill16(0, gRecvCmds, sizeof gRecvCmds);
 }
 
-static void sub_800F014(void)
+static void MoveSendCmdToRecv(void)
 {
     s32 i;
     for (i = 0; i < CMD_LENGTH - 1; i++)
-    {
         gRecvCmds[0][i] = gSendCmd[i];
-    }
+
     for (i = 0; i < CMD_LENGTH - 1; i++)
-    {
         gSendCmd[i] = 0;
-    }
 }
 
 static void UpdateBackupQueue(void)
 {
-    if (Rfu.linkRecovered)
+    if (gRfu.linkRecovered)
     {
-        bool8 backupEmpty = RfuBackupQueue_Dequeue(&Rfu.backupQueue, Rfu.unk_4c);
+        bool8 backupEmpty = RfuBackupQueue_Dequeue(&gRfu.backupQueue, gRfu.childSendBuffer);
 
-        if (Rfu.backupQueue.count == 0)
-            Rfu.linkRecovered = FALSE;
+        if (gRfu.backupQueue.count == 0)
+            gRfu.linkRecovered = FALSE;
 
         if (backupEmpty)
             return;
     }
-    if (!Rfu.linkRecovered)
+    if (!gRfu.linkRecovered)
     {
-        RfuSendQueue_Dequeue(&Rfu.sendQueue, Rfu.unk_4c);
-        RfuBackupQueue_Enqueue(&Rfu.backupQueue, Rfu.unk_4c);
+        RfuSendQueue_Dequeue(&gRfu.sendQueue, gRfu.childSendBuffer);
+        RfuBackupQueue_Enqueue(&gRfu.backupQueue, gRfu.childSendBuffer);
     }
 }
 
@@ -701,26 +765,20 @@ bool32 IsRfuRecvQueueEmpty(void)
     s32 i;
     s32 j;
 
-    if (gRfuLinkStatus->sendSlotUNIFlag == 0)
-    {
+    if (!gRfuLinkStatus->sendSlotUNIFlag)
         return FALSE;
-    }
+
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
-    {
         for (j = 0; j < CMD_LENGTH - 1; j++)
-        {
             if (gRecvCmds[i][j] != 0)
-            {
                 return FALSE;
-            }
-        }
-    }
+
     return TRUE;
 }
 
-static bool32 sub_800F0F8(void)
+static bool32 RfuMain1_Parent(void)
 {
-    if (Rfu.state < 20)
+    if (gRfu.state < RFUSTATE_FINALIZED)
     {
         rfu_REQ_recvData();
         rfu_waitREQComplete();
@@ -728,19 +786,19 @@ static bool32 sub_800F0F8(void)
     }
     else
     {
-        Rfu.unk_cdb = FALSE;
-        if ((Rfu.unk_ce2 & gRfuLinkStatus->connSlotFlag) == Rfu.unk_ce2 && (Rfu.unk_ce2 & gRfuLinkStatus->connSlotFlag))
+        gRfu.parentFinished = FALSE;
+        if ((gRfu.parentSlots & gRfuLinkStatus->connSlotFlag) == gRfu.parentSlots && (gRfu.parentSlots & gRfuLinkStatus->connSlotFlag))
         {
-            if (!Rfu.unk_cdc)
+            if (!gRfu.parentMain2Failed)
             {
-                if (Rfu.unk_ce3)
+                if (gRfu.disconnectSlots)
                 {
-                    RfuReqDisconnectSlot(Rfu.unk_ce3);
-                    Rfu.unk_ce3 = 0;
-                    if (Rfu.unk_ce4 == 1)
+                    RfuReqDisconnectSlot(gRfu.disconnectSlots);
+                    gRfu.disconnectSlots = 0;
+                    if (gRfu.disconnectMode == RFU_DISCONNECT_ERROR)
                     {
-                        RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, 0x8000);
-                        GetLinkmanErrorParams(0x8000);
+                        RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, F_RFU_ERROR_8);
+                        RfuSetErrorParams(F_RFU_ERROR_8);
                         return FALSE;
                     }
                     if (!lman.acceptSlot_flag)
@@ -750,67 +808,65 @@ static bool32 sub_800F0F8(void)
                         return FALSE;
                     }
                 }
-                sub_800EFB0();
-                rfu_UNI_readySendData(Rfu.unk_cda);
+                ReadAllPlayerRecvCmds();
+                rfu_UNI_readySendData(gRfu.parentSendSlot);
                 rfu_LMAN_REQ_sendData(TRUE);
             }
             else
             {
                 rfu_REQ_PARENT_resumeRetransmitAndChange();
             }
-            Rfu.unk_0e = TRUE;
+            gRfu.runParentMain2 = TRUE;
         }
     }
     return FALSE;
 }
 
-static bool32 sub_800F1E0(void)
+static bool32 RfuMain2_Parent(void)
 {
     u16 i;
     u16 flags;
     u8 r0;
     u16 j;
-    u8 retval;
+    bool8 failed;
 
-    if (Rfu.state >= 20 && Rfu.unk_0e == TRUE)
+    if (gRfu.state >= RFUSTATE_FINALIZED && gRfu.runParentMain2 == TRUE)
     {
         rfu_waitREQComplete();
-        while (Rfu.unk_cdb == FALSE)
+        while (gRfu.parentFinished == FALSE)
         {
-            if (Rfu.errorState != 0)
-            {
+            if (gRfu.errorState != RFU_ERROR_STATE_NONE)
                 return FALSE;
-            }
         }
         rfu_REQ_recvData();
         rfu_waitREQComplete();
-        if ((lman.parentAck_flag & Rfu.unk_ce2) == Rfu.unk_ce2)
+        if ((lman.parentAck_flag & gRfu.parentSlots) == gRfu.parentSlots)
         {
-            Rfu.unk_cdc = FALSE;
-            sRfuDebug.unk_06++;
+            gRfu.parentMain2Failed = FALSE;
+            sRfuDebug.recvCount++;
             flags = lman.acceptSlot_flag;
             for (i = 0; i < RFU_CHILD_MAX; i++)
             {
                 if (flags & 1)
                 {
-                    if (Rfu.unk_14[i][1])
+                    if (gRfu.childRecvBuffer[i][1])
                     {
-                        if (Rfu.unk_cee[i] != 0xFF && (Rfu.unk_14[i][0] >> 5) != ((Rfu.unk_cee[i] + 1) & 7))
+                        if (gRfu.childRecvIds[i] != 0xFF && (gRfu.childRecvBuffer[i][0] >> 5) != ((gRfu.childRecvIds[i] + 1) & 7))
                         {
-                            if (++Rfu.unk_cea[i] > 4)
-                                GetLinkmanErrorParams(0x8100);
+                            if (++gRfu.numChildRecvErrors[i] > 4)
+                                RfuSetErrorParams(F_RFU_ERROR_8 | F_RFU_ERROR_1);
                         }
                         else
                         {
-                            Rfu.unk_cee[i] = Rfu.unk_14[i][0] / 32;
-                            Rfu.unk_cea[i] = 0;
-                            Rfu.unk_14[i][0] &= 0x1f;
-                            r0 = Rfu.linkPlayerIdx[i];
-                            for (j = 0; j < 7; j++)
+                            gRfu.childRecvIds[i] = gRfu.childRecvBuffer[i][0] / 32;
+                            gRfu.numChildRecvErrors[i] = 0;
+                            gRfu.childRecvBuffer[i][0] &= 0x1f;
+                            r0 = gRfu.linkPlayerIdx[i];
+                            for (j = 0; j < CMD_LENGTH - 1; j++)
                             {
-                                gRecvCmds[r0][j] = (Rfu.unk_14[i][(j << 1) + 1] << 8) | Rfu.unk_14[i][(j << 1) + 0];
-                                Rfu.unk_14[i][(j << 1) + 1] = 0;
-                                Rfu.unk_14[i][(j << 1) + 0] = 0;
+                                gRecvCmds[r0][j] = (gRfu.childRecvBuffer[i][(j << 1) + 1] << 8) | gRfu.childRecvBuffer[i][(j << 1) + 0];
+                                gRfu.childRecvBuffer[i][(j << 1) + 1] = 0;
+                                gRfu.childRecvBuffer[i][(j << 1) + 0] = 0;
                             }
                         }
                     }
@@ -818,102 +874,99 @@ static bool32 sub_800F1E0(void)
                 }
                 flags >>= 1;
             }
-            sub_800F014();
+            MoveSendCmdToRecv();
             RfuHandleReceiveCommand(0);
             CallRfuFunc();
-            if (Rfu.unk_ce5 && !Rfu.unk_cd9)
+            if (gRfu.nextChildBits && !gRfu.stopNewConnections)
             {
-                sRfuDebug.unk_0e = FALSE;
-                rfu_clearSlot(TYPE_UNI_SEND | TYPE_UNI_RECV, Rfu.unk_cda);
+                sRfuDebug.unkFlag = FALSE;
+                rfu_clearSlot(TYPE_UNI_SEND | TYPE_UNI_RECV, gRfu.parentSendSlot);
                 for (i = 0; i < RFU_CHILD_MAX; i++)
                 {
-                    if ((Rfu.unk_ce5 >> i) & 1)
-                    {
-                        rfu_setRecvBuffer(TYPE_UNI, i, Rfu.unk_14[i], 14);
-                    }
+                    if ((gRfu.nextChildBits >> i) & 1)
+                        rfu_setRecvBuffer(TYPE_UNI, i, gRfu.childRecvBuffer[i], sizeof(gRfu.childRecvBuffer[0]));
                 }
-                sub_800E88C(Rfu.unk_ce2, Rfu.unk_ce2 | Rfu.unk_ce5);
-                Rfu.unk_ce9 = Rfu.unk_ce5;
-                Rfu.unk_ce2 |= Rfu.unk_ce5;
-                Rfu.unk_ce5 = 0;
-                rfu_UNI_setSendData(Rfu.unk_ce2, Rfu.recvCmds, 70);
-                Rfu.unk_cda = sub_800E87C(Rfu.unk_ce2);
-                CreateTask(Task_ExchangeLinkPlayers, 0);
+                SetLinkPlayerIdsFromSlots(gRfu.parentSlots, gRfu.parentSlots | gRfu.nextChildBits);
+                gRfu.incomingChild = gRfu.nextChildBits;
+                gRfu.parentSlots |= gRfu.nextChildBits;
+                gRfu.nextChildBits = 0;
+                rfu_UNI_setSendData(gRfu.parentSlots, gRfu.recvCmds, sizeof(gRfu.recvCmds));
+                gRfu.parentSendSlot = Rfu_GetIndexOfNewestChild(gRfu.parentSlots);
+                CreateTask(Task_PlayerExchangeUpdate, 0);
             }
         }
         else
         {
-            Rfu.unk_cdc = TRUE;
-            Rfu.unk_0e = FALSE;
+            gRfu.parentMain2Failed = TRUE;
+            gRfu.runParentMain2 = FALSE;
         }
-        Rfu.unk_0e = FALSE;
+        gRfu.runParentMain2 = FALSE;
     }
-    retval = Rfu.unk_cdc;
-    return gRfuLinkStatus->sendSlotUNIFlag ? retval & 1 : FALSE;
+    failed = gRfu.parentMain2Failed;
+    return gRfuLinkStatus->sendSlotUNIFlag ? failed & 1 : FALSE;
 }
 
-static void sub_800F498(u16 *a0, u8 *a1)
+static void ChildBuildSendCmd(u16 *sendCmd, u8 *dst)
 {
     s32 i;
 
-    if (a0[0])
+    if (sendCmd[0])
     {
-        a0[0] |= (Rfu.unk_102 << 5);
-        Rfu.unk_102 = (Rfu.unk_102 + 1) & 7;
-        for (i = 0; i < 7; i++)
+        sendCmd[0] |= (gRfu.childSendCmdId << 5);
+        gRfu.childSendCmdId = (gRfu.childSendCmdId + 1) & 7;
+        for (i = 0; i < CMD_LENGTH - 1; i++)
         {
-            a1[2 * i + 1] = a0[i] >> 8;
-            a1[2 * i + 0] = a0[i];
+            dst[2 * i + 1] = sendCmd[i] >> 8;
+            dst[2 * i + 0] = sendCmd[i];
         }
     }
     else
     {
-        for (i = 0; i < 14; i++)
-            a1[i] = 0;
+        for (i = 0; i < COMM_SLOT_LENGTH; i++)
+            dst[i] = 0;
     }
 }
 
-static bool32 RfuProcessEnqueuedRecvBlock(void)
+static bool32 RfuMain1_Child(void)
 {
     u8 i;
     u8 j;
-    u8 sp00[MAX_RFU_PLAYERS * (2 * (CMD_LENGTH - 1))];
-    u8 sp48[2 * (CMD_LENGTH - 1)];
+    u8 recv[MAX_RFU_PLAYERS * (2 * (CMD_LENGTH - 1))];
+    u8 send[2 * (CMD_LENGTH - 1)];
     u8 status;
 
-    RfuRecvQueue_Dequeue(&Rfu.recvQueue, sp00);
+    RfuRecvQueue_Dequeue(&gRfu.recvQueue, recv);
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
         for (j = 0; j < CMD_LENGTH - 1; j++)
-        {
-            gRecvCmds[i][j] = (sp00[i * 14 + (j << 1) + 1] << 8) | sp00[i * 14 + (j << 1) + 0];
-        }
+            gRecvCmds[i][j] = (recv[i * COMM_SLOT_LENGTH + (j * 2) + 1] << 8)
+                             | recv[i * COMM_SLOT_LENGTH + (j * 2) + 0];
     }
     RfuHandleReceiveCommand(0);
-    if (lman.childClockSlave_flag == 0 && Rfu.unk_ce4)
+    if (lman.childClockSlave_flag == 0 && gRfu.disconnectMode != RFU_DISCONNECT_NONE)
     {
         rfu_REQ_disconnect(gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag);
         rfu_waitREQComplete();
         status = RfuGetStatus();
         if (status != RFU_STATUS_FATAL_ERROR && status != RFU_STATUS_JOIN_GROUP_NO && status != RFU_STATUS_LEAVE_GROUP)
-            RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, 0x9000);
+            RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, F_RFU_ERROR_5 | F_RFU_ERROR_8);
         rfu_clearAllSlot();
         gReceivedRemoteLinkPlayers = FALSE;
-        Rfu.callback = NULL;
-        if (Rfu.unk_ce4 == 1)
+        gRfu.callback = NULL;
+        if (gRfu.disconnectMode == RFU_DISCONNECT_ERROR)
         {
-            RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, 0x9000);
-            GetLinkmanErrorParams(0x9000);
+            RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, F_RFU_ERROR_5 | F_RFU_ERROR_8);
+            RfuSetErrorParams(F_RFU_ERROR_5 | F_RFU_ERROR_8);
         }
         lman.state = lman.next_state = 0;
-        Rfu.unk_ce4 = 0;
+        gRfu.disconnectMode = RFU_DISCONNECT_NONE;
     }
-    if (Rfu.unk_cd0)
+    if (gRfu.childSendCount)
     {
-        Rfu.unk_cd0--;
+        gRfu.childSendCount--;
         CallRfuFunc();
-        sub_800F498(gSendCmd, sp48);
-        RfuSendQueue_Enqueue(&Rfu.sendQueue, sp48);
+        ChildBuildSendCmd(gSendCmd, send);
+        RfuSendQueue_Enqueue(&gRfu.sendQueue, send);
         for (i = 0; i < CMD_LENGTH - 1; i++)
             gSendCmd[i] = 0;
     }
@@ -924,25 +977,26 @@ static void HandleSendFailure(u8 unused, u32 flags)
 {
     s32 i, j, temp;
 
-    const u8 *r10 = Rfu.sendBlock.payload;
-    for (i = 0; i < Rfu.sendBlock.count; i++)
+    const u8 *payload = gRfu.sendBlock.payload;
+    for (i = 0; i < gRfu.sendBlock.count; i++)
     {
         if (!(flags & 1))
         {
-            sResendBlock16[0] = RFUCMD_0x8900 | i;
-            for (j = 0; j < 7; j++)
+            sResendBlock16[0] = RFUCMD_SEND_BLOCK | i;
+            for (j = 0; j < CMD_LENGTH - 1; j++)
             {
-                temp = j << 1;
-                sResendBlock16[j + 1] = (r10[12 * i + temp + 1] << 8) | r10[12 * i + temp + 0];
+                temp = j * 2;
+                sResendBlock16[j + 1] = (payload[(COMM_SLOT_LENGTH - 2) * i + temp + 1] << 8)
+                                       | payload[(COMM_SLOT_LENGTH - 2) * i + temp + 0];
             }
-            for (j = 0; j < 7; j++)
+            for (j = 0; j < CMD_LENGTH - 1; j++)
             {
-                temp = j << 1;
+                temp = j * 2;
                 sResendBlock8[temp + 1] = sResendBlock16[j] >> 8;
                 sResendBlock8[temp + 0] = sResendBlock16[j];
             }
-            RfuSendQueue_Enqueue(&Rfu.sendQueue, sResendBlock8);
-            Rfu.sendBlock.failedFlags |= (1 << i);
+            RfuSendQueue_Enqueue(&gRfu.sendQueue, sResendBlock8);
+            gRfu.sendBlock.failedFlags |= (1 << i);
         }
         flags >>= 1;
     }
@@ -950,32 +1004,30 @@ static void HandleSendFailure(u8 unused, u32 flags)
 
 void Rfu_SetBlockReceivedFlag(u8 linkPlayerId)
 {
-    if (Rfu.parentChild == MODE_PARENT && linkPlayerId)
-        Rfu.numBlocksReceived[linkPlayerId] = 1;
+    if (gRfu.parentChild == MODE_PARENT && linkPlayerId)
+        gRfu.numBlocksReceived[linkPlayerId] = 1;
     else
-        Rfu.blockReceived[linkPlayerId] = TRUE;
+        gRfu.blockReceived[linkPlayerId] = TRUE;
 }
 
 void Rfu_ResetBlockReceivedFlag(u8 linkPlayerId)
 {
-    Rfu.blockReceived[linkPlayerId] = FALSE;
-    Rfu.recvBlock[linkPlayerId].receiving = 0;
+    gRfu.blockReceived[linkPlayerId] = FALSE;
+    gRfu.recvBlock[linkPlayerId].receiving = RECV_STATE_READY;
 }
 
-static u8 sub_800F74C(const u8 *a0)
+static u8 LoadLinkPlayerIds(const u8 *ids)
 {
     u8 i;
-
-    if (Rfu.parentChild == MODE_PARENT)
+    if (gRfu.parentChild == MODE_PARENT)
         return FALSE;
     for (i = 0; i < RFU_CHILD_MAX; i++)
-    {
-        Rfu.linkPlayerIdx[i] = a0[i];
-    }
-    return a0[Rfu.childSlot];
+        gRfu.linkPlayerIdx[i] = ids[i];
+
+    return ids[gRfu.childSlot];
 }
 
-static void RfuFunc_SendKeysToRfu(void)
+static void SendKeysToRfu(void)
 {
     if (gReceivedRemoteLinkPlayers
         && gHeldKeyCodeToSend != LINK_KEY_CODE_NULL
@@ -987,24 +1039,24 @@ static void RfuFunc_SendKeysToRfu(void)
     }
 }
 
-struct GFtgtGname *GetHostRFUtgtGname(void)
+struct RfuGameData *GetHostRfuGameData(void)
 {
-    return &gHostRFUtgtGnameBuffer;
+    return &gHostRfuGameData;
 }
 
 bool32 IsSendingKeysToRfu(void)
 {
-    return Rfu.callback == RfuFunc_SendKeysToRfu;
+    return gRfu.callback == SendKeysToRfu;
 }
 
 void StartSendingKeysToRfu(void)
 {
-    Rfu.callback = RfuFunc_SendKeysToRfu;
+    gRfu.callback = SendKeysToRfu;
 }
 
 void ClearLinkRfuCallback(void)
 {
-    Rfu.callback = NULL;
+    gRfu.callback = NULL;
 }
 
 static void Rfu_BerryBlenderSendHeldKeys(void)
@@ -1017,8 +1069,8 @@ static void Rfu_BerryBlenderSendHeldKeys(void)
 
 void Rfu_SetBerryBlenderLinkCallback(void)
 {
-    if (Rfu.callback == NULL)
-        Rfu.callback = Rfu_BerryBlenderSendHeldKeys;
+    if (gRfu.callback == NULL)
+        gRfu.callback = Rfu_BerryBlenderSendHeldKeys;
 }
 
 static void RfuHandleReceiveCommand(u8 unused)
@@ -1028,42 +1080,42 @@ static void RfuHandleReceiveCommand(u8 unused)
 
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
-        switch (gRecvCmds[i][0] & 0xff00)
+        switch (gRecvCmds[i][0] & RFUCMD_MASK)
         {
-        case RFUCMD_0x7800:
-            if (Rfu.parentChild == MODE_CHILD && gReceivedRemoteLinkPlayers)
+        case RFUCMD_SEND_PLAYER_IDS_NEW:
+            if (gRfu.parentChild == MODE_CHILD && gReceivedRemoteLinkPlayers)
                 return;
             // fallthrough
-        case RFUCMD_0x7700:
+        case RFUCMD_SEND_PLAYER_IDS:
             if (gRfuLinkStatus->parentChild == MODE_CHILD)
             {
-                Rfu.playerCount = gRecvCmds[i][1];
-                Rfu.multiplayerId = sub_800F74C((u8 *)(gRecvCmds[i] + 2));
+                gRfu.playerCount = gRecvCmds[i][1];
+                gRfu.multiplayerId = LoadLinkPlayerIds((u8 *)(gRecvCmds[i] + 2));
             }
             break;
-        case RFUCMD_0x8800:
-            if (Rfu.recvBlock[i].receiving == 0)
+        case RFUCMD_SEND_BLOCK_INIT:
+            if (gRfu.recvBlock[i].receiving == RECV_STATE_READY)
             {
-                Rfu.recvBlock[i].next = 0;
-                Rfu.recvBlock[i].count = gRecvCmds[i][1];
-                Rfu.recvBlock[i].owner = gRecvCmds[i][2];
-                Rfu.recvBlock[i].receivedFlags = 0;
-                Rfu.recvBlock[i].receiving = 1;
-                Rfu.blockReceived[i] = FALSE;
+                gRfu.recvBlock[i].next = 0;
+                gRfu.recvBlock[i].count = gRecvCmds[i][1];
+                gRfu.recvBlock[i].owner = gRecvCmds[i][2];
+                gRfu.recvBlock[i].receivedFlags = 0;
+                gRfu.recvBlock[i].receiving = RECV_STATE_RECEIVING;
+                gRfu.blockReceived[i] = FALSE;
             }
             break;
-        case RFUCMD_0x8900:
-            if (Rfu.recvBlock[i].receiving == 1)
+        case RFUCMD_SEND_BLOCK:
+            if (gRfu.recvBlock[i].receiving == RECV_STATE_RECEIVING)
             {
-                Rfu.recvBlock[i].next = gRecvCmds[i][0] & 0xff;
-                Rfu.recvBlock[i].receivedFlags |= (1 << Rfu.recvBlock[i].next);
+                gRfu.recvBlock[i].next = gRecvCmds[i][0] & 0xff;
+                gRfu.recvBlock[i].receivedFlags |= (1 << gRfu.recvBlock[i].next);
                 for (j = 0; j < 6; j++)
-                    gBlockRecvBuffer[i][Rfu.recvBlock[i].next * 6 + j] = gRecvCmds[i][j + 1];
-                if (Rfu.recvBlock[i].receivedFlags == sAllBlocksReceived[Rfu.recvBlock[i].count])
+                    gBlockRecvBuffer[i][gRfu.recvBlock[i].next * 6 + j] = gRecvCmds[i][j + 1];
+                if (gRfu.recvBlock[i].receivedFlags == sAllBlocksReceived[gRfu.recvBlock[i].count])
                 {
-                    Rfu.recvBlock[i].receiving = 2;
+                    gRfu.recvBlock[i].receiving = RECV_STATE_FINISHED;
                     Rfu_SetBlockReceivedFlag(i);
-                    if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM) && gReceivedRemoteLinkPlayers != 0 && Rfu.parentChild == MODE_CHILD)
+                    if (GetHostRfuGameData()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM) && gReceivedRemoteLinkPlayers != 0 && gRfu.parentChild == MODE_CHILD)
                         ValidateAndReceivePokemonSioInfo(gBlockRecvBuffer);
                 }
             }
@@ -1072,40 +1124,42 @@ static void RfuHandleReceiveCommand(u8 unused)
             Rfu_InitBlockSend(sBlockRequests[gRecvCmds[i][1]].address, (u16)sBlockRequests[gRecvCmds[i][1]].size);
             break;
         case RFUCMD_READY_CLOSE_LINK:
-            Rfu.readyCloseLink[i] = TRUE;
+            gRfu.readyCloseLink[i] = TRUE;
             break;
         case RFUCMD_READY_EXIT_STANDBY:
-            if (Rfu.unk_100 == gRecvCmds[i][1])
-                Rfu.readyExitStandby[i] = TRUE;
+            if (gRfu.allReadyNum == gRecvCmds[i][1])
+                gRfu.readyExitStandby[i] = TRUE;
             break;
-        case RFUCMD_0xED00:
-            if (Rfu.parentChild == MODE_CHILD)
+        case RFUCMD_DISCONNECT:
+            if (gRfu.parentChild == MODE_CHILD)
             {
+                // Disconnect child
                 if (gReceivedRemoteLinkPlayers)
                 {
                     if (gRecvCmds[i][1] & gRfuLinkStatus->connSlotFlag)
                     {
                         gReceivedRemoteLinkPlayers = 0;
                         rfu_LMAN_requestChangeAgbClockMaster();
-                        Rfu.unk_ce4 = gRecvCmds[i][2];
+                        gRfu.disconnectMode = gRecvCmds[i][2];
                     }
-                    Rfu.playerCount = gRecvCmds[i][3];
+                    gRfu.playerCount = gRecvCmds[i][3];
                     ClearSelectedLinkPlayerIds(gRecvCmds[i][1]);
                 }
             }
             else
             {
-                RfuPrepareSendBuffer(RFUCMD_0xEE00);
+                // Disconnect parent
+                RfuPrepareSendBuffer(RFUCMD_DISCONNECT_PARENT);
                 gSendCmd[1] = gRecvCmds[i][1];
                 gSendCmd[2] = gRecvCmds[i][2];
                 gSendCmd[3] = gRecvCmds[i][3];
             }
             break;
-        case RFUCMD_0xEE00:
-            if (Rfu.parentChild == MODE_PARENT)
+        case RFUCMD_DISCONNECT_PARENT:
+            if (gRfu.parentChild == MODE_PARENT)
             {
-                Rfu.unk_ce3 |= gRecvCmds[i][1];
-                Rfu.unk_ce4 = gRecvCmds[i][2];
+                gRfu.disconnectSlots |= gRecvCmds[i][1];
+                gRfu.disconnectMode = gRecvCmds[i][2];
                 ClearSelectedLinkPlayerIds(gRecvCmds[i][1]);
             }
             break;
@@ -1114,38 +1168,38 @@ static void RfuHandleReceiveCommand(u8 unused)
             gLinkPartnersHeldKeys[i] = gRecvCmds[i][1];
             break;
         }
-        if (Rfu.parentChild == MODE_PARENT && Rfu.numBlocksReceived[i])
+        if (gRfu.parentChild == MODE_PARENT && gRfu.numBlocksReceived[i])
         {
-            if (Rfu.numBlocksReceived[i] == 4)
+            if (gRfu.numBlocksReceived[i] == 4)
             {
-                Rfu.blockReceived[i] = TRUE;
-                Rfu.numBlocksReceived[i] = 0;
+                gRfu.blockReceived[i] = TRUE;
+                gRfu.numBlocksReceived[i] = 0;
             }
             else
-                Rfu.numBlocksReceived[i]++;
+                gRfu.numBlocksReceived[i]++;
         }
     }
 }
 
-static bool8 AreNoPlayersReceiving(void)
+static bool8 AreAllPlayersReadyToReceive(void)
 {
     s32 i;
 
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
-        if (Rfu.recvBlock[i].receiving)
+        if (gRfu.recvBlock[i].receiving != RECV_STATE_READY)
             return FALSE;
     }
     return TRUE;
 }
 
-static bool8 sub_800FC88(void)
+static bool8 AreAllPlayersFinishedReceiving(void)
 {
     s32 i;
 
-    for (i = 0; i < Rfu.playerCount; i++)
+    for (i = 0; i < gRfu.playerCount; i++)
     {
-        if (Rfu.recvBlock[i].receiving != 2 || Rfu.blockReceived[i] != TRUE)
+        if (gRfu.recvBlock[i].receiving != RECV_STATE_FINISHED || gRfu.blockReceived[i] != TRUE)
             return FALSE;
     }
     return TRUE;
@@ -1159,7 +1213,7 @@ static void ResetSendDataManager(struct RfuBlockSend *data)
     data->receivedFlags = 0;
     data->sending = FALSE;
     data->owner = 0;
-    data->receiving = 0;
+    data->receiving = RECV_STATE_READY;
 }
 
 u8 Rfu_GetBlockReceivedStatus(void)
@@ -1169,10 +1223,8 @@ u8 Rfu_GetBlockReceivedStatus(void)
 
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
-        if (Rfu.recvBlock[i].receiving == 2 && Rfu.blockReceived[i] == TRUE)
-        {
+        if (gRfu.recvBlock[i].receiving == RECV_STATE_FINISHED && gRfu.blockReceived[i] == TRUE)
             flags |= (1 << i);
-        }
     }
     return flags;
 }
@@ -1186,26 +1238,26 @@ static void RfuPrepareSendBuffer(u16 command)
     gSendCmd[0] = command;
     switch (command)
     {
-    case RFUCMD_0x8800:
-        gSendCmd[1] = Rfu.sendBlock.count;
-        gSendCmd[2] = Rfu.sendBlock.owner + 0x80;
+    case RFUCMD_SEND_BLOCK_INIT:
+        gSendCmd[1] = gRfu.sendBlock.count;
+        gSendCmd[2] = gRfu.sendBlock.owner + 0x80;
         break;
     case RFUCMD_SEND_BLOCK_REQ:
-        if (AreNoPlayersReceiving())
-            gSendCmd[1] = Rfu.blockRequestType;
+        if (AreAllPlayersReadyToReceive())
+            gSendCmd[1] = gRfu.blockRequestType;
         break;
-    case RFUCMD_0x7700:
-    case RFUCMD_0x7800:
-        tmp = Rfu.unk_ce2 ^ Rfu.unk_ce3;
-        Rfu.playerCount = sUnknown_082ED695[tmp] + 1;
-        gSendCmd[1] = Rfu.playerCount;
-        buff = (u8 *)(gSendCmd + 2);
+    case RFUCMD_SEND_PLAYER_IDS:
+    case RFUCMD_SEND_PLAYER_IDS_NEW:
+        tmp = gRfu.parentSlots ^ gRfu.disconnectSlots;
+        gRfu.playerCount = sPlayerBitsToCount[tmp] + 1;
+        gSendCmd[1] = gRfu.playerCount;
+        buff = (u8 *)&gSendCmd[2];
         for (i = 0; i < RFU_CHILD_MAX; i++)
-            buff[i] = Rfu.linkPlayerIdx[i];
+            buff[i] = gRfu.linkPlayerIdx[i];
         break;
     case RFUCMD_READY_EXIT_STANDBY:
     case RFUCMD_READY_CLOSE_LINK:
-        gSendCmd[1] = Rfu.unk_100;
+        gSendCmd[1] = gRfu.allReadyNum;
         break;
     case RFUCMD_BLENDER_SEND_KEYS:
         gSendCmd[0] = command;
@@ -1213,14 +1265,13 @@ static void RfuPrepareSendBuffer(u16 command)
         break;
     case RFUCMD_SEND_PACKET:
         for (i = 0; i < RFU_PACKET_SIZE; i++)
-            gSendCmd[1 + i] = Rfu.packet[i];
+            gSendCmd[1 + i] = gRfu.packet[i];
         break;
     case RFUCMD_SEND_HELD_KEYS:
         gSendCmd[1] = gHeldKeyCodeToSend;
         break;
-    case RFUCMD_0xEE00:
-        break;
-    case RFUCMD_0xED00:
+    case RFUCMD_DISCONNECT_PARENT:
+    case RFUCMD_DISCONNECT:
         break;
     }
 }
@@ -1229,7 +1280,7 @@ void Rfu_SendPacket(void *data)
 {
     if (gSendCmd[0] == 0 && !RfuHasErrored())
     {
-        memcpy(Rfu.packet, data, sizeof(Rfu.packet));
+        memcpy(gRfu.packet, data, sizeof(gRfu.packet));
         RfuPrepareSendBuffer(RFUCMD_SEND_PACKET);
     }
 }
@@ -1237,31 +1288,31 @@ void Rfu_SendPacket(void *data)
 bool32 Rfu_InitBlockSend(const u8 *src, size_t size)
 {
     bool8 r4;
-    if (Rfu.callback != NULL)
+    if (gRfu.callback != NULL)
         return FALSE;
     if (gSendCmd[0] != 0)
         return FALSE;
-    if (Rfu.sendBlock.sending)
+    if (gRfu.sendBlock.sending)
     {
-        sRfuDebug.unk_83++;
+        sRfuDebug.blockSendTime++;
         return FALSE;
     }
     r4 = (size % 12) != 0;
-    Rfu.sendBlock.owner = GetMultiplayerId();
-    Rfu.sendBlock.sending = TRUE;
-    Rfu.sendBlock.count = (size / 12) + r4;
-    Rfu.sendBlock.next = 0;
-    if (size > 0x100)
-        Rfu.sendBlock.payload = src;
+    gRfu.sendBlock.owner = GetMultiplayerId();
+    gRfu.sendBlock.sending = TRUE;
+    gRfu.sendBlock.count = (size / 12) + r4;
+    gRfu.sendBlock.next = 0;
+    if (size > BLOCK_BUFFER_SIZE)
+        gRfu.sendBlock.payload = src;
     else
     {
         if (src != gBlockSendBuffer)
             memcpy(gBlockSendBuffer, src, size);
-        Rfu.sendBlock.payload = gBlockSendBuffer;
+        gRfu.sendBlock.payload = gBlockSendBuffer;
     }
-    RfuPrepareSendBuffer(RFUCMD_0x8800);
-    Rfu.callback = HandleBlockSend;
-    Rfu.unk_5b = 0;
+    RfuPrepareSendBuffer(RFUCMD_SEND_BLOCK_INIT);
+    gRfu.callback = HandleBlockSend;
+    gRfu.blockSendAttempts = 0;
     return TRUE;
 }
 
@@ -1269,16 +1320,16 @@ static void HandleBlockSend(void)
 {
     if (gSendCmd[0] == 0)
     {
-        RfuPrepareSendBuffer(RFUCMD_0x8800);
-        if (Rfu.parentChild == MODE_PARENT)
+        RfuPrepareSendBuffer(RFUCMD_SEND_BLOCK_INIT);
+        if (gRfu.parentChild == MODE_PARENT)
         {
-            if (++Rfu.unk_5b > 2)
-                Rfu.callback = SendNextBlock;
+            if (++gRfu.blockSendAttempts > 2)
+                gRfu.callback = SendNextBlock;
         }
         else
         {
-            if ((gRecvCmds[GetMultiplayerId()][0] & 0xff00) == RFUCMD_0x8800)
-                Rfu.callback = SendNextBlock;
+            if ((gRecvCmds[GetMultiplayerId()][0] & RFUCMD_MASK) == RFUCMD_SEND_BLOCK_INIT)
+                gRfu.callback = SendNextBlock;
         }
     }
 }
@@ -1286,126 +1337,134 @@ static void HandleBlockSend(void)
 static void SendNextBlock(void)
 {
     s32 i;
-    const u8 *src = Rfu.sendBlock.payload;
-    gSendCmd[0] = RFUCMD_0x8900 | Rfu.sendBlock.next;
+    const u8 *src = gRfu.sendBlock.payload;
+    gSendCmd[0] = RFUCMD_SEND_BLOCK | gRfu.sendBlock.next;
     for (i = 0; i < CMD_LENGTH - 1; i++)
-        gSendCmd[i + 1] = (src[(i << 1) + Rfu.sendBlock.next * 12 + 1] << 8) | src[(i << 1) + Rfu.sendBlock.next * 12 + 0];
-    Rfu.sendBlock.next++;
-    if (Rfu.sendBlock.count <= Rfu.sendBlock.next)
+        gSendCmd[i + 1] = (src[(i << 1) + gRfu.sendBlock.next * 12 + 1] << 8) | src[(i << 1) + gRfu.sendBlock.next * 12 + 0];
+    gRfu.sendBlock.next++;
+    if (gRfu.sendBlock.count <= gRfu.sendBlock.next)
     {
-        Rfu.sendBlock.sending = FALSE;
-        Rfu.callback = SendLastBlock;
+        gRfu.sendBlock.sending = FALSE;
+        gRfu.callback = SendLastBlock;
     }
 }
 
 static void SendLastBlock(void)
 {
-    const u8 *src = Rfu.sendBlock.payload;
+    const u8 *src = gRfu.sendBlock.payload;
     u8 mpId = GetMultiplayerId();
     s32 i;
-    if (Rfu.parentChild == MODE_CHILD)
+    if (gRfu.parentChild == MODE_CHILD)
     {
-        gSendCmd[0] = RFUCMD_0x8900 | (Rfu.sendBlock.count - 1);
+        gSendCmd[0] = RFUCMD_SEND_BLOCK | (gRfu.sendBlock.count - 1);
         for (i = 0; i < CMD_LENGTH - 1; i++)
-            gSendCmd[i + 1] = (src[(i << 1) + (Rfu.sendBlock.count - 1) * 12 + 1] << 8) | src[(i << 1) + (Rfu.sendBlock.count - 1) * 12 + 0];
-        if ((u8)gRecvCmds[mpId][0] == Rfu.sendBlock.count - 1)
+            gSendCmd[i + 1] = (src[(i << 1) + (gRfu.sendBlock.count - 1) * 12 + 1] << 8) | src[(i << 1) + (gRfu.sendBlock.count - 1) * 12 + 0];
+        if ((u8)gRecvCmds[mpId][0] == gRfu.sendBlock.count - 1)
         {
-            if (Rfu.recvBlock[mpId].receivedFlags != sAllBlocksReceived[Rfu.recvBlock[mpId].count])
+            if (gRfu.recvBlock[mpId].receivedFlags != sAllBlocksReceived[gRfu.recvBlock[mpId].count])
             {
-                HandleSendFailure(mpId, Rfu.recvBlock[mpId].receivedFlags);
-                sRfuDebug.unk_64++;
+                HandleSendFailure(mpId, gRfu.recvBlock[mpId].receivedFlags);
+                sRfuDebug.blockSendFailures++;
             }
             else
-                Rfu.callback = NULL;
+            {
+                gRfu.callback = NULL;
+            }
         }
     }
     else
-        Rfu.callback = NULL;
+    {
+        gRfu.callback = NULL;
+    }
 }
 
 bool8 Rfu_SendBlockRequest(u8 type)
 {
-    Rfu.blockRequestType = type;
+    gRfu.blockRequestType = type;
     RfuPrepareSendBuffer(RFUCMD_SEND_BLOCK_REQ);
     return TRUE;
 }
 
-static void sub_801011C(void)
+static void RfuShutdownAfterDisconnect(void)
 {
     rfu_clearAllSlot();
     rfu_LMAN_powerDownRFU();
     gReceivedRemoteLinkPlayers = 0;
-    Rfu.isShuttingDown = TRUE;
-    Rfu.callback = NULL;
+    gRfu.isShuttingDown = TRUE;
+    gRfu.callback = NULL;
 }
 
 static void DisconnectRfu(void)
 {
     rfu_REQ_disconnect(gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag);
     rfu_waitREQComplete();
-    sub_801011C();
+    RfuShutdownAfterDisconnect();
 }
 
 static void TryDisconnectRfu(void)
 {
-    if (Rfu.parentChild == MODE_CHILD)
+    if (gRfu.parentChild == MODE_CHILD)
     {
         rfu_LMAN_requestChangeAgbClockMaster();
-        Rfu.unk_ce4 = 2;
+        gRfu.disconnectMode = RFU_DISCONNECT_NORMAL;
     }
     else
-        Rfu.callback = DisconnectRfu;
+    {
+        gRfu.callback = DisconnectRfu;
+    }
 }
 
 void LinkRfu_FatalError(void)
 {
     rfu_LMAN_requestChangeAgbClockMaster();
-    Rfu.unk_ce4 = 1;
-    Rfu.unk_ce3 = gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag;
+    gRfu.disconnectMode = RFU_DISCONNECT_ERROR;
+    gRfu.disconnectSlots = gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag;
 }
 
 // RFU equivalent of LinkCB_WaitCloseLink
 static void WaitAllReadyToCloseLink(void)
 {
     s32 i;
-    u8 playerCount = Rfu.playerCount;
+    u8 playerCount = gRfu.playerCount;
     s32 count = 0;
 
     // Wait for all players to be ready
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
-        if (Rfu.readyCloseLink[i])
+        if (gRfu.readyCloseLink[i])
             count++;
     }
     if (count == playerCount)
     {
         // All ready, close link
         gBattleTypeFlags &= ~BATTLE_TYPE_LINK_IN_BATTLE;
-        if (Rfu.parentChild == MODE_CHILD)
+        if (gRfu.parentChild == MODE_CHILD)
         {
-            Rfu.errorState = 3;
+            gRfu.errorState = RFU_ERROR_STATE_DISCONNECTING;
             TryDisconnectRfu();
         }
         else
-            Rfu.callback = TryDisconnectRfu;
+        {
+            gRfu.callback = TryDisconnectRfu;
+        }
     }
 }
 
 static void SendReadyCloseLink(void)
 {
-    if (gSendCmd[0] == 0 && Rfu.unk_ce8 == 0)
+    if (gSendCmd[0] == 0 && !gRfu.playerExchangeActive)
     {
         RfuPrepareSendBuffer(RFUCMD_READY_CLOSE_LINK);
-        Rfu.callback = WaitAllReadyToCloseLink;
+        gRfu.callback = WaitAllReadyToCloseLink;
     }
 }
 
 static void Task_TryReadyCloseLink(u8 taskId)
 {
-    if (Rfu.callback == NULL)
+    if (gRfu.callback == NULL)
     {
-        Rfu.unk_cd9 = 1;
-        Rfu.callback = SendReadyCloseLink;
+        gRfu.stopNewConnections = TRUE;
+        gRfu.callback = SendReadyCloseLink;
         DestroyTask(taskId);
     }
 }
@@ -1423,34 +1482,34 @@ static void SendReadyExitStandbyUntilAllReady(void)
 
     if (GetMultiplayerId() != 0)
     {
-        if (Rfu.recvQueue.count == 0 && Rfu.resendExitStandbyTimer > 60)
+        if (gRfu.recvQueue.count == 0 && gRfu.resendExitStandbyTimer > 60)
         {
             RfuPrepareSendBuffer(RFUCMD_READY_EXIT_STANDBY);
-            Rfu.resendExitStandbyTimer = 0;
+            gRfu.resendExitStandbyTimer = 0;
         }
     }
     playerCount = GetLinkPlayerCount();
     for (i = 0; i < playerCount; i++)
     {
-        if (!Rfu.readyExitStandby[i])
+        if (!gRfu.readyExitStandby[i])
             break;
     }
     if (i == playerCount)
     {
         for (i = 0; i < MAX_RFU_PLAYERS; i++)
-            Rfu.readyExitStandby[i] = FALSE;
-        Rfu.unk_100++;
-        Rfu.callback = NULL;
+            gRfu.readyExitStandby[i] = FALSE;
+        gRfu.allReadyNum++;
+        gRfu.callback = NULL;
     }
-    Rfu.resendExitStandbyTimer++;
+    gRfu.resendExitStandbyTimer++;
 }
 
 static void LinkLeaderReadyToExitStandby(void)
 {
-    if (Rfu.recvQueue.count == 0 && gSendCmd[0] == 0)
+    if (gRfu.recvQueue.count == 0 && gSendCmd[0] == 0)
     {
         RfuPrepareSendBuffer(RFUCMD_READY_EXIT_STANDBY);
-        Rfu.callback = SendReadyExitStandbyUntilAllReady;
+        gRfu.callback = SendReadyExitStandbyUntilAllReady;
     }
 }
 
@@ -1463,10 +1522,10 @@ static void Rfu_LinkStandby(void)
     if (GetMultiplayerId() != 0)
     {
         // Not link leader, send exit standby when ready
-        if (Rfu.recvQueue.count == 0 && gSendCmd[0] == 0)
+        if (gRfu.recvQueue.count == 0 && gSendCmd[0] == 0)
         {
             RfuPrepareSendBuffer(RFUCMD_READY_EXIT_STANDBY);
-            Rfu.callback = SendReadyExitStandbyUntilAllReady;
+            gRfu.callback = SendReadyExitStandbyUntilAllReady;
         }
     }
     else
@@ -1475,15 +1534,15 @@ static void Rfu_LinkStandby(void)
         playerCount = GetLinkPlayerCount();
         for (i = 1; i < playerCount; i++)
         {
-            if (!Rfu.readyExitStandby[i])
+            if (!gRfu.readyExitStandby[i])
                 break;
         }
         if (i == playerCount)
         {
-            if (Rfu.recvQueue.count == 0 && gSendCmd[0] == 0)
+            if (gRfu.recvQueue.count == 0 && gSendCmd[0] == 0)
             {
                 RfuPrepareSendBuffer(RFUCMD_READY_EXIT_STANDBY);
-                Rfu.callback = LinkLeaderReadyToExitStandby;
+                gRfu.callback = LinkLeaderReadyToExitStandby;
             }
         }
     }
@@ -1491,10 +1550,10 @@ static void Rfu_LinkStandby(void)
 
 void Rfu_SetLinkStandbyCallback(void)
 {
-    if (Rfu.callback == NULL)
+    if (gRfu.callback == NULL)
     {
-        Rfu.callback = Rfu_LinkStandby;
-        Rfu.resendExitStandbyTimer = 0;
+        gRfu.callback = Rfu_LinkStandby;
+        gRfu.resendExitStandbyTimer = 0;
     }
 }
 
@@ -1503,49 +1562,49 @@ bool32 IsRfuSerialNumberValid(u32 serialNo)
     s32 i;
     for (i = 0; sAcceptedSerialNos[i] != serialNo; i++)
     {
-        if (sAcceptedSerialNos[i] == 0xFFFF)
+        if (sAcceptedSerialNos[i] == RFU_SERIAL_END)
             return FALSE;
     }
     return TRUE;
 }
 
-u8 sub_801048C(bool32 a0)
+u8 Rfu_SetLinkRecovery(bool32 enable)
 {
-    if (a0 == FALSE)
+    if (enable == FALSE)
         return rfu_LMAN_setLinkRecovery(0, 0);
     rfu_LMAN_setLinkRecovery(1, 600);
     return 0;
 }
 
-void sub_80104B0(void)
+void Rfu_StopPartnerSearch(void)
 {
-    Rfu.unk_cd9 = 1;
+    gRfu.stopNewConnections = TRUE;
     rfu_LMAN_stopManager(FALSE);
 }
 
 u8 Rfu_GetMultiplayerId(void)
 {
-    if (Rfu.parentChild == MODE_PARENT)
+    if (gRfu.parentChild == MODE_PARENT)
         return 0;
-    return Rfu.multiplayerId;
+    return gRfu.multiplayerId;
 }
 
 u8 Rfu_GetLinkPlayerCount(void)
 {
-    return Rfu.playerCount;
+    return gRfu.playerCount;
 }
 
 bool8 IsLinkRfuTaskFinished(void)
 {
-    if (Rfu.status == RFU_STATUS_CONNECTION_ERROR)
+    if (gRfu.status == RFU_STATUS_CONNECTION_ERROR)
         return FALSE;
-    return Rfu.callback ? FALSE : TRUE;
+    return gRfu.callback ? FALSE : TRUE;
 }
 
 static void CallRfuFunc(void)
 {
-    if (Rfu.callback)
-        Rfu.callback();
+    if (gRfu.callback)
+        gRfu.callback();
 }
 
 static bool8 CheckForLeavingGroupMembers(void)
@@ -1554,23 +1613,23 @@ static bool8 CheckForLeavingGroupMembers(void)
     bool8 memberLeft = FALSE;
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (Rfu.partnerSendStatuses[i] < RFU_STATUS_JOIN_GROUP_OK 
-         || Rfu.partnerSendStatuses[i] > RFU_STATUS_JOIN_GROUP_NO)
+        if (gRfu.partnerSendStatuses[i] < RFU_STATUS_JOIN_GROUP_OK
+         || gRfu.partnerSendStatuses[i] > RFU_STATUS_JOIN_GROUP_NO)
         {
-            if (gRfuSlotStatusNI[i]->recv.state == SLOT_STATE_RECV_SUCCESS 
+            if (gRfuSlotStatusNI[i]->recv.state == SLOT_STATE_RECV_SUCCESS
              || gRfuSlotStatusNI[i]->recv.state == SLOT_STATE_RECV_SUCCESS_AND_SENDSIDE_UNKNOWN)
             {
-                if (Rfu.partnerRecvStatuses[i] == RFU_STATUS_LEAVE_GROUP_NOTICE)
+                if (gRfu.partnerRecvStatuses[i] == RFU_STATUS_LEAVE_GROUP_NOTICE)
                 {
-                    Rfu.partnerSendStatuses[i] = RFU_STATUS_LEAVE_GROUP;
-                    Rfu.partnerRecvStatuses[i] = RFU_STATUS_10;
+                    gRfu.partnerSendStatuses[i] = RFU_STATUS_LEAVE_GROUP;
+                    gRfu.partnerRecvStatuses[i] = RFU_STATUS_CHILD_LEAVE_READY;
                     rfu_clearSlot(TYPE_NI_RECV, i);
-                    rfu_NI_setSendData(1 << i, 8, &Rfu.partnerSendStatuses[i], 1);
+                    rfu_NI_setSendData(1 << i, 8, &gRfu.partnerSendStatuses[i], 1);
                     memberLeft = TRUE;
                 }
 
             }
-            else if (gRfuSlotStatusNI[Rfu.childSlot]->recv.state == SLOT_STATE_RECV_FAILED)
+            else if (gRfuSlotStatusNI[gRfu.childSlot]->recv.state == SLOT_STATE_RECV_FAILED)
                 rfu_clearSlot(TYPE_NI_RECV, i);
             {
 
@@ -1580,27 +1639,33 @@ static bool8 CheckForLeavingGroupMembers(void)
     return memberLeft;
 }
 
-bool32 sub_80105EC(void)
+bool32 RfuTryDisconnectLeavingChildren(void)
 {
-    u8 flags = 0;
+    u8 childrenLeaving = 0;
     s32 i;
+    
+    // Check all children, get those waiting to be disconnected
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (Rfu.partnerRecvStatuses[i] == RFU_STATUS_11)
+        if (gRfu.partnerRecvStatuses[i] == RFU_STATUS_CHILD_LEAVE)
         {
-            flags |= (1 << i);
-            Rfu.partnerRecvStatuses[i] = RFU_STATUS_OK;
+            childrenLeaving |= (1 << i);
+            gRfu.partnerRecvStatuses[i] = RFU_STATUS_OK;
         }
     }
-    if (flags)
+
+    // Disconnect any leaving children
+    if (childrenLeaving)
     {
-        rfu_REQ_disconnect(flags);
+        rfu_REQ_disconnect(childrenLeaving);
         rfu_waitREQComplete();
     }
+
+    // Return true if any children have left or are still waiting to leave
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (Rfu.partnerRecvStatuses[i] == RFU_STATUS_10 
-         || Rfu.partnerRecvStatuses[i] == RFU_STATUS_11)
+        if (gRfu.partnerRecvStatuses[i] == RFU_STATUS_CHILD_LEAVE_READY
+         || gRfu.partnerRecvStatuses[i] == RFU_STATUS_CHILD_LEAVE)
             return TRUE;
     }
     return FALSE;
@@ -1611,7 +1676,7 @@ bool32 HasTrainerLeftPartnersList(u16 trainerId, const u8 *name)
     u8 idx = GetPartnerIndexByNameAndTrainerID(name, trainerId);
     if (idx == 0xFF)
         return TRUE;
-    if (Rfu.partnerSendStatuses[idx] == RFU_STATUS_LEAVE_GROUP)
+    if (gRfu.partnerSendStatuses[idx] == RFU_STATUS_LEAVE_GROUP)
         return TRUE;
     return FALSE;
 }
@@ -1619,16 +1684,16 @@ bool32 HasTrainerLeftPartnersList(u16 trainerId, const u8 *name)
 void SendRfuStatusToPartner(u8 status, u16 trainerId, const u8 *name)
 {
     u8 idx = GetPartnerIndexByNameAndTrainerID(name, trainerId);
-    Rfu.partnerSendStatuses[idx] = status;
+    gRfu.partnerSendStatuses[idx] = status;
     rfu_clearSlot(TYPE_NI_SEND, idx);
-    rfu_NI_setSendData(1 << idx, 8, &Rfu.partnerSendStatuses[idx], 1);
+    rfu_NI_setSendData(1 << idx, 8, &gRfu.partnerSendStatuses[idx], 1);
 }
 
 void SendLeaveGroupNotice(void)
 {
-    Rfu.unk_c85 = RFU_STATUS_LEAVE_GROUP_NOTICE;
-    rfu_clearSlot(TYPE_NI_SEND, Rfu.childSlot);
-    rfu_NI_setSendData(1 << Rfu.childSlot, 8, &Rfu.unk_c85, 1);
+    gRfu.leaveGroupStatus = RFU_STATUS_LEAVE_GROUP_NOTICE;
+    rfu_clearSlot(TYPE_NI_SEND, gRfu.childSlot);
+    rfu_NI_setSendData(1 << gRfu.childSlot, 8, &gRfu.leaveGroupStatus, 1);
 }
 
 u32 WaitSendRfuStatusToPartner(u16 trainerId, const u8 *name)
@@ -1648,117 +1713,119 @@ static void UpdateChildStatuses(void)
     CheckForLeavingGroupMembers();
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (gRfuSlotStatusNI[i]->send.state == SLOT_STATE_SEND_SUCCESS 
+        if (gRfuSlotStatusNI[i]->send.state == SLOT_STATE_SEND_SUCCESS
          || gRfuSlotStatusNI[i]->send.state == SLOT_STATE_SEND_FAILED)
         {
-            if (Rfu.partnerRecvStatuses[i] == RFU_STATUS_10)
-                Rfu.partnerRecvStatuses[i] = RFU_STATUS_11;
+            if (gRfu.partnerRecvStatuses[i] == RFU_STATUS_CHILD_LEAVE_READY)
+                gRfu.partnerRecvStatuses[i] = RFU_STATUS_CHILD_LEAVE;
             rfu_clearSlot(TYPE_NI_SEND, i);
         }
     }
 }
 
-static s32 sub_80107A0(void)
+static s32 GetJoinGroupStatus(void)
 {
     s32 status = RFU_STATUS_OK;
-    if (Rfu.unk_c85 == 8)
+    if (gRfu.leaveGroupStatus == RFU_STATUS_LEAVE_GROUP_NOTICE)
     {
-        if (gRfuSlotStatusNI[Rfu.childSlot]->send.state == SLOT_STATE_SEND_SUCCESS 
-         || gRfuSlotStatusNI[Rfu.childSlot]->send.state == SLOT_STATE_SEND_FAILED)
-            rfu_clearSlot(TYPE_NI_SEND, Rfu.childSlot);
+        if (gRfuSlotStatusNI[gRfu.childSlot]->send.state == SLOT_STATE_SEND_SUCCESS
+         || gRfuSlotStatusNI[gRfu.childSlot]->send.state == SLOT_STATE_SEND_FAILED)
+            rfu_clearSlot(TYPE_NI_SEND, gRfu.childSlot);
     }
-    if (gRfuSlotStatusNI[Rfu.childSlot]->recv.state == SLOT_STATE_RECV_SUCCESS
-     || gRfuSlotStatusNI[Rfu.childSlot]->recv.state == SLOT_STATE_RECV_SUCCESS_AND_SENDSIDE_UNKNOWN)
+    if (gRfuSlotStatusNI[gRfu.childSlot]->recv.state == SLOT_STATE_RECV_SUCCESS
+     || gRfuSlotStatusNI[gRfu.childSlot]->recv.state == SLOT_STATE_RECV_SUCCESS_AND_SENDSIDE_UNKNOWN)
     {
-        rfu_clearSlot(TYPE_NI_RECV, Rfu.childSlot);
-        RfuSetStatus(Rfu.recvStatus, 0);
-        status = Rfu.recvStatus;
+        rfu_clearSlot(TYPE_NI_RECV, gRfu.childSlot);
+        RfuSetStatus(gRfu.childRecvStatus, 0);
+        status = gRfu.childRecvStatus;
     }
-    else if (gRfuSlotStatusNI[Rfu.childSlot]->recv.state == SLOT_STATE_RECV_FAILED)
+    else if (gRfuSlotStatusNI[gRfu.childSlot]->recv.state == SLOT_STATE_RECV_FAILED)
     {
-        rfu_clearSlot(TYPE_NI_RECV, Rfu.childSlot);
+        rfu_clearSlot(TYPE_NI_RECV, gRfu.childSlot);
         status = RFU_STATUS_JOIN_GROUP_NO;
     }
     return status;
 }
 
-static void sub_801084C(u8 taskId)
+#define tState data[0]
+
+static void Task_PlayerExchange(u8 taskId)
 {
     s32 i;
 
-    if (Rfu.status == RFU_STATUS_FATAL_ERROR || Rfu.status == RFU_STATUS_CONNECTION_ERROR)
+    if (gRfu.status == RFU_STATUS_FATAL_ERROR || gRfu.status == RFU_STATUS_CONNECTION_ERROR)
     {
-        Rfu.unk_ce8 = 0;
+        gRfu.playerExchangeActive = FALSE;
         DestroyTask(taskId);
     }
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tState)
     {
     case 0:
-        if (AreNoPlayersReceiving())
+        if (AreAllPlayersReadyToReceive())
         {
             ResetBlockReceivedFlags();
             LocalLinkPlayerToBlock();
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
         }
         break;
     case 1:
-        if (Rfu.parentChild == MODE_PARENT)
+        if (gRfu.parentChild == MODE_PARENT)
         {
             if (gReceivedRemoteLinkPlayers)
-                RfuPrepareSendBuffer(RFUCMD_0x7800);
+                RfuPrepareSendBuffer(RFUCMD_SEND_PLAYER_IDS_NEW);
             else
-                RfuPrepareSendBuffer(RFUCMD_0x7700);
-            gTasks[taskId].data[0] = 101;
+                RfuPrepareSendBuffer(RFUCMD_SEND_PLAYER_IDS);
+            gTasks[taskId].tState = 101;
         }
         else
-            gTasks[taskId].data[0] = 2;
+            gTasks[taskId].tState = 2;
         break;
     case 101:
         if (gSendCmd[0] == 0)
-            gTasks[taskId].data[0] = 2;
+            gTasks[taskId].tState = 2;
         break;
     case 2:
-        if (Rfu.playerCount)
-            gTasks[taskId].data[0]++;
+        if (gRfu.playerCount)
+            gTasks[taskId].tState++;
         break;
     case 3:
-        if (Rfu.parentChild == MODE_PARENT)
+        if (gRfu.parentChild == MODE_PARENT)
         {
-            if (AreNoPlayersReceiving())
+            if (AreAllPlayersReadyToReceive())
             {
-                Rfu.blockRequestType = 0;
+                gRfu.blockRequestType = BLOCK_REQ_SIZE_NONE;
                 RfuPrepareSendBuffer(RFUCMD_SEND_BLOCK_REQ);
-                gTasks[taskId].data[0]++;
+                gTasks[taskId].tState++;
             }
         }
         else
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
         break;
     case 4:
-        if (sub_800FC88())
-            gTasks[taskId].data[0]++;
+        if (AreAllPlayersFinishedReceiving())
+            gTasks[taskId].tState++;
         break;
     case 5:
-        for (i = 0; i < Rfu.playerCount; i++)
+        for (i = 0; i < gRfu.playerCount; i++)
         {
             LinkPlayerFromBlock(i);
             Rfu_ResetBlockReceivedFlag(i);
         }
-        gTasks[taskId].data[0]++;
+        gTasks[taskId].tState++;
         break;
     case 6:
         DestroyTask(taskId);
         gReceivedRemoteLinkPlayers = TRUE;
-        Rfu.unk_ce8 = FALSE;
+        gRfu.playerExchangeActive = FALSE;
         rfu_LMAN_setLinkRecovery(1, 600);
-        if (Rfu.unk_ce6)
+        if (gRfu.newChildQueue)
         {
             for (i = 0; i < RFU_CHILD_MAX; i++)
             {
-                if ((Rfu.unk_ce6 >> i) & 1)
+                if ((gRfu.newChildQueue >> i) & 1)
                 {
-                    Rfu.unk_ce5 = 1 << i;
-                    Rfu.unk_ce6 ^= (1 << i);
+                    gRfu.nextChildBits = 1 << i;
+                    gRfu.newChildQueue ^= (1 << i);
                 }
             }
         }
@@ -1773,16 +1840,16 @@ static void ClearSelectedLinkPlayerIds(u16 selected)
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         if ((selected >> i) & 1)
-            Rfu.linkPlayerIdx[i] = 0;
+            gRfu.linkPlayerIdx[i] = 0;
     }
 }
 
 static void ReceiveRfuLinkPlayers(const struct SioInfo *sioInfo)
 {
     s32 i;
-    Rfu.playerCount = sioInfo->playerCount;
+    gRfu.playerCount = sioInfo->playerCount;
     for (i = 0; i < RFU_CHILD_MAX; i++)
-        Rfu.linkPlayerIdx[i] = sioInfo->linkPlayerIdx[i];
+        gRfu.linkPlayerIdx[i] = sioInfo->linkPlayerIdx[i];
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
         gLinkPlayers[i] = sioInfo->linkPlayers[i];
@@ -1800,74 +1867,75 @@ static void ValidateAndReceivePokemonSioInfo(void *recvBuffer)
     }
 }
 
-static void Task_ExchangeLinkPlayers(u8 taskId)
+// Equivalent to Task_PlayerExchange, but for when new children arrive after the first exchange
+static void Task_PlayerExchangeUpdate(u8 taskId)
 {
     s32 i;
-    struct LinkPlayerBlock *r2;
-    struct SioInfo *r5;
-    u8 r4 = Rfu.linkPlayerIdx[sUnknown_082ED68C[Rfu.unk_ce9]];
-    if (Rfu.status == RFU_STATUS_FATAL_ERROR || Rfu.status == RFU_STATUS_CONNECTION_ERROR)
+    struct LinkPlayerBlock *playerBlock;
+    struct SioInfo *sio;
+    u8 playerId = gRfu.linkPlayerIdx[sSlotToLinkPlayerTableId[gRfu.incomingChild]];
+    if (gRfu.status == RFU_STATUS_FATAL_ERROR || gRfu.status == RFU_STATUS_CONNECTION_ERROR)
     {
-        Rfu.unk_ce8 = 0;
+        gRfu.playerExchangeActive = FALSE;
         DestroyTask(taskId);
     }
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tState)
     {
     case 0:
         if (gSendCmd[0] == 0)
         {
-            ResetBlockReceivedFlag(r4);
-            RfuPrepareSendBuffer(RFUCMD_0x7800);
-            gTasks[taskId].data[0]++;
+            ResetBlockReceivedFlag(playerId);
+            RfuPrepareSendBuffer(RFUCMD_SEND_PLAYER_IDS_NEW);
+            gTasks[taskId].tState++;
         }
         break;
     case 1:
         if (gSendCmd[0] == 0)
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
         break;
     case 2:
-        if ((GetBlockReceivedStatus() >> r4) & 1)
+        if ((GetBlockReceivedStatus() >> playerId) & 1)
         {
-            ResetBlockReceivedFlag(r4);
-            r2 = (struct LinkPlayerBlock *)gBlockRecvBuffer[r4];
-            gLinkPlayers[r4] = r2->linkPlayer;
-            ConvertLinkPlayerName(gLinkPlayers + r4);
-            gTasks[taskId].data[0]++;
+            ResetBlockReceivedFlag(playerId);
+            playerBlock = (struct LinkPlayerBlock *)gBlockRecvBuffer[playerId];
+            gLinkPlayers[playerId] = playerBlock->linkPlayer;
+            ConvertLinkPlayerName(&gLinkPlayers[playerId]);
+            gTasks[taskId].tState++;
         }
         break;
     case 3:
-        r5 = (struct SioInfo *)gBlockSendBuffer;
-        memcpy(r5->magic, sASCII_PokemonSioInfo, sizeof sASCII_PokemonSioInfo);
-        r5->playerCount = Rfu.playerCount;
+        sio = (struct SioInfo *)gBlockSendBuffer;
+        memcpy(sio->magic, sASCII_PokemonSioInfo, sizeof sASCII_PokemonSioInfo);
+        sio->playerCount = gRfu.playerCount;
         for (i = 0; i < RFU_CHILD_MAX; i++)
-            r5->linkPlayerIdx[i] = Rfu.linkPlayerIdx[i];
-        memcpy(r5->linkPlayers, gLinkPlayers, sizeof gLinkPlayers);
-        gTasks[taskId].data[0]++;
+            sio->linkPlayerIdx[i] = gRfu.linkPlayerIdx[i];
+        memcpy(sio->linkPlayers, gLinkPlayers, sizeof gLinkPlayers);
+        gTasks[taskId].tState++;
         // fallthrough
     case 4:
-        r5 = (struct SioInfo *)gBlockSendBuffer;
-        r5->playerCount = Rfu.playerCount;
+        sio = (struct SioInfo *)gBlockSendBuffer;
+        sio->playerCount = gRfu.playerCount;
         for (i = 0; i < RFU_CHILD_MAX; i++)
-            r5->linkPlayerIdx[i] = Rfu.linkPlayerIdx[i];
-        memcpy(r5->linkPlayers, gLinkPlayers, sizeof gLinkPlayers);
+            sio->linkPlayerIdx[i] = gRfu.linkPlayerIdx[i];
+        memcpy(sio->linkPlayers, gLinkPlayers, sizeof(gLinkPlayers));
         if (SendBlock(0, gBlockSendBuffer, 0xa0))
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
         break;
     case 5:
         if (IsLinkTaskFinished() && GetBlockReceivedStatus() & 1)
         {
             CpuFill16(0, gBlockRecvBuffer, sizeof(struct SioInfo));
             ResetBlockReceivedFlag(0);
-            Rfu.unk_ce8 = 0;
-            if (Rfu.unk_ce6)
+            gRfu.playerExchangeActive = FALSE;
+            if (gRfu.newChildQueue)
             {
-                for (i = 0; i < 4; i++)
+                for (i = 0; i < RFU_CHILD_MAX; i++)
                 {
-                    if ((Rfu.unk_ce6 >> i) & 1)
+                    if ((gRfu.newChildQueue >> i) & 1)
                     {
-                        Rfu.unk_ce5 = 1 << i;
-                        Rfu.unk_ce6 ^= (1 << i);
-                        Rfu.unk_ce8 = 1;
+                        gRfu.nextChildBits = 1 << i;
+                        gRfu.newChildQueue ^= (1 << i);
+                        gRfu.playerExchangeActive = TRUE;
                         break;
                     }
                 }
@@ -1878,23 +1946,24 @@ static void Task_ExchangeLinkPlayers(u8 taskId)
     }
 }
 
-static void sub_8010D0C(u8 taskId)
+// Equivalent to Task_PlayerExchange but for chatting with a Union Room partner
+static void Task_PlayerExchangeChat(u8 taskId)
 {
-    if (Rfu.status == RFU_STATUS_FATAL_ERROR || Rfu.status == RFU_STATUS_CONNECTION_ERROR)
+    if (gRfu.status == RFU_STATUS_FATAL_ERROR || gRfu.status == RFU_STATUS_CONNECTION_ERROR)
         DestroyTask(taskId);
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tState)
     {
     case 0:
-        if (Rfu.playerCount)
+        if (gRfu.playerCount)
         {
             LocalLinkPlayerToBlock();
             SendBlock(0, gBlockSendBuffer, sizeof(struct LinkPlayerBlock));
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
         }
         break;
     case 1:
         if (IsLinkTaskFinished())
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
         break;
     case 2:
         if (GetBlockReceivedStatus() & 1)
@@ -1910,28 +1979,28 @@ static void sub_8010D0C(u8 taskId)
 
 static void RfuCheckErrorStatus(void)
 {
-    if (Rfu.errorState == 1 && lman.childClockSlave_flag == 0)
+    if (gRfu.errorState == RFU_ERROR_STATE_OCCURRED && lman.childClockSlave_flag == 0)
     {
-        if (gMain.callback2 == c2_mystery_gift_e_reader_run || lman.init_param->mboot_flag)
+        if (gMain.callback2 == CB2_MysteryGiftEReader || lman.init_param->mboot_flag)
             gWirelessCommType = 2;
         SetMainCallback2(CB2_LinkError);
         gMain.savedCallback = CB2_LinkError;
-        BufferLinkErrorInfo((Rfu.linkmanMsg << 16) | (Rfu.unk_10 << 8) | Rfu.unk_12, Rfu.recvQueue.count, Rfu.sendQueue.count, RfuGetStatus() == RFU_STATUS_CONNECTION_ERROR);
-        Rfu.errorState = 2;
+        SetLinkErrorBuffer((gRfu.errorInfo << 16) | (gRfu.errorParam0 << 8) | gRfu.errorParam1, gRfu.recvQueue.count, gRfu.sendQueue.count, RfuGetStatus() == RFU_STATUS_CONNECTION_ERROR);
+        gRfu.errorState = RFU_ERROR_STATE_PROCESSED;
         CloseLink();
     }
-    else if (Rfu.sendQueue.full == TRUE || Rfu.recvQueue.full == TRUE)
+    else if (gRfu.sendQueue.full == TRUE || gRfu.recvQueue.full == TRUE)
     {
         if (lman.childClockSlave_flag)
             rfu_LMAN_requestChangeAgbClockMaster();
-        RfuSetStatus(RFU_STATUS_FATAL_ERROR, 0x7000);
-        GetLinkmanErrorParams(0x7000);
+        RfuSetStatus(RFU_STATUS_FATAL_ERROR, F_RFU_ERROR_5 | F_RFU_ERROR_6 | F_RFU_ERROR_7);
+        RfuSetErrorParams(F_RFU_ERROR_5 | F_RFU_ERROR_6 | F_RFU_ERROR_7);
     }
 }
 
-static void rfu_REQ_recvData_then_sendData(void)
+static void RfuMain1_UnionRoom(void)
 {
-    if (lman.parent_child == 1)
+    if (lman.parent_child == MODE_PARENT)
     {
         rfu_REQ_recvData();
         rfu_waitREQComplete();
@@ -1939,184 +2008,190 @@ static void rfu_REQ_recvData_then_sendData(void)
     }
 }
 
-bool32 sub_8010EC0(void)
+// Rfu equivalent of LinkMain1
+bool32 RfuMain1(void)
 {
     bool32 retval = FALSE;
-    Rfu.parentId = 0;
+    gRfu.parentId = 0;
     rfu_LMAN_manager_entity(Random2());
-    if (!Rfu.isShuttingDown)
+    if (!gRfu.isShuttingDown)
     {
-        switch (Rfu.parentChild)
+        switch (gRfu.parentChild)
         {
         case MODE_PARENT:
-            sub_800F0F8();
+            RfuMain1_Parent();
             break;
         case MODE_CHILD:
-            retval = RfuProcessEnqueuedRecvBlock();
+            retval = RfuMain1_Child();
             break;
-        case 2:
-            rfu_REQ_recvData_then_sendData();
+        case MODE_P_C_SWITCH:
+            RfuMain1_UnionRoom();
             break;
         }
     }
     return retval;
 }
 
-bool32 sub_8010F1C(void)
+// Rfu equivalent of LinkMain2
+bool32 RfuMain2(void)
 {
     bool32 retval = FALSE;
-    if (!Rfu.isShuttingDown)
+    if (!gRfu.isShuttingDown)
     {
-        if (Rfu.parentChild == MODE_PARENT)
-            retval = sub_800F1E0();
+        if (gRfu.parentChild == MODE_PARENT)
+            retval = RfuMain2_Parent();
         RfuCheckErrorStatus();
     }
     return retval;
 }
 
-static void CopyPlayerNameToUnameBuffer(void)
+static void SetHostRfuUsername(void)
 {
-    StringCopy(gHostRFUtgtUnameBuffer, gSaveBlock2Ptr->playerName);
+    StringCopy(gHostRfuUsername, gSaveBlock2Ptr->playerName);
 }
 
-void ClearAndInitHostRFUtgtGname(void)
+void ResetHostRfuGameData(void)
 {
-    memset(&gHostRFUtgtGnameBuffer, 0, RFU_GAME_NAME_LENGTH);
-    InitHostRFUtgtGname(&gHostRFUtgtGnameBuffer, ACTIVITY_NONE, FALSE, 0);
+    memset(&gHostRfuGameData, 0, RFU_GAME_NAME_LENGTH);
+    InitHostRfuGameData(&gHostRfuGameData, ACTIVITY_NONE, FALSE, 0);
 }
 
-void SetHostRFUtgtGname(u8 activity, u32 child_sprite_genders, bool32 started)
+void SetHostRfuGameData(u8 activity, u32 partnerInfo, bool32 startedActivity)
 {
-    InitHostRFUtgtGname(&gHostRFUtgtGnameBuffer, activity, started, child_sprite_genders);
+    InitHostRfuGameData(&gHostRfuGameData, activity, startedActivity, partnerInfo);
 }
 
-void SetGnameBufferWonderFlags(bool32 hasNews, bool32 hasCard)
+void SetHostRfuWonderFlags(bool32 hasNews, bool32 hasCard)
 {
-    gHostRFUtgtGnameBuffer.unk_00.hasNews = hasNews;
-    gHostRFUtgtGnameBuffer.unk_00.hasCard = hasCard;
+    gHostRfuGameData.compatibility.hasNews = hasNews;
+    gHostRfuGameData.compatibility.hasCard = hasCard;
 }
 
 void SetTradeBoardRegisteredMonInfo(u32 type, u32 species, u32 level)
 {
-    gHostRFUtgtGnameBuffer.type = type;
-    gHostRFUtgtGnameBuffer.species = species;
-    gHostRFUtgtGnameBuffer.level = level;
+    gHostRfuGameData.tradeType = type;
+    gHostRfuGameData.tradeSpecies = species;
+    gHostRfuGameData.tradeLevel = level;
 }
 
-u8 sub_801100C(s32 a0)
+u8 GetLinkPlayerInfoFlags(s32 playerId)
 {
-    u8 retval = 0x80;
-    retval |= (gLinkPlayers[a0].gender << 3);
-    retval |= (gLinkPlayers[a0].trainerId & 7);
+    u8 retval = PINFO_ACTIVE_FLAG;
+    retval |= (gLinkPlayers[playerId].gender << PINFO_GENDER_SHIFT);
+    retval |= (gLinkPlayers[playerId].trainerId & PINFO_TID_MASK);
     return retval;
 }
 
-void sub_801103C(void)
+void GetOtherPlayersInfoFlags(void)
 {
-    struct GFtgtGname *r5 = &gHostRFUtgtGnameBuffer;
+    struct RfuGameData *data = &gHostRfuGameData;
     s32 i;
 
     for (i = 1; i < GetLinkPlayerCount(); i++)
-        r5->child_sprite_gender[i - 1] = sub_801100C(i);
+        data->partnerInfo[i - 1] = GetLinkPlayerInfoFlags(i);
 }
 
-void UpdateGameData_GroupLockedIn(bool8 started)
+void UpdateGameData_GroupLockedIn(bool8 startedActivity)
 {
-    gHostRFUtgtGnameBuffer.started = started;
-    rfu_REQ_configGameData(0, 2, (void *)&gHostRFUtgtGnameBuffer, gHostRFUtgtUnameBuffer);
+    gHostRfuGameData.startedActivity = startedActivity;
+    rfu_REQ_configGameData(0, RFU_SERIAL_GAME, (void *)&gHostRfuGameData, gHostRfuUsername);
 }
 
-void UpdateGameData_SetActivity(u8 activity, u32 flags, bool32 started)
+void UpdateGameData_SetActivity(u8 activity, u32 partnerInfo, bool32 startedActivity)
 {
     if (activity != ACTIVITY_NONE)
-        SetHostRFUtgtGname(activity, flags, started);
-    rfu_REQ_configGameData(0, 2, (void *)&gHostRFUtgtGnameBuffer, gHostRFUtgtUnameBuffer);
+        SetHostRfuGameData(activity, partnerInfo, startedActivity);
+    rfu_REQ_configGameData(0, RFU_SERIAL_GAME, (void *)&gHostRfuGameData, gHostRfuUsername);
 }
 
-void sub_80110B8(u32 a0)
+void SetUnionRoomChatPlayerData(u32 numPlayers)
 {
     s32 i;
     u32 numConnectedChildren;
-    u32 child_sprite_genders;
-    s32 r8;
+    u32 partnerInfo;
+    s32 slots;
 
-    if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM))
+    if (GetHostRfuGameData()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM))
     {
         numConnectedChildren = 0;
-        child_sprite_genders = 0;
-        r8 = Rfu.unk_ce2 ^ Rfu.unk_ce3;
-        for (i = 0; i < 4; i++)
+        partnerInfo = 0;
+        slots = gRfu.parentSlots ^ gRfu.disconnectSlots;
+        for (i = 0; i < RFU_CHILD_MAX; i++)
         {
-            if ((r8 >> i) & 1)
+            if ((slots >> i) & 1)
             {
-                child_sprite_genders |= ((0x80 | ((gLinkPlayers[Rfu.linkPlayerIdx[i]].gender & 1) << 3) | (gLinkPlayers[Rfu.linkPlayerIdx[i]].trainerId & 7)) << (numConnectedChildren << 3));
+                // Only trainerId is shifted by the number of children, so the active flag and gender
+                // are only ever set for the first child
+                partnerInfo |= ((PINFO_ACTIVE_FLAG
+                             | ((gLinkPlayers[gRfu.linkPlayerIdx[i]].gender & 1) << PINFO_GENDER_SHIFT) 
+                             | (gLinkPlayers[gRfu.linkPlayerIdx[i]].trainerId & PINFO_TID_MASK)) << (numConnectedChildren * 8));
                 numConnectedChildren++;
-                if (numConnectedChildren == a0 - 1)
+                if (numConnectedChildren == numPlayers - 1)
                     break;
             }
         }
-        UpdateGameData_SetActivity((ACTIVITY_CHAT | IN_UNION_ROOM), child_sprite_genders, FALSE);
+        UpdateGameData_SetActivity(ACTIVITY_CHAT | IN_UNION_ROOM, partnerInfo, FALSE);
     }
 }
 
-void GetLinkmanErrorParams(u32 msg)
+void RfuSetErrorParams(u32 errorInfo)
 {
-    if (Rfu.errorState == 0)
+    if (gRfu.errorState == RFU_ERROR_STATE_NONE)
     {
-        Rfu.unk_10 = lman.param[0];
-        Rfu.unk_12 = lman.param[1];
-        Rfu.linkmanMsg = msg;
-        Rfu.errorState = 1;
+        gRfu.errorParam0 = lman.param[0];
+        gRfu.errorParam1 = lman.param[1];
+        gRfu.errorInfo = errorInfo;
+        gRfu.errorState = RFU_ERROR_STATE_OCCURRED;
     }
 }
 
 static void ResetErrorState(void)
 {
-    Rfu.errorState = 0;
+    gRfu.errorState = RFU_ERROR_STATE_NONE;
 }
 
-void sub_80111B0(bool32 a0)
+void RfuSetIgnoreError(bool32 enable)
 {
-    if (!a0)
-        Rfu.errorState = 0;
+    if (!enable)
+        gRfu.errorState = RFU_ERROR_STATE_NONE;
     else
-        Rfu.errorState = 4;
+        gRfu.errorState = RFU_ERROR_STATE_IGNORE;
 }
 
-static void sub_80111DC(void)
+static void DisconnectNewChild(void)
 {
-    sub_8011E94(lman.acceptSlot_flag, 1);
-    Rfu.callback = NULL;
+    SendDisconnectCommand(lman.acceptSlot_flag, RFU_DISCONNECT_ERROR);
+    gRfu.callback = NULL;
 }
 
-static void sub_80111FC(void)
+static void StartDisconnectNewChild(void)
 {
-    Rfu.callback = sub_80111DC;
+    gRfu.callback = DisconnectNewChild;
 }
 
-static void sub_801120C(u8 msg, u8 paramCount)
+static void LinkManagerCB_Parent(u8 msg, u8 paramCount)
 {
     u8 i;
     u8 disconnectFlag = 0;
     switch (msg)
     {
     case LMAN_MSG_INITIALIZE_COMPLETED:
-        Rfu.state = 2;
+        gRfu.state = RFUSTATE_PARENT_CONNECT;
         break;
     case LMAN_MSG_NEW_CHILD_CONNECT_DETECTED:
         break;
     case LMAN_MSG_NEW_CHILD_CONNECT_ACCEPTED:
-        sub_80115EC(lman.param[0]);
+        ParentResetChildRecvMetadata(lman.param[0]);
         for (i = 0; i < RFU_CHILD_MAX; i++)
         {
             if ((lman.param[0] >> i) & 1)
             {
-                struct GFtgtGname *structPtr = (void *)gRfuLinkStatus->partner[i].gname;
-                if (structPtr->activity == GetHostRFUtgtGname()->activity)
+                struct RfuGameData *data = (void *)gRfuLinkStatus->partner[i].gname;
+                if (data->activity == GetHostRfuGameData()->activity)
                 {
-                    Rfu.partnerSendStatuses[i] = RFU_STATUS_OK;
-                    Rfu.partnerRecvStatuses[i] = RFU_STATUS_OK;
-                    rfu_setRecvBuffer(TYPE_NI, i, &Rfu.partnerRecvStatuses[i], 1);
+                    gRfu.partnerSendStatuses[i] = RFU_STATUS_OK;
+                    gRfu.partnerRecvStatuses[i] = RFU_STATUS_OK;
+                    rfu_setRecvBuffer(TYPE_NI, i, &gRfu.partnerRecvStatuses[i], sizeof(gRfu.partnerRecvStatuses[0]));
                 }
                 else
                 {
@@ -2135,104 +2210,103 @@ static void sub_801120C(u8 msg, u8 paramCount)
     case LMAN_MSG_SEARCH_CHILD_PERIOD_EXPIRED:
         break;
     case LMAN_MSG_END_WAIT_CHILD_NAME:
-        if (Rfu.acceptSlot_flag != lman.acceptSlot_flag)
+        if (gRfu.acceptSlot_flag != lman.acceptSlot_flag)
         {
-            rfu_REQ_disconnect(Rfu.acceptSlot_flag ^ lman.acceptSlot_flag);
+            rfu_REQ_disconnect(gRfu.acceptSlot_flag ^ lman.acceptSlot_flag);
             rfu_waitREQComplete();
         }
-        Rfu.state = 17;
+        gRfu.state = RFUSTATE_PARENT_FINALIZE_START;
         break;
     case LMAN_MSG_LINK_LOSS_DETECTED_AND_START_RECOVERY:
-        Rfu.linkLossRecoveryState = 1;
+        gRfu.linkLossRecoveryState = 1;
         break;
     case LMAN_MSG_LINK_RECOVERY_SUCCESSED:
-        Rfu.linkLossRecoveryState = 3;
+        gRfu.linkLossRecoveryState = 3;
         break;
     case LMAN_MSG_LINK_LOSS_DETECTED_AND_DISCONNECTED:
     case LMAN_MSG_LINK_RECOVERY_FAILED_AND_DISCONNECTED:
-        Rfu.linkLossRecoveryState = 4;
-        Rfu.unk_ce2 &= ~lman.param[0];
+        gRfu.linkLossRecoveryState = 4;
+        gRfu.parentSlots &= ~lman.param[0];
         if (gReceivedRemoteLinkPlayers == 1)
         {
-            if (Rfu.unk_ce2 == 0)
-                GetLinkmanErrorParams(msg);
+            if (gRfu.parentSlots == 0)
+                RfuSetErrorParams(msg);
             else
-                sub_80111FC();
+                StartDisconnectNewChild();
         }
         RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, msg);
         break;
-    case 0x34:
-        break;
+    case 0x34: // ? Not a valid LMAN_MSG value
     case LMAN_MSG_RFU_POWER_DOWN:
     case LMAN_MSG_MANAGER_STOPPED:
     case LMAN_MSG_MANAGER_FORCED_STOPPED_AND_RFU_RESET:
         break;
     case LMAN_MSG_LMAN_API_ERROR_RETURN:
         RfuSetStatus(RFU_STATUS_FATAL_ERROR, msg);
-        GetLinkmanErrorParams(msg);
-        Rfu.isShuttingDown = TRUE;
+        RfuSetErrorParams(msg);
+        gRfu.isShuttingDown = TRUE;
         break;
     case LMAN_MSG_REQ_API_ERROR:
     case LMAN_MSG_WATCH_DOG_TIMER_ERROR:
     case LMAN_MSG_CLOCK_SLAVE_MS_CHANGE_ERROR_BY_DMA:
     case LMAN_MSG_RFU_FATAL_ERROR:
-        GetLinkmanErrorParams(msg);
+        RfuSetErrorParams(msg);
         RfuSetStatus(RFU_STATUS_FATAL_ERROR, msg);
-        Rfu.unk_cdb = TRUE;
+        gRfu.parentFinished = TRUE;
         break;
     }
 }
 
-void sub_8011404(u8 msg, u8 unused1)
+static void LinkManagerCB_Child(u8 msg, u8 unused1)
 {
     switch (msg)
     {
     case LMAN_MSG_INITIALIZE_COMPLETED:
-        Rfu.state = 6;
+        gRfu.state = RFUSTATE_CHILD_CONNECT;
         break;
     case LMAN_MSG_PARENT_FOUND:
-        Rfu.parentId = lman.param[0];
+        gRfu.parentId = lman.param[0];
         break;
     case LMAN_MSG_SEARCH_PARENT_PERIOD_EXPIRED:
         break;
     case LMAN_MSG_CONNECT_PARENT_SUCCESSED:
-        Rfu.childSlot = lman.param[0];
+        gRfu.childSlot = lman.param[0];
         break;
     case LMAN_MSG_CONNECT_PARENT_FAILED:
         RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, msg);
         break;
     case LMAN_MSG_CHILD_NAME_SEND_COMPLETED:
-        Rfu.state = 11;
-        Rfu.unk_c85 = 0;
-        Rfu.recvStatus = RFU_STATUS_OK;
-        rfu_setRecvBuffer(TYPE_NI, Rfu.childSlot, &Rfu.recvStatus, 1);
-        rfu_setRecvBuffer(TYPE_UNI, Rfu.childSlot, Rfu.unk_c3f, 70);
+        gRfu.state = RFUSTATE_CHILD_TRY_JOIN;
+        gRfu.leaveGroupStatus = RFU_STATUS_OK;
+        gRfu.childRecvStatus = RFU_STATUS_OK;
+        rfu_setRecvBuffer(TYPE_NI, gRfu.childSlot, &gRfu.childRecvStatus, sizeof(gRfu.childRecvStatus));
+        rfu_setRecvBuffer(TYPE_UNI, gRfu.childSlot, gRfu.childRecvQueue, sizeof(gRfu.childRecvQueue));
         break;
     case LMAN_MSG_CHILD_NAME_SEND_FAILED_AND_DISCONNECTED:
         RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, msg);
         break;
     case LMAN_MSG_LINK_LOSS_DETECTED_AND_DISCONNECTED:
-        Rfu.linkLossRecoveryState = 2;
-        if (Rfu.recvStatus == RFU_STATUS_JOIN_GROUP_NO)
+        gRfu.linkLossRecoveryState = 2;
+        if (gRfu.childRecvStatus == RFU_STATUS_JOIN_GROUP_NO)
             break;
     case LMAN_MSG_LINK_RECOVERY_FAILED_AND_DISCONNECTED:
-        if (Rfu.linkLossRecoveryState != 2)
-            Rfu.linkLossRecoveryState = 4;
-        if (Rfu.recvStatus != RFU_STATUS_LEAVE_GROUP)
+        if (gRfu.linkLossRecoveryState != 2)
+            gRfu.linkLossRecoveryState = 4;
+        if (gRfu.childRecvStatus != RFU_STATUS_LEAVE_GROUP)
             RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, msg);
         Debug_PrintString(sASCII_LinkLossDisconnect, 5, 5);
         if (gReceivedRemoteLinkPlayers == 1)
-            GetLinkmanErrorParams(msg);
+            RfuSetErrorParams(msg);
         break;
     case LMAN_MSG_LINK_LOSS_DETECTED_AND_START_RECOVERY:
-        Rfu.linkLossRecoveryState = 1;
+        gRfu.linkLossRecoveryState = 1;
         Debug_PrintString(sASCII_LinkLossRecoveryNow, 5, 5);
         break;
     case LMAN_MSG_LINK_RECOVERY_SUCCESSED:
-        Rfu.linkLossRecoveryState = 3;
-        Rfu.linkRecovered = TRUE;
+        gRfu.linkLossRecoveryState = 3;
+        gRfu.linkRecovered = TRUE;
         break;
-    case 0x34:
+    case 0x34: // ? Not a valid LMAN_MSG value
         break;
     case LMAN_MSG_RFU_POWER_DOWN:
     case LMAN_MSG_MANAGER_STOPPED:
@@ -2240,45 +2314,45 @@ void sub_8011404(u8 msg, u8 unused1)
         break;
     case LMAN_MSG_LMAN_API_ERROR_RETURN:
         RfuSetStatus(RFU_STATUS_FATAL_ERROR, msg);
-        GetLinkmanErrorParams(msg);
-        Rfu.isShuttingDown = TRUE;
+        RfuSetErrorParams(msg);
+        gRfu.isShuttingDown = TRUE;
         break;
     case LMAN_MSG_REQ_API_ERROR:
     case LMAN_MSG_WATCH_DOG_TIMER_ERROR:
     case LMAN_MSG_CLOCK_SLAVE_MS_CHANGE_ERROR_BY_DMA:
     case LMAN_MSG_RFU_FATAL_ERROR:
         RfuSetStatus(RFU_STATUS_FATAL_ERROR, msg);
-        GetLinkmanErrorParams(msg);
-        Rfu.unk_cdb = TRUE;
+        RfuSetErrorParams(msg);
+        gRfu.parentFinished = TRUE;
         break;
     }
 }
 
-static void sub_80115EC(s32 a0)
+static void ParentResetChildRecvMetadata(s32 slot)
 {
     s32 i;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if ((a0 >> i) & 1)
+        if ((slot >> i) & 1)
         {
-            Rfu.unk_cea[i] = 0;
-            Rfu.unk_cee[i] = 0xFF;
+            gRfu.numChildRecvErrors[i] = 0;
+            gRfu.childRecvIds[i] = 0xFF;
         }
     }
 }
 
-static u8 GetNewChildrenInUnionRoomChat(s32 a0)
+static u8 GetNewChildrenInUnionRoomChat(s32 emptySlotMask)
 {
     u8 ret = 0;
     u8 i;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if ((a0 >> i) & 1)
+        if ((emptySlotMask >> i) & 1)
         {
-            struct GFtgtGname *structPtr = (void *)gRfuLinkStatus->partner[i].gname;
-            if (structPtr->activity == (ACTIVITY_CHAT | IN_UNION_ROOM))
+            struct RfuGameData *data = (void *)gRfuLinkStatus->partner[i].gname;
+            if (data->activity == (ACTIVITY_CHAT | IN_UNION_ROOM))
                 ret |= (1 << i);
         }
     }
@@ -2286,78 +2360,78 @@ static u8 GetNewChildrenInUnionRoomChat(s32 a0)
     return ret;
 }
 
-static void sub_8011674(u8 msg, u8 paramCount)
+static void LinkManagerCB_UnionRoom(u8 msg, u8 paramCount)
 {
-    u8 r1;
+    u8 acceptSlot;
 
     switch (msg)
     {
     case LMAN_MSG_INITIALIZE_COMPLETED:
-        Rfu.state = 17;
+        gRfu.state = RFUSTATE_UR_CONNECT;
         break;
     case LMAN_MSG_NEW_CHILD_CONNECT_DETECTED:
         RfuSetStatus(RFU_STATUS_NEW_CHILD_DETECTED, 0);
         break;
     case LMAN_MSG_NEW_CHILD_CONNECT_ACCEPTED:
-        if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM) && Rfu.unk_cd9 == 0)
+        if (GetHostRfuGameData()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM) && !gRfu.stopNewConnections)
         {
-            u8 idx = GetNewChildrenInUnionRoomChat(lman.param[0]);
-            if (idx != 0)
+            u8 newChildren = GetNewChildrenInUnionRoomChat(lman.param[0]);
+            if (newChildren != 0)
             {
-                r1 = 1 << sub_800E87C(idx);
-                if (Rfu.unk_ce6 == 0 && Rfu.unk_ce8 == 0)
+                acceptSlot = 1 << Rfu_GetIndexOfNewestChild(newChildren);
+                if (gRfu.newChildQueue == 0 && !gRfu.playerExchangeActive)
                 {
-                    Rfu.unk_ce5 = r1;
-                    Rfu.unk_ce6 |= (r1 ^ idx);
-                    Rfu.unk_ce8 = TRUE;
+                    gRfu.nextChildBits = acceptSlot;
+                    gRfu.newChildQueue |= (acceptSlot ^ newChildren);
+                    gRfu.playerExchangeActive = TRUE;
                 }
                 else
                 {
-                    Rfu.unk_ce6 |= idx;
+                    gRfu.newChildQueue |= newChildren;
                 }
             }
-            if (idx != lman.param[0])
+            if (newChildren != lman.param[0])
             {
-                Rfu.unk_ce3 |= (idx ^ lman.param[0]);
-                Rfu.unk_ce4 = 2;
+                gRfu.disconnectSlots |= (newChildren ^ lman.param[0]);
+                gRfu.disconnectMode = RFU_DISCONNECT_NORMAL;
             }
         }
-        else if (GetHostRFUtgtGname()->activity == (ACTIVITY_PLYRTALK | IN_UNION_ROOM))
+        else if (GetHostRfuGameData()->activity == (ACTIVITY_PLYRTALK | IN_UNION_ROOM))
         {
             rfu_REQ_disconnect(lman.acceptSlot_flag);
             rfu_waitREQComplete();
         }
-        sub_80115EC(lman.param[0]);
+        ParentResetChildRecvMetadata(lman.param[0]);
         break;
     case LMAN_MSG_NEW_CHILD_CONNECT_REJECTED:
         break;
     case LMAN_MSG_SEARCH_CHILD_PERIOD_EXPIRED:
         break;
     case LMAN_MSG_END_WAIT_CHILD_NAME:
-        if (GetHostRFUtgtGname()->activity != (ACTIVITY_CHAT | IN_UNION_ROOM) && lman.acceptCount > 1)
+        if (GetHostRfuGameData()->activity != (ACTIVITY_CHAT | IN_UNION_ROOM) && lman.acceptCount > 1)
         {
-            r1 = 1 << sub_800E87C(lman.param[0]);
-            rfu_REQ_disconnect(lman.acceptSlot_flag ^ r1);
+            acceptSlot = 1 << Rfu_GetIndexOfNewestChild(lman.param[0]);
+            rfu_REQ_disconnect(lman.acceptSlot_flag ^ acceptSlot);
             rfu_waitREQComplete();
         }
-        if (Rfu.state == 15)
-            Rfu.state = 16;
+        if (gRfu.state == RFUSTATE_UR_STOP_MANAGER_END)
+            gRfu.state = RFUSTATE_UR_FINALIZE;
         break;
         break;
     case LMAN_MSG_PARENT_FOUND:
-        Rfu.parentId = lman.param[0];
+        gRfu.parentId = lman.param[0];
         break;
     case LMAN_MSG_SEARCH_PARENT_PERIOD_EXPIRED:
         break;
     case LMAN_MSG_CONNECT_PARENT_SUCCESSED:
-        Rfu.childSlot = lman.param[0];
+        gRfu.childSlot = lman.param[0];
         break;
     case LMAN_MSG_CONNECT_PARENT_FAILED:
-        Rfu.state = 18;
-        if (Rfu.unk_ccf < 2)
+        gRfu.state = RFUSTATE_UR_CONNECT_END;
+        if (gRfu.connectParentFailures < 2)
         {
-            Rfu.unk_ccf++;
-            CreateTask(sub_801209C, 2);
+            gRfu.connectParentFailures++;
+            CreateTask(Task_TryConnectToUnionRoomParent, 2);
         }
         else
         {
@@ -2365,51 +2439,53 @@ static void sub_8011674(u8 msg, u8 paramCount)
         }
         break;
     case LMAN_MSG_CHILD_NAME_SEND_COMPLETED:
-        Rfu.state = 13;
+        gRfu.state = RFUSTATE_UR_PLAYER_EXCHANGE;
         RfuSetStatus(RFU_STATUS_CHILD_SEND_COMPLETE, 0);
-        rfu_setRecvBuffer(TYPE_UNI, Rfu.childSlot, Rfu.unk_c3f, 70);
+        rfu_setRecvBuffer(TYPE_UNI, gRfu.childSlot, gRfu.childRecvQueue, sizeof(gRfu.childRecvQueue));
         break;
     case LMAN_MSG_CHILD_NAME_SEND_FAILED_AND_DISCONNECTED:
         RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, msg);
         break;
     case LMAN_MSG_LINK_LOSS_DETECTED_AND_START_RECOVERY:
         if (lman.acceptSlot_flag & lman.param[0])
-            Rfu.linkLossRecoveryState = 1;
+            gRfu.linkLossRecoveryState = 1;
         break;
     case LMAN_MSG_LINK_RECOVERY_SUCCESSED:
-        Rfu.linkLossRecoveryState = 3;
+        gRfu.linkLossRecoveryState = 3;
         if (gRfuLinkStatus->parentChild == MODE_CHILD)
-            Rfu.linkRecovered = TRUE;
+            gRfu.linkRecovered = TRUE;
         break;
     case LMAN_MSG_LINK_LOSS_DETECTED_AND_DISCONNECTED:
-        Rfu.linkLossRecoveryState = 2;
+        gRfu.linkLossRecoveryState = 2;
     case LMAN_MSG_LINK_RECOVERY_FAILED_AND_DISCONNECTED:
-        if (Rfu.linkLossRecoveryState != 2)
-            Rfu.linkLossRecoveryState = 4;
-        if (Rfu.parentChild == MODE_PARENT)
+        if (gRfu.linkLossRecoveryState != 2)
+            gRfu.linkLossRecoveryState = 4;
+        if (gRfu.parentChild == MODE_PARENT)
         {
             if (gReceivedRemoteLinkPlayers == 1)
             {
-                Rfu.unk_ce2 &= ~(lman.param[0]);
-                if (Rfu.unk_ce2 == 0)
-                    GetLinkmanErrorParams(msg);
+                gRfu.parentSlots &= ~(lman.param[0]);
+                if (gRfu.parentSlots == 0)
+                    RfuSetErrorParams(msg);
                 else
-                    sub_80111FC();
+                    StartDisconnectNewChild();
             }
         }
-        else if (Rfu.unk_ce4 != 2 && gReceivedRemoteLinkPlayers == 1)
+        else if (gRfu.disconnectMode != RFU_DISCONNECT_NORMAL && gReceivedRemoteLinkPlayers == 1)
         {
-            GetLinkmanErrorParams(msg);
-            rfu_LMAN_stopManager(0);
+            RfuSetErrorParams(msg);
+            rfu_LMAN_stopManager(FALSE);
         }
 
-        if (gRfuLinkStatus->parentChild == MODE_NEUTRAL && lman.pcswitch_flag == 0 && FuncIsActiveTask(Task_LinkRfu_UnionRoomListen) == TRUE)
-            Rfu.state = 17;
+        if (gRfuLinkStatus->parentChild == MODE_NEUTRAL 
+            && !lman.pcswitch_flag
+            && FuncIsActiveTask(Task_UnionRoomListen) == TRUE)
+            gRfu.state = RFUSTATE_UR_CONNECT;
 
         RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, msg);
         break;
     case LMAN_MSG_LINK_DISCONNECTED_BY_USER:
-        Rfu.unk_ce3 = 0;
+        gRfu.disconnectSlots = 0;
         break;
     case LMAN_MSG_RFU_POWER_DOWN:
     case LMAN_MSG_MANAGER_STOPPED:
@@ -2417,34 +2493,34 @@ static void sub_8011674(u8 msg, u8 paramCount)
         break;
     case LMAN_MSG_LMAN_API_ERROR_RETURN:
         RfuSetStatus(RFU_STATUS_FATAL_ERROR, msg);
-        GetLinkmanErrorParams(msg);
-        Rfu.isShuttingDown = TRUE;
+        RfuSetErrorParams(msg);
+        gRfu.isShuttingDown = TRUE;
         break;
     case LMAN_MSG_REQ_API_ERROR:
     case LMAN_MSG_WATCH_DOG_TIMER_ERROR:
     case LMAN_MSG_CLOCK_SLAVE_MS_CHANGE_ERROR_BY_DMA:
     case LMAN_MSG_RFU_FATAL_ERROR:
-        GetLinkmanErrorParams(msg);
+        RfuSetErrorParams(msg);
         RfuSetStatus(RFU_STATUS_FATAL_ERROR, msg);
-        Rfu.unk_cdb = FALSE;
+        gRfu.parentFinished = FALSE;
         break;
     }
 }
 
-void sub_8011A50(void)
+void RfuSetNormalDisconnectMode(void)
 {
-    Rfu.unk_ce4 = 2;
+    gRfu.disconnectMode = RFU_DISCONNECT_NORMAL;
 }
 
-void RfuSetStatus(u8 status, u16 msg)
+void RfuSetStatus(u8 status, u16 errorInfo)
 {
-    Rfu.status = status;
-    Rfu.linkmanMsg = msg;
+    gRfu.status = status;
+    gRfu.errorInfo = errorInfo;
 }
 
 u8 RfuGetStatus(void)
 {
-    return Rfu.status;
+    return gRfu.status;
 }
 
 bool32 RfuHasErrored(void)
@@ -2457,14 +2533,14 @@ bool32 RfuHasErrored(void)
         return FALSE;
 }
 
-bool32 sub_8011A9C(void)
+bool32 Rfu_IsPlayerExchangeActive(void)
 {
-    return Rfu.unk_ce8;
+    return gRfu.playerExchangeActive;
 }
 
 bool8 Rfu_IsMaster(void)
 {
-    return Rfu.parentChild;
+    return gRfu.parentChild;
 }
 
 void RfuVSync(void)
@@ -2477,14 +2553,15 @@ void ClearRecvCommands(void)
     CpuFill32(0, gRecvCmds, sizeof(gRecvCmds));
 }
 
-static void sub_8011AE8(void)
+static void VBlank_RfuIdle(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-static void sub_8011AFC(void)
+// Unused
+static void Debug_RfuIdle(void)
 {
     s32 i;
 
@@ -2492,14 +2569,14 @@ static void sub_8011AFC(void)
     FreeAllSpritePalettes();
     ResetTasks();
     ResetPaletteFade();
-    SetVBlankCallback(sub_8011AE8);
+    SetVBlankCallback(VBlank_RfuIdle);
     if (IsWirelessAdapterConnected())
     {
         gLinkType = LINKTYPE_TRADE;
         SetWirelessCommType1();
         OpenLink();
         SeedRng(gMain.vblankCounter2);
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < TRAINER_ID_LENGTH; i++)
             gSaveBlock2Ptr->playerTrainerId[i] = Random() % 256;
 
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_1D_MAP);
@@ -2508,28 +2585,28 @@ static void sub_8011AFC(void)
         BuildOamBuffer();
         UpdatePaletteFade();
         CreateTask_RfuIdle();
-        SetMainCallback2(sub_8011BF8);
+        SetMainCallback2(CB2_RfuIdle);
     }
 }
 
 bool32 IsUnionRoomListenTaskActive(void)
 {
-    return FuncIsActiveTask(Task_LinkRfu_UnionRoomListen);
+    return FuncIsActiveTask(Task_UnionRoomListen);
 }
 
 void CreateTask_RfuIdle(void)
 {
     if (!FuncIsActiveTask(Task_Idle))
-        Rfu.idleTaskId = CreateTask(Task_Idle, 0);
+        gRfu.idleTaskId = CreateTask(Task_Idle, 0);
 }
 
 void DestroyTask_RfuIdle(void)
 {
      if (FuncIsActiveTask(Task_Idle) == TRUE)
-        DestroyTask(Rfu.idleTaskId);
+        DestroyTask(gRfu.idleTaskId);
 }
 
-static void sub_8011BF8(void)
+static void CB2_RfuIdle(void)
 {
     RunTasks();
     AnimateSprites();
@@ -2537,33 +2614,33 @@ static void sub_8011BF8(void)
     UpdatePaletteFade();
 }
 
-void InitializeRfuLinkManager_LinkLeader(u32 a0)
+void InitializeRfuLinkManager_LinkLeader(u32 groupMax)
 {
-    Rfu.parentChild = MODE_PARENT;
-    CopyPlayerNameToUnameBuffer();
-    rfu_LMAN_initializeManager(sub_801120C, NULL);
+    gRfu.parentChild = MODE_PARENT;
+    SetHostRfuUsername();
+    rfu_LMAN_initializeManager(LinkManagerCB_Parent, NULL);
     sRfuReqConfig = sRfuReqConfigTemplate;
-    sRfuReqConfig.availSlot_flag = sAvailSlots[a0 - 1];
-    CreateTask_LinkLeaderSearchForChildren();
+    sRfuReqConfig.availSlot_flag = sAvailSlots[groupMax - 1];
+    CreateTask_ParentSearchForChildren();
 }
 
 void InitializeRfuLinkManager_JoinGroup(void)
 {
-    Rfu.parentChild = MODE_CHILD;
-    CopyPlayerNameToUnameBuffer();
-    rfu_LMAN_initializeManager(sub_8011404, sub_800ED34);
-    CreateTask_JoinGroupSearchForParent();
+    gRfu.parentChild = MODE_CHILD;
+    SetHostRfuUsername();
+    rfu_LMAN_initializeManager(LinkManagerCB_Child, MSCCallback_Child);
+    CreateTask_ChildSearchForParent();
 }
 
 void InitializeRfuLinkManager_EnterUnionRoom(void)
 {
-    Rfu.parentChild = 2;
-    CopyPlayerNameToUnameBuffer();
-    rfu_LMAN_initializeManager(sub_8011674, NULL);
+    gRfu.parentChild = MODE_P_C_SWITCH;
+    SetHostRfuUsername();
+    rfu_LMAN_initializeManager(LinkManagerCB_UnionRoom, NULL);
     sRfuReqConfig = sRfuReqConfigTemplate;
     sRfuReqConfig.linkRecovery_enable = 0;
     sRfuReqConfig.linkRecovery_period = 600;
-    Rfu.searchTaskId = CreateTask(Task_LinkRfu_UnionRoomListen, 1);
+    gRfu.searchTaskId = CreateTask(Task_UnionRoomListen, 1);
 }
 
 static u16 ReadU16(const void *ptr)
@@ -2597,10 +2674,10 @@ static void RfuReqDisconnectSlot(u32 slot)
 {
     rfu_REQ_disconnect(slot);
     rfu_waitREQComplete();
-    Rfu.unk_ce2 &= ~(slot);
-    rfu_clearSlot(1, Rfu.unk_cda);
-    rfu_UNI_setSendData(Rfu.unk_ce2, Rfu.recvCmds, 70);
-    Rfu.unk_cda = sub_800E87C(Rfu.unk_ce2);
+    gRfu.parentSlots &= ~slot;
+    rfu_clearSlot(1, gRfu.parentSendSlot);
+    rfu_UNI_setSendData(gRfu.parentSlots, gRfu.recvCmds, sizeof(gRfu.recvCmds));
+    gRfu.parentSendSlot = Rfu_GetIndexOfNewestChild(gRfu.parentSlots);
 }
 
 void RequestDisconnectSlotByTrainerNameAndId(const u8 *name, u16 id)
@@ -2610,132 +2687,147 @@ void RequestDisconnectSlotByTrainerNameAndId(const u8 *name, u16 id)
         RfuReqDisconnectSlot(1 << var);
 }
 
-void sub_8011DE0(u32 a0)
+void Rfu_DisconnectPlayerById(u32 playerIdx)
 {
-    if (a0 != 0)
+    if (playerIdx != 0)
     {
         s32 i;
-        u8 var = 0;
+        u8 toDisconnect = 0;
 
         for (i = 0; i < RFU_CHILD_MAX; i++)
         {
-            if (Rfu.linkPlayerIdx[i] == a0 && (Rfu.unk_ce2 >> i) & 1)
-                var |= 1 << i;
+            if (gRfu.linkPlayerIdx[i] == playerIdx && (gRfu.parentSlots >> i) & 1)
+                toDisconnect |= 1 << i;
         }
-        if (var)
-            sub_8011E94(var, 2);
+        if (toDisconnect)
+            SendDisconnectCommand(toDisconnect, RFU_DISCONNECT_NORMAL);
     }
 }
 
-static void sub_8011E2C(u8 taskId)
+#define tDisconnectPlayers data[0]
+#define tDisconnectMode    data[1]
+
+static void Task_SendDisconnectCommand(u8 taskId)
 {
-    if (gSendCmd[0] == 0 && Rfu.unk_ce8 == 0)
+    if (gSendCmd[0] == 0 && !gRfu.playerExchangeActive)
     {
-        RfuPrepareSendBuffer(RFUCMD_0xED00);
-        gSendCmd[1] = gTasks[taskId].data[0];
-        gSendCmd[2] = gTasks[taskId].data[1];
-        Rfu.playerCount -= sUnknown_082ED695[gTasks[taskId].data[0]];
-        gSendCmd[3] = Rfu.playerCount;
+        RfuPrepareSendBuffer(RFUCMD_DISCONNECT);
+        gSendCmd[1] = gTasks[taskId].tDisconnectPlayers;
+        gSendCmd[2] = gTasks[taskId].tDisconnectMode;
+        gRfu.playerCount -= sPlayerBitsToCount[gTasks[taskId].tDisconnectPlayers];
+        gSendCmd[3] = gRfu.playerCount;
         DestroyTask(taskId);
     }
 }
 
-static void sub_8011E94(u32 a0, u32 a1)
+static void SendDisconnectCommand(u32 playersToDisconnect, u32 disconnectMode)
 {
-    u8 taskId = FindTaskIdByFunc(sub_8011E2C);
+    u8 taskId = FindTaskIdByFunc(Task_SendDisconnectCommand);
     if (taskId == TASK_NONE)
     {
-        taskId = CreateTask(sub_8011E2C, 5);
-        gTasks[taskId].data[0] = a0;
+        taskId = CreateTask(Task_SendDisconnectCommand, 5);
+        gTasks[taskId].tDisconnectPlayers = playersToDisconnect;
     }
     else
     {
-        gTasks[taskId].data[0] |= a0;
+        // Task is already active, just add the new players to disconnect
+        gTasks[taskId].tDisconnectPlayers |= playersToDisconnect;
     }
 
-    gTasks[taskId].data[1] = a1;
+    gTasks[taskId].tDisconnectMode = disconnectMode;
 }
+
+#undef tDisconnectMode
+
+#define tTime data[15]
 
 static void Task_RfuReconnectWithParent(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (sub_800EE94())
+    if (CanTryReconnectParent())
     {
         u8 id = GetPartnerIndexByNameAndTrainerID((u8*)data, ReadU16(&data[8]));
         if (id != 0xFF)
         {
             if (gRfuLinkStatus->partner[id].slot != 0xFF)
             {
-                Rfu.unk_c3d = id;
-                if (IsParentSuccessfullyReconnected())
+                gRfu.reconnectParentId = id;
+                if (TryReconnectParent())
                     DestroyTask(taskId);
             }
-            else if (GetHostRFUtgtGname()->activity == ACTIVITY_WONDER_CARD2 
-                  || GetHostRFUtgtGname()->activity == ACTIVITY_WONDER_NEWS2)
+            else if (GetHostRfuGameData()->activity == ACTIVITY_WONDER_CARD
+                  || GetHostRfuGameData()->activity == ACTIVITY_WONDER_NEWS)
             {
-                data[15]++;
+                tTime++;
             }
             else
             {
-                RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, 0x7000);
+                // Error, unable to reconnect to parent
+                RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, F_RFU_ERROR_5 | F_RFU_ERROR_6 | F_RFU_ERROR_7);
                 DestroyTask(taskId);
             }
         }
         else
         {
-            data[15]++;
-            Rfu.unk_c3d = id;
+            tTime++;
+            gRfu.reconnectParentId = id;
         }
     }
     else
     {
-        data[15]++;
+        tTime++;
     }
 
-    if (data[15] > 240)
+    if (tTime > 240)
     {
-        RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, 0x7000);
+        // Timeout error
+        RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, F_RFU_ERROR_5 | F_RFU_ERROR_6 | F_RFU_ERROR_7);
         DestroyTask(taskId);
     }
 }
+
+#undef tTime
 
 void CreateTask_RfuReconnectWithParent(const u8 *name, u16 trainerId)
 {
     u8 taskId;
     s16 *data;
 
-    Rfu.status = RFU_STATUS_OK;
+    gRfu.status = RFU_STATUS_OK;
     taskId = CreateTask(Task_RfuReconnectWithParent, 3);
     data = gTasks[taskId].data;
     StringCopy((u8*)(data), name);
     data[8] = trainerId;
 }
 
-static bool32 ShouldRejectPartnerConnectionBasedOnActivity(s16 activity, struct GFtgtGname *partnerGname)
+static bool32 IsPartnerActivityIncompatible(s16 activity, struct RfuGameData *partner)
 {
-    if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM))
+    if (GetHostRfuGameData()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM))
     {
-        if (partnerGname->activity != (ACTIVITY_CHAT | IN_UNION_ROOM))
+        // Host trying to chat, but partner isn't
+        if (partner->activity != (ACTIVITY_CHAT | IN_UNION_ROOM))
             return TRUE;
     }
-    else if (partnerGname->activity != IN_UNION_ROOM)
+    else if (partner->activity != IN_UNION_ROOM)
     {
+        // Partner not in union room
         return TRUE;
     }
     else if (activity == (ACTIVITY_TRADE | IN_UNION_ROOM))
     {
-        struct GFtgtGname *tradeGname = &Rfu.unk_10A;
-        if (tradeGname->species == SPECIES_EGG)
+        // Verify that the trade offered hasn't changed 
+        struct RfuGameData *original = &gRfu.parent;
+        if (original->tradeSpecies == SPECIES_EGG)
         {
-            if (partnerGname->species == tradeGname->species)
+            if (partner->tradeSpecies == original->tradeSpecies)
                 return FALSE;
             else
                 return TRUE;
         }
-        else if (partnerGname->species != tradeGname->species
-                 || partnerGname->level != tradeGname->level
-                 || partnerGname->type != tradeGname->type)
+        else if (partner->tradeSpecies != original->tradeSpecies
+                 || partner->tradeLevel != original->tradeLevel
+                 || partner->tradeType != original->tradeType)
         {
             return TRUE;
         }
@@ -2744,79 +2836,91 @@ static bool32 ShouldRejectPartnerConnectionBasedOnActivity(s16 activity, struct 
     return FALSE;
 }
 
-static void sub_801209C(u8 taskId)
+#define tTime     data[0]
+#define tActivity data[1]
+
+static void Task_TryConnectToUnionRoomParent(u8 taskId)
 {
-    if (Rfu.status == RFU_STATUS_NEW_CHILD_DETECTED)
+    // Stop task if player is the new parent
+    if (gRfu.status == RFU_STATUS_NEW_CHILD_DETECTED)
         DestroyTask(taskId);
 
-    if (++gTasks[taskId].data[0] > 300)
+    if (++gTasks[taskId].tTime > 300)
     {
-        RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, 0x7000);
+        // Timeout error
+        RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, F_RFU_ERROR_5 | F_RFU_ERROR_6 | F_RFU_ERROR_7);
         DestroyTask(taskId);
     }
 
-    if (Rfu.parentId != 0 && lman.parent_child == 0)
+    // Check if parent should be searched for
+    if (gRfu.parentId != 0 && lman.parent_child == MODE_CHILD)
     {
-        u16 trainerId = ReadU16(Rfu.unk_10A.unk_00.playerTrainerId);
-        u8 id = GetPartnerIndexByNameAndTrainerID(Rfu.playerName, trainerId);
+        // Search for parent
+        u16 trainerId = ReadU16(gRfu.parent.compatibility.playerTrainerId);
+        u8 id = GetPartnerIndexByNameAndTrainerID(gRfu.parentName, trainerId);
         if (id != 0xFF)
         {
-            if (!ShouldRejectPartnerConnectionBasedOnActivity(gTasks[taskId].data[1], (void *)gRfuLinkStatus->partner[id].gname))
+            // Parent found, try to connect
+            if (!IsPartnerActivityIncompatible(gTasks[taskId].tActivity, (void *)gRfuLinkStatus->partner[id].gname))
             {
-                if (gRfuLinkStatus->partner[id].slot != 0xFF && !rfu_LMAN_CHILD_connectParent(gRfuLinkStatus->partner[id].id, 0x5A))
+                if (gRfuLinkStatus->partner[id].slot != 0xFF && !rfu_LMAN_CHILD_connectParent(gRfuLinkStatus->partner[id].id, 90))
                 {
-                    Rfu.state = 0xA;
+                    // Succesfully connected to parent
+                    gRfu.state = RFUSTATE_CONNECTED;
                     DestroyTask(taskId);
                 }
             }
             else
             {
-                RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, 0x7000);
+                // Incompatible partner activity
+                RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, F_RFU_ERROR_5 | F_RFU_ERROR_6 | F_RFU_ERROR_7);
                 DestroyTask(taskId);
             }
         }
     }
 }
 
-void sub_8012188(const u8 *name, struct GFtgtGname *structPtr, u8 activity)
+void TryConnectToUnionRoomParent(const u8 *name, struct RfuGameData *parent, u8 activity)
 {
-    u8 taskId, taskId2;
+    u8 taskId, listenTaskId;
 
-    Rfu.unk_ccf = 0;
-    Rfu.status = RFU_STATUS_OK;
-    StringCopy(Rfu.playerName, name);
-    memcpy(&Rfu.unk_10A, structPtr, RFU_GAME_NAME_LENGTH);
+    gRfu.connectParentFailures = 0;
+    gRfu.status = RFU_STATUS_OK;
+    StringCopy(gRfu.parentName, name);
+    memcpy(&gRfu.parent, parent, RFU_GAME_NAME_LENGTH);
     rfu_LMAN_forceChangeSP();
-    taskId = CreateTask(sub_801209C, 2);
-    gTasks[taskId].data[1] = activity;
-    taskId2 = FindTaskIdByFunc(Task_LinkRfu_UnionRoomListen);
+    taskId = CreateTask(Task_TryConnectToUnionRoomParent, 2);
+    gTasks[taskId].tActivity = activity;
+    listenTaskId = FindTaskIdByFunc(Task_UnionRoomListen);
     if (activity == (ACTIVITY_CHAT | IN_UNION_ROOM))
     {
-        if (taskId2 != TASK_NONE)
-            gTasks[taskId2].data[7] = 1;
+        if (listenTaskId != TASK_NONE)
+            gTasks[listenTaskId].tConnectingForChat = TRUE;
     }
     else
     {
-        if (taskId2 != TASK_NONE)
-            gTasks[taskId2].data[7] = 0;
+        if (listenTaskId != TASK_NONE)
+            gTasks[listenTaskId].tConnectingForChat = FALSE;
     }
 }
 
 bool8 IsRfuRecoveringFromLinkLoss(void)
 {
-    if (Rfu.linkLossRecoveryState == 1)
+    if (gRfu.linkLossRecoveryState == 1)
         return TRUE;
     else
         return FALSE;
 }
 
-bool32 sub_8012240(void)
+bool32 IsRfuCommunicatingWithAllChildren(void)
 {
     s32 i;
-
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if ((lman.acceptSlot_flag >> i) & 1 && Rfu.partnerSendStatuses[i] == RFU_STATUS_OK)
+        // RFU_STATUS_OK is the default status.
+        // If any connected child is receiving a status other
+        // than OK, then the parent is communicating with them
+        if ((lman.acceptSlot_flag >> i) & 1 && gRfu.partnerSendStatuses[i] == RFU_STATUS_OK)
             return FALSE;
     }
 
@@ -2826,19 +2930,17 @@ bool32 sub_8012240(void)
 static void Debug_PrintEmpty(void)
 {
     s32 i;
-
     for (i = 0; i < 20; i++)
-        Debug_PrintString(sASCII_30Commas, 0, i);
+        Debug_PrintString(sASCII_30Spaces, 0, i);
 }
 
 static void Debug_PrintStatus(void)
 {
     s32 i, j;
-
-    Debug_PrintNum(GetBlockReceivedStatus(), 0x1C, 0x13, 2);
-    Debug_PrintNum(gRfuLinkStatus->connSlotFlag, 0x14, 1, 1);
-    Debug_PrintNum(gRfuLinkStatus->linkLossSlotFlag, 0x17, 1, 1);
-    if (Rfu.parentChild == MODE_PARENT)
+    Debug_PrintNum(GetBlockReceivedStatus(), 28, 19, 2);
+    Debug_PrintNum(gRfuLinkStatus->connSlotFlag, 20, 1, 1);
+    Debug_PrintNum(gRfuLinkStatus->linkLossSlotFlag, 23, 1, 1);
+    if (gRfu.parentChild == MODE_PARENT)
     {
         for (i = 0; i < RFU_CHILD_MAX; i++)
         {
@@ -2846,29 +2948,27 @@ static void Debug_PrintStatus(void)
             {
                 Debug_PrintNum(gRfuLinkStatus->partner[i].serialNo, 1, i + 3, 4);
                 Debug_PrintString((void*)gRfuLinkStatus->partner[i].gname, 6, i + 3);
-                Debug_PrintString(gRfuLinkStatus->partner[i].uname, 0x16, i + 3);
+                Debug_PrintString(gRfuLinkStatus->partner[i].uname, 22, i + 3);
             }
         }
         for (i = 0; i < RFU_CHILD_MAX; i++)
         {
-            for (j = 0; j < (int)ARRAY_COUNT(Rfu.unk_14[0]); j++)
-            {
-                Debug_PrintNum(Rfu.unk_14[i][j], j * 2, i + 11, 2);
-            }
+            for (j = 0; j < COMM_SLOT_LENGTH; j++)
+                Debug_PrintNum(gRfu.childRecvBuffer[i][j], j * 2, i + 11, 2);
         }
-        Debug_PrintString(sASCII_NowSlot, 1, 0xF);
+        Debug_PrintString(sASCII_NowSlot, 1, 15);
     }
     else if (gRfuLinkStatus->connSlotFlag != 0 && gRfuLinkStatus->getNameFlag != 0)
     {
         for (i = 0; i < RFU_CHILD_MAX; i++)
         {
             Debug_PrintNum(0, 1, i + 3, 4);
-            Debug_PrintString(sASCII_15Commas, 6, i + 3);
-            Debug_PrintString(sASCII_8Commas, 0x16, i + 3);
+            Debug_PrintString(sASCII_15Spaces, 6, i + 3);
+            Debug_PrintString(sASCII_8Spaces, 22, i + 3);
         }
-        Debug_PrintNum(gRfuLinkStatus->partner[Rfu.childSlot].serialNo, 1, 3, 4);
-        Debug_PrintString((void*)gRfuLinkStatus->partner[Rfu.childSlot].gname, 6, 3);
-        Debug_PrintString(gRfuLinkStatus->partner[Rfu.childSlot].uname, 0x16, 3);
+        Debug_PrintNum(gRfuLinkStatus->partner[gRfu.childSlot].serialNo, 1, 3, 4);
+        Debug_PrintString((void*)gRfuLinkStatus->partner[gRfu.childSlot].gname, 6, 3);
+        Debug_PrintString(gRfuLinkStatus->partner[gRfu.childSlot].uname, 22, 3);
     }
     else
     {
@@ -2878,26 +2978,26 @@ static void Debug_PrintStatus(void)
             {
                 Debug_PrintNum(gRfuLinkStatus->partner[i].serialNo, 1, i + 3, 4);
                 Debug_PrintNum(gRfuLinkStatus->partner[i].id, 6, i + 3, 4);
-                Debug_PrintString(gRfuLinkStatus->partner[i].uname, 0x16, i + 3);
+                Debug_PrintString(gRfuLinkStatus->partner[i].uname, 22, i + 3);
             }
         }
         for (; i < RFU_CHILD_MAX; i++)
         {
             Debug_PrintNum(0, 1, i + 3, 4);
-            Debug_PrintString(sASCII_15Commas, 6, i + 3);
-            Debug_PrintString(sASCII_8Commas, 0x16, i + 3);
+            Debug_PrintString(sASCII_15Spaces, 6, i + 3);
+            Debug_PrintString(sASCII_8Spaces, 22, i + 3);
         }
     }
 }
 
 static u32 GetRfuSendQueueLength(void)
 {
-    return Rfu.sendQueue.count;
+    return gRfu.sendQueue.count;
 }
 
 u32 GetRfuRecvQueueLength(void)
 {
-    return Rfu.recvQueue.count;
+    return gRfu.recvQueue.count;
 }
 
 static void Task_Idle(u8 taskId)

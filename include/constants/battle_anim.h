@@ -395,6 +395,7 @@
 #define ANIM_TAG_OMEGA_SYMBOL               (ANIM_SPRITES_START + 383)
 #define ANIM_TAG_PRIMAL_PARTICLES           (ANIM_SPRITES_START + 384)
 #define ANIM_TAG_STEEL_BEAM                 (ANIM_SPRITES_START + 385)
+#define ANIM_TAG_POLTERGEIST                (ANIM_SPRITES_START + 386)
 
 // battlers
 #define ANIM_ATTACKER    0
@@ -417,7 +418,7 @@
 #define SOUND_PAN_TARGET    63
 
 // move background ids
-#define BG_DARK_ 0 // the same as BG_DARK but is unused
+#define BG_NONE 0 // the same as BG_DARK but is unused
 #define BG_DARK 1
 #define BG_GHOST 2
 #define BG_PSYCHIC 3
@@ -441,9 +442,9 @@
 #define BG_FISSURE 21
 #define BG_BUG_OPPONENT 22
 #define BG_BUG_PLAYER 23
-#define BG_SOLARBEAM_OPPONENT 24
-#define BG_SOLARBEAM_PLAYER 25
-#define BG_SOLARBEAM_CONTESTS 26
+#define BG_SOLAR_BEAM_OPPONENT 24
+#define BG_SOLAR_BEAM_PLAYER 25
+#define BG_SOLAR_BEAM_CONTESTS 26
 #define BG_MAGMA_STORM 27
 #define BG_GIGA_IMPACT_OPPONENT 28
 #define BG_GIGA_IMPACT_PLAYER 29
@@ -453,51 +454,50 @@
 #define BG_SPACIAL_REND_ON_OPPONENT 33
 #define BG_SPACIAL_REND_ON_PLAYER 34
 #define BG_DARK_VOID 35
-
-#define BG_WATER                                36
-#define BG_NIGHTMARE                            37
-#define BG_LEAF_STORM                           38
-#define BG_FIRE                                 39
-#define BG_FIRE_2                               40
-#define BG_WATER_2                              41
-#define BG_POISON                               42
-#define BG_AEROBLAST                            43
-#define BG_HURRICANE                            44  
-#define BG_ELECTRIC_TERRAIN                     45
-#define BG_GRASSY_TERRAIN                       46
-#define BG_MISTY_TERRAIN                        47
-#define BG_PSYCHIC_TERRAIN                      48
-#define BG_FOCUS_BLAST                          49
-#define BG_GUNK_SHOT                            50
-#define BG_HYDRO_CANNON                         51
-#define BG_WONDER_ROOM                          52
-#define BG_MAGIC_ROOM                           53
-#define BG_HYPERSPACE_FURY                      54
-#define BG_BOLT_STRIKE                          55
-#define BG_ZMOVE_ACTIVATE                       56
-#define BG_TECTONIC_RAGE                        57
-#define BG_BLUE_SKY_DAY                         58
-#define BG_BLUE_SKY_AFTERNOON                   59
-#define BG_BLUE_SKY_NIGHT                       60
-#define BG_ZMOVE_MOUNTAIN                       61
-#define BG_NEVERENDING_NIGHTMARE                62
-#define BG_WATER_PULSE                          63
-#define BG_INFERNO_OVERDRIVE                    64
-#define BG_BLOOM_DOOM                           65
-#define BG_SHATTERED_PSYCHE                     66
-#define BG_TWINKLE_TACKLE                       67
-#define BG_BLACKHOLE_ECLIPSE                    68
-#define BG_SOULSTEALING_7STAR_STRIKE            69
-#define BG_MALICIOUS_MOONSAULT                  70
-#define BG_CLANGOROUS_SOULBLAZE                 71
-#define BG_SNUGGLE_FOREVER                      72
-#define BG_MAX_LIGHTNING                        73
-#define BG_GARBAGE_FALLS                        74
-#define BG_HYPER_BEAM                           75
-#define BG_DYNAMAX_CANNON                       76
-#define BG_AURA_SPHERE                          77
-#define BG_STEEL_BEAM_OPPONENT                  78
-#define BG_STEEL_BEAM_PLAYER                    79
+#define BG_WATER 36
+#define BG_NIGHTMARE 37
+#define BG_LEAF_STORM 38
+#define BG_FIRE 39
+#define BG_FIRE_2 40
+#define BG_WATER_2 41
+#define BG_POISON 42
+#define BG_AEROBLAST 43
+#define BG_HURRICANE 44  
+#define BG_ELECTRIC_TERRAIN 45
+#define BG_GRASSY_TERRAIN 46
+#define BG_MISTY_TERRAIN 47
+#define BG_PSYCHIC_TERRAIN 48
+#define BG_FOCUS_BLAST 49
+#define BG_GUNK_SHOT 50
+#define BG_HYDRO_CANNON 51
+#define BG_WONDER_ROOM 52
+#define BG_MAGIC_ROOM 53
+#define BG_HYPERSPACE_FURY 54
+#define BG_BOLT_STRIKE 55
+#define BG_ZMOVE_ACTIVATE 56
+#define BG_TECTONIC_RAGE 57
+#define BG_BLUE_SKY_DAY 58
+#define BG_BLUE_SKY_AFTERNOON 59
+#define BG_BLUE_SKY_NIGHT 60
+#define BG_ZMOVE_MOUNTAIN 61
+#define BG_NEVERENDING_NIGHTMARE 62
+#define BG_WATER_PULSE 63
+#define BG_INFERNO_OVERDRIVE 64
+#define BG_BLOOM_DOOM 65
+#define BG_SHATTERED_PSYCHE 66
+#define BG_TWINKLE_TACKLE 67
+#define BG_BLACKHOLE_ECLIPSE 68
+#define BG_SOULSTEALING_7STAR_STRIKE 69
+#define BG_MALICIOUS_MOONSAULT 70
+#define BG_CLANGOROUS_SOULBLAZE 71
+#define BG_SNUGGLE_FOREVER 72
+#define BG_MAX_LIGHTNING 73
+#define BG_GARBAGE_FALLS 74
+#define BG_HYPER_BEAM 75
+#define BG_DYNAMAX_CANNON 76
+#define BG_AURA_SPHERE 77
+#define BG_STEEL_BEAM_OPPONENT 78
+#define BG_STEEL_BEAM_PLAYER 79
 
 // table ids for general animations (gBattleAnims_General)
 #define B_ANIM_CASTFORM_CHANGE          0
@@ -532,6 +532,10 @@
 #define B_ANIM_GULP_MISSILE             29
 #define B_ANIM_STRONG_WINDS             30
 #define B_ANIM_PRIMAL_REVERSION         31
+#define B_ANIM_AQUA_RING_HEAL           32
+#define B_ANIM_BEAK_BLAST_SETUP         33
+#define B_ANIM_SHELL_TRAP_SETUP         34
+#define B_ANIM_ZMOVE_ACTIVATE           35 // Using Z Moves
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
@@ -558,6 +562,9 @@
 // Tasks with return values often assign them to gBattleAnimArgs[7].
 #define ARG_RET_ID 7
 
+// For createsprite macro to use internally
+#define ANIMSPRITE_IS_TARGET (1 << 7)
+
 // Trapping Wrap-like moves end turn animation.
 #define TRAP_ANIM_BIND 0
 #define TRAP_ANIM_WRAP 0
@@ -567,6 +574,7 @@
 #define TRAP_ANIM_SAND_TOMB 4
 #define TRAP_ANIM_MAGMA_STORM 5
 #define TRAP_ANIM_INFESTATION 6
+#define TRAP_ANIM_SNAP_TRAP 7
 
 // Weather defines for battle animation scripts.
 #define ANIM_WEATHER_NONE 0
@@ -594,9 +602,32 @@
 #define ANIM_RIGHT_FIST  0
 #define ANIM_LEFT_FIST   2
 
+// fist/chop frames
+#define ANIM_FIST_1  0
+#define ANIM_FOOT_1  1
+#define ANIM_FOOT_2  2
+#define ANIM_CHOP    3
+
 // surf wave palettes
 #define ANIM_SURF_PAL_SURF           0
 #define ANIM_SURF_PAL_MUDDY_WATER    1
 #define ANIM_SURF_PAL_SLUDGE_WAVE    2
+
+// Flags given to various functions to indicate which palettes to consider.
+// Handled by UnpackSelectedBattlePalettes
+#define F_PAL_BG          (1 << 0)
+#define F_PAL_ATTACKER    (1 << 1)
+#define F_PAL_TARGET      (1 << 2)
+#define F_PAL_ATK_PARTNER (1 << 3)
+#define F_PAL_DEF_PARTNER (1 << 4)
+#define F_PAL_ANIM_1      (1 << 5) // Palette set for GetBattleAnimBg1Data/GetBgDataForTransform. Only used (ineffectually?) by Aromatherapy.
+#define F_PAL_ANIM_2      (1 << 6) // Palette set for GetBattleAnimBgData/GetBgDataForTransform. Unused.
+#define F_PAL_ATK_SIDE    (F_PAL_ATTACKER | F_PAL_ATK_PARTNER)
+#define F_PAL_DEF_SIDE    (F_PAL_TARGET | F_PAL_DEF_PARTNER)
+#define F_PAL_BATTLERS    (F_PAL_ATK_SIDE | F_PAL_DEF_SIDE)
+// The below are only used by AnimTask_BlendBattleAnimPal to get battler sprite palettes by position rather than by role.
+// It's redundant with F_PAL_BATTLERS, because they're only ever used together to refer to all the battlers at once.
+#define F_PAL_BATTLERS_2  (1 << 7 | 1 << 8 | 1 << 9 | 1 << 10)
+
 
 #endif // GUARD_CONSTANTS_BATTLE_ANIM_H

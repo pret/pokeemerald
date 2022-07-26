@@ -5,15 +5,19 @@
 #include "graphics.h"
 #include "sprite.h"
 #include "util.h"
-#include "constants/pokemon.h"
 #include "constants/battle_palace.h"
 
-static void SmokescreenImpact_Callback(struct Sprite *);
-static void SpriteCB_DestroySprite(struct Sprite *sprite);
+#define TAG_SMOKESCREEN 55019
+
+#define PALTAG_SHADOW 55039
+#define GFXTAG_SHADOW 55129
+
+static void SpriteCB_SmokescreenImpactMain(struct Sprite *);
+static void SpriteCB_SmokescreenImpact(struct Sprite *);
 
 // The below data for smokescreen starts and ends with some data that belongs to battle_gfx_sfx_util.c
 
-const u8 gBattlePalaceNatureToMoveTarget[NUM_NATURES] = 
+const u8 gBattlePalaceNatureToMoveTarget[NUM_NATURES] =
 {
     [NATURE_HARDY]   = PALACE_TARGET_STRONGER,
     [NATURE_LONELY]  = PALACE_TARGET_STRONGER,
@@ -21,7 +25,7 @@ const u8 gBattlePalaceNatureToMoveTarget[NUM_NATURES] =
     [NATURE_ADAMANT] = PALACE_TARGET_STRONGER,
     [NATURE_NAUGHTY] = PALACE_TARGET_WEAKER,
     [NATURE_BOLD]    = PALACE_TARGET_WEAKER,
-    [NATURE_DOCILE]  = PALACE_TARGET_RANDOM, 
+    [NATURE_DOCILE]  = PALACE_TARGET_RANDOM,
     [NATURE_RELAXED] = PALACE_TARGET_STRONGER,
     [NATURE_IMPISH]  = PALACE_TARGET_STRONGER,
     [NATURE_LAX]     = PALACE_TARGET_STRONGER,
@@ -29,7 +33,7 @@ const u8 gBattlePalaceNatureToMoveTarget[NUM_NATURES] =
     [NATURE_HASTY]   = PALACE_TARGET_WEAKER,
     [NATURE_SERIOUS] = PALACE_TARGET_WEAKER,
     [NATURE_JOLLY]   = PALACE_TARGET_STRONGER,
-    [NATURE_NAIVE]   = PALACE_TARGET_RANDOM, 
+    [NATURE_NAIVE]   = PALACE_TARGET_RANDOM,
     [NATURE_MODEST]  = PALACE_TARGET_WEAKER,
     [NATURE_MILD]    = PALACE_TARGET_STRONGER,
     [NATURE_QUIET]   = PALACE_TARGET_WEAKER,
@@ -44,17 +48,17 @@ const u8 gBattlePalaceNatureToMoveTarget[NUM_NATURES] =
 
 static const struct CompressedSpriteSheet sSmokescreenImpactSpriteSheet =
 {
-    .data = gSmokescreenImpactTiles, .size = 0x180, .tag = 55019
+    .data = gSmokescreenImpactTiles, .size = 0x180, .tag = TAG_SMOKESCREEN
 };
 
 static const struct CompressedSpritePalette sSmokescreenImpactSpritePalette =
 {
-    .data = gSmokescreenImpactPalette, .tag = 55019
+    .data = gSmokescreenImpactPalette, .tag = TAG_SMOKESCREEN
 };
 
 static const struct OamData sOamData_SmokescreenImpact =
 {
-    .y = 0, 
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -71,33 +75,33 @@ static const struct OamData sOamData_SmokescreenImpact =
 
 static const union AnimCmd sAnim_SmokescreenImpact_0[] =
 {
-    ANIMCMD_FRAME(0, 4), 
-    ANIMCMD_FRAME(4, 4), 
-    ANIMCMD_FRAME(8, 4), 
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(8, 4),
     ANIMCMD_END
 };
 
 static const union AnimCmd sAnim_SmokescreenImpact_1[] =
 {
-    ANIMCMD_FRAME(0, 4, .hFlip = TRUE), 
-    ANIMCMD_FRAME(4, 4, .hFlip = TRUE), 
-    ANIMCMD_FRAME(8, 4, .hFlip = TRUE), 
+    ANIMCMD_FRAME(0, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(4, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(8, 4, .hFlip = TRUE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sAnim_SmokescreenImpact_2[] =
 {
-    ANIMCMD_FRAME(0, 4, .vFlip = TRUE), 
-    ANIMCMD_FRAME(4, 4, .vFlip = TRUE), 
-    ANIMCMD_FRAME(8, 4, .vFlip = TRUE), 
+    ANIMCMD_FRAME(0, 4, .vFlip = TRUE),
+    ANIMCMD_FRAME(4, 4, .vFlip = TRUE),
+    ANIMCMD_FRAME(8, 4, .vFlip = TRUE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sAnim_SmokescreenImpact_3[] =
 {
-    ANIMCMD_FRAME(0, 4, .hFlip = TRUE, .vFlip = TRUE), 
-    ANIMCMD_FRAME(4, 4, .hFlip = TRUE, .vFlip = TRUE), 
-    ANIMCMD_FRAME(8, 4, .hFlip = TRUE, .vFlip = TRUE), 
+    ANIMCMD_FRAME(0, 4, .hFlip = TRUE, .vFlip = TRUE),
+    ANIMCMD_FRAME(4, 4, .hFlip = TRUE, .vFlip = TRUE),
+    ANIMCMD_FRAME(8, 4, .hFlip = TRUE, .vFlip = TRUE),
     ANIMCMD_END
 };
 
@@ -111,23 +115,23 @@ static const union AnimCmd *const sAnims_SmokescreenImpact[] =
 
 static const struct SpriteTemplate sSmokescreenImpactSpriteTemplate =
 {
-    .tileTag = 55019, 
-    .paletteTag = 55019, 
-    .oam = &sOamData_SmokescreenImpact, 
-    .anims = sAnims_SmokescreenImpact, 
-    .images = NULL, 
-    .affineAnims = gDummySpriteAffineAnimTable, 
-    .callback = SpriteCB_DestroySprite
+    .tileTag = TAG_SMOKESCREEN,
+    .paletteTag = TAG_SMOKESCREEN,
+    .oam = &sOamData_SmokescreenImpact,
+    .anims = sAnims_SmokescreenImpact,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_SmokescreenImpact
 };
 
 const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow =
 {
-    .data = gEnemyMonShadow_Gfx, .size = 0x80, .tag = 55129
+    .data = gEnemyMonShadow_Gfx, .size = 0x80, .tag = GFXTAG_SHADOW
 };
 
 static const struct OamData sOamData_EnemyShadow =
 {
-    .y = 0, 
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -144,16 +148,21 @@ static const struct OamData sOamData_EnemyShadow =
 
 const struct SpriteTemplate gSpriteTemplate_EnemyShadow =
 {
-    .tileTag = 55129, 
-    .paletteTag = 55039, 
-    .oam = &sOamData_EnemyShadow, 
-    .anims = gDummySpriteAnimTable, 
-    .images = NULL, 
-    .affineAnims = gDummySpriteAffineAnimTable, 
+    .tileTag = GFXTAG_SHADOW,
+    .paletteTag = PALTAG_SHADOW,
+    .oam = &sOamData_EnemyShadow,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_SetInvisible
 };
 
-u8 SmokescreenImpact(s16 x, s16 y, u8 a3)
+#define sActiveSprites data[0]
+#define sPersist       data[1]
+
+#define sMainSpriteId data[0]
+
+u8 SmokescreenImpact(s16 x, s16 y, bool8 persist)
 {
     u8 mainSpriteId;
     u8 spriteId1, spriteId2, spriteId3, spriteId4;
@@ -165,54 +174,58 @@ u8 SmokescreenImpact(s16 x, s16 y, u8 a3)
         LoadCompressedSpritePaletteUsingHeap(&sSmokescreenImpactSpritePalette);
     }
 
-    mainSpriteId = CreateInvisibleSpriteWithCallback(SmokescreenImpact_Callback);
+    mainSpriteId = CreateInvisibleSpriteWithCallback(SpriteCB_SmokescreenImpactMain);
     mainSprite = &gSprites[mainSpriteId];
-    mainSprite->data[1] = a3;
+    mainSprite->sPersist = persist;
 
+    // Top left sprite
     spriteId1 = CreateSprite(&sSmokescreenImpactSpriteTemplate, x - 16, y - 16, 2);
-    gSprites[spriteId1].data[0] = mainSpriteId;
-    mainSprite->data[0]++;
+    gSprites[spriteId1].sMainSpriteId = mainSpriteId;
+    mainSprite->sActiveSprites++;
     AnimateSprite(&gSprites[spriteId1]);
 
+    // Top right sprite
     spriteId2 = CreateSprite(&sSmokescreenImpactSpriteTemplate, x, y - 16, 2);
-    gSprites[spriteId2].data[0] = mainSpriteId;
-    mainSprite->data[0]++;
+    gSprites[spriteId2].sMainSpriteId = mainSpriteId;
+    mainSprite->sActiveSprites++;
     StartSpriteAnim(&gSprites[spriteId2], 1);
     AnimateSprite(&gSprites[spriteId2]);
 
+    // Bottom left sprite
     spriteId3 = CreateSprite(&sSmokescreenImpactSpriteTemplate, x - 16, y, 2);
-    gSprites[spriteId3].data[0] = mainSpriteId;
-    mainSprite->data[0]++;
+    gSprites[spriteId3].sMainSpriteId = mainSpriteId;
+    mainSprite->sActiveSprites++;
     StartSpriteAnim(&gSprites[spriteId3], 2);
     AnimateSprite(&gSprites[spriteId3]);
 
+    // Bottom right sprite
     spriteId4 = CreateSprite(&sSmokescreenImpactSpriteTemplate, x, y, 2);
-    gSprites[spriteId4].data[0] = mainSpriteId;
-    mainSprite->data[0]++;
+    gSprites[spriteId4].sMainSpriteId = mainSpriteId;
+    mainSprite->sActiveSprites++;
     StartSpriteAnim(&gSprites[spriteId4], 3);
     AnimateSprite(&gSprites[spriteId4]);
 
     return mainSpriteId;
 }
 
-static void SmokescreenImpact_Callback(struct Sprite *sprite)
+static void SpriteCB_SmokescreenImpactMain(struct Sprite *sprite)
 {
-    if (!sprite->data[0])
+    if (sprite->sActiveSprites == 0)
     {
         FreeSpriteTilesByTag(sSmokescreenImpactSpriteSheet.tag);
         FreeSpritePaletteByTag(sSmokescreenImpactSpritePalette.tag);
-        if (!sprite->data[1])
+        if (!sprite->sPersist)
             DestroySprite(sprite);
         else
             sprite->callback = SpriteCallbackDummy;
     }
 }
 
-static void SpriteCB_DestroySprite(struct Sprite *sprite)
+static void SpriteCB_SmokescreenImpact(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {
-        gSprites[sprite->data[0]].data[0]--;
+        gSprites[sprite->sMainSpriteId].sActiveSprites--;
         DestroySprite(sprite);
     }
 }
