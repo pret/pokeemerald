@@ -3061,7 +3061,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (AI_RandLessThan(128))
             IncreaseSleepScore(battlerAtk, battlerDef, move, &score);
         break;
-	case EFFECT_ABSORB:
+    case EFFECT_ABSORB:
         if (AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_BIG_ROOT)
             score++;
         if (effectiveness <= AI_EFFECTIVENESS_x0_5 && AI_RandLessThan(50))
@@ -3075,12 +3075,12 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score++;
         }
         break;
-	case EFFECT_MIRROR_MOVE:
+    case EFFECT_MIRROR_MOVE:
         if (predictedMove != MOVE_NONE)
             return AI_CheckViability(battlerAtk, battlerDef, gLastMoves[battlerDef], score);
         break;
 // stat raising effects
-	case EFFECT_ATTACK_UP:
+    case EFFECT_ATTACK_UP:
     case EFFECT_ATTACK_UP_2:
         if (MovesWithSplitUnusable(battlerAtk, battlerDef, SPLIT_PHYSICAL))
         {
@@ -3101,7 +3101,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score--;
         }
         break;
-	case EFFECT_DEFENSE_UP:
+    case EFFECT_DEFENSE_UP:
     case EFFECT_DEFENSE_UP_2:
     case EFFECT_DEFENSE_UP_3:
         if (!HasMoveWithSplit(battlerDef, SPLIT_PHYSICAL))
@@ -3113,7 +3113,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         else if (AI_DATA->hpPercents[battlerAtk] < 40)
             score -= 2;
         break;
-	case EFFECT_SPEED_UP:
+    case EFFECT_SPEED_UP:
     case EFFECT_SPEED_UP_2:
         if (!WillAIStrikeFirst())
         {
@@ -3125,7 +3125,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score -= 3;
         }
         break;
-	case EFFECT_SPECIAL_ATTACK_UP:
+    case EFFECT_SPECIAL_ATTACK_UP:
     case EFFECT_SPECIAL_ATTACK_UP_2:
     case EFFECT_SPECIAL_ATTACK_UP_3:
         if (MovesWithSplitUnusable(battlerAtk, battlerDef, SPLIT_SPECIAL))
@@ -3147,7 +3147,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score--;
         }
         break;
-	case EFFECT_SPECIAL_DEFENSE_UP:
+    case EFFECT_SPECIAL_DEFENSE_UP:
     case EFFECT_SPECIAL_DEFENSE_UP_2:
         if (!HasMoveWithSplit(battlerDef, SPLIT_SPECIAL))
             score -= 2;
@@ -3158,7 +3158,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         else if (AI_DATA->hpPercents[battlerAtk] < 40)
             score -= 2;
         break;
-	case EFFECT_ACCURACY_UP:
+    case EFFECT_ACCURACY_UP:
     case EFFECT_ACCURACY_UP_2:
         if (gBattleMons[battlerAtk].statStages[STAT_ACC] >= 9 && !AI_RandLessThan(50))
             score -= 2;
@@ -3167,7 +3167,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         else 
             score++;
         break;
-	case EFFECT_EVASION_UP:
+    case EFFECT_EVASION_UP:
     case EFFECT_EVASION_UP_2:
         if (AI_DATA->hpPercents[battlerAtk] > 90 && !AI_RandLessThan(100))
             score += 3;
@@ -3189,7 +3189,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score -= 2;
         break;
 // stat lowering effects
-	case EFFECT_ATTACK_DOWN:
+    case EFFECT_ATTACK_DOWN:
     case EFFECT_ATTACK_DOWN_2:
         if (!ShouldLowerAttack(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef]))
             score -= 2;
@@ -3202,7 +3202,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         else if (AI_DATA->hpPercents[battlerDef] < 70)
             score -= 2;
         break;
-	case EFFECT_DEFENSE_DOWN:
+    case EFFECT_DEFENSE_DOWN:
     case EFFECT_DEFENSE_DOWN_2:
         if (!ShouldLowerDefense(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef]))
             score -= 2;
@@ -3211,14 +3211,14 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (AI_DATA->hpPercents[battlerDef] <= 70)
             score -= 2;
         break;
-	case EFFECT_SPEED_DOWN:
+    case EFFECT_SPEED_DOWN:
     case EFFECT_SPEED_DOWN_2:
         if (WillAIStrikeFirst())
             score -= 3;
         else if (!AI_RandLessThan(70))
             score += 2;
         break;
-	case EFFECT_SPECIAL_ATTACK_DOWN:
+    case EFFECT_SPECIAL_ATTACK_DOWN:
     case EFFECT_SPECIAL_ATTACK_DOWN_2:
         if (!ShouldLowerSpAtk(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef]))
             score -= 2;
@@ -3231,7 +3231,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         else if (AI_DATA->hpPercents[battlerDef] < 70)
             score -= 2;
         break;
-	case EFFECT_SPECIAL_DEFENSE_DOWN:
+    case EFFECT_SPECIAL_DEFENSE_DOWN:
     case EFFECT_SPECIAL_DEFENSE_DOWN_2:
         if (!ShouldLowerSpDef(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef]))
             score -= 2;
@@ -3241,7 +3241,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (AI_DATA->hpPercents[battlerDef] <= 70)
             score -= 2;
         break;
-	case EFFECT_ACCURACY_DOWN:
+    case EFFECT_ACCURACY_DOWN:
     case EFFECT_ACCURACY_DOWN_2:
         if (ShouldLowerAccuracy(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef]))
             score -= 2;
@@ -3262,7 +3262,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         else if (AI_DATA->hpPercents[battlerAtk] < 40 || AI_DATA->hpPercents[battlerDef] < 40 || !AI_RandLessThan(70))
             score -= 2;
         break;
-	case EFFECT_EVASION_DOWN:
+    case EFFECT_EVASION_DOWN:
     case EFFECT_EVASION_DOWN_2:
         if (!ShouldLowerEvasion(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef]))
             score -= 2;
@@ -3410,17 +3410,14 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score += 5;
         break;
     case EFFECT_TRAP:
+        if (HasMoveEffect(battlerDef, EFFECT_RAPID_SPIN))
+            break;
+        //fallthrough
     case EFFECT_MEAN_LOOK:
-        if (HasMoveEffect(battlerDef, EFFECT_RAPID_SPIN)
-          || (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battlerDef, TYPE_GHOST))
-          || gBattleMons[battlerDef].status2 & STATUS2_WRAPPED)
-        {
+        if (IsBattlerTrapped(battlerDef, TRUE))
             break; // in this case its a bad attacking move
-        }
         else if (ShouldTrap(battlerAtk, battlerDef, move))
-        {
             score += 5;
-        }
         break;
     case EFFECT_MIST:
         if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_SCREENER)
@@ -3464,7 +3461,6 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score++;
         if (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE && AI_DATA->abilities[battlerDef] != ABILITY_CONTRARY)
             score++;
-        break;
         if (ShouldLowerSpeed(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef]))
         {
             if (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE && AI_DATA->abilities[battlerDef] != ABILITY_CONTRARY)
@@ -3558,7 +3554,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                     if (gLastMoves[battlerDef] == predictedMove)
                         score += 3;
                     else */if (CanMoveFaintBattler(gLastMoves[battlerDef], battlerDef, battlerAtk, 1))
-                        score += 2;; //Disable move that can kill attacker
+                        score += 2; //Disable move that can kill attacker
                 }
             }
             else if (predictedMove != MOVE_NONE && IS_MOVE_STATUS(predictedMove))
@@ -4302,8 +4298,8 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPDEF, &score);
         break;
     case EFFECT_SHELL_SMASH:
-        if (AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_POWER_HERB)
-            score += 3;
+        if (AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_RESTORE_STATS)
+            score += 1;
         
         IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPEED, &score);
         IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPATK, &score);
