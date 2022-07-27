@@ -1067,7 +1067,7 @@ static void SpriteCB_PokeballReleaseMon(struct Sprite *sprite)
         StartSpriteAnim(sprite, 1);
         AnimateBallOpenParticlesForPokeball(sprite->x, sprite->y - 5, sprite->oam.priority, subpriority);
         // sDelay re-used to store task id but never read
-        sprite->sDelay = LaunchBallFadeMonTaskForPokeball(1, monPalNum, selectedPalettes);
+        sprite->sDelay = LaunchBallFadeMonTaskForPokeball(TRUE, monPalNum, selectedPalettes);
         sprite->callback = SpriteCB_ReleasedMonFlyOut;
         gSprites[spriteId].invisible = FALSE;
         StartSpriteAffineAnim(&gSprites[spriteId], BATTLER_AFFINE_EMERGE);
@@ -1171,7 +1171,7 @@ static void SpriteCB_TradePokeball(struct Sprite *sprite)
         StartSpriteAnim(sprite, 1);
         AnimateBallOpenParticlesForPokeball(sprite->x, sprite->y - 5, sprite->oam.priority, subpriority);
         // sDelay re-used to store task id but never read
-        sprite->sDelay = LaunchBallFadeMonTaskForPokeball(1, monPalNum, selectedPalettes);
+        sprite->sDelay = LaunchBallFadeMonTaskForPokeball(TRUE, monPalNum, selectedPalettes);
         sprite->callback = SpriteCB_TradePokeballSendOff;
 #ifdef BUGFIX
         // FIX: If this is used on a sprite that has previously had an affine animation, it will not

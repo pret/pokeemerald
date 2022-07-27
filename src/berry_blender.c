@@ -3553,7 +3553,7 @@ static bool8 PrintBlendingResults(void)
             sBerryBlender->mainState++;
         break;
     case 5:
-        ClearStdWindowAndFrameToTransparent(5, 1);
+        ClearStdWindowAndFrameToTransparent(5, TRUE);
 
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
@@ -3692,7 +3692,7 @@ static bool8 PrintBlendingRanking(void)
         }
         break;
     case 3:
-        DrawStdFrameWithCustomTileAndPalette(5, 0, 1, 0xD);
+        DrawStdFrameWithCustomTileAndPalette(5, FALSE, 1, 0xD);
         xPos = GetStringCenterAlignXOffset(FONT_NORMAL, sText_Ranking, 168);
         Blender_AddTextPrinter(5, sText_Ranking, xPos, 1, TEXT_SKIP_DRAW, 0);
 
@@ -3764,7 +3764,7 @@ void ShowBerryBlenderRecordWindow(void)
 
     winTemplate = sBlenderRecordWindowTemplate;
     gRecordsWindowId = AddWindow(&winTemplate);
-    DrawStdWindowFrame(gRecordsWindowId, 0);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
 
     xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gText_BlenderMaxSpeedRecord, 144);

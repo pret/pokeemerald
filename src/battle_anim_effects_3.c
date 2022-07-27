@@ -2677,7 +2677,7 @@ static void AnimWeakFrustrationAngerMark(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
-        InitSpritePosToAnimAttacker(sprite, 0);
+        InitSpritePosToAnimAttacker(sprite, FALSE);
         sprite->data[0]++;
     }
     else if (sprite->data[0]++ > 20)
@@ -4807,7 +4807,7 @@ void AnimTask_MonToSubstitute(u8 taskId)
     }
     else
     {
-        LoadBattleMonGfxAndAnimate(gBattleAnimAttacker, 0, spriteId);
+        LoadBattleMonGfxAndAnimate(gBattleAnimAttacker, FALSE, spriteId);
         if (IsContest())
         {
             gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims = gAffineAnims_BattleSpriteContest;

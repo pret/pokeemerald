@@ -464,7 +464,7 @@ static u32 LoopedTask_OpenRibbonsMonList(s32 state)
         if (!menu->fromSummary)
         {
             LoadLeftHeaderGfxForIndex(POKENAV_GFX_RIBBONS_MENU);
-            ShowLeftHeaderGfx(POKENAV_GFX_RIBBONS_MENU, 1, 0);
+            ShowLeftHeaderGfx(POKENAV_GFX_RIBBONS_MENU, TRUE, FALSE);
         }
         return LT_INC_AND_PAUSE;
     case 5:

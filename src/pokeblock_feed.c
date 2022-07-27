@@ -660,7 +660,7 @@ static bool8 LoadPokeblockFeedScene(void)
         gMain.state++;
         break;
     case 10:
-        DrawStdFrameWithCustomTileAndPalette(0, 1, 1, 14);
+        DrawStdFrameWithCustomTileAndPalette(0, TRUE, 1, 14);
         gMain.state++;
         break;
     case 11:

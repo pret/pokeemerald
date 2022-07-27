@@ -464,8 +464,8 @@ static u32 LoopedTask_OpenConditionSearchResults(s32 state)
         {
             u8 searchGfxId = GetSelectedConditionSearch() + POKENAV_MENUITEM_CONDITION_SEARCH_COOL;
             LoadLeftHeaderGfxForIndex(searchGfxId);
-            ShowLeftHeaderGfx(searchGfxId, 1, 0);
-            ShowLeftHeaderGfx(POKENAV_GFX_CONDITION_MENU, 1, 0);
+            ShowLeftHeaderGfx(searchGfxId, TRUE, FALSE);
+            ShowLeftHeaderGfx(POKENAV_GFX_CONDITION_MENU, TRUE, FALSE);
         }
         PokenavFadeScreen(POKENAV_FADE_FROM_BLACK);
         return LT_INC_AND_PAUSE;

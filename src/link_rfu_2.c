@@ -2004,7 +2004,7 @@ static void RfuMain1_UnionRoom(void)
     {
         rfu_REQ_recvData();
         rfu_waitREQComplete();
-        rfu_LMAN_REQ_sendData(0);
+        rfu_LMAN_REQ_sendData(FALSE);
     }
 }
 

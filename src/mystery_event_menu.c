@@ -131,7 +131,7 @@ static void CB2_MysteryEventMenu(void)
     switch (gMain.state)
     {
     case 0:
-        DrawStdFrameWithCustomTileAndPalette(0, 1, 1, 0xD);
+        DrawStdFrameWithCustomTileAndPalette(0, TRUE, 1, 0xD);
         PutWindowTilemap(0);
         CopyWindowToVram(0, COPYWIN_FULL);
         ShowBg(0);
@@ -178,7 +178,7 @@ static void CB2_MysteryEventMenu(void)
             {
                 PlaySE(SE_SELECT);
                 CheckShouldAdvanceLinkState();
-                DrawStdFrameWithCustomTileAndPalette(1, 1, 1, 0xD);
+                DrawStdFrameWithCustomTileAndPalette(1, TRUE, 1, 0xD);
                 PrintMysteryMenuText(1, gText_LoadingEvent, 1, 2, 0);
                 PutWindowTilemap(1);
                 CopyWindowToVram(1, COPYWIN_FULL);
