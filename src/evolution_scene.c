@@ -657,7 +657,7 @@ static void Task_EvolutionScene(u8 taskId)
         ShowBg(2);
         ShowBg(3);
         break;
-    case EVOSTATE_INTRO_MSG: // print 'whoa, poke is evolving!!!' msg
+    case EVOSTATE_INTRO_MSG:
         if (!gPaletteFade.active)
         {
             StringExpandPlaceholders(gStringVar4, gText_PkmnIsEvolving);
@@ -665,7 +665,7 @@ static void Task_EvolutionScene(u8 taskId)
             gTasks[taskId].tState++;
         }
         break;
-    case EVOSTATE_INTRO_MON_ANIM: // wait for string, animate mon(and play its cry)
+    case EVOSTATE_INTRO_MON_ANIM:
         if (!IsTextPrinterActive(0))
         {
             EvoScene_DoMonAnimAndCry(sEvoStructPtr->preEvoSpriteId, gTasks[taskId].tPreEvoSpecies);
@@ -679,7 +679,7 @@ static void Task_EvolutionScene(u8 taskId)
             gTasks[taskId].tState++;
         }
         break;
-    case EVOSTATE_START_MUSIC: // play evolution music and fade screen black
+    case EVOSTATE_START_MUSIC:
         if (!IsSEPlaying())
         {
             // Start music, fade background to black
@@ -688,7 +688,7 @@ static void Task_EvolutionScene(u8 taskId)
             BeginNormalPaletteFade(0x1C, 4, 0, 0x10, RGB_BLACK);
         }
         break;
-    case EVOSTATE_START_BG_AND_SPARKLE_SPIRAL: // launch moving bg task, preapre evo sparkles
+    case EVOSTATE_START_BG_AND_SPARKLE_SPIRAL:
         if (!gPaletteFade.active)
         {
             StartBgAnimation(FALSE);
@@ -696,7 +696,7 @@ static void Task_EvolutionScene(u8 taskId)
             gTasks[taskId].tState++;
         }
         break;
-    case EVOSTATE_SPARKLE_ARC: // another set of evo sparkles
+    case EVOSTATE_SPARKLE_ARC:
         if (!gTasks[sEvoGraphicsTaskId].isActive)
         {
             gTasks[taskId].tState++;
@@ -711,7 +711,7 @@ static void Task_EvolutionScene(u8 taskId)
             gTasks[taskId].tState++;
         }
         break;
-    case EVOSTATE_WAIT_CYCLE_MON_SPRITE: // wait for the above task to finish
+    case EVOSTATE_WAIT_CYCLE_MON_SPRITE:
         if (--sEvoStructPtr->delayTimer == 0)
         {
             sEvoStructPtr->delayTimer = 3;
@@ -719,7 +719,7 @@ static void Task_EvolutionScene(u8 taskId)
                 gTasks[taskId].tState++;
         }
         break;
-    case EVOSTATE_SPARKLE_CIRCLE: // post evo sparkles
+    case EVOSTATE_SPARKLE_CIRCLE:
         sEvoGraphicsTaskId = EvolutionSparkles_CircleInward();
         gTasks[taskId].tState++;
         break;
@@ -730,7 +730,7 @@ static void Task_EvolutionScene(u8 taskId)
             gTasks[taskId].tState++;
         }
         break;
-    case EVOSTATE_EVO_SOUND: // play tu du sound after evolution
+    case EVOSTATE_EVO_SOUND:
         if (!gTasks[sEvoGraphicsTaskId].isActive)
         {
             PlaySE(SE_EXP);
@@ -747,14 +747,14 @@ static void Task_EvolutionScene(u8 taskId)
             gTasks[taskId].tState++;
         }
         break;
-    case EVOSTATE_EVO_MON_ANIM: // animate mon
+    case EVOSTATE_EVO_MON_ANIM:
         if (!gPaletteFade.active)
         {
             EvoScene_DoMonAnimAndCry(sEvoStructPtr->postEvoSpriteId, gTasks[taskId].tPostEvoSpecies);
             gTasks[taskId].tState++;
         }
         break;
-    case EVOSTATE_SET_MON_EVOLVED: // congratulations string and rename prompt
+    case EVOSTATE_SET_MON_EVOLVED:
         if (IsCryFinished())
         {
             StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
@@ -769,7 +769,7 @@ static void Task_EvolutionScene(u8 taskId)
             IncrementGameStat(GAME_STAT_EVOLVED_POKEMON);
         }
         break;
-    case EVOSTATE_TRY_LEARN_MOVE: // check if it wants to learn a new move
+    case EVOSTATE_TRY_LEARN_MOVE:
         if (!IsTextPrinterActive(0))
         {
             var = MonTryLearningNewMove(mon, gTasks[taskId].tLearnsFirstMove);
@@ -803,7 +803,7 @@ static void Task_EvolutionScene(u8 taskId)
             }
         }
         break;
-    case EVOSTATE_END: // task has finished, return
+    case EVOSTATE_END:
         if (!gPaletteFade.active)
         {
             if (!(gTasks[taskId].tBits & TASK_BIT_LEARN_MOVE))
@@ -821,7 +821,7 @@ static void Task_EvolutionScene(u8 taskId)
             SetMainCallback2(gCB2_AfterEvolution);
         }
         break;
-    case EVOSTATE_CANCEL: // evolution has been canceled, stop music and re-fade palette
+    case EVOSTATE_CANCEL:
         if (!gTasks[sEvoGraphicsTaskId].isActive)
         {
             m4aMPlayAllStop();
@@ -829,14 +829,14 @@ static void Task_EvolutionScene(u8 taskId)
             gTasks[taskId].tState++;
         }
         break;
-    case EVOSTATE_CANCEL_MON_ANIM: // animate pokemon trying to evolve again, evolution has been stopped
+    case EVOSTATE_CANCEL_MON_ANIM:
         if (!gPaletteFade.active)
         {
             EvoScene_DoMonAnimAndCry(sEvoStructPtr->preEvoSpriteId, gTasks[taskId].tPreEvoSpecies);
             gTasks[taskId].tState++;
         }
         break;
-    case EVOSTATE_CANCEL_MSG: // after the animation, print the string 'WHOA IT DId NOT EVOLVE!!!'
+    case EVOSTATE_CANCEL_MSG:
         if (EvoScene_IsMonAnimFinished(sEvoStructPtr->preEvoSpriteId))
         {
             if (gTasks[taskId].tEvoWasStopped) // FRLG auto cancellation
@@ -849,7 +849,7 @@ static void Task_EvolutionScene(u8 taskId)
             gTasks[taskId].tState = EVOSTATE_TRY_LEARN_MOVE;
         }
         break;
-    case EVOSTATE_LEARNED_MOVE: // pokemon learned a new move, print string and play a fanfare
+    case EVOSTATE_LEARNED_MOVE:
         if (!IsTextPrinterActive(0) && !IsSEPlaying())
         {
             BufferMoveToLearnIntoBattleTextBuff2();
@@ -860,11 +860,11 @@ static void Task_EvolutionScene(u8 taskId)
             gTasks[taskId].tState++;
         }
         break;
-    case EVOSTATE_TRY_LEARN_ANOTHER_MOVE: // wait a bit and check if can learn another move
+    case EVOSTATE_TRY_LEARN_ANOTHER_MOVE:
         if (!IsTextPrinterActive(0) && !IsSEPlaying() && --gTasks[taskId].tLearnsFirstMove == 0)
             gTasks[taskId].tState = EVOSTATE_TRY_LEARN_MOVE;
         break;
-    case EVOSTATE_REPLACE_MOVE: // try to learn a new move
+    case EVOSTATE_REPLACE_MOVE:
         switch (gTasks[taskId].tLearnMoveState)
         {
         case MVSTATE_INTRO_MSG_1:
