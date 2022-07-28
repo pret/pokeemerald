@@ -102,7 +102,7 @@ void CB2_InitMysteryEventMenu(void)
         BuildOamBuffer();
         RunTextPrinters();
         UpdatePaletteFade();
-        FillPalette(0, 0, 2);
+        FillPalette(RGB_BLACK, 0, 2);
         SetMainCallback2(CB2_MysteryEventMenu);
     }
 }
