@@ -1174,7 +1174,7 @@ static void ReceiveApprenticeData(struct Apprentice *records, size_t recordSize,
     u32 apprenticeSaveId;
 
     ShufflePlayerIndices(mixIndices);
-    mixApprentice = (void*)records + (recordSize * mixIndices[multiplayerId]);
+    mixApprentice = (void *)records + (recordSize * mixIndices[multiplayerId]);
     numApprentices = 0;
     apprenticeId = 0;
     for (i = 0; i < 2; i++)

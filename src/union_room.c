@@ -378,7 +378,7 @@ void TryBecomeLinkLeader(void)
     struct WirelessLink_Leader *data;
 
     taskId = CreateTask(Task_TryBecomeLinkLeader, 0);
-    sWirelessLinkMain.leader = data = (void*)(gTasks[taskId].data);
+    sWirelessLinkMain.leader = data = (void *)(gTasks[taskId].data);
     sLeader = data;
 
     data->state = LL_STATE_INIT;
@@ -971,7 +971,7 @@ void TryJoinLinkGroup(void)
     struct WirelessLink_Group *data;
 
     taskId = CreateTask(Task_TryJoinLinkGroup, 0);
-    sWirelessLinkMain.group = data = (void*)(gTasks[taskId].data);
+    sWirelessLinkMain.group = data = (void *)(gTasks[taskId].data);
     sGroup = data;
 
     data->state = LG_STATE_INIT;
@@ -1297,7 +1297,7 @@ u8 CreateTask_ListenToWireless(void)
     struct WirelessLink_Group *data;
 
     taskId = CreateTask(Task_ListenToWireless, 0);
-    sWirelessLinkMain.group = data = (void*)(gTasks[taskId].data);
+    sWirelessLinkMain.group = data = (void *)(gTasks[taskId].data);
 
     data->state = 0;
     data->textState = 0;
@@ -1869,7 +1869,7 @@ void CreateTask_SendMysteryGift(u32 activity)
     struct WirelessLink_Leader *data;
 
     taskId = CreateTask(Task_SendMysteryGift, 0);
-    sWirelessLinkMain.leader = data = (void*)(gTasks[taskId].data);
+    sWirelessLinkMain.leader = data = (void *)(gTasks[taskId].data);
 
     data->state = 0;
     data->textState = 0;
@@ -2077,7 +2077,7 @@ void CreateTask_LinkMysteryGiftWithFriend(u32 activity)
     struct WirelessLink_Group *data;
 
     taskId = CreateTask(Task_CardOrNewsWithFriend, 0);
-    sWirelessLinkMain.group = data = (void*)(gTasks[taskId].data);
+    sWirelessLinkMain.group = data = (void *)(gTasks[taskId].data);
     sGroup = data;
 
     data->state = 0;
@@ -2246,7 +2246,7 @@ void CreateTask_LinkMysteryGiftOverWireless(u32 activity)
     struct WirelessLink_Group *data;
 
     taskId = CreateTask(Task_CardOrNewsOverWireless, 0);
-    sWirelessLinkMain.group = data = (void*)(gTasks[taskId].data);
+    sWirelessLinkMain.group = data = (void *)(gTasks[taskId].data);
     sGroup = data;
 
     data->state = 0;
@@ -3467,7 +3467,7 @@ static void Task_SearchForChildOrParent(u8 taskId)
 {
     s32 i, j;
     struct RfuPlayerData rfu;
-    struct RfuIncomingPlayerList **list = (void*) gTasks[taskId].data;
+    struct RfuIncomingPlayerList **list = (void *) gTasks[taskId].data;
     bool8 isParent;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
@@ -3510,7 +3510,7 @@ static u8 CreateTask_SearchForChildOrParent(struct RfuIncomingPlayerList * paren
 static void Task_ListenForCompatiblePartners(u8 taskId)
 {
     s32 i, j;
-    struct RfuIncomingPlayerList **list = (void*) gTasks[taskId].data;
+    struct RfuIncomingPlayerList **list = (void *) gTasks[taskId].data;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
@@ -3553,7 +3553,7 @@ static bool32 HasWonderCardOrNewsByLinkGroup(struct RfuGameData *data, s16 linkG
 static void Task_ListenForWonderDistributor(u8 taskId)
 {
     s32 i;
-    struct RfuIncomingPlayerList **list = (void*) gTasks[taskId].data;
+    struct RfuIncomingPlayerList **list = (void *) gTasks[taskId].data;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
@@ -3567,7 +3567,7 @@ static void Task_ListenForWonderDistributor(u8 taskId)
 static u8 CreateTask_ListenForCompatiblePartners(struct RfuIncomingPlayerList * list, u32 linkGroup)
 {
     u8 taskId = CreateTask(Task_ListenForCompatiblePartners, 0);
-    struct RfuIncomingPlayerList **oldList = (void*) gTasks[taskId].data;
+    struct RfuIncomingPlayerList **oldList = (void *) gTasks[taskId].data;
     oldList[0] = list;
     gTasks[taskId].data[2] = linkGroup;
     return taskId;
@@ -3576,7 +3576,7 @@ static u8 CreateTask_ListenForCompatiblePartners(struct RfuIncomingPlayerList * 
 static u8 CreateTask_ListenForWonderDistributor(struct RfuIncomingPlayerList * list, u32 linkGroup)
 {
     u8 taskId = CreateTask(Task_ListenForWonderDistributor, 0);
-    struct RfuIncomingPlayerList **oldList = (void*) gTasks[taskId].data;
+    struct RfuIncomingPlayerList **oldList = (void *) gTasks[taskId].data;
     oldList[0] = list;
     gTasks[taskId].data[2] = linkGroup;
     return taskId;

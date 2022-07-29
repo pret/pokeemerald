@@ -874,7 +874,7 @@ static const struct DigitObjUtilTemplate sDigitObjTemplates[] =
         .xDelta = 8,
         .x = 156,
         .y = 0,
-        .spriteSheet = (void*) &sSpriteSheets[3],
+        .spriteSheet = (void *) &sSpriteSheets[3],
         .spritePal = &sSpritePals[2],
     },
     { // Seconds
@@ -886,7 +886,7 @@ static const struct DigitObjUtilTemplate sDigitObjTemplates[] =
         .xDelta = 8,
         .x = 180,
         .y = 0,
-        .spriteSheet = (void*) &sSpriteSheets[3],
+        .spriteSheet = (void *) &sSpriteSheets[3],
         .spritePal = &sSpritePals[2],
     },
     { // 1/60ths of a second
@@ -898,7 +898,7 @@ static const struct DigitObjUtilTemplate sDigitObjTemplates[] =
         .xDelta = 8,
         .x = 204,
         .y = 0,
-        .spriteSheet = (void*) &sSpriteSheets[3],
+        .spriteSheet = (void *) &sSpriteSheets[3],
         .spritePal = &sSpritePals[2],
     }
 };

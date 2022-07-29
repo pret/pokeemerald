@@ -124,7 +124,7 @@ u8 AnimDummyReturnArg(u8 battler);
 s16 CloneBattlerSpriteWithBlend(u8);
 void DestroySpriteWithActiveSheet(struct Sprite*);
 u8 CreateInvisibleSpriteCopy(int, u8, int);
-void AnimLoadCompressedBgTilemapHandleContest(struct BattleAnimBgData*, const void*, bool32);
+void AnimLoadCompressedBgTilemapHandleContest(struct BattleAnimBgData*, const void *, bool32);
 void AnimLoadCompressedBgGfx(u32, const u32 *, u32);
 void UpdateAnimBg3ScreenSize(bool8);
 void TranslateSpriteInGrowingCircle(struct Sprite *);

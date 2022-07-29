@@ -3765,7 +3765,7 @@ static void InitDigitPrinters(void)
         .xDelta = 8,
         .x = 108,
         .y = 6,
-        .spriteSheet = (void*) &sSpriteSheet_Digits,
+        .spriteSheet = (void *) &sSpriteSheet_Digits,
         .spritePal = &sSpritePalette_Digits,
     };
 
