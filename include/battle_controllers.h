@@ -92,7 +92,7 @@ enum {
     LINK_STANDBY_MSG_ONLY,
 };
 
-#define INSTANT_HP_BAR_DROP     32767
+#define INSTANT_HP_BAR_DROP     0x7FFF
 
 #define PARTY_SUMM_SKIP_DRAW_DELAY (1 << 7)
 

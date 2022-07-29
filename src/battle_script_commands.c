@@ -1176,8 +1176,8 @@ static void Cmd_accuracycheck(void)
         if ((Random() % 100 + 1) > calc)
         {
             gMoveResultFlags |= MOVE_RESULT_MISSED;
-            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE &&
-                (gBattleMoves[move].target == MOVE_TARGET_BOTH || gBattleMoves[move].target == MOVE_TARGET_FOES_AND_ALLY))
+            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+             && (gBattleMoves[move].target == MOVE_TARGET_BOTH || gBattleMoves[move].target == MOVE_TARGET_FOES_AND_ALLY))
                 gBattleCommunication[MISS_TYPE] = B_MSG_AVOIDED_ATK;
             else
                 gBattleCommunication[MISS_TYPE] = B_MSG_MISSED;
@@ -1498,7 +1498,8 @@ static void CheckWonderGuardAndLevitate(void)
     }
 }
 
-static void ModulateDmgByType2(u8 multiplier, u16 move, u8 *flags) // same as ModulateDmgByType except different arguments
+// Same as ModulateDmgByType except different arguments
+static void ModulateDmgByType2(u8 multiplier, u16 move, u8 *flags)
 {
     gBattleMoveDamage = gBattleMoveDamage * multiplier / 10;
     if (gBattleMoveDamage == 0 && multiplier != 0)
@@ -1696,7 +1697,8 @@ static void Cmd_adjustnormaldamage(void)
     gBattlescriptCurrInstr++;
 }
 
-static void Cmd_adjustnormaldamage2(void) // The same as adjustnormaldamage except it doesn't check for false swipe move effect.
+// The same as adjustnormaldamage except it doesn't check for false swipe move effect.
+static void Cmd_adjustnormaldamage2(void)
 {
     u8 holdEffect, param;
 
@@ -2717,20 +2719,20 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     side = GetBattlerSide(gBattlerAttacker);
                     if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT
                         && !(gBattleTypeFlags &
-                             (BATTLE_TYPE_EREADER_TRAINER
-                              | BATTLE_TYPE_FRONTIER
-                              | BATTLE_TYPE_LINK
-                              | BATTLE_TYPE_RECORDED_LINK
-                              | BATTLE_TYPE_SECRET_BASE)))
+                            (BATTLE_TYPE_EREADER_TRAINER
+                            | BATTLE_TYPE_FRONTIER
+                            | BATTLE_TYPE_LINK
+                            | BATTLE_TYPE_RECORDED_LINK
+                            | BATTLE_TYPE_SECRET_BASE)))
                     {
                         gBattlescriptCurrInstr++;
                     }
                     else if (!(gBattleTypeFlags &
-                          (BATTLE_TYPE_EREADER_TRAINER
-                           | BATTLE_TYPE_FRONTIER
-                           | BATTLE_TYPE_LINK
-                           | BATTLE_TYPE_RECORDED_LINK
-                           | BATTLE_TYPE_SECRET_BASE))
+                            (BATTLE_TYPE_EREADER_TRAINER
+                            | BATTLE_TYPE_FRONTIER
+                            | BATTLE_TYPE_LINK
+                            | BATTLE_TYPE_RECORDED_LINK
+                            | BATTLE_TYPE_SECRET_BASE))
                         && (gWishFutureKnock.knockedOffMons[side] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]))
                     {
                         gBattlescriptCurrInstr++;
@@ -3931,7 +3933,8 @@ static void Cmd_end2(void)
     gCurrentActionFuncId = B_ACTION_TRY_FINISH;
 }
 
-static void Cmd_end3(void) // pops the main function stack
+// Pops the main function stack
+static void Cmd_end3(void)
 {
     BattleScriptPop();
     if (gBattleResources->battleCallbackStack->size != 0)
@@ -5824,7 +5827,8 @@ static void Cmd_cancelallactions(void)
     gBattlescriptCurrInstr++;
 }
 
-static void Cmd_adjustsetdamage(void) // The same as adjustnormaldamage, except there's no random damage multiplier.
+// The same as adjustnormaldamage, except there's no random damage multiplier.
+static void Cmd_adjustsetdamage(void)
 {
     u8 holdEffect, param;
 
@@ -6462,7 +6466,8 @@ static void Cmd_various(void)
     gBattlescriptCurrInstr += 3;
 }
 
-static void Cmd_setprotectlike(void) // protect and endure
+ // Protect and Endure
+static void Cmd_setprotectlike(void)
 {
     bool8 notLastTurn = TRUE;
     u16 lastMove = gLastResultingMoves[gBattlerAttacker];
@@ -7036,12 +7041,9 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
             gBattleTextBuff2[3] = STRINGID_STATSHARPLY >> 8;
             index = 4;
         }
-        gBattleTextBuff2[index] = B_BUFF_STRING;
-        index++;
-        gBattleTextBuff2[index] = STRINGID_STATROSE;
-        index++;
-        gBattleTextBuff2[index] = STRINGID_STATROSE >> 8;
-        index++;
+        gBattleTextBuff2[index++] = B_BUFF_STRING;
+        gBattleTextBuff2[index++] = STRINGID_STATROSE;
+        gBattleTextBuff2[index++] = STRINGID_STATROSE >> 8;
         gBattleTextBuff2[index] = B_BUFF_EOS;
 
         if (gBattleMons[gActiveBattler].statStages[statId] == MAX_STAT_STAGE)
@@ -7072,7 +7074,8 @@ static void Cmd_statbuffchange(void)
         gBattlescriptCurrInstr += 6;
 }
 
-static void Cmd_normalisebuffs(void) // haze
+// Haze
+static void Cmd_normalisebuffs(void)
 {
     s32 i, j;
 
@@ -7175,15 +7178,15 @@ static void Cmd_forcerandomswitch(void)
         {
             if ((gBattlerTarget & BIT_FLANK) != B_FLANK_LEFT)
             {
-                firstMonId = 3;
-                lastMonId = 6;
+                firstMonId = PARTY_SIZE / 2;
+                lastMonId = PARTY_SIZE;
             }
             else
             {
                 firstMonId = 0;
-                lastMonId = 3;
+                lastMonId = PARTY_SIZE / 2;
             }
-            monsCount = 3;
+            monsCount = PARTY_SIZE / 2;
             minNeeded = 1;
             battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
             battler1PartyId = gBattlerPartyIndexes[gBattlerTarget ^ BIT_FLANK];
@@ -7193,15 +7196,15 @@ static void Cmd_forcerandomswitch(void)
         {
             if (GetLinkTrainerFlankId(GetBattlerMultiplayerId(gBattlerTarget)) == B_FLANK_RIGHT)
             {
-                firstMonId = 3;
-                lastMonId = 6;
+                firstMonId = PARTY_SIZE / 2;
+                lastMonId = PARTY_SIZE;
             }
             else
             {
                 firstMonId = 0;
-                lastMonId = 3;
+                lastMonId = PARTY_SIZE / 2;
             }
-            monsCount = 3;
+            monsCount = PARTY_SIZE / 2;
             minNeeded = 1;
             battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
             battler1PartyId = gBattlerPartyIndexes[gBattlerTarget ^ BIT_FLANK];
@@ -7211,23 +7214,23 @@ static void Cmd_forcerandomswitch(void)
             if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
             {
                 firstMonId = 0;
-                lastMonId = 6;
-                monsCount = 6;
+                lastMonId = PARTY_SIZE;
+                monsCount = PARTY_SIZE;
                 minNeeded = 2; // since there are two opponents, it has to be a double battle
             }
             else
             {
                 if ((gBattlerTarget & BIT_FLANK) != B_FLANK_LEFT)
                 {
-                    firstMonId = 3;
-                    lastMonId = 6;
+                    firstMonId = PARTY_SIZE / 2;
+                    lastMonId = PARTY_SIZE;
                 }
                 else
                 {
                     firstMonId = 0;
-                    lastMonId = 3;
+                    lastMonId = PARTY_SIZE / 2;
                 }
-                monsCount = 3;
+                monsCount = PARTY_SIZE / 2;
                 minNeeded = 1;
             }
             battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
@@ -7236,8 +7239,8 @@ static void Cmd_forcerandomswitch(void)
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         {
             firstMonId = 0;
-            lastMonId = 6;
-            monsCount = 6;
+            lastMonId = PARTY_SIZE;
+            monsCount = PARTY_SIZE;
             minNeeded = 2;
             battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
             battler1PartyId = gBattlerPartyIndexes[gBattlerTarget ^ BIT_FLANK];
@@ -7245,8 +7248,8 @@ static void Cmd_forcerandomswitch(void)
         else
         {
             firstMonId = 0;
-            lastMonId = 6;
-            monsCount = 6;
+            lastMonId = PARTY_SIZE;
+            monsCount = PARTY_SIZE;
             minNeeded = 1;
             battler2PartyId = gBattlerPartyIndexes[gBattlerTarget]; // there is only one pokemon out in single battles
             battler1PartyId = gBattlerPartyIndexes[gBattlerTarget];
@@ -7306,7 +7309,8 @@ static void Cmd_forcerandomswitch(void)
     }
 }
 
-static void Cmd_tryconversiontypechange(void) // randomly changes user's type to one of its moves' type
+// Randomly changes user's type to one of its moves' type
+static void Cmd_tryconversiontypechange(void)
 {
     u8 validMoves = 0;
     u8 moveChecked;
@@ -7493,7 +7497,8 @@ static void Cmd_tryKO(void)
     }
 }
 
-static void Cmd_damagetohalftargethp(void) // super fang
+// Super Fang
+static void Cmd_damagetohalftargethp(void)
 {
     gBattleMoveDamage = gBattleMons[gBattlerTarget].hp / 2;
     if (gBattleMoveDamage == 0)
@@ -7875,7 +7880,8 @@ static void Cmd_counterdamagecalculator(void)
     }
 }
 
-static void Cmd_mirrorcoatdamagecalculator(void) // a copy of Cmd with the physical -> special field changes
+// A copy of Cmd with the physical -> special field changes
+static void Cmd_mirrorcoatdamagecalculator(void)
 {
     u8 sideAttacker = GetBattlerSide(gBattlerAttacker);
     u8 sideTarget = GetBattlerSide(gProtectStructs[gBattlerAttacker].specialBattlerId);
@@ -7979,7 +7985,8 @@ static void Cmd_painsplitdmgcalc(void)
     }
 }
 
-static void Cmd_settypetorandomresistance(void) // conversion 2
+// Conversion 2
+static void Cmd_settypetorandomresistance(void)
 {
     if (gLastLandedMoves[gBattlerAttacker] == MOVE_NONE
      || gLastLandedMoves[gBattlerAttacker] == MOVE_UNAVAILABLE)
@@ -8047,7 +8054,8 @@ static void Cmd_setalwayshitflag(void)
     gBattlescriptCurrInstr++;
 }
 
-static void Cmd_copymovepermanently(void) // sketch
+// Sketch
+static void Cmd_copymovepermanently(void)
 {
     gChosenMove = MOVE_UNAVAILABLE;
 
@@ -8677,7 +8685,8 @@ static void Cmd_setsunny(void)
     gBattlescriptCurrInstr++;
 }
 
-static void Cmd_maxattackhalvehp(void) // belly drum
+// Belly Drum
+static void Cmd_maxattackhalvehp(void)
 {
     u32 halfHp = gBattleMons[gBattlerAttacker].maxHP / 2;
 
@@ -8700,7 +8709,8 @@ static void Cmd_maxattackhalvehp(void) // belly drum
     }
 }
 
-static void Cmd_copyfoestats(void) // psych up
+// Psych Up
+static void Cmd_copyfoestats(void)
 {
     s32 i;
 
@@ -8978,7 +8988,8 @@ static void Cmd_trymemento(void)
     }
 }
 
-static void Cmd_setforcedtarget(void) // follow me
+// Follow Me
+static void Cmd_setforcedtarget(void)
 {
     gSideTimers[GetBattlerSide(gBattlerAttacker)].followmeTimer = 1;
     gSideTimers[GetBattlerSide(gBattlerAttacker)].followmeTarget = gBattlerAttacker;
@@ -8993,7 +9004,8 @@ static void Cmd_setcharge(void)
     gBattlescriptCurrInstr++;
 }
 
-static void Cmd_callterrainattack(void) // nature power
+// Nature Power
+static void Cmd_callterrainattack(void)
 {
     gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
     gCurrentMove = sNaturePowerMoves[gBattleTerrain];
@@ -9002,7 +9014,8 @@ static void Cmd_callterrainattack(void) // nature power
     gBattlescriptCurrInstr++;
 }
 
-static void Cmd_cureifburnedparalysedorpoisoned(void) // refresh
+// Refresh
+static void Cmd_cureifburnedparalysedorpoisoned(void)
 {
     if (gBattleMons[gBattlerAttacker].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON))
     {
@@ -9071,7 +9084,8 @@ static void Cmd_trysethelpinghand(void)
     }
 }
 
-static void Cmd_tryswapitems(void) // trick
+// Trick
+static void Cmd_tryswapitems(void)
 {
     // opponent can't swap items with player in regular battles
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL
@@ -9158,7 +9172,8 @@ static void Cmd_tryswapitems(void) // trick
     }
 }
 
-static void Cmd_trycopyability(void) // role play
+// Role Play
+static void Cmd_trycopyability(void)
 {
     if (gBattleMons[gBattlerTarget].ability != ABILITY_NONE
         && gBattleMons[gBattlerTarget].ability != ABILITY_WONDER_GUARD)
@@ -9206,7 +9221,8 @@ static void Cmd_trywish(void)
     }
 }
 
-static void Cmd_trysetroots(void) // ingrain
+// Ingrain
+static void Cmd_trysetroots(void)
 {
     if (gStatuses3[gBattlerAttacker] & STATUS3_ROOTED)
     {
@@ -9271,7 +9287,8 @@ static void Cmd_scaledamagebyhealthratio(void)
     gBattlescriptCurrInstr++;
 }
 
-static void Cmd_tryswapabilities(void) // skill swap
+// Skill Swap
+static void Cmd_tryswapabilities(void)
 {
     if ((gBattleMons[gBattlerAttacker].ability == ABILITY_NONE
         && gBattleMons[gBattlerTarget].ability == ABILITY_NONE)
@@ -9431,7 +9448,8 @@ static void Cmd_trysetmagiccoat(void)
     }
 }
 
-static void Cmd_trysetsnatch(void) // snatch
+// Snatch
+static void Cmd_trysetsnatch(void)
 {
     gSpecialStatuses[gBattlerAttacker].ppNotAffectedByPressure = 1;
     if (gCurrentTurnActionNumber == gBattlersCount - 1) // moves last turn
@@ -9635,7 +9653,8 @@ static void Cmd_trycastformdatachange(void)
     }
 }
 
-static void Cmd_settypebasedhalvers(void) // water and mud sport
+// Water and Mud Sport
+static void Cmd_settypebasedhalvers(void)
 {
     bool8 worked = FALSE;
 
@@ -9648,7 +9667,7 @@ static void Cmd_settypebasedhalvers(void) // water and mud sport
             worked = TRUE;
         }
     }
-    else // water sport
+    else // Water Sport
     {
         if (!(gStatuses3[gBattlerAttacker] & STATUS3_WATERSPORT))
         {
@@ -9759,7 +9778,8 @@ static void Cmd_snatchsetbattlers(void)
     gBattlescriptCurrInstr++;
 }
 
-static void Cmd_removelightscreenreflect(void) // brick break
+// Brick Break
+static void Cmd_removelightscreenreflect(void)
 {
     u8 opposingSide = GetBattlerSide(gBattlerAttacker) ^ BIT_SIDE;
 

@@ -410,7 +410,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         gMain.state++;
         break;
     case 2:
-        InitTradeBg();
+        LoadTradeAnimGfx();
         gMain.state++;
         break;
     case 3:
