@@ -3323,7 +3323,7 @@ static void Cmd_getexp(void)
             {
                 // music change in wild battle after fainting a poke
                 if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                 && gBattleMons[0].hp
+                 && gBattleMons[0].hp != 0
                  && !gBattleStruct->wildVictorySong)
                 {
                     BattleStopLowHpSound();
@@ -4246,7 +4246,7 @@ static void Cmd_moveend(void)
                 effect = TRUE;
             gBattleScripting.moveendState++;
             break;
-        case MOVEEND_ON_DAMAGE_ABILITIES: // Such as abilities activating on contact(Poison Spore, Rough Skin, etc.).
+        case MOVEEND_ON_DAMAGE_ABILITIES: // Such as abilities activating on contact (Effect Spore, Rough Skin, etc.).
             if (AbilityBattleEffects(ABILITYEFFECT_ON_DAMAGE, gBattlerTarget, 0, 0, 0))
                 effect = TRUE;
             gBattleScripting.moveendState++;
@@ -6237,7 +6237,7 @@ static void Cmd_hpthresholds(void)
         if (result == 0)
             result = 1;
 
-        if (result > 69 || !gBattleMons[opposingBattler].hp)
+        if (result > 69 || !gBattleMons[opposingBattler].hp == 0)
             gBattleStruct->hpScale = 0;
         else if (result > 39)
             gBattleStruct->hpScale = 1;
