@@ -146,10 +146,10 @@ static void EscapeRopeWarpInEffect_Init(struct Task *);
 static void EscapeRopeWarpInEffect_Spin(struct Task *);
 
 static void Task_TeleportWarpOut(u8);
-static void TeleportWarpOutFieldEffect_Init(struct Task*);
-static void TeleportWarpOutFieldEffect_SpinGround(struct Task*);
-static void TeleportWarpOutFieldEffect_SpinExit(struct Task*);
-static void TeleportWarpOutFieldEffect_End(struct Task*);
+static void TeleportWarpOutFieldEffect_Init(struct Task *);
+static void TeleportWarpOutFieldEffect_SpinGround(struct Task *);
+static void TeleportWarpOutFieldEffect_SpinExit(struct Task *);
+static void TeleportWarpOutFieldEffect_End(struct Task *);
 
 static void FieldCallback_TeleportWarpIn(void);
 static void Task_TeleportWarpIn(u8);
@@ -226,8 +226,8 @@ static void Task_DestroyDeoxysRock(u8 taskId);
 static void DestroyDeoxysRockEffect_CameraShake(s16 *, u8);
 static void DestroyDeoxysRockEffect_RockFragments(s16 *, u8);
 static void DestroyDeoxysRockEffect_WaitAndEnd(s16 *, u8);
-static void CreateDeoxysRockFragments(struct Sprite*);
-static void SpriteCB_DeoxysRockFragment(struct Sprite* sprite);
+static void CreateDeoxysRockFragments(struct Sprite *);
+static void SpriteCB_DeoxysRockFragment(struct Sprite *sprite);
 
 static void Task_MoveDeoxysRock(u8 taskId);
 
@@ -3776,7 +3776,7 @@ static const struct SpriteTemplate sSpriteTemplate_DeoxysRockFragment = {
     .callback = SpriteCB_DeoxysRockFragment
 };
 
-static void CreateDeoxysRockFragments(struct Sprite* sprite)
+static void CreateDeoxysRockFragments(struct Sprite *sprite)
 {
     int i;
     int xPos = (s16)gTotalCameraPixelOffsetX + sprite->x + sprite->x2;
@@ -3794,7 +3794,7 @@ static void CreateDeoxysRockFragments(struct Sprite* sprite)
     }
 }
 
-static void SpriteCB_DeoxysRockFragment(struct Sprite* sprite)
+static void SpriteCB_DeoxysRockFragment(struct Sprite *sprite)
 {
     // 1 case for each fragment, fly off in 4 different directions
     switch (sprite->data[0])
@@ -3820,7 +3820,7 @@ static void SpriteCB_DeoxysRockFragment(struct Sprite* sprite)
         DestroySprite(sprite);
 }
 
-bool8 FldEff_MoveDeoxysRock(struct Sprite* sprite)
+bool8 FldEff_MoveDeoxysRock(struct Sprite *sprite)
 {
     u8 objectEventIdBuffer;
     if (!TryGetObjectEventIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2], &objectEventIdBuffer))

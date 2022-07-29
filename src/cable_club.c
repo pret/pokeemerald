@@ -833,7 +833,7 @@ static void SetLinkBattleTypeFlags(int linkService)
 
 static void Task_StartWiredCableClubBattle(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
 
     switch (task->tState)
     {
@@ -1042,7 +1042,7 @@ void ExitLinkRoom(void)
 // Note: gSpecialVar_0x8005 contains the id of the seat the player entered
 static void Task_EnterCableClubSeat(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
 
     switch (task->tState)
     {

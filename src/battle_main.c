@@ -118,7 +118,7 @@ static void HandleEndTurn_BattleLost(void);
 static void HandleEndTurn_RanFromBattle(void);
 static void HandleEndTurn_MonFled(void);
 static void HandleEndTurn_FinishBattle(void);
-static void SpriteCB_UnusedBattleInit(struct Sprite* sprite);
+static void SpriteCB_UnusedBattleInit(struct Sprite *sprite);
 static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite);
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
@@ -1891,7 +1891,7 @@ void CB2_QuitRecordedBattle(void)
 #define sState data[0]
 #define sDelay data[4]
 
-static void SpriteCB_UnusedBattleInit(struct Sprite* sprite)
+static void SpriteCB_UnusedBattleInit(struct Sprite *sprite)
 {
     sprite->sState = 0;
     sprite->callback = SpriteCB_UnusedBattleInit_Main;

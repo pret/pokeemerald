@@ -67,7 +67,7 @@ static void IncrementCeilingCrumbleFinishedCount(void);
 static void WaitCeilingCrumble(u8);
 static void FinishCeilingCrumbleTask(u8);
 static void CreateCeilingCrumbleSprites(void);
-static void SpriteCB_CeilingCrumble(struct Sprite*);
+static void SpriteCB_CeilingCrumble(struct Sprite *);
 static void DoMirageTowerDisintegration(u8);
 static void InitMirageTowerShake(u8);
 static void Task_FossilFallAndSink(u8);
@@ -463,7 +463,7 @@ static void CreateCeilingCrumbleSprites(void)
     }
 }
 
-static void SpriteCB_CeilingCrumble(struct Sprite* sprite)
+static void SpriteCB_CeilingCrumble(struct Sprite *sprite)
 {
     sprite->data[1] += 2;
     sprite->y2 = sprite->data[1] / 2;

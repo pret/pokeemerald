@@ -1795,7 +1795,7 @@ static void VBlankCB_DodrioGame(void)
     ProcessSpriteCopyRequests();
 }
 
-static void InitMonInfo(struct DodrioGame_MonInfo * monInfo, struct Pokemon * mon)
+static void InitMonInfo(struct DodrioGame_MonInfo * monInfo, struct Pokemon *mon)
 {
     monInfo->isShiny = IsMonShiny(mon);
 }

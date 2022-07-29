@@ -170,7 +170,7 @@ static void CB2_BeginEvolutionScene(void)
 
 static void Task_BeginEvolutionScene(u8 taskId)
 {
-    struct Pokemon* mon = NULL;
+    struct Pokemon *mon = NULL;
     switch (gTasks[taskId].tState)
     {
     case 0:
@@ -196,7 +196,7 @@ static void Task_BeginEvolutionScene(u8 taskId)
     }
 }
 
-void BeginEvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, bool8 canStopEvo, u8 partyId)
+void BeginEvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopEvo, u8 partyId)
 {
     u8 taskId = CreateTask(Task_BeginEvolutionScene, 0);
     gTasks[taskId].tState = 0;
@@ -206,7 +206,7 @@ void BeginEvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, bool8 canStopE
     SetMainCallback2(CB2_BeginEvolutionScene);
 }
 
-void EvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, bool8 canStopEvo, u8 partyId)
+void EvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopEvo, u8 partyId)
 {
     u8 name[20];
     u16 currSpecies;
@@ -314,7 +314,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     const struct CompressedSpritePalette* pokePal;
     u16 postEvoSpecies;
     u32 trainerId, personality;
-    struct Pokemon* mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskId].tPartyId];
+    struct Pokemon *mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskId].tPartyId];
 
     postEvoSpecies = gTasks[sEvoStructPtr->evoTaskId].tPostEvoSpecies;
     trainerId = GetMonData(mon, MON_DATA_OT_ID);
@@ -381,7 +381,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
 
 static void CB2_TradeEvolutionSceneLoadGraphics(void)
 {
-    struct Pokemon* mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskId].tPartyId];
+    struct Pokemon *mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskId].tPartyId];
     u16 postEvoSpecies = gTasks[sEvoStructPtr->evoTaskId].tPostEvoSpecies;
 
     switch (gMain.state)
@@ -465,7 +465,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
     }
 }
 
-void TradeEvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, u8 preEvoSpriteId, u8 partyId)
+void TradeEvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, u8 preEvoSpriteId, u8 partyId)
 {
     u8 name[20];
     u16 currSpecies;
@@ -545,13 +545,13 @@ static void CB2_TradeEvolutionSceneUpdate(void)
     RunTasks();
 }
 
-static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
+static void CreateShedinja(u16 preEvoSpecies, struct Pokemon *mon)
 {
     u32 data = 0;
     if (gEvolutionTable[preEvoSpecies][0].method == EVO_LEVEL_NINJASK && gPlayerPartyCount < PARTY_SIZE)
     {
         s32 i;
-        struct Pokemon* shedinja = &gPlayerParty[gPlayerPartyCount];
+        struct Pokemon *shedinja = &gPlayerParty[gPlayerPartyCount];
 
         CopyMon(&gPlayerParty[gPlayerPartyCount], mon, sizeof(struct Pokemon));
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_SPECIES, &gEvolutionTable[preEvoSpecies][1].targetSpecies);
@@ -632,7 +632,7 @@ enum {
 static void Task_EvolutionScene(u8 taskId)
 {
     u32 var;
-    struct Pokemon* mon = &gPlayerParty[gTasks[taskId].tPartyId];
+    struct Pokemon *mon = &gPlayerParty[gTasks[taskId].tPartyId];
 
     // check if B Button was held, so the evolution gets stopped
     if (gMain.heldKeys == B_BUTTON
@@ -1081,7 +1081,7 @@ enum {
 static void Task_TradeEvolutionScene(u8 taskId)
 {
     u32 var = 0;
-    struct Pokemon* mon = &gPlayerParty[gTasks[taskId].tPartyId];
+    struct Pokemon *mon = &gPlayerParty[gTasks[taskId].tPartyId];
 
     switch (gTasks[taskId].tState)
     {

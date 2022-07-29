@@ -275,7 +275,7 @@ static s32 IsRequestedTypeOrEggInPlayerParty(u32, u32);
 static bool32 UR_PrintFieldMessage(const u8 *);
 static s32 GetChatLeaderActionRequestMessage(u8 *, u32, u16 *, struct WirelessLink_URoom *);
 static void Task_InitUnionRoom(u8 taskId);
-static bool8 ArePlayersDifferent(struct RfuPlayerData*, const struct RfuPlayerData*);
+static bool8 ArePlayersDifferent(struct RfuPlayerData *, const struct RfuPlayerData *);
 static void ItemPrintFunc_PossibleGroupMembers(u8, u32, u8);
 static void ListMenuItemPrintFunc_UnionRoomGroups(u8, u32, u8);
 static void TradeBoardListMenuItemPrintFunc(u8, u32, u8);
@@ -1487,7 +1487,7 @@ static void Task_StartUnionRoomTrade(u8 taskId)
     case 1:
         if (GetBlockReceivedStatus() == 3)
         {
-            gEnemyParty[0] = *(struct Pokemon*)(gBlockRecvBuffer[GetMultiplayerId() ^ 1]);
+            gEnemyParty[0] = *(struct Pokemon *)(gBlockRecvBuffer[GetMultiplayerId() ^ 1]);
             IncrementGameStat(GAME_STAT_NUM_UNION_ROOM_BATTLES);
             ResetBlockReceivedFlags();
             gTasks[taskId].data[0]++;

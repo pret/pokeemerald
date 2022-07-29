@@ -1145,7 +1145,7 @@ static void CB2_LoadBerryBlender(void)
 #define sYDownSpeed    data[7]
 
 // For throwing berries into the machine
-static void SpriteCB_Berry(struct Sprite* sprite)
+static void SpriteCB_Berry(struct Sprite *sprite)
 {
     sprite->sX += sprite->sXSpeed;
     sprite->sY -= sprite->sYUpSpeed;
@@ -1166,7 +1166,7 @@ static void SpriteCB_Berry(struct Sprite* sprite)
     sprite->y = sprite->sY;
 }
 
-static void SetBerrySpriteData(struct Sprite* sprite, s16 x, s16 y, s16 bounceSpeed, s16 xSpeed, s16 ySpeed)
+static void SetBerrySpriteData(struct Sprite *sprite, s16 x, s16 y, s16 bounceSpeed, s16 xSpeed, s16 ySpeed)
 {
     sprite->sTargetY = y;
     sprite->sX = x;
@@ -2628,7 +2628,7 @@ static void CB2_EndBlenderGame(void)
 
             if (gReceivedRemoteLinkPlayers && gWirelessCommType)
             {
-                struct BlenderGameBlock *receivedBlock = (struct BlenderGameBlock*)(&gBlockRecvBuffer);
+                struct BlenderGameBlock *receivedBlock = (struct BlenderGameBlock *)(&gBlockRecvBuffer);
 
                 sBerryBlender->maxRPM = receivedBlock->timeRPM.maxRPM;
                 sBerryBlender->gameFrameTime = receivedBlock->timeRPM.time;
@@ -2641,7 +2641,7 @@ static void CB2_EndBlenderGame(void)
             }
             else
             {
-                struct TimeAndRPM *receivedBlock = (struct TimeAndRPM*)(&gBlockRecvBuffer);
+                struct TimeAndRPM *receivedBlock = (struct TimeAndRPM *)(&gBlockRecvBuffer);
 
                 sBerryBlender->maxRPM = receivedBlock->maxRPM;
                 sBerryBlender->gameFrameTime = receivedBlock->time;
@@ -3159,7 +3159,7 @@ static void SetBgPos(void)
     SetGpuReg(REG_OFFSET_BG0VOFS, sBerryBlender->bg_Y);
 }
 
-static void SpriteCB_Particle(struct Sprite* sprite)
+static void SpriteCB_Particle(struct Sprite *sprite)
 {
     sprite->data[2] += sprite->data[0];
     sprite->data[3] += sprite->data[1];
@@ -3194,7 +3194,7 @@ static void CreateParticleSprites(void)
     }
 }
 
-static void SpriteCB_ScoreSymbol(struct Sprite* sprite)
+static void SpriteCB_ScoreSymbol(struct Sprite *sprite)
 {
     sprite->data[0]++;
     sprite->y2 = -(sprite->data[0] / 3);
@@ -3203,7 +3203,7 @@ static void SpriteCB_ScoreSymbol(struct Sprite* sprite)
         DestroySprite(sprite);
 }
 
-static void SpriteCB_ScoreSymbolBest(struct Sprite* sprite)
+static void SpriteCB_ScoreSymbolBest(struct Sprite *sprite)
 {
     sprite->data[0]++;
     sprite->y2 = -(sprite->data[0] * 2);
@@ -3225,7 +3225,7 @@ static void SetPlayerBerryData(u8 playerId, u16 itemId)
 #define sDelay  data[2]
 #define sAnimId data[3]
 
-static void SpriteCB_CountdownNumber(struct Sprite* sprite)
+static void SpriteCB_CountdownNumber(struct Sprite *sprite)
 {
     switch (sprite->sState)
     {
@@ -3272,7 +3272,7 @@ static void SpriteCB_CountdownNumber(struct Sprite* sprite)
 #undef sDelay
 #undef sAnimId
 
-static void SpriteCB_Start(struct Sprite* sprite)
+static void SpriteCB_Start(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -3443,7 +3443,7 @@ static bool8 UpdateBlenderLandScreenShake(void)
     return FALSE;
 }
 
-static void SpriteCB_PlayerArrow(struct Sprite* sprite)
+static void SpriteCB_PlayerArrow(struct Sprite *sprite)
 {
    sprite->x2 = -(sBerryBlender->bg_X);
    sprite->y2 = -(sBerryBlender->bg_Y);

@@ -1534,7 +1534,7 @@ static void AnimAirWaveProjectile_Step2(struct Sprite *sprite)
 
 static void AnimAirWaveProjectile_Step1(struct Sprite *sprite)
 {
-    struct Task* task = &gTasks[sprite->data[7]];
+    struct Task *task = &gTasks[sprite->data[7]];
     if (sprite->data[0] > task->data[5])
     {
         sprite->data[5] += sprite->data[3];
@@ -1571,7 +1571,7 @@ static void AnimAirWaveProjectile(struct Sprite *sprite)
     s16 b;
     s16 c;
 
-    struct Task* task = &gTasks[sprite->data[7]];
+    struct Task *task = &gTasks[sprite->data[7]];
     sprite->data[1] += (-2 & task->data[7]);
     sprite->data[2] += (-2 & task->data[8]);
     if (1 & task->data[7])
@@ -2035,7 +2035,7 @@ static void AnimTask_GrowAndGrayscale_Step(u8 taskId)
 // No args.
 void AnimTask_Minimize(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     task->data[0] = spriteId;
     PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
@@ -2051,7 +2051,7 @@ void AnimTask_Minimize(u8 taskId)
 
 static void AnimTask_Minimize_Step(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     switch (task->data[1])
     {
     case 0:
@@ -2115,7 +2115,7 @@ static void AnimTask_Minimize_Step(u8 taskId)
     }
 }
 
-static void CreateMinimizeSprite(struct Task* task, u8 taskId)
+static void CreateMinimizeSprite(struct Task *task, u8 taskId)
 {
     u16 matrixNum;
     s16 spriteId = CloneBattlerSpriteWithBlend(ANIM_ATTACKER);
@@ -2160,7 +2160,7 @@ static void ClonedMinizeSprite_Step(struct Sprite *sprite)
 // arg 1: num hops
 void AnimTask_Splash(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     if (gBattleAnimArgs[1] == 0)
     {
         DestroyAnimVisualTask(taskId);
@@ -2180,7 +2180,7 @@ void AnimTask_Splash(u8 taskId)
 
 static void AnimTask_Splash_Step(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     switch (task->data[1])
     {
     case 0:
@@ -2234,7 +2234,7 @@ static void AnimTask_Splash_Step(u8 taskId)
 // No args.
 void AnimTask_GrowAndShrink(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     PrepareAffineAnimInTaskData(task, spriteId, gGrowAndShrinkAffineAnimCmds);
     task->func = AnimTask_GrowAndShrink_Step;
@@ -2242,7 +2242,7 @@ void AnimTask_GrowAndShrink(u8 taskId)
 
 static void AnimTask_GrowAndShrink_Step(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     if (!RunAffineAnimFromTaskData(task))
         DestroyAnimVisualTask(taskId);
 }
@@ -2301,7 +2301,7 @@ static void AnimAngerMark(struct Sprite *sprite)
 // left/right movements
 void AnimTask_ThrashMoveMonHorizontal(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     task->data[0] = spriteId;
     task->data[1] = 0;
@@ -2311,7 +2311,7 @@ void AnimTask_ThrashMoveMonHorizontal(u8 taskId)
 
 static void AnimTask_ThrashMoveMonHorizontal_Step(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     if (!RunAffineAnimFromTaskData(task))
         DestroyAnimVisualTask(taskId);
 }
@@ -2319,7 +2319,7 @@ static void AnimTask_ThrashMoveMonHorizontal_Step(u8 taskId)
 // up/down movements
 void AnimTask_ThrashMoveMonVertical(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     task->data[0] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     task->data[1] = 0;
     task->data[2] = 4;
@@ -2338,7 +2338,7 @@ void AnimTask_ThrashMoveMonVertical(u8 taskId)
 
 static void AnimTask_ThrashMoveMonVertical_Step(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     if (++task->data[7] > 2)
     {
         task->data[7] = 0;
@@ -2389,7 +2389,7 @@ static void AnimTask_ThrashMoveMonVertical_Step(u8 taskId)
 
 void AnimTask_SketchDrawMon(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     struct ScanlineEffectParams params;
 
     s16 i;
@@ -2430,7 +2430,7 @@ void AnimTask_SketchDrawMon(u8 taskId)
 
 static void AnimTask_SketchDrawMon_Step(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
 
     switch (task->data[4])
     {
@@ -2791,7 +2791,7 @@ static void AnimSoftBoiledEgg_Step4_Callback(struct Sprite *sprite)
 // Used by Extremespeed
 void AnimTask_AttackerStretchAndDisappear(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     task->data[0] = spriteId;
     PrepareAffineAnimInTaskData(task, spriteId, gStretchAttackerAffineAnimCmds);
@@ -2800,7 +2800,7 @@ void AnimTask_AttackerStretchAndDisappear(u8 taskId)
 
 static void AnimTask_AttackerStretchAndDisappear_Step(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     if (!RunAffineAnimFromTaskData(task))
     {
         gSprites[task->data[0]].y2 = 0;
@@ -2811,7 +2811,7 @@ static void AnimTask_AttackerStretchAndDisappear_Step(u8 taskId)
 
 void AnimTask_ExtremeSpeedImpact(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     task->data[0] = 0;
     task->data[1] = 0;
     task->data[2] = 0;
@@ -2834,7 +2834,7 @@ void AnimTask_ExtremeSpeedImpact(u8 taskId)
 
 static void AnimTask_ExtremeSpeedImpact_Step(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
 
     switch (task->data[0])
     {
@@ -2880,7 +2880,7 @@ static void AnimTask_ExtremeSpeedImpact_Step(u8 taskId)
 
 void AnimTask_ExtremeSpeedMonReappear(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     task->data[0] = 0;
     task->data[1] = 0;
     task->data[2] = 0;
@@ -2894,7 +2894,7 @@ void AnimTask_ExtremeSpeedMonReappear(u8 taskId)
 
 static void AnimTask_ExtremeSpeedMonReappear_Step(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     if (task->data[0] == 0 && ++task->data[1] > task->data[4])
     {
         task->data[1] = 0;
@@ -2922,7 +2922,7 @@ static void AnimTask_ExtremeSpeedMonReappear_Step(u8 taskId)
 
 void AnimTask_SpeedDust(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     task->data[0] = 0;
     task->data[1] = 4;
     task->data[2] = 0;
@@ -2940,7 +2940,7 @@ void AnimTask_SpeedDust(u8 taskId)
 
 static void AnimTask_SpeedDust_Step(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     switch (task->data[8])
     {
     case 0:

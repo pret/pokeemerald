@@ -63,7 +63,7 @@ static void BuyMenuBuildListMenuTemplate(void);
 static void BuyMenuInitBgs(void);
 static void BuyMenuInitWindows(void);
 static void BuyMenuDecompressBgGraphics(void);
-static void BuyMenuSetListEntry(struct ListMenuItem*, u16, u8 *);
+static void BuyMenuSetListEntry(struct ListMenuItem *, u16, u8 *);
 static void BuyMenuAddItemIcon(u16, u8);
 static void BuyMenuRemoveItemIcon(u16, u8);
 static void BuyMenuPrint(u8 windowId, const u8 *text, u8 x, u8 y, s8 speed, u8 colorSet);

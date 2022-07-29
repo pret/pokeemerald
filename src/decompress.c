@@ -263,7 +263,7 @@ u32 GetDecompressedDataSize(const u32 *ptr)
     return (ptr8[3] << 16) | (ptr8[2] << 8) | (ptr8[1]);
 }
 
-bool8 LoadCompressedSpriteSheetUsingHeap(const struct CompressedSpriteSheet* src)
+bool8 LoadCompressedSpriteSheetUsingHeap(const struct CompressedSpriteSheet *src)
 {
     struct SpriteSheet dest;
     void *buffer;

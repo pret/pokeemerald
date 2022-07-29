@@ -239,9 +239,9 @@ static void SpriteCB_RotatingPokeBall(struct Sprite *sprite);
 static void SpriteCB_SeenOwnInfo(struct Sprite *sprite);
 static void SpriteCB_DexListStartMenuCursor(struct Sprite *sprite);
 static void SpriteCB_PokedexListMonSprite(struct Sprite *sprite);
-static u8 LoadInfoScreen(struct PokedexListItem*, u8 monSpriteId);
+static u8 LoadInfoScreen(struct PokedexListItem *, u8 monSpriteId);
 static bool8 IsInfoScreenScrolling(u8);
-static u8 StartInfoScreenScroll(struct PokedexListItem*, u8);
+static u8 StartInfoScreenScroll(struct PokedexListItem *, u8);
 static void Task_LoadInfoScreen(u8);
 static void Task_HandleInfoScreenInput(u8);
 static void Task_SwitchScreensFromInfoScreen(u8);
@@ -3177,7 +3177,7 @@ static void PrintInfoScreenText(const u8 *str, u8 left, u8 top)
 #define tMonSpriteId     data[4]
 #define tTrainerSpriteId data[5]
 
-static u8 LoadInfoScreen(struct PokedexListItem* item, u8 monSpriteId)
+static u8 LoadInfoScreen(struct PokedexListItem *item, u8 monSpriteId)
 {
     u8 taskId;
 

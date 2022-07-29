@@ -107,10 +107,10 @@ static bool8 LoadCardGfx(void);
 static void CB2_InitTrainerCard(void);
 static u32 GetCappedGameStat(u8 statId, u32 maxValue);
 static bool8 HasAllFrontierSymbols(void);
-static u8 GetRubyTrainerStars(struct TrainerCard*);
+static u8 GetRubyTrainerStars(struct TrainerCard *);
 static u16 GetCaughtMonsCount(void);
-static void SetPlayerCardData(struct TrainerCard*, u8);
-static void TrainerCard_GenerateCardForPlayer(struct TrainerCard*);
+static void SetPlayerCardData(struct TrainerCard *, u8);
+static void TrainerCard_GenerateCardForPlayer(struct TrainerCard *);
 static u8 VersionToCardType(u8);
 static void SetDataFromTrainerCard(void);
 static void InitGpuRegs(void);
@@ -152,12 +152,12 @@ static void LoadStickerGfx(void);
 static u8 SetCardBgsAndPals(void);
 static void DrawCardBackStats(void);
 static void Task_DoCardFlipTask(u8);
-static bool8 Task_BeginCardFlip(struct Task* task);
-static bool8 Task_AnimateCardFlipDown(struct Task* task);
-static bool8 Task_DrawFlippedCardSide(struct Task* task);
-static bool8 Task_SetCardFlipped(struct Task* task);
-static bool8 Task_AnimateCardFlipUp(struct Task* task);
-static bool8 Task_EndCardFlip(struct Task* task);
+static bool8 Task_BeginCardFlip(struct Task *task);
+static bool8 Task_AnimateCardFlipDown(struct Task *task);
+static bool8 Task_DrawFlippedCardSide(struct Task *task);
+static bool8 Task_SetCardFlipped(struct Task *task);
+static bool8 Task_AnimateCardFlipUp(struct Task *task);
+static bool8 Task_EndCardFlip(struct Task *task);
 static void UpdateCardFlipRegs(u16);
 static void LoadMonIconGfx(void);
 
@@ -1570,7 +1570,7 @@ static void BlinkTimeColon(void)
 
 u8 GetTrainerCardStars(u8 cardId)
 {
-    struct TrainerCard* trainerCards = gTrainerCards;
+    struct TrainerCard *trainerCards = gTrainerCards;
     return trainerCards[cardId].stars;
 }
 
@@ -1598,7 +1598,7 @@ static void Task_DoCardFlipTask(u8 taskId)
         ;
 }
 
-static bool8 Task_BeginCardFlip(struct Task* task)
+static bool8 Task_BeginCardFlip(struct Task *task)
 {
     u32 i;
 
@@ -1615,7 +1615,7 @@ static bool8 Task_BeginCardFlip(struct Task* task)
 // Note: Cannot be DISPLAY_HEIGHT / 2, or cardHeight will be 0
 #define CARD_FLIP_Y ((DISPLAY_HEIGHT / 2) - 3)
 
-static bool8 Task_AnimateCardFlipDown(struct Task* task)
+static bool8 Task_AnimateCardFlipDown(struct Task *task)
 {
     u32 cardHeight, r5, r10, cardTop, r6, var_24, cardBottom, var;
     s16 i;
@@ -1660,7 +1660,7 @@ static bool8 Task_AnimateCardFlipDown(struct Task* task)
     return FALSE;
 }
 
-static bool8 Task_DrawFlippedCardSide(struct Task* task)
+static bool8 Task_DrawFlippedCardSide(struct Task *task)
 {
     sData->allowDMACopy = FALSE;
     if (Overworld_IsRecvQueueAtMax() == TRUE)
@@ -1714,7 +1714,7 @@ static bool8 Task_DrawFlippedCardSide(struct Task* task)
     return FALSE;
 }
 
-static bool8 Task_SetCardFlipped(struct Task* task)
+static bool8 Task_SetCardFlipped(struct Task *task)
 {
     sData->allowDMACopy = FALSE;
 
@@ -1734,7 +1734,7 @@ static bool8 Task_SetCardFlipped(struct Task* task)
     return FALSE;
 }
 
-static bool8 Task_AnimateCardFlipUp(struct Task* task)
+static bool8 Task_AnimateCardFlipUp(struct Task *task)
 {
     u32 cardHeight, r5, r10, cardTop, r6, var_24, cardBottom, var;
     s16 i;

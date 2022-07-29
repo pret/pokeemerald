@@ -535,7 +535,7 @@ void ShowReturnToFieldStartMenu(void)
 
 void Task_ShowStartMenu(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
 
     switch(task->data[0])
     {

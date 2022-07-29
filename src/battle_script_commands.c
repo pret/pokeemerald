@@ -74,7 +74,7 @@ static void DrawLevelUpWindow1(void);
 static void DrawLevelUpWindow2(void);
 static void PutMonIconOnLvlUpBanner(void);
 static void DrawLevelUpBannerText(void);
-static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite* sprite);
+static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite *sprite);
 
 static void Cmd_attackcanceler(void);
 static void Cmd_accuracycheck(void);
@@ -5629,7 +5629,7 @@ static void Cmd_updatebattlermoves(void)
          if (gBattleControllerExecFlags == 0)
          {
             s32 i;
-            struct BattlePokemon *bufferPoke = (struct BattlePokemon*) &gBattleBufferB[gActiveBattler][4];
+            struct BattlePokemon *bufferPoke = (struct BattlePokemon *) &gBattleBufferB[gActiveBattler][4];
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
                 gBattleMons[gActiveBattler].moves[i] = bufferPoke->moves[i];
@@ -6141,7 +6141,7 @@ static void PutMonIconOnLvlUpBanner(void)
     gSprites[spriteId].sXOffset = gBattle_BG2_X;
 }
 
-static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite* sprite)
+static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite *sprite)
 {
     sprite->x2 = sprite->sXOffset - gBattle_BG2_X;
 
@@ -7160,7 +7160,7 @@ static void Cmd_forcerandomswitch(void)
     s32 firstMonId;
     s32 lastMonId = 0; // + 1
     s32 monsCount;
-    struct Pokemon* party = NULL;
+    struct Pokemon *party = NULL;
     s32 validMons = 0;
     s32 minNeeded;
 
@@ -9368,7 +9368,7 @@ static void Cmd_weightdamagecalculation(void)
 static void Cmd_assistattackselect(void)
 {
     s32 chooseableMovesNo = 0;
-    struct Pokemon* party;
+    struct Pokemon *party;
     s32 monId, moveId;
     u16 *validMoves = gBattleStruct->assistPossibleMoves;
 

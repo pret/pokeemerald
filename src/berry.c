@@ -980,7 +980,7 @@ bool32 IsEnigmaBerryValid(void)
 const struct Berry *GetBerryInfo(u8 berry)
 {
     if (berry == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) && IsEnigmaBerryValid())
-        return (struct Berry*)(&gSaveBlock1Ptr->enigmaBerry.berry);
+        return (struct Berry *)(&gSaveBlock1Ptr->enigmaBerry.berry);
     else
     {
         if (berry == BERRY_NONE || berry > ITEM_TO_BERRY(LAST_BERRY_INDEX))

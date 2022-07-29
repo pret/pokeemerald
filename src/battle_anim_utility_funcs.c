@@ -27,7 +27,7 @@ static void StartBlendAnimSpriteColor(u8, u32);
 static void AnimTask_BlendSpriteColor_Step2(u8);
 static void AnimTask_HardwarePaletteFade_Step(u8);
 static void AnimTask_TraceMonBlended_Step(u8);
-static void AnimMonTrace(struct Sprite*);
+static void AnimMonTrace(struct Sprite *);
 static void AnimTask_DrawFallingWhiteLinesOnAttacker_Step(u8);
 static void StatsChangeAnimation_Step1(u8);
 static void StatsChangeAnimation_Step2(u8);

@@ -48,11 +48,11 @@ static void AnimTask_SurfWaveScanlineEffect(u8);
 static void AnimTask_WaterSpoutLaunch_Step(u8);
 static void AnimTask_WaterSpoutRain_Step(u8);
 static u8 GetWaterSpoutPowerForAnim(void);
-static void CreateWaterSpoutLaunchDroplets(struct Task*, u8);
-static void CreateWaterSpoutRainDroplet(struct Task*, u8);
+static void CreateWaterSpoutLaunchDroplets(struct Task *, u8);
+static void CreateWaterSpoutRainDroplet(struct Task *, u8);
 static void AnimTask_WaterSport_Step(u8);
-static void CreateWaterSportDroplet(struct Task*);
-static void CreateWaterPulseRingBubbles(struct Sprite*, int, int);
+static void CreateWaterSportDroplet(struct Task *);
+static void CreateWaterPulseRingBubbles(struct Sprite *, int, int);
 
 static const u8 sUnusedWater_Gfx[] = INCBIN_U8("graphics/battle_anims/unused/water_gfx.4bpp");
 static const u8 sUnusedWater[] = INCBIN_U8("graphics/battle_anims/unused/water.bin");

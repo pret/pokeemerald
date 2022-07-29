@@ -1513,7 +1513,7 @@ static void PlayerPartnerHandleYesNoBox(void)
 static void PlayerPartnerHandleChooseMove(void)
 {
     u8 chosenMoveId;
-    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][4]);
+    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
 
     BattleAI_SetupAIData(0xF);
     chosenMoveId = BattleAI_ChooseMoveOrAction();

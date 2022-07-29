@@ -605,7 +605,7 @@ static bool8 IsReelTimeSmokeAnimFinished(void);
 static void DestroyReelTimeSmokeSprite(void);
 static u8 CreatePikaPowerBoltSprite(s16, s16);
 static void DestroyPikaPowerBoltSprite(u8);
-static u8 CreateDigitalDisplaySprite(u8, void (*callback)(struct Sprite*), s16, s16, s16);
+static u8 CreateDigitalDisplaySprite(u8, void (*callback)(struct Sprite *), s16, s16, s16);
 static void LoadSlotMachineGfx(void);
 static void LoadReelBackground(void);
 static void LoadMenuGfx(void);

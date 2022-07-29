@@ -1076,14 +1076,14 @@ void BtlController_EmitMoveAnimation(u8 bufferId, u16 move, u8 turnOfMove, u16 m
 void BtlController_EmitPrintString(u8 bufferId, u16 stringID)
 {
     s32 i;
-    struct BattleMsgData* stringInfo;
+    struct BattleMsgData *stringInfo;
 
     sBattleBuffersTransferData[0] = CONTROLLER_PRINTSTRING;
     sBattleBuffersTransferData[1] = gBattleOutcome;
     sBattleBuffersTransferData[2] = stringID;
     sBattleBuffersTransferData[3] = (stringID & 0xFF00) >> 8;
 
-    stringInfo = (struct BattleMsgData*)(&sBattleBuffersTransferData[4]);
+    stringInfo = (struct BattleMsgData *)(&sBattleBuffersTransferData[4]);
     stringInfo->currentMove = gCurrentMove;
     stringInfo->originallyUsedMove = gChosenMove;
     stringInfo->lastItem = gLastUsedItem;
@@ -1115,7 +1115,7 @@ void BtlController_EmitPrintSelectionString(u8 bufferId, u16 stringID)
     sBattleBuffersTransferData[2] = stringID;
     sBattleBuffersTransferData[3] = (stringID & 0xFF00) >> 8;
 
-    stringInfo = (struct BattleMsgData*)(&sBattleBuffersTransferData[4]);
+    stringInfo = (struct BattleMsgData *)(&sBattleBuffersTransferData[4]);
     stringInfo->currentMove = gCurrentMove;
     stringInfo->originallyUsedMove = gChosenMove;
     stringInfo->lastItem = gLastUsedItem;
