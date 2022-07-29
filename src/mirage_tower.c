@@ -72,7 +72,7 @@ static void DoMirageTowerDisintegration(u8);
 static void InitMirageTowerShake(u8);
 static void Task_FossilFallAndSink(u8);
 static void SpriteCB_FallingFossil(struct Sprite *);
-static void UpdateDisintegrationEffect(u8*, u16, u8, u8, u8);
+static void UpdateDisintegrationEffect(u8 *, u16, u8, u8, u8);
 
 static const u8 sBlankTile_Gfx[32] = {0};
 static const u8 sMirageTower_Gfx[] = INCBIN_U8("graphics/misc/mirage_tower.4bpp");
@@ -249,8 +249,8 @@ static const struct SpriteTemplate sSpriteTemplate_CeilingCrumbleLarge = {
     .callback = SpriteCB_CeilingCrumble
 };
 
-EWRAM_DATA static u8* sMirageTowerGfxBuffer = NULL;
-EWRAM_DATA static u8* sMirageTowerTilemapBuffer = NULL;
+EWRAM_DATA static u8 *sMirageTowerGfxBuffer = NULL;
+EWRAM_DATA static u8 *sMirageTowerTilemapBuffer = NULL;
 EWRAM_DATA static struct FallAnim_Fossil *sFallingFossil = NULL;
 EWRAM_DATA static struct FallAnim_Tower *sFallingTower = NULL;
 EWRAM_DATA static struct BgRegOffsets *sBgShakeOffsets = NULL;
@@ -748,7 +748,7 @@ static void SpriteCB_FallingFossil(struct Sprite *sprite)
     }
 }
 
-static void UpdateDisintegrationEffect(u8* tiles, u16 randId, u8 c, u8 size, u8 offset)
+static void UpdateDisintegrationEffect(u8 *tiles, u16 randId, u8 c, u8 size, u8 offset)
 {
     u8 heightTiles, height, widthTiles, width;
     u16 var, baseOffset;

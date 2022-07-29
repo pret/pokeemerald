@@ -1037,17 +1037,17 @@ static void InitTrainerBattleVariables(void)
 
 static inline void SetU8(void *ptr, u8 value)
 {
-    *(u8*)(ptr) = value;
+    *(u8 *)(ptr) = value;
 }
 
 static inline void SetU16(void *ptr, u16 value)
 {
-    *(u16*)(ptr) = value;
+    *(u16 *)(ptr) = value;
 }
 
 static inline void SetU32(void *ptr, u32 value)
 {
-    *(u32*)(ptr) = value;
+    *(u32 *)(ptr) = value;
 }
 
 static inline void SetPtr(const void *ptr, const void* value)

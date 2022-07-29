@@ -333,7 +333,7 @@ static const struct SpriteTemplate sSpriteTemplate_Cursor;
 static const struct SpriteTemplate sSpriteTemplate_InputArrow;
 static const struct SpriteTemplate sSpriteTemplate_Underscore;
 static const struct SpriteTemplate sSpriteTemplate_PCIcon;
-static const u8* const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT];
+static const u8 *const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT];
 static const struct SpriteSheet sSpriteSheets[];
 static const struct SpritePalette sSpritePalettes[];
 
@@ -2520,7 +2520,7 @@ static const struct SpriteTemplate sSpriteTemplate_PCIcon =
     .callback = SpriteCallbackDummy
 };
 
-static const u8* const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT] =
+static const u8 *const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT] =
 {
     [KEYBOARD_LETTERS_LOWER] =
     {

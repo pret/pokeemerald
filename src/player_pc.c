@@ -161,7 +161,7 @@ static void ItemStorage_HandleRemoveItem(u8);
 static void ItemStorage_HandleErrorMessageInput(u8);
 static void ItemStorage_ReturnToListInput(u8);
 
-static const u8* ItemStorage_GetMessage(u16);
+static const u8 *ItemStorage_GetMessage(u16);
 static void CopyItemName_PlayerPC(u8 *, u16);
 
 static void ItemStorage_Init(void);
@@ -1039,7 +1039,7 @@ static void ItemStorage_PrintMenuItem(u8 windowId, u32 id, u8 yOffset)
 
 static void ItemStorage_PrintDescription(s32 id)
 {
-    const u8* description;
+    const u8 *description;
     u8 windowId = sItemStorageMenu->windowIds[ITEMPC_WIN_MESSAGE];
 
     // Get item description (or Cancel text)
@@ -1088,7 +1088,7 @@ static void ItemStorage_DrawSwapArrow(u8 y, u8 b, u8 speed)
 static void ItemStorage_DrawItemIcon(u16 itemId)
 {
     u8 spriteId;
-    u8* spriteIdLoc = &sItemStorageMenu->spriteId;
+    u8 *spriteIdLoc = &sItemStorageMenu->spriteId;
 
     if (*spriteIdLoc == SPRITE_NONE)
     {
@@ -1107,7 +1107,7 @@ static void ItemStorage_DrawItemIcon(u16 itemId)
 
 static void ItemStorage_EraseItemIcon(void)
 {
-    u8* spriteIdLoc = &sItemStorageMenu->spriteId;
+    u8 *spriteIdLoc = &sItemStorageMenu->spriteId;
     if (*spriteIdLoc != SPRITE_NONE)
     {
         FreeSpriteTilesByTag(TAG_ITEM_ICON);
@@ -1133,7 +1133,7 @@ static void ItemStorage_CreateListMenu(u8 taskId)
     s16 *data;
     bool32 toss;
     u32 i, x;
-    const u8* text;
+    const u8 *text;
 
     data = gTasks[taskId].data;
     for (i = 0; i <= ITEMPC_WIN_LIST_END; i++)
@@ -1154,7 +1154,7 @@ static void ItemStorage_CreateListMenu(u8 taskId)
     gTasks[taskId].func = ItemStorage_ProcessInput;
 }
 
-static const u8* ItemStorage_GetMessage(u16 itemId)
+static const u8 *ItemStorage_GetMessage(u16 itemId)
 {
     const u8 *string;
 

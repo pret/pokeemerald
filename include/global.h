@@ -102,7 +102,7 @@
 #define T1_READ_8(ptr)  ((ptr)[0])
 #define T1_READ_16(ptr) ((ptr)[0] | ((ptr)[1] << 8))
 #define T1_READ_32(ptr) ((ptr)[0] | ((ptr)[1] << 8) | ((ptr)[2] << 16) | ((ptr)[3] << 24))
-#define T1_READ_PTR(ptr) (u8*) T1_READ_32(ptr)
+#define T1_READ_PTR(ptr) (u8 *) T1_READ_32(ptr)
 
 // T2_READ_8 is a duplicate to remain consistent with each group.
 #define T2_READ_8(ptr)  ((ptr)[0])

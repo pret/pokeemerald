@@ -268,7 +268,7 @@ bool8 LoadCompressedSpriteSheetUsingHeap(const struct CompressedSpriteSheet* src
     struct SpriteSheet dest;
     void* buffer;
 
-    buffer = AllocZeroed(*((u32*)(&src->data[0])) >> 8);
+    buffer = AllocZeroed(*((u32 *)(&src->data[0])) >> 8);
     LZ77UnCompWram(src->data, buffer);
 
     dest.data = buffer;
@@ -285,7 +285,7 @@ bool8 LoadCompressedSpritePaletteUsingHeap(const struct CompressedSpritePalette 
     struct SpritePalette dest;
     void* buffer;
 
-    buffer = AllocZeroed(*((u32*)(&src->data[0])) >> 8);
+    buffer = AllocZeroed(*((u32 *)(&src->data[0])) >> 8);
     LZ77UnCompWram(src->data, buffer);
     dest.data = buffer;
     dest.tag = src->tag;

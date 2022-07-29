@@ -2346,17 +2346,17 @@ void BufferStringBattle(u16 stringID)
     BattleStringExpandPlaceholdersToDisplayedString(stringPtr);
 }
 
-u32 BattleStringExpandPlaceholdersToDisplayedString(const u8* src)
+u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src)
 {
     BattleStringExpandPlaceholders(src, gDisplayedStringBattle);
 }
 
-static const u8* TryGetStatusString(u8 *src)
+static const u8 *TryGetStatusString(u8 *src)
 {
     u32 i;
     u8 status[8];
     u32 chars1, chars2;
-    u8* statusPtr;
+    u8 *statusPtr;
 
     memcpy(status, sDummyWeirdStatusString, 8);
 
@@ -2369,13 +2369,13 @@ static const u8* TryGetStatusString(u8 *src)
         statusPtr++;
     }
 
-    chars1 = *(u32*)(&status[0]);
-    chars2 = *(u32*)(&status[4]);
+    chars1 = *(u32 *)(&status[0]);
+    chars2 = *(u32 *)(&status[4]);
 
     for (i = 0; i < ARRAY_COUNT(gStatusConditionStringsTable); i++)
     {
-        if (chars1 == *(u32*)(&gStatusConditionStringsTable[i][0][0])
-            && chars2 == *(u32*)(&gStatusConditionStringsTable[i][0][4]))
+        if (chars1 == *(u32 *)(&gStatusConditionStringsTable[i][0][0])
+            && chars2 == *(u32 *)(&gStatusConditionStringsTable[i][0][4]))
             return gStatusConditionStringsTable[i][1];
     }
     return NULL;
@@ -2966,7 +2966,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
 // unused, since the value loaded into the buffer is not read; it loaded one of
 // two particles (either "は" or "の") which works in tandem with ChooseTypeOfMoveUsedString
 // below to effect changes in the meaning of the line.
-static void ChooseMoveUsedParticle(u8* textBuff)
+static void ChooseMoveUsedParticle(u8 *textBuff)
 {
     s32 counter = 0;
     u32 i = 0;
@@ -3006,7 +3006,7 @@ static void ChooseMoveUsedParticle(u8* textBuff)
 //
 // sText_ExclamationMark5 was " こうげき！" This resulted in a translation of
 // "<NAME>'s <ATTACK> attack!".
-static void ChooseTypeOfMoveUsedString(u8* dst)
+static void ChooseTypeOfMoveUsedString(u8 *dst)
 {
     s32 counter = 0;
     s32 i = 0;

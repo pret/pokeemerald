@@ -2747,7 +2747,7 @@ static void Task_RfuReconnectWithParent(u8 taskId)
 
     if (CanTryReconnectParent())
     {
-        u8 id = GetPartnerIndexByNameAndTrainerID((u8*)data, ReadU16(&data[8]));
+        u8 id = GetPartnerIndexByNameAndTrainerID((u8 *)data, ReadU16(&data[8]));
         if (id != 0xFF)
         {
             if (gRfuLinkStatus->partner[id].slot != 0xFF)
@@ -2797,7 +2797,7 @@ void CreateTask_RfuReconnectWithParent(const u8 *name, u16 trainerId)
     gRfu.status = RFU_STATUS_OK;
     taskId = CreateTask(Task_RfuReconnectWithParent, 3);
     data = gTasks[taskId].data;
-    StringCopy((u8*)(data), name);
+    StringCopy((u8 *)(data), name);
     data[8] = trainerId;
 }
 

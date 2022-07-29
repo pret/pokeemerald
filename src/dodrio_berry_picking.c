@@ -323,7 +323,7 @@ static bool32 TryPickBerry(u8, u8, u8);
 static void UpdateFallingBerries(void);
 static void UpdateGame_Leader(void);
 static void UpdateGame_Member(void);
-static void GetActiveBerryColumns(u8, u8*, u8*);
+static void GetActiveBerryColumns(u8, u8 *, u8 *);
 static bool32 AllPlayersReadyToStart(void);
 static void ResetReadyToStart(void);
 static bool32 ReadyToEndGame_Leader(void);

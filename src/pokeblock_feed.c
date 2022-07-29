@@ -466,7 +466,7 @@ static const struct WindowTemplate sWindowTemplates[] =
 };
 
 // - 1 excludes PBLOCK_CLR_NONE
-static const u32* const sPokeblocksPals[] =
+static const u32 *const sPokeblocksPals[] =
 {
     [PBLOCK_CLR_RED - 1]       = gPokeblockRed_Pal,
     [PBLOCK_CLR_BLUE - 1]      = gPokeblockBlue_Pal,

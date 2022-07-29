@@ -2027,7 +2027,7 @@ static void SwitchToMovePositionSwitchMode(u8 taskId)
 
 static void Task_HandleInput_MovePositionSwitch(u8 taskId)
 {
-    s16* data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
@@ -2168,7 +2168,7 @@ static void Task_SetHandleReplaceMoveInput(u8 taskId)
 
 static void Task_HandleReplaceMoveInput(u8 taskId)
 {
-    s16* data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
@@ -2244,7 +2244,7 @@ static void ShowCantForgetHMsWindow(u8 taskId)
 // This redraws the power/accuracy window when the player scrolls out of the "HM Moves can't be forgotten" message
 static void Task_HandleInputCantForgetHMsMoves(u8 taskId)
 {
-    s16* data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     u16 move;
     if (FuncIsActiveTask(Task_ShowPowerAccWindow) != 1)
     {

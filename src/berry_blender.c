@@ -215,7 +215,7 @@ static void SetPlayerBerryData(u8, u16);
 static void Blender_AddTextPrinter(u8, const u8 *, u8, u8, s32, s32);
 static void ResetLinkCmds(void);
 static void CreateParticleSprites(void);
-static void ShakeBgCoordForHit(s16*, u16);
+static void ShakeBgCoordForHit(s16 *, u16);
 static void TryUpdateProgressBar(u16, u16);
 static void UpdateRPM(u16);
 static void RestoreBgCoords(void);
@@ -265,7 +265,7 @@ static const u8 sText_Master[] = _("MASTER");
 static const u8 sText_Dude[] = _("DUDE");
 static const u8 sText_Miss[] = _("MISS");
 
-static const u8* const sBlenderOpponentsNames[] =
+static const u8 *const sBlenderOpponentsNames[] =
 {
     [BLENDER_MISTER] = sText_Mister,
     [BLENDER_LADDIE] = sText_Laddie,
@@ -2260,7 +2260,7 @@ static bool8 AreBlenderBerriesSame(struct BlenderBerry* berries, u8 a, u8 b)
         return FALSE;
 }
 
-static u32 CalculatePokeblockColor(struct BlenderBerry* berries, s16* _flavors, u8 numPlayers, u8 negativeFlavors)
+static u32 CalculatePokeblockColor(struct BlenderBerry* berries, s16 *_flavors, u8 numPlayers, u8 negativeFlavors)
 {
     s16 flavors[FLAVOR_COUNT + 1];
     s32 i, j;
@@ -2494,7 +2494,7 @@ static void CalculatePokeblock(struct BlenderBerry *berries, struct Pokeblock *p
 }
 
 // Unused
-static void Debug_CalculatePokeblock(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 numPlayers, u8* flavors, u16 maxRPM)
+static void Debug_CalculatePokeblock(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 numPlayers, u8 *flavors, u16 maxRPM)
 {
     CalculatePokeblock(berries, pokeblock, numPlayers, flavors, maxRPM);
 }
@@ -3318,7 +3318,7 @@ static void UpdateProgressBar(u16 value, u16 limit)
     s32 amountFilled, maxFilledSegment, subSegmentsFilled, i;
     u16 *vram;
 
-    vram = (u16*)(BG_SCREEN_ADDR(12));
+    vram = (u16 *)(BG_SCREEN_ADDR(12));
     amountFilled = (value * 64) / limit;
     maxFilledSegment = amountFilled / 8;
 
@@ -3368,22 +3368,22 @@ static void UpdateRPM(u16 speed)
         digits[i] = currentRPM % 10;
         currentRPM /= 10;
     }
-    *((u16*)(BG_SCREEN_ADDR(12) + 0x458)) = digits[4] + RPM_DIGIT;
-    *((u16*)(BG_SCREEN_ADDR(12) + 0x45A)) = digits[3] + RPM_DIGIT;
-    *((u16*)(BG_SCREEN_ADDR(12) + 0x45C)) = digits[2] + RPM_DIGIT;
-    *((u16*)(BG_SCREEN_ADDR(12) + 0x460)) = digits[1] + RPM_DIGIT;
-    *((u16*)(BG_SCREEN_ADDR(12) + 0x462)) = digits[0] + RPM_DIGIT;
+    *((u16 *)(BG_SCREEN_ADDR(12) + 0x458)) = digits[4] + RPM_DIGIT;
+    *((u16 *)(BG_SCREEN_ADDR(12) + 0x45A)) = digits[3] + RPM_DIGIT;
+    *((u16 *)(BG_SCREEN_ADDR(12) + 0x45C)) = digits[2] + RPM_DIGIT;
+    *((u16 *)(BG_SCREEN_ADDR(12) + 0x460)) = digits[1] + RPM_DIGIT;
+    *((u16 *)(BG_SCREEN_ADDR(12) + 0x462)) = digits[0] + RPM_DIGIT;
 }
 
 // Passed a pointer to the bg x/y
 // Used when hitting a Best at high RPM
-static void ShakeBgCoordForHit(s16* coord, u16 speed)
+static void ShakeBgCoordForHit(s16 *coord, u16 speed)
 {
     if (*coord == 0)
         *coord = (Random() % speed) - (speed / 2);
 }
 
-static void RestoreBgCoord(s16* coord)
+static void RestoreBgCoord(s16 *coord)
 {
     if (*coord < 0)
         (*coord)++;
@@ -3398,7 +3398,7 @@ static void RestoreBgCoords(void)
     RestoreBgCoord(&sBerryBlender->bg_Y);
 }
 
-static void BlenderLandShakeBgCoord(s16* coord, u16 timer)
+static void BlenderLandShakeBgCoord(s16 *coord, u16 timer)
 {
     s32 strength;
 

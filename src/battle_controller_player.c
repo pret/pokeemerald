@@ -1672,7 +1672,7 @@ static u32 CopyPlayerMonData(u8 monId, u8 *dst)
             moveData.pp[size] = GetMonData(&gPlayerParty[monId], MON_DATA_PP1 + size);
         }
         moveData.ppBonuses = GetMonData(&gPlayerParty[monId], MON_DATA_PP_BONUSES);
-        src = (u8*)(&moveData);
+        src = (u8 *)(&moveData);
         for (size = 0; size < sizeof(moveData); size++)
             dst[size] = src[size];
         break;
@@ -2546,7 +2546,7 @@ static void PlayerHandlePrintString(void)
 
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
-    stringId = (u16*)(&gBattleBufferA[gActiveBattler][2]);
+    stringId = (u16 *)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter2;
@@ -2797,7 +2797,7 @@ static void PlayerHandleDMA3Transfer(void)
     u16 sizeArg = gBattleBufferA[gActiveBattler][5] | (gBattleBufferA[gActiveBattler][6] << 8);
 
     const u8 *src = &gBattleBufferA[gActiveBattler][7];
-    u8 *dst = (u8*)(dstArg);
+    u8 *dst = (u8 *)(dstArg);
     u32 size = sizeArg;
 
     while (1)

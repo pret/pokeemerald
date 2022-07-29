@@ -859,19 +859,19 @@ static const struct CompressedSpriteSheet sSpriteSheets_ContestantsTurnBlinkEffe
 static const struct SpritePalette sSpritePalettes_ContestantsTurnBlinkEffect[CONTESTANT_COUNT] =
 {
     {
-        .data = (u16*)(gHeap + 0x1A0A4),
+        .data = (u16 *)(gHeap + 0x1A0A4),
         .tag = TAG_BLINK_EFFECT_CONTESTANT0
     },
     {
-        .data = (u16*)(gHeap + 0x1A0C4),
+        .data = (u16 *)(gHeap + 0x1A0C4),
         .tag = TAG_BLINK_EFFECT_CONTESTANT1
     },
     {
-        .data = (u16*)(gHeap + 0x1A0E4),
+        .data = (u16 *)(gHeap + 0x1A0E4),
         .tag = TAG_BLINK_EFFECT_CONTESTANT2
     },
     {
-        .data = (u16*)(gHeap + 0x1A104),
+        .data = (u16 *)(gHeap + 0x1A104),
         .tag = TAG_BLINK_EFFECT_CONTESTANT3
     }
 };
@@ -1396,7 +1396,7 @@ static void Task_RaiseCurtainAtStart(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 1:
-        *(s16*)&gBattle_BG1_Y += 7;
+        *(s16 *)&gBattle_BG1_Y += 7;
         if ((s16)gBattle_BG1_Y <= DISPLAY_HEIGHT)
             break;
         gTasks[taskId].data[0]++;

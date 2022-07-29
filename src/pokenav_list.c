@@ -665,7 +665,7 @@ static u32 LoopedTask_ReshowListFromCheckPage(s32 state)
 
 static void EraseListEntry(struct PokenavListMenuWindow *listWindow, s32 offset, s32 entries)
 {
-    u8 *tileData = (u8*)GetWindowAttribute(listWindow->windowId, WINDOW_TILE_DATA);
+    u8 *tileData = (u8 *)GetWindowAttribute(listWindow->windowId, WINDOW_TILE_DATA);
     u32 width = listWindow->width * 64;
 
     offset = (listWindow->unkA + offset) & 0xF;
@@ -694,7 +694,7 @@ static void EraseListEntry(struct PokenavListMenuWindow *listWindow, s32 offset,
 static void SetListMarginTile(struct PokenavListMenuWindow *listWindow, bool32 draw)
 {
     u16 var;
-    u16 *tilemapBuffer = (u16*)GetBgTilemapBuffer(GetWindowAttribute(listWindow->windowId, WINDOW_BG));
+    u16 *tilemapBuffer = (u16 *)GetBgTilemapBuffer(GetWindowAttribute(listWindow->windowId, WINDOW_BG));
     tilemapBuffer += (listWindow->unkA << 6) + listWindow->x - 1;
 
     if (draw)

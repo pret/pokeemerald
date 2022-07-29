@@ -1750,7 +1750,7 @@ static void Task_StartActivity(u8 taskId)
 static void Task_RunScriptAndFadeToActivity(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 *sendBuff = (u16*)(gBlockSendBuffer);
+    u16 *sendBuff = (u16 *)(gBlockSendBuffer);
 
     switch (data[0])
     {

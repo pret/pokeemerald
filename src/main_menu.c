@@ -178,7 +178,7 @@ static u32 InitMainMenu(bool8);
 static void Task_MainMenuCheckSaveFile(u8);
 static void Task_MainMenuCheckBattery(u8);
 static void Task_WaitForSaveFileErrorWindow(u8);
-static void CreateMainMenuErrorWindow(const u8*);
+static void CreateMainMenuErrorWindow(const u8 *);
 static void ClearMainMenuWindowTilemap(const struct WindowTemplate*);
 static void Task_DisplayMainMenu(u8);
 static void Task_WaitForBatteryDryErrorWindow(u8);
@@ -621,7 +621,7 @@ static u32 InitMainMenu(bool8 returningFromOptionsMenu)
 
 static void Task_MainMenuCheckSaveFile(u8 taskId)
 {
-    s16* data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     if (!gPaletteFade.active)
     {
@@ -736,7 +736,7 @@ static void Task_WaitForBatteryDryErrorWindow(u8 taskId)
 
 static void Task_DisplayMainMenu(u8 taskId)
 {
-    s16* data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     u16 palette;
 
     if (!gPaletteFade.active)
@@ -880,7 +880,7 @@ static void Task_HighlightSelectedMainMenuItem(u8 taskId)
 
 static bool8 HandleMainMenuInput(u8 taskId)
 {
-    s16* data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     if (JOY_NEW(A_BUTTON))
     {
@@ -1807,8 +1807,8 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     DmaFill32(3, 0, OAM, OAM_SIZE);
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
     ResetPaletteFade();
-    LZ77UnCompVram(sBirchSpeechShadowGfx, (u8*)VRAM);
-    LZ77UnCompVram(sBirchSpeechBgMap, (u8*)(BG_SCREEN_ADDR(7)));
+    LZ77UnCompVram(sBirchSpeechShadowGfx, (u8 *)VRAM);
+    LZ77UnCompVram(sBirchSpeechBgMap, (u8 *)(BG_SCREEN_ADDR(7)));
     LoadPalette(sBirchSpeechBgPals, 0, 64);
     LoadPalette(&sBirchSpeechBgGradientPal[1], 1, 16);
     ResetTasks();
@@ -2102,7 +2102,7 @@ static s8 NewGameBirchSpeech_ProcessGenderMenuInput(void)
 
 static void NewGameBirchSpeech_SetDefaultPlayerName(u8 nameId)
 {
-    const u8* name;
+    const u8 *name;
     u8 i;
 
     if (gSaveBlock2Ptr->playerGender == MALE)
@@ -2114,7 +2114,7 @@ static void NewGameBirchSpeech_SetDefaultPlayerName(u8 nameId)
     gSaveBlock2Ptr->playerName[PLAYER_NAME_LENGTH] = EOS;
 }
 
-static void CreateMainMenuErrorWindow(const u8* str)
+static void CreateMainMenuErrorWindow(const u8 *str)
 {
     FillWindowPixelBuffer(7, PIXEL_FILL(1));
     AddTextPrinterParameterized(7, FONT_NORMAL, str, 0, 1, 2, 0);
@@ -2143,7 +2143,7 @@ static void MainMenu_FormatSavegamePlayer(void)
 static void MainMenu_FormatSavegameTime(void)
 {
     u8 str[0x20];
-    u8* ptr;
+    u8 *ptr;
 
     StringExpandPlaceholders(gStringVar4, gText_ContinueMenuTime);
     AddTextPrinterParameterized3(2, FONT_NORMAL, 0x6C, 17, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);

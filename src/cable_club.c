@@ -879,7 +879,7 @@ static void Task_StartWiredCableClubBattle(u8 taskId)
 static void Task_StartWirelessCableClubBattle(u8 taskId)
 {
     int i;
-    s16* data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     switch (tState)
     {

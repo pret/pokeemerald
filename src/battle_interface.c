@@ -159,7 +159,7 @@ enum
 };
 
 static const u8 *GetHealthboxElementGfxPtr(u8);
-static u8* AddTextPrinterAndCreateWindowOnHealthbox(const u8 *, u32, u32, u32, u32 *);
+static u8 *AddTextPrinterAndCreateWindowOnHealthbox(const u8 *, u32, u32, u32, u32 *);
 
 static void RemoveWindowOnHealthbox(u32 windowId);
 static void UpdateHpTextInHealthboxInDoubles(u8, s16, u8);
@@ -2522,7 +2522,7 @@ u8 GetHPBarLevel(s16 hp, s16 maxhp)
     return result;
 }
 
-static u8* AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y, u32 bgColor, u32 *windowId)
+static u8 *AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y, u32 bgColor, u32 *windowId)
 {
     u16 winId;
     u8 color[3];
@@ -2538,7 +2538,7 @@ static u8* AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y,
     AddTextPrinterParameterized4(winId, FONT_SMALL, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
 
     *windowId = winId;
-    return (u8*)(GetWindowAttribute(winId, WINDOW_TILE_DATA));
+    return (u8 *)(GetWindowAttribute(winId, WINDOW_TILE_DATA));
 }
 
 static void RemoveWindowOnHealthbox(u32 windowId)

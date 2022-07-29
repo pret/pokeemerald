@@ -1838,7 +1838,7 @@ static void AnimBulletSeed_Step1(struct Sprite *sprite)
 {
     int i;
     u16 rand;
-    s16* ptr;
+    s16 *ptr;
     PlaySE12WithPanning(SE_M_HORN_ATTACK, BattleAnimAdjustPanning(63));
     sprite->x += sprite->x2;
     sprite->y += sprite->y2;

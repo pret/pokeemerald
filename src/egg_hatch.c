@@ -76,7 +76,7 @@ static void SpriteCB_Egg_WaitHatch(struct Sprite*);
 static void SpriteCB_Egg_Hatch(struct Sprite*);
 static void SpriteCB_Egg_Reveal(struct Sprite*);
 static void SpriteCB_EggShard(struct Sprite*);
-static void EggHatchPrintMessage(u8, u8*, u8, u8, u8);
+static void EggHatchPrintMessage(u8, u8 *, u8, u8, u8);
 static void CreateRandomEggShardSprite(void);
 static void CreateEggShardSprite(u8, u8, s16, s16, s16, u8);
 
@@ -420,7 +420,7 @@ bool8 CheckDaycareMonReceivedMail(void)
     return _CheckDaycareMonReceivedMail(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
 }
 
-static u8 EggHatchCreateMonSprite(u8 useAlt, u8 state, u8 partyId, u16* speciesLoc)
+static u8 EggHatchCreateMonSprite(u8 useAlt, u8 state, u8 partyId, u16 *speciesLoc)
 {
     u8 position = 0;
     u8 spriteId = 0;
@@ -914,7 +914,7 @@ static void CreateEggShardSprite(u8 x, u8 y, s16 velocityX, s16 velocityY, s16 a
     StartSpriteAnim(&gSprites[spriteId], spriteAnimIndex);
 }
 
-static void EggHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed)
+static void EggHatchPrintMessage(u8 windowId, u8 *string, u8 x, u8 y, u8 speed)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(15));
     sEggHatchData->textColor[0] = 0;

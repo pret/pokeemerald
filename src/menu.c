@@ -2038,7 +2038,7 @@ static void UnusedBlitBitmapRect(const struct Bitmap *src, struct Bitmap *dst, u
                 pixelsDst--;
                 if (loopDstX & 1)
                 {
-                    toOrr = *(vu16*)pixelsDst;
+                    toOrr = *(vu16 *)pixelsDst;
                     toOrr &= 0x0fff;
                     if (loopSrcX & 1)
                         toOrr |= ((*pixelsSrc & 0xf0) << 8);
@@ -2047,7 +2047,7 @@ static void UnusedBlitBitmapRect(const struct Bitmap *src, struct Bitmap *dst, u
                 }
                 else
                 {
-                    toOrr = *(vu16*)pixelsDst;
+                    toOrr = *(vu16 *)pixelsDst;
                     toOrr &= 0xf0ff;
                     if (loopSrcX & 1)
                         toOrr |= ((*pixelsSrc & 0xf0) << 4);
@@ -2059,7 +2059,7 @@ static void UnusedBlitBitmapRect(const struct Bitmap *src, struct Bitmap *dst, u
             {
                 if (loopDstX & 1)
                 {
-                    toOrr = *(vu16*)pixelsDst;
+                    toOrr = *(vu16 *)pixelsDst;
                     toOrr &= 0xff0f;
                     if (loopSrcX & 1)
                         toOrr |= ((*pixelsSrc & 0xf0) << 0);
@@ -2068,7 +2068,7 @@ static void UnusedBlitBitmapRect(const struct Bitmap *src, struct Bitmap *dst, u
                 }
                 else
                 {
-                    toOrr = *(vu16*)pixelsDst;
+                    toOrr = *(vu16 *)pixelsDst;
                     toOrr &= 0xfff0;
                     if (loopSrcX & 1)
                         toOrr |= ((*pixelsSrc & 0xf0) >> 4);
@@ -2076,7 +2076,7 @@ static void UnusedBlitBitmapRect(const struct Bitmap *src, struct Bitmap *dst, u
                         toOrr |= ((*pixelsSrc & 0x0f) >> 0);
                 }
             }
-            *(vu16*)pixelsDst = toOrr;
+            *(vu16 *)pixelsDst = toOrr;
         }
     }
 }

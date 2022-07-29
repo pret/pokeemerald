@@ -946,7 +946,7 @@ void ClearEnigmaBerries(void)
 void SetEnigmaBerry(u8 *src)
 {
     u32 i;
-    u8 *dest = (u8*)&gSaveBlock1Ptr->enigmaBerry;
+    u8 *dest = (u8 *)&gSaveBlock1Ptr->enigmaBerry;
 
     for (i = 0; i < sizeof(gSaveBlock1Ptr->enigmaBerry); i++)
         dest[i] = src[i];
@@ -958,7 +958,7 @@ static u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
     u32 checksum;
     u8 *dest;
 
-    dest = (u8*)enigmaBerry;
+    dest = (u8 *)enigmaBerry;
     checksum = 0;
     for (i = 0; i < sizeof(gSaveBlock1Ptr->enigmaBerry) - sizeof(gSaveBlock1Ptr->enigmaBerry.checksum); i++)
         checksum += dest[i];
@@ -1172,7 +1172,7 @@ void GetBerryNameByBerryType(u8 berry, u8 *string)
     string[BERRY_NAME_LENGTH] = EOS;
 }
 
-void GetBerryCountStringByBerryType(u8 berry, u8* dest, u32 berryCount)
+void GetBerryCountStringByBerryType(u8 berry, u8 *dest, u32 berryCount)
 {
     GetBerryCountString(dest, GetBerryInfo(berry)->name, berryCount);
 }

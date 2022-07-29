@@ -97,8 +97,8 @@ static void CloseTrainerCard(u8 task);
 static bool8 PrintAllOnCardFront(void);
 static void DrawTrainerCardWindow(u8);
 static void CreateTrainerCardTrainerPic(void);
-static void DrawCardScreenBackground(u16*);
-static void DrawCardFrontOrBack(u16*);
+static void DrawCardScreenBackground(u16 *);
+static void DrawCardFrontOrBack(u16 *);
 static void DrawStarsAndBadgesOnCard(void);
 static void PrintTimeOnCard(void);
 static void FlipTrainerCard(void);
@@ -147,7 +147,7 @@ static void BufferUnionRoomStats(void);
 static void BufferLinkPokeblocksNum(void);
 static void BufferLinkContestNum(void);
 static void BufferBattleFacilityStats(void);
-static void PrintStatOnBackOfCard(u8 top, const u8* str1, u8* str2, const u8* color);
+static void PrintStatOnBackOfCard(u8 top, const u8 *str1, u8 *str2, const u8 *color);
 static void LoadStickerGfx(void);
 static u8 SetCardBgsAndPals(void);
 static void DrawCardBackStats(void);
@@ -772,7 +772,7 @@ void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *trainerCard)
     trainerCard->version = GAME_VERSION;
     SetPlayerCardData(trainerCard, CARD_TYPE_EMERALD);
     trainerCard->linkHasAllFrontierSymbols = HasAllFrontierSymbols();
-    *((u16*)&trainerCard->linkPoints.frontier) = gSaveBlock2Ptr->frontier.cardBattlePoints;
+    *((u16 *)&trainerCard->linkPoints.frontier) = gSaveBlock2Ptr->frontier.cardBattlePoints;
     if (trainerCard->linkHasAllFrontierSymbols)
         trainerCard->stars++;
 
@@ -799,7 +799,7 @@ void CopyTrainerCardData(struct TrainerCard *dst, struct TrainerCard *src, u8 ga
         memcpy(dst, src, 0x60);
         dst->linkPoints.frontier = 0;
         dst->hasAllFrontierSymbols = src->linkHasAllFrontierSymbols;
-        dst->frontierBP = *((u16*)&src->linkPoints.frontier);
+        dst->frontierBP = *((u16 *)&src->linkPoints.frontier);
         break;
     }
 }
@@ -996,7 +996,7 @@ static void BufferTextsVarsForCardPage2(void)
 static void PrintNameOnCardFront(void)
 {
     u8 buffer[32];
-    u8* txtPtr;
+    u8 *txtPtr;
     txtPtr = StringCopy(buffer, gText_TrainerCardName);
     StringCopy(txtPtr, sData->trainerCard.playerName);
     ConvertInternationalString(txtPtr, sData->language);
@@ -1009,7 +1009,7 @@ static void PrintNameOnCardFront(void)
 static void PrintIdOnCard(void)
 {
     u8 buffer[32];
-    u8* txtPtr;
+    u8 *txtPtr;
     s32 xPos;
     u32 top;
     txtPtr = StringCopy(buffer, gText_TrainerCardIDNo);
@@ -1186,7 +1186,7 @@ static void BufferHofDebutTime(void)
     }
 }
 
-static void PrintStatOnBackOfCard(u8 top, const u8* statName, u8* stat, const u8* color)
+static void PrintStatOnBackOfCard(u8 top, const u8 *statName, u8 *stat, const u8 *color)
 {
     static const u8 xOffsets[] = {8, 16};
     static const u8 widths[] = {216, 216};
@@ -1471,7 +1471,7 @@ static void DrawCardScreenBackground(u16 *ptr)
     CopyBgTilemapBufferToVram(2);
 }
 
-static void DrawCardFrontOrBack(u16* ptr)
+static void DrawCardFrontOrBack(u16 *ptr)
 {
     s16 i, j;
     u16 *dst = sData->cardTilemapBuffer;

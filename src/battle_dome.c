@@ -97,7 +97,7 @@ static void CB2_TourneyTree(void);
 static void VblankCb_TourneyInfoCard(void);
 static void DisplayMatchInfoOnCard(u8, u8);
 static void DisplayTrainerInfoOnCard(u8, u8);
-static int BufferDomeWinString(u8, u8*);
+static int BufferDomeWinString(u8, u8 *);
 static u8 GetDomeBrainTrainerPicId(void);
 static u8 GetDomeBrainTrainerClass(void);
 static void CopyDomeBrainTrainerName(u8 *);

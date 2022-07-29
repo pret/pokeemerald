@@ -595,7 +595,7 @@ static void AnimFallingFeather(struct Sprite *sprite)
     data->unkA = (gBattleAnimArgs[2] >> 8) & 0xFF;
     data->unk4 = gBattleAnimArgs[3];
     data->unk6 = gBattleAnimArgs[4];
-    *(u16*)(data->unkC) = gBattleAnimArgs[5];
+    *(u16 *)(data->unkC) = gBattleAnimArgs[5];
 
     if (data->unk2 >= 64 && data->unk2 <= 191)
     {

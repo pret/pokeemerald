@@ -104,7 +104,7 @@ static int CalcRecordMixingGiftChecksum(void)
 {
     unsigned int i;
     int sum = 0;
-    u8 *data = (u8*)(&gSaveBlock1Ptr->recordMixingGift.data);
+    u8 *data = (u8 *)(&gSaveBlock1Ptr->recordMixingGift.data);
 
     for (i = 0; i < sizeof(gSaveBlock1Ptr->recordMixingGift.data); i++)
         sum += data[i];

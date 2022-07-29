@@ -294,10 +294,10 @@ static void PrintSearchParameterText(u8);
 static u8 GetSearchModeSelection(u8 taskId, u8 option);
 static void SetDefaultSearchModeAndOrder(u8);
 static void CreateSearchParameterScrollArrows(u8);
-static void EraseAndPrintSearchTextBox(const u8*);
+static void EraseAndPrintSearchTextBox(const u8 *);
 static void EraseSelectorArrow(u32);
 static void PrintSelectorArrow(u32);
-static void PrintSearchParameterTitle(u32, const u8*);
+static void PrintSearchParameterTitle(u32, const u8 *);
 static void ClearSearchParameterBoxText(void);
 
 // const rom data
@@ -2317,7 +2317,7 @@ static void CreatePokedexList(u8 dexMode, u8 order)
     }
 }
 
-static void PrintMonDexNumAndName(u8 windowId, u8 fontId, const u8* str, u8 left, u8 top)
+static void PrintMonDexNumAndName(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top)
 {
     u8 color[3];
 
@@ -2440,7 +2440,7 @@ static void CreateCaughtBall(bool16 owned, u8 x, u8 y, u16 unused)
 
 static u8 CreateMonName(u16 num, u8 left, u8 top)
 {
-    const u8* str;
+    const u8 *str;
 
     num = NationalPokedexNumToSpecies(num);
     if (num)
@@ -3160,7 +3160,7 @@ static void SpriteCB_DexListStartMenuCursor(struct Sprite *sprite)
     }
 }
 
-static void PrintInfoScreenText(const u8* str, u8 left, u8 top)
+static void PrintInfoScreenText(const u8 *str, u8 left, u8 top)
 {
     u8 color[3];
     color[0] = TEXT_COLOR_TRANSPARENT;
@@ -3872,7 +3872,7 @@ static void HighlightScreenSelectBarItem(u8 selectedScreen, u16 unused)
 {
     u8 i;
     u8 j;
-    u16* ptr = GetBgTilemapBuffer(1);
+    u16 *ptr = GetBgTilemapBuffer(1);
 
     for (i = 0; i < SCREEN_COUNT; i++)
     {
@@ -3899,7 +3899,7 @@ static void HighlightSubmenuScreenSelectBarItem(u8 a, u16 b)
 {
     u8 i;
     u8 j;
-    u16* ptr = GetBgTilemapBuffer(1);
+    u16 *ptr = GetBgTilemapBuffer(1);
 
     for (i = 0; i < 4; i++)
     {
@@ -4511,7 +4511,7 @@ static u8 PrintCryScreenSpeciesName(u8 windowId, u16 num, u8 left, u8 top)
     return i;
 }
 
-static void UnusedPrintMonName(u8 windowId, const u8* name, u8 left, u8 top)
+static void UnusedPrintMonName(u8 windowId, const u8 *name, u8 left, u8 top)
 {
     u8 str[POKEMON_NAME_LENGTH + 1];
     u8 i;
@@ -5419,7 +5419,7 @@ static void DrawOrEraseSearchParameterBox(bool8 erase)
 {
     u16 i;
     u16 j;
-    u16* ptr = GetBgTilemapBuffer(3);
+    u16 *ptr = GetBgTilemapBuffer(3);
 
     if (!erase)
     {
@@ -5612,7 +5612,7 @@ static void CreateSearchParameterScrollArrows(u8 taskId)
 #undef sTaskId
 #undef sIsDownArrow
 
-static void EraseAndPrintSearchTextBox(const u8* str)
+static void EraseAndPrintSearchTextBox(const u8 *str)
 {
     ClearSearchMenuRect(8, 120, 224, 32);
     PrintSearchText(str, 8, 121);
@@ -5628,7 +5628,7 @@ static void PrintSelectorArrow(u32 y)
     PrintSearchText(gText_SelectorArrow, 144, y * 16 + 9);
 }
 
-static void PrintSearchParameterTitle(u32 y, const u8* str)
+static void PrintSearchParameterTitle(u32 y, const u8 *str)
 {
     PrintSearchText(str, 152, y * 16 + 9);
 }

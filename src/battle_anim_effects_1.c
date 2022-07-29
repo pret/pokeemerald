@@ -5317,7 +5317,7 @@ static void AnimWavyMusicNotes(struct Sprite* sprite)
     sprite->callback = AnimWavyMusicNotes_Step;
 }
 
-static void AnimWavyMusicNotes_CalcVelocity(s16 x, s16 y, s16* velocX, s16* velocY, s8 xSpeedFactor)
+static void AnimWavyMusicNotes_CalcVelocity(s16 x, s16 y, s16 *velocX, s16 *velocY, s8 xSpeedFactor)
 {
     int x2;
     int time;

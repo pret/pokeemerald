@@ -48,7 +48,7 @@ int GetMaxWidthInMenuTable(const struct MenuAction *actions, int numActions)
     return ConvertPixelWidthToTileWidth(maxWidth);
 }
 
-int GetMaxWidthInSubsetOfMenuTable(const struct MenuAction *actions, const u8* actionIds, int numActions)
+int GetMaxWidthInSubsetOfMenuTable(const struct MenuAction *actions, const u8 *actionIds, int numActions)
 {
     int i, maxWidth;
 

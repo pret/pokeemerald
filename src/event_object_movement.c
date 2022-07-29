@@ -94,20 +94,20 @@ static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *, s16, s16);
 static void UpdateObjectEventOffscreen(struct ObjectEvent *, struct Sprite *);
 static void UpdateObjectEventSpriteVisibility(struct ObjectEvent *, struct Sprite *);
 static void ObjectEventUpdateMetatileBehaviors(struct ObjectEvent*);
-static void GetGroundEffectFlags_Reflection(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_TallGrassOnSpawn(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_LongGrassOnSpawn(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_SandHeap(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_ShallowFlowingWater(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_ShortGrass(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_HotSprings(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_TallGrassOnBeginStep(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_LongGrassOnBeginStep(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_Tracks(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_Puddle(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_Ripple(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_Seaweed(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent*, u32*);
+static void GetGroundEffectFlags_Reflection(struct ObjectEvent*, u32 *);
+static void GetGroundEffectFlags_TallGrassOnSpawn(struct ObjectEvent*, u32 *);
+static void GetGroundEffectFlags_LongGrassOnSpawn(struct ObjectEvent*, u32 *);
+static void GetGroundEffectFlags_SandHeap(struct ObjectEvent*, u32 *);
+static void GetGroundEffectFlags_ShallowFlowingWater(struct ObjectEvent*, u32 *);
+static void GetGroundEffectFlags_ShortGrass(struct ObjectEvent*, u32 *);
+static void GetGroundEffectFlags_HotSprings(struct ObjectEvent*, u32 *);
+static void GetGroundEffectFlags_TallGrassOnBeginStep(struct ObjectEvent*, u32 *);
+static void GetGroundEffectFlags_LongGrassOnBeginStep(struct ObjectEvent*, u32 *);
+static void GetGroundEffectFlags_Tracks(struct ObjectEvent*, u32 *);
+static void GetGroundEffectFlags_Puddle(struct ObjectEvent*, u32 *);
+static void GetGroundEffectFlags_Ripple(struct ObjectEvent*, u32 *);
+static void GetGroundEffectFlags_Seaweed(struct ObjectEvent*, u32 *);
+static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent*, u32 *);
 static u8 ObjectEventGetNearbyReflectionType(struct ObjectEvent*);
 static u8 GetReflectionTypeByMetatileBehavior(u32);
 static void InitObjectPriorityByElevation(struct Sprite *, u8);
@@ -1911,9 +1911,9 @@ void SetObjectInvisibility(u8 localId, u8 mapNum, u8 mapGroup, bool8 invisible)
 
 void ObjectEventGetLocalIdAndMap(struct ObjectEvent *objectEvent, void *localId, void *mapNum, void *mapGroup)
 {
-    *(u8*)(localId) = objectEvent->localId;
-    *(u8*)(mapNum) = objectEvent->mapNum;
-    *(u8*)(mapGroup) = objectEvent->mapGroup;
+    *(u8 *)(localId) = objectEvent->localId;
+    *(u8 *)(mapNum) = objectEvent->mapNum;
+    *(u8 *)(mapGroup) = objectEvent->mapGroup;
 }
 
 void AllowObjectAtPosTriggerGroundEffects(s16 x, s16 y)

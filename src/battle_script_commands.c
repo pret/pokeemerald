@@ -52,7 +52,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
-extern const u8* const gBattleScriptsForMoveEffects[];
+extern const u8 *const gBattleScriptsForMoveEffects[];
 
 #define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
 
@@ -65,7 +65,7 @@ static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
 static u8 AttacksThisTurn(u8 battlerId, u16 move); // Note: returns 1 if it's a charging turn, otherwise 2.
 static void CheckWonderGuardAndLevitate(void);
-static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8, const u8* BS_ptr);
+static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8, const u8 *BS_ptr);
 static bool32 IsMonGettingExpSentOut(void);
 static void InitLevelUpBanner(void);
 static bool8 SlideInLevelUpBanner(void);
@@ -624,7 +624,7 @@ static const u32 sStatusFlagsForMoveEffects[NUM_MOVE_EFFECTS] =
     [MOVE_EFFECT_THRASH]         = STATUS2_LOCK_CONFUSE,
 };
 
-static const u8* const sMoveEffectBS_Ptrs[] =
+static const u8 *const sMoveEffectBS_Ptrs[] =
 {
     [0]                            = BattleScript_MoveEffectSleep,
     [MOVE_EFFECT_SLEEP]            = BattleScript_MoveEffectSleep,
@@ -1498,7 +1498,7 @@ static void CheckWonderGuardAndLevitate(void)
     }
 }
 
-static void ModulateDmgByType2(u8 multiplier, u16 move, u8* flags) // same as ModulateDmgByType except different arguments
+static void ModulateDmgByType2(u8 multiplier, u16 move, u8 *flags) // same as ModulateDmgByType except different arguments
 {
     gBattleMoveDamage = gBattleMoveDamage * multiplier / 10;
     if (gBattleMoveDamage == 0 && multiplier != 0)
@@ -2156,7 +2156,7 @@ static void Cmd_printfromtable(void)
 {
     if (gBattleControllerExecFlags == 0)
     {
-        const u16* ptr = (const u16*) T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        const u16 *ptr = (const u16 *) T1_READ_PTR(gBattlescriptCurrInstr + 1);
         ptr += gBattleCommunication[MULTISTRING_CHOOSER];
 
         PrepareStringBattle(*ptr, gBattlerAttacker);
@@ -2170,7 +2170,7 @@ static void Cmd_printselectionstringfromtable(void)
 {
     if (gBattleControllerExecFlags == 0)
     {
-        const u16* ptr = (const u16*) T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        const u16 *ptr = (const u16 *) T1_READ_PTR(gBattlescriptCurrInstr + 1);
         ptr += gBattleCommunication[MULTISTRING_CHOOSER];
 
         gActiveBattler = gBattlerAttacker;
@@ -2476,7 +2476,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
              || gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_PARALYSIS
              || gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_BURN)
              {
-                u8* synchronizeEffect = &gBattleStruct->synchronizeMoveEffect;
+                u8 *synchronizeEffect = &gBattleStruct->synchronizeMoveEffect;
                 *synchronizeEffect = gBattleCommunication[MOVE_EFFECT_BYTE];
                 gHitMarker |= HITMARKER_SYNCHRONISE_EFFECT;
              }
@@ -2753,7 +2753,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     }
                     else
                     {
-                        u16* changedItem = &gBattleStruct->changedItems[gBattlerAttacker];
+                        u16 *changedItem = &gBattleStruct->changedItems[gBattlerAttacker];
                         gLastUsedItem = *changedItem = gBattleMons[gBattlerTarget].item;
                         gBattleMons[gBattlerTarget].item = ITEM_NONE;
 
@@ -2768,8 +2768,8 @@ void SetMoveEffect(bool8 primary, u8 certain)
                         BattleScriptPush(gBattlescriptCurrInstr + 1);
                         gBattlescriptCurrInstr = BattleScript_ItemSteal;
 
-                        *(u8*)((u8*)(&gBattleStruct->choicedMove[gBattlerTarget]) + 0) = 0;
-                        *(u8*)((u8*)(&gBattleStruct->choicedMove[gBattlerTarget]) + 1) = 0;
+                        *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gBattlerTarget]) + 0) = 0;
+                        *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gBattlerTarget]) + 1) = 0;
                     }
                 }
                 break;
@@ -2857,8 +2857,8 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_KnockedOff;
 
-                    *(u8*)((u8*)(&gBattleStruct->choicedMove[gEffectBattler]) + 0) = 0;
-                    *(u8*)((u8*)(&gBattleStruct->choicedMove[gEffectBattler]) + 1) = 0;
+                    *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gEffectBattler]) + 0) = 0;
+                    *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gEffectBattler]) + 1) = 0;
                 }
                 else
                 {
@@ -3053,7 +3053,7 @@ static void Cmd_jumpifstatus(void)
 {
     u8 battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     u32 flags = T2_READ_32(gBattlescriptCurrInstr + 2);
-    const u8* jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 6);
+    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 6);
 
     if (gBattleMons[battlerId].status1 & flags && gBattleMons[battlerId].hp != 0)
         gBattlescriptCurrInstr = jumpPtr;
@@ -3065,7 +3065,7 @@ static void Cmd_jumpifstatus2(void)
 {
     u8 battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     u32 flags = T2_READ_32(gBattlescriptCurrInstr + 2);
-    const u8* jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 6);
+    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 6);
 
     if (gBattleMons[battlerId].status2 & flags && gBattleMons[battlerId].hp != 0)
         gBattlescriptCurrInstr = jumpPtr;
@@ -3077,7 +3077,7 @@ static void Cmd_jumpifability(void)
 {
     u8 battlerId;
     u8 ability = gBattlescriptCurrInstr[2];
-    const u8* jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 3);
+    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 3);
 
     if (gBattlescriptCurrInstr[1] == BS_ATTACKER_SIDE)
     {
@@ -3124,7 +3124,7 @@ static void Cmd_jumpifsideaffecting(void)
 {
     u8 side;
     u16 flags;
-    const u8* jumpPtr;
+    const u8 *jumpPtr;
 
     if (gBattlescriptCurrInstr[1] == BS_ATTACKER)
         side = GET_BATTLER_SIDE(gBattlerAttacker);
@@ -3209,7 +3209,7 @@ static void Cmd_jumpiftype(void)
 {
     u8 battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     u8 type = gBattlescriptCurrInstr[2];
-    const u8* jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 3);
+    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 3);
 
     if (IS_BATTLER_OF_TYPE(battlerId, type))
         gBattlescriptCurrInstr = jumpPtr;
@@ -3627,9 +3627,9 @@ static void Cmd_goto(void)
 static void Cmd_jumpifbyte(void)
 {
     u8 caseID = gBattlescriptCurrInstr[1];
-    const u8* memByte = T2_READ_PTR(gBattlescriptCurrInstr + 2);
+    const u8 *memByte = T2_READ_PTR(gBattlescriptCurrInstr + 2);
     u8 value = gBattlescriptCurrInstr[6];
-    const u8* jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 7);
+    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 7);
 
     gBattlescriptCurrInstr += 11;
 
@@ -3665,9 +3665,9 @@ static void Cmd_jumpifbyte(void)
 static void Cmd_jumpifhalfword(void)
 {
     u8 caseID = gBattlescriptCurrInstr[1];
-    const u16* memHword = T2_READ_PTR(gBattlescriptCurrInstr + 2);
+    const u16 *memHword = T2_READ_PTR(gBattlescriptCurrInstr + 2);
     u16 value = T2_READ_16(gBattlescriptCurrInstr + 6);
-    const u8* jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 8);
+    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 8);
 
     gBattlescriptCurrInstr += 12;
 
@@ -3703,9 +3703,9 @@ static void Cmd_jumpifhalfword(void)
 static void Cmd_jumpifword(void)
 {
     u8 caseID = gBattlescriptCurrInstr[1];
-    const u32* memWord = T2_READ_PTR(gBattlescriptCurrInstr + 2);
+    const u32 *memWord = T2_READ_PTR(gBattlescriptCurrInstr + 2);
     u32 value = T1_READ_32(gBattlescriptCurrInstr + 6);
-    const u8* jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 10);
+    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 10);
 
     gBattlescriptCurrInstr += 14;
 
@@ -3740,10 +3740,10 @@ static void Cmd_jumpifword(void)
 
 static void Cmd_jumpifarrayequal(void)
 {
-    const u8* mem1 = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-    const u8* mem2 = T2_READ_PTR(gBattlescriptCurrInstr + 5);
+    const u8 *mem1 = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+    const u8 *mem2 = T2_READ_PTR(gBattlescriptCurrInstr + 5);
     u32 size = gBattlescriptCurrInstr[9];
-    const u8* jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 10);
+    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 10);
 
     u8 i;
     for (i = 0; i < size; i++)
@@ -3763,10 +3763,10 @@ static void Cmd_jumpifarrayequal(void)
 static void Cmd_jumpifarraynotequal(void)
 {
     u8 equalBytes = 0;
-    const u8* mem1 = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-    const u8* mem2 = T2_READ_PTR(gBattlescriptCurrInstr + 5);
+    const u8 *mem1 = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+    const u8 *mem2 = T2_READ_PTR(gBattlescriptCurrInstr + 5);
     u32 size = gBattlescriptCurrInstr[9];
-    const u8* jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 10);
+    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 10);
 
     u8 i;
     for (i = 0; i < size; i++)
@@ -3784,7 +3784,7 @@ static void Cmd_jumpifarraynotequal(void)
 
 static void Cmd_setbyte(void)
 {
-    u8* memByte = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+    u8 *memByte = T2_READ_PTR(gBattlescriptCurrInstr + 1);
     *memByte = gBattlescriptCurrInstr[5];
 
     gBattlescriptCurrInstr += 6;
@@ -3792,22 +3792,22 @@ static void Cmd_setbyte(void)
 
 static void Cmd_addbyte(void)
 {
-    u8* memByte = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+    u8 *memByte = T2_READ_PTR(gBattlescriptCurrInstr + 1);
     *memByte += gBattlescriptCurrInstr[5];
     gBattlescriptCurrInstr += 6;
 }
 
 static void Cmd_subbyte(void)
 {
-    u8* memByte = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+    u8 *memByte = T2_READ_PTR(gBattlescriptCurrInstr + 1);
     *memByte -= gBattlescriptCurrInstr[5];
     gBattlescriptCurrInstr += 6;
 }
 
 static void Cmd_copyarray(void)
 {
-    u8* dest = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-    const u8* src = T2_READ_PTR(gBattlescriptCurrInstr + 5);
+    u8 *dest = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+    const u8 *src = T2_READ_PTR(gBattlescriptCurrInstr + 5);
     s32 size = gBattlescriptCurrInstr[9];
 
     s32 i;
@@ -3819,9 +3819,9 @@ static void Cmd_copyarray(void)
 
 static void Cmd_copyarraywithindex(void)
 {
-    u8* dest = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-    const u8* src = T2_READ_PTR(gBattlescriptCurrInstr + 5);
-    const u8* index = T2_READ_PTR(gBattlescriptCurrInstr + 9);
+    u8 *dest = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+    const u8 *src = T2_READ_PTR(gBattlescriptCurrInstr + 5);
+    const u8 *index = T2_READ_PTR(gBattlescriptCurrInstr + 9);
     s32 size = gBattlescriptCurrInstr[13];
 
     s32 i;
@@ -3833,14 +3833,14 @@ static void Cmd_copyarraywithindex(void)
 
 static void Cmd_orbyte(void)
 {
-    u8* memByte = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+    u8 *memByte = T2_READ_PTR(gBattlescriptCurrInstr + 1);
     *memByte |= gBattlescriptCurrInstr[5];
     gBattlescriptCurrInstr += 6;
 }
 
 static void Cmd_orhalfword(void)
 {
-    u16* memHword = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+    u16 *memHword = T2_READ_PTR(gBattlescriptCurrInstr + 1);
     u16 val = T2_READ_16(gBattlescriptCurrInstr + 5);
 
     *memHword |= val;
@@ -3849,7 +3849,7 @@ static void Cmd_orhalfword(void)
 
 static void Cmd_orword(void)
 {
-    u32* memWord = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+    u32 *memWord = T2_READ_PTR(gBattlescriptCurrInstr + 1);
     u32 val = T2_READ_32(gBattlescriptCurrInstr + 5);
 
     *memWord |= val;
@@ -3858,14 +3858,14 @@ static void Cmd_orword(void)
 
 static void Cmd_bicbyte(void)
 {
-    u8* memByte = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+    u8 *memByte = T2_READ_PTR(gBattlescriptCurrInstr + 1);
     *memByte &= ~(gBattlescriptCurrInstr[5]);
     gBattlescriptCurrInstr += 6;
 }
 
 static void Cmd_bichalfword(void)
 {
-    u16* memHword = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+    u16 *memHword = T2_READ_PTR(gBattlescriptCurrInstr + 1);
     u16 val = T2_READ_16(gBattlescriptCurrInstr + 5);
 
     *memHword &= ~val;
@@ -3874,7 +3874,7 @@ static void Cmd_bichalfword(void)
 
 static void Cmd_bicword(void)
 {
-    u32* memWord = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+    u32 *memWord = T2_READ_PTR(gBattlescriptCurrInstr + 1);
     u32 val = T2_READ_32(gBattlescriptCurrInstr + 5);
 
     *memWord &= ~val;
@@ -3972,7 +3972,7 @@ static void Cmd_endselectionscript(void)
 
 static void Cmd_playanimation(void)
 {
-    const u16* argumentPtr;
+    const u16 *argumentPtr;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     argumentPtr = T2_READ_PTR(gBattlescriptCurrInstr + 3);
@@ -4014,8 +4014,8 @@ static void Cmd_playanimation(void)
 // Same as playanimation, except it takes a pointer to some animation id, instead of taking the value directly
 static void Cmd_playanimation_var(void)
 {
-    const u16* argumentPtr;
-    const u8* animationIdPtr;
+    const u16 *argumentPtr;
+    const u8 *animationIdPtr;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     animationIdPtr = T2_READ_PTR(gBattlescriptCurrInstr + 2);
@@ -4287,7 +4287,7 @@ static void Cmd_moveend(void)
         case MOVEEND_CHANGED_ITEMS: // changed held items
             for (i = 0; i < gBattlersCount; i++)
             {
-                u16* changedItem = &gBattleStruct->changedItems[i];
+                u16 *changedItem = &gBattleStruct->changedItems[i];
                 if (*changedItem != ITEM_NONE)
                 {
                     gBattleMons[i].item = *changedItem;
@@ -4420,11 +4420,11 @@ static void Cmd_moveend(void)
 
                 target = gBattlerTarget;
                 attacker = gBattlerAttacker;
-                *(attacker * 2 + target * 8 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 0) = gChosenMove;
+                *(attacker * 2 + target * 8 + (u8 *)(gBattleStruct->lastTakenMoveFrom) + 0) = gChosenMove;
 
                 target = gBattlerTarget;
                 attacker = gBattlerAttacker;
-                *(attacker * 2 + target * 8 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 1) = gChosenMove >> 8;
+                *(attacker * 2 + target * 8 + (u8 *)(gBattleStruct->lastTakenMoveFrom) + 1) = gChosenMove >> 8;
             }
             gBattleScripting.moveendState++;
             break;
@@ -4598,7 +4598,7 @@ static void Cmd_switchindataupdate(void)
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     oldData = gBattleMons[gActiveBattler];
-    monData = (u8*)(&gBattleMons[gActiveBattler]);
+    monData = (u8 *)(&gBattleMons[gActiveBattler]);
 
     for (i = 0; i < sizeof(struct BattlePokemon); i++)
         monData[i] = gBattleBufferB[gActiveBattler][4 + i];
@@ -5159,13 +5159,13 @@ static void Cmd_switchhandleorder(void)
 
         if (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
-            *(gActiveBattler * 3 + (u8*)(gBattleStruct->battlerPartyOrders) + 0) &= 0xF;
-            *(gActiveBattler * 3 + (u8*)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleBufferB[gActiveBattler][2] & 0xF0);
-            *(gActiveBattler * 3 + (u8*)(gBattleStruct->battlerPartyOrders) + 1) = gBattleBufferB[gActiveBattler][3];
+            *(gActiveBattler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) &= 0xF;
+            *(gActiveBattler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleBufferB[gActiveBattler][2] & 0xF0);
+            *(gActiveBattler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 1) = gBattleBufferB[gActiveBattler][3];
 
-            *((gActiveBattler ^ BIT_FLANK) * 3 + (u8*)(gBattleStruct->battlerPartyOrders) + 0) &= (0xF0);
-            *((gActiveBattler ^ BIT_FLANK) * 3 + (u8*)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleBufferB[gActiveBattler][2] & 0xF0) >> 4;
-            *((gActiveBattler ^ BIT_FLANK) * 3 + (u8*)(gBattleStruct->battlerPartyOrders) + 2) = gBattleBufferB[gActiveBattler][3];
+            *((gActiveBattler ^ BIT_FLANK) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) &= (0xF0);
+            *((gActiveBattler ^ BIT_FLANK) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleBufferB[gActiveBattler][2] & 0xF0) >> 4;
+            *((gActiveBattler ^ BIT_FLANK) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 2) = gBattleBufferB[gActiveBattler][3];
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
         {
@@ -5244,7 +5244,7 @@ static void Cmd_switchineffects(void)
 
             for (i = 0; i < gBattlersCount; i++)
             {
-                u16* hpOnSwitchout = &gBattleStruct->hpOnSwitchout[GetBattlerSide(i)];
+                u16 *hpOnSwitchout = &gBattleStruct->hpOnSwitchout[GetBattlerSide(i)];
                 *hpOnSwitchout = gBattleMons[i].hp;
             }
 
@@ -5868,7 +5868,7 @@ static void Cmd_adjustsetdamage(void) // The same as adjustnormaldamage, except 
 
 static void Cmd_removeitem(void)
 {
-    u16* usedHeldItem;
+    u16 *usedHeldItem;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
 
@@ -6117,14 +6117,14 @@ static bool8 SlideOutLevelUpBanner(void)
 static void PutMonIconOnLvlUpBanner(void)
 {
     u8 spriteId;
-    const u16* iconPal;
+    const u16 *iconPal;
     struct SpriteSheet iconSheet;
     struct SpritePalette iconPalSheet;
 
     u16 species = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPECIES);
     u32 personality = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_PERSONALITY);
 
-    const u8* iconPtr = GetMonIconPtr(species, personality, 1);
+    const u8 *iconPtr = GetMonIconPtr(species, personality, 1);
     iconSheet.data = iconPtr;
     iconSheet.size = 0x200;
     iconSheet.tag = TAG_LVLUP_BANNER_MON_ICON;
@@ -6578,7 +6578,7 @@ static void Cmd_jumpifnexttargetvalid(void)
 
 static void Cmd_tryhealhalfhealth(void)
 {
-    const u8* failPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    const u8 *failPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 
     if (gBattlescriptCurrInstr[5] == BS_ATTACKER)
         gBattlerTarget = gBattlerAttacker;
@@ -6749,7 +6749,7 @@ static void Cmd_trysetrest(void)
 
 static void Cmd_jumpifnotfirstturn(void)
 {
-    const u8* failJump = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    const u8 *failJump = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 
     if (gDisableStructs[gBattlerAttacker].isFirstTurn)
         gBattlescriptCurrInstr += 5;
@@ -6831,7 +6831,7 @@ static void Cmd_stockpile(void)
 
 static void Cmd_stockpiletobasedamage(void)
 {
-    const u8* jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    const u8 *jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     if (gDisableStructs[gBattlerAttacker].stockpileCounter == 0)
     {
         gBattlescriptCurrInstr = jumpPtr;
@@ -6857,7 +6857,7 @@ static void Cmd_stockpiletobasedamage(void)
 
 static void Cmd_stockpiletohpheal(void)
 {
-    const u8* jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    const u8 *jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 
     if (gDisableStructs[gBattlerAttacker].stockpileCounter == 0)
     {
@@ -7069,7 +7069,7 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
 
 static void Cmd_statbuffchange(void)
 {
-    const u8* jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
+    const u8 *jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
     if (ChangeStatBuffs(gBattleScripting.statChanger & 0xF0, GET_STAT_BUFF_ID(gBattleScripting.statChanger), gBattlescriptCurrInstr[1], jumpPtr) == STAT_CHANGE_WORKED)
         gBattlescriptCurrInstr += 6;
 }
@@ -7705,8 +7705,8 @@ static void Cmd_transformdataexecution(void)
 
         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerTarget].species)
 
-        battleMonAttacker = (u8*)(&gBattleMons[gBattlerAttacker]);
-        battleMonTarget = (u8*)(&gBattleMons[gBattlerTarget]);
+        battleMonAttacker = (u8 *)(&gBattleMons[gBattlerAttacker]);
+        battleMonTarget = (u8 *)(&gBattleMons[gBattlerTarget]);
 
         for (i = 0; i < offsetof(struct BattlePokemon, pp); i++)
             battleMonAttacker[i] = battleMonTarget[i];
@@ -7963,7 +7963,7 @@ static void Cmd_painsplitdmgcalc(void)
     {
         s32 hpDiff = (gBattleMons[gBattlerAttacker].hp + gBattleMons[gBattlerTarget].hp) / 2;
         s32 painSplitHp = gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - hpDiff;
-        u8* storeLoc = (void*)(&gBattleScripting.painSplitHp);
+        u8 *storeLoc = (void*)(&gBattleScripting.painSplitHp);
 
         storeLoc[0] = (painSplitHp);
         storeLoc[1] = (painSplitHp & 0x0000FF00) >> 8;
@@ -9139,11 +9139,11 @@ static void Cmd_tryswapitems(void) // trick
             BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gBattlerTarget].item), &gBattleMons[gBattlerTarget].item);
             MarkBattlerForControllerExec(gBattlerTarget);
 
-            *(u8*)((u8*)(&gBattleStruct->choicedMove[gBattlerTarget]) + 0) = 0;
-            *(u8*)((u8*)(&gBattleStruct->choicedMove[gBattlerTarget]) + 1) = 0;
+            *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gBattlerTarget]) + 0) = 0;
+            *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gBattlerTarget]) + 1) = 0;
 
-            *(u8*)((u8*)(&gBattleStruct->choicedMove[gBattlerAttacker]) + 0) = 0;
-            *(u8*)((u8*)(&gBattleStruct->choicedMove[gBattlerAttacker]) + 1) = 0;
+            *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gBattlerAttacker]) + 0) = 0;
+            *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gBattlerAttacker]) + 1) = 0;
 
             gBattlescriptCurrInstr += 5;
 
@@ -9370,7 +9370,7 @@ static void Cmd_assistattackselect(void)
     s32 chooseableMovesNo = 0;
     struct Pokemon* party;
     s32 monId, moveId;
-    u16* validMoves = gBattleStruct->assistPossibleMoves;
+    u16 *validMoves = gBattleStruct->assistPossibleMoves;
 
     if (GET_BATTLER_SIDE(gBattlerAttacker) != B_SIDE_PLAYER)
         party = gEnemyParty;

@@ -1219,7 +1219,7 @@ void HideBattlerShadowSprite(u8 battlerId)
 // Color the background tiles surrounding the action selection and move windows
 void FillAroundBattleWindows(void)
 {
-    u16 *vramPtr = (u16*)(VRAM + 0x240);
+    u16 *vramPtr = (u16 *)(VRAM + 0x240);
     s32 i;
     s32 j;
 

@@ -1337,7 +1337,7 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
     winTemplate.height = 2;
     windowId = AddWindow(&winTemplate);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(zero2));
-    tileData1 = (u8*) GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    tileData1 = (u8 *) GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     tileData2 = (winTemplate.width * TILE_SIZE_4BPP) + tileData1;
 
     if (!zero1)
@@ -1385,7 +1385,7 @@ static void UnusedDrawTextWindow(const u8 *string, void *dst, u16 offset, u8 bgC
     tilesSize = winTemplate.width * TILE_SIZE_4BPP;
     windowId = AddWindow(&winTemplate);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(bgColor));
-    tileData1 = (u8*) GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    tileData1 = (u8 *) GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     tileData2 = (winTemplate.width * TILE_SIZE_4BPP) + tileData1;
     txtColor[0] = bgColor;
     txtColor[1] = fgColor;
@@ -6555,7 +6555,7 @@ static void InitCanReleaseMonVars(void)
     }
 
     GetRestrictedReleaseMoves(sStorage->restrictedMoveList);
-    sStorage->restrictedReleaseMonMoves = GetMonData(&sStorage->tempMon, MON_DATA_KNOWN_MOVES, (u8*)sStorage->restrictedMoveList);
+    sStorage->restrictedReleaseMonMoves = GetMonData(&sStorage->tempMon, MON_DATA_KNOWN_MOVES, (u8 *)sStorage->restrictedMoveList);
     if (sStorage->restrictedReleaseMonMoves != 0)
     {
         // Pokémon knows at least one restricted release move
@@ -6621,7 +6621,7 @@ static s8 RunCanReleaseMon(void)
             // Make sure party Pokémon isn't the one we're releasing first
             if (sStorage->releaseBoxId != TOTAL_BOXES_COUNT || sStorage->releaseBoxPos != i)
             {
-                knownMoves = GetMonData(&gPlayerParty[i], MON_DATA_KNOWN_MOVES, (u8*)sStorage->restrictedMoveList);
+                knownMoves = GetMonData(&gPlayerParty[i], MON_DATA_KNOWN_MOVES, (u8 *)sStorage->restrictedMoveList);
                 sStorage->restrictedReleaseMonMoves &= ~(knownMoves);
             }
         }
@@ -6646,7 +6646,7 @@ static s8 RunCanReleaseMon(void)
         // moves the release Pokémon knows
         for (i = 0; i < IN_BOX_COUNT; i++)
         {
-            knownMoves = GetAndCopyBoxMonDataAt(sStorage->releaseCheckBoxId, sStorage->releaseCheckBoxPos, MON_DATA_KNOWN_MOVES, (u8*)sStorage->restrictedMoveList);
+            knownMoves = GetAndCopyBoxMonDataAt(sStorage->releaseCheckBoxId, sStorage->releaseCheckBoxPos, MON_DATA_KNOWN_MOVES, (u8 *)sStorage->restrictedMoveList);
             if (knownMoves != 0 && !(sStorage->releaseBoxId == sStorage->releaseCheckBoxId
                                   && sStorage->releaseBoxPos == sStorage->releaseCheckBoxPos))
             {
@@ -9648,7 +9648,7 @@ bool32 AnyStorageMonWithMove(u16 moveId)
         {
             if (GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_HAS_SPECIES)
                 && !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_IS_EGG)
-                && GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_KNOWN_MOVES, (u8*)moves))
+                && GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_KNOWN_MOVES, (u8 *)moves))
                 return TRUE;
         }
     }
