@@ -4072,6 +4072,9 @@ static bool32 ShouldChangeFormHpBased(u32 battler)
     u32 i;
     u16 battlerAbility = GetBattlerAbility(battler);
 
+    if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
+        return FALSE;
+
     for (i = 0; i < ARRAY_COUNT(forms); i++)
     {
         if (battlerAbility == forms[i][0])
