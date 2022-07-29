@@ -19,8 +19,8 @@
 extern ScrCmdFunc gMysteryEventScriptCmdTable[];
 extern ScrCmdFunc gMysteryEventScriptCmdTableEnd[];
 
-#define LANGUAGE_MASK 0x1
-#define VERSION_MASK 0x200
+// 0x1 in FireRed, 0x2 in LeafGreen, 0x80 in Ruby, 0x100 in Sapphire
+#define VERSION_MASK (1 << 9)
 
 #define mScriptBase data[0]
 #define mOffset data[1]
@@ -29,18 +29,21 @@ extern ScrCmdFunc gMysteryEventScriptCmdTableEnd[];
 
 EWRAM_DATA static struct ScriptContext sMysteryEventScriptContext = {0};
 
-static bool32 CheckCompatibility(u16 a1, u32 a2, u16 a3, u32 a4)
+static bool32 CheckCompatibility(u16 unk0, u32 unk1, u16 unk2, u32 version)
 {
-    if (!(a1 & LANGUAGE_MASK))
+    // 0x1 in English FRLG, 0x2 in English RS, 0x4 in German RS
+    if (!(unk0 & 0x1))
         return FALSE;
 
-    if (!(a2 & LANGUAGE_MASK))
+    // Same as above
+    if (!(unk1 & 0x1))
         return FALSE;
 
-    if (!(a3 & 0x4))
+    // 0x1 in FRLG, 0x4 in RS
+    if (!(unk2 & 0x4))
         return FALSE;
 
-    if (!(a4 & VERSION_MASK))
+    if (!(version & VERSION_MASK))
         return FALSE;
 
     return TRUE;
@@ -174,18 +177,18 @@ bool8 MEScrCmd_end(struct ScriptContext *ctx)
 
 bool8 MEScrCmd_checkcompat(struct ScriptContext *ctx)
 {
-    u16 v1;
-    u32 v2;
-    u16 v3;
-    u32 v4;
+    u16 unk0;
+    u32 unk1;
+    u16 unk2;
+    u32 version;
 
     ctx->mOffset = ScriptReadWord(ctx);
-    v1 = ScriptReadHalfword(ctx);
-    v2 = ScriptReadWord(ctx);
-    v3 = ScriptReadHalfword(ctx);
-    v4 = ScriptReadWord(ctx);
+    unk0 = ScriptReadHalfword(ctx);
+    unk1 = ScriptReadWord(ctx);
+    unk2 = ScriptReadHalfword(ctx);
+    version = ScriptReadWord(ctx);
 
-    if (CheckCompatibility(v1, v2, v3, v4) == TRUE)
+    if (CheckCompatibility(unk0, unk1, unk2, version) == TRUE)
         ctx->mValid = TRUE;
     else
         SetIncompatible();

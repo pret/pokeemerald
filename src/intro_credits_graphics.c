@@ -757,10 +757,9 @@ void LoadIntroPart2Graphics(u8 scenery)
     gReservedSpritePaletteCount = 8;
 }
 
-// Note: This is only called with a=1.
+// Note: This is only called with scenery=1.
 void SetIntroPart2BgCnt(u8 scenery)
 {
-    // Only called with scenery = 1
     switch (scenery)
     {
     default:

@@ -87,6 +87,41 @@
     #define ITEM_RINDO_BERRY    207
     #define ITEM_YACHE_BERRY    208
     #define ITEM_GRISEOUS_ORB   369
+    // z crystals
+    #define ITEM_NORMALIUM_Z    568
+    #define ITEM_FIGHTINIUM_Z   569
+    #define ITEM_FLYINIUM_Z     570
+    #define ITEM_POISONIUM_Z    571
+    #define ITEM_GROUNDIUM_Z    572
+    #define ITEM_ROCKIUM_Z      573
+    #define ITEM_BUGINIUM_Z     574
+    #define ITEM_GHOSTIUM_Z     575
+    #define ITEM_STEELIUM_Z     576
+    #define ITEM_FIRIUM_Z       577
+    #define ITEM_WATERIUM_Z     578
+    #define ITEM_GRASSIUM_Z     579
+    #define ITEM_ELECTRIUM_Z    580
+    #define ITEM_PSYCHIUM_Z     581
+    #define ITEM_ICIUM_Z        582
+    #define ITEM_DRAGONIUM_Z    583
+    #define ITEM_DARKINIUM_Z    584
+    #define ITEM_FAIRIUM_Z      585
+    #define ITEM_ALORAICHIUM_Z  586
+    #define ITEM_DECIDIUM_Z     587
+    #define ITEM_EEVIUM_Z       588
+    #define ITEM_INCINIUM_Z     589
+    #define ITEM_KOMMONIUM_Z    590
+    #define ITEM_LUNALIUM_Z     591
+    #define ITEM_LYCANIUM_Z     592
+    #define ITEM_MARSHADIUM_Z   593
+    #define ITEM_MEWNIUM_Z      594
+    #define ITEM_MIMIKIUM_Z     595
+    #define ITEM_PIKANIUM_Z     596
+    #define ITEM_PIKASHUNIUM_Z  597
+    #define ITEM_PRIMARIUM_Z    598
+    #define ITEM_SNORLIUM_Z     599
+    #define ITEM_SOLGANIUM_Z    600
+    #define ITEM_TAPUNIUM_Z     601
 #endif
 
 #ifndef GEN_3
@@ -125,6 +160,7 @@
 #define B_ROUGH_SKIN_DMG            GEN_7 // In Gen4+, Rough Skin contact damage is 1/8th of max HP instead of 1/16th. This will also affect Iron Barbs.
 #define B_KNOCK_OFF_DMG             GEN_8 // In Gen6+, Knock Off deals 50% more damage when knocking off an item.
 #define B_SPORT_DMG_REDUCTION       GEN_7 // In Gen5+, Water/Mud Sport reduce Fire/Electric Damage by 67% instead of 50%.
+#define B_EXPLOSION_DEFENSE         GEN_7 // In Gen5+, Self-Destruct and Explosion don't halve the targets' defense.
 
 // Type settings
 #define B_GHOSTS_ESCAPE             GEN_7 // In Gen6+, abilities like Shadow Tag or moves like Mean Look fail on Ghost-type Pokémon. They can also escape any Wild Battle.
@@ -144,24 +180,29 @@
 #define B_SPORT_TURNS               GEN_7 // In Gen6+, Water/Mud Sport last 5 turns, even if the user switches out.
 #define B_MEGA_EVO_TURN_ORDER       GEN_7 // In Gen7, a Pokémon's Speed after Mega Evolution is used to determine turn order, not its Speed before.
 #define B_RECALC_TURN_AFTER_ACTIONS GEN_8 // In Gen8, switching/using a move affects the current turn's order of actions.
+#define B_FAINT_SWITCH_IN           GEN_7 // In Gen4+, sending out a new Pokémon after the previous one fainted happens at the end of the turn. Before, it would happen after each action.
 
 // Move data settings
 #define B_UPDATED_MOVE_DATA         GEN_8 // Updates move data in gBattleMoves, including Power, Accuracy, PP, stat changes, targets, chances of secondary effects, etc.
 #define B_PHYSICAL_SPECIAL_SPLIT    GEN_7 // In Gen3, the move's type determines if it will do physical or special damage. The split icon in the summary will reflect this.
-#define B_FELL_STINGER_STAT_RAISE   GEN_7 // In Gen7+, it raises Atk by 3 stages instead of 2 if it causes the target to faint.
-#define B_KINGS_SHIELD_LOWER_ATK    GEN_7 // In Gen7+, it lowers Atk by 1 stage instead of 2 of oponents that hit it.
-#define B_SPEED_BUFFING_RAPID_SPIN  GEN_8 // In Gen8, Rapid Spin raises the user's Speed by 1 stage.
 #define B_RECOIL_IF_MISS_DMG        GEN_7 // In Gen5+, Jump Kick and High Jump Kick will always do half of the user's max HP when missing.
 #define B_KLUTZ_FLING_INTERACTION   GEN_7 // In Gen5+, Pokémon with the Klutz ability can't use Fling.
 #define B_UPDATED_CONVERSION        GEN_7 // In Gen6+, Conversion changes the user's type to match their first move's. Before, it would choose a move at random.
 #define B_PP_REDUCED_BY_SPITE       GEN_7 // In Gen4+, Spite reduces the foe's last move's PP by 4, instead of 2 to 5.
-#define B_MINIMIZE_EVASION          GEN_7 // In Gen5+, Minimize raises evasion by 2 stages instead of 1.
 
 // Move accuracy settings
 #define B_TOXIC_NEVER_MISS          GEN_7 // In Gen6+, if Toxic is used by a Poison-type Pokémon, it will never miss.
 #define B_MINIMIZE_DMG_ACC          GEN_7 // In Gen6+, moves that causes double damage to minimized Pokémon will also skip accuracy checks.
 #define B_BLIZZARD_HAIL             GEN_7 // In Gen4+, Blizzard bypasses accuracy checks if it's hailing.
 #define B_SHEER_COLD_ACC            GEN_7 // In Gen7+, Sheer Cold's base chance of hitting is reduced to 20% if the user isn't Ice-typed.
+
+// Move stat change settings
+#define B_FELL_STINGER_STAT_RAISE   GEN_7 // In Gen7+, it raises Atk by 3 stages instead of 2 if it causes the target to faint.
+#define B_KINGS_SHIELD_LOWER_ATK    GEN_7 // In Gen7+, it lowers Atk by 1 stage instead of 2 of oponents that hit it.
+#define B_SPEED_BUFFING_RAPID_SPIN  GEN_8 // In Gen8, Rapid Spin raises the user's Speed by 1 stage.
+#define B_CHARGE_SPDEF_RAISE        GEN_7 // In Gen5+, Charge raises the user's Special Defense by 1 stage.
+#define B_MINIMIZE_EVASION          GEN_7 // In Gen5+, Minimize raises evasion by 2 stages instead of 1.
+#define B_GROWTH_STAT_RAISE         GEN_7 // In Gen5+, Growth raises Attack in addition to Special Attack by 1 stage each. Under the effects of the sun, it raises them by 2 stages each instead.
 
 // Other move settings
 #define B_SOUND_SUBSTITUTE          GEN_7 // In Gen6+, sound moves bypass Substitute.
@@ -177,7 +218,6 @@
 #define B_HEAL_BLOCKING             GEN_7 // In Gen5+, Heal Block prevents healing by Black Sludge, Leftovers, Shell Bell. Affected Pokémon will not consume held HP-restoring Berries or Berry Juice.
                                           // Draining abilities will not heal but will prevent damage. In Gen6+, Heal Block prevents the use of most HP-draining moves.
 #define B_ROOTED_GROUNDING          GEN_7 // In Gen4+, Ingrain causes the affected Pokémon to become grounded.
-#define B_GROWTH_UNDER_SUN          GEN_7 // In Gen5+, Growth's effects are doubled when under the effects of the sun.
 
 // Ability settings
 #define B_EXPANDED_ABILITY_NAMES    TRUE  // If TRUE, ability names are increased from 12 characters to 16 characters.
@@ -191,6 +231,8 @@
 #define B_SYNCHRONIZE_TOXIC         GEN_8 // In Gen5+, if a Pokémon with Synchronize is badly poisoned, the opponent will also become badly poisoned. Previously, the opponent would become regular poisoned.
 #define B_UPDATED_INTIMIDATE        GEN_8 // In Gen8, Intimidate doesn't work on opponents with the Inner Focus, Scrappy, Own Tempo or Oblivious abilities. It also activates Rattled.
 #define B_OBLIVIOUS_TAUNT           GEN_7 // In Gen6+, Pokémon with Oblivious can't be taunted.
+#define B_STURDY                    GEN_7 // In Gen5+, Sturdy causes the Pokémon to have 1 HP remaining if another Pokémon's attack or confusion damage would have brought it from full health to 0 HP.
+#define B_PLUS_MINUS_INTERACTION    GEN_7 // In Gen5+, Plus and Minus can be activated with themselves and the opposite ability. Before, only the opposing ability could activate it.
 
 // Item settings
 #define B_HP_BERRIES                GEN_7 // In Gen4+, berries which restore hp activate immediately after HP drops to half. In Gen3, the effect occurs at the end of the turn.

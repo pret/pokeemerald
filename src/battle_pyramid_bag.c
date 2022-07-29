@@ -1410,7 +1410,7 @@ void TryStoreHeldItemsInPyramidBag(void)
 
     memcpy(newItems, gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode], PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
     memcpy(newQuantities, gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode], PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         heldItem = GetMonData(&party[i], MON_DATA_HELD_ITEM);
         if (heldItem != ITEM_NONE && !AddBagItem(heldItem, 1))
@@ -1426,10 +1426,8 @@ void TryStoreHeldItemsInPyramidBag(void)
     }
 
     heldItem = ITEM_NONE;
-    for (i = 0; i < 3; i++)
-    {
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         SetMonData(&party[i], MON_DATA_HELD_ITEM, &heldItem);
-    }
     gSpecialVar_Result = 0;
     Free(newItems);
     Free(newQuantities);

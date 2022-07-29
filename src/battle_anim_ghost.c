@@ -719,9 +719,9 @@ static void AnimTask_SpiteTargetShadow_Step1(u8 taskId)
             startLine = 0;
 
         if (position == 1)
-            task->data[10] = ScanlineEffect_InitWave(startLine, startLine + 64, 2, 6, 0, SCANLINE_EFFECT_REG_BG1HOFS, 1);
+            task->data[10] = ScanlineEffect_InitWave(startLine, startLine + 64, 2, 6, 0, SCANLINE_EFFECT_REG_BG1HOFS, TRUE);
         else
-            task->data[10] = ScanlineEffect_InitWave(startLine, startLine + 64, 2, 6, 0, SCANLINE_EFFECT_REG_BG2HOFS, 1);
+            task->data[10] = ScanlineEffect_InitWave(startLine, startLine + 64, 2, 6, 0, SCANLINE_EFFECT_REG_BG2HOFS, TRUE);
 
         task->data[15]++;
         break;
@@ -1079,7 +1079,7 @@ static void AnimTask_CurseStretchingBlackBg_Step1(u8 taskId)
         right = DISPLAY_WIDTH;
         top = 0;
         bottom = 112;
-        selectedPalettes = GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0);
+        selectedPalettes = GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);
         BeginNormalPaletteFade(selectedPalettes, 0, 16, 16, RGB(0, 0, 0));
         gTasks[taskId].func = AnimTask_CurseStretchingBlackBg_Step2;
     }
@@ -1441,4 +1441,69 @@ static void AnimPoltergeistItem(struct Sprite *sprite)
 
     if (sprite->data[2] == 256)
         DestroyAnimSprite(sprite);
+}
+
+//pulverizing pancake - destiny bond shadow from attacker to target
+void AnimTask_PulverizingPancakeWhiteShadow(u8 taskId)
+{
+    struct Task *task;
+    s16 battler;
+    u8 spriteId;
+    s16 baseX, baseY;
+    s16 x, y;
+
+    task = &gTasks[taskId];
+    SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL));
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 0x10));
+    task->data[5] = 0;
+    task->data[6] = 0;
+    task->data[7] = 0;
+    task->data[8] = 0;
+    task->data[9] = 16;
+    task->data[10] = gBattleAnimArgs[0];
+
+    baseX = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    baseY = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_BOTTOM);
+    if (!IsContest())
+    {
+        spriteId = CreateSprite(&gDestinyBondWhiteShadowSpriteTemplate, baseX, baseY, 55);
+        if (spriteId != MAX_SPRITES)
+        {
+            x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+            y = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_BOTTOM);
+            gSprites[spriteId].data[0] = baseX << 4;
+            gSprites[spriteId].data[1] = baseY << 4;
+            gSprites[spriteId].data[2] = ((x - baseX) << 4) / gBattleAnimArgs[1];
+            gSprites[spriteId].data[3] = ((y - baseY) << 4) / gBattleAnimArgs[1];
+            gSprites[spriteId].data[4] = gBattleAnimArgs[1];
+            gSprites[spriteId].data[5] = x;
+            gSprites[spriteId].data[6] = y;
+            gSprites[spriteId].callback = AnimDestinyBondWhiteShadow_Step;
+
+            task->data[task->data[12] + 13] = spriteId;
+            task->data[12]++;
+        }
+    }
+    else
+    {
+        spriteId = CreateSprite(&gDestinyBondWhiteShadowSpriteTemplate, baseX, baseY, 55);
+        if (spriteId != MAX_SPRITES)
+        {
+            x = 48;
+            y = 40;
+            gSprites[spriteId].data[0] = baseX << 4;
+            gSprites[spriteId].data[1] = baseY << 4;
+            gSprites[spriteId].data[2] = ((x - baseX) << 4) / gBattleAnimArgs[1];
+            gSprites[spriteId].data[3] = ((y - baseY) << 4) / gBattleAnimArgs[1];
+            gSprites[spriteId].data[4] = gBattleAnimArgs[1];
+            gSprites[spriteId].data[5] = x;
+            gSprites[spriteId].data[6] = y;
+            gSprites[spriteId].callback = AnimDestinyBondWhiteShadow_Step;
+
+            task->data[13] = spriteId;
+            task->data[12] = 1;
+        }
+    }
+
+    task->func = AnimTask_DestinyBondWhiteShadow_Step;
 }
