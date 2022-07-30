@@ -105,7 +105,7 @@ typedef void (*AffineAnimCmdFunc)(u8 matrixNum, struct Sprite *);
     .y = DISPLAY_HEIGHT,                    \
     .affineMode = 0,                        \
     .objMode = 0,                           \
-    .mosaic = 0,                            \
+    .mosaic = FALSE,                        \
     .bpp = 0,                               \
     .shape = SPRITE_SHAPE(8x8),             \
     .x = DISPLAY_WIDTH + 64,                \

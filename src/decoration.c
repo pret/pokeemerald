@@ -1985,7 +1985,7 @@ static void SetDecorSelectionBoxOamAttributes(u8 decorShape)
     sDecorSelectorOam.y = 0;
     sDecorSelectorOam.affineMode = ST_OAM_AFFINE_OFF;
     sDecorSelectorOam.objMode = ST_OAM_OBJ_NORMAL;
-    sDecorSelectorOam.mosaic = 0;
+    sDecorSelectorOam.mosaic = FALSE;
     sDecorSelectorOam.bpp = ST_OAM_4BPP;
     sDecorSelectorOam.shape = sDecorationMovementInfo[decorShape].shape;
     sDecorSelectorOam.x = 0;
