@@ -495,7 +495,6 @@ static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u16 baseTileTag, u16 base
     }
     sMenu->windowSprites[1]->y = y + 96;
 
-
     // Create marking sprites
     template.tileTag++;
     template.paletteTag++;
@@ -548,7 +547,6 @@ static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u16 baseTileTag, u16 base
     {
         sMenu->cursorSprite = NULL;
     }
-
 }
 
 static void SpriteCB_Dummy(struct Sprite *sprite)
@@ -610,7 +608,7 @@ static struct Sprite *CreateMarkingComboSprite(u16 tileTag, u16 paletteTag, cons
 
     spriteId = CreateSprite(&template, 0, 0, 0);
     if (spriteId != MAX_SPRITES)
-        return  &gSprites[spriteId];
+        return &gSprites[spriteId];
     else
         return NULL;
 }
