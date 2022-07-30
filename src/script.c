@@ -14,7 +14,7 @@ enum {
     SCRIPT_MODE_NATIVE,
 };
 
-extern const u8* gRamScriptRetAddr;
+extern const u8 *gRamScriptRetAddr;
 
 static u8 sScriptContext1Status;
 static struct ScriptContext sScriptContext1;
@@ -349,7 +349,7 @@ void TryRunOnWarpIntoMapScript(void)
 
 u32 CalculateRamScriptChecksum(void)
 {
-    return CalcCRC16WithTable((u8*)(&gSaveBlock1Ptr->ramScript.data), sizeof(gSaveBlock1Ptr->ramScript.data));
+    return CalcCRC16WithTable((u8 *)(&gSaveBlock1Ptr->ramScript.data), sizeof(gSaveBlock1Ptr->ramScript.data));
 }
 
 void ClearRamScript(void)
