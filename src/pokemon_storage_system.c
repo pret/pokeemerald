@@ -263,8 +263,6 @@ enum {
 // between 2 Pokémon with held items
 #define MAX_ITEM_ICONS 3
 
-#define MAX_MENU_ITEMS 7
-
 // IDs for the item icons affine anims
 enum {
     ITEM_ANIM_NONE,
@@ -476,7 +474,7 @@ struct PokemonStorageSystemData
     u8 iconScrollState;
     u8 iconScrollToBoxId; // Unused duplicate of scrollToBoxId
     struct WindowTemplate menuWindow;
-    struct StorageMenu menuItems[MAX_MENU_ITEMS];
+    struct StorageMenu menuItems[7];
     u8 menuItemsCount;
     u8 menuWidth;
     u8 menuUnusedField; // Never read.

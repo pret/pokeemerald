@@ -1308,7 +1308,7 @@ void LoadBallGfx(u8 ballId)
 {
     u16 var;
 
-    if (GetSpriteTileStartByTag(gBallSpriteSheets[ballId].tag) == TAG_NONE)
+    if (GetSpriteTileStartByTag(gBallSpriteSheets[ballId].tag) == 0xFFFF)
     {
         LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[ballId]);
         LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[ballId]);
