@@ -10034,7 +10034,7 @@ static void UnkUtil_CpuRun(struct UnkUtilData *data)
 
     for (i = 0; i < data->height; i++)
     {
-        CpuSet(data->src, data->dest, data->size / 2);
+        CpuCopy16(data->src, data->dest, data->size);
         data->dest += 64;
         data->src += data->unk * 2;
     }
