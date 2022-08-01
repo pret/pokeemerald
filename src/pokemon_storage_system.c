@@ -9241,16 +9241,16 @@ static bool8 UpdateItemInfoWindowSlideOut(void)
     return TRUE;
 }
 
-static void DrawItemInfoWindow(u32 pos)
+static void DrawItemInfoWindow(u32 x)
 {
-    if (pos != 0)
+    if (x != 0)
     {
-        FillBgTilemapBufferRect(0, 0x13A, 0, 0xC, pos, 1, 0xFu);
-        FillBgTilemapBufferRect(0, 0x93A, 0, 0x14, pos, 1, 0xFu);
+        FillBgTilemapBufferRect(0, 0x13A, 0, 0xC, x, 1, 0xFu);
+        FillBgTilemapBufferRect(0, 0x93A, 0, 0x14, x, 1, 0xFu);
     }
-    FillBgTilemapBufferRect(0, 0x13B, pos, 0xD, 1, 7, 0xFu);
-    FillBgTilemapBufferRect(0, 0x13C, pos, 0xC, 1, 1, 0xFu);
-    FillBgTilemapBufferRect(0, 0x13D, pos, 0x14, 1, 1, 0xFu);
+    FillBgTilemapBufferRect(0, 0x13B, x, 0xD, 1, 7, 0xFu);
+    FillBgTilemapBufferRect(0, 0x13C, x, 0xC, 1, 1, 0xFu);
+    FillBgTilemapBufferRect(0, 0x13D, x, 0x14, 1, 1, 0xFu);
     ScheduleBgCopyTilemapToVram(0);
 }
 

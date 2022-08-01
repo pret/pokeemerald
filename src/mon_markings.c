@@ -396,20 +396,16 @@ bool8 HandleMonMarkingsMenuInput(void)
 
     if (JOY_NEW(DPAD_UP))
     {
-        s8 pos;
         PlaySE(SE_SELECT);
-        pos = --sMenu->cursorPos;
-        if (pos < 0)
+        if (--sMenu->cursorPos < 0)
             sMenu->cursorPos = SELECTION_CANCEL;
         return TRUE;
     }
 
     if (JOY_NEW(DPAD_DOWN))
     {
-        s8 pos;
         PlaySE(SE_SELECT);
-        pos = ++sMenu->cursorPos;
-        if (pos > SELECTION_CANCEL)
+        if (++sMenu->cursorPos > SELECTION_CANCEL)
             sMenu->cursorPos = 0;
         return TRUE;
     }
