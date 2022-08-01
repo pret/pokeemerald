@@ -1578,24 +1578,19 @@ static void OpponentHandleChooseMove(void)
                 BtlController_EmitTwoReturnValues(BUFFER_B, 15, gBattlerTarget);
                 break;
             default:
-                if (GetBattlerMoveTargetType(gActiveBattler, moveInfo->moves[chosenMoveId]) & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
-                    gBattlerTarget = gActiveBattler;
-                if (GetBattlerMoveTargetType(gActiveBattler, moveInfo->moves[chosenMoveId]) & MOVE_TARGET_BOTH)
                 {
                     u16 chosenMove = moveInfo->moves[chosenMoveId];
-                        
-                    if (gBattleMoves[chosenMove].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
+
+                    if (GetBattlerMoveTargetType(gActiveBattler, chosenMove) & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
                         gBattlerTarget = gActiveBattler;
-                    if (gBattleMoves[chosenMove].target & MOVE_TARGET_BOTH)
+                    if (GetBattlerMoveTargetType(gActiveBattler, chosenMove) & MOVE_TARGET_BOTH)
                     {
                         gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
                         if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
                             gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-                    }
-                    
+                    }                    
                     if (ShouldUseZMove(gActiveBattler, gBattlerTarget, chosenMove))
-                        QueueZMove(gActiveBattler, chosenMove);
-                    
+                        QueueZMove(gActiveBattler, chosenMove);                    
                     if (CanMegaEvolve(gActiveBattler)) // If opponent can mega evolve, do it.
                         BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
                     else
