@@ -111,7 +111,9 @@ AbandonedShip_HiddenFloorRooms_EventScript_Trash::
 	releaseall
 	end
 
-AbandonedShip_HiddenFloorRooms_Text_BrightShinyTrash:
-	.string "It's bright and shiny!\n"
-	.string "But it's just trash…$"
+.ifdef FRENCH
+	.include "data/maps/AbandonedShip_HiddenFloorRooms/text_fr.inc"
+.else
+	.include "data/maps/AbandonedShip_HiddenFloorRooms/text.inc" @ENGLISH DEFAULT
+.endif
 
