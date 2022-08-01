@@ -833,9 +833,7 @@ Common_EventScript_PlayerHandedOverTheItem::
 .ifdef FRENCH
 	.include "data/text/general_fr.inc"
 .else
-.ifdef ENGLISH
 	.include "data/text/general.inc"
-.endif
 .endif
 	.include "data/text/pc_transfer.inc"
 	.include "data/text/questionnaire.inc"
