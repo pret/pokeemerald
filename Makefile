@@ -1,5 +1,10 @@
 TOOLCHAIN := $(DEVKITARM)
-COMPARE ?= 0
+
+# Default variables
+GAME_LANGUAGE ?= ENGLISH
+GAME_REVISION := 0
+MODERN        ?= 0
+COMPARE       ?= 0
 
 ifeq (compare,$(MAKECMDGOALS))
   COMPARE := 1
@@ -36,15 +41,33 @@ else
 EXE :=
 endif
 
-TITLE       := POKEMON EMER
-GAME_CODE   := BPEE
-MAKER_CODE  := 01
-REVISION    := 0
-MODERN      ?= 0
+TITLE        := POKEMON EMER
+GAME_CODE    := BPE
+MAKER_CODE   := 01
+BUILD_NAME   := emerald
 
 ifeq (modern,$(MAKECMDGOALS))
   MODERN := 1
 endif
+
+# Language
+ifeq ($(GAME_LANGUAGE), ENGLISH)
+  BUILD_NAME  := $(BUILD_NAME)
+  GAME_CODE  := $(GAME_CODE)E
+else
+ifeq ($(GAME_LANGUAGE), FRENCH)
+  BUILD_NAME  := $(BUILD_NAME)_fr
+  GAME_CODE  := $(GAME_CODE)F
+else
+  $(error unknown language $(GAME_LANGUAGE))
+endif
+endif
+
+OBJ_DIR_NAME := build/$(BUILD_NAME)
+
+ROM_NAME      := poke$(BUILD_NAME).gba
+ELF_NAME      := $(ROM_NAME:.gba=.elf)
+MAP_NAME      := $(ROM_NAME:.gba=.map)
 
 # use arm-none-eabi-cpp for macOS
 # as macOS's default compiler is clang
@@ -62,11 +85,6 @@ ifneq ($(MODERN),1)
 else
   CPP := $(PREFIX)cpp
 endif
-
-ROM_NAME := pokeemerald.gba
-ELF_NAME := $(ROM_NAME:.gba=.elf)
-MAP_NAME := $(ROM_NAME:.gba=.map)
-OBJ_DIR_NAME := build/emerald
 
 MODERN_ROM_NAME := pokeemerald_modern.gba
 MODERN_ELF_NAME := $(MODERN_ROM_NAME:.gba=.elf)
@@ -150,7 +168,7 @@ MAKEFLAGS += --no-print-directory
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS) libagbsyscall modern tidymodern tidynonmodern
+.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS) libagbsyscall modern tidy
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
@@ -223,7 +241,7 @@ $(TOOLDIRS):
 
 rom: $(ROM)
 ifeq ($(COMPARE),1)
-	@$(SHA1) rom.sha1
+	@$(SHA1) $(BUILD_NAME).sha1
 endif
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
@@ -234,7 +252,7 @@ clean: mostlyclean clean-tools
 clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
 
-mostlyclean: tidynonmodern tidymodern
+mostlyclean: tidy
 	rm -f $(SAMPLE_SUBDIR)/*.bin
 	rm -f $(CRY_SUBDIR)/*.bin
 	rm -f $(MID_SUBDIR)/*.s
@@ -245,15 +263,10 @@ mostlyclean: tidynonmodern tidymodern
 	rm -f $(AUTO_GEN_TARGETS)
 	@$(MAKE) clean -C libagbsyscall
 
-tidy: tidynonmodern tidymodern
-
-tidynonmodern:
-	rm -f $(ROM_NAME) $(ELF_NAME) $(MAP_NAME)
-	rm -rf $(OBJ_DIR_NAME)
-
-tidymodern:
-	rm -f $(MODERN_ROM_NAME) $(MODERN_ELF_NAME) $(MODERN_MAP_NAME)
-	rm -rf $(MODERN_OBJ_DIR_NAME)
+tidy:
+	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
+	$(RM) $(MODERN_BUILDS:%=poke%{.gba,.elf,.map})
+	$(RM) -r build
 	
 ifneq ($(MODERN),0)
 $(C_BUILDDIR)/berry_crush.o: override CFLAGS += -Wno-address-of-packed-member
@@ -299,6 +312,11 @@ $(C_BUILDDIR)/librfu_intr.o: CFLAGS := -O2 -mthumb-interwork -quiet
 else
 $(C_BUILDDIR)/librfu_intr.o: CFLAGS := -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast
 endif
+
+#### Main Rules ####
+
+ALL_BUILDS := emerald emerald_fr
+MODERN_BUILDS := $(ALL_BUILDS:%=%_modern)
 
 ifeq ($(DINFO),1)
 override CFLAGS += -g
@@ -419,13 +437,17 @@ $(OBJ_DIR)/ld_script.ld: $(LD_SCRIPT) $(LD_SCRIPT_DEPS)
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS) libagbsyscall
 	@echo "cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ <objects> <lib>"
 	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(OBJS_REL) $(LIB)
-	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
+	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 	$(FIX) $@ -p --silent
 
 modern: all
+
+# "friendly" target names for convenience sake
+french:     ; @$(MAKE) GAME_LANGUAGE=FRENCH
+compare_french:     ; @$(MAKE) GAME_LANGUAGE=FRENCH COMPARE=1
 
 libagbsyscall:
 	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN) MODERN=$(MODERN)
