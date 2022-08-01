@@ -52,6 +52,13 @@
 	setvar VAR_0x8005, \opponent
 	special CallBattleTowerFunc
 	.endm
+	
+	@ This acts like old tower_getopponentintro, but tower_getopponentintro was changed in the French version.
+	.macro tower_getopponentintro2 opponent:req
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_GET_OPPONENT_INTRO2
+	setvar VAR_0x8005, \opponent
+	special CallBattleTowerFunc
+	.endm
 
 	@ Load the parties, gfx, and other data (like Apprentice id) for the multi partner candidates
 	.macro tower_loadpartners

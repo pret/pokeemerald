@@ -15,8 +15,6 @@
 // printing system. Use NoCashGBAPrint() and NoCashGBAPrintf() like you
 // would normally use AGBPrint() and AGBPrintf().
 
-#define ENGLISH
-
 #ifdef ENGLISH
 #define UNITS_IMPERIAL
 #else
