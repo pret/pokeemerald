@@ -243,28 +243,44 @@ static void SpriteCB_Cursor_UpOrRight(struct Sprite *sprite)
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
+        #if ENGLISH
             sprite->x = 53;
+        #elif FRENCH
+            sprite->x = 56;
+        #endif
             sprite->y = 68;
             break;
         case SELECTION_HOURS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
+        #if ENGLISH
             sprite->x = 86;
+        #elif FRENCH
+            sprite->x = 92;
+        #endif
             sprite->y = 68;
             break;
         case SELECTION_MINS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
+        #if ENGLISH
             sprite->x = 101;
+        #elif FRENCH
+            sprite->x = 107;
+        #endif
             sprite->y = 68;
             break;
         case SELECTION_SECS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
+        #if ENGLISH
             sprite->x = 116;
+        #elif FRENCH
+            sprite->x = 122;
+        #endif
             sprite->y = 68;
             break;
         case SELECTION_CONFIRM:
@@ -293,28 +309,44 @@ static void SpriteCB_Cursor_Down(struct Sprite *sprite)
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
+        #if ENGLISH
             sprite->x = 53;
+        #elif FRENCH
+            sprite->x = 56;
+        #endif
             sprite->y = 92;
             break;
         case SELECTION_HOURS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
+        #if ENGLISH
             sprite->x = 86;
+        #elif FRENCH
+            sprite->x = 92;
+        #endif
             sprite->y = 92;
             break;
         case SELECTION_MINS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
+        #if ENGLISH
             sprite->x = 101;
+        #elif FRENCH
+            sprite->x = 107;
+        #endif
             sprite->y = 92;
             break;
         case SELECTION_SECS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
+        #if ENGLISH
             sprite->x = 116;
+        #elif FRENCH
+            sprite->x = 122;
+        #endif
             sprite->y = 92;
             break;
         case SELECTION_CONFIRM:
@@ -335,12 +367,20 @@ static void CreateCursor(u8 taskId)
 
     LoadSpritePalette(&sSpritePalette_Arrow);
 
+#if ENGLISH
     spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Arrow, 53, 68, 0);
+#elif FRENCH
+    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Arrow, 56, 68, 0);
+#endif
     gSprites[spriteId].callback = SpriteCB_Cursor_UpOrRight;
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].sState = -1;
 
+#if ENGLISH
     spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Arrow, 53, 68, 0);
+#elif FRENCH
+    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Arrow, 56, 68, 0);
+#endif
     gSprites[spriteId].callback = SpriteCB_Cursor_Down;
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].sState = -1;

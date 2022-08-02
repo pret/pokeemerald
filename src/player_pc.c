@@ -691,7 +691,11 @@ static void Mailbox_DrawMailboxMenu(u8 taskId)
 {
     u8 windowId = MailboxMenu_AddWindow(MAILBOXWIN_TITLE);
     MailboxMenu_AddWindow(MAILBOXWIN_LIST);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Mailbox, GetStringCenterAlignXOffset(FONT_NORMAL, gText_Mailbox, 0x40), 1, 0, NULL);
+#if ENGLISH
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Mailbox, GetStringCenterAlignXOffset(FONT_NORMAL, gText_Mailbox, 64), 1, 0, NULL);
+#elif FRENCH
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Mailbox, GetStringCenterAlignXOffset(FONT_NORMAL, gText_Mailbox, gWindows[windowId].window.width * 8), 1, 0, NULL);
+#endif
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].tListTaskId = MailboxMenu_CreateList(&gPlayerPCItemPageInfo);
     MailboxMenu_AddScrollArrows(&gPlayerPCItemPageInfo);

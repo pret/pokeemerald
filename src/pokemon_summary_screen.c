@@ -591,7 +591,11 @@ static const struct WindowTemplate sPageInfoTemplate[] =
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 9,
+    #if ENGLISH
         .width = 18,
+    #elif FRENCH
+        .width = 19,
+    #endif
         .height = 4,
         .paletteNum = 6,
         .baseBlock = 485,
@@ -603,7 +607,11 @@ static const struct WindowTemplate sPageInfoTemplate[] =
         .width = 18,
         .height = 6,
         .paletteNum = 6,
+    #if ENGLISH
         .baseBlock = 557,
+    #elif FRENCH
+        .baseBlock = 561,
+    #endif
     },
 };
 static const struct WindowTemplate sPageSkillsTemplate[] =
@@ -3677,7 +3685,11 @@ static void PrintNewMoveDetailsOrCancelText(void)
 static void AddAndFillMoveNamesWindow(void)
 {
     u8 windowId = AddWindowFromTemplateList(sPageMovesTemplate, PSS_DATA_WINDOW_MOVE_NAMES);
+#if ENGLISH
     FillWindowPixelRect(windowId, PIXEL_FILL(0), 0, 66, 72, 16);
+#elif FRENCH
+    FillWindowPixelRect(windowId, PIXEL_FILL(0), 0, 65, 72, 15);
+#endif
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
@@ -3879,7 +3891,7 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
                                                           summary->species2,
                                                           summary->pid);
             else
-                HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2], 
+                HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2],
                                            gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
                                            summary->species2,
                                            summary->pid);
@@ -3891,7 +3903,7 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
                 if (sMonSummaryScreen->monList.mons == gPlayerParty || sMonSummaryScreen->mode == SUMMARY_MODE_BOX || sMonSummaryScreen->unk40EF == TRUE)
                     HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2],
                                                gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
-                                               summary->species2, 
+                                               summary->species2,
                                                summary->pid);
                 else
                     HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[summary->species2],

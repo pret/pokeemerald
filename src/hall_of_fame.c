@@ -1109,7 +1109,7 @@ static void HallOfFame_PrintWelcomeText(u8 unusedPossiblyWindowId, u8 unused2)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
-    AddTextPrinterParameterized3(0, FONT_NORMAL, GetStringCenterAlignXOffset(FONT_NORMAL, gText_WelcomeToHOF, 0xD0), 1, sMonInfoTextColors, 0, gText_WelcomeToHOF);
+    AddTextPrinterParameterized3(0, FONT_NORMAL, GetStringCenterAlignXOffset(FONT_NORMAL, gText_WelcomeToHOF, 208), 1, sMonInfoTextColors, 0, gText_WelcomeToHOF);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
 
@@ -1153,7 +1153,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
     text[POKEMON_NAME_LENGTH] = EOS;
     if (currMon->species == SPECIES_EGG)
     {
-        width = GetStringCenterAlignXOffset(FONT_NORMAL, text, 0xD0);
+        width = GetStringCenterAlignXOffset(FONT_NORMAL, text, 208);
         AddTextPrinterParameterized3(0, FONT_NORMAL, width, 1, sMonInfoTextColors, TEXT_SKIP_DRAW, text);
         CopyWindowToVram(0, COPYWIN_FULL);
     }

@@ -759,7 +759,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
 
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     str = gText_MoveRelearnerBattleMoves;
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, str, 0x80);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, str, 128);
     AddTextPrinterParameterized(0, FONT_NORMAL, str, x, 1, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerPP;
@@ -820,7 +820,7 @@ static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
     MoveRelearnerShowHideHearts(chosenMove);
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
     str = gText_MoveRelearnerContestMovesTitle;
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, str, 0x80);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, str, 128);
     AddTextPrinterParameterized(1, FONT_NORMAL, str, x, 1, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerAppeal;

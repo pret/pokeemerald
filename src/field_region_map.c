@@ -151,7 +151,7 @@ static void FieldUpdateRegionMap(void)
             break;
         case 1:
             DrawStdFrameWithCustomTileAndPalette(1, FALSE, 0x27, 0xd);
-            offset = GetStringCenterAlignXOffset(FONT_NORMAL, gText_Hoenn, 0x38);
+            offset = GetStringCenterAlignXOffset(FONT_NORMAL, gText_Hoenn, 56);
             AddTextPrinterParameterized(1, FONT_NORMAL, gText_Hoenn, offset, 1, 0, NULL);
             ScheduleBgCopyTilemapToVram(0);
             DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x27, 0xd);

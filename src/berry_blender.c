@@ -1661,7 +1661,7 @@ static void PrintPlayerNames(void)
 
             text[0] = EOS;
             StringCopy(text, gLinkPlayers[sBerryBlender->arrowIdToPlayerId[i]].name);
-            xPos = GetStringCenterAlignXOffset(FONT_NORMAL, text, 0x38);
+            xPos = GetStringCenterAlignXOffset(FONT_NORMAL, text, 56);
 
             if (playerId == sBerryBlender->arrowIdToPlayerId[i])
                 Blender_AddTextPrinter(i, text, xPos, 1, 0, 2); // Highlight player's name in red
@@ -3555,7 +3555,7 @@ static bool8 PrintBlendingResults(void)
             u16 minutes, seconds;
             u8 *txtPtr;
 
-            xPos = GetStringCenterAlignXOffset(FONT_NORMAL, sText_BlendingResults, 0xA8);
+            xPos = GetStringCenterAlignXOffset(FONT_NORMAL, sText_BlendingResults, 168);
             Blender_AddTextPrinter(5, sText_BlendingResults, xPos, 1, TEXT_SKIP_DRAW, 0);
 
             if (sBerryBlender->numPlayers == BLENDER_MAX_PLAYERS)

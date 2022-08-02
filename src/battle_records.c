@@ -279,7 +279,7 @@ static void PrintLinkBattleWinsLossesDraws(struct LinkBattleRecord *records)
     ConvertIntToDecimalStringN(gStringVar3, GetGameStat(GAME_STAT_LINK_BATTLE_DRAWS), STR_CONV_MODE_LEFT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, gText_TotalRecordWLD);
 
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 0xD0);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 208);
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, x, 0x11, 0, NULL);
 }
 

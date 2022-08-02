@@ -1225,7 +1225,11 @@ void Task_WaitForLinkPlayerConnection(u8 taskId)
     struct Task *task = &gTasks[taskId];
 
     task->tTimer++;
+#if ENGLISH
     if (task->tTimer > 300)
+#elif FRENCH
+    if (task->tTimer > 480)
+#endif
     {
         CloseLink();
         SetMainCallback2(CB2_LinkError);

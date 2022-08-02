@@ -6,6 +6,9 @@
 #include "decompress.h"
 #include "dynamic_placeholder_text_util.h"
 #include "event_data.h"
+#if FRENCH
+#include "graphics.h"
+#endif
 #include "international_string_util.h"
 #include "item.h"
 #include "link.h"
@@ -3053,9 +3056,11 @@ static const u16 sVenusaur_Pal[] = INCBIN_U16("graphics/pokemon_jump/venusaur.gb
 static const u32 sVenusaur_Gfx[] = INCBIN_U32("graphics/pokemon_jump/venusaur.4bpp.lz");
 static const u32 sVenusaur_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/venusaur.bin.lz");
 
+#if ENGLISH
 static const u16 sBonuses_Pal[] = INCBIN_U16("graphics/pokemon_jump/bonuses.gbapal");
 static const u32 sBonuses_Gfx[] = INCBIN_U32("graphics/pokemon_jump/bonuses.4bpp.lz");
 static const u32 sBonuses_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/bonuses.bin.lz");
+#endif
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -3189,9 +3194,15 @@ static void LoadPokeJumpGfx(void)
         LoadPalette(sVenusaur_Pal, 0x30, 0x20);
         DecompressAndCopyTileDataToVram(BG_VENUSAUR, sVenusaur_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_VENUSAUR, sVenusaur_Tilemap, 0, 0, 1);
+    #if ENGLISH
         LoadPalette(sBonuses_Pal, 0x10, 0x20);
         DecompressAndCopyTileDataToVram(BG_BONUSES, sBonuses_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_BONUSES, sBonuses_Tilemap, 0, 0, 1);
+    #elif FRENCH
+        LoadPalette(gPokeJumpBonuses_Pal, 0x10, 0x20);
+        DecompressAndCopyTileDataToVram(BG_BONUSES, gPokeJumpBonuses_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(BG_BONUSES, gPokeJumpBonuses_Tilemap, 0, 0, 1);
+    #endif
         LoadPalette(sInterface_Pal, 0x20, 0x20);
         SetBgTilemapBuffer(BG_INTERFACE, sPokemonJumpGfx->tilemapBuffer);
         FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 0x20, 0x20);
