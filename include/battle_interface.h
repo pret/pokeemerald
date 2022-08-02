@@ -43,6 +43,7 @@ enum
 #define TAG_MEGA_INDICATOR_TILE         0xD778
 #define TAG_ALPHA_INDICATOR_TILE        0xD779
 #define TAG_OMEGA_INDICATOR_TILE        0xD77A
+#define TAG_ZMOVE_TRIGGER_TILE          0xD77B
 
 #define TAG_HEALTHBOX_PAL               0xD6FF
 #define TAG_HEALTHBAR_PAL               0xD704
@@ -53,6 +54,7 @@ enum
 #define TAG_MEGA_INDICATOR_PAL          0xD778
 #define TAG_ALPHA_INDICATOR_PAL         0xD779
 #define TAG_OMEGA_INDICATOR_PAL         0xD77A
+#define TAG_ZMOVE_TRIGGER_PAL           0xD77B
 
 enum
 {
@@ -89,14 +91,15 @@ void HideMegaTriggerSprite(void);
 void DestroyMegaTriggerSprite(void);
 u32 CreateMegaIndicatorSprite(u32 battlerId, u32 which);
 void DestroyMegaIndicatorSprite(u32 healthboxSpriteId);
-u8 CreatePartyStatusSummarySprites(u8 battler, struct HpAndStatus *partyInfo, u8 arg2, bool8 isBattleStart);
+u8 CreatePartyStatusSummarySprites(u8 battler, struct HpAndStatus *partyInfo, bool8 skipPlayer, bool8 isBattleStart);
 void Task_HidePartyStatusSummary(u8 taskId);
 void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elementId);
-s32 MoveBattleBar(u8 battler, u8 healthboxSpriteId, u8 whichBar, u8 arg3);
+s32 MoveBattleBar(u8 battler, u8 healthboxSpriteId, u8 whichBar, u8 unused);
 u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale);
 u8 GetHPBarLevel(s16 hp, s16 maxhp);
 void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle);
 void DestroyAbilityPopUp(u8 battlerId);
+void HideTriggerSprites(void);
 bool32 CanThrowLastUsedBall(void);
 void TryHideLastUsedBall(void);
 void TryRestoreLastUsedBall(void);

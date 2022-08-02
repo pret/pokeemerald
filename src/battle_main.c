@@ -64,6 +64,8 @@
 #include "constants/trainers.h"
 #include "cable_club.h"
 
+extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
+
 extern const struct BgTemplate gBattleBgTemplates[];
 extern const struct WindowTemplate *const gBattleWindowTemplates[];
 
@@ -115,6 +117,7 @@ static void HandleEndTurn_MonFled(void);
 static void HandleEndTurn_FinishBattle(void);
 static void SpriteCB_UnusedBattleInit(struct Sprite* sprite);
 static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite);
+static void TrySpecialEvolution(void);
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
 EWRAM_DATA u16 gBattle_BG0_Y = 0;
@@ -131,7 +134,7 @@ EWRAM_DATA u16 gBattle_WIN1V = 0;
 EWRAM_DATA u8 gDisplayedStringBattle[400] = {0};
 EWRAM_DATA u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT] = {0};
 EWRAM_DATA u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT] = {0};
-EWRAM_DATA u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT] = {0};
+EWRAM_DATA u8 gBattleTextBuff3[30] = {0};   //expanded for stupidly long z move names
 // The below array is never intentionally used. However, Juan's
 // defeat text (SootopolisCity_Gym_1F_Text_JuanDefeat) is too long
 // for gDisplayedStringBattle and overflows into this array. If it
@@ -236,7 +239,8 @@ EWRAM_DATA struct TotemBoost gTotemBoosts[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA bool8 gHasFetchedBall = FALSE;
 EWRAM_DATA u8 gLastUsedBall = 0;
 EWRAM_DATA u16 gLastThrownBall = 0;
-EWRAM_DATA bool8 gSwapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
+EWRAM_DATA u8 gPartyCriticalHits[PARTY_SIZE] = {0};
+EWRAM_DATA static u8 sTriedEvolving = 0;
 
 void (*gPreBattleCallback1)(void);
 void (*gBattleMainFunc)(void);
@@ -1372,8 +1376,7 @@ static void CB2_PreInitMultiBattle(void)
                 gBattleTypeFlags = *savedBattleTypeFlags;
                 gMain.savedCallback = *savedCallback;
                 SetMainCallback2(CB2_InitBattleInternal);
-                Free(sMultiPartnerPartyBuffer);
-                sMultiPartnerPartyBuffer = NULL;
+                FREE_AND_SET_NULL(sMultiPartnerPartyBuffer);
             }
         }
         else if (gReceivedRemoteLinkPlayers == 0)
@@ -1381,8 +1384,7 @@ static void CB2_PreInitMultiBattle(void)
             gBattleTypeFlags = *savedBattleTypeFlags;
             gMain.savedCallback = *savedCallback;
             SetMainCallback2(CB2_InitBattleInternal);
-            Free(sMultiPartnerPartyBuffer);
-            sMultiPartnerPartyBuffer = NULL;
+            FREE_AND_SET_NULL(sMultiPartnerPartyBuffer);
         }
         break;
     }
@@ -1418,8 +1420,7 @@ static void CB2_PreInitIngamePlayerPartnerBattle(void)
             gBattleTypeFlags = *savedBattleTypeFlags;
             gMain.savedCallback = *savedCallback;
             SetMainCallback2(CB2_InitBattleInternal);
-            Free(sMultiPartnerPartyBuffer);
-            sMultiPartnerPartyBuffer = NULL;
+            FREE_AND_SET_NULL(sMultiPartnerPartyBuffer);
         }
         break;
     }
@@ -2990,9 +2991,10 @@ static void BattleStartClearSetData(void)
         gBattleStruct->usedHeldItems[i][0] = 0;
         gBattleStruct->usedHeldItems[i][1] = 0;
         gBattleStruct->itemStolen[i].originalItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+        gPartyCriticalHits[i] = 0;
     }
 
-    gSwapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
+    gBattleStruct->swapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
 }
 
 void SwitchInClearSetData(void)
@@ -3626,12 +3628,18 @@ static void TryDoEventsBeforeFirstTurn(void)
     // Primal Reversion
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (CanMegaEvolve(i)
-         && GetBattlerHoldEffect(i, TRUE) == HOLD_EFFECT_PRIMAL_ORB)
+        if (GetBattlerHoldEffect(i, TRUE) == HOLD_EFFECT_PRIMAL_ORB)
         {
-            gBattlerAttacker = i;
-            BattleScriptExecute(BattleScript_PrimalReversion);
-            return;
+            for (j = 0; j < EVOS_PER_MON; j++)
+            {
+                if (gEvolutionTable[gBattleMons[i].species][j].targetSpecies != SPECIES_NONE
+                 && gEvolutionTable[gBattleMons[i].species][j].method == EVO_PRIMAL_REVERSION)
+                {
+                    gBattlerAttacker = i;
+                    BattleScriptExecute(BattleScript_PrimalReversion);
+                    return;
+                }
+            }
         }
     }
 
@@ -3689,6 +3697,8 @@ static void TryDoEventsBeforeFirstTurn(void)
     gMoveResultFlags = 0;
 
     gRandomTurnNumber = Random();
+    
+    GetAiLogicData(); // get assumed abilities, hold effects, etc of all battlers
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
     {
@@ -3777,6 +3787,7 @@ void BattleTurnPassed(void)
 
     *(&gBattleStruct->absentBattlerFlags) = gAbsentBattlerFlags;
     BattlePutTextOnWindow(gText_EmptyString3, B_WIN_MSG);
+    GetAiLogicData(); // get assumed abilities, hold effects, etc of all battlers
     gBattleMainFunc = HandleTurnActionSelectionState;
     gRandomTurnNumber = Random();
 
@@ -3894,6 +3905,11 @@ static void HandleTurnActionSelectionState(void)
         case STATE_TURN_START_RECORD: // Recorded battle related action on start of every turn.
             RecordedBattle_CopyBattlerMoves();
             gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
+            
+            // Do AI score computations here so we can use them in AI_TrySwitchOrUseItem
+            if ((gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart()) && IsBattlerAIControlled(gActiveBattler)) {
+                gBattleStruct->aiMoveOrAction[gActiveBattler] = ComputeBattleAiScores(gActiveBattler);
+            }
             break;
         case STATE_BEFORE_ACTION_CHOSEN: // Choose an action.
             *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
@@ -3963,6 +3979,7 @@ static void HandleTurnActionSelectionState(void)
                     {
                         struct ChooseMoveStruct moveInfo;
 
+                        moveInfo.zmove = gBattleStruct->zmove;
                         moveInfo.mega = gBattleStruct->mega;
                         moveInfo.species = gBattleMons[gActiveBattler].species;
                         moveInfo.monType1 = gBattleMons[gActiveBattler].type1;
@@ -4011,7 +4028,8 @@ static void HandleTurnActionSelectionState(void)
                     {
                         BtlController_EmitChoosePokemon(BUFFER_A, PARTY_ACTION_CANT_SWITCH, PARTY_SIZE, ABILITY_NONE, gBattleStruct->battlerPartyOrders[gActiveBattler]);
                     }
-                    else if ((i = IsAbilityPreventingEscape(gActiveBattler)))
+                    else if ((i = IsAbilityPreventingEscape(gActiveBattler)
+                              && ItemId_GetHoldEffect(gBattleMons[gActiveBattler].item) != HOLD_EFFECT_SHED_SHELL))
                     {
                         BtlController_EmitChoosePokemon(BUFFER_A, ((i - 1) << 4) | PARTY_ACTION_ABILITY_PREVENTS, PARTY_SIZE, gBattleMons[i - 1].ability, gBattleStruct->battlerPartyOrders[gActiveBattler]);
                     }
@@ -4077,6 +4095,7 @@ static void HandleTurnActionSelectionState(void)
                     }
 
                     gBattleStruct->mega.toEvolve &= ~(gBitTable[BATTLE_PARTNER(GetBattlerPosition(gActiveBattler))]);
+                    gBattleStruct->zmove.toBeUsed[BATTLE_PARTNER(GetBattlerPosition(gActiveBattler))] = MOVE_NONE;
                     BtlController_EmitEndBounceEffect(BUFFER_A);
                     MarkBattlerForControllerExec(gActiveBattler);
                     return;
@@ -4811,13 +4830,19 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
         {
             gActiveBattler = gBattlerAttacker = gBattleStruct->focusPunchBattlerId;
             gBattleStruct->focusPunchBattlerId++;
-            if (gChosenMoveByBattler[gActiveBattler] == MOVE_FOCUS_PUNCH
-                && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
+            if (!(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
                 && !(gDisableStructs[gBattlerAttacker].truantCounter)
                 && !(gProtectStructs[gActiveBattler].noValidMoves))
             {
-                BattleScriptExecute(BattleScript_FocusPunchSetUp);
-                return;
+                switch(gChosenMoveByBattler[gActiveBattler])
+                {
+                case MOVE_FOCUS_PUNCH:
+                    BattleScriptExecute(BattleScript_FocusPunchSetUp);
+                    return;
+                case MOVE_BEAK_BLAST:
+                    BattleScriptExecute(BattleScript_BeakBlastSetUp);
+                    return;
+                }
             }
         }
     }
@@ -5139,9 +5164,16 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
         gIsFishingEncounter = FALSE;
         gIsSurfingEncounter = FALSE;
         ResetSpriteData();
-        if (gLeveledUpInBattle && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT))
+        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
+                                  | BATTLE_TYPE_RECORDED_LINK
+                                  | BATTLE_TYPE_FIRST_BATTLE
+                                  | BATTLE_TYPE_SAFARI
+                                  | BATTLE_TYPE_FRONTIER
+                                  | BATTLE_TYPE_EREADER_TRAINER
+                                  | BATTLE_TYPE_WALLY_TUTORIAL))
+            && (B_EVOLUTION_AFTER_WHITEOUT >= GEN_6 || gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT))
         {
-            gBattleMainFunc = TryEvolvePokemon;
+            gBattleMainFunc = TrySpecialEvolution;
         }
         else
         {
@@ -5157,6 +5189,30 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
         FreeBattleResources();
         FreeBattleSpritesData();
     }
+}
+
+static void TrySpecialEvolution(void) // Attempts to perform non-level related battle evolutions (not the script command).
+{
+    s32 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        #ifndef POKEMON_EXPANSION
+            u16 species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_BATTLE_SPECIAL, i);
+        #else
+            u16 species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_BATTLE_SPECIAL, i, NULL);
+        #endif
+        if (species != SPECIES_NONE && !(sTriedEvolving & gBitTable[i]))
+        {
+            sTriedEvolving |= gBitTable[i];
+            FreeAllWindowBuffers();
+            gBattleMainFunc = WaitForEvoSceneToFinish;
+            EvolutionScene(&gPlayerParty[i], species, TRUE, i);
+            return;
+        }
+    }
+    sTriedEvolving = 0;
+    gBattleMainFunc = TryEvolvePokemon;
 }
 
 static void TryEvolvePokemon(void)
@@ -5175,7 +5231,7 @@ static void TryEvolvePokemon(void)
                 levelUpBits &= ~(gBitTable[i]);
                 gLeveledUpInBattle = levelUpBits;
 
-                species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_NORMAL, levelUpBits, SPECIES_NONE);
+                species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_NORMAL, levelUpBits, NULL);
                 if (species != SPECIES_NONE)
                 {
                     FreeAllWindowBuffers();
@@ -5193,7 +5249,7 @@ static void TryEvolvePokemon(void)
 static void WaitForEvoSceneToFinish(void)
 {
     if (gMain.callback2 == BattleMainCB2)
-        gBattleMainFunc = TryEvolvePokemon;
+        gBattleMainFunc = TrySpecialEvolution;
 }
 
 static void ReturnFromBattleToOverworld(void)

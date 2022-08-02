@@ -383,14 +383,20 @@
 #define EVO_SPECIFIC_MAP                  32     // Pokémon levels up on specified map
 #define EVO_LEVEL_NATURE_AMPED            33     // Pokémon reaches the specified level, it has a Hardy, Brave, Adamant, Naughty, Docile, Impish, Lax, Hasty, Jolly, Naive, Rash, Sassy, or Quirky nature.
 #define EVO_LEVEL_NATURE_LOW_KEY          34     // Pokémon reaches the specified level, it has a Lonely, Bold, Relaxed, Timid, Serious, Modest, Mild, Quiet, Bashful, Calm, Gentle, or Careful nature.
+#define EVO_CRITICAL_HITS                 35     // Pokémon performs specified number of critical hits in one battle
+#define EVO_SCRIPT_TRIGGER_DMG            36     // Pokémon has specified HP below max, then player interacts trigger
+#define EVO_DARK_SCROLL                   37     // interacts with Scroll of Darkness
+#define EVO_WATER_SCROLL                  38     // interacts with Scroll of Waters
 
 #define EVOS_PER_MON 10
 
 // Evolution 'modes,' for GetEvolutionTargetSpecies
-#define EVO_MODE_NORMAL     0
-#define EVO_MODE_TRADE      1
-#define EVO_MODE_ITEM_USE   2
-#define EVO_MODE_ITEM_CHECK 3 // If an Everstone is being held, still want to show that the stone *could* be used on that Pokémon to evolve
+#define EVO_MODE_NORMAL            0
+#define EVO_MODE_TRADE             1
+#define EVO_MODE_ITEM_USE          2
+#define EVO_MODE_ITEM_CHECK        3 // If an Everstone is being held, still want to show that the stone *could* be used on that Pokémon to evolve
+#define EVO_MODE_BATTLE_SPECIAL    4
+#define EVO_MODE_OVERWORLD_SPECIAL 5
 
 // Form change types
 #define FORM_CHANGE_END         0
@@ -417,5 +423,15 @@
 #define NUM_ABILITY_SLOTS (NUM_NORMAL_ABILITY_SLOTS + NUM_HIDDEN_ABILITY_SLOTS)
 #define NUM_NORMAL_ABILITY_SLOTS 2
 #define NUM_HIDDEN_ABILITY_SLOTS 1
+
+// Species Flags
+#define FLAG_LEGENDARY          (1 << 0)
+#define FLAG_MYTHICAL           (1 << 1)
+#define FLAG_ULTRA_BEAST        (1 << 2)
+#define FLAG_ALOLAN_FORM        (1 << 3)
+#define FLAG_GALARIAN_FORM      (1 << 4)
+#define FLAG_GENDER_DIFFERENCE  (1 << 5)
+
+#define LEGENDARY_PERFECT_IV_COUNT 3
 
 #endif // GUARD_CONSTANTS_POKEMON_H

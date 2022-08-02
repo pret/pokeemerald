@@ -9,6 +9,7 @@
 #include "battle_pyramid.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
+#include "battle_z_move.h"
 #include "data.h"
 #include "event_data.h"
 #include "evolution_scene.h"
@@ -65,6 +66,8 @@ static void Task_PlayMapChosenOrBattleBGM(u8 taskId);
 static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static bool8 ShouldSkipFriendshipChange(void);
 static u8 SendMonToPC(struct Pokemon* mon);
+static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
+void TrySpecialOverworldEvo();
 
 EWRAM_DATA static u8 sLearningMoveTableID = 0;
 EWRAM_DATA u8 gPlayerPartyCount = 0;
@@ -73,6 +76,7 @@ EWRAM_DATA struct Pokemon gPlayerParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct Pokemon gEnemyParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GFX_MANAGERS_COUNT] = {NULL};
+EWRAM_DATA static u8 sTriedEvolving = 0;
 
 #include "data/battle_moves.h"
 
@@ -3083,10 +3087,12 @@ static const s8 sFriendshipEventModifiers[][3] =
     [FRIENDSHIP_EVENT_FAINT_LARGE]     = {-5, -5, -10},
 };
 
+#define HM_MOVES_END 0xFFFF
+
 static const u16 sHMMoves[] =
 {
     MOVE_CUT, MOVE_FLY, MOVE_SURF, MOVE_STRENGTH, MOVE_FLASH,
-    MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_DIVE, 0xFFFF
+    MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_DIVE, HM_MOVES_END
 };
 
 static const struct SpeciesItem sAlteringCaveWildMonHeldItems[] =
@@ -3187,6 +3193,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u32 personality;
     u32 value;
     u16 checksum;
+    u8 i;
+    u8 availableIVs[NUM_STATS];
+    u8 selectedIvs[LEGENDARY_PERFECT_IV_COUNT];
 
     ZeroBoxMonData(boxMon);
 
@@ -3280,6 +3289,51 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
         iv = (value & (MAX_IV_MASK << 10)) >> 10;
         SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
+
+        #if P_LEGENDARY_PERFECT_IVS >= GEN_6
+            if (gBaseStats[species].flags & (FLAG_LEGENDARY | FLAG_MYTHICAL | FLAG_ULTRA_BEAST))
+            {
+                iv = MAX_PER_STAT_IVS;
+                // Initialize a list of IV indices.
+                for (i = 0; i < NUM_STATS; i++)
+                {
+                    availableIVs[i] = i;
+                }
+
+                // Select the 3 IVs that will be perfected.
+                for (i = 0; i < LEGENDARY_PERFECT_IV_COUNT; i++)
+                {
+                    u8 index = Random() % (NUM_STATS - i);
+                    selectedIvs[i] = availableIVs[index];
+                    RemoveIVIndexFromList(availableIVs, index);
+                }
+                for (i = 0; i < LEGENDARY_PERFECT_IV_COUNT; i++)
+                {
+                    switch (selectedIvs[i])
+                    {
+                        case STAT_HP:
+                            SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
+                            break;
+                        case STAT_ATK:
+                            SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
+                            break;
+                        case STAT_DEF:
+                            SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
+                            break;
+                        case STAT_SPEED:
+                            SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
+                            break;
+                        case STAT_SPATK:
+                            SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
+                            break;
+                        case STAT_SPDEF:
+                            SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
+                            break;
+                    }
+                }
+            }
+        #endif
+        
     }
 
     if (gBaseStats[species].abilities[1])
@@ -3465,7 +3519,7 @@ void CreateBattleTowerMon_HandleLevel(struct Pokemon *mon, struct BattleTowerPok
     if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_50)
         level = GetFrontierEnemyMonLevel(gSaveBlock2Ptr->frontier.lvlMode);
     else if (lvl50)
-        level = 50;
+        level = FRONTIER_MAX_LEVEL_50;
     else
         level = src->level;
 
@@ -5909,7 +5963,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
 
                     case 7: // ITEM4_EVO_STONE
                         {
-                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, item, SPECIES_NONE);
+                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, item, NULL);
 
                             if (targetSpecies != SPECIES_NONE)
                             {
@@ -6174,10 +6228,10 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
     return offset;
 }
 
-static void BufferStatRoseMessage(s32 arg0)
+static void BufferStatRoseMessage(s32 statIdx)
 {
     gBattlerTarget = gBattlerInMenuId;
-    StringCopy(gBattleTextBuff1, gStatNamesTable[sStatsToRaise[arg0]]);
+    StringCopy(gBattleTextBuff1, gStatNamesTable[sStatsToRaise[statIdx]]);
     if (B_X_ITEMS_BUFF >= GEN_7)
     {
         StringCopy(gBattleTextBuff2, gText_StatSharply);
@@ -6283,7 +6337,7 @@ u8 GetNatureFromPersonality(u32 personality)
     return personality % NUM_NATURES;
 }
 
-u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u16 tradePartnerSpecies)
+u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, struct Pokemon *tradePartner)
 {
     int i, j;
     u16 targetSpecies = 0;
@@ -6296,6 +6350,26 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
     u16 upperPersonality = personality >> 16;
     u8 holdEffect;
     u16 currentMap;
+    u16 partnerSpecies;
+    u16 partnerHeldItem;
+    u8 partnerHoldEffect;
+
+    if (tradePartner != NULL)
+    {
+        partnerSpecies = GetMonData(tradePartner, MON_DATA_SPECIES, 0);
+        partnerHeldItem = GetMonData(tradePartner, MON_DATA_HELD_ITEM, 0);
+        
+        if (partnerHeldItem == ITEM_ENIGMA_BERRY)
+            partnerHoldEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
+        else
+            partnerHoldEffect = ItemId_GetHoldEffect(partnerHeldItem);
+    }
+    else
+    {
+        partnerSpecies = SPECIES_NONE;
+        partnerHeldItem = ITEM_NONE;
+        partnerHoldEffect = HOLD_EFFECT_NONE;
+    }
 
     if (heldItem == ITEM_ENIGMA_BERRY_E_READER)
         holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
@@ -6303,7 +6377,9 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
         holdEffect = ItemId_GetHoldEffect(heldItem);
 
     // Prevent evolution with Everstone, unless we're just viewing the party menu with an evolution item
-    if (holdEffect == HOLD_EFFECT_PREVENT_EVOLVE && mode != EVO_MODE_ITEM_CHECK)
+    if (holdEffect == HOLD_EFFECT_PREVENT_EVOLVE
+        && mode != EVO_MODE_ITEM_CHECK
+        && (P_KADABRA_EVERSTONE < GEN_4 || species != SPECIES_KADABRA))
         return SPECIES_NONE;
 
     switch (mode)
@@ -6466,21 +6542,21 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                     u8 nature = GetNature(mon);
                     switch (nature)
                     {
-                        case NATURE_HARDY:
-                        case NATURE_BRAVE:
-                        case NATURE_ADAMANT:
-                        case NATURE_NAUGHTY:
-                        case NATURE_DOCILE:
-                        case NATURE_IMPISH:
-                        case NATURE_LAX:
-                        case NATURE_HASTY:
-                        case NATURE_JOLLY:
-                        case NATURE_NAIVE:
-                        case NATURE_RASH:
-                        case NATURE_SASSY:
-                        case NATURE_QUIRKY:
-                            targetSpecies = gEvolutionTable[species][i].targetSpecies;
-                            break;
+                    case NATURE_HARDY:
+                    case NATURE_BRAVE:
+                    case NATURE_ADAMANT:
+                    case NATURE_NAUGHTY:
+                    case NATURE_DOCILE:
+                    case NATURE_IMPISH:
+                    case NATURE_LAX:
+                    case NATURE_HASTY:
+                    case NATURE_JOLLY:
+                    case NATURE_NAIVE:
+                    case NATURE_RASH:
+                    case NATURE_SASSY:
+                    case NATURE_QUIRKY:
+                        targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                        break;
                     }
                 }
                 break;
@@ -6490,20 +6566,20 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                     u8 nature = GetNature(mon);
                     switch (nature)
                     {
-                        case NATURE_LONELY:
-                        case NATURE_BOLD:
-                        case NATURE_RELAXED:
-                        case NATURE_TIMID:
-                        case NATURE_SERIOUS:
-                        case NATURE_MODEST:
-                        case NATURE_MILD:
-                        case NATURE_QUIET:
-                        case NATURE_BASHFUL:
-                        case NATURE_CALM:
-                        case NATURE_GENTLE:
-                        case NATURE_CAREFUL:
-                            targetSpecies = gEvolutionTable[species][i].targetSpecies;
-                            break;
+                    case NATURE_LONELY:
+                    case NATURE_BOLD:
+                    case NATURE_RELAXED:
+                    case NATURE_TIMID:
+                    case NATURE_SERIOUS:
+                    case NATURE_MODEST:
+                    case NATURE_MILD:
+                    case NATURE_QUIET:
+                    case NATURE_BASHFUL:
+                    case NATURE_CALM:
+                    case NATURE_GENTLE:
+                    case NATURE_CAREFUL:
+                        targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                        break;
                     }
                 }
                 break;
@@ -6527,7 +6603,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                 }
                 break;
             case EVO_TRADE_SPECIFIC_MON:
-                if (gEvolutionTable[species][i].param == tradePartnerSpecies)
+                if (gEvolutionTable[species][i].param == partnerSpecies && partnerHoldEffect != HOLD_EFFECT_PREVENT_EVOLVE)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             }
@@ -6549,6 +6625,47 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                 break;
             case EVO_ITEM_MALE:
                 if (GetMonGender(mon) == MON_MALE && gEvolutionTable[species][i].param == evolutionItem)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            }
+        }
+        break;
+    #ifdef BATTLE_ENGINE
+    // Battle evolution without leveling; party slot is being passed into the evolutionItem arg.
+    case EVO_MODE_BATTLE_SPECIAL:
+        for (i = 0; i < EVOS_PER_MON; i++)
+        {
+            switch (gEvolutionTable[species][i].method)
+            {
+            case EVO_CRITICAL_HITS:
+                if (gPartyCriticalHits[evolutionItem] >= gEvolutionTable[species][i].param)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            }
+        }
+        break;
+    #endif
+    // Overworld evolution without leveling; evolution method is being passed into the evolutionItem arg.
+    case EVO_MODE_OVERWORLD_SPECIAL:
+        for (i = 0; i < EVOS_PER_MON; i++)
+        {
+            switch (gEvolutionTable[species][i].method)
+            {
+            case EVO_SCRIPT_TRIGGER_DMG:
+            {
+                u16 currentHp = GetMonData(mon, MON_DATA_HP, NULL);
+                if (evolutionItem == EVO_SCRIPT_TRIGGER_DMG
+                    && currentHp != 0
+                    && (GetMonData(mon, MON_DATA_MAX_HP, NULL) - currentHp >= gEvolutionTable[species][i].param))
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            }
+            case EVO_DARK_SCROLL:
+                if (evolutionItem == EVO_DARK_SCROLL)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_WATER_SCROLL:
+                if (evolutionItem == EVO_WATER_SCROLL)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             }
@@ -6782,13 +6899,13 @@ u16 GetLinkTrainerFlankId(u8 linkPlayerId)
     return flankId;
 }
 
-s32 GetBattlerMultiplayerId(u16 a1)
+s32 GetBattlerMultiplayerId(u16 id)
 {
-    s32 id;
-    for (id = 0; id < MAX_LINK_PLAYERS; id++)
-        if (gLinkPlayers[id].id == a1)
+    s32 multiplayerId;
+    for (multiplayerId = 0; multiplayerId < MAX_LINK_PLAYERS; multiplayerId++)
+        if (gLinkPlayers[multiplayerId].id == id)
             break;
-    return id;
+    return multiplayerId;
 }
 
 u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)
@@ -7506,7 +7623,7 @@ const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u
 bool32 IsHMMove2(u16 move)
 {
     int i = 0;
-    while (sHMMoves[i] != 0xFFFF)
+    while (sHMMoves[i] != HM_MOVES_END)
     {
         if (sHMMoves[i++] == move)
             return TRUE;
@@ -7614,7 +7731,7 @@ void SetWildMonHeldItem(void)
         u16 rnd;
         u16 species;
         u16 chanceNoItem = 45;
-        u16 chanceCommon = 95;
+        u16 chanceNotRare = 95;
         u16 count = (WILD_DOUBLE_BATTLE) ? 2 : 1;
         u16 i;
 
@@ -7623,11 +7740,14 @@ void SetWildMonHeldItem(void)
                 || GetMonAbility(&gPlayerParty[0]) == ABILITY_SUPER_LUCK))
         {
             chanceNoItem = 20;
-            chanceCommon = 80;
+            chanceNotRare = 80;
         }
 
         for (i = 0; i < count; i++)
         {
+            if (GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, NULL) != ITEM_NONE)
+                continue; // prevent ovewriting previously set item
+            
             rnd = Random() % 100;
             species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, 0);
             if (gMapHeader.mapLayoutId == LAYOUT_ALTERING_CAVE)
@@ -7636,7 +7756,7 @@ void SetWildMonHeldItem(void)
                 if (alteringCaveId != 0)
                 {
                     // In active Altering Cave, use special item list
-                    if (rnd < chanceCommon)
+                    if (rnd < chanceNotRare)
                         continue;
                     SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &sAlteringCaveWildMonHeldItems[alteringCaveId].item);
                 }
@@ -7645,27 +7765,27 @@ void SetWildMonHeldItem(void)
                     // In inactive Altering Cave, use normal items
                     if (rnd < chanceNoItem)
                         continue;
-                    if (rnd < chanceCommon)
-                        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBaseStats[species].item1);
+                    if (rnd < chanceNotRare)
+                        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBaseStats[species].itemCommon);
                     else
-                        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBaseStats[species].item2);
+                        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBaseStats[species].itemRare);
                 }
             }
             else
             {
-                if (gBaseStats[species].item1 == gBaseStats[species].item2 && gBaseStats[species].item1 != ITEM_NONE)
+                if (gBaseStats[species].itemCommon == gBaseStats[species].itemRare && gBaseStats[species].itemCommon != ITEM_NONE)
                 {
                     // Both held items are the same, 100% chance to hold item
-                    SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBaseStats[species].item1);
+                    SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBaseStats[species].itemCommon);
                 }
                 else
                 {
                     if (rnd < chanceNoItem)
                         continue;
-                    if (rnd < chanceCommon)
-                        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBaseStats[species].item1);
+                    if (rnd < chanceNotRare)
+                        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBaseStats[species].itemCommon);
                     else
-                        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBaseStats[species].item2);
+                        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBaseStats[species].itemRare);
                 }
             }
         }
@@ -7932,7 +8052,10 @@ bool8 HasTwoFramesAnimation(u16 species)
     return (species != SPECIES_CASTFORM
          && species != SPECIES_SPINDA
          && species != SPECIES_UNOWN
-         && species != SPECIES_CHERRIM);
+         && species != SPECIES_CHERRIM
+         && species != SPECIES_CASTFORM_SUNNY
+         && species != SPECIES_CASTFORM_RAINY
+         && species != SPECIES_CASTFORM_SNOWY);
 }
 
 static bool8 ShouldSkipFriendshipChange(void)
@@ -8243,4 +8366,53 @@ u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove)
         sLearningMoveTableID++;
     }
     return 0;
+}
+
+static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
+{
+    s32 i, j;
+    u8 temp[NUM_STATS];
+
+    ivs[selectedIv] = 0xFF;
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        temp[i] = ivs[i];
+    }
+
+    j = 0;
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        if (temp[i] != 0xFF)
+            ivs[j++] = temp[i];
+    }
+}
+
+// Attempts to perform non-level/item related overworld evolutions; called by tryspecialevo command.
+void TrySpecialOverworldEvo(void)
+{
+    u8 i;
+    u8 evoMethod = gSpecialVar_0x8000;
+    u16 canStopEvo = gSpecialVar_0x8001;
+    u16 tryMultiple = gSpecialVar_0x8002;    
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 targetSpecies = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_OVERWORLD_SPECIAL, evoMethod, SPECIES_NONE);
+        if (targetSpecies != SPECIES_NONE && !(sTriedEvolving & gBitTable[i]))
+        {
+            sTriedEvolving |= gBitTable[i];
+            if(gMain.callback2 == TrySpecialOverworldEvo) // This fixes small graphics glitches.
+                EvolutionScene(&gPlayerParty[i], targetSpecies, canStopEvo, i);
+            else
+                BeginEvolutionScene(&gPlayerParty[i], targetSpecies, canStopEvo, i);
+            if (tryMultiple)
+                gCB2_AfterEvolution = TrySpecialOverworldEvo;
+            else
+                gCB2_AfterEvolution = CB2_ReturnToField;
+            return;
+        }   
+    }
+
+    sTriedEvolving = 0;
+    SetMainCallback2(CB2_ReturnToField);
 }

@@ -264,6 +264,8 @@ const u32 gBattleAnimSpritePal_Steamroller[] = INCBIN_U32("graphics/battle_anims
 const u32 gBattleAnimSpriteGfx_StonePillar[] = INCBIN_U32("graphics/battle_anims/sprites/new/stone_pillar.4bpp.lz");
 const u32 gBattleAnimSpritePal_StonePillar[] = INCBIN_U32("graphics/battle_anims/sprites/new/stone_pillar.gbapal.lz");
 
+const u32 gBattleAnimSpritePal_Poltergeist[] = INCBIN_U32("graphics/battle_anims/sprites/new/poltergeist.gbapal.lz");
+
 const u32 gBattleAnimSpriteGfx_StraightBeam[] = INCBIN_U32("graphics/battle_anims/sprites/new/straight_beam.4bpp.lz");
 const u32 gBattleAnimSpritePal_StraightBeam[] = INCBIN_U32("graphics/battle_anims/sprites/new/straight_beam.gbapal.lz");
 

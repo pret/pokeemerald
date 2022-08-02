@@ -14,7 +14,9 @@ SECTIONS {
         . = 0x1C000;
 
         INCLUDE "sym_ewram.ld"
-
+        *libc.a:impure.o(.data);
+        *libc.a:locale.o(.data);
+        *libc.a:mallocr.o(.data);
         . = 0x40000;
 }
 
@@ -83,6 +85,7 @@ SECTIONS {
         src/battle_bg.o(.text);
         src/battle_main.o(.text);
         src/battle_util.o(.text);
+        src/battle_z_move.o(.text);
         src/battle_script_commands.o(.text);
         src/battle_util2.o(.text);
         src/battle_controller_player.o(.text);
@@ -459,6 +462,7 @@ SECTIONS {
         src/mystery_gift_server.o(.rodata);
         src/mystery_gift_client.o(.rodata);
         src/mystery_gift_scripts.o(.rodata);
+        src/wonder_news.o(.rodata);
         src/union_room_chat.o(.rodata);
         src/berry_crush.o(.rodata);
         src/berry_powder.o(.rodata);
@@ -473,6 +477,7 @@ SECTIONS {
         src/battle_bg.o(.rodata);
         src/battle_main.o(.rodata);
         src/battle_util.o(.rodata);
+        src/battle_z_move.o(.rodata);
         src/battle_script_commands.o(.rodata);
         src/battle_controller_player.o(.rodata);
         src/battle_anim_smokescreen.o(.rodata);
@@ -1246,9 +1251,43 @@ SECTIONS {
         src/librfu_sio32id.o(.rodata);
         *libgcc.a:_divdi3.o(.rodata);
         *libgcc.a:_udivdi3.o(.rodata);
-        *libc.a(.rodata);
-        *libc.a(.data);
+        *libc.a:memcpy.o(.rodata);
+        *libc.a:memset.o(.rodata);
+        *libc.a:strcmp.o(.rodata);
+        *libc.a:strcpy.o(.rodata);
+        *libc.a:impure.o(.rodata);
+        *libc.a:vsprintf.o(.rodata);
+        *libc.a:vfprintf.o(.rodata);
+        *libc.a:wsetup.o(.rodata);
+        *libc.a:dtoa.o(.rodata);
+        *libc.a:fflush.o(.rodata);
+        *libc.a:findfp.o(.rodata);
+        *libc.a:freer.o(.rodata);
+        *libc.a:mtrim.o(.rodata);
+        *libc.a:fvwrite.o(.rodata);
+        *libc.a:fwalk.o(.rodata);
+        *libc.a:locale.o(.rodata);
+        *libc.a:makebuf.o(.rodata);
+        *libc.a:mallocr.o(.rodata);
+        *libc.a:mbtowc_r.o(.rodata);
+        *libc.a:memchr.o(.rodata);
+        *libc.a:memmove.o(.rodata);
+        *libc.a:mlock.o(.rodata);
+        *libc.a:mprec.o(.rodata);
+        *libc.a:s_isinf.o(.rodata);
+        *libc.a:s_isnan.o(.rodata);
+        *libc.a:sbrkr.o(.rodata);
+        *libc.a:stdio.o(.rodata);
+        *libc.a:strlen.o(.rodata);
         *libc.a:syscalls.o(.rodata);
+        *libc.a:writer.o(.rodata);
+        *libc.a:callocr.o(.rodata);
+        *libc.a:closer.o(.rodata);
+        *libc.a:errno.o(.rodata);
+        *libc.a:fstatr.o(.rodata);
+        *libc.a:libcfunc.o(.rodata);
+        *libc.a:lseekr.o(.rodata);
+        *libc.a:readr.o(.rodata);
         src/libisagbprn.o(.rodata);
     } =0
 

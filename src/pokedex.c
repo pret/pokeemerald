@@ -840,7 +840,7 @@ static const u8 sText_No000[] = _("{NO}000");
 static const u8 sCaughtBall_Gfx[] = INCBIN_U8("graphics/pokedex/caught_ball.4bpp");
 static const u8 sText_TenDashes[] = _("----------");
 
-ALIGNED(4) static const u8 gExpandedPlaceholder_PokedexDescription[] = _("");
+ALIGNED(4) static const u8 sExpandedPlaceholder_PokedexDescription[] = _("");
 
 #include "data/pokemon/pokedex_text.h"
 #include "data/pokemon/pokedex_entries.h"
@@ -3991,10 +3991,7 @@ static void Task_DisplayCaughtMonDexPage(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 4:
-        if ((gBaseStats[dexNum].flags & FLAG_GENDER_DIFFERENCE))
-            spriteId = CreateMonPicSprite(dexNum, 0, ((u16)gTasks[taskId].tPersonalityHi << 16) | (u16)gTasks[taskId].tPersonalityLo, TRUE, MON_PAGE_X, MON_PAGE_Y, 0, TAG_NONE);
-        else
-            spriteId = CreateMonSpriteFromNationalDexNumber(dexNum, MON_PAGE_X, MON_PAGE_Y, 0);
+        spriteId = CreateMonPicSprite(NationalPokedexNumToSpecies(dexNum), 0, ((u16)gTasks[taskId].tPersonalityHi << 16) | (u16)gTasks[taskId].tPersonalityLo, TRUE, MON_PAGE_X, MON_PAGE_Y, 0, TAG_NONE);
         gSprites[spriteId].oam.priority = 0;
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         SetVBlankCallback(gPokedexVBlankCB);
@@ -4141,7 +4138,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     if (owned)
         description = gPokedexEntries[num].description;
     else
-        description = gExpandedPlaceholder_PokedexDescription;
+        description = sExpandedPlaceholder_PokedexDescription;
     PrintInfoScreenText(description, GetStringCenterAlignXOffset(FONT_NORMAL, description, 0xF0), 0x5F);
 }
 
@@ -4402,37 +4399,37 @@ bool16 HasAllMons(void)
     return TRUE;
 }
 
-static void ResetOtherVideoRegisters(u16 a)
+static void ResetOtherVideoRegisters(u16 regBits)
 {
-    if (!(a & DISPCNT_BG0_ON))
+    if (!(regBits & DISPCNT_BG0_ON))
     {
         ClearGpuRegBits(0, DISPCNT_BG0_ON);
         SetGpuReg(REG_OFFSET_BG0CNT, 0);
         SetGpuReg(REG_OFFSET_BG0HOFS, 0);
         SetGpuReg(REG_OFFSET_BG0VOFS, 0);
     }
-    if (!(a & DISPCNT_BG1_ON))
+    if (!(regBits & DISPCNT_BG1_ON))
     {
         ClearGpuRegBits(0, DISPCNT_BG1_ON);
         SetGpuReg(REG_OFFSET_BG1CNT, 0);
         SetGpuReg(REG_OFFSET_BG1HOFS, 0);
         SetGpuReg(REG_OFFSET_BG1VOFS, 0);
     }
-    if (!(a & DISPCNT_BG2_ON))
+    if (!(regBits & DISPCNT_BG2_ON))
     {
         ClearGpuRegBits(0, DISPCNT_BG2_ON);
         SetGpuReg(REG_OFFSET_BG2CNT, 0);
         SetGpuReg(REG_OFFSET_BG2HOFS, 0);
         SetGpuReg(REG_OFFSET_BG2VOFS, 0);
     }
-    if (!(a & DISPCNT_BG3_ON))
+    if (!(regBits & DISPCNT_BG3_ON))
     {
         ClearGpuRegBits(0, DISPCNT_BG3_ON);
         SetGpuReg(REG_OFFSET_BG3CNT, 0);
         SetGpuReg(REG_OFFSET_BG3HOFS, 0);
         SetGpuReg(REG_OFFSET_BG3VOFS, 0);
     }
-    if (!(a & DISPCNT_OBJ_ON))
+    if (!(regBits & DISPCNT_OBJ_ON))
     {
         ClearGpuRegBits(0, DISPCNT_OBJ_ON);
         ResetSpriteData();

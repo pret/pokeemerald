@@ -700,9 +700,9 @@ static void AnimWallSparkle(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
-        int arg3 = gBattleAnimArgs[3];
+        bool32 ignoreOffsets = gBattleAnimArgs[3];
         bool8 respectMonPicOffsets = FALSE;
-        if (arg3 == 0)
+        if (!ignoreOffsets)
             respectMonPicOffsets = TRUE;
 
         if (!IsContest() && IsDoubleBattle())

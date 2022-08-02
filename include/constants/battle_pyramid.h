@@ -14,6 +14,13 @@
 #define HINT_EXIT_FAR_REMAINING_TRAINERS      7
 #define HINT_EXIT_FAR_REMAINING_ITEMS         8
 
+#define MAX_PYRAMID_TRAINERS 8
+
+// Each floor of the Battle Pyramid is 32x32 metatiles, subdivided into a 4x4 grid of 8x8 metatile squares
+#define PYRAMID_FLOOR_SQUARES_WIDE 4
+#define PYRAMID_FLOOR_SQUARES_HIGH 4
+#define NUM_PYRAMID_FLOOR_SQUARES (PYRAMID_FLOOR_SQUARES_WIDE * PYRAMID_FLOOR_SQUARES_HIGH)
+
 #define OBJ_TRAINERS  0
 #define OBJ_ITEMS     1
 
