@@ -182,7 +182,11 @@ static void DetermineCyclingRoadResults(u32 numFrames, u8 numBikeCollisions)
     if (numFrames < 3600)
     {
         ConvertIntToDecimalStringN(gStringVar2, numFrames / 60, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    #if ENGLISH
         gStringVar2[2] = CHAR_PERIOD;
+    #elif FRENCH
+        gStringVar2[2] = CHAR_COMMA;
+    #endif
         ConvertIntToDecimalStringN(&gStringVar2[3], ((numFrames % 60) * 100) / 60, STR_CONV_MODE_LEADING_ZEROS, 2);
         StringAppend(gStringVar2, gText_SpaceSeconds);
     }
@@ -2138,6 +2142,15 @@ void BufferBattleTowerElevatorFloors(void)
     u8 i;
     u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+
+#if FRENCH
+    if (battleMode == FRONTIER_MODE_LINK_MULTIS)
+    {
+        gSpecialVar_0x8005 = 4;
+        gSpecialVar_0x8006 = 5;
+        return;
+    }
+#endif
 
     if (battleMode == FRONTIER_MODE_MULTIS && !FlagGet(FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER))
     {

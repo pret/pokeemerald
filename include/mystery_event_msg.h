@@ -10,7 +10,6 @@ extern const u8 gText_MysteryEventRareWord[];
 extern const u8 gText_MysteryEventSentOver[];
 extern const u8 gText_MysteryEventFullParty[];
 extern const u8 gText_MysteryEventNewTrainer[];
-extern const u8 gText_MysteryEventNewAdversaryInBattleTower[];
 extern const u8 gText_MysteryEventCantBeUsed[];
 
 #endif // GUARD_MYSTERY_EVENT_MSG_H

@@ -146,7 +146,11 @@ static void Task_CloseBagMenu(u8);
 static u8 AddItemMessageWindow(u8);
 static void RemoveItemMessageWindow(u8);
 static void ReturnToItemList(u8);
+#if ENGLISH
 static void PrintItemQuantity(u8, s16);
+#elif FRENCH
+static void PrintItemQuantity(u8, s16, u32);
+#endif
 static u8 BagMenu_AddWindow(u8);
 static u8 GetSwitchBagPocketDirection(void);
 static void SwitchBagPocket(u8, s16, bool16);
@@ -275,7 +279,11 @@ static const struct MenuAction sItemMenuActions[] = {
     [ACTION_WALK]              = {gMenuText_Walk,     ItemMenu_UseOutOfBattle},
     [ACTION_DESELECT]          = {gMenuText_Deselect, ItemMenu_Register},
     [ACTION_CHECK_TAG]         = {gMenuText_CheckTag, ItemMenu_CheckTag},
+#if ENGLISH
     [ACTION_CONFIRM]           = {gMenuText_Confirm,  Task_FadeAndCloseBagMenu},
+#elif FRENCH
+    [ACTION_CONFIRM]           = {gMenuText_Confirm2, Task_FadeAndCloseBagMenu},
+#endif
     [ACTION_SHOW]              = {gMenuText_Show,     ItemMenu_Show},
     [ACTION_GIVE_FAVOR_LADY]   = {gMenuText_Give2,    ItemMenu_GiveFavorLady},
     [ACTION_CONFIRM_QUIZ_LADY] = {gMenuText_Confirm,  ItemMenu_ConfirmQuizLady},
@@ -323,8 +331,14 @@ static const u8 sContextMenuItems_Cancel[] = {
 };
 
 static const u8 sContextMenuItems_BerryBlenderCrush[] = {
+#if ENGLISH
     ACTION_CONFIRM,     ACTION_CHECK_TAG,
     ACTION_DUMMY,       ACTION_CANCEL
+#elif FRENCH
+    ACTION_CONFIRM,     ACTION_DUMMY,
+    ACTION_CHECK_TAG,   ACTION_DUMMY,
+    ACTION_CANCEL,      ACTION_DUMMY
+#endif
 };
 
 static const u8 sContextMenuItems_Apprentice[] = {
@@ -1187,15 +1201,29 @@ void CloseItemMessage(u8 taskId)
 
 static void AddItemQuantityWindow(u8 windowType)
 {
+#if ENGLISH
     PrintItemQuantity(BagMenu_AddWindow(windowType), 1);
+#elif FRENCH
+    u32 windowId = BagMenu_AddWindow(windowType);
+    PrintItemQuantity(windowId, 1, TEXT_SKIP_DRAW);
+    CopyWindowToVram(windowId, 3);
+#endif
 }
 
+#if ENGLISH
 static void PrintItemQuantity(u8 windowId, s16 quantity)
+#elif FRENCH
+static void PrintItemQuantity(u8 windowId, s16 quantity, u32 speed)
+#endif
 {
     u8 numDigits = (gBagPosition.pocket == BERRIES_POCKET) ? BERRY_CAPACITY_DIGITS : BAG_ITEM_CAPACITY_DIGITS;
     ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, numDigits);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
+#if ENGLISH
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 40), 2, 0, 0);
+#elif FRENCH
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 40), 2, speed, NULL);
+#endif
 }
 
 // Prints the quantity of items to be sold and the amount that would be earned
@@ -1852,7 +1880,11 @@ static void Task_ChooseHowManyToToss(u8 taskId)
 
     if (AdjustQuantityAccordingToDPadInput(&tItemCount, tQuantity) == TRUE)
     {
+    #if ENGLISH
         PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount);
+    #elif FRENCH
+        PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount, 0);
+    #endif
     }
     else if (JOY_NEW(A_BUTTON))
     {
@@ -2215,7 +2247,11 @@ static void Task_ChooseHowManyToDeposit(u8 taskId)
 
     if (AdjustQuantityAccordingToDPadInput(&tItemCount, tQuantity) == TRUE)
     {
+    #if ENGLISH
         PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount);
+    #elif FRENCH
+        PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount, 0);
+    #endif
     }
     else if (JOY_NEW(A_BUTTON))
     {
@@ -2528,7 +2564,11 @@ static void DisplayCurrentMoneyWindow(void)
 {
     u8 windowId = BagMenu_AddWindow(ITEMWIN_MONEY);
     PrintMoneyAmountInMoneyBoxWithBorder(windowId, 1, 14, GetMoney(&gSaveBlock1Ptr->money));
+#if ENGLISH
     AddMoneyLabelObject(19, 11);
+#elif FRENCH
+    AddMoneyLabelObject(24, 11);
+#endif
 }
 
 static void RemoveMoneyWindow(void)

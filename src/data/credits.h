@@ -43,15 +43,22 @@ enum
     PAGE_COORDINATORS,
     PAGE_ENGLISH_VERSION,
     PAGE_TRANSLATOR,
+#if ENGLISH
     PAGE_TEXT_EDITOR,
+#endif
     PAGE_NCL_COORDINATOR,
     PAGE_PROGRAMMERS_5,
     PAGE_GRAPHIC_DESIGNER,
     PAGE_ENVIRONMENT_AND_TOOL_PROGRAMS_2,
     PAGE_NOA_TESTING,
+#if ENGLISH
     PAGE_BRAILLE_CODE_CHECK_1,
     PAGE_BRAILLE_CODE_CHECK_2,
+#endif
     PAGE_SPECIAL_THANKS_5,
+#if FRENCH
+    PAGE_SPECIAL_THANKS_6,
+#endif
     PAGE_TASK_MANAGERS,
     PAGE_PRODUCERS,
     PAGE_EXECUTIVE_DIRECTOR,
@@ -63,7 +70,11 @@ enum
 #define ENTRIES_PER_PAGE 5
 
 static const u8 sCreditsText_EmptyString[]                    = _("");
+#if ENGLISH
 static const u8 sCreditsText_PkmnEmeraldVersion[]             = _("POKéMON EMERALD VERSION");
+#elif FRENCH
+static const u8 sCreditsText_PkmnEmeraldVersion[]             = _("POKéMON VERSION EMERAUDE");
+#endif
 static const u8 sCreditsText_Credits[]                        = _("Credits");
 static const u8 sCreditsText_ExecutiveDirector[]              = _("Executive Director");
 static const u8 sCreditsText_Director[]                       = _("Director");
@@ -193,12 +204,21 @@ static const u8 sCreditsText_RetsujiNomoto[]                  = _("Retsuji Nomot
 static const u8 sCreditsText_AzusaTajima[]                    = _("Azusa Tajima");
 static const u8 sCreditsText_ShusakuEgami[]                   = _("Shusaku Egami");
 static const u8 sCreditsText_PackageAndManual[]               = _("Package & Manual Illustration");
+#if ENGLISH
 static const u8 sCreditsText_EnglishVersion[]                 = _("English Version Coordinators");
 static const u8 sCreditsText_Translator[]                     = _("Translator");
 static const u8 sCreditsText_TextEditor[]                     = _("Text Editor");
 static const u8 sCreditsText_NCLCoordinator[]                 = _("NCL Coordinator");
 static const u8 sCreditsText_GraphicDesigner[]                = _("Graphic Designer");
 static const u8 sCreditsText_NOAProductTesting[]              = _("NOA Product Testing");
+#elif FRENCH
+static const u8 sCreditsText_EnglishVersion[]                 = _("French Version Coordinators");
+static const u8 sCreditsText_Translator[]                     = _("Translators");
+static const u8 sCreditsText_TextEditor[]                     = _("Text Editor");
+static const u8 sCreditsText_NCLCoordinator[]                 = _("NCL Coordinators");
+static const u8 sCreditsText_GraphicDesigner[]                = _("Graphic Designer");
+static const u8 sCreditsText_NOAProductTesting[]              = _("NOE Product Testing");
+#endif
 static const u8 sCreditsText_HideyukiNakajima[]               = _("Hideyuki Nakajima");
 static const u8 sCreditsText_HidenoriSaeki[]                  = _("Hidenori Saeki");
 static const u8 sCreditsText_YokoWatanabe[]                   = _("Yoko Watanabe");
@@ -216,11 +236,30 @@ static const u8 sCreditsText_NationalFederationBlind[]        = _("National Fede
 static const u8 sCreditsText_PatriciaAMaurer[]                = _("Patricia A. Maurer");
 static const u8 sCreditsText_EuropeanBlindUnion[]             = _("European Blind Union");
 static const u8 sCreditsText_AustralianBrailleAuthority[]     = _("Australian Braille Authority");
+#if ENGLISH
 static const u8 sCreditsText_RoyalNewZealandFederationBlind[] = _("Royal New Zealand Federation for the Blind");
 static const u8 sCreditsText_MotoyasuTojima[]                 = _("Motoyasu Tojima");
 static const u8 sCreditsText_NicolaPrattBarlow[]              = _("Nicola Pratt-Barlow");
 static const u8 sCreditsText_ShellieDow[]                     = _("Shellie Dow");
 static const u8 sCreditsText_ErikJohnson[]                    = _("Erik Johnson");
+#elif FRENCH
+static const u8 sCreditsText_EuropeanBlindUnion2[]            = _("European Blind Union");
+static const u8 sCreditsText_MotoyasuTojima[]                 = _("Motoyasu Tojima");
+static const u8 sCreditsText_NicolaPrattBarlow[]              = _("Nicola Wright"); // Possibly got married :)
+static const u8 sCreditsText_ShellieDow[]                     = _("Shellie Dow");
+static const u8 sCreditsText_ErikJohnson[]                    = _("Erik Johnson");
+// New
+static const u8 sCreditsText_NorikoNetley[]                   = _("Noriko Netley");
+static const u8 sCreditsText_PierreSanchez[]                  = _("Pierre Sanchez");
+static const u8 sCreditsText_SabrinaBretant[]                 = _("Sabrina Bretant");
+static const u8 sCreditsText_ThomasFougeray[]                 = _("Thomas Fougeray");
+static const u8 sCreditsText_AlessioDanieli[]                 = _("Alessio Danieli");
+static const u8 sCreditsText_NOETestingTeam[]                 = _("NOE Testing Team");
+static const u8 sCreditsText_StefanRomberg[]                  = _("Stefan Romberg");
+static const u8 sCreditsText_MihoKozawa[]                     = _("Miho Kozawa");
+static const u8 sCreditsText_ToshifumiSayama[]                = _("Toshifumi Sayama");
+static const u8 sCreditsText_Hiroshi_Akune[]                  = _("Hiroshi Akune");
+#endif
 static const struct CreditsEntry sCreditsEntry_EmptyString[]                    = { 0, FALSE, sCreditsText_EmptyString};
 static const struct CreditsEntry sCreditsEntry_PkmnEmeraldVersion[]             = { 7,  TRUE, sCreditsText_PkmnEmeraldVersion};
 static const struct CreditsEntry sCreditsEntry_Credits[]                        = {11,  TRUE, sCreditsText_Credits};
@@ -375,11 +414,30 @@ static const struct CreditsEntry sCreditsEntry_NationalFederationBlind[]        
 static const struct CreditsEntry sCreditsEntry_PatriciaAMaurer[]                = { 0, FALSE, sCreditsText_PatriciaAMaurer};
 static const struct CreditsEntry sCreditsEntry_EuropeanBlindUnion[]             = { 0, FALSE, sCreditsText_EuropeanBlindUnion};
 static const struct CreditsEntry sCreditsEntry_AustralianBrailleAuthority[]     = { 0, FALSE, sCreditsText_AustralianBrailleAuthority};
+#if ENGLISH
 static const struct CreditsEntry sCreditsEntry_RoyalNewZealandFederationBlind[] = { 0, FALSE, sCreditsText_RoyalNewZealandFederationBlind};
 static const struct CreditsEntry sCreditsEntry_MotoyasuTojima[]                 = { 0, FALSE, sCreditsText_MotoyasuTojima};
 static const struct CreditsEntry sCreditsEntry_NicolaPrattBarlow[]              = { 0, FALSE, sCreditsText_NicolaPrattBarlow};
 static const struct CreditsEntry sCreditsEntry_ShellieDow[]                     = { 0, FALSE, sCreditsText_ShellieDow};
 static const struct CreditsEntry sCreditsEntry_ErikJohnson[]                    = { 0, FALSE, sCreditsText_ErikJohnson};
+#elif FRENCH
+static const struct CreditsEntry sCreditsEntry_EuropeanBlindUnion2[]            = { 0, FALSE, sCreditsText_EuropeanBlindUnion2};
+static const struct CreditsEntry sCreditsEntry_MotoyasuTojima[]                 = { 0, FALSE, sCreditsText_MotoyasuTojima};
+static const struct CreditsEntry sCreditsEntry_NicolaPrattBarlow[]              = { 0, FALSE, sCreditsText_NicolaPrattBarlow};
+static const struct CreditsEntry sCreditsEntry_ShellieDow[]                     = { 0, FALSE, sCreditsText_ShellieDow};
+static const struct CreditsEntry sCreditsEntry_ErikJohnson[]                    = { 0, FALSE, sCreditsText_ErikJohnson};
+// New
+static const struct CreditsEntry sCreditsEntry_NorikoNetley[]                   = { 0, FALSE, sCreditsText_NorikoNetley};
+static const struct CreditsEntry sCreditsEntry_PierreSanchez[]                  = { 0, FALSE, sCreditsText_PierreSanchez};
+static const struct CreditsEntry sCreditsEntry_SabrinaBretant[]                 = { 0, FALSE, sCreditsText_SabrinaBretant};
+static const struct CreditsEntry sCreditsEntry_ThomasFougeray[]                 = { 0, FALSE, sCreditsText_ThomasFougeray};
+static const struct CreditsEntry sCreditsEntry_AlessioDanieli[]                 = { 0, FALSE, sCreditsText_AlessioDanieli};
+static const struct CreditsEntry sCreditsEntry_NOETestingTeam[]                 = { 0, FALSE, sCreditsText_NOETestingTeam};
+static const struct CreditsEntry sCreditsEntry_StefanRomberg[]                  = { 0, FALSE, sCreditsText_StefanRomberg};
+static const struct CreditsEntry sCreditsEntry_MihoKozawa[]                     = { 0, FALSE, sCreditsText_MihoKozawa};
+static const struct CreditsEntry sCreditsEntry_ToshifumiSayama[]                = { 0, FALSE, sCreditsText_ToshifumiSayama};
+static const struct CreditsEntry sCreditsEntry_HiroshiAkune[]                   = { 0, FALSE, sCreditsText_Hiroshi_Akune};
+#endif
 
 #define _ sCreditsEntry_EmptyString
 static const struct CreditsEntry *const sCreditsEntryPointerTable[PAGE_COUNT][ENTRIES_PER_PAGE] =
@@ -671,6 +729,7 @@ static const struct CreditsEntry *const sCreditsEntryPointerTable[PAGE_COUNT][EN
         sCreditsEntry_RetsujiNomoto,
         _,
     },
+#if ENGLISH
     [PAGE_ENGLISH_VERSION] = {
         _,
         sCreditsEntry_EnglishVersion,
@@ -699,6 +758,29 @@ static const struct CreditsEntry *const sCreditsEntryPointerTable[PAGE_COUNT][EN
         _,
         _,
     },
+#elif FRENCH
+    [PAGE_ENGLISH_VERSION] = {
+        _,
+        sCreditsEntry_EnglishVersion,
+        sCreditsEntry_NorikoNetley,
+        sCreditsEntry_HiroyukiUesugi,
+        _,
+    },
+    [PAGE_TRANSLATOR] = {
+        sCreditsEntry_Translator,
+        sCreditsEntry_PierreSanchez,
+        sCreditsEntry_SabrinaBretant,
+        sCreditsEntry_ThomasFougeray,
+        _,
+    },
+    [PAGE_NCL_COORDINATOR] = {
+        _,
+        sCreditsEntry_NCLCoordinator,
+        sCreditsEntry_KimikoNakamichi,
+        sCreditsEntry_HiroshiAkune,
+        _,
+    },
+#endif
     [PAGE_PROGRAMMERS_5] = {
         sCreditsEntry_Programmers,
         sCreditsEntry_TerukiMurakawa,
@@ -720,6 +802,7 @@ static const struct CreditsEntry *const sCreditsEntryPointerTable[PAGE_COUNT][EN
         sCreditsEntry_KimikoNakamichi,
         _,
     },
+#if ENGLISH
     [PAGE_NOA_TESTING] = {
         sCreditsEntry_NOAProductTesting,
         sCreditsEntry_ThomasHertzog,
@@ -748,6 +831,29 @@ static const struct CreditsEntry *const sCreditsEntryPointerTable[PAGE_COUNT][EN
         sCreditsEntry_NicolaPrattBarlow,
         sCreditsEntry_ShellieDow,
     },
+#elif FRENCH
+    [PAGE_NOA_TESTING] = {
+        _,
+        sCreditsEntry_NOAProductTesting,
+        sCreditsEntry_AlessioDanieli,
+        sCreditsEntry_NOETestingTeam,
+        _,
+    },
+    [PAGE_SPECIAL_THANKS_5] = {
+        sCreditsEntry_SpecialThanks,
+        sCreditsEntry_StefanRomberg,
+        sCreditsEntry_MihoKozawa,
+        sCreditsEntry_ToshifumiSayama,
+        _,
+    },
+    [PAGE_SPECIAL_THANKS_6] = {
+        _,
+        sCreditsEntry_SpecialThanks,
+        sCreditsEntry_EuropeanBlindUnion2,
+        _,
+        _,
+    },
+#endif
     [PAGE_TASK_MANAGERS] = {
         _,
         sCreditsEntry_TaskManagers,

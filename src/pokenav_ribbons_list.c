@@ -1,5 +1,8 @@
 #include "global.h"
 #include "pokenav.h"
+#if FRENCH
+#include "graphics.h"
+#endif
 #include "bg.h"
 #include "menu.h"
 #include "window.h"
@@ -71,9 +74,11 @@ static const LoopedTask sMonRibbonListLoopTaskFuncs[] =
     BuildBoxMonRibbonList
 };
 
+#if ENGLISH
 static const u16 sMonRibbonListFramePal[] = INCBIN_U16("graphics/pokenav/ribbons/list_bg.gbapal");
 static const u32 sMonRibbonListFrameTiles[] = INCBIN_U32("graphics/pokenav/ribbons/list_bg.4bpp.lz");
 static const u32 sMonRibbonListFrameTilemap[] = INCBIN_U32("graphics/pokenav/ribbons/list_bg.bin.lz");
+#endif
 static const u16 sMonRibbonListUi_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/list_ui.gbapal");
 
 static const struct BgTemplate sMonRibbonListBgTemplates[] =
@@ -428,10 +433,17 @@ static u32 LoopedTask_OpenRibbonsMonList(s32 state)
     {
     case 0:
         InitBgTemplates(sMonRibbonListBgTemplates, ARRAY_COUNT(sMonRibbonListBgTemplates));
+    #if ENGLISH
         DecompressAndCopyTileDataToVram(1, sMonRibbonListFrameTiles, 0, 0, 0);
         SetBgTilemapBuffer(1, menu->buff);
         CopyToBgTilemapBuffer(1, sMonRibbonListFrameTilemap, 0, 0);
         CopyPaletteIntoBufferUnfaded(sMonRibbonListFramePal, 0x10, 0x20);
+    #elif FRENCH
+        DecompressAndCopyTileDataToVram(1, gMonRibbonListFrameTiles, 0, 0, 0);
+        SetBgTilemapBuffer(1, menu->buff);
+        CopyToBgTilemapBuffer(1, gMonRibbonListFrameTilemap, 0, 0);
+        CopyPaletteIntoBufferUnfaded(gMonRibbonListFramePal, 0x10, 0x20);
+    #endif
         CopyBgTilemapBufferToVram(1);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -684,8 +696,13 @@ static void CreateRibbonMonsList(void)
     template.count = GetRibbonsMonListCount();
     template.itemSize = sizeof(struct PokenavListItem);
     template.startIndex = GetRibbonListMenuCurrIndex();
+#if ENGLISH
     template.item_X = 13;
     template.windowWidth = 17;
+#elif FRENCH
+    template.item_X = 12;
+    template.windowWidth = 18;
+#endif
     template.listTop = 1;
     template.maxShowed = 8;
     template.fillValue = 2;

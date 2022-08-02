@@ -396,7 +396,11 @@ static u8 BufferQuizAuthorName(void)
     sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
     if (sQuizLadyPtr->playerName[0] == EOS)
     {
+    #if ENGLISH
         StringCopy_PlayerName(gStringVar1, gText_QuizLady_Lady);
+    #elif FRENCH
+        StringCopy(gStringVar1, gText_QuizLady_Lady);
+    #endif
         authorNameId = QUIZ_AUTHOR_NAME_LADY;
     }
     else

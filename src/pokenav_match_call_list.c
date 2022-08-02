@@ -405,11 +405,19 @@ void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry *matchCallEntry, u8
     const u8 *className;
     if (!matchCallEntry->isSpecialTrainer)
     {
+    #if ENGLISH
         int index = GetTrainerIdxByRematchIdx(matchCallEntry->headerId);
         const struct Trainer *trainer = &gTrainers[index];
         int class = trainer->trainerClass;
         className = gTrainerClassNames[class];
         trainerName = trainer->trainerName;
+    #elif FRENCH
+        const struct Trainer *trainer = &gTrainers[GetTrainerIdxByRematchIdx(matchCallEntry->headerId)];
+        int class = trainer->trainerClass;
+        int gender = trainer->encounterMusic_gender;
+        className = GetTrainerClassNameGenderSpecific(class, gender, trainer->trainerName);
+        trainerName = trainer->trainerName;
+    #endif
     }
     else
     {
