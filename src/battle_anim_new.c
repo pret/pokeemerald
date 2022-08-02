@@ -7712,12 +7712,9 @@ void AnimTask_GetTimeOfDay(u8 taskId)
 
 void AnimTask_GetLycanrocForm(u8 taskId)
 {
-
-    #ifdef POKEMON_EXPANSION
     if (GetMonData(GetIllusionMonPtr(gBattleAnimAttacker), MON_DATA_SPECIES) == SPECIES_LYCANROC_MIDNIGHT)
         gBattleAnimArgs[0] = 1;
     else
-    #endif
         gBattleAnimArgs[0] = 0;
     
     gBattleAnimArgs[0] = 0;

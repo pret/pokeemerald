@@ -771,15 +771,9 @@ static void Task_ShowAiPoints(u8 taskId)
         {
             if (i != data->aiBattlerId && IsBattlerAlive(i))
             {
-            #ifndef POKEMON_EXPANSION
-                data->aiIconSpriteIds[i] = CreateMonIcon(gBattleMons[i].species,
-                                                         SpriteCallbackDummy,
-                                                         95 + (count * 60), 17, 0, 0, FALSE);
-            #else
                 data->aiIconSpriteIds[i] = CreateMonIcon(gBattleMons[i].species,
                                                          SpriteCallbackDummy,
                                                          95 + (count * 60), 17, 0, 0);
-            #endif
                 gSprites[data->aiIconSpriteIds[i]].data[0] = i; // battler id
                 count++;
             }
@@ -788,19 +782,11 @@ static void Task_ShowAiPoints(u8 taskId)
                 data->aiIconSpriteIds[i] = 0xFF;
             }
         }
-        #ifndef POKEMON_EXPANSION
-        data->aiMonSpriteId = CreateMonPicSprite_HandleDeoxys(gBattleMons[data->aiBattlerId].species,
-                                                 gBattleMons[data->aiBattlerId].otId,
-                                                 gBattleMons[data->aiBattlerId].personality,
-                                                 TRUE,
-                                                 39, 130, 15, TAG_NONE);
-        #else
         data->aiMonSpriteId = CreateMonPicSprite(gBattleMons[data->aiBattlerId].species,
                                                  gBattleMons[data->aiBattlerId].otId,
                                                  gBattleMons[data->aiBattlerId].personality,
                                                  TRUE,
                                                  39, 130, 15, TAG_NONE);
-        #endif
         data->aiViewState++;
         break;
     // Put text
@@ -894,15 +880,9 @@ static void Task_ShowAiKnowledge(u8 taskId)
         {
             if (GET_BATTLER_SIDE(i) == B_SIDE_PLAYER && IsBattlerAlive(i))
             {
-            #ifndef POKEMON_EXPANSION
-                data->aiIconSpriteIds[i] = CreateMonIcon(gBattleMons[i].species,
-                                                         SpriteCallbackDummy,
-                                                         95 + (count * 80), 17, 0, 0, FALSE);
-            #else
                 data->aiIconSpriteIds[i] = CreateMonIcon(gBattleMons[i].species,
                                                          SpriteCallbackDummy,
                                                          95 + (count * 80), 17, 0, 0);
-            #endif
                 gSprites[data->aiIconSpriteIds[i]].data[0] = i; // battler id
                 count++;
             }
@@ -911,19 +891,11 @@ static void Task_ShowAiKnowledge(u8 taskId)
                 data->aiIconSpriteIds[i] = 0xFF;
             }
         }
-        #ifndef POKEMON_EXPANSION
-        data->aiMonSpriteId = CreateMonPicSprite_HandleDeoxys(gBattleMons[data->aiBattlerId].species,
-                                                 gBattleMons[data->aiBattlerId].otId,
-                                                 gBattleMons[data->aiBattlerId].personality,
-                                                 TRUE,
-                                                 39, 130, 15, TAG_NONE);
-        #else
         data->aiMonSpriteId = CreateMonPicSprite(gBattleMons[data->aiBattlerId].species,
                                                  gBattleMons[data->aiBattlerId].otId,
                                                  gBattleMons[data->aiBattlerId].personality,
                                                  TRUE,
                                                  39, 130, 15, TAG_NONE);
-        #endif
         data->aiViewState++;
         break;
     // Put text
@@ -1953,20 +1925,12 @@ static const u8 sText_HoldEffectPsychicPower[] = _("Psychic Power");
 static const u8 sText_HoldEffectFirePower[] = _("Fire Power");
 static const u8 sText_HoldEffectDragonPower[] = _("Dragon Power");
 static const u8 sText_HoldEffectNormalPower[] = _("Normal Power");
-#ifdef ITEM_EXPANSION
 static const u8 sText_HoldEffectUpgrade[] = _("Upgrade");
-#else
-static const u8 sText_HoldEffectUpgrade[] = _("Up Grade");
-#endif
 static const u8 sText_HoldEffectShellBell[] = _("Shell Bell");
 static const u8 sText_HoldEffectLuckyPunch[] = _("Lucky Punch");
 static const u8 sText_HoldEffectMetalPowder[] = _("Metal Powder");
 static const u8 sText_HoldEffectThickClub[] = _("Thick Club");
-#ifdef ITEM_EXPANSION
 static const u8 sText_HoldEffectLeek[] = _("Leek");
-#else
-static const u8 sText_HoldEffectLeek[] = _("Stick");
-#endif
 static const u8 sText_HoldEffectChoiceScarf[] = _("Choice Scarf");
 static const u8 sText_HoldEffectChoiceSpecs[] = _("Choice Specs");
 static const u8 sText_HoldEffectDampRock[] = _("Damp Rock");

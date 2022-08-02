@@ -5197,11 +5197,7 @@ static void TrySpecialEvolution(void) // Attempts to perform non-level related b
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        #ifndef POKEMON_EXPANSION
-            u16 species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_BATTLE_SPECIAL, i);
-        #else
-            u16 species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_BATTLE_SPECIAL, i, NULL);
-        #endif
+        u16 species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_BATTLE_SPECIAL, i, NULL);
         if (species != SPECIES_NONE && !(sTriedEvolving & gBitTable[i]))
         {
             sTriedEvolving |= gBitTable[i];

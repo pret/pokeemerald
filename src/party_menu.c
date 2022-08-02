@@ -4488,17 +4488,11 @@ void Task_AbilityPatch(u8 taskId)
     switch (tState)
     {
     case 0:
-
-    // If Hidden Abilities have been implemented without the use of Pokémon Expansion and added to the `abilities` field
-    // as ability no. 3 (eg. {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_CHLOROPHYLL} )
-    // you can remove this #ifdef.
-    #ifdef POKEMON_EXPANSION
         // Can't use.
         if (gBaseStats[tSpecies].abilities[tAbilityNum] == 0
             || !tSpecies
             || GetMonData(&gPlayerParty[tMonId], MON_DATA_ABILITY_NUM, NULL) > 1
             )
-    #endif
         {
             gPartyMenuUseExitCallback = FALSE;
             PlaySE(SE_SELECT);
@@ -5544,11 +5538,7 @@ u8 GetItemEffectType(u16 item)
     else
         itemEffect = gItemEffectTable[item - ITEM_POTION];
 
-#ifndef ITEM_EXPANSION
-    if ((itemEffect[0] & (ITEM0_DIRE_HIT | ITEM0_X_ATTACK)) || itemEffect[1] || itemEffect[2] || (itemEffect[3] & ITEM3_GUARD_SPEC))
-#else
     if ((itemEffect[0] & ITEM0_DIRE_HIT) || itemEffect[1] || (itemEffect[3] & ITEM3_GUARD_SPEC))
-#endif
         return ITEM_EFFECT_X_ITEM;
     else if (itemEffect[0] & ITEM0_SACRED_ASH)
         return ITEM_EFFECT_SACRED_ASH;

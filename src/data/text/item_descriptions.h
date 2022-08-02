@@ -108,7 +108,7 @@ static const u8 sHeavyBallDesc[] = _(
     "Pokémon.");
 
 static const u8 sDreamBallDesc[] = _(
-#if defined(BATTLE_ENGINE) && B_DREAM_BALL_MODIFIER >= GEN_8
+#if B_DREAM_BALL_MODIFIER >= GEN_8
     "A Ball that works\n"
     "well on sleeping\n"
     "Pokémon.");
@@ -634,7 +634,7 @@ static const u8 sEscapeRopeDesc[] = _(
 
 // Battle items
 static const u8 sXAttackDesc[] = _(
-#if defined(BATTLE_ENGINE) && B_X_ITEMS_BUFF >= GEN_7
+#if B_X_ITEMS_BUFF >= GEN_7
     "Sharply raises stat\n"
     "Attack during\n"
     "one battle.");
@@ -645,7 +645,7 @@ static const u8 sXAttackDesc[] = _(
 #endif
 
 static const u8 sXDefenseDesc[] = _(
-#if defined(BATTLE_ENGINE) && B_X_ITEMS_BUFF >= GEN_7
+#if B_X_ITEMS_BUFF >= GEN_7
     "Sharply raises stat\n"
     "Defense during\n"
     "one battle.");
@@ -656,7 +656,7 @@ static const u8 sXDefenseDesc[] = _(
 #endif
 
 static const u8 sXSpAtkDesc[] = _(
-#if defined(BATTLE_ENGINE) && B_X_ITEMS_BUFF >= GEN_7
+#if B_X_ITEMS_BUFF >= GEN_7
     "Sharply raises stat\n"
     "Sp. Atk during\n"
     "one battle.");
@@ -667,7 +667,7 @@ static const u8 sXSpAtkDesc[] = _(
 #endif
 
 static const u8 sXSpDefDesc[] = _(
-#if defined(BATTLE_ENGINE) && B_X_ITEMS_BUFF >= GEN_7
+#if B_X_ITEMS_BUFF >= GEN_7
     "Sharply raises stat\n"
     "Sp. Def during\n"
     "one battle.");
@@ -678,7 +678,7 @@ static const u8 sXSpDefDesc[] = _(
 #endif
 
 static const u8 sXSpeedDesc[] = _(
-#if defined(BATTLE_ENGINE) && B_X_ITEMS_BUFF >= GEN_7
+#if B_X_ITEMS_BUFF >= GEN_7
     "Sharply raises stat\n"
     "Speed during\n"
     "one battle.");
@@ -689,7 +689,7 @@ static const u8 sXSpeedDesc[] = _(
 #endif
 
 static const u8 sXAccuracyDesc[] = _(
-#if defined(BATTLE_ENGINE) && B_X_ITEMS_BUFF >= GEN_7
+#if B_X_ITEMS_BUFF >= GEN_7
     "Sharply raises move\n"
     "accuracy during\n"
     "one battle.");
@@ -2070,7 +2070,7 @@ static const u8 sDeepSeaToothDesc[] = _(
     "of Clamperl.");
 
 static const u8 sSoulDewDesc[] = _(
-#if defined(BATTLE_ENGINE) && B_SOUL_DEW_BOOST >= GEN_7
+#if B_SOUL_DEW_BOOST >= GEN_7
     "Powers up Latios' &\n"
     "Latias' Psychic and\n"
     "Dragon-type moves.");
@@ -2405,7 +2405,7 @@ static const u8 sSootheBellDesc[] = _(
     "calms spirits and\n"
     "fosters friendship.");
 
-#if defined(BATTLE_ENGINE) && B_MENTAL_HERB >= GEN_5
+#if B_MENTAL_HERB >= GEN_5
 static const u8 sMentalHerbDesc[] = _(
     "Snaps Pokémon out\n"
     "of move-binding\n"
