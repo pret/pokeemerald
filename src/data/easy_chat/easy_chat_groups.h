@@ -1,5 +1,6 @@
 #include "easy_chat.h"
 
+#if ENGLISH
 #include "easy_chat_group_pokemon.h"
 #include "easy_chat_group_trainer.h"
 #include "easy_chat_group_status.h"
@@ -22,6 +23,30 @@
 #include "easy_chat_group_move_2.h"
 #include "easy_chat_group_trendy_saying.h"
 #include "easy_chat_group_pokemon2.h"
+#elif FRENCH
+#include "easy_chat_group_pokemon_fr.h"
+#include "easy_chat_group_trainer_fr.h"
+#include "easy_chat_group_status_fr.h"
+#include "easy_chat_group_battle_fr.h"
+#include "easy_chat_group_greetings_fr.h"
+#include "easy_chat_group_people_fr.h"
+#include "easy_chat_group_voices_fr.h"
+#include "easy_chat_group_speech_fr.h"
+#include "easy_chat_group_endings_fr.h"
+#include "easy_chat_group_feelings_fr.h"
+#include "easy_chat_group_conditions_fr.h"
+#include "easy_chat_group_actions_fr.h"
+#include "easy_chat_group_lifestyle_fr.h"
+#include "easy_chat_group_hobbies_fr.h"
+#include "easy_chat_group_time_fr.h"
+#include "easy_chat_group_misc_fr.h"
+#include "easy_chat_group_adjectives_fr.h"
+#include "easy_chat_group_events_fr.h"
+#include "easy_chat_group_move_1_fr.h"
+#include "easy_chat_group_move_2_fr.h"
+#include "easy_chat_group_trendy_saying_fr.h"
+#include "easy_chat_group_pokemon2_fr.h"
+#endif
 
 const struct EasyChatGroup gEasyChatGroups[] = {
     {

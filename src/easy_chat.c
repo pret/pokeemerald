@@ -1215,7 +1215,11 @@ static const u8 *const sFooterTextOptions[NUM_FOOTER_TYPES][4] = {
 };
 
 #include "data/easy_chat/easy_chat_groups.h"
+#if ENGLISH
 #include "data/easy_chat/easy_chat_words_by_letter.h"
+#elif FRENCH
+#include "data/easy_chat/easy_chat_words_by_letter_fr.h"
+#endif
 
 static const u8 *const sEasyChatGroupNamePointers[EC_NUM_GROUPS] = {
     [EC_GROUP_POKEMON]          = gEasyChatGroupName_Pokemon,
