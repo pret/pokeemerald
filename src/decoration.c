@@ -205,7 +205,11 @@ static void TossDecorationPrompt(u8 taskId);
 static void TossDecoration(u8 taskId);
 
 #include "data/decoration/tiles.h"
+#if ENGLISH
 #include "data/decoration/description.h"
+#elif FRENCH
+#include "data/decoration/description_fr.h"
+#endif
 #include "data/decoration/header.h"
 
 static const u8 *const sDecorationCategoryNames[] =

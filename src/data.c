@@ -322,7 +322,14 @@ const union AnimCmd *const gAnims_MonPic[] =
 #include "data/pokemon_graphics/unknown_table.h"
 
 #include "data/trainer_parties.h"
+#if ENGLISH
 #include "data/text/trainer_class_names.h"
 #include "data/trainers.h"
 #include "data/text/species_names.h"
 #include "data/text/move_names.h"
+#elif FRENCH
+#include "data/text/trainer_class_names_fr.h"
+#include "data/trainers.h"
+#include "data/text/species_names_fr.h"
+#include "data/text/move_names_fr.h"
+#endif
