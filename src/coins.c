@@ -17,14 +17,24 @@ void PrintCoinsString(u32 coinAmount)
     ConvertIntToDecimalStringN(gStringVar1, coinAmount, STR_CONV_MODE_RIGHT_ALIGN, MAX_COIN_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_Coins);
 
+#if ENGLISH
     xAlign = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 0x40);
     AddTextPrinterParameterized(sCoinsWindowId, FONT_NORMAL, gStringVar4, xAlign, 1, 0, NULL);
+#elif FRENCH
+    xAlign = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 0x38);
+    AddTextPrinterParameterized(sCoinsWindowId, FONT_NARROW, gStringVar4, xAlign, 1, 0, NULL);
+#endif
 }
 
 void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y)
 {
     struct WindowTemplate template;
+
+#if ENGLISH
     SetWindowTemplateFields(&template, 0, x, y, 8, 2, 0xF, 0x141);
+#elif FRENCH
+    SetWindowTemplateFields(&template, 0, x, y, 7, 2, 0xF, 0x141);
+#endif
     sCoinsWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sCoinsWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sCoinsWindowId);

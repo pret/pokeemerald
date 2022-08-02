@@ -270,6 +270,9 @@ static void PrintMonHeight(u16 height, u8 left, u8 top);
 static void PrintMonWeight(u16 weight, u8 left, u8 top);
 static void ResetOtherVideoRegisters(u16);
 static u8 PrintCryScreenSpeciesName(u8, u16, u8, u8);
+#if FRENCH
+static void UnusedPrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top);
+#endif
 static void DrawFootprint(u8 windowId, u16 dexNum);
 static u16 CreateSizeScreenTrainerPic(u16, s16, s16, s8);
 static u16 GetNextPosition(u8, u16, u16, u16);
@@ -447,6 +450,14 @@ static const union AnimCmd sSpriteAnim_MenuText[] =
     ANIMCMD_END
 };
 
+#if FRENCH
+static const union AnimCmd sSpriteAnim_Unused[] =
+{
+    ANIMCMD_FRAME(200, 30),
+    ANIMCMD_END
+};
+#endif
+
 static const union AnimCmd sSpriteAnim_SeenText[] =
 {
     ANIMCMD_FRAME(64, 30),
@@ -619,6 +630,13 @@ static const union AnimCmd *const sSpriteAnimTable_InterfaceText[] =
     sSpriteAnim_SelectButton,
     sSpriteAnim_MenuText
 };
+
+#if FRENCH
+static const union AnimCmd *const sSpriteAnimTable_Unused[] =
+{
+    sSpriteAnim_Unused
+};
+#endif
 
 static const union AnimCmd *const sSpriteAnimTable_SeenOwnText[] =
 {
@@ -2791,6 +2809,11 @@ static void CreateInterfaceSprites(u8 page)
     spriteId = CreateSprite(&sInterfaceTextSpriteTemplate, 48, DISPLAY_HEIGHT - 16, 0);
     StartSpriteAnim(&gSprites[spriteId], 1);
 
+#if FRENCH
+    spriteId = CreateSprite(&sInterfaceTextSpriteTemplate, 80, DISPLAY_HEIGHT - 16, 0);
+    StartSpriteAnim(&gSprites[spriteId], 4);
+#endif
+
     spriteId = CreateSprite(&sRotatingPokeBallSpriteTemplate, 0, DISPLAY_HEIGHT / 2, 2);
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 30;
@@ -4125,6 +4148,8 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     PrintInfoScreenText(category, 0x64, 0x29);
     PrintInfoScreenText(gText_HTHeight, 0x60, 0x39);
     PrintInfoScreenText(gText_WTWeight, 0x60, 0x49);
+
+#if ENGLISH
     if (owned)
     {
         PrintMonHeight(gPokedexEntries[num].height, 0x81, 0x39);
@@ -4135,6 +4160,19 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
         PrintInfoScreenText(gText_UnkHeight, 0x81, 0x39);
         PrintInfoScreenText(gText_UnkWeight, 0x81, 0x49);
     }
+#elif FRENCH
+    if (owned)
+    {
+        PrintMonHeight(gPokedexEntries[num].height, 0x90, 0x39);
+        PrintMonWeight(gPokedexEntries[num].weight, 0x90, 0x49);
+    }
+    else
+    {
+        PrintInfoScreenText(gText_UnkHeight, 0x90, 0x39);
+        PrintInfoScreenText(gText_UnkWeight, 0x90, 0x49);
+    }
+#endif
+
     if (owned)
         description = gPokedexEntries[num].description;
     else
@@ -4144,6 +4182,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
 
 static void PrintMonHeight(u16 height, u8 left, u8 top)
 {
+#if ENGLISH
     u8 buffer[16];
     u32 inches, feet;
     u8 i = 0;
@@ -4173,10 +4212,15 @@ static void PrintMonHeight(u16 height, u8 left, u8 top)
     buffer[i++] = CHAR_DBL_QUOTE_RIGHT;
     buffer[i++] = EOS;
     PrintInfoScreenText(buffer, left, top);
+#elif FRENCH
+    PrintInfoScreenText(gText_EmptyHeight, left, top);
+    UnusedPrintDecimalNum(0, height, left, top);
+#endif
 }
 
 static void PrintMonWeight(u16 weight, u8 left, u8 top)
 {
+#if ENGLISH
     u8 buffer[16];
     bool8 output;
     u8 i;
@@ -4231,6 +4275,10 @@ static void PrintMonWeight(u16 weight, u8 left, u8 top)
     buffer[i++] = CHAR_PERIOD;
     buffer[i++] = EOS;
     PrintInfoScreenText(buffer, left, top);
+#elif FRENCH
+    PrintInfoScreenText(gText_EmptyWeight, left, top);
+    UnusedPrintDecimalNum(0, weight, left, top);
+#endif
 }
 
 const u8 *GetPokedexCategoryName(u16 dexNum) // unused
@@ -4531,13 +4579,13 @@ static void UnusedPrintMonName(u8 windowId, const u8 *name, u8 left, u8 top)
     PrintInfoSubMenuText(windowId, str, left, top);
 }
 
-static void UnusedPrintDecimalNum(u8 windowId, u16 b, u8 left, u8 top)
+static void UnusedPrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top)
 {
     u8 str[6];
     bool8 outputted = FALSE;
     u8 result;
 
-    result = b / 1000;
+    result = num / 1000;
     if (result == 0)
     {
         str[0] = CHAR_SPACER;
@@ -4549,7 +4597,7 @@ static void UnusedPrintDecimalNum(u8 windowId, u16 b, u8 left, u8 top)
         outputted = TRUE;
     }
 
-    result = (b % 1000) / 100;
+    result = (num % 1000) / 100;
     if (result == 0 && !outputted)
     {
         str[1] = CHAR_SPACER;
@@ -4561,9 +4609,13 @@ static void UnusedPrintDecimalNum(u8 windowId, u16 b, u8 left, u8 top)
         outputted = TRUE;
     }
 
-    str[2] = CHAR_0 + ((b % 1000) % 100) / 10;
+    str[2] = CHAR_0 + ((num % 1000) % 100) / 10;
+#if ENGLISH
     str[3] = CHAR_PERIOD;
-    str[4] = CHAR_0 + ((b % 1000) % 100) % 10;
+#elif FRENCH
+    str[3] = CHAR_COMMA;
+#endif
+    str[4] = CHAR_0 + ((num % 1000) % 100) % 10;
     str[5] = EOS;
     PrintInfoSubMenuText(windowId, str, left, top);
 }
