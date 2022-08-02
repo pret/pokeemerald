@@ -173,7 +173,11 @@ void DrawMoneyBox(int amount, u8 x, u8 y)
     PutWindowTilemap(sMoneyBoxWindowId);
     CopyWindowToVram(sMoneyBoxWindowId, COPYWIN_MAP);
     PrintMoneyAmountInMoneyBoxWithBorder(sMoneyBoxWindowId, 0x214, 14, amount);
+#if ENGLISH
     AddMoneyLabelObject((8 * x) + 19, (8 * y) + 11);
+#elif FRENCH
+    AddMoneyLabelObject((8 * x) + 24, (8 * y) + 11);
+#endif
 }
 
 void HideMoneyBox(void)

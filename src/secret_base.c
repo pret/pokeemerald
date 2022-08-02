@@ -177,9 +177,15 @@ static const struct WindowTemplate sRegistryWindowTemplates[] =
 {
     {
         .bg = 0,
+    #if ENGLISH
         .tilemapLeft = 18,
         .tilemapTop = 1,
         .width = 11,
+    #elif FRENCH
+        .tilemapLeft = 17,
+        .tilemapTop = 1,
+        .width = 12,
+    #endif
         .height = 18,
         .paletteNum = 15,
         .baseBlock = 0x01,
@@ -191,7 +197,11 @@ static const struct WindowTemplate sRegistryWindowTemplates[] =
         .width = 28,
         .height = 4,
         .paletteNum = 15,
+    #if ENGLISH
         .baseBlock = 0xc7,
+    #elif FRENCH
+        .baseBlock = 0xd9,
+    #endif
     }
 };
 
@@ -727,7 +737,11 @@ static u8 *GetSecretBaseName(u8 *dest, u8 secretBaseIdx)
 {
     *StringCopyN(dest, gSaveBlock1Ptr->secretBases[secretBaseIdx].trainerName, GetNameLength(gSaveBlock1Ptr->secretBases[secretBaseIdx].trainerName)) = EOS;
     ConvertInternationalString(dest, gSaveBlock1Ptr->secretBases[secretBaseIdx].language);
+#if ENGLISH
     return StringAppend(dest, gText_ApostropheSBase);
+#elif FRENCH
+    return StringAppendWithPlaceholder(dest, gText_ApostropheSBase, dest);
+#endif
 }
 
 u8 *GetSecretBaseMapName(u8 *dest)

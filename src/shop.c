@@ -705,7 +705,11 @@ static void BuyMenuDrawGraphics(void)
 {
     BuyMenuDrawMapGraphics();
     BuyMenuCopyMenuBgToBg1TilemapBuffer();
+#if ENGLISH
     AddMoneyLabelObject(19, 11);
+#elif FRENCH
+    AddMoneyLabelObject(24, 11);
+#endif
     PrintMoneyAmountInMoneyBoxWithBorder(0, 1, 13, GetMoney(&gSaveBlock1Ptr->money));
     ScheduleBgCopyTilemapToVram(0);
     ScheduleBgCopyTilemapToVram(1);
