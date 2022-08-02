@@ -20,7 +20,7 @@
 #define ENGLISH 1
 #endif
 
-#ifdef ENGLISH
+#if ENGLISH
 #define UNITS_IMPERIAL
 #else
 #define UNITS_METRIC

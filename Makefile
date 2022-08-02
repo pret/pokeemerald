@@ -45,6 +45,7 @@ TITLE        := POKEMON EMER
 GAME_CODE    := BPE
 MAKER_CODE   := 01
 BUILD_NAME   := emerald
+BUILD_SUFIX  := 
 
 ifeq (modern,$(MAKECMDGOALS))
   MODERN := 1
@@ -52,22 +53,27 @@ endif
 
 # Language
 ifeq ($(GAME_LANGUAGE), ENGLISH)
-  BUILD_NAME  := $(BUILD_NAME)
-  GAME_CODE  := $(GAME_CODE)E
+  GAME_CODE := $(GAME_CODE)E
 else
 ifeq ($(GAME_LANGUAGE), FRENCH)
-  BUILD_NAME  := $(BUILD_NAME)_fr
   GAME_CODE  := $(GAME_CODE)F
+  BUILD_SUFIX := _fr
 else
   $(error unknown language $(GAME_LANGUAGE))
 endif
 endif
 
+# Rom and build directory names.
+BUILD_NAME  := $(BUILD_NAME)$(BUILD_SUFIX)
+ifeq ($(MODERN),0)
+ROM_NAME     := poke$(BUILD_NAME).gba
 OBJ_DIR_NAME := build/$(BUILD_NAME)
-
-ROM_NAME      := poke$(BUILD_NAME).gba
-ELF_NAME      := $(ROM_NAME:.gba=.elf)
-MAP_NAME      := $(ROM_NAME:.gba=.map)
+else
+ROM_NAME     := poke$(BUILD_NAME)_modern.gba
+OBJ_DIR_NAME := build/modern$(BUILD_SUFIX)
+endif
+ELF_NAME     := $(ROM_NAME:.gba=.elf)
+MAP_NAME     := $(ROM_NAME:.gba=.map)
 
 # use arm-none-eabi-cpp for macOS
 # as macOS's default compiler is clang
@@ -86,10 +92,6 @@ else
   CPP := $(PREFIX)cpp
 endif
 
-MODERN_ROM_NAME := pokeemerald_modern.gba
-MODERN_ELF_NAME := $(MODERN_ROM_NAME:.gba=.elf)
-MODERN_MAP_NAME := $(MODERN_ROM_NAME:.gba=.map)
-MODERN_OBJ_DIR_NAME := build/modern
 
 SHELL := /bin/bash -o pipefail
 
@@ -116,18 +118,17 @@ MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 
 ASFLAGS := -mcpu=arm7tdmi --defsym MODERN=$(MODERN) --defsym $(GAME_LANGUAGE)=1
 
+ROM := $(ROM_NAME)
+OBJ_DIR := $(OBJ_DIR_NAME)
+
 ifeq ($(MODERN),0)
 CC1             := tools/agbcc/bin/agbcc$(EXE)
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -g
-ROM := $(ROM_NAME)
-OBJ_DIR := $(OBJ_DIR_NAME)
 LIBPATH := -L ../../tools/agbcc/lib
 LIB := $(LIBPATH) -lgcc -lc -L../../libagbsyscall -lagbsyscall
 else
 CC1              = $(shell $(PATH_MODERNCC) --print-prog-name=cc1) -quiet
 override CFLAGS += -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast
-ROM := $(MODERN_ROM_NAME)
-OBJ_DIR := $(MODERN_OBJ_DIR_NAME)
 LIBPATH := -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libnosys.a))" -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libc.a))"
 LIB := $(LIBPATH) -lc -lnosys -lgcc -L../../libagbsyscall -lagbsyscall
 endif
@@ -243,9 +244,6 @@ rom: $(ROM)
 ifeq ($(COMPARE),1)
 	@$(SHA1) $(BUILD_NAME).sha1
 endif
-
-# For contributors to make sure a change didn't affect the contents of the ROM.
-compare: all
 
 clean: mostlyclean clean-tools
 
@@ -443,13 +441,19 @@ $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 	$(FIX) $@ -p --silent
 
-modern: all
+# "Friendly" target names for convenience sake
+en:         ; @$(MAKE) GAME_LANGUAGE=ENGLISH
+fr:         ; @$(MAKE) GAME_LANGUAGE=FRENCH
 
-# "friendly" target names for convenience sake
-english:            ; @$(MAKE) GAME_LANGUAGE=ENGLISH
-french:             ; @$(MAKE) GAME_LANGUAGE=FRENCH
-compare_english:    ; @$(MAKE) GAME_LANGUAGE=ENGLISH COMPARE=1
-compare_french:     ; @$(MAKE) GAME_LANGUAGE=FRENCH COMPARE=1
+# For contributors to make sure a change didn't affect the contents of the ROMs.
+compare:    ; @$(MAKE) GAME_LANGUAGE=ENGLISH COMPARE=1
+compare_en: ; @$(MAKE) GAME_LANGUAGE=ENGLISH COMPARE=1
+compare_fr: ; @$(MAKE) GAME_LANGUAGE=FRENCH COMPARE=1
+
+# Use modern compilers to build rom. Will not match with original ROMs.
+modern:     ; @$(MAKE) GAME_LANGUAGE=ENGLISH MODERN=1
+modern_en:  ; @$(MAKE) GAME_LANGUAGE=ENGLISH MODERN=1
+modern_fr:  ; @$(MAKE) GAME_LANGUAGE=FRENCH MODERN=1
 
 libagbsyscall:
 	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN) MODERN=$(MODERN)
