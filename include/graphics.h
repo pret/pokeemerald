@@ -5063,4 +5063,54 @@ extern const u8 gMailTilemap_Retro[];
 extern const u8 gMonMarkingsMenu_Gfx[];
 extern const u16 gMonMarkingsMenu_Pal[];
 
+#if FRENCH
+extern const u16 gPokeJumpBonuses_Pal[];
+extern const u32 gPokeJumpBonuses_Gfx[];
+extern const u32 gPokeJumpBonuses_Tilemap[];
+
+extern const u16 g321Start_Pal[];
+extern const u32 g321Start_Gfx[];
+
+extern const u16 gBlenderCenter_Pal[];
+
+extern const u32 gFrontierPassMapScreen_Gfx[];
+
+// roulette
+extern const u16 gRouletteShadow_Pal[];
+extern const u16 gRouletteBall_Pal[];
+extern const u16 gRouletteBallCounter_Pal[];
+extern const u16 gRouletteCursor_Pal[];
+extern const u16 gRouletteCredit_Pal[];
+extern const u16 gRouletteShroomish_Pal[];
+extern const u16 gRouletteTaillow_Pal[];
+extern const u16 gRouletteGridIcons_Pal[];
+extern const u16 gRouletteWynaut_Pal[];
+extern const u16 gRouletteAzurill_Pal[];
+extern const u16 gRouletteSkitty_Pal[];
+extern const u16 gRouletteMakuhita_Pal[];
+
+// pokedex cry screen
+extern const u16 gCryMeter_Pal[];
+extern const u8 gCryMeter_Gfx[];
+
+// credits
+extern const u32 gCreditsCopyrightEnd_Gfx[];
+extern const u32 gCreditsCopyrightEnd_Tilemap[];
+
+// pokenav match call gfx
+extern const u16 gMatchCallUI_Pal[];
+extern const u32 gMatchCallUI_Gfx[];
+extern const u32 gMatchCallUI_Tilemap[];
+
+// pokenav conditions search results
+extern const u16 gConditionSearchResultFramePal[];
+extern const u32 gConditionSearchResultTiles[];
+extern const u32 gConditionSearchResultTilemap[];
+
+// pokenav ribbon list
+extern const u16 gMonRibbonListFramePal[];
+extern const u32 gMonRibbonListFrameTiles[];
+extern const u32 gMonRibbonListFrameTilemap[];
+#endif
+
 #endif //GUARD_GRAPHICS_H
