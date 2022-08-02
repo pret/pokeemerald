@@ -433,6 +433,7 @@ const u8 gTypeEffectiveness[336] =
 
 const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
 {
+#if ENGLISH
     [TYPE_NORMAL] = _("NORMAL"),
     [TYPE_FIGHTING] = _("FIGHT"),
     [TYPE_FLYING] = _("FLYING"),
@@ -451,6 +452,26 @@ const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
     [TYPE_ICE] = _("ICE"),
     [TYPE_DRAGON] = _("DRAGON"),
     [TYPE_DARK] = _("DARK"),
+#elif FRENCH
+    [TYPE_NORMAL] = _("NORMAL"),
+    [TYPE_FIGHTING] = _("COMBAT"),
+    [TYPE_FLYING] = _("VOL"),
+    [TYPE_POISON] = _("POISON"),
+    [TYPE_GROUND] = _("SOL"),
+    [TYPE_ROCK] = _("ROCHE"),
+    [TYPE_BUG] = _("INSECT"),
+    [TYPE_GHOST] = _("SPECTR"),
+    [TYPE_STEEL] = _("ACIER"),
+    [TYPE_MYSTERY] = _("???"),
+    [TYPE_FIRE] = _("FEU"),
+    [TYPE_WATER] = _("EAU"),
+    [TYPE_GRASS] = _("PLANTE"),
+    [TYPE_ELECTRIC] = _("ELECTR"),
+    [TYPE_PSYCHIC] = _("PSY"),
+    [TYPE_ICE] = _("GLACE"),
+    [TYPE_DRAGON] = _("DRAGON"),
+    [TYPE_DARK] = _("TENEBR"),
+#endif
 };
 
 // This is a factor in how much money you get for beating a trainer.
@@ -1068,7 +1089,7 @@ static void CB2_HandleStartBattle(void)
             // Recv Pokémon 5-6
             ResetBlockReceivedFlags();
             memcpy(&gEnemyParty[4], gBlockRecvBuffer[enemyMultiplayerId], sizeof(struct Pokemon) * 2);
-            
+
             TryCorrectShedinjaLanguage(&gEnemyParty[0]);
             TryCorrectShedinjaLanguage(&gEnemyParty[1]);
             TryCorrectShedinjaLanguage(&gEnemyParty[2]);
@@ -2489,7 +2510,11 @@ static void AskRecordBattle(void)
     case STATE_PRINT_YES_NO:
         if (!IsTextPrinterActive(B_WIN_MSG))
         {
-            HandleBattleWindow(0x18, 8, 0x1D, 0xD, 0);
+        #if ENGLISH
+            HandleBattleWindow(24, 8, 0x1D, 0xD, 0);
+        #elif FRENCH
+            HandleBattleWindow(23, 8, 0x1D, 0xD, 0);
+        #endif
             BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
             gBattleCommunication[CURSOR_POSITION] = 1;
             BattleCreateYesNoCursorAt(1);
@@ -2524,8 +2549,12 @@ static void AskRecordBattle(void)
             PlaySE(SE_SELECT);
             if (gBattleCommunication[CURSOR_POSITION] == 0)
             {
-                // Selected Yes
-                HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
+            // Selected Yes
+            #if ENGLISH
+                HandleBattleWindow(24, 8, 0x1D, 0xD, WINDOW_CLEAR);
+            #elif FRENCH
+                HandleBattleWindow(23, 8, 0x1D, 0xD, WINDOW_CLEAR);
+            #endif
                 gBattleCommunication[1] = MoveRecordedBattleToSaveData();
                 gBattleCommunication[MULTIUSE_STATE] = STATE_RECORD_YES;
             }
@@ -2544,7 +2573,11 @@ static void AskRecordBattle(void)
     case STATE_RECORD_NO:
         if (IsLinkTaskFinished() == TRUE)
         {
-            HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
+        #if ENGLISH
+            HandleBattleWindow(24, 8, 0x1D, 0xD, WINDOW_CLEAR);
+        #elif FRENCH
+            HandleBattleWindow(23, 8, 0x1D, 0xD, WINDOW_CLEAR);
+        #endif
             if (gMain.anyLinkBattlerHasFrontierPass)
             {
                 // Other battlers may be recording, wait for them
@@ -2985,7 +3018,7 @@ static void SpriteCB_TrainerThrowObject_Main(struct Sprite *sprite)
         sprite->callback = SpriteCB_Idle;
 }
 
-// Sprite callback for a trainer back pic to throw an object 
+// Sprite callback for a trainer back pic to throw an object
 // (Wally throwing a ball, throwing Pokéblocks/balls in the Safari Zone)
 void SpriteCB_TrainerThrowObject(struct Sprite *sprite)
 {

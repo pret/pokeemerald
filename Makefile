@@ -446,7 +446,9 @@ $(ROM): $(ELF)
 modern: all
 
 # "friendly" target names for convenience sake
-french:     ; @$(MAKE) GAME_LANGUAGE=FRENCH
+english:            ; @$(MAKE) GAME_LANGUAGE=ENGLISH
+french:             ; @$(MAKE) GAME_LANGUAGE=FRENCH
+compare_english:    ; @$(MAKE) GAME_LANGUAGE=ENGLISH COMPARE=1
 compare_french:     ; @$(MAKE) GAME_LANGUAGE=FRENCH COMPARE=1
 
 libagbsyscall:

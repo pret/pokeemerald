@@ -27,7 +27,12 @@
 #define NUM_LANGUAGES     7
 
 #define GAME_VERSION (VERSION_EMERALD)
+
+#if ENGLISH
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
+#elif FRENCH
+#define GAME_LANGUAGE (LANGUAGE_FRENCH)
+#endif
 
 // party sizes
 #define PARTY_SIZE 6

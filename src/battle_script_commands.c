@@ -5369,7 +5369,11 @@ static void Cmd_yesnoboxlearnmove(void)
     switch (gBattleScripting.learnMoveState)
     {
     case 0:
+    #if ENGLISH
         HandleBattleWindow(24, 8, 29, 13, 0);
+    #elif FRENCH
+        HandleBattleWindow(23, 8, 29, 13, 0);
+    #endif
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
         gBattleScripting.learnMoveState++;
         gBattleCommunication[CURSOR_POSITION] = 0;
@@ -5395,7 +5399,11 @@ static void Cmd_yesnoboxlearnmove(void)
             PlaySE(SE_SELECT);
             if (gBattleCommunication[1] == 0)
             {
+            #if ENGLISH
                 HandleBattleWindow(24, 8, 29, 13, WINDOW_CLEAR);
+            #elif FRENCH
+                HandleBattleWindow(23, 8, 29, 13, WINDOW_CLEAR);
+            #endif
                 BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                 gBattleScripting.learnMoveState++;
             }
@@ -5466,7 +5474,11 @@ static void Cmd_yesnoboxlearnmove(void)
         }
         break;
     case 5:
+    #if ENGLISH
         HandleBattleWindow(24, 8, 29, 13, WINDOW_CLEAR);
+    #elif FRENCH
+        HandleBattleWindow(23, 8, 29, 13, WINDOW_CLEAR);
+    #endif
         gBattlescriptCurrInstr += 5;
         break;
     case 6:
@@ -5483,7 +5495,11 @@ static void Cmd_yesnoboxstoplearningmove(void)
     switch (gBattleScripting.learnMoveState)
     {
     case 0:
+    #if ENGLISH
         HandleBattleWindow(24, 8, 29, 13, 0);
+    #elif FRENCH
+        HandleBattleWindow(23, 8, 29, 13, 0);
+    #endif
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
         gBattleScripting.learnMoveState++;
         gBattleCommunication[CURSOR_POSITION] = 0;
@@ -5513,13 +5529,21 @@ static void Cmd_yesnoboxstoplearningmove(void)
             else
                 gBattlescriptCurrInstr += 5;
 
+        #if ENGLISH
             HandleBattleWindow(24, 8, 29, 13, WINDOW_CLEAR);
+        #elif FRENCH
+            HandleBattleWindow(23, 8, 29, 13, WINDOW_CLEAR);
+        #endif
         }
         else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        #if ENGLISH
             HandleBattleWindow(24, 8, 29, 13, WINDOW_CLEAR);
+        #elif FRENCH
+            HandleBattleWindow(23, 8, 29, 13, WINDOW_CLEAR);
+        #endif
         }
         break;
     }
@@ -5779,7 +5803,11 @@ static void Cmd_yesnobox(void)
     switch (gBattleCommunication[0])
     {
     case 0:
+    #if ENGLISH
         HandleBattleWindow(24, 8, 29, 13, 0);
+    #elif FRENCH
+        HandleBattleWindow(23, 8, 29, 13, 0);
+    #endif
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
         gBattleCommunication[0]++;
         gBattleCommunication[CURSOR_POSITION] = 0;
@@ -5804,13 +5832,21 @@ static void Cmd_yesnobox(void)
         {
             gBattleCommunication[CURSOR_POSITION] = 1;
             PlaySE(SE_SELECT);
+        #if ENGLISH
             HandleBattleWindow(24, 8, 29, 13, WINDOW_CLEAR);
+        #elif FRENCH
+            HandleBattleWindow(23, 8, 29, 13, WINDOW_CLEAR);
+        #endif
             gBattlescriptCurrInstr++;
         }
         else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
+        #if ENGLISH
             HandleBattleWindow(24, 8, 29, 13, WINDOW_CLEAR);
+        #elif FRENCH
+            HandleBattleWindow(23, 8, 29, 13, WINDOW_CLEAR);
+        #endif
             gBattlescriptCurrInstr++;
         }
         break;
@@ -10096,8 +10132,11 @@ void BattleCreateYesNoCursorAt(u8 cursorPosition)
     u16 src[2];
     src[0] = 1;
     src[1] = 2;
-
+#if ENGLISH
     CopyToBgTilemapBufferRect_ChangePalette(0, src, 0x19, 9 + (2 * cursorPosition), 1, 2, 0x11);
+#elif FRENCH
+    CopyToBgTilemapBufferRect_ChangePalette(0, src, 0x18, 9 + (2 * cursorPosition), 1, 2, 0x11);
+#endif
     CopyBgTilemapBufferToVram(0);
 }
 
@@ -10107,7 +10146,11 @@ void BattleDestroyYesNoCursorAt(u8 cursorPosition)
     src[0] = 0x1016;
     src[1] = 0x1016;
 
+#if ENGLISH
     CopyToBgTilemapBufferRect_ChangePalette(0, src, 0x19, 9 + (2 * cursorPosition), 1, 2, 0x11);
+#elif FRENCH
+    CopyToBgTilemapBufferRect_ChangePalette(0, src, 0x18, 9 + (2 * cursorPosition), 1, 2, 0x11);
+#endif
     CopyBgTilemapBufferToVram(0);
 }
 
@@ -10116,7 +10159,11 @@ static void Cmd_trygivecaughtmonnick(void)
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
     case 0:
+    #if ENGLISH
         HandleBattleWindow(24, 8, 29, 13, 0);
+    #elif FRENCH
+        HandleBattleWindow(23, 8, 29, 13, 0);
+    #endif
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
         gBattleCommunication[MULTIUSE_STATE]++;
         gBattleCommunication[CURSOR_POSITION] = 0;
