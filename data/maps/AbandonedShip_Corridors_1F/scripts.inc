@@ -10,8 +10,10 @@ AbandonedShip_Corridors_1F_EventScript_Charlie::
 	msgbox AbandonedShip_Corridors_1F_Text_CharliePostBattle, MSGBOX_AUTOCLOSE
 	end
 
+.ifdef ENGLISH
+	.include "data/maps/AbandonedShip_Corridors_1F/text.inc"
+.else
 .ifdef FRENCH
 	.include "data/maps/AbandonedShip_Corridors_1F/text_fr.inc"
-.else
-	.include "data/maps/AbandonedShip_Corridors_1F/text.inc" @ENGLISH DEFAULT
+.endif
 .endif

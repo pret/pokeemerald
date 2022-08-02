@@ -131,8 +131,10 @@ AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen::
 	releaseall
 	end
 
+.ifdef ENGLISH
+	.include "data/maps/AbandonedShip_HiddenFloorCorridors/text.inc"
+.else
 .ifdef FRENCH
 	.include "data/maps/AbandonedShip_HiddenFloorCorridors/text_fr.inc"
-.else
-	.include "data/maps/AbandonedShip_HiddenFloorCorridors/text.inc" @ENGLISH DEFAULT
+.endif
 .endif

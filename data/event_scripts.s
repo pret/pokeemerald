@@ -830,10 +830,12 @@ Common_EventScript_PlayerHandedOverTheItem::
 	.include "data/text/pkmn_center_nurse.inc"
 	.include "data/text/mart_clerk.inc"
 	.include "data/text/obtain_item.inc"
+.ifdef ENGLISH
+	.include "data/text/general.inc"
+.else
 .ifdef FRENCH
 	.include "data/text/general_fr.inc"
-.else
-	.include "data/text/general.inc"
+.endif
 .endif
 	.include "data/text/pc_transfer.inc"
 	.include "data/text/questionnaire.inc"

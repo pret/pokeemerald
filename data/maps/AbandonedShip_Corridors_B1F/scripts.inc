@@ -53,8 +53,10 @@ AbandonedShip_Corridors_B1F_EventScript_Duncan::
 	msgbox AbandonedShip_Corridors_B1F_Text_DuncanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+.ifdef ENGLISH
+	.include "data/maps/AbandonedShip_Corridors_B1F/text.inc"
+.else
 .ifdef FRENCH
 	.include "data/maps/AbandonedShip_Corridors_B1F/text_fr.inc"
-.else
-	.include "data/maps/AbandonedShip_Corridors_B1F/text.inc" @ENGLISH DEFAULT
+.endif
 .endif

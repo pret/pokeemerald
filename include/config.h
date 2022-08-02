@@ -17,7 +17,7 @@
 
 // Using English as default.
 #if !defined(ENGLISH) && !defined(FRENCH)
-#define ENGLISH 1
+#define FRENCH 1
 #endif
 
 #if ENGLISH
