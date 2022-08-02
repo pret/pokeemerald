@@ -397,6 +397,12 @@ bool32 OpenPokenavMenuNotInitial(void)
         return FALSE;
 
     gfx->pokenavAlreadyOpen = TRUE;
+    #ifdef BUGFIX
+    // BUG: When returning from the condition graph to the menu, on some platforms the option glow may cut off
+    // midway through the screen. The condition graph changes REG_WIN0V, so we reset the window height when returning
+    // to fix this.
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, DISPLAY_HEIGHT));
+    #endif
     return TRUE;
 }
 
