@@ -26,7 +26,7 @@ u32 MapGridGetMetatileBehaviorAt(int, int);
 void MapGridSetMetatileIdAt(int, int, u16);
 void MapGridSetMetatileEntryAt(int, int, u16);
 void GetCameraCoords(u16 *, u16 *);
-bool8 MapGridIsImpassableAt(int, int);
+u8 MapGridGetCollisionAt(int, int);
 int GetMapBorderIdAt(int x, int y);
 bool32 CanCameraMoveInDirection(int direction);
 u16 GetMetatileAttributesById(u16 metatileId);
