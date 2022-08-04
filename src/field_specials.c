@@ -182,7 +182,7 @@ static void DetermineCyclingRoadResults(u32 numFrames, u8 numBikeCollisions)
     if (numFrames < 3600)
     {
         ConvertIntToDecimalStringN(gStringVar2, numFrames / 60, STR_CONV_MODE_RIGHT_ALIGN, 2);
-        gStringVar2[2] = CHAR_PERIOD;
+        gStringVar2[2] = CHAR_DEC_SEPARATOR;
         ConvertIntToDecimalStringN(&gStringVar2[3], ((numFrames % 60) * 100) / 60, STR_CONV_MODE_LEADING_ZEROS, 2);
         StringAppend(gStringVar2, gText_SpaceSeconds);
     }

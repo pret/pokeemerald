@@ -270,6 +270,7 @@ static void PrintMonHeight(u16 height, u8 left, u8 top);
 static void PrintMonWeight(u16 weight, u8 left, u8 top);
 static void ResetOtherVideoRegisters(u16);
 static u8 PrintCryScreenSpeciesName(u8, u16, u8, u8);
+static void PrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top);
 static void DrawFootprint(u8 windowId, u16 dexNum);
 static u16 CreateSizeScreenTrainerPic(u16, s16, s16, s8);
 static u16 GetNextPosition(u8, u16, u16, u16);
@@ -4531,13 +4532,14 @@ static void UnusedPrintMonName(u8 windowId, const u8 *name, u8 left, u8 top)
     PrintInfoSubMenuText(windowId, str, left, top);
 }
 
-static void UnusedPrintDecimalNum(u8 windowId, u16 b, u8 left, u8 top)
+// Unused in the English version, used to print height/weight in versions which use metric system.
+static void PrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top)
 {
     u8 str[6];
     bool8 outputted = FALSE;
     u8 result;
 
-    result = b / 1000;
+    result = num / 1000;
     if (result == 0)
     {
         str[0] = CHAR_SPACER;
@@ -4549,7 +4551,7 @@ static void UnusedPrintDecimalNum(u8 windowId, u16 b, u8 left, u8 top)
         outputted = TRUE;
     }
 
-    result = (b % 1000) / 100;
+    result = (num % 1000) / 100;
     if (result == 0 && !outputted)
     {
         str[1] = CHAR_SPACER;
@@ -4561,9 +4563,9 @@ static void UnusedPrintDecimalNum(u8 windowId, u16 b, u8 left, u8 top)
         outputted = TRUE;
     }
 
-    str[2] = CHAR_0 + ((b % 1000) % 100) / 10;
-    str[3] = CHAR_PERIOD;
-    str[4] = CHAR_0 + ((b % 1000) % 100) % 10;
+    str[2] = CHAR_0 + ((num % 1000) % 100) / 10;
+    str[3] = CHAR_DEC_SEPARATOR;
+    str[4] = CHAR_0 + ((num % 1000) % 100) % 10;
     str[5] = EOS;
     PrintInfoSubMenuText(windowId, str, left, top);
 }

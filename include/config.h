@@ -19,8 +19,10 @@
 
 #ifdef ENGLISH
 #define UNITS_IMPERIAL
+#define CHAR_DEC_SEPARATOR CHAR_PERIOD // Period is used as a decimal separator only in the UK and the US.
 #else
 #define UNITS_METRIC
+#define CHAR_DEC_SEPARATOR CHAR_COMMA
 #endif
 
 // Uncomment to fix some identified minor bugs
