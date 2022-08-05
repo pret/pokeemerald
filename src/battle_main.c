@@ -1068,7 +1068,7 @@ static void CB2_HandleStartBattle(void)
             // Recv Pokémon 5-6
             ResetBlockReceivedFlags();
             memcpy(&gEnemyParty[4], gBlockRecvBuffer[enemyMultiplayerId], sizeof(struct Pokemon) * 2);
-            
+
             TryCorrectShedinjaLanguage(&gEnemyParty[0]);
             TryCorrectShedinjaLanguage(&gEnemyParty[1]);
             TryCorrectShedinjaLanguage(&gEnemyParty[2]);
@@ -2489,7 +2489,7 @@ static void AskRecordBattle(void)
     case STATE_PRINT_YES_NO:
         if (!IsTextPrinterActive(B_WIN_MSG))
         {
-            HandleBattleWindow(0x18, 8, 0x1D, 0xD, 0);
+            HandleBattleWindow(YESNOBOX_X_Y, 0);
             BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
             gBattleCommunication[CURSOR_POSITION] = 1;
             BattleCreateYesNoCursorAt(1);
@@ -2525,7 +2525,7 @@ static void AskRecordBattle(void)
             if (gBattleCommunication[CURSOR_POSITION] == 0)
             {
                 // Selected Yes
-                HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
+                HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
                 gBattleCommunication[1] = MoveRecordedBattleToSaveData();
                 gBattleCommunication[MULTIUSE_STATE] = STATE_RECORD_YES;
             }
@@ -2544,7 +2544,7 @@ static void AskRecordBattle(void)
     case STATE_RECORD_NO:
         if (IsLinkTaskFinished() == TRUE)
         {
-            HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
+            HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
             if (gMain.anyLinkBattlerHasFrontierPass)
             {
                 // Other battlers may be recording, wait for them
@@ -2985,7 +2985,7 @@ static void SpriteCB_TrainerThrowObject_Main(struct Sprite *sprite)
         sprite->callback = SpriteCB_Idle;
 }
 
-// Sprite callback for a trainer back pic to throw an object 
+// Sprite callback for a trainer back pic to throw an object
 // (Wally throwing a ball, throwing Pokéblocks/balls in the Safari Zone)
 void SpriteCB_TrainerThrowObject(struct Sprite *sprite)
 {

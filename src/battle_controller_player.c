@@ -1435,7 +1435,7 @@ static void PlayerHandleYesNoInput(void)
     }
     if (JOY_NEW(A_BUTTON))
     {
-        HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
+        HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
         PlaySE(SE_SELECT);
 
         if (gMultiUsePlayerCursor != 0)
@@ -1447,7 +1447,7 @@ static void PlayerHandleYesNoInput(void)
     }
     if (JOY_NEW(B_BUTTON))
     {
-        HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
+        HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
         PlaySE(SE_SELECT);
         PlayerBufferExecCompleted();
     }
@@ -2592,7 +2592,7 @@ static void PlayerHandleYesNoBox(void)
 {
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
     {
-        HandleBattleWindow(0x18, 8, 0x1D, 0xD, 0);
+        HandleBattleWindow(YESNOBOX_X_Y, 0);
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
         gMultiUsePlayerCursor = 1;
         BattleCreateYesNoCursorAt(1);
