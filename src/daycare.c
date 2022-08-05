@@ -1195,8 +1195,8 @@ static void DaycareAddTextPrinter(u8 windowId, const u8 *text, u32 x, u32 y)
     gTextFlags.useAlternateDownArrow = 0;
     printer.letterSpacing = 0;
     printer.lineSpacing = 1;
-    printer.fgColor = 2;
-    printer.bgColor = 1;
+    printer.fgColor = TEXT_COLOR_DARK_GRAY;
+    printer.bgColor = TEXT_COLOR_WHITE;
     printer.shadowColor = 3;
 
     AddTextPrinter(&printer, TEXT_SKIP_DRAW, NULL);

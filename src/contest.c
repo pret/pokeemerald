@@ -5418,9 +5418,9 @@ static void Contest_PrintTextToBg0WindowStd(u32 windowId, const u8 *b)
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
     printerTemplate.unk = 0;
-    printerTemplate.fgColor = 15;
-    printerTemplate.bgColor = 0;
-    printerTemplate.shadowColor = 8;
+    printerTemplate.fgColor = TEXT_DYNAMIC_COLOR_6;
+    printerTemplate.bgColor = TEXT_COLOR_TRANSPARENT;
+    printerTemplate.shadowColor = TEXT_COLOR_BLUE;
 
     AddTextPrinter(&printerTemplate, 0, 0);
     PutWindowTilemap(windowId);
@@ -5441,9 +5441,9 @@ void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s3
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
     printerTemplate.unk = 0;
-    printerTemplate.fgColor = 15;
-    printerTemplate.bgColor = 0;
-    printerTemplate.shadowColor = 8;
+    printerTemplate.fgColor = TEXT_DYNAMIC_COLOR_6;
+    printerTemplate.bgColor = TEXT_COLOR_TRANSPARENT;
+    printerTemplate.shadowColor = TEXT_COLOR_BLUE;
 
     AddTextPrinter(&printerTemplate, 0, 0);
     PutWindowTilemap(windowId);
@@ -5465,9 +5465,9 @@ static void Contest_StartTextPrinter(const u8 *currChar, bool32 b)
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
     printerTemplate.unk = 0;
-    printerTemplate.fgColor = 1;
-    printerTemplate.bgColor = 0;
-    printerTemplate.shadowColor = 8;
+    printerTemplate.fgColor = TEXT_COLOR_WHITE;
+    printerTemplate.bgColor = TEXT_COLOR_TRANSPARENT;
+    printerTemplate.shadowColor = TEXT_COLOR_BLUE;
 
     if (!b)
     {

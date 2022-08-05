@@ -1947,9 +1947,9 @@ static void AddContestTextPrinter(int windowId, u8 *str, int x)
     textPrinter.letterSpacing = 0;
     textPrinter.lineSpacing = 0;
     textPrinter.unk = 0;
-    textPrinter.fgColor = 1;
-    textPrinter.bgColor = 0;
-    textPrinter.shadowColor = 8;
+    textPrinter.fgColor = TEXT_COLOR_WHITE;
+    textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
+    textPrinter.shadowColor = TEXT_COLOR_BLUE;
     AddTextPrinter(&textPrinter, 0, NULL);
     PutWindowTilemap(windowId);
 }
