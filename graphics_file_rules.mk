@@ -20,7 +20,7 @@ JPCONTESTGFXDIR := graphics/contest/japanese
 POKEDEXGFXDIR := graphics/pokedex
 STARTERGFXDIR := graphics/starter_choose
 
-# Graphics for specific languages
+# Graphics for specific languages. They need to be built regardless of compiled version due to limitations with preproc.
 include graphics_file_rules_en.mk
 include graphics_file_rules_fr.mk
 

@@ -535,7 +535,11 @@ const struct TrainerMoney gTrainerMoneyTable[] =
     {0xFF, 5}, // Any trainer class not listed above uses this
 };
 
+#if ENGLISH
 #include "data/text/abilities.h"
+#elif FRENCH
+#include "data/text/abilities_fr.h"
+#endif
 
 static void (* const sTurnActionsFuncsTable[])(void) =
 {
