@@ -46,7 +46,7 @@ static const u16 sDefaultBardSongLyrics[BARD_SONG_LENGTH] = {
     EC_WORD_DANCE
 };
 
-static const u8 * const sGiddyAdjectives[] = {
+static const u8 *const sGiddyAdjectives[] = {
     GiddyText_SoPretty,
     GiddyText_SoDarling,
     GiddyText_SoRelaxed,
@@ -60,7 +60,7 @@ static const u8 * const sGiddyAdjectives[] = {
 // Non-random lines Giddy can say. Not all are strictly
 // questions, but most are, and the player will receive
 // a Yes/No prompt afterwards regardless.
-static const u8 * const sGiddyQuestions[GIDDY_MAX_QUESTIONS] = {
+static const u8 *const sGiddyQuestions[GIDDY_MAX_QUESTIONS] = {
     GiddyText_ISoWantToGoOnAVacation,
     GiddyText_IBoughtCrayonsWith120Colors,
     GiddyText_WouldntItBeNiceIfWeCouldFloat,

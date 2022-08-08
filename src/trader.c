@@ -15,7 +15,7 @@
 #include "task.h"
 #include "script_menu.h"
 
-static const u8 * const sDefaultTraderNames[NUM_TRADER_ITEMS] =
+static const u8 *const sDefaultTraderNames[NUM_TRADER_ITEMS] =
 {
     gText_Tristan,
     gText_Philip,

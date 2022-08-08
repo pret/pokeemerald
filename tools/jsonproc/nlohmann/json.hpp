@@ -1438,7 +1438,7 @@ auto from_json_array_impl(const BasicJsonType& j, std::array<T, N>& arr,
                           priority_tag<2> /*unused*/)
 -> decltype(j.template get<T>(), void())
 {
-    for (std::size_t i = 0; i < N; ++i)
+    for (std::size_t i = 0; i < N; i++)
     {
         arr[i] = j.at(i).template get<T>();
     }
@@ -4301,7 +4301,7 @@ class binary_reader
 
         if (len != std::size_t(-1))
         {
-            for (std::size_t i = 0; i < len; ++i)
+            for (std::size_t i = 0; i < len; i++)
             {
                 if (JSON_UNLIKELY(not parse_cbor_internal()))
                 {
@@ -4338,7 +4338,7 @@ class binary_reader
         string_t key;
         if (len != std::size_t(-1))
         {
-            for (std::size_t i = 0; i < len; ++i)
+            for (std::size_t i = 0; i < len; i++)
             {
                 get();
                 if (JSON_UNLIKELY(not get_cbor_string(key) or not sax->key(key)))
@@ -4832,7 +4832,7 @@ class binary_reader
             return false;
         }
 
-        for (std::size_t i = 0; i < len; ++i)
+        for (std::size_t i = 0; i < len; i++)
         {
             if (JSON_UNLIKELY(not parse_msgpack_internal()))
             {
@@ -4855,7 +4855,7 @@ class binary_reader
         }
 
         string_t key;
-        for (std::size_t i = 0; i < len; ++i)
+        for (std::size_t i = 0; i < len; i++)
         {
             get();
             if (JSON_UNLIKELY(not get_msgpack_string(key) or not sax->key(key)))
@@ -5190,7 +5190,7 @@ class binary_reader
             {
                 if (size_and_type.second != 'N')
                 {
-                    for (std::size_t i = 0; i < size_and_type.first; ++i)
+                    for (std::size_t i = 0; i < size_and_type.first; i++)
                     {
                         if (JSON_UNLIKELY(not get_ubjson_value(size_and_type.second)))
                         {
@@ -5201,7 +5201,7 @@ class binary_reader
             }
             else
             {
-                for (std::size_t i = 0; i < size_and_type.first; ++i)
+                for (std::size_t i = 0; i < size_and_type.first; i++)
                 {
                     if (JSON_UNLIKELY(not parse_ubjson_internal()))
                     {
@@ -5251,7 +5251,7 @@ class binary_reader
 
             if (size_and_type.second != 0)
             {
-                for (std::size_t i = 0; i < size_and_type.first; ++i)
+                for (std::size_t i = 0; i < size_and_type.first; i++)
                 {
                     if (JSON_UNLIKELY(not get_ubjson_string(key) or not sax->key(key)))
                     {
@@ -5266,7 +5266,7 @@ class binary_reader
             }
             else
             {
-                for (std::size_t i = 0; i < size_and_type.first; ++i)
+                for (std::size_t i = 0; i < size_and_type.first; i++)
                 {
                     if (JSON_UNLIKELY(not get_ubjson_string(key) or not sax->key(key)))
                     {
@@ -5356,7 +5356,7 @@ class binary_reader
     {
         // step 1: read input into array with system's byte order
         std::array<std::uint8_t, sizeof(NumberType)> vec;
-        for (std::size_t i = 0; i < sizeof(NumberType); ++i)
+        for (std::size_t i = 0; i < sizeof(NumberType); i++)
         {
             get();
             if (JSON_UNLIKELY(not unexpect_eof(format, "number")))
@@ -6705,7 +6705,7 @@ scan_number_done:
                             token_type return_type)
     {
         assert(current == literal_text[0]);
-        for (std::size_t i = 1; i < length; ++i)
+        for (std::size_t i = 1; i < length; i++)
         {
             if (JSON_UNLIKELY(get() != literal_text[i]))
             {
@@ -9235,7 +9235,7 @@ class json_pointer
                 else
                 {
                     // iterate array and use index as reference string
-                    for (std::size_t i = 0; i < value.m_value.array->size(); ++i)
+                    for (std::size_t i = 0; i < value.m_value.array->size(); i++)
                     {
                         flatten(reference_string + "/" + std::to_string(i),
                                 value.m_value.array->operator[](i), result);
@@ -12183,7 +12183,7 @@ class serializer
 
                     // first n-1 elements
                     for (auto i = val.m_value.array->cbegin();
-                            i != val.m_value.array->cend() - 1; ++i)
+                            i != val.m_value.array->cend() - 1; i++)
                     {
                         o->write_characters(indent_string.c_str(), new_indent);
                         dump(*i, true, ensure_ascii, indent_step, new_indent);
@@ -12205,7 +12205,7 @@ class serializer
 
                     // first n-1 elements
                     for (auto i = val.m_value.array->cbegin();
-                            i != val.m_value.array->cend() - 1; ++i)
+                            i != val.m_value.array->cend() - 1; i++)
                     {
                         dump(*i, false, ensure_ascii, indent_step, current_indent);
                         o->write_character(',');
@@ -12302,7 +12302,7 @@ class serializer
         std::size_t bytes_after_last_accept = 0;
         std::size_t undumped_chars = 0;
 
-        for (std::size_t i = 0; i < s.size(); ++i)
+        for (std::size_t i = 0; i < s.size(); i++)
         {
             const auto byte = static_cast<uint8_t>(s[i]);
 

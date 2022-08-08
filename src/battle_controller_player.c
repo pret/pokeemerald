@@ -364,7 +364,7 @@ static void HandleInputChooseTarget(void)
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCb_HideAsMoveTarget;
+        gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCB_HideAsMoveTarget;
         BtlController_EmitTwoReturnValues(BUFFER_B, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
         EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
         PlayerBufferExecCompleted();
@@ -372,7 +372,7 @@ static void HandleInputChooseTarget(void)
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
     {
         PlaySE(SE_SELECT);
-        gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCb_HideAsMoveTarget;
+        gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCB_HideAsMoveTarget;
         gBattlerControllerFuncs[gActiveBattler] = HandleInputChooseMove;
         DoBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX, 7, 1);
         DoBounceEffect(gActiveBattler, BOUNCE_MON, 7, 1);
@@ -381,7 +381,7 @@ static void HandleInputChooseTarget(void)
     else if (JOY_NEW(DPAD_LEFT | DPAD_UP))
     {
         PlaySE(SE_SELECT);
-        gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCb_HideAsMoveTarget;
+        gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCB_HideAsMoveTarget;
 
         do
         {
@@ -422,12 +422,12 @@ static void HandleInputChooseTarget(void)
             if (gAbsentBattlerFlags & gBitTable[gMultiUsePlayerCursor])
                 i = 0;
         } while (i == 0);
-        gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCb_ShowAsMoveTarget;
+        gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCB_ShowAsMoveTarget;
     }
     else if (JOY_NEW(DPAD_RIGHT | DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
-        gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCb_HideAsMoveTarget;
+        gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCB_HideAsMoveTarget;
 
         do
         {
@@ -464,7 +464,7 @@ static void HandleInputChooseTarget(void)
             if (gAbsentBattlerFlags & gBitTable[gMultiUsePlayerCursor])
                 i = 0;
         } while (i == 0);
-        gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCb_ShowAsMoveTarget;
+        gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCB_ShowAsMoveTarget;
     }
 }
 
@@ -537,7 +537,7 @@ static void HandleInputChooseMove(void)
             else
                 gMultiUsePlayerCursor = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
 
-            gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCb_ShowAsMoveTarget;
+            gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCB_ShowAsMoveTarget;
         }
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)

@@ -226,7 +226,7 @@ bool8 SetUpFieldMove_Cut(void)
                 y = gPlayerFacingPosition.y + sHyperCutStruct[i].y;
                 tileCuttable = TRUE;
 
-                for (j = 0; j < 2; ++j)
+                for (j = 0; j < 2; j++)
                 {
                     if (sHyperCutStruct[i].unk2[j] == 0) break; // one line required to match -g
                     if (cutTiles[(u8)(sHyperCutStruct[i].unk2[j] - 1)] == FALSE)

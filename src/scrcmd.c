@@ -84,7 +84,7 @@ static const u8 sScriptConditionTable[6][3] =
     1, 0, 1, // !=
 };
 
-static u8 * const sScriptStringVars[] =
+static u8 *const sScriptStringVars[] =
 {
     gStringVar1,
     gStringVar2,
