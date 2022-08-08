@@ -13,6 +13,7 @@
 #include "constants/berry.h"
 #include "constants/maps.h"
 #include "constants/pokemon.h"
+#include "constants/pokemon_data.h"
 #include "constants/easy_chat.h"
 #include "constants/trainer_hill.h"
 
