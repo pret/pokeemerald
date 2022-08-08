@@ -20,6 +20,10 @@ JPCONTESTGFXDIR := graphics/contest/japanese
 POKEDEXGFXDIR := graphics/pokedex
 STARTERGFXDIR := graphics/starter_choose
 
+# Graphics for specific languages
+include graphics_file_rules_en.mk
+include graphics_file_rules_fr.mk
+
 ### Castform ###
 
 $(CASTFORMGFXDIR)/front.4bpp: $(CASTFORMGFXDIR)/front_normal_form.4bpp \

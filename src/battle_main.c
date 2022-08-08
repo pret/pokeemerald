@@ -2510,11 +2510,7 @@ static void AskRecordBattle(void)
     case STATE_PRINT_YES_NO:
         if (!IsTextPrinterActive(B_WIN_MSG))
         {
-        #if ENGLISH
-            HandleBattleWindow(24, 8, 0x1D, 0xD, 0);
-        #elif FRENCH
-            HandleBattleWindow(23, 8, 0x1D, 0xD, 0);
-        #endif
+            HandleBattleWindow(YESNOBOX_X_Y, 0);
             BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
             gBattleCommunication[CURSOR_POSITION] = 1;
             BattleCreateYesNoCursorAt(1);
@@ -2549,12 +2545,8 @@ static void AskRecordBattle(void)
             PlaySE(SE_SELECT);
             if (gBattleCommunication[CURSOR_POSITION] == 0)
             {
-            // Selected Yes
-            #if ENGLISH
-                HandleBattleWindow(24, 8, 0x1D, 0xD, WINDOW_CLEAR);
-            #elif FRENCH
-                HandleBattleWindow(23, 8, 0x1D, 0xD, WINDOW_CLEAR);
-            #endif
+                // Selected Yes
+                HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
                 gBattleCommunication[1] = MoveRecordedBattleToSaveData();
                 gBattleCommunication[MULTIUSE_STATE] = STATE_RECORD_YES;
             }
@@ -2573,11 +2565,7 @@ static void AskRecordBattle(void)
     case STATE_RECORD_NO:
         if (IsLinkTaskFinished() == TRUE)
         {
-        #if ENGLISH
-            HandleBattleWindow(24, 8, 0x1D, 0xD, WINDOW_CLEAR);
-        #elif FRENCH
-            HandleBattleWindow(23, 8, 0x1D, 0xD, WINDOW_CLEAR);
-        #endif
+            HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
             if (gMain.anyLinkBattlerHasFrontierPass)
             {
                 // Other battlers may be recording, wait for them

@@ -270,15 +270,6 @@ ifneq ($(MODERN),0)
 $(C_BUILDDIR)/berry_crush.o: override CFLAGS += -Wno-address-of-packed-member
 endif
 
-# Graphics for specific languages
-ifeq ($(GAME_LANGUAGE), ENGLISH)
-  include graphics_file_rules_en.mk
-else
-ifeq ($(GAME_LANGUAGE), FRENCH)
-  include graphics_file_rules_fr.mk
-endif
-endif
-
 include graphics_file_rules.mk
 include map_data_rules.mk
 include spritesheet_rules.mk

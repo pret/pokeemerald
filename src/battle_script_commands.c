@@ -693,7 +693,7 @@ static const struct OamData sOamData_MonIconOnLvlUpBanner =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -5369,11 +5369,7 @@ static void Cmd_yesnoboxlearnmove(void)
     switch (gBattleScripting.learnMoveState)
     {
     case 0:
-    #if ENGLISH
-        HandleBattleWindow(24, 8, 29, 13, 0);
-    #elif FRENCH
-        HandleBattleWindow(23, 8, 29, 13, 0);
-    #endif
+        HandleBattleWindow(YESNOBOX_X_Y, 0);
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
         gBattleScripting.learnMoveState++;
         gBattleCommunication[CURSOR_POSITION] = 0;
@@ -5399,11 +5395,7 @@ static void Cmd_yesnoboxlearnmove(void)
             PlaySE(SE_SELECT);
             if (gBattleCommunication[1] == 0)
             {
-            #if ENGLISH
-                HandleBattleWindow(24, 8, 29, 13, WINDOW_CLEAR);
-            #elif FRENCH
-                HandleBattleWindow(23, 8, 29, 13, WINDOW_CLEAR);
-            #endif
+                HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
                 BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                 gBattleScripting.learnMoveState++;
             }
@@ -5474,11 +5466,7 @@ static void Cmd_yesnoboxlearnmove(void)
         }
         break;
     case 5:
-    #if ENGLISH
-        HandleBattleWindow(24, 8, 29, 13, WINDOW_CLEAR);
-    #elif FRENCH
-        HandleBattleWindow(23, 8, 29, 13, WINDOW_CLEAR);
-    #endif
+        HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
         gBattlescriptCurrInstr += 5;
         break;
     case 6:
@@ -5495,11 +5483,7 @@ static void Cmd_yesnoboxstoplearningmove(void)
     switch (gBattleScripting.learnMoveState)
     {
     case 0:
-    #if ENGLISH
-        HandleBattleWindow(24, 8, 29, 13, 0);
-    #elif FRENCH
-        HandleBattleWindow(23, 8, 29, 13, 0);
-    #endif
+        HandleBattleWindow(YESNOBOX_X_Y, 0);
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
         gBattleScripting.learnMoveState++;
         gBattleCommunication[CURSOR_POSITION] = 0;
@@ -5529,21 +5513,13 @@ static void Cmd_yesnoboxstoplearningmove(void)
             else
                 gBattlescriptCurrInstr += 5;
 
-        #if ENGLISH
-            HandleBattleWindow(24, 8, 29, 13, WINDOW_CLEAR);
-        #elif FRENCH
-            HandleBattleWindow(23, 8, 29, 13, WINDOW_CLEAR);
-        #endif
+            HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
         }
         else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-        #if ENGLISH
-            HandleBattleWindow(24, 8, 29, 13, WINDOW_CLEAR);
-        #elif FRENCH
-            HandleBattleWindow(23, 8, 29, 13, WINDOW_CLEAR);
-        #endif
+            HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
         }
         break;
     }
@@ -5803,11 +5779,7 @@ static void Cmd_yesnobox(void)
     switch (gBattleCommunication[0])
     {
     case 0:
-    #if ENGLISH
-        HandleBattleWindow(24, 8, 29, 13, 0);
-    #elif FRENCH
-        HandleBattleWindow(23, 8, 29, 13, 0);
-    #endif
+        HandleBattleWindow(YESNOBOX_X_Y, 0);
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
         gBattleCommunication[0]++;
         gBattleCommunication[CURSOR_POSITION] = 0;
@@ -5832,21 +5804,13 @@ static void Cmd_yesnobox(void)
         {
             gBattleCommunication[CURSOR_POSITION] = 1;
             PlaySE(SE_SELECT);
-        #if ENGLISH
-            HandleBattleWindow(24, 8, 29, 13, WINDOW_CLEAR);
-        #elif FRENCH
-            HandleBattleWindow(23, 8, 29, 13, WINDOW_CLEAR);
-        #endif
+            HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
             gBattlescriptCurrInstr++;
         }
         else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
-        #if ENGLISH
-            HandleBattleWindow(24, 8, 29, 13, WINDOW_CLEAR);
-        #elif FRENCH
-            HandleBattleWindow(23, 8, 29, 13, WINDOW_CLEAR);
-        #endif
+            HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
             gBattlescriptCurrInstr++;
         }
         break;
@@ -10159,11 +10123,7 @@ static void Cmd_trygivecaughtmonnick(void)
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
     case 0:
-    #if ENGLISH
-        HandleBattleWindow(24, 8, 29, 13, 0);
-    #elif FRENCH
-        HandleBattleWindow(23, 8, 29, 13, 0);
-    #endif
+        HandleBattleWindow(YESNOBOX_X_Y, 0);
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
         gBattleCommunication[MULTIUSE_STATE]++;
         gBattleCommunication[CURSOR_POSITION] = 0;
