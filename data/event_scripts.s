@@ -825,21 +825,30 @@ Common_EventScript_PlayerHandedOverTheItem::
 	.include "data/scripts/elite_four.inc"
 	.include "data/scripts/movement.inc"
 	.include "data/scripts/check_furniture.inc"
+
+.ifdef ENGLISH
 	.include "data/text/record_mix.inc"
 	.include "data/text/pc.inc"
 	.include "data/text/pkmn_center_nurse.inc"
 	.include "data/text/mart_clerk.inc"
 	.include "data/text/obtain_item.inc"
-.ifdef ENGLISH
 	.include "data/text/general.inc"
-.else
-.ifdef FRENCH
-	.include "data/text/general_fr.inc"
-.endif
-.endif
 	.include "data/text/pc_transfer.inc"
 	.include "data/text/questionnaire.inc"
 	.include "data/text/abnormal_weather.inc"
+.else
+.ifdef FRENCH
+	.include "data/text/fr/record_mix.inc"
+	.include "data/text/fr/pc.inc"
+	.include "data/text/fr/pkmn_center_nurse.inc"
+	.include "data/text/fr/mart_clerk.inc"
+	.include "data/text/fr/obtain_item.inc"
+	.include "data/text/fr/general.inc"
+	.include "data/text/fr/pc_transfer.inc"
+	.include "data/text/fr/questionnaire.inc"
+	.include "data/text/fr/abnormal_weather.inc"
+.endif
+.endif
 
 EventScript_SelectWithoutRegisteredItem::
 	msgbox gText_SelectWithoutRegisteredItem, MSGBOX_SIGN
@@ -918,6 +927,7 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/scripts/repel.inc"
 	.include "data/scripts/safari_zone.inc"
 	.include "data/scripts/roulette.inc"
+.ifdef ENGLISH
 	.include "data/text/pokedex_rating.inc"
 	.include "data/text/lottery_corner.inc"
 	.include "data/text/event_ticket_1.inc"
@@ -925,6 +935,17 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/text/berries.inc"
 	.include "data/text/shoal_cave.inc"
 	.include "data/text/check_furniture.inc"
+.else
+.ifdef FRENCH
+	.include "data/text/fr/pokedex_rating.inc"
+	.include "data/text/fr/lottery_corner.inc"
+	.include "data/text/fr/event_ticket_1.inc"
+	.include "data/text/fr/braille.inc"
+	.include "data/text/fr/berries.inc"
+	.include "data/text/fr/shoal_cave.inc"
+	.include "data/text/fr/check_furniture.inc"
+.endif
+.endif
 	.include "data/scripts/cave_hole.inc"
 	.include "data/scripts/lilycove_lady.inc"
 	.include "data/text/match_call.inc"
