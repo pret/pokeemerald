@@ -20,6 +20,7 @@ MISCGFXDIR := graphics/misc
 JPCONTESTGFXDIR := graphics/contest/japanese
 POKEDEXGFXDIR := graphics/pokedex
 STARTERGFXDIR := graphics/starter_choose
+NAMINGGFXDIR := graphics/naming_screen
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -710,3 +711,12 @@ $(POKEDEXGFXDIR)/region_map_affine.8bpp: %.8bpp: %.png
 
 $(STARTERGFXDIR)/birch_help.4bpp: $(STARTERGFXDIR)/birch_bag.4bpp $(STARTERGFXDIR)/birch_grass.4bpp
 	@cat $^ >$@
+
+$(NAMINGGFXDIR)/cursor.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 5
+
+$(NAMINGGFXDIR)/cursor_squished.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 5
+
+$(NAMINGGFXDIR)/cursor_filled.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 5
