@@ -3,6 +3,7 @@
 
 #define NULL_BARD_SOUND { 0xff }
 
+#if ENGLISH
 #include "pokemon.h"
 #include "moves.h"
 #include "trainer.h"
@@ -23,6 +24,28 @@
 #include "adjectives.h"
 #include "events.h"
 #include "trendysaying.h"
+#elif FRENCH
+#include "fr/pokemon.h"
+#include "fr/moves.h"
+#include "fr/trainer.h"
+#include "fr/status.h"
+#include "fr/battle.h"
+#include "fr/greetings.h"
+#include "fr/people.h"
+#include "fr/voices.h"
+#include "fr/speech.h"
+#include "fr/endings.h"
+#include "fr/feelings.h"
+#include "fr/conditions.h"
+#include "fr/actions.h"
+#include "fr/lifestyle.h"
+#include "fr/hobbies.h"
+#include "fr/time.h"
+#include "fr/misc.h"
+#include "fr/adjectives.h"
+#include "fr/events.h"
+#include "fr/trendysaying.h"
+#endif
 
 const struct BardSound (*const gBardSoundsTable[EC_NUM_GROUPS])[6] = {
     [EC_GROUP_POKEMON]          = NULL, // Handled by gBardSounds_Pokemon
