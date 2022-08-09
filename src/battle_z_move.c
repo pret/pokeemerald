@@ -501,7 +501,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove)
                 break;
             }
             
-            BattlePutTextOnWindow(gDisplayedStringBattle, 5); // Slot of Move 3
+            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_3);
             gDisplayedStringBattle[0] = CHAR_Z;
             gDisplayedStringBattle[1] = CHAR_HYPHEN;
             StringCopy(gDisplayedStringBattle + 2, gMoveNames[move]);
@@ -510,7 +510,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove)
         {
             // Damaging move -> status z move
             StringCopy(gDisplayedStringBattle, sText_StatsPlus2);
-            BattlePutTextOnWindow(gDisplayedStringBattle, 5); // Slot of Move 3
+            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_3);
             StringCopy(gDisplayedStringBattle, GetZMoveName(zmove));
         }
         else
@@ -518,7 +518,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove)
             ZMoveSelectionDisplayPower(move, zmove);
             StringCopy(gDisplayedStringBattle, GetZMoveName(zmove));
         }
-        BattlePutTextOnWindow(gDisplayedStringBattle, 3);   // First move slot
+        BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_1);
 
         ZMoveSelectionDisplayPpNumber();
         MoveSelectionCreateCursorAt(0, 0);
@@ -540,7 +540,7 @@ static void ZMoveSelectionDisplayPower(u16 move, u16 zMove)
     {
         txtPtr = StringCopy(gDisplayedStringBattle, sText_PowerColon);
         ConvertIntToDecimalStringN(txtPtr, power, STR_CONV_MODE_LEFT_ALIGN, 3);
-        BattlePutTextOnWindow(gDisplayedStringBattle, 5); // Bottom left
+        BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_3);
     }
 }
 
@@ -557,7 +557,7 @@ static void ZMoveSelectionDisplayPpNumber(void)
     txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, 1, STR_CONV_MODE_RIGHT_ALIGN, 2);
     *(txtPtr)++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(txtPtr, 1, STR_CONV_MODE_RIGHT_ALIGN, 2);
-    BattlePutTextOnWindow(gDisplayedStringBattle, 9);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
 }
 
 const u8* GetZMoveName(u16 move)
