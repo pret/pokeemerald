@@ -1343,7 +1343,11 @@ const u8 gBerryBlenderScoreSymbols_Gfx[] = INCBIN_U8("graphics/berry_blender/sco
 const u8 gBerryBlenderParticles_Gfx[] = INCBIN_U8("graphics/berry_blender/particles.4bpp");
 static const u8 sEmpty0[0x120] = {0};
 const u8 gBerryBlenderCountdownNumbers_Gfx[] = INCBIN_U8("graphics/berry_blender/countdown_numbers.4bpp");
+#if ENGLISH
 const u8 gBerryBlenderStart_Gfx[] = INCBIN_U8("graphics/berry_blender/start.4bpp");
+#elif FRENCH
+const u8 gBerryBlenderStart_Gfx[] = INCBIN_U8("graphics/berry_blender/fr/start.4bpp");
+#endif
 static const u8 sEmpty1[0x200] = {0};
 const u8 gBerryBlenderPlayerArrow_Gfx[] = INCBIN_U8("graphics/berry_blender/arrow.4bpp");
 static const u8 sEmpty2[0x2C0] = {0};
@@ -1531,8 +1535,8 @@ const u32 gBerryCrush_TextWindows_Tilemap[] = INCBIN_U32("graphics/berry_crush/t
 // Moved from other files in the french version.
 
 // credits
-const u32 gCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/the_end_copyright_fr.4bpp.lz");
-const u32 gCreditsCopyrightEnd_Tilemap[] = INCBIN_U32("graphics/credits/the_end_copyright_fr.bin.lz");
+const u32 gCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/fr/the_end_copyright.4bpp.lz");
+const u32 gCreditsCopyrightEnd_Tilemap[] = INCBIN_U32("graphics/credits/fr/the_end_copyright.bin.lz");
 
 const u16 g321Start_Pal[] = INCBIN_U16("graphics/link/321start.gbapal");
 const u32 g321Start_Gfx[] = INCBIN_U32("graphics/link/321start.4bpp.lz");

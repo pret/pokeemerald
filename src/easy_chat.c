@@ -1218,7 +1218,7 @@ static const u8 *const sFooterTextOptions[NUM_FOOTER_TYPES][4] = {
 #if ENGLISH
 #include "data/easy_chat/easy_chat_words_by_letter.h"
 #elif FRENCH
-#include "data/easy_chat/easy_chat_words_by_letter_fr.h"
+#include "data/easy_chat/fr/easy_chat_words_by_letter.h"
 #endif
 
 static const u8 *const sEasyChatGroupNamePointers[EC_NUM_GROUPS] = {

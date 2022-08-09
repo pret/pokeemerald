@@ -243,9 +243,12 @@ u8 gInGameOpponentsNo;
 
 #if ENGLISH
 static const u16 sBlenderCenter_Pal[] = INCBIN_U16("graphics/berry_blender/center.gbapal");
-#endif
 static const u8 sBlenderCenter_Tilemap[] = INCBIN_U8("graphics/berry_blender/center_map.bin");
 static const u16 sBlenderOuter_Pal[] = INCBIN_U16("graphics/berry_blender/outer.gbapal");
+#elif FRENCH
+static const u8 sBlenderCenter_Tilemap[] = INCBIN_U8("graphics/berry_blender/center_map.bin");
+static const u16 sBlenderOuter_Pal[] = INCBIN_U16("graphics/berry_blender/fr/outer.gbapal");
+#endif
 
 static const u16 sUnused_Pal[] = INCBIN_U16("graphics/berry_blender/unused.gbapal");
 static const u16 sEmpty_Pal[16 * 14] = {0};
