@@ -1431,13 +1431,22 @@ const u32 gNamingScreenKeyboardSymbols_Tilemap[] = INCBIN_U32("graphics/naming_s
 
 // union room chat
 const u16 gUnionRoomChat_Background_Pal[] = INCBIN_U16("graphics/union_room_chat/background.gbapal");
+#if ENGLISH
 const u32 gUnionRoomChat_Background_Gfx[] = INCBIN_U32("graphics/union_room_chat/background.4bpp.lz");
 const u32 gUnionRoomChat_Background_Tilemap[] = INCBIN_U32("graphics/union_room_chat/background.bin.lz");
+#elif FRENCH
+const u32 gUnionRoomChat_Background_Gfx[] = INCBIN_U32("graphics/union_room_chat/fr/background.4bpp.lz");
+const u32 gUnionRoomChat_Background_Tilemap[] = INCBIN_U32("graphics/union_room_chat/fr/background.bin.lz");
+#endif
 const u16 gUnionRoomChat_Window_Pal1[] = INCBIN_U16("graphics/union_room_chat/window_1.gbapal");
 const u16 gUnionRoomChat_Window_Pal2[] = INCBIN_U16("graphics/union_room_chat/window_2.gbapal");
 const u32 gUnionRoomChat_Border_Gfx[] = INCBIN_U32("graphics/union_room_chat/border.4bpp.lz");
 const u32 gUnionRoomChat_Border_Tilemap[] = INCBIN_U32("graphics/union_room_chat/border.bin.lz");
+#if ENGLISH
 const u32 gUnionRoomChat_RButtonLabels[] = INCBIN_U32("graphics/union_room_chat/r_button_labels.4bpp.lz");
+#elif FRENCH
+const u32 gUnionRoomChat_RButtonLabels[] = INCBIN_U32("graphics/union_room_chat/fr/r_button_labels.4bpp.lz");
+#endif
 
 const u16 gTilesetPalettes_General[][16] =
 {
