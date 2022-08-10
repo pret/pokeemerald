@@ -1,8 +1,16 @@
+#if ENGLISH
 const u16 gSlotMachineMenu_Pal[] = INCBIN_U16("graphics/slot_machine/menu.gbapal");
 const u32 gSlotMachineMenu_Gfx[] = INCBIN_U32("graphics/slot_machine/menu.4bpp.lz");
 const u16 gSlotMachineMenu_Tilemap[] = INCBIN_U16("graphics/slot_machine/menu.bin");
 
 const u16 gSlotMachineInfoBox_Tilemap[] = INCBIN_U16("graphics/slot_machine/info_box.bin");
+#elif FRENCH
+const u16 gSlotMachineMenu_Pal[] = INCBIN_U16("graphics/slot_machine/fr/menu.gbapal");
+const u32 gSlotMachineMenu_Gfx[] = INCBIN_U32("graphics/slot_machine/menu.4bpp.lz");
+const u16 gSlotMachineMenu_Tilemap[] = INCBIN_U16("graphics/slot_machine/menu.bin");
+
+const u16 gSlotMachineInfoBox_Tilemap[] = INCBIN_U16("graphics/slot_machine/fr/info_box.bin");
+#endif
 
 const u16 gSlotMachineReelSymbols_Pal[] = INCBIN_U16("graphics/slot_machine/reel_symbols/1.gbapal");
 const u16 gSlotMachineReelTimePikachu_Pal[] = INCBIN_U16("graphics/slot_machine/reel_time_pikachu.gbapal");
@@ -17,10 +25,17 @@ const u8 gSlotMachineReelSymbol2Tiles[] = INCBIN_U8("graphics/slot_machine/reel_
 const u8 gSlotMachineReelSymbol3Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/3.4bpp");
 const u8 gSlotMachineReelSymbol4Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/4.4bpp");
 const u8 gSlotMachineReelSymbol5Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/5.4bpp");
+#if ENGLISH
 const u8 gSlotMachineReelSymbol6Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/6.4bpp");
 const u8 gSlotMachineReelSymbol7Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/7.4bpp");
 
 const u32 gSlotMachineDigitalDisplay_Gfx[] = INCBIN_U32("graphics/slot_machine/digital_display.4bpp.lz");
+#elif FRENCH
+const u8 gSlotMachineReelSymbol6Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/6_fr.4bpp");
+const u8 gSlotMachineReelSymbol7Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/7.4bpp");
+
+const u32 gSlotMachineDigitalDisplay_Gfx[] = INCBIN_U32("graphics/slot_machine/fr/digital_display.4bpp.lz");
+#endif
 
 const u8 gSlotMachineNumber0Tiles[] = INCBIN_U8("graphics/slot_machine/numbers/0.4bpp");
 const u8 gSlotMachineNumber1Tiles[] = INCBIN_U8("graphics/slot_machine/numbers/1.4bpp");
