@@ -473,12 +473,12 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         }
         else if (gBattleTextBuff1[0] < gBattleTextBuff2[0])
         {
-            result = AREAN_RESULT_PLAYER_LOST;
+            result = ARENA_RESULT_PLAYER_LOST;
             gBattleScripting.battler = 1;
         }
         else
         {
-            result = AREAN_RESULT_TIE;
+            result = ARENA_RESULT_TIE;
         }
         (*state)++;
         break;
