@@ -4709,7 +4709,6 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
 }
 
 // EXP candies store an index for this table in their holdEffectParam.
-#define NUM_EXP_CANDY_SIZES     5
 static const u32 sExpCandyExperienceTable[] = {100, 800, 3000, 10000, 30000};
 
 // Returns TRUE if the item has no effect on the Pokémon, FALSE otherwise
@@ -4885,15 +4884,15 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                 if (param == 0xFF) // Rare Candy
                 {
                     dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL) + 1];
-                    SetMonData(mon, MON_DATA_EXP, &dataUnsigned);
-                    CalculateMonStats(mon);
                 }
-                else if (param < NUM_EXP_CANDY_SIZES) // EXP Candies
+                else if (param < ARRAY_COUNT(sExpCandyExperienceTable)) // EXP Candies
                 {
                     dataUnsigned = sExpCandyExperienceTable[param] + GetMonData(mon, MON_DATA_EXP, NULL);
                     if (dataUnsigned > gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][MAX_LEVEL])
                         dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][MAX_LEVEL];
                 }
+                SetMonData(mon, MON_DATA_EXP, &dataUnsigned);
+                CalculateMonStats(mon);
                 retVal = FALSE;
             }
 
