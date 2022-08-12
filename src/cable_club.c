@@ -35,6 +35,12 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
+#if ENGLISH
+#define WAIT_FOR_LINK_TIMEOUT 300
+#elif FRENCH || ITALIAN
+#define WAIT_FOR_LINK_TIMEOUT 480
+#endif
+
 static const struct WindowTemplate sWindowTemplate_LinkPlayerCount = {
     .bg = 0,
     .tilemapLeft = 16,
@@ -1225,11 +1231,7 @@ void Task_WaitForLinkPlayerConnection(u8 taskId)
     struct Task *task = &gTasks[taskId];
 
     task->tTimer++;
-#if ENGLISH
-    if (task->tTimer > 300)
-#elif FRENCH
-    if (task->tTimer > 480)
-#endif
+    if (task->tTimer > WAIT_FOR_LINK_TIMEOUT)
     {
         CloseLink();
         SetMainCallback2(CB2_LinkError);

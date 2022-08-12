@@ -61,6 +61,13 @@ extern const u8 *const gBattleScriptsForMoveEffects[];
 
 #define TAG_LVLUP_BANNER_MON_ICON 55130
 
+// Arguments for 'destX' in CopyToBgTilemapBufferRect_ChangePalette
+#if ENGLISH
+#define YESNOBOX_CURSOR_RECT_X 0x19
+#elif FRENCH || ITALIAN
+#define YESNOBOX_CURSOR_RECT_X 0x18
+#endif
+
 static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
 static u8 AttacksThisTurn(u8 battlerId, u16 move); // Note: returns 1 if it's a charging turn, otherwise 2.
@@ -10096,11 +10103,8 @@ void BattleCreateYesNoCursorAt(u8 cursorPosition)
     u16 src[2];
     src[0] = 1;
     src[1] = 2;
-#if ENGLISH
-    CopyToBgTilemapBufferRect_ChangePalette(0, src, 0x19, 9 + (2 * cursorPosition), 1, 2, 0x11);
-#elif FRENCH
-    CopyToBgTilemapBufferRect_ChangePalette(0, src, 0x18, 9 + (2 * cursorPosition), 1, 2, 0x11);
-#endif
+
+    CopyToBgTilemapBufferRect_ChangePalette(0, src, YESNOBOX_CURSOR_RECT_X, 9 + (2 * cursorPosition), 1, 2, 0x11);
     CopyBgTilemapBufferToVram(0);
 }
 
@@ -10110,11 +10114,7 @@ void BattleDestroyYesNoCursorAt(u8 cursorPosition)
     src[0] = 0x1016;
     src[1] = 0x1016;
 
-#if ENGLISH
-    CopyToBgTilemapBufferRect_ChangePalette(0, src, 0x19, 9 + (2 * cursorPosition), 1, 2, 0x11);
-#elif FRENCH
-    CopyToBgTilemapBufferRect_ChangePalette(0, src, 0x18, 9 + (2 * cursorPosition), 1, 2, 0x11);
-#endif
+    CopyToBgTilemapBufferRect_ChangePalette(0, src, YESNOBOX_CURSOR_RECT_X, 9 + (2 * cursorPosition), 1, 2, 0x11);
     CopyBgTilemapBufferToVram(0);
 }
 

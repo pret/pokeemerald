@@ -1587,8 +1587,13 @@ const u32 gBerryCrush_TextWindows_Tilemap[] = INCBIN_U32("graphics/berry_crush/t
 // Moved from other files in the french version.
 
 // credits
+#if FRENCH
 const u32 gCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/fr/the_end_copyright.4bpp.lz");
 const u32 gCreditsCopyrightEnd_Tilemap[] = INCBIN_U32("graphics/credits/fr/the_end_copyright.bin.lz");
+#elif ITALIAN
+const u32 gCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/it/the_end_copyright.4bpp.lz");
+const u32 gCreditsCopyrightEnd_Tilemap[] = INCBIN_U32("graphics/credits/it/the_end_copyright.bin.lz");
+#endif
 
 const u16 g321Start_Pal[] = INCBIN_U16("graphics/link/321start.gbapal");
 const u32 g321Start_Gfx[] = INCBIN_U32("graphics/link/321start.4bpp.lz");

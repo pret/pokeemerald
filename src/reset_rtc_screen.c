@@ -19,6 +19,26 @@
 #include "gpu_regs.h"
 #include "constants/rgb.h"
 
+#if ENGLISH
+#define CURSOR_DAYS_X 53
+#define CURSOR_HOURS_X 86
+#define CURSOR_MINS_X 101
+#define CURSOR_SECS_X 116
+#define CURSOR_CONFIRM_X 153
+#elif FRENCH
+#define CURSOR_DAYS_X 56
+#define CURSOR_HOURS_X 92
+#define CURSOR_MINS_X 107
+#define CURSOR_SECS_X 122
+#define CURSOR_CONFIRM_X 153
+#elif ITALIAN
+#define CURSOR_DAYS_X 62
+#define CURSOR_HOURS_X 104
+#define CURSOR_MINS_X 119
+#define CURSOR_SECS_X 134
+#define CURSOR_CONFIRM_X 183
+#endif
+
 #define PALTAG_ARROW 0x1000
 
 // Task data for the Task_ResetRtc_* series of tasks, when setting the time on the clock
@@ -243,51 +263,35 @@ static void SpriteCB_Cursor_UpOrRight(struct Sprite *sprite)
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
-        #if ENGLISH
-            sprite->x = 53;
-        #elif FRENCH
-            sprite->x = 56;
-        #endif
+            sprite->x = CURSOR_DAYS_X;
             sprite->y = 68;
             break;
         case SELECTION_HOURS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
-        #if ENGLISH
-            sprite->x = 86;
-        #elif FRENCH
-            sprite->x = 92;
-        #endif
+            sprite->x = CURSOR_HOURS_X;
             sprite->y = 68;
             break;
         case SELECTION_MINS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
-        #if ENGLISH
-            sprite->x = 101;
-        #elif FRENCH
-            sprite->x = 107;
-        #endif
+            sprite->x = CURSOR_MINS_X;
             sprite->y = 68;
             break;
         case SELECTION_SECS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
-        #if ENGLISH
-            sprite->x = 116;
-        #elif FRENCH
-            sprite->x = 122;
-        #endif
+            sprite->x = CURSOR_SECS_X;
             sprite->y = 68;
             break;
         case SELECTION_CONFIRM:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_RIGHT;
             sprite->animDelayCounter = 0;
-            sprite->x = 153;
+            sprite->x = CURSOR_CONFIRM_X;
             sprite->y = 80;
             break;
         case SELECTION_NONE:
@@ -309,44 +313,28 @@ static void SpriteCB_Cursor_Down(struct Sprite *sprite)
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
-        #if ENGLISH
-            sprite->x = 53;
-        #elif FRENCH
-            sprite->x = 56;
-        #endif
+            sprite->x = CURSOR_DAYS_X;
             sprite->y = 92;
             break;
         case SELECTION_HOURS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
-        #if ENGLISH
-            sprite->x = 86;
-        #elif FRENCH
-            sprite->x = 92;
-        #endif
+            sprite->x = CURSOR_HOURS_X;
             sprite->y = 92;
             break;
         case SELECTION_MINS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
-        #if ENGLISH
-            sprite->x = 101;
-        #elif FRENCH
-            sprite->x = 107;
-        #endif
+            sprite->x = CURSOR_MINS_X;
             sprite->y = 92;
             break;
         case SELECTION_SECS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
-        #if ENGLISH
-            sprite->x = 116;
-        #elif FRENCH
-            sprite->x = 122;
-        #endif
+            sprite->x = CURSOR_SECS_X;
             sprite->y = 92;
             break;
         case SELECTION_CONFIRM:
@@ -367,20 +355,12 @@ static void CreateCursor(u8 taskId)
 
     LoadSpritePalette(&sSpritePalette_Arrow);
 
-#if ENGLISH
-    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Arrow, 53, 68, 0);
-#elif FRENCH
-    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Arrow, 56, 68, 0);
-#endif
+    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Arrow, CURSOR_DAYS_X, 68, 0);
     gSprites[spriteId].callback = SpriteCB_Cursor_UpOrRight;
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].sState = -1;
 
-#if ENGLISH
-    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Arrow, 53, 68, 0);
-#elif FRENCH
-    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Arrow, 56, 68, 0);
-#endif
+    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Arrow, CURSOR_DAYS_X, 68, 0);
     gSprites[spriteId].callback = SpriteCB_Cursor_Down;
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].sState = -1;
@@ -428,7 +408,7 @@ static void ShowChooseTimeWindow(u8 windowId, u16 days, u8 hours, u8 minutes, u8
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 0x214, 0xE);
     PrintTime(windowId, 0, 1, days, hours, minutes, seconds);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Confirm2, 126, 1, 0, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Confirm2, CURSOR_CONFIRM_X - 27, 1, 0, NULL);
     ScheduleBgCopyTilemapToVram(0);
 }
 

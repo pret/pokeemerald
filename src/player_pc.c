@@ -693,7 +693,7 @@ static void Mailbox_DrawMailboxMenu(u8 taskId)
     MailboxMenu_AddWindow(MAILBOXWIN_LIST);
 #if ENGLISH
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Mailbox, GetStringCenterAlignXOffset(FONT_NORMAL, gText_Mailbox, 64), 1, 0, NULL);
-#elif FRENCH
+#elif FRENCH || ITALIAN
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Mailbox, GetStringCenterAlignXOffset(FONT_NORMAL, gText_Mailbox, gWindows[windowId].window.width * 8), 1, 0, NULL);
 #endif
     ScheduleBgCopyTilemapToVram(0);

@@ -30,13 +30,43 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+#if ENGLISH
+#define WIN_BERRY_NAME_WIDTH        8
+#define WIN_BERRY_NAME_BASEBLOCK    69
+#define WIN_SIZE_FIRM_BASEBLOCK     85
+#define WIN_DESC_TILEMAP_LEFT       4
+#define WIN_DESC_WIDTH              25
+#define WIN_DESC_BASEBLOCK          157
+#define WIN_BERRY_TAG_BASEBLOCK     257
+#define BERRY_DESCRIPTION_X         0
+#elif FRENCH
+#define WIN_BERRY_NAME_WIDTH        8
+#define WIN_BERRY_NAME_BASEBLOCK    72
+#define WIN_SIZE_FIRM_BASEBLOCK     88
+#define WIN_DESC_TILEMAP_LEFT       3
+#define WIN_DESC_WIDTH              27
+#define WIN_DESC_BASEBLOCK          160
+#define WIN_BERRY_TAG_BASEBLOCK     268
+#define BERRY_DESCRIPTION_X         5
+#elif ITALIAN
+#define WIN_BERRY_NAME_WIDTH        13
+#define WIN_BERRY_NAME_BASEBLOCK    72
+#define WIN_SIZE_FIRM_BASEBLOCK     98
+#define WIN_DESC_TILEMAP_LEFT       3
+#define WIN_DESC_WIDTH              27
+#define WIN_DESC_BASEBLOCK          170
+#define WIN_BERRY_TAG_BASEBLOCK     278
+#define BERRY_DESCRIPTION_X         5
+#endif
+
 // There are 4 windows used in berry tag screen.
 enum
 {
     WIN_BERRY_NAME,
     WIN_SIZE_FIRM,
     WIN_DESC,
-    WIN_BERRY_TAG
+    WIN_BERRY_TAG,
+    WIN_DUMMY,
 };
 
 struct BerryTagScreenStruct
@@ -102,83 +132,47 @@ static const u8 sTextColors[2][3] =
 
 static const struct WindowTemplate sWindowTemplates[] =
 {
-    { // WIN_BERRY_NAME
+    [WIN_BERRY_NAME] =
+    {
         .bg = 1,
         .tilemapLeft = 11,
         .tilemapTop = 4,
-    #if ENGLISH
-        .width = 8,
+        .width = WIN_BERRY_NAME_WIDTH,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 69,
-    #elif FRENCH
-        .width = 8,
-        .height = 2,
-        .paletteNum = 15,
-        .baseBlock = 72,
-    #elif ITALIAN
-        .width = 13,
-        .height = 2,
-        .paletteNum = 15,
-        .baseBlock = 72,
-    #endif
+        .baseBlock = WIN_BERRY_NAME_BASEBLOCK,
     },
-    { // WIN_SIZE_FIRM
+    [WIN_SIZE_FIRM] =
+    {
         .bg = 1,
         .tilemapLeft = 11,
         .tilemapTop = 7,
         .width = 18,
         .height = 4,
         .paletteNum = 15,
-    #if ENGLISH
-        .baseBlock = 85,
-    #elif FRENCH
-        .baseBlock = 88,
-    #elif ITALIAN
-        .baseBlock = 98,
-    #endif
+        .baseBlock = WIN_SIZE_FIRM_BASEBLOCK,
     },
-    { // WIN_DESC
+    [WIN_DESC] =
+    {
         .bg = 1,
-    #if ENGLISH
-        .tilemapLeft = 4,
+        .tilemapLeft = WIN_DESC_TILEMAP_LEFT,
         .tilemapTop = 14,
-        .width = 25,
+        .width = WIN_DESC_WIDTH,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 157,
-    #elif FRENCH
-        .tilemapLeft = 3,
-        .tilemapTop = 14,
-        .width = 27,
-        .height = 4,
-        .paletteNum = 15,
-        .baseBlock = 160,
-    #elif ITALIAN
-        .tilemapLeft = 3,
-        .tilemapTop = 14,
-        .width = 27,
-        .height = 4,
-        .paletteNum = 15,
-        .baseBlock = 170,
-    #endif
+        .baseBlock = WIN_DESC_BASEBLOCK,
     },
-    { // WIN_BERRY_TAG
+    [WIN_BERRY_TAG] =
+    {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 0,
         .width = 8,
         .height = 2,
         .paletteNum = 15,
-    #if ENGLISH
-        .baseBlock = 257,
-    #elif FRENCH
-        .baseBlock = 268,
-    #elif ITALIAN
-        .baseBlock = 278,
-    #endif
+        .baseBlock = WIN_BERRY_TAG_BASEBLOCK,
     },
-    DUMMY_WIN_TEMPLATE
+    [WIN_DUMMY] = DUMMY_WIN_TEMPLATE
 };
 
 static const u8 *const sBerryFirmnessStrings[] =
@@ -462,7 +456,7 @@ static void PrintBerrySize(void)
     AddTextPrinterParameterized(WIN_SIZE_FIRM, FONT_NORMAL, gText_SizeSlash, 0, 1, TEXT_SKIP_DRAW, NULL);
     if (berry->size != 0)
     {
-    #if ENGLISH
+    #ifdef UNITS_IMPERIAL
         u32 inches, fraction;
 
         inches = 1000 * berry->size / 254;
@@ -473,7 +467,7 @@ static void PrintBerrySize(void)
 
         ConvertIntToDecimalStringN(gStringVar1, inches, STR_CONV_MODE_LEFT_ALIGN, 2);
         ConvertIntToDecimalStringN(gStringVar2, fraction, STR_CONV_MODE_LEFT_ALIGN, 2);
-    #elif FRENCH || ITALIAN
+    #else
         ConvertIntToDecimalStringN(gStringVar1, berry->size / 10, STR_CONV_MODE_LEFT_ALIGN, 2);
         ConvertIntToDecimalStringN(gStringVar2, berry->size % 10, STR_CONV_MODE_LEFT_ALIGN, 2);
     #endif
@@ -499,21 +493,13 @@ static void PrintBerryFirmness(void)
 static void PrintBerryDescription1(void)
 {
     const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
-#if ENGLISH
-    AddTextPrinterParameterized(WIN_DESC, FONT_NORMAL, berry->description1, 0, 1, 0, NULL);
-#elif FRENCH || ITALIAN
-    AddTextPrinterParameterized(WIN_DESC, FONT_NORMAL, berry->description1, 5, 1, 0, NULL);
-#endif
+    AddTextPrinterParameterized(WIN_DESC, FONT_NORMAL, berry->description1, BERRY_DESCRIPTION_X, 1, 0, NULL);
 }
 
 static void PrintBerryDescription2(void)
 {
     const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
-#if ENGLISH
-    AddTextPrinterParameterized(WIN_DESC, FONT_NORMAL, berry->description2, 0, 17, 0, NULL);
-#elif FRENCH || ITALIAN
-    AddTextPrinterParameterized(WIN_DESC, FONT_NORMAL, berry->description2, 5, 17, 0, NULL);
-#endif
+    AddTextPrinterParameterized(WIN_DESC, FONT_NORMAL, berry->description2, BERRY_DESCRIPTION_X, 17, 0, NULL);
 }
 
 static void CreateBerrySprite(void)

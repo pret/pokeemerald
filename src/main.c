@@ -39,6 +39,8 @@ const u8 gGameLanguage = GAME_LANGUAGE;
 const char BuildDateTime[] = "2005 02 21 11:10";
 #elif FRENCH
 const char BuildDateTime[] = "2005 07 01 18:30";
+#elif ITALIAN
+const char BuildDateTime[] = "2005 07 07 18:00";
 #endif
 
 const IntrFunc gIntrTableTemplate[] =

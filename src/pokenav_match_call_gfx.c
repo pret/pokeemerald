@@ -3,9 +3,7 @@
 #include "data.h"
 #include "decompress.h"
 #include "dma3.h"
-#if FRENCH
 #include "graphics.h"
-#endif
 #include "international_string_util.h"
 #include "main.h"
 #include "match_call.h"
@@ -121,6 +119,14 @@ static u32 ExitMatchCall(s32);
 static const u16 sMatchCallUI_Pal[] = INCBIN_U16("graphics/pokenav/match_call/ui.gbapal");
 static const u32 sMatchCallUI_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/ui.4bpp.lz");
 static const u32 sMatchCallUI_Tilemap[] = INCBIN_U32("graphics/pokenav/match_call/ui.bin.lz");
+
+#define MATCH_CALL_UI_PAL sMatchCallUI_Pal
+#define MATCH_CALL_UI_GFX sMatchCallUI_Gfx
+#define MATCH_CALL_UI_TILEMAP sMatchCallUI_Tilemap
+#elif FRENCH || ITALIAN
+#define MATCH_CALL_UI_PAL gMatchCallUI_Pal
+#define MATCH_CALL_UI_GFX gMatchCallUI_Gfx
+#define MATCH_CALL_UI_TILEMAP gMatchCallUI_Tilemap
 #endif
 static const u16 sOptionsCursor_Pal[] = INCBIN_U16("graphics/pokenav/match_call/options_cursor.gbapal");
 static const u32 sOptionsCursor_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/options_cursor.4bpp.lz");
@@ -334,19 +340,11 @@ static u32 LoopedTask_OpenMatchCall(s32 state)
         InitBgTemplates(sMatchCallBgTemplates, ARRAY_COUNT(sMatchCallBgTemplates));
         ChangeBgX(2, 0, BG_COORD_SET);
         ChangeBgY(2, 0, BG_COORD_SET);
-    #if ENGLISH
-        DecompressAndCopyTileDataToVram(2, sMatchCallUI_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(2, MATCH_CALL_UI_GFX, 0, 0, 0);
         SetBgTilemapBuffer(2, gfx->bgTilemapBuffer2);
-        CopyToBgTilemapBuffer(2, sMatchCallUI_Tilemap, 0, 0);
+        CopyToBgTilemapBuffer(2, MATCH_CALL_UI_TILEMAP, 0, 0);
         CopyBgTilemapBufferToVram(2);
-        CopyPaletteIntoBufferUnfaded(sMatchCallUI_Pal, 0x20, 0x20);
-    #elif FRENCH
-        DecompressAndCopyTileDataToVram(2, gMatchCallUI_Gfx, 0, 0, 0);
-        SetBgTilemapBuffer(2, gfx->bgTilemapBuffer2);
-        CopyToBgTilemapBuffer(2, gMatchCallUI_Tilemap, 0, 0);
-        CopyBgTilemapBufferToVram(2);
-        CopyPaletteIntoBufferUnfaded(gMatchCallUI_Pal, 0x20, 0x20);
-    #endif
+        CopyPaletteIntoBufferUnfaded(MATCH_CALL_UI_PAL, 0x20, 0x20);
         CopyBgTilemapBufferToVram(2);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -889,8 +887,8 @@ static void CreateMatchCallList(void)
     template.count = GetNumberRegistered();
     template.itemSize = sizeof(struct PokenavListItem);
     template.startIndex = 0;
-    template.item_X = 13;
-    template.windowWidth = 16;
+    template.item_X = POKENAV_LIST_ITEM_X;
+    template.windowWidth = POKENAV_LIST_WINDOW_WIDTH;
     template.listTop = 1;
     template.maxShowed = 8;
     template.fillValue = 3;

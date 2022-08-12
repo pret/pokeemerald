@@ -29,6 +29,14 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+#if ENGLISH
+#define WEIGHT_LEFT 0x81
+#elif FRENCH
+#define WEIGHT_LEFT 0x90
+#elif ITALIAN
+#define WEIGHT_LEFT 0x90
+#endif
+
 enum
 {
     PAGE_MAIN,
@@ -4147,29 +4155,16 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     PrintInfoScreenText(gText_HTHeight, 0x60, 0x39);
     PrintInfoScreenText(gText_WTWeight, 0x60, 0x49);
 
-#if ENGLISH
     if (owned)
     {
-        PrintMonHeight(gPokedexEntries[num].height, 0x81, 0x39);
-        PrintMonWeight(gPokedexEntries[num].weight, 0x81, 0x49);
+        PrintMonHeight(gPokedexEntries[num].height, WEIGHT_LEFT, 0x39);
+        PrintMonWeight(gPokedexEntries[num].weight, WEIGHT_LEFT, 0x49);
     }
     else
     {
-        PrintInfoScreenText(gText_UnkHeight, 0x81, 0x39);
-        PrintInfoScreenText(gText_UnkWeight, 0x81, 0x49);
+        PrintInfoScreenText(gText_UnkHeight, WEIGHT_LEFT, 0x39);
+        PrintInfoScreenText(gText_UnkWeight, WEIGHT_LEFT, 0x49);
     }
-#elif FRENCH
-    if (owned)
-    {
-        PrintMonHeight(gPokedexEntries[num].height, 0x90, 0x39);
-        PrintMonWeight(gPokedexEntries[num].weight, 0x90, 0x49);
-    }
-    else
-    {
-        PrintInfoScreenText(gText_UnkHeight, 0x90, 0x39);
-        PrintInfoScreenText(gText_UnkWeight, 0x90, 0x49);
-    }
-#endif
 
     if (owned)
         description = gPokedexEntries[num].description;
@@ -4180,7 +4175,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
 
 static void PrintMonHeight(u16 height, u8 left, u8 top)
 {
-#if ENGLISH
+#ifdef UNITS_IMPERIAL
     u8 buffer[16];
     u32 inches, feet;
     u8 i = 0;
@@ -4210,7 +4205,7 @@ static void PrintMonHeight(u16 height, u8 left, u8 top)
     buffer[i++] = CHAR_DBL_QUOTE_RIGHT;
     buffer[i++] = EOS;
     PrintInfoScreenText(buffer, left, top);
-#elif FRENCH
+#else
     PrintInfoScreenText(gText_EmptyHeight, left, top);
     PrintDecimalNum(0, height, left, top);
 #endif
@@ -4218,7 +4213,7 @@ static void PrintMonHeight(u16 height, u8 left, u8 top)
 
 static void PrintMonWeight(u16 weight, u8 left, u8 top)
 {
-#if ENGLISH
+#ifdef UNITS_IMPERIAL
     u8 buffer[16];
     bool8 output;
     u8 i;
@@ -4273,7 +4268,7 @@ static void PrintMonWeight(u16 weight, u8 left, u8 top)
     buffer[i++] = CHAR_PERIOD;
     buffer[i++] = EOS;
     PrintInfoScreenText(buffer, left, top);
-#elif FRENCH
+#else
     PrintInfoScreenText(gText_EmptyWeight, left, top);
     PrintDecimalNum(0, weight, left, top);
 #endif

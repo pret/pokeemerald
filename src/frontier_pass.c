@@ -1411,7 +1411,7 @@ static bool32 InitFrontierMap(void)
         PrintOnFrontierMap();
     #if ENGLISH
         DecompressAndCopyTileDataToVram(1, sMapScreen_Gfx, 0, 0, 0);
-    #elif FRENCH
+    #elif FRENCH || ITALIAN
         DecompressAndCopyTileDataToVram(1, gFrontierPassMapScreen_Gfx, 0, 0, 0);
     #endif
         break;

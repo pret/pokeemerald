@@ -597,7 +597,7 @@ static void CreateStarterPokemonLabel(u8 selection)
 
     width = GetStringCenterAlignXOffset(FONT_NORMAL, speciesName, 104);
     AddTextPrinterParameterized3(sStarterLabelWindowId, FONT_NORMAL, width, 17, sTextColors, 0, speciesName);
-#elif FRENCH
+#elif FRENCH || ITALIAN
     width = GetStringCenterAlignXOffset(FONT_NORMAL, speciesName, 104);
     AddTextPrinterParameterized3(sStarterLabelWindowId, FONT_NORMAL, width, 1, sTextColors, 0, speciesName);
 

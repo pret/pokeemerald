@@ -8,12 +8,18 @@
 #include "match_call.h"
 #include "pokenav.h"
 #include "strings.h"
-#if FRENCH
 #include "international_string_util.h"
-#endif
 #include "constants/region_map_sections.h"
 #include "constants/trainers.h"
 
+
+#if ENGLISH
+#define MAY_MATCH_CALL_DESC gText_MayBrendanMatchCallDesc
+#define BRENDAN_MATCH_CALL_DESC gText_MayBrendanMatchCallDesc
+#elif FRENCH || ITALIAN
+#define MAY_MATCH_CALL_DESC gText_MayMatchCallDesc
+#define BRENDAN_MATCH_CALL_DESC gText_BrendanMatchCallDesc
+#endif
 
 // NPC below means non-trainer character (no rematch or check page)
 // Steven also uses this type but has a check page by using a MatchCallCheckPageOverride
@@ -282,11 +288,7 @@ static const struct MatchCallRival sMayMatchCallHeader =
     .type = MC_TYPE_RIVAL,
     .playerGender = MALE,
     .flag = FLAG_ENABLE_RIVAL_MATCH_CALL,
-#if ENGLISH
-    .desc = gText_MayBrendanMatchCallDesc,
-#elif FRENCH
-    .desc = gText_MayMatchCallDesc,
-#endif
+    .desc = MAY_MATCH_CALL_DESC,
     .name = gText_ExpandedPlaceholder_May,
     .textData = sMayTextScripts
 };
@@ -315,11 +317,7 @@ static const struct MatchCallRival sBrendanMatchCallHeader =
     .type = MC_TYPE_RIVAL,
     .playerGender = FEMALE,
     .flag = FLAG_ENABLE_RIVAL_MATCH_CALL,
-#if ENGLISH
-    .desc = gText_MayBrendanMatchCallDesc,
-#elif FRENCH
-    .desc = gText_BrendanMatchCallDesc,
-#endif
+    .desc = BRENDAN_MATCH_CALL_DESC,
     .name = gText_ExpandedPlaceholder_Brendan,
     .textData = sBrendanTextScripts
 };
@@ -1101,7 +1099,7 @@ static void MatchCall_GetNameAndDescByRematchIdx(u32 idx, const u8 **desc, const
     const struct Trainer *trainer = gTrainers + GetTrainerIdxByRematchIdx(idx);
 #if ENGLISH
     *desc = gTrainerClassNames[trainer->trainerClass];
-#elif FRENCH
+#elif FRENCH || ITALIAN
     *desc = GetTrainerClassNameGenderSpecific(trainer->trainerClass, trainer->encounterMusic_gender, trainer->trainerName);
 #endif
     *name = trainer->trainerName;

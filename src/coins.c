@@ -8,6 +8,20 @@
 #include "international_string_util.h"
 #include "constants/coins.h"
 
+#if ENGLISH
+#define COINS_STRING_FONT           FONT_NORMAL
+#define COINS_STRING_TOTAL_WIDTH    0x40
+#define COINS_WINDOW_WIDTH          8
+#elif FRENCH
+#define COINS_STRING_FONT           FONT_NARROW
+#define COINS_STRING_TOTAL_WIDTH    0x38
+#define COINS_WINDOW_WIDTH          7
+#elif ITALIAN
+#define COINS_STRING_FONT           FONT_NARROW
+#define COINS_STRING_TOTAL_WIDTH    0x30
+#define COINS_WINDOW_WIDTH          6
+#endif
+
 static EWRAM_DATA u8 sCoinsWindowId = 0;
 
 void PrintCoinsString(u32 coinAmount)
@@ -16,30 +30,15 @@ void PrintCoinsString(u32 coinAmount)
 
     ConvertIntToDecimalStringN(gStringVar1, coinAmount, STR_CONV_MODE_RIGHT_ALIGN, MAX_COIN_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_Coins);
-
-#if ENGLISH
-    xAlign = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 0x40);
-    AddTextPrinterParameterized(sCoinsWindowId, FONT_NORMAL, gStringVar4, xAlign, 1, 0, NULL);
-#elif FRENCH
-    xAlign = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 0x38);
-    AddTextPrinterParameterized(sCoinsWindowId, FONT_NARROW, gStringVar4, xAlign, 1, 0, NULL);
-#elif ITALIAN
-    xAlign = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 0x30);
-    AddTextPrinterParameterized(sCoinsWindowId, FONT_NARROW, gStringVar4, xAlign, 1, 0, NULL);
-#endif
+    xAlign = GetStringRightAlignXOffset(COINS_STRING_FONT, gStringVar4, COINS_STRING_TOTAL_WIDTH);
+    AddTextPrinterParameterized(sCoinsWindowId, COINS_STRING_FONT, gStringVar4, xAlign, 1, 0, NULL);
 }
 
 void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y)
 {
     struct WindowTemplate template;
 
-#if ENGLISH
-    SetWindowTemplateFields(&template, 0, x, y, 8, 2, 0xF, 0x141);
-#elif FRENCH
-    SetWindowTemplateFields(&template, 0, x, y, 7, 2, 0xF, 0x141);
-#elif ITALIAN
-    SetWindowTemplateFields(&template, 0, x, y, 6, 2, 0xF, 0x141);
-#endif
+    SetWindowTemplateFields(&template, 0, x, y, COINS_WINDOW_WIDTH, 2, 0xF, 0x141);
     sCoinsWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sCoinsWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sCoinsWindowId);

@@ -213,7 +213,7 @@ extern const u8 gMenuText_Walk[];
 extern const u8 gMenuText_Deselect[];
 extern const u8 gMenuText_CheckTag[];
 extern const u8 gMenuText_Confirm[];
-#if FRENCH
+#if FRENCH || ITALIAN
 extern const u8 gMenuText_Confirm2[];
 #endif
 extern const u8 gMenuText_Show[];
@@ -530,7 +530,7 @@ extern const u8 gText_NumberClear01[];
 extern const u8 gText_5MarksPokemon[];
 extern const u8 gText_UnkHeight[];
 extern const u8 gText_UnkWeight[];
-#if FRENCH
+#if FRENCH || ITALIAN
 extern const u8 gText_EmptyPkmnCategory[];
 extern const u8 gText_EmptyHeight[];
 extern const u8 gText_EmptyWeight[];
@@ -2494,7 +2494,7 @@ extern const u8 gText_StevenMatchCallDesc[];
 extern const u8 gText_StevenMatchCallName[];
 #if ENGLISH
 extern const u8 gText_MayBrendanMatchCallDesc[];
-#elif FRENCH
+#elif FRENCH || ITALIAN
 extern const u8 gText_BrendanMatchCallDesc[];
 extern const u8 gText_MayMatchCallDesc[];
 #endif

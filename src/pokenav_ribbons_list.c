@@ -1,8 +1,6 @@
 #include "global.h"
 #include "pokenav.h"
-#if FRENCH
 #include "graphics.h"
-#endif
 #include "bg.h"
 #include "menu.h"
 #include "window.h"
@@ -696,13 +694,8 @@ static void CreateRibbonMonsList(void)
     template.count = GetRibbonsMonListCount();
     template.itemSize = sizeof(struct PokenavListItem);
     template.startIndex = GetRibbonListMenuCurrIndex();
-#if ENGLISH
-    template.item_X = 13;
-    template.windowWidth = 17;
-#elif FRENCH
-    template.item_X = 12;
-    template.windowWidth = 18;
-#endif
+    template.item_X = POKENAV_LIST_ITEM_X;
+    template.windowWidth = POKENAV_LIST_WINDOW_WIDTH + 1;
     template.listTop = 1;
     template.maxShowed = 8;
     template.fillValue = 2;

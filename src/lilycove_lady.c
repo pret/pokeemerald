@@ -398,7 +398,7 @@ static u8 BufferQuizAuthorName(void)
     {
     #if ENGLISH
         StringCopy_PlayerName(gStringVar1, gText_QuizLady_Lady);
-    #elif FRENCH
+    #elif FRENCH || ITALIAN
         StringCopy(gStringVar1, gText_QuizLady_Lady);
     #endif
         authorNameId = QUIZ_AUTHOR_NAME_LADY;

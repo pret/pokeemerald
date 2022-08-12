@@ -13,9 +13,7 @@
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "field_specials.h"
-#if FRENCH
 #include "international_string_util.h"
-#endif
 #include "item.h"
 #include "link.h"
 #include "main.h"
@@ -6887,7 +6885,7 @@ const u8 *GetTrainerClassNameFromId(u16 trainerId)
         trainerId = TRAINER_NONE;
 #if ENGLISH
     return gTrainerClassNames[gTrainers[trainerId].trainerClass];
-#elif FRENCH
+#elif FRENCH || ITALIAN
     return GetTrainerClassNameGenderSpecific(gTrainers[trainerId].trainerClass, gTrainers[trainerId].encounterMusic_gender, gTrainers[trainerId].trainerName);
 #endif
 }

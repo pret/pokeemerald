@@ -53,7 +53,7 @@
 	special CallBattleTowerFunc
 	.endm
 	
-	@ This acts like old tower_getopponentintro, but tower_getopponentintro was changed in the French version.
+	@ This acts like old tower_getopponentintro, but tower_getopponentintro was changed in the French and Italian versions.
 	.macro tower_getopponentintro2 opponent:req
 	setvar VAR_0x8004, BATTLE_TOWER_FUNC_GET_OPPONENT_INTRO2
 	setvar VAR_0x8005, \opponent

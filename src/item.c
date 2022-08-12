@@ -123,6 +123,9 @@ void GetBerryCountString(u8 *dst, const u8 *berryName, u32 quantity)
     txtPtr = StringCopy(dst, berryString);
     *txtPtr = CHAR_SPACE;
     StringCopy(txtPtr + 1, berryName);
+#elif ITALIAN
+    txtPtr = StringCopy(dst, berryString);
+    StringCopy(txtPtr, berryName);
 #endif
 }
 

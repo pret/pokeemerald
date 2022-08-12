@@ -1592,11 +1592,7 @@ void GetFrontierTrainerName(u8 *dst, u16 trainerId)
     dst[i] = EOS;
 }
 
-#if ENGLISH
-static bool8 IsFrontierTrainerFemale(u16 trainerId)
-#elif FRENCH || ITALIAN
 bool8 IsFrontierTrainerFemale(u16 trainerId)
-#endif
 {
     u32 i;
     u8 facilityClass;

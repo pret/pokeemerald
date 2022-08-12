@@ -281,7 +281,7 @@ static const struct MenuAction sItemMenuActions[] = {
     [ACTION_CHECK_TAG]         = {gMenuText_CheckTag, ItemMenu_CheckTag},
 #if ENGLISH
     [ACTION_CONFIRM]           = {gMenuText_Confirm,  Task_FadeAndCloseBagMenu},
-#elif FRENCH
+#elif FRENCH || ITALIAN
     [ACTION_CONFIRM]           = {gMenuText_Confirm2, Task_FadeAndCloseBagMenu},
 #endif
     [ACTION_SHOW]              = {gMenuText_Show,     ItemMenu_Show},
@@ -2564,11 +2564,7 @@ static void DisplayCurrentMoneyWindow(void)
 {
     u8 windowId = BagMenu_AddWindow(ITEMWIN_MONEY);
     PrintMoneyAmountInMoneyBoxWithBorder(windowId, 1, 14, GetMoney(&gSaveBlock1Ptr->money));
-#if ENGLISH || ITALIAN
-    AddMoneyLabelObject(19, 11);
-#elif FRENCH
-    AddMoneyLabelObject(24, 11);
-#endif
+    AddMoneyLabelObject(MONEY_LABEL_X_OFFSET, 11);
 }
 
 static void RemoveMoneyWindow(void)

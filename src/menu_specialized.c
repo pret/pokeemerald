@@ -26,6 +26,14 @@
 #include "constants/songs.h"
 #include "gba/io_reg.h"
 
+#if ENGLISH
+#define MAILBOXWIN_TITLE_WIDTH             8
+#define MAILBOXWIN_LISTOPTIONS_BASEBLOCK   0x18
+#elif FRENCH || ITALIAN
+#define MAILBOXWIN_TITLE_WIDTH             24
+#define MAILBOXWIN_LISTOPTIONS_BASEBLOCK   0x38
+#endif
+
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
 EWRAM_DATA static u8 sMailboxWindowIds[MAILBOXWIN_COUNT] = {0};
@@ -46,11 +54,7 @@ static const struct WindowTemplate sWindowTemplates_MailboxMenu[MAILBOXWIN_COUNT
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
-    #if ENGLISH
-        .width = 8,
-    #elif FRENCH
-        .width = 24,
-    #endif
+        .width = MAILBOXWIN_TITLE_WIDTH,
         .height = 2,
         .paletteNum = 15,
         .baseBlock = 0x8
@@ -62,11 +66,7 @@ static const struct WindowTemplate sWindowTemplates_MailboxMenu[MAILBOXWIN_COUNT
         .width = 8,
         .height = 18,
         .paletteNum = 15,
-    #if ENGLISH
-        .baseBlock = 0x18
-    #elif FRENCH
-        .baseBlock = 0x38
-    #endif
+        .baseBlock = MAILBOXWIN_LISTOPTIONS_BASEBLOCK
     },
     [MAILBOXWIN_OPTIONS] = {
         .bg = 0,
@@ -75,11 +75,7 @@ static const struct WindowTemplate sWindowTemplates_MailboxMenu[MAILBOXWIN_COUNT
         .width = 11,
         .height = 8,
         .paletteNum = 15,
-    #if ENGLISH
-        .baseBlock = 0x18
-    #elif FRENCH
-        .baseBlock = 0x38
-    #endif
+        .baseBlock = MAILBOXWIN_LISTOPTIONS_BASEBLOCK
     }
 };
 
@@ -231,7 +227,7 @@ u8 MailboxMenu_AddWindow(u8 windowIdx)
             template.width = GetMaxWidthInMenuTable(&gMailboxMailOptions[0], 4);
             sMailboxWindowIds[windowIdx] = AddWindow(&template);
         }
-    #if FRENCH
+    #if FRENCH || ITALIAN
         else if (windowIdx == MAILBOXWIN_TITLE)
         {
             struct WindowTemplate template = sWindowTemplates_MailboxMenu[windowIdx];
@@ -240,7 +236,7 @@ u8 MailboxMenu_AddWindow(u8 windowIdx)
             sMailboxWindowIds[windowIdx] = AddWindow(&template);
         }
     #endif
-        else // MAILBOXWIN_TITLE or MAILBOXWIN_LIST in English. MAILBOXWIN_LIST in French.
+        else // MAILBOXWIN_TITLE or MAILBOXWIN_LIST in English. MAILBOXWIN_LIST in French and Italian.
         {
             sMailboxWindowIds[windowIdx] = AddWindow(&sWindowTemplates_MailboxMenu[windowIdx]);
         }

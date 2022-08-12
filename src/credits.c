@@ -89,6 +89,19 @@ static EWRAM_DATA struct CreditsData *sCreditsData = {0};
 static const u16 sCredits_Pal[] = INCBIN_U16("graphics/credits/credits.gbapal");
 #if ENGLISH
 static const u32 sCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/the_end_copyright.4bpp.lz");
+#define CREDITS_COPYRIGHT_END_GFX sCreditsCopyrightEnd_Gfx
+#define CREDITS_COPYRIGHT_END_TILE_OFFSET 1
+#define UPDATE_PAGE_DELAY 115
+#define SHOW_MONS_SPRITE_DATA_3 50
+#define SHOW_MONS_DELAY 50
+#define CATCH_RIVAL_TIMER 584
+#elif FRENCH || ITALIAN
+#define CREDITS_COPYRIGHT_END_GFX gCreditsCopyrightEnd_Gfx
+#define CREDITS_COPYRIGHT_END_TILE_OFFSET 0
+#define UPDATE_PAGE_DELAY 121
+#define SHOW_MONS_SPRITE_DATA_3 52
+#define SHOW_MONS_DELAY 52
+#define CATCH_RIVAL_TIMER 620
 #endif
 
 static void SpriteCB_CreditsMonBg(struct Sprite *);
@@ -788,11 +801,7 @@ static void Task_UpdatePage(u8 taskId)
     case 3:
         if (!gPaletteFade.active)
         {
-        #if ENGLISH
-            gTasks[taskId].tDelay = 115;
-        #elif FRENCH || ITALIAN
-            gTasks[taskId].tDelay = 121;
-        #endif
+            gTasks[taskId].tDelay = UPDATE_PAGE_DELAY;
             gTasks[taskId].tState++;
         }
         return;
@@ -926,11 +935,7 @@ static void Task_ShowMons(u8 taskId)
         if (sCreditsData->currShownMon < sCreditsData->numMonToShow - 1)
         {
             sCreditsData->currShownMon++;
-        #if ENGLISH
-            gSprites[spriteId].data[3] = 50;
-        #elif FRENCH || ITALIAN
-            gSprites[spriteId].data[3] = 52;
-        #endif
+            gSprites[spriteId].data[3] = SHOW_MONS_SPRITE_DATA_3;
         }
         else
         {
@@ -944,11 +949,7 @@ static void Task_ShowMons(u8 taskId)
         else
             sCreditsData->nextImgPos++;
 
-    #if ENGLISH
-        gTasks[taskId].tDelay = 50;
-    #elif FRENCH || ITALIAN
-        gTasks[taskId].tDelay = 52;
-    #endif
+        gTasks[taskId].tDelay = SHOW_MONS_DELAY;
         gTasks[taskId].tState++;
         break;
     case 3:
@@ -1093,11 +1094,7 @@ static void Task_CycleSceneryPalette(u8 taskId)
     case SCENE_FOREST_CATCH_RIVAL:
         if (gTasks[taskId].tTimer != TIMER_STOP)
         {
-        #if ENGLISH
-            if (gTasks[taskId].tTimer == 584)
-        #elif FRENCH || ITALIAN
-            if (gTasks[taskId].tTimer == 620)
-        #endif
+            if (gTasks[taskId].tTimer == CATCH_RIVAL_TIMER)
             {
                 gTasks[gTasks[gTasks[taskId].tMainTaskId].tTaskId_BikeScene].tState = 10;
                 gTasks[taskId].tTimer = TIMER_STOP;
@@ -1309,23 +1306,13 @@ static void LoadTheEndScreen(u16 tileOffsetLoad, u16 tileOffsetWrite, u16 palOff
     u16 baseTile;
     u16 i;
 
-#if ENGLISH
-    LZ77UnCompVram(sCreditsCopyrightEnd_Gfx, (void *)(VRAM + tileOffsetLoad));
+    LZ77UnCompVram(CREDITS_COPYRIGHT_END_GFX, (void *)(VRAM + tileOffsetLoad));
     LoadPalette(gIntroCopyright_Pal, palOffset, sizeof(gIntroCopyright_Pal));
 
     baseTile = (palOffset / 16) << 12;
 
     for (i = 0; i < 32 * 32; i++)
-        ((u16 *) (VRAM + tileOffsetWrite))[i] = baseTile + 1;
-#elif FRENCH || ITALIAN
-    LZ77UnCompVram(gCreditsCopyrightEnd_Gfx, (void *)(VRAM + tileOffsetLoad));
-    LoadPalette(gIntroCopyright_Pal, palOffset, sizeof(gIntroCopyright_Pal));
-
-    baseTile = (palOffset / 16) << 12;
-
-    for (i = 0; i < 32 * 32; i++)
-        ((u16 *) (VRAM + tileOffsetWrite))[i] = baseTile;
-#endif
+        ((u16 *) (VRAM + tileOffsetWrite))[i] = baseTile + CREDITS_COPYRIGHT_END_TILE_OFFSET;
 }
 
 #if ENGLISH

@@ -688,7 +688,7 @@ static void LoadLeftHeaderGfxForMenu(u32 menuGfxId)
     RequestDma3Copy(gDecompressionBuffer, (void *)OBJ_VRAM0 + (GetSpriteTileStartByTag(2) * 32), size, 1);
     menu->leftHeaderSprites[1]->oam.tileNum = GetSpriteTileStartByTag(2) + sMenuLeftHeaderSpriteSheets[menuGfxId].size;
 
-#if ENGLISH
+#if ENGLISH || ITALIAN
     if (menuGfxId == POKENAV_GFX_MAP_MENU_ZOOMED_OUT || menuGfxId == POKENAV_GFX_MAP_MENU_ZOOMED_IN)
         menu->leftHeaderSprites[1]->x2 = 56;
     else
@@ -763,7 +763,7 @@ static void ShowLeftHeaderSprites(u32 startY, bool32 isOnRightSide)
     if (!isOnRightSide)
         start = -96, end = 32;
     else
-    #if ENGLISH
+    #if ENGLISH || ITALIAN
         start = 256, end = 160;
     #elif FRENCH
         start = 256, end = 144;
