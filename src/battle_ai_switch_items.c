@@ -1,6 +1,5 @@
 #include "global.h"
 #include "battle.h"
-#include "constants/battle_ai.h"
 #include "battle_ai_main.h"
 #include "battle_ai_util.h"
 #include "battle_util.h"
@@ -169,7 +168,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
     else
         return FALSE;
 
-    if (AI_GetAbility(gActiveBattler) == absorbingTypeAbility)
+    if (AI_DATA->abilities[gActiveBattler]) == absorbingTypeAbility)
         return FALSE;
 
     GetAIPartyIndexes(gActiveBattler, &firstId, &lastId);
@@ -220,8 +219,8 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
 static bool8 ShouldSwitchIfGameStatePrompt(void)
 {
     bool8 switchMon = FALSE;
-    u16 monAbility = AI_GetAbility(gActiveBattler);
-    u16 holdEffect = AI_GetHoldEffect(gActiveBattler);
+    u16 monAbility = AI_DATA->abilities[gActiveBattler];
+    u16 holdEffect = AI_DATA->holdEffects[gActiveBattler];
     u8 opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(gActiveBattler));
     u8 opposingBattler = GetBattlerAtPosition(opposingPosition);
     s32 moduloChance = 4; //25% Chance Default
@@ -267,8 +266,8 @@ static bool8 ShouldSwitchIfGameStatePrompt(void)
 
             //Check if Active Pokemon evasion boosted and might be able to dodge until awake
             if (gBattleMons[gActiveBattler].statStages[STAT_EVASION] > (DEFAULT_STAT_STAGE + 3)
-                && AI_GetAbility(opposingBattler) != ABILITY_UNAWARE
-                && AI_GetAbility(opposingBattler) != ABILITY_KEEN_EYE
+                && AI_DATA->abilities[opposingBattler] != ABILITY_UNAWARE
+                && AI_DATA->abilities[opposingBattler] != ABILITY_KEEN_EYE
                 && !(gBattleMons[gActiveBattler].status2 & STATUS2_FORESIGHT)
                 && !(gStatuses3[gActiveBattler] & STATUS3_MIRACLE_EYED))     
                 switchMon = FALSE;
@@ -334,7 +333,9 @@ static bool8 ShouldSwitchIfGameStatePrompt(void)
         return TRUE;
     }
     else
+    {
         return FALSE;
+    }
 }
 
 static bool8 ShouldSwitchIfAbilityBenefit(void)
@@ -352,7 +353,7 @@ static bool8 ShouldSwitchIfAbilityBenefit(void)
         ||IsNeutralizingGasOnField())
         return FALSE;
 
-    switch(AI_GetAbility(gActiveBattler)) {
+    switch(AI_DATA->abilities[gActiveBattler]) {
         case ABILITY_NATURAL_CURE:
             moduloChance = 4; //25%
             //Attempt to cure bad ailment     
