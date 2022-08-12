@@ -148,7 +148,7 @@ static void RemoveItemMessageWindow(u8);
 static void ReturnToItemList(u8);
 #if ENGLISH
 static void PrintItemQuantity(u8, s16);
-#elif FRENCH
+#elif FRENCH || ITALIAN
 static void PrintItemQuantity(u8, s16, u32);
 #endif
 static u8 BagMenu_AddWindow(u8);
@@ -334,7 +334,7 @@ static const u8 sContextMenuItems_BerryBlenderCrush[] = {
 #if ENGLISH
     ACTION_CONFIRM,     ACTION_CHECK_TAG,
     ACTION_DUMMY,       ACTION_CANCEL
-#elif FRENCH
+#elif FRENCH || ITALIAN
     ACTION_CONFIRM,     ACTION_DUMMY,
     ACTION_CHECK_TAG,   ACTION_DUMMY,
     ACTION_CANCEL,      ACTION_DUMMY
@@ -1203,7 +1203,7 @@ static void AddItemQuantityWindow(u8 windowType)
 {
 #if ENGLISH
     PrintItemQuantity(BagMenu_AddWindow(windowType), 1);
-#elif FRENCH
+#elif FRENCH || ITALIAN
     u32 windowId = BagMenu_AddWindow(windowType);
     PrintItemQuantity(windowId, 1, TEXT_SKIP_DRAW);
     CopyWindowToVram(windowId, 3);
@@ -1212,7 +1212,7 @@ static void AddItemQuantityWindow(u8 windowType)
 
 #if ENGLISH
 static void PrintItemQuantity(u8 windowId, s16 quantity)
-#elif FRENCH
+#elif FRENCH || ITALIAN
 static void PrintItemQuantity(u8 windowId, s16 quantity, u32 speed)
 #endif
 {
@@ -1221,7 +1221,7 @@ static void PrintItemQuantity(u8 windowId, s16 quantity, u32 speed)
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
 #if ENGLISH
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 40), 2, 0, 0);
-#elif FRENCH
+#elif FRENCH || ITALIAN
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 40), 2, speed, NULL);
 #endif
 }
@@ -1882,7 +1882,7 @@ static void Task_ChooseHowManyToToss(u8 taskId)
     {
     #if ENGLISH
         PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount);
-    #elif FRENCH
+    #elif FRENCH || ITALIAN
         PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount, 0);
     #endif
     }
@@ -2249,7 +2249,7 @@ static void Task_ChooseHowManyToDeposit(u8 taskId)
     {
     #if ENGLISH
         PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount);
-    #elif FRENCH
+    #elif FRENCH || ITALIAN
         PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount, 0);
     #endif
     }
@@ -2564,7 +2564,7 @@ static void DisplayCurrentMoneyWindow(void)
 {
     u8 windowId = BagMenu_AddWindow(ITEMWIN_MONEY);
     PrintMoneyAmountInMoneyBoxWithBorder(windowId, 1, 14, GetMoney(&gSaveBlock1Ptr->money));
-#if ENGLISH
+#if ENGLISH || ITALIAN
     AddMoneyLabelObject(19, 11);
 #elif FRENCH
     AddMoneyLabelObject(24, 11);

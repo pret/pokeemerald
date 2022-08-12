@@ -4261,7 +4261,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
 #if ENGLISH
     struct TextPrinterTemplate textPrinter;
     int i, j, k;
-#elif FRENCH
+#elif FRENCH || ITALIAN
     const u8 *trClassName;
     struct TextPrinterTemplate textPrinter;
     int i, j, k, trGender;
@@ -4357,7 +4357,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
 
     for (;gTrainerClassNames[j][i] != EOS; i++)
         gStringVar1[i] = gTrainerClassNames[j][i];
-#elif FRENCH
+#elif FRENCH || ITALIAN
     if (trainerId == TRAINER_PLAYER)
         j = gFacilityClassToTrainerClass[FACILITY_CLASS_BRENDAN], trGender = gSaveBlock2Ptr->playerGender;
     else if (trainerId == TRAINER_FRONTIER_BRAIN)

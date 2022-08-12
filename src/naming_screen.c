@@ -44,7 +44,7 @@ enum {
 
 #define KBROW_COUNT 4
 
-#if ENGLISH
+#if ENGLISH || ITALIAN
 #define KBCOL_COUNT 8
 #elif FRENCH
 #define KBCOL_COUNT 9
@@ -292,7 +292,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
 // This handles what characters get inserted when a key is pressed
 // The keys shown on the keyboard are handled separately by sNamingScreenKeyboardText
 static const u8 sKeyboardChars[KBPAGE_COUNT][KBROW_COUNT][KBCOL_COUNT] = {
-#if ENGLISH
+#if ENGLISH || ITALIAN
     [KEYBOARD_LETTERS_LOWER] = {
         __("abcdef ."),
         __("ghijkl ,"),
@@ -339,7 +339,7 @@ static const u8 sPageColumnCounts[KBPAGE_COUNT] = {
     [KEYBOARD_SYMBOLS]       = 6
 };
 static const u8 sPageColumnXPos[KBPAGE_COUNT * KBCOL_COUNT] = {
-#if ENGLISH
+#if ENGLISH || ITALIAN
     0, 12, 24, 56, 68, 80, 92, 123, // KEYBOARD_LETTERS_LOWER
     0, 12, 24, 56, 68, 80, 92, 123, // KEYBOARD_LETTERS_UPPER
     0, 22, 44, 66, 88, 110          // KEYBOARD_SYMBOLS
@@ -1757,7 +1757,7 @@ static void DrawMonTextEntryBox(void)
 
     StringCopy(buffer, gSpeciesNames[sNamingScreen->monSpecies]);
     StringAppendN(buffer, sNamingScreen->template->title, 15);
-#elif FRENCH
+#elif FRENCH || ITALIAN
     // StringVar1 is used as a buffer here
     u8 buffer[48];
 

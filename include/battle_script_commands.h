@@ -10,7 +10,7 @@
 // Arguments for 'xStart, yStart, xEnd, yEnd' in HandleBattleWindow
 #if ENGLISH
 #define YESNOBOX_X_Y 24, 8, 29, 13
-#elif FRENCH
+#elif FRENCH || ITALIAN
 #define YESNOBOX_X_Y 23, 8, 29, 13
 #endif
 

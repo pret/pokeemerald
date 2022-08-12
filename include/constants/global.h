@@ -32,6 +32,8 @@
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
 #elif FRENCH
 #define GAME_LANGUAGE (LANGUAGE_FRENCH)
+#elif ITALIAN
+#define GAME_LANGUAGE (LANGUAGE_ITALIAN)
 #endif
 
 // party sizes

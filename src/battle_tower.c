@@ -56,7 +56,7 @@ static void SetTowerBattleWon(void);
 static void AwardBattleTowerRibbons(void);
 static void SaveTowerChallenge(void);
 static void GetOpponentIntroSpeech(void);
-#if FRENCH
+#if FRENCH || ITALIAN
 static void GetOpponentIntroSpeech2(void);
 #endif
 static void BattleTowerNop1(void);
@@ -821,7 +821,7 @@ static void (* const sBattleTowerFuncs[])(void) =
     [BATTLE_TOWER_FUNC_TRY_CLOSE_LINK]      = TowerTryCloseLink,
     [BATTLE_TOWER_FUNC_SET_PARTNER_GFX]     = SetMultiPartnerGfx,
     [BATTLE_TOWER_FUNC_SET_INTERVIEW_DATA]  = SetTowerInterviewData,
-#if FRENCH
+#if FRENCH || ITALIAN
     [BATTLE_TOWER_FUNC_GET_OPPONENT_INTRO2] = GetOpponentIntroSpeech2,
 #endif
 };
@@ -900,6 +900,8 @@ static const u16 sRecordTrainerSpeechWon[] =
     EC_WORD_YAY, EC_WORD_YAY, EC_WORD_EXCL_EXCL, EC_WORD_I_VE, EC_WORD_WON, EC_WORD_EXCL_EXCL
 #elif FRENCH
     EC_WORD_YAY, EC_WORD_EXCL_EXCL, EC_WORD_I_VE, EC_EMPTY_WORD, EC_WORD_WINS, EC_WORD_EXCL_EXCL
+#elif ITALIAN
+    EC_WORD_PLAY, EC_WORD_IS_IT_QUES, EC_WORD_WON, EC_WORD_ISN_T_IT_QUES, EC_EMPTY_WORD, EC_EMPTY_WORD
 #endif
 };
 
@@ -909,6 +911,8 @@ static const u16 sRecordTrainerSpeechLost[] =
     EC_WORD_TOO, EC_WORD_BAD, EC_WORD_ELLIPSIS, EC_WORD_WE, EC_WORD_LOST, EC_WORD_ELLIPSIS
 #elif FRENCH
     EC_WORD_SLIMY, EC_WORD_ELLIPSIS, EC_WORD_TO_US, EC_WORD_EVEN_SO, EC_WORD_LOST, EC_WORD_EXCL
+#elif ITALIAN
+    EC_WORD_SCARY, EC_WORD_IS_IT_QUES, EC_WORD_LOST, EC_WORD_LOST, EC_WORD_LOST, EC_WORD_EXCL, EC_POKEMON(NONE)
 #endif
 };
 
@@ -1590,7 +1594,7 @@ void GetFrontierTrainerName(u8 *dst, u16 trainerId)
 
 #if ENGLISH
 static bool8 IsFrontierTrainerFemale(u16 trainerId)
-#elif FRENCH
+#elif FRENCH || ITALIAN
 bool8 IsFrontierTrainerFemale(u16 trainerId)
 #endif
 {
@@ -1950,7 +1954,7 @@ void FrontierSpeechToString(const u16 *words)
 
         gStringVar4[i] = CHAR_PROMPT_SCROLL;
     }
-#elif FRENCH
+#elif FRENCH || ITALIAN
     UnusedConvertEasyChatWordsToString(gStringVar4, words, 2, 3);
 #endif
 }
@@ -1975,7 +1979,7 @@ static void GetOpponentIntroSpeech(void)
         BufferApprenticeChallengeText(trainerId - TRAINER_RECORD_MIXING_APPRENTICE);
 }
 
-#if FRENCH
+#if FRENCH || ITALIAN
 void FrontierSpeechToString2(const u16 *words)
 {
     ConvertEasyChatWordsToString(gStringVar4, words, 3, 2);

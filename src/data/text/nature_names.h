@@ -50,6 +50,32 @@ static const u8 sGentleNatureName[] = _("GENTIL");
 static const u8 sSassyNatureName[] = _("MALPOLI");
 static const u8 sCarefulNatureName[] = _("PRUDENT");
 static const u8 sQuirkyNatureName[] = _("BIZARRE");
+#elif ITALIAN
+static const u8 sHardyNatureName[] = _("ARDITA");
+static const u8 sLonelyNatureName[] = _("SCHIVA");
+static const u8 sBraveNatureName[] = _("AUDACE");
+static const u8 sAdamantNatureName[] = _("DECISA");
+static const u8 sNaughtyNatureName[] = _("BIRBONA");
+static const u8 sBoldNatureName[] = _("SICURA");
+static const u8 sDocileNatureName[] = _("DOCILE");
+static const u8 sRelaxedNatureName[] = _("PLACIDA");
+static const u8 sImpishNatureName[] = _("SCALTRA");
+static const u8 sLaxNatureName[] = _("FIACCA");
+static const u8 sTimidNatureName[] = _("TIMIDA");
+static const u8 sHastyNatureName[] = _("LESTA");
+static const u8 sSeriousNatureName[] = _("SERIA");
+static const u8 sJollyNatureName[] = _("ALLEGRA");
+static const u8 sNaiveNatureName[] = _("INGENUA");
+static const u8 sModestNatureName[] = _("MODESTA");
+static const u8 sMildNatureName[] = _("MITE");
+static const u8 sQuietNatureName[] = _("QUIETA");
+static const u8 sBashfulNatureName[] = _("RITROSA");
+static const u8 sRashNatureName[] = _("ARDENTE");
+static const u8 sCalmNatureName[] = _("CALMA");
+static const u8 sGentleNatureName[] = _("GENTILE");
+static const u8 sSassyNatureName[] = _("VIVACE");
+static const u8 sCarefulNatureName[] = _("CAUTA");
+static const u8 sQuirkyNatureName[] = _("FURBA");
 #endif
 
 const u8 *const gNatureNamePointers[NUM_NATURES] =

@@ -38,6 +38,26 @@ const u8 gRibbonDescriptionPart1_Artist[] = _("RUBAN pour les modèles");
 const u8 gRibbonDescriptionPart2_Artist[] = _("exposés au musée.");
 const u8 gRibbonDescriptionPart1_Effort[] = _("RUBAN pour récompenser");
 const u8 gRibbonDescriptionPart2_Effort[] = _("un dur travail.");
+#elif ITALIAN
+const u8 gRibbonDescriptionPart1_Champion[] = _("FIOCCO CAMPIONE");
+const u8 gRibbonDescriptionPart2_Champion[] = _("della SALA d’ONORE");
+const u8 gRibbonDescriptionPart1_CoolContest[] = _("GARA di CLASSE");
+const u8 gRibbonDescriptionPart1_BeautyContest[] = _("GARA di BEL.ZA");
+const u8 gRibbonDescriptionPart1_CuteContest[] = _("GARA di GRAZIA");
+const u8 gRibbonDescriptionPart1_SmartContest[] = _("GARA di ACUME");
+const u8 gRibbonDescriptionPart1_ToughContest[] = _("GARA di GRINTA");
+const u8 gRibbonDescriptionPart2_NormalRank[] = _("Vincitore liv. Normale!");
+const u8 gRibbonDescriptionPart2_SuperRank[] = _("Vincitore livello Super!");
+const u8 gRibbonDescriptionPart2_HyperRank[] = _("Vincitore livello Iper!");
+const u8 gRibbonDescriptionPart2_MasterRank[] = _("Vincitore livello Master!");
+const u8 gRibbonDescriptionPart1_Winning[] = _("FIOCCO per il L. 50");
+const u8 gRibbonDescriptionPart2_Winning[] = _("della TORRE LOTTA!");
+const u8 gRibbonDescriptionPart1_Victory[] = _("FIOCCO per il L. LIBERO");
+const u8 gRibbonDescriptionPart2_Victory[] = _("della TORRE LOTTA!");
+const u8 gRibbonDescriptionPart1_Artist[] = _("FIOCCO per essere stato");
+const u8 gRibbonDescriptionPart2_Artist[] = _("scelto come modello.");
+const u8 gRibbonDescriptionPart1_Effort[] = _("FIOCCO per");
+const u8 gRibbonDescriptionPart2_Effort[] = _("aver lavorato duro.");
 #endif
 
 const u8 *const gRibbonDescriptionPointers[][2] =

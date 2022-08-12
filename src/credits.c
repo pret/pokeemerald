@@ -790,7 +790,7 @@ static void Task_UpdatePage(u8 taskId)
         {
         #if ENGLISH
             gTasks[taskId].tDelay = 115;
-        #elif FRENCH
+        #elif FRENCH || ITALIAN
             gTasks[taskId].tDelay = 121;
         #endif
             gTasks[taskId].tState++;
@@ -928,7 +928,7 @@ static void Task_ShowMons(u8 taskId)
             sCreditsData->currShownMon++;
         #if ENGLISH
             gSprites[spriteId].data[3] = 50;
-        #elif FRENCH
+        #elif FRENCH || ITALIAN
             gSprites[spriteId].data[3] = 52;
         #endif
         }
@@ -946,7 +946,7 @@ static void Task_ShowMons(u8 taskId)
 
     #if ENGLISH
         gTasks[taskId].tDelay = 50;
-    #elif FRENCH
+    #elif FRENCH || ITALIAN
         gTasks[taskId].tDelay = 52;
     #endif
         gTasks[taskId].tState++;
@@ -1095,7 +1095,7 @@ static void Task_CycleSceneryPalette(u8 taskId)
         {
         #if ENGLISH
             if (gTasks[taskId].tTimer == 584)
-        #elif FRENCH
+        #elif FRENCH || ITALIAN
             if (gTasks[taskId].tTimer == 620)
         #endif
             {
@@ -1317,7 +1317,7 @@ static void LoadTheEndScreen(u16 tileOffsetLoad, u16 tileOffsetWrite, u16 palOff
 
     for (i = 0; i < 32 * 32; i++)
         ((u16 *) (VRAM + tileOffsetWrite))[i] = baseTile + 1;
-#elif FRENCH
+#elif FRENCH || ITALIAN
     LZ77UnCompVram(gCreditsCopyrightEnd_Gfx, (void *)(VRAM + tileOffsetLoad));
     LoadPalette(gIntroCopyright_Pal, palOffset, sizeof(gIntroCopyright_Pal));
 
@@ -1371,7 +1371,7 @@ static void DrawTheEnd(u16 offset, u16 palette)
     DrawLetterMapTiles(sTheEnd_LetterMap_N, 20, 7, offset, palette);
     DrawLetterMapTiles(sTheEnd_LetterMap_D, 24, 7, offset, palette);
 }
-#elif FRENCH
+#elif FRENCH || ITALIAN
 static void DrawTheEnd(u16 offset, u16 palette)
 {
     LZ77UnCompVram(gCreditsCopyrightEnd_Tilemap, ((u16 *) (VRAM + offset)));

@@ -20,7 +20,6 @@ static const u16 sLilycoveLadyGfxId[] =
 
 // Quiz Lady data
 #if ENGLISH
-
 static const u16 sQuizLadyQuestion1[QUIZ_QUESTION_LEN] =
 {
     EC_WORD_WHICH,
@@ -436,6 +435,214 @@ static const u16 sQuizLadyQuestion16[QUIZ_QUESTION_LEN] =
    EC_WORD_DARK,
    EC_EMPTY_WORD
 };
+#elif ITALIAN
+static const u16 sQuizLadyQuestion1[QUIZ_QUESTION_LEN] =
+{
+    EC_WORD_THING,
+    EC_WORD_HAVE,
+    EC_WORD_INFORMATION,
+    EC_WORD_UP,
+    EC_WORD_POKEMON,
+    EC_WORD_QUES,
+    EC_WORD_TELEVISION,
+    EC_WORD_POKEDEX,
+    EC_WORD_POKENAV,
+};
+
+static const u16 sQuizLadyQuestion2[QUIZ_QUESTION_LEN] =
+{
+    EC_WORD_GIMME,
+    EC_WORD_AS_IF,
+    EC_WORD_IS,
+    EC_WORD_TO,
+    EC_WORD_VERSION,
+    EC_WORD_QUES,
+    EC_WORD_RUBY,
+    EC_WORD_SAPPHIRE,
+    EC_WORD_DARK,
+};
+
+static const u16 sQuizLadyQuestion3[QUIZ_QUESTION_LEN] =
+{
+    EC_WORD_THING,
+    EC_WORD_PLAYED,
+    EC_WORD_EVOLVE,
+    EC_WORD_A,
+    EC_WORD_POKEMON,
+    EC_WORD_QUES,
+    EC_WORD_LEVEL,
+    EC_WORD_INSOMNIA,
+    EC_WORD_CUTE_CHARM,
+};
+
+static const u16 sQuizLadyQuestion4[QUIZ_QUESTION_LEN] =
+{
+    EC_WORD_MISS,
+    EC_MOVE(SWEET_SCENT),
+    EC_WORD_LISTEN,
+    EC_WORD_ELLIPSIS,
+    EC_WORD_ELLIPSIS,
+    EC_WORD_QUES,
+    EC_WORD_MESSAGE,
+    EC_WORD_FLOWERS,
+    EC_WORD_DISAPPOINT,
+};
+
+static const u16 sQuizLadyQuestion5[QUIZ_QUESTION_LEN] =
+{
+    EC_WORD_GIMME,
+    EC_WORD_AS_IF,
+    EC_WORD_IS,
+    EC_WORD_VERY,
+    EC_WORD_ROCK_SOLID,
+    EC_WORD_QUES,
+    EC_WORD_EGG,
+    EC_WORD_MAIL,
+    EC_WORD_PHONE,
+};
+
+static const u16 sQuizLadyQuestion6[QUIZ_QUESTION_LEN] =
+{
+    EC_WORD_MISS,
+    EC_WORD_THING,
+    EC_WORD_CHANGE,
+    EC_WORD_TAKE_THAT,
+    EC_MOVE2(CONFUSION),
+    EC_WORD_QUES,
+    EC_WORD_ILLUMINATE,
+    EC_WORD_OWN_TEMPO,
+    EC_WORD_SWIFT_SWIM,
+};
+
+static const u16 sQuizLadyQuestion7[QUIZ_QUESTION_LEN] =
+{
+    EC_WORD_GIMME,
+    EC_WORD_IS,
+    EC_WORD_TO,
+    EC_WORD_THIN,
+    EC_WORD_MUSIC,
+    EC_WORD_QUES,
+    EC_WORD_CHAT,
+    EC_WORD_SHOPPING,
+    EC_WORD_ANIME,
+};
+
+static const u16 sQuizLadyQuestion8[QUIZ_QUESTION_LEN] =
+{
+    EC_WORD_THING,
+    EC_WORD_LEARN,
+    EC_WORD_FAINT,
+    EC_WORD_VERSUS,
+    EC_WORD_ESCAPE,
+    EC_WORD_QUES,
+    EC_WORD_RUN_AWAY,
+    EC_WORD_SHADOW_TAG,
+    EC_WORD_WONDER_GUARD,
+};
+
+static const u16 sQuizLadyQuestion9[QUIZ_QUESTION_LEN] =
+{
+    EC_WORD_THING,
+    EC_WORD_THERE,
+    EC_WORD_USING,
+    EC_WORD_VERSUS,
+    EC_WORD_POISON,
+    EC_WORD_QUES,
+    EC_WORD_GUTS,
+    EC_WORD_IMMUNITY,
+    EC_WORD_SHED_SKIN,
+};
+
+static const u16 sQuizLadyQuestion10[QUIZ_QUESTION_LEN] =
+{
+    EC_WORD_MISS,
+    EC_WORD_THING,
+    EC_WORD_STORES,
+    EC_WORD_LAY,
+    EC_WORD_CENTER,
+    EC_WORD_QUES,
+    EC_WORD_POKEDEX,
+    EC_WORD_POKEMON,
+    EC_WORD_POKENAV,
+};
+
+static const u16 sQuizLadyQuestion11[QUIZ_QUESTION_LEN] =
+{
+    EC_WORD_EVEN_SO,
+    EC_WORD_THINKS,
+    EC_WORD_ALL,
+    EC_WORD_DID,
+    EC_WORD_POKEMON,
+    EC_WORD_QUES,
+    EC_WORD_PC,
+    EC_WORD_CLASS,
+    EC_WORD_TELEVISION,
+};
+
+static const u16 sQuizLadyQuestion12[QUIZ_QUESTION_LEN] =
+{
+    EC_WORD_IS,
+    EC_WORD_TO,
+    EC_WORD_MACHINE,
+    EC_WORD_NITWIT,
+    EC_WORD_INFORMATION,
+    EC_WORD_ELLIPSIS,
+    EC_WORD_BIKE,
+    EC_WORD_TRAIN,
+    EC_WORD_TELEVISION,
+};
+
+static const u16 sQuizLadyQuestion13[QUIZ_QUESTION_LEN] =
+{
+    EC_WORD_THING,
+    EC_WORD_CHANGE,
+    EC_WORD_CONCEDE,
+    EC_WORD_A,
+    EC_WORD_POKEMON,
+    EC_WORD_QUES,
+    EC_WORD_PHONE,
+    EC_WORD_PLUSH_DOLL,
+    EC_WORD_MAIL,
+};
+
+static const u16 sQuizLadyQuestion14[QUIZ_QUESTION_LEN] =
+{
+    EC_WORD_VERSUS,
+    EC_WORD_THING,
+    EC_WORD_IS,
+    EC_WORD_STRONG,
+    EC_WORD_STEEL,
+    EC_WORD_QUES,
+    EC_WORD_ICE,
+    EC_WORD_GROUND,
+    EC_EMPTY_WORD,
+};
+
+static const u16 sQuizLadyQuestion15[QUIZ_QUESTION_LEN] =
+{
+    EC_WORD_VERSUS,
+    EC_WORD_THING,
+    EC_WORD_IS,
+    EC_WORD_WEAK,
+    EC_WORD_DARK,
+    EC_WORD_QUES,
+    EC_WORD_PSYCHIC,
+    EC_WORD_FIGHTING,
+    EC_EMPTY_WORD,
+};
+
+static const u16 sQuizLadyQuestion16[QUIZ_QUESTION_LEN] =
+{
+    EC_WORD_VERSUS,
+    EC_WORD_THING,
+    EC_WORD_IS,
+    EC_WORD_WEAK,
+    EC_WORD_GHOST,
+    EC_WORD_QUES,
+    EC_WORD_NORMAL,
+    EC_WORD_DARK,
+    EC_EMPTY_WORD,
+};
 #endif
 
 static const u16 *const sQuizLadyQuizQuestions[] =
@@ -494,6 +701,23 @@ static const u16 sQuizLadyQuizAnswers[] =
     EC_WORD_ICE,
     EC_WORD_FIGHTING,
     EC_WORD_DARK
+#elif ITALIAN
+    EC_WORD_POKEDEX,
+    EC_WORD_DARK,
+    EC_WORD_LEVEL,
+    EC_WORD_FLOWERS,
+    EC_WORD_EGG,
+    EC_WORD_OWN_TEMPO,
+    EC_WORD_ANIME,
+    EC_WORD_SHADOW_TAG,
+    EC_WORD_IMMUNITY,
+    EC_WORD_POKEMON,
+    EC_WORD_PC,
+    EC_WORD_TELEVISION,
+    EC_WORD_PLUSH_DOLL,
+    EC_WORD_ICE,
+    EC_WORD_FIGHTING,
+    EC_WORD_DARK,
 #endif
 };
 

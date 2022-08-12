@@ -209,6 +209,8 @@ static void TossDecoration(u8 taskId);
 #include "data/decoration/description.h"
 #elif FRENCH
 #include "data/decoration/description_fr.h"
+#elif ITALIAN
+#include "data/decoration/description_it.h"
 #endif
 #include "data/decoration/header.h"
 

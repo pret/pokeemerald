@@ -1,6 +1,6 @@
 #include "global.h"
 #include "decompress.h"
-#if FRENCH
+#if FRENCH || ITALIAN
 #include "graphics.h"
 #endif
 #include "link.h"
@@ -611,7 +611,7 @@ static void Load321StartGfx(u16 tileTag, u16 palTag)
 #if ENGLISH
     struct CompressedSpriteSheet spriteSheet = {s321Start_Gfx, 0xE00, 0};
     struct SpritePalette spritePalette = {s321Start_Pal, 0};
-#elif FRENCH
+#elif FRENCH || ITALIAN
     struct CompressedSpriteSheet spriteSheet = {g321Start_Gfx, 0xE00, 0};
     struct SpritePalette spritePalette = {g321Start_Pal, 0};
 #endif

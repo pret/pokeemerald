@@ -471,6 +471,25 @@ const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
     [TYPE_ICE] = _("GLACE"),
     [TYPE_DRAGON] = _("DRAGON"),
     [TYPE_DARK] = _("TENEBR"),
+#elif ITALIAN
+    [TYPE_NORMAL] = _("NORM"),
+    [TYPE_FIGHTING] = _("LOTTA"),
+    [TYPE_FLYING] = _("VOLAN"),
+    [TYPE_POISON] = _("VELENO"),
+    [TYPE_GROUND] = _("TERRA"),
+    [TYPE_ROCK] = _("ROCCIA"),
+    [TYPE_BUG] = _("COLEOT"),
+    [TYPE_GHOST] = _("SP.TRO"),
+    [TYPE_STEEL] = _("ACC.IO"),
+    [TYPE_MYSTERY] = _("???"),
+    [TYPE_FIRE] = _("FUOCO"),
+    [TYPE_WATER] = _("ACQUA"),
+    [TYPE_GRASS] = _("ERBA"),
+    [TYPE_ELECTRIC] = _("ELETT"),
+    [TYPE_PSYCHIC] = _("PSICO"),
+    [TYPE_ICE] = _("GHIACC"),
+    [TYPE_DRAGON] = _("DRAGO"),
+    [TYPE_DARK] = _("BUIO"),
 #endif
 };
 
@@ -538,7 +557,9 @@ const struct TrainerMoney gTrainerMoneyTable[] =
 #if ENGLISH
 #include "data/text/abilities.h"
 #elif FRENCH
-#include "data/text/abilities_fr.h"
+#include "data/text/fr/abilities.h"
+#elif ITALIAN
+#include "data/text/it/abilities.h"
 #endif
 
 static void (* const sTurnActionsFuncsTable[])(void) =

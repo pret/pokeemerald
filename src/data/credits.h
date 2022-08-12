@@ -56,7 +56,7 @@ enum
     PAGE_BRAILLE_CODE_CHECK_2,
 #endif
     PAGE_SPECIAL_THANKS_5,
-#if FRENCH
+#if FRENCH || ITALIAN
     PAGE_SPECIAL_THANKS_6,
 #endif
     PAGE_TASK_MANAGERS,
@@ -74,6 +74,8 @@ static const u8 sCreditsText_EmptyString[]                    = _("");
 static const u8 sCreditsText_PkmnEmeraldVersion[]             = _("POKéMON EMERALD VERSION");
 #elif FRENCH
 static const u8 sCreditsText_PkmnEmeraldVersion[]             = _("POKéMON VERSION EMERAUDE");
+#elif ITALIAN
+static const u8 sCreditsText_PkmnEmeraldVersion[]             = _("POKéMON VERSIONE SMERALDO");
 #endif
 static const u8 sCreditsText_Credits[]                        = _("Credits");
 static const u8 sCreditsText_ExecutiveDirector[]              = _("Executive Director");
@@ -206,13 +208,18 @@ static const u8 sCreditsText_ShusakuEgami[]                   = _("Shusaku Egami
 static const u8 sCreditsText_PackageAndManual[]               = _("Package & Manual Illustration");
 #if ENGLISH
 static const u8 sCreditsText_EnglishVersion[]                 = _("English Version Coordinators");
+#elif FRENCH
+static const u8 sCreditsText_EnglishVersion[]                 = _("French Version Coordinators");
+#elif ITALIAN
+static const u8 sCreditsText_EnglishVersion[]                 = _("Italian Version Coordinators");
+#endif
+#if ENGLISH
 static const u8 sCreditsText_Translator[]                     = _("Translator");
 static const u8 sCreditsText_TextEditor[]                     = _("Text Editor");
 static const u8 sCreditsText_NCLCoordinator[]                 = _("NCL Coordinator");
 static const u8 sCreditsText_GraphicDesigner[]                = _("Graphic Designer");
 static const u8 sCreditsText_NOAProductTesting[]              = _("NOA Product Testing");
-#elif FRENCH
-static const u8 sCreditsText_EnglishVersion[]                 = _("French Version Coordinators");
+#elif FRENCH || ITALIAN
 static const u8 sCreditsText_Translator[]                     = _("Translators");
 static const u8 sCreditsText_TextEditor[]                     = _("Text Editor");
 static const u8 sCreditsText_NCLCoordinator[]                 = _("NCL Coordinators");
@@ -240,19 +247,25 @@ static const u8 sCreditsText_AustralianBrailleAuthority[]     = _("Australian Br
 static const u8 sCreditsText_RoyalNewZealandFederationBlind[] = _("Royal New Zealand Federation for the Blind");
 static const u8 sCreditsText_MotoyasuTojima[]                 = _("Motoyasu Tojima");
 static const u8 sCreditsText_NicolaPrattBarlow[]              = _("Nicola Pratt-Barlow");
-static const u8 sCreditsText_ShellieDow[]                     = _("Shellie Dow");
-static const u8 sCreditsText_ErikJohnson[]                    = _("Erik Johnson");
-#elif FRENCH
+#elif FRENCH || ITALIAN
 static const u8 sCreditsText_EuropeanBlindUnion2[]            = _("European Blind Union");
 static const u8 sCreditsText_MotoyasuTojima[]                 = _("Motoyasu Tojima");
 static const u8 sCreditsText_NicolaPrattBarlow[]              = _("Nicola Wright"); // Possibly got married :)
+#endif
 static const u8 sCreditsText_ShellieDow[]                     = _("Shellie Dow");
 static const u8 sCreditsText_ErikJohnson[]                    = _("Erik Johnson");
 // New
+#if FRENCH || ITALIAN
 static const u8 sCreditsText_NorikoNetley[]                   = _("Noriko Netley");
+#if FRENCH
 static const u8 sCreditsText_PierreSanchez[]                  = _("Pierre Sanchez");
 static const u8 sCreditsText_SabrinaBretant[]                 = _("Sabrina Bretant");
 static const u8 sCreditsText_ThomasFougeray[]                 = _("Thomas Fougeray");
+#elif ITALIAN
+static const u8 sCreditsText_PierreSanchez[]                  = _("Elena Nardo");
+static const u8 sCreditsText_SabrinaBretant[]                 = _("Giovanna Prati");
+static const u8 sCreditsText_ThomasFougeray[]                 = _("Andrea Salvi");
+#endif
 static const u8 sCreditsText_AlessioDanieli[]                 = _("Alessio Danieli");
 static const u8 sCreditsText_NOETestingTeam[]                 = _("NOE Testing Team");
 static const u8 sCreditsText_StefanRomberg[]                  = _("Stefan Romberg");
@@ -416,17 +429,16 @@ static const struct CreditsEntry sCreditsEntry_EuropeanBlindUnion[]             
 static const struct CreditsEntry sCreditsEntry_AustralianBrailleAuthority[]     = { 0, FALSE, sCreditsText_AustralianBrailleAuthority};
 #if ENGLISH
 static const struct CreditsEntry sCreditsEntry_RoyalNewZealandFederationBlind[] = { 0, FALSE, sCreditsText_RoyalNewZealandFederationBlind};
-static const struct CreditsEntry sCreditsEntry_MotoyasuTojima[]                 = { 0, FALSE, sCreditsText_MotoyasuTojima};
-static const struct CreditsEntry sCreditsEntry_NicolaPrattBarlow[]              = { 0, FALSE, sCreditsText_NicolaPrattBarlow};
-static const struct CreditsEntry sCreditsEntry_ShellieDow[]                     = { 0, FALSE, sCreditsText_ShellieDow};
-static const struct CreditsEntry sCreditsEntry_ErikJohnson[]                    = { 0, FALSE, sCreditsText_ErikJohnson};
-#elif FRENCH
+#elif FRENCH || ITALIAN
 static const struct CreditsEntry sCreditsEntry_EuropeanBlindUnion2[]            = { 0, FALSE, sCreditsText_EuropeanBlindUnion2};
+#endif
 static const struct CreditsEntry sCreditsEntry_MotoyasuTojima[]                 = { 0, FALSE, sCreditsText_MotoyasuTojima};
 static const struct CreditsEntry sCreditsEntry_NicolaPrattBarlow[]              = { 0, FALSE, sCreditsText_NicolaPrattBarlow};
 static const struct CreditsEntry sCreditsEntry_ShellieDow[]                     = { 0, FALSE, sCreditsText_ShellieDow};
 static const struct CreditsEntry sCreditsEntry_ErikJohnson[]                    = { 0, FALSE, sCreditsText_ErikJohnson};
+
 // New
+#if FRENCH || ITALIAN
 static const struct CreditsEntry sCreditsEntry_NorikoNetley[]                   = { 0, FALSE, sCreditsText_NorikoNetley};
 static const struct CreditsEntry sCreditsEntry_PierreSanchez[]                  = { 0, FALSE, sCreditsText_PierreSanchez};
 static const struct CreditsEntry sCreditsEntry_SabrinaBretant[]                 = { 0, FALSE, sCreditsText_SabrinaBretant};
@@ -758,7 +770,7 @@ static const struct CreditsEntry *const sCreditsEntryPointerTable[PAGE_COUNT][EN
         _,
         _,
     },
-#elif FRENCH
+#elif FRENCH || ITALIAN
     [PAGE_ENGLISH_VERSION] = {
         _,
         sCreditsEntry_EnglishVersion,
@@ -831,7 +843,7 @@ static const struct CreditsEntry *const sCreditsEntryPointerTable[PAGE_COUNT][EN
         sCreditsEntry_NicolaPrattBarlow,
         sCreditsEntry_ShellieDow,
     },
-#elif FRENCH
+#elif FRENCH || ITALIAN
     [PAGE_NOA_TESTING] = {
         _,
         sCreditsEntry_NOAProductTesting,

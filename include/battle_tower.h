@@ -59,7 +59,7 @@ void PutNewBattleTowerRecord(struct EmeraldBattleTowerRecord *newRecordEm);
 u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
 u8 GetFrontierOpponentClass(u16 trainerId);
 void GetFrontierTrainerName(u8 *dst, u16 trainerId);
-#if FRENCH
+#if FRENCH || ITALIAN
 bool8 IsFrontierTrainerFemale(u16 trainerId);
 #endif
 void FillFrontierTrainerParty(u8 monsCount);

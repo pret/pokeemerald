@@ -27,5 +27,9 @@ AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus::
 .else
 .ifdef FRENCH
 	.include "data/maps/AbandonedShip_CaptainsOffice/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/AbandonedShip_CaptainsOffice/text_it.inc"
+.endif
 .endif
 .endif

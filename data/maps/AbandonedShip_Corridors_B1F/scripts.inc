@@ -58,5 +58,9 @@ AbandonedShip_Corridors_B1F_EventScript_Duncan::
 .else
 .ifdef FRENCH
 	.include "data/maps/AbandonedShip_Corridors_B1F/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/AbandonedShip_Corridors_B1F/text_it.inc"
+.endif
 .endif
 .endif

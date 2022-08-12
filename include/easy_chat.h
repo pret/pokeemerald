@@ -126,7 +126,7 @@ u8 * CopyEasyChatWord(u8 *dest, u16 word);
 bool32 IsEasyChatAnswerUnlocked(int word);
 void InitializeEasyChatWordArray(u16 *words, u16 length);
 u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows);
-#if FRENCH
+#if FRENCH || ITALIAN
 u8 *UnusedConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows);
 #endif
 bool8 IsBardWordInvalid(u16 word);

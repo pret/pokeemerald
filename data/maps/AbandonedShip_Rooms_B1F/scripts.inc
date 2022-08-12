@@ -10,18 +10,14 @@ AbandonedShip_Rooms_B1F_EventScript_FatMan::
 	msgbox AbandonedShip_Rooms_B1F_Text_GettingQueasy, MSGBOX_NPC
 	end
 
-AbandonedShip_Rooms_B1F_Text_GettingQueasy:
 .ifdef ENGLISH
-	.string "Urrrrppp…\p"
-	.string "I'm getting queasy just being aboard\n"
-	.string "this ship…\p"
-	.string "It's not even moving, but…$"
+	.include "data/maps/AbandonedShip_Rooms_B1F/text.inc"
 .else
 .ifdef FRENCH
-	.string "Hoooou…\p"
-	.string "J’ai mal au cœur rien que d’être à bord\n"
-	.string "de ce bateau…\p"
-	.string "Ça ne bouge même pas, mais…$"
+	.include "data/maps/AbandonedShip_Rooms_B1F/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/AbandonedShip_Rooms_B1F/text_it.inc"
 .endif
 .endif
-
+.endif

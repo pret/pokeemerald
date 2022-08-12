@@ -198,6 +198,93 @@ static const u8 sBerryDescriptionPart1_Starf[] = _("Trop puissante, elle fut aba
 static const u8 sBerryDescriptionPart2_Starf[] = _("au bout du monde. On parle de mirage.");
 static const u8 sBerryDescriptionPart1_Enigma[] = _("Une BAIE très énigmatique qui");
 static const u8 sBerryDescriptionPart2_Enigma[] = _("détiendrait le pouvoir des étoiles.");
+#elif ITALIAN
+static const u8 sBerryDescriptionPart1_Cheri[] = _("Fiorisce con bei fiorellini delicati. La");
+static const u8 sBerryDescriptionPart2_Cheri[] = _("BACCA di un rosso vivo è molto pepata.");
+static const u8 sBerryDescriptionPart1_Chesto[] = _("La scorza spessa e il frutto sono");
+static const u8 sBerryDescriptionPart2_Chesto[] = _("durissimi. Ha un gusto molto secco.");
+static const u8 sBerryDescriptionPart1_Pecha[] = _("BACCA molto dolce e gustosa.");
+static const u8 sBerryDescriptionPart2_Pecha[] = _("Molto tenera, maneggiare con cura.");
+static const u8 sBerryDescriptionPart1_Rawst[] = _("Se le foglie sono lunghe e ricce,");
+static const u8 sBerryDescriptionPart2_Rawst[] = _("la BACCA diventa molto amara.");
+static const u8 sBerryDescriptionPart1_Aspear[] = _("Questa dura BACCA è ricca di un succo");
+static const u8 sBerryDescriptionPart2_Aspear[] = _("molto nutriente. È piuttosto aspra.");
+static const u8 sBerryDescriptionPart1_Leppa[] = _("Matura più lenta della BACCALIEGIA. Le");
+static const u8 sBerryDescriptionPart2_Leppa[] = _("BACCHE più piccole sono più saporite.");
+static const u8 sBerryDescriptionPart1_Oran[] = _("Una BACCA speciale con sapori misti.");
+static const u8 sBerryDescriptionPart2_Oran[] = _("Matura in mezza giornata.");
+static const u8 sBerryDescriptionPart1_Persim[] = _("Ama la luce solare. Se esposta al sole,");
+static const u8 sBerryDescriptionPart2_Persim[] = _("i colori della BACCA si fanno più vivi.");
+static const u8 sBerryDescriptionPart1_Lum[] = _("Matura lentamente. Se coltivata con");
+static const u8 sBerryDescriptionPart2_Lum[] = _("cura, può produrre due BACCHE.");
+static const u8 sBerryDescriptionPart1_Sitrus[] = _("Strettamente collegata alla");
+static const u8 sBerryDescriptionPart2_Sitrus[] = _("BACCARANCIA, ha un sapore rotondo.");
+static const u8 sBerryDescriptionPart1_Figy[] = _("BACCA dall’aspetto rosicchiato");
+static const u8 sBerryDescriptionPart2_Figy[] = _("ricca di sostanze pepate.");
+static const u8 sBerryDescriptionPart1_Wiki[] = _("Pare che la consistenza grumosa");
+static const u8 sBerryDescriptionPart2_Wiki[] = _("della BACCA aiuti i POKéMON a coglierla.");
+static const u8 sBerryDescriptionPart1_Mago[] = _("La BACCA s’incurva crescendo,");
+static const u8 sBerryDescriptionPart2_Mago[] = _("diventando più dolce e saporita.");
+static const u8 sBerryDescriptionPart1_Aguav[] = _("Il fiore è molto delicato. Possiede la");
+static const u8 sBerryDescriptionPart2_Aguav[] = _("rara capacità di crescere al buio.");
+static const u8 sBerryDescriptionPart1_Iapapa[] = _("BACCA molto grande e aspra. Ci");
+static const u8 sBerryDescriptionPart2_Iapapa[] = _("mette almeno un giorno per maturare.");
+static const u8 sBerryDescriptionPart1_Razz[] = _("BACCA rossa e leggermente pepata.");
+static const u8 sBerryDescriptionPart2_Razz[] = _("Matura velocemente in sole 4 ore.");
+static const u8 sBerryDescriptionPart1_Bluk[] = _("Esternamente la BACCA è blu, ma");
+static const u8 sBerryDescriptionPart2_Bluk[] = _("quando si mangia annerisce la lingua.");
+static const u8 sBerryDescriptionPart1_Nanab[] = _("Questa BACCA dolce è la settima");
+static const u8 sBerryDescriptionPart2_Nanab[] = _("scoperta al mondo.");
+static const u8 sBerryDescriptionPart1_Wepear[] = _("Il fiore è piccolo e bianco. La BACCA");
+static const u8 sBerryDescriptionPart2_Wepear[] = _("ha un sapore amaro e aspro.");
+static const u8 sBerryDescriptionPart1_Pinap[] = _("Non resiste al freddo e al vento.");
+static const u8 sBerryDescriptionPart2_Pinap[] = _("Il frutto è pepato e la buccia aspra.");
+static const u8 sBerryDescriptionPart1_Pomeg[] = _("Per quanto venga annaffiata,");
+static const u8 sBerryDescriptionPart2_Pomeg[] = _("non produce più di sei BACCHE.");
+static const u8 sBerryDescriptionPart1_Kelpsy[] = _("Una specie rara a forma di radice.");
+static const u8 sBerryDescriptionPart2_Kelpsy[] = _("Produce un fiore molto grande.");
+static const u8 sBerryDescriptionPart1_Qualot[] = _("Adora l’acqua. Cresce forte anche in");
+static const u8 sBerryDescriptionPart2_Qualot[] = _("luoghi con precipitazioni persistenti.");
+static const u8 sBerryDescriptionPart1_Hondew[] = _("BACCA rara e preziosa,");
+static const u8 sBerryDescriptionPart2_Hondew[] = _("oltre ad essere squisita.");
+static const u8 sBerryDescriptionPart1_Grepa[] = _("Nonostante la morbida consistenza e");
+static const u8 sBerryDescriptionPart2_Grepa[] = _("la forma rotonda, è molto aspra.");
+static const u8 sBerryDescriptionPart1_Tamato[] = _("Questa BACCA è incredibilmente");
+static const u8 sBerryDescriptionPart2_Tamato[] = _("pepata e lenta a maturare.");
+static const u8 sBerryDescriptionPart1_Cornn[] = _("BACCA già conosciuta nell’antichità.");
+static const u8 sBerryDescriptionPart2_Cornn[] = _("Cresce solo nelle colture intensive.");
+static const u8 sBerryDescriptionPart1_Magost[] = _("BACCA conosciuta come frutto");
+static const u8 sBerryDescriptionPart2_Magost[] = _("dal sapore agrodolce bilanciato.");
+static const u8 sBerryDescriptionPart1_Rabuta[] = _("Una specie rara ricoperta da una");
+static const u8 sBerryDescriptionPart2_Rabuta[] = _("fitta peluria. Sapore piuttosto amaro.");
+static const u8 sBerryDescriptionPart1_Nomel[] = _("BACCA asperrima. Assaggiandola non");
+static const u8 sBerryDescriptionPart2_Nomel[] = _("si sente più alcun sapore per 3 giorni.");
+static const u8 sBerryDescriptionPart1_Spelon[] = _("BACCA rosso vivo. Le protuberanze");
+static const u8 sBerryDescriptionPart2_Spelon[] = _("producono una sostanza molto pepata.");
+static const u8 sBerryDescriptionPart1_Pamtre[] = _("È portata dalle onde del mare.");
+static const u8 sBerryDescriptionPart2_Pamtre[] = _("Pare che cresca altrove.");
+static const u8 sBerryDescriptionPart1_Watmel[] = _("Ne è stata scoperta una enorme con");
+static const u8 sBerryDescriptionPart2_Watmel[] = _("diametro di 50 cm. È dolcissima.");
+static const u8 sBerryDescriptionPart1_Durin[] = _("È talmente amara che nessuno è mai");
+static const u8 sBerryDescriptionPart2_Durin[] = _("riuscito a mangiarla così com’è.");
+static const u8 sBerryDescriptionPart1_Belue[] = _("È lucida e pare deliziosa, ma in realtà");
+static const u8 sBerryDescriptionPart2_Belue[] = _("è molto aspra. Matura lentamente.");
+static const u8 sBerryDescriptionPart1_Liechi[] = _("BACCA misteriosa. Si dice che");
+static const u8 sBerryDescriptionPart2_Liechi[] = _("abbia in sé la forza del mare.");
+static const u8 sBerryDescriptionPart1_Ganlon[] = _("BACCA misteriosa. Si dice che");
+static const u8 sBerryDescriptionPart2_Ganlon[] = _("abbia in sé la forza della terra.");
+static const u8 sBerryDescriptionPart1_Salac[] = _("BACCA misteriosa. Si dice che");
+static const u8 sBerryDescriptionPart2_Salac[] = _("abbia in sé la forza del cielo.");
+static const u8 sBerryDescriptionPart1_Petaya[] = _("BACCA misteriosa. Si dice che abbia in");
+static const u8 sBerryDescriptionPart2_Petaya[] = _("sé la forza di tutti gli esseri viventi.");
+static const u8 sBerryDescriptionPart1_Apicot[] = _("BACCA misteriosa. Non si sa come");
+static const u8 sBerryDescriptionPart2_Apicot[] = _("usarla, né i possibili risultati.");
+static const u8 sBerryDescriptionPart1_Lansat[] = _("È conosciuta come BACCA leggendaria.");
+static const u8 sBerryDescriptionPart2_Lansat[] = _("Pare che porti gioia a chi la tiene.");
+static const u8 sBerryDescriptionPart1_Starf[] = _("Quasi mai usata per il suo sapore così");
+static const u8 sBerryDescriptionPart2_Starf[] = _("forte. È considerata un miraggio.");
+static const u8 sBerryDescriptionPart1_Enigma[] = _("BACCA altamente enigmatica.");
+static const u8 sBerryDescriptionPart2_Enigma[] = _("Pare possedere la forza delle stelle.");
 #endif
 
 const struct Berry gBerries[] =
@@ -208,6 +295,8 @@ const struct Berry gBerries[] =
         .name = _("CHERI"),
     #elif FRENCH
         .name = _("CERIZ"),
+    #elif ITALIAN
+        .name = _("LIEGIA"),
     #endif
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 20,
@@ -230,6 +319,8 @@ const struct Berry gBerries[] =
         .name = _("CHESTO"),
     #elif FRENCH
         .name = _("MARON"),
+    #elif ITALIAN
+        .name = _("STAGNA"),
     #endif
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 80,
@@ -250,6 +341,8 @@ const struct Berry gBerries[] =
     {
     #if ENGLISH || FRENCH
         .name = _("PECHA"),
+    #elif ITALIAN
+        .name = _("PESCA"),
     #endif
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
         .size = 40,
@@ -272,6 +365,8 @@ const struct Berry gBerries[] =
         .name = _("RAWST"),
     #elif FRENCH
         .name = _("FRAIVE"),
+    #elif ITALIAN
+        .name = _("FRAGO"),
     #endif
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 32,
@@ -294,6 +389,8 @@ const struct Berry gBerries[] =
         .name = _("ASPEAR"),
     #elif FRENCH
         .name = _("WILLIA"),
+    #elif ITALIAN
+        .name = _("PERINA"),
     #endif
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 50,
@@ -316,6 +413,8 @@ const struct Berry gBerries[] =
         .name = _("LEPPA"),
     #elif FRENCH
         .name = _("MEPO"),
+    #elif ITALIAN
+        .name = _("MELA"),
     #endif
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 28,
@@ -336,6 +435,8 @@ const struct Berry gBerries[] =
     {
     #if ENGLISH || FRENCH
         .name = _("ORAN"),
+    #elif ITALIAN
+        .name = _("RANCIA"),
     #endif
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 35,
@@ -358,6 +459,8 @@ const struct Berry gBerries[] =
         .name = _("PERSIM"),
     #elif FRENCH
         .name = _("KIKA"),
+    #elif ITALIAN
+        .name = _("KI"),
     #endif
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 47,
@@ -380,6 +483,8 @@ const struct Berry gBerries[] =
         .name = _("LUM"),
     #elif FRENCH
         .name = _("PRINE"),
+    #elif ITALIAN
+        .name = _("PRUGNA"),
     #endif
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 34,
@@ -400,6 +505,8 @@ const struct Berry gBerries[] =
     {
     #if ENGLISH || FRENCH
         .name = _("SITRUS"),
+    #elif ITALIAN
+        .name = _("CEDRO"),
     #endif
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 95,
@@ -422,6 +529,8 @@ const struct Berry gBerries[] =
         .name = _("FIGY"),
     #elif FRENCH
         .name = _("FIGUY"),
+    #elif ITALIAN
+        .name = _("FICO"),
     #endif
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 100,
@@ -442,6 +551,8 @@ const struct Berry gBerries[] =
     {
     #if ENGLISH || FRENCH
         .name = _("WIKI"),
+    #elif ITALIAN
+        .name = _("KIWI"),
     #endif
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 115,
@@ -462,6 +573,8 @@ const struct Berry gBerries[] =
     {
     #if ENGLISH || FRENCH
         .name = _("MAGO"),
+    #elif ITALIAN
+        .name = _("MANGO"),
     #endif
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 126,
@@ -484,6 +597,8 @@ const struct Berry gBerries[] =
         .name = _("AGUAV"),
     #elif FRENCH
         .name = _("GOWAV"),
+    #elif ITALIAN
+        .name = _("GUAVA"),
     #endif
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 64,
@@ -506,6 +621,8 @@ const struct Berry gBerries[] =
         .name = _("IAPAPA"),
     #elif FRENCH
         .name = _("PAPAYA"),
+    #elif ITALIAN
+        .name = _("PAIA"),
     #endif
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 223,
@@ -528,6 +645,8 @@ const struct Berry gBerries[] =
         .name = _("RAZZ"),
     #elif FRENCH
         .name = _("FRAMBY"),
+    #elif ITALIAN
+        .name = _("LAMPON"),
     #endif
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 120,
@@ -550,6 +669,8 @@ const struct Berry gBerries[] =
         .name = _("BLUK"),
     #elif FRENCH
         .name = _("REMU"),
+    #elif ITALIAN
+        .name = _("MORA"),
     #endif
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 108,
@@ -570,6 +691,8 @@ const struct Berry gBerries[] =
     {
     #if ENGLISH || FRENCH
         .name = _("NANAB"),
+    #elif ITALIAN
+        .name = _("BANA"),
     #endif
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 77,
@@ -592,6 +715,8 @@ const struct Berry gBerries[] =
         .name = _("WEPEAR"),
     #elif FRENCH
         .name = _("REPOI"),
+    #elif ITALIAN
+        .name = _("PERA"),
     #endif
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 74,
@@ -614,6 +739,8 @@ const struct Berry gBerries[] =
         .name = _("PINAP"),
     #elif FRENCH
         .name = _("NANANA"),
+    #elif ITALIAN
+        .name = _("NANAS"),
     #endif
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 80,
@@ -636,6 +763,8 @@ const struct Berry gBerries[] =
         .name = _("POMEG"),
     #elif FRENCH
         .name = _("GRENA"),
+    #elif ITALIAN
+        .name = _("GRANA"),
     #endif
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 135,
@@ -658,6 +787,8 @@ const struct Berry gBerries[] =
         .name = _("KELPSY"),
     #elif FRENCH
         .name = _("ALGA"),
+    #elif ITALIAN
+        .name = _("LGA"),
     #endif
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 150,
@@ -678,6 +809,8 @@ const struct Berry gBerries[] =
     {
     #if ENGLISH || FRENCH
         .name = _("QUALOT"),
+    #elif ITALIAN
+        .name = _("LOQUAT"),
     #endif
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 110,
@@ -700,6 +833,8 @@ const struct Berry gBerries[] =
         .name = _("HONDEW"),
     #elif FRENCH
         .name = _("LONME"),
+    #elif ITALIAN
+        .name = _("MELON"),
     #endif
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 162,
@@ -722,6 +857,8 @@ const struct Berry gBerries[] =
         .name = _("GREPA"),
     #elif FRENCH
         .name = _("RESIN"),
+    #elif ITALIAN
+        .name = _("UVA"),
     #endif
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 149,
@@ -742,6 +879,8 @@ const struct Berry gBerries[] =
     {
     #if ENGLISH || FRENCH
         .name = _("TAMATO"),
+    #elif ITALIAN
+        .name = _("MODORO"),
     #endif
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 200,
@@ -764,6 +903,8 @@ const struct Berry gBerries[] =
         .name = _("CORNN"),
     #elif FRENCH
         .name = _("SIAM"),
+    #elif ITALIAN
+        .name = _("VENA"),
     #endif
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 75,
@@ -786,6 +927,8 @@ const struct Berry gBerries[] =
         .name = _("MAGOST"),
     #elif FRENCH
         .name = _("MANGOU"),
+    #elif ITALIAN
+        .name = _("GOSTAN"),
     #endif
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 140,
@@ -806,6 +949,8 @@ const struct Berry gBerries[] =
     {
     #if ENGLISH || FRENCH
         .name = _("RABUTA"),
+    #elif ITALIAN
+        .name = _("MBUTAN"),
     #endif
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 226,
@@ -828,6 +973,8 @@ const struct Berry gBerries[] =
         .name = _("NOMEL"),
     #elif FRENCH
         .name = _("TRONCI"),
+    #elif ITALIAN
+        .name = _("LEMON"),
     #endif
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 285,
@@ -850,6 +997,8 @@ const struct Berry gBerries[] =
         .name = _("SPELON"),
     #elif FRENCH
         .name = _("KIWAN"),
+    #elif ITALIAN
+        .name = _("MELOS"),
     #endif
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 133,
@@ -870,7 +1019,7 @@ const struct Berry gBerries[] =
     {
     #if ENGLISH
         .name = _("PAMTRE"),
-    #elif FRENCH
+    #elif FRENCH || ITALIAN
         .name = _("PALMA"),
     #endif
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
@@ -894,6 +1043,8 @@ const struct Berry gBerries[] =
         .name = _("WATMEL"),
     #elif FRENCH
         .name = _("STEKPA"),
+    #elif ITALIAN
+        .name = _("COMERO"),
     #endif
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 250,
@@ -914,6 +1065,8 @@ const struct Berry gBerries[] =
     {
     #if ENGLISH || FRENCH
         .name = _("DURIN"),
+    #elif ITALIAN
+        .name = _("DURIAN"),
     #endif
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 280,
@@ -936,6 +1089,8 @@ const struct Berry gBerries[] =
         .name = _("BELUE"),
     #elif FRENCH
         .name = _("MYRTE"),
+    #elif ITALIAN
+        .name = _("RTILLO"),
     #endif
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
         .size = 300,
@@ -958,6 +1113,8 @@ const struct Berry gBerries[] =
         .name = _("LIECHI"),
     #elif FRENCH
         .name = _("LICHII"),
+    #elif ITALIAN
+        .name = _("LICI"),
     #endif
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 111,
@@ -980,6 +1137,8 @@ const struct Berry gBerries[] =
         .name = _("GANLON"),
     #elif FRENCH
         .name = _("LINGAN"),
+    #elif ITALIAN
+        .name = _("LONGAN"),
     #endif
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 33,
@@ -1002,6 +1161,8 @@ const struct Berry gBerries[] =
         .name = _("SALAC"),
     #elif FRENCH
         .name = _("SAILAK"),
+    #elif ITALIAN
+        .name = _("SALAK"),
     #endif
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 95,
@@ -1024,6 +1185,8 @@ const struct Berry gBerries[] =
         .name = _("PETAYA"),
     #elif FRENCH
         .name = _("PITAYE"),
+    #elif ITALIAN
+        .name = _("PITAYA"),
     #endif
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 237,
@@ -1046,6 +1209,8 @@ const struct Berry gBerries[] =
         .name = _("APICOT"),
     #elif FRENCH
         .name = _("ABRIKO"),
+    #elif ITALIAN
+        .name = _("COCCA"),
     #endif
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 75,
@@ -1066,6 +1231,8 @@ const struct Berry gBerries[] =
     {
     #if ENGLISH || FRENCH
         .name = _("LANSAT"),
+    #elif ITALIAN
+        .name = _("LANGSA"),
     #endif
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 97,
@@ -1088,6 +1255,8 @@ const struct Berry gBerries[] =
         .name = _("STARF"),
     #elif FRENCH
         .name = _("FRISTA"),
+    #elif ITALIAN
+        .name = _("MBOLA"),
     #endif
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 153,

@@ -167,7 +167,7 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .tilemapTop = 15,
     #if ENGLISH
         .width = 26,
-    #elif FRENCH
+    #elif FRENCH || ITALIAN
         .width = 27,
     #endif
         .height = 4,
@@ -279,7 +279,7 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .tilemapLeft = 26,
         .tilemapTop = 9,
         .width = 3,
-    #elif FRENCH
+    #elif FRENCH || ITALIAN
         .tilemapLeft = 25,
         .tilemapTop = 9,
         .width = 4,
@@ -398,7 +398,7 @@ static const struct WindowTemplate sBattleArenaWindowTemplates[] =
         .tilemapTop = 15,
     #if ENGLISH
         .width = 26,
-    #elif FRENCH
+    #elif FRENCH || ITALIAN
         .width = 27,
     #endif
         .height = 4,
@@ -510,7 +510,7 @@ static const struct WindowTemplate sBattleArenaWindowTemplates[] =
         .tilemapLeft = 26,
         .tilemapTop = 9,
         .width = 3,
-    #elif FRENCH
+    #elif FRENCH || ITALIAN
         .tilemapLeft = 25,
         .tilemapTop = 9,
         .width = 4,
@@ -575,7 +575,7 @@ static const struct WindowTemplate sBattleArenaWindowTemplates[] =
     },
     [ARENA_WIN_SKILL] = {
         .bg = 0,
-    #if ENGLISH
+    #if ENGLISH || ITALIAN
         .tilemapLeft = 12,
         .tilemapTop = 6,
         .width = 6,
@@ -595,8 +595,8 @@ static const struct WindowTemplate sBattleArenaWindowTemplates[] =
         .width = 6,
         .height = 2,
         .paletteNum = 5,
-    #if ENGLISH
-        .baseBlock = 0x013c,
+    #if ENGLISH || ITALIAN
+        .baseBlock = 0x013C,
     #elif FRENCH
         .baseBlock = 0x0140,
     #endif
@@ -608,7 +608,7 @@ static const struct WindowTemplate sBattleArenaWindowTemplates[] =
         .width = 14,
         .height = 2,
         .paletteNum = 5,
-    #if ENGLISH
+    #if ENGLISH || ITALIAN
         .baseBlock = 0x0148,
     #elif FRENCH
         .baseBlock = 0x014C,
@@ -620,7 +620,7 @@ static const struct WindowTemplate sBattleArenaWindowTemplates[] =
         .tilemapTop = 15,
     #if ENGLISH
         .width = 26,
-    #elif FRENCH
+    #elif FRENCH || ITALIAN
         .width = 27,
     #endif
         .height = 4,

@@ -847,6 +847,18 @@ Common_EventScript_PlayerHandedOverTheItem::
 	.include "data/text/fr/pc_transfer.inc"
 	.include "data/text/fr/questionnaire.inc"
 	.include "data/text/fr/abnormal_weather.inc"
+.else
+.ifdef ITALIAN
+	.include "data/text/it/record_mix.inc"
+	.include "data/text/it/pc.inc"
+	.include "data/text/it/pkmn_center_nurse.inc"
+	.include "data/text/it/mart_clerk.inc"
+	.include "data/text/it/obtain_item.inc"
+	.include "data/text/it/general.inc"
+	.include "data/text/it/pc_transfer.inc"
+	.include "data/text/it/questionnaire.inc"
+	.include "data/text/it/abnormal_weather.inc"
+.endif
 .endif
 .endif
 
@@ -944,6 +956,16 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/text/fr/berries.inc"
 	.include "data/text/fr/shoal_cave.inc"
 	.include "data/text/fr/check_furniture.inc"
+.else
+.ifdef ITALIAN
+	.include "data/text/it/pokedex_rating.inc"
+	.include "data/text/it/lottery_corner.inc"
+	.include "data/text/it/event_ticket_1.inc"
+	.include "data/text/it/braille.inc"
+	.include "data/text/it/berries.inc"
+	.include "data/text/it/shoal_cave.inc"
+	.include "data/text/it/check_furniture.inc"
+.endif
 .endif
 .endif
 	.include "data/scripts/cave_hole.inc"

@@ -90,10 +90,17 @@ int Intl_GetListMenuWidth(const struct ListMenuTemplate *listMenu)
 
 void CopyMonCategoryText(int dexNum, u8 *dest)
 {
-    u8 *str = StringCopy(dest, gPokedexEntries[dexNum].categoryName);
 #if ENGLISH
+    u8 *str = StringCopy(dest, gPokedexEntries[dexNum].categoryName);
     *str = CHAR_SPACE;
     StringCopy(str + 1, gText_Pokemon);
+#elif FRENCH
+    u8 *str = StringCopy(dest, gPokedexEntries[dexNum].categoryName);
+#elif ITALIAN
+    const u8 *categoryText = gPokedexEntries[dexNum].categoryName;
+    u8 *str = StringCopy(dest, gText_Pokemon);
+    *str++ = CHAR_SPACE;
+    StringCopy(str, categoryText);
 #endif
 }
 
@@ -239,7 +246,7 @@ void FillWindowTilesByRow(int windowId, int columnStart, int rowStart, int numFi
     }
 }
 
-#if FRENCH
+#if FRENCH || ITALIAN
 u8 *StringAppendWithPlaceholder(u8 *dest, const u8 *src, u8 *placeholderStr)
 {
     u8 text[32], c;
@@ -264,7 +271,11 @@ u8 *StringAppendWithPlaceholder(u8 *dest, const u8 *src, u8 *placeholderStr)
     return dest;
 }
 
+#if FRENCH
 const u8 gText_LevyTatia[] = _("LEVY&TATIA");
+#elif ITALIAN
+const u8 gText_LevyTatia[] = _("TELL & PAT");
+#endif
 
 const u8 *GetTrainerClassNameGenderSpecific(s32 trainerClassId, u32 trainerGender, const u8 *trainerName)
 {

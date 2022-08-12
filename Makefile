@@ -59,7 +59,12 @@ ifeq ($(GAME_LANGUAGE), FRENCH)
   GAME_CODE  := $(GAME_CODE)F
   BUILD_SUFIX := _fr
 else
+ifeq ($(GAME_LANGUAGE), ITALIAN)
+  GAME_CODE  := $(GAME_CODE)I
+  BUILD_SUFIX := _it
+else
   $(error unknown language $(GAME_LANGUAGE))
+endif
 endif
 endif
 
@@ -242,7 +247,7 @@ $(TOOLDIRS):
 
 rom: $(ROM)
 ifeq ($(COMPARE),1)
-	@$(SHA1) $(BUILD_NAME).sha1
+	@$(SHA1) rom$(BUILD_SUFIX).sha1
 endif
 
 clean: mostlyclean clean-tools
@@ -444,16 +449,19 @@ $(ROM): $(ELF)
 # "Friendly" target names for convenience sake
 en:         ; @$(MAKE) GAME_LANGUAGE=ENGLISH
 fr:         ; @$(MAKE) GAME_LANGUAGE=FRENCH
+it:         ; @$(MAKE) GAME_LANGUAGE=ITALIAN
 
 # For contributors to make sure a change didn't affect the contents of the ROMs.
 compare:    ; @$(MAKE) GAME_LANGUAGE=ENGLISH COMPARE=1
 compare_en: ; @$(MAKE) GAME_LANGUAGE=ENGLISH COMPARE=1
 compare_fr: ; @$(MAKE) GAME_LANGUAGE=FRENCH COMPARE=1
+compare_it: ; @$(MAKE) GAME_LANGUAGE=ITALIAN COMPARE=1
 
 # Use modern compilers to build rom. Will not match with original ROMs.
 modern:     ; @$(MAKE) GAME_LANGUAGE=ENGLISH MODERN=1
 modern_en:  ; @$(MAKE) GAME_LANGUAGE=ENGLISH MODERN=1
 modern_fr:  ; @$(MAKE) GAME_LANGUAGE=FRENCH MODERN=1
+modern_it:  ; @$(MAKE) GAME_LANGUAGE=ITALIAN MODERN=1
 
 libagbsyscall:
 	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN) MODERN=$(MODERN)

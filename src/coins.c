@@ -23,6 +23,9 @@ void PrintCoinsString(u32 coinAmount)
 #elif FRENCH
     xAlign = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 0x38);
     AddTextPrinterParameterized(sCoinsWindowId, FONT_NARROW, gStringVar4, xAlign, 1, 0, NULL);
+#elif ITALIAN
+    xAlign = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 0x30);
+    AddTextPrinterParameterized(sCoinsWindowId, FONT_NARROW, gStringVar4, xAlign, 1, 0, NULL);
 #endif
 }
 
@@ -34,6 +37,8 @@ void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y)
     SetWindowTemplateFields(&template, 0, x, y, 8, 2, 0xF, 0x141);
 #elif FRENCH
     SetWindowTemplateFields(&template, 0, x, y, 7, 2, 0xF, 0x141);
+#elif ITALIAN
+    SetWindowTemplateFields(&template, 0, x, y, 6, 2, 0xF, 0x141);
 #endif
     sCoinsWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sCoinsWindowId, PIXEL_FILL(0));

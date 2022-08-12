@@ -689,6 +689,11 @@ static const u16 sMysteryGiftPhrase[NUM_QUESTIONNAIRE_WORDS] = {
     EC_WORD_WITH,
     EC_WORD_CASE,
     EC_WORD_TRAINER,
+#elif ITALIAN
+    EC_WORD_ME,
+    EC_WORD_TOO_LATE,
+    EC_WORD_LINK,
+    EC_WORD_EXCL,
 #endif
 };
 
@@ -696,13 +701,22 @@ static const u16 sBerryMasterWifePhrases[][2] = {
 #if ENGLISH
     [PHRASE_GREAT_BATTLE - 1]        = {EC_WORD_GREAT, EC_WORD_BATTLE},
     [PHRASE_CHALLENGE_CONTEST - 1]   = {EC_WORD_CHALLENGE, EC_WORD_CONTEST},
-#elif FRENCH
-    [PHRASE_GREAT_BATTLE - 1]        = {EC_WORD_GREAT, EC_WORD_FIGHTING},
-    [PHRASE_CHALLENGE_CONTEST - 1]   = {EC_WORD_CONTEST, EC_WORD_CHALLENGE},
-#endif
     [PHRASE_OVERWHELMING_LATIAS - 1] = {EC_WORD_OVERWHELMING, EC_POKEMON(LATIAS)},
     [PHRASE_COOL_LATIOS - 1]         = {EC_WORD_COOL, EC_POKEMON(LATIOS)},
     [PHRASE_SUPER_HUSTLE - 1]        = {EC_WORD_SUPER, EC_WORD_HUSTLE},
+#elif FRENCH
+    [PHRASE_GREAT_BATTLE - 1]        = {EC_WORD_GREAT, EC_WORD_FIGHTING},
+    [PHRASE_CHALLENGE_CONTEST - 1]   = {EC_WORD_CONTEST, EC_WORD_CHALLENGE},
+    [PHRASE_OVERWHELMING_LATIAS - 1] = {EC_WORD_OVERWHELMING, EC_POKEMON(LATIAS)},
+    [PHRASE_COOL_LATIOS - 1]         = {EC_WORD_COOL, EC_POKEMON(LATIOS)},
+    [PHRASE_SUPER_HUSTLE - 1]        = {EC_WORD_SUPER, EC_WORD_HUSTLE},
+#elif ITALIAN
+    [PHRASE_GREAT_BATTLE - 1]        = {EC_WORD_THIN, EC_WORD_FIGHTING},
+    [PHRASE_CHALLENGE_CONTEST - 1]   = {EC_WORD_SUPER, EC_WORD_CONTEST},
+    [PHRASE_OVERWHELMING_LATIAS - 1] = {EC_POKEMON(LATIAS), EC_WORD_KIND},
+    [PHRASE_COOL_LATIOS - 1]         = {EC_POKEMON(LATIOS), EC_WORD_COOL},
+    [PHRASE_SUPER_HUSTLE - 1]        = {EC_WORD_HUSTLE, EC_WORD_YAY},
+#endif
 };
 
 static const u16 sTriangleCursor_Pal[] = INCBIN_U16("graphics/easy_chat/triangle_cursor.gbapal");
@@ -832,7 +846,7 @@ static const struct WindowTemplate sEasyChatWindowTemplates[] = {
         .tilemapLeft = 6,
         .tilemapTop = 0,
         .width = 18,
-#elif FRENCH
+#elif FRENCH || ITALIAN
         .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = 30,
@@ -1205,6 +1219,9 @@ static const u8 sFooterOptionXOffsets[NUM_FOOTER_TYPES][4] = {
 #elif FRENCH
     [FOOTER_QUIZ]   = {16,  82, 148, 184},
     [FOOTER_ANSWER] = {16,  78, 141, 174},
+#elif ITALIAN
+    [FOOTER_QUIZ]   = {16,  92, 144, 184},
+    [FOOTER_ANSWER] = {16,  86, 133, 168},
 #endif
 };
 
@@ -1219,6 +1236,8 @@ static const u8 *const sFooterTextOptions[NUM_FOOTER_TYPES][4] = {
 #include "data/easy_chat/easy_chat_words_by_letter.h"
 #elif FRENCH
 #include "data/easy_chat/fr/easy_chat_words_by_letter.h"
+#elif ITALIAN
+#include "data/easy_chat/it/easy_chat_words_by_letter.h"
 #endif
 
 static const u8 *const sEasyChatGroupNamePointers[EC_NUM_GROUPS] = {
@@ -1257,6 +1276,11 @@ static const u16 sDefaultProfileWords[EASY_CHAT_BATTLE_WORDS_COUNT - 2] = {
     EC_WORD_CASE,
     EC_WORD_POKEMON,
     EC_EMPTY_WORD,
+#elif ITALIAN
+    EC_WORD_ABSENT,
+    EC_WORD_LAY,
+    EC_WORD_ALL,
+    EC_WORD_POKEMON,
 #endif
 };
 
@@ -1275,6 +1299,13 @@ static const u16 sDefaultBattleStartWords[EASY_CHAT_BATTLE_WORDS_COUNT] = {
     EC_WORD_EXCL,
     EC_EMPTY_WORD,
     EC_EMPTY_WORD,
+#elif ITALIAN
+    EC_WORD_WILL_BE_HERE,
+    EC_WORD_WHERE,
+    EC_WORD_STRONG,
+    EC_WORD_QUES,
+    EC_WORD_HERE_I_COME,
+    EC_WORD_EXCL,
 #endif
 };
 
@@ -1293,6 +1324,13 @@ static const u16 sDefaultBattleWonWords[EASY_CHAT_BATTLE_WORDS_COUNT] = {
     EC_WORD_REALLY,
     EC_WORD_WINS,
     EC_WORD_EXCL_EXCL,
+#elif ITALIAN
+	EC_WORD_YEAH,
+	EC_WORD_EXCL,
+	EC_WORD_IS_IT_QUES,
+	EC_WORD_WON,
+	EC_WORD_ISN_T_IT_QUES,
+	EC_WORD_EXCL,
 #endif
 };
 
@@ -1311,6 +1349,13 @@ static const u16 sDefaultBattleLostWords[EASY_CHAT_BATTLE_WORDS_COUNT] = {
     EC_WORD_ELLIPSIS,
     EC_WORD_I_VE,
     EC_WORD_LOST,
+#elif ITALIAN
+	EC_WORD_WAAAH,
+	EC_EMPTY_WORD,
+	EC_WORD_IS_IT_QUES,
+	EC_WORD_PERFECT,
+	EC_WORD_LOST,
+	EC_WORD_EXCL,
 #endif
 };
 
@@ -3990,7 +4035,7 @@ static void PrintTitle(void)
 
 #if ENGLISH
     xOffset = GetStringCenterAlignXOffset(FONT_NORMAL, titleText, 144);
-#elif FRENCH
+#elif FRENCH || ITALIAN
     xOffset = GetStringCenterAlignXOffset(FONT_NORMAL, titleText, 240);
 #endif
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
@@ -4092,7 +4137,7 @@ static void AddPhraseWindow(void)
     template.paletteNum = 11;
 #if ENGLISH
     template.baseBlock = 0x6C;
-#elif FRENCH
+#elif FRENCH || ITALIAN
     template.baseBlock = 0x84;
 #endif
     sScreenControl->windowId = AddWindow(&template);
@@ -5141,7 +5186,7 @@ static void AddMainScreenButtonWindow(void)
     template.paletteNum = 11;
 #if ENGLISH
     template.baseBlock = 0x34;
-#elif FRENCH
+#elif FRENCH || ITALIAN
     template.baseBlock = 0x4C;
 #endif
     windowId = AddWindow(&template);
@@ -5321,7 +5366,7 @@ u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows
 
 #if ENGLISH
 static u8 *UnusedConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows)
-#elif FRENCH
+#elif FRENCH || ITALIAN
 u8 *UnusedConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows)
 #endif
 {

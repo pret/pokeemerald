@@ -116,5 +116,9 @@ AbandonedShip_HiddenFloorRooms_EventScript_Trash::
 .else
 .ifdef FRENCH
 	.include "data/maps/AbandonedShip_HiddenFloorRooms/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/AbandonedShip_HiddenFloorRooms/text_it.inc"
+.endif
 .endif
 .endif

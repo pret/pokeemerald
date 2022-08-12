@@ -77,6 +77,28 @@ static const u8 sText_TheTradeHasBeenCanceled[] = _("{COLOR 2}{HIGHLIGHT 1}{SHAD
 static const u8 sText_OnlyPkmnForBattle[] = _("{COLOR 2}{HIGHLIGHT 1}{SHADOW 3}C’est votre seul\nPOKéMON pour combattre.");
 static const u8 sText_WaitingForYourFriend[] = _("{COLOR 2}{HIGHLIGHT 1}{SHADOW 3}Votre ami(e) n’a pas\nencore fini…");
 static const u8 sText_YourFriendWantsToTrade[] = _("Votre ami(e) veut\néchanger des POKéMON.");
+#elif ITALIAN
+static const u8 sText_SpaceMove[] = _(" MOSSE");
+static const u8 sText_NewLine[] = _("\n");
+static const u8 sText_Slash[] = _("/");
+static const u8 sText_Lv[] = _("L. ");
+static const u8 sText_ThreeDashes[] = _("---");
+static const u8 sText_FourQuestionMarks[] = _("????");
+static const u8 sText_UnusedEmpty[] = _("");
+static const u8 sText_IsThisTradeOkay[] = _("Va bene questo scambio?");
+static const u8 sText_Cancel[] = _("ESCI");
+static const u8 sText_ChooseAPkmn[] = _("Scegli un POKéMON.");
+static const u8 sText_Summary[] = _("INFO");
+static const u8 sText_Trade[] = _("SCAMBIA");
+static const u8 sText_CancelTrade[] = _("Esci dallo scambio?");
+static const u8 sJPText_PressBButtonToQuit[] = _("Bボタン　で　もどります");
+static const u8 sText_Summary2[] = _("INFO");
+static const u8 sText_Trade2[] = _("SCAMBIA");
+static const u8 sText_CommunicationStandby[] = _("{COLOR 2}{HIGHLIGHT 1}{SHADOW 3}Un momento…\nAttendi…");
+static const u8 sText_TheTradeHasBeenCanceled[] = _("{COLOR 2}{HIGHLIGHT 1}{SHADOW 3}Lo scambio\nè stato annullato.");
+static const u8 sText_OnlyPkmnForBattle[] = _("{COLOR 2}{HIGHLIGHT 1}{SHADOW 3}Questo è l’unico\nPOKéMON utile.");
+static const u8 sText_WaitingForYourFriend[] = _("{COLOR 2}{HIGHLIGHT 1}{SHADOW 3}Attendi che il\ntuo amico finisca!");
+static const u8 sText_YourFriendWantsToTrade[] = _("Il tuo amico vuole\nscambiare POKéMON.");
 #endif
 
 static const struct OamData sTradeOamData_32x16 =
@@ -1029,7 +1051,7 @@ static const struct InGameTrade sIngameTrades[] =
 {
     [INGAME_TRADE_SEEDOT] =
     {
-    #if ENGLISH
+    #if ENGLISH || ITALIAN
         .nickname = _("DOTS"),
     #elif FRENCH
         .nickname = _("PIPIO"),
@@ -1042,14 +1064,18 @@ static const struct InGameTrade sIngameTrades[] =
         .personality = 0x84,
         .heldItem = ITEM_CHESTO_BERRY,
         .mailNum = -1,
+    #if ENGLISH || FRENCH
         .otName = _("KOBE"),
+    #elif ITALIAN
+        .otName = _("KIKO"),
+    #endif
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_RALTS
     },
     [INGAME_TRADE_PLUSLE] =
     {
-    #if ENGLISH
+    #if ENGLISH || ITALIAN
         .nickname = _("PLUSES"),
     #elif FRENCH
         .nickname = _("SIPO"),
@@ -1062,7 +1088,7 @@ static const struct InGameTrade sIngameTrades[] =
         .personality = 0x6F,
         .heldItem = ITEM_WOOD_MAIL,
         .mailNum = 0,
-    #if ENGLISH
+    #if ENGLISH || ITALIAN
         .otName = _("ROMAN"),
     #elif FRENCH
         .otName = _("ALBAN"),
@@ -1073,7 +1099,7 @@ static const struct InGameTrade sIngameTrades[] =
     },
     [INGAME_TRADE_HORSEA] =
     {
-    #if ENGLISH
+    #if ENGLISH || ITALIAN
         .nickname = _("SEASOR"),
     #elif FRENCH
         .nickname = _("HYPY"),
@@ -1090,6 +1116,8 @@ static const struct InGameTrade sIngameTrades[] =
         .otName = _("SKYLAR"),
     #elif FRENCH
         .otName = _("LUDOVIC"),
+    #elif ITALIAN
+        .otName = _("SERGINO"),
     #endif
         .otGender = MALE,
         .sheen = 10,
@@ -1097,7 +1125,7 @@ static const struct InGameTrade sIngameTrades[] =
     },
     [INGAME_TRADE_MEOWTH] =
     {
-    #if ENGLISH
+    #if ENGLISH || ITALIAN
         .nickname = _("MEOWOW"),
     #elif FRENCH
         .nickname = _("GNAGNAA"),
@@ -1182,6 +1210,38 @@ static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
         EC_WORD_A,
         EC_WORD_SUPER,
         EC_WORD_CRY
+    }
+#elif ITALIAN
+    {
+        EC_WORD_OVERDO,
+        EC_WORD_CONCEDE,
+        EC_WORD_MEET,
+        EC_WORD_LAY,
+        EC_POKEMON(PLUSLE),
+        EC_WORD_EXCL_EXCL,
+        EC_POKEMON(VOLBEAT),
+        EC_WORD_IS,
+        EC_WORD_BORED,
+    }, {
+        EC_WORD_WHICH,
+        EC_WORD_LIKES,
+        EC_POKEMON(HORSEA),
+        EC_WORD_QUES,
+        EC_WORD_NOW,
+        EC_WORD_ARE,
+        EC_WORD_TRAINER,
+        EC_WORD_LISTEN,
+        EC_POKEMON(BAGON),
+    }, {
+        EC_WORD_THANKS,
+        EC_WORD_NITWIT,
+        EC_POKEMON(SKITTY),
+        EC_WORD_EXCL,
+        EC_POKEMON_NATIONAL(MEOWTH),
+        EC_WORD_IS,
+        EC_WORD_PERFECT,
+        EC_WORD_BEAUTIFUL,
+        EC_EMPTY_WORD,
     }
 #endif
 };

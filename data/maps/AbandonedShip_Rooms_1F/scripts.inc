@@ -36,5 +36,9 @@ AbandonedShip_Rooms_1F_EventScript_ThaliaRematch::
 .else
 .ifdef FRENCH
 	.include "data/maps/AbandonedShip_Rooms_1F/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/AbandonedShip_Rooms_1F/text_it.inc"
+.endif
 .endif
 .endif

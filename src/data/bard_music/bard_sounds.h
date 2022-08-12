@@ -45,6 +45,27 @@
 #include "fr/adjectives.h"
 #include "fr/events.h"
 #include "fr/trendysaying.h"
+#elif ITALIAN
+#include "it/pokemon.h"
+#include "it/moves.h"
+#include "it/trainer.h"
+#include "it/status.h"
+#include "it/battle.h"
+#include "it/greetings.h"
+#include "it/people.h"
+#include "it/voices.h"
+#include "it/speech.h"
+#include "it/endings.h"
+#include "it/feelings.h"
+#include "it/conditions.h"
+#include "it/actions.h"
+#include "it/lifestyle.h"
+#include "it/hobbies.h"
+#include "it/time.h"
+#include "it/misc.h"
+#include "it/adjectives.h"
+#include "it/events.h"
+#include "it/trendysaying.h"
 #endif
 
 const struct BardSound (*const gBardSoundsTable[EC_NUM_GROUPS])[6] = {

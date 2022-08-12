@@ -195,6 +195,15 @@ static const u8 sText_PyramidFloor5[] = _("PYRAMIDE Niv.5");
 static const u8 sText_PyramidFloor6[] = _("PYRAMIDE Niv.6");
 static const u8 sText_PyramidFloor7[] = _("PYRAMIDE Niv.7");
 static const u8 sText_Pyramid[] = _("PYRAMIDE");
+#elif ITALIAN
+static const u8 sText_PyramidFloor1[] = _("PIRAMIDE 1º P.");
+static const u8 sText_PyramidFloor2[] = _("PIRAMIDE 2º P.");
+static const u8 sText_PyramidFloor3[] = _("PIRAMIDE 3º P.");
+static const u8 sText_PyramidFloor4[] = _("PIRAMIDE 4º P.");
+static const u8 sText_PyramidFloor5[] = _("PIRAMIDE 5º P.");
+static const u8 sText_PyramidFloor6[] = _("PIRAMIDE 6º P.");
+static const u8 sText_PyramidFloor7[] = _("PIRAMIDE 7º P.");
+static const u8 sText_Pyramid[] = _("PIRAMIDE");
 #endif
 
 static const u8 * const sBattlePyramid_MapHeaderStrings[FRONTIER_STAGES_PER_CHALLENGE + 1] =

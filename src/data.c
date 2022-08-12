@@ -328,8 +328,13 @@ const union AnimCmd *const gAnims_MonPic[] =
 #include "data/text/species_names.h"
 #include "data/text/move_names.h"
 #elif FRENCH
-#include "data/text/trainer_class_names_fr.h"
+#include "data/text/fr/trainer_class_names.h"
 #include "data/trainers.h"
-#include "data/text/species_names_fr.h"
-#include "data/text/move_names_fr.h"
+#include "data/text/fr/species_names.h"
+#include "data/text/fr/move_names.h"
+#elif ITALIAN
+#include "data/text/it/trainer_class_names.h"
+#include "data/trainers.h"
+#include "data/text/species_names.h"
+#include "data/text/it/move_names.h"
 #endif
