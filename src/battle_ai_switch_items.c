@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "constants/battle_ai.h"
 #include "battle_ai_main.h"
 #include "battle_ai_util.h"
 #include "battle_util.h"
@@ -14,6 +15,7 @@
 #include "util.h"
 #include "constants/abilities.h"
 #include "constants/item_effects.h"
+#include "constants/battle_move_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 
@@ -168,7 +170,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
     else
         return FALSE;
 
-    if (AI_DATA->abilities[gActiveBattler]) == absorbingTypeAbility)
+    if (AI_DATA->abilities[gActiveBattler] == absorbingTypeAbility)
         return FALSE;
 
     GetAIPartyIndexes(gActiveBattler, &firstId, &lastId);
@@ -225,6 +227,10 @@ static bool8 ShouldSwitchIfGameStatePrompt(void)
     u8 opposingBattler = GetBattlerAtPosition(opposingPosition);
     s32 moduloChance = 4; //25% Chance Default
     s32 chanceReducer = 1; //No Reduce default. Increase to reduce
+    s32 firstId;
+    s32 lastId;
+    s32 i;
+    struct Pokemon *party;
 
 
     if (AnyStatIsRaised(gActiveBattler))
@@ -245,10 +251,50 @@ static bool8 ShouldSwitchIfGameStatePrompt(void)
         {
             switchMon = TRUE;
 
-            //ToDo:
-                //Double Battles
-                //Add logic checking to see if effected by yawn & ally wants to switch out to a pokemon that will set Misty or Electric Terrain
+            //Double Battles
+            //Check if partner can prevent sleep
+            if (IsDoubleBattle())
+            {
+                if (IsBattlerAlive(BATTLE_PARTNER(gActiveBattler))
+                    && (GetAIChosenMove(BATTLE_PARTNER(gActiveBattler)) & MOVE_UPROAR)
+                    )
+                    switchMon = FALSE;
 
+                if (IsBattlerAlive(BATTLE_PARTNER(gActiveBattler)) 
+                    && (gBattleMoves[AI_DATA->partnerMove].effect == EFFECT_MISTY_TERRAIN
+                        || gBattleMoves[AI_DATA->partnerMove].effect == EFFECT_ELECTRIC_TERRAIN)
+                    && IsBattlerGrounded(gActiveBattler)
+                    )
+                    switchMon = FALSE;
+
+                if (*(gBattleStruct->AI_monToSwitchIntoId + BATTLE_PARTNER(gActiveBattler)) != PARTY_SIZE) //Partner is switching
+                    {
+                        GetAIPartyIndexes(gActiveBattler, &firstId, &lastId);
+                    
+                        if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
+                            party = gPlayerParty;
+                    
+                        for (i = firstId; i < lastId; i++)
+                        {
+                            //Look for mon in party that is able to be switched into and has ability that sets terrain
+                            if (GetMonData(&party[i], MON_DATA_HP) != 0
+                                && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
+                                && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG
+                                && i != gBattlerPartyIndexes[gActiveBattler]
+                                && i != gBattlerPartyIndexes[BATTLE_PARTNER(gActiveBattler)]
+                                && IsBattlerGrounded(gActiveBattler)
+                                && (GetMonData(&party[i], MON_DATA_ABILITY_NUM) == 226
+                                    || GetMonData(&party[i], MON_DATA_ABILITY_NUM) == 228)) //Ally has Misty or Electric Surge
+                                {
+                                    *(gBattleStruct->AI_monToSwitchIntoId + BATTLE_PARTNER(gActiveBattler)) = i;
+                                    BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_SWITCH, 0);
+                                    switchMon = FALSE;
+                                    break;
+                                }
+                        }
+                    }
+            }
+                                
             //Check if Active Pokemon can KO opponent instead of switching
             //Will still fall asleep, but take out opposing Pokemon first
             if (AiExpectsToFaintPlayer())
