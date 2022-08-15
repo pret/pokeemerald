@@ -2044,7 +2044,7 @@ bool8 UseRegisteredKeyItemOnField(void)
     {
         if (CheckBagHasItem(gSaveBlock1Ptr->registeredItem, 1) == TRUE)
         {
-            ScriptContext2_Enable();
+            LockPlayerFieldControls();
             FreezeObjectEvents();
             PlayerFreeze();
             StopPlayerAvatar();
@@ -2058,7 +2058,7 @@ bool8 UseRegisteredKeyItemOnField(void)
             gSaveBlock1Ptr->registeredItem = ITEM_NONE;
         }
     }
-    ScriptContext1_SetupScript(EventScript_SelectWithoutRegisteredItem);
+    ScriptContext_SetupScript(EventScript_SelectWithoutRegisteredItem);
     return TRUE;
 }
 
@@ -2373,7 +2373,7 @@ static void ItemMenu_Show(u8 taskId)
 
 static void CB2_ApprenticeExitBagMenu(void)
 {
-    gFieldCallback = Apprentice_EnableBothScriptContexts;
+    gFieldCallback = Apprentice_ScriptContext_Enable;
     SetMainCallback2(CB2_ReturnToField);
 }
 

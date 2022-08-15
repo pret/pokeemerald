@@ -365,7 +365,7 @@ static void VBlankCB_MoveRelearner(void)
 // Script arguments: The pokemon to teach is in VAR_0x8004
 void TeachMoveRelearnerMove(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(Task_WaitForFadeOut, 10);
     // Fade to black
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);

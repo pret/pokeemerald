@@ -277,7 +277,7 @@ static u8 CreateShopMenu(u8 martType)
 {
     int numMenuItems;
 
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     sMartInfo.martType = martType;
 
     if (martType == MART_TYPE_NORMAL)
@@ -373,7 +373,7 @@ static void Task_HandleShopMenuQuit(u8 taskId)
     ClearStdWindowAndFrameToTransparent(sMartInfo.windowId, 2); // Incorrect use, making it not copy it to vram.
     RemoveWindow(sMartInfo.windowId);
     TryPutSmartShopperOnAir();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     DestroyTask(taskId);
 
     if (sMartInfo.callback)
@@ -1210,19 +1210,19 @@ void CreatePokemartMenu(const u16 *itemsForSale)
     CreateShopMenu(MART_TYPE_NORMAL);
     SetShopItemsForSale(itemsForSale);
     ClearItemPurchases();
-    SetShopMenuCallback(EnableBothScriptContexts);
+    SetShopMenuCallback(ScriptContext_Enable);
 }
 
 void CreateDecorationShop1Menu(const u16 *itemsForSale)
 {
     CreateShopMenu(MART_TYPE_DECOR);
     SetShopItemsForSale(itemsForSale);
-    SetShopMenuCallback(EnableBothScriptContexts);
+    SetShopMenuCallback(ScriptContext_Enable);
 }
 
 void CreateDecorationShop2Menu(const u16 *itemsForSale)
 {
     CreateShopMenu(MART_TYPE_DECOR2);
     SetShopItemsForSale(itemsForSale);
-    SetShopMenuCallback(EnableBothScriptContexts);
+    SetShopMenuCallback(ScriptContext_Enable);
 }
