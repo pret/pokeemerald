@@ -194,6 +194,10 @@ bool8 ArePlayerFieldControlsLocked(void)
     return sLockFieldControls;
 }
 
+// The ScriptContext_* functions work with the primary script context,
+// which yields control back to native code should the script make a wait call.
+
+// Checks if the global script context is able to be run right now.
 bool8 ScriptContext_IsEnabled(void)
 {
     if (sGlobalScriptContextStatus == CONTEXT_RUNNING)
@@ -202,12 +206,17 @@ bool8 ScriptContext_IsEnabled(void)
         return FALSE;
 }
 
+// Re-initializes the global script context to zero.
 void ScriptContext_Init(void)
 {
     InitScriptContext(&sGlobalScriptContext, gScriptCmdTable, gScriptCmdTableEnd);
     sGlobalScriptContextStatus = CONTEXT_SHUTDOWN;
 }
 
+// Runs the script until the script makes a wait* call, then returns true if 
+// there's more script to run, or false if the script has hit the end. 
+// This function also returns false if the context is finished 
+// or waiting (after a call to _Stop)
 bool8 ScriptContext_RunScript(void)
 {
     if (sGlobalScriptContextStatus == CONTEXT_SHUTDOWN)
@@ -228,6 +237,7 @@ bool8 ScriptContext_RunScript(void)
     return TRUE;
 }
 
+// Sets up a new script in the global context and enables the context
 void ScriptContext_SetupScript(const u8 *ptr)
 {
     InitScriptContext(&sGlobalScriptContext, gScriptCmdTable, gScriptCmdTableEnd);
@@ -236,17 +246,22 @@ void ScriptContext_SetupScript(const u8 *ptr)
     sGlobalScriptContextStatus = CONTEXT_RUNNING;
 }
 
+// Puts the script into waiting mode; usually called from a wait* script command.
 void ScriptContext_Stop(void)
 {
     sGlobalScriptContextStatus = CONTEXT_WAITING;
 }
 
+// Puts the script into running mode.
 void ScriptContext_Enable(void)
 {
     sGlobalScriptContextStatus = CONTEXT_RUNNING;
     LockPlayerFieldControls();
 }
 
+// Sets up and runs a script in its own context immediately. The script will be
+// finished when this function returns. Used mainly by all of the map header
+// scripts (except the frame table scripts).
 void RunScriptImmediately(const u8 *ptr)
 {
     InitScriptContext(&sImmediateScriptContext, gScriptCmdTable, gScriptCmdTableEnd);
