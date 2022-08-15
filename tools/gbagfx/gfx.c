@@ -397,7 +397,7 @@ void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int 
 	free(buffer);
 }
 
-void WriteImage(char *path, int numTiles, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors)
+void WriteImage(char *path, enum NumTilesMode numTilesMode, int numTiles, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors)
 {
 	int tileSize = bitDepth * 8;
 
@@ -445,12 +445,21 @@ void WriteImage(char *path, int numTiles, int bitDepth, int metatileWidth, int m
 	}
 
 	bool zeroPadded = true;
-	for (int i = bufferSize; i < maxBufferSize; i++) {
+	for (int i = bufferSize; i < maxBufferSize && zeroPadded; i++) {
 		if (buffer[i] != 0)
 		{
-			fprintf(stderr, "Ignoring -num_tiles %d because tile %d contains non-transparent pixels.\n", numTiles, 1 + i / tileSize);
-			zeroPadded = false;
-			break;
+			switch (numTilesMode)
+			{
+			case NUM_TILES_IGNORE:
+				break;
+			case NUM_TILES_WARN:
+				fprintf(stderr, "Ignoring -num_tiles %d because tile %d contains non-transparent pixels.\n", numTiles, 1 + i / tileSize);
+				zeroPadded = false;
+				break;
+			case NUM_TILES_ERROR:
+				FATAL_ERROR("Tile %d contains non-transparent pixels.\n", 1 + i / tileSize);
+				break;
+			}
 		}
 	}
 
