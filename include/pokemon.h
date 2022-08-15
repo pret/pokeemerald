@@ -3,7 +3,7 @@
 
 #include "sprite.h"
 
-// Flags for Get(Box)MonData / Set(Box)MonData
+// Property labels for Get(Box)MonData / Set(Box)MonData
 enum {
     MON_DATA_PERSONALITY,
     MON_DATA_OT_ID,
