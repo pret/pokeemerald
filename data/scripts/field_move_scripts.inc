@@ -45,6 +45,7 @@ EventScript_CancelCut::
 	releaseall
 	end
 
+.ifdef ENGLISH
 Text_WantToCut:
 	.string "This tree looks like it can be\n"
 	.string "CUT down!\p"
@@ -56,6 +57,31 @@ Text_MonUsedFieldMove:
 Text_CantCut:
 	.string "This tree looks like it can be\n"
 	.string "CUT down!$"
+.else
+.ifdef FRENCH
+Text_WantToCut:
+	.string "Cet arbre semble pouvoir être COUPE.\p"
+	.string "Voulez-vous utiliser COUPE?$"
+
+Text_MonUsedFieldMove:
+	.string "{STR_VAR_1} utilise {STR_VAR_2}.$"
+
+Text_CantCut:
+	.string "Cet arbre semble pouvoir être COUPE.$"
+.else
+.ifdef ITALIAN
+Text_WantToCut:
+	.string "L’albero si può abbattere con TAGLIO.\p"
+	.string "Vuoi usare TAGLIO?$"
+
+Text_MonUsedFieldMove:
+	.string "{STR_VAR_1} usa {STR_VAR_2}!$"
+
+Text_CantCut:
+	.string "L’albero si può abbattere con TAGLIO.$"
+.endif
+.endif
+.endif
 
 @ Interact with smashable rock
 EventScript_RockSmash::
@@ -113,6 +139,7 @@ EventScript_CancelSmash::
 	releaseall
 	end
 
+.ifdef ENGLISH
 Text_WantToSmash:
 	.string "This rock appears to be breakable.\n"
 	.string "Would you like to use ROCK SMASH?$"
@@ -120,6 +147,27 @@ Text_WantToSmash:
 Text_CantSmash:
 	.string "It's a rugged rock, but a POKéMON\n"
 	.string "may be able to smash it.$"
+.else
+.ifdef FRENCH
+Text_WantToSmash:
+	.string "Ce bloc de pierre peut être brisé.\n"
+	.string "Voulez-vous utiliser ECLATE-ROC?$"
+
+Text_CantSmash:
+	.string "C’est un bloc de pierre solide, mais un\n"
+	.string "POKéMON peut être apte à le pulvériser.$"
+.else
+.ifdef ITALIAN
+Text_WantToSmash:
+	.string "Questa roccia può essere frantumata.\n"
+	.string "Vuoi usare SPACCAROCCIA?$"
+
+Text_CantSmash:
+	.string "È una roccia dura, ma un POKéMON\n"
+	.string "dovrebbe poterla frantumare.$"
+.endif
+.endif
+.endif
 
 EventScript_StrengthBoulder::
 	lockall
@@ -164,6 +212,7 @@ EventScript_CancelStrength::
 	releaseall
 	end
 
+.ifdef ENGLISH
 Text_WantToStrength:
 	.string "It's a big boulder, but a POKéMON\n"
 	.string "may be able to push it aside.\p"
@@ -181,6 +230,46 @@ Text_CantStrength:
 Text_StrengthActivated:
 	.string "STRENGTH made it possible to move\n"
 	.string "boulders around.$"
+.else
+.ifdef FRENCH
+Text_WantToStrength:
+	.string "C’est un gros rocher, mais un POKéMON\n"
+	.string "peut être apte à le déplacer.\p"
+	.string "Voulez-vous utiliser FORCE?$"
+
+Text_MonUsedStrength:
+	.string "{STR_VAR_1} utilise FORCE.\p"
+	.string "La capacité FORCE de {STR_VAR_1}\n"
+	.string "permet de déplacer le rocher.$"
+
+Text_CantStrength:
+	.string "C’est un gros rocher, mais un POKéMON\n"
+	.string "peut être apte à le déplacer.$"
+
+Text_StrengthActivated:
+	.string "FORCE permet de déplacer le rocher.$"
+.else
+.ifdef ITALIAN
+Text_WantToStrength:
+	.string "È un masso enorme, ma un POKéMON\n"
+	.string "dovrebbe poterlo spostare.\p"
+	.string "Vuoi usare FORZA?$"
+
+Text_MonUsedStrength:
+	.string "{STR_VAR_1} usa FORZA.\p"
+	.string "La FORZA di {STR_VAR_1} riesce a\n"
+	.string "spostare i massi.$"
+
+Text_CantStrength:
+	.string "È un masso enorme, ma un POKéMON\n"
+	.string "dovrebbe poterlo spostare.$"
+
+Text_StrengthActivated:
+	.string "FORZA ha reso possibile spostare\n"
+	.string "i massi.$"
+.endif
+.endif
+.endif
 
 EventScript_UseWaterfall::
 	lockall
@@ -204,6 +293,7 @@ EventScript_EndWaterfall::
 	releaseall
 	end
 
+.ifdef ENGLISH
 Text_CantWaterfall:
 	.string "A wall of water is crashing down with\n"
 	.string "a mighty roar.$"
@@ -214,6 +304,33 @@ Text_WantToWaterfall:
 
 Text_MonUsedWaterfall:
 	.string "{STR_VAR_1} used WATERFALL.$"
+.else
+.ifdef FRENCH
+Text_CantWaterfall:
+	.string "Un mur d’eau s’abat dans un vacarme\n"
+	.string "assourdissant.$"
+
+Text_WantToWaterfall:
+	.string "C’est une grande cascade.\n"
+	.string "Voulez-vous utiliser CASCADE?$"
+
+Text_MonUsedWaterfall:
+	.string "{STR_VAR_1} utilise CASCADE.$"
+.else
+.ifdef ITALIAN
+Text_CantWaterfall:
+	.string "Una parete d’acqua che si schianta\n"
+	.string "con un potente fragore…$"
+
+Text_WantToWaterfall:
+	.string "C’è un’enorme cascata.\n"
+	.string "Vuoi usare CASCATA?$"
+
+Text_MonUsedWaterfall:
+	.string "{STR_VAR_1} usa CASCATA.$"
+.endif
+.endif
+.endif
 
 EventScript_UseDive::
 	lockall
@@ -262,6 +379,7 @@ EventScript_EndSurface::
 	releaseall
 	end
 
+.ifdef ENGLISH
 Text_CantDive:
 	.string "The sea is deep here. A POKéMON\n"
 	.string "may be able to go underwater.$"
@@ -287,3 +405,60 @@ EventScript_FailSweetScent::
 
 Text_FailSweetScent:
 	.string "Looks like there's nothing here…$"
+.else
+.ifdef FRENCH
+Text_CantDive:
+	.string "La mer est profonde. Un POKéMON\n"
+	.string "doit pouvoir aller sous l’eau ici.$"
+
+Text_WantToDive:
+	.string "La mer est profonde ici.\n"
+	.string "Voulez-vous utiliser PLONGEE?$"
+
+Text_MonUsedDive:
+	.string "{STR_VAR_1} utilise PLONGEE.$"
+
+Text_CantSurface:
+	.string "Une lumière vient d’en haut. Un POKéMON\n"
+	.string "doit pouvoir remonter à la surface.$"
+
+Text_WantToSurface:
+	.string "Une lumière vient d’en haut.\n"
+	.string "Voulez-vous utiliser PLONGEE?$"
+
+EventScript_FailSweetScent::
+	msgbox Text_FailSweetScent, MSGBOX_SIGN
+	end
+
+Text_FailSweetScent:
+	.string "Apparemment, il n’y a rien ici…$"
+.else
+.ifdef ITALIAN
+Text_CantDive:
+	.string "Il mare è profondo qui. Ci si potrebbe\n"
+	.string "immergere anche un POKéMON.$"
+
+Text_WantToDive:
+	.string "Il mare è profondo qui.\n"
+	.string "Vuoi usare SUB?$"
+
+Text_MonUsedDive:
+	.string "{STR_VAR_1} usa SUB.$"
+
+Text_CantSurface:
+	.string "Una luce illumina l’acqua dall’alto.\n"
+	.string "Da qui un POKéMON potrebbe riemergere.$"
+
+Text_WantToSurface:
+	.string "Una luce illumina l’acqua dall’alto.\n"
+	.string "Vuoi usare SUB?$"
+
+EventScript_FailSweetScent::
+	msgbox Text_FailSweetScent, MSGBOX_SIGN
+	end
+
+Text_FailSweetScent:
+	.string "Pare non ci sia nulla qui…$"
+.endif
+.endif
+.endif

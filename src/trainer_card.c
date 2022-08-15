@@ -1523,7 +1523,7 @@ static void DrawStarsAndBadgesOnCard(void)
 
 static void DrawCardBackStats(void)
 {
-// For some reason this function is emptied out in the French version
+// For some reason this function is emptied out in the French and Italian versions
 #if ENGLISH
     if (sData->cardType == CARD_TYPE_FRLG)
     {

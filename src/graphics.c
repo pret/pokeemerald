@@ -1584,7 +1584,7 @@ const u32 gBerryCrush_Crusher_Gfx[] = INCBIN_U32("graphics/berry_crush/crusher.4
 const u32 gBerryCrush_TextWindows_Tilemap[] = INCBIN_U32("graphics/berry_crush/text_windows.bin.lz");
 
 #if FRENCH || ITALIAN
-// Moved from other files in the french version.
+// Moved from other files in the French and Italian versions.
 
 // credits
 #if FRENCH
