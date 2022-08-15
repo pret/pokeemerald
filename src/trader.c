@@ -109,7 +109,7 @@ void Task_BufferDecorSelectionAndCloseWindow(u8 taskId, u8 decorationId)
     RemoveWindow(tWindowId);
     ScheduleBgCopyTilemapToVram(0);
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 void Task_HandleGetDecorationMenuInput(u8 taskId)
@@ -186,14 +186,14 @@ void DecorationItemsMenuAction_Trade(u8 taskId)
         gSpecialVar_0x8006 = 0xFFFF;
     }
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 void ExitTraderMenu(u8 taskId)
 {
     gSpecialVar_0x8006 = 0;
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 void TraderDoDecorationTrade(void)

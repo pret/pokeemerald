@@ -98,7 +98,7 @@ static void Task_TryFieldPoisonWhiteOut(u8 taskId)
             {
                 gSpecialVar_Result = FLDPSN_NO_WHITEOUT;
             }
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
             DestroyTask(taskId);
             break;
     }
@@ -110,7 +110,7 @@ static void Task_TryFieldPoisonWhiteOut(u8 taskId)
 void TryFieldPoisonWhiteOut(void)
 {
     CreateTask(Task_TryFieldPoisonWhiteOut, 80);
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
 }
 
 s32 DoPoisonFieldEffect(void)

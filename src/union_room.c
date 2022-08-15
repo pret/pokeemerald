@@ -686,12 +686,12 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         data->state++; // LL_STATE_RETRY or LL_STATE_FAILED
         break;
     case LL_STATE_FAILED:
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
         gSpecialVar_Result = LINKUP_FAILED;
         break;
     case LL_STATE_RETRY:
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
         gSpecialVar_Result = LINKUP_RETRY_ROLE_ASSIGN;
         break;
@@ -1744,7 +1744,7 @@ static void Task_StartActivity(u8 taskId)
     DestroyTask(taskId);
     gSpecialVar_Result = LINKUP_SUCCESS;
     if (gPlayerCurrActivity != (ACTIVITY_TRADE | IN_UNION_ROOM))
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
 }
 
 static void Task_RunScriptAndFadeToActivity(u8 taskId)
@@ -1779,13 +1779,13 @@ static void Task_RunScriptAndFadeToActivity(u8 taskId)
             SaveLinkTrainerNames();
             DestroyTask(taskId);
         default:
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
             data[0] = 1;
             break;
         }
         break;
     case 1:
-        if (!ScriptContext1_IsScriptSetUp())
+        if (!ScriptContext_IsEnabled())
         {
             FadeScreen(FADE_TO_BLACK, 0);
             data[0] = 2;
@@ -1833,7 +1833,7 @@ static void Task_RunScriptAndFadeToActivity(u8 taskId)
         }
         break;
     case 6:
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
         break;
     case 7:
@@ -1844,7 +1844,7 @@ static void Task_RunScriptAndFadeToActivity(u8 taskId)
         if (gReceivedRemoteLinkPlayers == 0)
         {
             DestroyWirelessStatusIndicatorSprite();
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
             DestroyTask(taskId);
         }
         break;
@@ -2592,7 +2592,7 @@ static void Task_RunUnionRoom(u8 taskId)
                 gSpecialVar_Result = 0;
             }
         }
-        else if (ScriptContext2_IsEnabled() != TRUE)
+        else if (ArePlayerFieldControlsLocked() != TRUE)
         {
             if (JOY_NEW(A_BUTTON))
             {
@@ -3781,7 +3781,7 @@ static void UR_ClearBg0(void)
 
 static void JoinGroup_EnableScriptContexts(void)
 {
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 static void PrintUnionRoomText(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx)
@@ -4403,7 +4403,7 @@ static u32 GetPartyPositionOfRegisteredMon(struct UnionRoomTrade *trade, u8 mult
 static void HandleCancelActivity(bool32 setData)
 {
     UR_ClearBg0();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     UnionRoom_UnlockPlayerAndChatPartner();
     gPlayerCurrActivity = ACTIVITY_NONE;
     if (setData)
@@ -4415,7 +4415,7 @@ static void HandleCancelActivity(bool32 setData)
 
 static void StartScriptInteraction(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjects_WaitForPlayer();
 }
 
