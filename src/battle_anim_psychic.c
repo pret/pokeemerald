@@ -1137,7 +1137,7 @@ static void AnimPsychoBoost(struct Sprite *sprite)
     case 1:
         if (sprite->affineAnimEnded)
         {
-            PlaySE12WithPanning(SE_M_TELEPORT, BattleAnimAdjustPanning(-64));
+            PlaySE12WithPanning(SE_M_TELEPORT, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER));
             ChangeSpriteAffineAnim(sprite, 1);
             sprite->data[0]++;
         }

@@ -3184,14 +3184,14 @@ static void AnimItemSteal_Step3(struct Sprite *sprite)
 
     sprite->y2 = Sin(sprite->data[0] + 0x80, 30 - sprite->data[1] * 8);
     if (sprite->y2 == 0)
-        PlaySE12WithPanning(SE_M_BUBBLE2, BattleAnimAdjustPanning(63));
+        PlaySE12WithPanning(SE_M_BUBBLE2, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
 
     if (moveAlongLinearPath(sprite))
     {
         sprite->y2 = 0;
         sprite->data[0] = 0;
         sprite->callback = AnimItemSteal_Step2;
-        PlaySE12WithPanning(SE_M_BUBBLE2, BattleAnimAdjustPanning(-64));
+        PlaySE12WithPanning(SE_M_BUBBLE2, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER));
     }
 }
 
@@ -4264,7 +4264,7 @@ static void AnimLockOnTarget_Step1(struct Sprite *sprite)
         sprite->callback = StartAnimLinearTranslation;
         StoreSpriteCallbackInData6(sprite, AnimLockOnTarget_Step2);
         sprite->data[5] += 0x100;
-        PlaySE12WithPanning(SE_M_LOCK_ON, BattleAnimAdjustPanning(63));
+        PlaySE12WithPanning(SE_M_LOCK_ON, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
         break;
     }
 
@@ -4350,7 +4350,7 @@ static void AnimLockOnTarget_Step4(struct Sprite *sprite)
         sprite->data[2]++;
         pal = sprite->oam.paletteNum;
         LoadPalette(&gPlttBufferUnfaded[0x108 + pal * 16], pal * 16 | 0x101, 4);
-        PlaySE12WithPanning(SE_M_LEER, BattleAnimAdjustPanning(63));
+        PlaySE12WithPanning(SE_M_LEER, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
     }
     else if (sprite->data[1] == 0)
     {
@@ -4812,7 +4812,7 @@ static void AnimSharpenSphere(struct Sprite *sprite)
     sprite->data[2] = 0;
     sprite->data[3] = 0;
     sprite->data[4] = 0;
-    sprite->data[5] = BattleAnimAdjustPanning(-64);
+    sprite->data[5] = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
     sprite->callback = AnimSharpenSphere_Step;
 }
 
