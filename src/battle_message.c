@@ -431,7 +431,7 @@ static const u8 sText_SpDef2[] = _("SP. DEF");
 static const u8 sText_Accuracy[] = _("accuracy");
 static const u8 sText_Evasiveness[] = _("evasiveness");
 
-const u8 *const gStatNamesTable[NUM_BATTLE_STATS] =
+const u8 * const gStatNamesTable[NUM_BATTLE_STATS] =
 {
     [STAT_HP]      = sText_HP2,
     [STAT_ATK]     = sText_Attack2,
@@ -449,7 +449,7 @@ static const u8 sText_PokeblockWasTooSweet[] = _("was too sweet!");
 static const u8 sText_PokeblockWasTooBitter[] = _("was too bitter!");
 static const u8 sText_PokeblockWasTooSour[] = _("was too sour!");
 
-const u8 *const gPokeblockWasTooXStringTable[FLAVOR_COUNT] =
+const u8 * const gPokeblockWasTooXStringTable[FLAVOR_COUNT] =
 {
     [FLAVOR_SPICY]  = sText_PokeblockWasTooSpicy,
     [FLAVOR_DRY]    = sText_PokeblockWasTooDry,
@@ -514,7 +514,7 @@ static const u8 sText_Trainer2WinText[];
 static const u8 sText_TwoInGameTrainersDefeated[];
 static const u8 sText_Trainer2LoseText[];
 
-const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_START] =
+const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_START] =
 {
     [STRINGID_TRAINER1LOSETEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer1LoseText,
     [STRINGID_PKMNGAINEDEXP - BATTLESTRINGS_TABLE_START] = sText_PkmnGainedEXP,
@@ -1293,7 +1293,7 @@ static const u8 sText_SpAtk[] = _("SP. ATK");
 static const u8 sText_SpDef[] = _("SP. DEF");
 
 // Unused
-static const u8 *const sStatNamesTable2[] =
+static const u8 * const sStatNamesTable2[] =
 {
     sText_HP, sText_SpAtk, sText_Attack,
     sText_SpDef, sText_Defense, sText_Speed
@@ -1405,7 +1405,7 @@ static const u8 sText_LostToOpponentByReferee[] = _("{B_PLAYER_MON1_NAME} lost t
 static const u8 sText_TiedOpponentByReferee[] = _("{B_PLAYER_MON1_NAME} tied the opponent\n{B_OPPONENT_MON1_NAME} in a REFEREE's decision!");
 static const u8 sText_RefCommenceBattle[] = _("REFEREE: {B_PLAYER_MON1_NAME} VS {B_OPPONENT_MON1_NAME}!\nCommence battling!");
 
-const u8 *const gRefereeStringsTable[] =
+const u8 * const gRefereeStringsTable[] =
 {
     [B_MSG_REF_NOTHING_IS_DECIDED] = sText_RefIfNothingIsDecided,
     [B_MSG_REF_THATS_IT]           = sText_RefThatsIt,

@@ -27,8 +27,8 @@
 #include "constants/battle_palace.h"
 
 extern const u8 gBattlePalaceNatureToMoveTarget[];
-extern const u8 *const gBattleAnims_General[];
-extern const u8 *const gBattleAnims_Special[];
+extern const u8 * const gBattleAnims_General[];
+extern const u8 * const gBattleAnims_Special[];
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
 

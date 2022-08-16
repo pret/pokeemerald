@@ -301,7 +301,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
         sTempTextPrinter.textSpeed = 0;
         
         // Render all text (up to limit) at once
-        for (j = 0; j < 0x400; j++)
+        for (j = 0; j < 0x400; ++j)
         {
             if (RenderFont(&sTempTextPrinter) == RENDER_FINISH)
                 break;
@@ -322,7 +322,7 @@ void RunTextPrinters(void)
 
     if (!gDisableTextPrinters)
     {
-        for (i = 0; i < NUM_TEXT_PRINTERS; i++)
+        for (i = 0; i < NUM_TEXT_PRINTERS; ++i)
         {
             if (sTextPrinters[i].active)
             {
@@ -1318,7 +1318,7 @@ static u32 (*GetFontWidthFunc(u8 fontId))(u16, bool32)
 {
     u32 i;
 
-    for (i = 0; i < ARRAY_COUNT(sGlyphWidthFuncs); i++)
+    for (i = 0; i < ARRAY_COUNT(sGlyphWidthFuncs); ++i)
     {
         if (fontId == sGlyphWidthFuncs[i].fontId)
             return sGlyphWidthFuncs[i].func;

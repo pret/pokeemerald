@@ -2811,7 +2811,7 @@ class Renderer {
     if ((bc.flags & Bytecode::Flag::ValueMask) != Bytecode::Flag::ValuePop) {
       popArgs -= 1;
     }
-    for (unsigned int i = 0; i < popArgs; i++) {
+    for (unsigned int i = 0; i < popArgs; ++i) {
       m_stack.pop_back();
     }
   }
@@ -2925,7 +2925,7 @@ class Renderer {
   void render_to(std::ostream& os, const Template& tmpl, const json& data) {
     m_data = &data;
 
-    for (size_t i = 0; i < tmpl.bytecodes.size(); i++) {
+    for (size_t i = 0; i < tmpl.bytecodes.size(); ++i) {
       const auto& bc = tmpl.bytecodes[i];
 
       switch (bc.op) {

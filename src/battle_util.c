@@ -1223,7 +1223,7 @@ u8 DoFieldEndTurnEffects(void)
                 if (effect != 0)
                     break;
             }
-            if (!effect)
+            if (effect == 0)
             {
                 gBattleStruct->turnCountersTracker++;
                 gBattleStruct->turnSideTracker = 0;
@@ -1249,7 +1249,7 @@ u8 DoFieldEndTurnEffects(void)
                 if (effect != 0)
                     break;
             }
-            if (!effect)
+            if (effect == 0)
             {
                 gBattleStruct->turnCountersTracker++;
                 gBattleStruct->turnSideTracker = 0;
@@ -1272,7 +1272,7 @@ u8 DoFieldEndTurnEffects(void)
                 if (effect != 0)
                     break;
             }
-            if (!effect)
+            if (effect == 0)
             {
                 gBattleStruct->turnCountersTracker++;
                 gBattleStruct->turnSideTracker = 0;
@@ -1296,7 +1296,7 @@ u8 DoFieldEndTurnEffects(void)
                 if (effect != 0)
                     break;
             }
-            if (!effect)
+            if (effect == 0)
             {
                 gBattleStruct->turnCountersTracker++;
                 gBattleStruct->turnSideTracker = 0;
@@ -1318,7 +1318,7 @@ u8 DoFieldEndTurnEffects(void)
                 if (effect != 0)
                     break;
             }
-            if (!effect)
+            if (effect == 0)
             {
                 gBattleStruct->turnCountersTracker++;
             }

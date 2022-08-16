@@ -208,13 +208,13 @@ void STWI_send_GameConfigREQ(const u8 *serial_gname, const u8 *uname)
         *(u16 *)packetBytes = *(u16 *)serial_gname;
         packetBytes += sizeof(u16);
         serial_gname += sizeof(u16);
-        for (i = 0; i < 14; i++)
+        for (i = 0; i < 14; ++i)
         {
             *packetBytes = *serial_gname;
             ++packetBytes;
             ++serial_gname;
         }
-        for (i = 0; i < 8; i++)
+        for (i = 0; i < 8; ++i)
         {
             *packetBytes = *uname;
             ++packetBytes;
