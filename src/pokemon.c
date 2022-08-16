@@ -13,6 +13,7 @@
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "field_specials.h"
+#include "international_string_util.h"
 #include "item.h"
 #include "link.h"
 #include "main.h"

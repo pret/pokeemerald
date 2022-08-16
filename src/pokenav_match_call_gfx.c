@@ -3,6 +3,7 @@
 #include "data.h"
 #include "decompress.h"
 #include "dma3.h"
+#include "graphics.h"
 #include "international_string_util.h"
 #include "main.h"
 #include "match_call.h"

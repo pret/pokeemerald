@@ -8,6 +8,7 @@
 #include "match_call.h"
 #include "pokenav.h"
 #include "strings.h"
+#include "international_string_util.h"
 #include "constants/region_map_sections.h"
 #include "constants/trainers.h"
 

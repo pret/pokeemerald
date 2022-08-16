@@ -1,5 +1,6 @@
 #include "global.h"
 #include "bg.h"
+#include "graphics.h"
 #include "m4a.h"
 #include "main.h"
 #include "malloc.h"

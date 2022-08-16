@@ -1,6 +1,7 @@
 #include "global.h"
 #include "pokenav.h"
 #include "bg.h"
+#include "graphics.h"
 #include "menu.h"
 #include "window.h"
 #include "sound.h"
