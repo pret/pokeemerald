@@ -2509,7 +2509,11 @@ void CopyFrontierBrainTrainerName(u8 *dst)
     else
         facility = VarGet(VAR_FRONTIER_FACILITY);
 
-    for (i = 0; i < FRONTIER_BRAIN_NAME_LENGTH; i++)
+#if defined(BUGFIX) || FRENCH || ITALIAN
+    for (i = 0; i < TRAINER_NAME_LENGTH + 1; i++)
+#else
+    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
+#endif
         dst[i] = gTrainers[sFrontierBrainTrainerIds[facility]].trainerName[i];
 
     dst[i] = EOS;
