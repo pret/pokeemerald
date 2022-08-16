@@ -73,7 +73,7 @@ static const u8 sDarkDownArrowTiles[] = INCBIN_U8("graphics/fonts/down_arrow_alt
 static const u8 sUnusedFRLGBlankedDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_blanked_down_arrow.4bpp");
 static const u8 sUnusedFRLGDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_down_arrow.4bpp");
 static const u8 sDownArrowYCoords[] = { 0, 1, 2, 1 };
-static const u8 sWindowVerticalScrollSpeeds[] = { 
+static const u8 sWindowVerticalScrollSpeeds[] = {
     [OPTIONS_TEXT_SPEED_SLOW] = 1,
     [OPTIONS_TEXT_SPEED_MID] = 2,
     [OPTIONS_TEXT_SPEED_FAST] = 4,
@@ -299,7 +299,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
     else
     {
         sTempTextPrinter.textSpeed = 0;
-        
+
         // Render all text (up to limit) at once
         for (j = 0; j < 0x400; ++j)
         {

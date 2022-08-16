@@ -1,3 +1,4 @@
+.ifdef ENGLISH
 Route111_Text_MakingRoomUseTMToMakeYourOwn:
 	.string "What's that?\n"
 	.string "What am I doing?\p"
@@ -32,6 +33,82 @@ Route111_Text_DontHaveAnyRoom:
 	.string "Oh, you don't have any room for this.\p"
 	.string "I'll hold on to it, so come back for it\n"
 	.string "another time, okay?$"
+.else
+.ifdef FRENCH
+Route111_Text_MakingRoomUseTMToMakeYourOwn:
+	.string "Qu’est-ce que c’est?\n"
+	.string "Qu’est-ce que je fais?\p"
+	.string "Je vais me créer ma propre pièce ici, en\n"
+	.string "utilisant la capacité d’un POKéMON.\p"
+	.string "Je sais! Je vais te donner cette CT.\n"
+	.string "Tu vas l’utiliser pour avoir ta pièce?$"
+
+Route111_Text_ExplainSecretPower:
+	.string "Trouve un grand arbre qui pourrait\n"
+	.string "avoir des lianes.\p"
+	.string "Utilise FORCE CACHEE devant l’arbre.\n"
+	.string "Des lianes peuvent en tomber\l"
+	.string "et te permettre de monter.\p"
+	.string "Tu trouveras toute la place qu’il te\n"
+	.string "faut pour y mettre tes objets préférés.\p"
+	.string "Ce sera ta pièce secrète…\n"
+	.string "Ta BASE SECRETE!\p"
+	.string "Tu devrais t’en créer une!\p"
+	.string "Autre chose: une BASE SECRETE ne se\n"
+	.string "construit pas toujours dans un arbre.\p"
+	.string "Essaie d’utiliser FORCE CACHEE sur\n"
+	.string "des façades rocheuses fissurées.\p"
+	.string "Je vais aussi chercher d’autres lieux.\n"
+	.string "Salut!$"
+
+Route111_Text_DontWantThis:
+	.string "Oh, tu n’en veux pas? Si tu changes\n"
+	.string "d’avis, fais-moi signe, OK?$"
+
+Route111_Text_DontHaveAnyRoom:
+	.string "Oh, tu n’as pas de place pour ça.\p"
+	.string "Bon, je vais la garder et tu pourras la\n"
+	.string "prendre une autre fois, d’accord?$"
+.else
+.ifdef ITALIAN
+Route111_Text_MakingRoomUseTMToMakeYourOwn:
+	.string "Che c’è?\n"
+	.string "Cosa sto facendo?\p"
+	.string "Pensavo di stabilire qui il mio ritrovo\n"
+	.string "usando una mossa POKéMON.\p"
+	.string "Sì! Ti darò questa MT.\n"
+	.string "La userai per creare il tuo ritrovo?$"
+
+Route111_Text_ExplainSecretPower:
+	.string "Cerca un grosso albero dal quale\n"
+	.string "ti sembra possano cadere dei tralci.\p"
+	.string "Usa FORZASEGRETA di fronte all’albero.\n"
+	.string "In questo modo scenderanno dei tralci\l"
+	.string "con cui ti potrai arrampicare.\p"
+	.string "Ci sarà un sacco di spazio e potrai\n"
+	.string "metterci tutte le tue cose.\p"
+	.string "Questo sarà il tuo ritrovo segreto.\n"
+	.string "La tua BASE SEGRETA!\p"
+	.string "Dai, fanne una anche tu!\p"
+	.string "Ricordati, la BASE SEGRETA non deve\n"
+	.string "essere necessariamente su un albero.\p"
+	.string "Prova ad usare FORZASEGRETA\n"
+	.string "su pareti rocciose con piccole \l"
+	.string "rientranze.\p"
+	.string "Anch’io cercherò degli altri posti.\n"
+	.string "Ok, ciao!$"
+
+Route111_Text_DontWantThis:
+	.string "Non vuoi averla?\n"
+	.string "Fammi sapere se cambi idea, ok?$"
+
+Route111_Text_DontHaveAnyRoom:
+	.string "Oh, non hai più spazio.\p"
+	.string "La conserverò per te, puoi venire\n"
+	.string "a prenderla un’altra volta, ok?$"
+.endif
+.endif
+.endif
 
 Route111_EventScript_SecretPowerMan::
 	lock

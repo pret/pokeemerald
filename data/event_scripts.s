@@ -913,10 +913,14 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/scripts/abnormal_weather.inc"
 	.include "data/scripts/trainer_script.inc"
 	.include "data/scripts/berry_tree.inc"
+.ifdef ENGLISH
+	.include "data/text/berry_tree.inc"
+	.include "data/text/secret_power.inc"
+	.include "data/text/secret_base_trainers.inc"
 	.include "data/scripts/secret_base.inc"
+	.include "data/text/secret_base.inc"
 	.include "data/scripts/cable_club.inc"
 	.include "data/text/cable_club.inc"
-.ifdef ENGLISH
 	.include "data/scripts/contest_hall.inc"
 	.include "data/text/contest_hall.inc"
 	.include "data/text/contest_strings.inc"
@@ -973,6 +977,13 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/text/birch_speech.inc"
 .else
 .ifdef FRENCH
+	.include "data/text/fr/berry_tree.inc"
+	.include "data/text/fr/secret_power.inc"
+	.include "data/text/fr/secret_base_trainers.inc"
+	.include "data/scripts/secret_base.inc"
+	.include "data/text/fr/secret_base.inc"
+	.include "data/scripts/cable_club.inc"
+	.include "data/text/fr/cable_club.inc"
 	.include "data/scripts/contest_hall.inc"
 	.include "data/text/fr/contest_hall.inc"
 	.include "data/text/fr/contest_strings.inc"
@@ -1029,6 +1040,13 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/text/fr/birch_speech.inc"
 .else
 .ifdef ITALIAN
+	.include "data/text/it/berry_tree.inc"
+	.include "data/text/it/secret_power.inc"
+	.include "data/text/it/secret_base_trainers.inc"
+	.include "data/scripts/secret_base.inc"
+	.include "data/text/it/secret_base.inc"
+	.include "data/scripts/cable_club.inc"
+	.include "data/text/it/cable_club.inc"
 	.include "data/scripts/contest_hall.inc"
 	.include "data/text/it/contest_hall.inc"
 	.include "data/text/it/contest_strings.inc"

@@ -318,7 +318,7 @@ endif
 
 #### Main Rules ####
 
-ALL_BUILDS := emerald emerald_fr
+ALL_BUILDS := emerald emerald_fr emerald_it
 MODERN_BUILDS := $(ALL_BUILDS:%=%_modern)
 
 ifeq ($(DINFO),1)
