@@ -124,6 +124,10 @@ enum
 #define TILE_FILLED_JAM_HEART    0x103C
 #define TILE_EMPTY_JAM_HEART     0x103D
 
+#define PSS_DATA_WINDOW_INFO_ABILITY_WIDTH  18
+#define PSS_DATA_WINDOW_INFO_MEMO_BASEBLOCK 557
+#define MOVE_NAMES_RECT_Y_WIDTH_HEIGHT      66, 72, 16
+
 static EWRAM_DATA struct PokemonSummaryScreenData
 {
     /*0x00*/ union {
@@ -591,7 +595,7 @@ static const struct WindowTemplate sPageInfoTemplate[] =
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 9,
-        .width = 18,
+        .width = PSS_DATA_WINDOW_INFO_ABILITY_WIDTH,
         .height = 4,
         .paletteNum = 6,
         .baseBlock = 485,
@@ -603,7 +607,7 @@ static const struct WindowTemplate sPageInfoTemplate[] =
         .width = 18,
         .height = 6,
         .paletteNum = 6,
-        .baseBlock = 557,
+        .baseBlock = PSS_DATA_WINDOW_INFO_MEMO_BASEBLOCK,
     },
 };
 static const struct WindowTemplate sPageSkillsTemplate[] =
@@ -3677,7 +3681,7 @@ static void PrintNewMoveDetailsOrCancelText(void)
 static void AddAndFillMoveNamesWindow(void)
 {
     u8 windowId = AddWindowFromTemplateList(sPageMovesTemplate, PSS_DATA_WINDOW_MOVE_NAMES);
-    FillWindowPixelRect(windowId, PIXEL_FILL(0), 0, 66, 72, 16);
+    FillWindowPixelRect(windowId, PIXEL_FILL(0), 0, MOVE_NAMES_RECT_Y_WIDTH_HEIGHT);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 

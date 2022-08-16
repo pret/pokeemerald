@@ -11,6 +11,8 @@
 #include "constants/region_map_sections.h"
 #include "constants/trainers.h"
 
+#define MAY_MATCH_CALL_DESC gText_MayBrendanMatchCallDesc
+#define BRENDAN_MATCH_CALL_DESC gText_MayBrendanMatchCallDesc
 
 // NPC below means non-trainer character (no rematch or check page)
 // Steven also uses this type but has a check page by using a MatchCallCheckPageOverride
@@ -279,7 +281,7 @@ static const struct MatchCallRival sMayMatchCallHeader =
     .type = MC_TYPE_RIVAL,
     .playerGender = MALE,
     .flag = FLAG_ENABLE_RIVAL_MATCH_CALL,
-    .desc = gText_MayBrendanMatchCallDesc,
+    .desc = MAY_MATCH_CALL_DESC,
     .name = gText_ExpandedPlaceholder_May,
     .textData = sMayTextScripts
 };
@@ -308,7 +310,7 @@ static const struct MatchCallRival sBrendanMatchCallHeader =
     .type = MC_TYPE_RIVAL,
     .playerGender = FEMALE,
     .flag = FLAG_ENABLE_RIVAL_MATCH_CALL,
-    .desc = gText_MayBrendanMatchCallDesc,
+    .desc = BRENDAN_MATCH_CALL_DESC,
     .name = gText_ExpandedPlaceholder_Brendan,
     .textData = sBrendanTextScripts
 };

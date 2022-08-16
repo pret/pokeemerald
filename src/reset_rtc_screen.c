@@ -19,6 +19,12 @@
 #include "gpu_regs.h"
 #include "constants/rgb.h"
 
+#define CURSOR_DAYS_X 53
+#define CURSOR_HOURS_X 86
+#define CURSOR_MINS_X 101
+#define CURSOR_SECS_X 116
+#define CURSOR_CONFIRM_X 153
+
 #define PALTAG_ARROW 0x1000
 
 // Task data for the Task_ResetRtc_* series of tasks, when setting the time on the clock
@@ -243,35 +249,35 @@ static void SpriteCB_Cursor_UpOrRight(struct Sprite *sprite)
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
-            sprite->x = 53;
+            sprite->x = CURSOR_DAYS_X;
             sprite->y = 68;
             break;
         case SELECTION_HOURS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
-            sprite->x = 86;
+            sprite->x = CURSOR_HOURS_X;
             sprite->y = 68;
             break;
         case SELECTION_MINS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
-            sprite->x = 101;
+            sprite->x = CURSOR_MINS_X;
             sprite->y = 68;
             break;
         case SELECTION_SECS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
-            sprite->x = 116;
+            sprite->x = CURSOR_SECS_X;
             sprite->y = 68;
             break;
         case SELECTION_CONFIRM:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_RIGHT;
             sprite->animDelayCounter = 0;
-            sprite->x = 153;
+            sprite->x = CURSOR_CONFIRM_X;
             sprite->y = 80;
             break;
         case SELECTION_NONE:
@@ -293,28 +299,28 @@ static void SpriteCB_Cursor_Down(struct Sprite *sprite)
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
-            sprite->x = 53;
+            sprite->x = CURSOR_DAYS_X;
             sprite->y = 92;
             break;
         case SELECTION_HOURS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
-            sprite->x = 86;
+            sprite->x = CURSOR_HOURS_X;
             sprite->y = 92;
             break;
         case SELECTION_MINS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
-            sprite->x = 101;
+            sprite->x = CURSOR_MINS_X;
             sprite->y = 92;
             break;
         case SELECTION_SECS:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
-            sprite->x = 116;
+            sprite->x = CURSOR_SECS_X;
             sprite->y = 92;
             break;
         case SELECTION_CONFIRM:
@@ -335,12 +341,12 @@ static void CreateCursor(u8 taskId)
 
     LoadSpritePalette(&sSpritePalette_Arrow);
 
-    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Arrow, 53, 68, 0);
+    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Arrow, CURSOR_DAYS_X, 68, 0);
     gSprites[spriteId].callback = SpriteCB_Cursor_UpOrRight;
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].sState = -1;
 
-    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Arrow, 53, 68, 0);
+    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Arrow, CURSOR_DAYS_X, 68, 0);
     gSprites[spriteId].callback = SpriteCB_Cursor_Down;
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].sState = -1;
@@ -388,7 +394,7 @@ static void ShowChooseTimeWindow(u8 windowId, u16 days, u8 hours, u8 minutes, u8
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 0x214, 0xE);
     PrintTime(windowId, 0, 1, days, hours, minutes, seconds);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Confirm2, 126, 1, 0, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Confirm2, CURSOR_CONFIRM_X - 27, 1, 0, NULL);
     ScheduleBgCopyTilemapToVram(0);
 }
 

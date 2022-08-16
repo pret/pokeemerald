@@ -47,6 +47,10 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
+#define REGISTRY_WIN_1_TILEMAP_LEFT 18
+#define REGISTRY_WIN_1_WIDTH 11
+#define REGISTRY_WIN_2_BASEBLOCK 0xc7
+
 // Values for registryStatus
 enum {
     UNREGISTERED,
@@ -177,9 +181,9 @@ static const struct WindowTemplate sRegistryWindowTemplates[] =
 {
     {
         .bg = 0,
-        .tilemapLeft = 18,
+        .tilemapLeft = REGISTRY_WIN_1_TILEMAP_LEFT,
         .tilemapTop = 1,
-        .width = 11,
+        .width = REGISTRY_WIN_1_WIDTH,
         .height = 18,
         .paletteNum = 15,
         .baseBlock = 0x01,
@@ -191,7 +195,7 @@ static const struct WindowTemplate sRegistryWindowTemplates[] =
         .width = 28,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 0xc7,
+        .baseBlock = REGISTRY_WIN_2_BASEBLOCK,
     }
 };
 

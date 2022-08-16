@@ -10,6 +10,12 @@
 #include "international_string_util.h"
 #include "constants/songs.h"
 
+#define SEARCH_RESULT_PAL sConditionSearchResultFramePal
+#define SEARCH_RESULT_TILES sConditionSearchResultTiles
+#define SEARCH_RESULT_TILEMAP sConditionSearchResultTilemap
+#define SEARCH_RESULT_LIST_ITEM_X 13
+#define SEARCH_RESULT_LIST_WIN_WIDTH 17
+
 enum
 {
     CONDITION_SEARCH_FUNC_NONE,
@@ -427,11 +433,11 @@ static u32 LoopedTask_OpenConditionSearchResults(s32 state)
     {
     case 0:
         InitBgTemplates(sConditionSearchResultBgTemplates, ARRAY_COUNT(sConditionSearchResultBgTemplates));
-        DecompressAndCopyTileDataToVram(1, sConditionSearchResultTiles, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, SEARCH_RESULT_TILES, 0, 0, 0);
         SetBgTilemapBuffer(1, gfx->buff);
-        CopyToBgTilemapBuffer(1, sConditionSearchResultTilemap, 0, 0);
+        CopyToBgTilemapBuffer(1, SEARCH_RESULT_TILEMAP, 0, 0);
         CopyBgTilemapBufferToVram(1);
-        CopyPaletteIntoBufferUnfaded(sConditionSearchResultFramePal, 0x10, 0x20);
+        CopyPaletteIntoBufferUnfaded(SEARCH_RESULT_PAL, 0x10, 0x20);
         CopyBgTilemapBufferToVram(1);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -676,8 +682,8 @@ static void CreateSearchResultsList(void)
     template.count = GetSearchResultsMonListCount();
     template.itemSize = sizeof(struct PokenavListItem);
     template.startIndex = GetSearchResultsCurrentListIndex();
-    template.item_X = 13;
-    template.windowWidth = 17;
+    template.item_X = SEARCH_RESULT_LIST_ITEM_X;
+    template.windowWidth = SEARCH_RESULT_LIST_WIN_WIDTH;
     template.listTop = 1;
     template.maxShowed = 8;
     template.fillValue = 2;

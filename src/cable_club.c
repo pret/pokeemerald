@@ -35,6 +35,8 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
+#define WAIT_FOR_LINK_TIMEOUT 300
+
 static const struct WindowTemplate sWindowTemplate_LinkPlayerCount = {
     .bg = 0,
     .tilemapLeft = 16,
@@ -1225,7 +1227,7 @@ void Task_WaitForLinkPlayerConnection(u8 taskId)
     struct Task *task = &gTasks[taskId];
 
     task->tTimer++;
-    if (task->tTimer > 300)
+    if (task->tTimer > WAIT_FOR_LINK_TIMEOUT)
     {
         CloseLink();
         SetMainCallback2(CB2_LinkError);

@@ -8,6 +8,10 @@
 #include "international_string_util.h"
 #include "constants/coins.h"
 
+#define COINS_STRING_FONT           FONT_NORMAL
+#define COINS_STRING_TOTAL_WIDTH    0x40
+#define COINS_WINDOW_WIDTH          8
+
 static EWRAM_DATA u8 sCoinsWindowId = 0;
 
 void PrintCoinsString(u32 coinAmount)
@@ -17,14 +21,14 @@ void PrintCoinsString(u32 coinAmount)
     ConvertIntToDecimalStringN(gStringVar1, coinAmount, STR_CONV_MODE_RIGHT_ALIGN, MAX_COIN_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_Coins);
 
-    xAlign = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 0x40);
-    AddTextPrinterParameterized(sCoinsWindowId, FONT_NORMAL, gStringVar4, xAlign, 1, 0, NULL);
+    xAlign = GetStringRightAlignXOffset(COINS_STRING_FONT, gStringVar4, COINS_STRING_TOTAL_WIDTH);
+    AddTextPrinterParameterized(sCoinsWindowId, COINS_STRING_FONT, gStringVar4, xAlign, 1, 0, NULL);
 }
 
 void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y)
 {
     struct WindowTemplate template;
-    SetWindowTemplateFields(&template, 0, x, y, 8, 2, 0xF, 0x141);
+    SetWindowTemplateFields(&template, 0, x, y, COINS_WINDOW_WIDTH, 2, 0xF, 0x141);
     sCoinsWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sCoinsWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sCoinsWindowId);

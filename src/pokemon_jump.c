@@ -36,6 +36,10 @@
 
 #define JUMP_PEAK (-30)
 
+#define BONUSES_PAL sBonuses_Pal
+#define BONUSES_GFX sBonuses_Gfx
+#define BONUSES_TILEMAP sBonuses_Tilemap
+
 enum {
     BG_INTERFACE,
     BG_BONUSES,
@@ -3189,9 +3193,9 @@ static void LoadPokeJumpGfx(void)
         LoadPalette(sVenusaur_Pal, 0x30, 0x20);
         DecompressAndCopyTileDataToVram(BG_VENUSAUR, sVenusaur_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_VENUSAUR, sVenusaur_Tilemap, 0, 0, 1);
-        LoadPalette(sBonuses_Pal, 0x10, 0x20);
-        DecompressAndCopyTileDataToVram(BG_BONUSES, sBonuses_Gfx, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(BG_BONUSES, sBonuses_Tilemap, 0, 0, 1);
+        LoadPalette(BONUSES_PAL, 0x10, 0x20);
+        DecompressAndCopyTileDataToVram(BG_BONUSES, BONUSES_GFX, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(BG_BONUSES, BONUSES_TILEMAP, 0, 0, 1);
         LoadPalette(sInterface_Pal, 0x20, 0x20);
         SetBgTilemapBuffer(BG_INTERFACE, sPokemonJumpGfx->tilemapBuffer);
         FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 0x20, 0x20);

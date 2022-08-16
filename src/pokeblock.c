@@ -45,6 +45,20 @@
 
 #define POKEBLOCK_MAX_FEEL 99
 
+#define WIN_TITLE_WIDTH             9
+#define WIN_LIST_BASEBLOCK          0x30
+#define WIN_SPICY_BASEBLOCK         0x12C
+#define WIN_DRY_BASEBLOCK           0x136
+#define WIN_SWEET_BASEBLOCK         0x140
+#define WIN_BITTER_BASEBLOCK        0x14A
+#define WIN_SOUR_BASEBLOCK          0x154
+#define WIN_FEEL_BASEBLOCK          0x15E
+#define WIN_ACTIONS_TALL_BASEBLOCK  0x162
+#define WIN_ACTIONS_BASEBLOCK       0x186
+#define WIN_TOSS_MSG_BASEBLOCK      0x19E
+#define WIN_TOSS_PKBLOCK_BASEBLOCK  0x20A
+#define PKBLOCK_CASE_NAME_WIDTH     72
+
 enum {
     WIN_TITLE,
     WIN_LIST,
@@ -312,7 +326,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 1,
-        .width = 9,
+        .width = WIN_TITLE_WIDTH,
         .height = 2,
         .paletteNum = 15,
         .baseBlock = 0x1E
@@ -324,7 +338,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .width = 14,
         .height = 18,
         .paletteNum = 15,
-        .baseBlock = 0x30
+        .baseBlock = WIN_LIST_BASEBLOCK
     },
     [WIN_SPICY] = {
         .bg = 0,
@@ -333,7 +347,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .width = 5,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 0x12C
+        .baseBlock = WIN_SPICY_BASEBLOCK
     },
     [WIN_DRY] = {
         .bg = 0,
@@ -342,7 +356,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .width = 5,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 0x136
+        .baseBlock = WIN_DRY_BASEBLOCK
     },
     [WIN_SWEET] = {
         .bg = 0,
@@ -351,7 +365,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .width = 5,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 0x140
+        .baseBlock = WIN_SWEET_BASEBLOCK
     },
     [WIN_BITTER] = {
         .bg = 0,
@@ -360,7 +374,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .width = 5,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 0x14A
+        .baseBlock = WIN_BITTER_BASEBLOCK
     },
     [WIN_SOUR] = {
         .bg = 0,
@@ -369,7 +383,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .width = 5,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 0x154
+        .baseBlock = WIN_SOUR_BASEBLOCK
     },
     [WIN_FEEL] = {
         .bg = 0,
@@ -378,7 +392,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .width = 2,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 0x15E
+        .baseBlock = WIN_FEEL_BASEBLOCK
     },
     [WIN_ACTIONS_TALL] = {
         .bg = 1,
@@ -387,7 +401,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .width = 6,
         .height = 6,
         .paletteNum = 15,
-        .baseBlock = 0x162
+        .baseBlock = WIN_ACTIONS_TALL_BASEBLOCK
     },
     [WIN_ACTIONS] = {
         .bg = 1,
@@ -396,7 +410,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .width = 6,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 0x186
+        .baseBlock = WIN_ACTIONS_BASEBLOCK
     },
     [WIN_TOSS_MSG] = {
         .bg = 1,
@@ -405,7 +419,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .width = 27,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 0x19E
+        .baseBlock = WIN_TOSS_MSG_BASEBLOCK
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -418,7 +432,7 @@ static const struct WindowTemplate sTossPkblockWindowTemplate =
     .width = 5,
     .height = 4,
     .paletteNum = 15,
-    .baseBlock = 0x20A
+    .baseBlock = WIN_TOSS_PKBLOCK_BASEBLOCK
 };
 
 static const struct ListMenuTemplate sPokeblockListMenuTemplate =
@@ -700,7 +714,7 @@ static void DrawPokeblockMenuTitleText(void)
     u8 i;
 
     const u8 *itemName = ItemId_GetName(ITEM_POKEBLOCK_CASE);
-    PrintOnPokeblockWindow(WIN_TITLE, itemName, GetStringCenterAlignXOffset(FONT_NORMAL, itemName, 0x48));
+    PrintOnPokeblockWindow(WIN_TITLE, itemName, GetStringCenterAlignXOffset(FONT_NORMAL, itemName, PKBLOCK_CASE_NAME_WIDTH));
 
     PrintOnPokeblockWindow(WIN_SPICY,  gText_Spicy, 0);
     PrintOnPokeblockWindow(WIN_DRY,    gText_Dry, 0);

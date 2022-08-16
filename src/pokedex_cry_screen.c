@@ -27,6 +27,9 @@
 
 #define WAVEFORM_WINDOW_HEIGHT 56
 
+#define CRY_METER_PAL sCryMeter_Pal
+#define CRY_METER_GFX sCryMeter_Gfx
+
 struct PokedexCryMeterNeedle {
     s8 rotation;
     s8 targetRotation;
@@ -457,8 +460,8 @@ bool8 LoadCryMeter(struct CryScreenWindow *window, u8 windowId)
         if (!sCryMeterNeedle)
             sCryMeterNeedle = AllocZeroed(sizeof(*sCryMeterNeedle));
 
-        CopyToWindowPixelBuffer(windowId, sCryMeter_Gfx, 0, 0);
-        LoadPalette(sCryMeter_Pal, window->paletteNo * 16, 32);
+        CopyToWindowPixelBuffer(windowId, CRY_METER_GFX, 0, 0);
+        LoadPalette(CRY_METER_PAL, window->paletteNo * 16, 32);
         gDexCryScreenState++;
         break;
     case 1:

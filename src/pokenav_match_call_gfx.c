@@ -29,6 +29,10 @@
 #define PALTAG_CURSOR 12
 #define PALTAG_TRAINER_PIC 13
 
+#define MATCH_CALL_UI_PAL sMatchCallUI_Pal
+#define MATCH_CALL_UI_GFX sMatchCallUI_Gfx
+#define MATCH_CALL_UI_TILEMAP sMatchCallUI_Tilemap
+
 struct Pokenav_MatchCallGfx
 {
     bool32 (*isTaskActiveCB)(void);
@@ -329,11 +333,11 @@ static u32 LoopedTask_OpenMatchCall(s32 state)
         InitBgTemplates(sMatchCallBgTemplates, ARRAY_COUNT(sMatchCallBgTemplates));
         ChangeBgX(2, 0, BG_COORD_SET);
         ChangeBgY(2, 0, BG_COORD_SET);
-        DecompressAndCopyTileDataToVram(2, sMatchCallUI_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(2, MATCH_CALL_UI_GFX, 0, 0, 0);
         SetBgTilemapBuffer(2, gfx->bgTilemapBuffer2);
-        CopyToBgTilemapBuffer(2, sMatchCallUI_Tilemap, 0, 0);
+        CopyToBgTilemapBuffer(2, MATCH_CALL_UI_TILEMAP, 0, 0);
         CopyBgTilemapBufferToVram(2);
-        CopyPaletteIntoBufferUnfaded(sMatchCallUI_Pal, 0x20, 0x20);
+        CopyPaletteIntoBufferUnfaded(MATCH_CALL_UI_PAL, 0x20, 0x20);
         CopyBgTilemapBufferToVram(2);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -876,8 +880,8 @@ static void CreateMatchCallList(void)
     template.count = GetNumberRegistered();
     template.itemSize = sizeof(struct PokenavListItem);
     template.startIndex = 0;
-    template.item_X = 13;
-    template.windowWidth = 16;
+    template.item_X = POKENAV_LIST_ITEM_X;
+    template.windowWidth = POKENAV_LIST_WINDOW_WIDTH;
     template.listTop = 1;
     template.maxShowed = 8;
     template.fillValue = 3;

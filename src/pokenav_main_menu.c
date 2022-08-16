@@ -13,6 +13,8 @@
 #include "menu.h"
 #include "dma3.h"
 
+#define LEFT_HEADER_SPRITES_END 160
+
 struct Pokenav_MainMenu
 {
     void (*loopTask)(u32);
@@ -761,7 +763,7 @@ static void ShowLeftHeaderSprites(u32 startY, bool32 isOnRightSide)
     if (!isOnRightSide)
         start = -96, end = 32;
     else
-        start = 256, end = 160;
+        start = 256, end = LEFT_HEADER_SPRITES_END;
 
     for (i = 0; i < (s32)ARRAY_COUNT(menu->leftHeaderSprites); i++)
     {

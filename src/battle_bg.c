@@ -24,6 +24,15 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
+#define B_WIN_MSG_WIDTH                     26
+#define B_WIN_YESNO_TILEMAP_LEFT            26
+#define B_WIN_YESNO_WIDTH                   3
+#define ARENA_WIN_SKILL_TILEMAP_LEFT        12
+#define ARENA_WIN_SKILL_WIDTH               6
+#define ARENA_WIN_BODY_BASEBLOCK            0x013C
+#define ARENA_WIN_JUDGEMENT_TITLE_BASEBLOCK 0x0148
+#define ARENA_WIN_JUDGEMENT_TEXT_WIDTH      26
+
 struct BattleBackground
 {
     const void *tileset;
@@ -165,7 +174,7 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
-        .width = 26,
+        .width = B_WIN_MSG_WIDTH,
         .height = 4,
         .paletteNum = 0,
         .baseBlock = 0x0090,
@@ -271,9 +280,9 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
     },
     [B_WIN_YESNO] = {
         .bg = 0,
-        .tilemapLeft = 26,
+        .tilemapLeft = B_WIN_YESNO_TILEMAP_LEFT,
         .tilemapTop = 9,
-        .width = 3,
+        .width = B_WIN_YESNO_WIDTH,
         .height = 4,
         .paletteNum = 5,
         .baseBlock = 0x0100,
@@ -386,7 +395,7 @@ static const struct WindowTemplate sBattleArenaWindowTemplates[] =
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
-        .width = 26,
+        .width = B_WIN_MSG_WIDTH,
         .height = 4,
         .paletteNum = 0,
         .baseBlock = 0x0090,
@@ -492,9 +501,9 @@ static const struct WindowTemplate sBattleArenaWindowTemplates[] =
     },
     [B_WIN_YESNO] = {
         .bg = 0,
-        .tilemapLeft = 26,
+        .tilemapLeft = B_WIN_YESNO_TILEMAP_LEFT,
         .tilemapTop = 9,
-        .width = 3,
+        .width = B_WIN_YESNO_WIDTH,
         .height = 4,
         .paletteNum = 5,
         .baseBlock = 0x0100,
@@ -555,9 +564,9 @@ static const struct WindowTemplate sBattleArenaWindowTemplates[] =
     },
     [ARENA_WIN_SKILL] = {
         .bg = 0,
-        .tilemapLeft = 12,
+        .tilemapLeft = ARENA_WIN_SKILL_TILEMAP_LEFT,
         .tilemapTop = 6,
-        .width = 6,
+        .width = ARENA_WIN_SKILL_WIDTH,
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x0130,
@@ -569,7 +578,7 @@ static const struct WindowTemplate sBattleArenaWindowTemplates[] =
         .width = 6,
         .height = 2,
         .paletteNum = 5,
-        .baseBlock = 0x013c,
+        .baseBlock = ARENA_WIN_BODY_BASEBLOCK,
     },
     [ARENA_WIN_JUDGEMENT_TITLE] = {
         .bg = 0,
@@ -578,13 +587,13 @@ static const struct WindowTemplate sBattleArenaWindowTemplates[] =
         .width = 14,
         .height = 2,
         .paletteNum = 5,
-        .baseBlock = 0x0148,
+        .baseBlock = ARENA_WIN_JUDGEMENT_TITLE_BASEBLOCK,
     },
     [ARENA_WIN_JUDGEMENT_TEXT] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
-        .width = 26,
+        .width = ARENA_WIN_JUDGEMENT_TEXT_WIDTH,
         .height = 4,
         .paletteNum = 7,
         .baseBlock = 0x0090,

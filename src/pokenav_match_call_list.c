@@ -14,6 +14,9 @@
 #include "strings.h"
 #include "constants/songs.h"
 
+#define FULL_TRAINER_STRING_CLEAR_WIDTH_1 51
+#define FULL_TRAINER_STRING_CLEAR_WIDTH_2 120
+
 struct Pokenav_MatchCallMenu
 {
     u16 optionCursorPos;
@@ -419,11 +422,11 @@ void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry *matchCallEntry, u8
     if (className && trainerName)
     {
         u8 *str2 = GetStringClearToWidth(str, FONT_NARROW, className, 69);
-        GetStringClearToWidth(str2, FONT_NARROW, trainerName, 51);
+        GetStringClearToWidth(str2, FONT_NARROW, trainerName, FULL_TRAINER_STRING_CLEAR_WIDTH_1);
     }
     else
     {
-        GetStringClearToWidth(str, FONT_NARROW, NULL, 120);
+        GetStringClearToWidth(str, FONT_NARROW, NULL, FULL_TRAINER_STRING_CLEAR_WIDTH_2);
     }
 }
 

@@ -1,6 +1,8 @@
 #ifndef GUARD_MONEY_H
 #define GUARD_MONEY_H
 
+#define MONEY_LABEL_X_OFFSET 19
+
 u32 GetMoney(u32 *moneyPtr);
 void SetMoney(u32 *moneyPtr, u32 newValue);
 bool8 IsEnoughMoney(u32 *moneyPtr, u32 cost);

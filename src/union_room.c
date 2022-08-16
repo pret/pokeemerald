@@ -53,6 +53,8 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+#define TRADE_BOARD_FONT FONT_NORMAL
+
 // States for Task_RunUnionRoom
 enum {
     UR_STATE_INIT,
@@ -3656,7 +3658,7 @@ static u8 CreateTradeBoardWindow(const struct WindowTemplate * template)
     u8 windowId = AddWindow(template);
     DrawStdWindowFrame(windowId, FALSE);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(15));
-    PrintUnionRoomText(windowId, FONT_NORMAL, sText_NameWantedOfferLv, 8, 1, UR_COLOR_TRADE_BOARD_OTHER);
+    PrintUnionRoomText(windowId, TRADE_BOARD_FONT, sText_NameWantedOfferLv, 8, 1, UR_COLOR_TRADE_BOARD_OTHER);
     CopyWindowToVram(windowId, COPYWIN_GFX);
     PutWindowTilemap(windowId);
     return windowId;

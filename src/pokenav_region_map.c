@@ -22,6 +22,8 @@
 
 #define NUM_CITY_MAPS 22
 
+#define MAP_SEC_INFO_WIDTH 12
+
 struct Pokenav_RegionMapMenu
 {
     u8 unused[12];
@@ -138,7 +140,7 @@ static const struct WindowTemplate sMapSecInfoWindowTemplate =
     .bg = 1,
     .tilemapLeft = 17,
     .tilemapTop = 4,
-    .width = 12,
+    .width = MAP_SEC_INFO_WIDTH,
     .height = 13,
     .paletteNum = 1,
     .baseBlock = 0x4C
@@ -537,7 +539,7 @@ static void UpdateMapSecInfoWindow(struct Pokenav_RegionMapGfx *state)
     {
     case MAPSECTYPE_CITY_CANFLY:
         FillWindowPixelBuffer(state->infoWindowId, PIXEL_FILL(1));
-        PutWindowRectTilemap(state->infoWindowId, 0, 0, 12, 2);
+        PutWindowRectTilemap(state->infoWindowId, 0, 0, MAP_SEC_INFO_WIDTH, 2);
         AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, regionMap->mapSecName, 0, 1, TEXT_SKIP_DRAW, NULL);
         DrawCityMap(state, regionMap->mapSecId, regionMap->posWithinMapSec);
         CopyWindowToVram(state->infoWindowId, COPYWIN_FULL);
@@ -545,9 +547,9 @@ static void UpdateMapSecInfoWindow(struct Pokenav_RegionMapGfx *state)
         break;
     case MAPSECTYPE_CITY_CANTFLY:
         FillWindowPixelBuffer(state->infoWindowId, PIXEL_FILL(1));
-        PutWindowRectTilemap(state->infoWindowId, 0, 0, 12, 2);
+        PutWindowRectTilemap(state->infoWindowId, 0, 0, MAP_SEC_INFO_WIDTH, 2);
         AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, regionMap->mapSecName, 0, 1, TEXT_SKIP_DRAW, NULL);
-        FillBgTilemapBufferRect(1, 0x1041, 17, 6, 12, 11, 17);
+        FillBgTilemapBufferRect(1, 0x1041, 17, 6, MAP_SEC_INFO_WIDTH, 11, 17);
         CopyWindowToVram(state->infoWindowId, COPYWIN_FULL);
         SetCityZoomTextInvisibility(TRUE);
         break;
@@ -561,7 +563,7 @@ static void UpdateMapSecInfoWindow(struct Pokenav_RegionMapGfx *state)
         SetCityZoomTextInvisibility(TRUE);
         break;
     case MAPSECTYPE_NONE:
-        FillBgTilemapBufferRect(1, 0x1041, 17, 4, 12, 13, 17);
+        FillBgTilemapBufferRect(1, 0x1041, 17, 4, MAP_SEC_INFO_WIDTH, 13, 17);
         CopyBgTilemapBufferToVram(1);
         SetCityZoomTextInvisibility(TRUE);
         break;
@@ -643,7 +645,7 @@ static void DrawCityMap(struct Pokenav_RegionMapGfx *state, int mapSecId, int po
     if (i == NUM_CITY_MAPS)
         return;
 
-    FillBgTilemapBufferRect_Palette0(1, 0x1041, 17, 6, 12, 11);
+    FillBgTilemapBufferRect_Palette0(1, 0x1041, 17, 6, MAP_SEC_INFO_WIDTH, 11);
     CopyToBgTilemapBufferRect(1, state->cityZoomPics[i], 18, 6, 10, 10);
 }
 
@@ -656,7 +658,7 @@ static void PrintLandmarkNames(struct Pokenav_RegionMapGfx *state, int mapSecId,
         if (!landmarkName)
             break;
 
-        StringCopyPadded(gStringVar1, landmarkName, CHAR_SPACE, 12);
+        StringCopyPadded(gStringVar1, landmarkName, CHAR_SPACE, MAP_SEC_INFO_WIDTH);
         AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, gStringVar1, 0, i * 16 + 17, TEXT_SKIP_DRAW, NULL);
         i++;
     }

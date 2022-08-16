@@ -29,6 +29,8 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+#define WEIGHT_LEFT 0x81
+
 enum
 {
     PAGE_MAIN,
@@ -4128,13 +4130,13 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     PrintInfoScreenText(gText_WTWeight, 0x60, 0x49);
     if (owned)
     {
-        PrintMonHeight(gPokedexEntries[num].height, 0x81, 0x39);
-        PrintMonWeight(gPokedexEntries[num].weight, 0x81, 0x49);
+        PrintMonHeight(gPokedexEntries[num].height, WEIGHT_LEFT, 0x39);
+        PrintMonWeight(gPokedexEntries[num].weight, WEIGHT_LEFT, 0x49);
     }
     else
     {
-        PrintInfoScreenText(gText_UnkHeight, 0x81, 0x39);
-        PrintInfoScreenText(gText_UnkWeight, 0x81, 0x49);
+        PrintInfoScreenText(gText_UnkHeight, WEIGHT_LEFT, 0x39);
+        PrintInfoScreenText(gText_UnkWeight, WEIGHT_LEFT, 0x49);
     }
     if (owned)
         description = gPokedexEntries[num].description;
@@ -4145,6 +4147,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
 
 static void PrintMonHeight(u16 height, u8 left, u8 top)
 {
+#ifdef UNITS_IMPERIAL
     u8 buffer[16];
     u32 inches, feet;
     u8 i = 0;
@@ -4174,10 +4177,15 @@ static void PrintMonHeight(u16 height, u8 left, u8 top)
     buffer[i++] = CHAR_DBL_QUOTE_RIGHT;
     buffer[i++] = EOS;
     PrintInfoScreenText(buffer, left, top);
+#else
+    PrintInfoScreenText(gText_EmptyHeight, left, top);
+    PrintDecimalNum(0, height, left, top);
+#endif
 }
 
 static void PrintMonWeight(u16 weight, u8 left, u8 top)
 {
+#ifdef UNITS_IMPERIAL
     u8 buffer[16];
     bool8 output;
     u8 i;
@@ -4232,6 +4240,10 @@ static void PrintMonWeight(u16 weight, u8 left, u8 top)
     buffer[i++] = CHAR_PERIOD;
     buffer[i++] = EOS;
     PrintInfoScreenText(buffer, left, top);
+#else
+    PrintInfoScreenText(gText_EmptyWeight, left, top);
+    PrintDecimalNum(0, weight, left, top);
+#endif
 }
 
 const u8 *GetPokedexCategoryName(u16 dexNum) // unused

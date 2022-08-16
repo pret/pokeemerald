@@ -26,6 +26,9 @@
 #include "constants/songs.h"
 #include "gba/io_reg.h"
 
+#define MAILBOXWIN_TITLE_WIDTH             8
+#define MAILBOXWIN_LISTOPTIONS_BASEBLOCK   0x18
+
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
 EWRAM_DATA static u8 sMailboxWindowIds[MAILBOXWIN_COUNT] = {0};
@@ -46,7 +49,7 @@ static const struct WindowTemplate sWindowTemplates_MailboxMenu[MAILBOXWIN_COUNT
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
-        .width = 8,
+        .width = MAILBOXWIN_TITLE_WIDTH,
         .height = 2,
         .paletteNum = 15,
         .baseBlock = 0x8
@@ -58,7 +61,7 @@ static const struct WindowTemplate sWindowTemplates_MailboxMenu[MAILBOXWIN_COUNT
         .width = 8,
         .height = 18,
         .paletteNum = 15,
-        .baseBlock = 0x18
+        .baseBlock = MAILBOXWIN_LISTOPTIONS_BASEBLOCK
     },
     [MAILBOXWIN_OPTIONS] = {
         .bg = 0,
@@ -67,7 +70,7 @@ static const struct WindowTemplate sWindowTemplates_MailboxMenu[MAILBOXWIN_COUNT
         .width = 11,
         .height = 8,
         .paletteNum = 15,
-        .baseBlock = 0x18
+        .baseBlock = MAILBOXWIN_LISTOPTIONS_BASEBLOCK
     }
 };
 

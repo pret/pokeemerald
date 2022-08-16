@@ -158,6 +158,10 @@
 
 #define NO_DELAY 0xFFFF
 
+#define WIN_TILEMAP_LEFT 3
+#define WIN_WIDTH 24
+#define WIN_BASEBLOCK 0xC5
+
 enum {
     BALL_STATE_ROLLING,
     BALL_STATE_STUCK,
@@ -456,12 +460,12 @@ static const struct WindowTemplate sWindowTemplates[] =
 {
     {
         .bg = 0,
-        .tilemapLeft = 3,
+        .tilemapLeft = WIN_TILEMAP_LEFT,
         .tilemapTop = 15,
-        .width = 24,
+        .width = WIN_WIDTH,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 0xC5
+        .baseBlock = WIN_BASEBLOCK
     },
     #ifdef UBFIX
     DUMMY_WIN_TEMPLATE,
@@ -2347,20 +2351,33 @@ static const u32 sWheelIcons_Gfx[] = INCBIN_U32("graphics/roulette/wheel_icons.4
 static const u32 sShadow_Gfx[] = INCBIN_U32("graphics/roulette/shadow.4bpp.lz");
 static const u32 sCursor_Gfx[] = INCBIN_U32("graphics/roulette/cursor.4bpp.lz");
 
+#define SHADOW_PAL       sShadow_Pal
+#define BALL_PAL         sBall_Pal
+#define BALL_COUNTER_PAL sBallCounter_Pal
+#define CURSOR_PAL       sCursor_Pal
+#define CREDIT_PAL       sCredit_Pal
+#define SHROOMISH_PAL    sShroomish_Pal
+#define TAILLOW_PAL      sTaillow_Pal
+#define GRID_ICONS_PAL   sGridIcons_Pal
+#define WYNAUT_PAL       sWynaut_Pal
+#define AZURILL_PAL      sAzurill_Pal
+#define SKITTY_PAL       sSkitty_Pal
+#define MAKUHITA_PAL     sMakuhita_Pal
+
 static const struct SpritePalette sSpritePalettes[] =
 {
-    { .data = sShadow_Pal,      .tag = PALTAG_SHADOW },
-    { .data = sBall_Pal,        .tag = PALTAG_BALL },
-    { .data = sBallCounter_Pal, .tag = PALTAG_BALL_COUNTER },
-    { .data = sCursor_Pal,      .tag = PALTAG_CURSOR },
-    { .data = sCredit_Pal,      .tag = PALTAG_INTERFACE },
-    { .data = sShroomish_Pal,   .tag = PALTAG_SHROOMISH },
-    { .data = sTaillow_Pal,     .tag = PALTAG_TAILLOW },
-    { .data = sGridIcons_Pal,   .tag = PALTAG_GRID_ICONS },
-    { .data = sWynaut_Pal,      .tag = PALTAG_WYNAUT },
-    { .data = sAzurill_Pal,     .tag = PALTAG_AZURILL },
-    { .data = sSkitty_Pal,      .tag = PALTAG_SKITTY },
-    { .data = sMakuhita_Pal,    .tag = PALTAG_MAKUHITA },
+    { .data = SHADOW_PAL,       .tag = PALTAG_SHADOW },
+    { .data = BALL_PAL,         .tag = PALTAG_BALL },
+    { .data = BALL_COUNTER_PAL, .tag = PALTAG_BALL_COUNTER },
+    { .data = CURSOR_PAL,       .tag = PALTAG_CURSOR },
+    { .data = CREDIT_PAL,       .tag = PALTAG_INTERFACE },
+    { .data = SHROOMISH_PAL,    .tag = PALTAG_SHROOMISH },
+    { .data = TAILLOW_PAL,      .tag = PALTAG_TAILLOW },
+    { .data = GRID_ICONS_PAL,   .tag = PALTAG_GRID_ICONS },
+    { .data = WYNAUT_PAL,       .tag = PALTAG_WYNAUT },
+    { .data = AZURILL_PAL,      .tag = PALTAG_AZURILL },
+    { .data = SKITTY_PAL,       .tag = PALTAG_SKITTY },
+    { .data = MAKUHITA_PAL,     .tag = PALTAG_MAKUHITA },
     {}
 };
 
