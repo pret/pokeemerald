@@ -41,6 +41,12 @@
 #define MAX_FALL_DIST 10 // The number of times a berry needs to fall before hitting the ground
 #define EAT_FALL_DIST 7 // The number of times a berry needs to fall to be available to eat
 
+#if ENGLISH || FRENCH
+#define RESULTS_TITLE_FONT FONT_NORMAL
+#elif ITALIAN
+#define RESULTS_TITLE_FONT FONT_NARROW
+#endif
+
 enum {
     BG_INTERFACE,
     BG_TREE_LEFT,
@@ -4770,9 +4776,9 @@ static void ShowResults(void)
     case 2:
         FillWindowPixelBuffer(sGfx->windowIds[0], PIXEL_FILL(1));
         FillWindowPixelBuffer(sGfx->windowIds[1], PIXEL_FILL(1));
-        strWidth = GetStringWidth(FONT_NORMAL, gText_BerryPickingResults, -1);
+        strWidth = GetStringWidth(RESULTS_TITLE_FONT, gText_BerryPickingResults, -1);
         x = (224 - strWidth) / 2;
-        AddTextPrinterParameterized(sGfx->windowIds[0], FONT_NORMAL, gText_BerryPickingResults, x, 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[0], RESULTS_TITLE_FONT, gText_BerryPickingResults, x, 1, TEXT_SKIP_DRAW, NULL);
         AddTextPrinterParameterized(sGfx->windowIds[1], FONT_NORMAL, gText_10P30P50P50P, 68, 17, TEXT_SKIP_DRAW, NULL);
         for (i = 0; i < numPlayers; i++)
         {
@@ -4824,9 +4830,9 @@ static void ShowResults(void)
     case 5:
         FillWindowPixelBuffer(sGfx->windowIds[0], PIXEL_FILL(1));
         FillWindowPixelBuffer(sGfx->windowIds[1], PIXEL_FILL(1));
-        strWidth = GetStringWidth(FONT_NORMAL, gText_AnnouncingRankings, -1);
+        strWidth = GetStringWidth(RESULTS_TITLE_FONT, gText_AnnouncingRankings, -1);
         x = (224 - strWidth) / 2;
-        AddTextPrinterParameterized(sGfx->windowIds[0], FONT_NORMAL, gText_AnnouncingRankings, x, 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[0], RESULTS_TITLE_FONT, gText_AnnouncingRankings, x, 1, TEXT_SKIP_DRAW, NULL);
         sGfx->state++;
         break;
     case 6:
@@ -4870,9 +4876,9 @@ static void ShowResults(void)
         PlayNewMapMusic(MUS_LEVEL_UP);
         FillWindowPixelBuffer(sGfx->windowIds[0], PIXEL_FILL(1));
         FillWindowPixelBuffer(sGfx->windowIds[1], PIXEL_FILL(1));
-        strWidth = GetStringWidth(FONT_NORMAL, gText_AnnouncingPrizes, -1);
+        strWidth = GetStringWidth(RESULTS_TITLE_FONT, gText_AnnouncingPrizes, -1);
         x = (224 - strWidth) / 2;
-        AddTextPrinterParameterized(sGfx->windowIds[0], FONT_NORMAL, gText_AnnouncingPrizes, x, 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[0], RESULTS_TITLE_FONT, gText_AnnouncingPrizes, x, 1, TEXT_SKIP_DRAW, NULL);
         DynamicPlaceholderTextUtil_Reset();
         CopyItemName(GetPrizeItemId(), gStringVar1);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);

@@ -322,7 +322,13 @@ static void KeepMoveSelectorVisible(u8);
 static void SummaryScreen_DestroyAnimDelayTask(void);
 
 // const rom data
+#if ENGLISH
 #include "data/text/move_descriptions.h"
+#elif FRENCH
+#include "data/text/fr/move_descriptions.h"
+#elif ITALIAN
+#include "data/text/it/move_descriptions.h"
+#endif
 #include "data/text/nature_names.h"
 
 static const struct BgTemplate sBgTemplates[] =

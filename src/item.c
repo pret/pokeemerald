@@ -25,7 +25,13 @@ static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
 
 // rodata
+#if ENGLISH
 #include "data/text/item_descriptions.h"
+#elif FRENCH
+#include "data/text/fr/item_descriptions.h"
+#elif ITALIAN
+#include "data/text/fr/item_descriptions.h"
+#endif
 #include "data/items.h"
 
 // code

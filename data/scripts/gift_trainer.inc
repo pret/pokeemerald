@@ -19,6 +19,7 @@ MysteryGiftScript_VisitingTrainerArrived:
 	release
 	end
 
+.ifdef ENGLISH
 sText_MysteryGiftVisitingTrainerInstructions:
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
@@ -46,3 +47,65 @@ sText_MysteryGiftVisitingTrainerArrived:
 	.string "entering other passwords.\p"
 	.string "Try looking for other passwords\n"
 	.string "that may work.$"
+.else
+.ifdef FRENCH
+sText_MysteryGiftVisitingTrainerInstructions:
+	.string "Merci d’utiliser le système\n"
+	.string "CADEAU MYST.\p"
+	.string "En tenant la CARTE MIRACLE,\n"
+	.string "vous pouvez effectuer des\p"
+	.string "sondages dans les BOUTIQUES\n"
+	.string "POKéMON.\p"
+	.string "Utilisez ces sondages pour inviter\n"
+	.string "des DRESSEURS à ATALANOPOLIS.\p"
+	.string "Laissez-moi vous donner un mot\n"
+	.string "de passe secret:\p"
+	.string "“DONNE-MOI\n"
+	.string "UN COMBAT”\p"
+	.string "Ecrivez ça sur un sondage et\n"
+	.string "envoyez-le au SYSTEME DE\p"
+	.string "COMMUNICATION SANS FIL.$"
+
+sText_MysteryGiftVisitingTrainerArrived:
+	.string "Merci d’utiliser le système\n"
+	.string "CADEAU MYST.\p"
+	.string "Un DRESSEUR arrivé à ATALANOPOLIS\n"
+	.string "vous cherche.\p"
+	.string "On espère que vous apprecierez\n"
+	.string "le combat contre ce DRESSEUR.\p"
+	.string "Vous pouvez inviter des DRESSEURS\n"
+	.string "en entrant le mot de passe.\p"
+	.string "Essayez de trouver des mots de\n"
+	.string "passe qui pourraient fonctionner.$"
+.else
+.ifdef ITALIAN
+sText_MysteryGiftVisitingTrainerInstructions:
+	.string "Grazie per usare il Sistema\n"
+	.string "DONO SEGRETO.\p"
+	.string "La SCHEDA SEGRETA ti\n"
+	.string "permette di partecipare ad\l"
+	.string "un sondaggio al POKéMON-MARKET.\p"
+	.string "Così, potrai invitare gli\n"
+	.string "ALLENATORI a CENERIDE.\p"
+	.string "Ora ti do la password che ti serve\n"
+	.string "per partecipare a un sondaggio:\p"
+	.string "BATTI CINQUE ACUTI\n"
+	.string "ALLENATORE.\p"
+	.string "Scrivi questa password su\n"
+	.string "un sondaggio e invialo al\l"
+	.string "SISTEMA COMUNICAZIONE\l"
+	.string "WIRELESS.$"
+
+sText_MysteryGiftVisitingTrainerArrived:
+	.string "Grazie per usare il Sistema\n"
+	.string "DONO SEGRETO.\p"
+	.string "Un ALLENATORE è appena\n"
+	.string "arrivato a CENERIDE per cercarti.\p"
+	.string "Buon divertimento nella lotta\n"
+	.string "contro questo ALLENATORE!\p"
+	.string "Inserendo altre password,\n"
+	.string "potrai invitare altri ALLENATORI!\p"
+	.string "Cerca altre password valide!$"
+.endif
+.endif
+.endif

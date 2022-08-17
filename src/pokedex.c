@@ -866,7 +866,13 @@ static const u8 sText_TenDashes[] = _("----------");
 
 ALIGNED(4) static const u8 sExpandedPlaceholder_PokedexDescription[] = _("");
 
+#if ENGLISH
 #include "data/pokemon/pokedex_text.h"
+#elif FRENCH
+#include "data/pokemon/fr/pokedex_text.h"
+#elif ITALIAN
+#include "data/pokemon/it/pokedex_text.h"
+#endif
 #include "data/pokemon/pokedex_entries.h"
 
 static const u16 sSizeScreenSilhouette_Pal[] = INCBIN_U16("graphics/pokedex/size_silhouette.gbapal");
