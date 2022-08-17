@@ -2107,7 +2107,7 @@ static void AnimWishStar(struct Sprite *sprite)
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         sprite->x = -16;
     else
-        sprite->x = 256;
+        sprite->x = DISPLAY_WIDTH + 16;
 
     sprite->y = 0;
     sprite->callback = AnimWishStar_Step;
@@ -2136,7 +2136,7 @@ static void AnimWishStar_Step(struct Sprite *sprite)
     }
 
     newX = sprite->x + sprite->x2 + 32;
-    if (newX > 304)
+    if (newX > DISPLAY_WIDTH + 64)
         DestroyAnimSprite(sprite);
 }
 
@@ -3183,7 +3183,7 @@ static void AnimReversalOrb_Step(struct Sprite *sprite)
 // Copies the target mon's sprite, and makes a white silhouette that shrinks away.
 void AnimTask_RolePlaySilhouette(u8 taskId)
 {
-    u8 isBackPic;
+    bool8 isBackPic;
     u32 personality;
     u32 otId;
     u16 species;
@@ -3206,7 +3206,7 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
     {
         if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         {
-            isBackPic = 0;
+            isBackPic = FALSE;
             personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_PERSONALITY);
             otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_OT_ID);
             if (gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies == SPECIES_NONE)
@@ -3226,7 +3226,7 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
         }
         else
         {
-            isBackPic = 1;
+            isBackPic = TRUE;
             personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_PERSONALITY);
             otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_OT_ID);
             if (gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies == SPECIES_NONE)
@@ -5097,7 +5097,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
 
         gTasks[taskId].data[1] &= 0xFF;
         x = gSprites[spriteId].x + gSprites[spriteId].x2;
-        if ((u16)(x + 32) > 304)
+        if (x < -32 || x > DISPLAY_WIDTH + 32)
         {
             gTasks[taskId].data[1] = 0;
             gTasks[taskId].data[0]++;
@@ -5180,7 +5180,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
             }
         }
 
-        if ((u16)(x + 32) > 304)
+        if (x < -32 || x > DISPLAY_WIDTH + 32)
         {
             gTasks[taskId].data[1] = 0;
             gTasks[taskId].data[0]++;

@@ -84,7 +84,7 @@ static void AnimMilkBottle(struct Sprite *);
 static void AnimMilkBottle_Step1(struct Sprite *);
 static void AnimMilkBottle_Step2(struct Sprite *, int, int);
 static void AnimGrantingStars(struct Sprite *);
-static void AnimSparkingStars(struct Sprite *);
+static void AnimSparklingStars(struct Sprite *);
 static void AnimBubbleBurst(struct Sprite *);
 static void AnimBubbleBurst_Step(struct Sprite *);
 static void AnimSleepLetterZ(struct Sprite *);
@@ -1416,7 +1416,7 @@ const struct SpriteTemplate gSparklingStarsSpriteTemplate =
     .anims = gGrantingStarsAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimSparkingStars,
+    .callback = AnimSparklingStars,
 };
 
 static const union AnimCmd sAnim_BubbleBurst[] =
@@ -4137,7 +4137,7 @@ static void AnimGrantingStars(struct Sprite *sprite)
     sprite->callback = TranslateSpriteLinearFixedPoint;
 }
 
-static void AnimSparkingStars(struct Sprite *sprite)
+static void AnimSparklingStars(struct Sprite *sprite)
 {
     u8 battler;
     if (!gBattleAnimArgs[2])

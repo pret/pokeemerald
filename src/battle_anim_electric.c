@@ -583,7 +583,7 @@ static void AnimZapCannonSpark(struct Sprite *sprite)
     sprite->data[7] = gBattleAnimArgs[4];
     sprite->oam.tileNum += gBattleAnimArgs[6] * 4;
     sprite->callback = AnimZapCannonSpark_Step;
-    AnimZapCannonSpark_Step(sprite);
+    sprite->callback(sprite);
 }
 
 static void AnimZapCannonSpark_Step(struct Sprite *sprite)
