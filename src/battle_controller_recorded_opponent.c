@@ -1698,14 +1698,14 @@ static void RecordedOpponentHandleDrawPartyStatusSummary(void)
 
         if (gBattleBufferA[gActiveBattler][2] != 0)
         {
-            if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1E < 2)
+            if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].opponentDrawPartyStatusSummaryDelay < 2)
             {
-                gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1E++;
+                gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].opponentDrawPartyStatusSummaryDelay++;
                 return;
             }
             else
             {
-                gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1E = 0;
+                gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].opponentDrawPartyStatusSummaryDelay = 0;
             }
         }
 

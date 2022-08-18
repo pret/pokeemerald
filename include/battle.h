@@ -551,7 +551,7 @@ struct BattleHealthboxInfo
     u8 specialAnimActive:1; // x40
     u8 triedShinyMonAnim:1;
     u8 finishedShinyMonAnim:1;
-    u8 field_1_x1E:4;
+    u8 opponentDrawPartyStatusSummaryDelay:4;
     u8 bgmRestored:1;
     u8 waitForCry:1;
     u8 healthboxSlideInStarted:1;
