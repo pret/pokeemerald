@@ -29,7 +29,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-#define WEIGHT_LEFT 0x81
+#define WEIGHT_X 0x81
 
 enum
 {
@@ -4130,13 +4130,13 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     PrintInfoScreenText(gText_WTWeight, 0x60, 0x49);
     if (owned)
     {
-        PrintMonHeight(gPokedexEntries[num].height, WEIGHT_LEFT, 0x39);
-        PrintMonWeight(gPokedexEntries[num].weight, WEIGHT_LEFT, 0x49);
+        PrintMonHeight(gPokedexEntries[num].height, WEIGHT_X, 0x39);
+        PrintMonWeight(gPokedexEntries[num].weight, WEIGHT_X, 0x49);
     }
     else
     {
-        PrintInfoScreenText(gText_UnkHeight, WEIGHT_LEFT, 0x39);
-        PrintInfoScreenText(gText_UnkWeight, WEIGHT_LEFT, 0x49);
+        PrintInfoScreenText(gText_UnkHeight, WEIGHT_X, 0x39);
+        PrintInfoScreenText(gText_UnkWeight, WEIGHT_X, 0x49);
     }
     if (owned)
         description = gPokedexEntries[num].description;

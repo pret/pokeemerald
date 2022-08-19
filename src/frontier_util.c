@@ -39,11 +39,13 @@
 #include "party_menu.h"
 
 #define TOWER_RESULT_X          16
-#define TOWER_STREAK_X1X2       72, 132
+#define TOWER_STREAK_X1         72
+#define TOWER_STREAK_X2         132
 #define DOME_STREAK_X2A         121
 #define DOME_STREAK_X2B         112
 #define PALACE_RESULT_X         16
-#define PALACE_STREAK_X1X2      72, 131
+#define PALACE_STREAK_X1        72
+#define PALACE_STREAK_X2        131
 #define PIKE_CLEARED_X2A        114
 #define PIKE_CLEARED_X2B        114
 #define FACTORY_RENTALSWAP_X    152
@@ -1071,10 +1073,10 @@ static void ShowTowerResultsWindow(u8 battleMode)
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, TOWER_RESULT_X, 49, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, TOWER_RESULT_X, 97, TEXT_SKIP_DRAW, NULL);
     PrintHyphens(10);
-    TowerPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, TOWER_STREAK_X1X2, 49);
-    TowerPrintRecordStreak(battleMode, FRONTIER_LVL_50, TOWER_STREAK_X1X2, 65);
-    TowerPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, TOWER_STREAK_X1X2, 97);
-    TowerPrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, TOWER_STREAK_X1X2, 113);
+    TowerPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, TOWER_STREAK_X1, TOWER_STREAK_X2, 49);
+    TowerPrintRecordStreak(battleMode, FRONTIER_LVL_50, TOWER_STREAK_X1, TOWER_STREAK_X2, 65);
+    TowerPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, TOWER_STREAK_X1, TOWER_STREAK_X2, 97);
+    TowerPrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, TOWER_STREAK_X1, TOWER_STREAK_X2, 113);
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
@@ -1214,10 +1216,10 @@ static void ShowPalaceResultsWindow(u8 battleMode)
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, PALACE_RESULT_X, 49, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, PALACE_RESULT_X, 97, TEXT_SKIP_DRAW, NULL);
     PrintHyphens(10);
-    PalacePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, PALACE_STREAK_X1X2, 49);
-    PalacePrintRecordStreak(battleMode, FRONTIER_LVL_50, PALACE_STREAK_X1X2, 65);
-    PalacePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, PALACE_STREAK_X1X2, 97);
-    PalacePrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, PALACE_STREAK_X1X2, 113);
+    PalacePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, PALACE_STREAK_X1, PALACE_STREAK_X2, 49);
+    PalacePrintRecordStreak(battleMode, FRONTIER_LVL_50, PALACE_STREAK_X1, PALACE_STREAK_X2, 65);
+    PalacePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, PALACE_STREAK_X1, PALACE_STREAK_X2, 97);
+    PalacePrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, PALACE_STREAK_X1, PALACE_STREAK_X2, 113);
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }

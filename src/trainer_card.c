@@ -32,7 +32,7 @@
 #include "constants/rgb.h"
 #include "constants/trainers.h"
 
-#define CARD_NAME_BACK_LEFT 136
+#define CARD_BACK_NAME_X 136
 
 struct TrainerCardData
 {
@@ -1170,7 +1170,7 @@ static void BufferNameForCardBack(void)
 static void PrintNameOnCardBack(void)
 {
     if (!sData->isHoenn)
-        AddTextPrinterParameterized3(1, FONT_NORMAL, CARD_NAME_BACK_LEFT, 9, sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->textPlayersCard);
+        AddTextPrinterParameterized3(1, FONT_NORMAL, CARD_BACK_NAME_X, 9, sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->textPlayersCard);
     else
         AddTextPrinterParameterized3(1, FONT_NORMAL, GetStringRightAlignXOffset(FONT_NORMAL, sData->textPlayersCard, 216), 9, sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->textPlayersCard);
 }

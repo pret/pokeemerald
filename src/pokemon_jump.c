@@ -37,10 +37,6 @@
 
 #define JUMP_PEAK (-30)
 
-#define BONUSES_PAL sBonuses_Pal
-#define BONUSES_GFX sBonuses_Gfx
-#define BONUSES_TILEMAP sBonuses_Tilemap
-
 enum {
     BG_INTERFACE,
     BG_BONUSES,
@@ -3058,9 +3054,9 @@ static const u16 sVenusaur_Pal[] = INCBIN_U16("graphics/pokemon_jump/venusaur.gb
 static const u32 sVenusaur_Gfx[] = INCBIN_U32("graphics/pokemon_jump/venusaur.4bpp.lz");
 static const u32 sVenusaur_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/venusaur.bin.lz");
 
-static const u16 sBonuses_Pal[] = INCBIN_U16("graphics/pokemon_jump/bonuses.gbapal");
-static const u32 sBonuses_Gfx[] = INCBIN_U32("graphics/pokemon_jump/bonuses.4bpp.lz");
-static const u32 sBonuses_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/bonuses.bin.lz");
+const u16 gBonuses_Pal[] = INCBIN_U16("graphics/pokemon_jump/bonuses.gbapal"); // Called from src/graphics.c in non-English versions.
+const u32 gBonuses_Gfx[] = INCBIN_U32("graphics/pokemon_jump/bonuses.4bpp.lz"); // Called from src/graphics.c in non-English versions.
+const u32 gBonuses_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/bonuses.bin.lz"); // Called from src/graphics.c in non-English versions.
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -3194,9 +3190,9 @@ static void LoadPokeJumpGfx(void)
         LoadPalette(sVenusaur_Pal, 0x30, 0x20);
         DecompressAndCopyTileDataToVram(BG_VENUSAUR, sVenusaur_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_VENUSAUR, sVenusaur_Tilemap, 0, 0, 1);
-        LoadPalette(BONUSES_PAL, 0x10, 0x20);
-        DecompressAndCopyTileDataToVram(BG_BONUSES, BONUSES_GFX, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(BG_BONUSES, BONUSES_TILEMAP, 0, 0, 1);
+        LoadPalette(gBonuses_Pal, 0x10, 0x20);
+        DecompressAndCopyTileDataToVram(BG_BONUSES, gBonuses_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(BG_BONUSES, gBonuses_Tilemap, 0, 0, 1);
         LoadPalette(sInterface_Pal, 0x20, 0x20);
         SetBgTilemapBuffer(BG_INTERFACE, sPokemonJumpGfx->tilemapBuffer);
         FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 0x20, 0x20);

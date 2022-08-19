@@ -1574,7 +1574,6 @@ void GetFrontierTrainerName(u8 *dst, u16 trainerId)
     dst[i] = EOS;
 }
 
-// Used in French and Italian versions
 bool8 IsFrontierTrainerFemale(u16 trainerId)
 {
     u32 i;

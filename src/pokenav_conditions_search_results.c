@@ -11,12 +11,6 @@
 #include "international_string_util.h"
 #include "constants/songs.h"
 
-#define SEARCH_RESULT_PAL sConditionSearchResultFramePal
-#define SEARCH_RESULT_TILES sConditionSearchResultTiles
-#define SEARCH_RESULT_TILEMAP sConditionSearchResultTilemap
-#define SEARCH_RESULT_LIST_ITEM_X 13
-#define SEARCH_RESULT_LIST_WIN_WIDTH 17
-
 enum
 {
     CONDITION_SEARCH_FUNC_NONE,
@@ -83,9 +77,9 @@ static const LoopedTask sConditionSearchLoopedTaskFuncs[] =
     ConvertConditionsToListRanks
 };
 
-static const u16 sConditionSearchResultFramePal[] = INCBIN_U16("graphics/pokenav/condition/search_results.gbapal");
-static const u32 sConditionSearchResultTiles[] = INCBIN_U32("graphics/pokenav/condition/search_results.4bpp.lz");
-static const u32 sConditionSearchResultTilemap[] = INCBIN_U32("graphics/pokenav/condition/search_results.bin.lz");
+const u16 gConditionSearchResultFramePal[] = INCBIN_U16("graphics/pokenav/condition/search_results.gbapal"); // Called from src/graphics.c instead in non-English versions.
+const u32 gConditionSearchResultTiles[] = INCBIN_U32("graphics/pokenav/condition/search_results.4bpp.lz"); // Called from src/graphics.c instead in non-English versions.
+const u32 gConditionSearchResultTilemap[] = INCBIN_U32("graphics/pokenav/condition/search_results.bin.lz"); // Called from src/graphics.c instead in non-English versions.
 static const u16 sListBg_Pal[] = INCBIN_U16("graphics/pokenav/condition/search_results_list.gbapal");
 
 static const struct BgTemplate sConditionSearchResultBgTemplates[] =
@@ -434,11 +428,11 @@ static u32 LoopedTask_OpenConditionSearchResults(s32 state)
     {
     case 0:
         InitBgTemplates(sConditionSearchResultBgTemplates, ARRAY_COUNT(sConditionSearchResultBgTemplates));
-        DecompressAndCopyTileDataToVram(1, SEARCH_RESULT_TILES, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gConditionSearchResultTiles, 0, 0, 0);
         SetBgTilemapBuffer(1, gfx->buff);
-        CopyToBgTilemapBuffer(1, SEARCH_RESULT_TILEMAP, 0, 0);
+        CopyToBgTilemapBuffer(1, gConditionSearchResultTilemap, 0, 0);
         CopyBgTilemapBufferToVram(1);
-        CopyPaletteIntoBufferUnfaded(SEARCH_RESULT_PAL, 0x10, 0x20);
+        CopyPaletteIntoBufferUnfaded(gConditionSearchResultFramePal, 0x10, 0x20);
         CopyBgTilemapBufferToVram(1);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -683,8 +677,8 @@ static void CreateSearchResultsList(void)
     template.count = GetSearchResultsMonListCount();
     template.itemSize = sizeof(struct PokenavListItem);
     template.startIndex = GetSearchResultsCurrentListIndex();
-    template.item_X = SEARCH_RESULT_LIST_ITEM_X;
-    template.windowWidth = SEARCH_RESULT_LIST_WIN_WIDTH;
+    template.item_X = POKENAV_LIST_ITEM_X;
+    template.windowWidth = POKENAV_LIST_WINDOW_WIDTH + 1;
     template.listTop = 1;
     template.maxShowed = 8;
     template.fillValue = 2;

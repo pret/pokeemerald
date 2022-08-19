@@ -11,7 +11,7 @@
 #define GFXTAG_ARROW 10
 #define PALTAG_ARROW 20
 
-#define LIST_TRAINER_NAME_X 8
+#define LIST_ITEM_X 8
 #define FIELD_FLAVOR_TEXT_X 2
 #define LIST_ARROW_X_OFFSET 3
 
@@ -228,7 +228,7 @@ static u32 LoopedTask_PrintListItems(s32 state)
         if (listSub->iconDrawFunc != NULL)
             listSub->iconDrawFunc(listSub->listWindow.windowId, listSub->printIndex, row);
 
-        AddTextPrinterParameterized(listSub->listWindow.windowId, listSub->listWindow.fontId, listSub->itemTextBuffer, LIST_TRAINER_NAME_X, (row << 4) + 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(listSub->listWindow.windowId, listSub->listWindow.fontId, listSub->itemTextBuffer, LIST_ITEM_X, (row << 4) + 1, TEXT_SKIP_DRAW, NULL);
         if (++listSub->listWindow.numPrinted >= listSub->listWindow.numToPrint)
         {
             // Finished printing items. If icons were being drawn, draw the
@@ -718,7 +718,7 @@ static void PrintCheckPageTrainerName(struct PokenavListWindowState *state, stru
     list->bufferItemFunc(state->listPtr + state->listItemSize * state->windowTopIndex, list->itemTextBuffer);
     list->iconDrawFunc(list->listWindow.windowId, state->windowTopIndex, list->listWindow.unkA);
     FillWindowPixelRect(list->listWindow.windowId, PIXEL_FILL(4), 0, list->listWindow.unkA * 16, list->listWindow.width * 8, 16);
-    AddTextPrinterParameterized3(list->listWindow.windowId, list->listWindow.fontId, LIST_TRAINER_NAME_X, (list->listWindow.unkA * 16) + 1, colors, TEXT_SKIP_DRAW, list->itemTextBuffer);
+    AddTextPrinterParameterized3(list->listWindow.windowId, list->listWindow.fontId, LIST_ITEM_X, (list->listWindow.unkA * 16) + 1, colors, TEXT_SKIP_DRAW, list->itemTextBuffer);
     SetListMarginTile(&list->listWindow, TRUE);
     CopyWindowRectToVram(list->listWindow.windowId, COPYWIN_FULL, 0, list->listWindow.unkA * 2, list->listWindow.width, 2);
 }
@@ -728,7 +728,7 @@ static void PrintMatchCallListTrainerName(struct PokenavListWindowState *state, 
 {
     list->bufferItemFunc(state->listPtr + state->listItemSize * state->windowTopIndex, list->itemTextBuffer);
     FillWindowPixelRect(list->listWindow.windowId, PIXEL_FILL(1), 0, list->listWindow.unkA * 16, list->listWindow.width * 8, 16);
-    AddTextPrinterParameterized(list->listWindow.windowId, list->listWindow.fontId, list->itemTextBuffer, LIST_TRAINER_NAME_X, list->listWindow.unkA * 16 + 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(list->listWindow.windowId, list->listWindow.fontId, list->itemTextBuffer, LIST_ITEM_X, list->listWindow.unkA * 16 + 1, TEXT_SKIP_DRAW, NULL);
     SetListMarginTile(&list->listWindow, FALSE);
     CopyWindowToVram(list->listWindow.windowId, COPYWIN_FULL);
 }

@@ -28,9 +28,6 @@
 
 #define WAVEFORM_WINDOW_HEIGHT 56
 
-#define CRY_METER_PAL sCryMeter_Pal
-#define CRY_METER_GFX sCryMeter_Gfx
-
 struct PokedexCryMeterNeedle {
     s8 rotation;
     s8 targetRotation;
@@ -73,8 +70,8 @@ static const u16 sCryMeterNeedle_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter_
 static const u8 sCryMeterNeedle_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter_needle.4bpp");
 
 static const u16 sCryMeter_Tilemap[] = INCBIN_U16("graphics/pokedex/cry_meter_map.bin"); // Unused
-static const u16 sCryMeter_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal");
-static const u8 sCryMeter_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
+const u16 gCryMeter_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal"); // Called from src/graphics.c instead in non-English versions.
+const u8 gCryMeter_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz"); // Called from src/graphics.c instead in non-English versions.
 
 static const u16 sWaveformOffsets[][72] =
 {
@@ -461,8 +458,8 @@ bool8 LoadCryMeter(struct CryScreenWindow *window, u8 windowId)
         if (!sCryMeterNeedle)
             sCryMeterNeedle = AllocZeroed(sizeof(*sCryMeterNeedle));
 
-        CopyToWindowPixelBuffer(windowId, CRY_METER_GFX, 0, 0);
-        LoadPalette(CRY_METER_PAL, window->paletteNo * 16, 32);
+        CopyToWindowPixelBuffer(windowId, gCryMeter_Gfx, 0, 0);
+        LoadPalette(gCryMeter_Pal, window->paletteNo * 16, 32);
         gDexCryScreenState++;
         break;
     case 1:

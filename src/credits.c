@@ -28,10 +28,8 @@
 
 #define TAG_MON_BG 1001
 
-#define CREDITS_COPYRIGHT_END_GFX sCreditsCopyrightEnd_Gfx
 #define CREDITS_COPYRIGHT_END_TILE_OFFSET 1
 #define UPDATE_PAGE_DELAY 115
-#define SHOW_MONS_SPRITE_DATA_3 50
 #define SHOW_MONS_DELAY 50
 #define CATCH_RIVAL_TIMER 584
 
@@ -94,7 +92,7 @@ static EWRAM_DATA bool8 sUsedSpeedUp = 0; // Never read
 static EWRAM_DATA struct CreditsData *sCreditsData = {0};
 
 static const u16 sCredits_Pal[] = INCBIN_U16("graphics/credits/credits.gbapal");
-static const u32 sCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/the_end_copyright.4bpp.lz");
+const u32 gCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/the_end_copyright.4bpp.lz"); // Called from src/graphics.c instead in non-English versions.
 
 static void SpriteCB_CreditsMonBg(struct Sprite *);
 static void Task_WaitPaletteFade(u8);
@@ -925,12 +923,12 @@ static void Task_ShowMons(u8 taskId)
         if (sCreditsData->currShownMon < sCreditsData->numMonToShow - 1)
         {
             sCreditsData->currShownMon++;
-            gSprites[spriteId].data[3] = SHOW_MONS_SPRITE_DATA_3;
+            gSprites[spriteId].tDelay = SHOW_MONS_DELAY;
         }
         else
         {
             sCreditsData->currShownMon = 0;
-            gSprites[spriteId].data[3] = 512;
+            gSprites[spriteId].tDelay = 512;
         }
         sCreditsData->imgCounter++;
 
@@ -1297,7 +1295,7 @@ static void LoadTheEndScreen(u16 tileOffsetLoad, u16 tileOffsetWrite, u16 palOff
     u16 baseTile;
     u16 i;
 
-    LZ77UnCompVram(CREDITS_COPYRIGHT_END_GFX, (void *)(VRAM + tileOffsetLoad));
+    LZ77UnCompVram(gCreditsCopyrightEnd_Gfx, (void *)(VRAM + tileOffsetLoad));
     LoadPalette(gIntroCopyright_Pal, palOffset, sizeof(gIntroCopyright_Pal));
 
     baseTile = (palOffset / 16) << 12;
