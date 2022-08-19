@@ -67,7 +67,7 @@ static const struct WindowTemplate sTrainerHillRecordsWindowTemplates[] =
         .tilemapTop = 1,
         .width = 26,
         .height = 18,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 20
     },
     DUMMY_WIN_TEMPLATE
@@ -80,7 +80,7 @@ static const struct WindowTemplate sLinkBattleRecordsWindow =
     .tilemapTop = 1,
     .width = 26,
     .height = 17,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 1
 };
 
@@ -444,7 +444,7 @@ static void LoadTrainerHillRecordsWindowGfx(u8 bgId)
 {
     LoadBgTiles(bgId, sTrainerHillWindowTileset, sizeof(sTrainerHillWindowTileset), 0);
     CopyToBgTilemapBufferRect(bgId, sTrainerHillWindowTilemap, 0, 0, 0x20, 0x20);
-    LoadPalette(sTrainerHillWindowPalette, BG_PLTT_ID(0x0), PLTT_SIZE_4BPP);
+    LoadPalette(sTrainerHillWindowPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
 }
 
 static void VblankCB_TrainerHillRecords(void)
@@ -491,7 +491,7 @@ static void CB2_ShowTrainerHillRecords(void)
         break;
     case 3:
         LoadTrainerHillRecordsWindowGfx(3);
-        LoadPalette(GetTextWindowPalette(0), BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
+        LoadPalette(GetTextWindowPalette(0), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         gMain.state++;
         break;
     case 4:

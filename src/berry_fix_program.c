@@ -77,7 +77,7 @@ static const struct WindowTemplate sBerryFixWindowTemplates[] = {
         .tilemapTop = 4,
         .width = 26,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 1
     },
     {
@@ -86,7 +86,7 @@ static const struct WindowTemplate sBerryFixWindowTemplates[] = {
         .tilemapTop = 11,
         .width = 28,
         .height = 8,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 53
     },
     {
@@ -95,7 +95,7 @@ static const struct WindowTemplate sBerryFixWindowTemplates[] = {
         .tilemapTop = 8,
         .width = 30,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 277
     },
     {
@@ -104,7 +104,7 @@ static const struct WindowTemplate sBerryFixWindowTemplates[] = {
         .tilemapTop = 0,
         .width = 14,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 337
     },
     DUMMY_WIN_TEMPLATE

@@ -514,7 +514,7 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         BeginNormalPaletteFade(0x7FFFFF1C, 4, 0, 8, RGB_BLACK);
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
         LoadCompressedSpriteSheet(sBattleArenaJudgementSymbolsSpriteSheet);
-        LoadCompressedPalette(gBattleArenaJudgementSymbolsPalette, OBJ_PLTT_ID(0xF), PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gBattleArenaJudgementSymbolsPalette, OBJ_PLTT_ID(15), PLTT_SIZE_4BPP);
         gBattle_WIN0H = 0xFF;
         gBattle_WIN0V = 0x70;
         (*state)++;
@@ -894,7 +894,7 @@ static void BufferArenaOpponentName(void)
 void DrawArenaRefereeTextBox(void)
 {
     u8 width = 27;
-    u8 palNum = 0x7;
+    u8 palNum = 7;
 
     FillBgTilemapBufferRect(0, 0,    254, 14, 1,  6, palNum);
     FillBgTilemapBufferRect(0, 0,    32,  14, 1,  6, palNum);
@@ -918,7 +918,7 @@ void EraseArenaRefereeTextBox(void)
 {
     u8 width;
     u8 height;
-    u8 palNum = 0x0;
+    u8 palNum = 0;
 
     FillBgTilemapBufferRect(0, 3, 0, 14, 1, 1, palNum);
     height = 4;

@@ -556,7 +556,7 @@ static void ApplyGammaShiftWithBlend(u8 startPalIndex, u8 numPalettes, s8 gammaI
         {
             // No gamma shift. Simply blend the colors.
             BlendPalette(palOffset, 16, blendCoeff, blendColor);
-            palOffset += 0x10;
+            palOffset += 16;
         }
         else
         {
@@ -601,14 +601,14 @@ static void ApplyDroughtGammaShiftWithBlend(s8 gammaIndex, u8 blendCoeff, u16 bl
     rBlend = color.r;
     gBlend = color.g;
     bBlend = color.b;
-    palOffset = 0x00;
+    palOffset = 0;
     for (curPalIndex = 0; curPalIndex < 32; curPalIndex++)
     {
         if (sPaletteGammaTypes[curPalIndex] == GAMMA_NONE)
         {
             // No gamma shift. Simply blend the colors.
             BlendPalette(palOffset, 16, blendCoeff, blendColor);
-            palOffset += 0x10;
+            palOffset += 16;
         }
         else
         {
@@ -649,7 +649,7 @@ static void ApplyFogBlend(u8 blendCoeff, u16 blendColor)
     u8 bBlend;
     u16 curPalIndex;
 
-    BlendPalette(BG_PLTT_ID(0x0), 16 * 16, blendCoeff, blendColor);
+    BlendPalette(BG_PLTT_ID(0), 16 * 16, blendCoeff, blendColor);
     color = *(struct RGBColor *)&blendColor;
     rBlend = color.r;
     gBlend = color.g;

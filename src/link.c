@@ -200,7 +200,7 @@ static const struct WindowTemplate sLinkErrorWindowTemplates[] = {
         .tilemapTop = 0,
         .width = 30,
         .height = 5,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x002
     }, {
         .bg = 0,
@@ -208,7 +208,7 @@ static const struct WindowTemplate sLinkErrorWindowTemplates[] = {
         .tilemapTop = 6,
         .width = 30,
         .height = 7,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x098
     }, {
         .bg = 0,
@@ -216,7 +216,7 @@ static const struct WindowTemplate sLinkErrorWindowTemplates[] = {
         .tilemapTop = 13,
         .width = 30,
         .height = 7,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x16A
     }, DUMMY_WIN_TEMPLATE
 };
@@ -1621,7 +1621,7 @@ void CB2_LinkError(void)
         SetGpuReg(REG_OFFSET_BG1HOFS, 0);
         SetGpuReg(REG_OFFSET_BG1VOFS, 0);
         ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJWIN_ON);
-        LoadPalette(gStandardMenuPalette, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
+        LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         gSoftResetDisabled = FALSE;
         CreateTask(Task_DestroySelf, 0);
         StopMapMusic();

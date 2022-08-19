@@ -741,8 +741,8 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
         SetGpuReg(REG_OFFSET_BG2HOFS, gBattle_BG2_X);
         SetGpuReg(REG_OFFSET_BG2VOFS, gBattle_BG2_Y);
 
-        LoadPalette(&gPlttBufferUnfaded[OBJ_PLTT_ID(battlerId)], BG_PLTT_ID(0x9), PLTT_SIZE_4BPP);
-        CpuCopy32(&gPlttBufferUnfaded[OBJ_PLTT_ID(battlerId)], (void *)(BG_PLTT + PLTT_OFFSET_4BPP(0x9)), PLTT_SIZE_4BPP);
+        LoadPalette(&gPlttBufferUnfaded[OBJ_PLTT_ID(battlerId)], BG_PLTT_ID(9), PLTT_SIZE_4BPP);
+        CpuCopy32(&gPlttBufferUnfaded[OBJ_PLTT_ID(battlerId)], (void *)(BG_PLTT + PLTT_OFFSET_4BPP(9)), PLTT_SIZE_4BPP);
 
         DrawBattlerOnBg(2, 0, 0, GetBattlerPosition(battlerId), animBg.paletteId, animBg.bgTiles + 0x1000, animBg.bgTilemap + 0x400, animBg.tilesOffset);
     }
@@ -1214,7 +1214,7 @@ static void LoadMoveBg(u16 bgId)
     {
         LZDecompressVram(gBattleAnimBackgroundTable[bgId].tilemap, (void *)BG_SCREEN_ADDR(26));
         LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)BG_CHAR_ADDR(2));
-        LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, BG_PLTT_ID(0x2), PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
     }
 }
 

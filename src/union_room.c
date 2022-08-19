@@ -1910,7 +1910,7 @@ static void Task_SendMysteryGift(u8 taskId)
 
         winTemplate = sWindowTemplate_PlayerList;
         winTemplate.baseBlock = GetMysteryGiftBaseBlock();
-        winTemplate.paletteNum = 0xC;
+        winTemplate.paletteNum = 12;
         data->listWindowId = AddWindow(&winTemplate);
         MG_DrawTextBorder(data->listWindowId);
         gMultiuseListMenuTemplate = sListMenuTemplate_PossibleGroupMembers;
@@ -2114,11 +2114,11 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
 
         listWinTemplate = sWindowTemplate_GroupList;
         listWinTemplate.baseBlock = GetMysteryGiftBaseBlock();
-        listWinTemplate.paletteNum = 0xC;
+        listWinTemplate.paletteNum = 12;
         data->listWindowId = AddWindow(&listWinTemplate);
 
         playerNameWinTemplate = sWindowTemplate_PlayerNameAndId;
-        playerNameWinTemplate.paletteNum = 0xC;
+        playerNameWinTemplate.paletteNum = 12;
         data->playerNameAndIdWindowId = AddWindow(&playerNameWinTemplate);
 
         MG_DrawTextBorder(data->listWindowId);
@@ -2439,7 +2439,7 @@ void RunUnionRoom(void)
     uroom->unreadPlayerId = 0;
 
     gSpecialVar_Result = 0;
-    ListMenuLoadStdPalAt(BG_PLTT_ID(0xD), 1);
+    ListMenuLoadStdPalAt(BG_PLTT_ID(13), 1);
 }
 
 static u16 ReadAsU16(const u8 *ptr)
@@ -3775,7 +3775,7 @@ static s32 TradeBoardMenuHandler(u8 *state, u8 *mainWindowId, u8 *listMenuId, u8
 
 static void UR_ClearBg0(void)
 {
-    FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0x0);
+    FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0);
     CopyBgTilemapBufferToVram(0);
 }
 

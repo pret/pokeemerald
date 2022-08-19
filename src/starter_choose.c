@@ -73,7 +73,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 15,
         .width = 24,
         .height = 4,
-        .paletteNum = 0xE,
+        .paletteNum = 14,
         .baseBlock = 0x0200
     },
     DUMMY_WIN_TEMPLATE,
@@ -86,7 +86,7 @@ static const struct WindowTemplate sWindowTemplate_ConfirmStarter =
     .tilemapTop = 9,
     .width = 5,
     .height = 4,
-    .paletteNum = 0xE,
+    .paletteNum = 14,
     .baseBlock = 0x0260
 };
 
@@ -97,7 +97,7 @@ static const struct WindowTemplate sWindowTemplate_StarterLabel =
     .tilemapTop = 0,
     .width = 13,
     .height = 4,
-    .paletteNum = 0xE,
+    .paletteNum = 14,
     .baseBlock = 0x0274
 };
 
@@ -411,7 +411,7 @@ void CB2_ChooseStarter(void)
     InitWindows(sWindowTemplates);
 
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 0x2A8, BG_PLTT_ID(0xD));
+    LoadUserWindowBorderGfx(0, 0x2A8, BG_PLTT_ID(13));
     ClearScheduledBgCopiesToVram();
     ScanlineEffect_Stop();
     ResetTasks();
@@ -420,8 +420,8 @@ void CB2_ChooseStarter(void)
     FreeAllSpritePalettes();
     ResetAllPicSprites();
 
-    LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(0xE), PLTT_SIZE_4BPP);
-    LoadPalette(gBirchBagGrassPal, BG_PLTT_ID(0x0), 2 * PLTT_SIZE_4BPP);
+    LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+    LoadPalette(gBirchBagGrassPal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     LoadCompressedSpriteSheet(&sSpriteSheet_PokeballSelect[0]);
     LoadCompressedSpriteSheet(&sSpriteSheet_StarterCircle[0]);
     LoadSpritePalettes(sSpritePalettes_StarterChoose);

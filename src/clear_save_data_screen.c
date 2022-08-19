@@ -52,7 +52,7 @@ static const struct WindowTemplate sClearSaveTextWindow[] =
         .tilemapTop = 15,
         .width = 26,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 11,
     },
     DUMMY_WIN_TEMPLATE
@@ -66,7 +66,7 @@ static const struct WindowTemplate sClearSaveYesNo[] =
         .tilemapTop = 2,
         .width = 5,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 115,
     }
 };
@@ -204,6 +204,6 @@ static void InitClearSaveDataScreenWindows(void)
     InitWindows(sClearSaveTextWindow);
     DeactivateAllTextPrinters();
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    LoadWindowGfx(0, 0, 2, BG_PLTT_ID(0xE));
-    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
+    LoadWindowGfx(0, 0, 2, BG_PLTT_ID(14));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
 }

@@ -78,7 +78,7 @@ static const struct WindowTemplate sHelpBarWindowTemplate[] =
         .tilemapTop = 22,
         .width = 16,
         .height = 2,
-        .paletteNum = 0x0,
+        .paletteNum = 0,
         .baseBlock = 0x36,
     },
     DUMMY_WIN_TEMPLATE
@@ -349,7 +349,7 @@ static u32 LoopedTask_InitPokenavMenu(s32 state)
         DecompressAndCopyTileDataToVram(0, &gPokenavHeader_Gfx, 0, 0, 0);
         SetBgTilemapBuffer(0, menu->tilemapBuffer);
         CopyToBgTilemapBuffer(0, &gPokenavHeader_Tilemap, 0, 0);
-        CopyPaletteIntoBufferUnfaded(gPokenavHeader_Pal, BG_PLTT_ID(0x0), PLTT_SIZE_4BPP);
+        CopyPaletteIntoBufferUnfaded(gPokenavHeader_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         CopyBgTilemapBufferToVram(0);
         return LT_INC_AND_PAUSE;
     case 2:

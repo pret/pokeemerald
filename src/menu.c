@@ -20,9 +20,9 @@
 #include "window.h"
 #include "constants/songs.h"
 
-#define DLG_WINDOW_PALETTE_NUM 0xF
+#define DLG_WINDOW_PALETTE_NUM 15
 #define DLG_WINDOW_BASE_TILE_NUM 0x200
-#define STD_WINDOW_PALETTE_NUM 0xE
+#define STD_WINDOW_PALETTE_NUM 14
 #define STD_WINDOW_PALETTE_SIZE PLTT_SIZEOF(10)
 #define STD_WINDOW_BASE_TILE_NUM 0x214
 
@@ -89,7 +89,7 @@ static const struct WindowTemplate sStandardTextBox_WindowTemplates[] =
         .tilemapTop = 15,
         .width = 27,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x194
     },
     DUMMY_WIN_TEMPLATE
@@ -102,7 +102,7 @@ static const struct WindowTemplate sYesNo_WindowTemplates =
     .tilemapTop = 9,
     .width = 5,
     .height = 4,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x125
 };
 
@@ -429,7 +429,7 @@ void SetStandardWindowBorderStyle(u8 windowId, bool8 copyToVram)
 void LoadMessageBoxAndFrameGfx(u8 windowId, bool8 copyToVram)
 {
     LoadMessageBoxGfx(windowId, DLG_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(DLG_WINDOW_PALETTE_NUM));
-    DrawDialogFrameWithCustomTileAndPalette(windowId, copyToVram, DLG_WINDOW_BASE_TILE_NUM, 0xF);
+    DrawDialogFrameWithCustomTileAndPalette(windowId, copyToVram, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM);
 }
 
 void Menu_LoadStdPal(void)
@@ -686,7 +686,7 @@ void ClearDialogWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram)
 
 static void WindowFunc_ClearDialogWindowAndFrameNullPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
-    FillBgTilemapBufferRect(bg, 0, tilemapLeft - 3, tilemapTop - 1, width + 6, height + 2, 0x0);
+    FillBgTilemapBufferRect(bg, 0, tilemapLeft - 3, tilemapTop - 1, width + 6, height + 2, 0);
 }
 
 void DrawStdFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 baseTileNum, u8 paletteNum)
@@ -783,7 +783,7 @@ void ClearStdWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram)
 
 static void WindowFunc_ClearStdWindowAndFrameToTransparent(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
-    FillBgTilemapBufferRect(bg, 0, tilemapLeft - 1, tilemapTop - 1, width + 2, height + 2, 0x0);
+    FillBgTilemapBufferRect(bg, 0, tilemapLeft - 1, tilemapTop - 1, width + 2, height + 2, 0);
 }
 
 // Creates the window used to display the info bar at the top of the HOF PC that shows the controls and team number.
@@ -806,8 +806,8 @@ u8 HofPCTopBar_AddWindow(u8 bg, u8 xPos, u8 yPos, u8 palette, u16 baseTile)
 
     sHofPCTopBarWindowId = AddWindow(&window);
 
-    if (palette > 0xF)
-        palette = BG_PLTT_ID(0xF);
+    if (palette > 15)
+        palette = BG_PLTT_ID(15);
     else
         palette = BG_PLTT_ID(palette);
 

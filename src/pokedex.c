@@ -831,7 +831,7 @@ static const struct WindowTemplate sPokemonList_WindowTemplate[] =
         .tilemapTop = 0,
         .width = 32,
         .height = 32,
-        .paletteNum = 0x0,
+        .paletteNum = 0,
         .baseBlock = 1,
     },
     DUMMY_WIN_TEMPLATE
@@ -902,7 +902,7 @@ static const struct WindowTemplate sInfoScreen_WindowTemplates[] =
         .tilemapTop = 0,
         .width = 32,
         .height = 20,
-        .paletteNum = 0x0,
+        .paletteNum = 0,
         .baseBlock = 1,
     },
     [WIN_FOOTPRINT] =
@@ -912,7 +912,7 @@ static const struct WindowTemplate sInfoScreen_WindowTemplates[] =
         .tilemapTop = 8,
         .width = 2,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 641,
     },
     [WIN_CRY_WAVE] =
@@ -922,7 +922,7 @@ static const struct WindowTemplate sInfoScreen_WindowTemplates[] =
         .tilemapTop = 12,
         .width = 32,
         .height = 7,
-        .paletteNum = 0x8,
+        .paletteNum = 8,
         .baseBlock = 645,
     },
     [WIN_VU_METER] =
@@ -932,7 +932,7 @@ static const struct WindowTemplate sInfoScreen_WindowTemplates[] =
         .tilemapTop = 3,
         .width = 10,
         .height = 8,
-        .paletteNum = 0x9,
+        .paletteNum = 9,
         .baseBlock = 869,
     },
     DUMMY_WIN_TEMPLATE
@@ -969,7 +969,7 @@ static const struct WindowTemplate sNewEntryInfoScreen_WindowTemplates[] =
         .tilemapTop = 0,
         .width = 32,
         .height = 20,
-        .paletteNum = 0x0,
+        .paletteNum = 0,
         .baseBlock = 1,
     },
     [WIN_FOOTPRINT] =
@@ -979,7 +979,7 @@ static const struct WindowTemplate sNewEntryInfoScreen_WindowTemplates[] =
         .tilemapTop = 8,
         .width = 2,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 641,
     },
     DUMMY_WIN_TEMPLATE
@@ -1490,7 +1490,7 @@ static const struct WindowTemplate sSearchMenu_WindowTemplate[] =
         .tilemapTop = 0,
         .width = 32,
         .height = 20,
-        .paletteNum = 0x0,
+        .paletteNum = 0,
         .baseBlock = 0x0001,
     },
     DUMMY_WIN_TEMPLATE
@@ -2145,12 +2145,12 @@ static bool8 LoadPokedexListPage(u8 page)
 static void LoadPokedexBgPalette(bool8 isSearchResults)
 {
     if (isSearchResults == TRUE)
-        LoadPalette(gPokedexSearchResults_Pal + 1, BG_PLTT_ID(0x0) + 1, PLTT_SIZEOF(6 * 16 - 1));
+        LoadPalette(gPokedexSearchResults_Pal + 1, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(6 * 16 - 1));
     else if (!IsNationalPokedexEnabled())
-        LoadPalette(gPokedexBgHoenn_Pal + 1, BG_PLTT_ID(0x0) + 1, PLTT_SIZEOF(6 * 16 - 1));
+        LoadPalette(gPokedexBgHoenn_Pal + 1, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(6 * 16 - 1));
     else
-        LoadPalette(gPokedexBgNational_Pal + 1, BG_PLTT_ID(0x0) + 1, PLTT_SIZEOF(6 * 16 - 1));
-    LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
+        LoadPalette(gPokedexBgNational_Pal + 1, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(6 * 16 - 1));
+    LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
 }
 
 static void FreeWindowAndBgBuffers(void)
@@ -3264,7 +3264,7 @@ static void Task_LoadInfoScreen(u8 taskId)
     case 4:
         PrintMonInfo(sPokedexListItem->dexNum, sPokedexView->dexMode == DEX_MODE_HOENN ? FALSE : TRUE, sPokedexListItem->owned, 0);
         if (!sPokedexListItem->owned)
-            LoadPalette(gPlttBufferUnfaded + 1, BG_PLTT_ID(0x3) + 1, PLTT_SIZEOF(16 - 1));
+            LoadPalette(gPlttBufferUnfaded + 1, BG_PLTT_ID(3) + 1, PLTT_SIZEOF(16 - 1));
         CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
@@ -3713,7 +3713,7 @@ static void LoadPlayArrowPalette(bool8 cryPlaying)
         color = RGB(18, 28, 0);
     else
         color = RGB(15, 21, 0);
-    LoadPalette(&color, BG_PLTT_ID(0x5) + 13, PLTT_SIZEOF(1));
+    LoadPalette(&color, BG_PLTT_ID(5) + 13, PLTT_SIZEOF(1));
 }
 
 static void Task_LoadSizeScreen(u8 taskId)
@@ -4030,11 +4030,11 @@ static void Task_HandleCaughtMonPageInput(u8 taskId)
     // Flicker caught screen color
     else if (++gTasks[taskId].tPalTimer & 16)
     {
-        LoadPalette(gPokedexBgHoenn_Pal + 1, BG_PLTT_ID(0x3) + 1, PLTT_SIZEOF(7));
+        LoadPalette(gPokedexBgHoenn_Pal + 1, BG_PLTT_ID(3) + 1, PLTT_SIZEOF(7));
     }
     else
     {
-        LoadPalette(gPokedexCaughtScreen_Pal + 1, BG_PLTT_ID(0x3) + 1, PLTT_SIZEOF(7));
+        LoadPalette(gPokedexCaughtScreen_Pal + 1, BG_PLTT_ID(3) + 1, PLTT_SIZEOF(7));
     }
 }
 
@@ -4836,7 +4836,7 @@ static void Task_LoadSearchMenu(u8 taskId)
                 CopyToBgTilemapBuffer(3, gPokedexSearchMenuHoenn_Tilemap, 0, 0);
             else
                 CopyToBgTilemapBuffer(3, gPokedexSearchMenuNational_Tilemap, 0, 0);
-            LoadPalette(gPokedexSearchMenu_Pal + 1, BG_PLTT_ID(0x0) + 1, PLTT_SIZEOF(4 * 16 - 1));
+            LoadPalette(gPokedexSearchMenu_Pal + 1, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(4 * 16 - 1));
             gMain.state = 1;
         }
         break;

@@ -391,7 +391,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 0,
         .width = 11,
         .height = 2,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 1,
     },
     [PSS_LABEL_WINDOW_POKEMON_SKILLS_TITLE] = {
@@ -400,7 +400,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 0,
         .width = 11,
         .height = 2,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 23,
     },
     [PSS_LABEL_WINDOW_BATTLE_MOVES_TITLE] = {
@@ -409,7 +409,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 0,
         .width = 11,
         .height = 2,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 45,
     },
     [PSS_LABEL_WINDOW_CONTEST_MOVES_TITLE] = {
@@ -418,7 +418,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 0,
         .width = 11,
         .height = 2,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 67,
     },
     [PSS_LABEL_WINDOW_PROMPT_CANCEL] = {
@@ -427,7 +427,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 0,
         .width = 8,
         .height = 2,
-        .paletteNum = 0x7,
+        .paletteNum = 7,
         .baseBlock = 89,
     },
     [PSS_LABEL_WINDOW_PROMPT_INFO] = {
@@ -436,7 +436,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 0,
         .width = 8,
         .height = 2,
-        .paletteNum = 0x7,
+        .paletteNum = 7,
         .baseBlock = 105,
     },
     [PSS_LABEL_WINDOW_PROMPT_SWITCH] = {
@@ -445,7 +445,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 0,
         .width = 8,
         .height = 2,
-        .paletteNum = 0x7,
+        .paletteNum = 7,
         .baseBlock = 121,
     },
     [PSS_LABEL_WINDOW_UNUSED1] = {
@@ -454,7 +454,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 4,
         .width = 0,
         .height = 2,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 137,
     },
     [PSS_LABEL_WINDOW_POKEMON_INFO_RENTAL] = {
@@ -463,7 +463,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 4,
         .width = 18,
         .height = 2,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 137,
     },
     [PSS_LABEL_WINDOW_POKEMON_INFO_TYPE] = {
@@ -472,7 +472,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 6,
         .width = 18,
         .height = 2,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 173,
     },
     [PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT] = {
@@ -481,7 +481,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 7,
         .width = 6,
         .height = 6,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 209,
     },
     [PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT] = {
@@ -490,7 +490,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 7,
         .width = 5,
         .height = 6,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 245,
     },
     [PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP] = {
@@ -499,7 +499,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 14,
         .width = 11,
         .height = 4,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 275,
     },
     [PSS_LABEL_WINDOW_POKEMON_SKILLS_STATUS] = {
@@ -508,7 +508,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 18,
         .width = 6,
         .height = 2,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 319,
     },
     [PSS_LABEL_WINDOW_MOVES_POWER_ACC] = {
@@ -517,7 +517,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 15,
         .width = 9,
         .height = 4,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 331,
     },
     [PSS_LABEL_WINDOW_MOVES_APPEAL_JAM] = {
@@ -526,7 +526,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 15,
         .width = 5,
         .height = 4,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 367,
     },
     [PSS_LABEL_WINDOW_UNUSED2] = {
@@ -535,7 +535,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 4,
         .width = 0,
         .height = 2,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 387,
     },
     [PSS_LABEL_WINDOW_PORTRAIT_DEX_NUMBER] = {
@@ -544,7 +544,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 2,
         .width = 4,
         .height = 2,
-        .paletteNum = 0x7,
+        .paletteNum = 7,
         .baseBlock = 387,
     },
     [PSS_LABEL_WINDOW_PORTRAIT_NICKNAME] = {
@@ -553,7 +553,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 12,
         .width = 9,
         .height = 2,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 395,
     },
     [PSS_LABEL_WINDOW_PORTRAIT_SPECIES] = {
@@ -562,7 +562,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .tilemapTop = 14,
         .width = 9,
         .height = 4,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 413,
     },
     [PSS_LABEL_WINDOW_END] = DUMMY_WIN_TEMPLATE
@@ -575,7 +575,7 @@ static const struct WindowTemplate sPageInfoTemplate[] =
         .tilemapTop = 4,
         .width = 11,
         .height = 2,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 449,
     },
     [PSS_DATA_WINDOW_INFO_ID] = {
@@ -584,7 +584,7 @@ static const struct WindowTemplate sPageInfoTemplate[] =
         .tilemapTop = 4,
         .width = 7,
         .height = 2,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 471,
     },
     [PSS_DATA_WINDOW_INFO_ABILITY] = {
@@ -593,7 +593,7 @@ static const struct WindowTemplate sPageInfoTemplate[] =
         .tilemapTop = 9,
         .width = 18,
         .height = 4,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 485,
     },
     [PSS_DATA_WINDOW_INFO_MEMO] = {
@@ -602,7 +602,7 @@ static const struct WindowTemplate sPageInfoTemplate[] =
         .tilemapTop = 14,
         .width = 18,
         .height = 6,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 557,
     },
 };
@@ -614,7 +614,7 @@ static const struct WindowTemplate sPageSkillsTemplate[] =
         .tilemapTop = 4,
         .width = 10,
         .height = 2,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 449,
     },
     [PSS_DATA_WINDOW_SKILLS_RIBBON_COUNT] = {
@@ -623,7 +623,7 @@ static const struct WindowTemplate sPageSkillsTemplate[] =
         .tilemapTop = 4,
         .width = 10,
         .height = 2,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 469,
     },
     [PSS_DATA_WINDOW_SKILLS_STATS_LEFT] = {
@@ -632,7 +632,7 @@ static const struct WindowTemplate sPageSkillsTemplate[] =
         .tilemapTop = 7,
         .width = 6,
         .height = 6,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 489,
     },
     [PSS_DATA_WINDOW_SKILLS_STATS_RIGHT] = {
@@ -641,7 +641,7 @@ static const struct WindowTemplate sPageSkillsTemplate[] =
         .tilemapTop = 7,
         .width = 3,
         .height = 6,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 525,
     },
     [PSS_DATA_WINDOW_EXP] = {
@@ -650,7 +650,7 @@ static const struct WindowTemplate sPageSkillsTemplate[] =
         .tilemapTop = 14,
         .width = 6,
         .height = 4,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 543,
     },
 };
@@ -662,7 +662,7 @@ static const struct WindowTemplate sPageMovesTemplate[] = // This is used for bo
         .tilemapTop = 4,
         .width = 9,
         .height = 10,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 449,
     },
     [PSS_DATA_WINDOW_MOVE_PP] = {
@@ -671,7 +671,7 @@ static const struct WindowTemplate sPageMovesTemplate[] = // This is used for bo
         .tilemapTop = 4,
         .width = 6,
         .height = 10,
-        .paletteNum = 0x8,
+        .paletteNum = 8,
         .baseBlock = 539,
     },
     [PSS_DATA_WINDOW_MOVE_DESCRIPTION] = {
@@ -680,7 +680,7 @@ static const struct WindowTemplate sPageMovesTemplate[] = // This is used for bo
         .tilemapTop = 15,
         .width = 20,
         .height = 4,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 599,
     },
 };
@@ -1328,8 +1328,8 @@ static bool8 DecompressGraphics(void)
         sMonSummaryScreen->switchCounter++;
         break;
     case 6:
-        LoadCompressedPalette(gSummaryScreen_Pal, BG_PLTT_ID(0x0), 8 * PLTT_SIZE_4BPP);
-        LoadPalette(&gPPTextPalette, BG_PLTT_ID(0x8) + 1, PLTT_SIZEOF(16 - 1));
+        LoadCompressedPalette(gSummaryScreen_Pal, BG_PLTT_ID(0), 8 * PLTT_SIZE_4BPP);
+        LoadPalette(&gPPTextPalette, BG_PLTT_ID(8) + 1, PLTT_SIZEOF(16 - 1));
         sMonSummaryScreen->switchCounter++;
         break;
     case 7:
@@ -1353,7 +1353,7 @@ static bool8 DecompressGraphics(void)
         sMonSummaryScreen->switchCounter++;
         break;
     case 12:
-        LoadCompressedPalette(gMoveTypes_Pal, OBJ_PLTT_ID(0xD), 3 * PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gMoveTypes_Pal, OBJ_PLTT_ID(13), 3 * PLTT_SIZE_4BPP);
         sMonSummaryScreen->switchCounter = 0;
         return TRUE;
     }

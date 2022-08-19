@@ -459,7 +459,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 15,
         .width = 28,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0xA
     },
     DUMMY_WIN_TEMPLATE
@@ -771,7 +771,7 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
         }
         break;
     case 8:
-        LoadCompressedPalette(gBattleTerrainPalette_Frontier, BG_PLTT_ID(0x2), 3 * PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gBattleTerrainPalette_Frontier, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
         sPokeblockFeed->loadGfxState = 0;
         return TRUE;
     }
@@ -783,8 +783,8 @@ static void HandleInitWindows(void)
 {
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(0xE));
-    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
+    LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(14));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);

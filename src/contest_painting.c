@@ -121,7 +121,7 @@ static const struct WindowTemplate sWindowTemplate =
     .tilemapTop = 14,
     .width = 26,
     .height = 4,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 1,
 };
 
@@ -420,7 +420,7 @@ static void LoadContestPaintingFrame(u8 contestWinnerId, bool8 isForArtist)
 {
     u8 x, y;
 
-    LoadPalette(sPictureFramePalettes, BG_PLTT_ID(0x0), 8 * PLTT_SIZE_4BPP);
+    LoadPalette(sPictureFramePalettes, BG_PLTT_ID(0), 8 * PLTT_SIZE_4BPP);
     if (isForArtist == TRUE)
     {
         // Load Artist's frame
@@ -586,7 +586,7 @@ static void DoContestPaintingImageProcessing(u8 imageEffect)
     ApplyImageProcessingEffects(&gImageProcessingContext);
     ApplyImageProcessingQuantization(&gImageProcessingContext);
     ConvertImageProcessingToGBA(&gImageProcessingContext);
-    LoadPalette(gContestPaintingMonPalette, OBJ_PLTT_ID(0x0), 16 * PLTT_SIZE_4BPP);
+    LoadPalette(gContestPaintingMonPalette, OBJ_PLTT_ID(0), 16 * PLTT_SIZE_4BPP);
 }
 
 static void CreateContestPaintingPicture(u8 contestWinnerId, bool8 isForArtist)

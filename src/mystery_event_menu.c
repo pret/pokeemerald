@@ -46,7 +46,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 15,
         .width = 22,
         .height = 4,
-        .paletteNum = 0xE,
+        .paletteNum = 14,
         .baseBlock = 20
     },
     {
@@ -55,7 +55,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 6,
         .width = 16,
         .height = 4,
-        .paletteNum = 0xE,
+        .paletteNum = 14,
         .baseBlock = 0x6C
     },
     DUMMY_WIN_TEMPLATE
@@ -91,8 +91,8 @@ void CB2_InitMysteryEventMenu(void)
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
 
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x1E, 0x14);
-        LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(0xD));
-        Menu_LoadStdPalAt(BG_PLTT_ID(0xE));
+        LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(13));
+        Menu_LoadStdPalAt(BG_PLTT_ID(14));
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         CreateTask(Task_DestroySelf, 0);

@@ -68,7 +68,7 @@ static const struct WindowTemplate sMonNameGenderWindowTemplate =
     .tilemapTop = 1,
     .width = 13,
     .height = 4,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 2
 };
 
@@ -79,7 +79,7 @@ static const struct WindowTemplate sListIndexWindowTemplate =
     .tilemapTop = 6,
     .width = 7,
     .height = 2,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x36
 };
 
@@ -90,7 +90,7 @@ static const struct WindowTemplate sUnusedWindowTemplate1 =
     .tilemapTop = 0x1C,
     .width = 5,
     .height = 2,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x44
 };
 
@@ -101,7 +101,7 @@ static const struct WindowTemplate sUnusedWindowTemplate2 =
     .tilemapTop = 0x1C,
     .width = 3,
     .height = 2,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x44
 };
 
@@ -224,8 +224,8 @@ static u32 LoopedTask_OpenConditionGraphMenu(s32 state)
             CopyToBgTilemapBufferRect(3, gPokenavOptions_Tilemap, 0, 5, 9, 4);
 
         CopyBgTilemapBufferToVram(3);
-        CopyPaletteIntoBufferUnfaded(gPokenavCondition_Pal, BG_PLTT_ID(0x1), PLTT_SIZE_4BPP);
-        CopyPaletteIntoBufferUnfaded(gConditionText_Pal, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
+        CopyPaletteIntoBufferUnfaded(gPokenavCondition_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+        CopyPaletteIntoBufferUnfaded(gConditionText_Pal, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         menu->monTransitionX = -80;
         return LT_INC_AND_PAUSE;
     case 4:
@@ -235,7 +235,7 @@ static u32 LoopedTask_OpenConditionGraphMenu(s32 state)
         LZ77UnCompVram(sConditionGraphData_Tilemap, menu->tilemapBuffers[2]);
         SetBgTilemapBuffer(2, menu->tilemapBuffers[2]);
         CopyBgTilemapBufferToVram(2);
-        CopyPaletteIntoBufferUnfaded(gConditionGraphData_Pal, BG_PLTT_ID(0x3), PLTT_SIZE_4BPP);
+        CopyPaletteIntoBufferUnfaded(gConditionGraphData_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
         ConditionGraph_InitWindow(2);
         return LT_INC_AND_PAUSE;
     case 5:

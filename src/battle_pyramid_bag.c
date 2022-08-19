@@ -214,7 +214,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 2,
         .width = 15,
         .height = 16,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 30
     },
     [WIN_INFO] = {
@@ -223,7 +223,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 13,
         .width = 14,
         .height = 6,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 270
     },
     [WIN_MSG] = {
@@ -232,7 +232,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 15,
         .width = 27,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 354
     },
     [WIN_TOSS_NUM] = {
@@ -241,7 +241,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 17,
         .width = 5,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 462
     },
     DUMMY_WIN_TEMPLATE,
@@ -263,7 +263,7 @@ static const struct WindowTemplate sWindowTemplates_MenuActions[] =
         .tilemapTop = 17,
         .width = 7,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 472
     },
     [MENU_WIN_1x2] = {
@@ -272,7 +272,7 @@ static const struct WindowTemplate sWindowTemplates_MenuActions[] =
         .tilemapTop = 15,
         .width = 7,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 472
     },
     [MENU_WIN_2x2] = {
@@ -281,7 +281,7 @@ static const struct WindowTemplate sWindowTemplates_MenuActions[] =
         .tilemapTop = 15,
         .width = 14,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 472
     },
     [MENU_WIN_2x3] = { // Unused
@@ -290,7 +290,7 @@ static const struct WindowTemplate sWindowTemplates_MenuActions[] =
         .tilemapTop = 13,
         .width = 14,
         .height = 6,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 472
     },
     [MENU_WIN_YESNO] = {
@@ -299,7 +299,7 @@ static const struct WindowTemplate sWindowTemplates_MenuActions[] =
         .tilemapTop = 15,
         .width = 5,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 472
     },
 };
@@ -578,7 +578,7 @@ static bool8 LoadPyramidBagGfx(void)
         }
         break;
     case 2:
-        LoadCompressedPalette(gBattlePyramidBagInterface_Pal, BG_PLTT_ID(0x0), PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gBattlePyramidBagInterface_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         gPyramidBagMenu->state++;
         break;
     case 3:
@@ -1439,9 +1439,9 @@ static void InitPyramidBagWindows(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 0x1, BG_PLTT_ID(0xE));
-    LoadMessageBoxGfx(0, 0xA, BG_PLTT_ID(0xD));
-    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
+    LoadUserWindowBorderGfx(0, 0x1, BG_PLTT_ID(14));
+    LoadMessageBoxGfx(0, 0xA, BG_PLTT_ID(13));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
 
     for (i = 0; i < ARRAY_COUNT(sWindowTemplates); i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));

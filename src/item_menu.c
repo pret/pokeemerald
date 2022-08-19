@@ -399,7 +399,7 @@ static const struct WindowTemplate sDefaultBagWindows[] =
         .tilemapTop = 2,
         .width = 15,
         .height = 16,
-        .paletteNum = 0x1,
+        .paletteNum = 1,
         .baseBlock = 0x27,
     },
     [WIN_DESCRIPTION] = {
@@ -408,7 +408,7 @@ static const struct WindowTemplate sDefaultBagWindows[] =
         .tilemapTop = 13,
         .width = 14,
         .height = 6,
-        .paletteNum = 0x1,
+        .paletteNum = 1,
         .baseBlock = 0x117,
     },
     [WIN_POCKET_NAME] = {
@@ -417,7 +417,7 @@ static const struct WindowTemplate sDefaultBagWindows[] =
         .tilemapTop = 1,
         .width = 8,
         .height = 2,
-        .paletteNum = 0x1,
+        .paletteNum = 1,
         .baseBlock = 0x1A1,
     },
     [WIN_TMHM_INFO_ICONS] = {
@@ -426,7 +426,7 @@ static const struct WindowTemplate sDefaultBagWindows[] =
         .tilemapTop = 13,
         .width = 5,
         .height = 6,
-        .paletteNum = 0xC,
+        .paletteNum = 12,
         .baseBlock = 0x16B,
     },
     [WIN_TMHM_INFO] = {
@@ -435,7 +435,7 @@ static const struct WindowTemplate sDefaultBagWindows[] =
         .tilemapTop = 13,
         .width = 4,
         .height = 6,
-        .paletteNum = 0xC,
+        .paletteNum = 12,
         .baseBlock = 0x189,
     },
     [WIN_MESSAGE] = {
@@ -444,7 +444,7 @@ static const struct WindowTemplate sDefaultBagWindows[] =
         .tilemapTop = 15,
         .width = 27,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x1B1,
     },
     DUMMY_WIN_TEMPLATE,
@@ -458,7 +458,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .tilemapTop = 17,
         .width = 7,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x21D,
     },
     [ITEMWIN_1x2] = {
@@ -467,7 +467,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .tilemapTop = 15,
         .width = 7,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x21D,
     },
     [ITEMWIN_2x2] = {
@@ -476,7 +476,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .tilemapTop = 15,
         .width = 14,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x21D,
     },
     [ITEMWIN_2x3] = {
@@ -485,7 +485,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .tilemapTop = 13,
         .width = 14,
         .height = 6,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x21D,
     },
     [ITEMWIN_MESSAGE] = {
@@ -494,7 +494,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .tilemapTop = 15,
         .width = 27,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x1B1,
     },
     [ITEMWIN_YESNO_LOW] = { // Yes/No tucked in corner, for toss confirm
@@ -503,7 +503,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .tilemapTop = 15,
         .width = 5,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x21D,
     },
     [ITEMWIN_YESNO_HIGH] = { // Yes/No higher up, positioned above a lower message box
@@ -512,7 +512,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .tilemapTop = 9,
         .width = 5,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x21D,
     },
     [ITEMWIN_QUANTITY] = { // Used for quantity of items to Toss/Deposit
@@ -521,7 +521,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .tilemapTop = 17,
         .width = 5,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x21D,
     },
     [ITEMWIN_QUANTITY_WIDE] = { // Used for quantity and price of items to Sell
@@ -530,7 +530,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .tilemapTop = 11,
         .width = 10,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x245,
     },
     [ITEMWIN_MONEY] = {
@@ -539,7 +539,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .tilemapTop = 1,
         .width = 10,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x231,
     },
 };
@@ -818,9 +818,9 @@ static bool8 LoadBagMenu_Graphics(void)
         break;
     case 2:
         if (!IsWallysBag() && gSaveBlock2Ptr->playerGender != MALE)
-            LoadCompressedPalette(gBagScreenFemale_Pal, BG_PLTT_ID(0x0), 2 * PLTT_SIZE_4BPP);
+            LoadCompressedPalette(gBagScreenFemale_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
         else
-            LoadCompressedPalette(gBagScreenMale_Pal, BG_PLTT_ID(0x0), 2 * PLTT_SIZE_4BPP);
+            LoadCompressedPalette(gBagScreenMale_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
         gBagMenu->graphicsLoadState++;
         break;
     case 3:
@@ -2448,10 +2448,10 @@ static void LoadBagMenuTextWindows(void)
 
     InitWindows(sDefaultBagWindows);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(0xE));
-    LoadMessageBoxGfx(0, 10, BG_PLTT_ID(0xD));
-    ListMenuLoadStdPalAt(BG_PLTT_ID(0xC), 1);
-    LoadPalette(&gStandardMenuPalette, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
+    LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(14));
+    LoadMessageBoxGfx(0, 10, BG_PLTT_ID(13));
+    ListMenuLoadStdPalAt(BG_PLTT_ID(12), 1);
+    LoadPalette(&gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     for (i = 0; i <= WIN_POCKET_NAME; i++)
     {
         FillWindowPixelBuffer(i, PIXEL_FILL(0));

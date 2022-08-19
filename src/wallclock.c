@@ -79,7 +79,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 17,
         .width = 24,
         .height = 2,
-        .paletteNum = 0xE,
+        .paletteNum = 14,
         .baseBlock = 512
     },
     {
@@ -88,7 +88,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 16,
         .width = 6,
         .height = 2,
-        .paletteNum = 0xC,
+        .paletteNum = 12,
         .baseBlock = 560
     },
     DUMMY_WIN_TEMPLATE
@@ -101,7 +101,7 @@ static const struct WindowTemplate sWindowTemplate_ConfirmYesNo =
     .tilemapTop = 9,
     .width = 5,
     .height = 4,
-    .paletteNum = 0xE,
+    .paletteNum = 14,
     .baseBlock = 572
 };
 
@@ -644,17 +644,17 @@ static void LoadWallClockGraphics(void)
     LZ77UnCompVram(gWallClock_Gfx, (void *)VRAM);
 
     if (gSpecialVar_0x8004 == MALE)
-        LoadPalette(gWallClockMale_Pal, BG_PLTT_ID(0x0), PLTT_SIZE_4BPP);
+        LoadPalette(gWallClockMale_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     else
-        LoadPalette(gWallClockFemale_Pal, BG_PLTT_ID(0x0), PLTT_SIZE_4BPP);
+        LoadPalette(gWallClockFemale_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
 
-    LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(0xE), PLTT_SIZE_4BPP);
-    LoadPalette(sTextPrompt_Pal, BG_PLTT_ID(0xC), PLTT_SIZEOF(4));
+    LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+    LoadPalette(sTextPrompt_Pal, BG_PLTT_ID(12), PLTT_SIZEOF(4));
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 0x250, BG_PLTT_ID(0xD));
+    LoadUserWindowBorderGfx(0, 0x250, BG_PLTT_ID(13));
     ClearScheduledBgCopiesToVram();
     ScanlineEffect_Stop();
     ResetTasks();

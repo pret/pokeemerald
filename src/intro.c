@@ -1080,7 +1080,7 @@ static u8 SetUpCopyrightScreen(void)
         CpuFill32(0, (void *)OAM, OAM_SIZE);
         CpuFill16(0, (void *)(PLTT + 2), PLTT_SIZE - 2);
         ResetPaletteFade();
-        LoadCopyrightGraphics(0, 0x3800, BG_PLTT_ID(0x0));
+        LoadCopyrightGraphics(0, 0x3800, BG_PLTT_ID(0));
         ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
@@ -1178,7 +1178,7 @@ static void Task_Scene1_Load(u8 taskId)
     DmaClear16(3, BG_SCREEN_ADDR(21), BG_SCREEN_SIZE);
     LZ77UnCompVram(sIntro1Bg3_Tilemap, (void *)(BG_SCREEN_ADDR(22)));
     DmaClear16(3, BG_SCREEN_ADDR(23), BG_SCREEN_SIZE);
-    LoadPalette(sIntro1Bg_Pal, BG_PLTT_ID(0x0), sizeof(sIntro1Bg_Pal));
+    LoadPalette(sIntro1Bg_Pal, BG_PLTT_ID(0), sizeof(sIntro1Bg_Pal));
     SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(22) | BGCNT_16COLOR | BGCNT_TXT256x512);
     SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(20) | BGCNT_16COLOR | BGCNT_TXT256x512);
     SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(18) | BGCNT_16COLOR | BGCNT_TXT256x512);
@@ -1717,7 +1717,7 @@ static void Task_Scene3_Load(u8 taskId)
     IntroResetGpuRegs();
     LZ77UnCompVram(sIntroPokeball_Gfx, (void *)VRAM);
     LZ77UnCompVram(sIntroPokeball_Tilemap, (void *)(BG_CHAR_ADDR(1)));
-    LoadPalette(sIntroPokeball_Pal, BG_PLTT_ID(0x0), sizeof(sIntroPokeball_Pal));
+    LoadPalette(sIntroPokeball_Pal, BG_PLTT_ID(0), sizeof(sIntroPokeball_Pal));
     gTasks[taskId].tAlpha = 0;
     gTasks[taskId].tZoomDiv = 0;
     gTasks[taskId].tZoomDivSpeed = 0;
@@ -2663,10 +2663,10 @@ static void Task_RayquazaAttack(u8 taskId)
         {
             if (--data[3] != 0)
             {
-                BlendPalette(BG_PLTT_ID(0x5), 16, data[3], RGB(9, 10, 10));
-                CpuCopy16(&gIntro3Bg_Pal[0x1AC], &gPlttBufferFaded[BG_PLTT_ID(0x5) + 14], PLTT_SIZEOF(1));
-                CpuCopy16(&gIntro3Bg_Pal[0x1AC], &gPlttBufferFaded[BG_PLTT_ID(0x5) + 8], PLTT_SIZEOF(1));
-                CpuCopy16(&gIntro3Bg_Pal[0x18C], &gPlttBufferFaded[BG_PLTT_ID(0x5) + 12], PLTT_SIZEOF(1));
+                BlendPalette(BG_PLTT_ID(5), 16, data[3], RGB(9, 10, 10));
+                CpuCopy16(&gIntro3Bg_Pal[428], &gPlttBufferFaded[BG_PLTT_ID(5) + 14], PLTT_SIZEOF(1));
+                CpuCopy16(&gIntro3Bg_Pal[428], &gPlttBufferFaded[BG_PLTT_ID(5) + 8], PLTT_SIZEOF(1));
+                CpuCopy16(&gIntro3Bg_Pal[396], &gPlttBufferFaded[BG_PLTT_ID(5) + 12], PLTT_SIZEOF(1));
             }
             else
             {

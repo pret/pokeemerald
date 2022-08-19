@@ -912,7 +912,7 @@ void CopySecondaryTilesetToVramUsingHeap(struct MapLayout const *mapLayout)
 
 static void LoadPrimaryTilesetPalette(struct MapLayout const *mapLayout)
 {
-    LoadTilesetPalette(mapLayout->primaryTileset, BG_PLTT_ID(0x0), NUM_PALS_IN_PRIMARY * PLTT_SIZE_4BPP);
+    LoadTilesetPalette(mapLayout->primaryTileset, BG_PLTT_ID(0), NUM_PALS_IN_PRIMARY * PLTT_SIZE_4BPP);
 }
 
 void LoadSecondaryTilesetPalette(struct MapLayout const *mapLayout)

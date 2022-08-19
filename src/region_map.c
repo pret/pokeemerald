@@ -392,7 +392,7 @@ static const struct WindowTemplate sFlyMapWindowTemplates[] =
         .tilemapTop = 17,
         .width = 12,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x01
     },
     {
@@ -401,7 +401,7 @@ static const struct WindowTemplate sFlyMapWindowTemplates[] =
         .tilemapTop = 15,
         .width = 12,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x19
     },
     {
@@ -410,7 +410,7 @@ static const struct WindowTemplate sFlyMapWindowTemplates[] =
         .tilemapTop = 18,
         .width = 14,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x49
     },
     DUMMY_WIN_TEMPLATE
@@ -567,7 +567,7 @@ bool8 LoadRegionMapGfx(void)
         break;
     case 2:
         if (!FreeTempTileDataBuffersIfPossible())
-            LoadPalette(sRegionMapBg_Pal, BG_PLTT_ID(0x7), 3 * PLTT_SIZE_4BPP);
+            LoadPalette(sRegionMapBg_Pal, BG_PLTT_ID(7), 3 * PLTT_SIZE_4BPP);
         break;
     case 3:
         LZ77UnCompWram(sRegionMapCursorSmallGfxLZ, sRegionMap->cursorSmallImage);
@@ -1689,7 +1689,7 @@ void CB2_OpenFlyMap(void)
         gMain.state++;
         break;
     case 3:
-        LoadUserWindowBorderGfx(0, 0x65, BG_PLTT_ID(0xD));
+        LoadUserWindowBorderGfx(0, 0x65, BG_PLTT_ID(13));
         ClearScheduledBgCopiesToVram();
         gMain.state++;
         break;
@@ -1712,7 +1712,7 @@ void CB2_OpenFlyMap(void)
         gMain.state++;
         break;
     case 7:
-        LoadPalette(sRegionMapFramePal, BG_PLTT_ID(0x1), sizeof(sRegionMapFramePal));
+        LoadPalette(sRegionMapFramePal, BG_PLTT_ID(1), sizeof(sRegionMapFramePal));
         PutWindowTilemap(2);
         FillWindowPixelBuffer(2, PIXEL_FILL(0));
         AddTextPrinterParameterized(2, FONT_NORMAL, gText_FlyToWhere, 0, 1, 0, NULL);

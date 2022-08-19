@@ -333,8 +333,8 @@ static void InitTradeMenu(void)
     gPaletteFade.bufferTransferDisabled = TRUE;
 
     SetVBlankCallback(VBlankCB_TradeMenu);
-    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(0xF), PLTT_SIZEOF(10));
-    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(0xD), PLTT_SIZEOF(10));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZEOF(10));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(13), PLTT_SIZEOF(10));
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sTradeMenuBgTemplates, ARRAY_COUNT(sTradeMenuBgTemplates));
     SetBgTilemapBuffer(1, sTradeMenuData->tilemapBuffer);
@@ -351,9 +351,9 @@ static void InitTradeMenu(void)
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
         }
 
-        FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 0xF);
-        LoadUserWindowBorderGfx_(0, 20, BG_PLTT_ID(0xC));
-        LoadUserWindowBorderGfx(2, 1, BG_PLTT_ID(0xE));
+        FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 15);
+        LoadUserWindowBorderGfx_(0, 20, BG_PLTT_ID(12));
+        LoadUserWindowBorderGfx(2, 1, BG_PLTT_ID(14));
         LoadMonIconPalettes();
         sTradeMenuData->bufferPartyState = 0;
         sTradeMenuData->tradeMenuFunc = 0;
@@ -910,7 +910,7 @@ static void LoadTradeBgGfx(u8 state)
     switch (state)
     {
     case 0:
-        LoadPalette(gTradeMenu_Pal, BG_PLTT_ID(0x0), 3 * PLTT_SIZE_4BPP);
+        LoadPalette(gTradeMenu_Pal, BG_PLTT_ID(0), 3 * PLTT_SIZE_4BPP);
         LoadBgTiles(1, gTradeMenu_Gfx, 0x1280, 0);
         CopyToBgTilemapBufferRect_ChangePalette(1, gTradeMenu_Tilemap, 0, 0, 32, 20, 0);
         LoadBgTilemap(2, sTradeStripesBG2Tilemap, 0x800, 0);
@@ -1391,7 +1391,7 @@ static void TradeMenuProcessInput(void)
         // Cursor is in player's party
         if (sTradeMenuData->cursorPosition < PARTY_SIZE)
         {
-            DrawTextBorderOuter(1, 1, 0xE);
+            DrawTextBorderOuter(1, 1, 14);
             FillWindowPixelBuffer(1, PIXEL_FILL(1));
             PrintMenuTable(1, ARRAY_COUNT(sSelectTradeMonActions), sSelectTradeMonActions);
             InitMenuInUpperLeftCornerNormal(1, ARRAY_COUNT(sSelectTradeMonActions), 0);
@@ -2153,7 +2153,7 @@ static void PrintTradeMessage(u8 messageId)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     AddTextPrinterParameterized(0, FONT_NORMAL, sTradeMessages[messageId], 0, 1, TEXT_SKIP_DRAW, NULL);
-    DrawTextBorderOuter(0, 20, 0xC);
+    DrawTextBorderOuter(0, 20, 12);
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
@@ -2915,12 +2915,12 @@ static void InitTradeBgInternal(void)
     DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
     LZDecompressWram(gBattleTextboxTilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, 0x800, 0);
-    LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0x0), PLTT_SIZE_4BPP);
+    LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     InitWindows(sTradeSequenceWindowTemplates);
     DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
     LZDecompressWram(gBattleTextboxTilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, 0x800, 0);
-    LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0x0), PLTT_SIZE_4BPP);
+    LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
 }
 
 static void CB2_InGameTrade(void)
@@ -3100,7 +3100,7 @@ static void SetTradeSequenceBgGpuRegs(u8 state)
                                      BGCNT_16COLOR |
                                      BGCNT_SCREENBASE(18) |
                                      BGCNT_TXT512x256);
-        LoadPalette(gTradeGba2_Pal, BG_PLTT_ID(0x1), 3 * PLTT_SIZE_4BPP);
+        LoadPalette(gTradeGba2_Pal, BG_PLTT_ID(1), 3 * PLTT_SIZE_4BPP);
         DmaCopyLarge16(3, gTradeGba_Gfx, (void *) BG_CHAR_ADDR(1), 0x1420, 0x1000);
         DmaCopy16Defvars(3, gTradePlatform_Tilemap, (void *) BG_SCREEN_ADDR(18), 0x1000);
         break;
@@ -3157,7 +3157,7 @@ static void SetTradeSequenceBgGpuRegs(u8 state)
         }
         break;
     case 3:
-        LoadPalette(sWirelessSignalNone_Pal, BG_PLTT_ID(0x3), PLTT_SIZE_4BPP);
+        LoadPalette(sWirelessSignalNone_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
         LZ77UnCompVram(sWirelessSignal_Gfx, (void *) BG_CHAR_ADDR(1));
         LZ77UnCompVram(sWirelessSignal_Tilemap, (void *) BG_SCREEN_ADDR(18));
         sTradeData->bg2vofs = 80;
@@ -3236,7 +3236,7 @@ static void SetTradeSequenceBgGpuRegs(u8 state)
                                      BGCNT_16COLOR |
                                      BGCNT_SCREENBASE(18) |
                                      BGCNT_TXT512x256);
-        LoadPalette(gTradeGba2_Pal, BG_PLTT_ID(0x1), 3 * PLTT_SIZE_4BPP);
+        LoadPalette(gTradeGba2_Pal, BG_PLTT_ID(1), 3 * PLTT_SIZE_4BPP);
         DmaCopyLarge16(3, gTradeGba_Gfx, (void *) BG_CHAR_ADDR(1), 0x1420, 0x1000);
         DmaCopy16Defvars(3, gTradePlatform_Tilemap, (void *) BG_SCREEN_ADDR(18), 0x1000);
         break;
@@ -4849,16 +4849,16 @@ static void Task_AnimateWirelessSignal(u8 taskId)
     if (!signalComingBack)
     {
         if (paletteIdx == 256)
-            LoadPalette(sWirelessSignalNone_Pal, BG_PLTT_ID(0x3), PLTT_SIZE_4BPP);
+            LoadPalette(sWirelessSignalNone_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
         else
-            LoadPalette(&sWirelessSignalSend_Pal[paletteIdx], BG_PLTT_ID(0x3), PLTT_SIZE_4BPP);
+            LoadPalette(&sWirelessSignalSend_Pal[paletteIdx], BG_PLTT_ID(3), PLTT_SIZE_4BPP);
     }
     else
     {
         if (paletteIdx == 256)
-            LoadPalette(sWirelessSignalNone_Pal, BG_PLTT_ID(0x3), PLTT_SIZE_4BPP);
+            LoadPalette(sWirelessSignalNone_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
         else
-            LoadPalette(&sWirelessSignalRecv_Pal[paletteIdx], BG_PLTT_ID(0x3), PLTT_SIZE_4BPP);
+            LoadPalette(&sWirelessSignalRecv_Pal[paletteIdx], BG_PLTT_ID(3), PLTT_SIZE_4BPP);
     }
 
     if (sWirelessSignalTiming[idx][0] == 0 && counter == 0)

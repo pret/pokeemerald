@@ -33,7 +33,7 @@
 #include "constants/cable_club.h"
 
 #define LIST_MENU_TILE_NUM 10
-#define LIST_MENU_PAL_NUM BG_PLTT_ID(0xE)
+#define LIST_MENU_PAL_NUM BG_PLTT_ID(14)
 
 static void LoadMysteryGiftTextboxBorder(u8 bgId);
 static void CreateMysteryGiftTask(void);
@@ -104,7 +104,7 @@ static const struct WindowTemplate sMainWindows[] = {
         .tilemapTop = 0,
         .width = 30,
         .height = 2,
-        .paletteNum = 0xC,
+        .paletteNum = 12,
         .baseBlock = 0x0013
     }, {
         .bg = 0,
@@ -112,7 +112,7 @@ static const struct WindowTemplate sMainWindows[] = {
         .tilemapTop = 15,
         .width = 28,
         .height = 4,
-        .paletteNum = 0xC,
+        .paletteNum = 12,
         .baseBlock = 0x004f
     }, {
         .bg = 0,
@@ -120,7 +120,7 @@ static const struct WindowTemplate sMainWindows[] = {
         .tilemapTop = 15,
         .width = 30,
         .height = 5,
-        .paletteNum = 0xD,
+        .paletteNum = 13,
         .baseBlock = 0x004f
     },
     DUMMY_WIN_TEMPLATE
@@ -132,7 +132,7 @@ static const struct WindowTemplate sWindowTemplate_YesNoMsg_Wide = {
     .tilemapTop = 15,
     .width = 28,
     .height = 4,
-    .paletteNum = 0xC,
+    .paletteNum = 12,
     .baseBlock = 0x00e5
 };
 
@@ -142,7 +142,7 @@ static const struct WindowTemplate sWindowTemplate_YesNoMsg = {
     .tilemapTop = 15,
     .width = 20,
     .height = 4,
-    .paletteNum = 0xC,
+    .paletteNum = 12,
     .baseBlock = 0x00e5
 };
 
@@ -152,7 +152,7 @@ static const struct WindowTemplate sWindowTemplate_GiftSelect = {
     .tilemapTop = 15,
     .width = 19,
     .height = 4,
-    .paletteNum = 0xC,
+    .paletteNum = 12,
     .baseBlock = 0x00e5
 };
 
@@ -162,7 +162,7 @@ static const struct WindowTemplate sWindowTemplate_ThreeOptions = {
     .tilemapTop = 6,
     .width = 14,
     .height = 6,
-    .paletteNum = 0xC,
+    .paletteNum = 12,
     .baseBlock = 0x0155
 };
 
@@ -172,7 +172,7 @@ static const struct WindowTemplate sWindowTemplate_YesNoBox = {
     .tilemapTop = 15,
     .width = 6,
     .height = 4,
-    .paletteNum = 0xC,
+    .paletteNum = 12,
     .baseBlock = 0x0155
 };
 
@@ -182,7 +182,7 @@ static const struct WindowTemplate sWindowTemplate_GiftSelect_3Options = {
     .tilemapTop = 11,
     .width = 7,
     .height = 8,
-    .paletteNum = 0xC,
+    .paletteNum = 12,
     .baseBlock = 0x0155
 };
 
@@ -192,7 +192,7 @@ static const struct WindowTemplate sWindowTemplate_GiftSelect_2Options = {
     .tilemapTop = 13,
     .width = 7,
     .height = 6,
-    .paletteNum = 0xC,
+    .paletteNum = 12,
     .baseBlock = 0x0155
 };
 
@@ -202,7 +202,7 @@ static const struct WindowTemplate sWindowTemplate_GiftSelect_1Option = {
     .tilemapTop = 15,
     .width = 7,
     .height = 4,
-    .paletteNum = 0xC,
+    .paletteNum = 12,
     .baseBlock = 0x0155
 };
 
@@ -411,11 +411,11 @@ static bool32 HandleMysteryGiftOrEReaderSetup(s32 isEReader)
         gMain.state++;
         break;
     case 1:
-        LoadPalette(sTextboxBorder_Pal, BG_PLTT_ID(0x0), PLTT_SIZE_4BPP);
-        LoadPalette(GetTextWindowPalette(2), BG_PLTT_ID(0xD), PLTT_SIZE_4BPP);
-        Menu_LoadStdPalAt(BG_PLTT_ID(0xC));
-        LoadUserWindowBorderGfx(0, 0xA, BG_PLTT_ID(0xE));
-        LoadUserWindowBorderGfx_(0, 0x1, BG_PLTT_ID(0xF));
+        LoadPalette(sTextboxBorder_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+        LoadPalette(GetTextWindowPalette(2), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        Menu_LoadStdPalAt(BG_PLTT_ID(12));
+        LoadUserWindowBorderGfx(0, 0xA, BG_PLTT_ID(14));
+        LoadUserWindowBorderGfx_(0, 0x1, BG_PLTT_ID(15));
         FillBgTilemapBufferRect(0, 0x000, 0, 0, 32, 32, 17);
         FillBgTilemapBufferRect(1, 0x000, 0, 0, 32, 32, 17);
         FillBgTilemapBufferRect(2, 0x000, 0, 0, 32, 32, 17);

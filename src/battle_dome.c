@@ -676,7 +676,7 @@ static const struct WindowTemplate sTourneyTreeWindowTemplates[] =
         .tilemapTop = 3,
         .width = 8,
         .height = 16,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 16,
     },
     {
@@ -685,7 +685,7 @@ static const struct WindowTemplate sTourneyTreeWindowTemplates[] =
         .tilemapTop = 3,
         .width = 8,
         .height = 16,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 144,
     },
     {
@@ -694,7 +694,7 @@ static const struct WindowTemplate sTourneyTreeWindowTemplates[] =
         .tilemapTop = 1,
         .width = 14,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 272,
     },
     DUMMY_WIN_TEMPLATE,
@@ -708,7 +708,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 2,
         .width = 26,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 1,
     },
     {
@@ -717,7 +717,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 5,
         .width = 8,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 53,
     },
     {
@@ -726,7 +726,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 7,
         .width = 9,
         .height = 3,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 69,
     },
     {
@@ -735,7 +735,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 10,
         .width = 8,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 96,
     },
     {
@@ -744,7 +744,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 12,
         .width = 26,
         .height = 7,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 112,
     },
     {
@@ -753,7 +753,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 2,
         .width = 23,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 294,
     },
     {
@@ -762,7 +762,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 5,
         .width = 8,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 340,
     },
     {
@@ -771,7 +771,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 5,
         .width = 8,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 356,
     },
     {
@@ -780,7 +780,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 16,
         .width = 26,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 372,
     },
     {
@@ -789,7 +789,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 2,
         .width = 26,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 1,
     },
     {
@@ -798,7 +798,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 5,
         .width = 8,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 53,
     },
     {
@@ -807,7 +807,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 7,
         .width = 9,
         .height = 3,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 69,
     },
     {
@@ -816,7 +816,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 10,
         .width = 8,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 96,
     },
     {
@@ -825,7 +825,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 12,
         .width = 26,
         .height = 7,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 112,
     },
     {
@@ -834,7 +834,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 2,
         .width = 23,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 294,
     },
     {
@@ -843,7 +843,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 5,
         .width = 8,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 340,
     },
     {
@@ -852,7 +852,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 5,
         .width = 8,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 356,
     },
     {
@@ -861,7 +861,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .tilemapTop = 16,
         .width = 26,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 372,
     },
     #ifdef UBFIX
@@ -3050,9 +3050,9 @@ static void Task_ShowTourneyInfoCard(u8 taskId)
         LoadCompressedSpriteSheet(sTourneyTreeButtonsSpriteSheet);
         LoadCompressedPalette(gDomeTourneyTree_Pal, BG_PLTT_OFFSET, BG_PLTT_SIZE);
         LoadCompressedPalette(gDomeTourneyTreeButtons_Pal, OBJ_PLTT_OFFSET, OBJ_PLTT_SIZE);
-        LoadCompressedPalette(gBattleWindowTextPalette, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gBattleWindowTextPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         if (mode == INFOCARD_MATCH)
-            LoadCompressedPalette(gDomeTourneyMatchCardBg_Pal, BG_PLTT_ID(0x5), PLTT_SIZE_4BPP); // Changes the moving info card bg to orange when in match card mode
+            LoadCompressedPalette(gDomeTourneyMatchCardBg_Pal, BG_PLTT_ID(5), PLTT_SIZE_4BPP); // Changes the moving info card bg to orange when in match card mode
         CpuFill32(0, gPlttBufferFaded, PLTT_SIZE);
         ShowBg(0);
         ShowBg(1);
@@ -5329,7 +5329,7 @@ static void Task_ShowTourneyTree(u8 taskId)
         DecompressAndLoadBgGfxUsingHeap(3, gDomeTourneyLineUp_Tilemap, 0x2000, 0, 1);
         LoadCompressedPalette(gDomeTourneyTree_Pal, BG_PLTT_OFFSET, BG_PLTT_SIZE);
         LoadCompressedPalette(gDomeTourneyTreeButtons_Pal, OBJ_PLTT_OFFSET, OBJ_PLTT_SIZE);
-        LoadCompressedPalette(gBattleWindowTextPalette, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gBattleWindowTextPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         CpuFill32(0, gPlttBufferFaded, PLTT_SIZE);
         ShowBg(0);
         ShowBg(1);

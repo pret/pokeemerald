@@ -83,12 +83,12 @@ void TintPalette_CustomTone(u16 *palette, u16 count, u16 rTone, u16 gTone, u16 b
 
 static inline void SetBackdropFromColor(u16 color)
 {
-  FillPalette(color, 0x00, PLTT_SIZEOF(1));
+  FillPalette(color, 0, PLTT_SIZEOF(1));
 }
 
 static inline void SetBackdropFromPalette(const u16 *palette)
 {
-  LoadPalette(palette, 0x00, PLTT_SIZEOF(1));
+  LoadPalette(palette, 0, PLTT_SIZEOF(1));
 }
 
 #endif // GUARD_PALETTE_H

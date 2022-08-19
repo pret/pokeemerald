@@ -350,7 +350,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
         .tilemapTop = 2,
         .width = 12,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x0001,
     },
     [SELECT_WIN_SPECIES] = {
@@ -359,7 +359,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
         .tilemapTop = 2,
         .width = 11,
         .height = 2,
-        .paletteNum = 0xE,
+        .paletteNum = 14,
         .baseBlock = 0x0019,
     },
     [SELECT_WIN_INFO] = {
@@ -368,7 +368,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
         .tilemapTop = 15,
         .width = 20,
         .height = 3,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x002f,
     },
     [SELECT_WIN_OPTIONS] = {
@@ -377,7 +377,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
         .tilemapTop = 14,
         .width = 8,
         .height = 6,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x006b,
     },
     [SELECT_WIN_YES_NO] = {
@@ -386,7 +386,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
         .tilemapTop = 14,
         .width = 8,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x009b,
     },
     [SELECT_WIN_MON_CATEGORY] = {
@@ -395,7 +395,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
         .tilemapTop = 0,
         .width = 15,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x00bb,
     },
     DUMMY_WIN_TEMPLATE,
@@ -945,7 +945,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 2,
         .width = 12,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x0001,
     },
     [SWAP_WIN_SPECIES] = {
@@ -954,7 +954,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 2,
         .width = 11,
         .height = 2,
-        .paletteNum = 0xE,
+        .paletteNum = 14,
         .baseBlock = 0x0019,
     },
     [SWAP_WIN_INFO] = {
@@ -963,7 +963,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 15,
         .width = 20,
         .height = 3,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x002f,
     },
     [SWAP_WIN_OPTIONS] = {
@@ -972,7 +972,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 14,
         .width = 9,
         .height = 6,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x006b,
     },
     [SWAP_WIN_YES_NO] = {
@@ -981,7 +981,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 14,
         .width = 8,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x00a1,
     },
     [SWAP_WIN_ACTION_FADE] = {
@@ -990,7 +990,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 15,
         .width = 9,
         .height = 5,
-        .paletteNum = 0xE,
+        .paletteNum = 14,
         .baseBlock = 0x006b,
     },
     [SWAP_WIN_UNUSED] = {
@@ -999,7 +999,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 2,
         .width = 4,
         .height = 2,
-        .paletteNum = 0xE,
+        .paletteNum = 14,
         .baseBlock = 0x00c1,
     },
     [SWAP_WIN_SPECIES_AT_FADE] = {
@@ -1008,7 +1008,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 2,
         .width = 11,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x00c9,
     },
     [SWAP_WIN_MON_CATEGORY] = {
@@ -1017,7 +1017,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 0,
         .width = 15,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x00df,
     },
     DUMMY_WIN_TEMPLATE,
@@ -1176,15 +1176,15 @@ static void CB2_InitSelectScreen(void)
         CpuCopy16(gFrontierFactorySelectMenu_Tilemap, sSelectMenuTilemapBuffer, BG_SCREEN_SIZE);
         LoadBgTilemap(1, sSelectMenuTilemapBuffer, BG_SCREEN_SIZE, 0);
         LoadPalette(gFrontierFactorySelectMenu_Pal, 0, 2 * PLTT_SIZE_4BPP);
-        LoadPalette(sSelectText_Pal, BG_PLTT_ID(0xF), PLTT_SIZEOF(4));
-        LoadPalette(sSelectText_Pal, BG_PLTT_ID(0xE), PLTT_SIZEOF(5));
+        LoadPalette(sSelectText_Pal, BG_PLTT_ID(15), PLTT_SIZEOF(4));
+        LoadPalette(sSelectText_Pal, BG_PLTT_ID(14), PLTT_SIZEOF(5));
 #ifdef UBFIX
         if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
 #else
         if (sFactorySelectScreen->fromSummaryScreen == TRUE)
 #endif
             gPlttBufferUnfaded[228] = sFactorySelectScreen->speciesNameColorBackup;
-        LoadPalette(sMonPicBg_Pal, BG_PLTT_ID(0x2), PLTT_SIZEOF(2));
+        LoadPalette(sMonPicBg_Pal, BG_PLTT_ID(2), PLTT_SIZEOF(2));
         gMain.state++;
         break;
     case 3:
@@ -2748,7 +2748,7 @@ static void Swap_Task_FadeOutSpeciesName(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 1:
-        LoadPalette(&gPlttBufferUnfaded[BG_PLTT_ID(0xF)], BG_PLTT_ID(0xE), PLTT_SIZEOF(5));
+        LoadPalette(&gPlttBufferUnfaded[BG_PLTT_ID(15)], BG_PLTT_ID(14), PLTT_SIZEOF(5));
         gTasks[taskId].tState++;
         break;
     case 2:
@@ -2994,7 +2994,7 @@ static void Swap_Task_ScreenInfoTransitionOut(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        LoadPalette(sSwapText_Pal, BG_PLTT_ID(0xE), sizeof(sSwapText_Pal));
+        LoadPalette(sSwapText_Pal, BG_PLTT_ID(14), sizeof(sSwapText_Pal));
         Swap_PrintActionStrings();
         PutWindowTilemap(SWAP_WIN_ACTION_FADE);
         gTasks[taskId].tState++;
@@ -3310,9 +3310,9 @@ static void CB2_InitSwapScreen(void)
         CpuCopy16(gFrontierFactorySelectMenu_Tilemap, sSwapMenuTilemapBuffer, BG_SCREEN_SIZE);
         LoadBgTilemap(1, sSwapMenuTilemapBuffer, BG_SCREEN_SIZE, 0);
         LoadPalette(gFrontierFactorySelectMenu_Pal, 0, 2 * PLTT_SIZE_4BPP);
-        LoadPalette(sSwapText_Pal, BG_PLTT_ID(0xF), sizeof(sSwapText_Pal));
-        LoadPalette(sSwapText_Pal, BG_PLTT_ID(0xE), sizeof(sSwapText_Pal));
-        LoadPalette(sMonPicBg_Pal, BG_PLTT_ID(0x2), PLTT_SIZEOF(2));
+        LoadPalette(sSwapText_Pal, BG_PLTT_ID(15), sizeof(sSwapText_Pal));
+        LoadPalette(sSwapText_Pal, BG_PLTT_ID(14), sizeof(sSwapText_Pal));
+        LoadPalette(sMonPicBg_Pal, BG_PLTT_ID(2), PLTT_SIZEOF(2));
         gMain.state++;
         break;
     case 3:
@@ -3867,7 +3867,7 @@ static void Swap_PrintMonSpeciesAtFade(void)
         pal[4] = gPlttBufferFaded[228];
     else
         pal[4] = sFactorySwapScreen->speciesNameColorBackup;
-    LoadPalette(pal, BG_PLTT_ID(0xF), sizeof(sSwapText_Pal));
+    LoadPalette(pal, BG_PLTT_ID(15), sizeof(sSwapText_Pal));
 
     PutWindowTilemap(SWAP_WIN_SPECIES_AT_FADE);
     FillWindowPixelBuffer(SWAP_WIN_SPECIES_AT_FADE, PIXEL_FILL(0));
@@ -3895,8 +3895,8 @@ static void Swap_PrintMonSpeciesForTransition(void)
     u16 species;
     u8 x;
 
-    LoadPalette(sSwapText_Pal, BG_PLTT_ID(0xE), sizeof(sSwapText_Pal));
-    CpuCopy16(&gPlttBufferUnfaded[BG_PLTT_ID(0xF)], &gPlttBufferFaded[BG_PLTT_ID(0xE)], PLTT_SIZEOF(5));
+    LoadPalette(sSwapText_Pal, BG_PLTT_ID(14), sizeof(sSwapText_Pal));
+    CpuCopy16(&gPlttBufferUnfaded[BG_PLTT_ID(15)], &gPlttBufferFaded[BG_PLTT_ID(14)], PLTT_SIZEOF(5));
 
     if (sFactorySwapScreen->cursorPos >= FRONTIER_PARTY_SIZE)
     {

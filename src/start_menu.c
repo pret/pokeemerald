@@ -192,7 +192,7 @@ static const struct WindowTemplate sWindowTemplates_LinkBattleSave[] =
         .tilemapTop = 15,
         .width = 26,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x194
     },
     DUMMY_WIN_TEMPLATE
@@ -204,7 +204,7 @@ static const struct WindowTemplate sSaveInfoWindowTemplate = {
     .tilemapTop = 1,
     .width = 14,
     .height = 10,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 8
 };
 
@@ -1196,8 +1196,8 @@ static bool32 InitSaveWindowAfterLinkBattle(u8 *state)
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sBgTemplates_LinkBattleSave, ARRAY_COUNT(sBgTemplates_LinkBattleSave));
         InitWindows(sWindowTemplates_LinkBattleSave);
-        LoadUserWindowBorderGfx_(0, 8, BG_PLTT_ID(0xE));
-        Menu_LoadStdPalAt(BG_PLTT_ID(0xF));
+        LoadUserWindowBorderGfx_(0, 8, BG_PLTT_ID(14));
+        Menu_LoadStdPalAt(BG_PLTT_ID(15));
         break;
     case 3:
         ShowBg(0);
@@ -1246,7 +1246,7 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
                                         TEXT_COLOR_DARK_GRAY,
                                         TEXT_COLOR_WHITE,
                                         TEXT_COLOR_LIGHT_GRAY);
-            DrawTextBorderOuter(0, 8, 0xE);
+            DrawTextBorderOuter(0, 8, 14);
             PutWindowTilemap(0);
             CopyWindowToVram(0, COPYWIN_FULL);
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);

@@ -789,7 +789,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 15,
         .width = 27,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x194
     },
     DUMMY_WIN_TEMPLATE
@@ -802,7 +802,7 @@ static const struct WindowTemplate sWindowTemplate_InfoBox =
     .tilemapTop = 3,
     .width = 20,
     .height = 13,
-    .paletteNum = 0xD,
+    .paletteNum = 13,
     .baseBlock = 1
 };
 
@@ -1247,8 +1247,8 @@ static void SlotMachineSetup_LoadGfxAndTilemaps(void)
     LoadMenuGfx();
     LoadMenuAndReelOverlayTilemaps();
     LoadSlotMachineGfx();
-    LoadMessageBoxGfx(0, 0x200, BG_PLTT_ID(0xF));
-    LoadUserWindowBorderGfx(0, 0x214, BG_PLTT_ID(0xE));
+    LoadMessageBoxGfx(0, 0x200, BG_PLTT_ID(15));
+    LoadUserWindowBorderGfx(0, 0x214, BG_PLTT_ID(14));
     PutWindowTilemap(0);
 }
 
@@ -3360,7 +3360,7 @@ static bool8 TryStopSlotMachineLights(void)
     if (gTasks[taskId].sFlashState == 0)
     {
         DestroyTask(taskId);
-        LoadPalette(sSlotMachineMenu_Pal, BG_PLTT_ID(0x1), PLTT_SIZE_4BPP);
+        LoadPalette(sSlotMachineMenu_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         return TRUE;
     }
     return FALSE;
@@ -3376,7 +3376,7 @@ static void Task_FlashSlotMachineLights(u8 taskId)
         if (task->sFlashState == 0 || task->sFlashState == 2)
             task->sFlashDir = -task->sFlashDir;
     }
-    LoadPalette(sFlashingLightsPalTable[task->sFlashState], BG_PLTT_ID(0x1), PLTT_SIZE_4BPP);
+    LoadPalette(sFlashingLightsPalTable[task->sFlashState], BG_PLTT_ID(1), PLTT_SIZE_4BPP);
 }
 
 #undef sDelayTimer
@@ -5054,8 +5054,8 @@ static void LoadMenuGfx(void)
     sMenuGfx = Alloc(0x2200);
     LZDecompressWram(gSlotMachineMenu_Gfx, sMenuGfx);
     LoadBgTiles(2, sMenuGfx, 0x2200, 0);
-    LoadPalette(gSlotMachineMenu_Pal, BG_PLTT_ID(0x0), 5 * PLTT_SIZE_4BPP);
-    LoadPalette(sUnkPalette, BG_PLTT_ID(0xD), PLTT_SIZE_4BPP);
+    LoadPalette(gSlotMachineMenu_Pal, BG_PLTT_ID(0), 5 * PLTT_SIZE_4BPP);
+    LoadPalette(sUnkPalette, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
 }
 
 static void LoadMenuAndReelOverlayTilemaps(void)
@@ -7728,19 +7728,19 @@ static const u16 *const sLitMatchLinePalTable[NUM_MATCH_LINES] =
 
 static const u16 *const sDarkMatchLinePalTable[NUM_MATCH_LINES] =
 {
-    [MATCH_MIDDLE_ROW] = &gSlotMachineMenu_Pal[BG_PLTT_ID(0x4) + 10],
-    [MATCH_TOP_ROW]    = &gSlotMachineMenu_Pal[BG_PLTT_ID(0x4) + 11],
-    [MATCH_BOTTOM_ROW] = &gSlotMachineMenu_Pal[BG_PLTT_ID(0x4) + 12],
-    [MATCH_NWSE_DIAG]  = &gSlotMachineMenu_Pal[BG_PLTT_ID(0x4) + 13],
-    [MATCH_NESW_DIAG]  = &gSlotMachineMenu_Pal[BG_PLTT_ID(0x4) + 14],
+    [MATCH_MIDDLE_ROW] = &gSlotMachineMenu_Pal[BG_PLTT_ID(4) + 10],
+    [MATCH_TOP_ROW]    = &gSlotMachineMenu_Pal[BG_PLTT_ID(4) + 11],
+    [MATCH_BOTTOM_ROW] = &gSlotMachineMenu_Pal[BG_PLTT_ID(4) + 12],
+    [MATCH_NWSE_DIAG]  = &gSlotMachineMenu_Pal[BG_PLTT_ID(4) + 13],
+    [MATCH_NESW_DIAG]  = &gSlotMachineMenu_Pal[BG_PLTT_ID(4) + 14],
 };
 
 static const u8 sMatchLinePalOffsets[NUM_MATCH_LINES] = {
-    [MATCH_MIDDLE_ROW] = BG_PLTT_ID(0x4) + 10,
-    [MATCH_TOP_ROW]    = BG_PLTT_ID(0x4) + 11,
-    [MATCH_BOTTOM_ROW] = BG_PLTT_ID(0x4) + 12,
-    [MATCH_NWSE_DIAG]  = BG_PLTT_ID(0x4) + 14, // Diag colors flipped for some reason
-    [MATCH_NESW_DIAG]  = BG_PLTT_ID(0x4) + 13  // Doesn't matter as both are identical
+    [MATCH_MIDDLE_ROW] = BG_PLTT_ID(4) + 10,
+    [MATCH_TOP_ROW]    = BG_PLTT_ID(4) + 11,
+    [MATCH_BOTTOM_ROW] = BG_PLTT_ID(4) + 12,
+    [MATCH_NWSE_DIAG]  = BG_PLTT_ID(4) + 14, // Diag colors flipped for some reason
+    [MATCH_NESW_DIAG]  = BG_PLTT_ID(4) + 13  // Doesn't matter as both are identical
 };
 
 static const u8 sBetToMatchLineIds[MAX_BET][2] =

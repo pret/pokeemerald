@@ -113,7 +113,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 3,
         .width = 26,
         .height = 15,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 1
     },
     DUMMY_WIN_TEMPLATE
@@ -566,13 +566,13 @@ static bool8 MailReadBuildGraphics(void)
             CopyBgTilemapBufferToVram(2);
             break;
         case 12:
-            LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
+            LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
 
             gPlttBufferUnfaded[250] = sMailGraphics[sMailRead->mailType].textColor;
             gPlttBufferFaded[250] = sMailGraphics[sMailRead->mailType].textColor;
             gPlttBufferUnfaded[251] = sMailGraphics[sMailRead->mailType].textShadow;
             gPlttBufferFaded[251] = sMailGraphics[sMailRead->mailType].textShadow;
-            LoadPalette(sMailGraphics[sMailRead->mailType].palette, BG_PLTT_ID(0x0), PLTT_SIZE_4BPP);
+            LoadPalette(sMailGraphics[sMailRead->mailType].palette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
 
             gPlttBufferUnfaded[10] = sBgColors[gSaveBlock2Ptr->playerGender][0];
             gPlttBufferFaded[10] = sBgColors[gSaveBlock2Ptr->playerGender][0];

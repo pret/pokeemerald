@@ -181,7 +181,7 @@ static const struct WindowTemplate sRegistryWindowTemplates[] =
         .tilemapTop = 1,
         .width = 11,
         .height = 18,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x01,
     },
     {
@@ -190,7 +190,7 @@ static const struct WindowTemplate sRegistryWindowTemplates[] =
         .tilemapTop = 1,
         .width = 28,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0xc7,
     }
 };

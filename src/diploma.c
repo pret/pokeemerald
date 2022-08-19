@@ -72,7 +72,7 @@ void CB2_ShowDiploma(void)
     ResetSpriteData();
     ResetPaletteFade();
     FreeAllSpritePalettes();
-    LoadPalette(sDiplomaPalettes, BG_PLTT_ID(0x0), 2 * PLTT_SIZE_4BPP);
+    LoadPalette(sDiplomaPalettes, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     sDiplomaTilemapPtr = malloc(0x1000);
     InitDiplomaBg();
     InitDiplomaWindow();
@@ -186,7 +186,7 @@ static const struct WindowTemplate sDiplomaWinTemplates[2] =
         .tilemapTop = 2,
         .width = 20,
         .height = 16,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 1,
     },
     DUMMY_WIN_TEMPLATE,
@@ -196,7 +196,7 @@ static void InitDiplomaWindow(void)
 {
     InitWindows(sDiplomaWinTemplates);
     DeactivateAllTextPrinters();
-    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
 }

@@ -85,7 +85,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 1,
         .width = 19,
         .height = 9,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x155
     },
     {
@@ -94,7 +94,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 15,
         .width = 27,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0xE9
     },
     DUMMY_WIN_TEMPLATE
@@ -106,7 +106,7 @@ static const struct WindowTemplate sInputTimeWindow = {
     .tilemapTop = 9,
     .width = 21,
     .height = 2,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0xBF
 };
 

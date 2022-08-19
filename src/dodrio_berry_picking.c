@@ -2931,7 +2931,7 @@ static const struct WindowTemplate sWindowTemplates_Records =
     .tilemapTop = 1,
     .width = 20,
     .height = 11,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x1,
 };
 
@@ -3005,8 +3005,8 @@ static void PrintRecordsText(u8 windowId, s32 width)
     recordNums[1] = gSaveBlock2Ptr->berryPick.bestScore;
     recordNums[2] = gSaveBlock2Ptr->berryPick.berriesPickedInRow;
 
-    LoadUserWindowBorderGfx_(windowId, 0x21D, BG_PLTT_ID(0xD));
-    DrawTextBorderOuter(windowId, 0x21D, 0xD);
+    LoadUserWindowBorderGfx_(windowId, 0x21D, BG_PLTT_ID(13));
+    DrawTextBorderOuter(windowId, 0x21D, 13);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_BerryPickingRecords, GetStringCenterAlignXOffset(FONT_NORMAL, gText_BerryPickingRecords, width * 8), 1, TEXT_SKIP_DRAW, NULL);
     for (i = 0; i < NUM_RECORD_TYPES; i++)
@@ -3401,7 +3401,7 @@ static const struct WindowTemplate sWindowTemplates_Results[] =
         .tilemapTop = 1,
         .width = 28,
         .height = 2,
-        .paletteNum = 0xD,
+        .paletteNum = 13,
         .baseBlock = 0x13,
     },
     {
@@ -3410,7 +3410,7 @@ static const struct WindowTemplate sWindowTemplates_Results[] =
         .tilemapTop = 5,
         .width = 28,
         .height = 14,
-        .paletteNum = 0xD,
+        .paletteNum = 13,
         .baseBlock = 0x4B,
     }
 };
@@ -3422,7 +3422,7 @@ static const struct WindowTemplate sWindowTemplate_Prize =
     .tilemapTop = 5,
     .width = 28,
     .height = 7,
-    .paletteNum = 0xD,
+    .paletteNum = 13,
     .baseBlock = 0x4B,
 };
 
@@ -3439,7 +3439,7 @@ static const struct WindowTemplate sWindowTemplates_PlayAgain[] =
         .tilemapTop = 8,
         .width = 19,
         .height = 3,
-        .paletteNum = 0xD,
+        .paletteNum = 13,
         .baseBlock = 0x13,
     },
     [WIN_YES_NO] = {
@@ -3448,7 +3448,7 @@ static const struct WindowTemplate sWindowTemplates_PlayAgain[] =
         .tilemapTop = 7,
         .width = 6,
         .height = 4,
-        .paletteNum = 0xD,
+        .paletteNum = 13,
         .baseBlock = 0x4C,
     }
 };
@@ -3460,7 +3460,7 @@ static const struct WindowTemplate sWindowTemplate_DroppedOut =
     .tilemapTop = 6,
     .width = 22,
     .height = 5,
-    .paletteNum = 0xD,
+    .paletteNum = 13,
     .baseBlock = 0x13,
 };
 
@@ -3471,7 +3471,7 @@ static const struct WindowTemplate sWindowTemplate_CommStandby =
     .tilemapTop = 8,
     .width = 19,
     .height = 3,
-    .paletteNum = 0xD,
+    .paletteNum = 13,
     .baseBlock = 0x13,
 };
 
@@ -4429,12 +4429,12 @@ static void ResetBerryAndStatusBarSprites(void)
 static void LoadWindowFrameGfx(u8 frameId)
 {
     LoadBgTiles(BG_INTERFACE, GetWindowFrameTilesPal(frameId)->tiles, 0x120, 1);
-    LoadPalette(GetWindowFrameTilesPal(frameId)->pal, BG_PLTT_ID(0xA), PLTT_SIZE_4BPP);
+    LoadPalette(GetWindowFrameTilesPal(frameId)->pal, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
 }
 
 static void LoadUserWindowFrameGfx(void)
 {
-    LoadUserWindowBorderGfx_(0, 0xA, BG_PLTT_ID(0xB));
+    LoadUserWindowBorderGfx_(0, 0xA, BG_PLTT_ID(11));
 }
 
 static void ResetGfxState(void)
@@ -4448,7 +4448,7 @@ static void ResetGfxState(void)
 
 static void DrawYesNoMessageWindow(const struct WindowTemplate *template)
 {
-    u8 pal = 0xA;
+    u8 pal = 10;
 
     FillBgTilemapBufferRect(BG_INTERFACE, 1, template->tilemapLeft - 1,                template->tilemapTop - 1,                   1, 1, pal);
     FillBgTilemapBufferRect(BG_INTERFACE, 2, template->tilemapLeft,                    template->tilemapTop - 1,                   template->width, 1, pal);
@@ -4462,7 +4462,7 @@ static void DrawYesNoMessageWindow(const struct WindowTemplate *template)
 
 static void DrawMessageWindow(const struct WindowTemplate *template)
 {
-    u8 pal = 0xB;
+    u8 pal = 11;
 
     FillBgTilemapBufferRect(BG_INTERFACE, 10, template->tilemapLeft - 1,                template->tilemapTop - 1,                   1, 1, pal);
     FillBgTilemapBufferRect(BG_INTERFACE, 11, template->tilemapLeft,                    template->tilemapTop - 1,                   template->width, 1, pal);
@@ -4634,7 +4634,7 @@ static void ShowNames(void)
         window.bg = BG_INTERFACE;
         window.width = 7;
         window.height = 2;
-        window.paletteNum = 0xD;
+        window.paletteNum = 13;
         window.baseBlock = 0x13;
         for (i = 0; i < numPlayers; coords++, i++)
         {
@@ -5193,7 +5193,7 @@ static bool32 LoadBgGfx(void)
     switch (sGfx->loadState)
     {
     case 0:
-        LoadPalette(sBg_Pal, BG_PLTT_ID(0x0), sizeof(sBg_Pal));
+        LoadPalette(sBg_Pal, BG_PLTT_ID(0), sizeof(sBg_Pal));
         break;
     case 1:
         ResetTempTileDataBuffers();
@@ -5209,7 +5209,7 @@ static bool32 LoadBgGfx(void)
             return FALSE;
         break;
     case 5:
-        LoadPalette(GetTextWindowPalette(3), BG_PLTT_ID(0xD), PLTT_SIZE_4BPP);
+        LoadPalette(GetTextWindowPalette(3), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
     default:
         sGfx->loadState = 0;

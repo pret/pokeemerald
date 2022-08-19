@@ -2215,7 +2215,7 @@ void CB2_InitEndLinkBattle(void)
         gBattle_BG3_Y = 0;
 
         InitBattleBgsVideo();
-        LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0x0), 2 * PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
         LoadBattleMenuWindowGfx();
         ResetSpriteData();
         ResetTasks();

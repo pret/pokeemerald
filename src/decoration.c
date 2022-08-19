@@ -263,7 +263,7 @@ static const struct WindowTemplate sDecorationWindowTemplates[WINDOW_COUNT] =
         .tilemapTop = 1,
         .width = 18,
         .height = 2 * ARRAY_COUNT(sDecorationMainMenuActions),
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x0001
     },
     {
@@ -272,7 +272,7 @@ static const struct WindowTemplate sDecorationWindowTemplates[WINDOW_COUNT] =
         .tilemapTop = 1,
         .width = 13,
         .height = 18,
-        .paletteNum = 0xD,
+        .paletteNum = 13,
         .baseBlock = 0x0091
     },
     {
@@ -281,7 +281,7 @@ static const struct WindowTemplate sDecorationWindowTemplates[WINDOW_COUNT] =
         .tilemapTop = 1,
         .width = 12,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x017b
     },
     {
@@ -290,7 +290,7 @@ static const struct WindowTemplate sDecorationWindowTemplates[WINDOW_COUNT] =
         .tilemapTop = 13,
         .width = 13,
         .height = 6,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x0193
     }
 };
@@ -687,7 +687,7 @@ static void ReturnToDecorationActionsAfterInvalidSelection(u8 taskId)
 
 static void SecretBasePC_PrepMenuForSelectingStoredDecors(u8 taskId)
 {
-    LoadPalette(sDecorationMenuPalette, BG_PLTT_ID(0xD), PLTT_SIZE_4BPP);
+    LoadPalette(sDecorationMenuPalette, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
     ClearDialogWindowAndFrame(0, FALSE);
     RemoveDecorationWindow(WINDOW_MAIN_MENU);
     InitDecorationCategoriesWindow(taskId);
@@ -833,7 +833,7 @@ static void ReturnToActionsMenuFromCategories(u8 taskId)
 
 void ShowDecorationCategoriesWindow(u8 taskId)
 {
-    LoadPalette(sDecorationMenuPalette, BG_PLTT_ID(0xD), PLTT_SIZE_4BPP);
+    LoadPalette(sDecorationMenuPalette, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
     ClearDialogWindowAndFrame(0, FALSE);
     gTasks[taskId].tDecorationMenuCommand = DECOR_MENU_TRADE;
     sCurDecorationCategory = DECORCAT_DESK;

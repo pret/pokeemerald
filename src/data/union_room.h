@@ -627,7 +627,7 @@ static const struct WindowTemplate sWindowTemplate_BButtonCancel = {
     .tilemapTop = 0,
     .width = 30,
     .height = 2,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x0008
 };
 
@@ -669,7 +669,7 @@ static const struct WindowTemplate sWindowTemplate_PlayerList = {
     .tilemapTop = 3,
     .width = 13,
     .height = 8,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x0044
 };
 
@@ -679,7 +679,7 @@ static const struct WindowTemplate sWindowTemplate_5PlayerList = {
     .tilemapTop = 3,
     .width = 13,
     .height = 10,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x0044
 };
 
@@ -689,7 +689,7 @@ static const struct WindowTemplate sWindowTemplate_NumPlayerMode = {
     .tilemapTop = 3,
     .width = 7,
     .height = 4,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x00c6
 };
 
@@ -728,7 +728,7 @@ static const struct WindowTemplate sWindowTemplate_GroupList = {
     .tilemapTop = 3,
     .width = 17,
     .height = 10,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x0044
 };
 
@@ -738,7 +738,7 @@ static const struct WindowTemplate sWindowTemplate_PlayerNameAndId = {
     .tilemapTop = 3,
     .width = 7,
     .height = 4,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x00ee
 };
 
@@ -788,7 +788,7 @@ static const struct WindowTemplate sWindowTemplate_InviteToActivity = {
     .tilemapTop = 5,
     .width = 16,
     .height = 8,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x0001
 };
 
@@ -826,7 +826,7 @@ static const struct WindowTemplate sWindowTemplate_RegisterForTrade = {
     .tilemapTop = 7,
     .width = 16,
     .height = 6,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x0001
 };
 
@@ -863,7 +863,7 @@ static const struct WindowTemplate sWindowTemplate_TradingBoardRequestType = {
     .tilemapTop = 1,
     .width = 16,
     .height = 12,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x0001
 };
 
@@ -915,7 +915,7 @@ static const struct WindowTemplate sWindowTemplate_TradingBoardHeader = {
     .tilemapTop = 1,
     .width = 28,
     .height = 2,
-    .paletteNum = 0xD,
+    .paletteNum = 13,
     .baseBlock = 0x0001
 };
 
@@ -925,7 +925,7 @@ static const struct WindowTemplate sWindowTemplate_TradingBoardMain = {
     .tilemapTop = 5,
     .width = 28,
     .height = 12,
-    .paletteNum = 0xD,
+    .paletteNum = 13,
     .baseBlock = 0x0039
 };
 
@@ -970,7 +970,7 @@ static const struct WindowTemplate sWindowTemplate_Unused = {
     .tilemapTop = 5,
     .width = 28,
     .height = 12,
-    .paletteNum = 0xD,
+    .paletteNum = 13,
     .baseBlock = 0x0039
 };
 

@@ -585,7 +585,7 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
 
     LZDecompressWram(lzPaletteData, gDecompressionBuffer);
     LoadPalette(gDecompressionBuffer, paletteOffset, PLTT_SIZE_4BPP);
-    LoadPalette(gDecompressionBuffer, 0x80 + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
+    LoadPalette(gDecompressionBuffer, BG_PLTT_ID(8) + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
 
     if (species == SPECIES_CASTFORM)
     {
@@ -648,7 +648,7 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
 
     LZDecompressWram(lzPaletteData, gDecompressionBuffer);
     LoadPalette(gDecompressionBuffer, paletteOffset, PLTT_SIZE_4BPP);
-    LoadPalette(gDecompressionBuffer, 0x80 + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
+    LoadPalette(gDecompressionBuffer, BG_PLTT_ID(8) + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
 
     if (species == SPECIES_CASTFORM)
     {

@@ -244,7 +244,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenus[] =
         .tilemapTop = 1,
         .width = 9,
         .height = 6,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 1
     },
     [WIN_MAIN_MENU_BEDROOM] = {
@@ -253,7 +253,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenus[] =
         .tilemapTop = 1,
         .width = 9,
         .height = 8,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 1
     },
     [WIN_ITEM_STORAGE_MENU] = {
@@ -262,7 +262,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenus[] =
         .tilemapTop = 1,
         .width = 10,
         .height = 8,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 1
     }
 };
@@ -302,7 +302,7 @@ static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMPC_WIN_COUNT
         .tilemapTop = 1,
         .width = 13,
         .height = 18,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x0001
     },
     [ITEMPC_WIN_MESSAGE] = {
@@ -311,7 +311,7 @@ static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMPC_WIN_COUNT
         .tilemapTop = 13,
         .width = 13,
         .height = 6,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x00EB
     },
     [ITEMPC_WIN_ICON] = {
@@ -320,7 +320,7 @@ static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMPC_WIN_COUNT
         .tilemapTop = 8,
         .width = 3,
         .height = 3,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x0153
     },
     [ITEMPC_WIN_TITLE] = {
@@ -329,7 +329,7 @@ static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMPC_WIN_COUNT
         .tilemapTop = 1,
         .width = 13,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x0139
     },
     [ITEMPC_WIN_QUANTITY] = {
@@ -338,7 +338,7 @@ static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMPC_WIN_COUNT
         .tilemapTop = 9,
         .width = 6,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x015C
     },
     [ITEMPC_WIN_YESNO] = {
@@ -347,7 +347,7 @@ static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMPC_WIN_COUNT
         .tilemapTop = 7,
         .width = 5,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x0168
     }
 };

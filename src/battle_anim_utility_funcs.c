@@ -166,7 +166,7 @@ void StartBlendAnimSpriteColor(u8 taskId, u32 selectedPalettes)
 static void AnimTask_BlendSpriteColor_Step2(u8 taskId)
 {
     u32 selectedPalettes;
-    u16 singlePaletteOffset = 0x00;
+    u16 singlePaletteOffset = 0;
 
     if (gTasks[taskId].data[9] == gTasks[taskId].data[2])
     {
@@ -176,7 +176,7 @@ static void AnimTask_BlendSpriteColor_Step2(u8 taskId)
         {
             if (selectedPalettes & 1)
                 BlendPalette(singlePaletteOffset, 16, gTasks[taskId].data[10], gTasks[taskId].data[5]);
-            singlePaletteOffset += 0x10;
+            singlePaletteOffset += 16;
             selectedPalettes >>= 1;
         }
 

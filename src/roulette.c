@@ -460,7 +460,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 15,
         .width = 24,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0xC5
     },
     #ifdef UBFIX
@@ -1195,7 +1195,7 @@ static void CB2_LoadRoulette(void)
         ResetTempTileDataBuffers();
         break;
     case 3:
-        LoadPalette(&sWheel_Pal, BG_PLTT_ID(0x0), 14 * PLTT_SIZE_4BPP);
+        LoadPalette(&sWheel_Pal, BG_PLTT_ID(0), 14 * PLTT_SIZE_4BPP);
         DecompressAndCopyTileDataToVram(1, gRouletteMenu_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(2, gRouletteWheel_Gfx, 0, 0, 0);
         break;

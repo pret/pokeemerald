@@ -1235,7 +1235,7 @@ static const struct WindowTemplate sMatchCallTextWindow =
     .tilemapTop = 15,
     .width = 28,
     .height = 4,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x200
 };
 
@@ -1267,8 +1267,8 @@ static bool32 MatchCall_LoadGfx(u8 taskId)
     }
 
     FillWindowPixelBuffer(tWindowId, PIXEL_FILL(8));
-    LoadPalette(sMatchCallWindow_Pal, BG_PLTT_ID(0xE), sizeof(sMatchCallWindow_Pal));
-    LoadPalette(sPokenavIcon_Pal, BG_PLTT_ID(0xF), sizeof(sPokenavIcon_Pal));
+    LoadPalette(sMatchCallWindow_Pal, BG_PLTT_ID(14), sizeof(sMatchCallWindow_Pal));
+    LoadPalette(sPokenavIcon_Pal, BG_PLTT_ID(15), sizeof(sPokenavIcon_Pal));
     ChangeBgY(0, -0x2000, BG_COORD_SET);
     return TRUE;
 }

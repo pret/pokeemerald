@@ -68,7 +68,7 @@ static const struct WindowTemplate sBerryPowderWindowTemplates[] =
         .tilemapTop = 1,
         .width = 28,
         .height = 2,
-        .paletteNum = 0xD,
+        .paletteNum = 13,
         .baseBlock = 19
     },
     {
@@ -77,7 +77,7 @@ static const struct WindowTemplate sBerryPowderWindowTemplates[] =
         .tilemapTop = 5,
         .width = 28,
         .height = 14,
-        .paletteNum = 0xD,
+        .paletteNum = 13,
         .baseBlock = 75
     },
     {
@@ -86,7 +86,7 @@ static const struct WindowTemplate sBerryPowderWindowTemplates[] =
         .tilemapTop = 5,
         .width = 28,
         .height = 7,
-        .paletteNum = 0xD,
+        .paletteNum = 13,
         .baseBlock = 75
     },
     {
@@ -95,7 +95,7 @@ static const struct WindowTemplate sBerryPowderWindowTemplates[] =
         .tilemapTop = 8,
         .width = 19,
         .height = 3,
-        .paletteNum = 0xD,
+        .paletteNum = 13,
         .baseBlock = 19
     },
     {
@@ -104,7 +104,7 @@ static const struct WindowTemplate sBerryPowderWindowTemplates[] =
         .tilemapTop = 7,
         .width = 6,
         .height = 4,
-        .paletteNum = 0xD,
+        .paletteNum = 13,
         .baseBlock = 76
     },
     {
@@ -113,7 +113,7 @@ static const struct WindowTemplate sBerryPowderWindowTemplates[] =
         .tilemapTop = 6,
         .width = 22,
         .height = 5,
-        .paletteNum = 0xD,
+        .paletteNum = 13,
         .baseBlock = 19
     },
     {
@@ -122,7 +122,7 @@ static const struct WindowTemplate sBerryPowderWindowTemplates[] =
         .tilemapTop = 8,
         .width = 19,
         .height = 3,
-        .paletteNum = 0xD,
+        .paletteNum = 13,
         .baseBlock = 19
     },
 };
@@ -229,7 +229,7 @@ void DisplayBerryPowderVendorMenu(void)
     sBerryPowderVendorWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sBerryPowderVendorWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sBerryPowderVendorWindowId);
-    LoadUserWindowBorderGfx_(sBerryPowderVendorWindowId, 0x21D, BG_PLTT_ID(0xD));
+    LoadUserWindowBorderGfx_(sBerryPowderVendorWindowId, 0x21D, BG_PLTT_ID(13));
     DrawPlayerPowderAmount(sBerryPowderVendorWindowId, 0x21D, 13, GetBerryPowder());
 }
 

@@ -436,7 +436,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
     {
         task->data[10] = gBattle_BG2_Y;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2);
-        FillPalette(RGB_BLACK, BG_PLTT_ID(0x9), PLTT_SIZE_4BPP);
+        FillPalette(RGB_BLACK, BG_PLTT_ID(9), PLTT_SIZE_4BPP);
         scanlineParams.dmaDest = &REG_BG2VOFS;
         var0 = WINOUT_WIN01_BG2;
         if (!IsContest())
@@ -571,7 +571,7 @@ void AnimTask_MoveTargetMementoShadow(u8 taskId)
         else
         {
             task->data[10] = gBattle_BG2_Y;
-            FillPalette(RGB_BLACK, BG_PLTT_ID(0x9), PLTT_SIZE_4BPP);
+            FillPalette(RGB_BLACK, BG_PLTT_ID(9), PLTT_SIZE_4BPP);
         }
 
         SetAllBattlersSpritePriority(3);

@@ -895,7 +895,7 @@ static const struct WindowTemplate sWindowTemplate_MainMenu =
     .tilemapTop = 1,
     .width = 17,
     .height = 10,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x1,
 };
 
@@ -976,7 +976,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 11,
         .width = 9,
         .height = 7,
-        .paletteNum = 0x3,
+        .paletteNum = 3,
         .baseBlock = 0xC0,
     },
     [WIN_MESSAGE] = {
@@ -985,7 +985,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 17,
         .width = 18,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x14,
     },
     [WIN_ITEM_DESC] = {
@@ -994,7 +994,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 13,
         .width = 21,
         .height = 7,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x14,
     },
     DUMMY_WIN_TEMPLATE
@@ -1104,7 +1104,7 @@ static const struct WindowTemplate sYesNoWindowTemplate =
     .tilemapTop = 11,
     .width = 5,
     .height = 4,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x5C,
 };
 
@@ -2128,7 +2128,7 @@ static void Task_InitPokeStorage(u8 taskId)
         PutWindowTilemap(WIN_DISPLAY_INFO);
         ClearWindowTilemap(WIN_MESSAGE);
         CpuFill32(0, (void *)VRAM, 0x200);
-        LoadUserWindowBorderGfx(WIN_MESSAGE, 0xB, BG_PLTT_ID(0xE));
+        LoadUserWindowBorderGfx(WIN_MESSAGE, 0xB, BG_PLTT_ID(14));
         break;
     case 3:
         ResetAllBgCoords();
@@ -3849,13 +3849,13 @@ static void LoadWaveformSpritePalette(void)
 
 static void InitPalettesAndSprites(void)
 {
-    LoadPalette(sInterface_Pal, BG_PLTT_ID(0x0), sizeof(sInterface_Pal));
-    LoadPalette(sPkmnDataGray_Pal, BG_PLTT_ID(0x2), sizeof(sPkmnDataGray_Pal));
-    LoadPalette(sTextWindows_Pal, BG_PLTT_ID(0xF), sizeof(sTextWindows_Pal));
+    LoadPalette(sInterface_Pal, BG_PLTT_ID(0), sizeof(sInterface_Pal));
+    LoadPalette(sPkmnDataGray_Pal, BG_PLTT_ID(2), sizeof(sPkmnDataGray_Pal));
+    LoadPalette(sTextWindows_Pal, BG_PLTT_ID(15), sizeof(sTextWindows_Pal));
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
-        LoadPalette(sBg_Pal, BG_PLTT_ID(0x3), sizeof(sBg_Pal));
+        LoadPalette(sBg_Pal, BG_PLTT_ID(3), sizeof(sBg_Pal));
     else
-        LoadPalette(sBgMoveItems_Pal, BG_PLTT_ID(0x3), sizeof(sBgMoveItems_Pal));
+        LoadPalette(sBgMoveItems_Pal, BG_PLTT_ID(3), sizeof(sBgMoveItems_Pal));
 
     SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1) | BGCNT_CHARBASE(1) | BGCNT_16COLOR | BGCNT_SCREENBASE(30));
     CreateDisplayMonSprite();
@@ -4045,7 +4045,7 @@ static void UpdateWaveformAnimation(void)
 static void InitSupplementalTilemaps(void)
 {
     LZ77UnCompWram(gStorageSystemPartyMenu_Tilemap, sStorage->partyMenuTilemapBuffer);
-    LoadPalette(gStorageSystemPartyMenu_Pal, BG_PLTT_ID(0x1), PLTT_SIZE_4BPP);
+    LoadPalette(gStorageSystemPartyMenu_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
     TilemapUtil_SetMap(TILEMAPID_PARTY_MENU, 1, sStorage->partyMenuTilemapBuffer, 12, 22);
     TilemapUtil_SetMap(TILEMAPID_CLOSE_BUTTON, 1, sCloseBoxButton_Tilemap, 9, 4);
     TilemapUtil_SetPos(TILEMAPID_PARTY_MENU, 10, 0);
@@ -4267,7 +4267,7 @@ static void UpdateBoxToSendMons(void)
 static void InitPokeStorageBg0(void)
 {
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(29));
-    LoadUserWindowBorderGfx(WIN_MESSAGE, 2, BG_PLTT_ID(0xD));
+    LoadUserWindowBorderGfx(WIN_MESSAGE, 2, BG_PLTT_ID(13));
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 17);
     CopyBgTilemapBufferToVram(0);
 }
@@ -4308,7 +4308,7 @@ static void PrintMessage(u8 id)
     DynamicPlaceholderTextUtil_ExpandPlaceholders(sStorage->messageText, sMessages[id].text);
     FillWindowPixelBuffer(WIN_MESSAGE, PIXEL_FILL(1));
     AddTextPrinterParameterized(WIN_MESSAGE, FONT_NORMAL, sStorage->messageText, 0, 1, TEXT_SKIP_DRAW, NULL);
-    DrawTextBorderOuter(WIN_MESSAGE, 2, 0xE);
+    DrawTextBorderOuter(WIN_MESSAGE, 2, 14);
     PutWindowTilemap(WIN_MESSAGE);
     CopyWindowToVram(WIN_MESSAGE, COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(0);
@@ -5380,9 +5380,9 @@ static void LoadWallpaperGfx(u8 boxId, s8 direction)
         DrawWallpaper(sStorage->wallpaperTilemap, sStorage->wallpaperLoadDir, sStorage->wallpaperOffset);
 
         if (sStorage->wallpaperLoadDir != 0)
-            LoadPalette(wallpaper->palettes, 0x40 + BG_PLTT_ID(sStorage->wallpaperOffset * 2), 2 * PLTT_SIZE_4BPP);
+            LoadPalette(wallpaper->palettes, BG_PLTT_ID(4) + BG_PLTT_ID(sStorage->wallpaperOffset * 2), 2 * PLTT_SIZE_4BPP);
         else
-            CpuCopy16(wallpaper->palettes, &gPlttBufferUnfaded[0x40 + BG_PLTT_ID(sStorage->wallpaperOffset * 2)], 2 * PLTT_SIZE_4BPP);
+            CpuCopy16(wallpaper->palettes, &gPlttBufferUnfaded[BG_PLTT_ID(4) + BG_PLTT_ID(sStorage->wallpaperOffset * 2)], 2 * PLTT_SIZE_4BPP);
 
         sStorage->wallpaperTiles = malloc_and_decompress(wallpaper->tiles, &tilesSize);
         LoadBgTiles(2, sStorage->wallpaperTiles, tilesSize, sStorage->wallpaperOffset << 8);
@@ -5398,9 +5398,9 @@ static void LoadWallpaperGfx(u8 boxId, s8 direction)
         CpuCopy16(GetWaldaWallpaperColorsPtr(), &sStorage->wallpaperTilemap[17], 4);
 
         if (sStorage->wallpaperLoadDir != 0)
-            LoadPalette(sStorage->wallpaperTilemap, 0x40 + BG_PLTT_ID(sStorage->wallpaperOffset * 2), 2 * PLTT_SIZE_4BPP);
+            LoadPalette(sStorage->wallpaperTilemap, BG_PLTT_ID(4) + BG_PLTT_ID(sStorage->wallpaperOffset * 2), 2 * PLTT_SIZE_4BPP);
         else
-            CpuCopy16(sStorage->wallpaperTilemap, &gPlttBufferUnfaded[0x40 + BG_PLTT_ID(sStorage->wallpaperOffset * 2)], 2 * PLTT_SIZE_4BPP);
+            CpuCopy16(sStorage->wallpaperTilemap, &gPlttBufferUnfaded[BG_PLTT_ID(4) + BG_PLTT_ID(sStorage->wallpaperOffset * 2)], 2 * PLTT_SIZE_4BPP);
 
         sStorage->wallpaperTiles = malloc_and_decompress(wallpaper->tiles, &tilesSize);
         iconGfx = malloc_and_decompress(sWaldaWallpaperIcons[GetWaldaWallpaperIconId()], &iconSize);
@@ -7929,7 +7929,7 @@ static void InitMenu(void)
     sStorage->menuItemsCount = 0;
     sStorage->menuWidth = 0;
     sStorage->menuWindow.bg = 0;
-    sStorage->menuWindow.paletteNum = 0xF;
+    sStorage->menuWindow.paletteNum = 15;
     sStorage->menuWindow.baseBlock = 92;
 }
 
@@ -8085,7 +8085,7 @@ static const struct WindowTemplate sWindowTemplate_MultiMove =
     .tilemapTop = 3,
     .width = 20,
     .height = 18,
-    .paletteNum = 0x9,
+    .paletteNum = 9,
     .baseBlock = 0xA,
 };
 
@@ -8164,7 +8164,7 @@ static bool8 MultiMove_Start(void)
     {
     case 0:
         HideBg(0);
-        TryLoadAllMonIconPalettesAtOffset(BG_PLTT_ID(0x8));
+        TryLoadAllMonIconPalettesAtOffset(BG_PLTT_ID(8));
         sMultiMove->state++;
         break;
     case 1:
@@ -8213,7 +8213,7 @@ static bool8 MultiMove_Cancel(void)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             SetCursorPriorityTo1();
-            LoadPalette(GetTextWindowPalette(3), BG_PLTT_ID(0xD), PLTT_SIZE_4BPP);
+            LoadPalette(GetTextWindowPalette(3), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
             ShowBg(0);
             return FALSE;
         }
@@ -8319,7 +8319,7 @@ static bool8 MultiMove_PlaceMons(void)
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            LoadPalette(GetTextWindowPalette(3), BG_PLTT_ID(0xD), PLTT_SIZE_4BPP);
+            LoadPalette(GetTextWindowPalette(3), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
             SetCursorPriorityTo1();
             ShowBg(0);
             return FALSE;
@@ -9245,12 +9245,12 @@ static void DrawItemInfoWindow(u32 x)
 {
     if (x != 0)
     {
-        FillBgTilemapBufferRect(0, 0x13A, 0, 0xC, x, 1, 0xF);
-        FillBgTilemapBufferRect(0, 0x93A, 0, 0x14, x, 1, 0xF);
+        FillBgTilemapBufferRect(0, 0x13A, 0, 0xC, x, 1, 15);
+        FillBgTilemapBufferRect(0, 0x93A, 0, 0x14, x, 1, 15);
     }
-    FillBgTilemapBufferRect(0, 0x13B, x, 0xD, 1, 7, 0xF);
-    FillBgTilemapBufferRect(0, 0x13C, x, 0xC, 1, 1, 0xF);
-    FillBgTilemapBufferRect(0, 0x13D, x, 0x14, 1, 1, 0xF);
+    FillBgTilemapBufferRect(0, 0x13B, x, 0xD, 1, 7, 15);
+    FillBgTilemapBufferRect(0, 0x13C, x, 0xC, 1, 1, 15);
+    FillBgTilemapBufferRect(0, 0x13D, x, 0x14, 1, 1, 15);
     ScheduleBgCopyTilemapToVram(0);
 }
 

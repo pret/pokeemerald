@@ -668,7 +668,7 @@ static bool8 AllocPartyMenuBgGfx(void)
         }
         break;
     case 2:
-        LoadCompressedPalette(gPartyMenuBg_Pal, BG_PLTT_ID(0x0), 11 * PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gPartyMenuBg_Pal, BG_PLTT_ID(0), 11 * PLTT_SIZE_4BPP);
         CpuCopy16(gPlttBufferUnfaded, sPartyMenuInternal->palBuffer, 11 * PLTT_SIZE_4BPP);
         sPartyMenuInternal->data[0]++;
         break;
@@ -1021,7 +1021,7 @@ static void CreateCancelConfirmPokeballSprites(void)
     if (gPartyMenu.menuType == PARTY_MENU_TYPE_MULTI_SHOWCASE)
     {
         // The showcase has no Cancel/Confirm buttons
-        FillBgTilemapBufferRect(1, 14, 23, 17, 7, 2, 0x1);
+        FillBgTilemapBufferRect(1, 14, 23, 17, 7, 2, 1);
     }
     else
     {
@@ -2015,9 +2015,9 @@ static void InitPartyMenuWindows(u8 layout)
     DeactivateAllTextPrinters();
     for (i = 0; i < PARTY_SIZE; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
-    LoadUserWindowBorderGfx(0, 0x4F, BG_PLTT_ID(0xD));
-    LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(0xE), PLTT_SIZE_4BPP);
-    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
+    LoadUserWindowBorderGfx(0, 0x4F, BG_PLTT_ID(13));
+    LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
 }
 
 static void CreateCancelConfirmWindows(bool8 chooseHalf)
@@ -2417,7 +2417,7 @@ void DisplayPartyMenuStdMessage(u32 stringId)
             else if (!ShouldUseChooseMonText())
                 stringId = PARTY_MSG_CHOOSE_MON_OR_CANCEL;
         }
-        DrawStdFrameWithCustomTileAndPalette(*windowPtr, FALSE, 0x4F, 0xD);
+        DrawStdFrameWithCustomTileAndPalette(*windowPtr, FALSE, 0x4F, 13);
         StringExpandPlaceholders(gStringVar4, sActionStringTable[stringId]);
         AddTextPrinterParameterized(*windowPtr, FONT_NORMAL, gStringVar4, 0, 1, 0, 0);
         ScheduleBgCopyTilemapToVram(2);
@@ -2822,7 +2822,7 @@ static void MoveAndBufferPartySlot(const void *rectSrc, s16 x, s16 y, s16 width,
     {
         FillBgTilemapBufferRect_Palette0(0, 0, newX, y, newWidth, height);
         if (TryMovePartySlot(x + dir, width, &srcX, &newX, &newWidth))
-            CopyRectToBgTilemapBufferRect(0, rectSrc, srcX, 0, width, height, newX, y, newWidth, height, 17, 0, 0x0);
+            CopyRectToBgTilemapBufferRect(0, rectSrc, srcX, 0, width, height, newX, y, newWidth, height, 17, 0, 0);
     }
 }
 

@@ -140,7 +140,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .tilemapTop = 3,
         .width = 10,
         .height = 7,
-        .paletteNum = 0x3,
+        .paletteNum = 3,
         .baseBlock = 0x63,
     },
     {
@@ -149,7 +149,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .tilemapTop = 1,
         .width = 18,
         .height = 3,
-        .paletteNum = 0x4,
+        .paletteNum = 4,
         .baseBlock = 0xA9,
     },
     {
@@ -158,7 +158,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .tilemapTop = 4,
         .width = 18,
         .height = 3,
-        .paletteNum = 0x5,
+        .paletteNum = 5,
         .baseBlock = 0xDF,
     },
     {
@@ -167,7 +167,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .tilemapTop = 7,
         .width = 18,
         .height = 3,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 0x115,
     },
     {
@@ -176,7 +176,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .tilemapTop = 10,
         .width = 18,
         .height = 3,
-        .paletteNum = 0x7,
+        .paletteNum = 7,
         .baseBlock = 0x14B,
     },
     {
@@ -185,7 +185,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .tilemapTop = 13,
         .width = 18,
         .height = 3,
-        .paletteNum = 0x8,
+        .paletteNum = 8,
         .baseBlock = 0x181,
     },
     {
@@ -194,7 +194,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .tilemapTop = 15,
         .width = 28,
         .height = 4,
-        .paletteNum = 0xE,
+        .paletteNum = 14,
         .baseBlock = 0x1DF,
     },
     DUMMY_WIN_TEMPLATE
@@ -208,7 +208,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .tilemapTop = 1,
         .width = 10,
         .height = 7,
-        .paletteNum = 0x3,
+        .paletteNum = 3,
         .baseBlock = 0x63,
     },
     {
@@ -217,7 +217,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .tilemapTop = 8,
         .width = 10,
         .height = 7,
-        .paletteNum = 0x4,
+        .paletteNum = 4,
         .baseBlock = 0xA9,
     },
     {
@@ -226,7 +226,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .tilemapTop = 1,
         .width = 18,
         .height = 3,
-        .paletteNum = 0x5,
+        .paletteNum = 5,
         .baseBlock = 0xEF,
     },
     {
@@ -235,7 +235,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .tilemapTop = 5,
         .width = 18,
         .height = 3,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 0x125,
     },
     {
@@ -244,7 +244,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .tilemapTop = 9,
         .width = 18,
         .height = 3,
-        .paletteNum = 0x7,
+        .paletteNum = 7,
         .baseBlock = 0x15B,
     },
     {
@@ -253,7 +253,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .tilemapTop = 13,
         .width = 18,
         .height = 3,
-        .paletteNum = 0x8,
+        .paletteNum = 8,
         .baseBlock = 0x191,
     },
     {
@@ -262,7 +262,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .tilemapTop = 15,
         .width = 28,
         .height = 4,
-        .paletteNum = 0xE,
+        .paletteNum = 14,
         .baseBlock = 0x1DF,
     },
     DUMMY_WIN_TEMPLATE
@@ -276,7 +276,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .tilemapTop = 1,
         .width = 10,
         .height = 7,
-        .paletteNum = 0x3,
+        .paletteNum = 3,
         .baseBlock = 0x63,
     },
     {
@@ -285,7 +285,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .tilemapTop = 8,
         .width = 10,
         .height = 7,
-        .paletteNum = 0x4,
+        .paletteNum = 4,
         .baseBlock = 0xA9,
     },
     {
@@ -294,7 +294,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .tilemapTop = 2,
         .width = 18,
         .height = 3,
-        .paletteNum = 0x5,
+        .paletteNum = 5,
         .baseBlock = 0xEF,
     },
     {
@@ -303,7 +303,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .tilemapTop = 5,
         .width = 18,
         .height = 3,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 0x125,
     },
     {
@@ -312,7 +312,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .tilemapTop = 9,
         .width = 18,
         .height = 3,
-        .paletteNum = 0x7,
+        .paletteNum = 7,
         .baseBlock = 0x15B,
     },
     {
@@ -321,7 +321,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .tilemapTop = 12,
         .width = 18,
         .height = 3,
-        .paletteNum = 0x8,
+        .paletteNum = 8,
         .baseBlock = 0x191,
     },
     {
@@ -330,7 +330,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .tilemapTop = 15,
         .width = 28,
         .height = 4,
-        .paletteNum = 0xE,
+        .paletteNum = 14,
         .baseBlock = 0x1DF,
     },
     DUMMY_WIN_TEMPLATE
@@ -344,7 +344,7 @@ static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
         .tilemapTop = 2,
         .width = 10,
         .height = 7,
-        .paletteNum = 0x3,
+        .paletteNum = 3,
         .baseBlock = 0x63,
     },
     {
@@ -353,7 +353,7 @@ static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
         .tilemapTop = 3,
         .width = 18,
         .height = 3,
-        .paletteNum = 0x5,
+        .paletteNum = 5,
         .baseBlock = 0xA9,
     },
     {
@@ -362,7 +362,7 @@ static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
         .tilemapTop = 6,
         .width = 18,
         .height = 3,
-        .paletteNum = 0x6,
+        .paletteNum = 6,
         .baseBlock = 0xDF,
     },
     {
@@ -371,7 +371,7 @@ static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
         .tilemapTop = 11,
         .width = 10,
         .height = 7,
-        .paletteNum = 0x4,
+        .paletteNum = 4,
         .baseBlock = 0x115,
     },
     {
@@ -380,7 +380,7 @@ static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
         .tilemapTop = 12,
         .width = 18,
         .height = 3,
-        .paletteNum = 0x7,
+        .paletteNum = 7,
         .baseBlock = 0x16B,
     },
     {
@@ -389,7 +389,7 @@ static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
         .tilemapTop = 15,
         .width = 18,
         .height = 3,
-        .paletteNum = 0x8,
+        .paletteNum = 8,
         .baseBlock = 0x1A1,
     },
     DUMMY_WIN_TEMPLATE
@@ -402,7 +402,7 @@ static const struct WindowTemplate sCancelButtonWindowTemplate =
     .tilemapTop = 17,
     .width = 6,
     .height = 2,
-    .paletteNum = 0x3,
+    .paletteNum = 3,
     .baseBlock = 0x1C7,
 };
 
@@ -413,7 +413,7 @@ static const struct WindowTemplate sMultiCancelButtonWindowTemplate =
     .tilemapTop = 18,
     .width = 6,
     .height = 2,
-    .paletteNum = 0x3,
+    .paletteNum = 3,
     .baseBlock = 0x1C7,
 };
 
@@ -424,7 +424,7 @@ static const struct WindowTemplate sConfirmButtonWindowTemplate =
     .tilemapTop = 16,
     .width = 6,
     .height = 2,
-    .paletteNum = 0x3,
+    .paletteNum = 3,
     .baseBlock = 0x1D3,
 };
 
@@ -435,7 +435,7 @@ static const struct WindowTemplate sDefaultPartyMsgWindowTemplate =
     .tilemapTop = 17,
     .width = 21,
     .height = 2,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x24F,
 };
 
@@ -446,7 +446,7 @@ static const struct WindowTemplate sDoWhatWithMonMsgWindowTemplate =
     .tilemapTop = 17,
     .width = 16,
     .height = 2,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x279,
 };
 
@@ -457,7 +457,7 @@ static const struct WindowTemplate sDoWhatWithItemMsgWindowTemplate =
     .tilemapTop = 17,
     .width = 20,
     .height = 2,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x299,
 };
 
@@ -468,7 +468,7 @@ static const struct WindowTemplate sDoWhatWithMailMsgWindowTemplate =
     .tilemapTop = 17,
     .width = 18,
     .height = 2,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x299,
 };
 
@@ -479,7 +479,7 @@ static const struct WindowTemplate sWhichMoveMsgWindowTemplate =
     .tilemapTop = 17,
     .width = 16,
     .height = 2,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x299,
 };
 
@@ -490,7 +490,7 @@ static const struct WindowTemplate sAlreadyHoldingOneMsgWindowTemplate =
     .tilemapTop = 15,
     .width = 20,
     .height = 4,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x299,
 };
 
@@ -501,7 +501,7 @@ static const struct WindowTemplate sItemGiveTakeWindowTemplate =
     .tilemapTop = 13,
     .width = 6,
     .height = 6,
-    .paletteNum = 0xE,
+    .paletteNum = 14,
     .baseBlock = 0x39D,
 };
 
@@ -512,7 +512,7 @@ static const struct WindowTemplate sMailReadTakeWindowTemplate =
     .tilemapTop = 13,
     .width = 8,
     .height = 6,
-    .paletteNum = 0xE,
+    .paletteNum = 14,
     .baseBlock = 0x39D,
 };
 
@@ -523,7 +523,7 @@ static const struct WindowTemplate sMoveSelectWindowTemplate =
     .tilemapTop = 11,
     .width = 10,
     .height = 8,
-    .paletteNum = 0xE,
+    .paletteNum = 14,
     .baseBlock = 0x2E9,
 };
 
@@ -534,7 +534,7 @@ static const struct WindowTemplate sPartyMenuYesNoWindowTemplate =
     .tilemapTop = 9,
     .width = 5,
     .height = 4,
-    .paletteNum = 0xE,
+    .paletteNum = 14,
     .baseBlock = 0x2E9,
 };
 
@@ -545,7 +545,7 @@ static const struct WindowTemplate sLevelUpStatsWindowTemplate =
     .tilemapTop = 1,
     .width = 10,
     .height = 11,
-    .paletteNum = 0xE,
+    .paletteNum = 14,
     .baseBlock = 0x2E9,
 };
 
@@ -556,7 +556,7 @@ static const struct WindowTemplate sUnusedWindowTemplate1 =
     .tilemapTop = 15,
     .width = 27,
     .height = 4,
-    .paletteNum = 0xE,
+    .paletteNum = 14,
     .baseBlock = 0x1DF,
 };
 
@@ -567,7 +567,7 @@ static const struct WindowTemplate sUnusedWindowTemplate2 =
     .tilemapTop = 13,
     .width = 18,
     .height = 3,
-    .paletteNum = 0xC,
+    .paletteNum = 12,
     .baseBlock = 0x39D,
 };
 
