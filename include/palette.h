@@ -81,12 +81,12 @@ void TintPalette_GrayScale2(u16 *palette, u16 count);
 void TintPalette_SepiaTone(u16 *palette, u16 count);
 void TintPalette_CustomTone(u16 *palette, u16 count, u16 rTone, u16 gTone, u16 bTone);
 
-extern inline void SetBackdropFromColor(u16 color)
+static inline void SetBackdropFromColor(u16 color)
 {
   FillPalette(color, 0x00, PLTT_SIZEOF(1));
 }
 
-extern inline void SetBackdropFromPalette(const u16 *palette)
+static inline void SetBackdropFromPalette(const u16 *palette)
 {
   LoadPalette(palette, 0x00, PLTT_SIZEOF(1));
 }
