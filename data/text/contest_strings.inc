@@ -4,145 +4,192 @@ gText_HighlyAppealingMove::
 	.string "A highly appealing move.$"
 
 gText_UserMoreEasilyStartled::
-	.string "After this move, the user is\nmore easily startled.$"
+	.string "After this move, the user is\n"
+	.string "more easily startled.$"
 
 gText_GreatAppealButNoMoreToEnd::
-	.string "Makes a great appeal, but\nallows no more to the end.$"
+	.string "Makes a great appeal, but\n"
+	.string "allows no more to the end.$"
 
 gText_UsedRepeatedlyWithoutBoringJudge::
-	.string "Can be repeatedly used\nwithout boring the JUDGE.$"
+	.string "Can be repeatedly used\n"
+	.string "without boring the JUDGE.$"
 
 gText_AvoidStartledByOthersOnce::
-	.string "Can avoid being startled\nby others once.$"
+	.string "Can avoid being startled\n"
+	.string "by others once.$"
 
 gText_AvoidStartledByOthers::
-	.string "Can avoid being startled\nby others.$"
+	.string "Can avoid being startled\n"
+	.string "by others.$"
 
 gText_AvoidStartledByOthersLittle::
-	.string "Can avoid being startled\nby others a little.$"
+	.string "Can avoid being startled\n"
+	.string "by others a little.$"
 
 gText_UserLessLikelyStartled::
-	.string "After this move, the user is\nless likely to be startled.$"
+	.string "After this move, the user is\n"
+	.string "less likely to be startled.$"
 
 gText_SlightlyStartleFrontMon::
-	.string "Slightly startles the\nPOKéMON in front.$"
+	.string "Slightly startles the\n"
+	.string "POKéMON in front.$"
 
 gText_SlightlyStartleAppealed::
-	.string "Slightly startles those\nthat have made appeals.$"
+	.string "Slightly startles those\n"
+	.string "that have made appeals.$"
 
 gText_StartleAppealedBeforeUser::
-	.string "Startles the POKéMON that\nappealed before the user.$"
+	.string "Startles the POKéMON that\n"
+	.string "appealed before the user.$"
 
 gText_StartleAllAppealed::
-	.string "Startles all POKéMON that\nhave done their appeals.$"
+	.string "Startles all POKéMON that\n"
+	.string "have done their appeals.$"
 
 gText_BadlyStartleFrontMon::
-	.string "Badly startles the\nPOKéMON in front.$"
+	.string "Badly startles the\n"
+	.string "POKéMON in front.$"
 
 gText_BadlyStartleAppealed::
-	.string "Badly startles those that\nhave made appeals.$"
+	.string "Badly startles those that\n"
+	.string "have made appeals.$"
 
 gText_StartleAppealedBeforeUser2::
-	.string "Startles the POKéMON that\nappealed before the user.$"
+	.string "Startles the POKéMON that\n"
+	.string "appealed before the user.$"
 
 gText_StartleAllAppealed2::
-	.string "Startles all POKéMON that\nhave done their appeals.$"
+	.string "Startles all POKéMON that\n"
+	.string "have done their appeals.$"
 
 gText_ShiftJudgesAttentionFromOthers::
-	.string "Shifts the JUDGE's\nattention from others.$"
+	.string "Shifts the JUDGE's\n"
+	.string "attention from others.$"
 
 gText_StartleMonHasJudgesAttention::
-	.string "Startles the POKéMON that\nhas the JUDGE's attention.$"
+	.string "Startles the POKéMON that\n"
+	.string "has the JUDGE's attention.$"
 
 gText_JamOthersMissesTurn::
-	.string "Jams the others, and misses\none turn of appeals.$"
+	.string "Jams the others, and misses\n"
+	.string "one turn of appeals.$"
 
 gText_StartleMonsMadeSameTypeAppeal::
-	.string "Startles POKéMON that\nmade a same-type appeal.$"
+	.string "Startles POKéMON that\n"
+	.string "made a same-type appeal.$"
 
 gText_BadlyStartleCoolAppeals::
-	.string "Badly startles POKéMON\nthat made COOL appeals.$"
+	.string "Badly startles POKéMON\n"
+	.string "that made COOL appeals.$"
 
 gText_BadlyStartleBeautyAppeals::
-	.string "Badly startles POKéMON\nthat made BEAUTY appeals.$"
+	.string "Badly startles POKéMON\n"
+	.string "that made BEAUTY appeals.$"
 
 gText_BadlyStartleCuteAppeals::
-	.string "Badly startles POKéMON\nthat made CUTE appeals.$"
+	.string "Badly startles POKéMON\n"
+	.string "that made CUTE appeals.$"
 
 gText_BadlyStartleSmartAppeals::
-	.string "Badly startles POKéMON\nthat made SMART appeals.$"
+	.string "Badly startles POKéMON\n"
+	.string "that made SMART appeals.$"
 
 gText_BadlyStartleToughAppeals::
-	.string "Badly startles POKéMON\nthat made TOUGH appeals.$"
+	.string "Badly startles POKéMON\n"
+	.string "that made TOUGH appeals.$"
 
 gText_MakeMonAfterUserNervous::
-	.string "Makes one POKéMON after\nthe user nervous.$"
+	.string "Makes one POKéMON after\n"
+	.string "the user nervous.$"
 
 gText_MakeAllMonsAfterUserNervous::
-	.string "Makes all POKéMON after\nthe user nervous.$"
+	.string "Makes all POKéMON after\n"
+	.string "the user nervous.$"
 
 gText_WorsenConditionOfThoseMadeAppeals::
-	.string "Worsens the condition of\nthose that made appeals.$"
+	.string "Worsens the condition of\n"
+	.string "those that made appeals.$"
 
 gText_BadlyStartleMonsGoodCondition::
-	.string "Badly startles POKéMON in\ngood condition.$"
+	.string "Badly startles POKéMON in\n"
+	.string "good condition.$"
 
 gText_AppealGreatIfPerformedFirst::
-	.string "The appeal works great if\nperformed first.$"
+	.string "The appeal works great if\n"
+	.string "performed first.$"
 
 gText_AppealGreatIfPerformedLast::
-	.string "The appeal works great if\nperformed last.$"
+	.string "The appeal works great if\n"
+	.string "performed last.$"
 
 gText_AppealAsGoodAsThoseBeforeIt::
-	.string "Makes the appeal as good\nas those before it.$"
+	.string "Makes the appeal as good\n"
+	.string "as those before it.$"
 
 gText_AppealAsGoodAsOneBeforeIt::
-	.string "Makes the appeal as good\nas the one before it.$"
+	.string "Makes the appeal as good\n"
+	.string "as the one before it.$"
 
 gText_AppealBetterLaterItsPerformed::
-	.string "The appeal works better\nthe later it is performed.$"
+	.string "The appeal works better\n"
+	.string "the later it is performed.$"
 
 gText_AppealVariesDependingOnTiming::
-	.string "The appeal's quality varies\ndepending on its timing.$"
+	.string "The appeal's quality varies\n"
+	.string "depending on its timing.$"
 
 gText_WorksWellIfSameTypeAsBefore::
-	.string "Works well if it's the same\ntype as the one before.$"
+	.string "Works well if it's the same\n"
+	.string "type as the one before.$"
 
 gText_WorksWellIfDifferentTypeAsBefore::
-	.string "Works well if different in\ntype than the one before.$"
+	.string "Works well if different in\n"
+	.string "type than the one before.$"
 
 gText_AffectedByAppealInFront::
-	.string "Affected by how well the\nappeal in front goes.$"
+	.string "Affected by how well the\n"
+	.string "appeal in front goes.$"
 
 gText_UpsConditionHelpsPreventNervousness::
-	.string "Ups the user's condition.\nHelps prevent nervousness.$"
+	.string "Ups the user's condition.\n"
+	.string "Helps prevent nervousness.$"
 
 gText_AppealWorksWellIfConditionGood::
-	.string "The appeal works well if the\nuser's condition is good.$"
+	.string "The appeal works well if the\n"
+	.string "user's condition is good.$"
 
 gText_NextAppealMadeEarlier::
-	.string "The next appeal can be\nmade earlier next turn.$"
+	.string "The next appeal can be\n"
+	.string "made earlier next turn.$"
 
 gText_NextAppealMadeLater::
-	.string "The next appeal can be\nmade later next turn.$"
+	.string "The next appeal can be\n"
+	.string "made later next turn.$"
 
 gText_TurnOrderMoreEasilyScrambled::
-	.string "Makes the next turn's order\nmore easily scrambled.$"
+	.string "Makes the next turn's order\n"
+	.string "more easily scrambled.$"
 
 gText_ScrambleOrderOfNextAppeals::
-	.string "Scrambles the order of\nappeals on the next turn.$"
+	.string "Scrambles the order of\n"
+	.string "appeals on the next turn.$"
 
 gText_AppealExcitesAudienceInAnyContest::
-	.string "An appeal that excites the\naudience in any CONTEST.$"
+	.string "An appeal that excites the\n"
+	.string "audience in any CONTEST.$"
 
 gText_BadlyStartlesMonsGoodAppeals::
-	.string "Badly startles all POKéMON\nthat made good appeals.$"
+	.string "Badly startles all POKéMON\n"
+	.string "that made good appeals.$"
 
 gText_AppealBestMoreCrowdExcited::
-	.string "The appeal works best the\nmore the crowd is excited.$"
+	.string "The appeal works best the\n"
+	.string "more the crowd is excited.$"
 
 gText_TemporarilyStopCrowdExcited::
-	.string "Temporarily stops the\ncrowd from growing excited.$"
+	.string "Temporarily stops the\n"
+	.string "crowd from growing excited.$"
 
 @ Unused move names
 

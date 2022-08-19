@@ -1,4 +1,4 @@
-static const union AnimCmd gAnimCmd_Brendan_1[] =
+static const union AnimCmd sAnimCmd_Brendan_1[] =
 {
     ANIMCMD_FRAME(0, 24),
     ANIMCMD_FRAME(1, 9),
@@ -8,7 +8,7 @@ static const union AnimCmd gAnimCmd_Brendan_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd gAnimCmd_May_Steven_1[] =
+static const union AnimCmd sAnimCmd_May_Steven_1[] =
 {
     ANIMCMD_FRAME(0, 24),
     ANIMCMD_FRAME(1, 9),
@@ -18,7 +18,7 @@ static const union AnimCmd gAnimCmd_May_Steven_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd gAnimCmd_Wally_1[] =
+static const union AnimCmd sAnimCmd_Wally_1[] =
 {
     ANIMCMD_FRAME(0, 24),
     ANIMCMD_FRAME(1, 9),
@@ -28,7 +28,7 @@ static const union AnimCmd gAnimCmd_Wally_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd gAnimCmd_Red_1[] =
+static const union AnimCmd sAnimCmd_Red_1[] =
 {
     ANIMCMD_FRAME(1, 20),
     ANIMCMD_FRAME(2, 6),
@@ -38,7 +38,7 @@ static const union AnimCmd gAnimCmd_Red_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd gAnimCmd_Leaf_1[] =
+static const union AnimCmd sAnimCmd_Leaf_1[] =
 {
     ANIMCMD_FRAME(1, 20),
     ANIMCMD_FRAME(2, 6),
@@ -48,7 +48,7 @@ static const union AnimCmd gAnimCmd_Leaf_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd gAnimCmd_RubySapphireBrendan_1[] =
+static const union AnimCmd sAnimCmd_RubySapphireBrendan_1[] =
 {
     ANIMCMD_FRAME(0, 24),
     ANIMCMD_FRAME(1, 9),
@@ -58,7 +58,7 @@ static const union AnimCmd gAnimCmd_RubySapphireBrendan_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd gAnimCmd_RubySapphireMay_1[] =
+static const union AnimCmd sAnimCmd_RubySapphireMay_1[] =
 {
     ANIMCMD_FRAME(0, 24),
     ANIMCMD_FRAME(1, 9),
@@ -71,49 +71,49 @@ static const union AnimCmd gAnimCmd_RubySapphireMay_1[] =
 static const union AnimCmd *const sBackAnims_Brendan[] =
 {
     sAnim_GeneralFrame3,
-    gAnimCmd_Brendan_1,
+    sAnimCmd_Brendan_1,
 };
 
 static const union AnimCmd *const sBackAnims_May[] =
 {
     sAnim_GeneralFrame3,
-    gAnimCmd_May_Steven_1,
+    sAnimCmd_May_Steven_1,
 };
 
 static const union AnimCmd *const sBackAnims_Red[] =
 {
     sAnim_GeneralFrame0,
-    gAnimCmd_Red_1,
+    sAnimCmd_Red_1,
 };
 
 static const union AnimCmd *const sBackAnims_Leaf[] =
 {
     sAnim_GeneralFrame0,
-    gAnimCmd_Leaf_1,
+    sAnimCmd_Leaf_1,
 };
 
 static const union AnimCmd *const sBackAnims_RubySapphireBrendan[] =
 {
     sAnim_GeneralFrame3,
-    gAnimCmd_RubySapphireBrendan_1,
+    sAnimCmd_RubySapphireBrendan_1,
 };
 
 static const union AnimCmd *const sBackAnims_RubySapphireMay[] =
 {
     sAnim_GeneralFrame3,
-    gAnimCmd_RubySapphireMay_1,
+    sAnimCmd_RubySapphireMay_1,
 };
 
 static const union AnimCmd *const sBackAnims_Wally[] =
 {
     sAnim_GeneralFrame3,
-    gAnimCmd_Wally_1,
+    sAnimCmd_Wally_1,
 };
 
 static const union AnimCmd *const sBackAnims_Steven[] =
 {
     sAnim_GeneralFrame3,
-    gAnimCmd_May_Steven_1,
+    sAnimCmd_May_Steven_1,
 };
 
 const union AnimCmd *const *const gTrainerBackAnimsPtrTable[] =

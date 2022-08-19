@@ -53,7 +53,7 @@ static void Task_EnableScriptAfterMusicFade(u8 taskId);
 static const u16 sFlashLevelToRadius[] = { 200, 72, 64, 56, 48, 40, 32, 24, 0 };
 const s32 gMaxFlashLevel = ARRAY_COUNT(sFlashLevelToRadius) - 1;
 
-const struct ScanlineEffectParams sFlashEffectParams =
+static const struct ScanlineEffectParams sFlashEffectParams =
 {
     &REG_WIN0H,
     ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
