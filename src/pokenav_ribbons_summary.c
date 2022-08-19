@@ -3,6 +3,7 @@
 #include "dynamic_placeholder_text_util.h"
 #include "graphics.h"
 #include "international_string_util.h"
+#include "palette.h"
 #include "pokenav.h"
 #include "sound.h"
 #include "sprite.h"
@@ -572,7 +573,7 @@ static u32 LoopedTask_OpenRibbonsSummaryMenu(s32 state)
         DecompressAndCopyTileDataToVram(2, gPokenavRibbonsSummaryBg_Gfx, 0, 0, 0);
         SetBgTilemapBuffer(2, menu->tilemapBuffers[0]);
         CopyToBgTilemapBuffer(2, gPokenavRibbonsSummaryBg_Tilemap, 0, 0);
-        CopyPaletteIntoBufferUnfaded(gPokenavRibbonsSummaryBg_Pal, 0x10, 0x20);
+        CopyPaletteIntoBufferUnfaded(gPokenavRibbonsSummaryBg_Pal, BG_PLTT_ID(0x1), PLTT_SIZE_4BPP);
         CopyBgTilemapBufferToVram(2);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -582,8 +583,8 @@ static u32 LoopedTask_OpenRibbonsSummaryMenu(s32 state)
             DecompressAndCopyTileDataToVram(1, sRibbonIconsSmall_Gfx, 0, 1, 0);
             SetBgTilemapBuffer(1, menu->tilemapBuffers[1]);
             FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 32, 20);
-            CopyPaletteIntoBufferUnfaded(sRibbonIcons1_Pal, 0x20, 0xA0);
-            CopyPaletteIntoBufferUnfaded(sMonInfo_Pal, 0xA0, 0x20);
+            CopyPaletteIntoBufferUnfaded(sRibbonIcons1_Pal, BG_PLTT_ID(0x2), 5 * PLTT_SIZE_4BPP);
+            CopyPaletteIntoBufferUnfaded(sMonInfo_Pal, BG_PLTT_ID(0xA), PLTT_SIZE_4BPP);
             CopyBgTilemapBufferToVram(1);
             return LT_INC_AND_PAUSE;
         }
@@ -789,7 +790,7 @@ static const struct WindowTemplate sRibbonCountWindowTemplate =
     .tilemapTop = 13,
     .width = 16,
     .height = 4,
-    .paletteNum = 1,
+    .paletteNum = 0x1,
     .baseBlock = 0x14,
 };
 
@@ -853,7 +854,7 @@ static const struct WindowTemplate sRibbonSummaryMonNameWindowTemplate =
     .tilemapTop = 1,
     .width = 13,
     .height = 2,
-    .paletteNum = 10,
+    .paletteNum = 0xA,
     .baseBlock = 0x54,
 };
 
@@ -908,7 +909,7 @@ static const struct WindowTemplate sRibbonMonListIndexWindowTemplate[] =
         .tilemapTop = 5,
         .width = 7,
         .height = 2,
-        .paletteNum = 1,
+        .paletteNum = 0x1,
         .baseBlock = 0x6E,
     },
     {},

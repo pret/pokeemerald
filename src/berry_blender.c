@@ -338,7 +338,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 6,
         .width = 7,
         .height = 2,
-        .paletteNum = 14,
+        .paletteNum = 0xE,
         .baseBlock = 0x28,
     },
     {
@@ -347,7 +347,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 6,
         .width = 7,
         .height = 2,
-        .paletteNum = 14,
+        .paletteNum = 0xE,
         .baseBlock = 0x36,
     },
     {
@@ -356,7 +356,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 12,
         .width = 7,
         .height = 2,
-        .paletteNum = 14,
+        .paletteNum = 0xE,
         .baseBlock = 0x44,
     },
     {
@@ -365,7 +365,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 12,
         .width = 7,
         .height = 2,
-        .paletteNum = 14,
+        .paletteNum = 0xE,
         .baseBlock = 0x52,
     },
     {
@@ -374,7 +374,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 15,
         .width = 27,
         .height = 4,
-        .paletteNum = 14,
+        .paletteNum = 0xE,
         .baseBlock = 0x60,
     },
     {
@@ -383,7 +383,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 3,
         .width = 21,
         .height = 14,
-        .paletteNum = 14,
+        .paletteNum = 0xE,
         .baseBlock = 0x60,
     },
     DUMMY_WIN_TEMPLATE
@@ -396,7 +396,7 @@ static const struct WindowTemplate sYesNoWindowTemplate_ContinuePlaying =
     .tilemapTop = 9,
     .width = 5,
     .height = 4,
-    .paletteNum = 14,
+    .paletteNum = 0xE,
     .baseBlock = 0xCC
 };
 
@@ -926,7 +926,7 @@ static const struct WindowTemplate sBlenderRecordWindowTemplate =
     .tilemapTop = 4,
     .width = 18,
     .height = 11,
-    .paletteNum = 15,
+    .paletteNum = 0xF,
     .baseBlock = 8
 };
 
@@ -959,7 +959,7 @@ static bool8 LoadBerryBlenderGfx(void)
     case 1:
         CopyToBgTilemapBuffer(2, sBlenderCenter_Tilemap, 0x400, 0);
         CopyBgTilemapBufferToVram(2);
-        LoadPalette(sBlenderCenter_Pal, 0, 0x100);
+        LoadPalette(sBlenderCenter_Pal, BG_PLTT_ID(0x0), 8 * PLTT_SIZE_4BPP);
         sBerryBlender->loadGfxState++;
         break;
     case 2:
@@ -984,7 +984,7 @@ static bool8 LoadBerryBlenderGfx(void)
         sBerryBlender->loadGfxState++;
         break;
     case 7:
-        LoadPalette(sBlenderOuter_Pal, 0x80, 0x20);
+        LoadPalette(sBlenderOuter_Pal, BG_PLTT_ID(0x8), PLTT_SIZE_4BPP);
         sBerryBlender->loadGfxState++;
         break;
     case 8:
@@ -1065,8 +1065,8 @@ static void CB2_LoadBerryBlender(void)
         InitBgsFromTemplates(1, sBgTemplates, ARRAY_COUNT(sBgTemplates));
         SetBgTilemapBuffer(1, sBerryBlender->tilemapBuffers[0]);
         SetBgTilemapBuffer(2, sBerryBlender->tilemapBuffers[1]);
-        LoadUserWindowBorderGfx(0, 1, 0xD0);
-        LoadMessageBoxGfx(0, 0x14, 0xF0);
+        LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(0xD));
+        LoadMessageBoxGfx(0, 0x14, BG_PLTT_ID(0xF));
         InitBerryBlenderWindows();
 
         sBerryBlender->mainState++;
@@ -1502,8 +1502,8 @@ static void InitBlenderBgs(void)
 
     SetBgTilemapBuffer(1, sBerryBlender->tilemapBuffers[0]);
     SetBgTilemapBuffer(2, sBerryBlender->tilemapBuffers[1]);
-    LoadUserWindowBorderGfx(0, 1, 0xD0);
-    LoadMessageBoxGfx(0, 0x14, 0xF0);
+    LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(0xD));
+    LoadMessageBoxGfx(0, 0x14, BG_PLTT_ID(0xF));
     InitBerryBlenderWindows();
 
     sBerryBlender->unk0 = 0;

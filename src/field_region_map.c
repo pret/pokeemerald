@@ -72,7 +72,7 @@ static const struct WindowTemplate sFieldRegionMapWindowTemplates[] =
         .tilemapTop = 17,
         .width = 12,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 1
     },
     {
@@ -81,7 +81,7 @@ static const struct WindowTemplate sFieldRegionMapWindowTemplates[] =
         .tilemapTop = 1,
         .width = 7,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 25
     },
     DUMMY_WIN_TEMPLATE
@@ -115,7 +115,7 @@ static void MCB2_InitRegionMapRegisters(void)
     InitBgsFromTemplates(1, sFieldRegionMapBgTemplates, ARRAY_COUNT(sFieldRegionMapBgTemplates));
     InitWindows(sFieldRegionMapWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 0x27, 0xd0);
+    LoadUserWindowBorderGfx(0, 0x27, BG_PLTT_ID(0xD));
     ClearScheduledBgCopiesToVram();
     SetMainCallback2(MCB2_FieldUpdateRegionMap);
     SetVBlankCallback(VBCB_FieldUpdateRegionMap);

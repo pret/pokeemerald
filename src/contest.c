@@ -1032,13 +1032,13 @@ void LoadContestBgAfterMoveAnim(void)
     LZDecompressVram(gContestAudienceGfx, (void *)(BG_SCREEN_ADDR(4)));
     CopyToBgTilemapBuffer(3, gContestAudienceTilemap, 0, 0);
     CopyBgTilemapBufferToVram(3);
-    LoadCompressedPalette(gContestInterfaceAudiencePalette, 0, 0x200);
+    LoadCompressedPalette(gContestInterfaceAudiencePalette, BG_PLTT_OFFSET, BG_PLTT_SIZE);
     LoadContestPalettes();
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         u32 contestantWindowId = 5 + i;
 
-        LoadPalette(eContestTempSave.cachedWindowPalettes[contestantWindowId], 16 * (5 + gContestantTurnOrder[i]), sizeof((eContestTempSave.cachedWindowPalettes[contestantWindowId])));
+        LoadPalette(eContestTempSave.cachedWindowPalettes[contestantWindowId], BG_PLTT_ID(0x5 + gContestantTurnOrder[i]), sizeof((eContestTempSave.cachedWindowPalettes[contestantWindowId])));
     }
 }
 
@@ -1073,11 +1073,11 @@ static void LoadContestPalettes(void)
 {
     s32 i;
 
-    LoadPalette(sText_Pal, 0xf0, 0x20);
-    FillPalette(RGB_BLACK, 0, 2);
+    LoadPalette(sText_Pal, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
+    SetBackdropFromColor(RGB_BLACK);
     for (i = 10; i < 14; i++)
-        LoadPalette(gPlttBufferUnfaded + 241, 240 + i, 2);
-    FillPalette(RGB(31, 17, 31), 0xF3, 2);
+        LoadPalette(gPlttBufferUnfaded + BG_PLTT_ID(0xF) + 1, BG_PLTT_ID(0xF) + i, PLTT_SIZEOF(1));
+    FillPalette(RGB(31, 17, 31), BG_PLTT_ID(0xF) + 3, PLTT_SIZEOF(1));
 }
 
 static void InitContestResources(void)
@@ -1327,11 +1327,11 @@ static bool8 SetupContestGraphics(u8 *stateVar)
         DmaCopy32Defvars(3, gContestResources->contestBgTilemaps[2], eContestTempSave.savedJunk, sizeof(eContestTempSave.savedJunk));
         break;
     case 5:
-        LoadCompressedPalette(gContestInterfaceAudiencePalette, 0, 0x200);
-        CpuCopy32(gPlttBufferUnfaded + 128, tempPalette1, 16 * sizeof(u16));
-        CpuCopy32(gPlttBufferUnfaded + (5 + gContestPlayerMonIndex) * 16, tempPalette2, 16 * sizeof(u16));
-        CpuCopy32(tempPalette2, gPlttBufferUnfaded + 128, 16 * sizeof(u16));
-        CpuCopy32(tempPalette1, gPlttBufferUnfaded + (5 + gContestPlayerMonIndex) * 16, 16 * sizeof(u16));
+        LoadCompressedPalette(gContestInterfaceAudiencePalette, BG_PLTT_OFFSET, BG_PLTT_SIZE);
+        CpuCopy32(gPlttBufferUnfaded + BG_PLTT_ID(0x8), tempPalette1, PLTT_SIZE_4BPP);
+        CpuCopy32(gPlttBufferUnfaded + BG_PLTT_ID(0x5 + gContestPlayerMonIndex), tempPalette2, 16 * sizeof(u16));
+        CpuCopy32(tempPalette2, gPlttBufferUnfaded + BG_PLTT_ID(0x8), PLTT_SIZE_4BPP);
+        CpuCopy32(tempPalette1, gPlttBufferUnfaded + BG_PLTT_ID(0x5 + gContestPlayerMonIndex), PLTT_SIZE_4BPP);
         DmaCopy32Defvars(3, gPlttBufferUnfaded, eContestTempSave.cachedWindowPalettes, sizeof(eContestTempSave.cachedWindowPalettes));
         LoadContestPalettes();
         break;
@@ -3097,7 +3097,7 @@ static u8 CreateJudgeSprite(void)
     u8 spriteId;
 
     LoadCompressedSpriteSheet(&sSpriteSheet_Judge);
-    LoadCompressedPalette(gContest2Pal, 0x110, 32);
+    LoadCompressedPalette(gContest2Pal, OBJ_PLTT_ID(0x1), PLTT_SIZE_4BPP);
     spriteId = CreateSprite(&sSpriteTemplate_Judge, 112, 36, 30);
     gSprites[spriteId].oam.paletteNum = 1;
     gSprites[spriteId].callback = SpriteCallbackDummy;
@@ -3126,7 +3126,7 @@ static u8 CreateContestantSprite(u16 species, u32 otId, u32 personality, u32 ind
     else
         HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT], species, personality);
 
-    LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality), 0x120, 0x20);
+    LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality), OBJ_PLTT_ID(0x2), PLTT_SIZE_4BPP);
     SetMultiuseSpriteTemplateToPokemon(species, B_POSITION_PLAYER_LEFT);
 
     spriteId = CreateSprite(&gMultiuseSpriteTemplate, 0x70, GetBattlerSpriteFinal_Y(2, species, FALSE), 30);
@@ -3997,7 +3997,7 @@ static void Task_StopFlashJudgeAttentionEye(u8 taskId)
     {
         gTasks[eContest.judgeAttentionTaskId].data[contestant * 4 + 0] = 0xFF;
         gTasks[eContest.judgeAttentionTaskId].data[contestant * 4 + 1] = 0;
-        BlendPalette((eContest.prevTurnOrder[contestant] + 5) * 16 + 6, 2, 0, RGB(31, 31, 18));
+        BlendPalette(BG_PLTT_ID(0x5 + eContest.prevTurnOrder[contestant]) + 6, 2, 0, RGB(31, 31, 18));
         DestroyTask(taskId);
     }
 }
@@ -4021,7 +4021,7 @@ static void Task_FlashJudgeAttentionEye(u8 taskId)
              || gTasks[taskId].data[offset + 0] == 0)
                 gTasks[taskId].data[offset + 1] ^= 1;
 
-            BlendPalette((eContest.prevTurnOrder[i] + 5) * 16 + 6, 2, gTasks[taskId].data[offset + 0], RGB(31, 31, 18));
+            BlendPalette(BG_PLTT_ID(0x5 + eContest.prevTurnOrder[i]) + 6, 2, gTasks[taskId].data[offset + 0], RGB(31, 31, 18));
         }
     }
 }
@@ -4100,8 +4100,8 @@ static void Task_UnusedBlend(u8 taskId)
                  || gTasks[taskId].data[idx] == 0)
                     gTasks[taskId].data[idx + 1] ^= 1;
 
-                BlendPalette((i + 5) * 16 + 10,     1, gTasks[taskId].data[idx + 0], RGB(31, 31, 18));
-                BlendPalette((i + 5) * 16 + 12 + i, 1, gTasks[taskId].data[idx + 0], RGB(31, 31, 18));
+                BlendPalette(BG_PLTT_ID(0x5 + i) + 10,     1, gTasks[taskId].data[idx + 0], RGB(31, 31, 18));
+                BlendPalette(BG_PLTT_ID(0x5 + i) + 12 + i, 1, gTasks[taskId].data[idx + 0], RGB(31, 31, 18));
             }
         }
     }
@@ -4414,7 +4414,7 @@ static void DrawContestantWindows(void)
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         s32 windowId = i + 5;
-        LoadPalette(eContestTempSave.cachedWindowPalettes[windowId], (gContestantTurnOrder[i] + 5) * 16, sizeof(eContestTempSave.cachedWindowPalettes[0]));
+        LoadPalette(eContestTempSave.cachedWindowPalettes[windowId], BG_PLTT_ID(0x5 + gContestantTurnOrder[i]), sizeof(eContestTempSave.cachedWindowPalettes[0]));
     }
     DrawContestantWindowText();
 }
@@ -4769,7 +4769,7 @@ static void Task_ApplauseOverflowAnimation(u8 taskId)
         else
             gTasks[taskId].data[4]--;
 
-        BlendPalette(264 + gTasks[taskId].data[2] * 16, 1, gTasks[taskId].data[4], RGB_WHITE);
+        BlendPalette(OBJ_PLTT_ID(gTasks[taskId].data[2]) + 8, 1, gTasks[taskId].data[4], RGB_WHITE);
 
         // At the maximum or minimum blending, switch directions.
         if (gTasks[taskId].data[4] == 0 || gTasks[taskId].data[4] == 16)
@@ -4779,7 +4779,7 @@ static void Task_ApplauseOverflowAnimation(u8 taskId)
             // Continue the animation until the applause meter is cleared.
             if (eContest.applauseLevel < 5)
             {
-                BlendPalette(264 + gTasks[taskId].data[2] * 16, 1, 0, RGB_RED);
+                BlendPalette(OBJ_PLTT_ID(gTasks[taskId].data[2]) + 8, 1, 0, RGB_RED);
                 DestroyTask(taskId);
             }
         }
@@ -4992,8 +4992,8 @@ static void Task_BlendAudienceBackground(u8 taskId)
         else
             gTasks[taskId].tBlendCoeff--;
 
-        BlendPalette(17, 1, gTasks[taskId].tBlendCoeff, gTasks[taskId].tBlendColor);
-        BlendPalette(26, 1, gTasks[taskId].tBlendCoeff, gTasks[taskId].tBlendColor);
+        BlendPalette(BG_PLTT_ID(0x1) + 1,  1, gTasks[taskId].tBlendCoeff, gTasks[taskId].tBlendColor);
+        BlendPalette(BG_PLTT_ID(0x1) + 10, 1, gTasks[taskId].tBlendCoeff, gTasks[taskId].tBlendColor);
 
         if (gTasks[taskId].tBlendCoeff == gTasks[taskId].tTargetBlendCoeff)
         {

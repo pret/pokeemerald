@@ -251,7 +251,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
         .tilemapTop = 1,
         .width = 13,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 1
     },
     [WIN_NATURE] = {
@@ -260,7 +260,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
         .tilemapTop = 14,
         .width = 11,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x35
     },
     [WIN_TEXT] = {
@@ -269,7 +269,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
         .tilemapTop = 17,
         .width = 28,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x4B
     },
     DUMMY_WIN_TEMPLATE
@@ -282,7 +282,7 @@ static const struct WindowTemplate sUsePokeblockYesNoWinTemplate =
     .tilemapTop = 11,
     .width = 5,
     .height = 4,
-    .paletteNum = 15,
+    .paletteNum = 0xF,
     .baseBlock = 0x83
 };
 
@@ -505,7 +505,7 @@ static void LoadUsePokeblockMenu(void)
         InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
         InitWindows(sWindowTemplates);
         DeactivateAllTextPrinters();
-        LoadUserWindowBorderGfx(0, 0x97, 0xE0);
+        LoadUserWindowBorderGfx(0, 0x97, BG_PLTT_ID(0xE));
         sInfo->mainState++;
         break;
     case 4:
@@ -1233,13 +1233,13 @@ static void UpdateMonPic(u8 loadId)
             gSprites[sMenu->curMonSpriteId].callback = SpriteCB_MonPic;
             gSprites[sMenu->curMonSpriteId].y2 -= 34;
             sMenu->curMonTileStart = (void *)(OBJ_VRAM0 + (sMenu->curMonSheet * 32));
-            sMenu->curMonPalette = (sMenu->curMonPalette * 16) + 0x100;
+            sMenu->curMonPalette = OBJ_PLTT_ID(sMenu->curMonPalette);
         }
     }
     else
     {
         Dma3CopyLarge16_(sMenu->partySheets[loadId], sMenu->curMonTileStart, MON_PIC_SIZE);
-        LoadPalette(sMenu->partyPalettes[loadId], sMenu->curMonPalette, 32);
+        LoadPalette(sMenu->partyPalettes[loadId], sMenu->curMonPalette, PLTT_SIZE_4BPP);
     }
 }
 
@@ -1340,7 +1340,7 @@ static bool8 LoadUsePokeblockMenuGfx(void)
          LoadBgTilemap(3, sMonFrame_TilemapPtr, 1280, 0);
         break;
     case 5:
-        LoadPalette(sMonFrame_Pal, 208, 32);
+        LoadPalette(sMonFrame_Pal, BG_PLTT_ID(0xD), PLTT_SIZE_4BPP);
         sMenu->curMonXOffset = -80;
         break;
     case 6:
@@ -1348,7 +1348,7 @@ static bool8 LoadUsePokeblockMenuGfx(void)
         break;
     case 7:
         LZ77UnCompVram(gUsePokeblockGraph_Tilemap, sGraph_Tilemap);
-        LoadPalette(gUsePokeblockGraph_Pal, 32, 32);
+        LoadPalette(gUsePokeblockGraph_Pal, BG_PLTT_ID(0x2), PLTT_SIZE_4BPP);
         break;
     case 8:
         LoadBgTiles(1, sGraph_Gfx, 6656, 160 << 2);
@@ -1363,8 +1363,8 @@ static bool8 LoadUsePokeblockMenuGfx(void)
         break;
     case 11:
         LoadBgTilemap(2, sMenu->tilemapBuffer, 1280, 0);
-        LoadPalette(gConditionGraphData_Pal, 48, 32);
-        LoadPalette(gConditionText_Pal, 240, 32);
+        LoadPalette(gConditionGraphData_Pal, BG_PLTT_ID(0x3), PLTT_SIZE_4BPP);
+        LoadPalette(gConditionText_Pal, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
         ConditionGraph_InitWindow(2);
         break;
     default:

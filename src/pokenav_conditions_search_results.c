@@ -2,6 +2,7 @@
 #include "pokenav.h"
 #include "bg.h"
 #include "menu.h"
+#include "palette.h"
 #include "window.h"
 #include "sound.h"
 #include "dynamic_placeholder_text_util.h"
@@ -120,7 +121,7 @@ static const struct WindowTemplate sSearchResultListMenuWindowTemplate =
     .tilemapTop = 6,
     .width = 7,
     .height = 2,
-    .paletteNum = 1,
+    .paletteNum = 0x1,
     .baseBlock = 20
 };
 
@@ -431,7 +432,7 @@ static u32 LoopedTask_OpenConditionSearchResults(s32 state)
         SetBgTilemapBuffer(1, gfx->buff);
         CopyToBgTilemapBuffer(1, sConditionSearchResultTilemap, 0, 0);
         CopyBgTilemapBufferToVram(1);
-        CopyPaletteIntoBufferUnfaded(sConditionSearchResultFramePal, 0x10, 0x20);
+        CopyPaletteIntoBufferUnfaded(sConditionSearchResultFramePal, BG_PLTT_ID(0x1), PLTT_SIZE_4BPP);
         CopyBgTilemapBufferToVram(1);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -443,7 +444,7 @@ static u32 LoopedTask_OpenConditionSearchResults(s32 state)
     case 2:
         if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
-        CopyPaletteIntoBufferUnfaded(sListBg_Pal, 0x20, 32);
+        CopyPaletteIntoBufferUnfaded(sListBg_Pal, BG_PLTT_ID(0x2), PLTT_SIZE_4BPP);
         CreateSearchResultsList();
         return LT_INC_AND_PAUSE;
     case 3:

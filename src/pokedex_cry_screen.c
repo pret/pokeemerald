@@ -258,7 +258,7 @@ bool8 LoadCryWaveformWindow(struct CryScreenWindow *window, u8 windowId)
         break;
     case 2:
         DrawWaveformWindow(windowId);
-        LoadPalette(sCryScreenBg_Pal, window->paletteNo * 16, 32);
+        LoadPalette(sCryScreenBg_Pal, BG_PLTT_ID(window->paletteNo), PLTT_SIZE_4BPP);
         finished = TRUE;
         break;
     }
@@ -458,7 +458,7 @@ bool8 LoadCryMeter(struct CryScreenWindow *window, u8 windowId)
             sCryMeterNeedle = AllocZeroed(sizeof(*sCryMeterNeedle));
 
         CopyToWindowPixelBuffer(windowId, sCryMeter_Gfx, 0, 0);
-        LoadPalette(sCryMeter_Pal, window->paletteNo * 16, 32);
+        LoadPalette(sCryMeter_Pal, BG_PLTT_ID(window->paletteNo), PLTT_SIZE_4BPP);
         gDexCryScreenState++;
         break;
     case 1:

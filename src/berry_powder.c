@@ -4,6 +4,7 @@
 #include "event_data.h"
 #include "load_save.h"
 #include "menu.h"
+#include "palette.h"
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
@@ -67,7 +68,7 @@ static const struct WindowTemplate sBerryPowderWindowTemplates[] =
         .tilemapTop = 1,
         .width = 28,
         .height = 2,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 19
     },
     {
@@ -76,7 +77,7 @@ static const struct WindowTemplate sBerryPowderWindowTemplates[] =
         .tilemapTop = 5,
         .width = 28,
         .height = 14,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 75
     },
     {
@@ -85,7 +86,7 @@ static const struct WindowTemplate sBerryPowderWindowTemplates[] =
         .tilemapTop = 5,
         .width = 28,
         .height = 7,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 75
     },
     {
@@ -94,7 +95,7 @@ static const struct WindowTemplate sBerryPowderWindowTemplates[] =
         .tilemapTop = 8,
         .width = 19,
         .height = 3,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 19
     },
     {
@@ -103,7 +104,7 @@ static const struct WindowTemplate sBerryPowderWindowTemplates[] =
         .tilemapTop = 7,
         .width = 6,
         .height = 4,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 76
     },
     {
@@ -112,7 +113,7 @@ static const struct WindowTemplate sBerryPowderWindowTemplates[] =
         .tilemapTop = 6,
         .width = 22,
         .height = 5,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 19
     },
     {
@@ -121,7 +122,7 @@ static const struct WindowTemplate sBerryPowderWindowTemplates[] =
         .tilemapTop = 8,
         .width = 19,
         .height = 3,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 19
     },
 };
@@ -228,7 +229,7 @@ void DisplayBerryPowderVendorMenu(void)
     sBerryPowderVendorWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sBerryPowderVendorWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sBerryPowderVendorWindowId);
-    LoadUserWindowBorderGfx_(sBerryPowderVendorWindowId, 0x21D, 0xD0);
+    LoadUserWindowBorderGfx_(sBerryPowderVendorWindowId, 0x21D, BG_PLTT_ID(0xD));
     DrawPlayerPowderAmount(sBerryPowderVendorWindowId, 0x21D, 13, GetBerryPowder());
 }
 

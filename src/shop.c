@@ -120,7 +120,7 @@ static const struct WindowTemplate sShopMenuWindowTemplates[] =
         .tilemapTop = 1,
         .width = 9,
         .height = 6,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x0008,
     },
     {
@@ -129,7 +129,7 @@ static const struct WindowTemplate sShopMenuWindowTemplates[] =
         .tilemapTop = 1,
         .width = 9,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x0008,
     }
 };
@@ -204,7 +204,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplates[] =
         .tilemapTop = 1,
         .width = 10,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x001E,
     },
     {
@@ -213,7 +213,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplates[] =
         .tilemapTop = 2,
         .width = 15,
         .height = 16,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x0032,
     },
     {
@@ -222,7 +222,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplates[] =
         .tilemapTop = 13,
         .width = 14,
         .height = 6,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x0122,
     },
     {
@@ -231,7 +231,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplates[] =
         .tilemapTop = 11,
         .width = 12,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x0176,
     },
     {
@@ -240,7 +240,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplates[] =
         .tilemapTop = 11,
         .width = 10,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x018E,
     },
     {
@@ -249,7 +249,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplates[] =
         .tilemapTop = 15,
         .width = 27,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x01A2,
     },
     DUMMY_WIN_TEMPLATE
@@ -262,7 +262,7 @@ static const struct WindowTemplate sShopBuyMenuYesNoWindowTemplates =
     .tilemapTop = 9,
     .width = 5,
     .height = 4,
-    .paletteNum = 15,
+    .paletteNum = 0xF,
     .baseBlock = 0x020E,
 };
 
@@ -676,15 +676,15 @@ static void BuyMenuDecompressBgGraphics(void)
 {
     DecompressAndCopyTileDataToVram(1, gShopMenu_Gfx, 0x3A0, 0x3E3, 0);
     LZDecompressWram(gShopMenu_Tilemap, sShopData->tilemapBuffers[0]);
-    LoadCompressedPalette(gShopMenu_Pal, 0xC0, 0x20);
+    LoadCompressedPalette(gShopMenu_Pal, BG_PLTT_ID(0xC), PLTT_SIZE_4BPP);
 }
 
 static void BuyMenuInitWindows(void)
 {
     InitWindows(sShopBuyMenuWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 1, 0xD0);
-    LoadMessageBoxGfx(0, 0xA, 0xE0);
+    LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(0xD));
+    LoadMessageBoxGfx(0, 0xA, BG_PLTT_ID(0xE));
     PutWindowTilemap(0);
     PutWindowTilemap(1);
     PutWindowTilemap(2);

@@ -103,7 +103,7 @@ static const struct WindowTemplate sWindowTemplate_Text[] =
         .tilemapTop = 13,
         .width = 28,
         .height = 6,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 1,
     }
 };
@@ -116,7 +116,7 @@ static const struct WindowTemplate sWindowTemplate_Clock[] =
         .tilemapTop = 9,
         .width = 2,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 169,
     }
 };
@@ -214,10 +214,10 @@ static void CB2_SaveFailedScreen(void)
         ResetSpriteData();
         ResetTasks();
         ResetPaletteFade();
-        LoadPalette(gBirchBagGrassPal, 0, 0x40);
-        LoadPalette(sSaveFailedClockPal, 0x100, 0x20);
-        LoadPalette(gTextWindowFrame1_Pal, 0xE0, 0x20);
-        LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
+        LoadPalette(gBirchBagGrassPal, BG_PLTT_ID(0x0), 2 * PLTT_SIZE_4BPP);
+        LoadPalette(sSaveFailedClockPal, OBJ_PLTT_ID(0x0), PLTT_SIZE_4BPP);
+        LoadPalette(gTextWindowFrame1_Pal, BG_PLTT_ID(0xE), PLTT_SIZE_4BPP);
+        LoadPalette(gStandardMenuPalette, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
         DrawStdFrameWithCustomTileAndPalette(sWindowIds[TEXT_WIN_ID], FALSE, 0x214, 0xE);
         DrawStdFrameWithCustomTileAndPalette(sWindowIds[CLOCK_WIN_ID], FALSE, 0x214, 0xE);
         FillWindowPixelBuffer(sWindowIds[CLOCK_WIN_ID], PIXEL_FILL(1)); // backwards?

@@ -96,7 +96,7 @@ static const struct WindowTemplate sCard_WindowTemplates[] = {
         .tilemapTop = 1,
         .width = 25,
         .height = 4,
-        .paletteNum = 2,
+        .paletteNum = 0x2,
         .baseBlock = 0x029c
     },
     [CARD_WIN_BODY] = {
@@ -105,7 +105,7 @@ static const struct WindowTemplate sCard_WindowTemplates[] = {
         .tilemapTop = 6,
         .width = 28,
         .height = 8,
-        .paletteNum = 2,
+        .paletteNum = 0x2,
         .baseBlock = 0x01bc
     },
     [CARD_WIN_FOOTER] = {
@@ -114,7 +114,7 @@ static const struct WindowTemplate sCard_WindowTemplates[] = {
         .tilemapTop = 14,
         .width = 28,
         .height = 5,
-        .paletteNum = 2,
+        .paletteNum = 0x2,
         .baseBlock = 0x0130
     }
 };
@@ -239,11 +239,11 @@ s32 WonderCard_Enter(void)
     case 3:
         if (FreeTempTileDataBuffersIfPossible())
             return 0;
-        LoadPalette(GetTextWindowPalette(1), 0x20, 0x20);
+        LoadPalette(GetTextWindowPalette(1), BG_PLTT_ID(0x2), PLTT_SIZE_4BPP);
         gPaletteFade.bufferTransferDisabled = TRUE;
-        LoadPalette(sWonderCardData->gfx->pal, 0x10, 0x20);
+        LoadPalette(sWonderCardData->gfx->pal, BG_PLTT_ID(0x1), PLTT_SIZE_4BPP);
         LZ77UnCompWram(sWonderCardData->gfx->map, sWonderCardData->bgTilemapBuffer);
-        CopyRectToBgTilemapBufferRect(2, sWonderCardData->bgTilemapBuffer, 0, 0, 30, 20, 0, 0, 30, 20, 1, 0x008, 0);
+        CopyRectToBgTilemapBufferRect(2, sWonderCardData->bgTilemapBuffer, 0, 0, 30, 20, 0, 0, 30, 20, 0x1, 0x008, 0);
         CopyBgTilemapBufferToVram(2);
         break;
     case 4:
@@ -586,7 +586,7 @@ static const struct WindowTemplate sNews_WindowTemplates[] = {
         .tilemapTop = 0,
         .width = 28,
         .height = 3,
-        .paletteNum = 2,
+        .paletteNum = 0x2,
         .baseBlock = 0x2AC
     },
     [NEWS_WIN_BODY] = {
@@ -595,7 +595,7 @@ static const struct WindowTemplate sNews_WindowTemplates[] = {
         .tilemapTop = 3,
         .width = 28,
         .height = 20,
-        .paletteNum = 2,
+        .paletteNum = 0x2,
         .baseBlock = 0x07C
     }
 };
@@ -702,12 +702,12 @@ s32 WonderNews_Enter(void)
     case 3:
         if (FreeTempTileDataBuffersIfPossible())
             return 0;
-        LoadPalette(GetTextWindowPalette(1), 0x20, 0x20);
+        LoadPalette(GetTextWindowPalette(1), BG_PLTT_ID(0x2), PLTT_SIZE_4BPP);
         gPaletteFade.bufferTransferDisabled = TRUE;
-        LoadPalette(sWonderNewsData->gfx->pal, 0x10, 0x20);
+        LoadPalette(sWonderNewsData->gfx->pal, BG_PLTT_ID(0x1), PLTT_SIZE_4BPP);
         LZ77UnCompWram(sWonderNewsData->gfx->map, sWonderNewsData->bgTilemapBuffer);
-        CopyRectToBgTilemapBufferRect(1, sWonderNewsData->bgTilemapBuffer, 0, 0, 30, 3, 0, 0, 30, 3, 1, 8, 0);
-        CopyRectToBgTilemapBufferRect(3, sWonderNewsData->bgTilemapBuffer, 0, 3, 30, 23, 0, 3, 30, 23, 1, 8, 0);
+        CopyRectToBgTilemapBufferRect(1, sWonderNewsData->bgTilemapBuffer, 0, 0, 30, 3, 0, 0, 30, 3, 0x1, 8, 0);
+        CopyRectToBgTilemapBufferRect(3, sWonderNewsData->bgTilemapBuffer, 0, 3, 30, 23, 0, 3, 30, 23, 0x1, 8, 0);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(3);
         break;

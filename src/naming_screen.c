@@ -233,7 +233,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
         .tilemapTop = 10,
         .width = 19,
         .height = 8,
-        .paletteNum = 10,
+        .paletteNum = 0xA,
         .baseBlock = 0x030
     },
     [WIN_KB_PAGE_2] = {
@@ -242,7 +242,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
         .tilemapTop = 10,
         .width = 19,
         .height = 8,
-        .paletteNum = 10,
+        .paletteNum = 0xA,
         .baseBlock = 0x0C8
     },
     [WIN_TEXT_ENTRY] = {
@@ -251,7 +251,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
         .tilemapTop = 6,
         .width = 17,
         .height = 2,
-        .paletteNum = 10,
+        .paletteNum = 0xA,
         .baseBlock = 0x030
     },
     [WIN_TEXT_ENTRY_BOX] = {
@@ -260,7 +260,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
         .tilemapTop = 4,
         .width = 17,
         .height = 2,
-        .paletteNum = 10,
+        .paletteNum = 0xA,
         .baseBlock = 0x052
     },
     [WIN_BANNER] = {
@@ -269,7 +269,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
         .tilemapTop = 0,
         .width = 30,
         .height = 2,
-        .paletteNum = 11,
+        .paletteNum = 0xB,
         .baseBlock = 0x074
     },
     DUMMY_WIN_TEMPLATE
@@ -1880,9 +1880,9 @@ static void CreateHelperTasks(void)
 
 static void LoadPalettes(void)
 {
-    LoadPalette(gNamingScreenMenu_Pal, 0, sizeof(gNamingScreenMenu_Pal));
-    LoadPalette(sKeyboard_Pal, 0xA0, sizeof(sKeyboard_Pal));
-    LoadPalette(GetTextWindowPalette(2), 0xB0, 0x20);
+    LoadPalette(gNamingScreenMenu_Pal, BG_PLTT_ID(0x0), sizeof(gNamingScreenMenu_Pal));
+    LoadPalette(sKeyboard_Pal, BG_PLTT_ID(0xA), sizeof(sKeyboard_Pal));
+    LoadPalette(GetTextWindowPalette(2), BG_PLTT_ID(0xB), PLTT_SIZE_4BPP);
 }
 
 static void DrawBgTilemap(u8 bg, const void *src)

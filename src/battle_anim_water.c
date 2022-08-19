@@ -825,9 +825,9 @@ void AnimTask_CreateSurfWave(u8 taskId)
     }
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Surf, animBg.tilesOffset);
     if (gBattleAnimArgs[0] == 0)
-        LoadCompressedPalette(gBattleAnimBgPalette_Surf, animBg.paletteId * 16, 32);
+        LoadCompressedPalette(gBattleAnimBgPalette_Surf, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
     else
-        LoadCompressedPalette(gBattleAnimBackgroundImageMuddyWater_Pal, animBg.paletteId * 16, 32);
+        LoadCompressedPalette(gBattleAnimBackgroundImageMuddyWater_Pal, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
     taskId2 = CreateTask(AnimTask_SurfWaveScanlineEffect, gTasks[taskId].priority + 1);
     gTasks[taskId].data[15] = taskId2;
     gTasks[taskId2].data[0] = 0;

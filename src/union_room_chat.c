@@ -566,7 +566,7 @@ static const struct WindowTemplate sWinTemplates[] = {
         .tilemapTop = 1,
         .width = 21,
         .height = 19,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x0001,
     }, {
         .bg = 1,
@@ -574,7 +574,7 @@ static const struct WindowTemplate sWinTemplates[] = {
         .tilemapTop = 18,
         .width = 15,
         .height = 2,
-        .paletteNum = 12,
+        .paletteNum = 0xC,
         .baseBlock = 0x007a,
     }, {
         .bg = 1,
@@ -582,7 +582,7 @@ static const struct WindowTemplate sWinTemplates[] = {
         .tilemapTop = 2,
         .width = 6,
         .height = 15,
-        .paletteNum = 7,
+        .paletteNum = 0x7,
         .baseBlock = 0x0020,
     }, {
         .bg = 0,
@@ -590,7 +590,7 @@ static const struct WindowTemplate sWinTemplates[] = {
         .tilemapTop = 2,
         .width = 7,
         .height = 9,
-        .paletteNum = 14,
+        .paletteNum = 0xE,
         .baseBlock = 0x0013,
     }, DUMMY_WIN_TEMPLATE
 };
@@ -2732,7 +2732,7 @@ static void AddYesNoMenuAt(u8 left, u8 top, u8 initialCursorPos)
     template.tilemapTop = top;
     template.width = 6;
     template.height = 4;
-    template.paletteNum = 14;
+    template.paletteNum = 0xE;
     template.baseBlock = 0x52;
     sDisplay->yesNoMenuWindowId = AddWindow(&template);
     if (sDisplay->yesNoMenuWindowId != WINDOW_NONE)
@@ -2741,7 +2741,7 @@ static void AddYesNoMenuAt(u8 left, u8 top, u8 initialCursorPos)
         PutWindowTilemap(sDisplay->yesNoMenuWindowId);
         AddTextPrinterParameterized(sDisplay->yesNoMenuWindowId, FONT_NORMAL, gText_Yes, 8, 1, TEXT_SKIP_DRAW, NULL);
         AddTextPrinterParameterized(sDisplay->yesNoMenuWindowId, FONT_NORMAL, gText_No, 8, 17, TEXT_SKIP_DRAW, NULL);
-        DrawTextBorderOuter(sDisplay->yesNoMenuWindowId, 1, 13);
+        DrawTextBorderOuter(sDisplay->yesNoMenuWindowId, 1, 0xD);
         InitMenuInUpperLeftCornerNormal(sDisplay->yesNoMenuWindowId, 2, initialCursorPos);
     }
 }
@@ -2779,7 +2779,7 @@ static void AddStdMessageWindow(int msgId, u16 bg0vofs)
     template.tilemapTop = 16;
     template.width = 21;
     template.height = 4;
-    template.paletteNum = 14;
+    template.paletteNum = 0xE;
     template.baseBlock = 0x6A;
     if (sDisplayStdMessages[msgId].useWiderBox)
     {
@@ -3050,8 +3050,8 @@ static void ClearBg0(void)
 
 static void LoadChatWindowBorderGfx(void)
 {
-    LoadPalette(gUnionRoomChat_Window_Pal2, 0x70, 0x20);
-    LoadPalette(gUnionRoomChat_Window_Pal1, 0xC0, 0x20);
+    LoadPalette(gUnionRoomChat_Window_Pal2, BG_PLTT_ID(0x7), PLTT_SIZE_4BPP);
+    LoadPalette(gUnionRoomChat_Window_Pal1, BG_PLTT_ID(0xC), PLTT_SIZE_4BPP);
     DecompressAndCopyTileDataToVram(1, gUnionRoomChat_Border_Gfx, 0, 0, 0);
     CopyToBgTilemapBuffer(1, gUnionRoomChat_Border_Tilemap, 0, 0);
     CopyBgTilemapBufferToVram(1);
@@ -3061,7 +3061,7 @@ static void LoadChatWindowGfx(void)
 {
     u8 *ptr;
 
-    LoadPalette(gUnionRoomChat_Background_Pal, 0, 0x20);
+    LoadPalette(gUnionRoomChat_Background_Pal, BG_PLTT_ID(0x0), PLTT_SIZE_4BPP);
     ptr = DecompressAndCopyTileDataToVram(2, gUnionRoomChat_Background_Gfx, 0, 0, 0);
     if (ptr)
     {
@@ -3075,13 +3075,13 @@ static void LoadChatWindowGfx(void)
 
 static void LoadChatUnkPalette(void)
 {
-    LoadPalette(sUnk_Palette1, 0x80, sizeof(sUnk_Palette1));
+    LoadPalette(sUnk_Palette1, BG_PLTT_ID(0x8), sizeof(sUnk_Palette1));
     RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + 0x20, 0x20, 1);
 }
 
 static void LoadChatMessagesWindow(void)
 {
-    LoadPalette(sUnk_Palette2, 0xF0, sizeof(sUnk_Palette2));
+    LoadPalette(sUnk_Palette2, BG_PLTT_ID(0xF), sizeof(sUnk_Palette2));
     PutWindowTilemap(0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     CopyWindowToVram(0, COPYWIN_FULL);
@@ -3112,9 +3112,9 @@ static void LoadTextEntryWindow(void)
 static void LoadKeyboardSwapWindow(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
-    LoadUserWindowBorderGfx(3, 1, 0xD0);
-    LoadUserWindowBorderGfx_(3, 0xA, 0x20);
-    LoadPalette(gStandardMenuPalette, 0xE0,  0x20);
+    LoadUserWindowBorderGfx(3, 1, BG_PLTT_ID(0xD));
+    LoadUserWindowBorderGfx_(3, 0xA, BG_PLTT_ID(0x2));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(0xE),  PLTT_SIZE_4BPP);
 }
 
 static void InitScanlineEffect(void)
@@ -3197,7 +3197,7 @@ static void SetRegisteredTextPalette(bool32 registering)
 {
     const u16 *palette = &sUnionRoomChatInterfacePal[registering * 2 + 1];
     u8 index = IndexOfSpritePaletteTag(PALTAG_INTERFACE);
-    LoadPalette(palette, index * 16 + 0x101, 4);
+    LoadPalette(palette, OBJ_PLTT_ID(index) + 1, PLTT_SIZEOF(2));
 }
 
 static void StartKeyboardCursorAnim(void)

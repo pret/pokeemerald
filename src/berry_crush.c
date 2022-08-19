@@ -473,7 +473,7 @@ static const struct WindowTemplate sWindowTemplate_Rankings =
     .tilemapTop = 4,
     .width = 24,
     .height = 13,
-    .paletteNum = 15,
+    .paletteNum = 0xF,
     .baseBlock = 1
 };
 
@@ -485,7 +485,7 @@ static const struct WindowTemplate sWindowTemplates_PlayerNames[MAX_RFU_PLAYERS 
         .tilemapTop = 0,
         .width = 9,
         .height = 2,
-        .paletteNum = 8,
+        .paletteNum = 0x8,
         .baseBlock = 1005
     },
     {
@@ -494,7 +494,7 @@ static const struct WindowTemplate sWindowTemplates_PlayerNames[MAX_RFU_PLAYERS 
         .tilemapTop = 3,
         .width = 9,
         .height = 2,
-        .paletteNum = 8,
+        .paletteNum = 0x8,
         .baseBlock = 987
     },
     {
@@ -503,7 +503,7 @@ static const struct WindowTemplate sWindowTemplates_PlayerNames[MAX_RFU_PLAYERS 
         .tilemapTop = 6,
         .width = 9,
         .height = 2,
-        .paletteNum = 8,
+        .paletteNum = 0x8,
         .baseBlock = 969
     },
     {
@@ -512,7 +512,7 @@ static const struct WindowTemplate sWindowTemplates_PlayerNames[MAX_RFU_PLAYERS 
         .tilemapTop = 3,
         .width = 9,
         .height = 2,
-        .paletteNum = 8,
+        .paletteNum = 0x8,
         .baseBlock = 951
     },
     {
@@ -521,7 +521,7 @@ static const struct WindowTemplate sWindowTemplates_PlayerNames[MAX_RFU_PLAYERS 
         .tilemapTop = 6,
         .width = 9,
         .height = 2,
-        .paletteNum = 8,
+        .paletteNum = 0x8,
         .baseBlock = 933
     },
     DUMMY_WIN_TEMPLATE,
@@ -535,7 +535,7 @@ static const struct WindowTemplate sWindowTemplates_Results[] =
         .tilemapTop = 2,
         .width = 20,
         .height = 16,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 1
     },
     [STATE_RESULTS_RANDOM - RESULTS_STATE_START] = {
@@ -544,7 +544,7 @@ static const struct WindowTemplate sWindowTemplates_Results[] =
         .tilemapTop = 2,
         .width = 20,
         .height = 16,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 1
     },
     [STATE_RESULTS_CRUSHING - RESULTS_STATE_START] = {
@@ -553,7 +553,7 @@ static const struct WindowTemplate sWindowTemplates_Results[] =
         .tilemapTop = 2,
         .width = 22,
         .height = 16,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 1
     },
     DUMMY_WIN_TEMPLATE,
@@ -1235,7 +1235,7 @@ static s32 ShowGameDisplay(void)
         gPaletteFade.bufferTransferDisabled = TRUE;
         break;
     case 7:
-        LoadPalette(gBerryCrush_Crusher_Pal, 0, 0x180);
+        LoadPalette(gBerryCrush_Crusher_Pal, BG_PLTT_ID(0x0), 12 * PLTT_SIZE_4BPP);
         CopyToBgTilemapBuffer(1, sCrusherTop_Tilemap, 0, 0);
         CopyToBgTilemapBuffer(2, sContainerCap_Tilemap, 0, 0);
         CopyToBgTilemapBuffer(3, sBg_Tilemap, 0, 0);
@@ -1751,8 +1751,8 @@ static bool32 OpenResultsWindow(struct BerryCrushGame *game, struct BerryCrushGa
         FillWindowPixelBuffer(gfx->resultsWindowId, PIXEL_FILL(0));
         break;
     case 2:
-        LoadUserWindowBorderGfx_(gfx->resultsWindowId, 541, 208);
-        DrawStdFrameWithCustomTileAndPalette(gfx->resultsWindowId, FALSE, 541, 13);
+        LoadUserWindowBorderGfx_(gfx->resultsWindowId, 541, BG_PLTT_ID(0xD));
+        DrawStdFrameWithCustomTileAndPalette(gfx->resultsWindowId, FALSE, 541, 0xD);
         break;
     case 3:
         playerCountIdx = game->playerCount - 2;
@@ -1809,8 +1809,8 @@ static void Task_ShowRankings(u8 taskId)
         tWindowId = AddWindow(&sWindowTemplate_Rankings);
         PutWindowTilemap(tWindowId);
         FillWindowPixelBuffer(tWindowId, PIXEL_FILL(0));
-        LoadUserWindowBorderGfx_(tWindowId, 541, 208);
-        DrawStdFrameWithCustomTileAndPalette(tWindowId, FALSE, 541, 13);
+        LoadUserWindowBorderGfx_(tWindowId, 541, BG_PLTT_ID(0xD));
+        DrawStdFrameWithCustomTileAndPalette(tWindowId, FALSE, 541, 0xD);
         break;
     case 1:
         // Print header text

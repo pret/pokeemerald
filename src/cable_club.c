@@ -41,7 +41,7 @@ static const struct WindowTemplate sWindowTemplate_LinkPlayerCount = {
     .tilemapTop = 11,
     .width = 11,
     .height = 2,
-    .paletteNum = 15,
+    .paletteNum = 0xF,
     .baseBlock = 0x0125,
 };
 

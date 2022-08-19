@@ -463,7 +463,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 7,
         .width = 22,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 30
     },
     {
@@ -472,7 +472,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 15,
         .width = 10,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 118
     },
     {
@@ -481,7 +481,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 5,
         .width = 8,
         .height = 2,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 158
     },
     {
@@ -490,7 +490,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 5,
         .width = 8,
         .height = 2,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 174
     },
     {
@@ -499,7 +499,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 10,
         .width = 8,
         .height = 2,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 190
     },
     {
@@ -508,7 +508,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 10,
         .width = 8,
         .height = 2,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 206
     },
     {
@@ -517,7 +517,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 15,
         .width = 8,
         .height = 2,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 222
     },
     {
@@ -526,7 +526,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 15,
         .width = 8,
         .height = 2,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 238
     },
     {
@@ -535,7 +535,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 5,
         .width = 8,
         .height = 2,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 254
     },
     {
@@ -544,7 +544,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 5,
         .width = 8,
         .height = 2,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 270
     },
     {
@@ -553,7 +553,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 10,
         .width = 8,
         .height = 2,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 286
     },
     {
@@ -562,7 +562,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 10,
         .width = 8,
         .height = 2,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 302
     },
     {
@@ -571,7 +571,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 15,
         .width = 8,
         .height = 2,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 318
     },
     {
@@ -580,7 +580,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 15,
         .width = 8,
         .height = 2,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 334
     },
     {
@@ -589,7 +589,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 5,
         .width = 14,
         .height = 2,
-        .paletteNum = 13,
+        .paletteNum = 0xD,
         .baseBlock = 350
     },
     {
@@ -598,7 +598,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 8,
         .width = 11,
         .height = 8,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 378
     },
     {
@@ -607,7 +607,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 5,
         .width = 14,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 466
     },
     {
@@ -616,7 +616,7 @@ static const struct WindowTemplate sTradeMenuWindowTemplates[] =
         .tilemapTop = 8,
         .width = 11,
         .height = 8,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 494
     },
     DUMMY_WIN_TEMPLATE,
@@ -629,7 +629,7 @@ static const struct WindowTemplate sTradeYesNoWindowTemplate =
     .tilemapTop = 13,
     .width = 5,
     .height = 4,
-    .paletteNum = 15,
+    .paletteNum = 0xF,
     .baseBlock = 582
 };
 
@@ -1112,7 +1112,7 @@ static const struct WindowTemplate sTradeSequenceWindowTemplates[] =
         .tilemapTop = 15,
         .width = 26,
         .height = 4,
-        .paletteNum = 0,
+        .paletteNum = 0x0,
         .baseBlock = 64
     },
     DUMMY_WIN_TEMPLATE
@@ -1125,7 +1125,7 @@ const struct WindowTemplate gTradeEvolutionSceneYesNoWindowTemplate =
     .tilemapTop = 9,
     .width = 5,
     .height = 4,
-    .paletteNum = 15,
+    .paletteNum = 0xF,
     .baseBlock = 188
 };
 

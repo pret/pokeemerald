@@ -108,7 +108,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 4,
         .width = 8,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 69,
     },
     { // WIN_SIZE_FIRM
@@ -117,7 +117,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 7,
         .width = 18,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 85,
     },
     { // WIN_DESC
@@ -126,7 +126,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 14,
         .width = 25,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 157,
     },
     { // WIN_BERRY_TAG
@@ -135,7 +135,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 0,
         .width = 8,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 257,
     },
     DUMMY_WIN_TEMPLATE
@@ -346,7 +346,7 @@ static bool8 LoadBerryTagGfx(void)
         sBerryTag->gfxState++;
         break;
     case 4:
-        LoadCompressedPalette(gBerryCheck_Pal, 0, 0xC0);
+        LoadCompressedPalette(gBerryCheck_Pal, BG_PLTT_ID(0x0), 6 * PLTT_SIZE_4BPP);
         sBerryTag->gfxState++;
         break;
     case 5:
@@ -367,7 +367,7 @@ static void HandleInitWindows(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadPalette(sFontPalette, 0xF0, 0x20);
+    LoadPalette(sFontPalette, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
     for (i = 0; i < ARRAY_COUNT(sWindowTemplates) - 1; i++)
         PutWindowTilemap(i);
     ScheduleBgCopyTilemapToVram(0);

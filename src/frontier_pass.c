@@ -253,7 +253,7 @@ static const struct WindowTemplate sPassWindowTemplates[WINDOW_COUNT] =
         .tilemapTop = 3,
         .width = 12,
         .height = 3,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x1,
     },
     [WINDOW_BATTLE_RECORD] = {
@@ -262,7 +262,7 @@ static const struct WindowTemplate sPassWindowTemplates[WINDOW_COUNT] =
         .tilemapTop = 10,
         .width = 12,
         .height = 3,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x26,
     },
     [WINDOW_BATTLE_POINTS] = {
@@ -271,7 +271,7 @@ static const struct WindowTemplate sPassWindowTemplates[WINDOW_COUNT] =
         .tilemapTop = 13,
         .width = 12,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x4B,
     },
     [WINDOW_DESCRIPTION] = {
@@ -280,7 +280,7 @@ static const struct WindowTemplate sPassWindowTemplates[WINDOW_COUNT] =
         .tilemapTop = 18,
         .width = 30,
         .height = 3,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x7C,
     },
     DUMMY_WIN_TEMPLATE
@@ -294,7 +294,7 @@ static const struct WindowTemplate sMapWindowTemplates[] =
         .tilemapTop = 1,
         .width = 15,
         .height = 5,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x1,
     },
     [MAP_WINDOW_NAME] = {
@@ -303,7 +303,7 @@ static const struct WindowTemplate sMapWindowTemplates[] =
         .tilemapTop = 1,
         .width = 10,
         .height = 14,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x4D,
     },
     [MAP_WINDOW_DESCRIPTION] = {
@@ -312,7 +312,7 @@ static const struct WindowTemplate sMapWindowTemplates[] =
         .tilemapTop = 16,
         .width = 26,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0xDA,
     },
     DUMMY_WIN_TEMPLATE
@@ -768,9 +768,9 @@ static bool32 InitFrontierPass(void)
         CopyBgTilemapBufferToVram(2);
         break;
     case 8:
-        LoadPalette(gFrontierPassBg_Pal[0], 0, 0x1A0);
-        LoadPalette(gFrontierPassBg_Pal[1 + sPassData->trainerStars], 0x10, 0x20);
-        LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
+        LoadPalette(gFrontierPassBg_Pal[0], 0, 13 * PLTT_SIZE_4BPP);
+        LoadPalette(gFrontierPassBg_Pal[1 + sPassData->trainerStars], BG_PLTT_ID(0x1), PLTT_SIZE_4BPP);
+        LoadPalette(GetTextWindowPalette(0), BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
         DrawFrontierPassBg();
         UpdateAreaHighlight(sPassData->cursorArea, sPassData->previousCursorArea);
         if (sPassData->areaToShow == CURSOR_AREA_MAP || sPassData->areaToShow == CURSOR_AREA_CARD)
@@ -1412,8 +1412,8 @@ static bool32 InitFrontierMap(void)
     case 5:
         if (FreeTempTileDataBuffersIfPossible())
             return FALSE;
-        LoadPalette(gFrontierPassBg_Pal[0], 0, 0x1A0);
-        LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
+        LoadPalette(gFrontierPassBg_Pal[0], BG_PLTT_ID(0x0), 13 * PLTT_SIZE_4BPP);
+        LoadPalette(GetTextWindowPalette(0), BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
         CopyToBgTilemapBuffer(2, sMapScreen_Tilemap, 0, 0);
         CopyBgTilemapBufferToVram(2);
         break;

@@ -820,7 +820,7 @@ static const struct WindowTemplate sEasyChatWindowTemplates[] = {
         .tilemapTop = 0,
         .width = 18,
         .height = 2,
-        .paletteNum = 10,
+        .paletteNum = 0xA,
         .baseBlock = 0x10,
     },
     {
@@ -829,7 +829,7 @@ static const struct WindowTemplate sEasyChatWindowTemplates[] = {
         .tilemapTop = 15,
         .width = 24,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0xA,
     },
     {
@@ -838,7 +838,7 @@ static const struct WindowTemplate sEasyChatWindowTemplates[] = {
         .tilemapTop = 0,
         .width = 28,
         .height = 32,
-        .paletteNum = 3,
+        .paletteNum = 0x3,
         .baseBlock = 0,
     },
     DUMMY_WIN_TEMPLATE,
@@ -850,7 +850,7 @@ static const struct WindowTemplate sEasyChatYesNoWindowTemplate = {
     .tilemapTop = 9,
     .width = 5,
     .height = 4,
-    .paletteNum = 15,
+    .paletteNum = 0xF,
     .baseBlock = 0x6A,
 };
 
@@ -3911,13 +3911,13 @@ static void InitEasyChatBgs(void)
 static void LoadEasyChatPalettes(void)
 {
     ResetPaletteFade();
-    LoadPalette(gEasyChatMode_Pal, 0, 32);
-    LoadPalette(sTextInputFrameOrange_Pal, 1 * 16, 32);
-    LoadPalette(sTextInputFrameGreen_Pal, 4 * 16, 32);
-    LoadPalette(sTitleText_Pal, 10 * 16, 8);
-    LoadPalette(sText_Pal, 11 * 16, 12);
-    LoadPalette(sText_Pal, 15 * 16, 12);
-    LoadPalette(sText_Pal, 3 * 16, 12);
+    LoadPalette(gEasyChatMode_Pal, BG_PLTT_ID(0x0), PLTT_SIZE_4BPP);
+    LoadPalette(sTextInputFrameOrange_Pal, BG_PLTT_ID(0x1), PLTT_SIZE_4BPP);
+    LoadPalette(sTextInputFrameGreen_Pal, BG_PLTT_ID(0x4), PLTT_SIZE_4BPP);
+    LoadPalette(sTitleText_Pal, BG_PLTT_ID(0xA), PLTT_SIZEOF(4));
+    LoadPalette(sText_Pal, BG_PLTT_ID(0xB), PLTT_SIZEOF(6));
+    LoadPalette(sText_Pal, BG_PLTT_ID(0xF), PLTT_SIZEOF(6));
+    LoadPalette(sText_Pal, BG_PLTT_ID(0x3), PLTT_SIZEOF(6));
 }
 
 static void PrintTitle(void)
@@ -3951,8 +3951,8 @@ static void PrintEasyChatTextWithColors(u8 windowId, u8 fontId, const u8 *str, u
 static void PrintInitialInstructions(void)
 {
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 17);
-    LoadUserWindowBorderGfx(1, 1, 0xE0);
-    DrawTextBorderOuter(1, 1, 14);
+    LoadUserWindowBorderGfx(1, 1, BG_PLTT_ID(0xE));
+    DrawTextBorderOuter(1, 1, 0xE);
     PrintEasyChatStdMessage(MSG_INSTRUCTIONS);
     PutWindowTilemap(1);
     CopyBgTilemapBufferToVram(0);
@@ -4024,7 +4024,7 @@ static void AddPhraseWindow(void)
     template.tilemapTop = sPhraseFrameDimensions[frameId].top;
     template.width = sPhraseFrameDimensions[frameId].width;
     template.height = sPhraseFrameDimensions[frameId].height;
-    template.paletteNum = 11;
+    template.paletteNum = 0xB;
     template.baseBlock = 0x6C;
     sScreenControl->windowId = AddWindow(&template);
     PutWindowTilemap(sScreenControl->windowId);
@@ -5069,7 +5069,7 @@ static void AddMainScreenButtonWindow(void)
     template.tilemapTop = 11;
     template.width = 28;
     template.height = 2;
-    template.paletteNum = 11;
+    template.paletteNum = 0xB;
     template.baseBlock = 0x34;
     windowId = AddWindow(&template);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));

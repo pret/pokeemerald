@@ -638,7 +638,7 @@ static const struct WindowTemplate sFrontierResultsWindowTemplate =
     .tilemapTop = 1,
     .width = 28,
     .height = 18,
-    .paletteNum = 15,
+    .paletteNum = 0xF,
     .baseBlock = 1
 };
 
@@ -649,7 +649,7 @@ static const struct WindowTemplate sLinkContestResultsWindowTemplate =
     .tilemapTop = 2,
     .width = 26,
     .height = 15,
-    .paletteNum = 15,
+    .paletteNum = 0xF,
     .baseBlock = 1
 };
 
@@ -660,7 +660,7 @@ static const struct WindowTemplate sRankingHallRecordsWindowTemplate =
     .tilemapTop = 1,
     .width = 26,
     .height = 17,
-    .paletteNum = 15,
+    .paletteNum = 0xF,
     .baseBlock = 1
 };
 

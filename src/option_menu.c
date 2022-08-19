@@ -102,7 +102,7 @@ static const struct WindowTemplate sOptionMenuWinTemplates[] =
         .tilemapTop = 1,
         .width = 26,
         .height = 2,
-        .paletteNum = 1,
+        .paletteNum = 0x1,
         .baseBlock = 2
     },
     {
@@ -111,7 +111,7 @@ static const struct WindowTemplate sOptionMenuWinTemplates[] =
         .tilemapTop = 5,
         .width = 26,
         .height = 14,
-        .paletteNum = 1,
+        .paletteNum = 0x1,
         .baseBlock = 0x36
     },
     DUMMY_WIN_TEMPLATE
@@ -207,12 +207,12 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 4:
-        LoadPalette(sOptionMenuBg_Pal, 0, sizeof(sOptionMenuBg_Pal));
-        LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, 0x70, 0x20);
+        LoadPalette(sOptionMenuBg_Pal, BG_PLTT_ID(0x0), sizeof(sOptionMenuBg_Pal));
+        LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, BG_PLTT_ID(0x7), PLTT_SIZE_4BPP);
         gMain.state++;
         break;
     case 5:
-        LoadPalette(sOptionMenuText_Pal, 16, sizeof(sOptionMenuText_Pal));
+        LoadPalette(sOptionMenuText_Pal, BG_PLTT_ID(0x1), sizeof(sOptionMenuText_Pal));
         gMain.state++;
         break;
     case 6:
@@ -529,7 +529,7 @@ static u8 FrameType_ProcessInput(u8 selection)
             selection = 0;
 
         LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
-        LoadPalette(GetWindowFrameTilesPal(selection)->pal, 0x70, 0x20);
+        LoadPalette(GetWindowFrameTilesPal(selection)->pal, BG_PLTT_ID(0x7), PLTT_SIZE_4BPP);
         sArrowPressed = TRUE;
     }
     if (JOY_NEW(DPAD_LEFT))
@@ -540,7 +540,7 @@ static u8 FrameType_ProcessInput(u8 selection)
             selection = WINDOW_FRAMES_COUNT - 1;
 
         LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
-        LoadPalette(GetWindowFrameTilesPal(selection)->pal, 0x70, 0x20);
+        LoadPalette(GetWindowFrameTilesPal(selection)->pal, BG_PLTT_ID(0x7), PLTT_SIZE_4BPP);
         sArrowPressed = TRUE;
     }
     return selection;
@@ -653,24 +653,24 @@ static void DrawBgWindowFrames(void)
 {
     //                     bg, tile,              x, y, width, height, palNum
     // Draw title window frame
-    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1,  0,  1,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2,  0, 27,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28,  0,  1,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1,  1,  1,  2,  7);
-    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28,  1,  1,  2,  7);
-    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1,  3,  1,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2,  3, 27,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28,  3,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1,  0,  1,  1,  0x7);
+    FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2,  0, 27,  1,  0x7);
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28,  0,  1,  1,  0x7);
+    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1,  1,  1,  2,  0x7);
+    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28,  1,  1,  2,  0x7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1,  3,  1,  1,  0x7);
+    FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2,  3, 27,  1,  0x7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28,  3,  1,  1,  0x7);
 
     // Draw options list window frame
-    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1,  4,  1,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2,  4, 26,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28,  4,  1,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1,  5,  1, 18,  7);
-    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28,  5,  1, 18,  7);
-    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1, 19,  1,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2, 19, 26,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28, 19,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1,  4,  1,  1,  0x7);
+    FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2,  4, 26,  1,  0x7);
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28,  4,  1,  1,  0x7);
+    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1,  5,  1, 18,  0x7);
+    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28,  5,  1, 18,  0x7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1, 19,  1,  1,  0x7);
+    FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2, 19, 26,  1,  0x7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28, 19,  1,  1,  0x7);
 
     CopyBgTilemapBufferToVram(1);
 }

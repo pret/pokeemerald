@@ -66,7 +66,7 @@ void CreateAvailableDecorationsMenu(u8 taskId)
         .tilemapTop = 1,
         .width = 10,
         .height = 10,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 1
     };
     s32 windowWidth = GetStringWidth(FONT_NORMAL, gText_Exit, 0);

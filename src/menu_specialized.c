@@ -48,7 +48,7 @@ static const struct WindowTemplate sWindowTemplates_MailboxMenu[MAILBOXWIN_COUNT
         .tilemapTop = 1,
         .width = 8,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x8
     },
     [MAILBOXWIN_LIST] = {
@@ -57,7 +57,7 @@ static const struct WindowTemplate sWindowTemplates_MailboxMenu[MAILBOXWIN_COUNT
         .tilemapTop = 1,
         .width = 8,
         .height = 18,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x18
     },
     [MAILBOXWIN_OPTIONS] = {
@@ -66,7 +66,7 @@ static const struct WindowTemplate sWindowTemplates_MailboxMenu[MAILBOXWIN_COUNT
         .tilemapTop = 1,
         .width = 11,
         .height = 8,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x18
     }
 };
@@ -707,8 +707,8 @@ void InitMoveRelearnerWindows(bool8 useContextWindow)
 
     InitWindows(sMoveRelearnerWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 1, 0xE0);
-    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
+    LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(0xE));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
 
     for (i = 0; i < ARRAY_COUNT(sMoveRelearnerWindowTemplates) - 1; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(1));

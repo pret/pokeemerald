@@ -3105,7 +3105,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 0,
         .width = 6,
         .height = 2,
-        .paletteNum = 2,
+        .paletteNum = 0x2,
         .baseBlock = 0x13,
     },
     [WIN_TIMES] = {
@@ -3114,7 +3114,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 0,
         .width = 6,
         .height = 2,
-        .paletteNum = 2,
+        .paletteNum = 0x2,
         .baseBlock = 0x1F,
     },
     DUMMY_WIN_TEMPLATE,
@@ -3183,21 +3183,21 @@ static void LoadPokeJumpGfx(void)
         ResetTempTileDataBuffers();
         LoadSpriteSheetsAndPalettes(sPokemonJumpGfx);
         InitDigitPrinters();
-        LoadPalette(sBg_Pal, 0, 0x20);
+        LoadPalette(sBg_Pal, BG_PLTT_ID(0x0), PLTT_SIZE_4BPP);
         DecompressAndCopyTileDataToVram(BG_SCENERY, sBg_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_SCENERY, sBg_Tilemap, 0, 0, 1);
-        LoadPalette(sVenusaur_Pal, 0x30, 0x20);
+        LoadPalette(sVenusaur_Pal, BG_PLTT_ID(0x3), PLTT_SIZE_4BPP);
         DecompressAndCopyTileDataToVram(BG_VENUSAUR, sVenusaur_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_VENUSAUR, sVenusaur_Tilemap, 0, 0, 1);
-        LoadPalette(sBonuses_Pal, 0x10, 0x20);
+        LoadPalette(sBonuses_Pal, BG_PLTT_ID(0x1), PLTT_SIZE_4BPP);
         DecompressAndCopyTileDataToVram(BG_BONUSES, sBonuses_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_BONUSES, sBonuses_Tilemap, 0, 0, 1);
-        LoadPalette(sInterface_Pal, 0x20, 0x20);
+        LoadPalette(sInterface_Pal, BG_PLTT_ID(0x2), PLTT_SIZE_4BPP);
         SetBgTilemapBuffer(BG_INTERFACE, sPokemonJumpGfx->tilemapBuffer);
         FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 0x20, 0x20);
         PrintScoreSuffixes();
         PrintScore(0);
-        LoadUserWindowBorderGfxOnBg(0, 1, 0xE0);
+        LoadUserWindowBorderGfxOnBg(0, 1, BG_PLTT_ID(0xE));
         CopyBgTilemapBufferToVram(BG_INTERFACE);
         CopyBgTilemapBufferToVram(BG_VENUSAUR);
         CopyBgTilemapBufferToVram(BG_BONUSES);
@@ -3321,7 +3321,7 @@ static void Msg_WantToPlayAgain(void)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             PutWindowTilemap(sPokemonJumpGfx->msgWindowId);
-            DrawTextBorderOuter(sPokemonJumpGfx->msgWindowId, 1, 14);
+            DrawTextBorderOuter(sPokemonJumpGfx->msgWindowId, 1, 0xE);
             CreatePokeJumpYesNoMenu(23, 7, 0);
             CopyBgTilemapBufferToVram(BG_INTERFACE);
             sPokemonJumpGfx->mainState++;
@@ -3348,7 +3348,7 @@ static void Msg_SavingDontTurnOff(void)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             PutWindowTilemap(sPokemonJumpGfx->msgWindowId);
-            DrawTextBorderOuter(sPokemonJumpGfx->msgWindowId, 1, 14);
+            DrawTextBorderOuter(sPokemonJumpGfx->msgWindowId, 1, 0xE);
             CopyBgTilemapBufferToVram(BG_INTERFACE);
             sPokemonJumpGfx->mainState++;
         }
@@ -3391,7 +3391,7 @@ static void Msg_SomeoneDroppedOut(void)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             PutWindowTilemap(sPokemonJumpGfx->msgWindowId);
-            DrawTextBorderOuter(sPokemonJumpGfx->msgWindowId, 1, 14);
+            DrawTextBorderOuter(sPokemonJumpGfx->msgWindowId, 1, 0xE);
             CopyBgTilemapBufferToVram(BG_INTERFACE);
             sPokemonJumpGfx->mainState++;
         }
@@ -3417,7 +3417,7 @@ static void Msg_CommunicationStandby(void)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             PutWindowTilemap(sPokemonJumpGfx->msgWindowId);
-            DrawTextBorderOuter(sPokemonJumpGfx->msgWindowId, 1, 14);
+            DrawTextBorderOuter(sPokemonJumpGfx->msgWindowId, 1, 0xE);
             CopyBgTilemapBufferToVram(BG_INTERFACE);
             sPokemonJumpGfx->mainState++;
         }
@@ -3527,7 +3527,7 @@ static bool32 DoPrizeMessageAndFanfare(void)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             PutWindowTilemap(sPokemonJumpGfx->msgWindowId);
-            DrawTextBorderOuter(sPokemonJumpGfx->msgWindowId, 1, 14);
+            DrawTextBorderOuter(sPokemonJumpGfx->msgWindowId, 1, 0xE);
             CopyBgTilemapBufferToVram(BG_INTERFACE);
             sPokemonJumpGfx->msgWindowState++;
         }
@@ -3618,7 +3618,7 @@ static void CreatePokeJumpYesNoMenu(u16 left, u16 top, u8 cursorPos)
     window.tilemapTop = top;
     window.width = 6;
     window.height = 4;
-    window.paletteNum = 2;
+    window.paletteNum = 0x2;
     window.baseBlock = 0x2B;
 
     CreateYesNoMenu(&window, 1, 0xD, cursorPos);
@@ -3832,7 +3832,7 @@ static void AddPlayerNameWindows(void)
     window.bg = BG_INTERFACE;
     window.width = 8;
     window.height = 2;
-    window.paletteNum = 2;
+    window.paletteNum = 0x2;
     window.baseBlock = 0x2B;
 
     for (i = 0; i < playersCount; i++)
@@ -4142,7 +4142,7 @@ static const struct WindowTemplate sWindowTemplate_Records =
     .tilemapTop = 1,
     .width = 28,
     .height = 9,
-    .paletteNum = 15,
+    .paletteNum = 0xF,
     .baseBlock = 0x1,
 };
 
@@ -4213,7 +4213,7 @@ static void PrintRecordsText(u16 windowId, int width)
     recordNums[1] = records->bestJumpScore;
     recordNums[2] = records->excellentsInRow;
 
-    LoadUserWindowBorderGfx_(windowId, 0x21D, 0xD0);
+    LoadUserWindowBorderGfx_(windowId, 0x21D, BG_PLTT_ID(0xD));
     DrawTextBorderOuter(windowId, 0x21D, 0xD);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_PkmnJumpRecords, GetStringCenterAlignXOffset(FONT_NORMAL, gText_PkmnJumpRecords, width * 8), 1, TEXT_SKIP_DRAW, NULL);

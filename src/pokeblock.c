@@ -314,7 +314,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 1,
         .width = 9,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x1E
     },
     [WIN_LIST] = {
@@ -323,7 +323,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 1,
         .width = 14,
         .height = 18,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x30
     },
     [WIN_SPICY] = {
@@ -332,7 +332,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 13,
         .width = 5,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x12C
     },
     [WIN_DRY] = {
@@ -341,7 +341,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 15,
         .width = 5,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x136
     },
     [WIN_SWEET] = {
@@ -350,7 +350,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 17,
         .width = 5,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x140
     },
     [WIN_BITTER] = {
@@ -359,7 +359,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 13,
         .width = 5,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x14A
     },
     [WIN_SOUR] = {
@@ -368,7 +368,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 15,
         .width = 5,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x154
     },
     [WIN_FEEL] = {
@@ -377,7 +377,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 17,
         .width = 2,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x15E
     },
     [WIN_ACTIONS_TALL] = {
@@ -386,7 +386,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 5,
         .width = 6,
         .height = 6,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x162
     },
     [WIN_ACTIONS] = {
@@ -395,7 +395,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 7,
         .width = 6,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x186
     },
     [WIN_TOSS_MSG] = {
@@ -404,7 +404,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 15,
         .width = 27,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x19E
     },
     DUMMY_WIN_TEMPLATE
@@ -417,7 +417,7 @@ static const struct WindowTemplate sTossPkblockWindowTemplate =
     .tilemapTop = 9,
     .width = 5,
     .height = 4,
-    .paletteNum = 15,
+    .paletteNum = 0xF,
     .baseBlock = 0x20A
 };
 
@@ -653,7 +653,7 @@ static bool8 LoadPokeblockMenuGfx(void)
         }
         break;
     case 2:
-        LoadCompressedPalette(gMenuPokeblock_Pal, 0, 0xC0);
+        LoadCompressedPalette(gMenuPokeblock_Pal, BG_PLTT_ID(0x0), 6 * PLTT_SIZE_4BPP);
         sPokeblockMenu->gfxState++;
         break;
     case 3:
@@ -679,9 +679,9 @@ static void HandleInitWindows(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 1, 0xE0);
-    LoadMessageBoxGfx(0, 0xA, 0xD0);
-    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
+    LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(0xE));
+    LoadMessageBoxGfx(0, 0xA, BG_PLTT_ID(0xD));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
 
     for (i = 0; i < ARRAY_COUNT(sWindowTemplates) - 1; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));

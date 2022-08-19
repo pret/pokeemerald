@@ -121,7 +121,7 @@ static const struct WindowTemplate sWindowTemplate =
     .tilemapTop = 14,
     .width = 26,
     .height = 4,
-    .paletteNum = 15,
+    .paletteNum = 0xF,
     .baseBlock = 1,
 };
 
@@ -223,7 +223,7 @@ static void ShowContestPainting(void)
         break;
     case 4:
         PrintContestPaintingCaption(gCurContestWinnerSaveIdx, gCurContestWinnerIsForArtist);
-        LoadPalette(sBgPalette, 0, 1 * 2);
+        SetBackdropFromPalette(sBgPalette);
         DmaClear32(3, PLTT, PLTT_SIZE);
         BeginFastPaletteFade(2);
         SetVBlankCallback(VBlankCB_ContestPainting);
@@ -420,7 +420,7 @@ static void LoadContestPaintingFrame(u8 contestWinnerId, bool8 isForArtist)
 {
     u8 x, y;
 
-    LoadPalette(sPictureFramePalettes, 0, 0x100);
+    LoadPalette(sPictureFramePalettes, BG_PLTT_ID(0x0), 8 * PLTT_SIZE_4BPP);
     if (isForArtist == TRUE)
     {
         // Load Artist's frame
@@ -586,7 +586,7 @@ static void DoContestPaintingImageProcessing(u8 imageEffect)
     ApplyImageProcessingEffects(&gImageProcessingContext);
     ApplyImageProcessingQuantization(&gImageProcessingContext);
     ConvertImageProcessingToGBA(&gImageProcessingContext);
-    LoadPalette(gContestPaintingMonPalette, 0x100, 0x200);
+    LoadPalette(gContestPaintingMonPalette, OBJ_PLTT_ID(0x0), 16 * PLTT_SIZE_4BPP);
 }
 
 static void CreateContestPaintingPicture(u8 contestWinnerId, bool8 isForArtist)

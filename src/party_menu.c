@@ -668,8 +668,8 @@ static bool8 AllocPartyMenuBgGfx(void)
         }
         break;
     case 2:
-        LoadCompressedPalette(gPartyMenuBg_Pal, 0, 0x160);
-        CpuCopy16(gPlttBufferUnfaded, sPartyMenuInternal->palBuffer, 0x160);
+        LoadCompressedPalette(gPartyMenuBg_Pal, BG_PLTT_ID(0x0), 11 * PLTT_SIZE_4BPP);
+        CpuCopy16(gPlttBufferUnfaded, sPartyMenuInternal->palBuffer, 11 * PLTT_SIZE_4BPP);
         sPartyMenuInternal->data[0]++;
         break;
     case 3:
@@ -1021,7 +1021,7 @@ static void CreateCancelConfirmPokeballSprites(void)
     if (gPartyMenu.menuType == PARTY_MENU_TYPE_MULTI_SHOWCASE)
     {
         // The showcase has no Cancel/Confirm buttons
-        FillBgTilemapBufferRect(1, 14, 23, 17, 7, 2, 1);
+        FillBgTilemapBufferRect(1, 14, 23, 17, 7, 2, 0x1);
     }
     else
     {
@@ -2015,9 +2015,9 @@ static void InitPartyMenuWindows(u8 layout)
     DeactivateAllTextPrinters();
     for (i = 0; i < PARTY_SIZE; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
-    LoadUserWindowBorderGfx(0, 0x4F, 0xD0);
-    LoadPalette(GetOverworldTextboxPalettePtr(), 0xE0, 0x20);
-    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
+    LoadUserWindowBorderGfx(0, 0x4F, BG_PLTT_ID(0xD));
+    LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(0xE), PLTT_SIZE_4BPP);
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
 }
 
 static void CreateCancelConfirmWindows(bool8 chooseHalf)
@@ -2119,9 +2119,9 @@ static void DrawEmptySlot(u8 windowId)
 
 #define LOAD_PARTY_BOX_PAL(paletteIds, paletteOffsets)                                    \
 {                                                                                         \
-    LoadPalette(GetPartyMenuPalBufferPtr(paletteIds[0]), paletteOffsets[0] + palNum, 2);  \
-    LoadPalette(GetPartyMenuPalBufferPtr(paletteIds[1]), paletteOffsets[1] + palNum, 2);  \
-    LoadPalette(GetPartyMenuPalBufferPtr(paletteIds[2]), paletteOffsets[2] + palNum, 2);  \
+    LoadPalette(GetPartyMenuPalBufferPtr(paletteIds[0]), paletteOffsets[0] + palNum, PLTT_SIZEOF(1));  \
+    LoadPalette(GetPartyMenuPalBufferPtr(paletteIds[1]), paletteOffsets[1] + palNum, PLTT_SIZEOF(1));  \
+    LoadPalette(GetPartyMenuPalBufferPtr(paletteIds[2]), paletteOffsets[2] + palNum, PLTT_SIZEOF(1));  \
 }
 
 static void LoadPartyBoxPalette(struct PartyMenuBox *menuBox, u8 palFlags)
@@ -2263,13 +2263,13 @@ static void DisplayPartyPokemonGender(u8 gender, u16 species, u8 *nickname, stru
     switch (gender)
     {
     case MON_MALE:
-        LoadPalette(GetPartyMenuPalBufferPtr(sGenderMalePalIds[0]), sGenderPalOffsets[0] + palNum, 2);
-        LoadPalette(GetPartyMenuPalBufferPtr(sGenderMalePalIds[1]), sGenderPalOffsets[1] + palNum, 2);
+        LoadPalette(GetPartyMenuPalBufferPtr(sGenderMalePalIds[0]), sGenderPalOffsets[0] + palNum, PLTT_SIZEOF(1));
+        LoadPalette(GetPartyMenuPalBufferPtr(sGenderMalePalIds[1]), sGenderPalOffsets[1] + palNum, PLTT_SIZEOF(1));
         DisplayPartyPokemonBarDetail(menuBox->windowId, gText_MaleSymbol, 2, &menuBox->infoRects->dimensions[8]);
         break;
     case MON_FEMALE:
-        LoadPalette(GetPartyMenuPalBufferPtr(sGenderFemalePalIds[0]), sGenderPalOffsets[0] + palNum, 2);
-        LoadPalette(GetPartyMenuPalBufferPtr(sGenderFemalePalIds[1]), sGenderPalOffsets[1] + palNum, 2);
+        LoadPalette(GetPartyMenuPalBufferPtr(sGenderFemalePalIds[0]), sGenderPalOffsets[0] + palNum, PLTT_SIZEOF(1));
+        LoadPalette(GetPartyMenuPalBufferPtr(sGenderFemalePalIds[1]), sGenderPalOffsets[1] + palNum, PLTT_SIZEOF(1));
         DisplayPartyPokemonBarDetail(menuBox->windowId, gText_FemaleSymbol, 2, &menuBox->infoRects->dimensions[8]);
         break;
     }
@@ -2330,16 +2330,16 @@ static void DisplayPartyPokemonHPBar(u16 hp, u16 maxhp, struct PartyMenuBox *men
     {
     case HP_BAR_GREEN:
     case HP_BAR_FULL:
-        LoadPalette(GetPartyMenuPalBufferPtr(sHPBarGreenPalIds[0]), sHPBarPalOffsets[0] + palNum, 2);
-        LoadPalette(GetPartyMenuPalBufferPtr(sHPBarGreenPalIds[1]), sHPBarPalOffsets[1] + palNum, 2);
+        LoadPalette(GetPartyMenuPalBufferPtr(sHPBarGreenPalIds[0]), sHPBarPalOffsets[0] + palNum, PLTT_SIZEOF(1));
+        LoadPalette(GetPartyMenuPalBufferPtr(sHPBarGreenPalIds[1]), sHPBarPalOffsets[1] + palNum, PLTT_SIZEOF(1));
         break;
     case HP_BAR_YELLOW:
-        LoadPalette(GetPartyMenuPalBufferPtr(sHPBarYellowPalIds[0]), sHPBarPalOffsets[0] + palNum, 2);
-        LoadPalette(GetPartyMenuPalBufferPtr(sHPBarYellowPalIds[1]), sHPBarPalOffsets[1] + palNum, 2);
+        LoadPalette(GetPartyMenuPalBufferPtr(sHPBarYellowPalIds[0]), sHPBarPalOffsets[0] + palNum, PLTT_SIZEOF(1));
+        LoadPalette(GetPartyMenuPalBufferPtr(sHPBarYellowPalIds[1]), sHPBarPalOffsets[1] + palNum, PLTT_SIZEOF(1));
         break;
     default:
-        LoadPalette(GetPartyMenuPalBufferPtr(sHPBarRedPalIds[0]), sHPBarPalOffsets[0] + palNum, 2);
-        LoadPalette(GetPartyMenuPalBufferPtr(sHPBarRedPalIds[1]), sHPBarPalOffsets[1] + palNum, 2);
+        LoadPalette(GetPartyMenuPalBufferPtr(sHPBarRedPalIds[0]), sHPBarPalOffsets[0] + palNum, PLTT_SIZEOF(1));
+        LoadPalette(GetPartyMenuPalBufferPtr(sHPBarRedPalIds[1]), sHPBarPalOffsets[1] + palNum, PLTT_SIZEOF(1));
         break;
     }
 
@@ -2822,7 +2822,7 @@ static void MoveAndBufferPartySlot(const void *rectSrc, s16 x, s16 y, s16 width,
     {
         FillBgTilemapBufferRect_Palette0(0, 0, newX, y, newWidth, height);
         if (TryMovePartySlot(x + dir, width, &srcX, &newX, &newWidth))
-            CopyRectToBgTilemapBufferRect(0, rectSrc, srcX, 0, width, height, newX, y, newWidth, height, 17, 0, 0);
+            CopyRectToBgTilemapBufferRect(0, rectSrc, srcX, 0, width, height, newX, y, newWidth, height, 17, 0, 0x0);
     }
 }
 

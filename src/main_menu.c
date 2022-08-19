@@ -294,7 +294,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
         .tilemapTop = MENU_TOP_WIN0,
         .width = MENU_WIDTH,
         .height = MENU_HEIGHT_WIN0,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 1
     },
     // OPTIONS
@@ -304,7 +304,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
         .tilemapTop = MENU_TOP_WIN1,
         .width = MENU_WIDTH,
         .height = MENU_HEIGHT_WIN1,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x35
     },
     // Has saved game
@@ -315,7 +315,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
         .tilemapTop = MENU_TOP_WIN2,
         .width = MENU_WIDTH,
         .height = MENU_HEIGHT_WIN2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 1
     },
     // NEW GAME
@@ -325,7 +325,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
         .tilemapTop = MENU_TOP_WIN3,
         .width = MENU_WIDTH,
         .height = MENU_HEIGHT_WIN3,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x9D
     },
     // OPTION / MYSTERY GIFT
@@ -335,7 +335,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
         .tilemapTop = MENU_TOP_WIN4,
         .width = MENU_WIDTH,
         .height = MENU_HEIGHT_WIN4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0xD1
     },
     // OPTION / MYSTERY EVENTS
@@ -345,7 +345,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
         .tilemapTop = MENU_TOP_WIN5,
         .width = MENU_WIDTH,
         .height = MENU_HEIGHT_WIN5,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x105
     },
     // OPTION
@@ -355,7 +355,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
         .tilemapTop = MENU_TOP_WIN6,
         .width = MENU_WIDTH,
         .height = MENU_HEIGHT_WIN6,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x139
     },
     // Error message window
@@ -365,7 +365,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
         .tilemapTop = MENU_TOP_ERROR,
         .width = MENU_WIDTH_ERROR,
         .height = MENU_HEIGHT_ERROR,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x16D
     },
     DUMMY_WIN_TEMPLATE
@@ -379,7 +379,7 @@ static const struct WindowTemplate sNewGameBirchSpeechTextWindows[] =
         .tilemapTop = 15,
         .width = 27,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 1
     },
     {
@@ -388,7 +388,7 @@ static const struct WindowTemplate sNewGameBirchSpeechTextWindows[] =
         .tilemapTop = 5,
         .width = 6,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x6D
     },
     {
@@ -397,7 +397,7 @@ static const struct WindowTemplate sNewGameBirchSpeechTextWindows[] =
         .tilemapTop = 2,
         .width = 9,
         .height = 10,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x85
     },
     DUMMY_WIN_TEMPLATE
@@ -571,8 +571,8 @@ static u32 InitMainMenu(bool8 returningFromOptionsMenu)
     DmaFill16(3, 0, (void *)(PLTT + 2), PLTT_SIZE - 2);
 
     ResetPaletteFade();
-    LoadPalette(sMainMenuBgPal, 0, 32);
-    LoadPalette(sMainMenuTextPal, 0xF0, 32);
+    LoadPalette(sMainMenuBgPal, BG_PLTT_ID(0x0), PLTT_SIZE_4BPP);
+    LoadPalette(sMainMenuTextPal, BG_PLTT_ID(0xF), PLTT_SIZE_4BPP);
     ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
@@ -750,28 +750,28 @@ static void Task_DisplayMainMenu(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDY, 7);
 
         palette = RGB_BLACK;
-        LoadPalette(&palette, 254, 2);
+        LoadPalette(&palette, BG_PLTT_ID(0xF) + 14, PLTT_SIZEOF(1));
 
         palette = RGB_WHITE;
-        LoadPalette(&palette, 250, 2);
+        LoadPalette(&palette, BG_PLTT_ID(0xF) + 10, PLTT_SIZEOF(1));
 
         palette = RGB(12, 12, 12);
-        LoadPalette(&palette, 251, 2);
+        LoadPalette(&palette, BG_PLTT_ID(0xF) + 11, PLTT_SIZEOF(1));
 
         palette = RGB(26, 26, 25);
-        LoadPalette(&palette, 252, 2);
+        LoadPalette(&palette, BG_PLTT_ID(0xF) + 12, PLTT_SIZEOF(1));
 
         // Note: If there is no save file, the save block is zeroed out,
         // so the default gender is MALE.
         if (gSaveBlock2Ptr->playerGender == MALE)
         {
             palette = RGB(4, 16, 31);
-            LoadPalette(&palette, 241, 2);
+            LoadPalette(&palette, BG_PLTT_ID(0xF) + 1, PLTT_SIZEOF(1));
         }
         else
         {
             palette = RGB(31, 3, 21);
-            LoadPalette(&palette, 241, 2);
+            LoadPalette(&palette, BG_PLTT_ID(0xF) + 1, PLTT_SIZEOF(1));
         }
 
         switch (gTasks[taskId].tMenuType)
@@ -1274,8 +1274,8 @@ static void Task_NewGameBirchSpeech_Init(u8 taskId)
 
     LZ77UnCompVram(sBirchSpeechShadowGfx, (void *)VRAM);
     LZ77UnCompVram(sBirchSpeechBgMap, (void *)(BG_SCREEN_ADDR(7)));
-    LoadPalette(sBirchSpeechBgPals, 0, 64);
-    LoadPalette(sBirchSpeechPlatformBlackPal, 1, 16);
+    LoadPalette(sBirchSpeechBgPals, BG_PLTT_ID(0x0), 2 * PLTT_SIZE_4BPP);
+    LoadPalette(sBirchSpeechPlatformBlackPal, BG_PLTT_ID(0x0) + 1, PLTT_SIZEOF(8));
     ScanlineEffect_Stop();
     ResetSpriteData();
     FreeAllSpritePalettes();
@@ -1327,7 +1327,7 @@ static void Task_NewGameBirchSpeech_WaitForSpriteFadeInWelcome(u8 taskId)
         {
             InitWindows(sNewGameBirchSpeechTextWindows);
             LoadMainMenuWindowFrameTiles(0, 0xF3);
-            LoadMessageBoxGfx(0, 0xFC, 0xF0);
+            LoadMessageBoxGfx(0, 0xFC, BG_PLTT_ID(0xF));
             NewGameBirchSpeech_ShowDialogueWindow(0, 1);
             PutWindowTilemap(0);
             CopyWindowToVram(0, COPYWIN_GFX);
@@ -1809,8 +1809,8 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     ResetPaletteFade();
     LZ77UnCompVram(sBirchSpeechShadowGfx, (u8 *)VRAM);
     LZ77UnCompVram(sBirchSpeechBgMap, (u8 *)(BG_SCREEN_ADDR(7)));
-    LoadPalette(sBirchSpeechBgPals, 0, 64);
-    LoadPalette(&sBirchSpeechBgGradientPal[1], 1, 16);
+    LoadPalette(sBirchSpeechBgPals, BG_PLTT_ID(0x0), 2 * PLTT_SIZE_4BPP);
+    LoadPalette(&sBirchSpeechBgGradientPal[1], BG_PLTT_ID(0x0) + 1, PLTT_SIZEOF(8));
     ResetTasks();
     taskId = CreateTask(Task_NewGameBirchSpeech_ReturnFromNamingScreenShowTextbox, 0);
     gTasks[taskId].tTimer = 5;
@@ -1853,7 +1853,7 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     SetMainCallback2(CB2_MainMenu);
     InitWindows(sNewGameBirchSpeechTextWindows);
     LoadMainMenuWindowFrameTiles(0, 0xF3);
-    LoadMessageBoxGfx(0, 0xFC, 0xF0);
+    LoadMessageBoxGfx(0, 0xFC, BG_PLTT_ID(0xF));
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
@@ -2029,7 +2029,7 @@ static void Task_NewGameBirchSpeech_FadePlatformIn(u8 taskId)
     {
         gTasks[taskId].tDelayTimer = gTasks[taskId].tDelay;
         gTasks[taskId].tPalIndex++;
-        LoadPalette(&sBirchSpeechBgGradientPal[gTasks[taskId].tPalIndex], 1, 16);
+        LoadPalette(&sBirchSpeechBgGradientPal[gTasks[taskId].tPalIndex], BG_PLTT_ID(0x0) + 1, PLTT_SIZEOF(8));
     }
 }
 
@@ -2063,7 +2063,7 @@ static void Task_NewGameBirchSpeech_FadePlatformOut(u8 taskId)
     {
         gTasks[taskId].tDelayTimer = gTasks[taskId].tDelay;
         gTasks[taskId].tPalIndex--;
-        LoadPalette(&sBirchSpeechBgGradientPal[gTasks[taskId].tPalIndex], 1, 16);
+        LoadPalette(&sBirchSpeechBgGradientPal[gTasks[taskId].tPalIndex], BG_PLTT_ID(0x0) + 1, PLTT_SIZEOF(8));
     }
 }
 
@@ -2191,7 +2191,7 @@ static void MainMenu_FormatSavegameBadges(void)
 static void LoadMainMenuWindowFrameTiles(u8 bgId, u16 tileOffset)
 {
     LoadBgTiles(bgId, GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->tiles, 0x120, tileOffset);
-    LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, 32, 32);
+    LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, BG_PLTT_ID(0x2), PLTT_SIZE_4BPP);
 }
 
 static void DrawMainMenuWindowBorder(const struct WindowTemplate *template, u16 baseTileNum)
@@ -2204,26 +2204,26 @@ static void DrawMainMenuWindowBorder(const struct WindowTemplate *template, u16 
     u16 sp14 = 7 + baseTileNum;
     u16 r6 = 8 + baseTileNum;
 
-    FillBgTilemapBufferRect(template->bg, baseTileNum, template->tilemapLeft - 1, template->tilemapTop - 1, 1, 1, 2);
-    FillBgTilemapBufferRect(template->bg, r9, template->tilemapLeft, template->tilemapTop - 1, template->width, 1, 2);
-    FillBgTilemapBufferRect(template->bg, r10, template->tilemapLeft + template->width, template->tilemapTop - 1, 1, 1, 2);
-    FillBgTilemapBufferRect(template->bg, sp18, template->tilemapLeft - 1, template->tilemapTop, 1, template->height, 2);
-    FillBgTilemapBufferRect(template->bg, spC, template->tilemapLeft + template->width, template->tilemapTop, 1, template->height, 2);
-    FillBgTilemapBufferRect(template->bg, sp10, template->tilemapLeft - 1, template->tilemapTop + template->height, 1, 1, 2);
-    FillBgTilemapBufferRect(template->bg, sp14, template->tilemapLeft, template->tilemapTop + template->height, template->width, 1, 2);
-    FillBgTilemapBufferRect(template->bg, r6, template->tilemapLeft + template->width, template->tilemapTop + template->height, 1, 1, 2);
+    FillBgTilemapBufferRect(template->bg, baseTileNum, template->tilemapLeft - 1, template->tilemapTop - 1, 1, 1, 0x2);
+    FillBgTilemapBufferRect(template->bg, r9, template->tilemapLeft, template->tilemapTop - 1, template->width, 1, 0x2);
+    FillBgTilemapBufferRect(template->bg, r10, template->tilemapLeft + template->width, template->tilemapTop - 1, 1, 1, 0x2);
+    FillBgTilemapBufferRect(template->bg, sp18, template->tilemapLeft - 1, template->tilemapTop, 1, template->height, 0x2);
+    FillBgTilemapBufferRect(template->bg, spC, template->tilemapLeft + template->width, template->tilemapTop, 1, template->height, 0x2);
+    FillBgTilemapBufferRect(template->bg, sp10, template->tilemapLeft - 1, template->tilemapTop + template->height, 1, 1, 0x2);
+    FillBgTilemapBufferRect(template->bg, sp14, template->tilemapLeft, template->tilemapTop + template->height, template->width, 1, 0x2);
+    FillBgTilemapBufferRect(template->bg, r6, template->tilemapLeft + template->width, template->tilemapTop + template->height, 1, 1, 0x2);
     CopyBgTilemapBufferToVram(template->bg);
 }
 
 static void ClearMainMenuWindowTilemap(const struct WindowTemplate *template)
 {
-    FillBgTilemapBufferRect(template->bg, 0, template->tilemapLeft - 1, template->tilemapTop - 1, template->tilemapLeft + template->width + 1, template->tilemapTop + template->height + 1, 2);
+    FillBgTilemapBufferRect(template->bg, 0, template->tilemapLeft - 1, template->tilemapTop - 1, template->tilemapLeft + template->width + 1, template->tilemapTop + template->height + 1, 0x2);
     CopyBgTilemapBufferToVram(template->bg);
 }
 
 static void NewGameBirchSpeech_ClearGenderWindowTilemap(u8 bg, u8 x, u8 y, u8 width, u8 height, u8 unused)
 {
-    FillBgTilemapBufferRect(bg, 0, x + 255, y + 255, width + 2, height + 2, 2);
+    FillBgTilemapBufferRect(bg, 0, x + 255, y + 255, width + 2, height + 2, 0x2);
 }
 
 static void NewGameBirchSpeech_ClearGenderWindow(u8 windowId, bool8 copyToVram)

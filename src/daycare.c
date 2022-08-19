@@ -46,7 +46,7 @@ static const struct WindowTemplate sDaycareLevelMenuWindowTemplate =
     .tilemapTop = 1,
     .width = 14,
     .height = 6,
-    .paletteNum = 15,
+    .paletteNum = 0xF,
     .baseBlock = 8
 };
 

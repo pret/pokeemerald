@@ -431,7 +431,7 @@ static u8 UpdateNormalPaletteFade(void)
             gPaletteFade.delayCounter = 0;
         }
 
-        paletteOffset = 0;
+        paletteOffset = 0x00;
 
         if (!gPaletteFade.objPaletteToggle)
         {
@@ -452,7 +452,7 @@ static u8 UpdateNormalPaletteFade(void)
                     gPaletteFade.y,
                     gPaletteFade.blendColor);
             selectedPalettes >>= 1;
-            paletteOffset += 16;
+            paletteOffset += 0x10;
         }
 
         gPaletteFade.objPaletteToggle ^= 1;
@@ -495,7 +495,7 @@ static u8 UpdateNormalPaletteFade(void)
 
 void InvertPlttBuffer(u32 selectedPalettes)
 {
-    u16 paletteOffset = 0;
+    u16 paletteOffset = 0x00;
 
     while (selectedPalettes)
     {
@@ -506,13 +506,13 @@ void InvertPlttBuffer(u32 selectedPalettes)
                 gPlttBufferFaded[paletteOffset + i] = ~gPlttBufferFaded[paletteOffset + i];
         }
         selectedPalettes >>= 1;
-        paletteOffset += 16;
+        paletteOffset += 0x10;
     }
 }
 
 void TintPlttBuffer(u32 selectedPalettes, s8 r, s8 g, s8 b)
 {
-    u16 paletteOffset = 0;
+    u16 paletteOffset = 0x00;
 
     while (selectedPalettes)
     {
@@ -528,13 +528,13 @@ void TintPlttBuffer(u32 selectedPalettes, s8 r, s8 g, s8 b)
             }
         }
         selectedPalettes >>= 1;
-        paletteOffset += 16;
+        paletteOffset += 0x10;
     }
 }
 
 void UnfadePlttBuffer(u32 selectedPalettes)
 {
-    u16 paletteOffset = 0;
+    u16 paletteOffset = 0x00;
 
     while (selectedPalettes)
     {
@@ -545,7 +545,7 @@ void UnfadePlttBuffer(u32 selectedPalettes)
                 gPlttBufferFaded[paletteOffset + i] = gPlttBufferUnfaded[paletteOffset + i];
         }
         selectedPalettes >>= 1;
-        paletteOffset += 16;
+        paletteOffset += 0x10;
     }
 }
 
@@ -835,7 +835,7 @@ void BlendPalettes(u32 selectedPalettes, u8 coeff, u16 color)
 {
     u16 paletteOffset;
 
-    for (paletteOffset = 0; selectedPalettes; paletteOffset += 16)
+    for (paletteOffset = 0x00; selectedPalettes; paletteOffset += 0x10)
     {
         if (selectedPalettes & 1)
             BlendPalette(paletteOffset, 16, coeff, color);

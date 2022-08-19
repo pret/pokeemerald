@@ -1078,7 +1078,7 @@ u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate *arrowInfo, u16
 
     if (arrowInfo->palTag == TAG_NONE)
     {
-        LoadPalette(sRedArrowPal, (16 * arrowInfo->palNum) + 0x100, 0x20);
+        LoadPalette(sRedArrowPal, OBJ_PLTT_ID(arrowInfo->palNum), PLTT_SIZE_4BPP);
     }
     else
     {
@@ -1324,7 +1324,7 @@ static u8 ListMenuAddRedOutlineCursorObject(struct CursorStruct *cursor)
 
     if (cursor->palTag == TAG_NONE)
     {
-        LoadPalette(sRedArrowPal, (16 * cursor->palNum) + 0x100, 0x20);
+        LoadPalette(sRedArrowPal, OBJ_PLTT_ID(cursor->palNum), PLTT_SIZE_4BPP);
     }
     else
     {
@@ -1409,7 +1409,7 @@ static u8 ListMenuAddRedArrowCursorObject(struct CursorStruct *cursor)
 
     if (cursor->palTag == TAG_NONE)
     {
-        LoadPalette(sRedArrowPal, (16 * cursor->palNum) + 0x100, 0x20);
+        LoadPalette(sRedArrowPal, OBJ_PLTT_ID(cursor->palNum), PLTT_SIZE_4BPP);
     }
     else
     {

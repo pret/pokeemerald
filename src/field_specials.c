@@ -583,16 +583,16 @@ static void LoadLinkPartnerObjectEventSpritePalette(u8 graphicsId, u8 localEvent
             switch (graphicsId)
             {
             case OBJ_EVENT_GFX_LINK_RS_BRENDAN:
-                LoadPalette(gObjectEventPal_RubySapphireBrendan, 0x100 + (adjustedPaletteNum << 4), 0x20);
+                LoadPalette(gObjectEventPal_RubySapphireBrendan, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
                 break;
             case OBJ_EVENT_GFX_LINK_RS_MAY:
-                LoadPalette(gObjectEventPal_RubySapphireMay, 0x100 + (adjustedPaletteNum << 4), 0x20);
+                LoadPalette(gObjectEventPal_RubySapphireMay, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
                 break;
             case OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL:
-                LoadPalette(gObjectEventPal_Brendan, 0x100 + (adjustedPaletteNum << 4), 0x20);
+                LoadPalette(gObjectEventPal_Brendan, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
                 break;
             case OBJ_EVENT_GFX_RIVAL_MAY_NORMAL:
-                LoadPalette(gObjectEventPal_May, 0x100 + (adjustedPaletteNum << 4), 0x20);
+                LoadPalette(gObjectEventPal_May, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
                 break;
             }
         }
@@ -1638,7 +1638,7 @@ const struct WindowTemplate gElevatorFloor_WindowTemplate =
     .tilemapTop = 1,
     .width = 8,
     .height = 4,
-    .paletteNum = 15,
+    .paletteNum = 0xF,
     .baseBlock = 8,
 };
 
@@ -2845,7 +2845,7 @@ void ShowBattlePointsWindow(void)
         .tilemapTop = 1,
         .width = 6,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 8,
     };
 
@@ -2891,7 +2891,7 @@ void ShowFrontierExchangeCornerItemIconWindow(void)
         .tilemapTop = 9,
         .width = 4,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 20,
     };
 
@@ -3031,7 +3031,7 @@ static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
         .tilemapTop = 7,
         .width = 12,
         .height = 6,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 28,
     };
 
@@ -3266,7 +3266,7 @@ static void Task_DeoxysRockInteraction(u8 taskId)
 static void ChangeDeoxysRockLevel(u8 rockLevel)
 {
     u8 objectEventId;
-    LoadPalette(&sDeoxysRockPalettes[rockLevel], 0x1A0, 8);
+    LoadPalette(&sDeoxysRockPalettes[rockLevel], OBJ_PLTT_ID(0xA), PLTT_SIZEOF(4));
     TryGetObjectEventIdByLocalIdAndMap(LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
 
     if (rockLevel == 0)
@@ -3314,7 +3314,7 @@ void IncrementBirthIslandRockStepCount(void)
 
 void SetDeoxysRockPalette(void)
 {
-    LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], 0x1A0, 8);
+    LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], OBJ_PLTT_ID(0xA), PLTT_SIZEOF(4));
     BlendPalettes(0x04000000, 16, 0);
 }
 

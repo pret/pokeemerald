@@ -76,7 +76,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 0,
         .width = 24,
         .height = 3,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x0001
     }, {
         .bg = 0,
@@ -84,7 +84,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 4,
         .width = 21,
         .height = 15,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x0049
     }, {
         .bg = 0,
@@ -92,7 +92,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 4,
         .width = 3,
         .height = 15,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x0184
     }, DUMMY_WIN_TEMPLATE
 };
@@ -193,10 +193,10 @@ static void CB2_InitWirelessCommunicationScreen(void)
     ChangeBgY(0, 0, BG_COORD_SET);
     ChangeBgX(1, 0, BG_COORD_SET);
     ChangeBgY(1, 0, BG_COORD_SET);
-    LoadPalette(sBgTiles_Pal, 0x00, 0x20);
+    LoadPalette(sBgTiles_Pal, BG_PLTT_ID(0x0), PLTT_SIZE_4BPP);
     Menu_LoadStdPalAt(0xF0);
     DynamicPlaceholderTextUtil_Reset();
-    FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0x0F);
+    FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0xF);
     CopyBgTilemapBufferToVram(1);
     SetMainCallback2(CB2_RunWirelessCommunicationScreen);
     RunTasks();
@@ -227,7 +227,7 @@ static void WCSS_CyclePalette(s16 * counter, s16 * palIdx)
 
         *counter = 0;
     }
-    LoadPalette(sBgTiles_Pal + 16 * (*palIdx + 2), 0, 0x10);
+    LoadPalette(sBgTiles_Pal + 16 * (*palIdx + 2), BG_PLTT_ID(0x0), PLTT_SIZEOF(8));
 }
 
 static void PrintHeaderTexts(void)

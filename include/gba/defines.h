@@ -67,6 +67,12 @@
 #define DISPLAY_WIDTH  240
 #define DISPLAY_HEIGHT 160
 
+#define PLTT_SIZEOF(n) ((n) * sizeof(u16))
+#define PLTT_SIZE_4BPP PLTT_SIZEOF(16)
+#define PLTT_SIZE_8BPP PLTT_SIZEOF(256)
+
+#define PLTT_OFFSET_4BPP(n) ((n) * PLTT_SIZE_4BPP)
+
 #define TILE_SIZE_4BPP 32
 #define TILE_SIZE_8BPP 64
 
