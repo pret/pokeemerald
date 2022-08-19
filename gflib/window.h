@@ -33,6 +33,29 @@ struct WindowTemplate
     u16 baseBlock;
 };
 
+
+#define CALC_WT_BASEBLOCK(winLabel, bg, tilemapLeft, tilemapTop, width, height, paletteNum, offset) \
+enum {                                                  \
+    WT_ ## winLabel ## _BG = bg,                        \
+    WT_ ## winLabel ## _TILEMAP_LEFT = tilemapLeft,     \
+    WT_ ## winLabel ## _TILEMAP_TOP = tilemapTop,       \
+    WT_ ## winLabel ## _WIDTH = width,                  \
+    WT_ ## winLabel ## _HEIGHT = height,                \
+    WT_ ## winLabel ## _PALETTE_NUM = paletteNum,       \
+    WT_ ## winLabel ## _BASE_BLOCK = offset,            \
+    WT_AFTER_ ## winLabel = offset + width * height,    \
+};
+
+#define WINDOW_TEMPLATE(winLabel) \
+{ \
+    .bg = WT_ ## winLabel ## _BG,                       \
+    .tilemapLeft = WT_ ## winLabel ## _TILEMAP_LEFT,    \
+    .tilemapTop  = WT_ ## winLabel ## _TILEMAP_TOP,     \
+    .width       = WT_ ## winLabel ## _WIDTH,           \
+    .height      = WT_ ## winLabel ## _HEIGHT,          \
+    .paletteNum  = WT_ ## winLabel ## _PALETTE_NUM,     \
+    .baseBlock = WT_ ## winLabel ## _BASE_BLOCK,        \
+}
 #define DUMMY_WIN_TEMPLATE          \
 {                                   \
     .bg = 0xFF,                     \

@@ -46,17 +46,6 @@
 #define POKEBLOCK_MAX_FEEL 99
 
 #define WIN_TITLE_WIDTH             9
-#define WIN_LIST_BASEBLOCK          0x30
-#define WIN_SPICY_BASEBLOCK         0x12C
-#define WIN_DRY_BASEBLOCK           0x136
-#define WIN_SWEET_BASEBLOCK         0x140
-#define WIN_BITTER_BASEBLOCK        0x14A
-#define WIN_SOUR_BASEBLOCK          0x154
-#define WIN_FEEL_BASEBLOCK          0x15E
-#define WIN_ACTIONS_TALL_BASEBLOCK  0x162
-#define WIN_ACTIONS_BASEBLOCK       0x186
-#define WIN_TOSS_MSG_BASEBLOCK      0x19E
-#define WIN_TOSS_PKBLOCK_BASEBLOCK  0x20A
 #define PKBLOCK_CASE_NAME_WIDTH     72
 
 enum {
@@ -320,120 +309,36 @@ static const struct Pokeblock sFavoritePokeblocksTable[FLAVOR_COUNT] =
     [FLAVOR_SOUR]   = { PBLOCK_CLR_YELLOW,  0,  0,  0,  0, 20, 20}
 };
 
+CALC_WT_BASEBLOCK(WIN_TITLE, 0, 2, 1, WIN_TITLE_WIDTH, 2, 15, 0x1E)
+CALC_WT_BASEBLOCK(WIN_LIST, 0, 15, 1, 14, 18, 15, WT_AFTER_WIN_TITLE)
+CALC_WT_BASEBLOCK(WIN_SPICY, 0, 2, 13, 5, 2, 15, WT_AFTER_WIN_LIST)
+CALC_WT_BASEBLOCK(WIN_DRY, 0, 2, 15, 5, 2, 15, WT_AFTER_WIN_SPICY)
+CALC_WT_BASEBLOCK(WIN_SWEET, 0, 2, 17, 5, 2, 15, WT_AFTER_WIN_DRY)
+CALC_WT_BASEBLOCK(WIN_BITTER, 0, 8, 13, 5, 2, 15, WT_AFTER_WIN_SWEET)
+CALC_WT_BASEBLOCK(WIN_SOUR, 0, 8, 15, 5, 2, 15, WT_AFTER_WIN_BITTER)
+CALC_WT_BASEBLOCK(WIN_FEEL, 0, 11, 17, 2, 2, 15, WT_AFTER_WIN_SOUR)
+CALC_WT_BASEBLOCK(WIN_ACTIONS_TALL, 1, 7, 5, 6, 6, 15, WT_AFTER_WIN_FEEL)
+CALC_WT_BASEBLOCK(WIN_ACTIONS, 1, 7, 7, 6, 4, 15, WT_AFTER_WIN_ACTIONS_TALL)
+CALC_WT_BASEBLOCK(WIN_TOSS_MSG, 1, 2, 15, 27, 4, 15, WT_AFTER_WIN_ACTIONS)
+
 static const struct WindowTemplate sWindowTemplates[] =
 {
-    [WIN_TITLE] = {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 1,
-        .width = WIN_TITLE_WIDTH,
-        .height = 2,
-        .paletteNum = 15,
-        .baseBlock = 0x1E
-    },
-    [WIN_LIST] = {
-        .bg = 0,
-        .tilemapLeft = 15,
-        .tilemapTop = 1,
-        .width = 14,
-        .height = 18,
-        .paletteNum = 15,
-        .baseBlock = WIN_LIST_BASEBLOCK
-    },
-    [WIN_SPICY] = {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 13,
-        .width = 5,
-        .height = 2,
-        .paletteNum = 15,
-        .baseBlock = WIN_SPICY_BASEBLOCK
-    },
-    [WIN_DRY] = {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 15,
-        .width = 5,
-        .height = 2,
-        .paletteNum = 15,
-        .baseBlock = WIN_DRY_BASEBLOCK
-    },
-    [WIN_SWEET] = {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 17,
-        .width = 5,
-        .height = 2,
-        .paletteNum = 15,
-        .baseBlock = WIN_SWEET_BASEBLOCK
-    },
-    [WIN_BITTER] = {
-        .bg = 0,
-        .tilemapLeft = 8,
-        .tilemapTop = 13,
-        .width = 5,
-        .height = 2,
-        .paletteNum = 15,
-        .baseBlock = WIN_BITTER_BASEBLOCK
-    },
-    [WIN_SOUR] = {
-        .bg = 0,
-        .tilemapLeft = 8,
-        .tilemapTop = 15,
-        .width = 5,
-        .height = 2,
-        .paletteNum = 15,
-        .baseBlock = WIN_SOUR_BASEBLOCK
-    },
-    [WIN_FEEL] = {
-        .bg = 0,
-        .tilemapLeft = 11,
-        .tilemapTop = 17,
-        .width = 2,
-        .height = 2,
-        .paletteNum = 15,
-        .baseBlock = WIN_FEEL_BASEBLOCK
-    },
-    [WIN_ACTIONS_TALL] = {
-        .bg = 1,
-        .tilemapLeft = 7,
-        .tilemapTop = 5,
-        .width = 6,
-        .height = 6,
-        .paletteNum = 15,
-        .baseBlock = WIN_ACTIONS_TALL_BASEBLOCK
-    },
-    [WIN_ACTIONS] = {
-        .bg = 1,
-        .tilemapLeft = 7,
-        .tilemapTop = 7,
-        .width = 6,
-        .height = 4,
-        .paletteNum = 15,
-        .baseBlock = WIN_ACTIONS_BASEBLOCK
-    },
-    [WIN_TOSS_MSG] = {
-        .bg = 1,
-        .tilemapLeft = 2,
-        .tilemapTop = 15,
-        .width = 27,
-        .height = 4,
-        .paletteNum = 15,
-        .baseBlock = WIN_TOSS_MSG_BASEBLOCK
-    },
+    [WIN_TITLE]         = WINDOW_TEMPLATE(WIN_TITLE),
+    [WIN_LIST]          = WINDOW_TEMPLATE(WIN_LIST),
+    [WIN_SPICY]         = WINDOW_TEMPLATE(WIN_SPICY),
+    [WIN_DRY]           = WINDOW_TEMPLATE(WIN_DRY),
+    [WIN_SWEET]         = WINDOW_TEMPLATE(WIN_SWEET),
+    [WIN_BITTER]        = WINDOW_TEMPLATE(WIN_BITTER),
+    [WIN_SOUR]          = WINDOW_TEMPLATE(WIN_SOUR),
+    [WIN_FEEL]          = WINDOW_TEMPLATE(WIN_FEEL),
+    [WIN_ACTIONS_TALL]  = WINDOW_TEMPLATE(WIN_ACTIONS_TALL),
+    [WIN_ACTIONS]       = WINDOW_TEMPLATE(WIN_ACTIONS),
+    [WIN_TOSS_MSG]      = WINDOW_TEMPLATE(WIN_TOSS_MSG),
     DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate sTossPkblockWindowTemplate =
-{
-    .bg = 1,
-    .tilemapLeft = 21,
-    .tilemapTop = 9,
-    .width = 5,
-    .height = 4,
-    .paletteNum = 15,
-    .baseBlock = WIN_TOSS_PKBLOCK_BASEBLOCK
-};
+CALC_WT_BASEBLOCK(WIN_TOSS, 1, 21, 9, 5, 4, 15, WT_AFTER_WIN_TOSS_MSG)
+static const struct WindowTemplate sTossPkblockWindowTemplate = WINDOW_TEMPLATE(WIN_TOSS);
 
 static const struct ListMenuTemplate sPokeblockListMenuTemplate =
 {

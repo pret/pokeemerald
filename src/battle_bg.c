@@ -29,8 +29,6 @@
 #define B_WIN_YESNO_WIDTH                   3
 #define ARENA_WIN_SKILL_TILEMAP_LEFT        12
 #define ARENA_WIN_SKILL_WIDTH               6
-#define ARENA_WIN_BODY_BASEBLOCK            0x013C
-#define ARENA_WIN_JUDGEMENT_TITLE_BASEBLOCK 0x0148
 #define ARENA_WIN_JUDGEMENT_TEXT_WIDTH      26
 
 struct BattleBackground
@@ -168,436 +166,102 @@ const struct BgTemplate gBattleBgTemplates[] =
     },
 };
 
+// Shared Window Templates
+CALC_WT_BASEBLOCK(B_WIN_MSG, 0, 2, 15, B_WIN_MSG_WIDTH, 4, 0, 144)
+CALC_WT_BASEBLOCK(B_WIN_ACTION_PROMPT, 0, 1, 35, 14, 4, 0, 448)
+CALC_WT_BASEBLOCK(B_WIN_ACTION_MENU, 0, 17, 35, 12, 4, 5, 400)
+CALC_WT_BASEBLOCK(B_WIN_MOVE_NAME_1, 0, 2, 55, 8, 2, 5, 768)
+CALC_WT_BASEBLOCK(B_WIN_MOVE_NAME_2, 0, 11, 55, 8, 2, 5, WT_AFTER_B_WIN_MOVE_NAME_1)
+CALC_WT_BASEBLOCK(B_WIN_MOVE_NAME_3, 0, 2, 57, 8, 2, 5, WT_AFTER_B_WIN_MOVE_NAME_2)
+CALC_WT_BASEBLOCK(B_WIN_MOVE_NAME_4, 0, 11, 57, 8, 2, 5, WT_AFTER_B_WIN_MOVE_NAME_3)
+CALC_WT_BASEBLOCK(B_WIN_PP, 0, 21, 55, 4, 2, 5, 656)
+CALC_WT_BASEBLOCK(B_WIN_DUMMY, 0, 21, 57, 0, 0, 5, WT_AFTER_B_WIN_PP)
+CALC_WT_BASEBLOCK(B_WIN_PP_REMAINING, 0, 25, 55, 4, 2, 5, WT_AFTER_B_WIN_PP)
+CALC_WT_BASEBLOCK(B_WIN_MOVE_TYPE, 0, 21, 57, 8, 2, 5, WT_AFTER_B_WIN_PP_REMAINING)
+CALC_WT_BASEBLOCK(B_WIN_SWITCH_PROMPT, 0, 21, 55, 8, 4, 5, WT_AFTER_B_WIN_MOVE_TYPE)
+CALC_WT_BASEBLOCK(B_WIN_YESNO, 0, B_WIN_YESNO_TILEMAP_LEFT, 9, B_WIN_YESNO_WIDTH, 4, 5, 256)
+CALC_WT_BASEBLOCK(B_WIN_LEVEL_UP_BOX, 1, 19, 8, 10, 11, 5, 256)
+CALC_WT_BASEBLOCK(B_WIN_LEVEL_UP_BANNER, 2, 18, 0, 12, 3, 6, WT_AFTER_B_WIN_LEVEL_UP_BOX)
+
+// Standard-only Window Templates
+CALC_WT_BASEBLOCK(B_WIN_VS_PLAYER, 1, 2, 3, 6, 2, 5, 32)
+CALC_WT_BASEBLOCK(B_WIN_VS_OPPONENT, 2, 2, 3, 6, 2, 5, 64)
+CALC_WT_BASEBLOCK(B_WIN_VS_MULTI_PLAYER_1, 1, 2, 2, 6, 2, 5, 32)
+CALC_WT_BASEBLOCK(B_WIN_VS_MULTI_PLAYER_2, 2, 2, 2, 6, 2, 5, 64)
+CALC_WT_BASEBLOCK(B_WIN_VS_MULTI_PLAYER_3, 1, 2, 6, 6, 2, 5, 96)
+CALC_WT_BASEBLOCK(B_WIN_VS_MULTI_PLAYER_4, 2, 2, 6, 6, 2, 5, 128)
+CALC_WT_BASEBLOCK(B_WIN_VS_OUTCOME_DRAW, 0, 12, 2, 6, 2, 0, 160)
+CALC_WT_BASEBLOCK(B_WIN_VS_OUTCOME_LEFT, 0, 4, 2, 7, 2, 0, 160)
+CALC_WT_BASEBLOCK(B_WIN_VS_OUTCOME_RIGHT, 0, 19, 2, 7, 2, 0, 176)
+
 static const struct WindowTemplate sStandardBattleWindowTemplates[] =
 {
-    [B_WIN_MSG] = {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 15,
-        .width = B_WIN_MSG_WIDTH,
-        .height = 4,
-        .paletteNum = 0,
-        .baseBlock = 0x0090,
-    },
-    [B_WIN_ACTION_PROMPT] = {
-        .bg = 0,
-        .tilemapLeft = 1,
-        .tilemapTop = 35,
-        .width = 14,
-        .height = 4,
-        .paletteNum = 0,
-        .baseBlock = 0x01c0,
-    },
-    [B_WIN_ACTION_MENU] = {
-        .bg = 0,
-        .tilemapLeft = 17,
-        .tilemapTop = 35,
-        .width = 12,
-        .height = 4,
-        .paletteNum = 5,
-        .baseBlock = 0x0190,
-    },
-    [B_WIN_MOVE_NAME_1] = {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 55,
-        .width = 8,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0300,
-    },
-    [B_WIN_MOVE_NAME_2] = {
-        .bg = 0,
-        .tilemapLeft = 11,
-        .tilemapTop = 55,
-        .width = 8,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0310,
-    },
-    [B_WIN_MOVE_NAME_3] = {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 57,
-        .width = 8,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0320,
-    },
-    [B_WIN_MOVE_NAME_4] = {
-        .bg = 0,
-        .tilemapLeft = 11,
-        .tilemapTop = 57,
-        .width = 8,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0330,
-    },
-    [B_WIN_PP] = {
-        .bg = 0,
-        .tilemapLeft = 21,
-        .tilemapTop = 55,
-        .width = 4,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0290,
-    },
-    [B_WIN_DUMMY] = {
-        .bg = 0,
-        .tilemapLeft = 21,
-        .tilemapTop = 57,
-        .width = 0,
-        .height = 0,
-        .paletteNum = 5,
-        .baseBlock = 0x0298,
-    },
-    [B_WIN_PP_REMAINING] = {
-        .bg = 0,
-        .tilemapLeft = 25,
-        .tilemapTop = 55,
-        .width = 4,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0298,
-    },
-    [B_WIN_MOVE_TYPE] = {
-        .bg = 0,
-        .tilemapLeft = 21,
-        .tilemapTop = 57,
-        .width = 8,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x02a0,
-    },
-    [B_WIN_SWITCH_PROMPT] = {
-        .bg = 0,
-        .tilemapLeft = 21,
-        .tilemapTop = 55,
-        .width = 8,
-        .height = 4,
-        .paletteNum = 5,
-        .baseBlock = 0x02b0,
-    },
-    [B_WIN_YESNO] = {
-        .bg = 0,
-        .tilemapLeft = B_WIN_YESNO_TILEMAP_LEFT,
-        .tilemapTop = 9,
-        .width = B_WIN_YESNO_WIDTH,
-        .height = 4,
-        .paletteNum = 5,
-        .baseBlock = 0x0100,
-    },
-    [B_WIN_LEVEL_UP_BOX] = {
-        .bg = 1,
-        .tilemapLeft = 19,
-        .tilemapTop = 8,
-        .width = 10,
-        .height = 11,
-        .paletteNum = 5,
-        .baseBlock = 0x0100,
-    },
-    [B_WIN_LEVEL_UP_BANNER] = {
-        .bg = 2,
-        .tilemapLeft = 18,
-        .tilemapTop = 0,
-        .width = 12,
-        .height = 3,
-        .paletteNum = 6,
-        .baseBlock = 0x016e,
-    },
-    [B_WIN_VS_PLAYER] = {
-        .bg = 1,
-        .tilemapLeft = 2,
-        .tilemapTop = 3,
-        .width = 6,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0020,
-    },
-    [B_WIN_VS_OPPONENT] = {
-        .bg = 2,
-        .tilemapLeft = 2,
-        .tilemapTop = 3,
-        .width = 6,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0040,
-    },
-    [B_WIN_VS_MULTI_PLAYER_1] = {
-        .bg = 1,
-        .tilemapLeft = 2,
-        .tilemapTop = 2,
-        .width = 6,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0020,
-    },
-    [B_WIN_VS_MULTI_PLAYER_2] = {
-        .bg = 2,
-        .tilemapLeft = 2,
-        .tilemapTop = 2,
-        .width = 6,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0040,
-    },
-    [B_WIN_VS_MULTI_PLAYER_3] = {
-        .bg = 1,
-        .tilemapLeft = 2,
-        .tilemapTop = 6,
-        .width = 6,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0060,
-    },
-    [B_WIN_VS_MULTI_PLAYER_4] = {
-        .bg = 2,
-        .tilemapLeft = 2,
-        .tilemapTop = 6,
-        .width = 6,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0080,
-    },
-    [B_WIN_VS_OUTCOME_DRAW] = {
-        .bg = 0,
-        .tilemapLeft = 12,
-        .tilemapTop = 2,
-        .width = 6,
-        .height = 2,
-        .paletteNum = 0,
-        .baseBlock = 0x00a0,
-    },
-    [B_WIN_VS_OUTCOME_LEFT] = {
-        .bg = 0,
-        .tilemapLeft = 4,
-        .tilemapTop = 2,
-        .width = 7,
-        .height = 2,
-        .paletteNum = 0,
-        .baseBlock = 0x00a0,
-    },
-    [B_WIN_VS_OUTCOME_RIGHT] = {
-        .bg = 0,
-        .tilemapLeft = 19,
-        .tilemapTop = 2,
-        .width = 7,
-        .height = 2,
-        .paletteNum = 0,
-        .baseBlock = 0x00b0,
-    },
+    // Shared Window Templates
+    [B_WIN_MSG]                 = WINDOW_TEMPLATE(B_WIN_MSG),
+    [B_WIN_ACTION_PROMPT]       = WINDOW_TEMPLATE(B_WIN_ACTION_PROMPT),
+    [B_WIN_ACTION_MENU]         = WINDOW_TEMPLATE(B_WIN_ACTION_MENU),
+    [B_WIN_MOVE_NAME_1]         = WINDOW_TEMPLATE(B_WIN_MOVE_NAME_1),
+    [B_WIN_MOVE_NAME_2]         = WINDOW_TEMPLATE(B_WIN_MOVE_NAME_2),
+    [B_WIN_MOVE_NAME_3]         = WINDOW_TEMPLATE(B_WIN_MOVE_NAME_3),
+    [B_WIN_MOVE_NAME_4]         = WINDOW_TEMPLATE(B_WIN_MOVE_NAME_4),
+    [B_WIN_PP]                  = WINDOW_TEMPLATE(B_WIN_PP),
+    [B_WIN_DUMMY]               = WINDOW_TEMPLATE(B_WIN_DUMMY),
+    [B_WIN_PP_REMAINING]        = WINDOW_TEMPLATE(B_WIN_PP_REMAINING),
+    [B_WIN_MOVE_TYPE]           = WINDOW_TEMPLATE(B_WIN_MOVE_TYPE),
+    [B_WIN_SWITCH_PROMPT]       = WINDOW_TEMPLATE(B_WIN_SWITCH_PROMPT),
+    [B_WIN_YESNO]               = WINDOW_TEMPLATE(B_WIN_YESNO),
+    [B_WIN_LEVEL_UP_BOX]        = WINDOW_TEMPLATE(B_WIN_LEVEL_UP_BOX),
+    [B_WIN_LEVEL_UP_BANNER]     = WINDOW_TEMPLATE(B_WIN_LEVEL_UP_BANNER),
+    // Standard-only Window Templates
+    [B_WIN_VS_PLAYER]           = WINDOW_TEMPLATE(B_WIN_VS_PLAYER),
+    [B_WIN_VS_OPPONENT]         = WINDOW_TEMPLATE(B_WIN_VS_OPPONENT),
+    [B_WIN_VS_MULTI_PLAYER_1]   = WINDOW_TEMPLATE(B_WIN_VS_MULTI_PLAYER_1),
+    [B_WIN_VS_MULTI_PLAYER_2]   = WINDOW_TEMPLATE(B_WIN_VS_MULTI_PLAYER_2),
+    [B_WIN_VS_MULTI_PLAYER_3]   = WINDOW_TEMPLATE(B_WIN_VS_MULTI_PLAYER_3),
+    [B_WIN_VS_MULTI_PLAYER_4]   = WINDOW_TEMPLATE(B_WIN_VS_MULTI_PLAYER_4),
+    [B_WIN_VS_OUTCOME_DRAW]     = WINDOW_TEMPLATE(B_WIN_VS_OUTCOME_DRAW),
+    [B_WIN_VS_OUTCOME_LEFT]     = WINDOW_TEMPLATE(B_WIN_VS_OUTCOME_LEFT),
+    [B_WIN_VS_OUTCOME_RIGHT]    = WINDOW_TEMPLATE(B_WIN_VS_OUTCOME_RIGHT),
     DUMMY_WIN_TEMPLATE
 };
 
+// Arena-only Window Templates
+CALC_WT_BASEBLOCK(ARENA_WIN_PLAYER_NAME, 0, 6, 1, 8, 2, 5, 256)
+CALC_WT_BASEBLOCK(ARENA_WIN_VS, 0, 14, 1, 2, 2, 5, WT_AFTER_ARENA_WIN_PLAYER_NAME)
+CALC_WT_BASEBLOCK(ARENA_WIN_OPPONENT_NAME, 0, 16, 1, 8, 2, 5, WT_AFTER_ARENA_WIN_VS)
+CALC_WT_BASEBLOCK(ARENA_WIN_MIND, 0, 12, 4, 6, 2, 5, WT_AFTER_ARENA_WIN_OPPONENT_NAME)
+CALC_WT_BASEBLOCK(ARENA_WIN_SKILL, 0, ARENA_WIN_SKILL_TILEMAP_LEFT, 6, ARENA_WIN_SKILL_WIDTH, 2, 5, WT_AFTER_ARENA_WIN_MIND)
+CALC_WT_BASEBLOCK(ARENA_WIN_BODY, 0, 12, 8, 6, 2, 5, WT_AFTER_ARENA_WIN_SKILL)
+CALC_WT_BASEBLOCK(ARENA_WIN_JUDGEMENT_TITLE, 0, 8, 11, 14, 2, 5, WT_AFTER_ARENA_WIN_BODY)
+CALC_WT_BASEBLOCK(ARENA_WIN_JUDGEMENT_TEXT, 0, 2, 15, ARENA_WIN_JUDGEMENT_TEXT_WIDTH, 4, 7, 144)
+
 static const struct WindowTemplate sBattleArenaWindowTemplates[] =
 {
-    [B_WIN_MSG] = {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 15,
-        .width = B_WIN_MSG_WIDTH,
-        .height = 4,
-        .paletteNum = 0,
-        .baseBlock = 0x0090,
-    },
-    [B_WIN_ACTION_PROMPT] = {
-        .bg = 0,
-        .tilemapLeft = 1,
-        .tilemapTop = 35,
-        .width = 14,
-        .height = 4,
-        .paletteNum = 0,
-        .baseBlock = 0x01c0,
-    },
-    [B_WIN_ACTION_MENU] = {
-        .bg = 0,
-        .tilemapLeft = 17,
-        .tilemapTop = 35,
-        .width = 12,
-        .height = 4,
-        .paletteNum = 5,
-        .baseBlock = 0x0190,
-    },
-    [B_WIN_MOVE_NAME_1] = {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 55,
-        .width = 8,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0300,
-    },
-    [B_WIN_MOVE_NAME_2] = {
-        .bg = 0,
-        .tilemapLeft = 11,
-        .tilemapTop = 55,
-        .width = 8,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0310,
-    },
-    [B_WIN_MOVE_NAME_3] = {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 57,
-        .width = 8,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0320,
-    },
-    [B_WIN_MOVE_NAME_4] = {
-        .bg = 0,
-        .tilemapLeft = 11,
-        .tilemapTop = 57,
-        .width = 8,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0330,
-    },
-    [B_WIN_PP] = {
-        .bg = 0,
-        .tilemapLeft = 21,
-        .tilemapTop = 55,
-        .width = 4,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0290,
-    },
-    [B_WIN_DUMMY] = {
-        .bg = 0,
-        .tilemapLeft = 21,
-        .tilemapTop = 57,
-        .width = 0,
-        .height = 0,
-        .paletteNum = 5,
-        .baseBlock = 0x0298,
-    },
-    [B_WIN_PP_REMAINING] = {
-        .bg = 0,
-        .tilemapLeft = 25,
-        .tilemapTop = 55,
-        .width = 4,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0298,
-    },
-    [B_WIN_MOVE_TYPE] = {
-        .bg = 0,
-        .tilemapLeft = 21,
-        .tilemapTop = 57,
-        .width = 8,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x02a0,
-    },
-    [B_WIN_SWITCH_PROMPT] = {
-        .bg = 0,
-        .tilemapLeft = 21,
-        .tilemapTop = 55,
-        .width = 8,
-        .height = 4,
-        .paletteNum = 5,
-        .baseBlock = 0x02b0,
-    },
-    [B_WIN_YESNO] = {
-        .bg = 0,
-        .tilemapLeft = B_WIN_YESNO_TILEMAP_LEFT,
-        .tilemapTop = 9,
-        .width = B_WIN_YESNO_WIDTH,
-        .height = 4,
-        .paletteNum = 5,
-        .baseBlock = 0x0100,
-    },
-    [B_WIN_LEVEL_UP_BOX] = {
-        .bg = 1,
-        .tilemapLeft = 19,
-        .tilemapTop = 8,
-        .width = 10,
-        .height = 11,
-        .paletteNum = 5,
-        .baseBlock = 0x0100,
-    },
-    [B_WIN_LEVEL_UP_BANNER] = {
-        .bg = 2,
-        .tilemapLeft = 18,
-        .tilemapTop = 0,
-        .width = 12,
-        .height = 3,
-        .paletteNum = 6,
-        .baseBlock = 0x016e,
-    },
-    [ARENA_WIN_PLAYER_NAME] = {
-        .bg = 0,
-        .tilemapLeft = 6,
-        .tilemapTop = 1,
-        .width = 8,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0100,
-    },
-    [ARENA_WIN_VS] = {
-        .bg = 0,
-        .tilemapLeft = 14,
-        .tilemapTop = 1,
-        .width = 2,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0110,
-    },
-    [ARENA_WIN_OPPONENT_NAME] = {
-        .bg = 0,
-        .tilemapLeft = 16,
-        .tilemapTop = 1,
-        .width = 8,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0114,
-    },
-    [ARENA_WIN_MIND] = {
-        .bg = 0,
-        .tilemapLeft = 12,
-        .tilemapTop = 4,
-        .width = 6,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0124,
-    },
-    [ARENA_WIN_SKILL] = {
-        .bg = 0,
-        .tilemapLeft = ARENA_WIN_SKILL_TILEMAP_LEFT,
-        .tilemapTop = 6,
-        .width = ARENA_WIN_SKILL_WIDTH,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x0130,
-    },
-    [ARENA_WIN_BODY] = {
-        .bg = 0,
-        .tilemapLeft = 12,
-        .tilemapTop = 8,
-        .width = 6,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = ARENA_WIN_BODY_BASEBLOCK,
-    },
-    [ARENA_WIN_JUDGEMENT_TITLE] = {
-        .bg = 0,
-        .tilemapLeft = 8,
-        .tilemapTop = 11,
-        .width = 14,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = ARENA_WIN_JUDGEMENT_TITLE_BASEBLOCK,
-    },
-    [ARENA_WIN_JUDGEMENT_TEXT] = {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 15,
-        .width = ARENA_WIN_JUDGEMENT_TEXT_WIDTH,
-        .height = 4,
-        .paletteNum = 7,
-        .baseBlock = 0x0090,
-    },
+    // Shared Window Templates
+    [B_WIN_MSG]                 = WINDOW_TEMPLATE(B_WIN_MSG),
+    [B_WIN_ACTION_PROMPT]       = WINDOW_TEMPLATE(B_WIN_ACTION_PROMPT),
+    [B_WIN_ACTION_MENU]         = WINDOW_TEMPLATE(B_WIN_ACTION_MENU),
+    [B_WIN_MOVE_NAME_1]         = WINDOW_TEMPLATE(B_WIN_MOVE_NAME_1),
+    [B_WIN_MOVE_NAME_2]         = WINDOW_TEMPLATE(B_WIN_MOVE_NAME_2),
+    [B_WIN_MOVE_NAME_3]         = WINDOW_TEMPLATE(B_WIN_MOVE_NAME_3),
+    [B_WIN_MOVE_NAME_4]         = WINDOW_TEMPLATE(B_WIN_MOVE_NAME_4),
+    [B_WIN_PP]                  = WINDOW_TEMPLATE(B_WIN_PP),
+    [B_WIN_DUMMY]               = WINDOW_TEMPLATE(B_WIN_DUMMY),
+    [B_WIN_PP_REMAINING]        = WINDOW_TEMPLATE(B_WIN_PP_REMAINING),
+    [B_WIN_MOVE_TYPE]           = WINDOW_TEMPLATE(B_WIN_MOVE_TYPE),
+    [B_WIN_SWITCH_PROMPT]       = WINDOW_TEMPLATE(B_WIN_SWITCH_PROMPT),
+    [B_WIN_YESNO]               = WINDOW_TEMPLATE(B_WIN_YESNO),
+    [B_WIN_LEVEL_UP_BOX]        = WINDOW_TEMPLATE(B_WIN_LEVEL_UP_BOX),
+    [B_WIN_LEVEL_UP_BANNER]     = WINDOW_TEMPLATE(B_WIN_LEVEL_UP_BANNER),
+    // Arena-only Window Templates
+    [ARENA_WIN_PLAYER_NAME]     = WINDOW_TEMPLATE(ARENA_WIN_PLAYER_NAME),
+    [ARENA_WIN_VS]              = WINDOW_TEMPLATE(ARENA_WIN_VS),
+    [ARENA_WIN_OPPONENT_NAME]   = WINDOW_TEMPLATE(ARENA_WIN_OPPONENT_NAME),
+    [ARENA_WIN_MIND]            = WINDOW_TEMPLATE(ARENA_WIN_MIND),
+    [ARENA_WIN_SKILL]           = WINDOW_TEMPLATE(ARENA_WIN_SKILL),
+    [ARENA_WIN_BODY]            = WINDOW_TEMPLATE(ARENA_WIN_BODY),
+    [ARENA_WIN_JUDGEMENT_TITLE] = WINDOW_TEMPLATE(ARENA_WIN_JUDGEMENT_TITLE),
+    [ARENA_WIN_JUDGEMENT_TEXT]  = WINDOW_TEMPLATE(ARENA_WIN_JUDGEMENT_TEXT),
     DUMMY_WIN_TEMPLATE
 };
 
