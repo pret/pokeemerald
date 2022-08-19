@@ -713,10 +713,10 @@ $(STARTERGFXDIR)/birch_help.4bpp: $(STARTERGFXDIR)/birch_bag.4bpp $(STARTERGFXDI
 	@cat $^ >$@
 
 $(NAMINGGFXDIR)/cursor.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 5
+	$(GFX) $< $@ -num_tiles 5 -Wnum_tiles
 
 $(NAMINGGFXDIR)/cursor_squished.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 5
+	$(GFX) $< $@ -num_tiles 5 -Wnum_tiles
 
 $(NAMINGGFXDIR)/cursor_filled.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 5
+	$(GFX) $< $@ -num_tiles 5 -Wnum_tiles
