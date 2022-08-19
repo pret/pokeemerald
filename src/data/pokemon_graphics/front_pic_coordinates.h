@@ -4507,7 +4507,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_KLEAVOR] =
     {
         .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 0,
+        .y_offset = 2,
     },
     [SPECIES_URSALUNA] =
     {
