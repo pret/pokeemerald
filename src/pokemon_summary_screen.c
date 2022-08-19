@@ -124,6 +124,7 @@ enum
 #define TILE_FILLED_JAM_HEART    0x103C
 #define TILE_EMPTY_JAM_HEART     0x103D
 
+// Change in some languages
 #define DATA_WINDOW_INFO_ABILITY_WIDTH  18
 #define DATA_WINDOW_INFO_MEMO_BASEBLOCK 557
 #define MOVE_NAMES_RECT_Y               66

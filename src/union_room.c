@@ -53,6 +53,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+// Changes in some languages
 #define TRADE_BOARD_TITLE_FONT FONT_NORMAL
 
 // States for Task_RunUnionRoom

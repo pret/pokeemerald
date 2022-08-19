@@ -29,6 +29,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+// Changes in some languages
 #define WEIGHT_X 0x81
 
 enum

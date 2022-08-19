@@ -32,6 +32,7 @@
 #include "constants/rgb.h"
 #include "constants/trainers.h"
 
+// Changes in some languages
 #define CARD_BACK_NAME_X 136
 
 struct TrainerCardData

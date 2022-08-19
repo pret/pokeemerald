@@ -28,6 +28,7 @@
 
 #define TAG_MON_BG 1001
 
+// Change in some languages
 #define CREDITS_COPYRIGHT_END_TILE_OFFSET 1
 #define UPDATE_PAGE_DELAY 115
 #define SHOW_MONS_DELAY 50

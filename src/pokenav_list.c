@@ -11,6 +11,7 @@
 #define GFXTAG_ARROW 10
 #define PALTAG_ARROW 20
 
+// Change in some languages
 #define LIST_ITEM_X 8
 #define FIELD_FLAVOR_TEXT_X 2
 #define LIST_ARROW_X_OFFSET 3
