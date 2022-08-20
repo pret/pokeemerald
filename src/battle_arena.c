@@ -35,7 +35,7 @@ static void SaveArenaChallenge(void);
 static void SetArenaPrize(void);
 static void GiveArenaPrize(void);
 static void BufferArenaOpponentName(void);
-static void SpriteCb_JudgmentIcon(struct Sprite *sprite);
+static void SpriteCB_JudgmentIcon(struct Sprite *sprite);
 static void ShowJudgmentSprite(u8 x, u8 y, u8 category, u8 battler);
 
 static const s8 sMindRatings[] =
@@ -456,7 +456,7 @@ static const struct SpriteTemplate sSpriteTemplate_JudgmentIcon =
     .anims = sJudgementIconAnimCmds,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCb_JudgmentIcon,
+    .callback = SpriteCB_JudgmentIcon,
 };
 
 static const struct CompressedSpriteSheet sBattleArenaJudgementSymbolsSpriteSheet[] =
@@ -679,7 +679,7 @@ static void ShowJudgmentSprite(u8 x, u8 y, u8 category, u8 battler)
     StartSpriteAnim(&gSprites[pointsPlayer], animNum);
 }
 
-static void SpriteCb_JudgmentIcon(struct Sprite *sprite)
+static void SpriteCB_JudgmentIcon(struct Sprite *sprite)
 {
     if (gBattleCommunication[0] > 8)
         DestroySprite(sprite);
