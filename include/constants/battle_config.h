@@ -3,63 +3,6 @@
 
 #include "constants/expansion_branches.h"
 
-// // Species with peculiar battle effects.
-// #ifndef POKEMON_EXPANSION
-//     #define SPECIES_DIALGA                           0
-//     #define SPECIES_PALKIA                           0
-//     #define SPECIES_GIRATINA                         0
-//     #define SPECIES_CHERRIM                          0
-//     #define SPECIES_ARCEUS                           0
-//     #define SPECIES_SILVALLY                         0
-//     #define SPECIES_GENESECT                         0
-//     #define SPECIES_AEGISLASH                        0
-//     #define SPECIES_AEGISLASH_BLADE                  10000
-//     #define SPECIES_MIMIKYU                          0
-//     #define SPECIES_MIMIKYU_BUSTED                   10001
-//     #define SPECIES_DARMANITAN                       0
-//     #define SPECIES_DARMANITAN_ZEN_MODE              10002
-//     #define SPECIES_MINIOR_CORE_RED                  0
-//     #define SPECIES_MINIOR                           10003
-//     #define SPECIES_MINIOR_CORE_BLUE                 0
-//     #define SPECIES_MINIOR_METEOR_BLUE               10004
-//     #define SPECIES_MINIOR_CORE_GREEN                0
-//     #define SPECIES_MINIOR_METEOR_GREEN              10005
-//     #define SPECIES_MINIOR_CORE_INDIGO               0
-//     #define SPECIES_MINIOR_METEOR_INDIGO             10006
-//     #define SPECIES_MINIOR_CORE_ORANGE               0
-//     #define SPECIES_MINIOR_METEOR_ORANGE             10007
-//     #define SPECIES_MINIOR_CORE_VIOLET               0
-//     #define SPECIES_MINIOR_METEOR_VIOLET             10008
-//     #define SPECIES_MINIOR_CORE_YELLOW               0
-//     #define SPECIES_MINIOR_METEOR_YELLOW             10009
-//     #define SPECIES_WISHIWASHI                       0
-//     #define SPECIES_WISHIWASHI_SCHOOL                10010
-//     #define SPECIES_ZYGARDE                          0     // 50%
-//     #define SPECIES_ZYGARDE_10                       10011 // 10 %
-//     #define SPECIES_ZYGARDE_COMPLETE                 10012 // 100 %
-//     #define SPECIES_BURMY                            0
-//     #define SPECIES_BURMY_SANDY_CLOAK                10013
-//     #define SPECIES_BURMY_TRASH_CLOAK                10014
-//     #define SPECIES_CRAMORANT                        0
-//     #define SPECIES_CRAMORANT_GORGING                10015
-//     #define SPECIES_CRAMORANT_GULPING                10016
-//     #define SPECIES_GRENINJA_BATTLE_BOND             0
-//     #define SPECIES_GRENINJA_ASH                     10017
-//     #define SPECIES_HOOPA                            0
-//     #define SPECIES_HOOPA_UNBOUND                    10018
-//     #define SPECIES_MELOETTA                         0
-//     #define SPECIES_MELOETTA_PIROUETTE               10019
-//     #define SPECIES_MORPEKO                          0
-//     #define SPECIES_MORPEKO_HANGRY                   10020
-//     #define SPECIES_SIRFETCHD                        10021
-//     #define SPECIES_DARMANITAN_GALARIAN              0
-//     #define SPECIES_DARMANITAN_ZEN_MODE_GALARIAN     10022
-//     #define SPECIES_HEATMOR                          0
-//     #define SPECIES_DURANT                           0
-//     #define SPECIES_CARBINK                          0
-//     #define SPECIES_MAREANIE                         0
-// #endif
-
 #ifndef GEN_3
     #define GEN_3 0
     #define GEN_4 1

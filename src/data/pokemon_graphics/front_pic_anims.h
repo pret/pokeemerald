@@ -4805,6 +4805,7 @@ static const union AnimCmd sAnim_UNOWN_QMARK_1[] =
     ANIMCMD_END,
 };
 
+#if P_NEW_POKEMON == TRUE
 static const union AnimCmd sAnim_TURTWIG_1[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -9168,7 +9169,7 @@ static const union AnimCmd sAnim_ZYGARDE_COMPLETE_1[] =
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
-
+#endif
 static const union AnimCmd sAnim_DEOXYS_ATTACK_1[] =
 {
     ANIMCMD_FRAME(0, 16),
@@ -9226,6 +9227,7 @@ static const union AnimCmd sAnim_DEOXYS_SPEED_2[] =
     ANIMCMD_END,
 };
 
+#if P_NEW_POKEMON == TRUE
 static const union AnimCmd sAnim_PIKACHU_COSPLAY_1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -9315,6 +9317,7 @@ static const union AnimCmd sAnim_PICHU_SPIKY_EARED_1[] =
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
+#endif
 
 static const union AnimCmd *const sAnims_NONE[] ={
     sAnim_GeneralFrame0,
@@ -11456,6 +11459,7 @@ static const union AnimCmd *const sAnims_UNOWN_QMARK[] ={
     sAnim_UNOWN_QMARK_1,
 };
 
+#if P_NEW_POKEMON == TRUE
 static const union AnimCmd *const sAnims_TURTWIG[] ={
     sAnim_GeneralFrame0,
     sAnim_TURTWIG_1,
@@ -14575,7 +14579,7 @@ static const union AnimCmd *const sAnims_ZYGARDE_COMPLETE[] ={
     sAnim_GeneralFrame0,
     sAnim_ZYGARDE_COMPLETE_1,
 };
-
+#endif
 static const union AnimCmd *const sAnims_DEOXYS_ATTACK[] ={
     sAnim_GeneralFrame0,
     sAnim_DEOXYS_ATTACK_1,
@@ -14594,6 +14598,7 @@ static const union AnimCmd *const sAnims_DEOXYS_SPEED[] ={
     sAnim_DEOXYS_SPEED_2,
 };
 
+#if P_NEW_POKEMON == TRUE
 static const union AnimCmd *const sAnims_PIKACHU_COSPLAY[] ={
     sAnim_GeneralFrame0,
     sAnim_PIKACHU_COSPLAY_1,
@@ -14668,6 +14673,7 @@ static const union AnimCmd *const sAnims_PICHU_SPIKY_EARED[] ={
     sAnim_GeneralFrame0,
     sAnim_PICHU_SPIKY_EARED_1,
 };
+#endif
 
 #define ANIM_CMD(name)             [SPECIES_##name] = sAnims_##name
 #define ANIM_CMD_FULL(name, anims) [SPECIES_##name] = anims
@@ -15061,6 +15067,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(JIRACHI),
     ANIM_CMD(DEOXYS),
     ANIM_CMD(CHIMECHO),
+#if P_NEW_POKEMON == TRUE
     ANIM_CMD(TURTWIG),
     ANIM_CMD(GROTLE),
     ANIM_CMD(TORTERRA),
@@ -15675,6 +15682,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(PIKACHU_PARTNER_CAP),
     ANIM_CMD(PIKACHU_WORLD_CAP),
     ANIM_CMD(PICHU_SPIKY_EARED),
+#endif
     ANIM_CMD(UNOWN_B),
     ANIM_CMD(UNOWN_C),
     ANIM_CMD(UNOWN_D),
@@ -15708,6 +15716,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(DEOXYS_ATTACK),
     ANIM_CMD(DEOXYS_DEFENSE),
     ANIM_CMD(DEOXYS_SPEED),
+#if P_NEW_POKEMON == TRUE
     ANIM_CMD_FULL(BURMY_SANDY_CLOAK, sAnims_BURMY),
     ANIM_CMD_FULL(BURMY_TRASH_CLOAK, sAnims_BURMY),
     ANIM_CMD_FULL(WORMADAM_SANDY_CLOAK, sAnims_WORMADAM),
@@ -15881,6 +15890,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD_FULL(ZARUDE_DADA, sAnims_ZARUDE),
     ANIM_CMD_FULL(CALYREX_ICE_RIDER, sAnims_CALYREX),
     ANIM_CMD_FULL(CALYREX_SHADOW_RIDER, sAnims_CALYREX),
+#endif
     ANIM_CMD(EGG),
 };
 

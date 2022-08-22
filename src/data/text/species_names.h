@@ -386,6 +386,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_RAYQUAZA] = _("Rayquaza"),
     [SPECIES_JIRACHI] = _("Jirachi"),
     [SPECIES_DEOXYS] = _("Deoxys"),
+#if P_NEW_POKEMON == TRUE
     [SPECIES_TURTWIG] = _("Turtwig"),
     [SPECIES_GROTLE] = _("Grotle"),
     [SPECIES_TORTERRA] = _("Torterra"),
@@ -1011,6 +1012,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_PIKACHU_WORLD_CAP] = _("Pikachu"),
     // Pichu
     [SPECIES_PICHU_SPIKY_EARED] = _("Pichu"),
+#endif
     // Unown
     [SPECIES_UNOWN_B] = _("Unown"),
     [SPECIES_UNOWN_C] = _("Unown"),
@@ -1047,6 +1049,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_DEOXYS_ATTACK] = _("Deoxys"),
     [SPECIES_DEOXYS_DEFENSE] = _("Deoxys"),
     [SPECIES_DEOXYS_SPEED] = _("Deoxys"),
+#if P_NEW_POKEMON == TRUE
     // Burmy
     [SPECIES_BURMY_SANDY_CLOAK] = _("Burmy"),
     [SPECIES_BURMY_TRASH_CLOAK] = _("Burmy"),
@@ -1274,4 +1277,5 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     // Calyrex
     [SPECIES_CALYREX_ICE_RIDER] = _("Calyrex"),
     [SPECIES_CALYREX_SHADOW_RIDER] = _("Calyrex"),
+#endif
 };

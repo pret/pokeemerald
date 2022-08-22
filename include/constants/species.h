@@ -1,6 +1,8 @@
 #ifndef GUARD_CONSTANTS_SPECIES_H
 #define GUARD_CONSTANTS_SPECIES_H
 
+#include "constants/pokemon_config.h"
+
 #define SPECIES_NONE 0
 #define SPECIES_BULBASAUR 1
 #define SPECIES_IVYSAUR 2
@@ -901,8 +903,6 @@
 #define SPECIES_SPECTRIER 897
 #define SPECIES_CALYREX 898
 
-#define FORMS_START SPECIES_CALYREX
-
 // Megas
 #define SPECIES_VENUSAUR_MEGA                FORMS_START + 1
 #define SPECIES_CHARIZARD_MEGA_X             FORMS_START + 2
@@ -1021,6 +1021,7 @@
 // Pichu
 #define SPECIES_PICHU_SPIKY_EARED            FORMS_START + 102
 
+#if P_NEW_POKEMON == TRUE
 // Unown
 #define SPECIES_UNOWN_B                      FORMS_START + 103
 #define SPECIES_UNOWN_C                      FORMS_START + 104
@@ -1059,6 +1060,47 @@
 #define SPECIES_DEOXYS_ATTACK                FORMS_START + 133
 #define SPECIES_DEOXYS_DEFENSE               FORMS_START + 134
 #define SPECIES_DEOXYS_SPEED                 FORMS_START + 135
+
+#else
+// Unown
+#define SPECIES_UNOWN_B                      FORMS_START + 1
+#define SPECIES_UNOWN_C                      FORMS_START + 2
+#define SPECIES_UNOWN_D                      FORMS_START + 3
+#define SPECIES_UNOWN_E                      FORMS_START + 4
+#define SPECIES_UNOWN_F                      FORMS_START + 5
+#define SPECIES_UNOWN_G                      FORMS_START + 6
+#define SPECIES_UNOWN_H                      FORMS_START + 7
+#define SPECIES_UNOWN_I                      FORMS_START + 8
+#define SPECIES_UNOWN_J                      FORMS_START + 9
+#define SPECIES_UNOWN_K                      FORMS_START + 10
+#define SPECIES_UNOWN_L                      FORMS_START + 11
+#define SPECIES_UNOWN_M                      FORMS_START + 12
+#define SPECIES_UNOWN_N                      FORMS_START + 13
+#define SPECIES_UNOWN_O                      FORMS_START + 14
+#define SPECIES_UNOWN_P                      FORMS_START + 15
+#define SPECIES_UNOWN_Q                      FORMS_START + 16
+#define SPECIES_UNOWN_R                      FORMS_START + 17
+#define SPECIES_UNOWN_S                      FORMS_START + 18
+#define SPECIES_UNOWN_T                      FORMS_START + 19
+#define SPECIES_UNOWN_U                      FORMS_START + 20
+#define SPECIES_UNOWN_V                      FORMS_START + 21
+#define SPECIES_UNOWN_W                      FORMS_START + 22
+#define SPECIES_UNOWN_X                      FORMS_START + 23
+#define SPECIES_UNOWN_Y                      FORMS_START + 24
+#define SPECIES_UNOWN_Z                      FORMS_START + 25
+#define SPECIES_UNOWN_EMARK                  FORMS_START + 26
+#define SPECIES_UNOWN_QMARK                  FORMS_START + 27
+
+// Castform
+#define SPECIES_CASTFORM_SUNNY               FORMS_START + 28
+#define SPECIES_CASTFORM_RAINY               FORMS_START + 29
+#define SPECIES_CASTFORM_SNOWY               FORMS_START + 30
+
+// Deoxys
+#define SPECIES_DEOXYS_ATTACK                FORMS_START + 31
+#define SPECIES_DEOXYS_DEFENSE               FORMS_START + 32
+#define SPECIES_DEOXYS_SPEED                 FORMS_START + 33
+#endif
 
 // Burmy
 #define SPECIES_BURMY_SANDY_CLOAK            FORMS_START + 136
@@ -1341,7 +1383,14 @@
 #define SPECIES_CALYREX_ICE_RIDER            FORMS_START + 307
 #define SPECIES_CALYREX_SHADOW_RIDER         FORMS_START + 308
 
+#if P_NEW_POKEMON == TRUE
+#define FORMS_START SPECIES_CALYREX
 #define SPECIES_EGG SPECIES_CALYREX_SHADOW_RIDER + 1
+#else
+#define FORMS_START SPECIES_DEOXYS
+#define SPECIES_EGG SPECIES_DEOXYS_SPEED + 1
+#endif
+
 #define NUM_SPECIES SPECIES_EGG
 
 #endif  // GUARD_CONSTANTS_SPECIES_H

@@ -21,6 +21,8 @@
 #define P_KADABRA_EVERSTONE     GEN_8 // Since Gen 4, Kadabra can evolve even when holding an Everstone.
 #define P_NIDORAN_M_DITTO_BREED GEN_8 // Since Gen 5, when Nidoran♂ breeds with Ditto it can produce Nidoran♀ offspring. Before, it would only yield male offspring. This change also applies to Volbeat.
 
+#define P_NEW_POKEMON           TRUE  // Turning this to FALSE will remove all newly added Pokémon and Forms. Only Unown, Castform and Deoxys forms will remain.
+
 #define P_ENABLE_DEBUG          TRUE  // Enables a debug menu for pokemon sprites and icons, accessed by pressing SELECT in the summary screen.
 
 #endif // GUARD_CONSTANTS_POKEMON_CONFIG_H

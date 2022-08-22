@@ -387,6 +387,7 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_JIRACHI] = gMonFootprint_Jirachi,
     [SPECIES_DEOXYS] = gMonFootprint_Deoxys,
     [SPECIES_CHIMECHO] = gMonFootprint_Chimecho,
+#if P_NEW_POKEMON == TRUE
     [SPECIES_TURTWIG] = gMonFootprint_Turtwig,
     [SPECIES_GROTLE] = gMonFootprint_Grotle,
     [SPECIES_TORTERRA] = gMonFootprint_Torterra,
@@ -899,5 +900,6 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_GLASTRIER] = gMonFootprint_Glastrier,
     [SPECIES_SPECTRIER] = gMonFootprint_Spectrier,
     [SPECIES_CALYREX] = gMonFootprint_Calyrex,
+#endif
     [SPECIES_EGG] = gMonFootprint_Bulbasaur,
 };

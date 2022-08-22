@@ -1939,6 +1939,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 9,
     },
+#if P_NEW_POKEMON == TRUE
     [SPECIES_TURTWIG] =
     {
         .size = MON_COORDS_SIZE(48, 56),
@@ -5017,6 +5018,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(48, 56),
         .y_offset = 8,
     },
+#endif
     // Unown
     [SPECIES_UNOWN_B] =
     {
@@ -5185,6 +5187,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
+#if P_NEW_POKEMON == TRUE
     // Burmy
     [SPECIES_BURMY_SANDY_CLOAK] =
     {
@@ -6104,6 +6107,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 7,
     },
+#endif
     // Egg
     [SPECIES_EGG] =
     {
