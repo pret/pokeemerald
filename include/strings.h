@@ -3041,4 +3041,11 @@ extern const u8 gText_Dresseur[];
 extern const u8 gText_Champion[];
 #endif
 
+// Naming Screen
+extern const u8 gText_MoveOkBack[];
+extern const u8 gText_YourName[];
+extern const u8 gText_BoxName[];
+extern const u8 gText_PkmnsNickname[];
+extern const u8 gText_TellHimTheWords[];
+
 #endif // GUARD_STRINGS_H

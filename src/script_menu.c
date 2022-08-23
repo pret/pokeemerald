@@ -190,7 +190,7 @@ static void Task_HandleMultichoiceInput(u8 taskId)
                 }
                 ClearToTransparentAndRemoveWindow(tWindowId);
                 DestroyTask(taskId);
-                EnableBothScriptContexts();
+                ScriptContext_Enable();
             }
         }
     }
@@ -245,7 +245,7 @@ static void Task_HandleYesNoInput(u8 taskId)
     }
 
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress, u8 columnCount)
@@ -307,7 +307,7 @@ static void Task_HandleMultichoiceGridInput(u8 taskId)
 
     ClearToTransparentAndRemoveWindow(tWindowId);
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 #undef tWindowId

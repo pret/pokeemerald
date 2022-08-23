@@ -277,7 +277,7 @@
 	.endm
 
 	@ Blocks script execution until a command or C code manually unblocks it. Generally used with specific 
-	@ commands and specials. Calling EnableBothScriptContexts for instance will allow execution to continue.
+	@ commands and specials. Calling ScriptContext_Enable for instance will allow execution to continue.
 	.macro waitstate
 	.byte 0x27
 	.endm

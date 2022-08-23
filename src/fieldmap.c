@@ -352,7 +352,7 @@ u8 MapGridGetElevationAt(int x, int y)
     return block >> MAPGRID_ELEVATION_SHIFT;
 }
 
-bool8 MapGridIsImpassableAt(int x, int y)
+u8 MapGridGetCollisionAt(int x, int y)
 {
     u16 block = GetMapGridBlockAt(x, y);
 

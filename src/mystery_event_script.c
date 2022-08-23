@@ -220,7 +220,7 @@ bool8 MEScrCmd_setmsg(struct ScriptContext *ctx)
 bool8 MEScrCmd_runscript(struct ScriptContext *ctx)
 {
     u8 *script = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
-    ScriptContext2_RunNewScript(script);
+    RunScriptImmediately(script);
     return FALSE;
 }
 
