@@ -387,6 +387,7 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(JIRACHI, gMonFrontPic_Jirachi),
     SPECIES_SPRITE(DEOXYS, gMonFrontPic_Deoxys),
     SPECIES_SPRITE(CHIMECHO, gMonFrontPic_Chimecho),
+#if P_NEW_POKEMON == TRUE
     SPECIES_SPRITE(TURTWIG, gMonFrontPic_Turtwig),
     SPECIES_SPRITE(GROTLE, gMonFrontPic_Grotle),
     SPECIES_SPRITE(TORTERRA, gMonFrontPic_Torterra),
@@ -1008,7 +1009,7 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(PIKACHU_WORLD_CAP, gMonFrontPic_PikachuWorldCap),
 
     SPECIES_SPRITE(PICHU_SPIKY_EARED, gMonFrontPic_PichuSpikyEared),
-
+#endif
     SPECIES_SPRITE(UNOWN_B, gMonFrontPic_UnownB),
     SPECIES_SPRITE(UNOWN_C, gMonFrontPic_UnownC),
     SPECIES_SPRITE(UNOWN_D, gMonFrontPic_UnownD),
@@ -1044,7 +1045,7 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(DEOXYS_ATTACK, gMonFrontPic_DeoxysAttack),
     SPECIES_SPRITE(DEOXYS_DEFENSE, gMonFrontPic_DeoxysDefense),
     SPECIES_SPRITE(DEOXYS_SPEED, gMonFrontPic_DeoxysSpeed),
-
+#if P_NEW_POKEMON == TRUE
     SPECIES_SPRITE(BURMY_SANDY_CLOAK, gMonFrontPic_BurmySandyCloak),
     SPECIES_SPRITE(BURMY_TRASH_CLOAK, gMonFrontPic_BurmyTrashCloak),
 
@@ -1271,13 +1272,14 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
 
     SPECIES_SPRITE(CALYREX_ICE_RIDER, gMonFrontPic_CalyrexIceRider),
     SPECIES_SPRITE(CALYREX_SHADOW_RIDER, gMonFrontPic_CalyrexShadowRider),
-
+#endif
     SPECIES_SPRITE(EGG, gMonFrontPic_Egg),
 };
 
 const struct CompressedSpriteSheet gMonFrontPicTableFemale[] =
 {
     SPECIES_SPRITE(EEVEE, gMonFrontPic_EeveeF),
+#if P_NEW_POKEMON == TRUE
     SPECIES_SPRITE(STARLY, gMonFrontPic_StarlyF),
     SPECIES_SPRITE(STARAVIA, gMonFrontPic_StaraviaF),
     SPECIES_SPRITE(STARAPTOR, gMonFrontPic_StaraptorF),
@@ -1292,4 +1294,5 @@ const struct CompressedSpriteSheet gMonFrontPicTableFemale[] =
     SPECIES_SPRITE(FRILLISH, gMonFrontPic_FrillishF),
     SPECIES_SPRITE(JELLICENT, gMonFrontPic_JellicentF),
     SPECIES_SPRITE(PYROAR, gMonFrontPic_PyroarF),
+#endif
 };

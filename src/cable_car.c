@@ -245,7 +245,7 @@ static void Task_LoadCableCar(u8 taskId)
 
 void CableCar(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(Task_LoadCableCar, 1);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB(0, 0, 0));
 }

@@ -7,6 +7,9 @@
 #define WINDOW_CLEAR (1 << 0)
 #define WINDOW_BG1   (1 << 7)
 
+// Arguments for 'xStart, yStart, xEnd, yEnd' in HandleBattleWindow
+#define YESNOBOX_X_Y 24, 8, 29, 13
+
 struct StatFractions
 {
     u8 dividend;

@@ -58,7 +58,7 @@ static u8 GetZMoveScore(u8 battlerAtk, u8 battlerDef, u16 baseMove, u16 zMove);
 // Const Data
 static const struct SignatureZMove sSignatureZMoves[] =
 {
-    #ifdef POKEMON_EXPANSION
+//    #ifdef NEW_POKEMON
     {SPECIES_PIKACHU_COSPLAY,       ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
     {SPECIES_PIKACHU_ROCK_STAR,     ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
     {SPECIES_PIKACHU_BELLE,         ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
@@ -95,7 +95,7 @@ static const struct SignatureZMove sSignatureZMoves[] =
     {SPECIES_TAPU_LELE,             ITEM_TAPUNIUM_Z,           MOVE_NATURES_MADNESS,     MOVE_GUARDIAN_OF_ALOLA},
     {SPECIES_TAPU_FINI,             ITEM_TAPUNIUM_Z,           MOVE_NATURES_MADNESS,     MOVE_GUARDIAN_OF_ALOLA},
     {SPECIES_NECROZMA_ULTRA,        ITEM_ULTRANECROZIUM_Z,     MOVE_PHOTON_GEYSER,       MOVE_LIGHT_THAT_BURNS_THE_SKY},
-    #endif
+//    #endif
     {SPECIES_MEW,                   ITEM_MEWNIUM_Z,            MOVE_PSYCHIC,             MOVE_GENESIS_SUPERNOVA},
     {SPECIES_PIKACHU,               ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
     {SPECIES_EEVEE,                 ITEM_EEVIUM_Z,             MOVE_LAST_RESORT,         MOVE_EXTREME_EVOBOOST},
@@ -161,7 +161,7 @@ void QueueZMove(u8 battlerId, u16 baseMove)
 bool32 IsViableZMove(u8 battlerId, u16 move)
 {
     struct Pokemon *mon;
-    struct MegaEvolutionData *mega = &(((struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]))->mega);
+    struct MegaEvolutionData *mega = &(((struct ChooseMoveStruct *)(&gBattleResources->bufferA[gActiveBattler][4]))->mega);
     u8 battlerPosition = GetBattlerPosition(battlerId);
     u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battlerId));
     u32 item;
@@ -212,7 +212,7 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
         
         if (move != MOVE_NONE && zMove != MOVE_Z_STATUS && gBattleMoves[move].type == ItemId_GetSecondaryId(item))
         {
-            if (IS_MOVE_STATUS(gBattleMoves[move].split))
+            if (IS_MOVE_STATUS(move))
                 gBattleStruct->zmove.chosenZMove = move;
             else
                 gBattleStruct->zmove.chosenZMove = GetTypeBasedZMove(move, battlerId);
@@ -408,7 +408,7 @@ static u16 GetTypeBasedZMove(u16 move, u8 battler)
 bool32 MoveSelectionDisplayZMove(u16 zmove)
 {
     u32 i;
-    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
+    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[gActiveBattler][4]);
     u16 move = moveInfo->moves[gMoveSelectionCursor[gActiveBattler]];
     
     PlaySE(SE_SELECT);
@@ -501,7 +501,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove)
                 break;
             }
             
-            BattlePutTextOnWindow(gDisplayedStringBattle, 5); // Slot of Move 3
+            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_3);
             gDisplayedStringBattle[0] = CHAR_Z;
             gDisplayedStringBattle[1] = CHAR_HYPHEN;
             StringCopy(gDisplayedStringBattle + 2, gMoveNames[move]);
@@ -510,7 +510,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove)
         {
             // Damaging move -> status z move
             StringCopy(gDisplayedStringBattle, sText_StatsPlus2);
-            BattlePutTextOnWindow(gDisplayedStringBattle, 5); // Slot of Move 3
+            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_3);
             StringCopy(gDisplayedStringBattle, GetZMoveName(zmove));
         }
         else
@@ -518,7 +518,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove)
             ZMoveSelectionDisplayPower(move, zmove);
             StringCopy(gDisplayedStringBattle, GetZMoveName(zmove));
         }
-        BattlePutTextOnWindow(gDisplayedStringBattle, 3);   // First move slot
+        BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_1);
 
         ZMoveSelectionDisplayPpNumber();
         MoveSelectionCreateCursorAt(0, 0);
@@ -540,7 +540,7 @@ static void ZMoveSelectionDisplayPower(u16 move, u16 zMove)
     {
         txtPtr = StringCopy(gDisplayedStringBattle, sText_PowerColon);
         ConvertIntToDecimalStringN(txtPtr, power, STR_CONV_MODE_LEFT_ALIGN, 3);
-        BattlePutTextOnWindow(gDisplayedStringBattle, 5); // Bottom left
+        BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_3);
     }
 }
 
@@ -553,14 +553,14 @@ static void ZMoveSelectionDisplayPpNumber(void)
         return;
 
     SetPpNumbersPaletteInMoveSelection();
-    moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
+    moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[gActiveBattler][4]);
     txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, 1, STR_CONV_MODE_RIGHT_ALIGN, 2);
     *(txtPtr)++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(txtPtr, 1, STR_CONV_MODE_RIGHT_ALIGN, 2);
-    BattlePutTextOnWindow(gDisplayedStringBattle, 9);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
 }
 
-const u8* GetZMoveName(u16 move)
+const u8 *GetZMoveName(u16 move)
 {
     if (IsZMove(move))
         return gZMoveNames[move - FIRST_Z_MOVE];

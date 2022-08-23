@@ -393,7 +393,7 @@ static void AnimStealthRockStep2(struct Sprite *sprite)
 void AnimFallingRock(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[3] != 0)
-        SetAverageBattlerPositions(gBattleAnimTarget, 0, &sprite->x, &sprite->y);
+        SetAverageBattlerPositions(gBattleAnimTarget, FALSE, &sprite->x, &sprite->y);
 
     sprite->x += gBattleAnimArgs[0];
     sprite->y += 14;
@@ -459,7 +459,7 @@ void AnimRockFragment(struct Sprite *sprite)
 void AnimParticleInVortex(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[6] == ANIM_ATTACKER)
-        InitSpritePosToAnimAttacker(sprite, 0);
+        InitSpritePosToAnimAttacker(sprite, FALSE);
     else
         InitSpritePosToAnimTarget(sprite, FALSE);
 
@@ -640,7 +640,7 @@ void AnimFlyingSandCrescent(struct Sprite *sprite)
 void AnimRaiseSprite(struct Sprite *sprite)
 {
     StartSpriteAnim(sprite, gBattleAnimArgs[4]);
-    InitSpritePosToAnimAttacker(sprite, 0);
+    InitSpritePosToAnimAttacker(sprite, FALSE);
 
     sprite->data[0] = gBattleAnimArgs[3];
     sprite->data[2] = sprite->x;

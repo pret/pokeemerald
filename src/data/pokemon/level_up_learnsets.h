@@ -7903,6 +7903,7 @@ static const struct LevelUpMove sChimechoLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+#if P_NEW_POKEMON == TRUE
 static const struct LevelUpMove sTurtwigLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 5, MOVE_WITHDRAW),
@@ -18840,7 +18841,7 @@ static const struct LevelUpMove sStunfiskGalarianLevelUpLearnset[] = {
     LEVEL_UP_MOVE(55, MOVE_FISSURE),
     LEVEL_UP_END
 };
-
+#endif
 static const struct LevelUpMove sDeoxysAttackLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_LEER),
     LEVEL_UP_MOVE( 1, MOVE_WRAP),
@@ -18897,6 +18898,7 @@ static const struct LevelUpMove sDeoxysSpeedLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+#if P_NEW_POKEMON == TRUE
 static const struct LevelUpMove sWormadamSandyCloakLevelUpLearnset[] = {
     //LEVEL_UP_MOVE( 0, MOVE_QUIVER_DANCE),
     LEVEL_UP_MOVE( 1, MOVE_QUIVER_DANCE),
@@ -19247,3 +19249,4 @@ static const struct LevelUpMove sCalyrexShadowRiderLevelUpLearnset[] = {
     LEVEL_UP_MOVE(88, MOVE_FUTURE_SIGHT),
     LEVEL_UP_END
 };
+#endif

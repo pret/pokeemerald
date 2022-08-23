@@ -386,6 +386,7 @@ gCryTable::
 	cry Cry_Rayquaza
 	cry Cry_Jirachi
 	cry Cry_Deoxys
+.if P_NEW_POKEMON == TRUE
 	cry Cry_Turtwig
 	cry Cry_Grotle
 	cry Cry_Torterra
@@ -1271,6 +1272,44 @@ gCryTable::
 	@ Calyrex
 	cry Cry_CalyrexIceRider
 	cry Cry_CalyrexShadowRider
+.else
+	@ Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	@ Castform
+	cry Cry_Castform
+	cry Cry_Castform
+	cry Cry_Castform
+	@ Deoxys
+	cry Cry_Deoxys
+	cry Cry_Deoxys
+	cry Cry_Deoxys
+.endif
 
 	.align 2
 gCryTable_Reverse::
@@ -1660,6 +1699,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Rayquaza
 	cry_reverse Cry_Jirachi
 	cry_reverse Cry_Deoxys
+.if P_NEW_POKEMON == TRUE
 	cry_reverse Cry_Turtwig
 	cry_reverse Cry_Grotle
 	cry_reverse Cry_Torterra
@@ -2545,3 +2585,41 @@ gCryTable_Reverse::
 	@ Calyrex
 	cry_reverse Cry_CalyrexIceRider
 	cry_reverse Cry_CalyrexShadowRider
+.else
+	@ Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	@ Castform
+	cry_reverse Cry_Castform
+	cry_reverse Cry_Castform
+	cry_reverse Cry_Castform
+	@ Deoxys
+	cry_reverse Cry_Deoxys
+	cry_reverse Cry_Deoxys
+	cry_reverse Cry_Deoxys
+.endif

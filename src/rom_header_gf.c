@@ -15,8 +15,8 @@ struct GFRomHeader
     const struct CompressedSpriteSheet * monBackPics;
     const struct CompressedSpritePalette * monNormalPalettes;
     const struct CompressedSpritePalette * monShinyPalettes;
-    const u8 * const * monIcons;
-    const u8 * monIconPaletteIds;
+    const u8 *const * monIcons;
+    const u8 *monIconPaletteIds;
     const struct SpritePalette * monIconPalettes;
     const u8 (* monSpeciesNames)[];
     const u8 (* moveNames)[];
@@ -30,7 +30,7 @@ struct GFRomHeader
     u32 mysteryEventFlag;
     u32 pokedexCount;
     u8 playerNameLength;
-    u8 unk2;
+    u8 trainerNameLength;
     u8 pokemonNameLength1;
     u8 pokemonNameLength2;
     u8 unk5;
@@ -61,7 +61,7 @@ struct GFRomHeader
     u32 unk18;
     const struct BaseStats * baseStats;
     const u8 (* abilityNames)[];
-    const u8 * const * abilityDescriptions;
+    const u8 *const * abilityDescriptions;
     const struct Item * items;
     const struct BattleMove * moves;
     const struct CompressedSpriteSheet * ballGfx;
@@ -79,7 +79,7 @@ struct GFRomHeader
     u32 giftRibbonsOffset;
     u32 enigmaBerryOffset;
     u32 enigmaBerrySize;
-    const u8 * moveDescriptions;
+    const u8 *moveDescriptions;
     u32 unk20;
 };
 
@@ -109,7 +109,7 @@ static const struct GFRomHeader sGFRomHeader = {
     .mysteryEventFlag = FLAG_SYS_MYSTERY_EVENT_ENABLE,
     .pokedexCount = NATIONAL_DEX_COUNT,
     .playerNameLength = PLAYER_NAME_LENGTH,
-    .unk2 = 10,
+    .trainerNameLength = TRAINER_NAME_LENGTH,
     .pokemonNameLength1 = POKEMON_NAME_LENGTH,
     .pokemonNameLength2 = POKEMON_NAME_LENGTH,
     // Two of the below 12s are likely move/ability name length, given their presence in this header

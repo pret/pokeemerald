@@ -387,6 +387,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(JIRACHI, gMonBackPic_Jirachi),
     SPECIES_SPRITE(DEOXYS, gMonBackPic_Deoxys),
     SPECIES_SPRITE(CHIMECHO, gMonBackPic_Chimecho),
+#if P_NEW_POKEMON == TRUE
     SPECIES_SPRITE(TURTWIG, gMonBackPic_Turtwig),
     SPECIES_SPRITE(GROTLE, gMonBackPic_Grotle),
     SPECIES_SPRITE(TORTERRA, gMonBackPic_Torterra),
@@ -1008,7 +1009,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(PIKACHU_WORLD_CAP, gMonBackPic_PikachuWorldCap),
 
     SPECIES_SPRITE(PICHU_SPIKY_EARED, gMonBackPic_PichuSpikyEared),
-
+#endif
     SPECIES_SPRITE(UNOWN_B, gMonBackPic_UnownB),
     SPECIES_SPRITE(UNOWN_C, gMonBackPic_UnownC),
     SPECIES_SPRITE(UNOWN_D, gMonBackPic_UnownD),
@@ -1044,7 +1045,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(DEOXYS_ATTACK, gMonBackPic_DeoxysAttack),
     SPECIES_SPRITE(DEOXYS_DEFENSE, gMonBackPic_DeoxysDefense),
     SPECIES_SPRITE(DEOXYS_SPEED, gMonBackPic_DeoxysSpeed),
-
+#if P_NEW_POKEMON == TRUE
     SPECIES_SPRITE(BURMY_SANDY_CLOAK, gMonBackPic_BurmySandyCloak),
     SPECIES_SPRITE(BURMY_TRASH_CLOAK, gMonBackPic_BurmyTrashCloak),
 
@@ -1271,13 +1272,14 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
 
     SPECIES_SPRITE(CALYREX_ICE_RIDER, gMonBackPic_CalyrexIceRider),
     SPECIES_SPRITE(CALYREX_SHADOW_RIDER, gMonBackPic_CalyrexShadowRider),
-
+#endif
     SPECIES_SPRITE(EGG, gMonFrontPic_Egg),
 };
 
 const struct CompressedSpriteSheet gMonBackPicTableFemale[] =
 {
     SPECIES_SPRITE(EEVEE, gMonBackPic_EeveeF),
+#if P_NEW_POKEMON == TRUE
     SPECIES_SPRITE(STARLY, gMonBackPic_StarlyF),
     SPECIES_SPRITE(STARAVIA, gMonBackPic_StaraviaF),
     SPECIES_SPRITE(STARAPTOR, gMonBackPic_Staraptor),
@@ -1292,4 +1294,5 @@ const struct CompressedSpriteSheet gMonBackPicTableFemale[] =
     SPECIES_SPRITE(FRILLISH, gMonBackPic_FrillishF),
     SPECIES_SPRITE(JELLICENT, gMonBackPic_JellicentF),
     SPECIES_SPRITE(PYROAR, gMonBackPic_PyroarF),
+#endif
 };
