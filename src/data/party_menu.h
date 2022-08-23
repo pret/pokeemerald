@@ -1143,7 +1143,7 @@ static const struct CompressedSpritePalette sSpritePalette_StatusIcons =
     gStatusPal_Icons, TAG_STATUS_ICONS
 };
 
-static const struct SpriteTemplate sSpriteTemplate_StatusIcons =
+const struct SpriteTemplate gSpriteTemplate_StatusIcons =
 {
     .tileTag = TAG_STATUS_ICONS,
     .paletteTag = TAG_STATUS_ICONS,

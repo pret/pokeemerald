@@ -245,6 +245,7 @@ static void CopyBattlerDataToAIParty(u32 bPosition, u32 side)
 
     aiMon->species = bMon->species;
     aiMon->level = bMon->level;
+    aiMon->status = bMon->status1;
     aiMon->gender = GetGenderFromSpeciesAndPersonality(bMon->species, bMon->personality);
     aiMon->isFainted = FALSE;
     aiMon->wasSentInBattle = TRUE;
@@ -253,6 +254,8 @@ static void CopyBattlerDataToAIParty(u32 bPosition, u32 side)
 
 void Ai_InitPartyStruct(void)
 {
+    u32 i;
+
     AI_PARTY->count[B_SIDE_PLAYER] = gPlayerPartyCount;
     AI_PARTY->count[B_SIDE_OPPONENT] = gEnemyPartyCount;
 
@@ -266,6 +269,13 @@ void Ai_InitPartyStruct(void)
     {
         CopyBattlerDataToAIParty(B_POSITION_OPPONENT_LEFT, B_SIDE_OPPONENT);
         CopyBattlerDataToAIParty(B_POSITION_OPPONENT_RIGHT, B_SIDE_OPPONENT);
+    }
+
+    // Find fainted mons
+    for (i = 0; i < AI_PARTY->count[B_SIDE_PLAYER]; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
+            AI_PARTY->mons[B_SIDE_PLAYER][i].isFainted = TRUE;
     }
 }
 
@@ -287,6 +297,8 @@ void Ai_UpdateSwitchInData(u32 battler)
             if (aiMon->moves[i])
                 BATTLE_HISTORY->usedMoves[battler][i] = aiMon->moves[i];
         }
+        aiMon->switchInCount++;
+        aiMon->status = gBattleMons[battler].status1; // Copy status, because it could've been changed in battle.
     }
     else // If not, copy the newly switched-in mon in battle and clear battle history.
     {
@@ -295,6 +307,15 @@ void Ai_UpdateSwitchInData(u32 battler)
         ClearBattlerItemEffectHistory(battler);
         CopyBattlerDataToAIParty(GetBattlerPosition(battler), side);
     }
+}
+
+void Ai_UpdateFaintData(u32 battler)
+{
+    struct AiPartyMon *aiMon = &AI_PARTY->mons[GET_BATTLER_SIDE(battler)][gBattlerPartyIndexes[battler]];
+    ClearBattlerMoveHistory(battler);
+    ClearBattlerAbilityHistory(battler);
+    ClearBattlerItemEffectHistory(battler);
+    aiMon->isFainted = TRUE;
 }
 
 static void SetBattlerAiData(u8 battlerId)

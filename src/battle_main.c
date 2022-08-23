@@ -3210,9 +3210,7 @@ void FaintClearSetData(void)
     gBattleMons[gActiveBattler].type2 = gBaseStats[gBattleMons[gActiveBattler].species].type2;
     gBattleMons[gActiveBattler].type3 = TYPE_MYSTERY;
 
-    ClearBattlerMoveHistory(gActiveBattler);
-    ClearBattlerAbilityHistory(gActiveBattler);
-    ClearBattlerItemEffectHistory(gActiveBattler);
+    Ai_UpdateFaintData(gActiveBattler);
     UndoFormChange(gBattlerPartyIndexes[gActiveBattler], GET_BATTLER_SIDE(gActiveBattler), FALSE);
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         UndoMegaEvolution(gBattlerPartyIndexes[gActiveBattler]);

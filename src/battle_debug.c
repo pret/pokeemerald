@@ -7,6 +7,7 @@
 #include "menu_helpers.h"
 #include "scanline_effect.h"
 #include "palette.h"
+#include "party_menu.h"
 #include "pokemon_icon.h"
 #include "sprite.h"
 #include "item.h"
@@ -30,6 +31,7 @@
 #include "reset_rtc_screen.h"
 #include "reshow_battle_screen.h"
 #include "constants/abilities.h"
+#include "constants/party_menu.h"
 #include "constants/moves.h"
 #include "constants/items.h"
 #include "constants/rgb.h"
@@ -883,7 +885,7 @@ static void PutAiInfoText(struct BattleDebugMenu *data)
 
 static void PutAiPartyText(struct BattleDebugMenu *data)
 {
-    u32 i, j, count, maxWidth;
+    u32 i, j, count;
     u8 *text = malloc(0x50), *txtPtr;
     struct AiPartyMon *aiMons = AI_PARTY->mons[GET_BATTLER_SIDE(data->aiBattlerId)];
 
@@ -891,15 +893,37 @@ static void PutAiPartyText(struct BattleDebugMenu *data)
     count = AI_PARTY->count[GET_BATTLER_SIDE(data->aiBattlerId)];
     for (i = 0; i < count; i++)
     {
+        if (aiMons[i].wasSentInBattle)
+        {
+            text[0] = CHAR_LV;
+            txtPtr = ConvertIntToDecimalStringN(text + 1, aiMons[i].level, STR_CONV_MODE_LEFT_ALIGN, 3);
+            *txtPtr++ = CHAR_SPACE;
+            if (aiMons[i].gender == MON_MALE)
+                *txtPtr++ = CHAR_MALE;
+            else if (aiMons[i].gender == MON_FEMALE)
+                *txtPtr++ = CHAR_FEMALE;
+            *txtPtr = EOS;
+            AddTextPrinterParameterized5(data->aiMovesWindowId, FONT_SMALL_NARROW, text, i * 41, 0, 0, NULL, 0, 0);
+        }
+
         txtPtr = StringCopyN(text, gAbilityNames[aiMons[i].ability], 7); // The screen is too small to fit the whole string, so we need to drop the last letters.
         *txtPtr = EOS;
-        AddTextPrinterParameterized5(data->aiMovesWindowId, FONT_SMALL_NARROW, text, i * 41, 0, 0, NULL, 0, 0);
+        AddTextPrinterParameterized5(data->aiMovesWindowId, FONT_SMALL_NARROW, text, i * 41, 15, 0, NULL, 0, 0);
+
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
             txtPtr = StringCopyN(text, gMoveNames[aiMons[i].moves[j]], 8);
             *txtPtr = EOS;
-            AddTextPrinterParameterized5(data->aiMovesWindowId, FONT_SMALL_NARROW, text, i * 41, 20 + j * 15, 0, NULL, 0, 0);
+            AddTextPrinterParameterized5(data->aiMovesWindowId, FONT_SMALL_NARROW, text, i * 41, 35 + j * 15, 0, NULL, 0, 0);
         }
+
+        txtPtr = StringCopyN(text, GetHoldEffectName(aiMons[i].heldEffect), 7);
+        *txtPtr = EOS;
+        AddTextPrinterParameterized5(data->aiMovesWindowId, FONT_SMALL_NARROW, text, i * 41, 35 + j * 15, 0, NULL, 0, 0);
+
+        txtPtr = ConvertIntToDecimalStringN(text, aiMons[i].switchInCount, STR_CONV_MODE_LEFT_ALIGN, 2);
+        *txtPtr = EOS;
+        AddTextPrinterParameterized5(data->aiMovesWindowId, FONT_SMALL_NARROW, text, i * 41, 35 + (j + 1) * 15, 0, NULL, 0, 0);
     }
 
     CopyWindowToVram(data->aiMovesWindowId, 3);
@@ -984,9 +1008,11 @@ static void Task_ShowAiKnowledge(u8 taskId)
     }
 }
 
+#define sConditionSpriteId data[1]
+
 static void Task_ShowAiParty(u8 taskId)
 {
-    u32 i;
+    u32 i, ailment;
     struct WindowTemplate winTemplate;
     struct AiPartyMon *aiMons;
     struct BattleDebugMenu *data = GetStructPtr(taskId);
@@ -998,6 +1024,7 @@ static void Task_ShowAiParty(u8 taskId)
         ShowBg(1);
 
         LoadMonIconPalettes();
+        LoadPartyMenuAilmentGfx();
         data->aiBattlerId = data->battlerId;
         aiMons = AI_PARTY->mons[GET_BATTLER_SIDE(data->aiBattlerId)];
         for (i = 0; i < AI_PARTY->count[GET_BATTLER_SIDE(data->aiBattlerId)]; i++)
@@ -1005,7 +1032,18 @@ static void Task_ShowAiParty(u8 taskId)
             u16 species = SPECIES_OLD_UNOWN_B; // Question mark
             if (aiMons[i].wasSentInBattle && aiMons[i].species)
                 species = aiMons[i].species;
-            data->spriteIds.aiPartyIcons[i] = CreateMonIcon(species, SpriteCallbackDummy, (i * 41) - 5 + 20, 7, 0, 0, FALSE);
+            data->spriteIds.aiPartyIcons[i] = CreateMonIcon(species, SpriteCallbackDummy, (i * 41) + 15, 7, 1, 0, FALSE);
+            gSprites[data->spriteIds.aiPartyIcons[i]].oam.priority = 0;
+
+            gSprites[data->spriteIds.aiPartyIcons[i]].sConditionSpriteId = CreateSprite(&gSpriteTemplate_StatusIcons, (i * 41) + 15, 7, 0);
+            gSprites[gSprites[data->spriteIds.aiPartyIcons[i]].sConditionSpriteId].oam.priority = 0;
+            if (aiMons[i].isFainted)
+                ailment = AILMENT_FNT;
+            else if (aiMons[i].status)
+                ailment = GetAilmentFromStatus(aiMons[i].status);
+            else
+                ailment = AILMENT_FNT + 1; // blank
+            StartSpriteAnim(&gSprites[gSprites[data->spriteIds.aiPartyIcons[i]].sConditionSpriteId], ailment - 1);
         }
         for (; i < PARTY_SIZE; i++)
             data->spriteIds.aiPartyIcons[i] = 0xFF;
@@ -1013,7 +1051,7 @@ static void Task_ShowAiParty(u8 taskId)
         break;
     // Put text
     case 1:
-        winTemplate = CreateWindowTemplate(1, 0, 4, 30, 14, 15, 0x200);
+        winTemplate = CreateWindowTemplate(1, 0, 3, 29, 16, 15, 0x150);
         data->aiMovesWindowId = AddWindow(&winTemplate);
         PutWindowTilemap(data->aiMovesWindowId);
         PutAiPartyText(data);
@@ -1053,12 +1091,18 @@ static void SwitchToDebugViewFromAiParty(u8 taskId)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (data->spriteIds.aiPartyIcons[i] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[gSprites[data->spriteIds.aiPartyIcons[i]].sConditionSpriteId]);
             FreeAndDestroyMonIconSprite(&gSprites[data->spriteIds.aiPartyIcons[i]]);
+        }
     }
+    ClearWindowTilemap(data->aiMovesWindowId);
     RemoveWindow(data->aiMovesWindowId);
 
     gTasks[taskId].func = Task_DebugMenuProcessInput;
 }
+
+#undef sConditionSpriteId
 
 static void SwitchToDebugView(u8 taskId)
 {
@@ -1072,6 +1116,7 @@ static void SwitchToDebugView(u8 taskId)
             FreeAndDestroyMonIconSprite(&gSprites[data->spriteIds.aiIconSpriteIds[i]]);
     }
     FreeAndDestroyMonPicSprite(data->aiMonSpriteId);
+    ClearWindowTilemap(data->aiMovesWindowId);
     RemoveWindow(data->aiMovesWindowId);
 
     gTasks[taskId].func = Task_DebugMenuProcessInput;

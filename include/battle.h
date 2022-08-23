@@ -254,9 +254,10 @@ struct AiPartyMon
     u16 gender;
     u16 level;
     u16 moves[MAX_MON_MOVES];
+    u32 status;
     bool8 isFainted;
-    u8 switchInCount; // Counts how many times this Pokemon has been sent out or switched into in a battle.
     bool8 wasSentInBattle;
+    u8 switchInCount; // Counts how many times this Pokemon has been sent out or switched into in a battle.
 };
 
 struct AIPartyData // Opposing battlers - party mons.
