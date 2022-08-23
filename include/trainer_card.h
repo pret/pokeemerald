@@ -54,7 +54,7 @@ struct TrainerCard
     /*0x4C*/ bool8 shouldDrawStickers; // FRLG only
     /*0x4D*/ u8 unused;
     /*0x4E*/ u8 monIconTint; // FRLG only
-    /*0x4F*/ u8 facilityClass;
+    /*0x4F*/ u8 unionRoomClass;
     /*0x50*/ u8 stickers[TRAINER_CARD_STICKER_TYPES]; // FRLG only
     /*0x54*/ u16 monSpecies[PARTY_SIZE]; // FRLG only
              // Note: Link players use linkHasAllFrontierSymbols, not the field below,

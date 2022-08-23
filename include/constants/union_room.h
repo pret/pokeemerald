@@ -13,6 +13,10 @@
 
 #define UNION_ROOM_MAX_LEVEL 30
 
+// The number of possible trainer classes for a trainer of a given gender in the Union Room.
+// This value is necessarily a power of 2 because of the way it's treated in GetUnionRoomTrainerPic / GetUnionRoomTrainerClass
+#define NUM_UNION_ROOM_CLASSES (1 << 3) // 8
+
 #define ACTIVITY_NONE               0
 #define ACTIVITY_BATTLE_SINGLE      1
 #define ACTIVITY_BATTLE_DOUBLE      2
