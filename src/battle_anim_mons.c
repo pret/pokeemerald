@@ -412,7 +412,7 @@ u8 GetAnimBattlerSpriteId(u8 animBattler)
     }
 }
 
-void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*callback)(struct Sprite*))
+void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*callback)(struct Sprite *))
 {
     sprite->data[6] = (u32)(callback) & 0xffff;
     sprite->data[7] = (u32)(callback) >> 16;
@@ -1622,7 +1622,7 @@ void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite)
 
 void AnimThrowProjectile(struct Sprite *sprite)
 {
-    InitSpritePosToAnimAttacker(sprite, 1);
+    InitSpritePosToAnimAttacker(sprite, TRUE);
     if (GetBattlerSide(gBattleAnimAttacker))
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[4];

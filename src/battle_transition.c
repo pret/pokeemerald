@@ -827,7 +827,7 @@ static const struct OamData sOam_UnusedBrendanLass =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -2186,7 +2186,7 @@ static bool8 Wave_Init(struct Task *task)
 static bool8 Wave_Main(struct Task *task)
 {
     u8 i, sinIndex;
-    u16* toStore;
+    u16 *toStore;
     bool8 finished;
 
     sTransitionData->VBlank_DMA = FALSE;
@@ -2347,7 +2347,7 @@ static bool8 Mugshot_SetGfx(struct Task *task)
 static bool8 Mugshot_ShowBanner(struct Task *task)
 {
     u8 i, sinIndex;
-    u16* toStore;
+    u16 *toStore;
     s16 x;
     s32 mergedValue;
 
@@ -2388,7 +2388,7 @@ static bool8 Mugshot_ShowBanner(struct Task *task)
     if (task->tBottomBannerX < 0)
         task->tBottomBannerX = 0;
 
-    mergedValue = *(s32*)(&task->tTopBannerX);
+    mergedValue = *(s32 *)(&task->tTopBannerX);
     if (mergedValue == DISPLAY_WIDTH)
         task->tState++;
 
@@ -2401,7 +2401,7 @@ static bool8 Mugshot_ShowBanner(struct Task *task)
 static bool8 Mugshot_StartOpponentSlide(struct Task *task)
 {
     u8 i;
-    u16* toStore;
+    u16 *toStore;
 
     sTransitionData->VBlank_DMA = FALSE;
 
@@ -3716,8 +3716,8 @@ static void SpriteCB_WhiteBarFade(struct Sprite *sprite)
     else
     {
         u16 i;
-        u16* ptr1 = &gScanlineEffectRegBuffers[0][sprite->y];
-        u16* ptr2 = &gScanlineEffectRegBuffers[0][sprite->y + DISPLAY_HEIGHT];
+        u16 *ptr1 = &gScanlineEffectRegBuffers[0][sprite->y];
+        u16 *ptr2 = &gScanlineEffectRegBuffers[0][sprite->y + DISPLAY_HEIGHT];
         for (i = 0; i < DISPLAY_HEIGHT / NUM_WHITE_BARS; i++)
         {
             ptr1[i] = sprite->sFade >> 8;
@@ -3783,7 +3783,7 @@ static bool8 GridSquares_Init(struct Task *task)
 
 static bool8 GridSquares_Main(struct Task *task)
 {
-    u16* tileset;
+    u16 *tileset;
 
     if (task->tDelay == 0)
     {
@@ -4061,7 +4061,7 @@ static void GetBg0TilemapDst(u16 **tileset)
 {
     u16 charBase = REG_BG0CNT >> 2;
     charBase <<= 14;
-    *tileset = (u16*)(BG_VRAM + charBase);
+    *tileset = (u16 *)(BG_VRAM + charBase);
 }
 
 void GetBg0TilesDst(u16 **tilemap, u16 **tileset)
@@ -4072,8 +4072,8 @@ void GetBg0TilesDst(u16 **tilemap, u16 **tileset)
     screenBase <<= 11;
     charBase <<= 14;
 
-    *tilemap = (u16*)(BG_VRAM + screenBase);
-    *tileset = (u16*)(BG_VRAM + charBase);
+    *tilemap = (u16 *)(BG_VRAM + screenBase);
+    *tileset = (u16 *)(BG_VRAM + charBase);
 }
 
 static void FadeScreenBlack(void)

@@ -161,7 +161,7 @@ void QueueZMove(u8 battlerId, u16 baseMove)
 bool32 IsViableZMove(u8 battlerId, u16 move)
 {
     struct Pokemon *mon;
-    struct MegaEvolutionData *mega = &(((struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]))->mega);
+    struct MegaEvolutionData *mega = &(((struct ChooseMoveStruct *)(&gBattleResources->bufferA[gActiveBattler][4]))->mega);
     u8 battlerPosition = GetBattlerPosition(battlerId);
     u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battlerId));
     u32 item;
@@ -408,7 +408,7 @@ static u16 GetTypeBasedZMove(u16 move, u8 battler)
 bool32 MoveSelectionDisplayZMove(u16 zmove)
 {
     u32 i;
-    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
+    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[gActiveBattler][4]);
     u16 move = moveInfo->moves[gMoveSelectionCursor[gActiveBattler]];
     
     PlaySE(SE_SELECT);
@@ -553,14 +553,14 @@ static void ZMoveSelectionDisplayPpNumber(void)
         return;
 
     SetPpNumbersPaletteInMoveSelection();
-    moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
+    moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[gActiveBattler][4]);
     txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, 1, STR_CONV_MODE_RIGHT_ALIGN, 2);
     *(txtPtr)++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(txtPtr, 1, STR_CONV_MODE_RIGHT_ALIGN, 2);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
 }
 
-const u8* GetZMoveName(u16 move)
+const u8 *GetZMoveName(u16 move)
 {
     if (IsZMove(move))
         return gZMoveNames[move - FIRST_Z_MOVE];

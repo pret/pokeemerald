@@ -50,7 +50,7 @@ void LoadMessageBoxAndBorderGfx(void);
 void DrawDialogueFrame(u8 windowId, bool8 copyToVram);
 void ClearStdWindowAndFrame(u8 windowId, bool8 copyToVram);
 u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16), u8 fgColor, u8 bgColor, u8 shadowColor);
-void PrintPlayerNameOnWindow(u8, const u8*, u16, u16);
+void PrintPlayerNameOnWindow(u8, const u8 *, u16, u16);
 void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram);
 void SetStandardWindowBorderStyle(u8 windowId, bool8 copyToVram);
 void DisplayYesNoMenuDefaultYes(void);
@@ -61,7 +61,7 @@ void AddTextPrinterWithCallbackForMessage(bool8 canSpeedUp, void (*callback)(str
 void BgDmaFill(u32 bg, u8 value, int offset, int size);
 void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 left, u8 top, const u8 *color, s8 speed, const u8 *str);
 void ClearStdWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram);
-void SetWindowTemplateFields(struct WindowTemplate* template, u8 priority, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 palNum, u16 baseBlock);
+void SetWindowTemplateFields(struct WindowTemplate *template, u8 priority, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 palNum, u16 baseBlock);
 void DrawStdFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 tileStart, u8 palette);
 void ScheduleBgCopyTilemapToVram(u8 bgNum);
 void PrintMenuTable(u8 windowId, u8 itemCount, const struct MenuAction *strs);

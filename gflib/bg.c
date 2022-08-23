@@ -33,7 +33,7 @@ struct BgConfig2
     u32 basePalette:4;
     u32 unk_3:18;
 
-    void* tilemap;
+    void *tilemap;
     s32 bg_x;
     s32 bg_y;
 };
@@ -183,14 +183,14 @@ u8 LoadBgVram(u8 bg, const void *src, u16 size, u16 destOffset, u8 mode)
     case 0x1:
         offset = sGpuBgConfigs.configs[bg].charBaseIndex * BG_CHAR_SIZE;
         offset = destOffset + offset;
-        cursor = RequestDma3Copy(src, (void*)(offset + BG_VRAM), size, 0);
+        cursor = RequestDma3Copy(src, (void *)(offset + BG_VRAM), size, 0);
         if (cursor == -1)
             return -1;
         break;
     case 0x2:
         offset = sGpuBgConfigs.configs[bg].mapBaseIndex * BG_SCREEN_SIZE;
         offset = destOffset + offset;
-        cursor = RequestDma3Copy(src, (void*)(offset + BG_VRAM), size, 0);
+        cursor = RequestDma3Copy(src, (void *)(offset + BG_VRAM), size, 0);
         if (cursor == -1)
             return -1;
         break;
@@ -372,7 +372,7 @@ void SetBgMode(u8 bgMode)
     SetBgModeInternal(bgMode);
 }
 
-u16 LoadBgTiles(u8 bg, const void* src, u16 size, u16 destOffset)
+u16 LoadBgTiles(u8 bg, const void *src, u16 size, u16 destOffset)
 {
     u16 tileOffset;
     u8 cursor;
@@ -422,7 +422,7 @@ u16 Unused_LoadBgPalette(u8 bg, const void *src, u16 size, u16 destOffset)
     if (!IsInvalidBg32(bg))
     {
         u16 paletteOffset = (sGpuBgConfigs2[bg].basePalette * 0x20) + (destOffset * 2);
-        cursor = RequestDma3Copy(src, (void*)(paletteOffset + BG_PLTT), size, 0);
+        cursor = RequestDma3Copy(src, (void *)(paletteOffset + BG_PLTT), size, 0);
 
         if (cursor == -1)
         {
@@ -863,7 +863,7 @@ void UnsetBgTilemapBuffer(u8 bg)
     }
 }
 
-void* GetBgTilemapBuffer(u8 bg)
+void *GetBgTilemapBuffer(u8 bg)
 {
     if (IsInvalidBg32(bg))
         return NULL;
@@ -906,7 +906,7 @@ void CopyBgTilemapBufferToVram(u8 bg)
     }
 }
 
-void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 width, u8 height)
+void CopyToBgTilemapBufferRect(u8 bg, const void *src, u8 destX, u8 destY, u8 width, u8 height)
 {
     u16 destX16;
     u16 destY16;
@@ -923,20 +923,20 @@ void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 wi
             {
                 for (destX16 = destX; destX16 < (destX + width); destX16++)
                 {
-                    ((u16*)sGpuBgConfigs2[bg].tilemap)[((destY16 * 0x20) + destX16)] = *srcCopy++;
+                    ((u16 *)sGpuBgConfigs2[bg].tilemap)[((destY16 * 0x20) + destX16)] = *srcCopy++;
                 }
             }
             break;
         }
         case BG_TYPE_AFFINE:
         {
-            const u8 * srcCopy = src;
+            const u8 *srcCopy = src;
             mode = GetBgMetricAffineMode(bg, 0x1);
             for (destY16 = destY; destY16 < (destY + height); destY16++)
             {
                 for (destX16 = destX; destX16 < (destX + width); destX16++)
                 {
-                    ((u8*)sGpuBgConfigs2[bg].tilemap)[((destY16 * mode) + destX16)] = *srcCopy++;
+                    ((u8 *)sGpuBgConfigs2[bg].tilemap)[((destY16 * mode) + destX16)] = *srcCopy++;
                 }
             }
             break;
@@ -984,7 +984,7 @@ void CopyRectToBgTilemapBufferRect(u8 bg, const void *src, u8 srcX, u8 srcY, u8 
             {
                 for (j = destX; j < (destX + rectWidth); j++)
                 {
-                    *(u8*)(sGpuBgConfigs2[bg].tilemap + ((var * i) + j)) = *(u8*)(srcPtr) + tileOffset;
+                    *(u8 *)(sGpuBgConfigs2[bg].tilemap + ((var * i) + j)) = *(u8 *)(srcPtr) + tileOffset;
                     srcPtr++;
                 }
                 srcPtr += (srcWidth - rectWidth);
@@ -1009,7 +1009,7 @@ void FillBgTilemapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, 
             {
                 for (x16 = x; x16 < (x + width); x16++)
                 {
-                    ((u16*)sGpuBgConfigs2[bg].tilemap)[((y16 * 0x20) + x16)] = tileNum;
+                    ((u16 *)sGpuBgConfigs2[bg].tilemap)[((y16 * 0x20) + x16)] = tileNum;
                 }
             }
             break;
@@ -1019,7 +1019,7 @@ void FillBgTilemapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, 
             {
                 for (x16 = x; x16 < (x + width); x16++)
                 {
-                    ((u8*)sGpuBgConfigs2[bg].tilemap)[((y16 * mode) + x16)] = tileNum;
+                    ((u8 *)sGpuBgConfigs2[bg].tilemap)[((y16 * mode) + x16)] = tileNum;
                 }
             }
             break;
@@ -1052,7 +1052,7 @@ void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 widt
             {
                 for (x16 = x; x16 < (x + width); x16++)
                 {
-                    CopyTileMapEntry(&firstTileNum, &((u16*)sGpuBgConfigs2[bg].tilemap)[(u16)GetTileMapIndexFromCoords(x16, y16, attribute, mode, mode2)], paletteSlot, 0, 0);
+                    CopyTileMapEntry(&firstTileNum, &((u16 *)sGpuBgConfigs2[bg].tilemap)[(u16)GetTileMapIndexFromCoords(x16, y16, attribute, mode, mode2)], paletteSlot, 0, 0);
                     firstTileNum = (firstTileNum & (MAPGRID_COLLISION_MASK | MAPGRID_ELEVATION_MASK)) + ((firstTileNum + tileNumDelta) & MAPGRID_METATILE_ID_MASK);
                 }
             }
@@ -1063,7 +1063,7 @@ void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 widt
             {
                 for (x16 = x; x16 < (x + width); x16++)
                 {
-                    ((u8*)sGpuBgConfigs2[bg].tilemap)[(y16 * mode3) + x16] = firstTileNum;
+                    ((u8 *)sGpuBgConfigs2[bg].tilemap)[(y16 * mode3) + x16] = firstTileNum;
                     firstTileNum = (firstTileNum & (MAPGRID_COLLISION_MASK | MAPGRID_ELEVATION_MASK)) + ((firstTileNum + tileNumDelta) & MAPGRID_METATILE_ID_MASK);
                 }
             }
@@ -1240,7 +1240,7 @@ bool32 IsInvalidBg32(u8 bg)
 
 bool32 IsTileMapOutsideWram(u8 bg)
 {
-    if (sGpuBgConfigs2[bg].tilemap > (void*)IWRAM_END)
+    if (sGpuBgConfigs2[bg].tilemap > (void *)IWRAM_END)
         return TRUE;
     else if (sGpuBgConfigs2[bg].tilemap == NULL)
         return TRUE;

@@ -410,7 +410,7 @@ static const struct OamData sOam_Select_Pokeball =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -427,7 +427,7 @@ static const struct OamData sOam_Select_Arrow =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -444,7 +444,7 @@ static const struct OamData sOam_Select_MenuHighlight =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
@@ -461,7 +461,7 @@ static const struct OamData sOam_Select_MonPicBgAnim =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -661,7 +661,7 @@ static const struct OamData sOam_Swap_Pokeball =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -678,7 +678,7 @@ static const struct OamData sOam_Swap_Arrow =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -695,7 +695,7 @@ static const struct OamData sOam_Swap_MenuHighlight =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
@@ -712,7 +712,7 @@ static const struct OamData sOam_Swap_MonPicBgAnim =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -1747,9 +1747,9 @@ static void CreateFrontierFactorySelectableMons(u8 firstMonId)
         u16 monId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
         sFactorySelectScreen->mons[i + firstMonId].monId = monId;
         if (i < rentalRank)
-            ivs = GetFactoryMonFixedIV(challengeNum + 1, 0);
+            ivs = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
         else
-            ivs = GetFactoryMonFixedIV(challengeNum, 0);
+            ivs = GetFactoryMonFixedIV(challengeNum, FALSE);
         CreateMonWithEVSpreadNatureOTID(&sFactorySelectScreen->mons[i + firstMonId].monData,
                                              gFacilityTrainerMons[monId].species,
                                              level,
@@ -2473,7 +2473,7 @@ static void Swap_Task_HandleYesNo(u8 taskId)
                 gTasks[taskId].tSaidYes = TRUE;
                 hiPtr = gTasks[taskId].tFollowUpTaskPtrHi;
                 loPtr = gTasks[taskId].tFollowUpTaskPtrLo;
-                gTasks[taskId].func = (void*)((hiPtr << 16) | loPtr);
+                gTasks[taskId].func = (void *)((hiPtr << 16) | loPtr);
             }
             else
             {
@@ -2482,7 +2482,7 @@ static void Swap_Task_HandleYesNo(u8 taskId)
                 Swap_ErasePopupMenu(SWAP_WIN_YES_NO);
                 hiPtr = gTasks[taskId].tFollowUpTaskPtrHi;
                 loPtr = gTasks[taskId].tFollowUpTaskPtrLo;
-                gTasks[taskId].func = (void*)((hiPtr << 16) | loPtr);
+                gTasks[taskId].func = (void *)((hiPtr << 16) | loPtr);
             }
         }
         else if (JOY_NEW(B_BUTTON))
@@ -2492,7 +2492,7 @@ static void Swap_Task_HandleYesNo(u8 taskId)
             Swap_ErasePopupMenu(SWAP_WIN_YES_NO);
             hiPtr = gTasks[taskId].tFollowUpTaskPtrHi;
             loPtr = gTasks[taskId].tFollowUpTaskPtrLo;
-            gTasks[taskId].func = (void*)((hiPtr << 16) | loPtr);
+            gTasks[taskId].func = (void *)((hiPtr << 16) | loPtr);
         }
         else if (JOY_REPEAT(DPAD_UP))
         {

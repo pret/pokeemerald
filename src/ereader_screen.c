@@ -397,8 +397,8 @@ static void Task_EReader(u8 taskId)
         break;
     case ER_STATE_CONNECTING:
         AddTextPrinterToWindow1(gJPText_Connecting);
-        // XXX: This (u32*) cast is discarding the const qualifier from gMultiBootProgram_EReader_Start
-        EReader_Load(&gEReaderData, gMultiBootProgram_EReader_End - gMultiBootProgram_EReader_Start, (u32*)gMultiBootProgram_EReader_Start);
+        // XXX: This (u32 *) cast is discarding the const qualifier from gMultiBootProgram_EReader_Start
+        EReader_Load(&gEReaderData, gMultiBootProgram_EReader_End - gMultiBootProgram_EReader_Start, (u32 *)gMultiBootProgram_EReader_Start);
         data->state = ER_STATE_TRANSFER;
         break;
     case ER_STATE_TRANSFER:

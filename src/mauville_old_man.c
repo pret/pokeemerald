@@ -46,7 +46,7 @@ static const u16 sDefaultBardSongLyrics[BARD_SONG_LENGTH] = {
     EC_WORD_DANCE
 };
 
-static const u8 * const sGiddyAdjectives[] = {
+static const u8 *const sGiddyAdjectives[] = {
     GiddyText_SoPretty,
     GiddyText_SoDarling,
     GiddyText_SoRelaxed,
@@ -60,7 +60,7 @@ static const u8 * const sGiddyAdjectives[] = {
 // Non-random lines Giddy can say. Not all are strictly
 // questions, but most are, and the player will receive
 // a Yes/No prompt afterwards regardless.
-static const u8 * const sGiddyQuestions[GIDDY_MAX_QUESTIONS] = {
+static const u8 *const sGiddyQuestions[GIDDY_MAX_QUESTIONS] = {
     GiddyText_ISoWantToGoOnAVacation,
     GiddyText_IBoughtCrayonsWith120Colors,
     GiddyText_WouldntItBeNiceIfWeCouldFloat,
@@ -174,8 +174,8 @@ static void PrepareSongText(void)
 {
     struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
     u16 * lyrics = gSpecialVar_0x8004 == 0 ? bard->songLyrics : bard->temporaryLyrics;
-    u8 * wordEnd = gStringVar4;
-    u8 * str = wordEnd;
+    u8 *wordEnd = gStringVar4;
+    u8 *str = wordEnd;
     u16 lineNum;
 
     // Put three words on each line
@@ -222,7 +222,7 @@ static void PrepareSongText(void)
 void PlayBardSong(void)
 {
     StartBardSong(gSpecialVar_0x8004);
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
 }
 
 void GetHipsterSpokenFlag(void)
@@ -443,7 +443,7 @@ static void DisableTextPrinters(struct TextPrinterTemplate * printer, u16 render
     gDisableTextPrinters = TRUE;
 }
 
-static void DrawSongTextWindow(const u8 * str)
+static void DrawSongTextWindow(const u8 *str)
 {
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, str, 0, 1, 1, DisableTextPrinters);
@@ -627,7 +627,7 @@ static void Task_BardSong(u8 taskId)
             // End song
             FadeInBGM(6);
             m4aMPlayFadeOutTemporarily(&gMPlayInfo_SE2, 2);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
             DestroyTask(taskId);
         }
         else if (gStringVar4[task->tCharIndex] == CHAR_SPACE)
@@ -843,7 +843,7 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
         {
             for (i = 0; i < NUM_TRADER_ITEMS; i++)
             {
-                u8 * str = trader->playerNames[i];
+                u8 *str = trader->playerNames[i];
                 if (str[0] == EXT_CTRL_CODE_BEGIN && str[1] == EXT_CTRL_CODE_JPN)
                 {
                     StripExtCtrlCodes(str);
@@ -1247,9 +1247,9 @@ static void GetStoryByStattellerPlayerName(u32 player, void *dst)
     memcpy(dst, name, PLAYER_NAME_LENGTH);
 }
 
-static void StorytellerSetPlayerName(u32 player, const u8 * src)
+static void StorytellerSetPlayerName(u32 player, const u8 *src)
 {
-    u8 * name = sStorytellerPtr->trainerNames[player];
+    u8 *name = sStorytellerPtr->trainerNames[player];
     memset(name, EOS, PLAYER_NAME_LENGTH);
     memcpy(name, src, PLAYER_NAME_LENGTH);
 }
@@ -1265,7 +1265,7 @@ static void StorytellerRecordNewStat(u32 player, u32 stat)
     sStorytellerPtr->language[player] = gGameLanguage;
 }
 
-static void ScrambleStatList(u8 * arr, s32 count)
+static void ScrambleStatList(u8 *arr, s32 count)
 {
     s32 i;
 
@@ -1336,7 +1336,7 @@ static void PrintStoryList(void)
             width = curWidth;
     }
     sStorytellerWindowId = CreateWindowFromRect(0, 0, ConvertPixelWidthToTileWidth(width), GetFreeStorySlot() * 2 + 2);
-    SetStandardWindowBorderStyle(sStorytellerWindowId, 0);
+    SetStandardWindowBorderStyle(sStorytellerWindowId, FALSE);
     for (i = 0; i < NUM_STORYTELLER_TALES; i++)
     {
         u16 gameStatID = sStorytellerPtr->gameStatIDs[i];
@@ -1375,7 +1375,7 @@ static void Task_StoryListMenu(u8 taskId)
         }
         ClearToTransparentAndRemoveWindow(sStorytellerWindowId);
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         break;
     }
 }

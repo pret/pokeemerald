@@ -17,4 +17,10 @@
 #define ARENA_CATEGORY_SKILL 1
 #define ARENA_CATEGORY_BODY  2
 
+#define ARENA_RESULT_RUNNING     0 // For intermediate steps, when BattleArena_ShowJudgmentWindow should be called again immediately
+#define ARENA_RESULT_STEP_DONE   1 // A step has been completed, the script may advance to the next instruction
+#define ARENA_RESULT_PLAYER_WON  2
+#define ARENA_RESULT_PLAYER_LOST 3
+#define ARENA_RESULT_TIE         4
+
 #endif //GUARD_CONSTANTS_BATTLE_ARENA_H

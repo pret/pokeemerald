@@ -1480,7 +1480,7 @@ u8 GetTrainerEncounterMusicIdInBattlePyramid(u16 trainerId)
 // Unused
 static void BattlePyramidRetireChallenge(void)
 {
-    ScriptContext1_SetupScript(BattlePyramid_Retire);
+    ScriptContext_SetupScript(BattlePyramid_Retire);
 }
 
 static u16 GetUniqueTrainerId(u8 objectEventId)

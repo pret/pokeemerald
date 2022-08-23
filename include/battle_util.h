@@ -76,7 +76,6 @@ u8 GetBattlerForBattleScript(u8 caseId);
 void PressurePPLose(u8 target, u8 attacker, u16 move);
 void PressurePPLoseOnUsingPerishSong(u8 attacker);
 void PressurePPLoseOnUsingImprison(u8 attacker);
-void MarkAllBattlersForControllerExec(void); // unused
 bool32 IsBattlerMarkedForControllerExec(u8 battlerId);
 void MarkBattlerForControllerExec(u8 battlerId);
 void MarkBattlerReceivedLinkData(u8 battlerId);
@@ -86,7 +85,7 @@ void PrepareStringBattle(u16 stringId, u8 battlerId);
 void ResetSentPokesToOpponentValue(void);
 void OpponentSwitchInResetSentPokesToOpponentValue(u8 battlerId);
 void UpdateSentPokesToOpponentValue(u8 battlerId);
-void BattleScriptPush(const u8* bsPtr);
+void BattleScriptPush(const u8 *bsPtr);
 void BattleScriptPushCursor(void);
 void BattleScriptPop(void);
 u8 TrySetCantSelectMoveBattleScript(void);
@@ -113,8 +112,8 @@ u32 IsAbilityOnFieldExcept(u32 battlerId, u32 ability);
 u32 IsAbilityPreventingEscape(u32 battlerId);
 bool32 IsBattlerProtected(u8 battlerId, u16 move);
 bool32 CanBattlerEscape(u32 battlerId); // no ability check
-void BattleScriptExecute(const u8* BS_ptr);
-void BattleScriptPushCursorAndCallback(const u8* BS_ptr);
+void BattleScriptExecute(const u8 *BS_ptr);
+void BattleScriptPushCursorAndCallback(const u8 *BS_ptr);
 u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn);
 void ClearFuryCutterDestinyBondGrudge(u8 battlerId);
 void HandleAction_RunBattleScript(void);

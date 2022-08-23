@@ -1,5 +1,5 @@
 @ Note: ROM header data is empty space here.
-@       It's populated by gbafix using data provided in the Makefile. 
+@ It's populated by gbafix using data provided in the Makefile. 
 
 	.global Start
 Start:
@@ -41,20 +41,20 @@ RomHeaderChecksum:
 RomHeaderReserved2:
 	.space 2
 
-    .word 0
+	.word 0
 
-    .global GPIOPortData
+	.global GPIOPortData
 GPIOPortData:
-    .2byte 0
+	.2byte 0
 
-    .global GPIOPortDirection
+	.global GPIOPortDirection
 GPIOPortDirection:
-    .2byte 0
+	.2byte 0
 
-    .global GPIOPortReadEnable
+	.global GPIOPortReadEnable
 GPIOPortReadEnable:
-    .2byte 0
+	.2byte 0
 
-    .2byte 0
+	.2byte 0
 
-    .space 0x34
+	.space 0x34

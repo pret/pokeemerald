@@ -23,14 +23,14 @@ void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopP
 #ifdef NDEBUG
 #define AGB_ASSERT(exp)
 #else
-#define AGB_ASSERT(exp) (exp) ? ((void*)0) : AGBAssert(__FILE__, __LINE__, #exp, 1);
+#define AGB_ASSERT(exp) (exp) ? ((void *)0) : AGBAssert(__FILE__, __LINE__, #exp, 1);
 #endif
 
 #undef AGB_WARNING
 #ifdef NDEBUG
 #define AGB_WARNING(exp)
 #else
-#define AGB_WARNING(exp) (exp) ? ((void*)0) : AGBAssert(__FILE__, __LINE__, #exp, 0);
+#define AGB_WARNING(exp) (exp) ? ((void *)0) : AGBAssert(__FILE__, __LINE__, #exp, 0);
 #endif
 
 // for matching purposes
@@ -38,13 +38,13 @@ void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopP
 #ifdef NDEBUG
 #define    AGB_ASSERT_EX(exp, file, line)
 #else
-#define    AGB_ASSERT_EX(exp, file, line) (exp) ? ((void*)0) : AGBAssert(file, line, #exp, 1);
+#define    AGB_ASSERT_EX(exp, file, line) (exp) ? ((void *)0) : AGBAssert(file, line, #exp, 1);
 #endif
 
 #ifdef NDEBUG
 #define    AGB_WARNING_EX(exp, file, line)
 #else
-#define    AGB_WARNING_EX(exp, file, line) (exp) ? ((void*)0) : AGBAssert(file, line, #exp, 0);
+#define    AGB_WARNING_EX(exp, file, line) (exp) ? ((void *)0) : AGBAssert(file, line, #exp, 0);
 #endif
 
 #endif // GUARD_GBA_ISAGBPRINT_H
