@@ -43,6 +43,7 @@ FORM_ITEM_USE_TIME:
 #define DAY    0
 #define NIGHT  1
 
+#if P_NEW_POKEMON == TRUE
 static const struct FormChange sGiratinaFormChangeTable[] = {
     {FORM_ITEM_HOLD, SPECIES_GIRATINA, ITEM_NONE},
     {FORM_ITEM_HOLD, SPECIES_GIRATINA_ORIGIN, ITEM_GRISEOUS_ORB},
@@ -124,6 +125,16 @@ static const struct FormChange sLandorusTherianFormChangeTable[] = {
     {FORM_CHANGE_END},
 };
 
+static const struct FormChange sEnamorusFormChangeTable[] = {
+    {FORM_ITEM_USE, SPECIES_ENAMORUS, ITEM_REVEAL_GLASS},
+    {FORM_CHANGE_END},
+};
+
+static const struct FormChange sEnamorusTherianFormChangeTable[] = {
+    {FORM_ITEM_USE, SPECIES_ENAMORUS_THERIAN, ITEM_REVEAL_GLASS},
+    {FORM_CHANGE_END},
+};
+
 static const struct FormChange sKeldeoFormChangeTable[] = {
     {FORM_MOVE, SPECIES_KELDEO_RESOLUTE, MOVE_SECRET_SWORD, WHEN_LEARNED},
     {FORM_CHANGE_END},
@@ -182,6 +193,7 @@ static const struct FormChange sSilvallyFormChangeTable[] = {
     {FORM_ITEM_HOLD_ABILITY, SPECIES_SILVALLY_FAIRY,    ITEM_FAIRY_MEMORY,    ABILITY_RKS_SYSTEM},
     {FORM_CHANGE_END},
 };
+#endif
 
 #undef WHEN_LEARNED
 #undef WHEN_FORGOTTEN

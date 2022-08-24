@@ -25,7 +25,7 @@ static u8 CreateMonIconSprite(struct MonIconSpriteTemplate *, s16, s16, u8);
 static void FreeAndDestroyMonIconSprite_(struct Sprite *sprite);
 #if P_ENABLE_DEBUG == TRUE
 static const u8 *GetMonIconPtrCustom(u16 species, u32 personality, bool8 isFemale);
-static const u8* GetMonIconTilesCustom(u16 species, bool8 isFemale);
+static const u8 *GetMonIconTilesCustom(u16 species, bool8 isFemale);
 #endif
 
 const u8 *const gMonIconTable[] =
@@ -417,6 +417,7 @@ const u8 *const gMonIconTable[] =
     [SPECIES_JIRACHI] = gMonIcon_Jirachi,
     [SPECIES_DEOXYS] = gMonIcon_Deoxys,
     [SPECIES_CHIMECHO] = gMonIcon_Chimecho,
+#if P_NEW_POKEMON == TRUE
     [SPECIES_TURTWIG] = gMonIcon_Turtwig,
     [SPECIES_GROTLE] = gMonIcon_Grotle,
     [SPECIES_TORTERRA] = gMonIcon_Torterra,
@@ -1054,6 +1055,7 @@ const u8 *const gMonIconTable[] =
     [SPECIES_PIKACHU_PARTNER_CAP] = gMonIcon_PikachuPartnerCap,
     [SPECIES_PIKACHU_WORLD_CAP] = gMonIcon_QuestionMark,
     [SPECIES_PICHU_SPIKY_EARED] = gMonIcon_PichuSpikyEared,
+#endif
     [SPECIES_UNOWN_B] = gMonIcon_UnownB,
     [SPECIES_UNOWN_C] = gMonIcon_UnownC,
     [SPECIES_UNOWN_D] = gMonIcon_UnownD,
@@ -1087,6 +1089,7 @@ const u8 *const gMonIconTable[] =
     [SPECIES_DEOXYS_ATTACK] = gMonIcon_DeoxysAttack,
     [SPECIES_DEOXYS_DEFENSE] = gMonIcon_DeoxysDefense,
     [SPECIES_DEOXYS_SPEED] = gMonIcon_DeoxysSpeed,
+#if P_NEW_POKEMON == TRUE
     [SPECIES_BURMY_SANDY_CLOAK] = gMonIcon_BurmySandyCloak,
     [SPECIES_BURMY_TRASH_CLOAK] = gMonIcon_BurmyTrashCloak,
     [SPECIES_WORMADAM_SANDY_CLOAK] = gMonIcon_WormadamSandyCloak,
@@ -1264,12 +1267,14 @@ const u8 *const gMonIconTable[] =
     [SPECIES_ZARUDE_DADA] = gMonIcon_ZarudeDada,
     [SPECIES_CALYREX_ICE_RIDER] = gMonIcon_CalyrexIceRider,
     [SPECIES_CALYREX_SHADOW_RIDER] = gMonIcon_CalyrexShadowRider,
+#endif
     [SPECIES_EGG] = gMonIcon_Egg,
 };
 
 const u8 *const gMonIconTableFemale[] =
 {
     [SPECIES_EEVEE] = gMonIcon_Eevee,
+#if P_NEW_POKEMON == TRUE
     [SPECIES_STARLY] = gMonIcon_Starly,
     [SPECIES_STARAVIA] = gMonIcon_Staravia,
     [SPECIES_STARAPTOR] = gMonIcon_Staraptor,
@@ -1285,6 +1290,7 @@ const u8 *const gMonIconTableFemale[] =
     [SPECIES_JELLICENT] = gMonIcon_JellicentF,
     [SPECIES_PYROAR] = gMonIcon_PyroarF,
     [SPECIES_BASCULEGION] = gMonIcon_BasculegionF,
+#endif
 };
 
 const u8 gMonIconPaletteIndices[] =
@@ -1675,6 +1681,7 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_JIRACHI] = 0,
     [SPECIES_DEOXYS] = 0,
     [SPECIES_CHIMECHO] = 0,
+#if P_NEW_POKEMON == TRUE
     [SPECIES_TURTWIG] = 1,
     [SPECIES_GROTLE] = 1,
     [SPECIES_TORTERRA] = 1,
@@ -2183,7 +2190,7 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_URSHIFU] = 2,
     [SPECIES_ZARUDE] = 1,
     [SPECIES_REGIELEKI] = 0,
-    [SPECIES_REGIDRAGO] = 2,
+    [SPECIES_REGIDRAGO] = 0,
     [SPECIES_GLASTRIER] = 0,
     [SPECIES_SPECTRIER] = 0,
     [SPECIES_CALYREX] = 0,
@@ -2312,10 +2319,15 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_PIKACHU_PARTNER_CAP] = 0,
     [SPECIES_PIKACHU_WORLD_CAP] = 0,
     [SPECIES_PICHU_SPIKY_EARED] = 1,
+#endif
     [SPECIES_UNOWN_B ... SPECIES_UNOWN_QMARK] = 0,
     [SPECIES_CASTFORM_SUNNY] = 0,
     [SPECIES_CASTFORM_RAINY] = 0,
     [SPECIES_CASTFORM_SNOWY] = 0,
+    [SPECIES_DEOXYS_ATTACK] = 0,
+    [SPECIES_DEOXYS_DEFENSE] = 0,
+    [SPECIES_DEOXYS_SPEED] = 0,
+#if P_NEW_POKEMON == TRUE
     [SPECIES_BURMY_SANDY_CLOAK] = 1,
     [SPECIES_BURMY_TRASH_CLOAK] = 0,
     [SPECIES_WORMADAM_SANDY_CLOAK] = 1,
@@ -2487,12 +2499,14 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_ZARUDE_DADA] = 1,
     [SPECIES_CALYREX_ICE_RIDER] = 0,
     [SPECIES_CALYREX_SHADOW_RIDER] = 0,
+#endif
     [SPECIES_EGG] = 1,
 };
 
 const u8 gMonIconPaletteIndicesFemale[] =
 {
     [SPECIES_EEVEE] = 2,
+#if P_NEW_POKEMON == TRUE
     [SPECIES_STARLY] = 0,
     [SPECIES_STARAVIA] = 0,
     [SPECIES_BIDOOF] = 2,
@@ -2507,6 +2521,7 @@ const u8 gMonIconPaletteIndicesFemale[] =
     [SPECIES_JELLICENT] = 1,
     [SPECIES_PYROAR] = 2,
     [SPECIES_BASCULEGION] = 0,
+#endif
 };
 
 const struct SpritePalette gMonIconPaletteTable[] =
@@ -2811,9 +2826,9 @@ void SpriteCB_MonIcon(struct Sprite *sprite)
     UpdateMonIconFrame(sprite);
 }
 
-const u8* GetMonIconTiles(u16 species, u32 personality)
+const u8 *GetMonIconTiles(u16 species, u32 personality)
 {
-    const u8* iconSprite = gMonIconTable[species];
+    const u8 *iconSprite = gMonIconTable[species];
     if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
     {
         iconSprite = gMonIconTableFemale[species];
@@ -2821,9 +2836,9 @@ const u8* GetMonIconTiles(u16 species, u32 personality)
     return iconSprite;
 }
 #if P_ENABLE_DEBUG == TRUE
-static const u8* GetMonIconTilesCustom(u16 species, bool8 isFemale)
+static const u8 *GetMonIconTilesCustom(u16 species, bool8 isFemale)
 {
-    const u8* iconSprite = gMonIconTable[species];
+    const u8 *iconSprite = gMonIconTable[species];
     if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && isFemale)
     {
         iconSprite = gMonIconTableFemale[species];
@@ -2861,7 +2876,7 @@ u8 GetMonIconPaletteIndexFromSpecies(u16 species)
     return gMonIconPaletteIndices[species];
 }
 
-const u16* GetValidMonIconPalettePtr(u16 species)
+const u16 *GetValidMonIconPalettePtr(u16 species)
 {
     if (species > NUM_SPECIES)
         species = INVALID_ICON_SPECIES;

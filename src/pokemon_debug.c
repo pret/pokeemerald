@@ -52,7 +52,7 @@ static const u16 sBgColor[] = {RGB_WHITE};
 
 static struct PokemonDebugMenu *GetStructPtr(u8 taskId)
 {
-    u8 *taskDataPtr = (u8*)(&gTasks[taskId].data[0]);
+    u8 *taskDataPtr = (u8 *)(&gTasks[taskId].data[0]);
 
     return (struct PokemonDebugMenu*)(T1_READ_PTR(taskDataPtr));
 }
@@ -463,7 +463,7 @@ static void VBlankCB(void)
 static void SetStructPtr(u8 taskId, void *ptr)
 {
     u32 structPtr = (u32)(ptr);
-    u8 *taskDataPtr = (u8*)(&gTasks[taskId].data[0]);
+    u8 *taskDataPtr = (u8 *)(&gTasks[taskId].data[0]);
 
     taskDataPtr[0] = structPtr >> 0;
     taskDataPtr[1] = structPtr >> 8;
@@ -849,7 +849,7 @@ static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonDebugMenu *data, 
 static void DrawFootprintCustom(u8 windowId, u16 species)
 {
     u8 footprint[32 * 4] = {0};
-    const u8 * footprintGfx = gMonFootprintTable[species];
+    const u8 *footprintGfx = gMonFootprintTable[species];
     u32 i, j, tileIdx = 0;
 
     if (footprintGfx != NULL)

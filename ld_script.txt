@@ -14,6 +14,9 @@ SECTIONS {
         . = 0x1C000;
 
         INCLUDE "sym_ewram.ld"
+        src/*.o(.ewram_data);
+        gflib/*.o(.ewram_data);
+
         *libc.a:impure.o(.data);
         *libc.a:locale.o(.data);
         *libc.a:mallocr.o(.data);
@@ -27,6 +30,9 @@ SECTIONS {
     {
         /* .bss starts at 0x3000000 */
         INCLUDE "sym_bss.ld"
+        src/*.o(.bss);
+        gflib/*.o(.bss);
+        data/*.o(.bss);
 
         /* .bss.code starts at 0x3001AA8 */
         src/m4a.o(.bss.code);
@@ -85,6 +91,7 @@ SECTIONS {
         src/battle_bg.o(.text);
         src/battle_main.o(.text);
         src/battle_util.o(.text);
+        src/battle_z_move.o(.text);
         src/battle_script_commands.o(.text);
         src/battle_util2.o(.text);
         src/battle_controller_player.o(.text);
@@ -92,6 +99,7 @@ SECTIONS {
         src/battle_controller_opponent.o(.text);
         src/battle_ai_switch_items.o(.text);
         src/battle_controller_link_opponent.o(.text);
+        src/battle_debug.o(.text);
         src/pokemon.o(.text);
         src/trig.o(.text);
         src/random.o(.text);
@@ -195,6 +203,7 @@ SECTIONS {
         src/battle_anim_ground.o(.text);
         src/battle_anim_normal.o(.text);
         src/battle_anim_utility_funcs.o(.text);
+        src/battle_anim_new.o(.text);
         src/battle_intro.o(.text);
         src/bike.o(.text);
         src/easy_chat.o(.text);
@@ -209,7 +218,8 @@ SECTIONS {
         src/decoration.o(.text);
         src/slot_machine.o(.text);
         src/contest_painting.o(.text);
-        src/battle_ai_script_commands.o(.text);
+        src/battle_ai_main.o(.text);
+		src/battle_ai_util.o(.text);
         src/trader.o(.text);
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
@@ -342,7 +352,6 @@ SECTIONS {
         data/battle_scripts_1.o(script_data);
         data/field_effect_scripts.o(script_data);
         data/battle_scripts_2.o(script_data);
-        data/battle_ai_scripts.o(script_data);
         data/contest_ai_scripts.o(script_data);
         data/mystery_event_script_cmd_table.o(script_data);
     } =0
@@ -474,12 +483,14 @@ SECTIONS {
         src/battle_bg.o(.rodata);
         src/battle_main.o(.rodata);
         src/battle_util.o(.rodata);
+        src/battle_z_move.o(.rodata);
         src/battle_script_commands.o(.rodata);
         src/battle_controller_player.o(.rodata);
         src/battle_anim_smokescreen.o(.rodata);
         src/battle_controller_opponent.o(.rodata);
         src/battle_ai_switch_items.o(.rodata);
         src/battle_controller_link_opponent.o(.rodata);
+        src/battle_debug.o(.rodata);
         src/pokemon.o(.rodata);
         src/trig.o(.rodata);
         src/util.o(.rodata);
@@ -572,6 +583,7 @@ SECTIONS {
         src/battle_anim_ground.o(.rodata);
         src/battle_anim_normal.o(.rodata);
         src/battle_anim_utility_funcs.o(.rodata);
+        src/battle_anim_new.o(.rodata);
         src/battle_intro.o(.rodata);
         src/bike.o(.rodata);
         src/easy_chat.o(.rodata);
@@ -585,7 +597,8 @@ SECTIONS {
         src/decoration.o(.rodata);
         src/slot_machine.o(.rodata);
         src/contest_painting.o(.rodata);
-        src/battle_ai_script_commands.o(.rodata);
+        src/battle_ai_main.o(.rodata);
+		src/battle_ai_util.o(.rodata);
         src/trader.o(.rodata);
         src/starter_choose.o(.rodata);
         src/wallclock.o(.rodata);
@@ -689,6 +702,7 @@ SECTIONS {
         src/battle_transition_frontier.o(.rodata);
         src/text_input_strings.o(.rodata);
         src/fonts.o(.rodata);
+        src/international_string_util.o(.rodata);
         src/mystery_event_msg.o(.rodata);
         data/mystery_gift.o(.rodata);
         src/m4a_tables.o(.rodata);
@@ -1297,6 +1311,16 @@ SECTIONS {
     {
         src/graphics.o(.rodata);
     } =0
+
+    extra :
+    ALIGN(4)
+    {
+        src/*.o(.text);
+        gflib/*.o(.text);
+        src/*.o(.rodata);
+        gflib/*.o(.rodata);
+        data/*.o(.rodata);
+    } = 0
 
     /* DWARF debug sections.
        Symbols in the DWARF debugging sections are relative to the beginning

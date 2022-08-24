@@ -387,6 +387,7 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(JIRACHI, gMonShinyPalette_Jirachi),
     SPECIES_SHINY_PAL(DEOXYS, gMonShinyPalette_Deoxys),
     SPECIES_SHINY_PAL(CHIMECHO, gMonShinyPalette_Chimecho),
+#if P_NEW_POKEMON == TRUE
     SPECIES_SHINY_PAL(TURTWIG, gMonShinyPalette_Turtwig),
     SPECIES_SHINY_PAL(GROTLE, gMonShinyPalette_Grotle),
     SPECIES_SHINY_PAL(TORTERRA, gMonShinyPalette_Torterra),
@@ -1032,7 +1033,7 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(PIKACHU_WORLD_CAP, gMonShinyPalette_PikachuWorldCap),
 
     SPECIES_SHINY_PAL(PICHU_SPIKY_EARED, gMonShinyPalette_PichuSpikyEared),
-
+#endif
     SPECIES_SHINY_PAL(UNOWN_B, gMonShinyPalette_Unown),
     SPECIES_SHINY_PAL(UNOWN_C, gMonShinyPalette_Unown),
     SPECIES_SHINY_PAL(UNOWN_D, gMonShinyPalette_Unown),
@@ -1068,7 +1069,7 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(DEOXYS_ATTACK, gMonShinyPalette_DeoxysAttack),
     SPECIES_SHINY_PAL(DEOXYS_DEFENSE, gMonShinyPalette_DeoxysDefense),
     SPECIES_SHINY_PAL(DEOXYS_SPEED, gMonShinyPalette_DeoxysSpeed),
-
+#if P_NEW_POKEMON == TRUE
     SPECIES_SHINY_PAL(BURMY_SANDY_CLOAK, gMonShinyPalette_BurmySandyCloak),
     SPECIES_SHINY_PAL(BURMY_TRASH_CLOAK, gMonShinyPalette_BurmyTrashCloak),
 
@@ -1299,13 +1300,14 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
 
     SPECIES_SHINY_PAL(CALYREX_ICE_RIDER, gMonShinyPalette_CalyrexIceRider),
     SPECIES_SHINY_PAL(CALYREX_SHADOW_RIDER, gMonShinyPalette_CalyrexShadowRider),
-
+#endif
     SPECIES_SHINY_PAL(EGG, gMonPalette_Egg),
 };
 
 const struct CompressedSpritePalette gMonShinyPaletteTableFemale[] =
 {
     SPECIES_SHINY_PAL(EEVEE, gMonShinyPalette_Eevee),
+#if P_NEW_POKEMON == TRUE
     SPECIES_SHINY_PAL(STARLY, gMonShinyPalette_Starly),
     SPECIES_SHINY_PAL(STARAVIA, gMonShinyPalette_Staravia),
     SPECIES_SHINY_PAL(STARAPTOR, gMonShinyPalette_Staraptor),
@@ -1321,4 +1323,5 @@ const struct CompressedSpritePalette gMonShinyPaletteTableFemale[] =
     SPECIES_SHINY_PAL(JELLICENT, gMonShinyPalette_JellicentF),
     SPECIES_SHINY_PAL(PYROAR, gMonShinyPalette_PyroarF),
     SPECIES_SHINY_PAL(BASCULEGION, gMonShinyPalette_CircledQuestionMark), // gMonShinyPalette_BasculegionF),
+#endif
 };

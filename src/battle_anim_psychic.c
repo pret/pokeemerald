@@ -21,13 +21,14 @@ static void AnimQuestionMark_Step1(struct Sprite *);
 static void AnimQuestionMark_Step2(struct Sprite *);
 static void AnimRedX(struct Sprite *);
 static void AnimSkillSwapOrb(struct Sprite *);
-static void AnimPsychoBoost(struct Sprite *);
 static void AnimTask_MeditateStretchAttacker_Step(u8);
 static void AnimTask_Teleport_Step(u8);
 static void AnimTask_ImprisonOrbs_Step(u8);
 static void AnimTask_SkillSwap_Step(u8);
 static void AnimTask_ExtrasensoryDistortion_Step(u8);
 static void AnimTask_TransparentCloneGrowAndShrink_Step(u8);
+static void AnimateZenHeadbutt(struct Sprite *sprite);
+static void AnimPsychoCut(struct Sprite *sprite);
 
 static const union AffineAnimCmd sAffineAnim_PsychUpSpiral[] =
 {
@@ -365,7 +366,7 @@ static const union AffineAnimCmd sAffineAnim_LusterPurgeCircle[] =
     AFFINEANIMCMD_END_ALT(1),
 };
 
-static const union AffineAnimCmd *const sAffineAnims_LusterPurgeCircle[] =
+const union AffineAnimCmd *const gAffineAnims_LusterPurgeCircle[] =
 {
     sAffineAnim_LusterPurgeCircle,
 };
@@ -377,7 +378,7 @@ const struct SpriteTemplate gLusterPurgeCircleSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = sAffineAnims_LusterPurgeCircle,
+    .affineAnims = gAffineAnims_LusterPurgeCircle,
     .callback = AnimSpriteOnMonPos,
 };
 
@@ -402,7 +403,7 @@ static const union AffineAnimCmd sAffineAnim_PsychoBoostOrb_1[] =
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd *const sAffineAnims_PsychoBoostOrb[] =
+const union AffineAnimCmd *const gAffineAnims_PsychoBoostOrb[] =
 {
     sAffineAnim_PsychoBoostOrb_0,
     sAffineAnim_PsychoBoostOrb_1,
@@ -415,9 +416,125 @@ const struct SpriteTemplate gPsychoBoostOrbSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = sAffineAnims_PsychoBoostOrb,
+    .affineAnims = gAffineAnims_PsychoBoostOrb,
     .callback = AnimPsychoBoost,
 };
+
+const union AffineAnimCmd gZenHeadbuttAffineAnimCmd[] =
+{
+    AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
+    AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 18),
+    AFFINEANIMCMD_LOOP(0),
+    AFFINEANIMCMD_FRAME(0xFFFB, 0xFFFB, 0, 8),
+    AFFINEANIMCMD_FRAME(0x5, 0x5, 0, 8),
+    AFFINEANIMCMD_LOOP(5),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gZenHeadbuttAffineAnims[] =
+{
+    gZenHeadbuttAffineAnimCmd,
+};
+
+const struct SpriteTemplate gZenHeadbuttSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .paletteTag = ANIM_TAG_WATER_IMPACT,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gZenHeadbuttAffineAnims,
+    .callback = AnimateZenHeadbutt,
+};
+
+const struct SpriteTemplate gPsychoCutSpiralSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_SPIRAL,
+    .paletteTag = ANIM_TAG_PSYCHO_CUT,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_PsychUpSpiral,
+    .callback = AnimSpriteOnMonPos,
+};
+
+const struct SpriteTemplate gPsychoCutSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_PSYCHO_CUT,
+    .paletteTag = ANIM_TAG_PSYCHO_CUT,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimPsychoCut,
+};
+
+static void AnimPsychoCut(struct Sprite *sprite)
+{
+    s16 lVarX, lVarY;
+    u16 rot;
+
+    if (IsContest())
+    {
+        gBattleAnimArgs[2] = -gBattleAnimArgs[2];
+    }
+    else
+    {
+        if (GetBattlerSide(gBattleAnimAttacker))
+        {
+            gBattleAnimArgs[2] = -gBattleAnimArgs[2];
+            gBattleAnimArgs[1] = -gBattleAnimArgs[1];
+            gBattleAnimArgs[3] = -gBattleAnimArgs[3];
+        }
+    }
+
+    if (!IsContest() && GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget))
+    {
+        if (GetBattlerPosition(gBattleAnimTarget) == B_POSITION_PLAYER_LEFT
+         || GetBattlerPosition(gBattleAnimTarget) == B_POSITION_OPPONENT_LEFT)
+        {
+            s16 temp1, temp2;
+
+            temp1 = gBattleAnimArgs[2];
+            gBattleAnimArgs[2] = -temp1;
+
+            temp2 = gBattleAnimArgs[0];
+            gBattleAnimArgs[0] = -temp2;
+        }
+    }
+
+    InitSpritePosToAnimAttacker(sprite, 1);
+
+    lVarX = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + gBattleAnimArgs[2];
+    lVarY = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[3];
+    rot = ArcTan2Neg(lVarX - sprite->x, lVarY - sprite->y);
+    rot += 0xC000;
+    TrySetSpriteRotScale(sprite, FALSE, 0x100, 0x100, rot);
+
+    sprite->data[0] = gBattleAnimArgs[4];
+    sprite->data[2] = lVarX;
+    sprite->data[4] = lVarY;
+
+    sprite->callback = StartAnimLinearTranslation;
+    StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
+}
+
+static void AnimateZenHeadbutt(struct Sprite *sprite)
+{
+    if (gBattleAnimArgs[0] == 0)
+    {
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + 18;
+    }
+    else
+    {
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + 18;
+    }
+
+    StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
+    sprite->callback = RunStoredCallbackWhenAffineAnimEnds;
+}
 
 // For the rectangular wall sprite used by Reflect, Mirror Coat, etc
 static void AnimDefensiveWall(struct Sprite *sprite)
@@ -1118,7 +1235,7 @@ static void AnimTask_TransparentCloneGrowAndShrink_Step(u8 taskId)
     }
 }
 
-static void AnimPsychoBoost(struct Sprite *sprite)
+void AnimPsychoBoost(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {

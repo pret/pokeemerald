@@ -39,8 +39,8 @@ void StartEscalatorWarp(u8 metatileBehavior, u8 priority);
 void StartLavaridgeGymB1FWarp(u8 priority);
 void StartLavaridgeGym1FWarp(u8 priority);
 
-void SpriteCB_AshPuff(struct Sprite*);
-void SpriteCB_AshLaunch(struct Sprite*);
+void SpriteCB_AshPuff(struct Sprite *);
+void SpriteCB_AshLaunch(struct Sprite *);
 
 void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b);
 void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId);

@@ -63,7 +63,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         gBattle_BG3_Y = 0;
         break;
     case 1:
-        CpuFastFill(0, (void*)(VRAM), VRAM_SIZE);
+        CpuFastFill(0, (void *)(VRAM), VRAM_SIZE);
         break;
     case 2:
         LoadBattleTextboxAndBackground();
@@ -219,6 +219,8 @@ static void CreateBattlerSprite(u8 battler)
         if (GetBattlerSide(battler) != B_SIDE_PLAYER)
         {
             if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_HP) == 0)
+                return;
+            if (gBattleScripting.monCaught) // Don't create opponent sprite if it has been caught.
                 return;
 
             SetMultiuseSpriteTemplateToPokemon(GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES), GetBattlerPosition(battler));

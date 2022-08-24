@@ -1,5 +1,6 @@
 const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] = 
 {
+#if P_NEW_POKEMON == TRUE
     [SPECIES_GIRATINA] = sGiratinaFormChangeTable,
     [SPECIES_GIRATINA_ORIGIN] = sGiratinaFormChangeTable,
     [SPECIES_SHAYMIN] = sShayminFormChangeTable,
@@ -28,6 +29,8 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_THUNDURUS_THERIAN] = sThundurusTherianFormChangeTable,
     [SPECIES_LANDORUS] = sLandorusFormChangeTable,
     [SPECIES_LANDORUS_THERIAN] = sLandorusTherianFormChangeTable,
+    [SPECIES_ENAMORUS] = sEnamorusFormChangeTable,
+    [SPECIES_ENAMORUS_THERIAN] = sEnamorusTherianFormChangeTable,
     [SPECIES_KELDEO] = sKeldeoFormChangeTable,
     [SPECIES_KELDEO_RESOLUTE] = sKeldeoResoluteFormChangeTable,
     [SPECIES_GENESECT] = sGenesectFormChangeTable, 
@@ -59,4 +62,5 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_SILVALLY_ROCK] = sSilvallyFormChangeTable,
     [SPECIES_SILVALLY_STEEL] = sSilvallyFormChangeTable,
     [SPECIES_SILVALLY_WATER] = sSilvallyFormChangeTable,
+#endif
 };

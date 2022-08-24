@@ -103,7 +103,7 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_SPECIAL_DEFENSE_UP] = 1,
     [EFFECT_ACCURACY_UP] = 1,
     [EFFECT_EVASION_UP] = 1,
-    [EFFECT_ALWAYS_HIT] = 2,
+//    [EFFECT_ALWAYS_HIT] = 2,
     [EFFECT_ATTACK_DOWN] = 1,
     [EFFECT_DEFENSE_DOWN] = 1,
     [EFFECT_SPEED_DOWN] = 1,
@@ -125,16 +125,16 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_TRI_ATTACK] = 1,
     [EFFECT_REST] = 7,
     [EFFECT_OHKO] = 7,
-    [EFFECT_RAZOR_WIND] = 1,
+//    [EFFECT_RAZOR_WIND] = 1,
     [EFFECT_SUPER_FANG] = 5,
     [EFFECT_DRAGON_RAGE] = 2,
     [EFFECT_TRAP] = 4,
-    [EFFECT_HIGH_CRITICAL] = 1,
+//    [EFFECT_HIGH_CRITICAL] = 1,
     [EFFECT_DOUBLE_HIT] = 1,
     [EFFECT_RECOIL_IF_MISS] = 1,
     [EFFECT_MIST] = 5,
     [EFFECT_FOCUS_ENERGY] = 1,
-    [EFFECT_RECOIL] = 2,
+    [EFFECT_RECOIL_25] = 2,
     [EFFECT_CONFUSE] = 4,
     [EFFECT_ATTACK_UP_2] = 1,
     [EFFECT_DEFENSE_UP_2] = 1,
@@ -161,7 +161,7 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_SPECIAL_DEFENSE_DOWN_HIT] = 1,
     [EFFECT_ACCURACY_DOWN_HIT] = 1,
     [EFFECT_EVASION_DOWN_HIT] = 1,
-    [EFFECT_SKY_ATTACK] = 4,
+//    [EFFECT_SKY_ATTACK] = 4,
     [EFFECT_CONFUSE_HIT] = 1,
     [EFFECT_TWINEEDLE] = 1,
     [EFFECT_VITAL_THROW] = 1,
@@ -171,7 +171,7 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_MIMIC] = 4,
     [EFFECT_METRONOME] = 1,
     [EFFECT_LEECH_SEED] = 4,
-    [EFFECT_SPLASH] = 1,
+    [EFFECT_DO_NOTHING] = 1,
     [EFFECT_DISABLE] = 7,
     [EFFECT_LEVEL_DAMAGE] = 2,
     [EFFECT_PSYWAVE] = 1,
@@ -182,21 +182,21 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_CONVERSION_2] = 4,
     [EFFECT_LOCK_ON] = 3,
     [EFFECT_SKETCH] = 3,
-    [EFFECT_UNUSED_60] = 3,
+//    [EFFECT_UNUSED_60] = 3,
     [EFFECT_SLEEP_TALK] = 3,
     [EFFECT_DESTINY_BOND] = 3,
     [EFFECT_FLAIL] = 2,
     [EFFECT_SPITE] = 4,
     [EFFECT_FALSE_SWIPE] = 1,
     [EFFECT_HEAL_BELL] = 5,
-    [EFFECT_QUICK_ATTACK] = 1,
+//    [EFFECT_QUICK_ATTACK] = 1,
     [EFFECT_TRIPLE_KICK] = 1,
     [EFFECT_THIEF] = 4,
     [EFFECT_MEAN_LOOK] = 5,
     [EFFECT_NIGHTMARE] = 3,
     [EFFECT_MINIMIZE] = 1,
     [EFFECT_CURSE] = 2,
-    [EFFECT_UNUSED_6E] = 1,
+//    [EFFECT_UNUSED_6E] = 1,
     [EFFECT_PROTECT] = 5,
     [EFFECT_SPIKES] = 4,
     [EFFECT_FORESIGHT] = 3,
@@ -211,13 +211,13 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_PRESENT] = 1,
     [EFFECT_FRUSTRATION] = 1,
     [EFFECT_SAFEGUARD] = 5,
-    [EFFECT_THAW_HIT] = 1,
+//    [EFFECT_THAW_HIT] = 1, Now unused
     [EFFECT_MAGNITUDE] = 1,
     [EFFECT_BATON_PASS] = 7,
     [EFFECT_PURSUIT] = 2,
     [EFFECT_RAPID_SPIN] = 2,
     [EFFECT_SONICBOOM] = 1,
-    [EFFECT_UNUSED_83] = 1,
+//    [EFFECT_UNUSED_83] = 1,
     [EFFECT_MORNING_SUN] = 4,
     [EFFECT_SYNTHESIS] = 4,
     [EFFECT_MOONLIGHT] = 4,
@@ -227,7 +227,7 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_DEFENSE_UP_HIT] = 1,
     [EFFECT_ATTACK_UP_HIT] = 1,
     [EFFECT_ALL_STATS_UP_HIT] = 1,
-    [EFFECT_UNUSED_8D] = 1,
+//    [EFFECT_UNUSED_8D] = 1,
     [EFFECT_BELLY_DRUM] = 7,
     [EFFECT_PSYCH_UP] = 7,
     [EFFECT_MIRROR_COAT] = 6,
@@ -249,7 +249,7 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_STOCKPILE] = 3,
     [EFFECT_SPIT_UP] = 3,
     [EFFECT_SWALLOW] = 3,
-    [EFFECT_UNUSED_A3] = 1,
+//    [EFFECT_UNUSED_A3] = 1,
     [EFFECT_HAIL] = 4,
     [EFFECT_TORMENT] = 7,
     [EFFECT_FLATTER] = 7,
@@ -284,9 +284,9 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_SNATCH] = 1,
     [EFFECT_LOW_KICK] = 1,
     [EFFECT_SECRET_POWER] = 1,
-    [EFFECT_DOUBLE_EDGE] = 2,
+    [EFFECT_RECOIL_33] = 2,
     [EFFECT_TEETER_DANCE] = 6,
-    [EFFECT_BLAZE_KICK] = 1,
+//    [EFFECT_BLAZE_KICK] = 1,
     [EFFECT_MUD_SPORT] = 4,
     [EFFECT_POISON_FANG] = 1,
     [EFFECT_WEATHER_BALL] = 1,
@@ -295,7 +295,7 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_COSMIC_POWER] = 1,
     [EFFECT_SKY_UPPERCUT] = 1,
     [EFFECT_BULK_UP] = 1,
-    [EFFECT_POISON_TAIL] = 1,
+//    [EFFECT_POISON_TAIL] = 1,
     [EFFECT_WATER_SPORT] = 4,
     [EFFECT_CALM_MIND] = 1,
     [EFFECT_DRAGON_DANCE] = 1,
@@ -1010,10 +1010,10 @@ void BattleTv_SetDataBasedOnMove(u16 move, u16 weatherFlags, struct DisableStruc
         tvPtr->side[atkSide ^ BIT_SIDE].explosion = TRUE;
     }
 
-    AddMovePoints(PTS_REFLECT,      gBattleMoves[move].type, gBattleMoves[move].power, 0);
-    AddMovePoints(PTS_LIGHT_SCREEN, gBattleMoves[move].type, gBattleMoves[move].power, 0);
-    AddMovePoints(PTS_WATER_SPORT,  gBattleMoves[move].type, 0,                        0);
-    AddMovePoints(PTS_MUD_SPORT,    gBattleMoves[move].type, 0,                        0);
+    AddMovePoints(PTS_REFLECT,      move, gBattleMoves[move].power, 0);
+    AddMovePoints(PTS_LIGHT_SCREEN, move, gBattleMoves[move].power, 0);
+    AddMovePoints(PTS_WATER_SPORT,  move, 0,                        0);
+    AddMovePoints(PTS_MUD_SPORT,    move, 0,                        0);
 }
 
 void BattleTv_SetDataBasedOnAnimation(u8 animationId)
@@ -1210,11 +1210,11 @@ static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
         movePoints->points[arg1][arg2 * 4 + arg3] += sPointsArray[caseId][0];
         break;
 
-#define type arg1
+#define move arg1
 #define power arg2
     case PTS_WATER_SPORT:
         // If used fire move during Water Sport
-        if (tvPtr->pos[defSide][0].waterSportMonId != -(tvPtr->pos[defSide][1].waterSportMonId) && type == TYPE_FIRE)
+        if (tvPtr->pos[defSide][0].waterSportMonId != -(tvPtr->pos[defSide][1].waterSportMonId) && gBattleMoves[move].type == TYPE_FIRE)
         {
             if (tvPtr->pos[defSide][0].waterSportMonId != 0)
             {
@@ -1230,7 +1230,7 @@ static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
         break;
     case PTS_MUD_SPORT:
         // If used Electric move during Mud Sport
-        if (tvPtr->pos[defSide][0].mudSportMonId != -(tvPtr->pos[defSide][1].mudSportMonId) && type == TYPE_ELECTRIC)
+        if (tvPtr->pos[defSide][0].mudSportMonId != -(tvPtr->pos[defSide][1].mudSportMonId) && gBattleMoves[move].type == TYPE_ELECTRIC)
         {
             if (tvPtr->pos[defSide][0].mudSportMonId != 0)
             {
@@ -1246,7 +1246,7 @@ static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
         break;
     case PTS_REFLECT:
         // If hit Reflect with damaging physical move
-        if (IS_TYPE_PHYSICAL(type) && power != 0 && tvPtr->side[defSide].reflectMonId != 0)
+        if (IS_MOVE_PHYSICAL(move) && power != 0 && tvPtr->side[defSide].reflectMonId != 0)
         {
             u32 id = (tvPtr->side[defSide].reflectMonId - 1) * 4;
             movePoints->points[defSide][id + tvPtr->side[defSide].reflectMoveSlot] += sPointsArray[caseId][0];
@@ -1254,13 +1254,13 @@ static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
         break;
     case PTS_LIGHT_SCREEN:
         // If hit Light Screen with damaging special move
-        if (!IS_TYPE_PHYSICAL(type) && power != 0 && tvPtr->side[defSide].lightScreenMonId != 0)
+        if (IS_MOVE_SPECIAL(move) && power != 0 && tvPtr->side[defSide].lightScreenMonId != 0)
         {
             u32 id = (tvPtr->side[defSide].lightScreenMonId - 1) * 4;
             movePoints->points[defSide][id + tvPtr->side[defSide].lightScreenMoveSlot] += sPointsArray[caseId][0];
         }
         break;
-#undef type
+#undef move
 #undef power
     }
 }
@@ -1458,20 +1458,9 @@ static void TrySetBattleSeminarShow(void)
         powerOverride = 0;
         if (ShouldCalculateDamage(gCurrentMove, &dmgByMove[i], &powerOverride))
         {
-            u8 moveResultFlags;
-            u16 sideStatus = gSideStatuses[GET_BATTLER_SIDE(gBattlerTarget)];
-            gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBattlerAttacker], &gBattleMons[gBattlerTarget], gCurrentMove,
-                                                    sideStatus, powerOverride,
-                                                    0, gBattlerAttacker, gBattlerTarget);
-
-            if (gStatuses3[gBattlerAttacker] & STATUS3_CHARGED_UP && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
-                gBattleMoveDamage *= 2;
-            if (gProtectStructs[gBattlerAttacker].helpingHand)
-                gBattleMoveDamage = gBattleMoveDamage * 15 / 10;
-
-            moveResultFlags = TypeCalc(gCurrentMove, gBattlerAttacker, gBattlerTarget);
+            gBattleMoveDamage = CalculateMoveDamage(gCurrentMove, gBattlerAttacker, gBattlerTarget, gBattleMoves[gCurrentMove].type, powerOverride, FALSE, FALSE, FALSE);
             dmgByMove[i] = gBattleMoveDamage;
-            if (dmgByMove[i] == 0 && !(moveResultFlags & MOVE_RESULT_NO_EFFECT))
+            if (dmgByMove[i] == 0 && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
                 dmgByMove[i] = 1;
         }
     }

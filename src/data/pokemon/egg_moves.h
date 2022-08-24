@@ -2387,6 +2387,7 @@ const u16 gEggMoves[] = {
         MOVE_ENDURE,
         MOVE_DEFENSE_CURL),
 
+#if P_NEW_POKEMON == TRUE
     egg_moves(TURTWIG,
         MOVE_WORRY_SEED,
         MOVE_GROWTH,
@@ -4409,6 +4410,7 @@ const u16 gEggMoves[] = {
         MOVE_FAKE_OUT,
         MOVE_PSYCHO_SHIFT,
         MOVE_HEAL_PULSE),
+#endif
 
     EGG_MOVES_TERMINATOR
 };

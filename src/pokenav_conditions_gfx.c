@@ -299,8 +299,8 @@ static u32 LoopedTask_OpenConditionGraphMenu(s32 state)
         if (!IsConditionMenuSearchMode())
         {
             LoadLeftHeaderGfxForIndex(POKENAV_GFX_PARTY_MENU);
-            ShowLeftHeaderGfx(POKENAV_GFX_CONDITION_MENU, TRUE, 0);
-            ShowLeftHeaderGfx(POKENAV_GFX_PARTY_MENU, TRUE, 0);
+            ShowLeftHeaderGfx(POKENAV_GFX_CONDITION_MENU, TRUE, FALSE);
+            ShowLeftHeaderGfx(POKENAV_GFX_PARTY_MENU, TRUE, FALSE);
         }
         return LT_INC_AND_PAUSE;
     case 16:
@@ -826,7 +826,7 @@ static void CreateConditionMonPic(u8 id)
         {
             menu->monPicSpriteId = spriteId;
             gSprites[menu->monPicSpriteId].callback = MonPicGfxSpriteCallback;
-            menu->monGfxPtr = (void*)VRAM + BG_VRAM_SIZE + (menu->monGfxTileStart * 32);
+            menu->monGfxPtr = (void *)VRAM + BG_VRAM_SIZE + (menu->monGfxTileStart * 32);
             menu->monPalIndex = (menu->monPalIndex * 16) + 0x100;
         }
     }

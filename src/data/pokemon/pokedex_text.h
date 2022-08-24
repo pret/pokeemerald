@@ -2320,6 +2320,7 @@ const u8 gChimechoPokedexText[] = _(
     "themselves using seven different and\n"
     "distinguishing cries.");
 
+#if P_NEW_POKEMON == TRUE
 const u8 gTurtwigPokedexText[] = _(
     "The shell on its back is made of soil. \n"
     "On a very healthy Turtwig, the shell \n"
@@ -5388,3 +5389,4 @@ const u8 gEnamorusPokedexText[] = _(
     "winter. According to legend, this\n"
     "Pokémon's love gives rise to the\n"
     "budding of fresh life across the land.");
+#endif

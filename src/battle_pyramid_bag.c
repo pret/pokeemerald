@@ -309,7 +309,7 @@ static const struct OamData sOamData_PyramidBag =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -393,7 +393,7 @@ static void OpenBattlePyramidBagInBattle(void)
 // make room.
 void ChooseItemsToTossFromPyramidBag(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FadeScreen(FADE_TO_BLACK, 0);
     CreateTask(Task_ChooseItemsToTossFromPyramidBag, 10);
 }
@@ -1195,7 +1195,7 @@ static void Task_ChooseHowManyToToss(u8 taskId)
     {
         // Toss
         PlaySE(SE_SELECT);
-        ClearStdWindowAndFrameToTransparent(WIN_TOSS_NUM, 0);
+        ClearStdWindowAndFrameToTransparent(WIN_TOSS_NUM, FALSE);
         ClearWindowTilemap(WIN_TOSS_NUM);
         ScheduleBgCopyTilemapToVram(1);
         AskConfirmToss(taskId);
@@ -1204,7 +1204,7 @@ static void Task_ChooseHowManyToToss(u8 taskId)
     {
         // Cancel tossing
         PlaySE(SE_SELECT);
-        ClearStdWindowAndFrameToTransparent(WIN_TOSS_NUM, 0);
+        ClearStdWindowAndFrameToTransparent(WIN_TOSS_NUM, FALSE);
         ClearWindowTilemap(WIN_TOSS_NUM);
         ScheduleBgCopyTilemapToVram(1);
         DontTossItem(taskId);
@@ -1464,7 +1464,7 @@ static void PyramidBagPrint_Quantity(u8 windowId, const u8 *src, u8 x, u8 y, u8 
 
 static void DrawTossNumberWindow(u8 windowId)
 {
-    DrawStdFrameWithCustomTileAndPalette(windowId, 0, 1, 0xE);
+    DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 1, 0xE);
     ScheduleBgCopyTilemapToVram(1);
 }
 

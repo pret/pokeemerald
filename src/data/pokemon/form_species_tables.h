@@ -1,3 +1,4 @@
+#if P_NEW_POKEMON == TRUE
 static const u16 sVenusaurFormSpeciesIdTable[] = {
     SPECIES_VENUSAUR,
     SPECIES_VENUSAUR_MEGA,
@@ -308,6 +309,7 @@ static const u16 sSlowkingFormSpeciesIdTable[] = {
     SPECIES_SLOWKING_GALARIAN,
     FORM_SPECIES_END,
 };
+#endif
 
 static const u16 sQwilfishFormSpeciesIdTable[] = {
     SPECIES_QWILFISH,
@@ -353,6 +355,7 @@ static const u16 sUnownFormSpeciesIdTable[] = {
     FORM_SPECIES_END,
 };
 
+#if P_NEW_POKEMON == TRUE
 static const u16 sSteelixFormSpeciesIdTable[] = {
     SPECIES_STEELIX,
     SPECIES_STEELIX_MEGA,
@@ -472,7 +475,7 @@ static const u16 sAltariaFormSpeciesIdTable[] = {
     SPECIES_ALTARIA_MEGA,
     FORM_SPECIES_END,
 };
-
+#endif
 static const u16 sCastformFormSpeciesIdTable[] = {
     SPECIES_CASTFORM,
     SPECIES_CASTFORM_SUNNY,
@@ -481,6 +484,7 @@ static const u16 sCastformFormSpeciesIdTable[] = {
     FORM_SPECIES_END,
 };
 
+#if P_NEW_POKEMON == TRUE
 static const u16 sBanetteFormSpeciesIdTable[] = {
     SPECIES_BANETTE,
     SPECIES_BANETTE_MEGA,
@@ -540,7 +544,7 @@ static const u16 sRayquazaFormSpeciesIdTable[] = {
     SPECIES_RAYQUAZA_MEGA,
     FORM_SPECIES_END,
 };
-
+#endif
 static const u16 sDeoxysFormSpeciesIdTable[] = {
     SPECIES_DEOXYS,
     SPECIES_DEOXYS_ATTACK,
@@ -548,7 +552,7 @@ static const u16 sDeoxysFormSpeciesIdTable[] = {
     SPECIES_DEOXYS_SPEED,
     FORM_SPECIES_END,
 };
-
+#if P_NEW_POKEMON == TRUE
 static const u16 sBurmyFormSpeciesIdTable[] = {
     SPECIES_BURMY,
     SPECIES_BURMY_SANDY_CLOAK,
@@ -1135,3 +1139,4 @@ static const u16 sCalyrexFormSpeciesIdTable[] = {
     SPECIES_CALYREX_SHADOW_RIDER,
     FORM_SPECIES_END,
 };
+#endif
