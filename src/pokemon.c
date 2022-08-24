@@ -1890,17 +1890,18 @@ const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
     [NATURE_QUIRKY]  = {    0,  0,  0,     0,     0},
 };
 
-#include "data/pokemon/tmhm_learnsets.h"
 #include "data/pokemon/trainer_class_lookups.h"
 #include "data/pokemon/experience_tables.h"
 #include "data/pokemon/base_stats.h"
 #include "data/pokemon/level_up_learnsets.h"
+#include "data/pokemon/tmhm_learnsets.h"
 #if P_NEW_POKEMON == TRUE
 #include "data/pokemon/evolution.h"
 #else
 #include "data/pokemon/evolution_old.h"
 #endif
 #include "data/pokemon/level_up_learnset_pointers.h"
+#include "data/pokemon/tmhm_learnset_pointers.h"
 #include "data/pokemon/form_species_tables.h"
 #include "data/pokemon/form_species_table_pointers.h"
 #include "data/pokemon/form_change_tables.h"
@@ -7243,40 +7244,43 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
     }
 }
 
-u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
+u32 CanMonLearnTMHM(struct Pokemon *mon, u16 move)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
+    
     if (species == SPECIES_EGG)
     {
-        return 0;
-    }
-    else if (tm < 32)
-    {
-        u32 mask = 1 << tm;
-        return gTMHMLearnsets[species][0] & mask;
+        return FALSE;
     }
     else
     {
-        u32 mask = 1 << (tm - 32);
-        return gTMHMLearnsets[species][1] & mask;
+        u32 i;
+        for (i = 0; gTMHMLearnsets[species][i] != MOVE_UNAVAILABLE; i++)
+        {
+            if (gTMHMLearnsets[species][i] == move) {
+                return TRUE;
+            }
+        }
+        return FALSE;
     }
 }
 
-u32 CanSpeciesLearnTMHM(u16 species, u8 tm)
+u32 CanSpeciesLearnTMHM(u16 species, u16 move)
 {
     if (species == SPECIES_EGG)
     {
-        return 0;
-    }
-    else if (tm < 32)
-    {
-        u32 mask = 1 << tm;
-        return gTMHMLearnsets[species][0] & mask;
+        return FALSE;
     }
     else
     {
-        u32 mask = 1 << (tm - 32);
-        return gTMHMLearnsets[species][1] & mask;
+        u32 i;
+        for (i = 0; gTMHMLearnsets[species][i] != MOVE_UNAVAILABLE; i++)
+        {
+            if (gTMHMLearnsets[species][i] == move) {
+                return TRUE;
+            }
+        }
+        return FALSE;
     }
 }
 
