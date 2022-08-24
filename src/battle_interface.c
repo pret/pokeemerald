@@ -2908,7 +2908,7 @@ static void TextIntoAbilityPopUp(void *dest, u8 *windowTileData, s32 arg2, bool3
 
 #define MAX_CHARS_PRINTED 12
 
-static void PrintOnAbilityPopUp(const u8 *str, u8 *spriteTileData1, u8 *spriteTileData2, u32 x1, u32 x2, u32 y, u32 color1, u32 color2, u32 color3)
+static void PrintOnAbilityPopUp(const u8 *str, u8 *spriteTileData1, u8 *spriteTileData2, u32 x1, u32 x2, u32 y, u32 color1, u32 color2, u32 color3, bool32 alignAbilityChars)
 {
     u32 windowId, i;
     u8 *windowTileData;
@@ -2922,6 +2922,15 @@ static void PrintOnAbilityPopUp(const u8 *str, u8 *spriteTileData1, u8 *spriteTi
             break;
     }
     text1[i] = EOS;
+
+    // Because there are two Windows, we need to align the strings, so that the first char in the second window starts right after the last char in the first window.
+    // Windows are 64 pixels in width.
+    if (alignAbilityChars && i == MAX_CHARS_PRINTED)
+    {
+        u32 width = GetStringWidth(FONT_SMALL, text1, 0);
+        while (x1 + width < 64)
+            x1++;
+    }
 
     windowTileData = AddTextPrinterAndCreateWindowOnAbilityPopUp(text1, x1, y, color1, color2, color3, &windowId);
     TextIntoAbilityPopUp(spriteTileData1, windowTileData, 8, (y == 0));
@@ -2951,7 +2960,8 @@ static void ClearAbilityName(u8 spriteId1, u8 spriteId2)
                         (void*)(OBJ_VRAM0) + (gSprites[spriteId2].oam.tileNum * 32) + 256,
                         6, 1,
                         4,
-                        7, 9, 1);
+                        7, 9, 1,
+                        FALSE);
 }
 
 static void PrintBattlerOnAbilityPopUp(u8 battlerId, u8 spriteId1, u8 spriteId2)
@@ -2988,7 +2998,8 @@ static void PrintBattlerOnAbilityPopUp(u8 battlerId, u8 spriteId1, u8 spriteId2)
                         (void*)(OBJ_VRAM0) + (gSprites[spriteId2].oam.tileNum * 32),
                         7, 0,
                         0,
-                        2, 7, 1);
+                        2, 7, 1,
+                        FALSE);
 }
 
 static void PrintAbilityOnAbilityPopUp(u32 ability, u8 spriteId1, u8 spriteId2)
@@ -2996,9 +3007,10 @@ static void PrintAbilityOnAbilityPopUp(u32 ability, u8 spriteId1, u8 spriteId2)
     PrintOnAbilityPopUp(gAbilityNames[ability],
                         (void*)(OBJ_VRAM0) + (gSprites[spriteId1].oam.tileNum * 32) + 256,
                         (void*)(OBJ_VRAM0) + (gSprites[spriteId2].oam.tileNum * 32) + 256,
-                        6, 1,
+                        6, 0,
                         4,
-                        7, 9, 1);
+                        7, 9, 1,
+                        TRUE);
 }
 
 #define PIXEL_COORDS_TO_OFFSET(x, y)(            \
@@ -3196,7 +3208,7 @@ void UpdateAbilityPopup(u8 battlerId)
     u8 spriteId1 = gBattleStruct->abilityPopUpSpriteIds[battlerId][0];
     u8 spriteId2 = gBattleStruct->abilityPopUpSpriteIds[battlerId][1];
     u16 ability = (gBattleScripting.abilityPopupOverwrite != 0) ? gBattleScripting.abilityPopupOverwrite : gBattleMons[battlerId].ability;
-    
+
     ClearAbilityName(spriteId1, spriteId2);
     PrintAbilityOnAbilityPopUp(ability, spriteId1, spriteId2);
     RestoreOverwrittenPixels((void*)(OBJ_VRAM0) + (gSprites[spriteId1].oam.tileNum * 32));
@@ -3382,7 +3394,7 @@ static void DestroyLastUsedBallGfx(struct Sprite *sprite)
 }
 
 static void SpriteCB_LastUsedBallWin(struct Sprite *sprite)
-{    
+{
     if (sprite->sHide)
     {
         if (sprite->x != LAST_BALL_WIN_X_0)
@@ -3399,7 +3411,7 @@ static void SpriteCB_LastUsedBallWin(struct Sprite *sprite)
 }
 
 static void SpriteCB_LastUsedBall(struct Sprite *sprite)
-{    
+{
     if (sprite->sHide)
     {
         if (sprite->x != LAST_USED_BALL_X_0)
