@@ -281,10 +281,12 @@ static const u16 sBlastoiseTMHMLearnset[] = {
 };
 
 static const u16 sCaterpieTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sMetapodTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sButterfreeTMHMLearnset[] = {
 	MOVE_AERIAL_ACE,
@@ -314,10 +316,12 @@ static const u16 sButterfreeTMHMLearnset[] = {
 };
 
 static const u16 sWeedleTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sKakunaTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sBeedrillTMHMLearnset[] = {
 	MOVE_AERIAL_ACE,
@@ -3550,7 +3554,8 @@ static const u16 sTaurosTMHMLearnset[] = {
 };
 
 static const u16 sMagikarpTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sGyaradosTMHMLearnset[] = {
 	MOVE_ATTRACT,
@@ -3623,7 +3628,8 @@ static const u16 sLaprasTMHMLearnset[] = {
 };
 
 static const u16 sDittoTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sEeveeTMHMLearnset[] = {
 	MOVE_ATTRACT,
@@ -7401,10 +7407,12 @@ static const u16 sLinooneTMHMLearnset[] = {
 };
 
 static const u16 sWurmpleTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sSilcoonTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sBeautiflyTMHMLearnset[] = {
 	MOVE_AERIAL_ACE,
@@ -7431,7 +7439,8 @@ static const u16 sBeautiflyTMHMLearnset[] = {
 };
 
 static const u16 sCascoonTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sDustoxTMHMLearnset[] = {
 	MOVE_AERIAL_ACE,
@@ -10341,7 +10350,8 @@ static const u16 sSalamenceTMHMLearnset[] = {
 };
 
 static const u16 sBeldumTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sMetangTMHMLearnset[] = {
 	MOVE_AERIAL_ACE,
@@ -11140,7 +11150,8 @@ static const u16 sBibarelTMHMLearnset[] = {
 };
 
 static const u16 sKricketotTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sKricketuneTMHMLearnset[] = {
 	MOVE_AERIAL_ACE,
@@ -11481,7 +11492,8 @@ static const u16 sMothimTMHMLearnset[] = {
 };
 
 static const u16 sCombeeTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sVespiquenTMHMLearnset[] = {
 	MOVE_AERIAL_ACE,
@@ -16520,7 +16532,8 @@ static const u16 sKlinklangTMHMLearnset[] = {
 };
 
 static const u16 sTynamoTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sEelektrikTMHMLearnset[] = {
 	MOVE_ATTRACT,
@@ -18207,7 +18220,8 @@ static const u16 sTalonflameTMHMLearnset[] = {
 };
 
 static const u16 sScatterbugTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sSpewpaTMHMLearnset[] = {
 	MOVE_PROTECT,
@@ -21201,10 +21215,12 @@ static const u16 sTapuFiniTMHMLearnset[] = {
 };
 
 static const u16 sCosmogTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sCosmoemTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sSolgaleoTMHMLearnset[] = {
 	MOVE_CALM_MIND,
@@ -21781,7 +21797,8 @@ static const u16 sCorviknightTMHMLearnset[] = {
 };
 
 static const u16 sBlipbugTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sDottlerTMHMLearnset[] = {
 	MOVE_ATTRACT,
@@ -24305,7 +24322,8 @@ static const u16 sRotomHeatTMHMLearnset[] = {
 };
 
 static const u16 sRotomWashTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sRotomFrostTMHMLearnset[] = {
 	MOVE_BLIZZARD,
@@ -24313,10 +24331,12 @@ static const u16 sRotomFrostTMHMLearnset[] = {
 };
 
 static const u16 sRotomFanTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sRotomMowTMHMLearnset[] = {
-	};
+	MOVE_UNAVAILABLE,
+};
 
 static const u16 sGiratinaOriginTMHMLearnset[] = {
 	MOVE_AERIAL_ACE,
