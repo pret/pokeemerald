@@ -4515,6 +4515,10 @@ s8 GetMovePriority(u32 battlerId, u16 move)
             break;
         }
     }
+    if (gProtectStructs[battlerId].quash == 1)
+	{
+		priority = -8;
+	}	
 
     return priority;
 }
@@ -4736,6 +4740,7 @@ static void TurnValuesCleanUp(bool8 var0)
             gProtectStructs[gActiveBattler].spikyShielded = FALSE;
             gProtectStructs[gActiveBattler].kingsShielded = FALSE;
             gProtectStructs[gActiveBattler].banefulBunkered = FALSE;
+	    gProtectStructs[gBattlerTarget].quash = FALSE;
         }
         else
         {

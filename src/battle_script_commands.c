@@ -8454,28 +8454,14 @@ static void Cmd_various(void)
         }
         return;
     case VARIOUS_TRY_QUASH:
-        if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget))
+        if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget)) // is true if foe is faster, has a bigger priority, or switches
         {
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-        }
-        else
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3); // This replaces the current battlescript with the "fail" script, if the condition
+        }                                                                     // we checked is true
+        else // If the condition is not true, it means we are faster than the foe, so we can set the quash bit
         {
-            for (i = 0; i < gBattlersCount; i++)
-                data[i] = gBattlerByTurnOrder[i];
-            for (i = 0; i < gBattlersCount; i++)
-            {
-                if (data[i] == gBattlerTarget)
-                {
-                    for (j = i + 1; j < gBattlersCount; j++)
-                        data[i++] = data[j];
-                }
-                else
-                {
-                    gBattlerByTurnOrder[i] = data[i];
-                }
-            }
-            gBattlerByTurnOrder[gBattlersCount - 1] = gBattlerTarget;
-            gBattlescriptCurrInstr += 7;
+            gProtectStructs[gBattlerTarget].quash = 1;
+            gBattlescriptCurrInstr += 7; // and then we proceed with the rest of our battlescript
         }
         return;
     case VARIOUS_INVERT_STAT_STAGES:

@@ -149,6 +149,7 @@ struct ProtectStruct
     u16 beakBlastCharge:1;
     u32 physicalDmg;
     u32 specialDmg;
+    u8 quash : 1;
     u8 physicalBattlerId;
     u8 specialBattlerId;
 };
