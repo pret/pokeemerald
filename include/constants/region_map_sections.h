@@ -100,8 +100,8 @@
 #define MAPSEC_CINNABAR_ISLAND              0x60
 #define MAPSEC_INDIGO_PLATEAU               0x61
 #define MAPSEC_SAFFRON_CITY                 0x62
-#define MAPSEC_ROUTE_4_FLYDUP               0x63
-#define MAPSEC_ROUTE_10_FLYDUP              0x64
+#define MAPSEC_ROUTE_4_POKECENTER           0x63
+#define MAPSEC_ROUTE_10_POKECENTER          0x64
 #define MAPSEC_ROUTE_1                      0x65
 #define MAPSEC_ROUTE_2                      0x66
 #define MAPSEC_ROUTE_3                      0x67

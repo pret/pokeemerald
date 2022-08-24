@@ -3,35 +3,35 @@
 	@ ../gflib/bg.o
 	.align 2
 gWindowTileAutoAllocEnabled:
-    .space 4
+	.space 4
     @ ../gflib/window.o
-    .align 4
+	.align 4
 gTransparentTileNumber:
-    .space 1
-    .align 4
+	.space 1
+	.align 4
 gWindowBgTilemapBuffers:
-    .space 16
+	.space 16
     @ ../gflib/text.o
-    .align 4
+	.align 4
 gFonts:
-    .space 4
-    .align 2
+	.space 4
+	.align 2
 gDisableTextPrinters:
-    .space 1
-    .align 4
+	.space 1
+	.align 4
 gCurGlyph:
-    .space 132
-    .align 2
+	.space 132
+	.align 2
 gTextFlags:
-    .space 4
+	.space 4
     @ ../gflib/sprite.o
-    .align 2
+	.align 2
 gOamMatrixAllocBitmap:
-    .space 4
-    .align 2
+	.space 4
+	.align 2
 gReservedSpritePaletteCount:
-    .space 1
-    .align 4
+	.space 1
+	.align 4
 	.include "link.o"
 	.include "AgbRfu_LinkManager.o"
 	.include "link_rfu_2.o"

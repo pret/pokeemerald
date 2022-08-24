@@ -53,23 +53,17 @@ bool16 ResetAllPicSprites(void)
     return FALSE;
 }
 
-static bool16 DecompressPic(u16 species, u32 personality, bool8 isFrontPic, u8 *dest, bool8 isTrainer, bool8 ignoreDeoxys)
+static bool16 DecompressPic(u16 species, u32 personality, bool8 isFrontPic, u8 *dest, bool8 isTrainer)
 {
     if (!isTrainer)
     {
         if (isFrontPic)
         {
-            if (!ignoreDeoxys)
-                LoadSpecialPokePic(&gMonFrontPicTable[species], dest, species, personality, isFrontPic);
-            else
-                LoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species], dest, species, personality, isFrontPic);
+            LoadSpecialPokePic(&gMonFrontPicTable[species], dest, species, personality, isFrontPic);
         }
         else
         {
-            if (!ignoreDeoxys)
-                LoadSpecialPokePic(&gMonBackPicTable[species], dest, species, personality, isFrontPic);
-            else
-                LoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[species], dest, species, personality, isFrontPic);
+            LoadSpecialPokePic(&gMonBackPicTable[species], dest, species, personality, isFrontPic);
         }
     }
     else
@@ -80,11 +74,6 @@ static bool16 DecompressPic(u16 species, u32 personality, bool8 isFrontPic, u8 *
             DecompressPicFromTable(&gTrainerBackPicTable[species], dest, species);
     }
     return FALSE;
-}
-
-static bool16 DecompressPic_HandleDeoxys(u16 species, u32 personality, bool8 isFrontPic, u8 *dest, bool8 isTrainer)
-{
-    return DecompressPic(species, personality, isFrontPic, dest, isTrainer, FALSE);
 }
 
 static void LoadPicPaletteByTagOrSlot(u16 species, u32 otId, u32 personality, u8 paletteSlot, u16 paletteTag, bool8 isTrainer)
@@ -133,7 +122,7 @@ static void AssignSpriteAnimsTable(bool8 isTrainer)
         sCreatingSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[0];
 }
 
-static u16 CreatePicSprite(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 isTrainer, bool8 ignoreDeoxys)
+static u16 CreatePicSprite(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 isTrainer)
 {
     u8 i;
     u8 *framePics;
@@ -159,7 +148,7 @@ static u16 CreatePicSprite(u16 species, u32 otId, u32 personality, bool8 isFront
         Free(framePics);
         return 0xFFFF;
     }
-    if (DecompressPic(species, personality, isFrontPic, framePics, isTrainer, ignoreDeoxys))
+    if (DecompressPic(species, personality, isFrontPic, framePics, isTrainer))
     {
         // debug trap?
         return 0xFFFF;
@@ -185,11 +174,6 @@ static u16 CreatePicSprite(u16 species, u32 otId, u32 personality, bool8 isFront
     sSpritePics[i].spriteId = spriteId;
     sSpritePics[i].active = TRUE;
     return spriteId;
-}
-
-static u16 CreatePicSprite_HandleDeoxys(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 isTrainer)
-{
-    return CreatePicSprite(species, otId, personality, isFrontPic, x, y, paletteSlot, paletteTag, isTrainer, FALSE);
 }
 
 u16 CreateMonPicSprite_Affine(u16 species, u32 otId, u32 personality, u8 flags, s16 x, s16 y, u8 paletteSlot, u16 paletteTag)
@@ -228,7 +212,7 @@ u16 CreateMonPicSprite_Affine(u16 species, u32 otId, u32 personality, u8 flags, 
         Free(framePics);
         return 0xFFFF;
     }
-    if (DecompressPic(species, personality, flags, framePics, FALSE, FALSE))
+    if (DecompressPic(species, personality, flags, framePics, FALSE))
     {
         // debug trap?
         return 0xFFFF;
@@ -296,7 +280,7 @@ static u16 FreeAndDestroyPicSpriteInternal(u16 spriteId)
 
 static u16 LoadPicSpriteInWindow(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u8 paletteSlot, u8 windowId, bool8 isTrainer)
 {
-    if (DecompressPic_HandleDeoxys(species, personality, isFrontPic, (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA), FALSE))
+    if (DecompressPic(species, personality, isFrontPic, (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA), FALSE))
         return 0xFFFF;
 
     LoadPicPaletteBySlot(species, otId, personality, paletteSlot, isTrainer);
@@ -308,7 +292,7 @@ static u16 CreateTrainerCardSprite(u16 species, u32 otId, u32 personality, bool8
     u8 *framePics;
 
     framePics = Alloc(4 * 0x800);
-    if (framePics && !DecompressPic_HandleDeoxys(species, personality, isFrontPic, framePics, isTrainer))
+    if (framePics && !DecompressPic(species, personality, isFrontPic, framePics, isTrainer))
     {
         BlitBitmapRectToWindow(windowId, framePics, 0, 0, 0x40, 0x40, destX, destY, 0x40, 0x40);
         LoadPicPaletteBySlot(species, otId, personality, paletteSlot, isTrainer);
@@ -318,14 +302,9 @@ static u16 CreateTrainerCardSprite(u16 species, u32 otId, u32 personality, bool8
     return 0xFFFF;
 }
 
-static u16 CreateMonPicSprite(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 ignoreDeoxys)
+u16 CreateMonPicSprite(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag)
 {
-    return CreatePicSprite(species, otId, personality, isFrontPic, x, y, paletteSlot, paletteTag, FALSE, ignoreDeoxys);
-}
-
-u16 CreateMonPicSprite_HandleDeoxys(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag)
-{
-    return CreateMonPicSprite(species, otId, personality, isFrontPic, x, y, paletteSlot, paletteTag, FALSE);
+    return CreatePicSprite(species, otId, personality, isFrontPic, x, y, paletteSlot, paletteTag, FALSE);
 }
 
 u16 FreeAndDestroyMonPicSprite(u16 spriteId)
@@ -347,7 +326,7 @@ u16 CreateTrainerCardMonIconSprite(u16 species, u32 otId, u32 personality, bool8
 
 u16 CreateTrainerPicSprite(u16 species, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag)
 {
-    return CreatePicSprite_HandleDeoxys(species, 0, 0, isFrontPic, x, y, paletteSlot, paletteTag, TRUE);
+    return CreatePicSprite(species, 0, 0, isFrontPic, x, y, paletteSlot, paletteTag, TRUE);
 }
 
 u16 FreeAndDestroyTrainerPicSprite(u16 spriteId)
