@@ -24,6 +24,7 @@
 #include "trig.h"
 #include "window.h"
 #include "constants/songs.h"
+#include "constants/battle_move_effects.h"
 #include "gba/io_reg.h"
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
@@ -807,7 +808,11 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     }
     AddTextPrinterParameterized(0, FONT_NORMAL, str, 0x6A, 0x29, TEXT_SKIP_DRAW, NULL);
 
-    str = gMoveDescriptionPointers[chosenMove - 1];
+    if (move->effect != EFFECT_PLACEHOLDER)
+        str = gMoveDescriptionPointers[chosenMove - 1];
+    else
+        str = gNotDoneYetDescription;
+
     AddTextPrinterParameterized(0, FONT_NARROW, str, 0, 0x41, 0, NULL);
 }
 

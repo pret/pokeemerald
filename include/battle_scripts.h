@@ -277,6 +277,8 @@ extern const u8 BattleScript_HarvestActivates[];
 extern const u8 BattleScript_ImposterActivates[];
 extern const u8 BattleScript_SelectingNotAllowedMoveAssaultVest[];
 extern const u8 BattleScript_SelectingNotAllowedMoveAssaultVestInPalace[];
+extern const u8 BattleScript_SelectingNotAllowedPlaceholder[];
+extern const u8 BattleScript_SelectingNotAllowedPlaceholderInPalace[];
 extern const u8 BattleScript_SelectingNotAllowedMoveGravity[];
 extern const u8 BattleScript_MoveUsedGravityPrevents[];
 extern const u8 BattleScript_SelectingNotAllowedMoveGravityInPalace[];

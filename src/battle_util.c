@@ -1930,6 +1930,20 @@ u8 TrySetCantSelectMoveBattleScript(void)
         }
     }
 
+    if (gBattleMoves[move].effect == EFFECT_PLACEHOLDER)
+    {
+        if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+        {
+            gPalaceSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingNotAllowedPlaceholderInPalace;
+            gProtectStructs[gActiveBattler].palaceUnableToUseMove = TRUE;
+        }
+        else
+        {
+            gSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingNotAllowedPlaceholder;
+            limitations++;
+        }
+    }
+
     return limitations;
 }
 
@@ -1948,6 +1962,9 @@ u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u16 check)
             unusableMoves |= gBitTable[i];
         // No PP
         else if (check & MOVE_LIMITATION_PP && gBattleMons[battlerId].pp[i] == 0)
+            unusableMoves |= gBitTable[i];
+        // Placeholder
+        else if (check & MOVE_LIMITATION_PLACEHOLDER && gBattleMoves[gBattleMons[battlerId].moves[i]].effect == EFFECT_PLACEHOLDER)
             unusableMoves |= gBitTable[i];
         // Disable
         else if (check & MOVE_LIMITATION_DISABLED && gBattleMons[battlerId].moves[i] == gDisableStructs[battlerId].disabledMove)
