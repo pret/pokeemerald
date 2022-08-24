@@ -36,4 +36,14 @@
 #endif
 #endif
 
+// Compatibility definition for other projects to detect pokeemerald-expansion
+#define RHH_EXPANSION
+
+// Legacy branch-based defines included for backwards compatibility
+#ifdef RHH_EXPANSION
+    #define BATTLE_ENGINE
+    #define POKEMON_EXPANSION
+    #define ITEM_EXPANSION
+#endif
+
 #endif // GUARD_CONFIG_H
