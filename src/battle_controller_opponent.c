@@ -1618,7 +1618,7 @@ static void OpponentHandleChooseMove(void)
                     target = GetBattlerAtPosition(Random() & 2);
                 } while (!CanTargetBattler(gActiveBattler, target, move));
                 
-                #if B_WILD_NATURAL_ENEMIES == TRUE
+            #if B_WILD_NATURAL_ENEMIES == TRUE
                 // Don't bother to loop through table if the move can't attack ally
                 if (!(gBattleMoves[move].target & MOVE_TARGET_BOTH))
                 {
@@ -1650,7 +1650,7 @@ static void OpponentHandleChooseMove(void)
                         BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (target << 8));
                 }
                 else
-                #endif
+            #endif
                     BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (target << 8));
             }
             else

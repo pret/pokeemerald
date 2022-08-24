@@ -23548,26 +23548,25 @@ Move_SECRET_POWER:
 	jumpargeq 0, BATTLE_TERRAIN_PUDDLE,         Move_MUD_SHOT
 	jumpargeq 0, BATTLE_TERRAIN_MARSH,          Move_MUD_SHOT
 	jumpargeq 0, BATTLE_TERRAIN_SWAMP,          Move_MUD_SHOT
-.if B_SECRET_POWER_ANIMATION >= GEN_7
-	jumpargeq 0, BATTLE_TERRAIN_SNOW,           Move_ICE_SHARD
-.else
-	jumpargeq 0, BATTLE_TERRAIN_SNOW,           Move_AVALANCHE
-.endif
 	jumpargeq 0, BATTLE_TERRAIN_ICE,            Move_ICE_SHARD
 	jumpargeq 0, BATTLE_TERRAIN_VOLCANO,        Move_INCINERATE
 	jumpargeq 0, BATTLE_TERRAIN_DISTORTION_WORLD, Move_POUND
 	jumpargeq 0, BATTLE_TERRAIN_SPACE,          Move_SWIFT
 	jumpargeq 0, BATTLE_TERRAIN_ULTRA_SPACE,    Move_PSYWAVE
 .if B_SECRET_POWER_ANIMATION >= GEN_7
+	jumpargeq 0, BATTLE_TERRAIN_SNOW,           Move_ICE_SHARD
 	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_SPIT_UP
 	goto Move_SPIT_UP
-.elseif B_SECRET_POWER_ANIMATION == GEN_6
+.elseif B_SECRET_POWER_ANIMATION >= GEN_6
+	jumpargeq 0, BATTLE_TERRAIN_SNOW,           Move_AVALANCHE
 	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_BODY_SLAM
 	goto Move_BODY_SLAM
-.elseif B_SECRET_POWER_ANIMATION == GEN_5 || B_SECRET_POWER_ANIMATION == GEN_4
+.elseif B_SECRET_POWER_ANIMATION >= GEN_4
+	jumpargeq 0, BATTLE_TERRAIN_SNOW,           Move_AVALANCHE
 	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_BODY_SLAM
 	goto Move_MUD_SLAP
 .else
+	jumpargeq 0, BATTLE_TERRAIN_SNOW,           Move_AVALANCHE
 	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_STRENGTH
 	goto Move_SLAM
 .endif

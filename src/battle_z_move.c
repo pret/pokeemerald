@@ -58,7 +58,6 @@ static u8 GetZMoveScore(u8 battlerAtk, u8 battlerDef, u16 baseMove, u16 zMove);
 // Const Data
 static const struct SignatureZMove sSignatureZMoves[] =
 {
-//    #ifdef NEW_POKEMON
     {SPECIES_PIKACHU_COSPLAY,       ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
     {SPECIES_PIKACHU_ROCK_STAR,     ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
     {SPECIES_PIKACHU_BELLE,         ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
@@ -95,7 +94,6 @@ static const struct SignatureZMove sSignatureZMoves[] =
     {SPECIES_TAPU_LELE,             ITEM_TAPUNIUM_Z,           MOVE_NATURES_MADNESS,     MOVE_GUARDIAN_OF_ALOLA},
     {SPECIES_TAPU_FINI,             ITEM_TAPUNIUM_Z,           MOVE_NATURES_MADNESS,     MOVE_GUARDIAN_OF_ALOLA},
     {SPECIES_NECROZMA_ULTRA,        ITEM_ULTRANECROZIUM_Z,     MOVE_PHOTON_GEYSER,       MOVE_LIGHT_THAT_BURNS_THE_SKY},
-//    #endif
     {SPECIES_MEW,                   ITEM_MEWNIUM_Z,            MOVE_PSYCHIC,             MOVE_GENESIS_SUPERNOVA},
     {SPECIES_PIKACHU,               ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
     {SPECIES_EEVEE,                 ITEM_EEVIUM_Z,             MOVE_LAST_RESORT,         MOVE_EXTREME_EVOBOOST},
@@ -189,10 +187,13 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
         if (IsPartnerMonFromSameTrainer(battlerId) && (mega->alreadyEvolved[partnerPosition] || (mega->toEvolve & gBitTable[BATTLE_PARTNER(battlerId)])))
             return FALSE;   // Partner has mega evolved or is about to mega evolve
     }
-    
-    if (B_ENABLE_DEBUG && gBattleStruct->debugHoldEffects[battlerId])
+
+#if B_ENABLE_DEBUG == TRUE
+    if (gBattleStruct->debugHoldEffects[battlerId])
         holdEffect = gBattleStruct->debugHoldEffects[battlerId];
-    else if (item == ITEM_ENIGMA_BERRY)
+    else
+#endif
+    if (item == ITEM_ENIGMA_BERRY)
         return FALSE;   // HoldEffect = gEnigmaBerries[battlerId].holdEffect; 
     else
         holdEffect = ItemId_GetHoldEffect(item);
