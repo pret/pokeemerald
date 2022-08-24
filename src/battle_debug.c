@@ -1001,7 +1001,7 @@ static void Task_ShowAiParty(u8 taskId)
         aiMons = AI_PARTY->mons[GET_BATTLER_SIDE(data->aiBattlerId)];
         for (i = 0; i < AI_PARTY->count[GET_BATTLER_SIDE(data->aiBattlerId)]; i++)
         {
-            u16 species = SPECIES_OLD_UNOWN_B; // Question mark
+            u16 species = SPECIES_NONE; // Question mark
             if (aiMons[i].wasSentInBattle && aiMons[i].species)
                 species = aiMons[i].species;
             data->spriteIds.aiPartyIcons[i] = CreateMonIcon(species, SpriteCallbackDummy, (i * 41) + 15, 7, 1, 0, FALSE);
