@@ -4739,7 +4739,7 @@ static void TurnValuesCleanUp(bool8 var0)
             gProtectStructs[gActiveBattler].spikyShielded = FALSE;
             gProtectStructs[gActiveBattler].kingsShielded = FALSE;
             gProtectStructs[gActiveBattler].banefulBunkered = FALSE;
-	        gProtectStructs[gBattlerTarget].quash = FALSE;
+            gProtectStructs[gBattlerTarget].quash = FALSE;
         }
         else
         {
