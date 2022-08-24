@@ -2987,10 +2987,12 @@ static void BattleStartClearSetData(void)
     
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        gBattleStruct->usedHeldItems[i][0] = 0;
-        gBattleStruct->usedHeldItems[i][1] = 0;
+        gBattleStruct->usedHeldItems[i][B_SIDE_PLAYER] = 0;
+        gBattleStruct->usedHeldItems[i][B_SIDE_OPPONENT] = 0;
         gBattleStruct->itemStolen[i].originalItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
         gPartyCriticalHits[i] = 0;
+        gBattleStruct->allowedToChangeFormInWeather[i][B_SIDE_PLAYER] = 0;
+        gBattleStruct->allowedToChangeFormInWeather[i][B_SIDE_OPPONENT] = 0;
     }
 
     gBattleStruct->swapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky

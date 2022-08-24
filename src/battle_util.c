@@ -3999,6 +3999,21 @@ static const u16 sWeatherFlagsInfo[][3] =
     [ENUM_WEATHER_STRONG_WINDS] = {B_WEATHER_STRONG_WINDS, B_WEATHER_STRONG_WINDS, HOLD_EFFECT_NONE},
 };
 
+static void ShouldChangeFormInWeather(u8 battler)
+{
+    int i;
+    int side = GetBattlerSide(battler);
+    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&party[i], MON_DATA_SPECIES) == SPECIES_EISCUE_NOICE_FACE)
+            gBattleStruct->allowedToChangeFormInWeather[i][side] = 1;
+        else
+            gBattleStruct->allowedToChangeFormInWeather[i][side] = 0;
+    }
+}
+
 bool32 TryChangeBattleWeather(u8 battler, u32 weatherEnumId, bool32 viaAbility)
 {
     u16 battlerAbility = GetBattlerAbility(battler);
@@ -4007,6 +4022,7 @@ bool32 TryChangeBattleWeather(u8 battler, u32 weatherEnumId, bool32 viaAbility)
         && !(gBattleWeather & sWeatherFlagsInfo[weatherEnumId][1]))
     {
         gBattleWeather = (sWeatherFlagsInfo[weatherEnumId][0] | sWeatherFlagsInfo[weatherEnumId][1]);
+        ShouldChangeFormInWeather(battler);
         return TRUE;
     }
     else if (gBattleWeather & B_WEATHER_PRIMAL_ANY
@@ -4023,7 +4039,7 @@ bool32 TryChangeBattleWeather(u8 battler, u32 weatherEnumId, bool32 viaAbility)
             gWishFutureKnock.weatherDuration = 8;
         else
             gWishFutureKnock.weatherDuration = 5;
-
+        ShouldChangeFormInWeather(battler);
         return TRUE;
     }
 
@@ -4862,6 +4878,18 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                     effect++;
                 }
                 break;
+            case ABILITY_ICE_FACE:
+                if (IsBattlerWeatherAffected(battler, B_WEATHER_HAIL)
+                 && gBattleMons[battler].species == SPECIES_EISCUE_NOICE_FACE
+                 && !(gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
+                 && gBattleStruct->allowedToChangeFormInWeather[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)])
+                {
+                    gBattleStruct->allowedToChangeFormInWeather[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)] = 0;
+                    gBattleMons[battler].species = SPECIES_EISCUE;
+                    gBattleScripting.battler = battler; // For STRINGID_PKMNTRANSFORMED
+                    BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeWithStringEnd3);
+                    effect++;
+                }
             }
         }
         break;
@@ -4896,6 +4924,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 CancelMultiTurnMoves(gBattlerAttacker); // Don't cancel moves that can hit two targets bc one target might not be protected
             gBattleScripting.battler = gBattlerAbility = gBattlerTarget;
             gBattlescriptCurrInstr = BattleScript_DarkTypePreventsPrankster;
+            effect = 1;
+        }
+        else if (gLastUsedAbility == ABILITY_ICE_FACE && IS_MOVE_PHYSICAL(move) && gBattleMons[gBattlerTarget].species == SPECIES_EISCUE)
+        {
+            gBattleMons[gBattlerTarget].species = SPECIES_EISCUE_NOICE_FACE;
+            if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
+                gHitMarker |= HITMARKER_NO_PPDEDUCT;
+            gBattleScripting.battler = gBattlerTarget; // For STRINGID_PKMNTRANSFORMED
+            gBattlescriptCurrInstr = BattleScript_IceFaceNullsDamage;
             effect = 1;
         }
         break;

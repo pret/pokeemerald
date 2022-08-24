@@ -420,6 +420,11 @@ extern const u8 BattleScript_MagicianActivates[];
 extern const u8 BattleScript_BeakBlastSetUp[];
 extern const u8 BattleScript_BeakBlastBurn[];
 extern const u8 BattleScript_DefDownSpeedUp[];
+extern const u8 BattleScript_IceFaceNullsDamage[];
+extern const u8 BattleScript_TargetFormChangeWithString[];
+extern const u8 BattleScript_TargetFormChangeWithStringEnd3[];
+extern const u8 BattleScript_AttackerFormChangeWithString[];
+extern const u8 BattleScript_AttackerFormChangeWithStringEnd3[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
