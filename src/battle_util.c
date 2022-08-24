@@ -294,7 +294,7 @@ void HandleAction_UseMove(void)
     {
         gCurrentMove = gChosenMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
     }
-    
+
     // check z move used
     if (gBattleStruct->zmove.toBeUsed[gBattlerAttacker] != MOVE_NONE && !IS_MOVE_STATUS(gCurrentMove))
     {
@@ -395,7 +395,7 @@ void HandleAction_UseMove(void)
             u16 battlerAbility;
             gActiveBattler = gBattlerByTurnOrder[var];
             battlerAbility = GetBattlerAbility(gActiveBattler);
-            
+
             RecordAbilityBattle(gActiveBattler, gBattleMons[gActiveBattler].ability);
             if (battlerAbility == ABILITY_LIGHTNING_ROD)
                 gSpecialStatuses[gActiveBattler].lightningRodRedirected = TRUE;
@@ -909,7 +909,7 @@ void HandleAction_ActionFinished(void)
     gBattleCommunication[4] = 0;
     gBattleScripting.multihitMoveEffect = 0;
     gBattleResources->battleScriptsStack->size = 0;
-    
+
     #if B_RECALC_TURN_AFTER_ACTIONS >= GEN_8
     // i starts at `gCurrentTurnActionNumber` because we don't want to recalculate turn order for mon that have already
     // taken action. It's been previously increased, which we want in order to not recalculate the turn of the mon that just finished its action
@@ -930,7 +930,7 @@ void HandleAction_ActionFinished(void)
             {
                 if (GetWhoStrikesFirst(battler1, battler2, TRUE)) // If the actions chosen are switching, we recalc order but ignoring the moves
                     SwapTurnOrder(i, j);
-            }  
+            }
         }
     }
     #endif
@@ -1463,20 +1463,20 @@ void CancelMultiTurnMoves(u8 battler)
     // Clear battler's semi-invulnerable bits if they are not held by Sky Drop.
     if (!(gStatuses3[battler] & STATUS3_SKY_DROPPED))
         gStatuses3[battler] &= ~(STATUS3_SEMI_INVULNERABLE);
-    
+
     // Check to see if this Pokemon was in the middle of using Sky Drop. If so, release the target.
     if (gBattleStruct->skyDropTargets[battler] != 0xFF && !(gStatuses3[battler] & STATUS3_SKY_DROPPED))
     {
         // Get the target's battler id
         u8 otherSkyDropper = gBattleStruct->skyDropTargets[battler];
-        
+
         // Clears sky_dropped and on_air statuses
         gStatuses3[otherSkyDropper] &= ~(STATUS3_SKY_DROPPED | STATUS3_ON_AIR);
-        
+
         // Makes both attacker and target's sprites visible
         gSprites[gBattlerSpriteIds[battler]].invisible = FALSE;
         gSprites[gBattlerSpriteIds[otherSkyDropper]].invisible = FALSE;
-        
+
         // If target was sky dropped in the middle of Outrage/Thrash/Petal Dance,
         // confuse them upon release and display "confused by fatigue" message & animation.
         // Don't do this if this CancelMultiTurnMoves is caused by falling asleep via Yawn.
@@ -2341,6 +2341,7 @@ u8 DoFieldEndTurnEffects(void)
             if (effect == 0)
             {
                 gBattleStruct->turnCountersTracker++;
+                gBattleStruct->turnSideTracker = 0;
             }
             break;
         case ENDTURN_RAIN:
@@ -3729,7 +3730,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gBattleStruct->zmove.used[gBattlerAttacker] = TRUE;
                 if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && IsPartnerMonFromSameTrainer(gBattlerAttacker))
                     gBattleStruct->zmove.used[BATTLE_PARTNER(gBattlerAttacker)] = TRUE; //if 1v1 double, set partner used flag as well
-                
+
                 gBattleScripting.battler = gBattlerAttacker;
                 if (gBattleStruct->zmove.activeSplit == SPLIT_STATUS)
                 {
@@ -4961,7 +4962,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
 
             if (effect == 1) // Drain Hp ability.
             {
-#if B_HEAL_BLOCKING >= GEN_5                
+#if B_HEAL_BLOCKING >= GEN_5
                 if (BATTLER_MAX_HP(battler) || gStatuses3[battler] & STATUS3_HEAL_BLOCK)
 #else
                 if (BATTLER_MAX_HP(battler))
@@ -8048,7 +8049,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
     u32 i;
     u16 basePower = gBattleMoves[move].power;
     u32 weight, hpFraction, speed;
-    
+
     if (gBattleStruct->zmove.active)
         return gBattleMoves[gBattleStruct->zmove.baseMoves[battlerAtk]].zMovePower;
 
@@ -9122,7 +9123,7 @@ static s32 DoMoveDamageCalc(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType,
                             bool32 isCrit, bool32 randomFactor, bool32 updateFlags, u16 typeEffectivenessModifier)
 {
     s32 dmg;
-    
+
     // Don't calculate damage if the move has no effect on target.
     if (typeEffectivenessModifier == UQ_4_12(0))
         return 0;
@@ -9454,7 +9455,7 @@ bool32 CanMegaEvolve(u8 battlerId)
     // Cannot use z move and mega evolve on same turn
     if (gBattleStruct->zmove.toBeUsed[battlerId])
         return FALSE;
-    
+
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
      && IsPartnerMonFromSameTrainer(battlerId)
      && (mega->alreadyEvolved[partnerPosition] || (mega->toEvolve & gBitTable[BATTLE_PARTNER(battlerId)])))
@@ -10115,7 +10116,7 @@ void DoBurmyFormChange(u32 monId)
 
     currSpecies = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);
 
-    if ((GET_BASE_SPECIES_ID(currSpecies) == SPECIES_BURMY) 
+    if ((GET_BASE_SPECIES_ID(currSpecies) == SPECIES_BURMY)
         && (gBattleStruct->appearedInBattle & gBitTable[monId]) // Burmy appeared in battle
         && GetMonData(&party[monId], MON_DATA_HP, NULL) != 0) // Burmy isn't fainted
     {
