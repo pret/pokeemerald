@@ -109,6 +109,9 @@ static bool8 ShouldSwitchIfWonderGuard(void)
             continue;
         if (i == gBattlerPartyIndexes[gActiveBattler])
             continue;
+        if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON 
+            && i == (CalculateEnemyPartyCount()-1))
+            continue;
 
         for (opposingBattler = GetBattlerAtPosition(opposingPosition), j = 0; j < MAX_MON_MOVES; j++)
         {
@@ -260,7 +263,7 @@ static bool8 ShouldSwitchIfGameStatePrompt(void)
             if (IsDoubleBattle())
             {
                 if (IsBattlerAlive(BATTLE_PARTNER(gActiveBattler))
-                    && (GetAIChosenMove(BATTLE_PARTNER(gActiveBattler)) & MOVE_UPROAR)
+                    && (GetAIChosenMove(BATTLE_PARTNER(gActiveBattler)) == MOVE_UPROAR)
                     )
                     switchMon = FALSE;
 
@@ -291,8 +294,8 @@ static bool8 ShouldSwitchIfGameStatePrompt(void)
                                 && i != gBattlerPartyIndexes[gActiveBattler]
                                 && i != gBattlerPartyIndexes[BATTLE_PARTNER(gActiveBattler)]
                                 && IsBattlerGrounded(gActiveBattler)
-                                && (GetMonData(&party[i], MON_DATA_ABILITY_NUM) == 226
-                                    || GetMonData(&party[i], MON_DATA_ABILITY_NUM) == 228)) //Ally has Misty or Electric Surge
+                                && (GetMonAbility(&party[i]) == ABILITY_MISTY_SURGE
+                                    || GetMonAbility(&party[i]) == ABILITY_ELECTRIC_SURGE)) //Ally has Misty or Electric Surge
                                 {
                                     *(gBattleStruct->AI_monToSwitchIntoId + BATTLE_PARTNER(gActiveBattler)) = i;
                                     BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_SWITCH, 0);
@@ -347,7 +350,7 @@ static bool8 ShouldSwitchIfGameStatePrompt(void)
 
             //Nightmare
             moduloChance = 3; //33.3%
-            if (gBattleMons[gActiveBattler].status1 & (STATUS1_SLEEP > 1) && gBattleMons[gActiveBattler].status2 & STATUS2_NIGHTMARE
+            if (gBattleMons[gActiveBattler].status2 & STATUS2_NIGHTMARE
                 && (Random() % (moduloChance*chanceReducer)) == 0)
                 switchMon = TRUE;
 
@@ -374,7 +377,7 @@ static bool8 ShouldSwitchIfGameStatePrompt(void)
                 && AnyStatIsRaised(gActiveBattler))
                 switchMon = FALSE;
             if (AiExpectsToFaintPlayer()
-                && GetAIChosenMove(gActiveBattler) == AI_IS_SLOWER
+                && !WillAIStrikeFirst()
                 && !AI_OpponentCanFaintAiWithMod(0))
                 switchMon = FALSE;
     }
@@ -671,20 +674,33 @@ bool32 ShouldSwitch(void)
 
     if (availableToSwitch == 0)
         return FALSE;
-    if (ShouldSwitchIfAllBadMoves())
+
+    //NOTE: The sequence of the below functions matter! Do not change unless you have carefully considered the outcome.
+    //Since the order is sequencial, and some of these functions prompt switch to specific party members.
+
+    //These Functions can prompt switch to specific party members
+    if (ShouldSwitchIfWonderGuard())
         return TRUE;
     if (ShouldSwitchIfGameStatePrompt())
         return TRUE;
-    if (ShouldSwitchIfWonderGuard())
-        return TRUE;
     if (FindMonThatAbsorbsOpponentsMove())
+        return TRUE;
+
+    //These Functions can prompt switch to generic pary members
+    if (ShouldSwitchIfAllBadMoves())
         return TRUE;
     if (ShouldSwitchIfAbilityBenefit())
         return TRUE;
+    
+    //Removing switch capabilites under specific conditions
+    //These Functions prevent the "FindMonWithFlagsAndSuperEffective" from getting out of hand.
     if (HasSuperEffectiveMoveAgainstOpponents(FALSE))
         return FALSE;
     if (AreStatsRaised())
         return FALSE;
+    
+    //Default Function
+    //Can prompt switch if AI has a pokemon in party that resists current opponent & has super effective move
     if (FindMonWithFlagsAndSuperEffective(MOVE_RESULT_DOESNT_AFFECT_FOE, 2)
         || FindMonWithFlagsAndSuperEffective(MOVE_RESULT_NOT_VERY_EFFECTIVE, 3))
         return TRUE;
