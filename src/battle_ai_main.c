@@ -245,7 +245,7 @@ static void SetBattlerAiData(u8 battlerId)
     AI_DATA->holdEffectParams[battlerId] = GetBattlerHoldEffectParam(battlerId);
     AI_DATA->predictedMoves[battlerId] = gLastMoves[battlerId];
     AI_DATA->hpPercents[battlerId] = GetHealthPercentage(battlerId);
-    AI_DATA->moveLimitations[battlerId] = CheckMoveLimitations(battlerId, 0, 0xFF);
+    AI_DATA->moveLimitations[battlerId] = CheckMoveLimitations(battlerId, 0, MOVE_LIMITATIONS_ALL);
 }
 
 void GetAiLogicData(void)
