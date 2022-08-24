@@ -10748,6 +10748,7 @@ static const u16 sDeoxysTMHMLearnset[] = {
 	MOVE_UNAVAILABLE,
 };
 
+#if P_NEW_POKEMON == TRUE
 static const u16 sTurtwigTMHMLearnset[] = {
 	MOVE_ATTRACT,
 	MOVE_BULLET_SEED,
@@ -23926,6 +23927,7 @@ static const u16 sPichuSpikyEaredTMHMLearnset[] = {
 	MOVE_TOXIC,
 	MOVE_UNAVAILABLE,
 };
+#endif
 
 static const u16 sUnownBTMHMLearnset[] = {
 	MOVE_HIDDEN_POWER,
@@ -24182,6 +24184,7 @@ static const u16 sDeoxysSpeedTMHMLearnset[] = {
 	MOVE_UNAVAILABLE,
 };
 
+#if P_NEW_POKEMON == TRUE
 static const u16 sBurmySandyCloakTMHMLearnset[] = {
 	MOVE_HIDDEN_POWER,
 	MOVE_PROTECT,
@@ -28094,3 +28097,5 @@ static const u16 sCalyrexShadowRiderTMHMLearnset[] = {
 	MOVE_TAUNT,
 	MOVE_UNAVAILABLE,
 };
+
+#endif
