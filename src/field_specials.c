@@ -3130,7 +3130,7 @@ void GetBattleFrontierTutorMoveIndex(void)
         i = 0;
         do
         {
-            if (gTutorMoves[i] == sBattleFrontier_TutorMoves2[moveIndex])
+            if (i == sBattleFrontier_TutorMoves2[moveIndex])
             {
                 gSpecialVar_0x8005 = i;
                 break;
@@ -3143,7 +3143,7 @@ void GetBattleFrontierTutorMoveIndex(void)
         i = 0;
         do
         {
-            if (gTutorMoves[i] == sBattleFrontier_TutorMoves1[moveIndex])
+            if (i == sBattleFrontier_TutorMoves1[moveIndex])
             {
                 gSpecialVar_0x8005 = i;
                 break;
