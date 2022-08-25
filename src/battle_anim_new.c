@@ -7902,22 +7902,6 @@ void AnimTask_AffectionHangedOn(u8 taskId)
     int side = GetBattlerSide(gBattleAnimTarget);
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
 
-    switch (GetMonFriendshipScore(&party[gBattlerPartyIndexes[gBattleAnimTarget]]))
-    {
-    case FRIENDSHIP_MAX:
-        gBattleAnimArgs[0] = FRIENDSHIP_MAX;
-        break;
-    case FRIENDSHIP_200_TO_254:
-        gBattleAnimArgs[0] = FRIENDSHIP_200_TO_254;
-        break;
-    case FRIENDSHIP_150_TO_199:
-        gBattleAnimArgs[0] = FRIENDSHIP_150_TO_199;
-        break;
-    case FRIENDSHIP_100_TO_149:
-        gBattleAnimArgs[0] = FRIENDSHIP_100_TO_149;
-        break;
-    default:
-        break;
-    }
+    gBattleAnimArgs[0] = GetMonFriendshipScore(&party[gBattlerPartyIndexes[gBattleAnimTarget]]);
     DestroyAnimVisualTask(taskId);
 }

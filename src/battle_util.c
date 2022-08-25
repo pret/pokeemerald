@@ -2087,17 +2087,19 @@ void TryToRevertMimicry(void)
 
 u32 GetMonFriendshipScore(struct Pokemon *pokemon)
 {
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) == MAX_FRIENDSHIP)
+    u32 friendshipScore = GetMonData(pokemon, MON_DATA_FRIENDSHIP);
+
+    if (friendshipScore == MAX_FRIENDSHIP)
         return FRIENDSHIP_MAX;
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 200)
+    if (friendshipScore >= 200)
         return FRIENDSHIP_200_TO_254;
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 150)
+    if (friendshipScore >= 150)
         return FRIENDSHIP_150_TO_199;
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 100)
+    if (friendshipScore >= 100)
         return FRIENDSHIP_100_TO_149;
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 50)
+    if (friendshipScore >= 50)
         return FRIENDSHIP_50_TO_99;
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 1)
+    if (friendshipScore >= 1)
         return FRIENDSHIP_1_TO_49;
 
     return FRIENDSHIP_NONE;

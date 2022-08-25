@@ -178,13 +178,13 @@ struct SpecialStatus
     u8 dancerOriginalTarget:3;
     u8 announceNeutralizingGas:1;   // See Cmd_switchineffects
     u8 neutralizingGasRemoved:1;    // See VARIOUS_TRY_END_NEUTRALIZING_GAS
+    u8 affectionEndured:1;
     s32 dmg;
     s32 physicalDmg;
     s32 specialDmg;
     u8 physicalBattlerId;
     u8 specialBattlerId;
     u8 changedStatsBattlerId; // Battler that was responsible for the latest stat change. Can be self.
-    bool8 affectionEndured:1;
 };
 
 struct SideTimer

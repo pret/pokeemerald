@@ -421,8 +421,7 @@ BattleScript_AffectionBasedEndurance::
 	return
 
 BattleScript_AffectionBasedStatusHeal::
-	jumpifstatus BS_ATTACKER, STATUS1_POISON, BattleScript_AffectionBasedStatus_HealPoisonString
-	jumpifstatus BS_ATTACKER, STATUS1_TOXIC_POISON, BattleScript_AffectionBasedStatus_HealPoisonString
+	jumpifstatus BS_ATTACKER, STATUS1_POISON | STATUS1_TOXIC_POISON, BattleScript_AffectionBasedStatus_HealPoisonString
 	jumpifstatus BS_ATTACKER, STATUS1_SLEEP, BattleScript_AffectionBasedStatus_HealSleepString
 	jumpifstatus BS_ATTACKER, STATUS1_PARALYSIS, BattleScript_AffectionBasedStatus_HealParalysisString
 	jumpifstatus BS_ATTACKER, STATUS1_BURN, BattleScript_AffectionBasedStatus_HealBurnString
@@ -442,7 +441,6 @@ BattleScript_AffectionBasedStatus_HealBurnString:
 	goto BattleScript_AffectionBasedStatusHeal_Continue
 BattleScript_AffectionBasedStatus_HealFreezeString:
 	printstring STRINGID_ATTACKERMELTEDTHEICE
-	goto BattleScript_AffectionBasedStatusHeal_Continue
 BattleScript_AffectionBasedStatusHeal_Continue:
 	waitmessage B_WAIT_TIME_LONG
 	clearstatus BS_ATTACKER
