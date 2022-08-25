@@ -72,6 +72,7 @@ enum
     HEALTHBOX_SAFARI_BALLS_TEXT
 };
 
+u32 WhichBattleCoords(u32 battlerId);
 u8 GetMegaIndicatorSpriteId(u32 healthboxSpriteId);
 u8 CreateBattlerHealthboxSprites(u8 battler);
 u8 CreateSafariPlayerHealthboxSprites(void);
