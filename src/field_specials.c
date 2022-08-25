@@ -65,6 +65,7 @@
 #include "constants/weather.h"
 #include "constants/metatile_labels.h"
 #include "palette.h"
+#include "constants/pokemon.h"
 
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
@@ -941,19 +942,19 @@ u8 GetLeadMonFriendshipScore(void)
 {
     struct Pokemon *pokemon = &gPlayerParty[GetLeadMonIndex()];
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) == MAX_FRIENDSHIP)
-        return 6;
+        return FRIENDSHIP_MAX;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 200)
-        return 5;
+        return FRIENDSHIP_GE_200;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 150)
-        return 4;
+        return FRIENDSHIP_GE_150;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 100)
-        return 3;
+        return FRIENDSHIP_GE_100;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 50)
-        return 2;
+        return FRIENDSHIP_GE_50;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 1)
-        return 1;
+        return FRIENDSHIP_GE_1;
 
-    return 0;
+    return FRIENDSHIP_NONE;
 }
 
 static void CB2_FieldShowRegionMap(void)
