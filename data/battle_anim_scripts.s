@@ -24891,35 +24891,14 @@ General_AffectionHangedOn::
 	createvisualtask AnimTask_SwayMon, 5, 0, 12, 4096, 4, ANIM_ATTACKER
 	delay 15
 	launchtask AnimTask_AffectionHangedOn 0x5 0x0
-	jumpargeq 0x0, FRIENDSHIP_MAX, General_AffectionHangedOn_6Hearts
-	jumpargeq 0x0, FRIENDSHIP_200_TO_254, General_AffectionHangedOn_5Hearts
-	jumpargeq 0x0, FRIENDSHIP_150_TO_199, General_AffectionHangedOn_4Hearts
 	jumpargeq 0x0, FRIENDSHIP_100_TO_149, General_AffectionHangedOn_3Hearts
-	end
-General_AffectionHangedOn_6Hearts:
-	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 160, -32
-	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, -256, -40
-	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 128, -16
-	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 416, -38
-	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, -128, -22
+	jumpargeq 0x0, FRIENDSHIP_150_TO_199, General_AffectionHangedOn_4Hearts
+	jumpargeq 0x0, FRIENDSHIP_200_TO_254, General_AffectionHangedOn_5Hearts
 	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, -384, -31
-	waitforvisualfinish
-	end
 General_AffectionHangedOn_5Hearts:
-	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 160, -32
-	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, -256, -40
-	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 128, -16
-	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 416, -38
 	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, -128, -22
-	waitforvisualfinish
-	end
 General_AffectionHangedOn_4Hearts:
-	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 160, -32
-	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, -256, -40
-	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 128, -16
 	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 416, -38
-	waitforvisualfinish
-	end
 General_AffectionHangedOn_3Hearts:
 	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 160, -32
 	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, -256, -40
