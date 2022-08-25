@@ -367,20 +367,18 @@ static void InitContestMonPixels(u16 species, bool8 backPic)
     LZDecompressVram(pal, gContestPaintingMonPalette);
     if (!backPic)
     {
-        HandleLoadSpecialPokePic(
-            &gMonFrontPicTable[species],
-            gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
-            species,
-            gContestPaintingWinner->personality);
+        HandleLoadSpecialPokePic(TRUE,
+                                gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
+                                species,
+                                gContestPaintingWinner->personality);
         _InitContestMonPixels(gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT], gContestPaintingMonPalette, (void *)gContestMonPixels);
     }
     else
     {
-        HandleLoadSpecialPokePic(
-            &gMonBackPicTable[species],
-            gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT],
-            species,
-            gContestPaintingWinner->personality);
+        HandleLoadSpecialPokePic(FALSE,
+                                gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT],
+                                species,
+                                gContestPaintingWinner->personality);
         _InitContestMonPixels(gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT], gContestPaintingMonPalette, (void *)gContestMonPixels);
     }
 }

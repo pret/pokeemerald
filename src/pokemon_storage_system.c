@@ -3991,7 +3991,7 @@ static void LoadDisplayMonGfx(u16 species, u32 pid)
 
     if (species != SPECIES_NONE)
     {
-        LoadSpecialPokePic(&gMonFrontPicTable[species], sStorage->tileBuffer, species, pid, TRUE);
+        LoadSpecialPokePic(sStorage->tileBuffer, species, pid, TRUE);
         LZ77UnCompWram(sStorage->displayMonPalette, sStorage->displayMonPalBuffer);
         CpuCopy32(sStorage->tileBuffer, sStorage->displayMonTilePtr, MON_PIC_SIZE);
         LoadPalette(sStorage->displayMonPalBuffer, sStorage->displayMonPalOffset, 0x20);
@@ -5109,7 +5109,7 @@ static u16 TryLoadMonIconTiles(u16 species, u32 personality)
     u16 i, offset;
 
     // Treat female mons as a seperate species as they may have a different icon than males
-    if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+    if (ShouldShowFemaleDifferences(species, personality))
         species |= 0x8000; // 1 << 15
 
     // Search icon list for this species
@@ -5176,7 +5176,7 @@ static struct Sprite *CreateMonIconSprite(u16 species, u32 personality, s16 x, s
     struct SpriteTemplate template = sSpriteTemplate_MonIcon;
 
     species = GetIconSpecies(species, personality);
-    if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+    if (ShouldShowFemaleDifferences(species, personality))
     {
         template.paletteTag = PALTAG_MON_ICON_0 + gMonIconPaletteIndicesFemale[species];
     }
