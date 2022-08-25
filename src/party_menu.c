@@ -5012,7 +5012,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
         if (sFinalLevel > sInitialLevel)
         {
             PlayFanfareByFanfareNum(FANFARE_LEVEL_UP);
-            ConvertIntToDecimalStringN(gStringVar2, GetMonData(mon, MON_DATA_LEVEL), STR_CONV_MODE_LEFT_ALIGN, 3);
+            ConvertIntToDecimalStringN(gStringVar2, sFinalLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
             StringExpandPlaceholders(gStringVar4, gText_PkmnElevatedToLvVar2);
             DisplayPartyMenuMessage(gStringVar4, TRUE);
             ScheduleBgCopyTilemapToVram(2);

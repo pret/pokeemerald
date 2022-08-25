@@ -4709,7 +4709,13 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
 }
 
 // EXP candies store an index for this table in their holdEffectParam.
-static const u32 sExpCandyExperienceTable[] = {100, 800, 3000, 10000, 30000};
+static const u32 sExpCandyExperienceTable[] = {
+    [EXP_100 - 1] = 100,
+    [EXP_800 - 1] = 800,
+    [EXP_3000 - 1] = 3000,
+    [EXP_10000 - 1] = 10000,
+    [EXP_30000 - 1] = 30000,
+};
 
 // Returns TRUE if the item has no effect on the Pokémon, FALSE otherwise
 bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex, bool8 usedByAI)
@@ -4881,15 +4887,16 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
              && GetMonData(mon, MON_DATA_LEVEL, NULL) != MAX_LEVEL)
             {
                 u8 param = ItemId_GetHoldEffectParam(item);
-                if (param == 0xFF) // Rare Candy
+                if (param == 0) // Rare Candy
                 {
                     dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL) + 1];
                 }
                 else if (param < ARRAY_COUNT(sExpCandyExperienceTable)) // EXP Candies
                 {
+                    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
                     dataUnsigned = sExpCandyExperienceTable[param] + GetMonData(mon, MON_DATA_EXP, NULL);
-                    if (dataUnsigned > gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][MAX_LEVEL])
-                        dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][MAX_LEVEL];
+                    if (dataUnsigned > gExperienceTables[gBaseStats[species].growthRate][MAX_LEVEL])
+                        dataUnsigned = gExperienceTables[gBaseStats[species].growthRate][MAX_LEVEL];
                 }
                 SetMonData(mon, MON_DATA_EXP, &dataUnsigned);
                 CalculateMonStats(mon);
