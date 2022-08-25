@@ -245,7 +245,7 @@ static void SetBattlerAiData(u8 battlerId)
     AI_DATA->holdEffectParams[battlerId] = GetBattlerHoldEffectParam(battlerId);
     AI_DATA->predictedMoves[battlerId] = gLastMoves[battlerId];
     AI_DATA->hpPercents[battlerId] = GetHealthPercentage(battlerId);
-    AI_DATA->moveLimitations[battlerId] = CheckMoveLimitations(battlerId, 0, 0xFF);
+    AI_DATA->moveLimitations[battlerId] = CheckMoveLimitations(battlerId, 0, MOVE_LIMITATIONS_ALL);
 }
 
 void GetAiLogicData(void)
@@ -2512,6 +2512,8 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             if (gBattleMons[battlerAtk].hp <= gBattleMons[battlerAtk].maxHP / 3)
                 score -= 10;
             break;*/
+        case EFFECT_PLACEHOLDER:
+            return 0;   // cannot even select
     } // move effect checks
 
     if (score < 0)
