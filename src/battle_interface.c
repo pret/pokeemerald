@@ -2928,8 +2928,8 @@ static void PrintOnAbilityPopUp(const u8 *str, u8 *spriteTileData1, u8 *spriteTi
     if (alignAbilityChars && i == MAX_CHARS_PRINTED)
     {
         u32 width = GetStringWidth(FONT_SMALL, text1, 0);
-        while (x1 + width < 64)
-            x1++;
+        if (x1 + width < 64)
+            x1 += 64 - (x1 + width);
     }
 
     windowTileData = AddTextPrinterAndCreateWindowOnAbilityPopUp(text1, x1, y, color1, color2, color3, &windowId);
