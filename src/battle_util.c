@@ -2581,10 +2581,10 @@ u8 DoFieldEndTurnEffects(void)
                 gSideTimers[B_SIDE_OPPONENT].retaliateTimer--;
             gBattleStruct->turnCountersTracker++;
             break;
-    #if B_AFFECTION_MECHANICS == TRUE
         case ENDTURN_STATUS_HEAL:
             for (gBattlerAttacker = 0; gBattlerAttacker < gBattlersCount; gBattlerAttacker++)
             {
+            #if B_AFFECTION_MECHANICS == TRUE
                 if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER
                  && GetMonFriendshipScore(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]) >= FRIENDSHIP_GE_150
                  && (Random() % 100 < 20))
@@ -2593,10 +2593,10 @@ u8 DoFieldEndTurnEffects(void)
                     BattleScriptExecute(BattleScript_AffectionBasedStatusHeal);
                     break;
                 }
+            #endif
             }
             gBattleStruct->turnCountersTracker++;
             break;
-    #endif
         case ENDTURN_FIELD_COUNT:
             effect++;
             break;

@@ -536,7 +536,7 @@
 #define B_ANIM_BEAK_BLAST_SETUP         33
 #define B_ANIM_SHELL_TRAP_SETUP         34
 #define B_ANIM_ZMOVE_ACTIVATE           35 // Using Z Moves
-#define B_ANIM_AFFECTION_HANGED_ON      36
+#define B_ANIM_AFFECTION_HANGED_ON      36 // TODO: Make new animation, currently a copy of B_ANIM_HANGED_ON.
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
