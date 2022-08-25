@@ -274,13 +274,13 @@
 #define FRIENDSHIP_EVENT_FAINT_LARGE      8 // If opponent was >= 30 levels higher. See AdjustFriendshipOnBattleFaint
 
 // Constants for GetLeadMonFriendshipScore
-#define FRIENDSHIP_NONE   0
-#define FRIENDSHIP_GE_1   1
-#define FRIENDSHIP_GE_50  2
-#define FRIENDSHIP_GE_100 3
-#define FRIENDSHIP_GE_150 4
-#define FRIENDSHIP_GE_200 5
-#define FRIENDSHIP_MAX    6
+#define FRIENDSHIP_NONE        0
+#define FRIENDSHIP_1_TO_49     1
+#define FRIENDSHIP_50_TO_99    2
+#define FRIENDSHIP_100_TO_149  3
+#define FRIENDSHIP_150_TO_199  4
+#define FRIENDSHIP_200_TO_254  5
+#define FRIENDSHIP_MAX         6
 
 #define MAX_FRIENDSHIP  255
 #define MAX_SHEEN       255

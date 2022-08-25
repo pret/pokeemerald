@@ -2090,15 +2090,15 @@ u32 GetMonFriendshipScore(struct Pokemon *pokemon)
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) == MAX_FRIENDSHIP)
         return FRIENDSHIP_MAX;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 200)
-        return FRIENDSHIP_GE_200;
+        return FRIENDSHIP_200_TO_254;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 150)
-        return FRIENDSHIP_GE_150;
+        return FRIENDSHIP_150_TO_199;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 100)
-        return FRIENDSHIP_GE_100;
+        return FRIENDSHIP_100_TO_149;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 50)
-        return FRIENDSHIP_GE_50;
+        return FRIENDSHIP_50_TO_99;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 1)
-        return FRIENDSHIP_GE_1;
+        return FRIENDSHIP_1_TO_49;
 
     return FRIENDSHIP_NONE;
 }
@@ -2584,7 +2584,7 @@ u8 DoFieldEndTurnEffects(void)
             {
             #if B_AFFECTION_MECHANICS == TRUE
                 if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER
-                 && GetMonFriendshipScore(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]) >= FRIENDSHIP_GE_150
+                 && GetMonFriendshipScore(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]) >= FRIENDSHIP_150_TO_199
                  && (Random() % 100 < 20))
                 {
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;

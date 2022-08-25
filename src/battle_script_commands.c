@@ -1733,7 +1733,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
 #if B_AFFECTION_MECHANICS == TRUE
     // With high affection/friendship there's a chance to evade a move by substracting 10% of its accuracy.
     // I can't find exact information about that chance, so I'm just gonna write it as a 20% chance for now.
-    if (GetMonFriendshipScore(&gPlayerParty[gBattlerPartyIndexes[battlerDef]]) >= FRIENDSHIP_GE_150 && (Random() % 100) <= 20)
+    if (GetMonFriendshipScore(&gPlayerParty[gBattlerPartyIndexes[battlerDef]]) >= FRIENDSHIP_150_TO_199 && (Random() % 100) <= 20)
         calc = (calc * 90) / 100;
 #endif
 
@@ -1905,7 +1905,7 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
                     + 2 * (holdEffectAtk == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBattlerAttacker].species == SPECIES_CHANSEY)
                     + 2 * BENEFITS_FROM_LEEK(battlerAtk, holdEffectAtk)
                 #if B_AFFECTION_MECHANICS == TRUE
-                    + 2 * (GetMonFriendshipScore(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]) >= FRIENDSHIP_GE_200)
+                    + 2 * (GetMonFriendshipScore(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]) >= FRIENDSHIP_200_TO_254)
                 #endif
                     + (abilityAtk == ABILITY_SUPER_LUCK);
 
@@ -2010,12 +2010,12 @@ static void Cmd_adjustdamage(void)
         gSpecialStatuses[gBattlerTarget].focusSashed = TRUE;
     }
 #if B_AFFECTION_MECHANICS == TRUE
-    else if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER && friendshipScore >= FRIENDSHIP_GE_100)
+    else if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER && friendshipScore >= FRIENDSHIP_100_TO_149)
     {
         if ((friendshipScore == FRIENDSHIP_MAX && rand < 25)
-         || (friendshipScore == FRIENDSHIP_GE_200 && rand < 20)
-         || (friendshipScore == FRIENDSHIP_GE_150 && rand < 15)
-         || (friendshipScore == FRIENDSHIP_GE_100 && rand < 10))
+         || (friendshipScore == FRIENDSHIP_200_TO_254 && rand < 20)
+         || (friendshipScore == FRIENDSHIP_150_TO_199 && rand < 15)
+         || (friendshipScore == FRIENDSHIP_100_TO_149 && rand < 10))
             gSpecialStatuses[gBattlerTarget].affectionEndured = TRUE;
     }
 #endif
@@ -4062,7 +4062,7 @@ static void Cmd_getexp(void)
                     }
                     #endif
                 #if B_AFFECTION_MECHANICS == TRUE
-                    if (GetMonFriendshipScore(&gPlayerParty[gBattleStruct->expGetterMonId]) >= FRIENDSHIP_GE_50)
+                    if (GetMonFriendshipScore(&gPlayerParty[gBattleStruct->expGetterMonId]) >= FRIENDSHIP_50_TO_99)
                         gBattleMoveDamage = (gBattleMoveDamage * 120) / 100;
                 #endif
 

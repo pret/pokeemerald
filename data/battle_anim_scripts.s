@@ -24892,9 +24892,9 @@ General_AffectionHangedOn::
 	delay 15
 	launchtask AnimTask_AffectionHangedOn 0x5 0x0
 	jumpargeq 0x0, FRIENDSHIP_MAX, General_AffectionHangedOn_6Hearts
-	jumpargeq 0x0, FRIENDSHIP_GE_200, General_AffectionHangedOn_5Hearts
-	jumpargeq 0x0, FRIENDSHIP_GE_150, General_AffectionHangedOn_4Hearts
-	jumpargeq 0x0, FRIENDSHIP_GE_100, General_AffectionHangedOn_3Hearts
+	jumpargeq 0x0, FRIENDSHIP_200_TO_254, General_AffectionHangedOn_5Hearts
+	jumpargeq 0x0, FRIENDSHIP_150_TO_199, General_AffectionHangedOn_4Hearts
+	jumpargeq 0x0, FRIENDSHIP_100_TO_149, General_AffectionHangedOn_3Hearts
 	end
 General_AffectionHangedOn_6Hearts:
 	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 160, -32

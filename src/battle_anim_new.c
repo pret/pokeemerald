@@ -7907,14 +7907,14 @@ void AnimTask_AffectionHangedOn(u8 taskId)
     case FRIENDSHIP_MAX:
         gBattleAnimArgs[0] = FRIENDSHIP_MAX;
         break;
-    case FRIENDSHIP_GE_200:
-        gBattleAnimArgs[0] = FRIENDSHIP_GE_200;
+    case FRIENDSHIP_200_TO_254:
+        gBattleAnimArgs[0] = FRIENDSHIP_200_TO_254;
         break;
-    case FRIENDSHIP_GE_150:
-        gBattleAnimArgs[0] = FRIENDSHIP_GE_150;
+    case FRIENDSHIP_150_TO_199:
+        gBattleAnimArgs[0] = FRIENDSHIP_150_TO_199;
         break;
-    case FRIENDSHIP_GE_100:
-        gBattleAnimArgs[0] = FRIENDSHIP_GE_100;
+    case FRIENDSHIP_100_TO_149:
+        gBattleAnimArgs[0] = FRIENDSHIP_100_TO_149;
         break;
     default:
         break;
