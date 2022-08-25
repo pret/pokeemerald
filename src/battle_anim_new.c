@@ -18,6 +18,7 @@
 #include "constants/moves.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
+#include "constants/pokemon.h"
 
 // function declarations
 static void SpriteCB_SpriteToCentreOfSide(struct Sprite* sprite);
@@ -7892,6 +7893,31 @@ void AnimTask_TerrainPulse(u8 taskId)
     else
     {
         gBattleAnimArgs[0] = 0;
+    }
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_AffectionHangedOn(u8 taskId)
+{
+    int side = GetBattlerSide(gBattleAnimTarget);
+    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+
+    switch (GetMonFriendshipScore(&party[gBattlerPartyIndexes[gBattleAnimTarget]]))
+    {
+    case FRIENDSHIP_MAX:
+        gBattleAnimArgs[0] = FRIENDSHIP_MAX;
+        break;
+    case FRIENDSHIP_GE_200:
+        gBattleAnimArgs[0] = FRIENDSHIP_GE_200;
+        break;
+    case FRIENDSHIP_GE_150:
+        gBattleAnimArgs[0] = FRIENDSHIP_GE_150;
+        break;
+    case FRIENDSHIP_GE_100:
+        gBattleAnimArgs[0] = FRIENDSHIP_GE_100;
+        break;
+    default:
+        break;
     }
     DestroyAnimVisualTask(taskId);
 }
