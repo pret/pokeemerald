@@ -421,47 +421,29 @@ BattleScript_AffectionBasedEndurance::
 	return
 
 BattleScript_AffectionBasedStatusHeal::
-	jumpifstatus BS_ATTACKER, STATUS1_POISON, BattleScript_AffectionBasedStatusHeal_Poison
-	jumpifstatus BS_ATTACKER, STATUS1_TOXIC_POISON, BattleScript_AffectionBasedStatusHeal_Poison
-	jumpifstatus BS_ATTACKER, STATUS1_SLEEP, BattleScript_AffectionBasedStatusHeal_Sleep
-	jumpifstatus BS_ATTACKER, STATUS1_PARALYSIS, BattleScript_AffectionBasedStatusHeal_Paralysis
-	jumpifstatus BS_ATTACKER, STATUS1_BURN, BattleScript_AffectionBasedStatusHeal_Burn
-	jumpifstatus BS_ATTACKER, STATUS1_FREEZE, BattleScript_AffectionBasedStatusHeal_Freeze
+	jumpifstatus BS_ATTACKER, STATUS1_POISON, BattleScript_AffectionBasedStatus_HealPoisonString
+	jumpifstatus BS_ATTACKER, STATUS1_TOXIC_POISON, BattleScript_AffectionBasedStatus_HealPoisonString
+	jumpifstatus BS_ATTACKER, STATUS1_SLEEP, BattleScript_AffectionBasedStatus_HealSleepString
+	jumpifstatus BS_ATTACKER, STATUS1_PARALYSIS, BattleScript_AffectionBasedStatus_HealParalysisString
+	jumpifstatus BS_ATTACKER, STATUS1_BURN, BattleScript_AffectionBasedStatus_HealBurnString
+	jumpifstatus BS_ATTACKER, STATUS1_FREEZE, BattleScript_AffectionBasedStatus_HealFreezeString
 	end2
-BattleScript_AffectionBasedStatusHeal_Poison:
+BattleScript_AffectionBasedStatus_HealPoisonString:
 	printstring STRINGID_ATTACKEREXPELLEDTHEPOISON
-	waitmessage B_WAIT_TIME_LONG
-	clearstatus BS_ATTACKER
-	waitstate
-	updatestatusicon BS_ATTACKER
-	waitstate
-	end2
-BattleScript_AffectionBasedStatusHeal_Sleep:
+	goto BattleScript_AffectionBasedStatusHeal_Continue
+BattleScript_AffectionBasedStatus_HealSleepString:
 	printstring STRINGID_ATTACKERSHOOKITSELFAWAKE
-	waitmessage B_WAIT_TIME_LONG
-	clearstatus BS_ATTACKER
-	waitstate
-	updatestatusicon BS_ATTACKER
-	waitstate
-	end2
-BattleScript_AffectionBasedStatusHeal_Paralysis:
+	goto BattleScript_AffectionBasedStatusHeal_Continue
+BattleScript_AffectionBasedStatus_HealParalysisString:
 	printstring STRINGID_ATTACKERBROKETHROUGHPARALYSIS
-	waitmessage B_WAIT_TIME_LONG
-	clearstatus BS_ATTACKER
-	waitstate
-	updatestatusicon BS_ATTACKER
-	waitstate
-	end2
-BattleScript_AffectionBasedStatusHeal_Burn:
+	goto BattleScript_AffectionBasedStatusHeal_Continue
+BattleScript_AffectionBasedStatus_HealBurnString:
 	printstring STRINGID_ATTACKERHEALEDITSBURN
-	waitmessage B_WAIT_TIME_LONG
-	clearstatus BS_ATTACKER
-	waitstate
-	updatestatusicon BS_ATTACKER
-	waitstate
-	end2
-BattleScript_AffectionBasedStatusHeal_Freeze:
+	goto BattleScript_AffectionBasedStatusHeal_Continue
+BattleScript_AffectionBasedStatus_HealFreezeString:
 	printstring STRINGID_ATTACKERMELTEDTHEICE
+	goto BattleScript_AffectionBasedStatusHeal_Continue
+BattleScript_AffectionBasedStatusHeal_Continue:
 	waitmessage B_WAIT_TIME_LONG
 	clearstatus BS_ATTACKER
 	waitstate

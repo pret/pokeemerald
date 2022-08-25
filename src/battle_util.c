@@ -45,6 +45,7 @@
 #include "constants/species.h"
 #include "constants/trainers.h"
 #include "constants/weather.h"
+#include "constants/pokemon.h"
 
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
@@ -2084,22 +2085,22 @@ void TryToRevertMimicry(void)
     }
 }
 
-u32 GetMonFriendshipScore(struct Pokemon *pokemon) // Based on GetLeadMonFriendshipScore
+u32 GetMonFriendshipScore(struct Pokemon *pokemon)
 {
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) == 255)
-        return 6;
+    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) == MAX_FRIENDSHIP)
+        return FRIENDSHIP_MAX;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 200)
-        return 5;
+        return FRIENDSHIP_GE_200;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 150)
-        return 4;
+        return FRIENDSHIP_GE_150;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 100)
-        return 3;
+        return FRIENDSHIP_GE_100;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 50)
-        return 2;
+        return FRIENDSHIP_GE_50;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 1)
-        return 1;
+        return FRIENDSHIP_GE_1;
 
-    return 0;
+    return FRIENDSHIP_NONE;
 }
 
 enum
@@ -2585,7 +2586,7 @@ u8 DoFieldEndTurnEffects(void)
             for (gBattlerAttacker = 0; gBattlerAttacker < gBattlersCount; gBattlerAttacker++)
             {
                 if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER
-                 && GetMonFriendshipScore(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]) >= 4
+                 && GetMonFriendshipScore(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]) >= FRIENDSHIP_GE_150
                  && (Random() % 100 < 20))
                 {
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;
