@@ -4008,9 +4008,9 @@ static void ShouldChangeFormInWeather(u8 battler)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&party[i], MON_DATA_SPECIES) == SPECIES_EISCUE_NOICE_FACE)
-            gBattleStruct->allowedToChangeFormInWeather[i][side] = 1;
+            gBattleStruct->allowedToChangeFormInWeather[i][side] = TRUE;
         else
-            gBattleStruct->allowedToChangeFormInWeather[i][side] = 0;
+            gBattleStruct->allowedToChangeFormInWeather[i][side] = FALSE;
     }
 }
 
@@ -4884,7 +4884,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                  && !(gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
                  && gBattleStruct->allowedToChangeFormInWeather[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)])
                 {
-                    gBattleStruct->allowedToChangeFormInWeather[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)] = 0;
+                    gBattleStruct->allowedToChangeFormInWeather[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)] = FALSE;
                     gBattleMons[battler].species = SPECIES_EISCUE;
                     gBattleScripting.battler = battler; // For STRINGID_PKMNTRANSFORMED
                     BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeWithStringEnd3);
