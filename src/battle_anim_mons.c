@@ -2149,8 +2149,7 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16
     if (!isBackpic)
     {
         LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), (palette * 0x10) + 0x100, 0x20);
-        LoadSpecialPokePic(&gMonFrontPicTable[species],
-                           gMonSpritesGfxPtr->buffer,
+        LoadSpecialPokePic(gMonSpritesGfxPtr->buffer,
                            species,
                            personality,
                            TRUE);
@@ -2158,8 +2157,7 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16
     else
     {
         LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), (palette * 0x10) + 0x100, 0x20);
-        LoadSpecialPokePic(&gMonBackPicTable[species],
-                           gMonSpritesGfxPtr->buffer,
+        LoadSpecialPokePic(gMonSpritesGfxPtr->buffer,
                            species,
                            personality,
                            FALSE);
