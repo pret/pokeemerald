@@ -2986,40 +2986,12 @@ static void HideFrontierExchangeCornerItemIcon(u16 menu, u16 unused)
     }
 }
 
-static const u16 sBattleFrontier_TutorMoves1[] =
-{
-    MOVE_SOFT_BOILED,
-    MOVE_SEISMIC_TOSS,
-    MOVE_DREAM_EATER,
-    MOVE_MEGA_PUNCH,
-    MOVE_MEGA_KICK,
-    MOVE_BODY_SLAM,
-    MOVE_ROCK_SLIDE,
-    MOVE_COUNTER,
-    MOVE_THUNDER_WAVE,
-    MOVE_SWORDS_DANCE
-};
-
-static const u16 sBattleFrontier_TutorMoves2[] =
-{
-    MOVE_DEFENSE_CURL,
-    MOVE_SNORE,
-    MOVE_MUD_SLAP,
-    MOVE_SWIFT,
-    MOVE_ICY_WIND,
-    MOVE_ENDURE,
-    MOVE_PSYCH_UP,
-    MOVE_ICE_PUNCH,
-    MOVE_THUNDER_PUNCH,
-    MOVE_FIRE_PUNCH
-};
-
 void BufferBattleFrontierTutorMoveName(void)
 {
     if (gSpecialVar_0x8005 != 0)
-        StringCopy(gStringVar1, gMoveNames[sBattleFrontier_TutorMoves2[gSpecialVar_0x8004]]);
+        StringCopy(gStringVar1, gMoveNames[gSpecialVar_0x8004]);
     else
-        StringCopy(gStringVar1, gMoveNames[sBattleFrontier_TutorMoves1[gSpecialVar_0x8004]]);
+        StringCopy(gStringVar1, gMoveNames[gSpecialVar_0x8004]);
 }
 
 static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
@@ -3130,26 +3102,26 @@ void GetBattleFrontierTutorMoveIndex(void)
         i = 0;
         do
         {
-            if (i == sBattleFrontier_TutorMoves2[moveIndex])
+            if (i == moveIndex)
             {
                 gSpecialVar_0x8005 = i;
                 break;
             }
             i++;
-        } while (i < TUTOR_MOVE_COUNT);
+        } while (i < MOVES_COUNT);
     }
     else
     {
         i = 0;
         do
         {
-            if (i == sBattleFrontier_TutorMoves1[moveIndex])
+            if (i == moveIndex)
             {
                 gSpecialVar_0x8005 = i;
                 break;
             }
             i++;
-        } while (i < TUTOR_MOVE_COUNT);
+        } while (i < MOVES_COUNT);
     }
 }
 

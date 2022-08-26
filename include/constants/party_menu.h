@@ -12,8 +12,6 @@
 #define AILMENT_PKRS  6
 #define AILMENT_FNT   7
 
-#define TUTOR_MOVE_COUNT 30
-
 #define PARTY_LAYOUT_SINGLE          0
 #define PARTY_LAYOUT_DOUBLE          1
 #define PARTY_LAYOUT_MULTI           2
