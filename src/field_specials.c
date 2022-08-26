@@ -941,19 +941,19 @@ u8 GetLeadMonFriendshipScore(void)
 {
     struct Pokemon *pokemon = &gPlayerParty[GetLeadMonIndex()];
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) == MAX_FRIENDSHIP)
-        return 6;
+        return FRIENDSHIP_MAX;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 200)
-        return 5;
+        return FRIENDSHIP_200_TO_254;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 150)
-        return 4;
+        return FRIENDSHIP_150_TO_199;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 100)
-        return 3;
+        return FRIENDSHIP_100_TO_149;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 50)
-        return 2;
+        return FRIENDSHIP_50_TO_99;
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 1)
-        return 1;
+        return FRIENDSHIP_1_TO_49;
 
-    return 0;
+    return FRIENDSHIP_NONE;
 }
 
 static void CB2_FieldShowRegionMap(void)
