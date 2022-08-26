@@ -2030,7 +2030,7 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
 {
     if (GetMonData(mon, MON_DATA_IS_EGG))
         return CANNOT_LEARN_MOVE_IS_EGG;
-    else if (!CanLearnTaughtMove(GetMonData(mon, MON_DATA_SPECIES2), move))
+    else if (!CanLearnTeachableMove(GetMonData(mon, MON_DATA_SPECIES2), move))
         return CANNOT_LEARN_MOVE;
     else if (MonKnowsMove(mon, move) == TRUE)
         return ALREADY_KNOWS_MOVE;

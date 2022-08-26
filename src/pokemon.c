@@ -1894,14 +1894,14 @@ const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 #include "data/pokemon/experience_tables.h"
 #include "data/pokemon/base_stats.h"
 #include "data/pokemon/level_up_learnsets.h"
-#include "data/pokemon/teach_learnsets.h"
+#include "data/pokemon/teachable_learnsets.h"
 #if P_NEW_POKEMON == TRUE
 #include "data/pokemon/evolution.h"
 #else
 #include "data/pokemon/evolution_old.h"
 #endif
 #include "data/pokemon/level_up_learnset_pointers.h"
-#include "data/pokemon/teach_learnset_pointers.h"
+#include "data/pokemon/teachable_learnset_pointers.h"
 #include "data/pokemon/form_species_tables.h"
 #include "data/pokemon/form_species_table_pointers.h"
 #include "data/pokemon/form_change_tables.h"
@@ -7244,7 +7244,7 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
     }
 }
 
-u8 CanLearnTaughtMove(u16 species, u16 move)
+u8 CanLearnTeachableMove(u16 species, u16 move)
 {
     if (species == SPECIES_EGG)
     {
@@ -7253,9 +7253,9 @@ u8 CanLearnTaughtMove(u16 species, u16 move)
     else
     {
         u8 i;
-        for (i = 0; gTeachLearnsets[species][i] != MOVE_UNAVAILABLE; i++)
+        for (i = 0; gTeachableLearnsets[species][i] != MOVE_UNAVAILABLE; i++)
         {
-            if (gTeachLearnsets[species][i] == move) {
+            if (gTeachableLearnsets[species][i] == move) {
                 return TRUE;
             }
         }
