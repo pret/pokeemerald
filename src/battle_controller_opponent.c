@@ -410,7 +410,7 @@ static void CompleteOnHealthbarDone(void)
     SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
     if (hpValue != -1)
     {
-        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], hpValue, HP_CURRENT);
+        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], HP_CURRENT, hpValue, gBattleMons[gActiveBattler].maxHP);
     }
     else
         OpponentBufferExecCompleted();
@@ -1588,9 +1588,9 @@ static void OpponentHandleChooseMove(void)
                         gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
                         if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
                             gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-                    }                    
+                    }
                     if (ShouldUseZMove(gActiveBattler, gBattlerTarget, chosenMove))
-                        QueueZMove(gActiveBattler, chosenMove);                    
+                        QueueZMove(gActiveBattler, chosenMove);
                     if (CanMegaEvolve(gActiveBattler)) // If opponent can mega evolve, do it.
                         BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
                     else
@@ -1617,7 +1617,7 @@ static void OpponentHandleChooseMove(void)
                 do {
                     target = GetBattlerAtPosition(Random() & 2);
                 } while (!CanTargetBattler(gActiveBattler, target, move));
-                
+
                 #if B_WILD_NATURAL_ENEMIES == TRUE
                 // Don't bother to loop through table if the move can't attack ally
                 if (!(gBattleMoves[move].target & MOVE_TARGET_BOTH))
