@@ -13675,7 +13675,7 @@ static void Cmd_handleballthrow(void)
             case ITEM_NET_BALL:
                 if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_WATER) || IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_BUG))
                     #if B_NET_BALL_MODIFIER >= GEN_7
-                        ballMultiplier = 50;
+                        ballMultiplier = 35;
                     #else
                         ballMultiplier = 30;
                     #endif
