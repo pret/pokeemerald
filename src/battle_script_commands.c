@@ -59,6 +59,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "battle_util.h"
+#include "constants/pokemon.h"
 
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
@@ -1730,6 +1731,13 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
     if (gFieldStatuses & STATUS_FIELD_GRAVITY)
         calc = (calc * 5) / 3; // 1.66 Gravity acc boost
 
+#if B_AFFECTION_MECHANICS == TRUE
+    // With high affection/friendship there's a chance to evade a move by substracting 10% of its accuracy.
+    // I can't find exact information about that chance, so I'm just gonna write it as a 20% chance for now.
+    if (GetMonFriendshipScore(&gPlayerParty[gBattlerPartyIndexes[battlerDef]]) >= FRIENDSHIP_150_TO_199 && (Random() % 100) <= 20)
+        calc = (calc * 90) / 100;
+#endif
+
     return calc;
 }
 
@@ -1898,6 +1906,9 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
                     + (holdEffectAtk == HOLD_EFFECT_SCOPE_LENS)
                     + 2 * (holdEffectAtk == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBattlerAttacker].species == SPECIES_CHANSEY)
                     + 2 * BENEFITS_FROM_LEEK(battlerAtk, holdEffectAtk)
+                #if B_AFFECTION_MECHANICS == TRUE
+                    + 2 * (GetMonFriendshipScore(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]) >= FRIENDSHIP_200_TO_254)
+                #endif
                     + (abilityAtk == ABILITY_SUPER_LUCK);
 
         if (critChance >= ARRAY_COUNT(sCriticalHitChance))
@@ -1966,6 +1977,8 @@ static void Cmd_adjustdamage(void)
 {
     u8 holdEffect, param;
     u32 moveType;
+    u32 friendshipScore = GetMonFriendshipScore(&gPlayerParty[gBattlerPartyIndexes[gBattlerTarget]]);
+    u32 rand = Random() % 100;
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
 
@@ -1981,7 +1994,7 @@ static void Cmd_adjustdamage(void)
 
     gPotentialItemEffectBattler = gBattlerTarget;
 
-    if (holdEffect == HOLD_EFFECT_FOCUS_BAND && (Random() % 100) < param)
+    if (holdEffect == HOLD_EFFECT_FOCUS_BAND && rand < param)
     {
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
         gSpecialStatuses[gBattlerTarget].focusBanded = TRUE;
@@ -1998,11 +2011,24 @@ static void Cmd_adjustdamage(void)
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
         gSpecialStatuses[gBattlerTarget].focusSashed = TRUE;
     }
+#if B_AFFECTION_MECHANICS == TRUE
+    else if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER && friendshipScore >= FRIENDSHIP_100_TO_149)
+    {
+        if ((friendshipScore == FRIENDSHIP_MAX && rand < 25)
+         || (friendshipScore == FRIENDSHIP_200_TO_254 && rand < 20)
+         || (friendshipScore == FRIENDSHIP_150_TO_199 && rand < 15)
+         || (friendshipScore == FRIENDSHIP_100_TO_149 && rand < 10))
+            gSpecialStatuses[gBattlerTarget].affectionEndured = TRUE;
+    }
+#endif
 
     if (gBattleMoves[gCurrentMove].effect != EFFECT_FALSE_SWIPE
         && !gProtectStructs[gBattlerTarget].endured
         && !gSpecialStatuses[gBattlerTarget].focusBanded
         && !gSpecialStatuses[gBattlerTarget].focusSashed
+#if B_AFFECTION_MECHANICS == TRUE
+        && !gSpecialStatuses[gBattlerTarget].affectionEndured
+#endif
         && !gSpecialStatuses[gBattlerTarget].sturdied)
         goto END;
 
@@ -2023,6 +2049,12 @@ static void Cmd_adjustdamage(void)
         gMoveResultFlags |= MOVE_RESULT_STURDIED;
         gLastUsedAbility = ABILITY_STURDY;
     }
+#if B_AFFECTION_MECHANICS == TRUE
+    else if (gSpecialStatuses[gBattlerTarget].affectionEndured)
+    {
+        gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED_AFFECTION;
+    }
+#endif
 
 END:
     gBattlescriptCurrInstr++;
@@ -2478,6 +2510,16 @@ static void Cmd_resultmessage(void)
             {
                 stringId = STRINGID_BUTITFAILED;
             }
+        #if B_AFFECTION_MECHANICS == TRUE
+            else if (gMoveResultFlags & MOVE_RESULT_FOE_ENDURED_AFFECTION)
+            {
+                gSpecialStatuses[gBattlerTarget].affectionEndured = FALSE;
+                gMoveResultFlags &= ~MOVE_RESULT_FOE_ENDURED_AFFECTION;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_AffectionBasedEndurance;
+                return;
+            }
+        #endif
             else
             {
                 gBattleCommunication[MSG_DISPLAY] = 0;
@@ -4020,6 +4062,10 @@ static void Cmd_getexp(void)
                         gBattleMoveDamage = value + 1;
                     }
                     #endif
+                #if B_AFFECTION_MECHANICS == TRUE
+                    if (GetMonFriendshipScore(&gPlayerParty[gBattleStruct->expGetterMonId]) >= FRIENDSHIP_50_TO_99)
+                        gBattleMoveDamage = (gBattleMoveDamage * 120) / 100;
+                #endif
 
                     if (IsTradedMon(&gPlayerParty[gBattleStruct->expGetterMonId]))
                     {
@@ -11009,6 +11055,13 @@ static void Cmd_tryKO(void)
                 gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
                 gLastUsedItem = gBattleMons[gBattlerTarget].item;
             }
+        #if B_AFFECTION_MECHANICS == TRUE
+            else if (gSpecialStatuses[gBattlerTarget].affectionEndured)
+            {
+                gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
+                gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED_AFFECTION;
+            }
+        #endif
             else
             {
                 gBattleMoveDamage = gBattleMons[gBattlerTarget].hp;

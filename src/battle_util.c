@@ -45,6 +45,7 @@
 #include "constants/species.h"
 #include "constants/trainers.h"
 #include "constants/weather.h"
+#include "constants/pokemon.h"
 
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
@@ -2103,6 +2104,26 @@ void TryToRevertMimicry(void)
     }
 }
 
+u32 GetMonFriendshipScore(struct Pokemon *pokemon)
+{
+    u32 friendshipScore = GetMonData(pokemon, MON_DATA_FRIENDSHIP);
+
+    if (friendshipScore == MAX_FRIENDSHIP)
+        return FRIENDSHIP_MAX;
+    if (friendshipScore >= 200)
+        return FRIENDSHIP_200_TO_254;
+    if (friendshipScore >= 150)
+        return FRIENDSHIP_150_TO_199;
+    if (friendshipScore >= 100)
+        return FRIENDSHIP_100_TO_149;
+    if (friendshipScore >= 50)
+        return FRIENDSHIP_50_TO_99;
+    if (friendshipScore >= 1)
+        return FRIENDSHIP_1_TO_49;
+
+    return FRIENDSHIP_NONE;
+}
+
 enum
 {
     ENDTURN_ORDER,
@@ -2131,6 +2152,7 @@ enum
     ENDTURN_ION_DELUGE,
     ENDTURN_FAIRY_LOCK,
     ENDTURN_RETALIATE,
+    ENDTURN_STATUS_HEAL,
     ENDTURN_FIELD_COUNT,
 };
 
@@ -2576,6 +2598,22 @@ u8 DoFieldEndTurnEffects(void)
                 gSideTimers[B_SIDE_PLAYER].retaliateTimer--;
             if (gSideTimers[B_SIDE_OPPONENT].retaliateTimer > 0)
                 gSideTimers[B_SIDE_OPPONENT].retaliateTimer--;
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_STATUS_HEAL:
+            for (gBattlerAttacker = 0; gBattlerAttacker < gBattlersCount; gBattlerAttacker++)
+            {
+            #if B_AFFECTION_MECHANICS == TRUE
+                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER
+                 && GetMonFriendshipScore(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]) >= FRIENDSHIP_150_TO_199
+                 && (Random() % 100 < 20))
+                {
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                    BattleScriptExecute(BattleScript_AffectionBasedStatusHeal);
+                    break;
+                }
+            #endif
+            }
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_FIELD_COUNT:
