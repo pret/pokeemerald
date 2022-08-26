@@ -7244,28 +7244,7 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
     }
 }
 
-u32 CanMonLearnTaughtMove(struct Pokemon *mon, u16 move)
-{
-    u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
-    
-    if (species == SPECIES_EGG)
-    {
-        return FALSE;
-    }
-    else
-    {
-        u32 i;
-        for (i = 0; gTeachLearnsets[species][i] != MOVE_UNAVAILABLE; i++)
-        {
-            if (gTeachLearnsets[species][i] == move) {
-                return TRUE;
-            }
-        }
-        return FALSE;
-    }
-}
-
-u32 CanSpeciesLearnTaughtMove(u16 species, u16 move)
+u8 CanLearnTaughtMove(u16 species, u16 move)
 {
     if (species == SPECIES_EGG)
     {
@@ -7273,7 +7252,7 @@ u32 CanSpeciesLearnTaughtMove(u16 species, u16 move)
     }
     else
     {
-        u32 i;
+        u8 i;
         for (i = 0; gTeachLearnsets[species][i] != MOVE_UNAVAILABLE; i++)
         {
             if (gTeachLearnsets[species][i] == move) {
