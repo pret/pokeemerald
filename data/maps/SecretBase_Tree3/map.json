@@ -216,7 +216,7 @@
       "x": 8,
       "y": 6,
       "elevation": 0,
-      "dest_map": "MAP_NONE",
+      "dest_map": "MAP_DYNAMIC",
       "dest_warp_id": 126
     }
   ],

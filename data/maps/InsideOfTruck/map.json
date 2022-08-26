@@ -59,21 +59,21 @@
       "x": 4,
       "y": 1,
       "elevation": 0,
-      "dest_map": "MAP_NONE",
+      "dest_map": "MAP_DYNAMIC",
       "dest_warp_id": 127
     },
     {
       "x": 4,
       "y": 2,
       "elevation": 0,
-      "dest_map": "MAP_NONE",
+      "dest_map": "MAP_DYNAMIC",
       "dest_warp_id": 127
     },
     {
       "x": 4,
       "y": 3,
       "elevation": 0,
-      "dest_map": "MAP_NONE",
+      "dest_map": "MAP_DYNAMIC",
       "dest_warp_id": 127
     }
   ],

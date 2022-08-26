@@ -469,7 +469,7 @@
 	formatwarp \map, \a, \b, \c
 	.endm
 
-	@ Sets the dynamic warp destination. Warps with a destination map of MAP_NONE will target this destination.
+	@ Sets the dynamic warp destination. Warps with a destination map of MAP_DYNAMIC will target this destination.
 	@ Warp commands can be given either the id of which warp location to go to on the destination map
 	@ or a pair of x/y coordinates to go to directly on the destination map.
 	.macro setdynamicwarp map:req, a, b, c

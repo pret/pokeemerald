@@ -33,28 +33,28 @@
       "x": 8,
       "y": 9,
       "elevation": 3,
-      "dest_map": "MAP_NONE",
+      "dest_map": "MAP_DYNAMIC",
       "dest_warp_id": 127
     },
     {
       "x": 9,
       "y": 9,
       "elevation": 3,
-      "dest_map": "MAP_NONE",
+      "dest_map": "MAP_DYNAMIC",
       "dest_warp_id": 127
     },
     {
       "x": 11,
       "y": 9,
       "elevation": 3,
-      "dest_map": "MAP_NONE",
+      "dest_map": "MAP_DYNAMIC",
       "dest_warp_id": 127
     },
     {
       "x": 10,
       "y": 9,
       "elevation": 3,
-      "dest_map": "MAP_NONE",
+      "dest_map": "MAP_DYNAMIC",
       "dest_warp_id": 127
     }
   ],
