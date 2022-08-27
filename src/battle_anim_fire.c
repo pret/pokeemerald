@@ -926,7 +926,7 @@ static void CreateEruptionLaunchRocks(u8 spriteId, u8 taskId, u8 activeSpritesId
     u16 y = GetEruptionLaunchRockInitialYPos(spriteId);
     u16 x = gSprites[spriteId].x;
 
-    if(!GetBattlerSide(gBattleAnimAttacker))
+    if(GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
         x -= 12;
         sign = 1;
