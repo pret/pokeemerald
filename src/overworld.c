@@ -2525,8 +2525,7 @@ static u16 KeyInterCB_Idle(u32 key)
     return LINK_KEY_CODE_EMPTY;
 }
 
-// Ignore the player's inputs as long as there is an event script
-// in ScriptContext2.
+// Ignore the player's inputs as long as there is an event script being executed.
 static u16 KeyInterCB_DeferToEventScript(u32 key)
 {
     u16 retVal;

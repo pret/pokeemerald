@@ -67,40 +67,40 @@ static void Task_TryFieldPoisonWhiteOut(u8 taskId)
     s16 *data = gTasks[taskId].data;
     switch (tState)
     {
-        case 0:
-            for (; tPartyIdx < PARTY_SIZE; tPartyIdx++)
+    case 0:
+        for (; tPartyIdx < PARTY_SIZE; tPartyIdx++)
+        {
+            if (MonFaintedFromPoison(tPartyIdx))
             {
-                if (MonFaintedFromPoison(tPartyIdx))
-                {
-                    FaintFromFieldPoison(tPartyIdx);
-                    ShowFieldMessage(gText_PkmnFainted_FldPsn);
-                    tState++;
-                    return;
-                }
+                FaintFromFieldPoison(tPartyIdx);
+                ShowFieldMessage(gText_PkmnFainted_FldPsn);
+                tState++;
+                return;
             }
-            tState = 2; // Finished checking party
-            break;
-        case 1:
-            // Wait for "{mon} fainted" message, then return to party loop
-            if (IsFieldMessageBoxHidden())
-                tState--;
-            break;
-        case 2:
-            if (AllMonsFainted())
-            {
-                // Battle facilities have their own white out script to handle the challenge loss
-                if (InBattlePyramid() | InBattlePike() || InTrainerHillChallenge())
-                    gSpecialVar_Result = FLDPSN_FRONTIER_WHITEOUT;
-                else
-                    gSpecialVar_Result = FLDPSN_WHITEOUT;
-            }
+        }
+        tState = 2; // Finished checking party
+        break;
+    case 1:
+        // Wait for "{mon} fainted" message, then return to party loop
+        if (IsFieldMessageBoxHidden())
+            tState--;
+        break;
+    case 2:
+        if (AllMonsFainted())
+        {
+            // Battle facilities have their own white out script to handle the challenge loss
+            if (InBattlePyramid() | InBattlePike() || InTrainerHillChallenge())
+                gSpecialVar_Result = FLDPSN_FRONTIER_WHITEOUT;
             else
-            {
-                gSpecialVar_Result = FLDPSN_NO_WHITEOUT;
-            }
-            ScriptContext_Enable();
-            DestroyTask(taskId);
-            break;
+                gSpecialVar_Result = FLDPSN_WHITEOUT;
+        }
+        else
+        {
+            gSpecialVar_Result = FLDPSN_NO_WHITEOUT;
+        }
+        ScriptContext_Enable();
+        DestroyTask(taskId);
+        break;
     }
 }
 
