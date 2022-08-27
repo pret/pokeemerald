@@ -2953,8 +2953,9 @@ static const u8 sEerieSpellDescription[] = _(
     "Attacks with psychic power.\n"
     "Foe's last move has 3 PP cut.");
 
-static const u8 sNotDoneYetDescription[] = _(
-    "Not done yet.");
+const u8 gNotDoneYetDescription[] = _(
+    "This move can't be used. Its\n"
+    "effect is in development.");
 
 #undef BINDING_TURNS
 

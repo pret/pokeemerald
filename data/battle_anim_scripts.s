@@ -868,7 +868,8 @@ gBattleAnims_General::
 	.4byte General_AquaRingHeal             @ B_ANIM_AQUA_RING_HEAL
 	.4byte General_BeakBlastSetUp           @ B_ANIM_BEAK_BLAST_SETUP
 	.4byte General_ShellTrapSetUp           @ B_ANIM_SHELL_TRAP_SETUP
-	.4byte General_ZMoveActivate			@ B_ANIM_ZMOVE_ACTIVATE
+	.4byte General_ZMoveActivate            @ B_ANIM_ZMOVE_ACTIVATE
+	.4byte General_AffectionHangedOn        @ B_ANIM_AFFECTION_HANGED_ON
 
 	.align 2
 gBattleAnims_Special::
@@ -24882,6 +24883,27 @@ PrimalReversionParticles:
 	createsprite gPrimalParticlesSpriteTemplate, ANIM_ATTACKER, 2, 5, -40, 13
 	delay 3
 	return
+
+General_AffectionHangedOn::
+	loadspritegfx ANIM_TAG_RED_HEART
+	loopsewithpan SE_M_CHARM, SOUND_PAN_ATTACKER, 12, 3
+	createvisualtask AnimTask_SwayMon, 5, 0, 12, 4096, 4, ANIM_ATTACKER
+	delay 15
+	launchtask AnimTask_AffectionHangedOn 0x5 0x0
+	jumpargeq 0x0, FRIENDSHIP_100_TO_149, General_AffectionHangedOn_3Hearts
+	jumpargeq 0x0, FRIENDSHIP_150_TO_199, General_AffectionHangedOn_4Hearts
+	jumpargeq 0x0, FRIENDSHIP_200_TO_254, General_AffectionHangedOn_5Hearts
+	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, -384, -31
+General_AffectionHangedOn_5Hearts:
+	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, -128, -22
+General_AffectionHangedOn_4Hearts:
+	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 416, -38
+General_AffectionHangedOn_3Hearts:
+	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 160, -32
+	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, -256, -40
+	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 128, -16
+	waitforvisualfinish
+	end
 
 SnatchMoveTrySwapFromSubstitute:
 	createvisualtask AnimTask_IsAttackerBehindSubstitute, 2

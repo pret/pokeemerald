@@ -1371,10 +1371,11 @@ const struct Item gItems[] =
         .name = _("Exp.Candy XS"),
         .itemId = ITEM_EXP_CANDY_XS,
         .price = 20,
+        .holdEffectParam = EXP_100,
         .description = sExpCandyXSDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
         .flingPower = 30,
     },
 
@@ -1383,10 +1384,11 @@ const struct Item gItems[] =
         .name = _("Exp.Candy S"),
         .itemId = ITEM_EXP_CANDY_S,
         .price = 240,
+        .holdEffectParam = EXP_800,
         .description = sExpCandyXSDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
         .flingPower = 30,
     },
 
@@ -1395,10 +1397,11 @@ const struct Item gItems[] =
         .name = _("Exp.Candy M"),
         .itemId = ITEM_EXP_CANDY_M,
         .price = 1000,
+        .holdEffectParam = EXP_3000,
         .description = sExpCandyMDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
         .flingPower = 30,
     },
 
@@ -1407,10 +1410,11 @@ const struct Item gItems[] =
         .name = _("Exp.Candy L"),
         .itemId = ITEM_EXP_CANDY_L,
         .price = 3000,
+        .holdEffectParam = EXP_10000,
         .description = sExpCandyLDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
         .flingPower = 30,
     },
 
@@ -1419,10 +1423,11 @@ const struct Item gItems[] =
         .name = _("Exp.Candy XL"),
         .itemId = ITEM_EXP_CANDY_XL,
         .price = 10000,
+        .holdEffectParam = EXP_30000,
         .description = sExpCandyXLDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
         .flingPower = 30,
     },
 

@@ -6,7 +6,8 @@
 enum
 {
     HP_CURRENT,
-    HP_MAX
+    HP_MAX,
+    HP_BOTH
 };
 
 enum
@@ -72,6 +73,7 @@ enum
     HEALTHBOX_SAFARI_BALLS_TEXT
 };
 
+u32 WhichBattleCoords(u32 battlerId);
 u8 GetMegaIndicatorSpriteId(u32 healthboxSpriteId);
 u8 CreateBattlerHealthboxSprites(u8 battler);
 u8 CreateSafariPlayerHealthboxSprites(void);
@@ -82,7 +84,7 @@ void DestoryHealthboxSprite(u8 healthboxSpriteId);
 void DummyBattleInterfaceFunc(u8 healthboxSpriteId, bool8 isDoubleBattleBankOnly);
 void UpdateOamPriorityInAllHealthboxes(u8 priority, bool32 hideHpBoxes);
 void InitBattlerHealthboxCoords(u8 battler);
-void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
+void UpdateHpTextInHealthbox(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp, s16 maxHp);
 void SwapHpBarsWithHpText(void);
 void ChangeMegaTriggerSprite(u8 spriteId, u8 animId);
 void CreateMegaTriggerSprite(u8 battlerId, u8 palId);
