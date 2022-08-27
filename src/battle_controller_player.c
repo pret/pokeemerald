@@ -498,7 +498,7 @@ static void HandleInputChooseMove(void)
         if (moveTarget & MOVE_TARGET_USER)
             gMultiUsePlayerCursor = gActiveBattler;
         else
-            gMultiUsePlayerCursor = GetBattlerAtPosition((GetBattlerPosition(gActiveBattler) & BIT_SIDE) ^ BIT_SIDE);
+            gMultiUsePlayerCursor = GetBattlerAtPosition(BATTLE_OPPOSITE(GetBattlerPosition(gActiveBattler) & BIT_SIDE));
 
         if (!gBattleBufferA[gActiveBattler][1]) // not a double battle
         {

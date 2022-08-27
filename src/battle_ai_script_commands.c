@@ -351,14 +351,14 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
     // Decide a random target battlerId in doubles.
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        gBattlerTarget = (Random() & BIT_FLANK) + (GetBattlerSide(gActiveBattler) ^ BIT_SIDE);
+        gBattlerTarget = (Random() & BIT_FLANK) + (BATTLE_OPPOSITE(GetBattlerSide(gActiveBattler)));
         if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
             gBattlerTarget ^= BIT_FLANK;
     }
     // There's only one choice in single battles.
     else
     {
-        gBattlerTarget = sBattler_AI ^ BIT_SIDE;
+        gBattlerTarget = BATTLE_OPPOSITE(sBattler_AI);
     }
 
     // Choose proper trainer ai scripts.
