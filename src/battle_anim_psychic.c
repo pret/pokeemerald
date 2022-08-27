@@ -570,7 +570,7 @@ static void AnimDefensiveWall_Step5(struct Sprite *sprite)
         if (IsBattlerSpriteVisible(battler))
             ResetBattleAnimBg(toBG2);
 
-        battler = battlerCopy ^ 2;
+        battler = BATTLE_PARTNER(battlerCopy);
         if (IsBattlerSpriteVisible(battler))
             ResetBattleAnimBg(toBG2 ^ var0);
     }
