@@ -1454,7 +1454,7 @@ static void AnimHailBegin(struct Sprite *sprite)
                                 sprite->data[3], sprite->data[4], sprite->subpriority);
 
         sprite->data[0] = spriteId;
-        if (spriteId != 64)
+        if (spriteId != MAX_SPRITES)
         {
             gSprites[sprite->data[0]].callback = AnimHailContinue;
             gSprites[sprite->data[0]].data[6] = sprite->data[6];

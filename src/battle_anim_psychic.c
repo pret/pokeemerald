@@ -918,7 +918,7 @@ static void AnimTask_SkillSwap_Step(u8 taskId)
         {
             task->data[1] = 0;
             spriteId = CreateSprite(&gSkillSwapOrbSpriteTemplate, task->data[11], task->data[12], 0);
-            if (spriteId != 64)
+            if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].data[0] = 16;
                 gSprites[spriteId].data[2] = task->data[13];
