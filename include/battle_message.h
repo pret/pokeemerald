@@ -202,7 +202,7 @@ struct BattleMsgData
     u16 lastItem;
     u8 lastAbility;
     u8 scrActive;
-    u8 unk1605E;
+    u8 bakScriptPartyIdx;
     u8 hpScale;
     u8 itemEffectBattler;
     u8 moveType;
