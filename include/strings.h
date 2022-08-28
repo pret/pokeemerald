@@ -724,7 +724,7 @@ extern const u8 gText_RankingHall[];
 extern const u8 gText_ExchangeService[];
 
 // Battle Frontier Move Tutors
-extern const u8 gText_Softboiled16BP[];
+extern const u8 gText_SoftBoiled16BP[];
 extern const u8 gText_SeismicToss24BP[];
 extern const u8 gText_DreamEater24BP[];
 extern const u8 gText_MegaPunch24BP[];
@@ -868,7 +868,7 @@ extern const u8 BattleFrontier_ExchangeServiceCorner_Text_FocusBandDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_ScopeLensDesc[];
 
 // Battle Frontier Move Tutors
-extern const u8 BattleFrontier_Lounge7_Text_SoftboiledDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_SoftBoiledDesc[];
 extern const u8 BattleFrontier_Lounge7_Text_SeismicTossDesc[];
 extern const u8 BattleFrontier_Lounge7_Text_DreamEaterDesc[];
 extern const u8 BattleFrontier_Lounge7_Text_MegaPunchDesc[];

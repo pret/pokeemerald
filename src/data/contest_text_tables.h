@@ -56,7 +56,7 @@ extern const u8 gText_RainDance[];
 extern const u8 gText_Rage[];
 extern const u8 gText_FocusEnergy[];
 extern const u8 gText_Hypnosis[];
-extern const u8 gText_Softboiled[];
+extern const u8 gText_SoftBoiled[];
 extern const u8 gText_HornAttack[];
 extern const u8 gText_SwordsDance[];
 extern const u8 gText_Conversion[];
@@ -279,7 +279,7 @@ static const u8 *const sUnusedComboMoveNameTexts[] =
     gText_Rage,
     gText_FocusEnergy,
     gText_Hypnosis,
-    gText_Softboiled,
+    gText_SoftBoiled,
     gText_HornAttack,
     gText_SwordsDance,
     gText_Conversion,

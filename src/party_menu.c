@@ -1299,7 +1299,7 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
             if (IsSelectedMonNotEgg((u8 *)slotPtr))
             {
                 PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
-                Task_TryUseSoftboiledOnPartyMon(taskId);
+                Task_TryUseSoftBoiledOnPartyMon(taskId);
             }
             break;
         case PARTY_ACTION_USE_ITEM:
@@ -3030,7 +3030,7 @@ static void SwitchPartyMon(void)
     SwitchMenuBoxSprites(&menuBoxes[0]->statusSpriteId, &menuBoxes[1]->statusSpriteId);
 }
 
-// Finish switching mons or using Softboiled
+// Finish switching mons or using Soft-Boiled
 static void FinishTwoMonAction(u8 taskId)
 {
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
@@ -3729,7 +3729,7 @@ static void CursorCb_FieldMove(u8 taskId)
             {
             case FIELD_MOVE_MILK_DRINK:
             case FIELD_MOVE_SOFT_BOILED:
-                ChooseMonForSoftboiled(taskId);
+                ChooseMonForSoftBoiled(taskId);
                 break;
             case FIELD_MOVE_TELEPORT:
                 mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->lastHealLocation.mapGroup, gSaveBlock1Ptr->lastHealLocation.mapNum);

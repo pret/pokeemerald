@@ -2421,7 +2421,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     },
     [SCROLL_MULTI_BF_MOVE_TUTOR_1] =
     {
-        gText_Softboiled16BP,
+        gText_SoftBoiled16BP,
         gText_SeismicToss24BP,
         gText_DreamEater24BP,
         gText_MegaPunch24BP,
@@ -3050,7 +3050,7 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
 {
     static const u8 *const sBattleFrontier_TutorMoveDescriptions1[] =
     {
-        BattleFrontier_Lounge7_Text_SoftboiledDesc,
+        BattleFrontier_Lounge7_Text_SoftBoiledDesc,
         BattleFrontier_Lounge7_Text_SeismicTossDesc,
         BattleFrontier_Lounge7_Text_DreamEaterDesc,
         BattleFrontier_Lounge7_Text_MegaPunchDesc,

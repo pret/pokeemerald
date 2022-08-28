@@ -205,7 +205,7 @@ gText_FocusEnergy::
 gText_Hypnosis::
 	.string "HYPNOSIS$"
 
-gText_Softboiled::
+gText_SoftBoiled::
 	.string "SOFTBOILED$"
 
 gText_HornAttack::

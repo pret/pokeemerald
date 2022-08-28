@@ -175,7 +175,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectBeatUp                 @ EFFECT_BEAT_UP
 	.4byte BattleScript_EffectSemiInvulnerable       @ EFFECT_SEMI_INVULNERABLE
 	.4byte BattleScript_EffectDefenseCurl            @ EFFECT_DEFENSE_CURL
-	.4byte BattleScript_EffectSoftboiled             @ EFFECT_SOFTBOILED
+	.4byte BattleScript_EffectSoftBoiled             @ EFFECT_SOFTBOILED
 	.4byte BattleScript_EffectFakeOut                @ EFFECT_FAKE_OUT
 	.4byte BattleScript_EffectUproar                 @ EFFECT_UPROAR
 	.4byte BattleScript_EffectStockpile              @ EFFECT_STOCKPILE
@@ -2024,7 +2024,7 @@ BattleScript_EffectDefenseCurl::
 BattleScript_DefenseCurlDoStatUpAnim::
 	goto BattleScript_StatUpDoAnim
 
-BattleScript_EffectSoftboiled::
+BattleScript_EffectSoftBoiled::
 	attackcanceler
 	attackstring
 	ppreduce
