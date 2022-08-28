@@ -4950,7 +4950,7 @@ bool8 MovementType_FollowPlayer_Shadow(struct ObjectEvent *objectEvent, struct S
         MoveObjectEventToMapCoords(objectEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
         objectEvent->triggerGroundEffectsOnMove = FALSE; // Stop endless reflection spawning
     }
-    sprite->data[1] = 1; // Enter active state; if the player moves the follower will appear
+    sprite->sTypeFuncId = 1; // Enter active state; if the player moves the follower will appear
     return TRUE;
 }
 
@@ -4960,7 +4960,7 @@ bool8 MovementType_FollowPlayer_Active(struct ObjectEvent *objectEvent, struct S
         return FALSE;
     } else if (!IsFollowerVisible()) {
       if (objectEvent->invisible) { // Return to shadowing state
-        sprite->data[1] = 0;
+        sprite->sTypeFuncId = 0;
         return FALSE;
       }
       // Animate entering pokeball
@@ -4968,7 +4968,7 @@ bool8 MovementType_FollowPlayer_Active(struct ObjectEvent *objectEvent, struct S
       ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_ENTER_POKEBALL);
       objectEvent->singleMovementActive = 1;
       sprite->animCmdIndex = 0; // Needed for animCmdIndex weirdness
-      sprite->data[1] = 2; // movement action sets state to 0
+      sprite->sTypeFuncId = 2; // movement action sets state to 0
       return TRUE;
     }
     // TODO: Remove dependence on PlayerGetCopyableMovement
@@ -4986,8 +4986,8 @@ bool8 MovementType_FollowPlayer_Moving(struct ObjectEvent *objectEvent, struct S
     if (ObjectEventExecSingleMovementAction(objectEvent, sprite)) {
     #endif
         objectEvent->singleMovementActive = 0;
-        if (sprite->data[1]) { // restore nonzero state
-          sprite->data[1] = 1;
+        if (sprite->sTypeFuncId) { // restore nonzero state
+            sprite->sTypeFuncId = 1;
         }
     } else if (objectEvent->movementActionId != MOVEMENT_ACTION_EXIT_POKEBALL) {
         UpdateFollowerTransformEffect(objectEvent, sprite);
@@ -5000,7 +5000,7 @@ bool8 FollowablePlayerMovement_Idle(struct ObjectEvent *objectEvent, struct Spri
     u8 direction;
     if (!objectEvent->singleMovementActive) { // walk in place
       ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkInPlaceNormalMovementAction(objectEvent->facingDirection));
-      sprite->data[1] = 1;
+      sprite->sTypeFuncId = 1;
       objectEvent->singleMovementActive = 1;
       return TRUE;
     } else if (ObjectEventExecSingleMovementAction(objectEvent, sprite)) { // finish movement action
@@ -5038,7 +5038,7 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
       ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_EXIT_POKEBALL);
       objectEvent->singleMovementActive = 1;
       sprite->animCmdIndex = 0; // Needed because of weird animCmdIndex stuff
-      sprite->data[1] = 2;
+      sprite->sTypeFuncId = 2;
       return TRUE;
     } else if (x == targetX && y == targetY) { // don't move if already in the player's last position
       return FALSE;
@@ -5046,14 +5046,19 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
 
     // Follow player
     direction = GetDirectionToFace(x, y, targetX, targetY);
-    #ifdef MB_SIDEWAYS_STAIRS_RIGHT_SIDE // https://github.com/ghoulslash/pokeemerald/tree/sideways_stairs
     MoveCoords(direction, &x, &y);
+    #ifdef MB_SIDEWAYS_STAIRS_RIGHT_SIDE // https://github.com/ghoulslash/pokeemerald/tree/sideways_stairs
     GetCollisionAtCoords(objectEvent, x, y, direction); // Sets directionOverwrite for stairs
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)) { // Set follow speed according to player's speed
+    if (GetLedgeJumpDirection(x, y, direction) != DIR_NONE) // InitJumpRegular will set the proper speed
+        ObjectEventSetSingleMovement(objectEvent, sprite, GetJump2MovementAction(direction));
+    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)) { // Set follow speed according to player's speed
         if (playerAction >= MOVEMENT_ACTION_RUN_DOWN_SLOW && playerAction <= MOVEMENT_ACTION_RUN_RIGHT_SLOW)
             objectEvent->movementActionId = GetWalkNormalMovementAction(direction);
         else
             objectEvent->movementActionId = GetWalkFastMovementAction(direction);
+
+    } else if (PlayerGetCopyableMovement() == COPY_MOVE_JUMP2) {
+        ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkSlowMovementAction(direction));
     } else {
         if (playerAction >= MOVEMENT_ACTION_WALK_SLOW_DOWN && playerAction <= MOVEMENT_ACTION_WALK_SLOW_RIGHT)
             ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkSlowMovementAction(direction));
@@ -5062,13 +5067,18 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
     }
     sprite->sActionFuncId = 0;
     #else
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)) // Set follow speed according to player's speed
+    if (GetLedgeJumpDirection(x, y, direction) != DIR_NONE) // InitJumpRegular will set the proper speed
+        ObjectEventSetSingleMovement(objectEvent, sprite, GetJump2MovementAction(direction));
+    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)) // Set follow speed according to player's speed
         ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkFastMovementAction(direction));
+    // If *player* jumps, make step take twice as long
+    else if (PlayerGetCopyableMovement() == COPY_MOVE_JUMP2)
+        ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkSlowMovementAction(direction));
     else
         ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkNormalMovementAction(direction));
     #endif
     objectEvent->singleMovementActive = 1;
-    sprite->data[1] = 2;
+    sprite->sTypeFuncId = 2;
     return TRUE;
 }
 
@@ -5087,7 +5097,7 @@ bool8 FollowablePlayerMovement_GoSpeed1(struct ObjectEvent *objectEvent, struct 
         ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(direction));
     }
     objectEvent->singleMovementActive = TRUE;
-    sprite->data[1] = 2;
+    sprite->sTypeFuncId = 2;
     return TRUE;
 }
 
@@ -5106,7 +5116,7 @@ bool8 FollowablePlayerMovement_GoSpeed2(struct ObjectEvent *objectEvent, struct 
         ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(direction));
     }
     objectEvent->singleMovementActive = TRUE;
-    sprite->data[1] = 2;
+    sprite->sTypeFuncId = 2;
     return TRUE;
 }
 
@@ -5125,7 +5135,7 @@ bool8 FollowablePlayerMovement_Slide(struct ObjectEvent *objectEvent, struct Spr
         ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(direction));
     }
     objectEvent->singleMovementActive = TRUE;
-    sprite->data[1] = 2;
+    sprite->sTypeFuncId = 2;
     return TRUE;
 }
 
@@ -5137,7 +5147,7 @@ bool8 fph_IM_DIFFERENT(struct ObjectEvent *objectEvent, struct Sprite *sprite, u
     direction = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, direction);
     ObjectEventSetSingleMovement(objectEvent, sprite, GetJumpInPlaceMovementAction(direction));
     objectEvent->singleMovementActive = TRUE;
-    sprite->data[1] = 2;
+    sprite->sTypeFuncId = 2;
     return TRUE;
 }
 
@@ -5156,7 +5166,7 @@ bool8 FollowablePlayerMovement_GoSpeed4(struct ObjectEvent *objectEvent, struct 
         ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(direction));
     }
     objectEvent->singleMovementActive = TRUE;
-    sprite->data[1] = 2;
+    sprite->sTypeFuncId = 2;
     return TRUE;
 }
 
@@ -5172,7 +5182,7 @@ bool8 FollowablePlayerMovement_Jump(struct ObjectEvent *objectEvent, struct Spri
     MoveCoordsInDirection(direction, &x, &y, 2, 2);
     ObjectEventSetSingleMovement(objectEvent, sprite, GetJump2MovementAction(direction));
     objectEvent->singleMovementActive = TRUE;
-    sprite->data[1] = 2;
+    sprite->sTypeFuncId = 2;
     return TRUE;
 }
 
@@ -6261,6 +6271,8 @@ enum {
     JUMP_TYPE_HIGH,
     JUMP_TYPE_LOW,
     JUMP_TYPE_NORMAL,
+    JUMP_TYPE_FAST,
+    JUMP_TYPE_FASTER,
 };
 
 static void InitJump(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 distance, u8 type)
@@ -6284,6 +6296,13 @@ static void InitJump(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 
 
 static void InitJumpRegular(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 distance, u8 type)
 {
+    // For follower only, match the anim duration of the player's movement, whether dashing, walking or jumping
+    if (objectEvent->localId == OBJ_EVENT_ID_FOLLOWER
+        && type == JUMP_TYPE_HIGH
+        && distance == JUMP_DISTANCE_FAR
+        // In some areas (i.e Meteor Falls), the player can jump as the follower jumps, so preserve type in this case
+        && PlayerGetCopyableMovement() != COPY_MOVE_JUMP2)
+        type = TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH) ? JUMP_TYPE_FASTER : JUMP_TYPE_FAST;
     InitJump(objectEvent, sprite, direction, distance, type);
     SetStepAnimHandleAlternation(objectEvent, sprite, GetMoveDirectionAnimNum(objectEvent->facingDirection));
     DoShadowFieldEffect(objectEvent);
@@ -9512,7 +9531,16 @@ static u8 DoJumpSpriteMovement(struct Sprite *sprite)
     if (sprite->sDistance != JUMP_DISTANCE_IN_PLACE)
         Step1(sprite, sprite->sDirection);
 
-    sprite->y2 = GetJumpY(sprite->sTimer >> distanceToShift[sprite->sDistance], sprite->sJumpType);
+    if (sprite->sJumpType == JUMP_TYPE_FASTER) {
+        Step3(sprite, sprite->sDirection);
+        sprite->y2 = GetJumpY(sprite->sTimer >> distanceToShift[sprite->sDistance], JUMP_TYPE_NORMAL);
+        sprite->sTimer += 3;
+    } else if (sprite->sJumpType == JUMP_TYPE_FAST) {
+        Step1(sprite, sprite->sDirection);
+        sprite->y2 = GetJumpY(sprite->sTimer >> distanceToShift[sprite->sDistance], JUMP_TYPE_NORMAL);
+        sprite->sTimer++;
+    } else
+        sprite->y2 = GetJumpY(sprite->sTimer >> distanceToShift[sprite->sDistance], sprite->sJumpType);
 
     sprite->sTimer++;
 

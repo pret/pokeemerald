@@ -408,17 +408,17 @@ u8 (*const gMovementTypeFuncs_FollowPlayer[])(struct ObjectEvent *, struct Sprit
 };
 
 bool8 (*const gFollowPlayerMovementFuncs[])(struct ObjectEvent *, struct Sprite *, u8, bool8(u8)) = {
-    FollowablePlayerMovement_Idle,
-    FollowablePlayerMovement_Idle,
-    FollowablePlayerMovement_Step,
-    FollowablePlayerMovement_GoSpeed1,
-    FollowablePlayerMovement_GoSpeed2,
-    FollowablePlayerMovement_Slide,
-    fph_IM_DIFFERENT,
-    FollowablePlayerMovement_GoSpeed4,
-    FollowablePlayerMovement_Jump,
-    FollowablePlayerMovement_Idle,
-    FollowablePlayerMovement_Idle,
+    [COPY_MOVE_NONE] = FollowablePlayerMovement_Idle,
+    [COPY_MOVE_FACE] = FollowablePlayerMovement_Idle,
+    [COPY_MOVE_WALK] = FollowablePlayerMovement_Step,
+    [COPY_MOVE_WALK_FAST] = FollowablePlayerMovement_GoSpeed1,
+    [COPY_MOVE_WALK_FASTER] = FollowablePlayerMovement_GoSpeed2,
+    [COPY_MOVE_SLIDE] = FollowablePlayerMovement_Slide,
+    [COPY_MOVE_JUMP_IN_PLACE] = fph_IM_DIFFERENT,
+    [COPY_MOVE_JUMP] = FollowablePlayerMovement_GoSpeed4,
+    [COPY_MOVE_JUMP2] = FollowablePlayerMovement_Step,
+    [COPY_MOVE_EMPTY_1] = FollowablePlayerMovement_Idle,
+    [COPY_MOVE_EMPTY_2] = FollowablePlayerMovement_Idle,
 };
 
 u8 (*const gMovementTypeFuncs_CopyPlayerInGrass[])(struct ObjectEvent *, struct Sprite *) = {
