@@ -33,6 +33,14 @@ FORM_ITEM_USE_TIME:
     param1 = item to use
     param2 = DAY if form change activates in the daytime
              NIGHT if form change activates at nighttime
+
+FORM_BATTLE_BEGIN:
+    Form change activates when the Pokémon is sent out at the beginning of a battle
+    param1 = item to hold, optional
+
+FORM_BATTLE_END:
+    Form change activates at the end of a battle
+    param1 = item to hold, optional
 */
 
 // FORM_MOVE param2 Arguments
@@ -184,6 +192,24 @@ static const struct FormChange sSilvallyFormChangeTable[] = {
     {FORM_CHANGE_END},
 };
 #endif
+
+static const struct FormChange sXerneasFormChangeTable[] = {
+    {FORM_BATTLE_BEGIN, SPECIES_XERNEAS_ACTIVE, ITEM_NONE},
+    {FORM_BATTLE_END,   SPECIES_XERNEAS,        ITEM_NONE},
+    {FORM_CHANGE_END},
+};
+
+static const struct FormChange sZacianFormChangeTable[] = {
+    {FORM_BATTLE_BEGIN, SPECIES_ZACIAN_CROWNED_SWORD, ITEM_RUSTED_SWORD},
+    {FORM_BATTLE_END,   SPECIES_ZACIAN,               ITEM_RUSTED_SWORD},
+    {FORM_CHANGE_END},
+};
+
+static const struct FormChange sZamazentaFormChangeTable[] = {
+    {FORM_BATTLE_BEGIN, SPECIES_ZAMAZENTA_CROWNED_SHIELD, ITEM_RUSTED_SHIELD},
+    {FORM_BATTLE_END,   SPECIES_ZAMAZENTA,                ITEM_RUSTED_SHIELD},
+    {FORM_CHANGE_END},
+};
 
 #undef WHEN_LEARNED
 #undef WHEN_FORGOTTEN

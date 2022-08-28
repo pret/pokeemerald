@@ -9588,7 +9588,7 @@ void UndoMegaEvolution(u32 monId)
 
 void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
 {
-    u32 i, currSpecies;
+    u32 i, currSpecies, targetSpecies;
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
     static const u16 species[][3] =
     {
@@ -9620,6 +9620,21 @@ void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
             SetMonData(&party[monId], MON_DATA_SPECIES, &species[i][1]);
             CalculateMonStats(&party[monId]);
             break;
+        }
+    }
+    if (!isSwitchingOut)
+    {
+        // Apply party-wide end-of-battle form changes
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            // Player's side
+            targetSpecies = GetFormChangeTargetSpecies(&gPlayerParty[i], FORM_BATTLE_END, 0);
+            if (targetSpecies != SPECIES_NONE)
+                SetMonData(&gPlayerParty[i], MON_DATA_SPECIES, &targetSpecies);
+            // Opponent's side
+            targetSpecies = GetFormChangeTargetSpecies(&gEnemyParty[i], FORM_BATTLE_END, 0);
+            if (targetSpecies != SPECIES_NONE)
+                SetMonData(&gEnemyParty[i], MON_DATA_SPECIES, &targetSpecies);
         }
     }
 }
