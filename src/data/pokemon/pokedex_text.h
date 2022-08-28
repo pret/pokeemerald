@@ -5354,12 +5354,12 @@ const u8 gWyrdeerPokedexText[] = _(
     "The black orbs shine with an uncanny light\n"
     "when it is erecting invisible barriers.\n"
     "The fur shed from its beard retains heat\n"
-    "and useful for winter clothing.");
+    "and is useful for winter clothing.");
 
 const u8 gKleavorPokedexText[] = _(
     "A violent creature that fells trees with\n"
     "its crude axes and shields itself with hard\n"
-    "stone. If one should encounter this Pokémon\n"
+    "stone. Should one encounter this Pokémon\n"
     "in the wild, one's only recourse is to flee.");
 
 const u8 gUrsalunaPokedexText[] = _(
@@ -5368,9 +5368,10 @@ const u8 gUrsalunaPokedexText[] = _(
     "manipulate peat at will.");
 
 const u8 gBasculegionPokedexText[] = _(
-    "It clads itself in the souls of comrades\n"
-    "that perishes before their goals of\n"
-    "journeying upstream.");
+    "Clads itself in the souls of comrades that\n"
+    "perished before fulfilling their goals of\n"
+    "journeying upstream. No other species in\n"
+    "all Hisui's rivers is Basculegion's equal.");
 
 const u8 gSneaslerPokedexText[] = _(
     "Because of its wicked poison and daunting\n"
@@ -5381,8 +5382,8 @@ const u8 gSneaslerPokedexText[] = _(
 const u8 gOverqwilPokedexText[] = _(
     "Its lancelike spikes and savage\n"
     "temperament have earned it the\n"
-    "nickname Sea Fiend.\n"
-    "It surps up poison to nourish itself.");
+    "nickname “Sea Fiend”.\n"
+    "It slurps up poison to nourish itself.");
 
 const u8 gEnamorusPokedexText[] = _(
     "Its arrival brings an end to the\n"
