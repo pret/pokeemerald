@@ -7,7 +7,17 @@
 #define MOVE_LIMITATION_TORMENTED               (1 << 3)
 #define MOVE_LIMITATION_TAUNT                   (1 << 4)
 #define MOVE_LIMITATION_IMPRISON                (1 << 5)
-#define MOVE_LIMITATIONS_ALL                    0xFF
+#define MOVE_LIMITATION_ENCORE                  (1 << 6)
+#define MOVE_LIMITATION_CHOICE_ITEM             (1 << 7)
+#define MOVE_LIMITATION_ASSAULT_VEST            (1 << 8)
+#define MOVE_LIMITATION_GRAVITY                 (1 << 9)
+#define MOVE_LIMITATION_HEAL_BLOCK              (1 << 10)
+#define MOVE_LIMITATION_BELCH                   (1 << 11)
+#define MOVE_LIMITATION_THROAT_CHOP             (1 << 12)
+#define MOVE_LIMITATION_STUFF_CHEEKS            (1 << 13)
+
+#define MOVE_LIMITATION_PLACEHOLDER             (1 << 15)
+#define MOVE_LIMITATIONS_ALL                    0xFFFF
 
 #define ABILITYEFFECT_ON_SWITCHIN                0
 #define ABILITYEFFECT_ENDTURN                    1
@@ -76,7 +86,6 @@ u8 GetBattlerForBattleScript(u8 caseId);
 void PressurePPLose(u8 target, u8 attacker, u16 move);
 void PressurePPLoseOnUsingPerishSong(u8 attacker);
 void PressurePPLoseOnUsingImprison(u8 attacker);
-void MarkAllBattlersForControllerExec(void); // unused
 bool32 IsBattlerMarkedForControllerExec(u8 battlerId);
 void MarkBattlerForControllerExec(u8 battlerId);
 void MarkBattlerReceivedLinkData(u8 battlerId);
@@ -86,11 +95,11 @@ void PrepareStringBattle(u16 stringId, u8 battlerId);
 void ResetSentPokesToOpponentValue(void);
 void OpponentSwitchInResetSentPokesToOpponentValue(u8 battlerId);
 void UpdateSentPokesToOpponentValue(u8 battlerId);
-void BattleScriptPush(const u8* bsPtr);
+void BattleScriptPush(const u8 *bsPtr);
 void BattleScriptPushCursor(void);
 void BattleScriptPop(void);
 u8 TrySetCantSelectMoveBattleScript(void);
-u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u8 check);
+u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u16 check);
 bool8 AreAllMovesUnusable(void);
 u8 GetImprisonedMovesCount(u8 battlerId, u16 move);
 u8 DoFieldEndTurnEffects(void);
@@ -113,8 +122,8 @@ u32 IsAbilityOnFieldExcept(u32 battlerId, u32 ability);
 u32 IsAbilityPreventingEscape(u32 battlerId);
 bool32 IsBattlerProtected(u8 battlerId, u16 move);
 bool32 CanBattlerEscape(u32 battlerId); // no ability check
-void BattleScriptExecute(const u8* BS_ptr);
-void BattleScriptPushCursorAndCallback(const u8* BS_ptr);
+void BattleScriptExecute(const u8 *BS_ptr);
+void BattleScriptPushCursorAndCallback(const u8 *BS_ptr);
 u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn);
 void ClearFuryCutterDestinyBondGrudge(u8 battlerId);
 void HandleAction_RunBattleScript(void);
@@ -192,5 +201,6 @@ bool32 CanBeParalyzed(u8 battlerId);
 bool32 CanBeFrozen(u8 battlerId);
 bool32 CanBeConfused(u8 battlerId);
 bool32 IsBattlerTerrainAffected(u8 battlerId, u32 terrainFlag);
+u32 GetMonFriendshipScore(struct Pokemon *pokemon);
 
 #endif // GUARD_BATTLE_UTIL_H

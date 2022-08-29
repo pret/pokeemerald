@@ -2978,8 +2978,9 @@ static const u8 sEerieSpellDescription[] = _(
     "Attacks with psychic power.\n"
     "Foe's last move has 3 PP cut.");
 
-static const u8 sNotDoneYetDescription[] = _(
-    "Not done yet.");
+const u8 gNotDoneYetDescription[] = _(
+    "This move can't be used. Its\n"
+    "effect is in development.");
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =

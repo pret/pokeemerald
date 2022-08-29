@@ -24,6 +24,7 @@
 #include "trig.h"
 #include "window.h"
 #include "constants/songs.h"
+#include "constants/battle_move_effects.h"
 #include "gba/io_reg.h"
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
@@ -223,14 +224,14 @@ u8 MailboxMenu_AddWindow(u8 windowIdx)
         {
             sMailboxWindowIds[windowIdx] = AddWindow(&sWindowTemplates_MailboxMenu[windowIdx]);
         }
-        SetStandardWindowBorderStyle(sMailboxWindowIds[windowIdx], 0);
+        SetStandardWindowBorderStyle(sMailboxWindowIds[windowIdx], FALSE);
     }
     return sMailboxWindowIds[windowIdx];
 }
 
 void MailboxMenu_RemoveWindow(u8 windowIdx)
 {
-    ClearStdWindowAndFrameToTransparent(sMailboxWindowIds[windowIdx], 0);
+    ClearStdWindowAndFrameToTransparent(sMailboxWindowIds[windowIdx], FALSE);
     ClearWindowTilemap(sMailboxWindowIds[windowIdx]);
     RemoveWindow(sMailboxWindowIds[windowIdx]);
     sMailboxWindowIds[windowIdx] = WINDOW_NONE;
@@ -716,17 +717,17 @@ void InitMoveRelearnerWindows(bool8 useContextWindow)
     if (!useContextWindow)
     {
         PutWindowTilemap(0);
-        DrawStdFrameWithCustomTileAndPalette(0, 0, 0x1, 0xE);
+        DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x1, 0xE);
     }
     else
     {
         PutWindowTilemap(1);
-        DrawStdFrameWithCustomTileAndPalette(1, 0, 1, 0xE);
+        DrawStdFrameWithCustomTileAndPalette(1, FALSE, 1, 0xE);
     }
     PutWindowTilemap(2);
     PutWindowTilemap(3);
-    DrawStdFrameWithCustomTileAndPalette(2, 0, 1, 0xE);
-    DrawStdFrameWithCustomTileAndPalette(3, 0, 1, 0xE);
+    DrawStdFrameWithCustomTileAndPalette(2, FALSE, 1, 0xE);
+    DrawStdFrameWithCustomTileAndPalette(3, FALSE, 1, 0xE);
     MoveRelearnerDummy();
     ScheduleBgCopyTilemapToVram(1);
 }
@@ -807,7 +808,11 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     }
     AddTextPrinterParameterized(0, FONT_NORMAL, str, 0x6A, 0x29, TEXT_SKIP_DRAW, NULL);
 
-    str = gMoveDescriptionPointers[chosenMove - 1];
+    if (move->effect != EFFECT_PLACEHOLDER)
+        str = gMoveDescriptionPointers[chosenMove - 1];
+    else
+        str = gNotDoneYetDescription;
+
     AddTextPrinterParameterized(0, FONT_NARROW, str, 0, 0x41, 0, NULL);
 }
 
@@ -1075,7 +1080,7 @@ void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u16 boxId, u16 monId, 
         u32 trainerId = GetBoxOrPartyMonData(boxId, monId, MON_DATA_OT_ID, NULL);
         u32 personality = GetBoxOrPartyMonData(boxId, monId, MON_DATA_PERSONALITY, NULL);
 
-        LoadSpecialPokePic(&gMonFrontPicTable[species], tilesDst, species, personality, TRUE);
+        LoadSpecialPokePic(tilesDst, species, personality, TRUE);
         LZ77UnCompWram(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), palDst);
     }
 }
@@ -1124,7 +1129,7 @@ static const struct OamData sOam_ConditionMonPic =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -1141,7 +1146,7 @@ static const struct OamData sOam_ConditionSelectionIcon =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,

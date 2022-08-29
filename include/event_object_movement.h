@@ -63,7 +63,7 @@ struct PairedPalettes
 
 struct LockedAnimObjectEvents
 {
-    u8 objectEventIds[OBJECT_EVENTS_COUNT];
+    u8 localIds[OBJECT_EVENTS_COUNT];
     u8 count;
 };
 

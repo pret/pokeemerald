@@ -235,7 +235,7 @@ void STWI_send_SystemConfigREQ(u16 availSlotFlag, u8 maxMFrame, u8 mcTimer)
         packetBytes += sizeof(u32);
         *packetBytes++ = mcTimer;
         *packetBytes++ = maxMFrame;
-        *(u16*)packetBytes = availSlotFlag;
+        *(u16 *)packetBytes = availSlotFlag;
         STWI_start_Command();
     }
 }

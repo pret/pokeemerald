@@ -63,7 +63,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         gBattle_BG3_Y = 0;
         break;
     case 1:
-        CpuFastFill(0, (void*)(VRAM), VRAM_SIZE);
+        CpuFastFill(0, (void *)(VRAM), VRAM_SIZE);
         break;
     case 2:
         LoadBattleTextboxAndBackground();

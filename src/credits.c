@@ -9,6 +9,7 @@
 #include "menu.h"
 #include "international_string_util.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 #include "gpu_regs.h"
 #include "m4a.h"
 #include "constants/rgb.h"
@@ -286,7 +287,7 @@ static const struct OamData sOamData_MonBg =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,

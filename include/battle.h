@@ -178,6 +178,7 @@ struct SpecialStatus
     u8 dancerOriginalTarget:3;
     u8 announceNeutralizingGas:1;   // See Cmd_switchineffects
     u8 neutralizingGasRemoved:1;    // See VARIOUS_TRY_END_NEUTRALIZING_GAS
+    u8 affectionEndured:1;
     s32 dmg;
     s32 physicalDmg;
     s32 specialDmg;
@@ -330,7 +331,6 @@ struct BattleResults
     u8 numHealingItemsUsed;   // 0x3
     u8 numRevivesUsed;        // 0x4
     u8 playerMonWasDamaged:1; // 0x5
-    u8 usedMasterBall:1;      // 0x5
     u8 caughtMonBall:4;       // 0x5
     u8 shinyWildMon:1;        // 0x5
     u16 playerMon1Species;    // 0x6
@@ -345,7 +345,7 @@ struct BattleResults
     u16 caughtMonSpecies;     // 0x28
     u8 caughtMonNick[POKEMON_NAME_LENGTH + 1];     // 0x2A
     u8 filler35;           // 0x35
-    u8 catchAttempts[POKEBALL_COUNT - 1];     // 0x36 Doesn't include Master ball
+    u8 catchAttempts[POKEBALL_COUNT];     // 0x36
 };
 
 struct BattleTv_Side
@@ -797,10 +797,10 @@ struct BattleSpriteData
 
 struct MonSpritesGfx
 {
-    void* firstDecompressed; // ptr to the decompressed sprite of the first pokemon
+    void *firstDecompressed; // ptr to the decompressed sprite of the first pokemon
     union {
-        void* ptr[MAX_BATTLERS_COUNT];
-        u8* byte[MAX_BATTLERS_COUNT];
+        void *ptr[MAX_BATTLERS_COUNT];
+        u8 *byte[MAX_BATTLERS_COUNT];
     } sprites;
     struct SpriteTemplate templates[MAX_BATTLERS_COUNT];
     struct SpriteFrameImage frameImages[MAX_BATTLERS_COUNT][4];

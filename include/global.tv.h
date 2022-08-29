@@ -81,7 +81,8 @@ typedef union // size = 0x24
         /*0x01*/ bool8 active;
         /*0x02*/ u16 species;
         /*0x04*/ u8 pokemonName[POKEMON_NAME_LENGTH + 1];
-        /*0x0F*/ u8 trainerName[11];
+        /*0x0F*/ u8 trainerName[PLAYER_NAME_LENGTH + 1];
+        /*0x17*/ u8 unused[3];
         /*0x1A*/ u8 random;
         /*0x1B*/ u8 random2;
         /*0x1C*/ u16 randomSpecies;

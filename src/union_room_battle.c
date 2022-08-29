@@ -73,7 +73,7 @@ static void CB2_SetUpPartiesAndStartBattle(void)
     SetMainCallback2(CB2_InitBattle);
 }
 
-static void AddTextPrinterForUnionRoomBattle(u8 windowId, const u8 * str, u8 x, u8 y, s32 speed)
+static void AddTextPrinterForUnionRoomBattle(u8 windowId, const u8 *str, u8 x, u8 y, s32 speed)
 {
     s32 letterSpacing = 0;
     s32 lineSpacing = 1;
@@ -81,7 +81,7 @@ static void AddTextPrinterForUnionRoomBattle(u8 windowId, const u8 * str, u8 x, 
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, letterSpacing, lineSpacing, sTextColors, speed, str);
 }
 
-static bool32 PrintUnionRoomBattleMessage(s16 * state, const u8 * str, s32 speed)
+static bool32 PrintUnionRoomBattleMessage(s16 * state, const u8 *str, s32 speed)
 {
     switch (*state)
     {
