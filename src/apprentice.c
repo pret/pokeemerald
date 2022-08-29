@@ -338,7 +338,7 @@ static u16 GetRandomAlternateMove(u8 monId)
     const struct LevelUpMove *learnset;
     bool32 needTMs = FALSE;
     u16 moveId = MOVE_NONE;
-    bool8 shouldUseMove;
+    bool32 shouldUseMove;
     u8 level;
 
     id = APPRENTICE_SPECIES_ID(monId);
