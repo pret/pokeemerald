@@ -4518,7 +4518,7 @@ s8 GetMovePriority(u32 battlerId, u16 move)
     }
 
     if (gProtectStructs[battlerId].quash)
-		priority = -8;
+        priority = -8;
 
     return priority;
 }
