@@ -46,6 +46,7 @@
 #include "task.h"
 #include "pokemon_summary_screen.h"
 #include "constants/abilities.h"
+#include "constants/battle_frontier.h"
 #include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/map_groups.h"
@@ -99,6 +100,7 @@ enum { // Flags
     DEBUG_FLAG_MENU_ITEM_POKENAVONOFF,
     DEBUG_FLAG_MENU_ITEM_FLYANYWHERE,
     DEBUG_FLAG_MENU_ITEM_GETALLBADGES,
+    DEBUG_FLAG_MENU_ITEM_FRONTIER_PASS,
     DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF,
     DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF,
     DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF,
@@ -115,6 +117,7 @@ enum { // Give
     DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX,
     DEBUG_GIVE_MENU_ITEM_MAX_MONEY,
     DEBUG_GIVE_MENU_ITEM_MAX_COINS,
+    DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS,
     DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG,
     DEBUG_GIVE_MENU_ITEM_FILL_PC,
     DEBUG_GIVE_MENU_ITEM_CHEAT,
@@ -127,7 +130,7 @@ enum { //Sound
 
 // *******************************
 // Constants
-#define DEBUG_MAIN_MENU_WIDTH 13
+#define DEBUG_MAIN_MENU_WIDTH 15
 #define DEBUG_MAIN_MENU_HEIGHT 8
 
 #define DEBUG_NUMBER_DISPLAY_WIDTH 10
@@ -220,17 +223,18 @@ static void DebugAction_Util_Trainer_Id(u8);
 static void DebugAction_Flags_Flags(u8 taskId);
 static void DebugAction_Flags_FlagsSelect(u8 taskId);
 
-static void DebugAction_Flags_SetPokedexFlags(u8);
-static void DebugAction_Flags_SwitchDex(u8);
-static void DebugAction_Flags_SwitchNatDex(u8);
-static void DebugAction_Flags_SwitchPokeNav(u8);
-static void DebugAction_Flags_ToggleFlyFlags(u8);
-static void DebugAction_Flags_ToggleBadgeFlags(u8);
-static void DebugAction_Flags_CollisionOnOff(u8);
-static void DebugAction_Flags_EncounterOnOff(u8);
-static void DebugAction_Flags_TrainerSeeOnOff(u8);
-static void DebugAction_Flags_BagUseOnOff(u8);
-static void DebugAction_Flags_CatchingOnOff(u8);
+static void DebugAction_Flags_SetPokedexFlags(u8 taskId);
+static void DebugAction_Flags_SwitchDex(u8 taskId);
+static void DebugAction_Flags_SwitchNatDex(u8 taskId);
+static void DebugAction_Flags_SwitchPokeNav(u8 taskId);
+static void DebugAction_Flags_ToggleFlyFlags(u8 taskId);
+static void DebugAction_Flags_ToggleBadgeFlags(u8 taskId);
+static void DebugAction_Flags_ToggleFrontierPass(u8 taskId);
+static void DebugAction_Flags_CollisionOnOff(u8 taskId);
+static void DebugAction_Flags_EncounterOnOff(u8 taskId);
+static void DebugAction_Flags_TrainerSeeOnOff(u8 taskId);
+static void DebugAction_Flags_BagUseOnOff(u8 taskId);
+static void DebugAction_Flags_CatchingOnOff(u8 taskId);
 
 static void DebugAction_Vars_Vars(u8 taskId);
 static void DebugAction_Vars_Select(u8 taskId);
@@ -252,6 +256,7 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId);
 static void DebugAction_Give_Pokemon_Move(u8 taskId);
 static void DebugAction_Give_MaxMoney(u8 taskId);
 static void DebugAction_Give_MaxCoins(u8 taskId);
+static void DebugAction_Give_MaxBattlePoints(u8 taskId);
 static void DebugAction_Give_DayCareEgg(u8 taskId);
 static void DebugAction_Give_FillPC(u8 taskId);
 static void DebugAction_Give_CHEAT(u8 taskId);
@@ -288,7 +293,7 @@ extern const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1];
 
 // *******************************
 //Maps per map group COPY FROM /include/constants/map_groups.h
- static const u8 MAP_GROUP_COUNT[] = {57, 5, 5, 6, 7, 8, 9, 7, 7, 14, 8, 17, 10, 23, 13, 15, 15, 2, 2, 2, 3, 1, 1, 1, 108, 61, 89, 2, 1, 13, 1, 1, 3, 1, 0};
+static const u8 MAP_GROUP_COUNT[] = {57, 5, 5, 6, 7, 8, 9, 7, 7, 14, 8, 17, 10, 23, 13, 15, 15, 2, 2, 2, 3, 1, 1, 1, 108, 61, 89, 2, 1, 13, 1, 1, 3, 1, 0};
 
 // Text
 // Main Menu
@@ -334,6 +339,7 @@ static const u8 gDebugText_Flags_SwitchNationalDex[] =      _("NatDex ON/OFF");
 static const u8 gDebugText_Flags_SwitchPokeNav[] =          _("PokéNav ON/OFF");
 static const u8 gDebugText_Flags_ToggleFlyFlags[] =         _("Fly Flags ON/OFF");
 static const u8 gDebugText_Flags_ToggleAllBadges[] =        _("All badges ON/OFF");
+static const u8 gDebugText_Flags_ToggleFrontierPass[] =     _("Frontier Pass ON/OFF");
 static const u8 gDebugText_Flags_SwitchCollision[] =        _("Collision ON/OFF");
 static const u8 gDebugText_Flags_SwitchEncounter[] =        _("Encounter ON/OFF");
 static const u8 gDebugText_Flags_SwitchTrainerSee[] =       _("TrainerSee ON/OFF");
@@ -373,6 +379,7 @@ static const u8 gDebugText_PokemonMove_2[] =            _("Move 2: {STR_VAR_3}  
 static const u8 gDebugText_PokemonMove_3[] =            _("Move 3: {STR_VAR_3}                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
 static const u8 gDebugText_Give_MaxMoney[] =            _("Max Money");
 static const u8 gDebugText_Give_MaxCoins[] =            _("Max Coins");
+static const u8 gDebugText_Give_BattlePoints[] =        _("Max Battle Points");
 static const u8 gDebugText_Give_DaycareEgg[] =          _("Daycare Egg");
 static const u8 gDebugText_Give_FillPc[] =              _("Fill Pc");
 static const u8 gDebugText_Give_GiveCHEAT[] =           _("CHEAT Start");
@@ -466,6 +473,7 @@ static const struct ListMenuItem sDebugMenu_Items_Flags[] =
     [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF]     = {gDebugText_Flags_SwitchPokeNav,       DEBUG_FLAG_MENU_ITEM_POKENAVONOFF},
     [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE]      = {gDebugText_Flags_ToggleFlyFlags,      DEBUG_FLAG_MENU_ITEM_FLYANYWHERE},
     [DEBUG_FLAG_MENU_ITEM_GETALLBADGES]     = {gDebugText_Flags_ToggleAllBadges,     DEBUG_FLAG_MENU_ITEM_GETALLBADGES},
+    [DEBUG_FLAG_MENU_ITEM_FRONTIER_PASS]    = {gDebugText_Flags_ToggleFrontierPass,  DEBUG_FLAG_MENU_ITEM_FRONTIER_PASS},
     [DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF]  = {gDebugText_Flags_SwitchCollision,     DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF},
     [DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF]  = {gDebugText_Flags_SwitchEncounter,     DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF},
     [DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF]= {gDebugText_Flags_SwitchTrainerSee,    DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF},
@@ -484,6 +492,7 @@ static const struct ListMenuItem sDebugMenu_Items_Give[] =
     [DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX]  = {gDebugText_Give_GivePokemonComplex,  DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX},
     [DEBUG_GIVE_MENU_ITEM_MAX_MONEY]        = {gDebugText_Give_MaxMoney,            DEBUG_GIVE_MENU_ITEM_MAX_MONEY},
     [DEBUG_GIVE_MENU_ITEM_MAX_COINS]        = {gDebugText_Give_MaxCoins,            DEBUG_GIVE_MENU_ITEM_MAX_COINS},
+    [DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS]= {gDebugText_Give_BattlePoints,        DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS},
     [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]      = {gDebugText_Give_DaycareEgg,          DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG},
     [DEBUG_GIVE_MENU_ITEM_FILL_PC]          = {gDebugText_Give_FillPc,              DEBUG_GIVE_MENU_ITEM_FILL_PC},
     [DEBUG_GIVE_MENU_ITEM_CHEAT]            = {gDebugText_Give_GiveCHEAT,           DEBUG_GIVE_MENU_ITEM_CHEAT},
@@ -543,6 +552,7 @@ static void (*const sDebugMenu_Actions_Flags[])(u8) =
     [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF]     = DebugAction_Flags_SwitchPokeNav,
     [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE]      = DebugAction_Flags_ToggleFlyFlags,
     [DEBUG_FLAG_MENU_ITEM_GETALLBADGES]     = DebugAction_Flags_ToggleBadgeFlags,
+    [DEBUG_FLAG_MENU_ITEM_FRONTIER_PASS]    = DebugAction_Flags_ToggleFrontierPass,
     [DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF]  = DebugAction_Flags_CollisionOnOff,
     [DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF]  = DebugAction_Flags_EncounterOnOff,
     [DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF]= DebugAction_Flags_TrainerSeeOnOff,
@@ -561,6 +571,7 @@ static void (*const sDebugMenu_Actions_Give[])(u8) =
     [DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX]  = DebugAction_Give_PokemonComplex,
     [DEBUG_GIVE_MENU_ITEM_MAX_MONEY]        = DebugAction_Give_MaxMoney,
     [DEBUG_GIVE_MENU_ITEM_MAX_COINS]        = DebugAction_Give_MaxCoins,
+    [DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS]= DebugAction_Give_MaxBattlePoints,
     [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]      = DebugAction_Give_DayCareEgg,
     [DEBUG_GIVE_MENU_ITEM_FILL_PC]          = DebugAction_Give_FillPC,
     [DEBUG_GIVE_MENU_ITEM_CHEAT]            = DebugAction_Give_CHEAT,
@@ -1423,6 +1434,15 @@ static void DebugAction_Flags_ToggleBadgeFlags(u8 taskId)
     FlagToggle(FLAG_BADGE06_GET);
     FlagToggle(FLAG_BADGE07_GET);
     FlagToggle(FLAG_BADGE08_GET);
+}
+static void DebugAction_Flags_ToggleFrontierPass(u8 taskId)
+{
+    // Sound effect
+    if(FlagGet(FLAG_SYS_FRONTIER_PASS))
+        PlaySE(SE_PC_OFF);
+    else
+        PlaySE(SE_PC_LOGIN);
+    FlagToggle(FLAG_SYS_FRONTIER_PASS);
 }
 static void DebugAction_Flags_CollisionOnOff(u8 taskId)
 {
@@ -2649,6 +2669,11 @@ static void DebugAction_Give_MaxMoney(u8 taskId)
 static void DebugAction_Give_MaxCoins(u8 taskId)
 {
     SetCoins(9999);
+}
+
+static void DebugAction_Give_MaxBattlePoints(u8 taskId)
+{
+    gSaveBlock2Ptr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
 }
 
 static void DebugAction_Give_DayCareEgg(u8 taskId)
