@@ -524,8 +524,8 @@ void AnimFlyBallAttack_Step(struct Sprite *sprite)
     }
 
     if (sprite->x + sprite->x2 < -32
-        || sprite->x + sprite->x2 > DISPLAY_WIDTH + 32
-        || sprite->y + sprite->y2 > DISPLAY_HEIGHT)
+     || sprite->x + sprite->x2 > DISPLAY_WIDTH + 32
+     || sprite->y + sprite->y2 > DISPLAY_HEIGHT)
     {
         gSprites[GetAnimBattlerSpriteId(ANIM_ATTACKER)].invisible = sprite->data[5];
         DestroyAnimSprite(sprite);
@@ -1211,8 +1211,8 @@ void AnimSkyAttackBird_Step(struct Sprite *sprite)
     sprite->x = sprite->data[4] >> 4;
     sprite->y = sprite->data[5] >> 4;
 
-    if (sprite->x > 285 || sprite->x < -45
-        || sprite->y > 157 || sprite->y < -45)
+    if (sprite->x > DISPLAY_WIDTH + 45 || sprite->x < -45
+     || sprite->y > 157 || sprite->y < -45)
         DestroySpriteAndMatrix(sprite);
 }
 
