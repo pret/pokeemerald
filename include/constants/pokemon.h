@@ -348,7 +348,8 @@
 #define FLAG_ULTRA_BEAST        (1 << 2)
 #define FLAG_ALOLAN_FORM        (1 << 3)
 #define FLAG_GALARIAN_FORM      (1 << 4)
-#define FLAG_GENDER_DIFFERENCE  (1 << 5)
+#define FLAG_HISUIAN_FORM       (1 << 5)
+#define FLAG_GENDER_DIFFERENCE  (1 << 6)
 
 #define LEGENDARY_PERFECT_IV_COUNT 3
 
