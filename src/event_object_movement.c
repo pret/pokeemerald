@@ -2083,7 +2083,7 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
   }
   // Match scripted conditional messages
   // With 50% chance, try to match scripted conditional messages
-  for (i = (Random() & 1) ? 28 : 0, j = 1; i < 28; i++) {
+  for (i = (Random() & 1) ? COND_MSG_COUNT : 0, j = 1; i < COND_MSG_COUNT; i++) {
       const struct FollowerMsgInfoExtended *info = &gFollowerConditionalMessages[i];
       if (info->stFlags == 1 && species != info->st.species)
         continue;

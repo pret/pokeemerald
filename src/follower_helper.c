@@ -66,204 +66,232 @@ static const u8 sCondMsg41[] = _("{STR_VAR_1} is touching the ice.");
 static const u8* const sIceTexts[] = {sCondMsg26, sCondMsg40, sCondMsg41, NULL};
 static const u8 sCondMsg42[] = _("{STR_VAR_1}'s burn looks painful!");
 
-// Note that the size of this array must also be correct in event_object_movement
-const struct FollowerMsgInfoExtended gFollowerConditionalMessages[28] = {
+// See the struct definition in follower_helper.h for more info
+const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT] = {
+    [COND_MSG_CELEBI] =
     {
     .text = (u8*)sCelebiTexts,
     .textSpread = 1,
     .script = EventScript_FollowerDance,
     .st = {.species = SPECIES_CELEBI},
-    .stFlags = 1, // MATCH_SPECIES
+    .stFlags = ST_FLAGS_SPECIES,
     .emotion = FOLLOWER_EMOTION_NEUTRAL,
     },
+    [COND_MSG_FIRE] =
     {
     .text = (u8*)sFireTexts,
     .st = {.types = {.type1 = TYPE_FIRE, .type2 = TYPE_FIRE}},
-    .stFlags = 2, // MATCH_TYPES
+    .stFlags = ST_FLAGS_TYPE,
     .emotion = FOLLOWER_EMOTION_NEUTRAL,
     .textSpread = 1,
     },
+    [COND_MSG_EVER_GRANDE] =
     {
     .text = sCondMsg06,
     .script = EventScript_FollowerFaceUp,
     .mm = {.map = {.mapNum = MAP_NUM(EVER_GRANDE_CITY), .mapGroup = MAP_GROUP(EVER_GRANDE_CITY)}},
-    .mmFlags = 2, // MATCH_MAP
+    .mmFlags = MM_FLAGS_MAP,
     .emotion = FOLLOWER_EMOTION_HAPPY,
     },
+    [COND_MSG_ROUTE_112] =
     {
     .text = sCondMsg07,
     .mm = {.map = {.mapNum = MAP_NUM(ROUTE112), .mapGroup = MAP_GROUP(ROUTE112)}},
-    .mmFlags = 2, // MATCH_MAP
+    .mmFlags = MM_FLAGS_MAP,
     .emotion = FOLLOWER_EMOTION_HAPPY,
     },
+    [COND_MSG_DAY_CARE] =
     {
     .text = sCondMsg08,
     .script = EventScript_FollowerNostalgia,
     .mm = {.map = {.mapNum = MAP_NUM(ROUTE117_POKEMON_DAY_CARE), .mapGroup = MAP_GROUP(ROUTE117_POKEMON_DAY_CARE)}},
-    .mmFlags = 2, // MATCH_MAP
+    .mmFlags = MM_FLAGS_MAP,
     .emotion = FOLLOWER_EMOTION_NEUTRAL,
     },
+    [COND_MSG_MART] =
     {
     .text = (u8*)sShopTexts,
     .textSpread = 1,
     .script = EventScript_FollowerLookAround,
     .wt = {.song = MUS_POKE_MART},
-    .wtFlags = 2, // MATCH_SONG
+    .wtFlags = WT_FLAGS_MUSIC,
     .emotion = FOLLOWER_EMOTION_NEUTRAL,
     },
+    [COND_MSG_VICTORY_ROAD] =
     {
     .text = sCondMsg11,
     .wt = {.song = MUS_VICTORY_ROAD},
-    .wtFlags = 2, // MATCH_SONG
+    .wtFlags = WT_FLAGS_MUSIC,
     .emotion = FOLLOWER_EMOTION_PENSIVE,
     },
+    [COND_MSG_BIKE_SHOP] =
     {
     .text = sCondMsg12,
     .mm = {.map = {.mapNum = MAP_NUM(MAUVILLE_CITY_BIKE_SHOP), .mapGroup = MAP_GROUP(MAUVILLE_CITY_BIKE_SHOP)}},
-    .mmFlags = 2, // MATCH_MAP
+    .mmFlags = MM_FLAGS_MAP,
     .emotion = FOLLOWER_EMOTION_PENSIVE,
     },
+    [COND_MSG_MACHINES] =
     {
     .text = (u8*)sMachineTexts,
     .mm = {.map = {.mapNum = MAP_NUM(NEW_MAUVILLE_INSIDE), .mapGroup = MAP_GROUP(NEW_MAUVILLE_INSIDE)}},
-    .mmFlags = 2, // MAP
+    .mmFlags = MM_FLAGS_MAP,
     .emotion = FOLLOWER_EMOTION_MUSIC,
     .textSpread = 1,
     },
+    [COND_MSG_SAILING] =
     {
     .text = (u8*)sBoatTexts,
     .script = EventScript_FollowerLookAround,
     .wt = {.song = MUS_SAILING},
-    .wtFlags = 2, // MATCH_SONG
+    .wtFlags = WT_FLAGS_MUSIC,
     .emotion = FOLLOWER_EMOTION_MUSIC,
     .textSpread = 1,
     },
+    [COND_MSG_PUDDLE] =
     {
     .text = sCondMsg18,
     .script = EventScript_FollowerHopping,
     .mm = {.mb = {.behavior1 = MB_SHALLOW_WATER, .behavior2 = MB_PUDDLE}},
-    .mmFlags = 3, // MB
+    .mmFlags = MM_FLAGS_MB,
     .emotion = FOLLOWER_EMOTION_MUSIC,
     },
+    [COND_MSG_SAND] =
     {
     .text = sCondMsg19,
     .mm = {.mb = {.behavior1 = MB_SAND, .behavior2 = MB_DEEP_SAND}},
-    .mmFlags = 3, // MB
+    .mmFlags = MM_FLAGS_MB,
     .emotion = FOLLOWER_EMOTION_MUSIC,
     },
+    [COND_MSG_GRASS] =
     {
     .text = sCondMsg20,
     .mm = {.mb = {.behavior1 = MB_TALL_GRASS, .behavior2 = MB_LONG_GRASS}},
-    .mmFlags = 3, // MB
+    .mmFlags = MM_FLAGS_MB,
     .emotion = FOLLOWER_EMOTION_MUSIC,
     },
+    [COND_MSG_FOOTPRINTS] =
     {
     .text = sCondMsg21,
     .mm = {.mb = {.behavior1 = MB_SAND, .behavior2 = MB_FOOTPRINTS}},
-    .mmFlags = 3, // MB
+    .mmFlags = MM_FLAGS_MB,
     .emotion = FOLLOWER_EMOTION_MUSIC,
     },
+    [COND_MSG_ELEVATOR] =
     {
     .text = (u8*)sElevatorTexts,
     .textSpread = 1,
     .mm = {.map = {.mapNum = MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_ELEVATOR), .mapGroup = MAP_GROUP(LILYCOVE_CITY_DEPARTMENT_STORE_ELEVATOR)}},
-    .mmFlags = 2, // MAP
+    .mmFlags = MM_FLAGS_MAP,
     .emotion = FOLLOWER_EMOTION_SURPRISE,
     },
+    [COND_MSG_ICE_ROOM] =
     {
     .text = (u8*)sColdTexts,
     .textSpread = 1,
     .mm = {.map = {.mapNum = MAP_NUM(SHOAL_CAVE_LOW_TIDE_ICE_ROOM), .mapGroup = MAP_GROUP(SHOAL_CAVE_LOW_TIDE_ICE_ROOM)}},
-    .mmFlags = 2, // MAP
+    .mmFlags = MM_FLAGS_MAP,
     .emotion = FOLLOWER_EMOTION_SURPRISE,
     },
+    [COND_MSG_ROUTE_117] =
     {
     .text = sCondMsg27,
     .mm = {.map = {.mapNum = MAP_NUM(ROUTE117), .mapGroup = MAP_GROUP(ROUTE117)}},
-    .mmFlags = 2, // MAP
+    .mmFlags = MM_FLAGS_MAP,
     .emotion = FOLLOWER_EMOTION_SURPRISE,
     },
+    [COND_MSG_DRAGON_GROWL] =
     {
     .text = sCondMsg28,
     .st = {.types = {.type1 = TYPE_DRAGON, .type2 = TYPE_DRAGON}},
-    .stFlags = 2, // MATCH_TYPES
+    .stFlags = ST_FLAGS_TYPE,
     .mm = {.mapSec = {.mapSec = MAPSEC_SKY_PILLAR}},
-    .mmFlags = 1, // MAP_SEC
+    .mmFlags = MM_FLAGS_MAPSEC,
     .emotion = FOLLOWER_EMOTION_UPSET,
     },
+    [COND_MSG_FEAR] =
     {
     .text = (u8*)sFearTexts,
     .textSpread = 1,
     .st = {.types = {.type1 = TYPE_GHOST, .type2 = TYPE_NOT_TYPE1}},
-    .stFlags = 2, // TYPE
+    .stFlags = ST_FLAGS_TYPE,
     .mm = {.mapSec = {.mapSec = MAPSEC_MT_PYRE}},
-    .mmFlags = 1, // MAP_SEC
+    .mmFlags = MM_FLAGS_MAPSEC,
     .wt = {.song = MUS_MT_PYRE},
-    .wtFlags = 2, // SONG
+    .wtFlags = WT_FLAGS_MUSIC,
     .emotion = FOLLOWER_EMOTION_UPSET,
     },
+    [COND_MSG_FIRE_RAIN] =
     {
     .text = sCondMsg31,
     .st = {.types = {.type1 = TYPE_FIRE, .type2 = TYPE_FIRE}},
-    .stFlags = 2, // TYPE
+    .stFlags = ST_FLAGS_TYPE,
     .wt = {.weather = {.weather1 = WEATHER_RAIN, .weather2 = WEATHER_RAIN_THUNDERSTORM}},
-    .wtFlags = 1, // WEATHER
+    .wtFlags = WT_FLAGS_WEATHER,
     .emotion = FOLLOWER_EMOTION_UPSET,
     },
+    [COND_MSG_FROZEN] =
     {
     .text = sCondMsg32,
     .st = {.status = STATUS1_FREEZE},
-    .stFlags = 3, // STATUS
+    .stFlags = ST_FLAGS_STATUS,
     .emotion = FOLLOWER_EMOTION_UPSET,
     },
+    [COND_MSG_SEASIDE] =
     {
     .text = (u8*)sSeaTexts,
     .textSpread = 1,
     .script = EventScript_FollowerFaceResult,
     .near = {.mb = {.behavior = MB_OCEAN_WATER, .distance = 5}},
-    .nearFlags = 1, // mb
+    .nearFlags = NEAR_FLAGS_MB,
     .emotion = FOLLOWER_EMOTION_MUSIC,
     },
+    [COND_MSG_WATERFALL] =
     {
     .text = sCondMsg36,
     .script = EventScript_FollowerFaceResult,
     .near = {.mb = {.behavior = MB_WATERFALL, .distance = 5}},
-    .nearFlags = 1, // mb
+    .nearFlags = NEAR_FLAGS_MB,
     .emotion = FOLLOWER_EMOTION_MUSIC,
     },
+    [COND_MSG_RAIN] =
     {
     .text = sCondMsg37,
     .st = {.types = {.type1 = TYPE_FIRE, .type2 = TYPE_NOT_TYPE1}},
-    .stFlags = 2, // TYPE
+    .stFlags = ST_FLAGS_TYPE,
     .wt = {.weather = {.weather1 = WEATHER_RAIN, .weather2 = WEATHER_RAIN_THUNDERSTORM}},
-    .wtFlags = 1, // WEATHER
+    .wtFlags = WT_FLAGS_WEATHER,
     .emotion = FOLLOWER_EMOTION_MUSIC,
     },
+    [COND_MSG_REFLECTION] =
     {
     .text = sCondMsg38,
     .script = EventScript_FollowerFaceResult,
     .near = {.mb = {.behavior = MB_POND_WATER, .distance = 1}},
-    .nearFlags = 1, // mb
+    .nearFlags = NEAR_FLAGS_MB,
     .emotion = FOLLOWER_EMOTION_PENSIVE,
     },
+    [COND_MSG_LEAVES] =
     {
     .text = sCondMsg39,
     .mm = {.mapSec = {.mapSec = MAPSEC_PETALBURG_WOODS}},
-    .mmFlags = 1, // MAP_SEC
+    .mmFlags = MM_FLAGS_MAPSEC,
     .emotion = FOLLOWER_EMOTION_PENSIVE,
     },
+    [COND_MSG_ICE] =
     {
     .text = (u8*)sIceTexts,
     .textSpread = 1,
     .script = EventScript_FollowerFaceResult,
     .near = {.mb = {.behavior = MB_ICE, .distance = 1}},
-    .nearFlags = 1, // mb
+    .nearFlags = NEAR_FLAGS_MB,
     .emotion = FOLLOWER_EMOTION_PENSIVE,
     },
+    [COND_MSG_BURN] =
     {
     .text = sCondMsg42,
     .st = {.status STATUS1_BURN},
-    .stFlags 3, // STATUS
+    .stFlags = ST_FLAGS_STATUS,
     .emotion = FOLLOWER_EMOTION_SAD,
     },
 };

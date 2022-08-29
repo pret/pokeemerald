@@ -16,9 +16,14 @@ enum {
   FOLLOWER_EMOTION_LENGTH,
 };
 
+// This struct is optimized for size
+// Each "section" can be used to combine multiple conditions,
+// i.e, species and map
+// Just set the flags accordingly and use the right union member
 struct __attribute__((packed)) FollowerMsgInfoExtended {
     const u8 *text;
     const u8 *script;
+
     union __attribute__((packed)) {
         u16 species:10;
         struct __attribute__((packed)) {
@@ -55,7 +60,8 @@ struct __attribute__((packed)) FollowerMsgInfoExtended {
     } wt;
     u16 wtFlags:2; // 1 = weather matching, 2 = song, 3 = time
     u16 weight:3;
-    u16 textSpread:1; // if set, `text` is an array of texts instead
+    // if set, `text` is treated as an array of up to 4 texts instead
+    u16 textSpread:1;
 
     union __attribute__((packed)) {
         struct __attribute__((packed)) {
@@ -63,9 +69,61 @@ struct __attribute__((packed)) FollowerMsgInfoExtended {
             u16 distance:6;
         } mb;
     } near;
-    u16 nearFlags:2; // 1 = mb within '+' shape distance away
+    u16 nearFlags:2; // 1 = mb within '+'-shaped distance away
 };
 
-extern const struct FollowerMsgInfoExtended gFollowerConditionalMessages[];
+enum {
+    ST_FLAGS_SPECIES = 1,
+    ST_FLAGS_TYPE,
+    ST_FLAGS_STATUS,
+};
+
+enum {
+    MM_FLAGS_MAPSEC = 1,
+    MM_FLAGS_MAP,
+    MM_FLAGS_MB, // (m)etatile (b)ehavior
+};
+
+enum {
+    WT_FLAGS_WEATHER = 1,
+    WT_FLAGS_MUSIC,
+    WT_FLAGS_TIME,
+};
+
+#define NEAR_FLAGS_MB 1
+
+enum {
+    COND_MSG_CELEBI,
+    COND_MSG_FIRE,
+    COND_MSG_EVER_GRANDE,
+    COND_MSG_ROUTE_112,
+    COND_MSG_DAY_CARE,
+    COND_MSG_MART,
+    COND_MSG_VICTORY_ROAD,
+    COND_MSG_BIKE_SHOP,
+    COND_MSG_MACHINES,
+    COND_MSG_SAILING,
+    COND_MSG_PUDDLE,
+    COND_MSG_SAND,
+    COND_MSG_GRASS,
+    COND_MSG_FOOTPRINTS,
+    COND_MSG_ELEVATOR,
+    COND_MSG_ICE_ROOM,
+    COND_MSG_ROUTE_117,
+    COND_MSG_DRAGON_GROWL,
+    COND_MSG_FEAR,
+    COND_MSG_FIRE_RAIN,
+    COND_MSG_FROZEN,
+    COND_MSG_SEASIDE,
+    COND_MSG_WATERFALL,
+    COND_MSG_RAIN,
+    COND_MSG_REFLECTION,
+    COND_MSG_LEAVES,
+    COND_MSG_ICE,
+    COND_MSG_BURN,
+    COND_MSG_COUNT,
+};
+
+extern const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT];
 
 #endif //GUARD_FOLLOWER_HELPER_H
