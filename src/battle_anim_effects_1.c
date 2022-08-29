@@ -71,7 +71,7 @@ static void AnimProtect_Step(struct Sprite *);
 static void AnimMilkBottle(struct Sprite *);
 static void AnimMilkBottle_Step1(struct Sprite *);
 static void AnimMilkBottle_Step2(struct Sprite *, int, int);
-static void AnimSparkingStars(struct Sprite *);
+static void AnimSparklingStars(struct Sprite *);
 static void AnimBubbleBurst(struct Sprite *);
 static void AnimBubbleBurst_Step(struct Sprite *);
 static void AnimSleepLetterZ(struct Sprite *);
@@ -1696,7 +1696,7 @@ const struct SpriteTemplate gSparklingStarsSpriteTemplate =
     .anims = gGrantingStarsAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimSparkingStars,
+    .callback = AnimSparklingStars,
 };
 
 static const union AnimCmd sAnim_BubbleBurst[] =
@@ -4290,14 +4290,14 @@ static void AnimItemSteal_Step3(struct Sprite *sprite)
 
     sprite->y2 = Sin(sprite->data[0] + 0x80, 30 - sprite->data[1] * 8);
     if (sprite->y2 == 0)
-        PlaySE12WithPanning(SE_M_BUBBLE2, BattleAnimAdjustPanning(63));
+        PlaySE12WithPanning(SE_M_BUBBLE2, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
 
     if (moveAlongLinearPath(sprite))
     {
         sprite->y2 = 0;
         sprite->data[0] = 0;
         sprite->callback = AnimItemSteal_Step2;
-        PlaySE12WithPanning(SE_M_BUBBLE2, BattleAnimAdjustPanning(-64));
+        PlaySE12WithPanning(SE_M_BUBBLE2, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER));
     }
 }
 
@@ -5243,7 +5243,7 @@ void AnimGrantingStars(struct Sprite *sprite)
     sprite->callback = TranslateSpriteLinearFixedPoint;
 }
 
-static void AnimSparkingStars(struct Sprite *sprite)
+static void AnimSparklingStars(struct Sprite *sprite)
 {
     u8 battler;
     if (!gBattleAnimArgs[2])
@@ -5370,7 +5370,7 @@ static void AnimLockOnTarget_Step1(struct Sprite *sprite)
         sprite->callback = StartAnimLinearTranslation;
         StoreSpriteCallbackInData6(sprite, AnimLockOnTarget_Step2);
         sprite->data[5] += 0x100;
-        PlaySE12WithPanning(SE_M_LOCK_ON, BattleAnimAdjustPanning(63));
+        PlaySE12WithPanning(SE_M_LOCK_ON, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
         break;
     }
 
@@ -5456,7 +5456,7 @@ static void AnimLockOnTarget_Step4(struct Sprite *sprite)
         sprite->data[2]++;
         pal = sprite->oam.paletteNum;
         LoadPalette(&gPlttBufferUnfaded[0x108 + pal * 16], pal * 16 | 0x101, 4);
-        PlaySE12WithPanning(SE_M_LEER, BattleAnimAdjustPanning(63));
+        PlaySE12WithPanning(SE_M_LEER, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
     }
     else if (sprite->data[1] == 0)
     {
@@ -5918,7 +5918,7 @@ static void AnimSharpenSphere(struct Sprite *sprite)
     sprite->data[2] = 0;
     sprite->data[3] = 0;
     sprite->data[4] = 0;
-    sprite->data[5] = BattleAnimAdjustPanning(-64);
+    sprite->data[5] = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
     sprite->callback = AnimSharpenSphere_Step;
 }
 

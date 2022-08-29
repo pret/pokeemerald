@@ -248,7 +248,7 @@ static void HandleInputChooseAction(void)
     {
         PlaySE(SE_SELECT);
         TryHideLastUsedBall();
-        
+
         switch (gActionSelectionCursor[gActiveBattler])
         {
         case 0: // Top left
@@ -614,17 +614,17 @@ static void HandleInputChooseMove(void)
         {
             moveTarget = GetBattlerMoveTargetType(gActiveBattler, moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]);
         }
-        
+
         if (gBattleStruct->zmove.viewing)
         {
             u16 chosenMove = moveInfo->moves[gMoveSelectionCursor[gActiveBattler]];
-            
+
             QueueZMove(gActiveBattler, chosenMove);
             gBattleStruct->zmove.viewing = FALSE;
             if (gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].split != SPLIT_STATUS)
                 moveTarget = MOVE_TARGET_SELECTED;  //damaging z moves always have selected target
         }
-        
+
         if (moveTarget & MOVE_TARGET_USER)
             gMultiUsePlayerCursor = gActiveBattler;
         else
@@ -660,7 +660,7 @@ static void HandleInputChooseMove(void)
                     u32 i = 0;
                     for (i = 0; i < gBattlersCount; i++)
                         TryShowAsTarget(i);
-                    
+
                     canSelectTarget = 3;
                 }
                 else if (moveTarget & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY))
@@ -673,7 +673,7 @@ static void HandleInputChooseMove(void)
                 }
             }
         }
-        
+
         switch (canSelectTarget)
         {
         case 0:
@@ -1346,7 +1346,7 @@ static void CompleteOnHealthbarDone(void)
 
     if (hpValue != -1)
     {
-        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], hpValue, HP_CURRENT);
+        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], HP_CURRENT, hpValue, gBattleMons[gActiveBattler].maxHP);
     }
     else
     {
@@ -2858,7 +2858,7 @@ static void PlayerHandleChooseMove(void)
     else
     {
         struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[gActiveBattler][4]);
-        
+
         InitMoveSelectionsVarsAndStrings();
         gBattleStruct->mega.playerSelect = FALSE;
         if (!IsMegaTriggerSpriteActive())
@@ -2867,7 +2867,7 @@ static void PlayerHandleChooseMove(void)
             CreateMegaTriggerSprite(gActiveBattler, 0);
         if (!IsZMoveTriggerSpriteActive())
             gBattleStruct->zmove.triggerSpriteId = 0xFF;
-        
+
         GetUsableZMoves(gActiveBattler, moveInfo->moves);
         gBattleStruct->zmove.viable = IsZMoveUsable(gActiveBattler, gMoveSelectionCursor[gActiveBattler]);
         CreateZMoveTriggerSprite(gActiveBattler, gBattleStruct->zmove.viable);
@@ -2952,7 +2952,7 @@ static void PlayerHandleHealthBarUpdate(void)
         u32 maxHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
 
         SetBattleBarStruct(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, 0, hpVal);
-        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], 0, HP_CURRENT);
+        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], HP_CURRENT, 0, maxHP);
     }
 
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;

@@ -23,10 +23,6 @@ struct MonIconSpriteTemplate
 
 static u8 CreateMonIconSprite(struct MonIconSpriteTemplate *, s16, s16, u8);
 static void FreeAndDestroyMonIconSprite_(struct Sprite *sprite);
-#if P_ENABLE_DEBUG == TRUE
-static const u8 *GetMonIconPtrCustom(u16 species, u32 personality, bool8 isFemale);
-static const u8 *GetMonIconTilesCustom(u16 species, bool8 isFemale);
-#endif
 
 const u8 *const gMonIconTable[] =
 {
@@ -2652,7 +2648,7 @@ u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u
 
     if (species > NUM_SPECIES)
         iconTemplate.paletteTag = POKE_ICON_BASE_PAL_TAG;
-    else if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+    else if (ShouldShowFemaleDifferences(species, personality))
         iconTemplate.paletteTag = POKE_ICON_BASE_PAL_TAG + gMonIconPaletteIndicesFemale[species];
 
     spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);
@@ -2662,32 +2658,6 @@ u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u
     return spriteId;
 }
 
-#if P_ENABLE_DEBUG == TRUE
-u8 CreateMonIconCustom(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, u32 personality, bool8 isFemale, bool8 isShiny)
-{
-    u8 spriteId;
-    struct MonIconSpriteTemplate iconTemplate =
-    {
-        .oam = &sMonIconOamData,
-        .image = GetMonIconPtrCustom(species, personality, isFemale),
-        .anims = sMonIconAnims,
-        .affineAnims = sMonIconAffineAnims,
-        .callback = callback,
-        .paletteTag = POKE_ICON_BASE_PAL_TAG + gMonIconPaletteIndices[species],
-    };
-
-    if (species > NUM_SPECIES)
-        iconTemplate.paletteTag = POKE_ICON_BASE_PAL_TAG;
-    else if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && isFemale)
-        iconTemplate.paletteTag = POKE_ICON_BASE_PAL_TAG + gMonIconPaletteIndicesFemale[species];
-
-    spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);
-
-    UpdateMonIconFrame(&gSprites[spriteId]);
-
-    return spriteId;
-}
-#endif
 
 u8 CreateMonIconNoPersonality(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority)
 {
@@ -2760,13 +2730,6 @@ const u8 *GetMonIconPtr(u16 species, u32 personality)
     return GetMonIconTiles(GetIconSpecies(species, personality), personality);
 }
 
-#if P_ENABLE_DEBUG == TRUE
-static const u8 *GetMonIconPtrCustom(u16 species, u32 personality, bool8 isFemale)
-{
-    return GetMonIconTilesCustom(GetIconSpecies(species, personality), isFemale);
-}
-#endif
-
 void FreeAndDestroyMonIconSprite(struct Sprite *sprite)
 {
     FreeAndDestroyMonIconSprite_(sprite);
@@ -2828,24 +2791,15 @@ void SpriteCB_MonIcon(struct Sprite *sprite)
 
 const u8 *GetMonIconTiles(u16 species, u32 personality)
 {
-    const u8 *iconSprite = gMonIconTable[species];
-    if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
-    {
+    const u8 *iconSprite;
+
+    if (ShouldShowFemaleDifferences(species, personality))
         iconSprite = gMonIconTableFemale[species];
-    }
+    else
+        iconSprite = gMonIconTable[species];
+
     return iconSprite;
 }
-#if P_ENABLE_DEBUG == TRUE
-static const u8 *GetMonIconTilesCustom(u16 species, bool8 isFemale)
-{
-    const u8 *iconSprite = gMonIconTable[species];
-    if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && isFemale)
-    {
-        iconSprite = gMonIconTableFemale[species];
-    }
-    return iconSprite;
-}
-#endif
 
 void TryLoadAllMonIconPalettesAtOffset(u16 offset)
 {
