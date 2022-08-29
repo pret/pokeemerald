@@ -12,6 +12,7 @@
 #include "credits.h"
 #include "data.h"
 #include "daycare.h"
+#include "debug.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -54,7 +55,7 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 
-
+#if TX_DEBUG_SYSTEM == TRUE
 // *******************************
 // Enums
 enum { // Main
@@ -3639,31 +3640,4 @@ SOUND_LIST_SE
 };
 #undef X
 
-
-// Additional functions
-/*
-static void DebugAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput, LMtemplate);
-}
-static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8))
-{
-    void (*func)(u8);
-    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
-
-    if (gMain.newKeys & A_BUTTON)
-    {
-        PlaySE(SE_SELECT);
-        if ((func = HandleInput[input]) != NULL)
-            func(taskId);
-    }
-    else if (gMain.newKeys & B_BUTTON)
-    {
-        PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
-        ScriptContext_Enable();
-    }
-}
-*/
-
+#endif
