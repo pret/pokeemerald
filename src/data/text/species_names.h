@@ -1093,7 +1093,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_ROTOM_FROST] = _("Rotom"),
     [SPECIES_ROTOM_MOW] = _("Rotom"),
     [SPECIES_ROTOM_WASH] = _("Rotom"),
-	// Origin
+    // Origin
     [SPECIES_DIALGA_ORIGIN] = _("Dialga"),
     [SPECIES_PALKIA_ORIGIN] = _("Palkia"),
     [SPECIES_GIRATINA_ORIGIN] = _("Giratina"),
