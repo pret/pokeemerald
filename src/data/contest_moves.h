@@ -5918,6 +5918,54 @@ const struct ContestMove gContestMoves[MOVES_COUNT] =
         .comboStarterId = 0,
         .comboMoves = {0}
     },
+
+    [MOVE_DIRE_CLAW] = {0}, // TODO
+
+    [MOVE_PSYSHIELD_BASH] = {0}, // TODO
+
+    [MOVE_POWER_SHIFT] = {0}, // TODO
+
+    [MOVE_STONE_AXE] = {0}, // TODO
+
+    [MOVE_SPRINGTIDE_STORM] = {0}, // TODO
+
+    [MOVE_MYSTICAL_POWER] = {0}, // TODO
+
+    [MOVE_RAGING_FURY] = {0}, // TODO
+
+    [MOVE_WAVE_CRASH] = {0}, // TODO
+
+    [MOVE_CHLOROBLAST] = {0}, // TODO
+
+    [MOVE_MOUNTAIN_GALE] = {0}, // TODO
+
+    [MOVE_VICTORY_DANCE] = {0}, // TODO
+
+    [MOVE_HEADLONG_RUSH] = {0}, // TODO
+
+    [MOVE_BARB_BARRAGE] = {0}, // TODO
+
+    [MOVE_ESPER_WING] = {0}, // TODO
+
+    [MOVE_BITTER_MALICE] = {0}, // TODO
+
+    [MOVE_SHELTER] = {0}, // TODO
+
+    [MOVE_TRIPLE_ARROWS] = {0}, // TODO
+
+    [MOVE_INFERNAL_PARADE] = {0}, // TODO
+
+    [MOVE_CEASELESS_EDGE] = {0}, // TODO
+
+    [MOVE_BLEAKWIND_STORM] = {0}, // TODO
+
+    [MOVE_WILDBOLT_STORM] = {0}, // TODO
+
+    [MOVE_SANDSEAR_STORM] = {0}, // TODO
+
+    [MOVE_LUNAR_BLESSING] = {0}, // TODO
+
+    [MOVE_TAKE_HEART] = {0}, // TODO
 };
 
 const struct ContestEffect gContestEffects[] =
