@@ -983,7 +983,8 @@ static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a b
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
     #if TX_DEBUG_SYSTEM == TRUE
-    if (FlagGet(FLAG_SYS_NO_CATCHING)){
+    if (FlagGet(FLAG_SYS_NO_CATCHING))
+    {
         static const u8 sText_BallsCannotBeUsed[] = _("Poké Balls cannot be used\nright now!\p");
         DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, CloseItemMessage);
         return;
