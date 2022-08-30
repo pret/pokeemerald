@@ -10637,7 +10637,7 @@ const struct BaseStats gBaseStats[] =
         .flags = FLAG_MYTHICAL,
     },
 
-#if P_NEW_POKEMON == TRUE
+#if P_NEW_POKEMON >= GEN_4
     [SPECIES_TURTWIG] =
     {
         .baseHP        = 55,
@@ -13216,7 +13216,9 @@ const struct BaseStats gBaseStats[] =
         .noFlip = FALSE,
         .flags = FLAG_MYTHICAL,
     },
+#endif
 
+#if P_NEW_POKEMON >= GEN_5
     [SPECIES_VICTINI] =
     {
         .baseHP        = 100,
@@ -17046,7 +17048,9 @@ const struct BaseStats gBaseStats[] =
     },
 
     [SPECIES_GENESECT] = GENESECT_BASE_STATS,
+#endif
 
+#if P_NEW_POKEMON >= GEN_6
     [SPECIES_CHESPIN] =
     {
         .baseHP        = 56,
@@ -18633,7 +18637,9 @@ const struct BaseStats gBaseStats[] =
         .noFlip = FALSE,
         .flags = FLAG_MYTHICAL,
     },
+#endif
 
+#if P_NEW_POKEMON >= GEN_7
     [SPECIES_ROWLET] =
     {
         .baseHP        = 68,
@@ -20681,7 +20687,9 @@ const struct BaseStats gBaseStats[] =
         .noFlip = FALSE,
         .flags = FLAG_MYTHICAL,
     },
+#endif
 
+#if P_NEW_POKEMON >= GEN_8
     [SPECIES_GROOKEY] =
     {
         .baseHP        = 50,
@@ -22854,6 +22862,7 @@ const struct BaseStats gBaseStats[] =
         .noFlip = FALSE,
         .flags = FLAG_LEGENDARY,
     },
+#endif
 
     [SPECIES_VENUSAUR_MEGA] =
     {
@@ -23837,6 +23846,7 @@ const struct BaseStats gBaseStats[] =
         .flags = FLAG_LEGENDARY,
     },
 
+#if P_NEW_POKEMON >= GEN_4
     [SPECIES_LOPUNNY_MEGA] =
     {
         .baseHP        = 65,
@@ -23959,7 +23969,9 @@ const struct BaseStats gBaseStats[] =
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
     },
+#endif
 
+#if P_NEW_POKEMON >= GEN_5
     [SPECIES_AUDINO_MEGA] =
     {
         .baseHP        = 103,
@@ -23985,7 +23997,9 @@ const struct BaseStats gBaseStats[] =
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
     },
+#endif
 
+#if P_NEW_POKEMON >= GEN_6
     [SPECIES_DIANCIE_MEGA] =
     {
         .baseHP        = 50,
@@ -24011,6 +24025,7 @@ const struct BaseStats gBaseStats[] =
         .noFlip = FALSE,
         .flags = FLAG_MYTHICAL,
     },
+#endif
 
     [SPECIES_RAYQUAZA_MEGA] =
     {
@@ -24928,6 +24943,7 @@ const struct BaseStats gBaseStats[] =
         .flags = FLAG_GALARIAN_FORM,
     },
 
+#if P_NEW_POKEMON >= GEN_5
     [SPECIES_DARUMAKA_GALARIAN] =
     {
         .baseHP        = 70,
@@ -25027,6 +25043,7 @@ const struct BaseStats gBaseStats[] =
         .noFlip = FALSE,
         .flags = FLAG_GALARIAN_FORM,
     },
+#endif
 
     [SPECIES_GROWLITHE_HISUIAN] =
     {
@@ -25205,6 +25222,7 @@ const struct BaseStats gBaseStats[] =
 	    .flags = FLAG_HISUIAN_FORM,
     },
 
+#if P_NEW_POKEMON >= GEN_5
     [SPECIES_SAMUROTT_HISUIAN] =
     {
         .baseHP        = 90,
@@ -25332,7 +25350,9 @@ const struct BaseStats gBaseStats[] =
         .noFlip = FALSE,
 	    .flags = FLAG_HISUIAN_FORM,
     },
+#endif
 
+#if P_NEW_POKEMON >= GEN_6
     [SPECIES_SLIGGOO_HISUIAN] =
     {
         .baseHP        = 58,
@@ -25410,7 +25430,9 @@ const struct BaseStats gBaseStats[] =
         .noFlip = FALSE,
 	    .flags = FLAG_HISUIAN_FORM,
     },
+#endif
 
+#if P_NEW_POKEMON >= GEN_7
     [SPECIES_DECIDUEYE_HISUIAN] =
     {
         .baseHP        = 88,
@@ -25435,6 +25457,7 @@ const struct BaseStats gBaseStats[] =
         .noFlip = FALSE,
 	    .flags = FLAG_HISUIAN_FORM,
     },
+#endif
 
     [SPECIES_PIKACHU_COSPLAY]   = COSPLAY_PIKACHU_BASE_STATS(FLIP),
     [SPECIES_PIKACHU_ROCK_STAR] = COSPLAY_PIKACHU_BASE_STATS(FLIP),
@@ -25453,7 +25476,7 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_PIKACHU_WORLD_CAP]    = CAP_PIKACHU_BASE_STATS(FLIP),
 
     [SPECIES_PICHU_SPIKY_EARED] = PICHU_BASE_STATS(NO_FLIP),
-#endif
+
     [SPECIES_UNOWN_B] = UNOWN_BASE_STATS(NO_FLIP),
     [SPECIES_UNOWN_C] = UNOWN_BASE_STATS(NO_FLIP),
     [SPECIES_UNOWN_D] = UNOWN_BASE_STATS(NO_FLIP),
@@ -25560,7 +25583,7 @@ const struct BaseStats gBaseStats[] =
         .noFlip = TRUE,
     },
 
-#if P_NEW_POKEMON == TRUE
+#if P_NEW_POKEMON >= GEN_4
     [SPECIES_BURMY_SANDY_CLOAK] = BURMY_BASE_STATS(BODY_COLOR_BROWN),
     [SPECIES_BURMY_TRASH_CLOAK] = BURMY_BASE_STATS(BODY_COLOR_RED),
 
@@ -25744,7 +25767,9 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_ARCEUS_DRAGON]   = ARCEUS_BASE_STATS(TYPE_DRAGON),
     [SPECIES_ARCEUS_DARK]     = ARCEUS_BASE_STATS(TYPE_DARK),
     [SPECIES_ARCEUS_FAIRY]    = ARCEUS_BASE_STATS(TYPE_FAIRY),
+#endif
 
+#if P_NEW_POKEMON >= GEN_5
     [SPECIES_BASCULIN_BLUE_STRIPED] =
     {
         .baseHP        = 70,
@@ -25927,31 +25952,6 @@ const struct BaseStats gBaseStats[] =
         .flags = FLAG_LEGENDARY,
     },
 
-    [SPECIES_ENAMORUS_THERIAN] =
-    {
-        .baseHP        = 74,
-        .baseAttack    = 115,
-        .baseDefense   = 110,
-        .baseSpeed     = 46,
-        .baseSpAttack  = 135,
-        .baseSpDefense = 100,
-        .type1 = TYPE_FAIRY,
-        .type2 = TYPE_FLYING,
-        .catchRate = 3,
-        .expYield = 270,
-        .evYield_SpAttack  = 3,
-        .genderRatio = MON_FEMALE,
-        .eggCycles = 120,
-        .friendship = 90,
-        .growthRate = GROWTH_SLOW,
-        .eggGroup1 = EGG_GROUP_UNDISCOVERED,
-        .eggGroup2 = EGG_GROUP_UNDISCOVERED,
-        .abilities = {ABILITY_OVERCOAT, ABILITY_NONE},
-        .bodyColor = BODY_COLOR_PINK,
-        .noFlip = FALSE,
-        .flags = FLAG_LEGENDARY,
-    },
-
     [SPECIES_KYUREM_WHITE] =
     {
         .baseHP        = 125,
@@ -26060,7 +26060,9 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_GENESECT_SHOCK_DRIVE] = GENESECT_BASE_STATS,
     [SPECIES_GENESECT_BURN_DRIVE] = GENESECT_BASE_STATS,
     [SPECIES_GENESECT_CHILL_DRIVE] = GENESECT_BASE_STATS,
+#endif
 
+#if P_NEW_POKEMON >= GEN_6
     [SPECIES_GRENINJA_BATTLE_BOND] =
     {
         .baseHP        = 72,
@@ -26262,6 +26264,8 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 41,
         .baseSpAttack  = 44,
         .baseSpDefense = 55,
+        .itemCommon = ITEM_MIRACLE_SEED,
+        .itemRare = ITEM_MIRACLE_SEED,
         PUMKPABOO_MISC_STATS,
     },
 
@@ -26295,6 +26299,8 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 54,
         .baseSpAttack  = 58,
         .baseSpDefense = 75,
+        .itemCommon = ITEM_MIRACLE_SEED,
+        .itemRare = ITEM_MIRACLE_SEED,
         GOURGEIST_MISC_STATS,
     },
 
@@ -26353,7 +26359,9 @@ const struct BaseStats gBaseStats[] =
         .noFlip = FALSE,
         .flags = FLAG_MYTHICAL,
     },
+#endif
 
+#if P_NEW_POKEMON >= GEN_7
     [SPECIES_ORICORIO_POM_POM] = ORICORIO_BASE_STATS(TYPE_ELECTRIC, BODY_COLOR_YELLOW),
     [SPECIES_ORICORIO_PAU]     = ORICORIO_BASE_STATS(TYPE_PSYCHIC, BODY_COLOR_PINK),
     [SPECIES_ORICORIO_SENSU]   = ORICORIO_BASE_STATS(TYPE_GHOST, BODY_COLOR_PURPLE),
@@ -26545,7 +26553,9 @@ const struct BaseStats gBaseStats[] =
     },
 
     [SPECIES_MAGEARNA_ORIGINAL_COLOR] = MAGEARNA_BASE_STATS(BODY_COLOR_RED),
+#endif
 
+#if P_NEW_POKEMON >= GEN_8
     [SPECIES_CRAMORANT_GULPING] = CRAMORANT_BASE_STATS,
     [SPECIES_CRAMORANT_GORGING] = CRAMORANT_BASE_STATS,
 
@@ -26762,6 +26772,31 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_AS_ONE_SHADOW_RIDER, ABILITY_NONE},
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+    },
+
+    [SPECIES_ENAMORUS_THERIAN] =
+    {
+        .baseHP        = 74,
+        .baseAttack    = 115,
+        .baseDefense   = 110,
+        .baseSpeed     = 46,
+        .baseSpAttack  = 135,
+        .baseSpDefense = 100,
+        .type1 = TYPE_FAIRY,
+        .type2 = TYPE_FLYING,
+        .catchRate = 3,
+        .expYield = 270,
+        .evYield_SpAttack  = 3,
+        .genderRatio = MON_FEMALE,
+        .eggCycles = 120,
+        .friendship = 90,
+        .growthRate = GROWTH_SLOW,
+        .eggGroup1 = EGG_GROUP_UNDISCOVERED,
+        .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+        .abilities = {ABILITY_OVERCOAT, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_PINK,
+        .noFlip = FALSE,
+        .flags = FLAG_LEGENDARY,
     },
 #endif
 };

@@ -1,3 +1,22 @@
+
+#define PIKACHU_BACK_PIC_COORDS         \
+{                                       \
+    .size = MON_COORDS_SIZE(64, 56),    \
+    .y_offset = 4,                      \
+}
+
+#define ARCEUS_BACK_PIC_COORDS          \
+{                                       \
+    .size = MON_COORDS_SIZE(64, 64),    \
+    .y_offset = 3,                      \
+}
+
+#define DEERLING_BACK_PIC_COORDS        \
+{                                       \
+    .size = MON_COORDS_SIZE(48, 56),    \
+    .y_offset = 9,                      \
+}
+
 // All Pokémon pics are 64x64, but this data table defines where in this 64x64 frame
 // the sprite's non-transparent pixels actually are.
 // .size is the dimensions of this drawn pixel area.
@@ -129,11 +148,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 1,
     },
-    [SPECIES_PIKACHU] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
-    },
+    [SPECIES_PIKACHU] = PIKACHU_BACK_PIC_COORDS,
     [SPECIES_RAICHU] =
     {
         .size = MON_COORDS_SIZE(64, 56),
@@ -1939,7 +1954,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 9,
     },
-#if P_NEW_POKEMON == TRUE
+#if P_NEW_POKEMON >= GEN_4
     [SPECIES_TURTWIG] =
     {
         .size = MON_COORDS_SIZE(48, 56),
@@ -2470,11 +2485,9 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(56, 40),
         .y_offset = 15,
     },
-    [SPECIES_ARCEUS] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
+    [SPECIES_ARCEUS] = ARCEUS_BACK_PIC_COORDS,
+#endif
+#if P_NEW_POKEMON >= GEN_5
     [SPECIES_VICTINI] =
     {
         .size = MON_COORDS_SIZE(40, 64),
@@ -2930,11 +2943,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 6,
     },
-    [SPECIES_DEERLING] =
-    {
-        .size = MON_COORDS_SIZE(48, 56),
-        .y_offset = 9,
-    },
+    [SPECIES_DEERLING] = DEERLING_BACK_PIC_COORDS,
     [SPECIES_SAWSBUCK] =
     {
         .size = MON_COORDS_SIZE(48, 64),
@@ -3255,6 +3264,8 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 48),
         .y_offset = 8,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_6
     [SPECIES_CHESPIN] =
     {
         .size = MON_COORDS_SIZE(56, 64),
@@ -3615,6 +3626,8 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 3,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_7
     [SPECIES_ROWLET] =
     {
         .size = MON_COORDS_SIZE(48, 40),
@@ -4055,6 +4068,8 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 40),
         .y_offset = 13,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_8
     [SPECIES_GROOKEY] =
     {
         .size = MON_COORDS_SIZE(48, 56),
@@ -4535,6 +4550,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
+#endif
     // Megas
     [SPECIES_VENUSAUR_MEGA] =
     {
@@ -4736,6 +4752,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 1,
     },
+#if P_NEW_POKEMON >= GEN_4
     [SPECIES_LOPUNNY_MEGA] =
     {
         .size = MON_COORDS_SIZE(64, 64),
@@ -4761,16 +4778,21 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 3,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_5
     [SPECIES_AUDINO_MEGA] =
     {
         .size = MON_COORDS_SIZE(56, 64),
         .y_offset = 0,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_6
     [SPECIES_DIANCIE_MEGA] =
     {
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 5,
     },
+#endif
     // Special Mega + Primals
     [SPECIES_RAYQUAZA_MEGA] =
     {
@@ -4954,6 +4976,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 40),
         .y_offset = 13,
     },
+#if P_NEW_POKEMON >= GEN_5
     [SPECIES_DARUMAKA_GALARIAN] =
     {
         .size = MON_COORDS_SIZE(56, 48),
@@ -4974,6 +4997,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 24),
         .y_offset = 23,
     },
+#endif
 	// Hisuian Forms
     [SPECIES_GROWLITHE_HISUIAN] =
     {
@@ -5010,6 +5034,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(56, 64),
         .y_offset = 3,
     },
+#if P_NEW_POKEMON >= GEN_5
     [SPECIES_SAMUROTT_HISUIAN] =
     {
         .size = MON_COORDS_SIZE(64, 64),
@@ -5035,6 +5060,8 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 0,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_6
     [SPECIES_SLIGGOO_HISUIAN] =
     {
         .size = MON_COORDS_SIZE(64, 64),
@@ -5050,91 +5077,37 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 32),
         .y_offset = 17,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_7
     [SPECIES_DECIDUEYE_HISUIAN] =
     {
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
+#endif
     // Misc Forms
     // Cosplay Pikachu
-    [SPECIES_PIKACHU_COSPLAY] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
-    },
-    [SPECIES_PIKACHU_ROCK_STAR] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
-    },
-    [SPECIES_PIKACHU_BELLE] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
-    },
-    [SPECIES_PIKACHU_POP_STAR] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
-    },
-    [SPECIES_PIKACHU_PH_D] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
-    },
-    [SPECIES_PIKACHU_LIBRE] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
-    },
+    [SPECIES_PIKACHU_COSPLAY] = PIKACHU_BACK_PIC_COORDS,
+    [SPECIES_PIKACHU_ROCK_STAR] = PIKACHU_BACK_PIC_COORDS,
+    [SPECIES_PIKACHU_BELLE] = PIKACHU_BACK_PIC_COORDS,
+    [SPECIES_PIKACHU_POP_STAR] = PIKACHU_BACK_PIC_COORDS,
+    [SPECIES_PIKACHU_PH_D] = PIKACHU_BACK_PIC_COORDS,
+    [SPECIES_PIKACHU_LIBRE] = PIKACHU_BACK_PIC_COORDS,
     // Cap Pikachu
-    [SPECIES_PIKACHU_ORIGINAL_CAP] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
-    },
-    [SPECIES_PIKACHU_HOENN_CAP] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
-    },
-    [SPECIES_PIKACHU_SINNOH_CAP] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
-    },
-    [SPECIES_PIKACHU_UNOVA_CAP] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
-    },
-    [SPECIES_PIKACHU_KALOS_CAP] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
-    },
-    [SPECIES_PIKACHU_ALOLA_CAP] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
-    },
-    [SPECIES_PIKACHU_PARTNER_CAP] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
-    },
-    [SPECIES_PIKACHU_WORLD_CAP] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
-    },
+    [SPECIES_PIKACHU_ORIGINAL_CAP] = PIKACHU_BACK_PIC_COORDS,
+    [SPECIES_PIKACHU_HOENN_CAP] = PIKACHU_BACK_PIC_COORDS,
+    [SPECIES_PIKACHU_SINNOH_CAP] = PIKACHU_BACK_PIC_COORDS,
+    [SPECIES_PIKACHU_UNOVA_CAP] = PIKACHU_BACK_PIC_COORDS,
+    [SPECIES_PIKACHU_KALOS_CAP] = PIKACHU_BACK_PIC_COORDS,
+    [SPECIES_PIKACHU_ALOLA_CAP] = PIKACHU_BACK_PIC_COORDS,
+    [SPECIES_PIKACHU_PARTNER_CAP] = PIKACHU_BACK_PIC_COORDS,
+    [SPECIES_PIKACHU_WORLD_CAP] = PIKACHU_BACK_PIC_COORDS,
     // Pichu
     [SPECIES_PICHU_SPIKY_EARED] =
     {
         .size = MON_COORDS_SIZE(48, 56),
         .y_offset = 8,
     },
-#endif
     // Unown
     [SPECIES_UNOWN_B] =
     {
@@ -5303,7 +5276,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
-#if P_NEW_POKEMON == TRUE
+#if P_NEW_POKEMON >= GEN_4
     // Burmy
     [SPECIES_BURMY_SANDY_CLOAK] =
     {
@@ -5393,91 +5366,25 @@ const struct MonCoords gMonBackPicCoords[] =
         .y_offset = 2,
     },
     // Arceus
-    [SPECIES_ARCEUS_FIGHTING] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
-    [SPECIES_ARCEUS_FLYING] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
-    [SPECIES_ARCEUS_POISON] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
-    [SPECIES_ARCEUS_GROUND] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
-    [SPECIES_ARCEUS_ROCK] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
-    [SPECIES_ARCEUS_BUG] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
-    [SPECIES_ARCEUS_GHOST] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
-    [SPECIES_ARCEUS_STEEL] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
-    [SPECIES_ARCEUS_FIRE] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
-    [SPECIES_ARCEUS_WATER] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
-    [SPECIES_ARCEUS_GRASS] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
-    [SPECIES_ARCEUS_ELECTRIC] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
-    [SPECIES_ARCEUS_PSYCHIC] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
-    [SPECIES_ARCEUS_ICE] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
-    [SPECIES_ARCEUS_DRAGON] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
-    [SPECIES_ARCEUS_DARK] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
-    [SPECIES_ARCEUS_FAIRY] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 3,
-    },
+    [SPECIES_ARCEUS_FIGHTING] = ARCEUS_BACK_PIC_COORDS,
+    [SPECIES_ARCEUS_FLYING] = ARCEUS_BACK_PIC_COORDS,
+    [SPECIES_ARCEUS_POISON] = ARCEUS_BACK_PIC_COORDS,
+    [SPECIES_ARCEUS_GROUND] = ARCEUS_BACK_PIC_COORDS,
+    [SPECIES_ARCEUS_ROCK] = ARCEUS_BACK_PIC_COORDS,
+    [SPECIES_ARCEUS_BUG] = ARCEUS_BACK_PIC_COORDS,
+    [SPECIES_ARCEUS_GHOST] = ARCEUS_BACK_PIC_COORDS,
+    [SPECIES_ARCEUS_STEEL] = ARCEUS_BACK_PIC_COORDS,
+    [SPECIES_ARCEUS_FIRE] = ARCEUS_BACK_PIC_COORDS,
+    [SPECIES_ARCEUS_WATER] = ARCEUS_BACK_PIC_COORDS,
+    [SPECIES_ARCEUS_GRASS] = ARCEUS_BACK_PIC_COORDS,
+    [SPECIES_ARCEUS_ELECTRIC] = ARCEUS_BACK_PIC_COORDS,
+    [SPECIES_ARCEUS_PSYCHIC] = ARCEUS_BACK_PIC_COORDS,
+    [SPECIES_ARCEUS_ICE] = ARCEUS_BACK_PIC_COORDS,
+    [SPECIES_ARCEUS_DRAGON] = ARCEUS_BACK_PIC_COORDS,
+    [SPECIES_ARCEUS_DARK] = ARCEUS_BACK_PIC_COORDS,
+    [SPECIES_ARCEUS_FAIRY] = ARCEUS_BACK_PIC_COORDS,
+#endif
+#if P_NEW_POKEMON >= GEN_5
     // Basculin
     [SPECIES_BASCULIN_BLUE_STRIPED] =
     {
@@ -5501,21 +5408,9 @@ const struct MonCoords gMonBackPicCoords[] =
         .y_offset = 1,
     },
     // Deerling
-    [SPECIES_DEERLING_SUMMER] =
-    {
-        .size = MON_COORDS_SIZE(48, 56),
-        .y_offset = 9,
-    },
-    [SPECIES_DEERLING_AUTUMN] =
-    {
-        .size = MON_COORDS_SIZE(48, 56),
-        .y_offset = 9,
-    },
-    [SPECIES_DEERLING_WINTER] =
-    {
-        .size = MON_COORDS_SIZE(48, 56),
-        .y_offset = 9,
-    },
+    [SPECIES_DEERLING_SUMMER] = DEERLING_BACK_PIC_COORDS,
+    [SPECIES_DEERLING_AUTUMN] = DEERLING_BACK_PIC_COORDS,
+    [SPECIES_DEERLING_WINTER] = DEERLING_BACK_PIC_COORDS,
     // Sawsbuck
     [SPECIES_SAWSBUCK_SUMMER] =
     {
@@ -5547,11 +5442,6 @@ const struct MonCoords gMonBackPicCoords[] =
     {
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 7,
-    },
-    [SPECIES_ENAMORUS_THERIAN] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 0,
     },
     // Kyurem
     [SPECIES_KYUREM_WHITE] =
@@ -5597,6 +5487,8 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 48),
         .y_offset = 8,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_6
     // Greninja
     [SPECIES_GRENINJA_BATTLE_BOND] =
     {
@@ -5895,6 +5787,8 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_7
     // Oricorio
     [SPECIES_ORICORIO_POM_POM] =
     {
@@ -6114,6 +6008,8 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 4,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_8
     // Cramorant
     [SPECIES_CRAMORANT_GULPING] =
     {
@@ -6242,6 +6138,11 @@ const struct MonCoords gMonBackPicCoords[] =
     {
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 7,
+    },
+    [SPECIES_ENAMORUS_THERIAN] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
     },
 #endif
     // Egg

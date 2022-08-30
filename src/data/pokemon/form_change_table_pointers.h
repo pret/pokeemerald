@@ -1,6 +1,6 @@
 const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] = 
 {
-#if P_NEW_POKEMON == TRUE
+#if P_NEW_POKEMON >= GEN_4
     [SPECIES_GIRATINA] = sGiratinaFormChangeTable,
     [SPECIES_GIRATINA_ORIGIN] = sGiratinaFormChangeTable,
     [SPECIES_SHAYMIN] = sShayminFormChangeTable,
@@ -23,14 +23,14 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_ARCEUS_DRAGON] = sArceusFormChangeTable,
     [SPECIES_ARCEUS_DARK] = sArceusFormChangeTable,
     [SPECIES_ARCEUS_FAIRY] = sArceusFormChangeTable,
+#endif
+#if P_NEW_POKEMON >= GEN_5
     [SPECIES_TORNADUS] = sTornadusFormChangeTable,
     [SPECIES_TORNADUS_THERIAN] = sTornadusTherianFormChangeTable,
     [SPECIES_THUNDURUS] = sThundurusFormChangeTable,
     [SPECIES_THUNDURUS_THERIAN] = sThundurusTherianFormChangeTable,
     [SPECIES_LANDORUS] = sLandorusFormChangeTable,
     [SPECIES_LANDORUS_THERIAN] = sLandorusTherianFormChangeTable,
-    [SPECIES_ENAMORUS] = sEnamorusFormChangeTable,
-    [SPECIES_ENAMORUS_THERIAN] = sEnamorusTherianFormChangeTable,
     [SPECIES_KELDEO] = sKeldeoFormChangeTable,
     [SPECIES_KELDEO_RESOLUTE] = sKeldeoResoluteFormChangeTable,
     [SPECIES_GENESECT] = sGenesectFormChangeTable, 
@@ -38,8 +38,12 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_GENESECT_SHOCK_DRIVE] = sGenesectFormChangeTable,
     [SPECIES_GENESECT_BURN_DRIVE] = sGenesectFormChangeTable,
     [SPECIES_GENESECT_CHILL_DRIVE] = sGenesectFormChangeTable,
+#endif
+#if P_NEW_POKEMON >= GEN_6
     [SPECIES_HOOPA] = sHoopaFormChangeTable,
     [SPECIES_HOOPA_UNBOUND] = sHoopaUnboundFormChangeTable,
+#endif
+#if P_NEW_POKEMON >= GEN_7
     [SPECIES_ORICORIO] = sOricorioFormChangeTable,
     [SPECIES_ORICORIO_POM_POM] = sOricorioFormChangeTable,
     [SPECIES_ORICORIO_PAU] = sOricorioFormChangeTable,
@@ -62,5 +66,9 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_SILVALLY_ROCK] = sSilvallyFormChangeTable,
     [SPECIES_SILVALLY_STEEL] = sSilvallyFormChangeTable,
     [SPECIES_SILVALLY_WATER] = sSilvallyFormChangeTable,
+#endif
+#if P_NEW_POKEMON >= GEN_8
+    [SPECIES_ENAMORUS] = sEnamorusFormChangeTable,
+    [SPECIES_ENAMORUS_THERIAN] = sEnamorusTherianFormChangeTable,
 #endif
 };

@@ -43,7 +43,7 @@ FORM_ITEM_USE_TIME:
 #define DAY    0
 #define NIGHT  1
 
-#if P_NEW_POKEMON == TRUE
+#if P_NEW_POKEMON >= GEN_4
 static const struct FormChange sGiratinaFormChangeTable[] = {
     {FORM_ITEM_HOLD, SPECIES_GIRATINA, ITEM_NONE},
     {FORM_ITEM_HOLD, SPECIES_GIRATINA_ORIGIN, ITEM_GRISEOUS_ORB},
@@ -94,7 +94,9 @@ static const struct FormChange sArceusFormChangeTable[] = {
     {FORM_ITEM_HOLD_ABILITY, SPECIES_ARCEUS_FAIRY,    ITEM_FAIRIUM_Z,    ABILITY_MULTITYPE},
     {FORM_CHANGE_END},
 };
+#endif
 
+#if P_NEW_POKEMON >= GEN_5
 static const struct FormChange sTornadusFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_TORNADUS_THERIAN, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
@@ -125,16 +127,6 @@ static const struct FormChange sLandorusTherianFormChangeTable[] = {
     {FORM_CHANGE_END},
 };
 
-static const struct FormChange sEnamorusFormChangeTable[] = {
-    {FORM_ITEM_USE, SPECIES_ENAMORUS, ITEM_REVEAL_GLASS},
-    {FORM_CHANGE_END},
-};
-
-static const struct FormChange sEnamorusTherianFormChangeTable[] = {
-    {FORM_ITEM_USE, SPECIES_ENAMORUS_THERIAN, ITEM_REVEAL_GLASS},
-    {FORM_CHANGE_END},
-};
-
 static const struct FormChange sKeldeoFormChangeTable[] = {
     {FORM_MOVE, SPECIES_KELDEO_RESOLUTE, MOVE_SECRET_SWORD, WHEN_LEARNED},
     {FORM_CHANGE_END},
@@ -153,7 +145,9 @@ static const struct FormChange sGenesectFormChangeTable[] = {
     {FORM_ITEM_HOLD, SPECIES_GENESECT_CHILL_DRIVE, ITEM_CHILL_DRIVE},
     {FORM_CHANGE_END},
 };
+#endif
 
+#if P_NEW_POKEMON >= GEN_6
 static const struct FormChange sHoopaFormChangeTable[] = {
     // {FORM_ITEM_USE, SPECIES_HOOPA_UNBOUND, ITEM_PRISON_BOTTLE, SPECIES_HOOPA},
     {FORM_CHANGE_END},
@@ -163,7 +157,9 @@ static const struct FormChange sHoopaUnboundFormChangeTable[] = {
     {FORM_WITHDRAW, SPECIES_HOOPA},
     {FORM_CHANGE_END},
 };
+#endif
 
+#if P_NEW_POKEMON >= GEN_7
 static const struct FormChange sOricorioFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_ORICORIO,         ITEM_RED_NECTAR},
     {FORM_ITEM_USE, SPECIES_ORICORIO_POM_POM, ITEM_YELLOW_NECTAR},
@@ -191,6 +187,18 @@ static const struct FormChange sSilvallyFormChangeTable[] = {
     {FORM_ITEM_HOLD_ABILITY, SPECIES_SILVALLY_DRAGON,   ITEM_DRAGON_MEMORY,   ABILITY_RKS_SYSTEM},
     {FORM_ITEM_HOLD_ABILITY, SPECIES_SILVALLY_DARK,     ITEM_DARK_MEMORY,     ABILITY_RKS_SYSTEM},
     {FORM_ITEM_HOLD_ABILITY, SPECIES_SILVALLY_FAIRY,    ITEM_FAIRY_MEMORY,    ABILITY_RKS_SYSTEM},
+    {FORM_CHANGE_END},
+};
+#endif
+
+#if P_NEW_POKEMON >= GEN_8
+static const struct FormChange sEnamorusFormChangeTable[] = {
+    {FORM_ITEM_USE, SPECIES_ENAMORUS, ITEM_REVEAL_GLASS},
+    {FORM_CHANGE_END},
+};
+
+static const struct FormChange sEnamorusTherianFormChangeTable[] = {
+    {FORM_ITEM_USE, SPECIES_ENAMORUS_THERIAN, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
 };
 #endif

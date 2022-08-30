@@ -1939,7 +1939,7 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(48, 48),
         .y_offset = 11,
     },
-#if P_NEW_POKEMON == TRUE
+#if P_NEW_POKEMON >= GEN_4
     [SPECIES_TURTWIG] =
     {
         .size = MON_COORDS_SIZE(40, 48),
@@ -2475,6 +2475,8 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_5
     [SPECIES_VICTINI] =
     {
         .size = MON_COORDS_SIZE(48, 56),
@@ -3255,6 +3257,8 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(56, 64),
         .y_offset = 0,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_6
     [SPECIES_CHESPIN] =
     {
         .size = MON_COORDS_SIZE(40, 48),
@@ -3615,6 +3619,8 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_7
     [SPECIES_ROWLET] =
     {
         .size = MON_COORDS_SIZE(32, 40),
@@ -4055,6 +4061,8 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 4,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_8
     [SPECIES_GROOKEY] =
     {
         .size = MON_COORDS_SIZE(40, 48),
@@ -4535,6 +4543,7 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
+#endif
     // Megas
     [SPECIES_VENUSAUR_MEGA] =
     {
@@ -4736,6 +4745,7 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
+#if P_NEW_POKEMON >= GEN_4
     [SPECIES_LOPUNNY_MEGA] =
     {
         .size = MON_COORDS_SIZE(56, 64),
@@ -4761,16 +4771,21 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 1,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_5
     [SPECIES_AUDINO_MEGA] =
     {
         .size = MON_COORDS_SIZE(48, 64),
         .y_offset = 6,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_6
     [SPECIES_DIANCIE_MEGA] =
     {
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
+#endif
     // Special Mega + Primals
     [SPECIES_RAYQUAZA_MEGA] =
     {
@@ -4954,6 +4969,7 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 40),
         .y_offset = 13,
     },
+#if P_NEW_POKEMON >= GEN_5
     [SPECIES_DARUMAKA_GALARIAN] =
     {
         .size = MON_COORDS_SIZE(40, 40),
@@ -4974,6 +4990,7 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(48, 40),
         .y_offset = 14,
     },
+#endif
 	// Hisuian Forms
     [SPECIES_GROWLITHE_HISUIAN] =
     {
@@ -5010,6 +5027,7 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(56, 56),
         .y_offset = 7,
     },
+#if P_NEW_POKEMON >= GEN_5
     [SPECIES_SAMUROTT_HISUIAN] =
     {
         .size = MON_COORDS_SIZE(64, 64),
@@ -5035,6 +5053,8 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_6
     [SPECIES_SLIGGOO_HISUIAN] =
     {
         .size = MON_COORDS_SIZE(48, 56),
@@ -5050,11 +5070,14 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 48),
         .y_offset = 5,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_7
     [SPECIES_DECIDUEYE_HISUIAN] =
     {
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
+#endif
     // Misc Forms
     // Cosplay Pikachu
     [SPECIES_PIKACHU_COSPLAY] =
@@ -5134,7 +5157,6 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(32, 40),
         .y_offset = 14,
     },
-#endif
     // Unown
     [SPECIES_UNOWN_B] =
     {
@@ -5303,7 +5325,7 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 1,
     },
-#if P_NEW_POKEMON == TRUE
+#if P_NEW_POKEMON >= GEN_4
     // Burmy
     [SPECIES_BURMY_SANDY_CLOAK] =
     {
@@ -5478,6 +5500,8 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_5
     // Basculin
     [SPECIES_BASCULIN_BLUE_STRIPED] =
     {
@@ -5548,11 +5572,6 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
-    [SPECIES_ENAMORUS_THERIAN] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 0,
-    },
     // Kyurem
     [SPECIES_KYUREM_WHITE] =
     {
@@ -5597,6 +5616,8 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(56, 64),
         .y_offset = 0,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_6
     // Greninja
     [SPECIES_GRENINJA_BATTLE_BOND] =
     {
@@ -5895,6 +5916,8 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_7
     // Oricorio
     [SPECIES_ORICORIO_POM_POM] =
     {
@@ -6114,6 +6137,8 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(56, 64),
         .y_offset = 0,
     },
+#endif
+#if P_NEW_POKEMON >= GEN_8
     // Cramorant
     [SPECIES_CRAMORANT_GULPING] =
     {
@@ -6239,6 +6264,11 @@ const struct MonCoords gMonFrontPicCoords[] =
         .y_offset = 0,
     },
     [SPECIES_CALYREX_SHADOW_RIDER] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_ENAMORUS_THERIAN] =
     {
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,

@@ -4644,7 +4644,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 2,
     },
 
-#if P_NEW_POKEMON == TRUE
+#if P_NEW_POKEMON >= GEN_4
     [NATIONAL_DEX_TURTWIG] =
     {
         .categoryName = _("Tiny Leaf"),
@@ -5928,7 +5928,9 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerScale = 256,
         .trainerOffset = 0,
     },
+#endif
 
+#if P_NEW_POKEMON >= GEN_5
     [NATIONAL_DEX_VICTINI] =
     {
         .categoryName = _("Victory"),
@@ -7800,7 +7802,9 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerScale = 256,
         .trainerOffset = 0,
     },
+#endif
 
+#if P_NEW_POKEMON >= GEN_6
     [NATIONAL_DEX_CHESPIN] =
     {
         .categoryName = _("Spiny Nut"),
@@ -8664,7 +8668,9 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerScale = 256,
         .trainerOffset = 0,
     },
+#endif
 
+#if P_NEW_POKEMON >= GEN_7
     [NATIONAL_DEX_ROWLET] =
     {
         .categoryName = _("Grass Quill"),
@@ -9720,7 +9726,9 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerScale = 387,
         .trainerOffset = 2,
     },
+#endif
 
+#if P_NEW_POKEMON >= GEN_8
     [NATIONAL_DEX_GROOKEY] =
     {
         .categoryName = _("Chimp"),
