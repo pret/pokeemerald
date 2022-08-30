@@ -25261,9 +25261,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 75,
         .expYield = 168,
         .evYield_Attack  = 2,
-        #ifdef ITEM_EXPANSION
-            .itemRare = ITEM_ABSORB_BULB,
-        #endif
+        .itemRare = ITEM_ABSORB_BULB,
         .genderRatio = MON_FEMALE,
         .eggCycles = 20,
         .friendship = 70,
@@ -25366,9 +25364,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 158,
         .evYield_SpDefense = 2,
-        #ifdef ITEM_EXPANSION
-            .itemRare = ITEM_SHED_SHELL,
-        #endif
+        .itemRare = ITEM_SHED_SHELL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 40,
         .friendship = 35,
