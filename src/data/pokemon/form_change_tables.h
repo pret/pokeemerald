@@ -43,7 +43,7 @@ FORM_ITEM_USE_TIME:
 #define DAY    0
 #define NIGHT  1
 
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
 static const struct FormChange sGiratinaFormChangeTable[] = {
     {FORM_ITEM_HOLD, SPECIES_GIRATINA, ITEM_NONE},
     {FORM_ITEM_HOLD, SPECIES_GIRATINA_ORIGIN, ITEM_GRISEOUS_ORB},
@@ -96,7 +96,7 @@ static const struct FormChange sArceusFormChangeTable[] = {
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
 static const struct FormChange sTornadusFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_TORNADUS_THERIAN, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
@@ -147,7 +147,7 @@ static const struct FormChange sGenesectFormChangeTable[] = {
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
 static const struct FormChange sHoopaFormChangeTable[] = {
     // {FORM_ITEM_USE, SPECIES_HOOPA_UNBOUND, ITEM_PRISON_BOTTLE, SPECIES_HOOPA},
     {FORM_CHANGE_END},
@@ -159,7 +159,7 @@ static const struct FormChange sHoopaUnboundFormChangeTable[] = {
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
 static const struct FormChange sOricorioFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_ORICORIO,         ITEM_RED_NECTAR},
     {FORM_ITEM_USE, SPECIES_ORICORIO_POM_POM, ITEM_YELLOW_NECTAR},
@@ -191,7 +191,7 @@ static const struct FormChange sSilvallyFormChangeTable[] = {
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_8
+#if P_GEN_8_POKEMON == TRUE
 static const struct FormChange sEnamorusFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_ENAMORUS, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},

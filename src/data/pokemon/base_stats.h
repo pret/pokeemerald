@@ -10637,7 +10637,7 @@ const struct BaseStats gBaseStats[] =
         .flags = FLAG_MYTHICAL,
     },
 
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
     [SPECIES_TURTWIG] =
     {
         .baseHP        = 55,
@@ -13218,7 +13218,7 @@ const struct BaseStats gBaseStats[] =
     },
 #endif
 
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_VICTINI] =
     {
         .baseHP        = 100,
@@ -17050,7 +17050,7 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_GENESECT] = GENESECT_BASE_STATS,
 #endif
 
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_CHESPIN] =
     {
         .baseHP        = 56,
@@ -18639,7 +18639,7 @@ const struct BaseStats gBaseStats[] =
     },
 #endif
 
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
     [SPECIES_ROWLET] =
     {
         .baseHP        = 68,
@@ -20689,7 +20689,7 @@ const struct BaseStats gBaseStats[] =
     },
 #endif
 
-#if P_NEW_POKEMON >= GEN_8
+#if P_GEN_8_POKEMON == TRUE
     [SPECIES_GROOKEY] =
     {
         .baseHP        = 50,
@@ -23846,7 +23846,7 @@ const struct BaseStats gBaseStats[] =
         .flags = FLAG_LEGENDARY,
     },
 
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
     [SPECIES_LOPUNNY_MEGA] =
     {
         .baseHP        = 65,
@@ -23971,7 +23971,7 @@ const struct BaseStats gBaseStats[] =
     },
 #endif
 
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_AUDINO_MEGA] =
     {
         .baseHP        = 103,
@@ -23999,7 +23999,7 @@ const struct BaseStats gBaseStats[] =
     },
 #endif
 
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_DIANCIE_MEGA] =
     {
         .baseHP        = 50,
@@ -24943,7 +24943,7 @@ const struct BaseStats gBaseStats[] =
         .flags = FLAG_GALARIAN_FORM,
     },
 
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_DARUMAKA_GALARIAN] =
     {
         .baseHP        = 70,
@@ -25222,7 +25222,7 @@ const struct BaseStats gBaseStats[] =
 	    .flags = FLAG_HISUIAN_FORM,
     },
 
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_SAMUROTT_HISUIAN] =
     {
         .baseHP        = 90,
@@ -25350,7 +25350,7 @@ const struct BaseStats gBaseStats[] =
     },
 #endif
 
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_SLIGGOO_HISUIAN] =
     {
         .baseHP        = 58,
@@ -25428,7 +25428,7 @@ const struct BaseStats gBaseStats[] =
     },
 #endif
 
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
     [SPECIES_DECIDUEYE_HISUIAN] =
     {
         .baseHP        = 88,
@@ -25579,7 +25579,7 @@ const struct BaseStats gBaseStats[] =
         .noFlip = TRUE,
     },
 
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
     [SPECIES_BURMY_SANDY_CLOAK] = BURMY_BASE_STATS(BODY_COLOR_BROWN),
     [SPECIES_BURMY_TRASH_CLOAK] = BURMY_BASE_STATS(BODY_COLOR_RED),
 
@@ -25765,7 +25765,7 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_ARCEUS_FAIRY]    = ARCEUS_BASE_STATS(TYPE_FAIRY),
 #endif
 
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_BASCULIN_BLUE_STRIPED] =
     {
         .baseHP        = 70,
@@ -26058,7 +26058,7 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_GENESECT_CHILL_DRIVE] = GENESECT_BASE_STATS,
 #endif
 
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_GRENINJA_BATTLE_BOND] =
     {
         .baseHP        = 72,
@@ -26357,7 +26357,7 @@ const struct BaseStats gBaseStats[] =
     },
 #endif
 
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
     [SPECIES_ORICORIO_POM_POM] = ORICORIO_BASE_STATS(TYPE_ELECTRIC, BODY_COLOR_YELLOW),
     [SPECIES_ORICORIO_PAU]     = ORICORIO_BASE_STATS(TYPE_PSYCHIC, BODY_COLOR_PINK),
     [SPECIES_ORICORIO_SENSU]   = ORICORIO_BASE_STATS(TYPE_GHOST, BODY_COLOR_PURPLE),
@@ -26551,7 +26551,7 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_MAGEARNA_ORIGINAL_COLOR] = MAGEARNA_BASE_STATS(BODY_COLOR_RED),
 #endif
 
-#if P_NEW_POKEMON >= GEN_8
+#if P_GEN_8_POKEMON == TRUE
     [SPECIES_CRAMORANT_GULPING] = CRAMORANT_BASE_STATS,
     [SPECIES_CRAMORANT_GORGING] = CRAMORANT_BASE_STATS,
 

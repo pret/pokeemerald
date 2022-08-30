@@ -387,7 +387,7 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_JIRACHI] = sJirachiTeachableLearnset,
     [SPECIES_DEOXYS] = sDeoxysTeachableLearnset,
     [SPECIES_CHIMECHO] = sChimechoTeachableLearnset,
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
     [SPECIES_TURTWIG] = sTurtwigTeachableLearnset,
     [SPECIES_GROTLE] = sGrotleTeachableLearnset,
     [SPECIES_TORTERRA] = sTorterraTeachableLearnset,
@@ -496,7 +496,7 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_SHAYMIN] = sShayminTeachableLearnset,
     [SPECIES_ARCEUS] = sArceusTeachableLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_VICTINI] = sVictiniTeachableLearnset,
     [SPECIES_SNIVY] = sSnivyTeachableLearnset,
     [SPECIES_SERVINE] = sServineTeachableLearnset,
@@ -654,7 +654,7 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_MELOETTA] = sMeloettaTeachableLearnset,
     [SPECIES_GENESECT] = sGenesectTeachableLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_CHESPIN] = sChespinTeachableLearnset,
     [SPECIES_QUILLADIN] = sQuilladinTeachableLearnset,
     [SPECIES_CHESNAUGHT] = sChesnaughtTeachableLearnset,
@@ -728,7 +728,7 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_HOOPA] = sHoopaTeachableLearnset,
     [SPECIES_VOLCANION] = sVolcanionTeachableLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
     [SPECIES_ROWLET] = sRowletTeachableLearnset,
     [SPECIES_DARTRIX] = sDartrixTeachableLearnset,
     [SPECIES_DECIDUEYE] = sDecidueyeTeachableLearnset,
@@ -818,7 +818,7 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_MELTAN] = sMeltanTeachableLearnset,
     [SPECIES_MELMETAL] = sMelmetalTeachableLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_8
+#if P_GEN_8_POKEMON == TRUE
     [SPECIES_GROOKEY] = sGrookeyTeachableLearnset,
     [SPECIES_THWACKEY] = sThwackeyTeachableLearnset,
     [SPECIES_RILLABOOM] = sRillaboomTeachableLearnset,
@@ -957,17 +957,17 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_METAGROSS_MEGA] = sMetagrossTeachableLearnset,
     [SPECIES_LATIAS_MEGA] = sLatiasTeachableLearnset,
     [SPECIES_LATIOS_MEGA] = sLatiosTeachableLearnset,
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
     [SPECIES_LOPUNNY_MEGA] = sLopunnyTeachableLearnset,
     [SPECIES_GARCHOMP_MEGA] = sGarchompTeachableLearnset,
     [SPECIES_LUCARIO_MEGA] = sLucarioTeachableLearnset,
     [SPECIES_ABOMASNOW_MEGA] = sAbomasnowTeachableLearnset,
     [SPECIES_GALLADE_MEGA] = sGalladeTeachableLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_AUDINO_MEGA] = sAudinoTeachableLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_DIANCIE_MEGA] = sDiancieTeachableLearnset,
 #endif
     // Special Mega + Primals
@@ -1009,7 +1009,7 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_CORSOLA_GALARIAN] = sCorsolaGalarianTeachableLearnset,
     [SPECIES_ZIGZAGOON_GALARIAN] = sZigzagoonGalarianTeachableLearnset,
     [SPECIES_LINOONE_GALARIAN] = sLinooneGalarianTeachableLearnset,
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_DARUMAKA_GALARIAN] = sDarumakaGalarianTeachableLearnset,
     [SPECIES_DARMANITAN_GALARIAN] = sDarmanitanGalarianTeachableLearnset,
     [SPECIES_YAMASK_GALARIAN] = sYamaskGalarianTeachableLearnset,
@@ -1023,19 +1023,19 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_TYPHLOSION_HISUIAN] = sTyphlosionHisuianTeachableLearnset,
     [SPECIES_QWILFISH_HISUIAN] = sQwilfishHisuianTeachableLearnset,
     [SPECIES_SNEASEL_HISUIAN] = sSneaselHisuianTeachableLearnset,
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_SAMUROTT_HISUIAN] = sSamurottHisuianTeachableLearnset,
     [SPECIES_LILLIGANT_HISUIAN] = sLilligantHisuianTeachableLearnset,
     [SPECIES_ZORUA_HISUIAN] = sZoruaHisuianTeachableLearnset,
     [SPECIES_ZOROARK_HISUIAN] = sZoroarkHisuianTeachableLearnset,
     [SPECIES_BRAVIARY_HISUIAN] = sBraviaryHisuianTeachableLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_SLIGGOO_HISUIAN] = sSliggooHisuianTeachableLearnset,
     [SPECIES_GOODRA_HISUIAN] = sGoodraHisuianTeachableLearnset,
     [SPECIES_AVALUGG_HISUIAN] = sAvaluggHisuianTeachableLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
     [SPECIES_DECIDUEYE_HISUIAN] = sDecidueyeHisuianTeachableLearnset,
 #endif
     // Misc Forms
@@ -1093,7 +1093,7 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_DEOXYS_ATTACK] = sDeoxysAttackTeachableLearnset,
     [SPECIES_DEOXYS_DEFENSE] = sDeoxysDefenseTeachableLearnset,
     [SPECIES_DEOXYS_SPEED] = sDeoxysSpeedTeachableLearnset,
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
     // Burmy
     [SPECIES_BURMY_SANDY_CLOAK] = sBurmyTeachableLearnset,
     [SPECIES_BURMY_TRASH_CLOAK] = sBurmyTeachableLearnset,
@@ -1137,7 +1137,7 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_ARCEUS_DARK] = sArceusTeachableLearnset,
     [SPECIES_ARCEUS_FAIRY] = sArceusTeachableLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     // Basculin
     [SPECIES_BASCULIN_BLUE_STRIPED] = sBasculinTeachableLearnset,
     [SPECIES_BASCULIN_WHITE_STRIPED] = sBasculinTeachableLearnset,
@@ -1169,7 +1169,7 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_GENESECT_BURN_DRIVE] = sGenesectTeachableLearnset,
     [SPECIES_GENESECT_CHILL_DRIVE] = sGenesectTeachableLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     // Greninja
     [SPECIES_GRENINJA_BATTLE_BOND] = sGreninjaTeachableLearnset,
     [SPECIES_GRENINJA_ASH] = sGreninjaTeachableLearnset,
@@ -1241,7 +1241,7 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     // Hoopa
     [SPECIES_HOOPA_UNBOUND] = sHoopaUnboundTeachableLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
     // Oricorio
     [SPECIES_ORICORIO_POM_POM] = sOricorioTeachableLearnset,
     [SPECIES_ORICORIO_PAU] = sOricorioTeachableLearnset,
@@ -1294,7 +1294,7 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     // Magearna
     [SPECIES_MAGEARNA_ORIGINAL_COLOR] = sMagearnaTeachableLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_8
+#if P_GEN_8_POKEMON == TRUE
     // Cramorant
     [SPECIES_CRAMORANT_GULPING] = sCramorantTeachableLearnset,
     [SPECIES_CRAMORANT_GORGING] = sCramorantTeachableLearnset,

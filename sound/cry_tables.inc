@@ -386,7 +386,7 @@ gCryTable::
 	cry Cry_Rayquaza
 	cry Cry_Jirachi
 	cry Cry_Deoxys
-.if P_NEW_POKEMON >= GEN_4
+.if P_GEN_4_POKEMON == TRUE
 	cry Cry_Turtwig
 	cry Cry_Grotle
 	cry Cry_Torterra
@@ -603,7 +603,7 @@ gCryTable::
 	cry Cry_Unown
 	cry Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_5
+.if P_GEN_5_POKEMON == TRUE
 	cry Cry_Victini
 	cry Cry_Snivy
 	cry Cry_Servine
@@ -918,7 +918,7 @@ gCryTable::
 	cry Cry_Unown
 	cry Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_6
+.if P_GEN_6_POKEMON == TRUE
 	cry Cry_Chespin
 	cry Cry_Quilladin
 	cry Cry_Chesnaught
@@ -1065,7 +1065,7 @@ gCryTable::
 	cry Cry_Unown
 	cry Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_7
+.if P_GEN_7_POKEMON == TRUE
 	cry Cry_Rowlet
 	cry Cry_Dartrix
 	cry Cry_Decidueye
@@ -1244,7 +1244,7 @@ gCryTable::
 	cry Cry_Unown
 	cry Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_8
+.if P_GEN_8_POKEMON == TRUE
 	cry Cry_Grookey
 	cry Cry_Thwackey
 	cry Cry_Rillaboom
@@ -1480,7 +1480,7 @@ gCryTable::
 	cry Cry_MetagrossMega
 	cry Cry_LatiasMega
 	cry Cry_LatiosMega
-.if P_NEW_POKEMON >= GEN_4
+.if P_GEN_4_POKEMON == TRUE
 	cry Cry_LopunnyMega
 	cry Cry_GarchompMega
 	cry Cry_LucarioMega
@@ -1493,12 +1493,12 @@ gCryTable::
 	cry Cry_Unown
 	cry Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_5
+.if P_GEN_5_POKEMON == TRUE
 	cry Cry_AudinoMega
 .else
 	cry Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_6
+.if P_GEN_6_POKEMON == TRUE
 	cry Cry_DiancieMega
 .else
 	cry Cry_Unown
@@ -1542,7 +1542,7 @@ gCryTable::
 	cry Cry_Corsola
 	cry Cry_Zigzagoon
 	cry Cry_Linoone
-.if P_NEW_POKEMON >= GEN_5
+.if P_GEN_5_POKEMON == TRUE
 	cry Cry_Darumaka
 	cry Cry_Darmanitan
 	cry Cry_Yamask
@@ -1561,7 +1561,7 @@ gCryTable::
 	cry Cry_Typhlosion
 	cry Cry_Qwilfish
 	cry Cry_Sneasel
-.if P_NEW_POKEMON >= GEN_5
+.if P_GEN_5_POKEMON == TRUE
 	cry Cry_Samurott
 	cry Cry_Lilligant
 	cry Cry_Zorua
@@ -1574,7 +1574,7 @@ gCryTable::
 	cry Cry_Unown
 	cry Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_6
+.if P_GEN_6_POKEMON == TRUE
 	cry Cry_Sliggoo
 	cry Cry_Goodra
 	cry Cry_Avalugg
@@ -1583,7 +1583,7 @@ gCryTable::
 	cry Cry_Unown
 	cry Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_7
+.if P_GEN_7_POKEMON == TRUE
 	cry Cry_Decidueye
 .else
 	cry Cry_Unown
@@ -1643,7 +1643,7 @@ gCryTable::
 	cry Cry_Deoxys
 	cry Cry_Deoxys
 	cry Cry_Deoxys
-.if P_NEW_POKEMON >= GEN_4
+.if P_GEN_4_POKEMON == TRUE
 	@ Burmy
 	cry Cry_Burmy
 	cry Cry_Burmy
@@ -1730,7 +1730,7 @@ gCryTable::
 	cry Cry_Unown
 	cry Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_5
+.if P_GEN_5_POKEMON == TRUE
 	@ Basculin
 	cry Cry_Basculin
 	cry Cry_Basculin
@@ -1793,7 +1793,7 @@ gCryTable::
 	cry Cry_Unown
 	cry Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_6
+.if P_GEN_6_POKEMON == TRUE
 	@ Greninja
 	cry Cry_Greninja
 	cry Cry_Greninja
@@ -1936,7 +1936,7 @@ gCryTable::
 	@ Hoopa
 	cry Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_7
+.if P_GEN_7_POKEMON == TRUE
 	@ Oricorio
 	cry Cry_OricorioPomPom
 	cry Cry_OricorioPau
@@ -2041,7 +2041,7 @@ gCryTable::
 	@ Magearna
 	cry Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_8
+.if P_GEN_8_POKEMON == TRUE
 	@ Cramorant
 	cry Cry_Cramorant
 	cry Cry_Cramorant
@@ -2507,7 +2507,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Rayquaza
 	cry_reverse Cry_Jirachi
 	cry_reverse Cry_Deoxys
-.if P_NEW_POKEMON >= GEN_4
+.if P_GEN_4_POKEMON == TRUE
 	cry_reverse Cry_Turtwig
 	cry_reverse Cry_Grotle
 	cry_reverse Cry_Torterra
@@ -2724,7 +2724,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Unown
 	cry_reverse Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_5
+.if P_GEN_5_POKEMON == TRUE
 	cry_reverse Cry_Victini
 	cry_reverse Cry_Snivy
 	cry_reverse Cry_Servine
@@ -3039,7 +3039,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Unown
 	cry_reverse Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_6
+.if P_GEN_6_POKEMON == TRUE
 	cry_reverse Cry_Chespin
 	cry_reverse Cry_Quilladin
 	cry_reverse Cry_Chesnaught
@@ -3186,7 +3186,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Unown
 	cry_reverse Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_7
+.if P_GEN_7_POKEMON == TRUE
 	cry_reverse Cry_Rowlet
 	cry_reverse Cry_Dartrix
 	cry_reverse Cry_Decidueye
@@ -3365,7 +3365,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Unown
 	cry_reverse Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_8
+.if P_GEN_8_POKEMON == TRUE
 	cry_reverse Cry_Grookey
 	cry_reverse Cry_Thwackey
 	cry_reverse Cry_Rillaboom
@@ -3601,7 +3601,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_MetagrossMega
 	cry_reverse Cry_LatiasMega
 	cry_reverse Cry_LatiosMega
-.if P_NEW_POKEMON >= GEN_4
+.if P_GEN_4_POKEMON == TRUE
 	cry_reverse Cry_LopunnyMega
 	cry_reverse Cry_GarchompMega
 	cry_reverse Cry_LucarioMega
@@ -3614,12 +3614,12 @@ gCryTable_Reverse::
 	cry_reverse Cry_Unown
 	cry_reverse Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_5
+.if P_GEN_5_POKEMON == TRUE
 	cry_reverse Cry_AudinoMega
 .else
 	cry_reverse Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_6
+.if P_GEN_6_POKEMON == TRUE
 	cry_reverse Cry_DiancieMega
 .else
 	cry_reverse Cry_Unown
@@ -3663,7 +3663,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Corsola
 	cry_reverse Cry_Zigzagoon
 	cry_reverse Cry_Linoone
-.if P_NEW_POKEMON >= GEN_5
+.if P_GEN_5_POKEMON == TRUE
 	cry_reverse Cry_Darumaka
 	cry_reverse Cry_Darmanitan
 	cry_reverse Cry_Yamask
@@ -3682,7 +3682,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Typhlosion
 	cry_reverse Cry_Qwilfish
 	cry_reverse Cry_Sneasel
-.if P_NEW_POKEMON >= GEN_5
+.if P_GEN_5_POKEMON == TRUE
 	cry_reverse Cry_Samurott
 	cry_reverse Cry_Lilligant
 	cry_reverse Cry_Zorua
@@ -3695,7 +3695,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Unown
 	cry_reverse Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_6
+.if P_GEN_6_POKEMON == TRUE
 	cry_reverse Cry_Sliggoo
 	cry_reverse Cry_Goodra
 	cry_reverse Cry_Avalugg
@@ -3704,7 +3704,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Unown
 	cry_reverse Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_7
+.if P_GEN_7_POKEMON == TRUE
 	cry_reverse Cry_Decidueye
 .else
 	cry_reverse Cry_Unown
@@ -3764,7 +3764,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Deoxys
 	cry_reverse Cry_Deoxys
 	cry_reverse Cry_Deoxys
-.if P_NEW_POKEMON >= GEN_4
+.if P_GEN_4_POKEMON == TRUE
 	@ Burmy
 	cry_reverse Cry_Burmy
 	cry_reverse Cry_Burmy
@@ -3842,7 +3842,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Unown
 	cry_reverse Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_5
+.if P_GEN_5_POKEMON == TRUE
 	@ Basculin
 	cry_reverse Cry_Basculin
 	cry_reverse Cry_Basculin
@@ -3898,7 +3898,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Unown
 	cry_reverse Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_6
+.if P_GEN_6_POKEMON == TRUE
 	@ Greninja
 	cry_reverse Cry_Greninja
 	cry_reverse Cry_Greninja
@@ -4028,7 +4028,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Unown
 	cry_reverse Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_7
+.if P_GEN_7_POKEMON == TRUE
 	@ Oricorio
 	cry_reverse Cry_OricorioPomPom
 	cry_reverse Cry_OricorioPau
@@ -4124,7 +4124,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Unown
 	cry_reverse Cry_Unown
 .endif
-.if P_NEW_POKEMON >= GEN_8
+.if P_GEN_8_POKEMON == TRUE
 	@ Cramorant
 	cry_reverse Cry_Cramorant
 	cry_reverse Cry_Cramorant

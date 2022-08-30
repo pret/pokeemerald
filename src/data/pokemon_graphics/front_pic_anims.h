@@ -4805,7 +4805,7 @@ static const union AnimCmd sAnim_UNOWN_QMARK_1[] =
     ANIMCMD_END,
 };
 
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
 static const union AnimCmd sAnim_TURTWIG_1[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -5768,7 +5768,7 @@ static const union AnimCmd sAnim_ARCEUS_1[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
 static const union AnimCmd sAnim_VICTINI_1[] =
 {
     ANIMCMD_FRAME(0, 30),
@@ -7017,7 +7017,7 @@ static const union AnimCmd sAnim_GENESECT_1[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
 static const union AnimCmd sAnim_CHESPIN_1[] =
 {
     ANIMCMD_FRAME(0, 8),
@@ -7455,7 +7455,7 @@ static const union AnimCmd sAnim_VOLCANION_1[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
 static const union AnimCmd sAnim_ROWLET_1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -8001,7 +8001,7 @@ static const union AnimCmd sAnim_MELMETAL_1[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_8
+#if P_GEN_8_POKEMON == TRUE
 static const union AnimCmd sAnim_GROOKEY_1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -8837,7 +8837,7 @@ static const union AnimCmd sAnim_RAYQUAZA_MEGA_1[] =
     ANIMCMD_END,
 };
 
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
 static const union AnimCmd sAnim_LOPUNNY_MEGA_1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -8869,7 +8869,7 @@ static const union AnimCmd sAnim_GALLADE_MEGA_1[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
 static const union AnimCmd sAnim_AUDINO_MEGA_1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -8877,7 +8877,7 @@ static const union AnimCmd sAnim_AUDINO_MEGA_1[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
 static const union AnimCmd sAnim_DIANCIE_MEGA_1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -9083,7 +9083,7 @@ static const union AnimCmd sAnim_LINOONE_GALARIAN_1[] =
     ANIMCMD_END,
 };
 
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
 static const union AnimCmd sAnim_DARUMAKA_GALARIAN_1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -9151,7 +9151,7 @@ static const union AnimCmd sAnim_SNEASEL_HISUIAN_1[] =
     ANIMCMD_END,
 };
 
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
 static const union AnimCmd sAnim_SAMUROTT_HISUIAN_1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -9183,7 +9183,7 @@ static const union AnimCmd sAnim_BRAVIARY_HISUIAN_1[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
 static const union AnimCmd sAnim_SLIGGOO_HISUIAN_1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -9203,7 +9203,7 @@ static const union AnimCmd sAnim_AVALUGG_HISUIAN_1[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
 static const union AnimCmd sAnim_DECIDUEYE_HISUIAN_1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -9357,7 +9357,7 @@ static const union AnimCmd sAnim_DEOXYS_SPEED_2[] =
     ANIMCMD_END,
 };
 
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
 static const union AnimCmd sAnim_SHAYMIN_SKY_1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -9383,7 +9383,7 @@ static const union AnimCmd sAnim_GIRATINA_ORIGIN_1[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
 static const union AnimCmd sAnim_DARMANITAN_ZEN_MODE_1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -9439,7 +9439,7 @@ static const union AnimCmd sAnim_MELOETTA_PIROUETTE_1[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
 static const union AnimCmd sAnim_AEGISLASH_BLADE_1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -9465,7 +9465,7 @@ static const union AnimCmd sAnim_HOOPA_UNBOUND_1[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
 static const union AnimCmd sAnim_MINIOR_CORE_1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -9497,7 +9497,7 @@ static const union AnimCmd sAnim_LYCANROC_DUSK_1[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_8
+#if P_GEN_8_POKEMON == TRUE
 static const union AnimCmd sAnim_ENAMORUS_THERIAN_1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -12061,7 +12061,7 @@ static const union AnimCmd *const sAnims_UNOWN_QMARK[] =
     sAnim_UNOWN_QMARK_1,
 };
 
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
 static const union AnimCmd *const sAnims_TURTWIG[] =
 {
     sAnim_GeneralFrame0,
@@ -12735,7 +12735,7 @@ static const union AnimCmd *const sAnims_ARCEUS[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
 static const union AnimCmd *const sAnims_VICTINI[] =
 {
     sAnim_GeneralFrame0,
@@ -13673,7 +13673,7 @@ static const union AnimCmd *const sAnims_GENESECT[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
 static const union AnimCmd *const sAnims_CHESPIN[] =
 {
     sAnim_GeneralFrame0,
@@ -14107,7 +14107,7 @@ static const union AnimCmd *const sAnims_VOLCANION[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
 static const union AnimCmd *const sAnims_ROWLET[] =
 {
     sAnim_GeneralFrame0,
@@ -14637,7 +14637,7 @@ static const union AnimCmd *const sAnims_MELMETAL[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_8
+#if P_GEN_8_POKEMON == TRUE
 static const union AnimCmd *const sAnims_GROOKEY[] =
 {
     sAnim_GeneralFrame0,
@@ -15473,7 +15473,7 @@ static const union AnimCmd *const sAnims_RAYQUAZA_MEGA[] =
     sAnim_RAYQUAZA_MEGA_1,
 };
 
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
 static const union AnimCmd *const sAnims_LOPUNNY_MEGA[] =
 {
     sAnim_GeneralFrame0,
@@ -15505,7 +15505,7 @@ static const union AnimCmd *const sAnims_GALLADE_MEGA[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
 static const union AnimCmd *const sAnims_AUDINO_MEGA[] =
 {
     sAnim_GeneralFrame0,
@@ -15513,7 +15513,7 @@ static const union AnimCmd *const sAnims_AUDINO_MEGA[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
 static const union AnimCmd *const sAnims_DIANCIE_MEGA[] =
 {
     sAnim_GeneralFrame0,
@@ -15719,7 +15719,7 @@ static const union AnimCmd *const sAnims_LINOONE_GALARIAN[] =
     sAnim_LINOONE_GALARIAN_1,
 };
 
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
 static const union AnimCmd *const sAnims_DARUMAKA_GALARIAN[] =
 {
     sAnim_GeneralFrame0,
@@ -15787,7 +15787,7 @@ static const union AnimCmd *const sAnims_SNEASEL_HISUIAN[] =
     sAnim_SNEASEL_HISUIAN_1,
 };
 
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
 static const union AnimCmd *const sAnims_SAMUROTT_HISUIAN[] =
 {
     sAnim_GeneralFrame0,
@@ -15819,7 +15819,7 @@ static const union AnimCmd *const sAnims_BRAVIARY_HISUIAN[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
 static const union AnimCmd *const sAnims_SLIGGOO_HISUIAN[] =
 {
     sAnim_GeneralFrame0,
@@ -15839,7 +15839,7 @@ static const union AnimCmd *const sAnims_AVALUGG_HISUIAN[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
 static const union AnimCmd *const sAnims_DECIDUEYE_HISUIAN[] =
 {
     sAnim_GeneralFrame0,
@@ -15956,7 +15956,7 @@ static const union AnimCmd *const sAnims_DEOXYS_SPEED[] =
     sAnim_DEOXYS_SPEED_2,
 };
 
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
 static const union AnimCmd *const sAnims_DIALGA_ORIGIN[] =
 {
     sAnim_GeneralFrame0,
@@ -15982,7 +15982,7 @@ static const union AnimCmd *const sAnims_SHAYMIN_SKY[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
 static const union AnimCmd *const sAnims_DARMANITAN_ZEN_MODE[] =
 {
     sAnim_GeneralFrame0,
@@ -16038,7 +16038,7 @@ static const union AnimCmd *const sAnims_MELOETTA_PIROUETTE[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
 static const union AnimCmd *const sAnims_AEGISLASH_BLADE[] =
 {
     sAnim_GeneralFrame0,
@@ -16064,7 +16064,7 @@ static const union AnimCmd *const sAnims_HOOPA_UNBOUND[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
 static const union AnimCmd *const sAnims_MINIOR_CORE[] =
 {
     sAnim_GeneralFrame0,
@@ -16096,7 +16096,7 @@ static const union AnimCmd *const sAnims_LYCANROC_DUSK[] =
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_8
+#if P_GEN_8_POKEMON == TRUE
 static const union AnimCmd *const sAnims_ENAMORUS_THERIAN[] =
 {
     sAnim_GeneralFrame0,
@@ -16496,7 +16496,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(JIRACHI),
     ANIM_CMD(DEOXYS),
     ANIM_CMD(CHIMECHO),
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
     ANIM_CMD(TURTWIG),
     ANIM_CMD(GROTLE),
     ANIM_CMD(TORTERRA),
@@ -16605,7 +16605,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(SHAYMIN),
     ANIM_CMD(ARCEUS),
 #endif
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     ANIM_CMD(VICTINI),
     ANIM_CMD(SNIVY),
     ANIM_CMD(SERVINE),
@@ -16763,7 +16763,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(MELOETTA),
     ANIM_CMD(GENESECT),
 #endif
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     ANIM_CMD(CHESPIN),
     ANIM_CMD(QUILLADIN),
     ANIM_CMD(CHESNAUGHT),
@@ -16837,7 +16837,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(HOOPA),
     ANIM_CMD(VOLCANION),
 #endif
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
     ANIM_CMD(ROWLET),
     ANIM_CMD(DARTRIX),
     ANIM_CMD(DECIDUEYE),
@@ -16927,7 +16927,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(MELTAN),
     ANIM_CMD(MELMETAL),
 #endif
-#if P_NEW_POKEMON >= GEN_8
+#if P_GEN_8_POKEMON == TRUE
     ANIM_CMD(GROOKEY),
     ANIM_CMD(THWACKEY),
     ANIM_CMD(RILLABOOM),
@@ -17065,17 +17065,17 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(METAGROSS_MEGA),
     ANIM_CMD(LATIAS_MEGA),
     ANIM_CMD(LATIOS_MEGA),
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
     ANIM_CMD(LOPUNNY_MEGA),
     ANIM_CMD(GARCHOMP_MEGA),
     ANIM_CMD(LUCARIO_MEGA),
     ANIM_CMD(ABOMASNOW_MEGA),
     ANIM_CMD(GALLADE_MEGA),
 #endif
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     ANIM_CMD(AUDINO_MEGA),
 #endif
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     ANIM_CMD(DIANCIE_MEGA),
 #endif
     ANIM_CMD(RAYQUAZA_MEGA),
@@ -17114,7 +17114,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(CORSOLA_GALARIAN),
     ANIM_CMD(ZIGZAGOON_GALARIAN),
     ANIM_CMD(LINOONE_GALARIAN),
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     ANIM_CMD(DARUMAKA_GALARIAN),
     ANIM_CMD(DARMANITAN_GALARIAN),
     ANIM_CMD(YAMASK_GALARIAN),
@@ -17127,19 +17127,19 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(TYPHLOSION_HISUIAN),
     ANIM_CMD(QWILFISH_HISUIAN),
     ANIM_CMD(SNEASEL_HISUIAN),
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     ANIM_CMD(SAMUROTT_HISUIAN),
     ANIM_CMD(LILLIGANT_HISUIAN),
     ANIM_CMD(ZORUA_HISUIAN),
     ANIM_CMD(ZOROARK_HISUIAN),
     ANIM_CMD(BRAVIARY_HISUIAN),
 #endif
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     ANIM_CMD(SLIGGOO_HISUIAN),
     ANIM_CMD(GOODRA_HISUIAN),
     ANIM_CMD(AVALUGG_HISUIAN),
 #endif
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
     ANIM_CMD(DECIDUEYE_HISUIAN),
 #endif
     ANIM_CMD(PIKACHU_COSPLAY),
@@ -17190,7 +17190,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(DEOXYS_ATTACK),
     ANIM_CMD(DEOXYS_DEFENSE),
     ANIM_CMD(DEOXYS_SPEED),
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
     ANIM_CMD_FULL(BURMY_SANDY_CLOAK, sAnims_BURMY),
     ANIM_CMD_FULL(BURMY_TRASH_CLOAK, sAnims_BURMY),
     ANIM_CMD_FULL(WORMADAM_SANDY_CLOAK, sAnims_WORMADAM),
@@ -17225,7 +17225,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD_FULL(ARCEUS_DARK, sAnims_ARCEUS),
     ANIM_CMD_FULL(ARCEUS_FAIRY, sAnims_ARCEUS),
 #endif
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     ANIM_CMD_FULL(BASCULIN_BLUE_STRIPED, sAnims_BASCULIN),
     ANIM_CMD_FULL(BASCULIN_WHITE_STRIPED, sAnims_BASCULIN),
     ANIM_CMD(DARMANITAN_ZEN_MODE),
@@ -17248,7 +17248,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD_FULL(GENESECT_BURN_DRIVE, sAnims_GENESECT),
     ANIM_CMD_FULL(GENESECT_CHILL_DRIVE, sAnims_GENESECT),
 #endif
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     ANIM_CMD_FULL(GRENINJA_BATTLE_BOND, sAnims_GRENINJA),
     ANIM_CMD_FULL(GRENINJA_ASH, sAnims_GRENINJA),
     ANIM_CMD_FULL(VIVILLON_POLAR, sAnims_VIVILLON),
@@ -17307,7 +17307,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(ZYGARDE_COMPLETE),
     ANIM_CMD(HOOPA_UNBOUND),
 #endif
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
     ANIM_CMD_FULL(ORICORIO_POM_POM, sAnims_ORICORIO),
     ANIM_CMD_FULL(ORICORIO_PAU, sAnims_ORICORIO),
     ANIM_CMD_FULL(ORICORIO_SENSU, sAnims_ORICORIO),
@@ -17351,7 +17351,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD_FULL(NECROZMA_ULTRA, sAnims_NECROZMA),
     ANIM_CMD_FULL(MAGEARNA_ORIGINAL_COLOR, sAnims_MAGEARNA),
 #endif
-#if P_NEW_POKEMON >= GEN_8
+#if P_GEN_8_POKEMON == TRUE
     ANIM_CMD_FULL(CRAMORANT_GULPING, sAnims_CRAMORANT),
     ANIM_CMD_FULL(CRAMORANT_GORGING, sAnims_CRAMORANT),
     ANIM_CMD_FULL(TOXTRICITY_LOW_KEY, sAnims_TOXTRICITY),

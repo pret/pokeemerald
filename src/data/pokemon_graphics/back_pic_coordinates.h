@@ -1954,7 +1954,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 9,
     },
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
     [SPECIES_TURTWIG] =
     {
         .size = MON_COORDS_SIZE(48, 56),
@@ -2487,7 +2487,7 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_ARCEUS] = ARCEUS_BACK_PIC_COORDS,
 #endif
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_VICTINI] =
     {
         .size = MON_COORDS_SIZE(40, 64),
@@ -3265,7 +3265,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .y_offset = 8,
     },
 #endif
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_CHESPIN] =
     {
         .size = MON_COORDS_SIZE(56, 64),
@@ -3627,7 +3627,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .y_offset = 3,
     },
 #endif
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
     [SPECIES_ROWLET] =
     {
         .size = MON_COORDS_SIZE(48, 40),
@@ -4069,7 +4069,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .y_offset = 13,
     },
 #endif
-#if P_NEW_POKEMON >= GEN_8
+#if P_GEN_8_POKEMON == TRUE
     [SPECIES_GROOKEY] =
     {
         .size = MON_COORDS_SIZE(48, 56),
@@ -4752,7 +4752,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 1,
     },
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
     [SPECIES_LOPUNNY_MEGA] =
     {
         .size = MON_COORDS_SIZE(64, 64),
@@ -4779,14 +4779,14 @@ const struct MonCoords gMonBackPicCoords[] =
         .y_offset = 3,
     },
 #endif
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_AUDINO_MEGA] =
     {
         .size = MON_COORDS_SIZE(56, 64),
         .y_offset = 0,
     },
 #endif
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_DIANCIE_MEGA] =
     {
         .size = MON_COORDS_SIZE(64, 56),
@@ -4976,7 +4976,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 40),
         .y_offset = 13,
     },
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_DARUMAKA_GALARIAN] =
     {
         .size = MON_COORDS_SIZE(56, 48),
@@ -5034,7 +5034,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(56, 64),
         .y_offset = 3,
     },
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_SAMUROTT_HISUIAN] =
     {
         .size = MON_COORDS_SIZE(64, 64),
@@ -5061,7 +5061,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .y_offset = 0,
     },
 #endif
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_SLIGGOO_HISUIAN] =
     {
         .size = MON_COORDS_SIZE(64, 64),
@@ -5078,7 +5078,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .y_offset = 17,
     },
 #endif
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
     [SPECIES_DECIDUEYE_HISUIAN] =
     {
         .size = MON_COORDS_SIZE(64, 64),
@@ -5276,7 +5276,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
     // Burmy
     [SPECIES_BURMY_SANDY_CLOAK] =
     {
@@ -5384,7 +5384,7 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_ARCEUS_DARK] = ARCEUS_BACK_PIC_COORDS,
     [SPECIES_ARCEUS_FAIRY] = ARCEUS_BACK_PIC_COORDS,
 #endif
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     // Basculin
     [SPECIES_BASCULIN_BLUE_STRIPED] =
     {
@@ -5488,7 +5488,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .y_offset = 8,
     },
 #endif
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     // Greninja
     [SPECIES_GRENINJA_BATTLE_BOND] =
     {
@@ -5788,7 +5788,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .y_offset = 0,
     },
 #endif
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
     // Oricorio
     [SPECIES_ORICORIO_POM_POM] =
     {
@@ -6009,7 +6009,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .y_offset = 4,
     },
 #endif
-#if P_NEW_POKEMON >= GEN_8
+#if P_GEN_8_POKEMON == TRUE
     // Cramorant
     [SPECIES_CRAMORANT_GULPING] =
     {

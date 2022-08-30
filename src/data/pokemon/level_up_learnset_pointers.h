@@ -387,7 +387,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_JIRACHI] = sJirachiLevelUpLearnset,
     [SPECIES_DEOXYS] = sDeoxysLevelUpLearnset,
     [SPECIES_CHIMECHO] = sChimechoLevelUpLearnset,
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
     [SPECIES_TURTWIG] = sTurtwigLevelUpLearnset,
     [SPECIES_GROTLE] = sGrotleLevelUpLearnset,
     [SPECIES_TORTERRA] = sTorterraLevelUpLearnset,
@@ -496,7 +496,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_SHAYMIN] = sShayminLevelUpLearnset,
     [SPECIES_ARCEUS] = sArceusLevelUpLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_VICTINI] = sVictiniLevelUpLearnset,
     [SPECIES_SNIVY] = sSnivyLevelUpLearnset,
     [SPECIES_SERVINE] = sServineLevelUpLearnset,
@@ -654,7 +654,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_MELOETTA] = sMeloettaLevelUpLearnset,
     [SPECIES_GENESECT] = sGenesectLevelUpLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_CHESPIN] = sChespinLevelUpLearnset,
     [SPECIES_QUILLADIN] = sQuilladinLevelUpLearnset,
     [SPECIES_CHESNAUGHT] = sChesnaughtLevelUpLearnset,
@@ -728,7 +728,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_HOOPA] = sHoopaLevelUpLearnset,
     [SPECIES_VOLCANION] = sVolcanionLevelUpLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
     [SPECIES_ROWLET] = sRowletLevelUpLearnset,
     [SPECIES_DARTRIX] = sDartrixLevelUpLearnset,
     [SPECIES_DECIDUEYE] = sDecidueyeLevelUpLearnset,
@@ -818,7 +818,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_MELTAN] = sMeltanLevelUpLearnset,
     [SPECIES_MELMETAL] = sMelmetalLevelUpLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_8
+#if P_GEN_8_POKEMON == TRUE
     [SPECIES_GROOKEY] = sGrookeyLevelUpLearnset,
     [SPECIES_THWACKEY] = sThwackeyLevelUpLearnset,
     [SPECIES_RILLABOOM] = sRillaboomLevelUpLearnset,
@@ -957,17 +957,17 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_METAGROSS_MEGA] = sMetagrossLevelUpLearnset,
     [SPECIES_LATIAS_MEGA] = sLatiasLevelUpLearnset,
     [SPECIES_LATIOS_MEGA] = sLatiosLevelUpLearnset,
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
     [SPECIES_LOPUNNY_MEGA] = sLopunnyLevelUpLearnset,
     [SPECIES_GARCHOMP_MEGA] = sGarchompLevelUpLearnset,
     [SPECIES_LUCARIO_MEGA] = sLucarioLevelUpLearnset,
     [SPECIES_ABOMASNOW_MEGA] = sAbomasnowLevelUpLearnset,
     [SPECIES_GALLADE_MEGA] = sGalladeLevelUpLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_AUDINO_MEGA] = sAudinoLevelUpLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_DIANCIE_MEGA] = sDiancieLevelUpLearnset,
 #endif
     // Special Mega + Primals
@@ -1009,7 +1009,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_CORSOLA_GALARIAN] = sCorsolaGalarianLevelUpLearnset,
     [SPECIES_ZIGZAGOON_GALARIAN] = sZigzagoonGalarianLevelUpLearnset,
     [SPECIES_LINOONE_GALARIAN] = sLinooneGalarianLevelUpLearnset,
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_DARUMAKA_GALARIAN] = sDarumakaGalarianLevelUpLearnset,
     [SPECIES_DARMANITAN_GALARIAN] = sDarmanitanGalarianLevelUpLearnset,
     [SPECIES_YAMASK_GALARIAN] = sYamaskGalarianLevelUpLearnset,
@@ -1023,19 +1023,19 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_TYPHLOSION_HISUIAN] = sTyphlosionHisuianLevelUpLearnset,
     [SPECIES_QWILFISH_HISUIAN] = sQwilfishHisuianLevelUpLearnset,
     [SPECIES_SNEASEL_HISUIAN] = sSneaselHisuianLevelUpLearnset,
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_SAMUROTT_HISUIAN] = sSamurottHisuianLevelUpLearnset,
     [SPECIES_LILLIGANT_HISUIAN] = sLilligantHisuianLevelUpLearnset,
     [SPECIES_ZORUA_HISUIAN] = sZoruaHisuianLevelUpLearnset,
     [SPECIES_ZOROARK_HISUIAN] = sZoroarkHisuianLevelUpLearnset,
     [SPECIES_BRAVIARY_HISUIAN] = sBraviaryHisuianLevelUpLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_SLIGGOO_HISUIAN] = sSliggooHisuianLevelUpLearnset,
     [SPECIES_GOODRA_HISUIAN] = sGoodraHisuianLevelUpLearnset,
     [SPECIES_AVALUGG_HISUIAN] = sAvaluggHisuianLevelUpLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
     [SPECIES_DECIDUEYE_HISUIAN] = sDecidueyeHisuianLevelUpLearnset,
 #endif
     // Misc Forms
@@ -1093,7 +1093,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_DEOXYS_ATTACK] = sDeoxysAttackLevelUpLearnset,
     [SPECIES_DEOXYS_DEFENSE] = sDeoxysDefenseLevelUpLearnset,
     [SPECIES_DEOXYS_SPEED] = sDeoxysSpeedLevelUpLearnset,
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
     // Burmy
     [SPECIES_BURMY_SANDY_CLOAK] = sBurmyLevelUpLearnset,
     [SPECIES_BURMY_TRASH_CLOAK] = sBurmyLevelUpLearnset,
@@ -1137,7 +1137,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_ARCEUS_DARK] = sArceusLevelUpLearnset,
     [SPECIES_ARCEUS_FAIRY] = sArceusLevelUpLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
     // Basculin
     [SPECIES_BASCULIN_BLUE_STRIPED] = sBasculinLevelUpLearnset,
     [SPECIES_BASCULIN_WHITE_STRIPED] = sBasculinLevelUpLearnset,
@@ -1169,7 +1169,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_GENESECT_BURN_DRIVE] = sGenesectLevelUpLearnset,
     [SPECIES_GENESECT_CHILL_DRIVE] = sGenesectLevelUpLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
     // Greninja
     [SPECIES_GRENINJA_BATTLE_BOND] = sGreninjaLevelUpLearnset,
     [SPECIES_GRENINJA_ASH] = sGreninjaLevelUpLearnset,
@@ -1241,7 +1241,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     // Hoopa
     [SPECIES_HOOPA_UNBOUND] = sHoopaUnboundLevelUpLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
     // Oricorio
     [SPECIES_ORICORIO_POM_POM] = sOricorioLevelUpLearnset,
     [SPECIES_ORICORIO_PAU] = sOricorioLevelUpLearnset,
@@ -1294,7 +1294,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     // Magearna
     [SPECIES_MAGEARNA_ORIGINAL_COLOR] = sMagearnaLevelUpLearnset,
 #endif
-#if P_NEW_POKEMON >= GEN_8
+#if P_GEN_8_POKEMON == TRUE
     // Cramorant
     [SPECIES_CRAMORANT_GULPING] = sCramorantLevelUpLearnset,
     [SPECIES_CRAMORANT_GORGING] = sCramorantLevelUpLearnset,

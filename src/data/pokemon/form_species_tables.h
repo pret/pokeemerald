@@ -549,7 +549,7 @@ static const u16 sDeoxysFormSpeciesIdTable[] = {
     FORM_SPECIES_END,
 };
 
-#if P_NEW_POKEMON >= GEN_4
+#if P_GEN_4_POKEMON == TRUE
 static const u16 sBurmyFormSpeciesIdTable[] = {
     SPECIES_BURMY,
     SPECIES_BURMY_SANDY_CLOAK,
@@ -669,7 +669,7 @@ static const u16 sArceusFormSpeciesIdTable[] = {
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_5
+#if P_GEN_5_POKEMON == TRUE
 static const u16 sSamurottFormSpeciesIdTable[] = {
     SPECIES_SAMUROTT,
     SPECIES_SAMUROTT_HISUIAN,
@@ -773,12 +773,6 @@ static const u16 sLandorusFormSpeciesIdTable[] = {
     FORM_SPECIES_END,
 };
 
-static const u16 sEnamorusFormSpeciesIdTable[] = {
-    SPECIES_ENAMORUS,
-    SPECIES_ENAMORUS_THERIAN,
-    FORM_SPECIES_END,
-};
-
 static const u16 sKyuremFormSpeciesIdTable[] = {
     SPECIES_KYUREM,
     SPECIES_KYUREM_WHITE,
@@ -808,7 +802,7 @@ static const u16 sGenesectFormSpeciesIdTable[] = {
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_6
+#if P_GEN_6_POKEMON == TRUE
 static const u16 sGreninjaFormSpeciesIdTable[] = {
     SPECIES_GRENINJA,
     SPECIES_GRENINJA_BATTLE_BOND,
@@ -956,7 +950,7 @@ static const u16 sHoopaFormSpeciesIdTable[] = {
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_7
+#if P_GEN_7_POKEMON == TRUE
 static const u16 sDecidueyeFormSpeciesIdTable[] = {
     SPECIES_DECIDUEYE,
     SPECIES_DECIDUEYE_HISUIAN,
@@ -1051,7 +1045,7 @@ static const u16 sMagearnaFormSpeciesIdTable[] = {
 };
 #endif
 
-#if P_NEW_POKEMON >= GEN_8
+#if P_GEN_8_POKEMON == TRUE
 static const u16 sCramorantFormSpeciesIdTable[] = {
     SPECIES_CRAMORANT,
     SPECIES_CRAMORANT_GULPING,
@@ -1144,4 +1138,11 @@ static const u16 sCalyrexFormSpeciesIdTable[] = {
     SPECIES_CALYREX_SHADOW_RIDER,
     FORM_SPECIES_END,
 };
+
+static const u16 sEnamorusFormSpeciesIdTable[] = {
+    SPECIES_ENAMORUS,
+    SPECIES_ENAMORUS_THERIAN,
+    FORM_SPECIES_END,
+};
+
 #endif
