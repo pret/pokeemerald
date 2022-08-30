@@ -4002,7 +4002,7 @@ static void HandleTurnActionSelectionState(void)
                     break;
                 case B_ACTION_USE_ITEM:
                     #if TX_DEBUG_SYSTEM == TRUE
-                    if (FlagGet(FLAG_SYS_NO_BAG_USE))
+                    if (FlagGet(TX_DEBUG_FLAG_NO_BAG_USE))
                     {
                         RecordedBattle_ClearBattlerAction(gActiveBattler, 1);
                         gSelectionBattleScripts[gActiveBattler] = BattleScript_ActionSelectionItemsCantBeUsed;

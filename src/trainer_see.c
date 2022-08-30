@@ -194,7 +194,7 @@ bool8 CheckForTrainersWantingBattle(void)
     u8 i;
 
     #if TX_DEBUG_SYSTEM == TRUE
-    if (FlagGet(FLAG_SYS_NO_TRAINER_SEE))
+    if (FlagGet(TX_DEBUG_FLAG_NO_TRAINER_SEE))
         return FALSE;
     #endif
 

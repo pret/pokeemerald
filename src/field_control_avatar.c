@@ -708,7 +708,7 @@ void RestartWildEncounterImmunitySteps(void)
 static bool8 CheckStandardWildEncounter(u16 metatileBehavior)
 {
     #if TX_DEBUG_SYSTEM == TRUE
-    if (FlagGet(FLAG_SYS_NO_ENCOUNTER))
+    if (FlagGet(TX_DEBUG_FLAG_NO_ENCOUNTER))
         return FALSE;
     #endif
 
