@@ -147,6 +147,7 @@ struct ProtectStruct
     u16 pranksterElevated:1;
     u16 quickDraw:1;
     u16 beakBlastCharge:1;
+    u16 quash:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;
@@ -178,6 +179,7 @@ struct SpecialStatus
     u8 dancerOriginalTarget:3;
     u8 announceNeutralizingGas:1;   // See Cmd_switchineffects
     u8 neutralizingGasRemoved:1;    // See VARIOUS_TRY_END_NEUTRALIZING_GAS
+    u8 affectionEndured:1;
     s32 dmg;
     s32 physicalDmg;
     s32 specialDmg;

@@ -97,7 +97,7 @@ void AnimTask_BlendBattleAnimPalExclude(u8 taskId)
     for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
     {
         if (battler != animBattlers[0] && battler != animBattlers[1] && IsBattlerSpriteVisible(battler))
-            selectedPalettes |= 0x10000 << AnimDummyReturnArg(battler);
+            selectedPalettes |= 0x10000 << GetSpritePalIdxByBattler(battler);
     }
 
     StartBlendAnimSpriteColor(taskId, selectedPalettes);
@@ -536,9 +536,9 @@ static void StatsChangeAnimation_Step2(u8 taskId)
     gTasks[taskId].func = StatsChangeAnimation_Step3;
 
     if (sAnimStatsChangeData->data[0] == 0)
-        PlaySE12WithPanning(SE_M_STAT_INCREASE, BattleAnimAdjustPanning2(-64));
+        PlaySE12WithPanning(SE_M_STAT_INCREASE, BattleAnimAdjustPanning2(SOUND_PAN_ATTACKER));
     else
-        PlaySE12WithPanning(SE_M_STAT_DECREASE, BattleAnimAdjustPanning2(-64));
+        PlaySE12WithPanning(SE_M_STAT_DECREASE, BattleAnimAdjustPanning2(SOUND_PAN_ATTACKER));
 }
 
 static void StatsChangeAnimation_Step3(u8 taskId)

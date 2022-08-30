@@ -3978,6 +3978,35 @@ Cry_Spectrier::
 	.align 2
 Cry_Calyrex::
 	.incbin "sound/direct_sound_samples/cries/calyrex.bin"
+/*	
+	.align 2
+Cry_Wyrdeer::
+	.incbin "sound/direct_sound_samples/cries/wyrdeer.bin"
+
+	.align 2
+Cry_Kleavor::
+	.incbin "sound/direct_sound_samples/cries/kleavor.bin"
+
+	.align 2
+Cry_Ursaluna::
+	.incbin "sound/direct_sound_samples/cries/ursaluna.bin"
+
+	.align 2
+Cry_Basculegion::
+	.incbin "sound/direct_sound_samples/cries/basculegion.bin"
+
+	.align 2
+Cry_Sneasler::
+	.incbin "sound/direct_sound_samples/cries/sneasler.bin"
+
+	.align 2
+Cry_Overqwil::
+	.incbin "sound/direct_sound_samples/cries/overqwil.bin"
+
+	.align 2
+Cry_Enamorus::
+	.incbin "sound/direct_sound_samples/cries/enamorus.bin"
+*/
 
 	.align 2
 Cry_VenusaurMega::
@@ -4198,6 +4227,11 @@ Cry_ThundurusTherian::
 	.align 2
 Cry_LandorusTherian::
 	.incbin "sound/direct_sound_samples/cries/landorus_therian.bin"
+/*
+	.align 2
+Cry_EnamorusTherian::
+	.incbin "sound/direct_sound_samples/cries/enamorus_therian.bin"
+*/
 
 	.align 2
 Cry_KyuremWhite::
