@@ -1734,7 +1734,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
 #if B_AFFECTION_MECHANICS == TRUE
     // With high affection/friendship there's a chance to evade a move by substracting 10% of its accuracy.
     // I can't find exact information about that chance, so I'm just gonna write it as a 20% chance for now.
-    if (GetMonFriendshipScore(battlerDef) >= FRIENDSHIP_150_TO_199 && (Random() % 100) <= 20)
+    if (GetBattlerFriendshipScore(battlerDef) >= FRIENDSHIP_150_TO_199 && (Random() % 100) <= 20)
         calc = (calc * 90) / 100;
 #endif
 
@@ -1907,7 +1907,7 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
                     + 2 * (holdEffectAtk == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBattlerAttacker].species == SPECIES_CHANSEY)
                     + 2 * BENEFITS_FROM_LEEK(battlerAtk, holdEffectAtk)
                 #if B_AFFECTION_MECHANICS == TRUE
-                    + 2 * (GetMonFriendshipScore(gBattlerAttacker) >= FRIENDSHIP_200_TO_254)
+                    + 2 * (GetBattlerFriendshipScore(gBattlerAttacker) >= FRIENDSHIP_200_TO_254)
                 #endif
                     + (abilityAtk == ABILITY_SUPER_LUCK);
 
@@ -4063,7 +4063,7 @@ static void Cmd_getexp(void)
                     }
                     #endif
                 #if B_AFFECTION_MECHANICS == TRUE
-                    if (GetMonFriendshipScore(gBattleStruct->expGetterMonId) >= FRIENDSHIP_50_TO_99)
+                    if (GetBattlerFriendshipScore(gBattleStruct->expGetterMonId) >= FRIENDSHIP_50_TO_99)
                         gBattleMoveDamage = (gBattleMoveDamage * 120) / 100;
                 #endif
 
