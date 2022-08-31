@@ -5292,11 +5292,14 @@ static void Task_TryLearningNextMove(u8 taskId)
         switch (result)
         {
         case 0: // No moves to learn
+            if (sInitialLevel >= sFinalLevel)
+                PartyMenuTryEvolution(taskId);
             break;
         case MON_HAS_MAX_MOVES:
             DisplayMonNeedsToReplaceMove(taskId);
             break;
         case MON_ALREADY_KNOWS_MOVE:
+            gTasks[taskId].func = Task_TryLearningNextMove;
             return;
         default:
             DisplayMonLearnedMove(taskId, result);
@@ -5305,8 +5308,6 @@ static void Task_TryLearningNextMove(u8 taskId)
         if (result)
             break;
     }
-    if (sInitialLevel >= sFinalLevel)
-        PartyMenuTryEvolution(taskId);
 }
 
 static void PartyMenuTryEvolution(u8 taskId)
