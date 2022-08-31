@@ -5714,20 +5714,26 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
              && GetMonData(mon, MON_DATA_LEVEL, NULL) != MAX_LEVEL)
             {
                 u8 param = ItemId_GetHoldEffectParam(item);
+                dataUnsigned = 0;
+
                 if (param == 0) // Rare Candy
                 {
                     dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL) + 1];
                 }
-                else if (param < ARRAY_COUNT(sExpCandyExperienceTable)) // EXP Candies
+                else if (param - 1 < ARRAY_COUNT(sExpCandyExperienceTable)) // EXP Candies
                 {
                     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
                     dataUnsigned = sExpCandyExperienceTable[param - 1] + GetMonData(mon, MON_DATA_EXP, NULL);
                     if (dataUnsigned > gExperienceTables[gBaseStats[species].growthRate][MAX_LEVEL])
                         dataUnsigned = gExperienceTables[gBaseStats[species].growthRate][MAX_LEVEL];
                 }
-                SetMonData(mon, MON_DATA_EXP, &dataUnsigned);
-                CalculateMonStats(mon);
-                retVal = FALSE;
+
+                if (dataUnsigned != 0) // Failsafe
+                {
+                    SetMonData(mon, MON_DATA_EXP, &dataUnsigned);
+                    CalculateMonStats(mon);
+                    retVal = FALSE;
+                }
             }
 
             // Cure status
