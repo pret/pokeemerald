@@ -5226,7 +5226,7 @@ static void Cmd_switchineffects(void)
     else
     {
         // There is a hack here to ensure the truant counter will be 0 when the battler's next turn starts.
-        // The truant counter is not updated in the case where a mon switches in after a lost judgement in the battle arena.
+        // The truant counter is not updated in the case where a mon switches in after a lost judgment in the battle arena.
         if (gBattleMons[gActiveBattler].ability == ABILITY_TRUANT && !gDisableStructs[gActiveBattler].truantSwitchInHack)
             gDisableStructs[gActiveBattler].truantCounter = 1;
 
@@ -6412,10 +6412,10 @@ static void Cmd_various(void)
         break;
     case VARIOUS_ARENA_JUDGMENT_STRING:
         BattleStringExpandPlaceholdersToDisplayedString(gRefereeStringsTable[gBattlescriptCurrInstr[1]]);
-        BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGEMENT_TEXT);
+        BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGMENT_TEXT);
         break;
     case VARIOUS_ARENA_WAIT_STRING:
-        if (IsTextPrinterActive(ARENA_WIN_JUDGEMENT_TEXT))
+        if (IsTextPrinterActive(ARENA_WIN_JUDGMENT_TEXT))
             return;
         break;
     case VARIOUS_WAIT_CRY:

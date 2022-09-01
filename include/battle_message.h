@@ -283,7 +283,7 @@ extern const u8 gText_OpponentMon1Name[];
 extern const u8 gText_Mind[];
 extern const u8 gText_Skill[];
 extern const u8 gText_Body[];
-extern const u8 gText_Judgement[];
+extern const u8 gText_Judgment[];
 extern const u8 gText_EmptyString3[];
 extern const u8 gText_RecordBattleToPass[];
 extern const u8 gText_BattleRecordedOnPass[];

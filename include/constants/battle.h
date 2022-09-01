@@ -357,8 +357,8 @@
 #define ARENA_WIN_MIND             18
 #define ARENA_WIN_SKILL            19
 #define ARENA_WIN_BODY             20
-#define ARENA_WIN_JUDGEMENT_TITLE  21
-#define ARENA_WIN_JUDGEMENT_TEXT   22
+#define ARENA_WIN_JUDGMENT_TITLE   21
+#define ARENA_WIN_JUDGMENT_TEXT    22
 
 // Flag for BattlePutTextOnWindow. Never set
 #define B_WIN_COPYTOVRAM (1 << 7)

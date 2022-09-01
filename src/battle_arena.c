@@ -38,9 +38,9 @@ static void BufferArenaOpponentName(void);
 static void SpriteCB_JudgmentIcon(struct Sprite *sprite);
 static void ShowJudgmentSprite(u8 x, u8 y, u8 category, u8 battler);
 
-#define JUDGEMENT_STATE_FINISHED 8
+#define JUDGMENT_STATE_FINISHED 8
 
-#define TAG_JUDGEMENT_ICON 1000
+#define TAG_JUDGMENT_ICON 1000
 
 enum {
     ANIM_ICON_X,        // Player lost
@@ -275,7 +275,7 @@ static const s8 sMindRatings[MOVES_COUNT] =
     [MOVE_PSYCHO_BOOST] = 1,
 };
 
-static const struct OamData sOam_JudgementIcon =
+static const struct OamData sOam_JudgmentIcon =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -292,52 +292,52 @@ static const struct OamData sOam_JudgementIcon =
     .affineParam = 0
 };
 
-static const union AnimCmd sAnim_JudgementIcon_X[] =
+static const union AnimCmd sAnim_JudgmentIcon_X[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sAnim_JudgementIcon_Triangle[] =
+static const union AnimCmd sAnim_JudgmentIcon_Triangle[] =
 {
     ANIMCMD_FRAME(4, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sAnim_JudgementIcon_Circle[] =
+static const union AnimCmd sAnim_JudgmentIcon_Circle[] =
 {
     ANIMCMD_FRAME(8, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sAnim_JudgementIcon_Line[] =
+static const union AnimCmd sAnim_JudgmentIcon_Line[] =
 {
     ANIMCMD_FRAME(12, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sAnims_JudgementIcon[] =
+static const union AnimCmd *const sAnims_JudgmentIcon[] =
 {
-    [ANIM_ICON_X]        = sAnim_JudgementIcon_X,
-    [ANIM_ICON_TRIANGLE] = sAnim_JudgementIcon_Triangle,
-    [ANIM_ICON_CIRCLE]   = sAnim_JudgementIcon_Circle,
-    [ANIM_ICON_LINE]     = sAnim_JudgementIcon_Line,
+    [ANIM_ICON_X]        = sAnim_JudgmentIcon_X,
+    [ANIM_ICON_TRIANGLE] = sAnim_JudgmentIcon_Triangle,
+    [ANIM_ICON_CIRCLE]   = sAnim_JudgmentIcon_Circle,
+    [ANIM_ICON_LINE]     = sAnim_JudgmentIcon_Line,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_JudgmentIcon =
 {
-    .tileTag = TAG_JUDGEMENT_ICON,
+    .tileTag = TAG_JUDGMENT_ICON,
     .paletteTag = TAG_NONE,
-    .oam = &sOam_JudgementIcon,
-    .anims = sAnims_JudgementIcon,
+    .oam = &sOam_JudgmentIcon,
+    .anims = sAnims_JudgmentIcon,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_JudgmentIcon,
 };
 
-static const struct CompressedSpriteSheet sBattleArenaJudgementSymbolsSpriteSheet[] =
+static const struct CompressedSpriteSheet sBattleArenaJudgmentSymbolsSpriteSheet[] =
 {
-    {gBattleArenaJudgementSymbolsGfx, 0x200, TAG_JUDGEMENT_ICON},
+    {gBattleArenaJudgmentSymbolsGfx, 0x200, TAG_JUDGMENT_ICON},
     {0}
 };
 
@@ -389,8 +389,8 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
     case 0:
         BeginNormalPaletteFade(0x7FFFFF1C, 4, 0, 8, RGB_BLACK);
         SetGpuReg(REG_OFFSET_WININ, (WININ_WIN0_ALL & ~WININ_WIN0_BG0) | WININ_WIN1_ALL);
-        LoadCompressedSpriteSheet(sBattleArenaJudgementSymbolsSpriteSheet);
-        LoadCompressedPalette(gBattleArenaJudgementSymbolsPalette, 0x1F0, 0x20);
+        LoadCompressedSpriteSheet(sBattleArenaJudgmentSymbolsSpriteSheet);
+        LoadCompressedPalette(gBattleArenaJudgmentSymbolsPalette, 0x1F0, 0x20);
         gBattle_WIN0H = 0xFF;
         gBattle_WIN0V = 0x70;
         (*state)++;
@@ -417,8 +417,8 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
             BattlePutTextOnWindow(gText_Mind, ARENA_WIN_MIND);
             BattlePutTextOnWindow(gText_Skill, ARENA_WIN_SKILL);
             BattlePutTextOnWindow(gText_Body, ARENA_WIN_BODY);
-            BattleStringExpandPlaceholdersToDisplayedString(gText_Judgement);
-            BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGEMENT_TITLE);
+            BattleStringExpandPlaceholdersToDisplayedString(gText_Judgment);
+            BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGMENT_TITLE);
             (*state)++;
         }
         break;
@@ -441,8 +441,8 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         PlaySE(SE_ARENA_TIMEUP1);
         ShowJudgmentSprite(80, 40, ARENA_CATEGORY_MIND, B_POSITION_PLAYER_LEFT);
         ShowJudgmentSprite(160, 40, ARENA_CATEGORY_MIND, B_POSITION_OPPONENT_LEFT);
-        BattleStringExpandPlaceholdersToDisplayedString(gText_Judgement);
-        BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGEMENT_TITLE);
+        BattleStringExpandPlaceholdersToDisplayedString(gText_Judgment);
+        BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGMENT_TITLE);
         (*state)++;
         result = ARENA_RESULT_STEP_DONE;
         break;
@@ -450,8 +450,8 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         PlaySE(SE_ARENA_TIMEUP1);
         ShowJudgmentSprite(80, 56, ARENA_CATEGORY_SKILL, B_POSITION_PLAYER_LEFT);
         ShowJudgmentSprite(160, 56, ARENA_CATEGORY_SKILL, B_POSITION_OPPONENT_LEFT);
-        BattleStringExpandPlaceholdersToDisplayedString(gText_Judgement);
-        BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGEMENT_TITLE);
+        BattleStringExpandPlaceholdersToDisplayedString(gText_Judgment);
+        BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGMENT_TITLE);
         (*state)++;
         result = ARENA_RESULT_STEP_DONE;
         break;
@@ -459,8 +459,8 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         PlaySE(SE_ARENA_TIMEUP1);
         ShowJudgmentSprite(80, 72, ARENA_CATEGORY_BODY, B_POSITION_PLAYER_LEFT);
         ShowJudgmentSprite(160, 72, ARENA_CATEGORY_BODY, B_POSITION_OPPONENT_LEFT);
-        BattleStringExpandPlaceholdersToDisplayedString(gText_Judgement);
-        BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGEMENT_TITLE);
+        BattleStringExpandPlaceholdersToDisplayedString(gText_Judgment);
+        BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGMENT_TITLE);
         (*state)++;
         result = ARENA_RESULT_STEP_DONE;
         break;
@@ -482,11 +482,11 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         }
         (*state)++;
         break;
-    case JUDGEMENT_STATE_FINISHED:
-        // Finishing this state is the indicator to SpriteCB_JudgmentIcon that its safe to destroy the judgement icon sprites
+    case JUDGMENT_STATE_FINISHED:
+        // Finishing this state is the indicator to SpriteCB_JudgmentIcon that its safe to destroy the judgment icon sprites
         (*state)++;
         break;
-    case JUDGEMENT_STATE_FINISHED + 1:
+    case JUDGMENT_STATE_FINISHED + 1:
         SetGpuReg(REG_OFFSET_WININ, (WININ_WIN0_ALL & ~WININ_WIN0_BG0) | WININ_WIN1_ALL);
         HandleBattleWindow(5, 0, 24, 13, WINDOW_CLEAR);
         CopyBgTilemapBufferToVram(0);
@@ -494,11 +494,11 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         BeginNormalPaletteFade(0x7FFFFF1C, 4, 8, 0, RGB_BLACK);
         (*state)++;
         break;
-    case JUDGEMENT_STATE_FINISHED + 2:
+    case JUDGMENT_STATE_FINISHED + 2:
         if (!gPaletteFade.active)
         {
             SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_ALL | WININ_WIN1_ALL);
-            FreeSpriteTilesByTag(TAG_JUDGEMENT_ICON);
+            FreeSpriteTilesByTag(TAG_JUDGMENT_ICON);
             result = ARENA_RESULT_STEP_DONE;
             (*state)++;
         }
@@ -562,7 +562,7 @@ static void ShowJudgmentSprite(u8 x, u8 y, u8 category, u8 battler)
 
 static void SpriteCB_JudgmentIcon(struct Sprite *sprite)
 {
-    if (gBattleCommunication[0] > JUDGEMENT_STATE_FINISHED)
+    if (gBattleCommunication[0] > JUDGMENT_STATE_FINISHED)
         DestroySprite(sprite);
 }
 
