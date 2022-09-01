@@ -792,8 +792,8 @@ bool8 AddPyramidBagItem(u16 itemId, u16 count)
 
     if (count == 0)
     {
-        memcpy(items, newItems, PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
-        memcpy(quantities, newQuantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
+        memcpy(items, newItems, PYRAMID_BAG_ITEMS_COUNT * sizeof(*items));
+        memcpy(quantities, newQuantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(*quantities));
         Free(newItems);
         Free(newQuantities);
         return TRUE;
@@ -854,8 +854,8 @@ bool8 RemovePyramidBagItem(u16 itemId, u16 count)
 
         if (count == 0)
         {
-            memcpy(items, newItems, PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
-            memcpy(quantities, newQuantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
+            memcpy(items, newItems, PYRAMID_BAG_ITEMS_COUNT * sizeof(*items));
+            memcpy(quantities, newQuantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(*quantities));
             Free(newItems);
             Free(newQuantities);
             return TRUE;
