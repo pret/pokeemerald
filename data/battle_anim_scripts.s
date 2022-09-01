@@ -779,6 +779,31 @@ gBattleAnims_Moves::
 	.4byte Move_GLACIAL_LANCE
 	.4byte Move_ASTRAL_BARRAGE
 	.4byte Move_EERIE_SPELL
+@@@@LA MOVES
+	.4byte Move_DIRE_CLAW
+	.4byte Move_PSYSHIELD_BASH
+	.4byte Move_POWER_SHIFT
+	.4byte Move_STONE_AXE
+	.4byte Move_SPRINGTIDE_STORM
+	.4byte Move_MYSTICAL_POWER
+	.4byte Move_RAGING_FURY
+	.4byte Move_WAVE_CRASH
+	.4byte Move_CHLOROBLAST
+	.4byte Move_MOUNTAIN_GALE
+	.4byte Move_VICTORY_DANCE
+	.4byte Move_HEADLONG_RUSH
+	.4byte Move_BARB_BARRAGE
+	.4byte Move_ESPER_WING
+	.4byte Move_BITTER_MALICE
+	.4byte Move_SHELTER
+	.4byte Move_TRIPLE_ARROWS
+	.4byte Move_INFERNAL_PARADE
+	.4byte Move_CEASELESS_EDGE
+	.4byte Move_BLEAKWIND_STORM
+	.4byte Move_WILDBOLT_STORM
+	.4byte Move_SANDSEAR_STORM
+	.4byte Move_LUNAR_BLESSING
+	.4byte Move_TAKE_HEART
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
 	.4byte Move_ALL_OUT_PUMMELING
@@ -14270,55 +14295,51 @@ Move_POLTERGEIST::
 	end
 
 Move_CORROSIVE_GAS::
-	end @to do:
-
 Move_COACHING::
-	end @to do:
-
 Move_FLIP_TURN::
-	end @to do:
-
 Move_TRIPLE_AXEL::
-	end @to do:
-
 Move_DUAL_WINGBEAT::
-	end @to do:
-
 Move_SCORCHING_SANDS::
-	end @to do:
+	end @to do
 
 Move_JUNGLE_HEALING::
 	goto Move_AROMATHERAPY
 
 Move_WICKED_BLOW::
-	end @to do:
-
 Move_SURGING_STRIKES::
-	end @to do:
-
 Move_THUNDER_CAGE::
-	end @to do:
-
 Move_DRAGON_ENERGY::
-	end @to do:
-
 Move_FREEZING_GLARE::
-	end @to do:
-
 Move_FIERY_WRATH::
-	end @to do:
-
 Move_THUNDEROUS_KICK::
-	end @to do:
-
 Move_GLACIAL_LANCE::
-	end @to do:
-
 Move_ASTRAL_BARRAGE::
-	end @to do:
-
 Move_EERIE_SPELL::
-	end @to do:
+Move_DIRE_CLAW::
+Move_PSYSHIELD_BASH::
+Move_POWER_SHIFT::
+Move_STONE_AXE::
+Move_SPRINGTIDE_STORM::
+Move_MYSTICAL_POWER::
+Move_RAGING_FURY::
+Move_WAVE_CRASH::
+Move_CHLOROBLAST::
+Move_MOUNTAIN_GALE::
+Move_VICTORY_DANCE::
+Move_HEADLONG_RUSH::
+Move_BARB_BARRAGE::
+Move_ESPER_WING::
+Move_BITTER_MALICE::
+Move_SHELTER::
+Move_TRIPLE_ARROWS::
+Move_INFERNAL_PARADE::
+Move_CEASELESS_EDGE::
+Move_BLEAKWIND_STORM::
+Move_WILDBOLT_STORM::
+Move_SANDSEAR_STORM::
+Move_LUNAR_BLESSING::
+Move_TAKE_HEART::
+	end @to do
 
 @@@@@@@@@@@@@@@@@@@@@@@ GEN 1-3 @@@@@@@@@@@@@@@@@@@@@@@
 Move_NONE:

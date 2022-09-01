@@ -13233,8 +13233,392 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .zMovePower = 160,
         .zMoveEffect = Z_EFFECT_NONE,
     },
-    
-    // Z MOVES
+
+    [MOVE_DIRE_CLAW] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_DIRE_CLAW,
+        .power = 60,
+        .type = TYPE_POISON,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 120,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_PSYSHIELD_BASH] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_PSYSHIELD_BASH,
+        .power = 70,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 90,
+        .pp = 10,
+        .secondaryEffectChance = 50, // TODO: Adjust this value. Currently it's set to Fiery Dance's.
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 140,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_POWER_SHIFT] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_POWER_SHIFT,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .flags = FLAG_MIRROR_MOVE_AFFECTED,
+        .split = SPLIT_STATUS,
+        .zMovePower = 100,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_STONE_AXE] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_STONE_AXE,
+        .power = 65,
+        .type = TYPE_ROCK,
+        .accuracy = 90,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 120,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_SPRINGTIDE_STORM] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_SPRINGTIDE_STORM,
+        .power = 95,
+        .type = TYPE_FAIRY,
+        .accuracy = 80,
+        .pp = 5,
+        .secondaryEffectChance = 30,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 175,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_MYSTICAL_POWER] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_MYSTICAL_POWER,
+        .power = 70,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 90,
+        .pp = 10,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 140,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_RAGING_FURY] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_RAGING_FURY,
+        .power = 90,
+        .type = TYPE_FIRE,
+        .accuracy = 85,
+        .pp = 10,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 175,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_WAVE_CRASH] =
+    {
+        .effect = EFFECT_RECOIL_33, // TODO: Legends: Arceus mechanics.
+        .power = 75,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 140,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_CHLOROBLAST] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_CHLOROBLAST,
+        .power = 120,
+        .type = TYPE_GRASS,
+        .accuracy = 95,
+        .pp = 5,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 190,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_MOUNTAIN_GALE] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_ACTION_SPEED_DOWN_HIT,
+        .power = 100,
+        .type = TYPE_ICE,
+        .accuracy = 85,
+        .pp = 5,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 180,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_VICTORY_DANCE] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_VICTORY_DANCE,
+        .power = 0,
+        .type = TYPE_FIGHTING,
+        .accuracy = 0,
+        .pp = 20,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .flags = FLAG_SNATCH_AFFECTED | FLAG_DANCE,
+        .split = SPLIT_STATUS,
+        .zMovePower = 100,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_HEADLONG_RUSH] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_HEADLONG_RUSH,
+        .power = 100,
+        .type = TYPE_GROUND,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 180,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_BARB_BARRAGE] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_BARB_BARRAGE,
+        .power = 60,
+        .type = TYPE_POISON,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 120,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_ESPER_WING] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_ESPER_WING,
+        .power = 75,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 90,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 140,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_BITTER_MALICE] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_ESPER_WING,
+        .power = 60,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 120,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_SHELTER] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_SHELTER,
+        .power = 0,
+        .type = TYPE_STEEL,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .flags = 0,
+        .split = SPLIT_STATUS,
+        .zMovePower = 100,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_TRIPLE_ARROWS] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_TRIPLE_ARROWS,
+        .power = 50,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 100,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_INFERNAL_PARADE] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_INFERNAL_PARADE,
+        .power = 60,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 120,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_CEASELESS_EDGE] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_CEASELESS_EDGE,
+        .power = 65,
+        .type = TYPE_DARK,
+        .accuracy = 90,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 120,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_BLEAKWIND_STORM] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_BLEAKWIND_STORM,
+        .power = 95,
+        .type = TYPE_FLYING,
+        .accuracy = 80,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 175,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_WILDBOLT_STORM] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_WILDBOLT_STORM,
+        .power = 95,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 80,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 175,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_SANDSEAR_STORM] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_SANDSEAR_STORM,
+        .power = 95,
+        .type = TYPE_GROUND,
+        .accuracy = 80,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 175,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_LUNAR_BLESSING] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_LUNAR_BLESSING,
+        .power = 0,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .flags = FLAG_SNATCH_AFFECTED,
+        .split = SPLIT_STATUS,
+        .zMovePower = 100,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_TAKE_HEART] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_TAKE_HEART,
+        .power = 0,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .flags = FLAG_SNATCH_AFFECTED,
+        .split = SPLIT_STATUS,
+        .zMovePower = 100,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {
         .effect = EFFECT_HIT,
