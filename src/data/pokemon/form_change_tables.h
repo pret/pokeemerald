@@ -1,8 +1,4 @@
 /*
-For cycling between forms with the same method and parameters but different target species (eg. Tornadus using the
-Reveal Glass to change between its two forms), a separate form change table is required for each form.
-Otherwise, only the last form change on the table will trigger.
-
 FORM_ITEM_HOLD:
     Form change activates when the item is given to or taken from the selected Pokémon.
     param1 = item to hold
@@ -64,7 +60,7 @@ static const struct FormChange sGiratinaFormChangeTable[] = {
 
 static const struct FormChange sShayminFormChangeTable[] = {
     {FORM_ITEM_USE_TIME, SPECIES_SHAYMIN_SKY, ITEM_GRACIDEA, DAY},
-    {FORM_WITHDRAW, SPECIES_SHAYMIN},
+    // {FORM_WITHDRAW, SPECIES_SHAYMIN},
     {FORM_CHANGE_END},
 };
 
@@ -109,51 +105,25 @@ static const struct FormChange sArceusFormChangeTable[] = {
 
 static const struct FormChange sTornadusFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_TORNADUS_THERIAN, ITEM_REVEAL_GLASS},
-    {FORM_CHANGE_END},
-};
-
-static const struct FormChange sTornadusTherianFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_TORNADUS, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
 };
 
 static const struct FormChange sThundurusFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_THUNDURUS_THERIAN, ITEM_REVEAL_GLASS},
-    {FORM_CHANGE_END},
-};
-
-static const struct FormChange sThundurusTherianFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_THUNDURUS, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
 };
 
 static const struct FormChange sLandorusFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_LANDORUS_THERIAN, ITEM_REVEAL_GLASS},
-    {FORM_CHANGE_END},
-};
-
-static const struct FormChange sLandorusTherianFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_LANDORUS, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
 };
 
-static const struct FormChange sEnamorusFormChangeTable[] = {
-    {FORM_ITEM_USE, SPECIES_ENAMORUS, ITEM_REVEAL_GLASS},
-    {FORM_CHANGE_END},
-};
-
-static const struct FormChange sEnamorusTherianFormChangeTable[] = {
-    {FORM_ITEM_USE, SPECIES_ENAMORUS_THERIAN, ITEM_REVEAL_GLASS},
-    {FORM_CHANGE_END},
-};
-
 static const struct FormChange sKeldeoFormChangeTable[] = {
-    {FORM_MOVE, SPECIES_KELDEO_RESOLUTE, MOVE_SECRET_SWORD, WHEN_LEARNED},
-    {FORM_CHANGE_END},
-};
-
-static const struct FormChange sKeldeoResoluteFormChangeTable[] = {
-    {FORM_MOVE, SPECIES_KELDEO, MOVE_SECRET_SWORD, WHEN_FORGOTTEN},
+    // {FORM_MOVE, SPECIES_KELDEO_RESOLUTE, MOVE_SECRET_SWORD, WHEN_LEARNED},
+    // {FORM_MOVE, SPECIES_KELDEO, MOVE_SECRET_SWORD, WHEN_FORGOTTEN},
     {FORM_CHANGE_END},
 };
 
@@ -167,12 +137,8 @@ static const struct FormChange sGenesectFormChangeTable[] = {
 };
 
 static const struct FormChange sHoopaFormChangeTable[] = {
-    // {FORM_ITEM_USE, SPECIES_HOOPA_UNBOUND, ITEM_PRISON_BOTTLE, SPECIES_HOOPA},
-    {FORM_CHANGE_END},
-};
-
-static const struct FormChange sHoopaUnboundFormChangeTable[] = {
-    {FORM_WITHDRAW, SPECIES_HOOPA},
+    {FORM_ITEM_USE, SPECIES_HOOPA_UNBOUND, ITEM_PRISON_BOTTLE, SPECIES_HOOPA},
+    // {FORM_WITHDRAW, SPECIES_HOOPA},
     {FORM_CHANGE_END},
 };
 
@@ -222,6 +188,12 @@ static const struct FormChange sZacianFormChangeTable[] = {
 static const struct FormChange sZamazentaFormChangeTable[] = {
     {FORM_BATTLE_BEGIN, SPECIES_ZAMAZENTA_CROWNED_SHIELD, ITEM_RUSTED_SHIELD, MOVE_IRON_HEAD,      MOVE_BEHEMOTH_BASH},
     {FORM_BATTLE_END,   SPECIES_ZAMAZENTA,                ITEM_RUSTED_SHIELD, MOVE_BEHEMOTH_BASH,  MOVE_IRON_HEAD},
+    {FORM_CHANGE_END},
+};
+
+static const struct FormChange sEnamorusFormChangeTable[] = {
+    {FORM_ITEM_USE, SPECIES_ENAMORUS, ITEM_REVEAL_GLASS},
+    {FORM_ITEM_USE, SPECIES_ENAMORUS_THERIAN, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
 };
 

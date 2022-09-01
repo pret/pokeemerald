@@ -8277,7 +8277,7 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
 
         for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
         {
-            if (method == formChanges[i].method)
+            if (method == formChanges[i].method && species != formChanges[i].targetSpecies)
             {
                 switch (method)
                 {
@@ -8324,7 +8324,7 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
         }
     }
 
-    return species != targetSpecies ? targetSpecies : SPECIES_NONE;
+    return targetSpecies;
 }
 
 u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove)
