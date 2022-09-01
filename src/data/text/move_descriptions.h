@@ -2983,15 +2983,15 @@ static const u8 sDireClawDescription[] = _(
     "paralyze, poison or drowse.");
 
 static const u8 sPsyshieldBashDescription[] = _(
-    "Hits a foe with psychic en-\n"
-    "ergy. May raise Defense.");
+    "Hits a foe with psychic\n"
+    "energy. May raise Defense.");
 
 static const u8 sPowerShiftDescription[] = _(
     "The user swaps its offensive\n"
     "and defensive stats.");
 
 static const u8 sStoneAxeDescription[] = _(
-    "High crit. hit chance. Leaves\n"
+    "High critical hit ratio. Sets\n"
     "Splinters that hurt the foe.");
 
 static const u8 sSpringtideStormDescription[] = _(
@@ -2999,59 +2999,59 @@ static const u8 sSpringtideStormDescription[] = _(
     "Varies with the user's form.");
 
 static const u8 sMysticalPowerDescription[] = _(
-    "Hurts the foe and increases\n"
-    "smallest of Atk. and Def.");
+    "Increases the user's better\n"
+    "of Atk. and Def. stats.");
 
 static const u8 sRagingFuryDescription[] = _(
     "Viciously spews flames at\n"
     "a foe, becoming fixated.");
 
 static const u8 sWaveCrashDescription[] = _(
-    "Hurts the foe and the user,\n"
-    "but increases Action Speed.");
+    "A water slam. Hurts the user\n"
+    "and raises its Action Speed.");
 
 static const u8 sChloroblastDescription[] = _(
-    "Hurts the foe and the user,\n"
-    "and lowers Action Speed.");
+    "An blast that hurts the user\n"
+    "and lowers its Action Speed.");
 
 static const u8 sMountainGaleDescription[] = _(
     "The user hurls giant chunks\n"
     "of ice to damage the foe.");
 
 static const u8 sVictoryDanceDescription[] = _(
-    "Dances to raise offenses,\n"
-    "defenses, and also damage.");
+    "Dances to raise damage 50%,\n"
+    "plus offenses and defenses.");
 
 static const u8 sHeadlongRushDescription[] = _(
-    "Charges the foe with a full-\n"
-    "body tackle. Lowers Defense.");
+    "Hits with a full-body tackle,\n"
+    "lowering the foe's Defense.");
 
 static const u8 sBarbBarrageDescription[] = _(
     "Can poison on impact. Powers\n"
     "up if the foe has an ailment.");
 
 static const u8 sEsperWingDescription[] = _(
-    "High crit. hit chance. Raises\n"
-    "the user's Action Speed.");
+    "High critical hit ratio.\n"
+    "Ups the user's Action Speed.");
 
 static const u8 sBitterMaliceDescription[] = _(
-    "Hurts a foe, harder if it has\n"
+    "Hurts a foe harder if it has\n"
     "an ailment. Can give FrstBte.");
 
 static const u8 sShelterDescription[] = _(
     "The user hardens their skin\n"
-    "and obscures themself.");
+    "and obscures itself.");
 
 static const u8 sTripleArrowsDescription[] = _(
-    "Shoots 3 arrows that up crit.\n"
-    "chance and lower foe's Defs.");
+    "Ups critical-hit ratio for 3\n"
+    "turns. Lowers foe Defenses.");
 
 static const u8 sInfernalParadeDescription[] = _(
-    "Hurts a foe, harder if it has\n"
+    "Hurts a foe harder if it has\n"
     "an ailment. May leave a burn.");
 
 static const u8 sCeaselessEdgeDescription[] = _(
-    "High crit. hit chance. Leaves\n"
+    "High critical hit ratio. Sets\n"
     "Splinters that hurt the foe.");
 
 static const u8 sBleakwindStormDescription[] = _(
@@ -3071,8 +3071,8 @@ static const u8 sLunarBlessingDescription[] = _(
     "conceals their presence.");
 
 static const u8 sTakeHeartDescription[] = _(
-    "The user raise spirit to heal\n"
-    "and strengthen themself.");
+    "The user lifts its spirits to\n"
+    "heal and strengthen itself.");
 
 const u8 gNotDoneYetDescription[] = _(
     "This move can't be used. Its\n"
