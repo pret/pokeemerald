@@ -8243,19 +8243,19 @@ u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
 }
 
 // Returns SPECIES_NONE if no form change is possible
-u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg)
+u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 arg)
 {
-    u32 i;
+    u32 i, j;
     u16 targetSpecies = SPECIES_NONE;
-    u16 species = GetBoxMonData(mon, MON_DATA_SPECIES, NULL);
+    u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
     const struct FormChange *formChanges = gFormChangeTablePointers[species];
     u16 heldItem;
     u32 ability;
 
     if (formChanges != NULL)
     {
-        heldItem = GetBoxMonData(mon, MON_DATA_HELD_ITEM, NULL);
-        ability = GetAbilityBySpecies(species, GetBoxMonData(mon, MON_DATA_ABILITY_NUM, NULL));
+        heldItem = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM, NULL);
+        ability = GetAbilityBySpecies(species, GetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, NULL));
 
         for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
         {
@@ -8264,8 +8264,6 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg
                 switch (method)
                 {
                 case FORM_ITEM_HOLD:
-                case FORM_BATTLE_BEGIN:
-                case FORM_BATTLE_END:
                     if (heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
@@ -8274,7 +8272,7 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_MOVE:
-                    if (BoxMonKnowsMove(mon, formChanges[i].param1) != formChanges[i].param2)
+                    if (BoxMonKnowsMove(boxMon, formChanges[i].param1) != formChanges[i].param2)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_ITEM_HOLD_ABILITY:
@@ -8299,6 +8297,10 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg
                         }
                     }
                     break;
+                case FORM_BATTLE_BEGIN:
+                case FORM_BATTLE_END:
+                    if (heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
+                        targetSpecies = formChanges[i].targetSpecies;
                 }
             }
         }
@@ -8358,7 +8360,7 @@ void TrySpecialOverworldEvo(void)
     u8 i;
     u8 evoMethod = gSpecialVar_0x8000;
     u16 canStopEvo = gSpecialVar_0x8001;
-    u16 tryMultiple = gSpecialVar_0x8002;    
+    u16 tryMultiple = gSpecialVar_0x8002;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -8375,7 +8377,7 @@ void TrySpecialOverworldEvo(void)
             else
                 gCB2_AfterEvolution = CB2_ReturnToField;
             return;
-        }   
+        }
     }
 
     sTriedEvolving = 0;
@@ -8385,4 +8387,44 @@ void TrySpecialOverworldEvo(void)
 bool32 ShouldShowFemaleDifferences(u16 species, u32 personality)
 {
     return (gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
+}
+
+void TryToSetBattleFormChangeMoves(struct Pokemon *mon)
+{
+    int i, j;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    const struct FormChange *formChanges = gFormChangeTablePointers[species];
+    u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES, NULL);
+
+    if (formChanges == NULL)
+        return;
+
+    for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
+    {
+        if ((formChanges[i].method == FORM_BATTLE_BEGIN || formChanges[i].method == FORM_BATTLE_END)
+         && formChanges[i].param2 && formChanges[i].param3 && formChanges[i].targetSpecies == species)
+        {
+            u16 originalMove = formChanges[i].param2;
+            u16 newMove = formChanges[i].param3;
+
+            for (j = 0; j < MAX_MON_MOVES; j++)
+            {
+                u16 currMove = GetMonData(mon, MON_DATA_MOVE1 + j, NULL);
+                u8 totalPp = gBattleMoves[currMove].pp; // Get current move's max PP
+                u8 currPp = GetMonData(mon, MON_DATA_PP1 + j, NULL); // Get current move's remaining PP
+                u8 diffPp = totalPp - currPp; // Current move's PP difference
+                u8 finalPp = gBattleMoves[newMove].pp - diffPp; // Apply the PP difference to the new move
+
+                if (currMove == originalMove)
+                {
+                    if (finalPp > gBattleMoves[newMove].pp)
+                        finalPp = 0;
+                    SetMonMoveSlot(mon, newMove, j);
+                    SetMonData(mon, MON_DATA_PP1 + j, &finalPp);
+                }
+            }
+            SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
+            break;
+        }
+    }
 }

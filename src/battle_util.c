@@ -9624,17 +9624,12 @@ void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
     }
     if (!isSwitchingOut)
     {
-        // Apply party-wide end-of-battle form changes
-        for (i = 0; i < PARTY_SIZE; i++)
+        targetSpecies = GetFormChangeTargetSpecies(&party[monId], FORM_BATTLE_END, 0);
+        if (targetSpecies != SPECIES_NONE)
         {
-            // Player's side
-            targetSpecies = GetFormChangeTargetSpecies(&gPlayerParty[i], FORM_BATTLE_END, 0);
-            if (targetSpecies != SPECIES_NONE)
-                SetMonData(&gPlayerParty[i], MON_DATA_SPECIES, &targetSpecies);
-            // Opponent's side
-            targetSpecies = GetFormChangeTargetSpecies(&gEnemyParty[i], FORM_BATTLE_END, 0);
-            if (targetSpecies != SPECIES_NONE)
-                SetMonData(&gEnemyParty[i], MON_DATA_SPECIES, &targetSpecies);
+            SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
+            CalculateMonStats(&party[monId]);
+            TryToSetBattleFormChangeMoves(&party[monId]);
         }
     }
 }

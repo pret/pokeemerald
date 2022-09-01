@@ -2791,12 +2791,12 @@ static const u8 sPyroBallDescription[] = _(
     "target. It may cause a burn.");
     
 static const u8 sBehemothBladeDescription[] = _(
-    "Strikes as a sword. It deals\n"
-    "2x damage to Dynamaxed foes.");
+    "Strikes as a sword. Deals 2x\n"
+    "damage to Dynamaxed foes.");
     
 static const u8 sBehemothBashDescription[] = _(
-    "Attacks as a shield. Deals\n"
-    "2x damage to Dynamaxed foes.");
+    "Attacks as a shield. Deals 2x\n"
+    "damage to Dynamaxed foes.");
     
 static const u8 sAuraWheelDescription[] = _(
     "Raises Speed to attack. The\n"

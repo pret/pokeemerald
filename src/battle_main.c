@@ -578,11 +578,19 @@ static void CB2_InitBattleInternal(void)
         // Player's side
         targetSpecies = GetFormChangeTargetSpecies(&gPlayerParty[i], FORM_BATTLE_BEGIN, 0);
         if (targetSpecies != SPECIES_NONE)
+        {
             SetMonData(&gPlayerParty[i], MON_DATA_SPECIES, &targetSpecies);
+            CalculateMonStats(&gPlayerParty[i]);
+            TryToSetBattleFormChangeMoves(&gPlayerParty[i]);
+        }
         // Opponent's side
         targetSpecies = GetFormChangeTargetSpecies(&gEnemyParty[i], FORM_BATTLE_BEGIN, 0);
         if (targetSpecies != SPECIES_NONE)
+        {
             SetMonData(&gEnemyParty[i], MON_DATA_SPECIES, &targetSpecies);
+            CalculateMonStats(&gEnemyParty[i]);
+            TryToSetBattleFormChangeMoves(&gEnemyParty[i]);
+        }
     }
 
     gBattleCommunication[MULTIUSE_STATE] = 0;
