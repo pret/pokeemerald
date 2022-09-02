@@ -398,8 +398,8 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
     for (auto &group : groups_data["group_order"].array_items()) {
         text << "// " << group.string_value() << "\n";
         vector<Json> map_ids;
-
-        size_t max_length = 0; //DEBUG
+        size_t max_length = 0;
+        
         int map_count = 0; //DEBUG
 
         for (auto &map_name : groups_data[group.string_value()].array_items()) {
