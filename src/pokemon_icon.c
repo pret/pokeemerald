@@ -2,6 +2,7 @@
 #include "graphics.h"
 #include "mail.h"
 #include "palette.h"
+#include "pokemon_debug.h"
 #include "pokemon_icon.h"
 #include "sprite.h"
 #include "data.h"
@@ -20,10 +21,8 @@ struct MonIconSpriteTemplate
     u16 paletteTag;
 };
 
-// static functions
 static u8 CreateMonIconSprite(struct MonIconSpriteTemplate *, s16, s16, u8);
-
-// .rodata
+static void FreeAndDestroyMonIconSprite_(struct Sprite *sprite);
 
 const u8 *const gMonIconTable[] =
 {
@@ -414,6 +413,7 @@ const u8 *const gMonIconTable[] =
     [SPECIES_JIRACHI] = gMonIcon_Jirachi,
     [SPECIES_DEOXYS] = gMonIcon_Deoxys,
     [SPECIES_CHIMECHO] = gMonIcon_Chimecho,
+#if P_NEW_POKEMON == TRUE
     [SPECIES_TURTWIG] = gMonIcon_Turtwig,
     [SPECIES_GROTLE] = gMonIcon_Grotle,
     [SPECIES_TORTERRA] = gMonIcon_Torterra,
@@ -925,7 +925,14 @@ const u8 *const gMonIconTable[] =
     [SPECIES_REGIDRAGO] = gMonIcon_Regidrago,
     [SPECIES_GLASTRIER] = gMonIcon_Glastrier,
     [SPECIES_SPECTRIER] = gMonIcon_Spectrier,
-    [SPECIES_CALYREX] = gMonIcon_QuestionMark,//gMonIcon_Calyrex,
+    [SPECIES_CALYREX] = gMonIcon_Calyrex,
+    [SPECIES_WYRDEER] = gMonIcon_Wyrdeer,
+    [SPECIES_KLEAVOR] = gMonIcon_Kleavor,
+    [SPECIES_URSALUNA] = gMonIcon_Ursaluna,
+    [SPECIES_BASCULEGION] = gMonIcon_Basculegion,
+    [SPECIES_SNEASLER] = gMonIcon_Sneasler,
+    [SPECIES_OVERQWIL] = gMonIcon_Overqwil,
+    [SPECIES_ENAMORUS] = gMonIcon_Enamorus,
     [SPECIES_VENUSAUR_MEGA] = gMonIcon_VenusaurMega,
     [SPECIES_CHARIZARD_MEGA_X] = gMonIcon_CharizardMegaX,
     [SPECIES_CHARIZARD_MEGA_Y] = gMonIcon_CharizardMegaY,
@@ -1013,6 +1020,22 @@ const u8 *const gMonIconTable[] =
     [SPECIES_DARMANITAN_GALARIAN] = gMonIcon_DarmanitanGalarian,
     [SPECIES_YAMASK_GALARIAN] = gMonIcon_YamaskGalarian,
     [SPECIES_STUNFISK_GALARIAN] = gMonIcon_StunfiskGalarian,
+    [SPECIES_GROWLITHE_HISUIAN] = gMonIcon_GrowlitheHisuian,
+    [SPECIES_ARCANINE_HISUIAN] = gMonIcon_ArcanineHisuian,
+    [SPECIES_VOLTORB_HISUIAN] = gMonIcon_VoltorbHisuian,
+    [SPECIES_ELECTRODE_HISUIAN] = gMonIcon_ElectrodeHisuian,
+    [SPECIES_TYPHLOSION_HISUIAN] = gMonIcon_TyphlosionHisuian,
+    [SPECIES_QWILFISH_HISUIAN] = gMonIcon_QwilfishHisuian,
+    [SPECIES_SNEASEL_HISUIAN] = gMonIcon_SneaselHisuian,
+    [SPECIES_SAMUROTT_HISUIAN] = gMonIcon_SamurottHisuian,
+    [SPECIES_LILLIGANT_HISUIAN] = gMonIcon_LilligantHisuian,
+    [SPECIES_ZORUA_HISUIAN] = gMonIcon_ZoruaHisuian,
+    [SPECIES_ZOROARK_HISUIAN] = gMonIcon_ZoroarkHisuian,
+    [SPECIES_BRAVIARY_HISUIAN] = gMonIcon_BraviaryHisuian,
+    [SPECIES_SLIGGOO_HISUIAN] = gMonIcon_SliggooHisuian,
+    [SPECIES_GOODRA_HISUIAN] = gMonIcon_GoodraHisuian,
+    [SPECIES_AVALUGG_HISUIAN] = gMonIcon_AvaluggHisuian,
+    [SPECIES_DECIDUEYE_HISUIAN] = gMonIcon_DecidueyeHisuian,
     [SPECIES_PIKACHU_COSPLAY] = gMonIcon_PikachuCosplay,
     [SPECIES_PIKACHU_ROCK_STAR] = gMonIcon_PikachuRockStar,
     [SPECIES_PIKACHU_BELLE] = gMonIcon_PikachuBelle,
@@ -1028,6 +1051,7 @@ const u8 *const gMonIconTable[] =
     [SPECIES_PIKACHU_PARTNER_CAP] = gMonIcon_PikachuPartnerCap,
     [SPECIES_PIKACHU_WORLD_CAP] = gMonIcon_QuestionMark,
     [SPECIES_PICHU_SPIKY_EARED] = gMonIcon_PichuSpikyEared,
+#endif
     [SPECIES_UNOWN_B] = gMonIcon_UnownB,
     [SPECIES_UNOWN_C] = gMonIcon_UnownC,
     [SPECIES_UNOWN_D] = gMonIcon_UnownD,
@@ -1061,6 +1085,7 @@ const u8 *const gMonIconTable[] =
     [SPECIES_DEOXYS_ATTACK] = gMonIcon_DeoxysAttack,
     [SPECIES_DEOXYS_DEFENSE] = gMonIcon_DeoxysDefense,
     [SPECIES_DEOXYS_SPEED] = gMonIcon_DeoxysSpeed,
+#if P_NEW_POKEMON == TRUE
     [SPECIES_BURMY_SANDY_CLOAK] = gMonIcon_BurmySandyCloak,
     [SPECIES_BURMY_TRASH_CLOAK] = gMonIcon_BurmyTrashCloak,
     [SPECIES_WORMADAM_SANDY_CLOAK] = gMonIcon_WormadamSandyCloak,
@@ -1073,6 +1098,8 @@ const u8 *const gMonIconTable[] =
     [SPECIES_ROTOM_FROST] = gMonIcon_RotomFrost,
     [SPECIES_ROTOM_FAN] = gMonIcon_RotomFan,
     [SPECIES_ROTOM_MOW] = gMonIcon_RotomMow,
+    [SPECIES_DIALGA_ORIGIN] = gMonIcon_DialgaOrigin,
+    [SPECIES_PALKIA_ORIGIN] = gMonIcon_PalkiaOrigin,
     [SPECIES_GIRATINA_ORIGIN] = gMonIcon_GiratinaOrigin,
     [SPECIES_SHAYMIN_SKY] = gMonIcon_ShayminSky,
     [SPECIES_ARCEUS_FIGHTING] = gMonIcon_Arceus,
@@ -1093,6 +1120,7 @@ const u8 *const gMonIconTable[] =
     [SPECIES_ARCEUS_DARK] = gMonIcon_Arceus,
     [SPECIES_ARCEUS_FAIRY] = gMonIcon_Arceus,
     [SPECIES_BASCULIN_BLUE_STRIPED] = gMonIcon_BasculinBlueStriped,
+    [SPECIES_BASCULIN_WHITE_STRIPED] = gMonIcon_BasculinWhiteStriped,
     [SPECIES_DARMANITAN_ZEN_MODE] = gMonIcon_DarmanitanZenMode,
     [SPECIES_DARMANITAN_ZEN_MODE_GALARIAN] = gMonIcon_DarmanitanZenModeGalarian,
     [SPECIES_DEERLING_SUMMER] = gMonIcon_DeerlingSummer,
@@ -1104,6 +1132,7 @@ const u8 *const gMonIconTable[] =
     [SPECIES_TORNADUS_THERIAN] = gMonIcon_TornadusTherian,
     [SPECIES_THUNDURUS_THERIAN] = gMonIcon_ThundurusTherian,
     [SPECIES_LANDORUS_THERIAN] = gMonIcon_LandorusTherian,
+    [SPECIES_ENAMORUS_THERIAN] = gMonIcon_EnamorusTherian,
     [SPECIES_KYUREM_WHITE] = gMonIcon_KyuremWhite,
     [SPECIES_KYUREM_BLACK] = gMonIcon_KyuremBlack,
     [SPECIES_KELDEO_RESOLUTE] = gMonIcon_KeldeoResolute,
@@ -1232,14 +1261,23 @@ const u8 *const gMonIconTable[] =
     [SPECIES_ETERNATUS_ETERNAMAX] = gMonIcon_EternatusEternamax,
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE] = gMonIcon_Urshifu,
     [SPECIES_ZARUDE_DADA] = gMonIcon_ZarudeDada,
-    [SPECIES_CALYREX_ICE_RIDER] = gMonIcon_QuestionMark,//gMonIcon_CalyrexIceRider,
-    [SPECIES_CALYREX_SHADOW_RIDER] = gMonIcon_QuestionMark,//gMonIcon_CalyrexShadowRider,
+    [SPECIES_CALYREX_ICE_RIDER] = gMonIcon_CalyrexIceRider,
+    [SPECIES_CALYREX_SHADOW_RIDER] = gMonIcon_CalyrexShadowRider,
+#endif
     [SPECIES_EGG] = gMonIcon_Egg,
 };
 
 const u8 *const gMonIconTableFemale[] =
 {
     [SPECIES_EEVEE] = gMonIcon_Eevee,
+#if P_NEW_POKEMON == TRUE
+    [SPECIES_STARLY] = gMonIcon_Starly,
+    [SPECIES_STARAVIA] = gMonIcon_Staravia,
+    [SPECIES_STARAPTOR] = gMonIcon_Staraptor,
+    [SPECIES_BIDOOF] = gMonIcon_Bidoof,
+    [SPECIES_KRICKETOT] = gMonIcon_Kricketot,
+    [SPECIES_KRICKETUNE] = gMonIcon_Kricketune,
+    [SPECIES_SHINX] = gMonIcon_Shinx,
     [SPECIES_COMBEE] = gMonIcon_Combee,
     [SPECIES_HIPPOPOTAS] = gMonIcon_Hippopotas,
     [SPECIES_HIPPOWDON] = gMonIcon_Hippowdon,
@@ -1247,6 +1285,8 @@ const u8 *const gMonIconTableFemale[] =
     [SPECIES_FRILLISH] = gMonIcon_FrillishF,
     [SPECIES_JELLICENT] = gMonIcon_JellicentF,
     [SPECIES_PYROAR] = gMonIcon_PyroarF,
+    [SPECIES_BASCULEGION] = gMonIcon_BasculegionF,
+#endif
 };
 
 const u8 gMonIconPaletteIndices[] =
@@ -1637,6 +1677,7 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_JIRACHI] = 0,
     [SPECIES_DEOXYS] = 0,
     [SPECIES_CHIMECHO] = 0,
+#if P_NEW_POKEMON == TRUE
     [SPECIES_TURTWIG] = 1,
     [SPECIES_GROTLE] = 1,
     [SPECIES_TORTERRA] = 1,
@@ -2145,10 +2186,17 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_URSHIFU] = 2,
     [SPECIES_ZARUDE] = 1,
     [SPECIES_REGIELEKI] = 0,
-    [SPECIES_REGIDRAGO] = 2,
+    [SPECIES_REGIDRAGO] = 0,
     [SPECIES_GLASTRIER] = 0,
     [SPECIES_SPECTRIER] = 0,
     [SPECIES_CALYREX] = 0,
+    [SPECIES_WYRDEER] = 2,
+    [SPECIES_KLEAVOR] = 2,
+    [SPECIES_URSALUNA] = 2,
+    [SPECIES_BASCULEGION] = 1,
+    [SPECIES_SNEASLER] = 2,
+    [SPECIES_OVERQWIL] = 2,
+    [SPECIES_ENAMORUS] = 1,
     [SPECIES_VENUSAUR_MEGA] = 1,
     [SPECIES_CHARIZARD_MEGA_X] = 0,
     [SPECIES_CHARIZARD_MEGA_Y] = 0,
@@ -2236,6 +2284,22 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_DARMANITAN_GALARIAN] = 0,
     [SPECIES_YAMASK_GALARIAN] = 2,
     [SPECIES_STUNFISK_GALARIAN] = 1,
+    [SPECIES_GROWLITHE_HISUIAN] = 0,
+    [SPECIES_ARCANINE_HISUIAN] = 0,
+    [SPECIES_VOLTORB_HISUIAN] = 0,
+    [SPECIES_ELECTRODE_HISUIAN] = 1,
+    [SPECIES_TYPHLOSION_HISUIAN] = 1,
+    [SPECIES_QWILFISH_HISUIAN] = 0,
+    [SPECIES_SNEASEL_HISUIAN] = 2,
+    [SPECIES_SAMUROTT_HISUIAN] = 0,
+    [SPECIES_LILLIGANT_HISUIAN] = 1,
+    [SPECIES_ZORUA_HISUIAN] = 0,
+    [SPECIES_ZOROARK_HISUIAN] = 0,
+    [SPECIES_BRAVIARY_HISUIAN] = 2,
+    [SPECIES_SLIGGOO_HISUIAN] = 2,
+    [SPECIES_GOODRA_HISUIAN] = 2,
+    [SPECIES_AVALUGG_HISUIAN] = 5,
+    [SPECIES_DECIDUEYE_HISUIAN] = 0,
     [SPECIES_PIKACHU_COSPLAY] = 2,
     [SPECIES_PIKACHU_ROCK_STAR] = 1,
     [SPECIES_PIKACHU_BELLE] = 0,
@@ -2251,10 +2315,15 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_PIKACHU_PARTNER_CAP] = 0,
     [SPECIES_PIKACHU_WORLD_CAP] = 0,
     [SPECIES_PICHU_SPIKY_EARED] = 1,
+#endif
     [SPECIES_UNOWN_B ... SPECIES_UNOWN_QMARK] = 0,
     [SPECIES_CASTFORM_SUNNY] = 0,
     [SPECIES_CASTFORM_RAINY] = 0,
     [SPECIES_CASTFORM_SNOWY] = 0,
+    [SPECIES_DEOXYS_ATTACK] = 0,
+    [SPECIES_DEOXYS_DEFENSE] = 0,
+    [SPECIES_DEOXYS_SPEED] = 0,
+#if P_NEW_POKEMON == TRUE
     [SPECIES_BURMY_SANDY_CLOAK] = 1,
     [SPECIES_BURMY_TRASH_CLOAK] = 0,
     [SPECIES_WORMADAM_SANDY_CLOAK] = 1,
@@ -2267,6 +2336,8 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_ROTOM_FROST] = 5,
     [SPECIES_ROTOM_FAN] = 0,
     [SPECIES_ROTOM_MOW] = 0,
+    [SPECIES_DIALGA_ORIGIN] = 0,
+    [SPECIES_PALKIA_ORIGIN] = 2,
     [SPECIES_GIRATINA_ORIGIN] = 0,
     [SPECIES_SHAYMIN_SKY] = 1,
     [SPECIES_ARCEUS_FIGHTING] = 1,
@@ -2287,6 +2358,7 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_ARCEUS_DARK] = 1,
     [SPECIES_ARCEUS_FAIRY] = 1,
     [SPECIES_BASCULIN_BLUE_STRIPED] = 0,
+    [SPECIES_BASCULIN_WHITE_STRIPED] = 0,
     [SPECIES_DARMANITAN_ZEN_MODE] = 0,
     [SPECIES_DARMANITAN_ZEN_MODE_GALARIAN] = 0,
     [SPECIES_DEERLING_SUMMER] = 1,
@@ -2298,6 +2370,7 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_TORNADUS_THERIAN] = 1,
     [SPECIES_THUNDURUS_THERIAN] = 0,
     [SPECIES_LANDORUS_THERIAN] = 0,
+    [SPECIES_ENAMORUS_THERIAN] = 1,
     [SPECIES_KYUREM_WHITE] = 0,
     [SPECIES_KYUREM_BLACK] = 0,
     [SPECIES_KELDEO_RESOLUTE] = 0,
@@ -2422,12 +2495,20 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_ZARUDE_DADA] = 1,
     [SPECIES_CALYREX_ICE_RIDER] = 0,
     [SPECIES_CALYREX_SHADOW_RIDER] = 0,
+#endif
     [SPECIES_EGG] = 1,
 };
 
 const u8 gMonIconPaletteIndicesFemale[] =
 {
     [SPECIES_EEVEE] = 2,
+#if P_NEW_POKEMON == TRUE
+    [SPECIES_STARLY] = 0,
+    [SPECIES_STARAVIA] = 0,
+    [SPECIES_BIDOOF] = 2,
+    [SPECIES_KRICKETOT] = 2,
+    [SPECIES_KRICKETUNE] = 2,
+    [SPECIES_SHINX] = 0,
     [SPECIES_COMBEE] = 0,
     [SPECIES_HIPPOPOTAS] = 1,
     [SPECIES_HIPPOWDON] = 1,
@@ -2435,6 +2516,8 @@ const u8 gMonIconPaletteIndicesFemale[] =
     [SPECIES_FRILLISH] = 1,
     [SPECIES_JELLICENT] = 1,
     [SPECIES_PYROAR] = 2,
+    [SPECIES_BASCULEGION] = 0,
+#endif
 };
 
 const struct SpritePalette gMonIconPaletteTable[] =
@@ -2447,7 +2530,7 @@ const struct SpritePalette gMonIconPaletteTable[] =
     { gMonIconPalettes[5], POKE_ICON_BASE_PAL_TAG + 5 },
 };
 
-const struct OamData sMonIconOamData =
+static const struct OamData sMonIconOamData =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -2498,7 +2581,7 @@ static const union AnimCmd sAnim_4[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const sMonIconAnims[] =
+static const union AnimCmd *const sMonIconAnims[] =
 {
     sAnim_0,
     sAnim_1,
@@ -2519,34 +2602,34 @@ static const union AffineAnimCmd sAffineAnim_1[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const sMonIconAffineAnims[] =
+static const union AffineAnimCmd *const sMonIconAffineAnims[] =
 {
     sAffineAnim_0,
     sAffineAnim_1,
 };
 
-const u16 sSpriteImageSizes[3][4] =
+static const u16 sSpriteImageSizes[3][4] =
 {
-    [ST_OAM_SQUARE] = 
+    [ST_OAM_SQUARE] =
     {
-        [SPRITE_SIZE(8x8)]   =  0x20,
-        [SPRITE_SIZE(16x16)] =  0x80,
-        [SPRITE_SIZE(32x32)] = 0x200,
-        [SPRITE_SIZE(64x64)] = 0x800,
+        [SPRITE_SIZE(8x8)]   =  8 * 8  / 2,
+        [SPRITE_SIZE(16x16)] = 16 * 16 / 2,
+        [SPRITE_SIZE(32x32)] = 32 * 32 / 2,
+        [SPRITE_SIZE(64x64)] = 64 * 64 / 2,
     },
-    [ST_OAM_H_RECTANGLE] = 
+    [ST_OAM_H_RECTANGLE] =
     {
-        [SPRITE_SIZE(16x8)]  =  0x40,
-        [SPRITE_SIZE(32x8)]  =  0x80,
-        [SPRITE_SIZE(32x16)] = 0x100,
-        [SPRITE_SIZE(64x32)] = 0x400,
+        [SPRITE_SIZE(16x8)]  = 16 * 8  / 2,
+        [SPRITE_SIZE(32x8)]  = 32 * 8  / 2,
+        [SPRITE_SIZE(32x16)] = 32 * 16 / 2,
+        [SPRITE_SIZE(64x32)] = 64 * 32 / 2,
     },
-    [ST_OAM_V_RECTANGLE] = 
+    [ST_OAM_V_RECTANGLE] =
     {
-        [SPRITE_SIZE(8x16)]  =  0x40,
-        [SPRITE_SIZE(8x32)]  =  0x80,
-        [SPRITE_SIZE(16x32)] = 0x100,
-        [SPRITE_SIZE(32x64)] = 0x400,
+        [SPRITE_SIZE(8x16)]  =  8 * 16 / 2,
+        [SPRITE_SIZE(8x32)]  =  8 * 32 / 2,
+        [SPRITE_SIZE(16x32)] = 16 * 32 / 2,
+        [SPRITE_SIZE(32x64)] = 32 * 64 / 2,
     },
 };
 
@@ -2565,7 +2648,7 @@ u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u
 
     if (species > NUM_SPECIES)
         iconTemplate.paletteTag = POKE_ICON_BASE_PAL_TAG;
-    else if (SpeciesHasGenderDifference[species] && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+    else if (ShouldShowFemaleDifferences(species, personality))
         iconTemplate.paletteTag = POKE_ICON_BASE_PAL_TAG + gMonIconPaletteIndicesFemale[species];
 
     spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);
@@ -2574,6 +2657,7 @@ u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u
 
     return spriteId;
 }
+
 
 u8 CreateMonIconNoPersonality(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority)
 {
@@ -2648,7 +2732,7 @@ const u8 *GetMonIconPtr(u16 species, u32 personality)
 
 void FreeAndDestroyMonIconSprite(struct Sprite *sprite)
 {
-    sub_80D328C(sprite);
+    FreeAndDestroyMonIconSprite_(sprite);
 }
 
 void LoadMonIconPalettes(void)
@@ -2705,17 +2789,19 @@ void SpriteCB_MonIcon(struct Sprite *sprite)
     UpdateMonIconFrame(sprite);
 }
 
-const u8* GetMonIconTiles(u16 species, u32 personality)
+const u8 *GetMonIconTiles(u16 species, u32 personality)
 {
-    const u8* iconSprite = gMonIconTable[species];
-    if (SpeciesHasGenderDifference[species] && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
-    {
+    const u8 *iconSprite;
+
+    if (ShouldShowFemaleDifferences(species, personality))
         iconSprite = gMonIconTableFemale[species];
-    }
+    else
+        iconSprite = gMonIconTable[species];
+
     return iconSprite;
 }
 
-void sub_80D304C(u16 offset)
+void TryLoadAllMonIconPalettesAtOffset(u16 offset)
 {
     s32 i;
     const struct SpritePalette* monIconPalettePtr;
@@ -2723,7 +2809,7 @@ void sub_80D304C(u16 offset)
     if (offset <= 0xA0)
     {
         monIconPalettePtr = gMonIconPaletteTable;
-        for(i = 5; i >= 0; i--)
+        for(i = ARRAY_COUNT(gMonIconPaletteTable) - 1; i >= 0; i--)
         {
             LoadPalette(monIconPalettePtr->data, offset, 0x20);
             offset += 0x10;
@@ -2744,7 +2830,7 @@ u8 GetMonIconPaletteIndexFromSpecies(u16 species)
     return gMonIconPaletteIndices[species];
 }
 
-const u16* GetValidMonIconPalettePtr(u16 species)
+const u16 *GetValidMonIconPalettePtr(u16 species)
 {
     if (species > NUM_SPECIES)
         species = INVALID_ICON_SPECIES;
@@ -2795,7 +2881,7 @@ static u8 CreateMonIconSprite(struct MonIconSpriteTemplate *iconTemplate, s16 x,
 
     struct SpriteTemplate spriteTemplate =
     {
-        .tileTag = 0xFFFF,
+        .tileTag = TAG_NONE,
         .paletteTag = iconTemplate->paletteTag,
         .oam = iconTemplate->oam,
         .anims = iconTemplate->anims,
@@ -2811,7 +2897,7 @@ static u8 CreateMonIconSprite(struct MonIconSpriteTemplate *iconTemplate, s16 x,
     return spriteId;
 }
 
-void sub_80D328C(struct Sprite *sprite)
+static void FreeAndDestroyMonIconSprite_(struct Sprite *sprite)
 {
     struct SpriteFrameImage image = { NULL, sSpriteImageSizes[sprite->oam.shape][sprite->oam.size] };
     sprite->images = &image;

@@ -93,7 +93,7 @@ static const struct OamData sOamData_CutGrass =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
@@ -125,7 +125,7 @@ const struct SpritePalette gSpritePalette_CutGrass = {gFieldEffectPal_CutGrass, 
 
 static const struct SpriteTemplate sSpriteTemplate_CutGrass =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_CUT_GRASS,
     .oam = &sOamData_CutGrass,
     .anims = sSpriteAnimTable_CutGrass,
@@ -140,7 +140,7 @@ bool8 SetUpFieldMove_Cut(void)
     s16 x, y;
     u8 i, j;
     u8 tileBehavior;
-    u8 userAbility;
+    u16 userAbility;
     bool8 cutTiles[CUT_NORMAL_AREA];
     bool8 ret;
 
@@ -181,7 +181,7 @@ bool8 SetUpFieldMove_Cut(void)
             for (j = 0; j < CUT_NORMAL_SIDE; j++)
             {
                 x = j - 1 + gPlayerFacingPosition.x;
-                if (MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
+                if (MapGridGetElevationAt(x, y) == gPlayerFacingPosition.elevation)
                 {
                     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
                     if (MetatileBehavior_IsPokeGrass(tileBehavior) == TRUE
@@ -191,7 +191,12 @@ bool8 SetUpFieldMove_Cut(void)
                         sHyperCutTiles[6 + (i * 5) + j] = TRUE;
                         ret = TRUE;
                     }
-                    if (MapGridIsImpassableAt(x, y) == TRUE)
+                #ifdef BUGFIX
+                    // Collision has a range 0-3, any value != 0 is impassable
+                    if (MapGridGetCollisionAt(x, y))
+                #else
+                    if (MapGridGetCollisionAt(x, y) == 1)
+                #endif
                     {
                         cutTiles[i * 3 + j] = FALSE;
                     }
@@ -238,7 +243,7 @@ bool8 SetUpFieldMove_Cut(void)
 
                 if (tileCuttable == TRUE)
                 {
-                    if (MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
+                    if (MapGridGetElevationAt(x, y) == gPlayerFacingPosition.elevation)
                     {
                         u8 tileArrayId = ((sHyperCutStruct[i].y * 5) + 12) + (sHyperCutStruct[i].x);
                         tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
@@ -289,7 +294,7 @@ bool8 FldEff_UseCutOnGrass(void)
 static void FieldCallback_CutTree(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext1_SetupScript(EventScript_UseCut);
+    ScriptContext_SetupScript(EventScript_UseCut);
 }
 
 bool8 FldEff_UseCutOnTree(void)
@@ -578,10 +583,10 @@ static void CutGrassSpriteCallbackEnd(struct Sprite *sprite)
     FieldEffectStop(&gSprites[sCutGrassSpriteArrayPtr[0]], FLDEFF_CUT_GRASS);
     FREE_AND_SET_NULL(sCutGrassSpriteArrayPtr);
     ScriptUnfreezeObjectEvents();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 
     if (IsMewPlayingHideAndSeek() == TRUE)
-        ScriptContext1_SetupScript(FarawayIsland_Interior_EventScript_HideMewWhenGrassCut);
+        ScriptContext_SetupScript(FarawayIsland_Interior_EventScript_HideMewWhenGrassCut);
 }
 
 void FixLongGrassMetatilesWindowTop(s16 x, s16 y)
@@ -638,5 +643,5 @@ static void StartCutTreeFieldEffect(void)
 {
     PlaySE(SE_M_CUT);
     FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_TREE);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }

@@ -165,7 +165,7 @@ bool8 HasAtLeastOneBerry(void)
 {
     u16 i;
 
-    for (i = FIRST_BERRY_INDEX; i < ITEM_BRIGHT_POWDER; i++)
+    for (i = FIRST_BERRY_INDEX; i <= LAST_BERRY_INDEX; i++)
     {
         if (CheckBagHasItem(i, 1) == TRUE)
         {
@@ -913,9 +913,9 @@ u8 ItemId_GetImportance(u16 itemId)
 }
 
 // unused
-u8 ItemId_GetUnknownValue(u16 itemId)
+u8 ItemId_GetRegistrability(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].unk19;
+    return gItems[SanitizeItemId(itemId)].registrability;
 }
 
 u8 ItemId_GetPocket(u16 itemId)
@@ -946,4 +946,9 @@ ItemUseFunc ItemId_GetBattleFunc(u16 itemId)
 u8 ItemId_GetSecondaryId(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].secondaryId;
+}
+
+u8 ItemId_GetFlingPower(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].flingPower;
 }

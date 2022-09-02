@@ -15,6 +15,7 @@
 #define TRAINER_LINK_OPPONENT               2048
 #define TRAINER_UNION_ROOM                  3072
 #define TRAINER_STEVEN_PARTNER              3075
+#define TRAINER_CUSTOM_PARTNER              3076
 
 #define TRAINER_PIC_HIKER                  0
 #define TRAINER_PIC_AQUA_GRUNT_M           1
@@ -110,6 +111,7 @@
 #define TRAINER_PIC_RS_BRENDAN            91
 #define TRAINER_PIC_RS_MAY                92
 
+// The player back pics are assumed to alternate according to the gender values (MALE/FEMALE)
 #define TRAINER_BACK_PIC_BRENDAN                0
 #define TRAINER_BACK_PIC_MAY                    1
 #define TRAINER_BACK_PIC_RED                    2
@@ -334,7 +336,7 @@
 #define TRAINER_CLASS_SAILOR         0x2f
 #define TRAINER_CLASS_COOLTRAINER_2  0x30 // Used for only one trainer.
 #define TRAINER_CLASS_MAGMA_ADMIN    0x31
-#define TRAINER_CLASS_PKMN_TRAINER_3 0x32
+#define TRAINER_CLASS_RIVAL          0x32
 #define TRAINER_CLASS_BUG_CATCHER    0x33
 #define TRAINER_CLASS_PKMN_RANGER    0x34
 #define TRAINER_CLASS_MAGMA_LEADER   0x35

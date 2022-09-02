@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "battle_interface.h"
 #include "bg.h"
 #include "contest.h"
 #include "data.h"
@@ -20,32 +21,34 @@
 
 extern const struct OamData gOamData_AffineNormal_ObjNormal_64x64;
 
-static void sub_80A6FB4(struct Sprite *sprite);
+static void AnimTranslateLinear_WithFollowup_SetCornerVecX(struct Sprite *sprite);
 static void AnimFastTranslateLinearWaitEnd(struct Sprite *sprite);
 static void AnimThrowProjectile_Step(struct Sprite *sprite);
-static void sub_80A8DFC(struct Sprite *sprite);
+static void AnimBattlerTrace(struct Sprite *sprite);
 static void AnimWeatherBallUp_Step(struct Sprite *sprite);
 static u16 GetBattlerYDeltaFromSpriteId(u8 spriteId);
 static void AnimTask_BlendPalInAndOutSetup(struct Task *task);
 static void AnimTask_AlphaFadeIn_Step(u8 taskId);
 static void AnimTask_AttackerPunchWithTrace_Step(u8 taskId);
 static void AnimTask_BlendMonInAndOut_Step(u8 taskId);
-static bool8 sub_80A7238(void);
-static void sub_80A8D78(struct Task *task, u8 taskId);
+static bool8 ShouldRotScaleSpeciesBeFlipped(void);
+static void CreateBattlerTrace(struct Task *task, u8 taskId);
 
-// EWRAM vars
-EWRAM_DATA static union AffineAnimCmd *gAnimTaskAffineAnim = NULL;
+EWRAM_DATA static union AffineAnimCmd *sAnimTaskAffineAnim = NULL;
 
-// Const rom data
-static const struct UCoords8 sBattlerCoords[][4] =
+#if P_ENABLE_DEBUG == TRUE
+const struct UCoords8 sBattlerCoords[][MAX_BATTLERS_COUNT] =
+#else
+static const struct UCoords8 sBattlerCoords[][MAX_BATTLERS_COUNT] =
+#endif
 {
-    {
+    { // Single battle
         { 72, 80 },
         { 176, 40 },
         { 48, 40 },
         { 112, 80 },
     },
-    {
+    { // Double battle
         { 32, 80 },
         { 200, 40 },
         { 90, 88 },
@@ -54,36 +57,40 @@ static const struct UCoords8 sBattlerCoords[][4] =
 };
 
 // One entry for each of the four Castform forms.
-const struct MonCoords gCastformFrontSpriteCoords[] =
+const struct MonCoords gCastformFrontSpriteCoords[NUM_CASTFORM_FORMS] =
 {
-    { .size = 0x44, .y_offset = 17 }, // NORMAL
-    { .size = 0x66, .y_offset =  9 }, // SUN
-    { .size = 0x46, .y_offset =  9 }, // RAIN
-    { .size = 0x86, .y_offset =  8 }, // HAIL
+    [CASTFORM_NORMAL] = { .size = MON_COORDS_SIZE(32, 32), .y_offset = 17 },
+    [CASTFORM_FIRE]   = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
+    [CASTFORM_WATER]  = { .size = MON_COORDS_SIZE(32, 48), .y_offset =  9 },
+    [CASTFORM_ICE]    = { .size = MON_COORDS_SIZE(64, 48), .y_offset =  8 },
 };
 
-static const u8 sCastformElevations[] =
+#if P_ENABLE_DEBUG == TRUE
+const u8 sCastformElevations[NUM_CASTFORM_FORMS] =
+#else
+static const u8 sCastformElevations[NUM_CASTFORM_FORMS] =
+#endif
 {
-    13, // NORMAL
-    14, // SUN
-    13, // RAIN
-    13, // HAIL
+    [CASTFORM_NORMAL] = 13,
+    [CASTFORM_FIRE]   = 14,
+    [CASTFORM_WATER]  = 13,
+    [CASTFORM_ICE]    = 13,
 };
 
 // Y position of the backsprite for each of the four Castform forms.
-static const u8 sCastformBackSpriteYCoords[] =
+static const u8 sCastformBackSpriteYCoords[NUM_CASTFORM_FORMS] =
 {
-    0, // NORMAL
-    0, // SUN
-    0, // RAIN
-    0, // HAIL
+    [CASTFORM_NORMAL] = 0,
+    [CASTFORM_FIRE]   = 0,
+    [CASTFORM_WATER]  = 0,
+    [CASTFORM_ICE]    = 0,
 };
 
 // Placeholders for pokemon sprites to be created for a move animation effect (e.g. Role Play / Snatch)
 #define TAG_MOVE_EFFECT_MON_1 55125
 #define TAG_MOVE_EFFECT_MON_2 55126
 
-static const struct SpriteTemplate sSpriteTemplate_MoveEffectMons[] =
+static const struct SpriteTemplate sSpriteTemplates_MoveEffectMons[] =
 {
     {
         .tileTag = TAG_MOVE_EFFECT_MON_1,
@@ -105,7 +112,7 @@ static const struct SpriteTemplate sSpriteTemplate_MoveEffectMons[] =
     }
 };
 
-static const struct SpriteSheet sSpriteSheet_MoveEffectMons[] =
+static const struct SpriteSheet sSpriteSheets_MoveEffectMons[] =
 {
     { gMiscBlank_Gfx, MON_PIC_SIZE, TAG_MOVE_EFFECT_MON_1, },
     { gMiscBlank_Gfx, MON_PIC_SIZE, TAG_MOVE_EFFECT_MON_2, },
@@ -115,6 +122,7 @@ u8 GetBattlerSpriteCoord(u8 battlerId, u8 coordType)
 {
     u8 retVal;
     u16 species;
+    struct Pokemon *mon, *illusionMon;
     struct BattleSpriteInfo *spriteInfo;
 
     if (IsContest())
@@ -127,10 +135,10 @@ u8 GetBattlerSpriteCoord(u8 battlerId, u8 coordType)
     {
     case BATTLER_COORD_X:
     case BATTLER_COORD_X_2:
-        retVal = sBattlerCoords[IS_DOUBLE_BATTLE()][GetBattlerPosition(battlerId)].x;
+        retVal = sBattlerCoords[WhichBattleCoords(battlerId)][GetBattlerPosition(battlerId)].x;
         break;
     case BATTLER_COORD_Y:
-        retVal = sBattlerCoords[IS_DOUBLE_BATTLE()][GetBattlerPosition(battlerId)].y;
+        retVal = sBattlerCoords[WhichBattleCoords(battlerId)][GetBattlerPosition(battlerId)].y;
         break;
     case BATTLER_COORD_Y_PIC_OFFSET:
     case BATTLER_COORD_Y_PIC_OFFSET_DEFAULT:
@@ -145,21 +153,18 @@ u8 GetBattlerSpriteCoord(u8 battlerId, u8 coordType)
         else
         {
             if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
-            {
-                spriteInfo = gBattleSpritesDataPtr->battlerData;
-                if (!spriteInfo[battlerId].transformSpecies)
-                    species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
-                else
-                    species = spriteInfo[battlerId].transformSpecies;
-            }
+                mon = &gEnemyParty[gBattlerPartyIndexes[battlerId]];
             else
-            {
-                spriteInfo = gBattleSpritesDataPtr->battlerData;
-                if (!spriteInfo[battlerId].transformSpecies)
-                    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
-                else
-                    species = spriteInfo[battlerId].transformSpecies;
-            }
+                mon = &gPlayerParty[gBattlerPartyIndexes[battlerId]];
+
+            illusionMon = GetIllusionMonPtr(battlerId);
+            if (illusionMon != NULL)
+                mon = illusionMon;
+            spriteInfo = gBattleSpritesDataPtr->battlerData;
+            if (!spriteInfo[battlerId].transformSpecies)
+                species = GetMonData(mon, MON_DATA_SPECIES);
+            else
+                species = spriteInfo[battlerId].transformSpecies;
         }
         if (coordType == BATTLER_COORD_Y_PIC_OFFSET)
             retVal = GetBattlerSpriteFinal_Y(battlerId, species, TRUE);
@@ -274,13 +279,13 @@ u8 GetBattlerSpriteFinal_Y(u8 battlerId, u16 species, bool8 a3)
         offset = GetBattlerYDelta(battlerId, species);
         offset -= GetBattlerElevation(battlerId, species);
     }
-    y = offset + sBattlerCoords[IS_DOUBLE_BATTLE()][GetBattlerPosition(battlerId)].y;
+    y = offset + sBattlerCoords[WhichBattleCoords(battlerId)][GetBattlerPosition(battlerId)].y;
     if (a3)
     {
         if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
             y += 8;
-        if (y > 104)
-            y = 104;
+        if (y > DISPLAY_HEIGHT - MON_PIC_HEIGHT + 8)
+            y = DISPLAY_HEIGHT - MON_PIC_HEIGHT + 8;
     }
     return y;
 }
@@ -377,7 +382,7 @@ u8 GetAnimBattlerSpriteId(u8 animBattler)
         }
         else
         {
-            return 0xff;
+            return SPRITE_NONE;
         }
     }
     else if (animBattler == ANIM_TARGET)
@@ -389,13 +394,13 @@ u8 GetAnimBattlerSpriteId(u8 animBattler)
         }
         else
         {
-            return 0xff;
+            return SPRITE_NONE;
         }
     }
     else if (animBattler == ANIM_ATK_PARTNER)
     {
         if (!IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimAttacker)))
-            return 0xff;
+            return SPRITE_NONE;
         else
             return gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)];
     }
@@ -404,11 +409,11 @@ u8 GetAnimBattlerSpriteId(u8 animBattler)
         if (IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimTarget)))
             return gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimTarget)];
         else
-            return 0xff;
+            return SPRITE_NONE;
     }
 }
 
-void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*callback)(struct Sprite*))
+void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*callback)(struct Sprite *))
 {
     sprite->data[6] = (u32)(callback) & 0xffff;
     sprite->data[7] = (u32)(callback) >> 16;
@@ -420,18 +425,38 @@ void SetCallbackToStoredInData6(struct Sprite *sprite)
     sprite->callback = (void (*)(struct Sprite *))callback;
 }
 
-void TranslateSpriteInCircleOverDuration(struct Sprite *sprite)
+// Sprite data for TranslateSpriteInCircle/Ellipse and related
+#define sCirclePos    data[0]
+#define sAmplitude    data[1]
+#define sCircleSpeed  data[2]
+#define sDuration     data[3]
+
+// TranslateSpriteInGrowingCircle
+#define sAmplitudeSpeed  data[4]
+#define sAmplitudeChange data[5]
+
+// TranslateSpriteInEllipse
+#define sAmplitudeX sAmplitude
+#define sAmplitudeY data[4]
+
+// TranslateSpriteInLissajousCurve
+#define sCirclePosX   sCirclePos
+#define sCircleSpeedX sCircleSpeed
+#define sCirclePosY   data[4]
+#define sCircleSpeedY data[5]
+
+void TranslateSpriteInCircle(struct Sprite *sprite)
 {
-    if (sprite->data[3])
+    if (sprite->sDuration)
     {
-        sprite->x2 = Sin(sprite->data[0], sprite->data[1]);
-        sprite->y2 = Cos(sprite->data[0], sprite->data[1]);
-        sprite->data[0] += sprite->data[2];
-        if (sprite->data[0] >= 0x100)
-            sprite->data[0] -= 0x100;
-        else if (sprite->data[0] < 0)
-            sprite->data[0] += 0x100;
-        sprite->data[3]--;
+        sprite->x2 = Sin(sprite->sCirclePos, sprite->sAmplitude);
+        sprite->y2 = Cos(sprite->sCirclePos, sprite->sAmplitude);
+        sprite->sCirclePos += sprite->sCircleSpeed;
+        if (sprite->sCirclePos >= 0x100)
+            sprite->sCirclePos -= 0x100;
+        else if (sprite->sCirclePos < 0)
+            sprite->sCirclePos += 0x100;
+        sprite->sDuration--;
     }
     else
     {
@@ -439,19 +464,19 @@ void TranslateSpriteInCircleOverDuration(struct Sprite *sprite)
     }
 }
 
-void TranslateSpriteInGrowingCircleOverDuration(struct Sprite *sprite)
+void TranslateSpriteInGrowingCircle(struct Sprite *sprite)
 {
-    if (sprite->data[3])
+    if (sprite->sDuration)
     {
-        sprite->x2 = Sin(sprite->data[0], (sprite->data[5] >> 8) + sprite->data[1]);
-        sprite->y2 = Cos(sprite->data[0], (sprite->data[5] >> 8) + sprite->data[1]);
-        sprite->data[0] += sprite->data[2];
-        sprite->data[5] += sprite->data[4];
-        if (sprite->data[0] >= 0x100)
-            sprite->data[0] -= 0x100;
-        else if (sprite->data[0] < 0)
-            sprite->data[0] += 0x100;
-        sprite->data[3]--;
+        sprite->x2 = Sin(sprite->sCirclePos, (sprite->sAmplitudeChange >> 8) + sprite->sAmplitude);
+        sprite->y2 = Cos(sprite->sCirclePos, (sprite->sAmplitudeChange >> 8) + sprite->sAmplitude);
+        sprite->sCirclePos += sprite->sCircleSpeed;
+        sprite->sAmplitudeChange += sprite->sAmplitudeSpeed;
+        if (sprite->sCirclePos >= 0x100)
+            sprite->sCirclePos -= 0x100;
+        else if (sprite->sCirclePos < 0)
+            sprite->sCirclePos += 0x100;
+        sprite->sDuration--;
     }
     else
     {
@@ -459,23 +484,28 @@ void TranslateSpriteInGrowingCircleOverDuration(struct Sprite *sprite)
     }
 }
 
-void sub_80A63C8(struct Sprite *sprite)
+// Unused
+// Exact shape depends on arguments. Can move in a figure-8-like pattern, or circular, etc.
+static void TranslateSpriteInLissajousCurve(struct Sprite *sprite)
 {
-    if (sprite->data[3])
+    if (sprite->sDuration)
     {
-        sprite->x2 = Sin(sprite->data[0], sprite->data[1]);
-        sprite->y2 = Cos(sprite->data[4], sprite->data[1]);
-        sprite->data[0] += sprite->data[2];
-        sprite->data[4] += sprite->data[5];
-        if (sprite->data[0] >= 0x100)
-            sprite->data[0] -= 0x100;
-        else if (sprite->data[0] < 0)
-            sprite->data[0] += 0x100;
-        if (sprite->data[4] >= 0x100)
-            sprite->data[4] -= 0x100;
-        else if (sprite->data[4] < 0)
-            sprite->data[4] += 0x100;
-        sprite->data[3]--;
+        sprite->x2 = Sin(sprite->sCirclePosX, sprite->sAmplitude);
+        sprite->y2 = Cos(sprite->sCirclePosY, sprite->sAmplitude);
+        sprite->sCirclePosX += sprite->sCircleSpeedX;
+        sprite->sCirclePosY += sprite->sCircleSpeedY;
+
+        if (sprite->sCirclePosX >= 0x100)
+            sprite->sCirclePosX -= 0x100;
+        else if (sprite->sCirclePosX < 0)
+            sprite->sCirclePosX += 0x100;
+
+        if (sprite->sCirclePosY >= 0x100)
+            sprite->sCirclePosY -= 0x100;
+        else if (sprite->sCirclePosY < 0)
+            sprite->sCirclePosY += 0x100;
+
+        sprite->sDuration--;
     }
     else
     {
@@ -483,24 +513,37 @@ void sub_80A63C8(struct Sprite *sprite)
     }
 }
 
-void TranslateSpriteInEllipseOverDuration(struct Sprite *sprite)
+void TranslateSpriteInEllipse(struct Sprite *sprite)
 {
-    if (sprite->data[3])
+    if (sprite->sDuration)
     {
-        sprite->x2 = Sin(sprite->data[0], sprite->data[1]);
-        sprite->y2 = Cos(sprite->data[0], sprite->data[4]);
-        sprite->data[0] += sprite->data[2];
-        if (sprite->data[0] >= 0x100)
-            sprite->data[0] -= 0x100;
-        else if (sprite->data[0] < 0)
-            sprite->data[0] += 0x100;
-        sprite->data[3]--;
+        sprite->x2 = Sin(sprite->sCirclePos, sprite->sAmplitudeX);
+        sprite->y2 = Cos(sprite->sCirclePos, sprite->sAmplitudeY);
+        sprite->sCirclePos += sprite->sCircleSpeed;
+        if (sprite->sCirclePos >= 0x100)
+            sprite->sCirclePos -= 0x100;
+        else if (sprite->sCirclePos < 0)
+            sprite->sCirclePos += 0x100;
+        sprite->sDuration--;
     }
     else
     {
         SetCallbackToStoredInData6(sprite);
     }
 }
+
+#undef sCirclePos
+#undef sAmplitude
+#undef sCircleSpeed
+#undef sDuration
+#undef sAmplitudeSpeed
+#undef sAmplitudeChange
+#undef sAmplitudeX
+#undef sAmplitudeY
+#undef sCirclePosX
+#undef sCircleSpeedX
+#undef sCirclePosY
+#undef sCircleSpeedY
 
 // Simply waits until the sprite's data[0] hits zero.
 // This is used to let sprite anims or affine anims to run for a designated
@@ -513,34 +556,47 @@ void WaitAnimForDuration(struct Sprite *sprite)
         SetCallbackToStoredInData6(sprite);
 }
 
-static void sub_80A64D0(struct Sprite *sprite)
+// Sprite data for ConvertPosDataToTranslateLinearData
+#define sStepsX  data[0]
+#define sStartX  data[1]
+#define sTargetX data[2]
+#define sStartY  data[3]
+#define sTargetY data[4]
+
+// Sprite data for TranslateSpriteLinear
+#define sMoveSteps data[0]
+#define sSpeedX    data[1]
+#define sSpeedY    data[2]
+
+// Functionally unused
+static void AnimPosToTranslateLinear(struct Sprite *sprite)
 {
-    sub_80A64EC(sprite);
+    ConvertPosDataToTranslateLinearData(sprite);
     sprite->callback = TranslateSpriteLinear;
     sprite->callback(sprite);
 }
 
-void sub_80A64EC(struct Sprite *sprite)
+void ConvertPosDataToTranslateLinearData(struct Sprite *sprite)
 {
     s16 old;
     int xDiff;
 
-    if (sprite->data[1] > sprite->data[2])
-        sprite->data[0] = -sprite->data[0];
-    xDiff = sprite->data[2] - sprite->data[1];
-    old = sprite->data[0];
-    sprite->data[0] = abs(xDiff / sprite->data[0]);
-    sprite->data[2] = (sprite->data[4] - sprite->data[3]) / sprite->data[0];
-    sprite->data[1] = old;
+    if (sprite->sStartX > sprite->sTargetX)
+        sprite->sStepsX = -sprite->sStepsX;
+    xDiff = sprite->sTargetX - sprite->sStartX;
+    old = sprite->sStepsX;
+    sprite->sMoveSteps = abs(xDiff / sprite->sStepsX);
+    sprite->sSpeedY = (sprite->sTargetY - sprite->sStartY) / sprite->sMoveSteps;
+    sprite->sSpeedX = old;
 }
 
 void TranslateSpriteLinear(struct Sprite *sprite)
 {
-    if (sprite->data[0] > 0)
+    if (sprite->sMoveSteps > 0)
     {
-        sprite->data[0]--;
-        sprite->x2 += sprite->data[1];
-        sprite->y2 += sprite->data[2];
+        sprite->sMoveSteps--;
+        sprite->x2 += sprite->sSpeedX;
+        sprite->y2 += sprite->sSpeedY;
     }
     else
     {
@@ -582,16 +638,18 @@ static void TranslateSpriteLinearFixedPointIconFrame(struct Sprite *sprite)
     UpdateMonIconFrame(sprite);
 }
 
-void sub_80A65EC(struct Sprite *sprite)
+// Unused
+static void TranslateSpriteToBattleTargetPos(struct Sprite *sprite)
 {
-    sprite->data[1] = sprite->x + sprite->x2;
-    sprite->data[3] = sprite->y + sprite->y2;
-    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
-    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
-    sprite->callback = sub_80A64D0;
+    sprite->sStartX = sprite->x + sprite->x2;
+    sprite->sStartY = sprite->y + sprite->y2;
+    sprite->sTargetX = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    sprite->sTargetY = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
+    sprite->callback = AnimPosToTranslateLinear;
 }
 
-void TranslateMonSpriteLinear(struct Sprite *sprite)
+// Same as TranslateSpriteLinear but takes an id to specify which sprite to move
+void TranslateSpriteLinearById(struct Sprite *sprite)
 {
     if (sprite->data[0] > 0)
     {
@@ -605,7 +663,7 @@ void TranslateMonSpriteLinear(struct Sprite *sprite)
     }
 }
 
-void TranslateMonSpriteLinearFixedPoint(struct Sprite *sprite)
+void TranslateSpriteLinearByIdFixedPoint(struct Sprite *sprite)
 {
     if (sprite->data[0] > 0)
     {
@@ -648,18 +706,26 @@ void DestroySpriteAndMatrix(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-void sub_80A6760(struct Sprite *sprite)
+// Unused
+static void TranslateSpriteToBattleAttackerPos(struct Sprite *sprite)
 {
-    sprite->data[1] = sprite->x + sprite->x2;
-    sprite->data[3] = sprite->y + sprite->y2;
-    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
-    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
-    sprite->callback = sub_80A64D0;
+    sprite->sStartX = sprite->x + sprite->x2;
+    sprite->sStartY = sprite->y + sprite->y2;
+    sprite->sTargetX = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    sprite->sTargetY = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
+    sprite->callback = AnimPosToTranslateLinear;
 }
 
-void sub_80A67A4(struct Sprite *sprite)
+#undef sStepsX
+#undef sStartX
+#undef sTargetX
+#undef sStartY
+#undef sTargetY
+
+// Unused
+static void EndUnkPaletteAnim(struct Sprite *sprite)
 {
-    ResetPaletteStructByUid(sprite->data[5]);
+    PaletteStruct_ResetById(sprite->data[5]);
     DestroySpriteAndMatrix(sprite);
 }
 
@@ -783,6 +849,46 @@ void InitSpritePosToAnimAttacker(struct Sprite *sprite, bool8 respectMonPicOffse
     sprite->y += gBattleAnimArgs[1];
 }
 
+void InitSpritePosToAnimAttackerPartner(struct Sprite *sprite, bool8 respectMonPicOffsets)
+{
+    if (!respectMonPicOffsets)
+    {
+        sprite->x = GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_X);
+        sprite->y = GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_Y);
+    }
+    else
+    {
+        sprite->x = GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_X_2);
+        sprite->y = GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_Y_PIC_OFFSET);
+    }
+    SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
+    sprite->y += gBattleAnimArgs[1];
+}
+
+bool32 InitSpritePosToAnimBattler(u32 animBattlerId, struct Sprite *sprite, bool8 respectMonPicOffsets)
+{
+    u32 battlerId = GetAnimBattlerId(animBattlerId);
+    if (GetAnimBattlerSpriteId(animBattlerId) == 0xFF || !IsBattlerSpriteVisible(battlerId))
+    {
+        DestroyAnimSprite(sprite);
+        return FALSE;
+    }
+
+    if (!respectMonPicOffsets)
+    {
+        sprite->x = GetBattlerSpriteCoord2(battlerId, BATTLER_COORD_X);
+        sprite->y = GetBattlerSpriteCoord2(battlerId, BATTLER_COORD_Y);
+    }
+    else if (animBattlerId != ANIM_TARGET)
+    {
+        sprite->x = GetBattlerSpriteCoord2(battlerId, BATTLER_COORD_X_2);
+        sprite->y = GetBattlerSpriteCoord2(battlerId, BATTLER_COORD_Y_PIC_OFFSET);
+    }
+    SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
+    sprite->y += gBattleAnimArgs[1];
+    return TRUE;
+}
+
 u8 GetBattlerSide(u8 battlerId)
 {
     return GET_BATTLER_SIDE2(battlerId);
@@ -819,21 +925,23 @@ bool8 IsBattlerSpritePresent(u8 battlerId)
     else
     {
         if (gBattlerPositions[battlerId] == 0xff)
-        {
             return FALSE;
-        }
-        else if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
+
+        if (!gBattleStruct->spriteIgnore0Hp)
         {
-            if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_HP) != 0)
-                return TRUE;
+            if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
+            {
+                if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_HP) == 0)
+                    return FALSE;
+            }
+            else
+            {
+                if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_HP) == 0)
+                    return FALSE;
+            }
         }
-        else
-        {
-            if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_HP) != 0)
-                return TRUE;
-        }
+        return TRUE;
     }
-    return FALSE;
 }
 
 bool8 IsDoubleBattle(void)
@@ -841,22 +949,26 @@ bool8 IsDoubleBattle(void)
     return IS_DOUBLE_BATTLE();
 }
 
+#define BG_ANIM_PAL_1        8
+#define BG_ANIM_PAL_2        9
+#define BG_ANIM_PAL_CONTEST 14
+
 void GetBattleAnimBg1Data(struct BattleAnimBgData *out)
 {
     if (IsContest())
     {
-        out->bgTiles = gUnknown_0202305C;
-        out->bgTilemap = (u16 *)gUnknown_02023060;
-        out->paletteId = 14;
+        out->bgTiles = gBattleAnimBgTileBuffer;
+        out->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
+        out->paletteId = BG_ANIM_PAL_CONTEST;
         out->bgId = 1;
         out->tilesOffset = 0;
         out->unused = 0;
     }
     else
     {
-        out->bgTiles = gUnknown_0202305C;
-        out->bgTilemap = (u16 *)gUnknown_02023060;
-        out->paletteId = 8;
+        out->bgTiles = gBattleAnimBgTileBuffer;
+        out->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
+        out->paletteId = BG_ANIM_PAL_1;
         out->bgId = 1;
         out->tilesOffset = 0x200;
         out->unused = 0;
@@ -867,9 +979,9 @@ void GetBattleAnimBgData(struct BattleAnimBgData *out, u32 bgId)
 {
     if (IsContest())
     {
-        out->bgTiles = gUnknown_0202305C;
-        out->bgTilemap = (u16 *)gUnknown_02023060;
-        out->paletteId = 14;
+        out->bgTiles = gBattleAnimBgTileBuffer;
+        out->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
+        out->paletteId = BG_ANIM_PAL_CONTEST;
         out->bgId = 1;
         out->tilesOffset = 0;
         out->unused = 0;
@@ -880,36 +992,36 @@ void GetBattleAnimBgData(struct BattleAnimBgData *out, u32 bgId)
     }
     else
     {
-        out->bgTiles = gUnknown_0202305C;
-        out->bgTilemap = (u16 *)gUnknown_02023060;
-        out->paletteId = 9;
+        out->bgTiles = gBattleAnimBgTileBuffer;
+        out->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
+        out->paletteId = BG_ANIM_PAL_2;
         out->bgId = 2;
         out->tilesOffset = 0x300;
         out->unused = 0;
     }
 }
 
-void sub_80A6BFC(struct BattleAnimBgData *out, u8 unused)
+void GetBgDataForTransform(struct BattleAnimBgData *out, u8 battlerId)
 {
-    out->bgTiles = gUnknown_0202305C;
-    out->bgTilemap = (u16 *)gUnknown_02023060;
+    out->bgTiles = gBattleAnimBgTileBuffer;
+    out->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
     if (IsContest())
     {
-        out->paletteId = 14;
+        out->paletteId = BG_ANIM_PAL_CONTEST;
         out->bgId = 1;
         out->tilesOffset = 0;
         out->unused = 0;
     }
     else if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
     {
-        out->paletteId = 8;
+        out->paletteId = BG_ANIM_PAL_1;
         out->bgId = 1;
         out->tilesOffset = 0x200;
         out->unused = 0;
     }
     else
     {
-        out->paletteId = 9;
+        out->paletteId = BG_ANIM_PAL_2;
         out->bgId = 2;
         out->tilesOffset = 0x300;
         out->unused = 0;
@@ -929,9 +1041,9 @@ void ClearBattleAnimBg(u32 bgId)
 
 void AnimLoadCompressedBgGfx(u32 bgId, const u32 *src, u32 tilesOffset)
 {
-    CpuFill32(0, gUnknown_0202305C, 0x2000);
-    LZDecompressWram(src, gUnknown_0202305C);
-    LoadBgTiles(bgId, gUnknown_0202305C, 0x2000, tilesOffset);
+    CpuFill32(0, gBattleAnimBgTileBuffer, 0x2000);
+    LZDecompressWram(src, gBattleAnimBgTileBuffer);
+    LoadBgTiles(bgId, gBattleAnimBgTileBuffer, 0x2000, tilesOffset);
 }
 
 static void InitAnimBgTilemapBuffer(u32 bgId, const void *src)
@@ -946,12 +1058,12 @@ void AnimLoadCompressedBgTilemap(u32 bgId, const void *src)
     CopyBgTilemapBufferToVram(bgId);
 }
 
-void AnimLoadCompressedBgTilemapHandleContest(struct BattleAnimBgData *unk, const void *src, u32 arg2)
+void AnimLoadCompressedBgTilemapHandleContest(struct BattleAnimBgData *data, const void *src, bool32 largeScreen)
 {
-    InitAnimBgTilemapBuffer(unk->bgId, src);
+    InitAnimBgTilemapBuffer(data->bgId, src);
     if (IsContest() == TRUE)
-        sub_80A4720(unk->paletteId, unk->bgTilemap, 0, arg2);
-    CopyBgTilemapBufferToVram(unk->bgId);
+        RelocateBattleBgPal(data->paletteId, data->bgTilemap, 0, largeScreen);
+    CopyBgTilemapBufferToVram(data->bgId);
 }
 
 u8 GetBattleBgPaletteNum(void)
@@ -1028,16 +1140,17 @@ void StartAnimLinearTranslation(struct Sprite *sprite)
     sprite->data[1] = sprite->x;
     sprite->data[3] = sprite->y;
     InitAnimLinearTranslation(sprite);
-    sprite->callback = AnimTranslateLinear_WaitEnd;
+    sprite->callback = AnimTranslateLinear_WithFollowup;
     sprite->callback(sprite);
 }
 
-void sub_80A6F14(struct Sprite *sprite)
+// Unused
+static void StartAnimLinearTranslation_SetCornerVecX(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->x;
     sprite->data[3] = sprite->y;
     InitAnimLinearTranslation(sprite);
-    sprite->callback = sub_80A6FB4;
+    sprite->callback = AnimTranslateLinear_WithFollowup_SetCornerVecX;
     sprite->callback(sprite);
 }
 
@@ -1071,15 +1184,16 @@ bool8 AnimTranslateLinear(struct Sprite *sprite)
     return FALSE;
 }
 
-void AnimTranslateLinear_WaitEnd(struct Sprite *sprite)
+void AnimTranslateLinear_WithFollowup(struct Sprite *sprite)
 {
     if (AnimTranslateLinear(sprite))
         SetCallbackToStoredInData6(sprite);
 }
 
-static void sub_80A6FB4(struct Sprite *sprite)
+// Functionally unused
+static void AnimTranslateLinear_WithFollowup_SetCornerVecX(struct Sprite *sprite)
 {
-    sub_8039E9C(sprite);
+    AnimSetCenterToCornerVecX(sprite);
     if (AnimTranslateLinear(sprite))
         SetCallbackToStoredInData6(sprite);
 }
@@ -1096,7 +1210,7 @@ void InitAnimLinearTranslationWithSpeedAndPos(struct Sprite *sprite)
     sprite->data[1] = sprite->x;
     sprite->data[3] = sprite->y;
     InitAnimLinearTranslationWithSpeed(sprite);
-    sprite->callback = AnimTranslateLinear_WaitEnd;
+    sprite->callback = AnimTranslateLinear_WithFollowup;
     sprite->callback(sprite);
 }
 
@@ -1198,7 +1312,7 @@ void SetSpriteRotScale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation)
     src.xScale = xScale;
     src.yScale = yScale;
     src.rotation = rotation;
-    if (sub_80A7238())
+    if (ShouldRotScaleSpeciesBeFlipped())
         src.xScale = -src.xScale;
     i = gSprites[spriteId].oam.matrixNum;
     ObjAffineSet(&src, &matrix, 1, 2);
@@ -1208,7 +1322,8 @@ void SetSpriteRotScale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation)
     gOamMatrices[i].d = matrix.d;
 }
 
-static bool8 sub_80A7238(void)
+// Pokémon in Contests (except Unown) should be flipped.
+static bool8 ShouldRotScaleSpeciesBeFlipped(void)
 {
     if (IsContest())
     {
@@ -1273,7 +1388,7 @@ void TrySetSpriteRotScale(struct Sprite *sprite, bool8 recalcCenterVector, s16 x
         src.xScale = xScale;
         src.yScale = yScale;
         src.rotation = rotation;
-        if (sub_80A7238())
+        if (ShouldRotScaleSpeciesBeFlipped())
             src.xScale = -src.xScale;
         i = sprite->oam.matrixNum;
         ObjAffineSet(&src, &matrix, 1, 2);
@@ -1291,14 +1406,14 @@ void ResetSpriteRotScale_PreserveAffine(struct Sprite *sprite)
     CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
 }
 
-static u16 ArcTan2_(s16 a, s16 b)
+static u16 ArcTan2_(s16 x, s16 y)
 {
-    return ArcTan2(a, b);
+    return ArcTan2(x, y);
 }
 
-u16 ArcTan2Neg(s16 a, s16 b)
+u16 ArcTan2Neg(s16 x, s16 y)
 {
-    u16 var = ArcTan2_(a, b);
+    u16 var = ArcTan2_(x, y);
     return -var;
 }
 
@@ -1331,7 +1446,7 @@ void SetGrayscaleOrOriginalPalette(u16 paletteNum, bool8 restoreOriginalColor)
     }
 }
 
-u32 GetBattleBgPalettesMask(u8 battleBackground, u8 attacker, u8 target, u8 attackerPartner, u8 targetPartner, u8 a6, u8 a7)
+u32 GetBattlePalettesMask(bool8 battleBackground, bool8 attacker, bool8 target, bool8 attackerPartner, bool8 targetPartner, bool8 anim1, bool8 anim2)
 {
     u32 selectedPalettes = 0;
     u32 shift;
@@ -1339,7 +1454,7 @@ u32 GetBattleBgPalettesMask(u8 battleBackground, u8 attacker, u8 target, u8 atta
     if (battleBackground)
     {
         if (!IsContest())
-            selectedPalettes = 0xe;
+            selectedPalettes = 0xe; // Palettes 1, 2, and 3
         else
             selectedPalettes = 1 << GetBattleBgPaletteNum();
     }
@@ -1369,17 +1484,17 @@ u32 GetBattleBgPalettesMask(u8 battleBackground, u8 attacker, u8 target, u8 atta
             selectedPalettes |= 1 << shift;
         }
     }
-    if (a6)
+    if (anim1)
     {
         if (!IsContest())
-            selectedPalettes |= 0x100;
+            selectedPalettes |= 1 << BG_ANIM_PAL_1;
         else
-            selectedPalettes |= 0x4000;
+            selectedPalettes |= 1 << BG_ANIM_PAL_CONTEST;
     }
-    if (a7)
+    if (anim2)
     {
         if (!IsContest())
-            selectedPalettes |= 0x200;
+            selectedPalettes |= 1 << BG_ANIM_PAL_2;
     }
     return selectedPalettes;
 }
@@ -1434,13 +1549,13 @@ u32 GetBattleMonSpritePalettesMask(u8 playerLeft, u8 playerRight, u8 opponentLef
     return selectedPalettes;
 }
 
-// Presumably something commented here, just returns arg
-u8 AnimDummyReturnArg(u8 battler)
+u8 GetSpritePalIdxByBattler(u8 battler)
 {
     return battler;
 }
 
-static u8 GetBattlerAtPosition_(u8 position)
+// Unused
+static u8 GetSpritePalIdxByPosition(u8 position)
 {
     return GetBattlerAtPosition(position);
 }
@@ -1455,10 +1570,14 @@ void AnimSpriteOnMonPos(struct Sprite *sprite)
             var = TRUE;
         else
             var = FALSE;
-        if (!gBattleAnimArgs[2])
+
+        if (gBattleAnimArgs[2] == 0)
             InitSpritePosToAnimAttacker(sprite, var);
-        else
+        else if (gBattleAnimArgs[2] == 1)
             InitSpritePosToAnimTarget(sprite, var);
+        else if (gBattleAnimArgs[2] == 2)
+            InitSpritePosToAnimAttackerPartner(sprite, var);
+
         sprite->data[0]++;
 
     }
@@ -1478,20 +1597,20 @@ void AnimSpriteOnMonPos(struct Sprite *sprite)
 // arg 5: lower 8 bits = location on attacking mon, upper 8 bits = location on target mon pick to target
 void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite)
 {
-    bool8 v1;
+    bool8 respectMonPicOffsets;
     u8 coordType;
 
     if (!(gBattleAnimArgs[5] & 0xff00))
-        v1 = TRUE;
+        respectMonPicOffsets = TRUE;
     else
-        v1 = FALSE;
+        respectMonPicOffsets = FALSE;
 
     if (!(gBattleAnimArgs[5] & 0xff))
         coordType = BATTLER_COORD_Y_PIC_OFFSET;
     else
         coordType = BATTLER_COORD_Y;
 
-    InitSpritePosToAnimAttacker(sprite, v1);
+    InitSpritePosToAnimAttacker(sprite, respectMonPicOffsets);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
@@ -1504,7 +1623,7 @@ void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite)
 
 void AnimThrowProjectile(struct Sprite *sprite)
 {
-    InitSpritePosToAnimAttacker(sprite, 1);
+    InitSpritePosToAnimAttacker(sprite, TRUE);
     if (GetBattlerSide(gBattleAnimAttacker))
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[4];
@@ -1577,7 +1696,7 @@ s16 CloneBattlerSpriteWithBlend(u8 animBattler)
     return -1;
 }
 
-void obj_delete_but_dont_free_vram(struct Sprite *sprite)
+void DestroySpriteWithActiveSheet(struct Sprite *sprite)
 {
     sprite->usingSheet = TRUE;
     DestroySprite(sprite);
@@ -1732,34 +1851,34 @@ void PrepareAffineAnimInTaskData(struct Task *task, u8 spriteId, const union Aff
 
 bool8 RunAffineAnimFromTaskData(struct Task *task)
 {
-    gAnimTaskAffineAnim = &((union AffineAnimCmd *)LoadPointerFromVars(task->data[13], task->data[14]))[task->data[7]];
-    switch (gAnimTaskAffineAnim->type)
+    sAnimTaskAffineAnim = &((union AffineAnimCmd *)LoadPointerFromVars(task->data[13], task->data[14]))[task->data[7]];
+    switch (sAnimTaskAffineAnim->type)
     {
     default:
-        if (!gAnimTaskAffineAnim->frame.duration)
+        if (!sAnimTaskAffineAnim->frame.duration)
         {
-            task->data[10] = gAnimTaskAffineAnim->frame.xScale;
-            task->data[11] = gAnimTaskAffineAnim->frame.yScale;
-            task->data[12] = gAnimTaskAffineAnim->frame.rotation;
+            task->data[10] = sAnimTaskAffineAnim->frame.xScale;
+            task->data[11] = sAnimTaskAffineAnim->frame.yScale;
+            task->data[12] = sAnimTaskAffineAnim->frame.rotation;
             task->data[7]++;
-            gAnimTaskAffineAnim++;
+            sAnimTaskAffineAnim++;
         }
-        task->data[10] += gAnimTaskAffineAnim->frame.xScale;
-        task->data[11] += gAnimTaskAffineAnim->frame.yScale;
-        task->data[12] += gAnimTaskAffineAnim->frame.rotation;
+        task->data[10] += sAnimTaskAffineAnim->frame.xScale;
+        task->data[11] += sAnimTaskAffineAnim->frame.yScale;
+        task->data[12] += sAnimTaskAffineAnim->frame.rotation;
         SetSpriteRotScale(task->data[15], task->data[10], task->data[11], task->data[12]);
         SetBattlerSpriteYOffsetFromYScale(task->data[15]);
-        if (++task->data[8] >= gAnimTaskAffineAnim->frame.duration)
+        if (++task->data[8] >= sAnimTaskAffineAnim->frame.duration)
         {
             task->data[8] = 0;
             task->data[7]++;
         }
         break;
     case AFFINEANIMCMDTYPE_JUMP:
-        task->data[7] = gAnimTaskAffineAnim->jump.target;
+        task->data[7] = sAnimTaskAffineAnim->jump.target;
         break;
     case AFFINEANIMCMDTYPE_LOOP:
-        if (gAnimTaskAffineAnim->loop.count)
+        if (sAnimTaskAffineAnim->loop.count)
         {
             if (task->data[9])
             {
@@ -1771,7 +1890,7 @@ bool8 RunAffineAnimFromTaskData(struct Task *task)
             }
             else
             {
-                task->data[9] = gAnimTaskAffineAnim->loop.count;
+                task->data[9] = sAnimTaskAffineAnim->loop.count;
             }
             if (!task->data[7])
             {
@@ -1780,8 +1899,8 @@ bool8 RunAffineAnimFromTaskData(struct Task *task)
             for (;;)
             {
                 task->data[7]--;
-                gAnimTaskAffineAnim--;
-                if (gAnimTaskAffineAnim->type == AFFINEANIMCMDTYPE_LOOP)
+                sAnimTaskAffineAnim--;
+                if (sAnimTaskAffineAnim->type == AFFINEANIMCMDTYPE_LOOP)
                 {
                     task->data[7]++;
                     return TRUE;
@@ -1805,12 +1924,12 @@ bool8 RunAffineAnimFromTaskData(struct Task *task)
 // matrix's scale in the y dimension.
 void SetBattlerSpriteYOffsetFromYScale(u8 spriteId)
 {
-    int var = 64 - GetBattlerYDeltaFromSpriteId(spriteId) * 2;
+    int var = MON_PIC_HEIGHT - GetBattlerYDeltaFromSpriteId(spriteId) * 2;
     u16 matrix = gSprites[spriteId].oam.matrixNum;
     int var2 = SAFE_DIV(var << 8, gOamMatrices[matrix].d);
 
-    if (var2 > 128)
-        var2 = 128;
+    if (var2 > MON_PIC_HEIGHT * 2)
+        var2 = MON_PIC_HEIGHT * 2;
     gSprites[spriteId].y2 = (var - var2) / 2;
 }
 
@@ -1818,12 +1937,12 @@ void SetBattlerSpriteYOffsetFromYScale(u8 spriteId)
 // matrix's scale in the y dimension.
 void SetBattlerSpriteYOffsetFromOtherYScale(u8 spriteId, u8 otherSpriteId)
 {
-    int var = 64 - GetBattlerYDeltaFromSpriteId(otherSpriteId) * 2;
+    int var = MON_PIC_HEIGHT - GetBattlerYDeltaFromSpriteId(otherSpriteId) * 2;
     u16 matrix = gSprites[spriteId].oam.matrixNum;
     int var2 = SAFE_DIV(var << 8, gOamMatrices[matrix].d);
 
-    if (var2 > 128)
-        var2 = 128;
+    if (var2 > MON_PIC_HEIGHT * 2)
+        var2 = MON_PIC_HEIGHT * 2;
     gSprites[spriteId].y2 = (var - var2) / 2;
 }
 
@@ -1874,7 +1993,7 @@ static u16 GetBattlerYDeltaFromSpriteId(u8 spriteId)
             }
         }
     }
-    return 64;
+    return MON_PIC_HEIGHT;
 }
 
 void StorePointerInVars(s16 *lo, s16 *hi, const void *ptr)
@@ -1939,7 +2058,8 @@ void AnimTask_GetFrustrationPowerLevel(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80A8174(u8 priority)
+// Unused
+static void SetPriorityForVisibleBattlers(u8 priority)
 {
     if (IsBattlerSpriteVisible(gBattleAnimTarget))
         gSprites[gBattlerSpriteIds[gBattleAnimTarget]].oam.priority = priority;
@@ -1951,7 +2071,7 @@ void sub_80A8174(u8 priority)
         gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)]].oam.priority = priority;
 }
 
-void sub_80A8278(void)
+void InitPrioritiesForVisibleBattlers(void)
 {
     int i;
 
@@ -2022,16 +2142,15 @@ u8 GetBattlerSpriteBGPriorityRank(u8 battlerId)
 u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16 x, s16 y, u8 subpriority, u32 personality, u32 trainerId, u32 battlerId)
 {
     u8 spriteId;
-    u16 sheet = LoadSpriteSheet(&sSpriteSheet_MoveEffectMons[id]);
-    u16 palette = AllocSpritePalette(sSpriteTemplate_MoveEffectMons[id].paletteTag);
+    u16 sheet = LoadSpriteSheet(&sSpriteSheets_MoveEffectMons[id]);
+    u16 palette = AllocSpritePalette(sSpriteTemplates_MoveEffectMons[id].paletteTag);
 
     if (gMonSpritesGfxPtr != NULL && gMonSpritesGfxPtr->buffer == NULL)
         gMonSpritesGfxPtr->buffer = AllocZeroed(0x2000);
     if (!isBackpic)
     {
         LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), (palette * 0x10) + 0x100, 0x20);
-        LoadSpecialPokePic(&gMonFrontPicTable[species],
-                           gMonSpritesGfxPtr->buffer,
+        LoadSpecialPokePic(gMonSpritesGfxPtr->buffer,
                            species,
                            personality,
                            TRUE);
@@ -2039,8 +2158,7 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16
     else
     {
         LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), (palette * 0x10) + 0x100, 0x20);
-        LoadSpecialPokePic(&gMonBackPicTable[species],
-                           gMonSpritesGfxPtr->buffer,
+        LoadSpecialPokePic(gMonSpritesGfxPtr->buffer,
                            species,
                            personality,
                            FALSE);
@@ -2050,9 +2168,9 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16
     FREE_AND_SET_NULL(gMonSpritesGfxPtr->buffer);
 
     if (!isBackpic)
-        spriteId = CreateSprite(&sSpriteTemplate_MoveEffectMons[id], x, y + gMonFrontPicCoords[species].y_offset, subpriority);
+        spriteId = CreateSprite(&sSpriteTemplates_MoveEffectMons[id], x, y + gMonFrontPicCoords[species].y_offset, subpriority);
     else
-        spriteId = CreateSprite(&sSpriteTemplate_MoveEffectMons[id], x, y + gMonBackPicCoords[species].y_offset, subpriority);
+        spriteId = CreateSprite(&sSpriteTemplates_MoveEffectMons[id], x, y + gMonBackPicCoords[species].y_offset, subpriority);
 
     if (IsContest())
     {
@@ -2172,17 +2290,17 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
     switch (attr)
     {
     case BATTLER_COORD_ATTR_HEIGHT:
-        return (coords->size & 0xf) * 8;
+        return GET_MON_COORDS_HEIGHT(coords->size);
     case BATTLER_COORD_ATTR_WIDTH:
-        return (coords->size >> 4) * 8;
+        return GET_MON_COORDS_WIDTH(coords->size);
     case BATTLER_COORD_ATTR_LEFT:
-        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) - ((coords->size >> 4) * 4);
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) - (GET_MON_COORDS_WIDTH(coords->size) / 2);
     case BATTLER_COORD_ATTR_RIGHT:
-        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) + ((coords->size >> 4) * 4);
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) + (GET_MON_COORDS_WIDTH(coords->size) / 2);
     case BATTLER_COORD_ATTR_TOP:
-        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) - ((coords->size & 0xf) * 4);
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) - (GET_MON_COORDS_HEIGHT(coords->size) / 2);
     case BATTLER_COORD_ATTR_BOTTOM:
-        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) + ((coords->size & 0xf) * 4);
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) + (GET_MON_COORDS_HEIGHT(coords->size) / 2);
     case BATTLER_COORD_ATTR_RAW_BOTTOM:
         ret = GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y) + 31;
         return ret - coords->y_offset;
@@ -2294,6 +2412,19 @@ void AnimSpinningSparkle(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
+// Task and sprite data for AnimTask_AttackerPunchWithTrace
+#define tBattlerSpriteId data[0]
+#define tMoveSpeed       data[1]
+#define tState           data[2]
+#define tCounter         data[3]
+#define tPaletteNum      data[4]
+#define tNumTracesActive data[5]
+#define tPriority        data[6]
+
+#define sActiveTime data[0]
+#define sTaskId     data[1]
+#define sSpriteId   data[2]
+
 // Slides attacker to right and back with a cloned trace of the specified color
 // arg0: Trace palette blend color
 // arg1: Trace palette blend coeff
@@ -2303,21 +2434,24 @@ void AnimTask_AttackerPunchWithTrace(u8 taskId)
     u16 dest;
     struct Task *task = &gTasks[taskId];
 
-    task->data[0] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
-    task->data[1] = ((GetBattlerSide(gBattleAnimAttacker)) != B_SIDE_PLAYER) ? -8 : 8;
-    task->data[2] = 0;
-    task->data[3] = 0;
-    gSprites[task->data[0]].x2 -= task->data[0];
-    task->data[4] = AllocSpritePalette(ANIM_TAG_BENT_SPOON);
-    task->data[5] = 0;
+    task->tBattlerSpriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
+    task->tMoveSpeed = (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER) ? -8 : 8;
+    task->tState = 0;
+    task->tCounter = 0;
+    gSprites[task->tBattlerSpriteId].x2 -= task->tBattlerSpriteId;
+    task->tPaletteNum = AllocSpritePalette(ANIM_TAG_BENT_SPOON);
+    task->tNumTracesActive = 0;
 
-    dest = (task->data[4] + 0x10) * 0x10;
-    src = (gSprites[task->data[0]].oam.paletteNum + 0x10) * 0x10;
-    task->data[6] = GetBattlerSpriteSubpriority(gBattleAnimAttacker);
-    if (task->data[6] == 20 || task->data[6] == 40)
-        task->data[6] = 2;
+    dest = (task->tPaletteNum + 16) * 16;
+    src = (gSprites[task->tBattlerSpriteId].oam.paletteNum + 0x10) * 0x10;
+
+    // Set trace's priority based on battler's subpriority
+    task->tPriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker);
+    if (task->tPriority == 20 || task->tPriority == 40)
+        task->tPriority = 2;
     else
-        task->data[6] = 3;
+        task->tPriority = 3;
+
     CpuCopy32(&gPlttBufferUnfaded[src], &gPlttBufferFaded[dest], 0x20);
     BlendPalette(dest, 16, gBattleAnimArgs[1], gBattleAnimArgs[0]);
     task->func = AnimTask_AttackerPunchWithTrace_Step;
@@ -2326,28 +2460,30 @@ void AnimTask_AttackerPunchWithTrace(u8 taskId)
 static void AnimTask_AttackerPunchWithTrace_Step(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    switch (task->data[2])
+    switch (task->tState)
     {
     case 0:
-        sub_80A8D78(task, taskId);
-        gSprites[task->data[0]].x2 += task->data[1];
-        if (++task->data[3] == 5)
+        // Move forward
+        CreateBattlerTrace(task, taskId);
+        gSprites[task->tBattlerSpriteId].x2 += task->tMoveSpeed;
+        if (++task->tCounter == 5)
         {
-            task->data[3]--;
-            task->data[2]++;
+            task->tCounter--;
+            task->tState++;
         }
         break;
     case 1:
-        sub_80A8D78(task, taskId);
-        gSprites[task->data[0]].x2 -= task->data[1];
-        if (--task->data[3] == 0)
+        // Move back (do same number of traces as before)
+        CreateBattlerTrace(task, taskId);
+        gSprites[task->tBattlerSpriteId].x2 -= task->tMoveSpeed;
+        if (--task->tCounter == 0)
         {
-            gSprites[task->data[0]].x2 = 0;
-            task->data[2]++;
+            gSprites[task->tBattlerSpriteId].x2 = 0;
+            task->tState++;
         }
         break;
     case 2:
-        if (!task->data[5])
+        if (task->tNumTracesActive == 0)
         {
             FreeSpritePaletteByTag(ANIM_TAG_BENT_SPOON);
             DestroyAnimVisualTask(taskId);
@@ -2356,30 +2492,43 @@ static void AnimTask_AttackerPunchWithTrace_Step(u8 taskId)
     }
 }
 
-static void sub_80A8D78(struct Task *task, u8 taskId)
+static void CreateBattlerTrace(struct Task *task, u8 taskId)
 {
     s16 spriteId = CloneBattlerSpriteWithBlend(0);
     if (spriteId >= 0)
     {
-        gSprites[spriteId].oam.priority = task->data[6];
-        gSprites[spriteId].oam.paletteNum = task->data[4];
-        gSprites[spriteId].data[0] = 8;
-        gSprites[spriteId].data[1] = taskId;
-        gSprites[spriteId].data[2] = spriteId;
-        gSprites[spriteId].x2 = gSprites[task->data[0]].x2;
-        gSprites[spriteId].callback = sub_80A8DFC;
-        task->data[5]++;
+        gSprites[spriteId].oam.priority = task->tPriority;
+        gSprites[spriteId].oam.paletteNum = task->tPaletteNum;
+        gSprites[spriteId].sActiveTime = 8;
+        gSprites[spriteId].sTaskId = taskId;
+        gSprites[spriteId].sSpriteId = spriteId;
+        gSprites[spriteId].x2 = gSprites[task->tBattlerSpriteId].x2;
+        gSprites[spriteId].callback = AnimBattlerTrace;
+        task->tNumTracesActive++;
     }
 }
 
-static void sub_80A8DFC(struct Sprite *sprite)
+// Just waits until destroyed
+static void AnimBattlerTrace(struct Sprite *sprite)
 {
-    if (--sprite->data[0] == 0)
+    if (--sprite->sActiveTime == 0)
     {
-        gTasks[sprite->data[1]].data[5]--;
-        obj_delete_but_dont_free_vram(sprite);
+        gTasks[sprite->sTaskId].tNumTracesActive--;
+        DestroySpriteWithActiveSheet(sprite);
     }
 }
+
+#undef tBattlerSpriteId
+#undef tMoveSpeed
+#undef tState
+#undef tCounter
+#undef tPaletteNum
+#undef tNumTracesActive
+#undef tPriority
+
+#undef sActiveTime
+#undef sTaskId
+#undef sSpriteId
 
 void AnimWeatherBallUp(struct Sprite *sprite)
 {

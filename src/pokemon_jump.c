@@ -126,7 +126,7 @@ enum {
 #define PLAY_AGAIN_YES 2
 
 #define TAG_MON1 0
-#define TAG_MON2 1 // MON2-5 used implicitly by adding multiplayer id to tag 
+#define TAG_MON2 1 // MON2-5 used implicitly by adding multiplayer id to tag
 #define TAG_MON3 2
 #define TAG_MON4 3
 #define TAG_MON5 4
@@ -434,17 +434,37 @@ static const struct PokemonJumpMons sPokeJumpMons[] =
     { .species = SPECIES_WEEDLE,     .jumpType = JUMP_TYPE_FAST, },
     { .species = SPECIES_KAKUNA,     .jumpType = JUMP_TYPE_FAST, },
     { .species = SPECIES_RATTATA,    .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_RATTATA_ALOLAN, .jumpType = JUMP_TYPE_FAST, },
     { .species = SPECIES_RATICATE,   .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_RATICATE_ALOLAN, .jumpType = JUMP_TYPE_FAST, },
     { .species = SPECIES_PIKACHU,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PIKACHU_COSPLAY, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PIKACHU_ROCK_STAR, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PIKACHU_BELLE, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PIKACHU_POP_STAR, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PIKACHU_PH_D, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PIKACHU_LIBRE, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PIKACHU_ORIGINAL_CAP, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PIKACHU_HOENN_CAP, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PIKACHU_SINNOH_CAP, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PIKACHU_UNOVA_CAP, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PIKACHU_KALOS_CAP, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PIKACHU_ALOLA_CAP, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PIKACHU_PARTNER_CAP, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PIKACHU_WORLD_CAP, .jumpType = JUMP_TYPE_NORMAL, },
     { .species = SPECIES_SANDSHREW,  .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_SANDSHREW_ALOLAN, .jumpType = JUMP_TYPE_SLOW, },
     { .species = SPECIES_NIDORAN_F,  .jumpType = JUMP_TYPE_NORMAL, },
     { .species = SPECIES_NIDORAN_M,  .jumpType = JUMP_TYPE_NORMAL, },
     { .species = SPECIES_CLEFAIRY,   .jumpType = JUMP_TYPE_NORMAL, },
     { .species = SPECIES_VULPIX,     .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_VULPIX_ALOLAN, .jumpType = JUMP_TYPE_NORMAL, },
     { .species = SPECIES_JIGGLYPUFF, .jumpType = JUMP_TYPE_SLOW, },
     { .species = SPECIES_ODDISH,     .jumpType = JUMP_TYPE_SLOW, },
     { .species = SPECIES_PARAS,      .jumpType = JUMP_TYPE_FAST, },
     { .species = SPECIES_MEOWTH,     .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_MEOWTH_ALOLAN, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_MEOWTH_GALARIAN, .jumpType = JUMP_TYPE_NORMAL, },
     { .species = SPECIES_PSYDUCK,    .jumpType = JUMP_TYPE_SLOW, },
     { .species = SPECIES_MANKEY,     .jumpType = JUMP_TYPE_FAST, },
     { .species = SPECIES_GROWLITHE,  .jumpType = JUMP_TYPE_FAST, },
@@ -463,6 +483,7 @@ static const struct PokemonJumpMons sPokeJumpMons[] =
     { .species = SPECIES_TOTODILE,   .jumpType = JUMP_TYPE_NORMAL, },
     { .species = SPECIES_SPINARAK,   .jumpType = JUMP_TYPE_FAST, },
     { .species = SPECIES_PICHU,      .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PICHU_SPIKY_EARED, .jumpType = JUMP_TYPE_NORMAL, },
     { .species = SPECIES_CLEFFA,     .jumpType = JUMP_TYPE_NORMAL, },
     { .species = SPECIES_IGGLYBUFF,  .jumpType = JUMP_TYPE_SLOW, },
     { .species = SPECIES_TOGEPI,     .jumpType = JUMP_TYPE_SLOW, },
@@ -491,7 +512,9 @@ static const struct PokemonJumpMons sPokeJumpMons[] =
     { .species = SPECIES_MARSHTOMP,  .jumpType = JUMP_TYPE_NORMAL, },
     { .species = SPECIES_POOCHYENA,  .jumpType = JUMP_TYPE_FAST, },
     { .species = SPECIES_ZIGZAGOON,  .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_ZIGZAGOON_GALARIAN, .jumpType = JUMP_TYPE_NORMAL, },
     { .species = SPECIES_LINOONE,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_LINOONE_GALARIAN, .jumpType = JUMP_TYPE_NORMAL, },
     { .species = SPECIES_WURMPLE,    .jumpType = JUMP_TYPE_FAST, },
     { .species = SPECIES_SILCOON,    .jumpType = JUMP_TYPE_SLOW, },
     { .species = SPECIES_CASCOON,    .jumpType = JUMP_TYPE_SLOW, },
@@ -506,6 +529,7 @@ static const struct PokemonJumpMons sPokeJumpMons[] =
     { .species = SPECIES_AZURILL,    .jumpType = JUMP_TYPE_SLOW, },
     { .species = SPECIES_SKITTY,     .jumpType = JUMP_TYPE_NORMAL, },
     { .species = SPECIES_SABLEYE,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_SABLEYE_MEGA, .jumpType = JUMP_TYPE_SLOW, },
     { .species = SPECIES_MAWILE,     .jumpType = JUMP_TYPE_NORMAL, },
     { .species = SPECIES_ARON,       .jumpType = JUMP_TYPE_FAST, },
     { .species = SPECIES_MEDITITE,   .jumpType = JUMP_TYPE_SLOW, },
@@ -526,6 +550,164 @@ static const struct PokemonJumpMons sPokeJumpMons[] =
     { .species = SPECIES_SNORUNT,    .jumpType = JUMP_TYPE_NORMAL, },
     { .species = SPECIES_CLAMPERL,   .jumpType = JUMP_TYPE_FAST, },
     { .species = SPECIES_BAGON,      .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_TURTWIG,    .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_CHIMCHAR,   .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_PIPLUP,     .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_BIDOOF,     .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_KRICKETOT,  .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_SHINX,      .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_BUDEW,      .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_SHIELDON,   .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_PACHIRISU,  .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_BUIZEL,     .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_CHERUBI,    .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_CHERRIM,    .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_CHERRIM_SUNSHINE, .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_SHELLOS,    .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_SHELLOS_EAST_SEA, .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_BUNEARY,    .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_GLAMEOW,    .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_STUNKY,     .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_BONSLY,     .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_MIME_JR,    .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_HAPPINY,    .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_GIBLE,      .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_MUNCHLAX,   .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_RIOLU,      .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_CROAGUNK,   .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_SHAYMIN,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_SNIVY,      .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_TEPIG,      .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_OSHAWOTT,   .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PATRAT,     .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_LILLIPUP,   .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_PURRLOIN,   .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_PANSAGE,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PANSEAR,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_PANPOUR,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_ROGGENROLA, .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_DRILBUR,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_EXCADRILL,  .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_TIMBURR,    .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_SEWADDLE,   .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_SWADLOON,   .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_VENIPEDE,   .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_PETILIL,    .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_SANDILE,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_DARUMAKA,   .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_DARUMAKA_GALARIAN, .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_DWEBBLE,    .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_SCRAGGY,    .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_ARCHEN,     .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_TRUBBISH,   .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_ZORUA,      .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_MINCCINO,   .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_CINCCINO,   .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_GOTHITA,    .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_GOTHORITA,  .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_DEERLING,   .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_DEERLING_SUMMER, .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_DEERLING_AUTUMN, .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_DEERLING_WINTER, .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_KARRABLAST, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_FOONGUS,    .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_AMOONGUSS,  .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_JOLTIK,     .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_LITWICK,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_AXEW,       .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_CUBCHOO,    .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_SHELMET,    .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_STUNFISK,   .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_STUNFISK_GALARIAN, .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_PAWNIARD,   .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_DURANT,     .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_CHESPIN,    .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_QUILLADIN,  .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_FENNEKIN,   .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_FROAKIE,    .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_FROGADIER,  .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_BUNNELBY,   .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_SCATTERBUG, .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_SPEWPA,     .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_LITLEO,     .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_PANCHAM,    .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_ESPURR,     .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_MEOWSTIC,   .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_MEOWSTIC_FEMALE, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_BINACLE,    .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_CLAUNCHER,  .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_HELIOPTILE, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_DEDENNE,    .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_GOOMY,      .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_ROWLET,     .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_DARTRIX,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_LITTEN,     .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_TORRACAT,   .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_POPPLIO,    .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_BRIONNE,    .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_YUNGOOS,    .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_GUMSHOOS,   .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_GRUBBIN,   .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_CHARJABUG,   .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_CRABRAWLER,   .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_ROCKRUFF,   .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_ROCKRUFF_OWN_TEMPO,   .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_MAREANIE,   .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_DEWPIDER,   .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_FOMANTIS,   .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_MORELULL,   .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_SALANDIT,   .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_STUFFUL,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_BOUNSWEET,  .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_STEENEE,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_WIMPOD,     .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_PYUKUMUKU,  .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_KOMALA,     .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_TOGEDEMARU, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_MIMIKYU,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_MIMIKYU_BUSTED, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_JANGMO_O,   .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_MARSHADOW,  .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_MELTAN,     .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_GROOKEY,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_THWACKEY,   .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_SCORBUNNY,  .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_RABOOT,     .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_SOBBLE,     .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_DRIZZILE,   .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_SKWOVET,    .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_SKWOVET,    .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_BLIPBUG,    .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_DOTTLER,    .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_NICKIT,     .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_GOSSIFLEUR, .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_ELDEGOSS,   .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_WOOLOO,     .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_CHEWTLE,    .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_YAMPER,     .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_ROLYCOLY,   .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_APPLIN,     .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_APPLETUN,   .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_TOXEL,      .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_SIZZLIPEDE, .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_CLOBBOPUS,  .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_HATENNA,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_HATTREM,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_IMPIDIMP,   .jumpType = JUMP_TYPE_FAST, },
+    { .species = SPECIES_ALCREMIE,   .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_ALCREMIE_RUBY_CREAM, .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_ALCREMIE_MATCHA_CREAM, .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_ALCREMIE_MINT_CREAM, .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_ALCREMIE_LEMON_CREAM, .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_ALCREMIE_SALTED_CREAM, .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_ALCREMIE_RUBY_SWIRL, .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_ALCREMIE_CARAMEL_SWIRL, .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_ALCREMIE_RAINBOW_SWIRL, .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_PINCURCHIN, .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_SNOM,       .jumpType = JUMP_TYPE_SLOW, },
+    { .species = SPECIES_MORPEKO,    .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_MORPEKO_HANGRY, .jumpType = JUMP_TYPE_NORMAL, },
+    { .species = SPECIES_KUBFU,      .jumpType = JUMP_TYPE_FAST, },
 };
 
 void StartPokemonJump(u16 partyId, MainCallback exitCallback)
@@ -1282,12 +1464,12 @@ static bool32 SavePokeJump(void)
     case 2:
         if (AreLinkQueuesEmpty())
         {
-            CreateTask(Task_LinkSave, 6);
+            CreateTask(Task_LinkFullSave, 6);
             sPokemonJump->mainState++;
         }
         break;
     case 3:
-        if (!FuncIsActiveTask(Task_LinkSave))
+        if (!FuncIsActiveTask(Task_LinkFullSave))
         {
             ClearMessageWindow();
             sPokemonJump->mainState++;
@@ -1723,7 +1905,7 @@ static void UpdateVineState(void)
 
         sPokemonJump->prevVineState = sPokemonJump->vineState;
         sPokemonJump->vineState = sPokemonJump->vineStateTimer >> 8;
-        
+
         // If beginning upswing
         if (sPokemonJump->vineState > VINE_UPSWING_LOWER && sPokemonJump->prevVineState < VINE_UPSWING_LOW)
         {
@@ -1960,23 +2142,23 @@ static void HandleMonState(void)
 
 static const s8 sJumpOffsets[][48] =
 {
-    [JUMP_TYPE_NORMAL] = { -3,  -6,  -8, -10, -13, -15, -17, -19, 
-                          -21, -23, -25, -27, -28, -29, 
-                          JUMP_PEAK, JUMP_PEAK, JUMP_PEAK, 
-                          -28, -27, -26, -25, -23, -22, -20, -18, 
+    [JUMP_TYPE_NORMAL] = { -3,  -6,  -8, -10, -13, -15, -17, -19,
+                          -21, -23, -25, -27, -28, -29,
+                          JUMP_PEAK, JUMP_PEAK, JUMP_PEAK,
+                          -28, -27, -26, -25, -23, -22, -20, -18,
                           -17, -15, -13, -11,  -8,  -6,  -4,  -1},
 
-    [JUMP_TYPE_FAST]  = { -3,  -6,  -9, -11, -14, -16, -18, -20, 
-                         -22, -24, -26, -28, -29, 
-                         JUMP_PEAK, JUMP_PEAK, 
-                         -28, -26, -24, -22, -20, -18, -16, -14, 
+    [JUMP_TYPE_FAST]  = { -3,  -6,  -9, -11, -14, -16, -18, -20,
+                         -22, -24, -26, -28, -29,
+                         JUMP_PEAK, JUMP_PEAK,
+                         -28, -26, -24, -22, -20, -18, -16, -14,
                          -11, -9,  -6,  -4,  -1},
 
-    [JUMP_TYPE_SLOW]  = { -3,  -6,  -9, -11, -13, -15, -17, -19, 
-                         -21, -23, -25, -27, -28, -29, 
-                         JUMP_PEAK, JUMP_PEAK, JUMP_PEAK, JUMP_PEAK, 
-                         -29, -29, -28, -28, -27, -27, -26, -25, 
-                         -24, -22, -20, -18, -16, -14, -12, -11,  
+    [JUMP_TYPE_SLOW]  = { -3,  -6,  -9, -11, -13, -15, -17, -19,
+                         -21, -23, -25, -27, -28, -29,
+                         JUMP_PEAK, JUMP_PEAK, JUMP_PEAK, JUMP_PEAK,
+                         -29, -29, -28, -28, -27, -27, -26, -25,
+                         -24, -22, -20, -18, -16, -14, -12, -11,
                           -9,  -6,  -4,  -1},
 };
 
@@ -2202,10 +2384,10 @@ static int GetPlayersAtJumpPeak(void)
 
 static bool32 AreLinkQueuesEmpty(void)
 {
-    return !Rfu.recvQueue.count && !Rfu.sendQueue.count;
+    return !gRfu.recvQueue.count && !gRfu.sendQueue.count;
 }
 
-static int GetNumPlayersForBonus(u8 *arg0)
+static int GetNumPlayersForBonus(u8 *atJumpPeak)
 {
     int i = 0;
     int flags = 0;
@@ -2213,7 +2395,7 @@ static int GetNumPlayersForBonus(u8 *arg0)
 
     for (; i < MAX_RFU_PLAYERS; i++)
     {
-        if (arg0[i])
+        if (atJumpPeak[i])
         {
             flags |= 1 << i;
             count++;
@@ -2248,13 +2430,13 @@ static void TryUpdateExcellentsRecord(u16 excellentsInRow)
 }
 
 static const u16 sPrizeItems[] = {
-    ITEM_LEPPA_BERRY, 
-    ITEM_LUM_BERRY, 
-    ITEM_SITRUS_BERRY, 
-    ITEM_FIGY_BERRY, 
-    ITEM_WIKI_BERRY, 
-    ITEM_MAGO_BERRY, 
-    ITEM_AGUAV_BERRY, 
+    ITEM_LEPPA_BERRY,
+    ITEM_LUM_BERRY,
+    ITEM_SITRUS_BERRY,
+    ITEM_FIGY_BERRY,
+    ITEM_WIKI_BERRY,
+    ITEM_MAGO_BERRY,
+    ITEM_AGUAV_BERRY,
     ITEM_IAPAPA_BERRY
 };
 
@@ -2431,7 +2613,7 @@ static const struct OamData sOamData_JumpMon =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -2448,7 +2630,7 @@ static const struct OamData sOamData_Vine16x32 =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x32),
     .x = 0,
@@ -2465,7 +2647,7 @@ static const struct OamData sOamData_Vine32x32 =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -2482,7 +2664,7 @@ static const struct OamData sOamData_Vine32x16 =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
@@ -2636,7 +2818,7 @@ static const struct OamData sOamData_Star =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -2723,11 +2905,10 @@ static void CreateJumpMonSprite(struct PokemonJumpGfx *jumpGfx, struct PokemonJu
 
     if (buffer && unusedBuffer)
     {
-        HandleLoadSpecialPokePic(
-            &gMonFrontPicTable[monInfo->species],
-            buffer,
-            monInfo->species,
-            monInfo->personality);
+        HandleLoadSpecialPokePic(TRUE,
+                                buffer,
+                                monInfo->species,
+                                monInfo->personality);
 
         spriteSheet.data = buffer;
         spriteSheet.tag = multiplayerId;
@@ -3197,7 +3378,7 @@ static void LoadPokeJumpGfx(void)
         FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 0x20, 0x20);
         PrintScoreSuffixes();
         PrintScore(0);
-        sub_8098C6C(0, 1, 0xE0);
+        LoadUserWindowBorderGfxOnBg(0, 1, 0xE0);
         CopyBgTilemapBufferToVram(BG_INTERFACE);
         CopyBgTilemapBufferToVram(BG_VENUSAUR);
         CopyBgTilemapBufferToVram(BG_BONUSES);
@@ -3313,8 +3494,8 @@ static void Msg_WantToPlayAgain(void)
     {
     case 0:
         sPokemonJumpGfx->msgWindowId = AddMessageWindow(1, 8, 20, 2);
-        AddTextPrinterParameterized(sPokemonJumpGfx->msgWindowId, 1, gText_WantToPlayAgain2, 0, 1, TEXT_SPEED_FF, NULL);
-        CopyWindowToVram(sPokemonJumpGfx->msgWindowId, 2);
+        AddTextPrinterParameterized(sPokemonJumpGfx->msgWindowId, FONT_NORMAL, gText_WantToPlayAgain2, 0, 1, TEXT_SKIP_DRAW, NULL);
+        CopyWindowToVram(sPokemonJumpGfx->msgWindowId, COPYWIN_GFX);
         sPokemonJumpGfx->mainState++;
         break;
     case 1:
@@ -3340,8 +3521,8 @@ static void Msg_SavingDontTurnOff(void)
     {
     case 0:
         sPokemonJumpGfx->msgWindowId = AddMessageWindow(2, 7, 26, 4);
-        AddTextPrinterParameterized(sPokemonJumpGfx->msgWindowId, 1, gText_SavingDontTurnOffPower, 0, 1, TEXT_SPEED_FF, NULL);
-        CopyWindowToVram(sPokemonJumpGfx->msgWindowId, 2);
+        AddTextPrinterParameterized(sPokemonJumpGfx->msgWindowId, FONT_NORMAL, gText_SavingDontTurnOffPower, 0, 1, TEXT_SKIP_DRAW, NULL);
+        CopyWindowToVram(sPokemonJumpGfx->msgWindowId, COPYWIN_GFX);
         sPokemonJumpGfx->mainState++;
         break;
     case 1:
@@ -3366,7 +3547,7 @@ static void EraseMessage(void)
     {
     case 0:
         ClearMessageWindow();
-        sub_8198C78();
+        EraseYesNoWindow();
         CopyBgTilemapBufferToVram(BG_INTERFACE);
         sPokemonJumpGfx->mainState++;
         break;
@@ -3383,8 +3564,8 @@ static void Msg_SomeoneDroppedOut(void)
     {
     case 0:
         sPokemonJumpGfx->msgWindowId = AddMessageWindow(2, 8, 22, 4);
-        AddTextPrinterParameterized(sPokemonJumpGfx->msgWindowId, 1, gText_SomeoneDroppedOut2, 0, 1, TEXT_SPEED_FF, NULL);
-        CopyWindowToVram(sPokemonJumpGfx->msgWindowId, 2);
+        AddTextPrinterParameterized(sPokemonJumpGfx->msgWindowId, FONT_NORMAL, gText_SomeoneDroppedOut2, 0, 1, TEXT_SKIP_DRAW, NULL);
+        CopyWindowToVram(sPokemonJumpGfx->msgWindowId, COPYWIN_GFX);
         sPokemonJumpGfx->mainState++;
         break;
     case 1:
@@ -3409,8 +3590,8 @@ static void Msg_CommunicationStandby(void)
     {
     case 0:
         sPokemonJumpGfx->msgWindowId = AddMessageWindow(7, 10, 16, 2);
-        AddTextPrinterParameterized(sPokemonJumpGfx->msgWindowId, 1, gText_CommunicationStandby4, 0, 1, TEXT_SPEED_FF, NULL);
-        CopyWindowToVram(sPokemonJumpGfx->msgWindowId, 2);
+        AddTextPrinterParameterized(sPokemonJumpGfx->msgWindowId, FONT_NORMAL, gText_CommunicationStandby4, 0, 1, TEXT_SKIP_DRAW, NULL);
+        CopyWindowToVram(sPokemonJumpGfx->msgWindowId, COPYWIN_GFX);
         sPokemonJumpGfx->mainState++;
         break;
     case 1:
@@ -3487,8 +3668,8 @@ static void PrintPrizeMessage(u16 itemId, u16 quantity)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, sPokemonJumpGfx->itemQuantityStr);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(sPokemonJumpGfx->prizeMsg, gText_AwesomeWonF701F700);
     sPokemonJumpGfx->msgWindowId = AddMessageWindow(4, 8, 22, 4);
-    AddTextPrinterParameterized(sPokemonJumpGfx->msgWindowId, 1, sPokemonJumpGfx->prizeMsg, 0, 1, TEXT_SPEED_FF, NULL);
-    CopyWindowToVram(sPokemonJumpGfx->msgWindowId, 2);
+    AddTextPrinterParameterized(sPokemonJumpGfx->msgWindowId, FONT_NORMAL, sPokemonJumpGfx->prizeMsg, 0, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sPokemonJumpGfx->msgWindowId, COPYWIN_GFX);
     sPokemonJumpGfx->fanfare = MUS_LEVEL_UP;
     sPokemonJumpGfx->msgWindowState = 0;
 }
@@ -3500,8 +3681,8 @@ static void PrintPrizeFilledBagMessage(u16 itemId)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sPokemonJumpGfx->itemName);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(sPokemonJumpGfx->prizeMsg, gText_FilledStorageSpace2);
     sPokemonJumpGfx->msgWindowId = AddMessageWindow(4, 8, 22, 4);
-    AddTextPrinterParameterized(sPokemonJumpGfx->msgWindowId, 1, sPokemonJumpGfx->prizeMsg, 0, 1, TEXT_SPEED_FF, NULL);
-    CopyWindowToVram(sPokemonJumpGfx->msgWindowId, 2);
+    AddTextPrinterParameterized(sPokemonJumpGfx->msgWindowId, FONT_NORMAL, sPokemonJumpGfx->prizeMsg, 0, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sPokemonJumpGfx->msgWindowId, COPYWIN_GFX);
     sPokemonJumpGfx->fanfare = MUS_DUMMY;
     sPokemonJumpGfx->msgWindowState = 0;
 }
@@ -3513,8 +3694,8 @@ static void PrintNoRoomForPrizeMessage(u16 itemId)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sPokemonJumpGfx->itemName);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(sPokemonJumpGfx->prizeMsg, gText_CantHoldMore);
     sPokemonJumpGfx->msgWindowId = AddMessageWindow(4, 9, 22, 2);
-    AddTextPrinterParameterized(sPokemonJumpGfx->msgWindowId, 1, sPokemonJumpGfx->prizeMsg, 0, 1, TEXT_SPEED_FF, NULL);
-    CopyWindowToVram(sPokemonJumpGfx->msgWindowId, 2);
+    AddTextPrinterParameterized(sPokemonJumpGfx->msgWindowId, FONT_NORMAL, sPokemonJumpGfx->prizeMsg, 0, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sPokemonJumpGfx->msgWindowId, COPYWIN_GFX);
     sPokemonJumpGfx->fanfare = MUS_DUMMY;
     sPokemonJumpGfx->msgWindowState = 0;
 }
@@ -3558,7 +3739,7 @@ static void ClearMessageWindow(void)
     if (sPokemonJumpGfx->msgWindowId != WINDOW_NONE)
     {
         rbox_fill_rectangle(sPokemonJumpGfx->msgWindowId);
-        CopyWindowToVram(sPokemonJumpGfx->msgWindowId, 1);
+        CopyWindowToVram(sPokemonJumpGfx->msgWindowId, COPYWIN_MAP);
         sPokemonJumpGfx->msgWindowState = 0;
     }
 }
@@ -3612,7 +3793,6 @@ static u32 AddMessageWindow(u32 left, u32 top, u32 width, u32 height)
 static void CreatePokeJumpYesNoMenu(u16 left, u16 top, u8 cursorPos)
 {
     struct WindowTemplate window;
-    u8 a = cursorPos;
 
     window.bg = BG_INTERFACE;
     window.tilemapLeft = left;
@@ -3622,7 +3802,7 @@ static void CreatePokeJumpYesNoMenu(u16 left, u16 top, u8 cursorPos)
     window.paletteNum = 2;
     window.baseBlock = 0x2B;
 
-    CreateYesNoMenu(&window, 1, 0xD, a);
+    CreateYesNoMenu(&window, 1, 0xD, cursorPos);
 }
 
 // "Points" for jump score and "times" for number of jumps in a row
@@ -3634,8 +3814,8 @@ static void PrintScoreSuffixes(void)
     PutWindowTilemap(WIN_TIMES);
     FillWindowPixelBuffer(WIN_POINTS, 0);
     FillWindowPixelBuffer(WIN_TIMES, 0);
-    AddTextPrinterParameterized3(WIN_POINTS, 0, 0, 1, color, 0, gText_SpacePoints2);
-    AddTextPrinterParameterized3(WIN_TIMES, 0, 0, 1, color, 0, gText_SpaceTimes3);
+    AddTextPrinterParameterized3(WIN_POINTS, FONT_SMALL, 0, 1, color, 0, gText_SpacePoints2);
+    AddTextPrinterParameterized3(WIN_TIMES, FONT_SMALL, 0, 1, color, 0, gText_SpaceTimes3);
 }
 
 // The venusaurs in the background are actually an empty 256x512 bg with 3 pairs of venusaurs on it.
@@ -3649,15 +3829,15 @@ enum {
 };
 
 static const u8 sVenusaurStates[] = {
-    [VINE_HIGHEST]          = VENUSAUR_UP, 
-    [VINE_DOWNSWING_HIGHER] = VENUSAUR_UP, 
-    [VINE_DOWNSWING_HIGH]   = VENUSAUR_NEUTRAL, 
-    [VINE_DOWNSWING_LOW]    = VENUSAUR_NEUTRAL, 
-    [VINE_DOWNSWING_LOWER]  = VENUSAUR_DOWN, 
-    [VINE_LOWEST]           = VENUSAUR_DOWN, 
-    [VINE_UPSWING_LOWER]    = VENUSAUR_DOWN, 
-    [VINE_UPSWING_LOW]      = VENUSAUR_NEUTRAL, 
-    [VINE_UPSWING_HIGH]     = VENUSAUR_NEUTRAL, 
+    [VINE_HIGHEST]          = VENUSAUR_UP,
+    [VINE_DOWNSWING_HIGHER] = VENUSAUR_UP,
+    [VINE_DOWNSWING_HIGH]   = VENUSAUR_NEUTRAL,
+    [VINE_DOWNSWING_LOW]    = VENUSAUR_NEUTRAL,
+    [VINE_DOWNSWING_LOWER]  = VENUSAUR_DOWN,
+    [VINE_LOWEST]           = VENUSAUR_DOWN,
+    [VINE_UPSWING_LOWER]    = VENUSAUR_DOWN,
+    [VINE_UPSWING_LOW]      = VENUSAUR_NEUTRAL,
+    [VINE_UPSWING_HIGH]     = VENUSAUR_NEUTRAL,
     [VINE_UPSWING_HIGHER]   = VENUSAUR_UP,
 };
 
@@ -3665,25 +3845,25 @@ static const struct CompressedSpriteSheet sSpriteSheet_Digits = {gMinigameDigits
 static const struct SpritePalette sSpritePalette_Digits = {gMinigameDigits_Pal, TAG_DIGITS};
 
 static const u16 sPlayerNameWindowCoords_2Players[] = {
-     6, 8, 
+     6, 8,
     16, 8
 };
 static const u16 sPlayerNameWindowCoords_3Players[] = {
-     6, 8, 
-    11, 6, 
+     6, 8,
+    11, 6,
     16, 8
 };
 static const u16 sPlayerNameWindowCoords_4Players[] = {
-     2, 6, 
-     6, 8, 
-    16, 8, 
+     2, 6,
+     6, 8,
+    16, 8,
     20, 6
 };
 static const u16 sPlayerNameWindowCoords_5Players[] = {
-     2, 6, 
-     6, 8, 
-    11, 6, 
-    16, 8, 
+     2, 6,
+     6, 8,
+    11, 6,
+    16, 8,
     20, 6
 };
 
@@ -3732,7 +3912,7 @@ static void SetMonSpriteY(u32 id, s16 y)
 static void UpdateVineSwing(int vineState)
 {
     UpdateVineAnim(sPokemonJumpGfx, vineState);
-    ChangeBgY(BG_VENUSAUR, (sVenusaurStates[vineState] * 5) << 13, 0);
+    ChangeBgY(BG_VENUSAUR, (sVenusaurStates[vineState] * 5) << 13, BG_COORD_SET);
 }
 
 static int DoSameJumpTimeBonus(u8 flags)
@@ -3766,7 +3946,7 @@ static void InitDigitPrinters(void)
         .xDelta = 8,
         .x = 108,
         .y = 6,
-        .spriteSheet = (void*) &sSpriteSheet_Digits,
+        .spriteSheet = (void *) &sSpriteSheet_Digits,
         .spritePal = &sSpritePalette_Digits,
     };
 
@@ -3855,10 +4035,10 @@ static void PrintPokeJumpPlayerName(int multiplayerId, u8 bgColor, u8 fgColor, u
     u8 colors[3] = {bgColor, fgColor, shadow};
 
     FillWindowPixelBuffer(sPokemonJumpGfx->nameWindowIds[multiplayerId], 0);
-    x = 64 - GetStringWidth(1, GetPokeJumpPlayerName(multiplayerId), -1);
+    x = 64 - GetStringWidth(FONT_NORMAL, GetPokeJumpPlayerName(multiplayerId), -1);
     x /= 2;
-    AddTextPrinterParameterized3(sPokemonJumpGfx->nameWindowIds[multiplayerId], 1, x, 1, colors, -1, GetPokeJumpPlayerName(multiplayerId));
-    CopyWindowToVram(sPokemonJumpGfx->nameWindowIds[multiplayerId], 2);
+    AddTextPrinterParameterized3(sPokemonJumpGfx->nameWindowIds[multiplayerId], FONT_NORMAL, x, 1, colors, TEXT_SKIP_DRAW, GetPokeJumpPlayerName(multiplayerId));
+    CopyWindowToVram(sPokemonJumpGfx->nameWindowIds[multiplayerId], COPYWIN_GFX);
 }
 
 static void PrintPokeJumpPlayerNames(bool32 highlightSelf)
@@ -3896,8 +4076,8 @@ static void DrawPlayerNameWindows(void)
 static void ShowBonus(u8 bonusId)
 {
     sPokemonJumpGfx->bonusTimer = 0;
-    ChangeBgX(BG_BONUSES, (bonusId / 2) * 256 * 256, 0);
-    ChangeBgY(BG_BONUSES, (((bonusId % 2) * 256) - 40) * 256, 0);
+    ChangeBgX(BG_BONUSES, (bonusId / 2) * 256 * 256, BG_COORD_SET);
+    ChangeBgY(BG_BONUSES, (((bonusId % 2) * 256) - 40) * 256, BG_COORD_SET);
     ShowBg(BG_BONUSES);
     CreateTask(Task_UpdateBonus, 4);
 }
@@ -3910,7 +4090,7 @@ static bool32 UpdateBonus(void)
     }
     else
     {
-        ChangeBgY(BG_BONUSES, 128, 1);
+        ChangeBgY(BG_BONUSES, 128, BG_COORD_ADD);
         if (++sPokemonJumpGfx->bonusTimer >= 32)
             HideBg(BG_BONUSES);
         return TRUE;
@@ -3945,7 +4125,7 @@ static bool32 RecvPacket_MonInfo(int multiplayerId, struct PokemonJump_MonInfo *
 {
     struct MonInfoPacket packet;
 
-    if ((gRecvCmds[multiplayerId][0] & 0xFF00) != RFUCMD_SEND_PACKET)
+    if ((gRecvCmds[multiplayerId][0] & RFUCMD_MASK) != RFUCMD_SEND_PACKET)
         return FALSE;
 
     memcpy(&packet, &gRecvCmds[multiplayerId][1], sizeof(packet));
@@ -4010,7 +4190,7 @@ static bool32 RecvPacket_LeaderState(struct PokemonJump_Player *player, struct P
 {
     struct LeaderStatePacket packet;
 
-    if ((gRecvCmds[0][0] & 0xFF00) != RFUCMD_SEND_PACKET)
+    if ((gRecvCmds[0][0] & RFUCMD_MASK) != RFUCMD_SEND_PACKET)
         return FALSE;
 
     memcpy(&packet, &gRecvCmds[0][1], sizeof(packet));
@@ -4057,7 +4237,7 @@ static bool32 RecvPacket_MemberStateToLeader(struct PokemonJump_Player *player, 
 {
     struct MemberStatePacket packet;
 
-    if ((gRecvCmds[multiplayerId][0] & 0xFF00) != RFUCMD_SEND_PACKET)
+    if ((gRecvCmds[multiplayerId][0] & RFUCMD_MASK) != RFUCMD_SEND_PACKET)
         return FALSE;
 
     memcpy(&packet, &gRecvCmds[multiplayerId][1], sizeof(packet));
@@ -4078,7 +4258,7 @@ static bool32 RecvPacket_MemberStateToMember(struct PokemonJump_Player *player, 
 {
     struct MemberStatePacket packet;
 
-    if ((gRecvCmds[multiplayerId][0] & 0xFF00) != RFUCMD_SEND_PACKET)
+    if ((gRecvCmds[multiplayerId][0] & RFUCMD_MASK) != RFUCMD_SEND_PACKET)
         return FALSE;
 
     memcpy(&packet, &gRecvCmds[multiplayerId][1], sizeof(packet));
@@ -4162,10 +4342,10 @@ static void Task_ShowPokemonJumpRecords(u8 taskId)
     {
     case 0:
         window = sWindowTemplate_Records;
-        width = GetStringWidth(1, gText_PkmnJumpRecords, 0);
+        width = GetStringWidth(FONT_NORMAL, gText_PkmnJumpRecords, 0);
         for (i = 0; i < ARRAY_COUNT(sRecordsTexts); i++)
         {
-            widthCurr = GetStringWidth(1, sRecordsTexts[i], 0) + 38;
+            widthCurr = GetStringWidth(FONT_NORMAL, sRecordsTexts[i], 0) + 38;
             if (widthCurr > width)
                 width = widthCurr;
         }
@@ -4176,7 +4356,7 @@ static void Task_ShowPokemonJumpRecords(u8 taskId)
         window.width = width;
         tWindowId = AddWindow(&window);
         PrintRecordsText(tWindowId, width);
-        CopyWindowToVram(tWindowId, 3);
+        CopyWindowToVram(tWindowId, COPYWIN_FULL);
         tState++;
         break;
     case 1:
@@ -4187,7 +4367,7 @@ static void Task_ShowPokemonJumpRecords(u8 taskId)
         if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             rbox_fill_rectangle(tWindowId);
-            CopyWindowToVram(tWindowId, 1);
+            CopyWindowToVram(tWindowId, COPYWIN_MAP);
             tState++;
         }
         break;
@@ -4196,7 +4376,7 @@ static void Task_ShowPokemonJumpRecords(u8 taskId)
         {
             RemoveWindow(tWindowId);
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
         }
         break;
     }
@@ -4217,14 +4397,14 @@ static void PrintRecordsText(u16 windowId, int width)
     LoadUserWindowBorderGfx_(windowId, 0x21D, 0xD0);
     DrawTextBorderOuter(windowId, 0x21D, 0xD);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    AddTextPrinterParameterized(windowId, 1, gText_PkmnJumpRecords, GetStringCenterAlignXOffset(1, gText_PkmnJumpRecords, width * 8), 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_PkmnJumpRecords, GetStringCenterAlignXOffset(FONT_NORMAL, gText_PkmnJumpRecords, width * 8), 1, TEXT_SKIP_DRAW, NULL);
     for (i = 0; i < ARRAY_COUNT(sRecordsTexts); i++)
     {
-        AddTextPrinterParameterized(windowId, 1, sRecordsTexts[i], 0, 25 + (i * 16), TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, sRecordsTexts[i], 0, 25 + (i * 16), TEXT_SKIP_DRAW, NULL);
         ConvertIntToDecimalStringN(gStringVar1, recordNums[i], STR_CONV_MODE_LEFT_ALIGN, 5);
         TruncateToFirstWordOnly(gStringVar1);
-        x = (width * 8) - GetStringWidth(1, gStringVar1, 0);
-        AddTextPrinterParameterized(windowId, 1, gStringVar1, x, 25 + (i * 16), TEXT_SPEED_FF, NULL);
+        x = (width * 8) - GetStringWidth(FONT_NORMAL, gStringVar1, 0);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar1, x, 25 + (i * 16), TEXT_SKIP_DRAW, NULL);
     }
     PutWindowTilemap(windowId);
 }

@@ -253,7 +253,7 @@ u16 CalcCRC16WithTable(const u8 *data, u32 length)
     return ~crc;
 }
 
-u32 CalcByteArraySum(const u8* data, u32 length)
+u32 CalcByteArraySum(const u8 *data, u32 length)
 {
     u32 sum, i;
     for (sum = 0, i = 0; i < length; i++)

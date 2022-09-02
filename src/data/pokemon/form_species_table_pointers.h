@@ -1,5 +1,6 @@
 const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
 {
+#if P_NEW_POKEMON == TRUE
     [SPECIES_VENUSAUR] = sVenusaurFormSpeciesIdTable,
     [SPECIES_CHARIZARD] = sCharizardFormSpeciesIdTable,
     [SPECIES_BLASTOISE] = sBlastoiseFormSpeciesIdTable,
@@ -18,6 +19,8 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_MEOWTH] = sMeowthFormSpeciesIdTable,
     [SPECIES_PERSIAN] = sPersianFormSpeciesIdTable,
     [SPECIES_ALAKAZAM] = sAlakazamFormSpeciesIdTable,
+    [SPECIES_GROWLITHE] = sGrowlitheFormSpeciesIdTable,	
+    [SPECIES_ARCANINE] = sArcanineFormSpeciesIdTable,	
     [SPECIES_GEODUDE] = sGeodudeFormSpeciesIdTable,
     [SPECIES_GRAVELER] = sGravelerFormSpeciesIdTable,
     [SPECIES_GOLEM] = sGolemFormSpeciesIdTable,
@@ -29,6 +32,8 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_GRIMER] = sGrimerFormSpeciesIdTable,
     [SPECIES_MUK] = sMukFormSpeciesIdTable,
     [SPECIES_GENGAR] = sGengarFormSpeciesIdTable,
+    [SPECIES_VOLTORB] = sVoltorbFormSpeciesIdTable,
+    [SPECIES_ELECTRODE] = sElectrodeFormSpeciesIdTable,
     [SPECIES_EXEGGUTOR] = sExeggutorFormSpeciesIdTable,
     [SPECIES_MAROWAK] = sMarowakFormSpeciesIdTable,
     [SPECIES_WEEZING] = sWeezingFormSpeciesIdTable,
@@ -41,10 +46,15 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_ZAPDOS] = sZapdosFormSpeciesIdTable,
     [SPECIES_MOLTRES] = sMoltresFormSpeciesIdTable,
     [SPECIES_MEWTWO] = sMewtwoFormSpeciesIdTable,
+    [SPECIES_TYPHLOSION] = sTyphlosionFormSpeciesIdTable,
     [SPECIES_PICHU] = sPichuFormSpeciesIdTable,
     [SPECIES_AMPHAROS] = sAmpharosFormSpeciesIdTable,
     [SPECIES_SLOWKING] = sSlowkingFormSpeciesIdTable,
+    [SPECIES_QWILFISH] = sQwilfishFormSpeciesIdTable,
+    [SPECIES_SNEASEL] = sSneaselFormSpeciesIdTable,
+#endif
     [SPECIES_UNOWN] = sUnownFormSpeciesIdTable,
+#if P_NEW_POKEMON == TRUE
     [SPECIES_STEELIX] = sSteelixFormSpeciesIdTable,
     [SPECIES_SCIZOR] = sScizorFormSpeciesIdTable,
     [SPECIES_HERACROSS] = sHeracrossFormSpeciesIdTable,
@@ -65,7 +75,9 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_SHARPEDO] = sSharpedoFormSpeciesIdTable,
     [SPECIES_CAMERUPT] = sCameruptFormSpeciesIdTable,
     [SPECIES_ALTARIA] = sAltariaFormSpeciesIdTable,
+#endif
     [SPECIES_CASTFORM] = sCastformFormSpeciesIdTable,
+#if P_NEW_POKEMON == TRUE
     [SPECIES_BANETTE] = sBanetteFormSpeciesIdTable,
     [SPECIES_ABSOL] = sAbsolFormSpeciesIdTable,
     [SPECIES_GLALIE] = sGlalieFormSpeciesIdTable,
@@ -76,7 +88,9 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_KYOGRE] = sKyogreFormSpeciesIdTable,
     [SPECIES_GROUDON] = sGroudonFormSpeciesIdTable,
     [SPECIES_RAYQUAZA] = sRayquazaFormSpeciesIdTable,
+#endif
     [SPECIES_DEOXYS] = sDeoxysFormSpeciesIdTable,
+#if P_NEW_POKEMON == TRUE
     [SPECIES_BURMY] = sBurmyFormSpeciesIdTable,
     [SPECIES_WORMADAM] = sWormadamFormSpeciesIdTable,
     [SPECIES_CHERRIM] = sCherrimFormSpeciesIdTable,
@@ -88,17 +102,24 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_ABOMASNOW] = sAbomasnowFormSpeciesIdTable,
     [SPECIES_GALLADE] = sGalladeFormSpeciesIdTable,
     [SPECIES_ROTOM] = sRotomFormSpeciesIdTable,
+    [SPECIES_DIALGA] = sDialgaFormSpeciesIdTable,
+    [SPECIES_PALKIA] = sPalkiaFormSpeciesIdTable,
     [SPECIES_GIRATINA] = sGiratinaFormSpeciesIdTable,
+    [SPECIES_SAMUROTT] = sSamurottFormSpeciesIdTable,
     [SPECIES_SHAYMIN] = sShayminFormSpeciesIdTable,
     [SPECIES_ARCEUS] = sArceusFormSpeciesIdTable,
     [SPECIES_AUDINO] = sAudinoFormSpeciesIdTable,
     [SPECIES_BASCULIN] = sBasculinFormSpeciesIdTable,
+    [SPECIES_LILLIGANT] = sLilligantFormSpeciesIdTable,
     [SPECIES_DARUMAKA] = sDarumakaFormSpeciesIdTable,
     [SPECIES_DARMANITAN] = sDarmanitanFormSpeciesIdTable,
-    [SPECIES_YAMASK] = sYamaskFormSpeciesIdTable,
+    [SPECIES_YAMASK] = sYamaskFormSpeciesIdTable,	
+    [SPECIES_ZORUA] = sZoruaFormSpeciesIdTable,
+    [SPECIES_ZOROARK] = sZoroarkFormSpeciesIdTable,
     [SPECIES_DEERLING] = sDeerlingFormSpeciesIdTable,
     [SPECIES_SAWSBUCK] = sSawsbuckFormSpeciesIdTable,
     [SPECIES_STUNFISK] = sStunfiskFormSpeciesIdTable,
+    [SPECIES_BRAVIARY] = sBraviaryFormSpeciesIdTable,
     [SPECIES_TORNADUS] = sTornadusFormSpeciesIdTable,
     [SPECIES_THUNDURUS] = sThundurusFormSpeciesIdTable,
     [SPECIES_LANDORUS] = sLandorusFormSpeciesIdTable,
@@ -114,12 +135,16 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_FURFROU] = sFurfrouFormSpeciesIdTable,
     [SPECIES_MEOWSTIC] = sMeowsticFormSpeciesIdTable,
     [SPECIES_AEGISLASH] = sAegislashFormSpeciesIdTable,
+    [SPECIES_SLIGGOO] = sSliggooFormSpeciesIdTable,
+    [SPECIES_GOODRA] = sGoodraFormSpeciesIdTable,
     [SPECIES_PUMPKABOO] = sPumpkabooFormSpeciesIdTable,
     [SPECIES_GOURGEIST] = sGourgeistFormSpeciesIdTable,
+    [SPECIES_AVALUGG] = sAvaluggFormSpeciesIdTable,	
     [SPECIES_XERNEAS] = sXerneasFormSpeciesIdTable,
     [SPECIES_ZYGARDE] = sZygardeFormSpeciesIdTable,
     [SPECIES_DIANCIE] = sDiancieFormSpeciesIdTable,
     [SPECIES_HOOPA] = sHoopaFormSpeciesIdTable,
+    [SPECIES_DECIDUEYE] = sDecidueyeFormSpeciesIdTable,
     [SPECIES_ORICORIO] = sOricorioFormSpeciesIdTable,
     [SPECIES_ROCKRUFF] = sRockruffFormSpeciesIdTable,
     [SPECIES_LYCANROC] = sLycanrocFormSpeciesIdTable,
@@ -143,6 +168,7 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_URSHIFU] = sUrshifuFormSpeciesIdTable,
     [SPECIES_ZARUDE] = sZarudeFormSpeciesIdTable,
     [SPECIES_CALYREX] = sCalyrexFormSpeciesIdTable,
+    [SPECIES_ENAMORUS] = sEnamorusFormSpeciesIdTable,
     // Megas
     [SPECIES_VENUSAUR_MEGA] = sVenusaurFormSpeciesIdTable,
     [SPECIES_CHARIZARD_MEGA_X] = sCharizardFormSpeciesIdTable,
@@ -234,6 +260,23 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_DARMANITAN_GALARIAN] = sDarmanitanFormSpeciesIdTable,
     [SPECIES_YAMASK_GALARIAN] = sYamaskFormSpeciesIdTable,
     [SPECIES_STUNFISK_GALARIAN] = sStunfiskFormSpeciesIdTable,
+    //Hisuian Forms
+    [SPECIES_GROWLITHE_HISUIAN] = sGrowlitheFormSpeciesIdTable,
+    [SPECIES_ARCANINE_HISUIAN] = sArcanineFormSpeciesIdTable,
+    [SPECIES_VOLTORB_HISUIAN] = sVoltorbFormSpeciesIdTable,
+    [SPECIES_ELECTRODE_HISUIAN] = sElectrodeFormSpeciesIdTable,
+    [SPECIES_TYPHLOSION_HISUIAN] = sTyphlosionFormSpeciesIdTable,
+    [SPECIES_QWILFISH_HISUIAN] = sQwilfishFormSpeciesIdTable,
+    [SPECIES_SNEASEL_HISUIAN] = sSneaselFormSpeciesIdTable,
+    [SPECIES_SAMUROTT_HISUIAN] = sSamurottFormSpeciesIdTable,
+    [SPECIES_LILLIGANT_HISUIAN] = sLilligantFormSpeciesIdTable,
+    [SPECIES_ZORUA_HISUIAN] = sZoruaFormSpeciesIdTable,
+    [SPECIES_ZOROARK_HISUIAN] = sZoroarkFormSpeciesIdTable,
+    [SPECIES_BRAVIARY_HISUIAN] = sBraviaryFormSpeciesIdTable,
+    [SPECIES_SLIGGOO_HISUIAN] = sSliggooFormSpeciesIdTable,
+    [SPECIES_GOODRA_HISUIAN] = sGoodraFormSpeciesIdTable,
+    [SPECIES_AVALUGG_HISUIAN] = sAvaluggFormSpeciesIdTable,
+    [SPECIES_DECIDUEYE_HISUIAN] = sDecidueyeFormSpeciesIdTable,
     // Misc Forms
     // Cosplay Pikachu
     [SPECIES_PIKACHU_COSPLAY] = sPikachuFormSpeciesIdTable,
@@ -253,6 +296,7 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_PIKACHU_WORLD_CAP] = sPikachuFormSpeciesIdTable,
     // Pichu
     [SPECIES_PICHU_SPIKY_EARED] = sPichuFormSpeciesIdTable,
+#endif
     // Unown
     [SPECIES_UNOWN_B] = sUnownFormSpeciesIdTable,
     [SPECIES_UNOWN_C] = sUnownFormSpeciesIdTable,
@@ -289,6 +333,7 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_DEOXYS_ATTACK] = sDeoxysFormSpeciesIdTable,
     [SPECIES_DEOXYS_DEFENSE] = sDeoxysFormSpeciesIdTable,
     [SPECIES_DEOXYS_SPEED] = sDeoxysFormSpeciesIdTable,
+#if P_NEW_POKEMON == TRUE
     // Burmy
     [SPECIES_BURMY_SANDY_CLOAK] = sBurmyFormSpeciesIdTable,
     [SPECIES_BURMY_TRASH_CLOAK] = sBurmyFormSpeciesIdTable,
@@ -307,7 +352,9 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_ROTOM_FROST] = sRotomFormSpeciesIdTable,
     [SPECIES_ROTOM_FAN] = sRotomFormSpeciesIdTable,
     [SPECIES_ROTOM_MOW] = sRotomFormSpeciesIdTable,
-    // Giratina
+    // Origin Forme
+    [SPECIES_DIALGA_ORIGIN] = sDialgaFormSpeciesIdTable,
+    [SPECIES_PALKIA_ORIGIN] = sPalkiaFormSpeciesIdTable,
     [SPECIES_GIRATINA_ORIGIN] = sGiratinaFormSpeciesIdTable,
     // Shaymin
     [SPECIES_SHAYMIN_SKY] = sShayminFormSpeciesIdTable,
@@ -331,6 +378,7 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_ARCEUS_FAIRY] = sArceusFormSpeciesIdTable,
     // Basculin
     [SPECIES_BASCULIN_BLUE_STRIPED] = sBasculinFormSpeciesIdTable,
+    [SPECIES_BASCULIN_WHITE_STRIPED] = sBasculinFormSpeciesIdTable,
     // Darmanitan
     [SPECIES_DARMANITAN_ZEN_MODE] = sDarmanitanFormSpeciesIdTable,
     [SPECIES_DARMANITAN_ZEN_MODE_GALARIAN] = sDarmanitanFormSpeciesIdTable,
@@ -346,6 +394,7 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_TORNADUS_THERIAN] = sTornadusFormSpeciesIdTable,
     [SPECIES_THUNDURUS_THERIAN] = sThundurusFormSpeciesIdTable,
     [SPECIES_LANDORUS_THERIAN] = sLandorusFormSpeciesIdTable,
+    [SPECIES_ENAMORUS_THERIAN] = sEnamorusFormSpeciesIdTable,	
     // Kyurem
     [SPECIES_KYUREM_WHITE] = sKyuremFormSpeciesIdTable,
     [SPECIES_KYUREM_BLACK] = sKyuremFormSpeciesIdTable,
@@ -516,4 +565,5 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     // Calyrex
     [SPECIES_CALYREX_ICE_RIDER] = sCalyrexFormSpeciesIdTable,
     [SPECIES_CALYREX_SHADOW_RIDER] = sCalyrexFormSpeciesIdTable,
+#endif
 };

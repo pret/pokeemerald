@@ -216,7 +216,7 @@ static const struct OamData sOamData_Sparkle =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -284,7 +284,7 @@ static const struct OamData sOamData_Volbeat =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -320,7 +320,7 @@ static const struct OamData sOamData_Torchic =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -380,7 +380,7 @@ static const struct OamData sOamData_Manectric =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -428,7 +428,7 @@ static const struct OamData sOamData_Lightning =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -519,7 +519,7 @@ static const struct OamData sOamData_Bubbles =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x32),
     .x = 0,
@@ -558,7 +558,7 @@ static const struct OamData sOamData_WaterDrop =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -660,7 +660,7 @@ static const struct OamData sOamData_GameFreakLetter =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -676,7 +676,7 @@ static const struct OamData sOamData_PresentsLetter =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
@@ -692,7 +692,7 @@ static const struct OamData sOamData_GameFreakLogo =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x64),
     .x = 0,
@@ -931,7 +931,7 @@ static const struct OamData sOamData_FlygonSilhouette =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
@@ -983,7 +983,7 @@ static const struct OamData sOamData_RayquazaOrb =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -1142,10 +1142,10 @@ void CB2_InitCopyrightScreenAfterBootup(void)
 {
     if (!SetUpCopyrightScreen())
     {
-        SetSaveBlocksPointers(sub_815355C());
+        SetSaveBlocksPointers(GetSaveBlocksPointersBaseOffset());
         ResetMenuAndMonGlobals();
         Save_ResetSaveCounters();
-        Save_LoadGameData(SAVE_NORMAL);
+        LoadGameSave(SAVE_NORMAL);
         if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
             Sav2_ClearSetDefault();
         SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
@@ -1421,7 +1421,7 @@ static void Task_Scene2_BikeRide(u8 taskId)
         gIntroCredits_MovingSceneryState = INTROCRED_SCENERY_FROZEN;
         DestroyTask(gTasks[taskId].tBgAnimTaskId);
     }
-    
+
     if (gIntroFrameCounter > TIMER_END_SCENE_2)
     {
         // Fade out to next scene
@@ -1671,7 +1671,7 @@ static void SpriteCB_Manectric(struct Sprite *sprite)
         sprite->x -= 2;
         if (gIntroFrameCounter != TIMER_MANECTRIC_RUN_CIRCULAR)
             break;
-        
+
         // Initialize circular pattern running
         sprite->y -= 12;
         sprite->sSinIdx = 0x80;
@@ -1848,7 +1848,7 @@ static void Task_Scene3_StartGroudon(u8 taskId)
 {
     gTasks[taskId].tState = 0;
     gTasks[taskId].func = Task_Scene3_Groudon;
-    ScanlineEffect_InitWave(0, 160, 4, 4, 1, 4, 0);
+    ScanlineEffect_InitWave(0, 160, 4, 4, 1, SCANLINE_EFFECT_REG_BG1HOFS, FALSE);
 }
 
 #define tScreenX data[1]
@@ -1925,7 +1925,7 @@ static void Task_Scene3_Groudon(u8 taskId)
             tScreenX = 80;
             tScreenY = 41;
             tDelay = 16;
-            PlayCryInternal(SPECIES_GROUDON, 0, 100, 10, 0);
+            PlayCryInternal(SPECIES_GROUDON, 0, 100, CRY_PRIORITY_NORMAL, CRY_MODE_NORMAL);
             tState++;
         }
         break;
@@ -2058,7 +2058,7 @@ static void Task_Scene3_LoadKyogre(u8 taskId)
     gTasks[taskId].tDelay = 16;
     gTasks[taskId].tZoom = 256;
     PanFadeAndZoomScreen(gTasks[taskId].tScreenX, gTasks[taskId].tScreenY, gTasks[taskId].tZoom, 0);
-    ScanlineEffect_InitWave(0, 0xA0, 4, 4, 1, 6, 0);
+    ScanlineEffect_InitWave(0, 0xA0, 4, 4, 1, SCANLINE_EFFECT_REG_BG1VOFS, FALSE);
 }
 
 static void Task_Scene3_Kyogre(u8 taskId)
@@ -2127,7 +2127,7 @@ static void Task_Scene3_Kyogre(u8 taskId)
             {
                 tDelay = 1;
                 tState++;
-                PlayCryInternal(SPECIES_KYOGRE, 0, 120, 10, 0);
+                PlayCryInternal(SPECIES_KYOGRE, 0, 120, CRY_PRIORITY_NORMAL, CRY_MODE_NORMAL);
             }
         }
         break;
@@ -2205,7 +2205,7 @@ static void Task_Scene3_Kyogre(u8 taskId)
     }
 }
 
-#undef tScreenX 
+#undef tScreenX
 #undef tScreenY
 #undef tZoom
 #undef tDelay
@@ -2219,7 +2219,7 @@ static void Task_Scene3_Kyogre(u8 taskId)
 #define sUnk    data[7] // Never read
 
 // taskId is used inconsistently for these two functions.
-// The sprite callback for the bubbles will always read it, unless delay is 0 to 
+// The sprite callback for the bubbles will always read it, unless delay is 0 to
 // start (it never is), but the first function is often passed 0 instead of a
 // taskId, and the second function doesn't take/assign a taskId at all.
 // The only time an actual taskId is given is when it actually needs the
@@ -2233,9 +2233,9 @@ static void CreateKyogreBubbleSprites_Body(u8 taskId)
 
     for (i = 0; i < NUM_BUBBLES_IN_SET; i++)
     {
-        spriteId = CreateSprite(&sSpriteTemplate_Bubbles, 
-                                sKyogreBubbleData[i][0], 
-                                sKyogreBubbleData[i][1], 
+        spriteId = CreateSprite(&sSpriteTemplate_Bubbles,
+                                sKyogreBubbleData[i][0],
+                                sKyogreBubbleData[i][1],
                                 i);
         gSprites[spriteId].invisible = TRUE;
         gSprites[spriteId].sTaskId = taskId;
@@ -2252,14 +2252,14 @@ static void CreateKyogreBubbleSprites_Fins(void)
 
     for (i = 0; i < NUM_BUBBLES_IN_SET; i++)
     {
-        spriteId = CreateSprite(&sSpriteTemplate_Bubbles, 
-                                sKyogreBubbleData[i + NUM_BUBBLES_IN_SET][0], 
-                                sKyogreBubbleData[i + NUM_BUBBLES_IN_SET][1], 
+        spriteId = CreateSprite(&sSpriteTemplate_Bubbles,
+                                sKyogreBubbleData[i + NUM_BUBBLES_IN_SET][0],
+                                sKyogreBubbleData[i + NUM_BUBBLES_IN_SET][1],
                                 i);
         gSprites[spriteId].invisible = TRUE;
 #ifdef BUGFIX
         gSprites[spriteId].sDelay = sKyogreBubbleData[i + NUM_BUBBLES_IN_SET][2];
-#else        
+#else
         gSprites[spriteId].sDelay = sKyogreBubbleData[i][2]; // Using the wrong set of delays here
 #endif
         gSprites[spriteId].sUnk = 64;

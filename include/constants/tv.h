@@ -8,6 +8,14 @@
 #define POKENEWS_BLENDMASTER  4
 #define NUM_POKENEWS_TYPES    4 // Excludes NONE
 
+#define POKENEWS_STATE_INACTIVE 0
+#define POKENEWS_STATE_UPCOMING 1
+#define POKENEWS_STATE_ACTIVE   2
+
+// Number of days to count down until the news event occurs.
+// Nothing is aired on TV the first day
+#define POKENEWS_COUNTDOWN 4
+
 // TV shows are categorized as being in one of 3 groups
 // - TVGROUP_NORMAL, TV shows that can appear without Record Mixing
 // - TVGROUP_RECORD_MIX, TV shows that can only appear via Record Mixing
@@ -35,7 +43,7 @@
 
 // TVGROUP_RECORD_MIX
 #define TVGROUP_RECORD_MIX_START                    21
-#define TVSHOW_POKEMON_TODAY_CAUGHT                 21 
+#define TVSHOW_POKEMON_TODAY_CAUGHT                 21
 #define TVSHOW_SMART_SHOPPER                        22
 #define TVSHOW_POKEMON_TODAY_FAILED                 23
 #define TVSHOW_FISHING_ADVICE                       24
@@ -265,5 +273,22 @@
 #define SMARTSHOPPER_STATE_OUTRO_MAX      12
 
 #define SMARTSHOPPER_NUM_ITEMS 3
+
+// TV Show states for Bravo Trainer's Battle Tower interview
+#define BRAVOTOWER_STATE_INTRO                 0
+#define BRAVOTOWER_STATE_NEW_RECORD            1
+#define BRAVOTOWER_STATE_LOST                  2
+#define BRAVOTOWER_STATE_WON                   3
+#define BRAVOTOWER_STATE_LOST_FINAL            4
+#define BRAVOTOWER_STATE_SATISFIED             5
+#define BRAVOTOWER_STATE_UNSATISFIED           6
+#define BRAVOTOWER_STATE_UNUSED_1              7
+#define BRAVOTOWER_STATE_UNUSED_2              8
+#define BRAVOTOWER_STATE_UNUSED_3              9
+#define BRAVOTOWER_STATE_UNUSED_4             10
+#define BRAVOTOWER_STATE_RESPONSE             11
+#define BRAVOTOWER_STATE_RESPONSE_SATISFIED   12
+#define BRAVOTOWER_STATE_RESPONSE_UNSATISFIED 13
+#define BRAVOTOWER_STATE_OUTRO                14
 
 #endif //GUARD_CONSTANTS_TV_H

@@ -42,9 +42,10 @@
 #include "text_window.h"
 #include "trainer_card.h"
 #include "window.h"
-#include "constants/songs.h"
 #include "union_room.h"
+#include "constants/battle_frontier.h"
 #include "constants/rgb.h"
+#include "constants/songs.h"
 
 // Menu actions
 enum
@@ -138,7 +139,7 @@ static bool8 FieldCB_ReturnToFieldStartMenu(void);
 
 static const struct WindowTemplate sSafariBallsWindowTemplate = {0, 1, 1, 9, 4, 0xF, 8};
 
-static const u8* const sPyramidFloorNames[] =
+static const u8 *const sPyramidFloorNames[FRONTIER_STAGES_PER_CHALLENGE + 1] =
 {
     gText_Floor1,
     gText_Floor2,
@@ -155,19 +156,19 @@ static const struct WindowTemplate sPyramidFloorWindowTemplate_1 = {0, 1, 1, 0xC
 
 static const struct MenuAction sStartMenuItems[] =
 {
-    {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
-    {gText_MenuPokemon, {.u8_void = StartMenuPokemonCallback}},
-    {gText_MenuBag, {.u8_void = StartMenuBagCallback}},
-    {gText_MenuPokenav, {.u8_void = StartMenuPokeNavCallback}},
-    {gText_MenuPlayer, {.u8_void = StartMenuPlayerNameCallback}},
-    {gText_MenuSave, {.u8_void = StartMenuSaveCallback}},
-    {gText_MenuOption, {.u8_void = StartMenuOptionCallback}},
-    {gText_MenuExit, {.u8_void = StartMenuExitCallback}},
-    {gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback}},
-    {gText_MenuPlayer, {.u8_void = StartMenuLinkModePlayerNameCallback}},
-    {gText_MenuRest, {.u8_void = StartMenuSaveCallback}},
-    {gText_MenuRetire, {.u8_void = StartMenuBattlePyramidRetireCallback}},
-    {gText_MenuBag, {.u8_void = StartMenuBattlePyramidBagCallback}}
+    [MENU_ACTION_POKEDEX]         = {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
+    [MENU_ACTION_POKEMON]         = {gText_MenuPokemon, {.u8_void = StartMenuPokemonCallback}},
+    [MENU_ACTION_BAG]             = {gText_MenuBag,     {.u8_void = StartMenuBagCallback}},
+    [MENU_ACTION_POKENAV]         = {gText_MenuPokenav, {.u8_void = StartMenuPokeNavCallback}},
+    [MENU_ACTION_PLAYER]          = {gText_MenuPlayer,  {.u8_void = StartMenuPlayerNameCallback}},
+    [MENU_ACTION_SAVE]            = {gText_MenuSave,    {.u8_void = StartMenuSaveCallback}},
+    [MENU_ACTION_OPTION]          = {gText_MenuOption,  {.u8_void = StartMenuOptionCallback}},
+    [MENU_ACTION_EXIT]            = {gText_MenuExit,    {.u8_void = StartMenuExitCallback}},
+    [MENU_ACTION_RETIRE_SAFARI]   = {gText_MenuRetire,  {.u8_void = StartMenuSafariZoneRetireCallback}},
+    [MENU_ACTION_PLAYER_LINK]     = {gText_MenuPlayer,  {.u8_void = StartMenuLinkModePlayerNameCallback}},
+    [MENU_ACTION_REST_FRONTIER]   = {gText_MenuRest,    {.u8_void = StartMenuSaveCallback}},
+    [MENU_ACTION_RETIRE_FRONTIER] = {gText_MenuRetire,  {.u8_void = StartMenuBattlePyramidRetireCallback}},
+    [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}}
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -198,12 +199,12 @@ static const struct WindowTemplate sWindowTemplates_LinkBattleSave[] =
 };
 
 static const struct WindowTemplate sSaveInfoWindowTemplate = {
-    .bg = 0, 
-    .tilemapLeft = 1, 
-    .tilemapTop = 1, 
-    .width = 14, 
-    .height = 10, 
-    .paletteNum = 15, 
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = 14,
+    .height = 10,
+    .paletteNum = 15,
     .baseBlock = 8
 };
 
@@ -251,7 +252,7 @@ static void BuildStartMenuActions(void)
 {
     sNumStartMenuActions = 0;
 
-    if (IsUpdateLinkStateCBActive() == TRUE)
+    if (IsOverworldLinkActive() == TRUE)
     {
         BuildLinkModeStartMenu();
     }
@@ -386,13 +387,13 @@ static void ShowSafariBallsWindow(void)
     DrawStdWindowFrame(sSafariBallsWindowId, FALSE);
     ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gText_SafariBallStock);
-    AddTextPrinterParameterized(sSafariBallsWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
-    CopyWindowToVram(sSafariBallsWindowId, 2);
+    AddTextPrinterParameterized(sSafariBallsWindowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sSafariBallsWindowId, COPYWIN_GFX);
 }
 
 static void ShowPyramidFloorWindow(void)
 {
-    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum == 7)
+    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum == FRONTIER_STAGES_PER_CHALLENGE)
         sBattlePyramidFloorWindowId = AddWindow(&sPyramidFloorWindowTemplate_1);
     else
         sBattlePyramidFloorWindowId = AddWindow(&sPyramidFloorWindowTemplate_2);
@@ -401,8 +402,8 @@ static void ShowPyramidFloorWindow(void)
     DrawStdWindowFrame(sBattlePyramidFloorWindowId, FALSE);
     StringCopy(gStringVar1, sPyramidFloorNames[gSaveBlock2Ptr->frontier.curChallengeBattleNum]);
     StringExpandPlaceholders(gStringVar4, gText_BattlePyramidFloor);
-    AddTextPrinterParameterized(sBattlePyramidFloorWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
-    CopyWindowToVram(sBattlePyramidFloorWindowId, 2);
+    AddTextPrinterParameterized(sBattlePyramidFloorWindowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sBattlePyramidFloorWindowId, COPYWIN_GFX);
 }
 
 static void RemoveExtraStartMenuWindows(void)
@@ -410,7 +411,7 @@ static void RemoveExtraStartMenuWindows(void)
     if (GetSafariZoneFlag())
     {
         ClearStdWindowAndFrameToTransparent(sSafariBallsWindowId, FALSE);
-        CopyWindowToVram(sSafariBallsWindowId, 2);
+        CopyWindowToVram(sSafariBallsWindowId, COPYWIN_GFX);
         RemoveWindow(sSafariBallsWindowId);
     }
     if (InBattlePyramid())
@@ -433,7 +434,7 @@ static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
         else
         {
             StringExpandPlaceholders(gStringVar4, sStartMenuItems[sCurrentStartMenuActions[index]].text);
-            AddTextPrinterParameterized(GetStartMenuWindowId(), 1, gStringVar4, 8, (index << 4) + 9, 0xFF, NULL);
+            AddTextPrinterParameterized(GetStartMenuWindowId(), FONT_NORMAL, gStringVar4, 8, (index << 4) + 9, TEXT_SKIP_DRAW, NULL);
         }
 
         index++;
@@ -466,7 +467,7 @@ static bool32 InitStartMenuStep(void)
         break;
     case 2:
         LoadMessageBoxAndBorderGfx();
-        DrawStdWindowFrame(sub_81979C4(sNumStartMenuActions), FALSE);
+        DrawStdWindowFrame(AddStartMenuWindow(sNumStartMenuActions), FALSE);
         sInitStartMenuData[1] = 0;
         sInitStartMenuData[0]++;
         break;
@@ -482,8 +483,8 @@ static bool32 InitStartMenuStep(void)
             sInitStartMenuData[0]++;
         break;
     case 5:
-        sStartMenuCursorPos = sub_81983AC(GetStartMenuWindowId(), 1, 0, 9, 16, sNumStartMenuActions, sStartMenuCursorPos);
-        CopyWindowToVram(GetStartMenuWindowId(), TRUE);
+        sStartMenuCursorPos = InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, 9, 16, sNumStartMenuActions, sStartMenuCursorPos);
+        CopyWindowToVram(GetStartMenuWindowId(), COPYWIN_MAP);
         return TRUE;
     }
 
@@ -534,7 +535,7 @@ void ShowReturnToFieldStartMenu(void)
 
 void Task_ShowStartMenu(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
 
     switch(task->data[0])
     {
@@ -554,14 +555,14 @@ void Task_ShowStartMenu(u8 taskId)
 
 void ShowStartMenu(void)
 {
-    if (!IsUpdateLinkStateCBActive())
+    if (!IsOverworldLinkActive())
     {
         FreezeObjectEvents();
         PlayerFreeze();
-        sub_808BCF4();
+        StopPlayerAvatar();
     }
     CreateStartMenuTask(Task_ShowStartMenu);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static bool8 HandleStartMenuInput(void)
@@ -679,7 +680,7 @@ static bool8 StartMenuPlayerNameCallback(void)
         RemoveExtraStartMenuWindows();
         CleanupOverworldWindowsAndTilemaps();
 
-        if (IsUpdateLinkStateCBActive() || InUnionRoom())
+        if (IsOverworldLinkActive() || InUnionRoom())
             ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
         else if (FlagGet(FLAG_SYS_FRONTIER_PASS))
             ShowFrontierPass(CB2_ReturnToFieldWithOpenMenu); // Display frontier pass
@@ -762,7 +763,7 @@ void ShowBattlePyramidStartMenu(void)
     ClearDialogWindowAndFrameToTransparent(0, FALSE);
     ScriptUnfreezeObjectEvents();
     CreateStartMenuTask(Task_ShowStartMenu);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static bool8 StartMenuBattlePyramidBagCallback(void)
@@ -803,7 +804,7 @@ static bool8 SaveCallback(void)
     case SAVE_ERROR:    // Close start menu
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         ScriptUnfreezeObjectEvents();
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         SoftResetInBattlePyramid();
         return TRUE;
     }
@@ -840,8 +841,8 @@ static bool8 BattlePyramidRetireCallback(void)
     case SAVE_CANCELED: // Yes (Retire from battle pyramid)
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         ScriptUnfreezeObjectEvents();
-        ScriptContext2_Disable();
-        ScriptContext1_SetupScript(BattlePyramid_Retire);
+        UnlockPlayerFieldControls();
+        ScriptContext_SetupScript(BattlePyramid_Retire);
         return TRUE;
     }
 
@@ -876,7 +877,7 @@ void SaveGame(void)
 static void ShowSaveMessage(const u8 *message, u8 (*saveCallback)(void))
 {
     StringExpandPlaceholders(gStringVar4, message);
-    sub_819786C(0, TRUE);
+    LoadMessageBoxAndFrameGfx(0, TRUE);
     AddTextPrinterForMessage_2(TRUE);
     sSavingComplete = TRUE;
     sSaveDialogCallback = saveCallback;
@@ -900,7 +901,7 @@ static void SaveGameTask(u8 taskId)
     }
 
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 static void HideSaveMessageWindow(void)
@@ -1200,7 +1201,7 @@ static bool32 InitSaveWindowAfterLinkBattle(u8 *state)
         break;
     case 3:
         ShowBg(0);
-        BlendPalettes(-1, 16, 0);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         SetVBlankCallback(VBlankCB_LinkBattleSave);
         EnableInterrupts(1);
         break;
@@ -1238,16 +1239,16 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
         case 0:
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
             AddTextPrinterParameterized2(0,
-                                        1,
+                                        FONT_NORMAL,
                                         gText_SavingDontTurnOffPower,
-                                        TEXT_SPEED_FF,
+                                        TEXT_SKIP_DRAW,
                                         NULL,
                                         TEXT_COLOR_DARK_GRAY,
                                         TEXT_COLOR_WHITE,
                                         TEXT_COLOR_LIGHT_GRAY);
             DrawTextBorderOuter(0, 8, 14);
             PutWindowTilemap(0);
-            CopyWindowToVram(0, 3);
+            CopyWindowToVram(0, COPYWIN_FULL);
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
 
             if (gWirelessCommType != 0 && InUnionRoom())
@@ -1269,11 +1270,11 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
             break;
         case 1:
             SetContinueGameWarpStatusToDynamicWarp();
-            FullSaveGame();
+            WriteSaveBlock2();
             *state = 2;
             break;
         case 2:
-            if (CheckSaveFile())
+            if (WriteSaveBlock1Sector())
             {
                 ClearContinueGameWarpStatus2();
                 *state = 3;
@@ -1290,11 +1291,11 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
             DestroyTask(taskId);
             break;
         case 5:
-            CreateTask(Task_LinkSave, 5);
+            CreateTask(Task_LinkFullSave, 5);
             *state = 6;
             break;
         case 6:
-            if (!FuncIsActiveTask(Task_LinkSave))
+            if (!FuncIsActiveTask(Task_LinkFullSave))
             {
                 *state = 3;
             }
@@ -1330,40 +1331,40 @@ static void ShowSaveInfoWindow(void)
     // Print region name
     yOffset = 1;
     BufferSaveMenuText(SAVE_MENU_LOCATION, gStringVar4, TEXT_COLOR_GREEN);
-    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar4, 0, yOffset, 0xFF, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, FONT_NORMAL, gStringVar4, 0, yOffset, TEXT_SKIP_DRAW, NULL);
 
     // Print player name
     yOffset += 16;
-    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingPlayer, 0, yOffset, 0xFF, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, FONT_NORMAL, gText_SavingPlayer, 0, yOffset, TEXT_SKIP_DRAW, NULL);
     BufferSaveMenuText(SAVE_MENU_NAME, gStringVar4, color);
-    xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
+    xOffset = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 0x70);
     PrintPlayerNameOnWindow(sSaveInfoWindowId, gStringVar4, xOffset, yOffset);
 
     // Print badge count
     yOffset += 16;
-    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingBadges, 0, yOffset, 0xFF, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, FONT_NORMAL, gText_SavingBadges, 0, yOffset, TEXT_SKIP_DRAW, NULL);
     BufferSaveMenuText(SAVE_MENU_BADGES, gStringVar4, color);
-    xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
-    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
+    xOffset = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 0x70);
+    AddTextPrinterParameterized(sSaveInfoWindowId, FONT_NORMAL, gStringVar4, xOffset, yOffset, TEXT_SKIP_DRAW, NULL);
 
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
         // Print pokedex count
         yOffset += 16;
-        AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingPokedex, 0, yOffset, 0xFF, NULL);
+        AddTextPrinterParameterized(sSaveInfoWindowId, FONT_NORMAL, gText_SavingPokedex, 0, yOffset, TEXT_SKIP_DRAW, NULL);
         BufferSaveMenuText(SAVE_MENU_CAUGHT, gStringVar4, color);
-        xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
-        AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
+        xOffset = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 0x70);
+        AddTextPrinterParameterized(sSaveInfoWindowId, FONT_NORMAL, gStringVar4, xOffset, yOffset, TEXT_SKIP_DRAW, NULL);
     }
 
     // Print play time
     yOffset += 16;
-    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingTime, 0, yOffset, 0xFF, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, FONT_NORMAL, gText_SavingTime, 0, yOffset, TEXT_SKIP_DRAW, NULL);
     BufferSaveMenuText(SAVE_MENU_PLAY_TIME, gStringVar4, color);
-    xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
-    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
+    xOffset = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 0x70);
+    AddTextPrinterParameterized(sSaveInfoWindowId, FONT_NORMAL, gStringVar4, xOffset, yOffset, TEXT_SKIP_DRAW, NULL);
 
-    CopyWindowToVram(sSaveInfoWindowId, 2);
+    CopyWindowToVram(sSaveInfoWindowId, COPYWIN_GFX);
 }
 
 static void RemoveSaveInfoWindow(void)
@@ -1374,30 +1375,30 @@ static void RemoveSaveInfoWindow(void)
 
 static void Task_WaitForBattleTowerLinkSave(u8 taskId)
 {
-    if (!FuncIsActiveTask(Task_LinkSave))
+    if (!FuncIsActiveTask(Task_LinkFullSave))
     {
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
 }
 
-#define tPartialSave data[2]
+#define tInBattleTower data[2]
 
 void SaveForBattleTowerLink(void)
 {
-    u8 taskId = CreateTask(Task_LinkSave, 5);
-    gTasks[taskId].tPartialSave = TRUE;
+    u8 taskId = CreateTask(Task_LinkFullSave, 5);
+    gTasks[taskId].tInBattleTower = TRUE;
     gTasks[CreateTask(Task_WaitForBattleTowerLinkSave, 6)].data[1] = taskId;
 }
 
-#undef tPartialSave
+#undef tInBattleTower
 
 static void HideStartMenuWindow(void)
 {
     ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
     ScriptUnfreezeObjectEvents();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 }
 
 void HideStartMenu(void)

@@ -71,7 +71,7 @@ struct BagMenu
     u8 unused1[2];
     u8 pocketScrollArrowsTask;
     u8 pocketSwitchArrowsTask;
-    const u8* contextMenuItemsPtr;
+    const u8 *contextMenuItemsPtr;
     u8 contextMenuItemsBuffer[4];
     u8 contextMenuNumItems;
     u8 numItemStacks[POCKETS_COUNT];

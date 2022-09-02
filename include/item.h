@@ -2,6 +2,7 @@
 #define GUARD_ITEM_H
 
 #include "constants/item.h"
+#include "constants/item_config.h"
 
 typedef void (*ItemUseFunc)(u8);
 
@@ -14,13 +15,14 @@ struct Item
     u8 holdEffectParam;
     const u8 *description;
     u8 importance;
-    u8 unk19;
+    bool8 registrability; // unused
     u8 pocket;
     u8 type;
     ItemUseFunc fieldUseFunc;
     u8 battleUsage;
     ItemUseFunc battleUseFunc;
     u8 secondaryId;
+    u8 flingPower;
 };
 
 struct BagPocket
@@ -29,6 +31,7 @@ struct BagPocket
     u8 capacity;
 };
 
+extern const struct Item gItems[];
 extern struct BagPocket gBagPockets[];
 
 void ApplyNewEncryptionKeyToBagItems(u32 newKey);
@@ -67,12 +70,13 @@ u8 ItemId_GetHoldEffect(u16 itemId);
 u8 ItemId_GetHoldEffectParam(u16 itemId);
 const u8 *ItemId_GetDescription(u16 itemId);
 u8 ItemId_GetImportance(u16 itemId);
-u8 ItemId_GetUnknownValue(u16 itemId);
+u8 ItemId_GetRegistrability(u16 itemId);
 u8 ItemId_GetPocket(u16 itemId);
 u8 ItemId_GetType(u16 itemId);
 ItemUseFunc ItemId_GetFieldFunc(u16 itemId);
 u8 ItemId_GetBattleUsage(u16 itemId);
 ItemUseFunc ItemId_GetBattleFunc(u16 itemId);
 u8 ItemId_GetSecondaryId(u16 itemId);
+u8 ItemId_GetFlingPower(u16 itemId);
 
 #endif // GUARD_ITEM_H

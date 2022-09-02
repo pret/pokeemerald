@@ -4,9 +4,6 @@
 #define TOTAL_ROUNDS 20
 #define PICKUP_ITEMS_PER_ROUND 10
 
-#define FLOOR_WALKABLE_METATILE 0x28D
-#define FLOOR_EXIT_METATILE 0x28E
-
 #define HINT_EXIT_DIRECTION                   0
 #define HINT_REMAINING_ITEMS                  1
 #define HINT_REMAINING_TRAINERS               2
@@ -17,13 +14,20 @@
 #define HINT_EXIT_FAR_REMAINING_TRAINERS      7
 #define HINT_EXIT_FAR_REMAINING_ITEMS         8
 
+#define MAX_PYRAMID_TRAINERS 8
+
+// Each floor of the Battle Pyramid is 32x32 metatiles, subdivided into a 4x4 grid of 8x8 metatile squares
+#define PYRAMID_FLOOR_SQUARES_WIDE 4
+#define PYRAMID_FLOOR_SQUARES_HIGH 4
+#define NUM_PYRAMID_FLOOR_SQUARES (PYRAMID_FLOOR_SQUARES_WIDE * PYRAMID_FLOOR_SQUARES_HIGH)
+
 #define OBJ_TRAINERS  0
 #define OBJ_ITEMS     1
 
 #define OBJ_POSITIONS_UNIFORM               0
 #define OBJ_POSITIONS_IN_AND_NEAR_ENTRANCE  1
 #define OBJ_POSITIONS_IN_AND_NEAR_EXIT      2
-#define OBJ_POSITIONS_NEAR_ENTRANCE         3         
+#define OBJ_POSITIONS_NEAR_ENTRANCE         3
 #define OBJ_POSITIONS_NEAR_EXIT             4
 
 // Functions IDs for sBattlePyramidFunctions / CallBattlePyramidFunction
