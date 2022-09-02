@@ -271,6 +271,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId);
 static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void DebugAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate);
 
+extern u8 Debug_FlagsNotSetMessage[];
 extern u8 Debug_Script_1[];
 extern u8 Debug_Script_2[];
 extern u8 Debug_Script_3[];
@@ -1447,6 +1448,11 @@ static void DebugAction_Flags_ToggleFrontierPass(u8 taskId)
 }
 static void DebugAction_Flags_CollisionOnOff(u8 taskId)
 {
+#if DEBUG_FLAG_NO_COLLISION == 0
+    Debug_DestroyMenu(taskId);
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
+#else
     if(FlagGet(DEBUG_FLAG_NO_COLLISION))
     {
         FlagClear(DEBUG_FLAG_NO_COLLISION);
@@ -1455,9 +1461,15 @@ static void DebugAction_Flags_CollisionOnOff(u8 taskId)
         FlagSet(DEBUG_FLAG_NO_COLLISION);
         PlaySE(SE_PC_LOGIN);
     }
+#endif
 }
 static void DebugAction_Flags_EncounterOnOff(u8 taskId)
 {
+#if DEBUG_FLAG_NO_ENCOUNTER == 0
+    Debug_DestroyMenu(taskId);
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
+#else
     if(FlagGet(DEBUG_FLAG_NO_ENCOUNTER))
     {
         FlagClear(DEBUG_FLAG_NO_ENCOUNTER);
@@ -1466,9 +1478,15 @@ static void DebugAction_Flags_EncounterOnOff(u8 taskId)
         FlagSet(DEBUG_FLAG_NO_ENCOUNTER);
         PlaySE(SE_PC_LOGIN);
     }
+#endif
 }
 static void DebugAction_Flags_TrainerSeeOnOff(u8 taskId)
 {
+#if DEBUG_FLAG_NO_TRAINER_SEE == 0
+    Debug_DestroyMenu(taskId);
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
+#else
     if(FlagGet(DEBUG_FLAG_NO_TRAINER_SEE))
     {
         FlagClear(DEBUG_FLAG_NO_TRAINER_SEE);
@@ -1477,9 +1495,15 @@ static void DebugAction_Flags_TrainerSeeOnOff(u8 taskId)
         FlagSet(DEBUG_FLAG_NO_TRAINER_SEE);
         PlaySE(SE_PC_LOGIN);
     }
+#endif
 }
 static void DebugAction_Flags_BagUseOnOff(u8 taskId)
 {
+#if B_FLAG_NO_BAG_USE == 0
+    Debug_DestroyMenu(taskId);
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
+#else
     if(FlagGet(B_FLAG_NO_BAG_USE))
     {
         FlagClear(B_FLAG_NO_BAG_USE);
@@ -1488,9 +1512,15 @@ static void DebugAction_Flags_BagUseOnOff(u8 taskId)
         FlagSet(B_FLAG_NO_BAG_USE);
         PlaySE(SE_PC_LOGIN);
     }
+#endif
 }
 static void DebugAction_Flags_CatchingOnOff(u8 taskId)
 {
+#if B_FLAG_NO_CATCHING_USE == 0
+    Debug_DestroyMenu(taskId);
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
+#else
     if(FlagGet(B_FLAG_NO_CATCHING))
     {
         FlagClear(B_FLAG_NO_CATCHING);
@@ -1499,6 +1529,7 @@ static void DebugAction_Flags_CatchingOnOff(u8 taskId)
         FlagSet(B_FLAG_NO_CATCHING);
         PlaySE(SE_PC_LOGIN);
     }
+#endif
 }
   
 // *******************************

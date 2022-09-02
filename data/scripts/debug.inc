@@ -38,9 +38,21 @@ Debug_CheatStart::
 	setflag FLAG_HIDE_ROUTE_116_MR_BRINEY
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
-	closemessage
 	release
 	end
+
+Debug_FlagsNotSetMessage::
+	lockall
+	message Debug_FlagsNotSetMessage_Text
+	waitmessage
+	waitbuttonpress
+	releaseall
+	end
+
+Debug_FlagsNotSetMessage_Text:
+	.string "Feature unavailable!\n"
+	.string "Please define a usable flag in:\l"
+	.string "'include/constants/debug{UNDERSCORE}config.h'!$"
 
 Debug_Script_1::
 	end
