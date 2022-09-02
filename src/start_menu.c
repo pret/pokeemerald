@@ -286,7 +286,7 @@ static void BuildStartMenuActions(void)
     }
     else
     {
-    #if TX_DEBUG_SYSTEM == TRUE && TX_DEBUG_SYSTEM_IN_MENU == TRUE
+    #if DEBUG_SYSTEM_ENABLE == TRUE && DEBUG_SYSTEM_IN_MENU == TRUE
         BuildDebugStartMenu();
     #else
         BuildNormalStartMenu();
@@ -760,7 +760,7 @@ static bool8 StartMenuDebugCallback(void)
     RemoveExtraStartMenuWindows();
     HideStartMenuDebug(); // Hide start menu without enabling movement
 
-#if TX_DEBUG_SYSTEM == TRUE
+#if DEBUG_SYSTEM_ENABLE == TRUE
     Debug_ShowMainMenu();
     #endif
 

@@ -1669,7 +1669,7 @@ static void FieldTask_ReturnToPcMenu(void)
     MainCallback vblankCb = gMain.vblankCallback;
 
     SetVBlankCallback(NULL);
-    if (!FlagGet(TX_DEBUG_FLAG_PC_FROM_DEBUG_MENU))
+    if (!FlagGet(DEBUG_FLAG_PC_FROM_DEBUG_MENU))
     {
         taskId = CreateTask(Task_PCMainMenu, 80);
         gTasks[taskId].tState = 0;
@@ -1678,7 +1678,7 @@ static void FieldTask_ReturnToPcMenu(void)
     }
     else
     {
-        FlagClear(TX_DEBUG_FLAG_PC_FROM_DEBUG_MENU);
+        FlagClear(DEBUG_FLAG_PC_FROM_DEBUG_MENU);
         ScriptContext_Enable();
     }
     SetVBlankCallback(vblankCb);

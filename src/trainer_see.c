@@ -193,8 +193,8 @@ bool8 CheckForTrainersWantingBattle(void)
 {
     u8 i;
 
-#if TX_DEBUG_SYSTEM == TRUE
-    if (FlagGet(TX_DEBUG_FLAG_NO_TRAINER_SEE))
+#if DEBUG_SYSTEM_ENABLE == TRUE
+    if (FlagGet(DEBUG_FLAG_NO_TRAINER_SEE))
         return FALSE;
 #endif
 

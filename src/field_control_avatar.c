@@ -131,7 +131,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
     else if (heldKeys & DPAD_RIGHT)
         input->dpadDirection = DIR_EAST;
 
-#if TX_DEBUG_SYSTEM == TRUE && TX_DEBUG_SYSTEM_IN_MENU == FALSE
+#if DEBUG_SYSTEM_ENABLE == TRUE && DEBUG_SYSTEM_IN_MENU == FALSE
     if ((heldKeys & R_BUTTON) && input->pressedStartButton)
     {
         input->input_field_1_2 = TRUE;
@@ -197,7 +197,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
         return TRUE;
 
-#if TX_DEBUG_SYSTEM == TRUE && TX_DEBUG_SYSTEM_IN_MENU == FALSE
+#if DEBUG_SYSTEM_ENABLE == TRUE && DEBUG_SYSTEM_IN_MENU == FALSE
     if (input->input_field_1_2)
     {
         PlaySE(SE_WIN_OPEN);
@@ -686,8 +686,8 @@ void RestartWildEncounterImmunitySteps(void)
 
 static bool8 CheckStandardWildEncounter(u16 metatileBehavior)
 {
-#if TX_DEBUG_SYSTEM == TRUE
-    if (FlagGet(TX_DEBUG_FLAG_NO_ENCOUNTER))
+#if DEBUG_SYSTEM_ENABLE == TRUE
+    if (FlagGet(DEBUG_FLAG_NO_ENCOUNTER))
         return FALSE;
 #endif
 

@@ -55,7 +55,7 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 
-#if TX_DEBUG_SYSTEM == TRUE
+#if DEBUG_SYSTEM_ENABLE == TRUE
 // *******************************
 // Enums
 enum { // Main
@@ -1447,56 +1447,56 @@ static void DebugAction_Flags_ToggleFrontierPass(u8 taskId)
 }
 static void DebugAction_Flags_CollisionOnOff(u8 taskId)
 {
-    if(FlagGet(TX_DEBUG_FLAG_NO_COLLISION))
+    if(FlagGet(DEBUG_FLAG_NO_COLLISION))
     {
-        FlagClear(TX_DEBUG_FLAG_NO_COLLISION);
+        FlagClear(DEBUG_FLAG_NO_COLLISION);
         PlaySE(SE_PC_OFF);
     }else{
-        FlagSet(TX_DEBUG_FLAG_NO_COLLISION);
+        FlagSet(DEBUG_FLAG_NO_COLLISION);
         PlaySE(SE_PC_LOGIN);
     }
 }
 static void DebugAction_Flags_EncounterOnOff(u8 taskId)
 {
-    if(FlagGet(TX_DEBUG_FLAG_NO_ENCOUNTER))
+    if(FlagGet(DEBUG_FLAG_NO_ENCOUNTER))
     {
-        FlagClear(TX_DEBUG_FLAG_NO_ENCOUNTER);
+        FlagClear(DEBUG_FLAG_NO_ENCOUNTER);
         PlaySE(SE_PC_OFF);
     }else{
-        FlagSet(TX_DEBUG_FLAG_NO_ENCOUNTER);
+        FlagSet(DEBUG_FLAG_NO_ENCOUNTER);
         PlaySE(SE_PC_LOGIN);
     }
 }
 static void DebugAction_Flags_TrainerSeeOnOff(u8 taskId)
 {
-    if(FlagGet(TX_DEBUG_FLAG_NO_TRAINER_SEE))
+    if(FlagGet(DEBUG_FLAG_NO_TRAINER_SEE))
     {
-        FlagClear(TX_DEBUG_FLAG_NO_TRAINER_SEE);
+        FlagClear(DEBUG_FLAG_NO_TRAINER_SEE);
         PlaySE(SE_PC_OFF);
     }else{
-        FlagSet(TX_DEBUG_FLAG_NO_TRAINER_SEE);
+        FlagSet(DEBUG_FLAG_NO_TRAINER_SEE);
         PlaySE(SE_PC_LOGIN);
     }
 }
 static void DebugAction_Flags_BagUseOnOff(u8 taskId)
 {
-    if(FlagGet(TX_DEBUG_FLAG_NO_BAG_USE))
+    if(FlagGet(B_FLAG_NO_BAG_USE))
     {
-        FlagClear(TX_DEBUG_FLAG_NO_BAG_USE);
+        FlagClear(B_FLAG_NO_BAG_USE);
         PlaySE(SE_PC_OFF);
     }else{
-        FlagSet(TX_DEBUG_FLAG_NO_BAG_USE);
+        FlagSet(B_FLAG_NO_BAG_USE);
         PlaySE(SE_PC_LOGIN);
     }
 }
 static void DebugAction_Flags_CatchingOnOff(u8 taskId)
 {
-    if(FlagGet(TX_DEBUG_FLAG_NO_CATCHING))
+    if(FlagGet(B_FLAG_NO_CATCHING))
     {
-        FlagClear(TX_DEBUG_FLAG_NO_CATCHING);
+        FlagClear(B_FLAG_NO_CATCHING);
         PlaySE(SE_PC_OFF);
     }else{
-        FlagSet(TX_DEBUG_FLAG_NO_CATCHING);
+        FlagSet(B_FLAG_NO_CATCHING);
         PlaySE(SE_PC_LOGIN);
     }
 }
@@ -2723,7 +2723,7 @@ static void Task_WaitFadeAccessPC(u8 taskId)
     if (!gPaletteFade.active)
     {
         DestroyTask(taskId);
-        FlagSet(TX_DEBUG_FLAG_PC_FROM_DEBUG_MENU);
+        FlagSet(DEBUG_FLAG_PC_FROM_DEBUG_MENU);
         EnterPokeStorage(2);
     }
 }
