@@ -866,7 +866,7 @@ static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
 
 }
 
-static void ApplyGlobalTintToPaletteSlot(void)
+static void ApplyGlobalTintToPaletteSlot(u8 slot, u8 count)
 {
 
 }
