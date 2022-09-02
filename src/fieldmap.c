@@ -87,13 +87,13 @@ void InitMapFromSavedGame(void)
 
 void InitBattlePyramidMap(bool8 setPlayerPosition)
 {
-    CpuFastFill(MAPGRID_UNDEFINED << 16 | MAPGRID_UNDEFINED, sBackupMapData, sizeof(sBackupMapData));
+    CpuFastFill16(MAPGRID_UNDEFINED, sBackupMapData, sizeof(sBackupMapData));
     GenerateBattlePyramidFloorLayout(sBackupMapData, setPlayerPosition);
 }
 
 void InitTrainerHillMap(void)
 {
-    CpuFastFill(MAPGRID_UNDEFINED << 16 | MAPGRID_UNDEFINED, sBackupMapData, sizeof(sBackupMapData));
+    CpuFastFill16(MAPGRID_UNDEFINED, sBackupMapData, sizeof(sBackupMapData));
     GenerateTrainerHillFloorLayout(sBackupMapData);
 }
 
