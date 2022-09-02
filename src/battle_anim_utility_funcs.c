@@ -27,7 +27,7 @@ static void StartBlendAnimSpriteColor(u8, u32);
 static void AnimTask_BlendSpriteColor_Step2(u8);
 static void AnimTask_HardwarePaletteFade_Step(u8);
 static void AnimTask_TraceMonBlended_Step(u8);
-static void AnimMonTrace(struct Sprite*);
+static void AnimMonTrace(struct Sprite *);
 static void AnimTask_DrawFallingWhiteLinesOnAttacker_Step(u8);
 static void StatsChangeAnimation_Step1(u8);
 static void StatsChangeAnimation_Step2(u8);
@@ -97,7 +97,7 @@ void AnimTask_BlendBattleAnimPalExclude(u8 taskId)
     for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
     {
         if (battler != animBattlers[0] && battler != animBattlers[1] && IsBattlerSpriteVisible(battler))
-            selectedPalettes |= 0x10000 << AnimDummyReturnArg(battler);
+            selectedPalettes |= 0x10000 << GetSpritePalIdxByBattler(battler);
     }
 
     StartBlendAnimSpriteColor(taskId, selectedPalettes);
@@ -357,7 +357,7 @@ static void AnimTask_DrawFallingWhiteLinesOnAttacker_Step(u8 taskId)
         gBattle_BG1_Y += 64;
         if (++gTasks[taskId].data[11] == 4)
         {
-            ResetBattleAnimBg(0);
+            ResetBattleAnimBg(FALSE);
             gBattle_WIN0H = 0;
             gBattle_WIN0V = 0;
             SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR
@@ -536,9 +536,9 @@ static void StatsChangeAnimation_Step2(u8 taskId)
     gTasks[taskId].func = StatsChangeAnimation_Step3;
 
     if (sAnimStatsChangeData->data[0] == 0)
-        PlaySE12WithPanning(SE_M_STAT_INCREASE, BattleAnimAdjustPanning2(-64));
+        PlaySE12WithPanning(SE_M_STAT_INCREASE, BattleAnimAdjustPanning2(SOUND_PAN_ATTACKER));
     else
-        PlaySE12WithPanning(SE_M_STAT_DECREASE, BattleAnimAdjustPanning2(-64));
+        PlaySE12WithPanning(SE_M_STAT_DECREASE, BattleAnimAdjustPanning2(SOUND_PAN_ATTACKER));
 }
 
 static void StatsChangeAnimation_Step3(u8 taskId)
@@ -569,7 +569,7 @@ static void StatsChangeAnimation_Step3(u8 taskId)
             SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[12], 16 - gTasks[taskId].data[12]));
             if (gTasks[taskId].data[12] == 0)
             {
-                ResetBattleAnimBg(0);
+                ResetBattleAnimBg(FALSE);
                 gTasks[taskId].data[15]++;
             }
         }
@@ -870,7 +870,7 @@ static void UpdateMonScrollingBgMask(u8 taskId)
             SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[12], 16 - gTasks[taskId].data[12]));
             if (gTasks[taskId].data[12] == 0)
             {
-                ResetBattleAnimBg(0);
+                ResetBattleAnimBg(FALSE);
                 gBattle_WIN0H = 0;
                 gBattle_WIN0V = 0;
                 SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR

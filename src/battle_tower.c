@@ -135,7 +135,7 @@ const u16 gBattleFrontierHeldItems[] =
     ITEM_APICOT_BERRY,
     ITEM_STARF_BERRY,
     ITEM_LIECHI_BERRY,
-    ITEM_STICK,
+    ITEM_LEEK,
     ITEM_LAX_INCENSE,
     ITEM_AGUAV_BERRY,
     ITEM_FIGY_BERRY,
@@ -996,7 +996,7 @@ static bool8 ChooseSpecialBattleTowerTrainer(void)
     winStreak = GetCurrentBattleTowerWinStreak(lvlMode, battleMode);
     for (i = 0; i < BATTLE_TOWER_RECORD_COUNT; i++)
     {
-        u32 *record = (u32*)(&gSaveBlock2Ptr->frontier.towerRecords[i]);
+        u32 *record = (u32 *)(&gSaveBlock2Ptr->frontier.towerRecords[i]);
         u32 recordHasData = 0;
         u32 checksum = 0;
         for (j = 0; j < (sizeof(struct EmeraldBattleTowerRecord) - 4) / 4; j++) // - 4, because of the last field being the checksum itself.
@@ -2418,7 +2418,7 @@ static void LoadMultiPartnerCandidatesData(void)
     r10 = 0;
     for (i = 0; i < BATTLE_TOWER_RECORD_COUNT; i++)
     {
-        u32 *record = (u32*)(&gSaveBlock2Ptr->frontier.towerRecords[i]);
+        u32 *record = (u32 *)(&gSaveBlock2Ptr->frontier.towerRecords[i]);
         u32 recordHasData = 0;
         u32 checksum = 0;
         for (j = 0; j < (sizeof(struct EmeraldBattleTowerRecord) - 4) / 4; j++) // - 4, because of the last field being the checksum itself.
@@ -2734,7 +2734,7 @@ static void SetTowerInterviewData(void)
 static void ValidateBattleTowerRecordChecksums(void)
 {
     s32 i, j;
-    u32 *record = (u32*)(&gSaveBlock2Ptr->frontier.towerPlayer);
+    u32 *record = (u32 *)(&gSaveBlock2Ptr->frontier.towerPlayer);
     u32 checksum = 0;
 
     for (j = 0; j < (sizeof(struct EmeraldBattleTowerRecord) - 4) / 4; j++) // - 4, because of the last field being the checksum itself.
@@ -2746,7 +2746,7 @@ static void ValidateBattleTowerRecordChecksums(void)
 
     for (i = 0; i < BATTLE_TOWER_RECORD_COUNT; i++)
     {
-        record = (u32*)(&gSaveBlock2Ptr->frontier.towerRecords[i]);
+        record = (u32 *)(&gSaveBlock2Ptr->frontier.towerRecords[i]);
         checksum = 0;
         for (j = 0; j < (sizeof(struct EmeraldBattleTowerRecord) - 4) / 4; j++) // - 4, because of the last field being the checksum itself.
         {
@@ -3305,7 +3305,7 @@ static void ValidateApprenticesChecksums(void)
 
     for (i = 0; i < APPRENTICE_COUNT; i++)
     {
-        u32 *data = (u32*) &gSaveBlock2Ptr->apprentices[i];
+        u32 *data = (u32 *) &gSaveBlock2Ptr->apprentices[i];
         u32 checksum = 0;
         for (j = 0; j < (sizeof(struct Apprentice) - 4) / 4; j++)
             checksum += data[j];
@@ -3614,7 +3614,7 @@ u8 FacilityClassToGraphicsId(u8 facilityClass)
 bool32 ValidateBattleTowerRecord(u8 recordId) // unused
 {
     s32 i;
-    u32 *record = (u32*)(&gSaveBlock2Ptr->frontier.towerRecords[recordId]);
+    u32 *record = (u32 *)(&gSaveBlock2Ptr->frontier.towerRecords[recordId]);
     u32 checksum = 0;
     u32 hasData = 0;
     for (i = 0; i < (sizeof(struct EmeraldBattleTowerRecord) - 4) / 4; i++) // - 4, because of the last fjeld bejng the checksum jtself.

@@ -58,7 +58,7 @@ static const struct OamData sCloudSpriteOamData =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -339,7 +339,7 @@ static void UpdateDroughtBlend(u8 taskId)
         task->tState++;
         break;
     case 4:
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
         break;
     }
@@ -393,7 +393,7 @@ static const struct OamData sRainSpriteOamData =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x32),
     .x = 0,
@@ -839,7 +839,7 @@ static const struct OamData sSnowflakeSpriteOamData =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
@@ -1272,7 +1272,7 @@ static const struct OamData sOamData_FogH =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,

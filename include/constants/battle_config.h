@@ -1,129 +1,6 @@
 #ifndef GUARD_CONSTANTS_BATTLE_CONFIG_H
 #define GUARD_CONSTANTS_BATTLE_CONFIG_H
 
-#include "constants/expansion_branches.h"
-
-// Species with peculiar battle effects.
-#ifndef POKEMON_EXPANSION
-    #define SPECIES_DIALGA                           0
-    #define SPECIES_PALKIA                           0
-    #define SPECIES_GIRATINA                         0
-    #define SPECIES_CHERRIM                          0
-    #define SPECIES_ARCEUS                           0
-    #define SPECIES_SILVALLY                         0
-    #define SPECIES_GENESECT                         0
-    #define SPECIES_AEGISLASH                        0
-    #define SPECIES_AEGISLASH_BLADE                  10000
-    #define SPECIES_MIMIKYU                          0
-    #define SPECIES_MIMIKYU_BUSTED                   10001
-    #define SPECIES_DARMANITAN                       0
-    #define SPECIES_DARMANITAN_ZEN_MODE              10002
-    #define SPECIES_MINIOR_CORE_RED                  0
-    #define SPECIES_MINIOR                           10003
-    #define SPECIES_MINIOR_CORE_BLUE                 0
-    #define SPECIES_MINIOR_METEOR_BLUE               10004
-    #define SPECIES_MINIOR_CORE_GREEN                0
-    #define SPECIES_MINIOR_METEOR_GREEN              10005
-    #define SPECIES_MINIOR_CORE_INDIGO               0
-    #define SPECIES_MINIOR_METEOR_INDIGO             10006
-    #define SPECIES_MINIOR_CORE_ORANGE               0
-    #define SPECIES_MINIOR_METEOR_ORANGE             10007
-    #define SPECIES_MINIOR_CORE_VIOLET               0
-    #define SPECIES_MINIOR_METEOR_VIOLET             10008
-    #define SPECIES_MINIOR_CORE_YELLOW               0
-    #define SPECIES_MINIOR_METEOR_YELLOW             10009
-    #define SPECIES_WISHIWASHI                       0
-    #define SPECIES_WISHIWASHI_SCHOOL                10010
-    #define SPECIES_ZYGARDE                          0     // 50%
-    #define SPECIES_ZYGARDE_10                       10011 // 10 %
-    #define SPECIES_ZYGARDE_COMPLETE                 10012 // 100 %
-    #define SPECIES_BURMY                            0
-    #define SPECIES_BURMY_SANDY_CLOAK                10013
-    #define SPECIES_BURMY_TRASH_CLOAK                10014
-    #define SPECIES_CRAMORANT                        0
-    #define SPECIES_CRAMORANT_GORGING                10015
-    #define SPECIES_CRAMORANT_GULPING                10016
-    #define SPECIES_GRENINJA_BATTLE_BOND             0
-    #define SPECIES_GRENINJA_ASH                     10017
-    #define SPECIES_HOOPA                            0
-    #define SPECIES_HOOPA_UNBOUND                    10018
-    #define SPECIES_MELOETTA                         0
-    #define SPECIES_MELOETTA_PIROUETTE               10019
-    #define SPECIES_MORPEKO                          0
-    #define SPECIES_MORPEKO_HANGRY                   10020
-    #define SPECIES_SIRFETCHD                        10021
-    #define SPECIES_DARMANITAN_GALARIAN              0
-    #define SPECIES_DARMANITAN_ZEN_MODE_GALARIAN     10022
-    #define SPECIES_HEATMOR                          0
-    #define SPECIES_DURANT                           0
-    #define SPECIES_CARBINK                          0
-    #define SPECIES_MAREANIE                         0
-#endif
-
-// Items with peculiar battle effects.
-#ifndef ITEM_EXPANSION
-    #define ITEM_CHOPLE_BERRY   177
-    #define ITEM_KEBIA_BERRY    178
-    #define ITEM_SHUCA_BERRY    179
-    #define ITEM_COBA_BERRY     180
-    #define ITEM_PAYAPA_BERRY   181
-    #define ITEM_TANGA_BERRY    182
-    #define ITEM_CHARTI_BERRY   183
-    #define ITEM_KASIB_BERRY    184
-    #define ITEM_HABAN_BERRY    185
-    #define ITEM_COLBUR_BERRY   186
-    #define ITEM_BABIRI_BERRY   187
-    #define ITEM_CHILAN_BERRY   188
-    #define ITEM_ROSELI_BERRY   189
-    #define ITEM_MICLE_BERRY    197
-    #define ITEM_CUSTAP_BERRY   199
-    #define ITEM_JABOCA_BERRY   200
-    #define ITEM_ROWAP_BERRY    201
-    #define ITEM_KEE_BERRY      202
-    #define ITEM_MARANGA_BERRY  203
-    #define ITEM_OCCA_BERRY     204
-    #define ITEM_PASSHO_BERRY   205
-    #define ITEM_WACAN_BERRY    206
-    #define ITEM_RINDO_BERRY    207
-    #define ITEM_YACHE_BERRY    208
-    #define ITEM_GRISEOUS_ORB   369
-    // z crystals
-    #define ITEM_NORMALIUM_Z    568
-    #define ITEM_FIGHTINIUM_Z   569
-    #define ITEM_FLYINIUM_Z     570
-    #define ITEM_POISONIUM_Z    571
-    #define ITEM_GROUNDIUM_Z    572
-    #define ITEM_ROCKIUM_Z      573
-    #define ITEM_BUGINIUM_Z     574
-    #define ITEM_GHOSTIUM_Z     575
-    #define ITEM_STEELIUM_Z     576
-    #define ITEM_FIRIUM_Z       577
-    #define ITEM_WATERIUM_Z     578
-    #define ITEM_GRASSIUM_Z     579
-    #define ITEM_ELECTRIUM_Z    580
-    #define ITEM_PSYCHIUM_Z     581
-    #define ITEM_ICIUM_Z        582
-    #define ITEM_DRAGONIUM_Z    583
-    #define ITEM_DARKINIUM_Z    584
-    #define ITEM_FAIRIUM_Z      585
-    #define ITEM_ALORAICHIUM_Z  586
-    #define ITEM_DECIDIUM_Z     587
-    #define ITEM_EEVIUM_Z       588
-    #define ITEM_INCINIUM_Z     589
-    #define ITEM_KOMMONIUM_Z    590
-    #define ITEM_LUNALIUM_Z     591
-    #define ITEM_LYCANIUM_Z     592
-    #define ITEM_MARSHADIUM_Z   593
-    #define ITEM_MEWNIUM_Z      594
-    #define ITEM_MIMIKIUM_Z     595
-    #define ITEM_PIKANIUM_Z     596
-    #define ITEM_PIKASHUNIUM_Z  597
-    #define ITEM_PRIMARIUM_Z    598
-    #define ITEM_SNORLIUM_Z     599
-    #define ITEM_SOLGANIUM_Z    600
-    #define ITEM_TAPUNIUM_Z     601
-#endif
-
 #ifndef GEN_3
     #define GEN_3 0
     #define GEN_4 1
@@ -298,6 +175,7 @@
 #define B_MULTI_BATTLE_WHITEOUT     GEN_8 // In Gen4+, multi battles end when the Player and also their Partner don't have any more Pokémon to fight.
 #define B_EVOLUTION_AFTER_WHITEOUT  GEN_6 // In Gen6+, Pokemon that qualify for evolution after battle will evolve even if the player loses.
 #define B_WILD_NATURAL_ENEMIES      TRUE  // If set to TRUE, certain wild mon species will attack other species when partnered in double wild battles (eg. Zangoose vs Seviper)
+#define B_AFFECTION_MECHANICS       FALSE // In Gen6+, there's a stat called affection that can trigger different effects in battle. From LGPE onwards, those effects use friendship instead.
 
 // Animation Settings
 #define B_NEW_SWORD_PARTICLE            FALSE    // If set to TRUE, it updates Swords Dance's particle.

@@ -22,12 +22,6 @@ struct MultiPartnerMenuPokemon
     /*0x1D*/ u8 language;
 };
 
-#if B_EXPANDED_ABILITY_NAMES
-#define ABILITY_NAME_LENGTH 16
-#else
-#define ABILITY_NAME_LENGTH 12
-#endif
-
 // defines for the 'DoBounceEffect' function
 #define BOUNCE_MON          0x0
 #define BOUNCE_HEALTHBOX    0x1
@@ -41,16 +35,16 @@ void SpriteCB_VsLetterInit(struct Sprite *sprite);
 void CB2_InitEndLinkBattle(void);
 u32 GetBattleBgTemplateData(u8 arrayId, u8 caseId);
 u32 GetBattleWindowTemplatePixelWidth(u32 setId, u32 tableId);
-void SpriteCb_WildMon(struct Sprite *sprite);
+void SpriteCB_WildMon(struct Sprite *sprite);
 void SpriteCallbackDummy_2(struct Sprite *sprite);
 void SpriteCB_FaintOpponentMon(struct Sprite *sprite);
-void SpriteCb_ShowAsMoveTarget(struct Sprite *sprite);
-void SpriteCb_HideAsMoveTarget(struct Sprite *sprite);
+void SpriteCB_ShowAsMoveTarget(struct Sprite *sprite);
+void SpriteCB_HideAsMoveTarget(struct Sprite *sprite);
 void SpriteCB_OpponentMonFromBall(struct Sprite *sprite);
 void SpriteCB_BattleSpriteStartSlideLeft(struct Sprite *sprite);
 void SpriteCB_FaintSlideAnim(struct Sprite *sprite);
-void DoBounceEffect(u8 battlerId, u8 b, s8 c, s8 d);
-void EndBounceEffect(u8 battlerId, bool8 b);
+void DoBounceEffect(u8 battler, u8 which, s8 delta, s8 amplitude);
+void EndBounceEffect(u8 battler, u8 which);
 void SpriteCB_PlayerMonFromBall(struct Sprite *sprite);
 void SpriteCB_TrainerThrowObject(struct Sprite *sprite);
 void AnimSetCenterToCornerVecX(struct Sprite *sprite);

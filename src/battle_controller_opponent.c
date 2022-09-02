@@ -412,7 +412,7 @@ static void CompleteOnHealthbarDone(void)
     SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
     if (hpValue != -1)
     {
-        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], hpValue, HP_CURRENT);
+        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], HP_CURRENT, hpValue, gBattleMons[gActiveBattler].maxHP);
     }
     else
         OpponentBufferExecCompleted();
@@ -640,7 +640,7 @@ static u32 GetOpponentMonData(u8 monId, u8 *dst)
             moveData.pp[size] = GetMonData(&gEnemyParty[monId], MON_DATA_PP1 + size);
         }
         moveData.ppBonuses = GetMonData(&gEnemyParty[monId], MON_DATA_PP_BONUSES);
-        src = (u8*)(&moveData);
+        src = (u8 *)(&moveData);
         for (size = 0; size < sizeof(moveData); size++)
             dst[size] = src[size];
         break;
@@ -1525,7 +1525,7 @@ static void OpponentHandlePrintString(void)
 
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
-    stringId = (u16*)(&gBattleResources->bufferA[gActiveBattler][2]);
+    stringId = (u16 *)(&gBattleResources->bufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
@@ -1558,7 +1558,7 @@ static void OpponentHandleChooseMove(void)
     else
     {
         u8 chosenMoveId;
-        struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
+        struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[gActiveBattler][4]);
 
         if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER)
          || IsWildMonSmart())
@@ -1590,9 +1590,9 @@ static void OpponentHandleChooseMove(void)
                         gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
                         if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
                             gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-                    }                    
+                    }
                     if (ShouldUseZMove(gActiveBattler, gBattlerTarget, chosenMove))
-                        QueueZMove(gActiveBattler, chosenMove);                    
+                        QueueZMove(gActiveBattler, chosenMove);
                     if (CanMegaEvolve(gActiveBattler)) // If opponent can mega evolve, do it.
                         BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
                     else
@@ -1619,7 +1619,7 @@ static void OpponentHandleChooseMove(void)
                 do {
                     target = GetBattlerAtPosition(Random() & 2);
                 } while (!CanTargetBattler(gActiveBattler, target, move));
-                
+
                 #if B_WILD_NATURAL_ENEMIES == TRUE
                 // Don't bother to loop through table if the move can't attack ally
                 if (!(gBattleMoves[move].target & MOVE_TARGET_BOTH))
