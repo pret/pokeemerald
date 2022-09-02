@@ -4630,10 +4630,10 @@ u8 GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 dir)
 {
     u8 direction = dir;
 
-    #if TX_DEBUG_SYSTEM == TRUE
+#if TX_DEBUG_SYSTEM == TRUE
     if (FlagGet(TX_DEBUG_FLAG_NO_COLLISION))
         return COLLISION_NONE;
-    #endif
+#endif
 
     if (IsCoordOutsideObjectEventMovementRange(objectEvent, x, y))
         return COLLISION_OUTSIDE_RANGE;
