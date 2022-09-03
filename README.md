@@ -6,10 +6,10 @@ The pokeemerald Expansion is a collection of feature branches that can be integr
 
 ## What feature branches are included?
 
-- **[Battle Engine Upgrade](../tree/battle_engine):** Upgrades the battle engine in pokeemerald to newer Generation games' standards. It also adds newer moves and abilities.
-- **[Pokémon Expansion](../tree/pokemon_expansion):** Adds Pokémon from newer Generations and makes them available in the National Dex. It also updates base stats and other Pokémon info.
-- **[Item Expansion](../tree/item_expansion):** Adds items from newer Generations and also updates item effects for field use.
-- **[master](../tree/master):** Combines the above branches into one single branch for the sake of convenience. Note that this branch is only updated once in a while, so you must merge manually if you want the latest features.
+- **[Battle Engine Upgrade](../../tree/battle_engine):** Upgrades the battle engine in pokeemerald to newer Generation games' standards. It also adds newer moves and abilities.
+- **[Pokémon Expansion](../../tree/pokemon_expansion):** Adds Pokémon from newer Generations and makes them available in the National Dex. It also updates base stats and other Pokémon info.
+- **[Item Expansion](../../tree/item_expansion):** Adds items from newer Generations and also updates item effects for field use.
+- **[master](../../tree/master):** Combines the above branches into one single branch for the sake of convenience. Note that this branch is only updated once in a while, so you must merge manually if you want the latest features.
 
 ## Who maintains the project?
 
