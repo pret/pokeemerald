@@ -6523,7 +6523,7 @@ const struct SpriteTemplate gSoulStealZStarSpriteTemplate =
 //general
 void AnimTask_IsTargetPartner(u8 taskId)
 {
-    if (gBattleAnimTarget == (gBattleAnimAttacker ^ BIT_FLANK))
+    if (gBattleAnimTarget == BATTLE_PARTNER(gBattleAnimAttacker))
         gBattleAnimArgs[0] = 1;
     else
         gBattleAnimArgs[0] = 0;
