@@ -2,21 +2,25 @@
 
 ## What is the pokeemerald Expansion?
 
-The pokeemerald Expansion is a collection of feature branches that can be integrated into existing [pokeemerald](https://github.com/pret/pokeemerald) projects.
+The Pokeemerald Expansion is a collection of feature branches that can be integrated into existing [pokeemerald](https://github.com/pret/pokeemerald) projects.
 
 ## What features are included?
 - Upgraded battle engine.
     - Fairy Type.
+    - Physical/Special/Status Category Split.
     - New moves and abilities up to SwSh.
     - Options to change behaviors and data by generation.
     - Mega Evolution and Primal Reversion
-    - Z-Moves (TODO: Ultra Burst)
-- Adds Pokémon from newer Generations and makes them available in the National Dex (with the option to disable them if needed).
+    - Z-Moves
+- Pokémon Species from newer Generations (with the option to disable them if needed).
     - Updates Hoenn's Regional Dex to match ORAS'.
+    - Updates National Dex incorporating all the new species.
     - Option to change base stats by generation.
     - New evolution methods.
-    - Hidden Abilities data (How to obtain them is up to the user).
-- Adds items from newer Generations and also updates item effects for field use.
+    - Hidden Abilities data (How to make them available is up to the user).
+- Items from newer Generations and updated item effects for battle and field use.
+
+Certain mechanics, moves, abilities and species sprites are missing. For more information, see [the project's milestones](https://github.com/rh-hideout/pokeemerald-expansion/milestones).
 
 ## Who maintains the project?
 
@@ -26,7 +30,7 @@ The project has now gotten larger and DizzyEgg is now maintaining the project as
 
 ## Can I contribute even if I'm not a member of ROM Hacking Hideout?
 
-Yes! Contributions are welcome via Pull Requests and they will be reviewed by maintainers. Don't feel discouraged if we take a bit to review your PR, we'll get to it
+Yes! Contributions are welcome via Pull Requests and they will be reviewed by maintainers. Don't feel discouraged if we take a bit to review your PR, we'll get to it.
 
 ## What is ROM Hacking Hideout?
 
