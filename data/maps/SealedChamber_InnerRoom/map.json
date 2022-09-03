@@ -20,7 +20,7 @@
       "y": 19,
       "elevation": 3,
       "dest_map": "MAP_SEALED_CHAMBER_OUTER_ROOM",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

@@ -34,14 +34,14 @@
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     },
     {
       "x": 4,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     }
   ],
   "coord_events": [],

@@ -294,49 +294,49 @@
       "y": 25,
       "elevation": 3,
       "dest_map": "MAP_VICTORY_ROAD_B2F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 17,
       "y": 16,
       "elevation": 3,
       "dest_map": "MAP_VICTORY_ROAD_B2F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 42,
       "y": 25,
       "elevation": 3,
       "dest_map": "MAP_VICTORY_ROAD_1F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 42,
       "y": 2,
       "elevation": 4,
       "dest_map": "MAP_VICTORY_ROAD_B2F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 8,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_VICTORY_ROAD_1F",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 20,
       "y": 21,
       "elevation": 3,
       "dest_map": "MAP_VICTORY_ROAD_1F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 5,
       "y": 26,
       "elevation": 3,
       "dest_map": "MAP_VICTORY_ROAD_B2F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [],

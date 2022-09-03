@@ -73,35 +73,35 @@
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_EVER_GRANDE_CITY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 10,
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_EVER_GRANDE_CITY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 9,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_EVER_GRANDE_CITY_HALL5",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 10,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_EVER_GRANDE_CITY_HALL5",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 1,
       "y": 7,
       "elevation": 4,
       "dest_map": "MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

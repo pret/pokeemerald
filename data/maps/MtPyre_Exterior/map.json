@@ -47,21 +47,21 @@
       "y": 42,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 19,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_SUMMIT",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 20,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_SUMMIT",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [

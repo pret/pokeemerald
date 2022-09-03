@@ -99,28 +99,28 @@
       "y": 34,
       "elevation": 3,
       "dest_map": "MAP_JAGGED_PASS",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 25,
       "y": 34,
       "elevation": 3,
       "dest_map": "MAP_MAGMA_HIDEOUT_2F_1R",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 31,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_MAGMA_HIDEOUT_2F_2R",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 20,
       "y": 22,
       "elevation": 0,
       "dest_map": "MAP_MAGMA_HIDEOUT_2F_3R",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

@@ -47,21 +47,21 @@
       "y": 25,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 9,
       "y": 25,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 11,
       "y": 22,
       "elevation": 3,
       "dest_map": "MAP_SOOTOPOLIS_CITY_GYM_B1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

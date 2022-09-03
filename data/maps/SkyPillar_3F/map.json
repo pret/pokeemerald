@@ -20,21 +20,21 @@
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_SKY_PILLAR_2F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 11,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_SKY_PILLAR_4F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 7,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_SKY_PILLAR_4F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

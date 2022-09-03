@@ -47,28 +47,28 @@
       "y": 12,
       "elevation": 3,
       "dest_map": "MAP_ROUTE106",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 35,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_GRANITE_CAVE_B1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 17,
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_GRANITE_CAVE_B1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 5,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_GRANITE_CAVE_STEVENS_ROOM",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

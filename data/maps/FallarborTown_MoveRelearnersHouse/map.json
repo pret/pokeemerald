@@ -34,14 +34,14 @@
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_FALLARBOR_TOWN",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 4,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_FALLARBOR_TOWN",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [],

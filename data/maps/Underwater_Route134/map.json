@@ -20,7 +20,7 @@
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_UNDERWATER_SEALED_CHAMBER",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

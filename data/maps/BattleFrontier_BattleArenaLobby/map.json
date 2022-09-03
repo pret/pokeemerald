@@ -86,7 +86,7 @@
       "y": 12,
       "elevation": 3,
       "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_EAST",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

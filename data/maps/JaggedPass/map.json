@@ -112,35 +112,35 @@
       "y": 40,
       "elevation": 3,
       "dest_map": "MAP_ROUTE112",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 15,
       "y": 40,
       "elevation": 3,
       "dest_map": "MAP_ROUTE112",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 13,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_MT_CHIMNEY",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 14,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_MT_CHIMNEY",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 16,
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_MAGMA_HIDEOUT_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

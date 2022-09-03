@@ -47,28 +47,28 @@
       "y": 30,
       "elevation": 3,
       "dest_map": "MAP_ROUTE125",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 19,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 6,
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 27,
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     }
   ],
   "coord_events": [],

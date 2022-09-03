@@ -26,14 +26,14 @@
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_UNDERWATER_MARINE_CAVE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 45,
       "y": 30,
       "elevation": 0,
       "dest_map": "MAP_UNDERWATER_MARINE_CAVE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

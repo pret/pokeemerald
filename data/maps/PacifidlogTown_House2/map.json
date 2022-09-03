@@ -60,14 +60,14 @@
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_PACIFIDLOG_TOWN",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 5,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_PACIFIDLOG_TOWN",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

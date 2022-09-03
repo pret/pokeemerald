@@ -20,28 +20,28 @@
       "y": 12,
       "elevation": 3,
       "dest_map": "MAP_EVER_GRANDE_CITY_SIDNEYS_ROOM",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 5,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_EVER_GRANDE_CITY_PHOEBES_ROOM",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 4,
       "y": 12,
       "elevation": 3,
       "dest_map": "MAP_EVER_GRANDE_CITY_SIDNEYS_ROOM",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 6,
       "y": 12,
       "elevation": 3,
       "dest_map": "MAP_EVER_GRANDE_CITY_SIDNEYS_ROOM",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

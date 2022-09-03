@@ -60,7 +60,7 @@
       "y": 4,
       "elevation": 3,
       "dest_map": "MAP_MIRAGE_TOWER_3F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

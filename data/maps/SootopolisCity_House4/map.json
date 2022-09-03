@@ -60,14 +60,14 @@
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     },
     {
       "x": 4,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     }
   ],
   "coord_events": [],

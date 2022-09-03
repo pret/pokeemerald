@@ -20,35 +20,35 @@
       "y": 15,
       "elevation": 3,
       "dest_map": "MAP_ROUTE108",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 14,
       "y": 15,
       "elevation": 3,
       "dest_map": "MAP_ROUTE108",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 13,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_CORRIDORS_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 8,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_CORRIDORS_1F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 12,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_CAPTAINS_OFFICE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

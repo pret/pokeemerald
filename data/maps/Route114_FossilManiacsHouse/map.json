@@ -34,21 +34,21 @@
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_ROUTE114",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 5,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_ROUTE114",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 4,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_ROUTE114_FOSSIL_MANIACS_TUNNEL",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

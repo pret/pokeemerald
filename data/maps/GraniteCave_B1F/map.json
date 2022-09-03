@@ -34,49 +34,49 @@
       "y": 13,
       "elevation": 3,
       "dest_map": "MAP_GRANITE_CAVE_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 4,
       "y": 21,
       "elevation": 3,
       "dest_map": "MAP_GRANITE_CAVE_1F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 29,
       "y": 13,
       "elevation": 3,
       "dest_map": "MAP_GRANITE_CAVE_B2F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 28,
       "y": 21,
       "elevation": 3,
       "dest_map": "MAP_GRANITE_CAVE_B2F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 8,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_GRANITE_CAVE_B2F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 12,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_GRANITE_CAVE_B2F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 29,
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_GRANITE_CAVE_B2F",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [],

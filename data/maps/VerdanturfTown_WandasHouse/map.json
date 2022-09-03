@@ -86,14 +86,14 @@
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_VERDANTURF_TOWN",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 8,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_VERDANTURF_TOWN",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [],

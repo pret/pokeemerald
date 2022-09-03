@@ -99,14 +99,14 @@
       "y": 22,
       "elevation": 3,
       "dest_map": "MAP_MAGMA_HIDEOUT_2F_1R",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 36,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_MAGMA_HIDEOUT_1F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

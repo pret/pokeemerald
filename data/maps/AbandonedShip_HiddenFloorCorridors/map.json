@@ -20,42 +20,42 @@
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 6,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 9,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 3,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 6,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     },
     {
       "x": 9,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS",
-      "dest_warp_id": 8
+      "dest_warp_id": "8"
     }
   ],
   "coord_events": [],

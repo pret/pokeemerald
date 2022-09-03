@@ -190,42 +190,42 @@
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_ROUTE104",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 15,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_ROUTE104",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 16,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_ROUTE104",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 17,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_ROUTE104",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 36,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_ROUTE104",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 37,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_ROUTE104",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     }
   ],
   "coord_events": [

@@ -151,21 +151,21 @@
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 10,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY",
-      "dest_warp_id": 13
+      "dest_warp_id": "13"
     },
     {
       "x": 16,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

@@ -138,91 +138,91 @@
       "y": 21,
       "elevation": 3,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_ENTRANCE",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 1,
       "y": 21,
       "elevation": 3,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_ENTRANCE",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 13,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_END",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 13,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_PUZZLE7",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 7,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_PUZZLE7",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 13,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_PUZZLE7",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 4,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_PUZZLE7",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 1,
       "y": 17,
       "elevation": 0,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_PUZZLE7",
-      "dest_warp_id": 8
+      "dest_warp_id": "8"
     },
     {
       "x": 0,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_PUZZLE7",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     },
     {
       "x": 2,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_PUZZLE7",
-      "dest_warp_id": 10
+      "dest_warp_id": "10"
     },
     {
       "x": 4,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_PUZZLE7",
-      "dest_warp_id": 9
+      "dest_warp_id": "9"
     },
     {
       "x": 1,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_PUZZLE7",
-      "dest_warp_id": 12
+      "dest_warp_id": "12"
     },
     {
       "x": 8,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_PUZZLE7",
-      "dest_warp_id": 11
+      "dest_warp_id": "11"
     }
   ],
   "coord_events": [

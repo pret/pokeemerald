@@ -34,7 +34,7 @@
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_NAVEL_ROCK_DOWN11",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

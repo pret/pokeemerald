@@ -164,266 +164,266 @@
       "y": 111,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 5,
       "y": 111,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 1,
       "y": 105,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 7,
       "y": 85,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 6,
       "y": 85,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 7,
       "y": 105,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 1,
       "y": 98,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 2,
       "y": 98,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 1,
       "y": 79,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 10
+      "dest_warp_id": "10"
     },
     {
       "x": 7,
       "y": 79,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 12
+      "dest_warp_id": "12"
     },
     {
       "x": 7,
       "y": 46,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 8
+      "dest_warp_id": "8"
     },
     {
       "x": 6,
       "y": 46,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 8
+      "dest_warp_id": "8"
     },
     {
       "x": 1,
       "y": 59,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 9
+      "dest_warp_id": "9"
     },
     {
       "x": 2,
       "y": 59,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 9
+      "dest_warp_id": "9"
     },
     {
       "x": 1,
       "y": 92,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 16
+      "dest_warp_id": "16"
     },
     {
       "x": 7,
       "y": 92,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 18
+      "dest_warp_id": "18"
     },
     {
       "x": 7,
       "y": 59,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 14
+      "dest_warp_id": "14"
     },
     {
       "x": 6,
       "y": 59,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 14
+      "dest_warp_id": "14"
     },
     {
       "x": 1,
       "y": 72,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 15
+      "dest_warp_id": "15"
     },
     {
       "x": 2,
       "y": 72,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 15
+      "dest_warp_id": "15"
     },
     {
       "x": 7,
       "y": 40,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 24
+      "dest_warp_id": "24"
     },
     {
       "x": 1,
       "y": 53,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 26
+      "dest_warp_id": "26"
     },
     {
       "x": 7,
       "y": 53,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 28
+      "dest_warp_id": "28"
     },
     {
       "x": 1,
       "y": 66,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 30
+      "dest_warp_id": "30"
     },
     {
       "x": 1,
       "y": 20,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 20
+      "dest_warp_id": "20"
     },
     {
       "x": 2,
       "y": 20,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 20
+      "dest_warp_id": "20"
     },
     {
       "x": 7,
       "y": 20,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 21
+      "dest_warp_id": "21"
     },
     {
       "x": 6,
       "y": 20,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 21
+      "dest_warp_id": "21"
     },
     {
       "x": 1,
       "y": 33,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 22
+      "dest_warp_id": "22"
     },
     {
       "x": 2,
       "y": 33,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 22
+      "dest_warp_id": "22"
     },
     {
       "x": 7,
       "y": 33,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 23
+      "dest_warp_id": "23"
     },
     {
       "x": 6,
       "y": 33,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 23
+      "dest_warp_id": "23"
     },
     {
       "x": 7,
       "y": 14,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 34
+      "dest_warp_id": "34"
     },
     {
       "x": 1,
       "y": 27,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 36
+      "dest_warp_id": "36"
     },
     {
       "x": 1,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 32
+      "dest_warp_id": "32"
     },
     {
       "x": 2,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 32
+      "dest_warp_id": "32"
     },
     {
       "x": 7,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 33
+      "dest_warp_id": "33"
     },
     {
       "x": 6,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 33
+      "dest_warp_id": "33"
     }
   ],
   "coord_events": [],

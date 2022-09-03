@@ -86,63 +86,63 @@
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_SS_TIDAL_ROOMS",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 7,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_SS_TIDAL_ROOMS",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 10,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_SS_TIDAL_ROOMS",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 13,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_SS_TIDAL_ROOMS",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 4,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_SS_TIDAL_ROOMS",
-      "dest_warp_id": 8
+      "dest_warp_id": "8"
     },
     {
       "x": 7,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_SS_TIDAL_ROOMS",
-      "dest_warp_id": 9
+      "dest_warp_id": "9"
     },
     {
       "x": 10,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_SS_TIDAL_ROOMS",
-      "dest_warp_id": 10
+      "dest_warp_id": "10"
     },
     {
       "x": 13,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_SS_TIDAL_ROOMS",
-      "dest_warp_id": 11
+      "dest_warp_id": "11"
     },
     {
       "x": 16,
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_SS_TIDAL_LOWER_DECK",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

@@ -138,14 +138,14 @@
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_SLATEPORT_CITY",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 7,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_SLATEPORT_CITY",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [],

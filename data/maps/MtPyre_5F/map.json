@@ -47,35 +47,35 @@
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_6F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 10,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_4F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 1,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_6F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 12,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_4F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 12,
       "y": 12,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_4F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [],

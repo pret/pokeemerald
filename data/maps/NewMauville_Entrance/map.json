@@ -20,14 +20,14 @@
       "y": 6,
       "elevation": 3,
       "dest_map": "MAP_ROUTE110",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 4,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_NEW_MAUVILLE_INSIDE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

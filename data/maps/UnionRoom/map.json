@@ -138,14 +138,14 @@
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_DYNAMIC",
-      "dest_warp_id": 127
+      "dest_warp_id": "WARP_ID_DYNAMIC"
     },
     {
       "x": 8,
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_DYNAMIC",
-      "dest_warp_id": 127
+      "dest_warp_id": "WARP_ID_DYNAMIC"
     }
   ],
   "coord_events": [],

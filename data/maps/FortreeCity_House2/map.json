@@ -47,14 +47,14 @@
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_FORTREE_CITY",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 4,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_FORTREE_CITY",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [],

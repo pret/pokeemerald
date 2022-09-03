@@ -34,7 +34,7 @@
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_EVER_GRANDE_CITY_CHAMPIONS_ROOM",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],
