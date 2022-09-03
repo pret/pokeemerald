@@ -9010,8 +9010,8 @@ extern const u16 gTilesetAnims_BattleDomePals0_1[];
 extern const u16 gTilesetAnims_BattleDomePals0_2[];
 extern const u16 gTilesetAnims_BattleDomePals0_3[];
 
-extern const u32 gBattleArenaJudgementSymbolsGfx[];
-extern const u32 gBattleArenaJudgementSymbolsPalette[];
+extern const u32 gBattleArenaJudgmentSymbolsGfx[];
+extern const u32 gBattleArenaJudgmentSymbolsPalette[];
 
 extern const u32 gBattleWindowTextPalette[];
 

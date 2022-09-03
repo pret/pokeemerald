@@ -162,7 +162,8 @@ static const struct SpritePalette sSpritePalettes_StampShadow[] = {
     {sStampShadowPal8, TAG_STAMP_SHADOW}
 };
 
-static const struct SpriteTemplate sSpriteTemplate_StampShadow = {
+static const struct SpriteTemplate sSpriteTemplate_StampShadow =
+{
     .tileTag = TAG_STAMP_SHADOW,
     .paletteTag = TAG_STAMP_SHADOW,
     .oam = &gOamData_AffineOff_ObjNormal_32x16,
