@@ -52,7 +52,7 @@ Debug_FlagsNotSetMessage::
 Debug_FlagsNotSetMessage_Text:
 	.string "Feature unavailable!\n"
 	.string "Please define a usable flag in:\l"
-	.string "'include/constants/debug{UNDERSCORE}config.h'!$"
+	.string "'include/constants/overworld{UNDERSCORE}config.h'!$"
 
 Debug_Script_1::
 	end
