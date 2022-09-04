@@ -3370,50 +3370,59 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         iv = (value & (MAX_IV_MASK << 10)) >> 10;
         SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
 
-        #if P_LEGENDARY_PERFECT_IVS >= GEN_6
-            if (gBaseStats[species].flags & (FLAG_LEGENDARY | FLAG_MYTHICAL | FLAG_ULTRA_BEAST))
+        if (gBaseStats[species].flags & FLAG_ALL_PERFECT_IVS)
+        {
+            iv = MAX_PER_STAT_IVS;
+            SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
+            SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
+            SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
+            SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
+            SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
+            SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
+        }
+    #if P_LEGENDARY_PERFECT_IVS >= GEN_6
+        else if (gBaseStats[species].flags & (FLAG_LEGENDARY | FLAG_MYTHICAL | FLAG_ULTRA_BEAST))
+        {
+            iv = MAX_PER_STAT_IVS;
+            // Initialize a list of IV indices.
+            for (i = 0; i < NUM_STATS; i++)
             {
-                iv = MAX_PER_STAT_IVS;
-                // Initialize a list of IV indices.
-                for (i = 0; i < NUM_STATS; i++)
-                {
-                    availableIVs[i] = i;
-                }
+                availableIVs[i] = i;
+            }
 
-                // Select the 3 IVs that will be perfected.
-                for (i = 0; i < LEGENDARY_PERFECT_IV_COUNT; i++)
+            // Select the 3 IVs that will be perfected.
+            for (i = 0; i < LEGENDARY_PERFECT_IV_COUNT; i++)
+            {
+                u8 index = Random() % (NUM_STATS - i);
+                selectedIvs[i] = availableIVs[index];
+                RemoveIVIndexFromList(availableIVs, index);
+            }
+            for (i = 0; i < LEGENDARY_PERFECT_IV_COUNT; i++)
+            {
+                switch (selectedIvs[i])
                 {
-                    u8 index = Random() % (NUM_STATS - i);
-                    selectedIvs[i] = availableIVs[index];
-                    RemoveIVIndexFromList(availableIVs, index);
-                }
-                for (i = 0; i < LEGENDARY_PERFECT_IV_COUNT; i++)
-                {
-                    switch (selectedIvs[i])
-                    {
-                        case STAT_HP:
-                            SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
-                            break;
-                        case STAT_ATK:
-                            SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
-                            break;
-                        case STAT_DEF:
-                            SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
-                            break;
-                        case STAT_SPEED:
-                            SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
-                            break;
-                        case STAT_SPATK:
-                            SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
-                            break;
-                        case STAT_SPDEF:
-                            SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
-                            break;
-                    }
+                    case STAT_HP:
+                        SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
+                        break;
+                    case STAT_ATK:
+                        SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
+                        break;
+                    case STAT_DEF:
+                        SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
+                        break;
+                    case STAT_SPEED:
+                        SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
+                        break;
+                    case STAT_SPATK:
+                        SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
+                        break;
+                    case STAT_SPDEF:
+                        SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
+                        break;
                 }
             }
-        #endif
-        
+        }
+    #endif
     }
 
     if (gBaseStats[species].abilities[1])

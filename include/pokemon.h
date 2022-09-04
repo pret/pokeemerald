@@ -323,7 +323,7 @@ struct BaseStats
             u8 safariZoneFleeRate;
             u8 bodyColor : 7;
             u8 noFlip : 1;
-            u8 flags;
+            u16 flags;
 };
 
 #include "constants/battle_config.h"
