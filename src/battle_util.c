@@ -6055,7 +6055,7 @@ u32 IsAbilityPreventingEscape(u32 battlerId)
 #if B_SHADOW_TAG_ESCAPE >= GEN_4
     if ((id = IsAbilityOnOpposingSide(battlerId, ABILITY_SHADOW_TAG)) && GetBattlerAbility(battlerId) != ABILITY_SHADOW_TAG)
 #else
-    if (id = IsAbilityOnOpposingSide(battlerId, ABILITY_SHADOW_TAG))
+    if ((id = IsAbilityOnOpposingSide(battlerId, ABILITY_SHADOW_TAG)))
 #endif
         return id;
     if ((id = IsAbilityOnOpposingSide(battlerId, ABILITY_ARENA_TRAP)) && IsBattlerGrounded(battlerId))
