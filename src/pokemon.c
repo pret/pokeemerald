@@ -3307,7 +3307,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
               | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
               | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
         
-        if (gBaseStats[species].flags & FLAG_SHINY_LOCKED)
+        if (gBaseStats[species].flags & SPECIES_FLAG_SHINY_LOCKED)
         {
             do
             {
@@ -3379,7 +3379,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         iv = (value & (MAX_IV_MASK << 10)) >> 10;
         SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
 
-        if (gBaseStats[species].flags & FLAG_ALL_PERFECT_IVS)
+        if (gBaseStats[species].flags & SPECIES_FLAG_ALL_PERFECT_IVS)
         {
             iv = MAX_PER_STAT_IVS;
             SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
@@ -3390,7 +3390,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
             SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
         }
     #if P_LEGENDARY_PERFECT_IVS >= GEN_6
-        else if (gBaseStats[species].flags & (FLAG_LEGENDARY | FLAG_MYTHICAL | FLAG_ULTRA_BEAST))
+        else if (gBaseStats[species].flags & (SPECIES_FLAG_LEGENDARY | SPECIES_FLAG_MYTHICAL | SPECIES_FLAG_ULTRA_BEAST))
         {
             iv = MAX_PER_STAT_IVS;
             // Initialize a list of IV indices.
@@ -8418,5 +8418,5 @@ void TrySpecialOverworldEvo(void)
 
 bool32 ShouldShowFemaleDifferences(u16 species, u32 personality)
 {
-    return (gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
+    return (gBaseStats[species].flags & SPECIES_FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
 }
