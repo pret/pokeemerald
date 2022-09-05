@@ -3410,24 +3410,24 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
             {
                 switch (selectedIvs[i])
                 {
-                    case STAT_HP:
-                        SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
-                        break;
-                    case STAT_ATK:
-                        SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
-                        break;
-                    case STAT_DEF:
-                        SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
-                        break;
-                    case STAT_SPEED:
-                        SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
-                        break;
-                    case STAT_SPATK:
-                        SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
-                        break;
-                    case STAT_SPDEF:
-                        SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
-                        break;
+                case STAT_HP:
+                    SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
+                    break;
+                case STAT_ATK:
+                    SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
+                    break;
+                case STAT_DEF:
+                    SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
+                    break;
+                case STAT_SPEED:
+                    SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
+                    break;
+                case STAT_SPATK:
+                    SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
+                    break;
+                case STAT_SPDEF:
+                    SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
+                    break;
                 }
             }
         }
