@@ -935,7 +935,7 @@ static void AnimTask_ImprisonOrbs_Step(u8 taskId)
         {
             for (i = 8; i < 13; i++)
             {
-                if (task->data[i] != 64)
+                if (task->data[i] != MAX_SPRITES)
                     DestroySprite(&gSprites[task->data[i]]);
             }
 
@@ -1114,12 +1114,10 @@ void AnimTask_ExtrasensoryDistortion(u8 taskId)
         scanlineParams.dmaDest = &REG_BG2HOFS;
     }
 
-    i = task->data[14];
-    while (i <= task->data[14] + 64)
+    for (i = task->data[14]; i <= task->data[14] + 64; i++)
     {
         gScanlineEffectRegBuffers[0][i] = task->data[10];
         gScanlineEffectRegBuffers[1][i] = task->data[10];
-        i++;
     }
 
     scanlineParams.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
@@ -1254,7 +1252,7 @@ void AnimPsychoBoost(struct Sprite *sprite)
     case 1:
         if (sprite->affineAnimEnded)
         {
-            PlaySE12WithPanning(SE_M_TELEPORT, BattleAnimAdjustPanning(-64));
+            PlaySE12WithPanning(SE_M_TELEPORT, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER));
             ChangeSpriteAffineAnim(sprite, 1);
             sprite->data[0]++;
         }

@@ -3140,6 +3140,7 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].spikyShielded = FALSE;
     gProtectStructs[gActiveBattler].kingsShielded = FALSE;
     gProtectStructs[gActiveBattler].banefulBunkered = FALSE;
+    gProtectStructs[gActiveBattler].quash = FALSE;
     gProtectStructs[gActiveBattler].obstructed = FALSE;
     gProtectStructs[gActiveBattler].endured = FALSE;
     gProtectStructs[gActiveBattler].noValidMoves = FALSE;
@@ -4527,6 +4528,9 @@ s8 GetMovePriority(u32 battlerId, u16 move)
         }
     }
 
+    if (gProtectStructs[battlerId].quash)
+        priority = -8;
+
     return priority;
 }
 
@@ -4747,6 +4751,7 @@ static void TurnValuesCleanUp(bool8 var0)
             gProtectStructs[gActiveBattler].spikyShielded = FALSE;
             gProtectStructs[gActiveBattler].kingsShielded = FALSE;
             gProtectStructs[gActiveBattler].banefulBunkered = FALSE;
+            gProtectStructs[gActiveBattler].quash = FALSE;
         }
         else
         {

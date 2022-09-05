@@ -267,8 +267,8 @@ static void DisplayPartyPokemonMaxHPCheck(struct Pokemon *, struct PartyMenuBox 
 static void DisplayPartyPokemonHPBarCheck(struct Pokemon *, struct PartyMenuBox *);
 static void DisplayPartyPokemonDescriptionText(u8, struct PartyMenuBox *, u8);
 static bool8 IsMonAllowedInMinigame(u8);
-static void DisplayPartyPokemonDataToTeachMove(u8, u16, u8);
-static u8 CanMonLearnTMTutor(struct Pokemon *, u16, u8);
+static void DisplayPartyPokemonDataToTeachMove(u8, u16);
+static u8 CanTeachMove(struct Pokemon *, u16);
 static void DisplayPartyPokemonBarDetail(u8, const u8 *, u8, const u8 *);
 static void DisplayPartyPokemonLevel(u8, struct PartyMenuBox *);
 static void DisplayPartyPokemonGender(u8, u16, u8 *, struct PartyMenuBox *);
@@ -328,8 +328,6 @@ static bool16 IsMonAllowedInPokemonJump(struct Pokemon *);
 static bool16 IsMonAllowedInDodrioBerryPicking(struct Pokemon *);
 static void Task_CancelParticipationYesNo(u8);
 static void Task_HandleCancelParticipationYesNoInput(u8);
-static bool8 CanLearnTutorMove(u16, u8);
-static u16 GetTutorMove(u8);
 static bool8 ShouldUseChooseMonText(void);
 static void SetPartyMonFieldSelectionActions(struct Pokemon *, u8);
 static u8 GetPartyMenuActionsTypeInBattle(struct Pokemon *);
@@ -481,7 +479,6 @@ static bool8 SetUpFieldMove_Dive(void);
 void TryItemHoldFormChange(struct Pokemon *mon);
 
 // static const data
-#include "data/pokemon/tutor_learnsets.h"
 #include "data/party_menu.h"
 
 // code
@@ -975,7 +972,7 @@ static bool8 DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(u8 slot)
     if (gPartyMenu.action == PARTY_ACTION_MOVE_TUTOR)
     {
         gSpecialVar_Result = FALSE;
-        DisplayPartyPokemonDataToTeachMove(slot, 0, gSpecialVar_0x8005);
+        DisplayPartyPokemonDataToTeachMove(slot, gSpecialVar_0x8005);
     }
     else
     {
@@ -987,7 +984,7 @@ static bool8 DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(u8 slot)
         default:
             return FALSE;
         case 1: // TM/HM
-            DisplayPartyPokemonDataToTeachMove(slot, item, 0);
+            DisplayPartyPokemonDataToTeachMove(slot, ItemIdToBattleMoveId(item));
             break;
         case 2: // Evolution stone
             if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, EVO_MODE_ITEM_CHECK, item, NULL) != SPECIES_NONE)
@@ -999,9 +996,9 @@ static bool8 DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(u8 slot)
     return TRUE;
 }
 
-static void DisplayPartyPokemonDataToTeachMove(u8 slot, u16 item, u8 tutor)
+static void DisplayPartyPokemonDataToTeachMove(u8 slot, u16 move)
 {
-    switch (CanMonLearnTMTutor(&gPlayerParty[slot], item, tutor))
+    switch (CanTeachMove(&gPlayerParty[slot], move))
     {
     case CANNOT_LEARN_MOVE:
     case CANNOT_LEARN_MOVE_IS_EGG:
@@ -2031,45 +2028,16 @@ static void Task_HandleCancelParticipationYesNoInput(u8 taskId)
     }
 }
 
-static u8 CanMonLearnTMTutor(struct Pokemon *mon, u16 item, u8 tutor)
+static u8 CanTeachMove(struct Pokemon *mon, u16 move)
 {
-    u16 move;
-
     if (GetMonData(mon, MON_DATA_IS_EGG))
         return CANNOT_LEARN_MOVE_IS_EGG;
-
-    if (item >= ITEM_TM01)
-    {
-        if (!CanMonLearnTMHM(mon, item - ITEM_TM01 - ((item > ITEM_TM100) ? 50 : 0)))
-            return CANNOT_LEARN_MOVE;
-        else
-            move = ItemIdToBattleMoveId(item);
-    }
-    else
-    {
-        if (!CanLearnTutorMove(GetMonData(mon, MON_DATA_SPECIES), tutor))
-            return CANNOT_LEARN_MOVE;
-        else
-            move = GetTutorMove(tutor);
-    }
-
-    if (MonKnowsMove(mon, move) == TRUE)
+    else if (!CanLearnTeachableMove(GetMonData(mon, MON_DATA_SPECIES2), move))
+        return CANNOT_LEARN_MOVE;
+    else if (MonKnowsMove(mon, move) == TRUE)
         return ALREADY_KNOWS_MOVE;
     else
         return CAN_LEARN_MOVE;
-}
-
-static u16 GetTutorMove(u8 tutor)
-{
-    return gTutorMoves[tutor];
-}
-
-static bool8 CanLearnTutorMove(u16 species, u8 tutor)
-{
-    if (sTutorLearnsets[species] & (1 << tutor))
-        return TRUE;
-    else
-        return FALSE;
 }
 
 static void InitPartyMenuWindows(u8 layout)
@@ -4954,19 +4922,18 @@ static void DisplayLearnMoveMessageAndClose(u8 taskId, const u8 *str)
 void ItemUseCB_TMHM(u8 taskId, TaskFunc task)
 {
     struct Pokemon *mon;
-    s16 *move;
-    u16 item;
+    u16 item = gSpecialVar_ItemId;
+    u16 move = ItemIdToBattleMoveId(item);
+
+    gPartyMenu.data1 = move;
 
     PlaySE(SE_SELECT);
     mon = &gPlayerParty[gPartyMenu.slotId];
-    move = &gPartyMenu.data1;
-    item = gSpecialVar_ItemId;
-    GetMonNickname(mon, gStringVar1);
-    move[0] = ItemIdToBattleMoveId(item);
-    StringCopy(gStringVar2, gMoveNames[move[0]]);
-    move[1] = 0;
 
-    switch (CanMonLearnTMTutor(mon, item, 0))
+    GetMonNickname(mon, gStringVar1);
+    StringCopy(gStringVar2, gMoveNames[move]);
+
+    switch (CanTeachMove(mon, move))
     {
     case CANNOT_LEARN_MOVE:
         DisplayLearnMoveMessageAndClose(taskId, gText_PkmnCantLearnMove);
@@ -4976,7 +4943,7 @@ void ItemUseCB_TMHM(u8 taskId, TaskFunc task)
         return;
     }
 
-    if (GiveMoveToMon(mon, move[0]) != MON_HAS_MAX_MOVES)
+    if (GiveMoveToMon(mon, move) != MON_HAS_MAX_MOVES)
     {
         gTasks[taskId].func = Task_LearnedMove;
     }
@@ -5727,10 +5694,10 @@ static void TryTutorSelectedMon(u8 taskId)
         mon = &gPlayerParty[gPartyMenu.slotId];
         move = &gPartyMenu.data1;
         GetMonNickname(mon, gStringVar1);
-        gPartyMenu.data1 = GetTutorMove(gSpecialVar_0x8005);
+        gPartyMenu.data1 = gSpecialVar_0x8005;
         StringCopy(gStringVar2, gMoveNames[gPartyMenu.data1]);
         move[1] = 2;
-        switch (CanMonLearnTMTutor(mon, 0, gSpecialVar_0x8005))
+        switch (CanTeachMove(mon, gPartyMenu.data1))
         {
         case CANNOT_LEARN_MOVE:
             DisplayLearnMoveMessageAndClose(taskId, gText_PkmnCantLearnMove);

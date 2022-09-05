@@ -869,7 +869,7 @@ static void PetalburgGymSetDoorMetatiles(u8 roomNumber, u16 metatileId)
     for (i = 0; i < nDoors; i++)
     {
         MapGridSetMetatileIdAt(doorCoordsX[i] + MAP_OFFSET, doorCoordsY[i] + MAP_OFFSET, metatileId | MAPGRID_COLLISION_MASK);
-        MapGridSetMetatileIdAt(doorCoordsX[i] + MAP_OFFSET, doorCoordsY[i] + MAP_OFFSET + 1, (metatileId + 8) | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(doorCoordsX[i] + MAP_OFFSET, doorCoordsY[i] + MAP_OFFSET + 1, (metatileId + METATILE_ROW_WIDTH) | MAPGRID_COLLISION_MASK);
     }
     DrawWholeMapView();
 }
@@ -2973,40 +2973,9 @@ static void HideFrontierExchangeCornerItemIcon(u16 menu, u16 unused)
     }
 }
 
-static const u16 sBattleFrontier_TutorMoves1[] =
-{
-    MOVE_SOFT_BOILED,
-    MOVE_SEISMIC_TOSS,
-    MOVE_DREAM_EATER,
-    MOVE_MEGA_PUNCH,
-    MOVE_MEGA_KICK,
-    MOVE_BODY_SLAM,
-    MOVE_ROCK_SLIDE,
-    MOVE_COUNTER,
-    MOVE_THUNDER_WAVE,
-    MOVE_SWORDS_DANCE
-};
-
-static const u16 sBattleFrontier_TutorMoves2[] =
-{
-    MOVE_DEFENSE_CURL,
-    MOVE_SNORE,
-    MOVE_MUD_SLAP,
-    MOVE_SWIFT,
-    MOVE_ICY_WIND,
-    MOVE_ENDURE,
-    MOVE_PSYCH_UP,
-    MOVE_ICE_PUNCH,
-    MOVE_THUNDER_PUNCH,
-    MOVE_FIRE_PUNCH
-};
-
 void BufferBattleFrontierTutorMoveName(void)
 {
-    if (gSpecialVar_0x8005 != 0)
-        StringCopy(gStringVar1, gMoveNames[sBattleFrontier_TutorMoves2[gSpecialVar_0x8004]]);
-    else
-        StringCopy(gStringVar1, gMoveNames[sBattleFrontier_TutorMoves1[gSpecialVar_0x8004]]);
+    StringCopy(gStringVar1, gMoveNames[gSpecialVar_0x8005]);
 }
 
 static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
@@ -3099,44 +3068,6 @@ void ScrollableMultichoice_RedrawPersistentMenu(void)
         AddTextPrinterParameterized(task->tWindowId, FONT_NORMAL, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SKIP_DRAW, NULL);
         PutWindowTilemap(task->tWindowId);
         CopyWindowToVram(task->tWindowId, COPYWIN_FULL);
-    }
-}
-
-void GetBattleFrontierTutorMoveIndex(void)
-{
-    u8 i;
-    u16 moveTutor = 0;
-    u16 moveIndex = 0;
-    gSpecialVar_0x8005 = 0;
-
-    moveTutor = VarGet(VAR_TEMP_E);
-    moveIndex = VarGet(VAR_TEMP_D);
-
-    if (moveTutor != 0)
-    {
-        i = 0;
-        do
-        {
-            if (gTutorMoves[i] == sBattleFrontier_TutorMoves2[moveIndex])
-            {
-                gSpecialVar_0x8005 = i;
-                break;
-            }
-            i++;
-        } while (i < TUTOR_MOVE_COUNT);
-    }
-    else
-    {
-        i = 0;
-        do
-        {
-            if (gTutorMoves[i] == sBattleFrontier_TutorMoves1[moveIndex])
-            {
-                gSpecialVar_0x8005 = i;
-                break;
-            }
-            i++;
-        } while (i < TUTOR_MOVE_COUNT);
     }
 }
 
