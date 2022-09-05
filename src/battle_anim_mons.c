@@ -896,7 +896,7 @@ u8 GetBattlerSide(u8 battlerId)
 
 u8 GetBattlerPosition(u8 battlerId)
 {
-    return GET_BATTLER_POSITION(battlerId);
+    return gBattlerPositions[battlerId];
 }
 
 u8 GetBattlerAtPosition(u8 position)
