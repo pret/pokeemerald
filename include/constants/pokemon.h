@@ -351,6 +351,7 @@
 #define FLAG_HISUIAN_FORM       (1 << 5)
 #define FLAG_GENDER_DIFFERENCE  (1 << 6)
 #define FLAG_ALL_PERFECT_IVS    (1 << 7)
+#define FLAG_SHINY_LOCKED       (1 << 8)
 
 #define LEGENDARY_PERFECT_IV_COUNT 3
 
