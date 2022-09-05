@@ -262,7 +262,7 @@
         .abilities = {ABILITY_MULTITYPE, ABILITY_NONE},\
         .bodyColor = BODY_COLOR_WHITE,                 \
         .noFlip = FALSE,                               \
-        .flags = SPECIES_FLAG_MYTHICAL,                        \
+        .flags = SPECIES_FLAG_MYTHICAL,                \
     }
 
 #define DEERLING_BASE_STATS(color)                                                   \
@@ -337,7 +337,7 @@
         .abilities = {ABILITY_DOWNLOAD, ABILITY_NONE},\
         .bodyColor = BODY_COLOR_PURPLE,               \
         .noFlip = FALSE,                              \
-        .flags = SPECIES_FLAG_MYTHICAL,                       \
+        .flags = SPECIES_FLAG_MYTHICAL,               \
     }
 
 #define VIVILLON_BASE_STATS(color)                                                      \
@@ -516,7 +516,7 @@
         .abilities = {ABILITY_FAIRY_AURA, ABILITY_NONE},\
         .bodyColor = BODY_COLOR_BLUE,                   \
         .noFlip = FALSE,                                \
-        .flags = SPECIES_FLAG_LEGENDARY,                        \
+        .flags = SPECIES_FLAG_LEGENDARY,                \
     }
 
 #define ZYGARDE_50_BASE_STATS(ability)       \
@@ -541,7 +541,7 @@
         .abilities = {ability, ABILITY_NONE},\
         .bodyColor = BODY_COLOR_GREEN,       \
         .noFlip = TRUE,                      \
-        .flags = SPECIES_FLAG_LEGENDARY,             \
+        .flags = SPECIES_FLAG_LEGENDARY,     \
     }
 
 #define ZYGARDE_10_BASE_STATS(ability)       \
@@ -566,7 +566,7 @@
         .abilities = {ability, ABILITY_NONE},\
         .bodyColor = BODY_COLOR_BLACK,       \
         .noFlip = TRUE,                      \
-        .flags = SPECIES_FLAG_LEGENDARY,             \
+        .flags = SPECIES_FLAG_LEGENDARY,     \
     }
 
 #define ORICORIO_BASE_STATS(type, color)            \
@@ -640,7 +640,7 @@
         .abilities = {ABILITY_RKS_SYSTEM, ABILITY_NONE},\
         .bodyColor = BODY_COLOR_GRAY,                   \
         .noFlip = FALSE,                                \
-        .flags = SPECIES_FLAG_LEGENDARY,                        \
+        .flags = SPECIES_FLAG_LEGENDARY,                \
     }
 
 #define MINIOR_METEOR_ATTRIBUTES\
@@ -737,7 +737,7 @@
         .abilities = {ABILITY_SOUL_HEART, ABILITY_NONE},\
         .bodyColor = color,                             \
         .noFlip = FALSE,                                \
-        .flags = SPECIES_FLAG_MYTHICAL,                         \
+        .flags = SPECIES_FLAG_MYTHICAL,                 \
     }
 
 #define CRAMORANT_BASE_STATS                              \
@@ -906,7 +906,7 @@
         .abilities = {ABILITY_LEAF_GUARD, ABILITY_NONE},\
         .bodyColor = BODY_COLOR_GREEN,                  \
         .noFlip = FALSE,                                \
-        .flags = SPECIES_FLAG_MYTHICAL,                         \
+        .flags = SPECIES_FLAG_MYTHICAL,                 \
     }
 
 const struct BaseStats gBaseStats[] =
