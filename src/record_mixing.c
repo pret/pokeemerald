@@ -444,7 +444,7 @@ static void Task_MixingRecordsRecv(u8 taskId)
         }
         break;
     case 1: // wait for handshake
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
         {
             ConvertIntToDecimalStringN(gStringVar1, GetMultiplayerId_(), STR_CONV_MODE_LEADING_ZEROS, 2);
             task->tState = 5;

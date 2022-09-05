@@ -660,18 +660,12 @@ static void PrepareBufferDataTransfer(u8 bufferId, u8 *data, u16 size)
         switch (bufferId)
         {
         case BUFFER_A:
-            for (i = 0; i < size; i++)
-            {
+            for (i = 0; i < size; data++, i++)
                 gBattleBufferA[gActiveBattler][i] = *data;
-                data++;
-            }
             break;
         case BUFFER_B:
-            for (i = 0; i < size; i++)
-            {
+            for (i = 0; i < size; data++, i++)
                 gBattleBufferB[gActiveBattler][i] = *data;
-                data++;
-            }
             break;
         }
     }
@@ -808,8 +802,7 @@ static void Task_HandleSendLinkBuffersData(u8 taskId)
         }
         break;
     case 5:
-        gTasks[taskId].data[13]--;
-        if (gTasks[taskId].data[13] == 0)
+        if (--gTasks[taskId].data[13] == 0)
         {
             gTasks[taskId].data[13] = 1;
             gTasks[taskId].data[11] = 3;
@@ -824,7 +817,7 @@ void TryReceiveLinkBattleData(void)
     s32 j;
     u8 *recvBuffer;
 
-    if (gReceivedRemoteLinkPlayers != 0 && (gBattleTypeFlags & BATTLE_TYPE_LINK_IN_BATTLE))
+    if (gReceivedRemoteLinkPlayers && (gBattleTypeFlags & BATTLE_TYPE_LINK_IN_BATTLE))
     {
         DestroyTask_RfuIdle();
         for (i = 0; i < GetLinkPlayerCount(); i++)

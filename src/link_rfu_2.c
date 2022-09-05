@@ -1115,7 +1115,7 @@ static void RfuHandleReceiveCommand(u8 unused)
                 {
                     gRfu.recvBlock[i].receiving = RECV_STATE_FINISHED;
                     Rfu_SetBlockReceivedFlag(i);
-                    if (GetHostRfuGameData()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM) && gReceivedRemoteLinkPlayers != 0 && gRfu.parentChild == MODE_CHILD)
+                    if (GetHostRfuGameData()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM) && gReceivedRemoteLinkPlayers && gRfu.parentChild == MODE_CHILD)
                         ValidateAndReceivePokemonSioInfo(gBlockRecvBuffer);
                 }
             }
