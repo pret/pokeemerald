@@ -132,10 +132,10 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
         input->dpadDirection = DIR_EAST;
 
 #if DEBUG_SYSTEM_ENABLE == TRUE && DEBUG_SYSTEM_IN_MENU == FALSE
-    if ((heldKeys & R_BUTTON) && input->pressedStartButton)
+    if ((heldKeys & DEBUG_SYSTEM_HELD_KEYS) && input->DEBUG_SYSTEM_TRIGGER_EVENT)
     {
         input->input_field_1_2 = TRUE;
-        input->pressedStartButton = FALSE;
+        input->DEBUG_SYSTEM_TRIGGER_EVENT = FALSE;
     }
 #endif
 }
