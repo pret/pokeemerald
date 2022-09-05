@@ -192,10 +192,8 @@ bool8 CheckForTrainersWantingBattle(void)
 {
     u8 i;
 
-#if DEBUG_SYSTEM_ENABLE == TRUE
-    if (FlagGet(DEBUG_FLAG_NO_TRAINER_SEE))
+    if (FlagGet(OW_FLAG_NO_TRAINER_SEE))
         return FALSE;
-#endif
 
     gNoOfApproachingTrainers = 0;
     gApproachingTrainerId = 0;
