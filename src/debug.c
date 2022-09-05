@@ -128,7 +128,6 @@ enum { //Sound
     DEBUG_SOUND_MENU_ITEM_MUS,
 };
 
-
 // *******************************
 // Constants
 #define DEBUG_MAIN_MENU_WIDTH 15
