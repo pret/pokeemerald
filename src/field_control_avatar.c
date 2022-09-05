@@ -686,10 +686,8 @@ void RestartWildEncounterImmunitySteps(void)
 
 static bool8 CheckStandardWildEncounter(u16 metatileBehavior)
 {
-#if DEBUG_SYSTEM_ENABLE == TRUE
-    if (FlagGet(DEBUG_FLAG_NO_ENCOUNTER))
+    if (FlagGet(OW_FLAG_NO_ENCOUNTER))
         return FALSE;
-#endif
 
     if (sWildEncounterImmunitySteps < 4)
     {
