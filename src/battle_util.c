@@ -7913,7 +7913,7 @@ u8 GetBattleMonMoveSlot(struct BattlePokemon *battleMon, u16 move)
 {
     u8 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (battleMon->moves[i] == move)
             break;
@@ -8135,7 +8135,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         basePower = 10 * (gBattleMons[battlerAtk].friendship) / 25;
         break;
     case EFFECT_FRUSTRATION:
-        basePower = 10 * (255 - gBattleMons[battlerAtk].friendship) / 25;
+        basePower = 10 * (MAX_FRIENDSHIP - gBattleMons[battlerAtk].friendship) / 25;
         break;
     case EFFECT_FURY_CUTTER:
         for (i = 1; i < gDisableStructs[battlerAtk].furyCutterCounter; i++)

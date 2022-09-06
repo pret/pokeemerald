@@ -2978,6 +2978,102 @@ static const u8 sEerieSpellDescription[] = _(
     "Attacks with psychic power.\n"
     "Foe's last move has 3 PP cut.");
 
+static const u8 sDireClawDescription[] = _(
+    "High critical hit chance. May\n"
+    "paralyze, poison or drowse.");
+
+static const u8 sPsyshieldBashDescription[] = _(
+    "Hits a foe with psychic\n"
+    "energy. May raise Defense.");
+
+static const u8 sPowerShiftDescription[] = _(
+    "The user swaps its offensive\n"
+    "and defensive stats.");
+
+static const u8 sStoneAxeDescription[] = _(
+    "High critical hit ratio. Sets\n"
+    "Splinters that hurt the foe.");
+
+static const u8 sSpringtideStormDescription[] = _(
+    "Wraps a foe in fierce winds.\n"
+    "Varies with the user's form.");
+
+static const u8 sMysticalPowerDescription[] = _(
+    "Increases the user's better\n"
+    "of Atk. and Def. stats.");
+
+static const u8 sRagingFuryDescription[] = _(
+    "Viciously spews flames at\n"
+    "a foe, becoming fixated.");
+
+static const u8 sWaveCrashDescription[] = _(
+    "A water slam. Hurts the user\n"
+    "and raises its Action Speed.");
+
+static const u8 sChloroblastDescription[] = _(
+    "An blast that hurts the user\n"
+    "and lowers its Action Speed.");
+
+static const u8 sMountainGaleDescription[] = _(
+    "The user hurls giant chunks\n"
+    "of ice to damage the foe.");
+
+static const u8 sVictoryDanceDescription[] = _(
+    "Dances to raise damage 50%,\n"
+    "plus offenses and defenses.");
+
+static const u8 sHeadlongRushDescription[] = _(
+    "Hits with a full-body tackle,\n"
+    "lowering the foe's Defense.");
+
+static const u8 sBarbBarrageDescription[] = _(
+    "Can poison on impact. Powers\n"
+    "up if the foe has an ailment.");
+
+static const u8 sEsperWingDescription[] = _(
+    "High critical hit ratio.\n"
+    "Ups the user's Action Speed.");
+
+static const u8 sBitterMaliceDescription[] = _(
+    "Hurts a foe harder if it has\n"
+    "an ailment. Can give FrstBte.");
+
+static const u8 sShelterDescription[] = _(
+    "The user hardens their skin\n"
+    "and obscures itself.");
+
+static const u8 sTripleArrowsDescription[] = _(
+    "Ups critical-hit ratio for 3\n"
+    "turns. Lowers foe Defenses.");
+
+static const u8 sInfernalParadeDescription[] = _(
+    "Hurts a foe harder if it has\n"
+    "an ailment. May leave a burn.");
+
+static const u8 sCeaselessEdgeDescription[] = _(
+    "High critical hit ratio. Sets\n"
+    "Splinters that hurt the foe.");
+
+static const u8 sBleakwindStormDescription[] = _(
+    "Hits with brutal, cold winds.\n"
+    "May inflict frostbite.");
+
+static const u8 sWildboltStormDescription[] = _(
+    "Hits with a brutal tempest.\n"
+    "May inflict paralysis.");
+
+static const u8 sSandsearStormDescription[] = _(
+    "Hits with brutally hot sand.\n"
+    "May inflict a burn.");
+
+static const u8 sLunarBlessingDescription[] = _(
+    "The user heals themself and\n"
+    "conceals their presence.");
+
+static const u8 sTakeHeartDescription[] = _(
+    "The user lifts its spirits to\n"
+    "heal and strengthen itself.");
+
 const u8 gNotDoneYetDescription[] = _(
     "This move can't be used. Its\n"
     "effect is in development.");
@@ -3741,4 +3837,28 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_GLACIAL_LANCE - 1] = sGlacialLanceDescription,
     [MOVE_ASTRAL_BARRAGE - 1] = sAstralBarrageDescription,
     [MOVE_EERIE_SPELL - 1] = sEerieSpellDescription,
+    [MOVE_DIRE_CLAW - 1] = sDireClawDescription,
+    [MOVE_PSYSHIELD_BASH - 1] = sPsyshieldBashDescription,
+    [MOVE_POWER_SHIFT - 1] = sPowerShiftDescription,
+    [MOVE_STONE_AXE - 1] = sStoneAxeDescription,
+    [MOVE_SPRINGTIDE_STORM - 1] = sSpringtideStormDescription,
+    [MOVE_MYSTICAL_POWER - 1] = sMysticalPowerDescription,
+    [MOVE_RAGING_FURY - 1] = sRagingFuryDescription,
+    [MOVE_WAVE_CRASH - 1] = sWaveCrashDescription,
+    [MOVE_CHLOROBLAST - 1] = sChloroblastDescription,
+    [MOVE_MOUNTAIN_GALE - 1] = sMountainGaleDescription,
+    [MOVE_VICTORY_DANCE - 1] = sVictoryDanceDescription,
+    [MOVE_HEADLONG_RUSH - 1] = sHeadlongRushDescription,
+    [MOVE_BARB_BARRAGE - 1] = sBarbBarrageDescription,
+    [MOVE_ESPER_WING - 1] = sEsperWingDescription,
+    [MOVE_BITTER_MALICE - 1] = sBitterMaliceDescription,
+    [MOVE_SHELTER - 1] = sShelterDescription,
+    [MOVE_TRIPLE_ARROWS - 1] = sTripleArrowsDescription,
+    [MOVE_INFERNAL_PARADE - 1] = sInfernalParadeDescription,
+    [MOVE_CEASELESS_EDGE - 1] = sCeaselessEdgeDescription,
+    [MOVE_BLEAKWIND_STORM - 1] = sBleakwindStormDescription,
+    [MOVE_WILDBOLT_STORM - 1] = sWildboltStormDescription,
+    [MOVE_SANDSEAR_STORM - 1] = sSandsearStormDescription,
+    [MOVE_LUNAR_BLESSING - 1] = sLunarBlessingDescription,
+    [MOVE_TAKE_HEART - 1] = sTakeHeartDescription,
 };
