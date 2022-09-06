@@ -22,11 +22,15 @@ The Pokeemerald Expansion is a collection of feature branches that can be integr
 
 Certain mechanics, moves, abilities and species sprites are missing. For more information, see [the project's milestones](https://github.com/rh-hideout/pokeemerald-expansion/milestones).
 
+### [Documentation on features can be found here](https://github.com/rh-hideout/pokeemerald-expansion/wiki)
+
 ## Who maintains the project?
 
 The project was originally started by DizzyEgg alongside other contributors.
 
 The project has now gotten larger and DizzyEgg is now maintaining the project as part of the ROM Hacking Hideout community. Some members of this community are taking on larger roles to help maintain the project.
+
+### Please consider crediting the entire [list of contributors](https://github.com/rh-hideout/pokeemerald-expansion/wiki/Credits) in your project, as they have all worked hard to develop this project :)
 
 ## Can I contribute even if I'm not a member of ROM Hacking Hideout?
 
