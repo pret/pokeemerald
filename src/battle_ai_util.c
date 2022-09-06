@@ -3248,7 +3248,7 @@ s32 CountUsablePartyMons(u8 battlerId)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         battlerOnField1 = gBattlerPartyIndexes[battlerId];
-        battlerOnField2 = gBattlerPartyIndexes[GetBattlerAtPosition(GetBattlerPosition(battlerId) ^ BIT_FLANK)];
+        battlerOnField2 = gBattlerPartyIndexes[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battlerId)))];
     }
     else // In singles there's only one battlerId by side.
     {

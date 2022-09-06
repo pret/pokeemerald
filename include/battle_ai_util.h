@@ -5,7 +5,7 @@
 #define AI_IS_FASTER   0
 #define AI_IS_SLOWER   1
 
-#define FOE(battler) ((battler ^ BIT_SIDE) & BIT_SIDE)
+#define FOE(battler) ((BATTLE_OPPOSITE(battler)) & BIT_SIDE)
 
 bool32 AI_RandLessThan(u8 val);
 void RecordLastUsedMoveByTarget(void);
