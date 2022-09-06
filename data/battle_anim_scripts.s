@@ -1,3 +1,4 @@
+#include "config.h"
 #include "constants/battle.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
@@ -779,6 +780,31 @@ gBattleAnims_Moves::
 	.4byte Move_GLACIAL_LANCE
 	.4byte Move_ASTRAL_BARRAGE
 	.4byte Move_EERIE_SPELL
+@@@@LA MOVES
+	.4byte Move_DIRE_CLAW
+	.4byte Move_PSYSHIELD_BASH
+	.4byte Move_POWER_SHIFT
+	.4byte Move_STONE_AXE
+	.4byte Move_SPRINGTIDE_STORM
+	.4byte Move_MYSTICAL_POWER
+	.4byte Move_RAGING_FURY
+	.4byte Move_WAVE_CRASH
+	.4byte Move_CHLOROBLAST
+	.4byte Move_MOUNTAIN_GALE
+	.4byte Move_VICTORY_DANCE
+	.4byte Move_HEADLONG_RUSH
+	.4byte Move_BARB_BARRAGE
+	.4byte Move_ESPER_WING
+	.4byte Move_BITTER_MALICE
+	.4byte Move_SHELTER
+	.4byte Move_TRIPLE_ARROWS
+	.4byte Move_INFERNAL_PARADE
+	.4byte Move_CEASELESS_EDGE
+	.4byte Move_BLEAKWIND_STORM
+	.4byte Move_WILDBOLT_STORM
+	.4byte Move_SANDSEAR_STORM
+	.4byte Move_LUNAR_BLESSING
+	.4byte Move_TAKE_HEART
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
 	.4byte Move_ALL_OUT_PUMMELING
@@ -868,7 +894,8 @@ gBattleAnims_General::
 	.4byte General_AquaRingHeal             @ B_ANIM_AQUA_RING_HEAL
 	.4byte General_BeakBlastSetUp           @ B_ANIM_BEAK_BLAST_SETUP
 	.4byte General_ShellTrapSetUp           @ B_ANIM_SHELL_TRAP_SETUP
-	.4byte General_ZMoveActivate			@ B_ANIM_ZMOVE_ACTIVATE
+	.4byte General_ZMoveActivate            @ B_ANIM_ZMOVE_ACTIVATE
+	.4byte General_AffectionHangedOn        @ B_ANIM_AFFECTION_HANGED_ON
 
 	.align 2
 gBattleAnims_Special::
@@ -14269,55 +14296,51 @@ Move_POLTERGEIST::
 	end
 
 Move_CORROSIVE_GAS::
-	end @to do:
-
 Move_COACHING::
-	end @to do:
-
 Move_FLIP_TURN::
-	end @to do:
-
 Move_TRIPLE_AXEL::
-	end @to do:
-
 Move_DUAL_WINGBEAT::
-	end @to do:
-
 Move_SCORCHING_SANDS::
-	end @to do:
+	end @to do
 
 Move_JUNGLE_HEALING::
 	goto Move_AROMATHERAPY
 
 Move_WICKED_BLOW::
-	end @to do:
-
 Move_SURGING_STRIKES::
-	end @to do:
-
 Move_THUNDER_CAGE::
-	end @to do:
-
 Move_DRAGON_ENERGY::
-	end @to do:
-
 Move_FREEZING_GLARE::
-	end @to do:
-
 Move_FIERY_WRATH::
-	end @to do:
-
 Move_THUNDEROUS_KICK::
-	end @to do:
-
 Move_GLACIAL_LANCE::
-	end @to do:
-
 Move_ASTRAL_BARRAGE::
-	end @to do:
-
 Move_EERIE_SPELL::
-	end @to do:
+Move_DIRE_CLAW::
+Move_PSYSHIELD_BASH::
+Move_POWER_SHIFT::
+Move_STONE_AXE::
+Move_SPRINGTIDE_STORM::
+Move_MYSTICAL_POWER::
+Move_RAGING_FURY::
+Move_WAVE_CRASH::
+Move_CHLOROBLAST::
+Move_MOUNTAIN_GALE::
+Move_VICTORY_DANCE::
+Move_HEADLONG_RUSH::
+Move_BARB_BARRAGE::
+Move_ESPER_WING::
+Move_BITTER_MALICE::
+Move_SHELTER::
+Move_TRIPLE_ARROWS::
+Move_INFERNAL_PARADE::
+Move_CEASELESS_EDGE::
+Move_BLEAKWIND_STORM::
+Move_WILDBOLT_STORM::
+Move_SANDSEAR_STORM::
+Move_LUNAR_BLESSING::
+Move_TAKE_HEART::
+	end @to do
 
 @@@@@@@@@@@@@@@@@@@@@@@ GEN 1-3 @@@@@@@@@@@@@@@@@@@@@@@
 Move_NONE:
@@ -14697,14 +14720,14 @@ Move_DOUBLE_EDGE:
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 4, -10, 0, ANIM_TARGET, 0
 	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 1, -32, 0, 0, 3
 	waitforvisualfinish
-	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -256, 0, 0
-	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -256, 1, 0
+	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -256, ANIM_ATTACKER, 0
+	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -256, ANIM_TARGET, 0
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 4, 0, 12, 1
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 4, 0, 12, 1
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 2, 16, 0, RGB_WHITE
 	waitforvisualfinish
-	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -256, 0, 1
-	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -256, 1, 1
+	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -256, ANIM_ATTACKER, 1
+	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -256, ANIM_TARGET, 1
 	waitforvisualfinish
 	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 5
 	delay 3
@@ -16341,7 +16364,7 @@ Move_HORN_ATTACK:
 Move_FURY_ATTACK:
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_HORN_HIT
-	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 4, 256, 0, 2
+	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 4, 256, ANIM_ATTACKER, 2
 	choosetwoturnanim FuryAttackRight, FuryAttackLeft
 FuryAttackContinue:
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 6, 1
@@ -16490,7 +16513,7 @@ Move_LOW_KICK:
 	createsprite gSlidingKickSpriteTemplate, ANIM_TARGET, 2, -24, 28, 40, 8, 160, 0
 	delay 4
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 2, -8, 8, ANIM_TARGET, 2
-	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 6, 384, 1, 2
+	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 6, 384, ANIM_TARGET, 2
 	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
 	waitforvisualfinish
 	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 1, 4
@@ -16735,7 +16758,7 @@ SkullBashSetUpHeadDown:
 	createsprite gSlideMonToOffsetAndBackSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, -24, 0, 0, 10, 0
 	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
 	waitforvisualfinish
-	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 16, 96, 0, 2
+	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 16, 96, ANIM_ATTACKER, 2
 	waitforvisualfinish
 	createsprite gSlideMonToOffsetAndBackSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, 24, 0, 0, 10, 1
 	waitforvisualfinish
@@ -17854,7 +17877,7 @@ Move_MIST_BALL:
 	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_BG, 1, 1, RGB(23, 16, 31), 16, RGB_WHITE, 16
 	delay 0
 	playsewithpan SE_M_HAZE, 0
-	createvisualtask AnimTask_LoadMistTiles, 5
+	createvisualtask AnimTask_MistBallFog, 5
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 3, 0, 16, RGB_WHITE
 	delay 8
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 70, 0
@@ -22454,14 +22477,14 @@ Move_ARM_THRUST:
 	loadspritegfx ANIM_TAG_IMPACT
 	splitbgprio ANIM_TARGET
 	setalpha 12, 8
-	createvisualtask AnimTask_RotateMonSpriteToSide, 5, 8, 5, 0, 0
+	createvisualtask AnimTask_RotateMonSpriteToSide, 5, 8, 5, ANIM_ATTACKER, 0
 	delay 6
 	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 4, 3
 	delay 4
 	playsewithpan SE_M_SWAGGER, SOUND_PAN_TARGET
 	createsprite gArmThrustHandSpriteTemplate, ANIM_TARGET, 2, 10, -8, 14, 3
 	waitforvisualfinish
-	createvisualtask AnimTask_RotateMonSpriteToSide, 5, 8, 5, 0, 1
+	createvisualtask AnimTask_RotateMonSpriteToSide, 5, 8, 5, ANIM_ATTACKER, 1
 	playsewithpan SE_M_DOUBLE_SLAP, SOUND_PAN_TARGET
 	choosetwoturnanim ArmThrustRight, ArmThrustLeft
 ArmThrustContinue:
@@ -23548,26 +23571,25 @@ Move_SECRET_POWER:
 	jumpargeq 0, BATTLE_TERRAIN_PUDDLE,         Move_MUD_SHOT
 	jumpargeq 0, BATTLE_TERRAIN_MARSH,          Move_MUD_SHOT
 	jumpargeq 0, BATTLE_TERRAIN_SWAMP,          Move_MUD_SHOT
-.if B_SECRET_POWER_ANIMATION >= GEN_7
-	jumpargeq 0, BATTLE_TERRAIN_SNOW,           Move_ICE_SHARD
-.else
-	jumpargeq 0, BATTLE_TERRAIN_SNOW,           Move_AVALANCHE
-.endif
 	jumpargeq 0, BATTLE_TERRAIN_ICE,            Move_ICE_SHARD
 	jumpargeq 0, BATTLE_TERRAIN_VOLCANO,        Move_INCINERATE
 	jumpargeq 0, BATTLE_TERRAIN_DISTORTION_WORLD, Move_POUND
 	jumpargeq 0, BATTLE_TERRAIN_SPACE,          Move_SWIFT
 	jumpargeq 0, BATTLE_TERRAIN_ULTRA_SPACE,    Move_PSYWAVE
 .if B_SECRET_POWER_ANIMATION >= GEN_7
+	jumpargeq 0, BATTLE_TERRAIN_SNOW,           Move_ICE_SHARD
 	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_SPIT_UP
 	goto Move_SPIT_UP
-.elseif B_SECRET_POWER_ANIMATION == GEN_6
+.elseif B_SECRET_POWER_ANIMATION >= GEN_6
+	jumpargeq 0, BATTLE_TERRAIN_SNOW,           Move_AVALANCHE
 	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_BODY_SLAM
 	goto Move_BODY_SLAM
-.elseif B_SECRET_POWER_ANIMATION == GEN_5 || B_SECRET_POWER_ANIMATION == GEN_4
+.elseif B_SECRET_POWER_ANIMATION >= GEN_4
+	jumpargeq 0, BATTLE_TERRAIN_SNOW,           Move_AVALANCHE
 	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_BODY_SLAM
 	goto Move_MUD_SLAP
 .else
+	jumpargeq 0, BATTLE_TERRAIN_SNOW,           Move_AVALANCHE
 	jumpargeq 0, BATTLE_TERRAIN_BUILDING,       Move_STRENGTH
 	goto Move_SLAM
 .endif
@@ -24883,6 +24905,27 @@ PrimalReversionParticles:
 	createsprite gPrimalParticlesSpriteTemplate, ANIM_ATTACKER, 2, 5, -40, 13
 	delay 3
 	return
+
+General_AffectionHangedOn::
+	loadspritegfx ANIM_TAG_RED_HEART
+	loopsewithpan SE_M_CHARM, SOUND_PAN_ATTACKER, 12, 3
+	createvisualtask AnimTask_SwayMon, 5, 0, 12, 4096, 4, ANIM_ATTACKER
+	delay 15
+	launchtask AnimTask_AffectionHangedOn 0x5 0x0
+	jumpargeq 0x0, FRIENDSHIP_100_TO_149, General_AffectionHangedOn_3Hearts
+	jumpargeq 0x0, FRIENDSHIP_150_TO_199, General_AffectionHangedOn_4Hearts
+	jumpargeq 0x0, FRIENDSHIP_200_TO_254, General_AffectionHangedOn_5Hearts
+	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, -384, -31
+General_AffectionHangedOn_5Hearts:
+	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, -128, -22
+General_AffectionHangedOn_4Hearts:
+	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 416, -38
+General_AffectionHangedOn_3Hearts:
+	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 160, -32
+	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, -256, -40
+	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 128, -16
+	waitforvisualfinish
+	end
 
 SnatchMoveTrySwapFromSubstitute:
 	createvisualtask AnimTask_IsAttackerBehindSubstitute, 2

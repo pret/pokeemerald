@@ -18,6 +18,7 @@
 #include "constants/moves.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
+#include "constants/pokemon.h"
 
 // function declarations
 static void SpriteCB_SpriteToCentreOfSide(struct Sprite *sprite);
@@ -6522,7 +6523,7 @@ const struct SpriteTemplate gSoulStealZStarSpriteTemplate =
 //general
 void AnimTask_IsTargetPartner(u8 taskId)
 {
-    if (gBattleAnimTarget == (gBattleAnimAttacker ^ BIT_FLANK))
+    if (gBattleAnimTarget == BATTLE_PARTNER(gBattleAnimAttacker))
         gBattleAnimArgs[0] = 1;
     else
         gBattleAnimArgs[0] = 0;
@@ -7890,5 +7891,14 @@ void AnimTask_TerrainPulse(u8 taskId)
     {
         gBattleAnimArgs[0] = 0;
     }
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_AffectionHangedOn(u8 taskId)
+{
+    int side = GetBattlerSide(gBattleAnimTarget);
+    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+
+    gBattleAnimArgs[0] = GetMonFriendshipScore(&party[gBattlerPartyIndexes[gBattleAnimTarget]]);
     DestroyAnimVisualTask(taskId);
 }

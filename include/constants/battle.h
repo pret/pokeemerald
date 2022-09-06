@@ -31,8 +31,8 @@
 #define B_POSITION_OPPONENT_RIGHT     3
 
 // These macros can be used with either battler ID or positions to get the partner or the opposite mon
-#define BATTLE_OPPOSITE(id) ((id) ^ 1)
-#define BATTLE_PARTNER(id) ((id) ^ 2)
+#define BATTLE_OPPOSITE(id) ((id) ^ BIT_SIDE)
+#define BATTLE_PARTNER(id) ((id) ^ BIT_FLANK)
 
 #define B_SIDE_PLAYER     0
 #define B_SIDE_OPPONENT   1
@@ -81,7 +81,7 @@
 
 #define WILD_DOUBLE_BATTLE ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER))))
 #define BATTLE_TWO_VS_ONE_OPPONENT ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gTrainerBattleOpponent_B == 0xFFFF))
-#define BATTLE_TYPE_HAS_AI          (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER)
+#define BATTLE_TYPE_HAS_AI          (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER | BATTLE_TYPE_INGAME_PARTNER)
 
 
 // Battle Outcome defines
@@ -250,16 +250,17 @@
 #define STATUS_FIELD_TERRAIN_ANY        (STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN)
 
 // Flags describing move's result
-#define MOVE_RESULT_MISSED             (1 << 0)
-#define MOVE_RESULT_SUPER_EFFECTIVE    (1 << 1)
-#define MOVE_RESULT_NOT_VERY_EFFECTIVE (1 << 2)
-#define MOVE_RESULT_DOESNT_AFFECT_FOE  (1 << 3)
-#define MOVE_RESULT_ONE_HIT_KO         (1 << 4)
-#define MOVE_RESULT_FAILED             (1 << 5)
-#define MOVE_RESULT_FOE_ENDURED        (1 << 6)
-#define MOVE_RESULT_FOE_HUNG_ON        (1 << 7)
-#define MOVE_RESULT_STURDIED           (1 << 8)
-#define MOVE_RESULT_NO_EFFECT          (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_FAILED)
+#define MOVE_RESULT_MISSED                (1 << 0)
+#define MOVE_RESULT_SUPER_EFFECTIVE       (1 << 1)
+#define MOVE_RESULT_NOT_VERY_EFFECTIVE    (1 << 2)
+#define MOVE_RESULT_DOESNT_AFFECT_FOE     (1 << 3)
+#define MOVE_RESULT_ONE_HIT_KO            (1 << 4)
+#define MOVE_RESULT_FAILED                (1 << 5)
+#define MOVE_RESULT_FOE_ENDURED           (1 << 6)
+#define MOVE_RESULT_FOE_HUNG_ON           (1 << 7)
+#define MOVE_RESULT_STURDIED              (1 << 8)
+#define MOVE_RESULT_FOE_ENDURED_AFFECTION (1 << 9)
+#define MOVE_RESULT_NO_EFFECT             (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_FAILED)
 
 // Battle Weather flags
 #define B_WEATHER_RAIN_TEMPORARY      (1 << 0)
@@ -459,8 +460,8 @@
 #define ARENA_WIN_MIND             18
 #define ARENA_WIN_SKILL            19
 #define ARENA_WIN_BODY             20
-#define ARENA_WIN_JUDGEMENT_TITLE  21
-#define ARENA_WIN_JUDGEMENT_TEXT   22
+#define ARENA_WIN_JUDGMENT_TITLE   21
+#define ARENA_WIN_JUDGMENT_TEXT    22
 
 // Flag for BattlePutTextOnWindow. Never set
 #define B_WIN_COPYTOVRAM (1 << 7)

@@ -564,7 +564,7 @@ static void AnimFistOrFootRandomPos(struct Sprite *sprite)
     if (Random2() & 1)
         y *= -1;
 
-    if ((gBattlerPositions[battler] & BIT_SIDE) == B_SIDE_PLAYER)
+    if (GET_BATTLER_SIDE2(battler) == B_SIDE_PLAYER)
         y += 0xFFF0;
 
     sprite->x += x;
@@ -572,7 +572,7 @@ static void AnimFistOrFootRandomPos(struct Sprite *sprite)
 
     sprite->data[0] = gBattleAnimArgs[1];
     sprite->data[7] = CreateSprite(&gBasicHitSplatSpriteTemplate, sprite->x, sprite->y, sprite->subpriority + 1);
-    if (sprite->data[7] != 64)
+    if (sprite->data[7] != MAX_SPRITES)
     {
         StartSpriteAffineAnim(&gSprites[sprite->data[7]], 0);
         gSprites[sprite->data[7]].callback = SpriteCallbackDummy;
@@ -585,7 +585,7 @@ static void AnimFistOrFootRandomPos_Step(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
-        if (sprite->data[7] != 64)
+        if (sprite->data[7] != MAX_SPRITES)
         {
             FreeOamMatrix(gSprites[sprite->data[7]].oam.matrixNum);
             DestroySprite(&gSprites[sprite->data[7]]);
