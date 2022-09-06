@@ -900,6 +900,13 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_GLASTRIER] = sGlastrierTeachableLearnset,
     [SPECIES_SPECTRIER] = sSpectrierTeachableLearnset,
     [SPECIES_CALYREX] = sCalyrexTeachableLearnset,
+    [SPECIES_WYRDEER] = sWyrdeerTeachableLearnset,
+    [SPECIES_KLEAVOR] = sKleavorTeachableLearnset,
+    [SPECIES_URSALUNA] = sUrsalunaTeachableLearnset,
+    [SPECIES_BASCULEGION] = sBasculegionTeachableLearnset,
+    [SPECIES_SNEASLER] = sSneaslerTeachableLearnset,
+    [SPECIES_OVERQWIL] = sOverqwilTeachableLearnset,
+    [SPECIES_ENAMORUS] = sEnamorusTeachableLearnset,
     // Megas
     [SPECIES_VENUSAUR_MEGA] = sVenusaurTeachableLearnset,
     [SPECIES_CHARIZARD_MEGA_X] = sCharizardTeachableLearnset,
@@ -991,6 +998,23 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_DARMANITAN_GALARIAN] = sDarmanitanGalarianTeachableLearnset,
     [SPECIES_YAMASK_GALARIAN] = sYamaskGalarianTeachableLearnset,
     [SPECIES_STUNFISK_GALARIAN] = sStunfiskGalarianTeachableLearnset,
+    // Hisuian Forms
+    [SPECIES_GROWLITHE_HISUIAN] = sGrowlitheHisuianTeachableLearnset,
+    [SPECIES_ARCANINE_HISUIAN] = sArcanineHisuianTeachableLearnset,
+    [SPECIES_VOLTORB_HISUIAN] = sVoltorbHisuianTeachableLearnset,
+    [SPECIES_ELECTRODE_HISUIAN] = sElectrodeHisuianTeachableLearnset,
+    [SPECIES_TYPHLOSION_HISUIAN] = sTyphlosionHisuianTeachableLearnset,
+    [SPECIES_QWILFISH_HISUIAN] = sQwilfishHisuianTeachableLearnset,
+    [SPECIES_SNEASEL_HISUIAN] = sSneaselHisuianTeachableLearnset,
+    [SPECIES_SAMUROTT_HISUIAN] = sSamurottHisuianTeachableLearnset,
+    [SPECIES_LILLIGANT_HISUIAN] = sLilligantHisuianTeachableLearnset,
+    [SPECIES_ZORUA_HISUIAN] = sZoruaHisuianTeachableLearnset,
+    [SPECIES_ZOROARK_HISUIAN] = sZoroarkHisuianTeachableLearnset,
+    [SPECIES_BRAVIARY_HISUIAN] = sBraviaryHisuianTeachableLearnset,
+    [SPECIES_SLIGGOO_HISUIAN] = sSliggooHisuianTeachableLearnset,
+    [SPECIES_GOODRA_HISUIAN] = sGoodraHisuianTeachableLearnset,
+    [SPECIES_AVALUGG_HISUIAN] = sAvaluggHisuianTeachableLearnset,
+    [SPECIES_DECIDUEYE_HISUIAN] = sDecidueyeHisuianTeachableLearnset,
     // Misc Forms
     // Cosplay Pikachu
     [SPECIES_PIKACHU_COSPLAY] = sPikachuTeachableLearnset,
@@ -1066,7 +1090,9 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_ROTOM_FROST] = sRotomTeachableLearnset,
     [SPECIES_ROTOM_FAN] = sRotomTeachableLearnset,
     [SPECIES_ROTOM_MOW] = sRotomTeachableLearnset,
-    // Giratina
+    // Origin Forme
+    [SPECIES_DIALGA_ORIGIN] = sDialgaTeachableLearnset,
+    [SPECIES_PALKIA_ORIGIN] = sPalkiaTeachableLearnset,
     [SPECIES_GIRATINA_ORIGIN] = sGiratinaTeachableLearnset,
     // Shaymin
     [SPECIES_SHAYMIN_SKY] = sShayminSkyTeachableLearnset,
@@ -1090,6 +1116,7 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_ARCEUS_FAIRY] = sArceusTeachableLearnset,
     // Basculin
     [SPECIES_BASCULIN_BLUE_STRIPED] = sBasculinTeachableLearnset,
+    [SPECIES_BASCULIN_WHITE_STRIPED] = sBasculinTeachableLearnset,
     // Darmanitan
     [SPECIES_DARMANITAN_ZEN_MODE] = sDarmanitanTeachableLearnset,
     [SPECIES_DARMANITAN_ZEN_MODE_GALARIAN] = sDarmanitanGalarianTeachableLearnset,
@@ -1105,6 +1132,7 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_TORNADUS_THERIAN] = sTornadusTeachableLearnset,
     [SPECIES_THUNDURUS_THERIAN] = sThundurusTeachableLearnset,
     [SPECIES_LANDORUS_THERIAN] = sLandorusTeachableLearnset,
+    [SPECIES_ENAMORUS_THERIAN] = sEnamorusTeachableLearnset,
     // Kyurem
     [SPECIES_KYUREM_WHITE] = sKyuremTeachableLearnset,
     [SPECIES_KYUREM_BLACK] = sKyuremTeachableLearnset,

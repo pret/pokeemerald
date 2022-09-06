@@ -32093,6 +32093,34 @@ static const u16 sCalyrexTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+static const u16 sWyrdeerTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sKleavorTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sUrsalunaTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sBasculegionTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sSneaslerTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sOverqwilTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sEnamorusTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
 static const u16 sRattataAlolanTeachableLearnset[] = {
     MOVE_BLIZZARD,
     MOVE_CUT,
@@ -32928,6 +32956,70 @@ static const u16 sStunfiskGalarianTeachableLearnset[] = {
     MOVE_SNORE,
     MOVE_SUBSTITUTE,
     MOVE_THUNDER_WAVE,
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sGrowlitheHisuianTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sArcanineHisuianTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sVoltorbHisuianTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sElectrodeHisuianTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sTyphlosionHisuianTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sQwilfishHisuianTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sSneaselHisuianTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sSamurottHisuianTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sLilligantHisuianTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sZoruaHisuianTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sZoroarkHisuianTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sBraviaryHisuianTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sSliggooHisuianTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sGoodraHisuianTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sAvaluggHisuianTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sDecidueyeHisuianTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 

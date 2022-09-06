@@ -125,6 +125,16 @@ static const struct FormChange sLandorusTherianFormChangeTable[] = {
     {FORM_CHANGE_END},
 };
 
+static const struct FormChange sEnamorusFormChangeTable[] = {
+    {FORM_ITEM_USE, SPECIES_ENAMORUS, ITEM_REVEAL_GLASS},
+    {FORM_CHANGE_END},
+};
+
+static const struct FormChange sEnamorusTherianFormChangeTable[] = {
+    {FORM_ITEM_USE, SPECIES_ENAMORUS_THERIAN, ITEM_REVEAL_GLASS},
+    {FORM_CHANGE_END},
+};
+
 static const struct FormChange sKeldeoFormChangeTable[] = {
     {FORM_MOVE, SPECIES_KELDEO_RESOLUTE, MOVE_SECRET_SWORD, WHEN_LEARNED},
     {FORM_CHANGE_END},

@@ -900,6 +900,13 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(GLASTRIER, gMonPalette_Glastrier),
     SPECIES_PAL(SPECTRIER, gMonPalette_Spectrier),
     SPECIES_PAL(CALYREX, gMonPalette_Calyrex),
+    SPECIES_PAL(WYRDEER, gMonPalette_CircledQuestionMark), // gMonPalette_Wyrdeer),
+    SPECIES_PAL(KLEAVOR, gMonPalette_Kleavor),
+    SPECIES_PAL(URSALUNA, gMonPalette_Ursaluna),
+    SPECIES_PAL(BASCULEGION, gMonPalette_CircledQuestionMark), // gMonPalette_Basculegion),
+    SPECIES_PAL(SNEASLER, gMonPalette_CircledQuestionMark), // gMonPalette_Sneasler),
+    SPECIES_PAL(OVERQWIL, gMonPalette_Overqwil),
+    SPECIES_PAL(ENAMORUS, gMonPalette_CircledQuestionMark), // gMonPalette_Enamorus),
 
     SPECIES_PAL(VENUSAUR_MEGA, gMonPalette_VenusaurMega),
     SPECIES_PAL(CHARIZARD_MEGA_X, gMonPalette_CharizardMegaX),
@@ -992,6 +999,23 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(YAMASK_GALARIAN, gMonPalette_YamaskGalarian),
     SPECIES_PAL(STUNFISK_GALARIAN, gMonPalette_StunfiskGalarian),
 
+    SPECIES_PAL(GROWLITHE_HISUIAN, gMonPalette_GrowlitheHisuian),
+    SPECIES_PAL(ARCANINE_HISUIAN, gMonPalette_ArcanineHisuian),
+    SPECIES_PAL(VOLTORB_HISUIAN, gMonPalette_VoltorbHisuian),
+    SPECIES_PAL(ELECTRODE_HISUIAN, gMonPalette_ElectrodeHisuian),
+    SPECIES_PAL(TYPHLOSION_HISUIAN, gMonPalette_TyphlosionHisuian),
+    SPECIES_PAL(QWILFISH_HISUIAN, gMonPalette_QwilfishHisuian),
+    SPECIES_PAL(SNEASEL_HISUIAN, gMonPalette_SneaselHisuian),
+    SPECIES_PAL(SAMUROTT_HISUIAN, gMonPalette_CircledQuestionMark), //gMonPalette_SamurottHisuian),
+    SPECIES_PAL(LILLIGANT_HISUIAN, gMonPalette_LilligantHisuian),
+    SPECIES_PAL(ZORUA_HISUIAN, gMonPalette_ZoruaHisuian),
+    SPECIES_PAL(ZOROARK_HISUIAN, gMonPalette_ZoroarkHisuian),
+    SPECIES_PAL(BRAVIARY_HISUIAN, gMonPalette_BraviaryHisuian),
+    SPECIES_PAL(SLIGGOO_HISUIAN, gMonPalette_SliggooHisuian),
+    SPECIES_PAL(GOODRA_HISUIAN, gMonPalette_GoodraHisuian),
+    SPECIES_PAL(AVALUGG_HISUIAN, gMonPalette_AvaluggHisuian),
+    SPECIES_PAL(DECIDUEYE_HISUIAN, gMonPalette_CircledQuestionMark), //gMonPalette_DecidueyeHisuian),
+
     SPECIES_PAL(PIKACHU_COSPLAY, gMonPalette_PikachuCosplay),
     SPECIES_PAL(PIKACHU_ROCK_STAR, gMonPalette_PikachuRockStar),
     SPECIES_PAL(PIKACHU_BELLE, gMonPalette_PikachuBelle),
@@ -1064,6 +1088,8 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(ROTOM_FAN, gMonPalette_RotomFan),
     SPECIES_PAL(ROTOM_MOW, gMonPalette_RotomMow),
 
+    SPECIES_PAL(DIALGA_ORIGIN, gMonPalette_DialgaOrigin),
+    SPECIES_PAL(PALKIA_ORIGIN, gMonPalette_PalkiaOrigin),
     SPECIES_PAL(GIRATINA_ORIGIN, gMonPalette_GiratinaOrigin),
 
     SPECIES_PAL(SHAYMIN_SKY, gMonPalette_ShayminSky),
@@ -1087,6 +1113,7 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(ARCEUS_FAIRY, gMonPalette_ArceusFairy),
 
     SPECIES_PAL(BASCULIN_BLUE_STRIPED, gMonPalette_BasculinBlueStriped),
+    SPECIES_PAL(BASCULIN_WHITE_STRIPED, gMonPalette_BasculinWhiteStriped),
 
     SPECIES_PAL(DARMANITAN_ZEN_MODE, gMonPalette_DarmanitanZenMode),
     SPECIES_PAL(DARMANITAN_ZEN_MODE_GALARIAN, gMonPalette_DarmanitanZenModeGalarian),
@@ -1102,6 +1129,7 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(TORNADUS_THERIAN, gMonPalette_TornadusTherian),
     SPECIES_PAL(THUNDURUS_THERIAN, gMonPalette_ThundurusTherian),
     SPECIES_PAL(LANDORUS_THERIAN, gMonPalette_LandorusTherian),
+    SPECIES_PAL(ENAMORUS_THERIAN, gMonPalette_CircledQuestionMark), // gMonPalette_EnamorusTherian),
 
     SPECIES_PAL(KYUREM_WHITE, gMonPalette_KyuremWhite),
     SPECIES_PAL(KYUREM_BLACK, gMonPalette_KyuremBlack),
@@ -1294,5 +1322,6 @@ const struct CompressedSpritePalette gMonPaletteTableFemale[] =
     SPECIES_PAL(FRILLISH, gMonPalette_FrillishF),
     SPECIES_PAL(JELLICENT, gMonPalette_JellicentF),
     SPECIES_PAL(PYROAR, gMonPalette_PyroarF),
+    SPECIES_PAL(BASCULEGION, gMonPalette_CircledQuestionMark), // gMonPalette_BasculegionF),
 #endif
 };
