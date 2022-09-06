@@ -13721,10 +13721,14 @@ static void Cmd_handleballthrow(void)
             {
             case ITEM_ULTRA_BALL:
                 ballMultiplier = 20;
+                break;
+        #if B_SPORT_BALL_MODIFIER <= GEN_7
+            case ITEM_SPORT_BALL:
+        #endif
             case ITEM_GREAT_BALL:
             case ITEM_SAFARI_BALL:
-            case ITEM_SPORT_BALL:
                 ballMultiplier = 15;
+                break;
             case ITEM_NET_BALL:
                 if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_WATER) || IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_BUG))
                     #if B_NET_BALL_MODIFIER >= GEN_7
