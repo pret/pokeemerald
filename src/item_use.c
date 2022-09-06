@@ -1006,14 +1006,14 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         else
             DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, Task_CloseBattlePyramidBagMessage);
         break;
-    #if B_SEMI_INVULNERABLE_CATCH >= GEN_4
+#if B_SEMI_INVULNERABLE_CATCH >= GEN_4
     case BALL_THROW_UNABLE_SEMI_INVULNERABLE:
         if (!InBattlePyramid())
             DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_SemiInvulnerable, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_SemiInvulnerable, Task_CloseBattlePyramidBagMessage);
         break;
-    #endif
+#endif
     case BALL_THROW_UNABLE_DISABLED_FLAG:
         if (!InBattlePyramid())
             DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_Disabled, CloseItemMessage);
