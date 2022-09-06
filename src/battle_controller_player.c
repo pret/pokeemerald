@@ -330,12 +330,14 @@ static void HandleInputChooseAction(void)
     {
         SwapHpBarsWithHpText();
     }
-    else if (B_ENABLE_DEBUG && gMain.newKeys & SELECT_BUTTON)
+#if B_ENABLE_DEBUG == TRUE
+    else if (gMain.newKeys & SELECT_BUTTON)
     {
         BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_DEBUG, 0);
         PlayerBufferExecCompleted();
     }
-    #if B_LAST_USED_BALL == TRUE
+#endif
+#if B_LAST_USED_BALL == TRUE
     else if (JOY_NEW(B_LAST_USED_BALL_BUTTON) && CanThrowLastUsedBall())
     {
         PlaySE(SE_SELECT);
@@ -343,7 +345,7 @@ static void HandleInputChooseAction(void)
         BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_THROW_BALL, 0);
         PlayerBufferExecCompleted();
     }
-    #endif
+#endif
 }
 
 static void UnusedEndBounceEffect(void)
@@ -652,26 +654,25 @@ static void HandleInputChooseMove(void)
                 canSelectTarget = 0;
             }
 
+        #if B_SHOW_TARGETS == TRUE
             // Show all available targets for multi-target moves
-            if (B_SHOW_TARGETS)
+            if ((moveTarget & MOVE_TARGET_ALL_BATTLERS) == MOVE_TARGET_ALL_BATTLERS)
             {
-                if ((moveTarget & MOVE_TARGET_ALL_BATTLERS) == MOVE_TARGET_ALL_BATTLERS)
-                {
-                    u32 i = 0;
-                    for (i = 0; i < gBattlersCount; i++)
-                        TryShowAsTarget(i);
+                u32 i = 0;
+                for (i = 0; i < gBattlersCount; i++)
+                    TryShowAsTarget(i);
 
-                    canSelectTarget = 3;
-                }
-                else if (moveTarget & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY))
-                {
-                    TryShowAsTarget(gMultiUsePlayerCursor);
-                    TryShowAsTarget(BATTLE_PARTNER(gMultiUsePlayerCursor));
-                    if (moveTarget & MOVE_TARGET_FOES_AND_ALLY)
-                        TryShowAsTarget(BATTLE_PARTNER(gActiveBattler));
-                    canSelectTarget = 2;
-                }
+                canSelectTarget = 3;
             }
+            else if (moveTarget & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY))
+            {
+                TryShowAsTarget(gMultiUsePlayerCursor);
+                TryShowAsTarget(BATTLE_PARTNER(gMultiUsePlayerCursor));
+                if (moveTarget & MOVE_TARGET_FOES_AND_ALLY)
+                    TryShowAsTarget(BATTLE_PARTNER(gActiveBattler));
+                canSelectTarget = 2;
+            }
+        #endif
         }
 
         switch (canSelectTarget)
