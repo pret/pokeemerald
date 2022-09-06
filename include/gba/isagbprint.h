@@ -1,36 +1,50 @@
 #ifndef GUARD_GBA_ISAGBPRINT_H
 #define GUARD_GBA_ISAGBPRINT_H
 
-#ifdef NDEBUG
-#define AGBPrintInit()
-#define AGBPutc(cChr)
-#define AGBPrint(pBuf)
-#define AGBPrintf(pBuf, ...)
-#define AGBPrintFlush1Block()
-#define AGBPrintFlush()
-#define AGBAssert(pFile, nLine, pExpression, nStopProgram)
-#else
-void AGBPrintInit(void);
-void AGBPutc(const char cChr);
-void AGBPrint(const char *pBuf);
-void AGBPrintf(const char *pBuf, ...);
-void AGBPrintFlush1Block(void);
-void AGBPrintFlush(void);
-void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopProgram);
-#endif
+#include "gba/types.h"
 
-#undef AGB_ASSERT
 #ifdef NDEBUG
+#define DebugPrintf(pBuf, ...)
+#define MgbaOpen()
+#define MgbaClose()
 #define AGB_ASSERT(exp)
-#else
-#define AGB_ASSERT(exp) (exp) ? ((void *)0) : AGBAssert(__FILE__, __LINE__, #exp, 1);
-#endif
-
-#undef AGB_WARNING
-#ifdef NDEBUG
 #define AGB_WARNING(exp)
+#define AGBPrintInit()
 #else
-#define AGB_WARNING(exp) (exp) ? ((void *)0) : AGBAssert(__FILE__, __LINE__, #exp, 0);
+#if (LOG_HANDLER == LOG_HANDLER_MGBA_PRINT)
+bool32 MgbaOpen(void);
+void MgbaClose(void);
+void MgbaPrintf(const char *pBuf, ...);
+void MgbaAssert(const char *pFile, s32 nLine, const char *pExpression, bool32 nStopProgram);
+#define DebugPrintf(pBuf, ...) MgbaPrintf(pBuf, __VA_ARGS__)
+#define AGB_ASSERT(exp) (exp) ? ((void*)0) : MgbaAssert(__FILE__, __LINE__, #exp, 1)
+#define AGB_WARNING(exp) (exp) ? ((void*)0) : MgbaAssert(__FILE__, __LINE__, #exp, 0)
+
+// Not used in this configuration
+#define AGBPrintfInit()
+#elif (LOG_HANDLER == LOG_HANDLER_NOCASH_PRINT)
+void NoCashGBAPrintf(const char *pBuf, ...)
+void NoCashGBAAssert(const char *pFile, s32 nLine, const char *pExpression, bool32 nStopProgram)
+#define DebugPrintf(pBuf, ...) NoCashGBAPrintf(pBuf, __VA_ARGS__)
+#define AGB_ASSERT(exp) (exp) ? ((void*)0) : NoCashGBAAssert(__FILE__, __LINE__, #exp, 1);
+#define AGB_WARNING(exp) (exp) ? ((void*)0) : NoCashGBAAssert(__FILE__, __LINE__, #exp, 0)
+
+// Not used in this configuration
+#define MgbaOpen()
+#define MgbaClose()
+#define AGBPrintInit()
+#else // Default to AGBPrint
+void AGBPrintf(const char *pBuf, ...);
+void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopProgram);
+void AGBPrintInit(void);
+#define DebugPrintf(pBuf, ...) AGBPrintf(const char *pBuf, ...)
+#define AGB_ASSERT(exp) (exp) ? ((void*)0) : AGBAssert(__FILE__, __LINE__, #exp, 1)
+#define AGB_WARNING(exp) (exp) ? ((void*)0) : NoCashGBAAssert(__FILE__, __LINE__, #exp, 0)
+
+// Not used in this configuration
+#define MgbaOpen()
+#define MgbaClose()
+#endif
 #endif
 
 // for matching purposes
@@ -38,13 +52,7 @@ void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopP
 #ifdef NDEBUG
 #define    AGB_ASSERT_EX(exp, file, line)
 #else
-#define    AGB_ASSERT_EX(exp, file, line) (exp) ? ((void *)0) : AGBAssert(file, line, #exp, 1);
-#endif
-
-#ifdef NDEBUG
-#define    AGB_WARNING_EX(exp, file, line)
-#else
-#define    AGB_WARNING_EX(exp, file, line) (exp) ? ((void *)0) : AGBAssert(file, line, #exp, 0);
+#define    AGB_ASSERT_EX(exp, file, line) AGB_ASSERT(exp);
 #endif
 
 #endif // GUARD_GBA_ISAGBPRINT_H
