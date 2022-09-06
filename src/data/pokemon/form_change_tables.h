@@ -1,8 +1,8 @@
 /*
 FORM_ITEM_HOLD:
-    Form change activates when the item is given to or taken from the selected Pokémon.
-    Alternatively, form change activates when the item is used on the selected Pokémon
-    that has a particular ability.
+    Form change activates when the specified item is given to or taken from the selected Pokémon.
+    Alternatively, form change activates when the specified item is is given to or taken from
+    the selected Pokémon that has a particular ability.
     param1 = item to hold
     param2 = ability to check for, optional
 
