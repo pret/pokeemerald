@@ -72,7 +72,7 @@ static const u8 *sPaletteGammaTypes;
 
 // The drought weather effect uses a precalculated color lookup table. Presumably this
 // is because the underlying color shift calculation is slow.
-const u16 sDroughtWeatherColors[][0x1000] = {
+static const u16 sDroughtWeatherColors[][0x1000] = {
     INCBIN_U16("graphics/weather/drought/colors_0.bin"),
     INCBIN_U16("graphics/weather/drought/colors_1.bin"),
     INCBIN_U16("graphics/weather/drought/colors_2.bin"),
@@ -863,10 +863,10 @@ void LoadCustomWeatherSpritePalette(const u16 *palette)
     UpdateSpritePaletteWithWeather(gWeatherPtr->weatherPicSpritePalIndex);
 }
 
-static void LoadDroughtWeatherPalette(u8 *gammaIndexPtr, u8 *a1)
+static void LoadDroughtWeatherPalette(u8 *palsIndex, u8 *palsOffset)
 {
-    *gammaIndexPtr = 0x20;
-    *a1 = 0x20;
+    *palsIndex = 0x20;
+    *palsOffset = 0x20;
 }
 
 void ResetDroughtWeatherPaletteLoading(void)

@@ -535,6 +535,8 @@
 #define B_ANIM_AQUA_RING_HEAL           32
 #define B_ANIM_BEAK_BLAST_SETUP         33
 #define B_ANIM_SHELL_TRAP_SETUP         34
+#define B_ANIM_ZMOVE_ACTIVATE           35 // Using Z Moves
+#define B_ANIM_AFFECTION_HANGED_ON      36
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
@@ -601,9 +603,32 @@
 #define ANIM_RIGHT_FIST  0
 #define ANIM_LEFT_FIST   2
 
+// fist/chop frames
+#define ANIM_FIST_1  0
+#define ANIM_FOOT_1  1
+#define ANIM_FOOT_2  2
+#define ANIM_CHOP    3
+
 // surf wave palettes
 #define ANIM_SURF_PAL_SURF           0
 #define ANIM_SURF_PAL_MUDDY_WATER    1
 #define ANIM_SURF_PAL_SLUDGE_WAVE    2
+
+// Flags given to various functions to indicate which palettes to consider.
+// Handled by UnpackSelectedBattlePalettes
+#define F_PAL_BG          (1 << 0)
+#define F_PAL_ATTACKER    (1 << 1)
+#define F_PAL_TARGET      (1 << 2)
+#define F_PAL_ATK_PARTNER (1 << 3)
+#define F_PAL_DEF_PARTNER (1 << 4)
+#define F_PAL_ANIM_1      (1 << 5) // Palette set for GetBattleAnimBg1Data/GetBgDataForTransform. Only used (ineffectually?) by Aromatherapy.
+#define F_PAL_ANIM_2      (1 << 6) // Palette set for GetBattleAnimBgData/GetBgDataForTransform. Unused.
+#define F_PAL_ATK_SIDE    (F_PAL_ATTACKER | F_PAL_ATK_PARTNER)
+#define F_PAL_DEF_SIDE    (F_PAL_TARGET | F_PAL_DEF_PARTNER)
+#define F_PAL_BATTLERS    (F_PAL_ATK_SIDE | F_PAL_DEF_SIDE)
+// The below are only used by AnimTask_BlendBattleAnimPal to get battler sprite palettes by position rather than by role.
+// It's redundant with F_PAL_BATTLERS, because they're only ever used together to refer to all the battlers at once.
+#define F_PAL_BATTLERS_2  (1 << 7 | 1 << 8 | 1 << 9 | 1 << 10)
+
 
 #endif // GUARD_CONSTANTS_BATTLE_ANIM_H

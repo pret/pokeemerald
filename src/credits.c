@@ -9,6 +9,7 @@
 #include "menu.h"
 #include "international_string_util.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 #include "gpu_regs.h"
 #include "m4a.h"
 #include "constants/rgb.h"
@@ -286,7 +287,7 @@ static const struct OamData sOamData_MonBg =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -1285,18 +1286,18 @@ static void ResetCreditsTasks(u8 taskId)
     gIntroCredits_MovingSceneryState = INTROCRED_SCENERY_DESTROY;
 }
 
-static void LoadTheEndScreen(u16 arg0, u16 arg1, u16 palOffset)
+static void LoadTheEndScreen(u16 tileOffsetLoad, u16 tileOffsetWrite, u16 palOffset)
 {
     u16 baseTile;
     u16 i;
 
-    LZ77UnCompVram(sCreditsCopyrightEnd_Gfx, (void *)(VRAM + arg0));
+    LZ77UnCompVram(sCreditsCopyrightEnd_Gfx, (void *)(VRAM + tileOffsetLoad));
     LoadPalette(gIntroCopyright_Pal, palOffset, sizeof(gIntroCopyright_Pal));
 
     baseTile = (palOffset / 16) << 12;
 
     for (i = 0; i < 32 * 32; i++)
-        ((u16 *) (VRAM + arg1))[i] = baseTile + 1;
+        ((u16 *) (VRAM + tileOffsetWrite))[i] = baseTile + 1;
 }
 
 static u16 GetLetterMapTile(u8 baseTiles)

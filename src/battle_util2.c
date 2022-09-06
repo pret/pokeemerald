@@ -26,6 +26,7 @@ void AllocateBattleResources(void)
     gBattleResources->battleCallbackStack = AllocZeroed(sizeof(*gBattleResources->battleCallbackStack));
     gBattleResources->beforeLvlUp = AllocZeroed(sizeof(*gBattleResources->beforeLvlUp));
     gBattleResources->ai = AllocZeroed(sizeof(*gBattleResources->ai));
+    gBattleResources->aiData = AllocZeroed(sizeof(*gBattleResources->aiData));
     gBattleResources->battleHistory = AllocZeroed(sizeof(*gBattleResources->battleHistory));
 
     gLinkBattleSendBuffer = AllocZeroed(BATTLE_BUFFER_LINK_SIZE);
@@ -57,6 +58,7 @@ void FreeBattleResources(void)
         FREE_AND_SET_NULL(gBattleResources->battleCallbackStack);
         FREE_AND_SET_NULL(gBattleResources->beforeLvlUp);
         FREE_AND_SET_NULL(gBattleResources->ai);
+        FREE_AND_SET_NULL(gBattleResources->aiData);
         FREE_AND_SET_NULL(gBattleResources->battleHistory);
         FREE_AND_SET_NULL(gBattleResources);
 
@@ -106,12 +108,12 @@ void SwitchPartyOrderInGameMulti(u8 battlerId, u8 arg1)
     {
         s32 i;
         for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
-            gBattlePartyCurrentOrder[i] = *(0 * 3 + i + (u8*)(gBattleStruct->battlerPartyOrders));
+            gBattlePartyCurrentOrder[i] = *(0 * 3 + i + (u8 *)(gBattleStruct->battlerPartyOrders));
 
         SwitchPartyMonSlots(GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battlerId]), GetPartyIdFromBattlePartyId(arg1));
 
         for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
-            *(0 * 3 + i + (u8*)(gBattleStruct->battlerPartyOrders)) = gBattlePartyCurrentOrder[i];
+            *(0 * 3 + i + (u8 *)(gBattleStruct->battlerPartyOrders)) = gBattlePartyCurrentOrder[i];
     }
 }
 

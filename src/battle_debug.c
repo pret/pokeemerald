@@ -614,7 +614,7 @@ static void SwitchToDebugView(u8 taskId);
 // code
 static struct BattleDebugMenu *GetStructPtr(u8 taskId)
 {
-    u8 *taskDataPtr = (u8*)(&gTasks[taskId].data[0]);
+    u8 *taskDataPtr = (u8 *)(&gTasks[taskId].data[0]);
 
     return (struct BattleDebugMenu*)(T1_READ_PTR(taskDataPtr));
 }
@@ -622,7 +622,7 @@ static struct BattleDebugMenu *GetStructPtr(u8 taskId)
 static void SetStructPtr(u8 taskId, void *ptr)
 {
     u32 structPtr = (u32)(ptr);
-    u8 *taskDataPtr = (u8*)(&gTasks[taskId].data[0]);
+    u8 *taskDataPtr = (u8 *)(&gTasks[taskId].data[0]);
 
     taskDataPtr[0] = structPtr >> 0;
     taskDataPtr[1] = structPtr >> 8;
@@ -714,7 +714,7 @@ void CB2_BattleDebugMenu(void)
 
 static void PutMovesPointsText(struct BattleDebugMenu *data)
 {
-    u32 i, j, count;
+    u32 i, j, count, battlerDef;
     u8 *text = malloc(0x50);
 
     FillWindowPixelBuffer(data->aiMovesWindowId, 0x11);
@@ -727,13 +727,14 @@ static void PutMovesPointsText(struct BattleDebugMenu *data)
         {
             if (data->aiIconSpriteIds[j] == 0xFF)
                 continue;
+            battlerDef = gSprites[data->aiIconSpriteIds[j]].data[0];
             ConvertIntToDecimalStringN(text,
-                                       gBattleStruct->aiFinalScore[data->aiBattlerId][gSprites[data->aiIconSpriteIds[j]].data[0]][i],
+                                       gBattleStruct->aiFinalScore[data->aiBattlerId][battlerDef][i],
                                        STR_CONV_MODE_RIGHT_ALIGN, 3);
             AddTextPrinterParameterized(data->aiMovesWindowId, 1, text, 83 + count * 54, i * 15, 0, NULL);
 
             ConvertIntToDecimalStringN(text,
-                                       gBattleStruct->aiSimulatedDamage[data->aiBattlerId][gSprites[data->aiIconSpriteIds[j]].data[0]][i],
+                                       AI_DATA->simulatedDmg[data->aiBattlerId][battlerDef][i],
                                        STR_CONV_MODE_RIGHT_ALIGN, 3);
             AddTextPrinterParameterized(data->aiMovesWindowId, 1, text, 110 + count * 54, i * 15, 0, NULL);
 
@@ -770,15 +771,9 @@ static void Task_ShowAiPoints(u8 taskId)
         {
             if (i != data->aiBattlerId && IsBattlerAlive(i))
             {
-            #ifndef POKEMON_EXPANSION
-                data->aiIconSpriteIds[i] = CreateMonIcon(gBattleMons[i].species,
-                                                         SpriteCallbackDummy,
-                                                         95 + (count * 60), 17, 0, 0, FALSE);
-            #else
                 data->aiIconSpriteIds[i] = CreateMonIcon(gBattleMons[i].species,
                                                          SpriteCallbackDummy,
                                                          95 + (count * 60), 17, 0, 0);
-            #endif
                 gSprites[data->aiIconSpriteIds[i]].data[0] = i; // battler id
                 count++;
             }
@@ -787,19 +782,11 @@ static void Task_ShowAiPoints(u8 taskId)
                 data->aiIconSpriteIds[i] = 0xFF;
             }
         }
-        #ifndef POKEMON_EXPANSION
-        data->aiMonSpriteId = CreateMonPicSprite_HandleDeoxys(gBattleMons[data->aiBattlerId].species,
-                                                 gBattleMons[data->aiBattlerId].otId,
-                                                 gBattleMons[data->aiBattlerId].personality,
-                                                 TRUE,
-                                                 39, 130, 15, TAG_NONE);
-        #else
         data->aiMonSpriteId = CreateMonPicSprite(gBattleMons[data->aiBattlerId].species,
                                                  gBattleMons[data->aiBattlerId].otId,
                                                  gBattleMons[data->aiBattlerId].personality,
                                                  TRUE,
                                                  39, 130, 15, TAG_NONE);
-        #endif
         data->aiViewState++;
         break;
     // Put text
@@ -893,15 +880,9 @@ static void Task_ShowAiKnowledge(u8 taskId)
         {
             if (GET_BATTLER_SIDE(i) == B_SIDE_PLAYER && IsBattlerAlive(i))
             {
-            #ifndef POKEMON_EXPANSION
-                data->aiIconSpriteIds[i] = CreateMonIcon(gBattleMons[i].species,
-                                                         SpriteCallbackDummy,
-                                                         95 + (count * 80), 17, 0, 0, FALSE);
-            #else
                 data->aiIconSpriteIds[i] = CreateMonIcon(gBattleMons[i].species,
                                                          SpriteCallbackDummy,
                                                          95 + (count * 80), 17, 0, 0);
-            #endif
                 gSprites[data->aiIconSpriteIds[i]].data[0] = i; // battler id
                 count++;
             }
@@ -910,19 +891,11 @@ static void Task_ShowAiKnowledge(u8 taskId)
                 data->aiIconSpriteIds[i] = 0xFF;
             }
         }
-        #ifndef POKEMON_EXPANSION
-        data->aiMonSpriteId = CreateMonPicSprite_HandleDeoxys(gBattleMons[data->aiBattlerId].species,
-                                                 gBattleMons[data->aiBattlerId].otId,
-                                                 gBattleMons[data->aiBattlerId].personality,
-                                                 TRUE,
-                                                 39, 130, 15, TAG_NONE);
-        #else
         data->aiMonSpriteId = CreateMonPicSprite(gBattleMons[data->aiBattlerId].species,
                                                  gBattleMons[data->aiBattlerId].otId,
                                                  gBattleMons[data->aiBattlerId].personality,
                                                  TRUE,
                                                  39, 130, 15, TAG_NONE);
-        #endif
         data->aiViewState++;
         break;
     // Put text
@@ -1393,30 +1366,30 @@ static void UpdateBattlerValue(struct BattleDebugMenu *data)
     switch (data->modifyArrows.typeOfVal)
     {
     case VAL_U8:
-        *(u8*)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
+        *(u8 *)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
         break;
     case VAL_S8:
-        *(s8*)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
+        *(s8 *)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
         break;
     case VAL_U16:
-        *(u16*)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
+        *(u16 *)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
         break;
     case VAR_U16_4_ENTRIES:
-        ((u16*)(data->modifyArrows.modifiedValPtr))[0] = data->modifyArrows.currValue;
-        ((u16*)(data->modifyArrows.modifiedValPtr))[1] = data->modifyArrows.currValue;
-        ((u16*)(data->modifyArrows.modifiedValPtr))[2] = data->modifyArrows.currValue;
-        ((u16*)(data->modifyArrows.modifiedValPtr))[3] = data->modifyArrows.currValue;
+        ((u16 *)(data->modifyArrows.modifiedValPtr))[0] = data->modifyArrows.currValue;
+        ((u16 *)(data->modifyArrows.modifiedValPtr))[1] = data->modifyArrows.currValue;
+        ((u16 *)(data->modifyArrows.modifiedValPtr))[2] = data->modifyArrows.currValue;
+        ((u16 *)(data->modifyArrows.modifiedValPtr))[3] = data->modifyArrows.currValue;
         break;
     case VAL_ALL_STAT_STAGES:
         for (i = 0; i < NUM_BATTLE_STATS; i++)
             gBattleMons[data->battlerId].statStages[i] = data->modifyArrows.currValue;
         break;
     case VAL_U32:
-        *(u32*)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
+        *(u32 *)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
         break;
     case VAL_BITFIELD_32:
-        *(u32*)(data->modifyArrows.modifiedValPtr) &= ~(GetBitfieldToAndValue(data->bitfield[data->currentSecondaryListItemId].currBit, data->bitfield[data->currentSecondaryListItemId].bitsCount));
-        *(u32*)(data->modifyArrows.modifiedValPtr) |= (data->modifyArrows.currValue << data->bitfield[data->currentSecondaryListItemId].currBit);
+        *(u32 *)(data->modifyArrows.modifiedValPtr) &= ~(GetBitfieldToAndValue(data->bitfield[data->currentSecondaryListItemId].currBit, data->bitfield[data->currentSecondaryListItemId].bitsCount));
+        *(u32 *)(data->modifyArrows.modifiedValPtr) |= (data->modifyArrows.currValue << data->bitfield[data->currentSecondaryListItemId].currBit);
         break;
     case VAR_SIDE_STATUS:
         *GetSideStatusValue(data, TRUE, data->modifyArrows.currValue != 0) = data->modifyArrows.currValue;
@@ -1425,8 +1398,8 @@ static void UpdateBattlerValue(struct BattleDebugMenu *data)
         (*(struct BattleSpriteInfo*)(data->modifyArrows.modifiedValPtr)).hpNumbersNoBars = data->modifyArrows.currValue;
         break;
     case VAR_SUBSTITUTE:
-        *(u8*)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
-        if (*(u8*)(data->modifyArrows.modifiedValPtr) == 0)
+        *(u8 *)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
+        if (*(u8 *)(data->modifyArrows.modifiedValPtr) == 0)
         {
             gBattleMons[data->battlerId].status2 &= ~STATUS2_SUBSTITUTE;
             gBattleSpritesDataPtr->battlerData[data->battlerId].behindSubstitute = 0;
@@ -1452,7 +1425,7 @@ static void UpdateBattlerValue(struct BattleDebugMenu *data)
         break;
     case VAL_ITEM:
         if (data->currentSecondaryListItemId == 0)
-            *(u16*)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
+            *(u16 *)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
         else if (data->currentSecondaryListItemId == 1)
             gBattleStruct->debugHoldEffects[data->battlerId] = data->modifyArrows.currValue;
         break;
@@ -1511,9 +1484,9 @@ static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus,
         if (changeStatus)
         {
             if (statusTrue)
-                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_REFLECT;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_REFLECT;
             else
-                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_REFLECT;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_REFLECT;
             sideTimer->reflectBattlerId = data->battlerId;
         }
         return &sideTimer->reflectTimer;
@@ -1521,9 +1494,9 @@ static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus,
         if (changeStatus)
         {
             if (statusTrue)
-                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_LIGHTSCREEN;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_LIGHTSCREEN;
             else
-                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_LIGHTSCREEN;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_LIGHTSCREEN;
             sideTimer->lightscreenBattlerId = data->battlerId;
         }
         return &sideTimer->lightscreenTimer;
@@ -1531,18 +1504,18 @@ static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus,
         if (changeStatus)
         {
             if (statusTrue)
-                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_SPIKES;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_SPIKES;
             else
-                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_SPIKES;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_SPIKES;
         }
         return &sideTimer->spikesAmount;
     case LIST_SIDE_SAFEGUARD:
         if (changeStatus)
         {
             if (statusTrue)
-                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_SAFEGUARD;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_SAFEGUARD;
             else
-                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_SAFEGUARD;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_SAFEGUARD;
             sideTimer->safeguardBattlerId = data->battlerId;
         }
         return &sideTimer->safeguardTimer;
@@ -1550,9 +1523,9 @@ static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus,
         if (changeStatus)
         {
             if (statusTrue)
-                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_MIST;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_MIST;
             else
-                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_MIST;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_MIST;
             sideTimer->mistBattlerId = data->battlerId;
         }
         return &sideTimer->mistTimer;
@@ -1560,9 +1533,9 @@ static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus,
         if (changeStatus)
         {
             if (statusTrue)
-                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_AURORA_VEIL;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_AURORA_VEIL;
             else
-                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_AURORA_VEIL;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_AURORA_VEIL;
             sideTimer->auroraVeilBattlerId = data->battlerId;
         }
         return &sideTimer->auroraVeilTimer;
@@ -1570,9 +1543,9 @@ static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus,
         if (changeStatus)
         {
             if (statusTrue)
-                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_LUCKY_CHANT;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_LUCKY_CHANT;
             else
-                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_LUCKY_CHANT;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_LUCKY_CHANT;
             sideTimer->luckyChantBattlerId = data->battlerId;
         }
         return &sideTimer->luckyChantTimer;
@@ -1580,9 +1553,9 @@ static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus,
         if (changeStatus)
         {
             if (statusTrue)
-                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_TAILWIND;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_TAILWIND;
             else
-                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_TAILWIND;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_TAILWIND;
             sideTimer->tailwindBattlerId = data->battlerId;
         }
         return &sideTimer->tailwindTimer;
@@ -1590,27 +1563,27 @@ static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus,
         if (changeStatus)
         {
             if (statusTrue)
-                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_STEALTH_ROCK;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_STEALTH_ROCK;
             else
-                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_STEALTH_ROCK;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_STEALTH_ROCK;
         }
         return &sideTimer->stealthRockAmount;
     case LIST_SIDE_TOXIC_SPIKES:
         if (changeStatus)
         {
             if (statusTrue)
-                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_TOXIC_SPIKES;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_TOXIC_SPIKES;
             else
-                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_TOXIC_SPIKES;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_TOXIC_SPIKES;
         }
         return &sideTimer->toxicSpikesAmount;
     case LIST_SIDE_STICKY_WEB:
         if (changeStatus)
         {
             if (statusTrue)
-                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_STICKY_WEB;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_STICKY_WEB;
             else
-                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_STICKY_WEB;
+                *(u32 *)(data->modifyArrows.modifiedValPtr) &= ~SIDE_STATUS_STICKY_WEB;
         }
         return &sideTimer->stickyWebAmount;
     default:
@@ -1674,9 +1647,9 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         data->modifyArrows.minValue = 0;
         data->modifyArrows.maxValue = NUMBER_OF_MON_TYPES - 1;
         data->modifyArrows.maxDigits = 2;
-        data->modifyArrows.modifiedValPtr = (u8*)((&gBattleMons[data->battlerId].type1) + data->currentSecondaryListItemId);
+        data->modifyArrows.modifiedValPtr = (u8 *)((&gBattleMons[data->battlerId].type1) + data->currentSecondaryListItemId);
         data->modifyArrows.typeOfVal = VAL_U8;
-        data->modifyArrows.currValue = *(u8*)((&gBattleMons[data->battlerId].type1) + data->currentSecondaryListItemId);
+        data->modifyArrows.currValue = *(u8 *)((&gBattleMons[data->battlerId].type1) + data->currentSecondaryListItemId);
         break;
     case LIST_ITEM_STATS:
         data->modifyArrows.minValue = 0;
@@ -1697,8 +1670,8 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         }
         else
         {
-            data->modifyArrows.modifiedValPtr = (u16*)((&gBattleMons[data->battlerId].attack) + (data->currentSecondaryListItemId - 2));
-            data->modifyArrows.currValue = *(u16*)((&gBattleMons[data->battlerId].attack) + (data->currentSecondaryListItemId - 2));
+            data->modifyArrows.modifiedValPtr = (u16 *)((&gBattleMons[data->battlerId].attack) + (data->currentSecondaryListItemId - 2));
+            data->modifyArrows.currValue = *(u16 *)((&gBattleMons[data->battlerId].attack) + (data->currentSecondaryListItemId - 2));
         }
         data->modifyArrows.typeOfVal = VAL_U16;
         break;
@@ -1952,20 +1925,12 @@ static const u8 sText_HoldEffectPsychicPower[] = _("Psychic Power");
 static const u8 sText_HoldEffectFirePower[] = _("Fire Power");
 static const u8 sText_HoldEffectDragonPower[] = _("Dragon Power");
 static const u8 sText_HoldEffectNormalPower[] = _("Normal Power");
-#ifdef ITEM_EXPANSION
 static const u8 sText_HoldEffectUpgrade[] = _("Upgrade");
-#else
-static const u8 sText_HoldEffectUpgrade[] = _("Up Grade");
-#endif
 static const u8 sText_HoldEffectShellBell[] = _("Shell Bell");
 static const u8 sText_HoldEffectLuckyPunch[] = _("Lucky Punch");
 static const u8 sText_HoldEffectMetalPowder[] = _("Metal Powder");
 static const u8 sText_HoldEffectThickClub[] = _("Thick Club");
-#ifdef ITEM_EXPANSION
 static const u8 sText_HoldEffectLeek[] = _("Leek");
-#else
-static const u8 sText_HoldEffectLeek[] = _("Stick");
-#endif
 static const u8 sText_HoldEffectChoiceScarf[] = _("Choice Scarf");
 static const u8 sText_HoldEffectChoiceSpecs[] = _("Choice Specs");
 static const u8 sText_HoldEffectDampRock[] = _("Damp Rock");

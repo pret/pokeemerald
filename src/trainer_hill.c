@@ -36,7 +36,7 @@
 
 struct FloorTrainers
 {
-    u8 name[HILL_TRAINERS_PER_FLOOR][HILL_TRAINER_NAME_LENGTH];
+    u8 name[HILL_TRAINERS_PER_FLOOR][TRAINER_NAME_LENGTH + 1];
     u8 facilityClass[HILL_TRAINERS_PER_FLOOR];
 };
 
@@ -165,30 +165,30 @@ static const u16 sPrizeListAttract[]     = {ITEM_TM45_ATTRACT,     ITEM_ETHER, I
 
 static const u16 *const sPrizeLists1[NUM_TRAINER_HILL_PRIZE_LISTS] =
 {
-	sPrizeListRareCandy1,
-	sPrizeListLuxuryBall1,
-	sPrizeListMaxRevive1,
-	sPrizeListMaxEther1,
-	sPrizeListElixir1,
-	sPrizeListRoar,
-	sPrizeListSludgeBomb,
-	sPrizeListToxic,
-	sPrizeListSunnyDay,
-	sPrizeListEarthQuake
+    sPrizeListRareCandy1,
+    sPrizeListLuxuryBall1,
+    sPrizeListMaxRevive1,
+    sPrizeListMaxEther1,
+    sPrizeListElixir1,
+    sPrizeListRoar,
+    sPrizeListSludgeBomb,
+    sPrizeListToxic,
+    sPrizeListSunnyDay,
+    sPrizeListEarthQuake
 };
 
 static const u16 *const sPrizeLists2[NUM_TRAINER_HILL_PRIZE_LISTS] =
 {
-	sPrizeListRareCandy2,
-	sPrizeListLuxuryBall2,
-	sPrizeListMaxRevive2,
-	sPrizeListMaxEther2,
-	sPrizeListElixir2,
-	sPrizeListBrickBreak,
-	sPrizeListTorment,
-	sPrizeListSkillSwap,
-	sPrizeListGigaDrain,
-	sPrizeListAttract
+    sPrizeListRareCandy2,
+    sPrizeListLuxuryBall2,
+    sPrizeListMaxRevive2,
+    sPrizeListMaxEther2,
+    sPrizeListElixir2,
+    sPrizeListBrickBreak,
+    sPrizeListTorment,
+    sPrizeListSkillSwap,
+    sPrizeListGigaDrain,
+    sPrizeListAttract
 };
 
 static const u16 *const *const sPrizeListSets[] =
@@ -305,7 +305,7 @@ void GetTrainerHillTrainerName(u8 *dst, u16 trainerId)
     s32 i;
     u8 id = trainerId - 1;
 
-    for (i = 0; i < HILL_TRAINER_NAME_LENGTH; i++)
+    for (i = 0; i < TRAINER_NAME_LENGTH + 1; i++)
         dst[i] = sFloorTrainers->name[id][i];
 }
 
@@ -330,7 +330,7 @@ void InitTrainerHillBattleStruct(void)
 
     for (i = 0; i < HILL_TRAINERS_PER_FLOOR; i++)
     {
-        for (j = 0; j < HILL_TRAINER_NAME_LENGTH; j++)
+        for (j = 0; j < TRAINER_NAME_LENGTH + 1; j++)
             sFloorTrainers->name[i][j] = sHillData->floors[sHillData->floorId].trainers[i].name[j];
 
         sFloorTrainers->facilityClass[i] = sHillData->floors[sHillData->floorId].trainers[i].facilityClass;

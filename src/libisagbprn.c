@@ -160,7 +160,7 @@ void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopP
 /*
 void NoCashGBAPrint(const char *pBuf)
 {
-    *(volatile u32*)NOCASHGBAPRINTADDR2 = (u32)pBuf;
+    *(volatile u32 *)NOCASHGBAPRINTADDR2 = (u32)pBuf;
 }
 
 void NoCashGBAPrintf(const char *pBuf, ...)

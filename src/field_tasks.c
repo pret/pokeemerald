@@ -166,7 +166,7 @@ static void Task_RunTimeBasedEvents(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (!ScriptContext2_IsEnabled())
+    if (!ArePlayerFieldControlsLocked())
     {
         RunTimeBasedEvents(data);
         UpdateAmbientCry(&tAmbientCryState, &tAmbientCryDelay);

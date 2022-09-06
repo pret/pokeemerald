@@ -3,12 +3,6 @@ ENTRY(Start)
 gNumMusicPlayers = 4;
 gMaxLines = 0;
 
-/* Modify the following load addresses as needed to make more room. Alternately, delete both the
-   declarations below and their references further down to get rid of the gaps.                  */
-
-__anim_mon_load_address = 0x8b00000;
-__gfx_load_address = 0x8c00000;
-
 SECTIONS {
     . = 0x2000000;
 
@@ -20,6 +14,9 @@ SECTIONS {
         . = 0x1C000;
 
         INCLUDE "sym_ewram.ld"
+        src/*.o(.ewram_data);
+        gflib/*.o(.ewram_data);
+
         *libc.a:impure.o(.data);
         *libc.a:locale.o(.data);
         *libc.a:mallocr.o(.data);
@@ -33,6 +30,9 @@ SECTIONS {
     {
         /* .bss starts at 0x3000000 */
         INCLUDE "sym_bss.ld"
+        src/*.o(.bss);
+        gflib/*.o(.bss);
+        data/*.o(.bss);
 
         /* .bss.code starts at 0x3001AA8 */
         src/m4a.o(.bss.code);
@@ -91,6 +91,7 @@ SECTIONS {
         src/battle_bg.o(.text);
         src/battle_main.o(.text);
         src/battle_util.o(.text);
+        src/battle_z_move.o(.text);
         src/battle_script_commands.o(.text);
         src/battle_util2.o(.text);
         src/battle_controller_player.o(.text);
@@ -340,6 +341,7 @@ SECTIONS {
         src/gym_leader_rematch.o(.text);
         src/battle_transition_frontier.o(.text);
         src/international_string_util.o(.text);
+        src/pokemon_debug.o(.text);
     } =0
 
     script_data :
@@ -481,6 +483,7 @@ SECTIONS {
         src/battle_bg.o(.rodata);
         src/battle_main.o(.rodata);
         src/battle_util.o(.rodata);
+        src/battle_z_move.o(.rodata);
         src/battle_script_commands.o(.rodata);
         src/battle_controller_player.o(.rodata);
         src/battle_anim_smokescreen.o(.rodata);
@@ -699,10 +702,12 @@ SECTIONS {
         src/battle_transition_frontier.o(.rodata);
         src/text_input_strings.o(.rodata);
         src/fonts.o(.rodata);
+        src/international_string_util.o(.rodata);
         src/mystery_event_msg.o(.rodata);
         data/mystery_gift.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
+        src/pokemon_debug.o(.rodata);
     } =0
 
     song_data :
@@ -1301,17 +1306,21 @@ SECTIONS {
         data/multiboot_pokemon_colosseum.o(.rodata);
     } =0
 
-    anim_mon_front_pic_data __anim_mon_load_address :
-    ALIGN(4)
-    {
-        src/anim_mon_front_pics.o(.rodata);
-    } =0
-
-    gfx_data __gfx_load_address :
+    gfx_data  :
     ALIGN(4)
     {
         src/graphics.o(.rodata);
     } =0
+
+    extra :
+    ALIGN(4)
+    {
+        src/*.o(.text);
+        gflib/*.o(.text);
+        src/*.o(.rodata);
+        gflib/*.o(.rodata);
+        data/*.o(.rodata);
+    } = 0
 
     /* DWARF debug sections.
        Symbols in the DWARF debugging sections are relative to the beginning

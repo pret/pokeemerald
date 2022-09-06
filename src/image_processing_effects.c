@@ -28,14 +28,14 @@ static void ApplyImageEffect_PersonalityColor(u8);
 static void ApplyImageEffect_RedChannelGrayscale(u8);
 static void ApplyImageEffect_RedChannelGrayscaleHighlight(u8);
 static void AddPointillismPoints(u16);
-static u16 ConvertColorToGrayscale(u16*);
-static u16 QuantizePixel_Blur(u16*, u16*, u16*);
-static u16 QuantizePixel_PersonalityColor(u16*, u8);
-static u16 QuantizePixel_BlackAndWhite(u16*);
-static u16 QuantizePixel_BlackOutline(u16*, u16*);
-static u16 QuantizePixel_Invert(u16*);
-static u16 QuantizePixel_BlurHard(u16*, u16*, u16*);
-static u16 QuantizePixel_MotionBlur(u16*, u16*);
+static u16 ConvertColorToGrayscale(u16 *);
+static u16 QuantizePixel_Blur(u16 *, u16 *, u16 *);
+static u16 QuantizePixel_PersonalityColor(u16 *, u8);
+static u16 QuantizePixel_BlackAndWhite(u16 *);
+static u16 QuantizePixel_BlackOutline(u16 *, u16 *);
+static u16 QuantizePixel_Invert(u16 *);
+static u16 QuantizePixel_BlurHard(u16 *, u16 *, u16 *);
+static u16 QuantizePixel_MotionBlur(u16 *, u16 *);
 static u16 GetColorFromPersonality(u8);
 static void QuantizePalette_Standard(bool8);
 static void SetPresetPalette_PrimaryColors(void);
@@ -46,10 +46,10 @@ static void SetPresetPalette_GrayscaleSmall(void);
 static void QuantizePalette_GrayscaleSmall(void);
 static void SetPresetPalette_BlackAndWhite(void);
 static void QuantizePalette_BlackAndWhite(void);
-static u16 QuantizePixel_Standard(u16*);
-static u16 QuantizePixel_GrayscaleSmall(u16*);
-static u16 QuantizePixel_Grayscale(u16*);
-static u16 QuantizePixel_PrimaryColors(u16*);
+static u16 QuantizePixel_Standard(u16 *);
+static u16 QuantizePixel_GrayscaleSmall(u16 *);
+static u16 QuantizePixel_Grayscale(u16 *);
+static u16 QuantizePixel_PrimaryColors(u16 *);
 
 #define MAX_DIMENSION 64
 
@@ -1091,7 +1091,7 @@ static u16 QuantizePixel_Standard(u16 *pixel)
     return RGB2(red, green, blue);
 }
 
-static u16 QuantizePixel_PrimaryColors(u16* color)
+static u16 QuantizePixel_PrimaryColors(u16 *color)
 {
     u16 red =   GET_R(*color);
     u16 green = GET_G(*color);

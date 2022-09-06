@@ -680,7 +680,7 @@ SoundMainRAM_Unk2:
 	ldr r1, [r4, o_SoundChannel_wav]
 	add r2, r2, r1
 	add r2, r2, 0x10
-	ldr r5, =gDecodingBuffer
+	ldr r5, =sDecodingBuffer
 	ldr r6, =gDeltaEncodingTable
 	mov r7, 0x40
 	ldrb lr, [r2], 1
@@ -701,7 +701,7 @@ _081DD57C:
 	subs r7, r7, 2
 	bgt _081DD568
 _081DD594:
-	ldr r5, =gDecodingBuffer
+	ldr r5, =sDecodingBuffer
 	and r0, r3, 0x3F
 	ldrsb r1, [r5, r0]
 	pop {r0,r2,r5-r7,pc}
@@ -1911,6 +1911,6 @@ _081DDD90:
 	.align 2, 0 @ Don't pad with nop.
 
 	.bss
-gDecodingBuffer: @ Used as a buffer for audio decoded from compressed DPCM
+sDecodingBuffer: @ Used as a buffer for audio decoded from compressed DPCM
 	.space 0x40
-	.size gDecodingBuffer, .-gDecodingBuffer
+	.size sDecodingBuffer, .-sDecodingBuffer
