@@ -1033,10 +1033,10 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority, bool32 hideHPBoxes)
         if (indicatorSpriteId != 0xFF)
             gSprites[indicatorSpriteId].oam.priority = priority;
 
-        #if B_HIDE_HEALTHBOX_IN_ANIMS
+    #if B_HIDE_HEALTHBOX_IN_ANIMS
         if (hideHPBoxes && IsBattlerAlive(i))
             TryToggleHealboxVisibility(priority, healthboxLeftSpriteId, healthboxRightSpriteId, healthbarSpriteId, indicatorSpriteId);
-        #endif
+    #endif
     }
 }
 
@@ -3119,10 +3119,11 @@ static void RestoreOverwrittenPixels(u8 *tiles)
 
 void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
 {
+#if B_ABILITY_POP_UP == TRUE
     const s16 (*coords)[2];
     u8 spriteId1, spriteId2, battlerPosition, taskId;
 
-    if (!B_ABILITY_POP_UP)
+    
         return;
 
     if (gBattleScripting.abilityPopupOverwrite != 0)
@@ -3189,6 +3190,7 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
     PrintBattlerOnAbilityPopUp(battlerId, spriteId1, spriteId2);
     PrintAbilityOnAbilityPopUp(ability, spriteId1, spriteId2);
     RestoreOverwrittenPixels((void*)(OBJ_VRAM0) + (gSprites[spriteId1].oam.tileNum * 32));
+#endif
 }
 
 void UpdateAbilityPopup(u8 battlerId)

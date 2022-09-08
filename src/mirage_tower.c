@@ -201,7 +201,8 @@ static const struct OamData sOamData_CeilingCrumbleSmall =
     .affineParam = 0,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_CeilingCrumbleSmall = {
+static const struct SpriteTemplate sSpriteTemplate_CeilingCrumbleSmall =
+{
     .tileTag = TAG_CEILING_CRUMBLE,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_CeilingCrumbleSmall,
@@ -239,7 +240,8 @@ static const struct OamData sOamData_CeilingCrumbleLarge =
     .affineParam = 0,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_CeilingCrumbleLarge = {
+static const struct SpriteTemplate sSpriteTemplate_CeilingCrumbleLarge =
+{
     .tileTag = TAG_CEILING_CRUMBLE,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_CeilingCrumbleLarge,

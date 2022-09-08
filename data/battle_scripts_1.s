@@ -1,3 +1,4 @@
+#include "config.h"
 #include "constants/global.h"
 #include "constants/battle.h"
 #include "constants/pokemon.h"
@@ -2016,12 +2017,11 @@ BattleScript_EffectHitSwitchTarget:
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	tryfaintmon BS_TARGET
-	moveendcase MOVEEND_MAGICIAN	@ possibly others?
+	moveendall
 	jumpifability BS_TARGET, ABILITY_SUCTION_CUPS, BattleScript_AbilityPreventsPhasingOut
 	jumpifstatus3 BS_TARGET, STATUS3_ROOTED, BattleScript_PrintMonIsRooted
 	tryhitswitchtarget BattleScript_EffectHitSwitchTargetMoveEnd
 BattleScript_EffectHitSwitchTargetMoveEnd:
-	moveendall
 	end
 
 BattleScript_EffectClearSmog:
@@ -6567,11 +6567,9 @@ BattleScript_LearnMoveReturn::
 BattleScript_RainContinuesOrEnds::
 	printfromtable gRainContinuesStringIds
 	waitmessage B_WAIT_TIME_LONG
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_RAIN_STOPPED, BattleScript_RainEnds
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_RAIN_STOPPED, BattleScript_RainContinuesOrEndsEnd
 	playanimation BS_ATTACKER, B_ANIM_RAIN_CONTINUES
-	end2
-BattleScript_RainEnds::
-	call BattleScript_WeatherFormChanges
+BattleScript_RainContinuesOrEndsEnd::
 	end2
 
 BattleScript_DamagingWeatherContinues::
@@ -6610,7 +6608,6 @@ BattleScript_DamagingWeatherContinuesEnd::
 BattleScript_SandStormHailEnds::
 	printfromtable gSandStormHailEndStringIds
 	waitmessage B_WAIT_TIME_LONG
-	call BattleScript_WeatherFormChanges
 	end2
 
 BattleScript_SunlightContinues::
@@ -6622,7 +6619,6 @@ BattleScript_SunlightContinues::
 BattleScript_SunlightFaded::
 	printstring STRINGID_SUNLIGHTFADED
 	waitmessage B_WAIT_TIME_LONG
-	call BattleScript_WeatherFormChanges
 	end2
 
 BattleScript_OverworldWeatherStarts::
@@ -7456,6 +7452,7 @@ BattleScript_MagicCoatBounce::
 	printfromtable gMagicCoatBounceStringIds
 	waitmessage B_WAIT_TIME_LONG
 	orword gHitMarker, HITMARKER_ATTACKSTRING_PRINTED | HITMARKER_NO_PPDEDUCT | HITMARKER_ALLOW_NO_PP
+	bicword gHitMarker, HITMARKER_NO_ATTACKSTRING
 	setmagiccoattarget BS_ATTACKER
 	return
 
@@ -8227,19 +8224,30 @@ BattleScript_ShedSkinActivates::
 BattleScript_WeatherFormChanges::
 	setbyte sBATTLER, 0
 BattleScript_WeatherFormChangesLoop::
-	trycastformdatachange
+	tryweatherformdatachange
 	addbyte sBATTLER, 1
 	jumpifbytenotequal sBATTLER, gBattlersCount, BattleScript_WeatherFormChangesLoop
 	return
 
-BattleScript_CastformChange::
-	call BattleScript_DoCastformChange
+BattleScript_WeatherFormChange::
+	call BattleScript_DoWeatherFormChange
 	end3
 
-BattleScript_DoCastformChange::
+BattleScript_DoWeatherFormChange::
 	copybyte gBattlerAbility, sBATTLER
+.if B_WEATHER_FORMS >= GEN_5
+	jumpifspecies BS_SCRIPTING, SPECIES_CASTFORM, BattleScript_DoWeatherFormChange_ForecastCheck
+BattleScript_DoWeatherFormChange_FlowerGiftCheck:
+	jumpifability BS_SCRIPTING, ABILITY_FLOWER_GIFT, BattleScript_DoWeatherFormChange_PopUp
+	goto BattleScript_DoWeatherFormChange_AfterPopUp
+.endif
+BattleScript_DoWeatherFormChange_ForecastCheck:
+	jumpifability BS_SCRIPTING, ABILITY_FORECAST, BattleScript_DoWeatherFormChange_PopUp
+	goto BattleScript_DoWeatherFormChange_AfterPopUp
+BattleScript_DoWeatherFormChange_PopUp:
 	call BattleScript_AbilityPopUp
-	docastformchangeanimation
+BattleScript_DoWeatherFormChange_AfterPopUp:
+	doweatherformchangeanimation
 	waitstate
 	printstring STRINGID_PKMNTRANSFORMED
 	waitmessage B_WAIT_TIME_LONG

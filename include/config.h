@@ -44,4 +44,13 @@
 #define POKEMON_EXPANSION
 #define ITEM_EXPANSION
 
+// Generation constants used in configs to define behavior
+#define GEN_3 0
+#define GEN_4 1
+#define GEN_5 2
+#define GEN_6 3
+#define GEN_7 4
+#define GEN_8 5
+#define GEN_LATEST GEN_8
+
 #endif // GUARD_CONFIG_H
