@@ -65,7 +65,6 @@ static void DecryptBoxMon(struct BoxPokemon *boxMon);
 static void Task_PlayMapChosenOrBattleBGM(u8 taskId);
 static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static bool8 ShouldSkipFriendshipChange(void);
-static u8 SendMonToPC(struct Pokemon *mon);
 static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
 void TrySpecialOverworldEvo();
 
@@ -5183,7 +5182,7 @@ u8 GiveMonToPlayer(struct Pokemon *mon)
     return MON_GIVEN_TO_PARTY;
 }
 
-static u8 SendMonToPC(struct Pokemon *mon)
+u8 SendMonToPC(struct Pokemon* mon)
 {
     s32 boxNo, boxPos;
 
