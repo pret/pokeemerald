@@ -2004,7 +2004,7 @@ static void RfuMain1_UnionRoom(void)
     {
         rfu_REQ_recvData();
         rfu_waitREQComplete();
-        rfu_LMAN_REQ_sendData(0);
+        rfu_LMAN_REQ_sendData(FALSE);
     }
 }
 
@@ -2747,7 +2747,7 @@ static void Task_RfuReconnectWithParent(u8 taskId)
 
     if (CanTryReconnectParent())
     {
-        u8 id = GetPartnerIndexByNameAndTrainerID((u8*)data, ReadU16(&data[8]));
+        u8 id = GetPartnerIndexByNameAndTrainerID((u8 *)data, ReadU16(&data[8]));
         if (id != 0xFF)
         {
             if (gRfuLinkStatus->partner[id].slot != 0xFF)
@@ -2797,7 +2797,7 @@ void CreateTask_RfuReconnectWithParent(const u8 *name, u16 trainerId)
     gRfu.status = RFU_STATUS_OK;
     taskId = CreateTask(Task_RfuReconnectWithParent, 3);
     data = gTasks[taskId].data;
-    StringCopy((u8*)(data), name);
+    StringCopy((u8 *)(data), name);
     data[8] = trainerId;
 }
 
@@ -2947,7 +2947,7 @@ static void Debug_PrintStatus(void)
             if ((gRfuLinkStatus->getNameFlag >> i) & 1)
             {
                 Debug_PrintNum(gRfuLinkStatus->partner[i].serialNo, 1, i + 3, 4);
-                Debug_PrintString((void*)gRfuLinkStatus->partner[i].gname, 6, i + 3);
+                Debug_PrintString((void *)gRfuLinkStatus->partner[i].gname, 6, i + 3);
                 Debug_PrintString(gRfuLinkStatus->partner[i].uname, 22, i + 3);
             }
         }
@@ -2967,7 +2967,7 @@ static void Debug_PrintStatus(void)
             Debug_PrintString(sASCII_8Spaces, 22, i + 3);
         }
         Debug_PrintNum(gRfuLinkStatus->partner[gRfu.childSlot].serialNo, 1, 3, 4);
-        Debug_PrintString((void*)gRfuLinkStatus->partner[gRfu.childSlot].gname, 6, 3);
+        Debug_PrintString((void *)gRfuLinkStatus->partner[gRfu.childSlot].gname, 6, 3);
         Debug_PrintString(gRfuLinkStatus->partner[gRfu.childSlot].uname, 22, 3);
     }
     else

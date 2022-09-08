@@ -332,7 +332,7 @@ u8 *CopyStringLeftAlignedToConditionData(u8 *dst, const u8 *src, s16 n)
     return dst;
 }
 
-static u8 *CopyConditionMonNameGender(u8 *str, u16 listId, bool8 arg3)
+static u8 *CopyConditionMonNameGender(u8 *str, u16 listId, bool8 skipPadding)
 {
     u16 boxId, monId, gender, species, level, lvlDigits;
     struct BoxPokemon *boxMon;
@@ -412,7 +412,7 @@ static u8 *CopyConditionMonNameGender(u8 *str, u16 listId, bool8 arg3)
     str_ = ConvertIntToDecimalStringN(str_, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     lvlDigits = str_ - txtPtr;
     *(str_++) = CHAR_SPACE;
-    if (!arg3)
+    if (!skipPadding)
     {
         lvlDigits = 3 - lvlDigits;
         while (lvlDigits-- != 0)
@@ -534,7 +534,7 @@ static void ConditionGraphDrawMonPic(s16 listId, u8 loadId)
     species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES2, NULL);
     tid = GetBoxOrPartyMonData(boxId, monId, MON_DATA_OT_ID, NULL);
     personality = GetBoxOrPartyMonData(boxId, monId, MON_DATA_PERSONALITY, NULL);
-    LoadSpecialPokePic(&gMonFrontPicTable[species], menu->monPicGfx[loadId], species, personality, TRUE);
+    LoadSpecialPokePic(menu->monPicGfx[loadId], species, personality, TRUE);
     LZ77UnCompWram(GetMonSpritePalFromSpeciesAndPersonality(species, tid, personality), menu->monPal[loadId]);
 }
 

@@ -288,43 +288,57 @@
 	createvisualtask AnimTask_IsDoubleBattle, 0
 	jumprettrue \ptr
 	.endm
-    
+
 @ keep CFRU macros cause I'm lazy. todo: update to createsprite and createvisualtask, respectively
 .macro launchtemplate launchtemplatePtr launchtemplatePriority launchtemplateArgsNo launchtemplatearg0 launchtemplatearg1 launchtemplatearg2 launchtemplatearg3 launchtemplatearg4 launchtemplatearg5 launchtemplatearg6 launchtemplatearg7 launchtemplatearg8
-    .byte 0x2
-    .word \launchtemplatePtr
-    .byte \launchtemplatePriority
-    .byte \launchtemplateArgsNo
-    .hword \launchtemplatearg0
-    .hword \launchtemplatearg1
-    .hword \launchtemplatearg2
-    .hword \launchtemplatearg3
-    .hword \launchtemplatearg4
-    .hword \launchtemplatearg5
-    .hword \launchtemplatearg6
-    .hword \launchtemplatearg7
-    .hword \launchtemplatearg8
-    .endm
-    
+	.byte 0x2
+	.word \launchtemplatePtr
+	.byte \launchtemplatePriority
+	.byte \launchtemplateArgsNo
+	.hword \launchtemplatearg0
+	.hword \launchtemplatearg1
+	.hword \launchtemplatearg2
+	.hword \launchtemplatearg3
+	.hword \launchtemplatearg4
+	.hword \launchtemplatearg5
+	.hword \launchtemplatearg6
+	.hword \launchtemplatearg7
+	.hword \launchtemplatearg8
+	.endm
+	
 .macro launchtask launchtaskPtr launchtaskPriority launchtaskArgsNo launchtaskarg0 launchtaskarg1 launchtaskarg2 launchtaskarg3 launchtaskarg4 launchtaskarg5 launchtaskarg6 launchtaskarg7 launchtaskarg8
-    .byte 0x3
-    .word \launchtaskPtr
-    .byte \launchtaskPriority
-    .byte \launchtaskArgsNo
-    .hword \launchtaskarg0
-    .hword \launchtaskarg1
-    .hword \launchtaskarg2
-    .hword \launchtaskarg3
-    .hword \launchtaskarg4
-    .hword \launchtaskarg5
-    .hword \launchtaskarg6
-    .hword \launchtaskarg7
-    .hword \launchtaskarg8
-    .endm
-    
+	.byte 0x3
+	.word \launchtaskPtr
+	.byte \launchtaskPriority
+	.byte \launchtaskArgsNo
+	.hword \launchtaskarg0
+	.hword \launchtaskarg1
+	.hword \launchtaskarg2
+	.hword \launchtaskarg3
+	.hword \launchtaskarg4
+	.hword \launchtaskarg5
+	.hword \launchtaskarg6
+	.hword \launchtaskarg7
+	.hword \launchtaskarg8
+	.endm
+	
 .macro setblends setblends_value
-.byte 0xC
-.hword \setblends_value
-.endm
+	.byte 0xC
+	.hword \setblends_value
+	.endm
 
+.macro launchsoundtask launchsoundtaskPtr launchsoundtaskArgsNo launchsoundtaskarg0 launchsoundtaskarg1 launchsoundtaskarg2 launchsoundtaskarg3 launchsoundtaskarg4 launchsoundtaskarg5 launchsoundtaskarg6 launchsoundtaskarg7 launchsoundtaskarg8
+	.byte 0x1F
+	.word \launchsoundtaskPtr
+	.byte \launchsoundtaskArgsNo
+	.hword \launchsoundtaskarg0
+	.hword \launchsoundtaskarg1
+	.hword \launchsoundtaskarg2
+	.hword \launchsoundtaskarg3
+	.hword \launchsoundtaskarg4
+	.hword \launchsoundtaskarg5
+	.hword \launchsoundtaskarg6
+	.hword \launchsoundtaskarg7
+	.hword \launchsoundtaskarg8
+	.endm
 

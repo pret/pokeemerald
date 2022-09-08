@@ -5,16 +5,31 @@ enum
 {
     BALL_POKE,
     BALL_GREAT,
-    BALL_SAFARI,
     BALL_ULTRA,
     BALL_MASTER,
-    BALL_NET,
-    BALL_DIVE,
-    BALL_NEST,
-    BALL_REPEAT,
-    BALL_TIMER,
-    BALL_LUXURY,
     BALL_PREMIER,
+    BALL_HEAL,
+    BALL_NET,
+    BALL_NEST,
+    BALL_DIVE,
+    BALL_DUSK,
+    BALL_TIMER,
+    BALL_QUICK,
+    BALL_REPEAT,
+    BALL_LUXURY,
+    BALL_LEVEL,
+    BALL_LURE,
+    BALL_MOON,
+    BALL_FRIEND,
+    BALL_LOVE,
+    BALL_FAST,
+    BALL_HEAVY,
+    BALL_DREAM,
+    BALL_SAFARI,
+    BALL_SPORT,
+    BALL_PARK,
+    BALL_BEAST,
+    BALL_CHERISH,
     POKEBALL_COUNT
 };
 
@@ -34,8 +49,8 @@ extern const struct SpriteTemplate gBallSpriteTemplates[];
 #define POKEBALL_OPPONENT_SENDOUT   0xFE
 
 u8 DoPokeballSendOutAnimation(s16 pan, u8 kindOfThrow);
-void CreatePokeballSpriteToReleaseMon(u8 monSpriteId, u8 battler, u8 x, u8 y, u8 oamPriority, u8 subpriortiy, u8 g, u32 h, u16 species);
-u8 CreateTradePokeballSprite(u8 a, u8 b, u8 x, u8 y, u8 oamPriority, u8 subPriority, u8 g, u32 h);
+void CreatePokeballSpriteToReleaseMon(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, u8 oamPriority, u8 subpriortiy, u8 delay, u32 fadePalettes, u16 species);
+u8 CreateTradePokeballSprite(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, u8 oamPriority, u8 subPriority, u8 delay, u32 fadePalettes);
 void StartHealthboxSlideIn(u8 battler);
 void DoHitAnimHealthboxEffect(u8 battler);
 void LoadBallGfx(u8 ballId);

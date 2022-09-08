@@ -373,21 +373,21 @@ static const u8 *const sTV3CheersForPokeblocksTextGroup[] = {
 };
 
 static const u8 *const sTVBravoTrainerBattleTowerTextGroup[] = {
-    gTVBravoTrainerBattleTowerText00,
-    gTVBravoTrainerBattleTowerText01,
-    gTVBravoTrainerBattleTowerText02,
-    gTVBravoTrainerBattleTowerText03,
-    gTVBravoTrainerBattleTowerText04,
-    gTVBravoTrainerBattleTowerText05,
-    gTVBravoTrainerBattleTowerText06,
-    gTVBravoTrainerBattleTowerText07,
-    gTVBravoTrainerBattleTowerText08,
-    gTVBravoTrainerBattleTowerText09,
-    gTVBravoTrainerBattleTowerText10,
-    gTVBravoTrainerBattleTowerText11,
-    gTVBravoTrainerBattleTowerText12,
-    gTVBravoTrainerBattleTowerText13,
-    gTVBravoTrainerBattleTowerText14
+    [BRAVOTOWER_STATE_INTRO]                = BravoTrainerBattleTower_Text_Intro,
+    [BRAVOTOWER_STATE_NEW_RECORD]           = BravoTrainerBattleTower_Text_NewRecord,
+    [BRAVOTOWER_STATE_LOST]                 = BravoTrainerBattleTower_Text_Lost,
+    [BRAVOTOWER_STATE_WON]                  = BravoTrainerBattleTower_Text_Won,
+    [BRAVOTOWER_STATE_LOST_FINAL]           = BravoTrainerBattleTower_Text_LostFinal,
+    [BRAVOTOWER_STATE_SATISFIED]            = BravoTrainerBattleTower_Text_Satisfied,
+    [BRAVOTOWER_STATE_UNSATISFIED]          = BravoTrainerBattleTower_Text_Unsatisfied,
+    [BRAVOTOWER_STATE_UNUSED_1]             = BravoTrainerBattleTower_Text_None1,
+    [BRAVOTOWER_STATE_UNUSED_2]             = BravoTrainerBattleTower_Text_None2,
+    [BRAVOTOWER_STATE_UNUSED_3]             = BravoTrainerBattleTower_Text_None3,
+    [BRAVOTOWER_STATE_UNUSED_4]             = BravoTrainerBattleTower_Text_None4,
+    [BRAVOTOWER_STATE_RESPONSE]             = BravoTrainerBattleTower_Text_Response,
+    [BRAVOTOWER_STATE_RESPONSE_SATISFIED]   = BravoTrainerBattleTower_Text_ResponseSatisfied,
+    [BRAVOTOWER_STATE_RESPONSE_UNSATISFIED] = BravoTrainerBattleTower_Text_ResponseUnsatisfied,
+    [BRAVOTOWER_STATE_OUTRO]                = BravoTrainerBattleTower_Text_Outro
 };
 
 static const u8 *const sTVContestLiveUpdatesTextGroup[] = {
@@ -723,7 +723,7 @@ static const u8 *const sTVInSearchOfTrainersTextGroup[] = {
 
 // Secret Base Secrets TV Show states for actions that can be taken in a secret base
 // The flags that determine whether or not the action was taken are commented
-const u8 sTVSecretBaseSecretsActions[NUM_SECRET_BASE_FLAGS] =
+static const u8 sTVSecretBaseSecretsActions[NUM_SECRET_BASE_FLAGS] =
 {
     SBSECRETS_STATE_USED_CHAIR,             // SECRET_BASE_USED_CHAIR
     SBSECRETS_STATE_USED_BALLOON,           // SECRET_BASE_USED_BALLOON
@@ -956,21 +956,13 @@ void GabbyAndTyBeforeInterview(void)
     else
         gSaveBlock1Ptr->gabbyAndTyData.playerUsedHealingItem = FALSE;
 
-    if (!gBattleResults.usedMasterBall)
+    for (i = 0; i < POKEBALL_COUNT; i++)
     {
-        for (i = 0; i < POKEBALL_COUNT - 1; i++)
+        if (gBattleResults.catchAttempts[i])
         {
-            if (gBattleResults.catchAttempts[i])
-            {
-                gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall = TRUE;
-                break;
-            }
+            gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall = TRUE;
+            break;
         }
-    }
-    else
-    {
-        // Player threw a Master Ball at Gabby and Ty
-        gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall = TRUE;
     }
 
     TakeGabbyAndTyOffTheAir();
@@ -1129,28 +1121,20 @@ void TryPutPokemonTodayOnAir(void)
             sCurTVShowSlot = FindFirstEmptyRecordMixTVShowSlot(gSaveBlock1Ptr->tvShows);
             if (sCurTVShowSlot != -1 && IsRecordMixShowAlreadySpawned(TVSHOW_POKEMON_TODAY_CAUGHT, FALSE) != TRUE)
             {
-                for (i = 0; i < POKEBALL_COUNT - 1; i++)
+                for (i = 0; i < POKEBALL_COUNT; i++)
                     ballsUsed += gBattleResults.catchAttempts[i];
 
-                if (ballsUsed != 0 || gBattleResults.usedMasterBall)
+                if (ballsUsed != 0)
                 {
                     ballsUsed = 0;
                     show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
                     show->pokemonToday.kind = TVSHOW_POKEMON_TODAY_CAUGHT;
                     show->pokemonToday.active = FALSE; // NOTE: Show is not active until passed via Record Mix.
-                    if (gBattleResults.usedMasterBall)
-                    {
-                        ballsUsed = 1;
-                        itemLastUsed = ITEM_MASTER_BALL;
-                    }
-                    else
-                    {
-                        for (i = 0; i < POKEBALL_COUNT - 1; i++)
-                            ballsUsed += gBattleResults.catchAttempts[i];
-                        if (ballsUsed > 255)
-                            ballsUsed = 255;
-                        itemLastUsed = gLastUsedItem;
-                    }
+                    for (i = 0; i < POKEBALL_COUNT; i++)
+                        ballsUsed += gBattleResults.catchAttempts[i];
+                    if (ballsUsed > 255)
+                        ballsUsed = 255;
+                    itemLastUsed = gLastUsedItem;
                     show->pokemonToday.nBallsUsed = ballsUsed;
                     show->pokemonToday.ball = itemLastUsed;
                     StringCopy(show->pokemonToday.playerName, gSaveBlock2Ptr->playerName);
@@ -1192,7 +1176,7 @@ static void TryPutPokemonTodayFailedOnTheAir(void)
 
     if (!rbernoulli(1, 1))
     {
-        for (i = 0, ballsUsed = 0; i < POKEBALL_COUNT - 1; i++)
+        for (i = 0, ballsUsed = 0; i < POKEBALL_COUNT; i++)
             ballsUsed += gBattleResults.catchAttempts[i];
         if (ballsUsed > 255)
             ballsUsed = 255;
@@ -1449,7 +1433,7 @@ static void InterviewAfter_BravoTrainerPokemonProfile(void)
     }
 }
 
-void BravoTrainerPokemonProfile_BeforeInterview1(u16 a0)
+void BravoTrainerPokemonProfile_BeforeInterview1(u16 move)
 {
     TVShow *show = &gSaveBlock1Ptr->tvShows[LAST_TVSHOW_IDX];
     InterviewBefore_BravoTrainerPkmnProfile();
@@ -1457,7 +1441,7 @@ void BravoTrainerPokemonProfile_BeforeInterview1(u16 a0)
     if (sCurTVShowSlot != -1)
     {
         DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, LAST_TVSHOW_IDX);
-        show->bravoTrainer.move = a0;
+        show->bravoTrainer.move = move;
         show->bravoTrainer.kind = TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE;
     }
 }
@@ -1490,9 +1474,9 @@ static void InterviewAfter_BravoTrainerBattleTowerProfile(void)
     show->bravoTrainerTower.numFights = GetCurrentBattleTowerWinStreak(gSaveBlock2Ptr->frontier.towerLvlMode, 0);
     show->bravoTrainerTower.wonTheChallenge = gSaveBlock2Ptr->frontier.towerBattleOutcome;
     if (gSaveBlock2Ptr->frontier.towerLvlMode == FRONTIER_LVL_50)
-        show->bravoTrainerTower.btLevel = 50;
+        show->bravoTrainerTower.btLevel = FRONTIER_MAX_LEVEL_50;
     else
-        show->bravoTrainerTower.btLevel = 100;
+        show->bravoTrainerTower.btLevel = FRONTIER_MAX_LEVEL_OPEN;
     show->bravoTrainerTower.interviewResponse = gSpecialVar_0x8004;
     StorePlayerIdInNormalShow(show);
     show->bravoTrainerTower.language = gGameLanguage;
@@ -2133,11 +2117,8 @@ void TryPutBreakingNewsOnAir(void)
         show->breakingNews.kind = TVSHOW_BREAKING_NEWS;
         show->breakingNews.active = FALSE; // NOTE: Show is not active until passed via Record Mix.
         balls = 0;
-        for (i = 0; i < POKEBALL_COUNT - 1; i++)
+        for (i = 0; i < POKEBALL_COUNT; i++)
             balls += gBattleResults.catchAttempts[i];
-
-        if (gBattleResults.usedMasterBall)
-            balls++;
         show->breakingNews.location = gMapHeader.regionMapSectionId;
         StringCopy(show->breakingNews.playerName, gSaveBlock2Ptr->playerName);
         show->breakingNews.poke1Species = gBattleResults.playerMon1Species;
@@ -2167,10 +2148,7 @@ void TryPutBreakingNewsOnAir(void)
         switch (show->breakingNews.outcome)
         {
         case 0:
-            if (gBattleResults.usedMasterBall)
-                show->breakingNews.caughtMonBall = ITEM_MASTER_BALL;
-            else
-                show->breakingNews.caughtMonBall = gBattleResults.caughtMonBall;
+            show->breakingNews.caughtMonBall = gBattleResults.caughtMonBall;
             show->breakingNews.balls = balls;
             break;
         case 1:
@@ -4371,6 +4349,9 @@ static void DoTVShowBravoTrainerPokemonProfile(void)
     ShowFieldMessage(sTVBravoTrainerTextGroup[state]);
 }
 
+// This is the TV show triggered by accepting the reporter's interview in the lobby of Battle Tower.
+// The reporter had asked the player if they were satisfied or not with the challenge, and then asked
+// for a one word Easy Chat description of their feelings about the challenge.
 static void DoTVShowBravoTrainerBattleTower(void)
 {
     TVShow *show;
@@ -4381,85 +4362,83 @@ static void DoTVShowBravoTrainerBattleTower(void)
     state = sTVShowState;
     switch(state)
     {
-    case 0:
+    case BRAVOTOWER_STATE_INTRO:
         TVShowConvertInternationalString(gStringVar1, show->bravoTrainerTower.trainerName, show->bravoTrainerTower.language);
         StringCopy(gStringVar2, gSpeciesNames[show->bravoTrainerTower.species]);
-        if (show->bravoTrainerTower.numFights >= 7)
-            sTVShowState = 1;
+        if (show->bravoTrainerTower.numFights >= FRONTIER_STAGES_PER_CHALLENGE)
+            sTVShowState = BRAVOTOWER_STATE_NEW_RECORD;
         else
-            sTVShowState = 2;
+            sTVShowState = BRAVOTOWER_STATE_LOST;
         break;
-    case 1:
-        if (show->bravoTrainerTower.btLevel == 50)
-        {
+    case BRAVOTOWER_STATE_NEW_RECORD:
+        // The TV show states a "new record" was achieved as long as all the battles in the challenge were attempted,
+        // regardless of any previous records or whether the final battle was won or lost.
+        if (show->bravoTrainerTower.btLevel == FRONTIER_MAX_LEVEL_50)
             StringCopy(gStringVar1, gText_Lv50);
-        }
         else
-        {
             StringCopy(gStringVar1, gText_OpenLevel);
-        }
         ConvertIntToDecimalString(1, show->bravoTrainerTower.numFights);
         if (show->bravoTrainerTower.wonTheChallenge == TRUE)
-            sTVShowState = 3;
+            sTVShowState = BRAVOTOWER_STATE_WON;
         else
-            sTVShowState = 4;
+            sTVShowState = BRAVOTOWER_STATE_LOST_FINAL;
         break;
-    case 2:
+    case BRAVOTOWER_STATE_LOST:
         TVShowConvertInternationalString(gStringVar1, show->bravoTrainerTower.pokemonName, show->bravoTrainerTower.pokemonNameLanguage);
         ConvertIntToDecimalString(1, show->bravoTrainerTower.numFights + 1);
         if (show->bravoTrainerTower.interviewResponse == 0)
-            sTVShowState = 5;
+            sTVShowState = BRAVOTOWER_STATE_SATISFIED;
         else
-            sTVShowState = 6;
+            sTVShowState = BRAVOTOWER_STATE_UNSATISFIED;
         break;
-    case 3:
+    case BRAVOTOWER_STATE_WON:
         TVShowConvertInternationalString(gStringVar1, show->bravoTrainerTower.pokemonName, show->bravoTrainerTower.pokemonNameLanguage);
         StringCopy(gStringVar2, gSpeciesNames[show->bravoTrainerTower.defeatedSpecies]);
         if (show->bravoTrainerTower.interviewResponse == 0)
-            sTVShowState = 5;
+            sTVShowState = BRAVOTOWER_STATE_SATISFIED;
         else
-            sTVShowState = 6;
+            sTVShowState = BRAVOTOWER_STATE_UNSATISFIED;
         break;
-    case 4:
+    case BRAVOTOWER_STATE_LOST_FINAL:
         TVShowConvertInternationalString(gStringVar1, show->bravoTrainerTower.pokemonName, show->bravoTrainerTower.pokemonNameLanguage);
         StringCopy(gStringVar2, gSpeciesNames[show->bravoTrainerTower.defeatedSpecies]);
         if (show->bravoTrainerTower.interviewResponse == 0)
-            sTVShowState = 5;
+            sTVShowState = BRAVOTOWER_STATE_SATISFIED;
         else
-            sTVShowState = 6;
+            sTVShowState = BRAVOTOWER_STATE_UNSATISFIED;
         break;
-    case 5:
+    case BRAVOTOWER_STATE_SATISFIED:
         TVShowConvertInternationalString(gStringVar1, show->bravoTrainerTower.pokemonName, show->bravoTrainerTower.pokemonNameLanguage);
-        sTVShowState = 11;
+        sTVShowState = BRAVOTOWER_STATE_RESPONSE;
         break;
-    case 6:
+    case BRAVOTOWER_STATE_UNSATISFIED:
         TVShowConvertInternationalString(gStringVar1, show->bravoTrainerTower.pokemonName, show->bravoTrainerTower.pokemonNameLanguage);
-        sTVShowState = 11;
+        sTVShowState = BRAVOTOWER_STATE_RESPONSE;
         break;
-    case 7:
-        sTVShowState = 11;
+    case BRAVOTOWER_STATE_UNUSED_1:
+        sTVShowState = BRAVOTOWER_STATE_RESPONSE;
         break;
-    case 8:
-    case 9:
-    case 10:
+    case BRAVOTOWER_STATE_UNUSED_2:
+    case BRAVOTOWER_STATE_UNUSED_3:
+    case BRAVOTOWER_STATE_UNUSED_4:
         TVShowConvertInternationalString(gStringVar1, show->bravoTrainerTower.trainerName, show->bravoTrainerTower.language);
-        sTVShowState = 11;
+        sTVShowState = BRAVOTOWER_STATE_RESPONSE;
         break;
-    case 11:
+    case BRAVOTOWER_STATE_RESPONSE:
         CopyEasyChatWord(gStringVar1, show->bravoTrainerTower.words[0]);
         if (show->bravoTrainerTower.interviewResponse == 0)
-            sTVShowState = 12;
+            sTVShowState = BRAVOTOWER_STATE_RESPONSE_SATISFIED;
         else
-            sTVShowState = 13;
+            sTVShowState = BRAVOTOWER_STATE_RESPONSE_UNSATISFIED;
         break;
-    case 12:
-    case 13:
+    case BRAVOTOWER_STATE_RESPONSE_SATISFIED:
+    case BRAVOTOWER_STATE_RESPONSE_UNSATISFIED:
         CopyEasyChatWord(gStringVar1, show->bravoTrainerTower.words[0]);
         TVShowConvertInternationalString(gStringVar2, show->bravoTrainerTower.trainerName, show->bravoTrainerTower.language);
         TVShowConvertInternationalString(gStringVar3, show->bravoTrainerTower.pokemonName, show->bravoTrainerTower.pokemonNameLanguage);
-        sTVShowState = 14;
+        sTVShowState = BRAVOTOWER_STATE_OUTRO;
         break;
-    case 14:
+    case BRAVOTOWER_STATE_OUTRO:
         TVShowConvertInternationalString(gStringVar1, show->bravoTrainerTower.trainerName, show->bravoTrainerTower.language);
         StringCopy(gStringVar2, gSpeciesNames[show->bravoTrainerTower.species]);
         TVShowDone();

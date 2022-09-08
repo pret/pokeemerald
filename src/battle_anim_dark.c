@@ -508,7 +508,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
         GetBattleAnimBg1Data(&animBg);
         task->data[10] = gBattle_BG1_Y;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG1);
-        FillPalette(0, animBg.paletteId * 16, 32);
+        FillPalette(RGB_BLACK, animBg.paletteId * 16, 32);
         scanlineParams.dmaDest = &REG_BG1VOFS;
         var0 = WINOUT_WIN01_BG1;
         if (!IsContest())
@@ -518,7 +518,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
     {
         task->data[10] = gBattle_BG2_Y;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2);
-        FillPalette(0, 144, 32);
+        FillPalette(RGB_BLACK, 144, 32);
         scanlineParams.dmaDest = &REG_BG2VOFS;
         var0 = WINOUT_WIN01_BG2;
         if (!IsContest())
@@ -648,12 +648,12 @@ void AnimTask_MoveTargetMementoShadow(u8 taskId)
         {
             GetBattleAnimBg1Data(&animBg);
             task->data[10] = gBattle_BG1_Y;
-            FillPalette(0, animBg.paletteId * 16, 32);
+            FillPalette(RGB_BLACK, animBg.paletteId * 16, 32);
         }
         else
         {
             task->data[10] = gBattle_BG2_Y;
-            FillPalette(0, 9 * 16, 32);
+            FillPalette(RGB_BLACK, 9 * 16, 32);
         }
 
         SetAllBattlersSpritePriority(3);
@@ -859,8 +859,8 @@ void AnimTask_InitMementoShadow(u8 taskId)
 
     if (IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimAttacker)))
     {
-        MoveBattlerSpriteToBG(gBattleAnimAttacker ^ 2, toBG2 ^ 1, TRUE);
-        gSprites[gBattlerSpriteIds[gBattleAnimAttacker ^ 2]].invisible = FALSE;
+        MoveBattlerSpriteToBG(BATTLE_PARTNER(gBattleAnimAttacker), toBG2 ^ 1, TRUE);
+        gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)]].invisible = FALSE;
     }
 
     DestroyAnimVisualTask(taskId);
@@ -868,7 +868,7 @@ void AnimTask_InitMementoShadow(u8 taskId)
 
 void AnimTask_MementoHandleBg(u8 taskId)
 {
-    u8 toBG2 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) ^ 1 ? 1 : 0;
+    bool8 toBG2 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) ^ 1 ? TRUE : FALSE;
     ResetBattleAnimBg(toBG2);
 
     if (IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimAttacker)))

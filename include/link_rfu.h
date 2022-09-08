@@ -98,18 +98,18 @@ struct RfuGameCompatibilityData
 // anything the developers want. This struct is what GF decided to use it for.
 // It can be up to 13 bytes in size (RFU_GAME_NAME_LENGTH).
 // The player's name is sent separately as the username ("uname"), and does not 
-// use a struct (gHostRfuUsername). 
+// use a struct (gHostRfuUsername).
 struct __attribute__((packed, aligned(2))) RfuGameData
 {
     struct RfuGameCompatibilityData compatibility;
-    u8 partnerInfo[RFU_CHILD_MAX]; 
-    u16 tradeSpecies:10;
-    u16 tradeType:6;
+    u8 partnerInfo[RFU_CHILD_MAX];
+    u16 tradeSpecies;
     u8 activity:7;
     u8 startedActivity:1;
     u8 playerGender:1;
     u8 tradeLevel:7;
-    u8 padding;
+    u8 tradeType:6;
+    u8 padding:2;
 };
 
 // Constants for getting/setting information in 'partnerInfo' of RfuGameData.
