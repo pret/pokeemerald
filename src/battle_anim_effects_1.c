@@ -354,10 +354,10 @@ const struct SpriteTemplate gSmallCloudTemplate =
     .callback = AnimMoveSmallCloud
 };
 
-const struct SpriteTemplate gAccupressureSpriteTemplate =
+const struct SpriteTemplate gAcupressureSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ACCUPRESSURE,
-    .paletteTag = ANIM_TAG_ACCUPRESSURE,
+    .tileTag = ANIM_TAG_ACUPRESSURE,
+    .paletteTag = ANIM_TAG_ACUPRESSURE,
     .oam = &gOamData_AffineDouble_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
