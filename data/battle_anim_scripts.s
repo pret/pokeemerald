@@ -859,7 +859,7 @@ gBattleAnims_StatusConditions::
 
 	.align 2
 gBattleAnims_General::
-	.4byte General_CastformChange           @ B_ANIM_CASTFORM_CHANGE
+	.4byte General_WeatherFormChange        @ B_ANIM_CASTFORM_CHANGE
 	.4byte General_StatsChange              @ B_ANIM_STATS_CHANGE
 	.4byte General_SubstituteFade           @ B_ANIM_SUBSTITUTE_FADE
 	.4byte General_SubstituteAppear         @ B_ANIM_SUBSTITUTE_APPEAR
@@ -24247,11 +24247,11 @@ Status_Nightmare:
 Status_Powder:
 	end
 
-General_CastformChange:
+General_WeatherFormChange:
 	createvisualtask AnimTask_IsMonInvisible, 2
-	jumpreteq TRUE, CastformChangeSkipAnim
-	goto CastformChangeContinue
-CastformChangeContinue:
+	jumpreteq TRUE, WeatherFormChangeSkipAnim
+	goto WeatherFormChangeContinue
+WeatherFormChangeContinue:
 	monbg ANIM_ATTACKER
 	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER, 48
@@ -24259,7 +24259,7 @@ CastformChangeContinue:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
-CastformChangeSkipAnim:
+WeatherFormChangeSkipAnim:
 	createvisualtask AnimTask_CastformGfxDataChange, 2, 1
 	end
 
