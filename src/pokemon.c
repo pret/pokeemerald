@@ -7297,9 +7297,8 @@ u8 CanLearnTeachableMove(u16 species, u16 move)
         u8 i;
         for (i = 0; gTeachableLearnsets[species][i] != MOVE_UNAVAILABLE; i++)
         {
-            if (gTeachableLearnsets[species][i] == move) {
+            if (gTeachableLearnsets[species][i] == move)
                 return TRUE;
-            }
         }
         return FALSE;
     }
