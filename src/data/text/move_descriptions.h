@@ -1,3 +1,10 @@
+
+#if B_BINDING_TURNS >= GEN_5
+#define BINDING_TURNS "4 or 5"
+#else
+#define BINDING_TURNS "2 to 5"
+#endif
+
 static const u8 sNullDescription[] = _(
     "");
 
@@ -79,11 +86,7 @@ static const u8 sFlyDescription[] = _(
 
 static const u8 sBindDescription[] = _(
     "Binds and squeezes the foe\n"
-#if B_BINDING_TURNS >= GEN_5
-    "for 4 or 5 turns.");
-#else
-    "for 2 to 5 turns.");
-#endif
+    "for "BINDING_TURNS" turns.");
 
 static const u8 sSlamDescription[] = _(
     "Slams the foe with a long\n"
@@ -143,11 +146,7 @@ static const u8 sBodySlamDescription[] = _(
 
 static const u8 sWrapDescription[] = _(
     "Wraps and squeezes the foe\n"
-#if B_BINDING_TURNS >= GEN_5
-    "4 or 5 times with vines, etc.");
-#else
-    "2 to 5 times with vines, etc.");
-#endif
+    BINDING_TURNS" times with vines, etc.");
 
 static const u8 sTakeDownDescription[] = _(
     "A reckless charge attack\n"
@@ -339,11 +338,7 @@ static const u8 sDragonRageDescription[] = _(
 
 static const u8 sFireSpinDescription[] = _(
     "Traps the foe in a ring of\n"
-#if B_BINDING_TURNS >= GEN_5
-    "fire for 4 or 5 turns.");
-#else
-    "fire for 2 to 5 turns.");
-#endif
+    "fire for "BINDING_TURNS" turns.");
 
 static const u8 sThunderShockDescription[] = _(
     "An electrical attack that\n"
@@ -523,11 +518,7 @@ static const u8 sWaterfallDescription[] = _(
 
 static const u8 sClampDescription[] = _(
     "Traps and squeezes the\n"
-#if B_BINDING_TURNS >= GEN_5
-    "foe for 4 or 5 turns.");
-#else
-    "foe for 2 to 5 turns.");
-#endif
+    "foe for "BINDING_TURNS" turns.");
 
 static const u8 sSwiftDescription[] = _(
     "Sprays star-shaped rays\n"
@@ -1015,11 +1006,7 @@ static const u8 sRockSmashDescription[] = _(
 
 static const u8 sWhirlpoolDescription[] = _(
     "Traps and hurts the foe in\n"
-#if B_BINDING_TURNS >= GEN_5
-    "a whirlpool for 4 or 5 turns.");
-#else
-    "a whirlpool for 2 to 5 turns.");
-#endif
+    "a whirlpool for "BINDING_TURNS" turns.");
 
 static const u8 sBeatUpDescription[] = _(
     "Summons party Pokémon to\n"
@@ -1030,7 +1017,11 @@ static const u8 sFakeOutDescription[] = _(
     "that causes flinching.");
 
 static const u8 sUproarDescription[] = _(
+#if B_UPROAR_TURNS >= GEN_5
     "Causes an uproar for 2 to 5\n"
+#else
+    "Causes an uproar for 3\n"
+#endif
     "turns and prevents sleep.");
 
 static const u8 sStockpileDescription[] = _(
@@ -1331,11 +1322,7 @@ static const u8 sSkyUppercutDescription[] = _(
 
 static const u8 sSandTombDescription[] = _(
     "Traps and hurts the foe in\n"
-#if B_BINDING_TURNS >= GEN_5
-    "quicksand for 4 or 5 turns.");
-#else
-    "quicksand for 2 to 5 turns.");
-#endif
+    "quicksand for "BINDING_TURNS" turns.");
 
 static const u8 sSheerColdDescription[] = _(
     "A chilling attack that\n"
@@ -1839,11 +1826,7 @@ static const u8 sSpacialRendDescription[] = _(
 
 static const u8 sMagmaStormDescription[] = _(
     "Traps the foe in a vortex\n"
-#if B_BINDING_TURNS >= GEN_5
-    "of fire for 4 or 5 turns.");
-#else
-    "of fire for 2 to 5 turns.");
-#endif
+    "of fire for "BINDING_TURNS" turns.");
 
 static const u8 sDarkVoidDescription[] = _(
     "Drags the foe into total\n"
@@ -2395,11 +2378,7 @@ static const u8 sNuzzleDescription[] = _(
 
 static const u8 sInfestationDescription[] = _(
     "The foe is infested and\n"
-#if B_BINDING_TURNS >= GEN_5
-    "attacked for 4 or 5 turns.");
-#else
-    "attacked for 2 to 5 turns.");
-#endif
+    "attacked for "BINDING_TURNS" turns.");
 
 static const u8 sPowerUpPunchDescription[] = _(
     "A hard punch that raises\n"
@@ -2944,11 +2923,7 @@ static const u8 sSurgingStrikesDescription[] = _(
 
 static const u8 sThunderCageDescription[] = _(
     "Traps the foe in a cage of\n"
-#if B_BINDING_TURNS >= GEN_5
-    "electricity for 4 or 5 turns.");
-#else
-    "electricity for 2 to 5 turns.");
-#endif
+    "electricity for "BINDING_TURNS" turns.");
 
 static const u8 sDragonEnergyDescription[] = _(
     "The higher the user's HP\n"
@@ -3077,6 +3052,8 @@ static const u8 sTakeHeartDescription[] = _(
 const u8 gNotDoneYetDescription[] = _(
     "This move can't be used. Its\n"
     "effect is in development.");
+
+#undef BINDING_TURNS
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =

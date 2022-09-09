@@ -25,7 +25,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MeteorFalls_B1F_2R_EventScript_ItemTM02",
-      "flag": "FLAG_ITEM_METEOR_FALLS_B1F_2R_TM_02"
+      "flag": "FLAG_ITEM_METEOR_FALLS_B1F_2R_TM02"
     }
   ],
   "warp_events": [

@@ -896,7 +896,7 @@ u8 GetBattlerSide(u8 battlerId)
 
 u8 GetBattlerPosition(u8 battlerId)
 {
-    return GET_BATTLER_POSITION(battlerId);
+    return gBattlerPositions[battlerId];
 }
 
 u8 GetBattlerAtPosition(u8 position)
@@ -2534,7 +2534,7 @@ void AnimWeatherBallUp(struct Sprite *sprite)
 {
     sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
-    if (!GetBattlerSide(gBattleAnimAttacker))
+    if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
         sprite->data[0] = 5;
     else
         sprite->data[0] = -10;
@@ -2560,7 +2560,7 @@ void AnimWeatherBallDown(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[2] = sprite->x + gBattleAnimArgs[4];
     sprite->data[4] = sprite->y + gBattleAnimArgs[5];
-    if (!GetBattlerSide(gBattleAnimTarget))
+    if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
     {
         x = (u16)gBattleAnimArgs[4] + 30;
         sprite->x += x;
