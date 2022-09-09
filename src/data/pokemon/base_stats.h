@@ -25974,7 +25974,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_TURBOBLAZE, ABILITY_NONE},
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = TRUE,
-        .flags = SPECIES_FLAG_LEGENDARY,
+        .flags = SPECIES_FLAG_LEGENDARY | SPECIES_FLAG_CANNOT_BE_TRADED,
     },
 
     [SPECIES_KYUREM_BLACK] =
@@ -25999,7 +25999,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_TERAVOLT, ABILITY_NONE},
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = TRUE,
-        .flags = SPECIES_FLAG_LEGENDARY,
+        .flags = SPECIES_FLAG_LEGENDARY | SPECIES_FLAG_CANNOT_BE_TRADED,
     },
 
     [SPECIES_KELDEO_RESOLUTE] =
@@ -26489,7 +26489,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_PRISM_ARMOR, ABILITY_NONE},
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = TRUE,
-        .flags = SPECIES_FLAG_LEGENDARY,
+        .flags = SPECIES_FLAG_LEGENDARY | SPECIES_FLAG_CANNOT_BE_TRADED,
     },
 
     [SPECIES_NECROZMA_DAWN_WINGS] =
@@ -26514,7 +26514,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_PRISM_ARMOR, ABILITY_NONE},
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = TRUE,
-        .flags = SPECIES_FLAG_LEGENDARY,
+        .flags = SPECIES_FLAG_LEGENDARY | SPECIES_FLAG_CANNOT_BE_TRADED,
     },
 
     [SPECIES_NECROZMA_ULTRA] =
@@ -26738,6 +26738,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_AS_ONE_ICE_RIDER, ABILITY_NONE},
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_LEGENDARY | SPECIES_FLAG_CANNOT_BE_TRADED,
     },
 
     [SPECIES_CALYREX_SHADOW_RIDER] =
@@ -26762,6 +26763,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_AS_ONE_SHADOW_RIDER, ABILITY_NONE},
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_LEGENDARY | SPECIES_FLAG_CANNOT_BE_TRADED,
     },
 #endif
 };
