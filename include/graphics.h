@@ -9631,8 +9631,6 @@ extern const u32 gBattleAnimSpriteGfx_MegaStone[];
 extern const u32 gBattleAnimSpritePal_MegaStone[];
 extern const u32 gBattleAnimSpriteGfx_MegaParticles[];
 extern const u32 gBattleAnimSpritePal_MegaParticles[];
-extern const u32 gBattleAnimSpriteGfx_PrimalParticles[];
-extern const u32 gBattleAnimSpritePal_PrimalParticles[];
 extern const u32 gBattleAnimSpriteGfx_MegaSymbol[];
 extern const u32 gBattleAnimSpritePal_MegaSymbol[];
 extern const u32 gBattleAnimSpriteGfx_FlashCannonBall[];
