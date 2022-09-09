@@ -5596,10 +5596,7 @@ void ItemUseCB_FormChange_ConsumedOnUse(u8 taskId, TaskFunc task)
 }
 void TryItemHoldFormChange(struct Pokemon *mon)
 {
-    u16 species = GetMonData(mon, MON_DATA_SPECIES);
-    u16 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_ITEM_HOLD_ABILITY, 0);
-    if (targetSpecies == SPECIES_NONE)
-        targetSpecies = GetFormChangeTargetSpecies(mon, FORM_ITEM_HOLD, 0);
+    u16 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_ITEM_HOLD, 0);
     if (targetSpecies != SPECIES_NONE)
     {
         PlayCry_NormalNoDucking(targetSpecies, 0, CRY_VOLUME_RS, CRY_VOLUME_RS);

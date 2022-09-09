@@ -481,6 +481,7 @@ void CB2_InitBattle(void)
 static void CB2_InitBattleInternal(void)
 {
     s32 i;
+    u16 targetSpecies;
 
     SetHBlankCallback(NULL);
     SetVBlankCallback(NULL);
@@ -570,6 +571,27 @@ static void CB2_InitBattleInternal(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
         AdjustFriendship(&gPlayerParty[i], FRIENDSHIP_EVENT_LEAGUE_BATTLE);
+
+    // Apply party-wide start-of-battle form changes
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        // Player's side
+        targetSpecies = GetFormChangeTargetSpecies(&gPlayerParty[i], FORM_BATTLE_BEGIN, 0);
+        if (targetSpecies != SPECIES_NONE)
+        {
+            SetMonData(&gPlayerParty[i], MON_DATA_SPECIES, &targetSpecies);
+            CalculateMonStats(&gPlayerParty[i]);
+            TryToSetBattleFormChangeMoves(&gPlayerParty[i]);
+        }
+        // Opponent's side
+        targetSpecies = GetFormChangeTargetSpecies(&gEnemyParty[i], FORM_BATTLE_BEGIN, 0);
+        if (targetSpecies != SPECIES_NONE)
+        {
+            SetMonData(&gEnemyParty[i], MON_DATA_SPECIES, &targetSpecies);
+            CalculateMonStats(&gEnemyParty[i]);
+            TryToSetBattleFormChangeMoves(&gEnemyParty[i]);
+        }
+    }
 
     gBattleCommunication[MULTIUSE_STATE] = 0;
 }
