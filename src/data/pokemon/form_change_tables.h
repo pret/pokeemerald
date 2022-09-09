@@ -9,6 +9,8 @@ FORM_ITEM_HOLD:
 FORM_ITEM_USE:
     Form change activates when the item is used on the selected Pokémon.
     param1 = item to use
+    param2 = DAY if form change activates in the daytime, optional
+             NIGHT if form change activates at nighttime, optional
 
 FORM_MOVE:
     Form change activates when the Pokémon learns or forgets the move.
@@ -19,13 +21,6 @@ FORM_MOVE:
 FORM_WITHDRAW:
     Form change activates when the Pokémon is withdrawn from the PC or Daycare.
     no parameters
-
-FORM_ITEM_USE_TIME:
-    Form change activates when the item is used on the selected Pokémon at the
-    appropriate time of day.
-    param1 = item to use
-    param2 = DAY if form change activates in the daytime
-             NIGHT if form change activates at nighttime
 
 FORM_BATTLE_BEGIN:
     Form change activates when the Pokémon is sent out at the beginning of a battle
@@ -44,9 +39,9 @@ FORM_BATTLE_END:
 #define WHEN_LEARNED    0
 #define WHEN_FORGOTTEN  1
 
-// FORM_ITEM_USE_TIME param2 Arguments
-#define DAY    0
-#define NIGHT  1
+// FORM_ITEM_USE param2 Arguments
+#define DAY    1
+#define NIGHT  2
 
 #if P_NEW_POKEMON == TRUE
 static const struct FormChange sGiratinaFormChangeTable[] = {
@@ -56,7 +51,7 @@ static const struct FormChange sGiratinaFormChangeTable[] = {
 };
 
 static const struct FormChange sShayminFormChangeTable[] = {
-    {FORM_ITEM_USE_TIME, SPECIES_SHAYMIN_SKY, ITEM_GRACIDEA, DAY},
+    {FORM_ITEM_USE, SPECIES_SHAYMIN_SKY, ITEM_GRACIDEA, DAY},
     // {FORM_WITHDRAW, SPECIES_SHAYMIN},
     {FORM_CHANGE_END},
 };

@@ -322,9 +322,8 @@
 #define FORM_ITEM_USE           2
 #define FORM_MOVE               3
 #define FORM_WITHDRAW           4
-#define FORM_ITEM_USE_TIME      5
-#define FORM_BATTLE_BEGIN       6
-#define FORM_BATTLE_END         7
+#define FORM_BATTLE_BEGIN       5
+#define FORM_BATTLE_END         6
 
 #define NUM_MALE_LINK_FACILITY_CLASSES   8
 #define NUM_FEMALE_LINK_FACILITY_CLASSES 8
