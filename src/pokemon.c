@@ -8283,9 +8283,7 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
                 {
                 case FORM_ITEM_HOLD:
                     if ((heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
-                     || ability == formChanges[i].param2)
-                        targetSpecies = formChanges[i].targetSpecies;
-                    if ((heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE) && ability == formChanges[i].param2)
+                     && (ability == formChanges[i].param2 || formChanges[i].param2 == ABILITY_NONE))
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_ITEM_USE:
