@@ -3300,21 +3300,19 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     }
     else // Player is the OT
     {
+        u32 totalRerolls = 0;
         value = gSaveBlock2Ptr->playerTrainerId[0]
               | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
               | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
               | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
-        
+
         if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+            totalRerolls += I_SHINY_CHARM_REROLLS;
+
+        while (GET_SHINY_VALUE(value, personality) >= SHINY_ODDS && totalRerolls > 0)
         {
-            u32 shinyValue;
-            u32 rolls = 0;
-            do
-            {
-                personality = Random32();
-                shinyValue = HIHALF(value) ^ LOHALF(value) ^ HIHALF(personality) ^ LOHALF(personality);
-                rolls++;
-            } while (shinyValue >= SHINY_ODDS && rolls < I_SHINY_CHARM_REROLLS);
+            personality = Random32();
+            totalRerolls--;
         }
     }
 
