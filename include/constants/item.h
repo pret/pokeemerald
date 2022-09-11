@@ -16,4 +16,10 @@
 #define KEYITEMS_POCKET    4
 #define POCKETS_COUNT      5
 
+#define REPEL_LURE_MASK         (1 << 15)
+#define IS_LAST_USED_LURE(var)  (var & REPEL_LURE_MASK)
+#define REPEL_LURE_STEPS(var)   (var & (REPEL_LURE_MASK - 1))
+#define LURE_STEPS(var) (IS_LAST_USED_LURE(var) ? REPEL_LURE_STEPS(var) : 0)
+#define REPEL_STEPS(var) (!IS_LAST_USED_LURE(var) ? REPEL_LURE_STEPS(var) : 0)
+
 #endif // GUARD_ITEM_CONSTANTS_H

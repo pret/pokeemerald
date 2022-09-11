@@ -47,7 +47,7 @@
 
 // general purpose vars
 #define VAR_RECYCLE_GOODS                    0x4020
-#define VAR_REPEL_STEP_COUNT                 0x4021
+#define VAR_REPEL_LURE_STEP_COUNT            0x4021
 #define VAR_ICE_STEP_COUNT                   0x4022
 #define VAR_STARTER_MON                      0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip
 #define VAR_MIRAGE_RND_H                     0x4024
