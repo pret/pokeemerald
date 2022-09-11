@@ -1,0 +1,7 @@
+-Wimplicit -Wparentheses -Werror -O2
+-lgcc
+-lc
+-Iinclude
+-Igflib
+-undef
+-Itools/agbcc/include

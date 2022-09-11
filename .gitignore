@@ -42,3 +42,5 @@ porymap.project.cfg
 *.diff
 *.sym
 *.js
+agbcc/
+/*.zip
