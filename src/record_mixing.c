@@ -879,7 +879,7 @@ static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *records, size
     for (i = 0; i < linkPlayerCount; i++)
     {
         mixMail = (void *)records + i * recordSize;
-        
+
         // Count number of players that have at least
         // one daycare Pokémon with no held item
         if (canHoldItem[i][0] == TRUE || canHoldItem[i][1] == TRUE)
@@ -945,7 +945,7 @@ static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *records, size
     case 4:
         // 4 players can swap, select which 2 pairings will swap
         ptr = idxs;
-        
+
         // Swap pair 1
         playerSlot1 = sDaycareMailSwapIds_4Player[tableId][0];
         playerSlot2 = sDaycareMailSwapIds_4Player[tableId][1];
