@@ -968,7 +968,7 @@ static bool8 IsWildLevelAllowedByRepel(u8 wildLevel)
 {
     u8 i;
 
-    if (!VarGet(VAR_REPEL_LURE_STEP_COUNT))
+    if (!REPEL_STEPS(VarGet(VAR_REPEL_LURE_STEP_COUNT)))
         return TRUE;
 
     for (i = 0; i < PARTY_SIZE; i++)
