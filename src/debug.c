@@ -175,6 +175,7 @@ struct DebugMonData
 static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate);
 void Debug_ShowMainMenu(void);
 static void Debug_DestroyMenu(u8);
+static void Debug_DestroyMenu_Full(u8);
 static void DebugAction_Cancel(u8);
 static void DebugAction_DestroyExtraWindow(u8 taskId);
 
@@ -699,13 +700,19 @@ static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMte
 static void Debug_DestroyMenu(u8 taskId)
 {
     DestroyListMenuTask(gTasks[taskId].data[0], NULL, NULL);
+    RemoveWindow(gTasks[taskId].data[1]);
+    DestroyTask(taskId);
+}
+static void Debug_DestroyMenu_Full(u8 taskId)
+{
+    DestroyListMenuTask(gTasks[taskId].data[0], NULL, NULL);
     ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
     DestroyTask(taskId);
 }
 static void DebugAction_Cancel(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
 static void DebugAction_DestroyExtraWindow(u8 taskId)
@@ -737,7 +744,7 @@ static void DebugTask_HandleMenuInput_Main(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         ScriptContext_Enable();
     }
 }
@@ -891,7 +898,7 @@ static void DebugAction_Util_HealParty(u8 taskId)
     PlaySE(SE_USE_ITEM);
     HealPlayerParty();
     ScriptContext_Enable();
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
 }
 static void DebugAction_Util_Fly(u8 taskId)
 {
@@ -913,7 +920,7 @@ static void DebugAction_Util_Fly(u8 taskId)
     FlagSet(FLAG_VISITED_EVER_GRANDE_CITY);
     FlagSet(FLAG_LANDMARK_POKEMON_LEAGUE);
     FlagSet(FLAG_LANDMARK_BATTLE_FRONTIER);
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetMainCallback2(CB2_OpenFlyMap);
 }
 
@@ -1141,26 +1148,26 @@ static void DebugAction_Util_CheckSaveBlock(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar3, sizeof(struct PokemonStorage), STR_CONV_MODE_LEFT_ALIGN, 6);
     StringExpandPlaceholders(gStringVar4, gDebugText_SaveBlockSize);
 
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_ShowFieldMessageStringVar4);
 }
 static void DebugAction_Util_CheckWallClock(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(PlayersHouse_2F_EventScript_CheckWallClock);
 }
 static void DebugAction_Util_SetWallClock(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(PlayersHouse_2F_EventScript_SetWallClock);
 }
 static void DebugAction_Util_WatchCredits(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetMainCallback2(CB2_StartCreditsSequence);
 }
 static void DebugAction_Util_Trainer_Name(u8 taskId)
@@ -1174,14 +1181,14 @@ static void DebugAction_Util_Trainer_Gender(u8 taskId)
         gSaveBlock2Ptr->playerGender = 1;
     else
         gSaveBlock2Ptr->playerGender = 0;
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
-    Debug_DestroyMenu(taskId);
 }
 static void DebugAction_Util_Trainer_Id(u8 taskId)
 {
     u32 trainerId = ((Random() << 16) | Random());
     SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
 
@@ -1189,49 +1196,49 @@ static void DebugAction_Util_Trainer_Id(u8 taskId)
 // Actions Scripts
 static void DebugAction_Util_Script_1(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_Script_1);
 }
 static void DebugAction_Util_Script_2(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_Script_2);
 }
 static void DebugAction_Util_Script_3(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_Script_3);
 }
 static void DebugAction_Util_Script_4(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_Script_4);
 }
 static void DebugAction_Util_Script_5(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_Script_5);
 }
 static void DebugAction_Util_Script_6(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_Script_6);
 }
 static void DebugAction_Util_Script_7(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_Script_7);
 }
 static void DebugAction_Util_Script_8(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_Script_8);
 }
@@ -1338,7 +1345,7 @@ static void DebugAction_Flags_SetPokedexFlags(u8 taskId)
         GetSetPokedexFlag(i + 1, FLAG_SET_CAUGHT);
         GetSetPokedexFlag(i + 1, FLAG_SET_SEEN);
     }
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
 static void DebugAction_Flags_SwitchDex(u8 taskId)
@@ -1426,7 +1433,7 @@ static void DebugAction_Flags_ToggleFrontierPass(u8 taskId)
 static void DebugAction_Flags_CollisionOnOff(u8 taskId)
 {
 #if DEBUG_FLAG_NO_COLLISION == 0
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
 #else
@@ -1440,7 +1447,7 @@ static void DebugAction_Flags_CollisionOnOff(u8 taskId)
 static void DebugAction_Flags_EncounterOnOff(u8 taskId)
 {
 #if OW_FLAG_NO_ENCOUNTER == 0
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
 #else
@@ -1454,7 +1461,7 @@ static void DebugAction_Flags_EncounterOnOff(u8 taskId)
 static void DebugAction_Flags_TrainerSeeOnOff(u8 taskId)
 {
 #if OW_FLAG_NO_TRAINER_SEE == 0
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
 #else
@@ -1468,7 +1475,7 @@ static void DebugAction_Flags_TrainerSeeOnOff(u8 taskId)
 static void DebugAction_Flags_BagUseOnOff(u8 taskId)
 {
 #if B_FLAG_NO_BAG_USE == 0
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
 #else
@@ -1482,7 +1489,7 @@ static void DebugAction_Flags_BagUseOnOff(u8 taskId)
 static void DebugAction_Flags_CatchingOnOff(u8 taskId)
 {
 #if B_FLAG_NO_CATCHING_USE == 0
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
 #else
@@ -1841,7 +1848,7 @@ static void DebugAction_Give_AllTMs(u8 taskId)
         if (ItemIdToBattleMoveId(i) != MOVE_NONE && !CheckBagHasItem(i, 1))
             AddBagItem(i, 1);
     }
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
 
@@ -2656,7 +2663,7 @@ static void DebugAction_Give_FillPC(u8 taskId) //Credit: Sierraffinity
 
 static void DebugAction_Give_CHEAT(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_CheatStart);
 }
@@ -2673,7 +2680,7 @@ static void Task_WaitFadeAccessPC(u8 taskId)
 
 static void DebugAction_AccessPC(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     CleanupOverworldWindowsAndTilemaps();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
     CreateTask(Task_WaitFadeAccessPC, 0);
