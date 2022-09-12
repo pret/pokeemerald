@@ -910,16 +910,19 @@ LittlerootTown_EventScript_GiveRunningShoes::
 	return
 
 LittlerootTown_Text_OurNewHomeLetsGoInside:
-	.string "MOM: {PLAYER}, we're here, honey!\p"
-	.string "It must be tiring riding with our things\n"
-	.string "in the moving truck.\p"
-	.string "Well, this is LITTLEROOT TOWN.\p"
-	.string "How do you like it?\n"
-	.string "This is our new home!\p"
-	.string "It has a quaint feel, but it seems to be\n"
-	.string "an easy place to live, don't you think?\p"
-	.string "And, you get your own room, {PLAYER}!\n"
-	.string "Let's go inside.$"
+	.string "MOM: {PLAYER}, welcome to the game!\p"
+	.string "This is a special version made by\n"
+	.string "Lucas Trestka.\p"
+	.string "Made specifically for checkpoint.\p"
+	.string "LowKickLuke will demonstrate that\n"
+	.string "Krobatz, the self proclaimed - \p"
+	.string "'Polish POKEMON Master...'\n"
+	.string "Ain't shit.\p"
+	.string "This game has been modified,\n"
+	.string "but not randomized.\p"
+	.string "Stay tuned for many fun \n"
+	.string "surprises ahead.\p"
+	.string "Let's have some fun.$"
 
 LittlerootTown_Text_WaitPlayer:
 	.string "MOM: Wait, {PLAYER}!$"
