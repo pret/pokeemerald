@@ -848,7 +848,7 @@ static void RemoveUsedItem(void)
 
 void ItemUseOutOfBattle_Repel(u8 taskId)
 {
-    if (REPEL_STEPS(VarGet(VAR_REPEL_LURE_STEP_COUNT)) == 0)
+    if (REPEL_STEP_COUNT == 0)
         gTasks[taskId].func = Task_StartUseRepel;
     else if (!InBattlePyramid())
         DisplayItemMessage(taskId, FONT_NORMAL, gText_RepelEffectsLingered, CloseItemMessage);
@@ -872,7 +872,7 @@ static void Task_UseRepel(u8 taskId)
 {
     if (!IsSEPlaying())
     {
-        VarSet(VAR_REPEL_LURE_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_ItemId));
+        VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_ItemId));
     #if I_VAR_LAST_REPEL_LURE_USED != 0
         VarSet(I_VAR_LAST_REPEL_LURE_USED, gSpecialVar_ItemId);
     #endif
@@ -886,13 +886,13 @@ static void Task_UseRepel(u8 taskId)
 void HandleUseExpiredRepel(void)
 {
 #if I_VAR_LAST_REPEL_LURE_USED != 0
-    VarSet(VAR_REPEL_LURE_STEP_COUNT, ItemId_GetHoldEffectParam(VarGet(I_VAR_LAST_REPEL_LURE_USED)));
+    VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(VarGet(I_VAR_LAST_REPEL_LURE_USED)));
 #endif
 }
 
 void ItemUseOutOfBattle_Lure(u8 taskId)
 {
-    if (LURE_STEPS(VarGet(VAR_REPEL_LURE_STEP_COUNT)) == 0)
+    if (LURE_STEP_COUNT == 0)
         gTasks[taskId].func = Task_StartUseLure;
     else if (!InBattlePyramid())
         DisplayItemMessage(taskId, FONT_NORMAL, gText_LureEffectsLingered, CloseItemMessage);
@@ -916,7 +916,7 @@ static void Task_UseLure(u8 taskId)
 {
     if (!IsSEPlaying())
     {
-        VarSet(VAR_REPEL_LURE_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_ItemId) | REPEL_LURE_MASK);
+        VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_ItemId) | REPEL_LURE_MASK);
     #if I_VAR_LAST_REPEL_LURE_USED != 0
         VarSet(I_VAR_LAST_REPEL_LURE_USED, gSpecialVar_ItemId);
     #endif
@@ -931,7 +931,7 @@ static void Task_UseLure(u8 taskId)
 void HandleUseExpiredLure(void)
 {
 #if I_VAR_LAST_REPEL_LURE_USED != 0
-    VarSet(VAR_REPEL_LURE_STEP_COUNT, ItemId_GetHoldEffectParam(VarGet(I_VAR_LAST_REPEL_LURE_USED)) | REPEL_LURE_MASK);
+    VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(VarGet(I_VAR_LAST_REPEL_LURE_USED)) | REPEL_LURE_MASK);
 #endif
 }
 

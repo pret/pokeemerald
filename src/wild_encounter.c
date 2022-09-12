@@ -212,7 +212,7 @@ static u8 ChooseWildMonIndex_Land(void)
     else
         wildMonIndex = 11;
 
-    if (LURE_STEPS(VarGet(VAR_REPEL_LURE_STEP_COUNT)) && (Random() % 10 < 2))
+    if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
         swap = TRUE;
 
 	if (swap)
@@ -239,7 +239,7 @@ static u8 ChooseWildMonIndex_WaterRock(void)
     else
         wildMonIndex = 4;
 
-    if (LURE_STEPS(VarGet(VAR_REPEL_LURE_STEP_COUNT)) && (Random() % 10 < 2))
+    if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
         swap = TRUE;
 
 	if (swap)
@@ -256,7 +256,7 @@ static u8 ChooseWildMonIndex_Fishing(u8 rod)
     u8 rand = Random() % max(max(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_TOTAL, ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_TOTAL),
                              ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_TOTAL);
 
-    if (LURE_STEPS(VarGet(VAR_REPEL_LURE_STEP_COUNT)) && (Random() % 10 < 2))
+    if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
         swap = TRUE;
 
     switch (rod)
@@ -556,7 +556,7 @@ static bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
         encounterRate = encounterRate * 80 / 100;
     ApplyFluteEncounterRateMod(&encounterRate);
     ApplyCleanseTagEncounterRateMod(&encounterRate);
-    if (LURE_STEPS(VarGet(VAR_REPEL_LURE_STEP_COUNT)) != 0)
+    if (LURE_STEP_COUNT != 0)
         encounterRate *= 2;
     if (!ignoreAbility && !GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
     {
@@ -929,7 +929,7 @@ u16 GetLocalWaterMon(void)
 
 bool8 UpdateRepelCounter(void)
 {
-    u16 repelLureVar = VarGet(VAR_REPEL_LURE_STEP_COUNT);
+    u16 repelLureVar = VarGet(VAR_REPEL_STEP_COUNT);
     u16 steps = REPEL_LURE_STEPS(repelLureVar);
     bool32 isLure = IS_LAST_USED_LURE(repelLureVar);
 
@@ -943,7 +943,7 @@ bool8 UpdateRepelCounter(void)
         steps--;
         if (!isLure)
         {
-            VarSet(VAR_REPEL_LURE_STEP_COUNT, steps);
+            VarSet(VAR_REPEL_STEP_COUNT, steps);
             if (steps == 0)
             {
                 ScriptContext_SetupScript(EventScript_RepelWoreOff);
@@ -952,7 +952,7 @@ bool8 UpdateRepelCounter(void)
         }
         else
         {
-            VarSet(VAR_REPEL_LURE_STEP_COUNT, steps | REPEL_LURE_MASK);
+            VarSet(VAR_REPEL_STEP_COUNT, steps | REPEL_LURE_MASK);
             if (steps == 0)
             {
                 ScriptContext_SetupScript(EventScript_LureWoreOff);
@@ -968,7 +968,7 @@ static bool8 IsWildLevelAllowedByRepel(u8 wildLevel)
 {
     u8 i;
 
-    if (!REPEL_STEPS(VarGet(VAR_REPEL_LURE_STEP_COUNT)))
+    if (!REPEL_STEP_COUNT)
         return TRUE;
 
     for (i = 0; i < PARTY_SIZE; i++)
