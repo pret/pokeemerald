@@ -15,8 +15,6 @@
 #include "constants/items.h"
 #include "constants/hold_effects.h"
 
-extern u16 gUnknown_0203CF30[];
-
 // this file's functions
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
