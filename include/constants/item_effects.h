@@ -2,22 +2,10 @@
 #define GUARD_CONSTANTS_ITEM_EFFECTS_H
 
 // field 0 masks
-#ifndef ITEM_EXPANSION
-#define ITEM0_X_ATTACK          0x0F
-#endif
 #define ITEM0_DIRE_HIT          0x30 // Works the same way as the move Focus Energy.
 #define ITEM0_SACRED_ASH        0x40
 #define ITEM0_INFATUATION       0x80
 
-#ifndef ITEM_EXPANSION
-// field 1 masks
-#define ITEM1_X_SPEED           0x0F
-#define ITEM1_X_DEFEND          0xF0
-
-// field 2 masks
-#define ITEM2_X_SPATK           0x0F
-#define ITEM2_X_ACCURACY        0xF0
-#else
 // new field 1 masks
 #define ITEM1_X_ATTACK          0x1
 #define ITEM1_X_DEFENSE         0x2
@@ -25,7 +13,6 @@
 #define ITEM1_X_SPATK           0x8
 #define ITEM1_X_SPDEF           0x10
 #define ITEM1_X_ACCURACY        0x20
-#endif
 
 // field 3 masks
 #define ITEM3_CONFUSION         0x1

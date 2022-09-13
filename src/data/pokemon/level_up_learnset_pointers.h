@@ -387,6 +387,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_JIRACHI] = sJirachiLevelUpLearnset,
     [SPECIES_DEOXYS] = sDeoxysLevelUpLearnset,
     [SPECIES_CHIMECHO] = sChimechoLevelUpLearnset,
+#if P_NEW_POKEMON == TRUE
     [SPECIES_TURTWIG] = sTurtwigLevelUpLearnset,
     [SPECIES_GROTLE] = sGrotleLevelUpLearnset,
     [SPECIES_TORTERRA] = sTorterraLevelUpLearnset,
@@ -899,6 +900,13 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_GLASTRIER] = sGlastrierLevelUpLearnset,
     [SPECIES_SPECTRIER] = sSpectrierLevelUpLearnset,
     [SPECIES_CALYREX] = sCalyrexLevelUpLearnset,
+    [SPECIES_WYRDEER] = sWyrdeerLevelUpLearnset,
+    [SPECIES_KLEAVOR] = sKleavorLevelUpLearnset,
+    [SPECIES_URSALUNA] = sUrsalunaLevelUpLearnset,
+    [SPECIES_BASCULEGION] = sBasculegionLevelUpLearnset,
+    [SPECIES_SNEASLER] = sSneaslerLevelUpLearnset,
+    [SPECIES_OVERQWIL] = sOverqwilLevelUpLearnset,
+    [SPECIES_ENAMORUS] = sEnamorusLevelUpLearnset,
     // Megas
     [SPECIES_VENUSAUR_MEGA] = sVenusaurLevelUpLearnset,
     [SPECIES_CHARIZARD_MEGA_X] = sCharizardLevelUpLearnset,
@@ -990,6 +998,23 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_DARMANITAN_GALARIAN] = sDarmanitanGalarianLevelUpLearnset,
     [SPECIES_YAMASK_GALARIAN] = sYamaskGalarianLevelUpLearnset,
     [SPECIES_STUNFISK_GALARIAN] = sStunfiskGalarianLevelUpLearnset,
+	// Hisuian Forms
+    [SPECIES_GROWLITHE_HISUIAN] = sGrowlitheHisuianLevelUpLearnset,
+    [SPECIES_ARCANINE_HISUIAN] = sArcanineHisuianLevelUpLearnset,
+    [SPECIES_VOLTORB_HISUIAN] = sVoltorbHisuianLevelUpLearnset,
+    [SPECIES_ELECTRODE_HISUIAN] = sElectrodeHisuianLevelUpLearnset,
+    [SPECIES_TYPHLOSION_HISUIAN] = sTyphlosionHisuianLevelUpLearnset,
+    [SPECIES_QWILFISH_HISUIAN] = sQwilfishHisuianLevelUpLearnset,
+    [SPECIES_SNEASEL_HISUIAN] = sSneaselHisuianLevelUpLearnset,
+    [SPECIES_SAMUROTT_HISUIAN] = sSamurottHisuianLevelUpLearnset,
+    [SPECIES_LILLIGANT_HISUIAN] = sLilligantHisuianLevelUpLearnset,
+    [SPECIES_ZORUA_HISUIAN] = sZoruaHisuianLevelUpLearnset,
+    [SPECIES_ZOROARK_HISUIAN] = sZoroarkHisuianLevelUpLearnset,
+    [SPECIES_BRAVIARY_HISUIAN] = sBraviaryHisuianLevelUpLearnset,
+    [SPECIES_SLIGGOO_HISUIAN] = sSliggooHisuianLevelUpLearnset,
+    [SPECIES_GOODRA_HISUIAN] = sGoodraHisuianLevelUpLearnset,
+    [SPECIES_AVALUGG_HISUIAN] = sAvaluggHisuianLevelUpLearnset,
+    [SPECIES_DECIDUEYE_HISUIAN] = sDecidueyeHisuianLevelUpLearnset,
     // Misc Forms
     // Cosplay Pikachu
     [SPECIES_PIKACHU_COSPLAY] = sPikachuLevelUpLearnset,
@@ -1009,6 +1034,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_PIKACHU_WORLD_CAP] = sPikachuLevelUpLearnset,
     // Pichu
     [SPECIES_PICHU_SPIKY_EARED] = sPichuLevelUpLearnset,
+#endif
     // Unown
     [SPECIES_UNOWN_B] = sUnownLevelUpLearnset,
     [SPECIES_UNOWN_C] = sUnownLevelUpLearnset,
@@ -1045,6 +1071,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_DEOXYS_ATTACK] = sDeoxysAttackLevelUpLearnset,
     [SPECIES_DEOXYS_DEFENSE] = sDeoxysDefenseLevelUpLearnset,
     [SPECIES_DEOXYS_SPEED] = sDeoxysSpeedLevelUpLearnset,
+#if P_NEW_POKEMON == TRUE
     // Burmy
     [SPECIES_BURMY_SANDY_CLOAK] = sBurmyLevelUpLearnset,
     [SPECIES_BURMY_TRASH_CLOAK] = sBurmyLevelUpLearnset,
@@ -1063,7 +1090,9 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_ROTOM_FROST] = sRotomLevelUpLearnset,
     [SPECIES_ROTOM_FAN] = sRotomLevelUpLearnset,
     [SPECIES_ROTOM_MOW] = sRotomLevelUpLearnset,
-    // Giratina
+    // Origin Forme
+    [SPECIES_DIALGA_ORIGIN] = sDialgaLevelUpLearnset,
+    [SPECIES_PALKIA_ORIGIN] = sPalkiaLevelUpLearnset,
     [SPECIES_GIRATINA_ORIGIN] = sGiratinaLevelUpLearnset,
     // Shaymin
     [SPECIES_SHAYMIN_SKY] = sShayminSkyLevelUpLearnset,
@@ -1087,6 +1116,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_ARCEUS_FAIRY] = sArceusLevelUpLearnset,
     // Basculin
     [SPECIES_BASCULIN_BLUE_STRIPED] = sBasculinLevelUpLearnset,
+    [SPECIES_BASCULIN_WHITE_STRIPED] = sBasculinLevelUpLearnset,
     // Darmanitan
     [SPECIES_DARMANITAN_ZEN_MODE] = sDarmanitanLevelUpLearnset,
     [SPECIES_DARMANITAN_ZEN_MODE_GALARIAN] = sDarmanitanGalarianLevelUpLearnset,
@@ -1102,6 +1132,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_TORNADUS_THERIAN] = sTornadusLevelUpLearnset,
     [SPECIES_THUNDURUS_THERIAN] = sThundurusLevelUpLearnset,
     [SPECIES_LANDORUS_THERIAN] = sLandorusLevelUpLearnset,
+    [SPECIES_ENAMORUS_THERIAN] = sEnamorusLevelUpLearnset,
     // Kyurem
     [SPECIES_KYUREM_WHITE] = sKyuremWhiteLevelUpLearnset,
     [SPECIES_KYUREM_BLACK] = sKyuremBlackLevelUpLearnset,
@@ -1272,4 +1303,5 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     // Calyrex
     [SPECIES_CALYREX_ICE_RIDER] = sCalyrexIceRiderLevelUpLearnset,
     [SPECIES_CALYREX_SHADOW_RIDER] = sCalyrexShadowRiderLevelUpLearnset,
+#endif
 };

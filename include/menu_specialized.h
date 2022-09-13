@@ -95,7 +95,7 @@ void ConditionGraph_Draw(struct ConditionGraph *graph);
 bool8 ConditionGraph_TryUpdate(struct ConditionGraph *graph);
 void ConditionGraph_Update(struct ConditionGraph *graph);
 void ConditionGraph_CalcPositions(u8 *conditions, struct UCoords16 *positions);
-void ConditionGraph_SetNewPositions(struct ConditionGraph *graph, struct UCoords16 *arg1, struct UCoords16 *arg2);
+void ConditionGraph_SetNewPositions(struct ConditionGraph *graph, struct UCoords16 *old, struct UCoords16 *new);
 
 // Condition menu
 bool8 ConditionMenu_UpdateMonEnter(struct ConditionGraph *graph, s16 *x);

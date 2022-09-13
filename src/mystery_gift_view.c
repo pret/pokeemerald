@@ -162,7 +162,8 @@ static const struct SpritePalette sSpritePalettes_StampShadow[] = {
     {sStampShadowPal8, TAG_STAMP_SHADOW}
 };
 
-static const struct SpriteTemplate sSpriteTemplate_StampShadow = {
+static const struct SpriteTemplate sSpriteTemplate_StampShadow =
+{
     .tileTag = TAG_STAMP_SHADOW,
     .paletteTag = TAG_STAMP_SHADOW,
     .oam = &gOamData_AffineOff_ObjNormal_32x16,
@@ -207,8 +208,7 @@ void WonderCard_Destroy(void)
     if (sWonderCardData != NULL)
     {
         *sWonderCardData = (struct WonderCardData){};
-        Free(sWonderCardData);
-        sWonderCardData = NULL;
+        FREE_AND_SET_NULL(sWonderCardData);
     }
 }
 
@@ -660,8 +660,7 @@ void WonderNews_Destroy(void)
     if (sWonderNewsData != NULL)
     {
         *sWonderNewsData = (struct WonderNewsData){};
-        Free(sWonderNewsData);
-        sWonderNewsData = NULL;
+        FREE_AND_SET_NULL(sWonderNewsData);
     }
 }
 

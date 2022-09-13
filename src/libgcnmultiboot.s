@@ -40,7 +40,7 @@
 	.text
 
 	thumb_func_start GameCubeMultiBoot_Hash
-GameCubeMultiBoot_Hash: @ 82DED70
+GameCubeMultiBoot_Hash:
 	push {r4,lr}
 	ldr r4, pool_HashVal
 	eors r3, r1
@@ -61,7 +61,7 @@ GameCubeMultiBoot_Hash_SkipEor:
 
 	thumb_func_start GameCubeMultiBoot_Main
 @ void GameCubeMultiBoot_Main(struct GameCubeMultiBoot *mb);
-GameCubeMultiBoot_Main: @ 82DED84
+GameCubeMultiBoot_Main:
 	@ If there is no interrupt handler, skip counter manipulation
 	ldr r1, [r0, GCMB_STRUCT_SERIAL_INTR_HANDLER]
 	cmp r1, 0
@@ -246,7 +246,7 @@ pool_NintendoLogo: .4byte RomHeaderNintendoLogo
 
 	thumb_func_start GameCubeMultiBoot_ExecuteProgram
 @ void GameCubeMultiBoot_ExecuteProgram(struct GameCubeMultiBoot *mb);
-GameCubeMultiBoot_ExecuteProgram: @ 82DEE84
+GameCubeMultiBoot_ExecuteProgram:
 	@ If there's no multiboot image ready, just return to caller
 	ldrb r1, [r0, GCMB_STRUCT_MBPROGRESS]
 	cmp r1, MBPROGRESS_READY_TO_BOOT
@@ -265,7 +265,7 @@ GameCubeMultiBoot_ExecuteProgram_Fail:
 
 	thumb_func_start GameCubeMultiBoot_Init
 @ void GameCubeMultiBoot_Init(struct GameCubeMultiBoot *mb);
-GameCubeMultiBoot_Init: @ 82DEE98
+GameCubeMultiBoot_Init:
 	ldr r3, pool_InterruptRegs
 
 @ Save IME register.
@@ -336,7 +336,7 @@ GameCubeMultiBoot_Init_ClearStructLoop:
 
 	non_word_aligned_thumb_func_start GameCubeMultiBoot_HandleSerialInterrupt
 @ void GameCubeMultiBoot_HandleSerialInterrupt(struct GameCubeMultiBoot *mb);
-GameCubeMultiBoot_HandleSerialInterrupt: @ 82DEEE2
+GameCubeMultiBoot_HandleSerialInterrupt:
 	ldr r3, pool_SerialRegs
 
 @ Acknowledge reset/receive/send flags.
@@ -400,7 +400,7 @@ GameCubeMultiBoot_BeginHandshake:
 
 	.align 2, 0
 
-GcMbIntrHandler_CheckGameCodeSent: @ 82DEF24
+GcMbIntrHandler_CheckGameCodeSent:
 	lsls r1, 31
 	bcc GcMbIntrHandler_Stop @ stop if send failed
 	bmi GameCubeMultiBoot_CheckHandshakeResponse @ branch if receive is complete
@@ -412,7 +412,7 @@ GcMbIntrHandler_CheckGameCodeSent: @ 82DEF24
 
 	.align 2, 0
 
-GcMbIntrHandler_CheckHandshakeResponse: @ 82DEF30
+GcMbIntrHandler_CheckHandshakeResponse:
 	lsrs r1, 1 @ is receive complete?
 	bcc GcMbIntrHandler_Stop @ stop if not
 
@@ -429,7 +429,7 @@ GameCubeMultiBoot_CheckHandshakeResponse:
 
 	.align 2, 0
 
-GcMbIntrHandler_ReceiveKeyA: @ 82DEF44
+GcMbIntrHandler_ReceiveKeyA:
 	lsrs r1, 1 @ is receive complete?
 	bcc GcMbIntrHandler_Stop @ branch if not
 	ldr r1, [r3, OFFSET_REG_JOY_RECV - 0x120]
@@ -473,7 +473,7 @@ GameCubeMultiBoot_KeyBCheckEnd:
 
 	.align 2, 0
 
-GcMbIntrHandler_CheckKeyBSent: @ 82DEF84
+GcMbIntrHandler_CheckKeyBSent:
 	lsls r1, 31
 	bcc GcMbIntrHandler_Stop @ stop if send failed
 	bmi GameCubeMultiBoot_CheckImageSizeResponse @ branch if receive is complete
@@ -482,7 +482,7 @@ GcMbIntrHandler_CheckKeyBSent: @ 82DEF84
 
 	.align 2, 0
 
-GcMbIntrHandler_CheckImageSizeResponse: @ 82DEF90
+GcMbIntrHandler_CheckImageSizeResponse:
 	lsrs r1, 1 @ is receive complete?
 	bcc GcMbIntrHandler_Stop @ branch if not
 GameCubeMultiBoot_CheckImageSizeResponse:
@@ -505,7 +505,7 @@ GcMbIntrHandler_StopIfNotEqual:
 
 	.align 2, 0
 
-GcMbIntrHandler_CheckImageResponse: @ 82DEFB4
+GcMbIntrHandler_CheckImageResponse:
 	lsrs r1, 1 @ is receive complete?
 	bcc GcMbIntrHandler_Stop @ branch if not
 	ldr r2, [r0, GCMB_STRUCT_CUR_DEST_PTR]
@@ -553,7 +553,7 @@ GcMbIntrHandler_StopIfSendFailed:
 
 	.align 2, 0
 
-GcMbIntrHandler_CheckKeyCDerivationSent: @ 82DEFF0
+GcMbIntrHandler_CheckKeyCDerivationSent:
 	lsls r1, 31
 	bcc GcMbIntrHandler_StopIfSendFailed @ branch if send failed
 	bmi GameCubeMultiBoot_CheckBootKeyResponse @ branch if receive is complete
@@ -562,7 +562,7 @@ GcMbIntrHandler_CheckKeyCDerivationSent: @ 82DEFF0
 
 	.align 2, 0
 
-GcMbIntrHandler_CheckBootKeyResponse: @ 82DEFFC
+GcMbIntrHandler_CheckBootKeyResponse:
 	lsrs r1, 1 @ is receive complete?
 	bcc GcMbIntrHandler_StopIfSendFailed @ branch if not
 
@@ -580,14 +580,14 @@ GameCubeMultiBoot_CheckBootKeyResponse:
 
 	.align 2, 0
 
-GcMbIntrHandler_StopUnconditionally: @ 82DF010
+GcMbIntrHandler_StopUnconditionally:
 	b GcMbIntrHandler_Stop
 
 	thumb_func_end GameCubeMultiBoot_HandleSerialInterrupt
 
 	non_word_aligned_thumb_func_start GameCubeMultiBoot_Quit
 @ void GameCubeMultiBoot_Quit();
-GameCubeMultiBoot_Quit: @ 82DF012
+GameCubeMultiBoot_Quit:
 	ldr r3, pool_InterruptRegs
 
 @ Save IME register.

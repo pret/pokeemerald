@@ -69,7 +69,7 @@ u32 CountPlayerTrainerStars(void);
 u8 GetTrainerCardStars(u8 cardId);
 void CopyTrainerCardData(struct TrainerCard *dst, struct TrainerCard *src, u8 gameVersion);
 void ShowPlayerTrainerCard(void (*callback)(void));
-void ShowTrainerCardInLink(u8 arg0, void (*callback)(void));
+void ShowTrainerCardInLink(u8 cardId, void (*callback)(void));
 void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *);
 
 #endif // GUARD_TRAINER_CARD_H

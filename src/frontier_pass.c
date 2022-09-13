@@ -173,7 +173,7 @@ static const u32 sHeads_Gfx[]                    = INCBIN_U32("graphics/frontier
 static const u32 sMapCursor_Gfx[]                = INCBIN_U32("graphics/frontier_pass/map_cursor.4bpp.lz");
 static const u32 sMapScreen_Tilemap[]            = INCBIN_U32("graphics/frontier_pass/map_screen.bin.lz");
 static const u32 sMapAndCard_ZoomedOut_Tilemap[] = INCBIN_U32("graphics/frontier_pass/small_map_and_card.bin.lz");
-static const u32 sUnusedData[]                   = INCBIN_U32("graphics/frontier_pass/unused.bin");
+static const u32 sCardBall_Filled_Tilemap[]      = INCBIN_U32("graphics/frontier_pass/card_ball_filled.bin"); // Unused
 static const u32 sBattleRecord_Tilemap[]         = INCBIN_U32("graphics/frontier_pass/record_frame.bin.lz");
 static const u32 sMapAndCard_Zooming_Tilemap[]   = INCBIN_U32("graphics/frontier_pass/small_map_and_card_affine.bin.lz");
 

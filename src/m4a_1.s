@@ -680,7 +680,7 @@ SoundMainRAM_Unk2:
 	ldr r1, [r4, o_SoundChannel_wav]
 	add r2, r2, r1
 	add r2, r2, 0x10
-	ldr r5, =gDecodingBuffer
+	ldr r5, =sDecodingBuffer
 	ldr r6, =gDeltaEncodingTable
 	mov r7, 0x40
 	ldrb lr, [r2], 1
@@ -701,7 +701,7 @@ _081DD57C:
 	subs r7, r7, 2
 	bgt _081DD568
 _081DD594:
-	ldr r5, =gDecodingBuffer
+	ldr r5, =sDecodingBuffer
 	and r0, r3, 0x3F
 	ldrsb r1, [r5, r0]
 	pop {r0,r2,r5-r7,pc}
@@ -1910,27 +1910,7 @@ _081DDD90:
 
 	.align 2, 0 @ Don't pad with nop.
 
-    .bss
-gDecodingBuffer: @ Used as a buffer for audio decoded from compressed DPCM
-    .space 0x40
-    .size gDecodingBuffer, .-gDecodingBuffer
-
-    .global gMPlayTrack_BGM
-gMPlayTrack_BGM:
-    .space 0x320
-    .size gMPlayTrack_BGM, .-gMPlayTrack_BGM
-
-    .global gMPlayTrack_SE1
-gMPlayTrack_SE1:
-    .space 0xF0
-    .size gMPlayTrack_SE1, .-gMPlayTrack_SE1
-
-    .global gMPlayTrack_SE2
-gMPlayTrack_SE2:
-    .space 0x2D0
-    .size gMPlayTrack_SE2, .-gMPlayTrack_SE2
-
-    .global gMPlayTrack_SE3
-gMPlayTrack_SE3:
-    .space 0x50
-    .size gMPlayTrack_SE3, .-gMPlayTrack_SE3
+	.bss
+sDecodingBuffer: @ Used as a buffer for audio decoded from compressed DPCM
+	.space 0x40
+	.size sDecodingBuffer, .-sDecodingBuffer

@@ -41,6 +41,8 @@ static void SpriteCB_HourHand(struct Sprite *sprite);
 static void SpriteCB_PMIndicator(struct Sprite *sprite);
 static void SpriteCB_AMIndicator(struct Sprite *sprite);
 
+#define sTaskId data[0]
+
 #define tMinuteHandAngle data[0]
 #define tHourHandAngle   data[1]
 #define tHours           data[2]
@@ -696,21 +698,21 @@ void CB2_StartWallClock(void)
     gTasks[taskId].tHourHandAngle = 300;
 
     spriteId = CreateSprite(&sSpriteTemplate_MinuteHand, 120, 80, 1);
-    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
 
     spriteId = CreateSprite(&sSpriteTemplate_HourHand, 120, 80, 0);
-    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
 
     spriteId = CreateSprite(&sSpriteTemplate_PM, 120, 80, 2);
-    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].data[1] = 45;
 
     spriteId = CreateSprite(&sSpriteTemplate_AM, 120, 80, 2);
-    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].data[1] = 90;
 
     WallClockInit();
@@ -744,21 +746,21 @@ void CB2_ViewWallClock(void)
     }
 
     spriteId = CreateSprite(&sSpriteTemplate_MinuteHand, 120, 80, 1);
-    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
 
     spriteId = CreateSprite(&sSpriteTemplate_HourHand, 120, 80, 0);
-    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
 
     spriteId = CreateSprite(&sSpriteTemplate_PM, 120, 80, 2);
-    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].data[1] = angle1;
 
     spriteId = CreateSprite(&sSpriteTemplate_AM, 120, 80, 2);
-    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].data[1] = angle2;
 
     WallClockInit();
@@ -1015,7 +1017,7 @@ static void InitClockWithRtc(u8 taskId)
 
 static void SpriteCB_MinuteHand(struct Sprite *sprite)
 {
-    u16 angle = gTasks[sprite->data[0]].tMinuteHandAngle;
+    u16 angle = gTasks[sprite->sTaskId].tMinuteHandAngle;
     s16 sin = Sin2(angle) / 16;
     s16 cos = Cos2(angle) / 16;
     u16 x, y;
@@ -1035,7 +1037,7 @@ static void SpriteCB_MinuteHand(struct Sprite *sprite)
 
 static void SpriteCB_HourHand(struct Sprite *sprite)
 {
-    u16 angle = gTasks[sprite->data[0]].tHourHandAngle;
+    u16 angle = gTasks[sprite->sTaskId].tHourHandAngle;
     s16 sin = Sin2(angle) / 16;
     s16 cos = Cos2(angle) / 16;
     u16 x, y;
@@ -1053,58 +1055,44 @@ static void SpriteCB_HourHand(struct Sprite *sprite)
     sprite->y2 = y;
 }
 
+#define sAngle data[1]
+
 static void SpriteCB_PMIndicator(struct Sprite *sprite)
 {
-    if (gTasks[sprite->data[0]].tPeriod != PERIOD_AM)
+    if (gTasks[sprite->sTaskId].tPeriod != PERIOD_AM)
     {
-        if (sprite->data[1] >= 60 && sprite->data[1] < 90)
-        {
-            sprite->data[1] += 5;
-        }
-        if (sprite->data[1] < 60)
-        {
-            sprite->data[1]++;
-        }
+        if (sprite->sAngle >= 60 && sprite->sAngle < 90)
+            sprite->sAngle += 5;
+        if (sprite->sAngle < 60)
+            sprite->sAngle++;
     }
     else
     {
-        if (sprite->data[1] >= 46 && sprite->data[1] < 76)
-        {
-            sprite->data[1] -= 5;
-        }
-        if (sprite->data[1] > 75)
-        {
-            sprite->data[1]--;
-        }
+        if (sprite->sAngle >= 46 && sprite->sAngle < 76)
+            sprite->sAngle -= 5;
+        if (sprite->sAngle > 75)
+            sprite->sAngle--;
     }
-    sprite->x2 = Cos2(sprite->data[1]) * 30 / 0x1000;
-    sprite->y2 = Sin2(sprite->data[1]) * 30 / 0x1000;
+    sprite->x2 = Cos2(sprite->sAngle) * 30 / 0x1000;
+    sprite->y2 = Sin2(sprite->sAngle) * 30 / 0x1000;
 }
 
 static void SpriteCB_AMIndicator(struct Sprite *sprite)
 {
-    if (gTasks[sprite->data[0]].tPeriod != PERIOD_AM)
+    if (gTasks[sprite->sTaskId].tPeriod != PERIOD_AM)
     {
-        if (sprite->data[1] >= 105 && sprite->data[1] < 135)
-        {
-            sprite->data[1] += 5;
-        }
-        if (sprite->data[1] < 105)
-        {
-            sprite->data[1]++;
-        }
+        if (sprite->sAngle >= 105 && sprite->sAngle < 135)
+            sprite->sAngle += 5;
+        if (sprite->sAngle < 105)
+            sprite->sAngle++;
     }
     else
     {
-        if (sprite->data[1] >= 91 && sprite->data[1] < 121)
-        {
-            sprite->data[1] -= 5;
-        }
-        if (sprite->data[1] > 120)
-        {
-            sprite->data[1]--;
-        }
+        if (sprite->sAngle >= 91 && sprite->sAngle < 121)
+            sprite->sAngle -= 5;
+        if (sprite->sAngle > 120)
+            sprite->sAngle--;
     }
-    sprite->x2 = Cos2(sprite->data[1]) * 30 / 0x1000;
-    sprite->y2 = Sin2(sprite->data[1]) * 30 / 0x1000;
+    sprite->x2 = Cos2(sprite->sAngle) * 30 / 0x1000;
+    sprite->y2 = Sin2(sprite->sAngle) * 30 / 0x1000;
 }

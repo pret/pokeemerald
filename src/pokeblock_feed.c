@@ -466,7 +466,7 @@ static const struct WindowTemplate sWindowTemplates[] =
 };
 
 // - 1 excludes PBLOCK_CLR_NONE
-static const u32* const sPokeblocksPals[] =
+static const u32 *const sPokeblocksPals[] =
 {
     [PBLOCK_CLR_RED - 1]       = gPokeblockRed_Pal,
     [PBLOCK_CLR_BLUE - 1]      = gPokeblockBlue_Pal,
@@ -545,7 +545,7 @@ static const struct OamData sOamData_Pokeblock =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
@@ -660,7 +660,7 @@ static bool8 LoadPokeblockFeedScene(void)
         gMain.state++;
         break;
     case 10:
-        DrawStdFrameWithCustomTileAndPalette(0, 1, 1, 14);
+        DrawStdFrameWithCustomTileAndPalette(0, TRUE, 1, 14);
         gMain.state++;
         break;
     case 11:
@@ -727,7 +727,7 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
         // Load mon gfx
         species = GetMonData(mon, MON_DATA_SPECIES2);
         personality = GetMonData(mon, MON_DATA_PERSONALITY);
-        HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT], species, personality);
+        HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT], species, personality);
         sPokeblockFeed->loadGfxState++;
         break;
     case 1:
@@ -872,7 +872,7 @@ static void Task_PrintAtePokeblockMessage(u8 taskId)
         StringExpandPlaceholders(gStringVar4, gText_Var1DisdainfullyAteVar2);
 
     gTextFlags.canABSpeedUpPrint = TRUE;
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     gTasks[taskId].func = Task_WaitForAtePokeblockMessage;
 }
 
@@ -905,7 +905,7 @@ static void Task_FadeOutPokeblockFeed(u8 taskId)
 #define sAccel   data[1]
 #define sSpecies data[2]
 
-static u8 CreateMonSprite(struct Pokemon* mon)
+static u8 CreateMonSprite(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2);
     u8 spriteId = CreateSprite(&gMultiuseSpriteTemplate, MON_X, MON_Y, 2);
@@ -937,7 +937,7 @@ static void StartMonJumpForPokeblock(u8 spriteId)
     gSprites[spriteId].callback = SpriteCB_MonJumpForPokeblock;
 }
 
-static void SpriteCB_MonJumpForPokeblock(struct Sprite* sprite)
+static void SpriteCB_MonJumpForPokeblock(struct Sprite *sprite)
 {
     sprite->x += 4;
     sprite->y += sprite->sSpeed;
@@ -982,7 +982,7 @@ static u8 CreatePokeblockSprite(void)
     return spriteId;
 }
 
-static void SpriteCB_ThrownPokeblock(struct Sprite* sprite)
+static void SpriteCB_ThrownPokeblock(struct Sprite *sprite)
 {
     sprite->x -= 4;
     sprite->y += sprite->sSpeed;

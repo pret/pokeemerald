@@ -1,8 +1,8 @@
 #ifndef GUARD_FLDEFF_MISC_H
 #define GUARD_FLDEFF_MISC_H
 
-void ComputerScreenOpenEffect(u16 a0, u16 a1, u8 a2);
-void ComputerScreenCloseEffect(u16 a0, u16 a1, u8 a2);
+void ComputerScreenOpenEffect(u16 increment, u16 unused, u8 priority);
+void ComputerScreenCloseEffect(u16 increment, u16 unused, u8 priority);
 bool8 IsComputerScreenOpenEffectActive(void);
 bool8 IsComputerScreenCloseEffectActive(void);
 bool8 SetUpFieldMove_SecretPower(void);
@@ -22,7 +22,7 @@ void PlaySecretBaseMusicNoteMatSound(s16 metatileId);
 void DoSecretBaseGlitterMatSparkle(void);
 bool8 FldEff_SandPillar(void);
 void InteractWithShieldOrTVDecoration(void);
-bool8 IsLargeBreakableDecoration(u16 arg0, u8 arg1);
+bool8 IsLargeBreakableDecoration(u16 metatileId, bool8 checkBase);
 void FldEffPoison_Start(void);
 bool32 FldEffPoison_IsActive(void);
 void DoWateringBerryTreeAnim(void);

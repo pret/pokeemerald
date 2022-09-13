@@ -78,12 +78,12 @@ static const struct Subsprite sOamTable_16x16_4[] = {
 };
 
 static const struct SubspriteTable sOamTables_16x16[] = {
-    {0, NULL},
-    {1, sOamTable_16x16_0},
-    {1, sOamTable_16x16_1},
-    {2, sOamTable_16x16_2},
-    {2, sOamTable_16x16_3},
-    {2, sOamTable_16x16_4}
+    {},
+    {ARRAY_COUNT(sOamTable_16x16_0), sOamTable_16x16_0},
+    {ARRAY_COUNT(sOamTable_16x16_1), sOamTable_16x16_1},
+    {ARRAY_COUNT(sOamTable_16x16_2), sOamTable_16x16_2},
+    {ARRAY_COUNT(sOamTable_16x16_3), sOamTable_16x16_3},
+    {ARRAY_COUNT(sOamTable_16x16_4), sOamTable_16x16_4}
 };
 
 static const struct Subsprite sOamTable_16x32_0[] = {
@@ -174,12 +174,12 @@ static const struct Subsprite sOamTable_16x32_4[] = {
 };
 
 static const struct SubspriteTable sOamTables_16x32[] = {
-    {0, NULL},
-    {1, sOamTable_16x32_0},
-    {1, sOamTable_16x32_1},
-    {3, sOamTable_16x32_2},
-    {2, sOamTable_16x32_3},
-    {2, sOamTable_16x32_4}
+    {},
+    {ARRAY_COUNT(sOamTable_16x32_0), sOamTable_16x32_0},
+    {ARRAY_COUNT(sOamTable_16x32_1), sOamTable_16x32_1},
+    {ARRAY_COUNT(sOamTable_16x32_2), sOamTable_16x32_2},
+    {ARRAY_COUNT(sOamTable_16x32_3), sOamTable_16x32_3},
+    {ARRAY_COUNT(sOamTable_16x32_4), sOamTable_16x32_4}
 };
 
 static const struct Subsprite sOamTable_32x32_0[] = {
@@ -270,12 +270,12 @@ static const struct Subsprite sOamTable_32x32_4[] = {
 };
 
 static const struct SubspriteTable sOamTables_32x32[] = {
-    {0, NULL},
-    {1, sOamTable_32x32_0},
-    {1, sOamTable_32x32_1},
-    {3, sOamTable_32x32_2},
-    {2, sOamTable_32x32_3},
-    {2, sOamTable_32x32_4}
+    {},
+    {ARRAY_COUNT(sOamTable_32x32_0), sOamTable_32x32_0},
+    {ARRAY_COUNT(sOamTable_32x32_1), sOamTable_32x32_1},
+    {ARRAY_COUNT(sOamTable_32x32_2), sOamTable_32x32_2},
+    {ARRAY_COUNT(sOamTable_32x32_3), sOamTable_32x32_3},
+    {ARRAY_COUNT(sOamTable_32x32_4), sOamTable_32x32_4}
 };
 
 static const struct Subsprite sOamTable_48x48[] = {
@@ -378,12 +378,12 @@ static const struct Subsprite sOamTable_48x48[] = {
 };
 
 static const struct SubspriteTable sOamTables_48x48[] = {
-    {12, sOamTable_48x48},
-    {12, sOamTable_48x48},
-    {12, sOamTable_48x48},
-    {12, sOamTable_48x48},
-    {12, sOamTable_48x48},
-    {12, sOamTable_48x48}
+    {ARRAY_COUNT(sOamTable_48x48), sOamTable_48x48},
+    {ARRAY_COUNT(sOamTable_48x48), sOamTable_48x48},
+    {ARRAY_COUNT(sOamTable_48x48), sOamTable_48x48},
+    {ARRAY_COUNT(sOamTable_48x48), sOamTable_48x48},
+    {ARRAY_COUNT(sOamTable_48x48), sOamTable_48x48},
+    {ARRAY_COUNT(sOamTable_48x48), sOamTable_48x48}
 };
 
 static const struct Subsprite sOamTable_64x32_0[] = {
@@ -432,12 +432,12 @@ static const struct Subsprite sOamTable_64x32_3[] = {
 
 // Unused
 static const struct SubspriteTable sOamTables_64x32[] = {
-    {0, NULL},
-    {1, sOamTable_64x32_0},
-    {1, sOamTable_64x32_1},
-    {1, sOamTable_64x32_2},
-    {1, sOamTable_64x32_3},
-    {1, sOamTable_64x32_3}
+    {},
+    {ARRAY_COUNT(sOamTable_64x32_0), sOamTable_64x32_0},
+    {ARRAY_COUNT(sOamTable_64x32_1), sOamTable_64x32_1},
+    {ARRAY_COUNT(sOamTable_64x32_2), sOamTable_64x32_2},
+    {ARRAY_COUNT(sOamTable_64x32_3), sOamTable_64x32_3},
+    {ARRAY_COUNT(sOamTable_64x32_3), sOamTable_64x32_3}
 };
 
 static const struct Subsprite sOamTable_64x64_0[] = {
@@ -485,12 +485,12 @@ static const struct Subsprite sOamTable_64x64_3[] = {
 };
 
 static const struct SubspriteTable sOamTables_64x64[] = {
-    {0, NULL},
-    {1, sOamTable_64x64_0},
-    {1, sOamTable_64x64_1},
-    {1, sOamTable_64x64_2},
-    {1, sOamTable_64x64_3},
-    {1, sOamTable_64x64_3}
+    {},
+    {ARRAY_COUNT(sOamTable_64x64_0), sOamTable_64x64_0},
+    {ARRAY_COUNT(sOamTable_64x64_1), sOamTable_64x64_1},
+    {ARRAY_COUNT(sOamTable_64x64_2), sOamTable_64x64_2},
+    {ARRAY_COUNT(sOamTable_64x64_3), sOamTable_64x64_3},
+    {ARRAY_COUNT(sOamTable_64x64_3), sOamTable_64x64_3}
 };
 
 static const struct Subsprite sOamTable_96x40_0[] = {
@@ -987,12 +987,12 @@ static const struct Subsprite sOamTable_96x40_3[] = {
 
 // Used by SS Tidal
 static const struct SubspriteTable sOamTables_96x40[] = {
-    {15, sOamTable_96x40_0},
-    {15, sOamTable_96x40_0},
-    {15, sOamTable_96x40_1},
-    {15, sOamTable_96x40_2},
-    {15, sOamTable_96x40_3},
-    {15, sOamTable_96x40_3}
+    {ARRAY_COUNT(sOamTable_96x40_0), sOamTable_96x40_0},
+    {ARRAY_COUNT(sOamTable_96x40_0), sOamTable_96x40_0},
+    {ARRAY_COUNT(sOamTable_96x40_1), sOamTable_96x40_1},
+    {ARRAY_COUNT(sOamTable_96x40_2), sOamTable_96x40_2},
+    {ARRAY_COUNT(sOamTable_96x40_3), sOamTable_96x40_3},
+    {ARRAY_COUNT(sOamTable_96x40_3), sOamTable_96x40_3}
 };
 
 static const struct Subsprite sOamTable_88x32_0[] = {
@@ -1521,10 +1521,10 @@ static const struct Subsprite sOamTable_88x32_3[] = {
 
 // Used by Submarine Shadow
 static const struct SubspriteTable sOamTables_88x32[] = {
-    {16, sOamTable_88x32_0},
-    {16, sOamTable_88x32_0},
-    {16, sOamTable_88x32_1},
-    {16, sOamTable_88x32_2},
-    {16, sOamTable_88x32_3},
-    {16, sOamTable_88x32_3}
+    {ARRAY_COUNT(sOamTable_88x32_0), sOamTable_88x32_0},
+    {ARRAY_COUNT(sOamTable_88x32_0), sOamTable_88x32_0},
+    {ARRAY_COUNT(sOamTable_88x32_1), sOamTable_88x32_1},
+    {ARRAY_COUNT(sOamTable_88x32_2), sOamTable_88x32_2},
+    {ARRAY_COUNT(sOamTable_88x32_3), sOamTable_88x32_3},
+    {ARRAY_COUNT(sOamTable_88x32_3), sOamTable_88x32_3}
 };

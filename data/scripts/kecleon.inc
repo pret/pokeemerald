@@ -71,7 +71,7 @@ EventScript_BattleKecleon::
 	playmoncry SPECIES_KECLEON, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
-	setwildbattle SPECIES_KECLEON, 30, ITEM_NONE
+	setwildbattle SPECIES_KECLEON, 30
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE

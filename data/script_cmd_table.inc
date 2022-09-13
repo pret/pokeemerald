@@ -80,16 +80,16 @@ gScriptCmdTable::
 	.4byte ScrCmd_checkdecor                @ 0x4d
 	.4byte ScrCmd_checkdecorspace           @ 0x4e
 	.4byte ScrCmd_applymovement             @ 0x4f
-	.4byte ScrCmd_applymovement_at          @ 0x50
+	.4byte ScrCmd_applymovementat           @ 0x50
 	.4byte ScrCmd_waitmovement              @ 0x51
-	.4byte ScrCmd_waitmovement_at           @ 0x52
+	.4byte ScrCmd_waitmovementat            @ 0x52
 	.4byte ScrCmd_removeobject              @ 0x53
-	.4byte ScrCmd_removeobject_at           @ 0x54
+	.4byte ScrCmd_removeobjectat            @ 0x54
 	.4byte ScrCmd_addobject                 @ 0x55
-	.4byte ScrCmd_addobject_at              @ 0x56
+	.4byte ScrCmd_addobjectat               @ 0x56
 	.4byte ScrCmd_setobjectxy               @ 0x57
-	.4byte ScrCmd_showobject_at             @ 0x58
-	.4byte ScrCmd_hideobject_at             @ 0x59
+	.4byte ScrCmd_showobjectat              @ 0x58
+	.4byte ScrCmd_hideobjectat              @ 0x59
 	.4byte ScrCmd_faceplayer                @ 0x5a
 	.4byte ScrCmd_turnobject                @ 0x5b
 	.4byte ScrCmd_trainerbattle             @ 0x5c

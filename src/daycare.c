@@ -695,7 +695,8 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
         {
             for (j = 0; j < NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES; j++)
             {
-                if (sHatchedEggFatherMoves[i] == ItemIdToBattleMoveId(ITEM_TM01_FOCUS_PUNCH + j) && CanMonLearnTMHM(egg, j))
+                u16 moveId = ItemIdToBattleMoveId(ITEM_TM01 + j);
+                if (sHatchedEggFatherMoves[i] == moveId && CanLearnTeachableMove(GetMonData(egg, MON_DATA_SPECIES2), moveId))
                 {
                     if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == MON_HAS_MAX_MOVES)
                         DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFatherMoves[i]);
@@ -759,8 +760,8 @@ static void AlterEggSpeciesWithIncenseItem(u16 *species, struct DayCare *daycare
         else if (*species == SPECIES_HAPPINY && motherItem != ITEM_LUCK_INCENSE && fatherItem != ITEM_LUCK_INCENSE)
             *species = SPECIES_CHANSEY;
     #endif
-    #ifdef SPECIES_MIMEJR
-        else if (*species == SPECIES_MIMEJR && motherItem != ITEM_ODD_INCENSE && fatherItem != ITEM_ODD_INCENSE)
+    #ifdef SPECIES_MIME_JR
+        else if (*species == SPECIES_MIME_JR && motherItem != ITEM_ODD_INCENSE && fatherItem != ITEM_ODD_INCENSE)
             *species = SPECIES_MR_MIME;
     #endif
     #ifdef SPECIES_CHINGLING
@@ -816,13 +817,25 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
 
     eggSpecies = GetEggSpecies(species[parentSlots[0]]);
     if (eggSpecies == SPECIES_NIDORAN_F && daycare->offspringPersonality & EGG_GENDER_MALE)
-    {
         eggSpecies = SPECIES_NIDORAN_M;
-    }
-    if (eggSpecies == SPECIES_ILLUMISE && daycare->offspringPersonality & EGG_GENDER_MALE)
-    {
+    else if (eggSpecies == SPECIES_ILLUMISE && daycare->offspringPersonality & EGG_GENDER_MALE)
         eggSpecies = SPECIES_VOLBEAT;
-    }
+#if P_NIDORAN_M_DITTO_BREED >= GEN_5
+    else if (eggSpecies == SPECIES_NIDORAN_M && !(daycare->offspringPersonality & EGG_GENDER_MALE))
+        eggSpecies = SPECIES_NIDORAN_F;
+    else if (eggSpecies == SPECIES_VOLBEAT && !(daycare->offspringPersonality & EGG_GENDER_MALE))
+        eggSpecies = SPECIES_ILLUMISE;
+#endif
+    else if (eggSpecies == SPECIES_MANAPHY)
+        eggSpecies = SPECIES_PHIONE;
+    else if (eggSpecies == SPECIES_SINISTEA_ANTIQUE)
+        eggSpecies = SPECIES_SINISTEA;
+    else if (GET_BASE_SPECIES_ID(eggSpecies) == SPECIES_VIVILLON)
+        eggSpecies = SPECIES_SCATTERBUG;
+    else if (GET_BASE_SPECIES_ID(eggSpecies) == SPECIES_ROTOM)
+        eggSpecies = SPECIES_ROTOM;
+    else if (GET_BASE_SPECIES_ID(eggSpecies) == SPECIES_FURFROU)
+        eggSpecies = SPECIES_FURFROU;
 
     // Make Ditto the "mother" slot if the other daycare mon is male.
     if (species[parentSlots[1]] == SPECIES_DITTO && GetBoxMonGender(&daycare->mons[parentSlots[0]].mon) != MON_FEMALE)
@@ -1289,7 +1302,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
         ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
     else if (JOY_NEW(B_BUTTON))
     {
@@ -1298,7 +1311,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
         ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
 }
 

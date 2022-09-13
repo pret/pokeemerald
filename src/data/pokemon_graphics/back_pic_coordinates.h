@@ -1939,6 +1939,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 9,
     },
+#if P_NEW_POKEMON == TRUE
     [SPECIES_TURTWIG] =
     {
         .size = MON_COORDS_SIZE(48, 56),
@@ -4499,6 +4500,41 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(56, 48),
         .y_offset = 10,
     },
+    [SPECIES_WYRDEER] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_KLEAVOR] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 4,
+    },
+    [SPECIES_URSALUNA] =
+    {
+        .size = MON_COORDS_SIZE(64, 40),
+        .y_offset = 14,
+    },
+    [SPECIES_BASCULEGION] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_SNEASLER] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_OVERQWIL] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 7,
+    },
+    [SPECIES_ENAMORUS] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
     // Megas
     [SPECIES_VENUSAUR_MEGA] =
     {
@@ -4938,6 +4974,87 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 24),
         .y_offset = 23,
     },
+	// Hisuian Forms
+    [SPECIES_GROWLITHE_HISUIAN] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 8,
+    },
+    [SPECIES_ARCANINE_HISUIAN] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_VOLTORB_HISUIAN] =
+    {
+        .size = MON_COORDS_SIZE(48, 32),
+        .y_offset = 10,
+    },
+    [SPECIES_ELECTRODE_HISUIAN] =
+    {
+        .size = MON_COORDS_SIZE(64, 40),
+        .y_offset = 7,
+    },
+    [SPECIES_TYPHLOSION_HISUIAN] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 3,
+    },
+    [SPECIES_QWILFISH_HISUIAN] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 6,
+    },
+    [SPECIES_SNEASEL_HISUIAN] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_SAMUROTT_HISUIAN] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_LILLIGANT_HISUIAN] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 5,
+    },
+    [SPECIES_ZORUA_HISUIAN] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 1,
+    },
+    [SPECIES_ZOROARK_HISUIAN] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_BRAVIARY_HISUIAN] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 0,
+    },
+    [SPECIES_SLIGGOO_HISUIAN] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_GOODRA_HISUIAN] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_AVALUGG_HISUIAN] =
+    {
+        .size = MON_COORDS_SIZE(64, 32),
+        .y_offset = 17,
+    },
+    [SPECIES_DECIDUEYE_HISUIAN] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
     // Misc Forms
     // Cosplay Pikachu
     [SPECIES_PIKACHU_COSPLAY] =
@@ -5017,6 +5134,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(48, 56),
         .y_offset = 8,
     },
+#endif
     // Unown
     [SPECIES_UNOWN_B] =
     {
@@ -5185,6 +5303,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
+#if P_NEW_POKEMON == TRUE
     // Burmy
     [SPECIES_BURMY_SANDY_CLOAK] =
     {
@@ -5251,7 +5370,17 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(56, 48),
         .y_offset = 10,
     },
-    // Giratina
+    // Origin Forme
+    [SPECIES_DIALGA_ORIGIN] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_PALKIA_ORIGIN] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 3,
+    },
     [SPECIES_GIRATINA_ORIGIN] =
     {
         .size = MON_COORDS_SIZE(64, 56),
@@ -5355,6 +5484,11 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 48),
         .y_offset = 16,
     },
+    [SPECIES_BASCULIN_WHITE_STRIPED] =
+    {
+        .size = MON_COORDS_SIZE(64, 40),
+        .y_offset = 16,
+    },
     // Darmanitan
     [SPECIES_DARMANITAN_ZEN_MODE] =
     {
@@ -5413,6 +5547,11 @@ const struct MonCoords gMonBackPicCoords[] =
     {
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 7,
+    },
+    [SPECIES_ENAMORUS_THERIAN] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
     },
     // Kyurem
     [SPECIES_KYUREM_WHITE] =
@@ -6104,6 +6243,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 7,
     },
+#endif
     // Egg
     [SPECIES_EGG] =
     {

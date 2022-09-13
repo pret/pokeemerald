@@ -120,18 +120,18 @@ static EWRAM_DATA void *sLinkErrorBgTilemapBuffer = NULL;
 static void InitLocalLinkPlayer(void);
 static void VBlankCB_LinkError(void);
 static void CB2_LinkTest(void);
-static void ProcessRecvCmds(u8 unused);
+static void ProcessRecvCmds(u8);
 static void LinkCB_SendHeldKeys(void);
 static void ResetBlockSend(void);
-static bool32 InitBlockSend(const void *src, size_t size);
+static bool32 InitBlockSend(const void *, size_t);
 static void LinkCB_BlockSendBegin(void);
 static void LinkCB_BlockSend(void);
 static void LinkCB_BlockSendEnd(void);
-static void SetBlockReceivedFlag(u8 who);
-static u16 LinkTestCalcBlockChecksum(const u16 *src, u16 size);
-static void LinkTest_PrintHex(u32 pos, u8 a0, u8 a1, u8 a2);
+static void SetBlockReceivedFlag(u8);
+static u16 LinkTestCalcBlockChecksum(const u16 *, u16);
+static void LinkTest_PrintHex(u32, u8, u8, u8);
 static void LinkCB_RequestPlayerDataExchange(void);
-static void Task_PrintTestData(u8 taskId);
+static void Task_PrintTestData(u8);
 
 static void LinkCB_ReadyCloseLink(void);
 static void LinkCB_WaitCloseLink(void);
@@ -158,13 +158,13 @@ static void DoSend(void);
 static void StopTimer(void);
 static void SendRecvDone(void);
 
-static const u16 sWirelessLinkDisplayPal[] = INCBIN_U16("graphics/interface/wireless_link_display.gbapal");
-static const u32 sWirelessLinkDisplayGfx[] = INCBIN_U32("graphics/interface/wireless_link_display.4bpp.lz");
-static const u32 sWirelessLinkDisplayTilemap[] = INCBIN_U32("graphics/interface/wireless_link_display.bin.lz");
-static const u16 sLinkTestDigitsPal[] = INCBIN_U16("graphics/interface/link_test_digits.gbapal");
-static const u16 sLinkTestDigitsGfx[] = INCBIN_U16("graphics/interface/link_test_digits.4bpp");
+static const u16 sWirelessLinkDisplayPal[] = INCBIN_U16("graphics/link/wireless_display.gbapal");
+static const u32 sWirelessLinkDisplayGfx[] = INCBIN_U32("graphics/link/wireless_display.4bpp.lz");
+static const u32 sWirelessLinkDisplayTilemap[] = INCBIN_U32("graphics/link/wireless_display.bin.lz");
+static const u16 sLinkTestDigitsPal[] = INCBIN_U16("graphics/link/test_digits.gbapal");
+static const u16 sLinkTestDigitsGfx[] = INCBIN_U16("graphics/link/test_digits.4bpp");
 static const u8 sUnusedTransparentWhite[] = _("{HIGHLIGHT TRANSPARENT}{COLOR WHITE}");
-static const u16 sCommErrorBg_Gfx[] = INCBIN_U16("graphics/interface/comm_error_bg.4bpp");
+static const u16 sCommErrorBg_Gfx[] = INCBIN_U16("graphics/link/comm_error_bg.4bpp");
 static const struct BlockRequest sBlockRequests[] = {
     [BLOCK_REQ_SIZE_NONE] = {gBlockSendBuffer, 200},
     [BLOCK_REQ_SIZE_200]  = {gBlockSendBuffer, 200},
@@ -1595,7 +1595,7 @@ void CB2_LinkError(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetPaletteFadeControl();
-    FillPalette(0, 0, 2);
+    FillPalette(RGB_BLACK, 0, 2);
     ResetTasks();
     ScanlineEffect_Stop();
     if (gWirelessCommType)

@@ -12,6 +12,7 @@ void ItemUseOutOfBattle_SSTicket(u8);
 void ItemUseOutOfBattle_WailmerPail(u8);
 void ItemUseOutOfBattle_Medicine(u8);
 void ItemUseOutOfBattle_AbilityCapsule(u8);
+void ItemUseOutOfBattle_AbilityPatch(u8);
 void ItemUseOutOfBattle_ReduceEV(u8);
 void ItemUseOutOfBattle_SacredAsh(u8);
 void ItemUseOutOfBattle_PPRecovery(u8);
@@ -36,6 +37,15 @@ void ItemUseInBattle_EnigmaBerry(u8);
 void Task_UseDigEscapeRopeOnField(u8 taskId);
 u8 CanUseDigOrEscapeRopeOnCurMap(void);
 u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
-u32 CanThrowBall(void);
+
+enum {
+    BALL_THROW_UNABLE_TWO_MONS,
+    BALL_THROW_UNABLE_NO_ROOM,
+    BALL_THROW_UNABLE_SEMI_INVULNERABLE,
+    BALL_THROW_ABLE,
+    BALL_THROW_UNABLE_DISABLED_FLAG,
+};
+
+bool32 CanThrowBall(void);
 
 #endif // GUARD_ITEM_USE_H

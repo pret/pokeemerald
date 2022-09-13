@@ -1,4 +1,4 @@
-	.macro inc x
+	.macro inc x:req
 	.set \x, \x + 1
 	.endm
 
@@ -6,7 +6,7 @@
 	.set __enum__, \x
 	.endm
 
-	.macro enum constant
+	.macro enum constant:req
 	.equiv \constant, __enum__
 	inc __enum__
 	.endm

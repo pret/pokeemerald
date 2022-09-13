@@ -54,17 +54,17 @@ static u16 sStarterLabelWindowId;
 
 const u16 gBirchBagGrassPal[][16] =
 {
-    INCBIN_U16("graphics/misc/birch_bag.gbapal"),
-    INCBIN_U16("graphics/misc/birch_grass.gbapal"),
+    INCBIN_U16("graphics/starter_choose/birch_bag.gbapal"),
+    INCBIN_U16("graphics/starter_choose/birch_grass.gbapal"),
 };
 
-static const u16 sPokeballSelection_Pal[] = INCBIN_U16("graphics/misc/pokeball_selection.gbapal");
-static const u16 sStarterCircle_Pal[] = INCBIN_U16("graphics/misc/starter_circle.gbapal");
-const u32 gBirchBagTilemap[] = INCBIN_U32("graphics/misc/birch_bag_map.bin.lz");
-const u32 gBirchGrassTilemap[] = INCBIN_U32("graphics/misc/birch_grass_map.bin.lz");
-const u32 gBirchHelpGfx[] = INCBIN_U32("graphics/misc/birch_help.4bpp.lz"); // Birch bag and grass combined
-const u32 gPokeballSelection_Gfx[] = INCBIN_U32("graphics/misc/pokeball_selection.4bpp.lz");
-static const u32 sStarterCircle_Gfx[] = INCBIN_U32("graphics/misc/starter_circle.4bpp.lz");
+static const u16 sPokeballSelection_Pal[] = INCBIN_U16("graphics/starter_choose/pokeball_selection.gbapal");
+static const u16 sStarterCircle_Pal[] = INCBIN_U16("graphics/starter_choose/starter_circle.gbapal");
+const u32 gBirchBagTilemap[] = INCBIN_U32("graphics/starter_choose/birch_bag.bin.lz");
+const u32 gBirchGrassTilemap[] = INCBIN_U32("graphics/starter_choose/birch_grass.bin.lz");
+const u32 gBirchHelpGfx[] = INCBIN_U32("graphics/starter_choose/birch_help.4bpp.lz"); // Birch bag and grass combined
+const u32 gPokeballSelection_Gfx[] = INCBIN_U32("graphics/starter_choose/pokeball_selection.4bpp.lz");
+static const u32 sStarterCircle_Gfx[] = INCBIN_U32("graphics/starter_choose/starter_circle.4bpp.lz");
 
 static const struct WindowTemplate sWindowTemplates[] =
 {
@@ -161,7 +161,7 @@ static const struct OamData sOam_Hand =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -178,7 +178,7 @@ static const struct OamData sOam_Pokeball =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -195,7 +195,7 @@ static const struct OamData sOam_StarterCircle =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,

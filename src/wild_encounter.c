@@ -47,6 +47,8 @@ enum {
 #define WILD_CHECK_REPEL    (1 << 0)
 #define WILD_CHECK_KEEN_EYE (1 << 1)
 
+#define HEADER_NONE 0xFFFF
+
 static u16 FeebasRandom(void);
 static void FeebasSeedRng(u16 seed);
 static bool8 IsWildLevelAllowedByRepel(u8 level);
@@ -176,6 +178,7 @@ static void FeebasSeedRng(u16 seed)
     sFeebasRngValue = seed;
 }
 
+// LAND_WILD_COUNT
 static u8 ChooseWildMonIndex_Land(void)
 {
     u8 rand = Random() % ENCOUNTER_CHANCE_LAND_MONS_TOTAL;
@@ -206,6 +209,7 @@ static u8 ChooseWildMonIndex_Land(void)
         return 11;
 }
 
+// ROCK_WILD_COUNT / WATER_WILD_COUNT
 static u8 ChooseWildMonIndex_WaterRock(void)
 {
     u8 rand = Random() % ENCOUNTER_CHANCE_WATER_MONS_TOTAL;
@@ -222,6 +226,7 @@ static u8 ChooseWildMonIndex_WaterRock(void)
         return 4;
 }
 
+// FISH_WILD_COUNT
 static u8 ChooseWildMonIndex_Fishing(u8 rod)
 {
     u8 wildMonIndex = 0;
@@ -314,7 +319,7 @@ static u16 GetCurrentMapWildMonHeaderId(void)
                 gSaveBlock1Ptr->location.mapNum == MAP_NUM(ALTERING_CAVE))
             {
                 u16 alteringCaveId = VarGet(VAR_ALTERING_CAVE_WILD_SET);
-                if (alteringCaveId > 8)
+                if (alteringCaveId >= NUM_ALTERING_CAVE_TABLES)
                     alteringCaveId = 0;
 
                 i += alteringCaveId;
@@ -324,7 +329,7 @@ static u16 GetCurrentMapWildMonHeaderId(void)
         }
     }
 
-    return -1;
+    return HEADER_NONE;
 }
 
 static u8 PickWildMonNature(void)
@@ -362,7 +367,10 @@ static u8 PickWildMonNature(void)
     // check synchronize for a pokemon with the same ability
     if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG)
         && GetMonAbility(&gPlayerParty[0]) == ABILITY_SYNCHRONIZE
-        && ((B_SYNCHRONIZE_NATURE >= GEN_8) || Random() % 2 == 0))
+    #if B_SYNCHRONIZE_NATURE <= GEN_7
+        && (Random() % 2 == 0)
+    #endif
+    )
     {
         return GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY) % NUM_NATURES;
     }
@@ -571,7 +579,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
         return FALSE;
 
     headerId = GetCurrentMapWildMonHeaderId();
-    if (headerId == 0xFFFF)
+    if (headerId == HEADER_NONE)
     {
         if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS)
         {
@@ -703,7 +711,7 @@ void RockSmashWildEncounter(void)
 {
     u16 headerId = GetCurrentMapWildMonHeaderId();
 
-    if (headerId != 0xFFFF)
+    if (headerId != HEADER_NONE)
     {
         const struct WildPokemonInfo *wildPokemonInfo = gWildMonHeaders[headerId].rockSmashMonsInfo;
 
@@ -711,7 +719,7 @@ void RockSmashWildEncounter(void)
         {
             gSpecialVar_Result = FALSE;
         }
-        else if (DoWildEncounterRateTest(wildPokemonInfo->encounterRate, 1) == TRUE
+        else if (DoWildEncounterRateTest(wildPokemonInfo->encounterRate, TRUE) == TRUE
          && TryGenerateWildMon(wildPokemonInfo, WILD_AREA_ROCKS, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
         {
             BattleSetup_StartWildBattle();
@@ -735,7 +743,7 @@ bool8 SweetScentWildEncounter(void)
 
     PlayerGetDestCoords(&x, &y);
     headerId = GetCurrentMapWildMonHeaderId();
-    if (headerId == 0xFFFF)
+    if (headerId == HEADER_NONE)
     {
         if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS)
         {
@@ -805,7 +813,7 @@ bool8 DoesCurrentMapHaveFishingMons(void)
 {
     u16 headerId = GetCurrentMapWildMonHeaderId();
 
-    if (headerId != 0xFFFF && gWildMonHeaders[headerId].fishingMonsInfo != NULL)
+    if (headerId != HEADER_NONE && gWildMonHeaders[headerId].fishingMonsInfo != NULL)
         return TRUE;
     else
         return FALSE;
@@ -840,7 +848,7 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
 
     *isWaterMon = FALSE;
     headerId = GetCurrentMapWildMonHeaderId();
-    if (headerId == 0xFFFF)
+    if (headerId == HEADER_NONE)
         return SPECIES_NONE;
     landMonsInfo = gWildMonHeaders[headerId].landMonsInfo;
     waterMonsInfo = gWildMonHeaders[headerId].waterMonsInfo;
@@ -872,7 +880,7 @@ u16 GetLocalWaterMon(void)
 {
     u16 headerId = GetCurrentMapWildMonHeaderId();
 
-    if (headerId != 0xFFFF)
+    if (headerId != HEADER_NONE)
     {
         const struct WildPokemonInfo *waterMonsInfo = gWildMonHeaders[headerId].waterMonsInfo;
 
@@ -899,7 +907,7 @@ bool8 UpdateRepelCounter(void)
         VarSet(VAR_REPEL_STEP_COUNT, steps);
         if (steps == 0)
         {
-            ScriptContext1_SetupScript(EventScript_RepelWoreOff);
+            ScriptContext_SetupScript(EventScript_RepelWoreOff);
             return TRUE;
         }
     }
@@ -998,11 +1006,13 @@ bool8 TryDoDoubleWildBattle(void)
 {
     if (GetSafariZoneFlag() || GetMonsStateToDoubles() != PLAYER_HAS_TWO_USABLE_MONS)
         return FALSE;
-    else if (B_FLAG_FORCE_DOUBLE_WILD != 0 && FlagGet(B_FLAG_FORCE_DOUBLE_WILD))
+#if B_FLAG_FORCE_DOUBLE_WILD != 0 
+    else if (FlagGet(B_FLAG_FORCE_DOUBLE_WILD))
         return TRUE;
-    #if B_DOUBLE_WILD_CHANCE != 0
+#endif
+#if B_DOUBLE_WILD_CHANCE != 0
     else if ((Random() % 100) + 1 < B_DOUBLE_WILD_CHANCE)
         return TRUE;
-    #endif
+#endif
     return FALSE;
 }

@@ -31,7 +31,7 @@ void AGBPrintFlush1Block(void);
 void AGBPrintInit(void)
 {
     volatile struct AGBPrintStruct *pPrint = (struct AGBPrintStruct *)AGB_PRINT_STRUCT_ADDR;
-    u16 *pWSCNT = &REG_WAITCNT;
+    vu16 *pWSCNT = &REG_WAITCNT;
     u16 *pProtect = (u16 *)AGB_PRINT_PROTECT_ADDR;
     u16 nOldWSCNT = *pWSCNT;
     *pWSCNT = WSCNT_DATA;
@@ -57,7 +57,7 @@ static void AGBPutcInternal(const char cChr)
 
 void AGBPutc(const char cChr)
 {
-    u16 *pWSCNT = &REG_WAITCNT;
+    vu16 *pWSCNT = &REG_WAITCNT;
     u16 nOldWSCNT = *pWSCNT;
     volatile struct AGBPrintStruct *pPrint;
     *pWSCNT = WSCNT_DATA;
@@ -71,7 +71,7 @@ void AGBPutc(const char cChr)
 void AGBPrint(const char *pBuf)
 {
     volatile struct AGBPrintStruct *pPrint = (struct AGBPrintStruct *)AGB_PRINT_STRUCT_ADDR;
-    u16 *pWSCNT = &REG_WAITCNT;
+    vu16 *pWSCNT = &REG_WAITCNT;
     u16 nOldWSCNT = *pWSCNT;
     *pWSCNT = WSCNT_DATA;
     while (*pBuf)
@@ -95,9 +95,9 @@ void AGBPrintf(const char *pBuf, ...)
 static void AGBPrintTransferDataInternal(u32 bAllData)
 {
     LPFN_PRINT_FLUSH lpfnFuncFlush;
-    u16 *pIME;
+    vu16 *pIME;
     u16 nIME;
-    u16 *pWSCNT;
+    vu16 *pWSCNT;
     u16 nOldWSCNT;
     u16 *pProtect;
     volatile struct AGBPrintStruct *pPrint;
@@ -160,7 +160,7 @@ void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopP
 /*
 void NoCashGBAPrint(const char *pBuf)
 {
-    *(volatile u32*)NOCASHGBAPRINTADDR2 = (u32)pBuf;
+    *(volatile u32 *)NOCASHGBAPRINTADDR2 = (u32)pBuf;
 }
 
 void NoCashGBAPrintf(const char *pBuf, ...)

@@ -9,12 +9,6 @@
 #define MAP_GROUP(map) (MAP_##map >> 8)
 #define MAP_NUM(map) (MAP_##map & 0xFF)
 
-// These groups are used by pokedex_area_screen.c to find wild
-// pokemon locations.
-#define MAP_GROUP_OVERWORLD_MONS MAP_GROUP(PETALBURG_CITY)
-#define MAP_GROUP_SPECIAL_MONS_1 MAP_GROUP(METEOR_FALLS_1F_1R)
-#define MAP_GROUP_SPECIAL_MONS_2 MAP_GROUP(SAFARI_ZONE_NORTHWEST)
-
 // IDs for dynamic warps. Both are used in the dest_warp_id field for warp events, but they
 // are never read in practice. A dest_map of MAP_NONE is used to indicate that a
 // dynamic warp should be used, at which point the warp id is ignored. It can be passed to

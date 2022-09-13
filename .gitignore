@@ -3,6 +3,7 @@
 *.i
 *.elf
 *.gba
+!data/*.gba
 *.sgm
 *.sa1
 *.ss[0-9]
@@ -36,5 +37,6 @@ porymap.project.cfg
 *.sna
 *.diff
 *.sym
+*.js
 mgba.sh
 core

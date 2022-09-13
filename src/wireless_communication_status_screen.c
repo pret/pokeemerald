@@ -51,9 +51,9 @@ static void Task_WirelessCommunicationScreen(u8);
 static void WCSS_AddTextPrinterParameterized(u8, u8, const u8 *, u8, u8, u8);
 static bool32 UpdateCommunicationCounts(u32 *, u32 *, u32 *, u8);
 
-static const u16 sBgTiles_Pal[] = INCBIN_U16("graphics/interface/wireless_info_screen.gbapal");
-static const u32 sBgTiles_Gfx[] = INCBIN_U32("graphics/interface/wireless_info_screen.4bpp.lz");
-static const u32 sBgTiles_Tilemap[] = INCBIN_U32("graphics/interface/wireless_info_screen.bin.lz");
+static const u16 sBgTiles_Pal[] = INCBIN_U16("graphics/link/wireless_info_screen.gbapal");
+static const u32 sBgTiles_Gfx[] = INCBIN_U32("graphics/link/wireless_info_screen.4bpp.lz");
+static const u32 sBgTiles_Tilemap[] = INCBIN_U32("graphics/link/wireless_info_screen.bin.lz");
 
 static const struct BgTemplate sBgTemplates[] = {
     {
@@ -311,7 +311,7 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
 
 #undef tState
 
-static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 mode)
+static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 mode)
 {
     u8 color[3];
 

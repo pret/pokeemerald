@@ -11,6 +11,8 @@
 #define UNION_ROOM_SPAWN_IN   1
 #define UNION_ROOM_SPAWN_OUT  2
 
+#define UNION_ROOM_MAX_LEVEL 30
+
 #define ACTIVITY_NONE               0
 #define ACTIVITY_BATTLE_SINGLE      1
 #define ACTIVITY_BATTLE_DOUBLE      2

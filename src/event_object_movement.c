@@ -2,6 +2,7 @@
 #include "malloc.h"
 #include "battle_pyramid.h"
 #include "berry.h"
+#include "debug.h"
 #include "decoration.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -92,33 +93,33 @@ static bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *, s16, s16, u
 static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *, s16, s16);
 static void UpdateObjectEventOffscreen(struct ObjectEvent *, struct Sprite *);
 static void UpdateObjectEventSpriteVisibility(struct ObjectEvent *, struct Sprite *);
-static void ObjectEventUpdateMetatileBehaviors(struct ObjectEvent*);
-static void GetGroundEffectFlags_Reflection(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_TallGrassOnSpawn(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_LongGrassOnSpawn(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_SandHeap(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_ShallowFlowingWater(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_ShortGrass(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_HotSprings(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_TallGrassOnBeginStep(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_LongGrassOnBeginStep(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_Tracks(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_Puddle(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_Ripple(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_Seaweed(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent*, u32*);
-static u8 ObjectEventGetNearbyReflectionType(struct ObjectEvent*);
+static void ObjectEventUpdateMetatileBehaviors(struct ObjectEvent *);
+static void GetGroundEffectFlags_Reflection(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_TallGrassOnSpawn(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_LongGrassOnSpawn(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_SandHeap(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_ShallowFlowingWater(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_ShortGrass(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_HotSprings(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_TallGrassOnBeginStep(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_LongGrassOnBeginStep(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_Tracks(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_Puddle(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_Ripple(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_Seaweed(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent *, u32 *);
+static u8 ObjectEventGetNearbyReflectionType(struct ObjectEvent *);
 static u8 GetReflectionTypeByMetatileBehavior(u32);
-static void InitObjectPriorityByZCoord(struct Sprite *sprite, u8 z);
-static void ObjectEventUpdateSubpriority(struct ObjectEvent*, struct Sprite*);
-static void DoTracksGroundEffect_None(struct ObjectEvent*, struct Sprite*, u8);
-static void DoTracksGroundEffect_Footprints(struct ObjectEvent*, struct Sprite*, u8);
-static void DoTracksGroundEffect_BikeTireTracks(struct ObjectEvent*, struct Sprite*, u8);
-static void DoRippleFieldEffect(struct ObjectEvent*, struct Sprite*);
-static void DoGroundEffects_OnSpawn(struct ObjectEvent*, struct Sprite*);
-static void DoGroundEffects_OnBeginStep(struct ObjectEvent*, struct Sprite*);
-static void DoGroundEffects_OnFinishStep(struct ObjectEvent*, struct Sprite*);
-static void VirtualObject_UpdateAnim(struct Sprite*);
+static void InitObjectPriorityByElevation(struct Sprite *, u8);
+static void ObjectEventUpdateSubpriority(struct ObjectEvent *, struct Sprite *);
+static void DoTracksGroundEffect_None(struct ObjectEvent *, struct Sprite *, u8);
+static void DoTracksGroundEffect_Footprints(struct ObjectEvent *, struct Sprite *, u8);
+static void DoTracksGroundEffect_BikeTireTracks(struct ObjectEvent *, struct Sprite *, u8);
+static void DoRippleFieldEffect(struct ObjectEvent *, struct Sprite *);
+static void DoGroundEffects_OnSpawn(struct ObjectEvent *, struct Sprite *);
+static void DoGroundEffects_OnBeginStep(struct ObjectEvent *, struct Sprite *);
+static void DoGroundEffects_OnFinishStep(struct ObjectEvent *, struct Sprite *);
+static void VirtualObject_UpdateAnim(struct Sprite *);
 static void ApplyLevitateMovement(u8);
 static bool8 MovementType_Disguise_Callback(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementType_Buried_Callback(struct ObjectEvent *, struct Sprite *);
@@ -140,27 +141,29 @@ static void ResetObjectEventFldEffData(struct ObjectEvent *);
 static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *);
 static u16 FindObjectEventPaletteIndexByTag(u16);
 static void _PatchObjectPalette(u16, u8);
-static bool8 ObjectEventDoesZCoordMatch(struct ObjectEvent *, u8);
+static bool8 ObjectEventDoesElevationMatch(struct ObjectEvent *, u8);
 static void SpriteCB_CameraObject(struct Sprite *);
 static void CameraObject_0(struct Sprite *);
 static void CameraObject_1(struct Sprite *);
 static void CameraObject_2(struct Sprite *);
-static struct ObjectEventTemplate *FindObjectEventTemplateByLocalId(u8 localId, struct ObjectEventTemplate *templates, u8 count);
+static struct ObjectEventTemplate *FindObjectEventTemplateByLocalId(u8, struct ObjectEventTemplate *, u8);
 static void ClearObjectEventMovement(struct ObjectEvent *, struct Sprite *);
 static void ObjectEventSetSingleMovement(struct ObjectEvent *, struct Sprite *, u8);
 static void SetSpriteDataForNormalStep(struct Sprite *, u8, u8);
-static void InitSpriteForFigure8Anim(struct Sprite *sprite);
-static bool8 AnimateSpriteInFigure8(struct Sprite *sprite);
+static void InitSpriteForFigure8Anim(struct Sprite *);
+static bool8 AnimateSpriteInFigure8(struct Sprite *);
 static void SpriteCB_VirtualObject(struct Sprite *);
 static void DoShadowFieldEffect(struct ObjectEvent *);
 static void SetJumpSpriteData(struct Sprite *, u8, u8, u8);
-static void SetWalkSlowSpriteData(struct Sprite *sprite, u8 direction);
-static bool8 UpdateWalkSlowAnim(struct Sprite *sprite);
-static u8 DoJumpSpriteMovement(struct Sprite *sprite);
-static u8 DoJumpSpecialSpriteMovement(struct Sprite *sprite);
+static void SetWalkSlowSpriteData(struct Sprite *, u8);
+static bool8 UpdateWalkSlowAnim(struct Sprite *);
+static u8 DoJumpSpriteMovement(struct Sprite *);
+static u8 DoJumpSpecialSpriteMovement(struct Sprite *);
 static void CreateLevitateMovementTask(struct ObjectEvent *);
 static void DestroyLevitateMovementTask(u8);
-static bool8 NpcTakeStep(struct Sprite *sprite);
+static bool8 NpcTakeStep(struct Sprite *);
+static bool8 IsElevationMismatchAt(u8, s16, s16);
+static bool8 AreElevationsCompatible(u8, u8);
 
 static const struct SpriteFrameImage sPicTable_PechaBerryTree[];
 
@@ -2178,26 +2181,26 @@ static const u8 sJumpSpecialDirectionAnimNums[] = { // used for jumping onto sur
     [DIR_NORTHEAST] = ANIM_GET_ON_OFF_POKEMON_NORTH,
 };
 static const u8 sAcroWheelieDirectionAnimNums[] = {
-    [DIR_NONE] = ANIM_BUNNY_HOPPY_BACK_WHEEL_SOUTH,
-    [DIR_SOUTH] = ANIM_BUNNY_HOPPY_BACK_WHEEL_SOUTH,
-    [DIR_NORTH] = ANIM_BUNNY_HOPPY_BACK_WHEEL_NORTH,
-    [DIR_WEST] = ANIM_BUNNY_HOPPY_BACK_WHEEL_WEST,
-    [DIR_EAST] = ANIM_BUNNY_HOPPY_BACK_WHEEL_EAST,
-    [DIR_SOUTHWEST] = ANIM_BUNNY_HOPPY_BACK_WHEEL_SOUTH,
-    [DIR_SOUTHEAST] = ANIM_BUNNY_HOPPY_BACK_WHEEL_SOUTH,
-    [DIR_NORTHWEST] = ANIM_BUNNY_HOPPY_BACK_WHEEL_NORTH,
-    [DIR_NORTHEAST] = ANIM_BUNNY_HOPPY_BACK_WHEEL_NORTH,
+    [DIR_NONE] = ANIM_BUNNY_HOP_BACK_WHEEL_SOUTH,
+    [DIR_SOUTH] = ANIM_BUNNY_HOP_BACK_WHEEL_SOUTH,
+    [DIR_NORTH] = ANIM_BUNNY_HOP_BACK_WHEEL_NORTH,
+    [DIR_WEST] = ANIM_BUNNY_HOP_BACK_WHEEL_WEST,
+    [DIR_EAST] = ANIM_BUNNY_HOP_BACK_WHEEL_EAST,
+    [DIR_SOUTHWEST] = ANIM_BUNNY_HOP_BACK_WHEEL_SOUTH,
+    [DIR_SOUTHEAST] = ANIM_BUNNY_HOP_BACK_WHEEL_SOUTH,
+    [DIR_NORTHWEST] = ANIM_BUNNY_HOP_BACK_WHEEL_NORTH,
+    [DIR_NORTHEAST] = ANIM_BUNNY_HOP_BACK_WHEEL_NORTH,
 };
 static const u8 sAcroUnusedDirectionAnimNums[] = {
-    [DIR_NONE] = ANIM_BUNNY_HOPPY_FRONT_WHEEL_SOUTH,
-    [DIR_SOUTH] = ANIM_BUNNY_HOPPY_FRONT_WHEEL_SOUTH,
-    [DIR_NORTH] = ANIM_BUNNY_HOPPY_FRONT_WHEEL_NORTH,
-    [DIR_WEST] = ANIM_BUNNY_HOPPY_FRONT_WHEEL_WEST,
-    [DIR_EAST] = ANIM_BUNNY_HOPPY_FRONT_WHEEL_EAST,
-    [DIR_SOUTHWEST] = ANIM_BUNNY_HOPPY_FRONT_WHEEL_SOUTH,
-    [DIR_SOUTHEAST] = ANIM_BUNNY_HOPPY_FRONT_WHEEL_SOUTH,
-    [DIR_NORTHWEST] = ANIM_BUNNY_HOPPY_FRONT_WHEEL_NORTH,
-    [DIR_NORTHEAST] = ANIM_BUNNY_HOPPY_FRONT_WHEEL_NORTH,
+    [DIR_NONE] = ANIM_BUNNY_HOP_FRONT_WHEEL_SOUTH,
+    [DIR_SOUTH] = ANIM_BUNNY_HOP_FRONT_WHEEL_SOUTH,
+    [DIR_NORTH] = ANIM_BUNNY_HOP_FRONT_WHEEL_NORTH,
+    [DIR_WEST] = ANIM_BUNNY_HOP_FRONT_WHEEL_WEST,
+    [DIR_EAST] = ANIM_BUNNY_HOP_FRONT_WHEEL_EAST,
+    [DIR_SOUTHWEST] = ANIM_BUNNY_HOP_FRONT_WHEEL_SOUTH,
+    [DIR_SOUTHEAST] = ANIM_BUNNY_HOP_FRONT_WHEEL_SOUTH,
+    [DIR_NORTHWEST] = ANIM_BUNNY_HOP_FRONT_WHEEL_NORTH,
+    [DIR_NORTHEAST] = ANIM_BUNNY_HOP_FRONT_WHEEL_NORTH,
 };
 static const u8 sAcroEndWheelieDirectionAnimNums[] = {
     [DIR_NONE] = ANIM_STANDING_WHEELIE_BACK_WHEEL_SOUTH,
@@ -2863,7 +2866,7 @@ static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTempl
     if (!objectEvent->inanimate)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(objectEvent->facingDirection));
 
-    SetObjectSubpriorityByZCoord(objectEvent->previousElevation, sprite, 1);
+    SetObjectSubpriorityByElevation(objectEvent->previousElevation, sprite, 1);
     UpdateObjectEventVisibility(objectEvent, sprite);
     return objectEventId;
 }
@@ -2900,7 +2903,7 @@ u8 SpawnSpecialObjectEvent(struct ObjectEventTemplate *objectEventTemplate)
     return TrySpawnObjectEventTemplate(objectEventTemplate, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
 }
 
-u8 SpawnSpecialObjectEventParameterized(u16 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 z)
+u8 SpawnSpecialObjectEventParameterized(u16 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 elevation)
 {
     struct ObjectEventTemplate objectEventTemplate;
 
@@ -2911,7 +2914,7 @@ u8 SpawnSpecialObjectEventParameterized(u16 graphicsId, u8 movementBehavior, u8 
     objectEventTemplate.inConnection = 0;
     objectEventTemplate.x = x;
     objectEventTemplate.y = y;
-    objectEventTemplate.elevation = z;
+    objectEventTemplate.elevation = elevation;
     objectEventTemplate.movementType = movementBehavior;
     objectEventTemplate.movementRangeX = 0;
     objectEventTemplate.movementRangeY = 0;
@@ -2990,7 +2993,7 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
 // A unique id is given as an argument and stored in the sprite data to allow referring back to the same virtual object.
 // They can be turned (and, in the case of the Union Room, animated teleporting in and out) but do not have movement types
 // or any of the other data normally associated with object events.
-u8 CreateVirtualObject(u16 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 z, u8 direction)
+u8 CreateVirtualObject(u16 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 elevation, u8 direction)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -3018,14 +3021,15 @@ u8 CreateVirtualObject(u16 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 z, u8 d
         sprite->oam.paletteNum = IndexOfSpritePaletteTag(spriteTemplate.paletteTag);
         sprite->coordOffsetEnabled = TRUE;
         sprite->sVirtualObjId = virtualObjId;
-        sprite->sVirtualObjElev = z;
+        sprite->sVirtualObjElev = elevation;
+
         if (subspriteTables != NULL)
         {
             SetSubspriteTables(sprite, subspriteTables);
             sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
         }
-        InitObjectPriorityByZCoord(sprite, z);
-        SetObjectSubpriorityByZCoord(z, sprite, 1);
+        InitObjectPriorityByElevation(sprite, elevation);
+        SetObjectSubpriorityByElevation(elevation, sprite, 1);
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(direction));
     }
     return spriteId;
@@ -3169,7 +3173,7 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
             StartSpriteAnim(sprite, GetFaceDirectionAnimNum(objectEvent->facingDirection));
 
         ResetObjectEventFldEffData(objectEvent);
-        SetObjectSubpriorityByZCoord(objectEvent->previousElevation, sprite, 1);
+        SetObjectSubpriorityByElevation(objectEvent->previousElevation, sprite, 1);
     }
 }
 
@@ -3316,9 +3320,9 @@ void SetObjectInvisibility(u8 localId, u8 mapNum, u8 mapGroup, bool8 invisible)
 
 void ObjectEventGetLocalIdAndMap(struct ObjectEvent *objectEvent, void *localId, void *mapNum, void *mapGroup)
 {
-    *(u8*)(localId) = objectEvent->localId;
-    *(u8*)(mapNum) = objectEvent->mapNum;
-    *(u8*)(mapGroup) = objectEvent->mapGroup;
+    *(u8 *)(localId) = objectEvent->localId;
+    *(u8 *)(mapNum) = objectEvent->mapNum;
+    *(u8 *)(mapGroup) = objectEvent->mapGroup;
 }
 
 void AllowObjectAtPosTriggerGroundEffects(s16 x, s16 y)
@@ -3524,7 +3528,7 @@ void UpdateObjectEventCoordsForCameraUpdate(void)
     }
 }
 
-u8 GetObjectEventIdByXYZ(u16 x, u16 y, u8 z)
+u8 GetObjectEventIdByPosition(u16 x, u16 y, u8 elevation)
 {
     u8 i;
 
@@ -3532,16 +3536,18 @@ u8 GetObjectEventIdByXYZ(u16 x, u16 y, u8 z)
     {
         if (gObjectEvents[i].active)
         {
-            if (gObjectEvents[i].currentCoords.x == x && gObjectEvents[i].currentCoords.y == y && ObjectEventDoesZCoordMatch(&gObjectEvents[i], z))
+            if (gObjectEvents[i].currentCoords.x == x
+             && gObjectEvents[i].currentCoords.y == y
+             && ObjectEventDoesElevationMatch(&gObjectEvents[i], elevation))
                 return i;
         }
     }
     return OBJECT_EVENTS_COUNT;
 }
 
-static bool8 ObjectEventDoesZCoordMatch(struct ObjectEvent *objectEvent, u8 z)
+static bool8 ObjectEventDoesElevationMatch(struct ObjectEvent *objectEvent, u8 elevation)
 {
-    if (objectEvent->currentElevation != 0 && z != 0 && objectEvent->currentElevation != z)
+    if (objectEvent->currentElevation != 0 && elevation != 0 && objectEvent->currentElevation != elevation)
         return FALSE;
 
     return TRUE;
@@ -5969,13 +5975,19 @@ static u8 GetCollisionInDirection(struct ObjectEvent *objectEvent, u8 direction)
 u8 GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 dir)
 {
     u8 direction = dir;
+
+#if DEBUG_SYSTEM_ENABLE == TRUE
+    if (FlagGet(DEBUG_FLAG_NO_COLLISION))
+        return COLLISION_NONE;
+#endif
+
     if (IsCoordOutsideObjectEventMovementRange(objectEvent, x, y))
         return COLLISION_OUTSIDE_RANGE;
-    else if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction))
+    else if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction))
         return COLLISION_IMPASSABLE;
     else if (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction))
         return COLLISION_IMPASSABLE;
-    else if (IsZCoordMismatchAt(objectEvent->currentElevation, x, y))
+    else if (IsElevationMismatchAt(objectEvent->currentElevation, x, y))
         return COLLISION_ELEVATION_MISMATCH;
     else if (DoesObjectCollideWithObjectAt(objectEvent, x, y))
         return COLLISION_OBJECT_EVENT;
@@ -5987,13 +5999,13 @@ u8 GetCollisionFlagsAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 d
     u8 flags = 0;
 
     if (IsCoordOutsideObjectEventMovementRange(objectEvent, x, y))
-        flags |= 1;
-    if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction) || (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction)))
-        flags |= 2;
-    if (IsZCoordMismatchAt(objectEvent->currentElevation, x, y))
-        flags |= 4;
+        flags |= 1 << (COLLISION_OUTSIDE_RANGE - 1);
+    if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction) || (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction)))
+        flags |= 1 << (COLLISION_IMPASSABLE - 1);
+    if (IsElevationMismatchAt(objectEvent->currentElevation, x, y))
+        flags |= 1 << (COLLISION_ELEVATION_MISMATCH - 1);
     if (DoesObjectCollideWithObjectAt(objectEvent, x, y))
-        flags |= 8;
+        flags |= 1 << (COLLISION_OBJECT_EVENT - 1);
     return flags;
 }
 
@@ -6044,7 +6056,7 @@ static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *objectEvent, s16 
         {
             if ((curObject->currentCoords.x == x && curObject->currentCoords.y == y) || (curObject->previousCoords.x == x && curObject->previousCoords.y == y))
             {
-                if (AreZCoordsCompatible(objectEvent->currentElevation, curObject->currentElevation))
+                if (AreElevationsCompatible(objectEvent->currentElevation, curObject->currentElevation))
                     return TRUE;
             }
         }
@@ -9012,23 +9024,23 @@ static void SetObjectEventSpriteOamTableForLongGrass(struct ObjectEvent *objEven
 
     sprite->subspriteTableNum = 4;
 
-    if (ZCoordToPriority(objEvent->previousElevation) == 1)
+    if (ElevationToPriority(objEvent->previousElevation) == 1)
         sprite->subspriteTableNum = 5;
 }
 
-bool8 IsZCoordMismatchAt(u8 z, s16 x, s16 y)
+static bool8 IsElevationMismatchAt(u8 elevation, s16 x, s16 y)
 {
-    u8 mapZ;
+    u8 mapElevation;
 
-    if (z == 0)
+    if (elevation == 0)
         return FALSE;
 
-    mapZ = MapGridGetZCoordAt(x, y);
+    mapElevation = MapGridGetElevationAt(x, y);
 
-    if (mapZ == 0 || mapZ == 15)
+    if (mapElevation == 0 || mapElevation == 15)
         return FALSE;
 
-    if (mapZ != z)
+    if (mapElevation != elevation)
         return TRUE;
 
     return FALSE;
@@ -9046,43 +9058,43 @@ static const u8 sElevationToSubspriteTableNum[] = {
     1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 0, 1,
 };
 
-void UpdateObjectEventZCoordAndPriority(struct ObjectEvent *objEvent, struct Sprite *sprite)
+static void UpdateObjectEventElevationAndPriority(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
     if (objEvent->fixedPriority)
         return;
 
-    ObjectEventUpdateZCoord(objEvent);
+    ObjectEventUpdateElevation(objEvent);
 
     sprite->subspriteTableNum = sElevationToSubspriteTableNum[objEvent->previousElevation];
     sprite->oam.priority = sElevationToPriority[objEvent->previousElevation];
 }
 
-static void InitObjectPriorityByZCoord(struct Sprite *sprite, u8 z)
+static void InitObjectPriorityByElevation(struct Sprite *sprite, u8 elevation)
 {
-    sprite->subspriteTableNum = sElevationToSubspriteTableNum[z];
-    sprite->oam.priority = sElevationToPriority[z];
+    sprite->subspriteTableNum = sElevationToSubspriteTableNum[elevation];
+    sprite->oam.priority = sElevationToPriority[elevation];
 }
 
-u8 ZCoordToPriority(u8 z)
+u8 ElevationToPriority(u8 elevation)
 {
-    return sElevationToPriority[z];
+    return sElevationToPriority[elevation];
 }
 
-void ObjectEventUpdateZCoord(struct ObjectEvent *objEvent)
+void ObjectEventUpdateElevation(struct ObjectEvent *objEvent)
 {
-    u8 z = MapGridGetZCoordAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
-    u8 z2 = MapGridGetZCoordAt(objEvent->previousCoords.x, objEvent->previousCoords.y);
+    u8 curElevation = MapGridGetElevationAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
+    u8 prevElevation = MapGridGetElevationAt(objEvent->previousCoords.x, objEvent->previousCoords.y);
 
-    if (z == 0xF || z2 == 0xF)
+    if (curElevation == 15 || prevElevation == 15)
         return;
 
-    objEvent->currentElevation = z;
+    objEvent->currentElevation = curElevation;
 
-    if (z != 0 && z != 0xF)
-        objEvent->previousElevation = z;
+    if (curElevation != 0 && curElevation != 15)
+        objEvent->previousElevation = curElevation;
 }
 
-void SetObjectSubpriorityByZCoord(u8 elevation, struct Sprite *sprite, u8 subpriority)
+void SetObjectSubpriorityByElevation(u8 elevation, struct Sprite *sprite, u8 subpriority)
 {
     s32 tmp = sprite->centerToCornerVecY;
     u32 tmpa = *(u16 *)&sprite->y;
@@ -9097,10 +9109,10 @@ static void ObjectEventUpdateSubpriority(struct ObjectEvent *objEvent, struct Sp
     if (objEvent->fixedPriority)
         return;
 
-    SetObjectSubpriorityByZCoord(objEvent->previousElevation, sprite, 1);
+    SetObjectSubpriorityByElevation(objEvent->previousElevation, sprite, 1);
 }
 
-bool8 AreZCoordsCompatible(u8 a, u8 b)
+static bool8 AreElevationsCompatible(u8 a, u8 b)
 {
     if (a == 0 || b == 0)
         return TRUE;
@@ -9178,7 +9190,7 @@ void GroundEffect_FlowingWater(struct ObjectEvent *objEvent, struct Sprite *spri
     StartFieldEffectForObjectEvent(FLDEFF_FEET_IN_FLOWING_WATER, objEvent);
 }
 
-static void (*const sGroundEffectTracksFuncs[])(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a) = {
+static void (*const sGroundEffectTracksFuncs[])(struct ObjectEvent *objEvent, struct Sprite *sprite, bool8 isDeepSand) = {
     [TRACKS_NONE] = DoTracksGroundEffect_None,
     [TRACKS_FOOT] = DoTracksGroundEffect_Footprints,
     [TRACKS_BIKE_TIRE] = DoTracksGroundEffect_BikeTireTracks,
@@ -9187,20 +9199,20 @@ static void (*const sGroundEffectTracksFuncs[])(struct ObjectEvent *objEvent, st
 void GroundEffect_SandTracks(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
     const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
-    sGroundEffectTracksFuncs[info->tracks](objEvent, sprite, 0);
+    sGroundEffectTracksFuncs[info->tracks](objEvent, sprite, FALSE);
 }
 
 void GroundEffect_DeepSandTracks(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
     const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
-    sGroundEffectTracksFuncs[info->tracks](objEvent, sprite, 1);
+    sGroundEffectTracksFuncs[info->tracks](objEvent, sprite, TRUE);
 }
 
-static void DoTracksGroundEffect_None(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a)
+static void DoTracksGroundEffect_None(struct ObjectEvent *objEvent, struct Sprite *sprite, bool8 isDeepSand)
 {
 }
 
-static void DoTracksGroundEffect_Footprints(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a)
+static void DoTracksGroundEffect_Footprints(struct ObjectEvent *objEvent, struct Sprite *sprite, bool8 isDeepSand)
 {
     // First half-word is a Field Effect script id. (gFieldEffectScriptPointers)
     u16 sandFootprints_FieldEffectData[2] = {
@@ -9213,10 +9225,10 @@ static void DoTracksGroundEffect_Footprints(struct ObjectEvent *objEvent, struct
     gFieldEffectArguments[2] = 149;
     gFieldEffectArguments[3] = 2;
     gFieldEffectArguments[4] = objEvent->facingDirection;
-    FieldEffectStart(sandFootprints_FieldEffectData[a]);
+    FieldEffectStart(sandFootprints_FieldEffectData[isDeepSand]);
 }
 
-static void DoTracksGroundEffect_BikeTireTracks(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a)
+static void DoTracksGroundEffect_BikeTireTracks(struct ObjectEvent *objEvent, struct Sprite *sprite, bool8 isDeepSand)
 {
     //  Specifies which bike track shape to show next.
     //  For example, when the bike turns from up to right, it will show
@@ -9396,7 +9408,7 @@ static void DoGroundEffects_OnSpawn(struct ObjectEvent *objEvent, struct Sprite 
     if (objEvent->triggerGroundEffectsOnMove)
     {
         flags = 0;
-        UpdateObjectEventZCoordAndPriority(objEvent, sprite);
+        UpdateObjectEventElevationAndPriority(objEvent, sprite);
         GetAllGroundEffectFlags_OnSpawn(objEvent, &flags);
         SetObjectEventSpriteOamTableForLongGrass(objEvent, sprite);
         DoFlaggedGroundEffects(objEvent, sprite, flags);
@@ -9412,7 +9424,7 @@ static void DoGroundEffects_OnBeginStep(struct ObjectEvent *objEvent, struct Spr
     if (objEvent->triggerGroundEffectsOnMove)
     {
         flags = 0;
-        UpdateObjectEventZCoordAndPriority(objEvent, sprite);
+        UpdateObjectEventElevationAndPriority(objEvent, sprite);
         GetAllGroundEffectFlags_OnBeginStep(objEvent, &flags);
         SetObjectEventSpriteOamTableForLongGrass(objEvent, sprite);
         filters_out_some_ground_effects(objEvent, &flags);
@@ -9429,7 +9441,7 @@ static void DoGroundEffects_OnFinishStep(struct ObjectEvent *objEvent, struct Sp
     if (objEvent->triggerGroundEffectsOnStop)
     {
         flags = 0;
-        UpdateObjectEventZCoordAndPriority(objEvent, sprite);
+        UpdateObjectEventElevationAndPriority(objEvent, sprite);
         GetAllGroundEffectFlags_OnFinishStep(objEvent, &flags);
         SetObjectEventSpriteOamTableForLongGrass(objEvent, sprite);
         FilterOutStepOnPuddleGroundEffectIfJumping(objEvent, &flags);
@@ -9592,11 +9604,11 @@ static const SpriteStepFunc *const sNpcStepFuncTables[] = {
 };
 
 static const s16 sStepTimes[] = {
-    [MOVE_SPEED_NORMAL] = 16,
-    [MOVE_SPEED_FAST_1] = 8,
-    [MOVE_SPEED_FAST_2] = 6,
-    [MOVE_SPEED_FASTER] = 4,
-    [MOVE_SPEED_FASTEST] = 2,
+    [MOVE_SPEED_NORMAL] = ARRAY_COUNT(sStep1Funcs),
+    [MOVE_SPEED_FAST_1] = ARRAY_COUNT(sStep2Funcs),
+    [MOVE_SPEED_FAST_2] = ARRAY_COUNT(sStep3Funcs),
+    [MOVE_SPEED_FASTER] = ARRAY_COUNT(sStep4Funcs),
+    [MOVE_SPEED_FASTEST] = ARRAY_COUNT(sStep8Funcs),
 };
 
 static bool8 NpcTakeStep(struct Sprite *sprite)
@@ -9893,7 +9905,7 @@ void UpdateObjectEventSpriteInvisibility(struct Sprite *sprite, bool8 invisible)
 static void SpriteCB_VirtualObject(struct Sprite *sprite)
 {
     VirtualObject_UpdateAnim(sprite);
-    SetObjectSubpriorityByZCoord(sprite->sVirtualObjElev, sprite, 1);
+    SetObjectSubpriorityByElevation(sprite->sVirtualObjElev, sprite, 1);
     UpdateObjectEventSpriteInvisibility(sprite, sprite->sInvisible);
 }
 
@@ -10087,13 +10099,13 @@ static void DoRippleFieldEffect(struct ObjectEvent *objectEvent, struct Sprite *
     FieldEffectStart(FLDEFF_RIPPLE);
 }
 
-u8 (*const gMovementActionFuncs_StoreAndLockAnim[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementAction_StoreAndLockAnim_Step0,
+u8 (*const gMovementActionFuncs_LockAnim[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_LockAnim_Step0,
     MovementAction_Finish,
 };
 
-u8 (*const gMovementActionFuncs_FreeAndUnlockAnim[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementAction_FreeAndUnlockAnim_Step0,
+u8 (*const gMovementActionFuncs_UnlockAnim[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_UnlockAnim_Step0,
     MovementAction_Finish,
 };
 
@@ -10109,36 +10121,36 @@ u8 (*const gMovementActionFuncs_FlyDown[])(struct ObjectEvent *, struct Sprite *
     MovementAction_Fly_Finish,
 };
 
-u8 MovementAction_StoreAndLockAnim_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+u8 MovementAction_LockAnim_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     bool32 ableToStore = FALSE;
     if (sLockedAnimObjectEvents == NULL)
     {
         sLockedAnimObjectEvents = AllocZeroed(sizeof(struct LockedAnimObjectEvents));
-        sLockedAnimObjectEvents->objectEventIds[0] = objectEvent->localId;
+        sLockedAnimObjectEvents->localIds[0] = objectEvent->localId;
         sLockedAnimObjectEvents->count = 1;
         ableToStore = TRUE;
     }
     else
     {
         u8 i;
-        u8 firstFreeSlot;
-        bool32 found;
-        for (firstFreeSlot = 16, found = FALSE, i = 0; i < 16; i++)
+        u8 firstFreeSlot = OBJECT_EVENTS_COUNT;
+        bool32 found = FALSE;
+        for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         {
-            if (firstFreeSlot == 16 && sLockedAnimObjectEvents->objectEventIds[i] == 0)
+            if (firstFreeSlot == OBJECT_EVENTS_COUNT && sLockedAnimObjectEvents->localIds[i] == 0)
                 firstFreeSlot = i;
 
-            if (sLockedAnimObjectEvents->objectEventIds[i] == objectEvent->localId)
+            if (sLockedAnimObjectEvents->localIds[i] == objectEvent->localId)
             {
                 found = TRUE;
                 break;
             }
         }
 
-        if (!found && firstFreeSlot != 16)
+        if (!found && firstFreeSlot != OBJECT_EVENTS_COUNT)
         {
-            sLockedAnimObjectEvents->objectEventIds[firstFreeSlot] = objectEvent->localId;
+            sLockedAnimObjectEvents->localIds[firstFreeSlot] = objectEvent->localId;
             sLockedAnimObjectEvents->count++;
             ableToStore = TRUE;
         }
@@ -10154,7 +10166,7 @@ u8 MovementAction_StoreAndLockAnim_Step0(struct ObjectEvent *objectEvent, struct
     return TRUE;
 }
 
-u8 MovementAction_FreeAndUnlockAnim_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+u8 MovementAction_UnlockAnim_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     bool32 ableToStore;
     u8 index;
@@ -10164,9 +10176,9 @@ u8 MovementAction_FreeAndUnlockAnim_Step0(struct ObjectEvent *objectEvent, struc
     {
         ableToStore = FALSE;
         index = FindLockedObjectEventIndex(objectEvent);
-        if (index != 16)
+        if (index != OBJECT_EVENTS_COUNT)
         {
-            sLockedAnimObjectEvents->objectEventIds[index] = 0;
+            sLockedAnimObjectEvents->localIds[index] = 0;
             sLockedAnimObjectEvents->count--;
             ableToStore = TRUE;
         }
@@ -10189,7 +10201,7 @@ u8 FindLockedObjectEventIndex(struct ObjectEvent *objectEvent)
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
-        if (sLockedAnimObjectEvents->objectEventIds[i] == objectEvent->localId)
+        if (sLockedAnimObjectEvents->localIds[i] == objectEvent->localId)
             return i;
     }
     return OBJECT_EVENTS_COUNT;
