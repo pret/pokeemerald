@@ -213,9 +213,9 @@ void ScriptContext_Init(void)
     sGlobalScriptContextStatus = CONTEXT_SHUTDOWN;
 }
 
-// Runs the script until the script makes a wait* call, then returns true if 
-// there's more script to run, or false if the script has hit the end. 
-// This function also returns false if the context is finished 
+// Runs the script until the script makes a wait* call, then returns true if
+// there's more script to run, or false if the script has hit the end.
+// This function also returns false if the context is finished
 // or waiting (after a call to _Stop)
 bool8 ScriptContext_RunScript(void)
 {

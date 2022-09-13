@@ -270,16 +270,16 @@
 	.macro stopsound
 	.byte 0x2f
 	.endm
-	
+
 @ useful macros
 	.macro jumpreteq value:req, ptr:req
 	jumpargeq ARG_RET_ID, \value, \ptr
 	.endm
-	
+
 	.macro jumprettrue ptr:req
 	jumpreteq TRUE, \ptr
 	.endm
-	
+
 	.macro jumpretfalse ptr:req
 	jumpreteq FALSE, \ptr
 	.endm

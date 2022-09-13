@@ -1788,7 +1788,7 @@
 	.macro setzeffect
 	various BS_ATTACKER, VARIOUS_SET_Z_EFFECT
 	.endm
-	
+
 	.macro consumeberry battler:req, restoreItem=FALSE
 	various \battler, VARIOUS_CONSUME_BERRY
 	.byte \restoreItem

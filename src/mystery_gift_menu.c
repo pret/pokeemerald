@@ -1240,7 +1240,7 @@ static void Task_MysteryGift(u8 taskId)
         }
         else if (gSpecialVar_Result == LINKUP_FAILED)
         {
-            // Link failed, return to link start menu 
+            // Link failed, return to link start menu
             ClearScreenInBg0(TRUE);
             data->state = MG_STATE_SOURCE_PROMPT;
         }
