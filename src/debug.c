@@ -1493,7 +1493,7 @@ static void DebugAction_Flags_CatchingOnOff(u8 taskId)
     FlagToggle(B_FLAG_NO_CATCHING);
 #endif
 }
-  
+
 // *******************************
 // Actions Variables
 static void DebugAction_Vars_Vars(u8 taskId)
@@ -2589,7 +2589,7 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
     }
 
     //Pokedex entry
-    nationalDexNum = SpeciesToNationalPokedexNum(species); 
+    nationalDexNum = SpeciesToNationalPokedexNum(species);
     switch(sentToPc)
     {
     case MON_GIVEN_TO_PARTY:

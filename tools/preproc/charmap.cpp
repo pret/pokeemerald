@@ -119,7 +119,7 @@ Lhs CharmapReader::ReadLhs()
             break;
         }
     }
-    
+
     if (m_buffer[m_pos] == '\'')
     {
         m_pos++;

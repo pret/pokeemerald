@@ -14196,7 +14196,7 @@ TerrainPulseElectric:
 	createvisualtask AnimTask_SwayMon, 5, 0, 4, 51200, 24, ANIM_TARGET
 	createvisualtask AnimTask_BlendColorCycle, 2, 4, 2, 2, 0, 12, RGB(27, 27, 0)
 	goto TerrainPulseEnd
-  
+
 TerrainPulseGrass:
 	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_DRAGON_PULSE, 0, 12, 12, RGB(11, 26, 11)
 	waitforvisualfinish
@@ -14218,7 +14218,7 @@ TerrainPulseFairy:
 	createvisualtask AnimTask_SwayMon, 5, 0, 4, 51200, 24, ANIM_TARGET
 	createvisualtask AnimTask_BlendColorCycle, 2, 4, 2, 2, 0, 12, RGB(31, 24, 31)
 	goto TerrainPulseEnd
-  
+
 TerrainPulsePsychic:
 	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_DRAGON_PULSE, 0, 12, 12, RGB(27, 0, 13)
 	waitforvisualfinish
@@ -24740,7 +24740,7 @@ General_RestoreBg:
 	restorebg
 	waitbgfadein
 	end
-	
+
 end
 
 General_ZMoveActivate:
@@ -25263,8 +25263,8 @@ FinishSupersonicSkystrike:
 	call UnsetPsychicBg
 	waitforvisualfinish
 	end
-	
-	
+
+
 Move_ACID_DOWNPOUR:
 	loadspritegfx ANIM_TAG_BLUE_ORB @ reversal
 	loadspritegfx ANIM_TAG_POISON_JAB	@ poison jab
@@ -25951,7 +25951,7 @@ NeverendingNightmareGeyser:
 	createsprite gNeverEndingNightmareGeyserHexSpriteTemplate ANIM_TARGET, 2, ANIM_TARGET, 0xfff0, 0x10
 	return
 
-	
+
 Move_CORKSCREW_CRASH::
 	loadspritegfx ANIM_TAG_SPIKES @metal bits
 	loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT @charge
@@ -26669,7 +26669,7 @@ HavocSpearSparkTarget:
 @	launchtemplate gSparkElectricityFlashingSpriteTemplate 0x4 0x8 0x0 0x0 0x20 0xc SOUND_PAN_ATTACKER 0x14 0x2 0x8000
 	launchtemplate gSparkElectricityFlashingSpriteTemplate 0x4 0x8 0x0 0x0 0x10 0xc SOUND_PAN_ATTACKER 0x14 0x2 0x8000
 	return
-	
+
 
 Move_SHATTERED_PSYCHE::
 	loadspritegfx ANIM_TAG_IMPACT @hit
@@ -29127,7 +29127,7 @@ OceanicOperettaExplosion:
 	launchtemplate gOceanOperaExplosionSpriteTemplate 0x33 0x4 0x10 0x10 ANIM_TARGET 0x1
 	delay 0x6
 	return
-	
+
 
 Move_SPLINTERED_STORMSHARDS::
 	loadspritegfx ANIM_TAG_ROCKS @rock
@@ -29388,7 +29388,7 @@ SplinteredStormshardsFinishFadeReturn:
 	return
 
 
-Move_LETS_SNUGGLE_FOREVER::  
+Move_LETS_SNUGGLE_FOREVER::
 	loadspritegfx ANIM_TAG_MAGENTA_HEART @sharm
 	loadspritegfx ANIM_TAG_MUSIC_NOTES @music note
 	loadspritegfx ANIM_TAG_SMALL_BUBBLES @fake tears

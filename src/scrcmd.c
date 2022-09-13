@@ -1885,7 +1885,7 @@ bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
         gIsScriptedWildDouble = FALSE;
     }
     else
-    { 
+    {
         CreateScriptedDoubleWildMon(species, level, item, species2, level2, item2);
         gIsScriptedWildDouble = TRUE;
     }

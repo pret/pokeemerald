@@ -817,7 +817,7 @@ static void SwitchToAiPointsView(u8 taskId)
     GetStructPtr(taskId)->aiViewState = 0;
 }
 
-static const u8 *const sAiInfoItemNames[] = 
+static const u8 *const sAiInfoItemNames[] =
 {
     sText_Ability,
     sText_HeldItem,
@@ -829,13 +829,13 @@ static void PutAiInfoText(struct BattleDebugMenu *data)
     u8 *text = malloc(0x50);
 
     FillWindowPixelBuffer(data->aiMovesWindowId, 0x11);
-    
+
     // item names
     for (i = 0; i < ARRAY_COUNT(sAiInfoItemNames); i++)
     {
         AddTextPrinterParameterized(data->aiMovesWindowId, 1, sAiInfoItemNames[i], 3, i * 15, 0, NULL);
     }
-    
+
     // items info
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -2004,7 +2004,7 @@ static const u8 sText_HoldEffectRoomService[] = _("Room Service");
 static const u8 sText_HoldEffectBlunderPolicy[] = _("Blunder Policy");
 static const u8 sText_HoldEffectHeavyDutyBoots[] = _("Heavy Duty Boots");
 static const u8 sText_HoldEffectThroatSpray[] = _("Throat Spray");
-static const u8 *const sHoldEffectNames[] = 
+static const u8 *const sHoldEffectNames[] =
 {
     [HOLD_EFFECT_NONE] = sText_HoldEffectNone,
     [HOLD_EFFECT_RESTORE_HP] = sText_HoldEffectRestoreHp,

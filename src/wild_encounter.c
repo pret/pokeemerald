@@ -1006,7 +1006,7 @@ bool8 TryDoDoubleWildBattle(void)
 {
     if (GetSafariZoneFlag() || GetMonsStateToDoubles() != PLAYER_HAS_TWO_USABLE_MONS)
         return FALSE;
-#if B_FLAG_FORCE_DOUBLE_WILD != 0 
+#if B_FLAG_FORCE_DOUBLE_WILD != 0
     else if (FlagGet(B_FLAG_FORCE_DOUBLE_WILD))
         return TRUE;
 #endif
