@@ -904,7 +904,7 @@ static void StartOptionAnimations_Enter(void)
                 // Not selected, set default position
                 x = OPTION_DEFAULT_X;
             }
-            
+
             // Slide new options in
             StartOptionSlide(gfx->iconSprites[i], OPTION_EXIT_X, x, 12);
             SetOptionInvisibility(gfx->iconSprites[i], FALSE);

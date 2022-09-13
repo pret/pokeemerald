@@ -6368,7 +6368,7 @@ static void Cmd_various(void)
         break;
     case VARIOUS_ARENA_JUDGMENT_WINDOW:
         i = BattleArena_ShowJudgmentWindow(&gBattleCommunication[0]);
-        
+
         // BattleArena_ShowJudgmentWindow's last state was an intermediate step.
         // Return without advancing the current instruction so that it will be called again.
         if (i == ARENA_RESULT_RUNNING)
