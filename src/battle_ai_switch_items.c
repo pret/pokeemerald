@@ -337,7 +337,7 @@ static bool8 ShouldSwitchIfGameStatePrompt(void)
         {
             //Toxic
             moduloChance = 2; //50%
-            if (gBattleMons[gActiveBattler].status1 & (STATUS1_TOXIC_COUNTER > 2)
+            if (((gBattleMons[gActiveBattler].status1 & STATUS1_TOXIC_COUNTER) >= STATUS1_TOXIC_TURN(2))
                 && gBattleMons[gActiveBattler].hp >= (gBattleMons[gActiveBattler].maxHP / 3)
                 && (Random() % (moduloChance*chanceReducer)) == 0)
                 switchMon = TRUE;
