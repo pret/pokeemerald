@@ -12,6 +12,7 @@
 #include "credits.h"
 #include "data.h"
 #include "daycare.h"
+#include "debug.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -55,6 +56,7 @@
 #include "constants/species.h"
 
 
+#if TX_DEBUG_SYSTEM_ENABLE == TRUE
 // *******************************
 // Enums
 enum { // Main
@@ -76,7 +78,6 @@ enum { // Util
     DEBUG_UTIL_MENU_ITEM_SAVEBLOCK,
     DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK,
     DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK,
-    DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY,
     DEBUG_UTIL_MENU_ITEM_WATCHCREDITS,
     DEBUG_UTIL_MENU_ITEM_TRAINER_NAME,
     DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER,
@@ -176,32 +177,33 @@ struct DebugMonData
 // Define functions
 static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate);
 void Debug_ShowMainMenu(void);
-static void Debug_DestroyMenu(u8);
-static void DebugAction_Cancel(u8);
+static void Debug_DestroyMenu(u8 taskId);
+static void Debug_DestroyMenu_Full(u8 taskId);
+static void DebugAction_Cancel(u8 taskId);
 static void DebugAction_DestroyExtraWindow(u8 taskId);
 
-static void DebugAction_Util_Script_1(u8);
-static void DebugAction_Util_Script_2(u8);
-static void DebugAction_Util_Script_3(u8);
-static void DebugAction_Util_Script_4(u8);
-static void DebugAction_Util_Script_5(u8);
-static void DebugAction_Util_Script_6(u8);
-static void DebugAction_Util_Script_7(u8);
-static void DebugAction_Util_Script_8(u8);
+static void DebugAction_Util_Script_1(u8 taskId);
+static void DebugAction_Util_Script_2(u8 taskId);
+static void DebugAction_Util_Script_3(u8 taskId);
+static void DebugAction_Util_Script_4(u8 taskId);
+static void DebugAction_Util_Script_5(u8 taskId);
+static void DebugAction_Util_Script_6(u8 taskId);
+static void DebugAction_Util_Script_7(u8 taskId);
+static void DebugAction_Util_Script_8(u8 taskId);
 
-static void DebugAction_OpenUtilitiesMenu(u8);
-static void DebugAction_OpenScriptsMenu(u8);
-static void DebugAction_OpenFlagsMenu(u8);
-static void DebugAction_OpenVariablesMenu(u8);
-static void DebugAction_OpenGiveMenu(u8);
-static void DebugAction_OpenSoundMenu(u8);
-static void DebugTask_HandleMenuInput_Main(u8);
-static void DebugTask_HandleMenuInput_Utilities(u8);
-static void DebugTask_HandleMenuInput_Scripts(u8);
-static void DebugTask_HandleMenuInput_Flags(u8);
-static void DebugTask_HandleMenuInput_Vars(u8);
-static void DebugTask_HandleMenuInput_Give(u8);
-static void DebugTask_HandleMenuInput_Sound(u8);
+static void DebugAction_OpenUtilitiesMenu(u8 taskId);
+static void DebugAction_OpenScriptsMenu(u8 taskId);
+static void DebugAction_OpenFlagsMenu(u8 taskId);
+static void DebugAction_OpenVariablesMenu(u8 taskId);
+static void DebugAction_OpenGiveMenu(u8 taskId);
+static void DebugAction_OpenSoundMenu(u8 taskId);
+static void DebugTask_HandleMenuInput_Main(u8 taskId);
+static void DebugTask_HandleMenuInput_Utilities(u8 taskId);
+static void DebugTask_HandleMenuInput_Scripts(u8 taskId);
+static void DebugTask_HandleMenuInput_Flags(u8 taskId);
+static void DebugTask_HandleMenuInput_Vars(u8 taskId);
+static void DebugTask_HandleMenuInput_Give(u8 taskId);
+static void DebugTask_HandleMenuInput_Sound(u8 taskId);
 
 static void DebugAction_Util_HealParty(u8 taskId);
 static void DebugAction_Util_Fly(u8 taskId);
@@ -211,14 +213,13 @@ static void DebugAction_Util_Warp_SelectMap(u8 taskId);
 static void DebugAction_Util_Warp_SelectWarp(u8 taskId);
 static void DebugAction_Util_RunningShoes(u8 taskId);
 static void DebugAction_Util_PoisonMons(u8 taskId);
-static void DebugAction_Util_CheckSaveBlock(u8);
-static void DebugAction_Util_CheckWallClock(u8);
-static void DebugAction_Util_SetWallClock(u8);
-static void DebugAction_Util_CheckWeekDay(u8);
-static void DebugAction_Util_WatchCredits(u8);
-static void DebugAction_Util_Trainer_Name(u8);
-static void DebugAction_Util_Trainer_Gender(u8);
-static void DebugAction_Util_Trainer_Id(u8);
+static void DebugAction_Util_CheckSaveBlock(u8 taskId);
+static void DebugAction_Util_CheckWallClock(u8 taskId);
+static void DebugAction_Util_SetWallClock(u8 taskId);
+static void DebugAction_Util_WatchCredits(u8 taskId);
+static void DebugAction_Util_Trainer_Name(u8 taskId);
+static void DebugAction_Util_Trainer_Gender(u8 taskId);
+static void DebugAction_Util_Trainer_Id(u8 taskId);
 
 static void DebugAction_Flags_Flags(u8 taskId);
 static void DebugAction_Flags_FlagsSelect(u8 taskId);
@@ -326,7 +327,6 @@ static const u8 gDebugText_Util_PoisonMons[] =              _("Poison all mons")
 static const u8 gDebugText_Util_SaveBlockSpace[] =          _("SaveBlock Space");
 static const u8 gDebugText_Util_CheckWallClock[] =          _("Check Wall Clock");
 static const u8 gDebugText_Util_SetWallClock[] =            _("Set Wall Clock");
-static const u8 gDebugText_Util_CheckWeekDay[] =            _("Check Week Day");
 static const u8 gDebugText_Util_WatchCredits[] =            _("Watch Credits");
 static const u8 gDebugText_Util_Trainer_Name[] =            _("Trainer name");
 static const u8 gDebugText_Util_Trainer_Gender[] =          _("Toggle T. Gender");
@@ -447,7 +447,6 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]        = {gDebugText_Util_SaveBlockSpace,   DEBUG_UTIL_MENU_ITEM_SAVEBLOCK},
     [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]   = {gDebugText_Util_CheckWallClock,   DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK},
     [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]     = {gDebugText_Util_SetWallClock,     DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
-    [DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY]     = {gDebugText_Util_CheckWeekDay,     DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY},
     [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]     = {gDebugText_Util_WatchCredits,     DEBUG_UTIL_MENU_ITEM_WATCHCREDITS},
     [DEBUG_UTIL_MENU_ITEM_TRAINER_NAME]     = {gDebugText_Util_Trainer_Name,     DEBUG_UTIL_MENU_ITEM_TRAINER_NAME},
     [DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER]   = {gDebugText_Util_Trainer_Gender,   DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER},
@@ -526,7 +525,6 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]        = DebugAction_Util_CheckSaveBlock,
     [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]   = DebugAction_Util_CheckWallClock,
     [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]     = DebugAction_Util_SetWallClock,
-    [DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY]     = DebugAction_Util_CheckWeekDay,
     [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]     = DebugAction_Util_WatchCredits,
     [DEBUG_UTIL_MENU_ITEM_TRAINER_NAME]     = DebugAction_Util_Trainer_Name,
     [DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER]   = DebugAction_Util_Trainer_Gender,
@@ -710,13 +708,20 @@ static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMte
 static void Debug_DestroyMenu(u8 taskId)
 {
     DestroyListMenuTask(gTasks[taskId].data[0], NULL, NULL);
-    ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
     DestroyTask(taskId);
 }
+static void Debug_DestroyMenu_Full(u8 taskId)
+{
+    DestroyListMenuTask(gTasks[taskId].data[0], NULL, NULL);
+    ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
+    RemoveWindow(gTasks[taskId].data[1]);
+    DestroyTask(taskId);
+    UnfreezeObjectEvents();
+}
 static void DebugAction_Cancel(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     EnableBothScriptContexts();
 }
 static void DebugAction_DestroyExtraWindow(u8 taskId)
@@ -729,6 +734,7 @@ static void DebugAction_DestroyExtraWindow(u8 taskId)
 
     DestroyTask(taskId);
     EnableBothScriptContexts();
+    UnfreezeObjectEvents();
 }
 
 
@@ -748,7 +754,7 @@ static void DebugTask_HandleMenuInput_Main(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         EnableBothScriptContexts();
     }
 }
@@ -902,7 +908,7 @@ static void DebugAction_Util_HealParty(u8 taskId)
     PlaySE(SE_USE_ITEM);
     HealPlayerParty();
     EnableBothScriptContexts();
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
 }
 static void DebugAction_Util_Fly(u8 taskId)
 {
@@ -924,7 +930,7 @@ static void DebugAction_Util_Fly(u8 taskId)
     FlagSet(FLAG_VISITED_EVER_GRANDE_CITY);
     FlagSet(FLAG_LANDMARK_POKEMON_LEAGUE);
     FlagSet(FLAG_LANDMARK_BATTLE_FRONTIER);
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetMainCallback2(CB2_OpenFlyMap);
 }
 
@@ -963,26 +969,26 @@ static void DebugAction_Util_Warp_SelectMapGroup(u8 taskId)
     if (gMain.newKeys & DPAD_ANY)
     {
         PlaySE(SE_SELECT);
-        if(gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] > MAP_GROUPS_COUNT-1)
+            if (gTasks[taskId].data[3] > MAP_GROUPS_COUNT-1)
                 gTasks[taskId].data[3] = MAP_GROUPS_COUNT-1;
         }
-        if(gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < 0)
+            if (gTasks[taskId].data[3] < 0)
                 gTasks[taskId].data[3] = 0;
         }
-        if(gMain.newKeys & DPAD_LEFT)
+        if (gMain.newKeys & DPAD_LEFT)
         {
-            if(gTasks[taskId].data[4] > 0)
+            if (gTasks[taskId].data[4] > 0)
                 gTasks[taskId].data[4] -= 1;
         }
-        if(gMain.newKeys & DPAD_RIGHT)
+        if (gMain.newKeys & DPAD_RIGHT)
         {
-            if(gTasks[taskId].data[4] < 2)
+            if (gTasks[taskId].data[4] < 2)
                 gTasks[taskId].data[4] += 1;
         }
 
@@ -1023,26 +1029,26 @@ static void DebugAction_Util_Warp_SelectMap(u8 taskId)
     if (gMain.newKeys & DPAD_ANY)
     {
         PlaySE(SE_SELECT);
-        if(gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] > max_value-1)
+            if (gTasks[taskId].data[3] > max_value-1)
                 gTasks[taskId].data[3] = max_value-1;
         }
-        if(gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < 0)
+            if (gTasks[taskId].data[3] < 0)
                 gTasks[taskId].data[3] = 0;
         }
-        if(gMain.newKeys & DPAD_LEFT)
+        if (gMain.newKeys & DPAD_LEFT)
         {
-            if(gTasks[taskId].data[4] > 0)
+            if (gTasks[taskId].data[4] > 0)
                 gTasks[taskId].data[4] -= 1;
         }
-        if(gMain.newKeys & DPAD_RIGHT)
+        if (gMain.newKeys & DPAD_RIGHT)
         {
-            if(gTasks[taskId].data[4] < 2)
+            if (gTasks[taskId].data[4] < 2)
                 gTasks[taskId].data[4] += 1;
         }
 
@@ -1078,16 +1084,16 @@ static void DebugAction_Util_Warp_SelectWarp(u8 taskId)
     if (gMain.newKeys & DPAD_ANY)
     {
         PlaySE(SE_SELECT);
-        if(gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] > 10)
+            if (gTasks[taskId].data[3] > 10)
                 gTasks[taskId].data[3] = 10;
         }
-        if(gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < 0)
+            if (gTasks[taskId].data[3] < 0)
                 gTasks[taskId].data[3] = 0;
         }
 
@@ -1152,34 +1158,26 @@ static void DebugAction_Util_CheckSaveBlock(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar3, sizeof(struct PokemonStorage), STR_CONV_MODE_LEFT_ALIGN, 6);
     StringExpandPlaceholders(gStringVar4, gDebugText_SaveBlockSize);
 
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(Debug_ShowFieldMessageStringVar4);
 }
 static void DebugAction_Util_CheckWallClock(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(PlayersHouse_2F_EventScript_CheckWallClock);
 }
 static void DebugAction_Util_SetWallClock(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(PlayersHouse_2F_EventScript_SetWallClock);
-}
-static void DebugAction_Util_CheckWeekDay(u8 taskId)
-{
-    //StringCopy(gStringVar4, GetDayOfWeekString(gLocalTime.dayOfWeek));
-    Debug_DestroyMenu(taskId);
-    //ScriptContext2_Enable();
-    //ScriptContext1_SetupScript(Debug_ShowFieldMessageStringVar4);
-    EnableBothScriptContexts();
 }
 static void DebugAction_Util_WatchCredits(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetMainCallback2(CB2_StartCreditsSequence);
 }
 static void DebugAction_Util_Trainer_Name(u8 taskId)
@@ -1189,18 +1187,18 @@ static void DebugAction_Util_Trainer_Name(u8 taskId)
 }
 static void DebugAction_Util_Trainer_Gender(u8 taskId)
 {
-    if(gSaveBlock2Ptr->playerGender == 0) // 0 Male, 1 Female
+    if (gSaveBlock2Ptr->playerGender == 0) // 0 Male, 1 Female
         gSaveBlock2Ptr->playerGender = 1;
     else
         gSaveBlock2Ptr->playerGender = 0;
     EnableBothScriptContexts();
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
 }
 static void DebugAction_Util_Trainer_Id(u8 taskId)
 {
     u32 trainerId = ((Random() << 16) | Random());
     SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     EnableBothScriptContexts();
 }
 
@@ -1208,49 +1206,49 @@ static void DebugAction_Util_Trainer_Id(u8 taskId)
 // Actions Scripts
 static void DebugAction_Util_Script_1(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(Debug_Script_1);
 }
 static void DebugAction_Util_Script_2(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(Debug_Script_2);
 }
 static void DebugAction_Util_Script_3(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(Debug_Script_3);
 }
 static void DebugAction_Util_Script_4(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(Debug_Script_4);
 }
 static void DebugAction_Util_Script_5(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(Debug_Script_5);
 }
 static void DebugAction_Util_Script_6(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(Debug_Script_6);
 }
 static void DebugAction_Util_Script_7(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(Debug_Script_7);
 }
 static void DebugAction_Util_Script_8(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(Debug_Script_8);
 }
@@ -1272,10 +1270,10 @@ static void DebugAction_Flags_Flags(u8 taskId)
     CopyWindowToVram(windowId, 3);
 
     //Display initial Flag
-    ConvertIntToDecimalStringN(gStringVar1, 0, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_FLAGS);
-    ConvertIntToHexStringN(gStringVar2, 0, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_FLAGS);
+    ConvertIntToHexStringN(gStringVar2, 1, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar1, gDebugText_Flags_FlagHex);
-    if(FlagGet(0) == TRUE)
+    if (FlagGet(FLAG_TEMP_1) == TRUE)
         StringCopyPadded(gStringVar2, gDebugText_Flags_FlagSet, CHAR_SPACE, 15);
     else
         StringCopyPadded(gStringVar2, gDebugText_Flags_FlagUnset, CHAR_SPACE, 15);
@@ -1285,8 +1283,8 @@ static void DebugAction_Flags_Flags(u8 taskId)
 
     gTasks[taskId].func = DebugAction_Flags_FlagsSelect;
     gTasks[taskId].data[2] = windowId;
-    gTasks[taskId].data[3] = 0;            //Current Flag
-    gTasks[taskId].data[4] = 0;            //Digit Selected
+    gTasks[taskId].data[3] = FLAG_TEMP_1; //Current Flag
+    gTasks[taskId].data[4] = 0;           //Digit Selected
 }
 static void DebugAction_Flags_FlagsSelect(u8 taskId)
 {
@@ -1299,36 +1297,36 @@ static void DebugAction_Flags_FlagsSelect(u8 taskId)
         return;
     }
 
-    if(gMain.newKeys & DPAD_UP)
+    if (gMain.newKeys & DPAD_UP)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-        if(gTasks[taskId].data[3] >= FLAGS_COUNT){
+        if (gTasks[taskId].data[3] >= FLAGS_COUNT){
             gTasks[taskId].data[3] = FLAGS_COUNT - 1;
         }
     }
-    if(gMain.newKeys & DPAD_DOWN)
+    if (gMain.newKeys & DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-        if(gTasks[taskId].data[3] < 0){
-            gTasks[taskId].data[3] = 0;
+        if (gTasks[taskId].data[3] < 1){
+            gTasks[taskId].data[3] = 1;
         }
     }
-    if(gMain.newKeys & DPAD_LEFT)
+    if (gMain.newKeys & DPAD_LEFT)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[4] -= 1;
-        if(gTasks[taskId].data[4] < 0)
+        if (gTasks[taskId].data[4] < 0)
         {
             gTasks[taskId].data[4] = 0;
         }
     }
-    if(gMain.newKeys & DPAD_RIGHT)
+    if (gMain.newKeys & DPAD_RIGHT)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[4] += 1;
-        if(gTasks[taskId].data[4] > DEBUG_NUMBER_DIGITS_FLAGS-1)
+        if (gTasks[taskId].data[4] > DEBUG_NUMBER_DIGITS_FLAGS-1)
         {
             gTasks[taskId].data[4] = DEBUG_NUMBER_DIGITS_FLAGS-1;
         }
@@ -1339,7 +1337,7 @@ static void DebugAction_Flags_FlagsSelect(u8 taskId)
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_FLAGS);
         ConvertIntToHexStringN(gStringVar2, gTasks[taskId].data[3], STR_CONV_MODE_LEFT_ALIGN, 3);
         StringExpandPlaceholders(gStringVar1, gDebugText_Flags_FlagHex);
-        if(FlagGet(gTasks[taskId].data[3]) == TRUE)
+        if (FlagGet(gTasks[taskId].data[3]) == TRUE)
             StringCopyPadded(gStringVar2, gDebugText_Flags_FlagSet, CHAR_SPACE, 15);
         else
             StringCopyPadded(gStringVar2, gDebugText_Flags_FlagUnset, CHAR_SPACE, 15);
@@ -1357,12 +1355,12 @@ static void DebugAction_Flags_SetPokedexFlags(u8 taskId)
         GetSetPokedexFlag(i + 1, FLAG_SET_CAUGHT);
         GetSetPokedexFlag(i + 1, FLAG_SET_SEEN);
     }
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     EnableBothScriptContexts();
 }
 static void DebugAction_Flags_SwitchDex(u8 taskId)
 {
-    if(FlagGet(FLAG_SYS_POKEDEX_GET))
+    if (FlagGet(FLAG_SYS_POKEDEX_GET))
     {
         FlagClear(FLAG_SYS_POKEDEX_GET);
         PlaySE(SE_PC_OFF);
@@ -1373,7 +1371,7 @@ static void DebugAction_Flags_SwitchDex(u8 taskId)
 }
 static void DebugAction_Flags_SwitchNatDex(u8 taskId)
 {
-    if(IsNationalPokedexEnabled())
+    if (IsNationalPokedexEnabled())
     {
         DisableNationalPokedex();
         PlaySE(SE_PC_OFF);
@@ -1384,7 +1382,7 @@ static void DebugAction_Flags_SwitchNatDex(u8 taskId)
 }
 static void DebugAction_Flags_SwitchPokeNav(u8 taskId)
 {
-    if(FlagGet(FLAG_SYS_POKENAV_GET))
+    if (FlagGet(FLAG_SYS_POKENAV_GET))
     {
         FlagClear(FLAG_SYS_POKENAV_GET);
         PlaySE(SE_PC_OFF);
@@ -1396,7 +1394,7 @@ static void DebugAction_Flags_SwitchPokeNav(u8 taskId)
 static void DebugAction_Flags_ToggleFlyFlags(u8 taskId)
 {
     // Sound effect
-    if(FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER))
+    if (FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER))
         PlaySE(SE_PC_OFF);
     else
         PlaySE(SE_PC_LOGIN);
@@ -1422,7 +1420,7 @@ static void DebugAction_Flags_ToggleFlyFlags(u8 taskId)
 static void DebugAction_Flags_ToggleBadgeFlags(u8 taskId)
 {
     // Sound effect
-    if(FlagGet(FLAG_BADGE08_GET))
+    if (FlagGet(FLAG_BADGE08_GET))
         PlaySE(SE_PC_OFF);
     else
         PlaySE(SE_PC_LOGIN);
@@ -1438,7 +1436,7 @@ static void DebugAction_Flags_ToggleBadgeFlags(u8 taskId)
 static void DebugAction_Flags_ToggleFrontierPass(u8 taskId)
 {
     // Sound effect
-    if(FlagGet(FLAG_SYS_FRONTIER_PASS))
+    if (FlagGet(FLAG_SYS_FRONTIER_PASS))
         PlaySE(SE_PC_OFF);
     else
         PlaySE(SE_PC_LOGIN);
@@ -1446,7 +1444,7 @@ static void DebugAction_Flags_ToggleFrontierPass(u8 taskId)
 }
 static void DebugAction_Flags_CollisionOnOff(u8 taskId)
 {
-    if(FlagGet(FLAG_SYS_NO_COLLISION))
+    if (FlagGet(FLAG_SYS_NO_COLLISION))
     {
         FlagClear(FLAG_SYS_NO_COLLISION);
         PlaySE(SE_PC_OFF);
@@ -1457,7 +1455,7 @@ static void DebugAction_Flags_CollisionOnOff(u8 taskId)
 }
 static void DebugAction_Flags_EncounterOnOff(u8 taskId)
 {
-    if(FlagGet(FLAG_SYS_NO_ENCOUNTER))
+    if (FlagGet(FLAG_SYS_NO_ENCOUNTER))
     {
         FlagClear(FLAG_SYS_NO_ENCOUNTER);
         PlaySE(SE_PC_OFF);
@@ -1468,7 +1466,7 @@ static void DebugAction_Flags_EncounterOnOff(u8 taskId)
 }
 static void DebugAction_Flags_TrainerSeeOnOff(u8 taskId)
 {
-    if(FlagGet(FLAG_SYS_NO_TRAINER_SEE))
+    if (FlagGet(FLAG_SYS_NO_TRAINER_SEE))
     {
         FlagClear(FLAG_SYS_NO_TRAINER_SEE);
         PlaySE(SE_PC_OFF);
@@ -1479,7 +1477,7 @@ static void DebugAction_Flags_TrainerSeeOnOff(u8 taskId)
 }
 static void DebugAction_Flags_BagUseOnOff(u8 taskId)
 {
-    if(FlagGet(FLAG_SYS_NO_BAG_USE))
+    if (FlagGet(FLAG_SYS_NO_BAG_USE))
     {
         FlagClear(FLAG_SYS_NO_BAG_USE);
         PlaySE(SE_PC_OFF);
@@ -1490,7 +1488,7 @@ static void DebugAction_Flags_BagUseOnOff(u8 taskId)
 }
 static void DebugAction_Flags_CatchingOnOff(u8 taskId)
 {
-    if(FlagGet(FLAG_SYS_NO_CATCHING))
+    if (FlagGet(FLAG_SYS_NO_CATCHING))
     {
         FlagClear(FLAG_SYS_NO_CATCHING);
         PlaySE(SE_PC_OFF);
@@ -1535,32 +1533,32 @@ static void DebugAction_Vars_Vars(u8 taskId)
 
 static void DebugAction_Vars_Select(u8 taskId)
 {
-    if(gMain.newKeys & DPAD_UP)
+    if (gMain.newKeys & DPAD_UP)
     {
         gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-        if(gTasks[taskId].data[3] > VARS_END){
+        if (gTasks[taskId].data[3] > VARS_END){
             gTasks[taskId].data[3] = VARS_END;
         }
     }
-    if(gMain.newKeys & DPAD_DOWN)
+    if (gMain.newKeys & DPAD_DOWN)
     {
         gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-        if(gTasks[taskId].data[3] < VARS_START){
+        if (gTasks[taskId].data[3] < VARS_START){
             gTasks[taskId].data[3] = VARS_START;
         }
     }
-    if(gMain.newKeys & DPAD_LEFT)
+    if (gMain.newKeys & DPAD_LEFT)
     {
         gTasks[taskId].data[4] -= 1;
-        if(gTasks[taskId].data[4] < 0)
+        if (gTasks[taskId].data[4] < 0)
         {
             gTasks[taskId].data[4] = 0;
         }
     }
-    if(gMain.newKeys & DPAD_RIGHT)
+    if (gMain.newKeys & DPAD_RIGHT)
     {
         gTasks[taskId].data[4] += 1;
-        if(gTasks[taskId].data[4] > DEBUG_NUMBER_DIGITS_VARIABLES-1)
+        if (gTasks[taskId].data[4] > DEBUG_NUMBER_DIGITS_VARIABLES-1)
         {
             gTasks[taskId].data[4] = DEBUG_NUMBER_DIGITS_VARIABLES-1;
         }
@@ -1616,35 +1614,35 @@ static void DebugAction_Vars_Select(u8 taskId)
 }
 static void DebugAction_Vars_SetValue(u8 taskId)
 {
-    if(gMain.newKeys & DPAD_UP)
+    if (gMain.newKeys & DPAD_UP)
     {
         if (gTasks[taskId].data[6] + sPowersOfTen[gTasks[taskId].data[4]] <= 32000)
             gTasks[taskId].data[6] += sPowersOfTen[gTasks[taskId].data[4]];
         else
             gTasks[taskId].data[6] = 32000-1;
-        if(gTasks[taskId].data[6] >= 32000){
+        if (gTasks[taskId].data[6] >= 32000){
             gTasks[taskId].data[6] = 32000-1;
         }
     }
-    if(gMain.newKeys & DPAD_DOWN)
+    if (gMain.newKeys & DPAD_DOWN)
     {
         gTasks[taskId].data[6] -= sPowersOfTen[gTasks[taskId].data[4]];
-        if(gTasks[taskId].data[6] < 0){
+        if (gTasks[taskId].data[6] < 0){
             gTasks[taskId].data[6] = 0;
         }
     }
-    if(gMain.newKeys & DPAD_LEFT)
+    if (gMain.newKeys & DPAD_LEFT)
     {
         gTasks[taskId].data[4] -= 1;
-        if(gTasks[taskId].data[4] < 0)
+        if (gTasks[taskId].data[4] < 0)
         {
             gTasks[taskId].data[4] = 0;
         }
     }
-    if(gMain.newKeys & DPAD_RIGHT)
+    if (gMain.newKeys & DPAD_RIGHT)
     {
         gTasks[taskId].data[4] += 1;
-        if(gTasks[taskId].data[4] > 4)
+        if (gTasks[taskId].data[4] > 4)
         {
             gTasks[taskId].data[4] = 4;
         }
@@ -1719,26 +1717,26 @@ static void DebugAction_Give_Item_SelectId(u8 taskId)
     {
         PlaySE(SE_SELECT);
 
-        if(gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] >= ITEMS_COUNT)
+            if (gTasks[taskId].data[3] >= ITEMS_COUNT)
                 gTasks[taskId].data[3] = ITEMS_COUNT - 1;
         }
-        if(gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < 1)
+            if (gTasks[taskId].data[3] < 1)
                 gTasks[taskId].data[3] = 1;
         }
-        if(gMain.newKeys & DPAD_LEFT)
+        if (gMain.newKeys & DPAD_LEFT)
         {
-            if(gTasks[taskId].data[4] > 0)
+            if (gTasks[taskId].data[4] > 0)
                 gTasks[taskId].data[4] -= 1;
         }
-        if(gMain.newKeys & DPAD_RIGHT)
+        if (gMain.newKeys & DPAD_RIGHT)
         {
-            if(gTasks[taskId].data[4] < DEBUG_NUMBER_DIGITS_ITEMS-1)
+            if (gTasks[taskId].data[4] < DEBUG_NUMBER_DIGITS_ITEMS-1)
                 gTasks[taskId].data[4] += 1;
         }
 
@@ -1790,26 +1788,26 @@ static void DebugAction_Give_Item_SelectQuantity(u8 taskId)
     {
         PlaySE(SE_SELECT);
 
-        if(gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] >= 100)
+            if (gTasks[taskId].data[3] >= 100)
                 gTasks[taskId].data[3] = 99;
         }
-        if(gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < 1)
+            if (gTasks[taskId].data[3] < 1)
                 gTasks[taskId].data[3] = 1;
         }
-        if(gMain.newKeys & DPAD_LEFT)
+        if (gMain.newKeys & DPAD_LEFT)
         {
-            if(gTasks[taskId].data[4] > 0)
+            if (gTasks[taskId].data[4] > 0)
                 gTasks[taskId].data[4] -= 1;
         }
-        if(gMain.newKeys & DPAD_RIGHT)
+        if (gMain.newKeys & DPAD_RIGHT)
         {
-            if(gTasks[taskId].data[4] < 2)
+            if (gTasks[taskId].data[4] < 2)
                 gTasks[taskId].data[4] += 1;
         }
 
@@ -1849,9 +1847,9 @@ static void DebugAction_Give_AllTMs(u8 taskId)
     u16 i;
     PlayFanfare(MUS_OBTAIN_TMHM);
     for (i = ITEM_TM01; i <= ITEM_TM50; i++)
-        if(!CheckBagHasItem(i, 1))
+        if (!CheckBagHasItem(i, 1))
             AddBagItem(i, 1);
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     EnableBothScriptContexts();
 }
 
@@ -1964,30 +1962,30 @@ static void DebugAction_Give_Pokemon_SelectId(u8 taskId)
     {
         PlaySE(SE_SELECT);
 
-        if(gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] > SPECIES_CELEBI && gTasks[taskId].data[3] < SPECIES_TREECKO)
+            if (gTasks[taskId].data[3] > SPECIES_CELEBI && gTasks[taskId].data[3] < SPECIES_TREECKO)
                 gTasks[taskId].data[3] = SPECIES_TREECKO;
-            if(gTasks[taskId].data[3] >= NUM_SPECIES)
+            if (gTasks[taskId].data[3] >= NUM_SPECIES)
                 gTasks[taskId].data[3] = NUM_SPECIES - 1;
         }
-        if(gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < SPECIES_TREECKO && gTasks[taskId].data[3] > SPECIES_CELEBI)
+            if (gTasks[taskId].data[3] < SPECIES_TREECKO && gTasks[taskId].data[3] > SPECIES_CELEBI)
                 gTasks[taskId].data[3] = SPECIES_CELEBI;
-            if(gTasks[taskId].data[3] < 1)
+            if (gTasks[taskId].data[3] < 1)
                 gTasks[taskId].data[3] = 1;
         }
-        if(gMain.newKeys & DPAD_LEFT)
+        if (gMain.newKeys & DPAD_LEFT)
         {
-            if(gTasks[taskId].data[4] > 0)
+            if (gTasks[taskId].data[4] > 0)
                 gTasks[taskId].data[4] -= 1;
         }
-        if(gMain.newKeys & DPAD_RIGHT)
+        if (gMain.newKeys & DPAD_RIGHT)
         {
-            if(gTasks[taskId].data[4] < DEBUG_NUMBER_DIGITS_ITEMS-1)
+            if (gTasks[taskId].data[4] < DEBUG_NUMBER_DIGITS_ITEMS-1)
                 gTasks[taskId].data[4] += 1;
         }
 
@@ -2039,26 +2037,26 @@ static void DebugAction_Give_Pokemon_SelectLevel(u8 taskId)
     {
         PlaySE(SE_SELECT);
 
-        if(gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] > 100)
+            if (gTasks[taskId].data[3] > 100)
                 gTasks[taskId].data[3] = 100;
         }
-        if(gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < 1)
+            if (gTasks[taskId].data[3] < 1)
                 gTasks[taskId].data[3] = 1;
         }
-        if(gMain.newKeys & DPAD_LEFT)
+        if (gMain.newKeys & DPAD_LEFT)
         {
-            if(gTasks[taskId].data[4] > 0)
+            if (gTasks[taskId].data[4] > 0)
                 gTasks[taskId].data[4] -= 1;
         }
-        if(gMain.newKeys & DPAD_RIGHT)
+        if (gMain.newKeys & DPAD_RIGHT)
         {
-            if(gTasks[taskId].data[4] < 2)
+            if (gTasks[taskId].data[4] < 2)
                 gTasks[taskId].data[4] += 1;
         }
 
@@ -2111,20 +2109,20 @@ static void DebugAction_Give_Pokemon_SelectShiny(u8 taskId)
     {
         PlaySE(SE_SELECT);
 
-        if(gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] > 1)
+            if (gTasks[taskId].data[3] > 1)
                 gTasks[taskId].data[3] = 1;
         }
-        if(gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < 0)
+            if (gTasks[taskId].data[3] < 0)
                 gTasks[taskId].data[3] = 0;
         }
 
-        if(gTasks[taskId].data[3] == 1)
+        if (gTasks[taskId].data[3] == 1)
             StringCopyPadded(gStringVar2, gDebugText_Flags_FlagSet, CHAR_SPACE, 15);
         else
             StringCopyPadded(gStringVar2, gDebugText_Flags_FlagUnset, CHAR_SPACE, 15);
@@ -2162,16 +2160,16 @@ static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
     {
         PlaySE(SE_SELECT);
 
-        if(gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] > NUM_NATURES-1)
+            if (gTasks[taskId].data[3] > NUM_NATURES-1)
                 gTasks[taskId].data[3] = NUM_NATURES-1;
         }
-        if(gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < 0)
+            if (gTasks[taskId].data[3] < 0)
                 gTasks[taskId].data[3] = 0;
         }
 
@@ -2220,16 +2218,16 @@ static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
     {
         PlaySE(SE_SELECT);
 
-        if(gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] > abilityCount)
+            if (gTasks[taskId].data[3] > abilityCount)
                 gTasks[taskId].data[3] = abilityCount;
         }
-        if(gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < 0)
+            if (gTasks[taskId].data[3] < 0)
                 gTasks[taskId].data[3] = 0;
         }
 
@@ -2273,26 +2271,26 @@ static void DebugAction_Give_Pokemon_SelectIVs(u8 taskId)
     {
         PlaySE(SE_SELECT);
 
-        if(gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] > 31)
+            if (gTasks[taskId].data[3] > 31)
                 gTasks[taskId].data[3] = 31;
         }
-        if(gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < 0)
+            if (gTasks[taskId].data[3] < 0)
                 gTasks[taskId].data[3] = 0;
         }
-        if(gMain.newKeys & DPAD_LEFT)
+        if (gMain.newKeys & DPAD_LEFT)
         {
-            if(gTasks[taskId].data[4] > 0)
+            if (gTasks[taskId].data[4] > 0)
                 gTasks[taskId].data[4] -= 1;
         }
-        if(gMain.newKeys & DPAD_RIGHT)
+        if (gMain.newKeys & DPAD_RIGHT)
         {
-            if(gTasks[taskId].data[4] < 2)
+            if (gTasks[taskId].data[4] < 2)
                 gTasks[taskId].data[4] += 1;
         }
 
@@ -2412,26 +2410,26 @@ static void DebugAction_Give_Pokemon_Move(u8 taskId)
     {
         PlaySE(SE_SELECT);
 
-        if(gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] >= MOVES_COUNT)
+            if (gTasks[taskId].data[3] >= MOVES_COUNT)
                 gTasks[taskId].data[3] = MOVES_COUNT - 1;
         }
-        if(gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < 0)
+            if (gTasks[taskId].data[3] < 0)
                 gTasks[taskId].data[3] = 0;
         }
-        if(gMain.newKeys & DPAD_LEFT)
+        if (gMain.newKeys & DPAD_LEFT)
         {
-            if(gTasks[taskId].data[4] > 0)
+            if (gTasks[taskId].data[4] > 0)
                 gTasks[taskId].data[4] -= 1;
         }
-        if(gMain.newKeys & DPAD_RIGHT)
+        if (gMain.newKeys & DPAD_RIGHT)
         {
-            if(gTasks[taskId].data[4] < 3)
+            if (gTasks[taskId].data[4] < 3)
                 gTasks[taskId].data[4] += 1;
         }
 
@@ -2712,7 +2710,7 @@ static void DebugAction_Give_FillPC(u8 taskId) //Credit: Sierraffinity
 
 static void DebugAction_Give_CHEAT(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(Debug_CheatStart);
 }
@@ -2729,7 +2727,7 @@ static void Task_WaitFadeAccessPC(u8 taskId)
 
 static void DebugAction_AccessPC(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     CleanupOverworldWindowsAndTilemaps();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
     CreateTask(Task_WaitFadeAccessPC, 0);
@@ -2773,26 +2771,26 @@ static void DebugAction_Sound_SE_SelectId(u8 taskId)
 {
     if (gMain.newKeys & DPAD_ANY)
     {
-        if(gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] > END_SE)
+            if (gTasks[taskId].data[3] > END_SE)
                 gTasks[taskId].data[3] = END_SE;
         }
-        if(gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < 1)
+            if (gTasks[taskId].data[3] < 1)
                 gTasks[taskId].data[3] = 1;
         }
-        if(gMain.newKeys & DPAD_LEFT)
+        if (gMain.newKeys & DPAD_LEFT)
         {
-            if(gTasks[taskId].data[4] > 0)
+            if (gTasks[taskId].data[4] > 0)
                 gTasks[taskId].data[4] -= 1;
         }
-        if(gMain.newKeys & DPAD_RIGHT)
+        if (gMain.newKeys & DPAD_RIGHT)
         {
-            if(gTasks[taskId].data[4] < DEBUG_NUMBER_DIGITS_ITEMS-1)
+            if (gTasks[taskId].data[4] < DEBUG_NUMBER_DIGITS_ITEMS-1)
                 gTasks[taskId].data[4] += 1;
         }
 
@@ -2850,26 +2848,26 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
 {
     if (gMain.newKeys & DPAD_ANY)
     {
-        if(gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] > END_MUS)
+            if (gTasks[taskId].data[3] > END_MUS)
                 gTasks[taskId].data[3] = END_MUS;
         }
-        if(gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < START_MUS)
+            if (gTasks[taskId].data[3] < START_MUS)
                 gTasks[taskId].data[3] = START_MUS;
         }
-        if(gMain.newKeys & DPAD_LEFT)
+        if (gMain.newKeys & DPAD_LEFT)
         {
-            if(gTasks[taskId].data[4] > 0)
+            if (gTasks[taskId].data[4] > 0)
                 gTasks[taskId].data[4] -= 1;
         }
-        if(gMain.newKeys & DPAD_RIGHT)
+        if (gMain.newKeys & DPAD_RIGHT)
         {
-            if(gTasks[taskId].data[4] < DEBUG_NUMBER_DIGITS_ITEMS-1)
+            if (gTasks[taskId].data[4] < DEBUG_NUMBER_DIGITS_ITEMS-1)
                 gTasks[taskId].data[4] += 1;
         }
 
@@ -3104,194 +3102,6 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_RG_TRAINER_TOWER, "MUS-RG-TRAINER-TOWER") \
     X(MUS_RG_SLOW_PALLET, "MUS-RG-SLOW-PALLET") \
     X(MUS_RG_TEACHY_TV_MENU, "MUS-RG-TEACHY-TV-MENU") \
-    X(DP_SEQ_TITLE00    , "DP-SEQ-TITLE00") \
-    X(DP_SEQ_TITLE01    , "DP-SEQ-TITLE01") \
-    X(DP_SEQ_OPENING    , "DP-SEQ-OPENING") \
-    X(DP_SEQ_TV_HOUSOU  , "DP-SEQ-TV-HOUSOU") \
-    X(DP_SEQ_TV_END     , "DP-SEQ-TV-END") \
-    X(DP_SEQ_TOWN01_D   , "DP-SEQ-TOWN01-D") \
-    X(DP_SEQ_TOWN01_N   , "DP-SEQ-TOWN01-N") \
-    X(DP_SEQ_THE_RIV    , "DP-SEQ-THE-RIV") \
-    X(DP_SEQ_ROAD_A_D   , "DP-SEQ-ROAD-A-D") \
-    X(DP_SEQ_ROAD_A_N   , "DP-SEQ-ROAD-A-N") \
-    X(DP_SEQ_D_LAKE     , "DP-SEQ-D-LAKE") \
-    X(DP_SEQ_THE_EVENT01, "DP-SEQ-THE-EVENT01") \
-    X(DP_SEQ_BA_POKE    , "DP-SEQ-BA-POKE") \
-    X(DP_SEQ_WINPOKE    , "DP-SEQ-WINPOKE") \
-    X(DP_SEQ_THE_GIRL   , "DP-SEQ-THE-GIRL") \
-    X(DP_SEQ_THE_BOY    , "DP-SEQ-THE-BOY") \
-    X(DP_SEQ_FANFA4     , "DP-SEQ-FANFA4") \
-    X(DP_SEQ_TOWN02_D   , "DP-SEQ-TOWN02-D") \
-    X(DP_SEQ_TOWN02_N   , "DP-SEQ-TOWN02-N") \
-    X(DP_SEQ_KENKYUJO   , "DP-SEQ-KENKYUJO") \
-    X(DP_SEQ_TSURETEKE  , "DP-SEQ-TSURETEKE") \
-    X(DP_SEQ_PC_01      , "DP-SEQ-PC-01") \
-    X(DP_SEQ_PC_02      , "DP-SEQ-PC-02") \
-    X(DP_SEQ_ASA        , "DP-SEQ-ASA") \
-    X(DP_SEQ_EYE_BOY    , "DP-SEQ-EYE-BOY") \
-    X(DP_SEQ_EYE_GIRL   , "DP-SEQ-EYE-GIRL") \
-    X(DP_SEQ_BA_TRAIN   , "DP-SEQ-BA-TRAIN") \
-    X(DP_SEQ_WINTRAIN   , "DP-SEQ-WINTRAIN") \
-    X(DP_SEQ_CITY01_D   , "DP-SEQ-CITY01-D") \
-    X(DP_SEQ_CITY01_N   , "DP-SEQ-CITY01-N") \
-    X(DP_SEQ_FANFA3     , "DP-SEQ-FANFA3") \
-    X(DP_SEQ_FS         , "DP-SEQ-FS") \
-    X(DP_SEQ_ROAD_B_D   , "DP-SEQ-ROAD-B-D") \
-    X(DP_SEQ_ROAD_B_N   , "DP-SEQ-ROAD-B-N") \
-    X(DP_SEQ_BA_RIVAL   , "DP-SEQ-BA-RIVAL") \
-    X(DP_SEQ_D_05       , "DP-SEQ-D-05") \
-    X(DP_SEQ_WAZA       , "DP-SEQ-WAZA") \
-    X(DP_SEQ_CITY03_D   , "DP-SEQ-CITY03-D") \
-    X(DP_SEQ_CITY03_N   , "DP-SEQ-CITY03-N") \
-    X(DP_SEQ_D_04       , "DP-SEQ-D-04") \
-    X(DP_SEQ_GYM        , "DP-SEQ-GYM") \
-    X(DP_SEQ_BA_GYM     , "DP-SEQ-BA-GYM") \
-    X(DP_SEQ_WINTGYM    , "DP-SEQ-WINTGYM") \
-    X(DP_SEQ_BADGE      , "DP-SEQ-BADGE") \
-    X(DP_SEQ_EYE_KID    , "DP-SEQ-EYE-KID") \
-    X(DP_SEQ_FANFA1     , "DP-SEQ-FANFA1") \
-    X(DP_SEQ_TOWN03_D   , "DP-SEQ-TOWN03-D") \
-    X(DP_SEQ_TOWN03_N   , "DP-SEQ-TOWN03-N") \
-    X(DP_SEQ_KINOMI     , "DP-SEQ-KINOMI") \
-    X(DP_SEQ_ROAD_C_D   , "DP-SEQ-ROAD-C-D") \
-    X(DP_SEQ_ROAD_C_N   , "DP-SEQ-ROAD-C-N") \
-    X(DP_SEQ_EYE_GINGA  , "DP-SEQ-EYE-GINGA") \
-    X(DP_SEQ_BA_GINGA   , "DP-SEQ-BA-GINGA") \
-    X(DP_SEQ_D_02       , "DP-SEQ-D-02") \
-    X(DP_SEQ_GONIN      , "DP-SEQ-GONIN") \
-    X(DP_SEQ_CITY04_D   , "DP-SEQ-CITY04-D") \
-    X(DP_SEQ_CITY04_N   , "DP-SEQ-CITY04-N") \
-    X(DP_SEQ_D_GINLOBBY , "DP-SEQ-D-GINLOBBY") \
-    X(DP_SEQ_BA_GINGA3  , "DP-SEQ-BA-GINGA3") \
-    X(DP_SEQ_WINGINGA   , "DP-SEQ-WINGINGA") \
-    X(DP_SEQ_SHINKA     , "DP-SEQ-SHINKA") \
-    X(DP_SEQ_FANFA5     , "DP-SEQ-FANFA5") \
-    X(DP_SEQ_BICYCLE    , "DP-SEQ-BICYCLE") \
-    X(DP_SEQ_EYE_SPORT  , "DP-SEQ-EYE-SPORT") \
-    X(DP_SEQ_ROAD_D_D   , "DP-SEQ-ROAD-D-D") \
-    X(DP_SEQ_ROAD_D_N   , "DP-SEQ-ROAD-D-N") \
-    X(DP_SEQ_CITY05_D   , "DP-SEQ-CITY05-D") \
-    X(DP_SEQ_CITY05_N   , "DP-SEQ-CITY05-N") \
-    X(DP_SEQ_ROAD_E_D   , "DP-SEQ-ROAD-E-D") \
-    X(DP_SEQ_ROAD_E_N   , "DP-SEQ-ROAD-E-N") \
-    X(DP_SEQ_EYE_MOUNT  , "DP-SEQ-EYE-MOUNT") \
-    X(DP_SEQ_TOWN04_D   , "DP-SEQ-TOWN04-D") \
-    X(DP_SEQ_TOWN04_N   , "DP-SEQ-TOWN04-N") \
-    X(DP_SEQ_POCKETCH   , "DP-SEQ-POCKETCH") \
-    X(DP_SEQ_ROAD_F_D   , "DP-SEQ-ROAD-F-D") \
-    X(DP_SEQ_ROAD_F_N   , "DP-SEQ-ROAD-F-N") \
-    X(DP_SEQ_CITY07_D   , "DP-SEQ-CITY07-D") \
-    X(DP_SEQ_CITY07_N   , "DP-SEQ-CITY07-N") \
-    X(DP_SEQ_TOWN07_D   , "DP-SEQ-TOWN07-D") \
-    X(DP_SEQ_TOWN07_N   , "DP-SEQ-TOWN07-N") \
-    X(DP_SEQ_CITY02_D             , "DP-SEQ-CITY02-D") \
-    X(DP_SEQ_CITY02_N             , "DP-SEQ-CITY02-N") \
-    X(DP_SEQ_ROAD_SNOW_D          , "DP-SEQ-ROAD-SNOW-D") \
-    X(DP_SEQ_ROAD_SNOW_N          , "DP-SEQ-ROAD-SNOW-N") \
-    X(DP_SEQ_CITY09_D             , "DP-SEQ-CITY09-D") \
-    X(DP_SEQ_CITY09_N             , "DP-SEQ-CITY09-N") \
-    X(DP_SEQ_D_AGITO              , "DP-SEQ-D-AGITO") \
-    X(DP_SEQ_BA_AGAKI             , "DP-SEQ-BA-AGAKI") \
-    X(DP_SEQ_THE_EVENT04          , "DP-SEQ-THE-EVENT04") \
-    X(DP_SEQ_D_MOUNT1             , "DP-SEQ-D-MOUNT1") \
-    X(DP_SEQ_D_MOUNT2             , "DP-SEQ-D-MOUNT2") \
-    X(DP_SEQ_THE_EVENT02          , "DP-SEQ-THE-EVENT02") \
-    X(DP_SEQ_THE_EVENT03          , "DP-SEQ-THE-EVENT03") \
-    X(DP_SEQ_BA_DPOKE2            , "DP-SEQ-BA-DPOKE2") \
-    X(DP_SEQ_CITY08_D             , "DP-SEQ-CITY08-D") \
-    X(DP_SEQ_CITY08_N             , "DP-SEQ-CITY08-N") \
-    X(DP_SEQ_D_01                 , "DP-SEQ-D-01") \
-    X(DP_SEQ_EYE_ELITE            , "DP-SEQ-EYE-ELITE") \
-    X(DP_SEQ_CITY10_D             , "DP-SEQ-CITY10-D") \
-    X(DP_SEQ_CITY10_N             , "DP-SEQ-CITY10-N") \
-    X(DP_SEQ_CITY11_D             , "DP-SEQ-CITY11-D") \
-    X(DP_SEQ_CITY11_N             , "DP-SEQ-CITY11-N") \
-    X(DP_SEQ_TOWN06_D             , "DP-SEQ-TOWN06-D") \
-    X(DP_SEQ_TOWN06_N             , "DP-SEQ-TOWN06-N") \
-    X(DP_SEQ_ROAD_BZA_D           , "DP-SEQ-ROAD-BZA-D") \
-    X(DP_SEQ_ROAD_BZA_N           , "DP-SEQ-ROAD-BZA-N") \
-    X(DP_SEQ_WIFILOBBY            , "DP-SEQ-WIFILOBBY") \
-    X(DP_SEQ_BLD_TV               , "DP-SEQ-BLD-TV") \
-    X(DP_SEQ_BLD_BLD_GTC          , "DP-SEQ-BLD-BLD-GTC") \
-    X(DP_SEQ_NAMINORI             , "DP-SEQ-NAMINORI") \
-    X(DP_SEQ_WASURE               , "DP-SEQ-WASURE") \
-    X(DP_SEQ_EYE_FIGHT            , "DP-SEQ-EYE-FIGHT") \
-    X(DP_SEQ_EYE_ENKA             , "DP-SEQ-EYE-ENKA") \
-    X(DP_SEQ_TANKOU               , "DP-SEQ-TANKOU") \
-    X(DP_SEQ_HATANIGE             , "DP-SEQ-HATANIGE") \
-    X(DP_SEQ_EYE_LADY             , "DP-SEQ-EYE-LADY") \
-    X(DP_SEQ_D_03                 , "DP-SEQ-D-03") \
-    X(DP_SEQ_D_SAFARI             , "DP-SEQ-D-SAFARI") \
-    X(DP_SEQ_EYE_MYS              , "DP-SEQ-EYE-MYS") \
-    X(DP_SEQ_BLD_GAME             , "DP-SEQ-BLD-GAME") \
-    X(DP_SEQ_SLOT_ATARI           , "DP-SEQ-SLOT-ATARI") \
-    X(DP_SEQ_SLOT_OOATARI         , "DP-SEQ-SLOT-OOATARI") \
-    X(DP_SEQ_EYE_RICH             , "DP-SEQ-EYE-RICH") \
-    X(DP_SEQ_D_RYAYHY             , "DP-SEQ-D-RYAYHY") \
-    X(DP_SEQ_BA_DPOKE1            , "DP-SEQ-BA-DPOKE1") \
-    X(DP_SEQ_KUSAGASA             , "DP-SEQ-KUSAGASA") \
-    X(DP_SEQ_EYE_FUN              , "DP-SEQ-EYE-FUN") \
-    X(DP_SEQ_D_KOUEN              , "DP-SEQ-D-KOUEN") \
-    X(DP_SEQ_ACCE                 , "DP-SEQ-ACCE") \
-    X(DP_SEQ_BLD_CON              , "DP-SEQ-BLD-CON") \
-    X(DP_SEQ_KINOMI1              , "DP-SEQ-KINOMI1") \
-    X(DP_SEQ_CON_TEST             , "DP-SEQ-CON-TEST") \
-    X(DP_SEQ_CO_DRESS             , "DP-SEQ-CO-DRESS") \
-    X(DP_SEQ_CO_KASHI             , "DP-SEQ-CO-KASHI") \
-    X(DP_SEQ_CO_TAKUMA            , "DP-SEQ-CO-TAKUMA") \
-    X(DP_SEQ_CO_KEKKA             , "DP-SEQ-CO-KEKKA") \
-    X(DP_SEQ_CO_FANFA             , "DP-SEQ-CO-FANFA") \
-    X(DP_SEQ_BF_TOWWER            , "DP-SEQ-BF-TOWWER") \
-    X(DP_SEQ_D_06                 , "DP-SEQ-D-06") \
-    X(DP_SEQ_BA_SECRET2           , "DP-SEQ-BA-SECRET2") \
-    X(DP_SEQ_PRESENT              , "DP-SEQ-PRESENT") \
-    X(DP_SEQ_D_LEAGUE             , "DP-SEQ-D-LEAGUE") \
-    X(DP_SEQ_EYE_TENNO            , "DP-SEQ-EYE-TENNO") \
-    X(DP_SEQ_BA_TENNO             , "DP-SEQ-BA-TENNO") \
-    X(DP_SEQ_WINTENNO             , "DP-SEQ-WINTENNO") \
-    X(DP_SEQ_EYE_CHAMP            , "DP-SEQ-EYE-CHAMP") \
-    X(DP_SEQ_BA_CHANP             , "DP-SEQ-BA-CHANP") \
-    X(DP_SEQ_WINCHAMP             , "DP-SEQ-WINCHAMP") \
-    X(DP_SEQ_BLD_DENDO            , "DP-SEQ-BLD-DENDO") \
-    X(DP_SEQ_BLD_EV_DENDO2        , "DP-SEQ-BLD-EV-DENDO2") \
-    X(DP_SEQ_BLD_ENDING           , "DP-SEQ-BLD-ENDING") \
-    X(DP_SEQ_FUE                  , "DP-SEQ-FUE") \
-    X(DP_SEQ_AUS                  , "DP-SEQ-AUS") \
-    X(DP_SEQ_BA_SECRET1           , "DP-SEQ-BA-SECRET1") \
-    X(PL_SEQ_TITLE00              , "PL-SEQ-TITLE00") \
-    X(PL_SEQ_TITLE01              , "PL-SEQ-TITLE01") \
-    X(PL_SEQ_TV_HOUSOU            , "PL-SEQ-TV-HOUSOU") \
-    X(PL_SEQ_TV_END               , "PL-SEQ-TV-END") \
-    X(PL_SEQ_PL_HANDSOME          , "PL-SEQ-PL-HANDSOME") \
-    X(PL_SEQ_PL_WIFITOWER         , "PL-SEQ-PL-WIFITOWER") \
-    X(PL_SEQ_PL_WIFIUNION         , "PL-SEQ-PL-WIFIUNION") \
-    X(PL_SEQ_PL_WIFIGAME          , "PL-SEQ-PL-WIFIGAME") \
-    X(PL_SEQ_PL_WINMINI2          , "PL-SEQ-PL-WINMINI2") \
-    X(PL_SEQ_PL_WIFIPARADE        , "PL-SEQ-PL-WIFIPARADE") \
-    X(PL_SEQ_PL_EV_GIRA           , "PL-SEQ-PL-EV-GIRA") \
-    X(PL_SEQ_PL_EV_GIRA2          , "PL-SEQ-PL-EV-GIRA2") \
-    X(PL_SEQ_PL_D_GIRATINA        , "PL-SEQ-PL-D-GIRATINA") \
-    X(PL_SEQ_PL_BA_GIRA           , "PL-SEQ-PL-BA-GIRA") \
-    X(PL_SEQ_PL_GURUGURU          , "PL-SEQ-PL-GURUGURU") \
-    X(PL_SEQ_PL_PTHAIFU           , "PL-SEQ-PL-PTHAIFU") \
-    X(PL_SEQ_PL_MTKAWA            , "PL-SEQ-PL-MTKAWA") \
-    X(PL_SEQ_PL_MTKAKKO           , "PL-SEQ-PL-MTKAKKO") \
-    X(PL_SEQ_PL_MTTAKMA           , "PL-SEQ-PL-MTTAKMA") \
-    X(PL_SEQ_PL_MTUTSUK           , "PL-SEQ-PL-MTUTSUK") \
-    X(PL_SEQ_PL_MTKASHI           , "PL-SEQ-PL-MTKASHI") \
-    X(PL_SEQ_PL_TOWN02            , "PL-SEQ-PL-TOWN02") \
-    X(PL_SEQ_PL_AUDIO             , "PL-SEQ-PL-AUDIO") \
-    X(PL_SEQ_CITY11_D             , "PL-SEQ-CITY11-D") \
-    X(PL_SEQ_PL_BF_ROULETTE       , "PL-SEQ-PL-BF-ROULETTE") \
-    X(PL_SEQ_PL_DON2              , "PL-SEQ-PL-DON2") \
-    X(PL_SEQ_PL_BF_STAGE          , "PL-SEQ-PL-BF-STAGE") \
-    X(PL_SEQ_PL_BF_FACTORY        , "PL-SEQ-PL-BF-FACTORY") \
-    X(PL_SEQ_PL_BF_CASTLE         , "PL-SEQ-PL-BF-CASTLE") \
-    X(PL_SEQ_PL_FRO               , "PL-SEQ-PL-FRO") \
-    X(PL_SEQ_PL_POINTGET3         , "PL-SEQ-PL-POINTGET3") \
-    X(PL_SEQ_PL_BA_BRAIN          , "PL-SEQ-PL-BA-BRAIN") \
-    X(PL_SEQ_PL_WINBRAIN          , "PL-SEQ-PL-WINBRAIN") \
-    X(PL_SEQ_PL_BA_REGI           , "PL-SEQ-PL-BA-REGI") \
     X(PH_TRAP_BLEND, "PH-TRAP-BLEND") \
     X(PH_TRAP_HELD, "PH-TRAP-HELD") \
     X(PH_TRAP_SOLO, "PH-TRAP-SOLO") \
@@ -3640,30 +3450,4 @@ SOUND_LIST_SE
 #undef X
 
 
-// Additional functions
-/*
-static void DebugAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput, LMtemplate);
-}
-static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8))
-{
-    void (*func)(u8);
-    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
-
-    if (gMain.newKeys & A_BUTTON)
-    {
-        PlaySE(SE_SELECT);
-        if ((func = HandleInput[input]) != NULL)
-            func(taskId);
-    }
-    else if (gMain.newKeys & B_BUTTON)
-    {
-        PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
-        EnableBothScriptContexts();
-    }
-}
-*/
-
+#endif

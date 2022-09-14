@@ -5,11 +5,6 @@ Debug_ShowFieldMessageStringVar4::
 	releaseall
 	end
 
-Debug_CheckWeekDay_Text:
-	.string "Aaaaah, yes!\l"
-	.string "{STR_VAR_1}s are made for dads!\l"
-	.string "And dad's car!$"
-
 Debug_CheatStart::
 	lockall
 	setflag FLAG_SYS_POKEMON_GET
@@ -27,8 +22,8 @@ Debug_CheatStart::
 	special SetUnlockedPokedexFlags
 	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
 	setvar VAR_CABLE_CLUB_TUTORIAL_STATE, 1
-	@ setflag FLAG_SYS_NATIONAL_DEX
-	@ special EnableNationalPokedex
+	setflag FLAG_SYS_NATIONAL_DEX
+	special EnableNationalPokedex
 	setflag FLAG_RECEIVED_RUNNING_SHOES
 	setflag FLAG_SYS_B_DASH
 	setvar VAR_LITTLEROOT_TOWN_STATE, 4 @ 4: Received Running Shoes
@@ -37,25 +32,12 @@ Debug_CheatStart::
 	setvar VAR_LITTLEROOT_HOUSES_STATE_MAY, 2 @ 2: Met Rival's Mom (and is corresponding gender)
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 4 @ 4: Received Pokedex
 	setflag FLAG_RECEIVED_BIKE
-	giveitem ITEM_ACRO_BIKE
+	additem ITEM_ACRO_BIKE
 	setvar VAR_BRINEY_HOUSE_STATE, 1
 	setvar VAR_ROUTE116_STATE, 2
 	setflag FLAG_HIDE_ROUTE_116_MR_BRINEY
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
-	@ additem ITEM_MAX_REPEL, 10
-	@ giveitem ITEM_EON_TICKET
-	@ setflag FLAG_SYS_HAS_EON_TICKET
-	@ setvar VAR_DISTRIBUTE_EON_TICKET, 0
-	@ giveitem ITEM_MYSTIC_TICKET
-	@ setflag FLAG_ENABLE_SHIP_NAVEL_ROCK
-	@ setflag FLAG_RECEIVED_MYSTIC_TICKET
-	@ giveitem ITEM_AURORA_TICKET
-	@ setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
-	@ setflag FLAG_RECEIVED_AURORA_TICKET
-	@ setflag FLAG_BADGE06_GET @ Badge for flying filed move
-	@ setweather WEATHER_VOLCANIC_ASH
-	@ doweather
 	closemessage
 	release
 	end

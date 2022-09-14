@@ -283,17 +283,14 @@ static void BuildStartMenuActions(void)
     {
         BuildMultiPartnerRoomStartMenu();
     }
-#if defined(TX_DEBUGGING) && TX_DEBUG_MENU_OPTION
     else
     {
+    #if defined(TX_DEBUG_SYSTEM_ENABLE) && TX_DEBUG_SYSTEM_IN_MENU
         BuildDebugStartMenu();
-    }
-#else
-    else
-    {
+    #else
         BuildNormalStartMenu();
+    #endif
     }
-#endif
 }
 
 static void AddStartMenuAction(u8 action)
@@ -771,9 +768,10 @@ static bool8 StartMenuDebugCallback(void)
     RemoveExtraStartMenuWindows();
     HideStartMenuDebug(); // Hide start menu without enabling movement
 
-    #ifdef TX_DEBUGGING
-        Debug_ShowMainMenu();
-    #endif
+#if TX_DEBUG_SYSTEM_ENABLE == TRUE
+    FreezeObjectEvents();
+    Debug_ShowMainMenu();
+#endif
 
     return TRUE;
 }
