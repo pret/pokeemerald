@@ -709,6 +709,7 @@ static void Debug_DestroyMenu_Full(u8 taskId)
     ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
     DestroyTask(taskId);
+    UnfreezeObjectEvents();
 }
 static void DebugAction_Cancel(u8 taskId)
 {
@@ -725,6 +726,7 @@ static void DebugAction_DestroyExtraWindow(u8 taskId)
 
     DestroyTask(taskId);
     ScriptContext_Enable();
+    UnfreezeObjectEvents();
 }
 
 
