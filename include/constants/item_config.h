@@ -9,9 +9,9 @@
 #define I_SITRUS_BERRY_HEAL     GEN_LATEST  // In Gen4+, Sitrus Berry was changed from healing 30 HP to healing 25% of Max HP.
 #define I_VITAMIN_EV_CAP        GEN_LATEST  // In Gen8, the Vitamins no longer have a cap of 100 EV per stat.
 
-// Var settings
-// To use the following features, replace the 0s with the var ID you're assigning it to.
-// Eg: Replace with VAR_UNUSED_0x40F7 so you can use I_VAR_LAST_REPEL_LURE_USED for that feature.
-#define I_VAR_LAST_REPEL_LURE_USED  0     // If this var has been assigned, B2W2's Repel prompt will trigger once it runs out. It also applies to Lures.
+// Repel/Lure config
+// These two settings are both independent and complementary.
+#define VAR_LAST_REPEL_LURE_USED    0       // If this var has been assigned, last Repel/Lure used will be saved and the player will get prompted with the vanilla repel YES/NO option, unless I_REPEL_LURE_MENU is set to TRUE.
+#define I_REPEL_LURE_MENU           TRUE    // If TRUE, the player is able to choose which Repel/Lure to use once the previous one runs out. Cursor position is saved by VAR_LAST_REPEL_LURE_USED if not 0.
 
 #endif // GUARD_CONSTANTS_ITEM_CONFIG_H

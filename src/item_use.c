@@ -873,8 +873,8 @@ static void Task_UseRepel(u8 taskId)
     if (!IsSEPlaying())
     {
         VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_ItemId));
-    #if I_VAR_LAST_REPEL_LURE_USED != 0
-        VarSet(I_VAR_LAST_REPEL_LURE_USED, gSpecialVar_ItemId);
+    #if VAR_LAST_REPEL_LURE_USED != 0
+        VarSet(VAR_LAST_REPEL_LURE_USED, gSpecialVar_ItemId);
     #endif
         RemoveUsedItem();
         if (!InBattlePyramid())
@@ -885,8 +885,8 @@ static void Task_UseRepel(u8 taskId)
 }
 void HandleUseExpiredRepel(void)
 {
-#if I_VAR_LAST_REPEL_LURE_USED != 0
-    VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(VarGet(I_VAR_LAST_REPEL_LURE_USED)));
+#if VAR_LAST_REPEL_LURE_USED != 0
+    VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(VarGet(VAR_LAST_REPEL_LURE_USED)));
 #endif
 }
 
@@ -917,8 +917,8 @@ static void Task_UseLure(u8 taskId)
     if (!IsSEPlaying())
     {
         VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_ItemId) | REPEL_LURE_MASK);
-    #if I_VAR_LAST_REPEL_LURE_USED != 0
-        VarSet(I_VAR_LAST_REPEL_LURE_USED, gSpecialVar_ItemId);
+    #if VAR_LAST_REPEL_LURE_USED != 0
+        VarSet(VAR_LAST_REPEL_LURE_USED, gSpecialVar_ItemId);
     #endif
         RemoveUsedItem();
         if (!InBattlePyramid())
@@ -930,8 +930,8 @@ static void Task_UseLure(u8 taskId)
 
 void HandleUseExpiredLure(void)
 {
-#if I_VAR_LAST_REPEL_LURE_USED != 0
-    VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(VarGet(I_VAR_LAST_REPEL_LURE_USED)) | REPEL_LURE_MASK);
+#if VAR_LAST_REPEL_LURE_USED != 0
+    VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(VarGet(VAR_LAST_REPEL_LURE_USED)) | REPEL_LURE_MASK);
 #endif
 }
 
