@@ -18,6 +18,7 @@
 #include "event_scripts.h"
 #include "field_message_box.h"
 #include "field_screen_effect.h"
+#include "field_weather.h"
 #include "international_string_util.h"
 #include "item.h"
 #include "item_icon.h"
@@ -55,6 +56,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/weather.h"
 
 #if DEBUG_SYSTEM_ENABLE == TRUE
 // *******************************
@@ -76,6 +78,7 @@ enum { // Util
     DEBUG_UTIL_MENU_ITEM_RUNNING_SHOES,
     DEBUG_UTIL_MENU_ITEM_POISON_MONS,
     DEBUG_UTIL_MENU_ITEM_SAVEBLOCK,
+    DEBUG_UTIL_MENU_ITEM_WEATHER,
     DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK,
     DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK,
     DEBUG_UTIL_MENU_ITEM_WATCHCREDITS,
@@ -135,6 +138,8 @@ enum { //Sound
 
 #define DEBUG_NUMBER_DISPLAY_WIDTH 10
 #define DEBUG_NUMBER_DISPLAY_HEIGHT 4
+#define DEBUG_NUMBER_DISPLAY_MEDIUM_WIDTH 15
+#define DEBUG_NUMBER_DISPLAY_MEDIUM_HEIGHT 3
 #define DEBUG_NUMBER_DISPLAY_SOUND_WIDTH 20
 #define DEBUG_NUMBER_DISPLAY_SOUND_HEIGHT 6
 
@@ -174,32 +179,33 @@ struct DebugMonData
 // Define functions
 static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate);
 void Debug_ShowMainMenu(void);
-static void Debug_DestroyMenu(u8);
-static void DebugAction_Cancel(u8);
+static void Debug_DestroyMenu(u8 taskId);
+static void Debug_DestroyMenu_Full(u8 taskId);
+static void DebugAction_Cancel(u8 taskId);
 static void DebugAction_DestroyExtraWindow(u8 taskId);
 
-static void DebugAction_Util_Script_1(u8);
-static void DebugAction_Util_Script_2(u8);
-static void DebugAction_Util_Script_3(u8);
-static void DebugAction_Util_Script_4(u8);
-static void DebugAction_Util_Script_5(u8);
-static void DebugAction_Util_Script_6(u8);
-static void DebugAction_Util_Script_7(u8);
-static void DebugAction_Util_Script_8(u8);
+static void DebugAction_Util_Script_1(u8 taskId);
+static void DebugAction_Util_Script_2(u8 taskId);
+static void DebugAction_Util_Script_3(u8 taskId);
+static void DebugAction_Util_Script_4(u8 taskId);
+static void DebugAction_Util_Script_5(u8 taskId);
+static void DebugAction_Util_Script_6(u8 taskId);
+static void DebugAction_Util_Script_7(u8 taskId);
+static void DebugAction_Util_Script_8(u8 taskId);
 
-static void DebugAction_OpenUtilitiesMenu(u8);
-static void DebugAction_OpenScriptsMenu(u8);
-static void DebugAction_OpenFlagsMenu(u8);
-static void DebugAction_OpenVariablesMenu(u8);
-static void DebugAction_OpenGiveMenu(u8);
-static void DebugAction_OpenSoundMenu(u8);
-static void DebugTask_HandleMenuInput_Main(u8);
-static void DebugTask_HandleMenuInput_Utilities(u8);
-static void DebugTask_HandleMenuInput_Scripts(u8);
-static void DebugTask_HandleMenuInput_Flags(u8);
-static void DebugTask_HandleMenuInput_Vars(u8);
-static void DebugTask_HandleMenuInput_Give(u8);
-static void DebugTask_HandleMenuInput_Sound(u8);
+static void DebugAction_OpenUtilitiesMenu(u8 taskId);
+static void DebugAction_OpenScriptsMenu(u8 taskId);
+static void DebugAction_OpenFlagsMenu(u8 taskId);
+static void DebugAction_OpenVariablesMenu(u8 taskId);
+static void DebugAction_OpenGiveMenu(u8 taskId);
+static void DebugAction_OpenSoundMenu(u8 taskId);
+static void DebugTask_HandleMenuInput_Main(u8 taskId);
+static void DebugTask_HandleMenuInput_Utilities(u8 taskId);
+static void DebugTask_HandleMenuInput_Scripts(u8 taskId);
+static void DebugTask_HandleMenuInput_Flags(u8 taskId);
+static void DebugTask_HandleMenuInput_Vars(u8 taskId);
+static void DebugTask_HandleMenuInput_Give(u8 taskId);
+static void DebugTask_HandleMenuInput_Sound(u8 taskId);
 
 static void DebugAction_Util_HealParty(u8 taskId);
 static void DebugAction_Util_Fly(u8 taskId);
@@ -209,13 +215,15 @@ static void DebugAction_Util_Warp_SelectMap(u8 taskId);
 static void DebugAction_Util_Warp_SelectWarp(u8 taskId);
 static void DebugAction_Util_RunningShoes(u8 taskId);
 static void DebugAction_Util_PoisonMons(u8 taskId);
-static void DebugAction_Util_CheckSaveBlock(u8);
-static void DebugAction_Util_CheckWallClock(u8);
-static void DebugAction_Util_SetWallClock(u8);
-static void DebugAction_Util_WatchCredits(u8);
-static void DebugAction_Util_Trainer_Name(u8);
-static void DebugAction_Util_Trainer_Gender(u8);
-static void DebugAction_Util_Trainer_Id(u8);
+static void DebugAction_Util_CheckSaveBlock(u8 taskId);
+static void DebugAction_Util_Weather(u8 taskId);
+static void DebugAction_Util_Weather_SelectId(u8 taskId);
+static void DebugAction_Util_CheckWallClock(u8 taskId);
+static void DebugAction_Util_SetWallClock(u8 taskId);
+static void DebugAction_Util_WatchCredits(u8 taskId);
+static void DebugAction_Util_Trainer_Name(u8 taskId);
+static void DebugAction_Util_Trainer_Gender(u8 taskId);
+static void DebugAction_Util_Trainer_Id(u8 taskId);
 
 static void DebugAction_Flags_Flags(u8 taskId);
 static void DebugAction_Flags_FlagsSelect(u8 taskId);
@@ -316,6 +324,8 @@ static const u8 gDebugText_Util_WarpToMap_SelMax[] =         _("{STR_VAR_1} / {S
 static const u8 gDebugText_Util_RunningShoes[] =             _("Toggle Running Shoes");
 static const u8 gDebugText_Util_PoisonMons[] =               _("Poison all mons");
 static const u8 gDebugText_Util_SaveBlockSpace[] =           _("SaveBlock Space");
+static const u8 gDebugText_Util_Weather[] =                  _("Set weather");
+static const u8 gDebugText_Util_Weather_ID[] =               _("Weather Id: {STR_VAR_3}\n{STR_VAR_1}\n{STR_VAR_2}");
 static const u8 gDebugText_Util_CheckWallClock[] =           _("Check Wall Clock");
 static const u8 gDebugText_Util_SetWallClock[] =             _("Set Wall Clock");
 static const u8 gDebugText_Util_WatchCredits[] =             _("Watch Credits");
@@ -436,6 +446,7 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_RUNNING_SHOES]  = {gDebugText_Util_RunningShoes,   DEBUG_UTIL_MENU_ITEM_RUNNING_SHOES},
     [DEBUG_UTIL_MENU_ITEM_POISON_MONS]    = {gDebugText_Util_PoisonMons,     DEBUG_UTIL_MENU_ITEM_POISON_MONS},
     [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]      = {gDebugText_Util_SaveBlockSpace, DEBUG_UTIL_MENU_ITEM_SAVEBLOCK},
+    [DEBUG_UTIL_MENU_ITEM_WEATHER]        = {gDebugText_Util_Weather,        DEBUG_UTIL_MENU_ITEM_WEATHER},
     [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK] = {gDebugText_Util_CheckWallClock, DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK},
     [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]   = {gDebugText_Util_SetWallClock,   DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
     [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]   = {gDebugText_Util_WatchCredits,   DEBUG_UTIL_MENU_ITEM_WATCHCREDITS},
@@ -514,6 +525,7 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_RUNNING_SHOES]  = DebugAction_Util_RunningShoes,
     [DEBUG_UTIL_MENU_ITEM_POISON_MONS]    = DebugAction_Util_PoisonMons,
     [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]      = DebugAction_Util_CheckSaveBlock,
+    [DEBUG_UTIL_MENU_ITEM_WEATHER]        = DebugAction_Util_Weather,
     [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK] = DebugAction_Util_CheckWallClock,
     [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]   = DebugAction_Util_SetWallClock,
     [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]   = DebugAction_Util_WatchCredits,
@@ -591,6 +603,16 @@ static const struct WindowTemplate sDebugNumberDisplayWindowTemplate =
     .tilemapTop = 1,
     .width = DEBUG_NUMBER_DISPLAY_WIDTH,
     .height = 2 * DEBUG_NUMBER_DISPLAY_HEIGHT,
+    .paletteNum = 15,
+    .baseBlock = 1,
+};
+static const struct WindowTemplate sDebugNumberDisplayMediumWindowTemplate =
+{
+    .bg = 0,
+    .tilemapLeft = 30 - DEBUG_NUMBER_DISPLAY_MEDIUM_WIDTH - 1,
+    .tilemapTop = 1,
+    .width = DEBUG_NUMBER_DISPLAY_MEDIUM_WIDTH,
+    .height = 2 * DEBUG_NUMBER_DISPLAY_MEDIUM_HEIGHT,
     .paletteNum = 15,
     .baseBlock = 1,
 };
@@ -699,13 +721,20 @@ static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMte
 static void Debug_DestroyMenu(u8 taskId)
 {
     DestroyListMenuTask(gTasks[taskId].data[0], NULL, NULL);
-    ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
     DestroyTask(taskId);
 }
+static void Debug_DestroyMenu_Full(u8 taskId)
+{
+    DestroyListMenuTask(gTasks[taskId].data[0], NULL, NULL);
+    ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
+    RemoveWindow(gTasks[taskId].data[1]);
+    DestroyTask(taskId);
+    UnfreezeObjectEvents();
+}
 static void DebugAction_Cancel(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
 static void DebugAction_DestroyExtraWindow(u8 taskId)
@@ -718,6 +747,7 @@ static void DebugAction_DestroyExtraWindow(u8 taskId)
 
     DestroyTask(taskId);
     ScriptContext_Enable();
+    UnfreezeObjectEvents();
 }
 
 
@@ -737,7 +767,7 @@ static void DebugTask_HandleMenuInput_Main(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         ScriptContext_Enable();
     }
 }
@@ -891,7 +921,7 @@ static void DebugAction_Util_HealParty(u8 taskId)
     PlaySE(SE_USE_ITEM);
     HealPlayerParty();
     ScriptContext_Enable();
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
 }
 static void DebugAction_Util_Fly(u8 taskId)
 {
@@ -913,7 +943,7 @@ static void DebugAction_Util_Fly(u8 taskId)
     FlagSet(FLAG_VISITED_EVER_GRANDE_CITY);
     FlagSet(FLAG_LANDMARK_POKEMON_LEAGUE);
     FlagSet(FLAG_LANDMARK_BATTLE_FRONTIER);
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetMainCallback2(CB2_OpenFlyMap);
 }
 
@@ -1014,23 +1044,23 @@ static void DebugAction_Util_Warp_SelectMap(u8 taskId)
         if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] > max_value - 1)
+            if (gTasks[taskId].data[3] > max_value - 1)
                 gTasks[taskId].data[3] = max_value - 1;
         }
-        if(gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
             if (gTasks[taskId].data[3] < 0)
                 gTasks[taskId].data[3] = 0;
         }
-        if(gMain.newKeys & DPAD_LEFT)
+        if (gMain.newKeys & DPAD_LEFT)
         {
             if (gTasks[taskId].data[4] > 0)
                 gTasks[taskId].data[4] -= 1;
         }
         if (gMain.newKeys & DPAD_RIGHT)
         {
-            if(gTasks[taskId].data[4] < 2)
+            if (gTasks[taskId].data[4] < 2)
                 gTasks[taskId].data[4] += 1;
         }
 
@@ -1066,16 +1096,16 @@ static void DebugAction_Util_Warp_SelectWarp(u8 taskId)
     if (gMain.newKeys & DPAD_ANY)
     {
         PlaySE(SE_SELECT);
-        if(gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] > 10)
+            if (gTasks[taskId].data[3] > 10)
                 gTasks[taskId].data[3] = 10;
         }
-        if(gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < 0)
+            if (gTasks[taskId].data[3] < 0)
                 gTasks[taskId].data[3] = 0;
         }
 
@@ -1141,26 +1171,130 @@ static void DebugAction_Util_CheckSaveBlock(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar3, sizeof(struct PokemonStorage), STR_CONV_MODE_LEFT_ALIGN, 6);
     StringExpandPlaceholders(gStringVar4, gDebugText_SaveBlockSize);
 
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_ShowFieldMessageStringVar4);
 }
+
+static const u8 sWeatherNames[22][24] = {
+    [WEATHER_NONE]               = _("NONE"),
+    [WEATHER_SUNNY_CLOUDS]       = _("SUNNY CLOUDS"),
+    [WEATHER_SUNNY]              = _("SUNNY"),
+    [WEATHER_RAIN]               = _("RAIN"),
+    [WEATHER_SNOW]               = _("SNOW"),
+    [WEATHER_RAIN_THUNDERSTORM]  = _("RAIN THUNDERSTORM"),
+    [WEATHER_FOG_HORIZONTAL]     = _("FOG HORIZONTAL"),
+    [WEATHER_VOLCANIC_ASH]       = _("VOLCANIC ASH"),
+    [WEATHER_SANDSTORM]          = _("SANDSTORM"),
+    [WEATHER_FOG_DIAGONAL]       = _("FOG DIAGONAL"),
+    [WEATHER_UNDERWATER]         = _("UNDERWATER"),
+    [WEATHER_SHADE]              = _("SHADE"),
+    [WEATHER_DROUGHT]            = _("DROUGHT"),
+    [WEATHER_DOWNPOUR]           = _("DOWNPOUR"),
+    [WEATHER_UNDERWATER_BUBBLES] = _("UNDERWATER BUBBLES"),
+    [WEATHER_ABNORMAL]           = _("ABNORMAL(NOT WORKING)"),
+    [WEATHER_ROUTE119_CYCLE]     = _("ROUTE119 CYCLE"),
+    [WEATHER_ROUTE123_CYCLE]     = _("ROUTE123 CYCLE"),
+};
+static const u8 sText_WeatherNotDefined[] = _("NOT DEFINED!!!");
+static void DebugAction_Util_Weather(u8 taskId)
+{
+    u8 windowId;
+
+    ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
+    RemoveWindow(gTasks[taskId].data[1]);
+
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sDebugNumberDisplayMediumWindowTemplate);
+    DrawStdWindowFrame(windowId, FALSE);
+
+    CopyWindowToVram(windowId, 3);
+
+    //Display initial ID
+    StringCopy(gStringVar2, gText_DigitIndicator[0]);
+    ConvertIntToDecimalStringN(gStringVar3, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringCopyPadded(gStringVar1, sWeatherNames[0], CHAR_SPACE, 30);
+    StringExpandPlaceholders(gStringVar4, gDebugText_Util_Weather_ID);
+    AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
+
+    gTasks[taskId].func = DebugAction_Util_Weather_SelectId;
+    gTasks[taskId].data[2] = windowId;
+    gTasks[taskId].data[3] = 0;            //Current ID
+    gTasks[taskId].data[4] = 0;            //Digit Selected
+}
+static void DebugAction_Util_Weather_SelectId(u8 taskId)
+{
+    if (gMain.newKeys & DPAD_ANY)
+    {
+        PlaySE(SE_SELECT);
+
+        if (gMain.newKeys & DPAD_UP)
+        {
+            gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
+            if (gTasks[taskId].data[3] > WEATHER_ROUTE123_CYCLE)
+                gTasks[taskId].data[3] = WEATHER_ROUTE123_CYCLE;
+        }
+        if (gMain.newKeys & DPAD_DOWN)
+        {
+            gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
+            if (gTasks[taskId].data[3] < WEATHER_NONE)
+                gTasks[taskId].data[3] = WEATHER_NONE;
+        }
+        if (gMain.newKeys & DPAD_LEFT)
+        {
+            if (gTasks[taskId].data[4] > 0)
+                gTasks[taskId].data[4] -= 1;
+        }
+        if (gMain.newKeys & DPAD_RIGHT)
+        {
+            if (gTasks[taskId].data[4] < 2)
+                gTasks[taskId].data[4] += 1;
+        }
+
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
+
+        if (gTasks[taskId].data[3] <= 15 || gTasks[taskId].data[3] >= 20)
+            StringCopyPadded(gStringVar1, sWeatherNames[gTasks[taskId].data[3]], CHAR_SPACE, 30);
+        else
+            StringCopyPadded(gStringVar1, sText_WeatherNotDefined, CHAR_SPACE, 30); 
+
+        StringExpandPlaceholders(gStringVar4, gDebugText_Util_Weather_ID);
+        AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
+    }
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        if (gTasks[taskId].data[3] <= 14 || gTasks[taskId].data[3] >= 20)
+        {
+            gTasks[taskId].data[5] = gTasks[taskId].data[3];
+            SetWeather(gTasks[taskId].data[5]);
+        }
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        DebugAction_DestroyExtraWindow(taskId);
+    }
+}
+
 static void DebugAction_Util_CheckWallClock(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(PlayersHouse_2F_EventScript_CheckWallClock);
 }
 static void DebugAction_Util_SetWallClock(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(PlayersHouse_2F_EventScript_SetWallClock);
 }
 static void DebugAction_Util_WatchCredits(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetMainCallback2(CB2_StartCreditsSequence);
 }
 static void DebugAction_Util_Trainer_Name(u8 taskId)
@@ -1170,18 +1304,18 @@ static void DebugAction_Util_Trainer_Name(u8 taskId)
 }
 static void DebugAction_Util_Trainer_Gender(u8 taskId)
 {
-    if(gSaveBlock2Ptr->playerGender == 0) // 0 Male, 1 Female
+    if (gSaveBlock2Ptr->playerGender == 0) // 0 Male, 1 Female
         gSaveBlock2Ptr->playerGender = 1;
     else
         gSaveBlock2Ptr->playerGender = 0;
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
-    Debug_DestroyMenu(taskId);
 }
 static void DebugAction_Util_Trainer_Id(u8 taskId)
 {
     u32 trainerId = ((Random() << 16) | Random());
     SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
 
@@ -1189,49 +1323,49 @@ static void DebugAction_Util_Trainer_Id(u8 taskId)
 // Actions Scripts
 static void DebugAction_Util_Script_1(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_Script_1);
 }
 static void DebugAction_Util_Script_2(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_Script_2);
 }
 static void DebugAction_Util_Script_3(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_Script_3);
 }
 static void DebugAction_Util_Script_4(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_Script_4);
 }
 static void DebugAction_Util_Script_5(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_Script_5);
 }
 static void DebugAction_Util_Script_6(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_Script_6);
 }
 static void DebugAction_Util_Script_7(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_Script_7);
 }
 static void DebugAction_Util_Script_8(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_Script_8);
 }
@@ -1253,10 +1387,10 @@ static void DebugAction_Flags_Flags(u8 taskId)
     CopyWindowToVram(windowId, 3);
 
     //Display initial Flag
-    ConvertIntToDecimalStringN(gStringVar1, 0, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_FLAGS);
-    ConvertIntToHexStringN(gStringVar2, 0, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_FLAGS);
+    ConvertIntToHexStringN(gStringVar2, 1, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar1, gDebugText_Flags_FlagHex);
-    if (FlagGet(0) == TRUE)
+    if (FlagGet(FLAG_TEMP_1) == TRUE)
         StringCopyPadded(gStringVar2, gDebugText_Flags_FlagSet, CHAR_SPACE, 15);
     else
         StringCopyPadded(gStringVar2, gDebugText_Flags_FlagUnset, CHAR_SPACE, 15);
@@ -1266,8 +1400,8 @@ static void DebugAction_Flags_Flags(u8 taskId)
 
     gTasks[taskId].func = DebugAction_Flags_FlagsSelect;
     gTasks[taskId].data[2] = windowId;
-    gTasks[taskId].data[3] = 0;            //Current Flag
-    gTasks[taskId].data[4] = 0;            //Digit Selected
+    gTasks[taskId].data[3] = FLAG_TEMP_1; //Current Flag
+    gTasks[taskId].data[4] = 0;           //Digit Selected
 }
 static void DebugAction_Flags_FlagsSelect(u8 taskId)
 {
@@ -1292,8 +1426,8 @@ static void DebugAction_Flags_FlagsSelect(u8 taskId)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-        if (gTasks[taskId].data[3] < 0){
-            gTasks[taskId].data[3] = 0;
+        if (gTasks[taskId].data[3] < 1){
+            gTasks[taskId].data[3] = 1;
         }
     }
     if (gMain.newKeys & DPAD_LEFT)
@@ -1338,7 +1472,7 @@ static void DebugAction_Flags_SetPokedexFlags(u8 taskId)
         GetSetPokedexFlag(i + 1, FLAG_SET_CAUGHT);
         GetSetPokedexFlag(i + 1, FLAG_SET_SEEN);
     }
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
 static void DebugAction_Flags_SwitchDex(u8 taskId)
@@ -1426,7 +1560,7 @@ static void DebugAction_Flags_ToggleFrontierPass(u8 taskId)
 static void DebugAction_Flags_CollisionOnOff(u8 taskId)
 {
 #if DEBUG_FLAG_NO_COLLISION == 0
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
 #else
@@ -1440,7 +1574,7 @@ static void DebugAction_Flags_CollisionOnOff(u8 taskId)
 static void DebugAction_Flags_EncounterOnOff(u8 taskId)
 {
 #if OW_FLAG_NO_ENCOUNTER == 0
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
 #else
@@ -1454,7 +1588,7 @@ static void DebugAction_Flags_EncounterOnOff(u8 taskId)
 static void DebugAction_Flags_TrainerSeeOnOff(u8 taskId)
 {
 #if OW_FLAG_NO_TRAINER_SEE == 0
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
 #else
@@ -1468,7 +1602,7 @@ static void DebugAction_Flags_TrainerSeeOnOff(u8 taskId)
 static void DebugAction_Flags_BagUseOnOff(u8 taskId)
 {
 #if B_FLAG_NO_BAG_USE == 0
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
 #else
@@ -1482,7 +1616,7 @@ static void DebugAction_Flags_BagUseOnOff(u8 taskId)
 static void DebugAction_Flags_CatchingOnOff(u8 taskId)
 {
 #if B_FLAG_NO_CATCHING_USE == 0
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
 #else
@@ -1532,7 +1666,7 @@ static void DebugAction_Vars_Select(u8 taskId)
     if (gMain.newKeys & DPAD_UP)
     {
         gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-        if(gTasks[taskId].data[3] > VARS_END)
+        if (gTasks[taskId].data[3] > VARS_END)
             gTasks[taskId].data[3] = VARS_END;
     }
     if (gMain.newKeys & DPAD_DOWN)
@@ -1544,7 +1678,7 @@ static void DebugAction_Vars_Select(u8 taskId)
     if (gMain.newKeys & DPAD_LEFT)
     {
         gTasks[taskId].data[4] -= 1;
-        if(gTasks[taskId].data[4] < 0)
+        if (gTasks[taskId].data[4] < 0)
             gTasks[taskId].data[4] = 0;
     }
     if (gMain.newKeys & DPAD_RIGHT)
@@ -1604,7 +1738,7 @@ static void DebugAction_Vars_Select(u8 taskId)
 }
 static void DebugAction_Vars_SetValue(u8 taskId)
 {
-    if(gMain.newKeys & DPAD_UP)
+    if (gMain.newKeys & DPAD_UP)
     {
         if (gTasks[taskId].data[6] + sPowersOfTen[gTasks[taskId].data[4]] <= 32000)
             gTasks[taskId].data[6] += sPowersOfTen[gTasks[taskId].data[4]];
@@ -1614,7 +1748,7 @@ static void DebugAction_Vars_SetValue(u8 taskId)
         if (gTasks[taskId].data[6] >= 32000)
             gTasks[taskId].data[6] = 32000 - 1;
     }
-    if(gMain.newKeys & DPAD_DOWN)
+    if (gMain.newKeys & DPAD_DOWN)
     {
         gTasks[taskId].data[6] -= sPowersOfTen[gTasks[taskId].data[4]];
         if (gTasks[taskId].data[6] < 0){
@@ -1710,7 +1844,7 @@ static void DebugAction_Give_Item_SelectId(u8 taskId)
         if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] >= ITEMS_COUNT)
+            if (gTasks[taskId].data[3] >= ITEMS_COUNT)
                 gTasks[taskId].data[3] = ITEMS_COUNT - 1;
         }
         if (gMain.newKeys & DPAD_DOWN)
@@ -1721,7 +1855,7 @@ static void DebugAction_Give_Item_SelectId(u8 taskId)
         }
         if (gMain.newKeys & DPAD_LEFT)
         {
-            if(gTasks[taskId].data[4] > 0)
+            if (gTasks[taskId].data[4] > 0)
                 gTasks[taskId].data[4] -= 1;
         }
         if (gMain.newKeys & DPAD_RIGHT)
@@ -1841,7 +1975,7 @@ static void DebugAction_Give_AllTMs(u8 taskId)
         if (ItemIdToBattleMoveId(i) != MOVE_NONE && !CheckBagHasItem(i, 1))
             AddBagItem(i, 1);
     }
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
 
@@ -2141,7 +2275,7 @@ static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
         if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < 0)
+            if (gTasks[taskId].data[3] < 0)
                 gTasks[taskId].data[3] = 0;
         }
 
@@ -2656,7 +2790,7 @@ static void DebugAction_Give_FillPC(u8 taskId) //Credit: Sierraffinity
 
 static void DebugAction_Give_CHEAT(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_CheatStart);
 }
@@ -2673,7 +2807,7 @@ static void Task_WaitFadeAccessPC(u8 taskId)
 
 static void DebugAction_AccessPC(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     CleanupOverworldWindowsAndTilemaps();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
     CreateTask(Task_WaitFadeAccessPC, 0);
