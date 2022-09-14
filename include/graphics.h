@@ -5279,9 +5279,11 @@ extern const u8 gMonIcon_Munchlax[];
 extern const u8 gMonIcon_Riolu[];
 extern const u8 gMonIcon_Lucario[];
 extern const u8 gMonIcon_Hippopotas[];
-extern const u8 gMonIcon_HippopotasF[];
 extern const u8 gMonIcon_Hippowdon[];
+#if P_HIPPO_GENDER_DIFF_ICONS == TRUE
+extern const u8 gMonIcon_HippopotasF[];
 extern const u8 gMonIcon_HippowdonF[];
+#endif
 extern const u8 gMonIcon_Skorupi[];
 extern const u8 gMonIcon_Drapion[];
 extern const u8 gMonIcon_Croagunk[];

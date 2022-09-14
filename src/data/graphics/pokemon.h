@@ -5212,9 +5212,11 @@ const u8 gMonIcon_Munchlax[] = INCBIN_U8("graphics/pokemon/munchlax/icon.4bpp");
 const u8 gMonIcon_Riolu[] = INCBIN_U8("graphics/pokemon/riolu/icon.4bpp");
 const u8 gMonIcon_Lucario[] = INCBIN_U8("graphics/pokemon/lucario/icon.4bpp");
 const u8 gMonIcon_Hippopotas[] = INCBIN_U8("graphics/pokemon/hippopotas/icon_m.4bpp");
-const u8 gMonIcon_HippopotasF[] = INCBIN_U8("graphics/pokemon/hippopotas/icon_f.4bpp");
 const u8 gMonIcon_Hippowdon[] = INCBIN_U8("graphics/pokemon/hippowdon/icon_m.4bpp");
+#if P_HIPPO_GENDER_DIFF_ICONS == TRUE
+const u8 gMonIcon_HippopotasF[] = INCBIN_U8("graphics/pokemon/hippopotas/icon_f.4bpp");
 const u8 gMonIcon_HippowdonF[] = INCBIN_U8("graphics/pokemon/hippowdon/icon_f.4bpp");
+#endif
 const u8 gMonIcon_Skorupi[] = INCBIN_U8("graphics/pokemon/skorupi/icon.4bpp");
 const u8 gMonIcon_Drapion[] = INCBIN_U8("graphics/pokemon/drapion/icon.4bpp");
 const u8 gMonIcon_Croagunk[] = INCBIN_U8("graphics/pokemon/croagunk/icon.4bpp");
