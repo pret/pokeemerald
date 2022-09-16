@@ -71,7 +71,7 @@ static const struct WildPokemon sWildFeebas = {20, 25, SPECIES_FEEBAS};
 
 static const u16 sRoute119WaterTileData[] =
 {
-//yMin, yMax, numSpots in previous sections 
+//yMin, yMax, numSpots in previous sections
      0,  45,  0,
     46,  91,  NUM_FISHING_SPOTS_1,
     92, 139,  NUM_FISHING_SPOTS_1 + NUM_FISHING_SPOTS_2,
@@ -149,7 +149,7 @@ static bool8 CheckFeebas(void)
             feebasSpots[i] = FeebasRandom() % NUM_FISHING_SPOTS;
             if (feebasSpots[i] == 0)
                 feebasSpots[i] = NUM_FISHING_SPOTS;
-            
+
             // < 1 below is a pointless check, it will never be TRUE.
             // >= 4 to skip fishing spots 1-3, because these are inaccessible
             // spots at the top of the map, at (9,7), (7,13), and (15,16).
@@ -184,8 +184,8 @@ static void FeebasSeedRng(u16 seed)
 // LAND_WILD_COUNT
 static u8 ChooseWildMonIndex_Land(void)
 {
-	u8 wildMonIndex = 0;
-	bool8 swap = FALSE;
+    u8 wildMonIndex = 0;
+    bool8 swap = FALSE;
     u8 rand = Random() % ENCOUNTER_CHANCE_LAND_MONS_TOTAL;
 
     if (rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_0)
@@ -216,17 +216,17 @@ static u8 ChooseWildMonIndex_Land(void)
     if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
         swap = TRUE;
 
-	if (swap)
-		wildMonIndex = 11 - wildMonIndex;
+    if (swap)
+        wildMonIndex = 11 - wildMonIndex;
 
-	return wildMonIndex;
+    return wildMonIndex;
 }
 
 // ROCK_WILD_COUNT / WATER_WILD_COUNT
 static u8 ChooseWildMonIndex_WaterRock(void)
 {
-	u8 wildMonIndex = 0;
-	bool8 swap = FALSE;
+    u8 wildMonIndex = 0;
+    bool8 swap = FALSE;
     u8 rand = Random() % ENCOUNTER_CHANCE_WATER_MONS_TOTAL;
 
     if (rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_0)
@@ -243,17 +243,17 @@ static u8 ChooseWildMonIndex_WaterRock(void)
     if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
         swap = TRUE;
 
-	if (swap)
-		wildMonIndex = 4 - wildMonIndex;
+    if (swap)
+        wildMonIndex = 4 - wildMonIndex;
 
-	return wildMonIndex;
+    return wildMonIndex;
 }
 
 // FISH_WILD_COUNT
 static u8 ChooseWildMonIndex_Fishing(u8 rod)
 {
     u8 wildMonIndex = 0;
-	bool8 swap = FALSE;
+    bool8 swap = FALSE;
     u8 rand = Random() % max(max(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_TOTAL, ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_TOTAL),
                              ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_TOTAL);
 
@@ -269,8 +269,8 @@ static u8 ChooseWildMonIndex_Fishing(u8 rod)
             wildMonIndex = 1;
         break;
 
-		if (swap)
-			wildMonIndex = 1 - wildMonIndex;
+        if (swap)
+            wildMonIndex = 1 - wildMonIndex;
     case GOOD_ROD:
         if (rand < ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_2)
             wildMonIndex = 2;
@@ -279,8 +279,8 @@ static u8 ChooseWildMonIndex_Fishing(u8 rod)
         if (rand >= ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_3 && rand < ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_4)
             wildMonIndex = 4;
 
-		if (swap)
-			wildMonIndex = 6 - wildMonIndex;
+        if (swap)
+            wildMonIndex = 6 - wildMonIndex;
         break;
     case SUPER_ROD:
         if (rand < ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_5)
@@ -294,8 +294,8 @@ static u8 ChooseWildMonIndex_Fishing(u8 rod)
         if (rand >= ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_8 && rand < ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_9)
             wildMonIndex = 9;
 
-		if (swap)
-			wildMonIndex = 14 - wildMonIndex;
+        if (swap)
+            wildMonIndex = 14 - wildMonIndex;
         break;
     }
     return wildMonIndex;
