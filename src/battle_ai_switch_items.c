@@ -371,6 +371,7 @@ static bool8 ShouldSwitchIfGameStatePrompt(void)
         
         //Semi-Invulnerable
         if (gStatuses3[opposingBattler] & STATUS3_SEMI_INVULNERABLE)
+        {
             if (FindMonThatAbsorbsOpponentsMove()) //If find absorber default to switch
                 switchMon = TRUE;
             if (!AI_OpponentCanFaintAiWithMod(0)
@@ -380,6 +381,7 @@ static bool8 ShouldSwitchIfGameStatePrompt(void)
                 && !WillAIStrikeFirst()
                 && !AI_OpponentCanFaintAiWithMod(0))
                 switchMon = FALSE;
+        }
     }
 
     if (switchMon)
