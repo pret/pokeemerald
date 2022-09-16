@@ -267,10 +267,10 @@ static u8 ChooseWildMonIndex_Fishing(u8 rod)
             wildMonIndex = 0;
         else
             wildMonIndex = 1;
-        break;
 
         if (swap)
             wildMonIndex = 1 - wildMonIndex;
+        break;
     case GOOD_ROD:
         if (rand < ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_2)
             wildMonIndex = 2;
