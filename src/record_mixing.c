@@ -315,8 +315,8 @@ static void Task_RecordMixing_Main(u8 taskId)
     switch (tState)
     {
     case 0: // init
-        sSentRecord = malloc(sizeof(*sSentRecord));
-        sReceivedRecords = malloc(sizeof(*sReceivedRecords) * MAX_LINK_PLAYERS);
+        sSentRecord = Alloc(sizeof(*sSentRecord));
+        sReceivedRecords = Alloc(sizeof(*sReceivedRecords) * MAX_LINK_PLAYERS);
         SetLocalLinkPlayerId(gSpecialVar_0x8005);
         VarSet(VAR_TEMP_0, 1);
         sReadyToReceive = FALSE;
@@ -689,7 +689,7 @@ static void ReceiveLilycoveLadyData(LilycoveLady *records, size_t recordSize, u8
 
     if (GetLilycoveLadyId() == 0)
     {
-        lilycoveLady = malloc(sizeof(*lilycoveLady));
+        lilycoveLady = Alloc(sizeof(*lilycoveLady));
         if (lilycoveLady == NULL)
             return;
 

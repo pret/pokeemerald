@@ -3450,7 +3450,7 @@ void ReceiveTvShowsData(void *src, u32 size, u8 playersLinkId)
     TVShow (*rmBuffer2)[MAX_LINK_PLAYERS][TV_SHOWS_COUNT];
     TVShow (*rmBuffer)[MAX_LINK_PLAYERS][TV_SHOWS_COUNT];
 
-    rmBuffer2 = malloc(MAX_LINK_PLAYERS * TV_SHOWS_COUNT * sizeof(TVShow));
+    rmBuffer2 = Alloc(MAX_LINK_PLAYERS * TV_SHOWS_COUNT * sizeof(TVShow));
     if (rmBuffer2 != NULL)
     {
         for (i = 0; i < MAX_LINK_PLAYERS; i++)
@@ -3835,7 +3835,7 @@ void ReceivePokeNewsData(void *src, u32 size, u8 playersLinkId)
     PokeNews (*rmBuffer2)[MAX_LINK_PLAYERS][POKE_NEWS_COUNT];
     PokeNews (*rmBuffer)[MAX_LINK_PLAYERS][POKE_NEWS_COUNT];
 
-    rmBuffer2 = malloc(MAX_LINK_PLAYERS * POKE_NEWS_COUNT * sizeof(PokeNews));
+    rmBuffer2 = Alloc(MAX_LINK_PLAYERS * POKE_NEWS_COUNT * sizeof(PokeNews));
     if (rmBuffer2 != NULL)
     {
         for (i = 0; i < MAX_LINK_PLAYERS; i++)
