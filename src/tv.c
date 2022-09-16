@@ -3966,7 +3966,7 @@ static void TranslateShowNames(TVShow *show, u32 language)
     int i;
     TVShow **shows;
 
-    shows = calloc(11, sizeof(TVShow *));
+    shows = AllocZeroed(sizeof(TVShow *) * 11);
     for (i = 0; i < LAST_TVSHOW_IDX; i++)
     {
         switch (show[i].common.kind)
