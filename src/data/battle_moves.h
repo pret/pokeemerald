@@ -11881,7 +11881,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .zMovePower = 180,
         .zMoveEffect = Z_EFFECT_NONE,
     },
-    
+
     [MOVE_ZIPPY_ZAP] =
     {
         #if B_UPDATED_MOVE_DATA >= GEN_8
@@ -12193,7 +12193,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .zMovePower = 120,
         .zMoveEffect = Z_EFFECT_NONE,
     },
-    
+
     [MOVE_DYNAMAX_CANNON] =
     {
         .effect = EFFECT_DYNAMAX_DOUBLE_DMG,
@@ -13105,7 +13105,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .zMovePower = 100,
         .zMoveEffect = Z_EFFECT_NONE,
     },
-    
+
     [MOVE_THUNDER_CAGE] =
     {
         .effect = EFFECT_TRAP,

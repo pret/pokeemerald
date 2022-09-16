@@ -702,7 +702,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         }
         else
         {
-            if (gReceivedRemoteLinkPlayers != 0)
+            if (gReceivedRemoteLinkPlayers)
             {
                 if (IsActivityWithVariableGroupSize(gPlayerCurrActivity))
                     GetOtherPlayersInfoFlags();
@@ -2047,7 +2047,7 @@ static void Task_SendMysteryGift(u8 taskId)
         {
             data->state = 13;
         }
-        else if (gReceivedRemoteLinkPlayers != 0)
+        else if (gReceivedRemoteLinkPlayers)
         {
             UpdateGameData_GroupLockedIn(TRUE);
             data->state++;

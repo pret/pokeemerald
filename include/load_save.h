@@ -10,24 +10,24 @@
  * toolchains. If this is not done, the ClearSav functions will end up erasing
  * the wrong memory leading to various glitches.
  */
-struct SaveBlock2DMA {
+struct SaveBlock2ASLR {
     struct SaveBlock2 block;
-    u8 dma[SAVEBLOCK_MOVE_RANGE];
+    u8 aslr[SAVEBLOCK_MOVE_RANGE];
 };
 
-struct SaveBlock1DMA {
+struct SaveBlock1ASLR {
     struct SaveBlock1 block;
-    u8 dma[SAVEBLOCK_MOVE_RANGE];
+    u8 aslr[SAVEBLOCK_MOVE_RANGE];
 };
 
-struct PokemonStorageDMA {
+struct PokemonStorageASLR {
     struct PokemonStorage block;
-    u8 dma[SAVEBLOCK_MOVE_RANGE];
+    u8 aslr[SAVEBLOCK_MOVE_RANGE];
 };
 
-extern struct SaveBlock1DMA gSaveblock1;
-extern struct SaveBlock2DMA gSaveblock2;
-extern struct PokemonStorageDMA gPokemonStorage;
+extern struct SaveBlock1ASLR gSaveblock1;
+extern struct SaveBlock2ASLR gSaveblock2;
+extern struct PokemonStorageASLR gPokemonStorage;
 
 extern bool32 gFlashMemoryPresent;
 extern struct SaveBlock1 *gSaveBlock1Ptr;

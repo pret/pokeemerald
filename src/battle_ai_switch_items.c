@@ -1000,17 +1000,17 @@ static bool32 AiExpectsToFaintPlayer(void)
     bool32 canFaintPlayer;
     u32 i;
     u8 target = gBattleStruct->aiChosenTarget[gActiveBattler];
-    
+
     if (gBattleStruct->aiMoveOrAction[gActiveBattler] > 3)
         return FALSE; // AI not planning to use move
-    
+
     if (GetBattlerSide(target) != GetBattlerSide(gActiveBattler)
       && CanIndexMoveFaintTarget(gActiveBattler, target, gBattleStruct->aiMoveOrAction[gActiveBattler], 0)
       && AI_WhoStrikesFirst(gActiveBattler, target, GetAIChosenMove(gActiveBattler)) == AI_IS_FASTER) {
         // We expect to faint the target and move first -> dont use an item
         return TRUE;
     }
-    
+
     return FALSE;
 }
 
@@ -1025,10 +1025,10 @@ static bool8 ShouldUseItem(void)
     if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT)
        || gStatuses3[gActiveBattler] & STATUS3_SKY_DROPPED)
         return FALSE;
-    
+
     if (gStatuses3[gActiveBattler] & STATUS3_EMBARGO)
         return FALSE;
-    
+
     if (AiExpectsToFaintPlayer())
         return FALSE;
 
@@ -1155,14 +1155,14 @@ static bool8 ShouldUseItem(void)
 static bool32 AI_ShouldHeal(u32 healAmount)
 {
     bool32 shouldHeal = FALSE;
-    
+
     if (gBattleMons[gActiveBattler].hp < gBattleMons[gActiveBattler].maxHP / 4
      || gBattleMons[gActiveBattler].hp == 0
      || (healAmount != 0 && gBattleMons[gActiveBattler].maxHP - gBattleMons[gActiveBattler].hp > healAmount)) {
         // We have low enough HP to consider healing
         shouldHeal = !AI_OpponentCanFaintAiWithMod(healAmount); // if target can kill us even after we heal, why bother
     }
-    
+
     return shouldHeal;
 }
 
