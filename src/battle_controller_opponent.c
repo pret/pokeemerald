@@ -1676,8 +1676,7 @@ static void OpponentHandleChoosePokemon(void)
 
     if (*(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) == PARTY_SIZE)
     {
-        chosenMonId = GetMostSuitableMonToSwitchInto();
-
+        chosenMonId = GetMostSuitableMonToSwitchInto(TRUE);
         if (chosenMonId == PARTY_SIZE)
         {
             s32 battler1, battler2, firstId, lastId;
@@ -1691,7 +1690,6 @@ static void OpponentHandleChoosePokemon(void)
                 battler1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
                 battler2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
                 pokemonInBattle = 2;
-
             }
 
             GetAIPartyIndexes(gActiveBattler, &firstId, &lastId);
@@ -1699,6 +1697,7 @@ static void OpponentHandleChoosePokemon(void)
             for (chosenMonId = (lastId-1); chosenMonId >= firstId; chosenMonId--)
             {
                 if (GetMonData(&gEnemyParty[chosenMonId], MON_DATA_HP) != 0
+                    && GetMonData(&gEnemyParty[chosenMonId], MON_DATA_SPECIES2) != SPECIES_NONE
                     && chosenMonId != gBattlerPartyIndexes[battler1]
                     && chosenMonId != gBattlerPartyIndexes[battler2]
                     && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON

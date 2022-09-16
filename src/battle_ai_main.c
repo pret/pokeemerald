@@ -356,7 +356,7 @@ static u8 ChooseMoveOrAction_Singles(void)
                     break;
             }
 
-            if (i == MAX_MON_MOVES && GetMostSuitableMonToSwitchInto() != PARTY_SIZE)
+            if (i == MAX_MON_MOVES && GetMostSuitableMonToSwitchInto(TRUE) != PARTY_SIZE)
             {
                 AI_THINKING_STRUCT->switchMon = TRUE;
                 return AI_CHOICE_SWITCH;
@@ -370,7 +370,7 @@ static u8 ChooseMoveOrAction_Singles(void)
             && gDisableStructs[sBattler_AI].truantCounter
             && gBattleMons[sBattler_AI].hp >= gBattleMons[sBattler_AI].maxHP / 2)
         {
-            if (GetMostSuitableMonToSwitchInto() != PARTY_SIZE)
+            if (GetMostSuitableMonToSwitchInto(TRUE) != PARTY_SIZE)
             {
                 AI_THINKING_STRUCT->switchMon = TRUE;
                 return AI_CHOICE_SWITCH;
