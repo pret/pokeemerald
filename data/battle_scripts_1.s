@@ -303,7 +303,6 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectQuiverDance             @ EFFECT_QUIVER_DANCE
 	.4byte BattleScript_EffectCoil                    @ EFFECT_COIL
 	.4byte BattleScript_EffectElectrify               @ EFFECT_ELECTRIFY
-	.4byte BattleScript_EffectBurnHit                 @ EFFECT_SCALD
 	.4byte BattleScript_EffectReflectType             @ EFFECT_REFLECT_TYPE
 	.4byte BattleScript_EffectSoak                    @ EFFECT_SOAK
 	.4byte BattleScript_EffectGrowth                  @ EFFECT_GROWTH
