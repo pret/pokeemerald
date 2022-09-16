@@ -386,6 +386,7 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
     char dir_separator = file_dir.back();
 
     ostringstream text;
+    ostringstream mapCountText;
 
     text << "#ifndef GUARD_CONSTANTS_MAP_GROUPS_H\n"
          << "#define GUARD_CONSTANTS_MAP_GROUPS_H\n\n";
@@ -424,14 +425,15 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
     }
 
     text << "#define MAP_GROUPS_COUNT " << group_num << "\n\n";
-
-    text << "// static const u8 MAP_GROUP_COUNT[] = {"; //DEBUG
-    for(int i=0; i<group_num; i++){                     //DEBUG
-        text << map_count_vec[i] << ", ";               //DEBUG
-    }                                                   //DEBUG
-    text << "0};\n\n";                                  //DEBUG
-
     text << "#endif // GUARD_CONSTANTS_MAP_GROUPS_H\n";
+
+    char s = file_dir.back();
+    mapCountText << "static const u8 MAP_GROUP_COUNT[] = {"; //DEBUG
+    for(int i=0; i<group_num; i++){                          //DEBUG
+        mapCountText << map_count_vec[i] << ", ";            //DEBUG
+    }                                                        //DEBUG
+    mapCountText << "0};\n";                                 //DEBUG
+    write_text_file(file_dir + ".." + s + ".." + s + "src" + s + "data" + s + "map_group_count.h", mapCountText.str());
 
     return text.str();
 }

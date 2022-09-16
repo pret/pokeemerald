@@ -24839,15 +24839,15 @@ General_PrimalReversion::
 	jumpargeq 0x1, ITEM_BLUE_ORB, General_PrimalReversion_Alpha
 General_PrimalReversion_Alpha:
 	loadspritegfx ANIM_TAG_ALPHA_STONE
-	loadspritegfx ANIM_TAG_PRIMAL_PARTICLES
+	loadspritegfx ANIM_TAG_MEGA_PARTICLES
 	loadspritegfx ANIM_TAG_ALPHA_SYMBOL
 	monbg ANIM_ATTACKER
 	setalpha 12, 8
 	loopsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER, 13, 3
 	createvisualtask AnimTask_BlendColorCycle, 2, 2, 0, 6, 0, 11, RGB(31, 31, 11)
-	call PrimalReversionParticles
-	call PrimalReversionParticles
-	call PrimalReversionParticles
+	call MegaEvolutionParticles
+	call MegaEvolutionParticles
+	call MegaEvolutionParticles
 	waitforvisualfinish
 	playsewithpan SE_M_SOLAR_BEAM, SOUND_PAN_ATTACKER
 	createsprite gAlphaStoneSpriteTemplate, ANIM_ATTACKER, 41, 0, 0, 0, 0
@@ -24865,15 +24865,15 @@ General_PrimalReversion_Alpha:
 	end
 General_PrimalReversion_Omega:
 	loadspritegfx ANIM_TAG_OMEGA_STONE
-	loadspritegfx ANIM_TAG_PRIMAL_PARTICLES
+	loadspritegfx ANIM_TAG_MEGA_PARTICLES
 	loadspritegfx ANIM_TAG_OMEGA_SYMBOL
 	monbg ANIM_ATTACKER
 	setalpha 12, 8
 	loopsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER, 13, 3
 	createvisualtask AnimTask_BlendColorCycle, 2, 2, 0, 6, 0, 11, RGB(31, 31, 11)
-	call PrimalReversionParticles
-	call PrimalReversionParticles
-	call PrimalReversionParticles
+	call MegaEvolutionParticles
+	call MegaEvolutionParticles
+	call MegaEvolutionParticles
 	waitforvisualfinish
 	playsewithpan SE_M_SOLAR_BEAM, SOUND_PAN_ATTACKER
 	createsprite gOmegaStoneSpriteTemplate, ANIM_ATTACKER, 41, 0, 0, 0, 0
@@ -24889,22 +24889,6 @@ General_PrimalReversion_Omega:
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
 	end
-PrimalReversionParticles:
-	createsprite gPrimalParticlesSpriteTemplate, ANIM_ATTACKER, 2, 40, -10, 13
-	delay 3
-	createsprite gPrimalParticlesSpriteTemplate, ANIM_ATTACKER, 2, -35, -10, 13
-	delay 3
-	createsprite gPrimalParticlesSpriteTemplate, ANIM_ATTACKER, 2, 15, -40, 13
-	delay 3
-	createsprite gPrimalParticlesSpriteTemplate, ANIM_ATTACKER, 2, -10, -32, 13
-	delay 3
-	createsprite gPrimalParticlesSpriteTemplate, ANIM_ATTACKER, 2, 25, -20, 13
-	delay 3
-	createsprite gPrimalParticlesSpriteTemplate, ANIM_ATTACKER, 2, -40, -20, 13
-	delay 3
-	createsprite gPrimalParticlesSpriteTemplate, ANIM_ATTACKER, 2, 5, -40, 13
-	delay 3
-	return
 
 General_AffectionHangedOn::
 	loadspritegfx ANIM_TAG_RED_HEART

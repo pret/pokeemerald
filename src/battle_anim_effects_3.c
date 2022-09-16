@@ -1239,17 +1239,6 @@ const struct SpriteTemplate gOmegaStoneSpriteTemplate =
     .callback = AnimSpriteOnMonPos,
 };
 
-const struct SpriteTemplate gPrimalParticlesSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_PRIMAL_PARTICLES,
-    .paletteTag = ANIM_TAG_PRIMAL_PARTICLES,
-    .oam = &gOamData_AffineNormal_ObjBlend_16x16,
-    .anims = gPowerAbsorptionOrbAnimTable,
-    .images = NULL,
-    .affineAnims = gPowerAbsorptionOrbAffineAnimTable,
-    .callback = AnimPowerAbsorptionOrb,
-};
-
 const struct SpriteTemplate gAlphaSymbolSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ALPHA_SYMBOL,
