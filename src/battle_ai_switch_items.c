@@ -370,7 +370,8 @@ static bool8 ShouldSwitchIfGameStatePrompt(void)
         //Pass Wish Heal
         
         //Semi-Invulnerable
-        if (gStatuses3[opposingBattler] & STATUS3_SEMI_INVULNERABLE) {
+        if (gStatuses3[opposingBattler] & STATUS3_SEMI_INVULNERABLE)
+        {
             if (FindMonThatAbsorbsOpponentsMove()) //If find absorber default to switch
                 switchMon = TRUE;
             if (!AI_OpponentCanFaintAiWithMod(0)
