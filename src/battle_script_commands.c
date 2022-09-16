@@ -11476,9 +11476,23 @@ static void Cmd_mimicattackcopy(void)
 
 static void Cmd_metronome(void)
 {
+#if B_METRONOME_MOVES >= GEN_8
+    u16 moveCount = MOVES_COUNT_GEN8;
+#elif B_METRONOME_MOVES >= GEN_7
+    u16 moveCount = MOVES_COUNT_GEN7;
+#elif B_METRONOME_MOVES >= GEN_6
+    u16 moveCount = MOVES_COUNT_GEN6;
+#elif B_METRONOME_MOVES >= GEN_5
+    u16 moveCount = MOVES_COUNT_GEN5;
+#elif B_METRONOME_MOVES >= GEN_4
+    u16 moveCount = MOVES_COUNT_GEN4;
+#elif B_METRONOME_MOVES >= GEN_3
+    u16 moveCount = MOVES_COUNT_GEN3;
+#endif
+
     while (TRUE)
     {
-        gCurrentMove = (Random() % (MOVES_COUNT - 1)) + 1;
+        gCurrentMove = (Random() % (moveCount - 1)) + 1;
         if (gBattleMoves[gCurrentMove].effect == EFFECT_PLACEHOLDER)
             continue;
 
