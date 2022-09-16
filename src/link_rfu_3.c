@@ -955,7 +955,7 @@ void SaveLinkTrainerNames(void)
 
         // Finalize the new list, and clean up.
         memcpy(gSaveBlock1Ptr->trainerNameRecords, newRecords, sizeof(gSaveBlock1Ptr->trainerNameRecords));
-        free(newRecords);
+        Free(newRecords);
     }
 }
 

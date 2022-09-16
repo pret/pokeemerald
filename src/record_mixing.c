@@ -358,8 +358,8 @@ static void Task_RecordMixing_Main(u8 taskId)
     case 5: // Wait for the task created by CreateTask_ReestablishCableClubLink
         if (!gTasks[tLinkTaskId].isActive)
         {
-            free(sReceivedRecords);
-            free(sSentRecord);
+            Free(sReceivedRecords);
+            Free(sSentRecord);
             SetLinkWaitingForScript();
             if (gWirelessCommType != 0)
                 CreateTask(Task_ReturnToFieldRecordMixing, 10);
@@ -705,7 +705,7 @@ static void ReceiveLilycoveLadyData(LilycoveLady *records, size_t recordSize, u8
     if (lilycoveLady != NULL)
     {
         QuizLadyClearQuestionForRecordMix(lilycoveLady);
-        free(lilycoveLady);
+        Free(lilycoveLady);
     }
 }
 

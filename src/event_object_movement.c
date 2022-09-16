@@ -1543,7 +1543,7 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
         LoadObjectEventPalette(spriteTemplate->paletteTag);
 
     spriteId = CreateSprite(spriteTemplate, x, y, subpriority);
-    free(spriteTemplate);
+    Free(spriteTemplate);
 
     if (spriteId != MAX_SPRITES && subspriteTables != NULL)
     {

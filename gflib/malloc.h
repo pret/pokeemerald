@@ -2,11 +2,10 @@
 #define GUARD_ALLOC_H
 
 #define HEAP_SIZE 0x1C000
-#define free Free
 
 #define FREE_AND_SET_NULL(ptr)          \
 {                                       \
-    free(ptr);                          \
+    Free(ptr);                          \
     ptr = NULL;                         \
 }
 

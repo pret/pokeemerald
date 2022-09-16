@@ -3488,7 +3488,7 @@ void ReceiveTvShowsData(void *src, u32 size, u8 playersLinkId)
         CompactTVShowArray(gSaveBlock1Ptr->tvShows);
         DeactivateShowsWithUnseenSpecies();
         DeactivateGameCompleteShowsIfNotUnlocked();
-        free(rmBuffer2);
+        Free(rmBuffer2);
     }
 }
 
@@ -3861,7 +3861,7 @@ void ReceivePokeNewsData(void *src, u32 size, u8 playersLinkId)
         }
         ClearInvalidPokeNews();
         ClearPokeNewsIfGameNotComplete();
-        free(rmBuffer2);
+        Free(rmBuffer2);
     }
 }
 
@@ -4023,7 +4023,7 @@ static void TranslateShowNames(TVShow *show, u32 language)
             break;
         }
     }
-    free(shows);
+    Free(shows);
 }
 
 void SanitizeTVShowsForRuby(TVShow *shows)
