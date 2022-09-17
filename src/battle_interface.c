@@ -318,10 +318,17 @@ static const struct SpriteTemplate sHealthbarSpriteTemplates[MAX_BATTLERS_COUNT]
     }
 };
 
+/*   v-- Origin
+[0   +         ][1     ]
+[              ][      ]   sUnused_Subsprites_0
+[              ][      ]   
+[______________][______]   96x40
+[2     ][3     ][4     ]
+*/
 static const struct Subsprite sUnused_Subsprites_0[] =
 {
     {
-        .x = DISPLAY_WIDTH,
+        .x = -16,
         .y = 0,
         .shape = SPRITE_SHAPE(64x32),
         .size = SPRITE_SIZE(64x32),
@@ -337,7 +344,7 @@ static const struct Subsprite sUnused_Subsprites_0[] =
         .priority = 1
     },
     {
-        .x = DISPLAY_WIDTH,
+        .x = -16,
         .y = 32,
         .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
@@ -362,10 +369,11 @@ static const struct Subsprite sUnused_Subsprites_0[] =
     }
 };
 
+// This subsprite table has the same layout as above, but offset by 64 base tiles.
 static const struct Subsprite sUnused_Subsprites_2[] =
 {
     {
-        .x = DISPLAY_WIDTH,
+        .x = -16,
         .y = 0,
         .shape = SPRITE_SHAPE(64x32),
         .size = SPRITE_SIZE(64x32),
@@ -381,7 +389,7 @@ static const struct Subsprite sUnused_Subsprites_2[] =
         .priority = 1
     },
     {
-        .x = DISPLAY_WIDTH,
+        .x = -16,
         .y = 32,
         .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
@@ -406,10 +414,16 @@ static const struct Subsprite sUnused_Subsprites_2[] =
     }
 };
 
+/*   v-- Origin
+[0   +         ][1     ]
+[              ][      ]
+[              ][      ]
+[              ][      ]   96x32
+*/
 static const struct Subsprite sUnused_Subsprites_1[] =
 {
     {
-        .x = DISPLAY_WIDTH,
+        .x = -16,
         .y = 0,
         .shape = SPRITE_SHAPE(64x32),
         .size = SPRITE_SIZE(64x32),
@@ -426,10 +440,11 @@ static const struct Subsprite sUnused_Subsprites_1[] =
     }
 };
 
+// Same as above
 static const struct Subsprite sUnused_Subsprites_3[] =
 {
     {
-        .x = DISPLAY_WIDTH,
+        .x = -16,
         .y = 0,
         .shape = SPRITE_SHAPE(64x32),
         .size = SPRITE_SIZE(64x32),
@@ -446,10 +461,13 @@ static const struct Subsprite sUnused_Subsprites_3[] =
     }
 };
 
+/*  v-- Origin
+[0  +  ][1     ]   64x8
+*/
 static const struct Subsprite sHealthBar_Subsprites_Player[] =
 {
     {
-        .x = DISPLAY_WIDTH,
+        .x = -16,
         .y = 0,
         .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
@@ -466,10 +484,14 @@ static const struct Subsprite sHealthBar_Subsprites_Player[] =
     }
 };
 
+/*       v-- Origin
+[]  [0  +  ][1     ]   72x8
+2^ ^--- Note 8px space
+*/
 static const struct Subsprite sHealthBar_Subsprites_Opponent[] =
 {
     {
-        .x = DISPLAY_WIDTH,
+        .x = -16,
         .y = 0,
         .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
@@ -485,7 +507,7 @@ static const struct Subsprite sHealthBar_Subsprites_Opponent[] =
         .priority = 1
     },
     {
-        .x = DISPLAY_WIDTH - 16,
+        .x = -32,
         .y = 0,
         .shape = SPRITE_SHAPE(8x8),
         .size = SPRITE_SIZE(8x8),
