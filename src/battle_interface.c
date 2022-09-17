@@ -320,8 +320,8 @@ static const struct SpriteTemplate sHealthbarSpriteTemplates[MAX_BATTLERS_COUNT]
 
 /*   v-- Origin
 [0   +         ][1     ]
-[              ][      ]   sUnused_Subsprites_0
-[              ][      ]   
+[              ][      ]
+[              ][      ]
 [______________][______]   96x40
 [2     ][3     ][4     ]
 */
