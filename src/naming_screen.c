@@ -2179,6 +2179,12 @@ static const struct OamData sOam_32x16 =
     .paletteNum = 0,
 };
 
+/*
+[0_____][] <-1   40x32
+[2_____][] <-3
+[3___+_][] <-5/Origin
+[4     ][] <-7
+*/
 static const struct Subsprite sSubsprites_PageSwapFrame[] =
 {
     {
@@ -2247,6 +2253,10 @@ static const struct Subsprite sSubsprites_PageSwapFrame[] =
     }
 };
 
+/*
+[0_][] <-1    24x8
+   ^-- Origin
+*/
 static const struct Subsprite sSubsprites_PageSwapText[] =
 {
     {
@@ -2267,6 +2277,11 @@ static const struct Subsprite sSubsprites_PageSwapText[] =
     }
 };
 
+/*
+[0_____][] <-1   40x24
+[2_____][] <-3
+[3___+_][] <-5/Origin
+*/
 static const struct Subsprite sSubsprites_Button[] =
 {
     {
@@ -2319,6 +2334,11 @@ static const struct Subsprite sSubsprites_Button[] =
     }
 };
 
+/*
+[0_]    16x24
+[1+] <--Origin
+[2_]
+*/
 static const struct Subsprite sSubsprites_PCIcon[] =
 {
     {
