@@ -824,7 +824,7 @@ void UpdateWirelessStatusIndicatorSprite(void)
         struct Sprite *sprite = &gSprites[gWirelessStatusIndicatorSpriteId];
         u8 signalStrength = RFU_LINK_ICON_LEVEL4_MAX;
         u8 i = 0;
-        
+
         // Get weakest signal strength
         if (gRfuLinkStatus->parentChild == MODE_PARENT)
         {

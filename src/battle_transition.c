@@ -2434,7 +2434,7 @@ static bool8 Mugshot_WaitStartPlayerSlide(struct Task *task)
 {
     sTransitionData->BG0HOFS_Lower -= 8;
     sTransitionData->BG0HOFS_Upper += 8;
-    
+
     // Start player's slide in once the opponent is finished
     if (IsTrainerPicSlideDone(task->tOpponentSpriteId))
     {
@@ -2770,7 +2770,7 @@ static bool8 Slice_Main(struct Task *task)
     {
         u16 *storeLoc1 = &gScanlineEffectRegBuffers[0][i];
         u16 *storeLoc2 = &gScanlineEffectRegBuffers[0][i + DISPLAY_HEIGHT];
-        
+
         // Alternate rows
         if (i % 2)
         {
@@ -3251,7 +3251,7 @@ static bool8 RectangularSpiral_Main(struct Task *task)
                 // The line moved to a new position, draw the tile.
                 done = FALSE;
                 position = sRectangularSpiralLines[j].position;
-                
+
                 // Invert position for the two lines that start at the bottom.
                 if ((j % 2) == 1)
                     position = 637 - position;
@@ -3281,7 +3281,7 @@ static bool8 RectangularSpiral_End(struct Task *task)
 static bool16 UpdateRectangularSpiralLine(const s16 * const *moveDataTable, struct RectangularSpiralLine *line)
 {
     const s16 *moveData = moveDataTable[line->state];
-    
+
     // Has spiral finished?
     // Note that most move data arrays endsin SPIRAL_END but it is
     // only ever reached on the final array of spiraling outward.
@@ -3294,9 +3294,9 @@ static bool16 UpdateRectangularSpiralLine(const s16 * const *moveDataTable, stru
     sDebug_RectangularSpiralData = moveData[2];
     sDebug_RectangularSpiralData = moveData[3];
 
-    // Note that for the two lines originating at the bottom the 
+    // Note that for the two lines originating at the bottom the
     // position is inverted, so the directions are flipped.
-    // i.e. position += 1 is right for the top lines and left 
+    // i.e. position += 1 is right for the top lines and left
     // for their inverted partners on the bottom.
     switch (moveData[0])
     {
@@ -4170,13 +4170,13 @@ static void InitBlackWipe(s16 *data, s16 startX, s16 startY, s16 endX, s16 endY,
 static bool8 UpdateBlackWipe(s16 *data, bool8 xExact, bool8 yExact)
 {
     u8 numFinished;
-    
+
     if (tWipeXDist > tWipeYDist)
     {
         // X has further to move, move it first
         tWipeCurrX += tWipeXMove;
 
-        // If it has been far enough since Y's 
+        // If it has been far enough since Y's
         // last move then move it too
         tWipeTemp += tWipeYDist;
         if (tWipeTemp > tWipeXDist)
@@ -4190,7 +4190,7 @@ static bool8 UpdateBlackWipe(s16 *data, bool8 xExact, bool8 yExact)
         // Y has further to move, move it first
         tWipeCurrY += tWipeYMove;
 
-        // If it has been far enough since X's 
+        // If it has been far enough since X's
         // last move then move it too
         tWipeTemp += tWipeXDist;
         if (tWipeTemp > tWipeYDist)
@@ -4201,9 +4201,9 @@ static bool8 UpdateBlackWipe(s16 *data, bool8 xExact, bool8 yExact)
     }
 
     numFinished = 0;
-    
+
     // Has X coord reached end?
-    if ((tWipeXMove > 0 && tWipeCurrX >= tWipeEndX) 
+    if ((tWipeXMove > 0 && tWipeCurrX >= tWipeEndX)
      || (tWipeXMove < 0 && tWipeCurrX <= tWipeEndX))
     {
         numFinished++;
@@ -4212,7 +4212,7 @@ static bool8 UpdateBlackWipe(s16 *data, bool8 xExact, bool8 yExact)
     }
 
     // Has Y coord reached end?
-    if ((tWipeYMove > 0 && tWipeCurrY >= tWipeEndY) 
+    if ((tWipeYMove > 0 && tWipeCurrY >= tWipeEndY)
      || (tWipeYMove < 0 && tWipeCurrY <= tWipeEndY))
     {
         numFinished++;

@@ -24,7 +24,8 @@ static u32 IsUnionRoomPlayerInvisible(u32, u32);
 static void SetUnionRoomObjectFacingDirection(s32, s32, u8);
 
 // + 2 is just to match, those elements are empty and never read
-static const u8 sUnionRoomObjGfxIds[GENDER_COUNT][MAX_UNION_ROOM_LEADERS + 2] = {
+// Graphics ids should correspond with the classes in gUnionRoomFacilityClasses
+static const u8 sUnionRoomObjGfxIds[GENDER_COUNT][NUM_UNION_ROOM_CLASSES + 2] = {
     [MALE] = {
         OBJ_EVENT_GFX_MAN_3,
         OBJ_EVENT_GFX_BLACK_BELT,
@@ -132,7 +133,7 @@ static bool32 IsPlayerStandingStill(void)
 // Gender and trainer id are used to determine which sprite a player appears as
 static u8 GetUnionRoomPlayerGraphicsId(u32 gender, u32 id)
 {
-    return sUnionRoomObjGfxIds[gender][id % MAX_UNION_ROOM_LEADERS];
+    return sUnionRoomObjGfxIds[gender][id % NUM_UNION_ROOM_CLASSES];
 }
 
 static void GetUnionRoomPlayerCoords(u32 leaderId, u32 memberId, s32 * x, s32 * y)
@@ -568,7 +569,7 @@ bool32 TryInteractWithUnionRoomMember(struct RfuPlayerList *list, s16 *memberIdP
         for (memberId = 0; memberId < MAX_RFU_PLAYERS; memberId++)
         {
             s32 id = UR_PLAYER_SPRITE_ID(i, memberId);
-            
+
             // Is the player in front of a group member position?
             if (x != sUnionRoomPlayerCoords[i][0] + sUnionRoomGroupOffsets[memberId][0] + 7)
                 continue;

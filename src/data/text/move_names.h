@@ -1604,7 +1604,7 @@ static const u8 sText_Menacing_Moonraze_Maelstrom[] = _("Menacing Moonraze Maels
 static const u8 sText_Light_That_Burns_The_Sky[] = _("Light That Burns The Sky");
 static const u8 sText_Soul_Stealing_7_Star_Strike[] = _("Soul Stealing 7 Star Strike");
 
-const u8 *const gZMoveNames[] = 
+const u8 *const gZMoveNames[] =
 {
     [MOVE_BREAKNECK_BLITZ - FIRST_Z_MOVE] = sText_Breakneck_Blitz,
     [MOVE_ALL_OUT_PUMMELING - FIRST_Z_MOVE] = sText_All_Out_Pummeling,
