@@ -109,9 +109,9 @@ static bool8 ShouldSwitchIfWonderGuard(void)
             continue;
         if (i == gBattlerPartyIndexes[gActiveBattler])
             continue;
-        if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON 
+        /*if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON 
             && i == (CalculateEnemyPartyCount()-1))
-            continue;
+            continue;*/
 
         for (opposingBattler = GetBattlerAtPosition(opposingPosition), j = 0; j < MAX_MON_MOVES; j++)
         {
@@ -202,9 +202,9 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
             continue;
         if (i == *(gBattleStruct->monToSwitchIntoId + battlerIn2))
             continue;
-        if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON 
+        /*if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON 
             && i == (CalculateEnemyPartyCount()-1))
-            continue;
+            continue;*/
         
 
         species = GetMonData(&party[i], MON_DATA_SPECIES);
@@ -283,9 +283,9 @@ static bool8 ShouldSwitchIfGameStatePrompt(void)
                     
                         for (i = firstId; i < lastId; i++)
                         {
-                            if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON 
+                            /*if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON 
                                 && i == (CalculateEnemyPartyCount()-1))
-                                break;
+                                break;*/
 
                             //Look for mon in party that is able to be switched into and has ability that sets terrain
                             if (GetMonData(&party[i], MON_DATA_HP) != 0
@@ -574,9 +574,9 @@ static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent)
             continue;
         if (i == *(gBattleStruct->monToSwitchIntoId + battlerIn2))
             continue;
-        if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON 
+        /*if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON 
             && i == (CalculateEnemyPartyCount()-1))
-            continue;
+            continue;*/
 
 
         species = GetMonData(&party[i], MON_DATA_SPECIES);
@@ -666,9 +666,9 @@ bool32 ShouldSwitch(void)
             continue;
         if (i == *(gBattleStruct->monToSwitchIntoId + battlerIn2))
             continue;
-        if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON
+        /*if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON
             && i == (CalculateEnemyPartyCount()-1))
-            continue;
+            continue;*/
 
         availableToSwitch++;
     }
@@ -756,9 +756,9 @@ void AI_TrySwitchOrUseItem(void)
                             continue;
                         if (monToSwitchId == *(gBattleStruct->monToSwitchIntoId + battlerIn2))
                             continue;
-                        if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON 
+                        /*if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON 
                             && monToSwitchId == (CalculateEnemyPartyCount()-1))
-                            continue;
+                            continue;*/
 
                         break;
                     }
@@ -957,8 +957,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
             || i == *(gBattleStruct->monToSwitchIntoId + battlerIn1)
             || i == *(gBattleStruct->monToSwitchIntoId + battlerIn2)
             || (GetMonAbility(&party[i]) == ABILITY_TRUANT && IsTruantMonVulnerable(gActiveBattler, opposingBattler)) // While not really invalid per say, not really wise to switch into this mon.
-            || (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON 
-                && i == (CalculateEnemyPartyCount()-1))) //Save Ace Pokemon for last
+            /*|| (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON 
+                && i == (CalculateEnemyPartyCount()-1))*/) //Save Ace Pokemon for last
             invalidMons |= gBitTable[i];
         else
             aliveCount++;
