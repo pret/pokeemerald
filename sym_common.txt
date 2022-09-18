@@ -53,9 +53,9 @@ gReservedSpritePaletteCount:
 	.include "tv.o"
 	.include "mauville_old_man.o"
 	.include "image_processing_effects.o"
-	
+
 	.space 0x4
-	
+
 	.include "contest_painting.o"
 	.include "field_specials.o"
 	.include "evolution_scene.o"
@@ -66,12 +66,12 @@ gReservedSpritePaletteCount:
 	.include "battle_anim_throw.o"
 	.include "battle_factory_screen.o"
 	.include "apprentice.o"
-	
+
 	.space 0x8
-	
+
 	.include "list_menu.o"
 	.include "party_menu.o"
-	
+
 	.space 0x44
 
 	.include "ereader_screen.o"

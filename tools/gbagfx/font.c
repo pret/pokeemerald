@@ -26,7 +26,7 @@ static void ConvertFromLatinFont(unsigned char *src, unsigned char *dest, unsign
 				unsigned int pixelsX = (column * 16) + ((glyphTile & 1) * 8);
 
 				for (unsigned int i = 0; i < 8; i++) {
-					unsigned int pixelsY = (row * 16) + ((glyphTile >> 1) * 8) + i;				
+					unsigned int pixelsY = (row * 16) + ((glyphTile >> 1) * 8) + i;
 					unsigned int destPixelsOffset = (pixelsY * 64) + (pixelsX / 4);
 
 					dest[destPixelsOffset] = src[srcPixelsOffset + 1];
@@ -75,7 +75,7 @@ static void ConvertFromHalfwidthJapaneseFont(unsigned char *src, unsigned char *
 				for (unsigned int i = 0; i < 8; i++) {
 					unsigned int pixelsY = (row * 16) + (glyphTile * 8) + i;
 					unsigned int destPixelsOffset = (pixelsY * 32) + (pixelsX / 4);
-					
+
 					dest[destPixelsOffset] = src[srcPixelsOffset + 1];
 					dest[destPixelsOffset + 1] = src[srcPixelsOffset];
 
@@ -233,7 +233,7 @@ void ReadHalfwidthJapaneseFont(char *path, struct Image *image)
 		FATAL_ERROR("The file size (%d) is not a multiple of %d.\n", fileSize, glyphSize);
 
 	int numGlyphs = fileSize / glyphSize;
-	
+
 	if (numGlyphs % 16 != 0)
 		FATAL_ERROR("The number of glyphs (%d) is not a multiple of 16.\n", numGlyphs);
 

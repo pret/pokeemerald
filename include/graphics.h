@@ -9464,7 +9464,7 @@ extern const u32 gBattleAnimSpriteGfx_Bird[];
 extern const u32 gBattleAnimSpriteGfx_CrossImpact[];
 extern const u32 gBattleAnimSpriteGfx_TrumpCard[];
 extern const u32 gBattleAnimSpriteGfx_TrumpCardParticles[];
-extern const u32 gBattleAnimSpriteGfx_Accupressure[];
+extern const u32 gBattleAnimSpriteGfx_Acupressure[];
 extern const u32 gBattleAnimSpriteGfx_WringOut[];
 extern const u32 gBattleAnimSpriteGfx_ColoredOrbs[];
 extern const u32 gBattleAnimSpriteGfx_WorrySeed[];
@@ -9766,7 +9766,7 @@ extern const u32 gBattleAnimSpritePal_WhipHit[];
 extern const u32 gBattleAnimSpritePal_BlueRing2[];
 extern const u32 gBattleAnimSpritePal_TrumpCard[];
 extern const u32 gBattleAnimSpritePal_TrumpCardParticles[];
-extern const u32 gBattleAnimSpritePal_Accupressure[];
+extern const u32 gBattleAnimSpritePal_Acupressure[];
 extern const u32 gBattleAnimSpritePal_WringOut[];
 extern const u32 gBattleAnimSpritePal_ColoredOrbs[];
 extern const u32 gBattleAnimSpritePal_WorrySeed[];
@@ -9791,8 +9791,6 @@ extern const u32 gBattleAnimSpriteGfx_MegaStone[];
 extern const u32 gBattleAnimSpritePal_MegaStone[];
 extern const u32 gBattleAnimSpriteGfx_MegaParticles[];
 extern const u32 gBattleAnimSpritePal_MegaParticles[];
-extern const u32 gBattleAnimSpriteGfx_PrimalParticles[];
-extern const u32 gBattleAnimSpritePal_PrimalParticles[];
 extern const u32 gBattleAnimSpriteGfx_MegaSymbol[];
 extern const u32 gBattleAnimSpritePal_MegaSymbol[];
 extern const u32 gBattleAnimSpriteGfx_FlashCannonBall[];
@@ -9805,8 +9803,6 @@ extern const u32 gBattleAnimSpriteGfx_QuickGuard[];
 extern const u32 gBattleAnimSpritePal_QuickGuard[];
 
 // New Battle Anim Particles
-extern const u32 gBattleAnimSpriteGfx_AcupressureFinger[];
-extern const u32 gBattleAnimSpritePal_AcupressureFinger[];
 extern const u32 gBattleAnimSpriteGfx_AlphaStone[];
 extern const u32 gBattleAnimSpritePal_AlphaStone[];
 extern const u32 gBattleAnimSpriteGfx_AlphaSymbol[];
@@ -10246,9 +10242,6 @@ extern const u16 gSlotMachineReelTimePikachu_Pal[];
 
 extern const u32 gBattleAnimBgTilemap_Sandstorm[];
 extern const u32 gBattleAnimBgImage_Sandstorm[];
-
-extern const u32 gBattleAnimBgTilemap_Windstorm[];
-extern const u32 gBattleAnimBgImage_Windstorm[];
 
 // Pokedex Area Screen
 extern const u32 gPokedexAreaScreenAreaUnknown_Gfx[];

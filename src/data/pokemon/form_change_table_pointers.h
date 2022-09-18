@@ -1,4 +1,4 @@
-const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] = 
+const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
 {
 #if P_GEN_4_POKEMON == TRUE
     [SPECIES_GIRATINA] = sGiratinaFormChangeTable,
@@ -26,22 +26,24 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
 #endif
 #if P_GEN_5_POKEMON == TRUE
     [SPECIES_TORNADUS] = sTornadusFormChangeTable,
-    [SPECIES_TORNADUS_THERIAN] = sTornadusTherianFormChangeTable,
+    [SPECIES_TORNADUS_THERIAN] = sTornadusFormChangeTable,
     [SPECIES_THUNDURUS] = sThundurusFormChangeTable,
-    [SPECIES_THUNDURUS_THERIAN] = sThundurusTherianFormChangeTable,
+    [SPECIES_THUNDURUS_THERIAN] = sThundurusFormChangeTable,
     [SPECIES_LANDORUS] = sLandorusFormChangeTable,
-    [SPECIES_LANDORUS_THERIAN] = sLandorusTherianFormChangeTable,
+    [SPECIES_LANDORUS_THERIAN] = sLandorusFormChangeTable,
     [SPECIES_KELDEO] = sKeldeoFormChangeTable,
-    [SPECIES_KELDEO_RESOLUTE] = sKeldeoResoluteFormChangeTable,
-    [SPECIES_GENESECT] = sGenesectFormChangeTable, 
+    [SPECIES_KELDEO_RESOLUTE] = sKeldeoFormChangeTable,
+    [SPECIES_GENESECT] = sGenesectFormChangeTable,
     [SPECIES_GENESECT_DOUSE_DRIVE] = sGenesectFormChangeTable,
     [SPECIES_GENESECT_SHOCK_DRIVE] = sGenesectFormChangeTable,
     [SPECIES_GENESECT_BURN_DRIVE] = sGenesectFormChangeTable,
     [SPECIES_GENESECT_CHILL_DRIVE] = sGenesectFormChangeTable,
 #endif
 #if P_GEN_6_POKEMON == TRUE
+    [SPECIES_XERNEAS] = sXerneasFormChangeTable,
+    [SPECIES_XERNEAS_ACTIVE] = sXerneasFormChangeTable,
     [SPECIES_HOOPA] = sHoopaFormChangeTable,
-    [SPECIES_HOOPA_UNBOUND] = sHoopaUnboundFormChangeTable,
+    [SPECIES_HOOPA_UNBOUND] = sHoopaFormChangeTable,
 #endif
 #if P_GEN_7_POKEMON == TRUE
     [SPECIES_ORICORIO] = sOricorioFormChangeTable,
@@ -68,7 +70,11 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_SILVALLY_WATER] = sSilvallyFormChangeTable,
 #endif
 #if P_GEN_8_POKEMON == TRUE
+    [SPECIES_ZACIAN] = sZacianFormChangeTable,
+    [SPECIES_ZACIAN_CROWNED_SWORD] = sZacianFormChangeTable,
+    [SPECIES_ZAMAZENTA] = sZamazentaFormChangeTable,
+    [SPECIES_ZAMAZENTA_CROWNED_SHIELD] = sZamazentaFormChangeTable,
     [SPECIES_ENAMORUS] = sEnamorusFormChangeTable,
-    [SPECIES_ENAMORUS_THERIAN] = sEnamorusTherianFormChangeTable,
+    [SPECIES_ENAMORUS_THERIAN] = sEnamorusFormChangeTable,
 #endif
 };

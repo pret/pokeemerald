@@ -481,6 +481,7 @@ void CB2_InitBattle(void)
 static void CB2_InitBattleInternal(void)
 {
     s32 i;
+    u16 targetSpecies;
 
     SetHBlankCallback(NULL);
     SetVBlankCallback(NULL);
@@ -570,6 +571,27 @@ static void CB2_InitBattleInternal(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
         AdjustFriendship(&gPlayerParty[i], FRIENDSHIP_EVENT_LEAGUE_BATTLE);
+
+    // Apply party-wide start-of-battle form changes
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        // Player's side
+        targetSpecies = GetFormChangeTargetSpecies(&gPlayerParty[i], FORM_BATTLE_BEGIN, 0);
+        if (targetSpecies != SPECIES_NONE)
+        {
+            SetMonData(&gPlayerParty[i], MON_DATA_SPECIES, &targetSpecies);
+            CalculateMonStats(&gPlayerParty[i]);
+            TryToSetBattleFormChangeMoves(&gPlayerParty[i]);
+        }
+        // Opponent's side
+        targetSpecies = GetFormChangeTargetSpecies(&gEnemyParty[i], FORM_BATTLE_BEGIN, 0);
+        if (targetSpecies != SPECIES_NONE)
+        {
+            SetMonData(&gEnemyParty[i], MON_DATA_SPECIES, &targetSpecies);
+            CalculateMonStats(&gEnemyParty[i]);
+            TryToSetBattleFormChangeMoves(&gEnemyParty[i]);
+        }
+    }
 
     gBattleCommunication[MULTIUSE_STATE] = 0;
 }
@@ -846,7 +868,7 @@ static void CB2_HandleStartBattle(void)
     case 1:
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-            if (gReceivedRemoteLinkPlayers != 0)
+            if (gReceivedRemoteLinkPlayers)
             {
                 if (IsLinkTaskFinished())
                 {
@@ -1053,7 +1075,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
     case 1:
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-            if (gReceivedRemoteLinkPlayers != 0)
+            if (gReceivedRemoteLinkPlayers)
             {
                 u8 language;
 
@@ -1320,7 +1342,7 @@ static void CB2_PreInitMultiBattle(void)
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
     case 0:
-        if (gReceivedRemoteLinkPlayers != 0 && IsLinkTaskFinished())
+        if (gReceivedRemoteLinkPlayers && IsLinkTaskFinished())
         {
             sMultiPartnerPartyBuffer = Alloc(sizeof(gMultiPartnerParty));
             SetMultiPartnerMenuParty(0);
@@ -1456,7 +1478,7 @@ static void CB2_HandleStartMultiBattle(void)
     case 1:
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-            if (gReceivedRemoteLinkPlayers != 0)
+            if (gReceivedRemoteLinkPlayers)
             {
                 if (IsLinkTaskFinished())
                 {
@@ -5284,7 +5306,7 @@ static void ReturnFromBattleToOverworld(void)
         PartySpreadPokerus(gPlayerParty);
     }
 
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK && gReceivedRemoteLinkPlayers != 0)
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK && gReceivedRemoteLinkPlayers)
         return;
 
     gSpecialVar_Result = gBattleOutcome;

@@ -331,7 +331,7 @@ static const union AffineAnimCmd* const sSpriteAffineAnimTable_CrushGripHand[] =
 const struct SpriteTemplate gCrushGripHandTemplate =
 {
     .tileTag = ANIM_TAG_PURPLE_HAND_OUTLINE,
-    .paletteTag = ANIM_TAG_ACCUPRESSURE,
+    .paletteTag = ANIM_TAG_ACUPRESSURE,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = sAnims_BasicRock,
     .images = NULL,

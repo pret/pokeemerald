@@ -6900,9 +6900,7 @@ static void ReshowDisplayMon(void)
 
 void SetMonFormPSS(struct BoxPokemon *boxMon)
 {
-    u16 targetSpecies = GetFormChangeTargetSpeciesBoxMon(boxMon, FORM_ITEM_HOLD_ABILITY, 0);
-    if (targetSpecies == SPECIES_NONE)
-        targetSpecies = GetFormChangeTargetSpeciesBoxMon(boxMon, FORM_ITEM_HOLD, 0);
+    u16 targetSpecies = GetFormChangeTargetSpeciesBoxMon(boxMon, FORM_ITEM_HOLD, 0);
     if (targetSpecies != SPECIES_NONE)
     {
         SetBoxMonData(boxMon, MON_DATA_SPECIES, &targetSpecies);

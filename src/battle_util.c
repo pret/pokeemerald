@@ -4744,8 +4744,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_INTREPID_SWORD:
-            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            if (!gSpecialStatuses[battler].switchInAbilityDone && CompareStat(battler, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN))
             {
+                gBattlerAttacker = battler;
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 SET_STATCHANGER(STAT_ATK, 1, FALSE);
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerAbilityStatRaiseOnSwitchIn);
@@ -4753,8 +4754,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_DAUNTLESS_SHIELD:
-            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            if (!gSpecialStatuses[battler].switchInAbilityDone && CompareStat(battler, STAT_DEF, MAX_STAT_STAGE, CMP_LESS_THAN))
             {
+                gBattlerAttacker = battler;
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 SET_STATCHANGER(STAT_DEF, 1, FALSE);
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerAbilityStatRaiseOnSwitchIn);
@@ -9692,7 +9694,7 @@ void UndoMegaEvolution(u32 monId)
 
 void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
 {
-    u32 i, currSpecies;
+    u32 i, currSpecies, targetSpecies;
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
     static const u16 species[][3] =
     {
@@ -9724,6 +9726,16 @@ void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
             SetMonData(&party[monId], MON_DATA_SPECIES, &species[i][1]);
             CalculateMonStats(&party[monId]);
             break;
+        }
+    }
+    if (!isSwitchingOut)
+    {
+        targetSpecies = GetFormChangeTargetSpecies(&party[monId], FORM_BATTLE_END, 0);
+        if (targetSpecies != SPECIES_NONE)
+        {
+            SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
+            CalculateMonStats(&party[monId]);
+            TryToSetBattleFormChangeMoves(&party[monId]);
         }
     }
 }

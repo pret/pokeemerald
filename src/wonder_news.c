@@ -76,7 +76,7 @@ u16 RetrieveWonderNewsVal(void)
     struct WonderNewsMetadata *data = GetSavedWonderNewsMetadata();
     u16 newsVal;
 
-    // Checks if Mystery Event is enabled, not Mystery Gift?  
+    // Checks if Mystery Event is enabled, not Mystery Gift?
     if (!IsMysteryEventEnabled() || !ValidateSavedWonderNews())
         return 0;
 
