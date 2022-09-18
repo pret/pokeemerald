@@ -957,8 +957,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
             || i == *(gBattleStruct->monToSwitchIntoId + battlerIn1)
             || i == *(gBattleStruct->monToSwitchIntoId + battlerIn2)
             || (GetMonAbility(&party[i]) == ABILITY_TRUANT && IsTruantMonVulnerable(gActiveBattler, opposingBattler)) // While not really invalid per say, not really wise to switch into this mon.
-            || (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON 
-                && i == (CalculateEnemyPartyCount()-1))) //Save Ace Pokemon for last
+            || ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON)
+                && i == (CalculateEnemyPartyCount() - 1))) //Save Ace Pokemon for last
             invalidMons |= gBitTable[i];
         else
             aliveCount++;
