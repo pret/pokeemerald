@@ -2813,8 +2813,8 @@ static void DebugAction_AccessPC(u8 taskId)
 
 // *******************************
 // Sound Scripts
-static const u8 *const gBGMNames[];
-static const u8 *const gSENames[];
+static const u8 *const sBGMNames[];
+static const u8 *const sSENames[];
 static void DebugAction_Sound_SE(u8 taskId)
 {
     u8 windowId;
@@ -2832,7 +2832,7 @@ static void DebugAction_Sound_SE(u8 taskId)
     //Display initial ID
     StringCopy(gStringVar2, gText_DigitIndicator[0]);
     ConvertIntToDecimalStringN(gStringVar3, 1, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
-    StringCopyPadded(gStringVar1, gSENames[0], CHAR_SPACE, 35);
+    StringCopyPadded(gStringVar1, sSENames[0], CHAR_SPACE, 35);
     StringExpandPlaceholders(gStringVar4, gDebugText_Sound_SE_ID);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
 
@@ -2872,7 +2872,7 @@ static void DebugAction_Sound_SE_SelectId(u8 taskId)
         }
 
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
-        StringCopyPadded(gStringVar1, gSENames[gTasks[taskId].data[3]-1], CHAR_SPACE, 35);
+        StringCopyPadded(gStringVar1, sSENames[gTasks[taskId].data[3]-1], CHAR_SPACE, 35);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
         StringExpandPlaceholders(gStringVar4, gDebugText_Sound_SE_ID);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
@@ -2909,7 +2909,7 @@ static void DebugAction_Sound_MUS(u8 taskId)
     //Display initial ID
     StringCopy(gStringVar2, gText_DigitIndicator[0]);
     ConvertIntToDecimalStringN(gStringVar3, START_MUS, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
-    StringCopyPadded(gStringVar1, gBGMNames[0], CHAR_SPACE, 35);
+    StringCopyPadded(gStringVar1, sBGMNames[0], CHAR_SPACE, 35);
     StringExpandPlaceholders(gStringVar4, gDebugText_Sound_MUS_ID);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
 
@@ -2949,7 +2949,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
         }
 
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
-        StringCopyPadded(gStringVar1, gBGMNames[gTasks[taskId].data[3]-START_MUS], CHAR_SPACE, 35);
+        StringCopyPadded(gStringVar1, sBGMNames[gTasks[taskId].data[3]-START_MUS], CHAR_SPACE, 35);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
         StringExpandPlaceholders(gStringVar4, gDebugText_Sound_MUS_ID);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
@@ -3508,7 +3508,7 @@ SOUND_LIST_BGM
 #undef X
 
 #define X(songId) sBGMName_##songId,
-static const u8 *const gBGMNames[] =
+static const u8 *const sBGMNames[] =
 {
 SOUND_LIST_BGM
 };
@@ -3520,7 +3520,7 @@ SOUND_LIST_SE
 #undef X
 
 #define X(songId) sSEName_##songId,
-static const u8 *const gSENames[] =
+static const u8 *const sSENames[] =
 {
 SOUND_LIST_SE
 };
