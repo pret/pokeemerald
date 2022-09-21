@@ -465,8 +465,8 @@ PetalburgWoods_Text_TrainerTipsExperience:
 
 PetalburgWoods_Text_TrainerTipsPP:
 	.string "TRAINER TIPS\p"
-	.string "A new will be able to train his POKéMON\n"
-	.string "to approximately level 16.\p"
-	.string "Some POKéMON grow faster than others,\n"
+	.string "A new Trainer will be able to train his\n"
+	.string "POKéMON to approximately level 16.\l"
+	.string "Some POKéMON grow faster than others,\l"
 	.string "so this level varies with species.$"
 
