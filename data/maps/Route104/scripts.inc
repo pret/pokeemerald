@@ -1071,15 +1071,16 @@ Route104_Text_PrettyPetalFlowShop:
 	.string "PRETTY PETAL FLOWER SHOP$"
 
 Route104_Text_TrainerTipsDoubleBattles:
-	.string "TRAINER TIPS\p"
-	.string "In the HOENN region there are pairs\n"
-	.string "of TRAINERS who challenge others\l"
-	.string "for 2-on-2 POKéMON battles called\l"
-	.string "DOUBLE BATTLES.\p"
-	.string "In a DOUBLE BATTLE, the TRAINER must\n"
-	.string "send out two POKéMON, the one at the\l"
-	.string "left of the list and the top one.\l"
-	.string "Watch how POKéMON are lined up.$"
+	.string "Some POKéMON are better than others of\n"
+	.string "the same species.\p"
+	.string "You can view your POKéMON's IVs by\n"
+	.string "pressing L on the POKéMON's stats\l"
+	.string "screen.\p"
+	.string "Further, POKéMON get stronger as they\n"
+	.string "defeat opponents.\p"
+	.string "You can view your POKéMON's EVs by\n"
+	.string "pressing R on the POKéMON's stats\l"
+	.string "screen.$"
 
 Route104_Text_MayWeShouldRegister:
 	.string "MAY: Oh, hi, {PLAYER}{KUN}!\p"
