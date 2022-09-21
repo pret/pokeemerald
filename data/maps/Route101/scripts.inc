@@ -217,6 +217,10 @@ Route101_EventScript_Boy::
 Route101_EventScript_RouteSign::
 	msgbox Route101_Text_RouteSign, MSGBOX_SIGN
 	end
+	
+Route101_EventScript_Sign1::
+	msgbox Route101_Text_TrainerTipsNuzlocke, MSGBOX_SIGN
+	end
 
 Route101_EventScript_BirchsBag::
 	lock
@@ -299,4 +303,12 @@ Route101_Text_WildPokemonInTallGrass:
 Route101_Text_RouteSign:
 	.string "ROUTE 101\n"
 	.string "{UP_ARROW} OLDALE TOWN$"
+
+Route101_Text_TrainerTipsNuzlocke:
+	.string "TRAINER TIPS\p"
+	.string "A POKéMON that faints in battle is dead\n"
+	.string "forever!\p"
+	.string "It will not be able to be deposited in\n"
+	.string "the POKéMON storage system, only\l"
+	.string "released.$"
 
