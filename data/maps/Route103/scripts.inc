@@ -200,6 +200,15 @@ Route103_EventScript_Man::
 Route103_EventScript_RouteSign::
 	msgbox Route103_Text_RouteSign, MSGBOX_SIGN
 	end
+	
+Route103_EventScript_TrainerTips::
+	msgbox Route103_Text_TrainerTips, MSGBOX_SIGN
+	end
+
+Route103_EventScript_TrainerTipsNuzlocke::
+	msgbox 	Route103_Text_TrainerTipsNuzlocke, MSGBOX_SIGN
+	end
+
 
 Route103_EventScript_Daisy::
 	trainerbattle_single TRAINER_DAISY, Route103_Text_DaisyIntro, Route103_Text_DaisyDefeated
@@ -353,3 +362,21 @@ Route103_Text_RouteSign:
 	.string "ROUTE 103\n"
 	.string "{DOWN_ARROW} OLDALE TOWN$"
 
+Route103_Text_TrainerTips:
+	.string "TRAINER TIPS\p"
+	.string "Battles are about your POKéMON's\n"
+	.string "ability, not your wallet.\p"
+	.string "Recent POKéMON League regulations\n"
+	.string "have limited the use of items to once\l"
+	.string "per battle.$"
+	
+Route103_Text_TrainerTipsNuzlocke:
+	.string "TRAINER TIPS\p"
+	.string "Recent POKéMON League regulations\n"
+	.string "only allow a trainer to engage in battle\l"
+	.string "with one POKéMON per area.\p"
+	.string "Due to lobbying by the Collectors'\n"
+	.string "Union, there is an exception for\l"
+	.string "POKéMON that share an evolution line\l"
+	.string "with a species the trainer has already\l"
+	.string "caught.$"

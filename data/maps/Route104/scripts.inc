@@ -317,6 +317,10 @@ Route104_EventScript_FlowerShopSign::
 Route104_EventScript_TrainerTipsDoubleBattles::
 	msgbox Route104_Text_TrainerTipsDoubleBattles, MSGBOX_SIGN
 	end
+	
+Route104_EventScript_TrainerTipsHMs::
+	msgbox Route104_Text_TrainerTipsHMs, MSGBOX_SIGN
+	end
 
 Route104_EventScript_Boy1::
 	msgbox Route104_Text_ThrowBallAtWeakenedPokemon, MSGBOX_NPC
@@ -1071,6 +1075,7 @@ Route104_Text_PrettyPetalFlowShop:
 	.string "PRETTY PETAL FLOWER SHOP$"
 
 Route104_Text_TrainerTipsDoubleBattles:
+	.string "TRAINER TIPS\p"
 	.string "Some POKéMON are better than others of\n"
 	.string "the same species.\p"
 	.string "You can view your POKéMON's IVs by\n"
@@ -1081,6 +1086,15 @@ Route104_Text_TrainerTipsDoubleBattles:
 	.string "You can view your POKéMON's EVs by\n"
 	.string "pressing R on the POKéMON's stats\l"
 	.string "screen.$"
+	
+Route104_Text_TrainerTipsHMs:
+	.string "TRAINER TIPS\p"
+	.string "For a long time, trainers have been\n"
+	.string "incompetent at making good use of HM\l"
+	.string "moves.\p"
+	.string "In recent years, however, tactics have\n"
+	.string "evolved to make HM moves better in\l"
+	.string "battle.$"
 
 Route104_Text_MayWeShouldRegister:
 	.string "MAY: Oh, hi, {PLAYER}{KUN}!\p"

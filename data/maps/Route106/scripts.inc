@@ -43,6 +43,10 @@ Route106_EventScript_Ned::
 
 Route106_Text_TrainerTips:
 	.string "TRAINER TIPS\p"
-	.string "Advice on catching POKéMON with a ROD:\n"
-	.string "Press the A Button if you get a bite.$"
-
+	.string "It was previously believed that some\n"
+	.string "POKéMON only evolved by trading,\l"
+	.string "possibly with a held item.\p"
+	.string "However, recent developments have\n"
+	.string "shown that these POKéMON are actually\l"
+	.string "capable of evolving by leveling up or\l"
+	.string "by having an item used on them.$"

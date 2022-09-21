@@ -221,6 +221,10 @@ Route101_EventScript_RouteSign::
 Route101_EventScript_Sign1::
 	msgbox Route101_Text_TrainerTipsNuzlocke, MSGBOX_SIGN
 	end
+	
+Route101_EventScript_Sign2::
+	msgbox Route101_Text_TrainerTipsWhiteOut, MSGBOX_SIGN
+	end
 
 Route101_EventScript_BirchsBag::
 	lock
@@ -312,3 +316,10 @@ Route101_Text_TrainerTipsNuzlocke:
 	.string "the POKéMON storage system, only\l"
 	.string "released.$"
 
+Route101_Text_TrainerTipsWhiteOut:
+	.string "TRAINER TIPS\p"
+	.string "If all your POKéMON faint, it's a white\n"
+	.string "out!\p"
+	.string "It's game over, even if you have\n"
+	.string "POKéMON available in the POKéMON\l"
+	.string "storage system.$"

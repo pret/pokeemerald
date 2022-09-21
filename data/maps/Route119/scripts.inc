@@ -607,9 +607,7 @@ Route119_Text_WeatherInstitute:
 
 Route119_Text_TrainerTipsDecoration:
 	.string "TRAINER TIPS\p"
-	.string "Up to sixteen decorations and\n"
-	.string "furniture items can be placed in\l"
-	.string "a SECRET BASE.\p"
-	.string "Pick your favorite items and create\n"
-	.string "your very own SECRET BASE exactly the\l"
-	.string "way you want.$"
+	.string "The Elite Four are a powerful group of\n"
+	.string "trainers. If you ever reach that point,\l"
+	.string "your POKéMON will gain double\l"
+	.string "experience.$"

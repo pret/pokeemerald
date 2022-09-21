@@ -13,6 +13,14 @@ Route102_EventScript_RouteSignPetalburg::
 	msgbox Route102_Text_RouteSignPetalburg, MSGBOX_SIGN
 	end
 
+Route102_EventScript_Sign1::
+	msgbox Route102_Text_TrainerTipsAccuracyEvasion, MSGBOX_SIGN
+	end
+
+Route102_EventScript_Sign2::
+	msgbox Route102_Text_TrainerTipsNatures, MSGBOX_SIGN
+	end
+
 Route102_EventScript_Boy::
 	msgbox Route102_Text_CatchWholeBunchOfPokemon, MSGBOX_NPC
 	end
@@ -107,3 +115,26 @@ Route102_Text_RouteSignOldale:
 Route102_Text_RouteSignPetalburg:
 	.string "ROUTE 102\n"
 	.string "{LEFT_ARROW} PETALBURG CITY$"
+	
+Route102_Text_TrainerTipsAccuracyEvasion:
+	.string "TRAINER TIPS\p"
+	.string "There was a time when trainers' POKéMON\n"
+	.string "would use cheap tactics such as\l"
+	.string "hurling sand to reduce the foe's\l"
+	.string "accuracy or making shadow clones to\l"
+	.string "avoid being hit.\p"
+	.string "Modern POKéMON League regulations\n"
+	.string "require that moves like SAND-ATTACK\l"
+	.string "and DOUBLE TEAM be used for different\l"
+	.string "purposes.$"
+	
+Route102_Text_TrainerTipsNatures:
+	.string "TRAINER TIPS\p"
+	.string "Different POKéMON of the same species\n"
+	.string "may have different natures, which\l"
+	.string "affect their stats.\p"
+	.string "The stat, if any, that is boosted by a\n"
+	.string "nature is displayed in red on the\l"
+	.string "POKéMON's stats screen, while the\l"
+	.string "stats that is lowered is displayed in\l"
+	.string "blue.$"
