@@ -258,7 +258,7 @@ void GetAiLogicData(void)
 
     memset(AI_DATA, 0, sizeof(struct AiLogicData));
 
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER))
+    if (!(gBattleTypeFlags & BATTLE_TYPE_HAS_AI)
       && !IsWildMonSmart())
         return;
 
