@@ -458,19 +458,15 @@ PetalburgWoods_Text_MiracleSeedExplanation:
 
 PetalburgWoods_Text_TrainerTipsExperience:
 	.string "TRAINER TIPS\p"
-	.string "Any POKéMON that appears even once\n"
-	.string "in a battle is awarded EXP Points.\p"
-	.string "To raise a weak POKéMON, put it at the\n"
-	.string "left of the team list.\p"
-	.string "As soon as a battle starts, switch it\n"
-	.string "out. It will earn EXP Points without\l"
-	.string "being exposed to any harm.$"
+	.string "A POKéMON's experience gain is limited\n"
+	.string "by the skill of the trainer.\p"
+	.string "Defeat powerful opponents to allow\n"
+	.string "your POKéMON to continue growing!$"
 
 PetalburgWoods_Text_TrainerTipsPP:
 	.string "TRAINER TIPS\p"
-	.string "In addition to Hit Points (HP), POKéMON\n"
-	.string "have Power Points (PP) that are used to\l"
-	.string "make moves during battle.\p"
-	.string "If a POKéMON runs out of PP, it must be\n"
-	.string "taken to a POKéMON CENTER.$"
+	.string "A new will be able to train his Pokemon\n"
+	.string "to approximately level 16.\p"
+	.string "Some Pokemon grow faster than others,\n"
+	.string "so this level varies with species.$"
 
