@@ -3365,12 +3365,12 @@ static void Task_InitUnionRoom(u8 taskId)
         }
         break;
     case 4:
-        free(data->spawnPlayer);
-        free(data->playerList);
-        free(data->incomingParentList);
-        free(data->incomingChildList);
+        Free(data->spawnPlayer);
+        Free(data->playerList);
+        Free(data->incomingParentList);
+        Free(data->incomingChildList);
         DestroyTask(data->searchTaskId);
-        free(sWirelessLinkMain.uRoom);
+        Free(sWirelessLinkMain.uRoom);
         LinkRfu_Shutdown();
         DestroyTask(taskId);
         break;
