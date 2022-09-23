@@ -4,7 +4,7 @@
   "layout": "LAYOUT_VICTORY_ROAD_B2F",
   "music": "MUS_VICTORY_ROAD",
   "region_map_section": "MAPSEC_VICTORY_ROAD",
-  "requires_flash": true,
+  "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",
   "allow_cycling": true,

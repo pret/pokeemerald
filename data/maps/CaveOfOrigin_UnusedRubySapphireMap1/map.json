@@ -4,7 +4,7 @@
   "layout": "LAYOUT_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP1",
   "music": "MUS_CAVE_OF_ORIGIN",
   "region_map_section": "MAPSEC_CAVE_OF_ORIGIN",
-  "requires_flash": true,
+  "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",
   "allow_cycling": true,
