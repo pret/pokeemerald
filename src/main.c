@@ -124,8 +124,8 @@ void AgbMain()
         ReadKeys();
 
         if (gSoftResetDisabled == FALSE
-         && (gMain.heldKeysRaw & A_BUTTON)
-         && (gMain.heldKeysRaw & B_START_SELECT) == B_START_SELECT)
+         && JOY_HELD_RAW(A_BUTTON)
+         && JOY_HELD_RAW(B_START_SELECT) == B_START_SELECT)
         {
             rfu_REQ_stopMode();
             rfu_waitREQComplete();
@@ -278,7 +278,7 @@ static void ReadKeys(void)
             gMain.heldKeys |= A_BUTTON;
     }
 
-    if (gMain.newKeys & gMain.watchedKeysMask)
+    if (JOY_NEW(gMain.watchedKeysMask))
         gMain.watchedKeysPressed = TRUE;
 }
 
