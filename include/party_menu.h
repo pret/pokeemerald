@@ -85,6 +85,7 @@ void BattlePyramidChooseMonHeldItems(void);
 void DoBattlePyramidMonsHaveHeldItem(void);
 void IsSelectedMonEgg(void);
 void IsLastMonThatKnowsSurf(void);
+u32 AnotherMonKnowsHM(u16 item);
 void MoveDeleterForgetMove(void);
 void BufferMoveDeleterNicknameAndMove(void);
 void GetNumMovesSelectedMonHas(void);

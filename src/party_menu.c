@@ -92,7 +92,8 @@ enum
     CAN_LEARN_MOVE,
     CANNOT_LEARN_MOVE,
     ALREADY_KNOWS_MOVE,
-    CANNOT_LEARN_MOVE_IS_EGG
+    CANNOT_LEARN_MOVE_IS_EGG,
+    ANOTHER_POKEMON_KNOWS_MOVE
 };
 
 struct PartyMenuBoxInfoRects
@@ -929,6 +930,7 @@ static void DisplayPartyPokemonDataToTeachMove(u8 slot, u16 item, u8 tutor)
     {
     case CANNOT_LEARN_MOVE:
     case CANNOT_LEARN_MOVE_IS_EGG:
+    case ANOTHER_POKEMON_KNOWS_MOVE:
         DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_NOT_ABLE_2);
         break;
     case ALREADY_KNOWS_MOVE:
@@ -1977,7 +1979,13 @@ static u8 CanMonLearnTMTutor(struct Pokemon *mon, u16 item, u8 tutor)
 
     if (MonKnowsMove(mon, move) == TRUE)
         return ALREADY_KNOWS_MOVE;
-    else
+    
+    else if (item >= ITEM_HM01)
+        {
+            if (AnotherMonKnowsHM(item))
+                return ANOTHER_POKEMON_KNOWS_MOVE;
+        }
+    else 
         return CAN_LEARN_MOVE;
 }
 
@@ -4694,6 +4702,9 @@ void ItemUseCB_TMHM(u8 taskId, TaskFunc task)
     case ALREADY_KNOWS_MOVE:
         DisplayLearnMoveMessageAndClose(taskId, gText_PkmnAlreadyKnows);
         return;
+    case ANOTHER_POKEMON_KNOWS_MOVE:
+        DisplayLearnMoveMessageAndClose(taskId, gText_AnotherPkmnAlreadyKnows);
+        return;
     }
 
     if (GiveMoveToMon(mon, move[0]) != MON_HAS_MAX_MOVES)
@@ -6395,4 +6406,25 @@ void IsLastMonThatKnowsSurf(void)
         if (AnyStorageMonWithMove(move) != TRUE)
             gSpecialVar_Result = TRUE;
     }
+}
+
+u32 AnotherMonKnowsHM(u16 item)
+{
+    u32 i, j;
+    u16 move;
+    move = ItemIdToBattleMoveId(item);
+
+        for (i = 0; i < CalculatePlayerPartyCount(); i++)
+        {
+            for (j = 0; j < MAX_MON_MOVES; j++)
+            {
+                if (GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + j) == move)
+                {
+                    return TRUE;    
+                }
+            }
+        }
+        if (AnyStorageMonWithMove(move))
+            return TRUE;
+        return FALSE;
 }
