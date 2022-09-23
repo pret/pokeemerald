@@ -29,6 +29,7 @@
 #include "party_menu.h"
 #include "pokedex.h"
 #include "pokenav.h"
+#include "region_map.h"
 #include "safari_zone.h"
 #include "save.h"
 #include "scanline_effect.h"
@@ -47,6 +48,8 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+extern const u8 EventScript_CantFly[];
+
 // Menu actions
 enum
 {
@@ -62,7 +65,8 @@ enum
     MENU_ACTION_PLAYER_LINK,
     MENU_ACTION_REST_FRONTIER,
     MENU_ACTION_RETIRE_FRONTIER,
-    MENU_ACTION_PYRAMID_BAG
+    MENU_ACTION_PYRAMID_BAG,
+    MENU_ACTION_FLY
 };
 
 // Save status
@@ -99,6 +103,7 @@ static bool8 StartMenuPlayerNameCallback(void);
 static bool8 StartMenuSaveCallback(void);
 static bool8 StartMenuOptionCallback(void);
 static bool8 StartMenuExitCallback(void);
+static bool8 StartMenuFlyCallback(void);
 static bool8 StartMenuSafariZoneRetireCallback(void);
 static bool8 StartMenuLinkModePlayerNameCallback(void);
 static bool8 StartMenuBattlePyramidRetireCallback(void);
@@ -168,7 +173,8 @@ static const struct MenuAction sStartMenuItems[] =
     {gText_MenuPlayer, {.u8_void = StartMenuLinkModePlayerNameCallback}},
     {gText_MenuRest, {.u8_void = StartMenuSaveCallback}},
     {gText_MenuRetire, {.u8_void = StartMenuBattlePyramidRetireCallback}},
-    {gText_MenuBag, {.u8_void = StartMenuBattlePyramidBagCallback}}
+    {gText_MenuBag, {.u8_void = StartMenuBattlePyramidBagCallback}},
+    {gText_MenuFly, {.u8_void = StartMenuFlyCallback}}
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -299,6 +305,11 @@ static void BuildNormalStartMenu(void)
     }
 
     AddStartMenuAction(MENU_ACTION_BAG);
+    
+    if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
+    {
+        AddStartMenuAction(MENU_ACTION_FLY);
+    }
 
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
     {
@@ -308,7 +319,7 @@ static void BuildNormalStartMenu(void)
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
-    AddStartMenuAction(MENU_ACTION_EXIT);
+    //AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
 static void BuildSafariZoneStartMenu(void)
@@ -582,6 +593,17 @@ static bool8 HandleStartMenuInput(void)
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
+        if (sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void == StartMenuFlyCallback)
+        {
+            if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == FALSE)
+            {
+                RemoveExtraStartMenuWindows();
+                HideStartMenu();
+                ScriptContext1_SetupScript(EventScript_CantFly);
+                return TRUE;
+            }
+        }
+
         if (sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void == StartMenuPokedexCallback)
         {
             if (GetNationalPokedexCount(FLAG_GET_SEEN) == 0)
@@ -725,6 +747,21 @@ static bool8 StartMenuExitCallback(void)
     HideStartMenu(); // Hide start menu
 
     return TRUE;
+}
+
+static bool8 StartMenuFlyCallback(void)
+{
+
+    if (!gPaletteFade.active)
+    {
+        PlayRainStoppingSoundEffect();
+        RemoveExtraStartMenuWindows();
+        CleanupOverworldWindowsAndTilemaps();
+        SetMainCallback2(CB2_OpenFlyMap);
+
+        return TRUE;
+    }
+    return FALSE;    
 }
 
 static bool8 StartMenuSafariZoneRetireCallback(void)

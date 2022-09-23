@@ -218,3 +218,12 @@ EventScript_FailSweetScent::
 
 Text_FailSweetScent:
 	.string "Looks like there's nothing here…$"
+
+EventScript_CantFly::
+	lockall
+	msgbox Text_CantFly, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Text_CantFly:
+	.string "FLY can't be used here.$"
