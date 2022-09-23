@@ -39,7 +39,7 @@ void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopP
 void AGBPrintInit(void);
 #define DebugPrintf(pBuf, ...) AGBPrintf(const char *pBuf, ...)
 #define AGB_ASSERT(exp) (exp) ? ((void*)0) : AGBAssert(__FILE__, __LINE__, #exp, 1)
-#define AGB_WARNING(exp) (exp) ? ((void*)0) : NoCashGBAAssert(__FILE__, __LINE__, #exp, 0)
+#define AGB_WARNING(exp) (exp) ? ((void*)0) : AGBAssert(__FILE__, __LINE__, #exp, 0)
 
 // Not used in this configuration
 #define MgbaOpen()
