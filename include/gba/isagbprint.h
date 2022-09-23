@@ -17,8 +17,8 @@ void MgbaClose(void);
 void MgbaPrintf(const char *pBuf, ...);
 void MgbaAssert(const char *pFile, s32 nLine, const char *pExpression, bool32 nStopProgram);
 #define DebugPrintf(pBuf, ...) MgbaPrintf(pBuf, __VA_ARGS__)
-#define AGB_ASSERT(exp) (exp) ? ((void*)0) : MgbaAssert(__FILE__, __LINE__, #exp, 1)
-#define AGB_WARNING(exp) (exp) ? ((void*)0) : MgbaAssert(__FILE__, __LINE__, #exp, 0)
+#define AGB_ASSERT(exp) (exp) ? ((void*)0) : MgbaAssert(__FILE__, __LINE__, #exp, TRUE)
+#define AGB_WARNING(exp) (exp) ? ((void*)0) : MgbaAssert(__FILE__, __LINE__, #exp, FALSE)
 
 // Not used in this configuration
 #define AGBPrintfInit()
@@ -26,8 +26,8 @@ void MgbaAssert(const char *pFile, s32 nLine, const char *pExpression, bool32 nS
 void NoCashGBAPrintf(const char *pBuf, ...)
 void NoCashGBAAssert(const char *pFile, s32 nLine, const char *pExpression, bool32 nStopProgram)
 #define DebugPrintf(pBuf, ...) NoCashGBAPrintf(pBuf, __VA_ARGS__)
-#define AGB_ASSERT(exp) (exp) ? ((void*)0) : NoCashGBAAssert(__FILE__, __LINE__, #exp, 1);
-#define AGB_WARNING(exp) (exp) ? ((void*)0) : NoCashGBAAssert(__FILE__, __LINE__, #exp, 0)
+#define AGB_ASSERT(exp) (exp) ? ((void*)0) : NoCashGBAAssert(__FILE__, __LINE__, #exp, TRUE);
+#define AGB_WARNING(exp) (exp) ? ((void*)0) : NoCashGBAAssert(__FILE__, __LINE__, #exp, FALSE)
 
 // Not used in this configuration
 #define MgbaOpen()
@@ -38,8 +38,8 @@ void AGBPrintf(const char *pBuf, ...);
 void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopProgram);
 void AGBPrintInit(void);
 #define DebugPrintf(pBuf, ...) AGBPrintf(const char *pBuf, ...)
-#define AGB_ASSERT(exp) (exp) ? ((void*)0) : AGBAssert(__FILE__, __LINE__, #exp, 1)
-#define AGB_WARNING(exp) (exp) ? ((void*)0) : AGBAssert(__FILE__, __LINE__, #exp, 0)
+#define AGB_ASSERT(exp) (exp) ? ((void*)0) : AGBAssert(__FILE__, __LINE__, #exp, TRUE)
+#define AGB_WARNING(exp) (exp) ? ((void*)0) : AGBAssert(__FILE__, __LINE__, #exp, FALSE)
 
 // Not used in this configuration
 #define MgbaOpen()
