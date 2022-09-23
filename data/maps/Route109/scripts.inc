@@ -558,7 +558,8 @@ Route109_Text_SeashoreHouseSign:
 
 Route109_Text_TrainerTipsSign:
 	.string "TRAINER TIPS\p"
-	.string "POKéMON at the same level may not\n"
-	.string "always have identical stats.\p"
-	.string "POKéMON raised by TRAINERS are said\n"
-	.string "to grow stronger than wild POKéMON.$"
+	.string "There is a person in Lilycove that can\n"
+	.string "make your POKéMON forget its moves.\p"
+	.string "Due to recent economic conditions, he\n"
+	.string "now charges a HEART SCALE for this\l"
+	.string "privilege.$"

@@ -465,9 +465,12 @@ Route116_Text_TrainerTipsBToStopEvolution:
 
 Route116_Text_TrainerTipsBagHasPockets:
 	.string "TRAINER TIPS\p"
-	.string "Your BAG has several POCKETS.\p"
-	.string "Items you obtain are automatically\n"
-	.string "placed in the appropriate POCKETS.\p"
-	.string "No TRAINER can afford to be without\n"
-	.string "a BAG of their own.$"
+	.string "In an effort to improve diversity in\n"
+	.string "techniques, recent POKéMON League\l"
+	.string "regulations only allow for one POKéMON\l"
+	.string "in a trainer's possession to learn a\l"
+	.string "given HM.\p"
+	.string "If a POKéMON with an HM move is\n"
+	.string "released, that HM is allowed to be\l"
+	.string "taught again.$"
 
