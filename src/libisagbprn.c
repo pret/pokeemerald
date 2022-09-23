@@ -211,14 +211,6 @@ void NoCashGBAAssert(const char *pFile, s32 nLine, const char *pExpression, bool
 
 // mgba print functions
 #if (LOG_HANDLER == LOG_HANDLER_MGBA_PRINT)
-#define MGBA_PRINTF_BUFFER_SIZE (4096)
-
-#define MGBA_LOG_FATAL  (0)
-#define MGBA_LOG_ERROR  (1)
-#define MGBA_LOG_WARN   (2)
-#define MGBA_LOG_INFO   (3)
-#define MGBA_LOG_DEBUG  (4)
-
 #define MGBA_REG_DEBUG_MAX (256)
 
 bool32 MgbaOpen(void)
@@ -232,7 +224,7 @@ void MgbaClose(void)
     *REG_DEBUG_ENABLE = 0;
 }
 
-static void MgbaPrintfBounded(s32 level, const char* ptr, ...)
+void MgbaPrintf(s32 level, const char* ptr, ...)
 {
     va_list args;
 
@@ -249,52 +241,16 @@ static void MgbaPrintfBounded(s32 level, const char* ptr, ...)
     *REG_DEBUG_FLAGS = level | 0x100;
 }
 
-void MgbaPrintf(const char* ptr, ...)
-{
-    va_list args;
-    u32 offset = 0;
-    u32 n = 0;
-    u32 i;
-    char *buffer = Alloc(MGBA_PRINTF_BUFFER_SIZE);
-    AGB_ASSERT(buffer != NULL);
-
-    va_start(args, ptr);
-    #if (PRETTY_PRINT_HANDLER == PRETTY_PRINT_MINI_PRINTF)
-    n = mini_vsnprintf(buffer, MGBA_PRINTF_BUFFER_SIZE, ptr, args);
-    #elif (PRETTY_PRINT_HANDLER == PRETTY_PRINT_LIBC)
-    n = vsnprintf(buffer, MGBA_PRINTF_BUFFER_SIZE, ptr, args);
-    #else
-    #error "unspecified pretty printing handler."
-    #endif
-    va_end(args);
-
-    AGB_ASSERT(n < MGBA_PRINTF_BUFFER_SIZE);
-
-    do
-    {
-        for (i = 0; i < MGBA_REG_DEBUG_MAX; ++i)
-        {
-            REG_DEBUG_STRING[i] = buffer[offset + i];
-            if (buffer[offset + i] == 0)
-                break;
-        }
-        offset += i;
-        *REG_DEBUG_FLAGS = MGBA_LOG_INFO | 0x100;
-    } while ((i == MGBA_REG_DEBUG_MAX) && (buffer[offset] != '\0'));
-
-    Free(buffer);
-}
-
 void MgbaAssert(const char *pFile, s32 nLine, const char *pExpression, bool32 nStopProgram)
 {
     if (nStopProgram)
     {
-        MgbaPrintfBounded(MGBA_LOG_ERROR, "ASSERTION FAILED  FILE=[%s] LINE=[%d]  EXP=[%s]", pFile, nLine, pExpression);
+        MgbaPrintf(MGBA_LOG_ERROR, "ASSERTION FAILED  FILE=[%s] LINE=[%d]  EXP=[%s]", pFile, nLine, pExpression);
         asm(".hword 0xEFFF");
     }
     else
     {
-        MgbaPrintfBounded(MGBA_LOG_WARN, "WARING FILE=[%s] LINE=[%d]  EXP=[%s]", pFile, nLine, pExpression);
+        MgbaPrintf(MGBA_LOG_WARN, "WARING FILE=[%s] LINE=[%d]  EXP=[%s]", pFile, nLine, pExpression);
     }
 }
 #endif
