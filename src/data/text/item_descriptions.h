@@ -1374,7 +1374,7 @@ static const u8 sHM01Desc[] = _(
 static const u8 sHM02Desc[] = _(
     "Flies up on the\n"
     "first turn, then\n"
-    "attacks next turn.");
+    "strikes next turn.");
 
 static const u8 sHM03Desc[] = _(
     "Creates a huge\n"
@@ -1392,17 +1392,17 @@ static const u8 sHM05Desc[] = _(
     "raises special.");
 
 static const u8 sHM06Desc[] = _(
-    "A rock-crushingly\n"
-    "tough attack that\n"
-    "may lower DEFENSE.");
+    "A rock crushing attack\n"
+    "that often lowers\n"
+    "DEFENSE.");
 
 static const u8 sHM07Desc[] = _(
-    "Attacks the foe.\n"
+    "Charges the foe.\n"
     "May cause the\n"
     "target to flinch.");
 
 static const u8 sHM08Desc[] = _(
-    "Dives evilly\n"
+    "Dives in the shadows\n"
     "the 1st turn, then\n"
     "attacks next turn.");
 

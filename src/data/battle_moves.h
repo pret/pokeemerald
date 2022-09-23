@@ -913,7 +913,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_STRENGTH] =
     {
         .effect = EFFECT_HIT,
-        .power = 95,
+        .power = 80,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 15,
@@ -3240,11 +3240,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_ROCK_SMASH] =
     {
         .effect = EFFECT_DEFENSE_DOWN_HIT,
-        .power = 70,
+        .power = 60,
         .type = TYPE_FIGHTING,
         .accuracy = 100,
         .pp = 15,
-        .secondaryEffectChance = 30,
+        .secondaryEffectChance = 50,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,

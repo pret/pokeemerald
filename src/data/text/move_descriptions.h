@@ -75,7 +75,7 @@ static const u8 sWhirlwindDescription[] = _(
 
 static const u8 sFlyDescription[] = _(
     "Flies up on the first turn,\n"
-    "then strikes the next turn.");
+    "then strikes next turn.");
 
 static const u8 sBindDescription[] = _(
     "Binds and squeezes the foe\n"
@@ -995,7 +995,7 @@ static const u8 sFutureSightDescription[] = _(
 
 static const u8 sRockSmashDescription[] = _(
     "A rock-crushing attack\n"
-    "that may lower DEFENSE.");
+    "that often lowers DEFENSE.");
 
 static const u8 sWhirlpoolDescription[] = _(
     "Traps and hurts the foe in\n"
@@ -1162,8 +1162,8 @@ static const u8 sSecretPowerDescription[] = _(
     "that vary by location.");
 
 static const u8 sDiveDescription[] = _(
-    "Dives evilly the first\n"
-    "turn and strikes next turn.");
+    "Dives in the shadows then\n"
+    "strikes next turn.");
 
 static const u8 sArmThrustDescription[] = _(
     "Straight-arm punches that\n"
