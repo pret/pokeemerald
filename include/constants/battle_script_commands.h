@@ -243,6 +243,8 @@
 #define VARIOUS_SWAP_SIDE_STATUSES                  152
 #define VARIOUS_SET_Z_EFFECT                        153
 #define VARIOUS_TRY_SYMBIOSIS                       154
+#define VARIOUS_CAN_TELEPORT                        155
+#define VARIOUS_GET_BATTLER_SIDE                    156
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

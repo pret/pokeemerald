@@ -1980,6 +1980,14 @@
 	various BS_ATTACKER, VARIOUS_SWAP_SIDE_STATUSES
 	.endm
 
+	.macro canteleport battler:req
+	various \battler, VARIOUS_CAN_TELEPORT
+	.endm
+
+	.macro getbattlerside battler:req
+	various \battler, VARIOUS_GET_BATTLER_SIDE
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER, \stat | \stages << 3 | \down << 7

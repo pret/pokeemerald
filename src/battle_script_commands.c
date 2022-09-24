@@ -8021,6 +8021,38 @@ static bool32 CourtChangeSwapSideStatuses(void)
     SWAP(sideTimerPlayer->stickyWebBattlerSide, sideTimerOpp->stickyWebBattlerSide, temp);
 }
 
+static bool32 CanTeleport(u8 battlerId)
+{
+    struct Pokemon* party = NULL;
+    u32 species, count, i;
+
+    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+        party = gPlayerParty;
+    else
+        party = gEnemyParty;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        species = GetMonData(&party[i], MON_DATA_SPECIES2);
+        if (species != SPECIES_NONE && species != SPECIES_EGG && GetMonData(&party[i], MON_DATA_HP) != 0)
+            count++;
+    }
+
+    switch (GetBattlerSide(battlerId))
+    {
+    case B_SIDE_OPPONENT:
+        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            return FALSE;
+        break;
+    case B_SIDE_PLAYER:
+        if (count == 1 || (count <= 2 && gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+            return FALSE;
+        break;
+    }
+
+    return TRUE;
+}
+
 static void Cmd_various(void)
 {
     struct Pokemon *mon;
@@ -9856,6 +9888,15 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = BattleScript_SymbiosisActivates;
             return;
         }
+        break;
+    case VARIOUS_CAN_TELEPORT:
+        gBattleCommunication[0] = CanTeleport(gActiveBattler);
+        break;
+    case VARIOUS_GET_BATTLER_SIDE:
+        if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
+            gBattleCommunication[0] = B_SIDE_PLAYER;
+        else
+            gBattleCommunication[0] = B_SIDE_OPPONENT;
         break;
     } // End of switch (gBattlescriptCurrInstr[2])
 
