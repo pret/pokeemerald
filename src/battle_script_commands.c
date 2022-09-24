@@ -8152,8 +8152,7 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 8;
         return;
     case VARIOUS_TRACE_ABILITY:
-        gBattleMons[gActiveBattler].ability = gBattleStruct->tracedAbility[gActiveBattler];
-        RecordAbilityBattle(gActiveBattler, gBattleMons[gActiveBattler].ability);
+        gBattleMons[gActiveBattler].ability = gBattleStruct->overwrittenAbilities[gActiveBattler] = gBattleStruct->tracedAbility[gActiveBattler];
         break;
     case VARIOUS_TRY_ILLUSION_OFF:
         if (GetIllusionMonPtr(gActiveBattler) != NULL)
@@ -8628,7 +8627,7 @@ static void Cmd_various(void)
             if (gBattleMons[gBattlerTarget].ability == ABILITY_NEUTRALIZING_GAS)
                 gSpecialStatuses[gBattlerTarget].neutralizingGasRemoved = TRUE;
 
-            gBattleMons[gBattlerTarget].ability = ABILITY_SIMPLE;
+            gBattleMons[gBattlerTarget].ability = gBattleStruct->overwrittenAbilities[gBattlerTarget] = ABILITY_SIMPLE;
             gBattlescriptCurrInstr += 7;
         }
         return;
@@ -8646,7 +8645,7 @@ static void Cmd_various(void)
         }
         else
         {
-            gBattleMons[gBattlerTarget].ability = gBattleMons[gBattlerAttacker].ability;
+            gBattleMons[gBattlerTarget].ability = gBattleStruct->overwrittenAbilities[gBattlerTarget] = gBattleMons[gBattlerAttacker].ability;
             gBattlescriptCurrInstr += 7;
         }
         return;
@@ -11458,7 +11457,8 @@ static void Cmd_transformdataexecution(void)
 
         for (i = 0; i < offsetof(struct BattlePokemon, pp); i++)
             battleMonAttacker[i] = battleMonTarget[i];
-
+        
+        gBattleStruct->overwrittenAbilities[gBattlerAttacker] = GetBattlerAbility(gBattlerTarget);
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (gBattleMoves[gBattleMons[gBattlerAttacker].moves[i]].pp < 5)
@@ -12982,7 +12982,7 @@ static void Cmd_trycopyability(void)
     else
     {
         gBattleScripting.abilityPopupOverwrite = gBattleMons[gBattlerAttacker].ability;
-        gBattleMons[gBattlerAttacker].ability = defAbility;
+        gBattleMons[gBattlerAttacker].ability = gBattleStruct->overwrittenAbilities[gBattlerAttacker] = defAbility;
         gLastUsedAbility = defAbility;
         gBattlescriptCurrInstr += 5;
     }
@@ -13148,8 +13148,8 @@ static void Cmd_tryswapabilities(void)
     else
     {
         u16 abilityAtk = gBattleMons[gBattlerAttacker].ability;
-        gBattleMons[gBattlerAttacker].ability = gBattleMons[gBattlerTarget].ability;
-        gBattleMons[gBattlerTarget].ability = abilityAtk;
+        gBattleMons[gBattlerAttacker].ability = gBattleStruct->overwrittenAbilities[gBattlerAttacker] = gBattleMons[gBattlerTarget].ability;
+        gBattleMons[gBattlerTarget].ability = gBattleStruct->overwrittenAbilities[gBattlerTarget] = abilityAtk;
 
         gBattlescriptCurrInstr += 5;
     }
@@ -14527,7 +14527,7 @@ static void Cmd_tryworryseed(void)
     }
     else
     {
-        gBattleMons[gBattlerTarget].ability = ABILITY_INSOMNIA;
+        gBattleMons[gBattlerTarget].ability = gBattleStruct->overwrittenAbilities[gBattlerTarget] = ABILITY_INSOMNIA;
         gBattlescriptCurrInstr += 5;
     }
 }
