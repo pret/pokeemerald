@@ -54,6 +54,7 @@ static void ZMoveSelectionDisplayPower(u16 move, u16 zMove);
 static void ShowZMoveTriggerSprite(void);
 static bool32 AreStatsMaxed(u8 battlerId, u8 n);
 static u8 GetZMoveScore(u8 battlerAtk, u8 battlerDef, u16 baseMove, u16 zMove);
+static void ZMoveSelectionDisplayMoveType(u16 zMove);
 
 // Const Data
 static const struct SignatureZMove sSignatureZMoves[] =
@@ -522,6 +523,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove)
         BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_1);
 
         ZMoveSelectionDisplayPpNumber();
+        ZMoveSelectionDisplayMoveType(zmove);
         MoveSelectionCreateCursorAt(0, 0);
         return TRUE;
     }
@@ -559,6 +561,23 @@ static void ZMoveSelectionDisplayPpNumber(void)
     *(txtPtr)++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(txtPtr, 1, STR_CONV_MODE_RIGHT_ALIGN, 2);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
+}
+
+static void ZMoveSelectionDisplayMoveType(u16 zMove)
+{
+    u8 *txtPtr;
+    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[gActiveBattler][4]);
+    u8 zMoveType;
+
+    GET_MOVE_TYPE(zMove, zMoveType);
+
+    txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
+    *(txtPtr)++ = EXT_CTRL_CODE_BEGIN;
+    *(txtPtr)++ = EXT_CTRL_CODE_FONT;
+    *(txtPtr)++ = FONT_NORMAL;
+
+    StringCopy(txtPtr, gTypeNames[zMoveType]);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
 }
 
 const u8 *GetZMoveName(u16 move)
