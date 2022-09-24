@@ -230,8 +230,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route117_EventScript_ItemRevive",
-      "flag": "FLAG_ITEM_ROUTE_117_REVIVE"
+      "script": "Route117_EventScript_ItemStardust",
+      "flag": "FLAG_ITEM_ROUTE_117_STARDUST"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_RUNNING_TRIATHLETE_F",

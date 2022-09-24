@@ -594,8 +594,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_ItemRevive",
-      "flag": "FLAG_ITEM_ROUTE_120_REVIVE"
+      "script": "Route120_EventScript_ItemStardust",
+      "flag": "FLAG_ITEM_ROUTE_120_STARDUST"
     }
   ],
   "warp_events": [
@@ -828,8 +828,8 @@
       "x": 31,
       "y": 11,
       "elevation": 3,
-      "item": "ITEM_REVIVE",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_REVIVE"
+      "item": "ITEM_STARDUST",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_STARDUST"
     },
     {
       "type": "hidden_item",

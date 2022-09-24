@@ -281,7 +281,6 @@ TrainerHill_Entrance_Pokemart_Expanded:
 	.2byte ITEM_MAX_POTION
 	.2byte ITEM_FULL_RESTORE
 	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_REVIVE
 	.2byte ITEM_X_SPEED
 	.2byte ITEM_X_SPECIAL
 	.2byte ITEM_X_ATTACK

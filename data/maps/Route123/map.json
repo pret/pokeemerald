@@ -809,8 +809,8 @@
       "x": 12,
       "y": 1,
       "elevation": 3,
-      "item": "ITEM_REVIVE",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_123_REVIVE"
+      "item": "ITEM_STARDUST",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_123_STARDUST"
     },
     {
       "type": "hidden_item",

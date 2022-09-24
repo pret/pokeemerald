@@ -150,8 +150,8 @@ Route117_EventScript_ItemGreatBall::
 	finditem ITEM_GREAT_BALL
 	end
 
-Route117_EventScript_ItemRevive::
-	finditem ITEM_REVIVE
+Route117_EventScript_ItemStardust::
+	finditem ITEM_STARDUST
 	end
 
 Route118_EventScript_ItemHyperPotion::
@@ -206,16 +206,16 @@ Route120_EventScript_ItemNestBall::
 	finditem ITEM_NEST_BALL
 	end
 
-Route120_EventScript_ItemRevive::
-	finditem ITEM_REVIVE
+Route120_EventScript_ItemStardust::
+	finditem ITEM_STARDUST
 	end
 
 Route121_EventScript_ItemCarbos::
 	finditem ITEM_CARBOS
 	end
 
-Route121_EventScript_ItemRevive::
-	finditem ITEM_REVIVE
+Route121_EventScript_ItemStardust::
+	finditem ITEM_STARDUST
 	end
 
 Route121_EventScript_ItemZinc::
@@ -290,8 +290,8 @@ Route133_EventScript_ItemStarPiece::
 	finditem ITEM_STAR_PIECE
 	end
 
-Route133_EventScript_ItemMaxRevive::
-	finditem ITEM_MAX_REVIVE
+Route133_EventScript_ItemStardust::
+	finditem ITEM_STARDUST
 	end
 
 Route134_EventScript_ItemCarbos::
@@ -302,8 +302,8 @@ Route134_EventScript_ItemStarPiece::
 	finditem ITEM_STAR_PIECE
 	end
 
-PetalburgCity_EventScript_ItemMaxRevive::
-	finditem ITEM_MAX_REVIVE
+PetalburgCity_EventScript_ItemStardust::
+	finditem ITEM_STARDUST
 	end
 
 PetalburgCity_EventScript_ItemEther::
@@ -434,8 +434,8 @@ AbandonedShip_Room_B1F_EventScript_ItemTM13::
 	finditem ITEM_TM13
 	end
 
-AbandonedShip_Rooms2_1F_EventScript_ItemRevive::
-	finditem ITEM_REVIVE
+AbandonedShip_Rooms2_1F_EventScript_ItemStardust::
+	finditem ITEM_STARDUST
 	end
 
 AbandonedShip_CaptainsOffice_EventScript_ItemStorageKey::
@@ -470,8 +470,8 @@ SafariZone_North_EventScript_ItemCalcium::
 	finditem ITEM_CALCIUM
 	end
 
-SafariZone_Southwest_EventScript_ItemMaxRevive::
-	finditem ITEM_MAX_REVIVE
+SafariZone_Southwest_EventScript_ItemStardust::
+	finditem ITEM_STARDUST
 	end
 
 SafariZone_Northeast_EventScript_ItemNugget::
@@ -650,8 +650,8 @@ MagmaHideout_3F_2R_EventScript_ItemPPMax::
 	finditem ITEM_PP_MAX
 	end
 
-MagmaHideout_4F_EventScript_ItemMaxRevive::
-	finditem ITEM_MAX_REVIVE
+MagmaHideout_4F_EventScript_ItemStardust::
+	finditem ITEM_STARDUST
 	end
 
 MagmaHideout_3F_3R_EventScript_ItemEscapeRope::

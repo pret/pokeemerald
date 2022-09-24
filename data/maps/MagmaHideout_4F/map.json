@@ -115,8 +115,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MagmaHideout_4F_EventScript_ItemMaxRevive",
-      "flag": "FLAG_ITEM_MAGMA_HIDEOUT_4F_MAX_REVIVE"
+      "script": "MagmaHideout_4F_EventScript_ItemStardust",
+      "flag": "FLAG_ITEM_MAGMA_HIDEOUT_4F_STARDUST"
     }
   ],
   "warp_events": [
