@@ -953,9 +953,22 @@ void FieldShowRegionMap(void)
     SetMainCallback2(CB2_FieldShowRegionMap);
 }
 
+static bool8 IsPlayerInFrontOfPC(void)
+{
+    u16 x, y;
+    u16 tileInFront;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    tileInFront = MapGridGetMetatileIdAt(x, y);
+
+    return (tileInFront == METATILE_BrendansMaysHouse_BrendanPC_Off
+         || tileInFront == METATILE_BrendansMaysHouse_MayPC_Off
+         || tileInFront == METATILE_Building_PC_Off);
+}
+
 void DoPCTurnOnEffect(void)
 {
-    if (FuncIsActiveTask(Task_PCTurnOnEffect) != TRUE)
+    if (FuncIsActiveTask(Task_PCTurnOnEffect) != TRUE && IsPlayerInFrontOfPC() == TRUE)
     {
         u8 taskId = CreateTask(Task_PCTurnOnEffect, 8);
         gTasks[taskId].data[0] = 0;
@@ -1041,29 +1054,33 @@ static void PCTurnOffEffect(void)
     s8 dy = 0;
     u16 tileId = 0;
     u8 playerDirection = GetPlayerFacingDirection();
-    switch (playerDirection)
+
+    if (IsPlayerInFrontOfPC() == TRUE)
     {
-    case DIR_NORTH:
-        dx = 0;
-        dy = -1;
-        break;
-    case DIR_WEST:
-        dx = -1;
-        dy = -1;
-        break;
-    case DIR_EAST:
-        dx = 1;
-        dy = -1;
-        break;
+        switch (playerDirection)
+        {
+        case DIR_NORTH:
+            dx = 0;
+            dy = -1;
+            break;
+        case DIR_WEST:
+            dx = -1;
+            dy = -1;
+            break;
+        case DIR_EAST:
+            dx = 1;
+            dy = -1;
+            break;
+        }
+        if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
+            tileId = METATILE_Building_PC_Off;
+        else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
+            tileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
+        else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
+            tileId = METATILE_BrendansMaysHouse_MayPC_Off;
+        MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, tileId | MAPGRID_COLLISION_MASK);
+        DrawWholeMapView();
     }
-    if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
-        tileId = METATILE_Building_PC_Off;
-    else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
-        tileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
-    else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
-        tileId = METATILE_BrendansMaysHouse_MayPC_Off;
-    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, tileId | MAPGRID_COLLISION_MASK);
-    DrawWholeMapView();
 }
 
 void DoLotteryCornerComputerEffect(void)
