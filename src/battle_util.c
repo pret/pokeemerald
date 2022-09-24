@@ -2153,6 +2153,7 @@ enum
     ENDTURN_ION_DELUGE,
     ENDTURN_FAIRY_LOCK,
     ENDTURN_RETALIATE,
+    ENDTURN_WEATHER_FORM,
     ENDTURN_STATUS_HEAL,
     ENDTURN_FIELD_COUNT,
 };
@@ -2599,6 +2600,10 @@ u8 DoFieldEndTurnEffects(void)
                 gSideTimers[B_SIDE_PLAYER].retaliateTimer--;
             if (gSideTimers[B_SIDE_OPPONENT].retaliateTimer > 0)
                 gSideTimers[B_SIDE_OPPONENT].retaliateTimer--;
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_WEATHER_FORM:
+            AbilityBattleEffects(ABILITYEFFECT_WEATHER_FORM, 0, 0, 0, 0);
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_STATUS_HEAL:
@@ -4020,21 +4025,48 @@ u8 TryWeatherFormChange(u8 battler)
     bool32 weatherEffect = WEATHER_HAS_EFFECT;
     u16 holdEffect = GetBattlerHoldEffect(battler, TRUE);
 
-    if (gBattleMons[battler].species == SPECIES_CASTFORM)
+    switch (gBattleMons[battler].species)
     {
+    case SPECIES_CASTFORM:
+/*  Placeholder
+    case SPECIES_CASTFORM_RAINY:
+    case SPECIES_CASTFORM_SNOWY:
+    case SPECIES_CASTFORM_SUNNY:*/
+#if B_WEATHER_FORMS >= GEN_5
+        if (gBattleMons[battler].hp == 0)
+        {
+            ret = 0; // No change
+        }
+        else if (GetBattlerAbility(battler) != ABILITY_FORECAST || !weatherEffect)
+        {
+            if (!IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL))
+            {
+                SET_BATTLER_TYPE(battler, TYPE_NORMAL);
+                ret = CASTFORM_NORMAL + 1;
+            }
+            else
+            {
+                ret = 0; // No change
+            }
+        }
+#else
         if (GetBattlerAbility(battler) != ABILITY_FORECAST || gBattleMons[battler].hp == 0)
         {
             ret = 0; // No change
         }
-        else if (!weatherEffect && !IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL))
-        {
-            SET_BATTLER_TYPE(battler, TYPE_NORMAL);
-            ret = CASTFORM_NORMAL + 1;
-        }
         else if (!weatherEffect)
         {
-            ret = 0; // No change
+            if (!IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL))
+            {
+                SET_BATTLER_TYPE(battler, TYPE_NORMAL);
+                ret = CASTFORM_NORMAL + 1;
+            }
+            else
+            {
+                ret = 0; // No change
+            }
         }
+#endif
         else if (holdEffect == HOLD_EFFECT_UTILITY_UMBRELLA || (!(gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SUN | B_WEATHER_HAIL)) && !IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL)))
         {
             SET_BATTLER_TYPE(battler, TYPE_NORMAL);
@@ -4055,15 +4087,23 @@ u8 TryWeatherFormChange(u8 battler)
             SET_BATTLER_TYPE(battler, TYPE_ICE);
             ret = CASTFORM_ICE + 1;
         }
-    }
-    else if (gBattleMons[battler].species == SPECIES_CHERRIM)
-    {
-        if (GetBattlerAbility(battler) != ABILITY_FLOWER_GIFT || gBattleMons[battler].hp == 0)
+        break;
+    case SPECIES_CHERRIM:
+//  case SPECIES_CHERRIM_SUNSHINE:
+        if (gBattleMons[battler].hp == 0)
             ret = 0; // No change
+#if B_WEATHER_FORMS >= GEN_5
+        if (GetBattlerAbility(battler) != ABILITY_FLOWER_GIFT)
+            if (gBattleMonForms[battler] != 0)
+                ret = CHERRIM_OVERCAST + 1;
+            else
+                ret = 0; // No change
+#endif
         else if (gBattleMonForms[battler] == 0 && weatherEffect && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && gBattleWeather & B_WEATHER_SUN)
             ret = CHERRIM_SUNSHINE + 1;
         else if (gBattleMonForms[battler] != 0 && (!weatherEffect || holdEffect == HOLD_EFFECT_UTILITY_UMBRELLA || !(gBattleWeather & B_WEATHER_SUN)))
             ret = CHERRIM_OVERCAST + 1;
+        break;
     }
 
     return ret;
@@ -4665,11 +4705,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_FORECAST:
+#if B_WEATHER_FORMS >= GEN_5
         case ABILITY_FLOWER_GIFT:
+#else
+        TRY_WEATHER_FORM:
+#endif
             effect = TryWeatherFormChange(battler);
             if (effect != 0)
             {
-                BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
+                BattleScriptPushCursorAndCallback(BattleScript_WeatherFormChange);
                 *(&gBattleStruct->formToChangeInto) = effect - 1;
             }
             break;
@@ -4700,8 +4744,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_INTREPID_SWORD:
-            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            if (!gSpecialStatuses[battler].switchInAbilityDone && CompareStat(battler, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN))
             {
+                gBattlerAttacker = battler;
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 SET_STATCHANGER(STAT_ATK, 1, FALSE);
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerAbilityStatRaiseOnSwitchIn);
@@ -4709,8 +4754,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_DAUNTLESS_SHIELD:
-            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            if (!gSpecialStatuses[battler].switchInAbilityDone && CompareStat(battler, STAT_DEF, MAX_STAT_STAGE, CMP_LESS_THAN))
             {
+                gBattlerAttacker = battler;
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 SET_STATCHANGER(STAT_DEF, 1, FALSE);
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerAbilityStatRaiseOnSwitchIn);
@@ -4745,6 +4791,12 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
+#if B_WEATHER_FORMS < GEN_5
+        default:
+            if (gBattleMons[battler].species == SPECIES_CHERRIM)
+                goto TRY_WEATHER_FORM;
+            break;
+#endif
         }
         break;
     case ABILITYEFFECT_ENDTURN: // 1
@@ -5242,7 +5294,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 case ABILITY_STANCE_CHANGE:
                     break;
                 default:
-                    gLastUsedAbility = gBattleMons[gBattlerAttacker].ability = ABILITY_MUMMY;
+                    gLastUsedAbility = gBattleMons[gBattlerAttacker].ability = gBattleStruct->overwrittenAbilities[gBattlerAttacker] = ABILITY_MUMMY;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_MummyActivates;
                     effect++;
@@ -5274,10 +5326,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                     break;
                 default:
                     gLastUsedAbility = gBattleMons[gBattlerAttacker].ability;
-                    gBattleMons[gBattlerAttacker].ability = gBattleMons[gBattlerTarget].ability;
-                    gBattleMons[gBattlerTarget].ability = gLastUsedAbility;
-                    RecordAbilityBattle(gBattlerAttacker, gBattleMons[gBattlerAttacker].ability);
-                    RecordAbilityBattle(gBattlerTarget, gBattleMons[gBattlerTarget].ability);
+                    gBattleMons[gBattlerAttacker].ability = gBattleStruct->overwrittenAbilities[gBattlerAttacker] = gBattleMons[gBattlerTarget].ability;
+                    gBattleMons[gBattlerTarget].ability = gBattleStruct->overwrittenAbilities[gBattlerTarget] = gLastUsedAbility;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_WanderingSpiritActivates;
                     effect++;
@@ -5757,20 +5807,28 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
         }
         break;
-    case ABILITYEFFECT_FORECAST: // 6
+    case ABILITYEFFECT_WEATHER_FORM: // 6
         for (battler = 0; battler < gBattlersCount; battler++)
         {
-            u16 battlerAbility = GetBattlerAbility(battler);
-            if (battlerAbility == ABILITY_FORECAST || battlerAbility == ABILITY_FLOWER_GIFT)
+            switch (gBattleMons[battler].species)
             {
+            case SPECIES_CASTFORM:
+            case SPECIES_CHERRIM:
+#ifdef POKEMON_EXPANSION
+            case SPECIES_CASTFORM_RAINY:
+            case SPECIES_CASTFORM_SNOWY:
+            case SPECIES_CASTFORM_SUNNY:
+            case SPECIES_CHERRIM_SUNSHINE:
+#endif
                 effect = TryWeatherFormChange(battler);
                 if (effect != 0)
                 {
-                    BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
+                    BattleScriptPushCursorAndCallback(BattleScript_WeatherFormChange);
                     gBattleScripting.battler = battler;
                     gBattleStruct->formToChangeInto = effect - 1;
                     return effect;
                 }
+                break;
             }
         }
         break;
@@ -9634,7 +9692,7 @@ void UndoMegaEvolution(u32 monId)
 
 void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
 {
-    u32 i, currSpecies;
+    u32 i, currSpecies, targetSpecies;
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
     static const u16 species[][3] =
     {
@@ -9666,6 +9724,16 @@ void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
             SetMonData(&party[monId], MON_DATA_SPECIES, &species[i][1]);
             CalculateMonStats(&party[monId]);
             break;
+        }
+    }
+    if (!isSwitchingOut)
+    {
+        targetSpecies = GetFormChangeTargetSpecies(&party[monId], FORM_BATTLE_END, 0);
+        if (targetSpecies != SPECIES_NONE)
+        {
+            SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
+            CalculateMonStats(&party[monId]);
+            TryToSetBattleFormChangeMoves(&party[monId]);
         }
     }
 }

@@ -1186,11 +1186,11 @@
 	.byte 0xe5
 	.endm
 
-	.macro docastformchangeanimation
+	.macro doweatherformchangeanimation
 	.byte 0xe6
 	.endm
 
-	.macro trycastformdatachange
+	.macro tryweatherformdatachange
 	.byte 0xe7
 	.endm
 
@@ -1788,7 +1788,7 @@
 	.macro setzeffect
 	various BS_ATTACKER, VARIOUS_SET_Z_EFFECT
 	.endm
-	
+
 	.macro consumeberry battler:req, restoreItem=FALSE
 	various \battler, VARIOUS_CONSUME_BERRY
 	.byte \restoreItem
@@ -2139,4 +2139,9 @@
 	@ Accounts for if the target of Sky Drop was in confuse_lock when the attacker falls asleep due to Yawn.
 	.macro skydropyawn
 	various 0, VARIOUS_SKY_DROP_YAWN
+	.endm
+
+	@ Used by effects that may proc Symbiosis but do not call removeitem.
+	.macro trysymbiosis
+	various BS_ATTACKER, VARIOUS_TRY_SYMBIOSIS
 	.endm
