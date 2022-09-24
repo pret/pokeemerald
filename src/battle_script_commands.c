@@ -5777,12 +5777,15 @@ static void Cmd_moveend(void)
         case MOVEEND_SYMBIOSIS:
             for (i = 0; i < gBattlersCount; i++)
             {
-                if (((B_SYMBIOSIS_GEMS >= GEN_7 && gSpecialStatuses[i].gemBoost) || gSpecialStatuses[i].berryReduced)
-                    && SYMBIOSIS_CHECK(i, i ^ BIT_FLANK))
+                if ((gSpecialStatuses[i].berryReduced
+                #if B_SYMBIOSIS_GEMS >= GEN_7
+                    || gSpecialStatuses[i].gemBoost
+                #endif
+                    ) && SYMBIOSIS_CHECK(i, BATTLE_PARTNER(i)))
                 {
-                    BestowItem(i ^ BIT_FLANK, i);
-                    gLastUsedAbility = gBattleMons[i ^ BIT_FLANK].ability;
-                    gBattleScripting.battler = gBattlerAbility = i ^ BIT_FLANK;
+                    BestowItem(BATTLE_PARTNER(i), i);
+                    gLastUsedAbility = gBattleMons[BATTLE_PARTNER(i)].ability;
+                    gBattleScripting.battler = gBattlerAbility = BATTLE_PARTNER(i);
                     gBattlerAttacker = i;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_SymbiosisActivates;
@@ -7290,20 +7293,20 @@ static void BestowItem(u32 battlerAtk, u32 battlerDef)
 // Called by Cmd_removeitem. itemId represents the item that was removed, not being given.
 static bool32 TrySymbiosis(u32 battler, u32 itemId)
 {
-    u32 ally = battler ^ BIT_FLANK;
-
     if (!gBattleStruct->itemStolen[gBattlerPartyIndexes[battler]].stolen
         && gBattleStruct->changedItems[battler] == ITEM_NONE
         && GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_EJECT_BUTTON
         && GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_EJECT_PACK
-        && !(B_SYMBIOSIS_GEMS >= GEN_7 && gSpecialStatuses[battler].gemBoost)
+    #if B_SYMBIOSIS_GEMS >= GEN_7
+        && !(gSpecialStatuses[battler].gemBoost)
+    #endif
         && gCurrentMove != MOVE_FLING //Fling and damage-reducing berries are handled separately.
         && !gSpecialStatuses[battler].berryReduced
-        && SYMBIOSIS_CHECK(battler, ally))
+        && SYMBIOSIS_CHECK(battler, BATTLE_PARTNER(battler)))
     {
-        BestowItem(ally, battler);
-        gLastUsedAbility = gBattleMons[ally].ability;
-        gBattleScripting.battler = gBattlerAbility = ally;
+        BestowItem(BATTLE_PARTNER(battler), battler);
+        gLastUsedAbility = gBattleMons[BATTLE_PARTNER(battler)].ability;
+        gBattleScripting.battler = gBattlerAbility = BATTLE_PARTNER(battler);
         gBattlerAttacker = battler;
         BattleScriptPush(gBattlescriptCurrInstr + 2);
         gBattlescriptCurrInstr = BattleScript_SymbiosisActivates;
@@ -9844,11 +9847,11 @@ static void Cmd_various(void)
         CourtChangeSwapSideStatuses();
         break;
     case VARIOUS_TRY_SYMBIOSIS: //called by Bestow, Fling, and Bug Bite, which don't work with Cmd_removeitem.
-        if (SYMBIOSIS_CHECK(gActiveBattler, gActiveBattler ^ BIT_FLANK))
+        if (SYMBIOSIS_CHECK(gActiveBattler, BATTLE_PARTNER(gActiveBattler)))
         {
-            BestowItem(gActiveBattler ^ BIT_FLANK, gActiveBattler);
-            gLastUsedAbility = gBattleMons[gActiveBattler ^ BIT_FLANK].ability;
-            gBattleScripting.battler = gBattlerAbility = gActiveBattler ^ BIT_FLANK;
+            BestowItem(BATTLE_PARTNER(gActiveBattler), gActiveBattler);
+            gLastUsedAbility = gBattleMons[BATTLE_PARTNER(gActiveBattler)].ability;
+            gBattleScripting.battler = gBattlerAbility = BATTLE_PARTNER(gActiveBattler);
             gBattlerAttacker = gActiveBattler;
             BattleScriptPushCursor();
             gBattlescriptCurrInstr = BattleScript_SymbiosisActivates;
