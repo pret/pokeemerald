@@ -242,6 +242,7 @@
 #define VARIOUS_SET_BEAK_BLAST                      151
 #define VARIOUS_SWAP_SIDE_STATUSES                  152
 #define VARIOUS_SET_Z_EFFECT                        153
+#define VARIOUS_TRY_SYMBIOSIS                       154
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
@@ -312,8 +313,9 @@
 #define MOVEEND_DANCER                            28
 #define MOVEEND_EMERGENCY_EXIT                    29
 #define MOVEEND_WEATHER_FORM                      30
-#define MOVEEND_CLEAR_BITS                        31
-#define MOVEEND_COUNT                             32
+#define MOVEEND_SYMBIOSIS                         31
+#define MOVEEND_CLEAR_BITS                        32
+#define MOVEEND_COUNT                             33
 
 // switch cases
 #define B_SWITCH_NORMAL     0
