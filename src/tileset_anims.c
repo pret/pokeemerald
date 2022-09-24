@@ -537,7 +537,7 @@ const u16 *const gTilesetAnims_BattlePyramid_StatueShadow[] = {
     gTilesetAnims_BattlePyramid_StatueShadow_Frame2
 };
 
-static const u16 *const gTilesetAnims_BattleDomeFloorLightPals[] = {
+static const u16 *const sTilesetAnims_BattleDomeFloorLightPals[] = {
     gTilesetAnims_BattleDomePals0_0,
     gTilesetAnims_BattleDomePals0_1,
     gTilesetAnims_BattleDomePals0_2,
@@ -1167,7 +1167,7 @@ static void QueueAnimTiles_BattlePyramid_StatueShadow(u16 timer)
 
 static void BlendAnimPalette_BattleDome_FloorLights(u16 timer)
 {
-    CpuCopy16(gTilesetAnims_BattleDomeFloorLightPals[timer % ARRAY_COUNT(gTilesetAnims_BattleDomeFloorLightPals)], &gPlttBufferUnfaded[0x80], 32);
+    CpuCopy16(sTilesetAnims_BattleDomeFloorLightPals[timer % ARRAY_COUNT(sTilesetAnims_BattleDomeFloorLightPals)], &gPlttBufferUnfaded[0x80], 32);
     BlendPalette(0x80, 16, gPaletteFade.y, gPaletteFade.blendColor & 0x7FFF);
     if ((u8)FindTaskIdByFunc(Task_BattleTransition_Intro) != TASK_NONE)
     {
@@ -1178,7 +1178,7 @@ static void BlendAnimPalette_BattleDome_FloorLights(u16 timer)
 
 static void BlendAnimPalette_BattleDome_FloorLightsNoBlend(u16 timer)
 {
-    CpuCopy16(gTilesetAnims_BattleDomeFloorLightPals[timer % ARRAY_COUNT(gTilesetAnims_BattleDomeFloorLightPals)], &gPlttBufferUnfaded[0x80], 32);
+    CpuCopy16(sTilesetAnims_BattleDomeFloorLightPals[timer % ARRAY_COUNT(sTilesetAnims_BattleDomeFloorLightPals)], &gPlttBufferUnfaded[0x80], 32);
     if ((u8)FindTaskIdByFunc(Task_BattleTransition_Intro) == TASK_NONE)
     {
         BlendPalette(0x80, 16, gPaletteFade.y, gPaletteFade.blendColor & 0x7FFF);

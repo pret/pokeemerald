@@ -285,7 +285,7 @@ static void ReceiveExchangePacket(u32 multiplayerId)
 
 static void PrintTextOnRecordMixing(const u8 *src)
 {
-    DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, src, 0, 1, 0, NULL);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
@@ -363,9 +363,9 @@ static void Task_RecordMixing_Main(u8 taskId)
             SetLinkWaitingForScript();
             if (gWirelessCommType != 0)
                 CreateTask(Task_ReturnToFieldRecordMixing, 10);
-            ClearDialogWindowAndFrame(0, 1);
+            ClearDialogWindowAndFrame(0, TRUE);
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
         }
         break;
     }
@@ -444,7 +444,7 @@ static void Task_MixingRecordsRecv(u8 taskId)
         }
         break;
     case 1: // wait for handshake
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
         {
             ConvertIntToDecimalStringN(gStringVar1, GetMultiplayerId_(), STR_CONV_MODE_LEADING_ZEROS, 2);
             task->tState = 5;
@@ -879,7 +879,7 @@ static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *records, size
     for (i = 0; i < linkPlayerCount; i++)
     {
         mixMail = (void *)records + i * recordSize;
-        
+
         // Count number of players that have at least
         // one daycare Pokémon with no held item
         if (canHoldItem[i][0] == TRUE || canHoldItem[i][1] == TRUE)
@@ -945,7 +945,7 @@ static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *records, size
     case 4:
         // 4 players can swap, select which 2 pairings will swap
         ptr = idxs;
-        
+
         // Swap pair 1
         playerSlot1 = sDaycareMailSwapIds_4Player[tableId][0];
         playerSlot2 = sDaycareMailSwapIds_4Player[tableId][1];
@@ -1174,7 +1174,7 @@ static void ReceiveApprenticeData(struct Apprentice *records, size_t recordSize,
     u32 apprenticeSaveId;
 
     ShufflePlayerIndices(mixIndices);
-    mixApprentice = (void*)records + (recordSize * mixIndices[multiplayerId]);
+    mixApprentice = (void *)records + (recordSize * mixIndices[multiplayerId]);
     numApprentices = 0;
     apprenticeId = 0;
     for (i = 0; i < 2; i++)

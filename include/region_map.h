@@ -99,7 +99,7 @@ u8 DoRegionMapInputCallback(void);
 bool8 UpdateRegionMapZoom(void);
 void FreeRegionMapIconResources(void);
 u16 GetRegionMapSecIdAt(u16 x, u16 y);
-void CreateRegionMapPlayerIcon(u16 x, u16 y);
+void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag);
 void CreateRegionMapCursor(u16 tileTag, u16 paletteTag);
 bool32 IsEventIslandMapSecId(u8 mapSecId);
 u8 *GetMapName(u8 *, u16, u16);

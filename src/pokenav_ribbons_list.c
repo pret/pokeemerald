@@ -22,7 +22,7 @@ enum
 
 struct Pokenav_RibbonsMonList
 {
-    u32 (*callback)(struct Pokenav_RibbonsMonList*);
+    u32 (*callback)(struct Pokenav_RibbonsMonList *);
     u32 loopedTaskId;
     u16 winid;
     s32 boxId;
@@ -256,7 +256,7 @@ static u32 BuildPartyMonRibbonList(s32 state)
     item.boxId = TOTAL_BOXES_COUNT;
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        struct Pokemon * pokemon = &gPlayerParty[i];
+        struct Pokemon *pokemon = &gPlayerParty[i];
         if (!GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES))
             return LT_INC_AND_CONTINUE;
         if (!GetMonData(pokemon, MON_DATA_SANITY_IS_EGG) && !GetMonData(pokemon, MON_DATA_SANITY_IS_BAD_EGG))
@@ -464,7 +464,7 @@ static u32 LoopedTask_OpenRibbonsMonList(s32 state)
         if (!menu->fromSummary)
         {
             LoadLeftHeaderGfxForIndex(POKENAV_GFX_RIBBONS_MENU);
-            ShowLeftHeaderGfx(POKENAV_GFX_RIBBONS_MENU, 1, 0);
+            ShowLeftHeaderGfx(POKENAV_GFX_RIBBONS_MENU, TRUE, FALSE);
         }
         return LT_INC_AND_PAUSE;
     case 5:
@@ -669,7 +669,7 @@ static void DrawListIndexNumber(s32 windowId, s32 index, s32 max)
     u8 strbuf[16];
     u32 x;
 
-    u8 * ptr = strbuf;
+    u8 *ptr = strbuf;
     ptr = ConvertIntToDecimalStringN(ptr, index, STR_CONV_MODE_RIGHT_ALIGN, 3);
     *ptr++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(ptr, max, STR_CONV_MODE_RIGHT_ALIGN, 3);
@@ -696,18 +696,18 @@ static void CreateRibbonMonsList(void)
 }
 
 // Buffers the "Nickname gender/level" text for the ribbon mon list
-static void BufferRibbonMonInfoText(struct PokenavListItem * listItem, u8 * dest)
+static void BufferRibbonMonInfoText(struct PokenavListItem * listItem, u8 *dest)
 {
     u8 gender;
     u8 level;
-    u8 * s;
-    const u8 * genderStr;
+    u8 *s;
+    const u8 *genderStr;
     struct PokenavMonListItem * item = (struct PokenavMonListItem *)listItem;
 
     // Mon is in party
     if (item->boxId == TOTAL_BOXES_COUNT)
     {
-        struct Pokemon * mon = &gPlayerParty[item->monId];
+        struct Pokemon *mon = &gPlayerParty[item->monId];
         gender = GetMonGender(mon);
         level = GetLevelFromMonExp(mon);
         GetMonData(mon, MON_DATA_NICKNAME, gStringVar3);

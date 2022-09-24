@@ -9,8 +9,8 @@
 
 #define NUM_SAVE_SLOTS 2
 
-// If the sector's security field is not this value then the sector is either invalid or empty.
-#define SECTOR_SECURITY_NUM 0x8012025
+// If the sector's signature field is not this value then the sector is either invalid or empty.
+#define SECTOR_SIGNATURE 0x8012025
 
 #define SPECIAL_SECTOR_SENTINEL 0xB39D
 
@@ -72,12 +72,12 @@ struct SaveSector
     u8 unused[SECTOR_FOOTER_SIZE - 12]; // Unused portion of the footer
     u16 id;
     u16 checksum;
-    u32 security;
+    u32 signature;
     u32 counter;
 }; // size is SECTOR_SIZE (0x1000)
 
-#define SECTOR_SECURITY_OFFSET offsetof(struct SaveSector, security)
-#define SECTOR_COUNTER_OFFSET offsetof(struct SaveSector, counter)
+#define SECTOR_SIGNATURE_OFFSET offsetof(struct SaveSector, signature)
+#define SECTOR_COUNTER_OFFSET   offsetof(struct SaveSector, counter)
 
 extern u16 gLastWrittenSector;
 extern u32 gLastSaveCounter;
@@ -99,13 +99,13 @@ u8 TrySavingData(u8 saveType);
 bool8 LinkFullSave_Init(void);
 bool8 LinkFullSave_WriteSector(void);
 bool8 LinkFullSave_ReplaceLastSector(void);
-bool8 LinkFullSave_SetLastSectorSecurity(void);
+bool8 LinkFullSave_SetLastSectorSignature(void);
 bool8 WriteSaveBlock2(void);
 bool8 WriteSaveBlock1Sector(void);
 u8 LoadGameSave(u8 saveType);
 u16 GetSaveBlocksPointersBaseOffset(void);
-u32 TryReadSpecialSaveSector(u8 sector, u8* dst);
-u32 TryWriteSpecialSaveSector(u8 sector, u8* src);
+u32 TryReadSpecialSaveSector(u8 sector, u8 *dst);
+u32 TryWriteSpecialSaveSector(u8 sector, u8 *src);
 void Task_LinkFullSave(u8 taskId);
 
 // save_failed_screen.c

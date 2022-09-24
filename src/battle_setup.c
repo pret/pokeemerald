@@ -403,7 +403,7 @@ void BattleSetup_StartBattlePikeWildBattle(void)
 
 static void DoStandardWildBattle(bool32 isDouble)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
@@ -424,7 +424,7 @@ static void DoStandardWildBattle(bool32 isDouble)
 
 void BattleSetup_StartRoamerBattle(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
@@ -438,7 +438,7 @@ void BattleSetup_StartRoamerBattle(void)
 
 static void DoSafariBattle(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndSafariBattle;
@@ -448,7 +448,7 @@ static void DoSafariBattle(void)
 
 static void DoBattlePikeWildBattle(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
@@ -484,7 +484,7 @@ static void DoBattlePyramidTrainerHillBattle(void)
 void StartWallyTutorialBattle(void)
 {
     CreateMaleMon(&gEnemyParty[0], SPECIES_RALTS, 5);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
     gBattleTypeFlags = BATTLE_TYPE_WALLY_TUTORIAL;
     CreateBattleStartTask(B_TRANSITION_SLICE, 0);
@@ -492,7 +492,7 @@ void StartWallyTutorialBattle(void)
 
 void BattleSetup_StartScriptedWildBattle(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = 0;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
@@ -504,7 +504,7 @@ void BattleSetup_StartScriptedWildBattle(void)
 
 void BattleSetup_StartScriptedDoubleWildBattle(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_DOUBLE;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
@@ -516,7 +516,7 @@ void BattleSetup_StartScriptedDoubleWildBattle(void)
 
 void BattleSetup_StartLatiBattle(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
@@ -528,7 +528,7 @@ void BattleSetup_StartLatiBattle(void)
 
 void BattleSetup_StartLegendaryBattle(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
 
@@ -567,7 +567,7 @@ void BattleSetup_StartLegendaryBattle(void)
 
 void StartGroudonKyogreBattle(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_KYOGRE_GROUDON;
 
@@ -587,7 +587,7 @@ void StartRegiBattle(void)
     u8 transitionId;
     u16 species;
 
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI;
 
@@ -617,7 +617,7 @@ void StartRegiBattle(void)
 
 static void CB2_EndWildBattle(void)
 {
-    CpuFill16(0, (void*)(BG_PLTT), BG_PLTT_SIZE);
+    CpuFill16(0, (void *)(BG_PLTT), BG_PLTT_SIZE);
     ResetOamRange(0, 128);
 
     if (IsPlayerDefeated(gBattleOutcome) == TRUE && !InBattlePyramid() && !InBattlePike())
@@ -633,7 +633,7 @@ static void CB2_EndWildBattle(void)
 
 static void CB2_EndScriptedWildBattle(void)
 {
-    CpuFill16(0, (void*)(BG_PLTT), BG_PLTT_SIZE);
+    CpuFill16(0, (void *)(BG_PLTT), BG_PLTT_SIZE);
     ResetOamRange(0, 128);
 
     if (IsPlayerDefeated(gBattleOutcome) == TRUE)
@@ -716,21 +716,22 @@ static u8 GetBattleTransitionTypeByMap(void)
 
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
+
     if (GetFlashLevel())
         return TRANSITION_TYPE_FLASH;
-    if (!MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
+
+    if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
+        return TRANSITION_TYPE_WATER;
+
+    switch (gMapHeader.mapType)
     {
-        switch (gMapHeader.mapType)
-        {
-        case MAP_TYPE_UNDERGROUND:
-            return TRANSITION_TYPE_CAVE;
-        case MAP_TYPE_UNDERWATER:
-            return TRANSITION_TYPE_WATER;
-        default:
-            return TRANSITION_TYPE_NORMAL;
-        }
+    case MAP_TYPE_UNDERGROUND:
+        return TRANSITION_TYPE_CAVE;
+    case MAP_TYPE_UNDERWATER:
+        return TRANSITION_TYPE_WATER;
+    default:
+        return TRANSITION_TYPE_NORMAL;
     }
-    return TRANSITION_TYPE_WATER;
 }
 
 static u16 GetSumOfPlayerPartyLevel(u8 numMons)
@@ -1053,22 +1054,22 @@ static void InitTrainerBattleVariables(void)
 
 static inline void SetU8(void *ptr, u8 value)
 {
-    *(u8*)(ptr) = value;
+    *(u8 *)(ptr) = value;
 }
 
 static inline void SetU16(void *ptr, u16 value)
 {
-    *(u16*)(ptr) = value;
+    *(u16 *)(ptr) = value;
 }
 
 static inline void SetU32(void *ptr, u32 value)
 {
-    *(u32*)(ptr) = value;
+    *(u32 *)(ptr) = value;
 }
 
-static inline void SetPtr(const void *ptr, const void* value)
+static inline void SetPtr(const void *ptr, const void *value)
 {
-    *(const void**)(ptr) = value;
+    *(const void **)(ptr) = value;
 }
 
 static void TrainerBattleLoadArgs(const struct TrainerBattleParameter *specs, const u8 *data)
@@ -1211,8 +1212,8 @@ void ConfigureAndSetUpOneTrainerBattle(u8 trainerObjEventId, const u8 *trainerSc
     gSelectedObjectEvent = trainerObjEventId;
     gSpecialVar_LastTalked = gObjectEvents[trainerObjEventId].localId;
     BattleSetup_ConfigureTrainerBattle(trainerScript + 1);
-    ScriptContext1_SetupScript(EventScript_StartTrainerApproach);
-    ScriptContext2_Enable();
+    ScriptContext_SetupScript(EventScript_StartTrainerApproach);
+    LockPlayerFieldControls();
 }
 
 void ConfigureTwoTrainersBattle(u8 trainerObjEventId, const u8 *trainerScript)
@@ -1224,8 +1225,8 @@ void ConfigureTwoTrainersBattle(u8 trainerObjEventId, const u8 *trainerScript)
 
 void SetUpTwoTrainersBattle(void)
 {
-    ScriptContext1_SetupScript(EventScript_StartTrainerApproach);
-    ScriptContext2_Enable();
+    ScriptContext_SetupScript(EventScript_StartTrainerApproach);
+    LockPlayerFieldControls();
 }
 
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
@@ -1337,7 +1338,7 @@ void BattleSetup_StartTrainerBattle(void)
     else
         DoTrainerBattle();
 
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
 }
 
 static void CB2_EndTrainerBattle(void)
@@ -1388,7 +1389,7 @@ void BattleSetup_StartRematchBattle(void)
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
     gMain.savedCallback = CB2_EndRematchBattle;
     DoTrainerBattle();
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
 }
 
 void ShowTrainerIntroSpeech(void)

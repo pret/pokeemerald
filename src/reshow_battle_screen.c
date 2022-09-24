@@ -63,7 +63,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         gBattle_BG3_Y = 0;
         break;
     case 1:
-        CpuFastFill(0, (void*)(VRAM), VRAM_SIZE);
+        CpuFastFill(0, (void *)(VRAM), VRAM_SIZE);
         break;
     case 2:
         LoadBattleTextboxAndBackground();
@@ -149,7 +149,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
 
             ActionSelectionCreateCursorAt(gActionSelectionCursor[gBattlerInMenuId], 0);
 
-            if (gWirelessCommType != 0 && gReceivedRemoteLinkPlayers != 0)
+            if (gWirelessCommType != 0 && gReceivedRemoteLinkPlayers)
             {
                 LoadWirelessStatusIndicatorSpriteGfx();
                 CreateWirelessStatusIndicatorSprite(0, 0);

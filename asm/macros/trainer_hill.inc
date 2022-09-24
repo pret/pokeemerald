@@ -100,9 +100,9 @@
 	special CallTrainerHillFunction
 	.endm
 
-	@ Set the challenge mode to HILL_TAG_* (Normal, Variety, Unique, or Expert)
-	.macro trainerhill_settag tag:req
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_SET_TAG
-	copyvar VAR_0x8005, \tag
+	@ Set the challenge mode to HILL_MODE_* (Normal, Variety, Unique, or Expert)
+	.macro trainerhill_setmode mode:req
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_SET_MODE
+	copyvar VAR_0x8005, \mode
 	special CallTrainerHillFunction
 	.endm

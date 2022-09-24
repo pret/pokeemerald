@@ -676,7 +676,7 @@
 	.byte 0x77
 	.endm
 
-	.macro faintifabilitynotdamp
+	.macro tryexplosion
 	.byte 0x78
 	.endm
 
@@ -1044,7 +1044,7 @@
 	.byte 0xc8
 	.endm
 
-	.macro jumpifattackandspecialattackcannotfall ptr:req
+	.macro trymemento ptr:req
 	.byte 0xc9
 	.4byte \ptr
 	.endm
@@ -1186,11 +1186,11 @@
 	.byte 0xe5
 	.endm
 
-	.macro docastformchangeanimation
+	.macro doweatherformchangeanimation
 	.byte 0xe6
 	.endm
 
-	.macro trycastformdatachange
+	.macro tryweatherformdatachange
 	.byte 0xe7
 	.endm
 
@@ -1785,6 +1785,10 @@
 	various \battler, VARIOUS_TRY_ACTIVATE_GRIM_NEIGH
 	.endm
 
+	.macro setzeffect
+	various BS_ATTACKER, VARIOUS_SET_Z_EFFECT
+	.endm
+
 	.macro consumeberry battler:req, restoreItem=FALSE
 	various \battler, VARIOUS_CONSUME_BERRY
 	.byte \restoreItem
@@ -1924,8 +1928,8 @@
 	.4byte \ptr
 	.endm
 
-	.macro photongeysercheck
-	various BS_ATTACKER, VARIOUS_PHOTON_GEYSER_CHECK
+	.macro photongeysercheck battler:req
+	various \battler, VARIOUS_PHOTON_GEYSER_CHECK
 	.endm
 
 	.macro shellsidearmcheck
