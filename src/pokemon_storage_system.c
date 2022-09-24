@@ -579,7 +579,6 @@ EWRAM_DATA static bool8 sAutoActionOn = 0;
 EWRAM_DATA static bool8 sJustOpenedBag = 0;
 
 // Main tasks
-static void EnterPokeStorage(u8);
 static void Task_InitPokeStorage(u8);
 static void Task_PlaceMon(u8);
 static void Task_ChangeScreen(u8);
@@ -1670,10 +1669,18 @@ static void FieldTask_ReturnToPcMenu(void)
     MainCallback vblankCb = gMain.vblankCallback;
 
     SetVBlankCallback(NULL);
-    taskId = CreateTask(Task_PCMainMenu, 80);
-    gTasks[taskId].tState = 0;
-    gTasks[taskId].tSelectedOption = sPreviousBoxOption;
-    Task_PCMainMenu(taskId);
+    if (!FlagGet(DEBUG_FLAG_PC_FROM_DEBUG_MENU))
+    {
+        taskId = CreateTask(Task_PCMainMenu, 80);
+        gTasks[taskId].tState = 0;
+        gTasks[taskId].tSelectedOption = sPreviousBoxOption;
+        Task_PCMainMenu(taskId);
+    }
+    else
+    {
+        FlagClear(DEBUG_FLAG_PC_FROM_DEBUG_MENU);
+        ScriptContext_Enable();
+    }
     SetVBlankCallback(vblankCb);
     FadeInFromBlack();
 }
@@ -2003,7 +2010,7 @@ static void CB2_PokeStorage(void)
     BuildOamBuffer();
 }
 
-static void EnterPokeStorage(u8 boxOption)
+void EnterPokeStorage(u8 boxOption)
 {
     ResetTasks();
     sCurrentBoxOption = boxOption;
@@ -3991,7 +3998,7 @@ static void LoadDisplayMonGfx(u16 species, u32 pid)
 
     if (species != SPECIES_NONE)
     {
-        LoadSpecialPokePic(&gMonFrontPicTable[species], sStorage->tileBuffer, species, pid, TRUE);
+        LoadSpecialPokePic(sStorage->tileBuffer, species, pid, TRUE);
         LZ77UnCompWram(sStorage->displayMonPalette, sStorage->displayMonPalBuffer);
         CpuCopy32(sStorage->tileBuffer, sStorage->displayMonTilePtr, MON_PIC_SIZE);
         LoadPalette(sStorage->displayMonPalBuffer, sStorage->displayMonPalOffset, 0x20);
@@ -5109,7 +5116,7 @@ static u16 TryLoadMonIconTiles(u16 species, u32 personality)
     u16 i, offset;
 
     // Treat female mons as a seperate species as they may have a different icon than males
-    if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+    if (ShouldShowFemaleDifferences(species, personality))
         species |= 0x8000; // 1 << 15
 
     // Search icon list for this species
@@ -5176,7 +5183,7 @@ static struct Sprite *CreateMonIconSprite(u16 species, u32 personality, s16 x, s
     struct SpriteTemplate template = sSpriteTemplate_MonIcon;
 
     species = GetIconSpecies(species, personality);
-    if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+    if (ShouldShowFemaleDifferences(species, personality))
     {
         template.paletteTag = PALTAG_MON_ICON_0 + gMonIconPaletteIndicesFemale[species];
     }
@@ -6893,10 +6900,7 @@ static void ReshowDisplayMon(void)
 
 void SetMonFormPSS(struct BoxPokemon *boxMon)
 {
-    u16 species = GetMonData(boxMon, MON_DATA_SPECIES);
-    u16 targetSpecies = GetFormChangeTargetSpeciesBoxMon(boxMon, FORM_ITEM_HOLD_ABILITY, 0);
-    if (targetSpecies == SPECIES_NONE)
-        targetSpecies = GetFormChangeTargetSpeciesBoxMon(boxMon, FORM_ITEM_HOLD, 0);
+    u16 targetSpecies = GetFormChangeTargetSpeciesBoxMon(boxMon, FORM_ITEM_HOLD, 0);
     if (targetSpecies != SPECIES_NONE)
     {
         SetBoxMonData(boxMon, MON_DATA_SPECIES, &targetSpecies);

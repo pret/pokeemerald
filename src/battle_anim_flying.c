@@ -524,8 +524,8 @@ void AnimFlyBallAttack_Step(struct Sprite *sprite)
     }
 
     if (sprite->x + sprite->x2 < -32
-        || sprite->x + sprite->x2 > DISPLAY_WIDTH + 32
-        || sprite->y + sprite->y2 > DISPLAY_HEIGHT)
+     || sprite->x + sprite->x2 > DISPLAY_WIDTH + 32
+     || sprite->y + sprite->y2 > DISPLAY_HEIGHT)
     {
         gSprites[GetAnimBattlerSpriteId(ANIM_ATTACKER)].invisible = sprite->data[5];
         DestroyAnimSprite(sprite);
@@ -906,8 +906,8 @@ static void AnimWhirlwindLine(struct Sprite * sprite)
     else
         InitSpritePosToAnimTarget(sprite, FALSE);
 
-    if ((gBattleAnimArgs[2] == ANIM_ATTACKER && !GetBattlerSide(gBattleAnimAttacker))
-        || (gBattleAnimArgs[2] == ANIM_TARGET && !GetBattlerSide(gBattleAnimTarget)))
+    if ((gBattleAnimArgs[2] == ANIM_ATTACKER && GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
+        || (gBattleAnimArgs[2] == ANIM_TARGET && GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER))
     {
         sprite->x += 8;
     }
@@ -1211,8 +1211,8 @@ void AnimSkyAttackBird_Step(struct Sprite *sprite)
     sprite->x = sprite->data[4] >> 4;
     sprite->y = sprite->data[5] >> 4;
 
-    if (sprite->x > 285 || sprite->x < -45
-        || sprite->y > 157 || sprite->y < -45)
+    if (sprite->x > DISPLAY_WIDTH + 45 || sprite->x < -45
+     || sprite->y > 157 || sprite->y < -45)
         DestroySpriteAndMatrix(sprite);
 }
 
@@ -1252,8 +1252,8 @@ void AnimTask_LoadWindstormBackground(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 
     GetBattleAnimBg1Data(&animBg);
-    AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Windstorm, animBg.tilesOffset);
-    AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimBgTilemap_Windstorm, 0);
+    AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Sandstorm, animBg.tilesOffset);
+    AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimBgTilemap_Sandstorm, 0);
     LoadCompressedPalette(gBattleAnimSpritePal_Windstorm, animBg.paletteId * 16, 32);
 
     if (gBattleAnimArgs[0] && GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)

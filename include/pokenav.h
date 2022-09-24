@@ -116,7 +116,7 @@ enum
 #define POKENAV_MENU_IDS_START 100000
 enum
 {
-    POKENAV_MAIN_MENU = POKENAV_MENU_IDS_START, // The main menu where the player selects Hoenn Map/Condition/Match Call/Ribbons 
+    POKENAV_MAIN_MENU = POKENAV_MENU_IDS_START, // The main menu where the player selects Hoenn Map/Condition/Match Call/Ribbons
     POKENAV_MAIN_MENU_CURSOR_ON_MAP,
     POKENAV_CONDITION_MENU,                     // The first Condition screen where the player selects Party or Search
     POKENAV_CONDITION_SEARCH_MENU,              // The Condition search menu where the player selects a search parameter

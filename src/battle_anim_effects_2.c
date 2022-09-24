@@ -1678,7 +1678,7 @@ static void AirCutterProjectileStep1(u8 taskId)
         gTasks[taskId].data[gTasks[taskId].data[1] + 13] = spriteId;
         gTasks[taskId].data[0] = gTasks[taskId].data[3];
         gTasks[taskId].data[1]++;
-        PlaySE12WithPanning(SE_M_BLIZZARD2, BattleAnimAdjustPanning(-63));
+        PlaySE12WithPanning(SE_M_BLIZZARD2, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER + 1));
         if (gTasks[taskId].data[1] > 2)
             gTasks[taskId].func = AirCutterProjectileStep2;
     }
@@ -1703,7 +1703,7 @@ void AnimTask_AirCutterProjectile(u8 taskId)
     }
     else
     {
-        if ((gBattlerPositions[gBattleAnimTarget] & BIT_SIDE) == B_SIDE_PLAYER)
+        if (GET_BATTLER_SIDE2(gBattleAnimTarget) == B_SIDE_PLAYER)
         {
             gTasks[taskId].data[4] = 1;
             gBattleAnimArgs[0] = -gBattleAnimArgs[0];
@@ -1875,7 +1875,7 @@ static void AnimBulletSeed_Step1(struct Sprite *sprite)
     int i;
     u16 rand;
     s16 *ptr;
-    PlaySE12WithPanning(SE_M_HORN_ATTACK, BattleAnimAdjustPanning(63));
+    PlaySE12WithPanning(SE_M_HORN_ATTACK, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
     sprite->x += sprite->x2;
     sprite->y += sprite->y2;
     sprite->y2 = 0;
@@ -2521,7 +2521,7 @@ static void AnimPencil(struct Sprite *sprite)
     sprite->data[3] = 16;
     sprite->data[4] = 0;
     sprite->data[5] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_HEIGHT) + 2;
-    sprite->data[6] = BattleAnimAdjustPanning(63);
+    sprite->data[6] = BattleAnimAdjustPanning(SOUND_PAN_TARGET);
     sprite->callback = AnimPencil_Step;
 }
 
@@ -3079,9 +3079,7 @@ void AnimTask_FreeMusicNotesPals(u8 taskId)
 
 static void SetMusicNotePalette(struct Sprite *sprite, u8 a, u8 b)
 {
-    u8 tile;
-    tile = (b & 1);
-    tile = ((-tile | tile) >> 31) & 32;
+    u8 tile = (b & 1) ? 32 : 0;
     sprite->oam.tileNum += tile + (a << 2);
     sprite->oam.paletteNum = IndexOfSpritePaletteTag(sMusicNotePaletteTagsTable[b >> 1]);
 }
@@ -3828,8 +3826,7 @@ static void AnimPerishSongMusicNote_Step2(struct Sprite *sprite)
 
     if (sprite->data[4] > 3)
     {
-        int var1 = sprite->data[2];
-        sprite->invisible = var1 - (((s32)(var1 + ((u32)var1 >> 31)) >> 1) << 1);
+        sprite->invisible = sprite->data[2] % 2;
         DestroyAnimSprite(sprite);
     }
 

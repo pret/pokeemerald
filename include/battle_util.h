@@ -7,7 +7,17 @@
 #define MOVE_LIMITATION_TORMENTED               (1 << 3)
 #define MOVE_LIMITATION_TAUNT                   (1 << 4)
 #define MOVE_LIMITATION_IMPRISON                (1 << 5)
-#define MOVE_LIMITATIONS_ALL                    0xFF
+#define MOVE_LIMITATION_ENCORE                  (1 << 6)
+#define MOVE_LIMITATION_CHOICE_ITEM             (1 << 7)
+#define MOVE_LIMITATION_ASSAULT_VEST            (1 << 8)
+#define MOVE_LIMITATION_GRAVITY                 (1 << 9)
+#define MOVE_LIMITATION_HEAL_BLOCK              (1 << 10)
+#define MOVE_LIMITATION_BELCH                   (1 << 11)
+#define MOVE_LIMITATION_THROAT_CHOP             (1 << 12)
+#define MOVE_LIMITATION_STUFF_CHEEKS            (1 << 13)
+
+#define MOVE_LIMITATION_PLACEHOLDER             (1 << 15)
+#define MOVE_LIMITATIONS_ALL                    0xFFFF
 
 #define ABILITYEFFECT_ON_SWITCHIN                0
 #define ABILITYEFFECT_ENDTURN                    1
@@ -16,7 +26,7 @@
 #define ABILITYEFFECT_MOVE_END_ATTACKER          4
 #define ABILITYEFFECT_MOVE_END                   5
 #define ABILITYEFFECT_IMMUNITY                   6
-#define ABILITYEFFECT_FORECAST                   7
+#define ABILITYEFFECT_WEATHER_FORM               7
 #define ABILITYEFFECT_SYNCHRONIZE                8
 #define ABILITYEFFECT_ATK_SYNCHRONIZE            9
 #define ABILITYEFFECT_INTIMIDATE1                10
@@ -89,7 +99,7 @@ void BattleScriptPush(const u8 *bsPtr);
 void BattleScriptPushCursor(void);
 void BattleScriptPop(void);
 u8 TrySetCantSelectMoveBattleScript(void);
-u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u8 check);
+u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u16 check);
 bool8 AreAllMovesUnusable(void);
 u8 GetImprisonedMovesCount(u8 battlerId, u16 move);
 u8 DoFieldEndTurnEffects(void);
@@ -104,6 +114,7 @@ bool8 HasNoMonsToSwitch(u8 battlerId, u8 r1, u8 r2);
 u8 TryWeatherFormChange(u8 battlerId);
 bool32 TryChangeBattleWeather(u8 battler, u32 weatherEnumId, bool32 viaAbility);
 u8 AbilityBattleEffects(u8 caseID, u8 battlerId, u16 ability, u8 special, u16 moveArg);
+bool32 IsNeutralizingGasOnField(void);
 u32 GetBattlerAbility(u8 battlerId);
 u32 IsAbilityOnSide(u32 battlerId, u32 ability);
 u32 IsAbilityOnOpposingSide(u32 battlerId, u32 ability);
@@ -191,5 +202,6 @@ bool32 CanBeParalyzed(u8 battlerId);
 bool32 CanBeFrozen(u8 battlerId);
 bool32 CanBeConfused(u8 battlerId);
 bool32 IsBattlerTerrainAffected(u8 battlerId, u32 terrainFlag);
+u32 GetMonFriendshipScore(struct Pokemon *pokemon);
 
 #endif // GUARD_BATTLE_UTIL_H

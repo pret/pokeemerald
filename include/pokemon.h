@@ -142,7 +142,7 @@ struct PokemonSubstruct3
 
  /* 0x02 */ u16 metLevel:7;
  /* 0x02 */ u16 metGame:4;
- /* 0x03 */ u16 unused3_3:4;
+ /* 0x03 */ u16 unused1:4;
  /* 0x03 */ u16 otGender:1;
 
  /* 0x04 */ u32 hpIV:5;
@@ -152,6 +152,7 @@ struct PokemonSubstruct3
  /* 0x05 */ u32 spAttackIV:5;
  /* 0x06 */ u32 spDefenseIV:5;
  /* 0x07 */ u32 isEgg:1;
+ /* 0x07 */ u32 unused2:1;
 
  /* 0x08 */ u32 coolRibbon:3;
  /* 0x08 */ u32 beautyRibbon:3;
@@ -366,11 +367,13 @@ struct Evolution
     u16 targetSpecies;
 };
 
-struct FormChange {
+struct FormChange
+{
     u16 method;
     u16 targetSpecies;
     u16 param1;
     u16 param2;
+    u16 param3;
 };
 
 #define NUM_UNOWN_FORMS 28
@@ -382,7 +385,7 @@ struct FormChange {
     | (((personality) & 0x00000003) >> 0)  \
 ) % NUM_UNOWN_FORMS)
 
-#define GET_SHINY_VALUE(otId, personality)HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality)
+#define GET_SHINY_VALUE(otId, personality) (HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality))
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
@@ -397,14 +400,16 @@ extern const struct BaseStats gBaseStats[];
 extern const u8 *const gItemEffectTable[];
 extern const u32 gExperienceTables[][MAX_LEVEL + 1];
 extern const struct LevelUpMove *const gLevelUpLearnsets[];
+extern const u16 *const gTeachableLearnsets[];
 extern const u8 gPPUpGetMask[];
 extern const u8 gPPUpClearMask[];
 extern const u8 gPPUpAddValues[];
 extern const u8 gStatStageRatios[MAX_STAT_STAGE + 1][2];
-extern const u16 gLinkPlayerFacilityClasses[];
+extern const u16 gUnionRoomFacilityClasses[];
 extern const struct SpriteTemplate gBattlerSpriteTemplates[];
 extern const s8 gNatureStatTable[][5];
 extern const u16 *const gFormSpeciesIdTables[NUM_SPECIES];
+extern const u32 sExpCandyExperienceTable[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);
@@ -462,6 +467,7 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg);
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg);
 void CopyMon(void *dest, void *src, size_t size);
 u8 GiveMonToPlayer(struct Pokemon *mon);
+u8 SendMonToPC(struct Pokemon* mon);
 u8 CalculatePlayerPartyCount(void);
 u8 CalculateEnemyPartyCount(void);
 u8 GetMonsStateToDoubles(void);
@@ -509,8 +515,7 @@ u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection);
 void UpdatePartyPokerusTime(u16 days);
 void PartySpreadPokerus(struct Pokemon *party);
 bool8 TryIncrementMonLevel(struct Pokemon *mon);
-u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm);
-u32 CanSpeciesLearnTMHM(u16 species, u8 tm);
+u8 CanLearnTeachableMove(u16 species, u16 move);
 u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves);
 u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves);
 u8 GetNumberOfRelearnableMoves(struct Pokemon *mon);
@@ -558,5 +563,7 @@ u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId);
 u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg);
 u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg);
 u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove);
+bool32 ShouldShowFemaleDifferences(u16 species, u32 personality);
+void TryToSetBattleFormChangeMoves(struct Pokemon *mon);
 
 #endif // GUARD_POKEMON_H

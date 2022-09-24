@@ -162,7 +162,8 @@ static const struct SpritePalette sSpritePalettes_StampShadow[] = {
     {sStampShadowPal8, TAG_STAMP_SHADOW}
 };
 
-static const struct SpriteTemplate sSpriteTemplate_StampShadow = {
+static const struct SpriteTemplate sSpriteTemplate_StampShadow =
+{
     .tileTag = TAG_STAMP_SHADOW,
     .paletteTag = TAG_STAMP_SHADOW,
     .oam = &gOamData_AffineOff_ObjNormal_32x16,
@@ -339,7 +340,7 @@ static void BufferCardText(void)
     if (sWonderCardData->card.idNumber > 999999)
         sWonderCardData->card.idNumber = 999999;
     ConvertIntToDecimalStringN(sWonderCardData->idNumberText, sWonderCardData->card.idNumber, STR_CONV_MODE_LEFT_ALIGN, 6);
-    
+
     // Copy body text
     for (i = 0; i < WONDER_CARD_BODY_TEXT_LINES; i++)
     {
@@ -363,12 +364,12 @@ static void BufferCardText(void)
         break;
     case CARD_TYPE_LINK_STAT:
         sWonderCardData->giftText[0] = EOS;
-        
+
         // Load stats
         stats[0] = sWonderCardData->cardMetadata.battlesWon < MAX_WONDER_CARD_STAT ? sWonderCardData->cardMetadata.battlesWon : MAX_WONDER_CARD_STAT;
         stats[1] = sWonderCardData->cardMetadata.battlesLost < MAX_WONDER_CARD_STAT ? sWonderCardData->cardMetadata.battlesLost : MAX_WONDER_CARD_STAT;
         stats[2] = sWonderCardData->cardMetadata.numTrades < MAX_WONDER_CARD_STAT ? sWonderCardData->cardMetadata.numTrades : MAX_WONDER_CARD_STAT;
-        
+
         // Init stat text arrays
         for (i = 0; i < ARRAY_COUNT(sWonderCardData->statTextData); i++)
         {
@@ -445,7 +446,7 @@ static void DrawCardWindow(u8 whichWindow)
                                      sCard_FooterTextOffsets[sWonderCardData->card.type],
                                      sCard_TextColorTable[sWonderCardData->gfx->footerTextPal],
                                      0, sWonderCardData->footerLine1Text);
-        
+
         // Print footer line 2
         if (sWonderCardData->card.type != CARD_TYPE_LINK_STAT)
         {
@@ -485,7 +486,7 @@ static void CreateCardSprites(void)
 {
     u8 i = 0;
     sWonderCardData->monIconSpriteId = SPRITE_NONE;
-    
+
     // Create icon sprite
     if (sWonderCardData->cardMetadata.iconSpecies != SPECIES_NONE)
     {
@@ -504,7 +505,7 @@ static void CreateCardSprites(void)
             sWonderCardData->stampSpriteIds[i][1] = SPRITE_NONE;
             sWonderCardData->stampSpriteIds[i][0] = CreateSprite(&sSpriteTemplate_StampShadow, 216 - 32 * i, 144, 8);
             if (sWonderCardData->cardMetadata.stampData[STAMP_SPECIES][i] != SPECIES_NONE)
-                sWonderCardData->stampSpriteIds[i][1] = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->cardMetadata.stampData[STAMP_SPECIES][i]), 
+                sWonderCardData->stampSpriteIds[i][1] = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->cardMetadata.stampData[STAMP_SPECIES][i]),
                                                                                SpriteCallbackDummy,
                                                                                216 - 32 * i,
                                                                                136, 0);
@@ -519,7 +520,7 @@ static void DestroyCardSprites(void)
     // Destroy icon sprite
     if (sWonderCardData->monIconSpriteId != SPRITE_NONE)
         FreeAndDestroyMonIconSprite(&gSprites[sWonderCardData->monIconSpriteId]);
-    
+
     // Destroy stamp sprites
     if (sWonderCardData->card.maxStamps != 0 && sWonderCardData->card.type == CARD_TYPE_STAMP)
     {
@@ -864,7 +865,7 @@ u32 WonderNews_GetInput(u16 input)
 static void BufferNewsText(void)
 {
     u8 i = 0;
-    
+
     // Copy title text
     memcpy(sWonderNewsData->titleText, sWonderNewsData->news.titleText, WONDER_NEWS_TEXT_LENGTH);
     sWonderNewsData->titleText[WONDER_NEWS_TEXT_LENGTH] = EOS;
@@ -895,7 +896,7 @@ static void DrawNewsWindows(void)
     if (x < 0)
         x = 0;
     AddTextPrinterParameterized3(sWonderNewsData->windowIds[NEWS_WIN_TITLE], FONT_SHORT_COPY_1, x, 6, sNews_TextColorTable[sWonderNewsData->gfx->titleTextPal], 0, sWonderNewsData->titleText);
-    
+
     // Print body text
     for (; i < WONDER_NEWS_BODY_TEXT_LINES; i++)
         AddTextPrinterParameterized3(sWonderNewsData->windowIds[NEWS_WIN_BODY], FONT_SHORT_COPY_1, 0,

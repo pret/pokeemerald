@@ -1371,10 +1371,11 @@ const struct Item gItems[] =
         .name = _("Exp.Candy XS"),
         .itemId = ITEM_EXP_CANDY_XS,
         .price = 20,
+        .holdEffectParam = EXP_100,
         .description = sExpCandyXSDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
         .flingPower = 30,
     },
 
@@ -1383,10 +1384,11 @@ const struct Item gItems[] =
         .name = _("Exp.Candy S"),
         .itemId = ITEM_EXP_CANDY_S,
         .price = 240,
+        .holdEffectParam = EXP_800,
         .description = sExpCandyXSDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
         .flingPower = 30,
     },
 
@@ -1395,10 +1397,11 @@ const struct Item gItems[] =
         .name = _("Exp.Candy M"),
         .itemId = ITEM_EXP_CANDY_M,
         .price = 1000,
+        .holdEffectParam = EXP_3000,
         .description = sExpCandyMDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
         .flingPower = 30,
     },
 
@@ -1407,10 +1410,11 @@ const struct Item gItems[] =
         .name = _("Exp.Candy L"),
         .itemId = ITEM_EXP_CANDY_L,
         .price = 3000,
+        .holdEffectParam = EXP_10000,
         .description = sExpCandyLDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
         .flingPower = 30,
     },
 
@@ -1419,10 +1423,11 @@ const struct Item gItems[] =
         .name = _("Exp.Candy XL"),
         .itemId = ITEM_EXP_CANDY_XL,
         .price = 10000,
+        .holdEffectParam = EXP_30000,
         .description = sExpCandyXLDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
         .flingPower = 30,
     },
 
@@ -1555,7 +1560,7 @@ const struct Item gItems[] =
     {
         .name = _("Lure"),
         .itemId = ITEM_LURE,
-        .price = 350,
+        .price = 400,
         .holdEffectParam = 100,
         .description = sLureDesc,
         .pocket = POCKET_ITEMS,
@@ -1569,7 +1574,7 @@ const struct Item gItems[] =
     {
         .name = _("Super Lure"),
         .itemId = ITEM_SUPER_LURE,
-        .price = 500,
+        .price = 700,
         .holdEffectParam = 200,
         .description = sSuperLureDesc,
         .pocket = POCKET_ITEMS,
@@ -1583,7 +1588,7 @@ const struct Item gItems[] =
     {
         .name = _("Max Lure"),
         .itemId = ITEM_MAX_LURE,
-        .price = 700,
+        .price = 900,
         .holdEffectParam = 250,
         .description = sMaxLureDesc,
         .pocket = POCKET_ITEMS,
@@ -7794,7 +7799,7 @@ const struct Item gItems[] =
         .flingPower = 10,
     },
 
-// TMs/HMs
+// TMs/HMs. They don't have a set flingPower, as that's handled by GetFlingPowerFromItemId.
 
     [ITEM_TM01_FOCUS_PUNCH] =
     {
@@ -7805,7 +7810,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 150,
     },
 
     [ITEM_TM02_DRAGON_CLAW] =
@@ -7817,7 +7821,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 80,
     },
 
     [ITEM_TM03_WATER_PULSE] =
@@ -7829,7 +7832,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 60,
     },
 
     [ITEM_TM04_CALM_MIND] =
@@ -7841,7 +7843,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM05_ROAR] =
@@ -7853,7 +7854,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM06_TOXIC] =
@@ -7865,7 +7865,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM07_HAIL] =
@@ -7877,7 +7876,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM08_BULK_UP] =
@@ -7889,7 +7887,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM09_BULLET_SEED] =
@@ -7901,11 +7898,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        #if B_UPDATED_MOVE_DATA >= GEN_5
-            .flingPower = 25,
-        #else
-            .flingPower = 10,
-        #endif
     },
 
     [ITEM_TM10_HIDDEN_POWER] =
@@ -7917,11 +7909,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        #if B_UPDATED_MOVE_DATA >= GEN_6
-            .flingPower = 60,
-        #else
-            .flingPower = 10,
-        #endif
     },
 
     [ITEM_TM11_SUNNY_DAY] =
@@ -7933,7 +7920,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM12_TAUNT] =
@@ -7945,7 +7931,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM13_ICE_BEAM] =
@@ -7957,11 +7942,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        #if B_UPDATED_MOVE_DATA >= GEN_6
-            .flingPower = 90,
-        #else
-            .flingPower = 95,
-        #endif
     },
 
     [ITEM_TM14_BLIZZARD] =
@@ -7973,11 +7953,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        #if B_UPDATED_MOVE_DATA >= GEN_6
-            .flingPower = 110,
-        #else
-            .flingPower = 120,
-        #endif
     },
 
     [ITEM_TM15_HYPER_BEAM] =
@@ -7989,7 +7964,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 150,
     },
 
     [ITEM_TM16_LIGHT_SCREEN] =
@@ -8001,7 +7975,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM17_PROTECT] =
@@ -8013,7 +7986,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM18_RAIN_DANCE] =
@@ -8025,7 +7997,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM19_GIGA_DRAIN] =
@@ -8037,11 +8008,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        #if B_UPDATED_MOVE_DATA >= GEN_5
-            .flingPower = 75,
-        #else
-            .flingPower = 60,
-        #endif
     },
 
     [ITEM_TM20_SAFEGUARD] =
@@ -8053,7 +8019,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM21_FRUSTRATION] =
@@ -8065,7 +8030,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM22_SOLAR_BEAM] =
@@ -8077,7 +8041,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 120,
     },
 
     [ITEM_TM23_IRON_TAIL] =
@@ -8089,7 +8052,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 100,
     },
 
     [ITEM_TM24_THUNDERBOLT] =
@@ -8101,11 +8063,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        #if B_UPDATED_MOVE_DATA >= GEN_6
-            .flingPower = 90,
-        #else
-            .flingPower = 95,
-        #endif
     },
 
     [ITEM_TM25_THUNDER] =
@@ -8117,11 +8074,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        #if B_UPDATED_MOVE_DATA >= GEN_6
-            .flingPower = 110,
-        #else
-            .flingPower = 120,
-        #endif
     },
 
     [ITEM_TM26_EARTHQUAKE] =
@@ -8133,7 +8085,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 100,
     },
 
     [ITEM_TM27_RETURN] =
@@ -8145,7 +8096,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM28_DIG] =
@@ -8157,11 +8107,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        #if B_UPDATED_MOVE_DATA >= GEN_4
-            .flingPower = 80,
-        #else
-            .flingPower = 60,
-        #endif
     },
 
     [ITEM_TM29_PSYCHIC] =
@@ -8173,7 +8118,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 90,
     },
 
     [ITEM_TM30_SHADOW_BALL] =
@@ -8185,7 +8129,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 80,
     },
 
     [ITEM_TM31_BRICK_BREAK] =
@@ -8197,7 +8140,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 75,
     },
 
     [ITEM_TM32_DOUBLE_TEAM] =
@@ -8209,7 +8151,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM33_REFLECT] =
@@ -8221,7 +8162,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM34_SHOCK_WAVE] =
@@ -8233,7 +8173,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 60,
     },
 
     [ITEM_TM35_FLAMETHROWER] =
@@ -8245,11 +8184,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        #if B_UPDATED_MOVE_DATA >= GEN_6
-            .flingPower = 90,
-        #else
-            .flingPower = 95,
-        #endif
     },
 
     [ITEM_TM36_SLUDGE_BOMB] =
@@ -8261,7 +8195,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 90,
     },
 
     [ITEM_TM37_SANDSTORM] =
@@ -8273,7 +8206,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM38_FIRE_BLAST] =
@@ -8285,11 +8217,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        #if B_UPDATED_MOVE_DATA >= GEN_6
-            .flingPower = 110,
-        #else
-            .flingPower = 120,
-        #endif
     },
 
     [ITEM_TM39_ROCK_TOMB] =
@@ -8301,11 +8228,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        #if B_UPDATED_MOVE_DATA >= GEN_6
-            .flingPower = 60,
-        #else
-            .flingPower = 50,
-        #endif
     },
 
     [ITEM_TM40_AERIAL_ACE] =
@@ -8317,7 +8239,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 60,
     },
 
     [ITEM_TM41_TORMENT] =
@@ -8329,7 +8250,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM42_FACADE] =
@@ -8341,7 +8261,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM43_SECRET_POWER] =
@@ -8353,7 +8272,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 70,
     },
 
     [ITEM_TM44_REST] =
@@ -8365,7 +8283,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM45_ATTRACT] =
@@ -8377,7 +8294,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM46_THIEF] =
@@ -8389,11 +8305,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        #if B_UPDATED_MOVE_DATA >= GEN_6
-            .flingPower = 60,
-        #else
-            .flingPower = 40,
-        #endif
     },
 
     [ITEM_TM47_STEEL_WING] =
@@ -8405,7 +8316,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 70,
     },
 
     [ITEM_TM48_SKILL_SWAP] =
@@ -8417,7 +8327,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM49_SNATCH] =
@@ -8429,7 +8338,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_TM50_OVERHEAT] =
@@ -8441,11 +8349,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        #if B_UPDATED_MOVE_DATA >= GEN_6
-            .flingPower = 130,
-        #else
-            .flingPower = 140,
-        #endif
     },
 
     [ITEM_TM51] =
@@ -9008,7 +8911,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 50,
     },
 
     [ITEM_HM02_FLY] =
@@ -9021,11 +8923,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        #if B_UPDATED_MOVE_DATA >= GEN_4
-            .flingPower = 90,
-        #else
-            .flingPower = 70,
-        #endif
     },
 
     [ITEM_HM03_SURF] =
@@ -9038,11 +8935,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        #if B_UPDATED_MOVE_DATA >= GEN_6
-            .flingPower = 90,
-        #else
-            .flingPower = 95,
-        #endif
     },
 
     [ITEM_HM04_STRENGTH] =
@@ -9055,7 +8947,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 80,
     },
 
     [ITEM_HM05_FLASH] =
@@ -9068,7 +8959,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 10,
     },
 
     [ITEM_HM06_ROCK_SMASH] =
@@ -9081,11 +8971,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        #if B_UPDATED_MOVE_DATA >= GEN_4
-            .flingPower = 20,
-        #else
-            .flingPower = 40,
-        #endif
     },
 
     [ITEM_HM07_WATERFALL] =
@@ -9098,7 +8983,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .flingPower = 80,
     },
 
     [ITEM_HM08_DIVE] =
@@ -9111,11 +8995,6 @@ const struct Item gItems[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        #if B_UPDATED_MOVE_DATA >= GEN_4
-            .flingPower = 80,
-        #else
-            .flingPower = 60,
-        #endif
     },
 
 
@@ -9192,7 +9071,7 @@ const struct Item gItems[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_FormChange,
-        .secondaryId = FORM_ITEM_USE_TIME,
+        .secondaryId = FORM_ITEM_USE,
     },
 
     [ITEM_REVEAL_GLASS] =

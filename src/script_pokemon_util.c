@@ -72,9 +72,7 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 u
     SetMonData(&mon, MON_DATA_HELD_ITEM, heldItem);
 
     // In case a mon with a form changing item is given. Eg: SPECIES_ARCEUS with ITEM_SPLASH_PLATE will transform into SPECIES_ARCEUS_WATER upon gifted.
-    targetSpecies = GetFormChangeTargetSpecies(&mon, FORM_ITEM_HOLD_ABILITY, 0);
-    if (targetSpecies == SPECIES_NONE)
-        targetSpecies = GetFormChangeTargetSpecies(&mon, FORM_ITEM_HOLD, 0);
+    targetSpecies = GetFormChangeTargetSpecies(&mon, FORM_ITEM_HOLD, 0);
     if (targetSpecies != SPECIES_NONE)
     {
         SetMonData(&mon, MON_DATA_SPECIES, &targetSpecies);

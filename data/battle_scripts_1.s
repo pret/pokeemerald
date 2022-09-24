@@ -1,3 +1,4 @@
+#include "config.h"
 #include "constants/global.h"
 #include "constants/battle.h"
 #include "constants/pokemon.h"
@@ -415,6 +416,41 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectExtremeEvoboost         @ EFFECT_EXTREME_EVOBOOST
 	.4byte BattleScript_EffectTerrainHit              @ EFFECT_DAMAGE_SET_TERRAIN
 
+BattleScript_AffectionBasedEndurance::
+	playanimation BS_TARGET, B_ANIM_AFFECTION_HANGED_ON
+	printstring STRINGID_TARGETTOUGHEDITOUT
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_AffectionBasedStatusHeal::
+	jumpifstatus BS_ATTACKER, STATUS1_POISON | STATUS1_TOXIC_POISON, BattleScript_AffectionBasedStatus_HealPoisonString
+	jumpifstatus BS_ATTACKER, STATUS1_SLEEP, BattleScript_AffectionBasedStatus_HealSleepString
+	jumpifstatus BS_ATTACKER, STATUS1_PARALYSIS, BattleScript_AffectionBasedStatus_HealParalysisString
+	jumpifstatus BS_ATTACKER, STATUS1_BURN, BattleScript_AffectionBasedStatus_HealBurnString
+	jumpifstatus BS_ATTACKER, STATUS1_FREEZE, BattleScript_AffectionBasedStatus_HealFreezeString
+	end2
+BattleScript_AffectionBasedStatus_HealPoisonString:
+	printstring STRINGID_ATTACKEREXPELLEDTHEPOISON
+	goto BattleScript_AffectionBasedStatusHeal_Continue
+BattleScript_AffectionBasedStatus_HealSleepString:
+	printstring STRINGID_ATTACKERSHOOKITSELFAWAKE
+	goto BattleScript_AffectionBasedStatusHeal_Continue
+BattleScript_AffectionBasedStatus_HealParalysisString:
+	printstring STRINGID_ATTACKERBROKETHROUGHPARALYSIS
+	goto BattleScript_AffectionBasedStatusHeal_Continue
+BattleScript_AffectionBasedStatus_HealBurnString:
+	printstring STRINGID_ATTACKERHEALEDITSBURN
+	goto BattleScript_AffectionBasedStatusHeal_Continue
+BattleScript_AffectionBasedStatus_HealFreezeString:
+	printstring STRINGID_ATTACKERMELTEDTHEICE
+BattleScript_AffectionBasedStatusHeal_Continue:
+	waitmessage B_WAIT_TIME_LONG
+	clearstatus BS_ATTACKER
+	waitstate
+	updatestatusicon BS_ATTACKER
+	waitstate
+	end2
+
 BattleScript_EffectSteelBeam::
 	attackcanceler
 	attackstring
@@ -475,7 +511,7 @@ BattleScript_BeakBlastSetUp::
 	setbeakblast BS_ATTACKER
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
-	playanimation BS_ATTACKER, B_ANIM_BEAK_BLAST_SETUP, NULL	
+	playanimation BS_ATTACKER, B_ANIM_BEAK_BLAST_SETUP, NULL
 	printstring STRINGID_HEATUPBEAK
 	waitmessage B_WAIT_TIME_LONG
 	end2
@@ -565,7 +601,7 @@ BattleScript_ScaleShotEnd::
 	moveendcase MOVEEND_SYNCHRONIZE_TARGET
 	moveendfrom MOVEEND_STATUS_IMMUNITY_ABILITIES
 	end
-  
+
 BattleScript_EffectSkyDrop:
 	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_SkyDropTurn2
 	attackcanceler
@@ -1981,12 +2017,11 @@ BattleScript_EffectHitSwitchTarget:
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	tryfaintmon BS_TARGET
-	moveendcase MOVEEND_MAGICIAN	@ possibly others?
+	moveendall
 	jumpifability BS_TARGET, ABILITY_SUCTION_CUPS, BattleScript_AbilityPreventsPhasingOut
 	jumpifstatus3 BS_TARGET, STATUS3_ROOTED, BattleScript_PrintMonIsRooted
 	tryhitswitchtarget BattleScript_EffectHitSwitchTargetMoveEnd
 BattleScript_EffectHitSwitchTargetMoveEnd:
-	moveendall
 	end
 
 BattleScript_EffectClearSmog:
@@ -5613,7 +5648,7 @@ BattleScript_EffectRolePlay::
 	pause 20
 	destroyabilitypopup
 	pause 40
-.endif	
+.endif
 	printstring STRINGID_PKMNCOPIEDFOE
 	waitmessage B_WAIT_TIME_LONG
 	switchinabilities BS_ATTACKER
@@ -6532,11 +6567,9 @@ BattleScript_LearnMoveReturn::
 BattleScript_RainContinuesOrEnds::
 	printfromtable gRainContinuesStringIds
 	waitmessage B_WAIT_TIME_LONG
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_RAIN_STOPPED, BattleScript_RainEnds
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_RAIN_STOPPED, BattleScript_RainContinuesOrEndsEnd
 	playanimation BS_ATTACKER, B_ANIM_RAIN_CONTINUES
-	end2
-BattleScript_RainEnds::
-	call BattleScript_WeatherFormChanges
+BattleScript_RainContinuesOrEndsEnd::
 	end2
 
 BattleScript_DamagingWeatherContinues::
@@ -6575,7 +6608,6 @@ BattleScript_DamagingWeatherContinuesEnd::
 BattleScript_SandStormHailEnds::
 	printfromtable gSandStormHailEndStringIds
 	waitmessage B_WAIT_TIME_LONG
-	call BattleScript_WeatherFormChanges
 	end2
 
 BattleScript_SunlightContinues::
@@ -6587,7 +6619,6 @@ BattleScript_SunlightContinues::
 BattleScript_SunlightFaded::
 	printstring STRINGID_SUNLIGHTFADED
 	waitmessage B_WAIT_TIME_LONG
-	call BattleScript_WeatherFormChanges
 	end2
 
 BattleScript_OverworldWeatherStarts::
@@ -7257,6 +7288,10 @@ BattleScript_SelectingNotAllowedStuffCheeks::
 	printselectionstring STRINGID_STUFFCHEEKSCANTSELECT
 	endselectionscript
 
+BattleScript_SelectingNotAllowedStuffCheeksInPalace::
+	printstring STRINGID_STUFFCHEEKSCANTSELECT
+	goto BattleScript_SelectingUnusableMoveInPalace
+
 BattleScript_SelectingNotAllowedBelch::
 	printselectionstring STRINGID_BELCHCANTSELECT
 	endselectionscript
@@ -7417,6 +7452,7 @@ BattleScript_MagicCoatBounce::
 	printfromtable gMagicCoatBounceStringIds
 	waitmessage B_WAIT_TIME_LONG
 	orword gHitMarker, HITMARKER_ATTACKSTRING_PRINTED | HITMARKER_NO_PPDEDUCT | HITMARKER_ALLOW_NO_PP
+	bicword gHitMarker, HITMARKER_NO_ATTACKSTRING
 	setmagiccoattarget BS_ATTACKER
 	return
 
@@ -8188,19 +8224,30 @@ BattleScript_ShedSkinActivates::
 BattleScript_WeatherFormChanges::
 	setbyte sBATTLER, 0
 BattleScript_WeatherFormChangesLoop::
-	trycastformdatachange
+	tryweatherformdatachange
 	addbyte sBATTLER, 1
 	jumpifbytenotequal sBATTLER, gBattlersCount, BattleScript_WeatherFormChangesLoop
 	return
 
-BattleScript_CastformChange::
-	call BattleScript_DoCastformChange
+BattleScript_WeatherFormChange::
+	call BattleScript_DoWeatherFormChange
 	end3
 
-BattleScript_DoCastformChange::
+BattleScript_DoWeatherFormChange::
 	copybyte gBattlerAbility, sBATTLER
+.if B_WEATHER_FORMS >= GEN_5
+	jumpifspecies BS_SCRIPTING, SPECIES_CASTFORM, BattleScript_DoWeatherFormChange_ForecastCheck
+BattleScript_DoWeatherFormChange_FlowerGiftCheck:
+	jumpifability BS_SCRIPTING, ABILITY_FLOWER_GIFT, BattleScript_DoWeatherFormChange_PopUp
+	goto BattleScript_DoWeatherFormChange_AfterPopUp
+.endif
+BattleScript_DoWeatherFormChange_ForecastCheck:
+	jumpifability BS_SCRIPTING, ABILITY_FORECAST, BattleScript_DoWeatherFormChange_PopUp
+	goto BattleScript_DoWeatherFormChange_AfterPopUp
+BattleScript_DoWeatherFormChange_PopUp:
 	call BattleScript_AbilityPopUp
-	docastformchangeanimation
+BattleScript_DoWeatherFormChange_AfterPopUp:
+	doweatherformchangeanimation
 	waitstate
 	printstring STRINGID_PKMNTRANSFORMED
 	waitmessage B_WAIT_TIME_LONG
@@ -9197,13 +9244,33 @@ BattleScript_SelectingNotAllowedMoveChoiceItem::
 	printselectionstring STRINGID_ITEMALLOWSONLYYMOVE
 	endselectionscript
 
+BattleScript_SelectingNotAllowedMoveChoiceItemInPalace::
+	printstring STRINGID_ITEMALLOWSONLYYMOVE
+	goto BattleScript_SelectingUnusableMoveInPalace
+
 BattleScript_SelectingNotAllowedMoveGorillaTactics::
 	printselectionstring STRINGID_ABILITYALLOWSONLYMOVE
 	endselectionscript
 
+BattleScript_SelectingNotAllowedMoveGorillaTacticsInPalace::
+	printstring STRINGID_ABILITYALLOWSONLYMOVE
+	goto BattleScript_SelectingUnusableMoveInPalace
+
 BattleScript_SelectingNotAllowedMoveAssaultVest::
 	printselectionstring STRINGID_ASSAULTVESTDOESNTALLOW
 	endselectionscript
+
+BattleScript_SelectingNotAllowedMoveAssaultVestInPalace::
+	printstring STRINGID_ASSAULTVESTDOESNTALLOW
+	goto BattleScript_SelectingUnusableMoveInPalace
+
+BattleScript_SelectingNotAllowedPlaceholder::
+	printselectionstring STRINGID_NOTDONEYET
+	endselectionscript
+
+BattleScript_SelectingNotAllowedPlaceholderInPalace::
+	printstring STRINGID_NOTDONEYET
+	goto BattleScript_SelectingUnusableMoveInPalace
 
 BattleScript_HangedOnMsg::
 	playanimation BS_TARGET, B_ANIM_HANGED_ON
@@ -9558,7 +9625,7 @@ BattleScript_StatUpZMove::
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_StatUpZMoveEnd:
 	return
-	
+
 BattleScript_HealReplacementZMove::
 	playanimation BS_SCRIPTING B_ANIM_WISH_HEAL 0x0
 	printfromtable gZEffectStringIds
@@ -9769,7 +9836,7 @@ BattleScript_NeutralizingGasExitsLoop:
 	jumpifbytenotequal gBattlerTarget, sByteFour, BattleScript_NeutralizingGasExitsLoop	@ SOMEHOW, comparing to gBattlersCount is problematic.
 	restoretarget
 	return
-  
+
 BattleScript_MagicianActivates::
 	call BattleScript_AbilityPopUp
 	call BattleScript_ItemSteal

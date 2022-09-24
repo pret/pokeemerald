@@ -56,7 +56,7 @@
       "x": 14,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_SKY_PILLAR_RAQUAZA_CRY_DONE",
+      "var": "VAR_SKY_PILLAR_RAYQUAZA_CRY_DONE",
       "var_value": "0",
       "script": "SkyPillar_Top_EventScript_AwakenRayquaza"
     }

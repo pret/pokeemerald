@@ -259,7 +259,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     else if (moveTarget == MOVE_TARGET_SELECTED)
         chosenMoveId |= GetBattlePalaceTarget();
     else
-        chosenMoveId |= (GetBattlerAtPosition((GetBattlerPosition(gActiveBattler) & BIT_SIDE) ^ BIT_SIDE) << 8);
+        chosenMoveId |= (GetBattlerAtPosition(BATTLE_OPPOSITE(GET_BATTLER_SIDE(gActiveBattler))) << 8);
 
     return chosenMoveId;
 }
@@ -282,7 +282,7 @@ static u8 GetBattlePalaceMoveGroup(u8 battlerId, u16 move)
     case MOVE_TARGET_RANDOM:
     case MOVE_TARGET_BOTH:
     case MOVE_TARGET_FOES_AND_ALLY:
-        if (gBattleMoves[move].power == 0)
+        if (IS_MOVE_STATUS(move))
             return PALACE_MOVE_GROUP_SUPPORT;
         else
             return PALACE_MOVE_GROUP_ATTACK;
@@ -315,7 +315,7 @@ static u16 GetBattlePalaceTarget(void)
         }
 
         if (gBattleMons[opposing1].hp == gBattleMons[opposing2].hp)
-            return (((gActiveBattler & BIT_SIDE) ^ BIT_SIDE) + (Random() & 2)) << 8;
+            return (BATTLE_OPPOSITE(gActiveBattler & BIT_SIDE) + (Random() & 2)) << 8;
 
         switch (gBattlePalaceNatureToMoveTarget[GetNatureFromPersonality(gBattleMons[gActiveBattler].personality)])
         {
@@ -330,11 +330,11 @@ static u16 GetBattlePalaceTarget(void)
             else
                 return opposing2 << 8;
         case PALACE_TARGET_RANDOM:
-            return (((gActiveBattler & BIT_SIDE) ^ BIT_SIDE) + (Random() & 2)) << 8;
+            return (BATTLE_OPPOSITE(gActiveBattler & BIT_SIDE) + (Random() & 2)) << 8;
         }
     }
 
-    return (gActiveBattler ^ BIT_SIDE) << 8;
+    return BATTLE_OPPOSITE(gActiveBattler) << 8;
 }
 
 // Wait for the pokemon to finish appearing out from the pokeball on send out
@@ -578,13 +578,13 @@ static void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battlerId, bool32 op
     position = GetBattlerPosition(battlerId);
     if (opponent)
     {
-        HandleLoadSpecialPokePic(&gMonFrontPicTable[species],
+        HandleLoadSpecialPokePic(TRUE,
                                  gMonSpritesGfxPtr->sprites.ptr[position],
                                  species, currentPersonality);
     }
     else
     {
-        HandleLoadSpecialPokePic(&gMonBackPicTable[species],
+        HandleLoadSpecialPokePic(FALSE,
                                  gMonSpritesGfxPtr->sprites.ptr[position],
                                  species, currentPersonality);
     }
@@ -715,7 +715,12 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
         else
         {
             if (state == 2)
-                LoadCompressedSpriteSheet(&sSpriteSheets_DoublesPlayerHealthbox[0]);
+            {
+                if (WhichBattleCoords(0))
+                    LoadCompressedSpriteSheet(&sSpriteSheets_DoublesPlayerHealthbox[0]);
+                else
+                    LoadCompressedSpriteSheet(&sSpriteSheet_SinglesPlayerHealthbox);
+            }
             else if (state == 3)
                 LoadCompressedSpriteSheet(&sSpriteSheets_DoublesPlayerHealthbox[1]);
             else if (state == 4)
@@ -860,7 +865,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 castform, bo
         personalityValue = gContestResources->moveAnim->personality;
         otId = gContestResources->moveAnim->otId;
 
-        HandleLoadSpecialPokePic(&gMonBackPicTable[targetSpecies],
+        HandleLoadSpecialPokePic(FALSE,
                                  gMonSpritesGfxPtr->sprites.ptr[position],
                                  targetSpecies,
                                  gContestResources->moveAnim->targetPersonality);
@@ -879,7 +884,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 castform, bo
             personalityValue = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_PERSONALITY);
             otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_OT_ID);
 
-            HandleLoadSpecialPokePic(&gMonBackPicTable[targetSpecies],
+            HandleLoadSpecialPokePic(FALSE,
                                      gMonSpritesGfxPtr->sprites.ptr[position],
                                      targetSpecies,
                                      gTransformedPersonalities[battlerAtk]);
@@ -889,7 +894,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 castform, bo
             personalityValue = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_PERSONALITY);
             otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_OT_ID);
 
-            HandleLoadSpecialPokePic(&gMonFrontPicTable[targetSpecies],
+            HandleLoadSpecialPokePic(TRUE,
                                      gMonSpritesGfxPtr->sprites.ptr[position],
                                      targetSpecies,
                                      gTransformedPersonalities[battlerAtk]);
@@ -1014,7 +1019,7 @@ void HandleLowHpMusicChange(struct Pokemon *mon, u8 battlerId)
     {
         if (!gBattleSpritesDataPtr->battlerData[battlerId].lowHpSong)
         {
-            if (!gBattleSpritesDataPtr->battlerData[battlerId ^ BIT_FLANK].lowHpSong)
+            if (!gBattleSpritesDataPtr->battlerData[BATTLE_PARTNER(battlerId)].lowHpSong)
                 PlaySE(SE_LOW_HEALTH);
             gBattleSpritesDataPtr->battlerData[battlerId].lowHpSong = 1;
         }
@@ -1027,7 +1032,7 @@ void HandleLowHpMusicChange(struct Pokemon *mon, u8 battlerId)
             m4aSongNumStop(SE_LOW_HEALTH);
             return;
         }
-        if (IsDoubleBattle() && !gBattleSpritesDataPtr->battlerData[battlerId ^ BIT_FLANK].lowHpSong)
+        if (IsDoubleBattle() && !gBattleSpritesDataPtr->battlerData[BATTLE_PARTNER(battlerId)].lowHpSong)
         {
             m4aSongNumStop(SE_LOW_HEALTH);
             return;
@@ -1041,7 +1046,7 @@ void BattleStopLowHpSound(void)
 
     gBattleSpritesDataPtr->battlerData[playerBattler].lowHpSong = 0;
     if (IsDoubleBattle())
-        gBattleSpritesDataPtr->battlerData[playerBattler ^ BIT_FLANK].lowHpSong = 0;
+        gBattleSpritesDataPtr->battlerData[BATTLE_PARTNER(playerBattler)].lowHpSong = 0;
 
     m4aSongNumStop(SE_LOW_HEALTH);
 }
