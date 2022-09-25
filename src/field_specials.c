@@ -1055,7 +1055,7 @@ static void PCTurnOffEffect(void)
     u16 tileId = 0;
     u8 playerDirection = GetPlayerFacingDirection();
 
-    if (IsPlayerInFrontOfPC() == TRUE)
+    if (IsPlayerInFrontOfPC() == FALSE)
         return;
     switch (playerDirection)
     {
