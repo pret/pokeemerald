@@ -728,7 +728,7 @@ void CB2_BattleDebugMenu(void)
 static void PutMovesPointsText(struct BattleDebugMenu *data)
 {
     u32 i, j, count, battlerDef;
-    u8 *text = malloc(0x50);
+    u8 *text = Alloc(0x50);
 
     FillWindowPixelBuffer(data->aiMovesWindowId, 0x11);
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -756,7 +756,7 @@ static void PutMovesPointsText(struct BattleDebugMenu *data)
     }
 
     CopyWindowToVram(data->aiMovesWindowId, 3);
-    free(text);
+    Free(text);
 }
 
 static void Task_ShowAiPoints(u8 taskId)
@@ -840,7 +840,7 @@ static const u8 *const sAiInfoItemNames[] =
 static void PutAiInfoText(struct BattleDebugMenu *data)
 {
     u32 i, j, count;
-    u8 *text = malloc(0x50);
+    u8 *text = Alloc(0x50);
 
     FillWindowPixelBuffer(data->aiMovesWindowId, 0x11);
 
@@ -866,13 +866,13 @@ static void PutAiInfoText(struct BattleDebugMenu *data)
     }
 
     CopyWindowToVram(data->aiMovesWindowId, 3);
-    free(text);
+    Free(text);
 }
 
 static void PutAiPartyText(struct BattleDebugMenu *data)
 {
     u32 i, j, count;
-    u8 *text = malloc(0x50), *txtPtr;
+    u8 *text = Alloc(0x50), *txtPtr;
     struct AiPartyMon *aiMons = AI_PARTY->mons[GET_BATTLER_SIDE(data->aiBattlerId)];
 
     FillWindowPixelBuffer(data->aiMovesWindowId, 0x11);
@@ -913,7 +913,7 @@ static void PutAiPartyText(struct BattleDebugMenu *data)
     }
 
     CopyWindowToVram(data->aiMovesWindowId, 3);
-    free(text);
+    Free(text);
 }
 
 static void Task_ShowAiKnowledge(u8 taskId)
