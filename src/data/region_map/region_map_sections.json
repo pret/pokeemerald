@@ -794,7 +794,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_4_FLYDUP",
+            "map_section": "MAPSEC_ROUTE_4_POKECENTER",
             "name": "ROUTE 4",
             "name_clone": true,
             "x": 0,
@@ -803,7 +803,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_10_FLYDUP",
+            "map_section": "MAPSEC_ROUTE_10_POKECENTER",
             "name": "ROUTE 10",
             "name_clone": true,
             "x": 0,

@@ -44,15 +44,15 @@ WSL1 is the preferred terminal to build **pokeemerald**. The following instructi
 3. The next step is to choose and install a Linux distribution from the Microsoft Store. The following instructions will assume Ubuntu as the Linux distribution of choice.
     <details>
         <summary><i>Note for advanced users...</i></summary>
-    
-    >   You can pick a preferred Linux distribution, but setup instructions may differ. Debian should work with the given instructions, but has not been tested. 
+
+    >   You can pick a preferred Linux distribution, but setup instructions may differ. Debian should work with the given instructions, but has not been tested.
     </details>
 
 4. Open the [Microsoft Store Linux Selection](https://aka.ms/wslstore), click Ubuntu, then click Get, which will install the Ubuntu distribution.
     <details>
         <summary><i>Notes...</i></summary>
 
-    >   Note 1: If a dialog pops up asking for you to sign into a Microsoft Account, then just close the dialog.  
+    >   Note 1: If a dialog pops up asking for you to sign into a Microsoft Account, then just close the dialog.
     >   Note 2: If the link does not work, then open the Microsoft Store manually, and search for the Ubuntu app (choose the one with no version number).
     </details>
 
@@ -102,11 +102,11 @@ cd /mnt/c/Users/<user>/Desktop/decomps
 <details>
     <summary><i>Notes...</i></summary>
 
->   Note 1: The Windows C:\ drive is called /mnt/c/ in WSL.  
->   Note 2: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "/mnt/c/users/<user>/Desktop/decomp folder"`.  
+>   Note 1: The Windows C:\ drive is called /mnt/c/ in WSL.
+>   Note 2: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "/mnt/c/users/<user>/Desktop/decomp folder"`.
 >   Note 3: Windows path names are case-insensitive so adhering to capitalization isn't needed
 </details>
-    
+
 If this works, then proceed to [Installation](#installation).
 
 Otherwise, ask for help on Discord or IRC (see [README.md](README.md)), or continue reading below for [Windows instructions using msys2](#windows-msys2).
@@ -213,10 +213,10 @@ Note that the directory **must exist** in Windows. If you want to store pokeemer
 <details>
     <summary><i>Notes...</i></summary>
 
->   Note 1: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "c:/users/<user>/Desktop/decomp folder"`.  
->   Note 2: Windows path names are case-insensitive so adhering to capitalization isn't needed  
+>   Note 1: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "c:/users/<user>/Desktop/decomp folder"`.
+>   Note 2: Windows path names are case-insensitive so adhering to capitalization isn't needed
 </details>
-    
+
 If this works, then proceed to [Installation](#installation). Otherwise, ask for help on Discord or IRC (see [README.md](README.md)).
 
 ## macOS
@@ -283,8 +283,8 @@ Note that the directory **must exist** in the folder system. If you want to stor
 
 <details>
     <summary><i>Note..</i>.</summary>
-    
->   Note: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "Desktop/decomp folder"`  
+
+>   Note: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "Desktop/decomp folder"`
 </details>
 
 If this works, then proceed to [Installation](#installation). Otherwise, ask for help on Discord or IRC (see [README.md](README.md)).
@@ -304,6 +304,20 @@ Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to
 >   If the repository you plan to build has an **[older revision of the INSTALL.md](https://github.com/pret/pokeemerald/blob/571c598/INSTALL.md)**,
 >   then you will have to install devkitARM. Install all the above packages except binutils-arm-none-eabi, and follow the instructions to
 >   [install devkitARM on Debian/Ubuntu-based distributions](#installing-devkitarm-on-debianubuntu-based-distributions).
+</details>
+
+### Arch Linux
+Run this command as root to install the necessary packages:
+```bash
+pacman -S base-devel arm-none-eabi-binutils git libpng
+```
+Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to-store-pokeemerald-linux).
+<details>
+    <summary><i>Note for legacy repos...</i></summary>
+
+>   If the repository you plan to build has an **[older revision of the INSTALL.md](https://github.com/pret/pokeemerald/blob/571c598/INSTALL.md)**,
+>   then you will have to install devkitARM. Install all the above packages except binutils-arm-none-eabi, and follow the instructions to
+>   [install devkitARM on Arch Linux](#installing-devkitarm-on-arch-linux).
 </details>
 
 ### Other distributions
@@ -404,20 +418,15 @@ If you aren't in the pokeemerald directory already, then **change directory** to
 ```bash
 cd pokeemerald
 ```
-To build **pokeemerald.gba** for the first time and confirm it matches the official ROM image (Note: to speed up builds, see [Parallel builds](#parallel-builds)):
+To build **pokeemerald.gba** (Note: to speed up builds, see [Parallel builds](#parallel-builds)):
 ```bash
-make compare
+make
 ```
-If an OK is returned, then the installation went smoothly.
+If it has built successfully you will have the output file **pokeemerald.gba** in your project folder.
 <details>
 <summary>Note for Windows...</summary>
 > If you switched terminals since the last build (e.g. from msys2 to WSL1), you must run `make clean-tools` once before any subsequent `make` commands.
 </details>
-
-To build **pokeemerald.gba** with your changes:
-```bash
-make
-```
 
 # Building guidance
 
@@ -437,11 +446,20 @@ Replace `<output of nproc>` with the number that the `nproc` command returned.
 
 `nproc` is not available on macOS. The alternative is `sysctl -n hw.ncpu` ([relevant Stack Overflow thread](https://stackoverflow.com/questions/1715580)).
 
-## Debug info
+## Compare ROM to the original
 
-To build **pokeemerald.elf** with enhanced debug info:
+For contributing, or if you'd simply like to verify that your ROM is identical to the original game, run:
 ```bash
-make DINFO=1
+make compare
+```
+If it matches, you will see the following at the end of the output:
+```bash
+pokeemerald.gba: OK
+```
+If there are any changes from the original game, you will instead see:
+```bash
+pokeemerald.gba: FAILED
+shasum: WARNING: 1 computed checksum did NOT match
 ```
 
 ## devkitARM's C compiler
@@ -520,7 +538,25 @@ devkitARM is now installed.
 
 devkitARM is now installed.
 
-## Other toolchains
+### Installing devkitARM on Arch Linux
+
+1. Follow [devkitPro's instructions](https://devkitpro.org/wiki/devkitPro_pacman#Customising_Existing_Pacman_Install) to configure `pacman` to download devkitPro packages.
+2. Install `gba-dev`: run the following command as root.
+
+    ```console
+    pacman -S gba-dev
+    ```
+    This will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
+
+3. Run the following command to set devkitPro related environment variables (alternatively, close and re-open the Terminal):
+
+    ```bash
+    source /etc/profile.d/devkit-env.sh
+    ```
+
+devkitARM is now installed.
+
+### Other toolchains
 
 To build using a toolchain other than devkitARM, override the `TOOLCHAIN` environment variable with the path to your toolchain, which must contain the subdirectory `bin`.
 ```bash
@@ -531,6 +567,14 @@ The following is an example:
 make TOOLCHAIN="/usr/local/arm-none-eabi"
 ```
 To compile the `modern` target with this toolchain, the subdirectories `lib`, `include`, and `arm-none-eabi` must also be present.
+
+### Building with debug info under a modern toolchain
+
+To build **pokeemerald.elf** with debug symbols under a modern toolchain:
+```bash
+make modern DINFO=1
+```
+Note that this is not necessary for a non-modern build since those are built with debug symbols by default.
 
 # Useful additional tools
 

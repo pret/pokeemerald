@@ -4063,18 +4063,24 @@ extern const u16 gBattleInterface_BallStatusBarPal[];
 extern const u16 gBattleInterface_BallDisplayPal[];
 extern const u8 gHealthboxElementsGfxTable[][32];
 
-extern const u16 gNamingScreenMenu_Pal[];
+extern const u16 gNamingScreenMenu_Pal[6][16];
 extern const u32 gNamingScreenMenu_Gfx[];
 extern const u32 gNamingScreenBackground_Tilemap[];
 extern const u8 gNamingScreenKeyboardUpper_Tilemap[];
 extern const u8 gNamingScreenKeyboardLower_Tilemap[];
 extern const u8 gNamingScreenKeyboardSymbols_Tilemap[];
-extern const u8 gNamingScreenRWindow_Gfx[];
-extern const u8 gNamingScreenPageButton_Gfx[];
-extern const u8 gNamingScreenROptions_Gfx[];
-extern const u8 gNamingScreenCursor_Gfx[];
-extern const u8 gNamingScreenInputArrow_Gfx[];
-extern const u8 gNamingScreenUnderscore_Gfx[];
+extern const u32 gNamingScreenPageSwapFrame_Gfx[];
+extern const u32 gNamingScreenBackButton_Gfx[];
+extern const u32 gNamingScreenOKButton_Gfx[];
+extern const u32 gNamingScreenPageSwapButton_Gfx[];
+extern const u32 gNamingScreenPageSwapUpper_Gfx[];
+extern const u32 gNamingScreenPageSwapLower_Gfx[];
+extern const u32 gNamingScreenPageSwapOthers_Gfx[];
+extern const u32 gNamingScreenCursor_Gfx[];
+extern const u32 gNamingScreenCursorSquished_Gfx[];
+extern const u32 gNamingScreenCursorFilled_Gfx[];
+extern const u32 gNamingScreenInputArrow_Gfx[];
+extern const u32 gNamingScreenUnderscore_Gfx[];
 
 extern const u32 gPokeblockFeedBg_Tilemap[];
 
@@ -4132,8 +4138,8 @@ extern const u16 gTilesetAnims_BattleDomePals0_1[];
 extern const u16 gTilesetAnims_BattleDomePals0_2[];
 extern const u16 gTilesetAnims_BattleDomePals0_3[];
 
-extern const u32 gBattleArenaJudgementSymbolsGfx[];
-extern const u32 gBattleArenaJudgementSymbolsPalette[];
+extern const u32 gBattleArenaJudgmentSymbolsGfx[];
+extern const u32 gBattleArenaJudgmentSymbolsPalette[];
 
 extern const u32 gBattleWindowTextPalette[];
 

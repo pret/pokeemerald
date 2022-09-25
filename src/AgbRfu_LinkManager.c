@@ -49,7 +49,7 @@ u32 rfu_LMAN_REQBN_softReset_and_checkID(void)
     return id;
 }
 
-void rfu_LMAN_REQ_sendData(u8 clockChangeFlag)
+void rfu_LMAN_REQ_sendData(bool8 clockChangeFlag)
 {
     if (gRfuLinkStatus->parentChild == MODE_CHILD)
     {
