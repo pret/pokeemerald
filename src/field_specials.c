@@ -1056,31 +1056,30 @@ static void PCTurnOffEffect(void)
     u8 playerDirection = GetPlayerFacingDirection();
 
     if (IsPlayerInFrontOfPC() == TRUE)
+        return;
+    switch (playerDirection)
     {
-        switch (playerDirection)
-        {
-        case DIR_NORTH:
-            dx = 0;
-            dy = -1;
-            break;
-        case DIR_WEST:
-            dx = -1;
-            dy = -1;
-            break;
-        case DIR_EAST:
-            dx = 1;
-            dy = -1;
-            break;
-        }
-        if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
-            tileId = METATILE_Building_PC_Off;
-        else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
-            tileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
-        else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
-            tileId = METATILE_BrendansMaysHouse_MayPC_Off;
-        MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, tileId | MAPGRID_COLLISION_MASK);
-        DrawWholeMapView();
+    case DIR_NORTH:
+        dx = 0;
+        dy = -1;
+        break;
+    case DIR_WEST:
+        dx = -1;
+        dy = -1;
+        break;
+    case DIR_EAST:
+        dx = 1;
+        dy = -1;
+        break;
     }
+    if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
+        tileId = METATILE_Building_PC_Off;
+    else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
+        tileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
+    else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
+        tileId = METATILE_BrendansMaysHouse_MayPC_Off;
+    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, tileId | MAPGRID_COLLISION_MASK);
+    DrawWholeMapView();
 }
 
 void DoLotteryCornerComputerEffect(void)
