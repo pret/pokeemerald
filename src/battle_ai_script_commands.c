@@ -351,14 +351,14 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
     // Decide a random target battlerId in doubles.
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        gBattlerTarget = (Random() & BIT_FLANK) + (GetBattlerSide(gActiveBattler) ^ BIT_SIDE);
+        gBattlerTarget = (Random() & BIT_FLANK) + BATTLE_OPPOSITE(GetBattlerSide(gActiveBattler));
         if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
             gBattlerTarget ^= BIT_FLANK;
     }
     // There's only one choice in single battles.
     else
     {
-        gBattlerTarget = sBattler_AI ^ BIT_SIDE;
+        gBattlerTarget = BATTLE_OPPOSITE(sBattler_AI);
     }
 
     // Choose proper trainer ai scripts.
@@ -541,7 +541,7 @@ static u8 ChooseMoveOrAction_Doubles(void)
                 bestMovePointsForTarget[i] = mostViableMovesScores[0];
 
                 // Don't use a move against ally if it has less than 100 points.
-                if (i == (sBattler_AI ^ BIT_FLANK) && bestMovePointsForTarget[i] < 100)
+                if (i == BATTLE_PARTNER(sBattler_AI) && bestMovePointsForTarget[i] < 100)
                 {
                     bestMovePointsForTarget[i] = -1;
                     mostViableMovesScores[0] = mostViableMovesScores[0]; // Needed to match.
@@ -1151,9 +1151,9 @@ static u8 BattleAI_GetWantedBattler(u8 wantedBattler)
     default:
         return gBattlerTarget;
     case AI_USER_PARTNER:
-        return sBattler_AI ^ BIT_FLANK;
+        return BATTLE_PARTNER(sBattler_AI);
     case AI_TARGET_PARTNER:
-        return gBattlerTarget ^ BIT_FLANK;
+        return BATTLE_PARTNER(gBattlerTarget);
     }
 }
 
@@ -1316,7 +1316,7 @@ static void Cmd_count_usable_party_mons(void)
     {
         u32 position;
         battlerOnField1 = gBattlerPartyIndexes[battlerId];
-        position = GetBattlerPosition(battlerId) ^ BIT_FLANK;
+        position = BATTLE_PARTNER(GetBattlerPosition(battlerId));
         battlerOnField2 = gBattlerPartyIndexes[GetBattlerAtPosition(position)];
     }
     else // In singles there's only one battlerId by side.
@@ -1799,7 +1799,7 @@ static void Cmd_if_has_move(void)
             gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
         break;
     case AI_USER_PARTNER:
-        if (gBattleMons[sBattler_AI ^ BIT_FLANK].hp == 0)
+        if (gBattleMons[BATTLE_PARTNER(sBattler_AI)].hp == 0)
         {
             gAIScriptPtr += 8;
             break;
@@ -1808,7 +1808,7 @@ static void Cmd_if_has_move(void)
         {
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
-                if (gBattleMons[sBattler_AI ^ BIT_FLANK].moves[i] == *movePtr)
+                if (gBattleMons[BATTLE_PARTNER(sBattler_AI)].moves[i] == *movePtr)
                     break;
             }
         }

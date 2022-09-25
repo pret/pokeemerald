@@ -366,7 +366,7 @@ static u32 LoopedTask_OpenRegionMap(s32 taskState)
             menuGfxId = POKENAV_GFX_MAP_MENU_ZOOMED_IN;
 
         LoadLeftHeaderGfxForIndex(menuGfxId);
-        ShowLeftHeaderGfx(menuGfxId, 1, 1);
+        ShowLeftHeaderGfx(menuGfxId, TRUE, TRUE);
         PokenavFadeScreen(POKENAV_FADE_FROM_BLACK);
         return LT_INC_AND_PAUSE;
     case 7:
