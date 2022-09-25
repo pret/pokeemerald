@@ -2805,9 +2805,8 @@ static void Task_WaitFadeAccessPC(u8 taskId)
 static void DebugAction_AccessPC(u8 taskId)
 {
     Debug_DestroyMenu_Full(taskId);
-    CleanupOverworldWindowsAndTilemaps();
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-    CreateTask(Task_WaitFadeAccessPC, 0);
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_PC);
 }
 
 
