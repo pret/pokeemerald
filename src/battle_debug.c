@@ -813,7 +813,7 @@ static void Task_ShowAiPoints(u8 taskId)
         break;
     // Input
     case 2:
-        if (gMain.newKeys & (SELECT_BUTTON | B_BUTTON))
+        if (JOY_NEW(SELECT_BUTTON | B_BUTTON))
         {
             SwitchToDebugView(taskId);
             HideBg(1);
@@ -969,7 +969,7 @@ static void Task_ShowAiKnowledge(u8 taskId)
         break;
     // Input
     case 2:
-        if (gMain.newKeys & (SELECT_BUTTON | B_BUTTON))
+        if (JOY_NEW(SELECT_BUTTON | B_BUTTON))
         {
             SwitchToDebugView(taskId);
             HideBg(1);
@@ -1031,7 +1031,7 @@ static void Task_ShowAiParty(u8 taskId)
         break;
     // Input
     case 2:
-        if (gMain.newKeys & (SELECT_BUTTON | B_BUTTON))
+        if (JOY_NEW(SELECT_BUTTON | B_BUTTON))
         {
             SwitchToDebugViewFromAiParty(taskId);
             HideBg(1);
@@ -1106,7 +1106,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
     struct BattleDebugMenu *data = GetStructPtr(taskId);
 
     // Exit the menu.
-    if (gMain.newKeys & SELECT_BUTTON)
+    if (JOY_NEW(SELECT_BUTTON))
     {
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
         gTasks[taskId].func = Task_DebugMenuFadeOut;
@@ -1114,13 +1114,13 @@ static void Task_DebugMenuProcessInput(u8 taskId)
     }
 
     // Try changing active battler.
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
     {
         if (data->battlerId++ == gBattlersCount - 1)
             data->battlerId = 0;
         UpdateWindowsOnChangedBattler(data);
     }
-    else if (gMain.newKeys & L_BUTTON)
+    else if (JOY_NEW(L_BUTTON))
     {
         if (data->battlerId-- == 0)
             data->battlerId = gBattlersCount - 1;
@@ -1133,17 +1133,17 @@ static void Task_DebugMenuProcessInput(u8 taskId)
         listItemId = ListMenu_ProcessInput(data->mainListTaskId);
         if (listItemId != LIST_CANCEL && listItemId != LIST_NOTHING_CHOSEN && listItemId < LIST_ITEM_COUNT)
         {
-            if (listItemId == LIST_ITEM_AI_MOVES_PTS && gMain.newKeys & A_BUTTON)
+            if (listItemId == LIST_ITEM_AI_MOVES_PTS && JOY_NEW(A_BUTTON))
             {
                 SwitchToAiPointsView(taskId);
                 return;
             }
-            else if (listItemId == LIST_ITEM_AI_INFO && gMain.newKeys & A_BUTTON)
+            else if (listItemId == LIST_ITEM_AI_INFO && JOY_NEW(A_BUTTON))
             {
                 SwitchToAiInfoView(taskId);
                 return;
             }
-            else if (listItemId == LIST_ITEM_AI_PARTY && gMain.newKeys & A_BUTTON)
+            else if (listItemId == LIST_ITEM_AI_PARTY && JOY_NEW(A_BUTTON))
             {
                 SwitchToAiPartyView(taskId);
                 return;
@@ -1182,14 +1182,14 @@ static void Task_DebugMenuProcessInput(u8 taskId)
     // Handle value modifying.
     else if (data->activeWindow == ACTIVE_WIN_MODIFY)
     {
-        if (gMain.newKeys & (B_BUTTON | A_BUTTON))
+        if (JOY_NEW(B_BUTTON | A_BUTTON))
         {
             ClearStdWindowAndFrameToTransparent(data->modifyWindowId, TRUE);
             RemoveWindow(data->modifyWindowId);
             DestroyModifyArrows(data);
             data->activeWindow = ACTIVE_WIN_SECONDARY;
         }
-        else if (gMain.newKeys & DPAD_RIGHT)
+        else if (JOY_NEW(DPAD_RIGHT))
         {
             if (data->modifyArrows.currentDigit != (data->modifyArrows.maxDigits - 1))
             {
@@ -1198,7 +1198,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
                 gSprites[data->modifyArrows.arrowSpriteId[1]].x2 += 6;
             }
         }
-        else if (gMain.newKeys & DPAD_LEFT)
+        else if (JOY_NEW(DPAD_LEFT))
         {
             if (data->modifyArrows.currentDigit != 0)
             {
@@ -1207,7 +1207,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
                 gSprites[data->modifyArrows.arrowSpriteId[1]].x2 -= 6;
             }
         }
-        else if (gMain.newKeys & DPAD_UP)
+        else if (JOY_NEW(DPAD_UP))
         {
             if (TryMoveDigit(&data->modifyArrows, TRUE))
             {
@@ -1216,7 +1216,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
                 PrintSecondaryEntries(data);
             }
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             if (TryMoveDigit(&data->modifyArrows, FALSE))
             {
