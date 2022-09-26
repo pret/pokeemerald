@@ -34,6 +34,7 @@
 #include "new_game.h"
 #include "overworld.h"
 #include "palette.h"
+#include "party_menu.h"
 #include "pokedex.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
@@ -120,9 +121,18 @@ enum { // Give
     DEBUG_GIVE_MENU_ITEM_MAX_COINS,
     DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS,
     DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG,
-    DEBUG_GIVE_MENU_ITEM_FILL_PC_FAST,
-    DEBUG_GIVE_MENU_ITEM_FILL_PC_SLOW,
+    DEBUG_GIVE_MENU_ITEM_FILL_MENU,
     DEBUG_GIVE_MENU_ITEM_CHEAT,
+};
+enum { // Give Fill
+    DEBUG_GIVE_MENU_ITEM_FILL_PC_BOXES_FAST,
+    DEBUG_GIVE_MENU_ITEM_FILL_PC_BOXES_SLOW,
+    DEBUG_GIVE_MENU_ITEM_FILL_PC_ITEMS,
+    DEBUG_GIVE_MENU_ITEM_FILL_POCKET_ITEMS,
+    DEBUG_GIVE_MENU_ITEM_FILL_POCKET_BALLS,
+    DEBUG_GIVE_MENU_ITEM_FILL_POCKET_TMHM,
+    DEBUG_GIVE_MENU_ITEM_FILL_POCKET_BERRIES,
+    DEBUG_GIVE_MENU_ITEM_FILL_POCKET_KEY_ITEMS,
 };
 enum { //Sound
     DEBUG_SOUND_MENU_ITEM_SE,
@@ -132,7 +142,7 @@ enum { //Sound
 
 // *******************************
 // Constants
-#define DEBUG_MENU_WIDTH_MAIN 15
+#define DEBUG_MENU_WIDTH_MAIN 16
 #define DEBUG_MENU_HEIGHT_MAIN 9
 
 #define DEBUG_MENU_WIDTH_EXTRA 10
@@ -203,12 +213,15 @@ static void DebugAction_OpenUtilitiesMenu(u8 taskId);
 static void DebugAction_OpenScriptsMenu(u8 taskId);
 static void DebugAction_OpenFlagsVarsMenu(u8 taskId);
 static void DebugAction_OpenGiveMenu(u8 taskId);
+static void DebugAction_OpenGiveFillMenu(u8 taskId);
 static void DebugAction_OpenSoundMenu(u8 taskId);
+static void DebugAction_AccessPC(u8 taskId);
 static void DebugTask_HandleMenuInput_Main(u8 taskId);
 static void DebugTask_HandleMenuInput_Utilities(u8 taskId);
 static void DebugTask_HandleMenuInput_Scripts(u8 taskId);
 static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId);
 static void DebugTask_HandleMenuInput_Give(u8 taskId);
+static void DebugTask_HandleMenuInput_Give_Fill(u8 taskId);
 static void DebugTask_HandleMenuInput_Sound(u8 taskId);
 
 static void DebugAction_Util_HealParty(u8 taskId);
@@ -265,10 +278,15 @@ static void DebugAction_Give_MaxMoney(u8 taskId);
 static void DebugAction_Give_MaxCoins(u8 taskId);
 static void DebugAction_Give_MaxBattlePoints(u8 taskId);
 static void DebugAction_Give_DayCareEgg(u8 taskId);
-static void DebugAction_Give_FillPC_Fast(u8 taskId);
-static void DebugAction_Give_FillPC_Slow(u8 taskId);
+static void DebugAction_Give_Fill_PCBoxes_Fast(u8 taskId);
+static void DebugAction_Give_Fill_PCBoxes_Slow(u8 taskId);
+static void DebugAction_Give_Fill_PCItemStorage(u8 taskId);
+static void DebugAction_Give_Fill_PocketItems(u8 taskId);
+static void DebugAction_Give_Fill_PocketPokeBalls(u8 taskId);
+static void DebugAction_Give_Fill_PocketTMHM(u8 taskId);
+static void DebugAction_Give_Fill_PocketBerries(u8 taskId);
+static void DebugAction_Give_Fill_PocketKeyItems(u8 taskId);
 static void DebugAction_Give_CHEAT(u8 taskId);
-static void DebugAction_AccessPC(u8 taskId);
 
 static void DebugAction_Sound_SE(u8 taskId);
 static void DebugAction_Sound_SE_SelectId(u8 taskId);
@@ -394,8 +412,16 @@ static const u8 sDebugText_Give_MaxMoney[] =            _("Max Money");
 static const u8 sDebugText_Give_MaxCoins[] =            _("Max Coins");
 static const u8 sDebugText_Give_BattlePoints[] =        _("Max Battle Points");
 static const u8 sDebugText_Give_DaycareEgg[] =          _("Daycare Egg");
-static const u8 sDebugText_Give_FillPc_Fast[] =         _("Fill PC Fast");
-static const u8 sDebugText_Give_FillPc_Slow[] =         _("Fill PC Slow (LAG!)");
+static const u8 sDebugText_Give_Fill_Menu[] =           _("Fill PC/Pockets…{CLEAR_TO 100}{RIGHT_ARROW}");
+// Give Fill Menu
+static const u8 sDebugText_Give_Fill_Pc_Fast[] =        _("Fill PCBoxes Fast");
+static const u8 sDebugText_Give_Fill_Pc_Slow[] =        _("Fill PCBoxes Slow (LAG!)");
+static const u8 sDebugText_Give_Fill_Pc_Items[] =       _("Fill PCItems");
+static const u8 sDebugText_Give_Fill_PocketItems[] =    _("Fill Pocket Items");
+static const u8 sDebugText_Give_Fill_PocketPokeBalls[] =_("Fill Pocket PokeBalls");
+static const u8 sDebugText_Give_Fill_PocketTMHM[] =     _("Fill Pocket TMHM");
+static const u8 sDebugText_Give_Fill_PocketBerries[] =  _("Fill Pocket Berries");
+static const u8 sDebugText_Give_Fill_PocketKeyItems[] = _("Fill Pocket KeyItems");
 static const u8 sDebugText_Give_GiveCHEAT[] =           _("CHEAT Start");
 // Sound Mneu
 static const u8 sDebugText_Sound_SE[] =                 _("Effects…{CLEAR_TO 100}{RIGHT_ARROW}");
@@ -494,17 +520,27 @@ static const struct ListMenuItem sDebugMenu_Items_Flags[] =
 };
 static const struct ListMenuItem sDebugMenu_Items_Give[] =
 {
-    [DEBUG_GIVE_MENU_ITEM_ITEM_X]           = {sDebugText_Give_GiveItem,            DEBUG_GIVE_MENU_ITEM_ITEM_X},
-    [DEBUG_GIVE_MENU_ITEM_ALLTMS]           = {sDebugText_Give_AllTMs,              DEBUG_GIVE_MENU_ITEM_ALLTMS},
-    [DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE]   = {sDebugText_Give_GivePokemonSimple,   DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE},
-    [DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX]  = {sDebugText_Give_GivePokemonComplex,  DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX},
-    [DEBUG_GIVE_MENU_ITEM_MAX_MONEY]        = {sDebugText_Give_MaxMoney,            DEBUG_GIVE_MENU_ITEM_MAX_MONEY},
-    [DEBUG_GIVE_MENU_ITEM_MAX_COINS]        = {sDebugText_Give_MaxCoins,            DEBUG_GIVE_MENU_ITEM_MAX_COINS},
-    [DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS]= {sDebugText_Give_BattlePoints,        DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS},
-    [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]      = {sDebugText_Give_DaycareEgg,          DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG},
-    [DEBUG_GIVE_MENU_ITEM_FILL_PC_FAST]     = {sDebugText_Give_FillPc_Fast,         DEBUG_GIVE_MENU_ITEM_FILL_PC_FAST},
-    [DEBUG_GIVE_MENU_ITEM_FILL_PC_SLOW]     = {sDebugText_Give_FillPc_Slow,         DEBUG_GIVE_MENU_ITEM_FILL_PC_SLOW},
-    [DEBUG_GIVE_MENU_ITEM_CHEAT]            = {sDebugText_Give_GiveCHEAT,           DEBUG_GIVE_MENU_ITEM_CHEAT},
+    [DEBUG_GIVE_MENU_ITEM_ITEM_X]            = {sDebugText_Give_GiveItem,           DEBUG_GIVE_MENU_ITEM_ITEM_X},
+    [DEBUG_GIVE_MENU_ITEM_ALLTMS]            = {sDebugText_Give_AllTMs,             DEBUG_GIVE_MENU_ITEM_ALLTMS},
+    [DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE]    = {sDebugText_Give_GivePokemonSimple,  DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE},
+    [DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX]   = {sDebugText_Give_GivePokemonComplex, DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX},
+    [DEBUG_GIVE_MENU_ITEM_MAX_MONEY]         = {sDebugText_Give_MaxMoney,           DEBUG_GIVE_MENU_ITEM_MAX_MONEY},
+    [DEBUG_GIVE_MENU_ITEM_MAX_COINS]         = {sDebugText_Give_MaxCoins,           DEBUG_GIVE_MENU_ITEM_MAX_COINS},
+    [DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS] = {sDebugText_Give_BattlePoints,       DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS},
+    [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]       = {sDebugText_Give_DaycareEgg,         DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG},
+    [DEBUG_GIVE_MENU_ITEM_FILL_MENU]         = {sDebugText_Give_Fill_Menu,          DEBUG_GIVE_MENU_ITEM_FILL_MENU},
+    [DEBUG_GIVE_MENU_ITEM_CHEAT]             = {sDebugText_Give_GiveCHEAT,          DEBUG_GIVE_MENU_ITEM_CHEAT},
+};
+static const struct ListMenuItem sDebugMenu_Items_Give_Fill[] =
+{
+    [DEBUG_GIVE_MENU_ITEM_FILL_PC_BOXES_FAST]    = {sDebugText_Give_Fill_Pc_Fast,         DEBUG_GIVE_MENU_ITEM_FILL_PC_BOXES_FAST},
+    [DEBUG_GIVE_MENU_ITEM_FILL_PC_BOXES_SLOW]    = {sDebugText_Give_Fill_Pc_Slow,         DEBUG_GIVE_MENU_ITEM_FILL_PC_BOXES_SLOW},
+    [DEBUG_GIVE_MENU_ITEM_FILL_PC_ITEMS]         = {sDebugText_Give_Fill_Pc_Items ,       DEBUG_GIVE_MENU_ITEM_FILL_PC_ITEMS},
+    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_ITEMS]     = {sDebugText_Give_Fill_PocketItems,     DEBUG_GIVE_MENU_ITEM_FILL_POCKET_ITEMS},
+    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_BALLS]     = {sDebugText_Give_Fill_PocketPokeBalls, DEBUG_GIVE_MENU_ITEM_FILL_POCKET_BALLS},
+    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_TMHM]      = {sDebugText_Give_Fill_PocketTMHM,      DEBUG_GIVE_MENU_ITEM_FILL_POCKET_TMHM},
+    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_BERRIES]   = {sDebugText_Give_Fill_PocketBerries,   DEBUG_GIVE_MENU_ITEM_FILL_POCKET_BERRIES},
+    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_KEY_ITEMS] = {sDebugText_Give_Fill_PocketKeyItems,  DEBUG_GIVE_MENU_ITEM_FILL_POCKET_KEY_ITEMS},
 };
 static const struct ListMenuItem sDebugMenu_Items_Sound[] =
 {
@@ -570,18 +606,29 @@ static void (*const sDebugMenu_Actions_Flags[])(u8) =
 };
 static void (*const sDebugMenu_Actions_Give[])(u8) =
 {
-    [DEBUG_GIVE_MENU_ITEM_ITEM_X]           = DebugAction_Give_Item,
-    [DEBUG_GIVE_MENU_ITEM_ALLTMS]           = DebugAction_Give_AllTMs,
-    [DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE]   = DebugAction_Give_PokemonSimple,
-    [DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX]  = DebugAction_Give_PokemonComplex,
-    [DEBUG_GIVE_MENU_ITEM_MAX_MONEY]        = DebugAction_Give_MaxMoney,
-    [DEBUG_GIVE_MENU_ITEM_MAX_COINS]        = DebugAction_Give_MaxCoins,
-    [DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS]= DebugAction_Give_MaxBattlePoints,
-    [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]      = DebugAction_Give_DayCareEgg,
-    [DEBUG_GIVE_MENU_ITEM_FILL_PC_FAST]     = DebugAction_Give_FillPC_Fast,
-    [DEBUG_GIVE_MENU_ITEM_FILL_PC_SLOW]     = DebugAction_Give_FillPC_Slow,
-    [DEBUG_GIVE_MENU_ITEM_CHEAT]            = DebugAction_Give_CHEAT,
+    [DEBUG_GIVE_MENU_ITEM_ITEM_X]            = DebugAction_Give_Item,
+    [DEBUG_GIVE_MENU_ITEM_ALLTMS]            = DebugAction_Give_AllTMs,
+    [DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE]    = DebugAction_Give_PokemonSimple,
+    [DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX]   = DebugAction_Give_PokemonComplex,
+    [DEBUG_GIVE_MENU_ITEM_MAX_MONEY]         = DebugAction_Give_MaxMoney,
+    [DEBUG_GIVE_MENU_ITEM_MAX_COINS]         = DebugAction_Give_MaxCoins,
+    [DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS] = DebugAction_Give_MaxBattlePoints,
+    [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]       = DebugAction_Give_DayCareEgg,
+    [DEBUG_GIVE_MENU_ITEM_FILL_MENU]         = DebugAction_OpenGiveFillMenu,
+    [DEBUG_GIVE_MENU_ITEM_CHEAT]             = DebugAction_Give_CHEAT,
 };
+static void (*const sDebugMenu_Actions_Give_Fill[])(u8) =
+{
+    [DEBUG_GIVE_MENU_ITEM_FILL_PC_BOXES_FAST]    = DebugAction_Give_Fill_PCBoxes_Fast,
+    [DEBUG_GIVE_MENU_ITEM_FILL_PC_BOXES_SLOW]    = DebugAction_Give_Fill_PCBoxes_Slow,
+    [DEBUG_GIVE_MENU_ITEM_FILL_PC_ITEMS]         = DebugAction_Give_Fill_PCItemStorage,
+    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_ITEMS]     = DebugAction_Give_Fill_PocketItems,
+    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_BALLS]     = DebugAction_Give_Fill_PocketPokeBalls,
+    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_TMHM]      = DebugAction_Give_Fill_PocketTMHM,
+    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_BERRIES]   = DebugAction_Give_Fill_PocketBerries,
+    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_KEY_ITEMS] = DebugAction_Give_Fill_PocketKeyItems,
+};
+
 static void (*const sDebugMenu_Actions_Sound[])(u8) =
 {
     [DEBUG_SOUND_MENU_ITEM_SE]      = DebugAction_Sound_SE,
@@ -673,6 +720,12 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Give =
     .items = sDebugMenu_Items_Give,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_Give),
+};
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Give_Fill =
+{
+    .items = sDebugMenu_Items_Give_Fill,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Give_Fill),
 };
 static const struct ListMenuTemplate sDebugMenu_ListTemplate_Sound =
 {
@@ -946,6 +999,24 @@ static void DebugTask_HandleMenuInput_Give(u8 taskId)
         Debug_ShowMainMenu();
     }
 }
+static void DebugTask_HandleMenuInput_Give_Fill(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_Give_Fill[input]) != NULL)
+            func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        DebugAction_OpenGiveMenu(taskId);
+    }
+}
 static void DebugTask_HandleMenuInput_Sound(u8 taskId)
 {
     void (*func)(u8);
@@ -987,12 +1058,16 @@ static void DebugAction_OpenGiveMenu(u8 taskId)
     Debug_DestroyMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
 }
+static void DebugAction_OpenGiveFillMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_Give_Fill, sDebugMenu_ListTemplate_Give_Fill);
+}
 static void DebugAction_OpenSoundMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Sound, sDebugMenu_ListTemplate_Sound);
 }
-
 
 // *******************************
 // Actions Utilities
@@ -2871,7 +2946,7 @@ static void DebugAction_Give_DayCareEgg(u8 taskId)
     TriggerPendingDaycareEgg();
 }
 
-static void DebugAction_Give_FillPC_Fast(u8 taskId) //Credit: Sierraffinity
+static void DebugAction_Give_Fill_PCBoxes_Fast(u8 taskId) //Credit: Sierraffinity
 {
     int boxId, boxPosition;
     u32 personality;
@@ -2898,9 +2973,12 @@ static void DebugAction_Give_FillPC_Fast(u8 taskId) //Credit: Sierraffinity
             }
         }
     }
+
+    Debug_DestroyMenu_Full(taskId);
+    EnableBothScriptContexts();
 }
 
-static void DebugAction_Give_FillPC_Slow(u8 taskId)
+static void DebugAction_Give_Fill_PCBoxes_Slow(u8 taskId)
 {
     int boxId, boxPosition;
     u32 personality;
@@ -2943,6 +3021,75 @@ static void DebugAction_Give_FillPC_Slow(u8 taskId)
                 gPokemonStoragePtr->boxes[boxId][boxPosition] = boxMon;
             }
         }
+    }
+
+    Debug_DestroyMenu_Full(taskId);
+    EnableBothScriptContexts();
+}
+
+static void DebugAction_Give_Fill_PCItemStorage(u8 taskId)
+{
+    u16 itemId;
+
+    for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
+    {
+        if (!CheckPCHasItem(itemId, MAX_PC_ITEM_CAPACITY))
+            AddPCItem(itemId, MAX_PC_ITEM_CAPACITY);
+    }
+}
+
+static void DebugAction_Give_Fill_PocketItems(u8 taskId)
+{
+    u16 itemId;
+
+    for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
+    {
+        if (ItemId_GetPocket(itemId) == POCKET_ITEMS && CheckBagHasSpace(itemId, MAX_BAG_ITEM_CAPACITY))
+            AddBagItem(itemId, MAX_BAG_ITEM_CAPACITY);
+    }
+}
+
+static void DebugAction_Give_Fill_PocketPokeBalls(u8 taskId)
+{
+    u16 itemId;
+
+    for (itemId = FIRST_BALL; itemId < LAST_BALL; itemId++)
+    {
+        if (CheckBagHasSpace(itemId, MAX_BAG_ITEM_CAPACITY))
+            AddBagItem(itemId, MAX_BAG_ITEM_CAPACITY);
+    }
+}
+
+static void DebugAction_Give_Fill_PocketTMHM(u8 taskId)
+{
+    u16 itemId;
+
+    for (itemId = ITEM_TM01; itemId <= ITEM_HM08; itemId++)
+    {
+        if (CheckBagHasSpace(itemId, 1) && ItemIdToBattleMoveId(itemId) != MOVE_NONE)
+            AddBagItem(itemId, 1);
+    }
+}
+
+static void DebugAction_Give_Fill_PocketBerries(u8 taskId)
+{
+    u16 itemId;
+
+    for (itemId = FIRST_BERRY_INDEX; itemId < LAST_BERRY_INDEX; itemId++)
+    {
+        if (CheckBagHasSpace(itemId, MAX_BERRY_CAPACITY))
+            AddBagItem(itemId, MAX_BERRY_CAPACITY);
+    }
+}
+
+static void DebugAction_Give_Fill_PocketKeyItems(u8 taskId)
+{
+    u16 itemId;
+
+    for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
+    {
+        if (ItemId_GetPocket(itemId) == POCKET_KEY_ITEMS && CheckBagHasSpace(itemId, 1))
+            AddBagItem(itemId, 1);
     }
 }
 
