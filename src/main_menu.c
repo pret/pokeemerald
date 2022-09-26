@@ -1121,7 +1121,7 @@ static void Task_DisplayMainMenuInvalidActionError(u8 taskId)
     switch (gTasks[taskId].tCurrItem)
     {
         case 0:
-            FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+            FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
             switch (gTasks[taskId].tMenuType)
             {
                 case 0:
