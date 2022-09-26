@@ -85,6 +85,7 @@ enum { // Util
     DEBUG_UTIL_MENU_ITEM_TRAINER_NAME,
     DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER,
     DEBUG_UTIL_MENU_ITEM_TRAINER_ID,
+    DEBUG_UTIL_MENU_ITEM_CHEAT,
 };
 enum { // Scripts
     DEBUG_UTIL_MENU_ITEM_SCRIPT_1,
@@ -122,7 +123,6 @@ enum { // Give
     DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS,
     DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG,
     DEBUG_GIVE_MENU_ITEM_FILL_MENU,
-    DEBUG_GIVE_MENU_ITEM_CHEAT,
 };
 enum { // Give Fill
     DEBUG_GIVE_MENU_ITEM_FILL_PC_BOXES_FAST,
@@ -241,6 +241,7 @@ static void DebugAction_Util_WatchCredits(u8 taskId);
 static void DebugAction_Util_Trainer_Name(u8 taskId);
 static void DebugAction_Util_Trainer_Gender(u8 taskId);
 static void DebugAction_Util_Trainer_Id(u8 taskId);
+static void DebugAction_Util_CheatStart(u8 taskId);
 
 static void DebugAction_FlagsVars_Flags(u8 taskId);
 static void DebugAction_FlagsVars_FlagsSelect(u8 taskId);
@@ -286,7 +287,6 @@ static void DebugAction_Give_Fill_PocketPokeBalls(u8 taskId);
 static void DebugAction_Give_Fill_PocketTMHM(u8 taskId);
 static void DebugAction_Give_Fill_PocketBerries(u8 taskId);
 static void DebugAction_Give_Fill_PocketKeyItems(u8 taskId);
-static void DebugAction_Give_CHEAT(u8 taskId);
 
 static void DebugAction_Sound_SE(u8 taskId);
 static void DebugAction_Sound_SE_SelectId(u8 taskId);
@@ -330,12 +330,12 @@ static const u8 sDebugText_Colored_False[] = _("{COLOR RED}FALSE");
 static const u8 sDebugText_Dashes[] =        _("---");
 static const u8 sDebugText_Empty[] =         _("");
 // Main Menu
-static const u8 sDebugText_Utilities[] =        _("Utilities…{CLEAR_TO 100}{RIGHT_ARROW}");
-static const u8 sDebugText_Scripts[] =          _("Scripts…{CLEAR_TO 100}{RIGHT_ARROW}");
-static const u8 sDebugText_FlagsVars[] =        _("Flags & Vars…{CLEAR_TO 100}{RIGHT_ARROW}");
-static const u8 sDebugText_Give[] =             _("Give X…{CLEAR_TO 100}{RIGHT_ARROW}");
-static const u8 sDebugText_Sound[] =            _("Sound…{CLEAR_TO 100}{RIGHT_ARROW}");
-static const u8 sDebugText_AccessPC[] =         _("Access PC…{CLEAR_TO 100}{RIGHT_ARROW}");
+static const u8 sDebugText_Utilities[] =        _("Utilities…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Scripts[] =          _("Scripts…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_FlagsVars[] =        _("Flags & Vars…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Give[] =             _("Give X…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Sound[] =            _("Sound…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_AccessPC[] =         _("Access PC…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Cancel[] =           _("Cancel");
 // Script menu
 static const u8 sDebugText_Util_Script_1[] =               _("Script 1");
@@ -348,28 +348,29 @@ static const u8 sDebugText_Util_Script_7[] =               _("Script 7");
 static const u8 sDebugText_Util_Script_8[] =               _("Script 8");
 // Util Menu
 static const u8 sDebugText_Util_HealParty[] =               _("Heal Party");
-static const u8 sDebugText_Util_Fly[] =                     _("Fly to map…{CLEAR_TO 100}{RIGHT_ARROW}");
-static const u8 sDebugText_Util_WarpToMap[] =               _("Warp to map warp…{CLEAR_TO 100}{RIGHT_ARROW}");
+static const u8 sDebugText_Util_Fly[] =                     _("Fly to map…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Util_WarpToMap[] =               _("Warp to map warp…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Util_WarpToMap_SelectMapGroup[] =_("Group: {STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n\n{STR_VAR_3}{CLEAR_TO 90}");
 static const u8 sDebugText_Util_WarpToMap_SelectMap[] =     _("Map: {STR_VAR_1}{CLEAR_TO 90}\nMapSec:{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}\n{STR_VAR_3}{CLEAR_TO 90}");
 static const u8 sDebugText_Util_WarpToMap_SelectWarp[] =    _("Warp:{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_3}{CLEAR_TO 90}");
 static const u8 sDebugText_Util_WarpToMap_SelMax[] =        _("{STR_VAR_1} / {STR_VAR_2}");
 static const u8 sDebugText_Util_RunningShoes[] =            _("Toggle Running Shoes");
 static const u8 sDebugText_Util_PoisonMons[] =              _("Poison all mons");
-static const u8 sDebugText_Util_SaveBlockSpace[] =          _("SaveBlock Space…{CLEAR_TO 100}{RIGHT_ARROW}");
-static const u8 sDebugText_Util_Weather[] =                 _("Set weather…{CLEAR_TO 100}{RIGHT_ARROW}");
+static const u8 sDebugText_Util_SaveBlockSpace[] =          _("SaveBlock Space…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Util_Weather[] =                 _("Set weather…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Util_Weather_ID[] =              _("Weather Id: {STR_VAR_3}\n{STR_VAR_1}\n{STR_VAR_2}");
-static const u8 sDebugText_Util_CheckWallClock[] =          _("Check Wall Clock…{CLEAR_TO 100}{RIGHT_ARROW}");
-static const u8 sDebugText_Util_SetWallClock[] =            _("Set Wall Clock…{CLEAR_TO 100}{RIGHT_ARROW}");
-static const u8 sDebugText_Util_WatchCredits[] =            _("Watch Credits…{CLEAR_TO 100}{RIGHT_ARROW}");
+static const u8 sDebugText_Util_CheckWallClock[] =          _("Check Wall Clock…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Util_SetWallClock[] =            _("Set Wall Clock…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Util_WatchCredits[] =            _("Watch Credits…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Util_Trainer_Name[] =            _("Trainer name");
 static const u8 sDebugText_Util_Trainer_Gender[] =          _("Toggle T. Gender");
 static const u8 sDebugText_Util_Trainer_Id[] =              _("New Trainer Id");
+static const u8 sDebugText_Util_CheatStart[] =              _("CHEAT Start");
 // Flags/Vars Menu
-static const u8 sDebugText_FlagsVars_Flags[] =                  _("Set Flag XYZ…{CLEAR_TO 100}{RIGHT_ARROW}");
+static const u8 sDebugText_FlagsVars_Flags[] =                  _("Set Flag XYZ…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_FlagsVars_Flag[] =                   _("Flag: {STR_VAR_1}{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}\n{STR_VAR_3}");
 static const u8 sDebugText_FlagsVars_FlagHex[] =                _("{STR_VAR_1}{CLEAR_TO 90}\n0x{STR_VAR_2}{CLEAR_TO 90}");
-static const u8 sDebugText_FlagsVars_Vars[] =                   _("Set Var XYZ…{CLEAR_TO 100}{RIGHT_ARROW}");
+static const u8 sDebugText_FlagsVars_Vars[] =                   _("Set Var XYZ…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_FlagsVars_VariableHex[] =            _("{STR_VAR_1}{CLEAR_TO 90}\n0x{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_FlagsVars_Variable[] =               _("Var: {STR_VAR_1}{CLEAR_TO 90}\nVal: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_2}");
 static const u8 sDebugText_FlagsVars_VariableValueSet[] =       _("Var: {STR_VAR_1}{CLEAR_TO 90}\nVal: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_2}");
@@ -386,12 +387,12 @@ static const u8 sDebugText_FlagsVars_SwitchTrainerSee[] =       _("Toggle Traine
 static const u8 sDebugText_FlagsVars_SwitchBagUse[] =           _("Toggle BagUse");
 static const u8 sDebugText_FlagsVars_SwitchCatching[] =         _("Toggle Catching");
 // Give Menu
-static const u8 sDebugText_Give_GiveItem[] =            _("Give item XYZ…{CLEAR_TO 100}{RIGHT_ARROW}");
+static const u8 sDebugText_Give_GiveItem[] =            _("Give item XYZ…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_ItemQuantity[] =             _("Quantity:{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n\n{STR_VAR_2}");
 static const u8 sDebugText_ItemID[] =                   _("Item Id: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 90}\n\n{STR_VAR_2}");
 static const u8 sDebugText_Give_AllTMs[] =              _("Give all TMs");
-static const u8 sDebugText_Give_GivePokemonSimple[] =   _("Pkm (lvl)…{CLEAR_TO 100}{RIGHT_ARROW}");
-static const u8 sDebugText_Give_GivePokemonComplex[] =  _("Pkm (l,s,n,a,IV,mov)…{CLEAR_TO 100}{RIGHT_ARROW}");
+static const u8 sDebugText_Give_GivePokemonSimple[] =   _("Pkm (lvl)…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Give_GivePokemonComplex[] =  _("Pkm (l,s,n,a,IV,mov)…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_PokemonID[] =                _("Species: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 90}\n\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_PokemonLevel[] =             _("Level:{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_PokemonShiny[] =             _("Shiny:{CLEAR_TO 90}\n   {STR_VAR_2}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{CLEAR_TO 90}");
@@ -412,7 +413,7 @@ static const u8 sDebugText_Give_MaxMoney[] =            _("Max Money");
 static const u8 sDebugText_Give_MaxCoins[] =            _("Max Coins");
 static const u8 sDebugText_Give_BattlePoints[] =        _("Max Battle Points");
 static const u8 sDebugText_Give_DaycareEgg[] =          _("Daycare Egg");
-static const u8 sDebugText_Give_Fill_Menu[] =           _("Fill PC/Pockets…{CLEAR_TO 100}{RIGHT_ARROW}");
+static const u8 sDebugText_Give_Fill_Menu[] =           _("Fill PC/Pockets…{CLEAR_TO 110}{RIGHT_ARROW}");
 // Give Fill Menu
 static const u8 sDebugText_Give_Fill_Pc_Fast[] =        _("Fill PCBoxes Fast");
 static const u8 sDebugText_Give_Fill_Pc_Slow[] =        _("Fill PCBoxes Slow (LAG!)");
@@ -422,11 +423,10 @@ static const u8 sDebugText_Give_Fill_PocketPokeBalls[] =_("Fill Pocket PokeBalls
 static const u8 sDebugText_Give_Fill_PocketTMHM[] =     _("Fill Pocket TMHM");
 static const u8 sDebugText_Give_Fill_PocketBerries[] =  _("Fill Pocket Berries");
 static const u8 sDebugText_Give_Fill_PocketKeyItems[] = _("Fill Pocket KeyItems");
-static const u8 sDebugText_Give_GiveCHEAT[] =           _("CHEAT Start");
 // Sound Mneu
-static const u8 sDebugText_Sound_SE[] =                 _("Effects…{CLEAR_TO 100}{RIGHT_ARROW}");
+static const u8 sDebugText_Sound_SE[] =                 _("Effects…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Sound_SE_ID[] =              _("Sound Id: {STR_VAR_3}\n{STR_VAR_1}    \n{STR_VAR_2}");
-static const u8 sDebugText_Sound_MUS[] =                _("Music…{CLEAR_TO 100}{RIGHT_ARROW}");
+static const u8 sDebugText_Sound_MUS[] =                _("Music…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Sound_MUS_ID[] =             _("Music Id: {STR_VAR_3}\n{STR_VAR_1}    \n{STR_VAR_2}");
 
 static const u8 digitInidicator_1[] =               _("{LEFT_ARROW}+1{RIGHT_ARROW}        ");
@@ -489,6 +489,7 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_TRAINER_NAME]     = {sDebugText_Util_Trainer_Name,     DEBUG_UTIL_MENU_ITEM_TRAINER_NAME},
     [DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER]   = {sDebugText_Util_Trainer_Gender,   DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER},
     [DEBUG_UTIL_MENU_ITEM_TRAINER_ID]       = {sDebugText_Util_Trainer_Id,       DEBUG_UTIL_MENU_ITEM_TRAINER_ID},
+    [DEBUG_UTIL_MENU_ITEM_CHEAT]            = {sDebugText_Util_CheatStart,        DEBUG_UTIL_MENU_ITEM_CHEAT},
 };
 static const struct ListMenuItem sDebugMenu_Items_Scripts[] =
 {
@@ -529,7 +530,6 @@ static const struct ListMenuItem sDebugMenu_Items_Give[] =
     [DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS] = {sDebugText_Give_BattlePoints,       DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS},
     [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]       = {sDebugText_Give_DaycareEgg,         DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG},
     [DEBUG_GIVE_MENU_ITEM_FILL_MENU]         = {sDebugText_Give_Fill_Menu,          DEBUG_GIVE_MENU_ITEM_FILL_MENU},
-    [DEBUG_GIVE_MENU_ITEM_CHEAT]             = {sDebugText_Give_GiveCHEAT,          DEBUG_GIVE_MENU_ITEM_CHEAT},
 };
 static const struct ListMenuItem sDebugMenu_Items_Give_Fill[] =
 {
@@ -575,6 +575,7 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_TRAINER_NAME]     = DebugAction_Util_Trainer_Name,
     [DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER]   = DebugAction_Util_Trainer_Gender,
     [DEBUG_UTIL_MENU_ITEM_TRAINER_ID]       = DebugAction_Util_Trainer_Id,
+    [DEBUG_UTIL_MENU_ITEM_CHEAT]            = DebugAction_Util_CheatStart,
 };
 static void (*const sDebugMenu_Actions_Scripts[])(u8) =
 {
@@ -615,7 +616,6 @@ static void (*const sDebugMenu_Actions_Give[])(u8) =
     [DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS] = DebugAction_Give_MaxBattlePoints,
     [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]       = DebugAction_Give_DayCareEgg,
     [DEBUG_GIVE_MENU_ITEM_FILL_MENU]         = DebugAction_OpenGiveFillMenu,
-    [DEBUG_GIVE_MENU_ITEM_CHEAT]             = DebugAction_Give_CHEAT,
 };
 static void (*const sDebugMenu_Actions_Give_Fill[])(u8) =
 {
@@ -3093,7 +3093,7 @@ static void DebugAction_Give_Fill_PocketKeyItems(u8 taskId)
     }
 }
 
-static void DebugAction_Give_CHEAT(u8 taskId)
+static void DebugAction_Util_CheatStart(u8 taskId)
 {
     Debug_DestroyMenu_Full(taskId);
     ScriptContext2_Enable();
