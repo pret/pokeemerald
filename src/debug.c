@@ -132,15 +132,20 @@ enum { //Sound
 
 // *******************************
 // Constants
-#define DEBUG_MAIN_MENU_WIDTH 15
-#define DEBUG_MAIN_MENU_HEIGHT 9
+#define DEBUG_MENU_WIDTH_MAIN 15
+#define DEBUG_MENU_HEIGHT_MAIN 9
 
-#define DEBUG_NUMBER_DISPLAY_WIDTH 10
-#define DEBUG_NUMBER_DISPLAY_HEIGHT 4
-#define DEBUG_NUMBER_DISPLAY_MEDIUM_WIDTH 15
-#define DEBUG_NUMBER_DISPLAY_MEDIUM_HEIGHT 3
-#define DEBUG_NUMBER_DISPLAY_SOUND_WIDTH 20
-#define DEBUG_NUMBER_DISPLAY_SOUND_HEIGHT 6
+#define DEBUG_MENU_WIDTH_EXTRA 10
+#define DEBUG_MENU_HEIGHT_EXTRA 4
+
+#define DEBUG_MENU_WIDTH_WEATHER 15
+#define DEBUG_MENU_HEIGHT_WEATHER 3
+
+#define DEBUG_MENU_WIDTH_SOUND 20
+#define DEBUG_MENU_HEIGHT_SOUND 6
+
+#define DEBUG_MENU_WIDTH_FLAGVAR 4
+#define DEBUG_MENU_HEIGHT_FLAGVAR 2
 
 #define DEBUG_NUMBER_DIGITS_FLAGS 4
 #define DEBUG_NUMBER_DIGITS_VARIABLES 5
@@ -300,15 +305,19 @@ static const u8 MAP_GROUP_COUNT[] = {57, 5, 5, 6, 7, 8, 9, 7, 7, 14, 8, 17, 10, 
 
 // Text
 // General
-static const u8 gDebugText_True[] =     _("TRUE");
-static const u8 gDebugText_False[] =    _("FALSE");
+static const u8 gDebugText_True[] =          _("TRUE");
+static const u8 gDebugText_False[] =         _("FALSE");
+static const u8 gDebugText_Colored_True[] =  _("{COLOR GREEN}TRUE");
+static const u8 gDebugText_Colored_False[] = _("{COLOR RED}FALSE");
+static const u8 gDebugText_Dashes[] =        _("---");
+static const u8 gDebugText_Empty[] =         _("");
 // Main Menu
-static const u8 gDebugText_Utilities[] =        _("{RIGHT_ARROW}Utilities");
-static const u8 gDebugText_Scripts[] =          _("{RIGHT_ARROW}Scripts");
-static const u8 gDebugText_FlagsVars[] =        _("{RIGHT_ARROW}Flags & Vars");
-static const u8 gDebugText_Give[] =             _("{RIGHT_ARROW}Give X");
-static const u8 gDebugText_Sound[] =            _("{RIGHT_ARROW}Sound");
-static const u8 gDebugText_AccessPC[] =         _("{RIGHT_ARROW}Access PC");
+static const u8 gDebugText_Utilities[] =        _("Utilities …");
+static const u8 gDebugText_Scripts[] =          _("Scripts …");
+static const u8 gDebugText_FlagsVars[] =        _("Flags & Vars …");
+static const u8 gDebugText_Give[] =             _("Give X …");
+static const u8 gDebugText_Sound[] =            _("Sound …");
+static const u8 gDebugText_AccessPC[] =         _("Access PC …");
 static const u8 gDebugText_Cancel[] =           _("Cancel");
 // Script menu
 static const u8 gDebugText_Util_Script_1[] =               _("Script 1");
@@ -321,50 +330,50 @@ static const u8 gDebugText_Util_Script_7[] =               _("Script 7");
 static const u8 gDebugText_Util_Script_8[] =               _("Script 8");
 // Util Menu
 static const u8 gDebugText_Util_HealParty[] =               _("Heal Party");
-static const u8 gDebugText_Util_Fly[] =                     _("{RIGHT_ARROW}Fly to map");
-static const u8 gDebugText_Util_WarpToMap[] =               _("{RIGHT_ARROW}Warp to map warp");
+static const u8 gDebugText_Util_Fly[] =                     _("Fly to map …");
+static const u8 gDebugText_Util_WarpToMap[] =               _("Warp to map warp …");
 static const u8 gDebugText_Util_WarpToMap_SelectMapGroup[] =_("Group: {STR_VAR_1}          \n                 \n\n{STR_VAR_3}     ");
 static const u8 gDebugText_Util_WarpToMap_SelectMap[] =     _("Map: {STR_VAR_1}            \nMapSec:          \n{STR_VAR_2}                       \n{STR_VAR_3}     ");
 static const u8 gDebugText_Util_WarpToMap_SelectWarp[] =    _("Warp:             \n{STR_VAR_1}                \n                                  \n{STR_VAR_3}     ");
 static const u8 gDebugText_Util_WarpToMap_SelMax[] =        _("{STR_VAR_1} / {STR_VAR_2}");
 static const u8 gDebugText_Util_RunningShoes[] =            _("Toggle Running Shoes");
 static const u8 gDebugText_Util_PoisonMons[] =              _("Poison all mons");
-static const u8 gDebugText_Util_SaveBlockSpace[] =          _("{RIGHT_ARROW}SaveBlock Space");
-static const u8 gDebugText_Util_Weather[] =                 _("{RIGHT_ARROW}Set weather");
+static const u8 gDebugText_Util_SaveBlockSpace[] =          _("SaveBlock Space …");
+static const u8 gDebugText_Util_Weather[] =                 _("Set weather …");
 static const u8 gDebugText_Util_Weather_ID[] =              _("Weather Id: {STR_VAR_3}\n{STR_VAR_1}\n{STR_VAR_2}");
-static const u8 gDebugText_Util_CheckWallClock[] =          _("{RIGHT_ARROW}Check Wall Clock");
-static const u8 gDebugText_Util_SetWallClock[] =            _("{RIGHT_ARROW}Set Wall Clock");
-static const u8 gDebugText_Util_WatchCredits[] =            _("{RIGHT_ARROW}Watch Credits");
+static const u8 gDebugText_Util_CheckWallClock[] =          _("Check Wall Clock …");
+static const u8 gDebugText_Util_SetWallClock[] =            _("Set Wall Clock …");
+static const u8 gDebugText_Util_WatchCredits[] =            _("Watch Credits …");
 static const u8 gDebugText_Util_Trainer_Name[] =            _("Trainer name");
 static const u8 gDebugText_Util_Trainer_Gender[] =          _("Toggle T. Gender");
 static const u8 gDebugText_Util_Trainer_Id[] =              _("New Trainer Id");
 // Flags/Vars Menu
-static const u8 gDebugText_FlagsVars_Flags[] =                  _("{RIGHT_ARROW}Set Flag XYZ");
+static const u8 gDebugText_FlagsVars_Flags[] =                  _("Set Flag XYZ …");
 static const u8 gDebugText_FlagsVars_Flag[] =                   _("Flag: {STR_VAR_1}   \n{STR_VAR_2}                   \n{STR_VAR_3}");
 static const u8 gDebugText_FlagsVars_FlagHex[] =                _("{STR_VAR_1}           \n0x{STR_VAR_2}             ");
-static const u8 gDebugText_FlagsVars_Vars[] =                   _("{RIGHT_ARROW}Set Var XYZ");
+static const u8 gDebugText_FlagsVars_Vars[] =                   _("Set Var XYZ …");
 static const u8 gDebugText_FlagsVars_VariableHex[] =            _("{STR_VAR_1}           \n0x{STR_VAR_2}             ");
 static const u8 gDebugText_FlagsVars_Variable[] =               _("Var: {STR_VAR_1}             \nVal: {STR_VAR_3}             \n{STR_VAR_2}");
 static const u8 gDebugText_FlagsVars_VariableValueSet[] =       _("Var: {STR_VAR_1}             \nVal: {STR_VAR_3}             \n{STR_VAR_2}");
 static const u8 gDebugText_FlagsVars_SetPokedexFlags[] =        _("All Pokédex Flags");
-static const u8 gDebugText_FlagsVars_SwitchDex[] =              _("Pokédex ON/OFF");
-static const u8 gDebugText_FlagsVars_SwitchNationalDex[] =      _("NatDex ON/OFF");
-static const u8 gDebugText_FlagsVars_SwitchPokeNav[] =          _("PokéNav ON/OFF");
-static const u8 gDebugText_FlagsVars_ToggleFlyFlags[] =         _("Fly Flags ON/OFF");
-static const u8 gDebugText_FlagsVars_ToggleAllBadges[] =        _("All badges ON/OFF");
-static const u8 gDebugText_FlagsVars_ToggleFrontierPass[] =     _("Frontier Pass ON/OFF");
-static const u8 gDebugText_FlagsVars_SwitchCollision[] =        _("Collision ON/OFF");
-static const u8 gDebugText_FlagsVars_SwitchEncounter[] =        _("Encounter ON/OFF");
-static const u8 gDebugText_FlagsVars_SwitchTrainerSee[] =       _("TrainerSee ON/OFF");
-static const u8 gDebugText_FlagsVars_SwitchBagUse[] =           _("BagUse ON/OFF");
-static const u8 gDebugText_FlagsVars_SwitchCatching[] =         _("Catching ON/OFF");
+static const u8 gDebugText_FlagsVars_SwitchDex[] =              _("Toggle Pokédex");
+static const u8 gDebugText_FlagsVars_SwitchNationalDex[] =      _("Toggle NatDex");
+static const u8 gDebugText_FlagsVars_SwitchPokeNav[] =          _("Toggle PokéNav");
+static const u8 gDebugText_FlagsVars_ToggleFlyFlags[] =         _("Toggle Fly Flags");
+static const u8 gDebugText_FlagsVars_ToggleAllBadges[] =        _("Toggle All badges");
+static const u8 gDebugText_FlagsVars_ToggleFrontierPass[] =     _("Toggle Frontier Pass");
+static const u8 gDebugText_FlagsVars_SwitchCollision[] =        _("Toggle Collision");
+static const u8 gDebugText_FlagsVars_SwitchEncounter[] =        _("Toggle Encounter");
+static const u8 gDebugText_FlagsVars_SwitchTrainerSee[] =       _("Toggle TrainerSee");
+static const u8 gDebugText_FlagsVars_SwitchBagUse[] =           _("Toggle BagUse");
+static const u8 gDebugText_FlagsVars_SwitchCatching[] =         _("Toggle Catching");
 // Give Menu
-static const u8 gDebugText_Give_GiveItem[] =            _("{RIGHT_ARROW}Give item XYZ");
+static const u8 gDebugText_Give_GiveItem[] =            _("Give item XYZ …");
 static const u8 gDebugText_ItemQuantity[] =             _("Quantity:       \n{STR_VAR_1}    \n\n{STR_VAR_2}");
 static const u8 gDebugText_ItemID[] =                   _("Item Id: {STR_VAR_3}\n{STR_VAR_1}    \n\n{STR_VAR_2}");
 static const u8 gDebugText_Give_AllTMs[] =              _("Give all TMs");
-static const u8 gDebugText_Give_GivePokemonSimple[] =   _("{RIGHT_ARROW}Pkm (lvl)");
-static const u8 gDebugText_Give_GivePokemonComplex[] =  _("{RIGHT_ARROW}Pkm (l,s,n,a,IV,mov)");
+static const u8 gDebugText_Give_GivePokemonSimple[] =   _("Pkm (lvl) …");
+static const u8 gDebugText_Give_GivePokemonComplex[] =  _("Pkm (l,s,n,a,IV,mov) …");
 static const u8 gDebugText_PokemonID[] =                _("Species: {STR_VAR_3}\n{STR_VAR_1}    \n\n{STR_VAR_2}");
 static const u8 gDebugText_PokemonLevel[] =             _("Level:                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
 static const u8 gDebugText_PokemonShiny[] =             _("Shiny:                   \n   {STR_VAR_2}             \n              \n                ");
@@ -389,11 +398,10 @@ static const u8 gDebugText_Give_FillPc_Fast[] =         _("Fill PC Fast");
 static const u8 gDebugText_Give_FillPc_Slow[] =         _("Fill PC Slow (LAG!)");
 static const u8 gDebugText_Give_GiveCHEAT[] =           _("CHEAT Start");
 // Sound Mneu
-static const u8 gDebugText_Sound_SE[] =                 _("{RIGHT_ARROW}Effects");
+static const u8 gDebugText_Sound_SE[] =                 _("Effects …");
 static const u8 gDebugText_Sound_SE_ID[] =              _("Sound Id: {STR_VAR_3}\n{STR_VAR_1}    \n{STR_VAR_2}");
-static const u8 gDebugText_Sound_MUS[] =                _("{RIGHT_ARROW}Music");
+static const u8 gDebugText_Sound_MUS[] =                _("Music …");
 static const u8 gDebugText_Sound_MUS_ID[] =             _("Music Id: {STR_VAR_3}\n{STR_VAR_1}    \n{STR_VAR_2}");
-static const u8 gDebugText_Sound_Empty[] =              _("");
 
 static const u8 digitInidicator_1[] =               _("{LEFT_ARROW}+1{RIGHT_ARROW}        ");
 static const u8 digitInidicator_10[] =              _("{LEFT_ARROW}+10{RIGHT_ARROW}       ");
@@ -510,7 +518,7 @@ static void (*const sDebugMenu_Actions_Main[])(u8) =
 {
     [DEBUG_MENU_ITEM_UTILITIES]     = DebugAction_OpenUtilitiesMenu,
     [DEBUG_MENU_ITEM_SCRIPTS]       = DebugAction_OpenScriptsMenu,
-    [DEBUG_MENU_ITEM_FLAGVAR]         = DebugAction_OpenFlagsVarsMenu,
+    [DEBUG_MENU_ITEM_FLAGVAR]       = DebugAction_OpenFlagsVarsMenu,
     [DEBUG_MENU_ITEM_GIVE]          = DebugAction_OpenGiveMenu,
     [DEBUG_MENU_ITEM_SOUND]         = DebugAction_OpenSoundMenu,
     [DEBUG_MENU_ITEM_ACCESS_PC]     = DebugAction_AccessPC,
@@ -583,45 +591,55 @@ static void (*const sDebugMenu_Actions_Sound[])(u8) =
 
 // *******************************
 // Windows
-static const struct WindowTemplate sDebugMenuWindowTemplate =
+static const struct WindowTemplate sDebugMenuWindowTemplateMain =
 {
     .bg = 0,
     .tilemapLeft = 1,
     .tilemapTop = 1,
-    .width = DEBUG_MAIN_MENU_WIDTH,
-    .height = 2 * DEBUG_MAIN_MENU_HEIGHT,
+    .width = DEBUG_MENU_WIDTH_MAIN,
+    .height = 2 * DEBUG_MENU_HEIGHT_MAIN,
     .paletteNum = 15,
     .baseBlock = 1,
 };
-static const struct WindowTemplate sDebugNumberDisplayWindowTemplate =
+static const struct WindowTemplate sDebugMenuWindowTemplateExtra =
 {
     .bg = 0,
-    .tilemapLeft = 4 + DEBUG_MAIN_MENU_WIDTH,
+    .tilemapLeft = 30 - DEBUG_MENU_WIDTH_EXTRA - 1,
     .tilemapTop = 1,
-    .width = DEBUG_NUMBER_DISPLAY_WIDTH,
-    .height = 2 * DEBUG_NUMBER_DISPLAY_HEIGHT,
+    .width = DEBUG_MENU_WIDTH_EXTRA,
+    .height = 2 * DEBUG_MENU_HEIGHT_EXTRA,
     .paletteNum = 15,
     .baseBlock = 1,
 };
-static const struct WindowTemplate sDebugNumberDisplayMediumWindowTemplate =
+static const struct WindowTemplate sDebugMenuWindowTemplateWeather =
 {
     .bg = 0,
-    .tilemapLeft = 30 - DEBUG_NUMBER_DISPLAY_MEDIUM_WIDTH - 1,
+    .tilemapLeft = 30 - DEBUG_MENU_WIDTH_WEATHER - 1,
     .tilemapTop = 1,
-    .width = DEBUG_NUMBER_DISPLAY_MEDIUM_WIDTH,
-    .height = 2 * DEBUG_NUMBER_DISPLAY_MEDIUM_HEIGHT,
+    .width = DEBUG_MENU_WIDTH_WEATHER,
+    .height = 2 * DEBUG_MENU_HEIGHT_WEATHER,
     .paletteNum = 15,
     .baseBlock = 1,
 };
-static const struct WindowTemplate sDebugNumberDisplayLargeWindowTemplate =
+static const struct WindowTemplate sDebugMenuWindowTemplateSound =
 {
     .bg = 0,
-    .tilemapLeft = 30 - DEBUG_NUMBER_DISPLAY_SOUND_WIDTH -1,
+    .tilemapLeft = 30 - DEBUG_MENU_WIDTH_SOUND - 1,
     .tilemapTop = 1,
-    .width = DEBUG_NUMBER_DISPLAY_SOUND_WIDTH,
-    .height = DEBUG_NUMBER_DISPLAY_SOUND_HEIGHT,
+    .width = DEBUG_MENU_WIDTH_SOUND,
+    .height = DEBUG_MENU_HEIGHT_SOUND,
     .paletteNum = 15,
     .baseBlock = 1,
+};
+static const struct WindowTemplate sDebugMenuWindowTemplateFlagsVars =
+{
+    .bg = 0,
+    .tilemapLeft = 30 - DEBUG_MENU_WIDTH_FLAGVAR - 1,
+    .tilemapTop = 1,
+    .width = DEBUG_MENU_WIDTH_FLAGVAR,
+    .height = DEBUG_MENU_HEIGHT_FLAGVAR,
+    .paletteNum = 15,
+    .baseBlock = 1 + DEBUG_MENU_WIDTH_MAIN * DEBUG_MENU_HEIGHT_MAIN * 2,
 };
 
 // *******************************
@@ -680,12 +698,12 @@ static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMte
     // create window
     HideMapNamePopUpWindow();
     LoadMessageBoxAndBorderGfx();
-    windowId = AddWindow(&sDebugMenuWindowTemplate);
+    windowId = AddWindow(&sDebugMenuWindowTemplateMain);
     DrawStdWindowFrame(windowId, FALSE);
 
     // create list menu
     menuTemplate = LMtemplate;
-    menuTemplate.maxShowed = DEBUG_MAIN_MENU_HEIGHT;
+    menuTemplate.maxShowed = DEBUG_MENU_HEIGHT_MAIN;
     menuTemplate.windowId = windowId;
     menuTemplate.header_X = 0;
     menuTemplate.item_X = 8;
@@ -801,8 +819,98 @@ static void DebugTask_HandleMenuInput_Scripts(u8 taskId)
 static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId)
 {
     void (*func)(u8);
-    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
+    u8 listTaskId = gTasks[taskId].data[0];
+    u32 input = ListMenu_ProcessInput(listTaskId);
+    u16 idx;
+    
+    ListMenuGetCurrentItemArrayId(listTaskId, &idx);
 
+    // Create extra true/false window
+    if (gTasks[taskId].data[2] == 0)
+    {
+        u8 windowId;
+        
+        windowId = AddWindow(&sDebugMenuWindowTemplateFlagsVars);
+        DrawStdWindowFrame(windowId, FALSE);
+        CopyWindowToVram(windowId, 3);
+
+        gTasks[taskId].data[2] = windowId;
+    }
+
+    // Check current flag
+    switch (idx)
+    {
+        case DEBUG_FLAGVAR_MENU_ITEM_POKEDEXONOFF:
+            gTasks[taskId].data[3] = FlagGet(FLAG_SYS_POKEDEX_GET);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_NATDEXONOFF:
+            gTasks[taskId].data[3] = IsNationalPokedexEnabled();
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_POKENAVONOFF:
+            gTasks[taskId].data[3] = FlagGet(FLAG_SYS_POKENAV_GET);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_FLYANYWHERE:
+            gTasks[taskId].data[3] = FlagGet(FLAG_VISITED_LITTLEROOT_TOWN) &&
+                FlagGet(FLAG_VISITED_OLDALE_TOWN) &&
+                FlagGet(FLAG_VISITED_DEWFORD_TOWN) &&
+                FlagGet(FLAG_VISITED_LAVARIDGE_TOWN) &&
+                FlagGet(FLAG_VISITED_FALLARBOR_TOWN) &&
+                FlagGet(FLAG_VISITED_VERDANTURF_TOWN) &&
+                FlagGet(FLAG_VISITED_PACIFIDLOG_TOWN) &&
+                FlagGet(FLAG_VISITED_PETALBURG_CITY) &&
+                FlagGet(FLAG_VISITED_SLATEPORT_CITY) &&
+                FlagGet(FLAG_VISITED_MAUVILLE_CITY) &&
+                FlagGet(FLAG_VISITED_RUSTBORO_CITY) &&
+                FlagGet(FLAG_VISITED_FORTREE_CITY) &&
+                FlagGet(FLAG_VISITED_LILYCOVE_CITY) &&
+                FlagGet(FLAG_VISITED_MOSSDEEP_CITY) &&
+                FlagGet(FLAG_VISITED_SOOTOPOLIS_CITY) &&
+                FlagGet(FLAG_VISITED_EVER_GRANDE_CITY) &&
+                FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) &&
+                FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_GETALLBADGES:
+            gTasks[taskId].data[3] = FlagGet(FLAG_BADGE01_GET) &&
+                FlagGet(FLAG_BADGE02_GET) &&
+                FlagGet(FLAG_BADGE03_GET) &&
+                FlagGet(FLAG_BADGE04_GET) &&
+                FlagGet(FLAG_BADGE05_GET) &&
+                FlagGet(FLAG_BADGE06_GET) &&
+                FlagGet(FLAG_BADGE07_GET) &&
+                FlagGet(FLAG_BADGE08_GET);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_FRONTIER_PASS:
+            gTasks[taskId].data[3] = FlagGet(FLAG_SYS_FRONTIER_PASS);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_COLISSION_ONOFF:
+            gTasks[taskId].data[3] = FlagGet(FLAG_SYS_NO_COLLISION);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_ENCOUNTER_ONOFF:
+            gTasks[taskId].data[3] = FlagGet(FLAG_SYS_NO_ENCOUNTER);
+            break; 
+        case DEBUG_FLAGVAR_MENU_ITEM_TRAINER_SEE_ONOFF:
+            gTasks[taskId].data[3] = FlagGet(FLAG_SYS_NO_TRAINER_SEE);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_BAG_USE_ONOFF:
+            gTasks[taskId].data[3] = FlagGet(FLAG_SYS_NO_BAG_USE);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_CATCHING_ONOFF:
+            gTasks[taskId].data[3] = FlagGet(FLAG_SYS_NO_CATCHING);
+            break;
+        default:
+            gTasks[taskId].data[3] = 0xFF;
+            break;
+    }
+
+    if (gTasks[taskId].data[3] == 0xFF)
+        StringCopyAndFillWithSpaces(gStringVar4, gDebugText_Empty, 10);
+    else if (gTasks[taskId].data[3])
+        StringCopyAndFillWithSpaces(gStringVar4, gDebugText_Colored_True, 10);
+    else
+        StringCopyAndFillWithSpaces(gStringVar4, gDebugText_Colored_False, 10);
+    AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
+
+    // Other inputs
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
@@ -813,6 +921,10 @@ static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Debug_DestroyMenu(taskId);
+        
+        ClearStdWindowAndFrame(gTasks[taskId].data[2], TRUE);
+        RemoveWindow(gTasks[taskId].data[2]);
+
         Debug_ShowMainMenu();
     }
 }
@@ -924,7 +1036,7 @@ static void DebugAction_Util_Warp_Warp(u8 taskId)
 
     HideMapNamePopUpWindow();
     LoadMessageBoxAndBorderGfx();
-    windowId = AddWindow(&sDebugNumberDisplayWindowTemplate);
+    windowId = AddWindow(&sDebugMenuWindowTemplateExtra);
     DrawStdWindowFrame(windowId, FALSE);
 
     CopyWindowToVram(windowId, 3);
@@ -1103,15 +1215,10 @@ static void DebugAction_Util_Warp_SelectWarp(u8 taskId)
 static void DebugAction_Util_RunningShoes(u8 taskId)
 {
     if (FlagGet(FLAG_SYS_B_DASH))
-    {
-        FlagClear(FLAG_SYS_B_DASH);
         PlaySE(SE_PC_OFF);
-    }
     else
-    {
-        FlagSet(FLAG_SYS_B_DASH);
         PlaySE(SE_PC_LOGIN);
-    }
+    FlagToggle(FLAG_SYS_B_DASH);
 }
 
 static void DebugAction_Util_PoisonMons(u8 taskId)
@@ -1174,7 +1281,7 @@ static void DebugAction_Util_Weather(u8 taskId)
 
     HideMapNamePopUpWindow();
     LoadMessageBoxAndBorderGfx();
-    windowId = AddWindow(&sDebugNumberDisplayMediumWindowTemplate);
+    windowId = AddWindow(&sDebugMenuWindowTemplateWeather);
     DrawStdWindowFrame(windowId, FALSE);
 
     CopyWindowToVram(windowId, 3);
@@ -1349,7 +1456,7 @@ static void DebugAction_FlagsVars_Flags(u8 taskId)
 
     HideMapNamePopUpWindow();
     LoadMessageBoxAndBorderGfx();
-    windowId = AddWindow(&sDebugNumberDisplayWindowTemplate);
+    windowId = AddWindow(&sDebugMenuWindowTemplateExtra);
     DrawStdWindowFrame(windowId, FALSE);
 
     CopyWindowToVram(windowId, 3);
@@ -1441,7 +1548,7 @@ static void DebugAction_FlagsVars_Vars(u8 taskId)
 
     HideMapNamePopUpWindow();
     LoadMessageBoxAndBorderGfx();
-    windowId = AddWindow(&sDebugNumberDisplayWindowTemplate);
+    windowId = AddWindow(&sDebugMenuWindowTemplateExtra);
     DrawStdWindowFrame(windowId, FALSE);
 
     CopyWindowToVram(windowId, 3);
@@ -1622,13 +1729,10 @@ static void DebugAction_FlagsVars_SetPokedexFlags(u8 taskId)
 static void DebugAction_FlagsVars_SwitchDex(u8 taskId)
 {
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
-    {
-        FlagClear(FLAG_SYS_POKEDEX_GET);
         PlaySE(SE_PC_OFF);
-    }else{
-        FlagSet(FLAG_SYS_POKEDEX_GET);
+    else
         PlaySE(SE_PC_LOGIN);
-    }
+    FlagToggle(FLAG_SYS_POKEDEX_GET);
 }
 static void DebugAction_FlagsVars_SwitchNatDex(u8 taskId)
 {
@@ -1644,39 +1748,60 @@ static void DebugAction_FlagsVars_SwitchNatDex(u8 taskId)
 static void DebugAction_FlagsVars_SwitchPokeNav(u8 taskId)
 {
     if (FlagGet(FLAG_SYS_POKENAV_GET))
-    {
-        FlagClear(FLAG_SYS_POKENAV_GET);
         PlaySE(SE_PC_OFF);
-    }else{
-        FlagSet(FLAG_SYS_POKENAV_GET);
+    else
         PlaySE(SE_PC_LOGIN);
-    }
+    FlagToggle(FLAG_SYS_POKENAV_GET);
 }
 static void DebugAction_FlagsVars_ToggleFlyFlags(u8 taskId)
 {
     // Sound effect
     if (FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER))
+    {
         PlaySE(SE_PC_OFF);
+
+        FlagClear(FLAG_VISITED_LITTLEROOT_TOWN);
+        FlagClear(FLAG_VISITED_OLDALE_TOWN);
+        FlagClear(FLAG_VISITED_DEWFORD_TOWN);
+        FlagClear(FLAG_VISITED_LAVARIDGE_TOWN);
+        FlagClear(FLAG_VISITED_FALLARBOR_TOWN);
+        FlagClear(FLAG_VISITED_VERDANTURF_TOWN);
+        FlagClear(FLAG_VISITED_PACIFIDLOG_TOWN);
+        FlagClear(FLAG_VISITED_PETALBURG_CITY);
+        FlagClear(FLAG_VISITED_SLATEPORT_CITY);
+        FlagClear(FLAG_VISITED_MAUVILLE_CITY);
+        FlagClear(FLAG_VISITED_RUSTBORO_CITY);
+        FlagClear(FLAG_VISITED_FORTREE_CITY);
+        FlagClear(FLAG_VISITED_LILYCOVE_CITY);
+        FlagClear(FLAG_VISITED_MOSSDEEP_CITY);
+        FlagClear(FLAG_VISITED_SOOTOPOLIS_CITY);
+        FlagClear(FLAG_VISITED_EVER_GRANDE_CITY);
+        FlagClear(FLAG_LANDMARK_POKEMON_LEAGUE);
+        FlagClear(FLAG_LANDMARK_BATTLE_FRONTIER);
+    }
     else
+    {
         PlaySE(SE_PC_LOGIN);
-    FlagToggle(FLAG_VISITED_LITTLEROOT_TOWN);
-    FlagToggle(FLAG_VISITED_OLDALE_TOWN);
-    FlagToggle(FLAG_VISITED_DEWFORD_TOWN);
-    FlagToggle(FLAG_VISITED_LAVARIDGE_TOWN);
-    FlagToggle(FLAG_VISITED_FALLARBOR_TOWN);
-    FlagToggle(FLAG_VISITED_VERDANTURF_TOWN);
-    FlagToggle(FLAG_VISITED_PACIFIDLOG_TOWN);
-    FlagToggle(FLAG_VISITED_PETALBURG_CITY);
-    FlagToggle(FLAG_VISITED_SLATEPORT_CITY);
-    FlagToggle(FLAG_VISITED_MAUVILLE_CITY);
-    FlagToggle(FLAG_VISITED_RUSTBORO_CITY);
-    FlagToggle(FLAG_VISITED_FORTREE_CITY);
-    FlagToggle(FLAG_VISITED_LILYCOVE_CITY);
-    FlagToggle(FLAG_VISITED_MOSSDEEP_CITY);
-    FlagToggle(FLAG_VISITED_SOOTOPOLIS_CITY);
-    FlagToggle(FLAG_VISITED_EVER_GRANDE_CITY);
-    FlagToggle(FLAG_LANDMARK_POKEMON_LEAGUE);
-    FlagToggle(FLAG_LANDMARK_BATTLE_FRONTIER);
+    
+        FlagSet(FLAG_VISITED_LITTLEROOT_TOWN);
+        FlagSet(FLAG_VISITED_OLDALE_TOWN);
+        FlagSet(FLAG_VISITED_DEWFORD_TOWN);
+        FlagSet(FLAG_VISITED_LAVARIDGE_TOWN);
+        FlagSet(FLAG_VISITED_FALLARBOR_TOWN);
+        FlagSet(FLAG_VISITED_VERDANTURF_TOWN);
+        FlagSet(FLAG_VISITED_PACIFIDLOG_TOWN);
+        FlagSet(FLAG_VISITED_PETALBURG_CITY);
+        FlagSet(FLAG_VISITED_SLATEPORT_CITY);
+        FlagSet(FLAG_VISITED_MAUVILLE_CITY);
+        FlagSet(FLAG_VISITED_RUSTBORO_CITY);
+        FlagSet(FLAG_VISITED_FORTREE_CITY);
+        FlagSet(FLAG_VISITED_LILYCOVE_CITY);
+        FlagSet(FLAG_VISITED_MOSSDEEP_CITY);
+        FlagSet(FLAG_VISITED_SOOTOPOLIS_CITY);
+        FlagSet(FLAG_VISITED_EVER_GRANDE_CITY);
+        FlagSet(FLAG_LANDMARK_POKEMON_LEAGUE);
+        FlagSet(FLAG_LANDMARK_BATTLE_FRONTIER);
+    }
 }
 static void DebugAction_FlagsVars_ToggleBadgeFlags(u8 taskId)
 {
@@ -1706,57 +1831,42 @@ static void DebugAction_FlagsVars_ToggleFrontierPass(u8 taskId)
 static void DebugAction_FlagsVars_CollisionOnOff(u8 taskId)
 {
     if (FlagGet(FLAG_SYS_NO_COLLISION))
-    {
-        FlagClear(FLAG_SYS_NO_COLLISION);
         PlaySE(SE_PC_OFF);
-    }else{
-        FlagSet(FLAG_SYS_NO_COLLISION);
+    else
         PlaySE(SE_PC_LOGIN);
-    }
+    FlagToggle(FLAG_SYS_NO_COLLISION);
 }
 static void DebugAction_FlagsVars_EncounterOnOff(u8 taskId)
 {
     if (FlagGet(FLAG_SYS_NO_ENCOUNTER))
-    {
-        FlagClear(FLAG_SYS_NO_ENCOUNTER);
         PlaySE(SE_PC_OFF);
-    }else{
-        FlagSet(FLAG_SYS_NO_ENCOUNTER);
+    else
         PlaySE(SE_PC_LOGIN);
-    }
+    FlagToggle(FLAG_SYS_NO_ENCOUNTER);
 }
 static void DebugAction_FlagsVars_TrainerSeeOnOff(u8 taskId)
 {
     if (FlagGet(FLAG_SYS_NO_TRAINER_SEE))
-    {
-        FlagClear(FLAG_SYS_NO_TRAINER_SEE);
         PlaySE(SE_PC_OFF);
-    }else{
-        FlagSet(FLAG_SYS_NO_TRAINER_SEE);
+    else
         PlaySE(SE_PC_LOGIN);
-    }
+    FlagToggle(FLAG_SYS_NO_TRAINER_SEE);
 }
 static void DebugAction_FlagsVars_BagUseOnOff(u8 taskId)
 {
     if (FlagGet(FLAG_SYS_NO_BAG_USE))
-    {
-        FlagClear(FLAG_SYS_NO_BAG_USE);
         PlaySE(SE_PC_OFF);
-    }else{
-        FlagSet(FLAG_SYS_NO_BAG_USE);
+    else
         PlaySE(SE_PC_LOGIN);
-    }
+    FlagToggle(FLAG_SYS_NO_BAG_USE);
 }
 static void DebugAction_FlagsVars_CatchingOnOff(u8 taskId)
 {
     if (FlagGet(FLAG_SYS_NO_CATCHING))
-    {
-        FlagClear(FLAG_SYS_NO_CATCHING);
         PlaySE(SE_PC_OFF);
-    }else{
-        FlagSet(FLAG_SYS_NO_CATCHING);
+    else
         PlaySE(SE_PC_LOGIN);
-    }
+    FlagToggle(FLAG_SYS_NO_CATCHING);
 }
 
 // *******************************
@@ -1771,7 +1881,7 @@ static void DebugAction_Give_Item(u8 taskId)
 
     HideMapNamePopUpWindow();
     LoadMessageBoxAndBorderGfx();
-    windowId = AddWindow(&sDebugNumberDisplayWindowTemplate);
+    windowId = AddWindow(&sDebugMenuWindowTemplateExtra);
     DrawStdWindowFrame(windowId, FALSE);
 
     CopyWindowToVram(windowId, 3);
@@ -1964,7 +2074,7 @@ static void DebugAction_Give_PokemonSimple(u8 taskId)
 
     HideMapNamePopUpWindow();
     LoadMessageBoxAndBorderGfx();
-    windowId = AddWindow(&sDebugNumberDisplayWindowTemplate);
+    windowId = AddWindow(&sDebugMenuWindowTemplateExtra);
     DrawStdWindowFrame(windowId, FALSE);
 
     CopyWindowToVram(windowId, 3);
@@ -2007,7 +2117,7 @@ static void DebugAction_Give_PokemonComplex(u8 taskId)
 
     HideMapNamePopUpWindow();
     LoadMessageBoxAndBorderGfx();
-    windowId = AddWindow(&sDebugNumberDisplayWindowTemplate);
+    windowId = AddWindow(&sDebugMenuWindowTemplateExtra);
     DrawStdWindowFrame(windowId, FALSE);
 
     CopyWindowToVram(windowId, 3);
@@ -2875,7 +2985,7 @@ static void DebugAction_Sound_SE(u8 taskId)
 
     HideMapNamePopUpWindow();
     LoadMessageBoxAndBorderGfx();
-    windowId = AddWindow(&sDebugNumberDisplayLargeWindowTemplate);
+    windowId = AddWindow(&sDebugMenuWindowTemplateSound);
     DrawStdWindowFrame(windowId, FALSE);
 
     CopyWindowToVram(windowId, 3);
@@ -2952,7 +3062,7 @@ static void DebugAction_Sound_MUS(u8 taskId)
 
     HideMapNamePopUpWindow();
     LoadMessageBoxAndBorderGfx();
-    windowId = AddWindow(&sDebugNumberDisplayLargeWindowTemplate);
+    windowId = AddWindow(&sDebugMenuWindowTemplateSound);
     DrawStdWindowFrame(windowId, FALSE);
 
     CopyWindowToVram(windowId, 3);
