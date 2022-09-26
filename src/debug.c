@@ -1013,7 +1013,7 @@ static void DebugTask_HandleMenuInput_Fill(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Debug_DestroyMenu(taskId);
-        DebugAction_OpenGiveMenu(taskId);
+        Debug_ShowMainMenu();
     }
 }
 static void DebugTask_HandleMenuInput_Sound(u8 taskId)
