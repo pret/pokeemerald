@@ -67,6 +67,7 @@ enum { // Main
     DEBUG_MENU_ITEM_SCRIPTS,
     DEBUG_MENU_ITEM_FLAGVAR,
     DEBUG_MENU_ITEM_GIVE,
+    DEBUG_MENU_ITEM_FILL,
     DEBUG_MENU_ITEM_SOUND,
     DEBUG_MENU_ITEM_ACCESS_PC,
     DEBUG_MENU_ITEM_CANCEL
@@ -122,17 +123,16 @@ enum { // Give
     DEBUG_GIVE_MENU_ITEM_MAX_COINS,
     DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS,
     DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG,
-    DEBUG_GIVE_MENU_ITEM_FILL_MENU,
 };
 enum { // Give Fill
-    DEBUG_GIVE_MENU_ITEM_FILL_PC_BOXES_FAST,
-    DEBUG_GIVE_MENU_ITEM_FILL_PC_BOXES_SLOW,
-    DEBUG_GIVE_MENU_ITEM_FILL_PC_ITEMS,
-    DEBUG_GIVE_MENU_ITEM_FILL_POCKET_ITEMS,
-    DEBUG_GIVE_MENU_ITEM_FILL_POCKET_BALLS,
-    DEBUG_GIVE_MENU_ITEM_FILL_POCKET_TMHM,
-    DEBUG_GIVE_MENU_ITEM_FILL_POCKET_BERRIES,
-    DEBUG_GIVE_MENU_ITEM_FILL_POCKET_KEY_ITEMS,
+    DEBUG_FILL_MENU_ITEM_PC_BOXES_FAST,
+    DEBUG_FILL_MENU_ITEM_PC_BOXES_SLOW,
+    DEBUG_FILL_MENU_ITEM_PC_ITEMS,
+    DEBUG_FILL_MENU_ITEM_POCKET_ITEMS,
+    DEBUG_FILL_MENU_ITEM_POCKET_BALLS,
+    DEBUG_FILL_MENU_ITEM_POCKET_TMHM,
+    DEBUG_FILL_MENU_ITEM_POCKET_BERRIES,
+    DEBUG_FILL_MENU_ITEM_POCKET_KEY_ITEMS,
 };
 enum { //Sound
     DEBUG_SOUND_MENU_ITEM_SE,
@@ -199,6 +199,7 @@ static void Debug_DestroyMenu(u8 taskId);
 static void Debug_DestroyMenu_Full(u8 taskId);
 static void DebugAction_Cancel(u8 taskId);
 static void DebugAction_DestroyExtraWindow(u8 taskId);
+static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 
 static void DebugAction_Util_Script_1(u8 taskId);
 static void DebugAction_Util_Script_2(u8 taskId);
@@ -213,7 +214,7 @@ static void DebugAction_OpenUtilitiesMenu(u8 taskId);
 static void DebugAction_OpenScriptsMenu(u8 taskId);
 static void DebugAction_OpenFlagsVarsMenu(u8 taskId);
 static void DebugAction_OpenGiveMenu(u8 taskId);
-static void DebugAction_OpenGiveFillMenu(u8 taskId);
+static void DebugAction_OpenFillMenu(u8 taskId);
 static void DebugAction_OpenSoundMenu(u8 taskId);
 static void DebugAction_AccessPC(u8 taskId);
 static void DebugTask_HandleMenuInput_Main(u8 taskId);
@@ -221,7 +222,7 @@ static void DebugTask_HandleMenuInput_Utilities(u8 taskId);
 static void DebugTask_HandleMenuInput_Scripts(u8 taskId);
 static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId);
 static void DebugTask_HandleMenuInput_Give(u8 taskId);
-static void DebugTask_HandleMenuInput_Give_Fill(u8 taskId);
+static void DebugTask_HandleMenuInput_Fill(u8 taskId);
 static void DebugTask_HandleMenuInput_Sound(u8 taskId);
 
 static void DebugAction_Util_HealParty(u8 taskId);
@@ -279,22 +280,20 @@ static void DebugAction_Give_MaxMoney(u8 taskId);
 static void DebugAction_Give_MaxCoins(u8 taskId);
 static void DebugAction_Give_MaxBattlePoints(u8 taskId);
 static void DebugAction_Give_DayCareEgg(u8 taskId);
-static void DebugAction_Give_Fill_PCBoxes_Fast(u8 taskId);
-static void DebugAction_Give_Fill_PCBoxes_Slow(u8 taskId);
-static void DebugAction_Give_Fill_PCItemStorage(u8 taskId);
-static void DebugAction_Give_Fill_PocketItems(u8 taskId);
-static void DebugAction_Give_Fill_PocketPokeBalls(u8 taskId);
-static void DebugAction_Give_Fill_PocketTMHM(u8 taskId);
-static void DebugAction_Give_Fill_PocketBerries(u8 taskId);
-static void DebugAction_Give_Fill_PocketKeyItems(u8 taskId);
+
+static void DebugAction_Fill_PCBoxes_Fast(u8 taskId);
+static void DebugAction_Fill_PCBoxes_Slow(u8 taskId);
+static void DebugAction_Fill_PCItemStorage(u8 taskId);
+static void DebugAction_Fill_PocketItems(u8 taskId);
+static void DebugAction_Fill_PocketPokeBalls(u8 taskId);
+static void DebugAction_Fill_PocketTMHM(u8 taskId);
+static void DebugAction_Fill_PocketBerries(u8 taskId);
+static void DebugAction_Fill_PocketKeyItems(u8 taskId);
 
 static void DebugAction_Sound_SE(u8 taskId);
 static void DebugAction_Sound_SE_SelectId(u8 taskId);
 static void DebugAction_Sound_MUS(u8 taskId);
 static void DebugAction_Sound_MUS_SelectId(u8 taskId);
-
-static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
-static void DebugAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate);
 
 extern u8 Debug_Script_1[];
 extern u8 Debug_Script_2[];
@@ -334,6 +333,7 @@ static const u8 sDebugText_Utilities[] =        _("Utilities…{CLEAR_TO 110}{RI
 static const u8 sDebugText_Scripts[] =          _("Scripts…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_FlagsVars[] =        _("Flags & Vars…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Give[] =             _("Give X…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Fill[] =             _("Fill PC/Pockets…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Sound[] =            _("Sound…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_AccessPC[] =         _("Access PC…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Cancel[] =           _("Cancel");
@@ -413,16 +413,15 @@ static const u8 sDebugText_Give_MaxMoney[] =            _("Max Money");
 static const u8 sDebugText_Give_MaxCoins[] =            _("Max Coins");
 static const u8 sDebugText_Give_BattlePoints[] =        _("Max Battle Points");
 static const u8 sDebugText_Give_DaycareEgg[] =          _("Daycare Egg");
-static const u8 sDebugText_Give_Fill_Menu[] =           _("Fill PC/Pockets…{CLEAR_TO 110}{RIGHT_ARROW}");
-// Give Fill Menu
-static const u8 sDebugText_Give_Fill_Pc_Fast[] =        _("Fill PCBoxes Fast");
-static const u8 sDebugText_Give_Fill_Pc_Slow[] =        _("Fill PCBoxes Slow (LAG!)");
-static const u8 sDebugText_Give_Fill_Pc_Items[] =       _("Fill PCItems");
-static const u8 sDebugText_Give_Fill_PocketItems[] =    _("Fill Pocket Items");
-static const u8 sDebugText_Give_Fill_PocketPokeBalls[] =_("Fill Pocket PokeBalls");
-static const u8 sDebugText_Give_Fill_PocketTMHM[] =     _("Fill Pocket TMHM");
-static const u8 sDebugText_Give_Fill_PocketBerries[] =  _("Fill Pocket Berries");
-static const u8 sDebugText_Give_Fill_PocketKeyItems[] = _("Fill Pocket KeyItems");
+// Fill Menu
+static const u8 sDebugText_Fill_Pc_Fast[] =        _("Fill PCBoxes Fast");
+static const u8 sDebugText_Fill_Pc_Slow[] =        _("Fill PCBoxes Slow (LAG!)");
+static const u8 sDebugText_Fill_Pc_Items[] =       _("Fill PCItems");
+static const u8 sDebugText_Fill_PocketItems[] =    _("Fill Pocket Items");
+static const u8 sDebugText_Fill_PocketPokeBalls[] =_("Fill Pocket PokeBalls");
+static const u8 sDebugText_Fill_PocketTMHM[] =     _("Fill Pocket TMHM");
+static const u8 sDebugText_Fill_PocketBerries[] =  _("Fill Pocket Berries");
+static const u8 sDebugText_Fill_PocketKeyItems[] = _("Fill Pocket KeyItems");
 // Sound Mneu
 static const u8 sDebugText_Sound_SE[] =                 _("Effects…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Sound_SE_ID[] =              _("Sound Id: {STR_VAR_3}\n{STR_VAR_1}    \n{STR_VAR_2}");
@@ -470,6 +469,7 @@ static const struct ListMenuItem sDebugMenu_Items_Main[] =
     [DEBUG_MENU_ITEM_SCRIPTS]       = {sDebugText_Scripts,      DEBUG_MENU_ITEM_SCRIPTS},
     [DEBUG_MENU_ITEM_FLAGVAR]       = {sDebugText_FlagsVars,    DEBUG_MENU_ITEM_FLAGVAR},
     [DEBUG_MENU_ITEM_GIVE]          = {sDebugText_Give,         DEBUG_MENU_ITEM_GIVE},
+    [DEBUG_MENU_ITEM_FILL]          = {sDebugText_Fill,         DEBUG_MENU_ITEM_FILL},
     [DEBUG_MENU_ITEM_SOUND]         = {sDebugText_Sound,        DEBUG_MENU_ITEM_SOUND},
     [DEBUG_MENU_ITEM_ACCESS_PC]     = {sDebugText_AccessPC,     DEBUG_MENU_ITEM_ACCESS_PC},
     [DEBUG_MENU_ITEM_CANCEL]        = {sDebugText_Cancel,       DEBUG_MENU_ITEM_CANCEL}
@@ -529,18 +529,17 @@ static const struct ListMenuItem sDebugMenu_Items_Give[] =
     [DEBUG_GIVE_MENU_ITEM_MAX_COINS]         = {sDebugText_Give_MaxCoins,           DEBUG_GIVE_MENU_ITEM_MAX_COINS},
     [DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS] = {sDebugText_Give_BattlePoints,       DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS},
     [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]       = {sDebugText_Give_DaycareEgg,         DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG},
-    [DEBUG_GIVE_MENU_ITEM_FILL_MENU]         = {sDebugText_Give_Fill_Menu,          DEBUG_GIVE_MENU_ITEM_FILL_MENU},
 };
-static const struct ListMenuItem sDebugMenu_Items_Give_Fill[] =
+static const struct ListMenuItem sDebugMenu_Items_Fill[] =
 {
-    [DEBUG_GIVE_MENU_ITEM_FILL_PC_BOXES_FAST]    = {sDebugText_Give_Fill_Pc_Fast,         DEBUG_GIVE_MENU_ITEM_FILL_PC_BOXES_FAST},
-    [DEBUG_GIVE_MENU_ITEM_FILL_PC_BOXES_SLOW]    = {sDebugText_Give_Fill_Pc_Slow,         DEBUG_GIVE_MENU_ITEM_FILL_PC_BOXES_SLOW},
-    [DEBUG_GIVE_MENU_ITEM_FILL_PC_ITEMS]         = {sDebugText_Give_Fill_Pc_Items ,       DEBUG_GIVE_MENU_ITEM_FILL_PC_ITEMS},
-    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_ITEMS]     = {sDebugText_Give_Fill_PocketItems,     DEBUG_GIVE_MENU_ITEM_FILL_POCKET_ITEMS},
-    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_BALLS]     = {sDebugText_Give_Fill_PocketPokeBalls, DEBUG_GIVE_MENU_ITEM_FILL_POCKET_BALLS},
-    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_TMHM]      = {sDebugText_Give_Fill_PocketTMHM,      DEBUG_GIVE_MENU_ITEM_FILL_POCKET_TMHM},
-    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_BERRIES]   = {sDebugText_Give_Fill_PocketBerries,   DEBUG_GIVE_MENU_ITEM_FILL_POCKET_BERRIES},
-    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_KEY_ITEMS] = {sDebugText_Give_Fill_PocketKeyItems,  DEBUG_GIVE_MENU_ITEM_FILL_POCKET_KEY_ITEMS},
+    [DEBUG_FILL_MENU_ITEM_PC_BOXES_FAST]    = {sDebugText_Fill_Pc_Fast,         DEBUG_FILL_MENU_ITEM_PC_BOXES_FAST},
+    [DEBUG_FILL_MENU_ITEM_PC_BOXES_SLOW]    = {sDebugText_Fill_Pc_Slow,         DEBUG_FILL_MENU_ITEM_PC_BOXES_SLOW},
+    [DEBUG_FILL_MENU_ITEM_PC_ITEMS]         = {sDebugText_Fill_Pc_Items ,       DEBUG_FILL_MENU_ITEM_PC_ITEMS},
+    [DEBUG_FILL_MENU_ITEM_POCKET_ITEMS]     = {sDebugText_Fill_PocketItems,     DEBUG_FILL_MENU_ITEM_POCKET_ITEMS},
+    [DEBUG_FILL_MENU_ITEM_POCKET_BALLS]     = {sDebugText_Fill_PocketPokeBalls, DEBUG_FILL_MENU_ITEM_POCKET_BALLS},
+    [DEBUG_FILL_MENU_ITEM_POCKET_TMHM]      = {sDebugText_Fill_PocketTMHM,      DEBUG_FILL_MENU_ITEM_POCKET_TMHM},
+    [DEBUG_FILL_MENU_ITEM_POCKET_BERRIES]   = {sDebugText_Fill_PocketBerries,   DEBUG_FILL_MENU_ITEM_POCKET_BERRIES},
+    [DEBUG_FILL_MENU_ITEM_POCKET_KEY_ITEMS] = {sDebugText_Fill_PocketKeyItems,  DEBUG_FILL_MENU_ITEM_POCKET_KEY_ITEMS},
 };
 static const struct ListMenuItem sDebugMenu_Items_Sound[] =
 {
@@ -556,6 +555,7 @@ static void (*const sDebugMenu_Actions_Main[])(u8) =
     [DEBUG_MENU_ITEM_SCRIPTS]       = DebugAction_OpenScriptsMenu,
     [DEBUG_MENU_ITEM_FLAGVAR]       = DebugAction_OpenFlagsVarsMenu,
     [DEBUG_MENU_ITEM_GIVE]          = DebugAction_OpenGiveMenu,
+    [DEBUG_MENU_ITEM_FILL]          = DebugAction_OpenFillMenu,
     [DEBUG_MENU_ITEM_SOUND]         = DebugAction_OpenSoundMenu,
     [DEBUG_MENU_ITEM_ACCESS_PC]     = DebugAction_AccessPC,
     [DEBUG_MENU_ITEM_CANCEL]        = DebugAction_Cancel
@@ -615,18 +615,17 @@ static void (*const sDebugMenu_Actions_Give[])(u8) =
     [DEBUG_GIVE_MENU_ITEM_MAX_COINS]         = DebugAction_Give_MaxCoins,
     [DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS] = DebugAction_Give_MaxBattlePoints,
     [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]       = DebugAction_Give_DayCareEgg,
-    [DEBUG_GIVE_MENU_ITEM_FILL_MENU]         = DebugAction_OpenGiveFillMenu,
 };
-static void (*const sDebugMenu_Actions_Give_Fill[])(u8) =
+static void (*const sDebugMenu_Actions_Fill[])(u8) =
 {
-    [DEBUG_GIVE_MENU_ITEM_FILL_PC_BOXES_FAST]    = DebugAction_Give_Fill_PCBoxes_Fast,
-    [DEBUG_GIVE_MENU_ITEM_FILL_PC_BOXES_SLOW]    = DebugAction_Give_Fill_PCBoxes_Slow,
-    [DEBUG_GIVE_MENU_ITEM_FILL_PC_ITEMS]         = DebugAction_Give_Fill_PCItemStorage,
-    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_ITEMS]     = DebugAction_Give_Fill_PocketItems,
-    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_BALLS]     = DebugAction_Give_Fill_PocketPokeBalls,
-    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_TMHM]      = DebugAction_Give_Fill_PocketTMHM,
-    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_BERRIES]   = DebugAction_Give_Fill_PocketBerries,
-    [DEBUG_GIVE_MENU_ITEM_FILL_POCKET_KEY_ITEMS] = DebugAction_Give_Fill_PocketKeyItems,
+    [DEBUG_FILL_MENU_ITEM_PC_BOXES_FAST]    = DebugAction_Fill_PCBoxes_Fast,
+    [DEBUG_FILL_MENU_ITEM_PC_BOXES_SLOW]    = DebugAction_Fill_PCBoxes_Slow,
+    [DEBUG_FILL_MENU_ITEM_PC_ITEMS]         = DebugAction_Fill_PCItemStorage,
+    [DEBUG_FILL_MENU_ITEM_POCKET_ITEMS]     = DebugAction_Fill_PocketItems,
+    [DEBUG_FILL_MENU_ITEM_POCKET_BALLS]     = DebugAction_Fill_PocketPokeBalls,
+    [DEBUG_FILL_MENU_ITEM_POCKET_TMHM]      = DebugAction_Fill_PocketTMHM,
+    [DEBUG_FILL_MENU_ITEM_POCKET_BERRIES]   = DebugAction_Fill_PocketBerries,
+    [DEBUG_FILL_MENU_ITEM_POCKET_KEY_ITEMS] = DebugAction_Fill_PocketKeyItems,
 };
 
 static void (*const sDebugMenu_Actions_Sound[])(u8) =
@@ -721,11 +720,11 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Give =
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_Give),
 };
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Give_Fill =
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Fill =
 {
-    .items = sDebugMenu_Items_Give_Fill,
+    .items = sDebugMenu_Items_Fill,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Give_Fill),
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Fill),
 };
 static const struct ListMenuTemplate sDebugMenu_ListTemplate_Sound =
 {
@@ -999,7 +998,7 @@ static void DebugTask_HandleMenuInput_Give(u8 taskId)
         Debug_ShowMainMenu();
     }
 }
-static void DebugTask_HandleMenuInput_Give_Fill(u8 taskId)
+static void DebugTask_HandleMenuInput_Fill(u8 taskId)
 {
     void (*func)(u8);
     u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
@@ -1007,7 +1006,7 @@ static void DebugTask_HandleMenuInput_Give_Fill(u8 taskId)
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        if ((func = sDebugMenu_Actions_Give_Fill[input]) != NULL)
+        if ((func = sDebugMenu_Actions_Fill[input]) != NULL)
             func(taskId);
     }
     else if (gMain.newKeys & B_BUTTON)
@@ -1058,10 +1057,10 @@ static void DebugAction_OpenGiveMenu(u8 taskId)
     Debug_DestroyMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
 }
-static void DebugAction_OpenGiveFillMenu(u8 taskId)
+static void DebugAction_OpenFillMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_Give_Fill, sDebugMenu_ListTemplate_Give_Fill);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_Fill, sDebugMenu_ListTemplate_Fill);
 }
 static void DebugAction_OpenSoundMenu(u8 taskId)
 {
@@ -2946,7 +2945,7 @@ static void DebugAction_Give_DayCareEgg(u8 taskId)
     TriggerPendingDaycareEgg();
 }
 
-static void DebugAction_Give_Fill_PCBoxes_Fast(u8 taskId) //Credit: Sierraffinity
+static void DebugAction_Fill_PCBoxes_Fast(u8 taskId) //Credit: Sierraffinity
 {
     int boxId, boxPosition;
     u32 personality;
@@ -2978,7 +2977,7 @@ static void DebugAction_Give_Fill_PCBoxes_Fast(u8 taskId) //Credit: Sierraffinit
     EnableBothScriptContexts();
 }
 
-static void DebugAction_Give_Fill_PCBoxes_Slow(u8 taskId)
+static void DebugAction_Fill_PCBoxes_Slow(u8 taskId)
 {
     int boxId, boxPosition;
     u32 personality;
@@ -3027,7 +3026,7 @@ static void DebugAction_Give_Fill_PCBoxes_Slow(u8 taskId)
     EnableBothScriptContexts();
 }
 
-static void DebugAction_Give_Fill_PCItemStorage(u8 taskId)
+static void DebugAction_Fill_PCItemStorage(u8 taskId)
 {
     u16 itemId;
 
@@ -3038,7 +3037,7 @@ static void DebugAction_Give_Fill_PCItemStorage(u8 taskId)
     }
 }
 
-static void DebugAction_Give_Fill_PocketItems(u8 taskId)
+static void DebugAction_Fill_PocketItems(u8 taskId)
 {
     u16 itemId;
 
@@ -3049,7 +3048,7 @@ static void DebugAction_Give_Fill_PocketItems(u8 taskId)
     }
 }
 
-static void DebugAction_Give_Fill_PocketPokeBalls(u8 taskId)
+static void DebugAction_Fill_PocketPokeBalls(u8 taskId)
 {
     u16 itemId;
 
@@ -3060,7 +3059,7 @@ static void DebugAction_Give_Fill_PocketPokeBalls(u8 taskId)
     }
 }
 
-static void DebugAction_Give_Fill_PocketTMHM(u8 taskId)
+static void DebugAction_Fill_PocketTMHM(u8 taskId)
 {
     u16 itemId;
 
@@ -3071,7 +3070,7 @@ static void DebugAction_Give_Fill_PocketTMHM(u8 taskId)
     }
 }
 
-static void DebugAction_Give_Fill_PocketBerries(u8 taskId)
+static void DebugAction_Fill_PocketBerries(u8 taskId)
 {
     u16 itemId;
 
@@ -3082,7 +3081,7 @@ static void DebugAction_Give_Fill_PocketBerries(u8 taskId)
     }
 }
 
-static void DebugAction_Give_Fill_PocketKeyItems(u8 taskId)
+static void DebugAction_Fill_PocketKeyItems(u8 taskId)
 {
     u16 itemId;
 
