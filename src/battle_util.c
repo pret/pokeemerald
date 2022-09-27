@@ -5939,6 +5939,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                     }
                     gBattleResources->flags->flags[i] &= ~RESOURCE_FLAG_TRACED;
                     gBattleStruct->tracedAbility[i] = gLastUsedAbility = gBattleMons[gActiveBattler].ability;
+                    RecordAbilityBattle(gActiveBattler, gLastUsedAbility); // Record the opposing battler has this ability
                     battler = gBattlerAbility = gBattleScripting.battler = i;
 
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gActiveBattler, gBattlerPartyIndexes[gActiveBattler])
