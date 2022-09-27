@@ -22878,6 +22878,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_THICK_FAT, ABILITY_THICK_FAT},
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_CHARIZARD_MEGA_X] =
@@ -22902,6 +22903,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_TOUGH_CLAWS, ABILITY_TOUGH_CLAWS},
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_CHARIZARD_MEGA_Y] =
@@ -22926,6 +22928,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_DROUGHT, ABILITY_DROUGHT},
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_BLASTOISE_MEGA] =
@@ -22950,6 +22953,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_MEGA_LAUNCHER, ABILITY_MEGA_LAUNCHER},
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_BEEDRILL_MEGA] =
@@ -22976,6 +22980,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_ADAPTABILITY, ABILITY_ADAPTABILITY},
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_PIDGEOT_MEGA] =
@@ -23000,6 +23005,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_NO_GUARD, ABILITY_NO_GUARD},
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_ALAKAZAM_MEGA] =
@@ -23029,6 +23035,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_TRACE, ABILITY_TRACE},
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_SLOWBRO_MEGA] =
@@ -23054,6 +23061,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_SHELL_ARMOR, ABILITY_SHELL_ARMOR},
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_GENGAR_MEGA] =
@@ -23078,6 +23086,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_SHADOW_TAG, ABILITY_SHADOW_TAG},
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_KANGASKHAN_MEGA] =
@@ -23102,6 +23111,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_PARENTAL_BOND, ABILITY_PARENTAL_BOND},
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_PINSIR_MEGA] =
@@ -23126,6 +23136,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_AERILATE, ABILITY_AERILATE},
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_GYARADOS_MEGA] =
@@ -23150,6 +23161,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_MOLD_BREAKER, ABILITY_MOLD_BREAKER},
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_AERODACTYL_MEGA] =
@@ -23174,6 +23186,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_TOUGH_CLAWS, ABILITY_TOUGH_CLAWS},
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_MEWTWO_MEGA_X] =
@@ -23198,7 +23211,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_STEADFAST, ABILITY_STEADFAST},
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
-        .flags = SPECIES_FLAG_LEGENDARY,
+        .flags = SPECIES_FLAG_LEGENDARY | SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_MEWTWO_MEGA_Y] =
@@ -23223,7 +23236,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_INSOMNIA, ABILITY_INSOMNIA},
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
-        .flags = SPECIES_FLAG_LEGENDARY,
+        .flags = SPECIES_FLAG_LEGENDARY | SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_AMPHAROS_MEGA] =
@@ -23248,6 +23261,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_MOLD_BREAKER, ABILITY_MOLD_BREAKER},
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_STEELIX_MEGA] =
@@ -23273,6 +23287,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_SAND_FORCE, ABILITY_SAND_FORCE},
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_SCIZOR_MEGA] =
@@ -23297,6 +23312,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_TECHNICIAN, ABILITY_TECHNICIAN},
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_HERACROSS_MEGA] =
@@ -23321,6 +23337,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_SKILL_LINK, ABILITY_SKILL_LINK},
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_HOUNDOOM_MEGA] =
@@ -23345,6 +23362,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_SOLAR_POWER, ABILITY_SOLAR_POWER},
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_TYRANITAR_MEGA] =
@@ -23369,6 +23387,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_SAND_STREAM, ABILITY_SAND_STREAM},
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_SCEPTILE_MEGA] =
@@ -23393,6 +23412,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_LIGHTNING_ROD, ABILITY_LIGHTNING_ROD},
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_BLAZIKEN_MEGA] =
@@ -23417,6 +23437,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_SPEED_BOOST, ABILITY_SPEED_BOOST},
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_SWAMPERT_MEGA] =
@@ -23441,6 +23462,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_SWIFT_SWIM, ABILITY_SWIFT_SWIM},
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_GARDEVOIR_MEGA] =
@@ -23465,6 +23487,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_PIXILATE, ABILITY_PIXILATE},
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_SABLEYE_MEGA] =
@@ -23490,6 +23513,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_MAGIC_BOUNCE, ABILITY_MAGIC_BOUNCE},
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_MAWILE_MEGA] =
@@ -23515,6 +23539,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_HUGE_POWER, ABILITY_HUGE_POWER},
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_AGGRON_MEGA] =
@@ -23540,6 +23565,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_FILTER, ABILITY_FILTER},
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_MEDICHAM_MEGA] =
@@ -23564,6 +23590,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_PURE_POWER, ABILITY_PURE_POWER},
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_MANECTRIC_MEGA] =
@@ -23588,6 +23615,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_INTIMIDATE, ABILITY_INTIMIDATE},
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_SHARPEDO_MEGA] =
@@ -23613,6 +23641,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_STRONG_JAW, ABILITY_STRONG_JAW},
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_CAMERUPT_MEGA] =
@@ -23638,6 +23667,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_SHEER_FORCE, ABILITY_SHEER_FORCE},
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_ALTARIA_MEGA] =
@@ -23662,6 +23692,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_PIXILATE, ABILITY_PIXILATE},
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_BANETTE_MEGA] =
@@ -23687,6 +23718,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_PRANKSTER, ABILITY_PRANKSTER},
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_ABSOL_MEGA] =
@@ -23711,6 +23743,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_MAGIC_BOUNCE, ABILITY_MAGIC_BOUNCE},
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = TRUE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_GLALIE_MEGA] =
@@ -23735,6 +23768,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_REFRIGERATE, ABILITY_REFRIGERATE},
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_SALAMENCE_MEGA] =
@@ -23760,6 +23794,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_AERILATE, ABILITY_AERILATE},
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_METAGROSS_MEGA] =
@@ -23785,6 +23820,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_TOUGH_CLAWS, ABILITY_TOUGH_CLAWS},
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_LATIAS_MEGA] =
@@ -23809,7 +23845,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_LEVITATE, ABILITY_LEVITATE},
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
-        .flags = SPECIES_FLAG_LEGENDARY,
+        .flags = SPECIES_FLAG_LEGENDARY | SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_LATIOS_MEGA] =
@@ -23834,7 +23870,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_LEVITATE, ABILITY_LEVITATE},
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
-        .flags = SPECIES_FLAG_LEGENDARY,
+        .flags = SPECIES_FLAG_LEGENDARY | SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_LOPUNNY_MEGA] =
@@ -23859,6 +23895,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_SCRAPPY, ABILITY_SCRAPPY},
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_GARCHOMP_MEGA] =
@@ -23883,6 +23920,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_SAND_FORCE, ABILITY_SAND_FORCE},
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_LUCARIO_MEGA] =
@@ -23908,6 +23946,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_ADAPTABILITY, ABILITY_ADAPTABILITY},
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_ABOMASNOW_MEGA] =
@@ -23934,6 +23973,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_SNOW_WARNING, ABILITY_SNOW_WARNING},
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_GALLADE_MEGA] =
@@ -23958,6 +23998,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_INNER_FOCUS, ABILITY_INNER_FOCUS},
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_AUDINO_MEGA] =
@@ -23984,6 +24025,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_HEALER, ABILITY_HEALER},
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_DIANCIE_MEGA] =
@@ -24009,7 +24051,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_MAGIC_BOUNCE, ABILITY_MAGIC_BOUNCE},
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
-        .flags = SPECIES_FLAG_MYTHICAL,
+        .flags = SPECIES_FLAG_MYTHICAL | SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_RAYQUAZA_MEGA] =
@@ -24035,7 +24077,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_DELTA_STREAM, ABILITY_DELTA_STREAM},
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
-        .flags = SPECIES_FLAG_LEGENDARY,
+        .flags = SPECIES_FLAG_LEGENDARY | SPECIES_FLAG_MEGA_EVOLUTION,
     },
 
     [SPECIES_KYOGRE_PRIMAL] =
@@ -25243,9 +25285,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 75,
         .expYield = 168,
         .evYield_Attack  = 2,
-        #ifdef ITEM_EXPANSION
-            .itemRare = ITEM_ABSORB_BULB,
-        #endif
+        .itemRare = ITEM_ABSORB_BULB,
         .genderRatio = MON_FEMALE,
         .eggCycles = 20,
         .friendship = 70,
@@ -25346,9 +25386,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 158,
         .evYield_SpDefense = 2,
-        #ifdef ITEM_EXPANSION
-            .itemRare = ITEM_SHED_SHELL,
-        #endif
+        .itemRare = ITEM_SHED_SHELL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 40,
         .friendship = 35,
