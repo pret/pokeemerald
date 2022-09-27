@@ -8,6 +8,7 @@
 //Jaizu:                https://jaizu.moe/
 #include "global.h"
 #include "battle.h"
+#include "battle_setup.h"
 #include "coins.h"
 #include "credits.h"
 #include "data.h"
@@ -48,6 +49,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "pokemon_summary_screen.h"
+#include "wild_encounter.h"
 #include "constants/abilities.h"
 #include "constants/battle_frontier.h"
 #include "constants/flags.h"
@@ -66,6 +68,7 @@ enum { // Main
     DEBUG_MENU_ITEM_UTILITIES,
     DEBUG_MENU_ITEM_SCRIPTS,
     DEBUG_MENU_ITEM_FLAGVAR,
+    DEBUG_MENU_ITEM_BATTLE,
     DEBUG_MENU_ITEM_GIVE,
     DEBUG_MENU_ITEM_FILL,
     DEBUG_MENU_ITEM_SOUND,
@@ -115,6 +118,49 @@ enum { // Flags and Vars
     DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BAG_USE,
     DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_CATCHING,
 };
+enum { // Battle 0 Type
+    DEBUG_BATTLE_0_MENU_ITEM_WILD,
+#ifdef BATTLE_ENGINE
+    DEBUG_BATTLE_0_MENU_ITEM_WILD_DOUBLE,
+#endif
+    DEBUG_BATTLE_0_MENU_ITEM_SINGLE,
+    DEBUG_BATTLE_0_MENU_ITEM_DOUBLE,
+    DEBUG_BATTLE_0_MENU_ITEM_MULTI,
+};
+enum { // Battle 1 AI FLags
+    DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_00,
+    DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_01,
+    DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_02,
+    DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_03,
+    DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_04,
+    DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_05,
+    DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_06,
+    DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_07,
+    DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_08,
+    DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_09,
+#ifdef BATTLE_ENGINE
+    DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_10,
+    DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_11,
+    DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_12,
+    DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_13,
+    DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_14,
+    DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_15,
+    DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_16,
+#endif
+    DEBUG_BATTLE_1_MENU_ITEM_CONTINUE,
+};
+enum { // Battle 2 Terrain
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_0,   
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_1,   
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_2,   
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_3,   
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_4,   
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_5,   
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_6,   
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_7,   
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_8,   
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_9,
+};   
 enum { // Give
     DEBUG_GIVE_MENU_ITEM_ITEM_X,
     DEBUG_GIVE_MENU_ITEM_ALLTMS,
@@ -191,39 +237,39 @@ struct DebugMenuListData
 {
     struct ListMenuItem listItems[20 + 1];
     u8 itemNames[PC_ITEMS_COUNT + 1][26];
+    u8 listId;
 };
 
 struct DebugBattleData
 {
+    u8 submenu;
     u8 battleType;
     u8 battleTerrain;
-    bool8 ai_flag_check_bad_move;
-    bool8 ai_flag_try_to_faint;
-    bool8 ai_flag_check_viability;
-    bool8 ai_flag_setup_first_turn;
-    bool8 ai_flag_risky;
-    bool8 ai_flag_prefer_power_extremes;
-    bool8 ai_flag_prefer_baton_pass;
-    bool8 ai_flag_double_battle;
-    bool8 ai_flag_hp_aware;
-    bool8 ai_flag_try_sunny_day_start;
+#ifdef BATTLE_ENGINE
+    bool8 aiFlags[17];
+#else
+    bool8 aiFlags[10];
+#endif
 };
 
 // EWRAM
 static EWRAM_DATA struct DebugMonData *sDebugMonData = NULL;
 static EWRAM_DATA struct DebugMenuListData *sDebugMenuListData = NULL;
-
+static EWRAM_DATA struct DebugBattleData *sDebugBattleData = NULL;
 
 // *******************************
 // Define functions
+static void Debug_ReShowMainMenu(void);
 static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate);
-void Debug_ShowMainMenu(void);
+static void Debug_ShowMenuDynamic(u8 taskId);
 static void Debug_DestroyMenu(u8 taskId);
 static void Debug_DestroyMenu_Full(u8 taskId);
 static void DebugAction_Cancel(u8 taskId);
 static void DebugAction_DestroyExtraWindow(u8 taskId);
 static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
+static void Debug_InitDebugBattleData(void);
 static void Debug_RefreshListMenu(u8 taskId);
+static void Debug_RedrawListMenu(u8 taskId);
 
 static void DebugAction_Util_Script_1(u8 taskId);
 static void DebugAction_Util_Script_2(u8 taskId);
@@ -237,6 +283,7 @@ static void DebugAction_Util_Script_8(u8 taskId);
 static void DebugAction_OpenUtilitiesMenu(u8 taskId);
 static void DebugAction_OpenScriptsMenu(u8 taskId);
 static void DebugAction_OpenFlagsVarsMenu(u8 taskId);
+static void DebugAction_OpenBattleMenu(u8 taskId);
 static void DebugAction_OpenGiveMenu(u8 taskId);
 static void DebugAction_OpenFillMenu(u8 taskId);
 static void DebugAction_OpenSoundMenu(u8 taskId);
@@ -245,6 +292,7 @@ static void DebugTask_HandleMenuInput_Main(u8 taskId);
 static void DebugTask_HandleMenuInput_Utilities(u8 taskId);
 static void DebugTask_HandleMenuInput_Scripts(u8 taskId);
 static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId);
+static void DebugTask_HandleMenuInput_Battle(u8 taskId);
 static void DebugTask_HandleMenuInput_Give(u8 taskId);
 static void DebugTask_HandleMenuInput_Fill(u8 taskId);
 static void DebugTask_HandleMenuInput_Sound(u8 taskId);
@@ -286,6 +334,9 @@ static void DebugAction_FlagsVars_EncounterOnOff(u8 taskId);
 static void DebugAction_FlagsVars_TrainerSeeOnOff(u8 taskId);
 static void DebugAction_FlagsVars_BagUseOnOff(u8 taskId);
 static void DebugAction_FlagsVars_CatchingOnOff(u8 taskId);
+
+static void DebugAction_OpenBattleAIMenu(u8 taskId);
+static void DebugAction_OpenBattleTerrainMenu(u8 taskId);
 
 static void DebugAction_Give_Item(u8 taskId);
 static void DebugAction_Give_Item_SelectId(u8 taskId);
@@ -353,10 +404,12 @@ static const u8 sDebugText_Colored_True[] =  _("{COLOR GREEN}TRUE");
 static const u8 sDebugText_Colored_False[] = _("{COLOR RED}FALSE");
 static const u8 sDebugText_Dashes[] =        _("---");
 static const u8 sDebugText_Empty[] =         _("");
+static const u8 sDebugText_Continue[] =      _("Continue…{CLEAR_TO 110}{RIGHT_ARROW}");
 // Main Menu
 static const u8 sDebugText_Utilities[] =        _("Utilities…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Scripts[] =          _("Scripts…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_FlagsVars[] =        _("Flags & Vars…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Battle[] =           _("Battle Test{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Give[] =             _("Give X…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Fill[] =             _("Fill PC/Pockets…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Sound[] =            _("Sound…{CLEAR_TO 110}{RIGHT_ARROW}");
@@ -412,6 +465,52 @@ static const u8 sDebugText_FlagsVars_SwitchEncounter[] =        _("Toggle {STR_V
 static const u8 sDebugText_FlagsVars_SwitchTrainerSee[] =       _("Toggle {STR_VAR_1}TrainerSee OFF");
 static const u8 sDebugText_FlagsVars_SwitchBagUse[] =           _("Toggle {STR_VAR_1}BagUse OFF");
 static const u8 sDebugText_FlagsVars_SwitchCatching[] =         _("Toggle {STR_VAR_1}Catching OFF");
+// Battle
+static const u8 sDebugText_Battle_0_Wild[] =        _("Wild…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Battle_0_WildDouble[] =  _("Wild Double…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Battle_0_Single[] =      _("Single…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Battle_0_Double[] =      _("Double…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Battle_0_Mulit[] =       _("Multi…{CLEAR_TO 110}{RIGHT_ARROW}");
+#ifndef BATTLE_ENGINE
+static const u8 sDebugText_Battle_1_AIFlag_00[] =   _("{STR_VAR_1}Check bad move");
+static const u8 sDebugText_Battle_1_AIFlag_01[] =   _("{STR_VAR_1}Try to faint");
+static const u8 sDebugText_Battle_1_AIFlag_02[] =   _("{STR_VAR_1}Check viability");
+static const u8 sDebugText_Battle_1_AIFlag_03[] =   _("{STR_VAR_1}Setup first turn");
+static const u8 sDebugText_Battle_1_AIFlag_04[] =   _("{STR_VAR_1}Risky");
+static const u8 sDebugText_Battle_1_AIFlag_05[] =   _("{STR_VAR_1}Prefer power extremes");
+static const u8 sDebugText_Battle_1_AIFlag_06[] =   _("{STR_VAR_1}Prefer baton pass");
+static const u8 sDebugText_Battle_1_AIFlag_07[] =   _("{STR_VAR_1}Double battle");
+static const u8 sDebugText_Battle_1_AIFlag_08[] =   _("{STR_VAR_1}Hp aware");
+static const u8 sDebugText_Battle_1_AIFlag_09[] =   _("{STR_VAR_1}Try sunny day start");
+#else
+static const u8 sDebugText_Battle_1_AIFlag_00[] =   _("{STR_VAR_1}Check bad move");
+static const u8 sDebugText_Battle_1_AIFlag_01[] =   _("{STR_VAR_1}Try to faint");
+static const u8 sDebugText_Battle_1_AIFlag_02[] =   _("{STR_VAR_1}Check viability");
+static const u8 sDebugText_Battle_1_AIFlag_03[] =   _("{STR_VAR_1}Setup first turn");
+static const u8 sDebugText_Battle_1_AIFlag_04[] =   _("{STR_VAR_1}Risky");
+static const u8 sDebugText_Battle_1_AIFlag_05[] =   _("{STR_VAR_1}Prefer strongest move");
+static const u8 sDebugText_Battle_1_AIFlag_06[] =   _("{STR_VAR_1}Prefer baton pass");
+static const u8 sDebugText_Battle_1_AIFlag_07[] =   _("{STR_VAR_1}Double battle");
+static const u8 sDebugText_Battle_1_AIFlag_08[] =   _("{STR_VAR_1}Hp aware");
+static const u8 sDebugText_Battle_1_AIFlag_09[] =   _("{STR_VAR_1}Negate unaware");
+static const u8 sDebugText_Battle_1_AIFlag_10[] =   _("{STR_VAR_1}Will suicide");
+static const u8 sDebugText_Battle_1_AIFlag_11[] =   _("{STR_VAR_1}Help partner");
+static const u8 sDebugText_Battle_1_AIFlag_12[] =   _("{STR_VAR_1}Prefer status moves");
+static const u8 sDebugText_Battle_1_AIFlag_13[] =   _("{STR_VAR_1}Stall");
+static const u8 sDebugText_Battle_1_AIFlag_14[] =   _("{STR_VAR_1}Screener");
+static const u8 sDebugText_Battle_1_AIFlag_15[] =   _("{STR_VAR_1}Smart switching");
+static const u8 sDebugText_Battle_1_AIFlag_16[] =   _("{STR_VAR_1}Ace pokemon");
+#endif
+static const u8 sDebugText_Battle_2_Terrain_0[] =   _("Grass…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Battle_2_Terrain_1[] =   _("Long grass…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Battle_2_Terrain_2[] =   _("Sand…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Battle_2_Terrain_3[] =   _("Underwater…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Battle_2_Terrain_4[] =   _("Water…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Battle_2_Terrain_5[] =   _("Pond…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Battle_2_Terrain_6[] =   _("Mountain…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Battle_2_Terrain_7[] =   _("Cave…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Battle_2_Terrain_8[] =   _("Building…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Battle_2_Terrain_9[] =   _("Plain…{CLEAR_TO 110}{RIGHT_ARROW}");
 // Give Menu
 static const u8 sDebugText_Give_GiveItem[] =            _("Give item XYZ…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_ItemQuantity[] =             _("Quantity:{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n\n{STR_VAR_2}");
@@ -494,6 +593,7 @@ static const struct ListMenuItem sDebugMenu_Items_Main[] =
     [DEBUG_MENU_ITEM_UTILITIES]     = {sDebugText_Utilities,    DEBUG_MENU_ITEM_UTILITIES},
     [DEBUG_MENU_ITEM_SCRIPTS]       = {sDebugText_Scripts,      DEBUG_MENU_ITEM_SCRIPTS},
     [DEBUG_MENU_ITEM_FLAGVAR]       = {sDebugText_FlagsVars,    DEBUG_MENU_ITEM_FLAGVAR},
+    [DEBUG_MENU_ITEM_BATTLE]        = {sDebugText_Battle,       DEBUG_MENU_ITEM_BATTLE},
     [DEBUG_MENU_ITEM_GIVE]          = {sDebugText_Give,         DEBUG_MENU_ITEM_GIVE},
     [DEBUG_MENU_ITEM_FILL]          = {sDebugText_Fill,         DEBUG_MENU_ITEM_FILL},
     [DEBUG_MENU_ITEM_SOUND]         = {sDebugText_Sound,        DEBUG_MENU_ITEM_SOUND},
@@ -546,6 +646,52 @@ static const struct ListMenuItem sDebugMenu_Items_FlagsVars[] =
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BAG_USE]       = {sDebugText_FlagsVars_SwitchBagUse,       DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BAG_USE},
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_CATCHING]      = {sDebugText_FlagsVars_SwitchCatching,     DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_CATCHING},
 };
+static const struct ListMenuItem sDebugMenu_Items_Battle_0[] =
+{
+    [DEBUG_BATTLE_0_MENU_ITEM_WILD]        = {sDebugText_Battle_0_Wild,       DEBUG_BATTLE_0_MENU_ITEM_WILD},
+    #ifdef BATTLE_ENGINE
+    [DEBUG_BATTLE_0_MENU_ITEM_WILD_DOUBLE] = {sDebugText_Battle_0_WildDouble, DEBUG_BATTLE_0_MENU_ITEM_WILD_DOUBLE},
+    #endif
+    [DEBUG_BATTLE_0_MENU_ITEM_SINGLE]      = {sDebugText_Battle_0_Single,     DEBUG_BATTLE_0_MENU_ITEM_SINGLE},
+    [DEBUG_BATTLE_0_MENU_ITEM_DOUBLE]      = {sDebugText_Battle_0_Double,     DEBUG_BATTLE_0_MENU_ITEM_DOUBLE},
+    [DEBUG_BATTLE_0_MENU_ITEM_MULTI]       = {sDebugText_Battle_0_Mulit,      DEBUG_BATTLE_0_MENU_ITEM_MULTI},
+};
+static const struct ListMenuItem sDebugMenu_Items_Battle_1[] =
+{
+    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_00] = {sDebugText_Battle_1_AIFlag_00, DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_00},
+    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_01] = {sDebugText_Battle_1_AIFlag_01, DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_01},
+    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_02] = {sDebugText_Battle_1_AIFlag_02, DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_02},
+    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_03] = {sDebugText_Battle_1_AIFlag_03, DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_03},
+    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_04] = {sDebugText_Battle_1_AIFlag_04, DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_04},
+    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_05] = {sDebugText_Battle_1_AIFlag_05, DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_05},
+    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_06] = {sDebugText_Battle_1_AIFlag_06, DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_06},
+    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_07] = {sDebugText_Battle_1_AIFlag_07, DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_07},
+    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_08] = {sDebugText_Battle_1_AIFlag_08, DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_08},
+    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_09] = {sDebugText_Battle_1_AIFlag_09, DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_09},
+#ifdef BATTLE_ENGINE
+    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_10] = {sDebugText_Battle_1_AIFlag_10, DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_10},
+    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_11] = {sDebugText_Battle_1_AIFlag_11, DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_11},
+    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_12] = {sDebugText_Battle_1_AIFlag_12, DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_12},
+    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_13] = {sDebugText_Battle_1_AIFlag_13, DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_13},
+    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_14] = {sDebugText_Battle_1_AIFlag_14, DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_14},
+    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_15] = {sDebugText_Battle_1_AIFlag_15, DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_15},
+    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_16] = {sDebugText_Battle_1_AIFlag_16, DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_16},
+#endif
+    [DEBUG_BATTLE_1_MENU_ITEM_CONTINUE]   = {sDebugText_Continue,           DEBUG_BATTLE_1_MENU_ITEM_CONTINUE},
+};
+static const struct ListMenuItem sDebugMenu_Items_Battle_2[] =
+{
+    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_0]     = {sDebugText_Battle_2_Terrain_0,    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_0},
+    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_1]     = {sDebugText_Battle_2_Terrain_1,    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_1},
+    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_2]     = {sDebugText_Battle_2_Terrain_2,    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_2},
+    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_3]     = {sDebugText_Battle_2_Terrain_3,    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_3},
+    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_4]     = {sDebugText_Battle_2_Terrain_4,    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_4},
+    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_5]     = {sDebugText_Battle_2_Terrain_5,    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_5},
+    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_6]     = {sDebugText_Battle_2_Terrain_6,    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_6},
+    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_7]     = {sDebugText_Battle_2_Terrain_7,    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_7},
+    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_8]     = {sDebugText_Battle_2_Terrain_8,    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_8},
+    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_9]     = {sDebugText_Battle_2_Terrain_9,    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_9},
+};
 static const struct ListMenuItem sDebugMenu_Items_Give[] =
 {
     [DEBUG_GIVE_MENU_ITEM_ITEM_X]            = {sDebugText_Give_GiveItem,           DEBUG_GIVE_MENU_ITEM_ITEM_X},
@@ -581,6 +727,7 @@ static void (*const sDebugMenu_Actions_Main[])(u8) =
     [DEBUG_MENU_ITEM_UTILITIES]     = DebugAction_OpenUtilitiesMenu,
     [DEBUG_MENU_ITEM_SCRIPTS]       = DebugAction_OpenScriptsMenu,
     [DEBUG_MENU_ITEM_FLAGVAR]       = DebugAction_OpenFlagsVarsMenu,
+    [DEBUG_MENU_ITEM_BATTLE]        = DebugAction_OpenBattleMenu,
     [DEBUG_MENU_ITEM_GIVE]          = DebugAction_OpenGiveMenu,
     [DEBUG_MENU_ITEM_FILL]          = DebugAction_OpenFillMenu,
     [DEBUG_MENU_ITEM_SOUND]         = DebugAction_OpenSoundMenu,
@@ -742,6 +889,24 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_FlagsVars =
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_FlagsVars),
 };
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Battle_0 =
+{
+    .items = sDebugMenu_Items_Battle_0,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Battle_0),
+};
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Battle_1 =
+{
+    .items = sDebugMenu_Items_Battle_1,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Battle_1),
+};
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Battle_2 =
+{
+    .items = sDebugMenu_Items_Battle_2,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Battle_2),
+};
 static const struct ListMenuTemplate sDebugMenu_ListTemplate_Give =
 {
     .items = sDebugMenu_Items_Give,
@@ -766,7 +931,14 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Sound =
 // Functions universal
 void Debug_ShowMainMenu(void)
 {
+    sDebugBattleData = AllocZeroed(sizeof(*sDebugBattleData));
     sDebugMenuListData = AllocZeroed(sizeof(*sDebugMenuListData));
+    Debug_InitDebugBattleData();
+
+    Debug_ShowMenu(DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
+}
+static void Debug_ReShowMainMenu(void)
+{
     Debug_ShowMenu(DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
 }
 static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate)
@@ -800,9 +972,6 @@ static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMte
     menuTemplate.cursorKind = 0;
     menuTaskId = ListMenuInit(&menuTemplate, 0, 0);
 
-    // draw everything
-    CopyWindowToVram(windowId, 3);
-
     // create input handler task
     inputTaskId = CreateTask(HandleInput, 3);
     gTasks[inputTaskId].data[0] = menuTaskId;
@@ -810,6 +979,10 @@ static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMte
     gTasks[inputTaskId].data[2] = 0;
 
     Debug_RefreshListMenu(inputTaskId);
+    //Debug_ShowMenuDynamic(inputTaskId);
+
+    // draw everything
+    CopyWindowToVram(windowId, 3);
 }
 static void Debug_DestroyMenu(u8 taskId)
 {
@@ -826,6 +999,8 @@ static void Debug_DestroyMenu_Full(u8 taskId)
     RemoveWindow(gTasks[taskId].data[1]);
     DestroyTask(taskId);
     UnfreezeObjectEvents();
+    Free(sDebugMenuListData);
+    Free(sDebugBattleData);
 }
 static void DebugAction_Cancel(u8 taskId)
 {
@@ -919,47 +1094,102 @@ static u8 Debug_CheckToggleFlags(u8 id)
     return result;
 }
 
+static void Debug_InitDebugBattleData(void)
+{
+    u32 i;
+    sDebugBattleData->submenu       = 0;
+    sDebugBattleData->battleType    = 0xFF;
+    sDebugBattleData->battleTerrain = 0xFF;
+    
+#ifdef BATTLE_ENGINE
+    for (i = 0; i < 17; i++)
+        sDebugBattleData->aiFlags[i] = FALSE;
+#else
+    for (i = 0; i < 10; i++)
+        sDebugBattleData->aiFlags[i] = FALSE;
+#endif
+}
+
 static void Debug_RefreshListMenu(u8 taskId)
 {
     u16 i;
     const u8 sColor_Red[] = _("{COLOR RED}");
     const u8 sColor_Green[] = _("{COLOR GREEN}");
-    u8 flagResult;
+    u8 listTaskId = gTasks[taskId].data[0];
+    struct ListMenu *list = (void*) gTasks[listTaskId].data;
+    u8 totalItems, flagResult;
+    u8 const * name;
+
+    if (sDebugMenuListData->listId == 0)
+        totalItems = sDebugMenu_ListTemplate_FlagsVars.totalItems;
+    else if (sDebugMenuListData->listId == 1 && sDebugBattleData->submenu <= 1)
+        totalItems = sDebugMenu_ListTemplate_Battle_1.totalItems;
+    else if (sDebugMenuListData->listId == 1 && sDebugBattleData->submenu > 1)
+        totalItems = 7;
 
     // Copy item names for all entries but the last (which is Cancel)
-    for(i = 0; i < sDebugMenu_ListTemplate_FlagsVars.totalItems; i++)
+    for(i = 0; i < totalItems; i++)
     {
-        flagResult = Debug_CheckToggleFlags(i);
-        if (flagResult == 0xFF)
+        
+        if (sDebugMenuListData->listId == 1 && sDebugBattleData->submenu > 1)
         {
-            StringCopy(&sDebugMenuListData->itemNames[i][0], sDebugMenu_Items_FlagsVars[i].name);
-        }
-        else if (flagResult)
-        {
-            StringCopy(gStringVar1, sColor_Green);
-            StringExpandPlaceholders(gStringVar4, sDebugMenu_Items_FlagsVars[i].name);
-            StringCopy(&sDebugMenuListData->itemNames[i][0], gStringVar4);
+            u16 species;
+            if (i == 6)
+            {
+                name = sDebugText_Continue;
+                StringCopy(&sDebugMenuListData->itemNames[i][0], name);
+            }
+            else if (GetMonData(&gEnemyParty[i], MON_DATA_SANITY_HAS_SPECIES))
+            {
+                species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES);
+                GetSpeciesName(gStringVar1, species);
+                StringCopy(&sDebugMenuListData->itemNames[i][0], gStringVar1);
+            }
+            else
+            {
+                StringCopy(&sDebugMenuListData->itemNames[i][0], sDebugText_Dashes);
+            }
         }
         else
         {
-            StringCopy(gStringVar1, sColor_Red);
-            StringExpandPlaceholders(gStringVar4, sDebugMenu_Items_FlagsVars[i].name);
-            StringCopy(&sDebugMenuListData->itemNames[i][0], gStringVar4);
+            if (sDebugMenuListData->listId == 0)
+            {
+                flagResult = Debug_CheckToggleFlags(i);
+                name = sDebugMenu_Items_FlagsVars[i].name;
+            }
+            else if (sDebugMenuListData->listId == 1)
+            {
+                flagResult = sDebugBattleData->aiFlags[i];
+                if (i == totalItems - 1)
+                    flagResult == 0xFF;
+                name = sDebugMenu_Items_Battle_1[i].name;
+            }
+        
+            if (flagResult == 0xFF)
+            {
+                StringCopy(&sDebugMenuListData->itemNames[i][0], name);
+            }
+            else if (flagResult)
+            {
+                StringCopy(gStringVar1, sColor_Green);
+                StringExpandPlaceholders(gStringVar4, name);
+                StringCopy(&sDebugMenuListData->itemNames[i][0], gStringVar4);
+            }
+            else
+            {
+                StringCopy(gStringVar1, sColor_Red);
+                StringExpandPlaceholders(gStringVar4, name);
+                StringCopy(&sDebugMenuListData->itemNames[i][0], gStringVar4);
+            }
         }
 
         sDebugMenuListData->listItems[i].name = &sDebugMenuListData->itemNames[i][0];
         sDebugMenuListData->listItems[i].id = i;
     }
 
-    // Set up Cancel entry
-    StringCopy(&sDebugMenuListData->itemNames[i][0], gText_Cancel2);
-    sDebugMenuListData->listItems[i].name = &sDebugMenuListData->itemNames[i][0];
-    sDebugMenuListData->listItems[i].id = LIST_CANCEL;
-
     // Set list menu data
-    gMultiuseListMenuTemplate = sDebugMenu_ListTemplate_FlagsVars;
     gMultiuseListMenuTemplate.items = sDebugMenuListData->listItems;
-    gMultiuseListMenuTemplate.totalItems = sDebugMenu_ListTemplate_FlagsVars.totalItems;
+    gMultiuseListMenuTemplate.totalItems = totalItems;
     gMultiuseListMenuTemplate.maxShowed = DEBUG_MENU_HEIGHT_MAIN;
     gMultiuseListMenuTemplate.windowId = gTasks[taskId].data[1];
     gMultiuseListMenuTemplate.header_X = 0;
@@ -974,6 +1204,16 @@ static void Debug_RefreshListMenu(u8 taskId)
     gMultiuseListMenuTemplate.scrollMultiple = LIST_NO_MULTIPLE_SCROLL;
     gMultiuseListMenuTemplate.fontId = 1;
     gMultiuseListMenuTemplate.cursorKind = 0;
+}
+static void Debug_RedrawListMenu(u8 taskId)
+{
+    u8 listTaskId = gTasks[taskId].data[0];
+    u16 scrollOffset, selectedRow;
+    ListMenuGetScrollAndRow(listTaskId, &scrollOffset, &selectedRow);
+
+    DestroyListMenuTask(gTasks[taskId].data[0], &scrollOffset, &selectedRow);
+    Debug_RefreshListMenu(taskId);
+    gTasks[taskId].data[0] = ListMenuInit(&gMultiuseListMenuTemplate, scrollOffset, selectedRow);
 }
 
 
@@ -1012,7 +1252,7 @@ static void DebugTask_HandleMenuInput_Utilities(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Debug_DestroyMenu(taskId);
-        Debug_ShowMainMenu();
+        Debug_ReShowMainMenu();
     }
 }
 static void DebugTask_HandleMenuInput_Scripts(u8 taskId)
@@ -1030,19 +1270,8 @@ static void DebugTask_HandleMenuInput_Scripts(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Debug_DestroyMenu(taskId);
-        Debug_ShowMainMenu();
+        Debug_ReShowMainMenu();
     }
-}
-static void Debug_RedrawList(u8 taskId)
-{
-    u8 listTaskId = gTasks[taskId].data[0];
-    u16 scrollOffset, selectedRow;
-    ListMenuGetScrollAndRow(listTaskId, &scrollOffset, &selectedRow);
-
-    DestroyListMenuTask(gTasks[taskId].data[0], &scrollOffset, &selectedRow);
-    Debug_RefreshListMenu(taskId);
-    gTasks[taskId].data[0] = ListMenuInit(&gMultiuseListMenuTemplate, scrollOffset, selectedRow);
-    //ScheduleBgCopyTilemapToVram(0);
 }
 static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId)
 {
@@ -1055,7 +1284,7 @@ static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId)
         if ((func = sDebugMenu_Actions_Flags[input]) != NULL)
         {
             func(taskId);
-            Debug_RedrawList(taskId);
+            Debug_RedrawListMenu(taskId);
         }
     }
     else if (gMain.newKeys & B_BUTTON)
@@ -1066,11 +1295,122 @@ static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId)
         ClearStdWindowAndFrame(gTasks[taskId].data[2], TRUE);
         RemoveWindow(gTasks[taskId].data[2]);
 
-        Free(sDebugMenuListData);
-
-        Debug_ShowMainMenu();
+        Debug_ReShowMainMenu();
     }
 }
+
+static void DebugTask_HandleBattleMenuReDraw(u8 taskId)
+{
+    Debug_RefreshListMenu(taskId);
+    switch (sDebugBattleData->submenu)
+    {
+    case 0:
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, sDebugMenu_ListTemplate_Battle_0);
+        break;
+    case 1:
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, gMultiuseListMenuTemplate);
+        break;
+    case 2:
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, sDebugMenu_ListTemplate_Battle_2);
+        break;
+    case 3:
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, gMultiuseListMenuTemplate);
+        break;
+    }
+}
+static void DebugTask_HandleMenuInput_Battle(u8 taskId)
+{
+    void (*func)(u8);
+    u8 listTaskId = gTasks[taskId].data[0];
+    u32 input = ListMenu_ProcessInput(listTaskId);
+    u16 idx;
+
+    ListMenuGetCurrentItemArrayId(listTaskId, &idx);
+
+    if (gMain.newKeys & A_BUTTON)
+    {        
+        PlaySE(SE_SELECT);
+
+        switch (sDebugBattleData->submenu)
+        {
+        case 0: // Battle type
+            sDebugBattleData->battleType = idx;
+            sDebugBattleData->submenu++;
+            Debug_DestroyMenu(taskId);
+
+            if (sDebugBattleData->battleType == DEBUG_BATTLE_0_MENU_ITEM_WILD // Skip AI Flag selection if wild battle
+                #ifdef BATTLE_ENGINE
+                || sDebugBattleData->battleType == DEBUG_BATTLE_0_MENU_ITEM_WILD_DOUBLE
+                #endif
+                )
+            {
+                sDebugBattleData->submenu++;
+                Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, sDebugMenu_ListTemplate_Battle_2);
+            }
+            else
+            {
+                Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, gMultiuseListMenuTemplate);
+            }
+            break;
+        case 1: // AI Flags
+            if (idx == sDebugMenu_ListTemplate_Battle_1.totalItems - 1)
+            {
+                sDebugBattleData->submenu++;
+                Debug_DestroyMenu(taskId);
+                Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, sDebugMenu_ListTemplate_Battle_2);
+            }
+            else
+            {
+                sDebugBattleData->aiFlags[idx] = !sDebugBattleData->aiFlags[idx];
+                Debug_RedrawListMenu(taskId);
+            }
+                
+            break;
+        case 2: // Terrain
+            sDebugBattleData->submenu++;
+            sDebugBattleData->battleTerrain = idx;
+            Debug_DestroyMenu(taskId);
+            Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, gMultiuseListMenuTemplate);
+            break;
+        case 3: // Enemy pokemon
+
+            break;
+        }
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        switch (sDebugBattleData->submenu)
+        {
+        case 0: // Return to Main menu
+            PlaySE(SE_SELECT);
+            Debug_DestroyMenu(taskId);
+            Debug_ReShowMainMenu();
+            break;
+        case 2: // Skip AI Flag selection if wild battle
+            if (sDebugBattleData->battleType == DEBUG_BATTLE_0_MENU_ITEM_WILD 
+                #ifdef BATTLE_ENGINE
+                || sDebugBattleData->battleType == DEBUG_BATTLE_0_MENU_ITEM_WILD_DOUBLE
+                #endif
+                )
+            {
+                sDebugBattleData->submenu = 0;
+            }
+            else
+                sDebugBattleData->submenu--;
+            DebugTask_HandleBattleMenuReDraw(taskId);
+            break;
+        default:
+            sDebugBattleData->submenu--;
+            DebugTask_HandleBattleMenuReDraw(taskId);
+            break;
+        }
+    }
+}
+
 static void DebugTask_HandleMenuInput_Give(u8 taskId)
 {
     void (*func)(u8);
@@ -1086,7 +1426,7 @@ static void DebugTask_HandleMenuInput_Give(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Debug_DestroyMenu(taskId);
-        Debug_ShowMainMenu();
+        Debug_ReShowMainMenu();
     }
 }
 static void DebugTask_HandleMenuInput_Fill(u8 taskId)
@@ -1104,7 +1444,7 @@ static void DebugTask_HandleMenuInput_Fill(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Debug_DestroyMenu(taskId);
-        Debug_ShowMainMenu();
+        Debug_ReShowMainMenu();
     }
 }
 static void DebugTask_HandleMenuInput_Sound(u8 taskId)
@@ -1122,7 +1462,7 @@ static void DebugTask_HandleMenuInput_Sound(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Debug_DestroyMenu(taskId);
-        Debug_ShowMainMenu();
+        Debug_ReShowMainMenu();
     }
 }
 
@@ -1141,8 +1481,17 @@ static void DebugAction_OpenScriptsMenu(u8 taskId)
 static void DebugAction_OpenFlagsVarsMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
+    sDebugMenuListData->listId = 0;
     Debug_ShowMenu(DebugTask_HandleMenuInput_FlagsVars, gMultiuseListMenuTemplate);
 }
+
+static void DebugAction_OpenBattleMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    sDebugMenuListData->listId = 1;
+    Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, sDebugMenu_ListTemplate_Battle_0);
+}
+
 static void DebugAction_OpenGiveMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
@@ -1613,8 +1962,6 @@ static void DebugAction_FlagsVars_Flags(u8 taskId)
 {
     u8 windowId;
 
-    Free(sDebugMenuListData);
-
     ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
 
@@ -1706,8 +2053,6 @@ static void DebugAction_FlagsVars_FlagsSelect(u8 taskId)
 static void DebugAction_FlagsVars_Vars(u8 taskId)
 {
     u8 windowId;
-
-    Free(sDebugMenuListData);
 
     ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
@@ -1890,7 +2235,6 @@ static void DebugAction_FlagsVars_PokedexFlags_All(u8 taskId)
         GetSetPokedexFlag(i + 1, FLAG_SET_SEEN);
     }
     Debug_DestroyMenu_Full(taskId);
-    Free(sDebugMenuListData);
     EnableBothScriptContexts();
 }
 static void DebugAction_FlagsVars_PokedexFlags_Reset(u8 taskId)
@@ -1927,7 +2271,6 @@ static void DebugAction_FlagsVars_PokedexFlags_Reset(u8 taskId)
         }
     }
     Debug_DestroyMenu_Full(taskId);
-    Free(sDebugMenuListData);
     EnableBothScriptContexts();
 }
 static void DebugAction_FlagsVars_SwitchDex(u8 taskId)

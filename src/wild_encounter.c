@@ -946,3 +946,12 @@ static void ApplyCleanseTagEncounterRateMod(u32 *encRate)
     if (GetMonData(&gPlayerParty[0], MON_DATA_HELD_ITEM) == ITEM_CLEANSE_TAG)
         *encRate = *encRate * 2 / 3;
 }
+
+bool8 StandardWildEncounter_Debug(void)
+{
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+    if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0) != TRUE)
+        return FALSE;
+
+    DoStandardWildBattle_Debug();
+}
