@@ -24,6 +24,9 @@ void BattleAI_SetupItems(void);
 void BattleAI_SetupFlags(void);
 void BattleAI_SetupAIData(u8 defaultScoreMoves);
 u8 BattleAI_ChooseMoveOrAction(void);
+void Ai_InitPartyStruct(void);
+void Ai_UpdateSwitchInData(u32 battler);
+void Ai_UpdateFaintData(u32 battler);
 void GetAiLogicData(void);
 
 extern u8 sBattler_AI;

@@ -174,7 +174,7 @@ static bool32 TryCalculateWallpaper(u16 *backgroundClr, u16 *foregroundClr, u8 *
     if (GetWallpaperDataBits(data, 0, 3) != GetWallpaperDataBits(charsByTableId, TO_BIT_OFFSET(WALDA_PHRASE_LENGTH - 1) + 2, 3))
         return FALSE;
 
-    // Perform some relatively arbitrary changes to the wallpaper data using the last byte (KEY) 
+    // Perform some relatively arbitrary changes to the wallpaper data using the last byte (KEY)
     RotateWallpaperDataLeft(data, NUM_WALLPAPER_DATA_BYTES,     21);
     RotateWallpaperDataLeft(data, NUM_WALLPAPER_DATA_BYTES - 1, KEY & 0xF);
     MaskWallpaperData(data, NUM_WALLPAPER_DATA_BYTES - 1, KEY >> 4);
