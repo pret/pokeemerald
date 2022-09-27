@@ -993,7 +993,10 @@ static void Debug_DestroyMenu(u8 taskId)
 static void Debug_DestroyMenu_Full(u8 taskId)
 {
     if (gTasks[taskId].data[2] != 0)
+    {
+        ClearStdWindowAndFrame(gTasks[taskId].data[2], FALSE);
         DebugAction_DestroyExtraWindow(taskId);
+    }
     DestroyListMenuTask(gTasks[taskId].data[0], NULL, NULL);
     ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
@@ -1121,11 +1124,20 @@ static void Debug_RefreshListMenu(u8 taskId)
     u8 const * name;
 
     if (sDebugMenuListData->listId == 0)
-        totalItems = sDebugMenu_ListTemplate_FlagsVars.totalItems;
+    {
+        gMultiuseListMenuTemplate = sDebugMenu_ListTemplate_FlagsVars;
+        totalItems = gMultiuseListMenuTemplate.totalItems;
+    }
     else if (sDebugMenuListData->listId == 1 && sDebugBattleData->submenu <= 1)
-        totalItems = sDebugMenu_ListTemplate_Battle_1.totalItems;
+    {
+        gMultiuseListMenuTemplate = sDebugMenu_ListTemplate_Battle_1;
+        totalItems = gMultiuseListMenuTemplate.totalItems;
+    }
     else if (sDebugMenuListData->listId == 1 && sDebugBattleData->submenu > 1)
+    {
+        gMultiuseListMenuTemplate = sDebugMenu_ListTemplate_Battle_2;
         totalItems = 7;
+    }
 
     // Copy item names for all entries but the last (which is Cancel)
     for(i = 0; i < totalItems; i++)
