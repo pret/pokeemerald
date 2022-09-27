@@ -2760,6 +2760,17 @@ void LoadMonIconPalette(u16 species)
         LoadSpritePalette(&gMonIconPaletteTable[palIndex]);
 }
 
+void LoadMonIconPalettePersonality(u16 species, u32 personality)
+{
+    u8 palIndex;
+    if (ShouldShowFemaleDifferences(species, personality))
+        palIndex = gMonIconPaletteIndicesFemale[species];
+    else
+        palIndex = gMonIconPaletteIndices[species];
+    if (IndexOfSpritePaletteTag(gMonIconPaletteTable[palIndex].tag) == 0xFF)
+        LoadSpritePalette(&gMonIconPaletteTable[palIndex]);
+}
+
 void FreeMonIconPalettes(void)
 {
     u8 i;

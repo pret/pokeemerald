@@ -1185,9 +1185,9 @@ Move_TAILWIND:
 	end
 
 Move_ACUPRESSURE:
-	loadspritegfx ANIM_TAG_ACCUPRESSURE
+	loadspritegfx ANIM_TAG_ACUPRESSURE
 	loadspritegfx ANIM_TAG_SPARK_2
-	createsprite gAccupressureSpriteTemplate, ANIM_ATTACKER, 40, 0, -40, 40
+	createsprite gAcupressureSpriteTemplate, ANIM_ATTACKER, 40, 0, -40, 40
 	waitforvisualfinish
 	call ElectricityEffect
 	end
@@ -4337,7 +4337,7 @@ Move_LUNAR_DANCE:
 
 Move_CRUSH_GRIP:
 	loadspritegfx ANIM_TAG_EXPLOSION
-	loadspritegfx ANIM_TAG_ACCUPRESSURE
+	loadspritegfx ANIM_TAG_ACUPRESSURE
 	loadspritegfx ANIM_TAG_PURPLE_HAND_OUTLINE
 	setalpha 15, 0
 	createsprite gCrushGripHandTemplate, ANIM_TARGET, 2, 16, 0, 0, 0, 25, 0x101
@@ -14196,7 +14196,7 @@ TerrainPulseElectric:
 	createvisualtask AnimTask_SwayMon, 5, 0, 4, 51200, 24, ANIM_TARGET
 	createvisualtask AnimTask_BlendColorCycle, 2, 4, 2, 2, 0, 12, RGB(27, 27, 0)
 	goto TerrainPulseEnd
-  
+
 TerrainPulseGrass:
 	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_DRAGON_PULSE, 0, 12, 12, RGB(11, 26, 11)
 	waitforvisualfinish
@@ -14218,7 +14218,7 @@ TerrainPulseFairy:
 	createvisualtask AnimTask_SwayMon, 5, 0, 4, 51200, 24, ANIM_TARGET
 	createvisualtask AnimTask_BlendColorCycle, 2, 4, 2, 2, 0, 12, RGB(31, 24, 31)
 	goto TerrainPulseEnd
-  
+
 TerrainPulsePsychic:
 	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_DRAGON_PULSE, 0, 12, 12, RGB(27, 0, 13)
 	waitforvisualfinish
@@ -24740,7 +24740,7 @@ General_RestoreBg:
 	restorebg
 	waitbgfadein
 	end
-	
+
 end
 
 General_ZMoveActivate:
@@ -24839,15 +24839,15 @@ General_PrimalReversion::
 	jumpargeq 0x1, ITEM_BLUE_ORB, General_PrimalReversion_Alpha
 General_PrimalReversion_Alpha:
 	loadspritegfx ANIM_TAG_ALPHA_STONE
-	loadspritegfx ANIM_TAG_PRIMAL_PARTICLES
+	loadspritegfx ANIM_TAG_MEGA_PARTICLES
 	loadspritegfx ANIM_TAG_ALPHA_SYMBOL
 	monbg ANIM_ATTACKER
 	setalpha 12, 8
 	loopsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER, 13, 3
 	createvisualtask AnimTask_BlendColorCycle, 2, 2, 0, 6, 0, 11, RGB(31, 31, 11)
-	call PrimalReversionParticles
-	call PrimalReversionParticles
-	call PrimalReversionParticles
+	call MegaEvolutionParticles
+	call MegaEvolutionParticles
+	call MegaEvolutionParticles
 	waitforvisualfinish
 	playsewithpan SE_M_SOLAR_BEAM, SOUND_PAN_ATTACKER
 	createsprite gAlphaStoneSpriteTemplate, ANIM_ATTACKER, 41, 0, 0, 0, 0
@@ -24865,15 +24865,15 @@ General_PrimalReversion_Alpha:
 	end
 General_PrimalReversion_Omega:
 	loadspritegfx ANIM_TAG_OMEGA_STONE
-	loadspritegfx ANIM_TAG_PRIMAL_PARTICLES
+	loadspritegfx ANIM_TAG_MEGA_PARTICLES
 	loadspritegfx ANIM_TAG_OMEGA_SYMBOL
 	monbg ANIM_ATTACKER
 	setalpha 12, 8
 	loopsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER, 13, 3
 	createvisualtask AnimTask_BlendColorCycle, 2, 2, 0, 6, 0, 11, RGB(31, 31, 11)
-	call PrimalReversionParticles
-	call PrimalReversionParticles
-	call PrimalReversionParticles
+	call MegaEvolutionParticles
+	call MegaEvolutionParticles
+	call MegaEvolutionParticles
 	waitforvisualfinish
 	playsewithpan SE_M_SOLAR_BEAM, SOUND_PAN_ATTACKER
 	createsprite gOmegaStoneSpriteTemplate, ANIM_ATTACKER, 41, 0, 0, 0, 0
@@ -24889,22 +24889,6 @@ General_PrimalReversion_Omega:
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
 	end
-PrimalReversionParticles:
-	createsprite gPrimalParticlesSpriteTemplate, ANIM_ATTACKER, 2, 40, -10, 13
-	delay 3
-	createsprite gPrimalParticlesSpriteTemplate, ANIM_ATTACKER, 2, -35, -10, 13
-	delay 3
-	createsprite gPrimalParticlesSpriteTemplate, ANIM_ATTACKER, 2, 15, -40, 13
-	delay 3
-	createsprite gPrimalParticlesSpriteTemplate, ANIM_ATTACKER, 2, -10, -32, 13
-	delay 3
-	createsprite gPrimalParticlesSpriteTemplate, ANIM_ATTACKER, 2, 25, -20, 13
-	delay 3
-	createsprite gPrimalParticlesSpriteTemplate, ANIM_ATTACKER, 2, -40, -20, 13
-	delay 3
-	createsprite gPrimalParticlesSpriteTemplate, ANIM_ATTACKER, 2, 5, -40, 13
-	delay 3
-	return
 
 General_AffectionHangedOn::
 	loadspritegfx ANIM_TAG_RED_HEART
@@ -25263,8 +25247,8 @@ FinishSupersonicSkystrike:
 	call UnsetPsychicBg
 	waitforvisualfinish
 	end
-	
-	
+
+
 Move_ACID_DOWNPOUR:
 	loadspritegfx ANIM_TAG_BLUE_ORB @ reversal
 	loadspritegfx ANIM_TAG_POISON_JAB	@ poison jab
@@ -25951,7 +25935,7 @@ NeverendingNightmareGeyser:
 	createsprite gNeverEndingNightmareGeyserHexSpriteTemplate ANIM_TARGET, 2, ANIM_TARGET, 0xfff0, 0x10
 	return
 
-	
+
 Move_CORKSCREW_CRASH::
 	loadspritegfx ANIM_TAG_SPIKES @metal bits
 	loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT @charge
@@ -26669,7 +26653,7 @@ HavocSpearSparkTarget:
 @	launchtemplate gSparkElectricityFlashingSpriteTemplate 0x4 0x8 0x0 0x0 0x20 0xc SOUND_PAN_ATTACKER 0x14 0x2 0x8000
 	launchtemplate gSparkElectricityFlashingSpriteTemplate 0x4 0x8 0x0 0x0 0x10 0xc SOUND_PAN_ATTACKER 0x14 0x2 0x8000
 	return
-	
+
 
 Move_SHATTERED_PSYCHE::
 	loadspritegfx ANIM_TAG_IMPACT @hit
@@ -29127,7 +29111,7 @@ OceanicOperettaExplosion:
 	launchtemplate gOceanOperaExplosionSpriteTemplate 0x33 0x4 0x10 0x10 ANIM_TARGET 0x1
 	delay 0x6
 	return
-	
+
 
 Move_SPLINTERED_STORMSHARDS::
 	loadspritegfx ANIM_TAG_ROCKS @rock
@@ -29388,7 +29372,7 @@ SplinteredStormshardsFinishFadeReturn:
 	return
 
 
-Move_LETS_SNUGGLE_FOREVER::  
+Move_LETS_SNUGGLE_FOREVER::
 	loadspritegfx ANIM_TAG_MAGENTA_HEART @sharm
 	loadspritegfx ANIM_TAG_MUSIC_NOTES @music note
 	loadspritegfx ANIM_TAG_SMALL_BUBBLES @fake tears
@@ -30467,11 +30451,11 @@ LightThatBurnsTheSkyGreenSparks:
 	launchtemplate gLightThatBurnsTheSkyGreenSparkSpriteTemplate 0x83 0x8 0x0 0x0 0x30 0x2c 0x0 0x28 0x0 0x3
 	launchtemplate gLightThatBurnsTheSkyGreenSparkSpriteTemplate 0x83 0x8 0x0 0x0 0x30 0x2c 0x40 0x28 0x1 0x3
 	launchtemplate gLightThatBurnsTheSkyGreenSparkSpriteTemplate 0x83 0x8 0x0 0x0 0x30 0x2c 0x80 0x28 0x0 0x3
-	launchtemplate gLightThatBurnsTheSkyGreenSparkSpriteTemplate 0x83 0x8 0x0 0x0 0x30 0x2c SOUND_PAN_ATTACKER 0x28 0x2 0x3
+	launchtemplate gLightThatBurnsTheSkyGreenSparkSpriteTemplate 0x83 0x8 0x0 0x0 0x30 0x2c 0x0 0x28 0x2 0x3
 	launchtemplate gLightThatBurnsTheSkyGreenSparkSpriteTemplate 0x83 0x8 0x0 0x0 0x15 0x2c 0x0 0x28 0x0 0x3
 	launchtemplate gLightThatBurnsTheSkyGreenSparkSpriteTemplate 0x83 0x8 0x0 0x0 0x15 0x2c 0x40 0x28 0x1 0x3
 	launchtemplate gLightThatBurnsTheSkyGreenSparkSpriteTemplate 0x83 0x8 0x0 0x0 0x15 0x2c 0x80 0x28 0x0 0x3
-	launchtemplate gLightThatBurnsTheSkyGreenSparkSpriteTemplate 0x83 0x8 0x0 0x0 0x15 0x2c SOUND_PAN_ATTACKER 0x28 0x2 0x3
+	launchtemplate gLightThatBurnsTheSkyGreenSparkSpriteTemplate 0x83 0x8 0x0 0x0 0x15 0x2c 0x0 0x28 0x2 0x3
 	delay 0x10
 	return
 

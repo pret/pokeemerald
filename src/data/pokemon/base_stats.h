@@ -859,7 +859,7 @@
         .bodyColor = color,                                                 \
         .noFlip = FALSE,                                                    \
     }
-    
+
 #define MORPEKO_BASE_STATS                                 \
     {                                                      \
         .baseHP        = 58,                               \
@@ -883,7 +883,7 @@
         .bodyColor = BODY_COLOR_YELLOW,                    \
         .noFlip = FALSE,                                   \
     }
-    
+
 #define ZARUDE_BASE_STATS                               \
     {                                                   \
         .baseHP        = 105,                           \
@@ -22755,7 +22755,7 @@ const struct BaseStats gBaseStats[] =
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
-	
+
     [SPECIES_BASCULEGION] =
     {
         .baseHP        = 120,
@@ -26464,7 +26464,7 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_MINIOR_CORE_BLUE]   = MINIOR_CORE_BASE_STATS(BODY_COLOR_BLUE),
     [SPECIES_MINIOR_CORE_INDIGO] = MINIOR_CORE_BASE_STATS(BODY_COLOR_BLUE),
     [SPECIES_MINIOR_CORE_VIOLET] = MINIOR_CORE_BASE_STATS(BODY_COLOR_PURPLE),
-    
+
     [SPECIES_MIMIKYU_BUSTED] = MIMIKYU_BASE_STATS,
 
     [SPECIES_NECROZMA_DUSK_MANE] =
@@ -26563,7 +26563,7 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_ALCREMIE_RUBY_SWIRL]    = ALCREMIE_BASE_STATS(BODY_COLOR_YELLOW),
     [SPECIES_ALCREMIE_CARAMEL_SWIRL] = ALCREMIE_BASE_STATS(BODY_COLOR_BROWN),
     [SPECIES_ALCREMIE_RAINBOW_SWIRL] = ALCREMIE_BASE_STATS(BODY_COLOR_YELLOW),
-    
+
     [SPECIES_EISCUE_NOICE_FACE] =
     {
         .baseHP        = 75,

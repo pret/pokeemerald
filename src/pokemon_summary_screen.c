@@ -3742,7 +3742,7 @@ static void PrintMoveDetails(u16 move)
             ShowSplitIcon(GetBattleMoveSplit(move));
         #endif
             PrintMovePowerAndAccuracy(move);
-            
+
             if (moveEffect != EFFECT_PLACEHOLDER)
                 PrintTextOnWindow(windowId, gMoveDescriptionPointers[move - 1], 6, 1, 0, 0);
             else

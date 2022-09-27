@@ -39,6 +39,7 @@
 #include "trainer_hill.h"
 #include "util.h"
 #include "constants/abilities.h"
+#include "constants/battle_config.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
@@ -49,8 +50,8 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+#include "constants/union_room.h"
 #include "constants/weather.h"
-#include "constants/battle_config.h"
 
 struct SpeciesItem
 {
@@ -2951,7 +2952,7 @@ static const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =
 #define PP_UP_SHIFTS_INV(val) (u8)~(val), (u8)~((val) << 2), (u8)~((val) << 4), (u8)~((val) << 6)
 
 // PP Up bonuses are stored for a Pokémon as a single byte.
-// There are 2 bits (a value 0-3) for each move slot that 
+// There are 2 bits (a value 0-3) for each move slot that
 // represent how many PP Ups have been applied.
 // The following arrays take a move slot id and return:
 // gPPUpGetMask - A mask to get the number of PP Ups applied to that move slot
@@ -2978,7 +2979,9 @@ const u8 gStatStageRatios[MAX_STAT_STAGE + 1][2] =
     {40, 10}, // +6, MAX_STAT_STAGE
 };
 
-const u16 gLinkPlayerFacilityClasses[NUM_MALE_LINK_FACILITY_CLASSES + NUM_FEMALE_LINK_FACILITY_CLASSES] =
+// The classes used by other players in the Union Room.
+// These should correspond with the overworld graphics in sUnionRoomObjGfxIds
+const u16 gUnionRoomFacilityClasses[NUM_UNION_ROOM_CLASSES * GENDER_COUNT] =
 {
     // Male classes
     FACILITY_CLASS_COOLTRAINER_M,
@@ -2989,7 +2992,7 @@ const u16 gLinkPlayerFacilityClasses[NUM_MALE_LINK_FACILITY_CLASSES + NUM_FEMALE
     FACILITY_CLASS_BUG_CATCHER,
     FACILITY_CLASS_PKMN_BREEDER_M,
     FACILITY_CLASS_GUITARIST,
-    // Female Classes
+    // Female classes
     FACILITY_CLASS_COOLTRAINER_F,
     FACILITY_CLASS_HEX_MANIAC,
     FACILITY_CLASS_PICNICKER,
@@ -3305,7 +3308,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
               | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
               | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
               | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
-        
+
         if (gBaseStats[species].flags & SPECIES_FLAG_SHINY_LOCKED)
         {
             do
@@ -3845,9 +3848,9 @@ u16 GetUnionRoomTrainerPic(void)
     else
         linkId = GetMultiplayerId() ^ 1;
 
-    arrId = gLinkPlayers[linkId].trainerId & 7;
-    arrId |= gLinkPlayers[linkId].gender << 3;
-    return FacilityClassToPicIndex(gLinkPlayerFacilityClasses[arrId]);
+    arrId = gLinkPlayers[linkId].trainerId % NUM_UNION_ROOM_CLASSES;
+    arrId |= gLinkPlayers[linkId].gender * NUM_UNION_ROOM_CLASSES;
+    return FacilityClassToPicIndex(gUnionRoomFacilityClasses[arrId]);
 }
 
 u16 GetUnionRoomTrainerClass(void)
@@ -3860,9 +3863,9 @@ u16 GetUnionRoomTrainerClass(void)
     else
         linkId = GetMultiplayerId() ^ 1;
 
-    arrId = gLinkPlayers[linkId].trainerId & 7;
-    arrId |= gLinkPlayers[linkId].gender << 3;
-    return gFacilityClassToTrainerClass[gLinkPlayerFacilityClasses[arrId]];
+    arrId = gLinkPlayers[linkId].trainerId % NUM_UNION_ROOM_CLASSES;
+    arrId |= gLinkPlayers[linkId].gender * NUM_UNION_ROOM_CLASSES;
+    return gFacilityClassToTrainerClass[gUnionRoomFacilityClasses[arrId]];
 }
 
 void CreateEventLegalEnemyMon(void)
@@ -5307,7 +5310,7 @@ u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
         gLastUsedAbility = gBaseStats[species].abilities[abilityNum];
     else
         gLastUsedAbility = ABILITY_NONE;
-    
+
     if (abilityNum >= NUM_NORMAL_ABILITY_SLOTS) // if abilityNum is empty hidden ability, look for other hidden abilities
     {
         for (i = NUM_NORMAL_ABILITY_SLOTS; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++)
@@ -5315,12 +5318,12 @@ u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
             gLastUsedAbility = gBaseStats[species].abilities[i];
         }
     }
-    
+
     for (i = 0; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++) // look for any non-empty ability
     {
         gLastUsedAbility = gBaseStats[species].abilities[i];
     }
-    
+
     return gLastUsedAbility;
 }
 
@@ -5530,7 +5533,7 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
 #endif
 
 // EXP candies store an index for this table in their holdEffectParam.
-static const u32 sExpCandyExperienceTable[] = {
+const u32 sExpCandyExperienceTable[] = {
     [EXP_100 - 1] = 100,
     [EXP_800 - 1] = 800,
     [EXP_3000 - 1] = 3000,
@@ -5719,20 +5722,26 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
              && GetMonData(mon, MON_DATA_LEVEL, NULL) != MAX_LEVEL)
             {
                 u8 param = ItemId_GetHoldEffectParam(item);
+                dataUnsigned = 0;
+
                 if (param == 0) // Rare Candy
                 {
                     dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL) + 1];
                 }
-                else if (param < ARRAY_COUNT(sExpCandyExperienceTable)) // EXP Candies
+                else if (param - 1 < ARRAY_COUNT(sExpCandyExperienceTable)) // EXP Candies
                 {
                     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
                     dataUnsigned = sExpCandyExperienceTable[param - 1] + GetMonData(mon, MON_DATA_EXP, NULL);
                     if (dataUnsigned > gExperienceTables[gBaseStats[species].growthRate][MAX_LEVEL])
                         dataUnsigned = gExperienceTables[gBaseStats[species].growthRate][MAX_LEVEL];
                 }
-                SetMonData(mon, MON_DATA_EXP, &dataUnsigned);
-                CalculateMonStats(mon);
-                retVal = FALSE;
+
+                if (dataUnsigned != 0) // Failsafe
+                {
+                    SetMonData(mon, MON_DATA_EXP, &dataUnsigned);
+                    CalculateMonStats(mon);
+                    retVal = FALSE;
+                }
             }
 
             // Cure status
@@ -6081,7 +6090,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                     case 4: // ITEM5_PP_MAX
                         dataUnsigned = (GetMonData(mon, MON_DATA_PP_BONUSES, NULL) & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
                         temp2 = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
-                        
+
                         // Check if 3 PP Ups have been applied already, and that the move has a total PP of at least 5 (excludes Sketch)
                         if (dataUnsigned < 3 && temp2 >= 5)
                         {
@@ -6361,7 +6370,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
     {
         partnerSpecies = GetMonData(tradePartner, MON_DATA_SPECIES, 0);
         partnerHeldItem = GetMonData(tradePartner, MON_DATA_HELD_ITEM, 0);
-        
+
         if (partnerHeldItem == ITEM_ENIGMA_BERRY)
             partnerHoldEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
         else
@@ -7732,7 +7741,7 @@ void SetWildMonHeldItem(void)
         {
             if (GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, NULL) != ITEM_NONE)
                 continue; // prevent ovewriting previously set item
-            
+
             rnd = Random() % 100;
             species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, 0);
             if (gMapHeader.mapLayoutId == LAYOUT_ALTERING_CAVE)
@@ -8058,7 +8067,7 @@ static bool8 ShouldSkipFriendshipChange(void)
 // Only the 'default' mode (MON_SPR_GFX_MODE_NORMAL) is used, which is set
 // up to allocate 4 sprites using the battler sprite templates (gBattlerSpriteTemplates).
 // MON_SPR_GFX_MODE_BATTLE is identical but never used.
-// MON_SPR_GFX_MODE_FULL_PARTY is set up to allocate 7 sprites (party + trainer?) 
+// MON_SPR_GFX_MODE_FULL_PARTY is set up to allocate 7 sprites (party + trainer?)
 // using a generic 64x64 template, and is also never used.
 
 // Between the unnecessarily large sizes below, a mistake allocating the spritePointers
@@ -8120,7 +8129,7 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
         gfx->dataSize = 1;
         gfx->mode = MON_SPR_GFX_MODE_FULL_PARTY;
         break;
- // case MON_SPR_GFX_MODE_BATTLE:       
+ // case MON_SPR_GFX_MODE_BATTLE:
     case MON_SPR_GFX_MODE_NORMAL:
     default:
         gfx->numSprites = MAX_BATTLERS_COUNT;
@@ -8259,72 +8268,72 @@ u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId)
     return targetFormId;
 }
 
-u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg) 
+u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
 {
     return GetFormChangeTargetSpeciesBoxMon(&mon->box, method, arg);
 }
 
 // Returns SPECIES_NONE if no form change is possible
-u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg) 
+u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 arg)
 {
-    u32 i;
+    u32 i, j;
     u16 targetSpecies = SPECIES_NONE;
-    u16 species = GetBoxMonData(mon, MON_DATA_SPECIES, NULL);
+    u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
     const struct FormChange *formChanges = gFormChangeTablePointers[species];
     u16 heldItem;
     u32 ability;
 
     if (formChanges != NULL)
     {
-        heldItem = GetBoxMonData(mon, MON_DATA_HELD_ITEM, NULL);
-        ability = GetAbilityBySpecies(species, GetBoxMonData(mon, MON_DATA_ABILITY_NUM, NULL));
+        heldItem = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM, NULL);
+        ability = GetAbilityBySpecies(species, GetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, NULL));
 
         for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
         {
-            if (method == formChanges[i].method)
+            if (method == formChanges[i].method && species != formChanges[i].targetSpecies)
             {
                 switch (method)
                 {
                 case FORM_ITEM_HOLD:
-                    if (heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
+                    if ((heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
+                     && (ability == formChanges[i].param2 || formChanges[i].param2 == ABILITY_NONE))
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_ITEM_USE:
-                    if (arg == formChanges[i].param1)
-                        targetSpecies = formChanges[i].targetSpecies;
-                    break;
-                case FORM_MOVE:
-                    if (BoxMonKnowsMove(mon, formChanges[i].param1) != formChanges[i].param2)
-                        targetSpecies = formChanges[i].targetSpecies;
-                    break;
-                case FORM_ITEM_HOLD_ABILITY:
-                    if ((heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
-                        && ability == formChanges[i].param2)
-                        targetSpecies = formChanges[i].targetSpecies;
-                    break;
-                case FORM_ITEM_USE_TIME:
-                    RtcCalcLocalTime();
                     if (arg == formChanges[i].param1)
                     {
                         switch (formChanges[i].param2)
                         {
                         case DAY:
+                            RtcCalcLocalTime();
                             if (gLocalTime.hours >= 12 && gLocalTime.hours < 24)
                                 targetSpecies = formChanges[i].targetSpecies;
                             break;
                         case NIGHT:
+                            RtcCalcLocalTime();
                             if (gLocalTime.hours >= 0 && gLocalTime.hours < 12)
                                 targetSpecies = formChanges[i].targetSpecies;
+                            break;
+                        default:
+                            targetSpecies = formChanges[i].targetSpecies;
                             break;
                         }
                     }
                     break;
+                case FORM_MOVE:
+                    if (BoxMonKnowsMove(boxMon, formChanges[i].param1) != formChanges[i].param2)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_BATTLE_BEGIN:
+                case FORM_BATTLE_END:
+                    if (heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
+                        targetSpecies = formChanges[i].targetSpecies;
                 }
             }
         }
     }
 
-    return species != targetSpecies ? targetSpecies : SPECIES_NONE;
+    return targetSpecies;
 }
 
 u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove)
@@ -8378,7 +8387,7 @@ void TrySpecialOverworldEvo(void)
     u8 i;
     u8 evoMethod = gSpecialVar_0x8000;
     u16 canStopEvo = gSpecialVar_0x8001;
-    u16 tryMultiple = gSpecialVar_0x8002;    
+    u16 tryMultiple = gSpecialVar_0x8002;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -8395,7 +8404,7 @@ void TrySpecialOverworldEvo(void)
             else
                 gCB2_AfterEvolution = CB2_ReturnToField;
             return;
-        }   
+        }
     }
 
     sTriedEvolving = 0;
@@ -8405,4 +8414,44 @@ void TrySpecialOverworldEvo(void)
 bool32 ShouldShowFemaleDifferences(u16 species, u32 personality)
 {
     return (gBaseStats[species].flags & SPECIES_FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
+}
+
+void TryToSetBattleFormChangeMoves(struct Pokemon *mon)
+{
+    int i, j;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    const struct FormChange *formChanges = gFormChangeTablePointers[species];
+    u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES, NULL);
+
+    if (formChanges == NULL)
+        return;
+
+    for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
+    {
+        if ((formChanges[i].method == FORM_BATTLE_BEGIN || formChanges[i].method == FORM_BATTLE_END)
+         && formChanges[i].param2 && formChanges[i].param3 && formChanges[i].targetSpecies == species)
+        {
+            u16 originalMove = formChanges[i].param2;
+            u16 newMove = formChanges[i].param3;
+
+            for (j = 0; j < MAX_MON_MOVES; j++)
+            {
+                u16 currMove = GetMonData(mon, MON_DATA_MOVE1 + j, NULL);
+                u8 totalPp = gBattleMoves[currMove].pp; // Get current move's max PP
+                u8 currPp = GetMonData(mon, MON_DATA_PP1 + j, NULL); // Get current move's remaining PP
+                u8 diffPp = totalPp - currPp; // Current move's PP difference
+                u8 finalPp = gBattleMoves[newMove].pp - diffPp; // Apply the PP difference to the new move
+
+                if (currMove == originalMove)
+                {
+                    if (finalPp > gBattleMoves[newMove].pp)
+                        finalPp = 0;
+                    SetMonMoveSlot(mon, newMove, j);
+                    SetMonData(mon, MON_DATA_PP1 + j, &finalPp);
+                }
+            }
+            SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
+            break;
+        }
+    }
 }

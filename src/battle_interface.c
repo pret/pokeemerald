@@ -767,7 +767,9 @@ static void InitLastUsedBallAssets(void)
 // This function is here to cover a specific case - one player's mon in a 2 vs 1 double battle. In this scenario - display singles layout.
 u32 WhichBattleCoords(u32 battlerId) // 0 - singles, 1 - doubles
 {
-    if (GetBattlerPosition(battlerId) == B_POSITION_PLAYER_LEFT && gPlayerPartyCount == 1)
+    if (GetBattlerPosition(battlerId) == B_POSITION_PLAYER_LEFT
+        && gPlayerPartyCount == 1
+        && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
         return 0;
     else
         return IsDoubleBattle();
@@ -3122,9 +3124,6 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
 #if B_ABILITY_POP_UP == TRUE
     const s16 (*coords)[2];
     u8 spriteId1, spriteId2, battlerPosition, taskId;
-
-    
-        return;
 
     if (gBattleScripting.abilityPopupOverwrite != 0)
         ability = gBattleScripting.abilityPopupOverwrite;

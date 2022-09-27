@@ -4744,8 +4744,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_INTREPID_SWORD:
-            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            if (!gSpecialStatuses[battler].switchInAbilityDone && CompareStat(battler, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN))
             {
+                gBattlerAttacker = battler;
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 SET_STATCHANGER(STAT_ATK, 1, FALSE);
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerAbilityStatRaiseOnSwitchIn);
@@ -4753,8 +4754,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_DAUNTLESS_SHIELD:
-            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            if (!gSpecialStatuses[battler].switchInAbilityDone && CompareStat(battler, STAT_DEF, MAX_STAT_STAGE, CMP_LESS_THAN))
             {
+                gBattlerAttacker = battler;
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 SET_STATCHANGER(STAT_DEF, 1, FALSE);
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerAbilityStatRaiseOnSwitchIn);
@@ -5292,7 +5294,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 case ABILITY_STANCE_CHANGE:
                     break;
                 default:
-                    gLastUsedAbility = gBattleMons[gBattlerAttacker].ability = ABILITY_MUMMY;
+                    gLastUsedAbility = gBattleMons[gBattlerAttacker].ability = gBattleStruct->overwrittenAbilities[gBattlerAttacker] = ABILITY_MUMMY;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_MummyActivates;
                     effect++;
@@ -5324,10 +5326,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                     break;
                 default:
                     gLastUsedAbility = gBattleMons[gBattlerAttacker].ability;
-                    gBattleMons[gBattlerAttacker].ability = gBattleMons[gBattlerTarget].ability;
-                    gBattleMons[gBattlerTarget].ability = gLastUsedAbility;
-                    RecordAbilityBattle(gBattlerAttacker, gBattleMons[gBattlerAttacker].ability);
-                    RecordAbilityBattle(gBattlerTarget, gBattleMons[gBattlerTarget].ability);
+                    gBattleMons[gBattlerAttacker].ability = gBattleStruct->overwrittenAbilities[gBattlerAttacker] = gBattleMons[gBattlerTarget].ability;
+                    gBattleMons[gBattlerTarget].ability = gBattleStruct->overwrittenAbilities[gBattlerTarget] = gLastUsedAbility;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_WanderingSpiritActivates;
                     effect++;
@@ -5939,6 +5939,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                     }
                     gBattleResources->flags->flags[i] &= ~RESOURCE_FLAG_TRACED;
                     gBattleStruct->tracedAbility[i] = gLastUsedAbility = gBattleMons[gActiveBattler].ability;
+                    RecordAbilityBattle(gActiveBattler, gLastUsedAbility); // Record the opposing battler has this ability
                     battler = gBattlerAbility = gBattleScripting.battler = i;
 
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gActiveBattler, gBattlerPartyIndexes[gActiveBattler])
@@ -9692,7 +9693,7 @@ void UndoMegaEvolution(u32 monId)
 
 void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
 {
-    u32 i, currSpecies;
+    u32 i, currSpecies, targetSpecies;
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
     static const u16 species[][3] =
     {
@@ -9724,6 +9725,16 @@ void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
             SetMonData(&party[monId], MON_DATA_SPECIES, &species[i][1]);
             CalculateMonStats(&party[monId]);
             break;
+        }
+    }
+    if (!isSwitchingOut)
+    {
+        targetSpecies = GetFormChangeTargetSpecies(&party[monId], FORM_BATTLE_END, 0);
+        if (targetSpecies != SPECIES_NONE)
+        {
+            SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
+            CalculateMonStats(&party[monId]);
+            TryToSetBattleFormChangeMoves(&party[monId]);
         }
     }
 }
