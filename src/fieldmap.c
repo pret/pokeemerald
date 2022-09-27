@@ -406,7 +406,7 @@ void MapGridSetMetatileEntryAt(int x, int y, u16 metatile)
 
 u16 GetMetatileAttributesById(u16 metatile)
 {
-    u16 *attributes;
+    const u16 *attributes;
     if (metatile < NUM_METATILES_IN_PRIMARY)
     {
         attributes = gMapHeader.mapLayout->primaryTileset->metatileAttributes;
