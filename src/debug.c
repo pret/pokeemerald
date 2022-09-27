@@ -167,10 +167,6 @@ enum { //Sound
 #define DEBUG_NUMBER_ICON_X 210
 #define DEBUG_NUMBER_ICON_Y 50
 
-// EWRAM
-static EWRAM_DATA struct DebugMonData *sDebugMonData = NULL;
-
-
 // *******************************
 struct DebugMonData
 {
@@ -191,6 +187,32 @@ struct DebugMonData
     u16 mon_move_3;
 };
 
+struct DebugMenuListData
+{
+    struct ListMenuItem listItems[20 + 1];
+    u8 itemNames[PC_ITEMS_COUNT + 1][26];
+};
+
+struct DebugBattleData
+{
+    u8 battleType;
+    u8 battleTerrain;
+    bool8 ai_flag_check_bad_move;
+    bool8 ai_flag_try_to_faint;
+    bool8 ai_flag_check_viability;
+    bool8 ai_flag_setup_first_turn;
+    bool8 ai_flag_risky;
+    bool8 ai_flag_prefer_power_extremes;
+    bool8 ai_flag_prefer_baton_pass;
+    bool8 ai_flag_double_battle;
+    bool8 ai_flag_hp_aware;
+    bool8 ai_flag_try_sunny_day_start;
+};
+
+// EWRAM
+static EWRAM_DATA struct DebugMonData *sDebugMonData = NULL;
+static EWRAM_DATA struct DebugMenuListData *sDebugMenuListData = NULL;
+
 
 // *******************************
 // Define functions
@@ -201,6 +223,7 @@ static void Debug_DestroyMenu_Full(u8 taskId);
 static void DebugAction_Cancel(u8 taskId);
 static void DebugAction_DestroyExtraWindow(u8 taskId);
 static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
+static void Debug_RefreshListMenu(u8 taskId);
 
 static void DebugAction_Util_Script_1(u8 taskId);
 static void DebugAction_Util_Script_2(u8 taskId);
@@ -377,18 +400,18 @@ static const u8 sDebugText_FlagsVars_Variable[] =               _("Var: {STR_VAR
 static const u8 sDebugText_FlagsVars_VariableValueSet[] =       _("Var: {STR_VAR_1}{CLEAR_TO 90}\nVal: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_2}");
 static const u8 sDebugText_FlagsVars_PokedexFlags_All[] =       _("Pokédex Flags All");
 static const u8 sDebugText_FlagsVars_PokedexFlags_Reset[] =     _("Pokédex Flags Reset");
-static const u8 sDebugText_FlagsVars_SwitchDex[] =              _("Toggle Pokédex");
-static const u8 sDebugText_FlagsVars_SwitchNationalDex[] =      _("Toggle NatDex");
-static const u8 sDebugText_FlagsVars_SwitchPokeNav[] =          _("Toggle PokéNav");
-static const u8 sDebugText_FlagsVars_RunningShoes[] =           _("Toggle Running Shoes");
-static const u8 sDebugText_FlagsVars_ToggleFlyFlags[] =         _("Toggle Fly Flags");
-static const u8 sDebugText_FlagsVars_ToggleAllBadges[] =        _("Toggle All badges");
-static const u8 sDebugText_FlagsVars_ToggleFrontierPass[] =     _("Toggle Frontier Pass");
-static const u8 sDebugText_FlagsVars_SwitchCollision[] =        _("Toggle Collision");
-static const u8 sDebugText_FlagsVars_SwitchEncounter[] =        _("Toggle Encounter");
-static const u8 sDebugText_FlagsVars_SwitchTrainerSee[] =       _("Toggle TrainerSee");
-static const u8 sDebugText_FlagsVars_SwitchBagUse[] =           _("Toggle BagUse");
-static const u8 sDebugText_FlagsVars_SwitchCatching[] =         _("Toggle Catching");
+static const u8 sDebugText_FlagsVars_SwitchDex[] =              _("Toggle {STR_VAR_1}Pokédex");
+static const u8 sDebugText_FlagsVars_SwitchNationalDex[] =      _("Toggle {STR_VAR_1}NatDex");
+static const u8 sDebugText_FlagsVars_SwitchPokeNav[] =          _("Toggle {STR_VAR_1}PokéNav");
+static const u8 sDebugText_FlagsVars_RunningShoes[] =           _("Toggle {STR_VAR_1}Running Shoes");
+static const u8 sDebugText_FlagsVars_ToggleFlyFlags[] =         _("Toggle {STR_VAR_1}Fly Flags");
+static const u8 sDebugText_FlagsVars_ToggleAllBadges[] =        _("Toggle {STR_VAR_1}All badges");
+static const u8 sDebugText_FlagsVars_ToggleFrontierPass[] =     _("Toggle {STR_VAR_1}Frontier Pass");
+static const u8 sDebugText_FlagsVars_SwitchCollision[] =        _("Toggle {STR_VAR_1}Collision OFF");
+static const u8 sDebugText_FlagsVars_SwitchEncounter[] =        _("Toggle {STR_VAR_1}Encounter OFF");
+static const u8 sDebugText_FlagsVars_SwitchTrainerSee[] =       _("Toggle {STR_VAR_1}TrainerSee OFF");
+static const u8 sDebugText_FlagsVars_SwitchBagUse[] =           _("Toggle {STR_VAR_1}BagUse OFF");
+static const u8 sDebugText_FlagsVars_SwitchCatching[] =         _("Toggle {STR_VAR_1}Catching OFF");
 // Give Menu
 static const u8 sDebugText_Give_GiveItem[] =            _("Give item XYZ…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_ItemQuantity[] =             _("Quantity:{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n\n{STR_VAR_2}");
@@ -504,7 +527,7 @@ static const struct ListMenuItem sDebugMenu_Items_Scripts[] =
     [DEBUG_UTIL_MENU_ITEM_SCRIPT_7]     = {sDebugText_Util_Script_7,    DEBUG_UTIL_MENU_ITEM_SCRIPT_7},
     [DEBUG_UTIL_MENU_ITEM_SCRIPT_8]     = {sDebugText_Util_Script_8,    DEBUG_UTIL_MENU_ITEM_SCRIPT_8},
 };
-static const struct ListMenuItem sDebugMenu_Items_Flags[] =
+static const struct ListMenuItem sDebugMenu_Items_FlagsVars[] =
 {
     [DEBUG_FLAGVAR_MENU_ITEM_FLAGS]                = {sDebugText_FlagsVars_Flags,              DEBUG_FLAGVAR_MENU_ITEM_FLAGS},
     [DEBUG_FLAGVAR_MENU_ITEM_VARS]                 = {sDebugText_FlagsVars_Vars,               DEBUG_FLAGVAR_MENU_ITEM_VARS},
@@ -715,9 +738,9 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Scripts =
 };
 static const struct ListMenuTemplate sDebugMenu_ListTemplate_FlagsVars =
 {
-    .items = sDebugMenu_Items_Flags,
+    .items = sDebugMenu_Items_FlagsVars,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Flags),
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_FlagsVars),
 };
 static const struct ListMenuTemplate sDebugMenu_ListTemplate_Give =
 {
@@ -743,6 +766,7 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Sound =
 // Functions universal
 void Debug_ShowMainMenu(void)
 {
+    sDebugMenuListData = AllocZeroed(sizeof(*sDebugMenuListData));
     Debug_ShowMenu(DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
 }
 static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate)
@@ -784,6 +808,8 @@ static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMte
     gTasks[inputTaskId].data[0] = menuTaskId;
     gTasks[inputTaskId].data[1] = windowId;
     gTasks[inputTaskId].data[2] = 0;
+
+    Debug_RefreshListMenu(inputTaskId);
 }
 static void Debug_DestroyMenu(u8 taskId)
 {
@@ -817,6 +843,137 @@ static void DebugAction_DestroyExtraWindow(u8 taskId)
     DestroyTask(taskId);
     EnableBothScriptContexts();
     UnfreezeObjectEvents();
+}
+
+static u8 Debug_CheckToggleFlags(u8 id)
+{
+    u8 result = FALSE;
+
+    switch (id)
+    {
+        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKEDEX:
+            result = FlagGet(FLAG_SYS_POKEDEX_GET);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_NATDEX:
+            result = IsNationalPokedexEnabled();
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKENAV:
+            result = FlagGet(FLAG_SYS_POKENAV_GET);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RUN_SHOES:
+            result = FlagGet(FLAG_SYS_B_DASH);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_LOCATIONS:
+            result = FlagGet(FLAG_VISITED_LITTLEROOT_TOWN) &&
+                FlagGet(FLAG_VISITED_OLDALE_TOWN) &&
+                FlagGet(FLAG_VISITED_DEWFORD_TOWN) &&
+                FlagGet(FLAG_VISITED_LAVARIDGE_TOWN) &&
+                FlagGet(FLAG_VISITED_FALLARBOR_TOWN) &&
+                FlagGet(FLAG_VISITED_VERDANTURF_TOWN) &&
+                FlagGet(FLAG_VISITED_PACIFIDLOG_TOWN) &&
+                FlagGet(FLAG_VISITED_PETALBURG_CITY) &&
+                FlagGet(FLAG_VISITED_SLATEPORT_CITY) &&
+                FlagGet(FLAG_VISITED_MAUVILLE_CITY) &&
+                FlagGet(FLAG_VISITED_RUSTBORO_CITY) &&
+                FlagGet(FLAG_VISITED_FORTREE_CITY) &&
+                FlagGet(FLAG_VISITED_LILYCOVE_CITY) &&
+                FlagGet(FLAG_VISITED_MOSSDEEP_CITY) &&
+                FlagGet(FLAG_VISITED_SOOTOPOLIS_CITY) &&
+                FlagGet(FLAG_VISITED_EVER_GRANDE_CITY) &&
+                FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) &&
+                FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BADGES_ALL:
+            result = FlagGet(FLAG_BADGE01_GET) &&
+                FlagGet(FLAG_BADGE02_GET) &&
+                FlagGet(FLAG_BADGE03_GET) &&
+                FlagGet(FLAG_BADGE04_GET) &&
+                FlagGet(FLAG_BADGE05_GET) &&
+                FlagGet(FLAG_BADGE06_GET) &&
+                FlagGet(FLAG_BADGE07_GET) &&
+                FlagGet(FLAG_BADGE08_GET);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_FRONTIER_PASS:
+            result = FlagGet(FLAG_SYS_FRONTIER_PASS);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_COLISSION:
+            result = FlagGet(FLAG_SYS_NO_COLLISION);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_ENCOUNTER:
+            result = FlagGet(FLAG_SYS_NO_ENCOUNTER);
+            break; 
+        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_TRAINER_SEE:
+            result = FlagGet(FLAG_SYS_NO_TRAINER_SEE);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BAG_USE:
+            result = FlagGet(FLAG_SYS_NO_BAG_USE);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_CATCHING:
+            result = FlagGet(FLAG_SYS_NO_CATCHING);
+            break;
+        default:
+            result = 0xFF;
+            break;
+    }
+
+    return result;
+}
+
+static void Debug_RefreshListMenu(u8 taskId)
+{
+    u16 i;
+    const u8 sColor_Red[] = _("{COLOR RED}");
+    const u8 sColor_Green[] = _("{COLOR GREEN}");
+    u8 flagResult;
+
+    // Copy item names for all entries but the last (which is Cancel)
+    for(i = 0; i < sDebugMenu_ListTemplate_FlagsVars.totalItems; i++)
+    {
+        flagResult = Debug_CheckToggleFlags(i);
+        if (flagResult == 0xFF)
+        {
+            StringCopy(&sDebugMenuListData->itemNames[i][0], sDebugMenu_Items_FlagsVars[i].name);
+        }
+        else if (flagResult)
+        {
+            StringCopy(gStringVar1, sColor_Green);
+            StringExpandPlaceholders(gStringVar4, sDebugMenu_Items_FlagsVars[i].name);
+            StringCopy(&sDebugMenuListData->itemNames[i][0], gStringVar4);
+        }
+        else
+        {
+            StringCopy(gStringVar1, sColor_Red);
+            StringExpandPlaceholders(gStringVar4, sDebugMenu_Items_FlagsVars[i].name);
+            StringCopy(&sDebugMenuListData->itemNames[i][0], gStringVar4);
+        }
+
+        sDebugMenuListData->listItems[i].name = &sDebugMenuListData->itemNames[i][0];
+        sDebugMenuListData->listItems[i].id = i;
+    }
+
+    // Set up Cancel entry
+    StringCopy(&sDebugMenuListData->itemNames[i][0], gText_Cancel2);
+    sDebugMenuListData->listItems[i].name = &sDebugMenuListData->itemNames[i][0];
+    sDebugMenuListData->listItems[i].id = LIST_CANCEL;
+
+    // Set list menu data
+    gMultiuseListMenuTemplate = sDebugMenu_ListTemplate_FlagsVars;
+    gMultiuseListMenuTemplate.items = sDebugMenuListData->listItems;
+    gMultiuseListMenuTemplate.totalItems = sDebugMenu_ListTemplate_FlagsVars.totalItems;
+    gMultiuseListMenuTemplate.maxShowed = DEBUG_MENU_HEIGHT_MAIN;
+    gMultiuseListMenuTemplate.windowId = gTasks[taskId].data[1];
+    gMultiuseListMenuTemplate.header_X = 0;
+    gMultiuseListMenuTemplate.item_X = 8;
+    gMultiuseListMenuTemplate.cursor_X = 0;
+    gMultiuseListMenuTemplate.upText_Y = 1;
+    gMultiuseListMenuTemplate.cursorPal = 2;
+    gMultiuseListMenuTemplate.fillValue = 1;
+    gMultiuseListMenuTemplate.cursorShadowPal = 3;
+    gMultiuseListMenuTemplate.lettersSpacing = 1;
+    gMultiuseListMenuTemplate.itemVerticalPadding = 0;
+    gMultiuseListMenuTemplate.scrollMultiple = LIST_NO_MULTIPLE_SCROLL;
+    gMultiuseListMenuTemplate.fontId = 1;
+    gMultiuseListMenuTemplate.cursorKind = 0;
 }
 
 
@@ -876,109 +1033,30 @@ static void DebugTask_HandleMenuInput_Scripts(u8 taskId)
         Debug_ShowMainMenu();
     }
 }
+static void Debug_RedrawList(u8 taskId)
+{
+    u8 listTaskId = gTasks[taskId].data[0];
+    u16 scrollOffset, selectedRow;
+    ListMenuGetScrollAndRow(listTaskId, &scrollOffset, &selectedRow);
+
+    DestroyListMenuTask(gTasks[taskId].data[0], &scrollOffset, &selectedRow);
+    Debug_RefreshListMenu(taskId);
+    gTasks[taskId].data[0] = ListMenuInit(&gMultiuseListMenuTemplate, scrollOffset, selectedRow);
+    //ScheduleBgCopyTilemapToVram(0);
+}
 static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId)
 {
     void (*func)(u8);
-    u8 listTaskId = gTasks[taskId].data[0];
-    u32 input = ListMenu_ProcessInput(listTaskId);
-    u16 idx;
-    
-    ListMenuGetCurrentItemArrayId(listTaskId, &idx);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
 
-    // Create extra true/false window
-    if (gTasks[taskId].data[2] == 0)
-    {
-        u8 windowId;
-        
-        windowId = AddWindow(&sDebugMenuWindowTemplateFlagsVars);
-        DrawStdWindowFrame(windowId, FALSE);
-        CopyWindowToVram(windowId, 3);
-
-        gTasks[taskId].data[2] = windowId;
-    }
-
-    // Check current flag
-    switch (idx)
-    {
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKEDEX:
-            gTasks[taskId].data[3] = FlagGet(FLAG_SYS_POKEDEX_GET);
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_NATDEX:
-            gTasks[taskId].data[3] = IsNationalPokedexEnabled();
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKENAV:
-            gTasks[taskId].data[3] = FlagGet(FLAG_SYS_POKENAV_GET);
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RUN_SHOES:
-            gTasks[taskId].data[3] = FlagGet(FLAG_SYS_B_DASH);
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_LOCATIONS:
-            gTasks[taskId].data[3] = FlagGet(FLAG_VISITED_LITTLEROOT_TOWN) &&
-                FlagGet(FLAG_VISITED_OLDALE_TOWN) &&
-                FlagGet(FLAG_VISITED_DEWFORD_TOWN) &&
-                FlagGet(FLAG_VISITED_LAVARIDGE_TOWN) &&
-                FlagGet(FLAG_VISITED_FALLARBOR_TOWN) &&
-                FlagGet(FLAG_VISITED_VERDANTURF_TOWN) &&
-                FlagGet(FLAG_VISITED_PACIFIDLOG_TOWN) &&
-                FlagGet(FLAG_VISITED_PETALBURG_CITY) &&
-                FlagGet(FLAG_VISITED_SLATEPORT_CITY) &&
-                FlagGet(FLAG_VISITED_MAUVILLE_CITY) &&
-                FlagGet(FLAG_VISITED_RUSTBORO_CITY) &&
-                FlagGet(FLAG_VISITED_FORTREE_CITY) &&
-                FlagGet(FLAG_VISITED_LILYCOVE_CITY) &&
-                FlagGet(FLAG_VISITED_MOSSDEEP_CITY) &&
-                FlagGet(FLAG_VISITED_SOOTOPOLIS_CITY) &&
-                FlagGet(FLAG_VISITED_EVER_GRANDE_CITY) &&
-                FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) &&
-                FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER);
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BADGES_ALL:
-            gTasks[taskId].data[3] = FlagGet(FLAG_BADGE01_GET) &&
-                FlagGet(FLAG_BADGE02_GET) &&
-                FlagGet(FLAG_BADGE03_GET) &&
-                FlagGet(FLAG_BADGE04_GET) &&
-                FlagGet(FLAG_BADGE05_GET) &&
-                FlagGet(FLAG_BADGE06_GET) &&
-                FlagGet(FLAG_BADGE07_GET) &&
-                FlagGet(FLAG_BADGE08_GET);
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_FRONTIER_PASS:
-            gTasks[taskId].data[3] = FlagGet(FLAG_SYS_FRONTIER_PASS);
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_COLISSION:
-            gTasks[taskId].data[3] = FlagGet(FLAG_SYS_NO_COLLISION);
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_ENCOUNTER:
-            gTasks[taskId].data[3] = FlagGet(FLAG_SYS_NO_ENCOUNTER);
-            break; 
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_TRAINER_SEE:
-            gTasks[taskId].data[3] = FlagGet(FLAG_SYS_NO_TRAINER_SEE);
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BAG_USE:
-            gTasks[taskId].data[3] = FlagGet(FLAG_SYS_NO_BAG_USE);
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_CATCHING:
-            gTasks[taskId].data[3] = FlagGet(FLAG_SYS_NO_CATCHING);
-            break;
-        default:
-            gTasks[taskId].data[3] = 0xFF;
-            break;
-    }
-
-    if (gTasks[taskId].data[3] == 0xFF)
-        StringCopyAndFillWithSpaces(gStringVar4, sDebugText_Empty, 10);
-    else if (gTasks[taskId].data[3])
-        StringCopyAndFillWithSpaces(gStringVar4, sDebugText_Colored_True, 10);
-    else
-        StringCopyAndFillWithSpaces(gStringVar4, sDebugText_Colored_False, 10);
-    AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
-
-    // Other inputs
     if (gMain.newKeys & A_BUTTON)
-    {
+    {        
         PlaySE(SE_SELECT);
         if ((func = sDebugMenu_Actions_Flags[input]) != NULL)
+        {
             func(taskId);
+            Debug_RedrawList(taskId);
+        }
     }
     else if (gMain.newKeys & B_BUTTON)
     {
@@ -987,6 +1065,8 @@ static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId)
         
         ClearStdWindowAndFrame(gTasks[taskId].data[2], TRUE);
         RemoveWindow(gTasks[taskId].data[2]);
+
+        Free(sDebugMenuListData);
 
         Debug_ShowMainMenu();
     }
@@ -1061,7 +1141,7 @@ static void DebugAction_OpenScriptsMenu(u8 taskId)
 static void DebugAction_OpenFlagsVarsMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_FlagsVars, sDebugMenu_ListTemplate_FlagsVars);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_FlagsVars, gMultiuseListMenuTemplate);
 }
 static void DebugAction_OpenGiveMenu(u8 taskId)
 {
@@ -1533,6 +1613,8 @@ static void DebugAction_FlagsVars_Flags(u8 taskId)
 {
     u8 windowId;
 
+    Free(sDebugMenuListData);
+
     ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
 
@@ -1624,6 +1706,8 @@ static void DebugAction_FlagsVars_FlagsSelect(u8 taskId)
 static void DebugAction_FlagsVars_Vars(u8 taskId)
 {
     u8 windowId;
+
+    Free(sDebugMenuListData);
 
     ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
@@ -1806,6 +1890,7 @@ static void DebugAction_FlagsVars_PokedexFlags_All(u8 taskId)
         GetSetPokedexFlag(i + 1, FLAG_SET_SEEN);
     }
     Debug_DestroyMenu_Full(taskId);
+    Free(sDebugMenuListData);
     EnableBothScriptContexts();
 }
 static void DebugAction_FlagsVars_PokedexFlags_Reset(u8 taskId)
@@ -1842,6 +1927,7 @@ static void DebugAction_FlagsVars_PokedexFlags_Reset(u8 taskId)
         }
     }
     Debug_DestroyMenu_Full(taskId);
+    Free(sDebugMenuListData);
     EnableBothScriptContexts();
 }
 static void DebugAction_FlagsVars_SwitchDex(u8 taskId)
