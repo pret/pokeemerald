@@ -256,6 +256,8 @@ struct DebugBattleData
 static EWRAM_DATA struct DebugMonData *sDebugMonData = NULL;
 static EWRAM_DATA struct DebugMenuListData *sDebugMenuListData = NULL;
 static EWRAM_DATA struct DebugBattleData *sDebugBattleData = NULL;
+EWRAM_DATA bool8 gIsDebugBattle = FALSE;
+EWRAM_DATA u32 gDebugAIFlags = 0;
 
 // *******************************
 // Define functions
@@ -335,8 +337,7 @@ static void DebugAction_FlagsVars_TrainerSeeOnOff(u8 taskId);
 static void DebugAction_FlagsVars_BagUseOnOff(u8 taskId);
 static void DebugAction_FlagsVars_CatchingOnOff(u8 taskId);
 
-static void DebugAction_OpenBattleAIMenu(u8 taskId);
-static void DebugAction_OpenBattleTerrainMenu(u8 taskId);
+static void Debug_InitializeBattle(u8 taskId);
 
 static void DebugAction_Give_Item(u8 taskId);
 static void DebugAction_Give_Item_SelectId(u8 taskId);
@@ -1389,7 +1390,8 @@ static void DebugTask_HandleMenuInput_Battle(u8 taskId)
             Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, gMultiuseListMenuTemplate);
             break;
         case 3: // Enemy pokemon
-
+            if (idx == 6)
+                Debug_InitializeBattle(taskId);
             break;
         }
     }
@@ -1421,6 +1423,52 @@ static void DebugTask_HandleMenuInput_Battle(u8 taskId)
             break;
         }
     }
+}
+
+static void Debug_InitializeBattle(u8 taskId)
+{
+    u32 i;
+    gBattleTypeFlags = 0;
+
+    // Set main battle flags
+    switch (sDebugBattleData->battleType)
+    {
+    case DEBUG_BATTLE_0_MENU_ITEM_WILD:
+        break;
+    case DEBUG_BATTLE_0_MENU_ITEM_SINGLE:
+        gBattleTypeFlags = (BATTLE_TYPE_TRAINER);
+        break;
+    case DEBUG_BATTLE_0_MENU_ITEM_DOUBLE:
+        gBattleTypeFlags = (BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TRAINER);
+        break;
+    case DEBUG_BATTLE_0_MENU_ITEM_MULTI:
+        gBattleTypeFlags = (BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TRAINER | BATTLE_TYPE_INGAME_PARTNER);
+        break;
+    }
+    
+    // Set terrain
+    gBattleTerrain = sDebugBattleData->battleTerrain;
+
+    // Populate enemy party
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        ZeroMonData(&gEnemyParty[i]);
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES))
+            gEnemyParty[i] = gPlayerParty[i];
+    }
+
+    // Set AI flags
+    for (i = 0; i < ARRAY_COUNT(sDebugBattleData->aiFlags); i++)
+    {
+        if (sDebugBattleData->aiFlags[i])
+            gDebugAIFlags |= (1 << i);
+    }
+
+    gIsDebugBattle = TRUE;
+    BattleSetup_StartTrainerBattle_Debug();
+
+
+    Debug_DestroyMenu_Full(taskId);
 }
 
 static void DebugTask_HandleMenuInput_Give(u8 taskId)

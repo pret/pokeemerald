@@ -656,7 +656,13 @@ static void CB2_InitBattleInternal(void)
     gBattle_BG3_X = 0;
     gBattle_BG3_Y = 0;
 
+#if TX_DEBUG_SYSTEM_ENABLE == FALSE 
+    
     gBattleTerrain = BattleSetup_GetTerrainId();
+#else
+    if (!gIsDebugBattle)
+        gBattleTerrain = BattleSetup_GetTerrainId();
+#endif
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         gBattleTerrain = BATTLE_TERRAIN_BUILDING;
 
@@ -679,6 +685,7 @@ static void CB2_InitBattleInternal(void)
     else
         SetMainCallback2(CB2_HandleStartBattle);
 
+#if TX_DEBUG_SYSTEM_ENABLE == FALSE 
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED)))
     {
         CreateNPCTrainerParty(&gEnemyParty[0], gTrainerBattleOpponent_A, TRUE);
@@ -686,6 +693,18 @@ static void CB2_InitBattleInternal(void)
             CreateNPCTrainerParty(&gEnemyParty[PARTY_SIZE / 2], gTrainerBattleOpponent_B, FALSE);
         SetWildMonHeldItem();
     }
+#else
+    if (!gIsDebugBattle)
+    {
+        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED)))
+        {
+            CreateNPCTrainerParty(&gEnemyParty[0], gTrainerBattleOpponent_A, TRUE);
+            if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+                CreateNPCTrainerParty(&gEnemyParty[PARTY_SIZE / 2], gTrainerBattleOpponent_B, FALSE);
+            SetWildMonHeldItem();
+        }
+    }
+#endif
 
     gMain.inBattle = TRUE;
     gSaveBlock2Ptr->frontier.disableRecordBattle = FALSE;

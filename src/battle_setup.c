@@ -1378,11 +1378,6 @@ void BattleSetup_StartTrainerBattle(void)
 
 void BattleSetup_StartTrainerBattle_Debug(void)
 {
-    u8 i;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-        ZeroMonData(&gEnemyParty[i]);
-
     sNoOfPossibleTrainerRetScripts = gNoOfApproachingTrainers;
     gNoOfApproachingTrainers = 0;
     sShouldCheckTrainerBScript = FALSE;
