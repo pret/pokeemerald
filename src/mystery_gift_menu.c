@@ -640,8 +640,8 @@ static u32 MysteryGift_HandleThreeOptionMenu(u8 * unused0, u16 * unused1, u8 whi
         width++;
 
     windowTemplate.width = width;
-    if (width < 30)
-        windowTemplate.tilemapLeft = (30 - width) / 2;
+    if (width < DISPLAY_TILE_WIDTH)
+        windowTemplate.tilemapLeft = (DISPLAY_TILE_WIDTH - width) / 2;
     else
         windowTemplate.tilemapLeft = 0;
 
