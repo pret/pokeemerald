@@ -1927,7 +1927,7 @@ static void Task_SendMysteryGift(u8 taskId)
         data->state = 3;
         break;
     case 3:
-        AddTextPrinterToWindow1(gStringVar4);
+        MG_AddMessageTextPrinter(gStringVar4);
         data->state = 4;
         break;
     case 4:
@@ -2001,7 +2001,7 @@ static void Task_SendMysteryGift(u8 taskId)
         }
         break;
     case 9:
-        AddTextPrinterToWindow1(gStringVar4);
+        MG_AddMessageTextPrinter(gStringVar4);
         data->state = 10;
         break;
     case 10:
@@ -2104,7 +2104,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
         data->state = 1;
         break;
     case 1:
-        AddTextPrinterToWindow1(sText_ChooseTrainer);
+        MG_AddMessageTextPrinter(sText_ChooseTrainer);
         data->state = 2;
         break;
     case 2:
@@ -2177,7 +2177,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
         }
         break;
     case 4:
-        AddTextPrinterToWindow1(sText_AwaitingPlayersResponse);
+        MG_AddMessageTextPrinter(sText_AwaitingPlayersResponse);
         CopyAndTranslatePlayerName(gStringVar1, &data->playerList->players[data->leaderId]);
         data->state = 5;
         break;
@@ -2196,7 +2196,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
             data->state = 8;
             break;
         case RFU_STATUS_JOIN_GROUP_OK:
-            AddTextPrinterToWindow1(sText_PlayerSentBackOK);
+            MG_AddMessageTextPrinter(sText_PlayerSentBackOK);
             RfuSetStatus(RFU_STATUS_OK, 0);
             break;
         }
@@ -2224,7 +2224,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
         break;
     case 7:
         DestroyWirelessStatusIndicatorSprite();
-        AddTextPrinterToWindow1(sText_PleaseStartOver);
+        MG_AddMessageTextPrinter(sText_PleaseStartOver);
         DestroyTask(taskId);
         LinkRfu_Shutdown();
         gSpecialVar_Result = LINKUP_FAILED;
@@ -2273,7 +2273,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         data->state = 1;
         break;
     case 1:
-        AddTextPrinterToWindow1(sText_SearchingForWirelessSystemWait);
+        MG_AddMessageTextPrinter(sText_SearchingForWirelessSystemWait);
         data->state = 2;
         break;
     case 2:
@@ -2342,7 +2342,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         }
         break;
     case 4:
-        AddTextPrinterToWindow1(sText_AwaitingResponseFromWirelessSystem);
+        MG_AddMessageTextPrinter(sText_AwaitingResponseFromWirelessSystem);
         CopyAndTranslatePlayerName(gStringVar1, &data->playerList->players[data->leaderId]);
         data->state = 5;
         break;
@@ -2361,7 +2361,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
             data->state = 8;
             break;
         case RFU_STATUS_JOIN_GROUP_OK:
-            AddTextPrinterToWindow1(sText_WirelessLinkEstablished);
+            MG_AddMessageTextPrinter(sText_WirelessLinkEstablished);
             RfuSetStatus(RFU_STATUS_OK, 0);
             break;
         }
