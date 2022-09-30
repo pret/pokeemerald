@@ -73,9 +73,33 @@ struct TourneyTreeLineSection
 #define tMode               data[2]
 #define tPrevTaskId         data[3]
 
-#define EFFECTIVENESS_MODE_GOOD     0
-#define EFFECTIVENESS_MODE_BAD      1
-#define EFFECTIVENESS_MODE_AI_VS_AI 2
+enum {
+    EFFECTIVENESS_MODE_GOOD,
+    EFFECTIVENESS_MODE_BAD,
+    EFFECTIVENESS_MODE_AI_VS_AI,
+};
+
+// Window IDs for the tourney tree
+enum {
+    TOURNEYWIN_NAMES_LEFT,
+    TOURNEYWIN_NAMES_RIGHT,
+    TOURNEYWIN_TITLE,
+};
+
+// Window IDs for the trainer (WIN_TRAINER_*) and match (WIN_MATCH_*) info cards.
+// All 9 have a duplicate window at WIN + NUM_INFO_CARD_WINDOWS used by the alternate info card
+enum {
+    WIN_TRAINER_NAME,
+    WIN_TRAINER_MON1_NAME,
+    WIN_TRAINER_MON2_NAME, // Used implicitly
+    WIN_TRAINER_MON3_NAME, // Used implicitly
+    WIN_TRAINER_FLAVOR_TEXT = WIN_TRAINER_MON1_NAME + FRONTIER_PARTY_SIZE, // Trainer's potential, battle style, and stat texts
+    WIN_MATCH_NUMBER,
+    WIN_MATCH_TRAINER_NAME_LEFT,
+    WIN_MATCH_TRAINER_NAME_RIGHT,
+    WIN_MATCH_WIN_TEXT,
+    NUM_INFO_CARD_WINDOWS
+};
 
 static u8 GetDomeTrainerMonIvs(u16);
 static void SwapDomeTrainers(int, int, u16 *);
@@ -670,7 +694,7 @@ static const struct BgTemplate sInfoCardBgTemplates[4] =
 
 static const struct WindowTemplate sTourneyTreeWindowTemplates[] =
 {
-    {
+    [TOURNEYWIN_NAMES_LEFT] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 3,
@@ -679,7 +703,7 @@ static const struct WindowTemplate sTourneyTreeWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 16,
     },
-    {
+    [TOURNEYWIN_NAMES_RIGHT] = {
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 3,
@@ -688,7 +712,7 @@ static const struct WindowTemplate sTourneyTreeWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 144,
     },
-    {
+    [TOURNEYWIN_TITLE] = {
         .bg = 0,
         .tilemapLeft = 8,
         .tilemapTop = 1,
@@ -702,7 +726,7 @@ static const struct WindowTemplate sTourneyTreeWindowTemplates[] =
 
 static const struct WindowTemplate sInfoCardWindowTemplates[] =
 {
-    {
+    [WIN_TRAINER_NAME] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 2,
@@ -711,7 +735,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 1,
     },
-    {
+    [WIN_TRAINER_MON1_NAME] = {
         .bg = 0,
         .tilemapLeft = 16,
         .tilemapTop = 5,
@@ -720,7 +744,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 53,
     },
-    {
+    [WIN_TRAINER_MON2_NAME] = {
         .bg = 0,
         .tilemapLeft = 19,
         .tilemapTop = 7,
@@ -729,7 +753,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 69,
     },
-    {
+    [WIN_TRAINER_MON3_NAME] = {
         .bg = 0,
         .tilemapLeft = 16,
         .tilemapTop = 10,
@@ -738,7 +762,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 96,
     },
-    {
+    [WIN_TRAINER_FLAVOR_TEXT] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 12,
@@ -747,7 +771,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 112,
     },
-    {
+    [WIN_MATCH_NUMBER] = {
         .bg = 0,
         .tilemapLeft = 5,
         .tilemapTop = 2,
@@ -756,7 +780,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 294,
     },
-    {
+    [WIN_MATCH_TRAINER_NAME_LEFT] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 5,
@@ -765,7 +789,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 340,
     },
-    {
+    [WIN_MATCH_TRAINER_NAME_RIGHT] = {
         .bg = 0,
         .tilemapLeft = 20,
         .tilemapTop = 5,
@@ -774,7 +798,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 356,
     },
-    {
+    [WIN_MATCH_WIN_TEXT] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 16,
@@ -783,7 +807,9 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 372,
     },
-    {
+    // Duplicate windows used by the alternate info card
+    // Same as above but on bg 1 instead of bg 0
+    [WIN_TRAINER_NAME + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 2,
@@ -792,7 +818,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 1,
     },
-    {
+    [WIN_TRAINER_MON1_NAME + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 16,
         .tilemapTop = 5,
@@ -801,7 +827,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 53,
     },
-    {
+    [WIN_TRAINER_MON2_NAME + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 19,
         .tilemapTop = 7,
@@ -810,7 +836,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 69,
     },
-    {
+    [WIN_TRAINER_MON3_NAME + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 16,
         .tilemapTop = 10,
@@ -819,7 +845,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 96,
     },
-    {
+    [WIN_TRAINER_FLAVOR_TEXT + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 12,
@@ -828,7 +854,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 112,
     },
-    {
+    [WIN_MATCH_NUMBER + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 5,
         .tilemapTop = 2,
@@ -837,7 +863,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 294,
     },
-    {
+    [WIN_MATCH_TRAINER_NAME_LEFT + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 5,
@@ -846,7 +872,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 340,
     },
-    {
+    [WIN_MATCH_TRAINER_NAME_RIGHT + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 20,
         .tilemapTop = 5,
@@ -855,7 +881,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 356,
     },
-    {
+    [WIN_MATCH_WIN_TEXT + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 16,
@@ -1397,26 +1423,27 @@ static const u8 sCompetitorRangeByMatch[DOME_TOURNAMENT_MATCHES_COUNT][3] =
     { NUM_POSSIBLE_MATCH_TRAINERS(DOME_FINAL) * 0,     NUM_POSSIBLE_MATCH_TRAINERS(DOME_FINAL),     DOME_FINAL},
 };
 
-// 1st value is the windowId (0 for left column, 1 for right column)
-// 2nd value is the y coord
+#define NAME_ROW_HEIGHT 16
+
+// 1st value is the windowId, 2nd value is the y coord
 static const u8 sTrainerNamePositions[DOME_TOURNAMENT_TRAINERS_COUNT][2] =
 {
-    { 0,   0},
-    { 1, 112},
-    { 1,   0},
-    { 0, 112},
-    { 0,  48},
-    { 1,  64},
-    { 1,  48},
-    { 0,  64},
-    { 0,  16},
-    { 1,  96},
-    { 1,  16},
-    { 0,  96},
-    { 0,  32},
-    { 1,  80},
-    { 1,  32},
-    { 0,  80},
+    { TOURNEYWIN_NAMES_LEFT,  0 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_RIGHT, 7 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_RIGHT, 0 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_LEFT,  7 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_LEFT,  3 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_RIGHT, 4 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_RIGHT, 3 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_LEFT,  4 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_LEFT,  1 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_RIGHT, 6 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_RIGHT, 1 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_LEFT,  6 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_LEFT,  2 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_RIGHT, 5 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_RIGHT, 2 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_LEFT,  5 * NAME_ROW_HEIGHT},
 };
 
 // Coords for the pokeballs on the tourney tree that act as buttons to view trainer/match info
@@ -2427,7 +2454,7 @@ static void InitDomeTrainers(void)
                 break;
         }
 
-        if (sTrainerNamePositions[i][0] != 0)
+        if (sTrainerNamePositions[i][0] != TOURNEYWIN_NAMES_LEFT)
         {
             j = 0;
             DOME_TRAINERS[j].trainerId = TRAINER_FRONTIER_BRAIN;
@@ -3437,11 +3464,11 @@ static void Task_HandleInfoCardInput(u8 taskId)
         case MATCHCARD_INPUT_UP ... MATCHCARD_INPUT_RIGHT:
             gTasks[taskId].data[5] = i;
             if (gTasks[taskId].tUsingAlternateSlot)
-                windowId = 9;
+                windowId = NUM_INFO_CARD_WINDOWS;
             else
                 windowId = 0;
 
-            for (i = windowId; i < windowId + 9; i++)
+            for (i = windowId; i < windowId + NUM_INFO_CARD_WINDOWS; i++)
             {
                 CopyWindowToVram(i, COPYWIN_GFX);
                 FillWindowPixelBuffer(i, PIXEL_FILL(0));
@@ -4263,14 +4290,14 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     int trainerId = 0;
     u8 nature = 0;
     int arrId = 0;
-    int windowId = 0;
+    int windowId = WIN_TRAINER_NAME;
     int x = 0, y = 0;
     u8 palSlot = 0;
     s16 *allocatedArray = AllocZeroed(sizeof(s16) * ALLOC_ARRAY_SIZE);
     trainerId = DOME_TRAINERS[trainerTourneyId].trainerId;
 
     if (flags & CARD_ALTERNATE_SLOT)
-        arrId = 2 * (FRONTIER_PARTY_SIZE + 1), windowId = 9, palSlot = 2;
+        arrId = 2 * (FRONTIER_PARTY_SIZE + 1), windowId = WIN_TRAINER_NAME + NUM_INFO_CARD_WINDOWS, palSlot = 2;
     if (flags & MOVE_CARD_RIGHT)
         x = DISPLAY_WIDTH + 16;
     if (flags & MOVE_CARD_DOWN)
@@ -4388,19 +4415,19 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
         else
             textPrinter.currentChar = gSpeciesNames[gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].species];
 
-        textPrinter.windowId = 1 + i + windowId;
+        textPrinter.windowId = WIN_TRAINER_MON1_NAME + i + windowId;
         if (i == 1)
             textPrinter.currentX = 7;
         else
             textPrinter.currentX = 0;
 
-        PutWindowTilemap(1 + i + windowId);
-        CopyWindowToVram(1 + i + windowId, COPYWIN_FULL);
+        PutWindowTilemap(WIN_TRAINER_MON1_NAME + i + windowId);
+        CopyWindowToVram(WIN_TRAINER_MON1_NAME + i + windowId, COPYWIN_FULL);
         AddTextPrinter(&textPrinter, 0, NULL);
     }
 
-    PutWindowTilemap(windowId + 4);
-    CopyWindowToVram(windowId + 4, COPYWIN_FULL);
+    PutWindowTilemap(windowId + WIN_TRAINER_FLAVOR_TEXT);
+    CopyWindowToVram(windowId + WIN_TRAINER_FLAVOR_TEXT, COPYWIN_FULL);
 
     // Print text about trainers potential in the tourney
     if (trainerId == TRAINER_FRONTIER_BRAIN)
@@ -4409,7 +4436,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
         textPrinter.currentChar = sBattleDomePotentialTexts[trainerTourneyId];
 
     textPrinter.fontId = FONT_NORMAL;
-    textPrinter.windowId = windowId + 4;
+    textPrinter.windowId = windowId + WIN_TRAINER_FLAVOR_TEXT;
     textPrinter.currentX = 0;
     textPrinter.y = 4;
     textPrinter.currentY = 4;
@@ -4731,7 +4758,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     u8 palSlot = 0;
 
     if (flags & CARD_ALTERNATE_SLOT)
-        arrId = 2 * (FRONTIER_PARTY_SIZE + 1), windowId = 9, palSlot = 2;
+        arrId = 2 * (FRONTIER_PARTY_SIZE + 1), windowId = NUM_INFO_CARD_WINDOWS, palSlot = 2;
     if (flags & MOVE_CARD_RIGHT)
         x = DISPLAY_WIDTH + 16;
     if (flags & MOVE_CARD_DOWN)
@@ -4873,10 +4900,10 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
     StringExpandPlaceholders(gStringVar4, sBattleDomeWinTexts[winStringId]);
     textPrinter.currentChar = gStringVar4;
-    textPrinter.windowId = windowId + 8;
+    textPrinter.windowId = windowId + WIN_MATCH_WIN_TEXT;
     textPrinter.fontId = FONT_NORMAL;
-    PutWindowTilemap(windowId + 8);
-    CopyWindowToVram(windowId + 8, COPYWIN_FULL);
+    PutWindowTilemap(windowId + WIN_MATCH_WIN_TEXT);
+    CopyWindowToVram(windowId + WIN_MATCH_WIN_TEXT, COPYWIN_FULL);
     textPrinter.currentX = 0;
     textPrinter.currentY = textPrinter.y = 0;
     AddTextPrinter(&textPrinter, 0, NULL);
@@ -4892,11 +4919,11 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     textPrinter.fontId = FONT_SHORT;
     textPrinter.letterSpacing = 2;
     textPrinter.currentChar = gStringVar1;
-    textPrinter.windowId = windowId + 6;
+    textPrinter.windowId = windowId + WIN_MATCH_TRAINER_NAME_LEFT;
     textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0x40, textPrinter.letterSpacing);
     textPrinter.currentY = textPrinter.y = 2;
-    PutWindowTilemap(windowId + 6);
-    CopyWindowToVram(windowId + 6, COPYWIN_FULL);
+    PutWindowTilemap(windowId + WIN_MATCH_TRAINER_NAME_LEFT);
+    CopyWindowToVram(windowId + WIN_MATCH_TRAINER_NAME_LEFT, COPYWIN_FULL);
     AddTextPrinter(&textPrinter, 0, NULL);
 
     // Print right trainer's name.
@@ -4908,21 +4935,21 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         CopyDomeTrainerName(gStringVar1, trainerIds[1]);
 
     textPrinter.currentChar = gStringVar1;
-    textPrinter.windowId = windowId + 7;
+    textPrinter.windowId = windowId + WIN_MATCH_TRAINER_NAME_RIGHT;
     textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0x40, textPrinter.letterSpacing);
     textPrinter.currentY = textPrinter.y = 2;
-    PutWindowTilemap(windowId + 7);
-    CopyWindowToVram(windowId + 7, COPYWIN_FULL);
+    PutWindowTilemap(windowId + WIN_MATCH_TRAINER_NAME_RIGHT);
+    CopyWindowToVram(windowId + WIN_MATCH_TRAINER_NAME_RIGHT, COPYWIN_FULL);
     AddTextPrinter(&textPrinter, 0, NULL);
 
     // Print match number.
     textPrinter.letterSpacing = 0;
     textPrinter.currentChar = sBattleDomeMatchNumberTexts[matchNo];
-    textPrinter.windowId = windowId + 5;
+    textPrinter.windowId = windowId + WIN_MATCH_NUMBER;
     textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0xA0, textPrinter.letterSpacing);
     textPrinter.currentY = textPrinter.y = 2;
-    PutWindowTilemap(windowId + 5);
-    CopyWindowToVram(windowId + 5, COPYWIN_FULL);
+    PutWindowTilemap(windowId + WIN_MATCH_NUMBER);
+    CopyWindowToVram(windowId + WIN_MATCH_NUMBER, COPYWIN_FULL);
     AddTextPrinter(&textPrinter, 0, NULL);
 }
 
@@ -5356,7 +5383,7 @@ static void Task_ShowTourneyTree(u8 taskId)
     case 4:
         textPrinter.fontId = FONT_SHORT;
         textPrinter.currentChar = gText_BattleTourney;
-        textPrinter.windowId = 2;
+        textPrinter.windowId = TOURNEYWIN_TITLE;
         textPrinter.x = 0;
         textPrinter.y = 0;
         textPrinter.letterSpacing = 2;
@@ -5442,7 +5469,7 @@ static void Task_ShowTourneyTree(u8 taskId)
                 }
             }
 
-            if (sTrainerNamePositions[i][0] == 0)
+            if (sTrainerNamePositions[i][0] == TOURNEYWIN_NAMES_LEFT)
                 textPrinter.currentX = GetStringWidthDifference(textPrinter.fontId, gDisplayedStringBattle, 0x3D, textPrinter.letterSpacing);
             else
                 textPrinter.currentX = 3;
@@ -5454,12 +5481,12 @@ static void Task_ShowTourneyTree(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 5:
-        PutWindowTilemap(0);
-        PutWindowTilemap(1);
-        PutWindowTilemap(2);
-        CopyWindowToVram(0, COPYWIN_FULL);
-        CopyWindowToVram(1, COPYWIN_FULL);
-        CopyWindowToVram(2, COPYWIN_FULL);
+        PutWindowTilemap(TOURNEYWIN_NAMES_LEFT);
+        PutWindowTilemap(TOURNEYWIN_NAMES_RIGHT);
+        PutWindowTilemap(TOURNEYWIN_TITLE);
+        CopyWindowToVram(TOURNEYWIN_NAMES_LEFT, COPYWIN_FULL);
+        CopyWindowToVram(TOURNEYWIN_NAMES_RIGHT, COPYWIN_FULL);
+        CopyWindowToVram(TOURNEYWIN_TITLE, COPYWIN_FULL);
         SetHBlankCallback(HblankCb_TourneyTree);
         SetVBlankCallback(VblankCb_TourneyTree);
         if (r4 == 2)
@@ -5556,7 +5583,7 @@ static void Task_HandleStaticTourneyTreeInput(u8 taskId)
                 if (DOME_TRAINERS[i].eliminatedAt == gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1
                     && DOME_TRAINERS[i].isEliminated)
                 {
-                    if (sTrainerNamePositions[i][0] == 0)
+                    if (sTrainerNamePositions[i][0] == TOURNEYWIN_NAMES_LEFT)
                         textPrinter.currentX = GetStringWidthDifference(textPrinter.fontId, gDisplayedStringBattle, 0x3D, textPrinter.letterSpacing);
                     else
                         textPrinter.currentX = 3;
