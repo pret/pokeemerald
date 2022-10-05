@@ -1,0 +1,57 @@
+{{ doNotModifyHeader }}
+const u8 gItemDescription_ITEM_NONE[] = _("?????");
+## for item in items
+## if item.itemId != "ITEM_NONE"
+const u8 gItemDescription_{{ item.itemId }}[] = _("{{ item.description_english }}");
+##endif
+## endfor
+
+const struct Item gItems[] =
+{
+## for item in items
+    [{{ item.tableId }}] =
+    {
+## if existsIn(item, "name_english")
+        .name = _("{{ item.name_english }}"),
+## endif
+## if existsIn(item, "itemId")
+        .itemId = {{ item.itemId }},
+## endif
+## if existsIn(item, "price")
+        .price = {{ item.price }},
+## endif
+## if existsIn(item, "holdEffect")
+        .holdEffect = {{ item.holdEffect }},
+## endif
+## if existsIn(item, "holdEffectParam")
+        .holdEffectParam = {{ item.holdEffectParam }},
+## endif
+        .description = gItemDescription_{{ item.itemId }},
+## if existsIn(item, "importance")
+        .importance = {{ item.importance }},
+## endif
+## if existsIn(item, "registrability")
+        .registrability = {{ item.registrability }},
+## endif
+## if existsIn(item, "pocket")
+        .pocket = {{ item.pocket }},
+## endif
+## if existsIn(item, "type")
+        .type = {{ item.type }},
+## endif
+## if existsIn(item, "fieldUseFunc")
+        .fieldUseFunc = {{ item.fieldUseFunc }},
+## endif
+## if existsIn(item, "battleUsage")
+        .battleUsage = {{ item.battleUsage }},
+## endif
+## if existsIn(item, "battleUseFunc")
+        .battleUseFunc = {{ item.battleUseFunc }},
+## endif
+## if existsIn(item, "secondaryId")
+        .secondaryId = {{ item.secondaryId }},
+## endif
+    },
+
+## endfor
+};
