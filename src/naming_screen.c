@@ -2280,7 +2280,7 @@ static const struct Subsprite sSubsprites_PageSwapText[] =
 /*
 [0_____][] <-1   40x24
 [2_____][] <-3
-[3___+_][] <-5/Origin
+[4___+_][] <-5/Origin
 */
 static const struct Subsprite sSubsprites_Button[] =
 {
