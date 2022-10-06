@@ -351,7 +351,7 @@ static void InitTradeMenu(void)
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
         }
 
-        FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 15);
+        FillBgTilemapBufferRect(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT, 15);
         LoadUserWindowBorderGfx_(0, 20, 0xC0);
         LoadUserWindowBorderGfx(2, 1, 0xE0);
         LoadMonIconPalettes();
@@ -2064,13 +2064,13 @@ static void RedrawTradeMenuParty(u8 whichParty)
 
 static void Task_DrawSelectionSummary(u8 taskId)
 {
-    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
     CopyBgTilemapBufferToVram(0);
 }
 
 static void Task_DrawSelectionTrade(u8 taskId)
 {
-    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
     CopyBgTilemapBufferToVram(0);
 }
 
