@@ -19,6 +19,7 @@
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/pokemon.h"
+#include "battle_util.h"
 
 // function declarations
 static void SpriteCB_SpriteToCentreOfSide(struct Sprite *sprite);
@@ -7856,8 +7857,8 @@ static void SpriteCB_TwinkleOnBattler(struct Sprite *sprite)
 
 void AnimTask_PrimalReversion(u8 taskId)
 {
-    if (ItemId_GetId(gBattleMons[gBattleAnimAttacker].item) == ITEM_RED_ORB)
-        gBattleAnimArgs[0] = ItemId_GetId(gBattleMons[gBattleAnimAttacker].item);
+    if (gBattleMons[gBattleAnimAttacker].item == ITEM_RED_ORB)
+        gBattleAnimArgs[0] = gBattleMons[gBattleAnimAttacker].item;
     else
         gBattleAnimArgs[0] = 0;
     DestroyAnimVisualTask(taskId);
@@ -7899,6 +7900,6 @@ void AnimTask_AffectionHangedOn(u8 taskId)
     int side = GetBattlerSide(gBattleAnimTarget);
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
 
-    gBattleAnimArgs[0] = GetMonFriendshipScore(&party[gBattlerPartyIndexes[gBattleAnimTarget]]);
+    gBattleAnimArgs[0] = GetBattlerFriendshipScore(gBattleAnimTarget);
     DestroyAnimVisualTask(taskId);
 }

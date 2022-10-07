@@ -351,7 +351,7 @@ static void InitTradeMenu(void)
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
         }
 
-        FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 15);
+        FillBgTilemapBufferRect(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT, 15);
         LoadUserWindowBorderGfx_(0, 20, 0xC0);
         LoadUserWindowBorderGfx(2, 1, 0xE0);
         LoadMonIconPalettes();
@@ -1504,6 +1504,10 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 player
             return PARTNER_MON_INVALID;
     }
 
+    // Can't trade specific species
+    if (gBaseStats[partnerSpecies].flags & SPECIES_FLAG_CANNOT_BE_TRADED)
+        return PARTNER_MON_INVALID;
+
     // Partner cant trade Egg or non-Hoenn mon if player doesn't have National Dex
     if (!IsNationalPokedexEnabled())
     {
@@ -2060,13 +2064,13 @@ static void RedrawTradeMenuParty(u8 whichParty)
 
 static void Task_DrawSelectionSummary(u8 taskId)
 {
-    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
     CopyBgTilemapBufferToVram(0);
 }
 
 static void Task_DrawSelectionTrade(u8 taskId)
 {
-    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
     CopyBgTilemapBufferToVram(0);
 }
 
@@ -2360,6 +2364,10 @@ static u32 CanTradeSelectedMon(struct Pokemon *playerParty, int partyCount, int 
             return CANT_TRADE_INVALID_MON;
     }
 
+    // Can't trade specific species
+    if (gBaseStats[species[monIdx]].flags & SPECIES_FLAG_CANNOT_BE_TRADED)
+        return CANT_TRADE_INVALID_MON;
+
     // Make Eggs not count for numMonsLeft
     for (i = 0; i < partyCount; i++)
     {
@@ -2450,7 +2458,11 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
 
     // Cannot trade illegitimate Deoxys/Mew
     if (IsDeoxysOrMewUntradable(playerSpecies, isEventLegal))
-        return UR_TRADE_MSG_MON_CANT_BE_TRADED_2;
+        return UR_TRADE_MSG_MON_CANT_BE_TRADED;
+
+    // Can't trade specific species
+    if (gBaseStats[playerSpecies].flags & SPECIES_FLAG_CANNOT_BE_TRADED)
+        return UR_TRADE_MSG_MON_CANT_BE_TRADED;
 
     if (partnerSpecies == SPECIES_EGG)
     {
@@ -2469,7 +2481,7 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
     // If the player is trading an Egg then the partner must also be trading an Egg
     // Odd that this wasn't checked earlier, as by this point we know either the partner doesn't have an Egg or that both do.
     if (playerSpecies2 == SPECIES_EGG && playerSpecies2 != partnerSpecies)
-        return UR_TRADE_MSG_MON_CANT_BE_TRADED_1;
+        return UR_TRADE_MSG_MON_CANT_BE_TRADED_NOW;
 
     // If the player doesn't have the National Dex then Eggs and non-Hoenn Pokémon can't be traded
     if (!playerHasNationalDex)
@@ -2478,7 +2490,7 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
             return UR_TRADE_MSG_EGG_CANT_BE_TRADED;
 
         if (!IsSpeciesInHoennDex(playerSpecies2))
-            return UR_TRADE_MSG_MON_CANT_BE_TRADED_2;
+            return UR_TRADE_MSG_MON_CANT_BE_TRADED_NOW;
 
         if (!IsSpeciesInHoennDex(partnerSpecies))
             return UR_TRADE_MSG_PARTNERS_MON_CANT_BE_TRADED;
@@ -2497,6 +2509,10 @@ int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 sp
     bool8 hasNationalDex = player.hasNationalDex;
 
     if (IsDeoxysOrMewUntradable(species, isEventLegal))
+        return CANT_REGISTER_MON_NOW;
+
+    // Can't trade specific species
+    if (gBaseStats[species].flags & SPECIES_FLAG_CANNOT_BE_TRADED)
         return CANT_REGISTER_MON;
 
     if (hasNationalDex)
@@ -2509,7 +2525,7 @@ int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 sp
     if (IsSpeciesInHoennDex(species2))
         return CAN_REGISTER_MON;
 
-    return CANT_REGISTER_MON;
+    return CANT_REGISTER_MON_NOW;
 }
 
 // Spin Trade wasnt fully implemented, but this checks if a mon would be valid to Spin Trade

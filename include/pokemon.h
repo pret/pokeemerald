@@ -324,7 +324,7 @@ struct BaseStats
             u8 safariZoneFleeRate;
             u8 bodyColor : 7;
             u8 noFlip : 1;
-            u8 flags;
+            u16 flags;
 };
 
 #include "constants/battle_config.h"
@@ -565,5 +565,6 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg
 u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove);
 bool32 ShouldShowFemaleDifferences(u16 species, u32 personality);
 void TryToSetBattleFormChangeMoves(struct Pokemon *mon);
+u32 GetMonFriendshipScore(struct Pokemon *pokemon);
 
 #endif // GUARD_POKEMON_H

@@ -440,13 +440,13 @@ s32 ListMenu_ProcessInput(u8 listTaskId)
             break;
         case LIST_MULTIPLE_SCROLL_DPAD:
             // note: JOY_REPEAT won't match here
-            leftButton = gMain.newAndRepeatedKeys & DPAD_LEFT;
-            rightButton = gMain.newAndRepeatedKeys & DPAD_RIGHT;
+            leftButton = JOY_REPEAT(DPAD_LEFT);
+            rightButton = JOY_REPEAT(DPAD_RIGHT);
             break;
         case LIST_MULTIPLE_SCROLL_L_R:
             // same as above
-            leftButton = gMain.newAndRepeatedKeys & L_BUTTON;
-            rightButton = gMain.newAndRepeatedKeys & R_BUTTON;
+            leftButton = JOY_REPEAT(L_BUTTON);
+            rightButton = JOY_REPEAT(R_BUTTON);
             break;
         }
 

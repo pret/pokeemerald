@@ -499,6 +499,7 @@ void RecordKnownMove(u8 battlerId, u32 move)
         if (BATTLE_HISTORY->usedMoves[battlerId][i] == MOVE_NONE)
         {
             BATTLE_HISTORY->usedMoves[battlerId][i] = move;
+            AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].moves[i] = move;
             break;
         }
     }
@@ -507,6 +508,7 @@ void RecordKnownMove(u8 battlerId, u32 move)
 void RecordAbilityBattle(u8 battlerId, u16 abilityId)
 {
     BATTLE_HISTORY->abilities[battlerId] = abilityId;
+    AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].ability = abilityId;
 }
 
 void ClearBattlerAbilityHistory(u8 battlerId)
@@ -517,6 +519,7 @@ void ClearBattlerAbilityHistory(u8 battlerId)
 void RecordItemEffectBattle(u8 battlerId, u8 itemEffect)
 {
     BATTLE_HISTORY->itemEffects[battlerId] = itemEffect;
+    AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].heldEffect = itemEffect;
 }
 
 void ClearBattlerItemEffectHistory(u8 battlerId)
@@ -1160,6 +1163,10 @@ s32 AI_GetAbility(u32 battlerId)
 {
     u32 knownAbility = GetBattlerAbility(battlerId);
 
+    // We've had ability overwritten by e.g. Worry Seed. It is not part of AI_PARTY in case of switching
+    if (gBattleStruct->overwrittenAbilities[battlerId])
+        return gBattleStruct->overwrittenAbilities[battlerId];
+    
     // The AI knows its own ability.
     if (IsBattlerAIControlled(battlerId))
         return knownAbility;
