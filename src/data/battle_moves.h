@@ -3122,7 +3122,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_CURSE] =
     {
-        #if B_UPDATED_MOVE_DATA >= GEN_5
+        #if B_UPDATED_MOVE_TYPES >= GEN_5
             .type = TYPE_GHOST,
         #else
             .type = TYPE_MYSTERY,
@@ -3342,7 +3342,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SWEET_KISS] =
     {
-        #if B_UPDATED_MOVE_DATA >= GEN_6
+        #if B_UPDATED_MOVE_TYPES >= GEN_6
             .type = TYPE_FAIRY,
         #else
             .type = TYPE_NORMAL,
@@ -3687,7 +3687,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_CHARM] =
     {
-        #if B_UPDATED_MOVE_DATA >= GEN_6
+        #if B_UPDATED_MOVE_TYPES >= GEN_6
             .type = TYPE_FAIRY,
         #else
             .type = TYPE_NORMAL,
@@ -4233,7 +4233,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_MOONLIGHT] =
     {
-        #if B_UPDATED_MOVE_DATA >= GEN_6
+        #if B_UPDATED_MOVE_TYPES >= GEN_6
             .type = TYPE_FAIRY,
         #else
             .type = TYPE_NORMAL,

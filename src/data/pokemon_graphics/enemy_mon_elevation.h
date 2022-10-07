@@ -58,7 +58,6 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_LATIOS] = 6,
     [SPECIES_JIRACHI] = 14,
     [SPECIES_CHIMECHO] = 16,
-#if P_NEW_POKEMON == TRUE
     // Gen 4
     [SPECIES_MOTHIM] = 10,
     [SPECIES_COMBEE] = 8,
@@ -182,7 +181,6 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_VOLTORB_HISUIAN] = 1,
     [SPECIES_ELECTRODE_HISUIAN] = 4,
     [SPECIES_BRAVIARY_HISUIAN] = 3,
-#endif
     // Other Forms
     [SPECIES_UNOWN_B] = 8,
     [SPECIES_UNOWN_C] = 8,
@@ -214,7 +212,6 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_CASTFORM_SUNNY] = 5,
     [SPECIES_CASTFORM_RAINY] = 5,
     [SPECIES_CASTFORM_SNOWY] = 5,
-#if P_NEW_POKEMON == TRUE
     [SPECIES_ROTOM_HEAT] = 6,
     [SPECIES_ROTOM_WASH] = 6,
     [SPECIES_ROTOM_FROST] = 6,
@@ -271,5 +268,4 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_SINISTEA_ANTIQUE] = 10,
     [SPECIES_POLTEAGEIST_ANTIQUE] = 12,
     [SPECIES_ETERNATUS_ETERNAMAX] = 13,
-#endif
 };

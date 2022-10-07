@@ -2320,7 +2320,7 @@ const u8 gChimechoPokedexText[] = _(
     "themselves using seven different and\n"
     "distinguishing cries.");
 
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
 const u8 gTurtwigPokedexText[] = _(
     "The shell on its back is made of soil. \n"
     "On a very healthy Turtwig, the shell \n"
@@ -2962,7 +2962,9 @@ const u8 gArceusPokedexText[] = _(
     "emerged from an egg and shaped all there\n"
     "is in this world, before the universe\n"
     "even existed.");
+#endif
 
+#if P_GEN_5_POKEMON == TRUE
 const u8 gVictiniPokedexText[] = _(
     "This Pokémon brings victory.\n"
     "It is said that Trainers with Victini\n"
@@ -3898,7 +3900,9 @@ const u8 gGenesectPokedexText[] = _(
     "feared as the strongest of hunters.\n"
     "Team Plasma altered it and attached\n"
     "a cannon to its back.");
+#endif
 
+#if P_GEN_6_POKEMON == TRUE
 const u8 gChespinPokedexText[] = _(
     "The quills on its head are usually soft.\n"
     "When it flexes them, the points become\n"
@@ -4330,7 +4334,9 @@ const u8 gVolcanionPokedexText[] = _(
     "on its back and disappears into the dense\n"
     "fog. It's said to live in mountains where\n"
     "humans do not tread.");
+#endif
 
+#if P_GEN_7_POKEMON == TRUE
 const u8 gRowletPokedexText[] = _(
     "This wary Pokémon uses photosynthesis\n"
     "to store up energy during the day, while\n"
@@ -4851,7 +4857,9 @@ const u8 gMelmetalPokedexText[] = _(
     "Revered long ago for its capacity to create\n"
     "iron from nothing, for some reason it has\n"
     "come back to life after 3,000 years.");
+#endif
 
+#if P_GEN_8_POKEMON == TRUE
 const u8 gGrookeyPokedexText[] = _(
     "When it uses its special stick to strike up\n"
     "a beat, the sound waves produced carry\n"

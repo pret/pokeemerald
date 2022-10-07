@@ -705,6 +705,7 @@ BattleScript_EffectFlingConsumeBerry:
 	restorebattleritem BS_TARGET
 BattleScript_FlingEnd:
 	tryfaintmon BS_TARGET
+	trysymbiosis
 	goto BattleScript_MoveEnd
 
 BattleScript_FlingFlameOrb:
@@ -1391,6 +1392,7 @@ BattleScript_MoveEffectBugBite::
 	consumeberry BS_ATTACKER, TRUE  @ consume the berry, then restore the item from changedItems
 	bicword gHitMarker, HITMARKER_NO_ANIMATIONS
 	setbyte sBERRY_OVERRIDE, FALSE
+	trysymbiosis
 	return
 
 BattleScript_EffectCoreEnforcer:
@@ -1762,6 +1764,7 @@ BattleScript_EffectBestow:
 	waitanimation
 	printstring STRINGID_BESTOWITEMGIVING
 	waitmessage B_WAIT_TIME_LONG
+	trysymbiosis
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectAfterYou:
@@ -5172,7 +5175,14 @@ BattleScript_EffectTeleport:
 	attackcanceler
 	attackstring
 	ppreduce
+.if B_TELEPORT_BEHAVIOR >= GEN_7
+	canteleport BS_ATTACKER
+	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_EffectTeleportNew
+	goto BattleScript_ButItFailed
+.else
 	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_ButItFailed
+.endif
+BattleScript_EffectTeleportTryToRunAway:
 	getifcantrunfrombattle BS_ATTACKER
 	jumpifbyte CMP_EQUAL, gBattleCommunication, BATTLE_RUN_FORBIDDEN, BattleScript_ButItFailed
 	jumpifbyte CMP_EQUAL, gBattleCommunication, BATTLE_RUN_FAILURE, BattleScript_PrintAbilityMadeIneffective
@@ -5181,6 +5191,29 @@ BattleScript_EffectTeleport:
 	printstring STRINGID_PKMNFLEDFROMBATTLE
 	waitmessage B_WAIT_TIME_LONG
 	setoutcomeonteleport BS_ATTACKER
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectTeleportNew:
+	getbattlerside BS_ATTACKER
+	jumpifbyte CMP_EQUAL, gBattleCommunication, B_SIDE_OPPONENT, BattleScript_EffectTeleportTryToRunAway
+	attackanimation
+	waitanimation
+	openpartyscreen BS_ATTACKER, BattleScript_EffectTeleportNewEnd
+	switchoutabilities BS_ATTACKER
+	waitstate
+	switchhandleorder BS_ATTACKER, 2
+	returntoball BS_ATTACKER
+	getswitchedmondata BS_ATTACKER
+	switchindataupdate BS_ATTACKER
+	hpthresholds BS_ATTACKER
+	trytoclearprimalweather
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
+	printstring STRINGID_SWITCHINMON
+	switchinanim BS_ATTACKER, TRUE
+	waitstate
+	switchineffects BS_ATTACKER
+BattleScript_EffectTeleportNewEnd:
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectBeatUp::
@@ -9839,4 +9872,10 @@ BattleScript_NeutralizingGasExitsLoop:
 BattleScript_MagicianActivates::
 	call BattleScript_AbilityPopUp
 	call BattleScript_ItemSteal
+	return
+
+BattleScript_SymbiosisActivates::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_SYMBIOSISITEMPASS
+	waitmessage B_WAIT_TIME_LONG
 	return

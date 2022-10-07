@@ -312,7 +312,9 @@ static bool8 ShouldSwitchIfGameStatePrompt(void)
                 switchMon = FALSE;
 
             //Checks to see if active Pokemon can do something against sleep
-            if (monAbility == (ABILITY_NATURAL_CURE | ABILITY_SHED_SKIN | ABILITY_EARLY_BIRD)
+            if ((monAbility == ABILITY_NATURAL_CURE
+                || monAbility == ABILITY_SHED_SKIN
+                || monAbility == ABILITY_EARLY_BIRD)
                 || holdEffect == (HOLD_EFFECT_CURE_SLP | HOLD_EFFECT_CURE_STATUS)
                 || HasMove(gActiveBattler, MOVE_SLEEP_TALK)
                 || (HasMoveEffect(gActiveBattler, MOVE_SNORE) && AI_GetTypeEffectiveness(MOVE_SNORE, gActiveBattler, opposingBattler) >= UQ_4_12(1.0))
@@ -957,8 +959,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
             || i == *(gBattleStruct->monToSwitchIntoId + battlerIn1)
             || i == *(gBattleStruct->monToSwitchIntoId + battlerIn2)
             || (GetMonAbility(&party[i]) == ABILITY_TRUANT && IsTruantMonVulnerable(gActiveBattler, opposingBattler)) // While not really invalid per say, not really wise to switch into this mon.
-            || (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON 
-                && i == (CalculateEnemyPartyCount()-1))) //Save Ace Pokemon for last
+            || ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON)
+                && i == (CalculateEnemyPartyCount() - 1))) //Save Ace Pokemon for last
             invalidMons |= gBitTable[i];
         else
             aliveCount++;
