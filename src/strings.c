@@ -479,6 +479,7 @@ const u8 gText_PauseUntilPress[] = _("{PAUSE_UNTIL_PRESS}");
 const u8 gJPText_AreYouSureYouWantToSpinTradeMon[] = _("{STR_VAR_1}を ぐるぐるこうかんに\nだして よろしいですか？");
 ALIGNED(4) const u8 gText_OnlyPkmnForBattle[] = _("That's your only\nPOKéMON for battle.");
 ALIGNED(4) const u8 gText_PkmnCantBeTradedNow[] = _("That POKéMON can't be traded\nnow.");
+ALIGNED(4) const u8 gText_PkmnCantBeTraded[] = _("That POKéMON can't be traded.");
 ALIGNED(4) const u8 gText_EggCantBeTradedNow[] = _("An EGG can't be traded now.");
 ALIGNED(4) const u8 gText_OtherTrainersPkmnCantBeTraded[] = _("The other TRAINER's POKéMON\ncan't be traded now.");
 ALIGNED(4) const u8 gText_OtherTrainerCantAcceptPkmn[] = _("The other TRAINER can't accept\nthat POKéMON now.");

@@ -1627,7 +1627,7 @@ static bool8 InitEasyChatScreenStruct(u8 type, u16 *words, u8 displayedPersonTyp
     u8 templateId;
     int i;
 
-    sEasyChatScreen = malloc(sizeof(*sEasyChatScreen));
+    sEasyChatScreen = Alloc(sizeof(*sEasyChatScreen));
     if (sEasyChatScreen == NULL)
         return FALSE;
 
