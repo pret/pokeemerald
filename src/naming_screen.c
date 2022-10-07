@@ -2182,8 +2182,8 @@ static const struct OamData sOam_32x16 =
 /*
 [0_____][] <-1   40x32
 [2_____][] <-3
-[3___+_][] <-5/Origin
-[4     ][] <-7
+[4___+_][] <-5/Origin
+[6     ][] <-7
 */
 static const struct Subsprite sSubsprites_PageSwapFrame[] =
 {
