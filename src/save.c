@@ -913,7 +913,7 @@ u16 GetSaveBlocksPointersBaseOffset(void)
     for (i = 0; i < NUM_SECTORS_PER_SLOT; i++)
     {
         ReadFlashSector(i + slotOffset, gReadWriteSector);
-        
+
         // Base offset for SaveBlock2 is calculated using the trainer id
         if (gReadWriteSector->id == SECTOR_ID_SAVEBLOCK2)
             return sector->data[offsetof(struct SaveBlock2, playerTrainerId[0])] +

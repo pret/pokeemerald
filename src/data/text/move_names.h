@@ -757,6 +757,30 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_GLACIAL_LANCE] = _("Glacial Lance"),
     [MOVE_ASTRAL_BARRAGE] = _("Astral Barrage"),
     [MOVE_EERIE_SPELL] = _("Eerie Spell"),
+    [MOVE_DIRE_CLAW] = _("Dire Claw"),
+    [MOVE_PSYSHIELD_BASH] = _("Psyshield Bash"),
+    [MOVE_POWER_SHIFT] = _("Power Shift"),
+    [MOVE_STONE_AXE] = _("Stone Axe"),
+    [MOVE_SPRINGTIDE_STORM] = _("Springtide Storm"),
+    [MOVE_MYSTICAL_POWER] = _("Mystical Power"),
+    [MOVE_RAGING_FURY] = _("Raging Fury"),
+    [MOVE_WAVE_CRASH] = _("Wave Crash"),
+    [MOVE_CHLOROBLAST] = _("Chloroblast"),
+    [MOVE_MOUNTAIN_GALE] = _("Mountain Gale"),
+    [MOVE_VICTORY_DANCE] = _("Victory Dance"),
+    [MOVE_HEADLONG_RUSH] = _("Headlong Rush"),
+    [MOVE_BARB_BARRAGE] = _("Barb Barrage"),
+    [MOVE_ESPER_WING] = _("Esper Wing"),
+    [MOVE_BITTER_MALICE] = _("Bitter Malice"),
+    [MOVE_SHELTER] = _("Shelter"),
+    [MOVE_TRIPLE_ARROWS] = _("Triple Arrows"),
+    [MOVE_INFERNAL_PARADE] = _("Infernal Parade"),
+    [MOVE_CEASELESS_EDGE] = _("Ceaseless Edge"),
+    [MOVE_BLEAKWIND_STORM] = _("Bleakwind Storm"),
+    [MOVE_WILDBOLT_STORM] = _("Wildbolt Storm"),
+    [MOVE_SANDSEAR_STORM] = _("Sandsear Storm"),
+    [MOVE_LUNAR_BLESSING] = _("Lunar Blessing"),
+    [MOVE_TAKE_HEART] = _("Take Heart"),
 };
 #else
 // 12 letters
@@ -1517,6 +1541,30 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_GLACIAL_LANCE] = _("GlacialLance"),
     [MOVE_ASTRAL_BARRAGE] = _("AstrlBarrage"),
     [MOVE_EERIE_SPELL] = _("Eerie Spell"),
+    [MOVE_DIRE_CLAW] = _("Dire Claw"),
+    [MOVE_PSYSHIELD_BASH] = _("PsyshieldBsh"),
+    [MOVE_POWER_SHIFT] = _("Power Shift"),
+    [MOVE_STONE_AXE] = _("Stone Axe"),
+    [MOVE_SPRINGTIDE_STORM] = _("SprngtdeStrm"),
+    [MOVE_MYSTICAL_POWER] = _("MystcalPower"),
+    [MOVE_RAGING_FURY] = _("Raging Fury"),
+    [MOVE_WAVE_CRASH] = _("Wave Crash"),
+    [MOVE_CHLOROBLAST] = _("Chloroblast"),
+    [MOVE_MOUNTAIN_GALE] = _("MountainGale"),
+    [MOVE_VICTORY_DANCE] = _("VictoryDance"),
+    [MOVE_HEADLONG_RUSH] = _("HeadlongRush"),
+    [MOVE_BARB_BARRAGE] = _("Barb Barrage"),
+    [MOVE_ESPER_WING] = _("Esper Wing"),
+    [MOVE_BITTER_MALICE] = _("BitterMalice"),
+    [MOVE_SHELTER] = _("Shelter"),
+    [MOVE_TRIPLE_ARROWS] = _("TripleArrows"),
+    [MOVE_INFERNAL_PARADE] = _("InfrnlParade"),
+    [MOVE_CEASELESS_EDGE] = _("CeaslessEdge"),
+    [MOVE_BLEAKWIND_STORM] = _("BlekwndStorm"),
+    [MOVE_WILDBOLT_STORM] = _("WildbltStorm"),
+    [MOVE_SANDSEAR_STORM] = _("SndsearStorm"),
+    [MOVE_LUNAR_BLESSING] = _("LunarBlessng"),
+    [MOVE_TAKE_HEART] = _("Take Heart"),
 };
 #endif
 
@@ -1556,7 +1604,7 @@ static const u8 sText_Menacing_Moonraze_Maelstrom[] = _("Menacing Moonraze Maels
 static const u8 sText_Light_That_Burns_The_Sky[] = _("Light That Burns The Sky");
 static const u8 sText_Soul_Stealing_7_Star_Strike[] = _("Soul Stealing 7 Star Strike");
 
-const u8 *const gZMoveNames[] = 
+const u8 *const gZMoveNames[] =
 {
     [MOVE_BREAKNECK_BLITZ - FIRST_Z_MOVE] = sText_Breakneck_Blitz,
     [MOVE_ALL_OUT_PUMMELING - FIRST_Z_MOVE] = sText_All_Out_Pummeling,

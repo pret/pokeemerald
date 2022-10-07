@@ -331,7 +331,7 @@ static const union AffineAnimCmd* const sSpriteAffineAnimTable_CrushGripHand[] =
 const struct SpriteTemplate gCrushGripHandTemplate =
 {
     .tileTag = ANIM_TAG_PURPLE_HAND_OUTLINE,
-    .paletteTag = ANIM_TAG_ACCUPRESSURE,
+    .paletteTag = ANIM_TAG_ACUPRESSURE,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = sAnims_BasicRock,
     .images = NULL,
@@ -692,8 +692,8 @@ void AnimTask_Rollout(u8 taskId)
     task->data[6] = 0;
     task->data[7] = 0;
 
-    pan1 = BattleAnimAdjustPanning(-64);
-    pan2 = BattleAnimAdjustPanning(63);
+    pan1 = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
+    pan2 = BattleAnimAdjustPanning(SOUND_PAN_TARGET);
 
     task->data[13] = pan1;
     task->data[14] = (pan2 - pan1) / task->data[8];

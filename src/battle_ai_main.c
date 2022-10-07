@@ -142,8 +142,10 @@ static u32 GetWildAiFlags(void)
     if (avgLevel >= 80)
         flags |= AI_FLAG_HP_AWARE;
 
-    if (B_VAR_WILD_AI_FLAGS != 0 && VarGet(B_VAR_WILD_AI_FLAGS) != 0)
+#if B_VAR_WILD_AI_FLAGS != 0
+    if (VarGet(B_VAR_WILD_AI_FLAGS) != 0)
         flags |= VarGet(B_VAR_WILD_AI_FLAGS);
+#endif
 
     return flags;
 }
@@ -237,6 +239,87 @@ u8 ComputeBattleAiScores(u8 battler)
     return BattleAI_ChooseMoveOrAction();
 }
 
+static void CopyBattlerDataToAIParty(u32 bPosition, u32 side)
+{
+    u32 battler = GetBattlerAtPosition(bPosition);
+    struct AiPartyMon *aiMon = &AI_PARTY->mons[side][gBattlerPartyIndexes[battler]];
+    struct BattlePokemon *bMon = &gBattleMons[battler];
+
+    aiMon->species = bMon->species;
+    aiMon->level = bMon->level;
+    aiMon->status = bMon->status1;
+    aiMon->gender = GetGenderFromSpeciesAndPersonality(bMon->species, bMon->personality);
+    aiMon->isFainted = FALSE;
+    aiMon->wasSentInBattle = TRUE;
+    aiMon->switchInCount++;
+}
+
+void Ai_InitPartyStruct(void)
+{
+    u32 i;
+
+    AI_PARTY->count[B_SIDE_PLAYER] = gPlayerPartyCount;
+    AI_PARTY->count[B_SIDE_OPPONENT] = gEnemyPartyCount;
+
+    // Save first 2 or 4(in doubles) mons
+    CopyBattlerDataToAIParty(B_POSITION_PLAYER_LEFT, B_SIDE_PLAYER);
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        CopyBattlerDataToAIParty(B_POSITION_PLAYER_RIGHT, B_SIDE_PLAYER);
+
+    // If player's partner is AI, save opponent mons
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+    {
+        CopyBattlerDataToAIParty(B_POSITION_OPPONENT_LEFT, B_SIDE_OPPONENT);
+        CopyBattlerDataToAIParty(B_POSITION_OPPONENT_RIGHT, B_SIDE_OPPONENT);
+    }
+
+    // Find fainted mons
+    for (i = 0; i < AI_PARTY->count[B_SIDE_PLAYER]; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
+            AI_PARTY->mons[B_SIDE_PLAYER][i].isFainted = TRUE;
+    }
+}
+
+void Ai_UpdateSwitchInData(u32 battler)
+{
+    u32 i;
+    u32 side = GetBattlerSide(battler);
+    struct AiPartyMon *aiMon = &AI_PARTY->mons[side][gBattlerPartyIndexes[battler]];
+
+    // See if the switched-in mon has been already in battle
+    if (aiMon->wasSentInBattle)
+    {
+        if (aiMon->ability)
+            BATTLE_HISTORY->abilities[battler] = aiMon->ability;
+        if (aiMon->heldEffect)
+            BATTLE_HISTORY->itemEffects[battler] = aiMon->heldEffect;
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            if (aiMon->moves[i])
+                BATTLE_HISTORY->usedMoves[battler][i] = aiMon->moves[i];
+        }
+        aiMon->switchInCount++;
+        aiMon->status = gBattleMons[battler].status1; // Copy status, because it could've been changed in battle.
+    }
+    else // If not, copy the newly switched-in mon in battle and clear battle history.
+    {
+        ClearBattlerMoveHistory(battler);
+        ClearBattlerAbilityHistory(battler);
+        ClearBattlerItemEffectHistory(battler);
+        CopyBattlerDataToAIParty(GetBattlerPosition(battler), side);
+    }
+}
+
+void Ai_UpdateFaintData(u32 battler)
+{
+    struct AiPartyMon *aiMon = &AI_PARTY->mons[GET_BATTLER_SIDE(battler)][gBattlerPartyIndexes[battler]];
+    ClearBattlerMoveHistory(battler);
+    ClearBattlerAbilityHistory(battler);
+    ClearBattlerItemEffectHistory(battler);
+    aiMon->isFainted = TRUE;
+}
+
 static void SetBattlerAiData(u8 battlerId)
 {
     AI_DATA->abilities[battlerId] = AI_GetAbility(battlerId);
@@ -256,8 +339,7 @@ void GetAiLogicData(void)
 
     memset(AI_DATA, 0, sizeof(struct AiLogicData));
 
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER))
-      && !IsWildMonSmart())
+    if (!(gBattleTypeFlags & BATTLE_TYPE_HAS_AI) && !IsWildMonSmart())
         return;
 
     // get/assume all battler data
@@ -486,7 +568,7 @@ static u8 ChooseMoveOrAction_Doubles(void)
                 bestMovePointsForTarget[i] = mostViableMovesScores[0];
 
                 // Don't use a move against ally if it has less than 100 points.
-                if (i == (sBattler_AI ^ BIT_FLANK) && bestMovePointsForTarget[i] < 100)
+                if (i == BATTLE_PARTNER(sBattler_AI) && bestMovePointsForTarget[i] < 100)
                 {
                     bestMovePointsForTarget[i] = -1;
                     mostViableMovesScores[0] = mostViableMovesScores[0]; // Needed to match.
@@ -1273,10 +1355,10 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 10;
             break;
         case EFFECT_OHKO:
-            if (B_SHEER_COLD_IMMUNITY >= GEN_7
-              && move == MOVE_SHEER_COLD
-              && IS_BATTLER_OF_TYPE(battlerDef, TYPE_ICE))
+        #if B_SHEER_COLD_IMMUNITY >= GEN_7
+            if (move == MOVE_SHEER_COLD && IS_BATTLER_OF_TYPE(battlerDef, TYPE_ICE))
                 return 0;
+        #endif
             if (!ShouldTryOHKO(battlerAtk, battlerDef, AI_DATA->abilities[battlerAtk], AI_DATA->abilities[battlerDef], move))
                 score -= 10;
             break;
@@ -1304,8 +1386,10 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 8;
             else if (AI_DATA->hpPercents[battlerAtk] <= 25)
                 score -= 10;
-            else if (B_SOUND_SUBSTITUTE >= GEN_6 && TestMoveFlagsInMoveset(battlerDef, FLAG_SOUND))
+        #if B_SOUND_SUBSTITUTE >= GEN_6
+            else if (TestMoveFlagsInMoveset(battlerDef, FLAG_SOUND))
                 score -= 8;
+        #endif
             break;
         case EFFECT_LEECH_SEED:
             if (gStatuses3[battlerDef] & STATUS3_LEECHSEED
@@ -1317,8 +1401,10 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             break;
         case EFFECT_DISABLE:
             if (gDisableStructs[battlerDef].disableTimer == 0
-              && (B_MENTAL_HERB >= GEN_5 && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_MENTAL_HERB)
-              && !PartnerHasSameMoveEffectWithoutTarget(BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove))
+            #if B_MENTAL_HERB >= GEN_5
+                && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_MENTAL_HERB
+            #endif
+                && !PartnerHasSameMoveEffectWithoutTarget(BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove))
             {
                 if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER) // Attacker should go first
                 {
@@ -1337,8 +1423,10 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             break;
         case EFFECT_ENCORE:
             if (gDisableStructs[battlerDef].encoreTimer == 0
-              && (B_MENTAL_HERB >= GEN_5 && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_MENTAL_HERB)
-              && !DoesPartnerHaveSameMoveEffect(BATTLE_PARTNER(battlerAtk), battlerDef, move, AI_DATA->partnerMove))
+            #if B_MENTAL_HERB >= GEN_5
+                && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_MENTAL_HERB
+            #endif
+                && !DoesPartnerHaveSameMoveEffect(BATTLE_PARTNER(battlerAtk), battlerDef, move, AI_DATA->partnerMove))
             {
                 if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER) // Attacker should go first
                 {
@@ -1570,9 +1658,10 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 10;
                 break;
             }
-
-            if (B_MENTAL_HERB >= GEN_5 && AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_MENTAL_HERB)
+        #if B_MENTAL_HERB >= GEN_5
+            if (AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_MENTAL_HERB)
                 score -= 6;
+        #endif
             break;
         case EFFECT_WILL_O_WISP:
             if (!AI_CanBurn(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove))
@@ -2976,6 +3065,8 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     u16 predictedMove = AI_DATA->predictedMoves[battlerDef];
     bool32 isDoubleBattle = IsValidDoubleBattle(battlerAtk);
     u32 i;
+    // We only check for moves that have a 20% chance or more for their secondary effect to happen because moves with a smaller chance are rather worthless. We don't want the AI to use those.
+    bool32 sereneGraceBoost = (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE && (gBattleMoves[move].secondaryEffectChance >= 20 && gBattleMoves[move].secondaryEffectChance < 100));
 
     // Targeting partner, check benefits of doing that instead
     if (IsTargetingPartner(battlerAtk, battlerDef))
@@ -3434,7 +3525,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score += 2;
         break;
     case EFFECT_CONFUSE_HIT:
-        if (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE)
+        if (sereneGraceBoost)
             score++;
         //fallthrough
     case EFFECT_CONFUSE:
@@ -3453,7 +3544,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_SPECIAL_DEFENSE_DOWN_HIT:
     case EFFECT_ACCURACY_DOWN_HIT:
     case EFFECT_EVASION_DOWN_HIT:
-        if (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE && AI_DATA->abilities[battlerDef] != ABILITY_CONTRARY)
+        if (sereneGraceBoost && AI_DATA->abilities[battlerDef] != ABILITY_CONTRARY)
             score += 2;
         break;
     case EFFECT_SPEED_DOWN_HIT:
@@ -3461,12 +3552,10 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score -= 2;
         else if (!AI_RandLessThan(70))
             score++;
-        if (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE && AI_DATA->abilities[battlerDef] != ABILITY_CONTRARY)
-            score++;
         if (ShouldLowerSpeed(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef]))
         {
-            if (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE && AI_DATA->abilities[battlerDef] != ABILITY_CONTRARY)
-                score += 4;
+            if (sereneGraceBoost && AI_DATA->abilities[battlerDef] != ABILITY_CONTRARY)
+                score += 5;
             else
                 score += 2;
         }
@@ -3545,7 +3634,10 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
     case EFFECT_DISABLE:
         if (gDisableStructs[battlerDef].disableTimer == 0
-          && (B_MENTAL_HERB >= GEN_5 && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_MENTAL_HERB))    // mental herb
+        #if B_MENTAL_HERB >= GEN_5
+            && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_MENTAL_HERB    // mental herb
+        #endif
+        )
         {
             if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER) // AI goes first
             {
@@ -3567,7 +3659,10 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
     case EFFECT_ENCORE:
         if (gDisableStructs[battlerDef].encoreTimer == 0
-          && (B_MENTAL_HERB >= GEN_5 && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_MENTAL_HERB))    // mental herb
+        #if B_MENTAL_HERB >= GEN_5
+            && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_MENTAL_HERB    // mental herb
+        #endif
+        )
         {
             if (IsEncoreEncouragedEffect(gBattleMoves[gLastMoves[battlerDef]].effect))
                 score += 3;
@@ -3597,7 +3692,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score++;
         break;
     case EFFECT_SPEED_UP_HIT:
-        if (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE && AI_DATA->abilities[battlerDef] != ABILITY_CONTRARY && !WillAIStrikeFirst())
+        if (sereneGraceBoost && AI_DATA->abilities[battlerDef] != ABILITY_CONTRARY && !WillAIStrikeFirst())
             score += 3;
         break;
     case EFFECT_DESTINY_BOND:
@@ -3616,7 +3711,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         {
             bool32 canSteal = FALSE;
 
-            #if defined B_TRAINERS_KNOCK_OFF_ITEMS && B_TRAINERS_KNOCK_OFF_ITEMS == TRUE
+            #if B_TRAINERS_KNOCK_OFF_ITEMS == TRUE
                 canSteal = TRUE;
             #endif
             if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER || GetBattlerSide(battlerAtk) == B_SIDE_PLAYER)
@@ -3841,7 +3936,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         }
         break;
     case EFFECT_ATTACK_UP_HIT:
-        if (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE)
+        if (sereneGraceBoost)
             IncreaseStatUpScore(battlerAtk, battlerDef, STAT_ATK, &score);
         break;
     case EFFECT_FELL_STINGER:

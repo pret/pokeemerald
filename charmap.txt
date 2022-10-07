@@ -79,6 +79,7 @@ SUPER_RE    = A0
 '?'         = AC
 '.'         = AD
 '-'         = AE
+'_'         = AE @ For autogenerating strings based on label names. Not using {UNDERSCORE} on purpose due to how bad it looks.
 '·'         = AF
 '…'         = B0
 '“'         = B1

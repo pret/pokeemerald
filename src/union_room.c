@@ -702,7 +702,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         }
         else
         {
-            if (gReceivedRemoteLinkPlayers != 0)
+            if (gReceivedRemoteLinkPlayers)
             {
                 if (IsActivityWithVariableGroupSize(gPlayerCurrActivity))
                     GetOtherPlayersInfoFlags();
@@ -2047,7 +2047,7 @@ static void Task_SendMysteryGift(u8 taskId)
         {
             data->state = 13;
         }
-        else if (gReceivedRemoteLinkPlayers != 0)
+        else if (gReceivedRemoteLinkPlayers)
         {
             UpdateGameData_GroupLockedIn(TRUE);
             data->state++;
@@ -3365,12 +3365,12 @@ static void Task_InitUnionRoom(u8 taskId)
         }
         break;
     case 4:
-        free(data->spawnPlayer);
-        free(data->playerList);
-        free(data->incomingParentList);
-        free(data->incomingChildList);
+        Free(data->spawnPlayer);
+        Free(data->playerList);
+        Free(data->incomingParentList);
+        Free(data->incomingChildList);
         DestroyTask(data->searchTaskId);
-        free(sWirelessLinkMain.uRoom);
+        Free(sWirelessLinkMain.uRoom);
         LinkRfu_Shutdown();
         DestroyTask(taskId);
         break;

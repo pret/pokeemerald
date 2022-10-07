@@ -106,7 +106,7 @@ cd /mnt/c/Users/<user>/Desktop/decomps
 >   Note 2: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "/mnt/c/users/<user>/Desktop/decomp folder"`.
 >   Note 3: Windows path names are case-insensitive so adhering to capitalization isn't needed
 </details>
-    
+
 If this works, then proceed to [Installation](#installation).
 
 Otherwise, ask for help on Discord or IRC (see [README.md](README.md)), or continue reading below for [Windows instructions using msys2](#windows-msys2).
@@ -216,7 +216,7 @@ Note that the directory **must exist** in Windows. If you want to store pokeemer
 >   Note 1: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "c:/users/<user>/Desktop/decomp folder"`.
 >   Note 2: Windows path names are case-insensitive so adhering to capitalization isn't needed
 </details>
-    
+
 If this works, then proceed to [Installation](#installation). Otherwise, ask for help on Discord or IRC (see [README.md](README.md)).
 
 ## macOS
@@ -539,7 +539,7 @@ devkitARM is now installed.
 devkitARM is now installed.
 
 ### Installing devkitARM on Arch Linux
-        
+
 1. Follow [devkitPro's instructions](https://devkitpro.org/wiki/devkitPro_pacman#Customising_Existing_Pacman_Install) to configure `pacman` to download devkitPro packages.
 2. Install `gba-dev`: run the following command as root.
 

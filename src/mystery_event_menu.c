@@ -201,7 +201,7 @@ static void CB2_MysteryEventMenu(void)
     case 6:
         if (IsLinkConnectionEstablished())
         {
-            if (gReceivedRemoteLinkPlayers != 0)
+            if (gReceivedRemoteLinkPlayers)
             {
                 if (GetLinkPlayerDataExchangeStatusTimed(2, 2) == EXCHANGE_DIFF_SELECTIONS)
                 {
