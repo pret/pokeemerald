@@ -7903,7 +7903,7 @@ static const struct LevelUpMove sChimechoLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
 static const struct LevelUpMove sTurtwigLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 5, MOVE_WITHDRAW),
@@ -9991,7 +9991,9 @@ static const struct LevelUpMove sArceusLevelUpLearnset[] = {
     LEVEL_UP_MOVE(100, MOVE_JUDGMENT),
     LEVEL_UP_END
 };
+#endif
 
+#if P_GEN_5_POKEMON == TRUE
 static const struct LevelUpMove sVictiniLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_SEARING_SHOT),
     LEVEL_UP_MOVE( 1, MOVE_FOCUS_ENERGY),
@@ -13250,7 +13252,9 @@ static const struct LevelUpMove sGenesectLevelUpLearnset[] = {
     LEVEL_UP_MOVE(77, MOVE_SELF_DESTRUCT),
     LEVEL_UP_END
 };
+#endif
 
+#if P_GEN_6_POKEMON == TRUE
 static const struct LevelUpMove sChespinLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_GROWL),
     LEVEL_UP_MOVE( 1, MOVE_VINE_WHIP),
@@ -14745,7 +14749,9 @@ static const struct LevelUpMove sVolcanionLevelUpLearnset[] = {
     LEVEL_UP_MOVE(85, MOVE_STEAM_ERUPTION),
     LEVEL_UP_END
 };
+#endif
 
+#if P_GEN_7_POKEMON == TRUE
 static const struct LevelUpMove sRowletLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 1, MOVE_LEAFAGE),
@@ -16523,6 +16529,9 @@ static const struct LevelUpMove sMelmetalLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 90, MOVE_HYPER_BEAM),
     LEVEL_UP_END
 };
+#endif
+
+#if P_GEN_8_POKEMON == TRUE
 static const struct LevelUpMove sGrookeyLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_SCRATCH),
     LEVEL_UP_MOVE( 1, MOVE_GROWL),
@@ -18177,6 +18186,7 @@ static const struct LevelUpMove sEnamorusLevelUpLearnset[] = {
     //LEVEL_UP_MOVE( 1, MOVE_SPRINGTIDE_STORM),
     LEVEL_UP_END
 };
+#endif
 
 static const struct LevelUpMove sRattataAlolanLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
@@ -18855,6 +18865,7 @@ static const struct LevelUpMove sLinooneGalarianLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+#if P_GEN_5_POKEMON == TRUE
 static const struct LevelUpMove sDarumakaGalarianLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_POWDER_SNOW),
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
@@ -18931,6 +18942,7 @@ static const struct LevelUpMove sStunfiskGalarianLevelUpLearnset[] = {
     LEVEL_UP_MOVE(55, MOVE_FISSURE),
     LEVEL_UP_END
 };
+#endif
 
 static const struct LevelUpMove sGrowlitheHisuianLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
@@ -19021,6 +19033,7 @@ static const struct LevelUpMove sSneaselHisuianLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+#if P_GEN_5_POKEMON == TRUE
 static const struct LevelUpMove sSamurottHisuianLevelUpLearnset[] = {
     //LEVEL_UP_MOVE( 0, MOVE_NIGHT_SLASH),
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
@@ -19090,7 +19103,9 @@ static const struct LevelUpMove sBraviaryHisuianLevelUpLearnset[] = {
     //LEVEL_UP_MOVE(52, MOVE_HURRICANE),
     LEVEL_UP_END
 };
+#endif
 
+#if P_GEN_6_POKEMON == TRUE
 static const struct LevelUpMove sSliggooHisuianLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_BUBBLE),
     //LEVEL_UP_MOVE( 6, MOVE_ACID_SPRAY),
@@ -19129,7 +19144,9 @@ static const struct LevelUpMove sAvaluggHisuianLevelUpLearnset[] = {
     LEVEL_UP_MOVE(47, MOVE_DOUBLE_EDGE),
     LEVEL_UP_END
 };
+#endif
 
+#if P_GEN_7_POKEMON == TRUE
 static const struct LevelUpMove sDecidueyeHisuianLevelUpLearnset[] = {
     //LEVEL_UP_MOVE( 0, MOVE_ROCK_SMASH),
     LEVEL_UP_MOVE( 1, MOVE_GUST),
@@ -19203,7 +19220,7 @@ static const struct LevelUpMove sDeoxysSpeedLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
 static const struct LevelUpMove sWormadamSandyCloakLevelUpLearnset[] = {
     //LEVEL_UP_MOVE( 0, MOVE_QUIVER_DANCE),
     LEVEL_UP_MOVE( 1, MOVE_QUIVER_DANCE),
@@ -19266,7 +19283,9 @@ static const struct LevelUpMove sShayminSkyLevelUpLearnset[] = {
     LEVEL_UP_MOVE(100, MOVE_SEED_FLARE),
     LEVEL_UP_END
 };
+#endif
 
+#if P_GEN_5_POKEMON == TRUE
 static const struct LevelUpMove sKyuremWhiteLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_ICY_WIND),
     LEVEL_UP_MOVE( 1, MOVE_DRAGON_RAGE),
@@ -19304,7 +19323,9 @@ static const struct LevelUpMove sKyuremBlackLevelUpLearnset[] = {
     LEVEL_UP_MOVE(92, MOVE_HYPER_VOICE),
     LEVEL_UP_END
 };
+#endif
 
+#if P_GEN_6_POKEMON == TRUE
 static const struct LevelUpMove sFloetteEternalFlowerLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 1, MOVE_VINE_WHIP),
@@ -19373,7 +19394,9 @@ static const struct LevelUpMove sHoopaUnboundLevelUpLearnset[] = {
     LEVEL_UP_MOVE(85, MOVE_HYPERSPACE_FURY),
     LEVEL_UP_END
 };
+#endif
 
+#if P_GEN_7_POKEMON == TRUE
 static const struct LevelUpMove sLycanrocMidnightLevelUpLearnset[] = {
     //LEVEL_UP_MOVE( 0, MOVE_COUNTER),
     LEVEL_UP_MOVE( 1, MOVE_REVERSAL),
@@ -19417,7 +19440,9 @@ static const struct LevelUpMove sLycanrocDuskLevelUpLearnset[] = {
     LEVEL_UP_MOVE(48, MOVE_STONE_EDGE),
     LEVEL_UP_END
 };
+#endif
 
+#if P_GEN_8_POKEMON == TRUE
 static const struct LevelUpMove sToxtricityLowKeyLevelUpLearnset[] = {
     //LEVEL_UP_MOVE( 0, MOVE_SPARK),
     LEVEL_UP_MOVE( 1, MOVE_SPARK),

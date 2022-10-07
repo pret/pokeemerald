@@ -391,6 +391,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_JIRACHI]                      = { .size = MON_COORDS_SIZE(56, 48), .y_offset = 13 },
     [SPECIES_DEOXYS]                       = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_CHIMECHO]                     = { .size = MON_COORDS_SIZE(48, 48), .y_offset = 11 },
+#if P_GEN_4_POKEMON == TRUE
     [SPECIES_TURTWIG]                      = { .size = MON_COORDS_SIZE(40, 48), .y_offset = 11 },
     [SPECIES_GROTLE]                       = { .size = MON_COORDS_SIZE(56, 56), .y_offset =  7 },
     [SPECIES_TORTERRA]                     = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
@@ -498,6 +499,8 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_DARKRAI]                      = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  3 },
     [SPECIES_SHAYMIN]                      = { .size = MON_COORDS_SIZE(40, 32), .y_offset = 16 },
     [SPECIES_ARCEUS]                       = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+#endif
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_VICTINI]                      = { .size = MON_COORDS_SIZE(48, 56), .y_offset = 10 },
     [SPECIES_SNIVY]                        = { .size = MON_COORDS_SIZE(48, 40), .y_offset = 12 },
     [SPECIES_SERVINE]                      = { .size = MON_COORDS_SIZE(48, 56), .y_offset =  7 },
@@ -654,6 +657,8 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_KELDEO]                       = { .size = MON_COORDS_SIZE(56, 56), .y_offset =  5 },
     [SPECIES_MELOETTA]                     = { .size = MON_COORDS_SIZE(32, 48), .y_offset =  9 },
     [SPECIES_GENESECT]                     = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  0 },
+#endif
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_CHESPIN]                      = { .size = MON_COORDS_SIZE(40, 48), .y_offset = 10 },
     [SPECIES_QUILLADIN]                    = { .size = MON_COORDS_SIZE(48, 48), .y_offset = 10 },
     [SPECIES_CHESNAUGHT]                   = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  4 },
@@ -726,6 +731,8 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_DIANCIE]                      = { .size = MON_COORDS_SIZE(40, 64), .y_offset =  1 },
     [SPECIES_HOOPA]                        = { .size = MON_COORDS_SIZE(48, 48), .y_offset = 11 },
     [SPECIES_VOLCANION]                    = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+#endif
+#if P_GEN_7_POKEMON == TRUE
     [SPECIES_ROWLET]                       = { .size = MON_COORDS_SIZE(32, 40), .y_offset = 12 },
     [SPECIES_DARTRIX]                      = { .size = MON_COORDS_SIZE(40, 48), .y_offset =  8 },
     [SPECIES_DECIDUEYE]                    = { .size = MON_COORDS_SIZE(48, 64), .y_offset =  0 },
@@ -814,6 +821,8 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_ZERAORA]                      = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  4 },
     [SPECIES_MELTAN]                       = { .size = MON_COORDS_SIZE(32, 48), .y_offset = 11 },
     [SPECIES_MELMETAL]                     = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  4 },
+#endif
+#if P_GEN_8_POKEMON == TRUE
     [SPECIES_GROOKEY]                      = { .size = MON_COORDS_SIZE(40, 48), .y_offset = 12 },
     [SPECIES_THWACKEY]                     = { .size = MON_COORDS_SIZE(48, 56), .y_offset =  7 },
     [SPECIES_RILLABOOM]                    = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  3 },
@@ -910,6 +919,8 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_SNEASLER]                     = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_OVERQWIL]                     = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_ENAMORUS]                     = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+#endif
+    // Megas         
     [SPECIES_VENUSAUR_MEGA]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  3 },
     [SPECIES_CHARIZARD_MEGA_X]             = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_CHARIZARD_MEGA_Y]             = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
@@ -950,16 +961,24 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_METAGROSS_MEGA]               = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_LATIAS_MEGA]                  = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_LATIOS_MEGA]                  = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+#if P_GEN_4_POKEMON == TRUE
     [SPECIES_LOPUNNY_MEGA]                 = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  1 },
     [SPECIES_GARCHOMP_MEGA]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_LUCARIO_MEGA]                 = { .size = MON_COORDS_SIZE(48, 64), .y_offset =  2 },
     [SPECIES_ABOMASNOW_MEGA]               = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  1 },
     [SPECIES_GALLADE_MEGA]                 = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  1 },
+#endif
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_AUDINO_MEGA]                  = { .size = MON_COORDS_SIZE(48, 64), .y_offset =  6 },
+#endif
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_DIANCIE_MEGA]                 = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+#endif
+    // Special Mega + Primals      
     [SPECIES_RAYQUAZA_MEGA]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_KYOGRE_PRIMAL]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_GROUDON_PRIMAL]               = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    // Alolan Forms        
     [SPECIES_RATTATA_ALOLAN]               = { .size = MON_COORDS_SIZE(40, 48), .y_offset = 11 },
     [SPECIES_RATICATE_ALOLAN]              = { .size = MON_COORDS_SIZE(56, 48), .y_offset =  8 },
     [SPECIES_RAICHU_ALOLAN]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
@@ -978,6 +997,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_MUK_ALOLAN]                   = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  3 },
     [SPECIES_EXEGGUTOR_ALOLAN]             = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_MAROWAK_ALOLAN]               = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  2 },
+    // Galarian Forms        
     [SPECIES_MEOWTH_GALARIAN]              = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
     [SPECIES_PONYTA_GALARIAN]              = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  8 },
     [SPECIES_RAPIDASH_GALARIAN]            = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
@@ -993,10 +1013,13 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_CORSOLA_GALARIAN]             = { .size = MON_COORDS_SIZE(48, 48), .y_offset = 11 },
     [SPECIES_ZIGZAGOON_GALARIAN]           = { .size = MON_COORDS_SIZE(56, 40), .y_offset = 13 },
     [SPECIES_LINOONE_GALARIAN]             = { .size = MON_COORDS_SIZE(64, 40), .y_offset = 13 },
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_DARUMAKA_GALARIAN]            = { .size = MON_COORDS_SIZE(40, 40), .y_offset = 15 },
     [SPECIES_DARMANITAN_GALARIAN]          = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  0 },
     [SPECIES_YAMASK_GALARIAN]              = { .size = MON_COORDS_SIZE(48, 40), .y_offset = 13 },
     [SPECIES_STUNFISK_GALARIAN]            = { .size = MON_COORDS_SIZE(48, 40), .y_offset = 14 },
+#endif
+    // Hisuian Forms
     [SPECIES_GROWLITHE_HISUIAN]            = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  6 },
     [SPECIES_ARCANINE_HISUIAN]             = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  2 },
     [SPECIES_VOLTORB_HISUIAN]              = { .size = MON_COORDS_SIZE(32, 32), .y_offset =  0 },
@@ -1004,21 +1027,30 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_TYPHLOSION_HISUIAN]           = { .size = MON_COORDS_SIZE(48, 64), .y_offset =  0 },
     [SPECIES_QWILFISH_HISUIAN]             = { .size = MON_COORDS_SIZE(48, 40), .y_offset =  8 },
     [SPECIES_SNEASEL_HISUIAN]              = { .size = MON_COORDS_SIZE(56, 56), .y_offset =  7 },
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_SAMUROTT_HISUIAN]             = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_LILLIGANT_HISUIAN]            = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  1 },
     [SPECIES_ZORUA_HISUIAN]                = { .size = MON_COORDS_SIZE(48, 64), .y_offset =  2 },
     [SPECIES_ZOROARK_HISUIAN]              = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  1 },
     [SPECIES_BRAVIARY_HISUIAN]             = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+#endif
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_SLIGGOO_HISUIAN]              = { .size = MON_COORDS_SIZE(48, 56), .y_offset =  6 },
     [SPECIES_GOODRA_HISUIAN]               = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  0 },
     [SPECIES_AVALUGG_HISUIAN]              = { .size = MON_COORDS_SIZE(64, 48), .y_offset =  5 },
+#endif
+#if P_GEN_7_POKEMON == TRUE
     [SPECIES_DECIDUEYE_HISUIAN]            = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+#endif
+    // Misc Forms        
+    // Cosplay Pikachu        
     [SPECIES_PIKACHU_COSPLAY]              = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
     [SPECIES_PIKACHU_ROCK_STAR]            = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
     [SPECIES_PIKACHU_BELLE]                = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
     [SPECIES_PIKACHU_POP_STAR]             = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
     [SPECIES_PIKACHU_PH_D]                 = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
     [SPECIES_PIKACHU_LIBRE]                = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
+    // Cap Pikachu        
     [SPECIES_PIKACHU_ORIGINAL_CAP]         = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
     [SPECIES_PIKACHU_HOENN_CAP]            = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
     [SPECIES_PIKACHU_SINNOH_CAP]           = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
@@ -1027,7 +1059,9 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_PIKACHU_ALOLA_CAP]            = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
     [SPECIES_PIKACHU_PARTNER_CAP]          = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
     [SPECIES_PIKACHU_WORLD_CAP]            = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
+    // Pichu         
     [SPECIES_PICHU_SPIKY_EARED]            = { .size = MON_COORDS_SIZE(32, 40), .y_offset = 14 },
+    // Unown         
     [SPECIES_UNOWN_B]                      = { .size = MON_COORDS_SIZE(24, 32), .y_offset = 16 },
     [SPECIES_UNOWN_C]                      = { .size = MON_COORDS_SIZE(32, 32), .y_offset = 16 },
     [SPECIES_UNOWN_D]                      = { .size = MON_COORDS_SIZE(32, 32), .y_offset = 16 },
@@ -1055,28 +1089,40 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_UNOWN_Z]                      = { .size = MON_COORDS_SIZE(24, 32), .y_offset = 16 },
     [SPECIES_UNOWN_EMARK]                  = { .size = MON_COORDS_SIZE(24, 40), .y_offset = 15 },
     [SPECIES_UNOWN_QMARK]                  = { .size = MON_COORDS_SIZE(24, 40), .y_offset = 13 },
+    // Castform         
     [SPECIES_CASTFORM_SUNNY]               = { .size = MON_COORDS_SIZE(40, 48), .y_offset =  9 },
     [SPECIES_CASTFORM_RAINY]               = { .size = MON_COORDS_SIZE(32, 48), .y_offset =  9 },
     [SPECIES_CASTFORM_SNOWY]               = { .size = MON_COORDS_SIZE(40, 56), .y_offset =  8 },
+    // Deoxys         
     [SPECIES_DEOXYS_ATTACK]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_DEOXYS_DEFENSE]               = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  0 },
     [SPECIES_DEOXYS_SPEED]                 = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  1 },
+#if P_GEN_4_POKEMON == TRUE
+    // Burmy         
     [SPECIES_BURMY_SANDY_CLOAK]            = { .size = MON_COORDS_SIZE(32, 56), .y_offset = 12 },
     [SPECIES_BURMY_TRASH_CLOAK]            = { .size = MON_COORDS_SIZE(32, 56), .y_offset =  8 },
+    // Wormadam         
     [SPECIES_WORMADAM_SANDY_CLOAK]         = { .size = MON_COORDS_SIZE(40, 56), .y_offset = 10 },
     [SPECIES_WORMADAM_TRASH_CLOAK]         = { .size = MON_COORDS_SIZE(48, 56), .y_offset = 10 },
+    // Cherrim         
     [SPECIES_CHERRIM_SUNSHINE]             = { .size = MON_COORDS_SIZE(48, 40), .y_offset = 12 },
+    // Shellos         
     [SPECIES_SHELLOS_EAST_SEA]             = { .size = MON_COORDS_SIZE(40, 40), .y_offset = 14 },
+    // Gastrodon         
     [SPECIES_GASTRODON_EAST_SEA]           = { .size = MON_COORDS_SIZE(56, 48), .y_offset =  8 },
+    // Rotom         
     [SPECIES_ROTOM_HEAT]                   = { .size = MON_COORDS_SIZE(56, 48), .y_offset = 10 },
     [SPECIES_ROTOM_WASH]                   = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  7 },
     [SPECIES_ROTOM_FROST]                  = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  4 },
     [SPECIES_ROTOM_FAN]                    = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  8 },
     [SPECIES_ROTOM_MOW]                    = { .size = MON_COORDS_SIZE(56, 64), .y_offset = 12 },
+    // Origin Forme        
     [SPECIES_DIALGA_ORIGIN]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_PALKIA_ORIGIN]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_GIRATINA_ORIGIN]              = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    // Shaymin         
     [SPECIES_SHAYMIN_SKY]                  = { .size = MON_COORDS_SIZE(56, 56), .y_offset =  7 },
+    // Arceus         
     [SPECIES_ARCEUS_FIGHTING]              = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_ARCEUS_FLYING]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_ARCEUS_POISON]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
@@ -1094,30 +1140,44 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_ARCEUS_DRAGON]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_ARCEUS_DARK]                  = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_ARCEUS_FAIRY]                 = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+#endif
+#if P_GEN_5_POKEMON == TRUE
+    // Basculin         
     [SPECIES_BASCULIN_BLUE_STRIPED]        = { .size = MON_COORDS_SIZE(56, 40), .y_offset = 16 },
     [SPECIES_BASCULIN_WHITE_STRIPED]       = { .size = MON_COORDS_SIZE(48, 40), .y_offset = 10 },
+    // Darmanitan         
     [SPECIES_DARMANITAN_ZEN_MODE]          = { .size = MON_COORDS_SIZE(40, 40), .y_offset = 14 },
     [SPECIES_DARMANITAN_ZEN_MODE_GALARIAN] = { .size = MON_COORDS_SIZE(48, 64), .y_offset =  2 },
+    // Deerling         
     [SPECIES_DEERLING_SUMMER]              = { .size = MON_COORDS_SIZE(32, 48), .y_offset = 11 },
     [SPECIES_DEERLING_AUTUMN]              = { .size = MON_COORDS_SIZE(32, 48), .y_offset = 11 },
     [SPECIES_DEERLING_WINTER]              = { .size = MON_COORDS_SIZE(32, 48), .y_offset = 11 },
+    // Sawsbuck         
     [SPECIES_SAWSBUCK_SUMMER]              = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_SAWSBUCK_AUTUMN]              = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_SAWSBUCK_WINTER]              = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  0 },
+    // Therian Forms        
     [SPECIES_TORNADUS_THERIAN]             = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_THUNDURUS_THERIAN]            = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  2 },
     [SPECIES_LANDORUS_THERIAN]             = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
-    [SPECIES_ENAMORUS_THERIAN]             = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    // Kyurem         
     [SPECIES_KYUREM_WHITE]                 = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_KYUREM_BLACK]                 = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    // Keldeo         
     [SPECIES_KELDEO_RESOLUTE]              = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  2 },
+    // Meloetta         
     [SPECIES_MELOETTA_PIROUETTE]           = { .size = MON_COORDS_SIZE(40, 64), .y_offset =  2 },
+    // Genesect         
     [SPECIES_GENESECT_DOUSE_DRIVE]         = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  0 },
     [SPECIES_GENESECT_SHOCK_DRIVE]         = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  0 },
     [SPECIES_GENESECT_BURN_DRIVE]          = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  0 },
     [SPECIES_GENESECT_CHILL_DRIVE]         = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  0 },
+#endif
+#if P_GEN_6_POKEMON == TRUE
+    // Greninja         
     [SPECIES_GRENINJA_BATTLE_BOND]         = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  7 },
     [SPECIES_GRENINJA_ASH]                 = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    // Vivillon         
     [SPECIES_VIVILLON_POLAR]               = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_VIVILLON_TUNDRA]              = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_VIVILLON_CONTINENTAL]         = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
@@ -1137,19 +1197,23 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_VIVILLON_JUNGLE]              = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_VIVILLON_FANCY]               = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_VIVILLON_POKE_BALL]           = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    // Flabébé         
     [SPECIES_FLABEBE_YELLOW_FLOWER]        = { .size = MON_COORDS_SIZE(48, 56), .y_offset =  6 },
     [SPECIES_FLABEBE_ORANGE_FLOWER]        = { .size = MON_COORDS_SIZE(48, 56), .y_offset =  6 },
     [SPECIES_FLABEBE_BLUE_FLOWER]          = { .size = MON_COORDS_SIZE(48, 56), .y_offset =  6 },
     [SPECIES_FLABEBE_WHITE_FLOWER]         = { .size = MON_COORDS_SIZE(48, 56), .y_offset =  6 },
+    // Floette         
     [SPECIES_FLOETTE_YELLOW_FLOWER]        = { .size = MON_COORDS_SIZE(48, 64), .y_offset =  3 },
     [SPECIES_FLOETTE_ORANGE_FLOWER]        = { .size = MON_COORDS_SIZE(48, 64), .y_offset =  3 },
     [SPECIES_FLOETTE_BLUE_FLOWER]          = { .size = MON_COORDS_SIZE(48, 64), .y_offset =  3 },
     [SPECIES_FLOETTE_WHITE_FLOWER]         = { .size = MON_COORDS_SIZE(48, 64), .y_offset =  3 },
     [SPECIES_FLOETTE_ETERNAL_FLOWER]       = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  3 },
+    // Florges         
     [SPECIES_FLORGES_YELLOW_FLOWER]        = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_FLORGES_ORANGE_FLOWER]        = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_FLORGES_BLUE_FLOWER]          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_FLORGES_WHITE_FLOWER]         = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    // Furfrou         
     [SPECIES_FURFROU_HEART_TRIM]           = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  2 },
     [SPECIES_FURFROU_STAR_TRIM]            = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  2 },
     [SPECIES_FURFROU_DIAMOND_TRIM]         = { .size = MON_COORDS_SIZE(48, 64), .y_offset =  2 },
@@ -1159,27 +1223,41 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_FURFROU_LA_REINE_TRIM]        = { .size = MON_COORDS_SIZE(48, 64), .y_offset =  2 },
     [SPECIES_FURFROU_KABUKI_TRIM]          = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  2 },
     [SPECIES_FURFROU_PHARAOH_TRIM]         = { .size = MON_COORDS_SIZE(48, 64), .y_offset =  2 },
+    // Meowstic         
     [SPECIES_MEOWSTIC_FEMALE]              = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  2 },
+    // Aegislash         
     [SPECIES_AEGISLASH_BLADE]              = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    // Pumpkaboo         
     [SPECIES_PUMPKABOO_SMALL]              = { .size = MON_COORDS_SIZE(40, 40), .y_offset = 15 },
     [SPECIES_PUMPKABOO_LARGE]              = { .size = MON_COORDS_SIZE(48, 48), .y_offset = 12 },
     [SPECIES_PUMPKABOO_SUPER]              = { .size = MON_COORDS_SIZE(48, 48), .y_offset = 10 },
+    // Gourgeist         
     [SPECIES_GOURGEIST_SMALL]              = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  5 },
     [SPECIES_GOURGEIST_LARGE]              = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  2 },
     [SPECIES_GOURGEIST_SUPER]              = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    // Xerneas         
     [SPECIES_XERNEAS_ACTIVE]               = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    // Zygarde         
     [SPECIES_ZYGARDE_10]                   = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  2 },
     [SPECIES_ZYGARDE_10_POWER_CONSTRUCT]   = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  2 },
     [SPECIES_ZYGARDE_50_POWER_CONSTRUCT]   = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_ZYGARDE_COMPLETE]             = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    // Hoopa         
     [SPECIES_HOOPA_UNBOUND]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+#endif
+#if P_GEN_7_POKEMON == TRUE
+    // Oricorio         
     [SPECIES_ORICORIO_POM_POM]             = { .size = MON_COORDS_SIZE(56, 56), .y_offset =  5 },
     [SPECIES_ORICORIO_PAU]                 = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  3 },
     [SPECIES_ORICORIO_SENSU]               = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  4 },
+    // Rockruff         
     [SPECIES_ROCKRUFF_OWN_TEMPO]           = { .size = MON_COORDS_SIZE(40, 48), .y_offset = 11 },
+    // Lycanroc         
     [SPECIES_LYCANROC_MIDNIGHT]            = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  1 },
     [SPECIES_LYCANROC_DUSK]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  3 },
+    // Wishiwashi         
     [SPECIES_WISHIWASHI_SCHOOL]            = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  4 },
+    // Silvally         
     [SPECIES_SILVALLY_FIGHTING]            = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_SILVALLY_FLYING]              = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_SILVALLY_POISON]              = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
@@ -1197,6 +1275,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_SILVALLY_DRAGON]              = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_SILVALLY_DARK]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_SILVALLY_FAIRY]               = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    // Minior         
     [SPECIES_MINIOR_METEOR_ORANGE]         = { .size = MON_COORDS_SIZE(48, 40), .y_offset = 14 },
     [SPECIES_MINIOR_METEOR_YELLOW]         = { .size = MON_COORDS_SIZE(48, 40), .y_offset = 14 },
     [SPECIES_MINIOR_METEOR_GREEN]          = { .size = MON_COORDS_SIZE(48, 40), .y_offset = 14 },
@@ -1210,16 +1289,26 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_MINIOR_CORE_BLUE]             = { .size = MON_COORDS_SIZE(48, 40), .y_offset = 14 },
     [SPECIES_MINIOR_CORE_INDIGO]           = { .size = MON_COORDS_SIZE(48, 40), .y_offset = 14 },
     [SPECIES_MINIOR_CORE_VIOLET]           = { .size = MON_COORDS_SIZE(48, 40), .y_offset = 14 },
+    // Mimikyu         
     [SPECIES_MIMIKYU_BUSTED]               = { .size = MON_COORDS_SIZE(48, 40), .y_offset = 12 },
+    // Necrozma         
     [SPECIES_NECROZMA_DUSK_MANE]           = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_NECROZMA_DAWN_WINGS]          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_NECROZMA_ULTRA]               = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    // Magearna         
     [SPECIES_MAGEARNA_ORIGINAL_COLOR]      = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  0 },
+#endif
+#if P_GEN_8_POKEMON == TRUE
+    // Cramorant         
     [SPECIES_CRAMORANT_GULPING]            = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_CRAMORANT_GORGING]            = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    // Toxtricity         
     [SPECIES_TOXTRICITY_LOW_KEY]           = { .size = MON_COORDS_SIZE(48, 64), .y_offset =  2 },
+    // Sinistea         
     [SPECIES_SINISTEA_ANTIQUE]             = { .size = MON_COORDS_SIZE(40, 32), .y_offset = 17 },
+    // Polteageist         
     [SPECIES_POLTEAGEIST_ANTIQUE]          = { .size = MON_COORDS_SIZE(48, 48), .y_offset = 11 },
+    // Alcremie         
     [SPECIES_ALCREMIE_RUBY_CREAM]          = { .size = MON_COORDS_SIZE(40, 56), .y_offset =  7 },
     [SPECIES_ALCREMIE_MATCHA_CREAM]        = { .size = MON_COORDS_SIZE(40, 56), .y_offset =  7 },
     [SPECIES_ALCREMIE_MINT_CREAM]          = { .size = MON_COORDS_SIZE(40, 56), .y_offset =  7 },
@@ -1228,15 +1317,28 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_ALCREMIE_RUBY_SWIRL]          = { .size = MON_COORDS_SIZE(40, 56), .y_offset =  7 },
     [SPECIES_ALCREMIE_CARAMEL_SWIRL]       = { .size = MON_COORDS_SIZE(40, 56), .y_offset =  7 },
     [SPECIES_ALCREMIE_RAINBOW_SWIRL]       = { .size = MON_COORDS_SIZE(40, 56), .y_offset =  7 },
+    // Eiscue         
     [SPECIES_EISCUE_NOICE_FACE]            = { .size = MON_COORDS_SIZE(40, 64), .y_offset =  0 },
+    // Indeedee         
     [SPECIES_INDEEDEE_FEMALE]              = { .size = MON_COORDS_SIZE(40, 48), .y_offset =  9 },
+    // Morpeko         
     [SPECIES_MORPEKO_HANGRY]               = { .size = MON_COORDS_SIZE(32, 40), .y_offset = 14 },
+    // Zacian         
     [SPECIES_ZACIAN_CROWNED_SWORD]         = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    // Zamazenta         
     [SPECIES_ZAMAZENTA_CROWNED_SHIELD]     = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  0 },
+    // Eternatus         
     [SPECIES_ETERNATUS_ETERNAMAX]          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  3 },
+    // Urshifu         
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE]   = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  0 },
+    // Zarude         
     [SPECIES_ZARUDE_DADA]                  = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  2 },
+    // Calyrex         
     [SPECIES_CALYREX_ICE_RIDER]            = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_CALYREX_SHADOW_RIDER]         = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    [SPECIES_ENAMORUS_THERIAN]             = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+#endif
+    // Egg         
     [SPECIES_EGG]                          = { .size = MON_COORDS_SIZE(24, 24), .y_offset = 20 },
+
 };
