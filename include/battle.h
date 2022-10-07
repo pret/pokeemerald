@@ -479,7 +479,6 @@ struct MegaEvolutionData
     bool8 playerSelect;
     u8 triggerSpriteId;
     bool8 isWishMegaEvo;
-    bool32 didMegaEvo[PARTY_SIZE][2]; // For each party member and side.
 };
 
 struct Illusion

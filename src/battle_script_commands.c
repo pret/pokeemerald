@@ -8840,7 +8840,6 @@ static void Cmd_various(void)
 
             gBattleMons[gActiveBattler].species = megaSpecies;
             PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].species);
-            gBattleStruct->mega.didMegaEvo[gActiveBattler][GetBattlerSide(gActiveBattler)] = TRUE;
 
             BtlController_EmitSetMonData(BUFFER_A, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[gActiveBattler]], sizeof(gBattleMons[gActiveBattler].species), &gBattleMons[gActiveBattler].species);
             MarkBattlerForControllerExec(gActiveBattler);

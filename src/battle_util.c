@@ -2110,10 +2110,11 @@ u32 GetBattlerFriendshipScore(u8 battlerId)
     struct MegaEvolutionData *mega = &(((struct ChooseMoveStruct *)(&gBattleResources->bufferA[battlerId][4]))->mega);
     u8 side = GetBattlerSide(battlerId);
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    u16 species = GetMonData(&party[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
 
     if (side != B_SIDE_PLAYER)
         return FRIENDSHIP_NONE;
-    else if (gBattleStruct->mega.didMegaEvo[battlerId][side]
+    else if (gBaseStats[species].flags & SPECIES_FLAG_MEGA_EVOLUTION
           || (gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER
                                 | BATTLE_TYPE_FRONTIER
                                 | BATTLE_TYPE_LINK
