@@ -2107,7 +2107,6 @@ void TryToRevertMimicry(void)
 
 u32 GetBattlerFriendshipScore(u8 battlerId)
 {
-    struct MegaEvolutionData *mega = &(((struct ChooseMoveStruct *)(&gBattleResources->bufferA[battlerId][4]))->mega);
     u8 side = GetBattlerSide(battlerId);
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
     u16 species = GetMonData(&party[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
