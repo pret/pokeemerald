@@ -284,7 +284,7 @@ void SerialCB(void);
 bool32 InUnionRoom(void);
 void LoadWirelessStatusIndicatorSpriteGfx(void);
 bool8 IsLinkTaskFinished(void);
-void CreateWirelessStatusIndicatorSprite(u8, u8);
+void CreateWirelessStatusIndicatorSprite(u8 x, u8 y);
 void SetLinkStandbyCallback(void);
 void SetWirelessCommType1(void);
 void CheckShouldAdvanceLinkState(void);

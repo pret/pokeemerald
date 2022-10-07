@@ -8,12 +8,31 @@
 // Ruby's actual debug build does not use the AGBPrint features.
 #define NDEBUG
 
-// To enable print debugging, comment out "#define NDEBUG". This allows
+// To enable printf debugging, comment out "#define NDEBUG". This allows
 // the various AGBPrint functions to be used. (See include/gba/isagbprint.h).
-// Some emulators support a debug console window: uncomment NoCashGBAPrint()
-// and NoCashGBAPrintf() in libisagbprn.c to use no$gba's own proprietary
-// printing system. Use NoCashGBAPrint() and NoCashGBAPrintf() like you
-// would normally use AGBPrint() and AGBPrintf().
+// See below for enabling different pretty printing versions.
+
+#ifndef NDEBUG
+
+#define PRETTY_PRINT_MINI_PRINTF (0)
+#define PRETTY_PRINT_LIBC (1)
+
+#define LOG_HANDLER_AGB_PRINT (0)
+#define LOG_HANDLER_NOCASH_PRINT (1)
+#define LOG_HANDLER_MGBA_PRINT (2)
+
+// Use this switch to choose a handler for pretty printing.
+// NOTE: mini_printf supports a custom pretty printing formatter to display preproc encoded strings. (%S)
+//       some libc distributions (especially dkp arm-libc) will fail to link pretty printing.
+#define PRETTY_PRINT_HANDLER (PRETTY_PRINT_MINI_PRINTF)
+
+// Use this switch to choose a handler for printf output.
+// NOTE: These will only work on the respective emulators and should not be used in a productive environment.
+//       Some emulators or real hardware might (and is allowed to) crash if they are used.
+//       AGB_PRINT is supported on respective debug units.
+
+#define LOG_HANDLER (LOG_HANDLER_MGBA_PRINT)
+#endif
 
 #define ENGLISH
 

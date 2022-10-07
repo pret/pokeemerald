@@ -181,6 +181,15 @@
 #define FRIENDSHIP_EVENT_FAINT_FIELD_PSN  7
 #define FRIENDSHIP_EVENT_FAINT_LARGE      8 // If opponent was >= 30 levels higher. See AdjustFriendshipOnBattleFaint
 
+// Constants for GetLeadMonFriendshipScore
+#define FRIENDSHIP_NONE        0
+#define FRIENDSHIP_1_TO_49     1
+#define FRIENDSHIP_50_TO_99    2
+#define FRIENDSHIP_100_TO_149  3
+#define FRIENDSHIP_150_TO_199  4
+#define FRIENDSHIP_200_TO_254  5
+#define FRIENDSHIP_MAX         6
+
 #define MAX_FRIENDSHIP  255
 #define MAX_SHEEN       255
 #define MAX_CONDITION   255
@@ -246,9 +255,6 @@
 #define EVO_MODE_TRADE      1
 #define EVO_MODE_ITEM_USE   2
 #define EVO_MODE_ITEM_CHECK 3 // If an Everstone is being held, still want to show that the stone *could* be used on that Pokémon to evolve
-
-#define NUM_MALE_LINK_FACILITY_CLASSES   8
-#define NUM_FEMALE_LINK_FACILITY_CLASSES 8
 
 #define MON_PIC_WIDTH 64
 #define MON_PIC_HEIGHT 64

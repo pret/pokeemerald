@@ -525,6 +525,9 @@ static const struct SpriteTemplate sSpriteTemplates_NextTurn[CONTESTANT_COUNT] =
     }
 };
 
+/*    v-- Origin
+[0    +][1     ]   64x8
+*/
 static const struct Subsprite sSubsprites_NextTurn[] =
 {
     {

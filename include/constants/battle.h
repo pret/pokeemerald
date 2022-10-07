@@ -31,8 +31,8 @@
 #define B_POSITION_OPPONENT_RIGHT     3
 
 // These macros can be used with either battler ID or positions to get the partner or the opposite mon
-#define BATTLE_OPPOSITE(id) ((id) ^ 1)
-#define BATTLE_PARTNER(id) ((id) ^ 2)
+#define BATTLE_OPPOSITE(id) ((id) ^ BIT_SIDE)
+#define BATTLE_PARTNER(id) ((id) ^ BIT_FLANK)
 
 #define B_SIDE_PLAYER     0
 #define B_SIDE_OPPONENT   1
@@ -316,6 +316,11 @@
 #define FLEE_ITEM    1
 #define FLEE_ABILITY 2
 
+// Return value for IsRunningFromBattleImpossible.
+#define BATTLE_RUN_SUCCESS        0
+#define BATTLE_RUN_FORBIDDEN      1
+#define BATTLE_RUN_FAILURE        2
+
 #define B_WIN_TYPE_NORMAL 0
 #define B_WIN_TYPE_ARENA  1
 
@@ -352,8 +357,8 @@
 #define ARENA_WIN_MIND             18
 #define ARENA_WIN_SKILL            19
 #define ARENA_WIN_BODY             20
-#define ARENA_WIN_JUDGEMENT_TITLE  21
-#define ARENA_WIN_JUDGEMENT_TEXT   22
+#define ARENA_WIN_JUDGMENT_TITLE   21
+#define ARENA_WIN_JUDGMENT_TEXT    22
 
 // Flag for BattlePutTextOnWindow. Never set
 #define B_WIN_COPYTOVRAM (1 << 7)

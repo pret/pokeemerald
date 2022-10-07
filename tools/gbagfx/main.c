@@ -77,7 +77,7 @@ void ConvertPngToGba(char *inputPath, char *outputPath, struct PngToGbaOptions *
 
     ReadPng(inputPath, &image);
 
-    WriteImage(outputPath, options->numTiles, options->bitDepth, options->metatileWidth, options->metatileHeight, &image, !image.hasPalette);
+    WriteImage(outputPath, options->numTilesMode, options->numTiles, options->bitDepth, options->metatileWidth, options->metatileHeight, &image, !image.hasPalette);
 
     FreeImage(&image);
 }
@@ -179,6 +179,7 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
     char *outputFileExtension = GetFileExtensionAfterDot(outputPath);
     int bitDepth = outputFileExtension[0] - '0';
     struct PngToGbaOptions options;
+    options.numTilesMode = NUM_TILES_IGNORE;
     options.numTiles = 0;
     options.bitDepth = bitDepth;
     options.metatileWidth = 1;
@@ -202,6 +203,12 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
 
             if (options.numTiles < 1)
                 FATAL_ERROR("Number of tiles must be positive.\n");
+        }
+        else if (strcmp(option, "-Wnum_tiles") == 0) {
+            options.numTilesMode = NUM_TILES_WARN;
+        }
+        else if (strcmp(option, "-Werror=num_tiles") == 0) {
+            options.numTilesMode = NUM_TILES_ERROR;
         }
         else if (strcmp(option, "-mwidth") == 0)
         {

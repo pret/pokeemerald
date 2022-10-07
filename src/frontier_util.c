@@ -2285,7 +2285,7 @@ static void Fill1PRecords(struct RankingHall1P *dst, s32 hallFacilityId, s32 lvl
 {
     s32 i, j;
     struct RankingHall1P record1P[HALL_RECORDS_COUNT + 1];
-    struct PlayerHallRecords *playerHallRecords = calloc(1, sizeof(struct PlayerHallRecords));
+    struct PlayerHallRecords *playerHallRecords = AllocZeroed(sizeof(struct PlayerHallRecords));
     GetPlayerHallRecords(playerHallRecords);
 
     for (i = 0; i < HALL_RECORDS_COUNT; i++)
@@ -2312,14 +2312,14 @@ static void Fill1PRecords(struct RankingHall1P *dst, s32 hallFacilityId, s32 lvl
         record1P[highestId].winStreak = 0;
     }
 
-    free(playerHallRecords);
+    Free(playerHallRecords);
 }
 
 static void Fill2PRecords(struct RankingHall2P *dst, s32 lvlMode)
 {
     s32 i, j;
     struct RankingHall2P record2P[HALL_RECORDS_COUNT + 1];
-    struct PlayerHallRecords *playerHallRecords = calloc(1, sizeof(struct PlayerHallRecords));
+    struct PlayerHallRecords *playerHallRecords = AllocZeroed(sizeof(struct PlayerHallRecords));
     GetPlayerHallRecords(playerHallRecords);
 
     for (i = 0; i < HALL_RECORDS_COUNT; i++)
@@ -2346,7 +2346,7 @@ static void Fill2PRecords(struct RankingHall2P *dst, s32 lvlMode)
         record2P[highestId].winStreak = 0;
     }
 
-    free(playerHallRecords);
+    Free(playerHallRecords);
 }
 
 static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
@@ -2435,7 +2435,7 @@ void ClearRankingHallRecords(void)
 void SaveGameFrontier(void)
 {
     s32 i;
-    struct Pokemon *monsParty = calloc(PARTY_SIZE, sizeof(struct Pokemon));
+    struct Pokemon *monsParty = AllocZeroed(sizeof(struct Pokemon) * PARTY_SIZE);
 
     for (i = 0; i < PARTY_SIZE; i++)
         monsParty[i] = gPlayerParty[i];
@@ -2450,7 +2450,7 @@ void SaveGameFrontier(void)
     for (i = 0; i < PARTY_SIZE; i++)
         gPlayerParty[i] = monsParty[i];
 
-    free(monsParty);
+    Free(monsParty);
 }
 
 // Frontier Brain functions.

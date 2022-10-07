@@ -267,7 +267,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
-        .width = 30,
+        .width = DISPLAY_TILE_WIDTH,
         .height = 2,
         .paletteNum = 11,
         .baseBlock = 0x074
@@ -1771,7 +1771,7 @@ static void DrawGenderIcon(void)
             StringCopy(text, gText_FemaleSymbol);
             isFemale = TRUE;
         }
-        AddTextPrinterParameterized3(sNamingScreen->windows[WIN_TEXT_ENTRY], FONT_NORMAL, 0x68, 1, sGenderColors[isFemale], TEXT_SKIP_DRAW, text);
+        AddTextPrinterParameterized3(sNamingScreen->windows[WIN_TEXT_ENTRY], FONT_NORMAL, (POKEMON_NAME_LENGTH * 4) + 64, 1, sGenderColors[isFemale], TEXT_SKIP_DRAW, text);
     }
 }
 
@@ -2179,6 +2179,12 @@ static const struct OamData sOam_32x16 =
     .paletteNum = 0,
 };
 
+/*
+[0_____][] <-1   40x32
+[2_____][] <-3
+[4___+_][] <-5/Origin
+[6     ][] <-7
+*/
 static const struct Subsprite sSubsprites_PageSwapFrame[] =
 {
     {
@@ -2247,6 +2253,10 @@ static const struct Subsprite sSubsprites_PageSwapFrame[] =
     }
 };
 
+/*
+[0_][] <-1    24x8
+   ^-- Origin
+*/
 static const struct Subsprite sSubsprites_PageSwapText[] =
 {
     {
@@ -2267,6 +2277,11 @@ static const struct Subsprite sSubsprites_PageSwapText[] =
     }
 };
 
+/*
+[0_____][] <-1   40x24
+[2_____][] <-3
+[4___+_][] <-5/Origin
+*/
 static const struct Subsprite sSubsprites_Button[] =
 {
     {
@@ -2319,6 +2334,11 @@ static const struct Subsprite sSubsprites_Button[] =
     }
 };
 
+/*
+[0_]    16x24
+[1+] <--Origin
+[2_]
+*/
 static const struct Subsprite sSubsprites_PCIcon[] =
 {
     {

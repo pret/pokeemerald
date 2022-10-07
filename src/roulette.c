@@ -1044,11 +1044,11 @@ static const struct YesNoFuncTable sYesNoTable_KeepPlaying =
 
 static void CB2_Roulette(void)
 {
-	RunTasks();
-	AnimateSprites();
-	BuildOamBuffer();
-	if (sRoulette->flashUtil.enabled)
-	   RouletteFlash_Run(&sRoulette->flashUtil);
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    if (sRoulette->flashUtil.enabled)
+        RouletteFlash_Run(&sRoulette->flashUtil);
 }
 
 static void VBlankCB_Roulette(void)
@@ -2679,7 +2679,7 @@ static const struct SpriteTemplate sSpriteTemplates_ColorHeaders[NUM_BOARD_COLOR
     }
 };
 
-static const struct SpriteTemplate sSpriteTemplate_GridIcons[NUM_BOARD_POKES] =
+static const struct SpriteTemplate sSpriteTemplates_GridIcons[NUM_BOARD_POKES] =
 {
     {
         .tileTag = GFXTAG_GRID_ICONS,
@@ -3554,7 +3554,7 @@ static void CreateGridSprites(void)
         u8 y = i * 24;
         for (j = 0; j < NUM_BOARD_POKES; j++)
         {
-            spriteId = sRoulette->spriteIds[(i * NUM_BOARD_POKES) + SPR_GRID_ICONS + j] = CreateSprite(&sSpriteTemplate_GridIcons[j], (j * 24) + 148, y + 92, 30);
+            spriteId = sRoulette->spriteIds[(i * NUM_BOARD_POKES) + SPR_GRID_ICONS + j] = CreateSprite(&sSpriteTemplates_GridIcons[j], (j * 24) + 148, y + 92, 30);
             gSprites[spriteId].animPaused = TRUE;
             y += 24;
             if (y >= 72)
@@ -4533,7 +4533,7 @@ static void SpriteCB_ShroomishExit(struct Sprite *sprite)
     // Delay for screen shaking, then exit left
     if (sprite->data[1]++ >= sprite->data[3])
     {
-	    sprite->x -= 2;
+        sprite->x -= 2;
         if (sprite->x < -16)
         {
             if (!sRoulette->ballUnstuck)
