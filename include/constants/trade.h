@@ -99,8 +99,8 @@
 #define UR_TRADE_MSG_NONE                         0
 #define UR_TRADE_MSG_NOT_MON_PARTNER_WANTS        1
 #define UR_TRADE_MSG_NOT_EGG                      2
-#define UR_TRADE_MSG_MON_CANT_BE_TRADED_1         3
-#define UR_TRADE_MSG_MON_CANT_BE_TRADED_2         4
+#define UR_TRADE_MSG_MON_CANT_BE_TRADED_NOW       3
+#define UR_TRADE_MSG_MON_CANT_BE_TRADED           4
 #define UR_TRADE_MSG_PARTNERS_MON_CANT_BE_TRADED  5
 #define UR_TRADE_MSG_EGG_CANT_BE_TRADED           6
 #define UR_TRADE_MSG_PARTNER_CANT_ACCEPT_MON      7
@@ -108,9 +108,10 @@
 #define UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_2    9
 
 // Return values for CanRegisterMonForTradingBoard
-#define CAN_REGISTER_MON   0
-#define CANT_REGISTER_MON  1
-#define CANT_REGISTER_EGG  2
+#define CAN_REGISTER_MON      0
+#define CANT_REGISTER_MON_NOW 1
+#define CANT_REGISTER_MON     2
+#define CANT_REGISTER_EGG     3
 
 
 #endif //GUARD_CONSTANTS_TRADE_H
