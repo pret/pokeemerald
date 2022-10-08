@@ -233,7 +233,7 @@ static const struct OamData sOamData_RotatingGateLarge =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -250,7 +250,7 @@ static const struct OamData sOamData_RotatingGateRegular =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -876,7 +876,12 @@ static s32 RotatingGate_CanRotate(u8 gateId, s32 rotationDirection)
 
             if (sRotatingGate_ArmLayout[shape][2 * i + j])
             {
-                if (MapGridIsImpassableAt(x + armPos[armIndex].x, y + armPos[armIndex].y) == TRUE)
+            #ifdef BUGFIX
+                // Collision has a range 0-3, any value != 0 is impassable
+                if (MapGridGetCollisionAt(x + armPos[armIndex].x, y + armPos[armIndex].y))
+            #else
+                if (MapGridGetCollisionAt(x + armPos[armIndex].x, y + armPos[armIndex].y) == 1)
+            #endif
                     return FALSE;
             }
         }

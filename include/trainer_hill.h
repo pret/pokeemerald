@@ -5,7 +5,7 @@
 
 struct TrainerHillTrainer
 {
-    u8 name[HILL_TRAINER_NAME_LENGTH];
+    u8 name[TRAINER_NAME_LENGTH + 1];
     u8 facilityClass;
     bool32 unused; // Set to TRUE on JP trainers
     u16 speechBefore[EASY_CHAT_BATTLE_WORDS_COUNT];

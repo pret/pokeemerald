@@ -388,7 +388,7 @@ static const struct OamData sOam_SliderHeart =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
@@ -473,7 +473,7 @@ static const struct OamData sOam_NextTurn =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
     .x = 0,
@@ -525,6 +525,9 @@ static const struct SpriteTemplate sSpriteTemplates_NextTurn[CONTESTANT_COUNT] =
     }
 };
 
+/*    v-- Origin
+[0    +][1     ]   64x8
+*/
 static const struct Subsprite sSubsprites_NextTurn[] =
 {
     {
@@ -859,19 +862,19 @@ static const struct CompressedSpriteSheet sSpriteSheets_ContestantsTurnBlinkEffe
 static const struct SpritePalette sSpritePalettes_ContestantsTurnBlinkEffect[CONTESTANT_COUNT] =
 {
     {
-        .data = (u16*)(gHeap + 0x1A0A4),
+        .data = (u16 *)(gHeap + 0x1A0A4),
         .tag = TAG_BLINK_EFFECT_CONTESTANT0
     },
     {
-        .data = (u16*)(gHeap + 0x1A0C4),
+        .data = (u16 *)(gHeap + 0x1A0C4),
         .tag = TAG_BLINK_EFFECT_CONTESTANT1
     },
     {
-        .data = (u16*)(gHeap + 0x1A0E4),
+        .data = (u16 *)(gHeap + 0x1A0E4),
         .tag = TAG_BLINK_EFFECT_CONTESTANT2
     },
     {
-        .data = (u16*)(gHeap + 0x1A104),
+        .data = (u16 *)(gHeap + 0x1A104),
         .tag = TAG_BLINK_EFFECT_CONTESTANT3
     }
 };
@@ -1396,7 +1399,7 @@ static void Task_RaiseCurtainAtStart(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 1:
-        *(s16*)&gBattle_BG1_Y += 7;
+        *(s16 *)&gBattle_BG1_Y += 7;
         if ((s16)gBattle_BG1_Y <= DISPLAY_HEIGHT)
             break;
         gTasks[taskId].data[0]++;
@@ -1582,7 +1585,7 @@ static void Task_HandleMoveSelectInput(u8 taskId)
                 StringCopy(gDisplayedStringBattle, gText_AppealNumButItCantParticipate);
             ContestClearGeneralTextWindow();
             StringExpandPlaceholders(gStringVar4, gDisplayedStringBattle);
-            Contest_StartTextPrinter(gStringVar4, 0);
+            Contest_StartTextPrinter(gStringVar4, FALSE);
             gBattle_BG0_Y = 0;
             gBattle_BG2_Y = 0;
             gTasks[taskId].func = Task_TryShowMoveSelectScreen;
@@ -1814,7 +1817,7 @@ static void Task_DoAppeals(u8 taskId)
             else
                 StringCopy(gStringVar2, sInvalidContestMoveNames[eContestantStatus[contestant].moveCategory]);
             StringExpandPlaceholders(gStringVar4, gText_MonAppealedWithMove);
-            Contest_StartTextPrinter(gStringVar4, 1);
+            Contest_StartTextPrinter(gStringVar4, TRUE);
             gTasks[taskId].tState = APPEALSTATE_WAIT_USED_MOVE_MSG;
         }
         return;
@@ -2076,7 +2079,7 @@ static void Task_DoAppeals(u8 taskId)
                 ContestClearGeneralTextWindow();
                 StringCopy(gStringVar1, gContestMons[contestant].nickname);
                 StringExpandPlaceholders(gStringVar4, gText_MonCantAppealNextTurn);
-                Contest_StartTextPrinter(gStringVar4, 1);
+                Contest_StartTextPrinter(gStringVar4, TRUE);
             }
             gTasks[taskId].tState = APPEALSTATE_WAIT_SKIP_NEXT_TURN_MSG;
         }
@@ -2118,7 +2121,7 @@ static void Task_DoAppeals(u8 taskId)
             ContestClearGeneralTextWindow();
             StringCopy(gStringVar1, gContestMons[contestant].nickname);
             StringExpandPlaceholders(gStringVar4, gText_JudgeLookedAtMonExpectantly);
-            Contest_StartTextPrinter(gStringVar4, 1);
+            Contest_StartTextPrinter(gStringVar4, TRUE);
             DoJudgeSpeechBubble(JUDGE_SYMBOL_ONE_EXCLAMATION);
             gTasks[taskId].tCounter = 0;
             gTasks[taskId].tState = APPEALSTATE_WAIT_JUDGE_COMBO;
@@ -2231,7 +2234,7 @@ static void Task_DoAppeals(u8 taskId)
                     StringExpandPlaceholders(gStringVar4, gText_MonsXWentOverGreat);
                 else
                     StringExpandPlaceholders(gStringVar4, gText_MonsXGotTheCrowdGoing);
-                Contest_StartTextPrinter(gStringVar4, 1);
+                Contest_StartTextPrinter(gStringVar4, TRUE);
                 gTasks[taskId].tCounter = 0;
                 gTasks[taskId].data[11] = 0;
                 if (r3 < 0)
@@ -2753,8 +2756,8 @@ static void Task_ContestReturnToField(u8 taskId)
 
 static void FieldCB_ContestReturnToField(void)
 {
-    ScriptContext2_Disable();
-    EnableBothScriptContexts();
+    UnlockPlayerFieldControls();
+    ScriptContext_Enable();
 }
 
 static void TryPutPlayerLast(void)
@@ -3666,7 +3669,7 @@ static void ContestPrintLinkStandby(void)
     gBattle_BG0_Y = 0;
     gBattle_BG2_Y = 0;
     ContestClearGeneralTextWindow();
-    Contest_StartTextPrinter(gText_LinkStandby4, 0);
+    Contest_StartTextPrinter(gText_LinkStandby4, FALSE);
 }
 
 static void FillContestantWindowBgs(void)
@@ -4577,7 +4580,7 @@ static void PrintAppealMoveResultText(u8 contestant, u8 stringId)
         StringCopy(gStringVar3, gText_Contest_Fear);
     StringExpandPlaceholders(gStringVar4, sAppealResultTexts[stringId]);
     ContestClearGeneralTextWindow();
-    Contest_StartTextPrinter(gStringVar4, 1);
+    Contest_StartTextPrinter(gStringVar4, TRUE);
 }
 
 void MakeContestantNervous(u8 p)

@@ -387,7 +387,7 @@ u8 *StringBraille(u8 *dest, const u8 *src)
     const u8 setBrailleFont[] = {
         EXT_CTRL_CODE_BEGIN,
         EXT_CTRL_CODE_FONT,
-        6,
+        FONT_BRAILLE,
         EOS
     };
     const u8 gotoLine2[] = {

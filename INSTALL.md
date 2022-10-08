@@ -44,15 +44,15 @@ WSL1 is the preferred terminal to build **pokeemerald**. The following instructi
 3. The next step is to choose and install a Linux distribution from the Microsoft Store. The following instructions will assume Ubuntu as the Linux distribution of choice.
     <details>
         <summary><i>Note for advanced users...</i></summary>
-    
-    >   You can pick a preferred Linux distribution, but setup instructions may differ. Debian should work with the given instructions, but has not been tested. 
+
+    >   You can pick a preferred Linux distribution, but setup instructions may differ. Debian should work with the given instructions, but has not been tested.
     </details>
 
 4. Open the [Microsoft Store Linux Selection](https://aka.ms/wslstore), click Ubuntu, then click Get, which will install the Ubuntu distribution.
     <details>
         <summary><i>Notes...</i></summary>
 
-    >   Note 1: If a dialog pops up asking for you to sign into a Microsoft Account, then just close the dialog.  
+    >   Note 1: If a dialog pops up asking for you to sign into a Microsoft Account, then just close the dialog.
     >   Note 2: If the link does not work, then open the Microsoft Store manually, and search for the Ubuntu app (choose the one with no version number).
     </details>
 
@@ -102,11 +102,11 @@ cd /mnt/c/Users/<user>/Desktop/decomps
 <details>
     <summary><i>Notes...</i></summary>
 
->   Note 1: The Windows C:\ drive is called /mnt/c/ in WSL.  
->   Note 2: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "/mnt/c/users/<user>/Desktop/decomp folder"`.  
+>   Note 1: The Windows C:\ drive is called /mnt/c/ in WSL.
+>   Note 2: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "/mnt/c/users/<user>/Desktop/decomp folder"`.
 >   Note 3: Windows path names are case-insensitive so adhering to capitalization isn't needed
 </details>
-    
+
 If this works, then proceed to [Installation](#installation).
 
 Otherwise, ask for help on Discord or IRC (see [README.md](README.md)), or continue reading below for [Windows instructions using msys2](#windows-msys2).
@@ -213,10 +213,10 @@ Note that the directory **must exist** in Windows. If you want to store pokeemer
 <details>
     <summary><i>Notes...</i></summary>
 
->   Note 1: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "c:/users/<user>/Desktop/decomp folder"`.  
->   Note 2: Windows path names are case-insensitive so adhering to capitalization isn't needed  
+>   Note 1: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "c:/users/<user>/Desktop/decomp folder"`.
+>   Note 2: Windows path names are case-insensitive so adhering to capitalization isn't needed
 </details>
-    
+
 If this works, then proceed to [Installation](#installation). Otherwise, ask for help on Discord or IRC (see [README.md](README.md)).
 
 ## macOS
@@ -283,8 +283,8 @@ Note that the directory **must exist** in the folder system. If you want to stor
 
 <details>
     <summary><i>Note..</i>.</summary>
-    
->   Note: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "Desktop/decomp folder"`  
+
+>   Note: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "Desktop/decomp folder"`
 </details>
 
 If this works, then proceed to [Installation](#installation). Otherwise, ask for help on Discord or IRC (see [README.md](README.md)).
@@ -305,7 +305,7 @@ Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to
 >   then you will have to install devkitARM. Install all the above packages except binutils-arm-none-eabi, and follow the instructions to
 >   [install devkitARM on Debian/Ubuntu-based distributions](#installing-devkitarm-on-debianubuntu-based-distributions).
 </details>
-    
+
 ### Arch Linux
 Run this command as root to install the necessary packages:
 ```bash
@@ -539,7 +539,7 @@ devkitARM is now installed.
 devkitARM is now installed.
 
 ### Installing devkitARM on Arch Linux
-        
+
 1. Follow [devkitPro's instructions](https://devkitpro.org/wiki/devkitPro_pacman#Customising_Existing_Pacman_Install) to configure `pacman` to download devkitPro packages.
 2. Install `gba-dev`: run the following command as root.
 

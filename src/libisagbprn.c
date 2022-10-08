@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include "gba/gba.h"
 #include "config.h"
+#include "malloc.h"
+#include "mini_printf.h"
 
 #define AGB_PRINT_FLUSH_ADDR 0x9FE209D
 #define AGB_PRINT_STRUCT_ADDR 0x9FE20F8
@@ -13,6 +15,11 @@
 #define NOCASHGBAIDADDR 0x4FFFA00
 #define NOCASHGBAPRINTADDR1 0x4FFFA10 // automatically adds a newline after the string has finished
 #define NOCASHGBAPRINTADDR2 0x4FFFA14 // does not automatically add the newline. by default, NOCASHGBAPRINTADDR2 is used. this is used to keep strings consistent between no$gba and VBA-RR, but a user can choose to forgo this.
+
+// hardware extensions for LOG_HANDLER_MGBA_PRINT
+#define REG_DEBUG_ENABLE ((vu16*) (0x4FFF780)) // handshake: (w)[0xC0DE] -> (r)[0x1DEA]
+#define REG_DEBUG_FLAGS  ((vu16*) (0x4FFF700))
+#define REG_DEBUG_STRING ((char*) (0x4FFF600))
 
 struct AGBPrintStruct
 {
@@ -26,6 +33,8 @@ typedef void (*LPFN_PRINT_FLUSH)(void);
 
 #ifndef NDEBUG
 
+// AGBPrint print functions
+#if (LOG_HANDLER == LOG_HANDLER_AGB_PRINT)
 void AGBPrintFlush1Block(void);
 
 void AGBPrintInit(void)
@@ -87,7 +96,13 @@ void AGBPrintf(const char *pBuf, ...)
     char bufPrint[0x100];
     va_list vArgv;
     va_start(vArgv, pBuf);
-    vsprintf(bufPrint, pBuf, vArgv);
+    #if (PRETTY_PRINT_HANDLER == PRETTY_PRINT_MINI_PRINTF)
+    mini_vsnprintf(bufPrint, 0x100, pBuf, vArgv);
+    #elif (PRETTY_PRINT_HANDLER == PRETTY_PRINT_LIBC)
+    vsnprintf(bufPrint, 0x100, pBuf, vArgv);
+    #else
+    #error "unspecified pretty printing handler."
+    #endif
     va_end(vArgv);
     AGBPrint(bufPrint);
 }
@@ -155,12 +170,13 @@ void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopP
         AGBPrintf("WARING FILE=[%s] LINE=[%d]  EXP=[%s] \n", pFile, nLine, pExpression);
     }
 }
+#endif
 
-// no$gba print functions, uncomment to use
-/*
+// no$gba print functions
+#if (LOG_HANDLER == LOG_HANDLER_NOCASH_PRINT)
 void NoCashGBAPrint(const char *pBuf)
 {
-    *(volatile u32*)NOCASHGBAPRINTADDR2 = (u32)pBuf;
+    *(volatile u32 *)NOCASHGBAPRINTADDR2 = (u32)pBuf;
 }
 
 void NoCashGBAPrintf(const char *pBuf, ...)
@@ -168,10 +184,74 @@ void NoCashGBAPrintf(const char *pBuf, ...)
     char bufPrint[0x100];
     va_list vArgv;
     va_start(vArgv, pBuf);
-    vsprintf(bufPrint, pBuf, vArgv);
+    #if (PRETTY_PRINT_HANDLER == PRETTY_PRINT_MINI_PRINTF)
+    mini_vsnprintf(bufPrint, 0x100, pBuf, vArgv);
+    #elif (PRETTY_PRINT_HANDLER == PRETTY_PRINT_LIBC)
+    vsnprintf(bufPrint, 0x100, pBuf, vArgv);
+    #else
+    #error "unspecified pretty printing handler."
+    #endif
     va_end(vArgv);
     NoCashGBAPrint(bufPrint);
 }
-*/
 
+void NoCashGBAAssert(const char *pFile, s32 nLine, const char *pExpression, bool32 nStopProgram)
+{
+    if (nStopProgram)
+    {
+        NoCashGBAPrintf("ASSERTION FAILED  FILE=[%s] LINE=[%d]  EXP=[%s]", pFile, nLine, pExpression);
+        asm(".hword 0xEFFF");
+    }
+    else
+    {
+        NoCashGBAPrintf("WARING FILE=[%s] LINE=[%d]  EXP=[%s]", pFile, nLine, pExpression);
+    }
+}
+#endif
+
+// mgba print functions
+#if (LOG_HANDLER == LOG_HANDLER_MGBA_PRINT)
+#define MGBA_REG_DEBUG_MAX (256)
+
+bool32 MgbaOpen(void)
+{
+    *REG_DEBUG_ENABLE = 0xC0DE;
+    return *REG_DEBUG_ENABLE == 0x1DEA;
+}
+
+void MgbaClose(void)
+{
+    *REG_DEBUG_ENABLE = 0;
+}
+
+void MgbaPrintf(s32 level, const char* ptr, ...)
+{
+    va_list args;
+
+    level &= 0x7;
+    va_start(args, ptr);
+    #if (PRETTY_PRINT_HANDLER == PRETTY_PRINT_MINI_PRINTF)
+    mini_vsnprintf(REG_DEBUG_STRING, MGBA_REG_DEBUG_MAX, ptr, args);
+    #elif (PRETTY_PRINT_HANDLER == PRETTY_PRINT_LIBC)
+    vsnprintf(REG_DEBUG_STRING, MGBA_REG_DEBUG_MAX, ptr, args);
+    #else
+    #error "unspecified pretty printing handler."
+    #endif
+    va_end(args);
+    *REG_DEBUG_FLAGS = level | 0x100;
+}
+
+void MgbaAssert(const char *pFile, s32 nLine, const char *pExpression, bool32 nStopProgram)
+{
+    if (nStopProgram)
+    {
+        MgbaPrintf(MGBA_LOG_ERROR, "ASSERTION FAILED  FILE=[%s] LINE=[%d]  EXP=[%s]", pFile, nLine, pExpression);
+        asm(".hword 0xEFFF");
+    }
+    else
+    {
+        MgbaPrintf(MGBA_LOG_WARN, "WARING FILE=[%s] LINE=[%d]  EXP=[%s]", pFile, nLine, pExpression);
+    }
+}
+#endif
 #endif

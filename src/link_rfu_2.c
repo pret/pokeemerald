@@ -61,7 +61,7 @@ struct SioInfo
     u8 filler[92];
 };
 
-// Struct is mostly empty, presumably because usage of 
+// Struct is mostly empty, presumably because usage of
 // its fields was largely removed before release
 struct RfuDebug
 {
@@ -1115,7 +1115,7 @@ static void RfuHandleReceiveCommand(u8 unused)
                 {
                     gRfu.recvBlock[i].receiving = RECV_STATE_FINISHED;
                     Rfu_SetBlockReceivedFlag(i);
-                    if (GetHostRfuGameData()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM) && gReceivedRemoteLinkPlayers != 0 && gRfu.parentChild == MODE_CHILD)
+                    if (GetHostRfuGameData()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM) && gReceivedRemoteLinkPlayers && gRfu.parentChild == MODE_CHILD)
                         ValidateAndReceivePokemonSioInfo(gBlockRecvBuffer);
                 }
             }
@@ -1643,7 +1643,7 @@ bool32 RfuTryDisconnectLeavingChildren(void)
 {
     u8 childrenLeaving = 0;
     s32 i;
-    
+
     // Check all children, get those waiting to be disconnected
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
@@ -2004,7 +2004,7 @@ static void RfuMain1_UnionRoom(void)
     {
         rfu_REQ_recvData();
         rfu_waitREQComplete();
-        rfu_LMAN_REQ_sendData(0);
+        rfu_LMAN_REQ_sendData(FALSE);
     }
 }
 
@@ -2123,7 +2123,7 @@ void SetUnionRoomChatPlayerData(u32 numPlayers)
                 // Only trainerId is shifted by the number of children, so the active flag and gender
                 // are only ever set for the first child
                 partnerInfo |= ((PINFO_ACTIVE_FLAG
-                             | ((gLinkPlayers[gRfu.linkPlayerIdx[i]].gender & 1) << PINFO_GENDER_SHIFT) 
+                             | ((gLinkPlayers[gRfu.linkPlayerIdx[i]].gender & 1) << PINFO_GENDER_SHIFT)
                              | (gLinkPlayers[gRfu.linkPlayerIdx[i]].trainerId & PINFO_TID_MASK)) << (numConnectedChildren * 8));
                 numConnectedChildren++;
                 if (numConnectedChildren == numPlayers - 1)
@@ -2477,7 +2477,7 @@ static void LinkManagerCB_UnionRoom(u8 msg, u8 paramCount)
             rfu_LMAN_stopManager(FALSE);
         }
 
-        if (gRfuLinkStatus->parentChild == MODE_NEUTRAL 
+        if (gRfuLinkStatus->parentChild == MODE_NEUTRAL
             && !lman.pcswitch_flag
             && FuncIsActiveTask(Task_UnionRoomListen) == TRUE)
             gRfu.state = RFUSTATE_UR_CONNECT;
@@ -2747,7 +2747,7 @@ static void Task_RfuReconnectWithParent(u8 taskId)
 
     if (CanTryReconnectParent())
     {
-        u8 id = GetPartnerIndexByNameAndTrainerID((u8*)data, ReadU16(&data[8]));
+        u8 id = GetPartnerIndexByNameAndTrainerID((u8 *)data, ReadU16(&data[8]));
         if (id != 0xFF)
         {
             if (gRfuLinkStatus->partner[id].slot != 0xFF)
@@ -2797,7 +2797,7 @@ void CreateTask_RfuReconnectWithParent(const u8 *name, u16 trainerId)
     gRfu.status = RFU_STATUS_OK;
     taskId = CreateTask(Task_RfuReconnectWithParent, 3);
     data = gTasks[taskId].data;
-    StringCopy((u8*)(data), name);
+    StringCopy((u8 *)(data), name);
     data[8] = trainerId;
 }
 
@@ -2816,7 +2816,7 @@ static bool32 IsPartnerActivityIncompatible(s16 activity, struct RfuGameData *pa
     }
     else if (activity == (ACTIVITY_TRADE | IN_UNION_ROOM))
     {
-        // Verify that the trade offered hasn't changed 
+        // Verify that the trade offered hasn't changed
         struct RfuGameData *original = &gRfu.parent;
         if (original->tradeSpecies == SPECIES_EGG)
         {
@@ -2947,7 +2947,7 @@ static void Debug_PrintStatus(void)
             if ((gRfuLinkStatus->getNameFlag >> i) & 1)
             {
                 Debug_PrintNum(gRfuLinkStatus->partner[i].serialNo, 1, i + 3, 4);
-                Debug_PrintString((void*)gRfuLinkStatus->partner[i].gname, 6, i + 3);
+                Debug_PrintString((void *)gRfuLinkStatus->partner[i].gname, 6, i + 3);
                 Debug_PrintString(gRfuLinkStatus->partner[i].uname, 22, i + 3);
             }
         }
@@ -2967,7 +2967,7 @@ static void Debug_PrintStatus(void)
             Debug_PrintString(sASCII_8Spaces, 22, i + 3);
         }
         Debug_PrintNum(gRfuLinkStatus->partner[gRfu.childSlot].serialNo, 1, 3, 4);
-        Debug_PrintString((void*)gRfuLinkStatus->partner[gRfu.childSlot].gname, 6, 3);
+        Debug_PrintString((void *)gRfuLinkStatus->partner[gRfu.childSlot].gname, 6, 3);
         Debug_PrintString(gRfuLinkStatus->partner[gRfu.childSlot].uname, 22, 3);
     }
     else

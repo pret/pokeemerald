@@ -156,7 +156,8 @@ void FadeOutAndFadeInNewMapMusic(u16 songNum, u8 fadeOutSpeed, u8 fadeInSpeed)
     sMapMusicFadeInSpeed = fadeInSpeed;
 }
 
-void FadeInNewMapMusic(u16 songNum, u8 speed)
+// Unused
+static void FadeInNewMapMusic(u16 songNum, u8 speed)
 {
     FadeInNewBGM(songNum, speed);
     sCurrentMapMusic = songNum;
@@ -376,7 +377,7 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     u8 table;
 
     species--;
-    
+
     // Set default values
     // May be overridden depending on mode.
     length = 140;

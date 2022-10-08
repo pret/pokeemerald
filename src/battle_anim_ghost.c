@@ -814,7 +814,7 @@ void AnimTask_DestinyBondWhiteShadow(u8 taskId)
         for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
         {
             if (battler != gBattleAnimAttacker
-             && battler != (gBattleAnimAttacker ^ 2)
+             && battler != BATTLE_PARTNER(gBattleAnimAttacker)
              && IsBattlerSpriteVisible(battler))
             {
                 spriteId = CreateSprite(&gDestinyBondWhiteShadowSpriteTemplate, baseX, baseY, 55);
@@ -1034,7 +1034,7 @@ static void AnimCurseNail(struct Sprite *sprite)
     s16 xDelta;
     s16 xDelta2;
 
-    InitSpritePosToAnimAttacker(sprite, 1);
+    InitSpritePosToAnimAttacker(sprite, TRUE);
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
         xDelta = 24;

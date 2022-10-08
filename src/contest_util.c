@@ -196,7 +196,7 @@ static const struct OamData sOamData_ResultsTextWindow =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
@@ -242,7 +242,7 @@ static const struct OamData sOamData_Confetti =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
@@ -365,7 +365,7 @@ static const struct OamData sOamData_WirelessIndicatorWindow =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -1167,24 +1167,24 @@ static void TryCreateWirelessSprites(void)
 static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
 {
     u16 windowId;
-    int origWidth;
+    int tileWidth;
     int strWidth;
     u8 *spriteTilePtrs[4];
     u8 *dst;
 
     struct WindowTemplate windowTemplate;
     memset(&windowTemplate, 0, sizeof(windowTemplate));
-    windowTemplate.width = 30;
+    windowTemplate.width = DISPLAY_TILE_WIDTH;
     windowTemplate.height = 2;
     windowId = AddWindow(&windowTemplate);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
 
-    origWidth = GetStringWidth(FONT_NORMAL, text, 0);
-    strWidth = (origWidth + 9) / 8;
-    if (strWidth > 30)
-     strWidth = 30;
+    strWidth = GetStringWidth(FONT_NORMAL, text, 0);
+    tileWidth = (strWidth + 9) / 8;
+    if (tileWidth > DISPLAY_TILE_WIDTH)
+        tileWidth = DISPLAY_TILE_WIDTH;
 
-    AddTextPrinterParameterized3(windowId, FONT_NORMAL, (strWidth * 8 - origWidth) / 2, 1, sContestLinkTextColors, TEXT_SKIP_DRAW, text);
+    AddTextPrinterParameterized3(windowId, FONT_NORMAL, (tileWidth * 8 - strWidth) / 2, 1, sContestLinkTextColors, TEXT_SKIP_DRAW, text);
     {
         s32 i;
         struct Sprite *sprite;
@@ -1196,7 +1196,7 @@ static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
         spriteTilePtrs[0] = (u8 *)(sprite->oam.tileNum * 32 + OBJ_VRAM0);
 
         for (i = 1; i < (int)ARRAY_COUNT(spriteTilePtrs); i++)
-            spriteTilePtrs[i] = (void*)(gSprites[sprite->data[i - 1]].oam.tileNum * 32 + OBJ_VRAM0);
+            spriteTilePtrs[i] = (void *)(gSprites[sprite->data[i - 1]].oam.tileNum * 32 + OBJ_VRAM0);
 
         for (i = 0; i < (int)ARRAY_COUNT(spriteTilePtrs); i++)
             CpuFill32(0, spriteTilePtrs[i], 0x400);
@@ -1207,7 +1207,7 @@ static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
         CpuCopy32(src + 128, dst + 0x200, 0x20);
         CpuCopy32(src + 64,  dst + 0x300, 0x20);
 
-        for (i = 0; i < strWidth; i++)
+        for (i = 0; i < tileWidth; i++)
         {
             dst = &spriteTilePtrs[(i + 1) / 8][((i + 1) % 8) * 32];
             CpuCopy32(src + 192, dst, 0x20);
@@ -1225,7 +1225,7 @@ static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
     }
     RemoveWindow(windowId);
 
-    return (DISPLAY_WIDTH - (strWidth + 2) * 8) / 2;
+    return (DISPLAY_WIDTH - (tileWidth + 2) * 8) / 2;
 }
 
 static void CreateResultsTextWindowSprites(void)
@@ -2129,7 +2129,7 @@ static void Task_StartContest(u8 taskId)
 
 void StartContest(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(Task_StartContest, 10);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
 }
@@ -2150,7 +2150,7 @@ static void Task_StartShowContestResults(u8 taskId)
 
 void ShowContestResults(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(Task_StartShowContestResults, 10);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
 }
@@ -2163,7 +2163,7 @@ void GetContestPlayerId(void)
 void ContestLinkTransfer(u8 category)
 {
     u8 newTaskId;
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     newTaskId = CreateTask(Task_LinkContest_Init, 0);
     SetTaskFuncWithFollowupFunc(newTaskId, Task_LinkContest_Init, Task_StartCommunication);
     gTasks[newTaskId].data[9] = category;
@@ -2265,8 +2265,8 @@ void Task_LinkContest_FinalizeConnection(u8 taskId)
 
         DestroyTask(taskId);
         SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
-        ScriptContext2_Disable();
-        EnableBothScriptContexts();
+        UnlockPlayerFieldControls();
+        ScriptContext_Enable();
     }
 }
 
@@ -2281,8 +2281,8 @@ static void Task_LinkContest_WaitDisconnect(u8 taskId)
     if (!gReceivedRemoteLinkPlayers)
     {
         DestroyTask(taskId);
-        ScriptContext2_Disable();
-        EnableBothScriptContexts();
+        UnlockPlayerFieldControls();
+        ScriptContext_Enable();
     }
 }
 
@@ -2639,7 +2639,7 @@ static void Task_ShowContestEntryMonPic(u8 taskId)
         break;
     case 1:
         task->data[5] = CreateWindowFromRect(10, 3, 8, 8);
-        SetStandardWindowBorderStyle(task->data[5], 1);
+        SetStandardWindowBorderStyle(task->data[5], TRUE);
         task->data[0]++;
         break;
     case 2:
@@ -2726,7 +2726,7 @@ static void Task_LinkContestWaitForConnection(u8 taskId)
     default:
         if (IsLinkTaskFinished() == 1)
         {
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
             DestroyTask(taskId);
         }
         break;
