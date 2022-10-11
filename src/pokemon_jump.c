@@ -2714,7 +2714,7 @@ static void CreateJumpMonSprite(struct PokemonJumpGfx *jumpGfx, struct PokemonJu
     u8 spriteId;
 
     spriteTemplate = sSpriteTemplate_JumpMon;
-    buffer = Alloc(0x2000);
+    buffer = Alloc(MON_PIC_SIZE * MAX_MON_PIC_FRAMES);
     unusedBuffer = Alloc(MON_PIC_SIZE);
     if (multiplayerId == GetPokeJumpMultiplayerId())
         subpriority = 3;

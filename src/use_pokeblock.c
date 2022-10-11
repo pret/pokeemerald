@@ -88,7 +88,7 @@ struct UsePokeblockMenu
 {
     u32 unused;
     u16 partyPalettes[PARTY_SIZE][0x40];
-    u8 partySheets[NUM_SELECTIONS_LOADED][0x2000];
+    u8 partySheets[NUM_SELECTIONS_LOADED][MON_PIC_SIZE * MAX_MON_PIC_FRAMES];
     u8 unusedBuffer[0x1000];
     u8 tilemapBuffer[BG_SCREEN_SIZE + 2];
     u8 selectionIconSpriteIds[PARTY_SIZE + 1];
