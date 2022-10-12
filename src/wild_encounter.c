@@ -518,7 +518,9 @@ static bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
     return DoWildEncounterRateDiceRoll(encounterRate);
 }
 
-static bool8 DoGlobalWildEncounterDiceRoll(void)
+// When you first step on a different type of metatile, there's a 40% chance it
+// skips the wild encounter check entirely.
+static bool8 AllowWildCheckOnNewMetatile(void)
 {
     if (Random() % 100 >= 60)
         return FALSE;
@@ -537,7 +539,7 @@ static bool8 AreLegendariesInSootopolisPreventingEncounters(void)
     return FlagGet(FLAG_LEGENDARIES_IN_SOOTOPOLIS);
 }
 
-bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavior)
+bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
 {
     u16 headerId;
     struct Roamer *roamer;
@@ -551,7 +553,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
         if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS)
         {
             headerId = GetBattlePikeWildMonHeaderId();
-            if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
+            if (prevMetatileBehavior != curMetatileBehavior && !AllowWildCheckOnNewMetatile())
                 return FALSE;
             else if (DoWildEncounterRateTest(gBattlePikeWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
                 return FALSE;
@@ -566,7 +568,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
         if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         {
             headerId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
-            if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
+            if (prevMetatileBehavior != curMetatileBehavior && !AllowWildCheckOnNewMetatile())
                 return FALSE;
             else if (DoWildEncounterRateTest(gBattlePyramidWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
                 return FALSE;
@@ -580,11 +582,11 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
     }
     else
     {
-        if (MetatileBehavior_IsLandWildEncounter(currMetaTileBehavior) == TRUE)
+        if (MetatileBehavior_IsLandWildEncounter(curMetatileBehavior) == TRUE)
         {
             if (gWildMonHeaders[headerId].landMonsInfo == NULL)
                 return FALSE;
-            else if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
+            else if (prevMetatileBehavior != curMetatileBehavior && !AllowWildCheckOnNewMetatile())
                 return FALSE;
             else if (DoWildEncounterRateTest(gWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
                 return FALSE;
@@ -616,14 +618,14 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
                 return FALSE;
             }
         }
-        else if (MetatileBehavior_IsWaterWildEncounter(currMetaTileBehavior) == TRUE
-                 || (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && MetatileBehavior_IsBridgeOverWater(currMetaTileBehavior) == TRUE))
+        else if (MetatileBehavior_IsWaterWildEncounter(curMetatileBehavior) == TRUE
+                 || (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && MetatileBehavior_IsBridgeOverWater(curMetatileBehavior) == TRUE))
         {
             if (AreLegendariesInSootopolisPreventingEncounters() == TRUE)
                 return FALSE;
             else if (gWildMonHeaders[headerId].waterMonsInfo == NULL)
                 return FALSE;
-            else if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
+            else if (prevMetatileBehavior != curMetatileBehavior && !AllowWildCheckOnNewMetatile())
                 return FALSE;
             else if (DoWildEncounterRateTest(gWildMonHeaders[headerId].waterMonsInfo->encounterRate, FALSE) != TRUE)
                 return FALSE;
