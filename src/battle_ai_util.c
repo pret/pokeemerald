@@ -1333,7 +1333,7 @@ bool32 IsConfusionMoveEffect(u16 moveEffect)
 {
     switch (moveEffect)
     {
-    case EFFECT_CONFUSE_HIT:
+    case EFFECT_CONFUSE:
     case EFFECT_SWAGGER:
     case EFFECT_FLATTER:
     case EFFECT_TEETER_DANCE:
