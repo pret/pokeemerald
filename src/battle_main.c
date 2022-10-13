@@ -392,6 +392,32 @@ const struct TrainerMoney gTrainerMoneyTable[] =
     {0xFF, 5}, // Any trainer class not listed above uses this
 };
 
+#if B_TRAINER_CLASS_POKE_BALLS >= GEN_7
+static const u16 sTrainerBallTable[TRAINER_CLASS_COUNT] =
+{
+#if B_TRAINER_CLASS_POKE_BALLS == GEN_7
+    [TRAINER_CLASS_PKMN_BREEDER] = ITEM_FRIEND_BALL,
+#elif B_TRAINER_CLASS_POKE_BALLS == GEN_8
+    [TRAINER_CLASS_PKMN_BREEDER] = ITEM_HEAL_BALL,
+#endif
+    [TRAINER_CLASS_COOLTRAINER] = ITEM_ULTRA_BALL,
+    [TRAINER_CLASS_COLLECTOR] = ITEM_PREMIER_BALL,
+    [TRAINER_CLASS_SWIMMER_M] = ITEM_DIVE_BALL,
+    [TRAINER_CLASS_BLACK_BELT] = ITEM_ULTRA_BALL,
+    [TRAINER_CLASS_AQUA_LEADER] = ITEM_MASTER_BALL,
+    [TRAINER_CLASS_GENTLEMAN] = ITEM_LUXURY_BALL,
+    [TRAINER_CLASS_ELITE_FOUR] = ITEM_ULTRA_BALL,
+#if B_TRAINER_CLASS_POKE_BALLS == GEN_7
+    [TRAINER_CLASS_FISHERMAN] = ITEM_LURE_BALL,
+#elif B_TRAINER_CLASS_POKE_BALLS == GEN_8
+    [TRAINER_CLASS_FISHERMAN] = ITEM_DIVE_BALL,
+#endif
+    [TRAINER_CLASS_SWIMMER_F] = ITEM_DIVE_BALL,
+    [TRAINER_CLASS_COOLTRAINER_2] = ITEM_ULTRA_BALL,
+    [TRAINER_CLASS_MAGMA_LEADER] = ITEM_MASTER_BALL,
+};
+#endif
+
 #include "data/text/abilities.h"
 
 static void (* const sTurnActionsFuncsTable[])(void) =
@@ -1847,6 +1873,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     u8 fixedIV;
     s32 i, j;
     u8 monsCount;
+    u16 ball;
 
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
@@ -1950,6 +1977,11 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 break;
             }
             }
+
+        #if B_TRAINER_CLASS_POKE_BALLS >= GEN_7
+            ball = (sTrainerBallTable[gTrainers[trainerNum].trainerClass]) ? sTrainerBallTable[gTrainers[trainerNum].trainerClass] : ITEM_POKE_BALL;
+            SetMonData(&party[i], MON_DATA_POKEBALL, &ball);
+        #endif
         }
 
         gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
