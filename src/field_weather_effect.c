@@ -1021,17 +1021,17 @@ enum {
 
     // The thunderstorm loops through these states,
     // not necessarily in order.
-    TSTORM_STATE_LOOP_START,
-    TSTORM_STATE_LOOP_WAIT,
-    TSTORM_STATE_INIT_THUNDER_SHORT_1,
-    TSTORM_STATE_INIT_THUNDER_SHORT_2,
-    TSTORM_STATE_TRY_THUNDER_SHORT,
-    TSTORM_STATE_TRY_NEW_THUNDER,
-    TSTORM_STATE_WAIT_THUNDER_SHORT,
-    TSTORM_STATE_INIT_THUNDER_LONG,
-    TSTORM_STATE_WAIT_THUNDER_LONG,
-    TSTORM_STATE_FADE_THUNDER_LONG,
-    TSTORM_STATE_END_THUNDER_LONG,
+    TSTORM_STATE_NEW_CYCLE,
+    TSTORM_STATE_NEW_CYCLE_WAIT,
+    TSTORM_STATE_INIT_CYCLE_1,
+    TSTORM_STATE_INIT_CYCLE_2,
+    TSTORM_STATE_SHORT_BOLT,
+    TSTORM_STATE_TRY_NEW_BOLT,
+    TSTORM_STATE_WAIT_BOLT_SHORT,
+    TSTORM_STATE_INIT_BOLT_LONG,
+    TSTORM_STATE_WAIT_BOLT_LONG,
+    TSTORM_STATE_FADE_BOLT_LONG,
+    TSTORM_STATE_END_BOLT_LONG,
 };
 
 void Thunderstorm_InitVars(void)
@@ -1045,7 +1045,7 @@ void Thunderstorm_InitVars(void)
     gWeatherPtr->gammaTargetIndex = 3;
     gWeatherPtr->gammaStepDelay = 20;
     gWeatherPtr->weatherGfxLoaded = FALSE;  // duplicate assignment
-    gWeatherPtr->thunderTriggered = FALSE;
+    gWeatherPtr->tStormWaitThunder = FALSE;
     SetRainStrengthFromSoundEffect(SE_THUNDERSTORM);
 }
 
@@ -1061,7 +1061,7 @@ void Thunderstorm_InitAll(void)
 //------------------------------------------------------------------------------
 
 static void UpdateThunderSound(void);
-static void SetThunderCounter(u16);
+static void EnqueueThunder(u16);
 
 void Downpour_InitVars(void)
 {
@@ -1084,6 +1084,11 @@ void Downpour_InitAll(void)
         Thunderstorm_Main();
 }
 
+// In a given cycle, there will be some shorter bolts of lightning, potentially
+// followed by a longer bolt. As a "regex", the pattern is:
+//   (SHORT_BOLT){1,2}(LONG_BOLT)?
+//
+// Thunder only plays on the final bolt of the cycle.
 void Thunderstorm_Main(void)
 {
     UpdateThunderSound();
@@ -1106,88 +1111,92 @@ void Thunderstorm_Main(void)
         break;
     case TSTORM_STATE_WAIT_CHANGE:
         if (gWeatherPtr->palProcessingState != WEATHER_PAL_STATE_CHANGING_WEATHER)
-            gWeatherPtr->initStep = TSTORM_STATE_INIT_THUNDER_SHORT_1;
+            gWeatherPtr->initStep = TSTORM_STATE_INIT_CYCLE_1;
         break;
-    case TSTORM_STATE_LOOP_START:
-        gWeatherPtr->thunderAllowEnd = TRUE;
-        gWeatherPtr->thunderDelay = (Random() % 360) + 360;
+    case TSTORM_STATE_NEW_CYCLE:
+        gWeatherPtr->tStormAllowEnd = TRUE;
+        gWeatherPtr->tStormTimer = (Random() % 360) + 360;
         gWeatherPtr->initStep++;
         // fall through
-    case TSTORM_STATE_LOOP_WAIT:
-        // Wait between 360-720 frames before trying thunder again
-        if (--gWeatherPtr->thunderDelay == 0)
+    case TSTORM_STATE_NEW_CYCLE_WAIT:
+        // Wait between 360-720 frames before starting a new cycle.
+        if (--gWeatherPtr->tStormTimer == 0)
             gWeatherPtr->initStep++;
         break;
-    case TSTORM_STATE_INIT_THUNDER_SHORT_1:
-        gWeatherPtr->thunderAllowEnd = TRUE;
-        gWeatherPtr->thunderSkipShort = Random() % 2;
+    case TSTORM_STATE_INIT_CYCLE_1:
+        gWeatherPtr->tStormAllowEnd = TRUE;
+        gWeatherPtr->tStormLongBolt = Random() % 2;
         gWeatherPtr->initStep++;
         break;
-    case TSTORM_STATE_INIT_THUNDER_SHORT_2:
-        gWeatherPtr->thunderShortRetries = (Random() & 1) + 1;
+    case TSTORM_STATE_INIT_CYCLE_2:
+        gWeatherPtr->tStormShortBolts = (Random() & 1) + 1;
         gWeatherPtr->initStep++;
         // fall through
-    case TSTORM_STATE_TRY_THUNDER_SHORT:
+    case TSTORM_STATE_SHORT_BOLT:
+        // Short bolt of lightning strikes.
         ApplyWeatherGammaShiftIfIdle(19);
-        if (!gWeatherPtr->thunderSkipShort && gWeatherPtr->thunderShortRetries == 1)
-            SetThunderCounter(20); // Do short thunder
+        // If final lightning bolt, enqueue thunder.
+        if (!gWeatherPtr->tStormLongBolt && gWeatherPtr->tStormShortBolts == 1)
+            EnqueueThunder(20);
 
-        gWeatherPtr->thunderDelay = (Random() % 3) + 6;
+        gWeatherPtr->tStormTimer = (Random() % 3) + 6;
         gWeatherPtr->initStep++;
         break;
-    case TSTORM_STATE_TRY_NEW_THUNDER:
-        if (--gWeatherPtr->thunderDelay == 0)
+    case TSTORM_STATE_TRY_NEW_BOLT:
+        if (--gWeatherPtr->tStormTimer == 0)
         {
+            // Short bolt of lightning ends.
             ApplyWeatherGammaShiftIfIdle(3);
-            gWeatherPtr->thunderAllowEnd = TRUE;
-            if (--gWeatherPtr->thunderShortRetries != 0)
+            gWeatherPtr->tStormAllowEnd = TRUE;
+            if (--gWeatherPtr->tStormShortBolts != 0)
             {
-                // Try a short thunder again
-                gWeatherPtr->thunderDelay = (Random() % 16) + 60;
-                gWeatherPtr->initStep = TSTORM_STATE_WAIT_THUNDER_SHORT;
+                // Wait a little, then do another short bolt.
+                gWeatherPtr->tStormTimer = (Random() % 16) + 60;
+                gWeatherPtr->initStep = TSTORM_STATE_WAIT_BOLT_SHORT;
             }
-            else if (!gWeatherPtr->thunderSkipShort)
+            else if (!gWeatherPtr->tStormLongBolt)
             {
-                // No more thunder, restart loop
-                gWeatherPtr->initStep = TSTORM_STATE_LOOP_START;
+                // No more bolts, restart loop.
+                gWeatherPtr->initStep = TSTORM_STATE_NEW_CYCLE;
             }
             else
             {
-                // Set up long thunder
-                gWeatherPtr->initStep = TSTORM_STATE_INIT_THUNDER_LONG;
+                // Set up long bolt.
+                gWeatherPtr->initStep = TSTORM_STATE_INIT_BOLT_LONG;
             }
         }
         break;
-    case TSTORM_STATE_WAIT_THUNDER_SHORT:
-        if (--gWeatherPtr->thunderDelay == 0)
-            gWeatherPtr->initStep = TSTORM_STATE_TRY_THUNDER_SHORT;
+    case TSTORM_STATE_WAIT_BOLT_SHORT:
+        if (--gWeatherPtr->tStormTimer == 0)
+            gWeatherPtr->initStep = TSTORM_STATE_SHORT_BOLT;
         break;
-    case TSTORM_STATE_INIT_THUNDER_LONG:
-        gWeatherPtr->thunderDelay = (Random() % 16) + 60;
+    case TSTORM_STATE_INIT_BOLT_LONG:
+        gWeatherPtr->tStormTimer = (Random() % 16) + 60;
         gWeatherPtr->initStep++;
         break;
-    case TSTORM_STATE_WAIT_THUNDER_LONG:
-        if (--gWeatherPtr->thunderDelay == 0)
+    case TSTORM_STATE_WAIT_BOLT_LONG:
+        if (--gWeatherPtr->tStormTimer == 0)
         {
-            // Do long thunder
-            SetThunderCounter(100);
+            // Do long bolt. Enqueue thunder with a potentially longer delay.
+            EnqueueThunder(100);
             ApplyWeatherGammaShiftIfIdle(19);
-            gWeatherPtr->thunderDelay = (Random() & 0xF) + 30;
+            gWeatherPtr->tStormTimer = (Random() & 0xF) + 30;
             gWeatherPtr->initStep++;
         }
         break;
-    case TSTORM_STATE_FADE_THUNDER_LONG:
-        if (--gWeatherPtr->thunderDelay == 0)
+    case TSTORM_STATE_FADE_BOLT_LONG:
+        if (--gWeatherPtr->tStormTimer == 0)
         {
+            // Fade long bolt out over time.
             ApplyWeatherGammaShiftIfIdle_Gradual(19, 3, 5);
             gWeatherPtr->initStep++;
         }
         break;
-    case TSTORM_STATE_END_THUNDER_LONG:
+    case TSTORM_STATE_END_BOLT_LONG:
         if (gWeatherPtr->palProcessingState == WEATHER_PAL_STATE_IDLE)
         {
-            gWeatherPtr->thunderAllowEnd = TRUE;
-            gWeatherPtr->initStep = TSTORM_STATE_LOOP_START;
+            gWeatherPtr->tStormAllowEnd = TRUE;
+            gWeatherPtr->initStep = TSTORM_STATE_NEW_CYCLE;
         }
         break;
     }
@@ -1198,12 +1207,12 @@ bool8 Thunderstorm_Finish(void)
     switch (gWeatherPtr->finishStep)
     {
     case 0:
-        gWeatherPtr->thunderAllowEnd = FALSE;
+        gWeatherPtr->tStormAllowEnd = FALSE;
         gWeatherPtr->finishStep++;
         // fall through
     case 1:
         Thunderstorm_Main();
-        if (gWeatherPtr->thunderAllowEnd)
+        if (gWeatherPtr->tStormAllowEnd)
         {
             if (gWeatherPtr->nextWeather == WEATHER_RAIN
              || gWeatherPtr->nextWeather == WEATHER_RAIN_THUNDERSTORM
@@ -1218,7 +1227,7 @@ bool8 Thunderstorm_Finish(void)
         if (!UpdateVisibleRainSprites())
         {
             DestroyRainSprites();
-            gWeatherPtr->thunderTriggered = 0;
+            gWeatherPtr->tStormWaitThunder = FALSE;
             gWeatherPtr->finishStep++;
             return FALSE;
         }
@@ -1229,20 +1238,21 @@ bool8 Thunderstorm_Finish(void)
     return TRUE;
 }
 
-static void SetThunderCounter(u16 max)
+// Enqueue a thunder sound effect for at most `waitFrames` frames from now.
+static void EnqueueThunder(u16 waitFrames)
 {
-    if (!gWeatherPtr->thunderTriggered)
+    if (!gWeatherPtr->tStormWaitThunder)
     {
-        gWeatherPtr->thunderCounter = Random() % max;
-        gWeatherPtr->thunderTriggered = TRUE;
+        gWeatherPtr->tStormThunderTimer = Random() % waitFrames;
+        gWeatherPtr->tStormWaitThunder = TRUE;
     }
 }
 
 static void UpdateThunderSound(void)
 {
-    if (gWeatherPtr->thunderTriggered == TRUE)
+    if (gWeatherPtr->tStormWaitThunder == TRUE)
     {
-        if (gWeatherPtr->thunderCounter == 0)
+        if (gWeatherPtr->tStormThunderTimer == 0)
         {
             if (IsSEPlaying())
                 return;
@@ -1252,11 +1262,11 @@ static void UpdateThunderSound(void)
             else
                 PlaySE(SE_THUNDER2);
 
-            gWeatherPtr->thunderTriggered = FALSE;
+            gWeatherPtr->tStormWaitThunder = FALSE;
         }
         else
         {
-            gWeatherPtr->thunderCounter--;
+            gWeatherPtr->tStormThunderTimer--;
         }
     }
 }
