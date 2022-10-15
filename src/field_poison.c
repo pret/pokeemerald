@@ -93,14 +93,16 @@ static void Task_TryFieldPoisonWhiteOut(u8 taskId)
             if (InBattlePyramid() | InBattlePike() || InTrainerHillChallenge())
                 gSpecialVar_Result = FLDPSN_FRONTIER_WHITEOUT;
             else
-            {
-                gSpecialVar_Result = FLDPSN_NO_WHITEOUT;
-                UpdateFollowingPokemon();
-            }
-            ScriptContext_Enable();
-            DestroyTask(taskId);
-            break;
+                gSpecialVar_Result = FLDPSN_WHITEOUT;
         }
+        else
+        {
+            gSpecialVar_Result = FLDPSN_NO_WHITEOUT;
+            UpdateFollowingPokemon();
+        }
+        ScriptContext_Enable();
+        DestroyTask(taskId);
+        break;
     }
 }
 
