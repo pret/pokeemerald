@@ -94,8 +94,8 @@ static const struct SpriteTemplate sCloudSpriteTemplate =
 
 void Clouds_InitVars(void)
 {
-    gWeatherPtr->gammaTargetIndex = 0;
-    gWeatherPtr->gammaStepDelay = 20;
+    gWeatherPtr->targetColorMapIndex = 0;
+    gWeatherPtr->colorMapStepDelay = 20;
     gWeatherPtr->weatherGfxLoaded = FALSE;
     gWeatherPtr->initStep = 0;
     if (gWeatherPtr->cloudSpritesCreated == FALSE)
@@ -152,8 +152,8 @@ bool8 Clouds_Finish(void)
 
 void Sunny_InitVars(void)
 {
-    gWeatherPtr->gammaTargetIndex = 0;
-    gWeatherPtr->gammaStepDelay = 20;
+    gWeatherPtr->targetColorMapIndex = 0;
+    gWeatherPtr->colorMapStepDelay = 20;
 }
 
 void Sunny_InitAll(void)
@@ -235,8 +235,8 @@ void Drought_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = FALSE;
-    gWeatherPtr->gammaTargetIndex = 0;
-    gWeatherPtr->gammaStepDelay = 0;
+    gWeatherPtr->targetColorMapIndex = 0;
+    gWeatherPtr->colorMapStepDelay = 0;
 }
 
 void Drought_InitAll(void)
@@ -476,8 +476,8 @@ void Rain_InitVars(void)
     gWeatherPtr->rainSpriteVisibleDelay = 8;
     gWeatherPtr->isDownpour = FALSE;
     gWeatherPtr->targetRainSpriteCount = 10;
-    gWeatherPtr->gammaTargetIndex = 3;
-    gWeatherPtr->gammaStepDelay = 20;
+    gWeatherPtr->targetColorMapIndex = 3;
+    gWeatherPtr->colorMapStepDelay = 20;
     SetRainStrengthFromSoundEffect(SE_RAIN);
 }
 
@@ -768,8 +768,8 @@ void Snow_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = FALSE;
-    gWeatherPtr->gammaTargetIndex = 3;
-    gWeatherPtr->gammaStepDelay = 20;
+    gWeatherPtr->targetColorMapIndex = 3;
+    gWeatherPtr->colorMapStepDelay = 20;
     gWeatherPtr->targetSnowflakeSpriteCount = 16;
     gWeatherPtr->snowflakeVisibleCounter = 0;
 }
@@ -1042,8 +1042,8 @@ void Thunderstorm_InitVars(void)
     gWeatherPtr->rainSpriteVisibleDelay = 4;
     gWeatherPtr->isDownpour = FALSE;
     gWeatherPtr->targetRainSpriteCount = 16;
-    gWeatherPtr->gammaTargetIndex = 3;
-    gWeatherPtr->gammaStepDelay = 20;
+    gWeatherPtr->targetColorMapIndex = 3;
+    gWeatherPtr->colorMapStepDelay = 20;
     gWeatherPtr->weatherGfxLoaded = FALSE;  // duplicate assignment
     gWeatherPtr->thunderTriggered = FALSE;
     SetRainStrengthFromSoundEffect(SE_THUNDERSTORM);
@@ -1071,8 +1071,8 @@ void Downpour_InitVars(void)
     gWeatherPtr->rainSpriteVisibleDelay = 4;
     gWeatherPtr->isDownpour = TRUE;
     gWeatherPtr->targetRainSpriteCount = 24;
-    gWeatherPtr->gammaTargetIndex = 3;
-    gWeatherPtr->gammaStepDelay = 20;
+    gWeatherPtr->targetColorMapIndex = 3;
+    gWeatherPtr->colorMapStepDelay = 20;
     gWeatherPtr->weatherGfxLoaded = FALSE;  // duplicate assignment
     SetRainStrengthFromSoundEffect(SE_DOWNPOUR);
 }
@@ -1128,7 +1128,7 @@ void Thunderstorm_Main(void)
         gWeatherPtr->initStep++;
         // fall through
     case TSTORM_STATE_TRY_THUNDER_SHORT:
-        ApplyWeatherGammaShiftIfIdle(19);
+        ApplyWeatherColorMapIfIdle(19);
         if (!gWeatherPtr->thunderSkipShort && gWeatherPtr->thunderShortRetries == 1)
             SetThunderCounter(20); // Do short thunder
 
@@ -1138,7 +1138,7 @@ void Thunderstorm_Main(void)
     case TSTORM_STATE_TRY_NEW_THUNDER:
         if (--gWeatherPtr->thunderDelay == 0)
         {
-            ApplyWeatherGammaShiftIfIdle(3);
+            ApplyWeatherColorMapIfIdle(3);
             gWeatherPtr->thunderAllowEnd = TRUE;
             if (--gWeatherPtr->thunderShortRetries != 0)
             {
@@ -1171,7 +1171,7 @@ void Thunderstorm_Main(void)
         {
             // Do long thunder
             SetThunderCounter(100);
-            ApplyWeatherGammaShiftIfIdle(19);
+            ApplyWeatherColorMapIfIdle(19);
             gWeatherPtr->thunderDelay = (Random() & 0xF) + 30;
             gWeatherPtr->initStep++;
         }
@@ -1179,7 +1179,7 @@ void Thunderstorm_Main(void)
     case TSTORM_STATE_FADE_THUNDER_LONG:
         if (--gWeatherPtr->thunderDelay == 0)
         {
-            ApplyWeatherGammaShiftIfIdle_Gradual(19, 3, 5);
+            ApplyWeatherColorMapIfIdle_Gradual(19, 3, 5);
             gWeatherPtr->initStep++;
         }
         break;
@@ -1361,8 +1361,8 @@ void FogHorizontal_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = FALSE;
-    gWeatherPtr->gammaTargetIndex = 0;
-    gWeatherPtr->gammaStepDelay = 20;
+    gWeatherPtr->targetColorMapIndex = 0;
+    gWeatherPtr->colorMapStepDelay = 20;
     if (gWeatherPtr->fogHSpritesCreated == 0)
     {
         gWeatherPtr->fogHScrollCounter = 0;
@@ -1516,8 +1516,8 @@ void Ash_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = FALSE;
-    gWeatherPtr->gammaTargetIndex = 0;
-    gWeatherPtr->gammaStepDelay = 20;
+    gWeatherPtr->targetColorMapIndex = 0;
+    gWeatherPtr->colorMapStepDelay = 20;
     gWeatherPtr->ashUnused = 20; // Never read
     if (!gWeatherPtr->ashSpritesCreated)
     {
@@ -1726,8 +1726,8 @@ void FogDiagonal_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = 0;
-    gWeatherPtr->gammaTargetIndex = 0;
-    gWeatherPtr->gammaStepDelay = 20;
+    gWeatherPtr->targetColorMapIndex = 0;
+    gWeatherPtr->colorMapStepDelay = 20;
     gWeatherPtr->fogHScrollCounter = 0;
     gWeatherPtr->fogHScrollOffset = 1;
     if (!gWeatherPtr->fogDSpritesCreated)
@@ -1940,8 +1940,8 @@ void Sandstorm_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = 0;
-    gWeatherPtr->gammaTargetIndex = 0;
-    gWeatherPtr->gammaStepDelay = 20;
+    gWeatherPtr->targetColorMapIndex = 0;
+    gWeatherPtr->colorMapStepDelay = 20;
     if (!gWeatherPtr->sandstormSpritesCreated)
     {
         gWeatherPtr->sandstormXOffset = gWeatherPtr->sandstormYOffset = 0;
@@ -2237,8 +2237,8 @@ static void UpdateSandstormSwirlSprite(struct Sprite *sprite)
 void Shade_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
-    gWeatherPtr->gammaTargetIndex = 3;
-    gWeatherPtr->gammaStepDelay = 20;
+    gWeatherPtr->targetColorMapIndex = 3;
+    gWeatherPtr->colorMapStepDelay = 20;
 }
 
 void Shade_InitAll(void)
