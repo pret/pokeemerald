@@ -884,7 +884,7 @@ static u8 *TryRunCoordEventScript(struct CoordEvent *coordEvent)
             DoCoordEventWeather(coordEvent->trigger);
             return NULL;
         }
-        if (coordEvent->trigger == 0)
+        if (coordEvent->trigger == VAR_RUN_TRIGGER_IMMEDIATELY)
         {
             RunScriptImmediately(coordEvent->script);
             return NULL;
