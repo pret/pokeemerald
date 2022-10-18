@@ -1386,6 +1386,7 @@ static bool8 GetAvailableObjectEventId(u16 localId, u8 mapNum, u8 mapGroup, u8 *
 static void RemoveObjectEvent(struct ObjectEvent *objectEvent)
 {
     objectEvent->active = FALSE;
+    objectEvent->extra.asU16 = 0; // zero potential species info
     RemoveObjectEventInternal(objectEvent);
 }
 
