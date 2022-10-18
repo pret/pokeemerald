@@ -137,9 +137,9 @@ static void Cmd_pause(void);
 static void Cmd_waitstate(void);
 static void Cmd_healthbar_update(void);
 static void Cmd_return(void);
-static void Cmd_end(void);
-static void Cmd_end2(void);
-static void Cmd_end3(void);
+static void Cmd_endmove(void);
+static void Cmd_endscript(void);
+static void Cmd_endreturn(void);
 static void Cmd_jumpifaffectedbyprotect(void);
 static void Cmd_call(void);
 static void Cmd_jumpiftype2(void);
@@ -389,9 +389,9 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_waitstate,                               //0x3A
     Cmd_healthbar_update,                        //0x3B
     Cmd_return,                                  //0x3C
-    Cmd_end,                                     //0x3D
-    Cmd_end2,                                    //0x3E
-    Cmd_end3,                                    //0x3F
+    Cmd_endmove,                                     //0x3D
+    Cmd_endscript,                               //0x3E
+    Cmd_endreturn,                               //0x3F
     Cmd_jumpifaffectedbyprotect,                 //0x40
     Cmd_call,                                    //0x41
     Cmd_jumpiftype2,                             //0x42
@@ -3917,7 +3917,7 @@ static void Cmd_return(void)
     BattleScriptPop();
 }
 
-static void Cmd_end(void)
+static void Cmd_endmove(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
         BattleArena_AddSkillPoints(gBattlerAttacker);
@@ -3927,14 +3927,14 @@ static void Cmd_end(void)
     gCurrentActionFuncId = B_ACTION_TRY_FINISH;
 }
 
-static void Cmd_end2(void)
+static void Cmd_endscript(void)
 {
     gActiveBattler = 0;
     gCurrentActionFuncId = B_ACTION_TRY_FINISH;
 }
 
 // Pops the main function stack
-static void Cmd_end3(void)
+static void Cmd_endreturn(void)
 {
     BattleScriptPop();
     if (gBattleResources->battleCallbackStack->size != 0)

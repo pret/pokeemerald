@@ -341,15 +341,15 @@
 	.byte 0x3c
 	.endm
 
-	.macro end
+	.macro endmove
 	.byte 0x3d
 	.endm
 
-	.macro end2
+	.macro endscript
 	.byte 0x3e
 	.endm
 
-	.macro end3
+	.macro endreturn
 	.byte 0x3f
 	.endm
 
