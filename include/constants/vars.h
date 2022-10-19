@@ -308,6 +308,6 @@
 // then the script will be run using RunScriptImmediately instead of in the
 // global script context. This means it will run faster, but cannot do any
 // cutscenes nor call a wait command. Used for weather effects in vanilla.
-#define VAR_RUN_TRIGGER_IMMEDIATELY   0
+#define TRIGGER_RUN_IMMEDIATELY   0
 
 #endif // GUARD_CONSTANTS_VARS_H
