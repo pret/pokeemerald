@@ -34,28 +34,28 @@
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_ROUTE110",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 2,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_ROUTE110",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 12,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_ROUTE110",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 13,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_ROUTE110",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [

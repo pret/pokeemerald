@@ -20,14 +20,14 @@
       "y": 20,
       "elevation": 3,
       "dest_map": "MAP_SOOTOPOLIS_CITY",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 9,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_CAVE_OF_ORIGIN_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

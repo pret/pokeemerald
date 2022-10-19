@@ -84,35 +84,35 @@
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_FALLARBOR_TOWN_MART",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 8,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 14,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_FALLARBOR_TOWN_POKEMON_CENTER_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 6,
       "y": 17,
       "elevation": 0,
       "dest_map": "MAP_FALLARBOR_TOWN_COZMOS_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 1,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_FALLARBOR_TOWN_MOVE_RELEARNERS_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],
