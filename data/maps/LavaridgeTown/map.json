@@ -188,7 +188,7 @@
       "x": 6,
       "y": 3,
       "elevation": 3,
-      "var": "0",
+      "var": "TRIGGER_RUN_IMMEDIATELY",
       "var_value": "0",
       "script": "LavaridgeTown_EventScript_HotSpringsTrigger"
     }
