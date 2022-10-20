@@ -97,6 +97,22 @@ static const struct FormChange sArceusFormChangeTable[] = {
 #endif
 
 #if P_GEN_5_POKEMON == TRUE
+
+static const struct FormChange sDarmanitanFormChangeTable[] = {
+    {FORM_BATTLE_END, SPECIES_DARMANITAN},
+    {FORM_CHANGE_END},
+};
+
+static const struct FormChange sDarmanitanGalarianFormChangeTable[] = {
+    {FORM_BATTLE_END, SPECIES_DARMANITAN_GALARIAN},
+    {FORM_CHANGE_END},
+};
+
+static const struct FormChange sMeloettaFormChangeTable[] = {
+    {FORM_BATTLE_END, SPECIES_MELOETTA},
+    {FORM_CHANGE_END},
+};
+
 static const struct FormChange sTornadusFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_TORNADUS_THERIAN, ITEM_REVEAL_GLASS},
     {FORM_ITEM_USE, SPECIES_TORNADUS, ITEM_REVEAL_GLASS},
@@ -132,6 +148,16 @@ static const struct FormChange sGenesectFormChangeTable[] = {
 #endif
 
 #if P_GEN_6_POKEMON == TRUE
+static const struct FormChange sGreninjaBattleBondFormChangeTable[] = {
+    {FORM_BATTLE_END, SPECIES_GRENINJA_BATTLE_BOND},
+    {FORM_CHANGE_END},
+};
+
+static const struct FormChange sAegislashFormChangeTable[] = {
+    {FORM_BATTLE_END, SPECIES_AEGISLASH},
+    {FORM_CHANGE_END},
+};
+
 static const struct FormChange sXerneasFormChangeTable[] = {
     {FORM_BATTLE_BEGIN, SPECIES_XERNEAS_ACTIVE},
     {FORM_BATTLE_END,   SPECIES_XERNEAS,      },
@@ -151,6 +177,10 @@ static const struct FormChange sOricorioFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_ORICORIO_POM_POM, ITEM_YELLOW_NECTAR},
     {FORM_ITEM_USE, SPECIES_ORICORIO_PAU,     ITEM_PINK_NECTAR},
     {FORM_ITEM_USE, SPECIES_ORICORIO_SENSU,   ITEM_PURPLE_NECTAR},
+    {FORM_CHANGE_END},
+};
+static const struct FormChange sWishiwashiFormChangeTable[] = {
+    {FORM_BATTLE_END, SPECIES_WISHIWASHI},
     {FORM_CHANGE_END},
 };
 
@@ -175,9 +205,54 @@ static const struct FormChange sSilvallyFormChangeTable[] = {
     {FORM_ITEM_HOLD, SPECIES_SILVALLY_FAIRY,    ITEM_FAIRY_MEMORY,    ABILITY_RKS_SYSTEM},
     {FORM_CHANGE_END},
 };
+
+static const struct FormChange sMimikyuFormChangeTable[] = {
+    {FORM_BATTLE_END, SPECIES_MIMIKYU},
+    {FORM_CHANGE_END},
+};
+
+static const struct FormChange sMiniorRedFormChangeTable[] = {
+    {FORM_BATTLE_END, SPECIES_MINIOR_CORE_RED},
+    {FORM_CHANGE_END},
+};
+static const struct FormChange sMiniorBlueFormChangeTable[] = {
+    {FORM_BATTLE_END, SPECIES_MINIOR_CORE_BLUE},
+    {FORM_CHANGE_END},
+};
+static const struct FormChange sMiniorGreenFormChangeTable[] = {
+    {FORM_BATTLE_END, SPECIES_MINIOR_CORE_GREEN},
+    {FORM_CHANGE_END},
+};
+static const struct FormChange sMiniorIndigoFormChangeTable[] = {
+    {FORM_BATTLE_END, SPECIES_MINIOR_CORE_INDIGO},
+    {FORM_CHANGE_END},
+};
+static const struct FormChange sMiniorOrangeFormChangeTable[] = {
+    {FORM_BATTLE_END, SPECIES_MINIOR_CORE_ORANGE},
+    {FORM_CHANGE_END},
+};
+static const struct FormChange sMiniorVioletFormChangeTable[] = {
+    {FORM_BATTLE_END, SPECIES_MINIOR_CORE_VIOLET},
+    {FORM_CHANGE_END},
+};
+static const struct FormChange sMiniorYellowFormChangeTable[] = {
+    {FORM_BATTLE_END, SPECIES_MINIOR_CORE_YELLOW},
+    {FORM_CHANGE_END},
+};
+
 #endif
 
 #if P_GEN_8_POKEMON == TRUE
+static const struct FormChange sCramorantFormChangeTable[] = {
+    {FORM_BATTLE_END,   SPECIES_CRAMORANT},
+    {FORM_CHANGE_END},
+};
+
+static const struct FormChange sMorpekoFormChangeTable[] = {
+    {FORM_BATTLE_END,   SPECIES_MORPEKO},
+    {FORM_CHANGE_END},
+};
+
 static const struct FormChange sZacianFormChangeTable[] = {
     {FORM_BATTLE_BEGIN, SPECIES_ZACIAN_CROWNED_SWORD, ITEM_RUSTED_SWORD, MOVE_IRON_HEAD,      MOVE_BEHEMOTH_BLADE},
     {FORM_BATTLE_END,   SPECIES_ZACIAN,               ITEM_RUSTED_SWORD, MOVE_BEHEMOTH_BLADE, MOVE_IRON_HEAD},

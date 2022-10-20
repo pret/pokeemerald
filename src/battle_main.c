@@ -602,21 +602,9 @@ static void CB2_InitBattleInternal(void)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         // Player's side
-        targetSpecies = GetFormChangeTargetSpecies(&gPlayerParty[i], FORM_BATTLE_BEGIN, 0);
-        if (targetSpecies != SPECIES_NONE)
-        {
-            SetMonData(&gPlayerParty[i], MON_DATA_SPECIES, &targetSpecies);
-            CalculateMonStats(&gPlayerParty[i]);
-            TryToSetBattleFormChangeMoves(&gPlayerParty[i]);
-        }
+        BattleFormChange(i, B_SIDE_PLAYER, FORM_BATTLE_BEGIN);
         // Opponent's side
-        targetSpecies = GetFormChangeTargetSpecies(&gEnemyParty[i], FORM_BATTLE_BEGIN, 0);
-        if (targetSpecies != SPECIES_NONE)
-        {
-            SetMonData(&gEnemyParty[i], MON_DATA_SPECIES, &targetSpecies);
-            CalculateMonStats(&gEnemyParty[i]);
-            TryToSetBattleFormChangeMoves(&gEnemyParty[i]);
-        }
+        BattleFormChange(i, B_SIDE_OPPONENT, FORM_BATTLE_BEGIN);
     }
 
     gBattleCommunication[MULTIUSE_STATE] = 0;
@@ -3264,7 +3252,7 @@ void FaintClearSetData(void)
         UndoMegaEvolution(gBattlerPartyIndexes[gActiveBattler]);
 
     gBattleStruct->overwrittenAbilities[gActiveBattler] = ABILITY_NONE;
-    
+
     // If the fainted mon was involved in a Sky Drop
     if (gBattleStruct->skyDropTargets[gActiveBattler] != 0xFF)
     {
@@ -5219,7 +5207,7 @@ static void HandleEndTurn_FinishBattle(void)
         for (i = 0; i < PARTY_SIZE; i++)
         {
             UndoMegaEvolution(i);
-            UndoFormChange(i, B_SIDE_PLAYER, FALSE);
+            BattleFormChange(i, B_SIDE_PLAYER, FORM_BATTLE_END);
             DoBurmyFormChange(i);
         }
     #if B_RECALCULATE_STATS >= GEN_5

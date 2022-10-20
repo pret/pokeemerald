@@ -9726,15 +9726,19 @@ void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
             break;
         }
     }
-    if (!isSwitchingOut)
+}
+
+void BattleFormChange(u32 monId, u32 side, u16 method)
+{
+    u32 targetSpecies;
+    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+
+    targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
+    if (targetSpecies != SPECIES_NONE)
     {
-        targetSpecies = GetFormChangeTargetSpecies(&party[monId], FORM_BATTLE_END, 0);
-        if (targetSpecies != SPECIES_NONE)
-        {
-            SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
-            CalculateMonStats(&party[monId]);
-            TryToSetBattleFormChangeMoves(&party[monId]);
-        }
+        TryToSetBattleFormChangeMoves(&party[monId], method);
+        SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
+        CalculateMonStats(&party[monId]);
     }
 }
 
