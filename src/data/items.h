@@ -3193,7 +3193,6 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
-        .secondaryId = FORM_ITEM_USE,
         .flingPower = 10,
     },
 
@@ -3207,7 +3206,6 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
-        .secondaryId = FORM_ITEM_USE,
         .flingPower = 10,
     },
 
@@ -3221,7 +3219,6 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
-        .secondaryId = FORM_ITEM_USE,
         .flingPower = 10,
     },
 
@@ -3235,7 +3232,6 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
-        .secondaryId = FORM_ITEM_USE,
         .flingPower = 10,
     },
 
@@ -9071,7 +9067,6 @@ const struct Item gItems[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_FormChange,
-        .secondaryId = FORM_ITEM_USE,
     },
 
     [ITEM_REVEAL_GLASS] =
@@ -9083,7 +9078,6 @@ const struct Item gItems[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_FormChange,
-        .secondaryId = FORM_ITEM_USE,
     },
 
     [ITEM_DNA_SPLICERS] =
@@ -9093,9 +9087,8 @@ const struct Item gItems[] =
         .price = 0,
         .description = sDNASplicersDesc,
         .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_FormChange,
-        .secondaryId = FORM_ITEM_USE,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo: ItemUseOutOfBattle_FormChange_Fusion
     },
 
     [ITEM_ZYGARDE_CUBE] =
@@ -9119,7 +9112,6 @@ const struct Item gItems[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_FormChange,
-        .secondaryId = FORM_ITEM_USE,
     },
 
     [ITEM_N_SOLARIZER] =
@@ -9129,9 +9121,8 @@ const struct Item gItems[] =
         .price = 0,
         .description = sNSolarizerDesc,
         .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_FormChange,
-        .secondaryId = FORM_ITEM_USE,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo: ItemUseOutOfBattle_FormChange_Fusion
     },
 
     [ITEM_N_LUNARIZER] =
@@ -9141,9 +9132,8 @@ const struct Item gItems[] =
         .price = 0,
         .description = sNLunarizerDesc,
         .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_FormChange,
-        .secondaryId = FORM_ITEM_USE,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo: ItemUseOutOfBattle_FormChange_Fusion
     },
 
     [ITEM_REINS_OF_UNITY] =
@@ -9153,9 +9143,8 @@ const struct Item gItems[] =
         .price = 0,
         .description = sReinsOfUnityDesc,
         .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_FormChange,
-        .secondaryId = FORM_ITEM_USE,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo: ItemUseOutOfBattle_FormChange_Fusion
     },
 
 // Battle Mechanic Key Items
