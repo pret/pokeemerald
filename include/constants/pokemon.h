@@ -317,13 +317,13 @@
 #define EVO_MODE_OVERWORLD_SPECIAL 5
 
 // Form change types
-#define FORM_CHANGE_END         0
-#define FORM_ITEM_HOLD          1
-#define FORM_ITEM_USE           2
-#define FORM_MOVE               3
-#define FORM_WITHDRAW           4
-#define FORM_BATTLE_BEGIN       5
-#define FORM_BATTLE_END         6
+#define FORM_CHANGE_END             0
+#define FORM_CHANGE_ITEM_HOLD       1
+#define FORM_CHANGE_ITEM_USE        2
+#define FORM_CHANGE_MOVE            3
+#define FORM_CHANGE_WITHDRAW        4
+#define FORM_CHANGE_BATTLE_BEGIN    5
+#define FORM_CHANGE_BATTLE_END      6
 
 #define MON_PIC_WIDTH 64
 #define MON_PIC_HEIGHT 64

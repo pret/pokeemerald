@@ -602,9 +602,9 @@ static void CB2_InitBattleInternal(void)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         // Player's side
-        BattleFormChange(i, B_SIDE_PLAYER, FORM_BATTLE_BEGIN);
+        BattleFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_BATTLE_BEGIN);
         // Opponent's side
-        BattleFormChange(i, B_SIDE_OPPONENT, FORM_BATTLE_BEGIN);
+        BattleFormChange(i, B_SIDE_OPPONENT, FORM_CHANGE_BATTLE_BEGIN);
     }
 
     gBattleCommunication[MULTIUSE_STATE] = 0;
@@ -5207,7 +5207,7 @@ static void HandleEndTurn_FinishBattle(void)
         for (i = 0; i < PARTY_SIZE; i++)
         {
             UndoMegaEvolution(i);
-            BattleFormChange(i, B_SIDE_PLAYER, FORM_BATTLE_END);
+            BattleFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_BATTLE_END);
             DoBurmyFormChange(i);
         }
     #if B_RECALCULATE_STATS >= GEN_5
