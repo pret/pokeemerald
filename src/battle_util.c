@@ -9690,44 +9690,6 @@ void UndoMegaEvolution(u32 monId)
     }
 }
 
-void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
-{
-    u32 i, currSpecies, targetSpecies;
-    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
-    static const u16 species[][3] =
-    {
-        // Changed Form ID                      Default Form ID               Should change on switch
-        {SPECIES_MIMIKYU_BUSTED,                SPECIES_MIMIKYU,              FALSE},
-        {SPECIES_GRENINJA_ASH,                  SPECIES_GRENINJA_BATTLE_BOND, FALSE},
-        {SPECIES_MELOETTA_PIROUETTE,            SPECIES_MELOETTA,             FALSE},
-        {SPECIES_AEGISLASH_BLADE,               SPECIES_AEGISLASH,            TRUE},
-        {SPECIES_DARMANITAN_ZEN_MODE,           SPECIES_DARMANITAN,           TRUE},
-        {SPECIES_MINIOR,                        SPECIES_MINIOR_CORE_RED,      TRUE},
-        {SPECIES_MINIOR_METEOR_BLUE,            SPECIES_MINIOR_CORE_BLUE,     TRUE},
-        {SPECIES_MINIOR_METEOR_GREEN,           SPECIES_MINIOR_CORE_GREEN,    TRUE},
-        {SPECIES_MINIOR_METEOR_INDIGO,          SPECIES_MINIOR_CORE_INDIGO,   TRUE},
-        {SPECIES_MINIOR_METEOR_ORANGE,          SPECIES_MINIOR_CORE_ORANGE,   TRUE},
-        {SPECIES_MINIOR_METEOR_VIOLET,          SPECIES_MINIOR_CORE_VIOLET,   TRUE},
-        {SPECIES_MINIOR_METEOR_YELLOW,          SPECIES_MINIOR_CORE_YELLOW,   TRUE},
-        {SPECIES_WISHIWASHI_SCHOOL,             SPECIES_WISHIWASHI,           TRUE},
-        {SPECIES_CRAMORANT_GORGING,             SPECIES_CRAMORANT,            TRUE},
-        {SPECIES_CRAMORANT_GULPING,             SPECIES_CRAMORANT,            TRUE},
-        {SPECIES_MORPEKO_HANGRY,                SPECIES_MORPEKO,              TRUE},
-        {SPECIES_DARMANITAN_ZEN_MODE_GALARIAN,  SPECIES_DARMANITAN_GALARIAN,  TRUE},
-    };
-
-    currSpecies = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);
-    for (i = 0; i < ARRAY_COUNT(species); i++)
-    {
-        if (currSpecies == species[i][0] && (!isSwitchingOut || species[i][2] == TRUE))
-        {
-            SetMonData(&party[monId], MON_DATA_SPECIES, &species[i][1]);
-            CalculateMonStats(&party[monId]);
-            break;
-        }
-    }
-}
-
 void BattleFormChange(u32 monId, u32 side, u16 method)
 {
     u32 targetSpecies;

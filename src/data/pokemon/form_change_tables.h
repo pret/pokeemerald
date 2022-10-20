@@ -104,18 +104,21 @@ static const struct FormChange sArceusFormChangeTable[] = {
 
 static const struct FormChange sDarmanitanFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_SWITCH, SPECIES_DARMANITAN},
+    {FORM_CHANGE_BATTLE_FAINT,  SPECIES_DARMANITAN},
     {FORM_CHANGE_BATTLE_END,    SPECIES_DARMANITAN},
     {FORM_CHANGE_END},
 };
 
 static const struct FormChange sDarmanitanGalarianFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_SWITCH, SPECIES_DARMANITAN_GALARIAN},
+    {FORM_CHANGE_BATTLE_FAINT,  SPECIES_DARMANITAN_GALARIAN},
     {FORM_CHANGE_BATTLE_END,    SPECIES_DARMANITAN_GALARIAN},
     {FORM_CHANGE_END},
 };
 
 static const struct FormChange sMeloettaFormChangeTable[] = {
-    {FORM_CHANGE_BATTLE_END, SPECIES_MELOETTA},
+    {FORM_CHANGE_BATTLE_FAINT,  SPECIES_MELOETTA},
+    {FORM_CHANGE_BATTLE_END,    SPECIES_MELOETTA},
     {FORM_CHANGE_END},
 };
 
@@ -155,12 +158,14 @@ static const struct FormChange sGenesectFormChangeTable[] = {
 
 #if P_GEN_6_POKEMON == TRUE
 static const struct FormChange sGreninjaBattleBondFormChangeTable[] = {
-    {FORM_CHANGE_BATTLE_END, SPECIES_GRENINJA_BATTLE_BOND},
+    {FORM_CHANGE_BATTLE_FAINT,  SPECIES_GRENINJA_BATTLE_BOND},
+    {FORM_CHANGE_BATTLE_END,    SPECIES_GRENINJA_BATTLE_BOND},
     {FORM_CHANGE_END},
 };
 
 static const struct FormChange sAegislashFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_SWITCH, SPECIES_AEGISLASH},
+    {FORM_CHANGE_BATTLE_FAINT,  SPECIES_AEGISLASH},
     {FORM_CHANGE_BATTLE_END,    SPECIES_AEGISLASH},
     {FORM_CHANGE_END},
 };
@@ -188,6 +193,7 @@ static const struct FormChange sOricorioFormChangeTable[] = {
 };
 static const struct FormChange sWishiwashiFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_SWITCH, SPECIES_WISHIWASHI},
+    {FORM_CHANGE_BATTLE_FAINT,  SPECIES_WISHIWASHI},
     {FORM_CHANGE_BATTLE_END,    SPECIES_WISHIWASHI},
     {FORM_CHANGE_END},
 };
@@ -215,42 +221,50 @@ static const struct FormChange sSilvallyFormChangeTable[] = {
 };
 
 static const struct FormChange sMimikyuFormChangeTable[] = {
-    {FORM_CHANGE_BATTLE_END, SPECIES_MIMIKYU},
+    {FORM_CHANGE_BATTLE_FAINT,  SPECIES_MIMIKYU},
+    {FORM_CHANGE_BATTLE_END,    SPECIES_MIMIKYU},
     {FORM_CHANGE_END},
 };
 
 static const struct FormChange sMiniorRedFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_SWITCH, SPECIES_MINIOR_CORE_RED},
+    {FORM_CHANGE_BATTLE_FAINT,  SPECIES_MINIOR_CORE_RED},
     {FORM_CHANGE_BATTLE_END,    SPECIES_MINIOR_CORE_RED},
     {FORM_CHANGE_END},
 };
 static const struct FormChange sMiniorBlueFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_SWITCH, SPECIES_MINIOR_CORE_BLUE},
+    {FORM_CHANGE_BATTLE_FAINT,  SPECIES_MINIOR_CORE_BLUE},
     {FORM_CHANGE_BATTLE_END,    SPECIES_MINIOR_CORE_BLUE},
     {FORM_CHANGE_END},
 };
 static const struct FormChange sMiniorGreenFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_SWITCH, SPECIES_MINIOR_CORE_GREEN},
+    {FORM_CHANGE_BATTLE_FAINT,  SPECIES_MINIOR_CORE_GREEN},
     {FORM_CHANGE_BATTLE_END,    SPECIES_MINIOR_CORE_GREEN},
     {FORM_CHANGE_END},
 };
 static const struct FormChange sMiniorIndigoFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_SWITCH, SPECIES_MINIOR_CORE_INDIGO},
+    {FORM_CHANGE_BATTLE_FAINT,  SPECIES_MINIOR_CORE_INDIGO},
     {FORM_CHANGE_BATTLE_END,    SPECIES_MINIOR_CORE_INDIGO},
     {FORM_CHANGE_END},
 };
 static const struct FormChange sMiniorOrangeFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_SWITCH, SPECIES_MINIOR_CORE_ORANGE},
+    {FORM_CHANGE_BATTLE_FAINT,  SPECIES_MINIOR_CORE_ORANGE},
     {FORM_CHANGE_BATTLE_END,    SPECIES_MINIOR_CORE_ORANGE},
     {FORM_CHANGE_END},
 };
 static const struct FormChange sMiniorVioletFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_SWITCH, SPECIES_MINIOR_CORE_VIOLET},
+    {FORM_CHANGE_BATTLE_FAINT,  SPECIES_MINIOR_CORE_VIOLET},
     {FORM_CHANGE_BATTLE_END,    SPECIES_MINIOR_CORE_VIOLET},
     {FORM_CHANGE_END},
 };
 static const struct FormChange sMiniorYellowFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_SWITCH, SPECIES_MINIOR_CORE_YELLOW},
+    {FORM_CHANGE_BATTLE_FAINT,  SPECIES_MINIOR_CORE_YELLOW},
     {FORM_CHANGE_BATTLE_END,    SPECIES_MINIOR_CORE_YELLOW},
     {FORM_CHANGE_END},
 };
@@ -260,12 +274,14 @@ static const struct FormChange sMiniorYellowFormChangeTable[] = {
 #if P_GEN_8_POKEMON == TRUE
 static const struct FormChange sCramorantFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_SWITCH, SPECIES_CRAMORANT},
+    {FORM_CHANGE_BATTLE_FAINT,  SPECIES_CRAMORANT},
     {FORM_CHANGE_BATTLE_END,    SPECIES_CRAMORANT},
     {FORM_CHANGE_END},
 };
 
 static const struct FormChange sMorpekoFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_SWITCH, SPECIES_MORPEKO},
+    {FORM_CHANGE_BATTLE_FAINT,  SPECIES_MORPEKO},
     {FORM_CHANGE_BATTLE_END,    SPECIES_MORPEKO},
     {FORM_CHANGE_END},
 };
