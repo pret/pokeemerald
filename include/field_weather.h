@@ -77,12 +77,12 @@ struct Weather
     u8 snowflakeSpriteCount;
     u8 targetSnowflakeSpriteCount;
     // Thunderstorm
-    u16 thunderDelay;
-    u16 thunderCounter;
+    u16 thunderTimer;        // general-purpose timer for state transitions
+    u16 thunderSETimer;      // timer for thunder sound effect
     bool8 thunderAllowEnd;
-    bool8 thunderSkipShort;
-    u8 thunderShortRetries;
-    bool8 thunderTriggered;
+    bool8 thunderLongBolt;   // true if this cycle will end in a long lightning bolt
+    u8 thunderShortBolts;    // the number of short bolts this cycle
+    bool8 thunderEnqueued;
     // Horizontal fog
     u16 fogHScrollPosX;
     u16 fogHScrollCounter;
