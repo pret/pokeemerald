@@ -8397,6 +8397,16 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
                 case FORM_CHANGE_BATTLE_END:
                     if (heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
                         targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_PRIMAL_REVERSION:
+                    if (arg == formChanges[i].param1)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_WITHDRAW:
+                case FORM_CHANGE_BATTLE_SWITCH:
+                case FORM_CHANGE_BATTLE_FAINT:
+                    targetSpecies = formChanges[i].targetSpecies;
+                    break;
                 }
             }
         }
@@ -8485,13 +8495,28 @@ bool32 ShouldShowFemaleDifferences(u16 species, u32 personality)
     return (gBaseStats[species].flags & SPECIES_FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
 }
 
+void TryFormChange(u32 monId, u32 side, u16 method)
+{
+    u32 targetSpecies;
+    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+
+    targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
+    if (targetSpecies != SPECIES_NONE)
+    {
+        TryToSetBattleFormChangeMoves(&party[monId], method);
+        SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
+        CalculateMonStats(&party[monId]);
+    }
+}
+
 void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method)
 {
     int i, j;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     const struct FormChange *formChanges = gFormChangeTablePointers[species];
 
-    if (formChanges == NULL || (method != FORM_CHANGE_BATTLE_BEGIN && method != FORM_CHANGE_BATTLE_END))
+    if (formChanges == NULL
+        || (method != FORM_CHANGE_BATTLE_BEGIN && method != FORM_CHANGE_BATTLE_END))
         return;
 
     for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)

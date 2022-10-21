@@ -472,9 +472,6 @@ struct MegaEvolutionData
     bool8 alreadyEvolved[4]; // Array id is used for mon position.
     u16 evolvedSpecies[MAX_BATTLERS_COUNT];
     u16 playerEvolvedSpecies;
-    u8 primalRevertedPartyIds[2]; // As flags using gBitTable;
-    u16 primalRevertedSpecies[MAX_BATTLERS_COUNT];
-    u16 playerPrimalRevertedSpecies;
     u8 battlerId;
     bool8 playerSelect;
     u8 triggerSpriteId;

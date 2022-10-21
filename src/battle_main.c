@@ -602,9 +602,9 @@ static void CB2_InitBattleInternal(void)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         // Player's side
-        BattleFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_BATTLE_BEGIN);
+        TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_BATTLE_BEGIN);
         // Opponent's side
-        BattleFormChange(i, B_SIDE_OPPONENT, FORM_CHANGE_BATTLE_BEGIN);
+        TryFormChange(i, B_SIDE_OPPONENT, FORM_CHANGE_BATTLE_BEGIN);
     }
 
     gBattleCommunication[MULTIUSE_STATE] = 0;
@@ -3247,7 +3247,7 @@ void FaintClearSetData(void)
     gBattleMons[gActiveBattler].type3 = TYPE_MYSTERY;
 
     Ai_UpdateFaintData(gActiveBattler);
-    BattleFormChange(gBattlerPartyIndexes[gActiveBattler], GET_BATTLER_SIDE(gActiveBattler), FORM_CHANGE_BATTLE_FAINT);
+    TryFormChange(gBattlerPartyIndexes[gActiveBattler], GET_BATTLER_SIDE(gActiveBattler), FORM_CHANGE_BATTLE_FAINT);
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         UndoMegaEvolution(gBattlerPartyIndexes[gActiveBattler]);
 
@@ -3682,18 +3682,12 @@ static void TryDoEventsBeforeFirstTurn(void)
     // Primal Reversion
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (GetBattlerHoldEffect(i, TRUE) == HOLD_EFFECT_PRIMAL_ORB)
+        if (GetBattlerHoldEffect(i, TRUE) == HOLD_EFFECT_PRIMAL_ORB
+            && GetPrimalReversionSpecies(gBattleMons[i].species, gBattleMons[i].item) != SPECIES_NONE)
         {
-            for (j = 0; j < EVOS_PER_MON; j++)
-            {
-                if (gEvolutionTable[gBattleMons[i].species][j].targetSpecies != SPECIES_NONE
-                 && gEvolutionTable[gBattleMons[i].species][j].method == EVO_PRIMAL_REVERSION)
-                {
-                    gBattlerAttacker = i;
-                    BattleScriptExecute(BattleScript_PrimalReversion);
-                    return;
-                }
-            }
+            gBattlerAttacker = i;
+            BattleScriptExecute(BattleScript_PrimalReversion);
+            return;
         }
     }
 
@@ -5207,7 +5201,7 @@ static void HandleEndTurn_FinishBattle(void)
         for (i = 0; i < PARTY_SIZE; i++)
         {
             UndoMegaEvolution(i);
-            BattleFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_BATTLE_END);
+            TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_BATTLE_END);
             DoBurmyFormChange(i);
         }
     #if B_RECALCULATE_STATS >= GEN_5
@@ -5221,6 +5215,13 @@ static void HandleEndTurn_FinishBattle(void)
             }
         }
     #endif
+        // Clear battle mon species to avoid a bug on the next battle that causes
+        // healthboxes loading incorrectly due to it trying to create a Mega Indicator
+        // if the previous battler would've had.
+        for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+        {
+            gBattleMons[i].species = SPECIES_NONE;
+        }
         gBattleMainFunc = FreeResetData_ReturnToOvOrDoEvolutions;
         gCB2_AfterEvolution = BattleMainCB2;
     }

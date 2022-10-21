@@ -266,7 +266,6 @@
 // Evolution types
 #define EVO_MEGA_EVOLUTION                0xffff // Not an actual evolution, used to temporarily mega evolve in battle.
 #define EVO_MOVE_MEGA_EVOLUTION           0xfffe // Mega Evolution that checks for a move instead of held item.
-#define EVO_PRIMAL_REVERSION              0xfffd // Not an actual evolution, used to undergo primal reversion in battle.
 #define EVO_FRIENDSHIP                    1      // Pokémon levels up with friendship ≥ 220
 #define EVO_FRIENDSHIP_DAY                2      // Pokémon levels up during the day with friendship ≥ 220
 #define EVO_FRIENDSHIP_NIGHT              3      // Pokémon levels up at night with friendship ≥ 220
@@ -317,15 +316,16 @@
 #define EVO_MODE_OVERWORLD_SPECIAL 5
 
 // Form change types
-#define FORM_CHANGE_END             0
-#define FORM_CHANGE_ITEM_HOLD       1
-#define FORM_CHANGE_ITEM_USE        2
-#define FORM_CHANGE_MOVE            3
-#define FORM_CHANGE_WITHDRAW        4
-#define FORM_CHANGE_BATTLE_BEGIN    5
-#define FORM_CHANGE_BATTLE_SWITCH   6
-#define FORM_CHANGE_BATTLE_FAINT    7
-#define FORM_CHANGE_BATTLE_END      8
+#define FORM_CHANGE_END                 0 // Form table terminator
+#define FORM_CHANGE_ITEM_HOLD           1
+#define FORM_CHANGE_ITEM_USE            2
+#define FORM_CHANGE_MOVE                3 // Todo
+#define FORM_CHANGE_WITHDRAW            4 // 
+#define FORM_CHANGE_BATTLE_BEGIN        5
+#define FORM_CHANGE_BATTLE_END          6
+#define FORM_CHANGE_BATTLE_SWITCH       7
+#define FORM_CHANGE_BATTLE_FAINT        8
+#define FORM_CHANGE_PRIMAL_REVERSION    9
 
 #define MON_PIC_WIDTH 64
 #define MON_PIC_HEIGHT 64
@@ -345,14 +345,15 @@
 #define SPECIES_FLAG_LEGENDARY          (1 << 0)
 #define SPECIES_FLAG_MYTHICAL           (1 << 1)
 #define SPECIES_FLAG_MEGA_EVOLUTION     (1 << 2)
-#define SPECIES_FLAG_ULTRA_BEAST        (1 << 3)
-#define SPECIES_FLAG_ALOLAN_FORM        (1 << 4)
-#define SPECIES_FLAG_GALARIAN_FORM      (1 << 5)
-#define SPECIES_FLAG_HISUIAN_FORM       (1 << 6)
-#define SPECIES_FLAG_GENDER_DIFFERENCE  (1 << 7)
-#define SPECIES_FLAG_ALL_PERFECT_IVS    (1 << 8)
-#define SPECIES_FLAG_SHINY_LOCKED       (1 << 9)
-#define SPECIES_FLAG_CANNOT_BE_TRADED   (1 << 10)
+#define SPECIES_FLAG_PRIMAL_REVERSION   (1 << 3)
+#define SPECIES_FLAG_ULTRA_BEAST        (1 << 4)
+#define SPECIES_FLAG_ALOLAN_FORM        (1 << 5)
+#define SPECIES_FLAG_GALARIAN_FORM      (1 << 6)
+#define SPECIES_FLAG_HISUIAN_FORM       (1 << 7)
+#define SPECIES_FLAG_GENDER_DIFFERENCE  (1 << 8)
+#define SPECIES_FLAG_ALL_PERFECT_IVS    (1 << 9)
+#define SPECIES_FLAG_SHINY_LOCKED       (1 << 10)
+#define SPECIES_FLAG_CANNOT_BE_TRADED   (1 << 11)
 
 #define LEGENDARY_PERFECT_IV_COUNT 3
 

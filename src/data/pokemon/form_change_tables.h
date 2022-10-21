@@ -47,6 +47,18 @@ FORM_CHANGE_BATTLE_END:
 #define DAY    1
 #define NIGHT  2
 
+static const struct FormChange sKyogreFormChangeTable[] = {
+    {FORM_CHANGE_PRIMAL_REVERSION,  SPECIES_KYOGRE_PRIMAL, ITEM_BLUE_ORB},
+    {FORM_CHANGE_BATTLE_END,        SPECIES_KYOGRE},
+    {FORM_CHANGE_END},
+};
+
+static const struct FormChange sGroudonFormChangeTable[] = {
+    {FORM_CHANGE_PRIMAL_REVERSION,  SPECIES_GROUDON_PRIMAL, ITEM_RED_ORB},
+    {FORM_CHANGE_BATTLE_END,        SPECIES_GROUDON},
+    {FORM_CHANGE_END},
+};
+
 #if P_GEN_4_POKEMON == TRUE
 static const struct FormChange sGiratinaFormChangeTable[] = {
     {FORM_CHANGE_ITEM_HOLD, SPECIES_GIRATINA, ITEM_NONE},
@@ -178,7 +190,7 @@ static const struct FormChange sXerneasFormChangeTable[] = {
 
 static const struct FormChange sHoopaFormChangeTable[] = {
     {FORM_CHANGE_ITEM_USE, SPECIES_HOOPA_UNBOUND, ITEM_PRISON_BOTTLE, SPECIES_HOOPA},
-    // {FORM_CHANGE_WITHDRAW, SPECIES_HOOPA},
+    {FORM_CHANGE_WITHDRAW, SPECIES_HOOPA},
     {FORM_CHANGE_END},
 };
 #endif

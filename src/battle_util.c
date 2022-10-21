@@ -518,7 +518,7 @@ void HandleAction_Switch(void)
     if (gBattleResults.playerSwitchesCounter < 255)
         gBattleResults.playerSwitchesCounter++;
 
-    BattleFormChange(gBattlerPartyIndexes[gBattlerAttacker], GetBattlerSide(gBattlerAttacker), FORM_CHANGE_BATTLE_SWITCH);
+    TryFormChange(gBattlerPartyIndexes[gBattlerAttacker], GetBattlerSide(gBattlerAttacker), FORM_CHANGE_BATTLE_SWITCH);
 }
 
 void HandleAction_UseItem(void)
@@ -8955,8 +8955,7 @@ static bool32 CanEvolve(u32 species)
     {
         if (gEvolutionTable[species][i].method
          && gEvolutionTable[species][i].method != EVO_MEGA_EVOLUTION
-         && gEvolutionTable[species][i].method != EVO_MOVE_MEGA_EVOLUTION
-         && gEvolutionTable[species][i].method != EVO_PRIMAL_REVERSION)
+         && gEvolutionTable[species][i].method != EVO_MOVE_MEGA_EVOLUTION)
             return TRUE;
     }
     return FALSE;
@@ -9565,15 +9564,20 @@ u16 GetMegaEvolutionSpecies(u16 preEvoSpecies, u16 heldItemId)
     return SPECIES_NONE;
 }
 
-u16 GetPrimalReversionSpecies(u16 preEvoSpecies, u16 heldItemId)
+u16 GetPrimalReversionSpecies(u16 preSpecies, u16 heldItemId)
 {
     u32 i;
+    const struct FormChange *formChanges = gFormChangeTablePointers[preSpecies];
 
-    for (i = 0; i < EVOS_PER_MON; i++)
+    if (formChanges != NULL)
     {
-        if (gEvolutionTable[preEvoSpecies][i].method == EVO_PRIMAL_REVERSION
-         && gEvolutionTable[preEvoSpecies][i].param == heldItemId)
-            return gEvolutionTable[preEvoSpecies][i].targetSpecies;
+        for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
+        {
+            if (formChanges[i].method == FORM_CHANGE_PRIMAL_REVERSION
+             && formChanges[i].param1 == heldItemId
+             && formChanges[i].targetSpecies != preSpecies)
+                return formChanges[i].targetSpecies;
+        }
     }
     return SPECIES_NONE;
 }
@@ -9675,12 +9679,6 @@ void UndoMegaEvolution(u32 monId)
         SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &gBattleStruct->mega.playerEvolvedSpecies);
         CalculateMonStats(&gPlayerParty[monId]);
     }
-    else if (gBattleStruct->mega.primalRevertedPartyIds[B_SIDE_PLAYER] & gBitTable[monId])
-    {
-        gBattleStruct->mega.primalRevertedPartyIds[B_SIDE_PLAYER] &= ~(gBitTable[monId]);
-        SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &baseSpecies);
-        CalculateMonStats(&gPlayerParty[monId]);
-    }
     // While not exactly a mega evolution, Zygarde follows the same rules.
     else if (GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, NULL) == SPECIES_ZYGARDE_COMPLETE)
     {
@@ -9690,17 +9688,23 @@ void UndoMegaEvolution(u32 monId)
     }
 }
 
-void BattleFormChange(u32 monId, u32 side, u16 method)
+bool32 IsBattlerPrimalReverted(u8 battlerId)
 {
-    u32 targetSpecies;
+    return (gBaseStats[gBattleMons[battlerId].species].flags & SPECIES_FLAG_PRIMAL_REVERSION);
+}
+
+void TryBattleFormChange(u8 battlerId, u16 method)
+{
+    u16 targetSpecies;
+    u8 monId = gBattlerPartyIndexes[battlerId];
+    u8 side = GET_BATTLER_SIDE(battlerId);
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
 
     targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
     if (targetSpecies != SPECIES_NONE)
     {
-        TryToSetBattleFormChangeMoves(&party[monId], method);
         SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
-        CalculateMonStats(&party[monId]);
+        RecalcBattlerStats(battlerId, &party[monId]);
     }
 }
 
@@ -10361,4 +10365,20 @@ bool32 CanTargetBattler(u8 battlerAtk, u8 battlerDef, u16 move)
       && gStatuses3[battlerAtk] & STATUS3_HEAL_BLOCK)
         return FALSE;   // Pokémon affected by Heal Block cannot target allies with Pollen Puff
     return TRUE;
+}
+
+void RecalcBattlerStats(u32 battler, struct Pokemon *mon)
+{
+    CalculateMonStats(mon);
+    gBattleMons[battler].level = GetMonData(mon, MON_DATA_LEVEL);
+    gBattleMons[battler].hp = GetMonData(mon, MON_DATA_HP);
+    gBattleMons[battler].maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+    gBattleMons[battler].attack = GetMonData(mon, MON_DATA_ATK);
+    gBattleMons[battler].defense = GetMonData(mon, MON_DATA_DEF);
+    gBattleMons[battler].speed = GetMonData(mon, MON_DATA_SPEED);
+    gBattleMons[battler].spAttack = GetMonData(mon, MON_DATA_SPATK);
+    gBattleMons[battler].spDefense = GetMonData(mon, MON_DATA_SPDEF);
+    gBattleMons[battler].ability = GetMonAbility(mon);
+    gBattleMons[battler].type1 = gBaseStats[gBattleMons[battler].species].type1;
+    gBattleMons[battler].type2 = gBaseStats[gBattleMons[battler].species].type2;
 }

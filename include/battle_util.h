@@ -145,11 +145,12 @@ u16 CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilit
 u16 GetTypeModifier(u8 atkType, u8 defType);
 s32 GetStealthHazardDamage(u8 hazardType, u8 battlerId);
 u16 GetMegaEvolutionSpecies(u16 preEvoSpecies, u16 heldItemId);
-u16 GetPrimalReversionSpecies(u16 preEvoSpecies, u16 heldItemId);
+u16 GetPrimalReversionSpecies(u16 preSpecies, u16 heldItemId);
 u16 GetWishMegaEvolutionSpecies(u16 preEvoSpecies, u16 moveId1, u16 moveId2, u16 moveId3, u16 moveId4);
 bool32 CanMegaEvolve(u8 battlerId);
 void UndoMegaEvolution(u32 monId);
-void BattleFormChange(u32 monId, u32 side, u16 method);
+bool32 IsBattlerPrimalReverted(u8 battlerId);
+void TryBattleFormChange(u8 battlerId, u16 method);
 bool32 DoBattlersShareType(u32 battler1, u32 battler2);
 bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId);
 struct Pokemon *GetIllusionMonPtr(u32 battlerId);
@@ -186,6 +187,7 @@ void TryToRevertMimicry(void);
 void RestoreBattlerOriginalTypes(u8 battlerId);
 u32 GetBattlerMoveTargetType(u8 battlerId, u16 move);
 bool32 CanTargetBattler(u8 battlerAtk, u8 battlerDef, u16 move);
+void RecalcBattlerStats(u32 battler, struct Pokemon *mon);
 // Ability checks
 bool32 IsRolePlayBannedAbilityAtk(u16 ability);
 bool32 IsRolePlayBannedAbility(u16 ability);
