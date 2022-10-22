@@ -105,11 +105,13 @@ int main(int argc, char *argv[])
     });
 
     env.add_callback("cleanString", 1, [](Arguments& args) {
-        string badChars = ".'{} \n\t-_\u00e9";
+        string badChars = ".'{} \n\t-\u00e9";
         string str = args.at(0)->get<string>();
-        str.erase(remove_if(str.begin(), str.end(), [&badChars](const char &c) {
-            return badChars.find(c) != std::string::npos;
-        }), str.end());
+        for (uint i = 0; i < str.length(); i++) {
+            if (badChars.find(str[i]) != std::string::npos) {
+                str[i] = '_';
+            }
+        }
         return str;
     });
 
