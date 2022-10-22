@@ -376,26 +376,14 @@ FollowerDance:
   lock_facing_direction
   jump_in_place_up
   unlock_facing_direction
-  walk_in_place_faster_up
-  walk_in_place_faster_left
-  walk_in_place_faster_down
-  walk_in_place_faster_right
-  walk_in_place_faster_up
-  walk_in_place_faster_left
-  walk_in_place_faster_down
-  walk_in_place_faster_right
-  walk_in_place_faster_up
-  walk_in_place_faster_left
-  walk_in_place_faster_down
-  walk_in_place_faster_right
-  walk_in_place_faster_up
-  walk_in_place_faster_left
-  walk_in_place_faster_down
-  walk_in_place_faster_right
-  walk_in_place_faster_up
-  walk_in_place_faster_left
-  walk_in_place_faster_down
-  walk_in_place_faster_right
+  walk_in_place_fast_up
+  walk_in_place_fast_left
+  walk_in_place_fast_down
+  walk_in_place_fast_right
+  walk_in_place_fast_up
+  walk_in_place_fast_left
+  walk_in_place_fast_down
+  walk_in_place_fast_right
   jump_in_place_up
   jump_in_place_down
   jump_in_place_up
