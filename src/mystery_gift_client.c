@@ -44,8 +44,7 @@ u32 MysteryGiftClient_Run(u16 * endVal)
     {
         *endVal = sClient->param;
         MysteryGiftClient_Free(sClient);
-        Free(sClient);
-        sClient = NULL;
+        FREE_AND_SET_NULL(sClient);
     }
     return result;
 }
@@ -203,7 +202,7 @@ static u32 Client_Run(struct MysteryGiftClient * client)
         MysteryGiftLink_InitSend(&client->link, MG_LINKID_GAME_DATA, client->sendBuffer, sizeof(struct MysteryGiftLinkGameData));
         break;
     case CLI_LOAD_TOSS_RESPONSE:
-        // param here is set by MG_STATE_LINK_ASK_TOSS or MG_STATE_LINK_ASK_TOSS_UNRECEIVED
+        // param here is set by MG_STATE_CLIENT_ASK_TOSS or MG_STATE_CLIENT_ASK_TOSS_UNRECEIVED
         MysteryGiftClient_InitSendWord(client, MG_LINKID_RESPONSE, client->param);
         break;
     case CLI_SAVE_CARD:
@@ -230,7 +229,7 @@ static u32 Client_Run(struct MysteryGiftClient * client)
         MysteryGift_TrySaveStamp(client->recvBuffer);
         break;
     case CLI_SAVE_RAM_SCRIPT:
-        InitRamScript_NoObjectEvent(client->recvBuffer, 1000);
+        InitRamScript_NoObjectEvent(client->recvBuffer, sizeof(struct RamScriptData));
         break;
     case CLI_RECV_EREADER_TRAINER:
         memcpy(&gSaveBlock2Ptr->frontier.ereaderTrainer, client->recvBuffer, sizeof(gSaveBlock2Ptr->frontier.ereaderTrainer));

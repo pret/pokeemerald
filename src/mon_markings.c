@@ -30,7 +30,7 @@ static const struct OamData sOamData_MenuWindow =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -48,7 +48,7 @@ static const struct OamData sOamData_8x8 =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
@@ -157,7 +157,7 @@ static const struct OamData sOamData_MarkingCombo =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
     .x = 0,
@@ -396,20 +396,16 @@ bool8 HandleMonMarkingsMenuInput(void)
 
     if (JOY_NEW(DPAD_UP))
     {
-        s8 pos;
         PlaySE(SE_SELECT);
-        pos = --sMenu->cursorPos;
-        if (pos < 0)
+        if (--sMenu->cursorPos < 0)
             sMenu->cursorPos = SELECTION_CANCEL;
         return TRUE;
     }
 
     if (JOY_NEW(DPAD_DOWN))
     {
-        s8 pos;
         PlaySE(SE_SELECT);
-        pos = ++sMenu->cursorPos;
-        if (pos > SELECTION_CANCEL)
+        if (++sMenu->cursorPos > SELECTION_CANCEL)
             sMenu->cursorPos = 0;
         return TRUE;
     }
@@ -495,7 +491,6 @@ static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u16 baseTileTag, u16 base
     }
     sMenu->windowSprites[1]->y = y + 96;
 
-
     // Create marking sprites
     template.tileTag++;
     template.paletteTag++;
@@ -548,7 +543,6 @@ static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u16 baseTileTag, u16 base
     {
         sMenu->cursorSprite = NULL;
     }
-
 }
 
 static void SpriteCB_Dummy(struct Sprite *sprite)
@@ -610,7 +604,7 @@ static struct Sprite *CreateMarkingComboSprite(u16 tileTag, u16 paletteTag, cons
 
     spriteId = CreateSprite(&template, 0, 0, 0);
     if (spriteId != MAX_SPRITES)
-        return  &gSprites[spriteId];
+        return &gSprites[spriteId];
     else
         return NULL;
 }
