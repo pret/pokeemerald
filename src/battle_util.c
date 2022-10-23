@@ -59,6 +59,7 @@ functions instead of at the top of the file with the other declarations.
 static bool32 TryRemoveScreens(u8 battler);
 static bool32 IsUnnerveAbilityOnOpposingSide(u8 battlerId);
 static u8 GetFlingPowerFromItemId(u16 itemId);
+static void SetRandomMultiHitCounter();
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForRunningByItem[];
@@ -3868,35 +3869,8 @@ u8 AtkCanceller_UnableToUseMove(void)
                 }
                 else
                 {
-                    if (B_MULTI_HIT_CHANCE >= GEN_5)
-                    {
-                        // Based on Gen 5's odds
-                        // 35% for 2 hits
-                        // 35% for 3 hits
-                        // 15% for 4 hits
-                        // 15% for 5 hits
-                        gMultiHitCounter = Random() % 100;
-                        if (gMultiHitCounter < 35)
-                            gMultiHitCounter = 2;
-                        else if (gMultiHitCounter < 35 + 35)
-                            gMultiHitCounter = 3;
-                        else if (gMultiHitCounter < 35 + 35 + 15)
-                            gMultiHitCounter = 4;
-                        else
-                            gMultiHitCounter =5;
-                    }
-                    else
-                    {
-                        // 2 and 3 hits: 37.5%
-                        // 4 and 5 hits: 12.5%
-                        gMultiHitCounter = Random() % 4;
-                        if (gMultiHitCounter > 1)
-                            gMultiHitCounter = (Random() % 4) + 2;
-                        else
-                            gMultiHitCounter += 2;
-                    }
+                    SetRandomMultiHitCounter();
                 }
-
                 PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
             }
             else if (gBattleMoves[gCurrentMove].flags & FLAG_TWO_STRIKES)
@@ -10517,4 +10491,36 @@ bool32 CanTargetBattler(u8 battlerAtk, u8 battlerDef, u16 move)
       && gStatuses3[battlerAtk] & STATUS3_HEAL_BLOCK)
         return FALSE;   // Pokémon affected by Heal Block cannot target allies with Pollen Puff
     return TRUE;
+}
+
+static void SetRandomMultiHitCounter()
+{
+    #if (B_MULTI_HIT_CHANCE >= GEN_5)
+    {
+        // Based on Gen 5's odds
+        // 35% for 2 hits
+        // 35% for 3 hits
+        // 15% for 4 hits
+        // 15% for 5 hits
+        gMultiHitCounter = Random() % 100;
+        if (gMultiHitCounter < 35)
+            gMultiHitCounter = 2;
+        else if (gMultiHitCounter < 35 + 35)
+            gMultiHitCounter = 3;
+        else if (gMultiHitCounter < 35 + 35 + 15)
+            gMultiHitCounter = 4;
+        else
+            gMultiHitCounter = 5;
+    }
+    #else
+    {
+        // 2 and 3 hits: 37.5%
+        // 4 and 5 hits: 12.5%
+        gMultiHitCounter = Random() % 4;
+        if (gMultiHitCounter > 1)
+            gMultiHitCounter = (Random() % 4) + 2;
+        else
+            gMultiHitCounter += 2;
+    }
+    #endif
 }
