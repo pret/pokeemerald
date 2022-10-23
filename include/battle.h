@@ -174,7 +174,7 @@ struct SpecialStatus
     u8 berryReduced:1;
     u8 gemBoost:1;
     u8 rototillerAffected:1;  // to be affected by rototiller
-    u8 parentalBondOn:2;
+    u8 parentalBondState:2;
     u8 multiHitOn:1;
     // End of byte, two bits unused
     u8 gemParam;
