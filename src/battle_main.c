@@ -4841,7 +4841,7 @@ static void TurnValuesCleanUp(bool8 var0)
         }
 
         if (gDisableStructs[gActiveBattler].substituteHP == 0)
-            gBattleMons[gActiveBattler].status2 &= ~(STATUS2_SUBSTITUTE);
+            gBattleMons[gActiveBattler].status2 &= ~STATUS2_SUBSTITUTE;
 
         gSpecialStatuses[gActiveBattler].parentalBondState = PARENTAL_BOND_OFF;
     }

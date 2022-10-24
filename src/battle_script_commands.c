@@ -1451,7 +1451,7 @@ static void Cmd_attackcanceler(void)
     if (AtkCanceller_UnableToUseMove())
         return;
 
-    if (!gSpecialStatuses[gBattlerAttacker].parentalBondState
+    if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_OFF
     && GetBattlerAbility(gBattlerAttacker) == ABILITY_PARENTAL_BOND
     && IsMoveAffectedByParentalBond(gCurrentMove, gBattlerAttacker)
     && !(gAbsentBattlerFlags & gBitTable[gBattlerTarget])
@@ -14847,14 +14847,12 @@ bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId)
             {
             // Both foes are alive, spread move strikes once
             case MOVE_TARGET_BOTH:
-                if (IsBattlerAlive(gBattlerTarget) && IsBattlerAlive(BATTLE_PARTNER(gBattlerTarget)))
+                if (CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) >= 2)
                     return FALSE;
                 break;
             // Either both foes or one foe and its ally are alive; spread move strikes once
             case MOVE_TARGET_FOES_AND_ALLY:
-                if (IsBattlerAlive(BATTLE_PARTNER(gBattlerTarget))
-                    || (IsBattlerAlive(BATTLE_PARTNER(battlerId))
-                        && (IsBattlerAlive(BATTLE_PARTNER(gBattlerTarget)) || IsBattlerAlive(gBattlerTarget))))
+                if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ATTACKER) >= 2)
                     return FALSE;
                 break;
             default:
