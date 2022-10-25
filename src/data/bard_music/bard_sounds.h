@@ -1,7 +1,10 @@
 #ifndef GUARD_BARD_SOUNDS_TABLE_H
 #define GUARD_BARD_SOUNDS_TABLE_H
 
-#define NULL_BARD_SOUND { 0xff }
+#define BARD_SOUND_FULL(var00, var01, var02) { var00, var01, var02, 0x0, 0x0 }
+#define BARD_SOUND(var00)   BARD_SOUND_FULL(var00, 0x0, 0x0)
+#define BARD_SOUND_EMPTY    BARD_SOUND(0x0)
+#define BARD_SOUND_NULL     BARD_SOUND(0xff)
 
 #include "pokemon.h"
 #include "moves.h"
