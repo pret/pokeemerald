@@ -9503,6 +9503,204 @@ static const union AnimCmd sAnim_ENAMORUS_THERIAN_1[] =
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
+
+static const union AnimCmd sAnim_VENUSAUR_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_CHARIZARD_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_BLASTOISE_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_BUTTERFREE_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_PIKACHU_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_MEOWTH_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_MACHAMP_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_GENGAR_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_KINGLER_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_LAPRAS_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_EEVEE_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_SNORLAX_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_GARBODOR_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_MELMETAL_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_RILLABOOM_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_CINDERACE_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_INTELEON_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_CORVIKNIGHT_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ORBEETLE_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_DREDNAW_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_COALOSSAL_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_FLAPPLE_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_APPLETUN_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_SANDACONDA_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_TOXTRICITY_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_CENTISKORCH_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_HATTERENE_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_GRIMMSNARL_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALCREMIE_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_COPPERAJAH_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_DURALUDON_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_URSHIFU_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_URSHIFU_RAPID_STRIKE_STYLE_GMAX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
 #endif
 
 static const union AnimCmd *const sAnims_NONE[] =
@@ -16102,6 +16300,172 @@ static const union AnimCmd *const sAnims_ENAMORUS_THERIAN[] =
     sAnim_GeneralFrame0,
     sAnim_ENAMORUS_THERIAN_1,
 };
+
+static const union AnimCmd *const sAnims_VENUSAUR_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_VENUSAUR_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_CHARIZARD_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_CHARIZARD_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_BLASTOISE_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_BLASTOISE_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_BUTTERFREE_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_BUTTERFREE_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_PIKACHU_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_PIKACHU_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_MEOWTH_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_MEOWTH_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_MACHAMP_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_MACHAMP_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_GENGAR_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_GENGAR_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_KINGLER_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_KINGLER_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_LAPRAS_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_LAPRAS_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_EEVEE_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_EEVEE_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_SNORLAX_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_SNORLAX_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_GARBODOR_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_GARBODOR_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_MELMETAL_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_MELMETAL_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_RILLABOOM_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_RILLABOOM_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_CINDERACE_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_CINDERACE_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_INTELEON_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_INTELEON_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_CORVIKNIGHT_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_CORVIKNIGHT_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_ORBEETLE_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ORBEETLE_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_DREDNAW_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_DREDNAW_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_COALOSSAL_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_COALOSSAL_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_FLAPPLE_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_FLAPPLE_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_APPLETUN_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_APPLETUN_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_SANDACONDA_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_SANDACONDA_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_TOXTRICITY_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_TOXTRICITY_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_CENTISKORCH_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_CENTISKORCH_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_HATTERENE_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_HATTERENE_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_GRIMMSNARL_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_GRIMMSNARL_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_ALCREMIE_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALCREMIE_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_COPPERAJAH_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_COPPERAJAH_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_DURALUDON_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_DURALUDON_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_URSHIFU_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_URSHIFU_GMAX_1,
+};
+
+static const union AnimCmd *const sAnims_URSHIFU_RAPID_STRIKE_STYLE_GMAX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_URSHIFU_RAPID_STRIKE_STYLE_GMAX_1,
+};
+
 #endif
 
 #define ANIM_CMD(name)             [SPECIES_##name] = sAnims_##name
@@ -17376,6 +17740,40 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD_FULL(CALYREX_ICE_RIDER, sAnims_CALYREX),
     ANIM_CMD_FULL(CALYREX_SHADOW_RIDER, sAnims_CALYREX),
     ANIM_CMD(ENAMORUS_THERIAN),
+    // Gigantamax Forms
+    ANIM_CMD(VENUSAUR_GMAX),
+    ANIM_CMD(CHARIZARD_GMAX),
+    ANIM_CMD(BLASTOISE_GMAX),
+    ANIM_CMD(BUTTERFREE_GMAX),
+    ANIM_CMD(PIKACHU_GMAX),
+    ANIM_CMD(MEOWTH_GMAX),
+    ANIM_CMD(MACHAMP_GMAX),
+    ANIM_CMD(GENGAR_GMAX),
+    ANIM_CMD(KINGLER_GMAX),
+    ANIM_CMD(LAPRAS_GMAX),
+    ANIM_CMD(EEVEE_GMAX),
+    ANIM_CMD(SNORLAX_GMAX),
+    ANIM_CMD(GARBODOR_GMAX),
+    ANIM_CMD(MELMETAL_GMAX),
+    ANIM_CMD(RILLABOOM_GMAX),
+    ANIM_CMD(CINDERACE_GMAX),
+    ANIM_CMD(INTELEON_GMAX),
+    ANIM_CMD(CORVIKNIGHT_GMAX),
+    ANIM_CMD(ORBEETLE_GMAX),
+    ANIM_CMD(DREDNAW_GMAX),
+    ANIM_CMD(COALOSSAL_GMAX),
+    ANIM_CMD(FLAPPLE_GMAX),
+    ANIM_CMD(APPLETUN_GMAX),
+    ANIM_CMD(SANDACONDA_GMAX),
+    ANIM_CMD(TOXTRICITY_GMAX),
+    ANIM_CMD(CENTISKORCH_GMAX),
+    ANIM_CMD(HATTERENE_GMAX),
+    ANIM_CMD(GRIMMSNARL_GMAX),
+    ANIM_CMD(ALCREMIE_GMAX),
+    ANIM_CMD(COPPERAJAH_GMAX),
+    ANIM_CMD(DURALUDON_GMAX),
+    ANIM_CMD(URSHIFU_GMAX),
+    ANIM_CMD(URSHIFU_RAPID_STRIKE_STYLE_GMAX),
 #endif
     ANIM_CMD(EGG),
 };
