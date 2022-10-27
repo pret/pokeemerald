@@ -2,12 +2,12 @@
 #define GUARD_default_sound_H
 
 const struct BardSound gBardSound_InvalidWord[] = {
-    BARD_SOUND_NULL,
-    BARD_SOUND_NULL,
-    BARD_SOUND_NULL,
-    BARD_SOUND_NULL,
-    BARD_SOUND_NULL,
-    BARD_SOUND_NULL
+    NULL_BARD_SOUND,
+    NULL_BARD_SOUND,
+    NULL_BARD_SOUND,
+    NULL_BARD_SOUND,
+    NULL_BARD_SOUND,
+    NULL_BARD_SOUND
 };
 
 #endif //GUARD_default_sound_H
