@@ -5678,7 +5678,7 @@ static void Cmd_moveend(void)
                 {
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_MultiHitPrintStrings;
-                    effect = 1;
+                    effect = TRUE;
                 }
                 else
                 {
@@ -5711,7 +5711,7 @@ static void Cmd_moveend(void)
                     {
                         BattleScriptPushCursor();
                         gBattlescriptCurrInstr = BattleScript_MultiHitPrintStrings;
-                        effect = 1;
+                        effect = TRUE;
                     }
                 }
             }

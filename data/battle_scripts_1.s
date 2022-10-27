@@ -5117,7 +5117,7 @@ BattleScript_EffectTeleportNew:
 BattleScript_EffectTeleportNewEnd:
 	goto BattleScript_MoveEnd
 
-.if B_BEAT_UP_DMG < GEN_5
+.if B_BEAT_UP < GEN_5
 BattleScript_EffectBeatUp::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE

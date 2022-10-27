@@ -3887,7 +3887,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gMultiHitCounter = 3;
                 PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
             }
-            #if B_BEAT_UP_DMG >= GEN_5
+            #if B_BEAT_UP >= GEN_5
             else if (gBattleMoves[gCurrentMove].effect == EFFECT_BEAT_UP)
             {
                 struct Pokemon* party;
@@ -8487,7 +8487,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
             basePower *= 2;
         break;
     case EFFECT_BEAT_UP:
-        #if B_BEAT_UP_DMG >= GEN_5
+        #if B_BEAT_UP >= GEN_5
         basePower = CalcBeatUpPower();
         #endif
         break;
@@ -9268,7 +9268,7 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
     // Parental Bond Second Strike
     if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_2ND_HIT)
     {
-        if (B_PARENTAL_BOND_DAMAGE < GEN_7)
+        if (B_PARENTAL_BOND_DMG < GEN_7)
             MulModifier(&finalModifier, UQ_4_12(0.5));
         else
             MulModifier(&finalModifier, UQ_4_12(0.25));
