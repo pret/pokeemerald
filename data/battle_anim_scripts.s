@@ -843,42 +843,24 @@ gBattleAnims_Moves::
 	.4byte Move_SOUL_STEALING_7_STAR_STRIKE
 @@@@ MAX MOVES
 	.4byte Move_MAX_GUARD
-	.4byte Move_MAX_STRIKE_P
-	.4byte Move_MAX_STRIKE_S 
-	.4byte Move_MAX_KNUCKLE_P
-	.4byte Move_MAX_KNUCKLE_S
-	.4byte Move_MAX_AIRSTREAM_P
-	.4byte Move_MAX_AIRSTREAM_S
-	.4byte Move_MAX_OOZE_P
-	.4byte Move_MAX_OOZE_S
-	.4byte Move_MAX_QUAKE_P
-	.4byte Move_MAX_QUAKE_S
-	.4byte Move_MAX_ROCKFALL_P
-	.4byte Move_MAX_ROCKFALL_S
-	.4byte Move_MAX_FLUTTERBY_P
-	.4byte Move_MAX_FLUTTERBY_S
-	.4byte Move_MAX_PHANTASM_P
-	.4byte Move_MAX_PHANTASM_S
-	.4byte Move_MAX_STEELSPIKE_P
-	.4byte Move_MAX_STEELSPIKE_S
-	.4byte Move_MAX_FLARE_P
-	.4byte Move_MAX_FLARE_S
-	.4byte Move_MAX_GEYSER_P
-	.4byte Move_MAX_GEYSER_S
-	.4byte Move_MAX_OVERGROWTH_P
-	.4byte Move_MAX_OVERGROWTH_S
-	.4byte Move_MAX_LIGHTNING_P
-	.4byte Move_MAX_LIGHTNING_S
-	.4byte Move_MAX_HAILSTORM_P
-	.4byte Move_MAX_HAILSTORM_S
-	.4byte Move_MAX_MINDSTORM_P
-	.4byte Move_MAX_MINDSTORM_S
-	.4byte Move_MAX_WYRMWIND_P
-	.4byte Move_MAX_WYRMWIND_S
-	.4byte Move_MAX_DARKNESS_P
-	.4byte Move_MAX_DARKNESS_S
-	.4byte Move_MAX_STARFALL_P
-	.4byte Move_MAX_STARFALL_S
+	.4byte Move_MAX_STRIKE 
+	.4byte Move_MAX_KNUCKLE
+	.4byte Move_MAX_AIRSTREAM
+	.4byte Move_MAX_OOZE
+	.4byte Move_MAX_QUAKE
+	.4byte Move_MAX_ROCKFALL
+	.4byte Move_MAX_FLUTTERBY
+	.4byte Move_MAX_PHANTASM
+	.4byte Move_MAX_STEELSPIKE
+	.4byte Move_MAX_FLARE
+	.4byte Move_MAX_GEYSER
+	.4byte Move_MAX_OVERGROWTH
+	.4byte Move_MAX_LIGHTNING
+	.4byte Move_MAX_HAILSTORM
+	.4byte Move_MAX_MINDSTORM
+	.4byte Move_MAX_WYRMWIND
+	.4byte Move_MAX_DARKNESS
+	.4byte Move_MAX_STARFALL
 @@@ Last Move - cannot be reached
 	.4byte Move_COUNT
 
@@ -30673,40 +30655,22 @@ SoulStealingSevenStarStrikeExplosion:
 
 @@@@@@@@@@ MAX MOVES @@@@@@@@@@
 Move_MAX_GUARD:
-Move_MAX_KNUCKLE_P::
-Move_MAX_KNUCKLE_S::
-Move_MAX_QUAKE_P::
-Move_MAX_QUAKE_S::
-Move_MAX_ROCKFALL_P::
-Move_MAX_ROCKFALL_S::
-Move_MAX_FLUTTERBY_P::
-Move_MAX_FLUTTERBY_S::
-Move_MAX_PHANTASM_P::
-Move_MAX_PHANTASM_S::
-Move_MAX_STEELSPIKE_P::
-Move_MAX_STEELSPIKE_S::
-Move_MAX_HAILSTORM_P::
-Move_MAX_HAILSTORM_S::
-Move_MAX_MINDSTORM_P::
-Move_MAX_MINDSTORM_S::
-Move_MAX_WYRMWIND_P::
-Move_MAX_WYRMWIND_S::
-Move_MAX_DARKNESS_P::
-Move_MAX_DARKNESS_S::
-Move_MAX_STARFALL_P::
-Move_MAX_STARFALL_S::
-Move_MAX_STRIKE_P::
-Move_MAX_STRIKE_S::
-Move_MAX_AIRSTREAM_P::
-Move_MAX_AIRSTREAM_S::
-Move_MAX_OOZE_P::
-Move_MAX_OOZE_S::
-Move_MAX_FLARE_P::
-Move_MAX_FLARE_S::
-Move_MAX_GEYSER_P::
-Move_MAX_GEYSER_S::
-Move_MAX_OVERGROWTH_P::
-Move_MAX_OVERGROWTH_S::
-Move_MAX_LIGHTNING_P::
-Move_MAX_LIGHTNING_S::
+Move_MAX_STRIKE:
+Move_MAX_KNUCKLE:
+Move_MAX_AIRSTREAM:
+Move_MAX_OOZE:
+Move_MAX_QUAKE:
+Move_MAX_ROCKFALL:
+Move_MAX_FLUTTERBY:
+Move_MAX_PHANTASM:
+Move_MAX_STEELSPIKE:
+Move_MAX_FLARE:
+Move_MAX_GEYSER:
+Move_MAX_OVERGROWTH:
+Move_MAX_LIGHTNING:
+Move_MAX_HAILSTORM:
+Move_MAX_MINDSTORM:
+Move_MAX_WYRMWIND:
+Move_MAX_DARKNESS:
+Move_MAX_STARFALL:
 	end

@@ -14161,7 +14161,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_STATUS,
 	},
 
-	[MOVE_MAX_FLARE_P] =
+	[MOVE_MAX_FLARE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 1,
@@ -14176,22 +14176,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.argument = MAX_EFFECT_SUN,
 	},
 
-	[MOVE_MAX_FLARE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 1,
-		.type = TYPE_FIRE,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 100,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_SUN,
-	},
-
-	[MOVE_MAX_FLUTTERBY_P] =
+	[MOVE_MAX_FLUTTERBY] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 1,
@@ -14206,22 +14191,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.argument = MAX_EFFECT_LOWER_SP_ATK,
 	},
 
-	[MOVE_MAX_FLUTTERBY_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 1,
-		.type = TYPE_BUG,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 100,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_LOWER_SP_ATK,
-	},
-
-	[MOVE_MAX_LIGHTNING_P] =
+	[MOVE_MAX_LIGHTNING] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 1,
@@ -14236,22 +14206,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.argument = MAX_EFFECT_ELECTRIC_TERRAIN,
 	},
 
-	[MOVE_MAX_LIGHTNING_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 1,
-		.type = TYPE_ELECTRIC,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 100,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_ELECTRIC_TERRAIN,
-	},
-
-	[MOVE_MAX_STRIKE_P] =
+	[MOVE_MAX_STRIKE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 1,
@@ -14266,22 +14221,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.argument = MAX_EFFECT_LOWER_SPEED,
 	},
 
-	[MOVE_MAX_STRIKE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 1,
-		.type = TYPE_NORMAL,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 100,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_LOWER_SPEED,
-	},
-
-	[MOVE_MAX_KNUCKLE_P] =
+	[MOVE_MAX_KNUCKLE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 1,
@@ -14296,22 +14236,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.argument = MAX_EFFECT_RAISE_TEAM_ATTACK,
 	},
 
-	[MOVE_MAX_KNUCKLE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 1,
-		.type = TYPE_FIGHTING,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 100,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_RAISE_TEAM_ATTACK,
-	},
-
-	[MOVE_MAX_PHANTASM_P] =
+	[MOVE_MAX_PHANTASM] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 1,
@@ -14326,22 +14251,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.argument = MAX_EFFECT_LOWER_DEFENSE,
 	},
 
-	[MOVE_MAX_PHANTASM_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 1,
-		.type = TYPE_GHOST,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 100,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_LOWER_DEFENSE,
-	},
-
-	[MOVE_MAX_HAILSTORM_P] =
+	[MOVE_MAX_HAILSTORM] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 1,
@@ -14356,22 +14266,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.argument = MAX_EFFECT_HAIL,
 	},
 
-	[MOVE_MAX_HAILSTORM_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 1,
-		.type = TYPE_ICE,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 100,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_HAIL,
-	},
-
-	[MOVE_MAX_OOZE_P] =
+	[MOVE_MAX_OOZE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 1,
@@ -14386,22 +14281,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.argument = MAX_EFFECT_RAISE_TEAM_SP_ATK,
 	},
 
-	[MOVE_MAX_OOZE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 1,
-		.type = TYPE_POISON,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 100,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_RAISE_TEAM_SP_ATK,
-	},
-
-	[MOVE_MAX_GEYSER_P] =
+	[MOVE_MAX_GEYSER] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 1,
@@ -14416,22 +14296,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.argument = MAX_EFFECT_RAIN,
 	},
 
-	[MOVE_MAX_GEYSER_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 1,
-		.type = TYPE_WATER,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 100,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_RAIN,
-	},
-
-	[MOVE_MAX_AIRSTREAM_P] =
+	[MOVE_MAX_AIRSTREAM] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 1,
@@ -14446,22 +14311,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.argument = MAX_EFFECT_RAISE_TEAM_SPEED,
 	},
 
-	[MOVE_MAX_AIRSTREAM_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 1,
-		.type = TYPE_FLYING,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 100,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_RAISE_TEAM_SPEED,
-	},
-
-	[MOVE_MAX_STARFALL_P] =
+	[MOVE_MAX_STARFALL] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 1,
@@ -14476,22 +14326,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.argument = MAX_EFFECT_MISTY_TERRAIN,
 	},
 
-	[MOVE_MAX_STARFALL_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 1,
-		.type = TYPE_FAIRY,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 100,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_MISTY_TERRAIN,
-	},
-
-	[MOVE_MAX_WYRMWIND_P] =
+	[MOVE_MAX_WYRMWIND] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 1,
@@ -14506,22 +14341,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.argument = MAX_EFFECT_LOWER_ATTACK,
 	},
 
-	[MOVE_MAX_WYRMWIND_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 1,
-		.type = TYPE_DRAGON,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 100,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_LOWER_ATTACK,
-	},
-
-	[MOVE_MAX_MINDSTORM_P] =
+	[MOVE_MAX_MINDSTORM] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 1,
@@ -14535,23 +14355,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_PSYCHIC_TERRAIN,
 	},
-
-	[MOVE_MAX_MINDSTORM_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 1,
-		.type = TYPE_PSYCHIC,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 100,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_PSYCHIC_TERRAIN,
-	},
-
-	[MOVE_MAX_ROCKFALL_P] =
+	[MOVE_MAX_ROCKFALL] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 1,
@@ -14565,23 +14369,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_SANDSTORM,
 	},
-
-	[MOVE_MAX_ROCKFALL_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 1,
-		.type = TYPE_ROCK,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_SANDSTORM,
-	},
-
-	[MOVE_MAX_QUAKE_P] =
+	[MOVE_MAX_QUAKE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 1,
@@ -14595,23 +14383,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_RAISE_TEAM_SP_DEF,
 	},
-
-	[MOVE_MAX_QUAKE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 1,
-		.type = TYPE_GROUND,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_RAISE_TEAM_SP_DEF,
-	},
-
-	[MOVE_MAX_DARKNESS_P] =
+	[MOVE_MAX_DARKNESS] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 1,
@@ -14625,23 +14397,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_LOWER_SP_DEF,
 	},
-
-	[MOVE_MAX_DARKNESS_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 1,
-		.type = TYPE_DARK,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 100,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_LOWER_SP_DEF,
-	},
-
-	[MOVE_MAX_OVERGROWTH_P] =
+	[MOVE_MAX_OVERGROWTH] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -14655,23 +14411,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_GRASSY_TERRAIN,
 	},
-
-	[MOVE_MAX_OVERGROWTH_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_GRASS,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_GRASSY_TERRAIN,
-	},
-
-	[MOVE_MAX_STEELSPIKE_P] =
+	[MOVE_MAX_STEELSPIKE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -14685,23 +14425,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_RAISE_TEAM_DEFENSE,
 	},
-
-	[MOVE_MAX_STEELSPIKE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_STEEL,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_RAISE_TEAM_DEFENSE,
-	},
-
-	[MOVE_G_MAX_VINE_LASH_P] =
+	
+	[MOVE_G_MAX_VINE_LASH] =
 	{	//ANIM TODO
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -14715,23 +14440,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_VINE_LASH,
 	},
-
-	[MOVE_G_MAX_VINE_LASH_S] =
-	{	//ANIM TODO
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_GRASS,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_VINE_LASH,
-	},
-
-	[MOVE_G_MAX_WILDFIRE_P] =
+	
+	[MOVE_G_MAX_WILDFIRE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -14745,23 +14455,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_WILDFIRE,
 	},
-
-	[MOVE_G_MAX_WILDFIRE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_FIRE,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_WILDFIRE,
-	},
-
-	[MOVE_G_MAX_CANNONADE_P] =
+	
+	[MOVE_G_MAX_CANNONADE] =
 	{	//ANIM TODO
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -14775,23 +14470,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_CANNONADE,
 	},
-
-	[MOVE_G_MAX_CANNONADE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_WATER,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_CANNONADE,
-	},
-
-	[MOVE_G_MAX_BEFUDDLE_P] =
+	
+	[MOVE_G_MAX_BEFUDDLE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -14805,23 +14485,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_EFFECT_SPORE_FOES,
 	},
-
-	[MOVE_G_MAX_BEFUDDLE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_BUG,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_EFFECT_SPORE_FOES,
-	},
-
-	[MOVE_G_MAX_VOLT_CRASH_P] =
+	
+	[MOVE_G_MAX_VOLT_CRASH] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -14835,23 +14500,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_PARALYZE_FOES,
 	},
-
-	[MOVE_G_MAX_VOLT_CRASH_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_ELECTRIC,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_PARALYZE_FOES,
-	},
-
-	[MOVE_G_MAX_GOLD_RUSH_P] =
+	
+	[MOVE_G_MAX_GOLD_RUSH] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -14865,24 +14515,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_CONFUSE_FOES_PAY_DAY,
 	},
-
-	[MOVE_G_MAX_GOLD_RUSH_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_NORMAL,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		//.z_move_power = 100,
-		.argument = MAX_EFFECT_CONFUSE_FOES_PAY_DAY,
-	},
-
-	[MOVE_G_MAX_CHI_STRIKE_P] =
+	
+	[MOVE_G_MAX_CHI_STRIKE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -14896,23 +14530,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_CRIT_PLUS,
 	},
-
-	[MOVE_G_MAX_CHI_STRIKE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_FIGHTING,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_CRIT_PLUS,
-	},
-
-	[MOVE_G_MAX_TERROR_P] =
+	
+	[MOVE_G_MAX_TERROR] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -14926,23 +14545,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_MEAN_LOOK,
 	},
-
-	[MOVE_G_MAX_TERROR_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_GHOST,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_MEAN_LOOK,
-	},
-
-	[MOVE_G_MAX_FOAM_BURST_P] =
+	
+	[MOVE_G_MAX_FOAM_BURST] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -14956,23 +14560,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_LOWER_SPEED_2_FOES,
 	},
-
-	[MOVE_G_MAX_FOAM_BURST_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_WATER,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_LOWER_SPEED_2_FOES,
-	},
-
-	[MOVE_G_MAX_RESONANCE_P] =
+	
+	[MOVE_G_MAX_RESONANCE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -14986,23 +14575,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_AURORA_VEIL,
 	},
-
-	[MOVE_G_MAX_RESONANCE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_ICE,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_AURORA_VEIL,
-	},
-
-	[MOVE_G_MAX_CUDDLE_P] =
+	
+	[MOVE_G_MAX_CUDDLE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15016,23 +14590,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_INFATUATE_FOES,
 	},
-
-	[MOVE_G_MAX_CUDDLE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_NORMAL,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_INFATUATE_FOES,
-	},
-
-	[MOVE_G_MAX_REPLENISH_P] =
+	
+	[MOVE_G_MAX_REPLENISH] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15046,23 +14605,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_RECYCLE_BERRIES,
 	},
-
-	[MOVE_G_MAX_REPLENISH_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_NORMAL,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_RECYCLE_BERRIES,
-	},
-
-	[MOVE_G_MAX_MALODOR_P] =
+	
+	[MOVE_G_MAX_MALODOR] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15076,23 +14620,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_POISON_FOES,
 	},
-
-	[MOVE_G_MAX_MALODOR_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_POISON,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_POISON_FOES,
-	},
-
-	[MOVE_G_MAX_MELTDOWN_P] =
+	
+	[MOVE_G_MAX_MELTDOWN] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15106,23 +14635,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_TORMENT_FOES,
 	},
-
-	[MOVE_G_MAX_MELTDOWN_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_STEEL,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_TORMENT_FOES,
-	},
-
-	[MOVE_G_MAX_DRUM_SOLO_P] =
+	
+	[MOVE_G_MAX_DRUM_SOLO] =
 	{	//ANIM TODO
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15136,23 +14650,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_TORMENT_FOES, //EFFECT TODO
 	},
-
-	[MOVE_G_MAX_DRUM_SOLO_S] =
-	{	//ANIM TODO
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_GRASS,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_TORMENT_FOES, //EFFECT TODO
-	},
-
-	[MOVE_G_MAX_FIREBALL_P] =
+	
+	[MOVE_G_MAX_FIREBALL] =
 	{	//ANIM TODO
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15166,23 +14665,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_TORMENT_FOES, //EFFECT TODO
 	},
-
-	[MOVE_G_MAX_FIREBALL_S] =
-	{	//ANIM TODO
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_FIRE,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_TORMENT_FOES, //EFFECT TODO
-	},
-
-	[MOVE_G_MAX_HYDROSNIPE_P] =
+	
+	[MOVE_G_MAX_HYDROSNIPE] =
 	{	//ANIM TODO
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15196,23 +14680,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_TORMENT_FOES, //EFFECT TODO
 	},
-
-	[MOVE_G_MAX_HYDROSNIPE_S] =
-	{	//ANIM TODO
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_WATER,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_TORMENT_FOES, //EFFECT TODO
-	},
-
-	[MOVE_G_MAX_WIND_RAGE_P] =
+	
+	[MOVE_G_MAX_WIND_RAGE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15226,23 +14695,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_DEFOG,
 	},
-
-	[MOVE_G_MAX_WIND_RAGE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_FLYING,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_DEFOG,
-	},
-
-	[MOVE_G_MAX_GRAVITAS_P] =
+	
+	[MOVE_G_MAX_GRAVITAS] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15256,23 +14710,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_GRAVITY,
 	},
-
-	[MOVE_G_MAX_GRAVITAS_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_PSYCHIC,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_GRAVITY,
-	},
-
-	[MOVE_G_MAX_STONESURGE_P] =
+	
+	[MOVE_G_MAX_STONESURGE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15286,23 +14725,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_STEALTH_ROCK,
 	},
-
-	[MOVE_G_MAX_STONESURGE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_WATER,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_STEALTH_ROCK,
-	},
-
-	[MOVE_G_MAX_VOLCALITH_P] =
+	
+	[MOVE_G_MAX_VOLCALITH] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15316,23 +14740,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_VOLCAITH_FOES,
 	},
-
-	[MOVE_G_MAX_VOLCALITH_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_ROCK,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_VOLCAITH_FOES,
-	},
-
-	[MOVE_G_MAX_TARTNESS_P] =
+	
+	[MOVE_G_MAX_TARTNESS] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15346,23 +14755,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_LOWER_EVASIVENESS_FOES,
 	},
-
-	[MOVE_G_MAX_TARTNESS_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_GRASS,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_LOWER_EVASIVENESS_FOES,
-	},
-
-	[MOVE_G_MAX_SWEETNESS_P] =
+	
+	[MOVE_G_MAX_SWEETNESS] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15376,23 +14770,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_AROMATHERAPY,
 	},
-
-	[MOVE_G_MAX_SWEETNESS_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_GRASS,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_AROMATHERAPY,
-	},
-
-	[MOVE_G_MAX_SANDBLAST_P] =
+	
+	[MOVE_G_MAX_SANDBLAST] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15406,23 +14785,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_SANDBLAST_FOES,
 	},
-
-	[MOVE_G_MAX_SANDBLAST_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_GROUND,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_SANDBLAST_FOES,
-	},
-
-	[MOVE_G_MAX_STUN_SHOCK_P] =
+	
+	[MOVE_G_MAX_STUN_SHOCK] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15436,23 +14800,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_POISON_PARALYZE_FOES,
 	},
-
-	[MOVE_G_MAX_STUN_SHOCK_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_ELECTRIC,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_POISON_PARALYZE_FOES,
-	},
-
-	[MOVE_G_MAX_CENTIFERNO_P] =
+	
+	[MOVE_G_MAX_CENTIFERNO] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15466,23 +14815,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_FIRE_SPIN_FOES,
 	},
-
-	[MOVE_G_MAX_CENTIFERNO_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_FIRE,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_FIRE_SPIN_FOES,
-	},
-
-	[MOVE_G_MAX_SMITE_P] =
+	
+	[MOVE_G_MAX_SMITE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15496,24 +14830,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_CONFUSE_FOES,
 	},
+	
 
-	[MOVE_G_MAX_SMITE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_FAIRY,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_CONFUSE_FOES,
-	},
-
-
-	[MOVE_G_MAX_SNOOZE_P] =
+	[MOVE_G_MAX_SNOOZE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15527,23 +14846,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_YAWN_FOE,
 	},
-
-	[MOVE_G_MAX_SNOOZE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_DARK,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_YAWN_FOE,
-	},
-
-	[MOVE_G_MAX_FINALE_P] =
+	
+	[MOVE_G_MAX_FINALE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15557,23 +14861,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_HEAL_TEAM,
 	},
-
-	[MOVE_G_MAX_FINALE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_FAIRY,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_HEAL_TEAM,
-	},
-
-	[MOVE_G_MAX_STEELSURGE_P] =
+	
+	[MOVE_G_MAX_STEELSURGE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15587,23 +14876,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_STEELSURGE,
 	},
-
-	[MOVE_G_MAX_STEELSURGE_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_STEEL,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_STEELSURGE,
-	},
-
-	[MOVE_G_MAX_DEPLETION_P] =
+	
+	[MOVE_G_MAX_DEPLETION] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15617,23 +14891,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_SPITE,
 	},
-
-	[MOVE_G_MAX_DEPLETION_S] =
-	{
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_DRAGON,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_SPITE,
-	},	
-
-	[MOVE_G_MAX_ONE_BLOW_P] =
+		
+	[MOVE_G_MAX_ONE_BLOW] =
 	{
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15647,23 +14906,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_TORMENT_FOES, //EFFECT TODO
 	},
-
-	[MOVE_G_MAX_ONE_BLOW_S] =
-	{	//ANIM TODO
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_DARK,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_TORMENT_FOES, //EFFECT TODO
-	},
-
-	[MOVE_G_MAX_RAPID_FLOW_P] =
+	
+	[MOVE_G_MAX_RAPID_FLOW] =
 	{	//ANIM TODO
 		.effect = EFFECT_MAX_MOVE,
 		.power = 10,
@@ -15677,21 +14921,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_TORMENT_FOES, //EFFECT TODO
 	},
-
-	[MOVE_G_MAX_RAPID_FLOW_S] =
-	{	//ANIM TODO
-		.effect = EFFECT_MAX_MOVE,
-		.power = 10,
-		.type = TYPE_WATER,
-		.accuracy = 0,
-		.pp = 10,
-		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
-		.priority = 0,
-		.flags = 0,
-		.split = SPLIT_SPECIAL,
-		.argument = MAX_EFFECT_TORMENT_FOES, //EFFECT TODO
-	},
+	
 };
 
 const u8 gDynamaxMovePowers[MOVES_COUNT] =
