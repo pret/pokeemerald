@@ -586,7 +586,7 @@ void StartRegiBattle(void)
 
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
-    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI;
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
 
     species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
     switch (species)
