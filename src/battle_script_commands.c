@@ -8023,13 +8023,9 @@ static bool32 CourtChangeSwapSideStatuses(void)
 
 static bool32 CanTeleport(u8 battlerId)
 {
-    struct Pokemon* party = NULL;
+    u8 side = GetBattlerSide(battlerId);
+    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
     u32 species, count, i;
-
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        party = gPlayerParty;
-    else
-        party = gEnemyParty;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -8041,11 +8037,11 @@ static bool32 CanTeleport(u8 battlerId)
     switch (GetBattlerSide(battlerId))
     {
     case B_SIDE_OPPONENT:
-        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        if (count == 1 || gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
             return FALSE;
         break;
     case B_SIDE_PLAYER:
-        if (count == 1 || (count <= 2 && gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+        if (count == 1 || (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && count <= 2))
             return FALSE;
         break;
     }
