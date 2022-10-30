@@ -38,7 +38,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MtPyre_6F_EventScript_ItemTM30",
-      "flag": "FLAG_ITEM_MT_PYRE_6F_TM_30"
+      "flag": "FLAG_ITEM_MT_PYRE_6F_TM30"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PSYCHIC_M",

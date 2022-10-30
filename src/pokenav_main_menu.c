@@ -50,7 +50,7 @@ static void InitHelpBar(void);
 static u32 LoopedTask_SlideMenuHeaderUp(s32);
 static u32 LoopedTask_SlideMenuHeaderDown(s32);
 static void DrawHelpBar(u32);
-static void SpriteCB_SpinningPokenav(struct Sprite*);
+static void SpriteCB_SpinningPokenav(struct Sprite *);
 static u32 LoopedTask_InitPokenavMenu(s32);
 
 static const u16 sSpinningPokenav_Pal[] = INCBIN_U16("graphics/pokenav/nav_icon.gbapal");
@@ -105,7 +105,7 @@ static const u8 sHelpBarTextColors[3] =
     TEXT_COLOR_RED, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY
 };
 
-static const struct CompressedSpriteSheet gSpinningPokenavSpriteSheet[] =
+static const struct CompressedSpriteSheet sSpinningPokenavSpriteSheet[] =
 {
     {
         .data = sSpinningPokenav_Gfx,
@@ -114,7 +114,7 @@ static const struct CompressedSpriteSheet gSpinningPokenavSpriteSheet[] =
     }
 };
 
-static const struct SpritePalette gSpinningNavgearPalettes[] =
+static const struct SpritePalette sSpinningNavgearPalettes[] =
 {
     {
         .data = sSpinningPokenav_Pal,
@@ -583,10 +583,10 @@ static void InitPokenavMainMenuResources(void)
     u8 spriteId;
     struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
 
-    for (i = 0; i < ARRAY_COUNT(gSpinningPokenavSpriteSheet); i++)
-        LoadCompressedSpriteSheet(&gSpinningPokenavSpriteSheet[i]);
+    for (i = 0; i < ARRAY_COUNT(sSpinningPokenavSpriteSheet); i++)
+        LoadCompressedSpriteSheet(&sSpinningPokenavSpriteSheet[i]);
 
-    Pokenav_AllocAndLoadPalettes(gSpinningNavgearPalettes);
+    Pokenav_AllocAndLoadPalettes(sSpinningNavgearPalettes);
     menu->palettes = ~1 & ~(0x10000 << IndexOfSpritePaletteTag(0));
     spriteId = CreateSprite(&sSpinningPokenavSpriteTemplate, 220, 12, 0);
     menu->spinningPokenav = &gSprites[spriteId];

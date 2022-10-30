@@ -497,7 +497,7 @@ static void LoadUsePokeblockMenu(void)
         break;
     case 2:
         SetVBlankCallback(NULL);
-        CpuFill32(0, (void*)(VRAM), VRAM_SIZE);
+        CpuFill32(0, (void *)(VRAM), VRAM_SIZE);
         sInfo->mainState++;
         break;
     case 3:
@@ -1232,7 +1232,7 @@ static void UpdateMonPic(u8 loadId)
             sMenu->curMonSpriteId = spriteId;
             gSprites[sMenu->curMonSpriteId].callback = SpriteCB_MonPic;
             gSprites[sMenu->curMonSpriteId].y2 -= 34;
-            sMenu->curMonTileStart = (void*)(OBJ_VRAM0 + (sMenu->curMonSheet * 32));
+            sMenu->curMonTileStart = (void *)(OBJ_VRAM0 + (sMenu->curMonSheet * 32));
             sMenu->curMonPalette = (sMenu->curMonPalette * 16) + 0x100;
         }
     }

@@ -824,7 +824,7 @@ void UpdateWirelessStatusIndicatorSprite(void)
         struct Sprite *sprite = &gSprites[gWirelessStatusIndicatorSpriteId];
         u8 signalStrength = RFU_LINK_ICON_LEVEL4_MAX;
         u8 i = 0;
-        
+
         // Get weakest signal strength
         if (gRfuLinkStatus->parentChild == MODE_PARENT)
         {
@@ -913,7 +913,7 @@ void SaveLinkTrainerNames(void)
         s32 j;
         s32 nextSpace;
         s32 connectedTrainerRecordIndices[MAX_RFU_PLAYERS];
-        struct TrainerNameRecord *newRecords = calloc(ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords), sizeof(struct TrainerNameRecord));
+        struct TrainerNameRecord *newRecords = AllocZeroed(sizeof(gSaveBlock1Ptr->trainerNameRecords));
 
         // Check if we already have a record saved for connected trainers.
         for (i = 0; i < GetLinkPlayerCount(); i++)
@@ -955,7 +955,7 @@ void SaveLinkTrainerNames(void)
 
         // Finalize the new list, and clean up.
         memcpy(gSaveBlock1Ptr->trainerNameRecords, newRecords, sizeof(gSaveBlock1Ptr->trainerNameRecords));
-        free(newRecords);
+        Free(newRecords);
     }
 }
 

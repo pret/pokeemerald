@@ -757,10 +757,9 @@ void LoadIntroPart2Graphics(u8 scenery)
     gReservedSpritePaletteCount = 8;
 }
 
-// Note: This is only called with a=1.
+// Note: This is only called with scenery=1.
 void SetIntroPart2BgCnt(u8 scenery)
 {
-    // Only called with scenery = 1
     switch (scenery)
     {
     default:
@@ -1107,7 +1106,7 @@ static void SpriteCB_Player(struct Sprite *sprite)
 
 #define sPlayerSpriteId data[0]
 
-static void SpriteCB_Bicycle(struct Sprite* sprite)
+static void SpriteCB_Bicycle(struct Sprite *sprite)
 {
     sprite->invisible = gSprites[sprite->sPlayerSpriteId].invisible;
     sprite->x = gSprites[sprite->sPlayerSpriteId].x;
@@ -1140,7 +1139,7 @@ static void SpriteCB_FlygonLeftHalf(struct Sprite *sprite)
 
 #define sLeftSpriteId data[0]
 
-static void SpriteCB_FlygonRightHalf(struct Sprite* sprite)
+static void SpriteCB_FlygonRightHalf(struct Sprite *sprite)
 {
     sprite->invisible = gSprites[sprite->sLeftSpriteId].invisible;
     sprite->y = gSprites[sprite->sLeftSpriteId].y;

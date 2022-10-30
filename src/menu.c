@@ -191,19 +191,19 @@ void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress)
 {
     void (*callback)(struct TextPrinterTemplate *, u16) = NULL;
     gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), callback, 2, 1, 3);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), callback, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 void AddTextPrinterForMessage_2(bool8 allowSkippingDelayWithButtonPress)
 {
     gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonPress, u8 speed)
 {
     gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, speed, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 void LoadMessageBoxAndBorderGfx(void)
@@ -542,10 +542,10 @@ void RemoveMapNamePopUpWindow(void)
     }
 }
 
-void AddTextPrinterWithCallbackForMessage(bool8 a1, void (*callback)(struct TextPrinterTemplate *, u16))
+void AddTextPrinterWithCallbackForMessage(bool8 canSpeedUp, void (*callback)(struct TextPrinterTemplate *, u16))
 {
-    gTextFlags.canABSpeedUpPrint = a1;
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), callback, 2, 1, 3);
+    gTextFlags.canABSpeedUpPrint = canSpeedUp;
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), callback, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 void EraseFieldMessageBox(bool8 copyToVram)
@@ -1245,9 +1245,9 @@ static void PrintMenuActionGridText(u8 windowId, u8 fontId, u8 left, u8 top, u8 
 }
 
 // Unused
-static void PrintMenuActionGridTextAtTop(u8 windowId, u8 fontId, u8 a2, u8 a3, u8 a4, u8 a5, const struct MenuAction *menuActions)
+static void PrintMenuActionGridTextAtTop(u8 windowId, u8 fontId, u8 width, u8 height, u8 columns, u8 rows, const struct MenuAction *menuActions)
 {
-    PrintMenuActionGridText(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 0, a2, a3, a4, a5, menuActions);
+    PrintMenuActionGridText(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 0, width, height, columns, rows, menuActions);
 }
 
 void PrintMenuActionGrid(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u8 horizontalCount, u8 verticalCount, const struct MenuAction *menuActions, const u8 *actionIds)
@@ -2031,14 +2031,14 @@ static void UnusedBlitBitmapRect(const struct Bitmap *src, struct Bitmap *dst, u
         for (loopSrcX = srcX, loopDstX = dstX; loopSrcX < xEnd; loopSrcX++, loopDstX++)
         {
             pixelsSrc = src->pixels + ((loopSrcX >> 1) & 3) + ((loopSrcX >> 3) << 5) + (((loopSrcY >> 3) * multiplierSrcY) << 5) + ((u32)(loopSrcY << 29) >> 27);
-            pixelsDst = (void*) dst->pixels + ((loopDstX >> 1) & 3) + ((loopDstX >> 3) << 5) + ((( loopDstY >> 3) * multiplierDstY) << 5) + ((u32)(loopDstY << 29) >> 27);
+            pixelsDst = (void *) dst->pixels + ((loopDstX >> 1) & 3) + ((loopDstX >> 3) << 5) + ((( loopDstY >> 3) * multiplierDstY) << 5) + ((u32)(loopDstY << 29) >> 27);
 
             if ((uintptr_t)pixelsDst & 1)
             {
                 pixelsDst--;
                 if (loopDstX & 1)
                 {
-                    toOrr = *(vu16*)pixelsDst;
+                    toOrr = *(vu16 *)pixelsDst;
                     toOrr &= 0x0fff;
                     if (loopSrcX & 1)
                         toOrr |= ((*pixelsSrc & 0xf0) << 8);
@@ -2047,7 +2047,7 @@ static void UnusedBlitBitmapRect(const struct Bitmap *src, struct Bitmap *dst, u
                 }
                 else
                 {
-                    toOrr = *(vu16*)pixelsDst;
+                    toOrr = *(vu16 *)pixelsDst;
                     toOrr &= 0xf0ff;
                     if (loopSrcX & 1)
                         toOrr |= ((*pixelsSrc & 0xf0) << 4);
@@ -2059,7 +2059,7 @@ static void UnusedBlitBitmapRect(const struct Bitmap *src, struct Bitmap *dst, u
             {
                 if (loopDstX & 1)
                 {
-                    toOrr = *(vu16*)pixelsDst;
+                    toOrr = *(vu16 *)pixelsDst;
                     toOrr &= 0xff0f;
                     if (loopSrcX & 1)
                         toOrr |= ((*pixelsSrc & 0xf0) << 0);
@@ -2068,7 +2068,7 @@ static void UnusedBlitBitmapRect(const struct Bitmap *src, struct Bitmap *dst, u
                 }
                 else
                 {
-                    toOrr = *(vu16*)pixelsDst;
+                    toOrr = *(vu16 *)pixelsDst;
                     toOrr &= 0xfff0;
                     if (loopSrcX & 1)
                         toOrr |= ((*pixelsSrc & 0xf0) >> 4);
@@ -2076,7 +2076,7 @@ static void UnusedBlitBitmapRect(const struct Bitmap *src, struct Bitmap *dst, u
                         toOrr |= ((*pixelsSrc & 0x0f) >> 0);
                 }
             }
-            *(vu16*)pixelsDst = toOrr;
+            *(vu16 *)pixelsDst = toOrr;
         }
     }
 }

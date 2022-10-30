@@ -174,10 +174,10 @@ static const struct SpriteTemplate sSpriteTemplate_MenuText =
     .callback = SpriteCallbackDummy,
 };
 
-static const u16 TradeScreenTextPalette[] = INCBIN_U16("graphics/trade/text.gbapal");
-static const struct SpritePalette gSpritePalette_TradeScreenText =
+static const u16 sTradeScreenTextPalette[] = INCBIN_U16("graphics/trade/text.gbapal");
+static const struct SpritePalette sSpritePalette_TradeScreenText =
 {
-    .data = TradeScreenTextPalette,
+    .data = sTradeScreenTextPalette,
     .tag = PALTAG_MENU_TEXT
 };
 

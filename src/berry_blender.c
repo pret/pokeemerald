@@ -215,7 +215,7 @@ static void SetPlayerBerryData(u8, u16);
 static void Blender_AddTextPrinter(u8, const u8 *, u8, u8, s32, s32);
 static void ResetLinkCmds(void);
 static void CreateParticleSprites(void);
-static void ShakeBgCoordForHit(s16*, u16);
+static void ShakeBgCoordForHit(s16 *, u16);
 static void TryUpdateProgressBar(u16, u16);
 static void UpdateRPM(u16);
 static void RestoreBgCoords(void);
@@ -265,7 +265,7 @@ static const u8 sText_Master[] = _("MASTER");
 static const u8 sText_Dude[] = _("DUDE");
 static const u8 sText_Miss[] = _("MISS");
 
-static const u8* const sBlenderOpponentsNames[] =
+static const u8 *const sBlenderOpponentsNames[] =
 {
     [BLENDER_MISTER] = sText_Mister,
     [BLENDER_LADDIE] = sText_Laddie,
@@ -456,7 +456,7 @@ static const struct OamData sOam_PlayerArrow =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -599,7 +599,7 @@ static const struct OamData sOam_ScoreSymbols =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -668,7 +668,7 @@ static const struct OamData sOam_Particles =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
@@ -755,7 +755,7 @@ static const struct OamData sOam_CountdownNumbers =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -813,7 +813,7 @@ static const struct OamData sOam_Start =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
@@ -1008,7 +1008,7 @@ static bool8 LoadBerryBlenderGfx(void)
 
 static void DrawBlenderBg(void)
 {
-    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x1E, 0x14);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
     CopyBgTilemapBufferToVram(0);
     ShowBg(0);
     ShowBg(1);
@@ -1029,7 +1029,7 @@ static void InitBerryBlenderWindows(void)
         for (i = 0; i < 5; i++)
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
 
-        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x1E, 0x14);
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
         Menu_LoadStdPalAt(0xE0);
     }
 }
@@ -1145,7 +1145,7 @@ static void CB2_LoadBerryBlender(void)
 #define sYDownSpeed    data[7]
 
 // For throwing berries into the machine
-static void SpriteCB_Berry(struct Sprite* sprite)
+static void SpriteCB_Berry(struct Sprite *sprite)
 {
     sprite->sX += sprite->sXSpeed;
     sprite->sY -= sprite->sYUpSpeed;
@@ -1166,7 +1166,7 @@ static void SpriteCB_Berry(struct Sprite* sprite)
     sprite->y = sprite->sY;
 }
 
-static void SetBerrySpriteData(struct Sprite* sprite, s16 x, s16 y, s16 bounceSpeed, s16 xSpeed, s16 ySpeed)
+static void SetBerrySpriteData(struct Sprite *sprite, s16 x, s16 y, s16 bounceSpeed, s16 xSpeed, s16 ySpeed)
 {
     sprite->sTargetY = y;
     sprite->sX = x;
@@ -1188,9 +1188,9 @@ static void SetBerrySpriteData(struct Sprite* sprite, s16 x, s16 y, s16 bounceSp
 #undef sXSpeed
 #undef sYDownSpeed
 
-static void CreateBerrySprite(u16 a0, u8 playerId)
+static void CreateBerrySprite(u16 itemId, u8 playerId)
 {
-    u8 spriteId = CreateSpinningBerrySprite(a0 + FIRST_BERRY_INDEX - 10, 0, 80, playerId & 1);
+    u8 spriteId = CreateSpinningBerrySprite(ITEM_TO_BERRY(itemId) - 1, 0, 80, playerId & 1);
     SetBerrySpriteData(&gSprites[spriteId],
                         sBerrySpriteData[playerId][0],
                         sBerrySpriteData[playerId][1],
@@ -2238,7 +2238,7 @@ static void CB2_PlayBlender(void)
     UpdatePaletteFade();
 }
 
-static void Blender_DummiedOutFunc(s16 a0, s16 a1)
+static void Blender_DummiedOutFunc(s16 bgX, s16 bgY)
 {
 
 }
@@ -2260,7 +2260,7 @@ static bool8 AreBlenderBerriesSame(struct BlenderBerry* berries, u8 a, u8 b)
         return FALSE;
 }
 
-static u32 CalculatePokeblockColor(struct BlenderBerry* berries, s16* _flavors, u8 numPlayers, u8 negativeFlavors)
+static u32 CalculatePokeblockColor(struct BlenderBerry* berries, s16 *_flavors, u8 numPlayers, u8 negativeFlavors)
 {
     s16 flavors[FLAVOR_COUNT + 1];
     s32 i, j;
@@ -2494,7 +2494,7 @@ static void CalculatePokeblock(struct BlenderBerry *berries, struct Pokeblock *p
 }
 
 // Unused
-static void Debug_CalculatePokeblock(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 numPlayers, u8* flavors, u16 maxRPM)
+static void Debug_CalculatePokeblock(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 numPlayers, u8 *flavors, u16 maxRPM)
 {
     CalculatePokeblock(berries, pokeblock, numPlayers, flavors, maxRPM);
 }
@@ -2628,7 +2628,7 @@ static void CB2_EndBlenderGame(void)
 
             if (gReceivedRemoteLinkPlayers && gWirelessCommType)
             {
-                struct BlenderGameBlock *receivedBlock = (struct BlenderGameBlock*)(&gBlockRecvBuffer);
+                struct BlenderGameBlock *receivedBlock = (struct BlenderGameBlock *)(&gBlockRecvBuffer);
 
                 sBerryBlender->maxRPM = receivedBlock->timeRPM.maxRPM;
                 sBerryBlender->gameFrameTime = receivedBlock->timeRPM.time;
@@ -2641,7 +2641,7 @@ static void CB2_EndBlenderGame(void)
             }
             else
             {
-                struct TimeAndRPM *receivedBlock = (struct TimeAndRPM*)(&gBlockRecvBuffer);
+                struct TimeAndRPM *receivedBlock = (struct TimeAndRPM *)(&gBlockRecvBuffer);
 
                 sBerryBlender->maxRPM = receivedBlock->maxRPM;
                 sBerryBlender->gameFrameTime = receivedBlock->time;
@@ -3159,7 +3159,7 @@ static void SetBgPos(void)
     SetGpuReg(REG_OFFSET_BG0VOFS, sBerryBlender->bg_Y);
 }
 
-static void SpriteCB_Particle(struct Sprite* sprite)
+static void SpriteCB_Particle(struct Sprite *sprite)
 {
     sprite->data[2] += sprite->data[0];
     sprite->data[3] += sprite->data[1];
@@ -3194,7 +3194,7 @@ static void CreateParticleSprites(void)
     }
 }
 
-static void SpriteCB_ScoreSymbol(struct Sprite* sprite)
+static void SpriteCB_ScoreSymbol(struct Sprite *sprite)
 {
     sprite->data[0]++;
     sprite->y2 = -(sprite->data[0] / 3);
@@ -3203,7 +3203,7 @@ static void SpriteCB_ScoreSymbol(struct Sprite* sprite)
         DestroySprite(sprite);
 }
 
-static void SpriteCB_ScoreSymbolBest(struct Sprite* sprite)
+static void SpriteCB_ScoreSymbolBest(struct Sprite *sprite)
 {
     sprite->data[0]++;
     sprite->y2 = -(sprite->data[0] * 2);
@@ -3225,7 +3225,7 @@ static void SetPlayerBerryData(u8 playerId, u16 itemId)
 #define sDelay  data[2]
 #define sAnimId data[3]
 
-static void SpriteCB_CountdownNumber(struct Sprite* sprite)
+static void SpriteCB_CountdownNumber(struct Sprite *sprite)
 {
     switch (sprite->sState)
     {
@@ -3272,7 +3272,7 @@ static void SpriteCB_CountdownNumber(struct Sprite* sprite)
 #undef sDelay
 #undef sAnimId
 
-static void SpriteCB_Start(struct Sprite* sprite)
+static void SpriteCB_Start(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -3318,7 +3318,7 @@ static void UpdateProgressBar(u16 value, u16 limit)
     s32 amountFilled, maxFilledSegment, subSegmentsFilled, i;
     u16 *vram;
 
-    vram = (u16*)(BG_SCREEN_ADDR(12));
+    vram = (u16 *)(BG_SCREEN_ADDR(12));
     amountFilled = (value * 64) / limit;
     maxFilledSegment = amountFilled / 8;
 
@@ -3368,22 +3368,22 @@ static void UpdateRPM(u16 speed)
         digits[i] = currentRPM % 10;
         currentRPM /= 10;
     }
-    *((u16*)(BG_SCREEN_ADDR(12) + 0x458)) = digits[4] + RPM_DIGIT;
-    *((u16*)(BG_SCREEN_ADDR(12) + 0x45A)) = digits[3] + RPM_DIGIT;
-    *((u16*)(BG_SCREEN_ADDR(12) + 0x45C)) = digits[2] + RPM_DIGIT;
-    *((u16*)(BG_SCREEN_ADDR(12) + 0x460)) = digits[1] + RPM_DIGIT;
-    *((u16*)(BG_SCREEN_ADDR(12) + 0x462)) = digits[0] + RPM_DIGIT;
+    *((u16 *)(BG_SCREEN_ADDR(12) + 0x458)) = digits[4] + RPM_DIGIT;
+    *((u16 *)(BG_SCREEN_ADDR(12) + 0x45A)) = digits[3] + RPM_DIGIT;
+    *((u16 *)(BG_SCREEN_ADDR(12) + 0x45C)) = digits[2] + RPM_DIGIT;
+    *((u16 *)(BG_SCREEN_ADDR(12) + 0x460)) = digits[1] + RPM_DIGIT;
+    *((u16 *)(BG_SCREEN_ADDR(12) + 0x462)) = digits[0] + RPM_DIGIT;
 }
 
 // Passed a pointer to the bg x/y
 // Used when hitting a Best at high RPM
-static void ShakeBgCoordForHit(s16* coord, u16 speed)
+static void ShakeBgCoordForHit(s16 *coord, u16 speed)
 {
     if (*coord == 0)
         *coord = (Random() % speed) - (speed / 2);
 }
 
-static void RestoreBgCoord(s16* coord)
+static void RestoreBgCoord(s16 *coord)
 {
     if (*coord < 0)
         (*coord)++;
@@ -3398,7 +3398,7 @@ static void RestoreBgCoords(void)
     RestoreBgCoord(&sBerryBlender->bg_Y);
 }
 
-static void BlenderLandShakeBgCoord(s16* coord, u16 timer)
+static void BlenderLandShakeBgCoord(s16 *coord, u16 timer)
 {
     s32 strength;
 
@@ -3443,7 +3443,7 @@ static bool8 UpdateBlenderLandScreenShake(void)
     return FALSE;
 }
 
-static void SpriteCB_PlayerArrow(struct Sprite* sprite)
+static void SpriteCB_PlayerArrow(struct Sprite *sprite)
 {
    sprite->x2 = -(sBerryBlender->bg_X);
    sprite->y2 = -(sBerryBlender->bg_Y);
@@ -3553,7 +3553,7 @@ static bool8 PrintBlendingResults(void)
             sBerryBlender->mainState++;
         break;
     case 5:
-        ClearStdWindowAndFrameToTransparent(5, 1);
+        ClearStdWindowAndFrameToTransparent(5, TRUE);
 
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
@@ -3692,7 +3692,7 @@ static bool8 PrintBlendingRanking(void)
         }
         break;
     case 3:
-        DrawStdFrameWithCustomTileAndPalette(5, 0, 1, 0xD);
+        DrawStdFrameWithCustomTileAndPalette(5, FALSE, 1, 0xD);
         xPos = GetStringCenterAlignXOffset(FONT_NORMAL, sText_Ranking, 168);
         Blender_AddTextPrinter(5, sText_Ranking, xPos, 1, TEXT_SKIP_DRAW, 0);
 
@@ -3764,7 +3764,7 @@ void ShowBerryBlenderRecordWindow(void)
 
     winTemplate = sBlenderRecordWindowTemplate;
     gRecordsWindowId = AddWindow(&winTemplate);
-    DrawStdWindowFrame(gRecordsWindowId, 0);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
 
     xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gText_BlenderMaxSpeedRecord, 144);
