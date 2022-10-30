@@ -39,6 +39,7 @@
 #include "trainer_hill.h"
 #include "util.h"
 #include "constants/abilities.h"
+#include "constants/battle_config.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
@@ -49,8 +50,8 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+#include "constants/union_room.h"
 #include "constants/weather.h"
-#include "constants/battle_config.h"
 
 struct SpeciesItem
 {
@@ -135,7 +136,7 @@ static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_HOENN(RALTS),
     SPECIES_TO_HOENN(KIRLIA),
     SPECIES_TO_HOENN(GARDEVOIR),
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     SPECIES_TO_HOENN(GALLADE),
 #endif
     SPECIES_TO_HOENN(SURSKIT),
@@ -167,7 +168,7 @@ static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_HOENN(GRAVELER),
     SPECIES_TO_HOENN(GOLEM),
     SPECIES_TO_HOENN(NOSEPASS),
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     SPECIES_TO_HOENN(PROBOPASS),
 #endif
     SPECIES_TO_HOENN(SKITTY),
@@ -193,7 +194,7 @@ static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_HOENN(MINUN),
     SPECIES_TO_HOENN(MAGNEMITE),
     SPECIES_TO_HOENN(MAGNETON),
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     SPECIES_TO_HOENN(MAGNEZONE),
 #endif
     SPECIES_TO_HOENN(VOLTORB),
@@ -206,7 +207,7 @@ static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_HOENN(BELLOSSOM),
     SPECIES_TO_HOENN(DODUO),
     SPECIES_TO_HOENN(DODRIO),
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     SPECIES_TO_HOENN(BUDEW),
     SPECIES_TO_HOENN(ROSELIA),
     SPECIES_TO_HOENN(ROSERADE),
@@ -268,7 +269,7 @@ static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_HOENN(BANETTE),
     SPECIES_TO_HOENN(DUSKULL),
     SPECIES_TO_HOENN(DUSCLOPS),
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     SPECIES_TO_HOENN(DUSKNOIR),
     SPECIES_TO_HOENN(TROPIUS),
     SPECIES_TO_HOENN(CHINGLING),
@@ -295,12 +296,12 @@ static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_HOENN(HERACROSS),
     SPECIES_TO_HOENN(RHYHORN),
     SPECIES_TO_HOENN(RHYDON),
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     SPECIES_TO_HOENN(RHYPERIOR),
 #endif
     SPECIES_TO_HOENN(SNORUNT),
     SPECIES_TO_HOENN(GLALIE),
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     SPECIES_TO_HOENN(FROSLASS),
 #endif
     SPECIES_TO_HOENN(SPHEAL),
@@ -724,7 +725,7 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(RAYQUAZA),
     SPECIES_TO_NATIONAL(JIRACHI),
     SPECIES_TO_NATIONAL(DEOXYS),
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     SPECIES_TO_NATIONAL(TURTWIG),
     SPECIES_TO_NATIONAL(GROTLE),
     SPECIES_TO_NATIONAL(TORTERRA),
@@ -832,6 +833,8 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(DARKRAI),
     SPECIES_TO_NATIONAL(SHAYMIN),
     SPECIES_TO_NATIONAL(ARCEUS),
+#endif
+#if P_GEN_5_POKEMON == TRUE
     SPECIES_TO_NATIONAL(VICTINI),
     SPECIES_TO_NATIONAL(SNIVY),
     SPECIES_TO_NATIONAL(SERVINE),
@@ -988,6 +991,8 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(KELDEO),
     SPECIES_TO_NATIONAL(MELOETTA),
     SPECIES_TO_NATIONAL(GENESECT),
+#endif
+#if P_GEN_6_POKEMON == TRUE
     SPECIES_TO_NATIONAL(CHESPIN),
     SPECIES_TO_NATIONAL(QUILLADIN),
     SPECIES_TO_NATIONAL(CHESNAUGHT),
@@ -1060,6 +1065,8 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(DIANCIE),
     SPECIES_TO_NATIONAL(HOOPA),
     SPECIES_TO_NATIONAL(VOLCANION),
+#endif
+#if P_GEN_7_POKEMON == TRUE
     SPECIES_TO_NATIONAL(ROWLET),
     SPECIES_TO_NATIONAL(DARTRIX),
     SPECIES_TO_NATIONAL(DECIDUEYE),
@@ -1148,6 +1155,8 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(ZERAORA),
     SPECIES_TO_NATIONAL(MELTAN),
     SPECIES_TO_NATIONAL(MELMETAL),
+#endif
+#if P_GEN_8_POKEMON == TRUE
     SPECIES_TO_NATIONAL(GROOKEY),
     SPECIES_TO_NATIONAL(THWACKEY),
     SPECIES_TO_NATIONAL(RILLABOOM),
@@ -1244,6 +1253,7 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(SNEASLER),
     SPECIES_TO_NATIONAL(OVERQWIL),
     SPECIES_TO_NATIONAL(ENAMORUS),
+#endif
 
     // Megas
     [SPECIES_VENUSAUR_MEGA - 1] = NATIONAL_DEX_VENUSAUR,
@@ -1286,13 +1296,19 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     [SPECIES_METAGROSS_MEGA - 1] = NATIONAL_DEX_METAGROSS,
     [SPECIES_LATIAS_MEGA - 1] = NATIONAL_DEX_LATIAS,
     [SPECIES_LATIOS_MEGA - 1] = NATIONAL_DEX_LATIOS,
+#if P_GEN_4_POKEMON == TRUE
     [SPECIES_LOPUNNY_MEGA - 1] = NATIONAL_DEX_LOPUNNY,
     [SPECIES_GARCHOMP_MEGA - 1] = NATIONAL_DEX_GARCHOMP,
     [SPECIES_LUCARIO_MEGA - 1] = NATIONAL_DEX_LUCARIO,
     [SPECIES_ABOMASNOW_MEGA - 1] = NATIONAL_DEX_ABOMASNOW,
     [SPECIES_GALLADE_MEGA - 1] = NATIONAL_DEX_GALLADE,
+#endif
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_AUDINO_MEGA - 1] = NATIONAL_DEX_AUDINO,
+#endif
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_DIANCIE_MEGA - 1] = NATIONAL_DEX_DIANCIE,
+#endif
     // Special Mega + Primals
     [SPECIES_RAYQUAZA_MEGA - 1] = NATIONAL_DEX_RAYQUAZA,
     [SPECIES_KYOGRE_PRIMAL - 1] = NATIONAL_DEX_KYOGRE,
@@ -1332,10 +1348,12 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     [SPECIES_CORSOLA_GALARIAN - 1] = NATIONAL_DEX_CORSOLA,
     [SPECIES_ZIGZAGOON_GALARIAN - 1] = NATIONAL_DEX_ZIGZAGOON,
     [SPECIES_LINOONE_GALARIAN - 1] = NATIONAL_DEX_LINOONE,
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_DARUMAKA_GALARIAN - 1] = NATIONAL_DEX_DARUMAKA,
     [SPECIES_DARMANITAN_GALARIAN - 1] = NATIONAL_DEX_DARMANITAN,
     [SPECIES_YAMASK_GALARIAN - 1] = NATIONAL_DEX_YAMASK,
     [SPECIES_STUNFISK_GALARIAN - 1] = NATIONAL_DEX_STUNFISK,
+#endif
 //Hisuian Forms
     [SPECIES_GROWLITHE_HISUIAN - 1] = NATIONAL_DEX_GROWLITHE,
     [SPECIES_ARCANINE_HISUIAN - 1] = NATIONAL_DEX_ARCANINE,
@@ -1344,15 +1362,21 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     [SPECIES_TYPHLOSION_HISUIAN - 1] = NATIONAL_DEX_TYPHLOSION,
     [SPECIES_QWILFISH_HISUIAN - 1] = NATIONAL_DEX_QWILFISH,
     [SPECIES_SNEASEL_HISUIAN - 1] = NATIONAL_DEX_SNEASEL,
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_SAMUROTT_HISUIAN - 1] = NATIONAL_DEX_SAMUROTT,
     [SPECIES_LILLIGANT_HISUIAN - 1] = NATIONAL_DEX_LILLIGANT,
     [SPECIES_ZORUA_HISUIAN - 1] = NATIONAL_DEX_ZORUA,
     [SPECIES_ZOROARK_HISUIAN - 1] = NATIONAL_DEX_ZOROARK,
     [SPECIES_BRAVIARY_HISUIAN - 1] = NATIONAL_DEX_BRAVIARY,
+#endif
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_SLIGGOO_HISUIAN - 1] = NATIONAL_DEX_SLIGGOO,
     [SPECIES_GOODRA_HISUIAN - 1] = NATIONAL_DEX_GOODRA,
     [SPECIES_AVALUGG_HISUIAN - 1] = NATIONAL_DEX_AVALUGG,
+#endif
+#if P_GEN_7_POKEMON == TRUE
     [SPECIES_DECIDUEYE_HISUIAN - 1] = NATIONAL_DEX_DECIDUEYE,
+#endif
     // Cosplay Pikachu
     [SPECIES_PIKACHU_COSPLAY - 1] = NATIONAL_DEX_PIKACHU,
     [SPECIES_PIKACHU_ROCK_STAR - 1] = NATIONAL_DEX_PIKACHU,
@@ -1371,7 +1395,6 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     [SPECIES_PIKACHU_WORLD_CAP - 1] = NATIONAL_DEX_PIKACHU,
     // Pichu
     [SPECIES_PICHU_SPIKY_EARED - 1] = NATIONAL_DEX_PICHU,
-#endif
     // Unown
     [SPECIES_UNOWN_B - 1] = NATIONAL_DEX_UNOWN,
     [SPECIES_UNOWN_C - 1] = NATIONAL_DEX_UNOWN,
@@ -1408,7 +1431,7 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     [SPECIES_DEOXYS_ATTACK - 1] = NATIONAL_DEX_DEOXYS,
     [SPECIES_DEOXYS_DEFENSE - 1] = NATIONAL_DEX_DEOXYS,
     [SPECIES_DEOXYS_SPEED - 1] = NATIONAL_DEX_DEOXYS,
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     // Burmy
     [SPECIES_BURMY_SANDY_CLOAK - 1] = NATIONAL_DEX_BURMY,
     [SPECIES_BURMY_TRASH_CLOAK - 1] = NATIONAL_DEX_BURMY,
@@ -1451,6 +1474,8 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     [SPECIES_ARCEUS_DRAGON - 1] = NATIONAL_DEX_ARCEUS,
     [SPECIES_ARCEUS_DARK - 1] = NATIONAL_DEX_ARCEUS,
     [SPECIES_ARCEUS_FAIRY - 1] = NATIONAL_DEX_ARCEUS,
+#endif
+#if P_GEN_5_POKEMON == TRUE
     // Basculin
     [SPECIES_BASCULIN_BLUE_STRIPED - 1] = NATIONAL_DEX_BASCULIN,
     [SPECIES_BASCULIN_WHITE_STRIPED - 1] = NATIONAL_DEX_BASCULIN,
@@ -1469,7 +1494,6 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     [SPECIES_TORNADUS_THERIAN - 1] = NATIONAL_DEX_TORNADUS,
     [SPECIES_THUNDURUS_THERIAN - 1] = NATIONAL_DEX_THUNDURUS,
     [SPECIES_LANDORUS_THERIAN - 1] = NATIONAL_DEX_LANDORUS,
-    [SPECIES_ENAMORUS_THERIAN - 1] = NATIONAL_DEX_ENAMORUS,
     // Kyurem
     [SPECIES_KYUREM_BLACK - 1] = NATIONAL_DEX_KYUREM,
     [SPECIES_KYUREM_WHITE - 1] = NATIONAL_DEX_KYUREM,
@@ -1482,6 +1506,8 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     [SPECIES_GENESECT_SHOCK_DRIVE - 1] = NATIONAL_DEX_GENESECT,
     [SPECIES_GENESECT_BURN_DRIVE - 1] = NATIONAL_DEX_GENESECT,
     [SPECIES_GENESECT_CHILL_DRIVE - 1] = NATIONAL_DEX_GENESECT,
+#endif
+#if P_GEN_6_POKEMON == TRUE
     // Greninja
     [SPECIES_GRENINJA_BATTLE_BOND - 1] = NATIONAL_DEX_GRENINJA,
     [SPECIES_GRENINJA_ASH - 1] = NATIONAL_DEX_GRENINJA,
@@ -1552,6 +1578,8 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     [SPECIES_ZYGARDE_COMPLETE - 1] = NATIONAL_DEX_ZYGARDE,
     // Hoopa
     [SPECIES_HOOPA_UNBOUND - 1] = NATIONAL_DEX_HOOPA,
+#endif
+#if P_GEN_7_POKEMON == TRUE
     // Oricorio
     [SPECIES_ORICORIO_POM_POM - 1] = NATIONAL_DEX_ORICORIO,
     [SPECIES_ORICORIO_PAU - 1] = NATIONAL_DEX_ORICORIO,
@@ -1603,6 +1631,8 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     [SPECIES_NECROZMA_ULTRA - 1] = NATIONAL_DEX_NECROZMA,
     // Magearna
     [SPECIES_MAGEARNA_ORIGINAL_COLOR - 1] = NATIONAL_DEX_MAGEARNA,
+#endif
+#if P_GEN_8_POKEMON == TRUE
     // Cramorant
     [SPECIES_CRAMORANT_GULPING - 1] = NATIONAL_DEX_CRAMORANT,
     [SPECIES_CRAMORANT_GORGING - 1] = NATIONAL_DEX_CRAMORANT,
@@ -1640,6 +1670,7 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     // Calyrex
     [SPECIES_CALYREX_ICE_RIDER - 1] = NATIONAL_DEX_CALYREX,
     [SPECIES_CALYREX_SHADOW_RIDER - 1] = NATIONAL_DEX_CALYREX,
+    [SPECIES_ENAMORUS_THERIAN - 1] = NATIONAL_DEX_ENAMORUS,
 #endif
 };
 
@@ -1677,7 +1708,7 @@ static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
     HOENN_TO_NATIONAL(RALTS),
     HOENN_TO_NATIONAL(KIRLIA),
     HOENN_TO_NATIONAL(GARDEVOIR),
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     HOENN_TO_NATIONAL(GALLADE),
 #endif
     HOENN_TO_NATIONAL(SURSKIT),
@@ -1709,7 +1740,7 @@ static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
     HOENN_TO_NATIONAL(GRAVELER),
     HOENN_TO_NATIONAL(GOLEM),
     HOENN_TO_NATIONAL(NOSEPASS),
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     HOENN_TO_NATIONAL(PROBOPASS),
 #endif
     HOENN_TO_NATIONAL(SKITTY),
@@ -1735,7 +1766,7 @@ static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
     HOENN_TO_NATIONAL(MINUN),
     HOENN_TO_NATIONAL(MAGNEMITE),
     HOENN_TO_NATIONAL(MAGNETON),
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     HOENN_TO_NATIONAL(MAGNEZONE),
 #endif
     HOENN_TO_NATIONAL(VOLTORB),
@@ -1748,7 +1779,7 @@ static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
     HOENN_TO_NATIONAL(BELLOSSOM),
     HOENN_TO_NATIONAL(DODUO),
     HOENN_TO_NATIONAL(DODRIO),
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     HOENN_TO_NATIONAL(BUDEW),
     HOENN_TO_NATIONAL(ROSELIA),
     HOENN_TO_NATIONAL(ROSERADE),
@@ -1810,7 +1841,7 @@ static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
     HOENN_TO_NATIONAL(BANETTE),
     HOENN_TO_NATIONAL(DUSKULL),
     HOENN_TO_NATIONAL(DUSCLOPS),
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     HOENN_TO_NATIONAL(DUSKNOIR),
     HOENN_TO_NATIONAL(TROPIUS),
     HOENN_TO_NATIONAL(CHINGLING),
@@ -1837,12 +1868,12 @@ static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
     HOENN_TO_NATIONAL(HERACROSS),
     HOENN_TO_NATIONAL(RHYHORN),
     HOENN_TO_NATIONAL(RHYDON),
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     HOENN_TO_NATIONAL(RHYPERIOR),
 #endif
     HOENN_TO_NATIONAL(SNORUNT),
     HOENN_TO_NATIONAL(GLALIE),
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     HOENN_TO_NATIONAL(FROSLASS),
 #endif
     HOENN_TO_NATIONAL(SPHEAL),
@@ -1922,11 +1953,7 @@ const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 #include "data/pokemon/base_stats.h"
 #include "data/pokemon/level_up_learnsets.h"
 #include "data/pokemon/teachable_learnsets.h"
-#if P_NEW_POKEMON == TRUE
 #include "data/pokemon/evolution.h"
-#else
-#include "data/pokemon/evolution_old.h"
-#endif
 #include "data/pokemon/level_up_learnset_pointers.h"
 #include "data/pokemon/teachable_learnset_pointers.h"
 #include "data/pokemon/form_species_tables.h"
@@ -2328,7 +2355,6 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_JIRACHI - 1]       = ANIM_SWING_CONVEX,
     [SPECIES_DEOXYS - 1]        = ANIM_H_PIVOT,
 
-#if P_NEW_POKEMON == TRUE
     // Gen 4
     [SPECIES_TURTWIG - 1]       = ANIM_V_SLIDE,
     [SPECIES_GROTLE - 1]        = ANIM_H_SLIDE,
@@ -2881,7 +2907,6 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_ARCEUS_DRAGON - 1]   = ANIM_CIRCULAR_VIBRATE,
     [SPECIES_ARCEUS_DARK - 1]     = ANIM_CIRCULAR_VIBRATE,
     [SPECIES_ARCEUS_FAIRY - 1]    = ANIM_CIRCULAR_VIBRATE,
-#endif
 };
 
 static const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =
@@ -2941,8 +2966,10 @@ static const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =
     [SPECIES_SALAMENCE - 1]  = 70,
     [SPECIES_KYOGRE - 1]     = 60,
     [SPECIES_RAYQUAZA - 1]   = 60,
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_7_POKEMON == TRUE
     [SPECIES_TAPU_FINI - 1]  = 5,
+#endif
+#if P_GEN_4_POKEMON == TRUE
     [SPECIES_ROTOM_FAN - 1]  = 7,
 #endif
 };
@@ -2951,7 +2978,7 @@ static const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =
 #define PP_UP_SHIFTS_INV(val) (u8)~(val), (u8)~((val) << 2), (u8)~((val) << 4), (u8)~((val) << 6)
 
 // PP Up bonuses are stored for a Pokémon as a single byte.
-// There are 2 bits (a value 0-3) for each move slot that 
+// There are 2 bits (a value 0-3) for each move slot that
 // represent how many PP Ups have been applied.
 // The following arrays take a move slot id and return:
 // gPPUpGetMask - A mask to get the number of PP Ups applied to that move slot
@@ -2978,7 +3005,9 @@ const u8 gStatStageRatios[MAX_STAT_STAGE + 1][2] =
     {40, 10}, // +6, MAX_STAT_STAGE
 };
 
-const u16 gLinkPlayerFacilityClasses[NUM_MALE_LINK_FACILITY_CLASSES + NUM_FEMALE_LINK_FACILITY_CLASSES] =
+// The classes used by other players in the Union Room.
+// These should correspond with the overworld graphics in sUnionRoomObjGfxIds
+const u16 gUnionRoomFacilityClasses[NUM_UNION_ROOM_CLASSES * GENDER_COUNT] =
 {
     // Male classes
     FACILITY_CLASS_COOLTRAINER_M,
@@ -2989,7 +3018,7 @@ const u16 gLinkPlayerFacilityClasses[NUM_MALE_LINK_FACILITY_CLASSES + NUM_FEMALE
     FACILITY_CLASS_BUG_CATCHER,
     FACILITY_CLASS_PKMN_BREEDER_M,
     FACILITY_CLASS_GUITARIST,
-    // Female Classes
+    // Female classes
     FACILITY_CLASS_COOLTRAINER_F,
     FACILITY_CLASS_HEX_MANIAC,
     FACILITY_CLASS_PICNICKER,
@@ -3300,21 +3329,31 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     }
     else // Player is the OT
     {
-        u32 totalRerolls = 0;
         value = gSaveBlock2Ptr->playerTrainerId[0]
               | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
               | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
               | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
 
-        if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
-            totalRerolls += I_SHINY_CHARM_REROLLS;
-        if (LURE_STEP_COUNT != 0)
-            totalRerolls += 1;
-
-        while (GET_SHINY_VALUE(value, personality) >= SHINY_ODDS && totalRerolls > 0)
+        if (gBaseStats[species].flags & SPECIES_FLAG_SHINY_LOCKED)
         {
-            personality = Random32();
-            totalRerolls--;
+            while (GET_SHINY_VALUE(value, personality) < SHINY_ODDS)
+            {
+                personality = Random32();
+            }
+        }
+        else
+        {
+            u32 totalRerolls = 0;
+            if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+                totalRerolls += I_SHINY_CHARM_REROLLS;
+            if (LURE_STEP_COUNT != 0)
+                totalRerolls += 1;
+
+            while (GET_SHINY_VALUE(value, personality) >= SHINY_ODDS && totalRerolls > 0)
+            {
+                personality = Random32();
+                totalRerolls--;
+            }
         }
     }
 
@@ -3369,8 +3408,18 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         iv = (value & (MAX_IV_MASK << 10)) >> 10;
         SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
 
+        if (gBaseStats[species].flags & SPECIES_FLAG_ALL_PERFECT_IVS)
+        {
+            iv = MAX_PER_STAT_IVS;
+            SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
+            SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
+            SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
+            SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
+            SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
+            SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
+        }
     #if P_LEGENDARY_PERFECT_IVS >= GEN_6
-        if (gBaseStats[species].flags & (FLAG_LEGENDARY | FLAG_MYTHICAL | FLAG_ULTRA_BEAST))
+        else if (gBaseStats[species].flags & (SPECIES_FLAG_LEGENDARY | SPECIES_FLAG_MYTHICAL | SPECIES_FLAG_ULTRA_BEAST))
         {
             iv = MAX_PER_STAT_IVS;
             // Initialize a list of IV indices.
@@ -3390,29 +3439,28 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
             {
                 switch (selectedIvs[i])
                 {
-                    case STAT_HP:
-                        SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
-                        break;
-                    case STAT_ATK:
-                        SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
-                        break;
-                    case STAT_DEF:
-                        SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
-                        break;
-                    case STAT_SPEED:
-                        SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
-                        break;
-                    case STAT_SPATK:
-                        SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
-                        break;
-                    case STAT_SPDEF:
-                        SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
-                        break;
+                case STAT_HP:
+                    SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
+                    break;
+                case STAT_ATK:
+                    SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
+                    break;
+                case STAT_DEF:
+                    SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
+                    break;
+                case STAT_SPEED:
+                    SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
+                    break;
+                case STAT_SPATK:
+                    SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
+                    break;
+                case STAT_SPDEF:
+                    SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
+                    break;
                 }
             }
         }
     #endif
-        
     }
 
     if (gBaseStats[species].abilities[1])
@@ -3827,9 +3875,9 @@ u16 GetUnionRoomTrainerPic(void)
     else
         linkId = GetMultiplayerId() ^ 1;
 
-    arrId = gLinkPlayers[linkId].trainerId & 7;
-    arrId |= gLinkPlayers[linkId].gender << 3;
-    return FacilityClassToPicIndex(gLinkPlayerFacilityClasses[arrId]);
+    arrId = gLinkPlayers[linkId].trainerId % NUM_UNION_ROOM_CLASSES;
+    arrId |= gLinkPlayers[linkId].gender * NUM_UNION_ROOM_CLASSES;
+    return FacilityClassToPicIndex(gUnionRoomFacilityClasses[arrId]);
 }
 
 u16 GetUnionRoomTrainerClass(void)
@@ -3842,9 +3890,9 @@ u16 GetUnionRoomTrainerClass(void)
     else
         linkId = GetMultiplayerId() ^ 1;
 
-    arrId = gLinkPlayers[linkId].trainerId & 7;
-    arrId |= gLinkPlayers[linkId].gender << 3;
-    return gFacilityClassToTrainerClass[gLinkPlayerFacilityClasses[arrId]];
+    arrId = gLinkPlayers[linkId].trainerId % NUM_UNION_ROOM_CLASSES;
+    arrId |= gLinkPlayers[linkId].gender * NUM_UNION_ROOM_CLASSES;
+    return gFacilityClassToTrainerClass[gUnionRoomFacilityClasses[arrId]];
 }
 
 void CreateEventLegalEnemyMon(void)
@@ -5289,7 +5337,7 @@ u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
         gLastUsedAbility = gBaseStats[species].abilities[abilityNum];
     else
         gLastUsedAbility = ABILITY_NONE;
-    
+
     if (abilityNum >= NUM_NORMAL_ABILITY_SLOTS) // if abilityNum is empty hidden ability, look for other hidden abilities
     {
         for (i = NUM_NORMAL_ABILITY_SLOTS; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++)
@@ -5297,12 +5345,12 @@ u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
             gLastUsedAbility = gBaseStats[species].abilities[i];
         }
     }
-    
+
     for (i = 0; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++) // look for any non-empty ability
     {
         gLastUsedAbility = gBaseStats[species].abilities[i];
     }
-    
+
     return gLastUsedAbility;
 }
 
@@ -5512,7 +5560,7 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
 #endif
 
 // EXP candies store an index for this table in their holdEffectParam.
-static const u32 sExpCandyExperienceTable[] = {
+const u32 sExpCandyExperienceTable[] = {
     [EXP_100 - 1] = 100,
     [EXP_800 - 1] = 800,
     [EXP_3000 - 1] = 3000,
@@ -5701,20 +5749,26 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
              && GetMonData(mon, MON_DATA_LEVEL, NULL) != MAX_LEVEL)
             {
                 u8 param = ItemId_GetHoldEffectParam(item);
+                dataUnsigned = 0;
+
                 if (param == 0) // Rare Candy
                 {
                     dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL) + 1];
                 }
-                else if (param < ARRAY_COUNT(sExpCandyExperienceTable)) // EXP Candies
+                else if (param - 1 < ARRAY_COUNT(sExpCandyExperienceTable)) // EXP Candies
                 {
                     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
                     dataUnsigned = sExpCandyExperienceTable[param - 1] + GetMonData(mon, MON_DATA_EXP, NULL);
                     if (dataUnsigned > gExperienceTables[gBaseStats[species].growthRate][MAX_LEVEL])
                         dataUnsigned = gExperienceTables[gBaseStats[species].growthRate][MAX_LEVEL];
                 }
-                SetMonData(mon, MON_DATA_EXP, &dataUnsigned);
-                CalculateMonStats(mon);
-                retVal = FALSE;
+
+                if (dataUnsigned != 0) // Failsafe
+                {
+                    SetMonData(mon, MON_DATA_EXP, &dataUnsigned);
+                    CalculateMonStats(mon);
+                    retVal = FALSE;
+                }
             }
 
             // Cure status
@@ -6063,7 +6117,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                     case 4: // ITEM5_PP_MAX
                         dataUnsigned = (GetMonData(mon, MON_DATA_PP_BONUSES, NULL) & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
                         temp2 = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
-                        
+
                         // Check if 3 PP Ups have been applied already, and that the move has a total PP of at least 5 (excludes Sketch)
                         if (dataUnsigned < 3 && temp2 >= 5)
                         {
@@ -6343,7 +6397,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
     {
         partnerSpecies = GetMonData(tradePartner, MON_DATA_SPECIES, 0);
         partnerHeldItem = GetMonData(tradePartner, MON_DATA_HELD_ITEM, 0);
-        
+
         if (partnerHeldItem == ITEM_ENIGMA_BERRY)
             partnerHoldEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
         else
@@ -7292,6 +7346,38 @@ u8 CanLearnTeachableMove(u16 species, u16 move)
     {
         return FALSE;
     }
+    else if (species == SPECIES_MEW)
+    {
+        switch (move)
+        {
+        case MOVE_BADDY_BAD:
+        case MOVE_BLAST_BURN:
+        case MOVE_BOUNCY_BUBBLE:
+        case MOVE_BUZZY_BUZZ:
+        case MOVE_DRACO_METEOR:
+        case MOVE_DRAGON_ASCENT:
+        case MOVE_FIRE_PLEDGE:
+        case MOVE_FLOATY_FALL:
+        case MOVE_FREEZY_FROST:
+        case MOVE_FRENZY_PLANT:
+        case MOVE_GLITZY_GLOW:
+        case MOVE_GRASS_PLEDGE:
+        case MOVE_HYDRO_CANNON:
+        case MOVE_RELIC_SONG:
+        case MOVE_SAPPY_SEED:
+        case MOVE_SECRET_SWORD:
+        case MOVE_SIZZLY_SLIDE:
+        case MOVE_SPARKLY_SWIRL:
+        case MOVE_SPLISHY_SPLASH:
+        case MOVE_STEEL_BEAM:
+        case MOVE_VOLT_TACKLE:
+        case MOVE_WATER_PLEDGE:
+        case MOVE_ZIPPY_ZAP:
+            return FALSE;
+        default:
+            return TRUE;
+        }
+    }
     else
     {
         u8 i;
@@ -7714,7 +7800,7 @@ void SetWildMonHeldItem(void)
         {
             if (GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, NULL) != ITEM_NONE)
                 continue; // prevent ovewriting previously set item
-            
+
             rnd = Random() % 100;
             species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, 0);
             if (gMapHeader.mapLayoutId == LAYOUT_ALTERING_CAVE)
@@ -8040,7 +8126,7 @@ static bool8 ShouldSkipFriendshipChange(void)
 // Only the 'default' mode (MON_SPR_GFX_MODE_NORMAL) is used, which is set
 // up to allocate 4 sprites using the battler sprite templates (gBattlerSpriteTemplates).
 // MON_SPR_GFX_MODE_BATTLE is identical but never used.
-// MON_SPR_GFX_MODE_FULL_PARTY is set up to allocate 7 sprites (party + trainer?) 
+// MON_SPR_GFX_MODE_FULL_PARTY is set up to allocate 7 sprites (party + trainer?)
 // using a generic 64x64 template, and is also never used.
 
 // Between the unnecessarily large sizes below, a mistake allocating the spritePointers
@@ -8102,7 +8188,7 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
         gfx->dataSize = 1;
         gfx->mode = MON_SPR_GFX_MODE_FULL_PARTY;
         break;
- // case MON_SPR_GFX_MODE_BATTLE:       
+ // case MON_SPR_GFX_MODE_BATTLE:
     case MON_SPR_GFX_MODE_NORMAL:
     default:
         gfx->numSprites = MAX_BATTLERS_COUNT;
@@ -8386,7 +8472,7 @@ void TrySpecialOverworldEvo(void)
 
 bool32 ShouldShowFemaleDifferences(u16 species, u32 personality)
 {
-    return (gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
+    return (gBaseStats[species].flags & SPECIES_FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
 }
 
 void TryToSetBattleFormChangeMoves(struct Pokemon *mon)
@@ -8427,4 +8513,24 @@ void TryToSetBattleFormChangeMoves(struct Pokemon *mon)
             break;
         }
     }
+}
+
+u32 GetMonFriendshipScore(struct Pokemon *pokemon)
+{
+    u32 friendshipScore = GetMonData(pokemon, MON_DATA_FRIENDSHIP, NULL);
+
+    if (friendshipScore == MAX_FRIENDSHIP)
+        return FRIENDSHIP_MAX;
+    if (friendshipScore >= 200)
+        return FRIENDSHIP_200_TO_254;
+    if (friendshipScore >= 150)
+        return FRIENDSHIP_150_TO_199;
+    if (friendshipScore >= 100)
+        return FRIENDSHIP_100_TO_149;
+    if (friendshipScore >= 50)
+        return FRIENDSHIP_50_TO_99;
+    if (friendshipScore >= 1)
+        return FRIENDSHIP_1_TO_49;
+
+    return FRIENDSHIP_NONE;
 }

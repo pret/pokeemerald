@@ -102,7 +102,7 @@ static const struct WindowTemplate sMainWindows[] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
-        .width = 30,
+        .width = DISPLAY_TILE_WIDTH,
         .height = 2,
         .paletteNum = 12,
         .baseBlock = 0x0013
@@ -118,7 +118,7 @@ static const struct WindowTemplate sMainWindows[] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 15,
-        .width = 30,
+        .width = DISPLAY_TILE_WIDTH,
         .height = 5,
         .paletteNum = 13,
         .baseBlock = 0x004f
@@ -640,8 +640,8 @@ static u32 MysteryGift_HandleThreeOptionMenu(u8 *unused0, u16 * unused1, u8 whic
         width++;
 
     windowTemplate.width = width;
-    if (width < 30)
-        windowTemplate.tilemapLeft = (30 - width) / 2;
+    if (width < DISPLAY_TILE_WIDTH)
+        windowTemplate.tilemapLeft = (DISPLAY_TILE_WIDTH - width) / 2;
     else
         windowTemplate.tilemapLeft = 0;
 
@@ -1232,7 +1232,7 @@ static void Task_MysteryGift(u8 taskId)
         data->state = MG_STATE_CLIENT_LINK_WAIT;
         break;
     case MG_STATE_CLIENT_LINK_WAIT:
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
         {
             ClearScreenInBg0(TRUE);
             data->state = MG_STATE_CLIENT_COMMUNICATING;
@@ -1240,7 +1240,7 @@ static void Task_MysteryGift(u8 taskId)
         }
         else if (gSpecialVar_Result == LINKUP_FAILED)
         {
-            // Link failed, return to link start menu 
+            // Link failed, return to link start menu
             ClearScreenInBg0(TRUE);
             data->state = MG_STATE_SOURCE_PROMPT;
         }
@@ -1528,7 +1528,7 @@ static void Task_MysteryGift(u8 taskId)
         }
         break;
     case MG_STATE_SERVER_LINK_WAIT:
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
         {
             ClearScreenInBg0(TRUE);
             data->state = MG_STATE_SERVER_LINK_START;
