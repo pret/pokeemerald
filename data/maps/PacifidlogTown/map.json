@@ -14,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
+      "map": "MAP_ROUTE132",
       "offset": 0,
-      "map": "MAP_ROUTE132"
+      "direction": "left"
     },
     {
-      "direction": "right",
+      "map": "MAP_ROUTE131",
       "offset": 0,
-      "map": "MAP_ROUTE131"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -71,42 +71,42 @@
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_PACIFIDLOG_TOWN_POKEMON_CENTER_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 16,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_PACIFIDLOG_TOWN_HOUSE1",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 3,
       "y": 22,
       "elevation": 0,
       "dest_map": "MAP_PACIFIDLOG_TOWN_HOUSE2",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 12,
       "y": 24,
       "elevation": 0,
       "dest_map": "MAP_PACIFIDLOG_TOWN_HOUSE3",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 2,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_PACIFIDLOG_TOWN_HOUSE4",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 17,
       "y": 21,
       "elevation": 0,
       "dest_map": "MAP_PACIFIDLOG_TOWN_HOUSE5",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],
