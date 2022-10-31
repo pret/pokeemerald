@@ -16,6 +16,5 @@
 
 // Replace the used flags with others or disable with a 0
 #define DEBUG_FLAG_NO_COLLISION             0   // If this flag is set, the debug function in the Utility submenu to disable player collision can be used.
-#define DEBUG_FLAG_PC_FROM_DEBUG_MENU       0   // If this flag is set, the debug function in debug menu to access the player PC works.
 
 #endif // GUARD_CONSTANTS_OVERWORLD_CONFIG_H
