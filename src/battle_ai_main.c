@@ -234,6 +234,7 @@ u8 BattleAI_ChooseMoveOrAction(void)
 // damages/other info computed in GetAIDataAndCalcDmg
 u8 ComputeBattleAiScores(u8 battler)
 {
+    sBattler_AI = battler;
     BattleAI_SetupAIData(0xF);
     return BattleAI_ChooseMoveOrAction();
 }
