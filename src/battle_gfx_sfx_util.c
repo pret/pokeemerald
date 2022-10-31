@@ -164,6 +164,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     {
         gBattleStruct->palaceFlags &= 0xF;
         gBattleStruct->palaceFlags |= (selectedMoves << 4);
+        sBattler_AI = gActiveBattler;
         BattleAI_SetupAIData(selectedMoves);
         chosenMoveId = BattleAI_ChooseMoveOrAction();
     }
@@ -173,6 +174,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     // If a move is chosen this way, there's a 50% chance that it will be unable to use it anyway
     if (chosenMoveId == -1 || chosenMoveId >= MAX_MON_MOVES)
     {
+        chosenMoveId = -1;
         if (unusableMovesBits != 0xF)
         {
             validMoveFlags = 0, numValidMoveGroups = 0;

@@ -234,18 +234,8 @@ u8 BattleAI_ChooseMoveOrAction(void)
 // damages/other info computed in GetAIDataAndCalcDmg
 u8 ComputeBattleAiScores(u8 battler)
 {
-    sBattler_AI = battler;
-    if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
-    {
-        u16 retVal = ChooseMoveAndTargetInBattlePalace(); // first byte is moveId, secondId is target
-        gBattleStruct->aiChosenTarget[sBattler_AI] = (retVal >> 8) & 0xFF;
-        return (retVal & 0xFF);
-    }
-    else
-    {
-        BattleAI_SetupAIData(0xF);
-        return BattleAI_ChooseMoveOrAction();
-    }
+    BattleAI_SetupAIData(0xF);
+    return BattleAI_ChooseMoveOrAction();
 }
 
 static void CopyBattlerDataToAIParty(u32 bPosition, u32 side)

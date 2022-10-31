@@ -1554,42 +1554,49 @@ static void OpponentHandleChooseMove(void)
     if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER)
      || IsWildMonSmart())
     {
-        chosenMoveId = gBattleStruct->aiMoveOrAction[gActiveBattler];
-        gBattlerTarget = gBattleStruct->aiChosenTarget[gActiveBattler];
-        switch (chosenMoveId)
+        if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-        case AI_CHOICE_WATCH:
-            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_SAFARI_WATCH_CAREFULLY, 0);
-            break;
-        case AI_CHOICE_FLEE:
-            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_RUN, 0);
-            break;
-        case AI_CHOICE_SWITCH:
-            BtlController_EmitTwoReturnValues(BUFFER_B, 10, 0xFFFF);
-            break;
-        case 6:
-            BtlController_EmitTwoReturnValues(BUFFER_B, 15, gBattlerTarget);
-            break;
-        default:
+            BtlController_EmitTwoReturnValues(BUFFER_B, 10, ChooseMoveAndTargetInBattlePalace());
+        }
+        else
+        {
+            chosenMoveId = gBattleStruct->aiMoveOrAction[gActiveBattler];
+            gBattlerTarget = gBattleStruct->aiChosenTarget[gActiveBattler];
+            switch (chosenMoveId)
             {
-                u16 chosenMove = moveInfo->moves[chosenMoveId];
-
-                if (GetBattlerMoveTargetType(gActiveBattler, chosenMove) & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
-                    gBattlerTarget = gActiveBattler;
-                if (GetBattlerMoveTargetType(gActiveBattler, chosenMove) & MOVE_TARGET_BOTH)
+            case AI_CHOICE_WATCH:
+                BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_SAFARI_WATCH_CAREFULLY, 0);
+                break;
+            case AI_CHOICE_FLEE:
+                BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_RUN, 0);
+                break;
+            case AI_CHOICE_SWITCH:
+                BtlController_EmitTwoReturnValues(BUFFER_B, 10, 0xFFFF);
+                break;
+            case 6:
+                BtlController_EmitTwoReturnValues(BUFFER_B, 15, gBattlerTarget);
+                break;
+            default:
                 {
-                    gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-                    if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
-                        gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+                    u16 chosenMove = moveInfo->moves[chosenMoveId];
+
+                    if (GetBattlerMoveTargetType(gActiveBattler, chosenMove) & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
+                        gBattlerTarget = gActiveBattler;
+                    if (GetBattlerMoveTargetType(gActiveBattler, chosenMove) & MOVE_TARGET_BOTH)
+                    {
+                        gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+                        if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
+                            gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+                    }
+                    if (ShouldUseZMove(gActiveBattler, gBattlerTarget, chosenMove))
+                        QueueZMove(gActiveBattler, chosenMove);
+                    if (CanMegaEvolve(gActiveBattler)) // If opponent can mega evolve, do it.
+                        BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
+                    else
+                        BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
                 }
-                if (ShouldUseZMove(gActiveBattler, gBattlerTarget, chosenMove))
-                    QueueZMove(gActiveBattler, chosenMove);
-                if (CanMegaEvolve(gActiveBattler)) // If opponent can mega evolve, do it.
-                    BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
-                else
-                    BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
+                break;
             }
-            break;
         }
         OpponentBufferExecCompleted();
     }
