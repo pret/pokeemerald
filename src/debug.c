@@ -2792,16 +2792,6 @@ static void DebugAction_Give_CHEAT(u8 taskId)
     ScriptContext_SetupScript(Debug_CheatStart);
 }
 
-static void Task_WaitFadeAccessPC(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        DestroyTask(taskId);
-        FlagSet(DEBUG_FLAG_PC_FROM_DEBUG_MENU);
-        EnterPokeStorage(2);
-    }
-}
-
 static void DebugAction_AccessPC(u8 taskId)
 {
     Debug_DestroyMenu_Full(taskId);
