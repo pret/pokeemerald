@@ -149,6 +149,7 @@ u16 GetPrimalReversionSpecies(u16 preSpecies, u16 heldItemId);
 u16 GetWishMegaEvolutionSpecies(u16 preEvoSpecies, u16 moveId1, u16 moveId2, u16 moveId3, u16 moveId4);
 bool32 CanMegaEvolve(u8 battlerId);
 void UndoMegaEvolution(u32 monId);
+bool32 IsBattlerMegaEvolved(u8 battlerId);
 bool32 IsBattlerPrimalReverted(u8 battlerId);
 void TryBattleFormChange(u8 battlerId, u16 method);
 bool32 DoBattlersShareType(u32 battler1, u32 battler2);

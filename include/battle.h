@@ -468,10 +468,7 @@ struct LinkBattlerHeader
 struct MegaEvolutionData
 {
     u8 toEvolve; // As flags using gBitTable.
-    u8 evolvedPartyIds[2]; // As flags using gBitTable;
     bool8 alreadyEvolved[4]; // Array id is used for mon position.
-    u16 evolvedSpecies[MAX_BATTLERS_COUNT];
-    u16 playerEvolvedSpecies;
     u8 battlerId;
     bool8 playerSelect;
     u8 triggerSpriteId;

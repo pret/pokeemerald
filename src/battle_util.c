@@ -8953,9 +8953,7 @@ static bool32 CanEvolve(u32 species)
 
     for (i = 0; i < EVOS_PER_MON; i++)
     {
-        if (gEvolutionTable[species][i].method
-         && gEvolutionTable[species][i].method != EVO_MEGA_EVOLUTION
-         && gEvolutionTable[species][i].method != EVO_MOVE_MEGA_EVOLUTION)
+        if (gEvolutionTable[species][i].method)
             return TRUE;
     }
     return FALSE;
@@ -9554,12 +9552,17 @@ bool32 IsPartnerMonFromSameTrainer(u8 battlerId)
 u16 GetMegaEvolutionSpecies(u16 preEvoSpecies, u16 heldItemId)
 {
     u32 i;
+    const struct FormChange *formChanges = gFormChangeTablePointers[preEvoSpecies];
 
-    for (i = 0; i < EVOS_PER_MON; i++)
+    if (formChanges != NULL)
     {
-        if (gEvolutionTable[preEvoSpecies][i].method == EVO_MEGA_EVOLUTION
-         && gEvolutionTable[preEvoSpecies][i].param == heldItemId)
-            return gEvolutionTable[preEvoSpecies][i].targetSpecies;
+        for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
+        {
+            if ((formChanges[i].method == FORM_CHANGE_MEGA_EVOLUTION_ITEM
+             && formChanges[i].param1 == heldItemId)
+             && formChanges[i].targetSpecies != preEvoSpecies)
+                return formChanges[i].targetSpecies;
+        }
     }
     return SPECIES_NONE;
 }
@@ -9584,15 +9587,18 @@ u16 GetPrimalReversionSpecies(u16 preSpecies, u16 heldItemId)
 
 u16 GetWishMegaEvolutionSpecies(u16 preEvoSpecies, u16 moveId1, u16 moveId2, u16 moveId3, u16 moveId4)
 {
-    u32 i, par;
+    u32 i, param;
+    const struct FormChange *formChanges = gFormChangeTablePointers[preEvoSpecies];
 
-    for (i = 0; i < EVOS_PER_MON; i++)
+    if (formChanges != NULL)
     {
-        if (gEvolutionTable[preEvoSpecies][i].method == EVO_MOVE_MEGA_EVOLUTION)
+        for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
         {
-            par = gEvolutionTable[preEvoSpecies][i].param;
-            if (par == moveId1 || par == moveId2 || par == moveId3 || par == moveId4)
-                return gEvolutionTable[preEvoSpecies][i].targetSpecies;
+            param = formChanges[i].param1;
+            if ((formChanges[i].method == FORM_CHANGE_MEGA_EVOLUTION_MOVE
+             && (param == moveId1 || param == moveId2 || param == moveId3 || param == moveId4))
+             && formChanges[i].targetSpecies != preEvoSpecies)
+                return formChanges[i].targetSpecies;
         }
     }
     return SPECIES_NONE;
@@ -9671,21 +9677,18 @@ bool32 CanMegaEvolve(u8 battlerId)
 
 void UndoMegaEvolution(u32 monId)
 {
-    u16 baseSpecies = GET_BASE_SPECIES_ID(GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES));
-
-    if (gBattleStruct->mega.evolvedPartyIds[B_SIDE_PLAYER] & gBitTable[monId])
-    {
-        gBattleStruct->mega.evolvedPartyIds[B_SIDE_PLAYER] &= ~(gBitTable[monId]);
-        SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &gBattleStruct->mega.playerEvolvedSpecies);
-        CalculateMonStats(&gPlayerParty[monId]);
-    }
     // While not exactly a mega evolution, Zygarde follows the same rules.
-    else if (GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, NULL) == SPECIES_ZYGARDE_COMPLETE)
+    if (GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, NULL) == SPECIES_ZYGARDE_COMPLETE)
     {
         SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &gBattleStruct->changedSpecies[monId]);
         gBattleStruct->changedSpecies[monId] = 0;
         CalculateMonStats(&gPlayerParty[monId]);
     }
+}
+
+bool32 IsBattlerMegaEvolved(u8 battlerId)
+{
+    return (gBaseStats[gBattleMons[battlerId].species].flags & SPECIES_FLAG_MEGA_EVOLUTION);
 }
 
 bool32 IsBattlerPrimalReverted(u8 battlerId)

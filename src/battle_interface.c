@@ -871,8 +871,7 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
     healthBarSpritePtr->invisible = TRUE;
 
     // Create mega indicator sprite if is a mega evolved or a primal reverted mon.
-    if ((gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
-     || IsBattlerPrimalReverted(battlerId))
+    if (IsBattlerMegaEvolved(battlerId) || IsBattlerPrimalReverted(battlerId))
     {
         megaIndicatorSpriteId = CreateMegaIndicatorSprite(battlerId, 0);
         gSprites[megaIndicatorSpriteId].invisible = TRUE;
@@ -979,8 +978,7 @@ void SetHealthboxSpriteVisible(u8 healthboxSpriteId)
     gSprites[healthboxSpriteId].invisible = FALSE;
     gSprites[gSprites[healthboxSpriteId].hMain_HealthBarSpriteId].invisible = FALSE;
     gSprites[gSprites[healthboxSpriteId].oam.affineParam].invisible = FALSE;
-    if ((gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
-     || IsBattlerPrimalReverted(battlerId))
+    if (IsBattlerMegaEvolved(battlerId) || IsBattlerPrimalReverted(battlerId))
     {
         u8 spriteId = GetMegaIndicatorSpriteId(healthboxSpriteId);
         if (spriteId != 0xFF)
@@ -1104,8 +1102,7 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     u8 battler = gSprites[healthboxSpriteId].hMain_Battler;
 
     // Don't print Lv char if mon is mega evolved or primal reverted.
-    if ((gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battler)] & gBitTable[gBattlerPartyIndexes[battler]])
-     || IsBattlerPrimalReverted(battler))
+    if (IsBattlerMegaEvolved(battler) || IsBattlerPrimalReverted(battler))
     {
         objVram = ConvertIntToDecimalStringN(text, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
         xPos = 5 * (3 - (objVram - (text + 2))) - 1;
@@ -1556,7 +1553,7 @@ u32 CreateMegaIndicatorSprite(u32 battlerId, u32 which)
     u32 spriteId, position;
     s16 x, y;
 
-    if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
+    if (IsBattlerMegaEvolved(battlerId))
     {
         LoadSpritePalette(&sSpritePalette_MegaIndicator);
         LoadSpriteSheet(&sSpriteSheet_MegaIndicator);
@@ -1586,7 +1583,7 @@ u32 CreateMegaIndicatorSprite(u32 battlerId, u32 which)
     else if (gBattleMons[battlerId].level < 10)
         x += 5;
 
-    if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
+    if (IsBattlerMegaEvolved(battlerId))
     {
         spriteId = CreateSpriteAtEnd(&sSpriteTemplate_MegaIndicator, x, y, 0);
     }
