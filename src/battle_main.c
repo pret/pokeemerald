@@ -3159,7 +3159,7 @@ void SwitchInClearSetData(void)
     // Reset damage to prevent things like red card activating if the switched-in mon is holding it
     gSpecialStatuses[gActiveBattler].physicalDmg = 0;
     gSpecialStatuses[gActiveBattler].specialDmg = 0;
-    
+
     gBattleStruct->overwrittenAbilities[gActiveBattler] = ABILITY_NONE;
 
     Ai_UpdateSwitchInData(gActiveBattler);
@@ -3264,7 +3264,7 @@ void FaintClearSetData(void)
         UndoMegaEvolution(gBattlerPartyIndexes[gActiveBattler]);
 
     gBattleStruct->overwrittenAbilities[gActiveBattler] = ABILITY_NONE;
-    
+
     // If the fainted mon was involved in a Sky Drop
     if (gBattleStruct->skyDropTargets[gActiveBattler] != 0xFF)
     {
@@ -3303,7 +3303,7 @@ void FaintClearSetData(void)
             }
         }
     }
-    
+
     // Clear Z-Move data
     gBattleStruct->zmove.active = FALSE;
     gBattleStruct->zmove.toBeUsed[gActiveBattler] = MOVE_NONE;
@@ -3973,7 +3973,8 @@ static void HandleTurnActionSelectionState(void)
             gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
 
             // Do AI score computations here so we can use them in AI_TrySwitchOrUseItem
-            if ((gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart()) && IsBattlerAIControlled(gActiveBattler)) {
+            if ((gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart())
+                && (IsBattlerAIControlled(gActiveBattler) && !(gBattleTypeFlags & BATTLE_TYPE_PALACE))) {
                 gBattleStruct->aiMoveOrAction[gActiveBattler] = ComputeBattleAiScores(gActiveBattler);
             }
             break;
