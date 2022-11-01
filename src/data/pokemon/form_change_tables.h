@@ -20,11 +20,11 @@ FORM_CHANGE_MOVE:
 
 FORM_CHANGE_WITHDRAW:
     Form change activates when the Pokémon is withdrawn from the PC or Daycare.
-    no parameters
+    No parameters.
 
-FORM_CHANGE_SWITCH:
-    Form change activates when the Pokémon is switched out in battle.
-    no parameters
+FORM_CHANGE_FAINT:
+    Form change activates when the Pokémon faints, either in battle or in the overworld by poison.
+    No parameters.
 
 FORM_CHANGE_BATTLE_BEGIN:
     Form change activates when the Pokémon is sent out at the beginning of a battle
@@ -37,6 +37,15 @@ FORM_CHANGE_BATTLE_END:
     param1 = item to hold, optional
     param2 = a move that will be replaced, optional
     param3 = a new move to replace it with, optional
+
+FORM_CHANGE_BATTLE_SWITCH:
+    Form change activates when the Pokémon is switched out in battle.
+    No parameters.
+
+FORM_CHANGE_PRIMAL_REVERSION:
+    Form change activates when entering battle with the specified item. If the item is a Red Orb,
+    it uses the Omega Symbol for the animation and icon. Otherwise, it defaults to Alpha.
+    param1 = item to hold, required.
 */
 
 // FORM_CHANGE_MOVE param2 Arguments
