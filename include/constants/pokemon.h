@@ -320,11 +320,11 @@
 #define FORM_CHANGE_ITEM_HOLD           1
 #define FORM_CHANGE_ITEM_USE            2
 #define FORM_CHANGE_MOVE                3 // Todo
-#define FORM_CHANGE_WITHDRAW            4 // 
-#define FORM_CHANGE_BATTLE_BEGIN        5
-#define FORM_CHANGE_BATTLE_END          6
-#define FORM_CHANGE_BATTLE_SWITCH       7
-#define FORM_CHANGE_BATTLE_FAINT        8
+#define FORM_CHANGE_WITHDRAW            4 // Daycare done, Todo PC
+#define FORM_CHANGE_FAINT               5
+#define FORM_CHANGE_BATTLE_BEGIN        6
+#define FORM_CHANGE_BATTLE_END          7
+#define FORM_CHANGE_BATTLE_SWITCH       8
 #define FORM_CHANGE_PRIMAL_REVERSION    9
 
 #define MON_PIC_WIDTH 64

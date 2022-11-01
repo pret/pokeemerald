@@ -8404,7 +8404,7 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
                     break;
                 case FORM_CHANGE_WITHDRAW:
                 case FORM_CHANGE_BATTLE_SWITCH:
-                case FORM_CHANGE_BATTLE_FAINT:
+                case FORM_CHANGE_FAINT:
                     targetSpecies = formChanges[i].targetSpecies;
                     break;
                 }
