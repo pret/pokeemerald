@@ -8495,7 +8495,7 @@ bool32 ShouldShowFemaleDifferences(u16 species, u32 personality)
     return (gBaseStats[species].flags & SPECIES_FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
 }
 
-void TryFormChange(u32 monId, u32 side, u16 method)
+bool32 TryFormChange(u32 monId, u32 side, u16 method)
 {
     u32 targetSpecies;
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
@@ -8506,7 +8506,9 @@ void TryFormChange(u32 monId, u32 side, u16 method)
         TryToSetBattleFormChangeMoves(&party[monId], method);
         SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
         CalculateMonStats(&party[monId]);
+        return TRUE;
     }
+    return FALSE;
 }
 
 void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method)

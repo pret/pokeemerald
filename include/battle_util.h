@@ -188,6 +188,8 @@ void TryToRevertMimicry(void);
 void RestoreBattlerOriginalTypes(u8 battlerId);
 u32 GetBattlerMoveTargetType(u8 battlerId, u16 move);
 bool32 CanTargetBattler(u8 battlerAtk, u8 battlerDef, u16 move);
+void CopyMonLevelAndBaseStatsToBattleMon(u32 battler, struct Pokemon *mon);
+void CopyMonAbilityAndTypesToBattleMon(u32 battler, struct Pokemon *mon);
 void RecalcBattlerStats(u32 battler, struct Pokemon *mon);
 // Ability checks
 bool32 IsRolePlayBannedAbilityAtk(u16 ability);

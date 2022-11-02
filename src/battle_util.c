@@ -518,7 +518,7 @@ void HandleAction_Switch(void)
     if (gBattleResults.playerSwitchesCounter < 255)
         gBattleResults.playerSwitchesCounter++;
 
-    TryFormChange(gBattlerPartyIndexes[gBattlerAttacker], GetBattlerSide(gBattlerAttacker), FORM_CHANGE_BATTLE_SWITCH);
+    TryBattleFormChange(gBattlerAttacker, FORM_CHANGE_BATTLE_SWITCH);
 }
 
 void HandleAction_UseItem(void)
@@ -9698,16 +9698,14 @@ bool32 IsBattlerPrimalReverted(u8 battlerId)
 
 void TryBattleFormChange(u8 battlerId, u16 method)
 {
-    u16 targetSpecies;
     u8 monId = gBattlerPartyIndexes[battlerId];
     u8 side = GET_BATTLER_SIDE(battlerId);
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
 
-    targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
-    if (targetSpecies != SPECIES_NONE)
+    if (TryFormChange(monId, side, method))
     {
-        SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
-        RecalcBattlerStats(battlerId, &party[monId]);
+        CopyMonLevelAndBaseStatsToBattleMon(battlerId, &party[monId]);
+        CopyMonAbilityAndTypesToBattleMon(battlerId, &party[monId]);
     }
 }
 
@@ -10370,9 +10368,8 @@ bool32 CanTargetBattler(u8 battlerAtk, u8 battlerDef, u16 move)
     return TRUE;
 }
 
-void RecalcBattlerStats(u32 battler, struct Pokemon *mon)
+void CopyMonLevelAndBaseStatsToBattleMon(u32 battler, struct Pokemon *mon)
 {
-    CalculateMonStats(mon);
     gBattleMons[battler].level = GetMonData(mon, MON_DATA_LEVEL);
     gBattleMons[battler].hp = GetMonData(mon, MON_DATA_HP);
     gBattleMons[battler].maxHP = GetMonData(mon, MON_DATA_MAX_HP);
@@ -10381,7 +10378,19 @@ void RecalcBattlerStats(u32 battler, struct Pokemon *mon)
     gBattleMons[battler].speed = GetMonData(mon, MON_DATA_SPEED);
     gBattleMons[battler].spAttack = GetMonData(mon, MON_DATA_SPATK);
     gBattleMons[battler].spDefense = GetMonData(mon, MON_DATA_SPDEF);
+}
+
+void CopyMonAbilityAndTypesToBattleMon(u32 battler, struct Pokemon *mon)
+{
     gBattleMons[battler].ability = GetMonAbility(mon);
     gBattleMons[battler].type1 = gBaseStats[gBattleMons[battler].species].type1;
     gBattleMons[battler].type2 = gBaseStats[gBattleMons[battler].species].type2;
+    gBattleMons[battler].type3 = TYPE_MYSTERY;
+}
+
+void RecalcBattlerStats(u32 battler, struct Pokemon *mon)
+{
+    CalculateMonStats(mon);
+    CopyMonLevelAndBaseStatsToBattleMon(battler, mon);
+    CopyMonAbilityAndTypesToBattleMon(battler, mon);
 }
