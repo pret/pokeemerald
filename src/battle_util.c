@@ -4735,6 +4735,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         case ABILITY_SCHOOLING:
             if (gBattleMons[battler].level < 20)
                 break;
+        // Fallthrough
+        case ABILITY_ZEN_MODE:
         case ABILITY_SHIELDS_DOWN:
             if (ShouldChangeFormHpBased(battler))
             {
@@ -4954,6 +4956,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             case ABILITY_SCHOOLING:
                 if (gBattleMons[battler].level < 20)
                     break;
+            // Fallthrough
             case ABILITY_ZEN_MODE:
             case ABILITY_SHIELDS_DOWN:
                 if ((effect = ShouldChangeFormHpBased(battler)))
