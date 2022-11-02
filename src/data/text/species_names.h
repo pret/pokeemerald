@@ -386,7 +386,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_RAYQUAZA] = _("Rayquaza"),
     [SPECIES_JIRACHI] = _("Jirachi"),
     [SPECIES_DEOXYS] = _("Deoxys"),
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     [SPECIES_TURTWIG] = _("Turtwig"),
     [SPECIES_GROTLE] = _("Grotle"),
     [SPECIES_TORTERRA] = _("Torterra"),
@@ -494,6 +494,8 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_DARKRAI] = _("Darkrai"),
     [SPECIES_SHAYMIN] = _("Shaymin"),
     [SPECIES_ARCEUS] = _("Arceus"),
+#endif
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_VICTINI] = _("Victini"),
     [SPECIES_SNIVY] = _("Snivy"),
     [SPECIES_SERVINE] = _("Servine"),
@@ -650,6 +652,8 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_KELDEO] = _("Keldeo"),
     [SPECIES_MELOETTA] = _("Meloetta"),
     [SPECIES_GENESECT] = _("Genesect"),
+#endif
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_CHESPIN] = _("Chespin"),
     [SPECIES_QUILLADIN] = _("Quilladin"),
     [SPECIES_CHESNAUGHT] = _("Chesnaught"),
@@ -722,6 +726,8 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_DIANCIE] = _("Diancie"),
     [SPECIES_HOOPA] = _("Hoopa"),
     [SPECIES_VOLCANION] = _("Volcanion"),
+#endif
+#if P_GEN_7_POKEMON == TRUE
     [SPECIES_ROWLET] = _("Rowlet"),
     [SPECIES_DARTRIX] = _("Dartrix"),
     [SPECIES_DECIDUEYE] = _("Decidueye"),
@@ -810,6 +816,8 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_ZERAORA] = _("Zeraora"),
     [SPECIES_MELTAN] = _("Meltan"),
     [SPECIES_MELMETAL] = _("Melmetal"),
+#endif
+#if P_GEN_8_POKEMON == TRUE
     [SPECIES_GROOKEY] = _("Grookey"),
     [SPECIES_THWACKEY] = _("Thwackey"),
     [SPECIES_RILLABOOM] = _("Rillaboom"),
@@ -906,6 +914,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_SNEASLER] = _("Sneasler"),
     [SPECIES_OVERQWIL] = _("Overqwil"),
     [SPECIES_ENAMORUS] = _("Enamorus"),
+#endif
 
     // Megas
     [SPECIES_VENUSAUR_MEGA] = _("Venusaur"),
@@ -948,13 +957,19 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_METAGROSS_MEGA] = _("Metagross"),
     [SPECIES_LATIAS_MEGA] = _("Latias"),
     [SPECIES_LATIOS_MEGA] = _("Latios"),
+#if P_GEN_4_POKEMON == TRUE
     [SPECIES_LOPUNNY_MEGA] = _("Lopunny"),
     [SPECIES_GARCHOMP_MEGA] = _("Garchomp"),
     [SPECIES_LUCARIO_MEGA] = _("Lucario"),
     [SPECIES_ABOMASNOW_MEGA] = _("Abomasnow"),
     [SPECIES_GALLADE_MEGA] = _("Gallade"),
+#endif
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_AUDINO_MEGA] = _("Audino"),
+#endif
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_DIANCIE_MEGA] = _("Diancie"),
+#endif
     // Special Mega + Primals
     [SPECIES_RAYQUAZA_MEGA] = _("Rayquaza"),
     [SPECIES_KYOGRE_PRIMAL] = _("Kyogre"),
@@ -996,10 +1011,12 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_CORSOLA_GALARIAN] = _("Corsola"),
     [SPECIES_ZIGZAGOON_GALARIAN] = _("Zigzagoon"),
     [SPECIES_LINOONE_GALARIAN] = _("Linoone"),
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_DARUMAKA_GALARIAN] = _("Darumaka"),
     [SPECIES_DARMANITAN_GALARIAN] = _("Darmanitan"),
     [SPECIES_YAMASK_GALARIAN] = _("Yamask"),
     [SPECIES_STUNFISK_GALARIAN] = _("Stunfisk"),
+#endif
 
 //Hisuian Forms
     [SPECIES_GROWLITHE_HISUIAN] = _("Growlithe"),
@@ -1009,15 +1026,21 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_TYPHLOSION_HISUIAN] = _("Typhlosion"),
     [SPECIES_QWILFISH_HISUIAN] = _("Qwilfish"),
     [SPECIES_SNEASEL_HISUIAN] = _("Sneasel"),
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_SAMUROTT_HISUIAN] = _("Samurott"),
     [SPECIES_LILLIGANT_HISUIAN] = _("Lilligant"),
     [SPECIES_ZORUA_HISUIAN] = _("Zorua"),
     [SPECIES_ZOROARK_HISUIAN] = _("Zoroark"),
     [SPECIES_BRAVIARY_HISUIAN] = _("Braviary"),
+#endif
+#if P_GEN_6_POKEMON == TRUE
     [SPECIES_SLIGGOO_HISUIAN] = _("Sliggoo"),
     [SPECIES_GOODRA_HISUIAN] = _("Goodra"),
     [SPECIES_AVALUGG_HISUIAN] = _("Avalugg"),
+#endif
+#if P_GEN_7_POKEMON == TRUE
     [SPECIES_DECIDUEYE_HISUIAN] = _("Decidueye"),
+#endif
 
     // Cosplay Pikachu
     [SPECIES_PIKACHU_COSPLAY] = _("Pikachu"),
@@ -1037,7 +1060,6 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_PIKACHU_WORLD_CAP] = _("Pikachu"),
     // Pichu
     [SPECIES_PICHU_SPIKY_EARED] = _("Pichu"),
-#endif
     // Unown
     [SPECIES_UNOWN_B] = _("Unown"),
     [SPECIES_UNOWN_C] = _("Unown"),
@@ -1074,7 +1096,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_DEOXYS_ATTACK] = _("Deoxys"),
     [SPECIES_DEOXYS_DEFENSE] = _("Deoxys"),
     [SPECIES_DEOXYS_SPEED] = _("Deoxys"),
-#if P_NEW_POKEMON == TRUE
+#if P_GEN_4_POKEMON == TRUE
     // Burmy
     [SPECIES_BURMY_SANDY_CLOAK] = _("Burmy"),
     [SPECIES_BURMY_TRASH_CLOAK] = _("Burmy"),
@@ -1117,6 +1139,8 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_ARCEUS_DRAGON] = _("Arceus"),
     [SPECIES_ARCEUS_DARK] = _("Arceus"),
     [SPECIES_ARCEUS_FAIRY] = _("Arceus"),
+#endif
+#if P_GEN_5_POKEMON == TRUE
     // Basculin
     [SPECIES_BASCULIN_BLUE_STRIPED] = _("Basculin"),
     [SPECIES_BASCULIN_WHITE_STRIPED] = _("Basculin"),
@@ -1148,6 +1172,8 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_GENESECT_SHOCK_DRIVE] = _("Genesect"),
     [SPECIES_GENESECT_BURN_DRIVE] = _("Genesect"),
     [SPECIES_GENESECT_CHILL_DRIVE] = _("Genesect"),
+#endif
+#if P_GEN_6_POKEMON == TRUE
     // Greninja
     [SPECIES_GRENINJA_BATTLE_BOND] = _("Greninja"),
     [SPECIES_GRENINJA_ASH] = _("Greninja"),
@@ -1218,6 +1244,8 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_ZYGARDE_COMPLETE] = _("Zygarde"),
     // Hoopa
     [SPECIES_HOOPA_UNBOUND] = _("Hoopa"),
+#endif
+#if P_GEN_7_POKEMON == TRUE
     // Oricorio
     [SPECIES_ORICORIO_POM_POM] = _("Oricorio"),
     [SPECIES_ORICORIO_PAU] = _("Oricorio"),
@@ -1269,6 +1297,8 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_NECROZMA_ULTRA] = _("Necrozma"),
     // Magearna
     [SPECIES_MAGEARNA_ORIGINAL_COLOR] = _("Magearna"),
+#endif
+#if P_GEN_8_POKEMON == TRUE
     // Cramorant
     [SPECIES_CRAMORANT_GULPING] = _("Cramorant"),
     [SPECIES_CRAMORANT_GORGING] = _("Cramorant"),

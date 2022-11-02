@@ -322,19 +322,17 @@
 #define FORM_ITEM_USE           2
 #define FORM_MOVE               3
 #define FORM_WITHDRAW           4
-#define FORM_ITEM_HOLD_ABILITY  5
-#define FORM_ITEM_USE_TIME      6
-
-#define NUM_MALE_LINK_FACILITY_CLASSES   8
-#define NUM_FEMALE_LINK_FACILITY_CLASSES 8
+#define FORM_BATTLE_BEGIN       5
+#define FORM_BATTLE_END         6
 
 #define MON_PIC_WIDTH 64
 #define MON_PIC_HEIGHT 64
 #define MON_PIC_SIZE (MON_PIC_WIDTH * MON_PIC_HEIGHT / 2)
 
-#define BATTLE_ALIVE_EXCEPT_ACTIVE  0
-#define BATTLE_ALIVE_ATK_SIDE       1
-#define BATTLE_ALIVE_DEF_SIDE       2
+#define BATTLE_ALIVE_EXCEPT_ACTIVE   0
+#define BATTLE_ALIVE_ATK_SIDE        1
+#define BATTLE_ALIVE_DEF_SIDE        2
+#define BATTLE_ALIVE_EXCEPT_ATTACKER 3
 
 #define SKIP_FRONT_ANIM (1 << 7)
 
@@ -343,13 +341,17 @@
 #define NUM_HIDDEN_ABILITY_SLOTS 1
 
 // Species Flags
-#define FLAG_LEGENDARY          (1 << 0)
-#define FLAG_MYTHICAL           (1 << 1)
-#define FLAG_ULTRA_BEAST        (1 << 2)
-#define FLAG_ALOLAN_FORM        (1 << 3)
-#define FLAG_GALARIAN_FORM      (1 << 4)
-#define FLAG_HISUIAN_FORM       (1 << 5)
-#define FLAG_GENDER_DIFFERENCE  (1 << 6)
+#define SPECIES_FLAG_LEGENDARY          (1 << 0)
+#define SPECIES_FLAG_MYTHICAL           (1 << 1)
+#define SPECIES_FLAG_MEGA_EVOLUTION     (1 << 2)
+#define SPECIES_FLAG_ULTRA_BEAST        (1 << 3)
+#define SPECIES_FLAG_ALOLAN_FORM        (1 << 4)
+#define SPECIES_FLAG_GALARIAN_FORM      (1 << 5)
+#define SPECIES_FLAG_HISUIAN_FORM       (1 << 6)
+#define SPECIES_FLAG_GENDER_DIFFERENCE  (1 << 7)
+#define SPECIES_FLAG_ALL_PERFECT_IVS    (1 << 8)
+#define SPECIES_FLAG_SHINY_LOCKED       (1 << 9)
+#define SPECIES_FLAG_CANNOT_BE_TRADED   (1 << 10)
 
 #define LEGENDARY_PERFECT_IV_COUNT 3
 

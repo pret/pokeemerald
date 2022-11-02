@@ -239,6 +239,87 @@ u8 ComputeBattleAiScores(u8 battler)
     return BattleAI_ChooseMoveOrAction();
 }
 
+static void CopyBattlerDataToAIParty(u32 bPosition, u32 side)
+{
+    u32 battler = GetBattlerAtPosition(bPosition);
+    struct AiPartyMon *aiMon = &AI_PARTY->mons[side][gBattlerPartyIndexes[battler]];
+    struct BattlePokemon *bMon = &gBattleMons[battler];
+
+    aiMon->species = bMon->species;
+    aiMon->level = bMon->level;
+    aiMon->status = bMon->status1;
+    aiMon->gender = GetGenderFromSpeciesAndPersonality(bMon->species, bMon->personality);
+    aiMon->isFainted = FALSE;
+    aiMon->wasSentInBattle = TRUE;
+    aiMon->switchInCount++;
+}
+
+void Ai_InitPartyStruct(void)
+{
+    u32 i;
+
+    AI_PARTY->count[B_SIDE_PLAYER] = gPlayerPartyCount;
+    AI_PARTY->count[B_SIDE_OPPONENT] = gEnemyPartyCount;
+
+    // Save first 2 or 4(in doubles) mons
+    CopyBattlerDataToAIParty(B_POSITION_PLAYER_LEFT, B_SIDE_PLAYER);
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        CopyBattlerDataToAIParty(B_POSITION_PLAYER_RIGHT, B_SIDE_PLAYER);
+
+    // If player's partner is AI, save opponent mons
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+    {
+        CopyBattlerDataToAIParty(B_POSITION_OPPONENT_LEFT, B_SIDE_OPPONENT);
+        CopyBattlerDataToAIParty(B_POSITION_OPPONENT_RIGHT, B_SIDE_OPPONENT);
+    }
+
+    // Find fainted mons
+    for (i = 0; i < AI_PARTY->count[B_SIDE_PLAYER]; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
+            AI_PARTY->mons[B_SIDE_PLAYER][i].isFainted = TRUE;
+    }
+}
+
+void Ai_UpdateSwitchInData(u32 battler)
+{
+    u32 i;
+    u32 side = GetBattlerSide(battler);
+    struct AiPartyMon *aiMon = &AI_PARTY->mons[side][gBattlerPartyIndexes[battler]];
+
+    // See if the switched-in mon has been already in battle
+    if (aiMon->wasSentInBattle)
+    {
+        if (aiMon->ability)
+            BATTLE_HISTORY->abilities[battler] = aiMon->ability;
+        if (aiMon->heldEffect)
+            BATTLE_HISTORY->itemEffects[battler] = aiMon->heldEffect;
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            if (aiMon->moves[i])
+                BATTLE_HISTORY->usedMoves[battler][i] = aiMon->moves[i];
+        }
+        aiMon->switchInCount++;
+        aiMon->status = gBattleMons[battler].status1; // Copy status, because it could've been changed in battle.
+    }
+    else // If not, copy the newly switched-in mon in battle and clear battle history.
+    {
+        ClearBattlerMoveHistory(battler);
+        ClearBattlerAbilityHistory(battler);
+        ClearBattlerItemEffectHistory(battler);
+        CopyBattlerDataToAIParty(GetBattlerPosition(battler), side);
+    }
+}
+
+void Ai_UpdateFaintData(u32 battler)
+{
+    struct AiPartyMon *aiMon = &AI_PARTY->mons[GET_BATTLER_SIDE(battler)][gBattlerPartyIndexes[battler]];
+    ClearBattlerMoveHistory(battler);
+    ClearBattlerAbilityHistory(battler);
+    ClearBattlerItemEffectHistory(battler);
+    aiMon->isFainted = TRUE;
+}
+
 static void SetBattlerAiData(u8 battlerId)
 {
     AI_DATA->abilities[battlerId] = AI_GetAbility(battlerId);
@@ -258,8 +339,7 @@ void GetAiLogicData(void)
 
     memset(AI_DATA, 0, sizeof(struct AiLogicData));
 
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER))
-      && !IsWildMonSmart())
+    if (!(gBattleTypeFlags & BATTLE_TYPE_HAS_AI) && !IsWildMonSmart())
         return;
 
     // get/assume all battler data
@@ -3327,7 +3407,6 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score += min(CountPositiveStatStages(battlerDef), 4);
         break;
     case EFFECT_MULTI_HIT:
-    case EFFECT_DOUBLE_HIT:
     case EFFECT_TRIPLE_KICK:
         if (AI_MoveMakesContact(AI_DATA->abilities[battlerAtk], AI_DATA->holdEffects[battlerAtk], move)
           && AI_DATA->abilities[battlerAtk] != ABILITY_MAGIC_GUARD
