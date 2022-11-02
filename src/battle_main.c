@@ -5203,18 +5203,15 @@ static void HandleEndTurn_FinishBattle(void)
             UndoMegaEvolution(i);
             TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_BATTLE_END);
             DoBurmyFormChange(i);
-        }
-    #if B_RECALCULATE_STATS >= GEN_5
-        // Recalculate the stats of every party member before the end
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
+        #if B_RECALCULATE_STATS >= GEN_5
+            // Recalculate the stats of every party member before the end
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
              && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
             {
                 CalculateMonStats(&gPlayerParty[i]);
             }
+        #endif
         }
-    #endif
         // Clear battle mon species to avoid a bug on the next battle that causes
         // healthboxes loading incorrectly due to it trying to create a Mega Indicator
         // if the previous battler would've had.
