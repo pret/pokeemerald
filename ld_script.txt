@@ -27,7 +27,7 @@ SECTIONS {
         *libc.a:locale.o(.data);
         *libc.a:mallocr.o(.data);
         . = 0x40000;
-}
+    }
 
     . = 0x3000000;
 
