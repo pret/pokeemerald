@@ -3001,6 +3001,7 @@ static void BattleStartClearSetData(void)
 	gBattleScripting.monCaught = FALSE;
 
     gMultiHitCounter = 0;
+    gBattleScripting.savedDmg = 0;
     gBattleOutcome = 0;
     gBattleControllerExecFlags = 0;
     gPaydayMoney = 0;
@@ -4842,6 +4843,8 @@ static void TurnValuesCleanUp(bool8 var0)
 
         if (gDisableStructs[gActiveBattler].substituteHP == 0)
             gBattleMons[gActiveBattler].status2 &= ~STATUS2_SUBSTITUTE;
+
+        gSpecialStatuses[gActiveBattler].parentalBondState = PARENTAL_BOND_OFF;
     }
 
     gSideStatuses[0] &= ~(SIDE_STATUS_QUICK_GUARD | SIDE_STATUS_WIDE_GUARD | SIDE_STATUS_CRAFTY_SHIELD | SIDE_STATUS_MAT_BLOCK);

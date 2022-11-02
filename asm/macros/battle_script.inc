@@ -1988,6 +1988,12 @@
 	various \battler, VARIOUS_GET_BATTLER_SIDE
 	.endm
 
+	.macro checkparentalbondcounter counter:req, ptr:req
+	various BS_ATTACKER, VARIOUS_CHECK_PARENTAL_BOND_COUNTER
+	.byte \counter
+	.4byte \ptr
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER, \stat | \stages << 3 | \down << 7
