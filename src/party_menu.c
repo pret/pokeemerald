@@ -4928,6 +4928,7 @@ void ItemUseCB_TMHM(u8 taskId, TaskFunc task)
     u16 move = ItemIdToBattleMoveId(item);
 
     gPartyMenu.data1 = move;
+    gPartyMenu.learnMoveState = 0;
 
     PlaySE(SE_SELECT);
     mon = &gPlayerParty[gPartyMenu.slotId];
