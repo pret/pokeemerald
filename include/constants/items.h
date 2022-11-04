@@ -931,6 +931,10 @@
 #define ITEMS_COUNT 758
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
+// A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
+// Its icon is defined at ITEMS_COUNT as the "return to field" arrow
+#define ITEM_LIST_END 0xFFFF
+
 // Range of berries given out by various NPCS
 #define FIRST_BERRY_MASTER_BERRY      ITEM_POMEG_BERRY
 #define LAST_BERRY_MASTER_BERRY       ITEM_NOMEL_BERRY

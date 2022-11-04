@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "battle_ai_main.h"
 #include "battle_ai_util.h"
+#include "constants/battle_ai.h"
 #include "battle_anim.h"
 #include "battle_arena.h"
 #include "battle_controllers.h"
@@ -94,6 +95,7 @@ static void OpponentHandleResetActionMoveSelection(void);
 static void OpponentHandleEndLinkBattle(void);
 static void OpponentHandleDebugMenu(void);
 static void OpponentCmdEnd(void);
+static u8 CountAIAliveNonEggMonsExcept(u8 slotToIgnore);
 
 static void OpponentBufferRunCommand(void);
 static void OpponentBufferExecCompleted(void);
@@ -409,9 +411,7 @@ static void CompleteOnHealthbarDone(void)
     s16 hpValue = MoveBattleBar(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR, 0);
     SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
     if (hpValue != -1)
-    {
         UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], HP_CURRENT, hpValue, gBattleMons[gActiveBattler].maxHP);
-    }
     else
         OpponentBufferExecCompleted();
 }
@@ -1548,18 +1548,17 @@ static void OpponentHandleYesNoBox(void)
 
 static void OpponentHandleChooseMove(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
-    {
-        BtlController_EmitTwoReturnValues(BUFFER_B, 10, ChooseMoveAndTargetInBattlePalace());
-        OpponentBufferExecCompleted();
-    }
-    else
-    {
-        u8 chosenMoveId;
-        struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[gActiveBattler][4]);
+    u8 chosenMoveId;
+    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[gActiveBattler][4]);
 
-        if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER)
-         || IsWildMonSmart())
+    if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER)
+     || IsWildMonSmart())
+    {
+        if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+        {
+            BtlController_EmitTwoReturnValues(BUFFER_B, 10, ChooseMoveAndTargetInBattlePalace());
+        }
+        else
         {
             chosenMoveId = gBattleStruct->aiMoveOrAction[gActiveBattler];
             gBattlerTarget = gBattleStruct->aiChosenTarget[gActiveBattler];
@@ -1598,66 +1597,66 @@ static void OpponentHandleChooseMove(void)
                 }
                 break;
             }
-            OpponentBufferExecCompleted();
         }
-        else // Wild pokemon - use random move
+        OpponentBufferExecCompleted();
+    }
+    else // Wild pokemon - use random move
+    {
+        u16 move;
+        u8 target;
+        do
         {
-            u16 move;
-            u8 target;
-            do
-            {
-                chosenMoveId = Random() & 3;
-                move = moveInfo->moves[chosenMoveId];
-            } while (move == MOVE_NONE);
+            chosenMoveId = Random() & 3;
+            move = moveInfo->moves[chosenMoveId];
+        } while (move == MOVE_NONE);
 
-            if (GetBattlerMoveTargetType(gActiveBattler, move) & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
-                BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (gActiveBattler << 8));
-            else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-            {
-                do {
-                    target = GetBattlerAtPosition(Random() & 2);
-                } while (!CanTargetBattler(gActiveBattler, target, move));
+        if (GetBattlerMoveTargetType(gActiveBattler, move) & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
+            BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (gActiveBattler << 8));
+        else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        {
+            do {
+                target = GetBattlerAtPosition(Random() & 2);
+            } while (!CanTargetBattler(gActiveBattler, target, move));
 
-            #if B_WILD_NATURAL_ENEMIES == TRUE
-                // Don't bother to loop through table if the move can't attack ally
-                if (!(gBattleMoves[move].target & MOVE_TARGET_BOTH))
+        #if B_WILD_NATURAL_ENEMIES == TRUE
+            // Don't bother to loop through table if the move can't attack ally
+            if (!(gBattleMoves[move].target & MOVE_TARGET_BOTH))
+            {
+                u16 i, speciesAttacker, speciesTarget, isPartnerEnemy = FALSE;
+                static const u16 naturalEnemies[][2] =
                 {
-                    u16 i, speciesAttacker, speciesTarget, isPartnerEnemy = FALSE;
-                    static const u16 naturalEnemies[][2] =
-                    {
-                        // Attacker         Target
-                        {SPECIES_ZANGOOSE,  SPECIES_SEVIPER},
-                        {SPECIES_SEVIPER,   SPECIES_ZANGOOSE},
-                        {SPECIES_HEATMOR,   SPECIES_DURANT},
-                        {SPECIES_DURANT,    SPECIES_HEATMOR},
-                        {SPECIES_SABLEYE,   SPECIES_CARBINK},
-                        {SPECIES_MAREANIE,  SPECIES_CORSOLA},
-                    };
-                    speciesAttacker = gBattleMons[gActiveBattler].species;
-                    speciesTarget = gBattleMons[GetBattlerAtPosition(BATTLE_PARTNER(gActiveBattler))].species;
+                    // Attacker         Target
+                    {SPECIES_ZANGOOSE,  SPECIES_SEVIPER},
+                    {SPECIES_SEVIPER,   SPECIES_ZANGOOSE},
+                    {SPECIES_HEATMOR,   SPECIES_DURANT},
+                    {SPECIES_DURANT,    SPECIES_HEATMOR},
+                    {SPECIES_SABLEYE,   SPECIES_CARBINK},
+                    {SPECIES_MAREANIE,  SPECIES_CORSOLA},
+                };
+                speciesAttacker = gBattleMons[gActiveBattler].species;
+                speciesTarget = gBattleMons[GetBattlerAtPosition(BATTLE_PARTNER(gActiveBattler))].species;
 
-                    for (i = 0; i < ARRAY_COUNT(naturalEnemies); i++)
+                for (i = 0; i < ARRAY_COUNT(naturalEnemies); i++)
+                {
+                    if (speciesAttacker == naturalEnemies[i][0] && speciesTarget == naturalEnemies[i][1])
                     {
-                        if (speciesAttacker == naturalEnemies[i][0] && speciesTarget == naturalEnemies[i][1])
-                        {
-                            isPartnerEnemy = TRUE;
-                            break;
-                        }
+                        isPartnerEnemy = TRUE;
+                        break;
                     }
-                    if (isPartnerEnemy && CanTargetBattler(gActiveBattler, target, move))
-                        BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (GetBattlerAtPosition(BATTLE_PARTNER(gActiveBattler)) << 8));
-                    else
-                        BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (target << 8));
                 }
+                if (isPartnerEnemy && CanTargetBattler(gActiveBattler, target, move))
+                    BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (GetBattlerAtPosition(BATTLE_PARTNER(gActiveBattler)) << 8));
                 else
-            #endif
                     BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (target << 8));
             }
             else
-                BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) << 8));
-
-            OpponentBufferExecCompleted();
+        #endif
+                BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (target << 8));
         }
+        else
+            BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) << 8));
+
+        OpponentBufferExecCompleted();
     }
 }
 
@@ -1670,6 +1669,7 @@ static void OpponentHandleChooseItem(void)
 static void OpponentHandleChoosePokemon(void)
 {
     s32 chosenMonId;
+    s32 pokemonInBattle = 1;
 
     if (*(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) == PARTY_SIZE)
     {
@@ -1687,15 +1687,20 @@ static void OpponentHandleChoosePokemon(void)
             {
                 battler1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
                 battler2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+                pokemonInBattle = 2;
+
             }
 
             GetAIPartyIndexes(gActiveBattler, &firstId, &lastId);
 
-            for (chosenMonId = firstId; chosenMonId < lastId; chosenMonId++)
+            for (chosenMonId = (lastId-1); chosenMonId >= firstId; chosenMonId--)
             {
                 if (GetMonData(&gEnemyParty[chosenMonId], MON_DATA_HP) != 0
                     && chosenMonId != gBattlerPartyIndexes[battler1]
-                    && chosenMonId != gBattlerPartyIndexes[battler2])
+                    && chosenMonId != gBattlerPartyIndexes[battler2]
+                    && (!(AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON)
+                        || chosenMonId != CalculateEnemyPartyCount() - 1
+                        || CountAIAliveNonEggMonsExcept(PARTY_SIZE) == pokemonInBattle))
                 {
                     break;
                 }
@@ -1712,6 +1717,24 @@ static void OpponentHandleChoosePokemon(void)
     *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = chosenMonId;
     BtlController_EmitChosenMonReturnValue(BUFFER_B, chosenMonId, NULL);
     OpponentBufferExecCompleted();
+}
+
+static u8 CountAIAliveNonEggMonsExcept(u8 slotToIgnore)
+{
+    u16 i, count;
+
+    for (i = 0, count = 0; i < PARTY_SIZE; i++)
+    {
+        if (i != slotToIgnore
+            && GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) != SPECIES_NONE
+            && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG)
+            && GetMonData(&gEnemyParty[i], MON_DATA_HP) != 0)
+        {
+            count++;
+        }
+    }
+
+    return count;
 }
 
 static void OpponentHandleCmd23(void)

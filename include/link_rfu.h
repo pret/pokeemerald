@@ -97,7 +97,7 @@ struct RfuGameCompatibilityData
 // wireless play (the kind the Pokémon games use) the gname data can be used for
 // anything the developers want. This struct is what GF decided to use it for.
 // It can be up to 13 bytes in size (RFU_GAME_NAME_LENGTH).
-// The player's name is sent separately as the username ("uname"), and does not 
+// The player's name is sent separately as the username ("uname"), and does not
 // use a struct (gHostRfuUsername).
 struct __attribute__((packed, aligned(2))) RfuGameData
 {
@@ -118,7 +118,7 @@ struct __attribute__((packed, aligned(2))) RfuGameData
 // Bits 0-2 are a shortened trainerId
 // Bit 3 is the player's gender
 // Bits 4-6 are unknown/unused
-// Bit 7 is an 'active' flag 
+// Bit 7 is an 'active' flag
 #define PINFO_TID_MASK 0x7
 #define PINFO_GENDER_SHIFT 3
 #define PINFO_ACTIVE_FLAG (1 << 7)
