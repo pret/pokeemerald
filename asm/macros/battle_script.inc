@@ -1290,7 +1290,7 @@
 	.4byte \ptr
 	.endm
 
-	.macro trygetbaddreamstarget ptr:req
+	.macro unused ptr:req
 	.byte 0xfd
 	.4byte \ptr
 	.endm
