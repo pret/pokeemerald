@@ -417,7 +417,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_DOUBLE_KICK] =
     {
-        .effect = EFFECT_DOUBLE_HIT,
+        .effect = EFFECT_HIT,
         .power = 30,
         .type = TYPE_FIGHTING,
         .accuracy = 100,
@@ -725,7 +725,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_TWINEEDLE] =
     {
-        .effect = EFFECT_TWINEEDLE,
+        .effect = EFFECT_POISON_HIT,
         .power = 25,
         .type = TYPE_BUG,
         .accuracy = 100,
@@ -2782,7 +2782,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_BONEMERANG] =
     {
-        .effect = EFFECT_DOUBLE_HIT,
+        .effect = EFFECT_HIT,
         .power = 50,
         .type = TYPE_GROUND,
         .accuracy = 90,
@@ -8224,7 +8224,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_DOUBLE_HIT] =
     {
-        .effect = EFFECT_DOUBLE_HIT,
+        .effect = EFFECT_HIT,
         .power = 35,
         .type = TYPE_NORMAL,
         .accuracy = 90,
@@ -9477,7 +9477,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_DUAL_CHOP] =
     {
-        .effect = EFFECT_DOUBLE_HIT,
+        .effect = EFFECT_HIT,
         .power = 40,
         .type = TYPE_DRAGON,
         .accuracy = 90,
@@ -9714,7 +9714,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_GEAR_GRIND] =
     {
-        .effect = EFFECT_DOUBLE_HIT,
+        .effect = EFFECT_HIT,
         .power = 50,
         .type = TYPE_STEEL,
         .accuracy = 85,
@@ -11387,7 +11387,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .type = TYPE_FIRE,
         .accuracy = 100,
         .pp = 5,
-        .secondaryEffectChance = 0,
+        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_THAW_USER,
@@ -12181,7 +12181,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         #else
             .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_DMG_MINIMIZE | FLAG_IRON_FIST_BOOST | FLAG_SHEER_FORCE_BOOST | FLAG_TWO_STRIKES,
         #endif
-        .effect = EFFECT_DOUBLE_IRON_BASH,
+        .effect = EFFECT_FLINCH_HIT,
         .power = 60,
         .type = TYPE_STEEL,
         .accuracy = 100,
@@ -13029,7 +13029,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_DUAL_WINGBEAT] =
     {
-        .effect = EFFECT_DOUBLE_HIT,
+        .effect = EFFECT_HIT,
         .power = 40,
         .type = TYPE_FLYING,
         .accuracy = 90,
@@ -13092,7 +13092,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SURGING_STRIKES] =
     {
-        .effect = EFFECT_TRIPLE_HIT,
+        .effect = EFFECT_ALWAYS_CRIT,
         .power = 25,
         .type = TYPE_WATER,
         .accuracy = 100,

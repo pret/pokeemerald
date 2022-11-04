@@ -19,7 +19,6 @@
 #include "constants/songs.h"
 
 static void FieldCallback_SweetScent(void);
-static void StartSweetScentFieldEffect(void);
 static void TrySweetScentEncounter(u8 taskId);
 static void FailSweetScentEncounter(u8 taskId);
 
@@ -47,14 +46,15 @@ bool8 FldEff_SweetScent(void)
     return FALSE;
 }
 
-static void StartSweetScentFieldEffect(void)
+void StartSweetScentFieldEffect(void)
 {
     u8 taskId;
+    u32 palettes = ~(1 << (gSprites[GetPlayerAvatarSpriteId()].oam.paletteNum + 16) | (1 << 13) | (1 << 14) | (1 << 15));
 
     PlaySE(SE_M_SWEET_SCENT);
     CpuFastSet(gPlttBufferUnfaded, gPaletteDecompressionBuffer, 0x100);
     CpuFastSet(gPlttBufferFaded, gPlttBufferUnfaded, 0x100);
-    BeginNormalPaletteFade(~(1 << (gSprites[GetPlayerAvatarSpriteId()].oam.paletteNum + 16)), 4, 0, 8, RGB_RED);
+    BeginNormalPaletteFade(palettes, 4, 0, 8, RGB_RED);
     taskId = CreateTask(TrySweetScentEncounter, 0);
     gTasks[taskId].data[0] = 0;
     FieldEffectActiveListRemove(FLDEFF_SWEET_SCENT);
