@@ -102,7 +102,7 @@ static const struct WindowTemplate sMainWindows[] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
-        .width = 30,
+        .width = DISPLAY_TILE_WIDTH,
         .height = 2,
         .paletteNum = 12,
         .baseBlock = 0x0013
@@ -118,7 +118,7 @@ static const struct WindowTemplate sMainWindows[] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 15,
-        .width = 30,
+        .width = DISPLAY_TILE_WIDTH,
         .height = 5,
         .paletteNum = 13,
         .baseBlock = 0x004f
@@ -640,8 +640,8 @@ static u32 MysteryGift_HandleThreeOptionMenu(u8 *unused0, u16 * unused1, u8 whic
         width++;
 
     windowTemplate.width = width;
-    if (width < 30)
-        windowTemplate.tilemapLeft = (30 - width) / 2;
+    if (width < DISPLAY_TILE_WIDTH)
+        windowTemplate.tilemapLeft = (DISPLAY_TILE_WIDTH - width) / 2;
     else
         windowTemplate.tilemapLeft = 0;
 
