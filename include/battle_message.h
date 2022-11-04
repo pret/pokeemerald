@@ -218,7 +218,7 @@ struct BattleMsgData
     u16 lastItem;
     u16 lastAbility;
     u8 scrActive;
-    u8 unk1605E;
+    u8 bakScriptPartyIdx;
     u8 hpScale;
     u8 itemEffectBattler;
     u8 moveType;
@@ -234,19 +234,20 @@ enum
 };
 
 void BufferStringBattle(u16 stringID);
-u32 BattleStringExpandPlaceholdersToDisplayedString(const u8* src);
-u32 BattleStringExpandPlaceholders(const u8* src, u8* dst);
-void BattlePutTextOnWindow(const u8* text, u8 windowId);
+u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src);
+u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst);
+void BattlePutTextOnWindow(const u8 *text, u8 windowId);
 void SetPpNumbersPaletteInMoveSelection(void);
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
 bool32 ShouldDoTrainerSlide(u32 battlerId, u32 trainerId, u32 which);
+void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
 extern struct BattleMsgData *gBattleMsgDataPtr;
 
-extern const u8* const gBattleStringsTable[];
-extern const u8* const gStatNamesTable[];
-extern const u8* const gPokeblockWasTooXStringTable[];
-extern const u8* const gRefereeStringsTable[];
+extern const u8 *const gBattleStringsTable[];
+extern const u8 *const gStatNamesTable[];
+extern const u8 *const gPokeblockWasTooXStringTable[];
+extern const u8 *const gRefereeStringsTable[];
 extern const u8 *const gRoundsStringTable[];
 
 extern const u8 gText_PkmnIsEvolving[];
@@ -308,7 +309,7 @@ extern const u8 gText_OpponentMon1Name[];
 extern const u8 gText_Mind[];
 extern const u8 gText_Skill[];
 extern const u8 gText_Body[];
-extern const u8 gText_Judgement[];
+extern const u8 gText_Judgment[];
 extern const u8 gText_EmptyString3[];
 extern const u8 gText_RecordBattleToPass[];
 extern const u8 gText_BattleRecordedOnPass[];

@@ -795,7 +795,7 @@ u8 MetatileBehavior_GetBridgeType(u8 metatileBehavior)
      && metatileBehavior <= MB_BRIDGE_OVER_POND_HIGH)
         return metatileBehavior - MB_BRIDGE_OVER_OCEAN;
 
-    if (metatileBehavior >= MB_BRIDGE_OVER_POND_MED_EDGE_1 
+    if (metatileBehavior >= MB_BRIDGE_OVER_POND_MED_EDGE_1
      && metatileBehavior <= MB_BRIDGE_OVER_POND_MED_EDGE_2)
         return BRIDGE_TYPE_POND_MED;
 

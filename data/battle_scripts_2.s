@@ -13,22 +13,6 @@
 	.section script_data, "aw", %progbits
 
 	.align 2
-gBattlescriptsForBallThrow::
-	.4byte BattleScript_BallThrow        @ ITEM_NONE
-	.4byte BattleScript_BallThrow        @ ITEM_MASTER_BALL
-	.4byte BattleScript_BallThrow        @ ITEM_ULTRA_BALL
-	.4byte BattleScript_BallThrow        @ ITEM_GREAT_BALL
-	.4byte BattleScript_BallThrow        @ ITEM_POKE_BALL
-	.4byte BattleScript_SafariBallThrow  @ ITEM_SAFARI_BALL
-	.4byte BattleScript_BallThrow        @ ITEM_NET_BALL
-	.4byte BattleScript_BallThrow        @ ITEM_DIVE_BALL
-	.4byte BattleScript_BallThrow        @ ITEM_NEST_BALL
-	.4byte BattleScript_BallThrow        @ ITEM_REPEAT_BALL
-	.4byte BattleScript_BallThrow        @ ITEM_TIMER_BALL
-	.4byte BattleScript_BallThrow        @ ITEM_LUXURY_BALL
-	.4byte BattleScript_BallThrow        @ ITEM_PREMIER_BALL
-
-	.align 2
 gBattlescriptsForUsingItem::
 	.4byte BattleScript_PlayerUsesItem
 	.4byte BattleScript_OpponentUsesHealItem        @ AI_ITEM_FULL_RESTORE
@@ -64,7 +48,6 @@ BattleScript_SafariBallThrow::
 
 BattleScript_SuccessBallThrow::
 	setbyte sMON_CAUGHT, TRUE
-	jumpifhalfword CMP_EQUAL, gLastUsedItem, ITEM_SAFARI_BALL, BattleScript_PrintCaughtMonInfo
 	incrementgamestat GAME_STAT_POKEMON_CAPTURES
 BattleScript_PrintCaughtMonInfo::
 	printstring STRINGID_GOTCHAPKMNCAUGHT

@@ -24,7 +24,7 @@ struct Pokenav_MatchCallMenu
     u16 numSpecialTrainers;
     bool32 initFinished;
     u32 loopedTaskId;
-    u32 (*callback)(struct Pokenav_MatchCallMenu*);
+    u32 (*callback)(struct Pokenav_MatchCallMenu *);
     struct PokenavMatchCallEntry matchCallEntries[MAX_REMATCH_ENTRIES - 1];
 };
 

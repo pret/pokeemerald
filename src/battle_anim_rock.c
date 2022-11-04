@@ -331,7 +331,7 @@ static const union AffineAnimCmd* const sSpriteAffineAnimTable_CrushGripHand[] =
 const struct SpriteTemplate gCrushGripHandTemplate =
 {
     .tileTag = ANIM_TAG_PURPLE_HAND_OUTLINE,
-    .paletteTag = ANIM_TAG_ACCUPRESSURE,
+    .paletteTag = ANIM_TAG_ACUPRESSURE,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = sAnims_BasicRock,
     .images = NULL,
@@ -393,7 +393,7 @@ static void AnimStealthRockStep2(struct Sprite *sprite)
 void AnimFallingRock(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[3] != 0)
-        SetAverageBattlerPositions(gBattleAnimTarget, 0, &sprite->x, &sprite->y);
+        SetAverageBattlerPositions(gBattleAnimTarget, FALSE, &sprite->x, &sprite->y);
 
     sprite->x += gBattleAnimArgs[0];
     sprite->y += 14;
@@ -459,7 +459,7 @@ void AnimRockFragment(struct Sprite *sprite)
 void AnimParticleInVortex(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[6] == ANIM_ATTACKER)
-        InitSpritePosToAnimAttacker(sprite, 0);
+        InitSpritePosToAnimAttacker(sprite, FALSE);
     else
         InitSpritePosToAnimTarget(sprite, FALSE);
 
@@ -640,7 +640,7 @@ void AnimFlyingSandCrescent(struct Sprite *sprite)
 void AnimRaiseSprite(struct Sprite *sprite)
 {
     StartSpriteAnim(sprite, gBattleAnimArgs[4]);
-    InitSpritePosToAnimAttacker(sprite, 0);
+    InitSpritePosToAnimAttacker(sprite, FALSE);
 
     sprite->data[0] = gBattleAnimArgs[3];
     sprite->data[2] = sprite->x;
@@ -674,6 +674,54 @@ void AnimTask_Rollout(u8 taskId)
     else
         task->data[8] = 48 - (rolloutCounter * 8);
 
+    task->data[0] = 0;
+    task->data[11] = 0;
+    task->data[9] = 0;
+    task->data[12] = 1;
+
+    var5 = task->data[8];
+    if (var5 < 0)
+        var5 += 7;
+
+    task->data[10] = (var5 >> 3) - 1;
+
+    task->data[2] = var0 * 8;
+    task->data[3] = var1 * 8;
+    task->data[4] = ((var2 - var0) * 8) / task->data[8];
+    task->data[5] = ((var3 - var1) * 8) / task->data[8];
+    task->data[6] = 0;
+    task->data[7] = 0;
+
+    pan1 = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
+    pan2 = BattleAnimAdjustPanning(SOUND_PAN_TARGET);
+
+    task->data[13] = pan1;
+    task->data[14] = (pan2 - pan1) / task->data[8];
+    task->data[1] = rolloutCounter;
+    task->data[15] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
+
+    task->func = AnimTask_Rollout_Step;
+}
+
+void AnimTask_TectonicRageRollout(u8 taskId)
+{
+    u16 var0, var1, var2, var3;
+    int var5;
+    s16 pan1, pan2;
+    struct Task *task;
+    u8 rolloutCounter = 1;
+
+    task = &gTasks[taskId];
+
+    var0 = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    var1 = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + 24;
+    var2 = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+    var3 = GetBattlerSpriteCoord(gBattleAnimTarget, 1) + 24;
+
+    if (BATTLE_PARTNER(gBattleAnimAttacker) == gBattleAnimTarget)
+        var3 = var1;
+
+    task->data[8] = 48 - (rolloutCounter * 8);  //rollout speed
     task->data[0] = 0;
     task->data[11] = 0;
     task->data[9] = 0;

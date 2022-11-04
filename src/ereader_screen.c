@@ -112,7 +112,7 @@ static bool32 ValidateEReaderConnection(void)
     REG_IME = 0;
     *(u64 *)handshakes = *(u64 *)gLink.handshakeBuffer;
     REG_IME = backupIME;
-    
+
     // Validate that we are player 1, the EReader is player 2,
     // and that players 3 and 4 are empty.
     if (handshakes[0] == SLAVE_HANDSHAKE && handshakes[1] == EREADER_HANDSHAKE
@@ -154,8 +154,8 @@ enum {
 
 static u32 TryReceiveCard(u8 *state, u16 *timer)
 {
-    if (*state >= RECV_STATE_EXCHANGE 
-     && *state <= RECV_STATE_WAIT_DISCONNECT 
+    if (*state >= RECV_STATE_EXCHANGE
+     && *state <= RECV_STATE_WAIT_DISCONNECT
      && HasLinkErrorOccurred())
     {
         // Return error status if an error occurs
@@ -397,8 +397,8 @@ static void Task_EReader(u8 taskId)
         break;
     case ER_STATE_CONNECTING:
         AddTextPrinterToWindow1(gJPText_Connecting);
-        // XXX: This (u32*) cast is discarding the const qualifier from gMultiBootProgram_EReader_Start
-        EReader_Load(&gEReaderData, gMultiBootProgram_EReader_End - gMultiBootProgram_EReader_Start, (u32*)gMultiBootProgram_EReader_Start);
+        // XXX: This (u32 *) cast is discarding the const qualifier from gMultiBootProgram_EReader_Start
+        EReader_Load(&gEReaderData, gMultiBootProgram_EReader_End - gMultiBootProgram_EReader_Start, (u32 *)gMultiBootProgram_EReader_Start);
         data->state = ER_STATE_TRANSFER;
         break;
     case ER_STATE_TRANSFER:

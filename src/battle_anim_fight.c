@@ -24,7 +24,6 @@ static void AnimSuperpowerOrb_Step(struct Sprite *);
 static void AnimSuperpowerRock(struct Sprite *);
 static void AnimSuperpowerRock_Step1(struct Sprite *);
 static void AnimSuperpowerRock_Step2(struct Sprite *);
-static void AnimSuperpowerFireball(struct Sprite *);
 static void AnimArmThrustHit(struct Sprite *);
 static void AnimArmThrustHit_Step(struct Sprite *sprite);
 static void AnimFocusPunchFist(struct Sprite *);
@@ -527,7 +526,7 @@ void AnimBasicFistOrFoot(struct Sprite *sprite)
     StartSpriteAnim(sprite, gBattleAnimArgs[4]);
 
     if (gBattleAnimArgs[3] == 0)
-        InitSpritePosToAnimAttacker(sprite, 1);
+        InitSpritePosToAnimAttacker(sprite, TRUE);
     else
         InitSpritePosToAnimTarget(sprite, TRUE);
 
@@ -565,7 +564,7 @@ static void AnimFistOrFootRandomPos(struct Sprite *sprite)
     if (Random2() & 1)
         y *= -1;
 
-    if ((gBattlerPositions[battler] & BIT_SIDE) == B_SIDE_PLAYER)
+    if (GET_BATTLER_SIDE2(battler) == B_SIDE_PLAYER)
         y += 0xFFF0;
 
     sprite->x += x;
@@ -573,7 +572,7 @@ static void AnimFistOrFootRandomPos(struct Sprite *sprite)
 
     sprite->data[0] = gBattleAnimArgs[1];
     sprite->data[7] = CreateSprite(&gBasicHitSplatSpriteTemplate, sprite->x, sprite->y, sprite->subpriority + 1);
-    if (sprite->data[7] != 64)
+    if (sprite->data[7] != MAX_SPRITES)
     {
         StartSpriteAffineAnim(&gSprites[sprite->data[7]], 0);
         gSprites[sprite->data[7]].callback = SpriteCallbackDummy;
@@ -586,7 +585,7 @@ static void AnimFistOrFootRandomPos_Step(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
-        if (sprite->data[7] != 64)
+        if (sprite->data[7] != MAX_SPRITES)
         {
             FreeOamMatrix(gSprites[sprite->data[7]].oam.matrixNum);
             DestroySprite(&gSprites[sprite->data[7]]);
@@ -966,7 +965,7 @@ static void AnimSuperpowerRock_Step2(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-static void AnimSuperpowerFireball(struct Sprite *sprite)
+void AnimSuperpowerFireball(struct Sprite *sprite)
 {
     u8 battler;
 
@@ -1037,7 +1036,7 @@ static void AnimArmThrustHit(struct Sprite *sprite)
 void AnimRevengeScratch(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[2] == ANIM_ATTACKER)
-        InitSpritePosToAnimAttacker(sprite, 0);
+        InitSpritePosToAnimAttacker(sprite, FALSE);
     else
         InitSpritePosToAnimTarget(sprite, FALSE);
 

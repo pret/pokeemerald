@@ -41,7 +41,7 @@ SourceFileType GetFileType(std::string& path)
         return SourceFileType::Inc;
     else
         FATAL_ERROR("Unrecognized extension \"%s\"\n", extension.c_str());
-    
+
     // Unreachable
     return SourceFileType::Cpp;
 }
@@ -84,7 +84,7 @@ SourceFile::SourceFile(std::string path)
             else
                 incbins.insert(outputPath);
         }
-        
+
         new (&m_source_file.asm_wrapper) SourceFile::InnerUnion::AsmWrapper{incbins, includes};
     }
 }

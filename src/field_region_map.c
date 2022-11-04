@@ -92,7 +92,7 @@ static const struct WindowTemplate sFieldRegionMapWindowTemplates[] =
 void FieldInitRegionMap(MainCallback callback)
 {
     SetVBlankCallback(NULL);
-    sFieldRegionMapHandler = malloc(sizeof(*sFieldRegionMapHandler));
+    sFieldRegionMapHandler = Alloc(sizeof(*sFieldRegionMapHandler));
     sFieldRegionMapHandler->state = 0;
     sFieldRegionMapHandler->callback = callback;
     SetMainCallback2(MCB2_InitRegionMapRegisters);
@@ -150,11 +150,11 @@ static void FieldUpdateRegionMap(void)
             sFieldRegionMapHandler->state++;
             break;
         case 1:
-            DrawStdFrameWithCustomTileAndPalette(1, 0, 0x27, 0xd);
+            DrawStdFrameWithCustomTileAndPalette(1, FALSE, 0x27, 0xd);
             offset = GetStringCenterAlignXOffset(FONT_NORMAL, gText_Hoenn, 0x38);
             AddTextPrinterParameterized(1, FONT_NORMAL, gText_Hoenn, offset, 1, 0, NULL);
             ScheduleBgCopyTilemapToVram(0);
-            DrawStdFrameWithCustomTileAndPalette(0, 0, 0x27, 0xd);
+            DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x27, 0xd);
             PrintRegionMapSecName();
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             sFieldRegionMapHandler->state++;
@@ -192,10 +192,7 @@ static void FieldUpdateRegionMap(void)
             {
                 FreeRegionMapIconResources();
                 SetMainCallback2(sFieldRegionMapHandler->callback);
-                if (sFieldRegionMapHandler != NULL)
-                {
-                    FREE_AND_SET_NULL(sFieldRegionMapHandler);
-                }
+                TRY_FREE_AND_SET_NULL(sFieldRegionMapHandler);
                 FreeAllWindowBuffers();
             }
             break;

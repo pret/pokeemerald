@@ -99,6 +99,7 @@
 #define METATILE_PetalburgGym_SlidingDoor_Frame2 0x21A
 #define METATILE_PetalburgGym_SlidingDoor_Frame3 0x21B
 #define METATILE_PetalburgGym_SlidingDoor_Frame4 0x21C
+#define METATILE_PetalburgGym_Door               0x224
 
 // gTileset_MossdeepGym from R/S
 #define METATILE_RS_MossdeepGym_RedArrow_Right        0x204
@@ -128,7 +129,6 @@
 
 // gTileset_BattleFrontier
 #define METATILE_BattleFrontier_Door_Elevator           0x20E
-#define METATILE_BattleFrontier_Door_Corridor           0x224
 #define METATILE_BattleFrontier_Door_MultiCorridor      0x2AD
 #define METATILE_BattleFrontier_CorridorOpenDoor_Top    0x207
 #define METATILE_BattleFrontier_CorridorOpenDoor_Bottom 0x20F

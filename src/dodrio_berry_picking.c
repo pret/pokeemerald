@@ -323,7 +323,7 @@ static bool32 TryPickBerry(u8, u8, u8);
 static void UpdateFallingBerries(void);
 static void UpdateGame_Leader(void);
 static void UpdateGame_Member(void);
-static void GetActiveBerryColumns(u8, u8*, u8*);
+static void GetActiveBerryColumns(u8, u8 *, u8 *);
 static bool32 AllPlayersReadyToStart(void);
 static void ResetReadyToStart(void);
 static bool32 ReadyToEndGame_Leader(void);
@@ -665,7 +665,7 @@ void StartDodrioBerryPicking(u16 partyId, void (*exitCallback)(void))
 {
     sExitingGame = FALSE;
 
-    if (gReceivedRemoteLinkPlayers != 0 && (sGame = AllocZeroed(sizeof(*sGame))))
+    if (gReceivedRemoteLinkPlayers && (sGame = AllocZeroed(sizeof(*sGame))))
     {
         ResetTasksAndSprites();
         InitDodrioGame(sGame);
@@ -775,7 +775,7 @@ static void Task_StartDodrioGame(u8 taskId)
     case 3:
         if (IsLinkTaskFinished())
         {
-            if (gReceivedRemoteLinkPlayers != 0)
+            if (gReceivedRemoteLinkPlayers)
             {
                 LoadWirelessStatusIndicatorSpriteGfx();
                 CreateWirelessStatusIndicatorSprite(0, 0);
@@ -1795,7 +1795,7 @@ static void VBlankCB_DodrioGame(void)
     ProcessSpriteCopyRequests();
 }
 
-static void InitMonInfo(struct DodrioGame_MonInfo * monInfo, struct Pokemon * mon)
+static void InitMonInfo(struct DodrioGame_MonInfo * monInfo, struct Pokemon *mon)
 {
     monInfo->isShiny = IsMonShiny(mon);
 }
@@ -2879,10 +2879,10 @@ static u8 TryGivePrize(void)
     return PRIZE_RECEIVED;
 }
 
-static u32 IncrementWithLimit(u32 a, u32 max)
+static u32 IncrementWithLimit(u32 num, u32 max)
 {
-    if (a < max)
-        return a + 1;
+    if (num < max)
+        return num + 1;
     else
         return max;
 }
@@ -2988,7 +2988,7 @@ static void Task_ShowDodrioBerryPickingRecords(u8 taskId)
         {
             RemoveWindow(tWindowId);
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
         }
         break;
     }
@@ -3608,7 +3608,7 @@ static const struct OamData sOamData_Dodrio =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -3626,7 +3626,7 @@ static const struct OamData sOamData_16x16_Priority0 =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -3643,7 +3643,7 @@ static const struct OamData sOamData_Berry =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -3660,7 +3660,7 @@ static const struct OamData sOamData_Cloud =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
@@ -4546,7 +4546,7 @@ struct
 {
     u8 id;
     void (*func)(void);
-} const sGfxFuncs[] =
+} static const sGfxFuncs[] =
 {
     {GFXFUNC_LOAD,               LoadGfx}, // Element not used, LoadGfx is passed directly to SetGfxFunc
     {GFXFUNC_SHOW_NAMES,         ShowNames},
@@ -4675,7 +4675,7 @@ static void ShowNames(void)
                 ClearWindowTilemap(sGfx->windowIds[i]);
                 RemoveWindow(sGfx->windowIds[i]);
             }
-            FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 30, 20);
+            FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
             CopyBgTilemapBufferToVram(BG_INTERFACE);
             sGfx->finished = TRUE;
         }
@@ -4859,7 +4859,7 @@ static void ShowResults(void)
                 sGfx->state++;
             }
 
-            FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 5, 30, 15);
+            FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 5, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT - 5);
             RemoveWindow(sGfx->windowIds[1]);
             sGfx->windowIds[1] = AddWindow(&sWindowTemplate_Prize);
             ClearWindowTilemap(sGfx->windowIds[1]);
@@ -4917,7 +4917,7 @@ static void ShowResults(void)
         ClearWindowTilemap(sGfx->windowIds[1]);
         RemoveWindow(sGfx->windowIds[0]);
         RemoveWindow(sGfx->windowIds[1]);
-        FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 30, 20);
+        FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
         CopyBgTilemapBufferToVram(BG_INTERFACE);
         sGfx->finished = TRUE;
         break;
@@ -5012,7 +5012,7 @@ static void Msg_WantToPlayAgain(void)
         ClearWindowTilemap(sGfx->windowIds[WIN_YES_NO]);
         RemoveWindow(sGfx->windowIds[WIN_PLAY_AGAIN]);
         RemoveWindow(sGfx->windowIds[WIN_YES_NO]);
-        FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 30, 20);
+        FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
         CopyBgTilemapBufferToVram(BG_INTERFACE);
         sGfx->finished = TRUE;
         break;
@@ -5025,7 +5025,7 @@ static void Msg_SavingDontTurnOff(void)
     {
     case 0:
         DrawDialogueFrame(0, FALSE);
-        AddTextPrinterParameterized2(0, FONT_NORMAL, gText_SavingDontTurnOffPower, 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, FONT_NORMAL, gText_SavingDontTurnOffPower, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         sGfx->state++;
         break;
     case 1:
@@ -5044,7 +5044,7 @@ static void Msg_SavingDontTurnOff(void)
             sGfx->state++;
         break;
     default:
-        FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 30, 20);
+        FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
         CopyBgTilemapBufferToVram(BG_INTERFACE);
         sGfx->finished = TRUE;
         break;
@@ -5083,7 +5083,7 @@ static void EraseMessage(void)
 {
     ClearWindowTilemap(sGfx->windowIds[0]);
     RemoveWindow(sGfx->windowIds[0]);
-    FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 30, 20);
+    FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
     CopyBgTilemapBufferToVram(BG_INTERFACE);
     sGfx->finished = TRUE;
 }
@@ -5121,7 +5121,7 @@ static void Msg_SomeoneDroppedOut(void)
         sGfx->playAgainState = PLAY_AGAIN_DROPPED;
         ClearWindowTilemap(sGfx->windowIds[0]);
         RemoveWindow(sGfx->windowIds[0]);
-        FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 30, 20);
+        FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
         CopyBgTilemapBufferToVram(BG_INTERFACE);
         sGfx->finished = TRUE;
         break;

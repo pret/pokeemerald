@@ -932,7 +932,7 @@ static const struct OamData sOamData_TriangleCursor = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
@@ -944,7 +944,8 @@ static const struct OamData sOamData_TriangleCursor = {
     .affineParam = 0,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_TriangleCursor = {
+static const struct SpriteTemplate sSpriteTemplate_TriangleCursor =
+{
     .tileTag = PALTAG_TRIANGLE_CURSOR,
     .paletteTag = GFXTAG_TRIANGLE_CURSOR,
     .oam = &sOamData_TriangleCursor,
@@ -958,7 +959,7 @@ static const struct OamData sOamData_RectangleCursor = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
@@ -1005,7 +1006,8 @@ static const union AnimCmd *const sAnims_RectangleCursor[] = {
     [RECTCURSOR_ANIM_ON_LETTER] = sAnim_RectangleCursor_OnLetter,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_RectangleCursor = {
+static const struct SpriteTemplate sSpriteTemplate_RectangleCursor =
+{
     .tileTag = GFXTAG_RECTANGLE_CURSOR,
     .paletteTag = PALTAG_RECTANGLE_CURSOR,
     .oam = &sOamData_RectangleCursor,
@@ -1019,7 +1021,7 @@ static const struct OamData sOamData_ModeWindow = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
@@ -1075,7 +1077,8 @@ static const union AnimCmd *const sAnims_ModeWindow[] = {
     [MODEWINDOW_ANIM_TRANSITION]  = sAnim_ModeWindow_Transition,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_ModeWindow = {
+static const struct SpriteTemplate sSpriteTemplate_ModeWindow =
+{
     .tileTag = GFXTAG_MODE_WINDOW,
     .paletteTag = PALTAG_MISC_UI,
     .oam = &sOamData_ModeWindow,
@@ -1089,7 +1092,7 @@ static const struct OamData sOamData_ButtonWindow = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -1101,7 +1104,8 @@ static const struct OamData sOamData_ButtonWindow = {
     .affineParam = 0,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_ButtonWindow = {
+static const struct SpriteTemplate sSpriteTemplate_ButtonWindow =
+{
     .tileTag = GFXTAG_BUTTON_WINDOW,
     .paletteTag = PALTAG_MISC_UI,
     .oam = &sOamData_ButtonWindow,
@@ -1115,7 +1119,7 @@ static const struct OamData sOamData_StartSelectButton = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
     .x = 0,
@@ -1131,7 +1135,7 @@ static const struct OamData sOamData_ScrollIndicator = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -1159,7 +1163,8 @@ static const union AnimCmd *const sAnims_TwoFrame[] = {
     sAnim_Frame1,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_StartSelectButton = {
+static const struct SpriteTemplate sSpriteTemplate_StartSelectButton =
+{
     .tileTag = GFXTAG_START_SELECT_BUTTONS,
     .paletteTag = PALTAG_MISC_UI,
     .oam = &sOamData_StartSelectButton,
@@ -1169,7 +1174,8 @@ static const struct SpriteTemplate sSpriteTemplate_StartSelectButton = {
     .callback = SpriteCallbackDummy,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_ScrollIndicator = {
+static const struct SpriteTemplate sSpriteTemplate_ScrollIndicator =
+{
     .tileTag = GFXTAG_SCROLL_INDICATOR,
     .paletteTag = PALTAG_MISC_UI,
     .oam = &sOamData_ScrollIndicator,
@@ -1492,7 +1498,7 @@ void ShowEasyChatScreen(void)
         displayedPersonType = EASY_CHAT_PERSON_REPORTER_MALE;
         break;
     case EASY_CHAT_TYPE_BATTLE_TOWER_INTERVIEW:
-        words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].fanclubOpinions.words18;
+        words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].bravoTrainerTower.words;
         displayedPersonType = EASY_CHAT_PERSON_REPORTER_FEMALE;
         break;
     case EASY_CHAT_TYPE_GOOD_SAYING:
@@ -1621,7 +1627,7 @@ static bool8 InitEasyChatScreenStruct(u8 type, u16 *words, u8 displayedPersonTyp
     u8 templateId;
     int i;
 
-    sEasyChatScreen = malloc(sizeof(*sEasyChatScreen));
+    sEasyChatScreen = Alloc(sizeof(*sEasyChatScreen));
     if (sEasyChatScreen == NULL)
         return FALSE;
 
@@ -1672,8 +1678,7 @@ static bool8 InitEasyChatScreenStruct(u8 type, u16 *words, u8 displayedPersonTyp
 
 static void FreeEasyChatScreenStruct(void)
 {
-    if (sEasyChatScreen != NULL)
-        FREE_AND_SET_NULL(sEasyChatScreen);
+    TRY_FREE_AND_SET_NULL(sEasyChatScreen);
 }
 
 // Returns the function ID of the action to take as a result of player's input.
@@ -3075,8 +3080,7 @@ static bool8 LoadEasyChatScreen(void)
 
 static void FreeEasyChatScreenControl(void)
 {
-    if (sScreenControl)
-        FREE_AND_SET_NULL(sScreenControl);
+    TRY_FREE_AND_SET_NULL(sScreenControl);
 }
 
 static void StartEasyChatFunction(u16 funcId)
@@ -5573,8 +5577,7 @@ static bool8 InitEasyChatScreenWordData(void)
 
 static void FreeEasyChatScreenWordData(void)
 {
-    if (sWordData)
-        FREE_AND_SET_NULL(sWordData);
+    TRY_FREE_AND_SET_NULL(sWordData);
 }
 
 static void SetUnlockedEasyChatGroups(void)

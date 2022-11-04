@@ -5,8 +5,7 @@
 	.arm
 
 	.align 2, 0
-	.global Init
-Init:
+Init::
 	mov r0, #PSR_IRQ_MODE
 	msr cpsr_cf, r0
 	ldr sp, sp_irq
@@ -33,8 +32,7 @@ sp_irq: .word IWRAM_END - 0x60
 
 	.arm
 	.align 2, 0
-	.global IntrMain
-IntrMain:
+IntrMain::
 	mov r3, #REG_BASE
 	add r3, r3, #OFFSET_REG_IE
 	ldr r2, [r3]
