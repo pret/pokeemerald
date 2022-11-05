@@ -2989,6 +2989,7 @@ static void BattleStartClearSetData(void)
 	gBattleScripting.monCaught = FALSE;
 
     gMultiHitCounter = 0;
+    gBattleScripting.savedDmg = 0;
     gBattleOutcome = 0;
     gBattleControllerExecFlags = 0;
     gPaydayMoney = 0;
@@ -3147,7 +3148,7 @@ void SwitchInClearSetData(void)
     // Reset damage to prevent things like red card activating if the switched-in mon is holding it
     gSpecialStatuses[gActiveBattler].physicalDmg = 0;
     gSpecialStatuses[gActiveBattler].specialDmg = 0;
-    
+
     gBattleStruct->overwrittenAbilities[gActiveBattler] = ABILITY_NONE;
 
     Ai_UpdateSwitchInData(gActiveBattler);
@@ -3289,7 +3290,7 @@ void FaintClearSetData(void)
             }
         }
     }
-    
+
     // Clear Z-Move data
     gBattleStruct->zmove.active = FALSE;
     gBattleStruct->zmove.toBeUsed[gActiveBattler] = MOVE_NONE;
@@ -3953,7 +3954,8 @@ static void HandleTurnActionSelectionState(void)
             gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
 
             // Do AI score computations here so we can use them in AI_TrySwitchOrUseItem
-            if ((gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart()) && IsBattlerAIControlled(gActiveBattler)) {
+            if ((gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart())
+                && (IsBattlerAIControlled(gActiveBattler) && !(gBattleTypeFlags & BATTLE_TYPE_PALACE))) {
                 gBattleStruct->aiMoveOrAction[gActiveBattler] = ComputeBattleAiScores(gActiveBattler);
             }
             break;
@@ -4821,6 +4823,8 @@ static void TurnValuesCleanUp(bool8 var0)
 
         if (gDisableStructs[gActiveBattler].substituteHP == 0)
             gBattleMons[gActiveBattler].status2 &= ~STATUS2_SUBSTITUTE;
+
+        gSpecialStatuses[gActiveBattler].parentalBondState = PARENTAL_BOND_OFF;
     }
 
     gSideStatuses[0] &= ~(SIDE_STATUS_QUICK_GUARD | SIDE_STATUS_WIDE_GUARD | SIDE_STATUS_CRAFTY_SHIELD | SIDE_STATUS_MAT_BLOCK);

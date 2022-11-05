@@ -3403,7 +3403,6 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score += min(CountPositiveStatStages(battlerDef), 4);
         break;
     case EFFECT_MULTI_HIT:
-    case EFFECT_DOUBLE_HIT:
     case EFFECT_TRIPLE_KICK:
         if (AI_MoveMakesContact(AI_DATA->abilities[battlerAtk], AI_DATA->holdEffects[battlerAtk], move)
           && AI_DATA->abilities[battlerAtk] != ABILITY_MAGIC_GUARD
