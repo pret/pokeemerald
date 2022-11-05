@@ -8339,7 +8339,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         #else
             .accuracy = 80,
         #endif
-        .effect = EFFECT_SLEEP,
+        .effect = EFFECT_DARK_VOID,
         .power = 0,
         .type = TYPE_DARK,
         .pp = 10,

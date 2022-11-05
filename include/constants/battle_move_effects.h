@@ -392,6 +392,7 @@
 #define EFFECT_STEEL_BEAM                   386
 #define EFFECT_EXTREME_EVOBOOST             387
 #define EFFECT_DAMAGE_SET_TERRAIN           388 // genesis supernova
+#define EFFECT_DARK_VOID                    389
 
 #define NUM_BATTLE_MOVE_EFFECTS             389
 

@@ -411,6 +411,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSteelBeam               @ EFFECT_STEEL_BEAM
 	.4byte BattleScript_EffectExtremeEvoboost         @ EFFECT_EXTREME_EVOBOOST
 	.4byte BattleScript_EffectTerrainHit              @ EFFECT_DAMAGE_SET_TERRAIN
+	.4byte BattleScript_EffectDarkVoid                @ EFFECT_DARK_VOID
 
 BattleScript_AffectionBasedEndurance::
 	playanimation BS_TARGET, B_ANIM_AFFECTION_HANGED_ON
@@ -775,9 +776,7 @@ BattleScript_EffectPhotonGeyser:
 BattleScript_EffectAuraWheel: @ Aura Wheel can only be used by Morpeko
 	jumpifspecies BS_ATTACKER, SPECIES_MORPEKO, BattleScript_EffectSpeedUpHit
 	jumpifspecies BS_ATTACKER, SPECIES_MORPEKO_HANGRY, BattleScript_EffectSpeedUpHit
-	printstring STRINGID_BUTPOKEMONCANTUSETHEMOVE
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_MoveEnd
+	goto BattleScript_PokemonCantUseTheMove
 
 BattleScript_EffectClangorousSoul:
 	attackcanceler
@@ -889,9 +888,7 @@ BattleScript_BothCanNoLongerEscape::
 BattleScript_EffectHyperspaceFury:
 	jumpifspecies BS_ATTACKER, SPECIES_HOOPA_UNBOUND, BattleScript_EffectHyperspaceFuryUnbound
 	jumpifspecies BS_ATTACKER, SPECIES_HOOPA, BattleScript_ButHoopaCantUseIt
-	printstring STRINGID_BUTPOKEMONCANTUSETHEMOVE
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_MoveEnd
+	goto BattleScript_PokemonCantUseTheMove
 
 BattleScript_EffectHyperspaceFuryUnbound::
 	attackcanceler
@@ -3023,6 +3020,11 @@ BattleScript_MoveMissed::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectDarkVoid::
+.if B_DARK_VOID_FAIL >= GEN_7
+	jumpifspecies BS_ATTACKER, SPECIES_DARKRAI, BattleScript_EffectSleep
+	goto BattleScript_PokemonCantUseTheMove
+.endif
 BattleScript_EffectSleep::
 	attackcanceler
 	attackstring
@@ -9790,3 +9792,11 @@ BattleScript_TargetAbilityStatRaiseRet::
 	call BattleScript_StatUp
 BattleScript_TargetAbilityStatRaiseRet_End:
 	return
+
+BattleScript_PokemonCantUseTheMove::
+	attackstring
+	ppreduce
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_BUTPOKEMONCANTUSETHEMOVE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
