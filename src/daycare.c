@@ -20,6 +20,7 @@
 #include "list_menu.h"
 #include "overworld.h"
 #include "item.h"
+#include "constants/form_change_types.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"

@@ -313,25 +313,6 @@
 #define EVO_MODE_BATTLE_SPECIAL    4
 #define EVO_MODE_OVERWORLD_SPECIAL 5
 
-// Form change types
-#define FORM_CHANGE_END                 0 // Form table terminator
-#define FORM_CHANGE_ITEM_HOLD           1
-#define FORM_CHANGE_ITEM_USE            2
-#define FORM_CHANGE_MOVE                3 // Todo
-#define FORM_CHANGE_WITHDRAW            4 // Daycare done, Todo PC
-#define FORM_CHANGE_FAINT               5
-#define FORM_CHANGE_BATTLE_BEGIN        6
-#define FORM_CHANGE_BATTLE_END          7
-#define FORM_CHANGE_BATTLE_SWITCH       8
-#define FORM_CHANGE_BATTLE_HP_PERCENT   9
-#define FORM_CHANGE_MEGA_EVOLUTION_ITEM 10
-#define FORM_CHANGE_MEGA_EVOLUTION_MOVE 11
-#define FORM_CHANGE_PRIMAL_REVERSION    12
-
-// FORM_CHANGE_BATTLE_HP_PERCENT param2 arguments
-#define HP_HIGHER_THAN      1
-#define HP_LOWER_EQ_THAN    2
-
 #define MON_PIC_WIDTH 64
 #define MON_PIC_HEIGHT 64
 #define MON_PIC_SIZE (MON_PIC_WIDTH * MON_PIC_HEIGHT / 2)

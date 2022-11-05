@@ -66,6 +66,7 @@
 #include "constants/battle.h"
 #include "constants/battle_frontier.h"
 #include "constants/field_effects.h"
+#include "constants/form_change_types.h"
 #include "constants/item_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
