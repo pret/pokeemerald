@@ -8800,10 +8800,10 @@ static void Cmd_various(void)
         if (gBattlescriptCurrInstr[3] == 0)
         {
             //Checks regular Mega Evolution
-            u16 megaSpecies = GetMegaEvolutionSpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].item);
+            u16 megaSpecies = GetBattleFormChangeTargetSpecies(gActiveBattler, FORM_CHANGE_MEGA_EVOLUTION_ITEM);
             //Checks Wish Mega Evolution
             if (megaSpecies == SPECIES_NONE)
-                megaSpecies = GetWishMegaEvolutionSpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].moves[0], gBattleMons[gActiveBattler].moves[1], gBattleMons[gActiveBattler].moves[2], gBattleMons[gActiveBattler].moves[3]);
+                megaSpecies = GetBattleFormChangeTargetSpecies(gActiveBattler, FORM_CHANGE_MEGA_EVOLUTION_MOVE);
 
             gBattleMons[gActiveBattler].species = megaSpecies;
             PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].species);
@@ -8836,7 +8836,7 @@ static void Cmd_various(void)
         // Change species.
         if (gBattlescriptCurrInstr[3] == 0)
         {
-            gBattleMons[gActiveBattler].species = GetPrimalReversionSpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].item);
+            gBattleMons[gActiveBattler].species = GetBattleFormChangeTargetSpecies(gActiveBattler, FORM_CHANGE_PRIMAL_REVERSION);
             PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].species);
 
             BtlController_EmitSetMonData(BUFFER_A, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[gActiveBattler]], sizeof(gBattleMons[gActiveBattler].species), &gBattleMons[gActiveBattler].species);
@@ -9561,7 +9561,7 @@ static void Cmd_various(void)
         return;
     case VARIOUS_JUMP_IF_CANT_REVERT_TO_PRIMAL:
     {
-        if (GetPrimalReversionSpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].item) == SPECIES_NONE)
+        if (GetBattleFormChangeTargetSpecies(gActiveBattler, FORM_CHANGE_PRIMAL_REVERSION) == SPECIES_NONE)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         else
             gBattlescriptCurrInstr += 7;

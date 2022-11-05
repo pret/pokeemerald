@@ -3999,13 +3999,14 @@ void CalculateMonStats(struct Pokemon *mon)
     {
         if (currentHP == 0 && oldMaxHP == 0)
             currentHP = newMaxHP;
-        else if (currentHP != 0) {
-            // BUG: currentHP is unintentionally able to become <= 0 after the instruction below. This causes the pomeg berry glitch.
-            currentHP += newMaxHP - oldMaxHP;
-            #ifdef BUGFIX
+        else if (currentHP != 0)
+        {
+            if (newMaxHP > oldMaxHP)
+                currentHP += newMaxHP - oldMaxHP;
             if (currentHP <= 0)
                 currentHP = 1;
-            #endif
+            if (currentHP > newMaxHP)
+                currentHP = newMaxHP;
         }
         else
             return;
@@ -8397,13 +8398,8 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
                 case FORM_CHANGE_BATTLE_END:
                     if (heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
                         targetSpecies = formChanges[i].targetSpecies;
-                    break;
-                case FORM_CHANGE_PRIMAL_REVERSION:
-                    if (arg == formChanges[i].param1)
-                        targetSpecies = formChanges[i].targetSpecies;
-                    break;
+                    break;  
                 case FORM_CHANGE_WITHDRAW:
-                case FORM_CHANGE_BATTLE_SWITCH:
                 case FORM_CHANGE_FAINT:
                     targetSpecies = formChanges[i].targetSpecies;
                     break;
@@ -8413,6 +8409,23 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
     }
 
     return targetSpecies;
+}
+
+bool32 DoesSpeciesHaveFormChangeMethod(u16 species, u16 method)
+{
+    u32 i, j;
+    const struct FormChange *formChanges = gFormChangeTablePointers[species];
+
+    if (formChanges != NULL)
+    {
+        for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
+        {
+            if (method == formChanges[i].method && species != formChanges[i].targetSpecies)
+                return TRUE;
+        }
+    }
+
+    return FALSE;
 }
 
 u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove)
@@ -8495,12 +8508,21 @@ bool32 ShouldShowFemaleDifferences(u16 species, u32 personality)
     return (gBaseStats[species].flags & SPECIES_FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
 }
 
+// Returns species that it transformed into. If it didn't, returns SPECIES_NONE.
 bool32 TryFormChange(u32 monId, u32 side, u16 method)
 {
-    u32 targetSpecies;
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    u16 targetSpecies;
+
+    if (GetMonData(&party[monId], MON_DATA_SPECIES2, 0) == SPECIES_NONE
+     || GetMonData(&party[monId], MON_DATA_SPECIES2, 0) == SPECIES_EGG)
+        return FALSE;
 
     targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
+
+    if (targetSpecies == SPECIES_NONE)
+        targetSpecies = gBattleStruct->changedSpecies[monId];
+
     if (targetSpecies != SPECIES_NONE)
     {
         TryToSetBattleFormChangeMoves(&party[monId], method);
@@ -8508,6 +8530,7 @@ bool32 TryFormChange(u32 monId, u32 side, u16 method)
         CalculateMonStats(&party[monId]);
         return TRUE;
     }
+
     return FALSE;
 }
 

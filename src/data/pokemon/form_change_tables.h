@@ -24,6 +24,8 @@ FORM_CHANGE_WITHDRAW:
 
 FORM_CHANGE_FAINT:
     Form change activates when the Pokémon faints, either in battle or in the overworld by poison.
+    If species is not specified and it's on the player's side, it will try to use the value
+    saved in gBattleStruct->changedSpecies from a previous form change.
     No parameters.
 
 FORM_CHANGE_BATTLE_BEGIN:
@@ -33,7 +35,8 @@ FORM_CHANGE_BATTLE_BEGIN:
     param3 = a new move to replace it with, optional
 
 FORM_CHANGE_BATTLE_END:
-    Form change activates at the end of a battle
+    Form change activates at the end of a battle. If species is not specified and it's on the player's side,
+    it will try to use the value saved in gBattleStruct->changedSpecies from a previous form change.
     param1 = item to hold, optional
     param2 = a move that will be replaced, optional
     param3 = a new move to replace it with, optional
@@ -42,10 +45,27 @@ FORM_CHANGE_BATTLE_SWITCH:
     Form change activates when the Pokémon is switched out in battle.
     No parameters.
 
+FORM_CHANGE_BATTLE_HP_PERCENT:
+    Form change activates when the Pokémon's HP % passes a certain threshold.
+    param1 = Ability to check.
+    param2 = HP_HIGHER_THAN if the form triggers when the current HP is higher than the specified threshold.
+             HP_LOWER_EQ_THAN if the form triggers when the current HP is lower or equal than the specified threshold.
+    param3 = HP percentage threshold.
+
+FORM_CHANGE_MEGA_EVOLUTION_ITEM:
+    Form change activates when the mon has the defined item. If it's on the player's side, it also requires
+    ITEM_MEGA_RING in the user's bag and for the player to choose to enable it.
+    param1 = item to hold.
+
+FORM_CHANGE_MEGA_EVOLUTION_MOVE:
+    Form change activates when the mon has the defined move. If it's on the player's side, it also requires
+    ITEM_MEGA_RING in the user's bag and for the player to choose to enable it.
+    param1 = move to have.
+
 FORM_CHANGE_PRIMAL_REVERSION:
-    Form change activates when entering battle with the specified item. If the item is a Red Orb,
+    Form change activates automatically when entering battle with the specified item. If the item is a Red Orb,
     it uses the Omega Symbol for the animation and icon. Otherwise, it defaults to Alpha.
-    param1 = item to hold, required.
+    param1 = item to hold.
 */
 
 // FORM_CHANGE_MOVE param2 Arguments
@@ -440,16 +460,18 @@ static const struct FormChange sAudinoFormChangeTable[] = {
 };
 
 static const struct FormChange sDarmanitanFormChangeTable[] = {
-    {FORM_CHANGE_BATTLE_SWITCH, SPECIES_DARMANITAN},
-    {FORM_CHANGE_FAINT,         SPECIES_DARMANITAN},
-    {FORM_CHANGE_BATTLE_END,    SPECIES_DARMANITAN},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_DARMANITAN,          ABILITY_ZEN_MODE, HP_HIGHER_THAN,   50},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_DARMANITAN_ZEN_MODE, ABILITY_ZEN_MODE, HP_LOWER_EQ_THAN, 50},
+    {FORM_CHANGE_FAINT,             SPECIES_DARMANITAN},
+    {FORM_CHANGE_BATTLE_END,        SPECIES_DARMANITAN},
     {FORM_CHANGE_END},
 };
 
 static const struct FormChange sDarmanitanGalarianFormChangeTable[] = {
-    {FORM_CHANGE_BATTLE_SWITCH, SPECIES_DARMANITAN_GALARIAN},
-    {FORM_CHANGE_FAINT,         SPECIES_DARMANITAN_GALARIAN},
-    {FORM_CHANGE_BATTLE_END,    SPECIES_DARMANITAN_GALARIAN},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_DARMANITAN_GALARIAN,          ABILITY_ZEN_MODE, HP_HIGHER_THAN,   50},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_DARMANITAN_ZEN_MODE_GALARIAN, ABILITY_ZEN_MODE, HP_LOWER_EQ_THAN, 50},
+    {FORM_CHANGE_FAINT,             SPECIES_DARMANITAN_GALARIAN},
+    {FORM_CHANGE_BATTLE_END,        SPECIES_DARMANITAN_GALARIAN},
     {FORM_CHANGE_END},
 };
 
@@ -513,6 +535,13 @@ static const struct FormChange sXerneasFormChangeTable[] = {
     {FORM_CHANGE_END},
 };
 
+static const struct FormChange sZygardePowerConstructFormChangeTable[] = {
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_ZYGARDE_COMPLETE, ABILITY_POWER_CONSTRUCT, HP_LOWER_EQ_THAN, 50},
+    {FORM_CHANGE_FAINT},
+    {FORM_CHANGE_BATTLE_END},
+    {FORM_CHANGE_END},
+};
+
 static const struct FormChange sDiancieFormChangeTable[] = {
     {FORM_CHANGE_MEGA_EVOLUTION_ITEM,   SPECIES_DIANCIE_MEGA, ITEM_DIANCITE},
     {FORM_CHANGE_FAINT,                 SPECIES_DIANCIE},
@@ -536,9 +565,11 @@ static const struct FormChange sOricorioFormChangeTable[] = {
     {FORM_CHANGE_END},
 };
 static const struct FormChange sWishiwashiFormChangeTable[] = {
-    {FORM_CHANGE_BATTLE_SWITCH, SPECIES_WISHIWASHI},
-    {FORM_CHANGE_FAINT,         SPECIES_WISHIWASHI},
-    {FORM_CHANGE_BATTLE_END,    SPECIES_WISHIWASHI},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_WISHIWASHI_SCHOOL, ABILITY_SCHOOLING, HP_HIGHER_THAN,   25},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_WISHIWASHI,        ABILITY_SCHOOLING, HP_LOWER_EQ_THAN, 25},
+    {FORM_CHANGE_BATTLE_SWITCH,     SPECIES_WISHIWASHI},
+    {FORM_CHANGE_FAINT,             SPECIES_WISHIWASHI},
+    {FORM_CHANGE_BATTLE_END,        SPECIES_WISHIWASHI},
     {FORM_CHANGE_END},
 };
 
@@ -571,55 +602,70 @@ static const struct FormChange sMimikyuFormChangeTable[] = {
 };
 
 static const struct FormChange sMiniorRedFormChangeTable[] = {
-    {FORM_CHANGE_BATTLE_SWITCH, SPECIES_MINIOR_CORE_RED},
-    {FORM_CHANGE_FAINT,         SPECIES_MINIOR_CORE_RED},
-    {FORM_CHANGE_BATTLE_END,    SPECIES_MINIOR_CORE_RED},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_MINIOR,          ABILITY_SHIELDS_DOWN, HP_HIGHER_THAN,   50},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_MINIOR_CORE_RED, ABILITY_SHIELDS_DOWN, HP_LOWER_EQ_THAN, 50},
+    {FORM_CHANGE_BATTLE_SWITCH,     SPECIES_MINIOR_CORE_RED},
+    {FORM_CHANGE_FAINT,             SPECIES_MINIOR_CORE_RED},
+    {FORM_CHANGE_BATTLE_END,        SPECIES_MINIOR_CORE_RED},
     {FORM_CHANGE_END},
 };
 static const struct FormChange sMiniorBlueFormChangeTable[] = {
-    {FORM_CHANGE_BATTLE_SWITCH, SPECIES_MINIOR_CORE_BLUE},
-    {FORM_CHANGE_FAINT,         SPECIES_MINIOR_CORE_BLUE},
-    {FORM_CHANGE_BATTLE_END,    SPECIES_MINIOR_CORE_BLUE},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_MINIOR_METEOR_BLUE, ABILITY_SHIELDS_DOWN, HP_HIGHER_THAN,   50},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_MINIOR_CORE_BLUE,   ABILITY_SHIELDS_DOWN, HP_LOWER_EQ_THAN, 50},
+    {FORM_CHANGE_BATTLE_SWITCH,     SPECIES_MINIOR_CORE_BLUE},
+    {FORM_CHANGE_FAINT,             SPECIES_MINIOR_CORE_BLUE},
+    {FORM_CHANGE_BATTLE_END,        SPECIES_MINIOR_CORE_BLUE},
     {FORM_CHANGE_END},
 };
 static const struct FormChange sMiniorGreenFormChangeTable[] = {
-    {FORM_CHANGE_BATTLE_SWITCH, SPECIES_MINIOR_CORE_GREEN},
-    {FORM_CHANGE_FAINT,         SPECIES_MINIOR_CORE_GREEN},
-    {FORM_CHANGE_BATTLE_END,    SPECIES_MINIOR_CORE_GREEN},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_MINIOR_METEOR_GREEN, ABILITY_SHIELDS_DOWN, HP_HIGHER_THAN,   50},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_MINIOR_CORE_GREEN,   ABILITY_SHIELDS_DOWN, HP_LOWER_EQ_THAN, 50},
+    {FORM_CHANGE_BATTLE_SWITCH,     SPECIES_MINIOR_CORE_GREEN},
+    {FORM_CHANGE_FAINT,             SPECIES_MINIOR_CORE_GREEN},
+    {FORM_CHANGE_BATTLE_END,        SPECIES_MINIOR_CORE_GREEN},
     {FORM_CHANGE_END},
 };
 static const struct FormChange sMiniorIndigoFormChangeTable[] = {
-    {FORM_CHANGE_BATTLE_SWITCH, SPECIES_MINIOR_CORE_INDIGO},
-    {FORM_CHANGE_FAINT,         SPECIES_MINIOR_CORE_INDIGO},
-    {FORM_CHANGE_BATTLE_END,    SPECIES_MINIOR_CORE_INDIGO},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_MINIOR_METEOR_INDIGO, ABILITY_SHIELDS_DOWN, HP_HIGHER_THAN,   50},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_MINIOR_CORE_INDIGO,   ABILITY_SHIELDS_DOWN, HP_LOWER_EQ_THAN, 50},
+    {FORM_CHANGE_BATTLE_SWITCH,     SPECIES_MINIOR_CORE_INDIGO},
+    {FORM_CHANGE_FAINT,             SPECIES_MINIOR_CORE_INDIGO},
+    {FORM_CHANGE_BATTLE_END,        SPECIES_MINIOR_CORE_INDIGO},
     {FORM_CHANGE_END},
 };
 static const struct FormChange sMiniorOrangeFormChangeTable[] = {
-    {FORM_CHANGE_BATTLE_SWITCH, SPECIES_MINIOR_CORE_ORANGE},
-    {FORM_CHANGE_FAINT,         SPECIES_MINIOR_CORE_ORANGE},
-    {FORM_CHANGE_BATTLE_END,    SPECIES_MINIOR_CORE_ORANGE},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_MINIOR_METEOR_ORANGE, ABILITY_SHIELDS_DOWN, HP_HIGHER_THAN,   50},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_MINIOR_CORE_ORANGE,   ABILITY_SHIELDS_DOWN, HP_LOWER_EQ_THAN, 50},
+    {FORM_CHANGE_BATTLE_SWITCH,     SPECIES_MINIOR_CORE_ORANGE},
+    {FORM_CHANGE_FAINT,             SPECIES_MINIOR_CORE_ORANGE},
+    {FORM_CHANGE_BATTLE_END,        SPECIES_MINIOR_CORE_ORANGE},
     {FORM_CHANGE_END},
 };
 static const struct FormChange sMiniorVioletFormChangeTable[] = {
-    {FORM_CHANGE_BATTLE_SWITCH, SPECIES_MINIOR_CORE_VIOLET},
-    {FORM_CHANGE_FAINT,         SPECIES_MINIOR_CORE_VIOLET},
-    {FORM_CHANGE_BATTLE_END,    SPECIES_MINIOR_CORE_VIOLET},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_MINIOR_METEOR_VIOLET, ABILITY_SHIELDS_DOWN, HP_HIGHER_THAN,   50},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_MINIOR_CORE_VIOLET,   ABILITY_SHIELDS_DOWN, HP_LOWER_EQ_THAN, 50},
+    {FORM_CHANGE_BATTLE_SWITCH,     SPECIES_MINIOR_CORE_VIOLET},
+    {FORM_CHANGE_FAINT,             SPECIES_MINIOR_CORE_VIOLET},
+    {FORM_CHANGE_BATTLE_END,        SPECIES_MINIOR_CORE_VIOLET},
     {FORM_CHANGE_END},
 };
 static const struct FormChange sMiniorYellowFormChangeTable[] = {
-    {FORM_CHANGE_BATTLE_SWITCH, SPECIES_MINIOR_CORE_YELLOW},
-    {FORM_CHANGE_FAINT,         SPECIES_MINIOR_CORE_YELLOW},
-    {FORM_CHANGE_BATTLE_END,    SPECIES_MINIOR_CORE_YELLOW},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_MINIOR_METEOR_YELLOW, ABILITY_SHIELDS_DOWN, HP_HIGHER_THAN,   50},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_MINIOR_CORE_YELLOW,   ABILITY_SHIELDS_DOWN, HP_LOWER_EQ_THAN, 50},
+    {FORM_CHANGE_BATTLE_SWITCH,     SPECIES_MINIOR_CORE_YELLOW},
+    {FORM_CHANGE_FAINT,             SPECIES_MINIOR_CORE_YELLOW},
+    {FORM_CHANGE_BATTLE_END,        SPECIES_MINIOR_CORE_YELLOW},
     {FORM_CHANGE_END},
 };
-
 #endif
 
 #if P_GEN_8_POKEMON == TRUE
 static const struct FormChange sCramorantFormChangeTable[] = {
-    {FORM_CHANGE_BATTLE_SWITCH, SPECIES_CRAMORANT},
-    {FORM_CHANGE_FAINT,         SPECIES_CRAMORANT},
-    {FORM_CHANGE_BATTLE_END,    SPECIES_CRAMORANT},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_CRAMORANT_GULPING, ABILITY_GULP_MISSILE, HP_HIGHER_THAN,   50},
+    {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_CRAMORANT_GORGING, ABILITY_GULP_MISSILE, HP_LOWER_EQ_THAN, 50},
+    {FORM_CHANGE_BATTLE_SWITCH,     SPECIES_CRAMORANT},
+    {FORM_CHANGE_FAINT,             SPECIES_CRAMORANT},
+    {FORM_CHANGE_BATTLE_END,        SPECIES_CRAMORANT},
     {FORM_CHANGE_END},
 };
 

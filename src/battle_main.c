@@ -3248,8 +3248,6 @@ void FaintClearSetData(void)
 
     Ai_UpdateFaintData(gActiveBattler);
     TryBattleFormChange(gActiveBattler, FORM_CHANGE_FAINT);
-    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-        UndoMegaEvolution(gBattlerPartyIndexes[gActiveBattler]);
 
     gBattleStruct->overwrittenAbilities[gActiveBattler] = ABILITY_NONE;
 
@@ -3683,7 +3681,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     for (i = 0; i < gBattlersCount; i++)
     {
         if (GetBattlerHoldEffect(i, TRUE) == HOLD_EFFECT_PRIMAL_ORB
-            && GetPrimalReversionSpecies(gBattleMons[i].species, gBattleMons[i].item) != SPECIES_NONE)
+            && GetBattleFormChangeTargetSpecies(i, FORM_CHANGE_PRIMAL_REVERSION) != SPECIES_NONE)
         {
             gBattlerAttacker = i;
             BattleScriptExecute(BattleScript_PrimalReversion);
@@ -5200,16 +5198,15 @@ static void HandleEndTurn_FinishBattle(void)
     #endif
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            UndoMegaEvolution(i);
-            TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_BATTLE_END);
+            bool32 changedForm = TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_BATTLE_END);
             DoBurmyFormChange(i);
+            // Clear original species field
+            gBattleStruct->changedSpecies[i] = SPECIES_NONE;
+
         #if B_RECALCULATE_STATS >= GEN_5
             // Recalculate the stats of every party member before the end
-            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
-             && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
-            {
+            if (!changedForm)
                 CalculateMonStats(&gPlayerParty[i]);
-            }
         #endif
         }
         // Clear battle mon species to avoid a bug on the next battle that causes

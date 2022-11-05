@@ -256,7 +256,8 @@ static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
     BoxMonToMon(&daycareMon->mon, &pokemon);
 
     newSpecies = GetFormChangeTargetSpecies(&pokemon, FORM_CHANGE_WITHDRAW, 0);
-    if (newSpecies != SPECIES_NONE) {
+    if (newSpecies != SPECIES_NONE)
+    {
         SetMonData(&pokemon, MON_DATA_SPECIES, &newSpecies);
         CalculateMonStats(&pokemon);
         species = newSpecies;

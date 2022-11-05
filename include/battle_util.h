@@ -144,14 +144,12 @@ u16 CalcTypeEffectivenessMultiplier(u16 move, u8 moveType, u8 battlerAtk, u8 bat
 u16 CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilityDef);
 u16 GetTypeModifier(u8 atkType, u8 defType);
 s32 GetStealthHazardDamage(u8 hazardType, u8 battlerId);
-u16 GetMegaEvolutionSpecies(u16 preEvoSpecies, u16 heldItemId);
-u16 GetPrimalReversionSpecies(u16 preSpecies, u16 heldItemId);
-u16 GetWishMegaEvolutionSpecies(u16 preEvoSpecies, u16 moveId1, u16 moveId2, u16 moveId3, u16 moveId4);
+bool32 DoesSpeciesUseHoldItemToChangeForm(u16 species, u16 heldItemId);
 bool32 CanMegaEvolve(u8 battlerId);
-void UndoMegaEvolution(u32 monId);
 bool32 IsBattlerMegaEvolved(u8 battlerId);
 bool32 IsBattlerPrimalReverted(u8 battlerId);
-void TryBattleFormChange(u8 battlerId, u16 method);
+u16 GetBattleFormChangeTargetSpecies(u8 battlerId, u16 method);
+bool32 TryBattleFormChange(u8 battlerId, u16 method);
 bool32 DoBattlersShareType(u32 battler1, u32 battler2);
 bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId);
 struct Pokemon *GetIllusionMonPtr(u32 battlerId);
