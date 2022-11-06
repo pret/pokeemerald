@@ -5202,8 +5202,15 @@ static void HandleEndTurn_FinishBattle(void)
     #endif
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            bool32 changedForm = TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_END_BATTLE);
-            DoBurmyFormChange(i);
+            bool32 changedForm = FALSE;
+
+            // Appeared in battle and didn't faint
+            if ((gBattleStruct->appearedInBattle & gBitTable[i]) && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0)
+                changedForm = TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_END_BATTLE_TERRAIN);
+
+            if (!changedForm)
+                changedForm = TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_END_BATTLE);
+
             // Clear original species field
             gBattleStruct->changedSpecies[i] = SPECIES_NONE;
 
@@ -5215,7 +5222,7 @@ static void HandleEndTurn_FinishBattle(void)
         }
         // Clear battle mon species to avoid a bug on the next battle that causes
         // healthboxes loading incorrectly due to it trying to create a Mega Indicator
-        // if the previous battler would've had.
+        // if the previous battler would've had it.
         for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
             gBattleMons[i].species = SPECIES_NONE;

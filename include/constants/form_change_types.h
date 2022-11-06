@@ -53,9 +53,13 @@
 // param3: a new move to replace it with, optional
 #define FORM_CHANGE_END_BATTLE                  7
 
+// Form change that activates at the end of a battle based on the terrain if it participated in the battle and hasn't fainted. Takes priority over FORM_CHANGE_END_BATTLE.
+// param1: battle terrain to check.
+#define FORM_CHANGE_END_BATTLE_TERRAIN          8
+
 // Form change that activates when the Pokémon is switched out in battle.
 // - No parameters.
-#define FORM_CHANGE_BATTLE_SWITCH               8
+#define FORM_CHANGE_BATTLE_SWITCH               9
 
 // Form change that activates when the Pokémon's HP % passes a certain threshold.
 // param1: Ability to check.
@@ -63,19 +67,19 @@
 // - HP_HIGHER_THAN if the form triggers when the current HP is higher than the specified threshold.
 // - HP_LOWER_EQ_THAN if the form triggers when the current HP is lower or equal than the specified threshold.
 // param3: HP percentage threshold.
-#define FORM_CHANGE_BATTLE_HP_PERCENT           9
+#define FORM_CHANGE_BATTLE_HP_PERCENT           10
 
 // Form change that activates when the mon has the defined item.
 // If it's on the player's side, it also requires ITEM_MEGA_RING in the user's bag and for the player to trigger it by pressing START before selecting a move.
 // param1: item to hold.
-#define FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM  10
+#define FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM  11
 
 // Form change that activates when the mon has the defined move.
 // If it's on the player's side, it also requires ITEM_MEGA_RING in the user's bag and for the player to trigger it by pressing START before selecting a move.
 // param1: move to have.
-#define FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE  11
+#define FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE  12
 
 // Form change that activates automatically when entering battle with the specified item.
 // If the item is a Red Orb, it uses the Omega Symbol for the animation and icon. Otherwise, it defaults to the Alpha symbol.
 // param1: item to hold.
-#define FORM_CHANGE_BATTLE_PRIMAL_REVERSION     12
+#define FORM_CHANGE_BATTLE_PRIMAL_REVERSION     13
