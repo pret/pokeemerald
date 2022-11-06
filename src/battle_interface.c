@@ -1560,12 +1560,12 @@ u32 CreateMegaIndicatorSprite(u32 battlerId, u32 which)
     }
     else if (IsBattlerPrimalReverted(battlerId))
     {
-        if (gBattleMons[battlerId].item == ITEM_RED_ORB)
+        if (gBattleMons[battlerId].species == SPECIES_GROUDON_PRIMAL)
         {
             LoadSpritePalette(&sSpritePalette_OmegaIndicator);
             LoadSpriteSheet(&sSpriteSheet_OmegaIndicator);
         }
-        else // ITEM_BLUE_ORB
+        else // SPECIES_KYOGRE_PRIMAL
         {
             LoadSpritePalette(&sSpritePalette_AlphaIndicator);
             LoadSpriteSheet(&sSpriteSheet_AlphaIndicator);
@@ -1589,9 +1589,9 @@ u32 CreateMegaIndicatorSprite(u32 battlerId, u32 which)
     }
     else if (IsBattlerPrimalReverted(battlerId))
     {
-        if (gBattleMons[battlerId].item == ITEM_RED_ORB)
+        if (gBattleMons[battlerId].species == SPECIES_GROUDON_PRIMAL)
             spriteId = CreateSpriteAtEnd(&sSpriteTemplate_OmegaIndicator, x, y, 0);
-        else // ITEM_BLUE_ORB
+        else // SPECIES_KYOGRE_PRIMAL
             spriteId = CreateSpriteAtEnd(&sSpriteTemplate_AlphaIndicator, x, y, 0);
     }
 
