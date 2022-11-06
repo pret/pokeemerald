@@ -602,9 +602,9 @@ static void CB2_InitBattleInternal(void)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         // Player's side
-        TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_BATTLE_BEGIN);
+        TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_BEGIN_BATTLE);
         // Opponent's side
-        TryFormChange(i, B_SIDE_OPPONENT, FORM_CHANGE_BATTLE_BEGIN);
+        TryFormChange(i, B_SIDE_OPPONENT, FORM_CHANGE_BEGIN_BATTLE);
     }
 
     gBattleCommunication[MULTIUSE_STATE] = 0;
@@ -3682,7 +3682,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     for (i = 0; i < gBattlersCount; i++)
     {
         if (GetBattlerHoldEffect(i, TRUE) == HOLD_EFFECT_PRIMAL_ORB
-            && GetBattleFormChangeTargetSpecies(i, FORM_CHANGE_PRIMAL_REVERSION) != SPECIES_NONE)
+            && GetBattleFormChangeTargetSpecies(i, FORM_CHANGE_BATTLE_PRIMAL_REVERSION) != SPECIES_NONE)
         {
             gBattlerAttacker = i;
             BattleScriptExecute(BattleScript_PrimalReversion);
@@ -5202,7 +5202,7 @@ static void HandleEndTurn_FinishBattle(void)
     #endif
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            bool32 changedForm = TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_BATTLE_END);
+            bool32 changedForm = TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_END_BATTLE);
             DoBurmyFormChange(i);
             // Clear original species field
             gBattleStruct->changedSpecies[i] = SPECIES_NONE;

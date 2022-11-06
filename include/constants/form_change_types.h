@@ -9,53 +9,53 @@
 #define DAY    1
 #define NIGHT  2
 
-#define FORM_CHANGE_END                 0 // Form table terminator
+#define FORM_CHANGE_TERMINATOR                  0
 
 // Form change that activates when the specified item is given to or taken from the selected Pokémon.
 // param1: item to hold.
 // param2: ability to check for, optional.
-#define FORM_CHANGE_ITEM_HOLD           1
+#define FORM_CHANGE_ITEM_HOLD                   1
 
 // Form change that activates when the item is used on the selected Pokémon.
 // param1: item to use
 // param2: time of day to check, optional.
 // - DAY if Form change that activates in the daytime.
 // - NIGHT if Form change that activates at nighttime.
-#define FORM_CHANGE_ITEM_USE            2
+#define FORM_CHANGE_ITEM_USE                    2
 
 // TODO: Form change that activates when the Pokémon learns or forgets the move.
 // param1: move to check for
 // param2:
 // - WHEN_LEARNED if Form change that activates when move is forgotten
 // - WHEN_FORGOTTEN if Form change that activates when move is learned
-#define FORM_CHANGE_MOVE                3
+#define FORM_CHANGE_MOVE                        3
 
 // Form change that activates when the Pokémon is withdrawn from the PC or Daycare.
 // Daycare withdraw done, PC withdraw TODO.
 // - No parameters.
-#define FORM_CHANGE_WITHDRAW            4
+#define FORM_CHANGE_WITHDRAW                    4
 
 // Form change that activates when the Pokémon faints, either in battle or in the overworld by poison.
 // If species is not specified and it's on the player's side, it will try to use the value
 // saved in gBattleStruct->changedSpecies from a previous form change.
 // - No parameters.
-#define FORM_CHANGE_FAINT               5
+#define FORM_CHANGE_FAINT                       5
 
 // Form change that activates when the Pokémon is sent out at the beginning of a battle
 // param1: item to hold, optional
 // param2: a move that will be replaced, optional
 // param3: a new move to replace it with, optional
-#define FORM_CHANGE_BATTLE_BEGIN        6
+#define FORM_CHANGE_BEGIN_BATTLE                6
 
 // Form change that activates at the end of a battle. If species is not specified and it's on the player's side, it will try to use the value saved in gBattleStruct->changedSpecies from a previous form change.
 // param1: item to hold, optional
 // param2: a move that will be replaced, optional
 // param3: a new move to replace it with, optional
-#define FORM_CHANGE_BATTLE_END          7
+#define FORM_CHANGE_END_BATTLE                  7
 
 // Form change that activates when the Pokémon is switched out in battle.
 // - No parameters.
-#define FORM_CHANGE_BATTLE_SWITCH       8
+#define FORM_CHANGE_BATTLE_SWITCH               8
 
 // Form change that activates when the Pokémon's HP % passes a certain threshold.
 // param1: Ability to check.
@@ -63,19 +63,19 @@
 // - HP_HIGHER_THAN if the form triggers when the current HP is higher than the specified threshold.
 // - HP_LOWER_EQ_THAN if the form triggers when the current HP is lower or equal than the specified threshold.
 // param3: HP percentage threshold.
-#define FORM_CHANGE_BATTLE_HP_PERCENT   9
+#define FORM_CHANGE_BATTLE_HP_PERCENT           9
 
 // Form change that activates when the mon has the defined item.
 // If it's on the player's side, it also requires ITEM_MEGA_RING in the user's bag and for the player to trigger it by pressing START before selecting a move.
 // param1: item to hold.
-#define FORM_CHANGE_MEGA_EVOLUTION_ITEM 10
+#define FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM  10
 
 // Form change that activates when the mon has the defined move.
 // If it's on the player's side, it also requires ITEM_MEGA_RING in the user's bag and for the player to trigger it by pressing START before selecting a move.
 // param1: move to have.
-#define FORM_CHANGE_MEGA_EVOLUTION_MOVE 11
+#define FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE  11
 
 // Form change that activates automatically when entering battle with the specified item.
 // If the item is a Red Orb, it uses the Omega Symbol for the animation and icon. Otherwise, it defaults to the Alpha symbol.
 // param1: item to hold.
-#define FORM_CHANGE_PRIMAL_REVERSION    12
+#define FORM_CHANGE_BATTLE_PRIMAL_REVERSION     12

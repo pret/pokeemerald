@@ -9654,12 +9654,12 @@ bool32 DoesSpeciesUseHoldItemToChangeForm(u16 species, u16 heldItemId)
 
     if (formChanges != NULL)
     {
-        for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
+        for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
         {
             switch (formChanges[i].method)
             {
-            case FORM_CHANGE_MEGA_EVOLUTION_ITEM:
-            case FORM_CHANGE_PRIMAL_REVERSION:
+            case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM:
+            case FORM_CHANGE_BATTLE_PRIMAL_REVERSION:
             case FORM_CHANGE_ITEM_HOLD:
                 if (formChanges[i].param1 == heldItemId)
                     return TRUE;
@@ -9710,7 +9710,7 @@ bool32 CanMegaEvolve(u8 battlerId)
     itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
 
     // Check if there is an entry in the evolution table for regular Mega Evolution.
-    if (GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_MEGA_EVOLUTION_ITEM) != SPECIES_NONE)
+    if (GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM) != SPECIES_NONE)
     {
     #if B_ENABLE_DEBUG == TRUE
         if (B_ENABLE_DEBUG && gBattleStruct->debugHoldEffects[battlerId])
@@ -9731,7 +9731,7 @@ bool32 CanMegaEvolve(u8 battlerId)
     }
 
     // Check if there is an entry in the evolution table for Wish Mega Evolution.
-    if (GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_MEGA_EVOLUTION_MOVE) != SPECIES_NONE)
+    if (GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE) != SPECIES_NONE)
     {
         gBattleStruct->mega.isWishMegaEvo = TRUE;
         return TRUE;
@@ -9766,18 +9766,18 @@ u16 GetBattleFormChangeTargetSpecies(u8 battlerId, u16 method)
         heldItem = gBattleMons[battlerId].item;
         ability = GetBattlerAbility(battlerId);
 
-        for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
+        for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
         {
             if (method == formChanges[i].method && species != formChanges[i].targetSpecies)
             {
                 switch (method)
                 {
-                case FORM_CHANGE_MEGA_EVOLUTION_ITEM:
-                case FORM_CHANGE_PRIMAL_REVERSION:
+                case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM:
+                case FORM_CHANGE_BATTLE_PRIMAL_REVERSION:
                     if (heldItem == formChanges[i].param1)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
-                case FORM_CHANGE_MEGA_EVOLUTION_MOVE:
+                case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE:
                     if (gBattleMons[battlerId].moves[0] == formChanges[i].param1
                      || gBattleMons[battlerId].moves[1] == formChanges[i].param1
                      || gBattleMons[battlerId].moves[2] == formChanges[i].param1
@@ -9856,7 +9856,7 @@ bool32 TryBattleFormChange(u8 battlerId, u16 method)
         RecalcBattlerStats(battlerId, &party[monId]);
         return TRUE;
     }
-    else if ((method == FORM_CHANGE_BATTLE_END || method == FORM_CHANGE_FAINT)
+    else if ((method == FORM_CHANGE_END_BATTLE || method == FORM_CHANGE_FAINT)
             && gBattleStruct->changedSpecies[monId] != SPECIES_NONE)
     {
         TryToSetBattleFormChangeMoves(&party[monId], method);
