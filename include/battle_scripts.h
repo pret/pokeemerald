@@ -152,7 +152,6 @@ extern const u8 BattleScript_ShedSkinActivates[];
 extern const u8 BattleScript_WeatherFormChanges[];
 extern const u8 BattleScript_WeatherFormChangesLoop[];
 extern const u8 BattleScript_WeatherFormChange[];
-extern const u8 BattleScript_IntimidateActivatesEnd3[];
 extern const u8 BattleScript_IntimidateActivates[];
 extern const u8 BattleScript_DroughtActivates[];
 extern const u8 BattleScript_TookAttack[];

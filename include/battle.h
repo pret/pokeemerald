@@ -53,7 +53,7 @@ struct ResourceFlags
 #define RESOURCE_FLAG_FLASH_FIRE        0x1
 #define RESOURCE_FLAG_ROOST             0x2
 #define RESOURCE_FLAG_UNBURDEN          0x4
-#define RESOURCE_FLAG_INTIMIDATED       0x8
+#define RESOURCE_FLAG_UNUSED            0x8
 #define RESOURCE_FLAG_TRACED            0x10
 #define RESOURCE_FLAG_EMERGENCY_EXIT    0x20
 #define RESOURCE_FLAG_NEUTRALIZING_GAS  0x40
@@ -158,7 +158,6 @@ struct SpecialStatus
     u8 statLowered:1;
     u8 lightningRodRedirected:1;
     u8 restoredBattlerSprite: 1;
-    u8 intimidatedMon:1;
     u8 traced:1;
     u8 ppNotAffectedByPressure:1;
     u8 faintedHasReplacement:1;
@@ -583,7 +582,6 @@ struct BattleStruct
     u8 AI_itemFlags[2];
     u16 choicedMove[MAX_BATTLERS_COUNT];
     u16 changedItems[MAX_BATTLERS_COUNT];
-    u8 intimidateBattler;
     u8 switchInItemsCounter;
     u8 arenaTurnCounter;
     u8 turnSideTracker;
