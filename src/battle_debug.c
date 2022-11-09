@@ -271,6 +271,7 @@ static const struct BitfieldInfo sStatus2Bitfield[] =
     {/*Multiple Turns*/ 1, 12},
     // Wrap bits are omitted. Done in various.
     // In Love bits are omitted. Done in various.
+    {/*(Focus Energy*/ 1, 20},
     {/*Transformed*/ 1, 21},
     {/*Recharge*/ 1, 22},
     {/*Rage*/ 1, 23},
