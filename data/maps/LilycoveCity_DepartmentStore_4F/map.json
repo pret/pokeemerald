@@ -86,21 +86,21 @@
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_DEPARTMENT_STORE_3F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 13,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_DEPARTMENT_STORE_5F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 2,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_DEPARTMENT_STORE_ELEVATOR",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

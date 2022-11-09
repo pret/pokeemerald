@@ -19,15 +19,15 @@
       "x": 8,
       "y": 18,
       "elevation": 0,
-      "dest_map": "MAP_NONE",
-      "dest_warp_id": 127
+      "dest_map": "MAP_DYNAMIC",
+      "dest_warp_id": "WARP_ID_DYNAMIC"
     },
     {
       "x": 14,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_TERRA_CAVE_END",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

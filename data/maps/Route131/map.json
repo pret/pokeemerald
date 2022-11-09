@@ -14,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
+      "map": "MAP_PACIFIDLOG_TOWN",
       "offset": 0,
-      "map": "MAP_PACIFIDLOG_TOWN"
+      "direction": "left"
     },
     {
-      "direction": "right",
+      "map": "MAP_ROUTE130",
       "offset": 0,
-      "map": "MAP_ROUTE130"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -136,7 +136,7 @@
       "y": 6,
       "elevation": 3,
       "dest_map": "MAP_SKY_PILLAR_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],
