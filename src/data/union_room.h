@@ -717,8 +717,8 @@ static const struct ListMenuTemplate sListMenuTemplate_PossibleGroupMembers = {
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
-    .fontId = 1,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = FONT_NORMAL,
     .cursorKind = 1
 };
 
@@ -777,8 +777,8 @@ static const struct ListMenuTemplate sListMenuTemplate_UnionRoomGroups = {
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 1,
-    .fontId = 1,
+    .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
+    .fontId = FONT_NORMAL,
     .cursorKind = 0
 };
 
@@ -815,8 +815,8 @@ static const struct ListMenuTemplate sListMenuTemplate_InviteToActivity = {
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
-    .fontId = 1,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = FONT_NORMAL,
     .cursorKind = 0
 };
 
@@ -852,8 +852,8 @@ static const struct ListMenuTemplate sListMenuTemplate_RegisterForTrade = {
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
-    .fontId = 1,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = FONT_NORMAL,
     .cursorKind = 0
 };
 
@@ -904,8 +904,8 @@ static const struct ListMenuTemplate sMenuTemplate_TradingBoardRequestType = {
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
-    .fontId = 1,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = FONT_NORMAL,
     .cursorKind = 0
 };
 
@@ -958,8 +958,8 @@ static const struct ListMenuTemplate sTradeBoardListMenuTemplate = {
     .cursorShadowPal = 13,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
-    .fontId = 1,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = FONT_NORMAL,
     .cursorKind = 0
 };
 
@@ -1010,8 +1010,8 @@ static const struct ListMenuTemplate sEmptyListMenuTemplate = {
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 1,
-    .fontId = 1,
+    .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
+    .fontId = FONT_NORMAL,
     .cursorKind = 0
 };
 
