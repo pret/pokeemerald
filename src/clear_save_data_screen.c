@@ -95,7 +95,7 @@ static void Task_ClearSaveDataScreenYesNoChoice(u8 taskId)
         gTasks[taskId].func = Task_ClearSaveData;
         break;
     case 1:
-    case -1:
+    case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
         DestroyTask(taskId);
         SetMainCallback2(CB2_FadeAndDoReset);

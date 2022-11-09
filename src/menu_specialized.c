@@ -1538,7 +1538,7 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bg
                                      0,
                                      15 * i,
                                      color,
-                                     -1,
+                                     TEXT_SKIP_DRAW,
                                      sLvlUpStatStrings[i]);
 
         StringCopy(text, (statsDiff[i] >= 0) ? gText_Plus : gText_Dash);
@@ -1547,7 +1547,7 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bg
                                      56,
                                      15 * i,
                                      color,
-                                     -1,
+                                     TEXT_SKIP_DRAW,
                                      text);
         if (abs(statsDiff[i]) <= 9)
             x = 18;
@@ -1560,7 +1560,7 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bg
                                      56 + x,
                                      15 * i,
                                      color,
-                                     -1,
+                                     TEXT_SKIP_DRAW,
                                      text);
     }
 }
@@ -1602,7 +1602,7 @@ void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 s
                                      0,
                                      15 * i,
                                      color,
-                                     -1,
+                                     TEXT_SKIP_DRAW,
                                      sLvlUpStatStrings[i]);
 
         AddTextPrinterParameterized3(windowId,
@@ -1610,7 +1610,7 @@ void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 s
                                      56 + x,
                                      15 * i,
                                      color,
-                                     -1,
+                                     TEXT_SKIP_DRAW,
                                      text);
     }
 }
