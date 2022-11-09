@@ -719,7 +719,7 @@ static const struct ListMenuTemplate sListMenuTemplate_PossibleGroupMembers = {
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NORMAL,
-    .cursorKind = 1
+    .cursorKind = CURSOR_INVISIBLE
 };
 
 static const struct WindowTemplate sWindowTemplate_GroupList = {
@@ -779,7 +779,7 @@ static const struct ListMenuTemplate sListMenuTemplate_UnionRoomGroups = {
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const struct WindowTemplate sWindowTemplate_InviteToActivity = {
@@ -817,7 +817,7 @@ static const struct ListMenuTemplate sListMenuTemplate_InviteToActivity = {
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const struct WindowTemplate sWindowTemplate_RegisterForTrade = {
@@ -854,7 +854,7 @@ static const struct ListMenuTemplate sListMenuTemplate_RegisterForTrade = {
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const struct WindowTemplate sWindowTemplate_TradingBoardRequestType = {
@@ -906,7 +906,7 @@ static const struct ListMenuTemplate sMenuTemplate_TradingBoardRequestType = {
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const struct WindowTemplate sWindowTemplate_TradingBoardHeader = {
@@ -960,7 +960,7 @@ static const struct ListMenuTemplate sTradeBoardListMenuTemplate = {
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 // Unused
@@ -1012,7 +1012,7 @@ static const struct ListMenuTemplate sEmptyListMenuTemplate = {
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const struct RfuPlayerData sUnionRoomPlayer_DummyRfu = {0};

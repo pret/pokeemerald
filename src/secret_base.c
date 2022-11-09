@@ -214,7 +214,7 @@ static const struct ListMenuTemplate sRegistryListMenuTemplate =
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0,
+    .cursorKind = CURSOR_BLACK_ARROW,
 };
 
 static void ClearSecretBase(struct SecretBase *secretBase)
