@@ -305,10 +305,10 @@ static const struct SpriteTemplate sSpriteTemplate_RedArrowCursor =
     .callback = SpriteCallback_RedArrowCursor,
 };
 
-static const u16 sRedArrowPal[] = INCBIN_U16("graphics/interface/red_arrow.gbapal");
-static const u32 sRedArrowOtherGfx[] = INCBIN_U32("graphics/interface/red_arrow_other.4bpp.lz");
-static const u32 sSelectorOutlineGfx[] = INCBIN_U32("graphics/interface/selector_outline.4bpp.lz");
-static const u32 sRedArrowGfx[] = INCBIN_U32("graphics/interface/red_arrow.4bpp.lz");
+static const u16 sRedInterface_Pal[]    = INCBIN_U16("graphics/interface/red.gbapal"); // Shared by all of the below gfx
+static const u32 sScrollIndicator_Gfx[] = INCBIN_U32("graphics/interface/scroll_indicator.4bpp.lz");
+static const u32 sOutlineCursor_Gfx[]   = INCBIN_U32("graphics/interface/outline_cursor.4bpp.lz");
+static const u32 sArrowCursor_Gfx[]     = INCBIN_U32("graphics/interface/arrow_cursor.4bpp.lz");
 
 // code
 static void ListMenuDummyTask(u8 taskId)
@@ -1077,18 +1077,18 @@ u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate *arrowInfo, u16
     struct ScrollIndicatorPair *data;
     u8 taskId;
 
-    spriteSheet.data = sRedArrowOtherGfx;
+    spriteSheet.data = sScrollIndicator_Gfx;
     spriteSheet.size = 0x100;
     spriteSheet.tag = arrowInfo->tileTag;
     LoadCompressedSpriteSheet(&spriteSheet);
 
     if (arrowInfo->palTag == TAG_NONE)
     {
-        LoadPalette(sRedArrowPal, (16 * arrowInfo->palNum) + 0x100, 0x20);
+        LoadPalette(sRedInterface_Pal, (16 * arrowInfo->palNum) + 0x100, 0x20);
     }
     else
     {
-        spritePal.data = sRedArrowPal;
+        spritePal.data = sRedInterface_Pal;
         spritePal.tag = arrowInfo->palTag;
         LoadSpritePalette(&spritePal);
     }
@@ -1323,18 +1323,18 @@ static u8 ListMenuAddRedOutlineCursorObject(struct CursorStruct *cursor)
     struct SpriteTemplate spriteTemplate;
     u8 taskId;
 
-    spriteSheet.data = sSelectorOutlineGfx;
+    spriteSheet.data = sOutlineCursor_Gfx;
     spriteSheet.size = 0x100;
     spriteSheet.tag = cursor->tileTag;
     LoadCompressedSpriteSheet(&spriteSheet);
 
     if (cursor->palTag == TAG_NONE)
     {
-        LoadPalette(sRedArrowPal, (16 * cursor->palNum) + 0x100, 0x20);
+        LoadPalette(sRedInterface_Pal, (16 * cursor->palNum) + 0x100, 0x20);
     }
     else
     {
-        spritePal.data = sRedArrowPal;
+        spritePal.data = sRedInterface_Pal;
         spritePal.tag = cursor->palTag;
         LoadSpritePalette(&spritePal);
     }
@@ -1408,18 +1408,18 @@ static u8 ListMenuAddRedArrowCursorObject(struct CursorStruct *cursor)
     struct SpriteTemplate spriteTemplate;
     u8 taskId;
 
-    spriteSheet.data = sRedArrowGfx;
+    spriteSheet.data = sArrowCursor_Gfx;
     spriteSheet.size = 0x80;
     spriteSheet.tag = cursor->tileTag;
     LoadCompressedSpriteSheet(&spriteSheet);
 
     if (cursor->palTag == TAG_NONE)
     {
-        LoadPalette(sRedArrowPal, (16 * cursor->palNum) + 0x100, 0x20);
+        LoadPalette(sRedInterface_Pal, (16 * cursor->palNum) + 0x100, 0x20);
     }
     else
     {
-        spritePal.data = sRedArrowPal;
+        spritePal.data = sRedInterface_Pal;
         spritePal.tag = cursor->palTag;
         LoadSpritePalette(&spritePal);
     }
