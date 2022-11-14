@@ -573,7 +573,7 @@ static void Cmd_settelekinesis(void);
 static void Cmd_swapstatstages(void);
 static void Cmd_averagestats(void);
 static void Cmd_jumpifoppositegenders(void);
-static void Cmd_trygetbaddreamstarget(void);
+static void Cmd_unused(void);
 static void Cmd_tryworryseed(void);
 static void Cmd_metalburstdamagecalculator(void);
 
@@ -832,7 +832,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_swapstatstages,                          //0xFA
     Cmd_averagestats,                            //0xFB
     Cmd_jumpifoppositegenders,                   //0xFC
-    Cmd_trygetbaddreamstarget,                   //0xFD
+    Cmd_unused,                                  //0xFD
     Cmd_tryworryseed,                            //0xFE
     Cmd_metalburstdamagecalculator,              //0xFF
 };
@@ -2839,7 +2839,8 @@ void SetMoveEffect(bool32 primary, u32 certain)
 
     if (gBattleMons[gEffectBattler].hp == 0
         && gBattleScripting.moveEffect != MOVE_EFFECT_PAYDAY
-        && gBattleScripting.moveEffect != MOVE_EFFECT_STEAL_ITEM)
+        && gBattleScripting.moveEffect != MOVE_EFFECT_STEAL_ITEM
+        && gBattleScripting.moveEffect != MOVE_EFFECT_BUG_BITE)
         INCREMENT_RESET_RETURN
 
     if (DoesSubstituteBlockMove(gBattlerAttacker, gEffectBattler, gCurrentMove) && affectsUser != MOVE_EFFECT_AFFECTS_USER)
@@ -3600,11 +3601,6 @@ void SetMoveEffect(bool32 primary, u32 certain)
 
                     BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gEffectBattler].item), &gBattleMons[gEffectBattler].item);
                     MarkBattlerForControllerExec(gActiveBattler);
-
-                    // attacker temporarily gains their item
-                    gBattleStruct->changedItems[gBattlerAttacker] = gBattleMons[gBattlerAttacker].item;
-                    gBattleMons[gBattlerAttacker].item = gLastUsedItem;
-
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_MoveEffectBugBite;
                 }
@@ -7485,6 +7481,13 @@ static void Cmd_removeitem(void)
 {
     u16 itemId = 0;
 
+    if (gBattleScripting.overrideBerryRequirements)
+    {
+        // bug bite / pluck - don't remove current item
+        gBattlescriptCurrInstr += 2;
+        return;
+    }
+
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     itemId = gBattleMons[gActiveBattler].item;
 
@@ -8189,13 +8192,9 @@ static bool32 CourtChangeSwapSideStatuses(void)
 
 static bool32 CanTeleport(u8 battlerId)
 {
-    struct Pokemon* party = NULL;
+    u8 side = GetBattlerSide(battlerId);
+    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
     u32 species, count, i;
-
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        party = gPlayerParty;
-    else
-        party = gEnemyParty;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -8207,11 +8206,11 @@ static bool32 CanTeleport(u8 battlerId)
     switch (GetBattlerSide(battlerId))
     {
     case B_SIDE_OPPONENT:
-        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        if (count == 1 || gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
             return FALSE;
         break;
     case B_SIDE_PLAYER:
-        if (count == 1 || (count <= 2 && gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+        if (count == 1 || (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && count <= 2))
             return FALSE;
         break;
     }
@@ -9750,24 +9749,18 @@ static void Cmd_various(void)
         }
         break;
     case VARIOUS_CONSUME_BERRY:
-        if (ItemId_GetHoldEffect(gBattleMons[gActiveBattler].item) == HOLD_EFFECT_NONE)
+        if (gBattleScripting.overrideBerryRequirements == 2)
         {
             gBattlescriptCurrInstr += 4;
             return;
         }
-
-        gBattleScripting.battler = gEffectBattler = gBattlerTarget = gActiveBattler;    // Cover all berry effect battlerId cases. e.g. ChangeStatBuffs uses target ID
-        // Do move end berry effects for just a single battler, instead of looping through all battlers
-        if (ItemBattleEffects(ITEMEFFECT_BATTLER_MOVE_END, gActiveBattler, FALSE))
-            return;
-
+        
         if (gBattlescriptCurrInstr[3])
-        {
-            gBattleMons[gActiveBattler].item = gBattleStruct->changedItems[gActiveBattler];
-            gBattleStruct->changedItems[gActiveBattler] = ITEM_NONE;
-            gBattleResources->flags->flags[gActiveBattler] &= ~RESOURCE_FLAG_UNBURDEN;
-        }
-
+            gLastUsedItem = gBattleMons[gActiveBattler].item;
+        
+        gBattleScripting.battler = gEffectBattler = gBattlerTarget = gActiveBattler;    // Cover all berry effect battlerId cases. e.g. ChangeStatBuffs uses target ID
+        if (ItemBattleEffects(ITEMEFFECT_USE_LAST_ITEM, gActiveBattler, FALSE))
+            return;
         gBattlescriptCurrInstr += 4;
         return;
     case VARIOUS_JUMP_IF_CANT_REVERT_TO_PRIMAL:
@@ -14734,22 +14727,8 @@ static void Cmd_jumpifoppositegenders(void)
         gBattlescriptCurrInstr += 5;
 }
 
-static void Cmd_trygetbaddreamstarget(void)
+static void Cmd_unused(void)
 {
-    u8 badDreamsMonSide = GetBattlerSide(gBattlerAttacker);
-    for (;gBattlerTarget < gBattlersCount; gBattlerTarget++)
-    {
-        if (GetBattlerSide(gBattlerTarget) == badDreamsMonSide)
-            continue;
-        if ((gBattleMons[gBattlerTarget].status1 & STATUS1_SLEEP || GetBattlerAbility(gBattlerTarget) == ABILITY_COMATOSE)
-            && IsBattlerAlive(gBattlerTarget))
-            break;
-    }
-
-    if (gBattlerTarget >= gBattlersCount)
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-    else
-        gBattlescriptCurrInstr += 5;
 }
 
 static void Cmd_tryworryseed(void)

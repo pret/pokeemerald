@@ -14,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
+      "map": "MAP_SAFARI_ZONE_NORTH",
       "offset": 0,
-      "map": "MAP_SAFARI_ZONE_NORTH"
+      "direction": "left"
     },
     {
-      "direction": "down",
+      "map": "MAP_SAFARI_ZONE_SOUTHEAST",
       "offset": 0,
-      "map": "MAP_SAFARI_ZONE_SOUTHEAST"
+      "direction": "down"
     }
   ],
   "object_events": [

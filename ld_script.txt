@@ -21,7 +21,7 @@ SECTIONS {
         *libc.a:locale.o(.data);
         *libc.a:mallocr.o(.data);
         . = 0x40000;
-}
+    }
 
     . = 0x3000000;
 
@@ -503,7 +503,7 @@ SECTIONS {
         src/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
         src/overworld.o(.rodata);
-        data/tilesets.o(.rodata);
+        src/tilesets.o(.rodata);
         data/maps.o(.rodata);
         src/fieldmap.o(.rodata);
         src/metatile_behavior.o(.rodata);

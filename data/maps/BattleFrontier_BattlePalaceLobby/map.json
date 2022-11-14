@@ -99,21 +99,21 @@
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_EAST",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 13,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_EAST",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 5,
       "y": 4,
       "elevation": 3,
       "dest_map": "MAP_BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

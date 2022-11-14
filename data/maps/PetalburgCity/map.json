@@ -14,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
+      "map": "MAP_ROUTE104",
       "offset": -50,
-      "map": "MAP_ROUTE104"
+      "direction": "left"
     },
     {
-      "direction": "right",
+      "map": "MAP_ROUTE102",
       "offset": 10,
-      "map": "MAP_ROUTE102"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -149,42 +149,42 @@
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_PETALBURG_CITY_HOUSE1",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 7,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_PETALBURG_CITY_WALLYS_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 15,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_PETALBURG_CITY_GYM",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 20,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_PETALBURG_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 20,
       "y": 24,
       "elevation": 0,
       "dest_map": "MAP_PETALBURG_CITY_HOUSE2",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 25,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_PETALBURG_CITY_MART",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [
