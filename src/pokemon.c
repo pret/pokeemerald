@@ -3460,16 +3460,32 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
               | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
               | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
 
-        if (gBaseStats[species].flags & SPECIES_FLAG_SHINY_LOCKED)
+#if P_FLAG_FORCE_NO_SHINY != 0
+        if (FlagGet(P_FLAG_FORCE_NO_SHINY))
         {
             while (GET_SHINY_VALUE(value, personality) < SHINY_ODDS)
-            {
                 personality = Random32();
-            }
         }
+#endif
+#if P_FLAG_FORCE_SHINY != 0
+    #if P_FLAG_FORCE_NO_SHINY != 0
         else
+    #endif
+        if (FlagGet(P_FLAG_FORCE_SHINY))
         {
+            while (GET_SHINY_VALUE(value, personality) >= SHINY_ODDS)
+                personality = Random32();
+        }
+#endif
+#if P_FLAG_FORCE_SHINY != 0 || P_FLAG_FORCE_NO_SHINY != 0
+        else
+#endif
+        {
+        #if P_SHINY_BASE_CHANCE >= GEN_6
+            u32 totalRerolls = 1;
+        #else
             u32 totalRerolls = 0;
+        #endif
             if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
                 totalRerolls += I_SHINY_CHARM_REROLLS;
             if (LURE_STEP_COUNT != 0)
