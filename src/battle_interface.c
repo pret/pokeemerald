@@ -31,7 +31,6 @@
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "constants/battle_config.h"
 #include "constants/items.h"
 
 enum
