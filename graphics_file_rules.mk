@@ -669,7 +669,7 @@ $(WALLPAPERGFXDIR)/whiscash/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame2.4bpp $
 $(OBJEVENTGFXDIR)/pics/effects/unknown_4F6D38/0.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 11 -Wnum_tiles
 
-$(INTERFACEGFXDIR)/selector_outline.4bpp: %.4bpp: %.png
+$(INTERFACEGFXDIR)/outline_cursor.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 8 -Wnum_tiles
 
 $(BATTRANSGFXDIR)/frontier_logo_center.4bpp: %.4bpp: %.png
