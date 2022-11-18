@@ -2962,9 +2962,8 @@ static const u8 sPsyshieldBashDescription[] = _(
     "energy. May raise Defense.");
 
 static const u8 sPowerShiftDescription[] = _(
-    "The user swaps its offensive\n"
-    "and defensive stats.");
-/* The user swaps its Attack and Defense stats. */
+    "The user swaps its Attack\n"
+    "and Defense stats.");
 
 static const u8 sStoneAxeDescription[] = _(
     "High critical hit ratio. Sets\n"
@@ -2975,83 +2974,52 @@ static const u8 sSpringtideStormDescription[] = _(
     "Varies with the user's form.");
 
 static const u8 sMysticalPowerDescription[] = _(
-    "Increases the user's better\n"
-    "of Atk. and Def. stats.");
-/* The user attacks by emitting a mysterious power.
-This also boosts the user’s Sp. Atk stat. */
+    "A mysterious power strikes and\n"
+    "raises the user's Sp. Atk.");
 
 static const u8 sRagingFuryDescription[] = _(
-    "Viciously spews flames at\n"
-    "a foe, becoming fixated.");
-//    "A rampage of 2 to 3 turns\n"
-//    "that confuses the user.");
-
-/* The user rampages around spewing flames for two to
-three turns. The user then becomes confused. */
+    "A rampage of 2 to 3 turns\n"
+    "that confuses the user.");
 
 static const u8 sWaveCrashDescription[] = _(
-    "A water slam. Hurts the user\n"
-    "and raises its Action Speed.");
-/* The user shrouds itself in water and slams into the target
-with its whole body to inflict damage. This also damages
-the user quite a lot. */
+    "A slam shrouded in water.\n"
+    "It also hurts the user.");
 
 static const u8 sChloroblastDescription[] = _(
-    "An blast that hurts the user\n"
-    "and lowers its Action Speed.");
-/* The user launches its amassed chlorophyll to inflict
-damage on the target. This also damages the user. */
+    "A user-hurting blast of\n"
+    "amassed chlorophyll.");
 
 static const u8 sMountainGaleDescription[] = _(
-    "The user hurls giant chunks\n"
-    "of ice to damage the foe.");
-/* The user hurls giant chunks of ice at the target to inflict
-damage. This may also make the target flinch. */
+    "Giant chunks of ice damage\n"
+    "the foe. It may flinch.");
 
 static const u8 sVictoryDanceDescription[] = _(
-    "Dances to raise damage 50%,\n"
-    "plus offenses and defenses.");
-/* The user performs an intense dance to usher in victory,
-boosting its Attack, Defense, and Speed stats. */
+    "Dances to raise Attack,\n"
+    "Defense and Speed.");
 
 static const u8 sHeadlongRushDescription[] = _(
     "Hits with a full-body tackle,\n"
-    "lowering the foe's Defense.");
-/* The user smashes into the target in a full-body tackle.
-This also lowers the user’s Defense and Sp. Def stats. */
+    "lowering the users's defenses.");
 
 static const u8 sBarbBarrageDescription[] = _(
     "Can poison on impact. Powers\n"
-    "up if the foe has an ailment.");
-/* The user launches countless toxic barbs to inflict
-damage. This may also poison the target. This move’s
-power is doubled if the target is already poisoned. */
+    "up against poisoned foes.");
 
 static const u8 sEsperWingDescription[] = _(
     "High critical hit ratio.\n"
-    "Ups the user's Action Speed.");
-/* The user slashes the target with aura-enriched wings.
-This also boosts the user’s Speed stat. This move has
-a heightened chance of landing a critical hit. */
+    "Ups the user's Speed.");
 
 static const u8 sBitterMaliceDescription[] = _(
-    "Hurts a foe harder if it has\n"
-    "an ailment. Can give FrstBte.");
-/* The user attacks the target with spine-chilling resentment.
-This also lowers the target’s Attack stat. */
+    "A spine-chilling resentment\n"
+    "that may lower the foe's Attack.");
 
 static const u8 sShelterDescription[] = _(
-    "The user hardens their skin\n"
-    "and obscures itself.");
-/* The user makes its skin as hard as an iron shield, sharply
-boosting its Defense stat. */
+    "The user hardens their skin,\n"
+    "sharply raising its Defense.");
 
 static const u8 sTripleArrowsDescription[] = _(
-    "Ups critical-hit ratio for 3\n"
-    "turns. Lowers foe Defenses.");
-/* The user kicks, then fires three arrows. This move has a
-heightened chance of landing a critical hit and may also
-lower the target’s Defense stat or make it flinch. */
+    "High critical hit ratio.\n"
+    "May lower Defense or flinch.");
 
 static const u8 sInfernalParadeDescription[] = _(
     "Hurts a foe harder if it has\n"
@@ -3063,10 +3031,7 @@ static const u8 sCeaselessEdgeDescription[] = _(
 
 static const u8 sBleakwindStormDescription[] = _(
     "Hits with brutal, cold winds.\n"
-    "May inflict frostbite.");
-/* The user attacks with savagely cold winds that cause
-both body and spirit to tremble. This may also lower the
-Speed stats of opposing Pokémon. */
+    "May lower the foe's Speed.");
 
 static const u8 sWildboltStormDescription[] = _(
     "Hits with a brutal tempest.\n"
@@ -3077,11 +3042,8 @@ static const u8 sSandsearStormDescription[] = _(
     "May inflict a burn.");
 
 static const u8 sLunarBlessingDescription[] = _(
-    "The user heals themself and\n"
-    "conceals their presence.");
-/* The user receives a blessing from the crescent moon,
-restoring HP and curing status conditions for itself and
-its ally Pokémon currently in the battle. */
+    "The user heals and cures\n"
+    "itself and its ally.");
 
 static const u8 sTakeHeartDescription[] = _(
     "The user lifts its spirits to\n"
