@@ -396,7 +396,8 @@
 #define EFFECT_SLEEP_HIT                    390
 #define EFFECT_DOUBLE_SHOCK                 391
 #define EFFECT_SPECIAL_ATTACK_UP_HIT        392
+#define EFFECT_VICTORY_DANCE                393
 
-#define NUM_BATTLE_MOVE_EFFECTS             393
+#define NUM_BATTLE_MOVE_EFFECTS             394
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

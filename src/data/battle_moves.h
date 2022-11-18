@@ -13454,7 +13454,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_VICTORY_DANCE] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_VICTORY_DANCE,
+        .effect = EFFECT_VICTORY_DANCE,
         .power = 0,
         .type = TYPE_FIGHTING,
         .accuracy = 0,
