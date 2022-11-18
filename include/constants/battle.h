@@ -78,6 +78,11 @@
 #define BATTLE_TYPE_RECORDED_IS_MASTER (1 << 31)
 #define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID)
 #define BATTLE_TYPE_FRONTIER_NO_PYRAMID     (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE)
+#define BATTLE_TYPE_RECORDED_INVALID        ((BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_FIRST_BATTLE                  \
+                                             | BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_ROAMER | BATTLE_TYPE_EREADER_TRAINER    \
+                                             | BATTLE_TYPE_KYOGRE_GROUDON | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI            \
+                                             | BATTLE_TYPE_RECORDED | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE        \
+                                             | BATTLE_TYPE_GROUDON | BATTLE_TYPE_KYOGRE | BATTLE_TYPE_RAYQUAZA))
 
 #define WILD_DOUBLE_BATTLE ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER))))
 #define BATTLE_TWO_VS_ONE_OPPONENT ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gTrainerBattleOpponent_B == 0xFFFF))
@@ -307,7 +312,7 @@
 #define MOVE_EFFECT_PAYDAY              0xB
 #define MOVE_EFFECT_CHARGING            0xC
 #define MOVE_EFFECT_WRAP                0xD
-#define MOVE_EFFECT_RECOIL_25           0xE
+#define MOVE_EFFECT_BURN_UP             0xE // MOVE_EFFECT_BURN_UP replaces unused MOVE_EFFECT_RECOIL_25 so that stat change animations don't break
 #define MOVE_EFFECT_ATK_PLUS_1          0xF
 #define MOVE_EFFECT_DEF_PLUS_1          0x10
 #define MOVE_EFFECT_SPD_PLUS_1          0x11
@@ -331,7 +336,7 @@
 #define MOVE_EFFECT_RAPIDSPIN           0x23
 #define MOVE_EFFECT_REMOVE_STATUS       0x24
 #define MOVE_EFFECT_ATK_DEF_DOWN        0x25
-#define MOVE_EFFECT_RECOIL_33           0x26
+#define MOVE_EFFECT_SCALE_SHOT          0x26 // MOVE_EFFECT_SCALE_SHOT replaces unused MOVE_EFFECT_RECOIL_33 so that stat change animations don't break
 #define MOVE_EFFECT_ATK_PLUS_2          0x27
 #define MOVE_EFFECT_DEF_PLUS_2          0x28
 #define MOVE_EFFECT_SPD_PLUS_2          0x29
@@ -349,27 +354,23 @@
 #define MOVE_EFFECT_THRASH              0x35
 #define MOVE_EFFECT_KNOCK_OFF           0x36
 #define MOVE_EFFECT_DEF_SPDEF_DOWN      0x37
-#define MOVE_EFFECT_RECOIL_33_STATUS    0x38
-#define MOVE_EFFECT_RECOIL_50           0x39
-#define MOVE_EFFECT_CLEAR_SMOG          0x3A
-#define MOVE_EFFECT_SP_ATK_TWO_DOWN     0x3B
-#define MOVE_EFFECT_SMACK_DOWN          0x3C
-#define MOVE_EFFECT_FLAME_BURST         0x3D
-#define MOVE_EFFECT_FEINT               0x3E
-#define MOVE_EFFECT_SPECTRAL_THIEF      0x3F
-#define MOVE_EFFECT_V_CREATE            0x40
-#define MOVE_EFFECT_HAPPY_HOUR          0x41
-#define MOVE_EFFECT_CORE_ENFORCER       0x42
-#define MOVE_EFFECT_THROAT_CHOP         0x43
-#define MOVE_EFFECT_INCINERATE          0x44
-#define MOVE_EFFECT_BUG_BITE            0x45
-#define MOVE_EFFECT_RECOIL_HP_25        0x46
-#define MOVE_EFFECT_RELIC_SONG          0x47
-#define MOVE_EFFECT_TRAP_BOTH           0x48
-#define MOVE_EFFECT_SKY_DROP            0x49
-#define MOVE_EFFECT_SCALE_SHOT          0x4A
+#define MOVE_EFFECT_CLEAR_SMOG          0x38
+#define MOVE_EFFECT_SP_ATK_TWO_DOWN     0x39
+#define MOVE_EFFECT_SMACK_DOWN          0x3A
+#define MOVE_EFFECT_FLAME_BURST         0x3B
+#define MOVE_EFFECT_FEINT               0x3C
+#define MOVE_EFFECT_SPECTRAL_THIEF      0x3D
+#define MOVE_EFFECT_V_CREATE            0x3E
+#define MOVE_EFFECT_HAPPY_HOUR          0x3F
+#define MOVE_EFFECT_CORE_ENFORCER       0x40
+#define MOVE_EFFECT_THROAT_CHOP         0x41
+#define MOVE_EFFECT_INCINERATE          0x42
+#define MOVE_EFFECT_BUG_BITE            0x43
+#define MOVE_EFFECT_RECOIL_HP_25        0x44
+#define MOVE_EFFECT_RELIC_SONG          0x45
+#define MOVE_EFFECT_TRAP_BOTH           0x46
 
-#define NUM_MOVE_EFFECTS                0x4B
+#define NUM_MOVE_EFFECTS                0x47
 
 #define MOVE_EFFECT_AFFECTS_USER        0x4000
 #define MOVE_EFFECT_CERTAIN             0x8000
@@ -482,5 +483,10 @@
 
 // For the second argument of GetMoveTarget, when no target override is needed
 #define NO_TARGET_OVERRIDE 0
+
+// Constants for Parental Bond
+#define PARENTAL_BOND_1ST_HIT 2
+#define PARENTAL_BOND_2ND_HIT 1
+#define PARENTAL_BOND_OFF     0
 
 #endif // GUARD_CONSTANTS_BATTLE_H

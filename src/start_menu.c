@@ -1312,7 +1312,7 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
             }
             else
             {
-                gSoftResetDisabled = 1;
+                gSoftResetDisabled = TRUE;
                 *state = 1;
             }
             break;
@@ -1326,7 +1326,7 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
             {
                 ClearContinueGameWarpStatus2();
                 *state = 3;
-                gSoftResetDisabled = 0;
+                gSoftResetDisabled = FALSE;
             }
             break;
         case 3:

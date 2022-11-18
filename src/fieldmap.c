@@ -406,7 +406,7 @@ void MapGridSetMetatileEntryAt(int x, int y, u16 metatile)
 
 u16 GetMetatileAttributesById(u16 metatile)
 {
-    u16 *attributes;
+    const u16 *attributes;
     if (metatile < NUM_METATILES_IN_PRIMARY)
     {
         attributes = gMapHeader.mapLayout->primaryTileset->metatileAttributes;
@@ -880,17 +880,17 @@ void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u16 size)
         if (tileset->isSecondary == FALSE)
         {
             LoadPalette(&black, destOffset, 2);
-            LoadPalette(((u16 *)tileset->palettes) + 1, destOffset + 1, size - 2);
+            LoadPalette(tileset->palettes[0] + 1, destOffset + 1, size - 2);
             ApplyGlobalTintToPaletteEntries(destOffset + 1, (size - 2) >> 1);
         }
         else if (tileset->isSecondary == TRUE)
         {
-            LoadPalette(((u16 *)tileset->palettes) + (NUM_PALS_IN_PRIMARY * 16), destOffset, size);
+            LoadPalette(tileset->palettes[NUM_PALS_IN_PRIMARY], destOffset, size);
             ApplyGlobalTintToPaletteEntries(destOffset, size >> 1);
         }
         else
         {
-            LoadCompressedPalette((u32 *)tileset->palettes, destOffset, size);
+            LoadCompressedPalette((const u32 *)tileset->palettes, destOffset, size);
             ApplyGlobalTintToPaletteEntries(destOffset, size >> 1);
         }
     }

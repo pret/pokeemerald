@@ -51,7 +51,7 @@
 #define ITEMEFFECT_TARGET                       5
 #define ITEMEFFECT_ORBS                         6
 #define ITEMEFFECT_LIFEORB_SHELLBELL            7
-#define ITEMEFFECT_BATTLER_MOVE_END             8 // move end effects for just the battler, not whole field
+#define ITEMEFFECT_USE_LAST_ITEM                8 // move end effects for just the battler, not whole field
 
 #define WEATHER_HAS_EFFECT ((!IsAbilityOnField(ABILITY_CLOUD_NINE) && !IsAbilityOnField(ABILITY_AIR_LOCK)))
 
@@ -186,6 +186,7 @@ void TryToRevertMimicry(void);
 void RestoreBattlerOriginalTypes(u8 battlerId);
 u32 GetBattlerMoveTargetType(u8 battlerId, u16 move);
 bool32 CanTargetBattler(u8 battlerAtk, u8 battlerDef, u16 move);
+bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId);
 // Ability checks
 bool32 IsRolePlayBannedAbilityAtk(u16 ability);
 bool32 IsRolePlayBannedAbility(u16 ability);
