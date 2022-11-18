@@ -412,6 +412,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectExtremeEvoboost         @ EFFECT_EXTREME_EVOBOOST
 	.4byte BattleScript_EffectTerrainHit              @ EFFECT_DAMAGE_SET_TERRAIN
 	.4byte BattleScript_EffectDarkVoid                @ EFFECT_DARK_VOID
+	.4byte BattleScript_EffectSleepHit                @ EFFECT_SLEEP_HIT
 
 BattleScript_AffectionBasedEndurance::
 	playanimation BS_TARGET, B_ANIM_AFFECTION_HANGED_ON
@@ -3199,6 +3200,10 @@ BattleScript_AbsorbHealBlock::
 
 BattleScript_EffectBurnHit::
 	setmoveeffect MOVE_EFFECT_BURN
+	goto BattleScript_EffectHit
+
+BattleScript_EffectSleepHit::
+	setmoveeffect MOVE_EFFECT_SLEEP
 	goto BattleScript_EffectHit
 
 BattleScript_EffectFreezeHit::

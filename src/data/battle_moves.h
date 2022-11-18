@@ -14435,12 +14435,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_WICKED_TORQUE] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_SLEEP_HIT
+        .effect = EFFECT_SLEEP_HIT,
         .power = 80,
         .type = TYPE_DARK,
         .accuracy = 100,
         .pp = 10,
-        .secondaryEffectChance = 10,
+        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED,
