@@ -13294,12 +13294,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_PSYSHIELD_BASH] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_PSYSHIELD_BASH,
+        .effect = EFFECT_DEFENSE_UP_HIT,
         .power = 70,
         .type = TYPE_PSYCHIC,
-        .accuracy = 90,
+        .accuracy = 100,
         .pp = 10,
-        .secondaryEffectChance = 50, // TODO: Adjust this value. Currently it's set to Fiery Dance's.
+        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
@@ -13347,7 +13347,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         #else
             .power = 95,
         #endif
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_SPRINGTIDE_STORM,
+        .effect = EFFECT_ATTACK_DOWN_HIT,
         .type = TYPE_FAIRY,
         .accuracy = 80,
         .pp = 5,
@@ -13362,7 +13362,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_MYSTICAL_POWER] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_MYSTICAL_POWER,
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_SPECIAL_ATTACK_UP_HIT
         .power = 70,
         .type = TYPE_PSYCHIC,
         .accuracy = 90,
@@ -13383,12 +13383,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         #else
             .power = 90,
         #endif
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_RAGING_FURY,
+        .effect = EFFECT_RAMPAGE,
         .type = TYPE_FIRE,
-        .accuracy = 85,
+        .accuracy = 100,
         .pp = 10,
-        .secondaryEffectChance = 100,
-        .target = MOVE_TARGET_SELECTED,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_RANDOM,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         .split = SPLIT_PHYSICAL,
@@ -13403,7 +13403,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         #else
             .power = 75,
         #endif
-        .effect = EFFECT_RECOIL_33, // TODO: Legends: Arceus mechanics.
+        .effect = EFFECT_RECOIL_33,
         .type = TYPE_WATER,
         .accuracy = 100,
         .pp = 10,
@@ -13423,11 +13423,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         #else
             .power = 120,
         #endif
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_CHLOROBLAST,
+        .effect = EFFECT_RECOIL_50,
         .type = TYPE_GRASS,
         .accuracy = 95,
         .pp = 5,
-        .secondaryEffectChance = 100,
+        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
@@ -13438,12 +13438,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_MOUNTAIN_GALE] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_ACTION_SPEED_DOWN_HIT,
+        .effect = EFFECT_FLINCH_HIT,
         .power = 100,
         .type = TYPE_ICE,
         .accuracy = 85,
         .pp = 5,
-        .secondaryEffectChance = 100,
+        .secondaryEffectChance = 30,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
@@ -13475,14 +13475,14 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         #else
             .power = 100,
         #endif
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_HEADLONG_RUSH,
+        .effect = EFFECT_CLOSE_COMBAT,
         .type = TYPE_GROUND,
         .accuracy = 100,
         .pp = 5,
-        .secondaryEffectChance = 100,
+        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_IRON_FIST_BOOST,
         .split = SPLIT_PHYSICAL,
         .zMovePower = 180,
         .zMoveEffect = Z_EFFECT_NONE,
@@ -13511,14 +13511,14 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         #else
             .power = 75,
         #endif
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_ESPER_WING,
+        .effect = EFFECT_SPEED_UP_HIT,
         .type = TYPE_PSYCHIC,
         .accuracy = 90,
         .pp = 10,
-        .secondaryEffectChance = 0,
+        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HIGH_CRIT,
         .split = SPLIT_SPECIAL,
         .zMovePower = 140,
         .zMoveEffect = Z_EFFECT_NONE,
@@ -13531,7 +13531,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         #else
             .power = 60,
         #endif
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_ESPER_WING,
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_ATTACKER_ATTACK_DOWN_HIT
         .type = TYPE_GHOST,
         .accuracy = 100,
         .pp = 15,
@@ -13546,7 +13546,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SHELTER] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_SHELTER,
+        .effect = EFFECT_DEFENSE_UP_2,
         .power = 0,
         .type = TYPE_STEEL,
         .accuracy = 0,
@@ -13621,10 +13621,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
             .power = 95,
             .pp = 5,
         #endif
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_BLEAKWIND_STORM,
+        .effect = EFFECT_SPEED_DOWN_HIT,
         .type = TYPE_FLYING,
         .accuracy = 80,
-        .secondaryEffectChance = 0,
+        .secondaryEffectChance = 30,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
@@ -13642,10 +13642,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
             .power = 95,
             .pp = 5,
         #endif
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_WILDBOLT_STORM,
+        .effect = EFFECT_PARALYZE_HIT,
         .type = TYPE_ELECTRIC,
         .accuracy = 80,
-        .secondaryEffectChance = 0,
+        .secondaryEffectChance = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
@@ -13663,10 +13663,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
             .power = 95,
             .pp = 5,
         #endif
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_SANDSEAR_STORM,
+        .effect = EFFECT_BURN_HIT,
         .type = TYPE_GROUND,
         .accuracy = 80,
-        .secondaryEffectChance = 0,
+        .secondaryEffectChance = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
