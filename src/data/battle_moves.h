@@ -1868,7 +1868,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_RECOVER] =
     {
-        #if B_UPDATED_MOVE_DATA >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .pp = 5,
+        #elif B_UPDATED_MOVE_DATA >= GEN_4
             .pp = 10,
         #else
             .pp = 20,
@@ -2401,11 +2403,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SOFT_BOILED] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .pp = 5,
+        #else
+            .pp = 10,
+        #endif
         .effect = EFFECT_SOFTBOILED,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 100,
-        .pp = 10,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
         .priority = 0,
@@ -2798,11 +2804,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_REST] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .pp = 5,
+        #else
+            .pp = 10,
+        #endif
         .effect = EFFECT_REST,
         .power = 0,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,
-        .pp = 10,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
         .priority = 0,
@@ -3759,11 +3769,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_MILK_DRINK] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .pp = 5,
+        #else
+            .pp = 10,
+        #endif
         .effect = EFFECT_SOFTBOILED,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
-        .pp = 10,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
         .priority = 0,
@@ -5452,11 +5466,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SLACK_OFF] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .pp = 5,
+        #else
+            .pp = 10,
+        #endif
         .effect = EFFECT_RESTORE_HP,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 100,
-        .pp = 10,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
         .priority = 0,
@@ -6403,11 +6421,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_ROOST] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .pp = 5,
+        #else
+            .pp = 10,
+        #endif
         .effect = EFFECT_ROOST,
         .power = 0,
         .type = TYPE_FLYING,
         .accuracy = 0,
-        .pp = 10,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
         .priority = 0,
@@ -11013,11 +11035,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SHORE_UP] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .pp = 5,
+        #else
+            .pp = 10,
+        #endif
         .effect = EFFECT_SHORE_UP,
         .power = 0,
         .type = TYPE_GROUND,
         .accuracy = 0,
-        .pp = 10,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
         .priority = 0,
@@ -12853,8 +12879,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_GRASSY_GLIDE] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .power = 60,
+        #else
+            .power = 70,
+        #endif
         .effect = EFFECT_GRASSY_GLIDE,
-        .power = 70,
         .type = TYPE_GRASS,
         .accuracy = 100,
         .pp = 20,
@@ -13076,8 +13106,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_WICKED_BLOW] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .power = 75,
+        #else
+            .power = 80,
+        #endif
         .effect = EFFECT_ALWAYS_CRIT,
-        .power = 80,
         .type = TYPE_DARK,
         .accuracy = 100,
         .pp = 5,
@@ -13188,8 +13222,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_GLACIAL_LANCE] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .power = 120,
+        #else
+            .power = 130,
+        #endif
         .effect = EFFECT_HIT,
-        .power = 130,
         .type = TYPE_ICE,
         .accuracy = 100,
         .pp = 5,
@@ -13236,8 +13274,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_DIRE_CLAW] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .power = 80,
+        #else
+            .power = 60,
+        #endif
         .effect = EFFECT_PLACEHOLDER, // EFFECT_DIRE_CLAW,
-        .power = 60,
         .type = TYPE_POISON,
         .accuracy = 100,
         .pp = 15,
@@ -13300,8 +13342,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SPRINGTIDE_STORM] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .power = 100,
+        #else
+            .power = 95,
+        #endif
         .effect = EFFECT_PLACEHOLDER, // EFFECT_SPRINGTIDE_STORM,
-        .power = 95,
         .type = TYPE_FAIRY,
         .accuracy = 80,
         .pp = 5,
@@ -13332,8 +13378,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_RAGING_FURY] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .power = 120,
+        #else
+            .power = 90,
+        #endif
         .effect = EFFECT_PLACEHOLDER, // EFFECT_RAGING_FURY,
-        .power = 90,
         .type = TYPE_FIRE,
         .accuracy = 85,
         .pp = 10,
@@ -13348,8 +13398,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_WAVE_CRASH] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .power = 120,
+        #else
+            .power = 75,
+        #endif
         .effect = EFFECT_RECOIL_33, // TODO: Legends: Arceus mechanics.
-        .power = 75,
         .type = TYPE_WATER,
         .accuracy = 100,
         .pp = 10,
@@ -13364,8 +13418,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_CHLOROBLAST] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .power = 150,
+        #else
+            .power = 120,
+        #endif
         .effect = EFFECT_PLACEHOLDER, // EFFECT_CHLOROBLAST,
-        .power = 120,
         .type = TYPE_GRASS,
         .accuracy = 95,
         .pp = 5,
@@ -13412,8 +13470,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_HEADLONG_RUSH] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .power = 120,
+        #else
+            .power = 100,
+        #endif
         .effect = EFFECT_PLACEHOLDER, // EFFECT_HEADLONG_RUSH,
-        .power = 100,
         .type = TYPE_GROUND,
         .accuracy = 100,
         .pp = 5,
@@ -13444,8 +13506,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_ESPER_WING] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .power = 80,
+        #else
+            .power = 75,
+        #endif
         .effect = EFFECT_PLACEHOLDER, // EFFECT_ESPER_WING,
-        .power = 75,
         .type = TYPE_PSYCHIC,
         .accuracy = 90,
         .pp = 10,
@@ -13460,8 +13526,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_BITTER_MALICE] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .power = 75,
+        #else
+            .power = 60,
+        #endif
         .effect = EFFECT_PLACEHOLDER, // EFFECT_ESPER_WING,
-        .power = 60,
         .type = TYPE_GHOST,
         .accuracy = 100,
         .pp = 15,
@@ -13492,8 +13562,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_TRIPLE_ARROWS] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .power = 90,
+        #else
+            .power = 50,
+        #endif
         .effect = EFFECT_PLACEHOLDER, // EFFECT_TRIPLE_ARROWS,
-        .power = 50,
         .type = TYPE_FIGHTING,
         .accuracy = 100,
         .pp = 15,
@@ -13540,11 +13614,16 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_BLEAKWIND_STORM] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .power = 100,
+            .pp = 10,
+        #else
+            .power = 95,
+            .pp = 5,
+        #endif
         .effect = EFFECT_PLACEHOLDER, // EFFECT_BLEAKWIND_STORM,
-        .power = 95,
         .type = TYPE_FLYING,
         .accuracy = 80,
-        .pp = 5,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -13556,11 +13635,16 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_WILDBOLT_STORM] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .power = 100,
+            .pp = 10,
+        #else
+            .power = 95,
+            .pp = 5,
+        #endif
         .effect = EFFECT_PLACEHOLDER, // EFFECT_WILDBOLT_STORM,
-        .power = 95,
         .type = TYPE_ELECTRIC,
         .accuracy = 80,
-        .pp = 5,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -13572,11 +13656,16 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SANDSEAR_STORM] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .power = 100,
+            .pp = 10,
+        #else
+            .power = 95,
+            .pp = 5,
+        #endif
         .effect = EFFECT_PLACEHOLDER, // EFFECT_SANDSEAR_STORM,
-        .power = 95,
         .type = TYPE_GROUND,
         .accuracy = 80,
-        .pp = 5,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
