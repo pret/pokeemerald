@@ -413,6 +413,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectTerrainHit              @ EFFECT_DAMAGE_SET_TERRAIN
 	.4byte BattleScript_EffectDarkVoid                @ EFFECT_DARK_VOID
 	.4byte BattleScript_EffectSleepHit                @ EFFECT_SLEEP_HIT
+	.4byte BattleScript_EffectDoubleShock             @ EFFECT_DOUBLE_SHOCK
 
 BattleScript_AffectionBasedEndurance::
 	playanimation BS_TARGET, B_ANIM_AFFECTION_HANGED_ON
@@ -1279,6 +1280,23 @@ BattleScript_BurnUpWorks:
 BattleScript_BurnUpRemoveType::
 	losetype BS_ATTACKER, TYPE_FIRE
 	printstring STRINGID_ATTACKERLOSTFIRETYPE
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_EffectDoubleShock:
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpiftype BS_ATTACKER, TYPE_ELECTRIC, BattleScript_DoubleShockWorks
+	goto BattleScript_ButItFailed
+
+BattleScript_DoubleShockWorks:
+	setmoveeffect MOVE_EFFECT_DOUBLE_SHOCK | MOVE_EFFECT_CERTAIN
+	goto BattleScript_EffectHit
+
+BattleScript_DoubleShockRemoveType::
+	losetype BS_ATTACKER, TYPE_ELECTRIC
+	printstring STRINGID_ATTACKERLOSTELECTRICTYPE
 	waitmessage B_WAIT_TIME_LONG
 	return
 	

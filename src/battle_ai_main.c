@@ -2007,6 +2007,10 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             if (!IS_BATTLER_OF_TYPE(battlerAtk, TYPE_FIRE))
                 score -= 10;
             break;
+        case EFFECT_DOUBLE_SHOCK:
+            if (!IS_BATTLER_OF_TYPE(battlerAtk, TYPE_ELECTRIC))
+                score -= 10;
+            break;
         case EFFECT_DEFOG:
             if (gSideStatuses[GetBattlerSide(battlerDef)]
              & (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL | SIDE_STATUS_SAFEGUARD | SIDE_STATUS_MIST)

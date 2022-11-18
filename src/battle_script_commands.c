@@ -1131,6 +1131,7 @@ static const u16 sFinalStrikeOnlyEffects[] =
     EFFECT_BUG_BITE,
     EFFECT_THIEF,
     EFFECT_BURN_UP,
+    EFFECT_DOUBLE_SHOCK,
     EFFECT_SECRET_POWER,
     EFFECT_SMACK_DOWN,
     EFFECT_SPARKLING_ARIA,
@@ -3646,6 +3647,11 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 // This seems unnecessary but is done to make it work properly with Parental Bond
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_BurnUpRemoveType;
+                break;
+            case MOVE_EFFECT_DOUBLE_SHOCK:
+                // This seems unnecessary but is done to make it work properly with Parental Bond
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_DoubleShockRemoveType;
                 break;
             }
         }

@@ -394,7 +394,8 @@
 #define EFFECT_DAMAGE_SET_TERRAIN           388 // genesis supernova
 #define EFFECT_DARK_VOID                    389
 #define EFFECT_SLEEP_HIT                    390
+#define EFFECT_DOUBLE_SHOCK                 391
 
-#define NUM_BATTLE_MOVE_EFFECTS             391
+#define NUM_BATTLE_MOVE_EFFECTS             392
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

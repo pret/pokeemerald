@@ -14355,7 +14355,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_DOUBLE_SHOCK] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_DOUBLE_SHOCK
+        .effect = EFFECT_DOUBLE_SHOCK,
         .power = 120,
         .type = TYPE_ELECTRIC,
         .accuracy = 100,
