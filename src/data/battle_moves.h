@@ -13618,6 +13618,796 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .zMoveEffect = Z_EFFECT_NONE,
     },
 
+    [MOVE_TERA_BLAST] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_TERA_BLAST,
+        .power = 80,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 160,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_SILK_TRAP] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_PROTECT with extra checks
+        .power = 0,
+        .type = TYPE_BUG,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 4,
+        .flags = FLAG_PROTECTION_MOVE,
+        .split = SPLIT_STATUS,
+        .zMovePower = 0,
+        .zMoveEffect = Z_EFFECT_NONE
+    },
+
+    [MOVE_AXE_KICK] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_RECOIL_IF_MISS + 30% chance to confuse
+        .power = 120,
+        .type = TYPE_FIGHTING,
+        .accuracy = 90,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 190,
+        .zMoveEffect = Z_EFFECT_NONE
+    },
+
+    [MOVE_LAST_RESPECTS] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_LAST_RESPECTS
+        .power = 50,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 100,
+        .zMoveEffect = Z_EFFECT_NONE
+    },
+
+    [MOVE_LUMINA_CRASH] =
+    {
+        .effect = EFFECT_SPECIAL_DEFENSE_DOWN_HIT_2,
+        .power = 80,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 160,
+        .zMoveEffect = Z_EFFECT_NONE
+    },
+
+    [MOVE_ORDER_UP] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_ORDER_UP
+        .power = 80,
+        .type = TYPE_DRAGON,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED, // No King's Rock I believe? I may be mistaken
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 160,
+        .zMoveEffect = Z_EFFECT_NONE
+    },
+
+    [MOVE_JET_PUNCH] =
+    {
+        .effect = EFFECT_HIT,
+        .power = 60,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 1,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_IRON_FIST_BOOST, // I assume Iron Fist is relevant here, but untested
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 120,
+        .zMoveEffect = Z_EFFECT_NONE,
+        // The datamine master sheet mentions uncopiable by Metronome but that sounds odd? not yet implemented
+    },
+
+    [MOVE_SPICY_EXTRACT] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_SPICY_EXTRACT
+        .power = 0,
+        .type = TYPE_GRASS,
+        .accuracy = 0, // Supposedly never misses? needs a double check?
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .split = SPLIT_STATUS,
+        .zMovePower = 0,
+        .zMoveEffect = Z_EFFECT_NONE,
+        // The datamine master sheet mentions uncopiable by Metronome but that sounds odd? not yet implemented
+    },
+
+    [MOVE_SPIN_OUT] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_SPIN_OUT
+        .power = 100,
+        .type = TYPE_STEEL,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 180,
+        .zMoveEffect = Z_EFFECT_NONE
+    },
+
+    [MOVE_POPULATION_BOMB] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_MULTI_HIT maybe?
+        .power = 20,
+        .type = TYPE_NORMAL,
+        .accuracy = 90,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 40,
+        .zMoveEffect = Z_EFFECT_NONE,
+        //Supposedly uncallable by Metronome? (if so, needs implementation)
+        //The master sheet mentions a "slicing" flag but I'm not sure what it refers to
+    },
+
+    [MOVE_ICE_SPINNER] =
+    {
+        .effect = EFFECT_DAMAGE_SET_TERRAIN,
+        .power = 80,
+        .type = TYPE_ICE,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 160,
+        .zMoveEffect = Z_EFFECT_NONE,
+        .argument = 1,  //remove terrain
+    },
+
+    [MOVE_GLAIVE_RUSH] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_GLAIVE_RUSH
+        .power = 120,
+        .type = TYPE_DRAGON,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 190,
+        .zMoveEffect = Z_EFFECT_NONE
+    },
+
+    [MOVE_REVIVAL_BLESSING] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_REVIVAL_BLESSING
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .pp = 1,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .flags = 0,
+        .split = SPLIT_STATUS,
+        .zMovePower = 0,
+        .zMoveEffect = Z_EFFECT_NONE,
+        // Uncallable by Metronome (to be implemented)
+    },
+
+    [MOVE_SALT_CURE] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_SALT_CURE
+        .power = 40,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 80,
+        .zMoveEffect = Z_EFFECT_NONE,
+        // Supposedly uncallable by Metronome, but dubious
+    },
+
+    [MOVE_TRIPLE_DIVE] =
+    {
+        .effect = EFFECT_TRIPLE_KICK,
+        .power = 30,
+        .type = TYPE_WATER,
+        .accuracy = 95,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 100,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_MORTAL_SPIN] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_MORTAL_SPIN
+        .power = 30,
+        .type = TYPE_POISON,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 60,
+        .zMoveEffect = Z_EFFECT_NONE
+    },
+
+    [MOVE_DOODLE] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_DOODLE
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED, // Supposedly unconfirmed?
+        .priority = 0,
+        .flags = 0,
+        .split = SPLIT_STATUS,
+        .zMovePower = 0,
+        .zMoveEffect = Z_EFFECT_NONE,
+        // Supposedly uncallable by Metronome (unimplemented)
+    },
+
+    [MOVE_FILLET_AWAY] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_FILLET_AWAY
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .flags = FLAG_SNATCH_AFFECTED,
+        .split = SPLIT_STATUS,
+        .zMovePower = 0,
+        .zMoveEffect = Z_EFFECT_RECOVER_HP,
+        // Supposedly uncallable by Metronome (unimplemented)
+    },
+
+    [MOVE_KOWTOW_CLEAVE] =
+    {
+        .effect = EFFECT_HIT,
+        .power = 85,
+        .type = TYPE_DARK,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 160,
+        .zMoveEffect = Z_EFFECT_NONE,
+        // Needs a "slicing" flag (not sure what it refers to)
+    },
+
+    [MOVE_FLOWER_TRICK] =
+    {
+        .effect = EFFECT_ALWAYS_CRIT,
+        .power = 70,
+        .type = TYPE_GRASS,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 140,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_TORCH_SONG] =
+    {
+        .effect = EFFECT_SP_ATTACK_UP_HIT,
+        .power = 80,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_SOUND,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 160,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_AQUA_STEP] =
+    {
+        .effect = EFFECT_SPEED_UP_HIT,
+        .power = 80,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_DANCE,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 160,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_RAGING_BULL] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_RAGING_BULL
+        .power = 90,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 175,
+        .zMoveEffect = Z_EFFECT_NONE,
+        // Uncallable by Metronome (to be implemented)
+    },
+
+    [MOVE_MAKE_IT_RAIN] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_MAKE_IT_RAIN
+        .power = 120,
+        .type = TYPE_STEEL,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 190,
+        .zMoveEffect = Z_EFFECT_NONE,
+        // Uncallable by Metronome (to be implemented)
+    },
+
+    [MOVE_RUINATION] =
+    {
+        .effect = EFFECT_SUPER_FANG,
+        .power = 1,
+        .type = TYPE_DARK,
+        .accuracy = 90,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 100,
+        .zMoveEffect = Z_EFFECT_NONE,
+        // Uncallable by Metronome (to be implemented)
+    },
+
+    [MOVE_COLLISION_COURSE] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_COLLISION_COURSE
+        .power = 100,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 180,
+        .zMoveEffect = Z_EFFECT_NONE,
+        // Uncallable by Metronome (to be implemented)
+    },
+
+    [MOVE_ELECTRO_DRIFT] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_COLLISION_COURSE
+        .power = 100,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 180,
+        .zMoveEffect = Z_EFFECT_NONE,
+        // Uncallable by Metronome (to be implemented)
+    },
+
+    [MOVE_SHED_TAIL] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_SHED_TAIL
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .flags = 0,
+        .split = SPLIT_STATUS,
+        .zMovePower = 0,
+        .zMoveEffect = Z_EFFECT_RESET_STATS,
+        // Uncallable by Metronome (to be implemented)
+        // Supposedly unsnatchable?
+    },
+
+    [MOVE_CHILLY_RECEPTION] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_CHILLY_RECEPTION
+        .power = 0,
+        .type = TYPE_ICE,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_ALL_BATTLERS,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED,
+        .split = SPLIT_STATUS,
+        .zMovePower = 0,
+        .zMoveEffect = Z_EFFECT_SPD_UP_1,
+        // Supposedly uncallable by Metronome? (to be implemented)
+    },
+
+    [MOVE_TIDY_UP] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_TIDY_UP
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .flags = 0,
+        .split = SPLIT_STATUS,
+        .zMovePower = 0,
+        .zMoveEffect = Z_EFFECT_NONE,
+        // Supposedly uncallable by Metronome? (to be implemented)
+        // Supposedly unsnatchable?
+    },
+
+    [MOVE_SNOWSCAPE] =
+    {
+        .effect = EFFECT_HAIL,
+        .power = 0,
+        .type = TYPE_ICE,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_ALL_BATTLERS,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED,
+        .split = SPLIT_STATUS,
+        .zMovePower = 0,
+        .zMoveEffect = Z_EFFECT_SPD_UP_1,
+        // Currently an exact copy of Hail until we figure out what to do with it
+    },
+
+    [MOVE_POUNCE] =
+    {
+        .effect = EFFECT_SPEED_DOWN_HIT,
+        .power = 50,
+        .type = TYPE_BUG,
+        .accuracy = 100,
+        .pp = 20,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 100,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_TRAILBLAZE] =
+    {
+        .effect = EFFECT_SPEED_UP_HIT,
+        .power = 50,
+        .type = TYPE_GRASS,
+        .accuracy = 100,
+        .pp = 20,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 100,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_CHILLING_WATER] =
+    {
+        .effect = EFFECT_ATTACK_DOWN_HIT,
+        .power = 50,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 20,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 100,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_HYPER_DRILL] =
+    {
+        .effect = EFFECT_HIT,
+        .power = 100,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_MIRROR_MOVE_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 180,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_TWIN_BEAM] =
+    {
+        .effect = EFFECT_HIT,
+        .power = 40,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_TWO_STRIKES,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 100,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_RAGE_FIST] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_RAGE_FIST
+        .power = 50,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_IRON_FIST_BOOST | FLAG_SHEER_FORCE_BOOST,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 100,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_ARMOR_CANNON] =
+    {
+        .effect = EFFECT_CLOSE_COMBAT,
+        .power = 120,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 190,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_BITTER_BLADE] =
+    {
+        .effect = EFFECT_ABSORB,
+        .power = 90,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 160,
+        .zMoveEffect = Z_EFFECT_NONE,
+        // Needs the "slicing" flag
+    },
+
+    [MOVE_DOUBLE_SHOCK] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_DOUBLE_SHOCK
+        .power = 120,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 190,
+        .zMoveEffect = Z_EFFECT_NONE
+    },
+
+    [MOVE_GIGATON_HAMMER] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_GIGATON_HAMMER
+        .power = 160,
+        .type = TYPE_STEEL,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 200,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_COMEUPPANCE] =
+    {
+        .effect = EFFECT_METAL_BURST,
+        .power = 0,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_DEPENDS,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+
+    [MOVE_AQUA_CUTTER] =
+    {
+        .effect = EFFECT_HIT,
+        .power = 70,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 20,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HIGH_CRIT,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 140,
+        .zMoveEffect = Z_EFFECT_NONE,
+        // Needs the "slicing" flag
+    },
+
+    [MOVE_BLAZING_TORQUE] =
+    {
+        .effect = EFFECT_BURN_HIT,
+        .power = 80,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 30,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 160,
+        .zMoveEffect = Z_EFFECT_NONE
+    },
+
+    [MOVE_WICKED_TORQUE] =
+    {
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_SLEEP_HIT
+        .power = 80,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 160,
+        .zMoveEffect = Z_EFFECT_NONE
+    },
+
+    [MOVE_NOXIOUS_TORQUE] =
+    {
+        .effect = EFFECT_POISON_HIT,
+        .power = 100,
+        .type = TYPE_POISON,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 30,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 160,
+        .zMoveEffect = Z_EFFECT_NONE
+    },
+
+    [MOVE_COMBAT_TORQUE] =
+    {
+        .effect = EFFECT_PARALYZE_HIT,
+        .power = 100,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 30,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 160,
+        .zMoveEffect = Z_EFFECT_NONE
+    },
+
+    [MOVE_MAGICAL_TORQUE] =
+    {
+        .effect = EFFECT_CONFUSE_HIT,
+        .power = 100,
+        .type = TYPE_FAIRY,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 30,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 160,
+        .zMoveEffect = Z_EFFECT_NONE
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {
