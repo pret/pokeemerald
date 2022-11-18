@@ -3942,6 +3942,10 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (sereneGraceBoost)
             IncreaseStatUpScore(battlerAtk, battlerDef, STAT_ATK, &score);
         break;
+    case EFFECT_SPECIAL_ATTACK_UP_HIT:
+        if (sereneGraceBoost)
+            IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPATK, &score);
+        break;
     case EFFECT_FELL_STINGER:
         if (gBattleMons[battlerAtk].statStages[STAT_ATK] < MAX_STAT_STAGE
           && AI_DATA->abilities[battlerAtk] != ABILITY_CONTRARY

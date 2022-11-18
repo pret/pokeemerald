@@ -395,7 +395,8 @@
 #define EFFECT_DARK_VOID                    389
 #define EFFECT_SLEEP_HIT                    390
 #define EFFECT_DOUBLE_SHOCK                 391
+#define EFFECT_SPECIAL_ATTACK_UP_HIT        392
 
-#define NUM_BATTLE_MOVE_EFFECTS             392
+#define NUM_BATTLE_MOVE_EFFECTS             393
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

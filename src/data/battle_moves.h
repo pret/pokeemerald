@@ -13362,7 +13362,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_MYSTICAL_POWER] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_SPECIAL_ATTACK_UP_HIT
+        .effect = EFFECT_SPECIAL_ATTACK_UP_HIT,
         .power = 70,
         .type = TYPE_PSYCHIC,
         .accuracy = 90,
