@@ -13310,7 +13310,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_POWER_SHIFT] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_POWER_SHIFT,
+        .effect = EFFECT_POWER_TRICK,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
@@ -13318,7 +13318,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
         .priority = 0,
-        .flags = FLAG_MIRROR_MOVE_AFFECTED,
+        .flags = FLAG_SNATCH_AFFECTED,
         .split = SPLIT_STATUS,
         .zMovePower = 100,
         .zMoveEffect = Z_EFFECT_NONE,
