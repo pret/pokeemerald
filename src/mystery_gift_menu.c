@@ -1258,7 +1258,7 @@ static void Task_MysteryGift(u8 taskId)
             data->state = MG_STATE_CLIENT_LINK_END;
             break;
         case CLI_RET_COPY_MSG:
-            memcpy(data->clientMsg, MysteryGiftClient_GetMsg(), 0x40);
+            memcpy(data->clientMsg, MysteryGiftClient_GetMsg(), CLIENT_MAX_MSG_SIZE);
             MysteryGiftClient_AdvanceState();
             break;
         case CLI_RET_PRINT_MSG:
@@ -1371,9 +1371,9 @@ static void Task_MysteryGift(u8 taskId)
             if (data->msgId == CLI_MSG_NEWS_RECEIVED)
             {
                 if (data->sourceIsFriend == TRUE)
-                    GenerateRandomWonderNews(WONDER_NEWS_RECV_FRIEND);
+                    WonderNews_SetReward(WONDER_NEWS_RECV_FRIEND);
                 else
-                    GenerateRandomWonderNews(WONDER_NEWS_RECV_WIRELESS);
+                    WonderNews_SetReward(WONDER_NEWS_RECV_WIRELESS);
             }
             if (!successMsg)
             {
@@ -1580,7 +1580,7 @@ static void Task_MysteryGift(u8 taskId)
         {
             if (data->sourceIsFriend == TRUE && data->msgId == SVR_MSG_NEWS_SENT)
             {
-                GenerateRandomWonderNews(WONDER_NEWS_SENT);
+                WonderNews_SetReward(WONDER_NEWS_SENT);
                 data->state = MG_STATE_SAVE_LOAD_GIFT;
             }
             else
