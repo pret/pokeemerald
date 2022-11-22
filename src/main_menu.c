@@ -1631,7 +1631,7 @@ static void Task_NewGameBirchSpeech_ProcessNameYesNoMenu(u8 taskId)
             NewGameBirchSpeech_StartFadePlatformIn(taskId, 1);
             gTasks[taskId].func = Task_NewGameBirchSpeech_SlidePlatformAway2;
             break;
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             PlaySE(SE_SELECT);
             gTasks[taskId].func = Task_NewGameBirchSpeech_BoyOrGirl;

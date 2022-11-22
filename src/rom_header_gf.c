@@ -6,6 +6,15 @@
 #include "item.h"
 #include "pokeball.h"
 
+// The purpose of this struct is for outside applications to be
+// able to access parts of the ROM or its save file, like a public API.
+// In vanilla, it was used by Colosseum and XD to access pokemon graphics.
+// 
+// If this struct is rearranged in any way, it defeats the purpose of 
+// having it at all. Applications like PKHex or streaming HUDs may find
+// these values useful, so there's some potential benefit to keeping it.
+// If there's a compilation problem below, just comment out the assignment
+// instead of changing this struct.
 struct GFRomHeader
 {
     u32 version;
@@ -60,7 +69,7 @@ struct GFRomHeader
     u32 externalEventFlagsOffset;
     u32 externalEventDataOffset;
     u32 unk18;
-    const struct BaseStats * baseStats;
+    const struct SpeciesInfo * speciesInfo;
     const u8 (* abilityNames)[];
     const u8 * const * abilityDescriptions;
     const struct Item * items;
@@ -141,7 +150,7 @@ static const struct GFRomHeader sGFRomHeader = {
     .externalEventFlagsOffset = offsetof(struct SaveBlock1, externalEventFlags),
     .externalEventDataOffset = offsetof(struct SaveBlock1, externalEventData),
     .unk18 = 0x00000000,
-    .baseStats = gBaseStats,
+    .speciesInfo = gSpeciesInfo,
     .abilityNames = gAbilityNames,
     .abilityDescriptions = gAbilityDescriptionPointers,
     .items = gItems,

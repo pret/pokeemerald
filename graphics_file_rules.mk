@@ -337,7 +337,7 @@ graphics/title_screen/pokemon_logo.gbapal: %.gbapal: %.pal
 graphics/pokemon_jump/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 63 -Wnum_tiles
 
-graphics/pokenav/region_map.8bpp: %.8bpp: %.png
+graphics/pokenav/region_map/map.8bpp: %.8bpp: %.png
 	$(GFX) $< $@ -num_tiles 233 -Wnum_tiles
 
 $(MISCGFXDIR)/japanese_hof.4bpp: %.4bpp: %.png
@@ -669,7 +669,7 @@ $(WALLPAPERGFXDIR)/whiscash/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame2.4bpp $
 $(OBJEVENTGFXDIR)/pics/effects/unknown_4F6D38/0.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 11 -Wnum_tiles
 
-$(INTERFACEGFXDIR)/selector_outline.4bpp: %.4bpp: %.png
+$(INTERFACEGFXDIR)/outline_cursor.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 8 -Wnum_tiles
 
 $(BATTRANSGFXDIR)/frontier_logo_center.4bpp: %.4bpp: %.png
