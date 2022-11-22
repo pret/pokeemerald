@@ -295,8 +295,7 @@ struct SpeciesInfo
  /* 0x03 */ u8 baseSpeed;
  /* 0x04 */ u8 baseSpAttack;
  /* 0x05 */ u8 baseSpDefense;
- /* 0x06 */ u8 type1;
- /* 0x07 */ u8 type2;
+ /* 0x06 */ u8 types[NUM_TYPE_SLOTS];
  /* 0x08 */ u8 catchRate;
  /* 0x09 */ u8 expYield;
  /* 0x0A */ u16 evYield_HP:2;
@@ -311,9 +310,8 @@ struct SpeciesInfo
  /* 0x11 */ u8 eggCycles;
  /* 0x12 */ u8 friendship;
  /* 0x13 */ u8 growthRate;
- /* 0x14 */ u8 eggGroup1;
- /* 0x15 */ u8 eggGroup2;
- /* 0x16 */ u8 abilities[2];
+ /* 0x14 */ u8 eggGroups[NUM_EGG_GROUP_SLOTS];
+ /* 0x16 */ u8 abilities[NUM_ABILITY_SLOTS];
  /* 0x18 */ u8 safariZoneFleeRate;
  /* 0x19 */ u8 bodyColor : 7;
             u8 noFlip : 1;
