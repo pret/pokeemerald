@@ -10,7 +10,7 @@
         .baseSpeed = 150,                                                   \
         .baseSpAttack = 150,                                                \
         .baseSpDefense = 50,                                                \
-        .types { TYPE_NORMAL, TYPE_NORMAL},                                 \
+        .types = { TYPE_NORMAL, TYPE_NORMAL},                               \
         .catchRate = 3,                                                     \
         .expYield = 1,                                                      \
         .evYield_HP = 2,                                                    \
