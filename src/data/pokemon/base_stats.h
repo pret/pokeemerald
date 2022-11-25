@@ -5941,7 +5941,7 @@ const struct BaseStats gBaseStats[] =
         .noFlip = FALSE,
     },
 
-    [SPECIES_UNOWN] = UNOWN_BASE_STATS(FLIP),
+    [SPECIES_UNOWN_A] = UNOWN_BASE_STATS(FLIP),
 
     [SPECIES_WOBBUFFET] =
     {

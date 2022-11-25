@@ -4592,9 +4592,9 @@ static u16 GetNextPosition(u8 direction, u16 position, u16 min, u16 max)
 // All others use personality 0
 static u32 GetPokedexMonPersonality(u16 species)
 {
-    if (species == SPECIES_UNOWN || species == SPECIES_SPINDA)
+    if (species == SPECIES_UNOWN_A || species == SPECIES_SPINDA)
     {
-        if (species == SPECIES_UNOWN)
+        if (species == SPECIES_UNOWN_A)
             return gSaveBlock2Ptr->pokedex.unownPersonality;
         else
             return gSaveBlock2Ptr->pokedex.spindaPersonality;

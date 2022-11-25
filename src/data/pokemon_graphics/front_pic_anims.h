@@ -11731,7 +11731,7 @@ static const union AnimCmd *const sAnims_MISDREAVUS[] =
     sAnim_MISDREAVUS_1,
 };
 
-static const union AnimCmd *const sAnims_UNOWN[] =
+static const union AnimCmd *const sAnims_UNOWN_A[] =
 {
     sAnim_GeneralFrame0,
     sAnim_UNOWN_1,
@@ -17335,7 +17335,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(MURKROW),
     ANIM_CMD(SLOWKING),
     ANIM_CMD(MISDREAVUS),
-    ANIM_CMD(UNOWN),
+    ANIM_CMD(UNOWN_A),
     ANIM_CMD(WOBBUFFET),
     ANIM_CMD(GIRAFARIG),
     ANIM_CMD(PINECO),
