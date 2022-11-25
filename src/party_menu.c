@@ -5177,9 +5177,10 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     PlaySE(SE_SELECT);
     if (cannotUseEffect)
     {
-        if (targetSpecies != SPECIES_NONE)
+        if (targetSpecies != SPECIES_NONE && holdEffectParam == 0)
         {
             PartyMenuTryEvolution(taskId);
+            RemoveBagItem(gSpecialVar_ItemId, 1);
         }
         else
         {
