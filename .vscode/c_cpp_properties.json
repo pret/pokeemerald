@@ -24,7 +24,7 @@
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
             },
-            "cStandard": "c99"
+            "cStandard": "c89"
         }
     ],
     "version": 4
