@@ -33,7 +33,6 @@ build/
 porymap.*.cfg
 prefabs.json
 .vscode/
-!.vscode/settings.json
 !.vscode/c_cpp_properties.json
 *.a
 .fuse_hidden*
