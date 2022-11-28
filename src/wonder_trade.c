@@ -24,25 +24,25 @@
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
 struct InGameTrade {
-    /*0x00*/ u8 name[11];
+    /*0x00*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
     /*0x0C*/ u16 species;
-    /*0x0E*/ u8 ivs[6];
-    /*0x14*/ bool8 ability;
+    /*0x0E*/ u8 ivs[NUM_STATS];
+    /*0x14*/ u8 abilityNum;
     /*0x18*/ u32 otId;
-    /*0x1C*/ u8 stats[5];
+    /*0x1C*/ u8 conditions[CONTEST_CATEGORIES_COUNT];
     /*0x24*/ u32 personality;
     /*0x28*/ u16 heldItem;
     /*0x2A*/ u8 mailNum;
     /*0x2B*/ u8 otName[11];
     /*0x36*/ u8 otGender;
     /*0x37*/ u8 sheen;
-    /*0x38*/ u16 playerSpecies;
+    /*0x38*/ u16 requestedSpecies;
 };
 
 #ifndef POKEMON_EXPANSION
 // This is a list of items that were not used in vanilla.
 // Feel free to delete it and remove the check that uses it.
-static const u16 sInvalidItem[] = {
+static const u16 sIsInvalidItem[] = {
     [ITEM_034] = 1,
     [ITEM_035] = 1,
     [ITEM_036] = 1,
@@ -113,7 +113,7 @@ static const u16 sInvalidItem[] = {
 };
 #endif
 
-static const u16 sValidSpecies[] =
+static const u16 sIsValidSpecies[] =
 {
     SPECIES_BULBASAUR,
     SPECIES_CHARMANDER,
@@ -567,7 +567,7 @@ u16 GetValidWonderTradeItem(u16 item);
 
 static u16 PickRandomSpecies() // picks only base forms
 {
-    u16 species = sValidSpecies[Random() % NELEMS(sValidSpecies)];
+    u16 species = sIsValidSpecies[Random() % NELEMS(sIsValidSpecies)];
     return species;
 }
 
@@ -1294,7 +1294,7 @@ u16 GetValidWonderTradeItem(u16 item)
         goto ROLL;
     else if (item == ITEM_METAL_POWDER && species != SPECIES_DITTO)
         goto ROLL;
-    else if (sInvalidItem[item])
+    else if (sIsInvalidItem[item])
         goto ROLL;
 
     return item;
