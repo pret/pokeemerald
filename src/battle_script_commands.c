@@ -14841,12 +14841,7 @@ void BS_CheckParentalBondCounter(void)
 // 6 bytes long (callnative(5) + battler(1))
 void BS_GetBattlerSide(void)
 {
-    u8 battler = gBattlescriptCurrInstr[5];
-    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
-        gBattleCommunication[0] = B_SIDE_PLAYER;
-    else
-        gBattleCommunication[0] = B_SIDE_OPPONENT;
-    
+    gBattleCommunication[0] = GetBattlerSide(gBattlescriptCurrInstr[5]);   
     gBattlescriptCurrInstr += 6;
 }
 
