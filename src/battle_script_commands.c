@@ -9434,9 +9434,6 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;    // exit if loop failed (failsafe)
         }
         return;
-    case VARIOUS_SET_Z_EFFECT:
-        SetZEffect();   //handles battle script jumping internally
-        return;
     case VARIOUS_MOVEEND_ITEM_EFFECTS:
         if (ItemBattleEffects(ITEMEFFECT_NORMAL, gActiveBattler, FALSE))
             return;
@@ -10034,39 +10031,6 @@ static void Cmd_various(void)
         break;
     case VARIOUS_SWAP_SIDE_STATUSES:
         CourtChangeSwapSideStatuses();
-        break;
-    case VARIOUS_TRY_SYMBIOSIS: //called by Bestow, Fling, and Bug Bite, which don't work with Cmd_removeitem.
-        if (SYMBIOSIS_CHECK(gActiveBattler, BATTLE_PARTNER(gActiveBattler)))
-        {
-            BestowItem(BATTLE_PARTNER(gActiveBattler), gActiveBattler);
-            gLastUsedAbility = gBattleMons[BATTLE_PARTNER(gActiveBattler)].ability;
-            gBattleScripting.battler = gBattlerAbility = BATTLE_PARTNER(gActiveBattler);
-            gBattlerAttacker = gActiveBattler;
-            BattleScriptPushCursor();
-            gBattlescriptCurrInstr = BattleScript_SymbiosisActivates;
-            return;
-        }
-        break;
-    case VARIOUS_CAN_TELEPORT:
-        gBattleCommunication[0] = CanTeleport(gActiveBattler);
-        break;
-    case VARIOUS_GET_BATTLER_SIDE:
-        if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-            gBattleCommunication[0] = B_SIDE_PLAYER;
-        else
-            gBattleCommunication[0] = B_SIDE_OPPONENT;
-        break;
-    case VARIOUS_CHECK_PARENTAL_BOND_COUNTER:
-        {
-            // Some effects should only happen on the first or second strike of Parental Bond,
-            // so a way to check this in battle scripts is useful
-            u8 counter = T1_READ_8(gBattlescriptCurrInstr + 3);
-            if (gSpecialStatuses[gBattlerAttacker].parentalBondState == counter && gBattleMons[gBattlerTarget].hp != 0)
-                gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 4);
-            else
-                gBattlescriptCurrInstr += 8;
-            return;
-        }
         break;
     } // End of switch (gBattlescriptCurrInstr[2])
 
@@ -14861,3 +14825,62 @@ static bool8 IsFinalStrikeEffect(u16 move)
     }
     return FALSE;
 }
+
+// 10 bytes long (callnative(5) + counter(1) + ptr(4))
+void BS_CheckParentalBondCounter(void)
+{
+    // Some effects should only happen on the first or second strike of Parental Bond,
+    // so a way to check this in battle scripts is useful
+    u8 counter = T1_READ_8(gBattlescriptCurrInstr + 5);
+    if (gSpecialStatuses[gBattlerAttacker].parentalBondState == counter && gBattleMons[gBattlerTarget].hp != 0)
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 6);
+    else
+        gBattlescriptCurrInstr += 10;
+}
+
+// 6 bytes long (callnative(5) + battler(1))
+void BS_GetBattlerSide(void)
+{
+    u8 battler = gBattlescriptCurrInstr[5];
+    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+        gBattleCommunication[0] = B_SIDE_PLAYER;
+    else
+        gBattleCommunication[0] = B_SIDE_OPPONENT;
+    
+    gBattlescriptCurrInstr += 6;
+}
+
+// 6 bytes long (callnative(5) + battler(1))
+void BS_CanTeleport(void)
+{
+    u8 battler = gBattlescriptCurrInstr[5];
+    gBattleCommunication[0] = CanTeleport(battler);
+    gBattlescriptCurrInstr += 6;
+}
+
+// 5 bytes long
+void BS_TrySymbiosis(void)
+{
+    //called by Bestow, Fling, and Bug Bite, which don't work with Cmd_removeitem.
+    gActiveBattler = gBattlerAttacker;
+    if (SYMBIOSIS_CHECK(gBattlerAttacker, BATTLE_PARTNER(gActiveBattler)))
+    {
+        BestowItem(BATTLE_PARTNER(gActiveBattler), gActiveBattler);
+        gLastUsedAbility = gBattleMons[BATTLE_PARTNER(gActiveBattler)].ability;
+        gBattleScripting.battler = gBattlerAbility = BATTLE_PARTNER(gActiveBattler);
+        gBattlerAttacker = gActiveBattler;
+        BattleScriptPushCursor(gBattlescriptCurrInstr + 5);
+        gBattlescriptCurrInstr = BattleScript_SymbiosisActivates;
+    }
+    else
+    {
+        gBattlescriptCurrInstr += 5;
+    }
+}
+
+void BS_SetZEffect(void)
+{
+    SetZEffect();   // Handles battle script jumping internally
+}
+
+
