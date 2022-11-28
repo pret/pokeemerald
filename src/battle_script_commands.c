@@ -14869,13 +14869,12 @@ void BS_TrySymbiosis(void)
         gLastUsedAbility = gBattleMons[BATTLE_PARTNER(gActiveBattler)].ability;
         gBattleScripting.battler = gBattlerAbility = BATTLE_PARTNER(gActiveBattler);
         gBattlerAttacker = gActiveBattler;
-        BattleScriptPushCursor(gBattlescriptCurrInstr + 5);
+        BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_SymbiosisActivates;
+        return;
     }
-    else
-    {
-        gBattlescriptCurrInstr += 5;
-    }
+    
+    gBattlescriptCurrInstr += 5;
 }
 
 void BS_SetZEffect(void)
