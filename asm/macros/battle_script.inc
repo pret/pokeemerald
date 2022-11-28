@@ -1299,13 +1299,18 @@
 	.byte 0xfe
 	.4byte \ptr
 	.endm
-
-	.macro metalburstdamagecalculator ptr:req
+	
+	.macro callnative func:req
 	.byte 0xff
-	.4byte \ptr
+	.4byte \func
 	.endm
 
 @ various command changed to more readable macros
+	.macro metalburstdamagecalculator ptr:req
+	callnative BS_CalcMetalBurstDmg
+	.4byte \ptr
+	.endm
+
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
 	.endm
