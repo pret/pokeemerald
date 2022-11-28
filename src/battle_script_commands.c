@@ -37,7 +37,6 @@
 #include "wild_encounter.h"
 #include "rtc.h"
 #include "party_menu.h"
-#include "constants/battle_config.h"
 #include "battle_arena.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"

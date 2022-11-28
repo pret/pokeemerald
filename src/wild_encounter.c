@@ -18,7 +18,6 @@
 #include "battle_pike.h"
 #include "battle_pyramid.h"
 #include "constants/abilities.h"
-#include "constants/battle_config.h"
 #include "constants/game_stat.h"
 #include "constants/item.h"
 #include "constants/items.h"

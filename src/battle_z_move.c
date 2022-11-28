@@ -31,7 +31,6 @@
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
 #include "battle_debug.h"
-#include "constants/battle_config.h"
 #include "data.h"
 #include "pokemon_summary_screen.h"
 #include "constants/songs.h"
@@ -187,7 +186,7 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
             return FALSE;   // Partner has mega evolved or is about to mega evolve
     }
 
-#if B_ENABLE_DEBUG == TRUE
+#if DEBUG_BATTLE_MENU == TRUE
     if (gBattleStruct->debugHoldEffects[battlerId])
         holdEffect = gBattleStruct->debugHoldEffects[battlerId];
     else

@@ -1,5 +1,5 @@
-#ifndef GUARD_CONSTANTS_POKEMON_CONFIG_H
-#define GUARD_CONSTANTS_POKEMON_CONFIG_H
+#ifndef GUARD_CONFIG_POKEMON_H
+#define GUARD_CONFIG_POKEMON_H
 
 #define P_UPDATED_TYPES         GEN_LATEST  // Since Gen 6, several Pokémon were changed to be partially or fully Fairy type.
 #define P_UPDATED_STATS         GEN_LATEST  // Since Gen 6, Pokémon stats are updated with each passing generation.
@@ -9,6 +9,13 @@
 #define P_LEGENDARY_PERFECT_IVS GEN_LATEST  // Since Gen 6, Legendaries, Mythicals and Ultra Beasts found in the wild or given through gifts have at least 3 perfect IVs.
 #define P_KADABRA_EVERSTONE     GEN_LATEST  // Since Gen 4, Kadabra can evolve even when holding an Everstone.
 #define P_NIDORAN_M_DITTO_BREED GEN_LATEST  // Since Gen 5, when Nidoran♂ breeds with Ditto it can produce Nidoran♀ offspring. Before, it would only yield male offspring. This change also applies to Volbeat.
+#define P_SHINY_BASE_CHANCE     GEN_LATEST  // Since Gen 6, the base chances of encountering a Shiny Pokémon was raised to 1/4096. This config adds an extra roll to the calculation, which effectively does the same thing.
+
+// Flag settings
+// To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.
+// Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.
+#define P_FLAG_FORCE_SHINY      0     // If this flag is set, all wild and gift Pokémon will forced into being Shiny.
+#define P_FLAG_FORCE_NO_SHINY   0     // If this flag is set, all wild and gift Pokémon will forced into NOT being Shiny.
 
 // Modifying the latest generation WILL change the saveblock due to Dex flags and will require a new save file.
 // Forms are kept based on the base species, Eg: Meowth and Persian will keep all of their forms, but Perrserker will not be available if P_GEN_8_POKEMON is set to FALSE.
@@ -20,6 +27,4 @@
 #define P_GEN_7_POKEMON         TRUE        // Generation 7 Pokémon (SM, USUM, LGPE)
 #define P_GEN_8_POKEMON         TRUE        // Generation 8 Pokémon (SwSh, BDSP, LA)
 
-#define P_ENABLE_DEBUG          TRUE        // Enables a debug menu for pokemon sprites and icons, accessed by pressing SELECT in the summary screen.
-
-#endif // GUARD_CONSTANTS_POKEMON_CONFIG_H
+#endif // GUARD_CONFIG_POKEMON_H

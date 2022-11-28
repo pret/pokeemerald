@@ -1,4 +1,5 @@
 #include "config.h"
+#include "config/battle.h"
 #include "constants/global.h"
 #include "constants/battle.h"
 #include "constants/pokemon.h"
@@ -12,7 +13,6 @@
 #include "constants/songs.h"
 #include "constants/game_stat.h"
 #include "constants/trainers.h"
-#include "constants/battle_config.h"
 #include "constants/species.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_script.inc"
