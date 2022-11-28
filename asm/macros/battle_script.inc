@@ -1305,12 +1305,13 @@
 	.4byte \func
 	.endm
 
-@ various command changed to more readable macros
+@ callnative macros
 	.macro metalburstdamagecalculator ptr:req
 	callnative BS_CalcMetalBurstDmg
 	.4byte \ptr
 	.endm
 
+@ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
 	.endm
