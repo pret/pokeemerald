@@ -21,6 +21,8 @@
 #include "constants/weather.h"
 #endif
 
+extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
+
 struct InGameTrade {
     /*0x00*/ u8 name[11];
     /*0x0C*/ u16 species;
@@ -74,9 +76,9 @@ static const u16 sInvalidItem[] = {
     [ITEM_076] = 1,
     [ITEM_077] = 1,
     [ITEM_078] = 1,
-    [ITEM_0B0] = 1,
-    [ITEM_0B1] = 1,
-    [ITEM_0B2] = 1,
+    [ITEM_UNUSED_BERRY_1] = 1,
+    [ITEM_UNUSED_BERRY_2] = 1,
+    [ITEM_UNUSED_BERRY_3] = 1,
     [ITEM_0E2] = 1,
     [ITEM_0E3] = 1,
     [ITEM_0E4] = 1,
