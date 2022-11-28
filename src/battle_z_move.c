@@ -165,12 +165,20 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
     u32 item;
     u16 holdEffect;
     u16 species;
+    int moveSlotIndex;
+
+    species = gBattleMons[battlerId].species;
+    item = gBattleMons[battlerId].item;
+
+    for (moveSlotIndex = 0; moveSlotIndex < MAX_MON_MOVES; moveSlotIndex++)
+    {
+        if (gBattleMons[battlerId].moves[moveSlotIndex] == move && gBattleMons[battlerId].pp[moveSlotIndex] == 0)
+            return FALSE;
+    }
 
     if (gBattleStruct->zmove.used[battlerId])
         return FALSE;
 
-    species = gBattleMons[battlerId].species;
-    item = gBattleMons[battlerId].item;
     if (gBattleTypeFlags & (BATTLE_TYPE_SAFARI | BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_FRONTIER))
         return FALSE;
 
