@@ -1,15 +1,13 @@
-EventScript_FieldPoison:: @ 82736BC
+EventScript_FieldPoison::
 	lockall
 	special TryFieldPoisonWhiteOut
 	waitstate
-	compare VAR_RESULT, FLDPSN_WHITEOUT
-	goto_if_eq EventScript_FieldWhiteOut
-	compare VAR_RESULT, FLDPSN_FRONTIER_WHITEOUT
-	goto_if_eq EventScript_FrontierFieldWhiteOut
+	goto_if_eq VAR_RESULT, FLDPSN_WHITEOUT, EventScript_FieldWhiteOut
+	goto_if_eq VAR_RESULT, FLDPSN_FRONTIER_WHITEOUT, EventScript_FrontierFieldWhiteOut
 	releaseall
 	end
 
-EventScript_FieldWhiteOut:: @ 82736D9
+EventScript_FieldWhiteOut::
 	message gText_PlayerWhitedOut
 	waitmessage
 	waitbuttonpress
@@ -21,25 +19,21 @@ EventScript_FieldWhiteOut:: @ 82736D9
 	waitstate
 	end
 
-EventScript_SetRespawnLavaridgePkmnCenter:: @ 82736F4
+EventScript_SetRespawnLavaridgePkmnCenter::
 	setrespawn HEAL_LOCATION_LAVARIDGE_TOWN
 	return
 
-EventScript_FrontierFieldWhiteOut:: @ 82736F8
+EventScript_FrontierFieldWhiteOut::
 	message gText_PlayerWhitedOut
 	waitmessage
 	waitbuttonpress
 	pike_inchallenge
-	compare VAR_RESULT, TRUE
-	goto_if_eq BattleFrontier_BattlePike_EventScript_Retire
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattlePike_EventScript_Retire
 	pyramid_inchallenge
-	compare VAR_RESULT, 1  @ On Pyramid floor
-	goto_if_eq BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
-	compare VAR_RESULT, 2  @ On Pyramid peak
-	goto_if_eq BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
+	goto_if_eq VAR_RESULT, 1, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost  @ On Pyramid floor
+	goto_if_eq VAR_RESULT, 2, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost  @ On Pyramid peak
 	trainerhill_inchallenge
-	compare VAR_RESULT, TRUE
-	goto_if_eq TrainerHill_1F_EventScript_Lost
+	goto_if_eq VAR_RESULT, TRUE, TrainerHill_1F_EventScript_Lost
 	special Script_FadeOutMapMusic
 	waitstate
 	fadescreen FADE_TO_BLACK

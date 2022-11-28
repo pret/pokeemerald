@@ -318,7 +318,7 @@
 #define SOUND_PAN_TARGET    63
 
 // move background ids
-#define BG_DARK_ 0 // the same as BG_DARK but is unused
+#define BG_NONE 0 // the same as BG_DARK but is unused
 #define BG_DARK 1
 #define BG_GHOST 2
 #define BG_PSYCHIC 3
@@ -342,9 +342,9 @@
 #define BG_FISSURE 21
 #define BG_BUG_OPPONENT 22
 #define BG_BUG_PLAYER 23
-#define BG_SOLARBEAM_OPPONENT 24
-#define BG_SOLARBEAM_PLAYER 25
-#define BG_SOLARBEAM_CONTESTS 26
+#define BG_SOLAR_BEAM_OPPONENT 24
+#define BG_SOLAR_BEAM_PLAYER 25
+#define BG_SOLAR_BEAM_CONTESTS 26
 
 // table ids for general animations (gBattleAnims_General)
 #define B_ANIM_CASTFORM_CHANGE          0
@@ -395,6 +395,9 @@
 // Tasks with return values often assign them to gBattleAnimArgs[7].
 #define ARG_RET_ID 7
 
+// For createsprite macro to use internally
+#define ANIMSPRITE_IS_TARGET (1 << 7)
+
 // Trapping Wrap-like moves end turn animation.
 #define TRAP_ANIM_BIND 0
 #define TRAP_ANIM_WRAP 0
@@ -409,5 +412,22 @@
 #define ANIM_WEATHER_RAIN 2
 #define ANIM_WEATHER_SANDSTORM 3
 #define ANIM_WEATHER_HAIL 4
+
+// Flags given to various functions to indicate which palettes to consider.
+// Handled by UnpackSelectedBattlePalettes
+#define F_PAL_BG          (1 << 0)
+#define F_PAL_ATTACKER    (1 << 1)
+#define F_PAL_TARGET      (1 << 2)
+#define F_PAL_ATK_PARTNER (1 << 3)
+#define F_PAL_DEF_PARTNER (1 << 4)
+#define F_PAL_ANIM_1      (1 << 5) // Palette set for GetBattleAnimBg1Data/GetBgDataForTransform. Only used (ineffectually?) by Aromatherapy.
+#define F_PAL_ANIM_2      (1 << 6) // Palette set for GetBattleAnimBgData/GetBgDataForTransform. Unused.
+#define F_PAL_ATK_SIDE    (F_PAL_ATTACKER | F_PAL_ATK_PARTNER)
+#define F_PAL_DEF_SIDE    (F_PAL_TARGET | F_PAL_DEF_PARTNER)
+#define F_PAL_BATTLERS    (F_PAL_ATK_SIDE | F_PAL_DEF_SIDE)
+// The below are only used by AnimTask_BlendBattleAnimPal to get battler sprite palettes by position rather than by role.
+// It's redundant with F_PAL_BATTLERS, because they're only ever used together to refer to all the battlers at once.
+#define F_PAL_BATTLERS_2  (1 << 7 | 1 << 8 | 1 << 9 | 1 << 10)
+
 
 #endif // GUARD_CONSTANTS_BATTLE_ANIM_H

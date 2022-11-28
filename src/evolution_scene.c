@@ -34,6 +34,8 @@
 #include "constants/rgb.h"
 #include "constants/items.h"
 
+extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
+
 struct EvoInfo
 {
     u8 preEvoSpriteId;
@@ -80,7 +82,7 @@ static const u8 sText_ShedinjaJapaneseName[] = _("ヌケニン");
 // The below table is used by Task_UpdateBgPalette to control the speed at which the bg color updates.
 // The first two values are indexes into sBgAnim_PalIndexes (indirectly, via sBgAnimPal), and are
 // the start and end of the range of colors in sBgAnim_PalIndexes it will move through incrementally
-// before starting over. It will repeat this cycle x number of times, where x = the 3rd value, 
+// before starting over. It will repeat this cycle x number of times, where x = the 3rd value,
 // delaying each increment by y, where y = the 4th value.
 // Once it has cycled x number of times, it will move to the next array in this table.
 static const u8 sBgAnim_PaletteControl[][4] =
@@ -168,7 +170,7 @@ static void CB2_BeginEvolutionScene(void)
 
 static void Task_BeginEvolutionScene(u8 taskId)
 {
-    struct Pokemon* mon = NULL;
+    struct Pokemon *mon = NULL;
     switch (gTasks[taskId].tState)
     {
     case 0:
@@ -194,7 +196,7 @@ static void Task_BeginEvolutionScene(u8 taskId)
     }
 }
 
-void BeginEvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, bool8 canStopEvo, u8 partyId)
+void BeginEvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopEvo, u8 partyId)
 {
     u8 taskId = CreateTask(Task_BeginEvolutionScene, 0);
     gTasks[taskId].tState = 0;
@@ -204,17 +206,17 @@ void BeginEvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, bool8 canStopE
     SetMainCallback2(CB2_BeginEvolutionScene);
 }
 
-void EvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, bool8 canStopEvo, u8 partyId)
+void EvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopEvo, u8 partyId)
 {
     u8 name[20];
     u16 currSpecies;
     u32 trainerId, personality;
     const struct CompressedSpritePalette* pokePal;
-    u8 ID;
+    u8 id;
 
     SetHBlankCallback(NULL);
     SetVBlankCallback(NULL);
-    CpuFill32(0, (void*)(VRAM), VRAM_SIZE);
+    CpuFill32(0, (void *)(VRAM), VRAM_SIZE);
 
     SetGpuReg(REG_OFFSET_MOSAIC, 0);
     SetGpuReg(REG_OFFSET_WIN0H, 0);
@@ -250,7 +252,7 @@ void EvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, bool8 canStopEvo, u
     AllocateMonSpritesGfx();
 
     GetMonData(mon, MON_DATA_NICKNAME, name);
-    StringCopy10(gStringVar1, name);
+    StringCopy_Nickname(gStringVar1, name);
     StringCopy(gStringVar2, gSpeciesNames[postEvoSpecies]);
 
     // preEvo sprite
@@ -258,43 +260,43 @@ void EvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, bool8 canStopEvo, u
     trainerId = GetMonData(mon, MON_DATA_OT_ID);
     personality = GetMonData(mon, MON_DATA_PERSONALITY);
     DecompressPicFromTable_2(&gMonFrontPicTable[currSpecies],
-                             gMonSpritesGfxPtr->sprites.ptr[1],
+                             gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
                              currSpecies);
     pokePal = GetMonSpritePalStructFromOtIdPersonality(currSpecies, trainerId, personality);
     LoadCompressedPalette(pokePal->data, 0x110, 0x20);
 
-    SetMultiuseSpriteTemplateToPokemon(currSpecies, 1);
+    SetMultiuseSpriteTemplateToPokemon(currSpecies, B_POSITION_OPPONENT_LEFT);
     gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
-    sEvoStructPtr->preEvoSpriteId = ID = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
+    sEvoStructPtr->preEvoSpriteId = id = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
 
-    gSprites[ID].callback = SpriteCallbackDummy_2;
-    gSprites[ID].oam.paletteNum = 1;
-    gSprites[ID].invisible = TRUE;
+    gSprites[id].callback = SpriteCallbackDummy_2;
+    gSprites[id].oam.paletteNum = 1;
+    gSprites[id].invisible = TRUE;
 
     // postEvo sprite
     DecompressPicFromTable_2(&gMonFrontPicTable[postEvoSpecies],
-                             gMonSpritesGfxPtr->sprites.ptr[3],
+                             gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT],
                              postEvoSpecies);
     pokePal = GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, trainerId, personality);
     LoadCompressedPalette(pokePal->data, 0x120, 0x20);
 
-    SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, 3);
+    SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, B_POSITION_OPPONENT_RIGHT);
     gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
-    sEvoStructPtr->postEvoSpriteId = ID = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
-    gSprites[ID].callback = SpriteCallbackDummy_2;
-    gSprites[ID].oam.paletteNum = 2;
-    gSprites[ID].invisible = TRUE;
+    sEvoStructPtr->postEvoSpriteId = id = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
+    gSprites[id].callback = SpriteCallbackDummy_2;
+    gSprites[id].oam.paletteNum = 2;
+    gSprites[id].invisible = TRUE;
 
     LoadEvoSparkleSpriteAndPal();
 
-    sEvoStructPtr->evoTaskId = ID = CreateTask(Task_EvolutionScene, 0);
-    gTasks[ID].tState = 0;
-    gTasks[ID].tPreEvoSpecies = currSpecies;
-    gTasks[ID].tPostEvoSpecies = postEvoSpecies;
-    gTasks[ID].tCanStop = canStopEvo;
-    gTasks[ID].tLearnsFirstMove = TRUE;
-    gTasks[ID].tEvoWasStopped = FALSE;
-    gTasks[ID].tPartyId = partyId;
+    sEvoStructPtr->evoTaskId = id = CreateTask(Task_EvolutionScene, 0);
+    gTasks[id].tState = 0;
+    gTasks[id].tPreEvoSpecies = currSpecies;
+    gTasks[id].tPostEvoSpecies = postEvoSpecies;
+    gTasks[id].tCanStop = canStopEvo;
+    gTasks[id].tLearnsFirstMove = TRUE;
+    gTasks[id].tEvoWasStopped = FALSE;
+    gTasks[id].tPartyId = partyId;
 
     memcpy(&sEvoStructPtr->savedPalette, &gPlttBufferUnfaded[0x20], sizeof(sEvoStructPtr->savedPalette));
 
@@ -308,11 +310,11 @@ void EvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, bool8 canStopEvo, u
 
 static void CB2_EvolutionSceneLoadGraphics(void)
 {
-    u8 ID;
+    u8 id;
     const struct CompressedSpritePalette* pokePal;
     u16 postEvoSpecies;
     u32 trainerId, personality;
-    struct Pokemon* mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskId].tPartyId];
+    struct Pokemon *mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskId].tPartyId];
 
     postEvoSpecies = gTasks[sEvoStructPtr->evoTaskId].tPostEvoSpecies;
     trainerId = GetMonData(mon, MON_DATA_OT_ID);
@@ -320,7 +322,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
 
     SetHBlankCallback(NULL);
     SetVBlankCallback(NULL);
-    CpuFill32(0, (void*)(VRAM), VRAM_SIZE);
+    CpuFill32(0, (void *)(VRAM), VRAM_SIZE);
 
     SetGpuReg(REG_OFFSET_MOSAIC, 0);
     SetGpuReg(REG_OFFSET_WIN0H, 0);
@@ -350,18 +352,18 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     gReservedSpritePaletteCount = 4;
 
     DecompressPicFromTable_2(&gMonFrontPicTable[postEvoSpecies],
-                             gMonSpritesGfxPtr->sprites.ptr[3],
+                             gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT],
                              postEvoSpecies);
     pokePal = GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, trainerId, personality);
 
     LoadCompressedPalette(pokePal->data, 0x120, 0x20);
 
-    SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, 3);
+    SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, B_POSITION_OPPONENT_RIGHT);
     gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
-    sEvoStructPtr->postEvoSpriteId = ID = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
+    sEvoStructPtr->postEvoSpriteId = id = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
 
-    gSprites[ID].callback = SpriteCallbackDummy_2;
-    gSprites[ID].oam.paletteNum = 2;
+    gSprites[id].callback = SpriteCallbackDummy_2;
+    gSprites[id].oam.paletteNum = 2;
 
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP);
 
@@ -379,7 +381,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
 
 static void CB2_TradeEvolutionSceneLoadGraphics(void)
 {
-    struct Pokemon* mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskId].tPartyId];
+    struct Pokemon *mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskId].tPartyId];
     u16 postEvoSpecies = gTasks[sEvoStructPtr->evoTaskId].tPostEvoSpecies;
 
     switch (gMain.state)
@@ -408,7 +410,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         gMain.state++;
         break;
     case 2:
-        InitTradeBg();
+        LoadTradeAnimGfx();
         gMain.state++;
         break;
     case 3:
@@ -422,7 +424,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
             u32 trainerId = GetMonData(mon, MON_DATA_OT_ID);
             u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
             DecompressPicFromTable_2(&gMonFrontPicTable[postEvoSpecies],
-                                     gMonSpritesGfxPtr->sprites.ptr[3],
+                                     gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT],
                                      postEvoSpecies);
             pokePal = GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, trainerId, personality);
             LoadCompressedPalette(pokePal->data, 0x120, 0x20);
@@ -431,14 +433,14 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         break;
     case 5:
         {
-            u8 ID;
+            u8 id;
 
-            SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, 1);
+            SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, B_POSITION_OPPONENT_LEFT);
             gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
-            sEvoStructPtr->postEvoSpriteId = ID = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
+            sEvoStructPtr->postEvoSpriteId = id = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
 
-            gSprites[ID].callback = SpriteCallbackDummy_2;
-            gSprites[ID].oam.paletteNum = 2;
+            gSprites[id].callback = SpriteCallbackDummy_2;
+            gSprites[id].oam.paletteNum = 2;
             gMain.state++;
             LinkTradeDrawWindow();
         }
@@ -449,7 +451,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
             LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(0, 0);
         }
-        BlendPalettes(PALETTES_ALL, 0x10, 0);
+        BlendPalettes(PALETTES_ALL, 0x10, RGB_BLACK);
         gMain.state++;
         break;
     case 7:
@@ -463,16 +465,16 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
     }
 }
 
-void TradeEvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, u8 preEvoSpriteId, u8 partyId)
+void TradeEvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, u8 preEvoSpriteId, u8 partyId)
 {
     u8 name[20];
     u16 currSpecies;
     u32 trainerId, personality;
     const struct CompressedSpritePalette* pokePal;
-    u8 ID;
+    u8 id;
 
     GetMonData(mon, MON_DATA_NICKNAME, name);
-    StringCopy10(gStringVar1, name);
+    StringCopy_Nickname(gStringVar1, name);
     StringCopy(gStringVar2, gSpeciesNames[postEvoSpecies]);
 
     gAffineAnimsDisabled = TRUE;
@@ -486,29 +488,29 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, u8 preEvoSprit
     sEvoStructPtr->preEvoSpriteId = preEvoSpriteId;
 
     DecompressPicFromTable_2(&gMonFrontPicTable[postEvoSpecies],
-                            gMonSpritesGfxPtr->sprites.ptr[1],
+                            gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
                             postEvoSpecies);
 
     pokePal = GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, trainerId, personality);
     LoadCompressedPalette(pokePal->data, 0x120, 0x20);
 
-    SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, 1);
+    SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, B_POSITION_OPPONENT_LEFT);
     gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
-    sEvoStructPtr->postEvoSpriteId = ID = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
+    sEvoStructPtr->postEvoSpriteId = id = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
 
-    gSprites[ID].callback = SpriteCallbackDummy_2;
-    gSprites[ID].oam.paletteNum = 2;
-    gSprites[ID].invisible = TRUE;
+    gSprites[id].callback = SpriteCallbackDummy_2;
+    gSprites[id].oam.paletteNum = 2;
+    gSprites[id].invisible = TRUE;
 
     LoadEvoSparkleSpriteAndPal();
 
-    sEvoStructPtr->evoTaskId = ID = CreateTask(Task_TradeEvolutionScene, 0);
-    gTasks[ID].tState = 0;
-    gTasks[ID].tPreEvoSpecies = currSpecies;
-    gTasks[ID].tPostEvoSpecies = postEvoSpecies;
-    gTasks[ID].tLearnsFirstMove = TRUE;
-    gTasks[ID].tEvoWasStopped = FALSE;
-    gTasks[ID].tPartyId = partyId;
+    sEvoStructPtr->evoTaskId = id = CreateTask(Task_TradeEvolutionScene, 0);
+    gTasks[id].tState = 0;
+    gTasks[id].tPreEvoSpecies = currSpecies;
+    gTasks[id].tPostEvoSpecies = postEvoSpecies;
+    gTasks[id].tLearnsFirstMove = TRUE;
+    gTasks[id].tEvoWasStopped = FALSE;
+    gTasks[id].tPartyId = partyId;
 
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
@@ -519,7 +521,7 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, u8 preEvoSprit
     gBattle_BG3_X = 256;
     gBattle_BG3_Y = 0;
 
-    gTextFlags.useAlternateDownArrow = 1;
+    gTextFlags.useAlternateDownArrow = TRUE;
 
     SetVBlankCallback(VBlankCB_TradeEvolutionScene);
     SetMainCallback2(CB2_TradeEvolutionSceneUpdate);
@@ -543,15 +545,13 @@ static void CB2_TradeEvolutionSceneUpdate(void)
     RunTasks();
 }
 
-static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
+static void CreateShedinja(u16 preEvoSpecies, struct Pokemon *mon)
 {
     u32 data = 0;
     if (gEvolutionTable[preEvoSpecies][0].method == EVO_LEVEL_NINJASK && gPlayerPartyCount < PARTY_SIZE)
     {
         s32 i;
-        struct Pokemon* shedinja = &gPlayerParty[gPlayerPartyCount];
-        const struct Evolution *evos;
-        const struct Evolution *evos2;
+        struct Pokemon *shedinja = &gPlayerParty[gPlayerPartyCount];
 
         CopyMon(&gPlayerParty[gPlayerPartyCount], mon, sizeof(struct Pokemon));
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_SPECIES, &gEvolutionTable[preEvoSpecies][1].targetSpecies);
@@ -572,12 +572,8 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
         CalculateMonStats(&gPlayerParty[gPlayerPartyCount]);
         CalculatePlayerPartyCount();
 
-        // can't match it otherwise, ehh
-        evos2 = gEvolutionTable[0];
-        evos = evos2 + EVOS_PER_MON * preEvoSpecies;
-
-        GetSetPokedexFlag(SpeciesToNationalPokedexNum(evos[1].targetSpecies), FLAG_SET_SEEN);
-        GetSetPokedexFlag(SpeciesToNationalPokedexNum(evos[1].targetSpecies), FLAG_SET_CAUGHT);
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(gEvolutionTable[preEvoSpecies][1].targetSpecies), FLAG_SET_SEEN);
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(gEvolutionTable[preEvoSpecies][1].targetSpecies), FLAG_SET_CAUGHT);
 
         if (GetMonData(shedinja, MON_DATA_SPECIES) == SPECIES_SHEDINJA
             && GetMonData(shedinja, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE
@@ -636,7 +632,7 @@ enum {
 static void Task_EvolutionScene(u8 taskId)
 {
     u32 var;
-    struct Pokemon* mon = &gPlayerParty[gTasks[taskId].tPartyId];
+    struct Pokemon *mon = &gPlayerParty[gTasks[taskId].tPartyId];
 
     // check if B Button was held, so the evolution gets stopped
     if (gMain.heldKeys == B_BUTTON
@@ -665,7 +661,7 @@ static void Task_EvolutionScene(u8 taskId)
         if (!gPaletteFade.active)
         {
             StringExpandPlaceholders(gStringVar4, gText_PkmnIsEvolving);
-            BattlePutTextOnWindow(gStringVar4, 0);
+            BattlePutTextOnWindow(gStringVar4, B_WIN_MSG);
             gTasks[taskId].tState++;
         }
         break;
@@ -762,10 +758,10 @@ static void Task_EvolutionScene(u8 taskId)
         if (IsCryFinished())
         {
             StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
-            BattlePutTextOnWindow(gStringVar4, 0);
+            BattlePutTextOnWindow(gStringVar4, B_WIN_MSG);
             PlayBGM(MUS_EVOLVED);
             gTasks[taskId].tState++;
-            SetMonData(mon, MON_DATA_SPECIES, (void*)(&gTasks[taskId].tPostEvoSpecies));
+            SetMonData(mon, MON_DATA_SPECIES, (void *)(&gTasks[taskId].tPostEvoSpecies));
             CalculateMonStats(mon);
             EvolutionRenameMon(mon, gTasks[taskId].tPreEvoSpecies, gTasks[taskId].tPostEvoSpecies);
             GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskId].tPostEvoSpecies), FLAG_SET_SEEN);
@@ -791,7 +787,7 @@ static void Task_EvolutionScene(u8 taskId)
                 gTasks[taskId].tLearnsFirstMove = FALSE;
                 gTasks[taskId].tLearnMoveState = MVSTATE_INTRO_MSG_1;
                 GetMonData(mon, MON_DATA_NICKNAME, text);
-                StringCopy10(gBattleTextBuff1, text);
+                StringCopy_Nickname(gBattleTextBuff1, text);
 
                 if (var == MON_HAS_MAX_MOVES)
                     gTasks[taskId].tState = EVOSTATE_REPLACE_MOVE;
@@ -820,8 +816,7 @@ static void Task_EvolutionScene(u8 taskId)
 
             DestroyTask(taskId);
             FreeMonSpritesGfx();
-            Free(sEvoStructPtr);
-            sEvoStructPtr = NULL;
+            FREE_AND_SET_NULL(sEvoStructPtr);
             FreeAllWindowBuffers();
             SetMainCallback2(gCB2_AfterEvolution);
         }
@@ -844,12 +839,12 @@ static void Task_EvolutionScene(u8 taskId)
     case EVOSTATE_CANCEL_MSG:
         if (EvoScene_IsMonAnimFinished(sEvoStructPtr->preEvoSpriteId))
         {
-            if (gTasks[taskId].tEvoWasStopped)
+            if (gTasks[taskId].tEvoWasStopped) // FRLG auto cancellation
                 StringExpandPlaceholders(gStringVar4, gText_EllipsisQuestionMark);
-            else // Fire Red leftover probably
+            else
                 StringExpandPlaceholders(gStringVar4, gText_PkmnStoppedEvolving);
 
-            BattlePutTextOnWindow(gStringVar4, 0);
+            BattlePutTextOnWindow(gStringVar4, B_WIN_MSG);
             gTasks[taskId].tEvoWasStopped = TRUE;
             gTasks[taskId].tState = EVOSTATE_TRY_LEARN_MOVE;
         }
@@ -859,8 +854,8 @@ static void Task_EvolutionScene(u8 taskId)
         {
             BufferMoveToLearnIntoBattleTextBuff2();
             PlayFanfare(MUS_LEVEL_UP);
-            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_PKMNLEARNEDMOVE - BATTLESTRINGS_ID_ADDER]);
-            BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_PKMNLEARNEDMOVE - BATTLESTRINGS_TABLE_START]);
+            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
             gTasks[taskId].tLearnsFirstMove = 0x40; // re-used as a counter
             gTasks[taskId].tState++;
         }
@@ -877,8 +872,8 @@ static void Task_EvolutionScene(u8 taskId)
             {
                 // "{mon} is trying to learn {move}"
                 BufferMoveToLearnIntoBattleTextBuff2();
-                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_TRYTOLEARNMOVE1 - BATTLESTRINGS_ID_ADDER]);
-                BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_TRYTOLEARNMOVE1 - BATTLESTRINGS_TABLE_START]);
+                BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
                 gTasks[taskId].tLearnMoveState++;
             }
             break;
@@ -886,8 +881,8 @@ static void Task_EvolutionScene(u8 taskId)
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
                 // "But, {mon} can't learn more than four moves"
-                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_TRYTOLEARNMOVE2 - BATTLESTRINGS_ID_ADDER]);
-                BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_TRYTOLEARNMOVE2 - BATTLESTRINGS_TABLE_START]);
+                BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
                 gTasks[taskId].tLearnMoveState++;
             }
             break;
@@ -895,8 +890,8 @@ static void Task_EvolutionScene(u8 taskId)
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
                 // "Delete a move to make room for {move}?"
-                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_TRYTOLEARNMOVE3 - BATTLESTRINGS_ID_ADDER]);
-                BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_TRYTOLEARNMOVE3 - BATTLESTRINGS_TABLE_START]);
+                BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
                 gTasks[taskId].tLearnMoveYesState = MVSTATE_SHOW_MOVE_SELECT;
                 gTasks[taskId].tLearnMoveNoState = MVSTATE_ASK_CANCEL;
                 gTasks[taskId].tLearnMoveState++;
@@ -904,8 +899,8 @@ static void Task_EvolutionScene(u8 taskId)
         case MVSTATE_PRINT_YES_NO:
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
-                HandleBattleWindow(0x18, 8, 0x1D, 0xD, 0);
-                BattlePutTextOnWindow(gText_BattleYesNoChoice, 0xC);
+                HandleBattleWindow(YESNOBOX_X_Y, 0);
+                BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
                 gTasks[taskId].tLearnMoveState++;
                 sEvoCursorPos = 0;
                 BattleCreateYesNoCursorAt(0);
@@ -933,7 +928,7 @@ static void Task_EvolutionScene(u8 taskId)
             }
             if (JOY_NEW(A_BUTTON))
             {
-                HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
+                HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
                 PlaySE(SE_SELECT);
 
                 if (sEvoCursorPos != 0)
@@ -952,7 +947,7 @@ static void Task_EvolutionScene(u8 taskId)
             if (JOY_NEW(B_BUTTON))
             {
                 // Equivalent to selecting NO
-                HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
+                HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
                 PlaySE(SE_SELECT);
                 gTasks[taskId].tLearnMoveState = gTasks[taskId].tLearnMoveNoState;
             }
@@ -983,8 +978,8 @@ static void Task_EvolutionScene(u8 taskId)
                     if (IsHMMove2(move))
                     {
                         // Can't forget HMs
-                        BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_HMMOVESCANTBEFORGOTTEN - BATTLESTRINGS_ID_ADDER]);
-                        BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+                        BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_HMMOVESCANTBEFORGOTTEN - BATTLESTRINGS_TABLE_START]);
+                        BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
                         gTasks[taskId].tLearnMoveState = MVSTATE_RETRY_AFTER_HM;
                     }
                     else
@@ -1000,36 +995,36 @@ static void Task_EvolutionScene(u8 taskId)
             }
             break;
         case MVSTATE_FORGET_MSG_1:
-            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_123POOF - BATTLESTRINGS_ID_ADDER]);
-            BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_123POOF - BATTLESTRINGS_TABLE_START]);
+            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
             gTasks[taskId].tLearnMoveState++;
             break;
         case MVSTATE_FORGET_MSG_2:
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
-                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_PKMNFORGOTMOVE - BATTLESTRINGS_ID_ADDER]);
-                BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_PKMNFORGOTMOVE - BATTLESTRINGS_TABLE_START]);
+                BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
                 gTasks[taskId].tLearnMoveState++;
             }
             break;
         case MVSTATE_LEARNED_MOVE:
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
-                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_ANDELLIPSIS - BATTLESTRINGS_ID_ADDER]);
-                BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_ANDELLIPSIS - BATTLESTRINGS_TABLE_START]);
+                BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
                 gTasks[taskId].tState = EVOSTATE_LEARNED_MOVE;
             }
             break;
         case MVSTATE_ASK_CANCEL:
-            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_STOPLEARNINGMOVE - BATTLESTRINGS_ID_ADDER]);
-            BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_STOPLEARNINGMOVE - BATTLESTRINGS_TABLE_START]);
+            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
             gTasks[taskId].tLearnMoveYesState = MVSTATE_CANCEL;
             gTasks[taskId].tLearnMoveNoState = MVSTATE_INTRO_MSG_1;
             gTasks[taskId].tLearnMoveState = MVSTATE_PRINT_YES_NO;
             break;
         case MVSTATE_CANCEL:
-            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_DIDNOTLEARNMOVE - BATTLESTRINGS_ID_ADDER]);
-            BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_DIDNOTLEARNMOVE - BATTLESTRINGS_TABLE_START]);
+            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
             gTasks[taskId].tState = EVOSTATE_TRY_LEARN_MOVE;
             break;
         case MVSTATE_RETRY_AFTER_HM:
@@ -1086,7 +1081,7 @@ enum {
 static void Task_TradeEvolutionScene(u8 taskId)
 {
     u32 var = 0;
-    struct Pokemon* mon = &gPlayerParty[gTasks[taskId].tPartyId];
+    struct Pokemon *mon = &gPlayerParty[gTasks[taskId].tPartyId];
 
     switch (gTasks[taskId].tState)
     {
@@ -1098,7 +1093,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
     case T_EVOSTATE_INTRO_CRY:
         if (!IsTextPrinterActive(0))
         {
-            PlayCry1(gTasks[taskId].tPreEvoSpecies, 0);
+            PlayCry_Normal(gTasks[taskId].tPreEvoSpecies, 0);
             gTasks[taskId].tState++;
         }
         break;
@@ -1206,7 +1201,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
                 gTasks[taskId].tLearnsFirstMove = FALSE;
                 gTasks[taskId].tLearnMoveState = 0;
                 GetMonData(mon, MON_DATA_NICKNAME, text);
-                StringCopy10(gBattleTextBuff1, text);
+                StringCopy_Nickname(gBattleTextBuff1, text);
 
                 if (var == MON_HAS_MAX_MOVES)
                     gTasks[taskId].tState = T_EVOSTATE_REPLACE_MOVE;
@@ -1227,9 +1222,8 @@ static void Task_TradeEvolutionScene(u8 taskId)
         if (!IsTextPrinterActive(0))
         {
             DestroyTask(taskId);
-            Free(sEvoStructPtr);
-            sEvoStructPtr = NULL;
-            gTextFlags.useAlternateDownArrow = 0;
+            FREE_AND_SET_NULL(sEvoStructPtr);
+            gTextFlags.useAlternateDownArrow = FALSE;
             SetMainCallback2(gCB2_AfterEvolution);
         }
         break;
@@ -1262,7 +1256,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
         {
             BufferMoveToLearnIntoBattleTextBuff2();
             PlayFanfare(MUS_LEVEL_UP);
-            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_PKMNLEARNEDMOVE - BATTLESTRINGS_ID_ADDER]);
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_PKMNLEARNEDMOVE - BATTLESTRINGS_TABLE_START]);
             DrawTextOnTradeWindow(0, gDisplayedStringBattle, 1);
             gTasks[taskId].tLearnsFirstMove = 0x40; // re-used as a counter
             gTasks[taskId].tState++;
@@ -1280,7 +1274,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
             {
                 // "{mon} is trying to learn {move}"
                 BufferMoveToLearnIntoBattleTextBuff2();
-                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_TRYTOLEARNMOVE1 - BATTLESTRINGS_ID_ADDER]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_TRYTOLEARNMOVE1 - BATTLESTRINGS_TABLE_START]);
                 DrawTextOnTradeWindow(0, gDisplayedStringBattle, 1);
                 gTasks[taskId].tLearnMoveState++;
             }
@@ -1289,7 +1283,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
                 // "But, {mon} can't learn more than four moves"
-                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_TRYTOLEARNMOVE2 - BATTLESTRINGS_ID_ADDER]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_TRYTOLEARNMOVE2 - BATTLESTRINGS_TABLE_START]);
                 DrawTextOnTradeWindow(0, gDisplayedStringBattle, 1);
                 gTasks[taskId].tLearnMoveState++;
             }
@@ -1298,7 +1292,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
                 // "Delete a move to make room for {move}?"
-                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_TRYTOLEARNMOVE3 - BATTLESTRINGS_ID_ADDER]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_TRYTOLEARNMOVE3 - BATTLESTRINGS_TABLE_START]);
                 DrawTextOnTradeWindow(0, gDisplayedStringBattle, 1);
                 gTasks[taskId].tLearnMoveYesState = T_MVSTATE_SHOW_MOVE_SELECT;
                 gTasks[taskId].tLearnMoveNoState = T_MVSTATE_ASK_CANCEL;
@@ -1319,7 +1313,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
             {
             case 0: // YES
                 sEvoCursorPos = 0;
-                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_EMPTYSTRING3 - BATTLESTRINGS_ID_ADDER]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_EMPTYSTRING3 - BATTLESTRINGS_TABLE_START]);
                 DrawTextOnTradeWindow(0, gDisplayedStringBattle, 1);
                 gTasks[taskId].tLearnMoveState = gTasks[taskId].tLearnMoveYesState;
                 if (gTasks[taskId].tLearnMoveState == T_MVSTATE_SHOW_MOVE_SELECT)
@@ -1328,7 +1322,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
             case 1: // NO
             case MENU_B_PRESSED:
                 sEvoCursorPos = 1;
-                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_EMPTYSTRING3 - BATTLESTRINGS_ID_ADDER]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_EMPTYSTRING3 - BATTLESTRINGS_TABLE_START]);
                 DrawTextOnTradeWindow(0, gDisplayedStringBattle, 1);
                 gTasks[taskId].tLearnMoveState = gTasks[taskId].tLearnMoveNoState;
                 break;
@@ -1367,7 +1361,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
                     if (IsHMMove2(move))
                     {
                         // Can't forget HMs
-                        BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_HMMOVESCANTBEFORGOTTEN - BATTLESTRINGS_ID_ADDER]);
+                        BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_HMMOVESCANTBEFORGOTTEN - BATTLESTRINGS_TABLE_START]);
                         DrawTextOnTradeWindow(0, gDisplayedStringBattle, 1);
                         gTasks[taskId].tLearnMoveState = T_MVSTATE_RETRY_AFTER_HM;
                     }
@@ -1378,7 +1372,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
 
                         RemoveMonPPBonus(mon, var);
                         SetMonMoveSlot(mon, gMoveToLearn, var);
-                        BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_123POOF - BATTLESTRINGS_ID_ADDER]);
+                        BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_123POOF - BATTLESTRINGS_TABLE_START]);
                         DrawTextOnTradeWindow(0, gDisplayedStringBattle, 1);
                         gTasks[taskId].tLearnMoveState++;
                     }
@@ -1388,7 +1382,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
         case T_MVSTATE_FORGET_MSG:
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
-                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_PKMNFORGOTMOVE - BATTLESTRINGS_ID_ADDER]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_PKMNFORGOTMOVE - BATTLESTRINGS_TABLE_START]);
                 DrawTextOnTradeWindow(0, gDisplayedStringBattle, 1);
                 gTasks[taskId].tLearnMoveState++;
             }
@@ -1396,20 +1390,20 @@ static void Task_TradeEvolutionScene(u8 taskId)
         case T_MVSTATE_LEARNED_MOVE:
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
-                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_ANDELLIPSIS - BATTLESTRINGS_ID_ADDER]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_ANDELLIPSIS - BATTLESTRINGS_TABLE_START]);
                 DrawTextOnTradeWindow(0, gDisplayedStringBattle, 1);
                 gTasks[taskId].tState = T_EVOSTATE_LEARNED_MOVE;
             }
             break;
         case T_MVSTATE_ASK_CANCEL:
-            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_STOPLEARNINGMOVE - BATTLESTRINGS_ID_ADDER]);
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_STOPLEARNINGMOVE - BATTLESTRINGS_TABLE_START]);
             DrawTextOnTradeWindow(0, gDisplayedStringBattle, 1);
             gTasks[taskId].tLearnMoveYesState = T_MVSTATE_CANCEL;
             gTasks[taskId].tLearnMoveNoState = T_MVSTATE_INTRO_MSG_1;
             gTasks[taskId].tLearnMoveState = T_MVSTATE_PRINT_YES_NO;
             break;
         case T_MVSTATE_CANCEL:
-            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_DIDNOTLEARNMOVE - BATTLESTRINGS_ID_ADDER]);
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_DIDNOTLEARNMOVE - BATTLESTRINGS_TABLE_START]);
             DrawTextOnTradeWindow(0, gDisplayedStringBattle, 1);
             gTasks[taskId].tState = T_EVOSTATE_TRY_LEARN_MOVE;
             break;
@@ -1650,7 +1644,7 @@ static void PauseBgPaletteAnim(void)
     if (taskId != TASK_NONE)
         gTasks[taskId].tPaused = TRUE;
 
-    FillPalette(0, 0xA0, 0x20);
+    FillPalette(RGB_BLACK, 0xA0, 0x20);
 }
 
 #undef tPaused
@@ -1664,7 +1658,7 @@ static void StopBgAnimation(void)
     if ((taskId = FindTaskIdByFunc(Task_AnimateBg)) != TASK_NONE)
         DestroyTask(taskId);
 
-    FillPalette(0, 0xA0, 0x20);
+    FillPalette(RGB_BLACK, 0xA0, 0x20);
     RestoreBgAfterAnim();
 }
 

@@ -1,4 +1,4 @@
-gText_Birch_Welcome:: @ 82C897B
+gText_Birch_Welcome::
 	.string "Hi! Sorry to keep you waiting!\p"
 	.string "Welcome to the world of POKéMON!\p"
 	.string "My name is BIRCH.\p"
@@ -6,12 +6,12 @@ gText_Birch_Welcome:: @ 82C897B
 	.string "PROFESSOR.\p"
 	.string "$"
 
-gText_Birch_Pokemon:: @ 82C89FB
+gText_Birch_Pokemon::
 	.string "This is what we call a “POKéMON.”\p"
 	.string "\n"
 	.string "$"
 
-gText_Birch_MainSpeech:: @ 82C8A1F
+gText_Birch_MainSpeech::
 	.string "This world is widely inhabited by\n"
 	.string "creatures known as POKéMON.\p"
 	.string "We humans live alongside POKéMON,\n"
@@ -28,28 +28,28 @@ gText_Birch_MainSpeech:: @ 82C8A1F
 	.string "That's what I do.\p"
 	.string "$"
 
-gText_Birch_AndYouAre:: @ 82C8BD0
+gText_Birch_AndYouAre::
 	.string "And you are?$"
 
-gText_Birch_BoyOrGirl:: @ 82C8BDD
+gText_Birch_BoyOrGirl::
 	.string "Are you a boy?\n"
 	.string "Or are you a girl?$"
 
-gText_Birch_WhatsYourName:: @ 82C8BFF
+gText_Birch_WhatsYourName::
 	.string "All right.\n"
 	.string "What's your name?$"
 
-gText_Birch_SoItsPlayer:: @ 82C8C1C
+gText_Birch_SoItsPlayer::
 	.string "So it's {PLAYER}{KUN}?$"
 
-gText_Birch_YourePlayer:: @ 82C8C2A
+gText_Birch_YourePlayer::
 	.string "Ah, okay!\p"
 	.string "You're {PLAYER}{KUN} who's moving to my\n"
 	.string "hometown of LITTLEROOT.\l"
 	.string "I get it now!\p"
 	.string "$"
 
-gText_Birch_AreYouReady:: @ 82C8C7A
+gText_Birch_AreYouReady::
 	.string "All right, are you ready?\p"
 	.string "Your very own adventure is about\n"
 	.string "to unfold.\p"

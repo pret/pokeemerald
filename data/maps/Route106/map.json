@@ -14,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "up",
+      "map": "MAP_ROUTE105",
       "offset": 0,
-      "map": "MAP_ROUTE105"
+      "direction": "up"
     },
     {
-      "direction": "down",
+      "map": "MAP_DEWFORD_TOWN",
       "offset": 60,
-      "map": "MAP_DEWFORD_TOWN"
+      "direction": "down"
     }
   ],
   "object_events": [
@@ -97,7 +97,7 @@
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_GRANITE_CAVE_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

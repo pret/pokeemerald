@@ -934,18 +934,18 @@ static const bool8 sValidApprenticeMoves[MOVES_COUNT] =
 // WHICH_MOVE has max 5 occurrences, defined as NUM_WHICH_MOVE_QUESTIONS
 // WHICH_FIRST has max 1 occurrence, lead mon should only be chosen once
 // WHICH_SPEECH has max 1 occurrence, as the apprentice leaves after its asked
-static const u8 sQuestionPossibilities[MAX_APPRENTICE_QUESTIONS] = 
+static const u8 sQuestionPossibilities[MAX_APPRENTICE_QUESTIONS] =
 {
     QUESTION_ID_WHAT_ITEM,
-    QUESTION_ID_WHAT_ITEM, 
-    QUESTION_ID_WHAT_ITEM, 
+    QUESTION_ID_WHAT_ITEM,
+    QUESTION_ID_WHAT_ITEM,
     QUESTION_ID_WHICH_MOVE,
-    QUESTION_ID_WHICH_MOVE, 
-    QUESTION_ID_WHICH_MOVE, 
-    QUESTION_ID_WHICH_MOVE, 
-    QUESTION_ID_WHICH_MOVE, 
-    QUESTION_ID_WHICH_FIRST, 
-    QUESTION_ID_WIN_SPEECH 
+    QUESTION_ID_WHICH_MOVE,
+    QUESTION_ID_WHICH_MOVE,
+    QUESTION_ID_WHICH_MOVE,
+    QUESTION_ID_WHICH_MOVE,
+    QUESTION_ID_WHICH_FIRST,
+    QUESTION_ID_WIN_SPEECH
 };
 
 static void (* const sApprenticeFunctions[])(void) =

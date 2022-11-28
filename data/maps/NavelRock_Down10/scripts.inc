@@ -1,3 +1,3 @@
-NavelRock_Down10_MapScripts:: @ 8269253
+NavelRock_Down10_MapScripts::
 	.byte 0
 

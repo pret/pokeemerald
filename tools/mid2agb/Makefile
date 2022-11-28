@@ -6,12 +6,18 @@ SRCS := agb.cpp error.cpp main.cpp midi.cpp tables.cpp
 
 HEADERS := agb.h error.h main.h midi.h tables.h
 
+ifeq ($(OS),Windows_NT)
+EXE := .exe
+else
+EXE :=
+endif
+
 .PHONY: all clean
 
-all: mid2agb
+all: mid2agb$(EXE)
 	@:
 
-mid2agb: $(SRCS) $(HEADERS)
+mid2agb$(EXE): $(SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o $@ $(LDFLAGS)
 
 clean:

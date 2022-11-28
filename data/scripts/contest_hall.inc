@@ -15,49 +15,47 @@
 .set LOCALID_ARTIST, 15
 
 @ Either ends or returns to EventScript_ContestReceptionist after submitting a contest entry
-LilycoveCity_ContestLobby_EventScript_SpeakToContestReceptionist:: @ 8279CC5
+LilycoveCity_ContestLobby_EventScript_SpeakToContestReceptionist::
 	lock
 	faceplayer
-	compare VAR_CONTEST_PRIZE_PICKUP, 0
-	goto_if_ne LilycoveCity_ContestLobby_EventScript_PickUpPrize
+	goto_if_ne VAR_CONTEST_PRIZE_PICKUP, 0, LilycoveCity_ContestLobby_EventScript_PickUpPrize
 	call_if_set FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_ReceptionWelcome
 	call_if_unset FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_GivePokeblockCase
 	goto LilycoveCity_ContestLobby_EventScript_AskEnterContest
 	end
 
-LilycoveCity_ContestLobby_EventScript_ReceptionWelcome:: @ 8279CEA
+LilycoveCity_ContestLobby_EventScript_ReceptionWelcome::
 	msgbox LilycoveCity_ContestLobby_Text_ContestReception, MSGBOX_DEFAULT
 	return
 
-LilycoveCity_ContestLobby_EventScript_GivePokeblockCase:: @ 8279CF3
+LilycoveCity_ContestLobby_EventScript_GivePokeblockCase::
 	msgbox LilycoveCity_ContestLobby_Text_ReceptionDontHavePokeblockCase, MSGBOX_DEFAULT
 	giveitem ITEM_POKEBLOCK_CASE
 	setflag FLAG_RECEIVED_POKEBLOCK_CASE
 	msgbox LilycoveCity_ContestLobby_Text_NowThatWeveClearedThatUp, MSGBOX_DEFAULT
 	return
 
-LilycoveCity_ContestLobby_EventScript_PickUpPrize:: @ 8279D13
+LilycoveCity_ContestLobby_EventScript_PickUpPrize::
 	msgbox LilycoveCity_ContestLobby_Text_PokemonWonWeHavePrize, MSGBOX_DEFAULT
 	switch VAR_CONTEST_PRIZE_PICKUP
 	case 4, LilycoveCity_ContestLobby_EventScript_GiveLuxuryBallAtCounter
 	end
 
-LilycoveCity_ContestLobby_EventScript_GiveLuxuryBallAtCounter:: @ 8279D2C
+LilycoveCity_ContestLobby_EventScript_GiveLuxuryBallAtCounter::
 	giveitem ITEM_LUXURY_BALL
-	compare VAR_RESULT, FALSE
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_NoRoomForLuxuryBallAtCounter
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_ContestLobby_EventScript_NoRoomForLuxuryBallAtCounter
 	setvar VAR_CONTEST_PRIZE_PICKUP, 0
 	closemessage
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_NoRoomForLuxuryBallAtCounter:: @ 8279D4B
+LilycoveCity_ContestLobby_EventScript_NoRoomForLuxuryBallAtCounter::
 	call Common_EventScript_BagIsFull
 	msgbox LilycoveCity_ContestLobby_Text_ComeBackForPrizeLater, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_AskEnterContest:: @ 8279D5A
+LilycoveCity_ContestLobby_EventScript_AskEnterContest::
 	message LilycoveCity_ContestLobby_Text_EnterContest1
 	waitmessage
 	multichoice 0, 0, MULTI_ENTERINFO, FALSE
@@ -68,7 +66,7 @@ LilycoveCity_ContestLobby_EventScript_AskEnterContest:: @ 8279D5A
 	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
 	end
 
-LilycoveCity_ContestLobby_EventScript_ContestInfo:: @ 8279D97
+LilycoveCity_ContestLobby_EventScript_ContestInfo::
 	message LilycoveCity_ContestLobby_Text_WhichTopic1
 	waitmessage
 	multichoice 0, 0, MULTI_CONTEST_INFO, FALSE
@@ -80,45 +78,39 @@ LilycoveCity_ContestLobby_EventScript_ContestInfo:: @ 8279D97
 	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_AskEnterContest
 	end
 
-LilycoveCity_ContestLobby_EventScript_ExplainContests:: @ 8279DDF
+LilycoveCity_ContestLobby_EventScript_ExplainContests::
 	msgbox LilycoveCity_ContestLobby_Text_ExplainContests, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_ContestInfo
 	end
 
-LilycoveCity_ContestLobby_EventScript_ExplainContestTypes:: @ 8279DED
+LilycoveCity_ContestLobby_EventScript_ExplainContestTypes::
 	msgbox LilycoveCity_ContestLobby_Text_ExplainContestTypes, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_ContestInfo
 	end
 
-LilycoveCity_ContestLobby_EventScript_ExplainContestRanks:: @ 8279DFB
+LilycoveCity_ContestLobby_EventScript_ExplainContestRanks::
 	msgbox LilycoveCity_ContestLobby_Text_ExplainContestRanks, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_ContestInfo
 	end
 
-LilycoveCity_ContestLobby_EventScript_CancelEnterContest:: @ 8279E09
+LilycoveCity_ContestLobby_EventScript_CancelEnterContest::
 	msgbox LilycoveCity_ContestLobby_Text_ParticipateAnotherTime, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_ChooseContestMon:: @ 8279E13
+LilycoveCity_ContestLobby_EventScript_ChooseContestMon::
 	msgbox LilycoveCity_ContestLobby_Text_EnterWhichPokemon1, MSGBOX_DEFAULT
 	choosecontestmon
-	compare VAR_0x8004, 255
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelEnterContest
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
 	special TryEnterContestMon
-	compare VAR_RESULT, CANT_ENTER_CONTEST
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_CantEnterLowRank
-	compare VAR_RESULT, CAN_ENTER_CONTEST_EQUAL_RANK
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_EnterMon
-	compare VAR_RESULT, CAN_ENTER_CONTEST_HIGH_RANK
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_ConfirmEntryAlreadyWon
-	compare VAR_RESULT, CANT_ENTER_CONTEST_EGG
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_CantEnterEgg
-	compare VAR_RESULT, CANT_ENTER_CONTEST_FAINTED
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_CantEnterFainted
+	goto_if_eq VAR_RESULT, CANT_ENTER_CONTEST, LilycoveCity_ContestLobby_EventScript_CantEnterLowRank
+	goto_if_eq VAR_RESULT, CAN_ENTER_CONTEST_EQUAL_RANK, LilycoveCity_ContestLobby_EventScript_EnterMon
+	goto_if_eq VAR_RESULT, CAN_ENTER_CONTEST_HIGH_RANK, LilycoveCity_ContestLobby_EventScript_ConfirmEntryAlreadyWon
+	goto_if_eq VAR_RESULT, CANT_ENTER_CONTEST_EGG, LilycoveCity_ContestLobby_EventScript_CantEnterEgg
+	goto_if_eq VAR_RESULT, CANT_ENTER_CONTEST_FAINTED, LilycoveCity_ContestLobby_EventScript_CantEnterFainted
 	end
 
-LilycoveCity_ContestLobby_EventScript_ChooseContestRank:: @ 8279E62
+LilycoveCity_ContestLobby_EventScript_ChooseContestRank::
 	message LilycoveCity_ContestLobby_Text_EnterWhichRank
 	waitmessage
 	multichoice 0, 0, MULTI_CONTEST_RANK, FALSE
@@ -131,29 +123,29 @@ LilycoveCity_ContestLobby_EventScript_ChooseContestRank:: @ 8279E62
 	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
 	end
 
-LilycoveCity_ContestLobby_EventScript_EnterNormalRank:: @ 8279EB5
+LilycoveCity_ContestLobby_EventScript_EnterNormalRank::
 	setvar VAR_CONTEST_RANK, CONTEST_RANK_NORMAL
 	goto LilycoveCity_ContestLobby_EventScript_ChooseContestType
 	end
 
-LilycoveCity_ContestLobby_EventScript_EnterSuperRank:: @ 8279EC0
+LilycoveCity_ContestLobby_EventScript_EnterSuperRank::
 	setvar VAR_CONTEST_RANK, CONTEST_RANK_SUPER
 	goto LilycoveCity_ContestLobby_EventScript_ChooseContestType
 	end
 
-LilycoveCity_ContestLobby_EventScript_EnterHyperRank:: @ 8279ECB
+LilycoveCity_ContestLobby_EventScript_EnterHyperRank::
 	setvar VAR_CONTEST_RANK, CONTEST_RANK_HYPER
 	goto LilycoveCity_ContestLobby_EventScript_ChooseContestType
 	end
 
-LilycoveCity_ContestLobby_EventScript_EnterMasterRank:: @ 8279ED6
+LilycoveCity_ContestLobby_EventScript_EnterMasterRank::
 	setvar VAR_CONTEST_RANK, CONTEST_RANK_MASTER
 	goto LilycoveCity_ContestLobby_EventScript_ChooseContestType
 	end
 
 @ The multichoice selection IDs are equal to the CATEGORY values
 @ So rather than list the cases they just copy VAR_RESULT for a valid selection into VAR_CONTEST_CATEGORY
-LilycoveCity_ContestLobby_EventScript_ChooseContestType:: @ 8279EE1
+LilycoveCity_ContestLobby_EventScript_ChooseContestType::
 	message LilycoveCity_ContestLobby_Text_EnterWhichContest1
 	waitmessage
 	multichoice 0, 0, MULTI_CONTEST_TYPE, FALSE
@@ -164,48 +156,48 @@ LilycoveCity_ContestLobby_EventScript_ChooseContestType:: @ 8279EE1
 	goto LilycoveCity_ContestLobby_EventScript_ChooseContestMon
 	end
 
-LilycoveCity_ContestLobby_EventScript_CantEnterLowRank:: @ 8279F12
+LilycoveCity_ContestLobby_EventScript_CantEnterLowRank::
 	msgbox LilycoveCity_ContestLobby_Text_MonNotQualifiedForRank, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_ChooseContestMon
 	release
 	end
 
 @ Unused
-LilycoveCity_ContestLobby_EventScript_ConfirmEntry:: @ 8279F21
+LilycoveCity_ContestLobby_EventScript_ConfirmEntry::
 	msgbox LilycoveCity_ContestLobby_Text_ConfirmContestMon, MSGBOX_YESNO
 	switch VAR_RESULT
 	case NO, LilycoveCity_ContestLobby_EventScript_ChooseContestMon
 	case YES, LilycoveCity_ContestLobby_EventScript_EnterMon
 	end
 
-LilycoveCity_ContestLobby_EventScript_ConfirmEntryAlreadyWon:: @ 8279F45
+LilycoveCity_ContestLobby_EventScript_ConfirmEntryAlreadyWon::
 	msgbox LilycoveCity_ContestLobby_Text_AlreadyWonEnterAnyway, MSGBOX_YESNO
 	switch VAR_RESULT
 	case NO, LilycoveCity_ContestLobby_EventScript_ChooseContestMon
 	case YES, LilycoveCity_ContestLobby_EventScript_EnterMon
 	end
 
-LilycoveCity_ContestLobby_EventScript_CantEnterEgg:: @ 8279F69
+LilycoveCity_ContestLobby_EventScript_CantEnterEgg::
 	msgbox LilycoveCity_ContestLobby_Text_EggCannotTakePart, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_ChooseContestMon
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_CantEnterFainted:: @ 8279F78
+LilycoveCity_ContestLobby_EventScript_CantEnterFainted::
 	msgbox LilycoveCity_ContestLobby_Text_MonInNoConditionForContest, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_ChooseContestMon
 	release
 	end
 
 @ The return here is back to LilycoveCity_ContestLobby_EventScript_ContestReceptionist
-LilycoveCity_ContestLobby_EventScript_EnterMon:: @ 8279F87
+LilycoveCity_ContestLobby_EventScript_EnterMon::
 	msgbox LilycoveCity_ContestLobby_Text_YourMonIsEntryNum4, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	setvar VAR_CONTEST_HALL_STATE, 1
 	return
 
-ContestHall_EventScript_DoContest:: @ 8279F97
+ContestHall_EventScript_DoContest::
 	special LinkContestTryShowWirelessIndicator
 	setvar VAR_0x8006, 0
 	lockall
@@ -228,7 +220,7 @@ ContestHall_EventScript_DoContest:: @ 8279F97
 	setvar VAR_CONTEST_HALL_STATE, 2
 	return
 
-ContestHall_EventScript_GetContestRankStringId:: @ 8279FF2
+ContestHall_EventScript_GetContestRankStringId::
 	switch VAR_CONTEST_RANK
 	case CONTEST_RANK_NORMAL, ContestHall_EventScript_GetNormalStringId
 	case CONTEST_RANK_SUPER, ContestHall_EventScript_GetSuperStringId
@@ -236,24 +228,24 @@ ContestHall_EventScript_GetContestRankStringId:: @ 8279FF2
 	case CONTEST_RANK_MASTER, ContestHall_EventScript_GetMasterStringId
 	return
 
-ContestHall_EventScript_GetNormalStringId:: @ 827A024
+ContestHall_EventScript_GetNormalStringId::
 	setvar VAR_0x8009, STDSTRING_NORMAL
 	return
 
-ContestHall_EventScript_GetSuperStringId:: @ 827A02A
+ContestHall_EventScript_GetSuperStringId::
 	setvar VAR_0x8009, STDSTRING_SUPER
 	return
 
-ContestHall_EventScript_GetHyperStringId:: @ 827A030
+ContestHall_EventScript_GetHyperStringId::
 	setvar VAR_0x8009, STDSTRING_HYPER
 	return
 
-ContestHall_EventScript_GetMasterStringId:: @ 827A036
+ContestHall_EventScript_GetMasterStringId::
 	setvar VAR_0x8009, STDSTRING_MASTER
 	return
 
 @ This whole switch is equivalent to copyvar VAR_0x8008, VAR_CONTEST_CATEGORY
-ContestHall_EventScript_GetContestCategory:: @ 827A03C
+ContestHall_EventScript_GetContestCategory::
 	switch VAR_CONTEST_CATEGORY
 	case CONTEST_CATEGORY_COOL, ContestHall_EventScript_GetCategoryCool
 	case CONTEST_CATEGORY_BEAUTY, ContestHall_EventScript_GetCategoryBeauty
@@ -262,29 +254,29 @@ ContestHall_EventScript_GetContestCategory:: @ 827A03C
 	case CONTEST_CATEGORY_TOUGH, ContestHall_EventScript_GetCategoryTough
 	return
 
-ContestHall_EventScript_GetCategoryCool:: @ 827A079
+ContestHall_EventScript_GetCategoryCool::
 	setvar VAR_0x8008, CONTEST_CATEGORY_COOL
 	return
 
-ContestHall_EventScript_GetCategoryBeauty:: @ 827A07F
+ContestHall_EventScript_GetCategoryBeauty::
 	setvar VAR_0x8008, CONTEST_CATEGORY_BEAUTY
 	return
 
-ContestHall_EventScript_GetCategoryCute:: @ 827A085
+ContestHall_EventScript_GetCategoryCute::
 	setvar VAR_0x8008, CONTEST_CATEGORY_CUTE
 	return
 
-ContestHall_EventScript_GetCategorySmart:: @ 827A08B
+ContestHall_EventScript_GetCategorySmart::
 	setvar VAR_0x8008, CONTEST_CATEGORY_SMART
 	return
 
-ContestHall_EventScript_GetCategoryTough:: @ 827A091
+ContestHall_EventScript_GetCategoryTough::
 	setvar VAR_0x8008, CONTEST_CATEGORY_TOUGH
 	return
 
-ContestHall_EventScript_ContestGettingStarted:: @ 827A097
-	buffercontesttypestring 1, VAR_0x8008
-	bufferstdstring 2, VAR_0x8009
+ContestHall_EventScript_ContestGettingStarted::
+	buffercontestname STR_VAR_2, VAR_0x8008
+	bufferstdstring STR_VAR_3, VAR_0x8009
 	call ContestHall_EventScript_GettingStarted
 	lockall
 	applymovement LOCALID_MC, ContestHall_Movement_MCBackUp
@@ -292,23 +284,21 @@ ContestHall_EventScript_ContestGettingStarted:: @ 827A097
 	releaseall
 	return
 
-ContestHall_EventScript_GettingStarted:: @ 827A0B1
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_GettingStartedLink
+ContestHall_EventScript_GettingStarted::
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_GettingStartedLink
 	lockall
 	msgbox ContestHall_Text_GettingStartedParticipantsAsFollows, MSGBOX_DEFAULT
 	releaseall
 	return
 
-ContestHall_EventScript_GettingStartedLink:: @ 827A0C7
+ContestHall_EventScript_GettingStartedLink::
 	specialvar VAR_RESULT, IsWirelessContest
-	compare VAR_RESULT, TRUE
-	goto_if_eq ContestHall_EventScript_GettingStartedWireless
+	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_GettingStartedWireless
 	messageautoscroll ContestHall_Text_GettingStartedParticipantsAsFollowsLink
 	waitmessage
 	return
 
-ContestHall_EventScript_GettingStartedWireless:: @ 827A0DE
+ContestHall_EventScript_GettingStartedWireless::
 	messageautoscroll ContestHall_Text_GettingStartedWireless
 	waitmessage
 	call ContestHall_EventScript_TryWaitForLink
@@ -317,7 +307,7 @@ ContestHall_EventScript_GettingStartedWireless:: @ 827A0DE
 	call ContestHall_EventScript_TryWaitForLink
 	return
 
-ContestHall_EventScript_ShowContestMons:: @ 827A0F5
+ContestHall_EventScript_ShowContestMons::
 	call ContestHall_EventScript_ContestantWalkToCenter
 	call ContestHall_EventScript_ShowContestMonPic
 	call ContestHall_EventScript_AudienceHeartEmotes
@@ -326,35 +316,29 @@ ContestHall_EventScript_ShowContestMons:: @ 827A0F5
 	call ContestHall_EventScript_TryWaitForLink
 	call ContestHall_EventScript_TryWaitForLink
 	addvar VAR_0x8006, 1
-	compare VAR_0x8006, CONTESTANT_COUNT
-	goto_if_ne ContestHall_EventScript_ShowContestMons
+	goto_if_ne VAR_0x8006, CONTESTANT_COUNT, ContestHall_EventScript_ShowContestMons
 	call ContestHall_EventScript_AudienceVote
 	setvar VAR_TEMP_1, 6
 	return
 
-ContestHall_EventScript_TryWaitForLink:: @ 827A133
+ContestHall_EventScript_TryWaitForLink::
 	specialvar VAR_RESULT, IsWirelessContest
-	compare VAR_RESULT, TRUE
-	goto_if_eq ContestHall_EventScript_WaitForLink
+	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_WaitForLink
 	return
 
-ContestHall_EventScript_WaitForLink:: @ 827A144
+ContestHall_EventScript_WaitForLink::
 	special LinkContestWaitForConnection
 	waitstate
 	return
 
-ContestHall_EventScript_ContestantWalkToCenter:: @ 827A149
-	compare VAR_0x8006, 0
-	goto_if_eq ContestHall_EventScript_Player1WalkToCenter
-	compare VAR_0x8006, 1
-	goto_if_eq ContestHall_EventScript_Player2WalkToCenter
-	compare VAR_0x8006, 2
-	goto_if_eq ContestHall_EventScript_Player3WalkToCenter
-	compare VAR_0x8006, 3
-	goto_if_eq ContestHall_EventScript_Player4WalkToCenter
+ContestHall_EventScript_ContestantWalkToCenter::
+	goto_if_eq VAR_0x8006, 0, ContestHall_EventScript_Player1WalkToCenter
+	goto_if_eq VAR_0x8006, 1, ContestHall_EventScript_Player2WalkToCenter
+	goto_if_eq VAR_0x8006, 2, ContestHall_EventScript_Player3WalkToCenter
+	goto_if_eq VAR_0x8006, 3, ContestHall_EventScript_Player4WalkToCenter
 	return
 
-ContestHall_EventScript_Player1WalkToCenter:: @ 827A176
+ContestHall_EventScript_Player1WalkToCenter::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
 	applymovement LOCALID_CONTESTANT_1, ContestHall_Movement_Player1WalkToCenter
@@ -363,7 +347,7 @@ ContestHall_EventScript_Player1WalkToCenter:: @ 827A176
 	setvar VAR_0x800B, LOCALID_CONTESTANT_1
 	return
 
-ContestHall_EventScript_Player2WalkToCenter:: @ 827A18D
+ContestHall_EventScript_Player2WalkToCenter::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
 	applymovement LOCALID_CONTESTANT_2, ContestHall_Movement_Player2WalkToCenter
@@ -372,7 +356,7 @@ ContestHall_EventScript_Player2WalkToCenter:: @ 827A18D
 	setvar VAR_0x800B, LOCALID_CONTESTANT_2
 	return
 
-ContestHall_EventScript_Player3WalkToCenter:: @ 827A1A4
+ContestHall_EventScript_Player3WalkToCenter::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
 	applymovement LOCALID_CONTESTANT_3, ContestHall_Movement_Player3WalkToCenter
@@ -381,7 +365,7 @@ ContestHall_EventScript_Player3WalkToCenter:: @ 827A1A4
 	setvar VAR_0x800B, LOCALID_CONTESTANT_3
 	return
 
-ContestHall_EventScript_Player4WalkToCenter:: @ 827A1BB
+ContestHall_EventScript_Player4WalkToCenter::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
 	applymovement LOCALID_CONTESTANT_4, ContestHall_Movement_Player4WalkToCenter
@@ -390,10 +374,10 @@ ContestHall_EventScript_Player4WalkToCenter:: @ 827A1BB
 	setvar VAR_0x800B, LOCALID_CONTESTANT_4
 	return
 
-ContestHall_EventScript_ShowContestMonPic:: @ 827A1D2
+ContestHall_EventScript_ShowContestMonPic::
 	special BufferContestTrainerAndMonNames
 	addvar VAR_0x8006, 1
-	buffernumberstring 1, VAR_0x8006
+	buffernumberstring STR_VAR_2, VAR_0x8006
 	lockall
 	applymovement VAR_0x800B, ContestHall_Movement_ContestantDelay32
 	waitmovement 0
@@ -412,19 +396,18 @@ ContestHall_EventScript_ShowContestMonPic:: @ 827A1D2
 	call ContestHall_EventScript_EntryXTrainersMon
 	return
 
-ContestHall_EventScript_EntryXTrainersMon:: @ 827A217
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_EntryXTrainersMonLink
+ContestHall_EventScript_EntryXTrainersMon::
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_EntryXTrainersMonLink
 	message ContestHall_Text_EntryXTrainersMon
 	waitmessage
 	return
 
-ContestHall_EventScript_EntryXTrainersMonLink:: @ 827A229
+ContestHall_EventScript_EntryXTrainersMonLink::
 	messageautoscroll ContestHall_Text_EntryXTrainersMon
 	waitmessage
 	return
 
-ContestHall_EventScript_AudienceVote:: @ 827A230
+ContestHall_EventScript_AudienceVote::
 	call ContestHall_EventScript_AudienceWillVote
 	call ContestHall_EventScript_VotingUnderWay
 	playse SE_M_ENCORE2
@@ -440,21 +423,19 @@ ContestHall_EventScript_AudienceVote:: @ 827A230
 	waitmovement 0
 	return
 
-ContestHall_EventScript_AudienceWillVote:: @ 827A26C
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_AudienceWillVoteLink
+ContestHall_EventScript_AudienceWillVote::
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_AudienceWillVoteLink
 	msgbox ContestHall_Text_SeenContestantsAudienceWillVote, MSGBOX_DEFAULT
 	return
 
-ContestHall_EventScript_AudienceWillVoteLink:: @ 827A280
+ContestHall_EventScript_AudienceWillVoteLink::
 	specialvar VAR_RESULT, IsWirelessContest
-	compare VAR_RESULT, TRUE
-	goto_if_eq ContestHall_EventScript_AudienceWillVoteWireless
+	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_AudienceWillVoteWireless
 	messageautoscroll ContestHall_Text_SeenContestantsAudienceWillVote
 	waitmessage
 	return
 
-ContestHall_EventScript_AudienceWillVoteWireless:: @ 827A297
+ContestHall_EventScript_AudienceWillVoteWireless::
 	messageautoscroll ContestHall_Text_WeveSeenContestants
 	waitmessage
 	call ContestHall_EventScript_TryWaitForLink
@@ -466,18 +447,17 @@ ContestHall_EventScript_AudienceWillVoteWireless:: @ 827A297
 	call ContestHall_EventScript_TryWaitForLink
 	return
 
-ContestHall_EventScript_VotingUnderWay:: @ 827A2B9
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_VotingUnderWayLink
+ContestHall_EventScript_VotingUnderWay::
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_VotingUnderWayLink
 	message ContestHall_Text_VotingUnderWay
 	return
 
-ContestHall_EventScript_VotingUnderWayLink:: @ 827A2CA
+ContestHall_EventScript_VotingUnderWayLink::
 	messageautoscroll ContestHall_Text_VotingUnderWay
 	call ContestHall_EventScript_TryWaitForLink
 	return
 
-ContestHall_EventScript_AudienceReactToContestant:: @ 827A2D5
+ContestHall_EventScript_AudienceReactToContestant::
 	call ContestHall_EventScript_TryWaitForLink
 	applymovement LOCALID_MC, ContestHall_Movement_AudienceMemberLookLeft
 	waitmovement 0
@@ -508,18 +488,13 @@ ContestHall_EventScript_AudienceReactToContestant:: @ 827A2D5
 @ For each heart to display a random audience member is chosen, and a new one chosen if they already displayed a heart
 @ VAR_TEMP_1 through VAR_TEMP_8 represent each of the 8 audience members that are actual object events
 @    and are set to 9 if they havent displayed a heart yet, and 1 if they have
-ContestHall_EventScript_AudienceHeartEmotes:: @ 827A34F
+ContestHall_EventScript_AudienceHeartEmotes::
 	special GetContestMonCondition
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_NORMAL
-	call_if_eq ContestHall_EventScript_GetNumberOfHeartsNormal
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_SUPER
-	call_if_eq ContestHall_EventScript_GetNumberOfHeartsSuper
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_HYPER
-	call_if_eq ContestHall_EventScript_GetNumberOfHeartsHyper
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_MASTER
-	call_if_eq ContestHall_EventScript_GetNumberOfHeartsMaster
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	call_if_eq ContestHall_EventScript_GetNumberOfHeartsLink
+	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_NORMAL, ContestHall_EventScript_GetNumberOfHeartsNormal
+	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_SUPER, ContestHall_EventScript_GetNumberOfHeartsSuper
+	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_HYPER, ContestHall_EventScript_GetNumberOfHeartsHyper
+	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_MASTER, ContestHall_EventScript_GetNumberOfHeartsMaster
+	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_GetNumberOfHeartsLink
 	setvar VAR_TEMP_1, 9
 	setvar VAR_TEMP_2, 9
 	setvar VAR_TEMP_3, 9
@@ -528,8 +503,7 @@ ContestHall_EventScript_AudienceHeartEmotes:: @ 827A34F
 	setvar VAR_TEMP_6, 9
 	setvar VAR_TEMP_7, 9
 	setvar VAR_TEMP_8, 9
-	compare VAR_TEMP_0, 0
-	call_if_gt ContestHall_EventScript_DisplayHearts
+	call_if_gt VAR_TEMP_0, 0, ContestHall_EventScript_DisplayHearts
 	setvar VAR_TEMP_1, 0
 	setvar VAR_TEMP_2, 0
 	setvar VAR_TEMP_3, 0
@@ -540,165 +514,115 @@ ContestHall_EventScript_AudienceHeartEmotes:: @ 827A34F
 	setvar VAR_TEMP_8, 0
 	return
 
-ContestHall_EventScript_DisplayHearts:: @ 827A3E5
+ContestHall_EventScript_DisplayHearts::
 	setvar VAR_RESULT, 8
 	special GenerateContestRand
-	compare VAR_RESULT, 0
-	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember1
-	compare VAR_RESULT, 1
-	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember2
-	compare VAR_RESULT, 2
-	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember3
-	compare VAR_RESULT, 3
-	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember4
-	compare VAR_RESULT, 4
-	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember5
-	compare VAR_RESULT, 5
-	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember6
-	compare VAR_RESULT, 6
-	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember7
-	compare VAR_RESULT, 7
-	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember8
-	compare VAR_TEMP_0, 0  @ Still more hearts to display
-	goto_if_gt ContestHall_EventScript_DisplayHearts
+	call_if_eq VAR_RESULT, 0, ContestHall_EventScript_TryDisplayHeartAudienceMember1
+	call_if_eq VAR_RESULT, 1, ContestHall_EventScript_TryDisplayHeartAudienceMember2
+	call_if_eq VAR_RESULT, 2, ContestHall_EventScript_TryDisplayHeartAudienceMember3
+	call_if_eq VAR_RESULT, 3, ContestHall_EventScript_TryDisplayHeartAudienceMember4
+	call_if_eq VAR_RESULT, 4, ContestHall_EventScript_TryDisplayHeartAudienceMember5
+	call_if_eq VAR_RESULT, 5, ContestHall_EventScript_TryDisplayHeartAudienceMember6
+	call_if_eq VAR_RESULT, 6, ContestHall_EventScript_TryDisplayHeartAudienceMember7
+	call_if_eq VAR_RESULT, 7, ContestHall_EventScript_TryDisplayHeartAudienceMember8
+	goto_if_gt VAR_TEMP_0, 0, ContestHall_EventScript_DisplayHearts  @ Still more hearts to display
 	waitmovement 0
 	return
 
-ContestHall_EventScript_GetNumberOfHeartsNormal:: @ 827A454
-	compare VAR_0x8004, 80
-	goto_if_gt ContestHall_EventScript_Set8Hearts
-	compare VAR_0x8004, 70
-	goto_if_gt ContestHall_EventScript_Set7Hearts
-	compare VAR_0x8004, 60
-	goto_if_gt ContestHall_EventScript_Set6Hearts
-	compare VAR_0x8004, 50
-	goto_if_gt ContestHall_EventScript_Set5Hearts
-	compare VAR_0x8004, 40
-	goto_if_gt ContestHall_EventScript_Set4Hearts
-	compare VAR_0x8004, 30
-	goto_if_gt ContestHall_EventScript_Set3Hearts
-	compare VAR_0x8004, 20
-	goto_if_gt ContestHall_EventScript_Set2Hearts
-	compare VAR_0x8004, 10
-	goto_if_gt ContestHall_EventScript_Set1Heart
+ContestHall_EventScript_GetNumberOfHeartsNormal::
+	goto_if_gt VAR_0x8004, 80, ContestHall_EventScript_Set8Hearts
+	goto_if_gt VAR_0x8004, 70, ContestHall_EventScript_Set7Hearts
+	goto_if_gt VAR_0x8004, 60, ContestHall_EventScript_Set6Hearts
+	goto_if_gt VAR_0x8004, 50, ContestHall_EventScript_Set5Hearts
+	goto_if_gt VAR_0x8004, 40, ContestHall_EventScript_Set4Hearts
+	goto_if_gt VAR_0x8004, 30, ContestHall_EventScript_Set3Hearts
+	goto_if_gt VAR_0x8004, 20, ContestHall_EventScript_Set2Hearts
+	goto_if_gt VAR_0x8004, 10, ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
-ContestHall_EventScript_GetNumberOfHeartsSuper:: @ 827A4B2
-	compare VAR_0x8004, 230
-	goto_if_gt ContestHall_EventScript_Set8Hearts
-	compare VAR_0x8004, 210
-	goto_if_gt ContestHall_EventScript_Set7Hearts
-	compare VAR_0x8004, 190
-	goto_if_gt ContestHall_EventScript_Set6Hearts
-	compare VAR_0x8004, 170
-	goto_if_gt ContestHall_EventScript_Set5Hearts
-	compare VAR_0x8004, 150
-	goto_if_gt ContestHall_EventScript_Set4Hearts
-	compare VAR_0x8004, 130
-	goto_if_gt ContestHall_EventScript_Set3Hearts
-	compare VAR_0x8004, 110
-	goto_if_gt ContestHall_EventScript_Set2Hearts
-	compare VAR_0x8004, 90
-	goto_if_gt ContestHall_EventScript_Set1Heart
+ContestHall_EventScript_GetNumberOfHeartsSuper::
+	goto_if_gt VAR_0x8004, 230, ContestHall_EventScript_Set8Hearts
+	goto_if_gt VAR_0x8004, 210, ContestHall_EventScript_Set7Hearts
+	goto_if_gt VAR_0x8004, 190, ContestHall_EventScript_Set6Hearts
+	goto_if_gt VAR_0x8004, 170, ContestHall_EventScript_Set5Hearts
+	goto_if_gt VAR_0x8004, 150, ContestHall_EventScript_Set4Hearts
+	goto_if_gt VAR_0x8004, 130, ContestHall_EventScript_Set3Hearts
+	goto_if_gt VAR_0x8004, 110, ContestHall_EventScript_Set2Hearts
+	goto_if_gt VAR_0x8004, 90, ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
-ContestHall_EventScript_GetNumberOfHeartsHyper:: @ 827A510
-	compare VAR_0x8004, 380
-	goto_if_gt ContestHall_EventScript_Set8Hearts
-	compare VAR_0x8004, 350
-	goto_if_gt ContestHall_EventScript_Set7Hearts
-	compare VAR_0x8004, 320
-	goto_if_gt ContestHall_EventScript_Set6Hearts
-	compare VAR_0x8004, 290
-	goto_if_gt ContestHall_EventScript_Set5Hearts
-	compare VAR_0x8004, 260
-	goto_if_gt ContestHall_EventScript_Set4Hearts
-	compare VAR_0x8004, 230
-	goto_if_gt ContestHall_EventScript_Set3Hearts
-	compare VAR_0x8004, 200
-	goto_if_gt ContestHall_EventScript_Set2Hearts
-	compare VAR_0x8004, 170
-	goto_if_gt ContestHall_EventScript_Set1Heart
+ContestHall_EventScript_GetNumberOfHeartsHyper::
+	goto_if_gt VAR_0x8004, 380, ContestHall_EventScript_Set8Hearts
+	goto_if_gt VAR_0x8004, 350, ContestHall_EventScript_Set7Hearts
+	goto_if_gt VAR_0x8004, 320, ContestHall_EventScript_Set6Hearts
+	goto_if_gt VAR_0x8004, 290, ContestHall_EventScript_Set5Hearts
+	goto_if_gt VAR_0x8004, 260, ContestHall_EventScript_Set4Hearts
+	goto_if_gt VAR_0x8004, 230, ContestHall_EventScript_Set3Hearts
+	goto_if_gt VAR_0x8004, 200, ContestHall_EventScript_Set2Hearts
+	goto_if_gt VAR_0x8004, 170, ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
-ContestHall_EventScript_GetNumberOfHeartsMaster:: @ 827A56E
-	compare VAR_0x8004, 600
-	goto_if_gt ContestHall_EventScript_Set8Hearts
-	compare VAR_0x8004, 560
-	goto_if_gt ContestHall_EventScript_Set7Hearts
-	compare VAR_0x8004, 520
-	goto_if_gt ContestHall_EventScript_Set6Hearts
-	compare VAR_0x8004, 480
-	goto_if_gt ContestHall_EventScript_Set5Hearts
-	compare VAR_0x8004, 440
-	goto_if_gt ContestHall_EventScript_Set4Hearts
-	compare VAR_0x8004, 400
-	goto_if_gt ContestHall_EventScript_Set3Hearts
-	compare VAR_0x8004, 360
-	goto_if_gt ContestHall_EventScript_Set2Hearts
-	compare VAR_0x8004, 320
-	goto_if_gt ContestHall_EventScript_Set1Heart
+ContestHall_EventScript_GetNumberOfHeartsMaster::
+	goto_if_gt VAR_0x8004, 600, ContestHall_EventScript_Set8Hearts
+	goto_if_gt VAR_0x8004, 560, ContestHall_EventScript_Set7Hearts
+	goto_if_gt VAR_0x8004, 520, ContestHall_EventScript_Set6Hearts
+	goto_if_gt VAR_0x8004, 480, ContestHall_EventScript_Set5Hearts
+	goto_if_gt VAR_0x8004, 440, ContestHall_EventScript_Set4Hearts
+	goto_if_gt VAR_0x8004, 400, ContestHall_EventScript_Set3Hearts
+	goto_if_gt VAR_0x8004, 360, ContestHall_EventScript_Set2Hearts
+	goto_if_gt VAR_0x8004, 320, ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
-ContestHall_EventScript_GetNumberOfHeartsLink:: @ 827A5CC
-	compare VAR_0x8004, 600
-	goto_if_gt ContestHall_EventScript_Set8Hearts
-	compare VAR_0x8004, 550
-	goto_if_gt ContestHall_EventScript_Set7Hearts
-	compare VAR_0x8004, 500
-	goto_if_gt ContestHall_EventScript_Set6Hearts
-	compare VAR_0x8004, 450
-	goto_if_gt ContestHall_EventScript_Set5Hearts
-	compare VAR_0x8004, 400
-	goto_if_gt ContestHall_EventScript_Set4Hearts
-	compare VAR_0x8004, 300
-	goto_if_gt ContestHall_EventScript_Set3Hearts
-	compare VAR_0x8004, 200
-	goto_if_gt ContestHall_EventScript_Set2Hearts
-	compare VAR_0x8004, 100
-	goto_if_gt ContestHall_EventScript_Set1Heart
+ContestHall_EventScript_GetNumberOfHeartsLink::
+	goto_if_gt VAR_0x8004, 600, ContestHall_EventScript_Set8Hearts
+	goto_if_gt VAR_0x8004, 550, ContestHall_EventScript_Set7Hearts
+	goto_if_gt VAR_0x8004, 500, ContestHall_EventScript_Set6Hearts
+	goto_if_gt VAR_0x8004, 450, ContestHall_EventScript_Set5Hearts
+	goto_if_gt VAR_0x8004, 400, ContestHall_EventScript_Set4Hearts
+	goto_if_gt VAR_0x8004, 300, ContestHall_EventScript_Set3Hearts
+	goto_if_gt VAR_0x8004, 200, ContestHall_EventScript_Set2Hearts
+	goto_if_gt VAR_0x8004, 100, ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
-ContestHall_EventScript_Set1Heart:: @ 827A62A
+ContestHall_EventScript_Set1Heart::
 	setvar VAR_TEMP_0, 1
 	return
 
-ContestHall_EventScript_Set2Hearts:: @ 827A630
+ContestHall_EventScript_Set2Hearts::
 	setvar VAR_TEMP_0, 2
 	return
 
-ContestHall_EventScript_Set3Hearts:: @ 827A636
+ContestHall_EventScript_Set3Hearts::
 	setvar VAR_TEMP_0, 3
 	return
 
-ContestHall_EventScript_Set4Hearts:: @ 827A63C
+ContestHall_EventScript_Set4Hearts::
 	setvar VAR_TEMP_0, 4
 	return
 
-ContestHall_EventScript_Set5Hearts:: @ 827A642
+ContestHall_EventScript_Set5Hearts::
 	setvar VAR_TEMP_0, 5
 	return
 
-ContestHall_EventScript_Set6Hearts:: @ 827A648
+ContestHall_EventScript_Set6Hearts::
 	setvar VAR_TEMP_0, 6
 	return
 
-ContestHall_EventScript_Set7Hearts:: @ 827A64E
+ContestHall_EventScript_Set7Hearts::
 	setvar VAR_TEMP_0, 7
 	return
 
-ContestHall_EventScript_Set8Hearts:: @ 827A654
+ContestHall_EventScript_Set8Hearts::
 	setvar VAR_TEMP_0, 8
 	return
 
-ContestHall_EventScript_TryDisplayHeartAudienceMember1:: @ 827A65A
-	compare VAR_TEMP_1, 1
-	goto_if_eq ContestHall_EventScript_AudienceMember1AlreadyEmoted
+ContestHall_EventScript_TryDisplayHeartAudienceMember1::
+	goto_if_eq VAR_TEMP_1, 1, ContestHall_EventScript_AudienceMember1AlreadyEmoted
 	applymovement LOCALID_AUDIENCE_1, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
@@ -706,12 +630,11 @@ ContestHall_EventScript_TryDisplayHeartAudienceMember1:: @ 827A65A
 	addvar VAR_TEMP_0, -1
 	return
 
-ContestHall_EventScript_AudienceMember1AlreadyEmoted:: @ 827A67D
+ContestHall_EventScript_AudienceMember1AlreadyEmoted::
 	return
 
-ContestHall_EventScript_TryDisplayHeartAudienceMember2:: @ 827A67E
-	compare VAR_TEMP_2, 1
-	goto_if_eq ContestHall_EventScript_AudienceMember2AlreadyEmoted
+ContestHall_EventScript_TryDisplayHeartAudienceMember2::
+	goto_if_eq VAR_TEMP_2, 1, ContestHall_EventScript_AudienceMember2AlreadyEmoted
 	applymovement LOCALID_AUDIENCE_2, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
@@ -719,12 +642,11 @@ ContestHall_EventScript_TryDisplayHeartAudienceMember2:: @ 827A67E
 	addvar VAR_TEMP_0, -1
 	return
 
-ContestHall_EventScript_AudienceMember2AlreadyEmoted:: @ 827A6A1
+ContestHall_EventScript_AudienceMember2AlreadyEmoted::
 	return
 
-ContestHall_EventScript_TryDisplayHeartAudienceMember3:: @ 827A6A2
-	compare VAR_TEMP_3, 1
-	goto_if_eq ContestHall_EventScript_AudienceMember3AlreadyEmoted
+ContestHall_EventScript_TryDisplayHeartAudienceMember3::
+	goto_if_eq VAR_TEMP_3, 1, ContestHall_EventScript_AudienceMember3AlreadyEmoted
 	applymovement LOCALID_AUDIENCE_3, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
@@ -732,12 +654,11 @@ ContestHall_EventScript_TryDisplayHeartAudienceMember3:: @ 827A6A2
 	addvar VAR_TEMP_0, -1
 	return
 
-ContestHall_EventScript_AudienceMember3AlreadyEmoted:: @ 827A6C5
+ContestHall_EventScript_AudienceMember3AlreadyEmoted::
 	return
 
-ContestHall_EventScript_TryDisplayHeartAudienceMember4:: @ 827A6C6
-	compare VAR_TEMP_4, 1
-	goto_if_eq ContestHall_EventScript_Audience4MemberAlreadyEmoted
+ContestHall_EventScript_TryDisplayHeartAudienceMember4::
+	goto_if_eq VAR_TEMP_4, 1, ContestHall_EventScript_Audience4MemberAlreadyEmoted
 	applymovement LOCALID_AUDIENCE_4, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
@@ -745,12 +666,11 @@ ContestHall_EventScript_TryDisplayHeartAudienceMember4:: @ 827A6C6
 	addvar VAR_TEMP_0, -1
 	return
 
-ContestHall_EventScript_Audience4MemberAlreadyEmoted:: @ 827A6E9
+ContestHall_EventScript_Audience4MemberAlreadyEmoted::
 	return
 
-ContestHall_EventScript_TryDisplayHeartAudienceMember5:: @ 827A6EA
-	compare VAR_TEMP_5, 1
-	goto_if_eq ContestHall_EventScript_AudienceMember5AlreadyEmoted
+ContestHall_EventScript_TryDisplayHeartAudienceMember5::
+	goto_if_eq VAR_TEMP_5, 1, ContestHall_EventScript_AudienceMember5AlreadyEmoted
 	applymovement LOCALID_AUDIENCE_5, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
@@ -758,12 +678,11 @@ ContestHall_EventScript_TryDisplayHeartAudienceMember5:: @ 827A6EA
 	addvar VAR_TEMP_0, -1
 	return
 
-ContestHall_EventScript_AudienceMember5AlreadyEmoted:: @ 827A70D
+ContestHall_EventScript_AudienceMember5AlreadyEmoted::
 	return
 
-ContestHall_EventScript_TryDisplayHeartAudienceMember6:: @ 827A70E
-	compare VAR_TEMP_6, 1
-	goto_if_eq ContestHall_EventScript_AudienceMember6AlreadyEmoted
+ContestHall_EventScript_TryDisplayHeartAudienceMember6::
+	goto_if_eq VAR_TEMP_6, 1, ContestHall_EventScript_AudienceMember6AlreadyEmoted
 	applymovement LOCALID_AUDIENCE_6, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
@@ -771,12 +690,11 @@ ContestHall_EventScript_TryDisplayHeartAudienceMember6:: @ 827A70E
 	addvar VAR_TEMP_0, -1
 	return
 
-ContestHall_EventScript_AudienceMember6AlreadyEmoted:: @ 827A731
+ContestHall_EventScript_AudienceMember6AlreadyEmoted::
 	return
 
-ContestHall_EventScript_TryDisplayHeartAudienceMember7:: @ 827A732
-	compare VAR_TEMP_7, 1
-	goto_if_eq ContestHall_EventScript_AudienceMember7AlreadyEmoted
+ContestHall_EventScript_TryDisplayHeartAudienceMember7::
+	goto_if_eq VAR_TEMP_7, 1, ContestHall_EventScript_AudienceMember7AlreadyEmoted
 	applymovement LOCALID_AUDIENCE_7, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
@@ -784,12 +702,11 @@ ContestHall_EventScript_TryDisplayHeartAudienceMember7:: @ 827A732
 	addvar VAR_TEMP_0, -1
 	return
 
-ContestHall_EventScript_AudienceMember7AlreadyEmoted:: @ 827A755
+ContestHall_EventScript_AudienceMember7AlreadyEmoted::
 	return
 
-ContestHall_EventScript_TryDisplayHeartAudienceMember8:: @ 827A756
-	compare VAR_TEMP_8, 1
-	goto_if_eq ContestHall_EventScript_AudienceMember8AlreadyEmoted
+ContestHall_EventScript_TryDisplayHeartAudienceMember8::
+	goto_if_eq VAR_TEMP_8, 1, ContestHall_EventScript_AudienceMember8AlreadyEmoted
 	applymovement LOCALID_ARTIST, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
@@ -797,10 +714,10 @@ ContestHall_EventScript_TryDisplayHeartAudienceMember8:: @ 827A756
 	addvar VAR_TEMP_0, -1
 	return
 
-ContestHall_EventScript_AudienceMember8AlreadyEmoted:: @ 827A779
+ContestHall_EventScript_AudienceMember8AlreadyEmoted::
 	return
 
-ContestHall_EventScript_ContestantReturn:: @ 827A77A
+ContestHall_EventScript_ContestantReturn::
 	closemessage
 	release
 	removeobject LOCALID_POKEBALL
@@ -813,7 +730,7 @@ ContestHall_EventScript_ContestantReturn:: @ 827A77A
 	case 3, ContestHall_EventScript_Player4WalkBack
 	return
 
-ContestHall_EventScript_Player1WalkBack:: @ 827A7B9
+ContestHall_EventScript_Player1WalkBack::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
 	applymovement VAR_0x800B, ContestHall_Movement_Player1WalkBack
@@ -821,7 +738,7 @@ ContestHall_EventScript_Player1WalkBack:: @ 827A7B9
 	releaseall
 	return
 
-ContestHall_EventScript_Player2WalkBack:: @ 827A7CB
+ContestHall_EventScript_Player2WalkBack::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
 	applymovement VAR_0x800B, ContestHall_Movement_Player2WalkBack
@@ -829,7 +746,7 @@ ContestHall_EventScript_Player2WalkBack:: @ 827A7CB
 	releaseall
 	return
 
-ContestHall_EventScript_Player3WalkBack:: @ 827A7DD
+ContestHall_EventScript_Player3WalkBack::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
 	applymovement VAR_0x800B, ContestHall_Movement_Player3WalkBack
@@ -837,7 +754,7 @@ ContestHall_EventScript_Player3WalkBack:: @ 827A7DD
 	releaseall
 	return
 
-ContestHall_EventScript_Player4WalkBack:: @ 827A7EF
+ContestHall_EventScript_Player4WalkBack::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
 	applymovement VAR_0x800B, ContestHall_Movement_Player4WalkBack
@@ -845,7 +762,7 @@ ContestHall_EventScript_Player4WalkBack:: @ 827A7EF
 	releaseall
 	return
 
-ContestHall_EventScript_DoContestAppeals:: @ 827A801
+ContestHall_EventScript_DoContestAppeals::
 	lockall
 	applymovement LOCALID_MC, ContestHall_Movement_FaceContestants2
 	waitmovement 0
@@ -869,21 +786,19 @@ ContestHall_EventScript_DoContestAppeals:: @ 827A801
 	releaseall
 	return
 
-ContestHall_EventScript_LetsAppeal:: @ 827A853
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_LetsAppealLink
+ContestHall_EventScript_LetsAppeal::
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_LetsAppealLink
 	msgbox ContestHall_Text_VotingCompleteLetsAppeal, MSGBOX_DEFAULT
 	return
 
-ContestHall_EventScript_LetsAppealLink:: @ 827A867
+ContestHall_EventScript_LetsAppealLink::
 	specialvar VAR_RESULT, IsWirelessContest
-	compare VAR_RESULT, TRUE
-	goto_if_eq ContestHall_EventScript_LetsAppealWireless
+	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_LetsAppealWireless
 	messageautoscroll ContestHall_Text_VotingCompleteLetsAppeal
 	waitmessage
 	return
 
-ContestHall_EventScript_LetsAppealWireless:: @ 827A87E
+ContestHall_EventScript_LetsAppealWireless::
 	call ContestHall_EventScript_TryWaitForLink
 	messageautoscroll ContestHall_Text_VotingComplete
 	waitmessage
@@ -896,7 +811,7 @@ ContestHall_EventScript_LetsAppealWireless:: @ 827A87E
 	call ContestHall_EventScript_TryWaitForLink
 	return
 
-ContestHall_EventScript_ContestResults:: @ 827A8A5
+ContestHall_EventScript_ContestResults::
 	call ContestHall_EventScript_TryWaitForLink
 	call ContestHall_EventScript_ThatsItForJudging
 	call ContestHall_EventScript_TryWaitForLink
@@ -916,62 +831,58 @@ ContestHall_EventScript_ContestResults:: @ 827A8A5
 	setvar VAR_TEMP_9, 1
 	showcontestresults
 	setvar VAR_TEMP_9, 0
-	playbgm MUS_CONTEST_WINNER, 0
+	playbgm MUS_CONTEST_WINNER, FALSE
 	return
 
-ContestHall_EventScript_ThatsItForJudging:: @ 827A8FB
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_ThatsItForJudgingLink
+ContestHall_EventScript_ThatsItForJudging::
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_ThatsItForJudgingLink
 	msgbox ContestHall_Text_ThatsItForJudging, MSGBOX_DEFAULT
 	return
 
-ContestHall_EventScript_ThatsItForJudgingLink:: @ 827A90F
+ContestHall_EventScript_ThatsItForJudgingLink::
 	call ContestHall_EventScript_TryWaitForLink
 	messageautoscroll ContestHall_Text_ThatsItForJudging
 	waitmessage
 	delay 30
 	return
 
-ContestHall_EventScript_ThankYouForAppeals:: @ 827A91E
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_ThankYouForAppealsLink
+ContestHall_EventScript_ThankYouForAppeals::
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_ThankYouForAppealsLink
 	msgbox ContestHall_Text_ThankYouForAppeals, MSGBOX_DEFAULT
 	return
 
-ContestHall_EventScript_ThankYouForAppealsLink:: @ 827A932
+ContestHall_EventScript_ThankYouForAppealsLink::
 	call ContestHall_EventScript_TryWaitForLink
 	messageautoscroll ContestHall_Text_ThankYouForAppeals
 	waitmessage
 	delay 30
 	return
 
-ContestHall_EventScript_JudgeLooksReady:: @ 827A941
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_JudgeLooksReadyLink
+ContestHall_EventScript_JudgeLooksReady::
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_JudgeLooksReadyLink
 	msgbox ContestHall_Text_JudgeLooksReady, MSGBOX_DEFAULT
 	return
 
-ContestHall_EventScript_JudgeLooksReadyLink:: @ 827A955
+ContestHall_EventScript_JudgeLooksReadyLink::
 	call ContestHall_EventScript_TryWaitForLink
 	messageautoscroll ContestHall_Text_JudgeLooksReady
 	waitmessage
 	delay 30
 	return
 
-ContestHall_EventScript_WeWillDeclareWinner:: @ 827A964
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_WeWillDeclareWinnerLink
+ContestHall_EventScript_WeWillDeclareWinner::
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_WeWillDeclareWinnerLink
 	msgbox ContestHall_Text_WeWillNowDeclareWinner, MSGBOX_DEFAULT
 	return
 
-ContestHall_EventScript_WeWillDeclareWinnerLink:: @ 827A978
+ContestHall_EventScript_WeWillDeclareWinnerLink::
 	call ContestHall_EventScript_TryWaitForLink
 	messageautoscroll ContestHall_Text_WeWillNowDeclareWinner
 	waitmessage
 	delay 30
 	return
 
-ContestHall_EventScript_GetWinnerObjEventId:: @ 827A987
+ContestHall_EventScript_GetWinnerObjEventId::
 	special GetContestWinnerId
 	switch VAR_0x8005
 	case 0, ContestHall_EventScript_GetPlayer1ObjEventId
@@ -980,27 +891,27 @@ ContestHall_EventScript_GetWinnerObjEventId:: @ 827A987
 	case 3, ContestHall_EventScript_GetPlayer4ObjEventId
 	return
 
-ContestHall_EventScript_GetPlayer1ObjEventId:: @ 827A9BC
+ContestHall_EventScript_GetPlayer1ObjEventId::
 	setvar VAR_TEMP_3, LOCALID_CONTESTANT_1
 	return
 
-ContestHall_EventScript_GetPlayer2ObjEventId:: @ 827A9C2
+ContestHall_EventScript_GetPlayer2ObjEventId::
 	setvar VAR_TEMP_3, LOCALID_CONTESTANT_2
 	return
 
-ContestHall_EventScript_GetPlayer3ObjEventId:: @ 827A9C8
+ContestHall_EventScript_GetPlayer3ObjEventId::
 	setvar VAR_TEMP_3, LOCALID_CONTESTANT_3
 	return
 
-ContestHall_EventScript_GetPlayer4ObjEventId:: @ 827A9CE
+ContestHall_EventScript_GetPlayer4ObjEventId::
 	setvar VAR_TEMP_3, LOCALID_CONTESTANT_4
 	return
 
-ContestHall_EventScript_CongratulateWinner:: @ 827A9D4
+ContestHall_EventScript_CongratulateWinner::
 	special BufferContestWinnerTrainerName
 	special BufferContestWinnerMonName
 	addvar VAR_0x8005, 1
-	buffernumberstring 1, VAR_0x8005
+	buffernumberstring STR_VAR_2, VAR_0x8005
 	addvar VAR_0x8005, -1
 	call ContestHall_EventScript_CongratsWinner
 	applymovement VAR_TEMP_3, ContestHall_Movement_WinningPlayerWalkUp
@@ -1009,22 +920,20 @@ ContestHall_EventScript_CongratulateWinner:: @ 827A9D4
 	setvar VAR_TEMP_1, 0
 	return
 
-ContestHall_EventScript_CongratsWinner:: @ 827AA00
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_CongratsWinnerLink
+ContestHall_EventScript_CongratsWinner::
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_CongratsWinnerLink
 	msgbox ContestHall_Text_CongratsTrainerXandMon, MSGBOX_DEFAULT
 	return
 
-ContestHall_EventScript_CongratsWinnerLink:: @ 827AA14
+ContestHall_EventScript_CongratsWinnerLink::
 	messageautoscroll ContestHall_Text_CongratsTrainerXandMon
 	waitmessage
 	return
 
-ContestHall_EventScript_AudienceLookAround:: @ 827AA1B
+ContestHall_EventScript_AudienceLookAround::
 	addvar VAR_TEMP_1, 1
 	lockall
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_NORMAL
-	call_if_gt ContestHall_EventScript_VObjectAudienceLookAround
+	call_if_gt VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_NORMAL, ContestHall_EventScript_VObjectAudienceLookAround
 	applymovement LOCALID_AUDIENCE_5, ContestHall_Movement_AudienceMemberLookRight
 	applymovement LOCALID_AUDIENCE_2, ContestHall_Movement_AudienceMemberLookDown
 	applymovement LOCALID_AUDIENCE_3, ContestHall_Movement_AudienceMemberLookRight
@@ -1033,12 +942,11 @@ ContestHall_EventScript_AudienceLookAround:: @ 827AA1B
 	applymovement LOCALID_AUDIENCE_7, ContestHall_Movement_AudienceMemberLookDown
 	applymovement LOCALID_AUDIENCE_1, ContestHall_Movement_AudienceMemberLookUp
 	applymovement LOCALID_AUDIENCE_4, ContestHall_Movement_AudienceMemberLookLeft
-	compare VAR_TEMP_1, 4
-	goto_if_ne ContestHall_EventScript_AudienceLookAround
+	goto_if_ne VAR_TEMP_1, 4, ContestHall_EventScript_AudienceLookAround
 	delay 30
 	return
 
-ContestHall_EventScript_VObjectAudienceLookAround:: @ 827AA6F
+ContestHall_EventScript_VObjectAudienceLookAround::
 	turnvobject 0, DIR_SOUTH
 	turnvobject 2, DIR_SOUTH
 	turnvobject 4, DIR_EAST
@@ -1107,9 +1015,8 @@ ContestHall_EventScript_VObjectAudienceLookAround:: @ 827AA6F
 	delay 10
 	return
 
-ContestHall_EventScript_GiveWinnerPrize:: @ 827AB36
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_eq ContestHall_EventScript_EndLinkContest
+ContestHall_EventScript_GiveWinnerPrize::
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_EndLinkContest
 	call ContestHall_EventScript_CheckShouldSkipPrize
 	goto_if_set FLAG_TEMP_2, ContestHall_EventScript_SkipPrize
 	lockall
@@ -1122,69 +1029,63 @@ ContestHall_EventScript_GiveWinnerPrize:: @ 827AB36
 	call ContestHall_EventScript_AudienceLookAround
 	delay 30
 	special ShouldReadyContestArtist
-	compare VAR_0x8004, TRUE
-	goto_if_eq ContestHall_EventScript_SetReadyForContestArtist
+	goto_if_eq VAR_0x8004, TRUE, ContestHall_EventScript_SetReadyForContestArtist
 	return
 
-ContestHall_EventScript_SkipPrize:: @ 827AB82
+ContestHall_EventScript_SkipPrize::
 	lockall
 	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
 	releaseall
 	delay 90
 	special ShouldReadyContestArtist
-	compare VAR_0x8004, TRUE
-	goto_if_eq ContestHall_EventScript_SetReadyForContestArtist
+	goto_if_eq VAR_0x8004, TRUE, ContestHall_EventScript_SetReadyForContestArtist
 	return
 
-ContestHall_EventScript_CheckShouldSkipPrize:: @ 827AB9E
+ContestHall_EventScript_CheckShouldSkipPrize::
 	specialvar VAR_RESULT, HasMonWonThisContestBefore
-	compare VAR_RESULT, TRUE
-	goto_if_eq ContestHall_EventScript_CheckPlayerWon
+	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_CheckPlayerWon
 	return
 
-ContestHall_EventScript_CheckPlayerWon:: @ 827ABAF
+ContestHall_EventScript_CheckPlayerWon::
 	special GetContestWinnerId
-	compare VAR_0x8005, 3
-	goto_if_eq ContestHall_EventScript_CheckRankIsMaster
+	goto_if_eq VAR_0x8005, 3, ContestHall_EventScript_CheckRankIsMaster
 	return
 
-ContestHall_EventScript_CheckRankIsMaster:: @ 827ABBE
-	compare VAR_CONTEST_RANK, CONTEST_RANK_MASTER
-	goto_if_eq ContestHall_EventScript_DontSkipPrize
+ContestHall_EventScript_CheckRankIsMaster::
+	goto_if_eq VAR_CONTEST_RANK, CONTEST_RANK_MASTER, ContestHall_EventScript_DontSkipPrize
 	setflag FLAG_TEMP_2
 	return
 
-ContestHall_EventScript_DontSkipPrize:: @ 827ABCD
+ContestHall_EventScript_DontSkipPrize::
 	return
 
 @ This flag is never read
-ContestHall_EventScript_SetSketchFlag:: @ 827ABCE
+ContestHall_EventScript_SetSketchFlag::
 	setflag FLAG_CONTEST_SKETCH_CREATED
 	return
 
-ContestHall_EventScript_SetReadyForContestArtist:: @ 827ABD2
+ContestHall_EventScript_SetReadyForContestArtist::
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 1
 	return
 
-ContestHall_EventScript_EndLinkContest:: @ 827ABD8
+ContestHall_EventScript_EndLinkContest::
 	delay 60
 	special GetContestPlayerId
 	special GetContestWinnerId
 	special ShouldReadyContestArtist
-	compare VAR_0x8004, TRUE
-	goto_if_eq ContestHall_EventScript_SetReadyForLinkContestArtist
+	goto_if_eq VAR_0x8004, TRUE, ContestHall_EventScript_SetReadyForLinkContestArtist
 	closemessage
 	return
 
-ContestHall_EventScript_SetReadyForLinkContestArtist:: @ 827ABF1
+ContestHall_EventScript_SetReadyForLinkContestArtist::
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 2
 	return
 
 @ Unused
-ContestHall_EventScript_Ret:: @ 827ABF7
+ContestHall_EventScript_Ret::
 	return
 
-ContestHall_EventScript_WinnerApproachForPrize:: @ 827ABF8
+ContestHall_EventScript_WinnerApproachForPrize::
 	switch VAR_0x8005
 	case 0, ContestHall_EventScript_Player1ApproachForPrize
 	case 1, ContestHall_EventScript_Player2ApproachForPrize
@@ -1192,28 +1093,28 @@ ContestHall_EventScript_WinnerApproachForPrize:: @ 827ABF8
 	case 3, ContestHall_EventScript_Player4ApproachForPrize
 	return
 
-ContestHall_EventScript_Player1ApproachForPrize:: @ 827AC2A
+ContestHall_EventScript_Player1ApproachForPrize::
 	lockall
 	applymovement VAR_TEMP_3, ContestHall_Movement_Player1ApproachForPrize
 	waitmovement 0
 	releaseall
 	return
 
-ContestHall_EventScript_Player2ApproachForPrize:: @ 827AC37
+ContestHall_EventScript_Player2ApproachForPrize::
 	lockall
 	applymovement VAR_TEMP_3, ContestHall_Movement_Player2ApproachForPrize
 	waitmovement 0
 	releaseall
 	return
 
-ContestHall_EventScript_Player3ApproachForPrize:: @ 827AC44
+ContestHall_EventScript_Player3ApproachForPrize::
 	lockall
 	applymovement VAR_TEMP_3, ContestHall_Movement_Player3ApproachForPrize
 	waitmovement 0
 	releaseall
 	return
 
-ContestHall_EventScript_Player4ApproachForPrize:: @ 827AC51
+ContestHall_EventScript_Player4ApproachForPrize::
 	lockall
 	applymovement VAR_TEMP_3, ContestHall_Movement_Player4ApproachForPrize
 	waitmovement 0
@@ -1221,29 +1122,25 @@ ContestHall_EventScript_Player4ApproachForPrize:: @ 827AC51
 	return
 
 @ In NPC Contests, the player is always entry 4 (id number 3)
-ContestHall_EventScript_GivePrizeIfWinner:: @ 827AC5E
+ContestHall_EventScript_GivePrizeIfWinner::
 	special GetContestWinnerId
-	compare VAR_0x8005, 3
-	goto_if_eq ContestHall_EventScript_GiveContestPrizes
+	goto_if_eq VAR_0x8005, 3, ContestHall_EventScript_GiveContestPrizes
 	lockall
 	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
 	releaseall
 	return
 
-ContestHall_EventScript_GiveContestPrizes:: @ 827AC77
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_SUPER
-	call_if_eq ContestHall_EventScript_SetSketchFlag
+ContestHall_EventScript_GiveContestPrizes::
+	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_SUPER, ContestHall_EventScript_SetSketchFlag
 	specialvar VAR_RESULT, HasMonWonThisContestBefore
-	compare VAR_RESULT, FALSE
-	goto_if_eq ContestHall_EventScript_ReceiveContestRibbon
-	compare VAR_CONTEST_RANK, CONTEST_RANK_MASTER
-	goto_if_eq ContestHall_EventScript_GiveLuxuryBall
+	goto_if_eq VAR_RESULT, FALSE, ContestHall_EventScript_ReceiveContestRibbon
+	goto_if_eq VAR_CONTEST_RANK, CONTEST_RANK_MASTER, ContestHall_EventScript_GiveLuxuryBall
 	lockall
 	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
 	releaseall
 	return
 
-ContestHall_EventScript_NoRoomForLuxuryBall:: @ 827ACA8
+ContestHall_EventScript_NoRoomForLuxuryBall::
 	lockall
 	call Common_EventScript_BagIsFull
 	msgbox ContestHall_Text_PickUpPrizeAtCounterLater, MSGBOX_DEFAULT
@@ -1251,16 +1148,15 @@ ContestHall_EventScript_NoRoomForLuxuryBall:: @ 827ACA8
 	setvar VAR_CONTEST_PRIZE_PICKUP, 4
 	return
 
-ContestHall_EventScript_GiveLuxuryBall:: @ 827ACBD
+ContestHall_EventScript_GiveLuxuryBall::
 	giveitem ITEM_LUXURY_BALL
-	compare VAR_RESULT, FALSE
-	goto_if_eq ContestHall_EventScript_NoRoomForLuxuryBall
+	goto_if_eq VAR_RESULT, FALSE, ContestHall_EventScript_NoRoomForLuxuryBall
 	lockall
 	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
 	releaseall
 	return
 
-ContestHall_EventScript_ReceiveContestRibbon:: @ 827ACDF
+ContestHall_EventScript_ReceiveContestRibbon::
 	special GiveMonContestRibbon
 	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
 	setflag FLAG_SYS_RIBBON_GET
@@ -1274,69 +1170,69 @@ ContestHall_EventScript_ReceiveContestRibbon:: @ 827ACDF
 	releaseall
 	return
 
-ContestHall_Movement_MCWalkDown: @ 827AD09
+ContestHall_Movement_MCWalkDown:
 	walk_down
 	step_end
 
-ContestHall_Movement_MCBackUp: @ 827AD0B
+ContestHall_Movement_MCBackUp:
 	lock_facing_direction
 	walk_up
 	unlock_facing_direction
 	step_end
 
-ContestHall_Movement_MCFaceJudge: @ 827AD0F
-	walk_in_place_fastest_right
+ContestHall_Movement_MCFaceJudge:
+	walk_in_place_faster_right
 	step_end
 
-ContestHall_Movement_Heart: @ 827AD11
+ContestHall_Movement_Heart:
 	emote_heart
 	step_end
 
-ContestHall_Movement_FaceContestants: @ 827AD13
-	walk_in_place_fastest_down
+ContestHall_Movement_FaceContestants:
+	walk_in_place_faster_down
 	step_end
 
-ContestHall_Movement_WalkStageLeft: @ 827AD15
+ContestHall_Movement_WalkStageLeft:
 	walk_left
 	walk_left
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
-ContestHall_Movement_WalkStageRight: @ 827AD19
+ContestHall_Movement_WalkStageRight:
 	walk_right
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
-ContestHall_Movement_WinningPlayerWalkUp: @ 827AD1D
+ContestHall_Movement_WinningPlayerWalkUp:
 	walk_up
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
-ContestHall_Movement_ContestantDelay32: @ 827AD20
+ContestHall_Movement_ContestantDelay32:
 	delay_16
 	delay_16
 	step_end
 
-ContestHall_Movement_MCFaceJudge2: @ 827AD23
-	walk_in_place_fastest_right
+ContestHall_Movement_MCFaceJudge2:
+	walk_in_place_faster_right
 	step_end
 
-ContestHall_Movement_JudgeFaceMC: @ 827AD25
-	walk_in_place_fastest_left
+ContestHall_Movement_JudgeFaceMC:
+	walk_in_place_faster_left
 	step_end
 
-ContestHall_Movement_FaceContestants2: @ 827AD27
-	walk_in_place_fastest_down
+ContestHall_Movement_FaceContestants2:
+	walk_in_place_faster_down
 	step_end
 
-ContestHall_Movement_Player3ApproachForPrize: @ 827AD29
+ContestHall_Movement_Player3ApproachForPrize:
 	walk_left
 	walk_left
 	walk_up
 	step_end
 
-ContestHall_Movement_Player4ApproachForPrize: @ 827AD2D
+ContestHall_Movement_Player4ApproachForPrize:
 	walk_left
 	walk_left
 	walk_left
@@ -1344,140 +1240,138 @@ ContestHall_Movement_Player4ApproachForPrize: @ 827AD2D
 	walk_up
 	step_end
 
-ContestHall_Movement_AudienceMemberLookLeft: @ 827AD33
+ContestHall_Movement_AudienceMemberLookLeft:
 	face_left
 	delay_16
 	face_original_direction
 	step_end
 
-ContestHall_Movement_AudienceMemberLookUp: @ 827AD37
+ContestHall_Movement_AudienceMemberLookUp:
 	face_up
 	delay_16
 	face_original_direction
 	step_end
 
-ContestHall_Movement_AudienceMemberLookRight: @ 827AD3B
+ContestHall_Movement_AudienceMemberLookRight:
 	face_right
 	delay_16
 	face_original_direction
 	step_end
 
-ContestHall_Movement_AudienceMemberLookDown: @ 827AD3F
+ContestHall_Movement_AudienceMemberLookDown:
 	face_down
 	delay_16
 	face_original_direction
 	step_end
 
-ContestHall_Movement_Player4FaceUp: @ 827AD43
+ContestHall_Movement_Player4FaceUp:
 	face_up
 	step_end
 
-ContestHall_Movement_MCLookAtJudge: @ 827AD45
+ContestHall_Movement_MCLookAtJudge:
 	face_up
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
-ContestHall_Movement_JudgeLookAtMC: @ 827AD49
-	walk_in_place_fastest_left
+ContestHall_Movement_JudgeLookAtMC:
+	walk_in_place_faster_left
 	delay_16
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
-ContestHall_Movement_MCWalkInPlaceDown: @ 827AD4E
+ContestHall_Movement_MCWalkInPlaceDown:
 	delay_16
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
-ContestHall_Movement_Player1WalkToCenter: @ 827AD52
+ContestHall_Movement_Player1WalkToCenter:
 	walk_up
 	walk_right
 	walk_right
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
-ContestHall_Movement_Player1WalkBack: @ 827AD58
+ContestHall_Movement_Player1WalkBack:
 	walk_fast_left
 	walk_fast_left
 	walk_fast_left
 	walk_fast_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
-ContestHall_Movement_Player2WalkToCenter: @ 827AD5E
+ContestHall_Movement_Player2WalkToCenter:
 	walk_up
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
-ContestHall_Movement_Player2WalkBack: @ 827AD62
+ContestHall_Movement_Player2WalkBack:
 	walk_fast_left
 	walk_fast_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
-ContestHall_Movement_Player3WalkToCenter: @ 827AD66
+ContestHall_Movement_Player3WalkToCenter:
 	walk_up
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
-ContestHall_Movement_Player3WalkBack: @ 827AD6A
+ContestHall_Movement_Player3WalkBack:
 	walk_fast_right
 	walk_fast_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
-ContestHall_Movement_Player4WalkToCenter: @ 827AD6E
+ContestHall_Movement_Player4WalkToCenter:
 	walk_up
 	walk_left
 	walk_left
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
-ContestHall_Movement_Player4WalkBack: @ 827AD74
+ContestHall_Movement_Player4WalkBack:
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
 	walk_fast_down
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
-ContestHall_Movement_Player1ApproachForPrize: @ 827AD7A
+ContestHall_Movement_Player1ApproachForPrize:
 	walk_right
 	walk_right
 	walk_up
 	step_end
 
-ContestHall_Movement_Player2ApproachForPrize: @ 827AD7E
+ContestHall_Movement_Player2ApproachForPrize:
 	walk_up
 	step_end
 
 @ IsContestWithRSPlayer has no side effect, so this is nop
-ContestHall_EventScript_CheckIfContestWithRSPlayer:: @ 827AD80
+ContestHall_EventScript_CheckIfContestWithRSPlayer::
 	specialvar VAR_RESULT, IsContestWithRSPlayer
-	compare VAR_RESULT, TRUE
-	goto_if_eq ContestHall_EventScript_RetRSPlayer
+	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_RetRSPlayer
 	return
 
-ContestHall_EventScript_RetRSPlayer:: @ 827AD91
+ContestHall_EventScript_RetRSPlayer::
 	return
 
-LilycoveCity_ContestLobby_EventScript_DelayIfContestWithRSPlayer:: @ 827AD92
+LilycoveCity_ContestLobby_EventScript_DelayIfContestWithRSPlayer::
 	specialvar VAR_RESULT, IsContestWithRSPlayer
-	compare VAR_RESULT, TRUE
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_DelayForRSPlayer
+	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_ContestLobby_EventScript_DelayForRSPlayer
 	return
 
-LilycoveCity_ContestLobby_EventScript_DelayForRSPlayer:: @ 827ADA3
+LilycoveCity_ContestLobby_EventScript_DelayForRSPlayer::
 	delay 9
 	return
 
-LilycoveCity_ContestLobby_Text_ReceptionDontHavePokeblockCase: @ 827ADA7
+LilycoveCity_ContestLobby_Text_ReceptionDontHavePokeblockCase:
 	.string "Hello!\p"
 	.string "This is the reception counter for\n"
 	.string "POKéMON CONTESTS.\p"
@@ -1486,32 +1380,32 @@ LilycoveCity_ContestLobby_Text_ReceptionDontHavePokeblockCase: @ 827ADA7
 	.string "In that case, we need to provide you\n"
 	.string "with this!$"
 
-LilycoveCity_ContestLobby_Text_NowThatWeveClearedThatUp: @ 827AE47
+LilycoveCity_ContestLobby_Text_NowThatWeveClearedThatUp:
 	.string "Okay, now that we've cleared that\n"
 	.string "up…\p"
 	.string "Hello!\p"
 	.string "This is the reception counter for\n"
 	.string "POKéMON CONTESTS.$"
 
-LilycoveCity_ContestLobby_Text_ContestReception: @ 827AEA8
+LilycoveCity_ContestLobby_Text_ContestReception:
 	.string "Hello!\p"
 	.string "This is the reception counter for\n"
 	.string "POKéMON CONTESTS.$"
 
 @ Unused
-LilycoveCity_ContestLobby_Text_CounterOnlyFor4PlayerContests: @ 827AEE3
+LilycoveCity_ContestLobby_Text_CounterOnlyFor4PlayerContests:
 	.string "Hello!\p"
 	.string "This reception counter is only\n"
 	.string "for 4-player POKéMON CONTESTS.$"
 
-LilycoveCity_ContestLobby_Text_EnterContest1: @ 827AF28
+LilycoveCity_ContestLobby_Text_EnterContest1:
 	.string "Would you like to enter your POKéMON\n"
 	.string "in our CONTESTS?$"
 
-LilycoveCity_ContestLobby_Text_WhichTopic1: @ 827AF5E
+LilycoveCity_ContestLobby_Text_WhichTopic1:
 	.string "Which topic would you like?$"
 
-LilycoveCity_ContestLobby_Text_ExplainContests: @ 827AF7A
+LilycoveCity_ContestLobby_Text_ExplainContests:
 	.string "A POKéMON CONTEST involves four\n"
 	.string "TRAINERS entering one POKéMON each\l"
 	.string "in competitive judging.\p"
@@ -1530,14 +1424,14 @@ LilycoveCity_ContestLobby_Text_ExplainContests: @ 827AF7A
 	.string "The POKéMON garnering the highest\n"
 	.string "score is declared the winner.$"
 
-LilycoveCity_ContestLobby_Text_ExplainContestTypes: @ 827B17D
+LilycoveCity_ContestLobby_Text_ExplainContestTypes:
 	.string "There are five kinds of CONTESTS.\p"
 	.string "COOL, BEAUTY, CUTE, SMART, and\n"
 	.string "TOUGH are the five categories.\p"
 	.string "Choose the CONTEST that is right for\n"
 	.string "the POKéMON you plan to enter.$"
 
-LilycoveCity_ContestLobby_Text_ExplainContestRanks: @ 827B221
+LilycoveCity_ContestLobby_Text_ExplainContestRanks:
 	.string "There are four ranks of POKéMON\n"
 	.string "CONTESTS.\p"
 	.string "NORMAL, SUPER, HYPER, and MASTER\n"
@@ -1555,77 +1449,77 @@ LilycoveCity_ContestLobby_Text_ExplainContestRanks: @ 827B221
 	.string "may compete in the MASTER Rank as\l"
 	.string "often as its TRAINER wants.$"
 
-LilycoveCity_ContestLobby_Text_EnterWhichRank: @ 827B3FF
+LilycoveCity_ContestLobby_Text_EnterWhichRank:
 	.string "Which Rank would you like to enter?$"
 
-LilycoveCity_ContestLobby_Text_EnterWhichContest1: @ 827B423
+LilycoveCity_ContestLobby_Text_EnterWhichContest1:
 	.string "Which CONTEST would you like to enter?$"
 
-LilycoveCity_ContestLobby_Text_EnterWhichPokemon1: @ 827B44A
+LilycoveCity_ContestLobby_Text_EnterWhichPokemon1:
 	.string "Which POKéMON would you like to enter?$"
 
-LilycoveCity_ContestLobby_Text_MonNotQualifiedForRank: @ 827B471
+LilycoveCity_ContestLobby_Text_MonNotQualifiedForRank:
 	.string "I'm terribly sorry, but your POKéMON\n"
 	.string "is not qualified to compete at this\l"
 	.string "Rank yet…$"
 
-LilycoveCity_ContestLobby_Text_EggCannotTakePart: @ 827B4C4
+LilycoveCity_ContestLobby_Text_EggCannotTakePart:
 	.string "I'm sorry, but an EGG cannot take part\n"
 	.string "in a POKéMON CONTEST.$"
 
-LilycoveCity_ContestLobby_Text_MonInNoConditionForContest: @ 827B501
+LilycoveCity_ContestLobby_Text_MonInNoConditionForContest:
 	.string "Your POKéMON appears to be in no\n"
 	.string "condition to take part in a CONTEST…$"
 
-LilycoveCity_ContestLobby_Text_AlreadyWonEnterAnyway: @ 827B547
+LilycoveCity_ContestLobby_Text_AlreadyWonEnterAnyway:
 	.string "Oh, but that RIBBON…\p"
 	.string "Your POKéMON has won this CONTEST\n"
 	.string "before, hasn't it?\p"
 	.string "Would you like to enter it in this\n"
 	.string "CONTEST anyway?$"
 
-LilycoveCity_ContestLobby_Text_ConfirmContestMon: @ 827B5C4
+LilycoveCity_ContestLobby_Text_ConfirmContestMon:
 	.string "Is that your CONTEST POKéMON?$"
 
-LilycoveCity_ContestLobby_Text_YourMonIsEntryNum4: @ 827B5E2
+LilycoveCity_ContestLobby_Text_YourMonIsEntryNum4:
 	.string "Okay, your POKéMON will be entered\n"
 	.string "in this CONTEST.\p"
 	.string "Your POKéMON is Entry No. 4.\n"
 	.string "The CONTEST will begin shortly.$"
 
-LilycoveCity_ContestLobby_Text_ComeThroughHere: @ 827B653
+LilycoveCity_ContestLobby_Text_ComeThroughHere:
 	.string "Please come in through here.\n"
 	.string "Good luck!$"
 
-LilycoveCity_ContestLobby_Text_PokemonWonWeHavePrize: @ 827B67B
+LilycoveCity_ContestLobby_Text_PokemonWonWeHavePrize:
 	.string "Congratulations! Your POKéMON is the\n"
 	.string "CONTEST winner!\p"
 	.string "We have your prize right here.\n"
 	.string "Please, right this way!$"
 
-LilycoveCity_ContestLobby_Text_ComeBackForPrizeLater: @ 827B6E7
+LilycoveCity_ContestLobby_Text_ComeBackForPrizeLater:
 	.string "Please come back for your prize\n"
 	.string "later on.$"
 
-ContestHall_Text_GettingStartedParticipantsAsFollows: @ 827B711
+ContestHall_Text_GettingStartedParticipantsAsFollows:
 	.string "MC: Hello! We're just getting started\n"
 	.string "with a {STR_VAR_3} Rank POKéMON\l"
 	.string "{STR_VAR_2}!\p"
 	.string "The participating TRAINERS and their\n"
 	.string "POKéMON are as follows:$"
 
-ContestHall_Text_GettingStartedParticipantsAsFollowsLink: @ 827B78F
+ContestHall_Text_GettingStartedParticipantsAsFollowsLink:
 	.string "MC: Hello! We're just getting started\n"
 	.string "with a 4-player linked POKéMON\l"
 	.string "{STR_VAR_2}!\p"
 	.string "The participating TRAINERS and their\n"
 	.string "POKéMON are as follows:$"
 
-ContestHall_Text_EntryXTrainersMon: @ 827B815
+ContestHall_Text_EntryXTrainersMon:
 	.string "MC: Entry No. {STR_VAR_2}!\n"
 	.string "{STR_VAR_1}'s {STR_VAR_3}!$"
 
-ContestHall_Text_SeenContestantsAudienceWillVote: @ 827B830
+ContestHall_Text_SeenContestantsAudienceWillVote:
 	.string "MC: We've just seen the four POKéMON\n"
 	.string "contestants.\p"
 	.string "Now it's time for primary judging!\p"
@@ -1634,10 +1528,10 @@ ContestHall_Text_SeenContestantsAudienceWillVote: @ 827B830
 	.string "Without any further ado, let the\n"
 	.string "voting begin!$"
 
-ContestHall_Text_VotingUnderWay: @ 827B8F2
+ContestHall_Text_VotingUnderWay:
 	.string "Voting under way…$"
 
-ContestHall_Text_VotingCompleteLetsAppeal: @ 827B904
+ContestHall_Text_VotingCompleteLetsAppeal:
 	.string "Voting is now complete!\p"
 	.string "While the votes are being tallied,\n"
 	.string "let's move on to secondary judging!\p"
@@ -1648,75 +1542,75 @@ ContestHall_Text_VotingCompleteLetsAppeal: @ 827B904
 	.string "Let's see a little enthusiasm!\n"
 	.string "Let's appeal!$"
 
-ContestHall_Text_ThatsItForJudging: @ 827BA15
+ContestHall_Text_ThatsItForJudging:
 	.string "MC: That's it for judging!$"
 
-ContestHall_Text_ThankYouForAppeals: @ 827BA30
+ContestHall_Text_ThankYouForAppeals:
 	.string "Thank you all for a most wonderful\n"
 	.string "display of quality appeals!\p"
 	.string "This concludes all judging!\n"
 	.string "Thank you for your fine efforts!$"
 
-ContestHall_Text_JudgeLooksReady: @ 827BAAC
+ContestHall_Text_JudgeLooksReady:
 	.string "Now, all that remains is the pulse-\n"
 	.string "pounding proclamation of the winner.\p"
 	.string "The JUDGE looks ready to make\n"
 	.string "the announcement!$"
 
-ContestHall_Text_WeWillNowDeclareWinner: @ 827BB25
+ContestHall_Text_WeWillNowDeclareWinner:
 	.string "JUDGE: We will now declare the winner!$"
 
-ContestHall_Text_CongratsTrainerXandMon: @ 827BB4C
+ContestHall_Text_CongratsTrainerXandMon:
 	.string "MC: Entry No. {STR_VAR_2}!\p"
 	.string "{STR_VAR_3} and {STR_VAR_1},\n"
 	.string "congratulations!$"
 
-ContestHall_Text_CongratsPleaseCompeteAgain: @ 827BB7A
+ContestHall_Text_CongratsPleaseCompeteAgain:
 	.string "MC: Congratulations!\n"
 	.string "Please do compete again!$"
 
-ContestHall_Text_AcceptYourPrize: @ 827BBA8
+ContestHall_Text_AcceptYourPrize:
 	.string "MC: Here you are!\n"
 	.string "Please accept your prize!$"
 
-ContestHall_Text_ConferRibbonAsPrize: @ 827BBD4
+ContestHall_Text_ConferRibbonAsPrize:
 	.string "We confer on you this RIBBON\n"
 	.string "as your prize!$"
 
-ContestHall_Text_ReceivedRibbon: @ 827BC00
+ContestHall_Text_ReceivedRibbon:
 	.string "{PLAYER} received a RIBBON.$"
 
-ContestHall_Text_PutRibbonOnMon: @ 827BC16
+ContestHall_Text_PutRibbonOnMon:
 	.string "{PLAYER} put the RIBBON on\n"
 	.string "{STR_VAR_1}.$"
 
-ContestHall_Text_PickUpPrizeAtCounterLater: @ 827BC2F
+ContestHall_Text_PickUpPrizeAtCounterLater:
 	.string "Please pick up your prize at\n"
 	.string "the reception counter later.\l"
 	.string "Please do compete again!$"
 
 @ Unused
-ContestHall_Text_OnlyRegister4Players: @ 827BC82
+ContestHall_Text_OnlyRegister4Players:
 	.string "I only register four players for\n"
 	.string "POKéMON CONTESTS.\p"
 	.string "If three other players link up, all\n"
 	.string "four may enter the same CONTEST.\p"
 	.string "Would you like to take part?$"
 
-LilycoveCity_ContestLobby_Text_ProgressWillBeSaved: @ 827BD17
+LilycoveCity_ContestLobby_Text_ProgressWillBeSaved:
 	.string "Before entering a CONTEST, your\n"
 	.string "progress will be saved.$"
 
-LilycoveCity_ContestLobby_Text_ParticipateAnotherTime: @ 827BD4F
+LilycoveCity_ContestLobby_Text_ParticipateAnotherTime:
 	.string "We hope you will participate another\n"
 	.string "time.$"
 
 @ Unused
-LilycoveCity_ContestLobby_Text_EnterContest2: @ 827BD7A
+LilycoveCity_ContestLobby_Text_EnterContest2:
 	.string "Would you like to enter a CONTEST?$"
 
 @ Unused
-LilycoveCity_ContestLobby_Text_Explain4PlayerContest: @ 827BD9D
+LilycoveCity_ContestLobby_Text_Explain4PlayerContest:
 	.string "When four players are ready, connect\n"
 	.string "over a Game Link cable, and register\l"
 	.string "with me, please.\p"
@@ -1728,82 +1622,82 @@ LilycoveCity_ContestLobby_Text_Explain4PlayerContest: @ 827BD9D
 	.string "apply.$"
 
 @ Unused
-LilycoveCity_ContestLobby_Text_EnterWhichContest2: @ 827BE9E
+LilycoveCity_ContestLobby_Text_EnterWhichContest2:
 	.string "Which CONTEST would you like to enter?$"
 
 @ Unused
-LilycoveCity_ContestLobby_Text_EnterWhichPokemon2: @ 827BEC5
+LilycoveCity_ContestLobby_Text_EnterWhichPokemon2:
 	.string "Which POKéMON would you like to enter?$"
 
-LilycoveCity_ContestLobby_Text_Transmitting: @ 827BEEC
+LilycoveCity_ContestLobby_Text_Transmitting:
 	.string "Transmitting…$"
 
-LilycoveCity_ContestLobby_Text_TransmissionError: @ 827BEFA
+LilycoveCity_ContestLobby_Text_TransmissionError:
 	.string "Transmission error…$"
 
-LilycoveCity_ContestLobby_Text_PlayersChoseDifferentContest: @ 827BF0E
+LilycoveCity_ContestLobby_Text_PlayersChoseDifferentContest:
 	.string "You may have chosen a different\n"
 	.string "CONTEST than another player.$"
 
-LilycoveCity_ContestLobby_Text_PlayersMadeDifferentChoice: @ 827BF4B
+LilycoveCity_ContestLobby_Text_PlayersMadeDifferentChoice:
 	.string "You may have made a different\n"
 	.string "choice than another player.$"
 
-LilycoveCity_ContestLobby_Text_PleaseWaitBButtonCancel: @ 827BF85
+LilycoveCity_ContestLobby_Text_PleaseWaitBButtonCancel:
 	.string "Please wait.\n"
 	.string "… … B Button: Cancel$"
 
 @ Unused
-LilycoveCity_ContestLobby_Text_ParticipateAnotherTime2: @ 827BFA7
+LilycoveCity_ContestLobby_Text_ParticipateAnotherTime2:
 	.string "We hope you will participate another\n"
 	.string "time.$"
 
 @ Unused
-LilycoveCity_ContestLobby_Text_TransmissionErrorTryAgain: @ 827BFD2
+LilycoveCity_ContestLobby_Text_TransmissionErrorTryAgain:
 	.string "Transmission error.\n"
 	.string "Please try again.$"
 
-LilycoveCity_ContestLobby_Text_YourMonIsEntryNumX: @ 827BFF8
+LilycoveCity_ContestLobby_Text_YourMonIsEntryNumX:
 	.string "Your POKéMON will be entered in\n"
 	.string "the CONTEST.\p"
 	.string "Your POKéMON is Entry No. {STR_VAR_2}.$"
 
-LilycoveCity_ContestLobby_Text_ContestBeginShortly: @ 827C043
+LilycoveCity_ContestLobby_Text_ContestBeginShortly:
 	.string "The CONTEST will begin shortly.$"
 
-LilycoveCity_ContestLobby_Text_LinkContestReception: @ 827C063
+LilycoveCity_ContestLobby_Text_LinkContestReception:
 	.string "Welcome! This is the POKéMON CONTEST\n"
 	.string "link reception counter.\p"
 	.string "You may enter CONTESTS together with\n"
 	.string "one or more friends.$"
 
-LilycoveCity_ContestLobby_Text_WhichTopic2: @ 827C0DA
+LilycoveCity_ContestLobby_Text_WhichTopic2:
 	.string "Which topic would you like?$"
 
-LilycoveCity_ContestLobby_Text_EnterContest3: @ 827C0F6
+LilycoveCity_ContestLobby_Text_EnterContest3:
 	.string "Would you like to enter a CONTEST?$"
 
-LilycoveCity_ContestLobby_Text_EnterWhichContest3: @ 827C119
+LilycoveCity_ContestLobby_Text_EnterWhichContest3:
 	.string "Which CONTEST would you like to enter?$"
 
-LilycoveCity_ContestLobby_Text_MonInNoCondition2: @ 827C140
+LilycoveCity_ContestLobby_Text_MonInNoCondition2:
 	.string "Your POKéMON appears to be in no\n"
 	.string "condition to take part in a CONTEST…$"
 
-LilycoveCity_ContestLobby_Text_EggCannotTakePart2: @ 827C186
+LilycoveCity_ContestLobby_Text_EggCannotTakePart2:
 	.string "I'm sorry, but an EGG cannot take part\n"
 	.string "in a POKéMON CONTEST.$"
 
-LilycoveCity_ContestLobby_Text_EnterWhichPokemon3: @ 827C1C3
+LilycoveCity_ContestLobby_Text_EnterWhichPokemon3:
 	.string "Which POKéMON would you like to enter?$"
 
-LilycoveCity_ContestLobby_Text_PleaseDecideLinkLeader: @ 827C1EA
+LilycoveCity_ContestLobby_Text_PleaseDecideLinkLeader:
 	.string "Please decide which of you will\n"
 	.string "become the GROUP LEADER.\p"
 	.string "The other players must then choose\n"
 	.string "“JOIN GROUP.”$"
 
-LilycoveCity_ContestLobby_Text_PlayerAt4PCounterUseGMode: @ 827C254
+LilycoveCity_ContestLobby_Text_PlayerAt4PCounterUseGMode:
 	.string "At least one player has entered using\n"
 	.string "the 4-player reception counter.\p"
 	.string "There must be four players connected\n"
@@ -1812,7 +1706,7 @@ LilycoveCity_ContestLobby_Text_PlayerAt4PCounterUseGMode: @ 827C254
 	.string "select G-MODE (GLOBAL MODE),\l"
 	.string "then register to enter again, please.$"
 
-LilycoveCity_ContestLobby_Text_ExplainLinkContest: @ 827C340
+LilycoveCity_ContestLobby_Text_ExplainLinkContest:
 	.string "This is a CONTEST for two to four\n"
 	.string "players linked using a Wireless\l"
 	.string "Adapter or a GBA Game Link cable.\p"
@@ -1833,7 +1727,7 @@ LilycoveCity_ContestLobby_Text_ExplainLinkContest: @ 827C340
 	.string "After that, a CONTEST will start in\n"
 	.string "the usual manner.$"
 
-LilycoveCity_ContestLobby_Text_ExplainEMode: @ 827C5B1
+LilycoveCity_ContestLobby_Text_ExplainEMode:
 	.string "In E-MODE (EMERALD MODE),\n"
 	.string "a LINK CONTEST can be held with\l"
 	.string "two to four players. Each player must\l"
@@ -1847,7 +1741,7 @@ LilycoveCity_ContestLobby_Text_ExplainEMode: @ 827C5B1
 	.string "Please be aware that E-MODE is not\n"
 	.string "available in POKéMON Ruby or Sapphire.$"
 
-LilycoveCity_ContestLobby_Text_ExplainGMode: @ 827C742
+LilycoveCity_ContestLobby_Text_ExplainGMode:
 	.string "G-MODE (GLOBAL MODE) is specifically\n"
 	.string "for four players who are linked using\l"
 	.string "GBA Game Link cables.\p"
@@ -1858,50 +1752,50 @@ LilycoveCity_ContestLobby_Text_ExplainGMode: @ 827C742
 	.string "enter through the 4-player reception\l"
 	.string "counter (POKéMON Ruby or Sapphire).$"
 
-LilycoveCity_ContestLobby_Text_NoWirelessAdapterInGMode: @ 827C879
+LilycoveCity_ContestLobby_Text_NoWirelessAdapterInGMode:
 	.string "I'm terribly sorry.\p"
 	.string "G-MODE does not function\n"
 	.string "with Wireless Adapters.\p"
 	.string "Please select E-MODE or try\n"
 	.string "again using a GBA Game Link cable.$"
 
-LilycoveCity_ContestLobby_Text_WhichContestMode: @ 827C8FD
+LilycoveCity_ContestLobby_Text_WhichContestMode:
 	.string "Which CONTEST MODE would you like\n"
 	.string "to enter?$"
 
-ContestHall_Text_GettingStartedWireless: @ 827C929
+ContestHall_Text_GettingStartedWireless:
 	.string "MC: Hello! We're just getting started\n"
 	.string "with a 4-player linked POKéMON\l"
 	.string "{STR_VAR_2}!$"
 
-ContestHall_Text_ParticipantsAsFollows: @ 827C972
+ContestHall_Text_ParticipantsAsFollows:
 	.string "The participating TRAINERS and their\n"
 	.string "POKéMON are as follows:$"
 
-ContestHall_Text_WeveSeenContestants: @ 827C9AF
+ContestHall_Text_WeveSeenContestants:
 	.string "MC: We've just seen the four POKéMON\n"
 	.string "contestants.\p"
 	.string "Now it's time for primary judging!$"
 
-ContestHall_Text_AudienceWillVote: @ 827CA04
+ContestHall_Text_AudienceWillVote:
 	.string "The audience will vote on their\n"
 	.string "favorite POKéMON contestants.$"
 
-ContestHall_Text_LetVotingBegin: @ 827CA42
+ContestHall_Text_LetVotingBegin:
 	.string "Without any further ado,\n"
 	.string "let the voting begin!$"
 
-ContestHall_Text_VotingComplete: @ 827CA71
+ContestHall_Text_VotingComplete:
 	.string "Voting is now complete!\p"
 	.string "While the votes are being tallied,\n"
 	.string "let's move on to secondary judging!$"
 
-ContestHall_Text_SecondStageOfJudging: @ 827CAD0
+ContestHall_Text_SecondStageOfJudging:
 	.string "The second stage of judging is\n"
 	.string "the much-anticipated appeal time!\p"
 	.string "May the contestants amaze us with\n"
 	.string "superb appeals of dazzling moves!$"
 
-ContestHall_Text_LetsAppeal: @ 827CB55
+ContestHall_Text_LetsAppeal:
 	.string "Let's see a little enthusiasm!\n"
 	.string "Let's appeal!$"

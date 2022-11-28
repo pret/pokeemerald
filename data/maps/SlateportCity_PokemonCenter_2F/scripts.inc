@@ -1,4 +1,4 @@
-SlateportCity_PokemonCenter_2F_MapScripts:: @ 820DC21
+SlateportCity_PokemonCenter_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp
 	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
@@ -6,15 +6,15 @@ SlateportCity_PokemonCenter_2F_MapScripts:: @ 820DC21
 	.byte 0
 
 @ The below 3 are unused and leftover from RS
-SlateportCity_PokemonCenter_2F_EventScript_Colosseum:: @ 820DC36
+SlateportCity_PokemonCenter_2F_EventScript_Colosseum::
 	call CableClub_EventScript_Colosseum
 	end
 
-SlateportCity_PokemonCenter_2F_EventScript_TradeCenter:: @ 820DC3C
+SlateportCity_PokemonCenter_2F_EventScript_TradeCenter::
 	call CableClub_EventScript_TradeCenter
 	end
 
-SlateportCity_PokemonCenter_2F_EventScript_RecordCorner:: @ 820DC42
+SlateportCity_PokemonCenter_2F_EventScript_RecordCorner::
 	call CableClub_EventScript_RecordCorner
 	end
 

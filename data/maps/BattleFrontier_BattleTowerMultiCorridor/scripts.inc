@@ -3,7 +3,7 @@
 .set LOCALID_ATTENDANT_2, 3
 .set LOCALID_PARTNER, 4
 
-BattleFrontier_BattleTowerMultiCorridor_MapScripts:: @ 8248D4A
+BattleFrontier_BattleTowerMultiCorridor_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerMultiCorridor_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerMultiCorridor_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerMultiCorridor_OnFrame
@@ -13,45 +13,42 @@ BattleFrontier_BattleTowerMultiCorridor_MapScripts:: @ 8248D4A
 	@ The player is represented instead by LOCALID_PLAYER, and has the gfx id VAR_OBJ_GFX_ID_F
 	@ The multi partner is represented by LOCALID_PARTNER, and has the gfx id VAR_OBJ_GFX_ID_E
 
-BattleFrontier_BattleTowerMultiCorridor_OnTransition: @ 8248D5A
-	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS
-	call_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx
-	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS
-	call_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_SetLinkPlayerGfx
+BattleFrontier_BattleTowerMultiCorridor_OnTransition:
+	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS, BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx
+	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS, BattleFrontier_BattleTowerMultiCorridor_EventScript_SetLinkPlayerGfx
 	end
 
-BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx:: @ 8248D71
+BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx::
 	tower_setpartnergfx
 	checkplayergender
-	compare VAR_RESULT, FEMALE
-	goto_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale
+	goto_if_eq VAR_RESULT, FEMALE, BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale
 	setvar VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_BRENDAN_NORMAL
 	return
 
-BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale:: @ 8248D8B
+BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale::
 	setvar VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_MAY_NORMAL
 	return
 
-BattleFrontier_BattleTowerMultiCorridor_EventScript_SetLinkPlayerGfx:: @ 8248D91
+BattleFrontier_BattleTowerMultiCorridor_EventScript_SetLinkPlayerGfx::
 	special SetBattleTowerLinkPlayerGfx
 	return
 
-BattleFrontier_BattleTowerMultiCorridor_OnWarp: @ 8248D95
+BattleFrontier_BattleTowerMultiCorridor_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerMultiCorridor_EventScript_SetUpObjects
 	.2byte 0
 
-BattleFrontier_BattleTowerMultiCorridor_EventScript_SetUpObjects:: @ 8248D9F
+BattleFrontier_BattleTowerMultiCorridor_EventScript_SetUpObjects::
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
 	hideobjectat LOCALID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
 	hideobjectat LOCALID_PARTNER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
 	special OffsetCameraForBattle
 	end
 
-BattleFrontier_BattleTowerMultiCorridor_OnFrame: @ 8248DB2
+BattleFrontier_BattleTowerMultiCorridor_OnFrame:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor
 	.2byte 0
 
-BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor:: @ 8248DBC
+BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor::
 	lockall
 	setflag FLAG_ENABLE_MULTI_CORRIDOR_DOOR
 	setvar VAR_0x8004, 14  @ x coord of far door, used by DrawDoor
@@ -76,8 +73,8 @@ BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor:: @ 8248DBC
 	applymovement LOCALID_ATTENDANT_1, BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerAttendantWalkToDoor
 	waitmovement 0
 	delay 40
-	applymovement LOCALID_ATTENDANT_2, Common_Movement_WalkInPlaceFastestUp
-	applymovement LOCALID_ATTENDANT_1, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_ATTENDANT_2, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_ATTENDANT_1, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	opendoor 7, 1
 	waitdooranim
@@ -94,34 +91,30 @@ BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor:: @ 8248DBC
 	releaseall
 	end
 
-BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom:: @ 8248E71
-	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
-	call_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom
-	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
-	call_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom
-	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS
-	call_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToMultiBattleRoom
-	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS
-	call_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom::
+	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES, BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom
+	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES, BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom
+	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS, BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToMultiBattleRoom
+	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS, BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom
 	return
 
-BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom:: @ 8248E9E
-	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 255, 4, 8
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom::
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 4, 8
 	waitstate
 	return
 
-BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToMultiBattleRoom:: @ 8248EA8
-	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 255, 4, 5
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToMultiBattleRoom::
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 4, 5
 	waitstate
 	return
 
 @ Unnecessary duplicate of the above
-BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom:: @ 8248EB2
-	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 255, 4, 5
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom::
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 4, 5
 	waitstate
 	return
 
-BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerWalkToDoor: @ 8248EBC
+BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerWalkToDoor:
 	walk_down
 	walk_right
 	walk_right
@@ -131,7 +124,7 @@ BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerWalkToDoor: @ 8248EBC
 	walk_right
 	step_end
 
-BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerWalkToDoor: @ 8248EC4
+BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerWalkToDoor:
 	walk_down
 	walk_left
 	walk_left
@@ -141,7 +134,7 @@ BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerWalkToDoor: @ 8248EC4
 	walk_left
 	step_end
 
-BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerAttendantWalkToDoor: @ 8248ECC
+BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerAttendantWalkToDoor:
 	walk_right
 	walk_right
 	walk_right
@@ -149,10 +142,10 @@ BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerAttendantWalkToDoor: @ 82
 	walk_right
 	walk_right
 	walk_up
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
-BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerAttendantWalkToDoor: @ 8248ED5
+BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerAttendantWalkToDoor:
 	walk_left
 	walk_left
 	walk_left
@@ -160,22 +153,22 @@ BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerAttendantWalkToDoor: @ 8
 	walk_left
 	walk_left
 	walk_up
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
-BattleFrontier_BattleTowerMultiCorridor_Movement_TrainerEnterDoor: @ 8248EDE
+BattleFrontier_BattleTowerMultiCorridor_Movement_TrainerEnterDoor:
 	delay_16
 	walk_up
 	walk_up
 	set_invisible
 	step_end
 
-BattleFrontier_BattleTowerMultiCorridor_Movement_AttendantEnterDoor: @ 8248EE3
+BattleFrontier_BattleTowerMultiCorridor_Movement_AttendantEnterDoor:
 	walk_up
 	set_invisible
 	step_end
 
-BattleFrontier_BattleTowerMultiCorridor_Movement_ExitElevator: @ 8248EE6
+BattleFrontier_BattleTowerMultiCorridor_Movement_ExitElevator:
 	walk_down
 	step_end
 

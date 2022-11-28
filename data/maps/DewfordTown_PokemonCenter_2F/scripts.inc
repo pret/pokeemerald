@@ -1,4 +1,4 @@
-DewfordTown_PokemonCenter_2F_MapScripts:: @ 81FC615
+DewfordTown_PokemonCenter_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp
 	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
@@ -6,15 +6,15 @@ DewfordTown_PokemonCenter_2F_MapScripts:: @ 81FC615
 	.byte 0
 
 @ The below 3 are unused and leftover from RS
-DewfordTown_PokemonCenter_2F_EventScript_Colosseum:: @ 81FC62A
+DewfordTown_PokemonCenter_2F_EventScript_Colosseum::
 	call CableClub_EventScript_Colosseum
 	end
 
-DewfordTown_PokemonCenter_2F_EventScript_TradeCenter:: @ 81FC630
+DewfordTown_PokemonCenter_2F_EventScript_TradeCenter::
 	call CableClub_EventScript_TradeCenter
 	end
 
-DewfordTown_PokemonCenter_2F_EventScript_RecordCorner:: @ 81FC636
+DewfordTown_PokemonCenter_2F_EventScript_RecordCorner::
 	call CableClub_EventScript_RecordCorner
 	end
 

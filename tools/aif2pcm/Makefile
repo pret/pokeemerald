@@ -6,12 +6,18 @@ LIBS = -lm
 
 SRCS = main.c extended.c
 
+ifeq ($(OS),Windows_NT)
+EXE := .exe
+else
+EXE :=
+endif
+
 .PHONY: all clean
 
-all: aif2pcm
+all: aif2pcm$(EXE)
 	@:
 
-aif2pcm: $(SRCS)
+aif2pcm$(EXE): $(SRCS)
 	$(CC) $(CFLAGS) $(SRCS) -o $@ $(LDFLAGS) $(LIBS)
 
 clean:

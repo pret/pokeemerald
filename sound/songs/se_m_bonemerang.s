@@ -26,18 +26,18 @@ se_m_bonemerang_1:
 	.byte		N01   , Cn5 , v127
 	.byte	W01
 	.byte		PAN   , c_v+10
-	.byte		N01   , Cn6 
+	.byte		N01   , Cn6
 	.byte	W01
 	.byte		PAN   , c_v+0
-	.byte		N01   , Cn5 
+	.byte		N01   , Cn5
 	.byte	W04
-	.byte		N01   
+	.byte		N01
 	.byte	W01
 	.byte		PAN   , c_v-11
-	.byte		N01   , Cn6 
+	.byte		N01   , Cn6
 	.byte	W01
 	.byte		PAN   , c_v+0
-	.byte		N01   , Cn5 
+	.byte		N01   , Cn5
 	.byte	W04
 	.byte	FINE
 

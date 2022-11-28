@@ -1,4 +1,4 @@
-const u32 *const gDecorIconTable[][2] = 
+const u32 *const gDecorIconTable[][2] =
 {
     [DECOR_NONE]            = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
     [DECOR_SMALL_DESK]      = {NULL, NULL},

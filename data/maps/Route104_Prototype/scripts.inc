@@ -1,3 +1,3 @@
-Route104_Prototype_MapScripts:: @ 82693F2
+Route104_Prototype_MapScripts::
 	.byte 0
 

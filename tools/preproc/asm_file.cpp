@@ -26,6 +26,7 @@
 #include "char_util.h"
 #include "utf8.h"
 #include "string_parser.h"
+#include "../../gflib/characters.h"
 
 AsmFile::AsmFile(std::string filename) : m_filename(filename)
 {
@@ -281,7 +282,7 @@ int AsmFile::ReadString(unsigned char* s)
 
         while (length < padLength)
         {
-            s[length++] = 0;
+            s[length++] = CHAR_SPACE;
         }
     }
 
@@ -290,40 +291,92 @@ int AsmFile::ReadString(unsigned char* s)
     return length;
 }
 
+void AsmFile::VerifyStringLength(int length)
+{
+    if (length == kMaxStringLength)
+        RaiseError("mapped string longer than %d bytes", kMaxStringLength);
+}
+
 int AsmFile::ReadBraille(unsigned char* s)
 {
     static std::map<char, unsigned char> encoding =
     {
-        { 'A', 0x01 },
-        { 'B', 0x05 },
-        { 'C', 0x03 },
-        { 'D', 0x0B },
-        { 'E', 0x09 },
-        { 'F', 0x07 },
-        { 'G', 0x0F },
-        { 'H', 0x0D },
-        { 'I', 0x06 },
-        { 'J', 0x0E },
-        { 'K', 0x11 },
-        { 'L', 0x15 },
-        { 'M', 0x13 },
-        { 'N', 0x1B },
-        { 'O', 0x19 },
-        { 'P', 0x17 },
-        { 'Q', 0x1F },
-        { 'R', 0x1D },
-        { 'S', 0x16 },
-        { 'T', 0x1E },
-        { 'U', 0x31 },
-        { 'V', 0x35 },
-        { 'W', 0x2E },
-        { 'X', 0x33 },
-        { 'Y', 0x3B },
-        { 'Z', 0x39 },
-        { ' ', 0x00 },
-        { ',', 0x04 },
-        { '.', 0x2C },
-        { '$', 0xFF },
+        { 'A', BRAILLE_CHAR_A },
+        { 'B', BRAILLE_CHAR_B },
+        { 'C', BRAILLE_CHAR_C },
+        { 'D', BRAILLE_CHAR_D },
+        { 'E', BRAILLE_CHAR_E },
+        { 'F', BRAILLE_CHAR_F },
+        { 'G', BRAILLE_CHAR_G },
+        { 'H', BRAILLE_CHAR_H },
+        { 'I', BRAILLE_CHAR_I },
+        { 'J', BRAILLE_CHAR_J },
+        { 'K', BRAILLE_CHAR_K },
+        { 'L', BRAILLE_CHAR_L },
+        { 'M', BRAILLE_CHAR_M },
+        { 'N', BRAILLE_CHAR_N },
+        { 'O', BRAILLE_CHAR_O },
+        { 'P', BRAILLE_CHAR_P },
+        { 'Q', BRAILLE_CHAR_Q },
+        { 'R', BRAILLE_CHAR_R },
+        { 'S', BRAILLE_CHAR_S },
+        { 'T', BRAILLE_CHAR_T },
+        { 'U', BRAILLE_CHAR_U },
+        { 'V', BRAILLE_CHAR_V },
+        { 'W', BRAILLE_CHAR_W },
+        { 'X', BRAILLE_CHAR_X },
+        { 'Y', BRAILLE_CHAR_Y },
+        { 'Z', BRAILLE_CHAR_Z },
+        { 'a', BRAILLE_CHAR_A },
+        { 'b', BRAILLE_CHAR_B },
+        { 'c', BRAILLE_CHAR_C },
+        { 'd', BRAILLE_CHAR_D },
+        { 'e', BRAILLE_CHAR_E },
+        { 'f', BRAILLE_CHAR_F },
+        { 'g', BRAILLE_CHAR_G },
+        { 'h', BRAILLE_CHAR_H },
+        { 'i', BRAILLE_CHAR_I },
+        { 'j', BRAILLE_CHAR_J },
+        { 'k', BRAILLE_CHAR_K },
+        { 'l', BRAILLE_CHAR_L },
+        { 'm', BRAILLE_CHAR_M },
+        { 'n', BRAILLE_CHAR_N },
+        { 'o', BRAILLE_CHAR_O },
+        { 'p', BRAILLE_CHAR_P },
+        { 'q', BRAILLE_CHAR_Q },
+        { 'r', BRAILLE_CHAR_R },
+        { 's', BRAILLE_CHAR_S },
+        { 't', BRAILLE_CHAR_T },
+        { 'u', BRAILLE_CHAR_U },
+        { 'v', BRAILLE_CHAR_V },
+        { 'w', BRAILLE_CHAR_W },
+        { 'x', BRAILLE_CHAR_X },
+        { 'y', BRAILLE_CHAR_Y },
+        { 'z', BRAILLE_CHAR_Z },
+        { '0', BRAILLE_CHAR_0 },
+        { '1', BRAILLE_CHAR_1 },
+        { '2', BRAILLE_CHAR_2 },
+        { '3', BRAILLE_CHAR_3 },
+        { '4', BRAILLE_CHAR_4 },
+        { '5', BRAILLE_CHAR_5 },
+        { '6', BRAILLE_CHAR_6 },
+        { '7', BRAILLE_CHAR_7 },
+        { '8', BRAILLE_CHAR_8 },
+        { '9', BRAILLE_CHAR_9 },
+        { ' ', BRAILLE_CHAR_SPACE },
+        { ',', BRAILLE_CHAR_COMMA },
+        { '.', BRAILLE_CHAR_PERIOD },
+        { '?', BRAILLE_CHAR_QUESTION_MARK },
+        { '!', BRAILLE_CHAR_EXCL_MARK },
+        { ':', BRAILLE_CHAR_COLON },
+        { ';', BRAILLE_CHAR_SEMICOLON },
+        { '-', BRAILLE_CHAR_HYPHEN },
+        { '/', BRAILLE_CHAR_SLASH },
+        { '(', BRAILLE_CHAR_PAREN },
+        { ')', BRAILLE_CHAR_PAREN },
+        { '\'', BRAILLE_CHAR_APOSTROPHE },
+        { '#', BRAILLE_CHAR_NUMBER },
+        { '$', EOS },
     };
 
     SkipWhitespace();
@@ -335,14 +388,13 @@ int AsmFile::ReadBraille(unsigned char* s)
 
     m_pos++;
 
+    bool inNumber = false;
     while (m_buffer[m_pos] != '"')
     {
-        if (length == kMaxStringLength)
-            RaiseError("mapped string longer than %d bytes", kMaxStringLength);
-
         if (m_buffer[m_pos] == '\\' && m_buffer[m_pos + 1] == 'n')
         {
-            s[length++] = 0xFE;
+            VerifyStringLength(length);
+            s[length++] = CHAR_NEWLINE;
             m_pos += 2;
         }
         else
@@ -357,6 +409,21 @@ int AsmFile::ReadBraille(unsigned char* s)
                     RaiseError("character '\\x%02X' not valid in braille string", m_buffer[m_pos]);
             }
 
+            if (!inNumber && c >= '0' && c <= '9' )
+            {
+                // Output number indicator at start of a number
+                inNumber = true;
+                VerifyStringLength(length);
+                s[length++] = BRAILLE_CHAR_NUMBER;
+            }
+            else if (inNumber && encoding[c] == BRAILLE_CHAR_SPACE)
+            {
+                // Number ends at a space.
+                // Non-number characters encountered before a space will simply be output as is.
+                inNumber = false;
+            }
+
+            VerifyStringLength(length);
             s[length++] = encoding[c];
             m_pos++;
         }

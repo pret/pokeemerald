@@ -1,3 +1,3 @@
-Underwater_Route124_MapScripts:: @ 81F7722
+Underwater_Route124_MapScripts::
 	.byte 0
 

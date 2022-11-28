@@ -294,7 +294,7 @@ struct ContestResources
     u8 * contestBgTilemaps[CONTESTANT_COUNT];
     void * boxBlinkTiles1;
     void * boxBlinkTiles2;
-    void * field_3c;
+    void * animBgTileBuffer;
 };
 
 #define eContest (*gContestResources->contest)
@@ -324,7 +324,6 @@ extern u16 gSpecialVar_ContestRank;
 extern u8 gNumLinkContestPlayers;
 extern u8 gHighestRibbonRank;
 extern struct ContestResources *gContestResources;
-extern u8 sContestBgCopyFlags;
 extern struct ContestWinner gCurContestWinner;
 extern u8 gCurContestWinnerIsForArtist;
 extern u8 gCurContestWinnerSaveIdx;
@@ -340,11 +339,11 @@ void SetLinkAIContestants(u8 contestType, u8 rank, bool32 isPostgame);
 u8 GetContestEntryEligibility(struct Pokemon *pkmn);
 void CalculateRound1Points(u8 contestCategory);
 bool8 IsSpeciesNotUnown(u16 species);
-bool8 Contest_IsMonsTurnDisabled(u8 a);
+bool8 Contest_IsMonsTurnDisabled(u8 contestant);
 void SaveLinkContestResults(void);
-void SortContestants(bool8 a);
-void SetContestantEffectStringID(u8 a, u8 b);
-void SetContestantEffectStringID2(u8 a, u8 b);
+void SortContestants(bool8 useRanking);
+void SetContestantEffectStringID(u8 contestant, u8 effectStringId);
+void SetContestantEffectStringID2(u8 contestant, u8 effectStringId);
 void SetStartledString(u8 contestant, u8 jam);
 void MakeContestantNervous(u8 p);
 s8 Contest_GetMoveExcitement(u16 move);

@@ -147,7 +147,7 @@ se_m_twister_1:
 	.byte	W02
 	.byte		PAN   , c_v-11
 	.byte	W03
-	.byte		EOT   
+	.byte		EOT
 	.byte	FINE
 
 @********************** Track  2 **********************@
@@ -190,7 +190,7 @@ se_m_twister_2:
 	.byte	W05
 	.byte		        18*se_m_twister_mvl/mxv
 	.byte	W05
-	.byte		EOT   
+	.byte		EOT
 	.byte	FINE
 
 @******************************************************@

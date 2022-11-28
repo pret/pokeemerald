@@ -14,24 +14,24 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "up",
+      "map": "MAP_MOSSDEEP_CITY",
       "offset": 0,
-      "map": "MAP_MOSSDEEP_CITY"
+      "direction": "up"
     },
     {
-      "direction": "down",
+      "map": "MAP_ROUTE128",
       "offset": 0,
-      "map": "MAP_ROUTE128"
+      "direction": "down"
     },
     {
-      "direction": "left",
+      "map": "MAP_ROUTE126",
       "offset": 0,
-      "map": "MAP_ROUTE126"
+      "direction": "left"
     },
     {
-      "direction": "dive",
+      "map": "MAP_UNDERWATER_ROUTE127",
       "offset": 0,
-      "map": "MAP_UNDERWATER_ROUTE127"
+      "direction": "dive"
     }
   ],
   "object_events": [

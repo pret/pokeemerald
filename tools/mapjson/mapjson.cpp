@@ -191,7 +191,7 @@ string generate_map_events_text(Json map_data) {
                  << warp_event["x"].int_value() << ", "
                  << warp_event["y"].int_value() << ", "
                  << warp_event["elevation"].int_value() << ", "
-                 << warp_event["dest_warp_id"].int_value() << ", "
+                 << warp_event["dest_warp_id"].string_value() << ", "
                  << warp_event["dest_map"].string_value() << "\n";
         }
         text << "\n";
@@ -230,7 +230,7 @@ string generate_map_events_text(Json map_data) {
         text << bgs_label << ":\n";
         for (auto &bg_event : map_data["bg_events"].array_items()) {
             if (bg_event["type"] == "sign") {
-                text << "\tbg_event "
+                text << "\tbg_sign_event "
                      << bg_event["x"].int_value() << ", "
                      << bg_event["y"].int_value() << ", "
                      << bg_event["elevation"].int_value() << ", "

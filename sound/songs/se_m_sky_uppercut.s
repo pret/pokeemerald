@@ -29,7 +29,7 @@ se_m_sky_uppercut_1:
 	.byte	W03
 	.byte		        93*se_m_sky_uppercut_mvl/mxv
 	.byte		PAN   , c_v-6
-	.byte		N02   , Cn5 
+	.byte		N02   , Cn5
 	.byte	W03
 	.byte		VOL   , 110*se_m_sky_uppercut_mvl/mxv
 	.byte	W01
@@ -74,9 +74,9 @@ se_m_sky_uppercut_2:
 	.byte		VOL   , 110*se_m_sky_uppercut_mvl/mxv
 	.byte		N02   , Cn3 , v060
 	.byte	W03
-	.byte		        Gn2 
+	.byte		        Gn2
 	.byte	W03
-	.byte		        Gs4 
+	.byte		        Gs4
 	.byte	W04
 	.byte		        Gs4 , v020
 	.byte	W02

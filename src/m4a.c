@@ -83,7 +83,7 @@ void m4aSoundInit(void)
     for (i = 0; i < NUM_MUSIC_PLAYERS; i++)
     {
         struct MusicPlayerInfo *mplayInfo = gMPlayTable[i].info;
-        MPlayOpen(mplayInfo, gMPlayTable[i].track, gMPlayTable[i].unk_8);
+        MPlayOpen(mplayInfo, gMPlayTable[i].track, gMPlayTable[i].numTracks);
         mplayInfo->unk_B = gMPlayTable[i].unk_A;
         mplayInfo->memAccArea = gMPlayMemAccArea;
     }
@@ -906,7 +906,6 @@ void CgbSound(void)
 {
     s32 ch;
     struct CgbChannel *channels;
-    s32 envelopeStepTimeAndDir;
     s32 prevC15;
     struct SoundInfo *soundInfo = SOUND_INFO_PTR;
     vu8 *nrx0ptr;
@@ -914,6 +913,7 @@ void CgbSound(void)
     vu8 *nrx2ptr;
     vu8 *nrx3ptr;
     vu8 *nrx4ptr;
+    s32 envelopeStepTimeAndDir;
 
     // Most comparision operations that cast to s8 perform 'and' by 0xFF.
     int mask = 0xff;
@@ -1178,7 +1178,7 @@ void CgbSound(void)
                 *nrx3ptr = channels->frequency;
             else
                 *nrx3ptr = (*nrx3ptr & 0x08) | channels->frequency;
-            channels->n4 = (channels->n4 & 0xC0) + (*((u8*)(&channels->frequency) + 1));
+            channels->n4 = (channels->n4 & 0xC0) + (*((u8 *)(&channels->frequency) + 1));
             *nrx4ptr = (s8)(channels->n4 & mask);
         }
 
@@ -1198,8 +1198,8 @@ void CgbSound(void)
             }
             else
             {
-                envelopeStepTimeAndDir &= 0xf;
-                *nrx2ptr = (channels->envelopeVolume << 4) + envelopeStepTimeAndDir;
+                u32 envMask = 0xF;
+                *nrx2ptr = (envelopeStepTimeAndDir & envMask) + (channels->envelopeVolume << 4);
                 *nrx4ptr = channels->n4 | 0x80;
                 if (ch == 1 && !(*nrx0ptr & 0x08))
                     *nrx4ptr = channels->n4 | 0x80;
@@ -1525,6 +1525,10 @@ void ply_xwave(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track
 {
     u32 wav;
 
+#ifdef UBFIX
+    wav = 0;
+#endif
+
     READ_XCMD_BYTE(wav, 0) // UB: uninitialized variable
     READ_XCMD_BYTE(wav, 1)
     READ_XCMD_BYTE(wav, 2)
@@ -1592,6 +1596,10 @@ void ply_xcmd_0C(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *tra
 {
     u32 unk;
 
+#ifdef UBFIX
+    unk = 0;
+#endif
+
     READ_XCMD_BYTE(unk, 0) // UB: uninitialized variable
     READ_XCMD_BYTE(unk, 1)
 
@@ -1611,6 +1619,7 @@ void ply_xcmd_0C(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *tra
 void ply_xcmd_0D(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 {
     u32 unk;
+
 #ifdef UBFIX
     unk = 0;
 #endif

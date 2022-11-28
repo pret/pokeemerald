@@ -1,15 +1,16 @@
 #include "global.h"
 #include "save_location.h"
-#include "constants/maps.h"
+
+#define LIST_END 0xFFFF
 
 static bool32 IsCurMapInLocationList(const u16 *list)
 {
     s32 i;
-    u16 locSum = (gSaveBlock1Ptr->location.mapGroup << 8) + (gSaveBlock1Ptr->location.mapNum);
+    u16 map = (gSaveBlock1Ptr->location.mapGroup << 8) + gSaveBlock1Ptr->location.mapNum;
 
-    for (i = 0; list[i] != 0xFFFF; i++)
+    for (i = 0; list[i] != LIST_END; i++)
     {
-        if (list[i] == locSum)
+        if (list[i] == map)
             return TRUE;
     }
 
@@ -56,7 +57,7 @@ static const u16 sSaveLocationPokeCenterList[] =
     MAP_TRADE_CENTER,
     MAP_RECORD_CORNER,
     MAP_BATTLE_COLOSSEUM_4P,
-    0xFFFF,
+    LIST_END,
 };
 
 static bool32 IsCurMapPokeCenter(void)
@@ -67,7 +68,7 @@ static bool32 IsCurMapPokeCenter(void)
 static const u16 sSaveLocationReloadLocList[] = // There's only 1 location, and it's presumed its for the save reload feature for battle tower.
 {
     MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY,
-    0xFFFF,
+    LIST_END,
 };
 
 static bool32 IsCurMapReloadLocation(void)
@@ -76,20 +77,20 @@ static bool32 IsCurMapReloadLocation(void)
 }
 
 // Nulled out list. Unknown what this would have been.
-static const u16 sUnknown_0861440E[] =
+static const u16 sEmptyMapList[] =
 {
-    0xFFFF,
+    LIST_END,
 };
 
-static bool32 sub_81AFCEC(void)
+static bool32 IsCurMapInEmptyList(void)
 {
-    return IsCurMapInLocationList(sUnknown_0861440E);
+    return IsCurMapInLocationList(sEmptyMapList);
 }
 
 static void TrySetPokeCenterWarpStatus(void)
 {
-    if (IsCurMapPokeCenter() == FALSE)
-        gSaveBlock2Ptr->specialSaveWarpFlags &= ~(POKECENTER_SAVEWARP);
+    if (!IsCurMapPokeCenter())
+        gSaveBlock2Ptr->specialSaveWarpFlags &= ~POKECENTER_SAVEWARP;
     else
         gSaveBlock2Ptr->specialSaveWarpFlags |= POKECENTER_SAVEWARP;
 }
@@ -97,16 +98,16 @@ static void TrySetPokeCenterWarpStatus(void)
 static void TrySetReloadWarpStatus(void)
 {
     if (!IsCurMapReloadLocation())
-        gSaveBlock2Ptr->specialSaveWarpFlags &= ~(LOBBY_SAVEWARP);
+        gSaveBlock2Ptr->specialSaveWarpFlags &= ~LOBBY_SAVEWARP;
     else
         gSaveBlock2Ptr->specialSaveWarpFlags |= LOBBY_SAVEWARP;
 }
 
-// this function definitely sets a warp status, but because the list is empty, it's unknown what this does yet.
-static void sub_81AFD5C(void)
+// Unknown save warp flag. Never set because map list is empty.
+static void TrySetUnknownWarpStatus(void)
 {
-    if (!sub_81AFCEC())
-        gSaveBlock2Ptr->specialSaveWarpFlags &= ~(UNK_SPECIAL_SAVE_WARP_FLAG_3);
+    if (!IsCurMapInEmptyList())
+        gSaveBlock2Ptr->specialSaveWarpFlags &= ~UNK_SPECIAL_SAVE_WARP_FLAG_3;
     else
         gSaveBlock2Ptr->specialSaveWarpFlags |= UNK_SPECIAL_SAVE_WARP_FLAG_3;
 }
@@ -115,21 +116,21 @@ void TrySetMapSaveWarpStatus(void)
 {
     TrySetPokeCenterWarpStatus();
     TrySetReloadWarpStatus();
-    sub_81AFD5C();
+    TrySetUnknownWarpStatus();
 }
 
-// In FRLG, only 0x1, 0x10, and 0x20 are set when the pokedex is received
-// 0x2, 0x4, 0x8, and 0x8000 are instead set by SetPostgameFlags
+// In FRLG, only bits 0, 4, and 5 are set when the pokedex is received.
+// Bits 1, 2, 3, and 15 are instead set by SetPostgameFlags.
 // These flags are read by Pokemon Colosseum/XD for linking. XD Additionally requires FLAG_SYS_GAME_CLEAR
 void SetUnlockedPokedexFlags(void)
 {
-    gSaveBlock2Ptr->gcnLinkFlags |= 0x8000;
-    gSaveBlock2Ptr->gcnLinkFlags |= 0x1;
-    gSaveBlock2Ptr->gcnLinkFlags |= 0x2;
-    gSaveBlock2Ptr->gcnLinkFlags |= 0x4;
-    gSaveBlock2Ptr->gcnLinkFlags |= 0x10;
-    gSaveBlock2Ptr->gcnLinkFlags |= 0x20;
-    gSaveBlock2Ptr->gcnLinkFlags |= 0x8;
+    gSaveBlock2Ptr->gcnLinkFlags |= (1 << 15);
+    gSaveBlock2Ptr->gcnLinkFlags |= (1 << 0);
+    gSaveBlock2Ptr->gcnLinkFlags |= (1 << 1);
+    gSaveBlock2Ptr->gcnLinkFlags |= (1 << 2);
+    gSaveBlock2Ptr->gcnLinkFlags |= (1 << 4);
+    gSaveBlock2Ptr->gcnLinkFlags |= (1 << 5);
+    gSaveBlock2Ptr->gcnLinkFlags |= (1 << 3);
 }
 
 void SetChampionSaveWarp(void)

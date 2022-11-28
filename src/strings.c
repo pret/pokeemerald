@@ -1,6 +1,7 @@
 #include "global.h"
 #include "strings.h"
 #include "battle_pyramid_bag.h"
+#include "item_menu.h"
 
 ALIGNED(4)
 const u8 gText_ExpandedPlaceholder_Empty[] = _("");
@@ -255,18 +256,18 @@ const u8 gText_ThePC[] = _("the PC");
 
 const u8 *const gBagMenu_ReturnToStrings[] =
 {
-    gText_TheField,
-    gText_TheBattle,
-    gText_ThePokemonList,
-    gText_TheShop,
-    gText_TheField,
-    gText_TheField,
-    gText_ThePC,
-    gText_TheField,
-    gText_TheField,
-    gText_TheField,
-    gText_TheBattle,
-    gText_ThePC
+    [ITEMMENULOCATION_FIELD]               = gText_TheField,
+    [ITEMMENULOCATION_BATTLE]              = gText_TheBattle,
+    [ITEMMENULOCATION_PARTY]               = gText_ThePokemonList,
+    [ITEMMENULOCATION_SHOP]                = gText_TheShop,
+    [ITEMMENULOCATION_BERRY_TREE]          = gText_TheField,
+    [ITEMMENULOCATION_BERRY_BLENDER_CRUSH] = gText_TheField,
+    [ITEMMENULOCATION_ITEMPC]              = gText_ThePC,
+    [ITEMMENULOCATION_FAVOR_LADY]          = gText_TheField,
+    [ITEMMENULOCATION_QUIZ_LADY]           = gText_TheField,
+    [ITEMMENULOCATION_APPRENTICE]          = gText_TheField,
+    [ITEMMENULOCATION_WALLY]               = gText_TheBattle,
+    [ITEMMENULOCATION_PCBOX]               = gText_ThePC
 };
 
 const u8 *const gPyramidBagMenu_ReturnToStrings[] =
@@ -286,15 +287,15 @@ const u8 gText_KeyItemsPocket[] = _("KEY ITEMS");
 
 const u8 *const gPocketNamesStringsTable[] =
 {
-    gText_ItemsPocket,
-    gText_PokeBallsPocket,
-    gText_TMHMPocket,
-    gText_BerriesPocket,
-    gText_KeyItemsPocket
+    [ITEMS_POCKET] = gText_ItemsPocket,
+    [BALLS_POCKET] = gText_PokeBallsPocket,
+    [TMHM_POCKET]  = gText_TMHMPocket,
+    [BERRIES_POCKET] = gText_BerriesPocket,
+    [KEYITEMS_POCKET] = gText_KeyItemsPocket
 };
 
-const u8 gText_NumberVar1Clear7Var2[] = _("{NO}{STR_VAR_1}{CLEAR 0x07}{STR_VAR_2}");
-const u8 gText_ClearTo11Var1Clear5Var2[] = _("{CLEAR_TO 0x11}{STR_VAR_1}{CLEAR 0x05}{STR_VAR_2}");
+const u8 gText_NumberItem_TMBerry[] = _("{NO}{STR_VAR_1}{CLEAR 0x07}{STR_VAR_2}");
+const u8 gText_NumberItem_HM[] = _("{CLEAR_TO 0x11}{STR_VAR_1}{CLEAR 0x05}{STR_VAR_2}");
 const u8 gText_SizeSlash[] = _("SIZE /");
 const u8 gText_FirmSlash[] = _("FIRM /");
 const u8 gText_Var1DotVar2[] = _("{STR_VAR_1}.{STR_VAR_2}”");
@@ -657,7 +658,7 @@ const u8 gText_Satisfied[] = _("Satisfied");
 const u8 gText_Dissatisfied[] = _("Dissatisfied");
 const u8 gText_DeepSeaTooth[] = _("DEEPSEATOOTH");
 const u8 gText_DeepSeaScale[] = _("DEEPSEASCALE");
-const u8 gText_BlueFlute2[] = _("BLUE FLUTE"); 
+const u8 gText_BlueFlute2[] = _("BLUE FLUTE");
 const u8 gText_YellowFlute2[] = _("YELLOW FLUTE");
 const u8 gText_RedFlute2[] = _("RED FLUTE");
 const u8 gText_WhiteFlute2[] = _("WHITE FLUTE");
@@ -838,17 +839,17 @@ const u8 gText_B4F[] = _("B4F");
 const u8 gText_Rooftop[] = _("ROOFTOP");
 const u8 gText_ElevatorNowOn[] = _("Now on:");
 const u8 gText_BP[] = _("BP");
-const u8 gText_EnergyPowder50[] = _("ENERGYPOWDER{CLEAR_TO 0x72}{SIZE 0}50");
-const u8 gText_EnergyRoot80[] = _("ENERGY ROOT{CLEAR_TO 0x72}{SIZE 0}80");
-const u8 gText_HealPowder50[] = _("HEAL POWDER{CLEAR_TO 0x72}{SIZE 0}50");
-const u8 gText_RevivalHerb300[] = _("REVIVAL HERB{CLEAR_TO 0x6C}{SIZE 0}300");
-const u8 gText_Protein1000[] = _("PROTEIN{CLEAR_TO 0x63}{SIZE 0}1,000");
-const u8 gText_Iron1000[] = _("IRON{CLEAR_TO 0x63}{SIZE 0}1,000");
-const u8 gText_Carbos1000[] = _("CARBOS{CLEAR_TO 0x63}{SIZE 0}1,000");
-const u8 gText_Calcium1000[] = _("CALCIUM{CLEAR_TO 0x63}{SIZE 0}1,000");
-const u8 gText_Zinc1000[] = _("ZINC{CLEAR_TO 0x63}{SIZE 0}1,000");
-const u8 gText_HPUp1000[] = _("HP UP{CLEAR_TO 0x63}{SIZE 0}1,000");
-const u8 gText_PPUp3000[] = _("PP UP{CLEAR_TO 0x63}{SIZE 0}3,000");
+const u8 gText_EnergyPowder50[] = _("ENERGYPOWDER{CLEAR_TO 114}{FONT_SMALL}50");
+const u8 gText_EnergyRoot80[] = _("ENERGY ROOT{CLEAR_TO 114}{FONT_SMALL}80");
+const u8 gText_HealPowder50[] = _("HEAL POWDER{CLEAR_TO 114}{FONT_SMALL}50");
+const u8 gText_RevivalHerb300[] = _("REVIVAL HERB{CLEAR_TO 108}{FONT_SMALL}300");
+const u8 gText_Protein1000[] = _("PROTEIN{CLEAR_TO 99}{FONT_SMALL}1,000");
+const u8 gText_Iron1000[] = _("IRON{CLEAR_TO 99}{FONT_SMALL}1,000");
+const u8 gText_Carbos1000[] = _("CARBOS{CLEAR_TO 99}{FONT_SMALL}1,000");
+const u8 gText_Calcium1000[] = _("CALCIUM{CLEAR_TO 99}{FONT_SMALL}1,000");
+const u8 gText_Zinc1000[] = _("ZINC{CLEAR_TO 99}{FONT_SMALL}1,000");
+const u8 gText_HPUp1000[] = _("HP UP{CLEAR_TO 99}{FONT_SMALL}1,000");
+const u8 gText_PPUp3000[] = _("PP UP{CLEAR_TO 99}{FONT_SMALL}3,000");
 const u8 gText_RankingHall[] = _("RANKING HALL");
 const u8 gText_ExchangeService[] = _("EXCHANGE SERVICE");
 const u8 gText_LilycoveCity[] = _("LILYCOVE CITY");
@@ -989,7 +990,7 @@ const u8 gText_Unknown[] = _("UNKNOWN");
 const u8 gText_Call[] = _("CALL");
 const u8 gText_Check[] = _("CHECK");
 const u8 gText_Cancel6[] = _("CANCEL");
-const u8 gText_NumberF700[] = _("No. {DYNAMIC 0}");
+const u8 gText_NumberIndex[] = _("No. {DYNAMIC 0}");
 const u8 gText_RibbonsF700[] = _("RIBBONS {DYNAMIC 0}");
 const u8 gText_PokemonMaleLv2[] = _("{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_RED WHITE GREEN}♂{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}/{LV}{DYNAMIC 1}{DYNAMIC 2}"); // Unused
 const u8 gText_PokemonFemaleLv2[] = _("{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_GREEN WHITE BLUE}♀{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}/{LV}{DYNAMIC 1}{DYNAMIC 2}"); // Unused
@@ -1185,7 +1186,7 @@ const u8 gText_PsychUp48BP[] = _("PSYCH UP{CLEAR_TO 0x4E}48BP");
 const u8 gText_IcePunch48BP[] = _("ICE PUNCH{CLEAR_TO 0x4E}48BP");
 const u8 gText_ThunderPunch48BP[] = _("THUNDERPUNCH{CLEAR_TO 0x4E}48BP");
 const u8 gText_FirePunch48BP[] = _("FIRE PUNCH{CLEAR_TO 0x4E}48BP");
-const u8 gText_PkmnFainted3[] = _("{STR_VAR_1} fainted…\p\n");
+const u8 gText_PkmnFainted_FldPsn[] = _("{STR_VAR_1} fainted…\p\n");
 const u8 gText_Marco[] = _("MARCO");
 const u8 gText_TrainerCardName[] = _("NAME: ");
 const u8 gText_TrainerCardIDNo[] = _("IDNo.");
@@ -1229,7 +1230,7 @@ ALIGNED(4) const u8 gText_Facility[] = _("{STR_VAR_1}");
 
 const u8 gText_Give[] = _("Give");
 const u8 gText_NoNeed[] = _("No need");
-const u8 gText_ColorLightShadowDarkGrey[] = _("{COLOR LIGHT_GRAY}{SHADOW DARK_GRAY}");
+const u8 gText_ColorLightShadowDarkGray[] = _("{COLOR LIGHT_GRAY}{SHADOW DARK_GRAY}");
 const u8 gText_ColorBlue[] = _("{COLOR BLUE}");
 const u8 gText_ColorTransparent[] = _("{HIGHLIGHT TRANSPARENT}{COLOR TRANSPARENT}");
 const u8 gText_CDot[] = _("C.");
@@ -1239,13 +1240,13 @@ const u8 gText_PreliminaryResults[] = _("The preliminary results!");
 const u8 gText_Round2Results[] = _("Round 2 results!");
 const u8 gText_ContestantsMonWon[] = _("{STR_VAR_1}'s {STR_VAR_2} won!");
 const u8 gText_CommunicationStandby[] = _("Communication standby…");
-const u8 gText_ColorDarkGrey[] = _("{COLOR DARK_GRAY}");
+const u8 gText_ColorDarkGray[] = _("{COLOR DARK_GRAY}");
 const u8 gText_ColorDynamic6WhiteDynamic5[] = _("{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR6 WHITE DYNAMIC_COLOR5}"); // Unused
-const u8 gText_HighlightDarkGrey[] = _("{HIGHLIGHT DARK_GRAY}");
+const u8 gText_HealthboxNickname[] = _("{HIGHLIGHT DARK_GRAY}");
 const u8 gText_EmptySpace2[] = _(" "); // Unused
-const u8 gText_DynColor2Male[] = _("{COLOR DYNAMIC_COLOR2}♂");
-const u8 gText_DynColor1Female[] = _("{COLOR DYNAMIC_COLOR1}♀");
-const u8 gText_DynColor2[] = _("{COLOR DYNAMIC_COLOR2}");
+const u8 gText_HealthboxGender_Male[] = _("{COLOR DYNAMIC_COLOR2}♂");
+const u8 gText_HealthboxGender_Female[] = _("{COLOR DYNAMIC_COLOR1}♀");
+const u8 gText_HealthboxGender_None[] = _("{COLOR DYNAMIC_COLOR2}");
 const u8 gText_Upper[] = _("UPPER");
 const u8 gText_Lower[] = _("lower");
 const u8 gText_Others[] = _("OTHERS");

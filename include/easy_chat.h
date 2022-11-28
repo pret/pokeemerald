@@ -2,7 +2,6 @@
 #define GUARD_EASYCHAT_H
 
 #include "main.h"
-#include "constants/easy_chat.h"
 
 struct EasyChatScreenTemplate
 {

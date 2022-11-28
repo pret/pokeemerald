@@ -3,8 +3,7 @@
 
 #define PIXEL_FILL(num) ((num) | ((num) << 4))
 
-enum
-{
+enum {
     WINDOW_BG,
     WINDOW_TILEMAP_LEFT,
     WINDOW_TILEMAP_TOP,
@@ -13,6 +12,14 @@ enum
     WINDOW_PALETTE_NUM,
     WINDOW_BASE_BLOCK,
     WINDOW_TILE_DATA
+};
+
+// Mode for CopyWindowToVram, CopyWindowRectToVram and CopyWindowToVram8Bit
+enum {
+    COPYWIN_NONE,
+    COPYWIN_MAP,
+    COPYWIN_GFX,
+    COPYWIN_FULL,
 };
 
 struct WindowTemplate
@@ -28,13 +35,7 @@ struct WindowTemplate
 
 #define DUMMY_WIN_TEMPLATE          \
 {                                   \
-    0xFF,                           \
-    0,                              \
-    0,                              \
-    0,                              \
-    0,                              \
-    0,                              \
-    0,                              \
+    .bg = 0xFF,                     \
 }
 
 #define WINDOW_NONE 0xFF
@@ -72,7 +73,7 @@ void BlitBitmapRectToWindow4BitTo8Bit(u8 windowId, const u8 *pixels, u16 srcX, u
 void CopyWindowToVram8Bit(u8 windowId, u8 mode);
 
 extern struct Window gWindows[];
-extern void* gWindowBgTilemapBuffers[];
+extern void *gWindowBgTilemapBuffers[];
 extern u32 gUnusedWindowVar1;
 extern u32 gUnusedWindowVar2;
 extern u32 gUnusedWindowVar3;

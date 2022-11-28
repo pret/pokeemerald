@@ -48,8 +48,8 @@ static void Task_StaticCountdown_Free(u8 taskId);
 static void Task_StaticCountdown_Start(u8 taskId);
 static void Task_StaticCountdown_Run(u8 taskId);
 
-static const u16 s321Start_Static_Pal[] = INCBIN_U16("graphics/minigame_countdown/321start_static.gbapal");
-static const u32 s321Start_Static_Gfx[] = INCBIN_U32("graphics/minigame_countdown/321start_static.4bpp.lz");
+static const u16 s321Start_Static_Pal[] = INCBIN_U16("graphics/link/321start_static.gbapal");
+static const u32 s321Start_Static_Gfx[] = INCBIN_U32("graphics/link/321start_static.4bpp.lz");
 
 static const struct CompressedSpriteSheet sSpriteSheet_321Start_Static[] =
 {
@@ -242,10 +242,10 @@ static void Task_StaticCountdown_Init(u8 taskId)
     StaticCountdown_CreateSprites(taskId, data);
 
     StartSpriteAnim(&gSprites[tSpriteIds(1)], ANIM_START_MID);
-    gSprites[tSpriteIds(1)].pos2.x = -32;
+    gSprites[tSpriteIds(1)].x2 = -32;
 
     StartSpriteAnim(&gSprites[tSpriteIds(2)], ANIM_START_RIGHT);
-    gSprites[tSpriteIds(2)].pos2.x = 32;
+    gSprites[tSpriteIds(2)].x2 = 32;
 }
 
 static void Task_StaticCountdown_Free(u8 taskId)
@@ -315,7 +315,7 @@ static void Task_StaticCountdown_Run(u8 taskId)
     u16 packet[RFU_PACKET_SIZE];
     s16 *data = gTasks[taskId].data;
 
-    if (gReceivedRemoteLinkPlayers != 0)
+    if (gReceivedRemoteLinkPlayers)
     {
         // Read link timer
         if (gRecvCmds[0][1] == LINKCMD_COUNTDOWN)
@@ -374,8 +374,8 @@ static void CreateStartSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u8 subprior
 static void InitStartGraphic(u8 spriteId1, u8 spriteId2, u8 spriteId3);
 static void SpriteCB_Start(struct Sprite *sprite);
 
-static const u16 s321Start_Pal[] = INCBIN_U16("graphics/minigame_countdown/321start.gbapal");
-static const u32 s321Start_Gfx[] = INCBIN_U32("graphics/minigame_countdown/321start.4bpp.lz");
+static const u16 s321Start_Pal[] = INCBIN_U16("graphics/link/321start.gbapal");
+static const u32 s321Start_Gfx[] = INCBIN_U32("graphics/link/321start.4bpp.lz");
 
 #define tState       data[0]
 #define tTilesTag    data[2]
@@ -447,13 +447,13 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
     switch (sprite->sState)
     {
     case 0:
-        sub_8007E18(sprite, 0x800, 0x1A);
+        SetSpriteMatrixAnchor(sprite, NO_ANCHOR, 26);
         sprite->sState++;
         // fallthrough
     case 1:
         if (sprite->sTimer == 0)
             PlaySE(SE_BALL_BOUNCE_2);
-        
+
         if (++sprite->sTimer >= 20)
         {
             // Ready for jump
@@ -477,7 +477,7 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
         break;
     case 4:
         // Moving up from jump
-        sprite->pos1.y -= 4;
+        sprite->y -= 4;
         if (++sprite->sTimer >= 8)
         {
             if (sprite->sAnimNum < 2)
@@ -497,7 +497,7 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
         break;
     case 5:
         // Falling after jump
-        sprite->pos1.y += 4;
+        sprite->y += 4;
         if (++sprite->sTimer >= 8)
         {
             // Land from jump
@@ -528,8 +528,8 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
 // First argument is unused.
 static void InitStartGraphic(u8 spriteId1, u8 spriteId2, u8 spriteId3)
 {
-    gSprites[spriteId2].pos2.y = -40;
-    gSprites[spriteId3].pos2.y = -40;
+    gSprites[spriteId2].y2 = -40;
+    gSprites[spriteId3].y2 = -40;
     gSprites[spriteId2].invisible = FALSE;
     gSprites[spriteId3].invisible = FALSE;
     gSprites[spriteId2].callback = SpriteCB_Start;
@@ -555,16 +555,16 @@ static void SpriteCB_Start(struct Sprite *sprite)
     {
     case 0:
         sYSpeed = 64;
-        sY = sprite->pos2.y << 4;
+        sY = sprite->y2 << 4;
         sState++;
     case 1:
         sY += sYSpeed;
         sYSpeed++;
-        sprite->pos2.y = sY >> 4;
-        if (sprite->pos2.y >= 0)
+        sprite->y2 = sY >> 4;
+        if (sprite->y2 >= 0)
         {
             PlaySE(SE_BALL_BOUNCE_2);
-            sprite->pos2.y = 0;
+            sprite->y2 = 0;
             sState++;
         }
         break;
@@ -577,7 +577,7 @@ static void SpriteCB_Start(struct Sprite *sprite)
             sState++;
         }
         y = gSineTable[sTimer];
-        sprite->pos2.y = -(y >> 4);
+        sprite->y2 = -(y >> 4);
         break;
     case 3:
         sTimer += 16;
@@ -587,7 +587,7 @@ static void SpriteCB_Start(struct Sprite *sprite)
             sTimer = 0;
             sState++;
         }
-        sprite->pos2.y = -(gSineTable[sTimer] >> 5);
+        sprite->y2 = -(gSineTable[sTimer] >> 5);
         break;
     case 4:
         if (++sTimer > 40)
@@ -618,7 +618,7 @@ static const struct OamData sOamData_Numbers =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -635,7 +635,7 @@ static const struct OamData sOamData_Start =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,

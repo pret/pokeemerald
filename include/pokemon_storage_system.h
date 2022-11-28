@@ -5,9 +5,10 @@
 #define IN_BOX_ROWS             5 // Number of rows, 6 Pokémon per row
 #define IN_BOX_COLUMNS          6 // Number of columns, 5 Pokémon per column
 #define IN_BOX_COUNT            (IN_BOX_ROWS * IN_BOX_COLUMNS)
+#define BOX_NAME_LENGTH         8
 
-/* 
-            COLUMNS         
+/*
+            COLUMNS
 ROWS        0   1   2   3   4   5
             6   7   8   9   10  11
             12  13  14  15  16  17
@@ -19,13 +20,13 @@ struct PokemonStorage
 {
     /*0x0000*/ u8 currentBox;
     /*0x0001*/ struct BoxPokemon boxes[TOTAL_BOXES_COUNT][IN_BOX_COUNT];
-    /*0x8344*/ u8 boxNames[TOTAL_BOXES_COUNT][9];
+    /*0x8344*/ u8 boxNames[TOTAL_BOXES_COUNT][BOX_NAME_LENGTH + 1];
     /*0x83C2*/ u8 boxWallpapers[TOTAL_BOXES_COUNT];
 };
 
 extern struct PokemonStorage *gPokemonStoragePtr;
 
-void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 arg2, u8 arg3, s32 bytesToBuffer);
+void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero2, s32 bytesToBuffer);
 u8 CountMonsInBox(u8 boxId);
 s16 GetFirstFreeBoxSpot(u8 boxId);
 u8 CountPartyAliveNonEggMonsExcept(u8 slotToIgnore);
@@ -51,7 +52,7 @@ void ZeroBoxMonAt(u8 boxId, u8 boxPosition);
 void BoxMonAtToMon(u8 boxId, u8 boxPosition, struct Pokemon *dst);
 struct BoxPokemon *GetBoxedMonPtr(u8 boxId, u8 boxPosition);
 u8 *GetBoxNamePtr(u8 boxId);
-s16 AdvanceStorageMonIndex(struct BoxPokemon *boxMons, u8 currIndex, u8 maxIndex, u8 arg3);
+s16 AdvanceStorageMonIndex(struct BoxPokemon *boxMons, u8 currIndex, u8 maxIndex, u8 mode);
 bool8 CheckFreePokemonStorageSpace(void);
 bool32 CheckBoxMonSanityAt(u32 boxId, u32 boxPosition);
 u32 CountStorageNonEggMons(void);

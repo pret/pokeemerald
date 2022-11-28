@@ -1,3 +1,3 @@
-MeteorFalls_B1F_1R_MapScripts:: @ 822CE25
+MeteorFalls_B1F_1R_MapScripts::
 	.byte 0
 

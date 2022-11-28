@@ -13,9 +13,9 @@ enum StringConvertMode
     STR_CONV_MODE_LEADING_ZEROS
 };
 
-u8 *StringCopy10(u8 *dest, const u8 *src);
-u8 *StringGetEnd10(u8 *str);
-u8 *StringCopy7(u8 *dest, const u8 *src);
+u8 *StringCopy_Nickname(u8 *dest, const u8 *src);
+u8 *StringGet_Nickname(u8 *str);
+u8 *StringCopy_PlayerName(u8 *dest, const u8 *src);
 u8 *StringCopy(u8 *dest, const u8 *src);
 u8 *StringAppend(u8 *dest, const u8 *src);
 u8 *StringCopyN(u8 *dest, const u8 *src, u8 n);
@@ -37,7 +37,7 @@ u8 *StringCopyN_Multibyte(u8 *dest, u8 *src, u32 n);
 u32 StringLength_Multibyte(const u8 *str);
 u8 *WriteColorChangeControlCode(u8 *dest, u32 colorType, u8 color);
 bool32 IsStringJapanese(u8 *str);
-bool32 sub_800924C(u8 *str, s32 n);
+bool32 IsStringNJapanese(u8 *str, s32 n);
 u8 GetExtCtrlCodeLength(u8 code);
 s32 StringCompareWithoutExtCtrlCodes(const u8 *str1, const u8 *str2);
 void ConvertInternationalString(u8 *s, u8 language);

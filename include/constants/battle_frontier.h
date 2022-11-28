@@ -1,6 +1,8 @@
 #ifndef GUARD_CONSTANTS_BATTLE_FRONTIER_H
 #define GUARD_CONSTANTS_BATTLE_FRONTIER_H
 
+#include "constants/pokemon.h"
+
 #define FRONTIER_CHALLENGE(facility, mode) ((facility << 8) + mode)
 
 // Battle Frontier facility ids.
@@ -16,11 +18,6 @@
 #define FACILITY_LINK_CONTEST      7
 #define FACILITY_UNION_ROOM        8
 #define FACILITY_MULTI_OR_EREADER  9  // Direct Corner multi battles, multi battle with Steven, and e-Reader battles
-
-// Battle Frontier lvl modes.
-#define FRONTIER_LVL_50   0
-#define FRONTIER_LVL_OPEN 1
-#define FRONTIER_LVL_TENT 2
 
 // Battle Frontier battle modes.
 #define FRONTIER_MODE_SINGLES      0
@@ -51,30 +48,38 @@
 #define MAX_BATTLE_FRONTIER_POINTS 9999
 #define MAX_STREAK 9999
 
+#define FRONTIER_MAX_LEVEL_50   50
+#define FRONTIER_MIN_LEVEL_OPEN 60
+#define FRONTIER_MAX_LEVEL_OPEN MAX_LEVEL
+
+// This is the default number of battles (or floors, in Battle Pyramid) per challenge.
+// There are 2 facilities that differ: Battle Dome (DOME_ROUNDS_COUNT) and Battle Pike (NUM_PIKE_ROOMS).
+#define FRONTIER_STAGES_PER_CHALLENGE 7
+
 // These sets of facility ids would be redundant if the order was consistent
 // The order is important for this set so that all the non-link records can be continuous
-#define RANKING_HALL_BATTLE_TOWER_SINGLES   0
-#define RANKING_HALL_BATTLE_TOWER_DOUBLES   1
-#define RANKING_HALL_BATTLE_TOWER_MULTIS    2
-#define RANKING_HALL_BATTLE_DOME            3
-#define RANKING_HALL_BATTLE_PALACE          4
-#define RANKING_HALL_BATTLE_ARENA           5
-#define RANKING_HALL_BATTLE_FACTORY         6
-#define RANKING_HALL_BATTLE_PIKE            7
-#define RANKING_HALL_BATTLE_PYRAMID         8
-#define RANKING_HALL_BATTLE_TOWER_LINK      9
+#define RANKING_HALL_TOWER_SINGLES   0
+#define RANKING_HALL_TOWER_DOUBLES   1
+#define RANKING_HALL_TOWER_MULTIS    2
+#define RANKING_HALL_DOME            3
+#define RANKING_HALL_PALACE          4
+#define RANKING_HALL_ARENA           5
+#define RANKING_HALL_FACTORY         6
+#define RANKING_HALL_PIKE            7
+#define RANKING_HALL_PYRAMID         8
+#define RANKING_HALL_TOWER_LINK      9
 
-#define FRONTIER_MANIAC_BATTLE_TOWER_SINGLES   0
-#define FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES   1
-#define FRONTIER_MANIAC_BATTLE_TOWER_MULTIS    2
-#define FRONTIER_MANIAC_BATTLE_TOWER_LINK      3
-#define FRONTIER_MANIAC_BATTLE_DOME            4
-#define FRONTIER_MANIAC_BATTLE_FACTORY         5
-#define FRONTIER_MANIAC_BATTLE_PALACE          6
-#define FRONTIER_MANIAC_BATTLE_ARENA           7
-#define FRONTIER_MANIAC_BATTLE_PIKE            8
-#define FRONTIER_MANIAC_BATTLE_PYRAMID         9
-#define FRONTIER_MANIAC_FACILITY_COUNT        10
+#define FRONTIER_MANIAC_TOWER_SINGLES   0
+#define FRONTIER_MANIAC_TOWER_DOUBLES   1
+#define FRONTIER_MANIAC_TOWER_MULTIS    2
+#define FRONTIER_MANIAC_TOWER_LINK      3
+#define FRONTIER_MANIAC_DOME            4
+#define FRONTIER_MANIAC_FACTORY         5
+#define FRONTIER_MANIAC_PALACE          6
+#define FRONTIER_MANIAC_ARENA           7
+#define FRONTIER_MANIAC_PIKE            8
+#define FRONTIER_MANIAC_PYRAMID         9
+#define FRONTIER_MANIAC_FACILITY_COUNT  10
 
 #define FRONTIER_MANIAC_MESSAGE_COUNT 3
 

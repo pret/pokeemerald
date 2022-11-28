@@ -118,7 +118,7 @@
 #define MOVE_POINTS_ACCURATE   9
 #define MOVE_POINTS_POWERFUL   10  // Most of the moves that are >= 100 power
 #define MOVE_POINTS_POPULAR    11  // Group seems arbitrary. All using it are TM/HMs, but its only 11/58
-#define MOVE_POINTS_LUCK       12  
+#define MOVE_POINTS_LUCK       12
 #define MOVE_POINTS_STRONG     13  // Most of the moves that are >= 90 power
 #define MOVE_POINTS_LOW_PP     14
 #define MOVE_POINTS_EFFECT     15  // Moves with additional effects

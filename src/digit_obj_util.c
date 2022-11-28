@@ -138,7 +138,7 @@ bool32 DigitObjUtil_CreatePrinter(u32 id, s32 num, const struct DigitObjUtilTemp
         {
             struct CompressedSpriteSheet compSpriteSheet;
 
-            compSpriteSheet = *(struct CompressedSpriteSheet*)(template->spriteSheet);
+            compSpriteSheet = *(struct CompressedSpriteSheet *)(template->spriteSheet);
             compSpriteSheet.size = GetDecompressedDataSize(template->spriteSheet->data);
             sOamWork->array[id].tileStart = LoadCompressedSpriteSheet(&compSpriteSheet);
         }

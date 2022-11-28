@@ -22,7 +22,7 @@ se_win_open_1:
 	.byte		VOL   , 110*se_win_open_mvl/mxv
 	.byte		N03   , Ds3 , v127
 	.byte	W03
-	.byte		N15   , Gn4 
+	.byte		N15   , Gn4
 	.byte	W21
 	.byte	FINE
 
