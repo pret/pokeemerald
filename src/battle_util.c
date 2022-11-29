@@ -231,7 +231,7 @@ static u8 CalcBeatUpPower(void)
         party = gEnemyParty;
     // Party slot is set in the battle script for Beat Up
     species = GetMonData(&party[gBattleCommunication[0] - 1], MON_DATA_SPECIES);
-    basePower = (gBaseStats[species].baseAttack / 10) + 5;
+    basePower = (gSpeciesInfo[species].baseAttack / 10) + 5;
 
     return basePower;
 }
@@ -2075,8 +2075,8 @@ u8 GetImprisonedMovesCount(u8 battlerId, u16 move)
 
 void RestoreBattlerOriginalTypes(u8 battlerId)
 {
-    gBattleMons[battlerId].type1 = gBaseStats[gBattleMons[battlerId].species].type1;
-    gBattleMons[battlerId].type2 = gBaseStats[gBattleMons[battlerId].species].type2;
+    gBattleMons[battlerId].type1 = gSpeciesInfo[gBattleMons[battlerId].species].type1;
+    gBattleMons[battlerId].type2 = gSpeciesInfo[gBattleMons[battlerId].species].type2;
 }
 
 void TryToApplyMimicry(u8 battlerId, bool8 various)
@@ -2132,7 +2132,7 @@ u32 GetBattlerFriendshipScore(u8 battlerId)
 
     if (side != B_SIDE_PLAYER)
         return FRIENDSHIP_NONE;
-    else if (gBaseStats[species].flags & SPECIES_FLAG_MEGA_EVOLUTION
+    else if (gSpeciesInfo[species].flags & SPECIES_FLAG_MEGA_EVOLUTION
           || (gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER
                                 | BATTLE_TYPE_FRONTIER
                                 | BATTLE_TYPE_LINK
@@ -9612,9 +9612,9 @@ u16 CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilit
 
     if (move != MOVE_STRUGGLE && moveType != TYPE_MYSTERY)
     {
-        MulByTypeEffectiveness(&modifier, move, moveType, 0, gBaseStats[speciesDef].type1, 0, FALSE);
-        if (gBaseStats[speciesDef].type2 != gBaseStats[speciesDef].type1)
-            MulByTypeEffectiveness(&modifier, move, moveType, 0, gBaseStats[speciesDef].type2, 0, FALSE);
+        MulByTypeEffectiveness(&modifier, move, moveType, 0, gSpeciesInfo[speciesDef].type1, 0, FALSE);
+        if (gSpeciesInfo[speciesDef].type2 != gSpeciesInfo[speciesDef].type1)
+            MulByTypeEffectiveness(&modifier, move, moveType, 0, gSpeciesInfo[speciesDef].type2, 0, FALSE);
 
         if (moveType == TYPE_GROUND && abilityDef == ABILITY_LEVITATE && !(gFieldStatuses & STATUS_FIELD_GRAVITY))
             modifier = UQ_4_12(0.0);
