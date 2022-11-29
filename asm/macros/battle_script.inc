@@ -1299,9 +1299,15 @@
 	.byte 0xfe
 	.4byte \ptr
 	.endm
-
-	.macro metalburstdamagecalculator ptr:req
+	
+	.macro callnative func:req
 	.byte 0xff
+	.4byte \func
+	.endm
+
+@ callnative macros
+	.macro metalburstdamagecalculator ptr:req
+	callnative BS_CalcMetalBurstDmg
 	.4byte \ptr
 	.endm
 

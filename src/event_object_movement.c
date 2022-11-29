@@ -4643,7 +4643,7 @@ u8 GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 dir)
 {
     u8 direction = dir;
 
-#if DEBUG_SYSTEM_ENABLE == TRUE
+#if DEBUG_FLAG_NO_COLLISION != 0
     if (FlagGet(DEBUG_FLAG_NO_COLLISION))
         return COLLISION_NONE;
 #endif
