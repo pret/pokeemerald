@@ -5354,11 +5354,13 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
+        case ABILITY_LINGERING_AROMA:
         case ABILITY_MUMMY:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && IsBattlerAlive(gBattlerAttacker)
              && TARGET_TURN_DAMAGED
-             && (IsMoveMakingContact(move, gBattlerAttacker)))
+             && IsMoveMakingContact(move, gBattlerAttacker)
+             && gBattleStruct->overwrittenAbilities[gBattlerAttacker] != GetBattlerAbility(gBattlerTarget))
             {
                 switch (gBattleMons[gBattlerAttacker].ability)
                 {
@@ -5374,7 +5376,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 case ABILITY_STANCE_CHANGE:
                     break;
                 default:
-                    gLastUsedAbility = gBattleMons[gBattlerAttacker].ability = gBattleStruct->overwrittenAbilities[gBattlerAttacker] = ABILITY_MUMMY;
+                    gLastUsedAbility = gBattleMons[gBattlerAttacker].ability = gBattleStruct->overwrittenAbilities[gBattlerAttacker] = gBattleMons[gBattlerTarget].ability;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_MummyActivates;
                     effect++;
