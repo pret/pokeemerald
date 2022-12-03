@@ -435,6 +435,7 @@ extern const u8 BattleScript_BurnUpRemoveType[];
 extern const u8 BattleScript_TargetAbilityStatRaiseRet[];
 extern const u8 BattleScript_SeedSowerActivates[];
 extern const u8 BattleScript_AngerShellActivates[];
+extern const u8 BattleScript_WellBakedBodyActivates[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

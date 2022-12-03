@@ -9800,6 +9800,18 @@ BattleScript_DarkTypePreventsPrankster::
 	orhalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	goto BattleScript_MoveEnd
 
+BattleScript_WellBakedBodyActivates::
+	attackstring
+	ppreduce
+	showabilitypopup BS_TARGET
+	pause B_WAIT_TIME_MED
+	printstring STRINGID_ITDOESNTAFFECT
+	waitmessage B_WAIT_TIME_MED
+	orhalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
+	modifybattlerstatstage BS_TARGET, STAT_DEF, INCREASE, 1, BattleScript_WellBakedBodyEnd, ANIM_ON
+BattleScript_WellBakedBodyEnd:
+	goto BattleScript_MoveEnd
+
 BattleScript_PastelVeilActivates::
 	setbyte gBattleCommunication, 0
 	setbyte gBattleCommunication + 1, 0

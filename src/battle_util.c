@@ -5079,40 +5079,44 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         }
         break;
     case ABILITYEFFECT_MOVES_BLOCK: // 2
-    {
-        u16 moveTarget = GetBattlerMoveTargetType(battler, move);
+        {
+            u16 moveTarget = GetBattlerMoveTargetType(battler, move);
+            u16 battlerAbility = GetBattlerAbility(battler);
+            u16 targetAbility = GetBattlerAbility(gBattlerTarget);
 
-        if ((gLastUsedAbility == ABILITY_SOUNDPROOF && gBattleMoves[move].flags & FLAG_SOUND && !(moveTarget & MOVE_TARGET_USER))
-            || (gLastUsedAbility == ABILITY_BULLETPROOF && gBattleMoves[move].flags & FLAG_BALLISTIC))
-        {
-            if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
-                gHitMarker |= HITMARKER_NO_PPDEDUCT;
-            gBattlescriptCurrInstr = BattleScript_SoundproofProtected;
-            effect = 1;
+            if ((gLastUsedAbility == ABILITY_SOUNDPROOF && gBattleMoves[move].flags & FLAG_SOUND && !(moveTarget & MOVE_TARGET_USER))
+             || (gLastUsedAbility == ABILITY_BULLETPROOF && gBattleMoves[move].flags & FLAG_BALLISTIC))
+            {
+                if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
+                    gHitMarker |= HITMARKER_NO_PPDEDUCT;
+                gBattlescriptCurrInstr = BattleScript_SoundproofProtected;
+                effect = 1;
+            }
+            else if ((gLastUsedAbility == ABILITY_DAZZLING || gLastUsedAbility == ABILITY_QUEENLY_MAJESTY || IsBattlerAlive(battler ^= BIT_FLANK))
+                  && (battlerAbility == ABILITY_DAZZLING || battlerAbility == ABILITY_QUEENLY_MAJESTY)
+                  && GetChosenMovePriority(gBattlerAttacker) > 0
+                  && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(battler))
+            {
+                if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
+                    gHitMarker |= HITMARKER_NO_PPDEDUCT;
+                gBattlescriptCurrInstr = BattleScript_DazzlingProtected;
+                effect = 1;
+            }
+            else if (BlocksPrankster(move, gBattlerAttacker, gBattlerTarget, TRUE) && !(IS_MOVE_STATUS(move) && targetAbility == ABILITY_MAGIC_BOUNCE))
+            {
+                if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) || !(moveTarget & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY)))
+                    CancelMultiTurnMoves(gBattlerAttacker); // Don't cancel moves that can hit two targets bc one target might not be protected
+                gBattleScripting.battler = gBattlerAbility = gBattlerTarget;
+                gBattlescriptCurrInstr = BattleScript_DarkTypePreventsPrankster;
+                effect = 1;
+            }
+            else if (targetAbility == ABILITY_WELL_BAKED_BODY && gBattleMoves[gCurrentMove].type == TYPE_FIRE)
+            {
+                gBattlescriptCurrInstr = BattleScript_WellBakedBodyActivates;
+                effect = 1;
+            }
+            break;
         }
-        else if ((((gLastUsedAbility == ABILITY_DAZZLING || gLastUsedAbility == ABILITY_QUEENLY_MAJESTY
-                   || (IsBattlerAlive(battler ^= BIT_FLANK)
-                       && ((GetBattlerAbility(battler) == ABILITY_DAZZLING) || GetBattlerAbility(battler) == ABILITY_QUEENLY_MAJESTY)))
-                   ))
-                 && GetChosenMovePriority(gBattlerAttacker) > 0
-                 && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(battler))
-        {
-            if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
-                gHitMarker |= HITMARKER_NO_PPDEDUCT;
-            gBattlescriptCurrInstr = BattleScript_DazzlingProtected;
-            effect = 1;
-        }
-        else if (BlocksPrankster(move, gBattlerAttacker, gBattlerTarget, TRUE)
-          && !(IS_MOVE_STATUS(move) && GetBattlerAbility(gBattlerTarget) == ABILITY_MAGIC_BOUNCE))
-        {
-            if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) || !(moveTarget & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY)))
-                CancelMultiTurnMoves(gBattlerAttacker); // Don't cancel moves that can hit two targets bc one target might not be protected
-            gBattleScripting.battler = gBattlerAbility = gBattlerTarget;
-            gBattlescriptCurrInstr = BattleScript_DarkTypePreventsPrankster;
-            effect = 1;
-        }
-        break;
-    }
     case ABILITYEFFECT_ABSORBING: // 3
         if (move != MOVE_NONE)
         {
