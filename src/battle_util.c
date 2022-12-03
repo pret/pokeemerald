@@ -8896,7 +8896,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
     #define TERRAIN_TYPE_BOOST UQ_4_12(1.5)
 #endif
 
-    // various effecs
+    // various effects
     if (gProtectStructs[battlerAtk].helpingHand)
         MulModifier(&modifier, UQ_4_12(1.5));
     if (gStatuses3[battlerAtk] & STATUS3_CHARGED_UP && moveType == TYPE_ELECTRIC)
@@ -9224,6 +9224,10 @@ static u32 CalcDefenseStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, 
         break;
     case ABILITY_PUNK_ROCK:
         if (gBattleMoves[move].flags & FLAG_SOUND)
+            MulModifier(&modifier, UQ_4_12(2.0));
+        break;
+    case ABILITY_PURIFYING_SALT:
+        if (gBattleMoves[move].type == TYPE_GHOST)
             MulModifier(&modifier, UQ_4_12(2.0));
         break;
     }
