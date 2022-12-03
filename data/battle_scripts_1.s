@@ -9823,10 +9823,8 @@ BattleScript_DarkTypePreventsPrankster::
 BattleScript_WellBakedBodyActivates::
 	attackstring
 	ppreduce
+	pause B_WAIT_TIME_SHORT
 	showabilitypopup BS_TARGET
-	pause B_WAIT_TIME_MED
-	printstring STRINGID_ITDOESNTAFFECT
-	waitmessage B_WAIT_TIME_MED
 	orhalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	modifybattlerstatstage BS_TARGET, STAT_DEF, INCREASE, 1, BattleScript_WellBakedBodyEnd, ANIM_ON
 BattleScript_WellBakedBodyEnd:
@@ -9835,10 +9833,9 @@ BattleScript_WellBakedBodyEnd:
 BattleScript_WindRiderActivatesMoveEnd::
 	attackstring
 	ppreduce
+	pause B_WAIT_TIME_SHORT
 	showabilitypopup BS_TARGET
-	pause B_WAIT_TIME_MED
 	orhalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
-	printstring STRINGID_EMPTYSTRING3
 	modifybattlerstatstage BS_TARGET, STAT_ATK, INCREASE, 1, BattleScript_WindRiderActivatesMoveEnd_End, ANIM_ON
 BattleScript_WindRiderActivatesMoveEnd_End:
 	goto BattleScript_MoveEnd
