@@ -436,6 +436,8 @@ extern const u8 BattleScript_TargetAbilityStatRaiseRet[];
 extern const u8 BattleScript_SeedSowerActivates[];
 extern const u8 BattleScript_AngerShellActivates[];
 extern const u8 BattleScript_WellBakedBodyActivates[];
+extern const u8 BattleScript_WindRiderActivatesEnd2[];
+extern const u8 BattleScript_WindRiderActivatesMoveEnd[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

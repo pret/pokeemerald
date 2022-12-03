@@ -6589,6 +6589,26 @@ BattleScript_TailwindEnds::
 	waitmessage B_WAIT_TIME_LONG
 	end2
 
+BattleScript_WindRiderActivatesEnd2::
+	setbyte gBattlerTarget, 0
+BattleScript_WindRiderLoop:
+	printstring STRINGID_EMPTYSTRING3
+	jumpifability BS_TARGET, ABILITY_WIND_RIDER, BattleScript_WindRiderLoop_Cont
+	goto BattleScript_WindRiderIncrement
+BattleScript_WindRiderLoop_Cont:
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_TAILWIND, BattleScript_WindRider_Activate
+	goto BattleScript_WindRiderIncrement
+BattleScript_WindRider_Activate:
+	call BattleScript_AbilityPopUp
+	pause B_WAIT_TIME_MED
+	modifybattlerstatstage BS_TARGET, STAT_ATK, INCREASE, 1, BattleScript_WindRiderIncrement, ANIM_ON
+BattleScript_WindRiderIncrement:
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_WindRiderLoop
+BattleScript_WindRiderEnd:
+	destroyabilitypopup
+	end2
+
 BattleScript_TrickRoomEnds::
 	printstring STRINGID_TRICKROOMENDS
 	waitmessage B_WAIT_TIME_LONG
@@ -9810,6 +9830,17 @@ BattleScript_WellBakedBodyActivates::
 	orhalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	modifybattlerstatstage BS_TARGET, STAT_DEF, INCREASE, 1, BattleScript_WellBakedBodyEnd, ANIM_ON
 BattleScript_WellBakedBodyEnd:
+	goto BattleScript_MoveEnd
+
+BattleScript_WindRiderActivatesMoveEnd::
+	attackstring
+	ppreduce
+	showabilitypopup BS_TARGET
+	pause B_WAIT_TIME_MED
+	orhalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
+	printstring STRINGID_EMPTYSTRING3
+	modifybattlerstatstage BS_TARGET, STAT_ATK, INCREASE, 1, BattleScript_WindRiderActivatesMoveEnd_End, ANIM_ON
+BattleScript_WindRiderActivatesMoveEnd_End:
 	goto BattleScript_MoveEnd
 
 BattleScript_PastelVeilActivates::

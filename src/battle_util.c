@@ -2373,6 +2373,11 @@ u8 DoFieldEndTurnEffects(void)
                         BattleScriptExecute(BattleScript_TailwindEnds);
                         effect++;
                     }
+                    if (IsAbilityOnSide(gActiveBattler, ABILITY_WIND_RIDER))
+                    {
+                        BattleScriptExecute(BattleScript_WindRiderActivatesEnd2);
+                        effect++;
+                    }
                 }
                 gBattleStruct->turnSideTracker++;
                 if (effect != 0)
@@ -5113,6 +5118,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             else if (targetAbility == ABILITY_WELL_BAKED_BODY && gBattleMoves[gCurrentMove].type == TYPE_FIRE)
             {
                 gBattlescriptCurrInstr = BattleScript_WellBakedBodyActivates;
+                effect = 1;
+            }
+            else if (targetAbility == ABILITY_WIND_RIDER && gBattleMoves[gCurrentMove].flags & FLAG_WIND_MOVE && !(moveTarget & MOVE_TARGET_USER))
+            {
+                gBattlescriptCurrInstr = BattleScript_WindRiderActivatesMoveEnd;
                 effect = 1;
             }
             break;
