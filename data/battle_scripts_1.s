@@ -7032,6 +7032,50 @@ BattleScript_SeedSowerActivates::
 	call BattleScript_TerrainSeedLoop
 	return
 
+BattleScript_AngerShellActivates::
+	call BattleScript_AbilityPopUp
+	jumpifstat BS_TARGET, CMP_LESS_THAN, STAT_ATK, MAX_STAT_STAGE, BattleScript_AngerShellTryDef
+	jumpifstat BS_TARGET, CMP_LESS_THAN, STAT_SPATK, MAX_STAT_STAGE, BattleScript_AngerShellTryDef
+	jumpifstat BS_TARGET, CMP_LESS_THAN, STAT_SPEED, MAX_STAT_STAGE, BattleScript_AngerShellTryDef
+	jumpifstat BS_TARGET, CMP_GREATER_THAN, STAT_DEF, MIN_STAT_STAGE, BattleScript_AngerShellTryDef
+	jumpifstat BS_TARGET, CMP_EQUAL, STAT_SPDEF, MIN_STAT_STAGE, BattleScript_ButItFailed
+BattleScript_AngerShellTryDef::
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_TARGET, BIT_DEF | BIT_SPDEF, STAT_CHANGE_NEGATIVE | STAT_CHANGE_CANT_PREVENT
+	setstatchanger STAT_DEF, 1, TRUE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR | MOVE_EFFECT_CERTAIN, BattleScript_AngerShellTrySpDef
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_AngerShellTrySpDef
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_AngerShellTrySpDef:
+	setstatchanger STAT_SPDEF, 1, TRUE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR | MOVE_EFFECT_CERTAIN, BattleScript_AngerShellTryAttack
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_AngerShellTryAttack
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_AngerShellTryAttack:
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_TARGET, BIT_SPATK | BIT_ATK | BIT_SPEED, STAT_CHANGE_BY_TWO
+	setstatchanger STAT_ATK, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_AngerShellTrySpAtk
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_AngerShellTrySpAtk
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_AngerShellTrySpAtk:
+	setstatchanger STAT_SPATK, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_AngerShellTrySpeed
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_AngerShellTrySpeed
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_AngerShellTrySpeed:
+	setstatchanger STAT_SPEED, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_AngerShellRet
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_AngerShellRet
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_AngerShellRet:
+	return
+
 BattleScript_PerishSongCountGoesDown::
 	printstring STRINGID_PKMNPERISHCOUNTFELL
 	waitmessage B_WAIT_TIME_LONG

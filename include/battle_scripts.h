@@ -434,6 +434,7 @@ extern const u8 BattleScript_MultiHitPrintStrings[];
 extern const u8 BattleScript_BurnUpRemoveType[];
 extern const u8 BattleScript_TargetAbilityStatRaiseRet[];
 extern const u8 BattleScript_SeedSowerActivates[];
+extern const u8 BattleScript_AngerShellActivates[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

@@ -5749,6 +5749,20 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
+        case ABILITY_ANGER_SHELL:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+             && TARGET_TURN_DAMAGED
+             && (gBattleMons[gBattlerTarget].hp <= gBattleMons[gBattlerTarget].maxHP / 2)
+             && !gBattleStruct->endturnAbilityDone[gBattlerPartyIndexes[gBattlerTarget]][GetBattlerSide(gBattlerTarget)])
+            {
+                gBattleStruct->endturnAbilityDone[gBattlerPartyIndexes[gBattlerTarget]][GetBattlerSide(gBattlerTarget)] = TRUE;
+                gBattlerAttacker = gBattlerTarget;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_AngerShellActivates;
+                effect++;
+            }
+            break;
         }
         break;
     case ABILITYEFFECT_MOVE_END_ATTACKER: // Same as above, but for attacker
