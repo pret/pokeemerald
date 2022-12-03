@@ -433,6 +433,7 @@ extern const u8 BattleScript_SymbiosisActivates[];
 extern const u8 BattleScript_MultiHitPrintStrings[];
 extern const u8 BattleScript_BurnUpRemoveType[];
 extern const u8 BattleScript_TargetAbilityStatRaiseRet[];
+extern const u8 BattleScript_SeedSowerActivates[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
