@@ -2998,8 +2998,8 @@ static const u8 sVictoryDanceDescription[] = _(
     "Defense and Speed.");
 
 static const u8 sHeadlongRushDescription[] = _(
-    "Hits with a full-body tackle,\n"
-    "lowering the users's defenses.");
+    "Hits with a full-body tackle.\n"
+    "Lowers the users's defenses.");
 
 static const u8 sBarbBarrageDescription[] = _(
     "Can poison on impact. Powers\n"
