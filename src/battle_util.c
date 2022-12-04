@@ -4892,6 +4892,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
+        case ABILITY_QUARK_DRIVE:
+            if (!gSpecialStatuses[battler].switchInAbilityDone && gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
+            {
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, GetHighestStatId(battler));
+                BattleScriptPushCursorAndCallback(BattleScript_QuarkDriveActivates);
+                effect++;
+            }
+            break;
 #if B_WEATHER_FORMS < GEN_5
         default:
             if (gBattleMons[battler].species == SPECIES_CHERRIM)
@@ -8767,6 +8776,10 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
         if (gBattleWeather & B_WEATHER_SUN && WEATHER_HAS_EFFECT && (atkHighestStat == STAT_ATK || atkHighestStat == STAT_SPATK))
             MulModifier(&modifier, UQ_4_12(1.3));
         break;
+    case ABILITY_QUARK_DRIVE:
+        if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && (atkHighestStat == STAT_ATK || atkHighestStat == STAT_SPATK))
+            MulModifier(&modifier, UQ_4_12(1.3));
+        break;
     }
 
     // field abilities
@@ -8826,6 +8839,10 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
         break;
     case ABILITY_PROTOSYNTHESIS:
         if (gBattleWeather & B_WEATHER_SUN && WEATHER_HAS_EFFECT && (defHighestStat == STAT_DEF || defHighestStat == STAT_SPDEF))
+            MulModifier(&modifier, UQ_4_12(0.3));
+        break;
+    case ABILITY_QUARK_DRIVE:
+        if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && (defHighestStat == STAT_DEF || defHighestStat == STAT_SPDEF))
             MulModifier(&modifier, UQ_4_12(0.3));
         break;
     }

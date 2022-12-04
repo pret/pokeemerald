@@ -8418,6 +8418,14 @@ BattleScript_ProtosynthesisActivates::
 	waitmessage B_WAIT_TIME_MED
 	end3
 
+BattleScript_QuarkDriveActivates::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_ELECTRICTERRAINACTIVATEDABILITY
+	waitmessage B_WAIT_TIME_MED
+	printstring STRINGID_STATWASHEIGHTENED
+	waitmessage B_WAIT_TIME_MED
+	end3
+
 BattleScript_AttackWeakenedByStrongWinds::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_ATTACKWEAKENEDBSTRONGWINDS
