@@ -5149,6 +5149,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 gBattlescriptCurrInstr = BattleScript_WindRiderActivatesMoveEnd;
                 effect = 1;
             }
+            else if (GetBattlerAbility(gBattlerTarget) == ABILITY_GOOD_AS_GOLD
+                  && IS_MOVE_STATUS(gCurrentMove)
+                  && !(moveTarget & MOVE_TARGET_USER)
+                  && !(moveTarget & MOVE_TARGET_OPPONENTS_FIELD)
+                  && !(moveTarget & MOVE_TARGET_ALL_BATTLERS))
+            {
+                gBattlescriptCurrInstr = BattleScript_GoodAsGoldActivates;
+                effect = 1;
+            }
             break;
         }
     case ABILITYEFFECT_ABSORBING: // 3

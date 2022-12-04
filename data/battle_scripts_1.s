@@ -9888,6 +9888,15 @@ BattleScript_WindRiderActivatesMoveEnd::
 BattleScript_WindRiderActivatesMoveEnd_End:
 	goto BattleScript_MoveEnd
 
+BattleScript_GoodAsGoldActivates::
+	attackstring
+	ppreduce
+	showabilitypopup BS_TARGET
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_ITDOESNTAFFECT
+	waitmessage B_WAIT_TIME_MED
+	goto BattleScript_MoveEnd
+
 BattleScript_PastelVeilActivates::
 	setbyte gBattleCommunication, 0
 	setbyte gBattleCommunication + 1, 0

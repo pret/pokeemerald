@@ -442,6 +442,7 @@ extern const u8 BattleScript_WindPowerActivates[];
 extern const u8 BattleScript_WindPowerActivatesEnd2[];
 extern const u8 BattleScript_ProtosynthesisActivates[];
 extern const u8 BattleScript_QuarkDriveActivates[];
+extern const u8 BattleScript_GoodAsGoldActivates[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
