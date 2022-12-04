@@ -2378,6 +2378,12 @@ u8 DoFieldEndTurnEffects(void)
                         BattleScriptExecute(BattleScript_WindRiderActivatesEnd2);
                         effect++;
                     }
+                    if (IsAbilityOnSide(gActiveBattler, ABILITY_WIND_POWER))
+                    {
+                        gCurrentMove = MOVE_TAILWIND;
+                        BattleScriptExecute(BattleScript_WindPowerActivatesEnd2);
+                        effect++;
+                    }
                 }
                 gBattleStruct->turnSideTracker++;
                 if (effect != 0)
@@ -5774,6 +5780,19 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 gBattlerAttacker = gBattlerTarget;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_AngerShellActivates;
+                effect++;
+            }
+            break;
+        case ABILITY_WIND_POWER:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+             && TARGET_TURN_DAMAGED
+             && gBattleMoves[gCurrentMove].flags & FLAG_WIND_MOVE
+             && IsBattlerAlive(gBattlerTarget))
+            {
+                gBattlerAttacker = gBattlerTarget;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_WindPowerActivates;
                 effect++;
             }
             break;

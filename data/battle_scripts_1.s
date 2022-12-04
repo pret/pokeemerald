@@ -6609,6 +6609,27 @@ BattleScript_WindRiderEnd:
 	destroyabilitypopup
 	end2
 
+BattleScript_WindPowerActivatesEnd2::
+	setbyte gBattlerAttacker, 0
+BattleScript_WindPowerLoop:
+	printstring STRINGID_EMPTYSTRING3
+	jumpifability BS_ATTACKER, ABILITY_WIND_POWER, BattleScript_WindPowerLoop_Cont
+	goto BattleScript_WindPowerIncrement
+BattleScript_WindPowerLoop_Cont:
+	jumpifstatus3 BS_ATTACKER, STATUS3_CHARGED_UP, BattleScript_WindPowerIncrement
+	goto BattleScript_WindPower_Activate
+BattleScript_WindPower_Activate:
+	call BattleScript_AbilityPopUp
+	setcharge
+	printstring STRINGID_BEINGHITCHARGEDPKMNWITHPOWER
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_WindPowerIncrement:
+	addbyte gBattlerAttacker, 1
+	jumpifbytenotequal gBattlerAttacker, gBattlersCount, BattleScript_WindPowerLoop
+BattleScript_WindPowerEnd:
+	destroyabilitypopup
+	end2
+
 BattleScript_TrickRoomEnds::
 	printstring STRINGID_TRICKROOMENDS
 	waitmessage B_WAIT_TIME_LONG
@@ -7100,6 +7121,15 @@ BattleScript_AngerShellTrySpeed:
 	printfromtable gStatUpStringIds
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_AngerShellRet:
+	return
+
+BattleScript_WindPowerActivates::
+	jumpifstatus3 BS_ATTACKER, STATUS3_CHARGED_UP, BattleScript_WindPowerActivates_Ret
+	call BattleScript_AbilityPopUp
+	setcharge
+	printstring STRINGID_BEINGHITCHARGEDPKMNWITHPOWER
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_WindPowerActivates_Ret:
 	return
 
 BattleScript_PerishSongCountGoesDown::
