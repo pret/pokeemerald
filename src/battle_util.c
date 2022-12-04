@@ -4937,6 +4937,13 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
+        case ABILITY_ORICHALCUM_PULSE:
+            if (TryChangeBattleWeather(battler, ENUM_WEATHER_SUN, TRUE))
+            {
+                BattleScriptPushCursorAndCallback(BattleScript_DroughtActivates);
+                effect++;
+            }
+            break;
 #if B_WEATHER_FORMS < GEN_5
         default:
             if (gBattleMons[battler].species == SPECIES_CHERRIM)
@@ -8824,6 +8831,10 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
     case ABILITY_QUARK_DRIVE:
         if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && (atkHighestStat == STAT_ATK || atkHighestStat == STAT_SPATK))
             MulModifier(&modifier, UQ_4_12(1.3));
+        break;
+    case ABILITY_ORICHALCUM_PULSE:
+        if (gBattleWeather & B_WEATHER_SUN && WEATHER_HAS_EFFECT)
+           MulModifier(&modifier, UQ_4_12(1.3));
         break;
     }
 
