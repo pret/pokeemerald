@@ -763,9 +763,11 @@ static const u8 sText_BeingHitChargedPkmnWithPower[] = _("Being hit by {B_CURREN
 static const u8 sText_SunlightActivatedAbility[] = _("The harsh sunlight activated\n{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}!");
 static const u8 sText_StatWasHeightened[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1} was heightened!");
 static const u8 sText_ElectricTerrainActivatedAbility[] = _("The Electric Terrain activated\n{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}!");
+static const u8 sText_AbilityWeakenedSurroundingMonsStat[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nweakened the {B_BUFF1} of\lall surrounding Pokémon!\p");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_ABILITYWEAKENEDFSURROUNDINGMONSSTAT - BATTLESTRINGS_TABLE_START] = sText_AbilityWeakenedSurroundingMonsStat,
     [STRINGID_ELECTRICTERRAINACTIVATEDABILITY - BATTLESTRINGS_TABLE_START] = sText_ElectricTerrainActivatedAbility,
     [STRINGID_STATWASHEIGHTENED - BATTLESTRINGS_TABLE_START] = sText_StatWasHeightened,
     [STRINGID_SUNLIGHTACTIVATEDABILITY - BATTLESTRINGS_TABLE_START] = sText_SunlightActivatedAbility,

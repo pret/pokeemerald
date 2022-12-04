@@ -4901,6 +4901,42 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
+        case ABILITY_VESSEL_OF_RUIN:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_SPATK);
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                BattleScriptPushCursorAndCallback(BattleScript_RuinAbilityActivates);
+                effect++;
+            }
+            break;
+        case ABILITY_SWORD_OF_RUIN:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_DEF);
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                BattleScriptPushCursorAndCallback(BattleScript_RuinAbilityActivates);
+                effect++;
+            }
+            break;
+        case ABILITY_TABLETS_OF_RUIN:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK);
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                BattleScriptPushCursorAndCallback(BattleScript_RuinAbilityActivates);
+                effect++;
+            }
+            break;
+        case ABILITY_BEADS_OF_RUIN:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_SPDEF);
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                BattleScriptPushCursorAndCallback(BattleScript_RuinAbilityActivates);
+                effect++;
+            }
+            break;
 #if B_WEATHER_FORMS < GEN_5
         default:
             if (gBattleMons[battler].species == SPECIES_CHERRIM)
@@ -8800,6 +8836,18 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
         else
             MulModifier(&modifier, UQ_4_12(1.33));
     }
+
+    if (IsAbilityOnField(ABILITY_VESSEL_OF_RUIN) && atkAbility != ABILITY_VESSEL_OF_RUIN && IS_MOVE_SPECIAL(gCurrentMove))
+        MulModifier(&modifier, UQ_4_12(0.25));
+
+    if (IsAbilityOnField(ABILITY_SWORD_OF_RUIN) && defAbility != ABILITY_SWORD_OF_RUIN && IS_MOVE_PHYSICAL(gCurrentMove))
+        MulModifier(&modifier, UQ_4_12(0.25));
+
+    if (IsAbilityOnField(ABILITY_TABLETS_OF_RUIN) && atkAbility != ABILITY_TABLETS_OF_RUIN && IS_MOVE_PHYSICAL(gCurrentMove))
+        MulModifier(&modifier, UQ_4_12(0.25));
+
+    if (IsAbilityOnField(ABILITY_BEADS_OF_RUIN) && defAbility != ABILITY_BEADS_OF_RUIN && IS_MOVE_SPECIAL(gCurrentMove))
+        MulModifier(&modifier, UQ_4_12(0.25));
 
     // attacker partner's abilities
     if (IsBattlerAlive(BATTLE_PARTNER(battlerAtk)))

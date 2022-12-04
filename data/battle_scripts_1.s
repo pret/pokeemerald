@@ -8426,6 +8426,12 @@ BattleScript_QuarkDriveActivates::
 	waitmessage B_WAIT_TIME_MED
 	end3
 
+BattleScript_RuinAbilityActivates::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_ABILITYWEAKENEDFSURROUNDINGMONSSTAT
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
 BattleScript_AttackWeakenedByStrongWinds::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_ATTACKWEAKENEDBSTRONGWINDS
