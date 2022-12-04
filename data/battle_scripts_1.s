@@ -7124,7 +7124,9 @@ BattleScript_AngerShellRet:
 	return
 
 BattleScript_WindPowerActivates::
+.if B_CHECK_IF_CHARGED_UP == TRUE
 	jumpifstatus3 BS_ATTACKER, STATUS3_CHARGED_UP, BattleScript_WindPowerActivates_Ret
+.endif
 	call BattleScript_AbilityPopUp
 	setcharge
 	printstring STRINGID_BEINGHITCHARGEDPKMNWITHPOWER
