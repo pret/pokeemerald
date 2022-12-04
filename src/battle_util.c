@@ -4883,6 +4883,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
+        case ABILITY_PROTOSYNTHESIS:
+            if (!gSpecialStatuses[battler].switchInAbilityDone && gBattleWeather & B_WEATHER_SUN)
+            {
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, GetHighestStatId(battler));
+                BattleScriptPushCursorAndCallback(BattleScript_ProtosynthesisActivates);
+                effect++;
+            }
+            break;
 #if B_WEATHER_FORMS < GEN_5
         default:
             if (gBattleMons[battler].species == SPECIES_CHERRIM)
@@ -8632,15 +8641,19 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
 
 static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, bool32 updateFlags)
 {
-    u32 i, ability;
+    u32 i;
     u32 holdEffectAtk, holdEffectParamAtk;
     u16 basePower = CalcMoveBasePower(move, battlerAtk, battlerDef);
     u16 holdEffectModifier;
     u16 modifier = UQ_4_12(1.0);
     u32 atkSide = GET_BATTLER_SIDE(battlerAtk);
+    u16 atkAbility = GetBattlerAbility(battlerAtk);
+    u16 defAbility = GetBattlerAbility(battlerDef);
+    u8 atkHighestStat = GetHighestStatId(battlerAtk);
+    u8 defHighestStat = GetHighestStatId(battlerDef);
 
     // attacker's abilities
-    switch (GetBattlerAbility(battlerAtk))
+    switch (atkAbility)
     {
     case ABILITY_TECHNICIAN:
         if (basePower <= 60)
@@ -8750,11 +8763,15 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
         if (moveType == TYPE_ROCK)
             MulModifier(&modifier, UQ_4_12(1.5));
         break;
+    case ABILITY_PROTOSYNTHESIS:
+        if (gBattleWeather & B_WEATHER_SUN && WEATHER_HAS_EFFECT && (atkHighestStat == STAT_ATK || atkHighestStat == STAT_SPATK))
+            MulModifier(&modifier, UQ_4_12(1.3));
+        break;
     }
 
     // field abilities
     if ((IsAbilityOnField(ABILITY_DARK_AURA) && moveType == TYPE_DARK)
-        || (IsAbilityOnField(ABILITY_FAIRY_AURA) && moveType == TYPE_FAIRY))
+     || (IsAbilityOnField(ABILITY_FAIRY_AURA) && moveType == TYPE_FAIRY))
     {
         if (IsAbilityOnField(ABILITY_AURA_BREAK))
             MulModifier(&modifier, UQ_4_12(0.75));
@@ -8782,8 +8799,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
     }
 
     // target's abilities
-    ability = GetBattlerAbility(battlerDef);
-    switch (ability)
+    switch (defAbility)
     {
     case ABILITY_HEATPROOF:
     case ABILITY_WATER_BUBBLE:
@@ -8791,7 +8807,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
         {
             MulModifier(&modifier, UQ_4_12(0.5));
             if (updateFlags)
-                RecordAbilityBattle(battlerDef, ability);
+                RecordAbilityBattle(battlerDef, defAbility);
         }
         break;
     case ABILITY_DRY_SKIN:
@@ -8803,10 +8819,14 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
         {
             MulModifier(&modifier, UQ_4_12(0.5));
             if (updateFlags)
-                RecordAbilityBattle(battlerDef, ability);
+                RecordAbilityBattle(battlerDef, defAbility);
         }
         if (moveType == TYPE_FIRE)
             MulModifier(&modifier, UQ_4_12(2.0));
+        break;
+    case ABILITY_PROTOSYNTHESIS:
+        if (gBattleWeather & B_WEATHER_SUN && WEATHER_HAS_EFFECT && (defHighestStat == STAT_DEF || defHighestStat == STAT_SPDEF))
+            MulModifier(&modifier, UQ_4_12(0.3));
         break;
     }
 

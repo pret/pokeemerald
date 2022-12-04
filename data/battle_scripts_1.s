@@ -8410,6 +8410,14 @@ BattleScript_DeltaStreamActivates::
 	playanimation BS_ATTACKER, B_ANIM_STRONG_WINDS
 	end3
 
+BattleScript_ProtosynthesisActivates::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_SUNLIGHTACTIVATEDABILITY
+	waitmessage B_WAIT_TIME_MED
+	printstring STRINGID_STATWASHEIGHTENED
+	waitmessage B_WAIT_TIME_MED
+	end3
+
 BattleScript_AttackWeakenedByStrongWinds::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_ATTACKWEAKENEDBSTRONGWINDS

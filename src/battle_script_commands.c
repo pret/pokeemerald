@@ -8098,7 +8098,7 @@ static void RecalcBattlerStats(u32 battler, struct Pokemon *mon)
     gBattleMons[battler].type2 = gSpeciesInfo[gBattleMons[battler].species].type2;
 }
 
-static u32 GetHighestStatId(u32 battlerId)
+u32 GetHighestStatId(u32 battlerId)
 {
     u32 i, highestId = STAT_ATK, highestStat = gBattleMons[battlerId].attack;
 
