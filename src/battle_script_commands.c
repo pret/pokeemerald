@@ -11763,7 +11763,9 @@ static void Cmd_mimicattackcopy(void)
 
 static void Cmd_metronome(void)
 {
-#if B_METRONOME_MOVES >= GEN_8
+#if B_METRONOME_MOVES >= GEN_9
+    u16 moveCount = MOVES_COUNT_GEN9;
+#elif B_METRONOME_MOVES >= GEN_8
     u16 moveCount = MOVES_COUNT_GEN8;
 #elif B_METRONOME_MOVES >= GEN_7
     u16 moveCount = MOVES_COUNT_GEN7;
