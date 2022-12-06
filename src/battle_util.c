@@ -5363,7 +5363,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && IsBattlerAlive(gBattlerAttacker)
              && TARGET_TURN_DAMAGED
-             && (IsMoveMakingContact(move, gBattlerAttacker)))
+             && (IsMoveMakingContact(move, gBattlerAttacker))
+             && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_ABILITY_SHIELD)
             {
                 switch (gBattleMons[gBattlerAttacker].ability)
                 {
@@ -5391,7 +5392,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && IsBattlerAlive(gBattlerAttacker)
              && TARGET_TURN_DAMAGED
-             && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT))
+             && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+             && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_ABILITY_SHIELD)
             {
                 switch (gBattleMons[gBattlerAttacker].ability)
                 {
