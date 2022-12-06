@@ -7144,6 +7144,18 @@ BattleScript_ToxicDebrisActivates::
 BattleScript_ToxicDebrisRet:
 	return
 
+BattleScript_EarthEaterActivates::
+	call BattleScript_AbilityPopUp
+	pause B_WAIT_TIME_LONG
+	tryhealquarterhealth BS_TARGET, BattleScript_EarthEaterRet
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	printstring STRINGID_PKMNREGAINEDHEALTH
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_EarthEaterRet:
+	return
+
 BattleScript_PerishSongCountGoesDown::
 	printstring STRINGID_PKMNPERISHCOUNTFELL
 	waitmessage B_WAIT_TIME_LONG
