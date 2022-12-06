@@ -10853,6 +10853,12 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
         }
         else if (activeBattlerAbility == ABILITY_SHIELD_DUST && flags == 0)
         {
+            RecordAbilityBattle(gActiveBattler, ABILITY_SHIELD_DUST);
+            return STAT_CHANGE_DIDNT_WORK;
+        }
+        else if (flags == 0 && GetBattlerHoldEffect(gActiveBattler, TRUE) == HOLD_EFFECT_COVERT_CLOAK)
+        {
+            RecordItemEffectBattle(gActiveBattler, HOLD_EFFECT_COVERT_CLOAK);
             return STAT_CHANGE_DIDNT_WORK;
         }
         else // try to decrease
