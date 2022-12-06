@@ -445,6 +445,7 @@ extern const u8 BattleScript_QuarkDriveActivates[];
 extern const u8 BattleScript_GoodAsGoldActivates[];
 extern const u8 BattleScript_RuinAbilityActivates[];
 extern const u8 BattleScript_CudChewActivates[];
+extern const u8 BattleScript_SupremeOverlordActivates[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

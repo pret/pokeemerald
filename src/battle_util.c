@@ -4957,6 +4957,14 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
+        case ABILITY_SUPREME_OVERLORD:
+            if (!gSpecialStatuses[battler].switchInAbilityDone && CountUsablePartyMons(battler) < PARTY_SIZE)
+            {
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                BattleScriptPushCursorAndCallback(BattleScript_SupremeOverlordActivates);
+                effect++;
+            }
+            break;
 #if B_WEATHER_FORMS < GEN_5
         default:
             if (gBattleMons[battler].species == SPECIES_CHERRIM)
@@ -8722,6 +8730,26 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
     return basePower;
 }
 
+// Supreme Overlord adds a damage boost for each fainted ally.
+// The first ally adds a x1.2 boost, and subsequent allies add an extra x0.1 boost each.
+static u16 ApplySupremeOverlordModifier(u8 battlerId)
+{
+    u8 side = GetBattlerSide(battlerId);
+    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    u8 i;
+    u16 modifier = UQ_4_12(1.0);
+    bool8 appliedFirstBoost = FALSE;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&party[i], MON_DATA_HP) == 0)
+            modifier += (!appliedFirstBoost) ? UQ_4_12(0.2) : UQ_4_12(0.1);
+        appliedFirstBoost = TRUE;
+    }
+
+    return modifier;
+}
+
 static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, bool32 updateFlags)
 {
     u32 i;
@@ -8865,6 +8893,9 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
     case ABILITY_SHARPNESS:
         if (gBattleMoves[move].flags & FLAG_SLICING_MOVE)
            MulModifier(&modifier, UQ_4_12(1.5));
+        break;
+    case ABILITY_SUPREME_OVERLORD:
+        MulModifier(&modifier, ApplySupremeOverlordModifier(battlerAtk));
         break;
     }
 
