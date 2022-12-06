@@ -4886,6 +4886,7 @@ BattleScript_MoveWeatherChange::
 	printfromtable gMoveWeatherChangeStringIds
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateSwitchInAbilities
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectSunnyDay::
@@ -8458,6 +8459,18 @@ BattleScript_TerrainSeedLoop_NextBattler:
 	addbyte gBattlerTarget, 0x1
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_TerrainSeedLoopIter
 	restoretarget
+	call BattleScript_ActivateSwitchInAbilities
+	return
+
+BattleScript_ActivateSwitchInAbilities:
+	copybyte sBATTLER, gBattlerAttacker
+	setbyte gBattlerAttacker, 0
+BattleScript_ActivateSwitchInAbilities_Loop:
+	switchinabilities BS_ATTACKER
+BattleScript_ActivateSwitchInAbilities_Increment:
+	addbyte gBattlerAttacker, 1
+	jumpifbytenotequal gBattlerAttacker, gBattlersCount, BattleScript_ActivateSwitchInAbilities_Loop
+	copybyte gBattlerAttacker, sBATTLER
 	return
 
 BattleScript_ElectricSurgeActivates::
