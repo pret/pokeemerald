@@ -8862,6 +8862,10 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
         if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
            MulModifier(&modifier, UQ_4_12(1.3));
         break;
+    case ABILITY_SHARPNESS:
+        if (gBattleMoves[move].flags & FLAG_SLICING_MOVE)
+           MulModifier(&modifier, UQ_4_12(1.5));
+        break;
     }
 
     // field abilities
