@@ -1634,7 +1634,7 @@ bool32 ShouldLowerStat(u8 battler, u16 battlerAbility, u8 stat)
     if ((gBattleMons[battler].statStages[stat] > MIN_STAT_STAGE && battlerAbility != ABILITY_CONTRARY)
       || (battlerAbility == ABILITY_CONTRARY && gBattleMons[battler].statStages[stat] < MAX_STAT_STAGE))
     {
-        if (AI_GetHoldEffect(battler) == HOLD_EFFECT_CLEAR_AMULET
+        if (AI_DATA->holdEffects[battler] == HOLD_EFFECT_CLEAR_AMULET
          || battlerAbility == ABILITY_CLEAR_BODY
          || battlerAbility == ABILITY_WHITE_SMOKE
          || battlerAbility == ABILITY_FULL_METAL_BODY)
