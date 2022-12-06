@@ -6338,12 +6338,28 @@ bool32 IsNeutralizingGasOnField(void)
     return FALSE;
 }
 
+bool32 IsMyceliumMightOnField(void)
+{
+    u32 i;
+
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (IsBattlerAlive(i) && gBattleMons[i].ability == ABILITY_MYCELIUM_MIGHT && IS_MOVE_STATUS(gCurrentMove))
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
 u32 GetBattlerAbility(u8 battlerId)
 {
     if (gStatuses3[battlerId] & STATUS3_GASTRO_ACID)
         return ABILITY_NONE;
 
     if (IsNeutralizingGasOnField() && !IsNeutralizingGasBannedAbility(gBattleMons[battlerId].ability))
+        return ABILITY_NONE;
+
+    if (IsMyceliumMightOnField())
         return ABILITY_NONE;
 
     if ((((gBattleMons[gBattlerAttacker].ability == ABILITY_MOLD_BREAKER
