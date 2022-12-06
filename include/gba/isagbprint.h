@@ -11,6 +11,7 @@
 
 #ifdef NDEBUG
 #define DebugPrintf(pBuf, ...)
+#define DebugPrintfLevel(level, pBuf, ...)
 #define MgbaOpen()
 #define MgbaClose()
 #define AGBPrintInit()
@@ -31,16 +32,19 @@ void AGBPrintInit(void);
 
 #define DebugPrintf(pBuf, ...) MgbaPrintf(MGBA_LOG_INFO, pBuf, ## __VA_ARGS__)
 #define DebugAssert(pFile, nLine, pExpression, nStopProgram) MgbaAssert(pFile, nLine, pExpression, nStopProgram)
+#define DebugPrintfLevel(level, pBuf, ...) MgbaPrintf(level, pBuf, ## __VA_ARGS__)
 
 #elif (LOG_HANDLER == LOG_HANDLER_NOCASH_PRINT)
 
 #define DebugPrintf(pBuf, ...) NoCashGBAPrintf(pBuf, ## __VA_ARGS__)
 #define DebugAssert(pFile, nLine, pExpression, nStopProgram) NoCashGBAAssert(pFile, nLine, pExpression, nStopProgram)
+#define DebugPrintfLevel(level, pBuf, ...) NoCashGBAPrintf(pBuf, ## __VA_ARGS__)
 
 #else // Default to AGBPrint
 
 #define DebugPrintf(pBuf, ...) AGBPrintf(pBuf, ## __VA_ARGS__)
 #define DebugAssert(pFile, nLine, pExpression, nStopProgram) AGBAssert(pFile, nLine, pExpression, nStopProgram)
+#define DebugPrintfLevel(level, pBuf, ...) AGBPrintf(pBuf, ## __VA_ARGS__)
 
 #endif
 #endif
