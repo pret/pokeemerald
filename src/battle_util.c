@@ -2696,6 +2696,7 @@ enum
     ENDTURN_THROAT_CHOP,
     ENDTURN_SLOW_START,
     ENDTURN_PLASMA_FISTS,
+    ENDTURN_CUD_CHEW,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -3236,6 +3237,11 @@ u8 DoBattlerEndTurnEffects(void)
         case ENDTURN_PLASMA_FISTS:
             for (i = 0; i < gBattlersCount; i++)
                 gStatuses4[i] &= ~STATUS4_PLASMA_FISTS;
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_CUD_CHEW:
+            if (GetBattlerAbility(gActiveBattler) == ABILITY_CUD_CHEW && !gDisableStructs[gActiveBattler].cudChew && GetUsedHeldItem(gActiveBattler) != ITEM_NONE)
+                gDisableStructs[gActiveBattler].cudChew = TRUE;
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_BATTLER_COUNT:  // done
@@ -5151,6 +5157,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                         gBattleMons[battler].species = SPECIES_MORPEKO;
                         BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3NoPopup);
                     }
+                    effect++;
+                }
+                break;
+            case ABILITY_CUD_CHEW:
+                if (ItemId_GetPocket(GetUsedHeldItem(battler)) == POCKET_BERRIES && gDisableStructs[gActiveBattler].cudChew == TRUE)
+                {
+                    gLastUsedItem = gBattleStruct->usedHeldItems[battler][GetBattlerSide(battler)];
+                    gBattleStruct->usedHeldItems[battler][GetBattlerSide(battler)] = ITEM_NONE;
+                    BattleScriptPushCursorAndCallback(BattleScript_CudChewActivates);
                     effect++;
                 }
                 break;

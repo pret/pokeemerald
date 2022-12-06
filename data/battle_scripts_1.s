@@ -7656,6 +7656,17 @@ BattleScript_BallFetch::
 	waitmessage B_WAIT_TIME_LONG
 	end3
 
+BattleScript_CudChewActivates::
+	pause B_WAIT_TIME_SHORTEST
+	call BattleScript_AbilityPopUp
+	setbyte sBERRY_OVERRIDE, 1 @ override the requirements for eating berries
+	consumeberry BS_TARGET, FALSE
+	orword gHitMarker, HITMARKER_SKIP_DMG_TRACK | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	setbyte sBERRY_OVERRIDE, 0
+	end3
+
 BattleScript_TargetFormChange::
 	pause 5
 	copybyte gBattlerAbility, gBattlerTarget
