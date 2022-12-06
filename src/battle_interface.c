@@ -3139,6 +3139,9 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
 
     if (gBattleScripting.abilityPopupOverwrite != 0)
         ability = gBattleScripting.abilityPopupOverwrite;
+    else
+        RecordAbilityBattle(battlerId, ability);
+    
 
     if (!gBattleStruct->activeAbilityPopUps)
     {
