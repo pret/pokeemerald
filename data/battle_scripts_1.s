@@ -8451,6 +8451,13 @@ BattleScript_SupremeOverlordActivates::
 	waitmessage B_WAIT_TIME_LONG
 	end3
 
+BattleScript_CostarActivates::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNCOPIEDSTATCHANGES
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
 BattleScript_AttackWeakenedByStrongWinds::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_ATTACKWEAKENEDBSTRONGWINDS

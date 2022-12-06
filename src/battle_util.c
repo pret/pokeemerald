@@ -4965,6 +4965,20 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
+        case ABILITY_COSTAR:
+            if (!gSpecialStatuses[battler].switchInAbilityDone
+             && IsDoubleBattle()
+             && IsBattlerAlive(BATTLE_PARTNER(battler))
+             && CountBattlerStatIncreases(BATTLE_PARTNER(battler), FALSE))
+            {
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                for (i = 0; i < NUM_BATTLE_STATS; i++)
+                    gBattleMons[battler].statStages[i] = gBattleMons[BATTLE_PARTNER(battler)].statStages[i];
+                gBattlerTarget = BATTLE_PARTNER(battler);
+                BattleScriptPushCursorAndCallback(BattleScript_CostarActivates);
+                effect++;
+            }
+            break;
 #if B_WEATHER_FORMS < GEN_5
         default:
             if (gBattleMons[battler].species == SPECIES_CHERRIM)

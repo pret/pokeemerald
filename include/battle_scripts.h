@@ -446,6 +446,7 @@ extern const u8 BattleScript_GoodAsGoldActivates[];
 extern const u8 BattleScript_RuinAbilityActivates[];
 extern const u8 BattleScript_CudChewActivates[];
 extern const u8 BattleScript_SupremeOverlordActivates[];
+extern const u8 BattleScript_CostarActivates[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
