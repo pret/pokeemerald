@@ -246,6 +246,7 @@
 #define VARIOUS_CAN_TELEPORT                        155
 #define VARIOUS_GET_BATTLER_SIDE                    156
 #define VARIOUS_CHECK_PARENTAL_BOND_COUNTER         157
+#define VARIOUS_APPLY_MIMICRY                       158
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

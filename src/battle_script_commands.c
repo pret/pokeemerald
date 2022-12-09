@@ -9590,7 +9590,6 @@ static void Cmd_various(void)
             break;
         }
         gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;    // remove the terrain
-        TryToRevertMimicry(); // restore the types of Pokémon with Mimicry
         break;
     case VARIOUS_JUMP_IF_UNDER_200:
         // If the Pokemon is less than 200 kg, or weighing less than 441 lbs, then Sky Drop will work. Otherwise, it will fail.
@@ -9939,21 +9938,6 @@ static void Cmd_various(void)
         else
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         return;
-    case VARIOUS_TRY_TO_APPLY_MIMICRY:
-    {
-        bool8 isMimicryDone = FALSE;
-
-        if (GetBattlerAbility(gActiveBattler) == ABILITY_MIMICRY)
-        {
-            TryToApplyMimicry(gActiveBattler, TRUE);
-            isMimicryDone = TRUE;
-        }
-        if (!isMimicryDone)
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-        else
-            gBattlescriptCurrInstr += 7;
-        return;
-    }
     case VARIOUS_JUMP_IF_CANT_FLING:
         if (!CanFling(gActiveBattler))
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
@@ -10069,6 +10053,9 @@ static void Cmd_various(void)
                 gBattlescriptCurrInstr += 8;
             return;
         }
+        break;
+    case VARIOUS_APPLY_MIMICRY:
+        ChangeTypeBasedOnTerrain(gActiveBattler);
         break;
     } // End of switch (gBattlescriptCurrInstr[2])
 

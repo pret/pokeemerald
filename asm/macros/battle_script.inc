@@ -1899,11 +1899,6 @@
 	various \battler, VARIOUS_TRY_END_NEUTRALIZING_GAS
 	.endm
 
-	.macro trytoapplymimicry battler:req, ptr:req
-	various \battler, VARIOUS_TRY_TO_APPLY_MIMICRY
-	.4byte \ptr
-	.endm
-
 	.macro trynoretreat battler:req, ptr:req
 	various \battler, VARIOUS_TRY_NO_RETREAT
 	.4byte \ptr
@@ -1998,6 +1993,10 @@
 	various BS_ATTACKER, VARIOUS_CHECK_PARENTAL_BOND_COUNTER
 	.byte \counter
 	.4byte \ptr
+	.endm
+
+	.macro applymimicry battler:req
+	various \battler, VARIOUS_APPLY_MIMICRY
 	.endm
 
 @ helpful macros

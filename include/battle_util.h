@@ -181,9 +181,6 @@ void DoBurmyFormChange(u32 monId);
 bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef, bool32 checkTarget);
 u16 GetUsedHeldItem(u8 battler);
 bool32 IsBattlerWeatherAffected(u8 battlerId, u32 weatherFlags);
-void TryToApplyMimicry(u8 battlerId, bool8 various);
-void TryToRevertMimicry(void);
-void RestoreBattlerOriginalTypes(u8 battlerId);
 u32 GetBattlerMoveTargetType(u8 battlerId, u16 move);
 bool32 CanTargetBattler(u8 battlerAtk, u8 battlerDef, u16 move);
 bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId);
@@ -204,5 +201,6 @@ bool32 CanBeFrozen(u8 battlerId);
 bool32 CanBeConfused(u8 battlerId);
 bool32 IsBattlerTerrainAffected(u8 battlerId, u32 terrainFlag);
 u32 GetBattlerFriendshipScore(u8 battlerId);
+void ChangeTypeBasedOnTerrain(u8 battlerId);
 
 #endif // GUARD_BATTLE_UTIL_H

@@ -2404,24 +2404,25 @@ BattleScript_EffectPsychicTerrain:
 	waitmessage B_WAIT_TIME_LONG
 	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG
 	call BattleScript_TerrainSeedLoop
-	jumpifabilitypresent ABILITY_MIMICRY, BattleScript_ApplyMimicry
+	call BattleScript_TryToApplyMimicry
 	goto BattleScript_MoveEnd
 
-BattleScript_ApplyMimicry::
+BattleScript_TryToApplyMimicry:
 	savetarget
 	setbyte gBattlerTarget, 0
-BattleScript_MimicryLoopIter:
-	copybyte sBATTLER, gBattlerTarget
-	trytoapplymimicry BS_TARGET, BattleScript_MimicryLoop_NextBattler
-	copybyte gBattlerAbility, sBATTLER
+BattleScript_TryToApplyMimicry_Loop:
+	jumpifword CMP_NOT_EQUAL, gFieldStatuses, STATUS_FIELD_TERRAIN_ANY, BattleScript_TryToApplyMimicry_Increment
+	jumpifability BS_TARGET, ABILITY_MIMICRY, BattleScript_TryToApplyMimicry_Effect
+BattleScript_TryToApplyMimicry_Effect:
+	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
+	applymimicry BS_TARGET
 	printstring STRINGID_BATTLERTYPECHANGEDTO
-	waitmessage B_WAIT_TIME_LONG
-BattleScript_MimicryLoop_NextBattler:
-	addbyte gBattlerTarget, 0x1
-	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_MimicryLoopIter
-	restoretarget
-	goto BattleScript_MoveEnd
+	waitmessage B_WAIT_TIME_SHORT
+BattleScript_TryToApplyMimicry_Increment:
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_TryToApplyMimicry_Loop
+	return
 
 BattleScript_EffectTopsyTurvy:
 	attackcanceler
@@ -8305,6 +8306,13 @@ BattleScript_AttackWeakenedByStrongWinds::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_MimicryActivates_End3::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_BATTLERTYPECHANGEDTO
+	waitmessage B_WAIT_TIME_SHORT
+	end3
+
 BattleScript_SnowWarningActivates::
 	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
@@ -8589,12 +8597,6 @@ BattleScript_ColorChangeActivates::
 	printstring STRINGID_PKMNCHANGEDTYPEWITH
 	waitmessage B_WAIT_TIME_LONG
 	return
-
-BattleScript_MimicryActivatesEnd3::
-	call BattleScript_AbilityPopUp
-	printstring STRINGID_BATTLERTYPECHANGEDTO
-	waitmessage B_WAIT_TIME_LONG
-	end3
 
 BattleScript_ProteanActivates::
 	pause B_WAIT_TIME_SHORTEST
