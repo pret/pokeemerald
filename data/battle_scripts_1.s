@@ -8239,7 +8239,7 @@ BattleScript_IntimidatePrevented:
 	call BattleScript_AbilityPopUp
 BattleScript_IntimidatePrevented_Item:
 	setbyte gBattleCommunication STAT_ATK
-	stattextbuffer BS_ATTACKER
+	stattextbuffer BS_TARGET
 	printstring STRINGID_STATWASNOTLOWERED
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_TryAdrenalineOrb
