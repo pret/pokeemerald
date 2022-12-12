@@ -358,7 +358,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
 1. If pokeemerald is not already downloaded (some users may prefer to download pokeemerald via a git client like GitHub Desktop), run:
 
     ```bash
-    git clone https://github.com/pret/pokeemerald
+    git clone https://github.com/rh-hideout/pokeemerald-expansion
     ```
 
     <details>
