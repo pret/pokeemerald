@@ -5760,7 +5760,8 @@ static void Cmd_moveend(void)
             if (gCurrentMove != MOVE_DRAGON_TAIL
               && gCurrentMove != MOVE_CIRCLE_THROW
               && IsBattlerAlive(gBattlerAttacker)
-              && !TestSheerForceFlag(gBattlerAttacker, gCurrentMove))
+              && !TestSheerForceFlag(gBattlerAttacker, gCurrentMove)
+              && GetBattlerAbility(gBattlerAttacker) != ABILITY_GUARD_DOG)
             {
                 // Since we check if battler was damaged, we don't need to check move result.
                 // In fact, doing so actually prevents multi-target moves from activating red card properly
@@ -9135,9 +9136,10 @@ static void Cmd_various(void)
         break;
     case VARIOUS_TRY_HIT_SWITCH_TARGET:
         if (IsBattlerAlive(gBattlerAttacker)
-            && IsBattlerAlive(gBattlerTarget)
-            && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-            && TARGET_TURN_DAMAGED)
+         && IsBattlerAlive(gBattlerTarget)
+         && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+         && TARGET_TURN_DAMAGED
+         && GetBattlerAbility(gBattlerTarget) != ABILITY_GUARD_DOG)
         {
             gBattleScripting.switchCase = B_SWITCH_HIT;
             gBattlescriptCurrInstr = BattleScript_ForceRandomSwitch;
@@ -11236,8 +11238,8 @@ static void Cmd_forcerandomswitch(void)
     }
     else
     {
-        // In normal wild doubles, Roar will always fail if the user's level is less than the target's.
-        if (gBattleMons[gBattlerAttacker].level >= gBattleMons[gBattlerTarget].level)
+        // In normal wild doubles, Roar will always fail if the user's level is less than the target's or if the target's ability is Guard Dog.
+        if (gBattleMons[gBattlerAttacker].level >= gBattleMons[gBattlerTarget].level && GetBattlerAbility(gBattlerTarget) != ABILITY_GUARD_DOG)
             gBattlescriptCurrInstr = BattleScript_RoarSuccessEndBattle;
         else
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
