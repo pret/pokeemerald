@@ -16,7 +16,7 @@ struct LLSFStruct
     u8 connSlotFlagShift;
     u8 slotStateShift;
     u8 ackShift;
-    u8 phaseShit;
+    u8 phaseShift;
     u8 nShift;
     u8 recvFirstMask;
     u8 connSlotFlagMask;
@@ -89,7 +89,7 @@ static const struct LLSFStruct llsf_struct[2] = {
         .connSlotFlagShift = 0,
         .slotStateShift = 10,
         .ackShift = 9,
-        .phaseShit = 5,
+        .phaseShift = 5,
         .nShift = 7,
         .recvFirstMask = 2,
         .connSlotFlagMask = 0,
@@ -105,7 +105,7 @@ static const struct LLSFStruct llsf_struct[2] = {
         .connSlotFlagShift = 18,
         .slotStateShift = 14,
         .ackShift = 13,
-        .phaseShit = 9,
+        .phaseShift = 9,
         .nShift = 11,
         .recvFirstMask = 3,
         .connSlotFlagMask = 15,
@@ -1809,7 +1809,7 @@ static u16 rfu_STC_NI_constructLLSF(u8 bm_slot_id, u8 **dest_pp, struct NIComm *
     }
     frame = (NI_comm->state & 0xF) << llsf->slotStateShift
          | NI_comm->ack << llsf->ackShift
-         | NI_comm->phase << llsf->phaseShit
+         | NI_comm->phase << llsf->phaseShift
          | NI_comm->n[NI_comm->phase] << llsf->nShift
          | size;
     if (gRfuLinkStatus->parentChild == MODE_PARENT)
@@ -1978,7 +1978,7 @@ static u16 rfu_STC_analyzeLLSF(u8 slot_id, const u8 *src, u16 last_frame)
     llsf_NI.connSlotFlag = (frames >> llsf_p->connSlotFlagShift) & llsf_p->connSlotFlagMask;
     llsf_NI.slotState = (frames >> llsf_p->slotStateShift) & llsf_p->slotStateMask;
     llsf_NI.ack = (frames >> llsf_p->ackShift) & llsf_p->ackMask;
-    llsf_NI.phase = (frames >> llsf_p->phaseShit) & llsf_p->phaseMask;
+    llsf_NI.phase = (frames >> llsf_p->phaseShift) & llsf_p->phaseMask;
     llsf_NI.n = (frames >> llsf_p->nShift) & llsf_p->nMask;
     llsf_NI.frame = (frames  & llsf_p->framesMask) & frames;
     retVal = llsf_NI.frame + llsf_p->frameSize;

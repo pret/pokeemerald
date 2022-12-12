@@ -31,11 +31,12 @@
 #define B_POSITION_OPPONENT_RIGHT     3
 
 // These macros can be used with either battler ID or positions to get the partner or the opposite mon
-#define BATTLE_OPPOSITE(id) ((id) ^ 1)
-#define BATTLE_PARTNER(id) ((id) ^ 2)
+#define BATTLE_OPPOSITE(id) ((id) ^ BIT_SIDE)
+#define BATTLE_PARTNER(id) ((id) ^ BIT_FLANK)
 
 #define B_SIDE_PLAYER     0
 #define B_SIDE_OPPONENT   1
+#define NUM_BATTLE_SIDES  2
 
 #define B_FLANK_LEFT  0
 #define B_FLANK_RIGHT 1
@@ -53,17 +54,17 @@
 #define BATTLE_TYPE_MULTI              (1 << 6)
 #define BATTLE_TYPE_SAFARI             (1 << 7)
 #define BATTLE_TYPE_BATTLE_TOWER       (1 << 8)
-#define BATTLE_TYPE_WALLY_TUTORIAL     (1 << 9)
+#define BATTLE_TYPE_WALLY_TUTORIAL     (1 << 9) // Used in pokefirered as BATTLE_TYPE_OLD_MAN_TUTORIAL.
 #define BATTLE_TYPE_ROAMER             (1 << 10)
 #define BATTLE_TYPE_EREADER_TRAINER    (1 << 11)
 #define BATTLE_TYPE_KYOGRE_GROUDON     (1 << 12)
 #define BATTLE_TYPE_LEGENDARY          (1 << 13)
 #define BATTLE_TYPE_REGI               (1 << 14)
-#define BATTLE_TYPE_TWO_OPPONENTS      (1 << 15)
-#define BATTLE_TYPE_DOME               (1 << 16)
-#define BATTLE_TYPE_PALACE             (1 << 17)
-#define BATTLE_TYPE_ARENA              (1 << 18)
-#define BATTLE_TYPE_FACTORY            (1 << 19)
+#define BATTLE_TYPE_TWO_OPPONENTS      (1 << 15) // Used in pokefirered as BATTLE_TYPE_GHOST.
+#define BATTLE_TYPE_DOME               (1 << 16) // Used in pokefirered as BATTLE_TYPE_POKEDUDE.
+#define BATTLE_TYPE_PALACE             (1 << 17) // Used in pokefirered as BATTLE_TYPE_WILD_SCRIPTED.
+#define BATTLE_TYPE_ARENA              (1 << 18) // Used in pokefirered as BATTLE_TYPE_LEGENDARY_FRLG.
+#define BATTLE_TYPE_FACTORY            (1 << 19) // Used in pokefirered as BATTLE_TYPE_TRAINER_TOWER.
 #define BATTLE_TYPE_PIKE               (1 << 20)
 #define BATTLE_TYPE_PYRAMID            (1 << 21)
 #define BATTLE_TYPE_INGAME_PARTNER     (1 << 22)
@@ -78,6 +79,11 @@
 #define BATTLE_TYPE_RECORDED_IS_MASTER (1 << 31)
 #define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID)
 #define BATTLE_TYPE_FRONTIER_NO_PYRAMID     (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE)
+#define BATTLE_TYPE_RECORDED_INVALID        ((BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_FIRST_BATTLE                  \
+                                             | BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_ROAMER | BATTLE_TYPE_EREADER_TRAINER    \
+                                             | BATTLE_TYPE_KYOGRE_GROUDON | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI            \
+                                             | BATTLE_TYPE_RECORDED | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE        \
+                                             | BATTLE_TYPE_GROUDON | BATTLE_TYPE_KYOGRE | BATTLE_TYPE_RAYQUAZA))
 
 // Battle Outcome defines
 #define B_OUTCOME_WON                  1
@@ -316,6 +322,11 @@
 #define FLEE_ITEM    1
 #define FLEE_ABILITY 2
 
+// Return value for IsRunningFromBattleImpossible.
+#define BATTLE_RUN_SUCCESS        0
+#define BATTLE_RUN_FORBIDDEN      1
+#define BATTLE_RUN_FAILURE        2
+
 #define B_WIN_TYPE_NORMAL 0
 #define B_WIN_TYPE_ARENA  1
 
@@ -352,8 +363,8 @@
 #define ARENA_WIN_MIND             18
 #define ARENA_WIN_SKILL            19
 #define ARENA_WIN_BODY             20
-#define ARENA_WIN_JUDGEMENT_TITLE  21
-#define ARENA_WIN_JUDGEMENT_TEXT   22
+#define ARENA_WIN_JUDGMENT_TITLE   21
+#define ARENA_WIN_JUDGMENT_TEXT    22
 
 // Flag for BattlePutTextOnWindow. Never set
 #define B_WIN_COPYTOVRAM (1 << 7)

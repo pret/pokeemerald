@@ -22,7 +22,7 @@ static const struct OamData sOamData_MoneyLabel =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
@@ -69,17 +69,17 @@ static const struct CompressedSpritePalette sSpritePalette_MoneyLabel =
     .tag = MONEY_LABEL_TAG
 };
 
-u32 GetMoney(u32* moneyPtr)
+u32 GetMoney(u32 *moneyPtr)
 {
     return *moneyPtr ^ gSaveBlock2Ptr->encryptionKey;
 }
 
-void SetMoney(u32* moneyPtr, u32 newValue)
+void SetMoney(u32 *moneyPtr, u32 newValue)
 {
     *moneyPtr = gSaveBlock2Ptr->encryptionKey ^ newValue;
 }
 
-bool8 IsEnoughMoney(u32* moneyPtr, u32 cost)
+bool8 IsEnoughMoney(u32 *moneyPtr, u32 cost)
 {
     if (GetMoney(moneyPtr) >= cost)
         return TRUE;
@@ -87,7 +87,7 @@ bool8 IsEnoughMoney(u32* moneyPtr, u32 cost)
         return FALSE;
 }
 
-void AddMoney(u32* moneyPtr, u32 toAdd)
+void AddMoney(u32 *moneyPtr, u32 toAdd)
 {
     u32 toSet = GetMoney(moneyPtr);
 
@@ -107,7 +107,7 @@ void AddMoney(u32* moneyPtr, u32 toAdd)
     SetMoney(moneyPtr, toSet);
 }
 
-void RemoveMoney(u32* moneyPtr, u32 toSub)
+void RemoveMoney(u32 *moneyPtr, u32 toSub)
 {
     u32 toSet = GetMoney(moneyPtr);
 

@@ -20,42 +20,42 @@
       "y": 6,
       "elevation": 4,
       "dest_map": "MAP_METEOR_FALLS_1F_2R",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 7,
       "y": 11,
       "elevation": 5,
       "dest_map": "MAP_METEOR_FALLS_1F_2R",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 18,
       "y": 15,
       "elevation": 4,
       "dest_map": "MAP_METEOR_FALLS_1F_2R",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 17,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_METEOR_FALLS_B1F_2R",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 3,
       "y": 23,
       "elevation": 5,
       "dest_map": "MAP_METEOR_FALLS_1F_1R",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 20,
       "y": 36,
       "elevation": 3,
       "dest_map": "MAP_METEOR_FALLS_1F_1R",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [],

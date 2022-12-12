@@ -14,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
+      "map": "MAP_FORTREE_CITY",
       "offset": 0,
-      "map": "MAP_FORTREE_CITY"
+      "direction": "left"
     },
     {
-      "direction": "right",
+      "map": "MAP_ROUTE121",
       "offset": 80,
-      "map": "MAP_ROUTE121"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -604,14 +604,14 @@
       "y": 55,
       "elevation": 0,
       "dest_map": "MAP_ANCIENT_TOMB",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 19,
       "y": 23,
       "elevation": 1,
       "dest_map": "MAP_SCORCHED_SLAB",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

@@ -25,7 +25,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "ShoalCave_LowTideIceRoom_EventScript_ItemTM07",
-      "flag": "FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_TM_07"
+      "flag": "FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_TM07"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -47,7 +47,7 @@
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [],

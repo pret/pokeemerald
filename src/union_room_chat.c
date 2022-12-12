@@ -793,7 +793,8 @@ static const union AnimCmd *const sAnims_KeyboardCursor[] = {
     sAnim_KeyboardCursorWide_Closed
 };
 
-static const struct SpriteTemplate sSpriteTemplate_KeyboardCursor = {
+static const struct SpriteTemplate sSpriteTemplate_KeyboardCursor =
+{
     .tileTag = GFXTAG_KEYBOARD_CURSOR,
     .paletteTag = PALTAG_INTERFACE,
     .oam = &sOam_KeyboardCursor,
@@ -809,7 +810,8 @@ static const struct OamData sOam_TextEntrySprite = {
     .priority = 2
 };
 
-static const struct SpriteTemplate sSpriteTemplate_TextEntryCursor = {
+static const struct SpriteTemplate sSpriteTemplate_TextEntryCursor =
+{
     .tileTag = GFXTAG_TEXT_ENTRY_CURSOR,
     .paletteTag = PALTAG_INTERFACE,
     .oam = &sOam_TextEntrySprite,
@@ -819,7 +821,8 @@ static const struct SpriteTemplate sSpriteTemplate_TextEntryCursor = {
     .callback = SpriteCB_TextEntryCursor
 };
 
-static const struct SpriteTemplate sSpriteTemplate_TextEntryArrow = {
+static const struct SpriteTemplate sSpriteTemplate_TextEntryArrow =
+{
     .tileTag = GFXTAG_TEXT_ENTRY_ARROW,
     .paletteTag = PALTAG_INTERFACE,
     .oam = &sOam_TextEntrySprite,
@@ -868,7 +871,8 @@ static const union AnimCmd *const sAnims_RButtonLabels[] = {
     sAnim_RegisterIcon
 };
 
-static const struct SpriteTemplate sSpriteTemplate_RButtonIcon = {
+static const struct SpriteTemplate sSpriteTemplate_RButtonIcon =
+{
     .tileTag = GFXTAG_RBUTTON_ICON,
     .paletteTag = PALTAG_INTERFACE,
     .oam = &sOam_RButtonIcon,
@@ -878,7 +882,8 @@ static const struct SpriteTemplate sSpriteTemplate_RButtonIcon = {
     .callback = SpriteCallbackDummy
 };
 
-static const struct SpriteTemplate sSpriteTemplate_RButtonLabels = {
+static const struct SpriteTemplate sSpriteTemplate_RButtonLabels =
+{
     .tileTag = GFXTAG_RBUTTON_LABELS,
     .paletteTag = PALTAG_INTERFACE,
     .oam = &sOam_RButtonLabel,
@@ -1039,7 +1044,7 @@ static void Chat_HandleInput(void)
         {
             SetChatFunction(CHAT_FUNC_SWITCH);
         }
-        else if (gMain.newAndRepeatedKeys & B_BUTTON)
+        else if (JOY_REPEAT(B_BUTTON))
         {
             if (sChat->bufferCursorPos)
             {
@@ -1166,7 +1171,7 @@ static void Chat_AskQuitChatting(void)
         input = ProcessMenuInput();
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             StartDisplaySubtask(CHATDISPLAY_FUNC_DESTROY_YESNO, 0);
             sChat->funcState = 3;
@@ -1205,7 +1210,7 @@ static void Chat_AskQuitChatting(void)
         input = ProcessMenuInput();
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             StartDisplaySubtask(CHATDISPLAY_FUNC_DESTROY_YESNO, 0);
             sChat->funcState = 3;
@@ -1507,7 +1512,7 @@ static void Chat_SaveAndExit(void)
         input = ProcessMenuInput();
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             sChat->funcState = 12;
             break;
@@ -1532,7 +1537,7 @@ static void Chat_SaveAndExit(void)
         input = ProcessMenuInput();
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             sChat->funcState = 12;
             break;

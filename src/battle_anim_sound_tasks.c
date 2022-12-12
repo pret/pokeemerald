@@ -100,7 +100,7 @@ void SoundTask_LoopSEAdjustPanning(u8 taskId)
     gTasks[taskId].data[12] = r9;
 
     gTasks[taskId].func = SoundTask_LoopSEAdjustPanning_Step;
-    SoundTask_LoopSEAdjustPanning_Step(taskId);
+    gTasks[taskId].func(taskId);
 }
 
 static void SoundTask_LoopSEAdjustPanning_Step(u8 taskId)
@@ -385,7 +385,7 @@ void SoundTask_AdjustPanningVar(u8 taskId)
     gTasks[taskId].data[11] = sourcePan;
 
     gTasks[taskId].func = SoundTask_AdjustPanningVar_Step;
-    SoundTask_AdjustPanningVar_Step(taskId);
+    gTasks[taskId].func(taskId);
 }
 
 static void SoundTask_AdjustPanningVar_Step(u8 taskId)

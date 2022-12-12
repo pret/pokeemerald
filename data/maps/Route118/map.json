@@ -14,19 +14,19 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "up",
+      "map": "MAP_ROUTE119",
       "offset": 40,
-      "map": "MAP_ROUTE119"
+      "direction": "up"
     },
     {
-      "direction": "left",
+      "map": "MAP_MAUVILLE_CITY",
       "offset": 0,
-      "map": "MAP_MAUVILLE_CITY"
+      "direction": "left"
     },
     {
-      "direction": "right",
+      "map": "MAP_ROUTE123",
       "offset": 0,
-      "map": "MAP_ROUTE123"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -310,14 +310,14 @@
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 9,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

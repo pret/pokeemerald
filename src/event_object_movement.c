@@ -93,33 +93,33 @@ static bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *, s16, s16, u
 static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *, s16, s16);
 static void UpdateObjectEventOffscreen(struct ObjectEvent *, struct Sprite *);
 static void UpdateObjectEventSpriteVisibility(struct ObjectEvent *, struct Sprite *);
-static void ObjectEventUpdateMetatileBehaviors(struct ObjectEvent*);
-static void GetGroundEffectFlags_Reflection(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_TallGrassOnSpawn(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_LongGrassOnSpawn(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_SandHeap(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_ShallowFlowingWater(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_ShortGrass(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_HotSprings(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_TallGrassOnBeginStep(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_LongGrassOnBeginStep(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_Tracks(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_Puddle(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_Ripple(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_Seaweed(struct ObjectEvent*, u32*);
-static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent*, u32*);
-static u8 ObjectEventGetNearbyReflectionType(struct ObjectEvent*);
+static void ObjectEventUpdateMetatileBehaviors(struct ObjectEvent *);
+static void GetGroundEffectFlags_Reflection(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_TallGrassOnSpawn(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_LongGrassOnSpawn(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_SandHeap(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_ShallowFlowingWater(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_ShortGrass(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_HotSprings(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_TallGrassOnBeginStep(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_LongGrassOnBeginStep(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_Tracks(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_Puddle(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_Ripple(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_Seaweed(struct ObjectEvent *, u32 *);
+static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent *, u32 *);
+static u8 ObjectEventGetNearbyReflectionType(struct ObjectEvent *);
 static u8 GetReflectionTypeByMetatileBehavior(u32);
 static void InitObjectPriorityByElevation(struct Sprite *, u8);
-static void ObjectEventUpdateSubpriority(struct ObjectEvent*, struct Sprite*);
-static void DoTracksGroundEffect_None(struct ObjectEvent*, struct Sprite*, u8);
-static void DoTracksGroundEffect_Footprints(struct ObjectEvent*, struct Sprite*, u8);
-static void DoTracksGroundEffect_BikeTireTracks(struct ObjectEvent*, struct Sprite*, u8);
-static void DoRippleFieldEffect(struct ObjectEvent*, struct Sprite*);
-static void DoGroundEffects_OnSpawn(struct ObjectEvent*, struct Sprite*);
-static void DoGroundEffects_OnBeginStep(struct ObjectEvent*, struct Sprite*);
-static void DoGroundEffects_OnFinishStep(struct ObjectEvent*, struct Sprite*);
-static void VirtualObject_UpdateAnim(struct Sprite*);
+static void ObjectEventUpdateSubpriority(struct ObjectEvent *, struct Sprite *);
+static void DoTracksGroundEffect_None(struct ObjectEvent *, struct Sprite *, u8);
+static void DoTracksGroundEffect_Footprints(struct ObjectEvent *, struct Sprite *, u8);
+static void DoTracksGroundEffect_BikeTireTracks(struct ObjectEvent *, struct Sprite *, u8);
+static void DoRippleFieldEffect(struct ObjectEvent *, struct Sprite *);
+static void DoGroundEffects_OnSpawn(struct ObjectEvent *, struct Sprite *);
+static void DoGroundEffects_OnBeginStep(struct ObjectEvent *, struct Sprite *);
+static void DoGroundEffects_OnFinishStep(struct ObjectEvent *, struct Sprite *);
+static void VirtualObject_UpdateAnim(struct Sprite *);
 static void ApplyLevitateMovement(u8);
 static bool8 MovementType_Disguise_Callback(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementType_Buried_Callback(struct ObjectEvent *, struct Sprite *);
@@ -168,7 +168,20 @@ static bool8 AreElevationsCompatible(u8, u8);
 
 static const struct SpriteFrameImage sPicTable_PechaBerryTree[];
 
-const u8 gReflectionEffectPaletteMap[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
+const u8 gReflectionEffectPaletteMap[16] = {
+        [PALSLOT_PLAYER]                 = PALSLOT_PLAYER_REFLECTION,
+        [PALSLOT_PLAYER_REFLECTION]      = PALSLOT_PLAYER_REFLECTION,
+        [PALSLOT_NPC_1]                  = PALSLOT_NPC_1_REFLECTION,
+        [PALSLOT_NPC_2]                  = PALSLOT_NPC_2_REFLECTION,
+        [PALSLOT_NPC_3]                  = PALSLOT_NPC_3_REFLECTION,
+        [PALSLOT_NPC_4]                  = PALSLOT_NPC_4_REFLECTION,
+        [PALSLOT_NPC_1_REFLECTION]       = PALSLOT_NPC_1_REFLECTION,
+        [PALSLOT_NPC_2_REFLECTION]       = PALSLOT_NPC_2_REFLECTION,
+        [PALSLOT_NPC_3_REFLECTION]       = PALSLOT_NPC_3_REFLECTION,
+        [PALSLOT_NPC_4_REFLECTION]       = PALSLOT_NPC_4_REFLECTION,
+        [PALSLOT_NPC_SPECIAL]            = PALSLOT_NPC_SPECIAL_REFLECTION,
+        [PALSLOT_NPC_SPECIAL_REFLECTION] = PALSLOT_NPC_SPECIAL_REFLECTION
+};
 
 static const struct SpriteTemplate sCameraSpriteTemplate = {
     .tileTag = 0,
@@ -610,55 +623,55 @@ static const struct PairedPalettes sSpecialObjectReflectionPaletteSets[] = {
 };
 
 static const u16 sObjectPaletteTags0[] = {
-    OBJ_EVENT_PAL_TAG_BRENDAN,
-    OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_1,
-    OBJ_EVENT_PAL_TAG_NPC_2,
-    OBJ_EVENT_PAL_TAG_NPC_3,
-    OBJ_EVENT_PAL_TAG_NPC_4,
-    OBJ_EVENT_PAL_TAG_NPC_1_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_2_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_4_REFLECTION,
+    [PALSLOT_PLAYER]            = OBJ_EVENT_PAL_TAG_BRENDAN,
+    [PALSLOT_PLAYER_REFLECTION] = OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION,
+    [PALSLOT_NPC_1]             = OBJ_EVENT_PAL_TAG_NPC_1,
+    [PALSLOT_NPC_2]             = OBJ_EVENT_PAL_TAG_NPC_2,
+    [PALSLOT_NPC_3]             = OBJ_EVENT_PAL_TAG_NPC_3,
+    [PALSLOT_NPC_4]             = OBJ_EVENT_PAL_TAG_NPC_4,
+    [PALSLOT_NPC_1_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_1_REFLECTION,
+    [PALSLOT_NPC_2_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_2_REFLECTION,
+    [PALSLOT_NPC_3_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION,
+    [PALSLOT_NPC_4_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_4_REFLECTION,
 };
 
 static const u16 sObjectPaletteTags1[] = {
-    OBJ_EVENT_PAL_TAG_BRENDAN,
-    OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_1,
-    OBJ_EVENT_PAL_TAG_NPC_2,
-    OBJ_EVENT_PAL_TAG_NPC_3,
-    OBJ_EVENT_PAL_TAG_NPC_4,
-    OBJ_EVENT_PAL_TAG_NPC_1_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_2_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_4_REFLECTION,
+    [PALSLOT_PLAYER]            = OBJ_EVENT_PAL_TAG_BRENDAN,
+    [PALSLOT_PLAYER_REFLECTION] = OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION,
+    [PALSLOT_NPC_1]             = OBJ_EVENT_PAL_TAG_NPC_1,
+    [PALSLOT_NPC_2]             = OBJ_EVENT_PAL_TAG_NPC_2,
+    [PALSLOT_NPC_3]             = OBJ_EVENT_PAL_TAG_NPC_3,
+    [PALSLOT_NPC_4]             = OBJ_EVENT_PAL_TAG_NPC_4,
+    [PALSLOT_NPC_1_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_1_REFLECTION,
+    [PALSLOT_NPC_2_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_2_REFLECTION,
+    [PALSLOT_NPC_3_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION,
+    [PALSLOT_NPC_4_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_4_REFLECTION,
 };
 
 static const u16 sObjectPaletteTags2[] = {
-    OBJ_EVENT_PAL_TAG_BRENDAN,
-    OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_1,
-    OBJ_EVENT_PAL_TAG_NPC_2,
-    OBJ_EVENT_PAL_TAG_NPC_3,
-    OBJ_EVENT_PAL_TAG_NPC_4,
-    OBJ_EVENT_PAL_TAG_NPC_1_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_2_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_4_REFLECTION,
+    [PALSLOT_PLAYER]            = OBJ_EVENT_PAL_TAG_BRENDAN,
+    [PALSLOT_PLAYER_REFLECTION] = OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION,
+    [PALSLOT_NPC_1]             = OBJ_EVENT_PAL_TAG_NPC_1,
+    [PALSLOT_NPC_2]             = OBJ_EVENT_PAL_TAG_NPC_2,
+    [PALSLOT_NPC_3]             = OBJ_EVENT_PAL_TAG_NPC_3,
+    [PALSLOT_NPC_4]             = OBJ_EVENT_PAL_TAG_NPC_4,
+    [PALSLOT_NPC_1_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_1_REFLECTION,
+    [PALSLOT_NPC_2_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_2_REFLECTION,
+    [PALSLOT_NPC_3_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION,
+    [PALSLOT_NPC_4_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_4_REFLECTION,
 };
 
 static const u16 sObjectPaletteTags3[] = {
-    OBJ_EVENT_PAL_TAG_BRENDAN,
-    OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_1,
-    OBJ_EVENT_PAL_TAG_NPC_2,
-    OBJ_EVENT_PAL_TAG_NPC_3,
-    OBJ_EVENT_PAL_TAG_NPC_4,
-    OBJ_EVENT_PAL_TAG_NPC_1_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_2_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_4_REFLECTION,
+    [PALSLOT_PLAYER]            = OBJ_EVENT_PAL_TAG_BRENDAN,
+    [PALSLOT_PLAYER_REFLECTION] = OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION,
+    [PALSLOT_NPC_1]             = OBJ_EVENT_PAL_TAG_NPC_1,
+    [PALSLOT_NPC_2]             = OBJ_EVENT_PAL_TAG_NPC_2,
+    [PALSLOT_NPC_3]             = OBJ_EVENT_PAL_TAG_NPC_3,
+    [PALSLOT_NPC_4]             = OBJ_EVENT_PAL_TAG_NPC_4,
+    [PALSLOT_NPC_1_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_1_REFLECTION,
+    [PALSLOT_NPC_2_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_2_REFLECTION,
+    [PALSLOT_NPC_3_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION,
+    [PALSLOT_NPC_4_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_4_REFLECTION,
 };
 
 static const u16 *const sObjectPaletteTagSets[] = {
@@ -1396,13 +1409,13 @@ static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTempl
     objectEvent = &gObjectEvents[objectEventId];
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     paletteSlot = graphicsInfo->paletteSlot;
-    if (paletteSlot == 0)
+    if (paletteSlot == PALSLOT_PLAYER)
     {
-        LoadPlayerObjectReflectionPalette(graphicsInfo->paletteTag, 0);
+        LoadPlayerObjectReflectionPalette(graphicsInfo->paletteTag, paletteSlot);
     }
-    else if (paletteSlot == 10)
+    else if (paletteSlot == PALSLOT_NPC_SPECIAL)
     {
-        LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, 10);
+        LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, paletteSlot);
     }
     else if (paletteSlot >= 16)
     {
@@ -1537,13 +1550,13 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
     struct Sprite *sprite;
     u8 spriteId;
 
-    spriteTemplate = malloc(sizeof(struct SpriteTemplate));
+    spriteTemplate = Alloc(sizeof(struct SpriteTemplate));
     CopyObjectGraphicsInfoToSpriteTemplate(graphicsId, callback, spriteTemplate, &subspriteTables);
     if (spriteTemplate->paletteTag != TAG_NONE)
         LoadObjectEventPalette(spriteTemplate->paletteTag);
 
     spriteId = CreateSprite(spriteTemplate, x, y, subpriority);
-    free(spriteTemplate);
+    Free(spriteTemplate);
 
     if (spriteId != MAX_SPRITES && subspriteTables != NULL)
     {
@@ -1590,7 +1603,7 @@ u8 CreateVirtualObject(u8 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 elevatio
         sprite->coordOffsetEnabled = TRUE;
         sprite->sVirtualObjId = virtualObjId;
         sprite->sVirtualObjElev = elevation;
-        if (graphicsInfo->paletteSlot == 10)
+        if (graphicsInfo->paletteSlot == PALSLOT_NPC_SPECIAL)
             LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
         else if (graphicsInfo->paletteSlot >= 16)
             _PatchObjectPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot | 0xf0);
@@ -1716,11 +1729,11 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
 
     *(u16 *)&spriteTemplate.paletteTag = TAG_NONE;
     paletteSlot = graphicsInfo->paletteSlot;
-    if (paletteSlot == 0)
+    if (paletteSlot == PALSLOT_PLAYER)
     {
         LoadPlayerObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
     }
-    else if (paletteSlot == 10)
+    else if (paletteSlot == PALSLOT_NPC_SPECIAL)
     {
         LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
     }
@@ -1791,11 +1804,11 @@ void ObjectEventSetGraphicsId(struct ObjectEvent *objectEvent, u8 graphicsId)
     graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
     sprite = &gSprites[objectEvent->spriteId];
     paletteSlot = graphicsInfo->paletteSlot;
-    if (paletteSlot == 0)
+    if (paletteSlot == PALSLOT_PLAYER)
     {
         PatchObjectPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
     }
-    else if (paletteSlot == 10)
+    else if (paletteSlot == PALSLOT_NPC_SPECIAL)
     {
         LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
     }
@@ -1911,9 +1924,9 @@ void SetObjectInvisibility(u8 localId, u8 mapNum, u8 mapGroup, bool8 invisible)
 
 void ObjectEventGetLocalIdAndMap(struct ObjectEvent *objectEvent, void *localId, void *mapNum, void *mapGroup)
 {
-    *(u8*)(localId) = objectEvent->localId;
-    *(u8*)(mapNum) = objectEvent->mapNum;
-    *(u8*)(mapGroup) = objectEvent->mapGroup;
+    *(u8 *)(localId) = objectEvent->localId;
+    *(u8 *)(mapNum) = objectEvent->mapNum;
+    *(u8 *)(mapGroup) = objectEvent->mapGroup;
 }
 
 void AllowObjectAtPosTriggerGroundEffects(s16 x, s16 y)
@@ -1973,7 +1986,7 @@ void SetObjectEventSpritePosByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, 
 void FreeAndReserveObjectSpritePalettes(void)
 {
     FreeAllSpritePalettes();
-    gReservedSpritePaletteCount = 12;
+    gReservedSpritePaletteCount = OBJ_PALSLOT_COUNT;
 }
 
 static void LoadObjectEventPalette(u16 paletteTag)
@@ -2499,19 +2512,19 @@ void OverrideSecretBaseDecorationSpriteScript(u8 localId, u8 mapNum, u8 mapGroup
     }
 }
 
-void InitObjectEventPalettes(u8 palSlot)
+void InitObjectEventPalettes(u8 reflectionType)
 {
     FreeAndReserveObjectSpritePalettes();
     sCurrentSpecialObjectPaletteTag = OBJ_EVENT_PAL_TAG_NONE;
-    sCurrentReflectionType = palSlot;
-    if (palSlot == 1)
+    sCurrentReflectionType = reflectionType;
+    if (reflectionType == 1)
     {
-        PatchObjectPaletteRange(sObjectPaletteTagSets[sCurrentReflectionType], 0, 6);
+        PatchObjectPaletteRange(sObjectPaletteTagSets[sCurrentReflectionType], PALSLOT_PLAYER, PALSLOT_NPC_4 + 1);
         gReservedSpritePaletteCount = 8;
     }
     else
     {
-        PatchObjectPaletteRange(sObjectPaletteTagSets[sCurrentReflectionType], 0, 10);
+        PatchObjectPaletteRange(sObjectPaletteTagSets[sCurrentReflectionType], PALSLOT_PLAYER, PALSLOT_NPC_4_REFLECTION + 1);
     }
 }
 
@@ -2519,7 +2532,7 @@ u16 GetObjectPaletteTag(u8 palSlot)
 {
     u8 i;
 
-    if (palSlot < 10)
+    if (palSlot < PALSLOT_NPC_SPECIAL)
         return sObjectPaletteTagSets[sCurrentReflectionType][palSlot];
 
     for (i = 0; sSpecialObjectReflectionPaletteSets[i].tag != OBJ_EVENT_PAL_TAG_NONE; i++)
@@ -2623,7 +2636,7 @@ bool8 ObjectEventIsTrainerAndCloseToPlayer(struct ObjectEvent *objectEvent)
     minY = objY - objectEvent->trainerRange_berryTreeId;
     maxX = objX + objectEvent->trainerRange_berryTreeId;
     maxY = objY + objectEvent->trainerRange_berryTreeId;
-    if (minX > playerX || maxX < playerX 
+    if (minX > playerX || maxX < playerX
      || minY > playerY || maxY < playerY)
         return FALSE;
 
@@ -4630,7 +4643,7 @@ u8 GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 dir)
     u8 direction = dir;
     if (IsCoordOutsideObjectEventMovementRange(objectEvent, x, y))
         return COLLISION_OUTSIDE_RANGE;
-    else if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction))
+    else if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction))
         return COLLISION_IMPASSABLE;
     else if (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction))
         return COLLISION_IMPASSABLE;
@@ -4647,7 +4660,7 @@ u8 GetCollisionFlagsAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 d
 
     if (IsCoordOutsideObjectEventMovementRange(objectEvent, x, y))
         flags |= 1 << (COLLISION_OUTSIDE_RANGE - 1);
-    if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction) || (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction)))
+    if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction) || (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction)))
         flags |= 1 << (COLLISION_IMPASSABLE - 1);
     if (IsElevationMismatchAt(objectEvent->currentElevation, x, y))
         flags |= 1 << (COLLISION_ELEVATION_MISMATCH - 1);
@@ -8746,13 +8759,13 @@ static void DoRippleFieldEffect(struct ObjectEvent *objectEvent, struct Sprite *
     FieldEffectStart(FLDEFF_RIPPLE);
 }
 
-u8 (*const gMovementActionFuncs_StoreAndLockAnim[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementAction_StoreAndLockAnim_Step0,
+u8 (*const gMovementActionFuncs_LockAnim[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_LockAnim_Step0,
     MovementAction_Finish,
 };
 
-u8 (*const gMovementActionFuncs_FreeAndUnlockAnim[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementAction_FreeAndUnlockAnim_Step0,
+u8 (*const gMovementActionFuncs_UnlockAnim[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_UnlockAnim_Step0,
     MovementAction_Finish,
 };
 
@@ -8768,36 +8781,36 @@ u8 (*const gMovementActionFuncs_FlyDown[])(struct ObjectEvent *, struct Sprite *
     MovementAction_Fly_Finish,
 };
 
-u8 MovementAction_StoreAndLockAnim_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+u8 MovementAction_LockAnim_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     bool32 ableToStore = FALSE;
     if (sLockedAnimObjectEvents == NULL)
     {
         sLockedAnimObjectEvents = AllocZeroed(sizeof(struct LockedAnimObjectEvents));
-        sLockedAnimObjectEvents->objectEventIds[0] = objectEvent->localId;
+        sLockedAnimObjectEvents->localIds[0] = objectEvent->localId;
         sLockedAnimObjectEvents->count = 1;
         ableToStore = TRUE;
     }
     else
     {
         u8 i;
-        u8 firstFreeSlot;
-        bool32 found;
-        for (firstFreeSlot = 16, found = FALSE, i = 0; i < 16; i++)
+        u8 firstFreeSlot = OBJECT_EVENTS_COUNT;
+        bool32 found = FALSE;
+        for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         {
-            if (firstFreeSlot == 16 && sLockedAnimObjectEvents->objectEventIds[i] == 0)
+            if (firstFreeSlot == OBJECT_EVENTS_COUNT && sLockedAnimObjectEvents->localIds[i] == 0)
                 firstFreeSlot = i;
 
-            if (sLockedAnimObjectEvents->objectEventIds[i] == objectEvent->localId)
+            if (sLockedAnimObjectEvents->localIds[i] == objectEvent->localId)
             {
                 found = TRUE;
                 break;
             }
         }
 
-        if (!found && firstFreeSlot != 16)
+        if (!found && firstFreeSlot != OBJECT_EVENTS_COUNT)
         {
-            sLockedAnimObjectEvents->objectEventIds[firstFreeSlot] = objectEvent->localId;
+            sLockedAnimObjectEvents->localIds[firstFreeSlot] = objectEvent->localId;
             sLockedAnimObjectEvents->count++;
             ableToStore = TRUE;
         }
@@ -8813,7 +8826,7 @@ u8 MovementAction_StoreAndLockAnim_Step0(struct ObjectEvent *objectEvent, struct
     return TRUE;
 }
 
-u8 MovementAction_FreeAndUnlockAnim_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+u8 MovementAction_UnlockAnim_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     bool32 ableToStore;
     u8 index;
@@ -8823,9 +8836,9 @@ u8 MovementAction_FreeAndUnlockAnim_Step0(struct ObjectEvent *objectEvent, struc
     {
         ableToStore = FALSE;
         index = FindLockedObjectEventIndex(objectEvent);
-        if (index != 16)
+        if (index != OBJECT_EVENTS_COUNT)
         {
-            sLockedAnimObjectEvents->objectEventIds[index] = 0;
+            sLockedAnimObjectEvents->localIds[index] = 0;
             sLockedAnimObjectEvents->count--;
             ableToStore = TRUE;
         }
@@ -8848,7 +8861,7 @@ u8 FindLockedObjectEventIndex(struct ObjectEvent *objectEvent)
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
-        if (sLockedAnimObjectEvents->objectEventIds[i] == objectEvent->localId)
+        if (sLockedAnimObjectEvents->localIds[i] == objectEvent->localId)
             return i;
     }
     return OBJECT_EVENTS_COUNT;

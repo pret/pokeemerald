@@ -86,21 +86,21 @@
       "y": 16,
       "elevation": 3,
       "dest_map": "MAP_ROUTE111",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 10,
       "y": 16,
       "elevation": 3,
       "dest_map": "MAP_ROUTE111",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 9,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_TRAINER_HILL_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

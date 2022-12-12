@@ -1106,7 +1106,7 @@ static void SpriteCB_Player(struct Sprite *sprite)
 
 #define sPlayerSpriteId data[0]
 
-static void SpriteCB_Bicycle(struct Sprite* sprite)
+static void SpriteCB_Bicycle(struct Sprite *sprite)
 {
     sprite->invisible = gSprites[sprite->sPlayerSpriteId].invisible;
     sprite->x = gSprites[sprite->sPlayerSpriteId].x;
@@ -1139,7 +1139,7 @@ static void SpriteCB_FlygonLeftHalf(struct Sprite *sprite)
 
 #define sLeftSpriteId data[0]
 
-static void SpriteCB_FlygonRightHalf(struct Sprite* sprite)
+static void SpriteCB_FlygonRightHalf(struct Sprite *sprite)
 {
     sprite->invisible = gSprites[sprite->sLeftSpriteId].invisible;
     sprite->y = gSprites[sprite->sLeftSpriteId].y;

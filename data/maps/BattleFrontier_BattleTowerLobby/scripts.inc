@@ -911,7 +911,7 @@ BattleFrontier_BattleTowerLobby_EventScript_ExitRules::
 	end
 
 @ Unused
-BattleFrontier_BattleTowerLobby_EventScript_DirectYouToBattleRoom:
+BattleFrontier_BattleTowerLobby_Text_DirectYouToBattleRoom:
 	.string "I'll direct you to your BATTLE ROOM now.$"
 
 BattleFrontier_BattleTowerLobby_Text_DidntSaveBeforeQuitting:
