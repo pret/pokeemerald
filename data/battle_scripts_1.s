@@ -416,6 +416,18 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDoubleShock             @ EFFECT_DOUBLE_SHOCK
 	.4byte BattleScript_EffectSpecialAttackUpHit      @ EFFECT_SPECIAL_ATTACK_UP_HIT
 	.4byte BattleScript_EffectVictoryDance            @ EFFECT_VICTORY_DANCE
+	.4byte BattleScript_EffectCeaselessEdge           @ EFFECT_CEASELESS_EDGE
+
+BattleScript_EffectCeaselessEdge::
+	call BattleScript_EffectHit_Ret
+	trysetspikes BattleScript_ButItFailedAtkStringPpReduce
+	attackstring
+	ppreduce
+	attackanimation
+	waitanimation
+	printstring STRINGID_SPIKESSCATTERED
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
 
 BattleScript_AffectionBasedEndurance::
 	playanimation BS_TARGET, B_ANIM_AFFECTION_HANGED_ON
@@ -3028,6 +3040,29 @@ BattleScript_HitFromAtkAnimation::
 BattleScript_MoveEnd::
 	moveendall
 	end
+
+BattleScript_EffectHit_Ret::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	adjustdamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	seteffectwithchance
+	tryfaintmon BS_TARGET
+	return
 
 BattleScript_EffectNaturalGift:
 	attackcanceler

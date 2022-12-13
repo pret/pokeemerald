@@ -13598,7 +13598,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_CEASELESS_EDGE] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_CEASELESS_EDGE,
+        .effect = EFFECT_CEASELESS_EDGE,
         .power = 65,
         .type = TYPE_DARK,
         .accuracy = 90,
