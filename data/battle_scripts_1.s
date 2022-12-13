@@ -418,6 +418,11 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectVictoryDance            @ EFFECT_VICTORY_DANCE
 	.4byte BattleScript_EffectCeaselessEdge           @ EFFECT_CEASELESS_EDGE
 	.4byte BattleScript_EffectShellTrap               @ EFFECT_SHELL_TRAP
+	.4byte BattleScript_EffectDireClaw                @ EFFECT_DIRE_CLAW
+
+BattleScript_EffectDireClaw::
+	setmoveeffect MOVE_EFFECT_DIRE_CLAW
+	goto BattleScript_EffectHit
 
 BattleScript_EffectShellTrap:
 	jumpifnodamage BattleScript_EffectShellTrap_Failed

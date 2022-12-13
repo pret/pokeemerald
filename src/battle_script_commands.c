@@ -3647,6 +3647,22 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_DoubleShockRemoveType;
                 break;
+            case MOVE_EFFECT_DIRE_CLAW:
+                if (gBattleMons[gEffectBattler].status1)
+                {
+                    gBattlescriptCurrInstr++;
+                }
+                else
+                {
+                DIRE_CLAW_STATUS_PICK:
+                    gBattleScripting.moveEffect = Random() % 6;
+                    if (gBattleScripting.moveEffect == MOVE_EFFECT_NONE
+                     || gBattleScripting.moveEffect == MOVE_EFFECT_BURN
+                     || gBattleScripting.moveEffect == MOVE_EFFECT_FREEZE)
+                        goto DIRE_CLAW_STATUS_PICK;
+                    SetMoveEffect(FALSE, 0);
+                }
+                break;
             }
         }
     }

@@ -399,7 +399,8 @@
 #define EFFECT_VICTORY_DANCE                393
 #define EFFECT_CEASELESS_EDGE               394
 #define EFFECT_SHELL_TRAP                   395
+#define EFFECT_DIRE_CLAW                    396
 
-#define NUM_BATTLE_MOVE_EFFECTS             396
+#define NUM_BATTLE_MOVE_EFFECTS             397
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H
