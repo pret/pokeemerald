@@ -607,6 +607,7 @@ static const u16 sCriticalHitChance[] = {16, 8, 4, 3, 2};
 
 static const u32 sStatusFlagsForMoveEffects[NUM_MOVE_EFFECTS] =
 {
+    [MOVE_EFFECT_NONE]           = STATUS1_NONE,
     [MOVE_EFFECT_SLEEP]          = STATUS1_SLEEP,
     [MOVE_EFFECT_POISON]         = STATUS1_POISON,
     [MOVE_EFFECT_BURN]           = STATUS1_BURN,
@@ -626,7 +627,7 @@ static const u32 sStatusFlagsForMoveEffects[NUM_MOVE_EFFECTS] =
 
 static const u8 *const sMoveEffectBS_Ptrs[] =
 {
-    [0]                            = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_NONE]             = BattleScript_MoveEffectSleep,
     [MOVE_EFFECT_SLEEP]            = BattleScript_MoveEffectSleep,
     [MOVE_EFFECT_POISON]           = BattleScript_MoveEffectPoison,
     [MOVE_EFFECT_BURN]             = BattleScript_MoveEffectBurn,

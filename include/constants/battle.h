@@ -231,6 +231,7 @@
 #define B_WEATHER_ANY                 (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_SUN | B_WEATHER_HAIL)
 
 // Move Effects
+#define MOVE_EFFECT_NONE                0
 #define MOVE_EFFECT_SLEEP               1
 #define MOVE_EFFECT_POISON              2
 #define MOVE_EFFECT_BURN                3
