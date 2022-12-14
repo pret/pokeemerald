@@ -401,7 +401,8 @@
 #define EFFECT_SHELL_TRAP                   395
 #define EFFECT_DIRE_CLAW                    396
 #define EFFECT_STONE_AXE                    397
+#define EFFECT_BARB_BARRAGE                 398
 
-#define NUM_BATTLE_MOVE_EFFECTS             398
+#define NUM_BATTLE_MOVE_EFFECTS             399
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

@@ -420,6 +420,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectShellTrap               @ EFFECT_SHELL_TRAP
 	.4byte BattleScript_EffectDireClaw                @ EFFECT_DIRE_CLAW
 	.4byte BattleScript_EffectStoneAxe                @ EFFECT_STONE_AXE
+	.4byte BattleScript_EffectBarbBarrage             @ EFFECT_BARB_BARRAGE
 
 BattleScript_EffectStoneAxe::
 	call BattleScript_EffectHit_Ret
@@ -3265,6 +3266,7 @@ BattleScript_CantMakeAsleep::
 	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectBarbBarrage:
 BattleScript_EffectPoisonHit:
 	setmoveeffect MOVE_EFFECT_POISON
 	goto BattleScript_EffectHit

@@ -13490,12 +13490,16 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_BARB_BARRAGE] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_BARB_BARRAGE,
+        .effect = EFFECT_BARB_BARRAGE,
         .power = 60,
         .type = TYPE_POISON,
         .accuracy = 100,
-        .pp = 15,
-        .secondaryEffectChance = 0,
+        #if B_UPDATED_MOVE_DATA >= GEN_9
+            .pp = 10,
+        #else
+            .pp = 15,
+        #endif
+        .secondaryEffectChance = 50,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST,

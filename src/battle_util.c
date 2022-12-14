@@ -8483,6 +8483,10 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         basePower = CalcBeatUpPower();
         #endif
         break;
+    case EFFECT_BARB_BARRAGE:
+        if (gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY)
+            basePower *= 2;
+        break;
     }
 
     // Move-specific base power changes
