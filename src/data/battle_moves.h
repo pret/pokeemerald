@@ -12835,7 +12835,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_LUNAR_BLESSING] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_LUNAR_BLESSING,
+        .effect = EFFECT_JUNGLE_HEALING,
         .power = 0,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,
