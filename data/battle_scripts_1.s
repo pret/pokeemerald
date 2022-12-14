@@ -419,6 +419,14 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCeaselessEdge           @ EFFECT_CEASELESS_EDGE
 	.4byte BattleScript_EffectShellTrap               @ EFFECT_SHELL_TRAP
 	.4byte BattleScript_EffectDireClaw                @ EFFECT_DIRE_CLAW
+	.4byte BattleScript_EffectStoneAxe                @ EFFECT_STONE_AXE
+
+BattleScript_EffectStoneAxe::
+	call BattleScript_EffectHit_Ret
+	setstealthrock BattleScript_ButItFailed
+	printstring STRINGID_POINTEDSTONESFLOAT
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectDireClaw::
 	setmoveeffect MOVE_EFFECT_DIRE_CLAW
@@ -444,10 +452,6 @@ BattleScript_ShellTrapSetUp::
 BattleScript_EffectCeaselessEdge::
 	call BattleScript_EffectHit_Ret
 	trysetspikes BattleScript_ButItFailedAtkStringPpReduce
-	attackstring
-	ppreduce
-	attackanimation
-	waitanimation
 	printstring STRINGID_SPIKESSCATTERED
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd

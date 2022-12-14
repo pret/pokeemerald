@@ -400,7 +400,8 @@
 #define EFFECT_CEASELESS_EDGE               394
 #define EFFECT_SHELL_TRAP                   395
 #define EFFECT_DIRE_CLAW                    396
+#define EFFECT_STONE_AXE                    397
 
-#define NUM_BATTLE_MOVE_EFFECTS             397
+#define NUM_BATTLE_MOVE_EFFECTS             398
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H
