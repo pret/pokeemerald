@@ -10073,6 +10073,42 @@ static void Cmd_various(void)
             return;
         }
         break;
+    case VARIOUS_SWAP_STATS:
+        {
+            u8 statId = T1_READ_8(gBattlescriptCurrInstr + 3);
+            u16 temp;
+
+            switch (statId)
+            {
+            case STAT_HP:
+                SWAP(gBattleMons[gBattlerAttacker].hp, gBattleMons[gBattlerTarget].hp, temp);
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
+                break;
+            case STAT_ATK:
+                SWAP(gBattleMons[gBattlerAttacker].attack, gBattleMons[gBattlerTarget].attack, temp);
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
+                break;
+            case STAT_DEF:
+                SWAP(gBattleMons[gBattlerAttacker].defense, gBattleMons[gBattlerTarget].defense, temp);
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
+                break;
+            case STAT_SPEED:
+                SWAP(gBattleMons[gBattlerAttacker].speed, gBattleMons[gBattlerTarget].speed, temp);
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
+                break;
+            case STAT_SPATK:
+                SWAP(gBattleMons[gBattlerAttacker].spAttack, gBattleMons[gBattlerTarget].spAttack, temp);
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
+                break;
+            case STAT_SPDEF:
+                SWAP(gBattleMons[gBattlerAttacker].spDefense, gBattleMons[gBattlerTarget].spDefense, temp);
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
+                break;
+            default:
+                break;
+            }
+        }
+        break;
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;
