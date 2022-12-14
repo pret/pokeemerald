@@ -3498,10 +3498,10 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     gProtectStructs[gBattlerTarget].banefulBunkered = FALSE;
                     gProtectStructs[gBattlerTarget].obstructed = FALSE;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    if (gCurrentMove == MOVE_FEINT)
-                        gBattlescriptCurrInstr = BattleScript_MoveEffectFeint;
-                    else if (gCurrentMove == MOVE_HYPERSPACE_FURY)
+                    if (gCurrentMove == MOVE_HYPERSPACE_FURY)
                         gBattlescriptCurrInstr = BattleScript_HyperspaceFuryRemoveProtect;
+                    else
+                        gBattlescriptCurrInstr = BattleScript_MoveEffectFeint;
                 }
                 break;
             case MOVE_EFFECT_SPECTRAL_THIEF:
