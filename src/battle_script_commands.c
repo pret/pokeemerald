@@ -2082,7 +2082,8 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
                 #if B_AFFECTION_MECHANICS == TRUE
                     + 2 * (GetBattlerFriendshipScore(gBattlerAttacker) >= FRIENDSHIP_200_TO_254)
                 #endif
-                    + (abilityAtk == ABILITY_SUPER_LUCK);
+                    + (abilityAtk == ABILITY_SUPER_LUCK)
+                    + (gBattleMoves[move].effect == EFFECT_TRIPLE_ARROWS);
 
         if (critChance >= ARRAY_COUNT(sCriticalHitChance))
             critChance = ARRAY_COUNT(sCriticalHitChance) - 1;
@@ -3797,6 +3798,35 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SPIKESSCATTERED;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_SpikesActivates;
+                }
+                break;
+            case MOVE_EFFECT_TRIPLE_ARROWS:
+                {
+                    u32 randomChance = Random() % 100;
+                    if (randomChance < 50) // Chance to reduce a foe's Defense by 1 stat stage.
+                    {
+                        BattleScriptPush(gBattlescriptCurrInstr + 1);
+                        gBattlescriptCurrInstr = BattleScript_DefDown;
+                    }
+                    if (randomChance >= 50 && randomChance <= 80) // Chance to cause a foe to flinch.
+                    {
+                        if (battlerAbility == ABILITY_INNER_FOCUS)
+                        {
+                            if (primary == TRUE || certain == MOVE_EFFECT_CERTAIN)
+                            {
+                                gLastUsedAbility = ABILITY_INNER_FOCUS;
+                                gBattlerAbility = gEffectBattler;
+                                RecordAbilityBattle(gEffectBattler, ABILITY_INNER_FOCUS);
+                                gBattlescriptCurrInstr = BattleScript_FlinchPrevention;
+                            }
+                        }
+                        else
+                        {
+                            if (GetBattlerTurnOrderNum(gEffectBattler) > gCurrentTurnActionNumber)
+                                gBattleMons[gEffectBattler].status2 |= sStatusFlagsForMoveEffects[MOVE_EFFECT_FLINCH];
+                            gBattlescriptCurrInstr++;
+                        }
+                    }
                 }
                 break;
             }
