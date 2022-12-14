@@ -8780,6 +8780,10 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         if (IsBattlerTerrainAffected(gBattlerAttacker, STATUS_FIELD_ELECTRIC_TERRAIN))
             MulModifier(&basePower, UQ_4_12(1.5));
         break;
+    case EFFECT_INFERNAL_PARADE:
+        if (gBattleMons[battlerDef].status1 & STATUS1_ANY)
+            basePower *= 2;
+        break;
     }
 
     // Move-specific base power changes
