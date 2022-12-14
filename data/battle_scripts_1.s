@@ -425,6 +425,25 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectBarbBarrage             @ EFFECT_BARB_BARRAGE
 	.4byte BattleScript_EffectTripleArrows            @ EFFECT_TRIPLE_ARROWS
 	.4byte BattleScript_EffectInfernalParade          @ EFFECT_INFERNAL_PARADE
+	.4byte BattleScript_EffectTakeHeart               @ EFFECT_TAKE_HEART
+
+BattleScript_EffectTakeHeart::
+@	TO DO: Use modifybattlerstatstage here once PR #2470 is merged.
+	printstring STRINGID_EMPTYSTRING3
+	playstatchangeanimation BS_ATTACKER, BIT_SPATK, 0
+	setstatchanger STAT_SPATK, 1, FALSE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_TakeHeartTrySpDef
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_TakeHeartTrySpDef:
+	printstring STRINGID_EMPTYSTRING3
+	playstatchangeanimation BS_ATTACKER, BIT_SPDEF, 0
+	setstatchanger STAT_SPDEF, 1, FALSE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_TakeHeart_MoveEnd
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_TakeHeart_MoveEnd:
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectInfernalParade::
 	setmoveeffect MOVE_EFFECT_BURN
