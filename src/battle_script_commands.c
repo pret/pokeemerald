@@ -2196,17 +2196,17 @@ u8 GetBattlerTurnOrderNum(u8 battlerId)
     return i;
 }
 
-#define INCREMENT_RESET_RETURN                  \
-{                                               \
-    gBattlescriptCurrInstr++;                   \
-    gBattleCommunication[MOVE_EFFECT_BYTE] = 0; \
-    return;                                     \
+#define INCREMENT_RESET_RETURN                                 \
+{                                                              \
+    gBattlescriptCurrInstr++;                                  \
+    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_NONE; \
+    return;                                                    \
 }
 
-#define RESET_RETURN                            \
-{                                               \
-    gBattleCommunication[MOVE_EFFECT_BYTE] = 0; \
-    return;                                     \
+#define RESET_RETURN                                           \
+{                                                              \
+    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_NONE; \
+    return;                                                    \
 }
 
 void SetMoveEffect(bool8 primary, u8 certain)
@@ -2487,7 +2487,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
         }
         else if (statusChanged == FALSE)
         {
-            gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
+            gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_NONE;
             gBattlescriptCurrInstr++;
             return;
         }
@@ -2876,7 +2876,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
         }
     }
 
-    gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
+    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_NONE;
 }
 
 static void Cmd_seteffectwithchance(void)
@@ -2908,7 +2908,7 @@ static void Cmd_seteffectwithchance(void)
         gBattlescriptCurrInstr++;
     }
 
-    gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
+    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_NONE;
     gBattleScripting.multihitMoveEffect = 0;
 }
 
@@ -2931,7 +2931,7 @@ static void Cmd_clearstatusfromeffect(void)
     else
         gBattleMons[gActiveBattler].status2 &= (~sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]]);
 
-    gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
+    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_NONE;
     gBattlescriptCurrInstr += 2;
     gBattleScripting.multihitMoveEffect = 0;
 }
@@ -3594,7 +3594,7 @@ static void MoveValuesCleanUp(void)
     gMoveResultFlags = 0;
     gBattleScripting.dmgMultiplier = 1;
     gCritMultiplier = 1;
-    gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
+    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_NONE;
     gBattleCommunication[MISS_TYPE] = 0;
     gHitMarker &= ~HITMARKER_DESTINYBOND;
     gHitMarker &= ~HITMARKER_SYNCHRONISE_EFFECT;
