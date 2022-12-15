@@ -287,15 +287,15 @@ static const u8 sCursorMoveDestinations[(PARTY_SIZE * 2) + 1][4][PARTY_SIZE] =
 static const u8 sTradeMonSpriteCoords[(PARTY_SIZE * 2) + 1][2] =
 {
     // Player's party
-    {COL0_X, ROW0_Y },
-    {COL1_X, ROW0_Y },
+    {COL0_X, ROW0_Y},
+    {COL1_X, ROW0_Y},
     {COL0_X, ROW1_Y},
     {COL1_X, ROW1_Y},
     {COL0_X, ROW2_Y},
     {COL1_X, ROW2_Y},
     // Partners's party
-    {COL2_X, ROW0_Y },
-    {COL3_X, ROW0_Y },
+    {COL2_X, ROW0_Y},
+    {COL3_X, ROW0_Y},
     {COL2_X, ROW1_Y},
     {COL3_X, ROW1_Y},
     {COL2_X, ROW2_Y},
@@ -624,8 +624,8 @@ static const u8 sSelectedMonLevelGenderCoords[3][2] =
 static const u16 sPokeball_Pal[] = INCBIN_U16("graphics/trade/pokeball.gbapal");
 static const u8 sPokeball_Gfx[] = INCBIN_U8("graphics/trade/pokeball.4bpp");
 static const u8 sPokeballSymbol_Gfx[] = INCBIN_U8("graphics/trade/pokeball_symbol.8bpp"); // unused
-static const u16 sCrossingHighlightCable_Tilemap[] = INCBIN_U16("graphics/trade/crossing_highlight_cable.bin");
-static const u16 sTradeTilemap_PokeBallSymbol[] = INCBIN_U16("graphics/trade/pokeball_symbol_map.bin"); // unused?
+static const u16 sCableCloseup_Map[] = INCBIN_U16("graphics/trade/crossing_highlight_cable.bin");
+static const u16 sPokeballSymbol_Map[] = INCBIN_U16("graphics/trade/pokeball_symbol_map.bin"); // unused?
 static const u16 sUnusedPal1[] = INCBIN_U16("graphics/trade/unused1.gbapal");
 static const u16 sGba_Pal[] = INCBIN_U16("graphics/trade/gba.gbapal");
 static const u16 sUnusedPal2[] = INCBIN_U16("graphics/trade/unused2.gbapal");
@@ -638,11 +638,11 @@ static const u8 sGbaScreen_Gfx[] = INCBIN_U8("graphics/trade/gba_screen.4bpp");
 const u16 gTradePlatform_Tilemap[] = INCBIN_U16("graphics/trade/platform.bin");
 static const u8 sGbaAffine_Gfx[] = INCBIN_U8("graphics/trade/gba_affine.8bpp"); // Only the gfx for when the GBA is zooming in/out
 static const u8 sEmptyGfx[64] = {};
-static const u8 sGbaCable_AffineTilemap[] = INCBIN_U8("graphics/trade/gba_affine_map_cable.bin");
-static const u8 sGbaWireless_AffineTilemap[] = INCBIN_U8("graphics/trade/gba_affine_map_wireless.bin");
-static const u16 sGbaWireless_Tilemap[] = INCBIN_U16("graphics/trade/gba_map_wireless.bin");
-static const u16 sGbaCable_Tilemap[] = INCBIN_U16("graphics/trade/gba_map_cable.bin");
-static const u32 sCrossingHighlightWireless_Tilemap[] = INCBIN_U32("graphics/trade/crossing_highlight_wireless.bin.lz");
+static const u8 sGbaAffineMapCable[] = INCBIN_U8("graphics/trade/gba_affine_map_cable.bin");
+static const u8 sGbaAffineMapWireless[] = INCBIN_U8("graphics/trade/gba_affine_map_wireless.bin");
+static const u16 sGbaMapWireless[] = INCBIN_U16("graphics/trade/gba_map_wireless.bin");
+static const u16 sGbaMapCable[] = INCBIN_U16("graphics/trade/gba_map_cable.bin");
+static const u32 sWirelessCloseup_Map[] = INCBIN_U32("graphics/trade/crossing_highlight_wireless.bin.lz");
 static const u16 sWirelessSignalSend_Pal[] = INCBIN_U16("graphics/trade/wireless_signal_send.gbapal");
 static const u16 sWirelessSignalRecv_Pal[] = INCBIN_U16("graphics/trade/wireless_signal_receive.gbapal");
 static const u16 sWirelessSignalNone_Pal[] = INCBIN_U16("graphics/trade/wireless_signal_none.gbapal");
@@ -730,7 +730,7 @@ static const union AffineAnimCmd *const sAffineAnims_Pokeball[] =
 static const struct SpriteSheet sPokeBallSpriteSheet =
 {
     .data = sPokeball_Gfx,
-    .size = 0x600,
+    .size = sizeof(sPokeball_Gfx),
     .tag = GFXTAG_POKEBALL
 };
 
@@ -786,7 +786,7 @@ static const union AffineAnimCmd *const sAffineAnims_LinkMonGlow[] =
 static const struct SpriteSheet sSpriteSheet_LinkMonGlow =
 {
     .data = sLinkMonGlow_Gfx,
-    .size = 0x200,
+    .size = sizeof(sLinkMonGlow_Gfx),
     .tag = GFXTAG_LINK_MON_GLOW
 };
 
@@ -943,7 +943,7 @@ static const union AnimCmd *const sAnims_GbaScreen_Short[] =
 static const struct SpriteSheet sSpriteSheet_GbaScreen =
 {
     .data = sGbaScreen_Gfx,
-    .size = 0x1000,
+    .size = sizeof(sGbaScreen_Gfx),
     .tag = GFXTAG_GBA_SCREEN
 };
 
@@ -1166,7 +1166,7 @@ static const s8 sTradeBallVerticalVelocityTable[] =
      0,  0,  0,  1,  0,  1,  1,  2,  3
 };
 
-static const u8 sWirelessSignalTiming[][2] =
+static const u8 sWirelessSignalAnimParams[][2] =
 {
     { 0,  1},
     { 1,  1},

@@ -4,8 +4,6 @@
 #define TRADE_PLAYER  0
 #define TRADE_PARTNER 1
 
-#define LINK_TRADE_TIMEOUT 300
-
 // In-game Trade IDs
 #define INGAME_TRADE_SEEDOT 0
 #define INGAME_TRADE_PLUSLE 1
