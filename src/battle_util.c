@@ -3223,8 +3223,7 @@ u8 DoBattlerEndTurnEffects(void)
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_PLASMA_FISTS:
-            for (i = 0; i < gBattlersCount; i++)
-                gStatuses4[i] &= ~STATUS4_PLASMA_FISTS;
+            gStatuses4[gActiveBattler] &= ~STATUS4_PLASMA_FISTS;
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_BATTLER_COUNT:  // done
