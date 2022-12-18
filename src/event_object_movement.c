@@ -5492,6 +5492,41 @@ u8 GetDirectionToFace(s16 x, s16 y, s16 targetX, s16 targetY)
     return DIR_SOUTH;
 }
 
+// Uses the above, but script accessible, and uses localIds
+bool8 ScrFunc_GetDirectionToFace(struct ScriptContext *ctx) {
+    u16 *var = GetVarPointer(ScriptReadHalfword(ctx));
+    u8 id0 = GetObjectEventIdByLocalId(ScriptReadByte(ctx)); // source
+    u8 id1 = GetObjectEventIdByLocalId(ScriptReadByte(ctx)); // target
+    if (var == NULL)
+        return FALSE;
+    if (id0 >= OBJECT_EVENTS_COUNT || id1 >= OBJECT_EVENTS_COUNT)
+        *var = DIR_NONE;
+    else
+        *var = GetDirectionToFace(
+            gObjectEvents[id0].currentCoords.x,
+            gObjectEvents[id0].currentCoords.y,
+            gObjectEvents[id1].currentCoords.x,
+            gObjectEvents[id1].currentCoords.y);
+    return FALSE;
+}
+
+// Whether following pokemon is also the user of the field move
+// Intended to be called before the field effect itself
+bool8 ScrFunc_IsFollowerFieldMoveUser(struct ScriptContext *ctx) {
+    u16 *var = GetVarPointer(ScriptReadHalfword(ctx));
+    u16 userIndex = gFieldEffectArguments[0]; // field move user index
+    struct Pokemon *follower = GetFirstLiveMon();
+    struct ObjectEvent *obj = GetFollowerObject();
+    if (var == NULL)
+        return FALSE;
+    *var = FALSE;
+    if (follower && obj && !obj->invisible) {
+        u16 followIndex = ((u32)follower - (u32)gPlayerParty) / sizeof(struct Pokemon);
+        *var = userIndex == followIndex;
+    } else
+    return FALSE;
+}
+
 void SetTrainerMovementType(struct ObjectEvent *objectEvent, u8 movementType)
 {
     objectEvent->movementType = movementType;
