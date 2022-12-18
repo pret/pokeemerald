@@ -9351,49 +9351,49 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         return;
     }
-      	case VARIOUS_TEATIME_TARGETS:
-		// Gets the battlers to be affected by teatime. If there are none, print 'But it failed!'
-	{
-		u32 count = 0;
-		for (i = 0; i < gBattlersCount; i++)
-		{
-			if (IsTeatimeAffected(i))
-			{
-				count++;
-			}
-		}
-			if (count == 0) {
-				gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);   // Teatime fails
-			}
-			else {
-				gBattlescriptCurrInstr += 7;
-			}
-	}
-	    return;
-	case VARIOUS_TEATIME_INVUL:
-		if (ItemId_GetPocket(gBattleMons[gActiveBattler].item) == POCKET_BERRIES && !(gStatuses3[gBattlerTarget] & (STATUS3_SEMI_INVULNERABLE)))
-			gBattlescriptCurrInstr += 7;
-		else
-			gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-		return;
-	case VARIOUS_JUMP_IF_ROD:
-		if (IsAbilityRodAffected())
-			gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-		else
-			gBattlescriptCurrInstr += 7;
-		return;
-	case VARIOUS_JUMP_IF_MOTOR:
-		if (IsAbilityMotorAffected())
-			gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-		else
-			gBattlescriptCurrInstr += 7;
-		return;
-	case VARIOUS_JUMP_IF_ABSORB:
-		if (IsAbilityAbsorbAffected())
-			gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-		else
-			gBattlescriptCurrInstr += 7;
-		return;      
+     case VARIOUS_TEATIME_TARGETS:
+         // Gets the battlers to be affected by teatime. If there are none, print 'But it failed!'
+        {
+            u32 count = 0;
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (IsTeatimeAffected(i))
+                {
+                    count++;
+                }
+                }
+                if (count == 0) {
+                    gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);   // Teatime fails
+                }
+                else {
+                    gBattlescriptCurrInstr += 7;
+                }
+        }
+        return;
+     case VARIOUS_TEATIME_INVUL:
+        if (ItemId_GetPocket(gBattleMons[gActiveBattler].item) == POCKET_BERRIES && !(gStatuses3[gBattlerTarget] & (STATUS3_SEMI_INVULNERABLE)))
+            gBattlescriptCurrInstr += 7;
+        else
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        return;
+     case VARIOUS_JUMP_IF_ROD:
+        if (IsAbilityRodAffected())
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
+     case VARIOUS_JUMP_IF_MOTOR:
+        if (IsAbilityMotorAffected())
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
+     case VARIOUS_JUMP_IF_ABSORB:
+        if (IsAbilityAbsorbAffected())
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;      
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;
