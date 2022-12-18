@@ -414,10 +414,10 @@ BattleScript_EffectTeatime::
 	attackanimation
 	waitanimation
 BattleScript_TeatimeLoop:
-jumpifteainvulnerable BS_TARGET, BattleScript_Teatimevul
-jumpifrodaffected BS_TARGET, BattleScript_Teatimerod
-jumpifabsorbaffected BS_TARGET, BattleScript_Teatimesorb
-jumpifmotoraffected BS_TARGET, BattleScript_Teatimemotor
+	jumpifteainvulnerable BS_TARGET, BattleScript_Teatimevul
+	jumpifrodaffected BS_TARGET, BattleScript_Teatimerod
+	jumpifabsorbaffected BS_TARGET, BattleScript_Teatimesorb
+	jumpifmotoraffected BS_TARGET, BattleScript_Teatimemotor
 	orword gHitMarker, HITMARKER_NO_ANIMATIONS
 	setbyte sBERRY_OVERRIDE, TRUE   @ override the requirements for eating berries
 	consumeberry BS_TARGET, TRUE  @ consume the berry, then restore the item from changedItems
@@ -426,23 +426,23 @@ jumpifmotoraffected BS_TARGET, BattleScript_Teatimemotor
 	moveendto MOVEEND_NEXT_TARGET
 	jumpifnexttargetvalid BattleScript_TeatimeLoop
 	moveendcase MOVEEND_CLEAR_BITS
-    goto BattleScript_MoveEnd
+	goto BattleScript_MoveEnd
 BattleScript_Teatimevul:
 	moveendto MOVEEND_NEXT_TARGET
 	jumpifnexttargetvalid BattleScript_TeatimeLoop
 	moveendcase MOVEEND_CLEAR_BITS
-    goto BattleScript_MoveEnd
+	goto BattleScript_MoveEnd
 BattleScript_Teatimesorb:
 	copybyte gBattlerAbility, gBattlerTarget
 	call BattleScript_AbilityPopUp
 	moveendto MOVEEND_NEXT_TARGET
 	jumpifnexttargetvalid BattleScript_TeatimeLoop
 	moveendcase MOVEEND_CLEAR_BITS
-    goto BattleScript_MoveEnd
+	goto BattleScript_MoveEnd
 BattleScript_Teatimerod:
 	copybyte gBattlerAbility, gBattlerTarget
 	call BattleScript_AbilityPopUp
-    playstatchangeanimation BS_TARGET, BIT_SPATK, STAT_CHANGE_BY_TWO
+	playstatchangeanimation BS_TARGET, BIT_SPATK, STAT_CHANGE_BY_TWO
 	setstatchanger STAT_SPATK, 1, FALSE
 	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_TeatimeBuffer
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_TeatimeBuffer
@@ -451,11 +451,11 @@ BattleScript_Teatimerod:
 	moveendto MOVEEND_NEXT_TARGET
 	jumpifnexttargetvalid BattleScript_TeatimeLoop
 	moveendcase MOVEEND_CLEAR_BITS
-    goto BattleScript_MoveEnd
+	goto BattleScript_MoveEnd
 BattleScript_Teatimemotor:
 	copybyte gBattlerAbility, gBattlerTarget
 	call BattleScript_AbilityPopUp
-    playstatchangeanimation BS_TARGET, BIT_SPEED, STAT_CHANGE_BY_TWO
+	playstatchangeanimation BS_TARGET, BIT_SPEED, STAT_CHANGE_BY_TWO
 	setstatchanger STAT_SPEED, 1, FALSE
 	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_TeatimeBuffer
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_TeatimeBuffer
@@ -464,12 +464,12 @@ BattleScript_Teatimemotor:
 	moveendto MOVEEND_NEXT_TARGET
 	jumpifnexttargetvalid BattleScript_TeatimeLoop
 	moveendcase MOVEEND_CLEAR_BITS
-    goto BattleScript_MoveEnd
+	goto BattleScript_MoveEnd
 BattleScript_TeatimeBuffer:
 	moveendto MOVEEND_NEXT_TARGET
 	jumpifnexttargetvalid BattleScript_TeatimeLoop
 	moveendcase MOVEEND_CLEAR_BITS
-    goto BattleScript_MoveEnd
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectShellSideArm:
 	shellsidearmcheck
