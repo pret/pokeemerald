@@ -10671,9 +10671,6 @@ static u16 ReverseStatChangeMoveEffect(u16 moveEffect)
     }
 }
 
-#define STAT_CHANGE_WORKED      0
-#define STAT_CHANGE_DIDNT_WORK  1
-
 static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr)
 {
     bool32 certain = FALSE;
