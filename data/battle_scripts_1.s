@@ -416,7 +416,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDoubleShock             @ EFFECT_DOUBLE_SHOCK
 	.4byte BattleScript_EffectSpecialAttackUpHit      @ EFFECT_SPECIAL_ATTACK_UP_HIT
 	.4byte BattleScript_EffectVictoryDance            @ EFFECT_VICTORY_DANCE
-  .4byte BattleScript_EffectTeatime                 @ EFFECT_TEATIME
+	.4byte BattleScript_EffectTeatime                     @ EFFECT_TEATIME
 
 BattleScript_EffectTeatime::
 	attackcanceler
