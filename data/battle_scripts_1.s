@@ -2732,10 +2732,10 @@ BattleScript_EffectSpeedSwap:
 	attackstring
 	ppreduce
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
-	swapstatstages STAT_SPEED
+	swapstats STAT_SPEED
 	attackanimation
 	waitanimation
-	printstring STRINGID_PKMNSWITCHEDSTATCHANGES
+	printstring STRINGID_ATTACKERSWITCHEDSTATWITHTARGET
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
