@@ -246,7 +246,11 @@
 #define VARIOUS_CAN_TELEPORT                        155
 #define VARIOUS_GET_BATTLER_SIDE                    156
 #define VARIOUS_CHECK_PARENTAL_BOND_COUNTER         157
-#define VARIOUS_TEATIME_TARGETS                     158
+#define VARIOUS_JUMP_IF_ROD                         158
+#define VARIOUS_JUMP_IF_ABSORB                      159
+#define VARIOUS_JUMP_IF_MOTOR                       160
+#define VARIOUS_TEATIME_INVUL                       161
+#define VARIOUS_TEATIME_TARGETS                     162
 
 
 // Cmd_manipulatedamage
