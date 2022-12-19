@@ -457,7 +457,7 @@ BattleScript_Teatimerod:
 	call BattleScript_AbilityPopUp
 	playstatchangeanimation BS_TARGET, BIT_SPATK, STAT_CHANGE_BY_TWO
 	setstatchanger STAT_SPATK, 1, FALSE
-	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_TeatimeBuffer
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_TeatimeBuffer
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_TeatimeBuffer
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
@@ -470,7 +470,7 @@ BattleScript_Teatimemotor:
 	call BattleScript_AbilityPopUp
 	playstatchangeanimation BS_TARGET, BIT_SPEED, STAT_CHANGE_BY_TWO
 	setstatchanger STAT_SPEED, 1, FALSE
-	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_TeatimeBuffer
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_TeatimeBuffer
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_TeatimeBuffer
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
