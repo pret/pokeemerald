@@ -16,7 +16,6 @@
 #include "decompress.h"
 #include "constants/songs.h"
 #include "constants/items.h"
-#include "constants/maps.h"
 
 #define TAG_SWAP_LINE 109
 
@@ -33,7 +32,7 @@ static const struct OamData sOamData_SwapLine =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -72,12 +71,12 @@ static const union AnimCmd *const sAnims_SwapLine[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_SwapLine =
 {
-    gBagSwapLineGfx, 0x100, TAG_SWAP_LINE
+    gSwapLineGfx, 0x100, TAG_SWAP_LINE
 };
 
 static const struct CompressedSpritePalette sSpritePalette_SwapLine =
 {
-    gBagSwapLinePal, TAG_SWAP_LINE
+    gSwapLinePal, TAG_SWAP_LINE
 };
 
 static const struct SpriteTemplate sSpriteTemplate_SwapLine =
@@ -99,21 +98,21 @@ void ResetVramOamAndBgCntRegs(void)
     SetGpuReg(REG_OFFSET_BG2CNT, 0);
     SetGpuReg(REG_OFFSET_BG1CNT, 0);
     SetGpuReg(REG_OFFSET_BG0CNT, 0);
-    CpuFill16(0, (void*) VRAM, VRAM_SIZE);
-    CpuFill32(0, (void*) OAM, OAM_SIZE);
-    CpuFill16(0, (void*) PLTT, PLTT_SIZE);
+    CpuFill16(0, (void *) VRAM, VRAM_SIZE);
+    CpuFill32(0, (void *) OAM, OAM_SIZE);
+    CpuFill16(0, (void *) PLTT, PLTT_SIZE);
 }
 
 void ResetAllBgsCoordinates(void)
 {
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
-    ChangeBgX(2, 0, 0);
-    ChangeBgY(2, 0, 0);
-    ChangeBgX(3, 0, 0);
-    ChangeBgY(3, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
+    ChangeBgX(2, 0, BG_COORD_SET);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    ChangeBgX(3, 0, BG_COORD_SET);
+    ChangeBgY(3, 0, BG_COORD_SET);
 }
 
 void SetVBlankHBlankCallbacksToNull(void)
@@ -131,7 +130,7 @@ void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 tileNum, u8 palet
         StringExpandPlaceholders(gStringVar4, string);
 
     gTextFlags.canABSpeedUpPrint = 1;
-    AddTextPrinterParameterized2(windowId, fontId, gStringVar4, textSpeed, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(windowId, fontId, gStringVar4, textSpeed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     sMessageNextTask = taskFunc;
     gTasks[taskId].func = Task_ContinueTaskAfterMessagePrints;
 }
@@ -154,7 +153,7 @@ void DoYesNoFuncWithChoice(u8 taskId, const struct YesNoFuncTable *data)
     gTasks[taskId].func = Task_CallYesOrNoCallback;
 }
 
-void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 arg2, u8 arg3, u8 arg4, u16 tileStart, u8 palette, const struct YesNoFuncTable *yesNo)
+void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 unused1, u8 unused2, u8 unused3, u16 tileStart, u8 palette, const struct YesNoFuncTable *yesNo)
 {
     CreateYesNoMenu(template, tileStart, palette, 0);
     sYesNo = *yesNo;
@@ -177,17 +176,18 @@ static void Task_CallYesOrNoCallback(u8 taskId)
     }
 }
 
-bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
+// Returns TRUE if the quantity was changed, FALSE if it remained the same
+bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity, u16 max)
 {
-    s16 valBefore = (*arg0);
+    s16 valBefore = *quantity;
 
-    if ((JOY_REPEAT(DPAD_ANY)) == DPAD_UP)
+    if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
     {
-        (*arg0)++;
-        if ((*arg0) > arg1)
-            (*arg0) = 1;
+        (*quantity)++;
+        if (*quantity > max)
+            *quantity = 1;
 
-        if ((*arg0) == valBefore)
+        if (*quantity == valBefore)
         {
             return FALSE;
         }
@@ -197,13 +197,13 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
             return TRUE;
         }
     }
-    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_DOWN)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
     {
-        (*arg0)--;
-        if ((*arg0) <= 0)
-            (*arg0) = arg1;
+        (*quantity)--;
+        if (*quantity <= 0)
+            *quantity = max;
 
-        if ((*arg0) == valBefore)
+        if (*quantity == valBefore)
         {
             return FALSE;
         }
@@ -213,13 +213,13 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
             return TRUE;
         }
     }
-    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_RIGHT)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT)
     {
-        (*arg0) += 10;
-        if ((*arg0) > arg1)
-            (*arg0) = arg1;
+        *quantity += 10;
+        if (*quantity > max)
+            *quantity = max;
 
-        if ((*arg0) == valBefore)
+        if (*quantity == valBefore)
         {
             return FALSE;
         }
@@ -229,13 +229,13 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
             return TRUE;
         }
     }
-    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_LEFT)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT)
     {
-        (*arg0) -= 10;
-        if ((*arg0) <= 0)
-            (*arg0) = 1;
+        *quantity -= 10;
+        if (*quantity <= 0)
+            *quantity = 1;
 
-        if ((*arg0) == valBefore)
+        if (*quantity == valBefore)
         {
             return FALSE;
         }
@@ -277,52 +277,46 @@ u8 GetLRKeysPressedAndHeld(void)
 
 bool8 IsHoldingItemAllowed(u16 itemId)
 {
-    // Enigma Berry can't be held in link areas
-    if (itemId != ITEM_ENIGMA_BERRY)
-        return TRUE;
-    else if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRADE_CENTER) 
-          && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRADE_CENTER))
+    // e-Reader Enigma Berry can't be held in link areas
+    if (itemId == ITEM_ENIGMA_BERRY_E_READER
+     && ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRADE_CENTER)
+       && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRADE_CENTER))
+       || InUnionRoom() == TRUE))
         return FALSE;
-    else if (InUnionRoom() != TRUE)
-        return TRUE;
     else
-        return FALSE;
+        return TRUE;
 }
 
 bool8 IsWritingMailAllowed(u16 itemId)
 {
-    if (IsUpdateLinkStateCBActive() != TRUE && InUnionRoom() != TRUE)
+    if ((IsOverworldLinkActive() == TRUE || InUnionRoom() == TRUE) && ItemIsMail(itemId) == TRUE)
+        return FALSE;
+    else
         return TRUE;
-    else if (ItemIsMail(itemId) != TRUE)
+}
+
+bool8 MenuHelpers_IsLinkActive(void)
+{
+    if (IsOverworldLinkActive() == TRUE || gReceivedRemoteLinkPlayers == 1)
         return TRUE;
     else
         return FALSE;
 }
 
-bool8 MenuHelpers_LinkSomething(void)
+static bool8 IsActiveOverworldLinkBusy(void)
 {
-    if (IsUpdateLinkStateCBActive() == TRUE || gReceivedRemoteLinkPlayers == 1)
-        return TRUE;
-    else
+    if (!MenuHelpers_IsLinkActive())
         return FALSE;
+    else
+        return Overworld_IsRecvQueueAtMax();
 }
 
-static bool8 sub_81221D0(void)
+bool8 MenuHelpers_ShouldWaitForLinkRecv(void)
 {
-    if (!MenuHelpers_LinkSomething())
-        return FALSE;
-    else
-        return Overworld_LinkRecvQueueLengthMoreThan2();
-}
-
-bool8 MenuHelpers_CallLinkSomething(void)
-{
-    if (sub_81221D0() == TRUE)
+    if (IsActiveOverworldLinkBusy() == TRUE || IsLinkRecvQueueAtOverworldMax() == TRUE )
         return TRUE;
-    else if (IsLinkRecvQueueLengthAtLeast3() != TRUE)
-        return FALSE;
     else
-        return TRUE;
+        return FALSE;
 }
 
 void SetItemListPerPageCount(struct ItemSlot *slots, u8 slotsCount, u8 *pageItems, u8 *totalItems, u8 maxPerPage)
@@ -440,12 +434,16 @@ void SetSwapLineSpritesInvisibility(u8 *spriteIds, u8 count, bool8 invisible)
 void UpdateSwapLineSpritesPos(u8 *spriteIds, u8 count, s16 x, u16 y)
 {
     u8 i;
-    bool8 unknownBit = count & 0x80;
-    count &= ~(0x80);
+    bool8 hasMargin = count & SWAP_LINE_HAS_MARGIN;
+    count &= ~SWAP_LINE_HAS_MARGIN;
 
     for (i = 0; i < count; i++)
     {
-        if (i == count - 1 && unknownBit)
+        // If the list menu has a right margin, the swap line
+        // shouldn't extend all the way to the edge of the screen.
+        // If this is the last sprite in the line, move it a bit
+        // to the left to keep it out of the margin.
+        if (i == count - 1 && hasMargin)
             gSprites[spriteIds[i]].x2 = x - 8;
         else
             gSprites[spriteIds[i]].x2 = x;

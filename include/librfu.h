@@ -30,12 +30,12 @@
     Calculate the number of the transferable DMA count based on this 42 cycles and the access cycles of the destination and source.
     For example, if both the CPU internal RAM --> VRAM have a one cycle access, then a 21 count DMA can occur.
 
-  
-  If RFU is used outside of these restrictions, problems, such as the loss of data caused by the failure of the AGB, as a clock slave, 
+
+  If RFU is used outside of these restrictions, problems, such as the loss of data caused by the failure of the AGB, as a clock slave,
   to notify that data has been received from the RFU, will occur.
   When this problem occurs, the REQ callback will send a REQ_commandID=ID_CLOCK_SLAVE_MS_CHANGE_ERROR_BY_DMA_REQ notification.
    (When using Link Manager, the LMAN call back will send a LMAN_msg=LMAN_MSG_CLOCK_SLAVE_MS_CHANGE_ERROR_BY_DMA notification.)
-  
+
 */
 
 // REQ-COMMAND (STWI) ID CODE LIST
@@ -137,7 +137,7 @@
 // Definition Data Returned by Return Values for Library Functions
 // *******************************************************
 
-// The function doesn't have return value. 
+// The function doesn't have return value.
 // Value of u8 *status for rfu_REQ_pollConnectParent (Connection Trial Status)
 // #define CP_STATUS_DONE                  0x00               // Connection successful
 // #define CP_STATUS_IN_PROCESS            0x01               // Connecting
@@ -145,7 +145,7 @@
 // #define CP_STATUS_DISCONNECTED          0x03               // Disconnected by parent device while connecting
 // #define CP_STATUS_UNKNOWN               0xff               // Cannot read status due to REQ-API execution error
 
-// The function doesn't exist. 
+// The function doesn't exist.
 // Value of u8 *status argument for rfu_REQ_pollRecoveryConnect (Link Restore Status)
 // #define RC_STATUS_DONE                  0x00               // Connection restore successful
 // #define RC_STATUS_FAILED                0x01               // Connection restore failure (meaningless to try anymore)
@@ -324,7 +324,7 @@ struct STWIStatus
     vu8 sending;
 };
 
-// This struct is used as u8 array in SDK. 
+// This struct is used as u8 array in SDK.
 struct RfuIntrStruct
 {
     union RfuPacket rxPacketAlloc;
@@ -475,7 +475,7 @@ extern struct RfuSlotStatusUNI *gRfuSlotStatusUNI[RFU_CHILD_MAX];
 // librfu_sio32id
 s32 AgbRFU_checkID(u8 maxTries);
 
-// Arguments with "bm..." specify slots of the form (0x01 << slot number) that are the object of a function operation. 
+// Arguments with "bm..." specify slots of the form (0x01 << slot number) that are the object of a function operation.
 
 // librfu_rfu
 // API Initialization and Initial Settings

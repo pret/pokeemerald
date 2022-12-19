@@ -31,7 +31,7 @@ se_m_sketch_1:
 	.byte		VOICE , 31
 	.byte		VOL   , 40*se_m_sketch_mvl/mxv
 	.byte		BEND  , c_v-1
-	.byte		N03   , Cs5 
+	.byte		N03   , Cs5
 	.byte	W01
 	.byte		VOL   , 64*se_m_sketch_mvl/mxv
 	.byte		PAN   , c_v-6
@@ -44,7 +44,7 @@ se_m_sketch_1:
 	.byte		VOL   , 110*se_m_sketch_mvl/mxv
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+0
-	.byte		N02   , As5 
+	.byte		N02   , As5
 	.byte	W01
 	.byte		BEND  , c_v+12
 	.byte	W01

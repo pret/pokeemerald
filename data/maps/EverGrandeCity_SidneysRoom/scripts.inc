@@ -12,8 +12,7 @@ EverGrandeCity_SidneysRoom_OnTransition:
 
 EverGrandeCity_SidneysRoom_OnLoad:
 	call_if_set FLAG_DEFEATED_ELITE_4_SIDNEY, EverGrandeCity_SidneysRoom_EventScript_ResetAdvanceToNextRoom
-	compare VAR_ELITE_4_STATE, 1
-	call_if_eq EverGrandeCity_SidneysRoom_EventScript_CloseDoor
+	call_if_eq VAR_ELITE_4_STATE, 1, EverGrandeCity_SidneysRoom_EventScript_CloseDoor
 	end
 
 EverGrandeCity_SidneysRoom_EventScript_ResetAdvanceToNextRoom::

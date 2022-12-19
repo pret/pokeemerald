@@ -33,11 +33,11 @@ extern const struct CompressedSpriteSheet gSpriteSheet_CreditsRivalBrendan[];
 extern const struct CompressedSpriteSheet gSpriteSheet_CreditsRivalMay[];
 extern const struct SpritePalette gSpritePalettes_Credits[];
 
-void LoadIntroPart2Graphics(u8 scene);
-void SetIntroPart2BgCnt(u8 a);
+void LoadIntroPart2Graphics(u8 scenery);
+void SetIntroPart2BgCnt(u8 scenery);
 void LoadCreditsSceneGraphics(u8);
 void SetCreditsSceneBgCnt(u8);
-u8 CreateBicycleBgAnimationTask(u8 a, u16 b, u16 c, u16 d);
+u8 CreateBicycleBgAnimationTask(u8 mode, u16 bg1Speed, u16 bg2Speed, u16 bg3Speed);
 void CycleSceneryPalette(u8);
 u8 CreateIntroBrendanSprite(s16 x, s16 y);
 u8 CreateIntroMaySprite(s16 x, s16 y);

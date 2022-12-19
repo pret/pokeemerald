@@ -18,10 +18,8 @@ FallarborTown_BattleTentBattleRoom_OnTransition:
 
 FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfx::
 	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale
-	compare VAR_RESULT, FEMALE
-	goto_if_eq FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale
+	goto_if_eq VAR_RESULT, MALE, FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale
+	goto_if_eq VAR_RESULT, FEMALE, FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale
 	return
 
 FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale::
@@ -44,8 +42,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_EnterRoom::
 	applymovement LOCALID_PLAYER, FallarborTown_BattleTentBattleRoom_Movement_PlayerEnter
 	waitmovement 0
 	frontier_get FRONTIER_DATA_BATTLE_NUM
-	compare VAR_RESULT, 0
-	goto_if_ne FallarborTown_BattleTentBattleRoom_EventScript_ResumeChallenge
+	goto_if_ne VAR_RESULT, 0, FallarborTown_BattleTentBattleRoom_EventScript_ResumeChallenge
 FallarborTown_BattleTentBattleRoom_EventScript_NextOpponentEnter::
 	tower_setopponent
 	addobject LOCALID_OPPONENT
@@ -71,7 +68,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_NextOpponentEnter::
 FallarborTown_BattleTentBattleRoom_EventScript_WarpToLobbyLost::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
 	special LoadPlayerParty
-	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
+	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 6, 6
 	waitstate
 
 FallarborTown_BattleTentBattleRoom_EventScript_DefeatedOpponent::
@@ -103,10 +100,8 @@ FallarborTown_BattleTentBattleRoom_EventScript_IncrementBattleNum::
 	special HealPlayerParty
 FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge::
 	frontier_get FRONTIER_DATA_BATTLE_NUM
-	compare VAR_RESULT, 1
-	call_if_eq FallarborTown_BattleTentBattleRoom_EventScript_ReadyFor2ndOpponent
-	compare VAR_RESULT, 2
-	call_if_eq FallarborTown_BattleTentBattleRoom_EventScript_ReadyFor3rdOpponent
+	call_if_eq VAR_RESULT, 1, FallarborTown_BattleTentBattleRoom_EventScript_ReadyFor2ndOpponent
+	call_if_eq VAR_RESULT, 2, FallarborTown_BattleTentBattleRoom_EventScript_ReadyFor3rdOpponent
 	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, FallarborTown_BattleTentBattleRoom_EventScript_ContinueChallenge
@@ -142,13 +137,12 @@ FallarborTown_BattleTentBattleRoom_EventScript_WarpToLobbyWon::
 	delay 60
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
 	special LoadPlayerParty
-	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
+	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 6, 6
 	waitstate
 
 @ Unreachable code block? The flow into the next block also doesnt make sense
 	arena_get ARENA_DATA_WIN_STREAK
-	compare VAR_RESULT, MAX_STREAK
-	goto_if_eq FallarborTown_BattleTentBattleRoom_EventScript_IncrementBattleNum
+	goto_if_eq VAR_RESULT, MAX_STREAK, FallarborTown_BattleTentBattleRoom_EventScript_IncrementBattleNum
 	addvar VAR_RESULT, 1
 	arena_set ARENA_DATA_WIN_STREAK, VAR_RESULT
 @ See above
@@ -185,15 +179,15 @@ FallarborTown_BattleTentBattleRoom_Movement_PlayerEnter:
 	walk_up
 	walk_up
 	walk_up
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 FallarborTown_BattleTentBattleRoom_Movement_PlayerFaceBattle:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 FallarborTown_BattleTentBattleRoom_Movement_PlayerFaceAttendant:
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 FallarborTown_BattleTentBattleRoom_Movement_OpponentEnter:
@@ -201,7 +195,7 @@ FallarborTown_BattleTentBattleRoom_Movement_OpponentEnter:
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 @ Unused
@@ -225,14 +219,14 @@ FallarborTown_BattleTentBattleRoom_Movement_AttendantApproachPlayer:
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 FallarborTown_BattleTentBattleRoom_Movement_AttendantReturnToPos:
 	walk_up
 	walk_up
 	walk_up
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 FallarborTown_BattleTentBattleRoom_OnWarp:

@@ -34,7 +34,7 @@ se_m_spit_up_1:
 	.byte	W01
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+0
-	.byte		N03   , Gn4 
+	.byte		N03   , Gn4
 	.byte	W02
 	.byte		PAN   , c_v-7
 	.byte		BEND  , c_v+15
@@ -63,7 +63,7 @@ se_m_spit_up_2:
 	.byte		N03   , En3 , v052
 	.byte	W03
 	.byte	W01
-	.byte		N03   
+	.byte		N03
 	.byte	W02
 	.byte	W03
 	.byte		        En3 , v032

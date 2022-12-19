@@ -4,11 +4,10 @@ MossdeepCity_House1_MapScripts::
 MossdeepCity_House1_EventScript_BlackBelt::
 	lock
 	faceplayer
-	bufferleadmonspeciesname 0
+	bufferleadmonspeciesname STR_VAR_1
 	msgbox MossdeepCity_House1_Text_HmmYourPokemon, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, GetPokeblockNameByMonNature
-	compare VAR_RESULT, 0
-	goto_if_eq MossdeepCity_House1_EventScript_NeutralNature
+	goto_if_eq VAR_RESULT, 0, MossdeepCity_House1_EventScript_NeutralNature
 	msgbox MossdeepCity_House1_Text_ItLikesXPokeblocks, MSGBOX_DEFAULT
 	release
 	end

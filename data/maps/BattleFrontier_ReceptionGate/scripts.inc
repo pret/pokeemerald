@@ -42,9 +42,9 @@ BattleFrontier_ReceptionGate_EventScript_ScottScene::
 	msgbox BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier, MSGBOX_DEFAULT
 	msgbox BattleFrontier_ReceptionGate_Text_IfItIsntPlayerYouCame, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_GREETER, Common_Movement_WalkInPlaceFastestUp
-	applymovement LOCALID_GUIDE, Common_Movement_WalkInPlaceFastestUp
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_GREETER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_GUIDE, Common_Movement_WalkInPlaceFasterUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	playse SE_PIN
 	applymovement LOCALID_GREETER, Common_Movement_ExclamationMark
@@ -78,7 +78,7 @@ BattleFrontier_ReceptionGate_Movement_PlayerFaceScott:
 	delay_16
 	delay_16
 	delay_8
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 @ Unused
@@ -112,7 +112,7 @@ BattleFrontier_ReceptionGate_Movement_GreeterFaceScott:
 	delay_16
 	delay_16
 	delay_8
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 BattleFrontier_ReceptionGate_Movement_FacilityGuideFaceScott:
@@ -120,7 +120,7 @@ BattleFrontier_ReceptionGate_Movement_FacilityGuideFaceScott:
 	delay_16
 	delay_16
 	delay_8
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 BattleFrontier_ReceptionGate_EventScript_Greeter::

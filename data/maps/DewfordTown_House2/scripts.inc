@@ -7,8 +7,7 @@ DewfordTown_House2_EventScript_Man::
 	goto_if_set FLAG_RECEIVED_SILK_SCARF, DewfordTown_House2_EventScript_ExplainSilkScarf
 	msgbox DewfordTown_House2_Text_WantYouToHaveSilkScarf, MSGBOX_DEFAULT
 	giveitem ITEM_SILK_SCARF
-	compare VAR_RESULT, FALSE
-	goto_if_eq DewfordTown_House2_EventScript_NoRoomForScarf
+	goto_if_eq VAR_RESULT, FALSE, DewfordTown_House2_EventScript_NoRoomForScarf
 	setflag FLAG_RECEIVED_SILK_SCARF
 	release
 	end

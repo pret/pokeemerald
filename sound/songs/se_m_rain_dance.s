@@ -97,7 +97,7 @@ se_m_rain_dance_1:
 	.byte		        1*se_m_rain_dance_mvl/mxv
 	.byte		PAN   , c_v+4
 	.byte	W06
-	.byte		EOT   
+	.byte		EOT
 	.byte	FINE
 
 @******************************************************@

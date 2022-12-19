@@ -6,9 +6,8 @@ MauvilleCity_House2_EventScript_Woman::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_COIN_CASE, MauvilleCity_House2_EventScript_ReceivedCoinCase
 	msgbox MauvilleCity_House2_Text_BuyHarborMailAtSlateport, MSGBOX_DEFAULT
-	checkitem ITEM_HARBOR_MAIL, 1
-	compare VAR_RESULT, TRUE
-	goto_if_eq MauvilleCity_House2_EventScript_AskToTradeForHarborMail
+	checkitem ITEM_HARBOR_MAIL
+	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_House2_EventScript_AskToTradeForHarborMail
 	release
 	end
 
@@ -19,10 +18,8 @@ MauvilleCity_House2_EventScript_AskToTradeForHarborMail::
 	applymovement VAR_LAST_TALKED, Common_Movement_Delay48
 	waitmovement 0
 	msgbox MauvilleCity_House2_Text_TradeHarborMailForCoinCase, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq MauvilleCity_House2_EventScript_AcceptTrade
-	compare VAR_RESULT, NO
-	goto_if_eq MauvilleCity_House2_EventScript_DeclineTrade
+	goto_if_eq VAR_RESULT, YES, MauvilleCity_House2_EventScript_AcceptTrade
+	goto_if_eq VAR_RESULT, NO, MauvilleCity_House2_EventScript_DeclineTrade
 	end
 
 MauvilleCity_House2_EventScript_AcceptTrade::

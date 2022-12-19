@@ -13,7 +13,7 @@ Route112_OnTransition:
 Route112_EventScript_MagmaGrunts::
 	lockall
 	delay 40
-	applymovement LOCALID_GRUNT_1, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_GRUNT_1, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 20
 	msgbox Route112_Text_LeaderGoingToAwakenThing, MSGBOX_DEFAULT
@@ -21,7 +21,7 @@ Route112_EventScript_MagmaGrunts::
 	applymovement LOCALID_GRUNT_1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	delay 40
-	applymovement LOCALID_GRUNT_2, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_GRUNT_2, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	delay 20
 	msgbox Route112_Text_YeahWeNeedMeteorite, MSGBOX_DEFAULT
@@ -29,7 +29,7 @@ Route112_EventScript_MagmaGrunts::
 	applymovement LOCALID_GRUNT_2, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	delay 40
-	applymovement LOCALID_GRUNT_1, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_GRUNT_1, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 20
 	msgbox Route112_Text_OhThatsWhyCrewWentToFallarbor, MSGBOX_DEFAULT
@@ -37,7 +37,7 @@ Route112_EventScript_MagmaGrunts::
 	applymovement LOCALID_GRUNT_1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	delay 40
-	applymovement LOCALID_GRUNT_2, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_GRUNT_2, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	delay 20
 	msgbox Route112_Text_CantLetAnyonePassUntilTheyreBack, MSGBOX_DEFAULT
@@ -71,8 +71,7 @@ Route112_EventScript_Brice::
 Route112_EventScript_Trent::
 	trainerbattle_single TRAINER_TRENT_1, Route112_Text_TrentIntro, Route112_Text_TrentDefeat, Route112_EventScript_RegisterTrent
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route112_EventScript_RematchTrent
+	goto_if_eq VAR_RESULT, TRUE, Route112_EventScript_RematchTrent
 	msgbox Route112_Text_TrentPostBattle, MSGBOX_DEFAULT
 	release
 	end

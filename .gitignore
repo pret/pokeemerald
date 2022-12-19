@@ -3,6 +3,7 @@
 *.i
 *.elf
 *.gba
+!data/*.gba
 *.sgm
 *.sa1
 *.ss[0-9]
@@ -29,8 +30,12 @@ build/
 .DS_Store
 *.ddump
 .idea/
-porymap.project.cfg
+porymap.*.cfg
+prefabs.json
 .vscode/
 *.a
 .fuse_hidden*
 *.sna
+*.diff
+*.sym
+*.js

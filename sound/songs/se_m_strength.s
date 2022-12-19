@@ -51,9 +51,9 @@ se_m_strength_2:
 	.byte		VOL   , 110*se_m_strength_mvl/mxv
 	.byte		N02   , Fn2 , v072
 	.byte	W02
-	.byte		N01   
+	.byte		N01
 	.byte	W01
-	.byte		N02   , Gn2 
+	.byte		N02   , Gn2
 	.byte	W03
 	.byte		N01   , Gs2 , v060
 	.byte	W01

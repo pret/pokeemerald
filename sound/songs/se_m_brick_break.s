@@ -23,7 +23,7 @@ se_m_brick_break_1:
 	.byte		PAN   , c_v+0
 	.byte		N01   , Cn4 , v127
 	.byte	W01
-	.byte		N03   , Cn5 
+	.byte		N03   , Cn5
 	.byte	W01
 	.byte		PAN   , c_v+5
 	.byte	W01
@@ -63,23 +63,23 @@ se_m_brick_break_2:
 	.byte		PAN   , c_v+0
 	.byte		N01   , Cn3 , v064
 	.byte	W01
-	.byte		N03   , Gn3 
+	.byte		N03   , Gn3
 	.byte	W05
 	.byte	W01
 	.byte		N02   , En4 , v040
 	.byte	W05
-	.byte		        Gn3 
+	.byte		        Gn3
 	.byte	W04
 	.byte		        En4 , v032
 	.byte	W02
 	.byte	W03
-	.byte		        Gn3 
+	.byte		        Gn3
 	.byte	W03
 	.byte	W02
 	.byte		        En4 , v020
 	.byte	W04
 	.byte	W01
-	.byte		        Gn3 
+	.byte		        Gn3
 	.byte	W05
 	.byte	FINE
 

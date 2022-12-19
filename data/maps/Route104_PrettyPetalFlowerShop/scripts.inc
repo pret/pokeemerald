@@ -23,19 +23,15 @@ Route104_PrettyPetalFlowerShop_EventScript_ShopOwner::
 	goto_if_set FLAG_MET_PRETTY_PETAL_SHOP_OWNER, Route104_PrettyPetalFlowerShop_EventScript_AlreadyMet
 	setflag FLAG_MET_PRETTY_PETAL_SHOP_OWNER
 	msgbox Route104_PrettyPetalFlowerShop_Text_IntroLearnAboutBerries, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	call_if_eq Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries
-	compare VAR_RESULT, NO
-	call_if_eq Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries
+	call_if_eq VAR_RESULT, YES, Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries
+	call_if_eq VAR_RESULT, NO, Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries
 	release
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_AlreadyMet::
 	msgbox Route104_PrettyPetalFlowerShop_Text_LearnAboutBerries, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	call_if_eq Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries
-	compare VAR_RESULT, NO
-	call_if_eq Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries
+	call_if_eq VAR_RESULT, YES, Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries
+	call_if_eq VAR_RESULT, NO, Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries
 	release
 	end
 
@@ -92,8 +88,7 @@ Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl::
 	random 8
 	addvar VAR_RESULT, FIRST_BERRY_INDEX
 	giveitem VAR_RESULT
-	compare VAR_RESULT, 0
-	goto_if_eq Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_FLOWER_SHOP_RECEIVED_BERRY
 	msgbox Route104_PrettyPetalFlowerShop_Text_MachineMixesBerries, MSGBOX_DEFAULT
 	release

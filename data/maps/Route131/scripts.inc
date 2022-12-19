@@ -3,8 +3,7 @@ Route131_MapScripts::
 	.byte 0
 
 Route131_OnTransition:
-	compare VAR_SOOTOPOLIS_CITY_STATE, 4
-	call_if_ge Route131_EventScript_CheckSetAbnormalWeather
+	call_if_ge VAR_SOOTOPOLIS_CITY_STATE, 4, Route131_EventScript_CheckSetAbnormalWeather
 	call Route131_EventScript_SetLayout
 	end
 

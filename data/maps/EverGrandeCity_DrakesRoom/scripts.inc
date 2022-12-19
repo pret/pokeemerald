@@ -26,8 +26,7 @@ EverGrandeCity_DrakesRoom_EventScript_WalkInCloseDoor::
 
 EverGrandeCity_DrakesRoom_OnLoad:
 	call_if_set FLAG_DEFEATED_ELITE_4_DRAKE, EverGrandeCity_DrakesRoom_EventScript_ResetAdvanceToNextRoom
-	compare VAR_ELITE_4_STATE, 4
-	call_if_eq EverGrandeCity_DrakesRoom_EventScript_CloseDoor
+	call_if_eq VAR_ELITE_4_STATE, 4, EverGrandeCity_DrakesRoom_EventScript_CloseDoor
 	end
 
 EverGrandeCity_DrakesRoom_EventScript_ResetAdvanceToNextRoom::

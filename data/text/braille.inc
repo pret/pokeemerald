@@ -1,3 +1,7 @@
+@ NOTE: The brailleformat macro in this file is leftover from RS.
+@       The numbers are simply skipped over. If you'd like to omit
+@       this macro you must also stop it from skipping over this
+@       section by editing ScrCmd_braillemessage.
 Underwater_SealedChamber_Braille_GoUpHere:
 	brailleformat 4, 6, 26, 13, 7, 9
 	.braille "GO UP HERE.$"

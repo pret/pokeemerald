@@ -1,8 +1,6 @@
 #ifndef GUARD_CONSTANTS_BATTLE_STRING_IDS_H
 #define GUARD_CONSTANTS_BATTLE_STRING_IDS_H
 
-#define BATTLESTRINGS_ID_ADDER  12 // all battlestrings have its ID + 12, because first 5 are reserved
-
 #define STRINGID_INTROMSG       0
 #define STRINGID_INTROSENDOUT   1
 #define STRINGID_RETURNMON      2
@@ -381,7 +379,7 @@
 #define STRINGID_PKMNBOXLANETTESPCFULL                378
 #define STRINGID_TRAINER1WINTEXT                      379
 #define STRINGID_TRAINER2WINTEXT                      380
-                                                      
+
 #define STRINGID_ENDUREDSTURDY                        381
 #define STRINGID_POWERHERB                            382
 #define STRINGID_HURTBYITEM                           383
@@ -592,25 +590,54 @@
 #define STRINGID_STRONGWINDSDISSIPATED                588
 #define STRINGID_MYSTERIOUSAIRCURRENTBLOWSON          589
 #define STRINGID_ATTACKWEAKENEDBSTRONGWINDS           590
-#define STRINGID_STUFFCHEEKSCANTSELECT                592
-#define STRINGID_PKMNREVERTEDTOPRIMAL                 593
-#define STRINGID_BUTPOKEMONCANTUSETHEMOVE             594
-#define STRINGID_BUTHOOPACANTUSEIT                    595
-#define STRINGID_BROKETHROUGHPROTECTION               596
-#define STRINGID_ABILITYALLOWSONLYMOVE                597
-#define STRINGID_SWAPPEDABILITIES                     598
-#define STRINGID_PASTELVEILPROTECTED                  599
-#define STRINGID_PASTELVEILENTERS                     600
-#define STRINGID_BATTLERTYPECHANGEDTO                 601
-#define STRINGID_BOTHCANNOLONGERESCAPE                602
-#define STRINGID_CANTESCAPEDUETOUSEDMOVE              603
-#define STRINGID_PKMNBECAMEWEAKERTOFIRE               604
-#define STRINGID_ABOUTTOUSEPOLTERGEIST                605
-#define STRINGID_CANTESCAPEBECAUSEOFCURRENTMOVE       606
-#define STRINGID_NEUTRALIZINGGASENTERS                607
-#define STRINGID_NEUTRALIZINGGASOVER                  608
+#define STRINGID_STUFFCHEEKSCANTSELECT                591
+#define STRINGID_PKMNREVERTEDTOPRIMAL                 592
+#define STRINGID_BUTPOKEMONCANTUSETHEMOVE             593
+#define STRINGID_BUTHOOPACANTUSEIT                    594
+#define STRINGID_BROKETHROUGHPROTECTION               595
+#define STRINGID_ABILITYALLOWSONLYMOVE                596
+#define STRINGID_SWAPPEDABILITIES                     597
+#define STRINGID_PASTELVEILPROTECTED                  598
+#define STRINGID_PASTELVEILENTERS                     599
+#define STRINGID_BATTLERTYPECHANGEDTO                 600
+#define STRINGID_BOTHCANNOLONGERESCAPE                601
+#define STRINGID_CANTESCAPEDUETOUSEDMOVE              602
+#define STRINGID_PKMNBECAMEWEAKERTOFIRE               603
+#define STRINGID_ABOUTTOUSEPOLTERGEIST                604
+#define STRINGID_CANTESCAPEBECAUSEOFCURRENTMOVE       605
+#define STRINGID_NEUTRALIZINGGASENTERS                606
+#define STRINGID_NEUTRALIZINGGASOVER                  607
+#define STRINGID_TARGETTOOHEAVY                       608
+#define STRINGID_PKMNTOOKTARGETHIGH                   609
+#define STRINGID_PKMNINSNAPTRAP                       610
+#define STRINGID_METEORBEAMCHARGING                   611
+#define STRINGID_HEATUPBEAK                           612
+#define STRINGID_COURTCHANGE                          613
+#define STRINGID_PLAYERLOSTTOENEMYTRAINER             614
+#define STRINGID_PLAYERPAIDPRIZEMONEY                 615
+#define STRINGID_ZPOWERSURROUNDS                      616
+#define STRINGID_ZMOVEUNLEASHED                       617
+#define STRINGID_ZMOVERESETSSTATS                     618
+#define STRINGID_ZMOVEALLSTATSUP                      619
+#define STRINGID_ZMOVEZBOOSTCRIT                      620
+#define STRINGID_ZMOVERESTOREHP                       621
+#define STRINGID_ZMOVESTATUP                          622
+#define STRINGID_ZMOVEHPTRAP                          623
+#define STRINGID_TERRAINREMOVED                       624
+#define STRINGID_ATTACKEREXPELLEDTHEPOISON            625
+#define STRINGID_ATTACKERSHOOKITSELFAWAKE             626
+#define STRINGID_ATTACKERBROKETHROUGHPARALYSIS        627
+#define STRINGID_ATTACKERHEALEDITSBURN                628
+#define STRINGID_ATTACKERMELTEDTHEICE                 629
+#define STRINGID_TARGETTOUGHEDITOUT                   630
+#define STRINGID_ATTACKERLOSTELECTRICTYPE             631
 
-#define BATTLESTRINGS_COUNT                           609
+#define BATTLESTRINGS_COUNT                           632
+
+// This is the string id that gBattleStringsTable starts with.
+// String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
+// and are instead handled explicitly by BufferStringBattle.
+#define BATTLESTRINGS_TABLE_START  STRINGID_TRAINER1LOSETEXT
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.
@@ -661,6 +688,8 @@
 #define B_MSG_TURN1_PHANTOM_FORCE  8
 #define B_MSG_TURN1_GEOMANCY       9
 #define B_MSG_TURN1_FREEZE_SHOCK   10
+#define B_MSG_TURN1_SKY_DROP       11
+#define B_MSG_TURN1_METEOR_BEAM    12
 
 // gMoveWeatherChangeStringIds
 #define B_MSG_STARTED_RAIN      0
@@ -860,5 +889,26 @@
 #define B_MSG_TERRAINPREVENTS_MISTY     0
 #define B_MSG_TERRAINPREVENTS_ELECTRIC  1
 #define B_MSG_TERRAINPREVENTS_PSYCHIC   2
+
+// gWrappedStringIds
+#define B_MSG_WRAPPED_BIND        0
+#define B_MSG_WRAPPED_WRAP        1
+#define B_MSG_WRAPPED_FIRE_SPIN   2
+#define B_MSG_WRAPPED_CLAMP       3
+#define B_MSG_WRAPPED_WHIRLPOOL   4
+#define B_MSG_WRAPPED_SAND_TOMB   5
+#define B_MSG_WRAPPED_MAGMA_STORM 6
+#define B_MSG_WRAPPED_INFESTATION 7
+#define B_MSG_WRAPPED_SNAP_TRAP   8
+#define NUM_TRAPPING_MOVES        9
+
+// z effects
+#define B_MSG_Z_RESET_STATS   0
+#define B_MSG_Z_ALL_STATS_UP  1
+#define B_MSG_Z_BOOST_CRITS   2
+#define B_MSG_Z_FOLLOW_ME     3
+#define B_MSG_Z_RECOVER_HP    4
+#define B_MSG_Z_STAT_UP       5
+#define B_MSG_Z_HP_TRAP       6
 
 #endif // GUARD_CONSTANTS_BATTLE_STRING_IDS_H

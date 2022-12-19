@@ -101,7 +101,7 @@ unsigned char *RLCompress(unsigned char *src, int srcSize, int *compressedSize)
             srcPos++;
             uncompressedLength++;
         }
-        
+
         if (uncompressedLength > 0)
         {
             dest[destPos++] = uncompressedLength - 1;

@@ -26,15 +26,15 @@ se_m_absorb_2_1:
 	.byte	W01
 	.byte		N02   , Dn6 , v112
 	.byte	W02
-	.byte		        Cs6 
+	.byte		        Cs6
 	.byte	W03
 	.byte		PAN   , c_v+8
-	.byte		N02   , An5 
+	.byte		N02   , An5
 	.byte	W02
-	.byte		        Fs5 
+	.byte		        Fs5
 	.byte	W01
 	.byte	W01
-	.byte		        Dn5 
+	.byte		        Dn5
 	.byte	W02
 	.byte		PAN   , c_v-7
 	.byte	W01
@@ -52,7 +52,7 @@ se_m_absorb_2_1:
 	.byte	W02
 	.byte		PAN   , c_v+15
 	.byte	W01
-	.byte		N02   , Dn6 
+	.byte		N02   , Dn6
 	.byte	W02
 	.byte		        Cs6 , v084
 	.byte	W03
@@ -89,17 +89,17 @@ se_m_absorb_2_2:
 	.byte		BEND  , c_v+15
 	.byte		N02   , An6 , v112
 	.byte	W02
-	.byte		        Fs6 
+	.byte		        Fs6
 	.byte	W01
 	.byte	W01
-	.byte		        Dn6 
+	.byte		        Dn6
 	.byte	W02
 	.byte	W01
-	.byte		        Cs6 
+	.byte		        Cs6
 	.byte	W02
-	.byte		        An5 
+	.byte		        An5
 	.byte	W03
-	.byte		N02   
+	.byte		N02
 	.byte	W02
 	.byte		        Fs5 , v104
 	.byte	W01

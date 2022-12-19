@@ -28,10 +28,8 @@ BattleFrontier_BattleArenaBattleRoom_OnTransition:
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_SetPlayerGfx::
 	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_SetPlayerGfxMale
-	compare VAR_RESULT, FEMALE
-	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_SetPlayerGfxFemale
+	goto_if_eq VAR_RESULT, MALE, BattleFrontier_BattleArenaBattleRoom_EventScript_SetPlayerGfxMale
+	goto_if_eq VAR_RESULT, FEMALE, BattleFrontier_BattleArenaBattleRoom_EventScript_SetPlayerGfxFemale
 	return
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_SetPlayerGfxMale::
@@ -52,8 +50,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_EnterRoom::
 	applymovement LOCALID_PLAYER, BattleFrontier_BattleArenaBattleRoom_Movement_PlayerEnter
 	waitmovement 0
 	frontier_get FRONTIER_DATA_BATTLE_NUM
-	compare VAR_RESULT, 0
-	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_AnnounceTrainers
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleArenaBattleRoom_EventScript_AnnounceTrainers
 	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceDown
 	applymovement LOCALID_PLAYER, BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceLeft
 	setvar VAR_TEMP_2, 1
@@ -110,7 +107,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_DeclareOpponentWinner::
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_WinnerIsOpponent, MSGBOX_DEFAULT
 BattleFrontier_BattleArenaBattleRoom_EventScript_WarpToLobbyLost::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
-	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY, 255, 7, 8
+	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY, 7, 8
 	waitstate
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_DefeatedOpponent::
@@ -137,24 +134,16 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_DefeatedOpponent::
 BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent::
 	frontier_getbrainstatus
 	copyvar VAR_TEMP_F, VAR_RESULT
-	compare VAR_RESULT, FRONTIER_BRAIN_NOT_READY
-	goto_if_ne BattleFrontier_BattleArenaBattleRoom_EventScript_TycoonUpNext
+	goto_if_ne VAR_RESULT, FRONTIER_BRAIN_NOT_READY, BattleFrontier_BattleArenaBattleRoom_EventScript_TycoonUpNext
 	frontier_get FRONTIER_DATA_BATTLE_NUM
-	compare VAR_RESULT, 1
-	call_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_ReadyFor2ndOpponent
-	compare VAR_RESULT, 2
-	call_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_ReadyFor3rdOpponent
-	compare VAR_RESULT, 3
-	call_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_ReadyFor4thOpponent
-	compare VAR_RESULT, 4
-	call_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_ReadyFor5thOpponent
-	compare VAR_RESULT, 5
-	call_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_ReadyFor6thOpponent
-	compare VAR_RESULT, 6
-	call_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_ReadyFor7thOpponent
+	call_if_eq VAR_RESULT, 1, BattleFrontier_BattleArenaBattleRoom_EventScript_ReadyFor2ndOpponent
+	call_if_eq VAR_RESULT, 2, BattleFrontier_BattleArenaBattleRoom_EventScript_ReadyFor3rdOpponent
+	call_if_eq VAR_RESULT, 3, BattleFrontier_BattleArenaBattleRoom_EventScript_ReadyFor4thOpponent
+	call_if_eq VAR_RESULT, 4, BattleFrontier_BattleArenaBattleRoom_EventScript_ReadyFor5thOpponent
+	call_if_eq VAR_RESULT, 5, BattleFrontier_BattleArenaBattleRoom_EventScript_ReadyFor6thOpponent
+	call_if_eq VAR_RESULT, 6, BattleFrontier_BattleArenaBattleRoom_EventScript_ReadyFor7thOpponent
 	call BattleFrontier_EventScript_GetCantRecordBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponentNoRecord
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponentNoRecord
 	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_ContinueChallenge
@@ -210,7 +199,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_ContinueChallenge::
 BattleFrontier_BattleArenaBattleRoom_EventScript_ReturnToLobbyWon::
 	delay 60
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
-	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY, 255, 7, 8
+	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY, 7, 8
 	waitstate
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_ReadyFor2ndOpponent::
@@ -254,16 +243,14 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_PauseChallenge::
 	end
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_TycoonUpNext::
-	compare VAR_TEMP_2, 1
-	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoon
+	goto_if_eq VAR_TEMP_2, 1, BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoon
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_NowFaceTycoon, MSGBOX_DEFAULT
 	setvar VAR_TEMP_2, 1
 BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoon::
 	message BattleFrontier_BattleArenaBattleRoom_Text_PreparedForTycoon
 	waitmessage
 	call BattleFrontier_EventScript_GetCantRecordBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoonNoRecord
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoonNoRecord
 	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, TRUE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGreta
@@ -309,8 +296,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGreta::
 	case FRONTIER_BRAIN_STREAK, BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGretaSilver
 	case FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGretaGold
 	frontier_get FRONTIER_DATA_HEARD_BRAIN_SPEECH
-	compare VAR_RESULT, FALSE
-	goto_if_ne BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGretaSilver
+	goto_if_ne VAR_RESULT, FALSE, BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGretaSilver
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_GretaYoureChallenger, MSGBOX_DEFAULT
 	closemessage
 	frontier_set FRONTIER_DATA_HEARD_BRAIN_SPEECH
@@ -324,15 +310,13 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGreta::
 BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGretaSilver::
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_IgniteMyPassionForBattle, MSGBOX_DEFAULT
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_StartArenaBattle
-	compare VAR_RESULT, 1
-	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_DefeatedGretaSilver
+	goto_if_eq VAR_RESULT, 1, BattleFrontier_BattleArenaBattleRoom_EventScript_DefeatedGretaSilver
 	goto BattleFrontier_BattleArenaBattleRoom_EventScript_DeclareOpponentWinner
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_DefeatedGretaSilver::
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_DeclarePlayerWinner
 	frontier_getsymbols
-	compare VAR_RESULT, 0
-	goto_if_ne BattleFrontier_BattleArenaBattleRoom_EventScript_ReturnToLobbyWon
+	goto_if_ne VAR_RESULT, 0, BattleFrontier_BattleArenaBattleRoom_EventScript_ReturnToLobbyWon
 	applymovement LOCALID_OPPONENT, BattleFrontier_BattleArenaBattleRoom_Movement_OpponentStepForwardLong
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_GretaYoureToughAfterAll, MSGBOX_DEFAULT
@@ -346,8 +330,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_DefeatedGretaSilver::
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_IntroGretaGold::
 	frontier_get FRONTIER_DATA_HEARD_BRAIN_SPEECH
-	compare VAR_RESULT, FALSE
-	goto_if_ne BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGretaGold
+	goto_if_ne VAR_RESULT, FALSE, BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGretaGold
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_GretaLookingForwardToSeeingAgain, MSGBOX_DEFAULT
 	closemessage
 	frontier_set FRONTIER_DATA_HEARD_BRAIN_SPEECH
@@ -361,15 +344,13 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_IntroGretaGold::
 BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGretaGold::
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_LetsGetThisStarted, MSGBOX_DEFAULT
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_StartArenaBattle
-	compare VAR_RESULT, 1
-	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_DefeatedGretaGold
+	goto_if_eq VAR_RESULT, 1, BattleFrontier_BattleArenaBattleRoom_EventScript_DefeatedGretaGold
 	goto BattleFrontier_BattleArenaBattleRoom_EventScript_DeclareOpponentWinner
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_DefeatedGretaGold::
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_DeclarePlayerWinner
 	frontier_getsymbols
-	compare VAR_RESULT, 2
-	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_ReturnToLobbyWon
+	goto_if_eq VAR_RESULT, 2, BattleFrontier_BattleArenaBattleRoom_EventScript_ReturnToLobbyWon
 	applymovement LOCALID_OPPONENT, BattleFrontier_BattleArenaBattleRoom_Movement_OpponentStepForwardLong
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_GretaBlownAway, MSGBOX_DEFAULT
@@ -426,15 +407,15 @@ BattleFrontier_BattleArenaBattleRoom_Movement_PlayerStepForward:
 BattleFrontier_BattleArenaBattleRoom_Movement_PlayerWalkBackToLine:
 	walk_left
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceLeft:
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceRight:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_OpponentEnter:
@@ -475,12 +456,12 @@ BattleFrontier_BattleArenaBattleRoom_Movement_JumpInPlaceUp:
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceDown:
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 @ Unused, redundant
 BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceRight2:
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_OnWarp:
@@ -497,19 +478,19 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_SetUpRoomObjects::
 
 BattleFrontier_BattleArenaBattleRoom_Movement_GretaLookAroundPlayer:
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
 	delay_16
 	delay_16
 	delay_16
 	walk_up
 	walk_up
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_GretaWalkBackToCenter:
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Text_PlayerStepForward:

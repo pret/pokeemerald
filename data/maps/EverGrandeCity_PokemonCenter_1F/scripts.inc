@@ -37,12 +37,9 @@ EverGrandeCity_PokemonCenter_1F_EventScript_Scott::
 	faceplayer
 	msgbox EverGrandeCity_PokemonCenter_1F_Text_ScottHappyForYou, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, DIR_NORTH
-	call_if_eq EverGrandeCity_PokemonCenter_1F_EventScript_ScottExitNorth
-	compare VAR_FACING, DIR_EAST
-	call_if_eq EverGrandeCity_PokemonCenter_1F_EventScript_ScottExit
-	compare VAR_FACING, DIR_WEST
-	call_if_eq EverGrandeCity_PokemonCenter_1F_EventScript_ScottExit
+	call_if_eq VAR_FACING, DIR_NORTH, EverGrandeCity_PokemonCenter_1F_EventScript_ScottExitNorth
+	call_if_eq VAR_FACING, DIR_EAST, EverGrandeCity_PokemonCenter_1F_EventScript_ScottExit
+	call_if_eq VAR_FACING, DIR_WEST, EverGrandeCity_PokemonCenter_1F_EventScript_ScottExit
 	addvar VAR_SCOTT_STATE, 1
 	setflag FLAG_MET_SCOTT_IN_EVERGRANDE
 	playse SE_EXIT

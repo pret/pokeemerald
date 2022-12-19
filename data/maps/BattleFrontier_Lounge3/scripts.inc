@@ -10,8 +10,7 @@ BattleFrontier_Lounge3_EventScript_Gambler::
 	faceplayer
 	goto_if_set FLAG_MET_BATTLE_FRONTIER_GAMBLER, BattleFrontier_Lounge3_EventScript_AlreadyMetGambler
 	call BattleFrontier_Lounge3_EventScript_CountSilverSymbols
-	compare VAR_0x8004, 2
-	goto_if_le BattleFrontier_Lounge3_EventScript_NotEnoughSilverSymbols
+	goto_if_le VAR_0x8004, 2, BattleFrontier_Lounge3_EventScript_NotEnoughSilverSymbols
 	setflag FLAG_MET_BATTLE_FRONTIER_GAMBLER
 	msgbox BattleFrontier_Lounge3_Text_YouLookToughExplainGambling, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_AskToEnterChallenge
@@ -22,11 +21,9 @@ BattleFrontier_Lounge3_EventScript_AskToEnterChallenge::
 	waitmessage
 	waitbuttonpress
 	msgbox BattleFrontier_Lounge3_Text_HowAboutEnteringEventForMe, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq BattleFrontier_Lounge3_EventScript_DeclineChallenge
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_Lounge3_EventScript_DeclineChallenge
 	msgbox BattleFrontier_Lounge3_Text_SpotMeSomeBattlePoints, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq BattleFrontier_Lounge3_EventScript_DeclineChallenge
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_Lounge3_EventScript_DeclineChallenge
 	message BattleFrontier_Lounge3_Text_HowMuchCanYouSpot
 	waitmessage
 	special ShowBattlePointsWindow
@@ -61,8 +58,7 @@ BattleFrontier_Lounge3_EventScript_Bet15::
 
 BattleFrontier_Lounge3_EventScript_TryPlaceBet::
 	specialvar VAR_TEMP_1, GetFrontierBattlePoints
-	compare VAR_TEMP_1, VAR_0x8008
-	goto_if_ge BattleFrontier_Lounge3_EventScript_PlaceBet
+	goto_if_ge VAR_TEMP_1, VAR_0x8008, BattleFrontier_Lounge3_EventScript_PlaceBet
 	msgbox BattleFrontier_Lounge3_Text_YouDontHaveEnoughPoints, MSGBOX_DEFAULT
 	message BattleFrontier_Lounge3_Text_HowMuchCanYouSpot
 	waitmessage
@@ -109,27 +105,21 @@ BattleFrontier_Lounge3_EventScript_NotEnoughSilverSymbols::
 
 BattleFrontier_Lounge3_EventScript_AlreadyMetGambler::
 	msgbox BattleFrontier_Lounge3_Text_Oh, MSGBOX_DEFAULT
-	compare VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_PLACED_BET
-	goto_if_ge BattleFrontier_Lounge3_EventScript_CheckBetResults
+	goto_if_ge VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_PLACED_BET, BattleFrontier_Lounge3_EventScript_CheckBetResults
 	goto BattleFrontier_Lounge3_EventScript_AskToEnterChallenge
 	end
 
 BattleFrontier_Lounge3_EventScript_CheckBetResults::
-	compare VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_PLACED_BET
-	goto_if_eq BattleFrontier_Lounge3_EventScript_ChallengeNotAttempted
-	compare VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_WON
-	goto_if_eq BattleFrontier_Lounge3_EventScript_WonChallenge
+	goto_if_eq VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_PLACED_BET, BattleFrontier_Lounge3_EventScript_ChallengeNotAttempted
+	goto_if_eq VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_WON, BattleFrontier_Lounge3_EventScript_WonChallenge
 	goto BattleFrontier_Lounge3_EventScript_LostChallenge
 	end
 
 BattleFrontier_Lounge3_EventScript_WonChallenge::
 	msgbox BattleFrontier_Lounge3_Text_HelloChampHeresYourPoints, MSGBOX_DEFAULT
-	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, FRONTIER_GAMBLER_BET_5
-	call_if_eq BattleFrontier_Lounge3_EventScript_RewardBet5
-	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, FRONTIER_GAMBLER_BET_10
-	call_if_eq BattleFrontier_Lounge3_EventScript_RewardBet10
-	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, FRONTIER_GAMBLER_BET_15
-	call_if_eq BattleFrontier_Lounge3_EventScript_RewardBet15
+	call_if_eq VAR_FRONTIER_GAMBLER_AMOUNT_BET, FRONTIER_GAMBLER_BET_5, BattleFrontier_Lounge3_EventScript_RewardBet5
+	call_if_eq VAR_FRONTIER_GAMBLER_AMOUNT_BET, FRONTIER_GAMBLER_BET_10, BattleFrontier_Lounge3_EventScript_RewardBet10
+	call_if_eq VAR_FRONTIER_GAMBLER_AMOUNT_BET, FRONTIER_GAMBLER_BET_15, BattleFrontier_Lounge3_EventScript_RewardBet15
 	msgbox BattleFrontier_Lounge3_Text_ObtainedBattlePoints, MSGBOX_GETPOINTS
 	special GiveFrontierBattlePoints
 	msgbox BattleFrontier_Lounge3_Text_ThinkOfMeForAnotherChallenge, MSGBOX_DEFAULT
@@ -144,17 +134,17 @@ BattleFrontier_Lounge3_EventScript_LostChallenge::
 	end
 
 BattleFrontier_Lounge3_EventScript_RewardBet5::
-	buffernumberstring 0, (BET_AMOUNT_5 * 2)
+	buffernumberstring STR_VAR_1, (BET_AMOUNT_5 * 2)
 	setvar VAR_0x8004, (BET_AMOUNT_5 * 2)
 	return
 
 BattleFrontier_Lounge3_EventScript_RewardBet10::
-	buffernumberstring 0, (BET_AMOUNT_10 * 2)
+	buffernumberstring STR_VAR_1, (BET_AMOUNT_10 * 2)
 	setvar VAR_0x8004, (BET_AMOUNT_10 * 2)
 	return
 
 BattleFrontier_Lounge3_EventScript_RewardBet15::
-	buffernumberstring 0, (BET_AMOUNT_15 * 2)
+	buffernumberstring STR_VAR_1, (BET_AMOUNT_15 * 2)
 	setvar VAR_0x8004, (BET_AMOUNT_15 * 2)
 	return
 

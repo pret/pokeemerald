@@ -3,8 +3,8 @@
 
 struct PlayerHallRecords
 {
-    struct RankingHall1P onePlayer[9][2];
-    struct RankingHall2P twoPlayers[2];
+    struct RankingHall1P onePlayer[HALL_FACILITIES_COUNT][FRONTIER_LVL_MODE_COUNT];
+    struct RankingHall2P twoPlayers[FRONTIER_LVL_MODE_COUNT];
 };
 
 void RecordMixingPlayerSpotTriggered(void);

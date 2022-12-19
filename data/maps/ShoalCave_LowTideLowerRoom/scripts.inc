@@ -8,7 +8,7 @@ ShoalCave_LowTideLowerRoom_OnLoad:
 
 ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatiles::
 	goto_if_set FLAG_RECEIVED_SHOAL_SALT_4, ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatilesEnd
-	setmetatile 18, 2, METATILE_Cave_ShoalCave_DirtPile_Large, 1
+	setmetatile 18, 2, METATILE_Cave_ShoalCave_DirtPile_Large, TRUE
 	return
 
 ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatilesEnd::
@@ -18,9 +18,8 @@ ShoalCave_LowTideLowerRoom_EventScript_ShoalSalt4::
 	lockall
 	goto_if_set FLAG_RECEIVED_SHOAL_SALT_4, ShoalCave_LowTideLowerRoom_EventScript_ReceivedShoalSalt
 	giveitem ITEM_SHOAL_SALT
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	setmetatile 18, 2, METATILE_Cave_ShoalCave_DirtPile_Small, 0
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setmetatile 18, 2, METATILE_Cave_ShoalCave_DirtPile_Small, FALSE
 	special DrawWholeMapView
 	setflag FLAG_RECEIVED_SHOAL_SALT_4
 	releaseall
@@ -37,8 +36,7 @@ ShoalCave_LowTideLowerRoom_EventScript_BlackBelt::
 	goto_if_set FLAG_RECEIVED_FOCUS_BAND, ShoalCave_LowTideLowerRoom_EventScript_ReceivedFocusBand
 	msgbox ShoalCave_LowTideLowerRoom_Text_CanOvercomeColdWithFocus, MSGBOX_DEFAULT
 	giveitem ITEM_FOCUS_BAND
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_FOCUS_BAND
 	release
 	end

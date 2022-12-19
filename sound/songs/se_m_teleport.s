@@ -68,7 +68,7 @@ se_m_teleport_1:
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+6
-	.byte		N06   , Fn3 
+	.byte		N06   , Fn3
 	.byte	W01
 	.byte		BEND  , c_v+11
 	.byte	W01

@@ -97,84 +97,84 @@ struct ItemStorageMenu
     u8 swapLineSpriteIds[SWAP_LINE_LENGTH];
 };
 
-static void InitPlayerPCMenu(u8 taskId);
-static void PlayerPCProcessMenuInput(u8 taskId);
-static void InitItemStorageMenu(u8 taskId, u8 var);
+static void InitPlayerPCMenu(u8);
+static void PlayerPCProcessMenuInput(u8);
+static void InitItemStorageMenu(u8, u8);
 
 static u8 GetMailboxMailCount(void);
 static void Mailbox_CompactMailList(void);
-static void Mailbox_DrawMailboxMenu(u8 taskId);
-static void Mailbox_ProcessInput(u8 taskId);
-static void Mailbox_PrintWhatToDoWithPlayerMailText(u8 taskId);
+static void Mailbox_DrawMailboxMenu(u8);
+static void Mailbox_ProcessInput(u8);
+static void Mailbox_PrintWhatToDoWithPlayerMailText(u8);
 static void Mailbox_ReturnToPlayerPC(u8);
-static void Mailbox_PrintMailOptions(u8 taskId);
-static void Mailbox_MailOptionsProcessInput(u8 taskId);
+static void Mailbox_PrintMailOptions(u8);
+static void Mailbox_MailOptionsProcessInput(u8);
 
-static void PlayerPC_ItemStorage(u8 taskId);
-static void PlayerPC_Mailbox(u8 taskId);
-static void PlayerPC_Decoration(u8 var);
-static void PlayerPC_TurnOff(u8 taskId);
+static void PlayerPC_ItemStorage(u8);
+static void PlayerPC_Mailbox(u8);
+static void PlayerPC_Decoration(u8);
+static void PlayerPC_TurnOff(u8);
 
-static void Mailbox_DoMailMoveToBag(u8 taskId);
-static void Mailbox_DoMailRead(u8 taskId);
-static void Mailbox_MoveToBag(u8 taskId);
-static void Mailbox_Give(u8 taskId);
-static void Mailbox_Cancel(u8 taskId);
+static void Mailbox_DoMailMoveToBag(u8);
+static void Mailbox_DoMailRead(u8);
+static void Mailbox_MoveToBag(u8);
+static void Mailbox_Give(u8);
+static void Mailbox_Cancel(u8);
 
-static void Mailbox_CancelMoveToBag(u8 taskId);
-static void Mailbox_HandleConfirmMoveToBag(u8 taskId);
-static void Mailbox_AskConfirmMoveToBag(u8 taskId);
-static void Mailbox_DoGiveMailPokeMenu(u8 taskId);
-static void Mailbox_NoPokemonForMail(u8 taskId);
+static void Mailbox_CancelMoveToBag(u8);
+static void Mailbox_HandleConfirmMoveToBag(u8);
+static void Mailbox_AskConfirmMoveToBag(u8);
+static void Mailbox_DoGiveMailPokeMenu(u8);
+static void Mailbox_NoPokemonForMail(u8);
 
-static void Mailbox_FadeAndReadMail(u8 taskId);
+static void Mailbox_FadeAndReadMail(u8);
 static void Mailbox_ReturnToFieldFromReadMail(void);
 static void Mailbox_ReshowAfterMail(void);
-static void Mailbox_HandleReturnToProcessInput(u8 taskId);
+static void Mailbox_HandleReturnToProcessInput(u8);
 static void Mailbox_UpdateMailListAfterDeposit(void);
 
-static void ItemStorage_Withdraw(u8 taskId);
-static void ItemStorage_Deposit(u8 taskId);
-static void ItemStorage_Toss(u8 taskId);
-static void ItemStorage_Exit(u8 taskId);
-static void ItemStorage_TossItemYes(u8 taskId);
-static void ItemStorage_TossItemNo(u8 taskId);
+static void ItemStorage_Withdraw(u8);
+static void ItemStorage_Deposit(u8);
+static void ItemStorage_Toss(u8);
+static void ItemStorage_Exit(u8);
+static void ItemStorage_TossItemYes(u8);
+static void ItemStorage_TossItemNo(u8);
 
 static void ItemStorageMenuPrint(const u8 *);
-static void ItemStorageMenuProcessInput(u8 taskId);
+static void ItemStorageMenuProcessInput(u8);
 static void SetPlayerPCListCount(u8);
-static void ItemStorage_HandleReturnToProcessInput(u8 taskId);
+static void ItemStorage_HandleReturnToProcessInput(u8);
 
-static void ItemStorage_Enter(u8 taskId, bool8 toss);
-static void ItemStorage_CreateListMenu(u8 taskId);
-static void ItemStorage_ProcessInput(u8 taskId);
-static void Task_ItemStorage_Deposit(u8 taskId);
+static void ItemStorage_Enter(u8, bool8);
+static void ItemStorage_CreateListMenu(u8);
+static void ItemStorage_ProcessInput(u8);
+static void Task_ItemStorage_Deposit(u8);
 static void ItemStorage_ReshowAfterBagMenu(void);
-static void ItemStorage_DoItemWithdraw(u8 taskId);
-static void ItemStorage_DoItemToss(u8 taskid);
-static void ItemStorage_HandleQuantityRolling(u8 taskid);
-static void ItemStorage_ExitItemList(u8 taskId);
-static void ItemStorage_StartItemSwap(u8 taskId);
-static void ItemStorage_DoItemAction(u8 taskId);
-static void ItemStorage_FinishItemSwap(u8 taskId, bool8 a);
-static void ItemStorage_HandleRemoveItem(u8 taskId);
-static void ItemStorage_HandleErrorMessageInput(u8 taskId);
-static void ItemStorage_ReturnToListInput(u8 taskId);
+static void ItemStorage_DoItemWithdraw(u8);
+static void ItemStorage_DoItemToss(u8);
+static void ItemStorage_HandleQuantityRolling(u8);
+static void ItemStorage_ExitItemList(u8);
+static void ItemStorage_StartItemSwap(u8);
+static void ItemStorage_DoItemAction(u8);
+static void ItemStorage_FinishItemSwap(u8, bool8);
+static void ItemStorage_HandleRemoveItem(u8);
+static void ItemStorage_HandleErrorMessageInput(u8);
+static void ItemStorage_ReturnToListInput(u8);
 
-static const u8* ItemStorage_GetMessage(u16);
-static void CopyItemName_PlayerPC(u8 *string, u16 itemId);
+static const u8 *ItemStorage_GetMessage(u16);
+static void CopyItemName_PlayerPC(u8 *, u16);
 
 static void ItemStorage_Init(void);
-static void ItemStorage_DrawSwapArrow(u8 y, u8, u8 speed);
+static void ItemStorage_DrawSwapArrow(u8, u8, u8);
 static void ItemStorage_RemoveWindow(u8);
 static void ItemStorage_UpdateSwapLinePos(u8);
-static void ItemStorage_ProcessItemSwapInput(u8 taskId);
+static void ItemStorage_ProcessItemSwapInput(u8);
 static void ItemStorage_EraseItemIcon(void);
-static void ItemStorage_DrawItemIcon(u16 itemId);
-static void ItemStorage_PrintDescription(s32 id);
-static void ItemStorage_EraseMainMenu(u8 taskId);
-static void ItemStorage_MoveCursor(s32 id, bool8 b, struct ListMenu * thisMenu);
-static void ItemStorage_PrintMenuItem(u8 windowId, u32 id, u8 yOffset);
+static void ItemStorage_DrawItemIcon(u16);
+static void ItemStorage_PrintDescription(s32);
+static void ItemStorage_EraseMainMenu(u8);
+static void ItemStorage_MoveCursor(s32, bool8, struct ListMenu *);
+static void ItemStorage_PrintMenuItem(u8, u32, u8);
 
 static EWRAM_DATA const u8 *sTopMenuOptionOrder = NULL;
 static EWRAM_DATA u8 sTopMenuNumOptions = 0;
@@ -290,8 +290,9 @@ static const struct ListMenuTemplate sListMenuTemplate_ItemStorage =
     .cursorShadowPal = 3,
     .lettersSpacing = FALSE,
     .itemVerticalPadding = 0,
-    .scrollMultiple = FALSE,
-    .fontId = 7
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = FONT_NARROW,
+    .cursorKind = CURSOR_BLACK_ARROW,
 };
 
 static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMPC_WIN_COUNT] =
@@ -396,11 +397,11 @@ static void InitPlayerPCMenu(u8 taskId)
     else // Bedroom PC
         windowTemplate = sWindowTemplates_MainMenus[WIN_MAIN_MENU_BEDROOM];
 
-    windowTemplate.width = sub_81DB3D8(sPlayerPCMenuActions, sTopMenuOptionOrder, sTopMenuNumOptions);
+    windowTemplate.width = GetMaxWidthInSubsetOfMenuTable(sPlayerPCMenuActions, sTopMenuOptionOrder, sTopMenuNumOptions);
     tWindowId = AddWindow(&windowTemplate);
-    SetStandardWindowBorderStyle(tWindowId, 0);
-    sub_81995E4(tWindowId, sTopMenuNumOptions, sPlayerPCMenuActions, sTopMenuOptionOrder);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(tWindowId, sTopMenuNumOptions, 0);
+    SetStandardWindowBorderStyle(tWindowId, FALSE);
+    PrintMenuActionTextsInUpperLeftCorner(tWindowId, sTopMenuNumOptions, sPlayerPCMenuActions, sTopMenuOptionOrder);
+    InitMenuInUpperLeftCornerNormal(tWindowId, sTopMenuNumOptions, 0);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = PlayerPCProcessMenuInput;
 }
@@ -467,11 +468,11 @@ static void PlayerPC_Mailbox(u8 taskId)
         SetPlayerPCListCount(taskId);
         if (MailboxMenu_Alloc(gPlayerPCItemPageInfo.count) == TRUE)
         {
-            ClearDialogWindowAndFrame(0, 0);
+            ClearDialogWindowAndFrame(0, FALSE);
             Mailbox_DrawMailboxMenu(taskId);
             gTasks[taskId].func = Mailbox_ProcessInput;
         }
-        else 
+        else
         {
             // Alloc failed, exit Mailbox
             DisplayItemMessageOnField(taskId, gText_NoMailHere, ReshowPlayerPC);
@@ -489,13 +490,13 @@ static void PlayerPC_TurnOff(u8 taskId)
     if (sTopMenuNumOptions == NUM_BEDROOM_PC_OPTIONS) // Flimsy way to determine if Bedroom PC is in use
     {
         if (gSaveBlock2Ptr->playerGender == MALE)
-            ScriptContext1_SetupScript(LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC);
+            ScriptContext_SetupScript(LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC);
         else
-            ScriptContext1_SetupScript(LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC);
+            ScriptContext_SetupScript(LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC);
     }
     else
     {
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
     DestroyTask(taskId);
 }
@@ -509,17 +510,17 @@ static void InitItemStorageMenu(u8 taskId, u8 var)
     windowTemplate = sWindowTemplates_MainMenus[WIN_ITEM_STORAGE_MENU];
     windowTemplate.width = GetMaxWidthInMenuTable(sItemStorage_MenuActions, ARRAY_COUNT(sItemStorage_MenuActions));
     tWindowId = AddWindow(&windowTemplate);
-    SetStandardWindowBorderStyle(tWindowId, 0);
+    SetStandardWindowBorderStyle(tWindowId, FALSE);
     PrintMenuTable(tWindowId, ARRAY_COUNT(sItemStorage_MenuActions), sItemStorage_MenuActions);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(tWindowId, 4, var);
+    InitMenuInUpperLeftCornerNormal(tWindowId, ARRAY_COUNT(sItemStorage_MenuActions), var);
     ScheduleBgCopyTilemapToVram(0);
     ItemStorageMenuPrint(sItemStorage_OptionDescriptions[var]);
 }
 
 static void ItemStorageMenuPrint(const u8 *textPtr)
 {
-    DrawDialogueFrame(0, 0);
-    AddTextPrinterParameterized(0, 1, textPtr, 0, 1, 0, 0);
+    DrawDialogueFrame(0, FALSE);
+    AddTextPrinterParameterized(0, FONT_NORMAL, textPtr, 0, 1, 0, 0);
 }
 
 static void ItemStorageMenuProcessInput(u8 taskId)
@@ -572,7 +573,7 @@ void CB2_PlayerPCExitBagMenu(void)
 static void ItemStorage_ReshowAfterBagMenu(void)
 {
     LoadMessageBoxAndBorderGfx();
-    DrawDialogueFrame(0, 1);
+    DrawDialogueFrame(0, TRUE);
     InitItemStorageMenu(CreateTask(ItemStorage_HandleReturnToProcessInput, 0), 1);
     FadeInFromBlack();
 }
@@ -588,7 +589,7 @@ static void ItemStorage_Withdraw(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     tUsedSlots = CountUsedPCItemSlots();
-    if (tUsedSlots != 0) 
+    if (tUsedSlots != 0)
     {
         ItemStorage_Enter(taskId, FALSE);
     }
@@ -632,7 +633,7 @@ static void ItemStorage_Enter(u8 taskId, bool8 toss)
     FreeAndReserveObjectSpritePalettes();
     LoadListMenuSwapLineGfx();
     CreateSwapLineSprites(sItemStorageMenu->swapLineSpriteIds, SWAP_LINE_LENGTH);
-    ClearDialogWindowAndFrame(0,0);
+    ClearDialogWindowAndFrame(0, FALSE);
     gTasks[taskId].func = ItemStorage_CreateListMenu;
 }
 
@@ -674,7 +675,7 @@ static u8 GetMailboxMailCount(void)
 
 static void Mailbox_CompactMailList(void)
 {
-    struct MailStruct temp;
+    struct Mail temp;
     u8 i, j;
 
     for (i = PARTY_SIZE; i < MAIL_COUNT - 1; i++)
@@ -691,7 +692,7 @@ static void Mailbox_DrawMailboxMenu(u8 taskId)
 {
     u8 windowId = MailboxMenu_AddWindow(MAILBOXWIN_TITLE);
     MailboxMenu_AddWindow(MAILBOXWIN_LIST);
-    AddTextPrinterParameterized(windowId, 1, gText_Mailbox, GetStringCenterAlignXOffset(1, gText_Mailbox, 0x40), 1, 0, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Mailbox, GetStringCenterAlignXOffset(FONT_NORMAL, gText_Mailbox, 0x40), 1, 0, NULL);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].tListTaskId = MailboxMenu_CreateList(&gPlayerPCItemPageInfo);
     MailboxMenu_AddScrollArrows(&gPlayerPCItemPageInfo);
@@ -753,7 +754,7 @@ static void Mailbox_PrintMailOptions(u8 taskId)
 {
     u8 windowId = MailboxMenu_AddWindow(MAILBOXWIN_OPTIONS);
     PrintMenuTable(windowId, ARRAY_COUNT(gMailboxMailOptions), gMailboxMailOptions);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, 4, 0);
+    InitMenuInUpperLeftCornerNormal(windowId, ARRAY_COUNT(gMailboxMailOptions), 0);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = Mailbox_MailOptionsProcessInput;
 }
@@ -850,7 +851,7 @@ static void Mailbox_HandleConfirmMoveToBag(u8 taskId)
 
 static void Mailbox_DoMailMoveToBag(u8 taskId)
 {
-    struct MailStruct *mail = &gSaveBlock1Ptr->mail[gPlayerPCItemPageInfo.itemsAbove + PARTY_SIZE + gPlayerPCItemPageInfo.cursorPos];
+    struct Mail *mail = &gSaveBlock1Ptr->mail[gPlayerPCItemPageInfo.itemsAbove + PARTY_SIZE + gPlayerPCItemPageInfo.cursorPos];
     if (!AddBagItem(mail->itemId, 1))
     {
         DisplayItemMessageOnField(taskId, gText_BagIsFull, Mailbox_Cancel);
@@ -858,7 +859,7 @@ static void Mailbox_DoMailMoveToBag(u8 taskId)
     else
     {
         DisplayItemMessageOnField(taskId, gText_MailToBagMessageErased, Mailbox_Cancel);
-        ClearMailStruct(mail);
+        ClearMail(mail);
         Mailbox_CompactMailList();
         gPlayerPCItemPageInfo.count--;
         if (gPlayerPCItemPageInfo.count < (gPlayerPCItemPageInfo.pageItems + gPlayerPCItemPageInfo.itemsAbove) && gPlayerPCItemPageInfo.itemsAbove != 0)
@@ -928,7 +929,7 @@ static void Mailbox_NoPokemonForMail(u8 taskId)
 static void Mailbox_Cancel(u8 taskId)
 {
     MailboxMenu_RemoveWindow(MAILBOXWIN_OPTIONS);
-    ClearDialogWindowAndFrame(0, 0);
+    ClearDialogWindowAndFrame(0, FALSE);
     Mailbox_DrawMailboxMenu(taskId);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = Mailbox_ProcessInput;
@@ -986,7 +987,7 @@ void ItemStorage_RefreshListMenu(void)
         sItemStorageMenu->listItems[i].name = &sItemStorageMenu->itemNames[i][0];
         sItemStorageMenu->listItems[i].id = i;
     }
-    
+
     // Set up Cancel entry
     StringCopy(&sItemStorageMenu->itemNames[i][0], gText_Cancel2);
     sItemStorageMenu->listItems[i].name = &sItemStorageMenu->itemNames[i][0];
@@ -1015,7 +1016,7 @@ static void ItemStorage_MoveCursor(s32 id, bool8 onInit, struct ListMenu *list)
         if (id != LIST_CANCEL)
             ItemStorage_DrawItemIcon(gSaveBlock1Ptr->pcItems[id].itemId);
         else
-            ItemStorage_DrawItemIcon(MSG_GO_BACK_TO_PREV);
+            ItemStorage_DrawItemIcon(ITEM_LIST_END);
         ItemStorage_PrintDescription(id);
     }
 }
@@ -1027,19 +1028,19 @@ static void ItemStorage_PrintMenuItem(u8 windowId, u32 id, u8 yOffset)
         if (sItemStorageMenu->toSwapPos != NOT_SWAPPING)
         {
             if (sItemStorageMenu->toSwapPos == (u8)id)
-                ItemStorage_DrawSwapArrow(yOffset, 0, TEXT_SPEED_FF);
+                ItemStorage_DrawSwapArrow(yOffset, 0, TEXT_SKIP_DRAW);
             else
-                ItemStorage_DrawSwapArrow(yOffset, 0xFF, TEXT_SPEED_FF);
+                ItemStorage_DrawSwapArrow(yOffset, 0xFF, TEXT_SKIP_DRAW);
         }
         ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1Ptr->pcItems[id].quantity, STR_CONV_MODE_RIGHT_ALIGN, 3);
         StringExpandPlaceholders(gStringVar4, gText_xVar1);
-        AddTextPrinterParameterized(windowId, 7, gStringVar4, GetStringRightAlignXOffset(7, gStringVar4, 104), yOffset, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NARROW, gStringVar4, GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 104), yOffset, TEXT_SKIP_DRAW, NULL);
     }
 }
 
 static void ItemStorage_PrintDescription(s32 id)
 {
-    const u8* description;
+    const u8 *description;
     u8 windowId = sItemStorageMenu->windowIds[ITEMPC_WIN_MESSAGE];
 
     // Get item description (or Cancel text)
@@ -1049,16 +1050,16 @@ static void ItemStorage_PrintDescription(s32 id)
         description = ItemStorage_GetMessage(MSG_GO_BACK_TO_PREV);
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    AddTextPrinterParameterized(windowId, 1, description, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, description, 0, 1, 0, NULL);
 }
 
 static void ItemStorage_AddScrollIndicator(void)
 {
     if (gPlayerPCItemPageInfo.scrollIndicatorTaskId == TASK_NONE)
-        gPlayerPCItemPageInfo.scrollIndicatorTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 176, 12, 148, 
-                                                                                                gPlayerPCItemPageInfo.count - gPlayerPCItemPageInfo.pageItems, 
-                                                                                                TAG_SCROLL_ARROW, 
-                                                                                                TAG_SCROLL_ARROW, 
+        gPlayerPCItemPageInfo.scrollIndicatorTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 176, 12, 148,
+                                                                                                gPlayerPCItemPageInfo.count - gPlayerPCItemPageInfo.pageItems,
+                                                                                                TAG_SCROLL_ARROW,
+                                                                                                TAG_SCROLL_ARROW,
                                                                                                 &gPlayerPCItemPageInfo.itemsAbove);
 }
 
@@ -1080,15 +1081,15 @@ static void ItemStorage_DrawSwapArrow(u8 y, u8 b, u8 speed)
 {
     u8 windowId = sItemStorageMenu->windowIds[ITEMPC_WIN_LIST];
     if (b == 0xFF)
-        FillWindowPixelRect(windowId, PIXEL_FILL(1), 0, y, GetMenuCursorDimensionByFont(1, 0), GetMenuCursorDimensionByFont(1, 1));
+        FillWindowPixelRect(windowId, PIXEL_FILL(1), 0, y, GetMenuCursorDimensionByFont(FONT_NORMAL, 0), GetMenuCursorDimensionByFont(FONT_NORMAL, 1));
     else
-        AddTextPrinterParameterized4(windowId, 1, 0, y, 0, 0, sSwapArrowTextColors, speed, gText_SelectorArrow2);
+        AddTextPrinterParameterized4(windowId, FONT_NORMAL, 0, y, 0, 0, sSwapArrowTextColors, speed, gText_SelectorArrow2);
 }
 
 static void ItemStorage_DrawItemIcon(u16 itemId)
 {
     u8 spriteId;
-    u8* spriteIdLoc = &sItemStorageMenu->spriteId;
+    u8 *spriteIdLoc = &sItemStorageMenu->spriteId;
 
     if (*spriteIdLoc == SPRITE_NONE)
     {
@@ -1107,7 +1108,7 @@ static void ItemStorage_DrawItemIcon(u16 itemId)
 
 static void ItemStorage_EraseItemIcon(void)
 {
-    u8* spriteIdLoc = &sItemStorageMenu->spriteId;
+    u8 *spriteIdLoc = &sItemStorageMenu->spriteId;
     if (*spriteIdLoc != SPRITE_NONE)
     {
         FreeSpriteTilesByTag(TAG_ITEM_ICON);
@@ -1133,7 +1134,7 @@ static void ItemStorage_CreateListMenu(u8 taskId)
     s16 *data;
     bool32 toss;
     u32 i, x;
-    const u8* text;
+    const u8 *text;
 
     data = gTasks[taskId].data;
     for (i = 0; i <= ITEMPC_WIN_LIST_END; i++)
@@ -1142,9 +1143,9 @@ static void ItemStorage_CreateListMenu(u8 taskId)
     text = gText_TossItem;
     if (!toss)
         text = gText_WithdrawItem;
-    x = GetStringCenterAlignXOffset(1, text, 104);
-    AddTextPrinterParameterized(sItemStorageMenu->windowIds[ITEMPC_WIN_TITLE], 1, text, x, 1, 0, NULL);
-    CopyWindowToVram(sItemStorageMenu->windowIds[ITEMPC_WIN_ICON], 2);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, text, 104);
+    AddTextPrinterParameterized(sItemStorageMenu->windowIds[ITEMPC_WIN_TITLE], FONT_NORMAL, text, x, 1, 0, NULL);
+    CopyWindowToVram(sItemStorageMenu->windowIds[ITEMPC_WIN_ICON], COPYWIN_GFX);
     ItemStorage_CompactList();
     ItemStorage_CompactCursor();
     ItemStorage_RefreshListMenu();
@@ -1154,7 +1155,7 @@ static void ItemStorage_CreateListMenu(u8 taskId)
     gTasks[taskId].func = ItemStorage_ProcessInput;
 }
 
-static const u8* ItemStorage_GetMessage(u16 itemId)
+static const u8 *ItemStorage_GetMessage(u16 itemId)
 {
     const u8 *string;
 
@@ -1199,7 +1200,7 @@ static void ItemStorage_PrintMessage(const u8 *string)
     u8 windowId = sItemStorageMenu->windowIds[ITEMPC_WIN_MESSAGE];
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     StringExpandPlaceholders(gStringVar4, string);
-    AddTextPrinterParameterized(windowId, 1, gStringVar4, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
 }
 
 // Process input while on the item storage's item list
@@ -1241,8 +1242,8 @@ static void ItemStorage_ReturnToMenuSelect(u8 taskId)
     s16 *data = gTasks[taskId].data;
     if (!IsDma3ManagerBusyWithBgCopy())
     {
-        DrawDialogueFrame(0, 0);
-        
+        DrawDialogueFrame(0, FALSE);
+
         // Select Withdraw/Toss by default depending on which was just exited
         if (!tInTossMenu)
             InitItemStorageMenu(taskId, MENU_WITHDRAW);
@@ -1338,7 +1339,7 @@ static void ItemStorage_PrintItemQuantity(u8 windowId, u16 value, u32 mode, u8 x
 {
     ConvertIntToDecimalStringN(gStringVar1, value, mode, n);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
-    AddTextPrinterParameterized(windowId, 1, gStringVar4, GetStringCenterAlignXOffset(1, gStringVar4, 48), y, 0, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 48), y, 0, NULL);
 }
 
 // Start an item Withdraw/Toss
@@ -1370,7 +1371,7 @@ static void ItemStorage_DoItemAction(u8 taskId)
             ItemStorage_DoItemToss(taskId);
             return;
         }
-        
+
         // Tossing multiple items, show "how many" message
         CopyItemName(gSaveBlock1Ptr->pcItems[pos].itemId, gStringVar1);
         ItemStorage_PrintMessage(ItemStorage_GetMessage(MSG_HOW_MANY_TO_TOSS));

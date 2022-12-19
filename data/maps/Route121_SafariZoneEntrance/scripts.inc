@@ -33,8 +33,7 @@ Route121_SafariZoneEntrance_EventScript_InfoAttendant::
 	lock
 	faceplayer
 	msgbox Route121_SafariZoneEntrance_Text_WelcomeFirstTime, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq Route121_SafariZoneEntrance_EventScript_FirstTimeInfo
+	goto_if_eq VAR_RESULT, YES, Route121_SafariZoneEntrance_EventScript_FirstTimeInfo
 	msgbox Route121_SafariZoneEntrance_Text_ComeInAndEnjoy, MSGBOX_DEFAULT
 	release
 	end
@@ -46,28 +45,25 @@ Route121_SafariZoneEntrance_EventScript_FirstTimeInfo::
 
 Route121_SafariZoneEntrance_EventScript_EntranceCounterTrigger::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
-	showmoneybox 0, 0, 0
+	showmoneybox 0, 0
 	msgbox Route121_SafariZoneEntrance_Text_WouldYouLikeToPlay, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq Route121_SafariZoneEntrance_EventScript_TryEnterSafariZone
+	goto_if_eq VAR_RESULT, YES, Route121_SafariZoneEntrance_EventScript_TryEnterSafariZone
 	msgbox Route121_SafariZoneEntrance_Text_PlayAnotherTime, MSGBOX_DEFAULT
 	goto Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter
 	end
 
 Route121_SafariZoneEntrance_EventScript_TryEnterSafariZone::
-	checkitem ITEM_POKEBLOCK_CASE, 1
-	compare VAR_RESULT, 0
-	goto_if_eq Route121_SafariZoneEntrance_EventScript_NoPokeblockCase
+	checkitem ITEM_POKEBLOCK_CASE
+	goto_if_eq VAR_RESULT, 0, Route121_SafariZoneEntrance_EventScript_NoPokeblockCase
 	call Route121_SafariZoneEntrance_EventScript_CheckHasRoomForPokemon
-	checkmoney 500, 0
-	compare VAR_RESULT, 0
-	goto_if_eq Route121_SafariZoneEntrance_EventScript_NotEnoughMoney
+	checkmoney 500
+	goto_if_eq VAR_RESULT, 0, Route121_SafariZoneEntrance_EventScript_NotEnoughMoney
 	playse SE_SHOP
 	msgbox Route121_SafariZoneEntrance_Text_ThatWillBe500Please, MSGBOX_DEFAULT
-	removemoney 500, 0
-	updatemoneybox 0, 0
+	removemoney 500
+	updatemoneybox
 	msgbox Route121_SafariZoneEntrance_Text_HereAreYourSafariBalls, MSGBOX_DEFAULT
 	playfanfare MUS_OBTAIN_ITEM
 	message Route121_SafariZoneEntrance_Text_Received30SafariBalls
@@ -80,17 +76,15 @@ Route121_SafariZoneEntrance_EventScript_TryEnterSafariZone::
 	special EnterSafariMode
 	setvar VAR_SAFARI_ZONE_STATE, 2
 	clearflag FLAG_GOOD_LUCK_SAFARI_ZONE
-	warp MAP_SAFARI_ZONE_SOUTH, 255, 32, 33
+	warp MAP_SAFARI_ZONE_SOUTH, 32, 33
 	waitstate
 	end
 
 Route121_SafariZoneEntrance_EventScript_CheckHasRoomForPokemon::
 	getpartysize
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_ne Route121_SafariZoneEntrance_EventScript_HasRoomForPokemon
+	goto_if_ne VAR_RESULT, PARTY_SIZE, Route121_SafariZoneEntrance_EventScript_HasRoomForPokemon
 	specialvar VAR_RESULT, ScriptCheckFreePokemonStorageSpace
-	compare VAR_RESULT, 1
-	goto_if_eq Route121_SafariZoneEntrance_EventScript_HasRoomForPokemon
+	goto_if_eq VAR_RESULT, 1, Route121_SafariZoneEntrance_EventScript_HasRoomForPokemon
 	msgbox Route121_SafariZoneEntrance_Text_PCIsFull, MSGBOX_DEFAULT
 	goto Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter
 	end

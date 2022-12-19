@@ -82,7 +82,7 @@ se_m_morning_sun_2:
 	.byte		N06   , Gs6 , v108
 	.byte	W03
 	.byte	W03
-	.byte		        Bn5 
+	.byte		        Bn5
 	.byte	W03
 	.byte	W03
 	.byte		        Gs6 , v100

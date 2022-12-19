@@ -22,19 +22,16 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleVisitingTrainer::
 	setvar VAR_0x8005, 0
 	special DoSpecialTrainerBattle
 	waitstate
-	compare VAR_RESULT, B_OUTCOME_DREW
-	call_if_eq SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleTie
-	compare VAR_RESULT, B_OUTCOME_WON
-	call_if_eq SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleWon
-	compare VAR_RESULT, B_OUTCOME_LOST
-	call_if_eq SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleLost
+	call_if_eq VAR_RESULT, B_OUTCOME_DREW, SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleTie
+	call_if_eq VAR_RESULT, B_OUTCOME_WON, SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleWon
+	call_if_eq VAR_RESULT, B_OUTCOME_LOST, SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleLost
 	closemessage
 	special HealPlayerParty
 	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_MysteryEventsHouse_B1F_Movement_PlayerExitBasement
 	waitmovement 0
 	special LoadPlayerParty
 	setvar VAR_TEMP_1, 1
-	warp MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_1F, 255, 3, 1
+	warp MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_1F, 3, 1
 	waitstate
 	releaseall
 	end

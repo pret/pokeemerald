@@ -16,10 +16,8 @@ SlateportCity_BattleTentBattleRoom_OnTransition:
 
 SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfx::
 	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxMale
-	compare VAR_RESULT, FEMALE
-	goto_if_eq SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale
+	goto_if_eq VAR_RESULT, MALE, SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxMale
+	goto_if_eq VAR_RESULT, FEMALE, SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale
 	return
 
 SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxMale::
@@ -68,7 +66,7 @@ SlateportCity_BattleTentBattleRoom_EventScript_EnterRoom::
 SlateportCity_BattleTent_EventScript_WarpToLobbyLost::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
 	special LoadPlayerParty
-	warp MAP_SLATEPORT_CITY_BATTLE_TENT_LOBBY, 255, 6, 6
+	warp MAP_SLATEPORT_CITY_BATTLE_TENT_LOBBY, 6, 6
 	waitstate
 @ forced stop
 
@@ -79,14 +77,14 @@ SlateportCity_BattleTentBattleRoom_EventScript_DefeatedOpponent::
 	switch VAR_RESULT
 	case 3, SlateportCity_BattleTentBattleRoom_EventScript_WarpToLobbyWon
 	setvar VAR_0x8006, 1
-	warp MAP_SLATEPORT_CITY_BATTLE_TENT_CORRIDOR, 255, 2, 3
+	warp MAP_SLATEPORT_CITY_BATTLE_TENT_CORRIDOR, 2, 3
 	waitstate
 @ forced stop
 
 SlateportCity_BattleTentBattleRoom_EventScript_WarpToLobbyWon::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
 	special LoadPlayerParty
-	warp MAP_SLATEPORT_CITY_BATTLE_TENT_LOBBY, 255, 6, 6
+	warp MAP_SLATEPORT_CITY_BATTLE_TENT_LOBBY, 6, 6
 	waitstate
 @ forced stop
 
@@ -94,7 +92,7 @@ SlateportCity_BattleTentBattleRoom_Movement_PlayerEnter:
 	walk_up
 	walk_up
 	walk_up
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 SlateportCity_BattleTentBattleRoom_Movement_OpponentEnter:
@@ -102,6 +100,6 @@ SlateportCity_BattleTentBattleRoom_Movement_OpponentEnter:
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 

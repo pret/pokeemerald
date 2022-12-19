@@ -17,32 +17,32 @@ MauvilleCity_Gym_EventScript_UpdateBarriers::
 	end
 
 MauvilleCity_Gym_EventScript_SetAltBarriers::
-	setmetatile 3, 11, METATILE_MauvilleGym_RedBeamV1_On, 1
-	setmetatile 3, 12, METATILE_MauvilleGym_RedBeamV2_On, 1
-	setmetatile 3, 13, METATILE_MauvilleGym_PoleTop_On, 1
-	setmetatile 4, 10, METATILE_MauvilleGym_RedBeamH1_On, 0
-	setmetatile 5, 10, METATILE_MauvilleGym_RedBeamH2_On, 0
-	setmetatile 4, 11, METATILE_MauvilleGym_RedBeamH3_On, 1
-	setmetatile 5, 11, METATILE_MauvilleGym_RedBeamH4_On, 1
-	setmetatile 7, 10, METATILE_MauvilleGym_RedBeamH1_On, 0
-	setmetatile 8, 10, METATILE_MauvilleGym_RedBeamH2_On, 0
-	setmetatile 7, 11, METATILE_MauvilleGym_RedBeamH3_On, 1
-	setmetatile 8, 11, METATILE_MauvilleGym_RedBeamH4_On, 1
-	setmetatile 4, 13, METATILE_MauvilleGym_GreenBeamH1_Off, 0
-	setmetatile 5, 13, METATILE_MauvilleGym_GreenBeamH2_Off, 0
-	setmetatile 4, 14, METATILE_MauvilleGym_GreenBeamH3_Off, 0
-	setmetatile 5, 14, METATILE_MauvilleGym_GreenBeamH4_Off, 0
-	setmetatile 1, 10, METATILE_MauvilleGym_GreenBeamH1_Off, 0
-	setmetatile 2, 10, METATILE_MauvilleGym_GreenBeamH2_Off, 0
-	setmetatile 1, 11, METATILE_MauvilleGym_GreenBeamH3_Off, 0
-	setmetatile 2, 11, METATILE_MauvilleGym_GreenBeamH4_Off, 0
-	setmetatile 6, 8, METATILE_MauvilleGym_PoleBottom_On, 1
-	setmetatile 6, 9, METATILE_MauvilleGym_FloorTile, 0
-	setmetatile 6, 10, METATILE_MauvilleGym_PoleTop_Off, 0
-	setmetatile 4, 6, METATILE_MauvilleGym_GreenBeamH1_Off, 0
-	setmetatile 5, 6, METATILE_MauvilleGym_GreenBeamH2_Off, 0
-	setmetatile 4, 7, METATILE_MauvilleGym_GreenBeamH3_Off, 0
-	setmetatile 5, 7, METATILE_MauvilleGym_GreenBeamH4_Off, 0
+	setmetatile 3, 11, METATILE_MauvilleGym_RedBeamV1_On, TRUE
+	setmetatile 3, 12, METATILE_MauvilleGym_RedBeamV2_On, TRUE
+	setmetatile 3, 13, METATILE_MauvilleGym_PoleTop_On, TRUE
+	setmetatile 4, 10, METATILE_MauvilleGym_RedBeamH1_On, FALSE
+	setmetatile 5, 10, METATILE_MauvilleGym_RedBeamH2_On, FALSE
+	setmetatile 4, 11, METATILE_MauvilleGym_RedBeamH3_On, TRUE
+	setmetatile 5, 11, METATILE_MauvilleGym_RedBeamH4_On, TRUE
+	setmetatile 7, 10, METATILE_MauvilleGym_RedBeamH1_On, FALSE
+	setmetatile 8, 10, METATILE_MauvilleGym_RedBeamH2_On, FALSE
+	setmetatile 7, 11, METATILE_MauvilleGym_RedBeamH3_On, TRUE
+	setmetatile 8, 11, METATILE_MauvilleGym_RedBeamH4_On, TRUE
+	setmetatile 4, 13, METATILE_MauvilleGym_GreenBeamH1_Off, FALSE
+	setmetatile 5, 13, METATILE_MauvilleGym_GreenBeamH2_Off, FALSE
+	setmetatile 4, 14, METATILE_MauvilleGym_GreenBeamH3_Off, FALSE
+	setmetatile 5, 14, METATILE_MauvilleGym_GreenBeamH4_Off, FALSE
+	setmetatile 1, 10, METATILE_MauvilleGym_GreenBeamH1_Off, FALSE
+	setmetatile 2, 10, METATILE_MauvilleGym_GreenBeamH2_Off, FALSE
+	setmetatile 1, 11, METATILE_MauvilleGym_GreenBeamH3_Off, FALSE
+	setmetatile 2, 11, METATILE_MauvilleGym_GreenBeamH4_Off, FALSE
+	setmetatile 6, 8, METATILE_MauvilleGym_PoleBottom_On, TRUE
+	setmetatile 6, 9, METATILE_MauvilleGym_FloorTile, FALSE
+	setmetatile 6, 10, METATILE_MauvilleGym_PoleTop_Off, FALSE
+	setmetatile 4, 6, METATILE_MauvilleGym_GreenBeamH1_Off, FALSE
+	setmetatile 5, 6, METATILE_MauvilleGym_GreenBeamH2_Off, FALSE
+	setmetatile 4, 7, METATILE_MauvilleGym_GreenBeamH3_Off, FALSE
+	setmetatile 5, 7, METATILE_MauvilleGym_GreenBeamH4_Off, FALSE
 	end
 
 MauvilleCity_Gym_EventScript_Switch1Pressed::
@@ -76,11 +76,9 @@ MauvilleCity_Gym_EventScript_DeactivatePuzzle::
 MauvilleCity_Gym_EventScript_Wattson::
 	trainerbattle_single TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq MauvilleCity_Gym_EventScript_WattsonRematch
+	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_Gym_EventScript_WattsonRematch
 	goto_if_unset FLAG_RECEIVED_TM34, MauvilleCity_Gym_EventScript_GiveShockWave2
-	compare VAR_NEW_MAUVILLE_STATE, 2
-	goto_if_eq MauvilleCity_Gym_EventScript_CompletedNewMauville
+	goto_if_eq VAR_NEW_MAUVILLE_STATE, 2, MauvilleCity_Gym_EventScript_CompletedNewMauville
 	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -95,8 +93,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	setflag FLAG_DEFEATED_MAUVILLE_GYM
 	setflag FLAG_BADGE03_GET
 	addvar VAR_PETALBURG_GYM_STATE, 1
-	compare VAR_PETALBURG_GYM_STATE, 6
-	call_if_eq Common_EventScript_ReadyPetalburgGymForBattle
+	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
 	setvar VAR_0x8008, 3
 	call Common_EventScript_SetGymTrainers
 	special MauvilleGymDeactivatePuzzle
@@ -116,8 +113,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 
 MauvilleCity_Gym_EventScript_GiveShockWave2::
 	giveitem ITEM_TM34
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM34
 	release
@@ -125,8 +121,7 @@ MauvilleCity_Gym_EventScript_GiveShockWave2::
 
 MauvilleCity_Gym_EventScript_GiveShockWave::
 	giveitem ITEM_TM34
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_BagIsFull
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM34
 	return
@@ -144,8 +139,7 @@ MauvilleCity_Gym_EventScript_WattsonRematch::
 MauvilleCity_Gym_EventScript_Switch1::
 	lockall
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_SwitchDoNothing
-	compare VAR_MAUVILLE_GYM_STATE, 1
-	goto_if_eq MauvilleCity_Gym_EventScript_SwitchDoNothing
+	goto_if_eq VAR_MAUVILLE_GYM_STATE, 1, MauvilleCity_Gym_EventScript_SwitchDoNothing
 	setvar VAR_MAUVILLE_GYM_STATE, 1
 	setvar VAR_0x8004, 0
 	goto MauvilleCity_Gym_EventScript_PressFloorSwitch
@@ -154,8 +148,7 @@ MauvilleCity_Gym_EventScript_Switch1::
 MauvilleCity_Gym_EventScript_Switch2::
 	lockall
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_SwitchDoNothing
-	compare VAR_MAUVILLE_GYM_STATE, 2
-	goto_if_eq MauvilleCity_Gym_EventScript_SwitchDoNothing
+	goto_if_eq VAR_MAUVILLE_GYM_STATE, 2, MauvilleCity_Gym_EventScript_SwitchDoNothing
 	setvar VAR_MAUVILLE_GYM_STATE, 2
 	setvar VAR_0x8004, 1
 	goto MauvilleCity_Gym_EventScript_PressFloorSwitch
@@ -164,8 +157,7 @@ MauvilleCity_Gym_EventScript_Switch2::
 MauvilleCity_Gym_EventScript_Switch3::
 	lockall
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_SwitchDoNothing
-	compare VAR_MAUVILLE_GYM_STATE, 3
-	goto_if_eq MauvilleCity_Gym_EventScript_SwitchDoNothing
+	goto_if_eq VAR_MAUVILLE_GYM_STATE, 3, MauvilleCity_Gym_EventScript_SwitchDoNothing
 	setvar VAR_MAUVILLE_GYM_STATE, 3
 	setvar VAR_0x8004, 2
 	goto MauvilleCity_Gym_EventScript_PressFloorSwitch
@@ -174,8 +166,7 @@ MauvilleCity_Gym_EventScript_Switch3::
 MauvilleCity_Gym_EventScript_Switch4::
 	lockall
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_SwitchDoNothing
-	compare VAR_MAUVILLE_GYM_STATE, 4
-	goto_if_eq MauvilleCity_Gym_EventScript_SwitchDoNothing
+	goto_if_eq VAR_MAUVILLE_GYM_STATE, 4, MauvilleCity_Gym_EventScript_SwitchDoNothing
 	setvar VAR_MAUVILLE_GYM_STATE, 4
 	setvar VAR_0x8004, 3
 	goto MauvilleCity_Gym_EventScript_PressFloorSwitch

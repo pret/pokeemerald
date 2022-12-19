@@ -11,12 +11,10 @@ LilycoveCity_DepartmentStore_1F_EventScript_LotteryClerk::
 	lock
 	faceplayer
 	dotimebasedevents
-	compare VAR_POKELOT_PRIZE_ITEM, ITEM_NONE
-	goto_if_ne LilycoveCity_DepartmentStore_1F_EventScript_GivePrizeFromEarlier
+	goto_if_ne VAR_POKELOT_PRIZE_ITEM, ITEM_NONE, LilycoveCity_DepartmentStore_1F_EventScript_GivePrizeFromEarlier
 	goto_if_set FLAG_DAILY_PICKED_LOTO_TICKET, LilycoveCity_DepartmentStore_1F_EventScript_ComeBackTomorrow
 	msgbox LilycoveCity_DepartmentStore_1F_Text_LotteryCornerDrawTicket, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain
+	goto_if_eq VAR_RESULT, NO, LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain
 	setflag FLAG_DAILY_PICKED_LOTO_TICKET
 	message LilycoveCity_DepartmentStore_1F_Text_PleasePickTicket
 	waitmessage
@@ -24,7 +22,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_LotteryClerk::
 	copyvar VAR_0x8008, VAR_RESULT
 	special BufferLottoTicketNumber
 	msgbox LilycoveCity_DepartmentStore_1F_Text_TicketNumberIsXPleaseWait, MSGBOX_DEFAULT
-	applymovement LOCALID_LOTTERY_CLERK, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_LOTTERY_CLERK, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	playse SE_PC_ON
 	special DoLotteryCornerComputerEffect
@@ -34,25 +32,17 @@ LilycoveCity_DepartmentStore_1F_EventScript_LotteryClerk::
 	delay 10
 	applymovement LOCALID_LOTTERY_CLERK, Common_Movement_FacePlayer
 	waitmovement 0
-	compare VAR_0x8004, 0
-	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_NoMatch
+	goto_if_eq VAR_0x8004, 0, LilycoveCity_DepartmentStore_1F_EventScript_NoMatch
 	incrementgamestat GAME_STAT_WON_POKEMON_LOTTERY
-	compare VAR_0x8006, 0
-	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPartyMon
-	compare VAR_0x8006, 1
-	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPCMon
-	bufferitemname 0, VAR_0x8005
-	compare VAR_0x8004, 1
-	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_TwoDigitMatch
-	compare VAR_0x8004, 2
-	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_ThreeDigitMatch
-	compare VAR_0x8004, 3
-	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_FourDigitMatch
-	compare VAR_0x8004, 4
-	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_FullMatch
+	call_if_eq VAR_0x8006, 0, LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPartyMon
+	call_if_eq VAR_0x8006, 1, LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPCMon
+	bufferitemname STR_VAR_1, VAR_0x8005
+	call_if_eq VAR_0x8004, 1, LilycoveCity_DepartmentStore_1F_EventScript_TwoDigitMatch
+	call_if_eq VAR_0x8004, 2, LilycoveCity_DepartmentStore_1F_EventScript_ThreeDigitMatch
+	call_if_eq VAR_0x8004, 3, LilycoveCity_DepartmentStore_1F_EventScript_FourDigitMatch
+	call_if_eq VAR_0x8004, 4, LilycoveCity_DepartmentStore_1F_EventScript_FullMatch
 	giveitem VAR_0x8005
-	compare VAR_RESULT, FALSE
-	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_RecordPrizeNoRoom
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_DepartmentStore_1F_EventScript_RecordPrizeNoRoom
 	special TryPutLotteryWinnerReportOnAir
 	goto LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain2
 	end
@@ -115,8 +105,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize::
 LilycoveCity_DepartmentStore_1F_EventScript_GivePrizeFromEarlier::
 	msgbox LilycoveCity_DepartmentStore_1F_Text_PrizeWeveBeenHolding, MSGBOX_DEFAULT
 	giveitem VAR_POKELOT_PRIZE_ITEM
-	compare VAR_RESULT, FALSE
-	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize
 	copyvar VAR_0x8004, VAR_POKELOT_PRIZE_PLACE
 	copyvar VAR_0x8005, VAR_POKELOT_PRIZE_ITEM
 	special TryPutLotteryWinnerReportOnAir
@@ -141,7 +130,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_Azumarill::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_AZUMARILL, 0
+	playmoncry SPECIES_AZUMARILL, CRY_MODE_NORMAL
 	msgbox LilycoveCity_DepartmentStore_1F_Text_Azumarill, MSGBOX_DEFAULT
 	waitmoncry
 	release

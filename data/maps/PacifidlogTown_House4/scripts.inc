@@ -13,10 +13,8 @@ PacifidlogTown_House4_EventScript_Boy::
 	lock
 	faceplayer
 	msgbox PacifidlogTown_House4_Text_WhereDidYouComeFrom, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq PacifidlogTown_House4_EventScript_Yes
-	compare VAR_RESULT, NO
-	goto_if_eq PacifidlogTown_House4_EventScript_No
+	goto_if_eq VAR_RESULT, YES, PacifidlogTown_House4_EventScript_Yes
+	goto_if_eq VAR_RESULT, NO, PacifidlogTown_House4_EventScript_No
 	end
 
 PacifidlogTown_House4_EventScript_Yes::

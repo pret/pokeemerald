@@ -7,8 +7,7 @@ Route104_MrBrineysHouse_MapScripts::
 
 Route104_MrBrineysHouse_OnTransition:
 	setflag FLAG_LANDMARK_MR_BRINEY_HOUSE
-	compare VAR_BRINEY_HOUSE_STATE, 1
-	call_if_eq Route104_MrBrineysHouse_EventScript_SetBrineyPeekoPos
+	call_if_eq VAR_BRINEY_HOUSE_STATE, 1, Route104_MrBrineysHouse_EventScript_SetBrineyPeekoPos
 	call_if_set FLAG_RECEIVED_POKENAV, Route104_MrBrineysHouse_EventScript_HideRustboroRival
 	end
 
@@ -36,8 +35,7 @@ Route104_MrBrineysHouse_EventScript_SailingIntro::
 	setflag FLAG_MR_BRINEY_SAILING_INTRO
 	msgbox Route104_MrBrineysHouse_Text_WaitUpPeeko, MSGBOX_DEFAULT
 	msgbox Route104_MrBrineysHouse_Text_ItsYouLetsSailToDewford, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing
+	goto_if_eq VAR_RESULT, NO, Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing
 	goto Route104_MrBrineysHouse_EventScript_SailToDewford
 	end
 
@@ -53,15 +51,13 @@ Route104_MrBrineysHouse_EventScript_WhereAreWeBound::
 
 Route104_MrBrineysHouse_EventScript_SailBothDeliveries::
 	msgbox Route104_MrBrineysHouse_Text_NeedToMakeDeliveriesSailToDewford, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing
+	goto_if_eq VAR_RESULT, NO, Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing
 	goto Route104_MrBrineysHouse_EventScript_SailToDewford
 	end
 
 Route104_MrBrineysHouse_EventScript_SailDeliverPackage::
 	msgbox Route104_MrBrineysHouse_Text_NeedToDeliverPackageSailToDewford, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing
+	goto_if_eq VAR_RESULT, NO, Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing
 	goto Route104_MrBrineysHouse_EventScript_SailToDewford
 	end
 
@@ -86,7 +82,7 @@ Route104_MrBrineysHouse_EventScript_SailToDewford::
 	setvar VAR_ROUTE104_STATE, 2
 	setflag FLAG_HIDE_RUSTBORO_CITY_RIVAL
 	setflag FLAG_HIDE_ROUTE_104_RIVAL
-	warp MAP_ROUTE104, 255, 13, 51
+	warp MAP_ROUTE104, 13, 51
 	waitstate
 	releaseall
 	end
@@ -95,7 +91,7 @@ Route104_MrBrineysHouse_EventScript_Peeko::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_WINGULL, 0
+	playmoncry SPECIES_WINGULL, CRY_MODE_NORMAL
 	msgbox Route104_MrBrineysHouse_Text_Peeko, MSGBOX_DEFAULT
 	waitmoncry
 	release

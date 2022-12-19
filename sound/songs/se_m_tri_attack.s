@@ -68,17 +68,17 @@ se_m_tri_attack_2:
 	.byte		VOL   , 110*se_m_tri_attack_mvl/mxv
 	.byte		N02   , Gs3 , v032
 	.byte	W02
-	.byte		        Gn3 
+	.byte		        Gn3
 	.byte	W02
-	.byte		        Fn3 
+	.byte		        Fn3
 	.byte	W03
-	.byte		        En3 
+	.byte		        En3
 	.byte	W02
-	.byte		        Dn3 
+	.byte		        Dn3
 	.byte	W03
-	.byte		        Cn3 
+	.byte		        Cn3
 	.byte	W02
-	.byte		        Gs2 
+	.byte		        Gs2
 	.byte	W10
 	.byte	FINE
 

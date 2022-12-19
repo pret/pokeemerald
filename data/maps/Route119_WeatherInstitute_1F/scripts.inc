@@ -5,8 +5,7 @@ Route119_WeatherInstitute_1F_MapScripts::
 	.byte 0
 
 Route119_WeatherInstitute_1F_OnTransition:
-	compare VAR_WEATHER_INSTITUTE_STATE, 0
-	call_if_eq Route119_WeatherInstitute_1F_EventScript_SetLittleBoyPos
+	call_if_eq VAR_WEATHER_INSTITUTE_STATE, 0, Route119_WeatherInstitute_1F_EventScript_SetLittleBoyPos
 	end
 
 Route119_WeatherInstitute_1F_EventScript_SetLittleBoyPos::
@@ -18,8 +17,7 @@ Route119_WeatherInstitute_1F_EventScript_LittleBoy::
 	lock
 	faceplayer
 	special GetPlayerBigGuyGirlString
-	compare VAR_WEATHER_INSTITUTE_STATE, 0
-	goto_if_eq Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere
+	goto_if_eq VAR_WEATHER_INSTITUTE_STATE, 0, Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere
 	msgbox Route119_WeatherInstitute_1F_Text_WowYoureStrong, MSGBOX_DEFAULT
 	release
 	end
@@ -36,8 +34,7 @@ Route119_WeatherInstitute_1F_EventScript_InstituteWorker1::
 	setvar VAR_0x8004, 0
 	call_if_set FLAG_DEFEATED_KYOGRE, Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
 	call_if_set FLAG_DEFEATED_GROUDON, Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
-	compare VAR_0x8004, 2  @ Both defeated
-	goto_if_eq Route119_WeatherInstitute_1F_EventScript_StudyingRain
+	goto_if_eq VAR_0x8004, 2, Route119_WeatherInstitute_1F_EventScript_StudyingRain  @ Both defeated
 	msgbox Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather, MSGBOX_DEFAULT
 	release
 	end

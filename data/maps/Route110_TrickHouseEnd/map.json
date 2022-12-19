@@ -34,14 +34,14 @@
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_PUZZLE1",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 2,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_CORRIDOR",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

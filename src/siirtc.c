@@ -4,6 +4,7 @@
 
 #include "gba/gba.h"
 #include "siirtc.h"
+#include "config.h"
 
 #define STATUS_INTFE  0x02 // frequency interrupt enable
 #define STATUS_INTME  0x08 // per-minute interrupt enable

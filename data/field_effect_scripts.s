@@ -50,7 +50,7 @@ gFieldEffectScriptPointers::
 	.4byte gFieldEffectScript_HotSpringsWater           @ FLDEFF_HOT_SPRINGS_WATER
 	.4byte gFieldEffectScript_UseWaterfall              @ FLDEFF_USE_WATERFALL
 	.4byte gFieldEffectScript_UseDive                   @ FLDEFF_USE_DIVE
-	.4byte gFieldEffectScript_Pokeball                  @ FLDEFF_POKEBALL
+	.4byte gFieldEffectScript_PokeballTrail             @ FLDEFF_POKEBALL_TRAIL
 	.4byte gFieldEffectScript_HeartIcon                 @ FLDEFF_HEART_ICON
 	.4byte gFieldEffectScript_Nop47                     @ FLDEFF_NOP_47
 	.4byte gFieldEffectScript_Nop48                     @ FLDEFF_NOP_48
@@ -254,9 +254,9 @@ gFieldEffectScript_UseDive::
 	field_eff_callnative FldEff_UseDive
 	field_eff_end
 
-gFieldEffectScript_Pokeball::
+gFieldEffectScript_PokeballTrail::
 	field_eff_loadpal gSpritePalette_Pokeball
-	field_eff_callnative FldEff_Pokeball
+	field_eff_callnative FldEff_PokeballTrail
 	field_eff_end
 
 gFieldEffectScript_HeartIcon::

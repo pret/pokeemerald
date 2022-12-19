@@ -6,7 +6,7 @@ MtPyre_2F_MapScripts::
 
 MtPyre_2F_SetHoleWarp:
 	setstepcallback STEP_CB_CRACKED_FLOOR
-	setholewarp MAP_MT_PYRE_1F, 255, 0, 0
+	setholewarp MAP_MT_PYRE_1F
 	end
 
 MtPyre_2F_EventScript_Woman::

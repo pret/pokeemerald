@@ -19,8 +19,7 @@ BattleFrontier_BattleDomePreBattleRoom_OnFrame:
 	.2byte 0
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_EnterRoom::
-	compare VAR_0x8006, 1
-	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_ReturnFromBattle
+	goto_if_eq VAR_0x8006, 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReturnFromBattle
 	frontier_set FRONTIER_DATA_RECORD_DISABLED, TRUE
 	setvar VAR_TEMP_0, 1
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerEnter
@@ -31,8 +30,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound::
 	waitmessage
 	switch VAR_RESULT  @ No case?
 	call BattleFrontier_EventScript_GetCantRecordBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRoundNoRecord
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRoundNoRecord
 	multichoice 16, 0, MULTI_TOURNEY_WITH_RECORD, TRUE
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowOpponentInfo
@@ -146,8 +144,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_ContinueChallenge::
 	special ChoosePartyForBattleFrontier
 	waitstate
 	frontier_resetsketch
-	compare VAR_RESULT, 0
-	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound
 	dome_set DOME_DATA_SELECTED_MONS
 	dome_reduceparty
 	dome_setopponent
@@ -163,7 +160,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_ContinueChallenge::
 	waitmovement 0
 	closedoor 5, 1
 	waitdooranim
-	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM, 255, 9, 5
+	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM, 9, 5
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

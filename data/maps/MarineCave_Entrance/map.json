@@ -20,7 +20,7 @@
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_MARINE_CAVE_END",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

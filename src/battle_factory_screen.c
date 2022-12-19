@@ -410,7 +410,7 @@ static const struct OamData sOam_Select_Pokeball =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -427,7 +427,7 @@ static const struct OamData sOam_Select_Arrow =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -444,7 +444,7 @@ static const struct OamData sOam_Select_MenuHighlight =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
@@ -461,7 +461,7 @@ static const struct OamData sOam_Select_MonPicBgAnim =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -661,7 +661,7 @@ static const struct OamData sOam_Swap_Pokeball =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -678,7 +678,7 @@ static const struct OamData sOam_Swap_Arrow =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -695,7 +695,7 @@ static const struct OamData sOam_Swap_MenuHighlight =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
@@ -712,7 +712,7 @@ static const struct OamData sOam_Swap_MonPicBgAnim =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -1131,8 +1131,7 @@ static void CB2_InitSelectScreen(void)
     switch (gMain.state)
     {
     case 0:
-        if (sFactorySelectMons != NULL)
-            FREE_AND_SET_NULL(sFactorySelectMons);
+        TRY_FREE_AND_SET_NULL(sFactorySelectMons);
         SetHBlankCallback(NULL);
         SetVBlankCallback(NULL);
         CpuFill32(0, (void *)VRAM, VRAM_SIZE);
@@ -1147,12 +1146,12 @@ static void CB2_InitSelectScreen(void)
         sSelectMonPicBgTilesetBuffer = AllocZeroed(0x440);
         sSelectMenuTilemapBuffer = Alloc(BG_SCREEN_SIZE);
         sSelectMonPicBgTilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
-        ChangeBgX(0, 0, 0);
-        ChangeBgY(0, 0, 0);
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
-        ChangeBgX(3, 0, 0);
-        ChangeBgY(3, 0, 0);
+        ChangeBgX(0, 0, BG_COORD_SET);
+        ChangeBgY(0, 0, BG_COORD_SET);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
+        ChangeBgX(3, 0, BG_COORD_SET);
+        ChangeBgY(3, 0, BG_COORD_SET);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 0);
@@ -1404,7 +1403,7 @@ static void Select_HandleMonSelectionChange(void)
     if (sFactorySelectScreen->mons[cursorPos].selectedId) // Deselect a mon.
     {
         paletteNum = IndexOfSpritePaletteTag(PALTAG_BALL_GRAY);
-        if (sFactorySelectScreen->selectingMonsState == FRONTIER_PARTY_SIZE 
+        if (sFactorySelectScreen->selectingMonsState == FRONTIER_PARTY_SIZE
          && sFactorySelectScreen->mons[cursorPos].selectedId == 1)
         {
             for (i = 0; i < SELECTABLE_MONS_COUNT; i++)
@@ -1748,9 +1747,9 @@ static void CreateFrontierFactorySelectableMons(u8 firstMonId)
         u16 monId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
         sFactorySelectScreen->mons[i + firstMonId].monId = monId;
         if (i < rentalRank)
-            ivs = GetFactoryMonFixedIV(challengeNum + 1, 0);
+            ivs = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
         else
-            ivs = GetFactoryMonFixedIV(challengeNum, 0);
+            ivs = GetFactoryMonFixedIV(challengeNum, FALSE);
         CreateMonWithEVSpreadNatureOTID(&sFactorySelectScreen->mons[i + firstMonId].monData,
                                              gFacilityTrainerMons[monId].species,
                                              level,
@@ -1854,15 +1853,15 @@ static void Select_ErasePopupMenu(u8 windowId)
     gSprites[sFactorySelectScreen->menuCursor1SpriteId].invisible = TRUE;
     gSprites[sFactorySelectScreen->menuCursor2SpriteId].invisible = TRUE;
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
-    CopyWindowToVram(windowId, 2);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
     ClearWindowTilemap(windowId);
 }
 
 static void Select_PrintRentalPkmnString(void)
 {
     FillWindowPixelBuffer(SELECT_WIN_TITLE, PIXEL_FILL(0));
-    AddTextPrinterParameterized(SELECT_WIN_TITLE, 1, gText_RentalPkmn2, 2, 1, 0, NULL);
-    CopyWindowToVram(SELECT_WIN_TITLE, 3);
+    AddTextPrinterParameterized(SELECT_WIN_TITLE, FONT_NORMAL, gText_RentalPkmn2, 2, 1, 0, NULL);
+    CopyWindowToVram(SELECT_WIN_TITLE, COPYWIN_FULL);
 }
 
 static void Select_PrintMonSpecies(void)
@@ -1874,9 +1873,9 @@ static void Select_PrintMonSpecies(void)
     FillWindowPixelBuffer(SELECT_WIN_SPECIES, PIXEL_FILL(0));
     species = GetMonData(&sFactorySelectScreen->mons[monId].monData, MON_DATA_SPECIES, NULL);
     StringCopy(gStringVar4, gSpeciesNames[species]);
-    x = GetStringRightAlignXOffset(1, gStringVar4, 86);
-    AddTextPrinterParameterized3(SELECT_WIN_SPECIES, 1, x, 1, sSpeciesNameTextColors, 0, gStringVar4);
-    CopyWindowToVram(SELECT_WIN_SPECIES, 2);
+    x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 86);
+    AddTextPrinterParameterized3(SELECT_WIN_SPECIES, FONT_NORMAL, x, 1, sSpeciesNameTextColors, 0, gStringVar4);
+    CopyWindowToVram(SELECT_WIN_SPECIES, COPYWIN_GFX);
 }
 
 static void Select_PrintSelectMonString(void)
@@ -1893,15 +1892,15 @@ static void Select_PrintSelectMonString(void)
     else
         str = gText_TheseThreePkmnOkay;
 
-    AddTextPrinterParameterized(SELECT_WIN_INFO, 1, str, 2, 5, 0, NULL);
-    CopyWindowToVram(SELECT_WIN_INFO, 2);
+    AddTextPrinterParameterized(SELECT_WIN_INFO, FONT_NORMAL, str, 2, 5, 0, NULL);
+    CopyWindowToVram(SELECT_WIN_INFO, COPYWIN_GFX);
 }
 
 static void Select_PrintCantSelectSameMon(void)
 {
     FillWindowPixelBuffer(SELECT_WIN_INFO, PIXEL_FILL(0));
-    AddTextPrinterParameterized(SELECT_WIN_INFO, 1, gText_CantSelectSamePkmn, 2, 5, 0, NULL);
-    CopyWindowToVram(SELECT_WIN_INFO, 2);
+    AddTextPrinterParameterized(SELECT_WIN_INFO, FONT_NORMAL, gText_CantSelectSamePkmn, 2, 5, 0, NULL);
+    CopyWindowToVram(SELECT_WIN_INFO, COPYWIN_GFX);
 }
 
 static void Select_PrintMenuOptions(void)
@@ -1910,23 +1909,23 @@ static void Select_PrintMenuOptions(void)
 
     PutWindowTilemap(SELECT_WIN_OPTIONS);
     FillWindowPixelBuffer(SELECT_WIN_OPTIONS, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, 1, 7, 1, sMenuOptionTextColors, 0, gText_Summary);
+    AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, FONT_NORMAL, 7, 1, sMenuOptionTextColors, 0, gText_Summary);
     if (selectedId != 0)
-        AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, 1, 7, 17, sMenuOptionTextColors, 0, gText_Deselect);
+        AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, FONT_NORMAL, 7, 17, sMenuOptionTextColors, 0, gText_Deselect);
     else
-        AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, 1, 7, 17, sMenuOptionTextColors, 0, gText_Rent);
+        AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, FONT_NORMAL, 7, 17, sMenuOptionTextColors, 0, gText_Rent);
 
-    AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, 1, 7, 33, sMenuOptionTextColors, 0, gText_Others2);
-    CopyWindowToVram(SELECT_WIN_OPTIONS, 3);
+    AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, FONT_NORMAL, 7, 33, sMenuOptionTextColors, 0, gText_Others2);
+    CopyWindowToVram(SELECT_WIN_OPTIONS, COPYWIN_FULL);
 }
 
 static void Select_PrintYesNoOptions(void)
 {
     PutWindowTilemap(SELECT_WIN_YES_NO);
     FillWindowPixelBuffer(SELECT_WIN_YES_NO, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(SELECT_WIN_YES_NO, 1, 7, 1, sMenuOptionTextColors, 0, gText_Yes2);
-    AddTextPrinterParameterized3(SELECT_WIN_YES_NO, 1, 7, 17, sMenuOptionTextColors, 0, gText_No2);
-    CopyWindowToVram(SELECT_WIN_YES_NO, 3);
+    AddTextPrinterParameterized3(SELECT_WIN_YES_NO, FONT_NORMAL, 7, 1, sMenuOptionTextColors, 0, gText_Yes2);
+    AddTextPrinterParameterized3(SELECT_WIN_YES_NO, FONT_NORMAL, 7, 17, sMenuOptionTextColors, 0, gText_No2);
+    CopyWindowToVram(SELECT_WIN_YES_NO, COPYWIN_FULL);
 }
 
 static u8 Select_RunMenuOptionFunc(void)
@@ -1994,9 +1993,9 @@ static void Select_PrintMonCategory(void)
         FillWindowPixelBuffer(SELECT_WIN_MON_CATEGORY, PIXEL_FILL(0));
         species = GetMonData(&sFactorySelectScreen->mons[monId].monData, MON_DATA_SPECIES, NULL);
         CopyMonCategoryText(SpeciesToNationalPokedexNum(species), text);
-        x = GetStringRightAlignXOffset(1, text, 0x76);
-        AddTextPrinterParameterized(SELECT_WIN_MON_CATEGORY, 1, text, x, 1, 0, NULL);
-        CopyWindowToVram(SELECT_WIN_MON_CATEGORY, 2);
+        x = GetStringRightAlignXOffset(FONT_NORMAL, text, 0x76);
+        AddTextPrinterParameterized(SELECT_WIN_MON_CATEGORY, FONT_NORMAL, text, x, 1, 0, NULL);
+        CopyWindowToVram(SELECT_WIN_MON_CATEGORY, COPYWIN_GFX);
     }
 }
 
@@ -2008,7 +2007,7 @@ static void Select_CreateMonSprite(void)
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
     u32 otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
 
-    sFactorySelectScreen->monPics[1].monSpriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, TRUE, 88, 32, 15, 0xFFFF);
+    sFactorySelectScreen->monPics[1].monSpriteId = CreateMonPicSprite(species, otId, personality, TRUE, 88, 32, 15, TAG_NONE);
     gSprites[sFactorySelectScreen->monPics[1].monSpriteId].centerToCornerVecX = 0;
     gSprites[sFactorySelectScreen->monPics[1].monSpriteId].centerToCornerVecY = 0;
 
@@ -2034,7 +2033,7 @@ static void Select_ReshowMonSprite(void)
     personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
     otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
 
-    sFactorySelectScreen->monPics[1].monSpriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, TRUE, 88, 32, 15, 0xFFFF);
+    sFactorySelectScreen->monPics[1].monSpriteId = CreateMonPicSprite(species, otId, personality, TRUE, 88, 32, 15, TAG_NONE);
     gSprites[sFactorySelectScreen->monPics[1].monSpriteId].centerToCornerVecX = 0;
     gSprites[sFactorySelectScreen->monPics[1].monSpriteId].centerToCornerVecY = 0;
 
@@ -2056,7 +2055,7 @@ static void Select_CreateChosenMonsSprites(void)
                 u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
                 u32 otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
 
-                sFactorySelectScreen->monPics[i].monSpriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, TRUE, (i * 72) + 16, 32, i + 13, 0xFFFF);
+                sFactorySelectScreen->monPics[i].monSpriteId = CreateMonPicSprite(species, otId, personality, TRUE, (i * 72) + 16, 32, i + 13, TAG_NONE);
                 gSprites[sFactorySelectScreen->monPics[i].monSpriteId].centerToCornerVecX = 0;
                 gSprites[sFactorySelectScreen->monPics[i].monSpriteId].centerToCornerVecY = 0;
                 break;
@@ -2474,7 +2473,7 @@ static void Swap_Task_HandleYesNo(u8 taskId)
                 gTasks[taskId].tSaidYes = TRUE;
                 hiPtr = gTasks[taskId].tFollowUpTaskPtrHi;
                 loPtr = gTasks[taskId].tFollowUpTaskPtrLo;
-                gTasks[taskId].func = (void*)((hiPtr << 16) | loPtr);
+                gTasks[taskId].func = (void *)((hiPtr << 16) | loPtr);
             }
             else
             {
@@ -2483,7 +2482,7 @@ static void Swap_Task_HandleYesNo(u8 taskId)
                 Swap_ErasePopupMenu(SWAP_WIN_YES_NO);
                 hiPtr = gTasks[taskId].tFollowUpTaskPtrHi;
                 loPtr = gTasks[taskId].tFollowUpTaskPtrLo;
-                gTasks[taskId].func = (void*)((hiPtr << 16) | loPtr);
+                gTasks[taskId].func = (void *)((hiPtr << 16) | loPtr);
             }
         }
         else if (JOY_NEW(B_BUTTON))
@@ -2493,7 +2492,7 @@ static void Swap_Task_HandleYesNo(u8 taskId)
             Swap_ErasePopupMenu(SWAP_WIN_YES_NO);
             hiPtr = gTasks[taskId].tFollowUpTaskPtrHi;
             loPtr = gTasks[taskId].tFollowUpTaskPtrLo;
-            gTasks[taskId].func = (void*)((hiPtr << 16) | loPtr);
+            gTasks[taskId].func = (void *)((hiPtr << 16) | loPtr);
         }
         else if (JOY_REPEAT(DPAD_UP))
         {
@@ -2509,7 +2508,7 @@ static void Swap_Task_HandleYesNo(u8 taskId)
     }
 }
 
-static void Swap_HandleQuitSwappingResposne(u8 taskId)
+static void Swap_HandleQuitSwappingResponse(u8 taskId)
 {
     if (gTasks[taskId].tSaidYes == TRUE)
     {
@@ -2533,8 +2532,8 @@ static void Swap_AskQuitSwapping(u8 taskId)
         Swap_PrintOnInfoWindow(gText_QuitSwapping);
         sFactorySwapScreen->monSwapped = FALSE;
         gTasks[taskId].tState = STATE_YESNO_SHOW;
-        gTasks[taskId].tFollowUpTaskPtrHi = (u32)(Swap_HandleQuitSwappingResposne) >> 16;
-        gTasks[taskId].tFollowUpTaskPtrLo = (u32)(Swap_HandleQuitSwappingResposne);
+        gTasks[taskId].tFollowUpTaskPtrHi = (u32)(Swap_HandleQuitSwappingResponse) >> 16;
+        gTasks[taskId].tFollowUpTaskPtrLo = (u32)(Swap_HandleQuitSwappingResponse);
         gTasks[taskId].func = Swap_Task_HandleYesNo;
     }
 }
@@ -3012,7 +3011,7 @@ static void Swap_Task_ScreenInfoTransitionOut(u8 taskId)
         if (!gPaletteFade.active)
         {
             FillWindowPixelBuffer(SWAP_WIN_ACTION_FADE, PIXEL_FILL(0));
-            CopyWindowToVram(SWAP_WIN_ACTION_FADE, 2);
+            CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPYWIN_GFX);
             if (sFactorySwapScreen->inEnemyScreen == TRUE)
             {
                 // Start "Pkmn for Swap" button slide offscreen
@@ -3057,7 +3056,7 @@ static void Swap_Task_ScreenInfoTransitionOut(u8 taskId)
         }
         break;
     case 5:
-        if (gTasks[taskId].tSlideFinishedPkmn == TRUE 
+        if (gTasks[taskId].tSlideFinishedPkmn == TRUE
          && gTasks[taskId].tSlideFinishedCancel == TRUE)
         {
             gTasks[taskId].tState = gTasks[taskId].tFollowUpTaskState;
@@ -3123,7 +3122,7 @@ static void Swap_Task_ScreenInfoTransitionIn(u8 taskId)
         }
         break;
     case 2:
-        if (gTasks[taskId].tSlideFinishedPkmn == TRUE 
+        if (gTasks[taskId].tSlideFinishedPkmn == TRUE
          && gTasks[taskId].tSlideFinishedCancel == TRUE)
         {
             gPlttBufferFaded[226] = sPokeballGray_Pal[37];
@@ -3150,7 +3149,7 @@ static void Swap_Task_ScreenInfoTransitionIn(u8 taskId)
         break;
     case 6:
         FillWindowPixelBuffer(SWAP_WIN_ACTION_FADE, PIXEL_FILL(0));
-        CopyWindowToVram(SWAP_WIN_ACTION_FADE, 2);
+        CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPYWIN_GFX);
         gTasks[taskId].tState++;
         break;
     case 7:
@@ -3205,7 +3204,7 @@ static void Swap_Task_SwitchPartyScreen(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 3:
-        if (!FuncIsActiveTask(Swap_Task_SlideCycleBalls) 
+        if (!FuncIsActiveTask(Swap_Task_SlideCycleBalls)
          && gTasks[sFactorySwapScreen->fadeSpeciesNameTaskId].tFadeOutFinished == TRUE)
         {
             Swap_EraseSpeciesWindow();
@@ -3280,14 +3279,14 @@ static void CB2_InitSwapScreen(void)
         sSwapMonPicBgTilesetBuffer = AllocZeroed(0x440);
         sSwapMenuTilemapBuffer = Alloc(BG_SCREEN_SIZE);
         sSwapMonPicBgTilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
-        ChangeBgX(0, 0, 0);
-        ChangeBgY(0, 0, 0);
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
-        ChangeBgX(2, 0, 0);
-        ChangeBgY(2, 0, 0);
-        ChangeBgX(3, 0, 0);
-        ChangeBgY(3, 0, 0);
+        ChangeBgX(0, 0, BG_COORD_SET);
+        ChangeBgY(0, 0, BG_COORD_SET);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
+        ChangeBgX(2, 0, BG_COORD_SET);
+        ChangeBgY(2, 0, BG_COORD_SET);
+        ChangeBgX(3, 0, BG_COORD_SET);
+        ChangeBgY(3, 0, BG_COORD_SET);
         SetGpuReg(REG_OFFSET_BLDY, 0);
         SetGpuReg(REG_OFFSET_MOSAIC, 0);
         SetGpuReg(REG_OFFSET_WIN0H, 0);
@@ -3679,7 +3678,7 @@ static void Swap_HideActionButtonHighlights(void)
     {
         // Hide button highlight on "Pkmn for Swap"
         gSprites[sFactorySwapScreen->pkmnForSwapButtonSpriteIds[1][i]].invisible = TRUE;
-        
+
         // Hide button highlight on Cancel
         if (i < ARRAY_COUNT(sFactorySwapScreen->cancelButtonSpriteIds[0]))
             gSprites[sFactorySwapScreen->cancelButtonSpriteIds[1][i]].invisible = TRUE;
@@ -3724,7 +3723,7 @@ static void Swap_ErasePopupMenu(u8 windowId)
     gSprites[sFactorySwapScreen->menuCursor1SpriteId].invisible = TRUE;
     gSprites[sFactorySwapScreen->menuCursor2SpriteId].invisible = TRUE;
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
-    CopyWindowToVram(windowId, 2);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
     ClearWindowTilemap(windowId);
 }
 
@@ -3732,14 +3731,14 @@ static void Swap_EraseSpeciesWindow(void)
 {
     PutWindowTilemap(SWAP_WIN_SPECIES);
     FillWindowPixelBuffer(SWAP_WIN_SPECIES, PIXEL_FILL(0));
-    CopyWindowToVram(SWAP_WIN_SPECIES, 2);
+    CopyWindowToVram(SWAP_WIN_SPECIES, COPYWIN_GFX);
 }
 
 static void Swap_EraseSpeciesAtFadeWindow(void)
 {
     PutWindowTilemap(SWAP_WIN_SPECIES_AT_FADE);
     FillWindowPixelBuffer(SWAP_WIN_SPECIES_AT_FADE, PIXEL_FILL(0));
-    CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, 2);
+    CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, COPYWIN_GFX);
 }
 
 static void Swap_EraseActionFadeWindow(void)
@@ -3747,14 +3746,14 @@ static void Swap_EraseActionFadeWindow(void)
     Swap_EraseSpeciesWindow();
     PutWindowTilemap(SWAP_WIN_ACTION_FADE);
     FillWindowPixelBuffer(SWAP_WIN_ACTION_FADE, PIXEL_FILL(0));
-    CopyWindowToVram(SWAP_WIN_ACTION_FADE, 2);
+    CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPYWIN_GFX);
 }
 
 static void Swap_PrintPkmnSwap(void)
 {
     FillWindowPixelBuffer(SWAP_WIN_TITLE, PIXEL_FILL(1));
-    AddTextPrinterParameterized(SWAP_WIN_TITLE, 1, gText_PkmnSwap, 2, 1, 0, NULL);
-    CopyWindowToVram(SWAP_WIN_TITLE, 3);
+    AddTextPrinterParameterized(SWAP_WIN_TITLE, FONT_NORMAL, gText_PkmnSwap, 2, 1, 0, NULL);
+    CopyWindowToVram(SWAP_WIN_TITLE, COPYWIN_FULL);
 }
 
 static void Swap_PrintMonSpecies(void)
@@ -3765,7 +3764,7 @@ static void Swap_PrintMonSpecies(void)
     FillWindowPixelBuffer(SWAP_WIN_SPECIES, PIXEL_FILL(0));
     if (sFactorySwapScreen->cursorPos >= FRONTIER_PARTY_SIZE)
     {
-        CopyWindowToVram(SWAP_WIN_SPECIES, 2);
+        CopyWindowToVram(SWAP_WIN_SPECIES, COPYWIN_GFX);
     }
     else
     {
@@ -3775,42 +3774,42 @@ static void Swap_PrintMonSpecies(void)
         else
             species = GetMonData(&gEnemyParty[monId], MON_DATA_SPECIES, NULL);
         StringCopy(gStringVar4, gSpeciesNames[species]);
-        x = GetStringRightAlignXOffset(1, gStringVar4, 86);
-        AddTextPrinterParameterized3(SWAP_WIN_SPECIES, 1, x, 1, sSwapSpeciesNameTextColors, 0, gStringVar4);
-        CopyWindowToVram(SWAP_WIN_SPECIES, 3);
+        x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 86);
+        AddTextPrinterParameterized3(SWAP_WIN_SPECIES, FONT_NORMAL, x, 1, sSwapSpeciesNameTextColors, 0, gStringVar4);
+        CopyWindowToVram(SWAP_WIN_SPECIES, COPYWIN_FULL);
     }
 }
 
 static void Swap_PrintOnInfoWindow(const u8 *str)
 {
     FillWindowPixelBuffer(SWAP_WIN_INFO, PIXEL_FILL(0));
-    AddTextPrinterParameterized(SWAP_WIN_INFO, 1, str, 2, 5, 0, NULL);
-    CopyWindowToVram(SWAP_WIN_INFO, 2);
+    AddTextPrinterParameterized(SWAP_WIN_INFO, FONT_NORMAL, str, 2, 5, 0, NULL);
+    CopyWindowToVram(SWAP_WIN_INFO, COPYWIN_GFX);
 }
 
 static void Swap_PrintMenuOptions(void)
 {
     PutWindowTilemap(SWAP_WIN_OPTIONS);
     FillWindowPixelBuffer(SWAP_WIN_OPTIONS, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(SWAP_WIN_OPTIONS, 1, 15,  1, sSwapMenuOptionsTextColors, 0, gText_Summary2);
-    AddTextPrinterParameterized3(SWAP_WIN_OPTIONS, 1, 15, 17, sSwapMenuOptionsTextColors, 0, gText_Swap);
-    AddTextPrinterParameterized3(SWAP_WIN_OPTIONS, 1, 15, 33, sSwapMenuOptionsTextColors, 0, gText_Rechoose);
-    CopyWindowToVram(SWAP_WIN_OPTIONS, 3);
+    AddTextPrinterParameterized3(SWAP_WIN_OPTIONS, FONT_NORMAL, 15,  1, sSwapMenuOptionsTextColors, 0, gText_Summary2);
+    AddTextPrinterParameterized3(SWAP_WIN_OPTIONS, FONT_NORMAL, 15, 17, sSwapMenuOptionsTextColors, 0, gText_Swap);
+    AddTextPrinterParameterized3(SWAP_WIN_OPTIONS, FONT_NORMAL, 15, 33, sSwapMenuOptionsTextColors, 0, gText_Rechoose);
+    CopyWindowToVram(SWAP_WIN_OPTIONS, COPYWIN_FULL);
 }
 
 static void Swap_PrintYesNoOptions(void)
 {
     PutWindowTilemap(SWAP_WIN_YES_NO);
     FillWindowPixelBuffer(SWAP_WIN_YES_NO, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(SWAP_WIN_YES_NO, 1, 7, 1,  sSwapMenuOptionsTextColors, 0, gText_Yes3);
-    AddTextPrinterParameterized3(SWAP_WIN_YES_NO, 1, 7, 17, sSwapMenuOptionsTextColors, 0, gText_No3);
-    CopyWindowToVram(SWAP_WIN_YES_NO, 3);
+    AddTextPrinterParameterized3(SWAP_WIN_YES_NO, FONT_NORMAL, 7, 1,  sSwapMenuOptionsTextColors, 0, gText_Yes3);
+    AddTextPrinterParameterized3(SWAP_WIN_YES_NO, FONT_NORMAL, 7, 17, sSwapMenuOptionsTextColors, 0, gText_No3);
+    CopyWindowToVram(SWAP_WIN_YES_NO, COPYWIN_FULL);
 }
 
 static void Swap_PrintActionString(const u8 *str, u32 y, u32 windowId)
 {
-    s32 x = GetStringRightAlignXOffset(0, str, 0x46);
-    AddTextPrinterParameterized3(windowId, 0, x, y, sSwapMenuOptionsTextColors, 0, str);
+    s32 x = GetStringRightAlignXOffset(FONT_SMALL, str, 0x46);
+    AddTextPrinterParameterized3(windowId, FONT_SMALL, x, y, sSwapMenuOptionsTextColors, 0, str);
 }
 
 static void Swap_PrintActionStrings(void)
@@ -3824,7 +3823,7 @@ static void Swap_PrintActionStrings(void)
         Swap_PrintActionString(gText_Cancel3, 24, SWAP_WIN_ACTION_FADE);
         break;
     }
-    CopyWindowToVram(SWAP_WIN_ACTION_FADE, 3);
+    CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPYWIN_FULL);
 }
 
 static void Swap_PrintActionStrings2(void)
@@ -3838,7 +3837,7 @@ static void Swap_PrintActionStrings2(void)
         Swap_PrintActionString(gText_Cancel3, 32, SWAP_WIN_OPTIONS);
         break;
     }
-    CopyWindowToVram(SWAP_WIN_OPTIONS, 3);
+    CopyWindowToVram(SWAP_WIN_OPTIONS, COPYWIN_FULL);
 }
 
 static void Swap_PrintOneActionString(u8 which)
@@ -3853,7 +3852,7 @@ static void Swap_PrintOneActionString(u8 which)
         Swap_PrintActionString(gText_Cancel3, 32, SWAP_WIN_OPTIONS);
         break;
     }
-    CopyWindowToVram(SWAP_WIN_OPTIONS, 3);
+    CopyWindowToVram(SWAP_WIN_OPTIONS, COPYWIN_FULL);
 }
 
 // For printing the species name once its selected. Keep the current fade but don't keep fading in and out
@@ -3874,7 +3873,7 @@ static void Swap_PrintMonSpeciesAtFade(void)
     FillWindowPixelBuffer(SWAP_WIN_SPECIES_AT_FADE, PIXEL_FILL(0));
     if (sFactorySwapScreen->cursorPos >= FRONTIER_PARTY_SIZE)
     {
-        CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, 3);
+        CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, COPYWIN_FULL);
     }
     else
     {
@@ -3884,9 +3883,9 @@ static void Swap_PrintMonSpeciesAtFade(void)
         else
             species = GetMonData(&gEnemyParty[monId], MON_DATA_SPECIES, NULL);
         StringCopy(gStringVar4, gSpeciesNames[species]);
-        x = GetStringRightAlignXOffset(1, gStringVar4, 86);
-        AddTextPrinterParameterized3(SWAP_WIN_SPECIES_AT_FADE, 1, x, 1, sSwapSpeciesNameTextColors, 0, gStringVar4);
-        CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, 3);
+        x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 86);
+        AddTextPrinterParameterized3(SWAP_WIN_SPECIES_AT_FADE, FONT_NORMAL, x, 1, sSwapSpeciesNameTextColors, 0, gStringVar4);
+        CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, COPYWIN_FULL);
     }
 }
 
@@ -3901,7 +3900,7 @@ static void Swap_PrintMonSpeciesForTransition(void)
 
     if (sFactorySwapScreen->cursorPos >= FRONTIER_PARTY_SIZE)
     {
-        CopyWindowToVram(SWAP_WIN_SPECIES, 2);
+        CopyWindowToVram(SWAP_WIN_SPECIES, COPYWIN_GFX);
     }
     else
     {
@@ -3911,9 +3910,9 @@ static void Swap_PrintMonSpeciesForTransition(void)
         else
             species = GetMonData(&gEnemyParty[monId], MON_DATA_SPECIES, NULL);
         StringCopy(gStringVar4, gSpeciesNames[species]);
-        x = GetStringRightAlignXOffset(1, gStringVar4, 86);
-        AddTextPrinterParameterized3(SWAP_WIN_SPECIES, 1, x, 1, sSwapSpeciesNameTextColors, 0, gStringVar4);
-        CopyWindowToVram(SWAP_WIN_SPECIES, 3);
+        x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 86);
+        AddTextPrinterParameterized3(SWAP_WIN_SPECIES, FONT_NORMAL, x, 1, sSwapSpeciesNameTextColors, 0, gStringVar4);
+        CopyWindowToVram(SWAP_WIN_SPECIES, COPYWIN_FULL);
     }
 }
 
@@ -3927,7 +3926,7 @@ static void Swap_PrintMonCategory(void)
     FillWindowPixelBuffer(SWAP_WIN_MON_CATEGORY, PIXEL_FILL(0));
     if (monId >= FRONTIER_PARTY_SIZE)
     {
-        CopyWindowToVram(SWAP_WIN_MON_CATEGORY, 2);
+        CopyWindowToVram(SWAP_WIN_MON_CATEGORY, COPYWIN_GFX);
     }
     else
     {
@@ -3937,9 +3936,9 @@ static void Swap_PrintMonCategory(void)
         else
             species = GetMonData(&gEnemyParty[monId], MON_DATA_SPECIES, NULL);
         CopyMonCategoryText(SpeciesToNationalPokedexNum(species), text);
-        x = GetStringRightAlignXOffset(1, text, 0x76);
-        AddTextPrinterParameterized(SWAP_WIN_MON_CATEGORY, 1, text, x, 1, 0, NULL);
-        CopyWindowToVram(SWAP_WIN_MON_CATEGORY, 2);
+        x = GetStringRightAlignXOffset(FONT_NORMAL, text, 0x76);
+        AddTextPrinterParameterized(SWAP_WIN_MON_CATEGORY, FONT_NORMAL, text, x, 1, 0, NULL);
+        CopyWindowToVram(SWAP_WIN_MON_CATEGORY, COPYWIN_GFX);
     }
 }
 
@@ -4072,9 +4071,9 @@ static void Swap_ShowSummaryMonSprite(void)
     otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
 
 #ifdef BUGFIX
-    sFactorySwapScreen->monPic.monSpriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, TRUE, 88, 32, 15, 0xFFFF);
+    sFactorySwapScreen->monPic.monSpriteId = CreateMonPicSprite(species, otId, personality, TRUE, 88, 32, 15, TAG_NONE);
 #else
-    sFactorySwapScreen->monPic.monSpriteId = CreateMonPicSprite_HandleDeoxys(species, personality, otId, TRUE, 88, 32, 15, 0xFFFF);
+    sFactorySwapScreen->monPic.monSpriteId = CreateMonPicSprite(species, personality, otId, TRUE, 88, 32, 15, TAG_NONE);
 #endif
     gSprites[sFactorySwapScreen->monPic.monSpriteId].centerToCornerVecX = 0;
     gSprites[sFactorySwapScreen->monPic.monSpriteId].centerToCornerVecY = 0;
@@ -4126,7 +4125,7 @@ static void Swap_TaskCantHaveSameMons(u8 taskId)
         if (sFactorySwapScreen->monPicAnimating != TRUE)
         {
             FillWindowPixelBuffer(SWAP_WIN_ACTION_FADE, PIXEL_FILL(0));
-            CopyWindowToVram(SWAP_WIN_ACTION_FADE, 2);
+            CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPYWIN_GFX);
             gTasks[taskId].tState++;
         }
         break;
@@ -4221,17 +4220,12 @@ static void Task_OpenMonPic(u8 taskId)
             return;
         break;
     default:
-        #ifndef UBFIX
         DestroyTask(taskId);
-        #endif
-        // UB: Should not use the task after it has been deleted.
+        // Accessing data of destroyed task. Task data isn't reset until a new task needs that task id.
         if (gTasks[taskId].tIsSwapScreen == TRUE)
             Swap_CreateMonSprite();
         else
             Select_CreateMonSprite();
-        #ifdef UBFIX
-        DestroyTask(taskId);
-        #endif
         return;
     }
     task->tState++;
@@ -4296,7 +4290,7 @@ static void Swap_CreateMonSprite(void)
     personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
     otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
 
-    sFactorySwapScreen->monPic.monSpriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, TRUE, 88, 32, 15, 0xFFFF);
+    sFactorySwapScreen->monPic.monSpriteId = CreateMonPicSprite(species, otId, personality, TRUE, 88, 32, 15, TAG_NONE);
     gSprites[sFactorySwapScreen->monPic.monSpriteId].centerToCornerVecX = 0;
     gSprites[sFactorySwapScreen->monPic.monSpriteId].centerToCornerVecY = 0;
 
