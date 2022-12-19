@@ -10135,25 +10135,21 @@ static void Cmd_various(void)
             return;
         }
         break;
-     case VARIOUS_TEATIME_TARGETS:
-         // Gets the battlers to be affected by teatime. If there are none, print 'But it failed!'
+    case VARIOUS_TEATIME_TARGETS:
+    {
+        u32 count = 0;
+
+        for (i = 0; i < gBattlersCount; i++)
         {
-            u32 count = 0;
-            for (i = 0; i < gBattlersCount; i++)
-            {
-                if (IsTeatimeAffected(i))
-                {
-                    count++;
-                }
-                }
-                if (count == 0) {
-                    gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);   // Teatime fails
-                }
-                else {
-                    gBattlescriptCurrInstr += 7;
-                }
+            if (IsTeatimeAffected(i))
+                count++;
         }
-        return;
+        if (count == 0)
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);   // Teatime fails
+        else
+            gBattlescriptCurrInstr += 7;
+    }
+    return;
      case VARIOUS_TEATIME_INVUL:
         if (ItemId_GetPocket(gBattleMons[gActiveBattler].item) == POCKET_BERRIES && !(gStatuses3[gBattlerTarget] & (STATUS3_SEMI_INVULNERABLE)))
             gBattlescriptCurrInstr += 7;
