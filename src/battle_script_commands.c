@@ -8141,12 +8141,10 @@ static bool32 IsAbilityRodAffected(void)
 	else
 		moveType = gBattleMoves[gCurrentMove].type;
 
-	if (moveType == TYPE_ELECTRIC && GetBattlerAbility(gBattlerTarget) == ABILITY_LIGHTNING_ROD) {
+	if (moveType == TYPE_ELECTRIC && GetBattlerAbility(gBattlerTarget) == ABILITY_LIGHTNING_ROD)
 		return TRUE;
-	}
-	else {
+	else
 		return FALSE;
-	}
 }
 
 static bool32 IsAbilityMotorAffected(void)
