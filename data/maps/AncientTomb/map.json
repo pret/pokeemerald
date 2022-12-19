@@ -34,21 +34,21 @@
       "y": 29,
       "elevation": 3,
       "dest_map": "MAP_ROUTE120",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 8,
       "y": 20,
       "elevation": 0,
       "dest_map": "MAP_ANCIENT_TOMB",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 8,
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_ANCIENT_TOMB",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

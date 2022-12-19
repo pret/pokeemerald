@@ -14,19 +14,19 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "up",
+      "map": "MAP_RUSTBORO_CITY",
       "offset": 0,
-      "map": "MAP_RUSTBORO_CITY"
+      "direction": "up"
     },
     {
-      "direction": "down",
+      "map": "MAP_ROUTE105",
       "offset": 0,
-      "map": "MAP_ROUTE105"
+      "direction": "down"
     },
     {
-      "direction": "right",
+      "map": "MAP_PETALBURG_CITY",
       "offset": 50,
-      "map": "MAP_PETALBURG_CITY"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -479,56 +479,56 @@
       "y": 50,
       "elevation": 0,
       "dest_map": "MAP_ROUTE104_MR_BRINEYS_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 5,
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_ROUTE104_PRETTY_PETAL_FLOWER_SHOP",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 10,
       "y": 30,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 11,
       "y": 30,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 10,
       "y": 38,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 11,
       "y": 38,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 32,
       "y": 42,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 33,
       "y": 42,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     }
   ],
   "coord_events": [

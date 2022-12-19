@@ -1,5 +1,5 @@
-#ifndef GUARD_CONSTANTS_BATTLE_CONFIG_H
-#define GUARD_CONSTANTS_BATTLE_CONFIG_H
+#ifndef GUARD_CONFIG_BATTLE_H
+#define GUARD_CONFIG_BATTLE_H
 
 // Calculation settings
 #define B_CRIT_CHANCE               GEN_LATEST // Chances of a critical hit landing. See CalcCritChanceStage. Gen6+ chances guarantee that Farfetch'd and Sirfetch'd always get critical hits while holding a Leek and using high-crit ratio moves.
@@ -197,6 +197,4 @@
 #define B_NEW_IMPACT_PALETTE            FALSE    // If set to TRUE, it updates the basic 'hit' palette.
 #define B_NEW_SURF_PARTICLE_PALETTE     FALSE    // If set to TRUE, it updates Surf's wave palette.
 
-#define B_ENABLE_DEBUG                  TRUE     // If set to TRUE, enables a debug menu to use in battles by pressing the Select button.
-
-#endif // GUARD_CONSTANTS_BATTLE_CONFIG_H
+#endif // GUARD_CONFIG_BATTLE_H

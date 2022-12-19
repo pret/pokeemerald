@@ -479,7 +479,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
         song->sound = GetWordSounds(word);
         GetWordPhonemes(song, MACRO1(word));
         song->currWord++;
-        if (song->sound->var00 != 0xFF)
+        if (song->sound->songLengthId != 0xFF)
             song->state = 0;
         else
         {
@@ -497,9 +497,9 @@ static void BardSing(struct Task *task, struct BardSong *song)
         {
         case 0:
             song->phonemeTimer = song->phonemes[song->currPhoneme].length;
-            if (sound->var00 <= 50)
+            if (sound->songLengthId <= 50)
             {
-                u8 num = sound->var00 / 3;
+                u8 num = sound->songLengthId / 3;
                 m4aSongNumStart(PH_TRAP_HELD + 3 * num);
             }
             song->state = 2;
@@ -507,7 +507,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
             break;
         case 2:
             song->state = 1;
-            if (sound->var00 <= 50)
+            if (sound->songLengthId <= 50)
             {
                 song->volume = 0x100 + sound->volume * 16;
                 m4aMPlayVolumeControl(&gMPlayInfo_SE2, TRACKS_ALL, song->volume);
@@ -529,7 +529,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
             if (song->phonemeTimer == 0)
             {
                 song->currPhoneme++;
-                if (song->currPhoneme != 6 && song->sound[song->currPhoneme].var00 != 0xFF)
+                if (song->currPhoneme != 6 && song->sound[song->currPhoneme].songLengthId != 0xFF)
                     song->state = 0;
                 else
                 {

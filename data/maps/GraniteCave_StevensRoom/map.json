@@ -34,7 +34,7 @@
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_GRANITE_CAVE_1F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [],
