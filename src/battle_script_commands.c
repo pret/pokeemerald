@@ -3497,16 +3497,11 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     gProtectStructs[gBattlerTarget].kingsShielded = FALSE;
                     gProtectStructs[gBattlerTarget].banefulBunkered = FALSE;
                     gProtectStructs[gBattlerTarget].obstructed = FALSE;
-                    if (gCurrentMove == MOVE_FEINT)
-                    {
-                        BattleScriptPush(gBattlescriptCurrInstr + 1);
-                        gBattlescriptCurrInstr = BattleScript_MoveEffectFeint;
-                    }
-                    else if (gCurrentMove == MOVE_HYPERSPACE_FURY)
-                    {
-                        BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    if (gCurrentMove == MOVE_HYPERSPACE_FURY)
                         gBattlescriptCurrInstr = BattleScript_HyperspaceFuryRemoveProtect;
-                    }
+                    else
+                        gBattlescriptCurrInstr = BattleScript_MoveEffectFeint;
                 }
                 break;
             case MOVE_EFFECT_SPECTRAL_THIEF:
@@ -10075,6 +10070,35 @@ static void Cmd_various(void)
             return;
         }
         break;
+    case VARIOUS_SWAP_STATS:
+        {
+            u8 statId = T1_READ_8(gBattlescriptCurrInstr + 3);
+            u16 temp;
+
+            switch (statId)
+            {
+            case STAT_HP:
+                SWAP(gBattleMons[gBattlerAttacker].hp, gBattleMons[gBattlerTarget].hp, temp);
+                break;
+            case STAT_ATK:
+                SWAP(gBattleMons[gBattlerAttacker].attack, gBattleMons[gBattlerTarget].attack, temp);
+                break;
+            case STAT_DEF:
+                SWAP(gBattleMons[gBattlerAttacker].defense, gBattleMons[gBattlerTarget].defense, temp);
+                break;
+            case STAT_SPEED:
+                SWAP(gBattleMons[gBattlerAttacker].speed, gBattleMons[gBattlerTarget].speed, temp);
+                break;
+            case STAT_SPATK:
+                SWAP(gBattleMons[gBattlerAttacker].spAttack, gBattleMons[gBattlerTarget].spAttack, temp);
+                break;
+            case STAT_SPDEF:
+                SWAP(gBattleMons[gBattlerAttacker].spDefense, gBattleMons[gBattlerTarget].spDefense, temp);
+                break;
+            }
+            PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
+        }
+        break;
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;
@@ -10677,9 +10701,6 @@ static u16 ReverseStatChangeMoveEffect(u16 moveEffect)
         return MOVE_EFFECT_EVS_PLUS_2;
     }
 }
-
-#define STAT_CHANGE_WORKED      0
-#define STAT_CHANGE_DIDNT_WORK  1
 
 static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr)
 {

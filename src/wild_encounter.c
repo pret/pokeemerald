@@ -1104,7 +1104,7 @@ bool8 TryDoDoubleWildBattle(void)
         return TRUE;
 #endif
 #if B_DOUBLE_WILD_CHANCE != 0
-    else if ((Random() % 100) + 1 < B_DOUBLE_WILD_CHANCE)
+    else if ((Random() % 100) + 1 <= B_DOUBLE_WILD_CHANCE)
         return TRUE;
 #endif
     return FALSE;
