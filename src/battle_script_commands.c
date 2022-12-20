@@ -8166,21 +8166,19 @@ static bool32 IsAbilityMotorAffected(void)
 
 static bool32 IsAbilityAbsorbAffected(void)
 {
-	u32 moveType;
+    u32 moveType;
 
-	if (gBattleStruct->dynamicMoveType == 0)
-		moveType = gBattleMoves[gCurrentMove].type;
-	else if (!(gBattleStruct->dynamicMoveType & 0x40))
-		moveType = gBattleStruct->dynamicMoveType & 0x3F;
-	else
-		moveType = gBattleMoves[gCurrentMove].type;
+    if (gBattleStruct->dynamicMoveType == 0)
+        moveType = gBattleMoves[gCurrentMove].type;
+    else if (!(gBattleStruct->dynamicMoveType & 0x40))
+        moveType = gBattleStruct->dynamicMoveType & 0x3F;
+    else
+        moveType = gBattleMoves[gCurrentMove].type;
 
-	if (moveType == TYPE_ELECTRIC && GetBattlerAbility(gBattlerTarget) == ABILITY_VOLT_ABSORB) {
-		return TRUE;
-	}
-	else {
-		return FALSE;
-	}
+    if (moveType == TYPE_ELECTRIC && GetBattlerAbility(gBattlerTarget) == ABILITY_VOLT_ABSORB)
+        return TRUE;
+    else
+        return FALSE;
 }
 
 static bool32 IsTeatimeAffected(u32 battlerId)
