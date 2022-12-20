@@ -8185,11 +8185,11 @@ static bool32 IsAbilityAbsorbAffected(void)
 
 static bool32 IsTeatimeAffected(u32 battlerId)
 {
-	if (ItemId_GetPocket(gBattleMons[battlerId].item) != POCKET_BERRIES)
-		return FALSE;   // Only berries
-	if (gStatuses3[battlerId] & STATUS3_SEMI_INVULNERABLE)
-		return FALSE;   // Teatime doesn't affected semi-invulnerable battlers
-	return TRUE;
+    if (ItemId_GetPocket(gBattleMons[battlerId].item) != POCKET_BERRIES)
+        return FALSE;   // Only berries
+    if (gStatuses3[battlerId] & STATUS3_SEMI_INVULNERABLE)
+        return FALSE;   // Teatime doesn't affected semi-invulnerable battlers
+    return TRUE;
 }
 
 #define COURTCHANGE_SWAP(status, structField, temp)                     \
