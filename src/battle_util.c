@@ -2378,11 +2378,6 @@ u8 DoFieldEndTurnEffects(void)
                         BattleScriptExecute(BattleScript_TailwindEnds);
                         effect++;
                     }
-                    if (IsAbilityOnSide(gActiveBattler, ABILITY_WIND_RIDER))
-                    {
-                        BattleScriptExecute(BattleScript_WindRiderActivatesEnd2);
-                        effect++;
-                    }
                     if (IsAbilityOnSide(gActiveBattler, ABILITY_WIND_POWER))
                     {
                         gCurrentMove = MOVE_TAILWIND;
@@ -3245,7 +3240,7 @@ u8 DoBattlerEndTurnEffects(void)
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_CUD_CHEW:
-            if (GetBattlerAbility(gActiveBattler) == ABILITY_CUD_CHEW && !gDisableStructs[gActiveBattler].cudChew && GetUsedHeldItem(gActiveBattler) != ITEM_NONE)
+            if (GetBattlerAbility(gActiveBattler) == ABILITY_CUD_CHEW && !gDisableStructs[gActiveBattler].cudChew && ItemId_GetPocket(GetUsedHeldItem(gActiveBattler)) == POCKET_BERRIES)
                 gDisableStructs[gActiveBattler].cudChew = TRUE;
             gBattleStruct->turnEffectsTracker++;
             break;
@@ -4773,6 +4768,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_ELECTRIC_SURGE:
+        case ABILITY_HADRON_ENGINE:
             if (TryChangeBattleTerrain(battler, STATUS_FIELD_ELECTRIC_TERRAIN, &gFieldTimers.terrainTimer))
             {
                 BattleScriptPushCursorAndCallback(BattleScript_ElectricSurgeActivates);
@@ -4954,13 +4950,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             if (TryChangeBattleWeather(battler, ENUM_WEATHER_SUN, TRUE))
             {
                 BattleScriptPushCursorAndCallback(BattleScript_DroughtActivates);
-                effect++;
-            }
-            break;
-        case ABILITY_HADRON_ENGINE:
-            if (TryChangeBattleTerrain(battler, STATUS_FIELD_ELECTRIC_TERRAIN, &gFieldTimers.terrainTimer))
-            {
-                BattleScriptPushCursorAndCallback(BattleScript_ElectricSurgeActivates);
                 effect++;
             }
             break;
@@ -5233,16 +5222,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 gBattlescriptCurrInstr = BattleScript_DarkTypePreventsPrankster;
                 effect = 1;
             }
-            else if (targetAbility == ABILITY_WELL_BAKED_BODY && gBattleMoves[gCurrentMove].type == TYPE_FIRE)
-            {
-                gBattlescriptCurrInstr = BattleScript_WellBakedBodyActivates;
-                effect = 1;
-            }
-            else if (targetAbility == ABILITY_WIND_RIDER && gBattleMoves[gCurrentMove].flags & FLAG_WIND_MOVE && !(moveTarget & MOVE_TARGET_USER))
-            {
-                gBattlescriptCurrInstr = BattleScript_WindRiderActivatesMoveEnd;
-                effect = 1;
-            }
             else if (GetBattlerAbility(gBattlerTarget) == ABILITY_GOOD_AS_GOLD
                   && IS_MOVE_STATUS(gCurrentMove)
                   && !(moveTarget & MOVE_TARGET_USER)
@@ -5258,6 +5237,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         if (move != MOVE_NONE)
         {
             u8 statId;
+            u8 statAmount = 1;
             switch (gLastUsedAbility)
             {
             case ABILITY_VOLT_ABSORB:
@@ -5315,6 +5295,18 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                     }
                 }
                 break;
+            case ABILITY_WELL_BAKED_BODY:
+                if (moveType == TYPE_FIRE)
+                    effect = 2, statId = STAT_DEF, statAmount = 2;
+                break;
+            case ABILITY_WIND_RIDER:
+                if (gBattleMoves[gCurrentMove].flags & FLAG_WIND_MOVE && !(GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove) & MOVE_TARGET_USER))
+                    effect = 2, statId = STAT_ATK;
+                break;
+            case ABILITY_EARTH_EATER:
+                if (moveType == TYPE_GROUND)
+                    effect = 1;
+                break;
             }
 
             if (effect == 1) // Drain Hp ability.
@@ -5359,9 +5351,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                     else
                         gBattlescriptCurrInstr = BattleScript_MoveStatDrain_PPLoss;
 
-                    SET_STATCHANGER(statId, 1, FALSE);
+                    SET_STATCHANGER(statId, statAmount, FALSE);
+                #if B_ABSORBING_ABILITY_STRING < GEN_5
                     gBattleMons[battler].statStages[statId]++;
                     PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
+                #endif
                 }
             }
         }
@@ -5894,10 +5888,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && TARGET_TURN_DAMAGED
-             && (gBattleMons[gBattlerTarget].hp <= gBattleMons[gBattlerTarget].maxHP / 2)
-             && !gBattleStruct->endturnAbilityDone[gBattlerPartyIndexes[gBattlerTarget]][GetBattlerSide(gBattlerTarget)])
+             && (gBattleMons[gBattlerTarget].hp <= gBattleMons[gBattlerTarget].maxHP / 2))
             {
-                gBattleStruct->endturnAbilityDone[gBattlerPartyIndexes[gBattlerTarget]][GetBattlerSide(gBattlerTarget)] = TRUE;
                 gBattlerAttacker = gBattlerTarget;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_AngerShellActivates;
@@ -5905,11 +5897,22 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_WIND_POWER:
-        case ABILITY_ELECTROMORPHOSIS:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && TARGET_TURN_DAMAGED
              && gBattleMoves[gCurrentMove].flags & FLAG_WIND_MOVE
+             && IsBattlerAlive(gBattlerTarget))
+            {
+                gBattlerAttacker = gBattlerTarget;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_WindPowerActivates;
+                effect++;
+            }
+            break;
+        case ABILITY_ELECTROMORPHOSIS:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+             && TARGET_TURN_DAMAGED
              && IsBattlerAlive(gBattlerTarget))
             {
                 gBattlerAttacker = gBattlerTarget;
@@ -5929,18 +5932,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 gBattlerTarget = gBattlerAttacker;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_ToxicDebrisActivates;
-                effect++;
-            }
-            break;
-        case ABILITY_EARTH_EATER:
-            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
-             && gBattleMoves[gCurrentMove].type == TYPE_GROUND
-             && TARGET_TURN_DAMAGED
-             && IsBattlerAlive(gBattlerTarget))
-            {
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_EarthEaterActivates;
                 effect++;
             }
             break;
@@ -8773,15 +8764,17 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
 // The first ally adds a x1.2 boost, and subsequent allies add an extra x0.1 boost each.
 static u16 ApplySupremeOverlordModifier(u8 battlerId)
 {
+    u32 i;
     u8 side = GetBattlerSide(battlerId);
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
-    u8 i;
     u16 modifier = UQ_4_12(1.0);
     bool8 appliedFirstBoost = FALSE;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (GetMonData(&party[i], MON_DATA_HP) == 0)
+        if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+         && !GetMonData(&party[i], MON_DATA_IS_EGG)
+         && GetMonData(&party[i], MON_DATA_HP) == 0)
             modifier += (!appliedFirstBoost) ? UQ_4_12(0.2) : UQ_4_12(0.1);
         appliedFirstBoost = TRUE;
     }
@@ -8799,8 +8792,6 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
     u32 atkSide = GET_BATTLER_SIDE(battlerAtk);
     u16 atkAbility = GetBattlerAbility(battlerAtk);
     u16 defAbility = GetBattlerAbility(battlerDef);
-    u8 atkHighestStat = GetHighestStatId(battlerAtk);
-    u8 defHighestStat = GetHighestStatId(battlerDef);
 
     // attacker's abilities
     switch (atkAbility)
@@ -8914,12 +8905,18 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
             MulModifier(&modifier, UQ_4_12(1.5));
         break;
     case ABILITY_PROTOSYNTHESIS:
-        if (gBattleWeather & B_WEATHER_SUN && WEATHER_HAS_EFFECT && (atkHighestStat == STAT_ATK || atkHighestStat == STAT_SPATK))
-            MulModifier(&modifier, UQ_4_12(1.3));
+        {
+            u8 atkHighestStat = GetHighestStatId(battlerAtk);
+            if (gBattleWeather & B_WEATHER_SUN && WEATHER_HAS_EFFECT && (atkHighestStat == STAT_ATK || atkHighestStat == STAT_SPATK))
+                MulModifier(&modifier, UQ_4_12(1.3));
+        }
         break;
     case ABILITY_QUARK_DRIVE:
-        if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && (atkHighestStat == STAT_ATK || atkHighestStat == STAT_SPATK))
-            MulModifier(&modifier, UQ_4_12(1.3));
+        {
+            u8 atkHighestStat = GetHighestStatId(battlerAtk);
+            if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && (atkHighestStat == STAT_ATK || atkHighestStat == STAT_SPATK))
+                MulModifier(&modifier, UQ_4_12(1.3));
+        }
         break;
     case ABILITY_ORICHALCUM_PULSE:
         if (gBattleWeather & B_WEATHER_SUN && WEATHER_HAS_EFFECT)
@@ -9006,12 +9003,18 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
             MulModifier(&modifier, UQ_4_12(2.0));
         break;
     case ABILITY_PROTOSYNTHESIS:
-        if (gBattleWeather & B_WEATHER_SUN && WEATHER_HAS_EFFECT && (defHighestStat == STAT_DEF || defHighestStat == STAT_SPDEF))
-            MulModifier(&modifier, UQ_4_12(0.3));
+        {
+            u8 defHighestStat = GetHighestStatId(battlerDef);
+            if (gBattleWeather & B_WEATHER_SUN && WEATHER_HAS_EFFECT && (defHighestStat == STAT_DEF || defHighestStat == STAT_SPDEF))
+                MulModifier(&modifier, UQ_4_12(0.7));
+        }
         break;
     case ABILITY_QUARK_DRIVE:
-        if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && (defHighestStat == STAT_DEF || defHighestStat == STAT_SPDEF))
-            MulModifier(&modifier, UQ_4_12(0.3));
+        {
+            u8 defHighestStat = GetHighestStatId(battlerDef);
+            if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && (defHighestStat == STAT_DEF || defHighestStat == STAT_SPDEF))
+                MulModifier(&modifier, UQ_4_12(0.7));
+        }
         break;
     }
 

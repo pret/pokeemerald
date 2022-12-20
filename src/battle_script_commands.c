@@ -11238,8 +11238,8 @@ static void Cmd_forcerandomswitch(void)
     }
     else
     {
-        // In normal wild doubles, Roar will always fail if the user's level is less than the target's or if the target's ability is Guard Dog.
-        if (gBattleMons[gBattlerAttacker].level >= gBattleMons[gBattlerTarget].level && GetBattlerAbility(gBattlerTarget) != ABILITY_GUARD_DOG)
+        // In normal wild doubles, Roar will always fail if the user's level is less than the target's.
+        if (gBattleMons[gBattlerAttacker].level >= gBattleMons[gBattlerTarget].level)
             gBattlescriptCurrInstr = BattleScript_RoarSuccessEndBattle;
         else
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);

@@ -653,7 +653,6 @@ struct BattleStruct
     u8 attackerBeforeBounce:2;
     u8 targetsDone[MAX_BATTLERS_COUNT]; // Each battler as a bit.
     u16 overwrittenAbilities[MAX_BATTLERS_COUNT];    // abilities overwritten during battle (keep separate from battle history in case of switching)
-    bool8 endturnAbilityDone[PARTY_SIZE][2]; // For some reason, adding a switchInAbilityDone equivalent in SpecialStatus didn't work.
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)
