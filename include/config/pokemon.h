@@ -9,7 +9,7 @@
 
 // Breeding settings
 #define P_NIDORAN_M_DITTO_BREED GEN_LATEST  // Since Gen 5, when Nidoran♂ breeds with Ditto it can produce Nidoran♀ offspring. Before, it would only yield male offspring. This change also applies to Volbeat.
-#define P_INCENSE_BREEDING      GEN_9  // Since Gen 9, cross-generation Baby Pokémon don't require Incense being held by the parents to be obtained via breeding.
+#define P_INCENSE_BREEDING      GEN_LATEST  // Since Gen 9, cross-generation Baby Pokémon don't require Incense being held by the parents to be obtained via breeding.
 
 // Other settings
 #define P_SHEDINJA_BALL         GEN_LATEST  // Since Gen 4, Shedinja requires a Poké Ball for its evolution. In Gen 3, Shedinja inherits Nincada's Ball.
