@@ -2702,7 +2702,7 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         switch (gBattleMoves[AI_DATA->partnerMove].effect)
         {
         case EFFECT_HELPING_HAND:
-            if (IS_MOVE_STATUS(move))
+            if (!IS_MOVE_STATUS(move))
                 score += 5;
             break;
         case EFFECT_PERISH_SONG:
