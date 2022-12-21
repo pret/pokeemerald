@@ -2378,12 +2378,6 @@ u8 DoFieldEndTurnEffects(void)
                         BattleScriptExecute(BattleScript_TailwindEnds);
                         effect++;
                     }
-                    if (IsAbilityOnSide(gActiveBattler, ABILITY_WIND_POWER))
-                    {
-                        gCurrentMove = MOVE_TAILWIND;
-                        BattleScriptExecute(BattleScript_WindPowerActivatesEnd2);
-                        effect++;
-                    }
                 }
                 gBattleStruct->turnSideTracker++;
                 if (effect != 0)

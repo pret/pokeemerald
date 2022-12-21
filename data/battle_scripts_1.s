@@ -2876,22 +2876,20 @@ BattleScript_EffectTailwind:
 	waitanimation
 	printstring STRINGID_TAILWINDBLEW
 	waitmessage B_WAIT_TIME_LONG
-	call TryActivateWindRiderLoop
+	call BattleScript_TryTailwindAbilitiesLoop
 	goto BattleScript_MoveEnd
 
-TryActivateWindRiderLoop:
+BattleScript_TryTailwindAbilitiesLoop:
 	savetarget
 	setbyte gBattlerTarget, 0
-BattleScript_WindRiderLoop_Iter:
-	jumpifability BS_TARGET, ABILITY_WIND_RIDER, BattleScript_WindRiderLoop_Activate
-	goto BattleScript_WindRiderLoop_Increment
-BattleScript_WindRiderLoop_Activate:
+BattleScript_TryTailwindAbilitiesLoop_Iter:
+	trywindriderpower BS_TARGET, BattleScript_TryTailwindAbilitiesLoop_Increment
 	call BattleScript_AbilityPopUp
-	modifybattlerstatstage BS_TARGET, STAT_ATK, INCREASE, 1, BattleScript_WindRiderLoop_Increment, ANIM_ON
-BattleScript_WindRiderLoop_Increment:
+	modifybattlerstatstage BS_TARGET, STAT_ATK, INCREASE, 1, BattleScript_TryTailwindAbilitiesLoop_Increment, ANIM_ON
+BattleScript_TryTailwindAbilitiesLoop_Increment:
 	addbyte gBattlerTarget, 0x1
-	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_WindRiderLoop_Iter
-BattleScript_WindRiderLoop_Ret:
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_TryTailwindAbilitiesLoop_Iter
+BattleScript_TryTailwindAbilitiesLoop_Ret:
 	restoretarget
 	return
 

@@ -247,6 +247,7 @@
 #define VARIOUS_GET_BATTLER_SIDE                    156
 #define VARIOUS_CHECK_PARENTAL_BOND_COUNTER         157
 #define VARIOUS_SWAP_STATS                          158
+#define VARIOUS_TRY_WIND_RIDER_POWER                159
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

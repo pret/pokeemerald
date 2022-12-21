@@ -10099,6 +10099,23 @@ static void Cmd_various(void)
             PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
         }
         break;
+    case VARIOUS_TRY_WIND_RIDER_POWER:
+        {
+            u16 ability = GetBattlerAbility(gActiveBattler);
+            if (GetBattlerSide(gActiveBattler) == GetBattlerSide(gBattlerAttacker)
+             && (ability == ABILITY_WIND_RIDER || ability == ABILITY_WIND_POWER))
+            {
+                gLastUsedAbility = ability;
+                RecordAbilityBattle(gActiveBattler, gLastUsedAbility);
+                gBattlerAbility = gBattleScripting.battler = gActiveBattler;
+                gBattlescriptCurrInstr += 7;
+            }
+            else
+            {
+                gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+            }
+        }
+        return;
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;
