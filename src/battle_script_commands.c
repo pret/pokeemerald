@@ -3656,7 +3656,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 {
                 DIRE_CLAW_STATUS_PICK:
                     gBattleScripting.moveEffect = Random() % 6;
-                    if (gBattleScripting.moveEffect == MOVE_EFFECT_NONE
+                    if (gBattleScripting.moveEffect == 0
                      || gBattleScripting.moveEffect == MOVE_EFFECT_BURN
                      || gBattleScripting.moveEffect == MOVE_EFFECT_FREEZE)
                         goto DIRE_CLAW_STATUS_PICK;
