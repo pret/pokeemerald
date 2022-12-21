@@ -8012,6 +8012,11 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
         else if (gProtectStructs[battlerId].protected)
             return FALSE;
     }
+    
+        if (move == MOVE_TEATIME)
+    {
+            return FALSE;
+    }
 
     // Protective Pads doesn't stop Unseen Fist from bypassing Protect effects, so IsMoveMakingContact() isn't used here.
     // This means extra logic is needed to handle Shell Side Arm.
