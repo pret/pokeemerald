@@ -14,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
+      "map": "MAP_ROUTE121",
       "offset": 10,
-      "map": "MAP_ROUTE121"
+      "direction": "left"
     },
     {
-      "direction": "right",
+      "map": "MAP_ROUTE124",
       "offset": -10,
-      "map": "MAP_ROUTE124"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -318,98 +318,98 @@
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_DEPARTMENT_STORE_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 37,
       "y": 24,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_COVE_LILY_MOTEL_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 24,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 11,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 23,
       "y": 24,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_CONTEST_LOBBY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 39,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 70,
       "y": 5,
       "elevation": 1,
       "dest_map": "MAP_AQUA_HIDEOUT_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 36,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_MOVE_DELETERS_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 42,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_HOUSE1",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 55,
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_HOUSE2",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 11,
       "y": 22,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_HOUSE3",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 12,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_HOUSE4",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 12,
       "y": 32,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_HARBOR",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 12,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

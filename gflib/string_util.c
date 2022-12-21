@@ -354,7 +354,7 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
 
             switch (c)
             {
-            case EXT_CTRL_CODE_RESET_SIZE:
+            case EXT_CTRL_CODE_RESET_FONT:
             case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
             case EXT_CTRL_CODE_FILL_WINDOW:
             case EXT_CTRL_CODE_JPN:
@@ -665,13 +665,13 @@ u8 GetExtCtrlCodeLength(u8 code)
         [EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW] = 4,
         [EXT_CTRL_CODE_PALETTE]                = 2,
         [EXT_CTRL_CODE_FONT]                   = 2,
-        [EXT_CTRL_CODE_RESET_SIZE]             = 1,
+        [EXT_CTRL_CODE_RESET_FONT]             = 1,
         [EXT_CTRL_CODE_PAUSE]                  = 2,
         [EXT_CTRL_CODE_PAUSE_UNTIL_PRESS]      = 1,
         [EXT_CTRL_CODE_WAIT_SE]                = 1,
         [EXT_CTRL_CODE_PLAY_BGM]               = 3,
         [EXT_CTRL_CODE_ESCAPE]                 = 2,
-        [EXT_CTRL_CODE_SHIFT_TEXT]             = 2,
+        [EXT_CTRL_CODE_SHIFT_RIGHT]            = 2,
         [EXT_CTRL_CODE_SHIFT_DOWN]             = 2,
         [EXT_CTRL_CODE_FILL_WINDOW]            = 1,
         [EXT_CTRL_CODE_PLAY_SE]                = 3,

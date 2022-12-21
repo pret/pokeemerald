@@ -29,13 +29,11 @@
 #define ABILITYEFFECT_WEATHER_FORM               7
 #define ABILITYEFFECT_SYNCHRONIZE                8
 #define ABILITYEFFECT_ATK_SYNCHRONIZE            9
-#define ABILITYEFFECT_INTIMIDATE1                10
-#define ABILITYEFFECT_INTIMIDATE2                11
-#define ABILITYEFFECT_TRACE1                     12
-#define ABILITYEFFECT_TRACE2                     13
-#define ABILITYEFFECT_MOVE_END_OTHER             14
-#define ABILITYEFFECT_NEUTRALIZINGGAS            15
-#define ABILITYEFFECT_FIELD_SPORT                16 // Only used if B_SPORT_TURNS < GEN_6
+#define ABILITYEFFECT_TRACE1                     10
+#define ABILITYEFFECT_TRACE2                     11
+#define ABILITYEFFECT_MOVE_END_OTHER             12
+#define ABILITYEFFECT_NEUTRALIZINGGAS            13
+#define ABILITYEFFECT_FIELD_SPORT                14 // Only used if B_SPORT_TURNS < GEN_6
 // Special cases
 #define ABILITYEFFECT_MUD_SPORT                  252 // Only used if B_SPORT_TURNS < GEN_6
 #define ABILITYEFFECT_WATER_SPORT                253 // Only used if B_SPORT_TURNS < GEN_6
@@ -51,7 +49,7 @@
 #define ITEMEFFECT_TARGET                       5
 #define ITEMEFFECT_ORBS                         6
 #define ITEMEFFECT_LIFEORB_SHELLBELL            7
-#define ITEMEFFECT_BATTLER_MOVE_END             8 // move end effects for just the battler, not whole field
+#define ITEMEFFECT_USE_LAST_ITEM                8 // move end effects for just the battler, not whole field
 
 #define WEATHER_HAS_EFFECT ((!IsAbilityOnField(ABILITY_CLOUD_NINE) && !IsAbilityOnField(ABILITY_AIR_LOCK)))
 

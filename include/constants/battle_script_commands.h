@@ -93,7 +93,7 @@
 #define VARIOUS_IS_RUNNING_IMPOSSIBLE               2
 #define VARIOUS_GET_MOVE_TARGET                     3
 #define VARIOUS_GET_BATTLER_FAINTED                 4
-#define VARIOUS_RESET_INTIMIDATE_TRACE_BITS         5
+#define VARIOUS_RESET_SWITCH_IN_ABILITY_BITS        5
 #define VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP        6
 #define VARIOUS_RESET_PLAYER_FAINTED                7
 #define VARIOUS_PALACE_FLAVOR_TEXT                  8
@@ -246,6 +246,7 @@
 #define VARIOUS_CAN_TELEPORT                        155
 #define VARIOUS_GET_BATTLER_SIDE                    156
 #define VARIOUS_CHECK_PARENTAL_BOND_COUNTER         157
+#define VARIOUS_SWAP_STATS                          158
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

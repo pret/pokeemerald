@@ -1,4 +1,5 @@
 #include "config.h"
+#include "config/battle.h"
 #include "constants/global.h"
 #include "constants/battle.h"
 #include "constants/pokemon.h"
@@ -12,7 +13,6 @@
 #include "constants/songs.h"
 #include "constants/game_stat.h"
 #include "constants/trainers.h"
-#include "constants/battle_config.h"
 #include "constants/species.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_script.inc"
@@ -410,6 +410,11 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSteelBeam               @ EFFECT_STEEL_BEAM
 	.4byte BattleScript_EffectExtremeEvoboost         @ EFFECT_EXTREME_EVOBOOST
 	.4byte BattleScript_EffectTerrainHit              @ EFFECT_DAMAGE_SET_TERRAIN
+	.4byte BattleScript_EffectDarkVoid                @ EFFECT_DARK_VOID
+	.4byte BattleScript_EffectSleepHit                @ EFFECT_SLEEP_HIT
+	.4byte BattleScript_EffectDoubleShock             @ EFFECT_DOUBLE_SHOCK
+	.4byte BattleScript_EffectSpecialAttackUpHit      @ EFFECT_SPECIAL_ATTACK_UP_HIT
+	.4byte BattleScript_EffectVictoryDance            @ EFFECT_VICTORY_DANCE
 
 BattleScript_AffectionBasedEndurance::
 	playanimation BS_TARGET, B_ANIM_AFFECTION_HANGED_ON
@@ -693,11 +698,11 @@ BattleScript_EffectFling:
 BattleScript_EffectFlingConsumeBerry:
 	savebattleritem BS_TARGET
 	battleritemtolastuseditem BS_TARGET
-	setbyte sBERRY_OVERRIDE, TRUE @ override the requirements for eating berries
+	setbyte sBERRY_OVERRIDE, 1 @ override the requirements for eating berries
 	orword gHitMarker, HITMARKER_NO_ANIMATIONS
-	consumeberry BS_TARGET
+	consumeberry BS_TARGET, TRUE
 	bicword gHitMarker, HITMARKER_NO_ANIMATIONS
-	setbyte sBERRY_OVERRIDE, FALSE
+	setbyte sBERRY_OVERRIDE, 0
 	restorebattleritem BS_TARGET
 BattleScript_FlingEnd:
 	tryfaintmon BS_TARGET
@@ -774,9 +779,7 @@ BattleScript_EffectPhotonGeyser:
 BattleScript_EffectAuraWheel: @ Aura Wheel can only be used by Morpeko
 	jumpifspecies BS_ATTACKER, SPECIES_MORPEKO, BattleScript_EffectSpeedUpHit
 	jumpifspecies BS_ATTACKER, SPECIES_MORPEKO_HANGRY, BattleScript_EffectSpeedUpHit
-	printstring STRINGID_BUTPOKEMONCANTUSETHEMOVE
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_MoveEnd
+	goto BattleScript_PokemonCantUseTheMove
 
 BattleScript_EffectClangorousSoul:
 	attackcanceler
@@ -888,9 +891,7 @@ BattleScript_BothCanNoLongerEscape::
 BattleScript_EffectHyperspaceFury:
 	jumpifspecies BS_ATTACKER, SPECIES_HOOPA_UNBOUND, BattleScript_EffectHyperspaceFuryUnbound
 	jumpifspecies BS_ATTACKER, SPECIES_HOOPA, BattleScript_ButHoopaCantUseIt
-	printstring STRINGID_BUTPOKEMONCANTUSETHEMOVE
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_MoveEnd
+	goto BattleScript_PokemonCantUseTheMove
 
 BattleScript_EffectHyperspaceFuryUnbound::
 	attackcanceler
@@ -1081,11 +1082,12 @@ BattleScript_EffectStuffCheeks::
 	attackanimation
 	waitanimation
 BattleScript_StuffCheeksEatBerry:
-	setbyte sBERRY_OVERRIDE, TRUE
+	setbyte sBERRY_OVERRIDE, 1
 	orword gHitMarker, HITMARKER_NO_ANIMATIONS
-	consumeberry BS_ATTACKER
+	consumeberry BS_ATTACKER, TRUE
 	bicword gHitMarker, HITMARKER_NO_ANIMATIONS
-	setbyte sBERRY_OVERRIDE, FALSE
+	setbyte sBERRY_OVERRIDE, 0
+	removeitem BS_ATTACKER
 	setstatchanger STAT_DEF, 2, FALSE
 	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_StuffCheeksEnd
 	setgraphicalstatchangevalues
@@ -1281,6 +1283,23 @@ BattleScript_BurnUpRemoveType::
 	printstring STRINGID_ATTACKERLOSTFIRETYPE
 	waitmessage B_WAIT_TIME_LONG
 	return
+
+BattleScript_EffectDoubleShock:
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpiftype BS_ATTACKER, TYPE_ELECTRIC, BattleScript_DoubleShockWorks
+	goto BattleScript_ButItFailed
+
+BattleScript_DoubleShockWorks:
+	setmoveeffect MOVE_EFFECT_DOUBLE_SHOCK | MOVE_EFFECT_CERTAIN
+	goto BattleScript_EffectHit
+
+BattleScript_DoubleShockRemoveType::
+	losetype BS_ATTACKER, TYPE_ELECTRIC
+	printstring STRINGID_ATTACKERLOSTELECTRICTYPE
+	waitmessage B_WAIT_TIME_LONG
+	return
 	
 BattleScript_EffectPurify:
 	attackcanceler
@@ -1363,11 +1382,13 @@ BattleScript_MoveEffectBugBite::
 	printstring STRINGID_BUGBITE
 	waitmessage B_WAIT_TIME_LONG
 	orword gHitMarker, HITMARKER_NO_ANIMATIONS
-	setbyte sBERRY_OVERRIDE, TRUE   @ override the requirements for eating berries
-	consumeberry BS_ATTACKER, TRUE  @ consume the berry, then restore the item from changedItems
+	setbyte sBERRY_OVERRIDE, 1   @ override the requirements for eating berries
+	savetarget
+	consumeberry BS_ATTACKER, FALSE
 	bicword gHitMarker, HITMARKER_NO_ANIMATIONS
-	setbyte sBERRY_OVERRIDE, FALSE
+	setbyte sBERRY_OVERRIDE, 0
 	trysymbiosis
+	restoretarget
 	return
 
 BattleScript_EffectCoreEnforcer:
@@ -2325,6 +2346,38 @@ BattleScript_QuiverDanceTrySpeed::
 BattleScript_QuiverDanceEnd::
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectVictoryDance:
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_ATK, MAX_STAT_STAGE, BattleScript_VictoryDanceDoMoveAnim
+	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_DEF, MAX_STAT_STAGE, BattleScript_VictoryDanceDoMoveAnim
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPEED, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
+BattleScript_VictoryDanceDoMoveAnim::
+	attackanimation
+	waitanimation
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_ATTACKER, BIT_ATK | BIT_DEF | BIT_SPEED, 0
+	setstatchanger STAT_ATK, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_VictoryDanceTryDef
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_VictoryDanceTryDef
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_VictoryDanceTryDef::
+	setstatchanger STAT_DEF, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_VictoryDanceTrySpeed
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_VictoryDanceTrySpeed
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_VictoryDanceTrySpeed::
+	setstatchanger STAT_SPEED, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_VictoryDanceEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_VictoryDanceEnd
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_VictoryDanceEnd::
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectSpeedUpHit:
 	setmoveeffect MOVE_EFFECT_SPD_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
 	goto BattleScript_EffectHit
@@ -2678,10 +2731,10 @@ BattleScript_EffectSpeedSwap:
 	attackstring
 	ppreduce
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
-	swapstatstages STAT_SPEED
+	swapstats STAT_SPEED
 	attackanimation
 	waitanimation
-	printstring STRINGID_PKMNSWITCHEDSTATCHANGES
+	printstring STRINGID_ATTACKERSWITCHEDSTATWITHTARGET
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
@@ -3019,6 +3072,11 @@ BattleScript_MoveMissed::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectDarkVoid::
+.if B_DARK_VOID_FAIL >= GEN_7
+	jumpifspecies BS_ATTACKER, SPECIES_DARKRAI, BattleScript_EffectSleep
+	goto BattleScript_PokemonCantUseTheMove
+.endif
 BattleScript_EffectSleep::
 	attackcanceler
 	attackstring
@@ -3193,6 +3251,10 @@ BattleScript_AbsorbHealBlock::
 
 BattleScript_EffectBurnHit::
 	setmoveeffect MOVE_EFFECT_BURN
+	goto BattleScript_EffectHit
+
+BattleScript_EffectSleepHit::
+	setmoveeffect MOVE_EFFECT_SLEEP
 	goto BattleScript_EffectHit
 
 BattleScript_EffectFreezeHit::
@@ -4964,6 +5026,10 @@ BattleScript_EffectAttackUpHit::
 	setmoveeffect MOVE_EFFECT_ATK_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
 	goto BattleScript_EffectHit
 
+BattleScript_EffectSpecialAttackUpHit::
+	setmoveeffect MOVE_EFFECT_SP_ATK_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
+	goto BattleScript_EffectHit
+
 BattleScript_EffectAllStatsUpHit::
 	setmoveeffect MOVE_EFFECT_ALL_STATS_UP | MOVE_EFFECT_AFFECTS_USER
 	goto BattleScript_EffectHit
@@ -6122,7 +6188,7 @@ BattleScript_FaintedMonTryChoose:
 	jumpifbyte CMP_EQUAL, gBattleCommunication, PARTY_SIZE, BattleScript_FaintedMonSendOutNew
 @ Switch Pokémon before opponent
 	atknameinbuff1
-	resetintimidatetracebits BS_ATTACKER
+	resetswitchinabilitybits BS_ATTACKER
 	hpthresholds2 BS_ATTACKER
 	printstring STRINGID_RETURNMON
 	switchoutabilities BS_ATTACKER
@@ -8192,19 +8258,15 @@ BattleScript_TryAdrenalineOrb:
 BattleScript_TryAdrenalineOrbRet:
 	return
 
-BattleScript_IntimidateActivatesEnd3::
-	call BattleScript_PauseIntimidateActivates
-	end3
-
-BattleScript_PauseIntimidateActivates:
-	pause B_WAIT_TIME_SHORT
 BattleScript_IntimidateActivates::
+	showabilitypopup BS_ATTACKER
+	pause B_WAIT_TIME_LONG
+	destroyabilitypopup
 	setbyte gBattlerTarget, 0
-	call BattleScript_AbilityPopUp
-BattleScript_IntimidateActivatesLoop:
-	setstatchanger STAT_ATK, 1, TRUE
-	trygetintimidatetarget BattleScript_IntimidateActivatesReturn
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_IntimidateActivatesLoopIncrement
+BattleScript_IntimidateLoop:
+	jumpifbyteequal gBattlerTarget, gBattlerAttacker, BattleScript_IntimidateLoopIncrement
+	jumpiftargetally BattleScript_IntimidateLoopIncrement
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_IntimidateLoopIncrement
 	jumpifability BS_TARGET, ABILITY_CLEAR_BODY, BattleScript_IntimidatePrevented
 	jumpifability BS_TARGET, ABILITY_HYPER_CUTTER, BattleScript_IntimidatePrevented
 	jumpifability BS_TARGET, ABILITY_WHITE_SMOKE, BattleScript_IntimidatePrevented
@@ -8214,27 +8276,31 @@ BattleScript_IntimidateActivatesLoop:
 	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_IntimidatePrevented
 	jumpifability BS_TARGET, ABILITY_OBLIVIOUS, BattleScript_IntimidatePrevented
 .endif
-	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_IntimidateActivatesLoopIncrement
-	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, 1, BattleScript_IntimidateActivatesLoopIncrement
+BattleScript_IntimidateEffect:
+	copybyte sBATTLER, gBattlerTarget
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
 	setgraphicalstatchangevalues
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	printstring STRINGID_PKMNCUTSATTACKWITH
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_TryAdrenalineOrb
-BattleScript_IntimidateActivatesLoopIncrement:
+BattleScript_IntimidateLoopIncrement:
 	addbyte gBattlerTarget, 1
-	goto BattleScript_IntimidateActivatesLoop
-BattleScript_IntimidateActivatesReturn:
-	return
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_IntimidateLoop
+BattleScript_IntimidateEnd:
+	destroyabilitypopup
+	pause B_WAIT_TIME_MED
+	end3
+
 BattleScript_IntimidatePrevented:
-	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
+	pause B_WAIT_TIME_LONG
 	setbyte gBattleCommunication STAT_ATK
-	stattextbuffer BS_ATTACKER
+	stattextbuffer BS_TARGET
 	printstring STRINGID_STATWASNOTLOWERED
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_TryAdrenalineOrb
-	goto BattleScript_IntimidateActivatesLoopIncrement
+	goto BattleScript_IntimidateLoopIncrement
 
 BattleScript_DroughtActivates::
 	pause B_WAIT_TIME_SHORT
@@ -8357,24 +8423,33 @@ BattleScript_PsychicSurgeActivates::
 	call BattleScript_TerrainSeedLoop
 	end3
 
-BattleScript_BadDreamsActivates::
-	setbyte gBattlerTarget, 0
-	call BattleScript_AbilityPopUp
-BattleScript_BadDreamsLoop:
-	trygetbaddreamstarget BattleScript_BadDreamsEnd
-	dmg_1_8_targethp
+BattleScript_HurtTarget_NoString:
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
-	printstring STRINGID_BADDREAMSDMG
-	waitmessage B_WAIT_TIME_LONG
-	jumpifability BS_TARGET, ABILITY_MAGIC_GUARD, BattleScript_BadDreamsIncrement
 	healthbarupdate BS_TARGET
 	datahpupdate BS_TARGET
 	tryfaintmon BS_TARGET
-	checkteamslost BattleScript_BadDreamsIncrement
+	return
+
+BattleScript_BadDreamsActivates::
+	call BattleScript_AbilityPopUp
+	setbyte sFIXED_ABILITY_POPUP, TRUE
+	setbyte gBattlerTarget, 0
+BattleScript_BadDreamsLoop:
+	jumpiftargetally BattleScript_BadDreamsIncrement
+	jumpifability BS_TARGET, ABILITY_MAGIC_GUARD, BattleScript_BadDreamsIncrement
+	jumpifability BS_TARGET, ABILITY_COMATOSE, BattleScript_BadDreams_Dmg
+	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_BadDreams_Dmg
+	goto BattleScript_BadDreamsIncrement
+BattleScript_BadDreams_Dmg:
+	printstring STRINGID_BADDREAMSDMG
+	waitmessage B_WAIT_TIME_LONG
+	dmg_1_8_targethp
+	call BattleScript_HurtTarget_NoString
 BattleScript_BadDreamsIncrement:
 	addbyte gBattlerTarget, 1
-	goto BattleScript_BadDreamsLoop
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_BadDreamsLoop
 BattleScript_BadDreamsEnd:
+	destroyabilitypopup
 	end3
 
 BattleScript_TookAttack::
@@ -9274,11 +9349,15 @@ BattleScript_BerryStatRaiseRet_Anim:
 BattleScript_BerryStatRaiseRet_End:
 	return
 
-BattleScript_BerryFocusEnergyEnd2::
-	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT
+BattleScript_BerryFocusEnergyRet::
+	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT
 	printstring STRINGID_PKMNUSEDXTOGETPUMPED
 	waitmessage B_WAIT_TIME_LONG
-	removeitem BS_ATTACKER
+	removeitem BS_SCRIPTING
+	return
+
+BattleScript_BerryFocusEnergyEnd2::
+	call BattleScript_BerryFocusEnergyRet
 	end2
 
 BattleScript_ActionSelectionItemsCantBeUsed::
@@ -9782,3 +9861,11 @@ BattleScript_TargetAbilityStatRaiseRet::
 	call BattleScript_StatUp
 BattleScript_TargetAbilityStatRaiseRet_End:
 	return
+
+BattleScript_PokemonCantUseTheMove::
+	attackstring
+	ppreduce
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_BUTPOKEMONCANTUSETHEMOVE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd

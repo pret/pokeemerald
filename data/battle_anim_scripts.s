@@ -1,4 +1,5 @@
 #include "config.h"
+#include "config/battle.h"
 #include "constants/battle.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
@@ -7,7 +8,6 @@
 #include "constants/moves.h"
 #include "constants/pokemon.h"
 #include "constants/items.h"
-#include "constants/battle_config.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_anim_script.inc"
 	.include "constants/constants.inc"
@@ -805,6 +805,55 @@ gBattleAnims_Moves::
 	.4byte Move_SANDSEAR_STORM
 	.4byte Move_LUNAR_BLESSING
 	.4byte Move_TAKE_HEART
+@@@@@@@@@@@@ GEN 9 @@@@@@@@@@@@
+	.4byte Move_TERA_BLAST
+	.4byte Move_SILK_TRAP
+	.4byte Move_AXE_KICK
+	.4byte Move_LAST_RESPECTS
+	.4byte Move_LUMINA_CRASH
+	.4byte Move_ORDER_UP
+	.4byte Move_JET_PUNCH
+	.4byte Move_SPICY_EXTRACT
+	.4byte Move_SPIN_OUT
+	.4byte Move_POPULATION_BOMB
+	.4byte Move_ICE_SPINNER
+	.4byte Move_GLAIVE_RUSH
+	.4byte Move_REVIVAL_BLESSING
+	.4byte Move_SALT_CURE
+	.4byte Move_TRIPLE_DIVE
+	.4byte Move_MORTAL_SPIN
+	.4byte Move_DOODLE
+	.4byte Move_FILLET_AWAY
+	.4byte Move_KOWTOW_CLEAVE
+	.4byte Move_FLOWER_TRICK
+	.4byte Move_TORCH_SONG
+	.4byte Move_AQUA_STEP
+	.4byte Move_RAGING_BULL
+	.4byte Move_MAKE_IT_RAIN
+	.4byte Move_RUINATION
+	.4byte Move_COLLISION_COURSE
+	.4byte Move_ELECTRO_DRIFT
+	.4byte Move_SHED_TAIL
+	.4byte Move_CHILLY_RECEPTION
+	.4byte Move_TIDY_UP
+	.4byte Move_SNOWSCAPE
+	.4byte Move_POUNCE
+	.4byte Move_TRAILBLAZE
+	.4byte Move_CHILLING_WATER
+	.4byte Move_HYPER_DRILL
+	.4byte Move_TWIN_BEAM
+	.4byte Move_RAGE_FIST
+	.4byte Move_ARMOR_CANNON
+	.4byte Move_BITTER_BLADE
+	.4byte Move_DOUBLE_SHOCK
+	.4byte Move_GIGATON_HAMMER
+	.4byte Move_COMEUPPANCE
+	.4byte Move_AQUA_CUTTER
+	.4byte Move_BLAZING_TORQUE
+	.4byte Move_WICKED_TORQUE
+	.4byte Move_NOXIOUS_TORQUE
+	.4byte Move_COMBAT_TORQUE
+	.4byte Move_MAGICAL_TORQUE
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
 	.4byte Move_ALL_OUT_PUMMELING
@@ -14345,6 +14394,54 @@ Move_WILDBOLT_STORM::
 Move_SANDSEAR_STORM::
 Move_LUNAR_BLESSING::
 Move_TAKE_HEART::
+Move_TERA_BLAST::
+Move_SILK_TRAP::
+Move_AXE_KICK::
+Move_LAST_RESPECTS::
+Move_LUMINA_CRASH::
+Move_ORDER_UP::
+Move_JET_PUNCH::
+Move_SPICY_EXTRACT::
+Move_SPIN_OUT::
+Move_POPULATION_BOMB::
+Move_ICE_SPINNER::
+Move_GLAIVE_RUSH::
+Move_REVIVAL_BLESSING::
+Move_SALT_CURE::
+Move_TRIPLE_DIVE::
+Move_MORTAL_SPIN::
+Move_DOODLE::
+Move_FILLET_AWAY::
+Move_KOWTOW_CLEAVE::
+Move_FLOWER_TRICK::
+Move_TORCH_SONG::
+Move_AQUA_STEP::
+Move_RAGING_BULL::
+Move_MAKE_IT_RAIN::
+Move_RUINATION::
+Move_COLLISION_COURSE::
+Move_ELECTRO_DRIFT::
+Move_SHED_TAIL::
+Move_CHILLY_RECEPTION::
+Move_TIDY_UP::
+Move_SNOWSCAPE::
+Move_POUNCE::
+Move_TRAILBLAZE::
+Move_CHILLING_WATER::
+Move_HYPER_DRILL::
+Move_TWIN_BEAM::
+Move_RAGE_FIST::
+Move_ARMOR_CANNON::
+Move_BITTER_BLADE::
+Move_DOUBLE_SHOCK::
+Move_GIGATON_HAMMER::
+Move_COMEUPPANCE::
+Move_AQUA_CUTTER::
+Move_BLAZING_TORQUE::
+Move_WICKED_TORQUE::
+Move_NOXIOUS_TORQUE::
+Move_COMBAT_TORQUE::
+Move_MAGICAL_TORQUE::
 	end @to do
 
 @@@@@@@@@@@@@@@@@@@@@@@ GEN 1-3 @@@@@@@@@@@@@@@@@@@@@@@

@@ -23,7 +23,6 @@
 #include "palette.h"
 #include "contest.h"
 #include "constants/songs.h"
-#include "constants/battle_config.h"
 #include "constants/rgb.h"
 #include "constants/battle_palace.h"
 
@@ -78,11 +77,7 @@ static const struct CompressedSpriteSheet sSpriteSheets_HealthBar[MAX_BATTLERS_C
     {gBlankGfxCompressed, 0x0120, TAG_HEALTHBAR_OPPONENT2_TILE}
 };
 
-#if P_ENABLE_DEBUG == TRUE
 const struct SpritePalette sSpritePalettes_HealthBoxHealthBar[2] =
-#else
-static const struct SpritePalette sSpritePalettes_HealthBoxHealthBar[2] =
-#endif
 {
     {gBattleInterface_BallStatusBarPal, TAG_HEALTHBOX_PAL},
     {gBattleInterface_BallDisplayPal, TAG_HEALTHBAR_PAL}

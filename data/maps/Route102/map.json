@@ -14,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
+      "map": "MAP_PETALBURG_CITY",
       "offset": -10,
-      "map": "MAP_PETALBURG_CITY"
+      "direction": "left"
     },
     {
-      "direction": "right",
+      "map": "MAP_OLDALE_TOWN",
       "offset": 0,
-      "map": "MAP_OLDALE_TOWN"
+      "direction": "right"
     }
   ],
   "object_events": [
