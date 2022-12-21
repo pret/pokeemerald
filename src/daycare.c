@@ -742,18 +742,22 @@ void RejectEggFromDayCare(void)
     RemoveEggFromDayCare(&gSaveBlock1Ptr->daycare);
 }
 
-u16 IncenseBabyTable[][3] =
+static const struct {
+  u16 noIncenseSpecies;
+  u16 item;
+  u16 incenseSpecies;
+} IncenseBabyTable[][3] =
 {
-    // Parent species,    Incense,           Offspring
-    { SPECIES_WOBBUFFET, ITEM_LAX_INCENSE,  SPECIES_WYNAUT },
-    { SPECIES_MARILL,    ITEM_SEA_INCENSE,  SPECIES_AZURILL },
-    { SPECIES_SNORLAX,   ITEM_FULL_INCENSE, SPECIES_MUNCHLAX },
-    { SPECIES_CHANSEY,   ITEM_LUCK_INCENSE, SPECIES_HAPPINY },
-    { SPECIES_MR_MIME,   ITEM_ODD_INCENSE,  SPECIES_MIME_JR },
-    { SPECIES_CHIMECHO,  ITEM_PURE_INCENSE, SPECIES_CHINGLING },
-    { SPECIES_SUDOWOODO, ITEM_ROCK_INCENSE, SPECIES_BONSLY },
-    { SPECIES_ROSELIA,   ITEM_ROSE_INCENSE, SPECIES_BUDEW },
-    { SPECIES_MANTINE,   ITEM_WAVE_INCENSE, SPECIES_MANTYKE },
+    // Regular offspring,   Item,              Incense Offspring
+    { SPECIES_WOBBUFFET,    ITEM_LAX_INCENSE,  SPECIES_WYNAUT },
+    { SPECIES_MARILL,       ITEM_SEA_INCENSE,  SPECIES_AZURILL },
+    { SPECIES_SNORLAX,      ITEM_FULL_INCENSE, SPECIES_MUNCHLAX },
+    { SPECIES_CHANSEY,      ITEM_LUCK_INCENSE, SPECIES_HAPPINY },
+    { SPECIES_MR_MIME,      ITEM_ODD_INCENSE,  SPECIES_MIME_JR },
+    { SPECIES_CHIMECHO,     ITEM_PURE_INCENSE, SPECIES_CHINGLING },
+    { SPECIES_SUDOWOODO,    ITEM_ROCK_INCENSE, SPECIES_BONSLY },
+    { SPECIES_ROSELIA,      ITEM_ROSE_INCENSE, SPECIES_BUDEW },
+    { SPECIES_MANTINE,      ITEM_WAVE_INCENSE, SPECIES_MANTYKE },
 };
 
 static void AlterEggSpeciesWithIncenseItem(u16 *species, struct DayCare *daycare)
@@ -765,8 +769,8 @@ static void AlterEggSpeciesWithIncenseItem(u16 *species, struct DayCare *daycare
 
     for (i = 0; i < ARRAY_COUNT(IncenseBabyTable); i++)
     {
-        if (IncenseBabyTable[i][2] == *species && motherItem != IncenseBabyTable[i][1] && fatherItem != IncenseBabyTable[i][1])
-            *species = IncenseBabyTable[i][0];
+        if (IncenseBabyTable[i]->incenseSpecies == *species && motherItem != IncenseBabyTable[i]->item && fatherItem != IncenseBabyTable[i]->item)
+            *species = IncenseBabyTable[i]->noIncenseSpecies;
     }
 }
 
