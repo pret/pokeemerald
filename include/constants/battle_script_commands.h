@@ -253,7 +253,6 @@
 #define VARIOUS_TEATIME_INVUL                       162
 #define VARIOUS_TEATIME_TARGETS                     163
 
-
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
 #define DMG_RECOIL_FROM_MISS       1
