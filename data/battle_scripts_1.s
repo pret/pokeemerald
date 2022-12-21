@@ -431,10 +431,10 @@ BattleScript_TeatimeLoop:
 	jumpifrodaffected BS_TARGET, BattleScript_Teatimerod
 	jumpifabsorbaffected BS_TARGET, BattleScript_Teatimesorb
 	jumpifmotoraffected BS_TARGET, BattleScript_Teatimemotor
-	orword gHitMarker, HITMARKER_NO_ANIMATIONS, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE
+	orword gHitMarker, HITMARKER_NO_ANIMATIONS | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE
 	setbyte sBERRY_OVERRIDE, TRUE   @ override the requirements for eating berries
 	consumeberry BS_TARGET, TRUE  @ consume the berry, then restore the item from changedItems
-	bicword gHitMarker, HITMARKER_NO_ANIMATIONS, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE
+	bicword gHitMarker, HITMARKER_NO_ANIMATIONS | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE
 	setbyte sBERRY_OVERRIDE, FALSE
 	removeitem BS_TARGET
 	moveendto MOVEEND_NEXT_TARGET
