@@ -1082,6 +1082,14 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             else if (!BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_SPDEF))
                 score -= 6;
             break;
+        case EFFECT_VICTORY_DANCE:
+            if (gBattleMons[battlerAtk].statStages[STAT_ATK] >= MAX_STAT_STAGE || !HasMoveWithSplit(battlerAtk, SPLIT_PHYSICAL))
+                score -= 10;
+            else if (!BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_SPEED))
+                score -= 8;
+            else if (!BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_DEF))
+                score -= 6;
+            break;
         case EFFECT_SHIFT_GEAR:
             if (!BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_ATK) || !HasMoveWithSplit(battlerAtk, SPLIT_PHYSICAL))
                 score -= 10;
@@ -2007,6 +2015,10 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             if (!IS_BATTLER_OF_TYPE(battlerAtk, TYPE_FIRE))
                 score -= 10;
             break;
+        case EFFECT_DOUBLE_SHOCK:
+            if (!IS_BATTLER_OF_TYPE(battlerAtk, TYPE_ELECTRIC))
+                score -= 10;
+            break;
         case EFFECT_DEFOG:
             if (gSideStatuses[GetBattlerSide(battlerDef)]
              & (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL | SIDE_STATUS_SAFEGUARD | SIDE_STATUS_MIST)
@@ -2690,7 +2702,7 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         switch (gBattleMoves[AI_DATA->partnerMove].effect)
         {
         case EFFECT_HELPING_HAND:
-            if (IS_MOVE_STATUS(move))
+            if (!IS_MOVE_STATUS(move))
                 score += 5;
             break;
         case EFFECT_PERISH_SONG:
@@ -3407,7 +3419,6 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score += min(CountPositiveStatStages(battlerDef), 4);
         break;
     case EFFECT_MULTI_HIT:
-    case EFFECT_DOUBLE_HIT:
     case EFFECT_TRIPLE_KICK:
         if (AI_MoveMakesContact(AI_DATA->abilities[battlerAtk], AI_DATA->holdEffects[battlerAtk], move)
           && AI_DATA->abilities[battlerAtk] != ABILITY_MAGIC_GUARD
@@ -3939,6 +3950,10 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (sereneGraceBoost)
             IncreaseStatUpScore(battlerAtk, battlerDef, STAT_ATK, &score);
         break;
+    case EFFECT_SPECIAL_ATTACK_UP_HIT:
+        if (sereneGraceBoost)
+            IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPATK, &score);
+        break;
     case EFFECT_FELL_STINGER:
         if (gBattleMons[battlerAtk].statStages[STAT_ATK] < MAX_STAT_STAGE
           && AI_DATA->abilities[battlerAtk] != ABILITY_CONTRARY
@@ -4393,6 +4408,11 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPEED, &score);
         IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPATK, &score);
         IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPDEF, &score);
+        break;
+    case EFFECT_VICTORY_DANCE:
+        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPEED, &score);
+        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_ATK, &score);
+        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_DEF, &score);
         break;
     case EFFECT_SHELL_SMASH:
         if (AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_RESTORE_STATS)
@@ -4879,6 +4899,7 @@ static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_SANDSTORM:
     case EFFECT_HAIL:
     case EFFECT_GEOMANCY:
+    case EFFECT_VICTORY_DANCE:
         score += 2;
         break;
     default:

@@ -5966,6 +5966,102 @@ const struct ContestMove gContestMoves[MOVES_COUNT] =
     [MOVE_LUNAR_BLESSING] = {0}, // TODO
 
     [MOVE_TAKE_HEART] = {0}, // TODO
+
+    [MOVE_TERA_BLAST] = {0}, // TODO
+
+    [MOVE_SILK_TRAP] = {0}, // TODO
+
+    [MOVE_AXE_KICK] = {0}, // TODO
+
+    [MOVE_LAST_RESPECTS] = {0}, // TODO
+
+    [MOVE_LUMINA_CRASH] = {0}, // TODO
+
+    [MOVE_ORDER_UP] = {0}, // TODO
+
+    [MOVE_JET_PUNCH] = {0}, // TODO
+
+    [MOVE_SPICY_EXTRACT] = {0}, // TODO
+
+    [MOVE_SPIN_OUT] = {0}, // TODO
+
+    [MOVE_POPULATION_BOMB] = {0}, // TODO
+
+    [MOVE_ICE_SPINNER] = {0}, // TODO
+
+    [MOVE_GLAIVE_RUSH] = {0}, // TODO
+
+    [MOVE_REVIVAL_BLESSING] = {0}, // TODO
+
+    [MOVE_SALT_CURE] = {0}, // TODO
+
+    [MOVE_TRIPLE_DIVE] = {0}, // TODO
+
+    [MOVE_MORTAL_SPIN] = {0}, // TODO
+
+    [MOVE_DOODLE] = {0}, // TODO
+
+    [MOVE_FILLET_AWAY] = {0}, // TODO
+
+    [MOVE_KOWTOW_CLEAVE] = {0}, // TODO
+
+    [MOVE_FLOWER_TRICK] = {0}, // TODO
+
+    [MOVE_TORCH_SONG] = {0}, // TODO
+
+    [MOVE_AQUA_STEP] = {0}, // TODO
+
+    [MOVE_RAGING_BULL] = {0}, // TODO
+
+    [MOVE_MAKE_IT_RAIN] = {0}, // TODO
+
+    [MOVE_RUINATION] = {0}, // TODO
+
+    [MOVE_COLLISION_COURSE] = {0}, // TODO
+
+    [MOVE_ELECTRO_DRIFT] = {0}, // TODO
+
+    [MOVE_SHED_TAIL] = {0}, // TODO
+
+    [MOVE_CHILLY_RECEPTION] = {0}, // TODO
+
+    [MOVE_TIDY_UP] = {0}, // TODO
+
+    [MOVE_SNOWSCAPE] = {0}, // TODO
+
+    [MOVE_POUNCE] = {0}, // TODO
+
+    [MOVE_TRAILBLAZE] = {0}, // TODO
+
+    [MOVE_CHILLING_WATER] = {0}, // TODO
+
+    [MOVE_HYPER_DRILL] = {0}, // TODO
+
+    [MOVE_TWIN_BEAM] = {0}, // TODO
+
+    [MOVE_RAGE_FIST] = {0}, // TODO
+
+    [MOVE_ARMOR_CANNON] = {0}, // TODO
+
+    [MOVE_BITTER_BLADE] = {0}, // TODO
+
+    [MOVE_DOUBLE_SHOCK] = {0}, // TODO
+
+    [MOVE_GIGATON_HAMMER] = {0}, // TODO
+
+    [MOVE_COMEUPPANCE] = {0}, // TODO
+
+    [MOVE_AQUA_CUTTER] = {0}, // TODO
+
+    [MOVE_BLAZING_TORQUE] = {0}, // TODO
+
+    [MOVE_WICKED_TORQUE] = {0}, // TODO
+
+    [MOVE_NOXIOUS_TORQUE] = {0}, // TODO
+
+    [MOVE_COMBAT_TORQUE] = {0}, // TODO
+
+    [MOVE_MAGICAL_TORQUE] = {0}, // TODO
 };
 
 const struct ContestEffect gContestEffects[] =

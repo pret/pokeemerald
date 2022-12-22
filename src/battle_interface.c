@@ -31,7 +31,6 @@
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "constants/battle_config.h"
 #include "constants/items.h"
 
 enum
@@ -325,10 +324,13 @@ static const struct SpriteTemplate sHealthbarSpriteTemplates[MAX_BATTLERS_COUNT]
     }
 };
 
+/*  v-- Origin
+[0  +  ][1     ]   64x8
+*/
 static const struct Subsprite sHealthBar_Subsprites_Player[] =
 {
     {
-        .x = DISPLAY_WIDTH,
+        .x = -16,
         .y = 0,
         .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
@@ -345,10 +347,14 @@ static const struct Subsprite sHealthBar_Subsprites_Player[] =
     }
 };
 
+/*       v-- Origin
+[]  [0  +  ][1     ]   8x8 + 64x8
+2^ ^--- Note 8px space
+*/
 static const struct Subsprite sHealthBar_Subsprites_Opponent[] =
 {
     {
-        .x = DISPLAY_WIDTH,
+        .x = -16,
         .y = 0,
         .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
@@ -364,7 +370,7 @@ static const struct Subsprite sHealthBar_Subsprites_Opponent[] =
         .priority = 1
     },
     {
-        .x = DISPLAY_WIDTH - 16,
+        .x = -32,
         .y = 0,
         .shape = SPRITE_SHAPE(8x8),
         .size = SPRITE_SIZE(8x8),
@@ -378,11 +384,13 @@ static const struct SubspriteTable sHealthBar_SubspriteTables[] =
     [B_SIDE_PLAYER]   = {ARRAY_COUNT(sHealthBar_Subsprites_Player), sHealthBar_Subsprites_Player},
     [B_SIDE_OPPONENT] = {ARRAY_COUNT(sHealthBar_Subsprites_Opponent), sHealthBar_Subsprites_Opponent}
 };
-
+/*                      v-- Origin
+[0     ][1     ][2     ][3     ]   128x8
+*/
 static const struct Subsprite sStatusSummaryBar_Subsprites_Enter[] =
 {
     {
-        .x = 32 * 5,
+        .x = 32 * -3,
         .y = 0,
         .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
@@ -390,7 +398,7 @@ static const struct Subsprite sStatusSummaryBar_Subsprites_Enter[] =
         .priority = 1
     },
     {
-        .x = 32 * 6,
+        .x = 32 * -2,
         .y = 0,
         .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
@@ -398,7 +406,7 @@ static const struct Subsprite sStatusSummaryBar_Subsprites_Enter[] =
         .priority = 1
     },
     {
-        .x = 32 * 7,
+        .x = 32 * -1,
         .y = 0,
         .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
@@ -415,10 +423,14 @@ static const struct Subsprite sStatusSummaryBar_Subsprites_Enter[] =
     }
 };
 
+/*                      v-- Origin
+[0     ][1     ][2     ][3     ][4     ][5     ]   192x8
+                 ^-- uses same tiles --^
+*/
 static const struct Subsprite sStatusSummaryBar_Subsprites_Exit[] =
 {
     {
-        .x = 32 * 5,
+        .x = 32 * -3,
         .y = 0,
         .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
@@ -426,7 +438,7 @@ static const struct Subsprite sStatusSummaryBar_Subsprites_Exit[] =
         .priority = 1
     },
     {
-        .x = 32 * 6,
+        .x = 32 * -2,
         .y = 0,
         .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
@@ -434,7 +446,7 @@ static const struct Subsprite sStatusSummaryBar_Subsprites_Exit[] =
         .priority = 1
     },
     {
-        .x = 32 * 7,
+        .x = 32 * -1,
         .y = 0,
         .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
@@ -2381,9 +2393,9 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
             species = GetMonData(mon, MON_DATA_SPECIES);
             level = GetMonData(mon, MON_DATA_LEVEL);
             exp = GetMonData(mon, MON_DATA_EXP);
-            currLevelExp = gExperienceTables[gBaseStats[species].growthRate][level];
+            currLevelExp = gExperienceTables[gSpeciesInfo[species].growthRate][level];
             currExpBarValue = exp - currLevelExp;
-            maxExpBarValue = gExperienceTables[gBaseStats[species].growthRate][level + 1] - currLevelExp;
+            maxExpBarValue = gExperienceTables[gSpeciesInfo[species].growthRate][level + 1] - currLevelExp;
             SetBattleBarStruct(battlerId, healthboxSpriteId, maxExpBarValue, currExpBarValue, isDoubles);
             MoveBattleBar(battlerId, healthboxSpriteId, EXP_BAR, 0);
         }

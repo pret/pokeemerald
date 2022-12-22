@@ -29,13 +29,11 @@
 #define ABILITYEFFECT_WEATHER_FORM               7
 #define ABILITYEFFECT_SYNCHRONIZE                8
 #define ABILITYEFFECT_ATK_SYNCHRONIZE            9
-#define ABILITYEFFECT_INTIMIDATE1                10
-#define ABILITYEFFECT_INTIMIDATE2                11
-#define ABILITYEFFECT_TRACE1                     12
-#define ABILITYEFFECT_TRACE2                     13
-#define ABILITYEFFECT_MOVE_END_OTHER             14
-#define ABILITYEFFECT_NEUTRALIZINGGAS            15
-#define ABILITYEFFECT_FIELD_SPORT                16 // Only used if B_SPORT_TURNS < GEN_6
+#define ABILITYEFFECT_TRACE1                     10
+#define ABILITYEFFECT_TRACE2                     11
+#define ABILITYEFFECT_MOVE_END_OTHER             12
+#define ABILITYEFFECT_NEUTRALIZINGGAS            13
+#define ABILITYEFFECT_FIELD_SPORT                14 // Only used if B_SPORT_TURNS < GEN_6
 // Special cases
 #define ABILITYEFFECT_MUD_SPORT                  252 // Only used if B_SPORT_TURNS < GEN_6
 #define ABILITYEFFECT_WATER_SPORT                253 // Only used if B_SPORT_TURNS < GEN_6
@@ -51,7 +49,7 @@
 #define ITEMEFFECT_TARGET                       5
 #define ITEMEFFECT_ORBS                         6
 #define ITEMEFFECT_LIFEORB_SHELLBELL            7
-#define ITEMEFFECT_BATTLER_MOVE_END             8 // move end effects for just the battler, not whole field
+#define ITEMEFFECT_USE_LAST_ITEM                8 // move end effects for just the battler, not whole field
 
 #define WEATHER_HAS_EFFECT ((!IsAbilityOnField(ABILITY_CLOUD_NINE) && !IsAbilityOnField(ABILITY_AIR_LOCK)))
 
@@ -186,6 +184,7 @@ void TryToRevertMimicry(void);
 void RestoreBattlerOriginalTypes(u8 battlerId);
 u32 GetBattlerMoveTargetType(u8 battlerId, u16 move);
 bool32 CanTargetBattler(u8 battlerAtk, u8 battlerDef, u16 move);
+bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId);
 // Ability checks
 bool32 IsRolePlayBannedAbilityAtk(u16 ability);
 bool32 IsRolePlayBannedAbility(u16 ability);
@@ -202,6 +201,6 @@ bool32 CanBeParalyzed(u8 battlerId);
 bool32 CanBeFrozen(u8 battlerId);
 bool32 CanBeConfused(u8 battlerId);
 bool32 IsBattlerTerrainAffected(u8 battlerId, u32 terrainFlag);
-u32 GetMonFriendshipScore(struct Pokemon *pokemon);
+u32 GetBattlerFriendshipScore(u8 battlerId);
 
 #endif // GUARD_BATTLE_UTIL_H

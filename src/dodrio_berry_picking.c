@@ -4675,7 +4675,7 @@ static void ShowNames(void)
                 ClearWindowTilemap(sGfx->windowIds[i]);
                 RemoveWindow(sGfx->windowIds[i]);
             }
-            FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 30, 20);
+            FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
             CopyBgTilemapBufferToVram(BG_INTERFACE);
             sGfx->finished = TRUE;
         }
@@ -4859,7 +4859,7 @@ static void ShowResults(void)
                 sGfx->state++;
             }
 
-            FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 5, 30, 15);
+            FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 5, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT - 5);
             RemoveWindow(sGfx->windowIds[1]);
             sGfx->windowIds[1] = AddWindow(&sWindowTemplate_Prize);
             ClearWindowTilemap(sGfx->windowIds[1]);
@@ -4917,7 +4917,7 @@ static void ShowResults(void)
         ClearWindowTilemap(sGfx->windowIds[1]);
         RemoveWindow(sGfx->windowIds[0]);
         RemoveWindow(sGfx->windowIds[1]);
-        FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 30, 20);
+        FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
         CopyBgTilemapBufferToVram(BG_INTERFACE);
         sGfx->finished = TRUE;
         break;
@@ -5012,7 +5012,7 @@ static void Msg_WantToPlayAgain(void)
         ClearWindowTilemap(sGfx->windowIds[WIN_YES_NO]);
         RemoveWindow(sGfx->windowIds[WIN_PLAY_AGAIN]);
         RemoveWindow(sGfx->windowIds[WIN_YES_NO]);
-        FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 30, 20);
+        FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
         CopyBgTilemapBufferToVram(BG_INTERFACE);
         sGfx->finished = TRUE;
         break;
@@ -5044,7 +5044,7 @@ static void Msg_SavingDontTurnOff(void)
             sGfx->state++;
         break;
     default:
-        FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 30, 20);
+        FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
         CopyBgTilemapBufferToVram(BG_INTERFACE);
         sGfx->finished = TRUE;
         break;
@@ -5083,7 +5083,7 @@ static void EraseMessage(void)
 {
     ClearWindowTilemap(sGfx->windowIds[0]);
     RemoveWindow(sGfx->windowIds[0]);
-    FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 30, 20);
+    FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
     CopyBgTilemapBufferToVram(BG_INTERFACE);
     sGfx->finished = TRUE;
 }
@@ -5121,7 +5121,7 @@ static void Msg_SomeoneDroppedOut(void)
         sGfx->playAgainState = PLAY_AGAIN_DROPPED;
         ClearWindowTilemap(sGfx->windowIds[0]);
         RemoveWindow(sGfx->windowIds[0]);
-        FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 30, 20);
+        FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
         CopyBgTilemapBufferToVram(BG_INTERFACE);
         sGfx->finished = TRUE;
         break;

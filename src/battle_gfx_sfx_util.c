@@ -23,7 +23,6 @@
 #include "palette.h"
 #include "contest.h"
 #include "constants/songs.h"
-#include "constants/battle_config.h"
 #include "constants/rgb.h"
 #include "constants/battle_palace.h"
 
@@ -78,11 +77,7 @@ static const struct CompressedSpriteSheet sSpriteSheets_HealthBar[MAX_BATTLERS_C
     {gBlankGfxCompressed, 0x0120, TAG_HEALTHBAR_OPPONENT2_TILE}
 };
 
-#if P_ENABLE_DEBUG == TRUE
 const struct SpritePalette sSpritePalettes_HealthBoxHealthBar[2] =
-#else
-static const struct SpritePalette sSpritePalettes_HealthBoxHealthBar[2] =
-#endif
 {
     {gBattleInterface_BallStatusBarPal, TAG_HEALTHBOX_PAL},
     {gBattleInterface_BallDisplayPal, TAG_HEALTHBAR_PAL}
@@ -164,6 +159,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     {
         gBattleStruct->palaceFlags &= 0xF;
         gBattleStruct->palaceFlags |= (selectedMoves << 4);
+        sBattler_AI = gActiveBattler;
         BattleAI_SetupAIData(selectedMoves);
         chosenMoveId = BattleAI_ChooseMoveOrAction();
     }
@@ -171,8 +167,9 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     // If no moves matched the selected group, pick a new move from groups the pokemon has
     // In this case the AI is not checked again, so the choice may be worse
     // If a move is chosen this way, there's a 50% chance that it will be unable to use it anyway
-    if (chosenMoveId == -1)
+    if (chosenMoveId == -1 || chosenMoveId >= MAX_MON_MOVES)
     {
+        chosenMoveId = -1;
         if (unusableMovesBits != 0xF)
         {
             validMoveFlags = 0, numValidMoveGroups = 0;

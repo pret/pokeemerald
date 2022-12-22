@@ -125,84 +125,84 @@
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_SS_TIDAL_CORRIDOR",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 5,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_SS_TIDAL_CORRIDOR",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 13,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_SS_TIDAL_CORRIDOR",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 14,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_SS_TIDAL_CORRIDOR",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 22,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_SS_TIDAL_CORRIDOR",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 23,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_SS_TIDAL_CORRIDOR",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 31,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_SS_TIDAL_CORRIDOR",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 32,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_SS_TIDAL_CORRIDOR",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 4,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SS_TIDAL_CORRIDOR",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 13,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SS_TIDAL_CORRIDOR",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 22,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SS_TIDAL_CORRIDOR",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 31,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SS_TIDAL_CORRIDOR",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     }
   ],
   "coord_events": [],

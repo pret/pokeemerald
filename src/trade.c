@@ -351,7 +351,7 @@ static void InitTradeMenu(void)
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
         }
 
-        FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 15);
+        FillBgTilemapBufferRect(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT, 15);
         LoadUserWindowBorderGfx_(0, 20, 0xC0);
         LoadUserWindowBorderGfx(2, 1, 0xE0);
         LoadMonIconPalettes();
@@ -1505,7 +1505,7 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 player
     }
 
     // Can't trade specific species
-    if (gBaseStats[partnerSpecies].flags & SPECIES_FLAG_CANNOT_BE_TRADED)
+    if (gSpeciesInfo[partnerSpecies].flags & SPECIES_FLAG_CANNOT_BE_TRADED)
         return PARTNER_MON_INVALID;
 
     // Partner cant trade Egg or non-Hoenn mon if player doesn't have National Dex
@@ -2064,13 +2064,13 @@ static void RedrawTradeMenuParty(u8 whichParty)
 
 static void Task_DrawSelectionSummary(u8 taskId)
 {
-    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
     CopyBgTilemapBufferToVram(0);
 }
 
 static void Task_DrawSelectionTrade(u8 taskId)
 {
-    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
     CopyBgTilemapBufferToVram(0);
 }
 
@@ -2365,7 +2365,7 @@ static u32 CanTradeSelectedMon(struct Pokemon *playerParty, int partyCount, int 
     }
 
     // Can't trade specific species
-    if (gBaseStats[species[monIdx]].flags & SPECIES_FLAG_CANNOT_BE_TRADED)
+    if (gSpeciesInfo[species[monIdx]].flags & SPECIES_FLAG_CANNOT_BE_TRADED)
         return CANT_TRADE_INVALID_MON;
 
     // Make Eggs not count for numMonsLeft
@@ -2461,7 +2461,7 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
         return UR_TRADE_MSG_MON_CANT_BE_TRADED;
 
     // Can't trade specific species
-    if (gBaseStats[playerSpecies].flags & SPECIES_FLAG_CANNOT_BE_TRADED)
+    if (gSpeciesInfo[playerSpecies].flags & SPECIES_FLAG_CANNOT_BE_TRADED)
         return UR_TRADE_MSG_MON_CANT_BE_TRADED;
 
     if (partnerSpecies == SPECIES_EGG)
@@ -2473,8 +2473,8 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
     else
     {
         // Player's Pokémon must be of the type the partner requested
-        if (gBaseStats[playerSpecies2].type1 != requestedType
-         && gBaseStats[playerSpecies2].type2 != requestedType)
+        if (gSpeciesInfo[playerSpecies2].type1 != requestedType
+         && gSpeciesInfo[playerSpecies2].type2 != requestedType)
             return UR_TRADE_MSG_NOT_MON_PARTNER_WANTS;
     }
 
@@ -2512,7 +2512,7 @@ int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 sp
         return CANT_REGISTER_MON_NOW;
 
     // Can't trade specific species
-    if (gBaseStats[species].flags & SPECIES_FLAG_CANNOT_BE_TRADED)
+    if (gSpeciesInfo[species].flags & SPECIES_FLAG_CANNOT_BE_TRADED)
         return CANT_REGISTER_MON;
 
     if (hasNationalDex)

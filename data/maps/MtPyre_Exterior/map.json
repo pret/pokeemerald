@@ -47,21 +47,21 @@
       "y": 42,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 19,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_SUMMIT",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 20,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_SUMMIT",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [
@@ -70,7 +70,7 @@
       "x": 24,
       "y": 21,
       "elevation": 3,
-      "var": "0",
+      "var": "TRIGGER_RUN_IMMEDIATELY",
       "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_FogTrigger"
     },
@@ -79,7 +79,7 @@
       "x": 25,
       "y": 21,
       "elevation": 3,
-      "var": "0",
+      "var": "TRIGGER_RUN_IMMEDIATELY",
       "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_FogTrigger"
     },
@@ -88,7 +88,7 @@
       "x": 22,
       "y": 27,
       "elevation": 3,
-      "var": "0",
+      "var": "TRIGGER_RUN_IMMEDIATELY",
       "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_SunTrigger"
     },
@@ -97,7 +97,7 @@
       "x": 23,
       "y": 28,
       "elevation": 3,
-      "var": "0",
+      "var": "TRIGGER_RUN_IMMEDIATELY",
       "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_SunTrigger"
     },
@@ -106,7 +106,7 @@
       "x": 26,
       "y": 21,
       "elevation": 3,
-      "var": "0",
+      "var": "TRIGGER_RUN_IMMEDIATELY",
       "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_FogTrigger"
     }

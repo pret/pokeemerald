@@ -93,7 +93,7 @@
 #define VARIOUS_IS_RUNNING_IMPOSSIBLE               2
 #define VARIOUS_GET_MOVE_TARGET                     3
 #define VARIOUS_GET_BATTLER_FAINTED                 4
-#define VARIOUS_RESET_INTIMIDATE_TRACE_BITS         5
+#define VARIOUS_RESET_SWITCH_IN_ABILITY_BITS        5
 #define VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP        6
 #define VARIOUS_RESET_PLAYER_FAINTED                7
 #define VARIOUS_PALACE_FLAVOR_TEXT                  8
@@ -245,6 +245,8 @@
 #define VARIOUS_TRY_SYMBIOSIS                       154
 #define VARIOUS_CAN_TELEPORT                        155
 #define VARIOUS_GET_BATTLER_SIDE                    156
+#define VARIOUS_CHECK_PARENTAL_BOND_COUNTER         157
+#define VARIOUS_SWAP_STATS                          158
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
@@ -284,40 +286,43 @@
 #define PARTY_SCREEN_OPTIONAL (1 << 7) // Flag for first argument to openpartyscreen
 
 // cases for Cmd_moveend
-#define MOVEEND_PROTECT_LIKE_EFFECT               0
-#define MOVEEND_RAGE                              1
-#define MOVEEND_DEFROST                           2
+#define MOVEEND_SUM_DAMAGE                        0
+#define MOVEEND_PROTECT_LIKE_EFFECT               1
+#define MOVEEND_RAGE                              2
 #define MOVEEND_SYNCHRONIZE_TARGET                3
 #define MOVEEND_ABILITIES                         4
 #define MOVEEND_ABILITIES_ATTACKER                5
 #define MOVEEND_STATUS_IMMUNITY_ABILITIES         6
 #define MOVEEND_SYNCHRONIZE_ATTACKER              7
 #define MOVEEND_CHOICE_MOVE                       8
-#define MOVEEND_CHANGED_ITEMS                     9
-#define MOVEEND_ATTACKER_INVISIBLE                10
-#define MOVEEND_ATTACKER_VISIBLE                  11
-#define MOVEEND_TARGET_VISIBLE                    12
-#define MOVEEND_ITEM_EFFECTS_TARGET               13
-#define MOVEEND_MOVE_EFFECTS2                     14
-#define MOVEEND_ITEM_EFFECTS_ALL                  15
-#define MOVEEND_KINGSROCK                         16    // These item effects will occur each strike of a multi-hit move
-#define MOVEEND_SUBSTITUTE                        17
-#define MOVEEND_SKY_DROP_CONFUSE                  18
-#define MOVEEND_UPDATE_LAST_MOVES                 19
-#define MOVEEND_MIRROR_MOVE                       20
-#define MOVEEND_NEXT_TARGET                       21    // Everything up until here is handled for each strike of a multi-hit move
-#define MOVEEND_MAGICIAN                          22    // Occurs after final multi-hit strike, and after other items/abilities would activate
-#define MOVEEND_EJECT_BUTTON                      23
-#define MOVEEND_RED_CARD                          24
-#define MOVEEND_EJECT_PACK                        25
-#define MOVEEND_LIFEORB_SHELLBELL                 26    // Includes shell bell, throat spray, etc
-#define MOVEEND_PICKPOCKET                        27
-#define MOVEEND_DANCER                            28
-#define MOVEEND_EMERGENCY_EXIT                    29
-#define MOVEEND_WEATHER_FORM                      30
-#define MOVEEND_SYMBIOSIS                         31
-#define MOVEEND_CLEAR_BITS                        32
-#define MOVEEND_COUNT                             33
+#define MOVEEND_ATTACKER_INVISIBLE                9
+#define MOVEEND_ATTACKER_VISIBLE                  10
+#define MOVEEND_TARGET_VISIBLE                    11
+#define MOVEEND_ITEM_EFFECTS_TARGET               12
+#define MOVEEND_ITEM_EFFECTS_ALL                  13
+#define MOVEEND_KINGSROCK                         14    // These item effects will occur each strike of a multi-hit move
+#define MOVEEND_SUBSTITUTE                        15
+#define MOVEEND_SKY_DROP_CONFUSE                  16
+#define MOVEEND_UPDATE_LAST_MOVES                 17
+#define MOVEEND_MIRROR_MOVE                       18
+#define MOVEEND_NEXT_TARGET                       19   // Everything up until here is handled for each strike of a multi-hit move
+#define MOVEEND_MULTIHIT_MOVE                     20
+#define MOVEEND_DEFROST                           21
+#define MOVEEND_MOVE_EFFECTS2                     22
+#define MOVEEND_RECOIL                            23
+#define MOVEEND_MAGICIAN                          24    // Occurs after final multi-hit strike, and after other items/abilities would activate
+#define MOVEEND_EJECT_BUTTON                      25
+#define MOVEEND_RED_CARD                          26
+#define MOVEEND_EJECT_PACK                        27
+#define MOVEEND_LIFEORB_SHELLBELL                 28    // Includes shell bell, throat spray, etc
+#define MOVEEND_CHANGED_ITEMS                     29
+#define MOVEEND_PICKPOCKET                        30
+#define MOVEEND_DANCER                            31
+#define MOVEEND_EMERGENCY_EXIT                    32
+#define MOVEEND_WEATHER_FORM                      33
+#define MOVEEND_SYMBIOSIS                         34
+#define MOVEEND_CLEAR_BITS                        35
+#define MOVEEND_COUNT                             36
 
 // switch cases
 #define B_SWITCH_NORMAL     0

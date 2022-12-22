@@ -1162,7 +1162,7 @@
 	.4byte \ptr
 	.endm
 
-	.macro trygetintimidatetarget ptr:req
+	.macro unused2 ptr:req
 	.byte 0xe1
 	.4byte \ptr
 	.endm
@@ -1290,7 +1290,7 @@
 	.4byte \ptr
 	.endm
 
-	.macro trygetbaddreamstarget ptr:req
+	.macro unused ptr:req
 	.byte 0xfd
 	.4byte \ptr
 	.endm
@@ -1299,9 +1299,15 @@
 	.byte 0xfe
 	.4byte \ptr
 	.endm
-
-	.macro metalburstdamagecalculator ptr:req
+	
+	.macro callnative func:req
 	.byte 0xff
+	.4byte \func
+	.endm
+
+@ callnative macros
+	.macro metalburstdamagecalculator ptr:req
+	callnative BS_CalcMetalBurstDmg
 	.4byte \ptr
 	.endm
 
@@ -1326,8 +1332,8 @@
 	various \battler, VARIOUS_GET_BATTLER_FAINTED
 	.endm
 
-	.macro resetintimidatetracebits battler:req
-	various \battler, VARIOUS_RESET_INTIMIDATE_TRACE_BITS
+	.macro resetswitchinabilitybits battler:req
+	various \battler, VARIOUS_RESET_SWITCH_IN_ABILITY_BITS
 	.endm
 
 	.macro updatechoicemoveonlvlup battler:req
@@ -1789,9 +1795,9 @@
 	various BS_ATTACKER, VARIOUS_SET_Z_EFFECT
 	.endm
 
-	.macro consumeberry battler:req, restoreItem=FALSE
+	.macro consumeberry battler:req, frombattler:req
 	various \battler, VARIOUS_CONSUME_BERRY
-	.byte \restoreItem
+	.byte \frombattler
 	.endm
 
 	.macro activateitemeffects battler:req
@@ -1986,6 +1992,17 @@
 
 	.macro getbattlerside battler:req
 	various \battler, VARIOUS_GET_BATTLER_SIDE
+	.endm
+
+	.macro checkparentalbondcounter counter:req, ptr:req
+	various BS_ATTACKER, VARIOUS_CHECK_PARENTAL_BOND_COUNTER
+	.byte \counter
+	.4byte \ptr
+	.endm
+
+	.macro swapstats stat:req
+	various BS_ATTACKER, VARIOUS_SWAP_STATS
+	.byte \stat
 	.endm
 
 @ helpful macros
