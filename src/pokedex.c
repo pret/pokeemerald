@@ -845,7 +845,11 @@ static const struct WindowTemplate sPokemonList_WindowTemplate[] =
     DUMMY_WIN_TEMPLATE
 };
 
+#if P_DEX_FOUR_DIGITS_AMOUNT == TRUE
+static const u8 sText_No000[] = _("{NO}0000");
+#else
 static const u8 sText_No000[] = _("{NO}000");
+#endif
 static const u8 sCaughtBall_Gfx[] = INCBIN_U8("graphics/pokedex/caught_ball.4bpp");
 static const u8 sText_TenDashes[] = _("----------");
 
@@ -2426,16 +2430,27 @@ static void CreateMonListEntry(u8 position, u16 b, u16 ignored)
 
 static void CreateMonDexNum(u16 entryNum, u8 left, u8 top, u16 unused)
 {
+#if P_DEX_FOUR_DIGITS_AMOUNT == TRUE
+    u8 text[7];
+#else
     u8 text[6];
+#endif
     u16 dexNum;
 
     memcpy(text, sText_No000, ARRAY_COUNT(text));
     dexNum = sPokedexView->pokedexList[entryNum].dexNum;
     if (sPokedexView->dexMode == DEX_MODE_HOENN)
         dexNum = NationalToHoennOrder(dexNum);
+#if P_DEX_FOUR_DIGITS_AMOUNT == TRUE
+    text[2] = CHAR_0 + dexNum / 1000;
+    text[3] = CHAR_0 + (dexNum % 1000) / 100;
+    text[4] = CHAR_0 + (dexNum % 100) / 10;
+    text[5] = CHAR_0 + (dexNum % 10);
+#else
     text[2] = CHAR_0 + dexNum / 100;
     text[3] = CHAR_0 + (dexNum % 100) / 10;
     text[4] = CHAR_0 + (dexNum % 100) % 10;
+#endif
     PrintMonDexNumAndName(0, FONT_NARROW, text, left, top);
 }
 
@@ -4119,7 +4134,11 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
         value = NationalToHoennOrder(num);
     else
         value = num;
+#if P_DEX_FOUR_DIGITS_AMOUNT == TRUE
+    ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), value, STR_CONV_MODE_LEADING_ZEROS, 4);
+#else
     ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), value, STR_CONV_MODE_LEADING_ZEROS, 3);
+#endif
     PrintInfoScreenText(str, 0x60, 0x19);
     natNum = NationalPokedexNumToSpecies(num);
     if (natNum)
