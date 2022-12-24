@@ -16,6 +16,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "test_runner.h"
 #include "constants/battle_anim.h"
 #include "constants/moves.h"
 
@@ -217,11 +218,26 @@ void DoMoveAnim(u16 move)
     LaunchBattleAnimation(ANIM_TYPE_MOVE, move);
 }
 
+static void Nop(void)
+{
+}
+
 void LaunchBattleAnimation(u32 animType, u32 animId)
 {
     s32 i;
     const u8 *const *animsTable;
     bool32 hideHpBoxes;
+
+    if (gTestRunnerEnabled)
+    {
+        TestRunner_Battle_RecordAnimation(animType, animId);
+        if (gTestRunnerHeadless)
+        {
+            gAnimScriptCallback = Nop;
+            gAnimScriptActive = FALSE;
+            return;
+        }
+    }
 
     switch (animType)
     {
@@ -239,7 +255,7 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
         break;
     }
 
-    hideHpBoxes =  !(animType == ANIM_TYPE_MOVE && animId == MOVE_TRANSFORM);
+    hideHpBoxes = !(animType == ANIM_TYPE_MOVE && animId == MOVE_TRANSFORM);
     if (animType != ANIM_TYPE_MOVE)
     {
         switch (animId)
