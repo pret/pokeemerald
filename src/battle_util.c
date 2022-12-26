@@ -9796,8 +9796,8 @@ bool32 TryBattleFormChange(u8 battlerId, u16 method)
     targetSpecies = GetBattleFormChangeTargetSpecies(battlerId, method);
     if (targetSpecies != SPECIES_NONE)
     {
-        // Saves the original species on the first form change.
-        if (gBattleStruct->changedSpecies[monId] == SPECIES_NONE)
+        // Saves the original species on the first form change for the player.
+        if (side == B_SIDE_PLAYER && gBattleStruct->changedSpecies[monId] == SPECIES_NONE)
             gBattleStruct->changedSpecies[monId] = gBattleMons[battlerId].species;
 
         TryToSetBattleFormChangeMoves(&party[monId], method);
@@ -9810,8 +9810,8 @@ bool32 TryBattleFormChange(u8 battlerId, u16 method)
     targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
     if (targetSpecies != SPECIES_NONE)
     {
-        // Saves the original species on the first form change.
-        if (gBattleStruct->changedSpecies[monId] == SPECIES_NONE)
+        // Saves the original species on the first form change for the player.
+        if (side == B_SIDE_PLAYER && gBattleStruct->changedSpecies[monId] == SPECIES_NONE)
             gBattleStruct->changedSpecies[monId] = targetSpecies;
 
         TryToSetBattleFormChangeMoves(&party[monId], method);
