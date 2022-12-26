@@ -8278,12 +8278,13 @@ BattleScript_IntimidateLoop:
 	jumpifability BS_TARGET, ABILITY_OBLIVIOUS, BattleScript_IntimidatePrevented
 .endif
 BattleScript_IntimidateEffect:
-	copybyte sBATTLER, gBattlerTarget
-	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
+	copybyte sBATTLER, gBattlerAttacker
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_IntimidateLoopIncrement
 	setgraphicalstatchangevalues
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	printstring STRINGID_PKMNCUTSATTACKWITH
 	waitmessage B_WAIT_TIME_LONG
+	copybyte sBATTLER, gBattlerTarget
 	call BattleScript_TryAdrenalineOrb
 BattleScript_IntimidateLoopIncrement:
 	addbyte gBattlerTarget, 1
