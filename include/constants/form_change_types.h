@@ -1,3 +1,5 @@
+#ifndef GUARD_CONSTANTS_FORM_CHANGE_TYPES_H
+#define GUARD_CONSTANTS_FORM_CHANGE_TYPES_H
 
 // FORM_CHANGE_BATTLE_HP_PERCENT param2 arguments
 #define HP_HIGHER_THAN      1
@@ -88,3 +90,5 @@
 // Form change that activates automatically when the turn ends.
 // param1: ability to check.
 #define FORM_CHANGE_BATTLE_TURN_END             14
+
+#endif // GUARD_CONSTANTS_FORM_CHANGE_TYPES_H
