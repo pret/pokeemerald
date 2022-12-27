@@ -12855,6 +12855,10 @@ static void Cmd_trysetfutureattack(void)
 
 static void Cmd_trydobeatup(void)
 {
+#if B_BEAT_UP >= GEN_5
+    gBattleStruct->beatUpSlot++;
+    gBattlescriptCurrInstr += 9;
+#else
     struct Pokemon *party;
 
     if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
@@ -12898,6 +12902,7 @@ static void Cmd_trydobeatup(void)
         else
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 5);
     }
+#endif
 }
 
 static void Cmd_setsemiinvulnerablebit(void)

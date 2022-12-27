@@ -1022,7 +1022,7 @@
 	.4byte \ptr
 	.endm
 
-	.macro trydobeatup endPtr:req, failPtr:req
+	.macro trydobeatup endPtr=NULL, failPtr=NULL
 	.byte 0xc4
 	.4byte \endPtr
 	.4byte \failPtr

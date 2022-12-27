@@ -230,8 +230,9 @@ static u8 CalcBeatUpPower(void)
         party = gPlayerParty;
     else
         party = gEnemyParty;
-    // Party slot is set in the battle script for Beat Up
-    species = GetMonData(&party[gBattleCommunication[0] - 1], MON_DATA_SPECIES);
+
+    // Party slot is incremented by the battle script for Beat Up after this damage calculation
+    species = GetMonData(&party[gBattleStruct->beatUpSlot], MON_DATA_SPECIES);
     basePower = (gSpeciesInfo[species].baseAttack / 10) + 5;
 
     return basePower;
@@ -3875,7 +3876,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                         gMultiHitCounter++;
                 }
 
-                gBattleCommunication[0] = 0; // For later
+                gBattleStruct->beatUpSlot = 0;
                 PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
             }
             #endif
