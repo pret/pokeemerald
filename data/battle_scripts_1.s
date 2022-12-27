@@ -5183,10 +5183,18 @@ BattleScript_EffectTeleportNew:
 BattleScript_EffectTeleportNewEnd:
 	goto BattleScript_MoveEnd
 
-.if B_BEAT_UP < GEN_5
 BattleScript_EffectBeatUp::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+.if B_BEAT_UP >= GEN_5
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	adjustdamage
+	trydobeatup
+	goto BattleScript_HitFromAtkAnimation
+.else
 	attackstring
 	pause B_WAIT_TIME_SHORT
 	ppreduce
@@ -5216,12 +5224,6 @@ BattleScript_BeatUpAttack::
 	goto BattleScript_BeatUpLoop
 BattleScript_BeatUpEnd::
 	end
-.else
-BattleScript_EffectBeatUp::
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	addbyte gBattleCommunication, 1
-	goto BattleScript_HitFromAtkString
 .endif
 
 BattleScript_EffectSemiInvulnerable::
