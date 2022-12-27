@@ -439,6 +439,7 @@ bool8 CopyablePlayerMovement_Jump(struct ObjectEvent *, struct Sprite *, u8, boo
 u8 MovementType_FollowPlayer_Shadow(struct ObjectEvent *, struct Sprite *);
 u8 MovementType_FollowPlayer_Active(struct ObjectEvent *, struct Sprite *);
 u8 MovementType_FollowPlayer_Moving(struct ObjectEvent *, struct Sprite *);
+void StartSpriteAnimInDirection(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 animNum);
 
 bool8 FollowablePlayerMovement_Idle(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
 bool8 FollowablePlayerMovement_FaceDirection(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));

@@ -1567,7 +1567,6 @@ static void HideFollowerForFieldEffect(void) {
     if (!followerObj || followerObj->invisible)
         return;
     ClearObjectEventMovement(followerObj, &gSprites[followerObj->spriteId]);
-    gSprites[followerObj->spriteId].animCmdIndex = 0; // Avoids a visual glitch with follower's animation frame
     ObjectEventSetHeldMovement(followerObj, MOVEMENT_ACTION_ENTER_POKEBALL);
 }
 

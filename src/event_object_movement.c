@@ -4981,7 +4981,6 @@ bool8 MovementType_FollowPlayer_Active(struct ObjectEvent *objectEvent, struct S
       ClearObjectEventMovement(objectEvent, sprite);
       ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_ENTER_POKEBALL);
       objectEvent->singleMovementActive = 1;
-      sprite->animCmdIndex = 0; // Needed for animCmdIndex weirdness
       sprite->sTypeFuncId = 2; // movement action sets state to 0
       return TRUE;
     }
@@ -5051,7 +5050,6 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
       MoveObjectEventToMapCoords(objectEvent, targetX, targetY);
       ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_EXIT_POKEBALL);
       objectEvent->singleMovementActive = 1;
-      sprite->animCmdIndex = 0; // Needed because of weird animCmdIndex stuff
       sprite->sTypeFuncId = 2;
       return TRUE;
     } else if (x == targetX && y == targetY) { // don't move if already in the player's last position
@@ -6654,11 +6652,13 @@ bool8 MovementAction_ExitPokeball_Step0(struct ObjectEvent *objectEvent, struct 
     u8 direction = gObjectEvents[gPlayerAvatar.objectEventId].facingDirection;
     objectEvent->invisible = FALSE;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)) { // If player is dashing, the pokemon must come out faster
-      InitMoveInPlace(objectEvent, sprite, direction, GetMoveDirectionFastestAnimNum(direction) + 4, 8);
-      sprite->data[6] = 0; // fast speed
+        StartSpriteAnimInDirection(objectEvent, sprite, direction, GetMoveDirectionFastestAnimNum(direction) + 4);
+        sprite->data[3] = 8; // duration
+        sprite->data[6] = 0; // fast speed
     } else {
-      InitMoveInPlace(objectEvent, sprite, direction, GetMoveDirectionFastestAnimNum(direction), 16);
-      sprite->data[6] = 1; // slow speed
+        StartSpriteAnimInDirection(objectEvent, sprite, direction, GetMoveDirectionFastestAnimNum(direction));
+        sprite->data[3] = 16; // duration
+        sprite->data[6] = 1; // slow speed
     }
     sprite->data[6] |= (direction == DIR_EAST ? 1 : 0) << 4;
     ObjectEventSetGraphicsId(objectEvent, OBJ_EVENT_GFX_ANIMATED_BALL);
@@ -6741,7 +6741,8 @@ bool8 MovementAction_ExitPokeball_Step1(struct ObjectEvent *objectEvent, struct 
 
 bool8 MovementAction_EnterPokeball_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
     u8 direction = objectEvent->facingDirection;
-    InitMoveInPlace(objectEvent, sprite, direction, GetMoveDirectionFasterAnimNum(direction), 16);
+    StartSpriteAnimInDirection(objectEvent, sprite, direction, GetMoveDirectionFasterAnimNum(direction));
+    sprite->data[3] = 16; // duration
     sprite->data[6] = direction == DIR_EAST ? 3 : 2; // affine animation number
     EndFollowerTransformEffect(objectEvent, sprite);
     return MovementAction_EnterPokeball_Step1(objectEvent, sprite);
