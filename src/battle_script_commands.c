@@ -3654,13 +3654,9 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 }
                 else
                 {
-                DIRE_CLAW_STATUS_PICK:
-                    gBattleScripting.moveEffect = Random() % 6;
-                    if (gBattleScripting.moveEffect == 0
-                     || gBattleScripting.moveEffect == MOVE_EFFECT_BURN
-                     || gBattleScripting.moveEffect == MOVE_EFFECT_FREEZE)
-                        goto DIRE_CLAW_STATUS_PICK;
-                    SetMoveEffect(FALSE, 0);
+                    static const u8 sDireClawEffects[] = { MOVE_EFFECT_POISON, MOVE_EFFECT_PARALYSIS, MOVE_EFFECT_SLEEP };
+                    gBattleScripting.moveEffect = sDireClawEffects[Random() % 3];
+                    SetMoveEffect(TRUE, 0);
                 }
                 break;
             }
@@ -11942,8 +11938,8 @@ static void Cmd_trysetencore(void)
     }
 
     if (gLastMoves[gBattlerTarget] == MOVE_STRUGGLE
-     || gLastMoves[gBattlerTarget] == MOVE_ENCORE
-     || gLastMoves[gBattlerTarget] == MOVE_MIRROR_MOVE)
+        || gLastMoves[gBattlerTarget] == MOVE_ENCORE
+        || gLastMoves[gBattlerTarget] == MOVE_MIRROR_MOVE)
     {
         i = MAX_MON_MOVES;
     }
