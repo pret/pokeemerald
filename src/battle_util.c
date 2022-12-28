@@ -5891,18 +5891,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_WIND_POWER:
-            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
-             && TARGET_TURN_DAMAGED
-             && gBattleMoves[gCurrentMove].flags & FLAG_WIND_MOVE
-             && IsBattlerAlive(gBattlerTarget))
-            {
-                gBattlerAttacker = gBattlerTarget;
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_WindPowerActivates;
-                effect++;
-            }
-            break;
+            if (!(gBattleMoves[gCurrentMove].flags & FLAG_WIND_MOVE))
+                break;
+            // fall through
         case ABILITY_ELECTROMORPHOSIS:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
@@ -8756,7 +8747,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
 
 // Supreme Overlord adds a damage boost for each fainted ally.
 // The first ally adds a x1.2 boost, and subsequent allies add an extra x0.1 boost each.
-static u16 ApplySupremeOverlordModifier(u8 battlerId)
+static u16 GetSupremeOverlordModifier(u8 battlerId)
 {
     u32 i;
     u8 side = GetBattlerSide(battlerId);
@@ -8925,7 +8916,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
            MulModifier(&modifier, UQ_4_12(1.5));
         break;
     case ABILITY_SUPREME_OVERLORD:
-        MulModifier(&modifier, ApplySupremeOverlordModifier(battlerAtk));
+        MulModifier(&modifier, GetSupremeOverlordModifier(battlerAtk));
         break;
     }
 
