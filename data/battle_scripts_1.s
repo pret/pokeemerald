@@ -417,7 +417,6 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSpecialAttackUpHit      @ EFFECT_SPECIAL_ATTACK_UP_HIT
 	.4byte BattleScript_EffectVictoryDance            @ EFFECT_VICTORY_DANCE
 	.4byte BattleScript_EffectCeaselessEdge           @ EFFECT_CEASELESS_EDGE
-	.4byte BattleScript_EffectShellTrap               @ EFFECT_SHELL_TRAP
 	.4byte BattleScript_EffectDireClaw                @ EFFECT_DIRE_CLAW
 	.4byte BattleScript_EffectStoneAxe                @ EFFECT_STONE_AXE
 	.4byte BattleScript_EffectBarbBarrage             @ EFFECT_BARB_BARRAGE
@@ -432,23 +431,6 @@ BattleScript_EffectStoneAxe::
 BattleScript_EffectDireClaw::
 	setmoveeffect MOVE_EFFECT_DIRE_CLAW
 	goto BattleScript_EffectHit
-
-BattleScript_EffectShellTrap:
-	jumpifnodamage BattleScript_EffectShellTrap_Failed
-	goto BattleScript_EffectHit
-
-BattleScript_EffectShellTrap_Failed:
-	printstring STRINGID_ATTACKERSHELLTRAPDIDNTWORK
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_MoveEnd
-
-BattleScript_ShellTrapSetUp::
-	printstring STRINGID_EMPTYSTRING3
-	waitmessage 1
-	playanimation BS_ATTACKER, B_ANIM_SHELL_TRAP_SETUP, NULL
-	printstring STRINGID_ATTACKERSETASHELLTRAP
-	waitmessage B_WAIT_TIME_LONG
-	end2
 
 BattleScript_EffectCeaselessEdge::
 	call BattleScript_EffectHit_Ret

@@ -632,10 +632,8 @@
 #define STRINGID_TARGETTOUGHEDITOUT                   630
 #define STRINGID_ATTACKERLOSTELECTRICTYPE             631
 #define STRINGID_ATTACKERSWITCHEDSTATWITHTARGET       632
-#define STRINGID_ATTACKERSETASHELLTRAP                633
-#define STRINGID_ATTACKERSHELLTRAPDIDNTWORK           634
 
-#define BATTLESTRINGS_COUNT                           635
+#define BATTLESTRINGS_COUNT                           633
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

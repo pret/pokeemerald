@@ -398,11 +398,10 @@
 #define EFFECT_SPECIAL_ATTACK_UP_HIT        392
 #define EFFECT_VICTORY_DANCE                393
 #define EFFECT_CEASELESS_EDGE               394
-#define EFFECT_SHELL_TRAP                   395
-#define EFFECT_DIRE_CLAW                    396
-#define EFFECT_STONE_AXE                    397
-#define EFFECT_BARB_BARRAGE                 398
+#define EFFECT_DIRE_CLAW                    395
+#define EFFECT_STONE_AXE                    396
+#define EFFECT_BARB_BARRAGE                 397
 
-#define NUM_BATTLE_MOVE_EFFECTS             399
+#define NUM_BATTLE_MOVE_EFFECTS             398
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H
