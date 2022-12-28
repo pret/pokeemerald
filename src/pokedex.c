@@ -4136,9 +4136,11 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
         value = num;
 #if P_DEX_FOUR_DIGITS_AMOUNT == TRUE
     ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), value, STR_CONV_MODE_LEADING_ZEROS, 4);
+    PrintInfoScreenText(str, 0x60, 0x19);
+    name = GetSpeciesName(num);
+    PrintInfoScreenText(name, 0x8A, 0x19);
 #else
     ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), value, STR_CONV_MODE_LEADING_ZEROS, 3);
-#endif
     PrintInfoScreenText(str, 0x60, 0x19);
     natNum = NationalPokedexNumToSpecies(num);
     if (natNum)
@@ -4146,6 +4148,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     else
         name = sText_TenDashes2;
     PrintInfoScreenText(name, 0x84, 0x19);
+#endif
     if (owned)
     {
         CopyMonCategoryText(num, str2);
