@@ -151,7 +151,13 @@ const u16 gBattleFrontierHeldItems[] =
 };
 
 #include "data/battle_frontier/battle_frontier_trainer_mons.h"
+#if ENGLISH
 #include "data/battle_frontier/battle_frontier_trainers.h"
+#elif FRENCH
+#include "data/battle_frontier/battle_frontier_trainers_fr.h"
+#elif ITALIAN
+#include "data/battle_frontier/battle_frontier_trainers_it.h"
+#endif
 #include "data/battle_frontier/battle_frontier_mons.h"
 
 const u8 gTowerMaleFacilityClasses[30] =
