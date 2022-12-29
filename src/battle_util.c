@@ -10109,18 +10109,12 @@ bool32 CanMegaEvolve(u8 battlerId)
 
         // Can Mega Evolve via Mega Stone.
         if (holdEffect == HOLD_EFFECT_MEGA_STONE)
-        {
-            gBattleStruct->mega.isWishMegaEvo = FALSE;
             return TRUE;
-        }
     }
 
     // Check if there is an entry in the evolution table for Wish Mega Evolution.
     if (GetWishMegaEvolutionSpecies(species, GetMonData(mon, MON_DATA_MOVE1), GetMonData(mon, MON_DATA_MOVE2), GetMonData(mon, MON_DATA_MOVE3), GetMonData(mon, MON_DATA_MOVE4)))
-    {
-        gBattleStruct->mega.isWishMegaEvo = TRUE;
         return TRUE;
-    }
 
     // No checks passed, the mon CAN'T mega evolve.
     return FALSE;
