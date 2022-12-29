@@ -2010,6 +2010,14 @@
 	.4byte \ptr
 	.endm
 
+	.macro activateweatherabilities battler:req
+	various \battler, VARIOUS_ACTIVATE_WEATHER_ABILITIES
+	.endm
+
+	.macro activateterrainabilities battler:req
+	various \battler, VARIOUS_ACTIVATE_TERRAIN_ABILITIES
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER, \stat | \stages << 3 | \down << 7

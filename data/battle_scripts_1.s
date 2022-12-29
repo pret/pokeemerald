@@ -410,7 +410,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCourtChange             @ EFFECT_COURT_CHANGE
 	.4byte BattleScript_EffectSteelBeam               @ EFFECT_STEEL_BEAM
 	.4byte BattleScript_EffectExtremeEvoboost         @ EFFECT_EXTREME_EVOBOOST
-	.4byte BattleScript_EffectTerrainHit              @ EFFECT_DAMAGE_SET_TERRAIN
+	.4byte BattleScript_EffectHitSetRemoveTerrain     @ EFFECT_HIT_SET_REMOVE_TERRAIN
 	.4byte BattleScript_EffectDarkVoid                @ EFFECT_DARK_VOID
 	.4byte BattleScript_EffectSleepHit                @ EFFECT_SLEEP_HIT
 	.4byte BattleScript_EffectDoubleShock             @ EFFECT_DOUBLE_SHOCK
@@ -2456,6 +2456,7 @@ BattleScript_EffectPsychicTerrain:
 	printfromtable gTerrainStringIds
 	waitmessage B_WAIT_TIME_LONG
 	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG
+	call BattleScript_ActivateTerrainAbilities
 	call BattleScript_TerrainSeedLoop
 	jumpifabilitypresent ABILITY_MIMICRY, BattleScript_ApplyMimicry
 	goto BattleScript_MoveEnd
@@ -4975,8 +4976,19 @@ BattleScript_MoveWeatherChange::
 	printfromtable gMoveWeatherChangeStringIds
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_WeatherFormChanges
-	call BattleScript_ActivateSwitchInAbilities
+	call BattleScript_ActivateWeatherAbilities
 	goto BattleScript_MoveEnd
+
+BattleScript_ActivateWeatherAbilities:
+	copybyte sBATTLER, gBattlerAttacker
+	setbyte gBattlerAttacker, 0
+BattleScript_ActivateWeatherAbilities_Loop:
+	activateweatherabilities BS_ATTACKER
+BattleScript_ActivateWeatherAbilities_Increment:
+	addbyte gBattlerAttacker, 1
+	jumpifbytenotequal gBattlerAttacker, gBattlersCount, BattleScript_ActivateWeatherAbilities_Loop
+	copybyte gBattlerAttacker, sBATTLER
+	return
 
 BattleScript_EffectSunnyDay::
 	attackcanceler
@@ -7150,6 +7162,7 @@ BattleScript_SeedSowerActivates::
 	printstring STRINGID_TERRAINBECOMESGRASSY
 	waitmessage B_WAIT_TIME_LONG
 	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG
+	call BattleScript_ActivateTerrainAbilities
 	call BattleScript_TerrainSeedLoop
 	return
 
@@ -8167,6 +8180,7 @@ BattleScript_DrizzleActivates::
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_RAIN_CONTINUES
 	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_AbilityRaisesDefenderStat::
@@ -8327,6 +8341,7 @@ BattleScript_SandstreamActivates::
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_SANDSTORM_CONTINUES
 	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_SandSpitActivates::
@@ -8336,6 +8351,7 @@ BattleScript_SandSpitActivates::
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_SANDSTORM_CONTINUES
 	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	return
 
 BattleScript_ShedSkinActivates::
@@ -8454,6 +8470,7 @@ BattleScript_DroughtActivates::
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_SUN_CONTINUES
 	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_DesolateLandActivates::
@@ -8463,6 +8480,7 @@ BattleScript_DesolateLandActivates::
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_SUN_CONTINUES
 	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_DesolateLandEvaporatesWaterTypeMoves::
@@ -8483,6 +8501,7 @@ BattleScript_PrimordialSeaActivates::
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_RAIN_CONTINUES
 	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_PrimordialSeaFizzlesOutFireTypeMoves::
@@ -8553,6 +8572,7 @@ BattleScript_SnowWarningActivates::
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_HAIL_CONTINUES
 	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_TerrainSeedLoop:
@@ -8566,7 +8586,6 @@ BattleScript_TerrainSeedLoop_NextBattler:
 	addbyte gBattlerTarget, 0x1
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_TerrainSeedLoopIter
 	restoretarget
-	call BattleScript_ActivateSwitchInAbilities
 	return
 
 BattleScript_ActivateSwitchInAbilities:
@@ -8580,12 +8599,24 @@ BattleScript_ActivateSwitchInAbilities_Increment:
 	copybyte gBattlerAttacker, sBATTLER
 	return
 
+BattleScript_ActivateTerrainAbilities:
+	copybyte sBATTLER, gBattlerAttacker
+	setbyte gBattlerAttacker, 0
+BattleScript_ActivateTerrainAbilities_Loop:
+	activateterrainabilities BS_ATTACKER
+BattleScript_ActivateTerrainAbilities_Increment:
+	addbyte gBattlerAttacker, 1
+	jumpifbytenotequal gBattlerAttacker, gBattlersCount, BattleScript_ActivateTerrainAbilities_Loop
+	copybyte gBattlerAttacker, sBATTLER
+	return
+
 BattleScript_ElectricSurgeActivates::
 	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_TERRAINBECOMESELECTRIC
 	waitmessage B_WAIT_TIME_LONG
 	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG
+	call BattleScript_ActivateTerrainAbilities
 	call BattleScript_TerrainSeedLoop
 	end3
 
@@ -8595,6 +8626,7 @@ BattleScript_MistySurgeActivates::
 	printstring STRINGID_TERRAINBECOMESMISTY
 	waitmessage B_WAIT_TIME_LONG
 	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG
+	call BattleScript_ActivateTerrainAbilities
 	call BattleScript_TerrainSeedLoop
 	end3
 
@@ -8604,6 +8636,7 @@ BattleScript_GrassySurgeActivates::
 	printstring STRINGID_TERRAINBECOMESGRASSY
 	waitmessage B_WAIT_TIME_LONG
 	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG
+	call BattleScript_ActivateTerrainAbilities
 	call BattleScript_TerrainSeedLoop
 	end3
 
@@ -8613,6 +8646,7 @@ BattleScript_PsychicSurgeActivates::
 	printstring STRINGID_TERRAINBECOMESPSYCHIC
 	waitmessage B_WAIT_TIME_LONG
 	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG
+	call BattleScript_ActivateTerrainAbilities
 	call BattleScript_TerrainSeedLoop
 	end3
 
@@ -9722,6 +9756,7 @@ BattleScript_AnnounceAirLockCloudNine::
 	printstring STRINGID_AIRLOCKACTIVATES
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_QuickClawActivation::
@@ -9881,7 +9916,7 @@ BattleScript_ExtremeEvoboostSpDef::
 BattleScript_ExtremeEvoboostEnd::
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectTerrainHit:
+BattleScript_EffectHitSetRemoveTerrain:
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
@@ -9903,6 +9938,7 @@ BattleScript_EffectTerrainHit:
 	setterrain BattleScript_TryFaint
 	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG
 	printfromtable gTerrainStringIds
+	call BattleScript_ActivateTerrainAbilities
 BattleScript_TryFaint:
 	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd

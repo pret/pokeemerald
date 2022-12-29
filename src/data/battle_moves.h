@@ -13872,7 +13872,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_ICE_SPINNER] =
     {
-        .effect = EFFECT_DAMAGE_SET_TERRAIN,
+        .effect = EFFECT_HIT_SET_REMOVE_TERRAIN,
         .power = 80,
         .type = TYPE_ICE,
         .accuracy = 100,
@@ -13884,7 +13884,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .split = SPLIT_PHYSICAL,
         .zMovePower = 160,
         .zMoveEffect = Z_EFFECT_NONE,
-        .argument = 1,  //remove terrain
+        .argument = 1, // Remove the active field terrain if there is one.
     },
 
     [MOVE_GLAIVE_RUSH] =
@@ -14839,7 +14839,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     },
     [MOVE_GENESIS_SUPERNOVA] =
     {
-        .effect = EFFECT_DAMAGE_SET_TERRAIN,
+        .effect = EFFECT_HIT_SET_REMOVE_TERRAIN,
         .power = 185,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,
@@ -14850,7 +14850,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .flags = 0,
         .zMovePower = 0,
         .split = SPLIT_SPECIAL,
-        .argument = 0,  //psychic terrain
+        .argument = 0, // Set Psychic Terrain. If there's a different field terrain active, overwrite it.
         .zMoveEffect = 0
     },
     [MOVE_SINISTER_ARROW_RAID] =
@@ -14900,7 +14900,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     },
     [MOVE_SPLINTERED_STORMSHARDS] =
     {
-        .effect = EFFECT_DAMAGE_SET_TERRAIN,
+        .effect = EFFECT_HIT_SET_REMOVE_TERRAIN,
         .power = 190,
         .type = TYPE_ROCK,
         .accuracy = 0,
@@ -14911,7 +14911,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .flags = 0,
         .zMovePower = 0,
         .split = SPLIT_PHYSICAL,
-        .argument = 1,  //remove terrain
+        .argument = 1,  // Remove the active field terrain if there is one.
         .zMoveEffect = 0
     },
     [MOVE_LETS_SNUGGLE_FOREVER] =

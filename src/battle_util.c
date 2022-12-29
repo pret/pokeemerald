@@ -6251,6 +6251,34 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             break;
         }
         break;
+    case ABILITYEFFECT_ON_WEATHER: // For ability effects that activate when the battle weather changes.
+        gBattleScripting.battler = gBattlerAbility = battler;
+        switch (GetBattlerAbility(battler))
+        {
+        case ABILITY_PROTOSYNTHESIS:
+            if (IsBattlerWeatherAffected(battler, B_WEATHER_SUN))
+            {
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, GetHighestStatId(battler));
+                BattleScriptPushCursorAndCallback(BattleScript_ProtosynthesisActivates);
+                effect++;
+            }
+            break;
+        }
+        break;
+    case ABILITYEFFECT_ON_TERRAIN:  // For ability effects that activate when the field terrain changes.
+        gBattleScripting.battler = gBattlerAbility = battler;
+        switch (GetBattlerAbility(battler))
+        {
+        case ABILITY_QUARK_DRIVE:
+            if (IsBattlerTerrainAffected(battler, STATUS_FIELD_ELECTRIC_TERRAIN))
+            {
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, GetHighestStatId(battler));
+                BattleScriptPushCursorAndCallback(BattleScript_QuarkDriveActivates);
+                effect++;
+            }
+            break;
+        }
+        break;
     }
 
     if (effect && gLastUsedAbility != 0xFF)

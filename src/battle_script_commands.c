@@ -7941,7 +7941,7 @@ static void HandleTerrainMove(u16 move)
         statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN, timer = &gFieldTimers.terrainTimer;
         gBattleCommunication[MULTISTRING_CHOOSER] = 3;
         break;
-    case EFFECT_DAMAGE_SET_TERRAIN:
+    case EFFECT_HIT_SET_REMOVE_TERRAIN:
         switch (gBattleMoves[move].argument)
         {
         case 0: //genesis supernova
@@ -10115,6 +10115,14 @@ static void Cmd_various(void)
                 gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
             }
         }
+        return;
+    case VARIOUS_ACTIVATE_WEATHER_ABILITIES:
+        gBattlescriptCurrInstr += 3;
+        AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, gActiveBattler, 0, 0, 0);
+        return;
+    case VARIOUS_ACTIVATE_TERRAIN_ABILITIES:
+        gBattlescriptCurrInstr += 3;
+        AbilityBattleEffects(ABILITYEFFECT_ON_TERRAIN, gActiveBattler, 0, 0, 0);
         return;
     } // End of switch (gBattlescriptCurrInstr[2])
 
