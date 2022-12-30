@@ -497,7 +497,13 @@ const u32 gJPContestVoltageGfx[] = INCBIN_U32("graphics/contest/japanese/voltage
 const u32 gJPContestVoltagePal[] = INCBIN_U32("graphics/contest/japanese/voltage.gbapal.lz");
 
 // Contest results
+#if ENGLISH
 const u32 gContestResults_Gfx[]                  = INCBIN_U32("graphics/contest/results_screen/tiles.4bpp.lz");
+#elif FRENCH
+const u32 gContestResults_Gfx[]                  = INCBIN_U32("graphics/contest/french/results_screen/tiles.4bpp.lz");
+#elif ITALIAN
+const u32 gContestResults_Gfx[]                  = INCBIN_U32("graphics/contest/italian/results_screen/tiles.4bpp.lz");
+#endif
 const u32 gContestResults_WinnerBanner_Tilemap[] = INCBIN_U32("graphics/contest/results_screen/winner_banner.bin.lz");
 const u32 gContestResults_Interface_Tilemap[]    = INCBIN_U32("graphics/contest/results_screen/interface.bin.lz");
 const u32 gContestResults_Bg_Tilemap[]           = INCBIN_U32("graphics/contest/results_screen/bg.bin.lz");
@@ -1051,7 +1057,13 @@ const u32 gBattleAnimBgTilemap_Ice[] = INCBIN_U32("graphics/battle_anims/backgro
 const u32 gBattleAnimSpriteGfx_IcicleSpear[] = INCBIN_U32("graphics/battle_anims/sprites/icicle_spear.4bpp.lz");
 const u32 gBattleAnimSpritePal_IcicleSpear[] = INCBIN_U32("graphics/battle_anims/sprites/icicle_spear.gbapal.lz");
 
+#if ENGLISH
 const u32 gContestNextTurnGfx[] = INCBIN_U32("graphics/contest/nextturn.4bpp.lz");
+#elif FRENCH
+const u32 gContestNextTurnGfx[] = INCBIN_U32("graphics/contest/french/nextturn.4bpp.lz");
+#elif ITALIAN
+const u32 gContestNextTurnGfx[] = INCBIN_U32("graphics/contest/italian/nextturn.4bpp.lz");
+#endif
 const u8 gContestNextTurnNumbersGfx[] = INCBIN_U8("graphics/contest/nextturn_numbers.4bpp");
 const u8 gContestNextTurnRandomGfx[] = INCBIN_U8("graphics/contest/nextturn_random.4bpp");
 
@@ -1061,7 +1073,13 @@ const u32 gBattleAnimSpritePal_GlowyGreenOrb[] = INCBIN_U32("graphics/battle_ani
 const u32 gBattleAnimSpritePal_SleepPowder[] = INCBIN_U32("graphics/battle_anims/sprites/sleep_powder.gbapal.lz");
 const u32 gBattleAnimSpritePal_StunSpore[] = INCBIN_U32("graphics/battle_anims/sprites/stun_spore.gbapal.lz");
 
+#if ENGLISH
 const u32 gContestApplauseGfx[] = INCBIN_U32("graphics/contest/applause.4bpp.lz");
+#elif FRENCH
+const u32 gContestApplauseGfx[] = INCBIN_U32("graphics/contest/french/applause.4bpp.lz");
+#elif ITALIAN
+const u32 gContestApplauseGfx[] = INCBIN_U32("graphics/contest/italian/applause.4bpp.lz");
+#endif
 const u8 gContestApplauseMeterGfx[] = INCBIN_U8("graphics/contest/applause_meter.4bpp");
 
 const u16 gContestPal[] = INCBIN_U16("graphics/contest/nextturn.gbapal");
@@ -1350,14 +1368,7 @@ const u8 gMenuInfoElements_Gfx[] = INCBIN_U8("graphics/interface/menu_info.4bpp"
 
 #if ENGLISH
 const u8 gBagMenuHMIcon_Gfx[] = INCBIN_U8("graphics/bag/hm.4bpp");
-#elif FRENCH
-const u8 gBagMenuHMIcon_Gfx[] = INCBIN_U8("graphics/bag/fr/hm.4bpp");
-#elif ITALIAN
-const u8 gBagMenuHMIcon_Gfx[] = INCBIN_U8("graphics/bag/it/hm.4bpp");
-#endif
-
 // contest results screen
-
 const u16 gContestResultsTitle_Normal_Tilemap[] = INCBIN_U16("graphics/contest/results_screen/title_normal.bin");
 const u16 gContestResultsTitle_Super_Tilemap[]  = INCBIN_U16("graphics/contest/results_screen/title_super.bin");
 const u16 gContestResultsTitle_Hyper_Tilemap[]  = INCBIN_U16("graphics/contest/results_screen/title_hyper.bin");
@@ -1369,6 +1380,35 @@ const u16 gContestResultsTitle_Cute_Tilemap[]   = INCBIN_U16("graphics/contest/r
 const u16 gContestResultsTitle_Smart_Tilemap[]  = INCBIN_U16("graphics/contest/results_screen/title_smart.bin");
 const u16 gContestResultsTitle_Tough_Tilemap[]  = INCBIN_U16("graphics/contest/results_screen/title_tough.bin");
 const u16 gContestResultsTitle_Tilemap[]        = INCBIN_U16("graphics/contest/results_screen/title.bin");
+#elif FRENCH
+const u8 gBagMenuHMIcon_Gfx[] = INCBIN_U8("graphics/bag/fr/hm.4bpp");
+// contest results screen
+const u16 gContestResultsTitle_Normal_Tilemap[] = INCBIN_U16("graphics/contest/french/results_screen/title_normal.bin");
+const u16 gContestResultsTitle_Super_Tilemap[]  = INCBIN_U16("graphics/contest/french/results_screen/title_super.bin");
+const u16 gContestResultsTitle_Hyper_Tilemap[]  = INCBIN_U16("graphics/contest/french/results_screen/title_hyper.bin");
+const u16 gContestResultsTitle_Master_Tilemap[] = INCBIN_U16("graphics/contest/french/results_screen/title_master.bin");
+const u16 gContestResultsTitle_Link_Tilemap[]   = INCBIN_U16("graphics/contest/french/results_screen/title_link.bin");
+const u16 gContestResultsTitle_Cool_Tilemap[]   = INCBIN_U16("graphics/contest/french/results_screen/title_cool.bin");
+const u16 gContestResultsTitle_Beauty_Tilemap[] = INCBIN_U16("graphics/contest/french/results_screen/title_beauty.bin");
+const u16 gContestResultsTitle_Cute_Tilemap[]   = INCBIN_U16("graphics/contest/french/results_screen/title_cute.bin");
+const u16 gContestResultsTitle_Smart_Tilemap[]  = INCBIN_U16("graphics/contest/french/results_screen/title_smart.bin");
+const u16 gContestResultsTitle_Tough_Tilemap[]  = INCBIN_U16("graphics/contest/french/results_screen/title_tough.bin");
+const u16 gContestResultsTitle_Tilemap[]        = INCBIN_U16("graphics/contest/french/results_screen/title.bin");
+#elif ITALIAN
+const u8 gBagMenuHMIcon_Gfx[] = INCBIN_U8("graphics/bag/it/hm.4bpp");
+// contest results screen
+const u16 gContestResultsTitle_Normal_Tilemap[] = INCBIN_U16("graphics/contest/italian/results_screen/title_normal.bin");
+const u16 gContestResultsTitle_Super_Tilemap[]  = INCBIN_U16("graphics/contest/italian/results_screen/title_super.bin");
+const u16 gContestResultsTitle_Hyper_Tilemap[]  = INCBIN_U16("graphics/contest/italian/results_screen/title_hyper.bin");
+const u16 gContestResultsTitle_Master_Tilemap[] = INCBIN_U16("graphics/contest/italian/results_screen/title_master.bin");
+const u16 gContestResultsTitle_Link_Tilemap[]   = INCBIN_U16("graphics/contest/italian/results_screen/title_link.bin");
+const u16 gContestResultsTitle_Cool_Tilemap[]   = INCBIN_U16("graphics/contest/italian/results_screen/title_cool.bin");
+const u16 gContestResultsTitle_Beauty_Tilemap[] = INCBIN_U16("graphics/contest/italian/results_screen/title_beauty.bin");
+const u16 gContestResultsTitle_Cute_Tilemap[]   = INCBIN_U16("graphics/contest/italian/results_screen/title_cute.bin");
+const u16 gContestResultsTitle_Smart_Tilemap[]  = INCBIN_U16("graphics/contest/results_screen/title_smart.bin");
+const u16 gContestResultsTitle_Tough_Tilemap[]  = INCBIN_U16("graphics/contest/italian/results_screen/title_tough.bin");
+const u16 gContestResultsTitle_Tilemap[]        = INCBIN_U16("graphics/contest/italian/results_screen/title.bin");
+#endif
 
 // pokenav
 
