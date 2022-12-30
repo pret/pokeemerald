@@ -86,13 +86,14 @@ Route112_CableCarStation_Movement_ExitCableCar:
 	delay_16
 	step_end
 
-Route112_CableCarStation_Text_CableCarReadyGetOn:
-	.string "The CABLE CAR is ready to go up.\n"
-	.string "Would you like to be on it?$"
-
-Route112_CableCarStation_Text_StepThisWay:
-	.string "Please step this way.$"
-
-Route112_CableCarStation_Text_RideAnotherTime:
-	.string "Please ride with us another time.$"
-
+.ifdef ENGLISH
+	.include "data/maps/Route112_CableCarStation/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/Route112_CableCarStation/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/Route112_CableCarStation/text_it.inc"
+.endif
+.endif
+.endif
