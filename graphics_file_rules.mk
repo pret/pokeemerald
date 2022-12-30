@@ -693,6 +693,43 @@ $(BATTRANSGFXDIR)/frontier_logo_center.4bpp: %.4bpp: %.png
 
 ### Pokenav ###
 
+## English options ##
+$(PKNAVOPTIONSGFXDIR)/options.4bpp: $(PKNAVOPTIONSGFXDIR)/hoenn_map.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/condition.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/match_call.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/ribbons.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/switch_off.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/party.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/search.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cool.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/beauty.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cute.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/smart.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/tough.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cancel.4bpp
+	@cat $^ >$@
+
+### French options ###
+PKNAVOPTIONSGFXDIR := graphics/pokenav/options/french
+
+$(PKNAVOPTIONSGFXDIR)/options.4bpp: $(PKNAVOPTIONSGFXDIR)/hoenn_map.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/condition.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/match_call.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/ribbons.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/switch_off.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/party.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/search.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cool.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/beauty.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cute.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/smart.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/tough.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cancel.4bpp
+	@cat $^ >$@
+
+### Italian options ###
+PKNAVOPTIONSGFXDIR := graphics/pokenav/options/italian
+
 $(PKNAVOPTIONSGFXDIR)/options.4bpp: $(PKNAVOPTIONSGFXDIR)/hoenn_map.4bpp \
                                     $(PKNAVOPTIONSGFXDIR)/condition.4bpp \
                                     $(PKNAVOPTIONSGFXDIR)/match_call.4bpp \
