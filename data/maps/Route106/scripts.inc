@@ -41,8 +41,14 @@ Route106_EventScript_Ned::
 	msgbox Route106_Text_NedPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route106_Text_TrainerTips:
-	.string "TRAINER TIPS\p"
-	.string "Advice on catching POKéMON with a ROD:\n"
-	.string "Press the A Button if you get a bite.$"
-
+.ifdef ENGLISH
+	.include "data/maps/Route106/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/Route106/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/Route106/text_it.inc"
+.endif
+.endif
+.endif
