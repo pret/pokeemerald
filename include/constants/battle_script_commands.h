@@ -247,6 +247,11 @@
 #define VARIOUS_GET_BATTLER_SIDE                    156
 #define VARIOUS_CHECK_PARENTAL_BOND_COUNTER         157
 #define VARIOUS_SWAP_STATS                          158
+#define VARIOUS_JUMP_IF_ROD                         159
+#define VARIOUS_JUMP_IF_ABSORB                      160
+#define VARIOUS_JUMP_IF_MOTOR                       161
+#define VARIOUS_TEATIME_INVUL                       162
+#define VARIOUS_TEATIME_TARGETS                     163
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

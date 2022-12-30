@@ -420,7 +420,7 @@ void HandleAction_UseMove(void)
             battlerAbility = GetBattlerAbility(gActiveBattler);
 
             RecordAbilityBattle(gActiveBattler, gBattleMons[gActiveBattler].ability);
-            if (battlerAbility == ABILITY_LIGHTNING_ROD)
+            if (battlerAbility == ABILITY_LIGHTNING_ROD && gCurrentMove != MOVE_TEATIME)
                 gSpecialStatuses[gActiveBattler].lightningRodRedirected = TRUE;
             else if (battlerAbility == ABILITY_STORM_DRAIN)
                 gSpecialStatuses[gActiveBattler].stormDrainRedirected = TRUE;
@@ -7980,6 +7980,11 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
         if (gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_CRAFTY_SHIELD)
             return TRUE;
         else if (gProtectStructs[battlerId].protected)
+            return FALSE;
+    }
+    
+        if (move == MOVE_TEATIME)
+    {
             return FALSE;
     }
 
