@@ -10092,7 +10092,7 @@ static void Cmd_various(void)
         gBattleMons[gActiveBattler].item = gLastUsedItem;
         break;
     case VARIOUS_SET_BEAK_BLAST:
-        gProtectStructs[gBattlerAttacker].beakBlastCharge = TRUE;
+        gProtectStructs[gActiveBattler].beakBlastCharge = TRUE;
         break;
     case VARIOUS_SWAP_SIDE_STATUSES:
         CourtChangeSwapSideStatuses();
@@ -12026,8 +12026,9 @@ static void Cmd_trysetencore(void)
     }
 
     if (gLastMoves[gBattlerTarget] == MOVE_STRUGGLE
-        || gLastMoves[gBattlerTarget] == MOVE_ENCORE
-        || gLastMoves[gBattlerTarget] == MOVE_MIRROR_MOVE)
+     || gLastMoves[gBattlerTarget] == MOVE_ENCORE
+     || gLastMoves[gBattlerTarget] == MOVE_MIRROR_MOVE
+     || gLastMoves[gBattlerTarget] == MOVE_SHELL_TRAP)
     {
         i = MAX_MON_MOVES;
     }
