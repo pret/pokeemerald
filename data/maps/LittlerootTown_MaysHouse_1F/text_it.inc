@@ -1,0 +1,87 @@
+
+RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
+	.string "Oh, ciao. Come stai?\p"
+	.string "… … … … … … … … …\n"
+	.string "… … … … … … … … …\p"
+	.string "Devi essere {PLAYER}{KUN}! Noi siamo i tuoi\n"
+	.string "nuovi vicini. Piacere di conoscerti!\p"
+	.string "Devi avere grossomodo la stessa\n"
+	.string "età di {STR_VAR_1}.\p"
+	.string "Il tuo arrivo ha reso {STR_VAR_1}\n"
+	.string "tanto felice.\p"
+	.string "Credo che sia di sopra.$"
+
+RivalsHouse_1F_Text_LikeChildLikeFather:
+	.string "Buon sangue non mente.\p"
+	.string "Mio marito adora i POKéMON tanto\n"
+	.string "quanto il nostro tesoro.\p"
+	.string "Se non è al LABORATORIO, di sicuro starà\n"
+	.string "armeggiando in qualche area erbosa.$"
+
+RivalsHouse_1F_Text_TooBusyToNoticeVisit:
+	.string "{RIVAL}!\p"
+	.string "Sono sicura che il nostro tesoro\n"
+	.string "è troppo impegnato con i POKéMON\l"
+	.string "per notare la tua presenza,\l"
+	.string "{PLAYER}{KUN}.$"
+
+RivalsHouse_1F_Text_WentOutToRoute103:
+	.string "Oh, poco fa ho visto {RIVAL} partire\n"
+	.string "alla volta del PERCORSO 103.\p"
+	.string "Proprio come suo padre, anche {RIVAL}\n"
+	.string "è sempre in movimento!$"
+
+RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:
+	.string "Dev’essere bellissimo mettersi\n"
+	.string "in viaggio coi POKéMON.\p"
+	.string "Ma dovresti tornare a casa ogni tanto\n"
+	.string "per dire a tua madre che stai bene.\p"
+	.string "Magari non lo dice, ma sono sicura\n"
+	.string "che si preoccupa per te, {PLAYER}{KUN}.$"
+
+RivalsHouse_1F_Text_MayWhoAreYou:
+	.string "Eh?\n"
+	.string "E tu?… Chi sei?\p"
+	.string "… … … … … … … …\n"
+	.string "… … … … … … … …\p"
+	.string "Oh, sei {PLAYER}{KUN}.\n"
+	.string "Ah già, hai traslocato oggi!\p"
+	.string "Mhmm… mi chiamo VERA.\n"
+	.string "Piacere di conoscerti!\p"
+	.string "Io… sogno di diventare amica\n"
+	.string "dei POKéMON di tutto il mondo.\p"
+	.string "Ho… ho sentito parlare di te,\n"
+	.string "{PLAYER}{KUN}, da mio padre, il PROF. BIRCH.\p"
+	.string "Speravo che fossi simpatico,\n"
+	.string "{PLAYER}{KUN}, per diventare amici.\p"
+	.string "Beh, non si può mai dire.\n"
+	.string "Ti ho appena conosciuto, {PLAYER}{KUN}.\p"
+	.string "Eheheh…\p"
+	.string "Oh, no! Sono in ritardo!\p"
+	.string "Devo andare ad aiutare papà\n"
+	.string "con dei POKéMON selvatici!\p"
+	.string "Ciao, {PLAYER}{KUN}, ci vediamo dopo!$"
+
+RivalsHouse_1F_Text_BrendanWhoAreYou:
+	.string "Ehi!\n"
+	.string "Tu…\p"
+	.string "Chi sei?\p"
+	.string "Oh, sei {PLAYER}, vero? Hai appena\n"
+	.string "traslocato qui a fianco, vero?\p"
+	.string "Allora sei tu la ragazzina?!\p"
+	.string "Papà, il PROF. BIRCH, mi aveva detto che\n"
+	.string "veniva ad abitare un CAPOPALESTRA\l"
+	.string "con sua moglie e la figlia.\p"
+	.string "Io mi chiamo BRENDON.\n"
+	.string "Benvenuta, vicina!\p"
+	.string "Eh? Ehi, {PLAYER}, non hai neanche\n"
+	.string "un POKéMON!\p"
+	.string "Vuoi che te ne catturi uno io?\p"
+	.string "Oh, che testa! Sono in ritardo…\p"
+	.string "Devo andare ad aiutare papà\n"
+	.string "con dei POKéMON selvatici!\p"
+	.string "Ciao, ci vediamo presto, ok?$"
+
+RivalsHouse_1F_Text_DoYouHavePokemon:
+	.string "Ciao!\p"
+	.string "Hai già dei POKéMON tutti tuoi?$"

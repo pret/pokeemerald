@@ -1473,9 +1473,16 @@ const u16 gEasyChatRectangleCursor_Pal[] = INCBIN_U16("graphics/easy_chat/rectan
 const u32 gEasyChatRectangleCursor_Gfx[] = INCBIN_U32("graphics/easy_chat/rectangle_cursor.4bpp.lz");
 
 const u16 gEasyChatButtonWindow_Pal[] = INCBIN_U16("graphics/easy_chat/button_window.gbapal");
+#if ENGLISH
 const u32 gEasyChatButtonWindow_Gfx[] = INCBIN_U32("graphics/easy_chat/button_window.4bpp.lz");
-
 const u32 gEasyChatMode_Gfx[] = INCBIN_U32("graphics/easy_chat/mode.4bpp.lz");
+#elif FRENCH
+const u32 gEasyChatButtonWindow_Gfx[] = INCBIN_U32("graphics/easy_chat/button_window_fr.4bpp.lz");
+const u32 gEasyChatMode_Gfx[] = INCBIN_U32("graphics/easy_chat/mode_it.4bpp.lz");
+#elif ITALIAN
+const u32 gEasyChatButtonWindow_Gfx[] = INCBIN_U32("graphics/easy_chat/button_window_it.4bpp.lz");
+const u32 gEasyChatMode_Gfx[] = INCBIN_U32("graphics/easy_chat/mode_it.4bpp.lz");
+#endif
 const u16 gEasyChatMode_Pal[] = INCBIN_U16("graphics/easy_chat/mode.gbapal");
 
 const u32 gEasyChatWindow_Gfx[] = INCBIN_U32("graphics/easy_chat/window.4bpp.lz"); // uses mode pal
@@ -1733,13 +1740,16 @@ const u32 gBerryCrush_TextWindows_Tilemap[] = INCBIN_U32("graphics/berry_crush/t
 #if FRENCH
 const u32 gCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/fr/the_end_copyright.4bpp.lz");
 const u32 gCreditsCopyrightEnd_Tilemap[] = INCBIN_U32("graphics/credits/fr/the_end_copyright.bin.lz");
+
+const u16 g321Start_Pal[] = INCBIN_U16("graphics/link/321start.gbapal");
+const u32 g321Start_Gfx[] = INCBIN_U32("graphics/link/321start_fr.4bpp.lz");
 #elif ITALIAN
 const u32 gCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/it/the_end_copyright.4bpp.lz");
 const u32 gCreditsCopyrightEnd_Tilemap[] = INCBIN_U32("graphics/credits/it/the_end_copyright.bin.lz");
-#endif
 
 const u16 g321Start_Pal[] = INCBIN_U16("graphics/link/321start.gbapal");
-const u32 g321Start_Gfx[] = INCBIN_U32("graphics/link/321start.4bpp.lz");
+const u32 g321Start_Gfx[] = INCBIN_U32("graphics/link/321start_it.4bpp.lz");
+#endif
 
 // poke jump
 const u16 gPokeJumpBonuses_Pal[] = INCBIN_U16("graphics/pokemon_jump/bonuses.gbapal");
