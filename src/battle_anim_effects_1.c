@@ -2447,6 +2447,39 @@ const struct SpriteTemplate gFollowMeFingerSpriteTemplate =
     .callback = AnimFollowMeFinger,
 };
 
+const union AffineAnimCmd gTeaAffineAnimCmds1[] =
+{
+        AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
+        AFFINEANIMCMD_FRAME(0x1E, 0x1E, 0, 8),
+        AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gTeaAffineAnimCmds2[] =
+{
+        AFFINEANIMCMD_FRAME(0x0, 0x0, -3, 11),
+        AFFINEANIMCMD_FRAME(0x0, 0x0, 3, 11),
+        AFFINEANIMCMD_LOOP(2),
+        AFFINEANIMCMD_FRAME(0xFFE2, 0xFFE2, 0, 8),
+        AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gTeaAffineAnimTable[] =
+{
+        gTeaAffineAnimCmds1,
+        gTeaAffineAnimCmds2,
+};
+
+const struct SpriteTemplate gTeapotSpriteTemplate =
+{
+        .tileTag = ANIM_TAG_TEAPOT,
+        .paletteTag = ANIM_TAG_TEAPOT,
+        .oam = &gOamData_AffineDouble_ObjNormal_64x64,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gTeaAffineAnimTable,
+        .callback = AnimMetronomeFinger,
+};
+
 const union AnimCmd gTauntFingerAnimCmds1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -5667,11 +5700,11 @@ static void AnimTipMon_Step(struct Sprite *sprite)
 
 void AnimTask_SkullBashPosition(u8 taskId)
 {
-    u8 a;
+    u8 side;
 
     gTasks[taskId].data[0] = gBattlerSpriteIds[gBattleAnimAttacker];
-    a = GetBattlerSide(gBattleAnimAttacker);
-    gTasks[taskId].data[1] = a;
+    side = GetBattlerSide(gBattleAnimAttacker);
+    gTasks[taskId].data[1] = side;
     gTasks[taskId].data[2] = 0;
     switch (gBattleAnimArgs[0])
     {
@@ -5683,7 +5716,7 @@ void AnimTask_SkullBashPosition(u8 taskId)
         gTasks[taskId].data[3] = 8;
         gTasks[taskId].data[4] = 0;
         gTasks[taskId].data[5] = 3;
-        if (a == 0)
+        if (side == B_SIDE_PLAYER)
             gTasks[taskId].data[5] *= -1;
 
         gTasks[taskId].func = AnimTask_SkullBashPositionSet;
@@ -5692,7 +5725,7 @@ void AnimTask_SkullBashPosition(u8 taskId)
         gTasks[taskId].data[3] = 8;
         gTasks[taskId].data[4] = 0x600;
         gTasks[taskId].data[5] = 0xC0;
-        if (a == 0)
+        if (side == B_SIDE_PLAYER)
         {
             gTasks[taskId].data[4] = -gTasks[taskId].data[4];
             gTasks[taskId].data[5] = -gTasks[taskId].data[5];

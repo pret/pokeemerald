@@ -1,7 +1,6 @@
 #ifndef GUARD_BATTLE_BG_H
 #define GUARD_BATTLE_BG_H
 
-#if P_ENABLE_DEBUG == TRUE
 struct BattleBackground
 {
     const void *tileset;
@@ -10,7 +9,6 @@ struct BattleBackground
     const void *entryTilemap;
     const void *palette;
 };
-#endif
 
 void BattleInitBgsAndWindows(void);
 void InitBattleBgsVideo(void);

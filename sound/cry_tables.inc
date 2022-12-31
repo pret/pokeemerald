@@ -1749,6 +1749,7 @@ gCryTable::
 	cry Cry_TornadusTherian
 	cry Cry_ThundurusTherian
 	cry Cry_LandorusTherian
+	cry Cry_Bulbasaur //Cry_EnamorusTherian
 	@ Kyurem
 	cry Cry_KyuremWhite
 	cry Cry_KyuremBlack
