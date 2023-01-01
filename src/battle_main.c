@@ -101,7 +101,7 @@ static void SetActionsAndBattlersTurnOrder(void);
 static void UpdateBattlerPartyOrdersOnSwitch(void);
 static bool8 AllAtActionConfirmed(void);
 static void TryChangeTurnOrder(void);
-static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void);
+static void CheckChosenMoveForEffectsBeforeTurnStarts(void);
 static void CheckMegaEvolutionBeforeTurn(void);
 static void CheckQuickClaw_CustapBerryActivation(void);
 static void FreeResetData_ReturnToOvOrDoEvolutions(void);
@@ -3027,6 +3027,7 @@ static void BattleStartClearSetData(void)
 
     gBattleStruct->stickyWebUser = 0xFF;
     gBattleStruct->appearedInBattle = 0;
+    gBattleStruct->beatUpSlot = 0;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -4854,7 +4855,7 @@ static void CheckMegaEvolutionBeforeTurn(void)
     }
 
     #if B_MEGA_EVO_TURN_ORDER <= GEN_6
-        gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
+        gBattleMainFunc = CheckChosenMoveForEffectsBeforeTurnStarts;
         gBattleStruct->focusPunchBattlerId = 0;
     #else
         gBattleMainFunc = TryChangeTurnOrder; // This will just do nothing if no mon has mega evolved
@@ -4879,11 +4880,11 @@ static void TryChangeTurnOrder(void)
             }
         }
     }
-    gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
+    gBattleMainFunc = CheckChosenMoveForEffectsBeforeTurnStarts;
     gBattleStruct->focusPunchBattlerId = 0;
 }
 
-static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
+static void CheckChosenMoveForEffectsBeforeTurnStarts(void)
 {
     u32 i;
 
@@ -4897,7 +4898,7 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
                 && !(gDisableStructs[gBattlerAttacker].truantCounter)
                 && !(gProtectStructs[gActiveBattler].noValidMoves))
             {
-                switch(gChosenMoveByBattler[gActiveBattler])
+                switch (gChosenMoveByBattler[gActiveBattler])
                 {
                 case MOVE_FOCUS_PUNCH:
                     BattleScriptExecute(BattleScript_FocusPunchSetUp);

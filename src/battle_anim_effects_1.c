@@ -2447,6 +2447,39 @@ const struct SpriteTemplate gFollowMeFingerSpriteTemplate =
     .callback = AnimFollowMeFinger,
 };
 
+const union AffineAnimCmd gTeaAffineAnimCmds1[] =
+{
+        AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
+        AFFINEANIMCMD_FRAME(0x1E, 0x1E, 0, 8),
+        AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gTeaAffineAnimCmds2[] =
+{
+        AFFINEANIMCMD_FRAME(0x0, 0x0, -3, 11),
+        AFFINEANIMCMD_FRAME(0x0, 0x0, 3, 11),
+        AFFINEANIMCMD_LOOP(2),
+        AFFINEANIMCMD_FRAME(0xFFE2, 0xFFE2, 0, 8),
+        AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gTeaAffineAnimTable[] =
+{
+        gTeaAffineAnimCmds1,
+        gTeaAffineAnimCmds2,
+};
+
+const struct SpriteTemplate gTeapotSpriteTemplate =
+{
+        .tileTag = ANIM_TAG_TEAPOT,
+        .paletteTag = ANIM_TAG_TEAPOT,
+        .oam = &gOamData_AffineDouble_ObjNormal_64x64,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gTeaAffineAnimTable,
+        .callback = AnimMetronomeFinger,
+};
+
 const union AnimCmd gTauntFingerAnimCmds1[] =
 {
     ANIMCMD_FRAME(0, 1),

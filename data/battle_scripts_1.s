@@ -416,6 +416,74 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDoubleShock             @ EFFECT_DOUBLE_SHOCK
 	.4byte BattleScript_EffectSpecialAttackUpHit      @ EFFECT_SPECIAL_ATTACK_UP_HIT
 	.4byte BattleScript_EffectVictoryDance            @ EFFECT_VICTORY_DANCE
+	.4byte BattleScript_EffectTeatime                 @ EFFECT_TEATIME
+
+BattleScript_EffectTeatime::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifteanoberry BattleScript_ButItFailed
+@ at least one battler is affected 
+	attackanimation
+	waitanimation
+BattleScript_TeatimeLoop:
+	jumpifteainvulnerable BS_TARGET, BattleScript_Teatimevul
+	jumpifrodaffected BS_TARGET, BattleScript_Teatimerod
+	jumpifabsorbaffected BS_TARGET, BattleScript_Teatimesorb
+	jumpifmotoraffected BS_TARGET, BattleScript_Teatimemotor
+	orword gHitMarker, HITMARKER_NO_ANIMATIONS | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE
+	setbyte sBERRY_OVERRIDE, TRUE   @ override the requirements for eating berries
+	consumeberry BS_TARGET, TRUE  @ consume the berry, then restore the item from changedItems
+	bicword gHitMarker, HITMARKER_NO_ANIMATIONS | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE
+	setbyte sBERRY_OVERRIDE, FALSE
+	removeitem BS_TARGET
+	moveendto MOVEEND_NEXT_TARGET
+	jumpifnexttargetvalid BattleScript_TeatimeLoop
+	moveendcase MOVEEND_CLEAR_BITS
+	goto BattleScript_MoveEnd
+BattleScript_Teatimevul:
+	moveendto MOVEEND_NEXT_TARGET
+	jumpifnexttargetvalid BattleScript_TeatimeLoop
+	moveendcase MOVEEND_CLEAR_BITS
+	goto BattleScript_MoveEnd
+BattleScript_Teatimesorb:
+	copybyte gBattlerAbility, gBattlerTarget
+	call BattleScript_AbilityPopUp
+	moveendto MOVEEND_NEXT_TARGET
+	jumpifnexttargetvalid BattleScript_TeatimeLoop
+	moveendcase MOVEEND_CLEAR_BITS
+	goto BattleScript_MoveEnd
+BattleScript_Teatimerod:
+	copybyte gBattlerAbility, gBattlerTarget
+	call BattleScript_AbilityPopUp
+	playstatchangeanimation BS_TARGET, BIT_SPATK, STAT_CHANGE_BY_TWO
+	setstatchanger STAT_SPATK, 1, FALSE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_TeatimeBuffer
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_TeatimeBuffer
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+	moveendto MOVEEND_NEXT_TARGET
+	jumpifnexttargetvalid BattleScript_TeatimeLoop
+	moveendcase MOVEEND_CLEAR_BITS
+	goto BattleScript_MoveEnd
+BattleScript_Teatimemotor:
+	copybyte gBattlerAbility, gBattlerTarget
+	call BattleScript_AbilityPopUp
+	playstatchangeanimation BS_TARGET, BIT_SPEED, STAT_CHANGE_BY_TWO
+	setstatchanger STAT_SPEED, 1, FALSE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_TeatimeBuffer
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_TeatimeBuffer
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+	moveendto MOVEEND_NEXT_TARGET
+	jumpifnexttargetvalid BattleScript_TeatimeLoop
+	moveendcase MOVEEND_CLEAR_BITS
+	goto BattleScript_MoveEnd
+BattleScript_TeatimeBuffer:
+	moveendto MOVEEND_NEXT_TARGET
+	jumpifnexttargetvalid BattleScript_TeatimeLoop
+	moveendcase MOVEEND_CLEAR_BITS
+	goto BattleScript_MoveEnd
 
 BattleScript_AffectionBasedEndurance::
 	playanimation BS_TARGET, B_ANIM_AFFECTION_HANGED_ON
@@ -5183,10 +5251,18 @@ BattleScript_EffectTeleportNew:
 BattleScript_EffectTeleportNewEnd:
 	goto BattleScript_MoveEnd
 
-.if B_BEAT_UP < GEN_5
 BattleScript_EffectBeatUp::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+.if B_BEAT_UP >= GEN_5
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	adjustdamage
+	trydobeatup
+	goto BattleScript_HitFromAtkAnimation
+.else
 	attackstring
 	pause B_WAIT_TIME_SHORT
 	ppreduce
@@ -5216,12 +5292,6 @@ BattleScript_BeatUpAttack::
 	goto BattleScript_BeatUpLoop
 BattleScript_BeatUpEnd::
 	end
-.else
-BattleScript_EffectBeatUp::
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	addbyte gBattleCommunication, 1
-	goto BattleScript_HitFromAtkString
 .endif
 
 BattleScript_EffectSemiInvulnerable::
@@ -8279,12 +8349,13 @@ BattleScript_IntimidateLoop:
 	jumpifability BS_TARGET, ABILITY_OBLIVIOUS, BattleScript_IntimidatePrevented
 .endif
 BattleScript_IntimidateEffect:
-	copybyte sBATTLER, gBattlerTarget
-	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
+	copybyte sBATTLER, gBattlerAttacker
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_IntimidateLoopIncrement
 	setgraphicalstatchangevalues
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	printstring STRINGID_PKMNCUTSATTACKWITH
 	waitmessage B_WAIT_TIME_LONG
+	copybyte sBATTLER, gBattlerTarget
 	call BattleScript_TryAdrenalineOrb
 BattleScript_IntimidateLoopIncrement:
 	addbyte gBattlerTarget, 1

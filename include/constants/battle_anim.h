@@ -394,6 +394,8 @@
 #define ANIM_TAG_OMEGA_SYMBOL               (ANIM_SPRITES_START + 382)
 #define ANIM_TAG_STEEL_BEAM                 (ANIM_SPRITES_START + 383)
 #define ANIM_TAG_POLTERGEIST                (ANIM_SPRITES_START + 384)
+#define ANIM_TAG_TEAPOT                     (ANIM_SPRITES_START + 385)
+
 
 // battlers
 #define ANIM_ATTACKER    0

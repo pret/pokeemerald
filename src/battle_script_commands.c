@@ -4794,22 +4794,24 @@ static void Cmd_setroost(void)
     {
         gBattleStruct->roostTypes[gBattlerAttacker][0] = TYPE_FLYING;
         gBattleStruct->roostTypes[gBattlerAttacker][1] = TYPE_FLYING;
-        gBattleStruct->roostTypes[gBattlerAttacker][2] = TYPE_FLYING;
+#if B_ROOST_PURE_FLYING >= GEN_5
         SET_BATTLER_TYPE(gBattlerAttacker, TYPE_NORMAL);
+#else
+        SET_BATTLER_TYPE(gBattlerAttacker, TYPE_MYSTERY);
+#endif
     }
-    // Dual Type with Flying Type.
-    else if ((gBattleMons[gBattlerAttacker].type1 == TYPE_FLYING && gBattleMons[gBattlerAttacker].type2 != TYPE_FLYING)
-           ||(gBattleMons[gBattlerAttacker].type2 == TYPE_FLYING && gBattleMons[gBattlerAttacker].type1 != TYPE_FLYING))
+    // Dual type with flying type.
+    else if (gBattleMons[gBattlerAttacker].type1 == TYPE_FLYING || gBattleMons[gBattlerAttacker].type2 == TYPE_FLYING)
     {
         gBattleStruct->roostTypes[gBattlerAttacker][0] = gBattleMons[gBattlerAttacker].type1;
         gBattleStruct->roostTypes[gBattlerAttacker][1] = gBattleMons[gBattlerAttacker].type2;
         if (gBattleMons[gBattlerAttacker].type1 == TYPE_FLYING)
             gBattleMons[gBattlerAttacker].type1 = TYPE_MYSTERY;
-        if (gBattleMons[gBattlerAttacker].type2 == TYPE_FLYING)
+        else if (gBattleMons[gBattlerAttacker].type2 == TYPE_FLYING)
             gBattleMons[gBattlerAttacker].type2 = TYPE_MYSTERY;
     }
     // Non-flying type.
-    else if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_FLYING))
+    else
     {
         gBattleStruct->roostTypes[gBattlerAttacker][0] = gBattleMons[gBattlerAttacker].type1;
         gBattleStruct->roostTypes[gBattlerAttacker][1] = gBattleMons[gBattlerAttacker].type2;
@@ -7912,35 +7914,34 @@ static bool32 HasAttackerFaintedTarget(void)
 static void HandleTerrainMove(u16 move)
 {
     u32 statusFlag = 0;
-    u8 *timer = NULL;
 
     switch (gBattleMoves[move].effect)
     {
     case EFFECT_MISTY_TERRAIN:
-        statusFlag = STATUS_FIELD_MISTY_TERRAIN, timer = &gFieldTimers.terrainTimer;
+        statusFlag = STATUS_FIELD_MISTY_TERRAIN;
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         break;
     case EFFECT_GRASSY_TERRAIN:
-        statusFlag = STATUS_FIELD_GRASSY_TERRAIN, timer = &gFieldTimers.terrainTimer;
+        statusFlag = STATUS_FIELD_GRASSY_TERRAIN;
         gBattleCommunication[MULTISTRING_CHOOSER] = 1;
         break;
     case EFFECT_ELECTRIC_TERRAIN:
-        statusFlag = STATUS_FIELD_ELECTRIC_TERRAIN, timer = &gFieldTimers.terrainTimer;
+        statusFlag = STATUS_FIELD_ELECTRIC_TERRAIN;
         gBattleCommunication[MULTISTRING_CHOOSER] = 2;
         break;
     case EFFECT_PSYCHIC_TERRAIN:
-        statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN, timer = &gFieldTimers.terrainTimer;
+        statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN;
         gBattleCommunication[MULTISTRING_CHOOSER] = 3;
         break;
     case EFFECT_DAMAGE_SET_TERRAIN:
         switch (gBattleMoves[move].argument)
         {
         case 0: //genesis supernova
-            statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN, timer = &gFieldTimers.terrainTimer;
+            statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN;
             gBattleCommunication[MULTISTRING_CHOOSER] = 3;
             break;
         case 1: //splintered stormshards
-            if (!(gFieldStatuses & (STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN)))
+            if (!(gFieldStatuses & STATUS_FIELD_TERRAIN_ANY))
             {
                 //no terrain to remove -> jump to battle script pointer
                 gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
@@ -7948,7 +7949,7 @@ static void HandleTerrainMove(u16 move)
             else
             {
                 // remove all terrain
-                gFieldStatuses &= ~(STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN);
+                gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 4;
                 gBattlescriptCurrInstr += 7;
             }
@@ -7968,9 +7969,9 @@ static void HandleTerrainMove(u16 move)
         gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
         gFieldStatuses |= statusFlag;
         if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_TERRAIN_EXTENDER)
-            *timer = 8;
+            gFieldTimers.terrainTimer = 8;
         else
-            *timer = 5;
+            gFieldTimers.terrainTimer = 5;
         gBattlescriptCurrInstr += 7;
     }
 }
@@ -8102,6 +8103,67 @@ static bool32 IsRototillerAffected(u32 battlerId)
         return FALSE;   // Rototiller doesn't affected semi-invulnerable battlers
     if (BlocksPrankster(MOVE_ROTOTILLER, gBattlerAttacker, battlerId, FALSE))
         return FALSE;
+    return TRUE;
+}
+
+
+static bool32 IsAbilityRodAffected(void)
+{
+    u32 moveType;
+
+    if (gBattleStruct->dynamicMoveType == 0)
+        moveType = gBattleMoves[gCurrentMove].type;
+    else if (!(gBattleStruct->dynamicMoveType & 0x40))
+        moveType = gBattleStruct->dynamicMoveType & 0x3F;
+    else
+        moveType = gBattleMoves[gCurrentMove].type;
+
+    if (moveType == TYPE_ELECTRIC && GetBattlerAbility(gBattlerTarget) == ABILITY_LIGHTNING_ROD)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+static bool32 IsAbilityMotorAffected(void)
+{
+    u32 moveType;
+
+    if (gBattleStruct->dynamicMoveType == 0)
+        moveType = gBattleMoves[gCurrentMove].type;
+    else if (!(gBattleStruct->dynamicMoveType & 0x40))
+        moveType = gBattleStruct->dynamicMoveType & 0x3F;
+    else
+        moveType = gBattleMoves[gCurrentMove].type;
+
+    if (moveType == TYPE_ELECTRIC && GetBattlerAbility(gBattlerTarget) == ABILITY_MOTOR_DRIVE)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+static bool32 IsAbilityAbsorbAffected(void)
+{
+    u32 moveType;
+
+    if (gBattleStruct->dynamicMoveType == 0)
+        moveType = gBattleMoves[gCurrentMove].type;
+    else if (!(gBattleStruct->dynamicMoveType & 0x40))
+        moveType = gBattleStruct->dynamicMoveType & 0x3F;
+    else
+        moveType = gBattleMoves[gCurrentMove].type;
+
+    if (moveType == TYPE_ELECTRIC && GetBattlerAbility(gBattlerTarget) == ABILITY_VOLT_ABSORB)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+static bool32 IsTeatimeAffected(u32 battlerId)
+{
+    if (ItemId_GetPocket(gBattleMons[battlerId].item) != POCKET_BERRIES)
+        return FALSE;   // Only berries
+    if (gStatuses3[battlerId] & STATUS3_SEMI_INVULNERABLE)
+        return FALSE;   // Teatime doesn't affected semi-invulnerable battlers
     return TRUE;
 }
 
@@ -9977,7 +10039,7 @@ static void Cmd_various(void)
         gBattleMons[gActiveBattler].item = gLastUsedItem;
         break;
     case VARIOUS_SET_BEAK_BLAST:
-        gProtectStructs[gBattlerAttacker].beakBlastCharge = TRUE;
+        gProtectStructs[gActiveBattler].beakBlastCharge = TRUE;
         break;
     case VARIOUS_SWAP_SIDE_STATUSES:
         CourtChangeSwapSideStatuses();
@@ -10044,6 +10106,45 @@ static void Cmd_various(void)
             PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
         }
         break;
+    case VARIOUS_TEATIME_TARGETS:
+    {
+        u32 count = 0;
+
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            if (IsTeatimeAffected(i))
+                count++;
+        }
+        if (count == 0)
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);   // Teatime fails
+        else
+            gBattlescriptCurrInstr += 7;
+    }
+    return;
+     case VARIOUS_TEATIME_INVUL:
+        if (ItemId_GetPocket(gBattleMons[gActiveBattler].item) == POCKET_BERRIES && !(gStatuses3[gBattlerTarget] & (STATUS3_SEMI_INVULNERABLE)))
+            gBattlescriptCurrInstr += 7;
+        else
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        return;
+     case VARIOUS_JUMP_IF_ROD:
+        if (IsAbilityRodAffected())
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
+     case VARIOUS_JUMP_IF_MOTOR:
+        if (IsAbilityMotorAffected())
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
+     case VARIOUS_JUMP_IF_ABSORB:
+        if (IsAbilityAbsorbAffected())
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;
@@ -10722,7 +10823,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
         else if ((activeBattlerAbility == ABILITY_CLEAR_BODY
                   || activeBattlerAbility == ABILITY_FULL_METAL_BODY
                   || activeBattlerAbility == ABILITY_WHITE_SMOKE)
-                 && !certain && gCurrentMove != MOVE_CURSE)
+                 && !affectsUser && !certain && gCurrentMove != MOVE_CURSE)
         {
             if (flags == STAT_CHANGE_ALLOW_PTR)
             {
@@ -11872,8 +11973,9 @@ static void Cmd_trysetencore(void)
     }
 
     if (gLastMoves[gBattlerTarget] == MOVE_STRUGGLE
-        || gLastMoves[gBattlerTarget] == MOVE_ENCORE
-        || gLastMoves[gBattlerTarget] == MOVE_MIRROR_MOVE)
+     || gLastMoves[gBattlerTarget] == MOVE_ENCORE
+     || gLastMoves[gBattlerTarget] == MOVE_MIRROR_MOVE
+     || gLastMoves[gBattlerTarget] == MOVE_SHELL_TRAP)
     {
         i = MAX_MON_MOVES;
     }
@@ -12801,6 +12903,10 @@ static void Cmd_trysetfutureattack(void)
 
 static void Cmd_trydobeatup(void)
 {
+#if B_BEAT_UP >= GEN_5
+    gBattleStruct->beatUpSlot++;
+    gBattlescriptCurrInstr += 9;
+#else
     struct Pokemon *party;
 
     if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
@@ -12844,6 +12950,7 @@ static void Cmd_trydobeatup(void)
         else
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 5);
     }
+#endif
 }
 
 static void Cmd_setsemiinvulnerablebit(void)
