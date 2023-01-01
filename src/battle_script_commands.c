@@ -10876,7 +10876,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
         else if ((activeBattlerAbility == ABILITY_CLEAR_BODY
                   || activeBattlerAbility == ABILITY_FULL_METAL_BODY
                   || activeBattlerAbility == ABILITY_WHITE_SMOKE)
-                 && !certain && gCurrentMove != MOVE_CURSE)
+                 && !affectsUser && !certain && gCurrentMove != MOVE_CURSE)
         {
             if (flags == STAT_CHANGE_ALLOW_PTR)
             {
