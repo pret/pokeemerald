@@ -29,13 +29,13 @@
 #define ABILITYEFFECT_WEATHER_FORM               7
 #define ABILITYEFFECT_SYNCHRONIZE                8
 #define ABILITYEFFECT_ATK_SYNCHRONIZE            9
-#define ABILITYEFFECT_INTIMIDATE1                10
-#define ABILITYEFFECT_INTIMIDATE2                11
-#define ABILITYEFFECT_TRACE1                     12
-#define ABILITYEFFECT_TRACE2                     13
-#define ABILITYEFFECT_MOVE_END_OTHER             14
-#define ABILITYEFFECT_NEUTRALIZINGGAS            15
-#define ABILITYEFFECT_FIELD_SPORT                16 // Only used if B_SPORT_TURNS < GEN_6
+#define ABILITYEFFECT_TRACE1                     10
+#define ABILITYEFFECT_TRACE2                     11
+#define ABILITYEFFECT_MOVE_END_OTHER             12
+#define ABILITYEFFECT_NEUTRALIZINGGAS            13
+#define ABILITYEFFECT_FIELD_SPORT                14 // Only used if B_SPORT_TURNS < GEN_6
+#define ABILITYEFFECT_ON_WEATHER                 15
+#define ABILITYEFFECT_ON_TERRAIN                 16
 // Special cases
 #define ABILITYEFFECT_MUD_SPORT                  252 // Only used if B_SPORT_TURNS < GEN_6
 #define ABILITYEFFECT_WATER_SPORT                253 // Only used if B_SPORT_TURNS < GEN_6
@@ -144,6 +144,7 @@ u16 CalcTypeEffectivenessMultiplier(u16 move, u8 moveType, u8 battlerAtk, u8 bat
 u16 CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilityDef);
 u16 GetTypeModifier(u8 atkType, u8 defType);
 s32 GetStealthHazardDamage(u8 hazardType, u8 battlerId);
+s32 GetStealthHazardDamageByTypesAndHP(u8 hazardType, u8 type1, u8 type2, u32 maxHp);
 u16 GetMegaEvolutionSpecies(u16 preEvoSpecies, u16 heldItemId);
 u16 GetPrimalReversionSpecies(u16 preEvoSpecies, u16 heldItemId);
 u16 GetWishMegaEvolutionSpecies(u16 preEvoSpecies, u16 moveId1, u16 moveId2, u16 moveId3, u16 moveId4);
@@ -201,6 +202,8 @@ bool32 CanBeFrozen(u8 battlerId);
 bool32 CanBeConfused(u8 battlerId);
 bool32 IsBattlerTerrainAffected(u8 battlerId, u32 terrainFlag);
 u32 GetBattlerFriendshipScore(u8 battlerId);
+u32 CountBattlerStatIncreases(u8 battlerId, bool32 countEvasionAcc);
+bool32 IsMyceliumMightOnField(void);
 void ChangeTypeBasedOnTerrain(u8 battlerId);
 
 #endif // GUARD_BATTLE_UTIL_H
