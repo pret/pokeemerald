@@ -1022,7 +1022,7 @@
 	.4byte \ptr
 	.endm
 
-	.macro trydobeatup endPtr:req, failPtr:req
+	.macro trydobeatup endPtr=NULL, failPtr=NULL
 	.byte 0xc4
 	.4byte \endPtr
 	.4byte \failPtr
@@ -1940,6 +1940,31 @@
 
 	.macro shellsidearmcheck
 	various BS_ATTACKER, VARIOUS_SHELL_SIDE_ARM_CHECK
+	.endm
+	
+	.macro jumpifrodaffected battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_ROD
+	.4byte \ptr
+	.endm
+
+	.macro jumpifabsorbaffected battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_ABSORB
+	.4byte \ptr
+	.endm
+
+	.macro jumpifmotoraffected battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_MOTOR
+	.4byte \ptr
+	.endm
+
+	.macro jumpifteanoberry ptr:req
+	various BS_ATTACKER, VARIOUS_TEATIME_TARGETS
+	.4byte \ptr
+	.endm
+
+	.macro jumpifteainvulnerable battler:req, ptr:req
+	various \battler, VARIOUS_TEATIME_INVUL
+	.4byte \ptr
 	.endm
 
 	.macro jumpifcantfling battler:req, ptr:req
