@@ -4976,19 +4976,7 @@ BattleScript_MoveWeatherChange::
 	printfromtable gMoveWeatherChangeStringIds
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_WeatherFormChanges
-	call BattleScript_ActivateWeatherAbilities
 	goto BattleScript_MoveEnd
-
-BattleScript_ActivateWeatherAbilities:
-	copybyte sBATTLER, gBattlerAttacker
-	setbyte gBattlerAttacker, 0
-BattleScript_ActivateWeatherAbilities_Loop:
-	activateweatherabilities BS_ATTACKER
-BattleScript_ActivateWeatherAbilities_Increment:
-	addbyte gBattlerAttacker, 1
-	jumpifbytenotequal gBattlerAttacker, gBattlersCount, BattleScript_ActivateWeatherAbilities_Loop
-	copybyte gBattlerAttacker, sBATTLER
-	return
 
 BattleScript_EffectSunnyDay::
 	attackcanceler
@@ -8180,7 +8168,6 @@ BattleScript_DrizzleActivates::
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_RAIN_CONTINUES
 	call BattleScript_WeatherFormChanges
-	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_AbilityRaisesDefenderStat::
@@ -8341,7 +8328,6 @@ BattleScript_SandstreamActivates::
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_SANDSTORM_CONTINUES
 	call BattleScript_WeatherFormChanges
-	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_SandSpitActivates::
@@ -8351,7 +8337,6 @@ BattleScript_SandSpitActivates::
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_SANDSTORM_CONTINUES
 	call BattleScript_WeatherFormChanges
-	call BattleScript_ActivateWeatherAbilities
 	return
 
 BattleScript_ShedSkinActivates::
@@ -8365,6 +8350,7 @@ BattleScript_WeatherFormChanges::
 	setbyte sBATTLER, 0
 BattleScript_WeatherFormChangesLoop::
 	tryweatherformdatachange
+	activateweatherchangeabilities BS_SCRIPTING
 	addbyte sBATTLER, 1
 	jumpifbytenotequal sBATTLER, gBattlersCount, BattleScript_WeatherFormChangesLoop
 	return
@@ -8470,7 +8456,6 @@ BattleScript_DroughtActivates::
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_SUN_CONTINUES
 	call BattleScript_WeatherFormChanges
-	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_DesolateLandActivates::
@@ -8480,7 +8465,6 @@ BattleScript_DesolateLandActivates::
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_SUN_CONTINUES
 	call BattleScript_WeatherFormChanges
-	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_DesolateLandEvaporatesWaterTypeMoves::
@@ -8501,7 +8485,6 @@ BattleScript_PrimordialSeaActivates::
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_RAIN_CONTINUES
 	call BattleScript_WeatherFormChanges
-	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_PrimordialSeaFizzlesOutFireTypeMoves::
@@ -8572,7 +8555,6 @@ BattleScript_SnowWarningActivates::
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_HAIL_CONTINUES
 	call BattleScript_WeatherFormChanges
-	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_TerrainSeedLoop:
@@ -8603,7 +8585,7 @@ BattleScript_ActivateTerrainAbilities:
 	copybyte sBATTLER, gBattlerAttacker
 	setbyte gBattlerAttacker, 0
 BattleScript_ActivateTerrainAbilities_Loop:
-	activateterrainabilities BS_ATTACKER
+	activateterrainchangeabilities BS_ATTACKER
 BattleScript_ActivateTerrainAbilities_Increment:
 	addbyte gBattlerAttacker, 1
 	jumpifbytenotequal gBattlerAttacker, gBattlersCount, BattleScript_ActivateTerrainAbilities_Loop
@@ -9756,7 +9738,6 @@ BattleScript_AnnounceAirLockCloudNine::
 	printstring STRINGID_AIRLOCKACTIVATES
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_WeatherFormChanges
-	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_QuickClawActivation::

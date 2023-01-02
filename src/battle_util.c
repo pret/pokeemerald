@@ -4798,19 +4798,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
-        case ABILITY_FORECAST:
-#if B_WEATHER_FORMS >= GEN_5
-        case ABILITY_FLOWER_GIFT:
-#else
-        TRY_WEATHER_FORM:
-#endif
-            effect = TryWeatherFormChange(battler);
-            if (effect != 0)
-            {
-                BattleScriptPushCursorAndCallback(BattleScript_WeatherFormChange);
-                *(&gBattleStruct->formToChangeInto) = effect - 1;
-            }
-            break;
         case ABILITY_TRACE:
             if (!(gSpecialStatuses[battler].traced))
             {
@@ -6252,9 +6239,22 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         }
         break;
     case ABILITYEFFECT_ON_WEATHER: // For ability effects that activate when the battle weather changes.
-        gBattleScripting.battler = gBattlerAbility = battler;
+        battler = gBattlerAbility = gBattlerAttacker = gBattleScripting.battler;
         switch (GetBattlerAbility(battler))
         {
+        case ABILITY_FORECAST:
+#if B_WEATHER_FORMS >= GEN_5
+        case ABILITY_FLOWER_GIFT:
+#else
+        TRY_WEATHER_FORM:
+#endif
+            effect = TryWeatherFormChange(battler);
+            if (effect != 0)
+            {
+                BattleScriptPushCursorAndCallback(BattleScript_WeatherFormChange);
+                *(&gBattleStruct->formToChangeInto) = effect - 1;
+            }
+            break;
         case ABILITY_PROTOSYNTHESIS:
             if (IsBattlerWeatherAffected(battler, B_WEATHER_SUN))
             {
@@ -6266,7 +6266,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         }
         break;
     case ABILITYEFFECT_ON_TERRAIN:  // For ability effects that activate when the field terrain changes.
-        gBattleScripting.battler = gBattlerAbility = battler;
+        battler = gBattlerAbility = gBattlerAttacker = gBattleScripting.battler;
         switch (GetBattlerAbility(battler))
         {
         case ABILITY_QUARK_DRIVE:

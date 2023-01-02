@@ -2010,12 +2010,12 @@
 	.4byte \ptr
 	.endm
 
-	.macro activateweatherabilities battler:req
-	various \battler, VARIOUS_ACTIVATE_WEATHER_ABILITIES
+	.macro activateweatherchangeabilities battler:req
+	various \battler, VARIOUS_ACTIVATE_WEATHER_CHANGE_ABILITIES
 	.endm
 
-	.macro activateterrainabilities battler:req
-	various \battler, VARIOUS_ACTIVATE_TERRAIN_ABILITIES
+	.macro activateterrainchangeabilities battler:req
+	various \battler, VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES
 	.endm
 
 @ helpful macros

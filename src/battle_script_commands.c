@@ -10116,11 +10116,11 @@ static void Cmd_various(void)
             }
         }
         return;
-    case VARIOUS_ACTIVATE_WEATHER_ABILITIES:
+    case VARIOUS_ACTIVATE_WEATHER_CHANGE_ABILITIES:
         gBattlescriptCurrInstr += 3;
         AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, gActiveBattler, 0, 0, 0);
         return;
-    case VARIOUS_ACTIVATE_TERRAIN_ABILITIES:
+    case VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES:
         gBattlescriptCurrInstr += 3;
         AbilityBattleEffects(ABILITYEFFECT_ON_TERRAIN, gActiveBattler, 0, 0, 0);
         return;
