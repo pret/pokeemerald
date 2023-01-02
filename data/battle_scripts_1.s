@@ -2526,25 +2526,7 @@ BattleScript_EffectPsychicTerrain:
 	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG
 	call BattleScript_ActivateTerrainAbilities
 	call BattleScript_TerrainSeedLoop
-	call BattleScript_TryToApplyMimicry
 	goto BattleScript_MoveEnd
-
-BattleScript_TryToApplyMimicry:
-	savetarget
-	setbyte gBattlerTarget, 0
-BattleScript_TryToApplyMimicry_Loop:
-	jumpifword CMP_NOT_EQUAL, gFieldStatuses, STATUS_FIELD_TERRAIN_ANY, BattleScript_TryToApplyMimicry_Increment
-	jumpifability BS_TARGET, ABILITY_MIMICRY, BattleScript_TryToApplyMimicry_Effect
-BattleScript_TryToApplyMimicry_Effect:
-	pause B_WAIT_TIME_SHORT
-	call BattleScript_AbilityPopUp
-	applymimicry BS_TARGET
-	printstring STRINGID_BATTLERTYPECHANGEDTO
-	waitmessage B_WAIT_TIME_SHORT
-BattleScript_TryToApplyMimicry_Increment:
-	addbyte gBattlerTarget, 1
-	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_TryToApplyMimicry_Loop
-	return
 
 BattleScript_EffectTopsyTurvy:
 	attackcanceler

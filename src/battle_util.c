@@ -4297,28 +4297,24 @@ static u8 ForewarnChooseMove(u32 battler)
 
 void ChangeTypeBasedOnTerrain(u8 battlerId)
 {
-    u16 moveType, move;
+    u8 battlerType;
     u16 terrainFlags = VarGet(VAR_TERRAIN) & STATUS_FIELD_TERRAIN_ANY;
 
     if (terrainFlags && gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
         gFieldStatuses = terrainFlags | STATUS_FIELD_TERRAIN_PERMANENT; // terrain is permanent
 
-    GET_MOVE_TYPE(move, moveType);
-    {
-        if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
-            moveType = TYPE_ELECTRIC;
-        else if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN)
-            moveType = TYPE_GRASS;
-        else if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)
-            moveType = TYPE_FAIRY;
-        else if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)
-            moveType = TYPE_PSYCHIC;
-        else // failsafe
-            moveType = gSpeciesInfo[battlerId].type1;
-    }
-    SET_BATTLER_TYPE(battlerId, moveType);
-    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, battlerId, gBattlerPartyIndexes[battlerId])
-    PREPARE_TYPE_BUFFER(gBattleTextBuff2, moveType);
+    if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
+        battlerType = TYPE_ELECTRIC;
+    else if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN)
+        battlerType = TYPE_GRASS;
+    else if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)
+        battlerType = TYPE_FAIRY;
+    else if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)
+        battlerType = TYPE_PSYCHIC;
+    else // failsafe
+        battlerType = gSpeciesInfo[battlerId].type1;
+    SET_BATTLER_TYPE(battlerId, battlerType);
+    PREPARE_TYPE_BUFFER(gBattleTextBuff1, battlerType);
 }
 
 u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 moveArg)
@@ -4821,30 +4817,12 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
-        case ABILITY_MIMICRY:
-            if (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY && !gSpecialStatuses[battler].switchInAbilityDone)
-            {
-                ChangeTypeBasedOnTerrain(battler);
-                BattleScriptPushCursorAndCallback(BattleScript_MimicryActivates_End3);
-                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
-                effect++;
-            }
-            break;
         case ABILITY_PROTOSYNTHESIS:
             if (!gSpecialStatuses[battler].switchInAbilityDone && gBattleWeather & B_WEATHER_SUN)
             {
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 PREPARE_STAT_BUFFER(gBattleTextBuff1, GetHighestStatId(battler));
                 BattleScriptPushCursorAndCallback(BattleScript_ProtosynthesisActivates);
-                effect++;
-            }
-            break;
-        case ABILITY_QUARK_DRIVE:
-            if (!gSpecialStatuses[battler].switchInAbilityDone && gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
-            {
-                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
-                PREPARE_STAT_BUFFER(gBattleTextBuff1, GetHighestStatId(battler));
-                BattleScriptPushCursorAndCallback(BattleScript_QuarkDriveActivates);
                 effect++;
             }
             break;
@@ -6197,7 +6175,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         }
         break;
     case ABILITYEFFECT_ON_WEATHER: // For ability effects that activate when the battle weather changes.
-        battler = gBattlerAbility = gBattlerAttacker = gBattleScripting.battler;
+        battler = gBattlerAbility = gBattleScripting.battler;
         switch (GetBattlerAbility(battler))
         {
         case ABILITY_FORECAST:
@@ -6224,12 +6202,22 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         }
         break;
     case ABILITYEFFECT_ON_TERRAIN:  // For ability effects that activate when the field terrain changes.
-        battler = gBattlerAbility = gBattlerAttacker = gBattleScripting.battler;
+        battler = gBattlerAbility = gBattleScripting.battler;
         switch (GetBattlerAbility(battler))
         {
-        case ABILITY_QUARK_DRIVE:
-            if (IsBattlerTerrainAffected(battler, STATUS_FIELD_ELECTRIC_TERRAIN))
+        case ABILITY_MIMICRY:
+            if (!gSpecialStatuses[battler].terrainAbilityDone)
             {
+                gSpecialStatuses[battler].terrainAbilityDone = TRUE;
+                ChangeTypeBasedOnTerrain(battler);
+                BattleScriptPushCursorAndCallback(BattleScript_MimicryActivates_End3);
+                effect++;
+            }
+            break;
+        case ABILITY_QUARK_DRIVE:
+            if (!gSpecialStatuses[battler].terrainAbilityDone && IsBattlerTerrainAffected(battler, STATUS_FIELD_ELECTRIC_TERRAIN))
+            {
+                gSpecialStatuses[battler].terrainAbilityDone = TRUE;
                 PREPARE_STAT_BUFFER(gBattleTextBuff1, GetHighestStatId(battler));
                 BattleScriptPushCursorAndCallback(BattleScript_QuarkDriveActivates);
                 effect++;
