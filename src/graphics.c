@@ -286,6 +286,8 @@ const u32 gBattleAnimSpritePal_Tornado[] = INCBIN_U32("graphics/battle_anims/spr
 const u32 gBattleAnimSpriteGfx_ZMoveSymbol[] = INCBIN_U32("graphics/battle_anims/sprites/z_move_symbol.4bpp.lz");
 const u32 gBattleAnimSpritePal_ZMoveSymbol[] = INCBIN_U32("graphics/battle_anims/sprites/z_move_symbol.gbapal.lz");
 
+const u32 gBattleAnimSpriteGfx_Teapot[] = INCBIN_U32("graphics/battle_anims/sprites/new/teapot.4bpp.lz");
+const u32 gBattleAnimSpritePal_Teapot[] = INCBIN_U32("graphics/battle_anims/sprites/new/teapot.gbapal.lz");
 
 // Battle anims
 const u32 gBattleAnimSpriteGfx_Bubble[] = INCBIN_U32("graphics/battle_anims/sprites/bubble.4bpp.lz");
