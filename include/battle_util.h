@@ -34,6 +34,8 @@
 #define ABILITYEFFECT_MOVE_END_OTHER             12
 #define ABILITYEFFECT_NEUTRALIZINGGAS            13
 #define ABILITYEFFECT_FIELD_SPORT                14 // Only used if B_SPORT_TURNS < GEN_6
+#define ABILITYEFFECT_ON_WEATHER                 15
+#define ABILITYEFFECT_ON_TERRAIN                 16
 // Special cases
 #define ABILITYEFFECT_MUD_SPORT                  252 // Only used if B_SPORT_TURNS < GEN_6
 #define ABILITYEFFECT_WATER_SPORT                253 // Only used if B_SPORT_TURNS < GEN_6
@@ -203,5 +205,7 @@ bool32 CanBeFrozen(u8 battlerId);
 bool32 CanBeConfused(u8 battlerId);
 bool32 IsBattlerTerrainAffected(u8 battlerId, u32 terrainFlag);
 u32 GetBattlerFriendshipScore(u8 battlerId);
+u32 CountBattlerStatIncreases(u8 battlerId, bool32 countEvasionAcc);
+bool32 IsMyceliumMightOnField(void);
 
 #endif // GUARD_BATTLE_UTIL_H
