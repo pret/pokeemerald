@@ -391,7 +391,7 @@
 #define EFFECT_COURT_CHANGE                 385
 #define EFFECT_STEEL_BEAM                   386
 #define EFFECT_EXTREME_EVOBOOST             387
-#define EFFECT_DAMAGE_SET_TERRAIN           388 // genesis supernova
+#define EFFECT_HIT_SET_REMOVE_TERRAIN       388
 #define EFFECT_DARK_VOID                    389
 #define EFFECT_SLEEP_HIT                    390
 #define EFFECT_DOUBLE_SHOCK                 391
