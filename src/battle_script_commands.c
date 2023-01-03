@@ -1808,7 +1808,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
 
     if (atkHoldEffect == HOLD_EFFECT_WIDE_LENS)
         calc = (calc * (100 + atkParam)) / 100;
-    else if (atkHoldEffect == HOLD_EFFECT_ZOOM_LENS && GetBattlerTurnOrderNum(battlerAtk) > GetBattlerTurnOrderNum(battlerDef));
+    else if (atkHoldEffect == HOLD_EFFECT_ZOOM_LENS && GetBattlerTurnOrderNum(battlerAtk) > GetBattlerTurnOrderNum(battlerDef))
         calc = (calc * (100 + atkParam)) / 100;
 
     if (gProtectStructs[battlerAtk].usedMicleBerry)
