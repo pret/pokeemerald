@@ -2662,12 +2662,7 @@ void SpriteCB_FaintOpponentMon(struct Sprite *sprite)
 
     GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_PERSONALITY);  // Unused return value.
 
-    if (species == SPECIES_UNOWN)
-    {
-        species = GetUnownSpeciesId(personality);
-        yOffset = gMonFrontPicCoords[species].y_offset;
-    }
-    else if (species == SPECIES_CASTFORM)
+    if (species == SPECIES_CASTFORM)
     {
         yOffset = gCastformFrontSpriteCoords[gBattleMonForms[battler]].y_offset;
     }

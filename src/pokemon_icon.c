@@ -227,7 +227,7 @@ const u8 *const gMonIconTable[] =
     [SPECIES_MURKROW] = gMonIcon_Murkrow,
     [SPECIES_SLOWKING] = gMonIcon_Slowking,
     [SPECIES_MISDREAVUS] = gMonIcon_Misdreavus,
-    [SPECIES_UNOWN] = gMonIcon_Unown,
+    [SPECIES_UNOWN_A] = gMonIcon_Unown,
     [SPECIES_WOBBUFFET] = gMonIcon_Wobbuffet,
     [SPECIES_GIRAFARIG] = gMonIcon_Girafarig,
     [SPECIES_PINECO] = gMonIcon_Pineco,
@@ -1532,7 +1532,7 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_MURKROW] = 2,
     [SPECIES_SLOWKING] = 0,
     [SPECIES_MISDREAVUS] = 0,
-    [SPECIES_UNOWN] = 0,
+    [SPECIES_UNOWN_A] = 0,
     [SPECIES_WOBBUFFET] = 0,
     [SPECIES_GIRAFARIG] = 1,
     [SPECIES_PINECO] = 0,
@@ -2737,17 +2737,10 @@ u16 GetIconSpecies(u16 species, u32 personality)
 {
     u16 result;
 
-    if (species == SPECIES_UNOWN)
-    {
-        result = GetUnownSpeciesId(personality);
-    }
+    if (species > NUM_SPECIES)
+        result = INVALID_ICON_SPECIES;
     else
-    {
-        if (species > NUM_SPECIES)
-            result = INVALID_ICON_SPECIES;
-        else
-            result = species;
-    }
+        result = species;
 
     return result;
 }
@@ -2764,18 +2757,10 @@ u16 GetIconSpeciesNoPersonality(u16 species)
 {
     u16 value;
 
-    if (MailSpeciesToSpecies(species, &value) == SPECIES_UNOWN)
-    {
-        value += SPECIES_UNOWN_B; // TODO
-        return value;
-    }
-    else
-    {
-        if (species > NUM_SPECIES)
-            species = INVALID_ICON_SPECIES;
+    if (species > NUM_SPECIES)
+        species = INVALID_ICON_SPECIES;
 
-        return GetIconSpecies(species, 0);
-    }
+    return GetIconSpecies(species, 0);
 }
 
 const u8 *GetMonIconPtr(u16 species, u32 personality)

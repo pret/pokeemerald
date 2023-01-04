@@ -67,9 +67,7 @@ u8 GiveMailToMonByItemId(struct Pokemon *mon, u16 itemId)
             for (i = 0; i < TRAINER_ID_LENGTH; i++)
                 gSaveBlock1Ptr->mail[id].trainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
 
-            species = GetBoxMonData(&mon->box, MON_DATA_SPECIES);
-            personality = GetBoxMonData(&mon->box, MON_DATA_PERSONALITY);
-            gSaveBlock1Ptr->mail[id].species = SpeciesToMailSpecies(species, personality);
+            gSaveBlock1Ptr->mail[id].species = GetBoxMonData(&mon->box, MON_DATA_SPECIES);
             gSaveBlock1Ptr->mail[id].itemId = itemId;
             SetMonData(mon, MON_DATA_MAIL, &id);
             SetMonData(mon, MON_DATA_HELD_ITEM, heldItem);
@@ -78,34 +76,6 @@ u8 GiveMailToMonByItemId(struct Pokemon *mon, u16 itemId)
     }
 
     return MAIL_NONE;
-}
-
-u16 SpeciesToMailSpecies(u16 species, u32 personality)
-{
-    if (species == SPECIES_UNOWN)
-    {
-        u32 species = GetUnownLetterByPersonality(personality) + UNOWN_OFFSET;
-        return species;
-    }
-
-    return species;
-}
-
-u16 MailSpeciesToSpecies(u16 mailSpecies, u16 *buffer)
-{
-    u16 result;
-
-    if (mailSpecies >= UNOWN_OFFSET && mailSpecies < UNOWN_OFFSET + NUM_UNOWN_FORMS)
-    {
-        result = SPECIES_UNOWN;
-        *buffer = mailSpecies - UNOWN_OFFSET;
-    }
-    else
-    {
-        result = mailSpecies;
-    }
-
-    return result;
 }
 
 u8 GiveMailToMon(struct Pokemon *mon, struct Mail *mail)

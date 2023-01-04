@@ -445,7 +445,6 @@ static const struct MailLayout sMailLayouts_Tall[] = {
 
 void ReadMail(struct Mail *mail, void (*exitCallback)(void), bool8 hasText)
 {
-    u16 buffer[2];
     u16 species;
 
     sMailRead = AllocZeroed(sizeof(*sMailRead));
@@ -473,8 +472,7 @@ void ReadMail(struct Mail *mail, void (*exitCallback)(void), bool8 hasText)
         sMailRead->layout = &sMailLayouts_Tall[sMailRead->mailType];
         break;
     }
-    species = MailSpeciesToSpecies(mail->species, buffer);
-    if (species > SPECIES_NONE && species < NUM_SPECIES)
+    if (mail->species > SPECIES_NONE && mail->species < NUM_SPECIES)
     {
         switch (sMailRead->mailType)
         {
