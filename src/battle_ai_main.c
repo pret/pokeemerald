@@ -1486,7 +1486,6 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             }
             break;
         case EFFECT_SPIKES:
-        case EFFECT_CEASELESS_EDGE:
             if (gSideTimers[GetBattlerSide(battlerDef)].spikesAmount >= 3)
                 score -= 10;
             else if (PartnerMoveIsSameNoTarget(BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove)
@@ -1494,7 +1493,6 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 10; // only one mon needs to set up the last layer of Spikes
             break;
         case EFFECT_STEALTH_ROCK:
-        case EFFECT_STONE_AXE:
             if (gSideTimers[GetBattlerSide(battlerDef)].stealthRockAmount > 0
               || PartnerMoveIsSameNoTarget(BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove)) //Only one mon needs to set up Stealth Rocks
                 score -= 10;
@@ -4600,10 +4598,6 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score += 3;
             break;
         }*/
-        break;
-    case EFFECT_DIRE_CLAW:
-        if (gBattleMons[battlerDef].status1 & STATUS1_NONE)
-            score += 3;
         break;
     case EFFECT_FEINT:
         if (gBattleMoves[predictedMove].effect == EFFECT_PROTECT)
