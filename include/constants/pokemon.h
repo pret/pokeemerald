@@ -266,8 +266,4 @@
 
 #define SKIP_FRONT_ANIM (1 << 7)
 
-#define NUM_TYPE_SLOTS      2
-#define NUM_EGG_GROUP_SLOTS 2
-#define NUM_ABILITY_SLOTS   2
-
 #endif // GUARD_CONSTANTS_POKEMON_H
