@@ -59,23 +59,23 @@ struct PlayerRecordRS
     struct RecordMixingDaycareMail daycareMail;
     struct RSBattleTowerRecord battleTowerRecord;
     u16 giftItem;
-    u16 padding[50];
+    u16 filler[50];
 };
 
 struct PlayerRecordEmerald
 {
     /* 0x0000 */ struct SecretBase secretBases[SECRET_BASES_COUNT];
-    /* 0x0c80 */ TVShow tvShows[TV_SHOWS_COUNT];
+    /* 0x0C80 */ TVShow tvShows[TV_SHOWS_COUNT];
     /* 0x1004 */ PokeNews pokeNews[POKE_NEWS_COUNT];
     /* 0x1044 */ OldMan oldMan;
     /* 0x1084 */ struct DewfordTrend dewfordTrends[SAVED_TRENDS_COUNT];
-    /* 0x10ac */ struct RecordMixingDaycareMail daycareMail;
+    /* 0x10AC */ struct RecordMixingDaycareMail daycareMail;
     /* 0x1124 */ struct EmeraldBattleTowerRecord battleTowerRecord;
     /* 0x1210 */ u16 giftItem;
     /* 0x1214 */ LilycoveLady lilycoveLady;
     /* 0x1254 */ struct Apprentice apprentices[2];
-    /* 0x12dc */ struct PlayerHallRecords hallRecords;
-    /* 0x1434 */ u8 padding[16];
+    /* 0x12DC */ struct PlayerHallRecords hallRecords;
+    /* 0x1434 */ u8 filler_1434[16];
 }; // 0x1444
 
 union PlayerRecord

@@ -1053,7 +1053,7 @@ void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 widt
                 for (x16 = x; x16 < (x + width); x16++)
                 {
                     CopyTileMapEntry(&firstTileNum, &((u16 *)sGpuBgConfigs2[bg].tilemap)[(u16)GetTileMapIndexFromCoords(x16, y16, attribute, mode, mode2)], paletteSlot, 0, 0);
-                    firstTileNum = (firstTileNum & (MAPGRID_COLLISION_MASK | MAPGRID_ELEVATION_MASK)) + ((firstTileNum + tileNumDelta) & MAPGRID_METATILE_ID_MASK);
+                    firstTileNum = (firstTileNum & 0xFC00) + ((firstTileNum + tileNumDelta) & 0x3FF);
                 }
             }
             break;
@@ -1064,7 +1064,7 @@ void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 widt
                 for (x16 = x; x16 < (x + width); x16++)
                 {
                     ((u8 *)sGpuBgConfigs2[bg].tilemap)[(y16 * mode3) + x16] = firstTileNum;
-                    firstTileNum = (firstTileNum & (MAPGRID_COLLISION_MASK | MAPGRID_ELEVATION_MASK)) + ((firstTileNum + tileNumDelta) & MAPGRID_METATILE_ID_MASK);
+                    firstTileNum = (firstTileNum & 0xFC00) + ((firstTileNum + tileNumDelta) & 0x3FF);
                 }
             }
             break;

@@ -19,6 +19,7 @@ EventScript_RepelUseAnother:
 	lock
 	msgbox Text_UseAnotherRepel, MSGBOX_YESNO
 .if I_REPEL_LURE_MENU == TRUE
+	goto_if_eq VAR_RESULT, NO, EventScript_RepelWoreOff_End
 	callnative TryDrawRepelMenu
 	goto_if_eq VAR_RESULT, FALSE, EventScript_RepelWoreOff_Chose
 	waitstate
@@ -68,6 +69,7 @@ EventScript_LureUseAnother:
 	lock
 	msgbox Text_UseAnotherLure, MSGBOX_YESNO
 .if I_REPEL_LURE_MENU == TRUE
+	goto_if_eq VAR_RESULT, NO, EventScript_LureWoreOff_End
 	callnative TryDrawLureMenu
 	goto_if_eq VAR_RESULT, FALSE, EventScript_LureWoreOff_Chose
 	waitstate

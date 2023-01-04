@@ -286,7 +286,7 @@ static void BuildStartMenuActions(void)
     }
     else
     {
-    #if DEBUG_SYSTEM_ENABLE == TRUE && DEBUG_SYSTEM_IN_MENU == TRUE
+    #if DEBUG_OVERWORLD_MENU == TRUE && DEBUG_OVERWORLD_IN_MENU == TRUE
         BuildDebugStartMenu();
     #else
         BuildNormalStartMenu();
@@ -760,7 +760,7 @@ static bool8 StartMenuDebugCallback(void)
     RemoveExtraStartMenuWindows();
     HideStartMenuDebug(); // Hide start menu without enabling movement
 
-#if DEBUG_SYSTEM_ENABLE == TRUE
+#if DEBUG_OVERWORLD_MENU == TRUE
     FreezeObjectEvents();
     Debug_ShowMainMenu();
 #endif
@@ -1044,7 +1044,7 @@ static u8 SaveConfirmInputCallback(void)
             sSaveDialogCallback = SaveFileExistsCallback;
             return SAVE_IN_PROGRESS;
         }
-    case -1: // B Button
+    case MENU_B_PRESSED:
     case 1: // No
         HideSaveInfoWindow();
         HideSaveMessageWindow();
@@ -1090,7 +1090,7 @@ static u8 SaveOverwriteInputCallback(void)
     case 0: // Yes
         sSaveDialogCallback = SaveSavingMessageCallback;
         return SAVE_IN_PROGRESS;
-    case -1: // B Button
+    case MENU_B_PRESSED:
     case 1: // No
         HideSaveInfoWindow();
         HideSaveMessageWindow();
@@ -1209,7 +1209,7 @@ static u8 BattlePyramidRetireInputCallback(void)
     {
     case 0: // Yes
         return SAVE_CANCELED;
-    case -1: // B Button
+    case MENU_B_PRESSED:
     case 1: // No
         HideSaveMessageWindow();
         return SAVE_SUCCESS;

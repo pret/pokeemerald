@@ -391,9 +391,15 @@
 #define EFFECT_COURT_CHANGE                 385
 #define EFFECT_STEEL_BEAM                   386
 #define EFFECT_EXTREME_EVOBOOST             387
-#define EFFECT_DAMAGE_SET_TERRAIN           388 // genesis supernova
+#define EFFECT_HIT_SET_REMOVE_TERRAIN       388
 #define EFFECT_DARK_VOID                    389
+#define EFFECT_SLEEP_HIT                    390
+#define EFFECT_DOUBLE_SHOCK                 391
+#define EFFECT_SPECIAL_ATTACK_UP_HIT        392
+#define EFFECT_VICTORY_DANCE                393
+#define EFFECT_TEATIME                      394
 
-#define NUM_BATTLE_MOVE_EFFECTS             389
+#define NUM_BATTLE_MOVE_EFFECTS             395
+
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H
