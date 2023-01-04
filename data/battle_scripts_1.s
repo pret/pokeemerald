@@ -423,22 +423,62 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectBarbBarrage             @ EFFECT_BARB_BARRAGE
 
 BattleScript_EffectStoneAxe::
-	call BattleScript_EffectHit_Ret
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	adjustdamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	seteffectwithchance
+	tryfaintmon BS_TARGET
 	setstealthrock BattleScript_ButItFailed
 	printstring STRINGID_POINTEDSTONESFLOAT
 	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_MoveEnd
+	moveendall
+	end
 
 BattleScript_EffectDireClaw::
 	setmoveeffect MOVE_EFFECT_DIRE_CLAW
 	goto BattleScript_EffectHit
 
 BattleScript_EffectCeaselessEdge::
-	call BattleScript_EffectHit_Ret
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	adjustdamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	seteffectwithchance
+	tryfaintmon BS_TARGET
 	trysetspikes BattleScript_ButItFailedAtkStringPpReduce
 	printstring STRINGID_SPIKESSCATTERED
 	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_MoveEnd
+	moveendall
+	end
 
 BattleScript_EffectTeatime::
 	attackcanceler
@@ -3150,29 +3190,6 @@ BattleScript_HitFromAtkAnimation::
 BattleScript_MoveEnd::
 	moveendall
 	end
-
-BattleScript_EffectHit_Ret::
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	attackstring
-	ppreduce
-	critcalc
-	damagecalc
-	adjustdamage
-	attackanimation
-	waitanimation
-	effectivenesssound
-	hitanimation BS_TARGET
-	waitstate
-	healthbarupdate BS_TARGET
-	datahpupdate BS_TARGET
-	critmessage
-	waitmessage B_WAIT_TIME_LONG
-	resultmessage
-	waitmessage B_WAIT_TIME_LONG
-	seteffectwithchance
-	tryfaintmon BS_TARGET
-	return
 
 BattleScript_EffectNaturalGift:
 	attackcanceler
