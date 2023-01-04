@@ -9532,7 +9532,11 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
 
     // check multiple targets in double battle
     if (GetMoveTargetCount(move, battlerAtk, battlerDef) >= 2)
+    #if B_MULTIPLE_TARGETS_DMG >= GEN_4
         MulModifier(&finalModifier, UQ_4_12(0.75));
+    #else
+        MulModifier(&finalModifier, UQ_4_12(0.5));
+    #endif
 
     // take type effectiveness
     MulModifier(&finalModifier, typeEffectivenessModifier);
