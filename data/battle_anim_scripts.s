@@ -13478,7 +13478,18 @@ Move_DRAGON_DARTS::
 	end
 
 Move_TEATIME::
-	goto Move_MILK_DRINK
+	loadspritegfx ANIM_TAG_TEAPOT
+	loadspritegfx ANIM_TAG_THOUGHT_BUBBLE
+	createsprite gThoughtBubbleSpriteTemplate, ANIM_ATTACKER, 11, 0, 100
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_ATTACKER
+	delay 6
+	createsprite gTeapotSpriteTemplate, ANIM_ATTACKER, 12, 0
+	createvisualtask AnimTask_RockMonBackAndForth, 5, ANIM_ATTACKER, 2, 0
+	createvisualtask AnimTask_RockMonBackAndForth, 5, ANIM_ATK_PARTNER, 2, 0
+	delay 24
+	loopsewithpan SE_M_HEAL_BELL, SOUND_PAN_ATTACKER, 22, 3
+	waitforvisualfinish
+	end
 
 Move_OCTOLOCK::
 	loadspritegfx ANIM_TAG_TENDRILS
@@ -24938,7 +24949,7 @@ General_StrongWinds::
 General_PrimalReversion::
 	launchtask AnimTask_PrimalReversion 0x5 0x0
 	jumpargeq 0x0, ITEM_RED_ORB, General_PrimalReversion_Omega
-	jumpargeq 0x1, ITEM_BLUE_ORB, General_PrimalReversion_Alpha
+	jumpargeq 0x0, ITEM_BLUE_ORB, General_PrimalReversion_Alpha
 General_PrimalReversion_Alpha:
 	loadspritegfx ANIM_TAG_ALPHA_STONE
 	loadspritegfx ANIM_TAG_MEGA_PARTICLES

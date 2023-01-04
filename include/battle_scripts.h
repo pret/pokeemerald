@@ -433,6 +433,21 @@ extern const u8 BattleScript_MultiHitPrintStrings[];
 extern const u8 BattleScript_BurnUpRemoveType[];
 extern const u8 BattleScript_TargetAbilityStatRaiseRet[];
 extern const u8 BattleScript_DoubleShockRemoveType[];
+extern const u8 BattleScript_SeedSowerActivates[];
+extern const u8 BattleScript_AngerShellActivates[];
+extern const u8 BattleScript_WellBakedBodyActivates[];
+extern const u8 BattleScript_WindRiderActivatesMoveEnd[];
+extern const u8 BattleScript_WindPowerActivates[];
+extern const u8 BattleScript_WindPowerActivatesEnd2[];
+extern const u8 BattleScript_ProtosynthesisActivates[];
+extern const u8 BattleScript_QuarkDriveActivates[];
+extern const u8 BattleScript_GoodAsGoldActivates[];
+extern const u8 BattleScript_RuinAbilityActivates[];
+extern const u8 BattleScript_CudChewActivates[];
+extern const u8 BattleScript_SupremeOverlordActivates[];
+extern const u8 BattleScript_CostarActivates[];
+extern const u8 BattleScript_ToxicDebrisActivates[];
+extern const u8 BattleScript_EarthEaterActivates[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
