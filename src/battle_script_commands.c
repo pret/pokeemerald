@@ -2789,6 +2789,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
     bool32 mirrorArmorReflected = (GetBattlerAbility(gBattlerTarget) == ABILITY_MIRROR_ARMOR);
     u32 flags = 0;
     u16 battlerAbility;
+    bool8 activateAfterFaint = FALSE;
 
     if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_1ST_HIT 
         && gBattleMons[gBattlerTarget].hp != 0
@@ -2806,6 +2807,10 @@ void SetMoveEffect(bool32 primary, u32 certain)
         gBattleStruct->moveEffect2 = gBattleScripting.moveEffect;
         gBattlescriptCurrInstr++;
         return;
+    case MOVE_EFFECT_STEALTH_ROCK:
+    case MOVE_EFFECT_SPIKES:
+        activateAfterFaint = TRUE;
+        break;
     }
 
     if (gBattleScripting.moveEffect & MOVE_EFFECT_AFFECTS_USER)
@@ -2838,6 +2843,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
         INCREMENT_RESET_RETURN
 
     if (gBattleMons[gEffectBattler].hp == 0
+        && !activateAfterFaint
         && gBattleScripting.moveEffect != MOVE_EFFECT_PAYDAY
         && gBattleScripting.moveEffect != MOVE_EFFECT_STEAL_ITEM
         && gBattleScripting.moveEffect != MOVE_EFFECT_BUG_BITE)
@@ -3657,6 +3663,20 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     static const u8 sDireClawEffects[] = { MOVE_EFFECT_POISON, MOVE_EFFECT_PARALYSIS, MOVE_EFFECT_SLEEP };
                     gBattleScripting.moveEffect = sDireClawEffects[Random() % 3];
                     SetMoveEffect(TRUE, 0);
+                }
+                break;
+            case MOVE_EFFECT_STEALTH_ROCK:
+                if (!(gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_STEALTH_ROCK))
+                {
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_StealthRockActivates;
+                }
+                break;
+            case MOVE_EFFECT_SPIKES:
+                if (!(gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_SPIKES))
+                {
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_SpikesActivate;
                 }
                 break;
             }

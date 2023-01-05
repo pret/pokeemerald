@@ -372,8 +372,10 @@
 #define MOVE_EFFECT_TRAP_BOTH           70
 #define MOVE_EFFECT_DOUBLE_SHOCK        71
 #define MOVE_EFFECT_DIRE_CLAW           72
+#define MOVE_EFFECT_STEALTH_ROCK        73
+#define MOVE_EFFECT_SPIKES              74
 
-#define NUM_MOVE_EFFECTS                73
+#define NUM_MOVE_EFFECTS                75
 
 #define MOVE_EFFECT_AFFECTS_USER        0x4000
 #define MOVE_EFFECT_CERTAIN             0x8000

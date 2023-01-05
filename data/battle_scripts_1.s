@@ -441,13 +441,17 @@ BattleScript_EffectStoneAxe::
 	waitmessage B_WAIT_TIME_LONG
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
-	seteffectwithchance
 	tryfaintmon BS_TARGET
-	setstealthrock BattleScript_ButItFailed
-	printstring STRINGID_POINTEDSTONESFLOAT
-	waitmessage B_WAIT_TIME_LONG
+	setmoveeffect MOVE_EFFECT_STEALTH_ROCK
+	seteffectprimary
 	moveendall
 	end
+
+BattleScript_StealthRockActivates::
+	setstealthrock BattleScript_MoveEnd
+	printstring STRINGID_POINTEDSTONESFLOAT
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectDireClaw::
 	setmoveeffect MOVE_EFFECT_DIRE_CLAW
@@ -472,13 +476,17 @@ BattleScript_EffectCeaselessEdge::
 	waitmessage B_WAIT_TIME_LONG
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
-	seteffectwithchance
 	tryfaintmon BS_TARGET
-	trysetspikes BattleScript_ButItFailedAtkStringPpReduce
-	printstring STRINGID_SPIKESSCATTERED
-	waitmessage B_WAIT_TIME_LONG
+	setmoveeffect MOVE_EFFECT_SPIKES
+	seteffectprimary
 	moveendall
 	end
+
+BattleScript_SpikesActivate::
+	trysetspikes BattleScript_MoveEnd
+	printstring STRINGID_SPIKESSCATTERED
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectTeatime::
 	attackcanceler
