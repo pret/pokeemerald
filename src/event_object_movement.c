@@ -2343,9 +2343,7 @@ void SetObjectEventDirection(struct ObjectEvent *objectEvent, u8 direction)
 {
     objectEvent->previousMovementDirection = objectEvent->facingDirection;
     if (!objectEvent->facingDirectionLocked)
-    {
         objectEvent->facingDirection = direction;
-    }
     objectEvent->movementDirection = direction;
 }
 
