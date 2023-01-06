@@ -201,7 +201,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(MURKROW, gMonBackPic_Murkrow),
     SPECIES_SPRITE(SLOWKING, gMonBackPic_Slowking),
     SPECIES_SPRITE(MISDREAVUS, gMonBackPic_Misdreavus),
-    SPECIES_SPRITE(UNOWN, gMonBackPic_Unown),
+    SPECIES_SPRITE(UNOWN_A, gMonBackPic_Unown),
     SPECIES_SPRITE(WOBBUFFET, gMonBackPic_Wobbuffet),
     SPECIES_SPRITE(GIRAFARIG, gMonBackPic_Girafarig),
     SPECIES_SPRITE(PINECO, gMonBackPic_Pineco),
@@ -1348,8 +1348,8 @@ const struct CompressedSpriteSheet gMonBackPicTableFemale[] =
     SPECIES_SPRITE(KRICKETUNE, gMonBackPic_KricketuneF),
     SPECIES_SPRITE(SHINX, gMonBackPic_ShinxF),
     SPECIES_SPRITE(COMBEE, gMonBackPic_Combee),
-    SPECIES_SPRITE(HIPPOPOTAS, gMonBackPic_HippopotasF),
-    SPECIES_SPRITE(HIPPOWDON, gMonBackPic_HippowdonF),
+    SPECIES_SPRITE(HIPPOPOTAS, gMonBackPic_Hippopotas),
+    SPECIES_SPRITE(HIPPOWDON, gMonBackPic_Hippowdon),
 #endif
 #if P_GEN_5_POKEMON == TRUE
     SPECIES_SPRITE(UNFEZANT, gMonBackPic_UnfezantF),

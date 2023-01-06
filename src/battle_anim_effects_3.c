@@ -2378,33 +2378,7 @@ void AnimTask_TransformMon(u8 taskId)
         LoadBgTiles(1, animBg.bgTiles, 0x800, animBg.tilesOffset);
         if (IsContest())
         {
-            if (IsSpeciesNotUnown(gContestResources->moveAnim->species) != IsSpeciesNotUnown(gContestResources->moveAnim->targetSpecies))
-            {
-                bgTilemap = (u16 *)animBg.bgTilemap;
-                for (i = 0; i < 8; i++)
-                {
-                    for (j = 0; j < 4; j++)
-                    {
-                        u16 temp = bgTilemap[j + i * 0x20];
-                        bgTilemap[j + i * 0x20] = bgTilemap[(7 - j) + i * 0x20];
-                        bgTilemap[(7 - j) + i * 0x20] = temp;
-                    }
-                }
-
-                for (i = 0; i < 8; i++)
-                {
-                    for (j = 0; j < 8; j++)
-                    {
-                       bgTilemap[j + i * 0x20] ^= 0x400;
-                    }
-                }
-            }
-
-            if (IsSpeciesNotUnown(gContestResources->moveAnim->targetSpecies))
-                gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims = gAffineAnims_BattleSpriteContest;
-            else
-                gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims = gAffineAnims_BattleSpriteOpponentSide;
-
+            gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims = gAffineAnims_BattleSpriteContest;
             StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimAttacker]], BATTLER_AFFINE_NORMAL);
         }
 

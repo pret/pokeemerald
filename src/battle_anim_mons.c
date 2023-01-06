@@ -177,64 +177,21 @@ u8 GetBattlerYDelta(u8 battlerId, u16 species)
 
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER || IsContest())
     {
-        if (species == SPECIES_UNOWN)
-        {
-            if (IsContest())
-            {
-                if (gContestResources->moveAnim->hasTargetAnim)
-                    personality = gContestResources->moveAnim->targetPersonality;
-                else
-                    personality = gContestResources->moveAnim->personality;
-            }
-            else
-            {
-                spriteInfo = gBattleSpritesDataPtr->battlerData;
-                if (!spriteInfo[battlerId].transformSpecies)
-                    personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PERSONALITY);
-                else
-                    personality = gTransformedPersonalities[battlerId];
-            }
-            coordSpecies = GetUnownSpeciesId(personality);
-            ret = gMonBackPicCoords[coordSpecies].y_offset;
-        }
-        else if (species == SPECIES_CASTFORM)
-        {
+        if (species == SPECIES_CASTFORM)
             ret = sCastformBackSpriteYCoords[gBattleMonForms[battlerId]];
-        }
         else if (species > NUM_SPECIES)
-        {
             ret = gMonBackPicCoords[0].y_offset;
-        }
         else
-        {
             ret = gMonBackPicCoords[species].y_offset;
-        }
     }
     else
     {
-        if (species == SPECIES_UNOWN)
-        {
-            spriteInfo = gBattleSpritesDataPtr->battlerData;
-            if (!spriteInfo[battlerId].transformSpecies)
-                personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PERSONALITY);
-            else
-                personality = gTransformedPersonalities[battlerId];
-
-            coordSpecies = GetUnownSpeciesId(personality);
-            ret = gMonFrontPicCoords[coordSpecies].y_offset;
-        }
-        else if (species == SPECIES_CASTFORM)
-        {
+        if (species == SPECIES_CASTFORM)
             ret = gCastformFrontSpriteCoords[gBattleMonForms[battlerId]].y_offset;
-        }
         else if (species > NUM_SPECIES)
-        {
             ret = gMonFrontPicCoords[0].y_offset;
-        }
         else
-        {
             ret = gMonFrontPicCoords[species].y_offset;
-        }
     }
     return ret;
 }
@@ -1317,17 +1274,7 @@ void SetSpriteRotScale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation)
 // Pokémon in Contests (except Unown) should be flipped.
 static bool8 ShouldRotScaleSpeciesBeFlipped(void)
 {
-    if (IsContest())
-    {
-        if (gSprites[GetAnimBattlerSpriteId(ANIM_ATTACKER)].data[2] == SPECIES_UNOWN)
-            return FALSE;
-        else
-            return TRUE;
-    }
-    else
-    {
-        return FALSE;
-    }
+    return IsContest();
 }
 
 void PrepareBattlerSpriteForRotScale(u8 spriteId, u8 objMode)
@@ -2197,12 +2144,8 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
             species = gContestResources->moveAnim->species;
             personality = gContestResources->moveAnim->personality;
         }
-        if (species == SPECIES_UNOWN)
-        {
-            species = GetUnownSpeciesId(personality);
-            coords = &gMonBackPicCoords[species];
-        }
-        else if (species == SPECIES_CASTFORM)
+
+        if (species == SPECIES_CASTFORM)
         {
             coords = &gCastformFrontSpriteCoords[gBattleMonForms[battlerId]];
         }
@@ -2231,19 +2174,10 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
                 personality = gTransformedPersonalities[battlerId];
             }
 
-            if (species == SPECIES_UNOWN)
-            {
-                species = GetUnownSpeciesId(personality);
-                coords = &gMonBackPicCoords[species];
-            }
-            else if (species > NUM_SPECIES)
-            {
+            if (species > NUM_SPECIES)
                 coords = &gMonBackPicCoords[0];
-            }
             else
-            {
                 coords = &gMonBackPicCoords[species];
-            }
         }
         else
         {
@@ -2259,23 +2193,12 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
                 personality = gTransformedPersonalities[battlerId];
             }
 
-            if (species == SPECIES_UNOWN)
-            {
-                species = GetUnownSpeciesId(personality);
-                coords = &gMonFrontPicCoords[species];
-            }
-            else if (species == SPECIES_CASTFORM)
-            {
+            if (species == SPECIES_CASTFORM)
                 coords = &gCastformFrontSpriteCoords[gBattleMonForms[battlerId]];
-            }
             else if (species > NUM_SPECIES)
-            {
                 coords = &gMonFrontPicCoords[0];
-            }
             else
-            {
                 coords = &gMonFrontPicCoords[species];
-            }
         }
     }
 
