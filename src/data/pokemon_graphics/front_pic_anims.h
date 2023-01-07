@@ -2342,7 +2342,7 @@ static const union AnimCmd sAnim_Misdreavus_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_UnownA_1[] =
+static const union AnimCmd sAnim_Unown_1[] =
 {
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_FRAME(1, 30),
@@ -10704,7 +10704,7 @@ SINGLE_ANIMATION(Umbreon);
 SINGLE_ANIMATION(Murkrow);
 SINGLE_ANIMATION(Slowking);
 SINGLE_ANIMATION(Misdreavus);
-SINGLE_ANIMATION(UnownA);
+SINGLE_ANIMATION(Unown);
 DOUBLE_ANIMATION(Wobbuffet);
 DOUBLE_ANIMATION(Girafarig);
 SINGLE_ANIMATION(Pineco);
@@ -11840,7 +11840,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     [SPECIES_MURKROW]     = sAnims_Murkrow,
     [SPECIES_SLOWKING]    = sAnims_Slowking,
     [SPECIES_MISDREAVUS]  = sAnims_Misdreavus,
-    [SPECIES_UNOWN_A]     = sAnims_UnownA,
+    [SPECIES_UNOWN]       = sAnims_Unown,
     [SPECIES_WOBBUFFET]   = sAnims_Wobbuffet,
     [SPECIES_GIRAFARIG]   = sAnims_Girafarig,
     [SPECIES_PINECO]      = sAnims_Pineco,

@@ -5941,7 +5941,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
-    [SPECIES_UNOWN_A] = UNOWN_SPECIES_INFO(FLIP),
+    [SPECIES_UNOWN] = UNOWN_SPECIES_INFO(FLIP),
 
     [SPECIES_WOBBUFFET] =
     {

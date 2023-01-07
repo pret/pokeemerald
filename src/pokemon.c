@@ -538,7 +538,7 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(MURKROW),
     SPECIES_TO_NATIONAL(SLOWKING),
     SPECIES_TO_NATIONAL(MISDREAVUS),
-    [SPECIES_UNOWN_A - 1] = NATIONAL_DEX_UNOWN,
+    SPECIES_TO_NATIONAL(UNOWN),
     SPECIES_TO_NATIONAL(WOBBUFFET),
     SPECIES_TO_NATIONAL(GIRAFARIG),
     SPECIES_TO_NATIONAL(PINECO),
@@ -2163,34 +2163,7 @@ const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_MURKROW - 1]       = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_SLOWKING - 1]      = ANIM_SHRINK_GROW,
     [SPECIES_MISDREAVUS - 1]    = ANIM_V_SLIDE_WOBBLE,
-    [SPECIES_UNOWN_A - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_B - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_C - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_D - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_E - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_F - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_G - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_H - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_I - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_J - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_K - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_L - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_M - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_N - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_O - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_P - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_Q - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_R - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_S - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_T - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_U - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_V - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_W - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_X - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_Y - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_Z - 1]       = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_EMARK - 1]   = ANIM_ZIGZAG_FAST,
-    [SPECIES_UNOWN_QMARK - 1]   = ANIM_ZIGZAG_FAST,
+    [SPECIES_UNOWN - 1]         = ANIM_ZIGZAG_FAST,
     [SPECIES_WOBBUFFET - 1]     = ANIM_GROW_VIBRATE,
     [SPECIES_GIRAFARIG - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_PINECO - 1]        = ANIM_SWING_CONCAVE,
@@ -3465,9 +3438,6 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     else
         personality = Random32();
 
-    if (species == SPECIES_UNOWN)
-        species = GetUnownSpeciesId(personality);
-
     // Determine original trainer ID
     if (otIdType == OT_ID_RANDOM_NO_SHINY)
     {
@@ -4490,7 +4460,7 @@ u32 GetUnownSpeciesId(u32 personality)
     u16 unownLetter = GetUnownLetterByPersonality(personality);
 
     if (unownLetter == 0)
-        return SPECIES_UNOWN_A;
+        return SPECIES_UNOWN;
     return unownLetter + SPECIES_UNOWN_B - 1;
 }
 
@@ -8254,7 +8224,7 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
     if (!GetSetPokedexFlag(nationalNum, getFlagCaseId)) // don't set if it's already set
     {
         GetSetPokedexFlag(nationalNum, caseId);
-        if (GET_BASE_SPECIES_ID(NationalPokedexNumToSpecies(nationalNum)) == SPECIES_UNOWN_A)
+        if (NationalPokedexNumToSpecies(nationalNum) == SPECIES_UNOWN)
             gSaveBlock2Ptr->pokedex.unownPersonality = personality;
         if (NationalPokedexNumToSpecies(nationalNum) == SPECIES_SPINDA)
             gSaveBlock2Ptr->pokedex.spindaPersonality = personality;
@@ -8277,12 +8247,13 @@ const u8 *GetTrainerNameFromId(u16 trainerId)
 
 bool8 HasTwoFramesAnimation(u16 species)
 {
-    species = GET_BASE_SPECIES_ID(species);
-
     return (species != SPECIES_CASTFORM
          && species != SPECIES_SPINDA
-         && species != SPECIES_UNOWN_A
-         && species != SPECIES_CHERRIM);
+         && species != SPECIES_UNOWN
+         && species != SPECIES_CHERRIM
+         && species != SPECIES_CASTFORM_SUNNY
+         && species != SPECIES_CASTFORM_RAINY
+         && species != SPECIES_CASTFORM_SNOWY);
 }
 
 static bool8 ShouldSkipFriendshipChange(void)
