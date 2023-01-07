@@ -47,14 +47,14 @@
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_SOUTHERN_ISLAND_INTERIOR",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 15,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_SOUTHERN_ISLAND_INTERIOR",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

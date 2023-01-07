@@ -60,7 +60,7 @@
 #define VAR_POISON_STEP_COUNTER                          0x402B
 #define VAR_RESET_RTC_ENABLE                             0x402C
 #define VAR_ENIGMA_BERRY_AVAILABLE                       0x402D
-#define VAR_WONDER_NEWS_COUNTER                          0x402E
+#define VAR_WONDER_NEWS_STEP_COUNTER                     0x402E
 
 #define VAR_FRONTIER_MANIAC_FACILITY                     0x402F
 #define VAR_FRONTIER_GAMBLER_CHALLENGE                   0x4030
@@ -303,5 +303,11 @@
 #define VAR_TRAINER_BATTLE_OPPONENT_A 0x8015 // Alias of gTrainerBattleOpponent_A
 
 #define SPECIAL_VARS_END              0x8015
+
+// If an overworld trigger uses this pseudo-variable as the trigger check,
+// then the script will be run using RunScriptImmediately instead of in the
+// global script context. This means it will run faster, but cannot do any
+// cutscenes nor call a wait command. Used for weather effects in vanilla.
+#define TRIGGER_RUN_IMMEDIATELY   0
 
 #endif // GUARD_CONSTANTS_VARS_H

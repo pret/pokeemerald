@@ -760,9 +760,9 @@ static bool32 InitFrontierPass(void)
     case 7:
         if (FreeTempTileDataBuffersIfPossible())
             return FALSE;
-        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
-        FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 30, 20);
-        FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, 30, 20);
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
+        FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
+        FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
         CopyBgTilemapBufferToVram(0);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
@@ -1396,9 +1396,9 @@ static bool32 InitFrontierMap(void)
         SetBgTilemapBuffer(0, sMapData->tilemapBuff0);
         SetBgTilemapBuffer(1, sMapData->tilemapBuff1);
         SetBgTilemapBuffer(2, sMapData->tilemapBuff2);
-        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
-        FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 30, 20);
-        FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, 30, 20);
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
+        FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
+        FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
         CopyBgTilemapBufferToVram(0);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);

@@ -1015,7 +1015,7 @@ static bool8 LoadBerryBlenderGfx(void)
 
 static void DrawBlenderBg(void)
 {
-    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x1E, 0x14);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
     CopyBgTilemapBufferToVram(0);
     ShowBg(0);
     ShowBg(1);
@@ -1036,7 +1036,7 @@ static void InitBerryBlenderWindows(void)
         for (i = 0; i < 5; i++)
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
 
-        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x1E, 0x14);
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
         Menu_LoadStdPalAt(0xE0);
     }
 }
@@ -2283,9 +2283,9 @@ static u32 CalculatePokeblockColor(struct BlenderBerry* berries, s16 *_flavors, 
             j++;
     }
 
-    // If all flavors are 0, or at least 3 were negative/0
+    // If all 5 flavors are 0, or if 4-5 flavors were negative,
     // or if players used the same berry, color is black
-    if (j == 5 || negativeFlavors > 3)
+    if (j == FLAVOR_COUNT || negativeFlavors > 3)
         return PBLOCK_CLR_BLACK;
 
     for (i = 0; i < numPlayers; i++)
@@ -2683,7 +2683,7 @@ static void CB2_EndBlenderGame(void)
         switch (Menu_ProcessInputNoWrapClearOnChoose())
         {
         case 1:
-        case -1:
+        case MENU_B_PRESSED:
             sBerryBlender->yesNoAnswer = 1;
             sBerryBlender->gameEndState++;
             for (i = 0; i < BLENDER_MAX_PLAYERS; i++)

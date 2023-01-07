@@ -5,6 +5,7 @@
 #include "link.h"
 #include "main.h"
 #include "mystery_gift_menu.h"
+#include "mystery_gift_client.h"
 #include "save.h"
 #include "sound.h"
 #include "sprite.h"
@@ -98,7 +99,7 @@ static u8 EReader_Transfer(struct EReaderData *eReader)
 static void OpenEReaderLink(void)
 {
     memset(gDecompressionBuffer, 0, 0x2000);
-    gLinkType = LINKTYPE_EREADER;
+    gLinkType = LINKTYPE_EREADER_EM;
     OpenLink();
     SetSuppressLinkErrorMessage(TRUE);
 }
@@ -259,7 +260,7 @@ void CreateEReaderTask(void)
     data->unused2 = 0;
     data->unused3 = 0;
     data->status = 0;
-    data->unusedBuffer = AllocZeroed(0x40);
+    data->unusedBuffer = AllocZeroed(CLIENT_MAX_MSG_SIZE);
 }
 
 static void ResetTimer(u16 *timer)
