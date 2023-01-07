@@ -9,9 +9,7 @@ void DynamicPlaceholderTextUtil_Reset(void)
 {
     s32 i;
     for (i = 0; i < (s32)ARRAY_COUNT(sStringPointers); i++)
-    {
         sStringPointers[i] = NULL;
-    }
 }
 
 void DynamicPlaceholderTextUtil_SetPlaceholderPtr(u8 idx, const u8 *ptr)
