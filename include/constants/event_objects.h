@@ -276,6 +276,10 @@
 #define OBJ_EVENT_GFX_VAR_E  (OBJ_EVENT_GFX_VARS + 0xE)
 #define OBJ_EVENT_GFX_VAR_F  (OBJ_EVENT_GFX_VARS + 0xF) // 255
 
+#define OBJ_EVENT_GFX_MON_BASE  0x200 // 512
+
+#define OW_SPECIES(x) (x->graphicsId - OBJ_EVENT_GFX_MON_BASE)
+
 #define SHADOW_SIZE_S   0
 #define SHADOW_SIZE_M   1
 #define SHADOW_SIZE_L   2
