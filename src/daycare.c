@@ -743,9 +743,9 @@ void RejectEggFromDayCare(void)
 }
 
 static const struct {
-  u16 noIncenseSpecies;
+  u16 currSpecies;
   u16 item;
-  u16 incenseSpecies;
+  u16 babySpecies;
 } IncenseBabyTable[][3] =
 {
     // Regular offspring,   Item,              Incense Offspring
@@ -769,8 +769,8 @@ static void AlterEggSpeciesWithIncenseItem(u16 *species, struct DayCare *daycare
 
     for (i = 0; i < ARRAY_COUNT(IncenseBabyTable); i++)
     {
-        if (IncenseBabyTable[i]->incenseSpecies == *species && motherItem != IncenseBabyTable[i]->item && fatherItem != IncenseBabyTable[i]->item)
-            *species = IncenseBabyTable[i]->noIncenseSpecies;
+        if (IncenseBabyTable[i]->babySpecies == *species && motherItem != IncenseBabyTable[i]->item && fatherItem != IncenseBabyTable[i]->item)
+            *species = IncenseBabyTable[i]->currSpecies;
     }
 }
 
@@ -780,7 +780,7 @@ static const struct {
   u16 move;
 } BreedingSpecialMoveItemTable[][3] =
 {
-    // Offspring     Item             Move
+    // Offspring,    Item,            Move
     { SPECIES_PICHU, ITEM_LIGHT_BALL, MOVE_VOLT_TACKLE },
 };
 
