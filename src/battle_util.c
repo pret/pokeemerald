@@ -2069,7 +2069,7 @@ u32 GetBattlerFriendshipScore(u8 battlerId)
 
 static void TryToRevertMimicry(void)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -4295,7 +4295,7 @@ static u8 ForewarnChooseMove(u32 battler)
     Free(data);
 }
 
-void ChangeTypeBasedOnTerrain(u8 battlerId)
+bool8 ChangeTypeBasedOnTerrain(u8 battlerId)
 {
     u8 battlerType;
     u16 terrainFlags = VarGet(VAR_TERRAIN) & STATUS_FIELD_TERRAIN_ANY;
@@ -4312,9 +4312,11 @@ void ChangeTypeBasedOnTerrain(u8 battlerId)
     else if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)
         battlerType = TYPE_PSYCHIC;
     else // failsafe
-        battlerType = gSpeciesInfo[battlerId].type1;
+        return FALSE;
+
     SET_BATTLER_TYPE(battlerId, battlerType);
     PREPARE_TYPE_BUFFER(gBattleTextBuff1, battlerType);
+    return TRUE;
 }
 
 u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 moveArg)
@@ -6206,7 +6208,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         switch (GetBattlerAbility(battler))
         {
         case ABILITY_MIMICRY:
-            if (!gSpecialStatuses[battler].terrainAbilityDone)
+            if (!gSpecialStatuses[battler].terrainAbilityDone && ChangeTypeBasedOnTerrain(battler))
             {
                 gSpecialStatuses[battler].terrainAbilityDone = TRUE;
                 ChangeTypeBasedOnTerrain(battler);
