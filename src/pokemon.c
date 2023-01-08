@@ -3481,11 +3481,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         else
 #endif
         {
-        #if P_SHINY_BASE_CHANCE >= GEN_6
-            u32 totalRerolls = 1;
-        #else
             u32 totalRerolls = 0;
-        #endif
             if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
                 totalRerolls += I_SHINY_CHARM_REROLLS;
             if (LURE_STEP_COUNT != 0)
@@ -8621,6 +8617,8 @@ void TrySpecialOverworldEvo(void)
 
 bool32 ShouldShowFemaleDifferences(u16 species, u32 personality)
 {
+    if (species >= NUM_SPECIES)
+        return FALSE;
     return (gSpeciesInfo[species].flags & SPECIES_FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
 }
 

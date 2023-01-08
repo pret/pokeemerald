@@ -286,6 +286,8 @@ const u32 gBattleAnimSpritePal_Tornado[] = INCBIN_U32("graphics/battle_anims/spr
 const u32 gBattleAnimSpriteGfx_ZMoveSymbol[] = INCBIN_U32("graphics/battle_anims/sprites/z_move_symbol.4bpp.lz");
 const u32 gBattleAnimSpritePal_ZMoveSymbol[] = INCBIN_U32("graphics/battle_anims/sprites/z_move_symbol.gbapal.lz");
 
+const u32 gBattleAnimSpriteGfx_Teapot[] = INCBIN_U32("graphics/battle_anims/sprites/new/teapot.4bpp.lz");
+const u32 gBattleAnimSpritePal_Teapot[] = INCBIN_U32("graphics/battle_anims/sprites/new/teapot.gbapal.lz");
 
 // Battle anims
 const u32 gBattleAnimSpriteGfx_Bubble[] = INCBIN_U32("graphics/battle_anims/sprites/bubble.4bpp.lz");
@@ -682,7 +684,7 @@ const u8 gHealthboxElementsGfxTable[] = INCBIN_U8("graphics/battle_interface/hpb
                                                   "graphics/battle_interface/hpbar_anim.4bpp",
                                                   "graphics/battle_interface/misc_frameend.4bpp",
                                                   "graphics/battle_interface/ball_display.4bpp",
-                                                  "graphics/battle_interface/ball_display_unused_extra.4bpp",
+                                                  "graphics/battle_interface/ball_caught_indicator.4bpp",
                                                   "graphics/battle_interface/status2.4bpp",  // these three duplicate sets of graphics are for the opponent pokemon
                                                   "graphics/battle_interface/status3.4bpp",  // and are also for use in double battles. they use dynamic palettes so
                                                   "graphics/battle_interface/status4.4bpp",  // coloring them is an extreme headache and wont be done for now
