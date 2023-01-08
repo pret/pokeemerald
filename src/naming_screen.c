@@ -1395,7 +1395,7 @@ static void NamingScreen_NoIcon(void)
 
 static void NamingScreen_CreatePlayerIcon(void)
 {
-    u8 rivalGfxId;
+    u16 rivalGfxId;
     u8 spriteId;
 
     rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, sNamingScreen->monSpecies);
@@ -2584,5 +2584,3 @@ static const struct SpritePalette sSpritePalettes[] =
     {gNamingScreenMenu_Pal[4], PALTAG_OK_BUTTON},
     {}
 };
-
-

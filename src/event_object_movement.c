@@ -1547,7 +1547,7 @@ u8 SpawnSpecialObjectEvent(struct ObjectEventTemplate *objectEventTemplate)
     return TrySpawnObjectEventTemplate(objectEventTemplate, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
 }
 
-u8 SpawnSpecialObjectEventParameterized(u8 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 elevation)
+u8 SpawnSpecialObjectEventParameterized(u16 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 elevation)
 {
     struct ObjectEventTemplate objectEventTemplate;
 
@@ -1657,7 +1657,7 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
 // A unique id is given as an argument and stored in the sprite data to allow referring back to the same virtual object.
 // They can be turned (and, in the case of the Union Room, animated teleporting in and out) but do not have movement types
 // or any of the other data normally associated with object events.
-u8 CreateVirtualObject(u8 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 elevation, u8 direction)
+u8 CreateVirtualObject(u16 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 elevation, u8 direction)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -1846,7 +1846,7 @@ void UpdateFollowingPokemon(void) { // Update following pokemon if any
   bool8 shiny;
   u8 form;
   // Avoid spawning large (64x64) follower pokemon inside buildings
-  if (GetFollowerInfo(&species, &form, &shiny) && !(gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(species, 0)->height == 64) && !FlagGet(FLAG_TEMP_HIDE_FOLLOWER) && FALSE) { // TODO
+  if (GetFollowerInfo(&species, &form, &shiny) && !(gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(species, 0)->height == 64) && !FlagGet(FLAG_TEMP_HIDE_FOLLOWER)) {
     if (objEvent == NULL) { // Spawn follower
       struct ObjectEventTemplate template = {
         .localId = OBJ_EVENT_ID_FOLLOWER,
@@ -2357,14 +2357,14 @@ static void ObjectEventSetGraphics(struct ObjectEvent *objectEvent, const struct
   }
 }
 
-void ObjectEventSetGraphicsId(struct ObjectEvent *objectEvent, u8 graphicsId)
+void ObjectEventSetGraphicsId(struct ObjectEvent *objectEvent, u16 graphicsId)
 {
     objectEvent->graphicsId = graphicsId;
     ObjectEventSetGraphics(objectEvent, GetObjectEventGraphicsInfo(graphicsId));
     objectEvent->graphicsId = graphicsId;
 }
 
-void ObjectEventSetGraphicsIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 graphicsId)
+void ObjectEventSetGraphicsIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u16 graphicsId)
 {
     u8 objectEventId;
 
@@ -2396,7 +2396,7 @@ void PlayerObjectTurn(struct PlayerAvatar *playerAvatar, u8 direction)
 }
 
 static void SetBerryTreeGraphics(struct ObjectEvent *objectEvent, u8 berryId, u8 berryStage) {
-  const u8 graphicsId = gBerryTreeObjectEventGraphicsIdTablePointers[berryId][berryStage];
+  const u16 graphicsId = gBerryTreeObjectEventGraphicsIdTablePointers[berryId][berryStage];
   const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
   struct Sprite *sprite = &gSprites[objectEvent->spriteId];
   UpdateSpritePalette(&sObjectEventSpritePalettes[gBerryTreePaletteSlotTablePointers[berryId][berryStage]-2], sprite);
@@ -2440,7 +2440,7 @@ static void get_berry_tree_graphics(struct ObjectEvent *objectEvent, struct Spri
     }
 }
 
-const struct ObjectEventGraphicsInfo *GetObjectEventGraphicsInfo(u8 graphicsId)
+const struct ObjectEventGraphicsInfo *GetObjectEventGraphicsInfo(u16 graphicsId)
 {
     u8 bard;
 
@@ -9751,7 +9751,7 @@ void TurnVirtualObject(u8 virtualObjId, u8 direction)
         StartSpriteAnim(&gSprites[spriteId], GetFaceDirectionAnimNum(direction));
 }
 
-void SetVirtualObjectGraphics(u8 virtualObjId, u8 graphicsId)
+void SetVirtualObjectGraphics(u8 virtualObjId, u16 graphicsId)
 {
     int spriteId = GetVirtualObjectSpriteId(virtualObjId);
 
