@@ -762,7 +762,7 @@ static const struct {
 
 static void AlterEggSpeciesWithIncenseItem(u16 *species, struct DayCare *daycare)
 {
-    u16 i;
+    u32 i;
     u16 motherItem, fatherItem;
     motherItem = GetBoxMonData(&daycare->mons[0].mon, MON_DATA_HELD_ITEM);
     fatherItem = GetBoxMonData(&daycare->mons[1].mon, MON_DATA_HELD_ITEM);
@@ -770,7 +770,10 @@ static void AlterEggSpeciesWithIncenseItem(u16 *species, struct DayCare *daycare
     for (i = 0; i < ARRAY_COUNT(IncenseBabyTable); i++)
     {
         if (IncenseBabyTable[i]->babySpecies == *species && motherItem != IncenseBabyTable[i]->item && fatherItem != IncenseBabyTable[i]->item)
+        {
             *species = IncenseBabyTable[i]->currSpecies;
+            break;
+        }
     }
 }
 
