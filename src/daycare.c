@@ -762,7 +762,7 @@ static const struct {
 
 static void AlterEggSpeciesWithIncenseItem(u16 *species, struct DayCare *daycare)
 {
-    u8 i;
+    u16 i;
     u16 motherItem, fatherItem;
     motherItem = GetBoxMonData(&daycare->mons[0].mon, MON_DATA_HELD_ITEM);
     fatherItem = GetBoxMonData(&daycare->mons[1].mon, MON_DATA_HELD_ITEM);
@@ -774,15 +774,31 @@ static void AlterEggSpeciesWithIncenseItem(u16 *species, struct DayCare *daycare
     }
 }
 
-static void GiveVoltTackleIfLightBall(struct Pokemon *mon, struct DayCare *daycare)
+static const struct {
+  u16 offspring;
+  u16 item;
+  u16 move;
+} BreedingSpecialMoveItemTable[][3] =
 {
+    // Offspring     Item             Move
+    { SPECIES_PICHU, ITEM_LIGHT_BALL, MOVE_VOLT_TACKLE },
+};
+
+static void GiveMoveIfItem(struct Pokemon *mon, struct DayCare *daycare)
+{
+    u16 i, species = GetMonData(mon, MON_DATA_SPECIES);
     u32 motherItem = GetBoxMonData(&daycare->mons[0].mon, MON_DATA_HELD_ITEM);
     u32 fatherItem = GetBoxMonData(&daycare->mons[1].mon, MON_DATA_HELD_ITEM);
 
-    if (motherItem == ITEM_LIGHT_BALL || fatherItem == ITEM_LIGHT_BALL)
+    for (i = 0; i < ARRAY_COUNT(BreedingSpecialMoveItemTable); i++)
     {
-        if (GiveMoveToMon(mon, MOVE_VOLT_TACKLE) == MON_HAS_MAX_MOVES)
-            DeleteFirstMoveAndGiveMoveToMon(mon, MOVE_VOLT_TACKLE);
+        if (BreedingSpecialMoveItemTable[i]->offspring == species
+            && (motherItem == BreedingSpecialMoveItemTable[i]->item ||
+                fatherItem == BreedingSpecialMoveItemTable[i]->item))
+        {
+            if (GiveMoveToMon(mon, BreedingSpecialMoveItemTable[i]->move) == MON_HAS_MAX_MOVES)
+                DeleteFirstMoveAndGiveMoveToMon(mon, BreedingSpecialMoveItemTable[i]->move);
+        }
     }
 }
 
@@ -855,8 +871,7 @@ static void _GiveEggFromDaycare(struct DayCare *daycare)
     InheritIVs(&egg, daycare);
     BuildEggMoveset(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
 
-    if (species == SPECIES_PICHU)
-        GiveVoltTackleIfLightBall(&egg, daycare);
+    GiveMoveIfItem(&egg, daycare);
 
     isEgg = TRUE;
     SetMonData(&egg, MON_DATA_IS_EGG, &isEgg);
