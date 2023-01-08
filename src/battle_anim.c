@@ -739,7 +739,7 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
         battlerSpriteId = gBattlerSpriteIds[battlerId];
 
         gBattle_BG1_X =  -(gSprites[battlerSpriteId].x + gSprites[battlerSpriteId].x2) + 0x20;
-        if (IsContest())
+        if (IsContest() && IsSpeciesNotUnown(gContestResources->moveAnim->species))
             gBattle_BG1_X--;
 
         gBattle_BG1_Y =  -(gSprites[battlerSpriteId].y + gSprites[battlerSpriteId].y2) + 0x20;
@@ -797,20 +797,23 @@ static void FlipBattlerBgTiles(void)
     struct BattleAnimBgData animBg;
     u16 *ptr;
 
-    GetBattleAnimBg1Data(&animBg);
-    ptr = animBg.bgTilemap;
-    for (i = 0; i < 8; i++)
+    if (IsSpeciesNotUnown(gContestResources->moveAnim->species))
     {
-        for (j = 0; j < 4; j++)
+        GetBattleAnimBg1Data(&animBg);
+        ptr = animBg.bgTilemap;
+        for (i = 0; i < 8; i++)
         {
-            u16 temp;
-            SWAP(ptr[j + i * 32], ptr[7 - j + i * 32], temp);
+            for (j = 0; j < 4; j++)
+            {
+                u16 temp;
+                SWAP(ptr[j + i * 32], ptr[7 - j + i * 32], temp);
+            }
         }
-    }
-    for (i = 0; i < 8; i++)
-    {
-        for (j = 0; j < 8; j++)
-            ptr[j + i * 32] ^= 0x400;
+        for (i = 0; i < 8; i++)
+        {
+            for (j = 0; j < 8; j++)
+                ptr[j + i * 32] ^= 0x400;
+        }
     }
 }
 

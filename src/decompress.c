@@ -83,7 +83,16 @@ void HandleLoadSpecialPokePic(bool32 isFrontPic, void *dest, s32 species, u32 pe
 
 void LoadSpecialPokePic(void *dest, s32 species, u32 personality, bool8 isFrontPic)
 {
-    if (species > NUM_SPECIES) // is species unknown? draw the ? icon
+    if (species == SPECIES_UNOWN)
+    {
+        u32 id = GetUnownSpeciesId(personality);
+
+        if (!isFrontPic)
+            LZ77UnCompWram(gMonBackPicTable[id].data, dest);
+        else
+            LZ77UnCompWram(gMonFrontPicTable[id].data, dest);
+    }
+    else if (species > NUM_SPECIES) // is species unknown? draw the ? icon
     {
         if (isFrontPic)
             LZ77UnCompWram(gMonFrontPicTable[0].data, dest);
