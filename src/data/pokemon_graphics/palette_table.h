@@ -1339,7 +1339,7 @@ const struct CompressedSpritePalette gMonPaletteTableFemale[] =
 {
     SPECIES_PAL(EEVEE, gMonPalette_Eevee),
 #if P_GEN_4_POKEMON == TRUE
-    SPECIES_PAL(COMBEE, gMonPalette_Combee),
+    SPECIES_PAL(COMBEE, gMonPalette_CombeeF),
     SPECIES_PAL(STARLY, gMonPalette_Starly),
     SPECIES_PAL(STARAVIA, gMonPalette_Staravia),
     SPECIES_PAL(STARAPTOR, gMonPalette_Staraptor),
@@ -1356,7 +1356,7 @@ const struct CompressedSpritePalette gMonPaletteTableFemale[] =
     SPECIES_PAL(JELLICENT, gMonPalette_JellicentF),
 #endif
 #if P_GEN_6_POKEMON == TRUE
-    SPECIES_PAL(PYROAR, gMonPalette_PyroarF),
+    SPECIES_PAL(PYROAR, gMonPalette_Pyroar),
 #endif
 #if P_GEN_8_POKEMON == TRUE
     SPECIES_PAL(BASCULEGION, gMonPalette_CircledQuestionMark), // gMonPalette_BasculegionF),

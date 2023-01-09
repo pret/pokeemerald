@@ -104,6 +104,7 @@ struct DisableStruct
     u8 noRetreat:1;
     u8 tarShot:1;
     u8 octolock:1;
+    u8 cudChew:1;
 };
 
 struct ProtectStruct
@@ -191,6 +192,8 @@ struct SpecialStatus
     u8 dancerUsedMove:1;
     u8 dancerOriginalTarget:3;
     // End of byte
+    u8 weatherAbilityDone:1;
+    u8 terrainAbilityDone:1;
 };
 
 struct SideTimer
@@ -683,6 +686,13 @@ struct BattleStruct
     gBattleMons[battlerId].type2 = type;            \
     gBattleMons[battlerId].type3 = TYPE_MYSTERY;    \
 }
+#define RESTORE_BATTLER_TYPE(battlerId)                                                 \
+{                                                                                       \
+    gBattleMons[battlerId].type1 = gSpeciesInfo[gBattleMons[battlerId].species].type1;  \
+    gBattleMons[battlerId].type2 = gSpeciesInfo[gBattleMons[battlerId].species].type2;  \
+    gBattleMons[battlerId].type3 = TYPE_MYSTERY;                                        \
+}
+
 
 #define IS_BATTLER_PROTECTED(battlerId)(gProtectStructs[battlerId].protected                                           \
                                         || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_WIDE_GUARD           \
