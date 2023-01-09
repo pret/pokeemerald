@@ -5108,19 +5108,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                     effect++;
                 }
                 break;
-            case ABILITY_ICE_FACE:
-                if (IsBattlerWeatherAffected(battler, B_WEATHER_HAIL)
-                 && gBattleMons[battler].species == SPECIES_EISCUE_NOICE_FACE
-                 && !(gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
-                 && gBattleStruct->allowedToChangeFormInWeather[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)])
-                {
-                    gBattleStruct->allowedToChangeFormInWeather[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)] = FALSE;
-                    gBattleMons[battler].species = SPECIES_EISCUE;
-                    gBattleScripting.battler = battler; // For STRINGID_PKMNTRANSFORMED
-                    BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeWithStringEnd3);
-                    effect++;
-                }
-                break;
             }
         }
         break;
@@ -6192,6 +6179,18 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             {
                 BattleScriptPushCursorAndCallback(BattleScript_WeatherFormChange);
                 *(&gBattleStruct->formToChangeInto) = effect - 1;
+            }
+            break;
+        case ABILITY_ICE_FACE:
+            if (IsBattlerWeatherAffected(battler, B_WEATHER_HAIL)
+             && gBattleMons[battler].species == SPECIES_EISCUE_NOICE_FACE
+             && !(gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
+             && gBattleStruct->allowedToChangeFormInWeather[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)])
+            {
+                gBattleStruct->allowedToChangeFormInWeather[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)] = FALSE;
+                gBattleMons[battler].species = SPECIES_EISCUE;
+                BattleScriptPushCursorAndCallback(BattleScript_BattlerFormChangeWithStringEnd3);
+                effect++;
             }
             break;
         case ABILITY_PROTOSYNTHESIS:
@@ -10126,6 +10125,7 @@ void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
     static const u16 species[][3] =
     {
         // Changed Form ID                      Default Form ID               Should change on switch
+        {SPECIES_EISCUE_NOICE_FACE,             SPECIES_EISCUE,               TRUE},
         {SPECIES_MIMIKYU_BUSTED,                SPECIES_MIMIKYU,              FALSE},
         {SPECIES_GRENINJA_ASH,                  SPECIES_GRENINJA_BATTLE_BOND, FALSE},
         {SPECIES_MELOETTA_PIROUETTE,            SPECIES_MELOETTA,             FALSE},

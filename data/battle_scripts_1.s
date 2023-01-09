@@ -7822,27 +7822,18 @@ BattleScript_TargetFormChangeWithString::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
-BattleScript_TargetFormChangeWithStringEnd3::
-	call BattleScript_TargetFormChangeWithString
-	end3
-
-BattleScript_AttackerFormChangeWithString::
+BattleScript_BattlerFormChangeWithStringEnd3::
 	pause 5
-	copybyte gBattlerAbility, gBattlerAttacker
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
-	handleformchange BS_ATTACKER, 0
-	handleformchange BS_ATTACKER, 1
-	playanimation BS_ATTACKER, B_ANIM_FORM_CHANGE, NULL
+	handleformchange BS_SCRIPTING, 0
+	handleformchange BS_SCRIPTING, 1
+	playanimation BS_SCRIPTING, B_ANIM_FORM_CHANGE, NULL
 	waitanimation
-	handleformchange BS_ATTACKER, 2
+	handleformchange BS_SCRIPTING, 2
 	printstring STRINGID_PKMNTRANSFORMED
 	waitmessage B_WAIT_TIME_LONG
-	return
-
-BattleScript_AttackerFormChangeWithStringEnd3::
-	call BattleScript_AttackerFormChangeWithString
 	end3
 
 BattleScript_IllusionOff::
