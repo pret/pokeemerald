@@ -129,17 +129,14 @@ Route115_EventScript_Marlene::
 	msgbox Route115_Text_MarlenePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route115_Text_NeverKnowWhenCavePokemonWillAppear:
-	.string "Exploring a cave isn't like walking\n"
-	.string "on a road.\p"
-	.string "You never know when wild POKéMON will\n"
-	.string "appear. It's full of suspense.$"
-
-Route115_Text_RouteSignRustboro:
-	.string "ROUTE 115\n"
-	.string "{DOWN_ARROW} RUSTBORO CITY$"
-
-Route115_Text_MeteorFallsSign:
-	.string "METEOR FALLS\n"
-	.string "FALLARBOR TOWN THROUGH HERE$"
-
+.ifdef ENGLISH
+	.include "data/maps/Route115/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/Route115/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/Route115/text_it.inc"
+.endif
+.endif
+.endif
