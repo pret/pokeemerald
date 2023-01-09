@@ -448,6 +448,7 @@ extern const u8 BattleScript_SupremeOverlordActivates[];
 extern const u8 BattleScript_CostarActivates[];
 extern const u8 BattleScript_ToxicDebrisActivates[];
 extern const u8 BattleScript_EarthEaterActivates[];
+extern const u8 BattleScript_MimicryActivates_End3[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
