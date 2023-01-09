@@ -2556,7 +2556,7 @@ u8 DoFieldEndTurnEffects(void)
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_WEATHER_FORM:
-            AbilityBattleEffects(ABILITYEFFECT_WEATHER_FORM, 0, 0, 0, 0);
+            AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, 0, 0, 0, 0);
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_STATUS_HEAL:
@@ -4815,15 +4815,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
-        case ABILITY_PROTOSYNTHESIS:
-            if (!gSpecialStatuses[battler].switchInAbilityDone && gBattleWeather & B_WEATHER_SUN)
-            {
-                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
-                PREPARE_STAT_BUFFER(gBattleTextBuff1, GetHighestStatId(battler));
-                BattleScriptPushCursorAndCallback(BattleScript_ProtosynthesisActivates);
-                effect++;
-            }
-            break;
         case ABILITY_VESSEL_OF_RUIN:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
@@ -6008,31 +5999,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
         }
         break;
-    case ABILITYEFFECT_WEATHER_FORM: // 6
-        for (battler = 0; battler < gBattlersCount; battler++)
-        {
-            switch (gBattleMons[battler].species)
-            {
-            case SPECIES_CASTFORM:
-            case SPECIES_CHERRIM:
-#ifdef POKEMON_EXPANSION
-            case SPECIES_CASTFORM_RAINY:
-            case SPECIES_CASTFORM_SNOWY:
-            case SPECIES_CASTFORM_SUNNY:
-            case SPECIES_CHERRIM_SUNSHINE:
-#endif
-                effect = TryWeatherFormChange(battler);
-                if (effect != 0)
-                {
-                    BattleScriptPushCursorAndCallback(BattleScript_WeatherFormChange);
-                    gBattleScripting.battler = battler;
-                    gBattleStruct->formToChangeInto = effect - 1;
-                    return effect;
-                }
-                break;
-            }
-        }
-        break;
     case ABILITYEFFECT_SYNCHRONIZE:
         if (gLastUsedAbility == ABILITY_SYNCHRONIZE && (gHitMarker & HITMARKER_SYNCHRONISE_EFFECT))
         {
@@ -6174,7 +6140,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         break;
     case ABILITYEFFECT_ON_WEATHER: // For ability effects that activate when the battle weather changes.
         battler = gBattlerAbility = gBattleScripting.battler;
-        switch (GetBattlerAbility(battler))
+        gLastUsedAbility = GetBattlerAbility(battler);
+        switch (gLastUsedAbility)
         {
         case ABILITY_FORECAST:
 #if B_WEATHER_FORMS >= GEN_5
@@ -6190,8 +6157,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_PROTOSYNTHESIS:
-            if (IsBattlerWeatherAffected(battler, B_WEATHER_SUN))
+            if (!gSpecialStatuses[battler].terrainAbilityDone && IsBattlerWeatherAffected(battler, B_WEATHER_SUN))
             {
+                gSpecialStatuses[battler].terrainAbilityDone = TRUE;
                 PREPARE_STAT_BUFFER(gBattleTextBuff1, GetHighestStatId(battler));
                 BattleScriptPushCursorAndCallback(BattleScript_ProtosynthesisActivates);
                 effect++;
@@ -6201,7 +6169,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         break;
     case ABILITYEFFECT_ON_TERRAIN:  // For ability effects that activate when the field terrain changes.
         battler = gBattlerAbility = gBattleScripting.battler;
-        switch (GetBattlerAbility(battler))
+        gLastUsedAbility = GetBattlerAbility(battler);
+        switch (gLastUsedAbility)
         {
         case ABILITY_MIMICRY:
             if (!gSpecialStatuses[battler].terrainAbilityDone && ChangeTypeBasedOnTerrain(battler))
