@@ -656,6 +656,7 @@ struct BattleStruct
     u8 beatUpSlot:3;
     u8 targetsDone[MAX_BATTLERS_COUNT]; // Each battler as a bit.
     u16 overwrittenAbilities[MAX_BATTLERS_COUNT];    // abilities overwritten during battle (keep separate from battle history in case of switching)
+    bool8 allowedToChangeFormInWeather[PARTY_SIZE][2]; // For each party member and side, used by Ice Face.
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)
