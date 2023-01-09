@@ -4298,10 +4298,6 @@ static u8 ForewarnChooseMove(u32 battler)
 bool8 ChangeTypeBasedOnTerrain(u8 battlerId)
 {
     u8 battlerType;
-    u16 terrainFlags = VarGet(VAR_TERRAIN) & STATUS_FIELD_TERRAIN_ANY;
-
-    if (terrainFlags && gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
-        gFieldStatuses = terrainFlags | STATUS_FIELD_TERRAIN_PERMANENT; // terrain is permanent
 
     if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
         battlerType = TYPE_ELECTRIC;
