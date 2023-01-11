@@ -8033,10 +8033,10 @@ u8 IsMonDisobedient(void)
             return 0;
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
             return 0;
-        #if B_OBEDIENCE_MECHANICS < GEN_8
-            if (!IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName))
-                return 0;
-        #endif
+    #if B_OBEDIENCE_MECHANICS < GEN_8
+        if (!IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName))
+            return 0;
+    #endif
         if (FlagGet(FLAG_BADGE08_GET))
             return 0;
 
@@ -8050,11 +8050,13 @@ u8 IsMonDisobedient(void)
             obedienceLevel = 70;
     }
 
-    #if B_OBEDIENCE_MECHANICS >= GEN_8
+#if B_OBEDIENCE_MECHANICS >= GEN_8
     if (!IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName))
         levelReferenced = gBattleMons[gBattlerAttacker].metLevel;
     else
-    #endif
+#else
+    if (gBattleMons[gBattlerAttacker].level <= obedienceLevel)
+#endif
         levelReferenced = gBattleMons[gBattlerAttacker].level;
 
     if (levelReferenced <= obedienceLevel)
