@@ -193,8 +193,7 @@ struct ObjectEvent
              u32 fixedPriority:1;
              u32 hideReflection:1;
              u32 shiny:1; // OW mon shininess
-    /*0x04*/ u16 graphicsId:11; // 11 bits; 2048 entries
-    /*0x05*/ u16 form:5;
+    /*0x04*/ u16 graphicsId; // 11 bits for species; high 5 bits for form
     /*0x06*/ u8 movementType;
     /*0x07*/ u8 trainerType;
     /*0x08*/ u8 localId;
