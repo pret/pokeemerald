@@ -1540,12 +1540,12 @@ static void PlayerPartnerHandleChoosePokemon(void)
 {
     s32 chosenMonId = GetMostSuitableMonToSwitchInto();
 
-    if (chosenMonId == 6) // just switch to the next mon
+    if (chosenMonId == PARTY_SIZE) // just switch to the next mon
     {
         u8 playerMonIdentity = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
         u8 selfIdentity = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
 
-        for (chosenMonId = 3; chosenMonId < 6; chosenMonId++)
+        for (chosenMonId = PARTY_SIZE / 2; chosenMonId < PARTY_SIZE; chosenMonId++)
         {
             if (GetMonData(&gPlayerParty[chosenMonId], MON_DATA_HP) != 0
                 && chosenMonId != gBattlerPartyIndexes[playerMonIdentity]

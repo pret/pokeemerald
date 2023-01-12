@@ -1151,7 +1151,7 @@ static void OpponentHandleLoadMonSprite(void)
 
 static void OpponentHandleSwitchInAnim(void)
 {
-    *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = 6;
+    *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
     gBattlerPartyIndexes[gActiveBattler] = gBattleBufferA[gActiveBattler][1];
     StartSendOutAnim(gActiveBattler, gBattleBufferA[gActiveBattler][2]);
     gBattlerControllerFuncs[gActiveBattler] = SwitchIn_TryShinyAnim;
@@ -1635,13 +1635,13 @@ static void OpponentHandleChoosePokemon(void)
             if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
             {
                 if (gActiveBattler == 1)
-                    firstId = 0, lastId = 3;
+                    firstId = 0, lastId = PARTY_SIZE / 2;
                 else
-                    firstId = 3, lastId = 6;
+                    firstId = PARTY_SIZE / 2, lastId = PARTY_SIZE;
             }
             else
             {
-                firstId = 0, lastId = 6;
+                firstId = 0, lastId = PARTY_SIZE;
             }
 
             for (chosenMonId = firstId; chosenMonId < lastId; chosenMonId++)
