@@ -1317,6 +1317,7 @@ static u8 InitObjectEventStateFromTemplate(const struct ObjectEventTemplate *tem
     y = template->y + MAP_OFFSET;
     objectEvent->active = TRUE;
     objectEvent->triggerGroundEffectsOnMove = TRUE;
+    objectEvent->expanded = TRUE;
     objectEvent->graphicsId = PackGraphicsId(template);
     if (objectEvent->graphicsId >= OBJ_EVENT_GFX_MON_BASE) {
         if (template->script && template->script[0] == 0x7d)
@@ -1506,8 +1507,6 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
 static u16 PackGraphicsId(const struct ObjectEventTemplate *template) {
     u16 graphicsId = template->graphicsId;
     u32 form = 0;
-    if (!template)
-        return 0;
     // set form based on template's script,
     // if first command is bufferspeciesname
     if (graphicsId >= OBJ_EVENT_GFX_MON_BASE) {
