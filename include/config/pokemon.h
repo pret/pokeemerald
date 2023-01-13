@@ -11,6 +11,7 @@
 #define P_NIDORAN_M_DITTO_BREED     GEN_LATEST  // Since Gen 5, when Nidoran♂ breeds with Ditto it can produce Nidoran♀ offspring. Before, it would only yield male offspring. This change also applies to Volbeat.
 #define P_INCENSE_BREEDING          GEN_LATEST  // Since Gen 9, cross-generation Baby Pokémon don't require Incense being held by the parents to be obtained via breeding.
 #define P_EGG_HATCH_LEVEL           GEN_LATEST  // Since Gen 4, Pokémon will hatch from eggs at level 1 instead of 5.
+#define P_BALL_INHERITING           GEN_LATEST  // Since Gen 6, Eggs from the Daycare will inherit the Poké Ball from their mother. From Gen7 onwards, the father can pass it down as well, as long as it's of the same species as the mother.
 
 // Other settings
 #define P_SHEDINJA_BALL             GEN_LATEST  // Since Gen 4, Shedinja requires a Poké Ball for its evolution. In Gen 3, Shedinja inherits Nincada's Ball.
