@@ -193,6 +193,8 @@ struct SpecialStatus
     u8 dancerUsedMove:1;
     u8 dancerOriginalTarget:3;
     // End of byte
+    u8 weatherAbilityDone:1;
+    u8 terrainAbilityDone:1;
 };
 
 struct SideTimer
@@ -649,6 +651,7 @@ struct BattleStruct
     u8 beatUpSlot:3;
     u8 targetsDone[MAX_BATTLERS_COUNT]; // Each battler as a bit.
     u16 overwrittenAbilities[MAX_BATTLERS_COUNT];    // abilities overwritten during battle (keep separate from battle history in case of switching)
+    bool8 allowedToChangeFormInWeather[PARTY_SIZE][2]; // For each party member and side, used by Ice Face.
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)
@@ -678,6 +681,13 @@ struct BattleStruct
     gBattleMons[battlerId].type2 = type;            \
     gBattleMons[battlerId].type3 = TYPE_MYSTERY;    \
 }
+#define RESTORE_BATTLER_TYPE(battlerId)                                                 \
+{                                                                                       \
+    gBattleMons[battlerId].type1 = gSpeciesInfo[gBattleMons[battlerId].species].type1;  \
+    gBattleMons[battlerId].type2 = gSpeciesInfo[gBattleMons[battlerId].species].type2;  \
+    gBattleMons[battlerId].type3 = TYPE_MYSTERY;                                        \
+}
+
 
 #define IS_BATTLER_PROTECTED(battlerId)(gProtectStructs[battlerId].protected                                           \
                                         || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_WIDE_GUARD           \

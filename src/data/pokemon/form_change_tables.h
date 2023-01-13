@@ -603,6 +603,12 @@ static const struct FormChange sCramorantFormChangeTable[] = {
     {FORM_CHANGE_TERMINATOR},
 };
 
+static const struct FormChange sEiscueFormChangeTable[] = {
+    {FORM_CHANGE_FAINT,             SPECIES_EISCUE},
+    {FORM_CHANGE_END_BATTLE,        SPECIES_EISCUE},
+    {FORM_CHANGE_TERMINATOR},
+};
+
 static const struct FormChange sMorpekoFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_TURN_END,   SPECIES_MORPEKO_HANGRY, ABILITY_HUNGER_SWITCH},
     {FORM_CHANGE_BATTLE_TURN_END,   SPECIES_MORPEKO       , ABILITY_HUNGER_SWITCH},

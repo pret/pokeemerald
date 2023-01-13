@@ -684,7 +684,7 @@ const u8 gHealthboxElementsGfxTable[] = INCBIN_U8("graphics/battle_interface/hpb
                                                   "graphics/battle_interface/hpbar_anim.4bpp",
                                                   "graphics/battle_interface/misc_frameend.4bpp",
                                                   "graphics/battle_interface/ball_display.4bpp",
-                                                  "graphics/battle_interface/ball_display_unused_extra.4bpp",
+                                                  "graphics/battle_interface/ball_caught_indicator.4bpp",
                                                   "graphics/battle_interface/status2.4bpp",  // these three duplicate sets of graphics are for the opponent pokemon
                                                   "graphics/battle_interface/status3.4bpp",  // and are also for use in double battles. they use dynamic palettes so
                                                   "graphics/battle_interface/status4.4bpp",  // coloring them is an extreme headache and wont be done for now

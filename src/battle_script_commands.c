@@ -1808,7 +1808,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
 
     if (atkHoldEffect == HOLD_EFFECT_WIDE_LENS)
         calc = (calc * (100 + atkParam)) / 100;
-    else if (atkHoldEffect == HOLD_EFFECT_ZOOM_LENS && GetBattlerTurnOrderNum(battlerAtk) > GetBattlerTurnOrderNum(battlerDef));
+    else if (atkHoldEffect == HOLD_EFFECT_ZOOM_LENS && GetBattlerTurnOrderNum(battlerAtk) > GetBattlerTurnOrderNum(battlerDef))
         calc = (calc * (100 + atkParam)) / 100;
 
     if (gProtectStructs[battlerAtk].usedMicleBerry)
@@ -5248,8 +5248,12 @@ static void Cmd_moveend(void)
                 && gBattleMons[gBattlerTarget].hp != 0
                 && gBattlerAttacker != gBattlerTarget
                 && gSpecialStatuses[gBattlerTarget].specialDmg
-                && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-                && (moveType == TYPE_FIRE || gBattleMoves[gCurrentMove].effect == EFFECT_SCALD))
+                && (moveType == TYPE_FIRE
+            #if B_BURN_HIT_THAW >= GEN_6
+                    || gBattleMoves[gCurrentMove].effect == EFFECT_BURN_HIT
+            #endif
+                )
+                && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
             {
                 gBattleMons[gBattlerTarget].status1 &= ~STATUS1_FREEZE;
                 gActiveBattler = gBattlerTarget;
@@ -6777,9 +6781,10 @@ static void Cmd_switchineffects(void)
         gDisableStructs[gActiveBattler].truantSwitchInHack = 0;
 
         if (AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, gActiveBattler, 0, 0, 0)
-            || ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gActiveBattler, FALSE)
-            || AbilityBattleEffects(ABILITYEFFECT_TRACE2, 0, 0, 0, 0)
-            || AbilityBattleEffects(ABILITYEFFECT_WEATHER_FORM, 0, 0, 0, 0))
+         || (gBattleWeather & B_WEATHER_ANY && WEATHER_HAS_EFFECT && AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, gActiveBattler, 0, 0, 0))
+         || (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY && AbilityBattleEffects(ABILITYEFFECT_ON_TERRAIN, gActiveBattler, 0, 0, 0))
+         || ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gActiveBattler, FALSE)
+         || AbilityBattleEffects(ABILITYEFFECT_TRACE2, 0, 0, 0, 0))
             return;
 
         gSideStatuses[GetBattlerSide(gActiveBattler)] &= ~(SIDE_STATUS_SPIKES_DAMAGED | SIDE_STATUS_TOXIC_SPIKES_DAMAGED | SIDE_STATUS_STEALTH_ROCK_DAMAGED | SIDE_STATUS_STICKY_WEB_DAMAGED);
@@ -9607,7 +9612,6 @@ static void Cmd_various(void)
             break;
         }
         gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;    // remove the terrain
-        TryToRevertMimicry(); // restore the types of Pokémon with Mimicry
         break;
     case VARIOUS_JUMP_IF_UNDER_200:
         // If the Pokemon is less than 200 kg, or weighing less than 441 lbs, then Sky Drop will work. Otherwise, it will fail.
@@ -9948,21 +9952,6 @@ static void Cmd_various(void)
         else
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         return;
-    case VARIOUS_TRY_TO_APPLY_MIMICRY:
-    {
-        bool8 isMimicryDone = FALSE;
-
-        if (GetBattlerAbility(gActiveBattler) == ABILITY_MIMICRY)
-        {
-            TryToApplyMimicry(gActiveBattler, TRUE);
-            isMimicryDone = TRUE;
-        }
-        if (!isMimicryDone)
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-        else
-            gBattlescriptCurrInstr += 7;
-        return;
-    }
     case VARIOUS_JUMP_IF_CANT_FLING:
         if (!CanFling(gActiveBattler))
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);

@@ -367,7 +367,6 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_QUIVER_DANCE]               = 0, // TODO: Assign points
     [EFFECT_COIL]                       = 0, // TODO: Assign points
     [EFFECT_ELECTRIFY]                  = 0, // TODO: Assign points
-    [EFFECT_SCALD]                      = 0, // TODO: Assign points
     [EFFECT_REFLECT_TYPE]               = 0, // TODO: Assign points
     [EFFECT_SOAK]                       = 0, // TODO: Assign points
     [EFFECT_GROWTH]                     = 0, // TODO: Assign points

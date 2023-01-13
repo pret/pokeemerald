@@ -1309,8 +1309,13 @@ const u8 *const gMonIconTableFemale[] =
     [SPECIES_KRICKETUNE] = gMonIcon_Kricketune,
     [SPECIES_SHINX] = gMonIcon_Shinx,
     [SPECIES_COMBEE] = gMonIcon_Combee,
+#if P_HIPPO_GENDER_DIFF_ICONS == TRUE
+    [SPECIES_HIPPOPOTAS] = gMonIcon_HippopotasF,
+    [SPECIES_HIPPOWDON] = gMonIcon_HippowdonF,
+#else
     [SPECIES_HIPPOPOTAS] = gMonIcon_Hippopotas,
     [SPECIES_HIPPOWDON] = gMonIcon_Hippowdon,
+#endif
 #endif
 #if P_GEN_5_POKEMON == TRUE
     [SPECIES_UNFEZANT] = gMonIcon_UnfezantF,

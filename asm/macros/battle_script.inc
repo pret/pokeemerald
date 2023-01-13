@@ -1899,11 +1899,6 @@
 	various \battler, VARIOUS_TRY_END_NEUTRALIZING_GAS
 	.endm
 
-	.macro trytoapplymimicry battler:req, ptr:req
-	various \battler, VARIOUS_TRY_TO_APPLY_MIMICRY
-	.4byte \ptr
-	.endm
-
 	.macro trynoretreat battler:req, ptr:req
 	various \battler, VARIOUS_TRY_NO_RETREAT
 	.4byte \ptr
@@ -2024,7 +2019,6 @@
 	.byte \counter
 	.4byte \ptr
 	.endm
-
 	.macro swapstats stat:req
 	various BS_ATTACKER, VARIOUS_SWAP_STATS
 	.byte \stat
