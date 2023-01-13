@@ -625,7 +625,7 @@ static void InheritPokeball(struct Pokemon *egg, struct BoxPokemon *father, stru
 
 #if P_BALL_INHERITING >= GEN_7
     if (fatherSpecies == motherSpecies)
-        inheritBall = (Random32() % 2 == 0 ? motherBall : fatherBall);
+        inheritBall = (Random() % 2 == 0 ? motherBall : fatherBall);
     else if (motherSpecies != SPECIES_DITTO)
         inheritBall = motherBall;
     else
