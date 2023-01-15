@@ -1729,6 +1729,31 @@
 	.2byte \quantity
 	.endm
 
+	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made.
+	@ Lists of options are provided in argv.
+	@ If ignoreBPress is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
+	.macro dynmultichoice left:req, top:req, ignoreBPress:req, maxBeforeScroll:req argv:vararg
+	.byte 0xe3
+	.byte \left
+	.byte \top
+	.byte \ignoreBPress
+	.byte \maxBeforeScroll
+	.byte (.Ldynmultichoice_\@_2 - .Ldynmultichoice_\@_1) / 4
+.Ldynmultichoice_\@_1:
+	.4byte \argv
+.Ldynmultichoice_\@_2:
+	.endm
+
+	.macro dynmultipush name:req, id:req
+	.byte 0xe4
+	.4byte \name
+	.byte \id
+	.endm
+
+	.macro dynmultistack left:req, top:req, ignoreBPress:req, maxBeforeScroll:req
+	dynmultichoice \left, \top, \ignoreBPress, \maxBeforeScroll, NULL
+	.endm
+
 
 @ Supplementary
 
