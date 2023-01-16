@@ -1376,12 +1376,15 @@ static void DynamicMultichoiceSortList(struct ListMenuItem *items, u32 count)
 bool8 ScrCmd_dynmultichoice(struct ScriptContext *ctx)
 {
     u32 i;
-    u8 left = ScriptReadByte(ctx);
-    u8 top = ScriptReadByte(ctx);
-    bool8 ignoreBPress = ScriptReadByte(ctx);
-    u8 maxBeforeScroll = ScriptReadByte(ctx);
+    u32 left = ScriptReadByte(ctx);
+    u32 top = ScriptReadByte(ctx);
+    bool32 ignoreBPress = ScriptReadByte(ctx);
+    u32 maxBeforeScroll = ScriptReadByte(ctx);
+    bool32 shouldSort = ScriptReadByte(ctx);
+    u32 initialSelected = VarGet(ScriptReadHalfword(ctx));
+    u32 initialRow = 0;
     // Read vararg
-    u8 argc = ScriptReadByte(ctx);
+    u32 argc = ScriptReadByte(ctx);
     struct ListMenuItem *items;
 
     if (argc == 0)
@@ -1400,6 +1403,8 @@ bool8 ScrCmd_dynmultichoice(struct ScriptContext *ctx)
             StringExpandPlaceholders(nameBuffer, arg);
             items[i].name = nameBuffer;
             items[i].id = i;
+            if (i == initialSelected)
+                initialRow = i;
         }
     }
     else
@@ -1409,16 +1414,19 @@ bool8 ScrCmd_dynmultichoice(struct ScriptContext *ctx)
         for (i = 0; i < argc; ++i)
         {
             u8 *nameBuffer = Alloc(100);
-            struct ListMenuItem *currentItem = MultichoiceDynamic_PopElement();
+            struct ListMenuItem *currentItem = MultichoiceDynamic_PeekElementAt(i);
             StringExpandPlaceholders(nameBuffer, currentItem->name);
             items[i].name = nameBuffer;
             items[i].id = currentItem->id;
+            if (currentItem->id == initialSelected)
+                initialRow = i;
         }
-        DynamicMultichoiceSortList(items, argc);
+        if (shouldSort)
+            DynamicMultichoiceSortList(items, argc);
         MultichoiceDynamic_DestroyStack();
     }
 
-    if (ScriptMenu_MultichoiceDynamic(left, top, argc, items, ignoreBPress, maxBeforeScroll))
+    if (ScriptMenu_MultichoiceDynamic(left, top, argc, items, ignoreBPress, maxBeforeScroll, initialRow))
     {
         ScriptContext_Stop();
         return TRUE;
