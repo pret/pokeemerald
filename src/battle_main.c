@@ -1945,8 +1945,17 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
                 for (j = 0; j < MAX_MON_MOVES; j++)
                 {
-                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
-                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
+                    if (partyData[i].moves[j] != MOVE_UNAVAILABLE) {
+                        // shift all moves.
+                        for (int k = 0; k < MAX_MON_MOVES - 1; k++)
+                        {
+                            SetMonData(&party[i], MON_DATA_MOVE1 + k, GetMonData(party[i], MON_DATA_MOVE2 + k, NULL));
+                            SetMonData(&party[i], MON_DATA_PP1 + k, GetMonData(party[i], MON_DATA_PP2 + k, NULL));
+                        }
+                        // add partyData[i].moves[j] to the last move spot.
+                        SetMonData(&party[i], MON_DATA_MOVE4, &partyData[i].moves[j]);
+                        SetMonData(&party[i], MON_DATA_PP4, &gBattleMoves[partyData[i].moves[j]].pp);
+                    }
                 }
                 break;
             }

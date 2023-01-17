@@ -77,7 +77,7 @@ struct WildMon {
 
 struct ShuffledTrainerInfo {
     struct Trainer trainer;
-    union TrainerMonParty party;
+    struct TrainerMonItemCustomMoves party[6];
     const u8* introText;
     const u8* defeatText;
     const u8* postbattleText;
@@ -122,7 +122,7 @@ union ShuffledObject {
 extern u16 realStarterMon[6];
 
 void Shuffle(u32 s);
-void DeclareTrainer(u8 objNum, u8 trainerType);
+void DeclareTrainer(u8 objNum, u8 trainerType, u8 partnerObjNum);
 const u8 *GetAdjustedTrainerIntroText(u16 objNum);
 const u8 *GetAdjustedTrainerDefeatText(u16 objNum);
 const u8 *GetAdjustedTrainerName(u16 index);

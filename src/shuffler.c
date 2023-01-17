@@ -46,6 +46,8 @@ EWRAM_DATA struct ObjectEventTemplate AdjustedTemplates[MAX_OBJECTS];
 EWRAM_DATA u16 CurrentAdjustedRoom = 0xFFFF;
 EWRAM_DATA u8 CurrentAdjustedRoomIndex;
 
+EWRAM_DATA u16 AdjustedObjectsDirty = 0xFFFF; 
+EWRAM_DATA u16 RedirectedTrainerFlags = 0;
 EWRAM_DATA union ShuffledObject AdjustedObjects[MAX_OBJECTS];
 
 EWRAM_DATA struct WarpData realWarps[TOTAL_WARPS] = {};
@@ -194,6 +196,8 @@ void MirrorMapData() {
     u16 currentRoom = gSaveBlock1Ptr->location.mapNum | (gSaveBlock1Ptr->location.mapGroup << 8);
     if (CurrentAdjustedRoom != currentRoom) {
         CurrentAdjustedRoom = currentRoom;
+        AdjustedObjectsDirty = 0xFFFF;
+        RedirectedTrainerFlags = 0;
         distance++;
         MYLOG("distance: %u", distance);
         SetCurrentRoomSeed();
@@ -214,8 +218,9 @@ void MirrorMapData() {
     gMapHeader.events = &AdjustedMapEvents;
 }
 
-void DeclareTrainer(u8 objNum, u8 trainerType) {
+void DeclareTrainer(u8 objNum, u8 trainerType, u8 partnerObjNum) {
     MirrorMapData();
+    AdjustedObjectsDirty ^= (1 << objNum);
 
     int i = tinymt32_generate_uint32(&currentRoomSeed) % allTrainersCount[trainerType];
 
@@ -230,20 +235,7 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
         AdjustedObjects[objNum].t.trainer.items[j] = ITEM_NONE;
     }
 
-    int partyFlags = 0;
-    for (int j = 0; j < tt->poolSize; j++) {
-        if (tt->party[j].moves[0] != 0) {
-            partyFlags |= F_TRAINER_PARTY_CUSTOM_MOVESET;
-        }
-        if (tt->party[j].heldItem != 0) {
-            partyFlags |= F_TRAINER_PARTY_HELD_ITEM;
-        }
-        if (partyFlags == F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM) {
-            break;
-        }
-    }
-
-    AdjustedObjects[objNum].t.trainer.partyFlags = partyFlags;
+    AdjustedObjects[objNum].t.trainer.partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM;
     AdjustedObjects[objNum].t.trainer.partySize = tt->partySize;
 
     int poolSize = tt->poolSize;
@@ -265,54 +257,24 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
         pool[k] = tmp;
     }
 
-    switch (partyFlags & 3) {
-        case 0:
-            for (int j = 0; j < tt->partySize; j++) {
-                AdjustedObjects[objNum].t.party.NoItemDefaultMoves[j].iv = 0;
-                AdjustedObjects[objNum].t.party.NoItemDefaultMoves[j].lvl = level;
-                AdjustedObjects[objNum].t.party.NoItemDefaultMoves[j].species =
-                    AdjustSpecies(tt->party[pool[j]].species, level, tt->party[pool[j]].evoStrat);
+    for (int j = 0; j < tt->partySize; j++) {
+        AdjustedObjects[objNum].t.party[j].iv = 0;
+        AdjustedObjects[objNum].t.party[j].lvl = level;
+        AdjustedObjects[objNum].t.party[j].species =
+            AdjustSpecies(tt->party[pool[j]].species, level, tt->party[pool[j]].evoStrat);
+        AdjustedObjects[objNum].t.party[j].heldItem =
+            tt->party[pool[j]].heldItem;
+        if (tt->party[j].moves[0] == 0) {
+            for (int k = 0; k < 4; k++) {
+                AdjustedObjects[objNum].t.party[j].moves[k] = 0xFFFF;
             }
-            AdjustedObjects[objNum].t.trainer.party.NoItemDefaultMoves = AdjustedObjects[objNum].t.party.NoItemDefaultMoves;
-            break;
-        case F_TRAINER_PARTY_CUSTOM_MOVESET:
-            for (int j = 0; j < tt->partySize; j++) {
-                AdjustedObjects[objNum].t.party.NoItemCustomMoves[j].iv = 0;
-                AdjustedObjects[objNum].t.party.NoItemCustomMoves[j].lvl = level;
-                AdjustedObjects[objNum].t.party.NoItemCustomMoves[j].species = 
-                    AdjustSpecies(tt->party[pool[j]].species, level, tt->party[pool[j]].evoStrat);
-                for (int k = 0; k < 4; k++) {
-                    AdjustedObjects[objNum].t.party.NoItemCustomMoves[j].moves[k] = tt->party[pool[j]].moves[k];
-                }
+        } else {
+            for (int k = 0; k < 4; k++) {
+                AdjustedObjects[objNum].t.party[j].moves[k] = tt->party[pool[j]].moves[k];
             }
-            AdjustedObjects[objNum].t.trainer.party.NoItemCustomMoves = AdjustedObjects[objNum].t.party.NoItemCustomMoves;
-            break;
-        case F_TRAINER_PARTY_HELD_ITEM:
-            for (int j = 0; j < tt->partySize; j++) {
-                AdjustedObjects[objNum].t.party.ItemDefaultMoves[j].iv = 0;
-                AdjustedObjects[objNum].t.party.ItemDefaultMoves[j].lvl = level;
-                AdjustedObjects[objNum].t.party.ItemDefaultMoves[j].species =
-                    AdjustSpecies(tt->party[pool[j]].species, level, tt->party[pool[j]].evoStrat);
-                AdjustedObjects[objNum].t.party.ItemDefaultMoves[j].heldItem =
-                    tt->party[pool[j]].heldItem;
-            }
-            AdjustedObjects[objNum].t.trainer.party.ItemDefaultMoves = AdjustedObjects[objNum].t.party.ItemDefaultMoves;
-            break;
-        case F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET:
-            for (int j = 0; j < tt->partySize; j++) {
-                AdjustedObjects[objNum].t.party.ItemCustomMoves[j].iv = 0;
-                AdjustedObjects[objNum].t.party.ItemCustomMoves[j].lvl = level;
-                AdjustedObjects[objNum].t.party.ItemCustomMoves[j].species =
-                    AdjustSpecies(tt->party[pool[j]].species, level, tt->party[pool[j]].evoStrat);
-                AdjustedObjects[objNum].t.party.ItemCustomMoves[j].heldItem =
-                    tt->party[pool[j]].heldItem;
-                for (int k = 0; k < 4; k++) {
-                    AdjustedObjects[objNum].t.party.ItemCustomMoves[j].moves[k] = tt->party[pool[j]].moves[k];
-                }
-            }
-            AdjustedObjects[objNum].t.trainer.party.ItemCustomMoves = AdjustedObjects[objNum].t.party.ItemCustomMoves;
-            break;
+        }
     }
+    AdjustedObjects[objNum].t.trainer.party.ItemCustomMoves = AdjustedObjects[objNum].t.party;
 
     AdjustedObjects[objNum].t.defeatText = tt->defeatText;
     AdjustedObjects[objNum].t.introText = tt->introText;
@@ -320,10 +282,69 @@ void DeclareTrainer(u8 objNum, u8 trainerType) {
     AdjustedObjects[objNum].t.name = tt->trainerName;
     AdjustedTemplates[objNum].graphicsId = tt->graphicsId;
     AdjustedTemplates[objNum].flagId = ShuffledFlagNumberByObjectEventId(objNum + 1);
+
+    if (partnerObjNum != 0xFF && (AdjustedObjectsDirty & (1 << partnerObjNum)) == 0) {
+        // combine the parties
+        int partySizeA = AdjustedObjects[objNum].t.trainer.partySize >> 1;
+        if (partySizeA < 1) {
+            partySizeA = 1;
+        } else if (partySizeA > 3) {
+            partySizeA = 3;
+        }
+        int partySizeB = AdjustedObjects[partnerObjNum].t.trainer.partySize >> 1;
+        if (partySizeB < 1) {
+            partySizeB = 1;
+        } else if (partySizeB > 3) {
+            partySizeB = 3;
+        }
+
+        int copyDestIndex;
+        if (partySizeA == 3) {
+            if (partySizeB == 1) {
+                copyDestIndex = 3;
+            } else {
+                copyDestIndex = 4;
+            }
+            memcpy(&AdjustedObjects[objNum].t.party[copyDestIndex], &AdjustedObjects[objNum].t.party[2], sizeof(struct TrainerMonItemCustomMoves));
+        }
+        
+        if (partySizeA >= 2) {
+            memcpy(&AdjustedObjects[objNum].t.party[2], &AdjustedObjects[objNum].t.party[1], sizeof(struct TrainerMonItemCustomMoves));
+        }
+
+        if (partySizeB == 3) {
+            memcpy(&AdjustedObjects[objNum].t.party[partySizeA + 2], &AdjustedObjects[partnerObjNum].t.party[2], sizeof(struct TrainerMonItemCustomMoves));
+        }
+
+        if (partySizeB >= 2) {
+            if (partySizeA == 1) {
+                copyDestIndex = 2;
+            } else {
+                copyDestIndex = 3;
+            }
+            memcpy(&AdjustedObjects[objNum].t.party[copyDestIndex], &AdjustedObjects[partnerObjNum].t.party[1], sizeof(struct TrainerMonItemCustomMoves));
+        }
+
+        memcpy(&AdjustedObjects[objNum].t.party[1], &AdjustedObjects[partnerObjNum].t.party[0], sizeof(struct TrainerMonItemCustomMoves));
+
+        // copy relevant data
+        AdjustedObjects[partnerObjNum].t.trainer.party.ItemCustomMoves = AdjustedObjects[objNum].t.party;
+
+        AdjustedObjects[objNum].t.trainer.partySize = partySizeA + partySizeB;
+        AdjustedObjects[partnerObjNum].t.trainer.partySize = partySizeA + partySizeB;
+
+        AdjustedObjects[objNum].t.trainer.doubleBattle = TRUE;
+        AdjustedObjects[partnerObjNum].t.trainer.doubleBattle = TRUE;
+
+        RedirectedTrainerFlags |= 1 << partnerObjNum;
+        MYLOG("DeclareTrainer RedirectedTrainerFlags: %d", RedirectedTrainerFlags);
+        AdjustedTemplates[partnerObjNum].flagId = AdjustedTemplates[objNum].flagId;
+    }
 }
 
 void DeclareWildMon(u8 objNum) {
     MirrorMapData();
+    AdjustedObjectsDirty ^= (1 << objNum);
     int i;
     if (WILD_LEGEND_ODDS == 0) {
         i = 1;
@@ -349,6 +370,7 @@ void DeclareWildMon(u8 objNum) {
 
 void DeclareItem(u16 objNum) {
     MirrorMapData();
+    AdjustedObjectsDirty ^= (1 << objNum);
     int i = tinymt32_generate_uint32(&currentRoomSeed) % 6;
     switch (i) {
     case 0:
@@ -392,6 +414,7 @@ static const u8* const witchItemRewardTexts[POSSIBLE_WITCH_ITEM_REWARDS] = {
 };
 void DeclareNPC(u16 objNum, u8 npcType) {
     MirrorMapData();
+    AdjustedObjectsDirty ^= (1 << objNum);
     int i = npcType;
     if (npcType == 0) {
         i = (tinymt32_generate_uint32(&currentRoomSeed) % POSSIBLE_NPCS) + 1;
@@ -602,7 +625,10 @@ u16 BufferWitchText(void) {
 }
 
 u16 ShuffledFlagNumberByObjectEventId(u16 objNum) {
-    return TEMP_FLAGS_START + objNum;
+    if (RedirectedTrainerFlags & (1 << (objNum - 1))) {
+        return TEMP_FLAGS_START + AdjustedTemplates[objNum - 1].flagId;
+    }
+    return TEMP_FLAGS_START + objNum - 1;
 }
 
 u8 GetScaledLevel(u8 dist) {

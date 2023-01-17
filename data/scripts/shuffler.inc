@@ -43,6 +43,51 @@ Shuffler_Trainer9::
 	bufferpostbattletext 0, 9
 	msgbox Shuffler_Text_PostBattle, MSGBOX_AUTOCLOSE
 	end
+Shuffler_DoubleTrainer1::
+	trainerbattle_double 1, 0, 0, 0
+	bufferpostbattletext 0, 1
+	msgbox Shuffler_Text_PostBattle, MSGBOX_AUTOCLOSE
+	end
+Shuffler_DoubleTrainer2::
+	trainerbattle_double 2, 0, 0, 0
+	bufferpostbattletext 0, 2
+	msgbox Shuffler_Text_PostBattle, MSGBOX_AUTOCLOSE
+	end
+Shuffler_DoubleTrainer3::
+	trainerbattle_double 3, 0, 0, 0
+	bufferpostbattletext 0, 3
+	msgbox Shuffler_Text_PostBattle, MSGBOX_AUTOCLOSE
+	end
+Shuffler_DoubleTrainer4::
+	trainerbattle_double 4, 0, 0, 0
+	bufferpostbattletext 0, 4
+	msgbox Shuffler_Text_PostBattle, MSGBOX_AUTOCLOSE
+	end
+Shuffler_DoubleTrainer5::
+	trainerbattle_double 5, 0, 0, 0
+	bufferpostbattletext 0, 5
+	msgbox Shuffler_Text_PostBattle, MSGBOX_AUTOCLOSE
+	end
+Shuffler_DoubleTrainer6::
+	trainerbattle_double 6, 0, 0, 0
+	bufferpostbattletext 0, 6
+	msgbox Shuffler_Text_PostBattle, MSGBOX_AUTOCLOSE
+	end
+Shuffler_DoubleTrainer7::
+	trainerbattle_double 7, 0, 0, 0
+	bufferpostbattletext 0, 7
+	msgbox Shuffler_Text_PostBattle, MSGBOX_AUTOCLOSE
+	end
+Shuffler_DoubleTrainer8::
+	trainerbattle_double 8, 0, 0, 0
+	bufferpostbattletext 0, 8
+	msgbox Shuffler_Text_PostBattle, MSGBOX_AUTOCLOSE
+	end
+Shuffler_DoubleTrainer9::
+	trainerbattle_double 9, 0, 0, 0
+	bufferpostbattletext 0, 9
+	msgbox Shuffler_Text_PostBattle, MSGBOX_AUTOCLOSE
+	end
 Shuffler_Text_PostBattle:
 	.string "{STR_VAR_1}$"
 Shuffler_WildMon_Common::

@@ -5,4 +5,6 @@ HealerRoom_MapScripts::
 HealerRoom_OnIntroTrainers::
 	declarenpc 1, 0
 	declareitem 2
+	declaretrainer 3, 0, 4
+	declaretrainer 4, 0, 3
 	end
