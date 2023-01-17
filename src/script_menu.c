@@ -16,6 +16,7 @@
 #include "list_menu.h"
 #include "malloc.h"
 #include "util.h"
+#include "item_icon.h"
 #include "constants/field_specials.h"
 #include "constants/items.h"
 #include "constants/script_menu.h"
@@ -23,8 +24,26 @@
 
 #include "data/script_menu.h"
 
+struct DynamicListMenuEventArgs
+{
+    struct ListMenuTemplate *list;
+    u16 selectedItem;
+    u8 windowId;
+};
+
+typedef void (*DynamicListCallback)(struct DynamicListMenuEventArgs *eventArgs);
+
+struct DynamicListMenuEventCollection
+{
+    DynamicListCallback OnInit;
+    DynamicListCallback OnSelectionChanged;
+    DynamicListCallback OnDestroy;
+};
+
 static EWRAM_DATA u8 sProcessInputDelay = 0;
+static EWRAM_DATA u8 sDynamicMenuEventId = 0;
 static EWRAM_DATA struct DynamicMultichoiceStack *sDynamicMultiChoiceStack = NULL;
+static EWRAM_DATA u16 *sDynamicMenuEventScratchPad = NULL;
 
 static u8 sLilycoveSSTidalSelections[SSTIDAL_SELECTION_COUNT];
 
@@ -33,7 +52,7 @@ static void Task_HandleScrollingMultichoiceInput(u8 taskId);
 static void Task_HandleMultichoiceInput(u8 taskId);
 static void Task_HandleYesNoInput(u8 taskId);
 static void Task_HandleMultichoiceGridInput(u8 taskId);
-static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenuItem *items, bool8 ignoreBPress, u32 initialRow, u8 maxBeforeScroll);
+static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenuItem *items, bool8 ignoreBPress, u32 initialRow, u8 maxBeforeScroll, u32 callbackSet);
 static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress, u8 cursorPos);
 static void InitMultichoiceCheckWrap(bool8 ignoreBPress, u8 count, u8 windowId, u8 multichoiceId);
 static void DrawLinkServicesMultichoiceMenu(u8 multichoiceId);
@@ -42,6 +61,28 @@ static void CreateLilycoveSSTidalMultichoice(void);
 static bool8 IsPicboxClosed(void);
 static void CreateStartMenuForPokenavTutorial(void);
 static void InitMultichoiceNoWrap(bool8 ignoreBPress, u8 unusedCount, u8 windowId, u8 multichoiceId);
+static void MultichoiceDynamicEventDebug_OnInit(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventDebug_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventDebug_OnDestroy(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventShowItem_OnInit(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventShowItem_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventShowItem_OnDestroy(struct DynamicListMenuEventArgs *eventArgs);
+
+static const struct DynamicListMenuEventCollection sDynamicListMenuEventCollections[] =
+{
+    [DYN_MULTICHOICE_CB_DEBUG] =
+    {
+        .OnInit = MultichoiceDynamicEventDebug_OnInit,
+        .OnSelectionChanged = MultichoiceDynamicEventDebug_OnSelectionChanged,
+        .OnDestroy = MultichoiceDynamicEventDebug_OnDestroy
+    },
+    [DYN_MULTICHOICE_CB_SHOW_ITEM] =
+    {
+        .OnInit = MultichoiceDynamicEventShowItem_OnInit,
+        .OnSelectionChanged = MultichoiceDynamicEventShowItem_OnSelectionChanged,
+        .OnDestroy = MultichoiceDynamicEventShowItem_OnDestroy
+    }
+};
 
 static const struct ListMenuTemplate sScriptableListMenuTemplate =
 {
@@ -55,7 +96,7 @@ static const struct ListMenuTemplate sScriptableListMenuTemplate =
     .fontId = FONT_NORMAL,
 };
 
-bool8 ScriptMenu_MultichoiceDynamic(u8 left, u8 top, u8 argc, struct ListMenuItem *items, bool8 ignoreBPress, u8 maxBeforeScroll, u32 initialRow)
+bool8 ScriptMenu_MultichoiceDynamic(u8 left, u8 top, u8 argc, struct ListMenuItem *items, bool8 ignoreBPress, u8 maxBeforeScroll, u32 initialRow, u32 callbackSet)
 {
     if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
     {
@@ -65,7 +106,7 @@ bool8 ScriptMenu_MultichoiceDynamic(u8 left, u8 top, u8 argc, struct ListMenuIte
     else
     {
         gSpecialVar_Result = 0xFF;
-        DrawMultichoiceMenuDynamic(left, top, argc, items, ignoreBPress, initialRow, maxBeforeScroll);
+        DrawMultichoiceMenuDynamic(left, top, argc, items, ignoreBPress, initialRow, maxBeforeScroll, callbackSet);
         return TRUE;
     }
 }
@@ -97,6 +138,74 @@ bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 multichoiceId, bool8
         return TRUE;
     }
 }
+
+static void MultichoiceDynamicEventDebug_OnInit(struct DynamicListMenuEventArgs *eventArgs)
+{
+    DebugPrintf("OnInit: %d", eventArgs->windowId);
+}
+
+static void MultichoiceDynamicEventDebug_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs)
+{
+    DebugPrintf("OnSelectionChanged: %d", eventArgs->selectedItem);
+}
+
+static void MultichoiceDynamicEventDebug_OnDestroy(struct DynamicListMenuEventArgs *eventArgs)
+{
+    DebugPrintf("OnDestroy: %d", eventArgs->windowId);
+}
+
+#define sAuxWindowId sDynamicMenuEventScratchPad[0]
+#define sItemSpriteId sDynamicMenuEventScratchPad[1]
+#define TAG_CB_ITEM_ICON 3000
+
+static void MultichoiceDynamicEventShowItem_OnInit(struct DynamicListMenuEventArgs *eventArgs)
+{
+    struct WindowTemplate *template = &gWindows[eventArgs->windowId].window;
+    u32 baseBlock = template->baseBlock + template->width * template->height;
+    struct WindowTemplate auxTemplate = CreateWindowTemplate(0, template->tilemapLeft + template->width + 2, template->tilemapTop, 4, 4, 15, baseBlock);
+    u32 auxWindowId = AddWindow(&auxTemplate);
+    SetStandardWindowBorderStyle(auxWindowId, FALSE);
+    FillWindowPixelBuffer(auxWindowId, 0x11);
+    CopyWindowToVram(auxWindowId, COPYWIN_FULL);
+    sAuxWindowId = auxWindowId;
+    sItemSpriteId = MAX_SPRITES;
+}
+
+static void MultichoiceDynamicEventShowItem_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs)
+{
+    struct WindowTemplate *template = &gWindows[eventArgs->windowId].window;
+    u32 x = template->tilemapLeft * 8 + template->width * 8 + 36;
+    u32 y = template->tilemapTop * 8 + 20;
+
+    if (sItemSpriteId != MAX_SPRITES)
+    {
+        FreeSpriteTilesByTag(TAG_CB_ITEM_ICON);
+        FreeSpritePaletteByTag(TAG_CB_ITEM_ICON);
+        DestroySprite(&gSprites[sItemSpriteId]);
+    }
+
+    sItemSpriteId = AddItemIconSprite(TAG_CB_ITEM_ICON, TAG_CB_ITEM_ICON, eventArgs->selectedItem);
+    gSprites[sItemSpriteId].oam.priority = 0;
+    gSprites[sItemSpriteId].x = x;
+    gSprites[sItemSpriteId].y = y;
+}
+
+static void MultichoiceDynamicEventShowItem_OnDestroy(struct DynamicListMenuEventArgs *eventArgs)
+{
+    ClearStdWindowAndFrame(sAuxWindowId, TRUE);
+    RemoveWindow(sAuxWindowId);
+
+    if (sItemSpriteId != MAX_SPRITES)
+    {
+        FreeSpriteTilesByTag(TAG_CB_ITEM_ICON);
+        FreeSpritePaletteByTag(TAG_CB_ITEM_ICON);
+        DestroySprite(&gSprites[sItemSpriteId]);
+    }
+}
+
+#undef sAuxWindowId
+#undef sItemSpriteId
+#undef TAG_CB_ITEM_ICON
 
 static void FreeListMenuItems(struct ListMenuItem *items, u32 count)
 {
@@ -226,10 +335,15 @@ static void MultichoiceDynamic_MoveCursor(s32 itemIndex, bool8 onInit, struct Li
     if (taskId != TASK_NONE)
     {
         ListMenuGetScrollAndRow(gTasks[taskId].data[0], &gScrollableMultichoice_ScrollOffset, NULL);
+        if (sDynamicMenuEventId != DYN_MULTICHOICE_CB_NONE && sDynamicListMenuEventCollections[sDynamicMenuEventId].OnSelectionChanged && !onInit)
+        {
+            struct DynamicListMenuEventArgs eventArgs = {.selectedItem = itemIndex, .windowId = list->template.windowId, .list = &list->template};
+            sDynamicListMenuEventCollections[sDynamicMenuEventId].OnSelectionChanged(&eventArgs);
+        }
     }
 }
 
-static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenuItem *items, bool8 ignoreBPress, u32 initialRow, u8 maxBeforeScroll)
+static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenuItem *items, bool8 ignoreBPress, u32 initialRow, u8 maxBeforeScroll, u32 callbackSet)
 {
     u32 i;
     u8 windowId;
@@ -250,6 +364,16 @@ static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenu
     SetStandardWindowBorderStyle(windowId, FALSE);
     CopyWindowToVram(windowId, COPYWIN_FULL);
 
+    // I don't like this being global either, but I could not come up with another solution that
+    // does not invade the whole ListMenu infrastructure.
+    sDynamicMenuEventId = callbackSet;
+    sDynamicMenuEventScratchPad = AllocZeroed(100 * sizeof(u16));
+    if (sDynamicMenuEventId != DYN_MULTICHOICE_CB_NONE && sDynamicListMenuEventCollections[sDynamicMenuEventId].OnInit)
+    {
+        struct DynamicListMenuEventArgs eventArgs = {.selectedItem = initialRow, .windowId = windowId, .list = NULL};
+        sDynamicListMenuEventCollections[sDynamicMenuEventId].OnInit(&eventArgs);
+    }
+
     gMultiuseListMenuTemplate = sScriptableListMenuTemplate;
     gMultiuseListMenuTemplate.windowId = windowId;
     gMultiuseListMenuTemplate.items = items;
@@ -266,6 +390,12 @@ static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenu
     StoreWordInTwoHalfwords(&gTasks[taskId].data[3], (u32) items);
     list = (void *) gTasks[gTasks[taskId].data[0]].data;
     ListMenuChangeSelectionFull(list, TRUE, FALSE, initialRow, TRUE);
+
+    if (sDynamicMenuEventId != DYN_MULTICHOICE_CB_NONE && sDynamicListMenuEventCollections[sDynamicMenuEventId].OnSelectionChanged)
+    {
+        struct DynamicListMenuEventArgs eventArgs = {.selectedItem = items[initialRow].id, .windowId = windowId, .list = &gMultiuseListMenuTemplate};
+        sDynamicListMenuEventCollections[sDynamicMenuEventId].OnSelectionChanged(&eventArgs);
+    }
     ListMenuGetScrollAndRow(gTasks[taskId].data[0], &gScrollableMultichoice_ScrollOffset, NULL);
     if (argc > maxBeforeScroll)
     {
@@ -377,6 +507,15 @@ static void Task_HandleScrollingMultichoiceInput(u8 taskId)
         struct ListMenuItem *items;
 
         PlaySE(SE_SELECT);
+
+        if (sDynamicMenuEventId != DYN_MULTICHOICE_CB_NONE && sDynamicListMenuEventCollections[sDynamicMenuEventId].OnDestroy)
+        {
+            struct DynamicListMenuEventArgs eventArgs = {.selectedItem = input, .windowId = gTasks[taskId].data[2], .list = NULL};
+            sDynamicListMenuEventCollections[sDynamicMenuEventId].OnDestroy(&eventArgs);
+        }
+
+        sDynamicMenuEventId = DYN_MULTICHOICE_CB_NONE;
+
         if (gTasks[taskId].data[5] > gTasks[taskId].data[7])
         {
             RemoveScrollIndicatorArrowPair(gTasks[taskId].data[6]);
@@ -384,7 +523,7 @@ static void Task_HandleScrollingMultichoiceInput(u8 taskId)
 
         LoadWordFromTwoHalfwords(&gTasks[taskId].data[3], (u32* )(&items));
         FreeListMenuItems(items, gTasks[taskId].data[5]);
-
+        TRY_FREE_AND_SET_NULL(sDynamicMenuEventScratchPad);
         DestroyListMenuTask(gTasks[taskId].data[0], NULL, NULL);
         ClearStdWindowAndFrame(gTasks[taskId].data[2], TRUE);
         RemoveWindow(gTasks[taskId].data[2]);
