@@ -150,26 +150,26 @@ string generate_map_header_text(Json map_data, Json layouts_data, string version
 
     ostringstream text;
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/" 
-         << json_to_string(map_data["name"]) 
-         << "/map.json\n@\n\n";
+    string mapName = json_to_string(map_data["name"]);
 
-    text << json_to_string(map_data["name"]) << ":\n"
+    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/" << mapName << "/map.json\n@\n\n";
+
+    text << mapName << ":\n"
          << "\t.4byte " << json_to_string(layout["name"]) << "\n";
 
     if (map_data.object_items().find("shared_events_map") != map_data.object_items().end())
         text << "\t.4byte " << json_to_string(map_data["shared_events_map"]) << "_MapEvents\n";
     else
-        text << "\t.4byte " << json_to_string(map_data["name"]) << "_MapEvents\n";
+        text << "\t.4byte " << mapName << "_MapEvents\n";
 
     if (map_data.object_items().find("shared_scripts_map") != map_data.object_items().end())
         text << "\t.4byte " << json_to_string(map_data["shared_scripts_map"]) << "_MapScripts\n";
     else
-        text << "\t.4byte " << json_to_string(map_data["name"]) << "_MapScripts\n";
+        text << "\t.4byte " << mapName << "_MapScripts\n";
 
     if (map_data.object_items().find("connections") != map_data.object_items().end()
      && map_data["connections"].array_items().size() > 0)
-        text << "\t.4byte " << json_to_string(map_data["name"]) << "_MapConnections\n";
+        text << "\t.4byte " << mapName << "_MapConnections\n";
     else
         text << "\t.4byte 0x0\n";
 
@@ -201,11 +201,11 @@ string generate_map_connections_text(Json map_data) {
 
     ostringstream text;
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/" 
-         << json_to_string(map_data["name"]) 
-         << "/map.json\n@\n\n";
+    string mapName = json_to_string(map_data["name"]);
 
-    text << json_to_string(map_data["name"]) << "_MapConnectionsList:\n";
+    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/" << mapName << "/map.json\n@\n\n";
+
+    text << mapName << "_MapConnectionsList:\n";
 
     for (auto &connection : map_data["connections"].array_items()) {
         text << "\tconnection "
@@ -214,9 +214,9 @@ string generate_map_connections_text(Json map_data) {
              << json_to_string(connection["map"]) << "\n";
     }
 
-    text << "\n" << json_to_string(map_data["name"]) << "_MapConnections:\n"
+    text << "\n" << mapName << "_MapConnections:\n"
          << "\t.4byte " << map_data["connections"].array_items().size() << "\n"
-         << "\t.4byte " << json_to_string(map_data["name"]) << "_MapConnectionsList\n\n";
+         << "\t.4byte " << mapName << "_MapConnectionsList\n\n";
 
     return text.str();
 }
@@ -227,14 +227,14 @@ string generate_map_events_text(Json map_data) {
 
     ostringstream text;
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/" 
-         << json_to_string(map_data["name"]) 
-         << "/map.json\n@\n\n";
+    string mapName = json_to_string(map_data["name"]);
+
+    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/" << mapName << "/map.json\n@\n\n";
 
     string objects_label, warps_label, coords_label, bgs_label;
 
     if (map_data["object_events"].array_items().size() > 0) {
-        objects_label = json_to_string(map_data["name"]) + "_ObjectEvents";
+        objects_label = mapName + "_ObjectEvents";
         text << objects_label << ":\n";
         for (unsigned int i = 0; i < map_data["object_events"].array_items().size(); i++) {
             auto obj_event = map_data["object_events"].array_items()[i];
@@ -257,7 +257,7 @@ string generate_map_events_text(Json map_data) {
     }
 
     if (map_data["warp_events"].array_items().size() > 0) {
-        warps_label = json_to_string(map_data["name"]) + "_MapWarps";
+        warps_label = mapName + "_MapWarps";
         text << warps_label << ":\n";
         for (auto &warp_event : map_data["warp_events"].array_items()) {
             text << "\twarp_def "
@@ -273,7 +273,7 @@ string generate_map_events_text(Json map_data) {
     }
 
     if (map_data["coord_events"].array_items().size() > 0) {
-        coords_label = json_to_string(map_data["name"]) + "_MapCoordEvents";
+        coords_label = mapName + "_MapCoordEvents";
         text << coords_label << ":\n";
         for (auto &coord_event : map_data["coord_events"].array_items()) {
             if (json_to_string(coord_event["type"]) == "trigger") {
@@ -299,7 +299,7 @@ string generate_map_events_text(Json map_data) {
     }
 
     if (map_data["bg_events"].array_items().size() > 0) {
-        bgs_label = json_to_string(map_data["name"]) + "_MapBGEvents";
+        bgs_label = mapName + "_MapBGEvents";
         text << bgs_label << ":\n";
         for (auto &bg_event : map_data["bg_events"].array_items()) {
             if (bg_event["type"] == "sign") {
@@ -331,7 +331,7 @@ string generate_map_events_text(Json map_data) {
         bgs_label = "0x0";
     }
 
-    text << json_to_string(map_data["name"]) << "_MapEvents::\n"
+    text << mapName << "_MapEvents::\n"
          << "\tmap_events " << objects_label << ", " << warps_label << ", "
          << coords_label << ", " << bgs_label << "\n\n";
 
@@ -468,22 +468,25 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
     int group_num = 0;
 
     for (auto &group : groups_data["group_order"].array_items()) {
-        text << "// " << json_to_string(group) << "\n";
+        string groupName = json_to_string(group);
+        text << "// " << groupName << "\n";
         vector<Json> map_ids;
         size_t max_length = 0;
 
-        for (auto &map_name : groups_data[json_to_string(group)].array_items()) {
+        for (auto &map_name : groups_data[groupName].array_items()) {
             string header_filepath = file_dir + json_to_string(map_name) + dir_separator + "map.json";
             string err_str;
             Json map_data = Json::parse(read_text_file(header_filepath), err_str);
             map_ids.push_back(map_data["id"]);
-            if (json_to_string(map_data["id"]).length() > max_length)
-                max_length = json_to_string(map_data["id"]).length();
+            string id = json_to_string(map_data["id"]);
+            if (id.length() > max_length)
+                max_length = id.length();
         }
 
         int map_id_num = 0;
         for (Json map_id : map_ids) {
-            text << "#define " << json_to_string(map_id) << string((max_length - json_to_string(map_id).length() + 1), ' ')
+            string id = json_to_string(map_id);
+            text << "#define " << id << string((max_length - id.length() + 1), ' ')
                  << "(" << map_id_num++ << " | (" << group_num << " << 8))\n";
         }
         text << "\n";
@@ -526,14 +529,15 @@ string generate_layout_headers_text(Json layouts_data) {
     text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/layouts/layouts.json\n@\n\n";
 
     for (auto &layout : layouts_data["layouts"].array_items()) {
-        string border_label = json_to_string(layout["name"]) + "_Border";
-        string blockdata_label = json_to_string(layout["name"]) + "_Blockdata";
+        string layoutName = json_to_string(layout["name"]);
+        string border_label = layoutName + "_Border";
+        string blockdata_label = layoutName + "_Blockdata";
         text << border_label << "::\n"
              << "\t.incbin \"" << json_to_string(layout["border_filepath"]) << "\"\n\n"
              << blockdata_label << "::\n"
              << "\t.incbin \"" << json_to_string(layout["blockdata_filepath"]) << "\"\n\n"
              << "\t.align 2\n"
-             << json_to_string(layout["name"]) << "::\n"
+             << layoutName << "::\n"
              << "\t.4byte " << json_to_int(layout["width"]) << "\n"
              << "\t.4byte " << json_to_int(layout["height"]) << "\n"
              << "\t.4byte " << border_label << "\n"
