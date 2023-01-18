@@ -784,7 +784,7 @@ void StripExtCtrlCodes(u8 *str)
 char *ConvertToAscii(const u8 *str)
 {
     s32 i;
-    char * textBuffer = malloc(128);
+    char * textBuffer = Alloc(128);
     for (i = 0; *str != EOS; i++, str++)
     {
         char modifiedCode = '?';
