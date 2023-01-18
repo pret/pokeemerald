@@ -1414,11 +1414,8 @@ bool8 ScrCmd_dynmultichoice(struct ScriptContext *ctx)
         items = AllocZeroed(sizeof(struct ListMenuItem) * argc);
         for (i = 0; i < argc; ++i)
         {
-            u8 *nameBuffer = Alloc(100);
             struct ListMenuItem *currentItem = MultichoiceDynamic_PeekElementAt(i);
-            StringExpandPlaceholders(nameBuffer, currentItem->name);
-            items[i].name = nameBuffer;
-            items[i].id = currentItem->id;
+            items[i] = *currentItem;
             if (currentItem->id == initialSelected)
                 initialRow = i;
         }
@@ -1440,9 +1437,13 @@ bool8 ScrCmd_dynmultichoice(struct ScriptContext *ctx)
 
 bool8 ScrCmd_dynmultipush(struct ScriptContext *ctx)
 {
+    u8 *nameBuffer = Alloc(100);
     const u8 *name = (const u8*) ScriptReadWord(ctx);
     u32 id = VarGet(ScriptReadHalfword(ctx));
-    struct ListMenuItem item = {.name = name, .id = id};
+    struct ListMenuItem item;
+    StringExpandPlaceholders(nameBuffer, name);
+    item.name = nameBuffer;
+    item.id = id;
     MultichoiceDynamic_PushElement(item);
 }
 
