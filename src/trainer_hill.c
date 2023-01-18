@@ -951,7 +951,7 @@ static void SetAllTrainerFlags(void)
 void TryLoadTrainerHillEReaderPalette(void)
 {
     if (OnTrainerHillEReaderChallengeFloor() == TRUE)
-        LoadPalette(sEReader_Pal, 0x70, 0x20);
+        LoadPalette(sEReader_Pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
 }
 
 static void GetGameSaved(void)

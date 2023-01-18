@@ -1301,7 +1301,7 @@ static void CB2_InitRayquazaScene(void)
     ResetPaletteFade();
     ResetSpriteData();
     ResetTasks();
-    FillPalette(RGB_BLACK, 0xF0, 32);
+    FillPalette(RGB_BLACK, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     CreateTask(sTasksForAnimations[sRayScene->animId], 0);
     SetMainCallback2(CB2_RayquazaScene);
 }
@@ -1592,7 +1592,7 @@ static void LoadDuoFightSceneGfx(void)
     LZDecompressWram(gRaySceneDuoFight_Clouds2_Tilemap, sRayScene->tilemapBuffers[0]);
     LZDecompressWram(gRaySceneDuoFight_Clouds1_Tilemap, sRayScene->tilemapBuffers[1]);
     LZDecompressWram(gRaySceneDuoFight_Clouds3_Tilemap, sRayScene->tilemapBuffers[2]);
-    LoadCompressedPalette(gRaySceneDuoFight_Clouds_Pal, 0, 0x40);
+    LoadCompressedPalette(gRaySceneDuoFight_Clouds_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     LoadCompressedSpriteSheet(&sSpriteSheet_DuoFight_Groudon);
     LoadCompressedSpriteSheet(&sSpriteSheet_DuoFight_GroudonShoulder);
     LoadCompressedSpriteSheet(&sSpriteSheet_DuoFight_GroudonClaw);
@@ -2032,7 +2032,7 @@ static void LoadTakesFlightSceneGfx(void)
     LZDecompressWram(gRaySceneDuoFight_Clouds2_Tilemap, sRayScene->tilemapBuffers[0]);
     LZDecompressWram(gRaySceneTakesFlight_Bg_Tilemap, sRayScene->tilemapBuffers[1]);
     LZDecompressWram(gRaySceneTakesFlight_Rayquaza_Tilemap, sRayScene->tilemapBuffers[2]);
-    LoadCompressedPalette(gRaySceneTakesFlight_Rayquaza_Pal, 0, 64);
+    LoadCompressedPalette(gRaySceneTakesFlight_Rayquaza_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     LoadCompressedSpriteSheet(&sSpriteSheet_TakesFlight_Smoke);
     LoadCompressedSpritePalette(&sSpritePal_TakesFlight_Smoke);
 }
@@ -2238,7 +2238,7 @@ static void LoadDescendsSceneGfx(void)
     CpuFastCopy(sRayScene->tilemapBuffers[3], sRayScene->tilemapBuffers[1], BG_SCREEN_SIZE);
     CpuFastFill16(0, &sRayScene->tilemapBuffers[1][0x100], 0x340);
 
-    LoadCompressedPalette(gRaySceneDescends_Bg_Pal, 0, 0x40);
+    LoadCompressedPalette(gRaySceneDescends_Bg_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     gPlttBufferUnfaded[0] = RGB_WHITE;
     gPlttBufferFaded[0] = RGB_WHITE;
     LoadCompressedSpriteSheet(&sSpriteSheet_Descends_Rayquaza);
@@ -2487,7 +2487,7 @@ static void LoadChargesSceneGfx(void)
     LZDecompressWram(gRaySceneCharges_Rayquaza_Tilemap, sRayScene->tilemapBuffers[1]);
     LZDecompressWram(gRaySceneCharges_Streaks_Tilemap, sRayScene->tilemapBuffers[2]);
     LZDecompressWram(gRaySceneCharges_Bg_Tilemap, sRayScene->tilemapBuffers[3]);
-    LoadCompressedPalette(gRaySceneCharges_Bg_Pal, 0, 0x80);
+    LoadCompressedPalette(gRaySceneCharges_Bg_Pal, BG_PLTT_ID(0), 4 * PLTT_SIZE_4BPP);
 }
 
 #define tState          data[0]
@@ -2671,7 +2671,7 @@ static void LoadChasesAwaySceneGfx(void)
     LZDecompressWram(gRaySceneChasesAway_Bg_Tilemap, sRayScene->tilemapBuffers[1]);
     LZDecompressWram(gRaySceneChasesAway_Light_Tilemap, sRayScene->tilemapBuffers[0]);
     LZDecompressWram(gRaySceneChasesAway_Ring_Tilemap, sRayScene->tilemapBuffers[2]);
-    LoadCompressedPalette(gRaySceneChasesAway_Bg_Pal, 0, 0x60);
+    LoadCompressedPalette(gRaySceneChasesAway_Bg_Pal, BG_PLTT_ID(0), 3 * PLTT_SIZE_4BPP);
     LoadCompressedSpriteSheet(&sSpriteSheet_ChasesAway_Groudon);
     LoadCompressedSpriteSheet(&sSpriteSheet_ChasesAway_GroudonTail);
     LoadCompressedSpriteSheet(&sSpriteSheet_ChasesAway_Kyogre);

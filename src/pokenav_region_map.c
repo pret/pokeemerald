@@ -509,14 +509,14 @@ static void LoadPokenavRegionMapGfx(struct Pokenav_RegionMapGfx *state)
     CpuFill16(0x1040, state->tilemapBuffer, 0x800);
     SetBgTilemapBuffer(1, state->tilemapBuffer);
     state->infoWindowId = AddWindow(&sMapSecInfoWindowTemplate);
-    LoadUserWindowBorderGfx_(state->infoWindowId, 0x42, 0x40);
+    LoadUserWindowBorderGfx_(state->infoWindowId, 0x42, BG_PLTT_ID(4));
     DrawTextBorderOuter(state->infoWindowId, 0x42, 4);
     DecompressAndCopyTileDataToVram(1, sRegionMapCityZoomTiles_Gfx, 0, 0, 0);
     FillWindowPixelBuffer(state->infoWindowId, PIXEL_FILL(1));
     PutWindowTilemap(state->infoWindowId);
     CopyWindowToVram(state->infoWindowId, COPYWIN_FULL);
-    CopyPaletteIntoBufferUnfaded(sMapSecInfoWindow_Pal, 0x10, 0x20);
-    CopyPaletteIntoBufferUnfaded(gRegionMapCityZoomTiles_Pal, 0x30, 0x20);
+    CopyPaletteIntoBufferUnfaded(sMapSecInfoWindow_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+    CopyPaletteIntoBufferUnfaded(gRegionMapCityZoomTiles_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
     if (!IsRegionMapZoomed())
         ChangeBgY(1, -0x6000, BG_COORD_SET);
     else
