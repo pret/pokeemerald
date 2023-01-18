@@ -357,6 +357,7 @@ static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenu
     {
         width = DisplayTextAndGetWidth(items[i].name, width);
     }
+    LoadMessageBoxAndBorderGfx();
     windowHeight = (argc < maxBeforeScroll) ? argc * 2 : maxBeforeScroll * 2;
     newWidth = ConvertPixelWidthToTileWidth(width);
     left = ScriptMenu_AdjustLeftCoordFromWidth(left, newWidth);
