@@ -151,42 +151,42 @@
       "y": 18,
       "elevation": 4,
       "dest_map": "MAP_ROUTE114",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 6,
       "y": 39,
       "elevation": 3,
       "dest_map": "MAP_ROUTE115",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 10,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_METEOR_FALLS_1F_2R",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 5,
       "y": 4,
       "elevation": 3,
       "dest_map": "MAP_METEOR_FALLS_B1F_1R",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 26,
       "y": 28,
       "elevation": 3,
       "dest_map": "MAP_METEOR_FALLS_B1F_1R",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 4,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_METEOR_FALLS_STEVENS_CAVE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

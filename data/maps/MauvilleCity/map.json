@@ -14,24 +14,24 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "up",
+      "map": "MAP_ROUTE111",
       "offset": 0,
-      "map": "MAP_ROUTE111"
+      "direction": "up"
     },
     {
-      "direction": "down",
+      "map": "MAP_ROUTE110",
       "offset": 0,
-      "map": "MAP_ROUTE110"
+      "direction": "down"
     },
     {
-      "direction": "left",
+      "map": "MAP_ROUTE117",
       "offset": 0,
-      "map": "MAP_ROUTE117"
+      "direction": "left"
     },
     {
-      "direction": "right",
+      "map": "MAP_ROUTE118",
       "offset": 0,
-      "map": "MAP_ROUTE118"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -185,49 +185,49 @@
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_MAUVILLE_CITY_GYM",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 22,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_MAUVILLE_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 35,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_MAUVILLE_CITY_BIKE_SHOP",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 23,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_MAUVILLE_CITY_MART",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 32,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_MAUVILLE_CITY_HOUSE1",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 8,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_MAUVILLE_CITY_GAME_CORNER",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 19,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_MAUVILLE_CITY_HOUSE2",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

@@ -304,4 +304,10 @@
 
 #define SPECIAL_VARS_END              0x8015
 
+// If an overworld trigger uses this pseudo-variable as the trigger check,
+// then the script will be run using RunScriptImmediately instead of in the
+// global script context. This means it will run faster, but cannot do any
+// cutscenes nor call a wait command. Used for weather effects in vanilla.
+#define TRIGGER_RUN_IMMEDIATELY   0
+
 #endif // GUARD_CONSTANTS_VARS_H

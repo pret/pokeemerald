@@ -47,28 +47,28 @@
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_SEAFLOOR_CAVERN_ROOM2",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 4,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_SEAFLOOR_CAVERN_ROOM5",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 9,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_SEAFLOOR_CAVERN_ROOM5",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 10,
       "y": 15,
       "elevation": 3,
       "dest_map": "MAP_SEAFLOOR_CAVERN_ENTRANCE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],
