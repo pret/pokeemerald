@@ -2037,6 +2037,11 @@
 	various \battler, VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES
 	.endm
 
+	.macro jumpifnovalidtargets ptr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_NO_VALID_TARGETS
+	.4byte \ptr
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER, \stat | \stages << 3 | \down << 7
