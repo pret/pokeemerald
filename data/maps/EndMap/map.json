@@ -22,7 +22,7 @@
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_END_MAP",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [
