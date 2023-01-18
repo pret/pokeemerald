@@ -271,10 +271,9 @@ static void BuildColorMaps(void)
     u16 baseBrightness;
     u32 remainingBrightness;
     s16 diff;
-    u8 i;
 
     for (i = 0; i <= 12; i++)
-        sBasePaletteGammaTypes[i] = COLOR_MAP_DARK_CONTRAST;
+        sBasePaletteColorMapTypes[i] = COLOR_MAP_DARK_CONTRAST;
 
     sPaletteColorMapTypes = sBasePaletteColorMapTypes;
     for (i = 0; i < 2; i++)
@@ -1109,5 +1108,5 @@ void ResetPreservedPalettesInWeather(void)
 void UpdatePaletteGammaType(u8 index, u8 gammaType)
 {
     if (index != 0xFF)
-        sBasePaletteGammaTypes[index + 16] = gammaType;
+        sBasePaletteColorMapTypes[index + 16] = gammaType;
 }
