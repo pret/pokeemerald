@@ -3183,21 +3183,21 @@ static void LoadPokeJumpGfx(void)
         ResetTempTileDataBuffers();
         LoadSpriteSheetsAndPalettes(sPokemonJumpGfx);
         InitDigitPrinters();
-        LoadPalette(sBg_Pal, 0, 0x20);
+        LoadPalette(sBg_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         DecompressAndCopyTileDataToVram(BG_SCENERY, sBg_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_SCENERY, sBg_Tilemap, 0, 0, 1);
-        LoadPalette(sVenusaur_Pal, 0x30, 0x20);
+        LoadPalette(sVenusaur_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
         DecompressAndCopyTileDataToVram(BG_VENUSAUR, sVenusaur_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_VENUSAUR, sVenusaur_Tilemap, 0, 0, 1);
-        LoadPalette(sBonuses_Pal, 0x10, 0x20);
+        LoadPalette(sBonuses_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         DecompressAndCopyTileDataToVram(BG_BONUSES, sBonuses_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_BONUSES, sBonuses_Tilemap, 0, 0, 1);
-        LoadPalette(sInterface_Pal, 0x20, 0x20);
+        LoadPalette(sInterface_Pal, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
         SetBgTilemapBuffer(BG_INTERFACE, sPokemonJumpGfx->tilemapBuffer);
         FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 0x20, 0x20);
         PrintScoreSuffixes();
         PrintScore(0);
-        LoadUserWindowBorderGfxOnBg(0, 1, 0xE0);
+        LoadUserWindowBorderGfxOnBg(0, 1, BG_PLTT_ID(14));
         CopyBgTilemapBufferToVram(BG_INTERFACE);
         CopyBgTilemapBufferToVram(BG_VENUSAUR);
         CopyBgTilemapBufferToVram(BG_BONUSES);
@@ -3601,7 +3601,7 @@ static u32 AddMessageWindow(u32 left, u32 top, u32 width, u32 height)
     window.tilemapTop = top;
     window.width = width;
     window.height = height;
-    window.paletteNum = 0xF;
+    window.paletteNum = 15;
     window.baseBlock = 0x43;
 
     windowId = AddWindow(&window);
@@ -4213,8 +4213,8 @@ static void PrintRecordsText(u16 windowId, int width)
     recordNums[1] = records->bestJumpScore;
     recordNums[2] = records->excellentsInRow;
 
-    LoadUserWindowBorderGfx_(windowId, 0x21D, 0xD0);
-    DrawTextBorderOuter(windowId, 0x21D, 0xD);
+    LoadUserWindowBorderGfx_(windowId, 0x21D, BG_PLTT_ID(13));
+    DrawTextBorderOuter(windowId, 0x21D, 13);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_PkmnJumpRecords, GetStringCenterAlignXOffset(FONT_NORMAL, gText_PkmnJumpRecords, width * 8), 1, TEXT_SKIP_DRAW, NULL);
     for (i = 0; i < ARRAY_COUNT(sRecordsTexts); i++)
