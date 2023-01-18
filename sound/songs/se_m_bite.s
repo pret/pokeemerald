@@ -25,11 +25,11 @@ se_m_bite_1:
 	.byte		BEND  , c_v+0
 	.byte		N02   , Gn3 , v112
 	.byte	W02
-	.byte		        Gs3 
+	.byte		        Gs3
 	.byte	W01
 	.byte		PAN   , c_v-7
 	.byte	W01
-	.byte		N02   , An3 
+	.byte		N02   , An3
 	.byte	W02
 	.byte		PAN   , c_v+7
 	.byte	W02
@@ -79,7 +79,7 @@ se_m_bite_2:
 	.byte	W10
 	.byte		N01   , Gn2 , v040
 	.byte	W08
-	.byte		N01   
+	.byte		N01
 	.byte	W06
 	.byte	FINE
 

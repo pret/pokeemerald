@@ -7,8 +7,8 @@
 #include "constants/items.h"
 
 // EWRAM vars
-EWRAM_DATA void *gItemIconDecompressionBuffer = NULL;
-EWRAM_DATA void *gItemIcon4x4Buffer = NULL;
+EWRAM_DATA u8 *gItemIconDecompressionBuffer = NULL;
+EWRAM_DATA u8 *gItemIcon4x4Buffer = NULL;
 
 // const rom data
 #include "data/item_icon_table.h"
@@ -18,7 +18,7 @@ static const struct OamData sOamData_ItemIcon =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -55,12 +55,10 @@ const struct SpriteTemplate gItemIconSpriteTemplate =
 // code
 bool8 AllocItemIconTemporaryBuffers(void)
 {
-    gItemIconDecompressionBuffer = gItemIconDecompressionBuffer; // needed to match
     gItemIconDecompressionBuffer = Alloc(0x120);
     if (gItemIconDecompressionBuffer == NULL)
         return FALSE;
 
-    gItemIcon4x4Buffer = gItemIcon4x4Buffer; // needed to match
     gItemIcon4x4Buffer = AllocZeroed(0x200);
     if (gItemIcon4x4Buffer == NULL)
     {
@@ -161,8 +159,8 @@ u8 AddCustomItemIconSprite(const struct SpriteTemplate *customSpriteTemplate, u1
 
 const void *GetItemIconPicOrPalette(u16 itemId, u8 which)
 {
-    if (itemId == 0xFFFF)
-        itemId = ITEM_FIELD_ARROW;
+    if (itemId == ITEM_LIST_END)
+        itemId = ITEMS_COUNT; // Use last icon, the "return to field" arrow
     else if (itemId >= ITEMS_COUNT)
         itemId = 0;
 

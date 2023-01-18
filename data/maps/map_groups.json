@@ -1,41 +1,41 @@
 {
   "group_order": [
-    "gMapGroup0",
-    "gMapGroup1",
-    "gMapGroup2",
-    "gMapGroup3",
-    "gMapGroup4",
-    "gMapGroup5",
-    "gMapGroup6",
-    "gMapGroup7",
-    "gMapGroup8",
-    "gMapGroup9",
-    "gMapGroup10",
-    "gMapGroup11",
-    "gMapGroup12",
-    "gMapGroup13",
-    "gMapGroup14",
-    "gMapGroup15",
-    "gMapGroup16",
-    "gMapGroup17",
-    "gMapGroup18",
-    "gMapGroup19",
-    "gMapGroup20",
-    "gMapGroup21",
-    "gMapGroup22",
-    "gMapGroup23",
-    "gMapGroup24",
-    "gMapGroup25",
-    "gMapGroup26",
-    "gMapGroup27",
-    "gMapGroup28",
-    "gMapGroup29",
-    "gMapGroup30",
-    "gMapGroup31",
-    "gMapGroup32",
-    "gMapGroup33"
+    "gMapGroup_TownsAndRoutes",
+    "gMapGroup_IndoorLittleroot",
+    "gMapGroup_IndoorOldale",
+    "gMapGroup_IndoorDewford",
+    "gMapGroup_IndoorLavaridge",
+    "gMapGroup_IndoorFallarbor",
+    "gMapGroup_IndoorVerdanturf",
+    "gMapGroup_IndoorPacifidlog",
+    "gMapGroup_IndoorPetalburg",
+    "gMapGroup_IndoorSlateport",
+    "gMapGroup_IndoorMauville",
+    "gMapGroup_IndoorRustboro",
+    "gMapGroup_IndoorFortree",
+    "gMapGroup_IndoorLilycove",
+    "gMapGroup_IndoorMossdeep",
+    "gMapGroup_IndoorSootopolis",
+    "gMapGroup_IndoorEverGrande",
+    "gMapGroup_IndoorRoute104",
+    "gMapGroup_IndoorRoute111",
+    "gMapGroup_IndoorRoute112",
+    "gMapGroup_IndoorRoute114",
+    "gMapGroup_IndoorRoute116",
+    "gMapGroup_IndoorRoute117",
+    "gMapGroup_IndoorRoute121",
+    "gMapGroup_Dungeons",
+    "gMapGroup_IndoorDynamic",
+    "gMapGroup_SpecialArea",
+    "gMapGroup_IndoorRoute104Prototype",
+    "gMapGroup_IndoorRoute109",
+    "gMapGroup_IndoorRoute110",
+    "gMapGroup_IndoorRoute113",
+    "gMapGroup_IndoorRoute123",
+    "gMapGroup_IndoorRoute119",
+    "gMapGroup_IndoorRoute124"
   ],
-  "gMapGroup0": [
+  "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
     "SlateportCity",
     "MauvilleCity",
@@ -94,21 +94,21 @@
     "Underwater_Route105",
     "Underwater_Route125"
   ],
-  "gMapGroup1": [
+  "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",
     "LittlerootTown_BrendansHouse_2F",
     "LittlerootTown_MaysHouse_1F",
     "LittlerootTown_MaysHouse_2F",
     "LittlerootTown_ProfessorBirchsLab"
   ],
-  "gMapGroup2": [
+  "gMapGroup_IndoorOldale": [
     "OldaleTown_House1",
     "OldaleTown_House2",
     "OldaleTown_PokemonCenter_1F",
     "OldaleTown_PokemonCenter_2F",
     "OldaleTown_Mart"
   ],
-  "gMapGroup3": [
+  "gMapGroup_IndoorDewford": [
     "DewfordTown_House1",
     "DewfordTown_PokemonCenter_1F",
     "DewfordTown_PokemonCenter_2F",
@@ -116,7 +116,7 @@
     "DewfordTown_Hall",
     "DewfordTown_House2"
   ],
-  "gMapGroup4": [
+  "gMapGroup_IndoorLavaridge": [
     "LavaridgeTown_HerbShop",
     "LavaridgeTown_Gym_1F",
     "LavaridgeTown_Gym_B1F",
@@ -125,7 +125,7 @@
     "LavaridgeTown_PokemonCenter_1F",
     "LavaridgeTown_PokemonCenter_2F"
   ],
-  "gMapGroup5": [
+  "gMapGroup_IndoorFallarbor": [
     "FallarborTown_Mart",
     "FallarborTown_BattleTentLobby",
     "FallarborTown_BattleTentCorridor",
@@ -135,7 +135,7 @@
     "FallarborTown_CozmosHouse",
     "FallarborTown_MoveRelearnersHouse"
   ],
-  "gMapGroup6": [
+  "gMapGroup_IndoorVerdanturf": [
     "VerdanturfTown_BattleTentLobby",
     "VerdanturfTown_BattleTentCorridor",
     "VerdanturfTown_BattleTentBattleRoom",
@@ -146,7 +146,7 @@
     "VerdanturfTown_FriendshipRatersHouse",
     "VerdanturfTown_House"
   ],
-  "gMapGroup7": [
+  "gMapGroup_IndoorPacifidlog": [
     "PacifidlogTown_PokemonCenter_1F",
     "PacifidlogTown_PokemonCenter_2F",
     "PacifidlogTown_House1",
@@ -155,7 +155,7 @@
     "PacifidlogTown_House4",
     "PacifidlogTown_House5"
   ],
-  "gMapGroup8": [
+  "gMapGroup_IndoorPetalburg": [
     "PetalburgCity_WallysHouse",
     "PetalburgCity_Gym",
     "PetalburgCity_House1",
@@ -164,7 +164,7 @@
     "PetalburgCity_PokemonCenter_2F",
     "PetalburgCity_Mart"
   ],
-  "gMapGroup9": [
+  "gMapGroup_IndoorSlateport": [
     "SlateportCity_SternsShipyard_1F",
     "SlateportCity_SternsShipyard_2F",
     "SlateportCity_BattleTentLobby",
@@ -180,7 +180,7 @@
     "SlateportCity_PokemonCenter_2F",
     "SlateportCity_Mart"
   ],
-  "gMapGroup10": [
+  "gMapGroup_IndoorMauville": [
     "MauvilleCity_Gym",
     "MauvilleCity_BikeShop",
     "MauvilleCity_House1",
@@ -190,7 +190,7 @@
     "MauvilleCity_PokemonCenter_2F",
     "MauvilleCity_Mart"
   ],
-  "gMapGroup11": [
+  "gMapGroup_IndoorRustboro": [
     "RustboroCity_DevonCorp_1F",
     "RustboroCity_DevonCorp_2F",
     "RustboroCity_DevonCorp_3F",
@@ -209,7 +209,7 @@
     "RustboroCity_Flat2_3F",
     "RustboroCity_House3"
   ],
-  "gMapGroup12": [
+  "gMapGroup_IndoorFortree": [
     "FortreeCity_House1",
     "FortreeCity_Gym",
     "FortreeCity_PokemonCenter_1F",
@@ -221,7 +221,7 @@
     "FortreeCity_House5",
     "FortreeCity_DecorationShop"
   ],
-  "gMapGroup13": [
+  "gMapGroup_IndoorLilycove": [
     "LilycoveCity_CoveLilyMotel_1F",
     "LilycoveCity_CoveLilyMotel_2F",
     "LilycoveCity_LilycoveMuseum_1F",
@@ -246,7 +246,7 @@
     "LilycoveCity_DepartmentStoreRooftop",
     "LilycoveCity_DepartmentStoreElevator"
   ],
-  "gMapGroup14": [
+  "gMapGroup_IndoorMossdeep": [
     "MossdeepCity_Gym",
     "MossdeepCity_House1",
     "MossdeepCity_House2",
@@ -261,7 +261,7 @@
     "MossdeepCity_GameCorner_1F",
     "MossdeepCity_GameCorner_B1F"
   ],
-  "gMapGroup15": [
+  "gMapGroup_IndoorSootopolis": [
     "SootopolisCity_Gym_1F",
     "SootopolisCity_Gym_B1F",
     "SootopolisCity_PokemonCenter_1F",
@@ -278,7 +278,7 @@
     "SootopolisCity_MysteryEventsHouse_1F",
     "SootopolisCity_MysteryEventsHouse_B1F"
   ],
-  "gMapGroup16": [
+  "gMapGroup_IndoorEverGrande": [
     "EverGrandeCity_SidneysRoom",
     "EverGrandeCity_PhoebesRoom",
     "EverGrandeCity_GlaciasRoom",
@@ -295,33 +295,33 @@
     "EverGrandeCity_PokemonCenter_2F",
     "EverGrandeCity_PokemonLeague_2F"
   ],
-  "gMapGroup17": [
+  "gMapGroup_IndoorRoute104": [
     "Route104_MrBrineysHouse",
     "Route104_PrettyPetalFlowerShop"
   ],
-  "gMapGroup18": [
+  "gMapGroup_IndoorRoute111": [
     "Route111_WinstrateFamilysHouse",
     "Route111_OldLadysRestStop"
   ],
-  "gMapGroup19": [
+  "gMapGroup_IndoorRoute112": [
     "Route112_CableCarStation",
     "MtChimney_CableCarStation"
   ],
-  "gMapGroup20": [
+  "gMapGroup_IndoorRoute114": [
     "Route114_FossilManiacsHouse",
     "Route114_FossilManiacsTunnel",
     "Route114_LanettesHouse"
   ],
-  "gMapGroup21": [
+  "gMapGroup_IndoorRoute116": [
     "Route116_TunnelersRestHouse"
   ],
-  "gMapGroup22": [
+  "gMapGroup_IndoorRoute117": [
     "Route117_PokemonDayCare"
   ],
-  "gMapGroup23": [
+  "gMapGroup_IndoorRoute121": [
     "Route121_SafariZoneEntrance"
   ],
-  "gMapGroup24": [
+  "gMapGroup_Dungeons": [
     "MeteorFalls_1F_1R",
     "MeteorFalls_1F_2R",
     "MeteorFalls_B1F_1R",
@@ -431,7 +431,7 @@
     "AlteringCave",
     "MeteorFalls_StevensCave"
   ],
-  "gMapGroup25": [
+  "gMapGroup_IndoorDynamic": [
     "SecretBase_RedCave1",
     "SecretBase_BrownCave1",
     "SecretBase_BlueCave1",
@@ -461,12 +461,12 @@
     "RecordCorner",
     "BattleColosseum_4P",
     "ContestHall",
-    "UnknownLinkContestRoom_25_29",
-    "UnknownLinkContestRoom_25_30",
-    "UnknownLinkContestRoom_25_31",
-    "UnknownLinkContestRoom_25_32",
-    "UnknownLinkContestRoom_25_33",
-    "UnknownLinkContestRoom_25_34",
+    "UnusedContestHall1",
+    "UnusedContestHall2",
+    "UnusedContestHall3",
+    "UnusedContestHall4",
+    "UnusedContestHall5",
+    "UnusedContestHall6",
     "ContestHallBeauty",
     "ContestHallTough",
     "ContestHallCool",
@@ -494,7 +494,7 @@
     "BattlePyramidSquare16",
     "UnionRoom"
   ],
-  "gMapGroup26": [
+  "gMapGroup_SpecialArea": [
     "SafariZone_Northwest",
     "SafariZone_North",
     "SafariZone_Southwest",
@@ -585,14 +585,14 @@
     "NavelRock_Bottom",
     "TrainerHill_Elevator"
   ],
-  "gMapGroup27": [
+  "gMapGroup_IndoorRoute104Prototype": [
     "Route104_Prototype",
     "Route104_PrototypePrettyPetalFlowerShop"
   ],
-  "gMapGroup28": [
+  "gMapGroup_IndoorRoute109": [
     "Route109_SeashoreHouse"
   ],
-  "gMapGroup29": [
+  "gMapGroup_IndoorRoute110": [
     "Route110_TrickHouseEntrance",
     "Route110_TrickHouseEnd",
     "Route110_TrickHouseCorridor",
@@ -607,18 +607,18 @@
     "Route110_SeasideCyclingRoadNorthEntrance",
     "Route110_SeasideCyclingRoadSouthEntrance"
   ],
-  "gMapGroup30": [
+  "gMapGroup_IndoorRoute113": [
     "Route113_GlassWorkshop"
   ],
-  "gMapGroup31": [
+  "gMapGroup_IndoorRoute123": [
     "Route123_BerryMastersHouse"
   ],
-  "gMapGroup32": [
+  "gMapGroup_IndoorRoute119": [
     "Route119_WeatherInstitute_1F",
     "Route119_WeatherInstitute_2F",
     "Route119_House"
   ],
-  "gMapGroup33": [
+  "gMapGroup_IndoorRoute124": [
     "Route124_DivingTreasureHuntersHouse"
   ],
   "connections_include_order": [

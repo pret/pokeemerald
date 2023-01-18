@@ -1,3 +1,3 @@
-TradeCenter_MapScripts:: @ 823B77E
+TradeCenter_MapScripts::
 	.byte 0
 

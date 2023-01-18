@@ -1,8 +1,8 @@
 #ifndef GUARD_ITEM_ICON_H
 #define GUARD_ITEM_ICON_H
 
-extern void *gItemIconDecompressionBuffer;
-extern void *gItemIcon4x4Buffer;
+extern u8 *gItemIconDecompressionBuffer;
+extern u8 *gItemIcon4x4Buffer;
 
 extern const struct SpriteTemplate gItemIconSpriteTemplate;
 

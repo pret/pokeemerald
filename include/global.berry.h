@@ -40,6 +40,7 @@ struct Berry2
     u8 bitter;
     u8 sour;
     u8 smoothness;
+    //u8 padding;
 };
 
 struct EnigmaBerry
@@ -63,7 +64,7 @@ struct BerryTree
 {
     u8 berry;
     u8 stage:7;
-    u8 growthSparkle:1;
+    u8 stopGrowth:1;
     u16 minutesUntilNextStage;
     u8 berryYield;
     u8 regrowthCount:4;

@@ -1,21 +1,31 @@
 #include "global.h"
 #include "script.h"
 #include "event_data.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "util.h"
+#include "constants/event_objects.h"
 #include "constants/map_scripts.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
-extern const u8* gUnknown_020375C0;
+enum {
+    SCRIPT_MODE_STOPPED,
+    SCRIPT_MODE_BYTECODE,
+    SCRIPT_MODE_NATIVE,
+};
 
-// ewram bss
-static u8 sScriptContext1Status;
-static u32 sUnusedVariable1;
-static struct ScriptContext sScriptContext1;
-static u32 sUnusedVariable2;
-static struct ScriptContext sScriptContext2;
-static bool8 sScriptContext2Enabled;
+enum {
+    CONTEXT_RUNNING,
+    CONTEXT_WAITING,
+    CONTEXT_SHUTDOWN,
+};
+
+extern const u8 *gRamScriptRetAddr;
+
+static u8 sGlobalScriptContextStatus;
+static struct ScriptContext sGlobalScriptContext;
+static struct ScriptContext sImmediateScriptContext;
+static bool8 sLockFieldControls;
 
 extern ScrCmdFunc gScriptCmdTable[];
 extern ScrCmdFunc gScriptCmdTableEnd[];
@@ -25,57 +35,60 @@ void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTable
 {
     s32 i;
 
-    ctx->mode = 0;
-    ctx->scriptPtr = 0;
+    ctx->mode = SCRIPT_MODE_STOPPED;
+    ctx->scriptPtr = NULL;
     ctx->stackDepth = 0;
-    ctx->nativePtr = 0;
+    ctx->nativePtr = NULL;
     ctx->cmdTable = cmdTable;
     ctx->cmdTableEnd = cmdTableEnd;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(ctx->data); i++)
         ctx->data[i] = 0;
 
-    for (i = 0; i < 20; i++)
-        ctx->stack[i] = 0;
+    for (i = 0; i < (int)ARRAY_COUNT(ctx->stack); i++)
+        ctx->stack[i] = NULL;
 }
 
 u8 SetupBytecodeScript(struct ScriptContext *ctx, const u8 *ptr)
 {
     ctx->scriptPtr = ptr;
-    ctx->mode = 1;
+    ctx->mode = SCRIPT_MODE_BYTECODE;
     return 1;
 }
 
 void SetupNativeScript(struct ScriptContext *ctx, bool8 (*ptr)(void))
 {
-    ctx->mode = 2;
+    ctx->mode = SCRIPT_MODE_NATIVE;
     ctx->nativePtr = ptr;
 }
 
 void StopScript(struct ScriptContext *ctx)
 {
-    ctx->mode = 0;
-    ctx->scriptPtr = 0;
+    ctx->mode = SCRIPT_MODE_STOPPED;
+    ctx->scriptPtr = NULL;
 }
 
 bool8 RunScriptCommand(struct ScriptContext *ctx)
 {
-    if (ctx->mode == 0)
+    if (ctx->mode == SCRIPT_MODE_STOPPED)
         return FALSE;
 
     switch (ctx->mode)
     {
-    case 0:
+    case SCRIPT_MODE_STOPPED:
         return FALSE;
-    case 2:
+    case SCRIPT_MODE_NATIVE:
+        // Try to call a function in C
+        // Continue to bytecode if no function or it returns TRUE
         if (ctx->nativePtr)
         {
             if (ctx->nativePtr() == TRUE)
-                ctx->mode = 1;
+                ctx->mode = SCRIPT_MODE_BYTECODE;
             return TRUE;
         }
-        ctx->mode = 1;
-    case 1:
+        ctx->mode = SCRIPT_MODE_BYTECODE;
+        // fallthrough
+    case SCRIPT_MODE_BYTECODE:
         while (1)
         {
             u8 cmdCode;
@@ -83,7 +96,7 @@ bool8 RunScriptCommand(struct ScriptContext *ctx)
 
             if (!ctx->scriptPtr)
             {
-                ctx->mode = 0;
+                ctx->mode = SCRIPT_MODE_STOPPED;
                 return FALSE;
             }
 
@@ -99,11 +112,11 @@ bool8 RunScriptCommand(struct ScriptContext *ctx)
 
             if (func >= ctx->cmdTableEnd)
             {
-                ctx->mode = 0;
+                ctx->mode = SCRIPT_MODE_STOPPED;
                 return FALSE;
             }
 
-            if ((*func)(ctx) == 1)
+            if ((*func)(ctx) == TRUE)
                 return TRUE;
         }
     }
@@ -111,21 +124,21 @@ bool8 RunScriptCommand(struct ScriptContext *ctx)
     return TRUE;
 }
 
-u8 ScriptPush(struct ScriptContext *ctx, const u8 *ptr)
+static bool8 ScriptPush(struct ScriptContext *ctx, const u8 *ptr)
 {
-    if (ctx->stackDepth + 1 >= 20)
+    if (ctx->stackDepth + 1 >= (int)ARRAY_COUNT(ctx->stack))
     {
-        return 1;
+        return TRUE;
     }
     else
     {
         ctx->stack[ctx->stackDepth] = ptr;
         ctx->stackDepth++;
-        return 0;
+        return FALSE;
     }
 }
 
-const u8 *ScriptPop(struct ScriptContext *ctx)
+static const u8 *ScriptPop(struct ScriptContext *ctx)
 {
     if (ctx->stackDepth == 0)
         return NULL;
@@ -166,79 +179,94 @@ u32 ScriptReadWord(struct ScriptContext *ctx)
     return (((((value3 << 8) + value2) << 8) + value1) << 8) + value0;
 }
 
-void ScriptContext2_Enable(void)
+void LockPlayerFieldControls(void)
 {
-    sScriptContext2Enabled = TRUE;
+    sLockFieldControls = TRUE;
 }
 
-void ScriptContext2_Disable(void)
+void UnlockPlayerFieldControls(void)
 {
-    sScriptContext2Enabled = FALSE;
+    sLockFieldControls = FALSE;
 }
 
-bool8 ScriptContext2_IsEnabled(void)
+bool8 ArePlayerFieldControlsLocked(void)
 {
-    return sScriptContext2Enabled;
+    return sLockFieldControls;
 }
 
-bool8 ScriptContext1_IsScriptSetUp(void)
+// The ScriptContext_* functions work with the primary script context,
+// which yields control back to native code should the script make a wait call.
+
+// Checks if the global script context is able to be run right now.
+bool8 ScriptContext_IsEnabled(void)
 {
-    if (sScriptContext1Status == 0)
+    if (sGlobalScriptContextStatus == CONTEXT_RUNNING)
         return TRUE;
     else
         return FALSE;
 }
 
-void ScriptContext1_Init(void)
+// Re-initializes the global script context to zero.
+void ScriptContext_Init(void)
 {
-    InitScriptContext(&sScriptContext1, gScriptCmdTable, gScriptCmdTableEnd);
-    sScriptContext1Status = 2;
+    InitScriptContext(&sGlobalScriptContext, gScriptCmdTable, gScriptCmdTableEnd);
+    sGlobalScriptContextStatus = CONTEXT_SHUTDOWN;
 }
 
-bool8 ScriptContext2_RunScript(void)
+// Runs the script until the script makes a wait* call, then returns true if
+// there's more script to run, or false if the script has hit the end.
+// This function also returns false if the context is finished
+// or waiting (after a call to _Stop)
+bool8 ScriptContext_RunScript(void)
 {
-    if (sScriptContext1Status == 2)
-        return 0;
+    if (sGlobalScriptContextStatus == CONTEXT_SHUTDOWN)
+        return FALSE;
 
-    if (sScriptContext1Status == 1)
-        return 0;
+    if (sGlobalScriptContextStatus == CONTEXT_WAITING)
+        return FALSE;
 
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 
-    if (!RunScriptCommand(&sScriptContext1))
+    if (!RunScriptCommand(&sGlobalScriptContext))
     {
-        sScriptContext1Status = 2;
-        ScriptContext2_Disable();
-        return 0;
+        sGlobalScriptContextStatus = CONTEXT_SHUTDOWN;
+        UnlockPlayerFieldControls();
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
-void ScriptContext1_SetupScript(const u8 *ptr)
+// Sets up a new script in the global context and enables the context
+void ScriptContext_SetupScript(const u8 *ptr)
 {
-    InitScriptContext(&sScriptContext1, gScriptCmdTable, gScriptCmdTableEnd);
-    SetupBytecodeScript(&sScriptContext1, ptr);
-    ScriptContext2_Enable();
-    sScriptContext1Status = 0;
+    InitScriptContext(&sGlobalScriptContext, gScriptCmdTable, gScriptCmdTableEnd);
+    SetupBytecodeScript(&sGlobalScriptContext, ptr);
+    LockPlayerFieldControls();
+    sGlobalScriptContextStatus = CONTEXT_RUNNING;
 }
 
-void ScriptContext1_Stop(void)
+// Puts the script into waiting mode; usually called from a wait* script command.
+void ScriptContext_Stop(void)
 {
-    sScriptContext1Status = 1;
+    sGlobalScriptContextStatus = CONTEXT_WAITING;
 }
 
-void EnableBothScriptContexts(void)
+// Puts the script into running mode.
+void ScriptContext_Enable(void)
 {
-    sScriptContext1Status = 0;
-    ScriptContext2_Enable();
+    sGlobalScriptContextStatus = CONTEXT_RUNNING;
+    LockPlayerFieldControls();
 }
 
-void ScriptContext2_RunNewScript(const u8 *ptr)
+// Sets up and runs a script in its own context immediately. The script will be
+// finished when this function returns. Used mainly by all of the map header
+// scripts (except the frame table scripts).
+void RunScriptImmediately(const u8 *ptr)
 {
-    InitScriptContext(&sScriptContext2, &gScriptCmdTable, &gScriptCmdTableEnd);
-    SetupBytecodeScript(&sScriptContext2, ptr);
-    while (RunScriptCommand(&sScriptContext2) == TRUE);
+    InitScriptContext(&sImmediateScriptContext, gScriptCmdTable, gScriptCmdTableEnd);
+    SetupBytecodeScript(&sImmediateScriptContext, ptr);
+    while (RunScriptCommand(&sImmediateScriptContext) == TRUE);
 }
 
 u8 *MapHeaderGetScriptTable(u8 tag)
@@ -255,7 +283,7 @@ u8 *MapHeaderGetScriptTable(u8 tag)
         if (*mapScripts == tag)
         {
             mapScripts++;
-            return (u8 *)(mapScripts[0] + (mapScripts[1] << 8) + (mapScripts[2] << 16) + (mapScripts[3] << 24));
+            return T2_READ_PTR(mapScripts);
         }
         mapScripts += 5;
     }
@@ -265,7 +293,7 @@ void MapHeaderRunScriptType(u8 tag)
 {
     u8 *ptr = MapHeaderGetScriptTable(tag);
     if (ptr)
-        ScriptContext2_RunNewScript(ptr);
+        RunScriptImmediately(ptr);
 }
 
 u8 *MapHeaderCheckScriptTable(u8 tag)
@@ -279,14 +307,20 @@ u8 *MapHeaderCheckScriptTable(u8 tag)
     {
         u16 varIndex1;
         u16 varIndex2;
-        varIndex1 = ptr[0] | (ptr[1] << 8);
+
+        // Read first var (or .2byte terminal value)
+        varIndex1 = T1_READ_16(ptr);
         if (!varIndex1)
-            return NULL;
+            return NULL; // Reached end of table
         ptr += 2;
-        varIndex2 = ptr[0] | (ptr[1] << 8);
+
+        // Read second var
+        varIndex2 = T1_READ_16(ptr);
         ptr += 2;
+
+        // Run map script if vars are equal
         if (VarGet(varIndex1) == VarGet(varIndex2))
-            return (u8 *)(ptr[0] + (ptr[1] << 8) + (ptr[2] << 16) + (ptr[3] << 24));
+            return T2_READ_PTR(ptr);
         ptr += 4;
     }
 }
@@ -323,7 +357,7 @@ bool8 TryRunOnFrameMapScript(void)
     if (!ptr)
         return FALSE;
 
-    ScriptContext1_SetupScript(ptr);
+    ScriptContext_SetupScript(ptr);
     return TRUE;
 }
 
@@ -331,12 +365,12 @@ void TryRunOnWarpIntoMapScript(void)
 {
     u8 *ptr = MapHeaderCheckScriptTable(MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE);
     if (ptr)
-        ScriptContext2_RunNewScript(ptr);
+        RunScriptImmediately(ptr);
 }
 
 u32 CalculateRamScriptChecksum(void)
 {
-    return CalcCRC16WithTable((u8*)(&gSaveBlock1Ptr->ramScript.data), sizeof(gSaveBlock1Ptr->ramScript.data));
+    return CalcCRC16WithTable((u8 *)(&gSaveBlock1Ptr->ramScript.data), sizeof(gSaveBlock1Ptr->ramScript.data));
 }
 
 void ClearRamScript(void)
@@ -365,7 +399,7 @@ bool8 InitRamScript(const u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8
 const u8 *GetRamScript(u8 objectId, const u8 *script)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
-    gUnknown_020375C0 = NULL;
+    gRamScriptRetAddr = NULL;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return script;
     if (scriptData->mapGroup != gSaveBlock1Ptr->location.mapGroup)
@@ -381,21 +415,23 @@ const u8 *GetRamScript(u8 objectId, const u8 *script)
     }
     else
     {
-        gUnknown_020375C0 = script;
+        gRamScriptRetAddr = script;
         return scriptData->script;
     }
 }
+
+#define NO_OBJECT OBJ_EVENT_ID_PLAYER
 
 bool32 ValidateSavedRamScript(void)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return FALSE;
-    if (scriptData->mapGroup != 0xFF)
+    if (scriptData->mapGroup != MAP_GROUP(UNDEFINED))
         return FALSE;
-    if (scriptData->mapNum != 0xFF)
+    if (scriptData->mapNum != MAP_NUM(UNDEFINED))
         return FALSE;
-    if (scriptData->objectId != 0xFF)
+    if (scriptData->objectId != NO_OBJECT)
         return FALSE;
     if (CalculateRamScriptChecksum() != gSaveBlock1Ptr->ramScript.checksum)
         return FALSE;
@@ -405,15 +441,15 @@ bool32 ValidateSavedRamScript(void)
 u8 *GetSavedRamScriptIfValid(void)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
-    if (!ValidateReceivedWonderCard())
+    if (!ValidateSavedWonderCard())
         return NULL;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return NULL;
-    if (scriptData->mapGroup != 0xFF)
+    if (scriptData->mapGroup != MAP_GROUP(UNDEFINED))
         return NULL;
-    if (scriptData->mapNum != 0xFF)
+    if (scriptData->mapNum != MAP_NUM(UNDEFINED))
         return NULL;
-    if (scriptData->objectId != 0xFF)
+    if (scriptData->objectId != NO_OBJECT)
         return NULL;
     if (CalculateRamScriptChecksum() != gSaveBlock1Ptr->ramScript.checksum)
     {
@@ -430,5 +466,5 @@ void InitRamScript_NoObjectEvent(u8 *script, u16 scriptSize)
 {
     if (scriptSize > sizeof(gSaveBlock1Ptr->ramScript.data.script))
         scriptSize = sizeof(gSaveBlock1Ptr->ramScript.data.script);
-    InitRamScript(script, scriptSize, 0xFF, 0xFF, 0xFF);
+    InitRamScript(script, scriptSize, MAP_GROUP(UNDEFINED), MAP_NUM(UNDEFINED), NO_OBJECT);
 }

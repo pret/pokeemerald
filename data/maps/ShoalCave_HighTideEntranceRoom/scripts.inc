@@ -1,3 +1,3 @@
-ShoalCave_HighTideEntranceRoom_MapScripts:: @ 82372AB
+ShoalCave_HighTideEntranceRoom_MapScripts::
 	.byte 0
 

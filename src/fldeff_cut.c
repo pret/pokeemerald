@@ -62,7 +62,6 @@ static void HandleLongGrassOnHyper(u8, s16, s16);
 static u8 sCutSquareSide;
 static u8 sTileCountFromPlayer_X;
 static u8 sTileCountFromPlayer_Y;
-static u32 sUnused;
 static bool8 sHyperCutTiles[CUT_HYPER_AREA];
 
 // EWRAM variables
@@ -94,7 +93,7 @@ static const struct OamData sOamData_CutGrass =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
@@ -126,7 +125,7 @@ const struct SpritePalette gSpritePalette_CutGrass = {gFieldEffectPal_CutGrass, 
 
 static const struct SpriteTemplate sSpriteTemplate_CutGrass =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_CUT_GRASS,
     .oam = &sOamData_CutGrass,
     .anims = sSpriteAnimTable_CutGrass,
@@ -182,7 +181,7 @@ bool8 SetUpFieldMove_Cut(void)
             for (j = 0; j < CUT_NORMAL_SIDE; j++)
             {
                 x = j - 1 + gPlayerFacingPosition.x;
-                if (MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
+                if (MapGridGetElevationAt(x, y) == gPlayerFacingPosition.elevation)
                 {
                     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
                     if (MetatileBehavior_IsPokeGrass(tileBehavior) == TRUE
@@ -192,7 +191,12 @@ bool8 SetUpFieldMove_Cut(void)
                         sHyperCutTiles[6 + (i * 5) + j] = TRUE;
                         ret = TRUE;
                     }
-                    if (MapGridIsImpassableAt(x, y) == TRUE)
+                #ifdef BUGFIX
+                    // Collision has a range 0-3, any value != 0 is impassable
+                    if (MapGridGetCollisionAt(x, y))
+                #else
+                    if (MapGridGetCollisionAt(x, y) == 1)
+                #endif
                     {
                         cutTiles[i * 3 + j] = FALSE;
                     }
@@ -239,7 +243,7 @@ bool8 SetUpFieldMove_Cut(void)
 
                 if (tileCuttable == TRUE)
                 {
-                    if (MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
+                    if (MapGridGetElevationAt(x, y) == gPlayerFacingPosition.elevation)
                     {
                         u8 tileArrayId = ((sHyperCutStruct[i].y * 5) + 12) + (sHyperCutStruct[i].x);
                         tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
@@ -290,7 +294,7 @@ bool8 FldEff_UseCutOnGrass(void)
 static void FieldCallback_CutTree(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext1_SetupScript(EventScript_UseCut);
+    ScriptContext_SetupScript(EventScript_UseCut);
 }
 
 bool8 FldEff_UseCutOnTree(void)
@@ -327,7 +331,7 @@ bool8 FldEff_CutGrass(void)
             y = yAdd + gPlayerFacingPosition.y;
 
             SetCutGrassMetatile(x, y);
-            sub_808E75C(x, y);
+            AllowObjectAtPosTriggerGroundEffects(x, y);
         }
     }
 
@@ -556,8 +560,8 @@ static void CutGrassSpriteCallback1(struct Sprite *sprite)
 
 static void CutGrassSpriteCallback2(struct Sprite *sprite)
 {
-    sprite->pos2.x = Sin(sprite->data[2], sprite->data[0]);
-    sprite->pos2.y = Cos(sprite->data[2], sprite->data[0]);
+    sprite->x2 = Sin(sprite->data[2], sprite->data[0]);
+    sprite->y2 = Cos(sprite->data[2], sprite->data[0]);
 
     sprite->data[2] = (sprite->data[2] + 8) & 0xFF;
     sprite->data[0] += 1 + (sprite->data[3] >> 2); // right shift by 2 is dividing by 4
@@ -579,10 +583,10 @@ static void CutGrassSpriteCallbackEnd(struct Sprite *sprite)
     FieldEffectStop(&gSprites[sCutGrassSpriteArrayPtr[0]], FLDEFF_CUT_GRASS);
     FREE_AND_SET_NULL(sCutGrassSpriteArrayPtr);
     ScriptUnfreezeObjectEvents();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 
     if (IsMewPlayingHideAndSeek() == TRUE)
-        ScriptContext1_SetupScript(FarawayIsland_Interior_EventScript_HideMewWhenGrassCut);
+        ScriptContext_SetupScript(FarawayIsland_Interior_EventScript_HideMewWhenGrassCut);
 }
 
 void FixLongGrassMetatilesWindowTop(s16 x, s16 y)
@@ -639,5 +643,5 @@ static void StartCutTreeFieldEffect(void)
 {
     PlaySE(SE_M_CUT);
     FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_TREE);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }

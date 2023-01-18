@@ -22,7 +22,7 @@ static const struct OamData sOamData_MoneyLabel =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
@@ -58,28 +58,28 @@ static const struct SpriteTemplate sSpriteTemplate_MoneyLabel =
 
 static const struct CompressedSpriteSheet sSpriteSheet_MoneyLabel =
 {
-    .data = gMenuMoneyGfx,
+    .data = gShopMenuMoney_Gfx,
     .size = 256,
     .tag = MONEY_LABEL_TAG,
 };
 
 static const struct CompressedSpritePalette sSpritePalette_MoneyLabel =
 {
-    .data = gMenuMoneyPal,
+    .data = gShopMenu_Pal,
     .tag = MONEY_LABEL_TAG
 };
 
-u32 GetMoney(u32* moneyPtr)
+u32 GetMoney(u32 *moneyPtr)
 {
     return *moneyPtr ^ gSaveBlock2Ptr->encryptionKey;
 }
 
-void SetMoney(u32* moneyPtr, u32 newValue)
+void SetMoney(u32 *moneyPtr, u32 newValue)
 {
     *moneyPtr = gSaveBlock2Ptr->encryptionKey ^ newValue;
 }
 
-bool8 IsEnoughMoney(u32* moneyPtr, u32 cost)
+bool8 IsEnoughMoney(u32 *moneyPtr, u32 cost)
 {
     if (GetMoney(moneyPtr) >= cost)
         return TRUE;
@@ -87,7 +87,7 @@ bool8 IsEnoughMoney(u32* moneyPtr, u32 cost)
         return FALSE;
 }
 
-void AddMoney(u32* moneyPtr, u32 toAdd)
+void AddMoney(u32 *moneyPtr, u32 toAdd)
 {
     u32 toSet = GetMoney(moneyPtr);
 
@@ -107,7 +107,7 @@ void AddMoney(u32* moneyPtr, u32 toAdd)
     SetMoney(moneyPtr, toSet);
 }
 
-void RemoveMoney(u32* moneyPtr, u32 toSub)
+void RemoveMoney(u32 *moneyPtr, u32 toSub)
 {
     u32 toSet = GetMoney(moneyPtr);
 
@@ -132,7 +132,7 @@ void SubtractMoneyFromVar0x8005(void)
 
 void PrintMoneyAmountInMoneyBox(u8 windowId, int amount, u8 speed)
 {
-    PrintMoneyAmount(windowId, 0x26, 1, amount, speed);
+    PrintMoneyAmount(windowId, 38, 1, amount, speed);
 }
 
 void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed)
@@ -146,10 +146,10 @@ void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed)
     txtPtr = gStringVar4;
 
     while (strLength-- > 0)
-        *(txtPtr++) = 0x77;
+        *(txtPtr++) = CHAR_SPACER;
 
     StringExpandPlaceholders(txtPtr, gText_PokedollarVar1);
-    AddTextPrinterParameterized(windowId, 1, gStringVar4, x, y, speed, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, x, y, speed, NULL);
 }
 
 void PrintMoneyAmountInMoneyBoxWithBorder(u8 windowId, u16 tileStart, u8 pallete, int amount)
@@ -171,7 +171,7 @@ void DrawMoneyBox(int amount, u8 x, u8 y)
     sMoneyBoxWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sMoneyBoxWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sMoneyBoxWindowId);
-    CopyWindowToVram(sMoneyBoxWindowId, 1);
+    CopyWindowToVram(sMoneyBoxWindowId, COPYWIN_MAP);
     PrintMoneyAmountInMoneyBoxWithBorder(sMoneyBoxWindowId, 0x214, 14, amount);
     AddMoneyLabelObject((8 * x) + 19, (8 * y) + 11);
 }
@@ -180,7 +180,7 @@ void HideMoneyBox(void)
 {
     RemoveMoneyLabelObject();
     ClearStdWindowAndFrameToTransparent(sMoneyBoxWindowId, FALSE);
-    CopyWindowToVram(sMoneyBoxWindowId, 2);
+    CopyWindowToVram(sMoneyBoxWindowId, COPYWIN_GFX);
     RemoveWindow(sMoneyBoxWindowId);
 }
 

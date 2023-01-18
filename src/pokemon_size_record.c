@@ -36,11 +36,12 @@ static const struct UnknownStruct sBigMonSizeTable[] =
     { 1700,   1,   -26 },
 };
 
-static const u8 sGiftRibbonsMonDataIds[] =
+// - 4 for unused gift ribbon bits in MON_DATA_UNUSED_RIBBONS
+static const u8 sGiftRibbonsMonDataIds[GIFT_RIBBONS_COUNT - 4] =
 {
-    MON_DATA_GIFT_RIBBON_1, MON_DATA_GIFT_RIBBON_2, MON_DATA_GIFT_RIBBON_3,
-    MON_DATA_GIFT_RIBBON_4, MON_DATA_GIFT_RIBBON_5, MON_DATA_GIFT_RIBBON_6,
-    MON_DATA_GIFT_RIBBON_7
+    MON_DATA_MARINE_RIBBON, MON_DATA_LAND_RIBBON, MON_DATA_SKY_RIBBON,
+    MON_DATA_COUNTRY_RIBBON, MON_DATA_NATIONAL_RIBBON, MON_DATA_EARTH_RIBBON,
+    MON_DATA_WORLD_RIBBON
 };
 
 extern const u8 gText_DecimalPoint[];
@@ -96,7 +97,7 @@ static void FormatMonSizeRecord(u8 *string, u32 size)
 {
 #ifdef UNITS_IMPERIAL
     //Convert size from centimeters to inches
-    size = (double)(size * 10) / (CM_PER_INCH * 10);
+    size = (f64)(size * 10) / (CM_PER_INCH * 10);
 #endif
 
     string = ConvertIntToDecimalStringN(string, size / 10, STR_CONV_MODE_LEFT_ALIGN, 8);
@@ -197,10 +198,10 @@ void GiveGiftRibbonToParty(u8 index, u8 ribbonId)
     s32 i;
     bool32 gotRibbon = FALSE;
     u8 data = 1;
-    u8 array[8];
+    u8 array[ARRAY_COUNT(sGiftRibbonsMonDataIds)];
     memcpy(array, sGiftRibbonsMonDataIds, sizeof(sGiftRibbonsMonDataIds));
 
-    if (index < 11 && ribbonId < 65)
+    if (index < GIFT_RIBBONS_COUNT && ribbonId <= MAX_GIFT_RIBBON)
     {
         gSaveBlock1Ptr->giftRibbons[index] = ribbonId;
         for (i = 0; i < PARTY_SIZE; i++)

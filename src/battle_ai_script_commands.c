@@ -95,16 +95,16 @@ static void Cmd_if_equal_(void);
 static void Cmd_if_not_equal_(void);
 static void Cmd_if_user_goes(void);
 static void Cmd_if_user_doesnt_go(void);
-static void Cmd_nullsub_2A(void);
-static void Cmd_nullsub_2B(void);
+static void Cmd_nop_2A(void);
+static void Cmd_nop_2B(void);
 static void Cmd_count_usable_party_mons(void);
 static void Cmd_get_considered_move(void);
 static void Cmd_get_considered_move_effect(void);
 static void Cmd_get_ability(void);
 static void Cmd_get_highest_type_effectiveness(void);
 static void Cmd_if_type_effectiveness(void);
-static void Cmd_nullsub_32(void);
-static void Cmd_nullsub_33(void);
+static void Cmd_nop_32(void);
+static void Cmd_nop_33(void);
 static void Cmd_if_status_in_party(void);
 static void Cmd_if_status_not_in_party(void);
 static void Cmd_get_weather(void);
@@ -135,12 +135,12 @@ static void Cmd_get_move_type_from_result(void);
 static void Cmd_get_move_power_from_result(void);
 static void Cmd_get_move_effect_from_result(void);
 static void Cmd_get_protect_count(void);
-static void Cmd_nullsub_52(void);
-static void Cmd_nullsub_53(void);
-static void Cmd_nullsub_54(void);
-static void Cmd_nullsub_55(void);
-static void Cmd_nullsub_56(void);
-static void Cmd_nullsub_57(void);
+static void Cmd_nop_52(void);
+static void Cmd_nop_53(void);
+static void Cmd_nop_54(void);
+static void Cmd_nop_55(void);
+static void Cmd_nop_56(void);
+static void Cmd_nop_57(void);
 static void Cmd_call(void);
 static void Cmd_goto(void);
 static void Cmd_end(void);
@@ -204,16 +204,16 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     Cmd_if_not_equal_,                              // 0x27
     Cmd_if_user_goes,                               // 0x28
     Cmd_if_user_doesnt_go,                          // 0x29
-    Cmd_nullsub_2A,                                 // 0x2A
-    Cmd_nullsub_2B,                                 // 0x2B
+    Cmd_nop_2A,                                     // 0x2A
+    Cmd_nop_2B,                                     // 0x2B
     Cmd_count_usable_party_mons,                    // 0x2C
     Cmd_get_considered_move,                        // 0x2D
     Cmd_get_considered_move_effect,                 // 0x2E
     Cmd_get_ability,                                // 0x2F
     Cmd_get_highest_type_effectiveness,             // 0x30
     Cmd_if_type_effectiveness,                      // 0x31
-    Cmd_nullsub_32,                                 // 0x32
-    Cmd_nullsub_33,                                 // 0x33
+    Cmd_nop_32,                                     // 0x32
+    Cmd_nop_33,                                     // 0x33
     Cmd_if_status_in_party,                         // 0x34
     Cmd_if_status_not_in_party,                     // 0x35
     Cmd_get_weather,                                // 0x36
@@ -244,12 +244,12 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     Cmd_get_move_power_from_result,                 // 0x4F
     Cmd_get_move_effect_from_result,                // 0x50
     Cmd_get_protect_count,                          // 0x51
-    Cmd_nullsub_52,                                 // 0x52
-    Cmd_nullsub_53,                                 // 0x53
-    Cmd_nullsub_54,                                 // 0x54
-    Cmd_nullsub_55,                                 // 0x55
-    Cmd_nullsub_56,                                 // 0x56
-    Cmd_nullsub_57,                                 // 0x57
+    Cmd_nop_52,                                     // 0x52
+    Cmd_nop_53,                                     // 0x53
+    Cmd_nop_54,                                     // 0x54
+    Cmd_nop_55,                                     // 0x55
+    Cmd_nop_56,                                     // 0x56
+    Cmd_nop_57,                                     // 0x57
     Cmd_call,                                       // 0x58
     Cmd_goto,                                       // 0x59
     Cmd_end,                                        // 0x5A
@@ -263,7 +263,10 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     Cmd_if_holds_item,                              // 0x62
 };
 
-static const u16 sDiscouragedPowerfulMoveEffects[] =
+// For the purposes of determining the most powerful move in a moveset, these
+// moves are treated the same as having a power of 0 or 1
+#define IGNORED_MOVES_END 0xFFFF
+static const u16 sIgnoredPowerfulMoveEffects[] =
 {
     EFFECT_EXPLOSION,
     EFFECT_DREAM_EATER,
@@ -271,13 +274,13 @@ static const u16 sDiscouragedPowerfulMoveEffects[] =
     EFFECT_SKY_ATTACK,
     EFFECT_RECHARGE,
     EFFECT_SKULL_BASH,
-    EFFECT_SOLARBEAM,
+    EFFECT_SOLAR_BEAM,
     EFFECT_SPIT_UP,
     EFFECT_FOCUS_PUNCH,
     EFFECT_SUPERPOWER,
     EFFECT_ERUPTION,
     EFFECT_OVERHEAT,
-    0xFFFF
+    IGNORED_MOVES_END
 };
 
 // code
@@ -293,7 +296,7 @@ void BattleAI_HandleItemUseBeforeAISetup(u8 defaultScoreMoves)
     if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
         && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_BATTLE_TOWER
                                | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_SECRET_BASE | BATTLE_TYPE_FRONTIER
-                               | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_x2000000)
+                               | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_RECORDED_LINK)
             )
        )
     {
@@ -331,7 +334,7 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
         defaultScoreMoves >>= 1;
     }
 
-    moveLimitations = CheckMoveLimitations(gActiveBattler, 0, 0xFF);
+    moveLimitations = CheckMoveLimitations(gActiveBattler, 0, MOVE_LIMITATIONS_ALL);
 
     // Ignore moves that aren't possible to use.
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -348,14 +351,14 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
     // Decide a random target battlerId in doubles.
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        gBattlerTarget = (Random() & BIT_FLANK) + (GetBattlerSide(gActiveBattler) ^ BIT_SIDE);
+        gBattlerTarget = (Random() & BIT_FLANK) + BATTLE_OPPOSITE(GetBattlerSide(gActiveBattler));
         if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
             gBattlerTarget ^= BIT_FLANK;
     }
     // There's only one choice in single battles.
     else
     {
-        gBattlerTarget = sBattler_AI ^ BIT_SIDE;
+        gBattlerTarget = BATTLE_OPPOSITE(sBattler_AI);
     }
 
     // Choose proper trainer ai scripts.
@@ -538,7 +541,7 @@ static u8 ChooseMoveOrAction_Doubles(void)
                 bestMovePointsForTarget[i] = mostViableMovesScores[0];
 
                 // Don't use a move against ally if it has less than 100 points.
-                if (i == (sBattler_AI ^ BIT_FLANK) && bestMovePointsForTarget[i] < 100)
+                if (i == BATTLE_PARTNER(sBattler_AI) && bestMovePointsForTarget[i] < 100)
                 {
                     bestMovePointsForTarget[i] = -1;
                     mostViableMovesScores[0] = mostViableMovesScores[0]; // Needed to match.
@@ -1148,9 +1151,9 @@ static u8 BattleAI_GetWantedBattler(u8 wantedBattler)
     default:
         return gBattlerTarget;
     case AI_USER_PARTNER:
-        return sBattler_AI ^ BIT_FLANK;
+        return BATTLE_PARTNER(sBattler_AI);
     case AI_TARGET_PARTNER:
-        return gBattlerTarget ^ BIT_FLANK;
+        return BATTLE_PARTNER(gBattlerTarget);
     }
 }
 
@@ -1177,14 +1180,14 @@ static void Cmd_get_how_powerful_move_is(void)
     s32 i, checkedMove;
     s32 moveDmgs[MAX_MON_MOVES];
 
-    for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
+    for (i = 0; sIgnoredPowerfulMoveEffects[i] != IGNORED_MOVES_END; i++)
     {
-        if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == sDiscouragedPowerfulMoveEffects[i])
+        if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == sIgnoredPowerfulMoveEffects[i])
             break;
     }
 
     if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power > 1
-        && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
+        && sIgnoredPowerfulMoveEffects[i] == IGNORED_MOVES_END)
     {
         gDynamicBasePower = 0;
         *(&gBattleStruct->dynamicMoveType) = 0;
@@ -1192,16 +1195,18 @@ static void Cmd_get_how_powerful_move_is(void)
         gMoveResultFlags = 0;
         gCritMultiplier = 1;
 
+        // Considered move has power and is not in sIgnoredPowerfulMoveEffects
+        // Check all other moves and calculate their power
         for (checkedMove = 0; checkedMove < MAX_MON_MOVES; checkedMove++)
         {
-            for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
+            for (i = 0; sIgnoredPowerfulMoveEffects[i] != IGNORED_MOVES_END; i++)
             {
-                if (gBattleMoves[gBattleMons[sBattler_AI].moves[checkedMove]].effect == sDiscouragedPowerfulMoveEffects[i])
+                if (gBattleMoves[gBattleMons[sBattler_AI].moves[checkedMove]].effect == sIgnoredPowerfulMoveEffects[i])
                     break;
             }
 
             if (gBattleMons[sBattler_AI].moves[checkedMove] != MOVE_NONE
-                && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF
+                && sIgnoredPowerfulMoveEffects[i] == IGNORED_MOVES_END
                 && gBattleMoves[gBattleMons[sBattler_AI].moves[checkedMove]].power > 1)
             {
                 gCurrentMove = gBattleMons[sBattler_AI].moves[checkedMove];
@@ -1217,6 +1222,7 @@ static void Cmd_get_how_powerful_move_is(void)
             }
         }
 
+        // Is the considered move the most powerful move available?
         for (checkedMove = 0; checkedMove < MAX_MON_MOVES; checkedMove++)
         {
             if (moveDmgs[checkedMove] > moveDmgs[AI_THINKING_STRUCT->movesetIndex])
@@ -1224,13 +1230,14 @@ static void Cmd_get_how_powerful_move_is(void)
         }
 
         if (checkedMove == MAX_MON_MOVES)
-            AI_THINKING_STRUCT->funcResult = MOVE_MOST_POWERFUL; // Is the most powerful.
+            AI_THINKING_STRUCT->funcResult = MOVE_MOST_POWERFUL;
         else
-            AI_THINKING_STRUCT->funcResult = MOVE_NOT_MOST_POWERFUL; // Not the most powerful.
+            AI_THINKING_STRUCT->funcResult = MOVE_NOT_MOST_POWERFUL;
     }
     else
     {
-        AI_THINKING_STRUCT->funcResult = MOVE_POWER_DISCOURAGED; // Highly discouraged in terms of power.
+        // Move has a power of 0/1, or is in the group sIgnoredPowerfulMoveEffects
+        AI_THINKING_STRUCT->funcResult = MOVE_POWER_OTHER;
     }
 
     gAIScriptPtr++;
@@ -1278,11 +1285,11 @@ static void Cmd_if_user_doesnt_go(void)
         gAIScriptPtr += 6;
 }
 
-static void Cmd_nullsub_2A(void)
+static void Cmd_nop_2A(void)
 {
 }
 
-static void Cmd_nullsub_2B(void)
+static void Cmd_nop_2B(void)
 {
 }
 
@@ -1309,7 +1316,7 @@ static void Cmd_count_usable_party_mons(void)
     {
         u32 position;
         battlerOnField1 = gBattlerPartyIndexes[battlerId];
-        position = GetBattlerPosition(battlerId) ^ BIT_FLANK;
+        position = BATTLE_PARTNER(GetBattlerPosition(battlerId));
         battlerOnField2 = gBattlerPartyIndexes[GetBattlerAtPosition(position)];
     }
     else // In singles there's only one battlerId by side.
@@ -1372,24 +1379,24 @@ static void Cmd_get_ability(void)
             return;
         }
 
-        if (gBaseStats[gBattleMons[battlerId].species].abilities[0] != ABILITY_NONE)
+        if (gSpeciesInfo[gBattleMons[battlerId].species].abilities[0] != ABILITY_NONE)
         {
-            if (gBaseStats[gBattleMons[battlerId].species].abilities[1] != ABILITY_NONE)
+            if (gSpeciesInfo[gBattleMons[battlerId].species].abilities[1] != ABILITY_NONE)
             {
                 // AI has no knowledge of opponent, so it guesses which ability.
                 if (Random() & 1)
-                    AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[battlerId].species].abilities[0];
+                    AI_THINKING_STRUCT->funcResult = gSpeciesInfo[gBattleMons[battlerId].species].abilities[0];
                 else
-                    AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[battlerId].species].abilities[1];
+                    AI_THINKING_STRUCT->funcResult = gSpeciesInfo[gBattleMons[battlerId].species].abilities[1];
             }
             else
             {
-                AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[battlerId].species].abilities[0]; // It's definitely ability 1.
+                AI_THINKING_STRUCT->funcResult = gSpeciesInfo[gBattleMons[battlerId].species].abilities[0]; // It's definitely ability 1.
             }
         }
         else
         {
-            AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[battlerId].species].abilities[1]; // AI can't actually reach this part since no pokemon has ability 2 and no ability 1.
+            AI_THINKING_STRUCT->funcResult = gSpeciesInfo[gBattleMons[battlerId].species].abilities[1]; // AI can't actually reach this part since no pokemon has ability 2 and no ability 1.
         }
     }
     else
@@ -1420,15 +1427,15 @@ static void Cmd_check_ability(void)
         {
             ability = gBattleMons[battlerId].ability;
         }
-        else if (gBaseStats[gBattleMons[battlerId].species].abilities[0] != ABILITY_NONE)
+        else if (gSpeciesInfo[gBattleMons[battlerId].species].abilities[0] != ABILITY_NONE)
         {
-            if (gBaseStats[gBattleMons[battlerId].species].abilities[1] != ABILITY_NONE)
+            if (gSpeciesInfo[gBattleMons[battlerId].species].abilities[1] != ABILITY_NONE)
             {
                 u8 abilityDummyVariable = ability; // Needed to match.
-                if (gBaseStats[gBattleMons[battlerId].species].abilities[0] != abilityDummyVariable
-                && gBaseStats[gBattleMons[battlerId].species].abilities[1] != abilityDummyVariable)
+                if (gSpeciesInfo[gBattleMons[battlerId].species].abilities[0] != abilityDummyVariable
+                && gSpeciesInfo[gBattleMons[battlerId].species].abilities[1] != abilityDummyVariable)
                 {
-                    ability = gBaseStats[gBattleMons[battlerId].species].abilities[0];
+                    ability = gSpeciesInfo[gBattleMons[battlerId].species].abilities[0];
                 }
                 else
                 {
@@ -1437,12 +1444,12 @@ static void Cmd_check_ability(void)
             }
             else
             {
-                ability = gBaseStats[gBattleMons[battlerId].species].abilities[0];
+                ability = gSpeciesInfo[gBattleMons[battlerId].species].abilities[0];
             }
         }
         else
         {
-            ability = gBaseStats[gBattleMons[battlerId].species].abilities[1]; // AI can't actually reach this part since no pokemon has ability 2 and no ability 1.
+            ability = gSpeciesInfo[gBattleMons[battlerId].species].abilities[1]; // AI can't actually reach this part since no pokemon has ability 2 and no ability 1.
         }
     }
     else
@@ -1539,11 +1546,11 @@ static void Cmd_if_type_effectiveness(void)
         gAIScriptPtr += 6;
 }
 
-static void Cmd_nullsub_32(void)
+static void Cmd_nop_32(void)
 {
 }
 
-static void Cmd_nullsub_33(void)
+static void Cmd_nop_33(void)
 {
 }
 
@@ -1625,13 +1632,13 @@ static void Cmd_if_status_not_in_party(void)
 
 static void Cmd_get_weather(void)
 {
-    if (gBattleWeather & WEATHER_RAIN_ANY)
+    if (gBattleWeather & B_WEATHER_RAIN)
         AI_THINKING_STRUCT->funcResult = AI_WEATHER_RAIN;
-    if (gBattleWeather & WEATHER_SANDSTORM_ANY)
+    if (gBattleWeather & B_WEATHER_SANDSTORM)
         AI_THINKING_STRUCT->funcResult = AI_WEATHER_SANDSTORM;
-    if (gBattleWeather & WEATHER_SUN_ANY)
+    if (gBattleWeather & B_WEATHER_SUN)
         AI_THINKING_STRUCT->funcResult = AI_WEATHER_SUN;
-    if (gBattleWeather & WEATHER_HAIL_ANY)
+    if (gBattleWeather & B_WEATHER_HAIL)
         AI_THINKING_STRUCT->funcResult = AI_WEATHER_HAIL;
 
     gAIScriptPtr += 1;
@@ -1761,7 +1768,11 @@ static void Cmd_if_cant_faint(void)
 
     gBattleMoveDamage = gBattleMoveDamage * AI_THINKING_STRUCT->simulatedRNG[AI_THINKING_STRUCT->movesetIndex] / 100;
 
-    // This macro is missing the damage 0 = 1 assumption.
+#ifdef BUGFIX
+    // Moves always do at least 1 damage.
+    if (gBattleMoveDamage == 0)
+        gBattleMoveDamage = 1;
+#endif
 
     if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
@@ -1788,7 +1799,7 @@ static void Cmd_if_has_move(void)
             gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
         break;
     case AI_USER_PARTNER:
-        if (gBattleMons[sBattler_AI ^ BIT_FLANK].hp == 0)
+        if (gBattleMons[BATTLE_PARTNER(sBattler_AI)].hp == 0)
         {
             gAIScriptPtr += 8;
             break;
@@ -1797,7 +1808,7 @@ static void Cmd_if_has_move(void)
         {
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
-                if (gBattleMons[sBattler_AI ^ BIT_FLANK].moves[i] == *movePtr)
+                if (gBattleMons[BATTLE_PARTNER(sBattler_AI)].moves[i] == *movePtr)
                     break;
             }
         }
@@ -1877,9 +1888,14 @@ static void Cmd_if_has_move_with_effect(void)
     case AI_TARGET_PARTNER:
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            // UB: checks sBattler_AI instead of gBattlerTarget.
+            // BUG: checks sBattler_AI instead of gBattlerTarget.
+            #ifndef BUGFIX
             if (gBattleMons[sBattler_AI].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
                 break;
+            #else
+            if (gBattleMons[gBattlerTarget].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
+                break;
+            #endif
         }
         if (i == MAX_MON_MOVES)
             gAIScriptPtr += 7;
@@ -2014,18 +2030,24 @@ static void Cmd_if_holds_item(void)
 {
     u8 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
     u16 item;
-    u8 var1, var2;
+    u8 itemLo, itemHi;
 
     if ((battlerId & BIT_SIDE) == (sBattler_AI & BIT_SIDE))
         item = gBattleMons[battlerId].item;
     else
         item = BATTLE_HISTORY->itemEffects[battlerId];
 
-    // UB: doesn't properly read an unaligned u16
-    var2 = gAIScriptPtr[2];
-    var1 = gAIScriptPtr[3];
+    itemHi = gAIScriptPtr[2];
+    itemLo = gAIScriptPtr[3];
 
-    if ((var1 | var2) == item)
+#ifdef BUGFIX
+    // This bug doesn't affect the vanilla game because this script command
+    // is only used to check ITEM_PERSIM_BERRY, whose high byte happens to
+    // be 0.
+    if (((itemHi << 8) | itemLo) == item)
+#else
+    if ((itemLo | itemHi) == item)
+#endif
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
@@ -2089,12 +2111,7 @@ static void Cmd_get_used_held_item(void)
     else
         battlerId = gBattlerTarget;
 
-    // This is likely a leftover from Ruby's code and its ugly ewram access.
-    #ifdef NONMATCHING
-        AI_THINKING_STRUCT->funcResult = gBattleStruct->usedHeldItems[battlerId];
-    #else
-        AI_THINKING_STRUCT->funcResult = *(u8*)((u8*)(gBattleStruct) + offsetof(struct BattleStruct, usedHeldItems) + (battlerId * 2));
-    #endif // NONMATCHING
+    AI_THINKING_STRUCT->funcResult = *(u8 *)&gBattleStruct->usedHeldItems[battlerId];
 
     gAIScriptPtr += 2;
 }
@@ -2134,27 +2151,27 @@ static void Cmd_get_protect_count(void)
     gAIScriptPtr += 2;
 }
 
-static void Cmd_nullsub_52(void)
+static void Cmd_nop_52(void)
 {
 }
 
-static void Cmd_nullsub_53(void)
+static void Cmd_nop_53(void)
 {
 }
 
-static void Cmd_nullsub_54(void)
+static void Cmd_nop_54(void)
 {
 }
 
-static void Cmd_nullsub_55(void)
+static void Cmd_nop_55(void)
 {
 }
 
-static void Cmd_nullsub_56(void)
+static void Cmd_nop_56(void)
 {
 }
 
-static void Cmd_nullsub_57(void)
+static void Cmd_nop_57(void)
 {
 }
 

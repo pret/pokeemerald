@@ -120,10 +120,10 @@ typedef struct InitializeParametersTag {
     // rfu_REQ_configSystem argument
     u8 maxMFrame;                            // Maximum number of times to re-transmit of RFU level
     u8 MC_TimerCount;                        // MC_Timer count (x16.7ms)
-    u16 availSlot_flag;                        // Use RFU-API constant "AVAIL_SLOT1-4" to specify the maximum number of child devices (1 - 4) that can be connected to a parent device.
+    u16 availSlot_flag;                      // Use RFU-API constant "AVAIL_SLOT1-4" to specify the maximum number of child devices (1 - 4) that can be connected to a parent device.
 
     // rfu_REQB_configGameData argument
-    u8 mboot_flag;                            // Multiplayer boot flag
+    u8 mboot_flag;                           // Multiplayer boot flag
     u16 serialNo;                            // Game serial number
     u8 *gameName;                            // Game name
     u8 *userName;                            // User name
@@ -132,8 +132,8 @@ typedef struct InitializeParametersTag {
     u8 fastSearchParent_flag;                // Flag indicating whether parent fast search operation to be performed by child.
 
     // Link recovery settings
-    u8 linkRecovery_enable;                // Determines whether or not to execute the link recovery process when a link cut occurs
-    u16 linkRecovery_period;                // Time to spend on the link recovery process (x 16.7 ms)  Note: Runs for unlimited time when specifying 0.
+    u8 linkRecovery_enable;                  // Determines whether or not to execute the link recovery process when a link cut occurs
+    u16 linkRecovery_period;                 // Time to spend on the link recovery process (x 16.7 ms)  Note: Runs for unlimited time when specifying 0.
 
     // Setting for NI-type data transmit/receive period
     u16 NI_failCounter_limit;                //  Limit for failCounter during NI type data transmit/receive (x 16.7 ms) Note: Runs for unlimited time when specifying 0.
@@ -142,43 +142,48 @@ typedef struct InitializeParametersTag {
 
 // Timer that counts with the V-Blank cycle
 typedef struct VblankTimerTag {
-    u8 active;                                // Timer ON/OFF (bits 0 - 3 indicate ON/OFF for each connected slot)
-    u16 count_max;                            // Maximum count value (x16.7ms)
+    u8 active;                               // Timer ON/OFF (bits 0 - 3 indicate ON/OFF for each connected slot)
+    u16 count_max;                           // Maximum count value (x16.7ms)
     u16 count[RFU_CHILD_MAX];                // Current count value (x 16.7 ms) for each connected slot
 }VBL_TIMER;
 
 typedef struct linkManagerTag
 {
-    /* 0x000 */ u8 acceptSlot_flag;
-    /* 0x001 */ u8 acceptCount;
-    /* 0x002 */ vu8 childClockSlave_flag;
-    /* 0x003 */ vu8 parentAck_flag;
-    /* 0x004 */ u8 state;
-    /* 0x005 */ u8 next_state;
-    /* 0x006 */ u8 parent_child;
-    /* 0x007 */ u8 pcswitch_flag;
-    /* 0x008 */ u8 RFU_powerOn_flag;
-    /* 0x009 */ u8 linkRecovery_enable;
-    /* 0x00a */ u8 linkRecovery_start_flag;
-    /* 0x00b */ u8 fastSearchParent_flag;
-    /* 0x00c */ u8 connectSlot_flag_old;
-    /* 0x00d */ u8 reserveDisconnectSlot_flag;
-    /* 0x00e */ u8 active;
-    /* 0x00f */ u8 msc_exe_flag;
-    /* 0x010 */ u8 child_slot;
-    /* 0x011 */ u8 state_bak[2];
-    /* 0x014 */ u16 param[2];
-    /* 0x018 */ u16 NI_failCounter_limit;
-    /* 0x01a */ u16 connect_period;
-    /* 0x01c */ u16 pcswitch_period_bak;
-    /* 0x01e */ u16 work;
-    /* 0x020 */ u16 *acceptable_serialNo_list;
-    /* 0x024 */ VBL_TIMER nameAcceptTimer;
-    /* 0x030 */ VBL_TIMER linkRecoveryTimer;
-    /* 0x03c */ INIT_PARAM *init_param;
-    /* 0x040 */ void (*LMAN_callback)(u8, u8);
-    /* 0x044 */ void (*MSC_callback)(u16);
+    u8 acceptSlot_flag;                             // Connection slot of child for which Link Manager accepted connection, expressed in bits. (This bit is not dropped for a broken link but is dropped with complete disconnection.)
+    u8 acceptCount;                                 // Number of child devices for which connections accepted by Link Manager.
+    vu8 childClockSlave_flag;                       // Flag indicating whether AGB clock slave state is currently being maintained by child.
+    vu8 parentAck_flag;                             // Flag indicating the child devices for which the parent received ACK by UNI commmunication.
+    u8 state;                                       // Current link manager state
+    u8 next_state;                                  // State that the link manager transitions to when it is next called.
+    u8 parent_child;                                // Shows whether operating on a parent or child.
+    u8 pcswitch_flag;                               // Flag for parent-child switching search.
+    u8 RFU_powerOn_flag;                            // Flag indicating whether RFU has been powered down.
+    u8 linkRecovery_enable;                         // ON/OFF flag for the link recovery process.
+    u8 linkRecovery_start_flag;                     // Link recovery start flag
+    u8 fastSearchParent_flag;                       // ON/OFF flag for parent fast search by child.
+    u8 connectSlot_flag_old;                        // Value of rfuLinkStatus->connectSlot_flag (internally used by the API) when the link manager was called previously.
+    u8 reserveDisconnectSlot_flag;                  // Bit indication of the child slot that was reject by child connection authentication and is waiting for disconnect.
+    u8 active;                                      // Link manager operating flag (internally used by the API)
+    u8 msc_exe_flag;                                // MSC callback executing flag (internally used by the API)
+    u8 child_slot;                                  // Slot number where child device connected (internally used by the API)
+    u8 state_bak[2];                                // Backup of link manager state (internally used by the API)
+    u16 param[2];                                   // Region where parameters returned when LMAN callback occurs are stored.
+    u16 NI_failCounter_limit;                       // Period of failCounter during NI type data transmit/receive (x 16.7 ms) Note: Runs for unlimited time when specifying 0
+    u16 connect_period;                             // Count for the period to execute a connection process (x 16.7 ms). Note: Runs for unlimited time when specifying 0.
+    u16 pcswitch_period_bak;                        // Backup for No. 3 SC period during parent-child switching search.
+    u16 work;                                       // Work region used by the link manager.
+    u16 *acceptable_serialNo_list;                  // List of game serial numbers that can accept connections. (See Note below)
+    VBL_TIMER nameAcceptTimer;                      // Timer for period to receive game names from child device.
+    VBL_TIMER linkRecoveryTimer;                    // Timer for the link recovery process period for both parent and child. Note: Runs for unlimited time when specifying 0.
+    INIT_PARAM *init_param;                         // Pointer to parameter when executing initial setting process.
+    void (*LMAN_callback)(u8 msg,u8 param_count);   // Pointer to user-defined LMAN callback routine generated by link manager operation.
+    void (*MSC_callback)(u16 REQ_commandID);        // User-defined MSC callback function. (When defining the link manager, defines the MSC callback using rfu_LMAN_initializeManager or rfu_LMAN_setMSCCallback without using rfu_setMSCCallback.)
 } LINK_MANAGER;
+
+/*  Note: The acceptable_serialNo_list uses the following format to specify a list of game serial numbers that the parent device can accept connections from and terminates with 0xffff. (maximum 16 devices)
+
+    u16 acceptable_serialNo_list[]={0x0001, 0x0002, 0x0003, 0xffff};
+*/
 
 extern struct linkManagerTag lman;
 

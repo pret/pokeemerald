@@ -1,3304 +1,3304 @@
 #ifndef GUARD_DATA_BARD_MUSIC_POKEMON_H
 #define GUARD_DATA_BARD_MUSIC_POKEMON_H
 
-const u16 gNumSpeciesNames = NUM_SPECIES;
+const u16 gNumBardWords_Species = NUM_SPECIES;
 
-const struct BardSound gBardSounds_Pokemon[][6] = {
-    {
+const struct BardSound gBardSounds_Pokemon[NUM_SPECIES][6] = {
+    [SPECIES_NONE] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x24, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_BULBASAUR] = {
+        { .songLengthId = 36 },
+        { .songLengthId = 42 },
+        { .songLengthId = 48 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x14, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x32, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_IVYSAUR] = {
+        { .songLengthId = 20 },
+        { .songLengthId = 12 },
+        { .songLengthId = 50 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_VENUSAUR] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 44 },
+        { .songLengthId = 48 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x6, 0x0, 0x0, 0x0, 0x0},
-        { 0x2, 0x0, 0x0, 0x0, 0x0},
-        { 0x32, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CHARMANDER] = {
+        { .songLengthId = 6 },
+        { .songLengthId =  2 },
+        { .songLengthId = 50 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x6, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
-        NULL_BARD_SOUND
+    [SPECIES_CHARMELEON] = {
+        { .songLengthId = 6 },
+        { .songLengthId = 12 },
+        { .songLengthId = 12 },
+        { .songLengthId = 21 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x6, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x32, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
-        NULL_BARD_SOUND
+    [SPECIES_CHARIZARD] = {
+        { .songLengthId = 6 },
+        { .songLengthId = 17 },
+        { .songLengthId = 50 },
+        { .songLengthId = 51 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x24, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SQUIRTLE] = {
+        { .songLengthId = 48 },
+        { .songLengthId = 36 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x8, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x24, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_WARTORTLE] = {
+        { .songLengthId = 8 },
+        { .songLengthId = 48 },
+        { .songLengthId = 36 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x1e, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_BLASTOISE] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 30 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CATERPIE] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 48 },
+        { .songLengthId = 12 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_METAPOD] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 42 },
+        { .songLengthId = 21 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_BUTTERFREE] = {
+        { .songLengthId = 42 },
+        { .songLengthId = 48 },
+        { .songLengthId = 12 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xe, 0x0, 0x0, 0x0, 0x0},
-        { 0x26, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_WEEDLE] = {
+        { .songLengthId = 14 },
+        { .songLengthId = 38 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_KAKUNA] = {
+        { .songLengthId = 42 },
+        { .songLengthId = 39 },
+        { .songLengthId = 42 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_BEEDRILL] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PIDGEY] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PIDGEOTTO] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 12 },
+        { .songLengthId = 24 },
+        { .songLengthId = 24 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PIDGEOT] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 12 },
+        { .songLengthId = 21 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_RATTATA] = {
+        { .songLengthId =  0 },
+        { .songLengthId =  0 },
+        { .songLengthId = 44 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_RATICATE] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 12 },
+        { .songLengthId =  3 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SPEAROW] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_FEAROW] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_EKANS] = {
+        { .songLengthId = 9 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x6, 0x0, 0x0, 0x0, 0x0},
-        { 0x17, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ARBOK] = {
+        { .songLengthId = 6 },
+        { .songLengthId = 23 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PIKACHU] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
+        { .songLengthId = 39 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_RAICHU] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SANDSHREW] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SANDSLASH] = {
+        { .songLengthId =  0 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_NIDORAN_F] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 24 },
+        { .songLengthId =  0 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_NIDORINA] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 24 },
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_NIDOQUEEN] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 24 },
+        { .songLengthId = 12 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_NIDORAN_M] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 24 },
+        { .songLengthId =  0 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_NIDORINO] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 24 },
+        { .songLengthId = 12 },
+        { .songLengthId = 24 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_NIDOKING] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 24 },
+        { .songLengthId = 12 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0xb, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CLEFAIRY] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 11 },
+        { .songLengthId = 12 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x24, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CLEFABLE] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 42 },
+        { .songLengthId = 36 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x24, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_VULPIX] = {
+        { .songLengthId = 36 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x5, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_NINETALES] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 5 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
-        NULL_BARD_SOUND
+    [SPECIES_JIGGLYPUFF] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 39 },
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
-        NULL_BARD_SOUND
+    [SPECIES_WIGGLYTUFF] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 39 },
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ZUBAT] = {
+        { .songLengthId = 39 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GOLBAT] = {
+        { .songLengthId = 26 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ODDISH] = {
+        { .songLengthId = 21 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GLOOM] = {
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x14, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_VILEPLUME] = {
+        { .songLengthId = 20 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PARAS] = {
+        { .songLengthId = 9 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PARASECT] = {
+        { .songLengthId = 9 },
+        { .songLengthId =  0 },
+        { .songLengthId = 9 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_VENONAT] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 26 },
+        { .songLengthId =  0 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_VENOMOTH] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 26 },
+        { .songLengthId = 21 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DIGLETT] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 9 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DUGTRIO] = {
+        { .songLengthId = 44 },
+        { .songLengthId = 12 },
+        { .songLengthId = 24 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x21, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MEOWTH] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 33 },
+        { .songLengthId = 17 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x32, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PERSIAN] = {
+        { .songLengthId = 50 },
+        { .songLengthId = 17 },
+        { .songLengthId =  0 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PSYDUCK] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 42 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GOLDUCK] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 42 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MANKEY] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PRIMEAPE] = {
+        { .songLengthId = 18 },
+        { .songLengthId =  3 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x21, 0x0, 0x0, 0x0, 0x0},
-        { 0xf, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GROWLITHE] = {
+        { .songLengthId = 33 },
+        { .songLengthId = 15 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x6, 0x0, 0x0, 0x0, 0x0},
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ARCANINE] = {
+        { .songLengthId = 6 },
+        { .songLengthId =  3 },
+        { .songLengthId = 18 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_POLIWAG] = {
+        { .songLengthId = 21 },
+        { .songLengthId = 12 },
+        { .songLengthId =  0 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_POLIWHIRL] = {
+        { .songLengthId = 21 },
+        { .songLengthId = 12 },
+        { .songLengthId = 48 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_POLIWRATH] = {
+        { .songLengthId = 21 },
+        { .songLengthId = 12 },
+        { .songLengthId =  0 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ABRA] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 42 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_KADABRA] = {
+        { .songLengthId = 44 },
+        { .songLengthId =  0 },
+        { .songLengthId = 44 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ALAKAZAM] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 44 },
+        { .songLengthId = 44 },
+        { .songLengthId =  0 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MACHOP] = {
+        { .songLengthId = 42 },
+        { .songLengthId = 21 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MACHOKE] = {
+        { .songLengthId = 42 },
+        { .songLengthId = 26 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MACHAMP] = {
+        { .songLengthId = 42 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xb, 0x0, 0x0, 0x0, 0x0},
-        { 0x21, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_BELLSPROUT] = {
+        { .songLengthId = 11 },
+        { .songLengthId = 33 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0xf, 0x0, 0x0, 0x0, 0x0},
-        { 0xb, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_WEEPINBELL] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 15 },
+        { .songLengthId = 11 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_VICTREEBEL] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 12 },
+        { .songLengthId = 9 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_TENTACOOL] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 42 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_TENTACRUEL] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 42 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GEODUDE] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 24 },
+        { .songLengthId = 39 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GRAVELER] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 9 },
+        { .songLengthId = 48 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GOLEM] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 9 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PONYTA] = {
+        { .songLengthId = 26 },
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_RAPIDASH] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 17 },
+        { .songLengthId =  0 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SLOWPOKE] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SLOWBRO] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MAGNEMITE] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 9 },
+        { .songLengthId = 18 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MAGNETON] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 9 },
+        { .songLengthId = 42 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x6, 0x0, 0x0, 0x0, 0x0},
-        { 0xb, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_FARFETCHD] = {
+        { .songLengthId = 6 },
+        { .songLengthId = 11 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DODUO] = {
+        { .songLengthId = 26 },
+        { .songLengthId = 39 },
+        { .songLengthId = 24 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DODRIO] = {
+        { .songLengthId = 26 },
+        { .songLengthId = 12 },
+        { .songLengthId = 24 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0xe, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SEEL] = {
+        { .songLengthId = 14 },
+        { .songLengthId = 51 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DEWGONG] = {
+        { .songLengthId = 39 },
+        { .songLengthId = 21 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GRIMER] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 48 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MUK] = {
+        { .songLengthId = 42 },
+        { .songLengthId = 51 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SHELLDER] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 48 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1e, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CLOYSTER] = {
+        { .songLengthId = 30 },
+        { .songLengthId = 48 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0xe, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GASTLY] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 14 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_HAUNTER] = {
+        { .songLengthId = 21 },
+        { .songLengthId = 48 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x8, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GENGAR] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 8 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ONIX] = {
+        { .songLengthId = 21 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x21, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DROWZEE] = {
+        { .songLengthId = 33 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_HYPNO] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_KRABBY] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_KINGLER] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 48 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_VOLTORB] = {
+        { .songLengthId = 26 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ELECTRODE] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 9 },
+        { .songLengthId = 24 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_EXEGGCUTE] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 44 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x32, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
-        NULL_BARD_SOUND
+    [SPECIES_EXEGGUTOR] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 44 },
+        { .songLengthId = 9 },
+        { .songLengthId = 50 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2d, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CUBONE] = {
+        { .songLengthId = 45 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MAROWAK] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 26 },
+        { .songLengthId =  0 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_HITMONLEE] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 21 },
+        { .songLengthId = 12 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_HITMONCHAN] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 21 },
+        { .songLengthId =  0 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LICKITUNG] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_KOFFING] = {
+        { .songLengthId = 21 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_WEEZING] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x14, 0x0, 0x0, 0x0, 0x0},
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_RHYHORN] = {
+        { .songLengthId = 20 },
+        { .songLengthId = 26 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_RHYDON] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 21 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CHANSEY] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_TANGELA] = {
+        { .songLengthId =  2 },
+        { .songLengthId = 9 },
+        { .songLengthId = 42 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_KANGASKHAN] = {
+        { .songLengthId =  0 },
+        { .songLengthId =  0 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_HORSEA] = {
+        { .songLengthId = 26 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SEADRA] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GOLDEEN] = {
+        { .songLengthId = 26 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SEAKING] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_STARYU] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_STARMIE] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MR_MIME] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 48 },
+        { .songLengthId = 18 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SCYTHER] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 48 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_JYNX] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ELECTABUZZ] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 9 },
+        { .songLengthId = 44 },
+        { .songLengthId = 44 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x1d, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MAGMAR] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 29 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PINSIR] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 48 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x1d, 0x0, 0x0, 0x0, 0x0},
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_TAUROS] = {
+        { .songLengthId = 29 },
+        { .songLengthId = 26 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MAGIKARP] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 17 },
+        { .songLengthId = 27 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1d, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x1d, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GYARADOS] = {
+        { .songLengthId = 29 },
+        { .songLengthId = 9 },
+        { .songLengthId = 17 },
+        { .songLengthId = 29 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LAPRAS] = {
+        { .songLengthId = 44 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DITTO] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_EEVEE] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_VAPOREON] = {
+        { .songLengthId =  3 },
+        { .songLengthId = 24 },
+        { .songLengthId = 12 },
+        { .songLengthId = 21 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_JOLTEON] = {
+        { .songLengthId = 26 },
+        { .songLengthId = 12 },
+        { .songLengthId = 21 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_FLAREON] = {
+        { .songLengthId =  3 },
+        { .songLengthId = 12 },
+        { .songLengthId = 21 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PORYGON] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 12 },
+        { .songLengthId = 21 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_OMANYTE] = {
+        { .songLengthId = 24 },
+        { .songLengthId =  0 },
+        { .songLengthId = 18 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_OMASTAR] = {
+        { .songLengthId = 24 },
+        { .songLengthId =  0 },
+        { .songLengthId = 21 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_KABUTO] = {
+        { .songLengthId = 42 },
+        { .songLengthId = 39 },
+        { .songLengthId = 26 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_KABUTOPS] = {
+        { .songLengthId = 42 },
+        { .songLengthId = 39 },
+        { .songLengthId = 21 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_AERODACTYL] = {
+        { .songLengthId =  3 },
+        { .songLengthId = 24 },
+        { .songLengthId =  0 },
+        { .songLengthId = 24 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SNORLAX] = {
+        { .songLengthId = 24 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x6, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ARTICUNO] = {
+        { .songLengthId = 6 },
+        { .songLengthId = 17 },
+        { .songLengthId = 39 },
+        { .songLengthId = 24 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ZAPDOS] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MOLTRES] = {
+        { .songLengthId = 26 },
+        { .songLengthId = 9 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DRATINI] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 12 },
+        { .songLengthId = 12 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0xb, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DRAGONAIR] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 21 },
+        { .songLengthId = 11 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DRAGONITE] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 21 },
+        { .songLengthId = 18 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2d, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MEWTWO] = {
+        { .songLengthId = 45 },
+        { .songLengthId = 39 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2d, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MEW] = {
+        { .songLengthId = 45 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CHIKORITA] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 24 },
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_BAYLEEF] = {
+        { .songLengthId =  3 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MEGANIUM] = {
+        { .songLengthId =  3 },
+        { .songLengthId = 9 },
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xf, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CYNDAQUIL] = {
+        { .songLengthId = 15 },
+        { .songLengthId = 42 },
+        { .songLengthId = 9 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x6, 0x0, 0x0, 0x0, 0x0},
-        { 0x8, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_QUILAVA] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 6 },
+        { .songLengthId = 8 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
-        NULL_BARD_SOUND
+    [SPECIES_TYPHLOSION] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 24 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_TOTODILE] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 24 },
+        { .songLengthId = 18 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CROCONAW] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 24 },
+        { .songLengthId = 27 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0xf, 0x0, 0x0, 0x0, 0x0},
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        NULL_BARD_SOUND
+    [SPECIES_FERALIGATR] = {
+        { .songLengthId = 48 },
+        { .songLengthId =  0 },
+        { .songLengthId = 15 },
+        { .songLengthId =  3 },
+        { .songLengthId = 48 },
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SENTRET] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 9 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_FURRET] = {
+        { .songLengthId = 48 },
+        { .songLengthId = 9 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_HOOTHOOT] = {
+        { .songLengthId = 39 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x21, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_NOCTOWL] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 33 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LEDYBA] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LEDIAN] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 12 },
+        { .songLengthId =  0 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0xf, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SPINARAK] = {
+        { .songLengthId = 15 },
+        { .songLengthId = 48 },
+        { .songLengthId =  0 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ARIADOS] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
+        { .songLengthId = 24 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CROBAT] = {
+        { .songLengthId = 24 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0xf, 0x0, 0x0, 0x0, 0x0},
-        { 0x21, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CHINCHOU] = {
+        { .songLengthId = 15 },
+        { .songLengthId = 33 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LANTURN] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 48 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PICHU] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CLEFFA] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 42 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_IGGLYBUFF] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 42 },
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_TOGEPI] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 9 },
+        { .songLengthId = 12 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_TOGETIC] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 9 },
+        { .songLengthId = 17 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_NATU] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_XATU] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1d, 0x0, 0x0, 0x0, 0x0},
-        { 0xe, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MAREEP] = {
+        { .songLengthId = 29 },
+        { .songLengthId = 14 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_FLAAFFY] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x6, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_AMPHAROS] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 6 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_BELLOSSOM] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 27 },
+        { .songLengthId = 44 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x8, 0x0, 0x0, 0x0, 0x0},
-        { 0x10, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MARILL] = {
+        { .songLengthId = 8 },
+        { .songLengthId = 16 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x8, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x10, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_AZUMARILL] = {
+        { .songLengthId = 8 },
+        { .songLengthId = 39 },
+        { .songLengthId = 44 },
+        { .songLengthId = 16 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SUDOWOODO] = {
+        { .songLengthId = 39 },
+        { .songLengthId = 24 },
+        { .songLengthId = 39 },
+        { .songLengthId = 24 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_POLITOED] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 12 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1d, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_HOPPIP] = {
+        { .songLengthId = 29 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SKIPLOOM] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_JUMPLUFF] = {
+        { .songLengthId = 44 },
+        { .songLengthId = 44 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_AIPOM] = {
+        { .songLengthId =  3 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SUNKERN] = {
+        { .songLengthId = 44 },
+        { .songLengthId = 48 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SUNFLORA] = {
+        { .songLengthId = 44 },
+        { .songLengthId = 24 },
+        { .songLengthId = 44 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_YANMA] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 42 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_WOOPER] = {
+        { .songLengthId = 39 },
+        { .songLengthId = 48 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x32, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_QUAGSIRE] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 18 },
+        { .songLengthId = 50 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ESPEON] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 12 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_UMBREON] = {
+        { .songLengthId = 42 },
+        { .songLengthId = 12 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MURKROW] = {
+        { .songLengthId = 48 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SLOWKING] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MISDREAVUS] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 12 },
+        { .songLengthId = 44 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_UNOWN] = {
+        { .songLengthId = 42 },
+        { .songLengthId = 26 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x1d, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_WOBBUFFET] = {
+        { .songLengthId = 29 },
+        { .songLengthId = 44 },
+        { .songLengthId = 9 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GIRAFARIG] = {
+        { .songLengthId = 48 },
+        { .songLengthId =  0 },
+        { .songLengthId = 42 },
+        { .songLengthId = 17 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PINECO] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_FORRETRESS] = {
+        { .songLengthId = 26 },
+        { .songLengthId = 9 },
+        { .songLengthId = 9 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x1c, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DUNSPARCE] = {
+        { .songLengthId = 42 },
+        { .songLengthId = 28 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GLIGAR] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_STEELIX] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SNUBBULL] = {
+        { .songLengthId = 44 },
+        { .songLengthId = 44 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GRANBULL] = {
+        { .songLengthId =  2 },
+        { .songLengthId = 44 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_QWILFISH] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x32, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SCIZOR] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 50 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x26, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SHUCKLE] = {
+        { .songLengthId = 42 },
+        { .songLengthId = 38 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_HERACROSS] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 42 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x26, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SNEASEL] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 38 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_TEDDIURSA] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 12 },
+        { .songLengthId = 48 },
+        { .songLengthId = 44 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_URSARING] = {
+        { .songLengthId = 48 },
+        { .songLengthId = 44 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SLUGMA] = {
+        { .songLengthId = 44 },
+        { .songLengthId = 44 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MAGCARGO] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 27 },
+        { .songLengthId = 24 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SWINUB] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 44 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PILOSWINE] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 26 },
+        { .songLengthId = 18 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CORSOLA] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 24 },
+        { .songLengthId = 42 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_REMORAID] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 24 },
+        { .songLengthId =  3 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_OCTILLERY] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 17 },
+        { .songLengthId = 48 },
+        { .songLengthId = 12 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DELIBIRD] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 12 },
+        { .songLengthId = 48 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MANTINE] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SKARMORY] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 26 },
+        { .songLengthId = 12 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x23, 0x0, 0x0, 0x0, 0x0},
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_HOUNDOUR] = {
+        { .songLengthId = 35 },
+        { .songLengthId = 26 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x21, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_HOUNDOOM] = {
+        { .songLengthId = 33 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_KINGDRA] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PHANPY] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DONPHAN] = {
+        { .songLengthId = 27 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PORYGON2] = {
+        { .songLengthId = 26 },
+        { .songLengthId = 12 },
+        { .songLengthId = 27 },
+        { .songLengthId = 39 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_STANTLER] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 48 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x26, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SMEARGLE] = {
+        { .songLengthId = 48 },
+        { .songLengthId = 38 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_TYROGUE] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0x1d, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_HITMONTOP] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 21 },
+        { .songLengthId = 29 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SMOOCHUM] = {
+        { .songLengthId = 39 },
+        { .songLengthId = 44 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xb, 0x0, 0x0, 0x0, 0x0},
-        { 0xb, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ELEKID] = {
+        { .songLengthId = 11 },
+        { .songLengthId = 11 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MAGBY] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MILTANK] = {
+        { .songLengthId = 17 },
+        { .songLengthId =  3 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0xe, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_BLISSEY] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 14 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_RAIKOU] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ENTEI] = {
+        { .songLengthId = 9 },
+        { .songLengthId =  3 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SUICUNE] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x15, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LARVITAR] = {
+        { .songLengthId = 21 },
+        { .songLengthId = 17 },
+        { .songLengthId = 21 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PUPITAR] = {
+        { .songLengthId = 39 },
+        { .songLengthId = 17 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_TYRANITAR] = {
+        { .songLengthId = 18 },
+        { .songLengthId =  0 },
+        { .songLengthId = 17 },
+        { .songLengthId = 27 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LUGIA] = {
+        { .songLengthId = 39 },
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_HO_OH] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CELEBI] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 9 },
+        { .songLengthId = 12 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
+    [SPECIES_OLD_UNOWN_B] = {
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
+    [SPECIES_OLD_UNOWN_C] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
+    [SPECIES_OLD_UNOWN_D] = {
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
+    [SPECIES_OLD_UNOWN_E] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
+    [SPECIES_OLD_UNOWN_F] = {
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
+    [SPECIES_OLD_UNOWN_G] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
+    [SPECIES_OLD_UNOWN_H] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
+    [SPECIES_OLD_UNOWN_I] = {
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
+    [SPECIES_OLD_UNOWN_J] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
+    [SPECIES_OLD_UNOWN_K] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
+    [SPECIES_OLD_UNOWN_L] = {
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
+    [SPECIES_OLD_UNOWN_M] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
+    [SPECIES_OLD_UNOWN_N] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
+    [SPECIES_OLD_UNOWN_O] = {
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
+    [SPECIES_OLD_UNOWN_P] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
+    [SPECIES_OLD_UNOWN_Q] = {
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
+    [SPECIES_OLD_UNOWN_R] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
+    [SPECIES_OLD_UNOWN_S] = {
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
+    [SPECIES_OLD_UNOWN_T] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
+    [SPECIES_OLD_UNOWN_U] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
+    [SPECIES_OLD_UNOWN_V] = {
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
+    [SPECIES_OLD_UNOWN_W] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
+    [SPECIES_OLD_UNOWN_X] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
+    [SPECIES_OLD_UNOWN_Y] = {
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
+    [SPECIES_OLD_UNOWN_Z] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_TREECKO] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GROVYLE] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 18 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SCEPTILE] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 18 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_TORCHIC] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0xf, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_COMBUSKEN] = {
+        { .songLengthId = 44 },
+        { .songLengthId = 44 },
+        { .songLengthId = 15 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0xf, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_BLAZIKEN] = {
+        { .songLengthId =  3 },
+        { .songLengthId = 17 },
+        { .songLengthId = 15 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MUDKIP] = {
+        { .songLengthId = 44 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x1d, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MARSHTOMP] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 29 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SWAMPERT] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 48 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_POOCHYENA] = {
+        { .songLengthId = 39 },
+        { .songLengthId = 12 },
+        { .songLengthId = 9 },
+        { .songLengthId = 44 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MIGHTYENA] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 12 },
+        { .songLengthId = 9 },
+        { .songLengthId = 44 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ZIGZAGOON] = {
+        { .songLengthId = 17 },
+        { .songLengthId =  0 },
+        { .songLengthId = 39 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x14, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LINOONE] = {
+        { .songLengthId = 20 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x24, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_WURMPLE] = {
+        { .songLengthId = 48 },
+        { .songLengthId = 36 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x28, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SILCOON] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 40 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2d, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_BEAUTIFLY] = {
+        { .songLengthId = 45 },
+        { .songLengthId = 9 },
+        { .songLengthId = 18 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CASCOON] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x17, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DUSTOX] = {
+        { .songLengthId = 44 },
+        { .songLengthId = 23 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LOTAD] = {
+        { .songLengthId = 24 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LOMBRE] = {
+        { .songLengthId = 24 },
+        { .songLengthId =  3 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LUDICOLO] = {
+        { .songLengthId = 39 },
+        { .songLengthId = 9 },
+        { .songLengthId = 26 },
+        { .songLengthId = 26 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SEEDOT] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0xe, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_NUZLEAF] = {
+        { .songLengthId = 44 },
+        { .songLengthId = 14 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SHIFTRY] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xf, 0x0, 0x0, 0x0, 0x0},
-        { 0x6, 0x0, 0x0, 0x0, 0x0},
-        { 0x6, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_NINCADA] = {
+        { .songLengthId = 15 },
+        { .songLengthId = 6 },
+        { .songLengthId = 6 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0xf, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_NINJASK] = {
+        { .songLengthId = 15 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0xf, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SHEDINJA] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 15 },
+        { .songLengthId = 42 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_TAILLOW] = {
+        { .songLengthId =  3 },
+        { .songLengthId = 26 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SWELLOW] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SHROOMISH] = {
+        { .songLengthId = 39 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_BRELOOM] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xf, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SPINDA] = {
+        { .songLengthId = 15 },
+        { .songLengthId = 42 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0xf, 0x0, 0x0, 0x0, 0x0},
-        { 0x24, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_WINGULL] = {
+        { .songLengthId = 15 },
+        { .songLengthId = 36 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PELIPPER] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 12 },
+        { .songLengthId = 48 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SURSKIT] = {
+        { .songLengthId = 48 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MASQUERAIN] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 48 },
+        { .songLengthId =  3 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x5, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_WAILMER] = {
+        { .songLengthId = 5 },
+        { .songLengthId = 48 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_WAILORD] = {
+        { .songLengthId =  3 },
+        { .songLengthId = 26 },
+        { .songLengthId = 51 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SKITTY] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DELCATTY] = {
+        { .songLengthId = 9 },
+        { .songLengthId =  0 },
+        { .songLengthId = 12 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_KECLEON] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 12 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x1, 0x0, 0x0, 0x0, 0x0},
-        { 0x1e, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_BALTOY] = {
+        { .songLengthId =  1 },
+        { .songLengthId = 30 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CLAYDOL] = {
+        { .songLengthId =  3 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_NOSEPASS] = {
+        { .songLengthId = 24 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_TORKOAL] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 26 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0xb, 0x0, 0x0, 0x0, 0x0},
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SABLEYE] = {
+        { .songLengthId =  3 },
+        { .songLengthId = 11 },
+        { .songLengthId = 18 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_BARBOACH] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_WHISCASH] = {
+        { .songLengthId = 17 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LUVDISC] = {
+        { .songLengthId = 44 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CORPHISH] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CRAWDAUNT] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xe, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_FEEBAS] = {
+        { .songLengthId = 14 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MILOTIC] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 24 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x1, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CARVANHA] = {
+        { .songLengthId = 27 },
+        { .songLengthId =  1 },
+        { .songLengthId = 42 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1d, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SHARPEDO] = {
+        { .songLengthId = 29 },
+        { .songLengthId = 12 },
+        { .songLengthId = 24 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0xf, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_TRAPINCH] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 15 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_VIBRAVA] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 27 },
+        { .songLengthId = 42 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_FLYGON] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MAKUHITA] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 39 },
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_HARIYAMA] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 12 },
+        { .songLengthId = 27 },
+        { .songLengthId = 42 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ELECTRIKE] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 9 },
+        { .songLengthId = 18 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MANECTRIC] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 9 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0xb, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_NUMEL] = {
+        { .songLengthId = 44 },
+        { .songLengthId = 11 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CAMERUPT] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 48 },
+        { .songLengthId = 42 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xe, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SPHEAL] = {
+        { .songLengthId = 14 },
+        { .songLengthId = 51 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SEALEO] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 12 },
+        { .songLengthId = 24 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_WALREIN] = {
+        { .songLengthId = 27 },
+        { .songLengthId =  3 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CACNEA] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CACTURNE] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 48 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SNORUNT] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 44 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x5, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GLALIE] = {
+        { .songLengthId = 5 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LUNATONE] = {
+        { .songLengthId = 39 },
+        { .songLengthId = 44 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SOLROCK] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x6, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0xf, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_AZURILL] = {
+        { .songLengthId = 6 },
+        { .songLengthId = 39 },
+        { .songLengthId = 15 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1e, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SPOINK] = {
+        { .songLengthId = 30 },
+        { .songLengthId = 51 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GRUMPIG] = {
+        { .songLengthId = 44 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x24, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_PLUSLE] = {
+        { .songLengthId = 42 },
+        { .songLengthId = 36 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MINUN] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 42 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MAWILE] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 18 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MEDITITE] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 17 },
+        { .songLengthId = 18 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_MEDICHAM] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 17 },
+        { .songLengthId =  0 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SWABLU] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x6, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ALTARIA] = {
+        { .songLengthId = 6 },
+        { .songLengthId = 27 },
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_WYNAUT] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x26, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DUSKULL] = {
+        { .songLengthId = 42 },
+        { .songLengthId = 38 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DUSCLOPS] = {
+        { .songLengthId = 42 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ROSELIA] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 9 },
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SLAKOTH] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_VIGOROTH] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 48 },
+        { .songLengthId = 27 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SLAKING] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x24, 0x0, 0x0, 0x0, 0x0},
-        { 0xf, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GULPIN] = {
+        { .songLengthId = 36 },
+        { .songLengthId = 15 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SWALOT] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_TROPIUS] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_WHISMUR] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 48 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x21, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LOUDRED] = {
+        { .songLengthId = 33 },
+        { .songLengthId = 9 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x21, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_EXPLOUD] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 33 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x32, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CLAMPERL] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 50 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x5, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_HUNTAIL] = {
+        { .songLengthId = 42 },
+        { .songLengthId = 5 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x2c, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GOREBYSS] = {
+        { .songLengthId = 26 },
+        { .songLengthId = 44 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ABSOL] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SHUPPET] = {
+        { .songLengthId = 42 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_BANETTE] = {
+        { .songLengthId =  3 },
+        { .songLengthId = 9 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SEVIPER] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 18 },
+        { .songLengthId = 48 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ZANGOOSE] = {
+        { .songLengthId =  3 },
+        { .songLengthId = 39 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_RELICANTH] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 17 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x1d, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ARON] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 29 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x5, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LAIRON] = {
+        { .songLengthId = 5 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_AGGRON] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x1a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CASTFORM] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 26 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_VOLBEAT] = {
+        { .songLengthId = 24 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x27, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ILLUMISE] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 39 },
+        { .songLengthId = 12 },
+        { .songLengthId =  3 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LILEEP] = {
+        { .songLengthId = 17 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CRADILY] = {
+        { .songLengthId =  3 },
+        { .songLengthId = 17 },
+        { .songLengthId = 12 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ANORITH] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 24 },
+        { .songLengthId = 17 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_ARMALDO] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 27 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x7, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_RALTS] = {
+        { .songLengthId =  7 },
+        { .songLengthId = 51 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_KIRLIA] = {
+        { .songLengthId = 48 },
+        { .songLengthId = 12 },
+        { .songLengthId = 42 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GARDEVOIR] = {
+        { .songLengthId = 27 },
+        { .songLengthId = 9 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x5, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_BAGON] = {
+        { .songLengthId = 5 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SHELGON] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_SALAMENCE] = {
+        { .songLengthId =  0 },
+        { .songLengthId =  0 },
+        { .songLengthId = 9 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_BELDUM] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 42 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_METANG] = {
+        { .songLengthId = 9 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_METAGROSS] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 42 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_REGIROCK] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 12 },
+        { .songLengthId = 27 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_REGICE] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 12 },
+        { .songLengthId = 18 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0xe, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_REGISTEEL] = {
+        { .songLengthId = 9 },
+        { .songLengthId = 12 },
+        { .songLengthId = 14 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_KYOGRE] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 24 },
+        { .songLengthId = 48 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x21, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_GROUDON] = {
+        { .songLengthId = 33 },
+        { .songLengthId = 27 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x3, 0x0, 0x0, 0x0, 0x0},
-        { 0x2a, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_RAYQUAZA] = {
+        { .songLengthId =  3 },
+        { .songLengthId =  3 },
+        { .songLengthId = 42 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LATIAS] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 12 },
+        { .songLengthId =  0 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0x0, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_LATIOS] = {
+        { .songLengthId =  0 },
+        { .songLengthId = 12 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x30, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_JIRACHI] = {
+        { .songLengthId = 48 },
+        { .songLengthId = 27 },
+        { .songLengthId = 12 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     },
-    {
-        { 0xc, 0x0, 0x0, 0x0, 0x0},
-        { 0x1b, 0x0, 0x0, 0x0, 0x0},
-        { 0x11, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_DEOXYS] = {
+        { .songLengthId = 12 },
+        { .songLengthId = 27 },
+        { .songLengthId = 17 },
+        { .songLengthId = 51 },
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
+        NULL_BARD_SOUND,
     },
-    {
-        { 0x12, 0x0, 0x0, 0x0, 0x0},
-        { 0x9, 0x0, 0x0, 0x0, 0x0},
-        { 0x18, 0x0, 0x0, 0x0, 0x0},
-        { 0x33, 0x0, 0x0, 0x0, 0x0},
+    [SPECIES_CHIMECHO] = {
+        { .songLengthId = 18 },
+        { .songLengthId = 9 },
+        { .songLengthId = 24 },
+        { .songLengthId = 51 },
+        NULL_BARD_SOUND,
         NULL_BARD_SOUND,
-        NULL_BARD_SOUND
     }
 };
 

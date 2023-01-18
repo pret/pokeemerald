@@ -1,2 +1,2 @@
-BattlePyramidSquare01_MapScripts:: @ 823D1A5
+BattlePyramidSquare01_MapScripts::
 	.byte 0

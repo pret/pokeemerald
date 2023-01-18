@@ -88,7 +88,7 @@ static void Task_LinkContest_SetUpContestEm(u8 taskId)
 
     for (i = 0; i < gNumLinkContestPlayers; i++)
         categories[i] = gTasks[taskId].data[i + 1];
-    
+
     // Ensure all players are doing the same category
     for (i = 0; i < gNumLinkContestPlayers && categories[0] == categories[i]; i++)
         ;
@@ -100,7 +100,7 @@ static void Task_LinkContest_SetUpContestEm(u8 taskId)
 
     for (i = 0; i < gNumLinkContestPlayers; i++)
         leaderIds[i] = gTasks[taskId].data[i + 5];
-    
+
     // If < 4 players and player is leader, set AI contestants based on rank and game clear
     if (gNumLinkContestPlayers != CONTESTANT_COUNT && GetMultiplayerId() == 0)
     {
@@ -113,7 +113,7 @@ static void Task_LinkContest_SetUpContestEm(u8 taskId)
 
         if (rank)
             rank--;
-        
+
         gameCleared = TRUE;
         for (i = 0; i < gNumLinkContestPlayers; i++)
         {
@@ -202,7 +202,7 @@ static void Task_LinkContest_CommunicateRngEm(u8 taskId)
             // Only the leader sends the RNG seed
             if (!IsLinkTaskFinished())
                 return;
-            
+
             if (LinkContest_SendBlock(&gRngValue, sizeof(gRngValue)) == 1)
                 gTasks[taskId].data[0]++;
         }
@@ -321,7 +321,7 @@ static void Task_LinkContest_CommunicateAIMonsEm(u8 taskId)
         {
             if (!IsLinkTaskFinished())
                 return;
-            
+
             if (LinkContest_SendBlock(&gContestMons[gNumLinkContestPlayers], (CONTESTANT_COUNT - gNumLinkContestPlayers) * sizeof(struct ContestPokemon)) == 1)
                 gTasks[taskId].data[0]++;
         }

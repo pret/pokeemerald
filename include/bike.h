@@ -17,11 +17,11 @@ struct BikeHistoryInputInfo
 // Player speeds
 enum
 {
-    SPEED_STANDING,
-    SPEED_NORMAL,
-    SPEED_FAST,
-    SPEED_FASTER,
-    SPEED_FASTEST,
+    PLAYER_SPEED_STANDING,
+    PLAYER_SPEED_NORMAL,
+    PLAYER_SPEED_FAST,
+    PLAYER_SPEED_FASTER,
+    PLAYER_SPEED_FASTEST,
 };
 
 // mach bike transitions enum
@@ -71,7 +71,7 @@ void MovePlayerOnBike(u8 direction, u16 newKeys, u16 heldKeys);
 void Bike_TryAcroBikeHistoryUpdate(u16 newKeys, u16 heldKeys);
 bool8 RS_IsRunningDisallowed(u8 tile);
 bool8 IsBikingDisallowedByPlayer(void);
-bool8 player_should_look_direction_be_enforced_upon_movement(void);
+bool8 IsPlayerNotUsingAcroBikeOnBumpySlope(void);
 void GetOnOffBike(u8 transitionFlags);
 void BikeClearState(int newDirHistory, int newAbStartHistory);
 void Bike_UpdateBikeCounterSpeed(u8 counter);

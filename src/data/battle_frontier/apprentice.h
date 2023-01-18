@@ -326,7 +326,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_LASS,
         .species = {SPECIES_SWALOT, SPECIES_XATU, SPECIES_ALTARIA, SPECIES_GOLDUCK, SPECIES_FLYGON, SPECIES_ALAKAZAM, SPECIES_GARDEVOIR, SPECIES_WAILORD, SPECIES_GRUMPIG, SPECIES_MIGHTYENA},
         .id = 3,
-        .speechLost = {EC_WORD_IS, EC_WORD_THIS, EC_WORD_TOO, EC_WORD_MUCH, EC_WORD_QUES, 0xFFFF},
+        .speechLost = {EC_WORD_IS, EC_WORD_THIS, EC_WORD_TOO, EC_WORD_MUCH, EC_WORD_QUES, EC_EMPTY_WORD},
     },
     {
         .name = {_("ヨウカ"), _("MACY"), _("AMELIE"), _("CLEO"), _("MARIA"), _("ELISA")},
@@ -358,7 +358,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_BEAUTY,
         .species = {SPECIES_NINETALES, SPECIES_ALAKAZAM, SPECIES_SCEPTILE, SPECIES_SALAMENCE, SPECIES_GOLDUCK, SPECIES_MAWILE, SPECIES_WEEZING, SPECIES_LANTURN, SPECIES_GARDEVOIR, SPECIES_MILOTIC},
         .id = 7,
-        .speechLost = {EC_WORD_YOU_RE, EC_WORD_STRONG, EC_WORD_AREN_T, EC_WORD_YOU, EC_WORD_QUES, 0xFFFF},
+        .speechLost = {EC_WORD_YOU_RE, EC_WORD_STRONG, EC_WORD_AREN_T, EC_WORD_YOU, EC_WORD_QUES, EC_EMPTY_WORD},
     },
     {
         .name = {_("スミレ"), _("ANNIE"), _("ANNIE"), _("IMELDA"), _("INES"), _("ROSA")},
@@ -374,7 +374,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_HIKER,
         .species = {SPECIES_SKARMORY, SPECIES_GOLEM, SPECIES_BLAZIKEN, SPECIES_CAMERUPT, SPECIES_DONPHAN, SPECIES_MUK, SPECIES_SALAMENCE, SPECIES_TROPIUS, SPECIES_SOLROCK, SPECIES_RHYDON},
         .id = 9,
-        .speechLost = {EC_WORD_WE, EC_WORD_WERE, EC_WORD_JUST, EC_WORD_SHREDDED, EC_WORD_ELLIPSIS, 0xFFFF},
+        .speechLost = {EC_WORD_WE, EC_WORD_WERE, EC_WORD_JUST, EC_WORD_SHREDDED, EC_WORD_ELLIPSIS, EC_EMPTY_WORD},
     },
     {
         .name = {_("トウゾウ"), _("DALLAS"), _("BRUNO"), _("LEARCO"), _("ANSGAR"), _("MANOLO")},
@@ -382,7 +382,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_FISHERMAN,
         .species = {SPECIES_SEAKING, SPECIES_STARMIE, SPECIES_GOLDUCK, SPECIES_TENTACRUEL, SPECIES_OCTILLERY, SPECIES_GOREBYSS, SPECIES_GLALIE, SPECIES_WAILORD, SPECIES_SHARPEDO, SPECIES_KINGDRA},
         .id = 10,
-        .speechLost = {EC_WORD_YOUR, EC_WORD_WIN, EC_WORD_ANGERS, EC_WORD_ME, EC_WORD_EXCL, 0xFFFF},
+        .speechLost = {EC_WORD_YOUR, EC_WORD_WIN, EC_WORD_ANGERS, EC_WORD_ME, EC_WORD_EXCL, EC_EMPTY_WORD},
     },
     {
         .name = {_("セイヤ"), _("FRANK"), _("FRANK"), _("OLINDO"), _("FRANK"), _("MAURO")},
@@ -934,18 +934,18 @@ static const bool8 sValidApprenticeMoves[MOVES_COUNT] =
 // WHICH_MOVE has max 5 occurrences, defined as NUM_WHICH_MOVE_QUESTIONS
 // WHICH_FIRST has max 1 occurrence, lead mon should only be chosen once
 // WHICH_SPEECH has max 1 occurrence, as the apprentice leaves after its asked
-static const u8 sQuestionPossibilities[MAX_APPRENTICE_QUESTIONS] = 
+static const u8 sQuestionPossibilities[MAX_APPRENTICE_QUESTIONS] =
 {
     QUESTION_ID_WHAT_ITEM,
-    QUESTION_ID_WHAT_ITEM, 
-    QUESTION_ID_WHAT_ITEM, 
+    QUESTION_ID_WHAT_ITEM,
+    QUESTION_ID_WHAT_ITEM,
     QUESTION_ID_WHICH_MOVE,
-    QUESTION_ID_WHICH_MOVE, 
-    QUESTION_ID_WHICH_MOVE, 
-    QUESTION_ID_WHICH_MOVE, 
-    QUESTION_ID_WHICH_MOVE, 
-    QUESTION_ID_WHICH_FIRST, 
-    QUESTION_ID_WIN_SPEECH 
+    QUESTION_ID_WHICH_MOVE,
+    QUESTION_ID_WHICH_MOVE,
+    QUESTION_ID_WHICH_MOVE,
+    QUESTION_ID_WHICH_MOVE,
+    QUESTION_ID_WHICH_FIRST,
+    QUESTION_ID_WIN_SPEECH
 };
 
 static void (* const sApprenticeFunctions[])(void) =

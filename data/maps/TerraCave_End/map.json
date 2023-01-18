@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_GROUDON_1",
+      "graphics_id": "OBJ_EVENT_GFX_GROUDON_FRONT",
       "x": 17,
       "y": 22,
       "elevation": 1,
@@ -34,7 +34,7 @@
       "y": 4,
       "elevation": 3,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [

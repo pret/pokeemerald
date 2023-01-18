@@ -1,5 +1,5 @@
-filler_03002F58
-filler_03002F5C
+gUnusedWindowVar1
+gUnusedWindowVar2
 gTransparentTileNumber
-filler_03002F64
-gUnknown_03002F70
+gUnusedWindowVar3
+gWindowBgTilemapBuffers

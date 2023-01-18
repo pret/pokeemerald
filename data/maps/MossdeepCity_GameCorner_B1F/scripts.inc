@@ -1,3 +1,3 @@
-MossdeepCity_GameCorner_B1F_MapScripts:: @ 8224E4B
+MossdeepCity_GameCorner_B1F_MapScripts::
 	.byte 0
 

@@ -30,13 +30,13 @@ se_m_stat_increase_1:
 	.byte	W01
 	.byte		PAN   , c_v+6
 	.byte		BEND  , c_v+5
-	.byte		N02   , An4 
+	.byte		N02   , An4
 	.byte	W01
 	.byte		BEND  , c_v+8
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+12
-	.byte		N02   , Dn5 
+	.byte		N02   , Dn5
 	.byte	W01
 	.byte		BEND  , c_v+16
 	.byte	W01
@@ -44,13 +44,13 @@ se_m_stat_increase_1:
 	.byte	W01
 	.byte		PAN   , c_v-6
 	.byte		BEND  , c_v+32
-	.byte		N02   , Dn4 
+	.byte		N02   , Dn4
 	.byte	W01
 	.byte		BEND  , c_v+42
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+0
-	.byte		N02   , As5 
+	.byte		N02   , As5
 	.byte	W01
 	.byte		BEND  , c_v+0
 	.byte	W01
@@ -58,13 +58,13 @@ se_m_stat_increase_1:
 	.byte	W01
 	.byte		PAN   , c_v+6
 	.byte		BEND  , c_v+5
-	.byte		N02   , As4 
+	.byte		N02   , As4
 	.byte	W01
 	.byte		BEND  , c_v+8
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+12
-	.byte		N02   , Ds5 
+	.byte		N02   , Ds5
 	.byte	W01
 	.byte		BEND  , c_v+16
 	.byte	W01
@@ -72,13 +72,13 @@ se_m_stat_increase_1:
 	.byte	W01
 	.byte		PAN   , c_v-6
 	.byte		BEND  , c_v+32
-	.byte		N02   , Ds4 
+	.byte		N02   , Ds4
 	.byte	W01
 	.byte		BEND  , c_v+42
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+0
-	.byte		N02   , Bn5 
+	.byte		N02   , Bn5
 	.byte	W01
 	.byte		BEND  , c_v+0
 	.byte	W01
@@ -86,13 +86,13 @@ se_m_stat_increase_1:
 	.byte	W01
 	.byte		PAN   , c_v+6
 	.byte		BEND  , c_v+5
-	.byte		N02   , Bn4 
+	.byte		N02   , Bn4
 	.byte	W01
 	.byte		BEND  , c_v+8
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+12
-	.byte		N02   , En5 
+	.byte		N02   , En5
 	.byte	W01
 	.byte		BEND  , c_v+16
 	.byte	W01
@@ -100,13 +100,13 @@ se_m_stat_increase_1:
 	.byte	W01
 	.byte		PAN   , c_v-6
 	.byte		BEND  , c_v+32
-	.byte		N02   , En4 
+	.byte		N02   , En4
 	.byte	W01
 	.byte		BEND  , c_v+42
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+0
-	.byte		N02   , Cn6 
+	.byte		N02   , Cn6
 	.byte	W01
 	.byte		BEND  , c_v+0
 	.byte	W01
@@ -114,13 +114,13 @@ se_m_stat_increase_1:
 	.byte	W01
 	.byte		PAN   , c_v+6
 	.byte		BEND  , c_v+5
-	.byte		N02   , Cn5 
+	.byte		N02   , Cn5
 	.byte	W01
 	.byte		BEND  , c_v+8
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+12
-	.byte		N02   , Fn5 
+	.byte		N02   , Fn5
 	.byte	W01
 	.byte		BEND  , c_v+16
 	.byte	W01
@@ -128,13 +128,13 @@ se_m_stat_increase_1:
 	.byte	W01
 	.byte		PAN   , c_v-6
 	.byte		BEND  , c_v+32
-	.byte		N02   , Fn4 
+	.byte		N02   , Fn4
 	.byte	W01
 	.byte		BEND  , c_v+42
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+0
-	.byte		N02   , Cs6 
+	.byte		N02   , Cs6
 	.byte	W01
 	.byte		BEND  , c_v+0
 	.byte	W01
@@ -142,7 +142,7 @@ se_m_stat_increase_1:
 	.byte	W01
 	.byte		PAN   , c_v+6
 	.byte		BEND  , c_v+5
-	.byte		N02   , Cs5 
+	.byte		N02   , Cs5
 	.byte	W01
 	.byte		BEND  , c_v+8
 	.byte	W02
@@ -156,13 +156,13 @@ se_m_stat_increase_1:
 	.byte	W01
 	.byte		PAN   , c_v-12
 	.byte		BEND  , c_v+32
-	.byte		N02   , Fn4 
+	.byte		N02   , Fn4
 	.byte	W01
 	.byte		BEND  , c_v+42
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+0
-	.byte		N02   , Cs6 
+	.byte		N02   , Cs6
 	.byte	W01
 	.byte		BEND  , c_v+0
 	.byte	W01
@@ -170,7 +170,7 @@ se_m_stat_increase_1:
 	.byte	W01
 	.byte		PAN   , c_v+12
 	.byte		BEND  , c_v+5
-	.byte		N02   , Cs5 
+	.byte		N02   , Cs5
 	.byte	W01
 	.byte		BEND  , c_v+8
 	.byte	W02
@@ -184,13 +184,13 @@ se_m_stat_increase_1:
 	.byte	W01
 	.byte		PAN   , c_v-16
 	.byte		BEND  , c_v+32
-	.byte		N02   , Fn4 
+	.byte		N02   , Fn4
 	.byte	W01
 	.byte		BEND  , c_v+42
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+0
-	.byte		N02   , Cs6 
+	.byte		N02   , Cs6
 	.byte	W01
 	.byte		BEND  , c_v+0
 	.byte	W01
@@ -198,7 +198,7 @@ se_m_stat_increase_1:
 	.byte	W01
 	.byte		PAN   , c_v+16
 	.byte		BEND  , c_v+5
-	.byte		N02   , Cs5 
+	.byte		N02   , Cs5
 	.byte	W01
 	.byte		BEND  , c_v+8
 	.byte	W02
@@ -214,55 +214,55 @@ se_m_stat_increase_2:
 	.byte		VOL   , 70*se_m_stat_increase_mvl/mxv
 	.byte		N02   , Cn3 , v052
 	.byte	W03
-	.byte		N02   
+	.byte		N02
 	.byte	W03
 	.byte	W01
-	.byte		        Cs3 
+	.byte		        Cs3
 	.byte	W03
-	.byte		N02   
+	.byte		N02
 	.byte	W02
 	.byte	W02
-	.byte		        Dn3 
+	.byte		        Dn3
 	.byte	W04
-	.byte		N02   
+	.byte		N02
 	.byte	W03
-	.byte		        Ds3 
+	.byte		        Ds3
 	.byte	W03
 	.byte	W01
-	.byte		N02   
+	.byte		N02
 	.byte	W03
-	.byte		        En3 
+	.byte		        En3
 	.byte	W02
 	.byte	W02
-	.byte		N02   
+	.byte		N02
 	.byte	W04
-	.byte		        Fn3 
+	.byte		        Fn3
 	.byte	W03
-	.byte		N02   
+	.byte		N02
 	.byte	W03
 	.byte	W01
-	.byte		        Fs3 
+	.byte		        Fs3
 	.byte	W03
-	.byte		N02   
+	.byte		N02
 	.byte	W02
 	.byte	W02
-	.byte		        Gn3 
+	.byte		        Gn3
 	.byte	W04
 	.byte		        Gn3 , v032
 	.byte	W03
-	.byte		        Gs3 
+	.byte		        Gs3
 	.byte	W03
 	.byte	W01
-	.byte		N02   
+	.byte		N02
 	.byte	W03
 	.byte		        An3 , v020
 	.byte	W02
 	.byte	W02
-	.byte		N02   
+	.byte		N02
 	.byte	W04
 	.byte		        As3 , v012
 	.byte	W03
-	.byte		N02   
+	.byte		N02
 	.byte	W03
 	.byte	FINE
 

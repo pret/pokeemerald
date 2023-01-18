@@ -1,4 +1,4 @@
-Common_EventScript_SetGymTrainers:: @ 8271F43
+Common_EventScript_SetGymTrainers::
 	switch VAR_0x8008
 	case 1, RustboroCity_Gym_SetGymTrainers
 	case 2, DewfordTown_Gym_SetGymTrainers
@@ -10,13 +10,13 @@ Common_EventScript_SetGymTrainers:: @ 8271F43
 	case 8, SootopolisCity_Gym_SetGymTrainers
 	end
 
-RustboroCity_Gym_SetGymTrainers:: @ 8271FA1
+RustboroCity_Gym_SetGymTrainers::
 	settrainerflag TRAINER_JOSH
 	settrainerflag TRAINER_TOMMY
 	settrainerflag TRAINER_MARC
 	return
 
-DewfordTown_Gym_SetGymTrainers:: @ 8271FAB
+DewfordTown_Gym_SetGymTrainers::
 	settrainerflag TRAINER_TAKAO
 	settrainerflag TRAINER_JOCELYN
 	settrainerflag TRAINER_LAURA
@@ -25,7 +25,7 @@ DewfordTown_Gym_SetGymTrainers:: @ 8271FAB
 	settrainerflag TRAINER_LILITH
 	return
 
-MauvilleCity_Gym_SetGymTrainers:: @ 8271FBE
+MauvilleCity_Gym_SetGymTrainers::
 	settrainerflag TRAINER_KIRK
 	settrainerflag TRAINER_SHAWN
 	settrainerflag TRAINER_BEN
@@ -33,7 +33,7 @@ MauvilleCity_Gym_SetGymTrainers:: @ 8271FBE
 	settrainerflag TRAINER_ANGELO
 	return
 
-LavaridgeTown_Gym_SetGymTrainers:: @ 8271FCE
+LavaridgeTown_Gym_SetGymTrainers::
 	settrainerflag TRAINER_COLE
 	settrainerflag TRAINER_AXLE
 	settrainerflag TRAINER_KEEGAN
@@ -44,7 +44,7 @@ LavaridgeTown_Gym_SetGymTrainers:: @ 8271FCE
 	settrainerflag TRAINER_ELI
 	return
 
-PetalburgCity_Gym_SetGymTrainers:: @ 8271FE7
+PetalburgCity_Gym_SetGymTrainers::
 	settrainerflag TRAINER_RANDALL
 	settrainerflag TRAINER_PARKER
 	settrainerflag TRAINER_GEORGE
@@ -54,7 +54,7 @@ PetalburgCity_Gym_SetGymTrainers:: @ 8271FE7
 	settrainerflag TRAINER_JODY
 	return
 
-FortreeCity_Gym_SetGymTrainers:: @ 8271FFD
+FortreeCity_Gym_SetGymTrainers::
 	settrainerflag TRAINER_JARED
 	settrainerflag TRAINER_FLINT
 	settrainerflag TRAINER_ASHLEY
@@ -63,7 +63,7 @@ FortreeCity_Gym_SetGymTrainers:: @ 8271FFD
 	settrainerflag TRAINER_DARIUS
 	return
 
-MossdeepCity_Gym_SetGymTrainers:: @ 8272010
+MossdeepCity_Gym_SetGymTrainers::
 	settrainerflag TRAINER_PRESTON
 	settrainerflag TRAINER_VIRGIL
 	settrainerflag TRAINER_BLAKE
@@ -78,7 +78,7 @@ MossdeepCity_Gym_SetGymTrainers:: @ 8272010
 	settrainerflag TRAINER_NICHOLAS
 	return
 
-SootopolisCity_Gym_SetGymTrainers:: @ 8272035
+SootopolisCity_Gym_SetGymTrainers::
 	settrainerflag TRAINER_ANDREA
 	settrainerflag TRAINER_CRISSY
 	settrainerflag TRAINER_BRIANNA

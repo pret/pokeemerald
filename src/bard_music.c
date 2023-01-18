@@ -1,8 +1,5 @@
-
-// Includes
 #include "global.h"
 #include "bard_music.h"
-#include "constants/easy_chat.h"
 #include "easy_chat.h"
 
 #include "data/bard_music/bard_sounds.h"
@@ -10,9 +7,9 @@
 #include "data/bard_music/default_sound.h"
 #include "data/bard_music/length_table.h"
 
-s16 CalcWordPitch(int arg0, int songPos)
+static s16 CalcWordPitch(int pitchIdx, int songPos)
 {
-    return gBardSoundPitchTables[arg0][songPos];
+    return sBardSoundPitchTables[pitchIdx][songPos];
 }
 
 const struct BardSound *GetWordSounds(u16 word)
@@ -21,16 +18,16 @@ const struct BardSound *GetWordSounds(u16 word)
     u32 subword;
     const struct BardSound (*ptr)[6];
 
-    if (ECWord_CheckIfOutsideOfValidRange(word))
+    if (IsBardWordInvalid(word))
     {
         return gBardSound_InvalidWord;
     }
-    category = word >> 9;
-    subword = word & 0x1ff;
+    category = EC_GROUP(word);
+    subword = EC_INDEX(word);
     switch (category)
     {
         case EC_GROUP_POKEMON:
-        case EC_GROUP_POKEMON_2:
+        case EC_GROUP_POKEMON_NATIONAL:
             ptr = gBardSounds_Pokemon;
             break;
         case EC_GROUP_MOVE_1:
@@ -54,9 +51,9 @@ void GetWordPhonemes(struct BardSong *song, u16 word)
     for (i = 0; i < 6; i ++)
     {
         sound = &song->sound[i];
-        if (sound->var00 != 0xFF)
+        if (sound->songLengthId != 0xFF)
         {
-            song->phonemes[i].length = sound->var01 + gBardSoundLengthTable[sound->var00];
+            song->phonemes[i].length = sound->songLengthOffset + gBardSoundLengthTable[sound->songLengthId];
             song->phonemes[i].pitch = CalcWordPitch(word + 30, i);
             song->length += song->phonemes[i].length;
         }

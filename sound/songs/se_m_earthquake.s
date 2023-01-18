@@ -209,9 +209,9 @@ se_m_earthquake_2:
 	.byte		VOL   , 110*se_m_earthquake_mvl/mxv
 	.byte		N02   , Fn2 , v072
 	.byte	W02
-	.byte		N01   
+	.byte		N01
 	.byte	W01
-	.byte		N02   , Gn2 
+	.byte		N02   , Gn2
 	.byte	W03
 	.byte		N01   , Gs2 , v060
 	.byte	W06
@@ -223,87 +223,87 @@ se_m_earthquake_2_000:
 	.byte		N06   , Bn1 , v080
 	.byte	W06
 	.byte	PEND
-	.byte		N06   
+	.byte		N06
 	.byte	W06
-	.byte		N06   
-	.byte	W06
-	.byte	PATT
-	 .word	se_m_earthquake_2_000
-	.byte		N06   , Bn1 , v080
-	.byte	W06
-	.byte		N06   
+	.byte		N06
 	.byte	W06
 	.byte	PATT
 	 .word	se_m_earthquake_2_000
 	.byte		N06   , Bn1 , v080
 	.byte	W06
-	.byte		N06   
+	.byte		N06
 	.byte	W06
 	.byte	PATT
 	 .word	se_m_earthquake_2_000
 	.byte		N06   , Bn1 , v080
 	.byte	W06
-	.byte		N06   
+	.byte		N06
 	.byte	W06
 	.byte	PATT
 	 .word	se_m_earthquake_2_000
 	.byte		N06   , Bn1 , v080
 	.byte	W06
-	.byte		N06   
+	.byte		N06
 	.byte	W06
 	.byte	PATT
 	 .word	se_m_earthquake_2_000
 	.byte		N06   , Bn1 , v080
 	.byte	W06
-	.byte		N06   
+	.byte		N06
 	.byte	W06
 	.byte	PATT
 	 .word	se_m_earthquake_2_000
 	.byte		N06   , Bn1 , v080
 	.byte	W06
-	.byte		N06   
+	.byte		N06
 	.byte	W06
 	.byte	PATT
 	 .word	se_m_earthquake_2_000
 	.byte		N06   , Bn1 , v080
 	.byte	W06
-	.byte		N06   
+	.byte		N06
+	.byte	W06
+	.byte	PATT
+	 .word	se_m_earthquake_2_000
+	.byte		N06   , Bn1 , v080
+	.byte	W06
+	.byte		N06
 	.byte	W06
 	.byte		VOL   , 106*se_m_earthquake_mvl/mxv
 	.byte		PAN   , c_v+0
-	.byte		N06   
+	.byte		N06
 	.byte	W03
 	.byte		VOL   , 103*se_m_earthquake_mvl/mxv
 	.byte	W03
-	.byte		N06   
+	.byte		N06
 	.byte	W01
 	.byte		VOL   , 97*se_m_earthquake_mvl/mxv
 	.byte	W03
 	.byte		        89*se_m_earthquake_mvl/mxv
 	.byte	W02
-	.byte		N06   
+	.byte		N06
 	.byte	W02
 	.byte		VOL   , 85*se_m_earthquake_mvl/mxv
 	.byte	W04
 	.byte		        78*se_m_earthquake_mvl/mxv
 	.byte		PAN   , c_v+0
-	.byte		N06   
+	.byte		N06
 	.byte	W03
 	.byte		VOL   , 72*se_m_earthquake_mvl/mxv
 	.byte	W03
-	.byte		N06   
+	.byte		N06
 	.byte	W01
 	.byte		VOL   , 66*se_m_earthquake_mvl/mxv
 	.byte	W03
 	.byte		        58*se_m_earthquake_mvl/mxv
 	.byte	W02
-	.byte		N06   
+	.byte		N06
 	.byte	W02
 	.byte		VOL   , 46*se_m_earthquake_mvl/mxv
 	.byte	W04
 	.byte		        30*se_m_earthquake_mvl/mxv
 	.byte		PAN   , c_v+0
-	.byte		N06   
+	.byte		N06
 	.byte	W03
 	.byte		VOL   , 12*se_m_earthquake_mvl/mxv
 	.byte	W03

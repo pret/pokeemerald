@@ -56,7 +56,7 @@ se_m_confuse_ray_1:
 	.byte		        c_v-17
 	.byte	W01
 	.byte		        c_v-1
-	.byte		N12   , As2 
+	.byte		N12   , As2
 	.byte	W02
 	.byte		PAN   , c_v+4
 	.byte		BEND  , c_v+8
@@ -82,7 +82,7 @@ se_m_confuse_ray_1:
 	.byte		        c_v-16
 	.byte	W01
 	.byte		        c_v-1
-	.byte		N12   , As2 
+	.byte		N12   , As2
 	.byte	W03
 	.byte		PAN   , c_v+4
 	.byte		BEND  , c_v+8

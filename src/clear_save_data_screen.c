@@ -79,8 +79,8 @@ void CB2_InitClearSaveDataScreen(void)
 
 static void Task_DoClearSaveDataScreenYesNo(u8 taskId)
 {
-    DrawStdFrameWithCustomTileAndPalette(0, 0, 2, 14);
-    AddTextPrinterParameterized(0, 1, gText_ClearAllSaveData, 0, 1, 0, 0);
+    DrawStdFrameWithCustomTileAndPalette(0, FALSE, 2, 14);
+    AddTextPrinterParameterized(0, FONT_NORMAL, gText_ClearAllSaveData, 0, 1, 0, 0);
     CreateYesNoMenu(sClearSaveYesNo, 2, 14, 1);
     gTasks[taskId].func = Task_ClearSaveDataScreenYesNoChoice;
 }
@@ -91,11 +91,11 @@ static void Task_ClearSaveDataScreenYesNoChoice(u8 taskId)
     {
     case 0:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized(0, 1, gText_ClearingData, 0, 1, 0, 0);
+        AddTextPrinterParameterized(0, FONT_NORMAL, gText_ClearingData, 0, 1, 0, 0);
         gTasks[taskId].func = Task_ClearSaveData;
         break;
     case 1:
-    case -1:
+    case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
         DestroyTask(taskId);
         SetMainCallback2(CB2_FadeAndDoReset);
@@ -163,7 +163,7 @@ static bool8 SetupClearSaveDataScreen(void)
         ShowBg(3);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         InitClearSaveDataScreenWindows();
-        BeginNormalPaletteFade(0x0000FFFF, 0, 0x10, 0, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETTES_BG, 0, 0x10, 0, RGB_WHITEALPHA);
         EnableInterrupts(INTR_FLAG_VBLANK);
         SetVBlankCallback(VBlankCB);
         gMain.state = 1;
@@ -185,7 +185,7 @@ static void CB2_FadeAndDoReset(void)
     {
     case 0:
     default:
-        BeginNormalPaletteFade(0x0000FFFF, 0, 0, 0x10, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETTES_BG, 0, 0, 0x10, RGB_WHITEALPHA);
         gMain.state = 1;
         break;
     case 1:
@@ -204,6 +204,6 @@ static void InitClearSaveDataScreenWindows(void)
     InitWindows(sClearSaveTextWindow);
     DeactivateAllTextPrinters();
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    LoadWindowGfx(0, 0, 2, 224);
-    LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+    LoadWindowGfx(0, 0, 2, BG_PLTT_ID(14));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
 }

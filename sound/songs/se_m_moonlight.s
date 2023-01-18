@@ -26,18 +26,18 @@ se_m_moonlight_1:
 	.byte		BEND  , c_v+3
 	.byte		N01   , Ds6 , v092
 	.byte	W01
-	.byte		        Dn6 
+	.byte		        Dn6
 	.byte	W01
-	.byte		        Gn5 
+	.byte		        Gn5
 	.byte	W01
 	.byte		N20   , Gn6 , v100
 	.byte	W21
 se_m_moonlight_1_000:
 	.byte		N01   , Ds6 , v056
 	.byte	W01
-	.byte		        Dn6 
+	.byte		        Dn6
 	.byte	W01
-	.byte		        Gn5 
+	.byte		        Gn5
 	.byte	W01
 	.byte		N20   , Gn6 , v064
 	.byte	W03
@@ -54,9 +54,9 @@ se_m_moonlight_1_001:
 	.byte		PAN   , c_v+0
 	.byte		N01   , Gs5 , v092
 	.byte	W01
-	.byte		        Gn5 
+	.byte		        Gn5
 	.byte	W01
-	.byte		        Cn5 
+	.byte		        Cn5
 	.byte	W01
 	.byte		N20   , Cn6 , v100
 	.byte	W21
@@ -65,9 +65,9 @@ se_m_moonlight_1_002:
 	.byte		PAN   , c_v+16
 	.byte		N01   , Gs5 , v056
 	.byte	W01
-	.byte		        Gn5 
+	.byte		        Gn5
 	.byte	W01
-	.byte		        Cn5 
+	.byte		        Cn5
 	.byte	W01
 	.byte		N20   , Cn6 , v064
 	.byte	W21
@@ -76,31 +76,31 @@ se_m_moonlight_1_003:
 	.byte		PAN   , c_v-16
 	.byte		N01   , Gs5 , v040
 	.byte	W01
-	.byte		        Gn5 
+	.byte		        Gn5
 	.byte	W01
-	.byte		        Cn5 
+	.byte		        Cn5
 	.byte	W01
-	.byte		N20   , Cn6 
+	.byte		N20   , Cn6
 	.byte	W21
 	.byte	PEND
 se_m_moonlight_1_004:
 	.byte		PAN   , c_v+32
 	.byte		N01   , Gs5 , v020
 	.byte	W01
-	.byte		        Gn5 
+	.byte		        Gn5
 	.byte	W01
-	.byte		        Cn5 
+	.byte		        Cn5
 	.byte	W01
 	.byte		PAN   , c_v-32
-	.byte		N20   , Cn6 
+	.byte		N20   , Cn6
 	.byte	W21
 	.byte	PEND
 	.byte		PAN   , c_v+0
 	.byte		N01   , Ds6 , v092
 	.byte	W01
-	.byte		        Dn6 
+	.byte		        Dn6
 	.byte	W01
-	.byte		        Gn5 
+	.byte		        Gn5
 	.byte	W01
 	.byte		N20   , Gn6 , v100
 	.byte	W21
@@ -127,11 +127,11 @@ se_m_moonlight_2:
 	.byte	W10
 	.byte		N01   , Ds6 , v112
 	.byte	W02
-	.byte		        Dn6 
+	.byte		        Dn6
 	.byte	W01
-	.byte		        Gn5 
+	.byte		        Gn5
 	.byte	W01
-	.byte		N04   , Gn6 
+	.byte		N04   , Gn6
 	.byte	W05
 	.byte		        Gn6 , v096
 	.byte	W05
@@ -154,11 +154,11 @@ se_m_moonlight_2_001:
 	.byte	W10
 	.byte		N01   , Gs5 , v112
 	.byte	W02
-	.byte		        Gn5 
+	.byte		        Gn5
 	.byte	W01
-	.byte		        Cn5 
+	.byte		        Cn5
 	.byte	W01
-	.byte		N04   , Cn6 
+	.byte		N04   , Cn6
 	.byte	W05
 	.byte		        Cn6 , v096
 	.byte	W05
@@ -183,11 +183,11 @@ se_m_moonlight_2_002:
 	.byte	W10
 	.byte		N01   , Ds6 , v112
 	.byte	W02
-	.byte		        Dn6 
+	.byte		        Dn6
 	.byte	W01
-	.byte		        Gn5 
+	.byte		        Gn5
 	.byte	W01
-	.byte		N04   , Gn6 
+	.byte		N04   , Gn6
 	.byte	W05
 	.byte		        Gn6 , v096
 	.byte	W05

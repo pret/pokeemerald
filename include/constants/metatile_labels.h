@@ -16,7 +16,7 @@
 #define METATILE_General_MuddySlope_Frame2    0x0EA
 #define METATILE_General_MuddySlope_Frame3    0x0EB
 #define METATILE_General_SandPit_Center       0x121
-#define METATILE_General_Door                 0x021   
+#define METATILE_General_Door                 0x021
 #define METATILE_General_Door_PokeMart        0x041
 #define METATILE_General_Door_PokeCenter      0x061
 #define METATILE_General_Door_Gym             0x1CD
@@ -35,13 +35,15 @@
 #define METATILE_General_SecretBase_VineLeft  0x036
 #define METATILE_General_SecretBase_VineRight 0x037
 #define METATILE_General_RedCaveIndent        0x1A0
-#define METATILE_General_RedCaveOpen          0x1A1 
+#define METATILE_General_RedCaveOpen          0x1A1
 #define METATILE_General_YellowCaveIndent     0x1A8
 #define METATILE_General_YellowCaveOpen       0x1A9
 #define METATILE_General_BlueCaveIndent       0x1B0
 #define METATILE_General_BlueCaveOpen         0x1B1
 
 // gTileset_Building
+#define METATILE_Building_TV_Off 0x002
+#define METATILE_Building_TV_On  0x003
 #define METATILE_Building_PC_Off 0x004
 #define METATILE_Building_PC_On  0x005
 
@@ -97,6 +99,7 @@
 #define METATILE_PetalburgGym_SlidingDoor_Frame2 0x21A
 #define METATILE_PetalburgGym_SlidingDoor_Frame3 0x21B
 #define METATILE_PetalburgGym_SlidingDoor_Frame4 0x21C
+#define METATILE_PetalburgGym_Door               0x224
 
 // gTileset_MossdeepGym from R/S
 #define METATILE_RS_MossdeepGym_RedArrow_Right        0x204
@@ -126,7 +129,6 @@
 
 // gTileset_BattleFrontier
 #define METATILE_BattleFrontier_Door_Elevator           0x20E
-#define METATILE_BattleFrontier_Door_Corridor           0x224
 #define METATILE_BattleFrontier_Door_MultiCorridor      0x2AD
 #define METATILE_BattleFrontier_CorridorOpenDoor_Top    0x207
 #define METATILE_BattleFrontier_CorridorOpenDoor_Bottom 0x20F
@@ -165,6 +167,8 @@
 
 // gTileset_Cave
 #define METATILE_Cave_EntranceCover                     0x229
+#define METATILE_Cave_CrackedFloor_Hole                 0x206
+#define METATILE_Cave_CrackedFloor                      0x22F
 #define METATILE_Cave_SealedChamberEntrance_TopLeft     0x22A
 #define METATILE_Cave_SealedChamberEntrance_TopMid      0x22B
 #define METATILE_Cave_SealedChamberEntrance_TopRight    0x22C
@@ -178,21 +182,22 @@
 #define METATILE_Cave_ShoalCave_BlueStone_Small         0x35B
 
 // gTileset_Pacifidlog
-#define METATILE_Pacifidlog_Door                          0x21A
-#define METATILE_Pacifidlog_FloatingLogs_Horizontal0      0x250
-#define METATILE_Pacifidlog_FloatingLogs_Horizontal1      0x251
-#define METATILE_Pacifidlog_HalfSubmergedLogs_Horizontal0 0x252
-#define METATILE_Pacifidlog_HalfSubmergedLogs_Horizontal1 0x253
-#define METATILE_Pacifidlog_SubmergedLogs_Horizontal0     0x254
-#define METATILE_Pacifidlog_SubmergedLogs_Horizontal1     0x255
-#define METATILE_Pacifidlog_FloatingLogs_Vertical0        0x258
-#define METATILE_Pacifidlog_FloatingLogs_Vertical1        0x260
-#define METATILE_Pacifidlog_HalfSubmergedLogs_Vertical0   0x259
-#define METATILE_Pacifidlog_HalfSubmergedLogs_Vertical1   0x261
-#define METATILE_Pacifidlog_SubmergedLogs_Vertical0       0x25A
-#define METATILE_Pacifidlog_SubmergedLogs_Vertical1       0x262
-#define METATILE_Pacifidlog_SkyPillar_DoorOpen_Top        0x2AA
-#define METATILE_Pacifidlog_SkyPillar_DoorOpen_Bottom     0x2B2
+#define METATILE_Pacifidlog_Door                              0x21A
+#define METATILE_Pacifidlog_FloatingLogs_HorizontalLeft       0x250
+#define METATILE_Pacifidlog_FloatingLogs_HorizontalRight      0x251
+#define METATILE_Pacifidlog_HalfSubmergedLogs_HorizontalLeft  0x252
+#define METATILE_Pacifidlog_HalfSubmergedLogs_HorizontalRight 0x253
+#define METATILE_Pacifidlog_SubmergedLogs_HorizontalLeft      0x254
+#define METATILE_Pacifidlog_SubmergedLogs_HorizontalRight     0x255
+#define METATILE_Pacifidlog_FloatingLogs_VerticalTop          0x258
+#define METATILE_Pacifidlog_FloatingLogs_VerticalBottom       0x260
+#define METATILE_Pacifidlog_HalfSubmergedLogs_VerticalTop     0x259
+#define METATILE_Pacifidlog_HalfSubmergedLogs_VerticalBottom  0x261
+#define METATILE_Pacifidlog_SubmergedLogs_VerticalTop         0x25A
+#define METATILE_Pacifidlog_SubmergedLogs_VerticalBottom      0x262
+#define METATILE_Pacifidlog_SkyPillar_CrackedFloor_Hole       0x237
+#define METATILE_Pacifidlog_SkyPillar_DoorOpen_Top            0x2AA
+#define METATILE_Pacifidlog_SkyPillar_DoorOpen_Bottom         0x2B2
 
 // gTileset_Fortree
 #define METATILE_Fortree_LongGrass_Root                   0x208
@@ -347,6 +352,7 @@
 #define METATILE_InsideShip_IntactDoor_Bottom_Interior 0x297
 
 // gTileset_BattlePike
+#define METATILE_BattlePike_CurtainFrames_Start  0x201
 #define METATILE_BattlePike_Curtain_Stage0_Tile0 0x24A
 #define METATILE_BattlePike_Curtain_Stage0_Tile1 0x251
 #define METATILE_BattlePike_Curtain_Stage0_Tile2 0x252
@@ -678,8 +684,6 @@
 #define METATILE_SecretBase_BigPlant_TopRight           0x2E6
 #define METATILE_SecretBase_BigPlant_BaseLeft1          0x2EC
 #define METATILE_SecretBase_BigPlant_BaseRight1         0x2ED
-#define METATILE_SecretBase_BigPlant_TopLeftWall        0x2E5
-#define METATILE_SecretBase_BigPlant_TopRightWall       0x2E6
 #define METATILE_SecretBase_BigPlant_BaseLeft2          0x2EE
 #define METATILE_SecretBase_BigPlant_BaseRight2         0x2EF
 #define METATILE_SecretBase_GorgeousPlant_TopLeft       0x2F0
@@ -782,5 +786,9 @@
 #define METATILE_SecretBase_SpikesMat_BottomLeft        0x329
 #define METATILE_SecretBase_SpikesMat_BottomMid         0x32A
 #define METATILE_SecretBase_SpikesMat_BottomRight       0x32B
+
+// gTileset_BattlePyramid
+#define METATILE_BattlePyramid_Floor 0x28D
+#define METATILE_BattlePyramid_Exit  0x28E
 
 #endif // GUARD_METATILE_LABELS_H

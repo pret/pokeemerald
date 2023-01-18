@@ -22,7 +22,6 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/metatile_labels.h"
 #include "constants/songs.h"
-#include "constants/tv.h"
 
 
 EWRAM_DATA struct MapPosition gPlayerFacingPosition = {0};
@@ -194,7 +193,7 @@ static const struct SpriteFrameImage sPicTable_SecretPowerShrub[] =
 
 static const struct SpriteTemplate sSpriteTemplate_SecretPowerCave =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_SECRET_POWER_TREE,
     .oam = &sOam_SecretPower,
     .anims = sAnimTable_SecretPowerCave,
@@ -205,7 +204,7 @@ static const struct SpriteTemplate sSpriteTemplate_SecretPowerCave =
 
 static const struct SpriteTemplate sSpriteTemplate_SecretPowerTree =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_SECRET_POWER_PLANT,
     .oam = &sOam_SecretPower,
     .anims = sAnimTable_SecretPowerTree,
@@ -216,7 +215,7 @@ static const struct SpriteTemplate sSpriteTemplate_SecretPowerTree =
 
 static const struct SpriteTemplate sSpriteTemplate_SecretPowerShrub =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_SECRET_POWER_PLANT,
     .oam = &sOam_SecretPower,
     .anims = sAnimTable_SecretPowerShrub,
@@ -262,7 +261,7 @@ static const struct SpriteFrameImage sPicTable_SandPillar[] =
 
 static const struct SpriteTemplate sSpriteTemplate_SandPillar =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_SAND_PILLAR,
     .oam = &sOam_SandPillar,
     .anims = sAnimTable_SandPillar,
@@ -300,7 +299,7 @@ static const union AnimCmd *const sAnimTable_RecordMixLights[] =
 
 static const struct SpriteTemplate sSpriteTemplate_RecordMixLights =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = 0x1000,
     .oam = &gObjectEventBaseOam_32x8,
     .anims = sAnimTable_RecordMixLights,
@@ -387,7 +386,7 @@ static void Task_ComputerScreenOpenEffect(u8 taskId)
             task->tWinRight = DISPLAY_WIDTH;
             SetGpuReg(REG_OFFSET_BLDY, 0);
             SetGpuReg(REG_OFFSET_BLDCNT, task->tBlendCnt);
-            BlendPalettes(0xFFFFFFFF, 0, 0);
+            BlendPalettes(PALETTES_ALL, 0, 0);
             gPlttBufferFaded[0] = 0;
         }
         SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(task->tWinLeft, task->tWinRight));
@@ -463,7 +462,7 @@ static void Task_ComputerScreenCloseEffect(u8 taskId)
         {
             task->tWinLeft = DISPLAY_WIDTH / 2;
             task->tWinRight = DISPLAY_WIDTH / 2;
-            BlendPalettes(-1, 16, 0);
+            BlendPalettes(PALETTES_ALL, 16, 0);
             gPlttBufferFaded[0] = 0;
         }
         SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(task->tWinLeft, task->tWinRight));
@@ -587,7 +586,7 @@ bool8 SetUpFieldMove_SecretPower(void)
 static void FieldCallback_SecretBaseCave(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext1_SetupScript(SecretBase_EventScript_CaveUseSecretPower);
+    ScriptContext_SetupScript(SecretBase_EventScript_CaveUseSecretPower);
 }
 
 bool8 FldEff_UseSecretPowerCave(void)
@@ -641,13 +640,13 @@ static void SpriteCB_CaveEntranceOpen(struct Sprite *sprite)
 static void SpriteCB_CaveEntranceEnd(struct Sprite *sprite)
 {
     FieldEffectStop(sprite, FLDEFF_SECRET_POWER_CAVE);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 static void FieldCallback_SecretBaseTree(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext1_SetupScript(SecretBase_EventScript_TreeUseSecretPower);
+    ScriptContext_SetupScript(SecretBase_EventScript_TreeUseSecretPower);
 }
 
 bool8 FldEff_UseSecretPowerTree(void)
@@ -715,13 +714,13 @@ static void SpriteCB_TreeEntranceOpen(struct Sprite *sprite)
 static void SpriteCB_TreeEntranceEnd(struct Sprite *sprite)
 {
     FieldEffectStop(sprite, FLDEFF_SECRET_POWER_TREE);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 static void FieldCallback_SecretBaseShrub(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext1_SetupScript(SecretBase_EventScript_ShrubUseSecretPower);
+    ScriptContext_SetupScript(SecretBase_EventScript_ShrubUseSecretPower);
 }
 
 bool8 FldEff_UseSecretPowerShrub(void)
@@ -779,7 +778,7 @@ static void SpriteCB_ShrubEntranceOpen(struct Sprite *sprite)
 static void SpriteCB_ShrubEntranceEnd(struct Sprite *sprite)
 {
     FieldEffectStop(sprite, FLDEFF_SECRET_POWER_SHRUB);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 #define tX     data[0]
@@ -821,7 +820,7 @@ static void Task_SecretBasePCTurnOn(u8 taskId)
         MapGridSetMetatileIdAt(tX, tY, METATILE_SecretBase_PC_On);
         CurrentMapDrawMetatileAt(tX, tY);
         FieldEffectActiveListRemove(FLDEFF_PCTURN_ON);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
         return;
     }
@@ -841,9 +840,9 @@ void DoSecretBasePCTurnOffEffect(void)
     PlaySE(SE_PC_OFF);
 
     if (!VarGet(VAR_CURRENT_SECRET_BASE))
-        MapGridSetMetatileIdAt(x, y, METATILE_SecretBase_PC | METATILE_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x, y, METATILE_SecretBase_PC | MAPGRID_COLLISION_MASK);
     else
-        MapGridSetMetatileIdAt(x, y, METATILE_SecretBase_RegisterPC | METATILE_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x, y, METATILE_SecretBase_RegisterPC | MAPGRID_COLLISION_MASK);
 
     CurrentMapDrawMetatileAt(x, y);
 }
@@ -1035,7 +1034,7 @@ bool8 FldEff_SandPillar(void)
 {
     s16 x, y;
 
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
 
     gFieldEffectArguments[5] = x;
@@ -1084,7 +1083,7 @@ static void SpriteCB_SandPillar_BreakTop(struct Sprite *sprite)
     PlaySE(SE_M_ROCK_THROW);
 
     if (MapGridGetMetatileIdAt(gFieldEffectArguments[5], gFieldEffectArguments[6] - 1) == METATILE_SecretBase_SandOrnament_TopWall)
-        MapGridSetMetatileIdAt(gFieldEffectArguments[5], gFieldEffectArguments[6] - 1, METATILE_SecretBase_Wall_TopMid | METATILE_COLLISION_MASK);
+        MapGridSetMetatileIdAt(gFieldEffectArguments[5], gFieldEffectArguments[6] - 1, METATILE_SecretBase_Wall_TopMid | MAPGRID_COLLISION_MASK);
     else
         MapGridSetMetatileIdAt(gFieldEffectArguments[5], gFieldEffectArguments[6] - 1, METATILE_SecretBase_SandOrnament_BrokenTop);
 
@@ -1104,7 +1103,7 @@ static void SpriteCB_SandPillar_BreakBase(struct Sprite *sprite)
     }
     else
     {
-        MapGridSetMetatileIdAt(gFieldEffectArguments[5], gFieldEffectArguments[6], METATILE_SecretBase_SandOrnament_BrokenBase | METATILE_COLLISION_MASK);
+        MapGridSetMetatileIdAt(gFieldEffectArguments[5], gFieldEffectArguments[6], METATILE_SecretBase_SandOrnament_BrokenBase | MAPGRID_COLLISION_MASK);
         CurrentMapDrawMetatileAt(gFieldEffectArguments[5], gFieldEffectArguments[6]);
         sprite->data[0] = 0;
         sprite->callback = SpriteCB_SandPillar_End;
@@ -1114,7 +1113,7 @@ static void SpriteCB_SandPillar_BreakBase(struct Sprite *sprite)
 static void SpriteCB_SandPillar_End(struct Sprite *sprite)
 {
     FieldEffectStop(sprite, FLDEFF_SAND_PILLAR);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 void InteractWithShieldOrTVDecoration(void)
@@ -1201,28 +1200,34 @@ bool8 IsLargeBreakableDecoration(u16 metatileId, bool8 checkBase)
     return FALSE;
 }
 
+#define tState  data[0]
+#define tMosaic data[1]
+
 static void Task_FieldPoisonEffect(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    switch (data[0])
+    switch (tState)
     {
     case 0:
-        data[1] += 2;
-        if (data[1] > 8)
-            data[0]++;
+        tMosaic += 2;
+        if (tMosaic > 8)
+            tState++;
         break;
     case 1:
-        data[1] -= 2;
-        if (data[1] == 0)
-            data[0]++;
+        tMosaic -= 2;
+        if (tMosaic == 0)
+            tState++;
         break;
     case 2:
         DestroyTask(taskId);
         return;
     }
-    SetGpuReg(REG_OFFSET_MOSAIC, (data[1] << 4) | data[1]);
+    SetGpuReg(REG_OFFSET_MOSAIC, (tMosaic << 4) | tMosaic);
 }
+
+#undef tState
+#undef tMosaic
 
 void FldEffPoison_Start(void)
 {
@@ -1274,7 +1279,7 @@ static void Task_WateringBerryTreeAnim_End(u8 taskId)
 {
     SetPlayerAvatarTransitionFlags(GetPlayerAvatarFlags());
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 void DoWateringBerryTreeAnim(void)
@@ -1298,10 +1303,10 @@ u8 CreateRecordMixingLights(void)
     else
     {
         struct Sprite *sprite = &gSprites[spriteId];
-        sub_8092FF0(16, 13, &sprite->pos1.x, &sprite->pos1.y);
+        GetMapCoordsFromSpritePos(16, 13, &sprite->x, &sprite->y);
         sprite->coordOffsetEnabled = TRUE;
-        sprite->pos1.x += 16;
-        sprite->pos1.y += 2;
+        sprite->x += 16;
+        sprite->y += 2;
     }
     return spriteId;
 }

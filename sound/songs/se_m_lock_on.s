@@ -37,7 +37,7 @@ se_m_lock_on_1:
 	.byte	W02
 	.byte		PAN   , c_v+6
 	.byte		BEND  , c_v+6
-	.byte		N01   , Cn4 
+	.byte		N01   , Cn4
 	.byte	W01
 	.byte		        Gn3 , v064
 	.byte	W02

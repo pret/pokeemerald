@@ -1,6 +1,8 @@
 #ifndef GUARD_SOUND_H
 #define GUARD_SOUND_H
 
+#include "constants/sound.h"
+
 void InitMapMusic(void);
 void MapMusicMain(void);
 void ResetMapMusic(void);
@@ -10,7 +12,6 @@ void StopMapMusic(void);
 void FadeOutMapMusic(u8 speed);
 void FadeOutAndPlayNewMapMusic(u16 songNum, u8 speed);
 void FadeOutAndFadeInNewMapMusic(u16 songNum, u8 fadeOutSpeed, u8 fadeInSpeed);
-void FadeInNewMapMusic(u16 songNum, u8 speed);
 bool8 IsNotWaitingForBGMStop(void);
 void PlayFanfareByFanfareNum(u8 fanfareNum);
 bool8 WaitFanfare(bool8 stop);
@@ -23,12 +24,12 @@ bool8 IsBGMPausedOrStopped(void);
 void FadeInBGM(u8 speed);
 void FadeOutBGM(u8 speed);
 bool8 IsBGMStopped(void);
-void PlayCry1(u16 species, s8 pan);
-void PlayCry2(u16 species, s8 pan, s8 volume, u8 priority);
-void PlayCry3(u16 species, s8 pan, u8 mode);
-void PlayCry4(u16 species, s8 pan, u8 mode);
-void PlayCry5(u16 species, u8 mode);
-void PlayCry6(u16 species, s8 pan, u8 mode);
+void PlayCry_Normal(u16 species, s8 pan);
+void PlayCry_NormalNoDucking(u16 species, s8 pan, s8 volume, u8 priority);
+void PlayCry_ByMode(u16 species, s8 pan, u8 mode);
+void PlayCry_ReleaseDouble(u16 species, s8 pan, u8 mode);
+void PlayCry_Script(u16 species, u8 mode);
+void PlayCry_DuckNoRestore(u16 species, s8 pan, u8 mode);
 void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode);
 bool8 IsCryFinished(void);
 void StopCryAndClearCrySongs(void);

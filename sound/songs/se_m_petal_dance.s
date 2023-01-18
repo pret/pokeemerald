@@ -33,7 +33,7 @@ se_m_petal_dance_1:
 	.byte		        Dn6 , v100
 	.byte	W03
 	.byte	W03
-	.byte		        An5 
+	.byte		        An5
 	.byte	W03
 	.byte	W03
 	.byte		PAN   , c_v-4
@@ -61,7 +61,7 @@ se_m_petal_dance_1:
 	.byte	W03
 	.byte	W03
 	.byte		PAN   , c_v+4
-	.byte		N06   , Dn6 
+	.byte		N06   , Dn6
 	.byte	W03
 	.byte	W03
 	.byte		PAN   , c_v+0
@@ -137,7 +137,7 @@ se_m_petal_dance_2:
 	.byte		        Bn5 , v088
 	.byte	W03
 	.byte	W03
-	.byte		        En6 
+	.byte		        En6
 	.byte	W03
 	.byte	W03
 	.byte		        Bn5 , v084
@@ -158,7 +158,7 @@ se_m_petal_dance_2:
 	.byte		        En6 , v064
 	.byte	W03
 	.byte	W03
-	.byte		        Bn5 
+	.byte		        Bn5
 	.byte	W03
 	.byte	W03
 	.byte		        En6 , v060

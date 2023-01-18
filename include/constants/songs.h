@@ -267,7 +267,7 @@
 #define SE_RG_HELP_ERROR            259 // SE_RG_HELP_NG
 #define SE_RG_DEOXYS_MOVE           260 // SE_RG_DEOMOV
 #define SE_RG_POKE_JUMP_SUCCESS     261 // SE_RG_EXCELLENT
-#define SE_RG_POKE_JUMP_FAILURE     262 // SE_RG_NAWAMISS 
+#define SE_RG_POKE_JUMP_FAILURE     262 // SE_RG_NAWAMISS
 // New Emerald SFX
 #define SE_POKENAV_CALL             263 // SE_TOREEYE
 #define SE_POKENAV_HANG_UP          264 // SE_TOREOFF

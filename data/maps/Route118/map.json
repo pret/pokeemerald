@@ -14,19 +14,19 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "up",
+      "map": "MAP_ROUTE119",
       "offset": 40,
-      "map": "MAP_ROUTE119"
+      "direction": "up"
     },
     {
-      "direction": "left",
+      "map": "MAP_MAUVILLE_CITY",
       "offset": 0,
-      "map": "MAP_MAUVILLE_CITY"
+      "direction": "left"
     },
     {
-      "direction": "right",
+      "map": "MAP_ROUTE123",
       "offset": 0,
-      "map": "MAP_ROUTE123"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -39,7 +39,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "31",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_118_SITRUS_1",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -52,7 +52,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "32",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_118_SOIL",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -65,7 +65,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "33",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_118_SITRUS_2",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -310,14 +310,14 @@
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 9,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

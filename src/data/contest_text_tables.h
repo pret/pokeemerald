@@ -181,7 +181,7 @@ extern const u8 gText_CouldntImproveItsCondition[];
 extern const u8 gText_BadConditionResultedInWeakAppeal[];
 extern const u8 gText_MonWasUnaffected[];
 extern const u8 gText_AttractedCrowdsAttention[];
- 
+
 // sContestConditions
 extern const u8 gText_Contest_Coolness[];
 extern const u8 gText_Contest_Beauty[];

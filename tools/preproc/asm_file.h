@@ -90,6 +90,7 @@ private:
     void RaiseErrorButContinue(const char * format, ...);
     void RaiseWarning(const char* format, ...);
     void TryPrintErrorHeaderMessage();
+    void VerifyStringLength(int length);
 };
 
 class LocalLabelInfo

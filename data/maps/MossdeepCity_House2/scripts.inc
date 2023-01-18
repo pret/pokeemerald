@@ -1,45 +1,43 @@
 .set LOCALID_WINGULL, 3
 
-MossdeepCity_House2_MapScripts:: @ 82220DE
+MossdeepCity_House2_MapScripts::
 	.byte 0
 
-MossdeepCity_House2_EventScript_Man:: @ 82220DF
+MossdeepCity_House2_EventScript_Man::
 	msgbox MossdeepCity_House2_Text_SisterMailsBoyfriendInFortree, MSGBOX_NPC
 	end
 
-MossdeepCity_House2_EventScript_Twin:: @ 82220E8
+MossdeepCity_House2_EventScript_Twin::
 	msgbox MossdeepCity_House2_Text_PokemonCarriesMailBackAndForth, MSGBOX_NPC
 	end
 
-MossdeepCity_House2_EventScript_Wingull:: @ 82220F1
+MossdeepCity_House2_EventScript_Wingull::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_WINGULL, 0
+	playmoncry SPECIES_WINGULL, CRY_MODE_NORMAL
 	msgbox MossdeepCity_House2_Text_Wingull, MSGBOX_DEFAULT
 	waitmoncry
 	closemessage
 	setflag FLAG_WINGULL_DELIVERED_MAIL
 	clearflag FLAG_HIDE_FORTREE_CITY_HOUSE_4_WINGULL
-	compare VAR_FACING, DIR_NORTH
-	call_if_eq MossdeepCity_House2_EventScript_WingullExitNorth
-	compare VAR_FACING, DIR_WEST
-	call_if_eq MossdeepCity_House2_EventScript_WingullExitWest
+	call_if_eq VAR_FACING, DIR_NORTH, MossdeepCity_House2_EventScript_WingullExitNorth
+	call_if_eq VAR_FACING, DIR_WEST, MossdeepCity_House2_EventScript_WingullExitWest
 	removeobject LOCALID_WINGULL
 	release
 	end
 
-MossdeepCity_House2_EventScript_WingullExitNorth:: @ 8222124
+MossdeepCity_House2_EventScript_WingullExitNorth::
 	applymovement LOCALID_WINGULL, MossdeepCity_House2_Movement_WingullExitNorth
 	waitmovement 0
 	return
 
-MossdeepCity_House2_EventScript_WingullExitWest:: @ 822212F
+MossdeepCity_House2_EventScript_WingullExitWest::
 	applymovement LOCALID_WINGULL, MossdeepCity_House2_Movement_WingullExitEast
 	waitmovement 0
 	return
 
-MossdeepCity_House2_Movement_WingullExitNorth: @ 822213A
+MossdeepCity_House2_Movement_WingullExitNorth:
 	walk_fast_right
 	walk_fast_down
 	walk_fast_down
@@ -48,25 +46,25 @@ MossdeepCity_House2_Movement_WingullExitNorth: @ 822213A
 	delay_8
 	step_end
 
-MossdeepCity_House2_Movement_WingullExitEast: @ 8222141
+MossdeepCity_House2_Movement_WingullExitEast:
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
 	delay_8
 	step_end
 
-MossdeepCity_House2_Text_SisterMailsBoyfriendInFortree: @ 8222146
+MossdeepCity_House2_Text_SisterMailsBoyfriendInFortree:
 	.string "My little sister exchanges MAIL with\n"
 	.string "her boyfriend in FORTREE.\p"
 	.string "I don't envy her one bit at all.$"
 
-MossdeepCity_House2_Text_PokemonCarriesMailBackAndForth: @ 82221A6
+MossdeepCity_House2_Text_PokemonCarriesMailBackAndForth:
 	.string "Even though I can't see my friend in\n"
 	.string "FORTREE, my POKéMON carries MAIL\l"
 	.string "back and forth for us.\p"
 	.string "I'm not lonesome, even though we're\n"
 	.string "apart.$"
 
-MossdeepCity_House2_Text_Wingull: @ 822222E
+MossdeepCity_House2_Text_Wingull:
 	.string "WINGULL: Pihyoh!$"
 
