@@ -185,7 +185,7 @@ static const struct OamData sHeartSpriteOamData =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
@@ -202,7 +202,7 @@ static const struct OamData sUnusedOam1 =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x16),
     .x = 0,
@@ -219,7 +219,7 @@ static const struct OamData sUnusedOam2 =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x8),
     .x = 0,
@@ -365,7 +365,7 @@ static void VBlankCB_MoveRelearner(void)
 // Script arguments: The pokemon to teach is in VAR_0x8004
 void TeachMoveRelearnerMove(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(Task_WaitForFadeOut, 10);
     // Fade to black
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
@@ -405,7 +405,7 @@ static void CB2_InitLearnMove(void)
     CreateUISprites();
 
     sMoveRelearnerStruct->moveListMenuTask = ListMenuInit(&gMultiuseListMenuTemplate, sMoveRelearnerMenuSate.listOffset, sMoveRelearnerMenuSate.listRow);
-    FillPalette(RGB_BLACK, 0, 2);
+    SetBackdropFromColor(RGB_BLACK);
     SetMainCallback2(CB2_MoveRelearnerMain);
 }
 
@@ -430,7 +430,7 @@ static void CB2_InitLearnMoveReturnFromSelectMove(void)
     CreateUISprites();
 
     sMoveRelearnerStruct->moveListMenuTask = ListMenuInit(&gMultiuseListMenuTemplate, sMoveRelearnerMenuSate.listOffset, sMoveRelearnerMenuSate.listRow);
-    FillPalette(RGB_BLACK, 0, 2);
+    SetBackdropFromColor(RGB_BLACK);
     SetMainCallback2(CB2_MoveRelearnerMain);
 }
 
@@ -553,7 +553,7 @@ static void DoMoveRelearnerMain(void)
                 gSpecialVar_0x8004 = FALSE;
                 sMoveRelearnerStruct->state = MENU_STATE_FADE_AND_RETURN;
             }
-            else if (selection == -1 || selection == 1)
+            else if (selection == MENU_B_PRESSED || selection == 1)
             {
                 if (sMoveRelearnerMenuSate.showContestInfo == FALSE)
                 {
@@ -579,14 +579,14 @@ static void DoMoveRelearnerMain(void)
         break;
     case MENU_STATE_CONFIRM_DELETE_OLD_MOVE:
         {
-            s8 var = Menu_ProcessInputNoWrapClearOnChoose();
+            s8 selection = Menu_ProcessInputNoWrapClearOnChoose();
 
-            if (var == 0)
+            if (selection == 0)
             {
                 FormatAndPrintText(gText_MoveRelearnerWhichMoveToForget);
                 sMoveRelearnerStruct->state = MENU_STATE_PRINT_WHICH_MOVE_PROMPT;
             }
-            else if (var == -1 || var == 1)
+            else if (selection == MENU_B_PRESSED || selection == 1)
             {
                 sMoveRelearnerStruct->state = MENU_STATE_PRINT_STOP_TEACHING;
             }
@@ -606,13 +606,13 @@ static void DoMoveRelearnerMain(void)
         break;
     case MENU_STATE_CONFIRM_STOP_TEACHING:
         {
-            s8 var = Menu_ProcessInputNoWrapClearOnChoose();
+            s8 selection = Menu_ProcessInputNoWrapClearOnChoose();
 
-            if (var == 0)
+            if (selection == 0)
             {
                 sMoveRelearnerStruct->state = MENU_STATE_CHOOSE_SETUP_STATE;
             }
-            else if (var == MENU_B_PRESSED || var == 1)
+            else if (selection == MENU_B_PRESSED || selection == 1)
             {
                 // What's the point? It gets set to MENU_STATE_PRINT_TRYING_TO_LEARN_PROMPT, anyway.
                 if (sMoveRelearnerMenuSate.showContestInfo == FALSE)

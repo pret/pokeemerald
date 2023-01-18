@@ -25,7 +25,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AbandonedShip_Room_B1F_EventScript_ItemTM13",
-      "flag": "FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_TM_13"
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_TM13"
     }
   ],
   "warp_events": [
@@ -34,14 +34,14 @@
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_CORRIDORS_B1F",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 5,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_CORRIDORS_B1F",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     }
   ],
   "coord_events": [],

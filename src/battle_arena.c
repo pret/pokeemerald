@@ -35,12 +35,28 @@ static void SaveArenaChallenge(void);
 static void SetArenaPrize(void);
 static void GiveArenaPrize(void);
 static void BufferArenaOpponentName(void);
-static void SpriteCb_JudgmentIcon(struct Sprite *sprite);
+static void SpriteCB_JudgmentIcon(struct Sprite *sprite);
 static void ShowJudgmentSprite(u8 x, u8 y, u8 category, u8 battler);
 
-static const s8 sMindRatings[] =
+#define JUDGMENT_STATE_FINISHED 8
+
+#define TAG_JUDGMENT_ICON 1000
+
+enum {
+    ANIM_ICON_X,        // Player lost
+    ANIM_ICON_TRIANGLE, // Tie
+    ANIM_ICON_CIRCLE,   // Player won
+    ANIM_ICON_LINE,     // Line segment for separating the score total at the bottom
+};
+
+// This table holds the number of points to add to the 'mind' score for each move.
+// All moves with power != 0 give 1 point, with the following exceptions:
+//    - Counter, Mirror Coat, and Bide give 0 points
+//    - Fake Out subtracts 1 point
+// All moves with power == 0 give 0 points, with the following exceptions:
+//    - Protect, Detect, and Endure subtract 1 point
+static const s8 sMindRatings[MOVES_COUNT] =
 {
-    [MOVE_NONE] = 0,
     [MOVE_POUND] = 1,
     [MOVE_KARATE_CHOP] = 1,
     [MOVE_DOUBLE_SLAP] = 1,
@@ -54,11 +70,9 @@ static const s8 sMindRatings[] =
     [MOVE_VICE_GRIP] = 1,
     [MOVE_GUILLOTINE] = 1,
     [MOVE_RAZOR_WIND] = 1,
-    [MOVE_SWORDS_DANCE] = 0,
     [MOVE_CUT] = 1,
     [MOVE_GUST] = 1,
     [MOVE_WING_ATTACK] = 1,
-    [MOVE_WHIRLWIND] = 0,
     [MOVE_FLY] = 1,
     [MOVE_BIND] = 1,
     [MOVE_SLAM] = 1,
@@ -68,7 +82,6 @@ static const s8 sMindRatings[] =
     [MOVE_MEGA_KICK] = 1,
     [MOVE_JUMP_KICK] = 1,
     [MOVE_ROLLING_KICK] = 1,
-    [MOVE_SAND_ATTACK] = 0,
     [MOVE_HEADBUTT] = 1,
     [MOVE_HORN_ATTACK] = 1,
     [MOVE_FURY_ATTACK] = 1,
@@ -79,22 +92,14 @@ static const s8 sMindRatings[] =
     [MOVE_TAKE_DOWN] = 1,
     [MOVE_THRASH] = 1,
     [MOVE_DOUBLE_EDGE] = 1,
-    [MOVE_TAIL_WHIP] = 0,
     [MOVE_POISON_STING] = 1,
     [MOVE_TWINEEDLE] = 1,
     [MOVE_PIN_MISSILE] = 1,
-    [MOVE_LEER] = 0,
     [MOVE_BITE] = 1,
-    [MOVE_GROWL] = 0,
-    [MOVE_ROAR] = 0,
-    [MOVE_SING] = 0,
-    [MOVE_SUPERSONIC] = 0,
     [MOVE_SONIC_BOOM] = 1,
-    [MOVE_DISABLE] = 0,
     [MOVE_ACID] = 1,
     [MOVE_EMBER] = 1,
     [MOVE_FLAMETHROWER] = 1,
-    [MOVE_MIST] = 0,
     [MOVE_WATER_GUN] = 1,
     [MOVE_HYDRO_PUMP] = 1,
     [MOVE_SURF] = 1,
@@ -108,58 +113,27 @@ static const s8 sMindRatings[] =
     [MOVE_DRILL_PECK] = 1,
     [MOVE_SUBMISSION] = 1,
     [MOVE_LOW_KICK] = 1,
-    [MOVE_COUNTER] = 0,
     [MOVE_SEISMIC_TOSS] = 1,
     [MOVE_STRENGTH] = 1,
     [MOVE_ABSORB] = 1,
     [MOVE_MEGA_DRAIN] = 1,
-    [MOVE_LEECH_SEED] = 0,
-    [MOVE_GROWTH] = 0,
     [MOVE_RAZOR_LEAF] = 1,
     [MOVE_SOLAR_BEAM] = 1,
-    [MOVE_POISON_POWDER] = 0,
-    [MOVE_STUN_SPORE] = 0,
-    [MOVE_SLEEP_POWDER] = 0,
     [MOVE_PETAL_DANCE] = 1,
-    [MOVE_STRING_SHOT] = 0,
     [MOVE_DRAGON_RAGE] = 1,
     [MOVE_FIRE_SPIN] = 1,
     [MOVE_THUNDER_SHOCK] = 1,
     [MOVE_THUNDERBOLT] = 1,
-    [MOVE_THUNDER_WAVE] = 0,
     [MOVE_THUNDER] = 1,
     [MOVE_ROCK_THROW] = 1,
     [MOVE_EARTHQUAKE] = 1,
     [MOVE_FISSURE] = 1,
     [MOVE_DIG] = 1,
-    [MOVE_TOXIC] = 0,
     [MOVE_CONFUSION] = 1,
     [MOVE_PSYCHIC] = 1,
-    [MOVE_HYPNOSIS] = 0,
-    [MOVE_MEDITATE] = 0,
-    [MOVE_AGILITY] = 0,
     [MOVE_QUICK_ATTACK] = 1,
     [MOVE_RAGE] = 1,
-    [MOVE_TELEPORT] = 0,
     [MOVE_NIGHT_SHADE] = 1,
-    [MOVE_MIMIC] = 0,
-    [MOVE_SCREECH] = 0,
-    [MOVE_DOUBLE_TEAM] = 0,
-    [MOVE_RECOVER] = 0,
-    [MOVE_HARDEN] = 0,
-    [MOVE_MINIMIZE] = 0,
-    [MOVE_SMOKESCREEN] = 0,
-    [MOVE_CONFUSE_RAY] = 0,
-    [MOVE_WITHDRAW] = 0,
-    [MOVE_DEFENSE_CURL] = 0,
-    [MOVE_BARRIER] = 0,
-    [MOVE_LIGHT_SCREEN] = 0,
-    [MOVE_HAZE] = 0,
-    [MOVE_REFLECT] = 0,
-    [MOVE_FOCUS_ENERGY] = 0,
-    [MOVE_BIDE] = 0,
-    [MOVE_METRONOME] = 0,
-    [MOVE_MIRROR_MOVE] = 0,
     [MOVE_SELF_DESTRUCT] = 1,
     [MOVE_EGG_BOMB] = 1,
     [MOVE_LICK] = 1,
@@ -173,118 +147,67 @@ static const s8 sMindRatings[] =
     [MOVE_SKULL_BASH] = 1,
     [MOVE_SPIKE_CANNON] = 1,
     [MOVE_CONSTRICT] = 1,
-    [MOVE_AMNESIA] = 0,
-    [MOVE_KINESIS] = 0,
-    [MOVE_SOFT_BOILED] = 0,
     [MOVE_HI_JUMP_KICK] = 1,
-    [MOVE_GLARE] = 0,
     [MOVE_DREAM_EATER] = 1,
-    [MOVE_POISON_GAS] = 0,
     [MOVE_BARRAGE] = 1,
     [MOVE_LEECH_LIFE] = 1,
-    [MOVE_LOVELY_KISS] = 0,
     [MOVE_SKY_ATTACK] = 1,
-    [MOVE_TRANSFORM] = 0,
     [MOVE_BUBBLE] = 1,
     [MOVE_DIZZY_PUNCH] = 1,
-    [MOVE_SPORE] = 0,
-    [MOVE_FLASH] = 0,
     [MOVE_PSYWAVE] = 1,
-    [MOVE_SPLASH] = 0,
-    [MOVE_ACID_ARMOR] = 0,
     [MOVE_CRABHAMMER] = 1,
     [MOVE_EXPLOSION] = 1,
     [MOVE_FURY_SWIPES] = 1,
     [MOVE_BONEMERANG] = 1,
-    [MOVE_REST] = 0,
     [MOVE_ROCK_SLIDE] = 1,
     [MOVE_HYPER_FANG] = 1,
-    [MOVE_SHARPEN] = 0,
-    [MOVE_CONVERSION] = 0,
     [MOVE_TRI_ATTACK] = 1,
     [MOVE_SUPER_FANG] = 1,
     [MOVE_SLASH] = 1,
-    [MOVE_SUBSTITUTE] = 0,
     [MOVE_STRUGGLE] = 1,
-    [MOVE_SKETCH] = 0,
     [MOVE_TRIPLE_KICK] = 1,
     [MOVE_THIEF] = 1,
-    [MOVE_SPIDER_WEB] = 0,
-    [MOVE_MIND_READER] = 0,
-    [MOVE_NIGHTMARE] = 0,
     [MOVE_FLAME_WHEEL] = 1,
     [MOVE_SNORE] = 1,
-    [MOVE_CURSE] = 0,
     [MOVE_FLAIL] = 1,
-    [MOVE_CONVERSION_2] = 0,
     [MOVE_AEROBLAST] = 1,
-    [MOVE_COTTON_SPORE] = 0,
     [MOVE_REVERSAL] = 1,
-    [MOVE_SPITE] = 0,
     [MOVE_POWDER_SNOW] = 1,
     [MOVE_PROTECT] = -1,
     [MOVE_MACH_PUNCH] = 1,
-    [MOVE_SCARY_FACE] = 0,
     [MOVE_FAINT_ATTACK] = 1,
-    [MOVE_SWEET_KISS] = 0,
-    [MOVE_BELLY_DRUM] = 0,
     [MOVE_SLUDGE_BOMB] = 1,
     [MOVE_MUD_SLAP] = 1,
     [MOVE_OCTAZOOKA] = 1,
-    [MOVE_SPIKES] = 0,
     [MOVE_ZAP_CANNON] = 1,
-    [MOVE_FORESIGHT] = 0,
-    [MOVE_DESTINY_BOND] = 0,
-    [MOVE_PERISH_SONG] = 0,
     [MOVE_ICY_WIND] = 1,
     [MOVE_DETECT] = -1,
     [MOVE_BONE_RUSH] = 1,
-    [MOVE_LOCK_ON] = 0,
     [MOVE_OUTRAGE] = 1,
-    [MOVE_SANDSTORM] = 0,
     [MOVE_GIGA_DRAIN] = 1,
     [MOVE_ENDURE] = -1,
-    [MOVE_CHARM] = 0,
     [MOVE_ROLLOUT] = 1,
     [MOVE_FALSE_SWIPE] = 1,
-    [MOVE_SWAGGER] = 0,
-    [MOVE_MILK_DRINK] = 0,
     [MOVE_SPARK] = 1,
     [MOVE_FURY_CUTTER] = 1,
     [MOVE_STEEL_WING] = 1,
-    [MOVE_MEAN_LOOK] = 0,
-    [MOVE_ATTRACT] = 0,
-    [MOVE_SLEEP_TALK] = 0,
-    [MOVE_HEAL_BELL] = 0,
     [MOVE_RETURN] = 1,
     [MOVE_PRESENT] = 1,
     [MOVE_FRUSTRATION] = 1,
-    [MOVE_SAFEGUARD] = 0,
-    [MOVE_PAIN_SPLIT] = 0,
     [MOVE_SACRED_FIRE] = 1,
     [MOVE_MAGNITUDE] = 1,
     [MOVE_DYNAMIC_PUNCH] = 1,
     [MOVE_MEGAHORN] = 1,
     [MOVE_DRAGON_BREATH] = 1,
-    [MOVE_BATON_PASS] = 0,
-    [MOVE_ENCORE] = 0,
     [MOVE_PURSUIT] = 1,
     [MOVE_RAPID_SPIN] = 1,
-    [MOVE_SWEET_SCENT] = 0,
     [MOVE_IRON_TAIL] = 1,
     [MOVE_METAL_CLAW] = 1,
     [MOVE_VITAL_THROW] = 1,
-    [MOVE_MORNING_SUN] = 0,
-    [MOVE_SYNTHESIS] = 0,
-    [MOVE_MOONLIGHT] = 0,
     [MOVE_HIDDEN_POWER] = 1,
     [MOVE_CROSS_CHOP] = 1,
     [MOVE_TWISTER] = 1,
-    [MOVE_RAIN_DANCE] = 0,
-    [MOVE_SUNNY_DAY] = 0,
     [MOVE_CRUNCH] = 1,
-    [MOVE_MIRROR_COAT] = 0,
-    [MOVE_PSYCH_UP] = 0,
     [MOVE_EXTREME_SPEED] = 1,
     [MOVE_ANCIENT_POWER] = 1,
     [MOVE_SHADOW_BALL] = 1,
@@ -294,56 +217,25 @@ static const s8 sMindRatings[] =
     [MOVE_BEAT_UP] = 1,
     [MOVE_FAKE_OUT] = -1,
     [MOVE_UPROAR] = 1,
-    [MOVE_STOCKPILE] = 0,
     [MOVE_SPIT_UP] = 1,
-    [MOVE_SWALLOW] = 0,
     [MOVE_HEAT_WAVE] = 1,
-    [MOVE_HAIL] = 0,
-    [MOVE_TORMENT] = 0,
-    [MOVE_FLATTER] = 0,
-    [MOVE_WILL_O_WISP] = 0,
-    [MOVE_MEMENTO] = 0,
     [MOVE_FACADE] = 1,
     [MOVE_FOCUS_PUNCH] = 1,
     [MOVE_SMELLING_SALT] = 1,
-    [MOVE_FOLLOW_ME] = 0,
-    [MOVE_NATURE_POWER] = 0,
-    [MOVE_CHARGE] = 0,
-    [MOVE_TAUNT] = 0,
-    [MOVE_HELPING_HAND] = 0,
-    [MOVE_TRICK] = 0,
-    [MOVE_ROLE_PLAY] = 0,
-    [MOVE_WISH] = 0,
-    [MOVE_ASSIST] = 0,
-    [MOVE_INGRAIN] = 0,
     [MOVE_SUPERPOWER] = 1,
-    [MOVE_MAGIC_COAT] = 0,
-    [MOVE_RECYCLE] = 0,
     [MOVE_REVENGE] = 1,
     [MOVE_BRICK_BREAK] = 1,
-    [MOVE_YAWN] = 0,
     [MOVE_KNOCK_OFF] = 1,
     [MOVE_ENDEAVOR] = 1,
     [MOVE_ERUPTION] = 1,
-    [MOVE_SKILL_SWAP] = 0,
-    [MOVE_IMPRISON] = 0,
-    [MOVE_REFRESH] = 0,
-    [MOVE_GRUDGE] = 0,
-    [MOVE_SNATCH] = 0,
     [MOVE_SECRET_POWER] = 1,
     [MOVE_DIVE] = 1,
     [MOVE_ARM_THRUST] = 1,
-    [MOVE_CAMOUFLAGE] = 0,
-    [MOVE_TAIL_GLOW] = 0,
     [MOVE_LUSTER_PURGE] = 1,
     [MOVE_MIST_BALL] = 1,
-    [MOVE_FEATHER_DANCE] = 0,
-    [MOVE_TEETER_DANCE] = 0,
     [MOVE_BLAZE_KICK] = 1,
-    [MOVE_MUD_SPORT] = 0,
     [MOVE_ICE_BALL] = 1,
     [MOVE_NEEDLE_ARM] = 1,
-    [MOVE_SLACK_OFF] = 0,
     [MOVE_HYPER_VOICE] = 1,
     [MOVE_POISON_FANG] = 1,
     [MOVE_CRUSH_CLAW] = 1,
@@ -352,17 +244,10 @@ static const s8 sMindRatings[] =
     [MOVE_METEOR_MASH] = 1,
     [MOVE_ASTONISH] = 1,
     [MOVE_WEATHER_BALL] = 1,
-    [MOVE_AROMATHERAPY] = 0,
-    [MOVE_FAKE_TEARS] = 0,
     [MOVE_AIR_CUTTER] = 1,
     [MOVE_OVERHEAT] = 1,
-    [MOVE_ODOR_SLEUTH] = 0,
     [MOVE_ROCK_TOMB] = 1,
     [MOVE_SILVER_WIND] = 1,
-    [MOVE_METAL_SOUND] = 0,
-    [MOVE_GRASS_WHISTLE] = 0,
-    [MOVE_TICKLE] = 0,
-    [MOVE_COSMIC_POWER] = 0,
     [MOVE_WATER_SPOUT] = 1,
     [MOVE_SIGNAL_BEAM] = 1,
     [MOVE_SHADOW_PUNCH] = 1,
@@ -374,22 +259,15 @@ static const s8 sMindRatings[] =
     [MOVE_BULLET_SEED] = 1,
     [MOVE_AERIAL_ACE] = 1,
     [MOVE_ICICLE_SPEAR] = 1,
-    [MOVE_IRON_DEFENSE] = 0,
-    [MOVE_BLOCK] = 0,
-    [MOVE_HOWL] = 0,
     [MOVE_DRAGON_CLAW] = 1,
     [MOVE_FRENZY_PLANT] = 1,
-    [MOVE_BULK_UP] = 0,
     [MOVE_BOUNCE] = 1,
     [MOVE_MUD_SHOT] = 1,
     [MOVE_POISON_TAIL] = 1,
     [MOVE_COVET] = 1,
     [MOVE_VOLT_TACKLE] = 1,
     [MOVE_MAGICAL_LEAF] = 1,
-    [MOVE_WATER_SPORT] = 0,
-    [MOVE_CALM_MIND] = 0,
     [MOVE_LEAF_BLADE] = 1,
-    [MOVE_DRAGON_DANCE] = 0,
     [MOVE_ROCK_BLAST] = 1,
     [MOVE_SHOCK_WAVE] = 1,
     [MOVE_WATER_PULSE] = 1,
@@ -397,14 +275,12 @@ static const s8 sMindRatings[] =
     [MOVE_PSYCHO_BOOST] = 1,
 };
 
-#define TAG_JUDGEMENT_ICON 1000
-
-static const struct OamData sJudgementIconOamData =
+static const struct OamData sOam_JudgmentIcon =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -416,52 +292,52 @@ static const struct OamData sJudgementIconOamData =
     .affineParam = 0
 };
 
-static const union AnimCmd sJudgementIconAnimCmd0[] =
+static const union AnimCmd sAnim_JudgmentIcon_X[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sJudgementIconAnimCmd1[] =
+static const union AnimCmd sAnim_JudgmentIcon_Triangle[] =
 {
     ANIMCMD_FRAME(4, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sJudgementIconAnimCmd2[] =
+static const union AnimCmd sAnim_JudgmentIcon_Circle[] =
 {
     ANIMCMD_FRAME(8, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sJudgementIconAnimCmd3[] =
+static const union AnimCmd sAnim_JudgmentIcon_Line[] =
 {
     ANIMCMD_FRAME(12, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sJudgementIconAnimCmds[] =
+static const union AnimCmd *const sAnims_JudgmentIcon[] =
 {
-    sJudgementIconAnimCmd0,
-    sJudgementIconAnimCmd1,
-    sJudgementIconAnimCmd2,
-    sJudgementIconAnimCmd3
+    [ANIM_ICON_X]        = sAnim_JudgmentIcon_X,
+    [ANIM_ICON_TRIANGLE] = sAnim_JudgmentIcon_Triangle,
+    [ANIM_ICON_CIRCLE]   = sAnim_JudgmentIcon_Circle,
+    [ANIM_ICON_LINE]     = sAnim_JudgmentIcon_Line,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_JudgmentIcon =
 {
-    .tileTag = TAG_JUDGEMENT_ICON,
+    .tileTag = TAG_JUDGMENT_ICON,
     .paletteTag = TAG_NONE,
-    .oam = &sJudgementIconOamData,
-    .anims = sJudgementIconAnimCmds,
+    .oam = &sOam_JudgmentIcon,
+    .anims = sAnims_JudgmentIcon,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCb_JudgmentIcon,
+    .callback = SpriteCB_JudgmentIcon,
 };
 
-static const struct CompressedSpriteSheet sBattleArenaJudgementSymbolsSpriteSheet[] =
+static const struct CompressedSpriteSheet sBattleArenaJudgmentSymbolsSpriteSheet[] =
 {
-    {gBattleArenaJudgementSymbolsGfx, 0x200, TAG_JUDGEMENT_ICON},
+    {gBattleArenaJudgmentSymbolsGfx, 0x200, TAG_JUDGMENT_ICON},
     {0}
 };
 
@@ -507,14 +383,14 @@ void CallBattleArenaFunction(void)
 u8 BattleArena_ShowJudgmentWindow(u8 *state)
 {
     int i;
-    u8 ret = 0;
+    u8 result = ARENA_RESULT_RUNNING;
     switch (*state)
     {
     case 0:
         BeginNormalPaletteFade(0x7FFFFF1C, 4, 0, 8, RGB_BLACK);
-        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
-        LoadCompressedSpriteSheet(sBattleArenaJudgementSymbolsSpriteSheet);
-        LoadCompressedPalette(gBattleArenaJudgementSymbolsPalette, 0x1F0, 0x20);
+        SetGpuReg(REG_OFFSET_WININ, (WININ_WIN0_ALL & ~WININ_WIN0_BG0) | WININ_WIN1_ALL);
+        LoadCompressedSpriteSheet(sBattleArenaJudgmentSymbolsSpriteSheet);
+        LoadCompressedPalette(gBattleArenaJudgmentSymbolsPalette, OBJ_PLTT_ID(15), PLTT_SIZE_4BPP);
         gBattle_WIN0H = 0xFF;
         gBattle_WIN0V = 0x70;
         (*state)++;
@@ -541,21 +417,23 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
             BattlePutTextOnWindow(gText_Mind, ARENA_WIN_MIND);
             BattlePutTextOnWindow(gText_Skill, ARENA_WIN_SKILL);
             BattlePutTextOnWindow(gText_Body, ARENA_WIN_BODY);
-            BattleStringExpandPlaceholdersToDisplayedString(gText_Judgement);
-            BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGEMENT_TITLE);
+            BattleStringExpandPlaceholdersToDisplayedString(gText_Judgment);
+            BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGMENT_TITLE);
             (*state)++;
         }
         break;
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
+            SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_ALL | WININ_WIN1_ALL);
+
+            // Create dividing line for the the score totals at the bottom
             for (i = 0; i < 8; i++)
             {
                 u8 spriteId = CreateSprite(&sSpriteTemplate_JudgmentIcon, 64 + i * 16, 84, 0);
-                StartSpriteAnim(&gSprites[spriteId], 3);
+                StartSpriteAnim(&gSprites[spriteId], ANIM_ICON_LINE);
             }
-            ret = 1;
+            result = ARENA_RESULT_STEP_DONE;
             (*state)++;
         }
         break;
@@ -563,70 +441,71 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         PlaySE(SE_ARENA_TIMEUP1);
         ShowJudgmentSprite(80, 40, ARENA_CATEGORY_MIND, B_POSITION_PLAYER_LEFT);
         ShowJudgmentSprite(160, 40, ARENA_CATEGORY_MIND, B_POSITION_OPPONENT_LEFT);
-        BattleStringExpandPlaceholdersToDisplayedString(gText_Judgement);
-        BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGEMENT_TITLE);
+        BattleStringExpandPlaceholdersToDisplayedString(gText_Judgment);
+        BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGMENT_TITLE);
         (*state)++;
-        ret = 1;
+        result = ARENA_RESULT_STEP_DONE;
         break;
     case 5:
         PlaySE(SE_ARENA_TIMEUP1);
         ShowJudgmentSprite(80, 56, ARENA_CATEGORY_SKILL, B_POSITION_PLAYER_LEFT);
         ShowJudgmentSprite(160, 56, ARENA_CATEGORY_SKILL, B_POSITION_OPPONENT_LEFT);
-        BattleStringExpandPlaceholdersToDisplayedString(gText_Judgement);
-        BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGEMENT_TITLE);
+        BattleStringExpandPlaceholdersToDisplayedString(gText_Judgment);
+        BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGMENT_TITLE);
         (*state)++;
-        ret = 1;
+        result = ARENA_RESULT_STEP_DONE;
         break;
     case 6:
         PlaySE(SE_ARENA_TIMEUP1);
         ShowJudgmentSprite(80, 72, ARENA_CATEGORY_BODY, B_POSITION_PLAYER_LEFT);
         ShowJudgmentSprite(160, 72, ARENA_CATEGORY_BODY, B_POSITION_OPPONENT_LEFT);
-        BattleStringExpandPlaceholdersToDisplayedString(gText_Judgement);
-        BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGEMENT_TITLE);
+        BattleStringExpandPlaceholdersToDisplayedString(gText_Judgment);
+        BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGMENT_TITLE);
         (*state)++;
-        ret = 1;
+        result = ARENA_RESULT_STEP_DONE;
         break;
     case 7:
         PlaySE(SE_ARENA_TIMEUP2);
         if (gBattleTextBuff1[0] > gBattleTextBuff2[0])
         {
-            ret = 2;
+            result = ARENA_RESULT_PLAYER_WON;
             gBattleScripting.battler = 0;
         }
         else if (gBattleTextBuff1[0] < gBattleTextBuff2[0])
         {
-            ret = 3;
+            result = ARENA_RESULT_PLAYER_LOST;
             gBattleScripting.battler = 1;
         }
         else
         {
-            ret = 4;
+            result = ARENA_RESULT_TIE;
         }
         (*state)++;
         break;
-    case 8:
+    case JUDGMENT_STATE_FINISHED:
+        // Finishing this state is the indicator to SpriteCB_JudgmentIcon that its safe to destroy the judgment icon sprites
         (*state)++;
         break;
-    case 9:
-        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
+    case JUDGMENT_STATE_FINISHED + 1:
+        SetGpuReg(REG_OFFSET_WININ, (WININ_WIN0_ALL & ~WININ_WIN0_BG0) | WININ_WIN1_ALL);
         HandleBattleWindow(5, 0, 24, 13, WINDOW_CLEAR);
         CopyBgTilemapBufferToVram(0);
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         BeginNormalPaletteFade(0x7FFFFF1C, 4, 8, 0, RGB_BLACK);
         (*state)++;
         break;
-    case 10:
+    case JUDGMENT_STATE_FINISHED + 2:
         if (!gPaletteFade.active)
         {
-            SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
-            FreeSpriteTilesByTag(TAG_JUDGEMENT_ICON);
-            ret = 1;
+            SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_ALL | WININ_WIN1_ALL);
+            FreeSpriteTilesByTag(TAG_JUDGMENT_ICON);
+            result = ARENA_RESULT_STEP_DONE;
             (*state)++;
         }
         break;
     }
 
-    return ret;
+    return result;
 }
 
 static void ShowJudgmentSprite(u8 x, u8 y, u8 category, u8 battler)
@@ -656,7 +535,8 @@ static void ShowJudgmentSprite(u8 x, u8 y, u8 category, u8 battler)
 
     if (pointsPlayer > pointsOpponent)
     {
-        animNum = 2;
+        animNum = ANIM_ICON_CIRCLE;
+        // +2 to score total for winning
         if (battler != 0)
             gBattleTextBuff2[0] += 2;
         else
@@ -664,7 +544,8 @@ static void ShowJudgmentSprite(u8 x, u8 y, u8 category, u8 battler)
     }
     else if (pointsPlayer == pointsOpponent)
     {
-        animNum = 1;
+        animNum = ANIM_ICON_TRIANGLE;
+        // +1 to score total for a tie
         if (battler != 0)
             gBattleTextBuff2[0] += 1;
         else
@@ -672,16 +553,16 @@ static void ShowJudgmentSprite(u8 x, u8 y, u8 category, u8 battler)
     }
     else
     {
-        animNum = 0;
+        animNum = ANIM_ICON_X;
     }
 
     pointsPlayer = CreateSprite(&sSpriteTemplate_JudgmentIcon, x, y, 0);
     StartSpriteAnim(&gSprites[pointsPlayer], animNum);
 }
 
-static void SpriteCb_JudgmentIcon(struct Sprite *sprite)
+static void SpriteCB_JudgmentIcon(struct Sprite *sprite)
 {
-    if (gBattleCommunication[0] > 8)
+    if (gBattleCommunication[0] > JUDGMENT_STATE_FINISHED)
         DestroySprite(sprite);
 }
 
@@ -701,8 +582,7 @@ void BattleArena_InitPoints(void)
 
 void BattleArena_AddMindPoints(u8 battler)
 {
-    s8 *mindPoints = gBattleStruct->arenaMindPoints;
-    mindPoints[battler] += sMindRatings[gCurrentMove];
+    gBattleStruct->arenaMindPoints[battler] += sMindRatings[gCurrentMove];
 }
 
 void BattleArena_AddSkillPoints(u8 battler)
@@ -719,7 +599,7 @@ void BattleArena_AddSkillPoints(u8 battler)
         }
         else if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
         {
-            if (!(gMoveResultFlags & MOVE_RESULT_MISSED) || gBattleCommunication[6] != 1)
+            if (!(gMoveResultFlags & MOVE_RESULT_MISSED) || gBattleCommunication[MISS_TYPE] != B_MSG_PROTECTED)
                 skillPoints[battler] -= 2;
         }
         else if ((gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE) && (gMoveResultFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE))

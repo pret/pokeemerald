@@ -120,18 +120,18 @@ static EWRAM_DATA void *sLinkErrorBgTilemapBuffer = NULL;
 static void InitLocalLinkPlayer(void);
 static void VBlankCB_LinkError(void);
 static void CB2_LinkTest(void);
-static void ProcessRecvCmds(u8 unused);
+static void ProcessRecvCmds(u8);
 static void LinkCB_SendHeldKeys(void);
 static void ResetBlockSend(void);
-static bool32 InitBlockSend(const void *src, size_t size);
+static bool32 InitBlockSend(const void *, size_t);
 static void LinkCB_BlockSendBegin(void);
 static void LinkCB_BlockSend(void);
 static void LinkCB_BlockSendEnd(void);
-static void SetBlockReceivedFlag(u8 who);
-static u16 LinkTestCalcBlockChecksum(const u16 *src, u16 size);
-static void LinkTest_PrintHex(u32 pos, u8 a0, u8 a1, u8 a2);
+static void SetBlockReceivedFlag(u8);
+static u16 LinkTestCalcBlockChecksum(const u16 *, u16);
+static void LinkTest_PrintHex(u32, u8, u8, u8);
 static void LinkCB_RequestPlayerDataExchange(void);
-static void Task_PrintTestData(u8 taskId);
+static void Task_PrintTestData(u8);
 
 static void LinkCB_ReadyCloseLink(void);
 static void LinkCB_WaitCloseLink(void);
@@ -198,7 +198,7 @@ static const struct WindowTemplate sLinkErrorWindowTemplates[] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
-        .width = 30,
+        .width = DISPLAY_TILE_WIDTH,
         .height = 5,
         .paletteNum = 15,
         .baseBlock = 0x002
@@ -206,7 +206,7 @@ static const struct WindowTemplate sLinkErrorWindowTemplates[] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 6,
-        .width = 30,
+        .width = DISPLAY_TILE_WIDTH,
         .height = 7,
         .paletteNum = 15,
         .baseBlock = 0x098
@@ -214,7 +214,7 @@ static const struct WindowTemplate sLinkErrorWindowTemplates[] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 13,
-        .width = 30,
+        .width = DISPLAY_TILE_WIDTH,
         .height = 7,
         .paletteNum = 15,
         .baseBlock = 0x16A
@@ -247,7 +247,7 @@ void Task_DestroySelf(u8 taskId)
 
 static void InitLinkTestBG(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charBaseBlock, u16 baseChar)
 {
-    LoadPalette(sLinkTestDigitsPal, paletteNum * 16, 0x20);
+    LoadPalette(sLinkTestDigitsPal, BG_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
     DmaCopy16(3, sLinkTestDigitsGfx, (u16 *)BG_CHAR_ADDR(charBaseBlock) + (16 * baseChar), sizeof sLinkTestDigitsGfx);
     gLinkTestBGInfo.screenBaseBlock = screenBaseBlock;
     gLinkTestBGInfo.paletteNum = paletteNum;
@@ -271,7 +271,7 @@ static void InitLinkTestBG(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charB
 // Unused
 static void LoadLinkTestBgGfx(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charBaseBlock)
 {
-    LoadPalette(sLinkTestDigitsPal, paletteNum * 16, 0x20);
+    LoadPalette(sLinkTestDigitsPal, BG_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
     DmaCopy16(3, sLinkTestDigitsGfx, (u16 *)BG_CHAR_ADDR(charBaseBlock), sizeof sLinkTestDigitsGfx);
     gLinkTestBGInfo.screenBaseBlock = screenBaseBlock;
     gLinkTestBGInfo.paletteNum = paletteNum;
@@ -1595,7 +1595,7 @@ void CB2_LinkError(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetPaletteFadeControl();
-    FillPalette(0, 0, 2);
+    SetBackdropFromColor(RGB_BLACK);
     ResetTasks();
     ScanlineEffect_Stop();
     if (gWirelessCommType)
@@ -1608,7 +1608,7 @@ void CB2_LinkError(void)
     SetVBlankCallback(VBlankCB_LinkError);
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sLinkErrorBgTemplates, ARRAY_COUNT(sLinkErrorBgTemplates));
-    sLinkErrorBgTilemapBuffer = tilemapBuffer = malloc(BG_SCREEN_SIZE);
+    sLinkErrorBgTilemapBuffer = tilemapBuffer = Alloc(BG_SCREEN_SIZE);
     SetBgTilemapBuffer(1, tilemapBuffer);
     if (InitWindows(sLinkErrorWindowTemplates))
     {
@@ -1621,7 +1621,7 @@ void CB2_LinkError(void)
         SetGpuReg(REG_OFFSET_BG1HOFS, 0);
         SetGpuReg(REG_OFFSET_BG1VOFS, 0);
         ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJWIN_ON);
-        LoadPalette(gStandardMenuPalette, 0xf0, 0x20);
+        LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         gSoftResetDisabled = FALSE;
         CreateTask(Task_DestroySelf, 0);
         StopMapMusic();

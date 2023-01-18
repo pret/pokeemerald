@@ -32,7 +32,7 @@ static const struct OamData sOamData_SwapLine =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -98,9 +98,9 @@ void ResetVramOamAndBgCntRegs(void)
     SetGpuReg(REG_OFFSET_BG2CNT, 0);
     SetGpuReg(REG_OFFSET_BG1CNT, 0);
     SetGpuReg(REG_OFFSET_BG0CNT, 0);
-    CpuFill16(0, (void*) VRAM, VRAM_SIZE);
-    CpuFill32(0, (void*) OAM, OAM_SIZE);
-    CpuFill16(0, (void*) PLTT, PLTT_SIZE);
+    CpuFill16(0, (void *) VRAM, VRAM_SIZE);
+    CpuFill32(0, (void *) OAM, OAM_SIZE);
+    CpuFill16(0, (void *) PLTT, PLTT_SIZE);
 }
 
 void ResetAllBgsCoordinates(void)
@@ -130,7 +130,7 @@ void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 tileNum, u8 palet
         StringExpandPlaceholders(gStringVar4, string);
 
     gTextFlags.canABSpeedUpPrint = 1;
-    AddTextPrinterParameterized2(windowId, fontId, gStringVar4, textSpeed, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(windowId, fontId, gStringVar4, textSpeed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     sMessageNextTask = taskFunc;
     gTasks[taskId].func = Task_ContinueTaskAfterMessagePrints;
 }
@@ -153,7 +153,7 @@ void DoYesNoFuncWithChoice(u8 taskId, const struct YesNoFuncTable *data)
     gTasks[taskId].func = Task_CallYesOrNoCallback;
 }
 
-void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 arg2, u8 arg3, u8 arg4, u16 tileStart, u8 palette, const struct YesNoFuncTable *yesNo)
+void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 unused1, u8 unused2, u8 unused3, u16 tileStart, u8 palette, const struct YesNoFuncTable *yesNo)
 {
     CreateYesNoMenu(template, tileStart, palette, 0);
     sYesNo = *yesNo;
@@ -176,17 +176,18 @@ static void Task_CallYesOrNoCallback(u8 taskId)
     }
 }
 
-bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
+// Returns TRUE if the quantity was changed, FALSE if it remained the same
+bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity, u16 max)
 {
-    s16 valBefore = (*arg0);
+    s16 valBefore = *quantity;
 
-    if ((JOY_REPEAT(DPAD_ANY)) == DPAD_UP)
+    if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
     {
-        (*arg0)++;
-        if ((*arg0) > arg1)
-            (*arg0) = 1;
+        (*quantity)++;
+        if (*quantity > max)
+            *quantity = 1;
 
-        if ((*arg0) == valBefore)
+        if (*quantity == valBefore)
         {
             return FALSE;
         }
@@ -196,13 +197,13 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
             return TRUE;
         }
     }
-    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_DOWN)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
     {
-        (*arg0)--;
-        if ((*arg0) <= 0)
-            (*arg0) = arg1;
+        (*quantity)--;
+        if (*quantity <= 0)
+            *quantity = max;
 
-        if ((*arg0) == valBefore)
+        if (*quantity == valBefore)
         {
             return FALSE;
         }
@@ -212,13 +213,13 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
             return TRUE;
         }
     }
-    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_RIGHT)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT)
     {
-        (*arg0) += 10;
-        if ((*arg0) > arg1)
-            (*arg0) = arg1;
+        *quantity += 10;
+        if (*quantity > max)
+            *quantity = max;
 
-        if ((*arg0) == valBefore)
+        if (*quantity == valBefore)
         {
             return FALSE;
         }
@@ -228,13 +229,13 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
             return TRUE;
         }
     }
-    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_LEFT)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT)
     {
-        (*arg0) -= 10;
-        if ((*arg0) <= 0)
-            (*arg0) = 1;
+        *quantity -= 10;
+        if (*quantity <= 0)
+            *quantity = 1;
 
-        if ((*arg0) == valBefore)
+        if (*quantity == valBefore)
         {
             return FALSE;
         }

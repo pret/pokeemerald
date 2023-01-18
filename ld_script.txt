@@ -20,11 +20,14 @@ SECTIONS {
         . = 0x1C000;
 
         INCLUDE "sym_ewram.ld"
+        src/*.o(.ewram_data);
+        gflib/*.o(.ewram_data);
+
         *libc.a:impure.o(.data);
         *libc.a:locale.o(.data);
         *libc.a:mallocr.o(.data);
         . = 0x40000;
-}
+    }
 
     . = 0x3000000;
 
@@ -33,6 +36,9 @@ SECTIONS {
     {
         /* .bss starts at 0x3000000 */
         INCLUDE "sym_bss.ld"
+        src/*.o(.bss);
+        gflib/*.o(.bss);
+        data/*.o(.bss);
 
         /* .bss.code starts at 0x3001AA8 */
         src/m4a.o(.bss.code);
@@ -497,7 +503,7 @@ SECTIONS {
         src/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
         src/overworld.o(.rodata);
-        data/tilesets.o(.rodata);
+        src/tilesets.o(.rodata);
         data/maps.o(.rodata);
         src/fieldmap.o(.rodata);
         src/metatile_behavior.o(.rodata);
@@ -694,6 +700,7 @@ SECTIONS {
         src/battle_transition_frontier.o(.rodata);
         src/text_input_strings.o(.rodata);
         src/fonts.o(.rodata);
+        src/international_string_util.o(.rodata);
         src/mystery_event_msg.o(.rodata);
         data/mystery_gift.o(.rodata);
         src/m4a_tables.o(.rodata);
@@ -1307,6 +1314,16 @@ SECTIONS {
     {
         src/graphics.o(.rodata);
     } =0
+
+    extra :
+    ALIGN(4)
+    {
+        src/*.o(.text);
+        gflib/*.o(.text);
+        src/*.o(.rodata);
+        gflib/*.o(.rodata);
+        data/*.o(.rodata);
+    } = 0
 
     /* DWARF debug sections.
        Symbols in the DWARF debugging sections are relative to the beginning

@@ -8,7 +8,7 @@
 #include "international_string_util.h"
 #include "constants/coins.h"
 
-EWRAM_DATA u8 sCoinsWindowId = 0;
+static EWRAM_DATA u8 sCoinsWindowId = 0;
 
 void PrintCoinsString(u32 coinAmount)
 {
