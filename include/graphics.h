@@ -4138,8 +4138,8 @@ extern const u16 gTilesetAnims_BattleDomePals0_1[];
 extern const u16 gTilesetAnims_BattleDomePals0_2[];
 extern const u16 gTilesetAnims_BattleDomePals0_3[];
 
-extern const u32 gBattleArenaJudgementSymbolsGfx[];
-extern const u32 gBattleArenaJudgementSymbolsPalette[];
+extern const u32 gBattleArenaJudgmentSymbolsGfx[];
+extern const u32 gBattleArenaJudgmentSymbolsPalette[];
 
 extern const u32 gBattleWindowTextPalette[];
 
@@ -4949,9 +4949,9 @@ extern const u16 gContestResultsTitle_Tough_Tilemap[];
 extern const u16 gContestResultsTitle_Tilemap[];
 
 // Trainer Card.
-extern const u16 gHoennTrainerCard0Star_Pal[];
+extern const u16 gHoennTrainerCardGreen_Pal[];
 extern const u32 gHoennTrainerCard_Gfx[];
-extern const u16 gKantoTrainerCard0Star_Pal[];
+extern const u16 gKantoTrainerCardBlue_Pal[];
 extern const u32 gKantoTrainerCard_Gfx[];
 extern const u32 gKantoTrainerCardBg_Tilemap[];
 extern const u32 gHoennTrainerCardBack_Tilemap[];

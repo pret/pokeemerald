@@ -23,7 +23,7 @@ static const u8 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
     [MB_MOSSDEEP_GYM_WARP]               = TILE_FLAG_UNUSED,
     [MB_MT_PYRE_HOLE]                    = TILE_FLAG_UNUSED,
     [MB_POND_WATER]                      = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
-    [MB_SEMI_DEEP_WATER]                 = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_INTERIOR_DEEP_WATER]             = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_DEEP_WATER]                      = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_WATERFALL]                       = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE,
     [MB_SOOTOPOLIS_DEEP_WATER]           = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE,
@@ -795,7 +795,7 @@ u8 MetatileBehavior_GetBridgeType(u8 metatileBehavior)
      && metatileBehavior <= MB_BRIDGE_OVER_POND_HIGH)
         return metatileBehavior - MB_BRIDGE_OVER_OCEAN;
 
-    if (metatileBehavior >= MB_BRIDGE_OVER_POND_MED_EDGE_1 
+    if (metatileBehavior >= MB_BRIDGE_OVER_POND_MED_EDGE_1
      && metatileBehavior <= MB_BRIDGE_OVER_POND_MED_EDGE_2)
         return BRIDGE_TYPE_POND_MED;
 
@@ -852,7 +852,7 @@ bool8 MetatileBehavior_IsMountain(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsDiveable(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_SEMI_DEEP_WATER
+    if (metatileBehavior == MB_INTERIOR_DEEP_WATER
      || metatileBehavior == MB_DEEP_WATER
      || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER)
         return TRUE;
@@ -905,7 +905,7 @@ bool8 MetatileBehavior_IsCrackedIce(u8 metatileBehavior)
 bool8 MetatileBehavior_IsDeepOrOceanWater(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_OCEAN_WATER
-     || metatileBehavior == MB_SEMI_DEEP_WATER
+     || metatileBehavior == MB_INTERIOR_DEEP_WATER
      || metatileBehavior == MB_DEEP_WATER)
         return TRUE;
     else
@@ -1163,7 +1163,7 @@ bool8 MetatileBehavior_IsSurfableFishableWater(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_POND_WATER
      || metatileBehavior == MB_OCEAN_WATER
-     || metatileBehavior == MB_SEMI_DEEP_WATER
+     || metatileBehavior == MB_INTERIOR_DEEP_WATER
      || metatileBehavior == MB_DEEP_WATER
      || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER
      || (metatileBehavior == MB_EASTWARD_CURRENT

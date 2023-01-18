@@ -14,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
+      "map": "MAP_ROUTE107",
       "offset": 0,
-      "map": "MAP_ROUTE107"
+      "direction": "left"
     },
     {
-      "direction": "right",
+      "map": "MAP_ROUTE109",
       "offset": -40,
-      "map": "MAP_ROUTE109"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -123,7 +123,7 @@
       "y": 6,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_DECK",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

@@ -129,7 +129,7 @@ void CB2_UnionRoomBattle(void)
         ClearWindowTilemap(0);
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 0xF);
+        FillBgTilemapBufferRect(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT, 0xF);
         LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(13));
         LoadUserWindowBorderGfx_(0, 1, BG_PLTT_ID(13));
         Menu_LoadStdPal();

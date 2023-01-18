@@ -27,7 +27,7 @@ SECTIONS {
         *libc.a:locale.o(.data);
         *libc.a:mallocr.o(.data);
         . = 0x40000;
-}
+    }
 
     . = 0x3000000;
 
@@ -45,9 +45,6 @@ SECTIONS {
 
         /* COMMON starts at 0x30022A8 */
         INCLUDE "sym_common.ld"
-        src/*.o(COMMON);
-        gflib/*.o(COMMON);
-
         *libc.a:sbrkr.o(COMMON);
         end = .;
         . = 0x8000;
@@ -506,7 +503,7 @@ SECTIONS {
         src/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
         src/overworld.o(.rodata);
-        data/tilesets.o(.rodata);
+        src/tilesets.o(.rodata);
         data/maps.o(.rodata);
         src/fieldmap.o(.rodata);
         src/metatile_behavior.o(.rodata);

@@ -20,14 +20,14 @@
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_NAVEL_ROCK_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 18,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_NAVEL_ROCK_FORK",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

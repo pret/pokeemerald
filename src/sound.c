@@ -377,7 +377,7 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     u8 table;
 
     species--;
-    
+
     // Set default values
     // May be overridden depending on mode.
     length = 140;

@@ -90,7 +90,7 @@ void CB2_InitMysteryEventMenu(void)
         for (i = 0; i < 2; i++)
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
 
-        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x1E, 0x14);
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
         LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(13));
         Menu_LoadStdPalAt(BG_PLTT_ID(14));
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON);
@@ -201,7 +201,7 @@ static void CB2_MysteryEventMenu(void)
     case 6:
         if (IsLinkConnectionEstablished())
         {
-            if (gReceivedRemoteLinkPlayers != 0)
+            if (gReceivedRemoteLinkPlayers)
             {
                 if (GetLinkPlayerDataExchangeStatusTimed(2, 2) == EXCHANGE_DIFF_SELECTIONS)
                 {

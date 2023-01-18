@@ -977,6 +977,8 @@ static void SpriteCB_PlayerMonSendOut_2(struct Sprite *sprite)
     }
 }
 
+#undef HIBYTE
+
 static void SpriteCB_ReleaseMon2FromBall(struct Sprite *sprite)
 {
     if (sprite->data[0]++ > 24)

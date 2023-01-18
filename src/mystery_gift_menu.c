@@ -102,7 +102,7 @@ static const struct WindowTemplate sMainWindows[] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
-        .width = 30,
+        .width = DISPLAY_TILE_WIDTH,
         .height = 2,
         .paletteNum = 12,
         .baseBlock = 0x0013
@@ -118,7 +118,7 @@ static const struct WindowTemplate sMainWindows[] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 15,
-        .width = 30,
+        .width = DISPLAY_TILE_WIDTH,
         .height = 5,
         .paletteNum = 13,
         .baseBlock = 0x004f
@@ -234,9 +234,9 @@ static const struct ListMenuTemplate sListMenuTemplate_ThreeOptions = {
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const struct ListMenuItem sListMenuItems_ReceiveSendToss[] = {
@@ -279,9 +279,9 @@ static const struct ListMenuTemplate sListMenu_ReceiveSendToss = {
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const struct ListMenuTemplate sListMenu_ReceiveToss = {
@@ -300,9 +300,9 @@ static const struct ListMenuTemplate sListMenu_ReceiveToss = {
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const struct ListMenuTemplate sListMenu_ReceiveSend = {
@@ -321,9 +321,9 @@ static const struct ListMenuTemplate sListMenu_ReceiveSend = {
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const struct ListMenuTemplate sListMenu_Receive = {
@@ -342,9 +342,9 @@ static const struct ListMenuTemplate sListMenu_Receive = {
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const u8 *const sUnusedMenuTexts[] = {
@@ -640,8 +640,8 @@ static u32 MysteryGift_HandleThreeOptionMenu(u8 * unused0, u16 * unused1, u8 whi
         width++;
 
     windowTemplate.width = width;
-    if (width < 30)
-        windowTemplate.tilemapLeft = (30 - width) / 2;
+    if (width < DISPLAY_TILE_WIDTH)
+        windowTemplate.tilemapLeft = (DISPLAY_TILE_WIDTH - width) / 2;
     else
         windowTemplate.tilemapLeft = 0;
 
@@ -1232,7 +1232,7 @@ static void Task_MysteryGift(u8 taskId)
         data->state = MG_STATE_CLIENT_LINK_WAIT;
         break;
     case MG_STATE_CLIENT_LINK_WAIT:
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
         {
             ClearScreenInBg0(TRUE);
             data->state = MG_STATE_CLIENT_COMMUNICATING;
@@ -1240,7 +1240,7 @@ static void Task_MysteryGift(u8 taskId)
         }
         else if (gSpecialVar_Result == LINKUP_FAILED)
         {
-            // Link failed, return to link start menu 
+            // Link failed, return to link start menu
             ClearScreenInBg0(TRUE);
             data->state = MG_STATE_SOURCE_PROMPT;
         }
@@ -1258,7 +1258,7 @@ static void Task_MysteryGift(u8 taskId)
             data->state = MG_STATE_CLIENT_LINK_END;
             break;
         case CLI_RET_COPY_MSG:
-            memcpy(data->clientMsg, MysteryGiftClient_GetMsg(), 0x40);
+            memcpy(data->clientMsg, MysteryGiftClient_GetMsg(), CLIENT_MAX_MSG_SIZE);
             MysteryGiftClient_AdvanceState();
             break;
         case CLI_RET_PRINT_MSG:
@@ -1371,9 +1371,9 @@ static void Task_MysteryGift(u8 taskId)
             if (data->msgId == CLI_MSG_NEWS_RECEIVED)
             {
                 if (data->sourceIsFriend == TRUE)
-                    GenerateRandomWonderNews(WONDER_NEWS_RECV_FRIEND);
+                    WonderNews_SetReward(WONDER_NEWS_RECV_FRIEND);
                 else
-                    GenerateRandomWonderNews(WONDER_NEWS_RECV_WIRELESS);
+                    WonderNews_SetReward(WONDER_NEWS_RECV_WIRELESS);
             }
             if (!successMsg)
             {
@@ -1528,7 +1528,7 @@ static void Task_MysteryGift(u8 taskId)
         }
         break;
     case MG_STATE_SERVER_LINK_WAIT:
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
         {
             ClearScreenInBg0(TRUE);
             data->state = MG_STATE_SERVER_LINK_START;
@@ -1580,7 +1580,7 @@ static void Task_MysteryGift(u8 taskId)
         {
             if (data->sourceIsFriend == TRUE && data->msgId == SVR_MSG_NEWS_SENT)
             {
-                GenerateRandomWonderNews(WONDER_NEWS_SENT);
+                WonderNews_SetReward(WONDER_NEWS_SENT);
                 data->state = MG_STATE_SAVE_LOAD_GIFT;
             }
             else

@@ -1039,7 +1039,7 @@ static void MainCB2_Intro(void)
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
-    if (gMain.newKeys && !gPaletteFade.active)
+    if (gMain.newKeys != 0 && !gPaletteFade.active)
         SetMainCallback2(MainCB2_EndIntro);
     else if (gIntroFrameCounter != -1)
         gIntroFrameCounter++;
@@ -2933,7 +2933,7 @@ static void SpriteCB_WaterDrop_ReachLeafEnd(struct Sprite *sprite)
     SetOamMatrix(sprite->data[1], sprite->data[6] + 64, 0, 0, sprite->data[6] + 64);
     SetOamMatrix(sprite->data[1] + 1, sprite->data[6] + 64, 0, 0, sprite->data[6] + 64);
     SetOamMatrix(sprite->data[1] + 2, sprite->data[6] + 64, 0, 0, sprite->data[6] + 64);
-    if (sprite->data[4] != 64)
+    if (sprite->data[4] != MAX_SPRITES)
     {
         u16 sinIdx;
         sprite->data[4] -= 8;
@@ -3322,24 +3322,29 @@ static u8 CreateGameFreakLogoSprites(s16 x, s16 y, s16 unused)
 #undef sLetterX
 #undef COLOR_CHANGES
 
+#define sScale   data[1]
+#define sRot     data[2]
+#define sPos     data[3]
+#define sTimer   data[7]
+
 static void SpriteCB_FlygonSilhouette(struct Sprite *sprite)
 {
-    sprite->data[7]++;
+    sprite->sTimer++;
 
     if (sprite->sState != 0)
     {
-        s16 sin1;
-        s16 sin2;
+        s16 sin;
+        s16 cos;
 
         s16 a, b, c, d;
-
-        sin1 = gSineTable[(u8)sprite->data[2]];
-        sin2 = gSineTable[(u8)(sprite->data[2] + 64)];
-
-        d = Q_8_8_TO_INT(sin2 * sprite->data[1]);
-        c = Q_8_8_TO_INT(-sin1 * sprite->data[1]);
-        b = Q_8_8_TO_INT(sin1 * sprite->data[1]);
-        a = Q_8_8_TO_INT(sin2 * sprite->data[1]);
+        // Determines rotation of the sprite
+        sin = gSineTable[(u8)sprite->sRot];
+        cos = gSineTable[(u8)(sprite->sRot + 64)];
+        // Converts rotation and scale into the OAM matrix
+        d = Q_8_8_TO_INT( cos * sprite->sScale);
+        c = Q_8_8_TO_INT(-sin * sprite->sScale);
+        b = Q_8_8_TO_INT( sin * sprite->sScale);
+        a = Q_8_8_TO_INT( cos * sprite->sScale);
 
         SetOamMatrix(1, a, b, c, d);
     }
@@ -3353,35 +3358,40 @@ static void SpriteCB_FlygonSilhouette(struct Sprite *sprite)
         CalcCenterToCornerVec(sprite, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_DOUBLE);
         sprite->invisible = FALSE;
         sprite->sState = 1;
-        sprite->data[1] = 0x80;
-        sprite->data[2] = 0;
-        sprite->data[3] = 0;
+        sprite->sScale = 128;
+        sprite->sRot = 0;
+        sprite->sPos = 0;
         break;
     case 1:
-        sprite->x2 = -Sin((u8)sprite->data[3], 140);
-        sprite->y2 = -Sin((u8)sprite->data[3], 120);
-        sprite->data[1] += 7;
-        sprite->data[3] += 3;
+        sprite->x2 = -Sin((u8)sprite->sPos, 140);
+        sprite->y2 = -Sin((u8)sprite->sPos, 120);
+        sprite->sScale += 7;
+        sprite->sPos += 3;
         if (sprite->x + sprite->x2 <= -16)
         {
             sprite->oam.priority = 3;
             sprite->sState++;
             sprite->x = 20;
             sprite->y = 40;
-            sprite->data[1] = 0x200;
-            sprite->data[2] = 0;
-            sprite->data[3] = 0x10;
+            sprite->sScale = 512;
+            sprite->sRot = 0;
+            sprite->sPos = 16;
         }
         break;
     case 2:
-        sprite->x2 = Sin((u8)sprite->data[3], 34);
-        sprite->y2 = -Cos((u8)sprite->data[3], 60);
-        sprite->data[1] += 2;
-        if (sprite->data[7] % 5 == 0)
-            sprite->data[3]++;
+        sprite->x2 = Sin((u8)sprite->sPos, 34);
+        sprite->y2 = -Cos((u8)sprite->sPos, 60);
+        sprite->sScale += 2;
+        if (sprite->sTimer % 5 == 0)
+            sprite->sPos++;
         break;
     }
 }
+
+#undef sScale
+#undef sRot
+#undef sPos
+#undef sTimer
 
 static void SpriteCB_RayquazaOrb(struct Sprite *sprite)
 {

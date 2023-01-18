@@ -87,13 +87,13 @@ void InitMapFromSavedGame(void)
 
 void InitBattlePyramidMap(bool8 setPlayerPosition)
 {
-    CpuFastFill(MAPGRID_UNDEFINED << 16 | MAPGRID_UNDEFINED, sBackupMapData, sizeof(sBackupMapData));
+    CpuFastFill16(MAPGRID_UNDEFINED, sBackupMapData, sizeof(sBackupMapData));
     GenerateBattlePyramidFloorLayout(sBackupMapData, setPlayerPosition);
 }
 
 void InitTrainerHillMap(void)
 {
-    CpuFastFill(MAPGRID_UNDEFINED << 16 | MAPGRID_UNDEFINED, sBackupMapData, sizeof(sBackupMapData));
+    CpuFastFill16(MAPGRID_UNDEFINED, sBackupMapData, sizeof(sBackupMapData));
     GenerateTrainerHillFloorLayout(sBackupMapData);
 }
 
@@ -406,7 +406,7 @@ void MapGridSetMetatileEntryAt(int x, int y, u16 metatile)
 
 u16 GetMetatileAttributesById(u16 metatile)
 {
-    u16 *attributes;
+    const u16 *attributes;
     if (metatile < NUM_METATILES_IN_PRIMARY)
     {
         attributes = gMapHeader.mapLayout->primaryTileset->metatileAttributes;
@@ -753,7 +753,7 @@ static int IsPosInConnectingMap(struct MapConnection *connection, int x, int y)
     return FALSE;
 }
 
-struct MapConnection *GetConnectionAtCoords(s16 x, s16 y)
+struct MapConnection *GetMapConnectionAtPos(s16 x, s16 y)
 {
     int count;
     struct MapConnection *connection;
@@ -860,12 +860,13 @@ static void CopyTilesetToVramUsingHeap(struct Tileset const *tileset, u16 numTil
     }
 }
 
-static void FieldmapPaletteDummy(u16 offset, u16 size)
+// Below two are dummied functions from FRLG, used to tint the overworld palettes for the Quest Log
+static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
 {
 
 }
 
-static void FieldmapUnkDummy(void)
+static void ApplyGlobalTintToPaletteSlot(u8 slot, u8 count)
 {
 
 }
@@ -879,18 +880,18 @@ void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u16 size)
         if (tileset->isSecondary == FALSE)
         {
             LoadPalette(&black, destOffset, PLTT_SIZEOF(1));
-            LoadPalette(((u16 *)tileset->palettes) + 1, destOffset + 1, size - PLTT_SIZEOF(1));
-            FieldmapPaletteDummy(destOffset + 1, (size - PLTT_SIZEOF(1)) >> 1);
+            LoadPalette(tileset->palettes[0] + 1, destOffset + 1, size - PLTT_SIZEOF(1));
+            ApplyGlobalTintToPaletteEntries(destOffset + 1, (size - PLTT_SIZEOF(1)) >> 1);
         }
         else if (tileset->isSecondary == TRUE)
         {
-            LoadPalette(((u16 *)tileset->palettes) + BG_PLTT_ID(NUM_PALS_IN_PRIMARY), destOffset, size);
-            FieldmapPaletteDummy(destOffset, size >> 1);
+            LoadPalette(tileset->palettes[NUM_PALS_IN_PRIMARY], destOffset, size);
+            ApplyGlobalTintToPaletteEntries(destOffset, size >> 1);
         }
         else
         {
-            LoadCompressedPalette((u32 *)tileset->palettes, destOffset, size);
-            FieldmapPaletteDummy(destOffset, size >> 1);
+            LoadCompressedPalette((const u32 *)tileset->palettes, destOffset, size);
+            ApplyGlobalTintToPaletteEntries(destOffset, size >> 1);
         }
     }
 }
