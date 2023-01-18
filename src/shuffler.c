@@ -628,7 +628,7 @@ u16 ShuffledFlagNumberByObjectEventId(u16 objNum) {
     if (RedirectedTrainerFlags & (1 << (objNum - 1))) {
         return TEMP_FLAGS_START + AdjustedTemplates[objNum - 1].flagId;
     }
-    return TEMP_FLAGS_START + objNum - 1;
+    return TEMP_FLAGS_START + objNum;
 }
 
 u8 GetScaledLevel(u8 dist) {
