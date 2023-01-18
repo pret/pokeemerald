@@ -219,7 +219,7 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
 {
     s32 i;
     bool32 hideHpBoxes = (tableId == MOVE_TRANSFORM) ? FALSE : TRUE;
-    
+
     if (!isMoveAnim)
     {
         switch (tableId)

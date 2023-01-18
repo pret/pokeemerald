@@ -448,7 +448,7 @@ void ReadMail(struct Mail *mail, void (*exitCallback)(void), bool8 hasText)
     u16 buffer[2];
     u16 species;
 
-    sMailRead = calloc(1, sizeof(*sMailRead));
+    sMailRead = AllocZeroed(sizeof(*sMailRead));
     sMailRead->language = GAME_LANGUAGE;
     sMailRead->international = TRUE;
     sMailRead->parserSingle = CopyEasyChatWord;
@@ -556,8 +556,8 @@ static bool8 MailReadBuildGraphics(void)
             }
             break;
         case 10:
-            FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
-            FillBgTilemapBufferRect_Palette0(2, 1, 0, 0, 30, 20);
+            FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
+            FillBgTilemapBufferRect_Palette0(2, 1, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
             CopyToBgTilemapBuffer(1, sMailGraphics[sMailRead->mailType].tileMap, 0, 0);
             break;
         case 11:

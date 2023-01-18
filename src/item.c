@@ -15,8 +15,6 @@
 #include "constants/items.h"
 #include "constants/hold_effects.h"
 
-extern u16 gUnknown_0203CF30[];
-
 // this file's functions
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
@@ -882,6 +880,7 @@ const u8 *ItemId_GetName(u16 itemId)
     return gItems[SanitizeItemId(itemId)].name;
 }
 
+// Unused
 u16 ItemId_GetId(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].itemId;
@@ -912,7 +911,7 @@ u8 ItemId_GetImportance(u16 itemId)
     return gItems[SanitizeItemId(itemId)].importance;
 }
 
-// unused
+// Unused
 u8 ItemId_GetRegistrability(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].registrability;

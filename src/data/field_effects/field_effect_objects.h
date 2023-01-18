@@ -1147,7 +1147,7 @@ static const union AnimCmd *const sAnimTable_AshPuff[] =
     sAnim_AshPuff,
 };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_AshPuff = 
+const struct SpriteTemplate gFieldEffectObjectTemplate_AshPuff =
 {
     .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_ASH,

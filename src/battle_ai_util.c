@@ -499,6 +499,7 @@ void RecordKnownMove(u8 battlerId, u32 move)
         if (BATTLE_HISTORY->usedMoves[battlerId][i] == MOVE_NONE)
         {
             BATTLE_HISTORY->usedMoves[battlerId][i] = move;
+            AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].moves[i] = move;
             break;
         }
     }
@@ -507,6 +508,7 @@ void RecordKnownMove(u8 battlerId, u32 move)
 void RecordAbilityBattle(u8 battlerId, u16 abilityId)
 {
     BATTLE_HISTORY->abilities[battlerId] = abilityId;
+    AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].ability = abilityId;
 }
 
 void ClearBattlerAbilityHistory(u8 battlerId)
@@ -517,6 +519,7 @@ void ClearBattlerAbilityHistory(u8 battlerId)
 void RecordItemEffectBattle(u8 battlerId, u8 itemEffect)
 {
     BATTLE_HISTORY->itemEffects[battlerId] = itemEffect;
+    AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].heldEffect = itemEffect;
 }
 
 void ClearBattlerItemEffectHistory(u8 battlerId)
@@ -793,7 +796,7 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness,
             dmg *= 2;
         else if (move == MOVE_SURGING_STRIKES || (move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH))
             dmg *= 3;
-        
+
         if (dmg == 0)
             dmg = 1;
     }
@@ -804,7 +807,7 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness,
 
     RestoreBattlerData(battlerAtk);
     RestoreBattlerData(battlerDef);
-    
+
     // convert multiper to AI_EFFECTIVENESS_xX
     *typeEffectiveness = AI_GetEffectiveness(effectivenessMultiplier);
 
@@ -1159,11 +1162,15 @@ bool32 AI_IsAbilityOnSide(u32 battlerId, u32 ability)
 s32 AI_GetAbility(u32 battlerId)
 {
     u32 knownAbility = GetBattlerAbility(battlerId);
+
+    // We've had ability overwritten by e.g. Worry Seed. It is not part of AI_PARTY in case of switching
+    if (gBattleStruct->overwrittenAbilities[battlerId])
+        return gBattleStruct->overwrittenAbilities[battlerId];
     
     // The AI knows its own ability.
     if (IsBattlerAIControlled(battlerId))
         return knownAbility;
-    
+
     // Check neutralizing gas, gastro acid
     if (knownAbility == ABILITY_NONE)
         return knownAbility;
@@ -1183,10 +1190,10 @@ s32 AI_GetAbility(u32 battlerId)
         {
             abilityGuess = gBaseStats[gBattleMons[battlerId].species].abilities[Random() % NUM_ABILITY_SLOTS];
         }
-        
+
         return abilityGuess;
     }
-    
+
     return ABILITY_NONE; // Unknown.
 }
 
@@ -2691,7 +2698,7 @@ static bool32 AI_CanPoisonType(u8 battlerAttacker, u8 battlerTarget)
 static bool32 AI_CanBePoisoned(u8 battlerAtk, u8 battlerDef)
 {
     u16 ability = AI_DATA->abilities[battlerDef];
-    
+
     if (!(AI_CanPoisonType(battlerAtk, battlerDef))
      || gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_SAFEGUARD
      || gBattleMons[battlerDef].status1 & STATUS1_ANY
@@ -3042,7 +3049,7 @@ bool32 IsValidDoubleBattle(u8 battlerAtk)
 u16 GetAllyChosenMove(u8 battlerId)
 {
     u8 partnerBattler = BATTLE_PARTNER(battlerId);
-    
+
     if (!IsBattlerAlive(partnerBattler) || !IsBattlerAIControlled(partnerBattler))
         return MOVE_NONE;
     else if (partnerBattler > battlerId) // Battler with the lower id chooses the move first.
@@ -3444,7 +3451,7 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
 
     if (AI_DATA->hpPercents[battlerAtk] < 80 && AI_RandLessThan(128))
         return;
-    
+
     if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return; // Damaging moves would get a score boost from AI_TryToFaint or PreferStrongestMove so we don't consider them here
 
@@ -3563,7 +3570,7 @@ void IncreaseParalyzeScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
     if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return;
-    
+
     if (AI_CanParalyze(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], move, AI_DATA->partnerMove))
     {
         u8 atkSpeed = GetBattlerTotalSpeedStat(battlerAtk);
@@ -3584,7 +3591,7 @@ void IncreaseSleepScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
     if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return;
-    
+
     if (AI_CanPutToSleep(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], move, AI_DATA->partnerMove))
         *score += 2;
     else
@@ -3602,7 +3609,7 @@ void IncreaseConfusionScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
     if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return;
-    
+
     if (AI_CanConfuse(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove)
       && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_CURE_CONFUSION
       && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_CURE_STATUS)
@@ -3633,26 +3640,26 @@ bool32 ShouldUseZMove(u8 battlerAtk, u8 battlerDef, u16 chosenMove)
         return FALSE; //don't use z move on partner
     if (gBattleStruct->zmove.used[battlerAtk])
         return FALSE;   //cant use z move twice
-    
+
     if (IsViableZMove(battlerAtk, chosenMove))
     {
         u8 effectiveness;
-        
+
         if (gBattleMons[battlerDef].ability == ABILITY_DISGUISE && gBattleMons[battlerDef].species == SPECIES_MIMIKYU)
             return FALSE; // Don't waste a Z-Move busting disguise
         if (gBattleMons[battlerDef].ability == ABILITY_ICE_FACE && gBattleMons[battlerDef].species == SPECIES_EISCUE && IS_MOVE_PHYSICAL(chosenMove))
             return FALSE; // Don't waste a Z-Move busting Ice Face
-        
+
         if (IS_MOVE_STATUS(chosenMove) && !IS_MOVE_STATUS(gBattleStruct->zmove.chosenZMove))
             return FALSE;
         else if (!IS_MOVE_STATUS(chosenMove) && IS_MOVE_STATUS(gBattleStruct->zmove.chosenZMove))
             return FALSE;
-        
+
         if (!IS_MOVE_STATUS(chosenMove) && AI_CalcDamage(chosenMove, battlerAtk, battlerDef, &effectiveness, FALSE) >= gBattleMons[battlerDef].hp)
             return FALSE;   // don't waste damaging z move if can otherwise faint target
-        
+
         return TRUE;
     }
-    
+
     return FALSE;
 }

@@ -112,7 +112,7 @@ static bool32 ValidateEReaderConnection(void)
     REG_IME = 0;
     *(u64 *)handshakes = *(u64 *)gLink.handshakeBuffer;
     REG_IME = backupIME;
-    
+
     // Validate that we are player 1, the EReader is player 2,
     // and that players 3 and 4 are empty.
     if (handshakes[0] == SLAVE_HANDSHAKE && handshakes[1] == EREADER_HANDSHAKE
@@ -154,8 +154,8 @@ enum {
 
 static u32 TryReceiveCard(u8 *state, u16 *timer)
 {
-    if (*state >= RECV_STATE_EXCHANGE 
-     && *state <= RECV_STATE_WAIT_DISCONNECT 
+    if (*state >= RECV_STATE_EXCHANGE
+     && *state <= RECV_STATE_WAIT_DISCONNECT
      && HasLinkErrorOccurred())
     {
         // Return error status if an error occurs
