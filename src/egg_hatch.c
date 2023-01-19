@@ -444,9 +444,9 @@ static u8 EggHatchCreateMonSprite(u8 useAlt, u8 state, u8 partyId, u16 *speciesL
         {
             u16 species = GetMonData(mon, MON_DATA_SPECIES);
             u32 pid = GetMonData(mon, MON_DATA_PERSONALITY);
-            HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species],
-                                                      gMonSpritesGfxPtr->sprites.ptr[(useAlt * 2) + B_POSITION_OPPONENT_LEFT],
-                                                      species, pid);
+            HandleLoadSpecialPokePic(TRUE,
+                                     gMonSpritesGfxPtr->sprites.ptr[(useAlt * 2) + B_POSITION_OPPONENT_LEFT],
+                                     species, pid);
             LoadCompressedSpritePalette(GetMonSpritePalStruct(mon));
             *speciesLoc = species;
         }
@@ -532,7 +532,7 @@ static void CB2_LoadEggHatch(void)
     case 2:
         DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
         CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0);
-        LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gBattleTextboxPalette, 0, 0x20);
         gMain.state++;
         break;
     case 3:
@@ -556,7 +556,7 @@ static void CB2_LoadEggHatch(void)
         break;
     case 7:
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-        LoadPalette(gTradeGba2_Pal, BG_PLTT_ID(1), 5 * PLTT_SIZE_4BPP);
+        LoadPalette(gTradeGba2_Pal, 0x10, 0xA0);
         LoadBgTiles(1, gTradeGba_Gfx, 0x1420, 0);
         CopyToBgTilemapBuffer(1, gTradePlatform_Tilemap, 0x1000, 0);
         CopyBgTilemapBufferToVram(1);
@@ -678,7 +678,7 @@ static void CB2_EggHatch(void)
         // Print the nickname prompt
         if (!IsTextPrinterActive(sEggHatchData->windowId))
         {
-            LoadUserWindowBorderGfx(sEggHatchData->windowId, 0x140, BG_PLTT_ID(14));
+            LoadUserWindowBorderGfx(sEggHatchData->windowId, 0x140, 0xE0);
             CreateYesNoMenu(&sYesNoWinTemplate, 0x140, 0xE, 0);
             sEggHatchData->state++;
         }
@@ -930,8 +930,10 @@ u8 GetEggCyclesToSubtract(void)
     {
         if (!GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_EGG))
         {
-            u8 ability = GetMonAbility(&gPlayerParty[i]);
-            if (ability == ABILITY_MAGMA_ARMOR || ability == ABILITY_FLAME_BODY)
+            u16 ability = GetMonAbility(&gPlayerParty[i]);
+            if (ability == ABILITY_MAGMA_ARMOR
+             || ability == ABILITY_FLAME_BODY
+             || ability == ABILITY_STEAM_ENGINE)
                 return 2;
         }
     }

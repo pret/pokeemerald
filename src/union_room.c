@@ -2438,7 +2438,7 @@ void RunUnionRoom(void)
     uroom->unreadPlayerId = 0;
 
     gSpecialVar_Result = 0;
-    ListMenuLoadStdPalAt(BG_PLTT_ID(13), 1);
+    ListMenuLoadStdPalAt(0xD0, 1);
 }
 
 static u16 ReadAsU16(const u8 *ptr)
@@ -4094,7 +4094,7 @@ static void ItemPrintFunc_EmptyList(u8 windowId, u32 itemId, u8 y)
 {
 }
 
-static void TradeBoardPrintItemInfo(u8 windowId, u8 y, struct RfuGameData * data, const u8 * playerName, u8 colorIdx)
+static void TradeBoardPrintItemInfo(u8 windowId, u8 y, struct RfuGameData * data, const u8 *playerName, u8 colorIdx)
 {
     u8 levelStr[4];
     u16 species = data->tradeSpecies;
@@ -4187,7 +4187,7 @@ static s32 IsRequestedTradeInPlayerParty(u32 type, u32 species)
         for (i = 0; i < gPlayerPartyCount; i++)
         {
             species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
-            if (gSpeciesInfo[species].types[0] == type || gSpeciesInfo[species].types[1] == type)
+            if (gSpeciesInfo[species].type1 == type || gSpeciesInfo[species].type2 == type)
                 return UR_TRADE_MATCH;
         }
         return UR_TRADE_NOTYPE;

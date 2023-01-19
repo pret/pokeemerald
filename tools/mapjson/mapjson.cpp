@@ -77,8 +77,8 @@ string generate_map_header_text(Json map_data, Json layouts_data, string version
 
     ostringstream text;
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/" 
-         << map_data["name"].string_value() 
+    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/"
+         << map_data["name"].string_value()
          << "/map.json\n@\n\n";
 
     text << map_data["name"].string_value() << ":\n"
@@ -128,8 +128,8 @@ string generate_map_connections_text(Json map_data) {
 
     ostringstream text;
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/" 
-         << map_data["name"].string_value() 
+    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/"
+         << map_data["name"].string_value()
          << "/map.json\n@\n\n";
 
     text << map_data["name"].string_value() << "_MapConnectionsList:\n";
@@ -154,8 +154,8 @@ string generate_map_events_text(Json map_data) {
 
     ostringstream text;
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/" 
-         << map_data["name"].string_value() 
+    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/"
+         << map_data["name"].string_value()
          << "/map.json\n@\n\n";
 
     string objects_label, warps_label, coords_label, bgs_label;
@@ -386,6 +386,7 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
     char dir_separator = file_dir.back();
 
     ostringstream text;
+    ostringstream mapCountText;
 
     text << "#ifndef GUARD_CONSTANTS_MAP_GROUPS_H\n"
          << "#define GUARD_CONSTANTS_MAP_GROUPS_H\n\n";
@@ -393,11 +394,14 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
     text << "//\n// DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/map_groups.json\n//\n\n";
 
     int group_num = 0;
+    vector<int> map_count_vec; //DEBUG
 
     for (auto &group : groups_data["group_order"].array_items()) {
         text << "// " << group.string_value() << "\n";
         vector<Json> map_ids;
         size_t max_length = 0;
+
+        int map_count = 0; //DEBUG
 
         for (auto &map_name : groups_data[group.string_value()].array_items()) {
             string header_filepath = file_dir + map_name.string_value() + dir_separator + "map.json";
@@ -406,6 +410,7 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
             map_ids.push_back(map_data["id"]);
             if (map_data["id"].string_value().length() > max_length)
                 max_length = map_data["id"].string_value().length();
+            map_count++; //DEBUG
         }
 
         int map_id_num = 0;
@@ -416,10 +421,19 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
         text << "\n";
 
         group_num++;
+        map_count_vec.push_back(map_count); //DEBUG
     }
 
     text << "#define MAP_GROUPS_COUNT " << group_num << "\n\n";
     text << "#endif // GUARD_CONSTANTS_MAP_GROUPS_H\n";
+
+    char s = file_dir.back();
+    mapCountText << "static const u8 MAP_GROUP_COUNT[] = {"; //DEBUG
+    for(int i=0; i<group_num; i++){                          //DEBUG
+        mapCountText << map_count_vec[i] << ", ";            //DEBUG
+    }                                                        //DEBUG
+    mapCountText << "0};\n";                                 //DEBUG
+    write_text_file(file_dir + ".." + s + ".." + s + "src" + s + "data" + s + "map_group_count.h", mapCountText.str());
 
     return text.str();
 }

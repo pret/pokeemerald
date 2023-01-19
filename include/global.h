@@ -58,6 +58,7 @@
 
 // Converts a number to Q4.12 fixed-point format
 #define Q_4_12(n)  ((s16)((n) * 4096))
+#define UQ_4_12(n)  ((u16)((n) * 4096))
 
 // Converts a number to Q24.8 fixed-point format
 #define Q_24_8(n)  ((s32)((n) << 8))
@@ -67,9 +68,14 @@
 
 // Converts a Q4.12 fixed-point format number to a regular integer
 #define Q_4_12_TO_INT(n)  ((int)((n) / 4096))
+#define UQ_4_12_TO_INT(n)  ((int)((n) / 4096))
 
 // Converts a Q24.8 fixed-point format number to a regular integer
 #define Q_24_8_TO_INT(n) ((int)((n) >> 8))
+
+// Rounding value for Q4.12 fixed-point format
+#define Q_4_12_ROUND ((1) << (12 - 1))
+#define UQ_4_12_ROUND ((1) << (12 - 1))
 
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) >= (b) ? (a) : (b))
@@ -129,9 +135,7 @@
 
 #define ROUND_BITS_TO_BYTES(numBits) DIV_ROUND_UP(numBits, 8)
 
-// NUM_DEX_FLAG_BYTES allocates more flags than it needs to, as NUM_SPECIES includes the "old unown"
-// values that don't appear in the Pokedex. NATIONAL_DEX_COUNT does not include these values.
-#define NUM_DEX_FLAG_BYTES ROUND_BITS_TO_BYTES(NUM_SPECIES)
+#define NUM_DEX_FLAG_BYTES ROUND_BITS_TO_BYTES(POKEMON_SLOTS_NUMBER)
 #define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
 #define NUM_ADDITIONAL_PHRASE_BYTES ROUND_BITS_TO_BYTES(NUM_ADDITIONAL_PHRASES)
 
@@ -192,8 +196,7 @@ struct Pokedex
     /*0x04*/ u32 unownPersonality; // set when you first see Unown
     /*0x08*/ u32 spindaPersonality; // set when you first see Spinda
     /*0x0C*/ u32 unknown3;
-    /*0x10*/ u8 owned[NUM_DEX_FLAG_BYTES];
-    /*0x44*/ u8 seen[NUM_DEX_FLAG_BYTES];
+    /*0x10*/ u8 filler[0x68]; // Previously Dex Flags, feel free to remove.
 };
 
 struct PokemonJumpRecords
@@ -861,9 +864,9 @@ struct TrainerHillSave
 struct WonderNewsMetadata
 {
     u8 newsType:2;
-    u8 sentRewardCounter:3;
-    u8 rewardCounter:3;
-    u8 berry;
+    u8 sentCounter:3;
+    u8 getCounter:3;
+    u8 rand;
     //u8 padding[2];
 };
 
@@ -989,7 +992,7 @@ struct SaveBlock1
     /*0x690*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
     /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
-    /*0x988*/ u8 seen1[NUM_DEX_FLAG_BYTES];
+    /*0x988*/ u8 filler1[0x34]; // Previously Dex Flags, feel free to remove.
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 unused_9C2[6];
     /*0x9C8*/ u16 trainerRematchStepCounter;
@@ -1044,18 +1047,17 @@ struct SaveBlock1
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
     /*0x322C*/ struct MysteryGiftSave mysteryGift;
-    /*0x3598*/ u8 unused_3598[0x180];
-    /*0x3718*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
-    /*0x3728*/ struct RamScript ramScript;
-    /*0x3B14*/ struct RecordMixingGift recordMixingGift;
-    /*0x3B24*/ u8 seen2[NUM_DEX_FLAG_BYTES];
-    /*0x3B58*/ LilycoveLady lilycoveLady;
-    /*0x3B98*/ struct TrainerNameRecord trainerNameRecords[20];
-    /*0x3C88*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
-    /*0x3D5A*/ u8 unused_3D5A[10];
-    /*0x3D64*/ struct TrainerHillSave trainerHill;
-    /*0x3D70*/ struct WaldaPhrase waldaPhrase;
-    // sizeof: 0x3D88
+    /*0x3???*/ u8 dexSeen[NUM_DEX_FLAG_BYTES];
+    /*0x3???*/ u8 dexCaught[NUM_DEX_FLAG_BYTES];
+    /*0x3???*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
+    /*0x3???*/ struct RamScript ramScript;
+    /*0x3???*/ struct RecordMixingGift recordMixingGift;
+    /*0x3???*/ LilycoveLady lilycoveLady;
+    /*0x3???*/ struct TrainerNameRecord trainerNameRecords[20];
+    /*0x3???*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
+    /*0x3???*/ struct TrainerHillSave trainerHill;
+    /*0x3???*/ struct WaldaPhrase waldaPhrase;
+    // sizeof: 0x3???
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;

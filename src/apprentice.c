@@ -335,7 +335,7 @@ static u16 GetRandomAlternateMove(u8 monId)
     u8 id;
     u8 numLearnsetMoves;
     u16 species;
-    const u16 *learnset;
+    const struct LevelUpMove *learnset;
     bool32 needTMs = FALSE;
     u16 moveId = MOVE_NONE;
     bool32 shouldUseMove;
@@ -352,9 +352,9 @@ static u16 GetRandomAlternateMove(u8 monId)
     else // == APPRENTICE_LVL_MODE_OPEN
         level = 60;
 
-    for (j = 0; learnset[j] != LEVEL_UP_END; j++)
+    for (j = 0; learnset[j].move != LEVEL_UP_END; j++)
     {
-        if ((learnset[j] & LEVEL_UP_MOVE_LV) > (level << 9))
+        if (learnset[j].level > level)
             break;
     }
 
@@ -376,7 +376,7 @@ static u16 GetRandomAlternateMove(u8 monId)
                 do
                 {
                     id = Random() % (NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES);
-                    shouldUseMove = CanSpeciesLearnTMHM(species, id);
+                    shouldUseMove = CanLearnTeachableMove(species, ItemIdToBattleMoveId(ITEM_TM01 + id));
                 }
                 while (!shouldUseMove);
 
@@ -391,7 +391,7 @@ static u16 GetRandomAlternateMove(u8 monId)
                 for (; j < numLearnsetMoves; j++)
                 {
                     // Keep looking for TMs until one not in the level up learnset is found
-                    if ((learnset[j] & LEVEL_UP_MOVE_ID) == moveId)
+                    if ((learnset[j].move) == moveId)
                     {
                         shouldUseMove = FALSE;
                         break;
@@ -415,13 +415,13 @@ static u16 GetRandomAlternateMove(u8 monId)
                 {
                     // Get a random move excluding the 4 it would know at max level
                     u8 learnsetId = Random() % (numLearnsetMoves - MAX_MON_MOVES);
-                    moveId = learnset[learnsetId] & LEVEL_UP_MOVE_ID;
+                    moveId = learnset[learnsetId].move;
                     shouldUseMove = TRUE;
 
                     for (j = numLearnsetMoves - MAX_MON_MOVES; j < numLearnsetMoves; j++)
                     {
                         // Keep looking for moves until one not in the last 4 is found
-                        if ((learnset[j] & LEVEL_UP_MOVE_ID) == moveId)
+                        if ((learnset[j].move) == moveId)
                         {
                             shouldUseMove = FALSE;
                             break;
@@ -461,7 +461,7 @@ static void GetLatestLearnedMoves(u16 species, u16 *moves)
 {
     u8 i, j;
     u8 level, numLearnsetMoves;
-    const u16 *learnset;
+    const struct LevelUpMove *learnset;
 
     if (PLAYER_APPRENTICE.lvlMode == APPRENTICE_LVL_MODE_50)
         level = 50;
@@ -469,9 +469,9 @@ static void GetLatestLearnedMoves(u16 species, u16 *moves)
         level = 60;
 
     learnset = gLevelUpLearnsets[species];
-    for (i = 0; learnset[i] != LEVEL_UP_END; i++)
+    for (i = 0; learnset[i].move != LEVEL_UP_END; i++)
     {
-        if ((learnset[i] & LEVEL_UP_MOVE_LV) > (level << 9))
+        if (learnset[i].level > level)
             break;
     }
 
@@ -480,7 +480,7 @@ static void GetLatestLearnedMoves(u16 species, u16 *moves)
         numLearnsetMoves = MAX_MON_MOVES;
 
     for (j = 0; j < numLearnsetMoves; j++)
-        moves[j] = learnset[(i - 1) - j] & LEVEL_UP_MOVE_ID;
+        moves[j] = learnset[(i - 1) - j].move;
 }
 
 // Get the level up move or previously suggested move to be the first move choice

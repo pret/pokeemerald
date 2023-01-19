@@ -103,13 +103,13 @@ struct __attribute__((packed, aligned(2))) RfuGameData
 {
     struct RfuGameCompatibilityData compatibility;
     u8 partnerInfo[RFU_CHILD_MAX];
-    u16 tradeSpecies:10;
-    u16 tradeType:6;
+    u16 tradeSpecies;
     u8 activity:7;
     u8 startedActivity:1;
     u8 playerGender:1;
     u8 tradeLevel:7;
-    u8 filler;
+    u8 tradeType:6;
+    u8 filler:2;
 };
 
 // Constants for getting/setting information in 'partnerInfo' of RfuGameData.

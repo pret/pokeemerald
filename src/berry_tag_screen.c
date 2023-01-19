@@ -346,7 +346,7 @@ static bool8 LoadBerryTagGfx(void)
         sBerryTag->gfxState++;
         break;
     case 4:
-        LoadCompressedPalette(gBerryCheck_Pal, BG_PLTT_ID(0), 6 * PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gBerryCheck_Pal, 0, 0xC0);
         sBerryTag->gfxState++;
         break;
     case 5:
@@ -367,7 +367,7 @@ static void HandleInitWindows(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadPalette(sFontPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+    LoadPalette(sFontPalette, 0xF0, 0x20);
     for (i = 0; i < ARRAY_COUNT(sWindowTemplates) - 1; i++)
         PutWindowTilemap(i);
     ScheduleBgCopyTilemapToVram(0);
@@ -550,7 +550,7 @@ static void TryChangeDisplayedBerry(u8 taskId, s8 toMove)
     s16 *data = gTasks[taskId].data;
     s16 currPocketPosition = gBagPosition.scrollPosition[BERRIES_POCKET] + gBagPosition.cursorPosition[BERRIES_POCKET];
     u32 newPocketPosition = currPocketPosition + toMove;
-    if (newPocketPosition < ITEM_TO_BERRY(MAX_BERRY_INDEX) && BagGetItemIdByPocketPosition(POCKET_BERRIES, newPocketPosition) != ITEM_NONE)
+    if (newPocketPosition < ITEM_TO_BERRY(LAST_BERRY_INDEX) && BagGetItemIdByPocketPosition(POCKET_BERRIES, newPocketPosition) != ITEM_NONE)
     {
         if (toMove < 0)
             data[1] = 2;

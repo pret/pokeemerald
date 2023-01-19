@@ -2,7 +2,6 @@
 #include "pokenav.h"
 #include "bg.h"
 #include "menu.h"
-#include "palette.h"
 #include "window.h"
 #include "sound.h"
 #include "string_util.h"
@@ -432,7 +431,7 @@ static u32 LoopedTask_OpenRibbonsMonList(s32 state)
         DecompressAndCopyTileDataToVram(1, sMonRibbonListFrameTiles, 0, 0, 0);
         SetBgTilemapBuffer(1, menu->buff);
         CopyToBgTilemapBuffer(1, sMonRibbonListFrameTilemap, 0, 0);
-        CopyPaletteIntoBufferUnfaded(sMonRibbonListFramePal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+        CopyPaletteIntoBufferUnfaded(sMonRibbonListFramePal, 0x10, 0x20);
         CopyBgTilemapBufferToVram(1);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -447,7 +446,7 @@ static u32 LoopedTask_OpenRibbonsMonList(s32 state)
     case 2:
         if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
-        CopyPaletteIntoBufferUnfaded(sMonRibbonListUi_Pal, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
+        CopyPaletteIntoBufferUnfaded(sMonRibbonListUi_Pal, 0x20, 0x20);
         CreateRibbonMonsList();
         return LT_INC_AND_PAUSE;
     case 3:
@@ -670,7 +669,7 @@ static void DrawListIndexNumber(s32 windowId, s32 index, s32 max)
     u8 strbuf[16];
     u32 x;
 
-    u8 * ptr = strbuf;
+    u8 *ptr = strbuf;
     ptr = ConvertIntToDecimalStringN(ptr, index, STR_CONV_MODE_RIGHT_ALIGN, 3);
     *ptr++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(ptr, max, STR_CONV_MODE_RIGHT_ALIGN, 3);
@@ -697,12 +696,12 @@ static void CreateRibbonMonsList(void)
 }
 
 // Buffers the "Nickname gender/level" text for the ribbon mon list
-static void BufferRibbonMonInfoText(struct PokenavListItem * listItem, u8 * dest)
+static void BufferRibbonMonInfoText(struct PokenavListItem * listItem, u8 *dest)
 {
     u8 gender;
     u8 level;
-    u8 * s;
-    const u8 * genderStr;
+    u8 *s;
+    const u8 *genderStr;
     struct PokenavMonListItem * item = (struct PokenavMonListItem *)listItem;
 
     // Mon is in party

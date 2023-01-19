@@ -789,8 +789,8 @@ static const u8 *const sUnionRoomTradeMessages[] =
 {
     [UR_TRADE_MSG_NOT_MON_PARTNER_WANTS - 1]       = gText_NotPkmnOtherTrainerWants,
     [UR_TRADE_MSG_NOT_EGG - 1]                     = gText_ThatIsntAnEgg,
-    [UR_TRADE_MSG_MON_CANT_BE_TRADED_1 - 1]        = gText_PkmnCantBeTradedNow,
-    [UR_TRADE_MSG_MON_CANT_BE_TRADED_2 - 1]        = gText_PkmnCantBeTradedNow,
+    [UR_TRADE_MSG_MON_CANT_BE_TRADED_NOW - 1]      = gText_PkmnCantBeTradedNow,
+    [UR_TRADE_MSG_MON_CANT_BE_TRADED - 1]          = gText_PkmnCantBeTraded,
     [UR_TRADE_MSG_PARTNERS_MON_CANT_BE_TRADED - 1] = gText_OtherTrainersPkmnCantBeTraded,
     [UR_TRADE_MSG_EGG_CANT_BE_TRADED -1]           = gText_EggCantBeTradedNow,
     [UR_TRADE_MSG_PARTNER_CANT_ACCEPT_MON - 1]     = gText_OtherTrainerCantAcceptPkmn,
@@ -1082,7 +1082,7 @@ static const struct CompressedSpritePalette sSpritePalette_StatusIcons =
     gStatusPal_Icons, TAG_STATUS_ICONS
 };
 
-static const struct SpriteTemplate sSpriteTemplate_StatusIcons =
+const struct SpriteTemplate gSpriteTemplate_StatusIcons =
 {
     .tileTag = TAG_STATUS_ICONS,
     .paletteTag = TAG_STATUS_ICONS,
@@ -1091,20 +1091,6 @@ static const struct SpriteTemplate sSpriteTemplate_StatusIcons =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
-};
-
-// Mask for the partners party in a multi battle. TRUE if in the partners party, FALSE otherwise
-// The 7th slot is Cancel, and the 8th slot is unreachable
-// Used only to determine whether or not to show the Deoxys form icon sprite
-static const bool8 sMultiBattlePartnersPartyMask[PARTY_SIZE + 2] =
-{
-    FALSE,
-    TRUE,
-    FALSE,
-    FALSE,
-    TRUE,
-    TRUE,
-    FALSE
 };
 
 static const u8 *const sUnused_StatStrings[] =
@@ -1169,6 +1155,56 @@ static const u16 sTMHMMoves[] =
     [ITEM_TM48 - ITEM_TM01] = MOVE_SKILL_SWAP,
     [ITEM_TM49 - ITEM_TM01] = MOVE_SNATCH,
     [ITEM_TM50 - ITEM_TM01] = MOVE_OVERHEAT,
+    [ITEM_TM51 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM52 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM53 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM54 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM55 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM56 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM57 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM58 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM59 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM60 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM61 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM62 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM63 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM64 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM65 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM66 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM67 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM68 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM69 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM70 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM71 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM72 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM73 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM74 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM75 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM76 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM77 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM78 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM79 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM80 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM81 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM82 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM83 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM84 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM85 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM86 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM87 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM88 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM89 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM90 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM91 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM92 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM93 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM94 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM95 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM96 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM97 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM98 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM99 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM100 - ITEM_TM01] = MOVE_NONE, // Todo
     [ITEM_HM01 - ITEM_TM01] = MOVE_CUT,
     [ITEM_HM02 - ITEM_TM01] = MOVE_FLY,
     [ITEM_HM03 - ITEM_TM01] = MOVE_SURF,

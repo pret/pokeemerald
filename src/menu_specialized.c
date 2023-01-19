@@ -24,6 +24,7 @@
 #include "trig.h"
 #include "window.h"
 #include "constants/songs.h"
+#include "constants/battle_move_effects.h"
 #include "gba/io_reg.h"
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
@@ -114,7 +115,7 @@ static const struct WindowTemplate sMoveRelearnerWindowTemplates[] =
         .tilemapTop = 1,
         .width = 16,
         .height = 12,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0xA
     },
     {
@@ -123,7 +124,7 @@ static const struct WindowTemplate sMoveRelearnerWindowTemplates[] =
         .tilemapTop = 1,
         .width = 16,
         .height = 12,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0xCA
     },
     {
@@ -132,7 +133,7 @@ static const struct WindowTemplate sMoveRelearnerWindowTemplates[] =
         .tilemapTop = 1,
         .width = 10,
         .height = 12,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x18A
     },
     {
@@ -141,7 +142,7 @@ static const struct WindowTemplate sMoveRelearnerWindowTemplates[] =
         .tilemapTop = 15,
         .width = 22,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x202
     },
     {
@@ -150,7 +151,7 @@ static const struct WindowTemplate sMoveRelearnerWindowTemplates[] =
         .tilemapTop = 8,
         .width = 5,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = 0xF,
         .baseBlock = 0x25A
     },
     DUMMY_WIN_TEMPLATE
@@ -163,7 +164,7 @@ static const struct WindowTemplate sMoveRelearnerYesNoMenuTemplate =
     .tilemapTop = 8,
     .width = 5,
     .height = 4,
-    .paletteNum = 15,
+    .paletteNum = 0xF,
     .baseBlock = 0x25A
 };
 
@@ -707,8 +708,8 @@ void InitMoveRelearnerWindows(bool8 useContextWindow)
 
     InitWindows(sMoveRelearnerWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(14));
-    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+    LoadUserWindowBorderGfx(0, 1, 0xE0);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
 
     for (i = 0; i < ARRAY_COUNT(sMoveRelearnerWindowTemplates) - 1; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(1));
@@ -807,7 +808,11 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     }
     AddTextPrinterParameterized(0, FONT_NORMAL, str, 0x6A, 0x29, TEXT_SKIP_DRAW, NULL);
 
-    str = gMoveDescriptionPointers[chosenMove - 1];
+    if (move->effect != EFFECT_PLACEHOLDER)
+        str = gMoveDescriptionPointers[chosenMove - 1];
+    else
+        str = gNotDoneYetDescription;
+
     AddTextPrinterParameterized(0, FONT_NARROW, str, 0, 0x41, 0, NULL);
 }
 
@@ -1075,7 +1080,7 @@ void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u16 boxId, u16 monId, 
         u32 trainerId = GetBoxOrPartyMonData(boxId, monId, MON_DATA_OT_ID, NULL);
         u32 personality = GetBoxOrPartyMonData(boxId, monId, MON_DATA_PERSONALITY, NULL);
 
-        LoadSpecialPokePic(&gMonFrontPicTable[species], tilesDst, species, personality, TRUE);
+        LoadSpecialPokePic(tilesDst, species, personality, TRUE);
         LZ77UnCompWram(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), palDst);
     }
 }

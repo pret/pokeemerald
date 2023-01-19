@@ -65,6 +65,7 @@
 #include "constants/weather.h"
 #include "constants/metatile_labels.h"
 #include "palette.h"
+#include "battle_util.h"
 
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
@@ -583,16 +584,16 @@ static void LoadLinkPartnerObjectEventSpritePalette(u8 graphicsId, u8 localEvent
             switch (graphicsId)
             {
             case OBJ_EVENT_GFX_LINK_RS_BRENDAN:
-                LoadPalette(gObjectEventPal_RubySapphireBrendan, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
+                LoadPalette(gObjectEventPal_RubySapphireBrendan, 0x100 + (adjustedPaletteNum << 4), 0x20);
                 break;
             case OBJ_EVENT_GFX_LINK_RS_MAY:
-                LoadPalette(gObjectEventPal_RubySapphireMay, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
+                LoadPalette(gObjectEventPal_RubySapphireMay, 0x100 + (adjustedPaletteNum << 4), 0x20);
                 break;
             case OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL:
-                LoadPalette(gObjectEventPal_Brendan, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
+                LoadPalette(gObjectEventPal_Brendan, 0x100 + (adjustedPaletteNum << 4), 0x20);
                 break;
             case OBJ_EVENT_GFX_RIVAL_MAY_NORMAL:
-                LoadPalette(gObjectEventPal_May, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
+                LoadPalette(gObjectEventPal_May, 0x100 + (adjustedPaletteNum << 4), 0x20);
                 break;
             }
         }
@@ -939,21 +940,7 @@ u16 GetWeekCount(void)
 
 u8 GetLeadMonFriendshipScore(void)
 {
-    struct Pokemon *pokemon = &gPlayerParty[GetLeadMonIndex()];
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) == MAX_FRIENDSHIP)
-        return FRIENDSHIP_MAX;
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 200)
-        return FRIENDSHIP_200_TO_254;
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 150)
-        return FRIENDSHIP_150_TO_199;
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 100)
-        return FRIENDSHIP_100_TO_149;
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 50)
-        return FRIENDSHIP_50_TO_99;
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 1)
-        return FRIENDSHIP_1_TO_49;
-
-    return FRIENDSHIP_NONE;
+    return GetMonFriendshipScore(&gPlayerParty[GetLeadMonIndex()]);
 }
 
 static void CB2_FieldShowRegionMap(void)
@@ -966,9 +953,25 @@ void FieldShowRegionMap(void)
     SetMainCallback2(CB2_FieldShowRegionMap);
 }
 
+static bool8 IsPlayerInFrontOfPC(void)
+{
+    u16 x, y;
+    u16 tileInFront;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    tileInFront = MapGridGetMetatileIdAt(x, y);
+
+    return (tileInFront == METATILE_BrendansMaysHouse_BrendanPC_On
+         || tileInFront == METATILE_BrendansMaysHouse_BrendanPC_Off
+         || tileInFront == METATILE_BrendansMaysHouse_MayPC_On
+         || tileInFront == METATILE_BrendansMaysHouse_MayPC_Off
+         || tileInFront == METATILE_Building_PC_On
+         || tileInFront == METATILE_Building_PC_Off);
+}
+
 void DoPCTurnOnEffect(void)
 {
-    if (FuncIsActiveTask(Task_PCTurnOnEffect) != TRUE)
+    if (FuncIsActiveTask(Task_PCTurnOnEffect) != TRUE && IsPlayerInFrontOfPC() == TRUE)
     {
         u8 taskId = CreateTask(Task_PCTurnOnEffect, 8);
         gTasks[taskId].data[0] = 0;
@@ -1054,6 +1057,9 @@ static void PCTurnOffEffect(void)
     s8 dy = 0;
     u16 tileId = 0;
     u8 playerDirection = GetPlayerFacingDirection();
+
+    if (IsPlayerInFrontOfPC() == FALSE)
+        return;
     switch (playerDirection)
     {
     case DIR_NORTH:
@@ -1196,7 +1202,7 @@ void IsGrassTypeInParty(void)
         if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
         {
             species = GetMonData(pokemon, MON_DATA_SPECIES);
-            if (gSpeciesInfo[species].types[0] == TYPE_GRASS || gSpeciesInfo[species].types[1] == TYPE_GRASS)
+            if (gSpeciesInfo[species].type1 == TYPE_GRASS || gSpeciesInfo[species].type2 == TYPE_GRASS)
             {
                 gSpecialVar_Result = TRUE;
                 return;
@@ -2986,40 +2992,9 @@ static void HideFrontierExchangeCornerItemIcon(u16 menu, u16 unused)
     }
 }
 
-static const u16 sBattleFrontier_TutorMoves1[] =
-{
-    MOVE_SOFT_BOILED,
-    MOVE_SEISMIC_TOSS,
-    MOVE_DREAM_EATER,
-    MOVE_MEGA_PUNCH,
-    MOVE_MEGA_KICK,
-    MOVE_BODY_SLAM,
-    MOVE_ROCK_SLIDE,
-    MOVE_COUNTER,
-    MOVE_THUNDER_WAVE,
-    MOVE_SWORDS_DANCE
-};
-
-static const u16 sBattleFrontier_TutorMoves2[] =
-{
-    MOVE_DEFENSE_CURL,
-    MOVE_SNORE,
-    MOVE_MUD_SLAP,
-    MOVE_SWIFT,
-    MOVE_ICY_WIND,
-    MOVE_ENDURE,
-    MOVE_PSYCH_UP,
-    MOVE_ICE_PUNCH,
-    MOVE_THUNDER_PUNCH,
-    MOVE_FIRE_PUNCH
-};
-
 void BufferBattleFrontierTutorMoveName(void)
 {
-    if (gSpecialVar_0x8005 != 0)
-        StringCopy(gStringVar1, gMoveNames[sBattleFrontier_TutorMoves2[gSpecialVar_0x8004]]);
-    else
-        StringCopy(gStringVar1, gMoveNames[sBattleFrontier_TutorMoves1[gSpecialVar_0x8004]]);
+    StringCopy(gStringVar1, gMoveNames[gSpecialVar_0x8005]);
 }
 
 static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
@@ -3112,44 +3087,6 @@ void ScrollableMultichoice_RedrawPersistentMenu(void)
         AddTextPrinterParameterized(task->tWindowId, FONT_NORMAL, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SKIP_DRAW, NULL);
         PutWindowTilemap(task->tWindowId);
         CopyWindowToVram(task->tWindowId, COPYWIN_FULL);
-    }
-}
-
-void GetBattleFrontierTutorMoveIndex(void)
-{
-    u8 i;
-    u16 moveTutor = 0;
-    u16 moveIndex = 0;
-    gSpecialVar_0x8005 = 0;
-
-    moveTutor = VarGet(VAR_TEMP_E);
-    moveIndex = VarGet(VAR_TEMP_D);
-
-    if (moveTutor != 0)
-    {
-        i = 0;
-        do
-        {
-            if (gTutorMoves[i] == sBattleFrontier_TutorMoves2[moveIndex])
-            {
-                gSpecialVar_0x8005 = i;
-                break;
-            }
-            i++;
-        } while (i < TUTOR_MOVE_COUNT);
-    }
-    else
-    {
-        i = 0;
-        do
-        {
-            if (gTutorMoves[i] == sBattleFrontier_TutorMoves1[moveIndex])
-            {
-                gSpecialVar_0x8005 = i;
-                break;
-            }
-            i++;
-        } while (i < TUTOR_MOVE_COUNT);
     }
 }
 
@@ -3266,7 +3203,7 @@ static void Task_DeoxysRockInteraction(u8 taskId)
 static void ChangeDeoxysRockLevel(u8 rockLevel)
 {
     u8 objectEventId;
-    LoadPalette(&sDeoxysRockPalettes[rockLevel], OBJ_PLTT_ID(10), PLTT_SIZEOF(4));
+    LoadPalette(&sDeoxysRockPalettes[rockLevel], 0x1A0, 8);
     TryGetObjectEventIdByLocalIdAndMap(LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
 
     if (rockLevel == 0)
@@ -3314,7 +3251,7 @@ void IncrementBirthIslandRockStepCount(void)
 
 void SetDeoxysRockPalette(void)
 {
-    LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], OBJ_PLTT_ID(10), PLTT_SIZEOF(4));
+    LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], 0x1A0, 8);
     BlendPalettes(0x04000000, 16, 0);
 }
 

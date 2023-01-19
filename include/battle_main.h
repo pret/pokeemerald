@@ -22,21 +22,6 @@ struct MultiPartnerMenuPokemon
     /*0x1D*/ u8 language;
 };
 
-// defines for the u8 array gTypeEffectiveness
-#define TYPE_EFFECT_ATK_TYPE(i)((gTypeEffectiveness[i + 0]))
-#define TYPE_EFFECT_DEF_TYPE(i)((gTypeEffectiveness[i + 1]))
-#define TYPE_EFFECT_MULTIPLIER(i)((gTypeEffectiveness[i + 2]))
-
-// defines for the gTypeEffectiveness multipliers
-#define TYPE_MUL_NO_EFFECT          0
-#define TYPE_MUL_NOT_EFFECTIVE      5
-#define TYPE_MUL_NORMAL             10
-#define TYPE_MUL_SUPER_EFFECTIVE    20
-
-// special type table Ids
-#define TYPE_FORESIGHT  0xFE
-#define TYPE_ENDTABLE   0xFF
-
 // defines for the 'DoBounceEffect' function
 #define BOUNCE_MON          0x0
 #define BOUNCE_HEALTHBOX    0x1
@@ -71,18 +56,22 @@ void BattleTurnPassed(void);
 u8 IsRunningFromBattleImpossible(void);
 void SwitchPartyOrder(u8 battlerId);
 void SwapTurnOrder(u8 id1, u8 id2);
+u32 GetBattlerTotalSpeedStat(u8 battlerId);
+s8 GetChosenMovePriority(u32 battlerId);
+s8 GetMovePriority(u32 battlerId, u16 move);
 u8 GetWhoStrikesFirst(u8 battlerId1, u8 battlerId2, bool8 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 battlerId);
 void SpecialStatusesClear(void);
+void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk);
+bool32 IsWildMonSmart(void);
 
 extern struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE];
 
 extern const struct SpriteTemplate gUnusedBattleInitSprite;
 extern const struct OamData gOamData_BattleSpriteOpponentSide;
 extern const struct OamData gOamData_BattleSpritePlayerSide;
-extern const u8 gTypeEffectiveness[336];
 extern const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1];
 extern const struct TrainerMoney gTrainerMoneyTable[];
 extern const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1];

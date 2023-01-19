@@ -2,6 +2,7 @@
 #include "malloc.h"
 #include "battle_pyramid.h"
 #include "berry.h"
+#include "debug.h"
 #include "decoration.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -497,12 +498,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Lugia,                 OBJ_EVENT_PAL_TAG_LUGIA},
     {gObjectEventPal_RubySapphireBrendan,   OBJ_EVENT_PAL_TAG_RS_BRENDAN},
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
-#ifdef BUGFIX
-    {NULL,                                  OBJ_EVENT_PAL_TAG_NONE}, 
-#else
-    {}, // BUG: FindObjectEventPaletteIndexByTag looks for OBJ_EVENT_PAL_TAG_NONE and not 0x0.
-        // If it's looking for a tag that isn't in this table, the game locks in an infinite loop.
-#endif
+    {},
 };
 
 static const u16 sReflectionPaletteTags_Brendan[] = {
@@ -1998,12 +1994,7 @@ static void LoadObjectEventPalette(u16 paletteTag)
 {
     u16 i = FindObjectEventPaletteIndexByTag(paletteTag);
 
-// FindObjectEventPaletteIndexByTag returns 0xFF on failure, not OBJ_EVENT_PAL_TAG_NONE.
-#ifdef BUGFIX
-    if (i != 0xFF)
-#else
-    if (i != OBJ_EVENT_PAL_TAG_NONE)
-#endif
+    if (i != OBJ_EVENT_PAL_TAG_NONE) // always true
         LoadSpritePaletteIfTagExists(&sObjectEventSpritePalettes[i]);
 }
 
@@ -2026,10 +2017,9 @@ static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *spritePalette
 
 void PatchObjectPalette(u16 paletteTag, u8 paletteSlot)
 {
-    // paletteTag is assumed to exist in sObjectEventSpritePalettes
     u8 paletteIndex = FindObjectEventPaletteIndexByTag(paletteTag);
 
-    LoadPalette(sObjectEventSpritePalettes[paletteIndex].data, OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
+    LoadPalette(sObjectEventSpritePalettes[paletteIndex].data, 16 * paletteSlot + 0x100, 0x20);
 }
 
 void PatchObjectPaletteRange(const u16 *paletteTags, u8 minSlot, u8 maxSlot)
@@ -4652,6 +4642,12 @@ static u8 GetCollisionInDirection(struct ObjectEvent *objectEvent, u8 direction)
 u8 GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 dir)
 {
     u8 direction = dir;
+
+#if DEBUG_FLAG_NO_COLLISION != 0
+    if (FlagGet(DEBUG_FLAG_NO_COLLISION))
+        return COLLISION_NONE;
+#endif
+
     if (IsCoordOutsideObjectEventMovementRange(objectEvent, x, y))
         return COLLISION_OUTSIDE_RANGE;
     else if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction))

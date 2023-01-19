@@ -618,9 +618,9 @@ static void GetOpponentMostCommonMonType(void)
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         u32 species = gFacilityTrainerMons[gFrontierTempParty[i]].species;
-        typeCounts[gSpeciesInfo[species].types[0]]++;
-        if (gSpeciesInfo[species].types[0] != gSpeciesInfo[species].types[1])
-            typeCounts[gSpeciesInfo[species].types[1]]++;
+        typeCounts[gSpeciesInfo[species].type1]++;
+        if (gSpeciesInfo[species].type1 != gSpeciesInfo[species].type2)
+            typeCounts[gSpeciesInfo[species].type2]++;
     }
 
     // Determine which are the two most-common types.
@@ -893,13 +893,13 @@ u32 GetAiScriptsInBattleFactory(void)
         int challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / 7;
 
         if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
-            return AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY;
+            return AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY;
         else if (challengeNum < 2)
             return 0;
         else if (challengeNum < 4)
-            return AI_SCRIPT_CHECK_BAD_MOVE;
+            return AI_FLAG_CHECK_BAD_MOVE;
         else
-            return AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY;
+            return AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY;
     }
 }
 

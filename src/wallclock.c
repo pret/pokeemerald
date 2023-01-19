@@ -644,17 +644,17 @@ static void LoadWallClockGraphics(void)
     LZ77UnCompVram(gWallClock_Gfx, (void *)VRAM);
 
     if (gSpecialVar_0x8004 == MALE)
-        LoadPalette(gWallClockMale_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+        LoadPalette(gWallClockMale_Pal, 0, 32);
     else
-        LoadPalette(gWallClockFemale_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+        LoadPalette(gWallClockFemale_Pal, 0, 32);
 
-    LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(14), PLTT_SIZE_4BPP);
-    LoadPalette(sTextPrompt_Pal, BG_PLTT_ID(12), PLTT_SIZEOF(4));
+    LoadPalette(GetOverworldTextboxPalettePtr(), 0xe0, 32);
+    LoadPalette(sTextPrompt_Pal, 0xc0, 8);
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 0x250, BG_PLTT_ID(13));
+    LoadUserWindowBorderGfx(0, 0x250, 0xd0);
     ClearScheduledBgCopiesToVram();
     ScanlineEffect_Stop();
     ResetTasks();

@@ -186,7 +186,7 @@ static const u8 sText_PyramidFloor6[] = _("PYRAMID FLOOR 6");
 static const u8 sText_PyramidFloor7[] = _("PYRAMID FLOOR 7");
 static const u8 sText_Pyramid[] = _("PYRAMID");
 
-static const u8 * const sBattlePyramid_MapHeaderStrings[FRONTIER_STAGES_PER_CHALLENGE + 1] =
+static const u8 *const sBattlePyramid_MapHeaderStrings[FRONTIER_STAGES_PER_CHALLENGE + 1] =
 {
     sText_PyramidFloor1,
     sText_PyramidFloor2,
@@ -385,8 +385,8 @@ static void LoadMapNamePopUpWindowBg(void)
     CallWindowFunction(popupWindowId, DrawMapNamePopUpFrame);
     PutWindowTilemap(popupWindowId);
     if (gMapHeader.weather == WEATHER_UNDERWATER_BUBBLES)
-        LoadPalette(&sMapPopUp_Palette_Underwater, BG_PLTT_ID(14), sizeof(sMapPopUp_Palette_Underwater));
+        LoadPalette(&sMapPopUp_Palette_Underwater, 0xE0, sizeof(sMapPopUp_Palette_Underwater));
     else
-        LoadPalette(sMapPopUp_PaletteTable[popUpThemeId], BG_PLTT_ID(14), sizeof(sMapPopUp_PaletteTable[0]));
+        LoadPalette(sMapPopUp_PaletteTable[popUpThemeId], 0xE0, sizeof(sMapPopUp_PaletteTable[0]));
     BlitBitmapToWindow(popupWindowId, sMapPopUp_Table[popUpThemeId], 0, 0, 80, 24);
 }

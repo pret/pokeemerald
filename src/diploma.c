@@ -72,7 +72,7 @@ void CB2_ShowDiploma(void)
     ResetSpriteData();
     ResetPaletteFade();
     FreeAllSpritePalettes();
-    LoadPalette(sDiplomaPalettes, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+    LoadPalette(sDiplomaPalettes, 0, 64);
     sDiplomaTilemapPtr = Alloc(0x1000);
     InitDiplomaBg();
     InitDiplomaWindow();
@@ -196,7 +196,7 @@ static void InitDiplomaWindow(void)
 {
     InitWindows(sDiplomaWinTemplates);
     DeactivateAllTextPrinters();
-    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
 }

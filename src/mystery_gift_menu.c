@@ -33,7 +33,7 @@
 #include "constants/cable_club.h"
 
 #define LIST_MENU_TILE_NUM 10
-#define LIST_MENU_PAL_NUM BG_PLTT_ID(14)
+#define LIST_MENU_PAL_NUM 224
 
 static void LoadMysteryGiftTextboxBorder(u8 bgId);
 static void CreateMysteryGiftTask(void);
@@ -58,7 +58,7 @@ struct MysteryGiftTaskData
     bool8 isWonderNews;
     bool8 sourceIsFriend;
     u8 msgId;
-    u8 * clientMsg;
+    u8 *clientMsg;
 };
 
 static const struct BgTemplate sBGTemplates[] = {
@@ -411,14 +411,14 @@ static bool32 HandleMysteryGiftOrEReaderSetup(s32 isEReader)
         gMain.state++;
         break;
     case 1:
-        LoadPalette(sTextboxBorder_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-        LoadPalette(GetTextWindowPalette(2), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
-        Menu_LoadStdPalAt(BG_PLTT_ID(12));
-        LoadUserWindowBorderGfx(0, 0xA, BG_PLTT_ID(14));
-        LoadUserWindowBorderGfx_(0, 0x1, BG_PLTT_ID(15));
-        FillBgTilemapBufferRect(0, 0x000, 0, 0, 32, 32, 17);
-        FillBgTilemapBufferRect(1, 0x000, 0, 0, 32, 32, 17);
-        FillBgTilemapBufferRect(2, 0x000, 0, 0, 32, 32, 17);
+        LoadPalette(sTextboxBorder_Pal, 0, 0x20);
+        LoadPalette(GetTextWindowPalette(2), 0xd0, 0x20);
+        Menu_LoadStdPalAt(0xC0);
+        LoadUserWindowBorderGfx(0, 0xA, 0xE0);
+        LoadUserWindowBorderGfx_(0, 0x1, 0xF0);
+        FillBgTilemapBufferRect(0, 0x000, 0, 0, 32, 32, 0x11);
+        FillBgTilemapBufferRect(1, 0x000, 0, 0, 32, 32, 0x11);
+        FillBgTilemapBufferRect(2, 0x000, 0, 0, 32, 32, 0x11);
         MG_DrawCheckerboardPattern(3);
         PrintMysteryGiftOrEReaderTopMenu(isEReader, FALSE);
         gMain.state++;
@@ -476,8 +476,8 @@ void MainCB_FreeAllBuffersAndReturnToInitTitleScreen(void)
 
 void PrintMysteryGiftOrEReaderTopMenu(bool8 isEReader, bool32 useCancel)
 {
-    const u8 * header;
-    const u8 * options;
+    const u8 *header;
+    const u8 *options;
     FillWindowPixelBuffer(0, 0);
     if (!isEReader)
     {
@@ -505,16 +505,16 @@ void MG_DrawCheckerboardPattern(u32 bg)
 {
     s32 i = 0, j;
 
-    FillBgTilemapBufferRect(bg, 0x003, 0, 0, 32, 2, 17);
+    FillBgTilemapBufferRect(bg, 0x003, 0, 0, 32, 2, 0x11);
 
     for (i = 0; i < 18; i++)
     {
         for (j = 0; j < 32; j++)
         {
             if ((i & 1) != (j & 1))
-                FillBgTilemapBufferRect(bg, 1, j, i + 2, 1, 1, 17);
+                FillBgTilemapBufferRect(bg, 1, j, i + 2, 1, 1, 0x11);
             else
-                FillBgTilemapBufferRect(bg, 2, j, i + 2, 1, 1, 17);
+                FillBgTilemapBufferRect(bg, 2, j, i + 2, 1, 1, 0x11);
         }
     }
 }
@@ -524,10 +524,10 @@ static void ClearScreenInBg0(bool32 ignoreTopTwoRows)
     switch (ignoreTopTwoRows)
     {
     case 0:
-        FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 17);
+        FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0x11);
         break;
     case 1:
-        FillBgTilemapBufferRect(0, 0, 0, 2, 32, 30, 17);
+        FillBgTilemapBufferRect(0, 0, 0, 2, 32, 30, 0x11);
         break;
     }
     CopyBgTilemapBufferToVram(0);
@@ -589,7 +589,7 @@ static void ShowDownArrow(void)
 }
 
 // Unused
-static bool32 HideDownArrowAndWaitButton(u8 * textState)
+static bool32 HideDownArrowAndWaitButton(u8 *textState)
 {
     switch (*textState)
     {
@@ -606,7 +606,7 @@ static bool32 HideDownArrowAndWaitButton(u8 * textState)
     return FALSE;
 }
 
-static bool32 PrintStringAndWait2Seconds(u8 * counter, const u8 * str)
+static bool32 PrintStringAndWait2Seconds(u8 *counter, const u8 *str)
 {
     if (*counter == 0)
         AddTextPrinterToWindow1(str);
@@ -623,7 +623,7 @@ static bool32 PrintStringAndWait2Seconds(u8 * counter, const u8 * str)
     }
 }
 
-static u32 MysteryGift_HandleThreeOptionMenu(u8 * unused0, u16 * unused1, u8 whichMenu)
+static u32 MysteryGift_HandleThreeOptionMenu(u8 *unused0, u16 * unused1, u8 whichMenu)
 {
     struct ListMenuTemplate listMenuTemplate = sListMenuTemplate_ThreeOptions;
     struct WindowTemplate windowTemplate = sWindowTemplate_ThreeOptions;
@@ -654,7 +654,7 @@ static u32 MysteryGift_HandleThreeOptionMenu(u8 * unused0, u16 * unused1, u8 whi
     return response;
 }
 
-s8 DoMysteryGiftYesNo(u8 * textState, u16 * windowId, bool8 yesNoBoxPlacement, const u8 * str)
+s8 DoMysteryGiftYesNo(u8 *textState, u16 * windowId, bool8 yesNoBoxPlacement, const u8 *str)
 {
     struct WindowTemplate windowTemplate;
     s8 input;
@@ -711,7 +711,7 @@ s8 DoMysteryGiftYesNo(u8 * textState, u16 * windowId, bool8 yesNoBoxPlacement, c
 }
 
 // Handle the "Receive/Send/Toss" menu that appears when selecting Wonder Card/News
-static s32 HandleGiftSelectMenu(u8 * textState, u16 * windowId, bool32 cannotToss, bool32 cannotSend)
+static s32 HandleGiftSelectMenu(u8 *textState, u16 * windowId, bool32 cannotToss, bool32 cannotSend)
 {
     struct WindowTemplate windowTemplate;
     s32 input;
@@ -778,7 +778,7 @@ static bool32 ValidateCardOrNews(bool32 isWonderNews)
         return ValidateSavedWonderNews();
 }
 
-static bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 isWonderNews)
+static bool32 HandleLoadWonderCardOrNews(u8 *state, bool32 isWonderNews)
 {
     switch (*state)
     {
@@ -844,7 +844,7 @@ static bool32 ExitWonderCardOrNews(bool32 isWonderNews, bool32 useCancel)
     }
 }
 
-static s32 AskDiscardGift(u8 * textState, u16 * windowId, bool32 isWonderNews)
+static s32 AskDiscardGift(u8 *textState, u16 * windowId, bool32 isWonderNews)
 {
     if (!isWonderNews)
         return DoMysteryGiftYesNo(textState, windowId, TRUE, gText_IfThrowAwayCardEventWontHappen);
@@ -852,7 +852,7 @@ static s32 AskDiscardGift(u8 * textState, u16 * windowId, bool32 isWonderNews)
         return DoMysteryGiftYesNo(textState, windowId, TRUE, gText_OkayToDiscardNews);
 }
 
-static bool32 PrintThrownAway(u8 * textState, bool32 isWonderNews)
+static bool32 PrintThrownAway(u8 *textState, bool32 isWonderNews)
 {
     if (!isWonderNews)
         return PrintMysteryGiftMenuMessage(textState, gText_WonderCardThrownAway);
@@ -860,7 +860,7 @@ static bool32 PrintThrownAway(u8 * textState, bool32 isWonderNews)
         return PrintMysteryGiftMenuMessage(textState, gText_WonderNewsThrownAway);
 }
 
-static bool32 SaveOnMysteryGiftMenu(u8 * state)
+static bool32 SaveOnMysteryGiftMenu(u8 *state)
 {
     switch (*state)
     {
@@ -889,9 +889,9 @@ static bool32 SaveOnMysteryGiftMenu(u8 * state)
     return FALSE;
 }
 
-static const u8 * GetClientResultMessage(bool32 * successMsg, bool8 isWonderNews, bool8 sourceIsFriend, u32 msgId)
+static const u8 *GetClientResultMessage(bool32 * successMsg, bool8 isWonderNews, bool8 sourceIsFriend, u32 msgId)
 {
-    const u8 * msg = NULL;
+    const u8 *msg = NULL;
     *successMsg = FALSE;
 
     switch (msgId)
@@ -961,7 +961,7 @@ static const u8 * GetClientResultMessage(bool32 * successMsg, bool8 isWonderNews
     return msg;
 }
 
-static bool32 PrintSuccessMessage(u8 * state, const u8 * msg, u16 * timer)
+static bool32 PrintSuccessMessage(u8 *state, const u8 *msg, u16 * timer)
 {
     switch (*state)
     {
@@ -988,9 +988,9 @@ static bool32 PrintSuccessMessage(u8 * state, const u8 * msg, u16 * timer)
     return FALSE;
 }
 
-static const u8 * GetServerResultMessage(bool32 * wonderSuccess, bool8 sourceIsFriend, u32 msgId)
+static const u8 *GetServerResultMessage(bool32 * wonderSuccess, bool8 sourceIsFriend, u32 msgId)
 {
-    const u8 * result = gText_CommunicationError;
+    const u8 *result = gText_CommunicationError;
     *wonderSuccess = FALSE;
     switch (msgId)
     {
@@ -1045,10 +1045,10 @@ static const u8 * GetServerResultMessage(bool32 * wonderSuccess, bool8 sourceIsF
     return result;
 }
 
-static bool32 PrintServerResultMessage(u8 * state, u16 * timer, bool8 sourceIsFriend, u32 msgId)
+static bool32 PrintServerResultMessage(u8 *state, u16 * timer, bool8 sourceIsFriend, u32 msgId)
 {
     bool32 wonderSuccess;
-    const u8 * str = GetServerResultMessage(&wonderSuccess, sourceIsFriend, msgId);
+    const u8 *str = GetServerResultMessage(&wonderSuccess, sourceIsFriend, msgId);
     if (wonderSuccess)
         return PrintSuccessMessage(state, str, timer);
     else
@@ -1258,7 +1258,7 @@ static void Task_MysteryGift(u8 taskId)
             data->state = MG_STATE_CLIENT_LINK_END;
             break;
         case CLI_RET_COPY_MSG:
-            memcpy(data->clientMsg, MysteryGiftClient_GetMsg(), CLIENT_MAX_MSG_SIZE);
+            memcpy(data->clientMsg, MysteryGiftClient_GetMsg(), 0x40);
             MysteryGiftClient_AdvanceState();
             break;
         case CLI_RET_PRINT_MSG:
@@ -1371,9 +1371,9 @@ static void Task_MysteryGift(u8 taskId)
             if (data->msgId == CLI_MSG_NEWS_RECEIVED)
             {
                 if (data->sourceIsFriend == TRUE)
-                    WonderNews_SetReward(WONDER_NEWS_RECV_FRIEND);
+                    GenerateRandomWonderNews(WONDER_NEWS_RECV_FRIEND);
                 else
-                    WonderNews_SetReward(WONDER_NEWS_RECV_WIRELESS);
+                    GenerateRandomWonderNews(WONDER_NEWS_RECV_WIRELESS);
             }
             if (!successMsg)
             {
@@ -1580,7 +1580,7 @@ static void Task_MysteryGift(u8 taskId)
         {
             if (data->sourceIsFriend == TRUE && data->msgId == SVR_MSG_NEWS_SENT)
             {
-                WonderNews_SetReward(WONDER_NEWS_SENT);
+                GenerateRandomWonderNews(WONDER_NEWS_SENT);
                 data->state = MG_STATE_SAVE_LOAD_GIFT;
             }
             else

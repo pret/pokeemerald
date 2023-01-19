@@ -62,6 +62,7 @@ static EWRAM_DATA u16 sMovingNpcMapNum = 0;
 static EWRAM_DATA u16 sFieldEffectScriptId = 0;
 
 static u8 sBrailleWindowId;
+static bool8 gIsScriptedWildDouble;
 
 extern const SpecialFunc gSpecials[];
 extern const u8 *gStdScripts[];
@@ -84,7 +85,7 @@ static const u8 sScriptConditionTable[6][3] =
     1, 0, 1, // !=
 };
 
-static u8 * const sScriptStringVars[] =
+static u8 *const sScriptStringVars[] =
 {
     gStringVar1,
     gStringVar2,
@@ -1523,7 +1524,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
 
     winTemplate = CreateWindowTemplate(0, xWindow, yWindow + 1, width, height, 0xF, 0x1);
     sBrailleWindowId = AddWindow(&winTemplate);
-    LoadUserWindowBorderGfx(sBrailleWindowId, 0x214, BG_PLTT_ID(14));
+    LoadUserWindowBorderGfx(sBrailleWindowId, 0x214, 0xE0);
     DrawStdWindowFrame(sBrailleWindowId, FALSE);
     PutWindowTilemap(sBrailleWindowId);
     FillWindowPixelBuffer(sBrailleWindowId, PIXEL_FILL(1));
@@ -1871,15 +1872,33 @@ bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
     u16 species = ScriptReadHalfword(ctx);
     u8 level = ScriptReadByte(ctx);
     u16 item = ScriptReadHalfword(ctx);
+    u16 species2 = ScriptReadHalfword(ctx);
+    u8 level2 = ScriptReadByte(ctx);
+    u16 item2 = ScriptReadHalfword(ctx);
 
-    CreateScriptedWildMon(species, level, item);
+    if(species2 == SPECIES_NONE)
+    {
+        CreateScriptedWildMon(species, level, item);
+        gIsScriptedWildDouble = FALSE;
+    }
+    else
+    {
+        CreateScriptedDoubleWildMon(species, level, item, species2, level2, item2);
+        gIsScriptedWildDouble = TRUE;
+    }
+
     return FALSE;
 }
 
 bool8 ScrCmd_dowildbattle(struct ScriptContext *ctx)
 {
-    BattleSetup_StartScriptedWildBattle();
+    if (gIsScriptedWildDouble == FALSE)
+        BattleSetup_StartScriptedWildBattle();
+    else
+        BattleSetup_StartScriptedDoubleWildBattle();
+
     ScriptContext_Stop();
+
     return TRUE;
 }
 

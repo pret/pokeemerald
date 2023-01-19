@@ -146,7 +146,7 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
             [3] = {
                 .species = SPECIES_CACTURNE,
                 .heldItem = ITEM_QUICK_CLAW,
-                .moves = { MOVE_GIGA_DRAIN, MOVE_FAINT_ATTACK, MOVE_THUNDER_PUNCH, MOVE_GROWTH },
+                .moves = { MOVE_GIGA_DRAIN, MOVE_FEINT_ATTACK, MOVE_THUNDER_PUNCH, MOVE_GROWTH },
                 .hpEV = 55,
                 .attackEV = 0,
                 .defenseEV = 100,
@@ -473,7 +473,7 @@ bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet * hillSet)
     return result;
 }
 
-static bool32 TryReadTrainerHill_Internal(struct EReaderTrainerHillSet * dest, u8 * buffer)
+static bool32 TryReadTrainerHill_Internal(struct EReaderTrainerHillSet * dest, u8 *buffer)
 {
     if (TryReadSpecialSaveSector(SECTOR_ID_TRAINER_HILL, buffer) != SAVE_STATUS_OK)
         return FALSE;

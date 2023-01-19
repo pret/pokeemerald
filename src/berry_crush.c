@@ -914,7 +914,7 @@ static const u8 *const sResultsTexts[] =
     [RESULTS_PAGE_POWER + NUM_RESULTS_PAGES]       = gText_PressingPowerRankings,
 };
 
-static u32 (*const sBerryCrushCommands[])(struct BerryCrushGame * game, u8 * data) =
+static u32 (*const sBerryCrushCommands[])(struct BerryCrushGame * game, u8 *data) =
 {
     [CMD_NONE]             = NULL,
     [CMD_FADE]             = Cmd_BeginNormalPaletteFade,
@@ -1235,7 +1235,7 @@ static s32 ShowGameDisplay(void)
         gPaletteFade.bufferTransferDisabled = TRUE;
         break;
     case 7:
-        LoadPalette(gBerryCrush_Crusher_Pal, BG_PLTT_ID(0), 12 * PLTT_SIZE_4BPP);
+        LoadPalette(gBerryCrush_Crusher_Pal, 0, 0x180);
         CopyToBgTilemapBuffer(1, sCrusherTop_Tilemap, 0, 0);
         CopyToBgTilemapBuffer(2, sContainerCap_Tilemap, 0, 0);
         CopyToBgTilemapBuffer(3, sBg_Tilemap, 0, 0);
@@ -1751,7 +1751,7 @@ static bool32 OpenResultsWindow(struct BerryCrushGame *game, struct BerryCrushGa
         FillWindowPixelBuffer(gfx->resultsWindowId, PIXEL_FILL(0));
         break;
     case 2:
-        LoadUserWindowBorderGfx_(gfx->resultsWindowId, 541, BG_PLTT_ID(13));
+        LoadUserWindowBorderGfx_(gfx->resultsWindowId, 541, 208);
         DrawStdFrameWithCustomTileAndPalette(gfx->resultsWindowId, FALSE, 541, 13);
         break;
     case 3:
@@ -1809,7 +1809,7 @@ static void Task_ShowRankings(u8 taskId)
         tWindowId = AddWindow(&sWindowTemplate_Rankings);
         PutWindowTilemap(tWindowId);
         FillWindowPixelBuffer(tWindowId, PIXEL_FILL(0));
-        LoadUserWindowBorderGfx_(tWindowId, 541, BG_PLTT_ID(13));
+        LoadUserWindowBorderGfx_(tWindowId, 541, 208);
         DrawStdFrameWithCustomTileAndPalette(tWindowId, FALSE, 541, 13);
         break;
     case 1:
@@ -1947,7 +1947,7 @@ static void DrawPlayerNameWindows(struct BerryCrushGame *game)
 static void CopyPlayerNameWindowGfxToBg(struct BerryCrushGame *game)
 {
     u8 i = 0;
-    u8 * windowGfx;
+    u8 *windowGfx;
 
     LZ77UnCompWram(gBerryCrush_TextWindows_Tilemap, gDecompressionBuffer);
 

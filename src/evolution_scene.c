@@ -8,6 +8,7 @@
 #include "evolution_scene.h"
 #include "evolution_graphics.h"
 #include "gpu_regs.h"
+#include "item.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "m4a.h"
@@ -259,11 +260,11 @@ void EvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopEvo, u
     currSpecies = GetMonData(mon, MON_DATA_SPECIES);
     trainerId = GetMonData(mon, MON_DATA_OT_ID);
     personality = GetMonData(mon, MON_DATA_PERSONALITY);
-    DecompressPicFromTable_2(&gMonFrontPicTable[currSpecies],
-                             gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
-                             currSpecies);
+    DecompressPicFromTableGender(gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
+                                currSpecies,
+                                personality);
     pokePal = GetMonSpritePalStructFromOtIdPersonality(currSpecies, trainerId, personality);
-    LoadCompressedPalette(pokePal->data, OBJ_PLTT_ID(1), PLTT_SIZE_4BPP);
+    LoadCompressedPalette(pokePal->data, 0x110, 0x20);
 
     SetMultiuseSpriteTemplateToPokemon(currSpecies, B_POSITION_OPPONENT_LEFT);
     gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
@@ -274,11 +275,11 @@ void EvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopEvo, u
     gSprites[id].invisible = TRUE;
 
     // postEvo sprite
-    DecompressPicFromTable_2(&gMonFrontPicTable[postEvoSpecies],
-                             gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT],
-                             postEvoSpecies);
+    DecompressPicFromTableGender(gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT],
+                                postEvoSpecies,
+                                personality);
     pokePal = GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, trainerId, personality);
-    LoadCompressedPalette(pokePal->data, OBJ_PLTT_ID(2), PLTT_SIZE_4BPP);
+    LoadCompressedPalette(pokePal->data, 0x120, 0x20);
 
     SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, B_POSITION_OPPONENT_RIGHT);
     gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
@@ -351,12 +352,12 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 4;
 
-    DecompressPicFromTable_2(&gMonFrontPicTable[postEvoSpecies],
-                             gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT],
-                             postEvoSpecies);
+    DecompressPicFromTableGender(gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT],
+                                postEvoSpecies,
+                                personality);
     pokePal = GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, trainerId, personality);
 
-    LoadCompressedPalette(pokePal->data, OBJ_PLTT_ID(2), PLTT_SIZE_4BPP);
+    LoadCompressedPalette(pokePal->data, 0x120, 0x20);
 
     SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, B_POSITION_OPPONENT_RIGHT);
     gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
@@ -423,11 +424,11 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
             const struct CompressedSpritePalette* pokePal;
             u32 trainerId = GetMonData(mon, MON_DATA_OT_ID);
             u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
-            DecompressPicFromTable_2(&gMonFrontPicTable[postEvoSpecies],
-                                     gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT],
-                                     postEvoSpecies);
+            DecompressPicFromTableGender(gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT],
+                                        postEvoSpecies,
+                                        personality);
             pokePal = GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, trainerId, personality);
-            LoadCompressedPalette(pokePal->data, OBJ_PLTT_ID(2), PLTT_SIZE_4BPP);
+            LoadCompressedPalette(pokePal->data, 0x120, 0x20);
             gMain.state++;
         }
         break;
@@ -487,12 +488,12 @@ void TradeEvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, u8 preEvoSprit
     sEvoStructPtr = AllocZeroed(sizeof(struct EvoInfo));
     sEvoStructPtr->preEvoSpriteId = preEvoSpriteId;
 
-    DecompressPicFromTable_2(&gMonFrontPicTable[postEvoSpecies],
-                            gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
-                            postEvoSpecies);
+    DecompressPicFromTableGender(gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
+                                postEvoSpecies,
+                                personality);
 
     pokePal = GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, trainerId, personality);
-    LoadCompressedPalette(pokePal->data, OBJ_PLTT_ID(2), PLTT_SIZE_4BPP);
+    LoadCompressedPalette(pokePal->data, 0x120, 0x20);
 
     SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, B_POSITION_OPPONENT_LEFT);
     gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
@@ -548,7 +549,12 @@ static void CB2_TradeEvolutionSceneUpdate(void)
 static void CreateShedinja(u16 preEvoSpecies, struct Pokemon *mon)
 {
     u32 data = 0;
-    if (gEvolutionTable[preEvoSpecies][0].method == EVO_LEVEL_NINJASK && gPlayerPartyCount < PARTY_SIZE)
+    u16 ball = ITEM_POKE_BALL;
+    if (gEvolutionTable[preEvoSpecies][0].method == EVO_LEVEL_NINJASK && gPlayerPartyCount < PARTY_SIZE
+    #if P_SHEDINJA_BALL >= GEN_4
+        && (CheckBagHasItem(ball, 1))
+    #endif
+    )
     {
         s32 i;
         struct Pokemon *shedinja = &gPlayerParty[gPlayerPartyCount];
@@ -559,6 +565,11 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon *mon)
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_HELD_ITEM, &data);
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_MARKINGS, &data);
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_ENCRYPT_SEPARATOR, &data);
+
+    #if P_SHEDINJA_BALL >= GEN_4
+        SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_POKEBALL, &ball);
+        RemoveBagItem(ball, 1);
+    #endif
 
         for (i = MON_DATA_COOL_RIBBON; i < MON_DATA_COOL_RIBBON + CONTEST_CATEGORIES_COUNT; i++)
             SetMonData(&gPlayerParty[gPlayerPartyCount], i, &data);
@@ -772,7 +783,7 @@ static void Task_EvolutionScene(u8 taskId)
     case EVOSTATE_TRY_LEARN_MOVE:
         if (!IsTextPrinterActive(0))
         {
-            var = MonTryLearningNewMove(mon, gTasks[taskId].tLearnsFirstMove);
+            var = MonTryLearningNewMoveEvolution(mon, gTasks[taskId].tLearnsFirstMove);
             if (var != MOVE_NONE && !gTasks[taskId].tEvoWasStopped)
             {
                 u8 text[20];
@@ -1192,7 +1203,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
     case T_EVOSTATE_TRY_LEARN_MOVE:
         if (!IsTextPrinterActive(0) && IsFanfareTaskInactive() == TRUE)
         {
-            var = MonTryLearningNewMove(mon, gTasks[taskId].tLearnsFirstMove);
+            var = MonTryLearningNewMoveEvolution(mon, gTasks[taskId].tLearnsFirstMove);
             if (var != MOVE_NONE && !gTasks[taskId].tEvoWasStopped)
             {
                 u8 text[20];
@@ -1301,7 +1312,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
         case T_MVSTATE_PRINT_YES_NO:
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
-                LoadUserWindowBorderGfx(0, 0xA8, BG_PLTT_ID(14));
+                LoadUserWindowBorderGfx(0, 0xA8, 0xE0);
                 CreateYesNoMenu(&gTradeEvolutionSceneYesNoWindowTemplate, 0xA8, 0xE, 0);
                 sEvoCursorPos = 0;
                 gTasks[taskId].tLearnMoveState++;
@@ -1507,7 +1518,7 @@ static void Task_UpdateBgPalette(u8 taskId)
         else
         {
             // Haven't reached final palette in current stage, load the current palette
-            LoadPalette(&sBgAnimPal[tPalStage * 16], BG_PLTT_ID(10), PLTT_SIZE_4BPP);
+            LoadPalette(&sBgAnimPal[tPalStage * 16], 0xA0, 0x20);
             tCycleTimer = 0;
             tPalStage++;
         }
@@ -1605,7 +1616,7 @@ static void StartBgAnimation(bool8 isLink)
     else
         innerBgId = 1, outerBgId = 3;
 
-    LoadPalette(sBgAnim_Intro_Pal, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
+    LoadPalette(sBgAnim_Intro_Pal, 0xA0, 0x20);
 
     DecompressAndLoadBgGfxUsingHeap(1, sBgAnim_Gfx, FALSE, 0, 0);
     CopyToBgTilemapBuffer(innerBgId, sBgAnim_Inner_Tilemap, 0, 0);
@@ -1644,7 +1655,7 @@ static void PauseBgPaletteAnim(void)
     if (taskId != TASK_NONE)
         gTasks[taskId].tPaused = TRUE;
 
-    FillPalette(RGB_BLACK, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
+    FillPalette(RGB_BLACK, 0xA0, 0x20);
 }
 
 #undef tPaused
@@ -1658,7 +1669,7 @@ static void StopBgAnimation(void)
     if ((taskId = FindTaskIdByFunc(Task_AnimateBg)) != TASK_NONE)
         DestroyTask(taskId);
 
-    FillPalette(RGB_BLACK, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
+    FillPalette(RGB_BLACK, 0xA0, 0x20);
     RestoreBgAfterAnim();
 }
 

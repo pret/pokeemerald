@@ -2,7 +2,6 @@
 #include "pokenav.h"
 #include "bg.h"
 #include "menu.h"
-#include "palette.h"
 #include "window.h"
 #include "sound.h"
 #include "dynamic_placeholder_text_util.h"
@@ -432,7 +431,7 @@ static u32 LoopedTask_OpenConditionSearchResults(s32 state)
         SetBgTilemapBuffer(1, gfx->buff);
         CopyToBgTilemapBuffer(1, sConditionSearchResultTilemap, 0, 0);
         CopyBgTilemapBufferToVram(1);
-        CopyPaletteIntoBufferUnfaded(sConditionSearchResultFramePal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+        CopyPaletteIntoBufferUnfaded(sConditionSearchResultFramePal, 0x10, 0x20);
         CopyBgTilemapBufferToVram(1);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -444,7 +443,7 @@ static u32 LoopedTask_OpenConditionSearchResults(s32 state)
     case 2:
         if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
-        CopyPaletteIntoBufferUnfaded(sListBg_Pal, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
+        CopyPaletteIntoBufferUnfaded(sListBg_Pal, 0x20, 32);
         CreateSearchResultsList();
         return LT_INC_AND_PAUSE;
     case 3:
@@ -688,12 +687,12 @@ static void CreateSearchResultsList(void)
     CreatePokenavList(&sConditionSearchResultBgTemplates[1], &template, 0);
 }
 
-static void BufferSearchMonListItem(struct PokenavMonListItem * item, u8 * dest)
+static void BufferSearchMonListItem(struct PokenavMonListItem * item, u8 *dest)
 {
     u8 gender;
     u8 level;
-    u8 * s;
-    const u8 * genderStr;
+    u8 *s;
+    const u8 *genderStr;
 
     // Mon is in party
     if (item->boxId == TOTAL_BOXES_COUNT)

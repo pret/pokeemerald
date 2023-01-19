@@ -35,15 +35,15 @@
 #include "confetti_util.h"
 #include "constants/rgb.h"
 
-#define HALL_OF_FAME_MAX_TEAMS 50
+#define HALL_OF_FAME_MAX_TEAMS 30
 #define TAG_CONFETTI 1001
 
 struct HallofFameMon
 {
     u32 tid;
     u32 personality;
-    u16 species:9;
-    u16 lvl:7;
+    u16 species;
+    u8 lvl;
     u8 nick[POKEMON_NAME_LENGTH];
 };
 
@@ -702,8 +702,8 @@ static void Task_Hof_DisplayPlayer(u8 taskId)
     ShowBg(3);
     gTasks[taskId].tPlayerSpriteID = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId_Debug(gSaveBlock2Ptr->playerGender, TRUE), TRUE, 120, 72, 6, TAG_NONE);
     AddWindow(&sHof_WindowTemplate);
-    LoadWindowGfx(1, gSaveBlock2Ptr->optionsWindowFrameType, 0x21D, BG_PLTT_ID(13));
-    LoadPalette(GetTextWindowPalette(1), BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+    LoadWindowGfx(1, gSaveBlock2Ptr->optionsWindowFrameType, 0x21D, 0xD0);
+    LoadPalette(GetTextWindowPalette(1), 0xE0, 0x20);
     gTasks[taskId].tFrameCount = 120;
     gTasks[taskId].func = Task_Hof_WaitAndPrintPlayerInfo;
 }
@@ -931,7 +931,7 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
             if (currMon->species == SPECIES_EGG)
                 posY += 10;
 
-            spriteId = CreateMonPicSprite_HandleDeoxys(currMon->species, currMon->tid, currMon->personality, TRUE, posX, posY, i, TAG_NONE);
+            spriteId = CreateMonPicSprite(currMon->species, currMon->tid, currMon->personality, TRUE, posX, posY, i, TAG_NONE);
             gSprites[spriteId].oam.priority = 1;
             gTasks[taskId].tMonSpriteId(i) = spriteId;
         }
@@ -1269,7 +1269,7 @@ static void ClearVramOamPltt_LoadHofPal(void)
     DmaFill16(3, 0, plttOffset, plttSize);
 
     ResetPaletteFade();
-    LoadPalette(sHallOfFame_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+    LoadPalette(sHallOfFame_Pal, 0, 0x20);
 }
 
 static void LoadHofGfx(void)

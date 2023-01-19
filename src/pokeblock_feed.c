@@ -727,7 +727,7 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
         // Load mon gfx
         species = GetMonData(mon, MON_DATA_SPECIES2);
         personality = GetMonData(mon, MON_DATA_PERSONALITY);
-        HandleLoadSpecialPokePic_2(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT], species, personality);
+        HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT], species, personality);
         sPokeblockFeed->loadGfxState++;
         break;
     case 1:
@@ -771,7 +771,7 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
         }
         break;
     case 8:
-        LoadCompressedPalette(gBattleTerrainPalette_Frontier, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gBattleTerrainPalette_Frontier, 0x20, 0x60);
         sPokeblockFeed->loadGfxState = 0;
         return TRUE;
     }
@@ -783,8 +783,8 @@ static void HandleInitWindows(void)
 {
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(14));
-    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+    LoadUserWindowBorderGfx(0, 1, 0xE0);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);

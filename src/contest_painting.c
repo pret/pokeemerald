@@ -223,7 +223,7 @@ static void ShowContestPainting(void)
         break;
     case 4:
         PrintContestPaintingCaption(gCurContestWinnerSaveIdx, gCurContestWinnerIsForArtist);
-        SetBackdropFromPalette(sBgPalette);
+        LoadPalette(sBgPalette, 0, 1 * 2);
         DmaClear32(3, PLTT, PLTT_SIZE);
         BeginFastPaletteFade(2);
         SetVBlankCallback(VBlankCB_ContestPainting);
@@ -367,20 +367,18 @@ static void InitContestMonPixels(u16 species, bool8 backPic)
     LZDecompressVram(pal, gContestPaintingMonPalette);
     if (!backPic)
     {
-        HandleLoadSpecialPokePic_DontHandleDeoxys(
-            &gMonFrontPicTable[species],
-            gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
-            species,
-            gContestPaintingWinner->personality);
+        HandleLoadSpecialPokePic(TRUE,
+                                gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
+                                species,
+                                gContestPaintingWinner->personality);
         _InitContestMonPixels(gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT], gContestPaintingMonPalette, (void *)gContestMonPixels);
     }
     else
     {
-        HandleLoadSpecialPokePic_DontHandleDeoxys(
-            &gMonBackPicTable[species],
-            gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT],
-            species,
-            gContestPaintingWinner->personality);
+        HandleLoadSpecialPokePic(FALSE,
+                                gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT],
+                                species,
+                                gContestPaintingWinner->personality);
         _InitContestMonPixels(gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT], gContestPaintingMonPalette, (void *)gContestMonPixels);
     }
 }
@@ -420,7 +418,7 @@ static void LoadContestPaintingFrame(u8 contestWinnerId, bool8 isForArtist)
 {
     u8 x, y;
 
-    LoadPalette(sPictureFramePalettes, BG_PLTT_ID(0), 8 * PLTT_SIZE_4BPP);
+    LoadPalette(sPictureFramePalettes, 0, 0x100);
     if (isForArtist == TRUE)
     {
         // Load Artist's frame
@@ -586,7 +584,7 @@ static void DoContestPaintingImageProcessing(u8 imageEffect)
     ApplyImageProcessingEffects(&gImageProcessingContext);
     ApplyImageProcessingQuantization(&gImageProcessingContext);
     ConvertImageProcessingToGBA(&gImageProcessingContext);
-    LoadPalette(gContestPaintingMonPalette, OBJ_PLTT_ID(0), 16 * PLTT_SIZE_4BPP);
+    LoadPalette(gContestPaintingMonPalette, 0x100, 0x200);
 }
 
 static void CreateContestPaintingPicture(u8 contestWinnerId, bool8 isForArtist)

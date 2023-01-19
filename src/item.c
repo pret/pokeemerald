@@ -163,7 +163,7 @@ bool8 HasAtLeastOneBerry(void)
 {
     u16 i;
 
-    for (i = FIRST_BERRY_INDEX; i < ITEM_BRIGHT_POWDER; i++)
+    for (i = FIRST_BERRY_INDEX; i <= LAST_BERRY_INDEX; i++)
     {
         if (CheckBagHasItem(i, 1) == TRUE)
         {
@@ -880,12 +880,6 @@ const u8 *ItemId_GetName(u16 itemId)
     return gItems[SanitizeItemId(itemId)].name;
 }
 
-// Unused
-u16 ItemId_GetId(u16 itemId)
-{
-    return gItems[SanitizeItemId(itemId)].itemId;
-}
-
 u16 ItemId_GetPrice(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].price;
@@ -945,4 +939,9 @@ ItemUseFunc ItemId_GetBattleFunc(u16 itemId)
 u8 ItemId_GetSecondaryId(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].secondaryId;
+}
+
+u8 ItemId_GetFlingPower(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].flingPower;
 }
