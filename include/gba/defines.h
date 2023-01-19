@@ -78,4 +78,10 @@
 
 #define TOTAL_OBJ_TILE_COUNT 1024
 
+#define PLTT_SIZEOF(n) ((n) * sizeof(u16))
+#define PLTT_SIZE_4BPP PLTT_SIZEOF(16)
+#define PLTT_SIZE_8BPP PLTT_SIZEOF(256)
+
+#define PLTT_OFFSET_4BPP(n) ((n) * PLTT_SIZE_4BPP)
+
 #endif // GUARD_GBA_DEFINES_H
