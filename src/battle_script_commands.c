@@ -5922,6 +5922,7 @@ static void Cmd_moveend(void)
                 if (gBattleResources->flags->flags[i] & RESOURCE_FLAG_EMERGENCY_EXIT)
                 {
                     gBattleResources->flags->flags[i] &= ~RESOURCE_FLAG_EMERGENCY_EXIT;
+                    gSpecialStatuses[i].emergencyExited = TRUE;
                     gBattlerTarget = gBattlerAbility = i;
                     BattleScriptPushCursor();
                     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER || GetBattlerSide(i) == B_SIDE_PLAYER)
@@ -10268,6 +10269,12 @@ static void Cmd_various(void)
             else
                 gBattlescriptCurrInstr += 7;
         }
+        return;
+    case VARIOUS_JUMP_IF_EMERGENCY_EXITED:
+        if (gSpecialStatuses[gActiveBattler].emergencyExited)
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
         return;
     } // End of switch (gBattlescriptCurrInstr[2])
 

@@ -195,6 +195,7 @@ struct SpecialStatus
     // End of byte
     u8 weatherAbilityDone:1;
     u8 terrainAbilityDone:1;
+    u8 emergencyExited:1;
 };
 
 struct SideTimer

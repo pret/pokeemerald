@@ -515,9 +515,11 @@ void HandleAction_UseMove(void)
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
         BattleArena_AddMindPoints(gBattlerAttacker);
 
-    // Record HP of each battler
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
         gBattleStruct->hpBefore[i] = gBattleMons[i].hp;
+        gSpecialStatuses[i].emergencyExited = FALSE;
+    }
 
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
