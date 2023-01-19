@@ -145,6 +145,7 @@ BattleFrontier_Lounge7_EventScript_ChooseRightTutorMove::
 	waitmessage
 	special ShowBattlePointsWindow
 	setvar VAR_TEMP_E, 1
+	setvar VAR_0x8004, SCROLL_MULTI_BF_MOVE_TUTOR_2
 	setvar VAR_0x8006, 0
 	special ShowScrollableMultichoice
 	waitstate
@@ -168,6 +169,7 @@ BattleFrontier_Lounge7_EventScript_ChooseNewRightTutorMove::
 	message BattleFrontier_Lounge7_Text_TeachWhichMove
 	waitmessage
 	setvar VAR_TEMP_E, 1
+	setvar VAR_0x8004, SCROLL_MULTI_BF_MOVE_TUTOR_2
 	setvar VAR_0x8006, 1
 	special ShowScrollableMultichoice
 	waitstate

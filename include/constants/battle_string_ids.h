@@ -630,10 +630,18 @@
 #define STRINGID_ATTACKERHEALEDITSBURN                628
 #define STRINGID_ATTACKERMELTEDTHEICE                 629
 #define STRINGID_TARGETTOUGHEDITOUT                   630
+#define STRINGID_ATTACKERLOSTELECTRICTYPE             631
+#define STRINGID_ATTACKERSWITCHEDSTATWITHTARGET       632
+#define STRINGID_BEINGHITCHARGEDPKMNWITHPOWER         633
+#define STRINGID_SUNLIGHTACTIVATEDABILITY             634
+#define STRINGID_STATWASHEIGHTENED                    635
+#define STRINGID_ELECTRICTERRAINACTIVATEDABILITY      636
+#define STRINGID_ABILITYWEAKENEDFSURROUNDINGMONSSTAT  637
+#define STRINGID_ATTACKERGAINEDSTRENGTHFROMTHEFALLEN  638
 
-#define STRINGID_TEAMGAINEDEXP                        631
+#define STRINGID_TEAMGAINEDEXP                        639
 
-#define BATTLESTRINGS_COUNT                           632
+#define BATTLESTRINGS_COUNT                           640
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

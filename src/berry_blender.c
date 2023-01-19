@@ -2676,7 +2676,7 @@ static void CB2_EndBlenderGame(void)
         switch (Menu_ProcessInputNoWrapClearOnChoose())
         {
         case 1:
-        case -1:
+        case MENU_B_PRESSED:
             sBerryBlender->yesNoAnswer = 1;
             sBerryBlender->gameEndState++;
             for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
