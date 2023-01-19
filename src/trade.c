@@ -5060,7 +5060,7 @@ u16 CompareTradeTypes(void) {
     if (species == SPECIES_NONE) {
         return 0;
     }
-    if (gBaseStats[species].type1 == gSpecialVar_0x8009 || gBaseStats[species].type2 == gSpecialVar_0x8009) {
+    if (gSpeciesInfo[species].type1 == gSpecialVar_0x8009 || gSpeciesInfo[species].type2 == gSpecialVar_0x8009) {
         return 1;
     }
     return 0;
