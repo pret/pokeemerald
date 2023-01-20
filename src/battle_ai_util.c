@@ -2433,8 +2433,8 @@ static bool32 PartyBattlerShouldAvoidHazards(u8 currBattler, u8 switchBattler)
     u16 species = GetMonData(mon, MON_DATA_SPECIES);
     u32 flags = gSideStatuses[GetBattlerSide(currBattler)] & (SIDE_STATUS_SPIKES | SIDE_STATUS_STEALTH_ROCK | SIDE_STATUS_STICKY_WEB | SIDE_STATUS_TOXIC_SPIKES);
     s32 hazardDamage = 0;
-    u8 type1 = gSpeciesInfo[species].type1;
-    u8 type2 = gSpeciesInfo[species].type2;
+    u8 type1 = gSpeciesInfo[species].types[0];
+    u8 type2 = gSpeciesInfo[species].types[1];
     u32 maxHp = GetMonData(mon, MON_DATA_MAX_HP);
 
     if (flags == 0)

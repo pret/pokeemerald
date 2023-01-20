@@ -651,9 +651,6 @@ $(WALLPAPERGFXDIR)/ludicolo/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame2.4bpp $
 $(WALLPAPERGFXDIR)/whiscash/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame2.4bpp $(WALLPAPERGFXDIR)/whiscash/bg.4bpp
 	@cat $^ >$@
 
-$(OBJEVENTGFXDIR)/pics/effects/unknown_4F6D38/0.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 11 -Wnum_tiles
-
 $(INTERFACEGFXDIR)/outline_cursor.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 8 -Wnum_tiles
 
@@ -693,9 +690,6 @@ $(POKEDEXGFXDIR)/region_map.8bpp: %.8bpp: %.png
 
 $(POKEDEXGFXDIR)/region_map_affine.8bpp: %.8bpp: %.png
 	$(GFX) $< $@ -num_tiles 233 -Wnum_tiles
-
-$(STARTERGFXDIR)/birch_help.4bpp: $(STARTERGFXDIR)/birch_bag.4bpp $(STARTERGFXDIR)/birch_grass.4bpp
-	@cat $^ >$@
 
 $(NAMINGGFXDIR)/cursor.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 5 -Wnum_tiles

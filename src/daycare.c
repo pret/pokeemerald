@@ -1115,8 +1115,8 @@ static u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
         trainerIds[i] = GetBoxMonData(&daycare->mons[i].mon, MON_DATA_OT_ID);
         personality = GetBoxMonData(&daycare->mons[i].mon, MON_DATA_PERSONALITY);
         genders[i] = GetGenderFromSpeciesAndPersonality(species[i], personality);
-        eggGroups[i][0] = gSpeciesInfo[species[i]].eggGroup1;
-        eggGroups[i][1] = gSpeciesInfo[species[i]].eggGroup2;
+        eggGroups[i][0] = gSpeciesInfo[species[i]].eggGroups[0];
+        eggGroups[i][1] = gSpeciesInfo[species[i]].eggGroups[1];
     }
 
     // check unbreedable egg group

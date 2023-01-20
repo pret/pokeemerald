@@ -9889,9 +9889,9 @@ u16 CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilit
 
     if (move != MOVE_STRUGGLE && moveType != TYPE_MYSTERY)
     {
-        MulByTypeEffectiveness(&modifier, move, moveType, 0, gSpeciesInfo[speciesDef].type1, 0, FALSE);
-        if (gSpeciesInfo[speciesDef].type2 != gSpeciesInfo[speciesDef].type1)
-            MulByTypeEffectiveness(&modifier, move, moveType, 0, gSpeciesInfo[speciesDef].type2, 0, FALSE);
+        MulByTypeEffectiveness(&modifier, move, moveType, 0, gSpeciesInfo[speciesDef].types[0], 0, FALSE);
+        if (gSpeciesInfo[speciesDef].types[1] != gSpeciesInfo[speciesDef].types[0])
+            MulByTypeEffectiveness(&modifier, move, moveType, 0, gSpeciesInfo[speciesDef].types[1], 0, FALSE);
 
         if (moveType == TYPE_GROUND && abilityDef == ABILITY_LEVITATE && !(gFieldStatuses & STATUS_FIELD_GRAVITY))
             modifier = UQ_4_12(0.0);
