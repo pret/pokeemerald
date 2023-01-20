@@ -172,7 +172,7 @@ static const struct MysteryGiftServerCmd sServerScript_TossPrompt[] = {
     {SVR_SEND},
     {SVR_RECV, MG_LINKID_RESPONSE},
     {SVR_READ_RESPONSE},
-    {SVR_GOTO_IF_EQ, FALSE, sServerScript_SendCard},       // Tossed old card, send new one
+    {SVR_GOTO_IF_EQ, FALSE, sServerScript_SendCard},    // Tossed old card, send new one
     {SVR_GOTO, .ptr = sServerScript_ClientCanceledCard} // Kept old card, cancel new one
 };
 

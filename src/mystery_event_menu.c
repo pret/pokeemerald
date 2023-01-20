@@ -91,8 +91,8 @@ void CB2_InitMysteryEventMenu(void)
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
 
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
-        LoadUserWindowBorderGfx(0, 1u, 0xD0u);
-        Menu_LoadStdPalAt(0xE0);
+        LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(13));
+        Menu_LoadStdPalAt(BG_PLTT_ID(14));
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         CreateTask(Task_DestroySelf, 0);
@@ -102,7 +102,7 @@ void CB2_InitMysteryEventMenu(void)
         BuildOamBuffer();
         RunTextPrinters();
         UpdatePaletteFade();
-        FillPalette(RGB_BLACK, 0, 2);
+        SetBackdropFromColor(RGB_BLACK);
         SetMainCallback2(CB2_MysteryEventMenu);
     }
 }

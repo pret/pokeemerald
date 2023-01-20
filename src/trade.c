@@ -333,8 +333,8 @@ static void InitTradeMenu(void)
     gPaletteFade.bufferTransferDisabled = TRUE;
 
     SetVBlankCallback(VBlankCB_TradeMenu);
-    LoadPalette(gStandardMenuPalette, 0xF0, 20);
-    LoadPalette(gStandardMenuPalette, 0xD0, 20);
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZEOF(10));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(13), PLTT_SIZEOF(10));
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sTradeMenuBgTemplates, ARRAY_COUNT(sTradeMenuBgTemplates));
     SetBgTilemapBuffer(1, sTradeMenuData->tilemapBuffer);
@@ -352,8 +352,8 @@ static void InitTradeMenu(void)
         }
 
         FillBgTilemapBufferRect(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT, 15);
-        LoadUserWindowBorderGfx_(0, 20, 0xC0);
-        LoadUserWindowBorderGfx(2, 1, 0xE0);
+        LoadUserWindowBorderGfx_(0, 20, BG_PLTT_ID(12));
+        LoadUserWindowBorderGfx(2, 1, BG_PLTT_ID(14));
         LoadMonIconPalettes();
         sTradeMenuData->bufferPartyState = 0;
         sTradeMenuData->tradeMenuFunc = 0;
@@ -906,7 +906,7 @@ static void LoadTradeBgGfx(u8 state)
     switch (state)
     {
     case 0:
-        LoadPalette(gTradeMenu_Pal, 0, 0x60);
+        LoadPalette(gTradeMenu_Pal, BG_PLTT_ID(0), 3 * PLTT_SIZE_4BPP);
         LoadBgTiles(1, gTradeMenu_Gfx, 0x1280, 0);
         CopyToBgTilemapBufferRect_ChangePalette(1, gTradeMenu_Tilemap, 0, 0, 32, 20, 0);
         LoadBgTilemap(2, sTradeStripesBG2Tilemap, 0x800, 0);
@@ -2473,8 +2473,8 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
     else
     {
         // Player's Pokémon must be of the type the partner requested
-        if (gSpeciesInfo[playerSpecies2].type1 != requestedType
-         && gSpeciesInfo[playerSpecies2].type2 != requestedType)
+        if (gSpeciesInfo[playerSpecies2].types[0] != requestedType
+         && gSpeciesInfo[playerSpecies2].types[1] != requestedType)
             return UR_TRADE_MSG_NOT_MON_PARTNER_WANTS;
     }
 
@@ -2617,7 +2617,7 @@ static void SpriteCB_LinkMonShadow(struct Sprite *sprite)
         if (++sprite->data[0] == 12)
             sprite->data[0] = 0;
 
-        LoadPalette(&sLinkMonShadow_Pal[sprite->data[0]], (sprite->oam.paletteNum + 16) * 16 + 4, 2);
+        LoadPalette(&sLinkMonShadow_Pal[sprite->data[0]], OBJ_PLTT_ID2(sprite->oam.paletteNum) + 4, PLTT_SIZEOF(1));
     }
 }
 
@@ -2924,12 +2924,12 @@ static void InitTradeBgInternal(void)
     DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
     LZDecompressWram(gBattleTextboxTilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, 0x800, 0);
-    LoadCompressedPalette(gBattleTextboxPalette, 0, 0x20);
+    LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     InitWindows(sTradeSequenceWindowTemplates);
     DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
     LZDecompressWram(gBattleTextboxTilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, 0x800, 0);
-    LoadCompressedPalette(gBattleTextboxPalette, 0, 0x20);
+    LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
 }
 
 static void CB2_InGameTrade(void)
@@ -3109,7 +3109,7 @@ static void SetTradeSequenceBgGpuRegs(u8 state)
                                      BGCNT_16COLOR |
                                      BGCNT_SCREENBASE(18) |
                                      BGCNT_TXT512x256);
-        LoadPalette(gTradeGba2_Pal, 16, 0x60);
+        LoadPalette(gTradeGba2_Pal, BG_PLTT_ID(1), 3 * PLTT_SIZE_4BPP);
         DmaCopyLarge16(3, gTradeGba_Gfx, (void *) BG_CHAR_ADDR(1), 0x1420, 0x1000);
         DmaCopy16Defvars(3, gTradePlatform_Tilemap, (void *) BG_SCREEN_ADDR(18), 0x1000);
         break;
@@ -3166,7 +3166,7 @@ static void SetTradeSequenceBgGpuRegs(u8 state)
         }
         break;
     case 3:
-        LoadPalette(sWirelessSignalNone_Pal, 48, 0x20);
+        LoadPalette(sWirelessSignalNone_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
         LZ77UnCompVram(sWirelessSignal_Gfx, (void *) BG_CHAR_ADDR(1));
         LZ77UnCompVram(sWirelessSignal_Tilemap, (void *) BG_SCREEN_ADDR(18));
         sTradeData->bg2vofs = 80;
@@ -3245,7 +3245,7 @@ static void SetTradeSequenceBgGpuRegs(u8 state)
                                      BGCNT_16COLOR |
                                      BGCNT_SCREENBASE(18) |
                                      BGCNT_TXT512x256);
-        LoadPalette(gTradeGba2_Pal, 16, 0x60);
+        LoadPalette(gTradeGba2_Pal, BG_PLTT_ID(1), 3 * PLTT_SIZE_4BPP);
         DmaCopyLarge16(3, gTradeGba_Gfx, (void *) BG_CHAR_ADDR(1), 0x1420, 0x1000);
         DmaCopy16Defvars(3, gTradePlatform_Tilemap, (void *) BG_SCREEN_ADDR(18), 0x1000);
         break;
@@ -4858,16 +4858,16 @@ static void Task_AnimateWirelessSignal(u8 taskId)
     if (!signalComingBack)
     {
         if (paletteIdx == 256)
-            LoadPalette(sWirelessSignalNone_Pal, 0x30, 32);
+            LoadPalette(sWirelessSignalNone_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
         else
-            LoadPalette(&sWirelessSignalSend_Pal[paletteIdx], 0x30, 32);
+            LoadPalette(&sWirelessSignalSend_Pal[paletteIdx], BG_PLTT_ID(3), PLTT_SIZE_4BPP);
     }
     else
     {
         if (paletteIdx == 256)
-            LoadPalette(sWirelessSignalNone_Pal, 0x30, 32);
+            LoadPalette(sWirelessSignalNone_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
         else
-            LoadPalette(&sWirelessSignalRecv_Pal[paletteIdx], 0x30, 32);
+            LoadPalette(&sWirelessSignalRecv_Pal[paletteIdx], BG_PLTT_ID(3), PLTT_SIZE_4BPP);
     }
 
     if (sWirelessSignalTiming[idx][0] == 0 && counter == 0)
