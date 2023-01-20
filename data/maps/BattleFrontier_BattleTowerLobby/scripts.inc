@@ -415,9 +415,9 @@ BattleFrontier_BattleTowerLobby_EventScript_SaveBeforeLinkMultisChallenge::
 @ to the flash, but not data in PokemonStorage. The SaveGame script that follows asks the player to do a full save,
 @ which they can opt out of. As a result the player can save their party and quit without having saved the PC.
 @ This allows players to clone pokemon and their held items by withdrawing them (or erase them by despositing).
-@.ifndef BUGFIX
+.ifndef BUGFIX
 	tower_save 0
-@.endif
+.endif
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleTowerLobby_EventScript_CancelChallengeSaveFailed
