@@ -2801,11 +2801,11 @@ static const struct SpritePalette sSpritePalette_AbilityPopUp =
 
 static const struct OamData sOamData_AbilityPopUp =
 {
-	.affineMode = ST_OAM_AFFINE_OFF,
-	.objMode = ST_OAM_OBJ_NORMAL,
-	.shape = SPRITE_SHAPE(64x32),
-	.size = SPRITE_SIZE(64x32),
-	.priority = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = SPRITE_SHAPE(64x32),
+    .size = SPRITE_SIZE(64x32),
+    .priority = 0,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_AbilityPopUp =
@@ -2819,7 +2819,7 @@ static const struct SpriteTemplate sSpriteTemplate_AbilityPopUp =
     .callback = SpriteCb_AbilityPopUp
 };
 
-#define ABILITY_POP_UP_POS_X_DIFF (64 - 7) //Hide second sprite underneath to gain proper letter spacing
+#define ABILITY_POP_UP_POS_X_DIFF (64 - 7) // Hide second sprite underneath to gain proper letter spacing
 #define ABILITY_POP_UP_POS_X_SLIDE 68
 
 static const s16 sAbilityPopUpCoordsDoubles[MAX_BATTLERS_COUNT][2] =
@@ -2882,8 +2882,8 @@ static void PrintOnAbilityPopUp(const u8 *str, u8 *spriteTileData1, u8 *spriteTi
 
     width = GetStringWidth(FONT_SMALL, str, 0);
 
-	if (width > MAX_POPUP_STRING_WIDTH - 5)
-	{
+    if (width > MAX_POPUP_STRING_WIDTH - 5)
+    {
         windowTileData = AddTextPrinterAndCreateWindowOnAbilityPopUp(str, x2 - MAX_POPUP_STRING_WIDTH, y, color1, color2, color3, &windowId);
         TextIntoAbilityPopUp(spriteTileData2, windowTileData, 3, (y == 0));
         RemoveWindow(windowId);
@@ -2924,7 +2924,7 @@ static void PrintBattlerOnAbilityPopUp(u8 battlerId, u8 spriteId1, u8 spriteId2)
 
     lastChar = *(textPtr - 1);
 
-    //Make the string say "[NAME]'s" instead of "[NAME]"
+    // Make the string say "[NAME]'s" instead of "[NAME]"
     textPtr[0] = CHAR_SGL_QUOTE_RIGHT; // apostraphe
     textPtr++;
     if (lastChar != CHAR_S && lastChar != CHAR_s)
@@ -3014,15 +3014,12 @@ static const u16 sOverwrittenPixelsTable[][2] =
     {PIXEL_COORDS_TO_OFFSET(0, 45), 8},
     {PIXEL_COORDS_TO_OFFSET(0, 46), 8},
     {PIXEL_COORDS_TO_OFFSET(0, 47), 8},
-    //{PIXEL_COORDS_TO_OFFSET(0, 48), 8},   // cuts off the top of the 'G' in Neutralizing Gas
     {PIXEL_COORDS_TO_OFFSET(8, 45), 8},
     {PIXEL_COORDS_TO_OFFSET(8, 46), 8},
     {PIXEL_COORDS_TO_OFFSET(8, 47), 8},
-    //{PIXEL_COORDS_TO_OFFSET(8, 48), 8},
     {PIXEL_COORDS_TO_OFFSET(16, 45), 8},
     {PIXEL_COORDS_TO_OFFSET(16, 46), 8},
     {PIXEL_COORDS_TO_OFFSET(16, 47), 8},
-    //{PIXEL_COORDS_TO_OFFSET(16, 48), 8},
 };
 
 static inline void CopyPixels(u8 *dest, const u8 *src, u32 pixelCount)
@@ -3093,32 +3090,32 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
 
     if ((battlerPosition & BIT_SIDE) == B_SIDE_PLAYER)
     {
-		spriteId1 = CreateSprite(&sSpriteTemplate_AbilityPopUp,
-								coords[battlerPosition][0] - ABILITY_POP_UP_POS_X_SLIDE,
-								coords[battlerPosition][1], 0);
-		spriteId2 = CreateSprite(&sSpriteTemplate_AbilityPopUp,
-								coords[battlerPosition][0] - ABILITY_POP_UP_POS_X_SLIDE + ABILITY_POP_UP_POS_X_DIFF,
-								coords[battlerPosition][1], 1); //Appears below
+        spriteId1 = CreateSprite(&sSpriteTemplate_AbilityPopUp,
+                                coords[battlerPosition][0] - ABILITY_POP_UP_POS_X_SLIDE,
+                                coords[battlerPosition][1], 0);
+        spriteId2 = CreateSprite(&sSpriteTemplate_AbilityPopUp,
+                                coords[battlerPosition][0] - ABILITY_POP_UP_POS_X_SLIDE + ABILITY_POP_UP_POS_X_DIFF,
+                                coords[battlerPosition][1], 1); //Appears below
 
         gSprites[spriteId1].tRightToLeft = TRUE;
         gSprites[spriteId2].tRightToLeft = TRUE;
     }
     else
     {
-		spriteId1 = CreateSprite(&sSpriteTemplate_AbilityPopUp,
-								coords[battlerPosition][0] + ABILITY_POP_UP_POS_X_SLIDE,
-								coords[battlerPosition][1], 0);
-		spriteId2 = CreateSprite(&sSpriteTemplate_AbilityPopUp,
-								coords[battlerPosition][0] + ABILITY_POP_UP_POS_X_SLIDE + ABILITY_POP_UP_POS_X_DIFF,
-								coords[battlerPosition][1], 1); //Appears below
+        spriteId1 = CreateSprite(&sSpriteTemplate_AbilityPopUp,
+                                coords[battlerPosition][0] + ABILITY_POP_UP_POS_X_SLIDE,
+                                coords[battlerPosition][1], 0);
+        spriteId2 = CreateSprite(&sSpriteTemplate_AbilityPopUp,
+                                coords[battlerPosition][0] + ABILITY_POP_UP_POS_X_SLIDE + ABILITY_POP_UP_POS_X_DIFF,
+                                coords[battlerPosition][1], 1); //Appears below
 
         gSprites[spriteId1].tRightToLeft = FALSE;
         gSprites[spriteId2].tRightToLeft = FALSE;
     }
 
-	gSprites[spriteId1].tOriginalX = coords[battlerPosition][0];
-	gSprites[spriteId2].tOriginalX = coords[battlerPosition][0] + ABILITY_POP_UP_POS_X_DIFF;
-	gSprites[spriteId2].oam.tileNum += (8 * 4); //Second half of pop up
+    gSprites[spriteId1].tOriginalX = coords[battlerPosition][0];
+    gSprites[spriteId2].tOriginalX = coords[battlerPosition][0] + ABILITY_POP_UP_POS_X_DIFF;
+    gSprites[spriteId2].oam.tileNum += (8 * 4); //Second half of pop up
 
     gBattleStruct->abilityPopUpSpriteIds[battlerId][0] = spriteId1;
     gBattleStruct->abilityPopUpSpriteIds[battlerId][1] = spriteId2;
