@@ -2701,11 +2701,8 @@ u8 DoBattlerEndTurnEffects(void)
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_ORBS:
-            if (gBattleMons[gActiveBattler].hp != 0
-                    && ItemBattleEffects(ITEMEFFECT_ORBS, gActiveBattler, FALSE))
-            {
+            if (IsBattlerAlive(gActiveBattler) && ItemBattleEffects(ITEMEFFECT_ORBS, gActiveBattler, FALSE))
                 effect++;
-            }
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_LEECH_SEED:  // leech seed
