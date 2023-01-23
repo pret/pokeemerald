@@ -8200,6 +8200,8 @@ u32 GetBattlerHoldEffectParam(u8 battlerId)
 
 bool32 IsMoveMakingContact(u16 move, u8 battlerAtk)
 {
+    u16 atkHoldEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
+    
     if (!(gBattleMoves[move].flags & FLAG_MAKES_CONTACT))
     {
         if (gBattleMoves[move].effect == EFFECT_SHELL_SIDE_ARM && gBattleStruct->swapDamageCategory)
@@ -8207,12 +8209,11 @@ bool32 IsMoveMakingContact(u16 move, u8 battlerAtk)
         else
             return FALSE;
     }
-    else if (GetBattlerAbility(battlerAtk) == ABILITY_LONG_REACH
-        || GetBattlerHoldEffect(battlerAtk, TRUE) == HOLD_EFFECT_PUNCHING_GLOVE)
+    else if (GetBattlerAbility(battlerAtk) == ABILITY_LONG_REACH || atkHoldEffect == HOLD_EFFECT_PUNCHING_GLOVE)
     {
         return FALSE;
     }
-    else if (GetBattlerHoldEffect(battlerAtk, TRUE) == HOLD_EFFECT_PROTECTIVE_PADS)
+    else if (atkHoldEffect == HOLD_EFFECT_PROTECTIVE_PADS)
     {
         return FALSE;
     }
