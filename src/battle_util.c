@@ -10888,6 +10888,6 @@ static void SetRandomMultiHitCounter()
     if (gMultiHitCounter < 4 && GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LOADED_DICE)
     {
         // If roll 4 or 5 Loaded Dice doesn't do anything. Otherwise it rolls the number of hits as 5 minus a random integer from 0 to 1 inclusive.
-        gMultiHitCounter = 5 - Random() & 1;
+        gMultiHitCounter = 5 - (Random() & 1);
     }
 }
