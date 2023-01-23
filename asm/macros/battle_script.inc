@@ -1022,7 +1022,7 @@
 	.4byte \ptr
 	.endm
 
-	.macro trydobeatup endPtr:req, failPtr:req
+	.macro trydobeatup endPtr=NULL, failPtr=NULL
 	.byte 0xc4
 	.4byte \endPtr
 	.4byte \failPtr
@@ -1162,7 +1162,7 @@
 	.4byte \ptr
 	.endm
 
-	.macro trygetintimidatetarget ptr:req
+	.macro unused2 ptr:req
 	.byte 0xe1
 	.4byte \ptr
 	.endm
@@ -1339,8 +1339,8 @@
 	various \battler, VARIOUS_GET_BATTLER_FAINTED
 	.endm
 
-	.macro resetintimidatetracebits battler:req
-	various \battler, VARIOUS_RESET_INTIMIDATE_TRACE_BITS
+	.macro resetswitchinabilitybits battler:req
+	various \battler, VARIOUS_RESET_SWITCH_IN_ABILITY_BITS
 	.endm
 
 	.macro updatechoicemoveonlvlup battler:req
@@ -1906,11 +1906,6 @@
 	various \battler, VARIOUS_TRY_END_NEUTRALIZING_GAS
 	.endm
 
-	.macro trytoapplymimicry battler:req, ptr:req
-	various \battler, VARIOUS_TRY_TO_APPLY_MIMICRY
-	.4byte \ptr
-	.endm
-
 	.macro trynoretreat battler:req, ptr:req
 	various \battler, VARIOUS_TRY_NO_RETREAT
 	.4byte \ptr
@@ -1947,6 +1942,31 @@
 
 	.macro shellsidearmcheck
 	various BS_ATTACKER, VARIOUS_SHELL_SIDE_ARM_CHECK
+	.endm
+	
+	.macro jumpifrodaffected battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_ROD
+	.4byte \ptr
+	.endm
+
+	.macro jumpifabsorbaffected battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_ABSORB
+	.4byte \ptr
+	.endm
+
+	.macro jumpifmotoraffected battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_MOTOR
+	.4byte \ptr
+	.endm
+
+	.macro jumpifteanoberry ptr:req
+	various BS_ATTACKER, VARIOUS_TEATIME_TARGETS
+	.4byte \ptr
+	.endm
+
+	.macro jumpifteainvulnerable battler:req, ptr:req
+	various \battler, VARIOUS_TEATIME_INVUL
+	.4byte \ptr
 	.endm
 
 	.macro jumpifcantfling battler:req, ptr:req
@@ -2005,6 +2025,23 @@
 	various BS_ATTACKER, VARIOUS_CHECK_PARENTAL_BOND_COUNTER
 	.byte \counter
 	.4byte \ptr
+	.endm
+	.macro swapstats stat:req
+	various BS_ATTACKER, VARIOUS_SWAP_STATS
+	.byte \stat
+	.endm
+
+	.macro trywindriderpower battler:req, ptr:req
+	various \battler, VARIOUS_TRY_WIND_RIDER_POWER
+	.4byte \ptr
+	.endm
+
+	.macro activateweatherchangeabilities battler:req
+	various \battler, VARIOUS_ACTIVATE_WEATHER_CHANGE_ABILITIES
+	.endm
+
+	.macro activateterrainchangeabilities battler:req
+	various \battler, VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES
 	.endm
 
 @ helpful macros
@@ -2163,4 +2200,35 @@
 	@ Used by effects that may proc Symbiosis but do not call removeitem.
 	.macro trysymbiosis
 	various BS_ATTACKER, VARIOUS_TRY_SYMBIOSIS
+	.endm
+
+	@ Tries to increase or decrease a battler's stat's stat stage by a specified amount. If impossible, jumps to \script.
+	.macro modifybattlerstatstage battler:req, stat:req, mode:req, amount:req, script:req, animation:req, customString
+
+	@ \mode parameters
+	INCREASE = FALSE
+	DECREASE = TRUE
+
+	@ \animation parameters
+	ANIM_OFF = FALSE
+	ANIM_ON = TRUE
+
+	setstatchanger \stat, \amount, \mode
+	statbuffchange STAT_CHANGE_ALLOW_PTR, \script
+	setgraphicalstatchangevalues
+	.if \animation == TRUE
+		playanimation \battler, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	.endif
+	.ifnb \customString
+		printstring \customString
+	.else
+		.if \mode == DECREASE
+			printfromtable gStatDownStringIds
+		.else
+		.if \mode == INCREASE
+			printfromtable gStatUpStringIds
+		.endif
+		.endif
+	.endif
+	waitmessage B_WAIT_TIME_LONG
 	.endm

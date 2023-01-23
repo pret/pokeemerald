@@ -53,7 +53,7 @@ struct ResourceFlags
 #define RESOURCE_FLAG_FLASH_FIRE        0x1
 #define RESOURCE_FLAG_ROOST             0x2
 #define RESOURCE_FLAG_UNBURDEN          0x4
-#define RESOURCE_FLAG_INTIMIDATED       0x8
+#define RESOURCE_FLAG_UNUSED            0x8
 #define RESOURCE_FLAG_TRACED            0x10
 #define RESOURCE_FLAG_EMERGENCY_EXIT    0x20
 #define RESOURCE_FLAG_NEUTRALIZING_GAS  0x40
@@ -104,6 +104,7 @@ struct DisableStruct
     u8 noRetreat:1;
     u8 tarShot:1;
     u8 octolock:1;
+    u8 cudChew:1;
 };
 
 struct ProtectStruct
@@ -155,41 +156,44 @@ struct ProtectStruct
 
 struct SpecialStatus
 {
-    u8 statLowered:1;
-    u8 lightningRodRedirected:1;
-    u8 restoredBattlerSprite: 1;
-    u8 intimidatedMon:1;
-    u8 traced:1;
-    u8 ppNotAffectedByPressure:1;
-    u8 faintedHasReplacement:1;
-    u8 focusBanded:1;
-    // End of byte
-    u8 focusSashed:1;
-    u8 sturdied:1;
-    u8 stormDrainRedirected:1;
-    u8 switchInAbilityDone:1;
-    u8 switchInItemDone:1;
-    u8 instructedChosenTarget:3;
-    // End of byte
-    u8 berryReduced:1;
-    u8 gemBoost:1;
-    u8 rototillerAffected:1;  // to be affected by rototiller
-    u8 parentalBondState:2;
-    u8 multiHitOn:1;
-    // End of byte, two bits unused
-    u8 gemParam;
-    u8 damagedMons:4; // Mons that have been damaged directly by using a move, includes substitute.
-    u8 dancerUsedMove:1;
-    u8 dancerOriginalTarget:3;
-    u8 announceNeutralizingGas:1;   // See Cmd_switchineffects
-    u8 neutralizingGasRemoved:1;    // See VARIOUS_TRY_END_NEUTRALIZING_GAS
-    u8 affectionEndured:1;
     s32 dmg;
     s32 physicalDmg;
     s32 specialDmg;
     u8 physicalBattlerId;
     u8 specialBattlerId;
     u8 changedStatsBattlerId; // Battler that was responsible for the latest stat change. Can be self.
+    u8 statLowered:1;
+    u8 lightningRodRedirected:1;
+    u8 restoredBattlerSprite: 1;
+    u8 traced:1;
+    u8 ppNotAffectedByPressure:1;
+    u8 faintedHasReplacement:1;
+    u8 focusBanded:1;
+    u8 focusSashed:1;
+    // End of byte
+    u8 sturdied:1;
+    u8 stormDrainRedirected:1;
+    u8 switchInAbilityDone:1;
+    u8 switchInItemDone:1;
+    u8 instructedChosenTarget:3;
+    u8 berryReduced:1;
+    // End of byte
+    u8 gemParam;
+    // End of byte
+    u8 gemBoost:1;
+    u8 rototillerAffected:1;  // to be affected by rototiller
+    u8 parentalBondState:2;
+    u8 multiHitOn:1;
+    u8 announceNeutralizingGas:1;   // See Cmd_switchineffects
+    u8 neutralizingGasRemoved:1;    // See VARIOUS_TRY_END_NEUTRALIZING_GAS
+    u8 affectionEndured:1;
+    // End of byte
+    u8 damagedMons:4; // Mons that have been damaged directly by using a move, includes substitute.
+    u8 dancerUsedMove:1;
+    u8 dancerOriginalTarget:3;
+    // End of byte
+    u8 weatherAbilityDone:1;
+    u8 terrainAbilityDone:1;
 };
 
 struct SideTimer
@@ -577,13 +581,12 @@ struct BattleStruct
     u16 synchronizeMoveEffect;
     bool8 anyMonHasTransformed;
     void (*savedCallback)(void);
-    u16 usedHeldItems[PARTY_SIZE][2];   // For each party member and side. For harvest, recycle
+    u16 usedHeldItems[PARTY_SIZE][NUM_BATTLE_SIDES]; // For each party member and side. For harvest, recycle
     u16 chosenItem[MAX_BATTLERS_COUNT];
     u8 AI_itemType[2];
     u8 AI_itemFlags[2];
     u16 choicedMove[MAX_BATTLERS_COUNT];
     u16 changedItems[MAX_BATTLERS_COUNT];
-    u8 intimidateBattler;
     u8 switchInItemsCounter;
     u8 arenaTurnCounter;
     u8 turnSideTracker;
@@ -611,7 +614,7 @@ struct BattleStruct
     u8 debugBattler;
     u8 magnitudeBasePower;
     u8 presentBasePower;
-    u8 roostTypes[MAX_BATTLERS_COUNT][3];
+    u8 roostTypes[MAX_BATTLERS_COUNT][2];
     u8 savedBattlerTarget;
     bool8 ateBoost[MAX_BATTLERS_COUNT];
     u8 activeAbilityPopUps; // as bits for each battler
@@ -650,8 +653,10 @@ struct BattleStruct
     u8 skyDropTargets[MAX_BATTLERS_COUNT]; // For Sky Drop, to account for if multiple Pokemon use Sky Drop in a double battle.
     // When using a move which hits multiple opponents which is then bounced by a target, we need to make sure, the move hits both opponents, the one with bounce, and the one without.
     u8 attackerBeforeBounce:2;
+    u8 beatUpSlot:3;
     u8 targetsDone[MAX_BATTLERS_COUNT]; // Each battler as a bit.
     u16 overwrittenAbilities[MAX_BATTLERS_COUNT];    // abilities overwritten during battle (keep separate from battle history in case of switching)
+    bool8 allowedToChangeFormInWeather[PARTY_SIZE][2]; // For each party member and side, used by Ice Face.
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)
@@ -681,6 +686,13 @@ struct BattleStruct
     gBattleMons[battlerId].type2 = type;            \
     gBattleMons[battlerId].type3 = TYPE_MYSTERY;    \
 }
+#define RESTORE_BATTLER_TYPE(battlerId)                                                     \
+{                                                                                           \
+    gBattleMons[battlerId].type1 = gSpeciesInfo[gBattleMons[battlerId].species].types[0];   \
+    gBattleMons[battlerId].type2 = gSpeciesInfo[gBattleMons[battlerId].species].types[1];   \
+    gBattleMons[battlerId].type3 = TYPE_MYSTERY;                                            \
+}
+
 
 #define IS_BATTLER_PROTECTED(battlerId)(gProtectStructs[battlerId].protected                                           \
                                         || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_WIDE_GUARD           \
