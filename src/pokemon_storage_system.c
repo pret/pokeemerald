@@ -1240,7 +1240,7 @@ static const union AffineAnimCmd *const sAffineAnims_ReleaseMon[] =
 
 static const u16 sUnusedColor = RGB(26, 29, 8);
 
-static const struct SpriteSheet sSpriteSheet_Arrow = {sArrow_Gfx, 0x80, GFXTAG_ARROW};
+static const struct SpriteSheet sSpriteSheet_Arrow = {sArrow_Gfx, sizeof(sArrow_Gfx), GFXTAG_ARROW};
 
 static const struct OamData sOamData_BoxTitle =
 {
