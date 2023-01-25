@@ -27,6 +27,8 @@
 
 #define WAVEFORM_WINDOW_HEIGHT 56
 
+#define TAG_NEEDLE 0x2000
+
 struct PokedexCryMeterNeedle {
     s8 rotation;
     s8 targetRotation;
@@ -202,8 +204,8 @@ static const struct OamData sOamData_CryMeterNeedle =
 
 static const struct SpriteTemplate sCryMeterNeedleSpriteTemplate =
 {
-    .tileTag = 0x2000,
-    .paletteTag = 0x2000,
+    .tileTag = TAG_NEEDLE,
+    .paletteTag = TAG_NEEDLE,
     .oam = &sOamData_CryMeterNeedle,
     .anims = sSpriteAnimTable_CryMeterNeedle,
     .images = NULL,
@@ -213,13 +215,13 @@ static const struct SpriteTemplate sCryMeterNeedleSpriteTemplate =
 
 static const struct SpriteSheet sCryMeterNeedleSpriteSheets[] =
 {
-    {sCryMeterNeedle_Gfx, 0x800, 0x2000},
+    {sCryMeterNeedle_Gfx, sizeof(sCryMeterNeedle_Gfx), TAG_NEEDLE},
     {}
 };
 
 static const struct SpritePalette sCryMeterNeedleSpritePalettes[] =
 {
-    {sCryMeterNeedle_Pal, 0x2000},
+    {sCryMeterNeedle_Pal, TAG_NEEDLE},
     {}
 };
 

@@ -867,17 +867,17 @@ static const u8 *const sEasyChatKeyboardAlphabet[NUM_ALPHABET_ROWS] =
 static const struct SpriteSheet sSpriteSheets[] = {
     {
         .data = sTriangleCursor_Gfx,
-        .size = 0x20,
+        .size = sizeof(sTriangleCursor_Gfx),
         .tag = GFXTAG_TRIANGLE_CURSOR
     },
     {
         .data = sScrollIndicator_Gfx,
-        .size = 0x100,
+        .size = sizeof(sScrollIndicator_Gfx),
         .tag = GFXTAG_SCROLL_INDICATOR
     },
     {
         .data = sStartSelectButtons_Gfx,
-        .size = 0x100,
+        .size = sizeof(sStartSelectButtons_Gfx),
         .tag = GFXTAG_START_SELECT_BUTTONS
     },
     {0}

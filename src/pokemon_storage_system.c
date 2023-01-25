@@ -257,7 +257,7 @@ enum {
 
 // The maximum number of Pokémon icons that can appear on-screen.
 // By default the limit is 40 (though in practice only 37 can be).
-#define MAX_MON_ICONS (IN_BOX_COUNT + PARTY_SIZE + 1 >= 40 ? IN_BOX_COUNT + PARTY_SIZE + 1 : 40)
+#define MAX_MON_ICONS max(IN_BOX_COUNT + PARTY_SIZE + 1, 40)
 
 // The maximum number of item icons that can appear on-screen while
 // moving held items. 1 in the cursor, and 2 more while switching
@@ -1245,7 +1245,7 @@ static const union AffineAnimCmd *const sAffineAnims_ReleaseMon[] =
 
 static const u16 sUnusedColor = RGB(26, 29, 8);
 
-static const struct SpriteSheet sSpriteSheet_Arrow = {sArrow_Gfx, 0x80, GFXTAG_ARROW};
+static const struct SpriteSheet sSpriteSheet_Arrow = {sArrow_Gfx, sizeof(sArrow_Gfx), GFXTAG_ARROW};
 
 static const struct OamData sOamData_BoxTitle =
 {
