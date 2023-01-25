@@ -7171,6 +7171,7 @@ BattleScript_GulpMissileGulping::
 	tryfaintmon BS_ATTACKER
 	getbattlerfainted BS_ATTACKER
 	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_GulpMissileNoSecondEffectGulping
+	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_CLEAR_AMULET, BattleScript_GulpMissileNoSecondEffectGulping
 	jumpifability BS_ATTACKER, ABILITY_CLEAR_BODY, BattleScript_GulpMissileNoSecondEffectGulping
 	jumpifability BS_ATTACKER, ABILITY_FULL_METAL_BODY, BattleScript_GulpMissileNoSecondEffectGulping
 	jumpifability BS_ATTACKER, ABILITY_WHITE_SMOKE, BattleScript_GulpMissileNoSecondEffectGulping
@@ -8480,6 +8481,7 @@ BattleScript_TryAdrenalineOrbRet:
 	return
 
 BattleScript_IntimidateActivates::
+	jumpifnovalidtargets BattleScript_IntimidateEnd
 	showabilitypopup BS_ATTACKER
 	pause B_WAIT_TIME_LONG
 	destroyabilitypopup
@@ -8488,6 +8490,7 @@ BattleScript_IntimidateLoop:
 	jumpifbyteequal gBattlerTarget, gBattlerAttacker, BattleScript_IntimidateLoopIncrement
 	jumpiftargetally BattleScript_IntimidateLoopIncrement
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_IntimidateLoopIncrement
+	jumpifholdeffect BS_TARGET, HOLD_EFFECT_CLEAR_AMULET, BattleScript_IntimidatePrevented_Item
 	jumpifability BS_TARGET, ABILITY_CLEAR_BODY, BattleScript_IntimidatePrevented
 	jumpifability BS_TARGET, ABILITY_HYPER_CUTTER, BattleScript_IntimidatePrevented
 	jumpifability BS_TARGET, ABILITY_WHITE_SMOKE, BattleScript_IntimidatePrevented
@@ -8518,6 +8521,7 @@ BattleScript_IntimidateEnd:
 BattleScript_IntimidatePrevented:
 	call BattleScript_AbilityPopUp
 	pause B_WAIT_TIME_LONG
+BattleScript_IntimidatePrevented_Item:
 	setbyte gBattleCommunication STAT_ATK
 	stattextbuffer BS_TARGET
 	printstring STRINGID_STATWASNOTLOWERED

@@ -115,7 +115,7 @@ static const struct WindowTemplate sMoveRelearnerWindowTemplates[] =
         .tilemapTop = 1,
         .width = 16,
         .height = 12,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0xA
     },
     {
@@ -124,7 +124,7 @@ static const struct WindowTemplate sMoveRelearnerWindowTemplates[] =
         .tilemapTop = 1,
         .width = 16,
         .height = 12,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0xCA
     },
     {
@@ -133,7 +133,7 @@ static const struct WindowTemplate sMoveRelearnerWindowTemplates[] =
         .tilemapTop = 1,
         .width = 10,
         .height = 12,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x18A
     },
     {
@@ -142,7 +142,7 @@ static const struct WindowTemplate sMoveRelearnerWindowTemplates[] =
         .tilemapTop = 15,
         .width = 22,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x202
     },
     {
@@ -151,7 +151,7 @@ static const struct WindowTemplate sMoveRelearnerWindowTemplates[] =
         .tilemapTop = 8,
         .width = 5,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x25A
     },
     DUMMY_WIN_TEMPLATE
@@ -164,7 +164,7 @@ static const struct WindowTemplate sMoveRelearnerYesNoMenuTemplate =
     .tilemapTop = 8,
     .width = 5,
     .height = 4,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x25A
 };
 
@@ -708,8 +708,8 @@ void InitMoveRelearnerWindows(bool8 useContextWindow)
 
     InitWindows(sMoveRelearnerWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 1, 0xE0);
-    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
+    LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(14));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
 
     for (i = 0; i < ARRAY_COUNT(sMoveRelearnerWindowTemplates) - 1; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(1));

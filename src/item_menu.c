@@ -818,9 +818,9 @@ static bool8 LoadBagMenu_Graphics(void)
         break;
     case 2:
         if (!IsWallysBag() && gSaveBlock2Ptr->playerGender != MALE)
-            LoadCompressedPalette(gBagScreenFemale_Pal, 0, 0x40);
+            LoadCompressedPalette(gBagScreenFemale_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
         else
-            LoadCompressedPalette(gBagScreenMale_Pal, 0, 0x40);
+            LoadCompressedPalette(gBagScreenMale_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
         gBagMenu->graphicsLoadState++;
         break;
     case 3:
@@ -2448,10 +2448,10 @@ static void LoadBagMenuTextWindows(void)
 
     InitWindows(sDefaultBagWindows);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 1, 0xE0);
-    LoadMessageBoxGfx(0, 10, 0xD0);
-    ListMenuLoadStdPalAt(0xC0, 1);
-    LoadPalette(&gStandardMenuPalette, 0xF0, 0x20);
+    LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(14));
+    LoadMessageBoxGfx(0, 10, BG_PLTT_ID(13));
+    ListMenuLoadStdPalAt(BG_PLTT_ID(12), 1);
+    LoadPalette(&gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     for (i = 0; i <= WIN_POCKET_NAME; i++)
     {
         FillWindowPixelBuffer(i, PIXEL_FILL(0));

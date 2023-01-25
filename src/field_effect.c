@@ -903,7 +903,7 @@ u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buf
 void LoadTrainerGfx_TrainerCard(u8 gender, u16 palOffset, u8 *dest)
 {
     LZDecompressVram(gTrainerFrontPicTable[gender].data, dest);
-    LoadCompressedPalette(gTrainerFrontPicPaletteTable[gender].data, palOffset, 0x20);
+    LoadCompressedPalette(gTrainerFrontPicPaletteTable[gender].data, palOffset, PLTT_SIZE_4BPP);
 }
 
 u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
@@ -2630,7 +2630,7 @@ static void FieldMoveShowMonOutdoorsEffect_LoadGfx(struct Task *task)
     u16 delta = ((REG_BG0CNT >> 8) << 11);
     CpuCopy16(sFieldMoveStreaksOutdoors_Gfx, (void *)(VRAM + offset), 0x200);
     CpuFill32(0, (void *)(VRAM + delta), 0x800);
-    LoadPalette(sFieldMoveStreaksOutdoors_Pal, 0xf0, sizeof(sFieldMoveStreaksOutdoors_Pal));
+    LoadPalette(sFieldMoveStreaksOutdoors_Pal, BG_PLTT_ID(15), sizeof(sFieldMoveStreaksOutdoors_Pal));
     LoadFieldMoveOutdoorStreaksTilemap(delta);
     task->tState++;
 }
@@ -2793,7 +2793,7 @@ static void FieldMoveShowMonIndoorsEffect_LoadGfx(struct Task *task)
     task->data[12] = delta;
     CpuCopy16(sFieldMoveStreaksIndoors_Gfx, (void *)(VRAM + offset), 0x80);
     CpuFill32(0, (void *)(VRAM + delta), 0x800);
-    LoadPalette(sFieldMoveStreaksIndoors_Pal, 0xf0, sizeof(sFieldMoveStreaksIndoors_Pal));
+    LoadPalette(sFieldMoveStreaksIndoors_Pal, BG_PLTT_ID(15), sizeof(sFieldMoveStreaksIndoors_Pal));
     task->tState++;
 }
 
@@ -3092,7 +3092,7 @@ u8 FldEff_RayquazaSpotlight(void)
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(14, 14));
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
-    LoadPalette(sSpotlight_Pal, 0xC0, sizeof(sSpotlight_Pal));
+    LoadPalette(sSpotlight_Pal, BG_PLTT_ID(12), sizeof(sSpotlight_Pal));
     SetGpuReg(REG_OFFSET_BG0VOFS, 120);
     for (i = 3; i < 15; i++)
     {

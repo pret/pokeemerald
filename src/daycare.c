@@ -611,6 +611,33 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
     }
 }
 
+static void InheritPokeball(struct Pokemon *egg, struct BoxPokemon *father, struct BoxPokemon *mother)
+{
+    u16 inheritBall = ITEM_POKE_BALL;
+    u16 fatherBall = GetBoxMonData(father, MON_DATA_POKEBALL);
+    u16 motherBall = GetBoxMonData(mother, MON_DATA_POKEBALL);
+    u16 fatherSpecies = GetBoxMonData(father, MON_DATA_SPECIES);
+    u16 motherSpecies = GetBoxMonData(mother, MON_DATA_SPECIES);
+
+    if (fatherBall == ITEM_MASTER_BALL || fatherBall == ITEM_CHERISH_BALL)
+        fatherBall = ITEM_POKE_BALL;
+
+    if (motherBall == ITEM_MASTER_BALL || motherBall == ITEM_CHERISH_BALL)
+        motherBall = ITEM_POKE_BALL;
+
+#if P_BALL_INHERITING >= GEN_7
+    if (fatherSpecies == motherSpecies)
+        inheritBall = (Random() % 2 == 0 ? motherBall : fatherBall);
+    else if (motherSpecies != SPECIES_DITTO)
+        inheritBall = motherBall;
+    else
+        inheritBall = fatherBall;
+#elif P_BALL_INHERITING == GEN_6
+    inheritBall = motherBall;
+#endif
+    SetMonData(egg, MON_DATA_POKEBALL, &inheritBall);
+}
+
 // Counts the number of egg moves a pokemon learns and stores the moves in
 // the given array.
 static u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves)
@@ -874,6 +901,7 @@ static void _GiveEggFromDaycare(struct DayCare *daycare)
 #endif
     SetInitialEggData(&egg, species, daycare);
     InheritIVs(&egg, daycare);
+    InheritPokeball(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
     BuildEggMoveset(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
 
     GiveMoveIfItem(&egg, daycare);
@@ -1089,8 +1117,8 @@ static u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
         trainerIds[i] = GetBoxMonData(&daycare->mons[i].mon, MON_DATA_OT_ID);
         personality = GetBoxMonData(&daycare->mons[i].mon, MON_DATA_PERSONALITY);
         genders[i] = GetGenderFromSpeciesAndPersonality(species[i], personality);
-        eggGroups[i][0] = gSpeciesInfo[species[i]].eggGroup1;
-        eggGroups[i][1] = gSpeciesInfo[species[i]].eggGroup2;
+        eggGroups[i][0] = gSpeciesInfo[species[i]].eggGroups[0];
+        eggGroups[i][1] = gSpeciesInfo[species[i]].eggGroups[1];
     }
 
     // check unbreedable egg group

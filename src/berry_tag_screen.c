@@ -346,7 +346,7 @@ static bool8 LoadBerryTagGfx(void)
         sBerryTag->gfxState++;
         break;
     case 4:
-        LoadCompressedPalette(gBerryCheck_Pal, 0, 0xC0);
+        LoadCompressedPalette(gBerryCheck_Pal, BG_PLTT_ID(0), 6 * PLTT_SIZE_4BPP);
         sBerryTag->gfxState++;
         break;
     case 5:
@@ -367,7 +367,7 @@ static void HandleInitWindows(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadPalette(sFontPalette, 0xF0, 0x20);
+    LoadPalette(sFontPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     for (i = 0; i < ARRAY_COUNT(sWindowTemplates) - 1; i++)
         PutWindowTilemap(i);
     ScheduleBgCopyTilemapToVram(0);

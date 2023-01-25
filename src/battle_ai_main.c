@@ -2142,12 +2142,14 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             break;
         case EFFECT_SKILL_SWAP:
             if (AI_DATA->abilities[battlerAtk] == ABILITY_NONE || AI_DATA->abilities[battlerDef] == ABILITY_NONE
-              || IsSkillSwapBannedAbility(AI_DATA->abilities[battlerAtk]) || IsSkillSwapBannedAbility(AI_DATA->abilities[battlerDef]))
+              || IsSkillSwapBannedAbility(AI_DATA->abilities[battlerAtk]) || IsSkillSwapBannedAbility(AI_DATA->abilities[battlerDef])
+              || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_ABILITY_SHIELD)
                 score -= 10;
             break;
         case EFFECT_WORRY_SEED:
             if (AI_DATA->abilities[battlerDef] == ABILITY_INSOMNIA
-              || IsWorrySeedBannedAbility(AI_DATA->abilities[battlerDef]))
+              || IsWorrySeedBannedAbility(AI_DATA->abilities[battlerDef])
+              || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_ABILITY_SHIELD)
                 score -= 10;
             break;
         case EFFECT_GASTRO_ACID:
@@ -2158,14 +2160,16 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_ENTRAINMENT:
             if (AI_DATA->abilities[battlerAtk] == ABILITY_NONE
               || IsEntrainmentBannedAbilityAttacker(AI_DATA->abilities[battlerAtk])
-              || IsEntrainmentTargetOrSimpleBeamBannedAbility(AI_DATA->abilities[battlerDef]))
+              || IsEntrainmentTargetOrSimpleBeamBannedAbility(AI_DATA->abilities[battlerDef])
+              || AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_ABILITY_SHIELD)
                 score -= 10;
             break;
         case EFFECT_CORE_ENFORCER:
             break;
         case EFFECT_SIMPLE_BEAM:
             if (AI_DATA->abilities[battlerDef] == ABILITY_SIMPLE
-              || IsEntrainmentTargetOrSimpleBeamBannedAbility(AI_DATA->abilities[battlerDef]))
+              || IsEntrainmentTargetOrSimpleBeamBannedAbility(AI_DATA->abilities[battlerDef])
+              || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_ABILITY_SHIELD)
                 score -= 10;
             break;
         case EFFECT_SNATCH:
