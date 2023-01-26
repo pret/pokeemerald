@@ -1107,7 +1107,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
     struct BattleDebugMenu *data = GetStructPtr(taskId);
 
     // Exit the menu.
-    if (JOY_NEW(SELECT_BUTTON))
+    if (JOY_NEW(SELECT_BUTTON) || ((JOY_NEW(B_BUTTON)) && data->activeWindow == ACTIVE_WIN_MAIN))
     {
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
         gTasks[taskId].func = Task_DebugMenuFadeOut;
