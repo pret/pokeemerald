@@ -190,6 +190,7 @@ void SaveObjectEvents(void)
         // since the lower graphicsIds will be in the same place as vanilla
         graphicsId = gObjectEvents[i].graphicsId;
         gSaveBlock1Ptr->objectEvents[i].graphicsId = (graphicsId >> 8) | (graphicsId << 8);
+        gSaveBlock1Ptr->objectEvents[i].spriteId = 127; // magic number
         // To avoid crash on vanilla, save follower as inactive
         if (gObjectEvents[i].localId == OBJ_EVENT_ID_FOLLOWER) 
             gSaveBlock1Ptr->objectEvents[i].active = FALSE;
@@ -208,8 +209,9 @@ void LoadObjectEvents(void)
         // since the lower graphicsIds will be in the same place as vanilla
         graphicsId = gObjectEvents[i].graphicsId;
         gObjectEvents[i].graphicsId = (graphicsId >> 8) | (graphicsId << 8);
-        if (!gObjectEvents[i].expanded)
+        if (gObjectEvents[i].spriteId != 127)
             gObjectEvents[i].graphicsId &= 0xFF;
+        gObjectEvents[i].spriteId = 0;
         // Try to restore saved inactive follower
         if (gObjectEvents[i].localId == OBJ_EVENT_ID_FOLLOWER &&
             !gObjectEvents[i].active &&

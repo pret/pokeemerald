@@ -1317,7 +1317,6 @@ static u8 InitObjectEventStateFromTemplate(const struct ObjectEventTemplate *tem
     y = template->y + MAP_OFFSET;
     objectEvent->active = TRUE;
     objectEvent->triggerGroundEffectsOnMove = TRUE;
-    objectEvent->expanded = TRUE;
     objectEvent->graphicsId = PackGraphicsId(template);
     if (objectEvent->graphicsId >= OBJ_EVENT_GFX_MON_BASE) {
         if (template->script && template->script[0] == 0x7d)
