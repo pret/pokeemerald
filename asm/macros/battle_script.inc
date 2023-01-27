@@ -2237,3 +2237,8 @@
 	.endif
 	waitmessage B_WAIT_TIME_LONG
 	.endm
+
+	.macro jumpifemergencyexited battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_EMERGENCY_EXITED
+	.4byte \ptr
+	.endm
