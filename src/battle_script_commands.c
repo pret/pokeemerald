@@ -5413,7 +5413,7 @@ static void Cmd_moveend(void)
                     gStatuses3[gBattlerTarget] |= STATUS3_SMACKED_DOWN;
                     gStatuses3[gBattlerTarget] &= ~(STATUS3_MAGNET_RISE | STATUS3_TELEKINESIS | STATUS3_ON_AIR);
                     effect = TRUE;
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    BattleScriptPush(gBattlescriptCurrInstr);
                     gBattlescriptCurrInstr = BattleScript_MoveEffectSmackDown;
                 }
                 break;
@@ -5426,7 +5426,7 @@ static void Cmd_moveend(void)
                     BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
                     MarkBattlerForControllerExec(gActiveBattler);
                     effect = TRUE;
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    BattleScriptPush(gBattlescriptCurrInstr);
                     switch (gBattleMoves[gCurrentMove].argument)
                     {
                     case STATUS1_PARALYSIS:
@@ -10106,9 +10106,9 @@ static void Cmd_various(void)
         return;
     case VARIOUS_JUMP_IF_LAST_USED_ITEM_BERRY:
         if (ItemId_GetPocket(gLastUsedItem) == POCKET_BERRIES)
-            gBattlescriptCurrInstr += 7;
-        else
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
         return;
     case VARIOUS_JUMP_IF_LAST_USED_ITEM_HOLD_EFFECT:
         if (ItemId_GetHoldEffect(gLastUsedItem) == gBattlescriptCurrInstr[3])
@@ -10191,6 +10191,8 @@ static void Cmd_various(void)
                 break;
             }
             PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
+            gBattlescriptCurrInstr += 4;
+            return;
         }
         break;
     case VARIOUS_TEATIME_TARGETS:
