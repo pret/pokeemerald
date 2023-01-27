@@ -12122,7 +12122,9 @@ static void Cmd_trysetencore(void)
             break;
     }
 
-    if (gLastMoves[gBattlerTarget] == MOVE_STRUGGLE
+    if (gLastMoves[gBattlerTarget] == MOVE_NONE
+     || gLastMoves[gBattlerTarget] == MOVE_UNAVAILABLE
+     || gLastMoves[gBattlerTarget] == MOVE_STRUGGLE
      || gLastMoves[gBattlerTarget] == MOVE_ENCORE
      || gLastMoves[gBattlerTarget] == MOVE_MIRROR_MOVE
      || gLastMoves[gBattlerTarget] == MOVE_SHELL_TRAP)
