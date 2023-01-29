@@ -537,13 +537,17 @@ static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
     }
 }
 
-static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
+static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare, struct BoxPokemon *father, struct BoxPokemon *mother)
 {
     u8 i;
-    u8 selectedIvs[INHERITED_IV_COUNT];
+    u8 selectedIvs[5];
     u8 availableIVs[NUM_STATS];
-    u8 whichParents[INHERITED_IV_COUNT];
+    u8 whichParents[5];
     u8 iv;
+    u8 howManyIVs = 3;
+
+    if (GetBoxMonData(father, MON_DATA_HELD_ITEM) == ITEM_DESTINY_KNOT || GetBoxMonData(mother, MON_DATA_HELD_ITEM) == ITEM_DESTINY_KNOT)
+        howManyIVs = 5;
 
     // Initialize a list of IV indices.
     for (i = 0; i < NUM_STATS; i++)
@@ -552,32 +556,20 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
     }
 
     // Select the 3 IVs that will be inherited.
-    for (i = 0; i < INHERITED_IV_COUNT; i++)
+    for (i = 0; i < howManyIVs; i++)
     {
-        // Randomly pick an IV from the available list and stop from being chosen again.
-        // BUG: Instead of removing the IV that was just picked, this
-        // removes position 0 (HP) then position 1 (DEF), then position 2. This is why HP and DEF
-        // have a lower chance to be inherited in Emerald and why the IV picked for inheritance can
-        // be repeated. Amusingly, FRLG and RS also got this wrong. They remove selectedIvs[i], which
-        // is not an index! This means that it can sometimes remove the wrong stat.
-        #ifndef BUGFIX
         selectedIvs[i] = availableIVs[Random() % (NUM_STATS - i)];
         RemoveIVIndexFromList(availableIVs, i);
-        #else
-        u8 index = Random() % (NUM_STATS - i);
-        selectedIvs[i] = availableIVs[index];
-        RemoveIVIndexFromList(availableIVs, index);
-        #endif
     }
 
     // Determine which parent each of the selected IVs should inherit from.
-    for (i = 0; i < INHERITED_IV_COUNT; i++)
+    for (i = 0; i < howManyIVs; i++)
     {
         whichParents[i] = Random() % DAYCARE_MON_COUNT;
     }
 
     // Set each of inherited IVs on the egg mon.
-    for (i = 0; i < INHERITED_IV_COUNT; i++)
+    for (i = 0; i < howManyIVs; i++)
     {
         switch (selectedIvs[i])
         {
@@ -898,7 +890,7 @@ static void _GiveEggFromDaycare(struct DayCare *daycare)
     AlterEggSpeciesWithIncenseItem(&species, daycare);
 #endif
     SetInitialEggData(&egg, species, daycare);
-    InheritIVs(&egg, daycare);
+    InheritIVs(&egg, daycare, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
     InheritPokeball(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
     BuildEggMoveset(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
 
