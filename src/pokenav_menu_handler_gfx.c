@@ -457,7 +457,7 @@ static u32 LoopedTask_OpenMenu(s32 state)
         SetBgTilemapBuffer(1, gfx->bg1TilemapBuffer);
         CopyToBgTilemapBuffer(1, gPokenavMessageBox_Tilemap, 0, 0);
         CopyBgTilemapBufferToVram(1);
-        CopyPaletteIntoBufferUnfaded(gPokenavMessageBox_Pal, 0x10, 0x20);
+        CopyPaletteIntoBufferUnfaded(gPokenavMessageBox_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         ChangeBgX(1, 0, BG_COORD_SET);
         ChangeBgY(1, 0, BG_COORD_SET);
         ChangeBgX(2, 0, BG_COORD_SET);
@@ -470,14 +470,14 @@ static u32 LoopedTask_OpenMenu(s32 state)
             return LT_PAUSE;
         DecompressAndCopyTileDataToVram(2, sPokenavDeviceBgTiles, 0, 0, 0);
         DecompressAndCopyTileDataToVram(2, sPokenavDeviceBgTilemap, 0, 0, 1);
-        CopyPaletteIntoBufferUnfaded(sPokenavDeviceBgPal, 0x20, 0x20);
+        CopyPaletteIntoBufferUnfaded(sPokenavDeviceBgPal, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
         return LT_INC_AND_PAUSE;
     case 2:
         if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
         DecompressAndCopyTileDataToVram(3, sPokenavBgDotsTiles, 0, 0, 0);
         DecompressAndCopyTileDataToVram(3, sPokenavBgDotsTilemap, 0, 0, 1);
-        CopyPaletteIntoBufferUnfaded(sPokenavBgDotsPal, 0x30, 0x20);
+        CopyPaletteIntoBufferUnfaded(sPokenavBgDotsPal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
         if (GetPokenavMenuType() == POKENAV_MENU_TYPE_CONDITION || GetPokenavMenuType() == POKENAV_MENU_TYPE_CONDITION_SEARCH)
             ChangeBgDotsColorToPurple();
         return LT_INC_AND_PAUSE;
@@ -1270,7 +1270,7 @@ static void CreateBgDotPurplePalTask(void)
 
 static void ChangeBgDotsColorToPurple(void)
 {
-    CopyPaletteIntoBufferUnfaded(sPokenavBgDotsPal + 7, 0x31, 4);
+    CopyPaletteIntoBufferUnfaded(sPokenavBgDotsPal + 7, BG_PLTT_ID(3) + 1, PLTT_SIZEOF(2));
 }
 
 static void CreateBgDotLightBluePalTask(void)
@@ -1293,7 +1293,7 @@ static void Task_UpdateBgDotsPalette(u8 taskId)
     const u16 * pal2 = (const u16 *)GetWordTaskArg(taskId, 3);
 
     PokenavCopyPalette(pal1, pal2, 2, 12, ++data[0], sp8);
-    LoadPalette(sp8, 0x31, 4);
+    LoadPalette(sp8, BG_PLTT_ID(3) + 1, PLTT_SIZEOF(2));
     if (data[0] == 12)
         DestroyTask(taskId);
 }
