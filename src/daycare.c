@@ -555,7 +555,7 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare, struct BoxP
         availableIVs[i] = i;
     }
 
-    // Select the 3 IVs that will be inherited.
+    // Select which IVs that will be inherited.
     for (i = 0; i < howManyIVs; i++)
     {
         selectedIvs[i] = availableIVs[Random() % (NUM_STATS - i)];
