@@ -537,8 +537,10 @@ static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
     }
 }
 
-static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare, struct BoxPokemon *father, struct BoxPokemon *mother)
+static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
 {
+    u16 motherItem = GetBoxMonData(&daycare->mons[0].mon, MON_DATA_HELD_ITEM);
+    u16 fatherItem = GetBoxMonData(&daycare->mons[1].mon, MON_DATA_HELD_ITEM);
     u8 i;
     u8 selectedIvs[5];
     u8 availableIVs[NUM_STATS];
@@ -546,7 +548,7 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare, struct BoxP
     u8 iv;
     u8 howManyIVs = 3;
 
-    if (GetBoxMonData(father, MON_DATA_HELD_ITEM) == ITEM_DESTINY_KNOT || GetBoxMonData(mother, MON_DATA_HELD_ITEM) == ITEM_DESTINY_KNOT)
+    if (motherItem == ITEM_DESTINY_KNOT || fatherItem == ITEM_DESTINY_KNOT)
         howManyIVs = 5;
 
     // Initialize a list of IV indices.
@@ -902,7 +904,7 @@ static void _GiveEggFromDaycare(struct DayCare *daycare)
     AlterEggSpeciesWithIncenseItem(&species, daycare);
 #endif
     SetInitialEggData(&egg, species, daycare);
-    InheritIVs(&egg, daycare, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
+    InheritIVs(&egg, daycare);
     InheritPokeball(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
     BuildEggMoveset(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
 
