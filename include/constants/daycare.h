@@ -13,7 +13,6 @@
 #define DAYCARE_ONE_MON     2
 #define DAYCARE_TWO_MONS    3
 
-#define INHERITED_IV_COUNT 3
 #if P_EGG_HATCH_LEVEL >= GEN_4
 #define EGG_HATCH_LEVEL 1
 #else
