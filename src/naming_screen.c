@@ -26,6 +26,7 @@
 #include "text_window.h"
 #include "overworld.h"
 #include "walda_phrase.h"
+#include "main.h"
 #include "constants/event_objects.h"
 #include "constants/rgb.h"
 
@@ -61,10 +62,10 @@ enum {
 };
 
 enum {
-    PALTAG_PC_ICON,
+    PALTAG_MENU, // Also the PC icon
     PALTAG_PAGE_SWAP_UPPER,
     PALTAG_PAGE_SWAP_LOWER,
-    PALTAG_PAGE_SWAP_OTHERS,
+    PALTAG_PAGE_SWAP_OTHERS, // Also the input arrow/underscore
     PALTAG_PAGE_SWAP,
     PALTAG_CURSOR,
     PALTAG_BACK_BUTTON,
@@ -180,21 +181,11 @@ struct NamingScreenData
 };
 
 EWRAM_DATA static struct NamingScreenData *sNamingScreen = NULL;
-extern u16 gKeyRepeatStartDelay;
 
-// extern text
-extern const u8 gText_MoveOkBack[];
-extern const u8 gText_YourName[];
-extern const u8 gText_BoxName[];
-extern const u8 gText_PkmnsNickname[];
-extern const u8 gText_TellHimTheWords[];
-
-
-// start of .rodata
-static const u8 sPCIconOff_Gfx[] = INCBIN_U8("graphics/naming_screen/pc_icon/off.4bpp");
-static const u8 sPCIconOn_Gfx[] = INCBIN_U8("graphics/naming_screen/pc_icon/on.4bpp");
+static const u8 sPCIconOff_Gfx[] = INCBIN_U8("graphics/naming_screen/pc_icon_off.4bpp");
+static const u8 sPCIconOn_Gfx[] = INCBIN_U8("graphics/naming_screen/pc_icon_on.4bpp");
 static const u16 sKeyboard_Pal[] = INCBIN_U16("graphics/naming_screen/keyboard.gbapal");
-static const u16 sUnused_Pal[] = INCBIN_U16("graphics/naming_screen/unused.gbapal");
+static const u16 sRival_Pal[] = INCBIN_U16("graphics/naming_screen/rival.gbapal"); // Unused, leftover from FRLG rival
 
 static const u8 *const sTransferredToPCMessages[] =
 {
@@ -276,7 +267,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
-        .width = 30,
+        .width = DISPLAY_TILE_WIDTH,
         .height = 2,
         .paletteNum = 11,
         .baseBlock = 0x074
@@ -312,13 +303,12 @@ static const u8 sPageColumnCounts[KBPAGE_COUNT] = {
     [KEYBOARD_LETTERS_UPPER] = KBCOL_COUNT,
     [KEYBOARD_SYMBOLS]       = 6
 };
-static const u8 sPageColumnXPos[KBPAGE_COUNT * KBCOL_COUNT] = {
-    0, 12, 24, 56, 68, 80, 92, 123, // KEYBOARD_LETTERS_LOWER
-    0, 12, 24, 56, 68, 80, 92, 123, // KEYBOARD_LETTERS_UPPER
-    0, 22, 44, 66, 88, 110          // KEYBOARD_SYMBOLS
+static const u8 sPageColumnXPos[KBPAGE_COUNT][KBCOL_COUNT] = {
+    [KEYBOARD_LETTERS_LOWER] = {0, 12, 24, 56, 68, 80, 92, 123},
+    [KEYBOARD_LETTERS_UPPER] = {0, 12, 24, 56, 68, 80, 92, 123},
+    [KEYBOARD_SYMBOLS]       = {0, 22, 44, 66, 88, 110}
 };
 
-// forward declarations
 static const struct NamingScreenTemplate *const sNamingScreenTemplates[];
 static const struct SubspriteTable sSubspriteTable_PageSwapFrame[];
 static const struct SubspriteTable sSubspriteTable_PageSwapText[];
@@ -333,7 +323,7 @@ static const struct SpriteTemplate sSpriteTemplate_Cursor;
 static const struct SpriteTemplate sSpriteTemplate_InputArrow;
 static const struct SpriteTemplate sSpriteTemplate_Underscore;
 static const struct SpriteTemplate sSpriteTemplate_PCIcon;
-static const u8* const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT];
+static const u8 *const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT];
 static const struct SpriteSheet sSpriteSheets[];
 static const struct SpritePalette sSpritePalettes[];
 
@@ -738,9 +728,9 @@ static void DisplaySentToPCMessage(void)
         stringToDisplay++;
 
     StringExpandPlaceholders(gStringVar4, sTransferredToPCMessages[stringToDisplay]);
-    DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, FALSE);
     gTextFlags.canABSpeedUpPrint = TRUE;
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), 0, 2, 1, 3);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
 
@@ -1142,7 +1132,7 @@ static void SetCursorPos(s16 x, s16 y)
     struct Sprite *cursorSprite = &gSprites[sNamingScreen->cursorSpriteId];
 
     if (x < sPageColumnCounts[CurrentPageToKeyboardId()])
-        cursorSprite->x = sPageColumnXPos[x + CurrentPageToKeyboardId() * KBCOL_COUNT] + 38;
+        cursorSprite->x = sPageColumnXPos[CurrentPageToKeyboardId()][x] + 38;
     else
         cursorSprite->x = 0;
 
@@ -1781,7 +1771,7 @@ static void DrawGenderIcon(void)
             StringCopy(text, gText_FemaleSymbol);
             isFemale = TRUE;
         }
-        AddTextPrinterParameterized3(sNamingScreen->windows[WIN_TEXT_ENTRY], FONT_NORMAL, 0x68, 1, sGenderColors[isFemale], TEXT_SKIP_DRAW, text);
+        AddTextPrinterParameterized3(sNamingScreen->windows[WIN_TEXT_ENTRY], FONT_NORMAL, (POKEMON_NAME_LENGTH * 4) + 64, 1, sGenderColors[isFemale], TEXT_SKIP_DRAW, text);
     }
 }
 
@@ -1890,9 +1880,9 @@ static void CreateHelperTasks(void)
 
 static void LoadPalettes(void)
 {
-    LoadPalette(gNamingScreenMenu_Pal, 0, 0xC0);
-    LoadPalette(sKeyboard_Pal, 0xA0, sizeof(sKeyboard_Pal));
-    LoadPalette(GetTextWindowPalette(2), 0xB0, 0x20);
+    LoadPalette(gNamingScreenMenu_Pal, BG_PLTT_ID(0), sizeof(gNamingScreenMenu_Pal));
+    LoadPalette(sKeyboard_Pal, BG_PLTT_ID(10), sizeof(sKeyboard_Pal));
+    LoadPalette(GetTextWindowPalette(2), BG_PLTT_ID(11), PLTT_SIZE_4BPP);
 }
 
 static void DrawBgTilemap(u8 bg, const void *src)
@@ -2189,6 +2179,12 @@ static const struct OamData sOam_32x16 =
     .paletteNum = 0,
 };
 
+/*
+[0_____][] <-1   40x32
+[2_____][] <-3
+[4___+_][] <-5/Origin
+[6     ][] <-7
+*/
 static const struct Subsprite sSubsprites_PageSwapFrame[] =
 {
     {
@@ -2257,6 +2253,10 @@ static const struct Subsprite sSubsprites_PageSwapFrame[] =
     }
 };
 
+/*
+[0_][] <-1    24x8
+   ^-- Origin
+*/
 static const struct Subsprite sSubsprites_PageSwapText[] =
 {
     {
@@ -2277,6 +2277,11 @@ static const struct Subsprite sSubsprites_PageSwapText[] =
     }
 };
 
+/*
+[0_____][] <-1   40x24
+[2_____][] <-3
+[4___+_][] <-5/Origin
+*/
 static const struct Subsprite sSubsprites_Button[] =
 {
     {
@@ -2329,6 +2334,11 @@ static const struct Subsprite sSubsprites_Button[] =
     }
 };
 
+/*
+[0_]    16x24
+[1+] <--Origin
+[2_]
+*/
 static const struct Subsprite sSubsprites_PCIcon[] =
 {
     {
@@ -2512,7 +2522,7 @@ static const struct SpriteTemplate sSpriteTemplate_Underscore =
 static const struct SpriteTemplate sSpriteTemplate_PCIcon =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_PC_ICON,
+    .paletteTag = PALTAG_MENU,
     .oam = &sOam_8x8,
     .anims = sAnims_PCIcon,
     .images = sImageTable_PCIcon,
@@ -2520,7 +2530,7 @@ static const struct SpriteTemplate sSpriteTemplate_PCIcon =
     .callback = SpriteCallbackDummy
 };
 
-static const u8* const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT] =
+static const u8 *const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT] =
 {
     [KEYBOARD_LETTERS_LOWER] =
     {
@@ -2547,31 +2557,31 @@ static const u8* const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT] =
 
 static const struct SpriteSheet sSpriteSheets[] =
 {
-    {gNamingScreenRWindow_Gfx + 0x280,          0x1E0,  GFXTAG_BACK_BUTTON},
-    {gNamingScreenRWindow_Gfx + 0x460,          0x1E0,  GFXTAG_OK_BUTTON},
-    {gNamingScreenRWindow_Gfx,                  0x280,  GFXTAG_PAGE_SWAP_FRAME},
-    {gNamingScreenPageButton_Gfx + 0x20,        0x100,  GFXTAG_PAGE_SWAP_BUTTON},
-    {gNamingScreenROptions_Gfx,                 0x060,  GFXTAG_PAGE_SWAP_UPPER},
-    {gNamingScreenROptions_Gfx + 0xA0,          0x060,  GFXTAG_PAGE_SWAP_LOWER},
-    {gNamingScreenROptions_Gfx + 0x140,         0x060,  GFXTAG_PAGE_SWAP_OTHERS},
-    {gNamingScreenCursor_Gfx,                   0x080,  GFXTAG_CURSOR},
-    {gNamingScreenCursor_Gfx + 0xA0,            0x080,  GFXTAG_CURSOR_SQUISHED},
-    {gNamingScreenCursor_Gfx + 0x140,           0x080,  GFXTAG_CURSOR_FILLED},
-    {gNamingScreenInputArrow_Gfx,               0x020,  GFXTAG_INPUT_ARROW},
-    {gNamingScreenUnderscore_Gfx,               0x020,  GFXTAG_UNDERSCORE},
+    {gNamingScreenBackButton_Gfx,     0x1E0,  GFXTAG_BACK_BUTTON},
+    {gNamingScreenOKButton_Gfx,       0x1E0,  GFXTAG_OK_BUTTON},
+    {gNamingScreenPageSwapFrame_Gfx,  0x280,  GFXTAG_PAGE_SWAP_FRAME},
+    {gNamingScreenPageSwapButton_Gfx, 0x100,  GFXTAG_PAGE_SWAP_BUTTON},
+    {gNamingScreenPageSwapUpper_Gfx,  0x060,  GFXTAG_PAGE_SWAP_UPPER},
+    {gNamingScreenPageSwapLower_Gfx,  0x060,  GFXTAG_PAGE_SWAP_LOWER},
+    {gNamingScreenPageSwapOthers_Gfx, 0x060,  GFXTAG_PAGE_SWAP_OTHERS},
+    {gNamingScreenCursor_Gfx,         0x080,  GFXTAG_CURSOR},
+    {gNamingScreenCursorSquished_Gfx, 0x080,  GFXTAG_CURSOR_SQUISHED},
+    {gNamingScreenCursorFilled_Gfx,   0x080,  GFXTAG_CURSOR_FILLED},
+    {gNamingScreenInputArrow_Gfx,     0x020,  GFXTAG_INPUT_ARROW},
+    {gNamingScreenUnderscore_Gfx,     0x020,  GFXTAG_UNDERSCORE},
     {}
 };
 
 static const struct SpritePalette sSpritePalettes[] =
 {
-    {gNamingScreenMenu_Pal,         PALTAG_PC_ICON},
-    {gNamingScreenMenu_Pal + 0x10,  PALTAG_PAGE_SWAP_UPPER},
-    {gNamingScreenMenu_Pal + 0x20,  PALTAG_PAGE_SWAP_LOWER},
-    {gNamingScreenMenu_Pal + 0x30,  PALTAG_PAGE_SWAP_OTHERS},
-    {gNamingScreenMenu_Pal + 0x40,  PALTAG_PAGE_SWAP},
-    {gNamingScreenMenu_Pal + 0x50,  PALTAG_CURSOR},
-    {gNamingScreenMenu_Pal + 0x40,  PALTAG_BACK_BUTTON},
-    {gNamingScreenMenu_Pal + 0x40,  PALTAG_OK_BUTTON},
+    {gNamingScreenMenu_Pal[0], PALTAG_MENU},
+    {gNamingScreenMenu_Pal[1], PALTAG_PAGE_SWAP_UPPER},
+    {gNamingScreenMenu_Pal[2], PALTAG_PAGE_SWAP_LOWER},
+    {gNamingScreenMenu_Pal[3], PALTAG_PAGE_SWAP_OTHERS},
+    {gNamingScreenMenu_Pal[4], PALTAG_PAGE_SWAP},
+    {gNamingScreenMenu_Pal[5], PALTAG_CURSOR},
+    {gNamingScreenMenu_Pal[4], PALTAG_BACK_BUTTON},
+    {gNamingScreenMenu_Pal[4], PALTAG_OK_BUTTON},
     {}
 };
 

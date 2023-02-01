@@ -12,12 +12,12 @@ extern const struct WindowTemplate gTradeEvolutionSceneYesNoWindowTemplate;
 s32 GetGameProgressForLinkTrade(void);
 void CB2_StartCreateTradeMenu(void);
 void CB2_LinkTrade(void);
-int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData a0, u16, u16, u8);
-int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData a0, struct RfuGameCompatibilityData a1, u16 a2, u16 a3, u8 a4, u16 a5, u8 a6);
-int CanSpinTradeMon(struct Pokemon*, u16);
+int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 species2, u16 species, bool8 isEventLegal);
+int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, bool8 isEventLegal);
+int CanSpinTradeMon(struct Pokemon *, u16);
 void InitTradeSequenceBgGpuRegs(void);
 void LinkTradeDrawWindow(void);
-void InitTradeBg(void);
+void LoadTradeAnimGfx(void);
 void DrawTextOnTradeWindow(u8, const u8 *, u8);
 
 #endif //GUARD_TRADE_H

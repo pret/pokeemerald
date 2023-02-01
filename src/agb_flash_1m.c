@@ -3,7 +3,7 @@
 
 static const char AgbLibFlashVersion[] = "FLASH1M_V103";
 
-const struct FlashSetupInfo * const sSetupInfos[] =
+static const struct FlashSetupInfo * const sSetupInfos[] =
 {
     &MX29L010,
     &LE26FV10N1TS,

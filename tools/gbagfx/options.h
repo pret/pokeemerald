@@ -4,6 +4,7 @@
 #define OPTIONS_H
 
 #include <stdbool.h>
+#include "gfx.h"
 
 struct GbaToPngOptions {
     char *paletteFilePath;
@@ -18,6 +19,7 @@ struct GbaToPngOptions {
 
 struct PngToGbaOptions {
     int numTiles;
+    enum NumTilesMode numTilesMode;
     int bitDepth;
     int metatileWidth;
     int metatileHeight;

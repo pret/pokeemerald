@@ -5,6 +5,7 @@
 #include "link.h"
 #include "main.h"
 #include "mystery_gift_menu.h"
+#include "mystery_gift_client.h"
 #include "save.h"
 #include "sound.h"
 #include "sprite.h"
@@ -98,7 +99,7 @@ static u8 EReader_Transfer(struct EReaderData *eReader)
 static void OpenEReaderLink(void)
 {
     memset(gDecompressionBuffer, 0, 0x2000);
-    gLinkType = LINKTYPE_EREADER;
+    gLinkType = LINKTYPE_EREADER_EM;
     OpenLink();
     SetSuppressLinkErrorMessage(TRUE);
 }
@@ -112,7 +113,7 @@ static bool32 ValidateEReaderConnection(void)
     REG_IME = 0;
     *(u64 *)handshakes = *(u64 *)gLink.handshakeBuffer;
     REG_IME = backupIME;
-    
+
     // Validate that we are player 1, the EReader is player 2,
     // and that players 3 and 4 are empty.
     if (handshakes[0] == SLAVE_HANDSHAKE && handshakes[1] == EREADER_HANDSHAKE
@@ -154,8 +155,8 @@ enum {
 
 static u32 TryReceiveCard(u8 *state, u16 *timer)
 {
-    if (*state >= RECV_STATE_EXCHANGE 
-     && *state <= RECV_STATE_WAIT_DISCONNECT 
+    if (*state >= RECV_STATE_EXCHANGE
+     && *state <= RECV_STATE_WAIT_DISCONNECT
      && HasLinkErrorOccurred())
     {
         // Return error status if an error occurs
@@ -259,7 +260,7 @@ void CreateEReaderTask(void)
     data->unused2 = 0;
     data->unused3 = 0;
     data->status = 0;
-    data->unusedBuffer = AllocZeroed(0x40);
+    data->unusedBuffer = AllocZeroed(CLIENT_MAX_MSG_SIZE);
 }
 
 static void ResetTimer(u16 *timer)
@@ -397,8 +398,8 @@ static void Task_EReader(u8 taskId)
         break;
     case ER_STATE_CONNECTING:
         AddTextPrinterToWindow1(gJPText_Connecting);
-        // XXX: This (u32*) cast is discarding the const qualifier from gMultiBootProgram_EReader_Start
-        EReader_Load(&gEReaderData, gMultiBootProgram_EReader_End - gMultiBootProgram_EReader_Start, (u32*)gMultiBootProgram_EReader_Start);
+        // XXX: This (u32 *) cast is discarding the const qualifier from gMultiBootProgram_EReader_Start
+        EReader_Load(&gEReaderData, gMultiBootProgram_EReader_End - gMultiBootProgram_EReader_Start, (u32 *)gMultiBootProgram_EReader_Start);
         data->state = ER_STATE_TRANSFER;
         break;
     case ER_STATE_TRANSFER:

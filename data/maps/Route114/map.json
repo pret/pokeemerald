@@ -14,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
+      "map": "MAP_ROUTE115",
       "offset": 40,
-      "map": "MAP_ROUTE115"
+      "direction": "left"
     },
     {
-      "direction": "right",
+      "map": "MAP_FALLARBOR_TOWN",
       "offset": 0,
-      "map": "MAP_FALLARBOR_TOWN"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -383,35 +383,35 @@
       "y": 63,
       "elevation": 0,
       "dest_map": "MAP_METEOR_FALLS_1F_1R",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 29,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_ROUTE114_FOSSIL_MANIACS_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 27,
       "y": 36,
       "elevation": 0,
       "dest_map": "MAP_ROUTE114_LANETTES_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 6,
       "y": 46,
       "elevation": 0,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 7,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

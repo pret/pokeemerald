@@ -50,7 +50,7 @@ static const struct OamData sClockOamData =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -196,7 +196,7 @@ static void CB2_SaveFailedScreen(void)
         DmaFill16(3, 0, VRAM, VRAM_SIZE);
         DmaFill32(3, 0, OAM, OAM_SIZE);
         DmaFill16(3, 0, PLTT, PLTT_SIZE);
-        LZ77UnCompVram(gBirchHelpGfx, (void *)VRAM);
+        LZ77UnCompVram(gBirchBagGrass_Gfx, (void *)VRAM);
         LZ77UnCompVram(gBirchBagTilemap, (void *)(BG_SCREEN_ADDR(14)));
         LZ77UnCompVram(gBirchGrassTilemap, (void *)(BG_SCREEN_ADDR(15)));
         LZ77UnCompVram(sSaveFailedClockGfx, (void *)(OBJ_VRAM0 + 0x20));
@@ -214,10 +214,10 @@ static void CB2_SaveFailedScreen(void)
         ResetSpriteData();
         ResetTasks();
         ResetPaletteFade();
-        LoadPalette(gBirchBagGrassPal, 0, 0x40);
-        LoadPalette(sSaveFailedClockPal, 0x100, 0x20);
-        LoadPalette(gTextWindowFrame1_Pal, 0xE0, 0x20);
-        LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
+        LoadPalette(gBirchBagGrass_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+        LoadPalette(sSaveFailedClockPal, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
+        LoadPalette(gTextWindowFrame1_Pal, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         DrawStdFrameWithCustomTileAndPalette(sWindowIds[TEXT_WIN_ID], FALSE, 0x214, 0xE);
         DrawStdFrameWithCustomTileAndPalette(sWindowIds[CLOCK_WIN_ID], FALSE, 0x214, 0xE);
         FillWindowPixelBuffer(sWindowIds[CLOCK_WIN_ID], PIXEL_FILL(1)); // backwards?

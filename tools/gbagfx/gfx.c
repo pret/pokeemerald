@@ -397,7 +397,7 @@ void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int 
 	free(buffer);
 }
 
-void WriteImage(char *path, int numTiles, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors)
+void WriteImage(char *path, enum NumTilesMode numTilesMode, int numTiles, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors)
 {
 	int tileSize = bitDepth * 8;
 
@@ -424,7 +424,8 @@ void WriteImage(char *path, int numTiles, int bitDepth, int metatileWidth, int m
 		FATAL_ERROR("The specified number of tiles (%d) is greater than the maximum possible value (%d).\n", numTiles, maxNumTiles);
 
 	int bufferSize = numTiles * tileSize;
-	unsigned char *buffer = malloc(bufferSize);
+	int maxBufferSize = maxNumTiles * tileSize;
+	unsigned char *buffer = malloc(maxBufferSize);
 
 	if (buffer == NULL)
 		FATAL_ERROR("Failed to allocate memory for pixels.\n");
@@ -433,17 +434,36 @@ void WriteImage(char *path, int numTiles, int bitDepth, int metatileWidth, int m
 
 	switch (bitDepth) {
 	case 1:
-		ConvertToTiles1Bpp(image->pixels, buffer, numTiles, metatilesWide, metatileWidth, metatileHeight, invertColors);
+		ConvertToTiles1Bpp(image->pixels, buffer, maxNumTiles, metatilesWide, metatileWidth, metatileHeight, invertColors);
 		break;
 	case 4:
-		ConvertToTiles4Bpp(image->pixels, buffer, numTiles, metatilesWide, metatileWidth, metatileHeight, invertColors);
+		ConvertToTiles4Bpp(image->pixels, buffer, maxNumTiles, metatilesWide, metatileWidth, metatileHeight, invertColors);
 		break;
 	case 8:
-		ConvertToTiles8Bpp(image->pixels, buffer, numTiles, metatilesWide, metatileWidth, metatileHeight, invertColors);
+		ConvertToTiles8Bpp(image->pixels, buffer, maxNumTiles, metatilesWide, metatileWidth, metatileHeight, invertColors);
 		break;
 	}
 
-	WriteWholeFile(path, buffer, bufferSize);
+	bool zeroPadded = true;
+	for (int i = bufferSize; i < maxBufferSize && zeroPadded; i++) {
+		if (buffer[i] != 0)
+		{
+			switch (numTilesMode)
+			{
+			case NUM_TILES_IGNORE:
+				break;
+			case NUM_TILES_WARN:
+				fprintf(stderr, "Ignoring -num_tiles %d because tile %d contains non-transparent pixels.\n", numTiles, 1 + i / tileSize);
+				zeroPadded = false;
+				break;
+			case NUM_TILES_ERROR:
+				FATAL_ERROR("Tile %d contains non-transparent pixels.\n", 1 + i / tileSize);
+				break;
+			}
+		}
+	}
+
+	WriteWholeFile(path, buffer, zeroPadded ? bufferSize : maxBufferSize);
 
 	free(buffer);
 }

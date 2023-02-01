@@ -14,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "down",
+      "map": "MAP_VERDANTURF_TOWN",
       "offset": 80,
-      "map": "MAP_VERDANTURF_TOWN"
+      "direction": "down"
     },
     {
-      "direction": "left",
+      "map": "MAP_RUSTBORO_CITY",
       "offset": 0,
-      "map": "MAP_RUSTBORO_CITY"
+      "direction": "left"
     }
   ],
   "object_events": [
@@ -396,35 +396,35 @@
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_RUSTURF_TUNNEL",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 38,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_ROUTE116_TUNNELERS_REST_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 65,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_RUSTURF_TUNNEL",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 59,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 79,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

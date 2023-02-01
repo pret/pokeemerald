@@ -63,7 +63,7 @@ void FreePokedexAreaMapBgNum(void)
     TRY_FREE_AND_SET_NULL(sPokedexAreaMapBgNum);
 }
 
-void PokedexAreaMapChangeBgY(u32 a0)
+void PokedexAreaMapChangeBgY(u32 move)
 {
-    ChangeBgY(*sPokedexAreaMapBgNum, a0 * 0x100, BG_COORD_SET);
+    ChangeBgY(*sPokedexAreaMapBgNum, move * 0x100, BG_COORD_SET);
 }

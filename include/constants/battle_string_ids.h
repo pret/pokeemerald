@@ -599,4 +599,6 @@
 #define B_MSG_REF_DRAW               7
 #define B_MSG_REF_COMMENCE_BATTLE    8
 
+#define NUM_TRAPPING_MOVES 6
+
 #endif // GUARD_CONSTANTS_BATTLE_STRING_IDS_H
