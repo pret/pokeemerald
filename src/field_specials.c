@@ -1049,7 +1049,7 @@ static void PCTurnOnEffect_SetMetatile(s16 isScreenOn, s8 dx, s8 dy)
     u16 metatileId = 0;
     if (isScreenOn)
     {
-        // Screen is off, set it on
+        // Screen is on, set it off
         if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
             metatileId = METATILE_Building_PC_Off;
         else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
@@ -1059,7 +1059,7 @@ static void PCTurnOnEffect_SetMetatile(s16 isScreenOn, s8 dx, s8 dy)
     }
     else
     {
-        // Screen is on, set it off
+        // Screen is off, set it on
         if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
             metatileId = METATILE_Building_PC_On;
         else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
