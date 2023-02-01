@@ -46,6 +46,7 @@
 #include "wallclock.h"
 #include "window.h"
 #include "constants/battle_frontier.h"
+#include "constants/battle_pyramid.h"
 #include "constants/battle_tower.h"
 #include "constants/decorations.h"
 #include "constants/event_objects.h"
@@ -65,6 +66,15 @@
 #include "constants/weather.h"
 #include "constants/metatile_labels.h"
 #include "palette.h"
+
+#define TAG_ITEM_ICON 5500
+
+#define GFXTAG_MULTICHOICE_SCROLL_ARROWS 2000
+#define PALTAG_MULTICHOICE_SCROLL_ARROWS 100
+
+#define ELEVATOR_WINDOW_WIDTH  3
+#define ELEVATOR_WINDOW_HEIGHT 3
+#define ELEVATOR_LIGHT_STAGES  3
 
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
@@ -1246,7 +1256,7 @@ void SpawnCameraObject(void)
                                                   OBJ_EVENT_ID_CAMERA,
                                                   gSaveBlock1Ptr->pos.x + MAP_OFFSET,
                                                   gSaveBlock1Ptr->pos.y + MAP_OFFSET,
-                                                  3);
+                                                  3); // elevation
     gObjectEvents[obj].invisible = TRUE;
     CameraObjectSetFollowedSpriteId(gObjectEvents[obj].spriteId);
 }
@@ -1411,7 +1421,7 @@ void SetShoalItemFlag(u16 unused)
     FlagSet(FLAG_SYS_SHOAL_ITEM);
 }
 
-void PutZigzagoonInPlayerParty(void)
+void LoadWallyZigzagoon(void)
 {
     u16 monData;
     CreateMon(&gPlayerParty[0], SPECIES_ZIGZAGOON, 7, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
@@ -1451,20 +1461,21 @@ bool8 IsPokerusInParty(void)
     return TRUE;
 }
 
-#define horizontalPan  data[0]
-#define delayCounter   data[1]
-#define numShakes      data[2]
-#define delay          data[3]
-#define verticalPan    data[4]
+// Task data for Task_ShakeCamera
+#define tHorizontalPan  data[0]
+#define tDelayCounter   data[1]
+#define tNumShakes      data[2]
+#define tDelay          data[3]
+#define tVerticalPan    data[4]
 
 void ShakeCamera(void)
 {
     u8 taskId = CreateTask(Task_ShakeCamera, 9);
-    gTasks[taskId].horizontalPan = gSpecialVar_0x8005;
-    gTasks[taskId].delayCounter = 0;
-    gTasks[taskId].numShakes = gSpecialVar_0x8006;
-    gTasks[taskId].delay = gSpecialVar_0x8007;
-    gTasks[taskId].verticalPan = gSpecialVar_0x8004;
+    gTasks[taskId].tHorizontalPan = gSpecialVar_0x8005;
+    gTasks[taskId].tDelayCounter = 0;
+    gTasks[taskId].tNumShakes = gSpecialVar_0x8006;
+    gTasks[taskId].tDelay = gSpecialVar_0x8007;
+    gTasks[taskId].tVerticalPan = gSpecialVar_0x8004;
     SetCameraPanningCallback(NULL);
     PlaySE(SE_M_STRENGTH);
 }
@@ -1473,15 +1484,15 @@ static void Task_ShakeCamera(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    delayCounter++;
-    if (delayCounter % delay == 0)
+    tDelayCounter++;
+    if (tDelayCounter % tDelay == 0)
     {
-        delayCounter = 0;
-        numShakes--;
-        horizontalPan = -horizontalPan;
-        verticalPan = -verticalPan;
-        SetCameraPanning(horizontalPan, verticalPan);
-        if (numShakes == 0)
+        tDelayCounter = 0;
+        tNumShakes--;
+        tHorizontalPan = -tHorizontalPan;
+        tVerticalPan = -tVerticalPan;
+        SetCameraPanning(tHorizontalPan, tVerticalPan);
+        if (tNumShakes == 0)
         {
             StopCameraShake(taskId);
             InstallCameraPanAheadCallback();
@@ -1495,11 +1506,11 @@ static void StopCameraShake(u8 taskId)
     ScriptContext_Enable();
 }
 
-#undef horizontalPan
-#undef delayCounter
-#undef numShakes
-#undef delay
-#undef verticalPan
+#undef tHorizontalPan
+#undef tDelayCounter
+#undef tNumShakes
+#undef tDelay
+#undef tVerticalPan
 
 bool8 FoundBlackGlasses(void)
 {
@@ -1524,7 +1535,8 @@ u8 GetLeadMonIndex(void)
     u8 partyCount = CalculatePlayerPartyCount();
     for (i = 0; i < partyCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_EGG && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != 0)
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_EGG
+         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_NONE)
             return i;
     }
     return 0;
@@ -1694,10 +1706,6 @@ static const u8 *const sDeptStoreFloorNames[] =
     [DEPT_STORE_FLOORNUM_11F] = gText_11F,
     [DEPT_STORE_FLOORNUM_ROOFTOP] = gText_Rooftop
 };
-
-#define ELEVATOR_WINDOW_WIDTH  3
-#define ELEVATOR_WINDOW_HEIGHT 3
-#define ELEVATOR_LIGHT_STAGES  3
 
 static const u16 sElevatorWindowTiles_Ascending[ELEVATOR_WINDOW_HEIGHT][ELEVATOR_LIGHT_STAGES] =
 {
@@ -2020,13 +2028,13 @@ bool8 UsedPokemonCenterWarp(void)
         MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F,
         MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F,
         MAP_UNION_ROOM,
-        0xFFFF
+        MAP_UNDEFINED
     };
 
     int i;
     u16 map = (gLastUsedWarp.mapGroup << 8) + gLastUsedWarp.mapNum;
 
-    for (i = 0; sPokemonCenters[i] != 0xFFFF; i++)
+    for (i = 0; sPokemonCenters[i] != MAP_UNDEFINED; i++)
     {
         if (sPokemonCenters[i] == map)
             return TRUE;
@@ -2724,21 +2732,21 @@ static void ScrollableMultichoice_UpdateScrollArrows(u8 taskId)
         .secondY = 0,
         .fullyUpThreshold = 0,
         .fullyDownThreshold = 0,
-        .tileTag = 2000,
-        .palTag = 100,
+        .tileTag = GFXTAG_MULTICHOICE_SCROLL_ARROWS,
+        .palTag = PALTAG_MULTICHOICE_SCROLL_ARROWS,
         .palNum = 0
     };
 
     struct Task *task = &gTasks[taskId];
     struct ScrollArrowsTemplate template = sScrollableMultichoice_ScrollArrowsTemplate;
-    if (task->tMaxItemsOnScreen != task->data[1])
+    if (task->tMaxItemsOnScreen != task->tNumItems)
     {
         template.firstX = (task->tWidth / 2) * 8 + 12 + (task->tLeft - 1) * 8;
         template.firstY = 8;
         template.secondX = (task->tWidth / 2) * 8 + 12 + (task->tLeft - 1) * 8;
         template.secondY = task->tHeight * 8 + 10;
         template.fullyUpThreshold = 0;
-        template.fullyDownThreshold = task->data[1] - task->tMaxItemsOnScreen;
+        template.fullyDownThreshold = task->tNumItems - task->tMaxItemsOnScreen;
         task->tScrollArrowId = AddScrollIndicatorArrowPair(&template, &sScrollableMultichoice_ScrollOffset);
     }
 }
@@ -2746,10 +2754,8 @@ static void ScrollableMultichoice_UpdateScrollArrows(u8 taskId)
 static void ScrollableMultichoice_RemoveScrollArrows(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    if (task->tMaxItemsOnScreen != task->data[1])
-    {
+    if (task->tMaxItemsOnScreen != task->tNumItems)
         RemoveScrollIndicatorArrowPair(task->tScrollArrowId);
-    }
 }
 
 // Removed for Emerald (replaced by ShowScrollableMultichoice)
@@ -2972,8 +2978,6 @@ void CloseFrontierExchangeCornerItemIconWindow(void)
     ClearStdWindowAndFrameToTransparent(sFrontierExchangeCorner_ItemIconWindowId, TRUE);
     RemoveWindow(sFrontierExchangeCorner_ItemIconWindowId);
 }
-
-#define TAG_ITEM_ICON 5500
 
 static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
 {
@@ -3255,12 +3259,14 @@ void ScrollableMultichoice_ClosePersistentMenu(void)
 #undef tListTaskId
 #undef tTaskId
 
+#define DEOXYS_ROCK_LEVELS 11
+
 void DoDeoxysRockInteraction(void)
 {
     CreateTask(Task_DeoxysRockInteraction, 8);
 }
 
-static const u16 sDeoxysRockPalettes[][16] = {
+static const u16 sDeoxysRockPalettes[DEOXYS_ROCK_LEVELS][16] = {
     INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_1.gbapal"),
     INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_2.gbapal"),
     INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_3.gbapal"),
@@ -3274,7 +3280,7 @@ static const u16 sDeoxysRockPalettes[][16] = {
     INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_11.gbapal"),
 };
 
-static const u8 sDeoxysRockCoords[][2] = {
+static const u8 sDeoxysRockCoords[DEOXYS_ROCK_LEVELS][2] = {
     { 15, 12 },
     { 11, 14 },
     { 15,  8 },
@@ -3290,11 +3296,11 @@ static const u8 sDeoxysRockCoords[][2] = {
 
 static void Task_DeoxysRockInteraction(u8 taskId)
 {
-    static const u8 sStoneMaxStepCounts[] = { 4, 8, 8, 8, 4, 4, 4, 6, 3, 3 };
+    static const u8 sStoneMaxStepCounts[DEOXYS_ROCK_LEVELS - 1] = { 4, 8, 8, 8, 4, 4, 4, 6, 3, 3 };
 
     if (FlagGet(FLAG_DEOXYS_ROCK_COMPLETE) == TRUE)
     {
-        gSpecialVar_Result = 3;
+        gSpecialVar_Result = DEOXYS_ROCK_COMPLETE;
         ScriptContext_Enable();
         DestroyTask(taskId);
     }
@@ -3309,13 +3315,13 @@ static void Task_DeoxysRockInteraction(u8 taskId)
             // Player failed to take the shortest path to the stone, so it resets.
             ChangeDeoxysRockLevel(0);
             VarSet(VAR_DEOXYS_ROCK_LEVEL, 0);
-            gSpecialVar_Result = 0;
+            gSpecialVar_Result = DEOXYS_ROCK_FAILED;
             DestroyTask(taskId);
         }
-        else if (rockLevel == 10)
+        else if (rockLevel == DEOXYS_ROCK_LEVELS - 1)
         {
             FlagSet(FLAG_DEOXYS_ROCK_COMPLETE);
-            gSpecialVar_Result = 2;
+            gSpecialVar_Result = DEOXYS_ROCK_SOLVED;
             ScriptContext_Enable();
             DestroyTask(taskId);
         }
@@ -3324,7 +3330,7 @@ static void Task_DeoxysRockInteraction(u8 taskId)
             rockLevel++;
             ChangeDeoxysRockLevel(rockLevel);
             VarSet(VAR_DEOXYS_ROCK_LEVEL, rockLevel);
-            gSpecialVar_Result = 1;
+            gSpecialVar_Result = DEOXYS_ROCK_PROGRESSED;
             DestroyTask(taskId);
         }
     }
@@ -3337,9 +3343,9 @@ static void ChangeDeoxysRockLevel(u8 rockLevel)
     TryGetObjectEventIdByLocalIdAndMap(LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
 
     if (rockLevel == 0)
-        PlaySE(SE_M_CONFUSE_RAY);
+        PlaySE(SE_M_CONFUSE_RAY); // Failure sound
     else
-        PlaySE(SE_RG_DEOXYS_MOVE);
+        PlaySE(SE_RG_DEOXYS_MOVE); // Success sound
 
     CreateTask(WaitForDeoxysRockMovement, 8);
     gFieldEffectArguments[0] = LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK;
@@ -3348,6 +3354,8 @@ static void ChangeDeoxysRockLevel(u8 rockLevel)
     gFieldEffectArguments[3] = sDeoxysRockCoords[rockLevel][0];
     gFieldEffectArguments[4] = sDeoxysRockCoords[rockLevel][1];
 
+    // Set number of movement steps.
+    // Resetting for failure is slow, successful movement is fast.
     if (rockLevel == 0)
         gFieldEffectArguments[5] = 60;
     else
@@ -3865,8 +3873,9 @@ static void Task_CloseBattlePikeCurtain(u8 taskId)
 
 void GetBattlePyramidHint(void)
 {
-    gSpecialVar_Result = gSpecialVar_0x8004 / 7;
-    gSpecialVar_Result -= (gSpecialVar_Result / 20) * 20;
+    // gSpecialVar_0x8004 here is expected to be the current Battle Pyramid win streak.
+    gSpecialVar_Result = gSpecialVar_0x8004 / FRONTIER_STAGES_PER_CHALLENGE;
+    gSpecialVar_Result -= (gSpecialVar_Result / TOTAL_PYRAMID_ROUNDS) * TOTAL_PYRAMID_ROUNDS;
 }
 
 // Used to avoid a potential softlock if the player respawns on Dewford with no way off
@@ -3901,13 +3910,13 @@ bool8 InPokemonCenter(void)
         MAP_TRADE_CENTER,
         MAP_RECORD_CORNER,
         MAP_BATTLE_COLOSSEUM_4P,
-        0xFFFF
+        MAP_UNDEFINED
     };
 
     int i;
     u16 map = (gSaveBlock1Ptr->location.mapGroup << 8) + gSaveBlock1Ptr->location.mapNum;
 
-    for (i = 0; sPokemonCenters[i] != 0xFFFF; i++)
+    for (i = 0; sPokemonCenters[i] != MAP_UNDEFINED; i++)
     {
         if (sPokemonCenters[i] == map)
             return TRUE;
