@@ -94,8 +94,8 @@ static void LoadLinkPartnerObjectEventSpritePalette(u8, u8, u8);
 static void Task_PetalburgGymSlideOpenRoomDoors(u8);
 static void PetalburgGymSetDoorMetatiles(u8, u16);
 static void Task_PCTurnOnEffect(u8);
-static void PCTurnOnEffect_0(struct Task *);
-static void PCTurnOnEffect_1(s16, s8, s8);
+static void PCTurnOnEffect(struct Task *);
+static void PCTurnOnEffect_SetMetatile(s16, s8, s8);
 static void PCTurnOffEffect(void);
 static void Task_LotteryCornerComputerEffect(u8);
 static void LotteryCornerComputerEffect(struct Task *);
@@ -966,34 +966,44 @@ void FieldShowRegionMap(void)
     SetMainCallback2(CB2_FieldShowRegionMap);
 }
 
+// Task data for Task_PCTurnOnEffect and Task_LotteryCornerComputerEffect
+#define tPaused       data[0] // Never set
+#define tTaskId       data[1]
+#define tFlickerCount data[2]
+#define tTimer        data[3]
+#define tIsScreenOn   data[4]
+
+// For this special, gSpecialVar_0x8004 is expected to be some PC_LOCATION_* value.
 void DoPCTurnOnEffect(void)
 {
     if (FuncIsActiveTask(Task_PCTurnOnEffect) != TRUE)
     {
         u8 taskId = CreateTask(Task_PCTurnOnEffect, 8);
-        gTasks[taskId].data[0] = 0;
-        gTasks[taskId].data[1] = taskId;
-        gTasks[taskId].data[2] = 0;
-        gTasks[taskId].data[3] = 0;
-        gTasks[taskId].data[4] = 0;
+        gTasks[taskId].tPaused = FALSE;
+        gTasks[taskId].tTaskId = taskId;
+        gTasks[taskId].tFlickerCount = 0;
+        gTasks[taskId].tTimer = 0;
+        gTasks[taskId].tIsScreenOn = FALSE;
     }
 }
 
 static void Task_PCTurnOnEffect(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    if (task->data[0] == 0)
-        PCTurnOnEffect_0(task);
+    if (!task->tPaused)
+        PCTurnOnEffect(task);
 }
 
-static void PCTurnOnEffect_0(struct Task *task)
+static void PCTurnOnEffect(struct Task *task)
 {
     u8 playerDirection;
     s8 dx = 0;
     s8 dy = 0;
-    if (task->data[3] == 6)
+    if (task->tTimer == 6)
     {
-        task->data[3] = 0;
+        task->tTimer = 0;
+        
+        // Get where the PC should be, depending on where the player is looking.
         playerDirection = GetPlayerFacingDirection();
         switch (playerDirection)
         {
@@ -1010,39 +1020,47 @@ static void PCTurnOnEffect_0(struct Task *task)
             dy = -1;
             break;
         }
-        PCTurnOnEffect_1(task->data[4], dx, dy);
+
+        // Update map
+        PCTurnOnEffect_SetMetatile(task->tIsScreenOn, dx, dy);
         DrawWholeMapView();
-        task->data[4] ^= 1;
-        if ((++task->data[2]) == 5)
-            DestroyTask(task->data[1]);
+        
+        // Screen flickers 5 times. Odd number and starting with the
+        // screen off means the animation ends with the screen on.
+        task->tIsScreenOn ^= 1;
+        if (++task->tFlickerCount == 5)
+            DestroyTask(task->tTaskId);
     }
-    task->data[3]++;
+    task->tTimer++;
 }
 
-static void PCTurnOnEffect_1(s16 isPcTurnedOn, s8 dx, s8 dy)
+static void PCTurnOnEffect_SetMetatile(s16 isScreenOn, s8 dx, s8 dy)
 {
-    u16 tileId = 0;
-    if (isPcTurnedOn)
+    u16 metatileId = 0;
+    if (isScreenOn)
     {
+        // Screen is off, set it on
         if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
-            tileId = METATILE_Building_PC_Off;
+            metatileId = METATILE_Building_PC_Off;
         else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
-            tileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
+            metatileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
         else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
-            tileId = METATILE_BrendansMaysHouse_MayPC_Off;
+            metatileId = METATILE_BrendansMaysHouse_MayPC_Off;
     }
     else
     {
+        // Screen is on, set it off
         if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
-            tileId = METATILE_Building_PC_On;
+            metatileId = METATILE_Building_PC_On;
         else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
-            tileId = METATILE_BrendansMaysHouse_BrendanPC_On;
+            metatileId = METATILE_BrendansMaysHouse_BrendanPC_On;
         else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
-            tileId = METATILE_BrendansMaysHouse_MayPC_On;
+            metatileId = METATILE_BrendansMaysHouse_MayPC_On;
     }
-    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, tileId | MAPGRID_COLLISION_MASK);
+    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, metatileId | MAPGRID_COLLISION_MASK);
 }
 
+// For this special, gSpecialVar_0x8004 is expected to be some PC_LOCATION_* value.
 void DoPCTurnOffEffect(void)
 {
     PCTurnOffEffect();
@@ -1052,7 +1070,9 @@ static void PCTurnOffEffect(void)
 {
     s8 dx = 0;
     s8 dy = 0;
-    u16 tileId = 0;
+    u16 metatileId = 0;
+
+    // Get where the PC should be, depending on where the player is looking.
     u8 playerDirection = GetPlayerFacingDirection();
     switch (playerDirection)
     {
@@ -1069,13 +1089,15 @@ static void PCTurnOffEffect(void)
         dy = -1;
         break;
     }
+
     if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
-        tileId = METATILE_Building_PC_Off;
+        metatileId = METATILE_Building_PC_Off;
     else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
-        tileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
+        metatileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
     else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
-        tileId = METATILE_BrendansMaysHouse_MayPC_Off;
-    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, tileId | MAPGRID_COLLISION_MASK);
+        metatileId = METATILE_BrendansMaysHouse_MayPC_Off;
+
+    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, metatileId | MAPGRID_COLLISION_MASK);
     DrawWholeMapView();
 }
 
@@ -1084,42 +1106,47 @@ void DoLotteryCornerComputerEffect(void)
     if (FuncIsActiveTask(Task_LotteryCornerComputerEffect) != TRUE)
     {
         u8 taskId = CreateTask(Task_LotteryCornerComputerEffect, 8);
-        gTasks[taskId].data[0] = 0;
-        gTasks[taskId].data[1] = taskId;
-        gTasks[taskId].data[2] = 0;
-        gTasks[taskId].data[3] = 0;
-        gTasks[taskId].data[4] = 0;
+        gTasks[taskId].tPaused = FALSE;
+        gTasks[taskId].tTaskId = taskId;
+        gTasks[taskId].tFlickerCount = 0;
+        gTasks[taskId].tTimer = 0;
+        gTasks[taskId].tIsScreenOn = FALSE;
     }
 }
 
 static void Task_LotteryCornerComputerEffect(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    if (task->data[0] == 0)
+    if (!task->tPaused)
         LotteryCornerComputerEffect(task);
 }
 
 static void LotteryCornerComputerEffect(struct Task *task)
 {
-    if (task->data[3] == 6)
+    if (task->tTimer == 6)
     {
-        task->data[3] = 0;
-        if (task->data[4] != 0)
+        task->tTimer = 0;
+        if (task->tIsScreenOn)
         {
+            // Screen is on, set it off
             MapGridSetMetatileIdAt(11 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_Shop_Laptop1_Normal | MAPGRID_COLLISION_MASK);
             MapGridSetMetatileIdAt(11 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Shop_Laptop2_Normal | MAPGRID_COLLISION_MASK);
         }
         else
         {
+            // Screen is off, set it on
             MapGridSetMetatileIdAt(11 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_Shop_Laptop1_Flash | MAPGRID_COLLISION_MASK);
             MapGridSetMetatileIdAt(11 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Shop_Laptop2_Flash | MAPGRID_COLLISION_MASK);
         }
         DrawWholeMapView();
-        task->data[4] ^= 1;
-        if ((++task->data[2]) == 5)
-            DestroyTask(task->data[1]);
+
+        // Screen flickers 5 times. Odd number and starting with the
+        // screen off means the animation ends with the screen on.
+        task->tIsScreenOn ^= 1;
+        if (++task->tFlickerCount == 5)
+            DestroyTask(task->tTaskId);
     }
-    task->data[3]++;
+    task->tTimer++;
 }
 
 void EndLotteryCornerComputerEffect(void)
@@ -1128,6 +1155,12 @@ void EndLotteryCornerComputerEffect(void)
     MapGridSetMetatileIdAt(11 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Shop_Laptop2_Normal | MAPGRID_COLLISION_MASK);
     DrawWholeMapView();
 }
+
+#undef tPaused
+#undef tTaskId
+#undef tFlickerCount
+#undef tTimer
+#undef tIsScreenOn
 
 void SetTrickHouseNuggetFlag(void)
 {
