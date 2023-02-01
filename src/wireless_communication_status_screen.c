@@ -266,7 +266,7 @@ static void PrintHeaderTexts(void)
     s32 i;
     FillWindowPixelBuffer(WIN_TITLE, PIXEL_FILL(0));
     FillWindowPixelBuffer(WIN_GROUP_NAMES, PIXEL_FILL(0));
-    FillWindowPixelBuffer(2, PIXEL_FILL(0));
+    FillWindowPixelBuffer(WIN_GROUP_COUNTS, PIXEL_FILL(0));
 
     // Print title
     WCSS_AddTextPrinterParameterized(WIN_TITLE, FONT_NORMAL, sHeaderTexts[0], GetStringCenterAlignXOffset(FONT_NORMAL, sHeaderTexts[0], 0xC0), 6, COLORMODE_GREEN);
