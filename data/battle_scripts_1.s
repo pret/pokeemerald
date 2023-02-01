@@ -301,7 +301,6 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectQuiverDance             @ EFFECT_QUIVER_DANCE
 	.4byte BattleScript_EffectCoil                    @ EFFECT_COIL
 	.4byte BattleScript_EffectElectrify               @ EFFECT_ELECTRIFY
-	.4byte BattleScript_EffectBurnHit                 @ EFFECT_SCALD
 	.4byte BattleScript_EffectReflectType             @ EFFECT_REFLECT_TYPE
 	.4byte BattleScript_EffectSoak                    @ EFFECT_SOAK
 	.4byte BattleScript_EffectGrowth                  @ EFFECT_GROWTH
@@ -2596,23 +2595,6 @@ BattleScript_EffectPsychicTerrain:
 	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG
 	call BattleScript_ActivateTerrainAbilities
 	call BattleScript_TerrainSeedLoop
-	jumpifabilitypresent ABILITY_MIMICRY, BattleScript_ApplyMimicry
-	goto BattleScript_MoveEnd
-
-BattleScript_ApplyMimicry::
-	savetarget
-	setbyte gBattlerTarget, 0
-BattleScript_MimicryLoopIter:
-	copybyte sBATTLER, gBattlerTarget
-	trytoapplymimicry BS_TARGET, BattleScript_MimicryLoop_NextBattler
-	copybyte gBattlerAbility, sBATTLER
-	call BattleScript_AbilityPopUp
-	printstring STRINGID_BATTLERTYPECHANGEDTO
-	waitmessage B_WAIT_TIME_LONG
-BattleScript_MimicryLoop_NextBattler:
-	addbyte gBattlerTarget, 0x1
-	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_MimicryLoopIter
-	restoretarget
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectTopsyTurvy:
@@ -3143,6 +3125,7 @@ BattleScript_EffectHitEscape:
 	jumpifbyte CMP_NOT_EQUAL gBattleOutcome 0, BattleScript_HitEscapeEnd
 	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_HitEscapeEnd
 	jumpifcantswitch SWITCH_IGNORE_ESCAPE_PREVENTION | BS_ATTACKER, BattleScript_HitEscapeEnd
+        jumpifemergencyexited BS_TARGET, BattleScript_HitEscapeEnd
 	openpartyscreen BS_ATTACKER, BattleScript_HitEscapeEnd
 	switchoutabilities BS_ATTACKER
 	waitstate
@@ -6796,12 +6779,14 @@ BattleScript_OverworldWeatherStarts::
 	printfromtable gWeatherStartsStringIds
 	waitmessage B_WAIT_TIME_LONG
 	playanimation_var BS_ATTACKER, sB_ANIM_ARG1
+	call BattleScript_WeatherFormChanges
 	end3
 
 BattleScript_OverworldTerrain::
 	printfromtable gTerrainStringIds
 	waitmessage B_WAIT_TIME_LONG
 	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG
+	call BattleScript_TerrainSeedLoop
 	end3
 
 BattleScript_SideStatusWoreOff::
@@ -7258,6 +7243,7 @@ BattleScript_GulpMissileGulping::
 	tryfaintmon BS_ATTACKER
 	getbattlerfainted BS_ATTACKER
 	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_GulpMissileNoSecondEffectGulping
+	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_CLEAR_AMULET, BattleScript_GulpMissileNoSecondEffectGulping
 	jumpifability BS_ATTACKER, ABILITY_CLEAR_BODY, BattleScript_GulpMissileNoSecondEffectGulping
 	jumpifability BS_ATTACKER, ABILITY_FULL_METAL_BODY, BattleScript_GulpMissileNoSecondEffectGulping
 	jumpifability BS_ATTACKER, ABILITY_WHITE_SMOKE, BattleScript_GulpMissileNoSecondEffectGulping
@@ -7893,6 +7879,35 @@ BattleScript_TargetFormChange::
 	waitanimation
 	handleformchange BS_TARGET, 2
 	return
+
+BattleScript_TargetFormChangeWithString::
+	pause 5
+	copybyte gBattlerAbility, gBattlerTarget
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
+	handleformchange BS_TARGET, 0
+	handleformchange BS_TARGET, 1
+	playanimation BS_TARGET, B_ANIM_FORM_CHANGE, NULL
+	waitanimation
+	handleformchange BS_TARGET, 2
+	printstring STRINGID_PKMNTRANSFORMED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_BattlerFormChangeWithStringEnd3::
+	pause 5
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
+	handleformchange BS_SCRIPTING, 0
+	handleformchange BS_SCRIPTING, 1
+	playanimation BS_SCRIPTING, B_ANIM_FORM_CHANGE, NULL
+	waitanimation
+	handleformchange BS_SCRIPTING, 2
+	printstring STRINGID_PKMNTRANSFORMED
+	waitmessage B_WAIT_TIME_LONG
+	end3
 
 BattleScript_IllusionOff::
 	spriteignore0hp TRUE
@@ -8537,6 +8552,7 @@ BattleScript_TryAdrenalineOrbRet:
 	return
 
 BattleScript_IntimidateActivates::
+	jumpifnovalidtargets BattleScript_IntimidateEnd
 	showabilitypopup BS_ATTACKER
 	pause B_WAIT_TIME_LONG
 	destroyabilitypopup
@@ -8545,6 +8561,7 @@ BattleScript_IntimidateLoop:
 	jumpifbyteequal gBattlerTarget, gBattlerAttacker, BattleScript_IntimidateLoopIncrement
 	jumpiftargetally BattleScript_IntimidateLoopIncrement
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_IntimidateLoopIncrement
+	jumpifholdeffect BS_TARGET, HOLD_EFFECT_CLEAR_AMULET, BattleScript_IntimidatePrevented_Item
 	jumpifability BS_TARGET, ABILITY_CLEAR_BODY, BattleScript_IntimidatePrevented
 	jumpifability BS_TARGET, ABILITY_HYPER_CUTTER, BattleScript_IntimidatePrevented
 	jumpifability BS_TARGET, ABILITY_WHITE_SMOKE, BattleScript_IntimidatePrevented
@@ -8575,6 +8592,7 @@ BattleScript_IntimidateEnd:
 BattleScript_IntimidatePrevented:
 	call BattleScript_AbilityPopUp
 	pause B_WAIT_TIME_LONG
+BattleScript_IntimidatePrevented_Item:
 	setbyte gBattleCommunication STAT_ATK
 	stattextbuffer BS_TARGET
 	printstring STRINGID_STATWASNOTLOWERED
@@ -8690,6 +8708,13 @@ BattleScript_AttackWeakenedByStrongWinds::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_MimicryActivates_End3::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_BATTLERTYPECHANGEDTO
+	waitmessage B_WAIT_TIME_SHORT
+	end3
+
 BattleScript_SnowWarningActivates::
 	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
@@ -8710,6 +8735,7 @@ BattleScript_TerrainSeedLoop_NextBattler:
 	addbyte gBattlerTarget, 0x1
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_TerrainSeedLoopIter
 	restoretarget
+	call BattleScript_ActivateSwitchInAbilities
 	return
 
 BattleScript_ActivateSwitchInAbilities:
@@ -8950,6 +8976,16 @@ BattleScript_SoundproofProtected::
 	orhalfword gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
 	goto BattleScript_MoveEnd
 
+BattleScript_IceFaceNullsDamage::
+	attackstring
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	call BattleScript_TargetFormChangeWithString
+	goto BattleScript_MoveEnd
+
 BattleScript_DazzlingProtected::
 	attackstring
 	ppreduce
@@ -9007,12 +9043,6 @@ BattleScript_ColorChangeActivates::
 	printstring STRINGID_PKMNCHANGEDTYPEWITH
 	waitmessage B_WAIT_TIME_LONG
 	return
-
-BattleScript_MimicryActivatesEnd3::
-	call BattleScript_AbilityPopUp
-	printstring STRINGID_BATTLERTYPECHANGEDTO
-	waitmessage B_WAIT_TIME_LONG
-	end3
 
 BattleScript_ProteanActivates::
 	pause B_WAIT_TIME_SHORTEST

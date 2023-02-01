@@ -557,7 +557,7 @@ bool8 LoadRegionMapGfx(void)
         break;
     case 2:
         if (!FreeTempTileDataBuffersIfPossible())
-            LoadPalette(sRegionMapBg_Pal, 0x70, 0x60);
+            LoadPalette(sRegionMapBg_Pal, BG_PLTT_ID(7), 3 * PLTT_SIZE_4BPP);
         break;
     case 3:
         LZ77UnCompWram(sRegionMapCursorSmallGfxLZ, sRegionMap->cursorSmallImage);
@@ -1679,7 +1679,7 @@ void CB2_OpenFlyMap(void)
         gMain.state++;
         break;
     case 3:
-        LoadUserWindowBorderGfx(0, 0x65, 0xd0);
+        LoadUserWindowBorderGfx(0, 0x65, BG_PLTT_ID(13));
         ClearScheduledBgCopiesToVram();
         gMain.state++;
         break;
@@ -1702,7 +1702,7 @@ void CB2_OpenFlyMap(void)
         gMain.state++;
         break;
     case 7:
-        LoadPalette(sRegionMapFramePal, 0x10, sizeof(sRegionMapFramePal));
+        LoadPalette(sRegionMapFramePal, BG_PLTT_ID(1), sizeof(sRegionMapFramePal));
         PutWindowTilemap(2);
         FillWindowPixelBuffer(2, PIXEL_FILL(0));
         AddTextPrinterParameterized(2, FONT_NORMAL, gText_FlyToWhere, 0, 1, 0, NULL);

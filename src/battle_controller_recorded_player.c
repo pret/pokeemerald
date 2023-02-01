@@ -19,6 +19,7 @@
 #include "sound.h"
 #include "string_util.h"
 #include "task.h"
+#include "test_runner.h"
 #include "text.h"
 #include "util.h"
 #include "window.h"
@@ -562,6 +563,7 @@ static u32 CopyRecordedPlayerMonData(u8 monId, u8 *dst)
         battleMon.spDefense = GetMonData(&gPlayerParty[monId], MON_DATA_SPDEF);
         battleMon.abilityNum = GetMonData(&gPlayerParty[monId], MON_DATA_ABILITY_NUM);
         battleMon.otId = GetMonData(&gPlayerParty[monId], MON_DATA_OT_ID);
+        battleMon.metLevel = GetMonData(&gPlayerParty[monId], MON_DATA_MET_LEVEL);
         GetMonData(&gPlayerParty[monId], MON_DATA_NICKNAME, nickname);
         StringCopy_Nickname(battleMon.nickname, nickname);
         GetMonData(&gPlayerParty[monId], MON_DATA_OT_NAME, battleMon.otName);
@@ -1393,6 +1395,17 @@ static void RecordedPlayerHandlePrintString(void)
     gBattle_BG0_Y = 0;
     stringId = (u16 *)(&gBattleResources->bufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
+
+    if (gTestRunnerEnabled)
+    {
+        TestRunner_Battle_RecordMessage(gDisplayedStringBattle);
+        if (gTestRunnerHeadless)
+        {
+            RecordedPlayerBufferExecCompleted();
+            return;
+        }
+    }
+
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
@@ -1406,7 +1419,7 @@ static void ChooseActionInBattlePalace(void)
 {
     if (gBattleCommunication[4] >= gBattlersCount / 2)
     {
-        BtlController_EmitTwoReturnValues(BUFFER_B, RecordedBattle_GetBattlerAction(gActiveBattler), 0);
+        BtlController_EmitTwoReturnValues(BUFFER_B, RecordedBattle_GetBattlerAction(RECORDED_BATTLE_PALACE_ACTION, gActiveBattler), 0);
         RecordedPlayerBufferExecCompleted();
     }
 }
@@ -1419,7 +1432,7 @@ static void RecordedPlayerHandleChooseAction(void)
     }
     else
     {
-        BtlController_EmitTwoReturnValues(BUFFER_B, RecordedBattle_GetBattlerAction(gActiveBattler), 0);
+        BtlController_EmitTwoReturnValues(BUFFER_B, RecordedBattle_GetBattlerAction(RECORDED_ACTION_TYPE, gActiveBattler), 0);
         RecordedPlayerBufferExecCompleted();
     }
 }
@@ -1437,8 +1450,8 @@ static void RecordedPlayerHandleChooseMove(void)
     }
     else
     {
-        u8 moveId = RecordedBattle_GetBattlerAction(gActiveBattler);
-        u8 target = RecordedBattle_GetBattlerAction(gActiveBattler);
+        u8 moveId = RecordedBattle_GetBattlerAction(RECORDED_MOVE_SLOT, gActiveBattler);
+        u8 target = RecordedBattle_GetBattlerAction(RECORDED_MOVE_TARGET, gActiveBattler);
         BtlController_EmitTwoReturnValues(BUFFER_B, 10, moveId | (target << 8));
     }
 
@@ -1452,7 +1465,7 @@ static void RecordedPlayerHandleChooseItem(void)
 
 static void RecordedPlayerHandleChoosePokemon(void)
 {
-    *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = RecordedBattle_GetBattlerAction(gActiveBattler);
+    *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = RecordedBattle_GetBattlerAction(RECORDED_PARTY_INDEX, gActiveBattler);
     BtlController_EmitChosenMonReturnValue(BUFFER_B, *(gBattleStruct->monToSwitchIntoId + gActiveBattler), NULL);
     RecordedPlayerBufferExecCompleted();
 }
@@ -1465,23 +1478,24 @@ static void RecordedPlayerHandleCmd23(void)
 static void RecordedPlayerHandleHealthBarUpdate(void)
 {
     s16 hpVal;
+    s32 maxHP, curHP;
 
     LoadBattleBarGfx(0);
     hpVal = gBattleResources->bufferA[gActiveBattler][2] | (gBattleResources->bufferA[gActiveBattler][3] << 8);
 
+    maxHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
+    curHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_HP);
+
     if (hpVal != INSTANT_HP_BAR_DROP)
     {
-        u32 maxHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
-        u32 curHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_HP);
-
         SetBattleBarStruct(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, curHP, hpVal);
+        TestRunner_Battle_RecordHP(gActiveBattler, curHP, min(maxHP, max(0, curHP - hpVal)));
     }
     else
     {
-        u32 maxHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
-
         SetBattleBarStruct(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, 0, hpVal);
         UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], HP_CURRENT, 0, maxHP);
+        TestRunner_Battle_RecordHP(gActiveBattler, curHP, 0);
     }
 
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
@@ -1502,6 +1516,9 @@ static void RecordedPlayerHandleStatusIconUpdate(void)
         battlerId = gActiveBattler;
         gBattleSpritesDataPtr->healthBoxesData[battlerId].statusAnimActive = 0;
         gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedStatusAnimation;
+
+        if (gTestRunnerEnabled)
+            TestRunner_Battle_RecordStatus1(battlerId, GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_STATUS));
     }
 }
 
@@ -1670,7 +1687,7 @@ static void RecordedPlayerHandleIntroTrainerBallThrow(void)
     else
         trainerPicId = gSaveBlock2Ptr->playerGender;
 
-    LoadCompressedPalette(gTrainerBackPicPaletteTable[trainerPicId].data, 0x100 + paletteNum * 16, 32);
+    LoadCompressedPalette(gTrainerBackPicPaletteTable[trainerPicId].data, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
 
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
 

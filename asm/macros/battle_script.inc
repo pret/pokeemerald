@@ -1311,6 +1311,13 @@
 	.4byte \ptr
 	.endm
 
+	.macro jumpifholdeffect battler:req, holdEffect:req, ptr:req
+	callnative BS_JumpIfHoldEffect
+	.byte \battler
+	.2byte \holdEffect
+	.4byte \ptr
+	.endm
+
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
@@ -1899,11 +1906,6 @@
 	various \battler, VARIOUS_TRY_END_NEUTRALIZING_GAS
 	.endm
 
-	.macro trytoapplymimicry battler:req, ptr:req
-	various \battler, VARIOUS_TRY_TO_APPLY_MIMICRY
-	.4byte \ptr
-	.endm
-
 	.macro trynoretreat battler:req, ptr:req
 	various \battler, VARIOUS_TRY_NO_RETREAT
 	.4byte \ptr
@@ -2024,7 +2026,6 @@
 	.byte \counter
 	.4byte \ptr
 	.endm
-
 	.macro swapstats stat:req
 	various BS_ATTACKER, VARIOUS_SWAP_STATS
 	.byte \stat
@@ -2041,6 +2042,11 @@
 
 	.macro activateterrainchangeabilities battler:req
 	various \battler, VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES
+	.endm
+
+	.macro jumpifnovalidtargets ptr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_NO_VALID_TARGETS
+	.4byte \ptr
 	.endm
 
 @ helpful macros
@@ -2230,4 +2236,9 @@
 		.endif
 	.endif
 	waitmessage B_WAIT_TIME_LONG
+	.endm
+
+	.macro jumpifemergencyexited battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_EMERGENCY_EXITED
+	.4byte \ptr
 	.endm

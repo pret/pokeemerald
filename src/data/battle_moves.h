@@ -8150,7 +8150,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_WOOD_HAMMER] =
     {
-        .effect = EFFECT_RECOIL_25,
+        .effect = EFFECT_RECOIL_33,
         .power = 120,
         .type = TYPE_GRASS,
         .accuracy = 100,
@@ -9026,11 +9026,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SCALD] =
     {
-        #if B_UPDATED_MOVE_DATA >= GEN_6
-            .effect = EFFECT_SCALD,
-        #else
-            .effect = EFFECT_BURN_HIT,
-        #endif
+        .effect = EFFECT_BURN_HIT,
         .power = 80,
         .type = TYPE_WATER,
         .accuracy = 100,
@@ -10546,7 +10542,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_STEAM_ERUPTION] =
     {
-        .effect = EFFECT_SCALD,
+        .effect = EFFECT_BURN_HIT,
         .power = 110,
         .type = TYPE_WATER,
         .accuracy = 95,
@@ -13075,7 +13071,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SCORCHING_SANDS] =
     {
-        .effect = EFFECT_SCALD,
+        .effect = EFFECT_BURN_HIT,
         .power = 70,
         .type = TYPE_GROUND,
         .accuracy = 100,
@@ -13729,7 +13725,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SILK_TRAP] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_PROTECT with extra checks
+        .effect = EFFECT_PROTECT,
         .power = 0,
         .type = TYPE_BUG,
         .accuracy = 0,

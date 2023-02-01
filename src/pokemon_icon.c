@@ -1309,8 +1309,13 @@ const u8 *const gMonIconTableFemale[] =
     [SPECIES_KRICKETUNE] = gMonIcon_Kricketune,
     [SPECIES_SHINX] = gMonIcon_Shinx,
     [SPECIES_COMBEE] = gMonIcon_Combee,
+#if P_HIPPO_GENDER_DIFF_ICONS == TRUE
+    [SPECIES_HIPPOPOTAS] = gMonIcon_HippopotasF,
+    [SPECIES_HIPPOWDON] = gMonIcon_HippowdonF,
+#else
     [SPECIES_HIPPOPOTAS] = gMonIcon_Hippopotas,
     [SPECIES_HIPPOWDON] = gMonIcon_Hippowdon,
+#endif
 #endif
 #if P_GEN_5_POKEMON == TRUE
     [SPECIES_UNFEZANT] = gMonIcon_UnfezantF,
@@ -2865,12 +2870,12 @@ void TryLoadAllMonIconPalettesAtOffset(u16 offset)
     s32 i;
     const struct SpritePalette* monIconPalettePtr;
 
-    if (offset <= 0xA0)
+    if (offset <= BG_PLTT_ID(10))
     {
         monIconPalettePtr = gMonIconPaletteTable;
-        for(i = ARRAY_COUNT(gMonIconPaletteTable) - 1; i >= 0; i--)
+        for (i = ARRAY_COUNT(gMonIconPaletteTable) - 1; i >= 0; i--)
         {
-            LoadPalette(monIconPalettePtr->data, offset, 0x20);
+            LoadPalette(monIconPalettePtr->data, offset, PLTT_SIZE_4BPP);
             offset += 0x10;
             monIconPalettePtr++;
         }

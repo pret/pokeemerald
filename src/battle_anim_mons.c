@@ -1763,7 +1763,7 @@ void AnimTask_BlendMonInAndOut(u8 task)
         DestroyAnimVisualTask(task);
         return;
     }
-    gTasks[task].data[0] = (gSprites[spriteId].oam.paletteNum * 0x10) + 0x101;
+    gTasks[task].data[0] = OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum) + 1;
     AnimTask_BlendPalInAndOutSetup(&gTasks[task]);
 }
 
@@ -2141,7 +2141,7 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16
         gMonSpritesGfxPtr->buffer = AllocZeroed(0x2000);
     if (!isBackpic)
     {
-        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), (palette * 0x10) + 0x100, 0x20);
+        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), OBJ_PLTT_ID(palette), PLTT_SIZE_4BPP);
         LoadSpecialPokePic(gMonSpritesGfxPtr->buffer,
                            species,
                            personality,
@@ -2149,7 +2149,7 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16
     }
     else
     {
-        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), (palette * 0x10) + 0x100, 0x20);
+        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), OBJ_PLTT_ID(palette), PLTT_SIZE_4BPP);
         LoadSpecialPokePic(gMonSpritesGfxPtr->buffer,
                            species,
                            personality,
@@ -2434,8 +2434,8 @@ void AnimTask_AttackerPunchWithTrace(u8 taskId)
     task->tPaletteNum = AllocSpritePalette(ANIM_TAG_BENT_SPOON);
     task->tNumTracesActive = 0;
 
-    dest = (task->tPaletteNum + 16) * 16;
-    src = (gSprites[task->tBattlerSpriteId].oam.paletteNum + 0x10) * 0x10;
+    dest = OBJ_PLTT_ID2(task->tPaletteNum);
+    src = OBJ_PLTT_ID2(gSprites[task->tBattlerSpriteId].oam.paletteNum);
 
     // Set trace's priority based on battler's subpriority
     task->tPriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker);
@@ -2444,7 +2444,7 @@ void AnimTask_AttackerPunchWithTrace(u8 taskId)
     else
         task->tPriority = 3;
 
-    CpuCopy32(&gPlttBufferUnfaded[src], &gPlttBufferFaded[dest], 0x20);
+    CpuCopy32(&gPlttBufferUnfaded[src], &gPlttBufferFaded[dest], PLTT_SIZE_4BPP);
     BlendPalette(dest, 16, gBattleAnimArgs[1], gBattleAnimArgs[0]);
     task->func = AnimTask_AttackerPunchWithTrace_Step;
 }
