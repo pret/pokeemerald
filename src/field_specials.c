@@ -583,16 +583,16 @@ static void LoadLinkPartnerObjectEventSpritePalette(u8 graphicsId, u8 localEvent
             switch (graphicsId)
             {
             case OBJ_EVENT_GFX_LINK_RS_BRENDAN:
-                LoadPalette(gObjectEventPal_RubySapphireBrendan, 0x100 + (adjustedPaletteNum << 4), 0x20);
+                LoadPalette(gObjectEventPal_RubySapphireBrendan, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
                 break;
             case OBJ_EVENT_GFX_LINK_RS_MAY:
-                LoadPalette(gObjectEventPal_RubySapphireMay, 0x100 + (adjustedPaletteNum << 4), 0x20);
+                LoadPalette(gObjectEventPal_RubySapphireMay, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
                 break;
             case OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL:
-                LoadPalette(gObjectEventPal_Brendan, 0x100 + (adjustedPaletteNum << 4), 0x20);
+                LoadPalette(gObjectEventPal_Brendan, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
                 break;
             case OBJ_EVENT_GFX_RIVAL_MAY_NORMAL:
-                LoadPalette(gObjectEventPal_May, 0x100 + (adjustedPaletteNum << 4), 0x20);
+                LoadPalette(gObjectEventPal_May, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
                 break;
             }
         }
@@ -1196,7 +1196,7 @@ void IsGrassTypeInParty(void)
         if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
         {
             species = GetMonData(pokemon, MON_DATA_SPECIES);
-            if (gBaseStats[species].type1 == TYPE_GRASS || gBaseStats[species].type2 == TYPE_GRASS)
+            if (gSpeciesInfo[species].types[0] == TYPE_GRASS || gSpeciesInfo[species].types[1] == TYPE_GRASS)
             {
                 gSpecialVar_Result = TRUE;
                 return;
@@ -1234,9 +1234,9 @@ void GetSecretBaseNearbyMapName(void)
     GetMapName(gStringVar1, VarGet(VAR_SECRET_BASE_MAP), 0);
 }
 
-u16 GetBestBattleTowerStreak(void)
+u16 GetBattleTowerSinglesStreak(void)
 {
-    return GetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK);
+    return GetGameStat(GAME_STAT_BATTLE_TOWER_SINGLES_STREAK);
 }
 
 void BufferEReaderTrainerName(void)
@@ -2536,9 +2536,9 @@ static void InitScrollableMultichoice(void)
     gScrollableMultichoice_ListMenuTemplate.cursorShadowPal = 3;
     gScrollableMultichoice_ListMenuTemplate.lettersSpacing = 0;
     gScrollableMultichoice_ListMenuTemplate.itemVerticalPadding = 0;
-    gScrollableMultichoice_ListMenuTemplate.scrollMultiple = 0;
+    gScrollableMultichoice_ListMenuTemplate.scrollMultiple = LIST_NO_MULTIPLE_SCROLL;
     gScrollableMultichoice_ListMenuTemplate.fontId = FONT_NORMAL;
-    gScrollableMultichoice_ListMenuTemplate.cursorKind = 0;
+    gScrollableMultichoice_ListMenuTemplate.cursorKind = CURSOR_BLACK_ARROW;
 }
 
 static void ScrollableMultichoice_MoveCursor(s32 itemIndex, bool8 onInit, struct ListMenu *list)
@@ -3266,7 +3266,7 @@ static void Task_DeoxysRockInteraction(u8 taskId)
 static void ChangeDeoxysRockLevel(u8 rockLevel)
 {
     u8 objectEventId;
-    LoadPalette(&sDeoxysRockPalettes[rockLevel], 0x1A0, 8);
+    LoadPalette(&sDeoxysRockPalettes[rockLevel], OBJ_PLTT_ID(10), PLTT_SIZEOF(4));
     TryGetObjectEventIdByLocalIdAndMap(LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
 
     if (rockLevel == 0)
@@ -3314,7 +3314,7 @@ void IncrementBirthIslandRockStepCount(void)
 
 void SetDeoxysRockPalette(void)
 {
-    LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], 0x1A0, 8);
+    LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], OBJ_PLTT_ID(10), PLTT_SIZEOF(4));
     BlendPalettes(0x04000000, 16, 0);
 }
 

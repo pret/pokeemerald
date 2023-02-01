@@ -959,7 +959,7 @@ static bool8 LoadBerryBlenderGfx(void)
     case 1:
         CopyToBgTilemapBuffer(2, sBlenderCenter_Tilemap, 0x400, 0);
         CopyBgTilemapBufferToVram(2);
-        LoadPalette(sBlenderCenter_Pal, 0, 0x100);
+        LoadPalette(sBlenderCenter_Pal, BG_PLTT_ID(0), 8 * PLTT_SIZE_4BPP);
         sBerryBlender->loadGfxState++;
         break;
     case 2:
@@ -984,7 +984,7 @@ static bool8 LoadBerryBlenderGfx(void)
         sBerryBlender->loadGfxState++;
         break;
     case 7:
-        LoadPalette(sBlenderOuter_Pal, 0x80, 0x20);
+        LoadPalette(sBlenderOuter_Pal, BG_PLTT_ID(8), PLTT_SIZE_4BPP);
         sBerryBlender->loadGfxState++;
         break;
     case 8:
@@ -1065,8 +1065,8 @@ static void CB2_LoadBerryBlender(void)
         InitBgsFromTemplates(1, sBgTemplates, ARRAY_COUNT(sBgTemplates));
         SetBgTilemapBuffer(1, sBerryBlender->tilemapBuffers[0]);
         SetBgTilemapBuffer(2, sBerryBlender->tilemapBuffers[1]);
-        LoadUserWindowBorderGfx(0, 1, 0xD0);
-        LoadMessageBoxGfx(0, 0x14, 0xF0);
+        LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(13));
+        LoadMessageBoxGfx(0, 0x14, BG_PLTT_ID(15));
         InitBerryBlenderWindows();
 
         sBerryBlender->mainState++;
@@ -1502,8 +1502,8 @@ static void InitBlenderBgs(void)
 
     SetBgTilemapBuffer(1, sBerryBlender->tilemapBuffers[0]);
     SetBgTilemapBuffer(2, sBerryBlender->tilemapBuffers[1]);
-    LoadUserWindowBorderGfx(0, 1, 0xD0);
-    LoadMessageBoxGfx(0, 0x14, 0xF0);
+    LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(13));
+    LoadMessageBoxGfx(0, 0x14, BG_PLTT_ID(15));
     InitBerryBlenderWindows();
 
     sBerryBlender->unk0 = 0;
@@ -2676,7 +2676,7 @@ static void CB2_EndBlenderGame(void)
         switch (Menu_ProcessInputNoWrapClearOnChoose())
         {
         case 1:
-        case -1:
+        case MENU_B_PRESSED:
             sBerryBlender->yesNoAnswer = 1;
             sBerryBlender->gameEndState++;
             for (i = 0; i < BLENDER_MAX_PLAYERS; i++)

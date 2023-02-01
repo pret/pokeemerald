@@ -109,7 +109,7 @@ struct __attribute__((packed, aligned(2))) RfuGameData
     u8 startedActivity:1;
     u8 playerGender:1;
     u8 tradeLevel:7;
-    u8 padding;
+    u8 filler;
 };
 
 // Constants for getting/setting information in 'partnerInfo' of RfuGameData.

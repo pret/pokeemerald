@@ -1152,10 +1152,7 @@ bool8 ScrCmd_resetobjectsubpriority(struct ScriptContext *ctx)
 bool8 ScrCmd_faceplayer(struct ScriptContext *ctx)
 {
     if (gObjectEvents[gSelectedObjectEvent].active)
-    {
-        ObjectEventFaceOppositeDirection(&gObjectEvents[gSelectedObjectEvent],
-          GetPlayerFacingDirection());
-    }
+        ObjectEventFaceOppositeDirection(&gObjectEvents[gSelectedObjectEvent], GetPlayerFacingDirection());
     return FALSE;
 }
 
@@ -1526,7 +1523,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
 
     winTemplate = CreateWindowTemplate(0, xWindow, yWindow + 1, width, height, 0xF, 0x1);
     sBrailleWindowId = AddWindow(&winTemplate);
-    LoadUserWindowBorderGfx(sBrailleWindowId, 0x214, 0xE0);
+    LoadUserWindowBorderGfx(sBrailleWindowId, 0x214, BG_PLTT_ID(14));
     DrawStdWindowFrame(sBrailleWindowId, FALSE);
     PutWindowTilemap(sBrailleWindowId);
     FillWindowPixelBuffer(sBrailleWindowId, PIXEL_FILL(1));

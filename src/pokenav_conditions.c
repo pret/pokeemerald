@@ -19,7 +19,7 @@ struct Pokenav_ConditionMenu
 {
     u32 monPal[CONDITION_MONS_LOADED][0x20];
     u8 fill[0x180];
-    u32 monPicGfx[CONDITION_MONS_LOADED][MON_PIC_SIZE]; // TODO: Is this too small?
+    u32 monPicGfx[CONDITION_MONS_LOADED][MON_PIC_SIZE];
     bool8 inSearchMode;
     s16 toLoadListIndex;
     u32 (*callback)(struct Pokenav_ConditionMenu *);

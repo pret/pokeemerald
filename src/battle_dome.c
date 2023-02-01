@@ -2348,8 +2348,8 @@ static void InitDomeTrainers(void)
         rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPDEF, NULL);
         rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPEED, NULL);
         rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_MAX_HP, NULL);
-        monTypesBits |= gBitTable[gBaseStats[GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL)].type1];
-        monTypesBits |= gBitTable[gBaseStats[GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL)].type2];
+        monTypesBits |= gBitTable[gSpeciesInfo[GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL)].types[0]];
+        monTypesBits |= gBitTable[gSpeciesInfo[GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL)].types[1]];
     }
 
     // Count the number of types in the players party, to factor into the ranking
@@ -2383,8 +2383,8 @@ static void InitDomeTrainers(void)
             rankingScores[i] += statValues[STAT_SPDEF];
             rankingScores[i] += statValues[STAT_SPEED];
             rankingScores[i] += statValues[STAT_HP];
-            monTypesBits |= gBitTable[gBaseStats[gFacilityTrainerMons[DOME_MONS[i][j]].species].type1];
-            monTypesBits |= gBitTable[gBaseStats[gFacilityTrainerMons[DOME_MONS[i][j]].species].type2];
+            monTypesBits |= gBitTable[gSpeciesInfo[gFacilityTrainerMons[DOME_MONS[i][j]].species].types[0]];
+            monTypesBits |= gBitTable[gSpeciesInfo[gFacilityTrainerMons[DOME_MONS[i][j]].species].types[1]];
         }
 
         for (monTypesCount = 0, j = 0; j < 32; j++)
@@ -2448,7 +2448,7 @@ static void InitDomeTrainers(void)
 
 #define CALC_STAT(base, statIndex)                                                          \
 {                                                                                           \
-    u8 baseStat = gBaseStats[species].base;                                                 \
+    u8 baseStat = gSpeciesInfo[species].base;                                                 \
     stats[statIndex] = (((2 * baseStat + ivs + evs[statIndex] / 4) * level) / 100) + 5;     \
     stats[statIndex] = (u8) ModifyStatByNature(nature, stats[statIndex], statIndex);        \
 }
@@ -2481,7 +2481,7 @@ static void CalcDomeMonStats(u16 species, int level, int ivs, u8 evBits, u8 natu
     }
     else
     {
-        int n = 2 * gBaseStats[species].baseHP;
+        int n = 2 * gSpeciesInfo[species].baseHP;
         stats[STAT_HP] = (((n + ivs + evs[STAT_HP] / 4) * level) / 100) + level + 10;
     }
 
@@ -2750,9 +2750,9 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
     if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || gBattleMoves[move].power == 0)
         return 0;
 
-    defType1 = gBaseStats[targetSpecies].type1;
-    defType2 = gBaseStats[targetSpecies].type2;
-    defAbility = gBaseStats[targetSpecies].abilities[0];
+    defType1 = gSpeciesInfo[targetSpecies].types[0];
+    defType2 = gSpeciesInfo[targetSpecies].types[1];
+    defAbility = gSpeciesInfo[targetSpecies].abilities[0];
     moveType = gBattleMoves[move].type;
 
     if (defAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
@@ -3048,12 +3048,12 @@ static void Task_ShowTourneyInfoCard(u8 taskId)
         DecompressAndLoadBgGfxUsingHeap(2, gDomeTourneyInfoCard_Tilemap, 0x2000, 0, 1);
         DecompressAndLoadBgGfxUsingHeap(3, gDomeTourneyInfoCardBg_Tilemap, 0x800, 0, 1);
         LoadCompressedSpriteSheet(sTourneyTreeButtonsSpriteSheet);
-        LoadCompressedPalette(gDomeTourneyTree_Pal, 0, 0x200);
-        LoadCompressedPalette(gDomeTourneyTreeButtons_Pal, 0x100, 0x200);
-        LoadCompressedPalette(gBattleWindowTextPalette, 0xF0, 0x20);
+        LoadCompressedPalette(gDomeTourneyTree_Pal, BG_PLTT_OFFSET, BG_PLTT_SIZE);
+        LoadCompressedPalette(gDomeTourneyTreeButtons_Pal, OBJ_PLTT_OFFSET, OBJ_PLTT_SIZE);
+        LoadCompressedPalette(gBattleWindowTextPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         if (mode == INFOCARD_MATCH)
-            LoadCompressedPalette(gDomeTourneyMatchCardBg_Pal, 0x50, 0x20); // Changes the moving info card bg to orange when in match card mode
-        CpuFill32(0, gPlttBufferFaded, 0x400);
+            LoadCompressedPalette(gDomeTourneyMatchCardBg_Pal, BG_PLTT_ID(5), PLTT_SIZE_4BPP); // Changes the moving info card bg to orange when in match card mode
+        CpuFill32(0, gPlttBufferFaded, PLTT_SIZE);
         ShowBg(0);
         ShowBg(1);
         ShowBg(2);
@@ -4254,7 +4254,7 @@ static u8 Task_GetInfoCardInput(u8 taskId)
 #undef tUsingAlternateSlot
 
 // allocatedArray below needs to be large enough to hold stat totals for each mon, or totals of each type of move points
-#define ALLOC_ARRAY_SIZE (NUM_STATS * FRONTIER_PARTY_SIZE >= NUM_MOVE_POINT_TYPES ? (NUM_STATS * FRONTIER_PARTY_SIZE) :  NUM_MOVE_POINT_TYPES)
+#define ALLOC_ARRAY_SIZE max(NUM_STATS * FRONTIER_PARTY_SIZE, NUM_MOVE_POINT_TYPES)
 
 static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
 {
@@ -5204,9 +5204,9 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
 
                 targetSpecies = gFacilityTrainerMons[DOME_MONS[loserTournamentId][k]].species;
                 if (var & 1)
-                    targetAbility = gBaseStats[targetSpecies].abilities[1];
+                    targetAbility = gSpeciesInfo[targetSpecies].abilities[1];
                 else
-                    targetAbility = gBaseStats[targetSpecies].abilities[0];
+                    targetAbility = gSpeciesInfo[targetSpecies].abilities[0];
 
                 var = AI_TypeCalc(moveIds[i * MAX_MON_MOVES + j], targetSpecies, targetAbility);
                 if (var & MOVE_RESULT_NOT_VERY_EFFECTIVE && var & MOVE_RESULT_SUPER_EFFECTIVE)
@@ -5327,10 +5327,10 @@ static void Task_ShowTourneyTree(u8 taskId)
         DecompressAndLoadBgGfxUsingHeap(2, gDomeTourneyLine_Gfx, 0x2000, 0, 0);
         DecompressAndLoadBgGfxUsingHeap(2, gDomeTourneyLineDown_Tilemap, 0x2000, 0, 1);
         DecompressAndLoadBgGfxUsingHeap(3, gDomeTourneyLineUp_Tilemap, 0x2000, 0, 1);
-        LoadCompressedPalette(gDomeTourneyTree_Pal, 0, 0x200);
-        LoadCompressedPalette(gDomeTourneyTreeButtons_Pal, 0x100, 0x200);
-        LoadCompressedPalette(gBattleWindowTextPalette, 0xF0, 0x20);
-        CpuFill32(0, gPlttBufferFaded, 0x400);
+        LoadCompressedPalette(gDomeTourneyTree_Pal, BG_PLTT_OFFSET, BG_PLTT_SIZE);
+        LoadCompressedPalette(gDomeTourneyTreeButtons_Pal, OBJ_PLTT_OFFSET, OBJ_PLTT_SIZE);
+        LoadCompressedPalette(gBattleWindowTextPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        CpuFill32(0, gPlttBufferFaded, PLTT_SIZE);
         ShowBg(0);
         ShowBg(1);
         ShowBg(2);
@@ -5883,8 +5883,8 @@ static void InitRandomTourneyTreeResults(void)
             statSums[i] += statValues[STAT_SPDEF];
             statSums[i] += statValues[STAT_SPEED];
             statSums[i] += statValues[STAT_HP];
-            monTypesBits |= gBitTable[gBaseStats[gFacilityTrainerMons[DOME_MONS[i][j]].species].type1];
-            monTypesBits |= gBitTable[gBaseStats[gFacilityTrainerMons[DOME_MONS[i][j]].species].type2];
+            monTypesBits |= gBitTable[gSpeciesInfo[gFacilityTrainerMons[DOME_MONS[i][j]].species].types[0]];
+            monTypesBits |= gBitTable[gSpeciesInfo[gFacilityTrainerMons[DOME_MONS[i][j]].species].types[1]];
         }
 
         // Because GF hates temporary vars, trainerId acts like monTypesCount here.
@@ -6010,12 +6010,12 @@ static void DecideRoundWinners(u8 roundId)
                     }
                 }
                 species = gFacilityTrainerMons[DOME_MONS[tournamentId1][monId1]].species;
-                points1 += ( gBaseStats[species].baseHP
-                           + gBaseStats[species].baseAttack
-                           + gBaseStats[species].baseDefense
-                           + gBaseStats[species].baseSpeed
-                           + gBaseStats[species].baseSpAttack
-                           + gBaseStats[species].baseSpDefense) / 10;
+                points1 += ( gSpeciesInfo[species].baseHP
+                           + gSpeciesInfo[species].baseAttack
+                           + gSpeciesInfo[species].baseDefense
+                           + gSpeciesInfo[species].baseSpeed
+                           + gSpeciesInfo[species].baseSpAttack
+                           + gSpeciesInfo[species].baseSpDefense) / 10;
             }
             // Random part of the formula.
             points1 += (Random() & 0x1F);
@@ -6033,12 +6033,12 @@ static void DecideRoundWinners(u8 roundId)
                     }
                 }
                 species = gFacilityTrainerMons[DOME_MONS[tournamentId2][monId1]].species;
-                points2 += ( gBaseStats[species].baseHP
-                           + gBaseStats[species].baseAttack
-                           + gBaseStats[species].baseDefense
-                           + gBaseStats[species].baseSpeed
-                           + gBaseStats[species].baseSpAttack
-                           + gBaseStats[species].baseSpDefense) / 10;
+                points2 += ( gSpeciesInfo[species].baseHP
+                           + gSpeciesInfo[species].baseAttack
+                           + gSpeciesInfo[species].baseDefense
+                           + gSpeciesInfo[species].baseSpeed
+                           + gSpeciesInfo[species].baseSpAttack
+                           + gSpeciesInfo[species].baseSpDefense) / 10;
             }
             // Random part of the formula.
             points2 += (Random() & 0x1F);

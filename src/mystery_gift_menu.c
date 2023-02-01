@@ -33,7 +33,7 @@
 #include "constants/cable_club.h"
 
 #define LIST_MENU_TILE_NUM 10
-#define LIST_MENU_PAL_NUM 224
+#define LIST_MENU_PAL_NUM BG_PLTT_ID(14)
 
 static void LoadMysteryGiftTextboxBorder(u8 bgId);
 static void CreateMysteryGiftTask(void);
@@ -234,9 +234,9 @@ static const struct ListMenuTemplate sListMenuTemplate_ThreeOptions = {
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const struct ListMenuItem sListMenuItems_ReceiveSendToss[] = {
@@ -279,9 +279,9 @@ static const struct ListMenuTemplate sListMenu_ReceiveSendToss = {
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const struct ListMenuTemplate sListMenu_ReceiveToss = {
@@ -300,9 +300,9 @@ static const struct ListMenuTemplate sListMenu_ReceiveToss = {
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const struct ListMenuTemplate sListMenu_ReceiveSend = {
@@ -321,9 +321,9 @@ static const struct ListMenuTemplate sListMenu_ReceiveSend = {
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const struct ListMenuTemplate sListMenu_Receive = {
@@ -342,9 +342,9 @@ static const struct ListMenuTemplate sListMenu_Receive = {
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const u8 *const sUnusedMenuTexts[] = {
@@ -411,14 +411,14 @@ static bool32 HandleMysteryGiftOrEReaderSetup(s32 isEReader)
         gMain.state++;
         break;
     case 1:
-        LoadPalette(sTextboxBorder_Pal, 0, 0x20);
-        LoadPalette(GetTextWindowPalette(2), 0xd0, 0x20);
-        Menu_LoadStdPalAt(0xC0);
-        LoadUserWindowBorderGfx(0, 0xA, 0xE0);
-        LoadUserWindowBorderGfx_(0, 0x1, 0xF0);
-        FillBgTilemapBufferRect(0, 0x000, 0, 0, 32, 32, 0x11);
-        FillBgTilemapBufferRect(1, 0x000, 0, 0, 32, 32, 0x11);
-        FillBgTilemapBufferRect(2, 0x000, 0, 0, 32, 32, 0x11);
+        LoadPalette(sTextboxBorder_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+        LoadPalette(GetTextWindowPalette(2), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        Menu_LoadStdPalAt(BG_PLTT_ID(12));
+        LoadUserWindowBorderGfx(0, 0xA, BG_PLTT_ID(14));
+        LoadUserWindowBorderGfx_(0, 0x1, BG_PLTT_ID(15));
+        FillBgTilemapBufferRect(0, 0x000, 0, 0, 32, 32, 17);
+        FillBgTilemapBufferRect(1, 0x000, 0, 0, 32, 32, 17);
+        FillBgTilemapBufferRect(2, 0x000, 0, 0, 32, 32, 17);
         MG_DrawCheckerboardPattern(3);
         PrintMysteryGiftOrEReaderTopMenu(isEReader, FALSE);
         gMain.state++;
@@ -505,16 +505,16 @@ void MG_DrawCheckerboardPattern(u32 bg)
 {
     s32 i = 0, j;
 
-    FillBgTilemapBufferRect(bg, 0x003, 0, 0, 32, 2, 0x11);
+    FillBgTilemapBufferRect(bg, 0x003, 0, 0, 32, 2, 17);
 
     for (i = 0; i < 18; i++)
     {
         for (j = 0; j < 32; j++)
         {
             if ((i & 1) != (j & 1))
-                FillBgTilemapBufferRect(bg, 1, j, i + 2, 1, 1, 0x11);
+                FillBgTilemapBufferRect(bg, 1, j, i + 2, 1, 1, 17);
             else
-                FillBgTilemapBufferRect(bg, 2, j, i + 2, 1, 1, 0x11);
+                FillBgTilemapBufferRect(bg, 2, j, i + 2, 1, 1, 17);
         }
     }
 }
@@ -524,10 +524,10 @@ static void ClearScreenInBg0(bool32 ignoreTopTwoRows)
     switch (ignoreTopTwoRows)
     {
     case 0:
-        FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0x11);
+        FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 17);
         break;
     case 1:
-        FillBgTilemapBufferRect(0, 0, 0, 2, 32, 30, 0x11);
+        FillBgTilemapBufferRect(0, 0, 0, 2, 32, 30, 17);
         break;
     }
     CopyBgTilemapBufferToVram(0);
@@ -1258,7 +1258,7 @@ static void Task_MysteryGift(u8 taskId)
             data->state = MG_STATE_CLIENT_LINK_END;
             break;
         case CLI_RET_COPY_MSG:
-            memcpy(data->clientMsg, MysteryGiftClient_GetMsg(), 0x40);
+            memcpy(data->clientMsg, MysteryGiftClient_GetMsg(), CLIENT_MAX_MSG_SIZE);
             MysteryGiftClient_AdvanceState();
             break;
         case CLI_RET_PRINT_MSG:
@@ -1371,9 +1371,9 @@ static void Task_MysteryGift(u8 taskId)
             if (data->msgId == CLI_MSG_NEWS_RECEIVED)
             {
                 if (data->sourceIsFriend == TRUE)
-                    GenerateRandomWonderNews(WONDER_NEWS_RECV_FRIEND);
+                    WonderNews_SetReward(WONDER_NEWS_RECV_FRIEND);
                 else
-                    GenerateRandomWonderNews(WONDER_NEWS_RECV_WIRELESS);
+                    WonderNews_SetReward(WONDER_NEWS_RECV_WIRELESS);
             }
             if (!successMsg)
             {
@@ -1580,7 +1580,7 @@ static void Task_MysteryGift(u8 taskId)
         {
             if (data->sourceIsFriend == TRUE && data->msgId == SVR_MSG_NEWS_SENT)
             {
-                GenerateRandomWonderNews(WONDER_NEWS_SENT);
+                WonderNews_SetReward(WONDER_NEWS_SENT);
                 data->state = MG_STATE_SAVE_LOAD_GIFT;
             }
             else

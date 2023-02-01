@@ -33,15 +33,15 @@
       "x": 6,
       "y": 8,
       "elevation": 3,
-      "dest_map": "MAP_NONE",
-      "dest_warp_id": 127
+      "dest_map": "MAP_DYNAMIC",
+      "dest_warp_id": "WARP_ID_DYNAMIC"
     },
     {
       "x": 7,
       "y": 8,
       "elevation": 3,
-      "dest_map": "MAP_NONE",
-      "dest_warp_id": 127
+      "dest_map": "MAP_DYNAMIC",
+      "dest_warp_id": "WARP_ID_DYNAMIC"
     }
   ],
   "coord_events": [

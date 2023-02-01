@@ -216,7 +216,7 @@ static const struct ListMenuTemplate sShopBuyMenuListTemplate =
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NARROW,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const struct BgTemplate sShopBuyMenuBgTemplates[] =
@@ -740,15 +740,15 @@ static void BuyMenuDecompressBgGraphics(void)
 {
     DecompressAndCopyTileDataToVram(1, gShopMenu_Gfx, 0x3A0, 0x3E3, 0);
     LZDecompressWram(gShopMenu_Tilemap, sShopData->tilemapBuffers[0]);
-    LoadCompressedPalette(gShopMenu_Pal, 0xC0, 0x20);
+    LoadCompressedPalette(gShopMenu_Pal, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
 }
 
 static void BuyMenuInitWindows(void)
 {
     InitWindows(sShopBuyMenuWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(WIN_MONEY, 1, 0xD0);
-    LoadMessageBoxGfx(WIN_MONEY, 0xA, 0xE0);
+    LoadUserWindowBorderGfx(WIN_MONEY, 1, BG_PLTT_ID(13));
+    LoadMessageBoxGfx(WIN_MONEY, 0xA, BG_PLTT_ID(14));
     PutWindowTilemap(WIN_MONEY);
     PutWindowTilemap(WIN_ITEM_LIST);
     PutWindowTilemap(WIN_ITEM_DESCRIPTION);
@@ -808,9 +808,9 @@ static void BuyMenuDrawMapBg(void)
                 metatileLayerType = METATILE_LAYER_TYPE_COVERED;
 
             if (metatile < NUM_METATILES_IN_PRIMARY)
-                BuyMenuDrawMapMetatile(i, j, (u16 *)mapLayout->primaryTileset->metatiles + metatile * 8, metatileLayerType);
+                BuyMenuDrawMapMetatile(i, j, mapLayout->primaryTileset->metatiles + metatile * NUM_TILES_PER_METATILE, metatileLayerType);
             else
-                BuyMenuDrawMapMetatile(i, j, (u16 *)mapLayout->secondaryTileset->metatiles + ((metatile - NUM_METATILES_IN_PRIMARY) * 8), metatileLayerType);
+                BuyMenuDrawMapMetatile(i, j, mapLayout->secondaryTileset->metatiles + ((metatile - NUM_METATILES_IN_PRIMARY) * NUM_TILES_PER_METATILE), metatileLayerType);
         }
     }
 }

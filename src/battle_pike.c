@@ -845,21 +845,21 @@ static bool8 DoesTypePreventStatus(u16 species, u32 status)
     switch (status)
     {
     case STATUS1_TOXIC_POISON:
-        if (gBaseStats[species].type1 == TYPE_STEEL || gBaseStats[species].type1 == TYPE_POISON
-            || gBaseStats[species].type2 == TYPE_STEEL || gBaseStats[species].type2 == TYPE_POISON)
+        if (gSpeciesInfo[species].types[0] == TYPE_STEEL || gSpeciesInfo[species].types[0] == TYPE_POISON
+            || gSpeciesInfo[species].types[1] == TYPE_STEEL || gSpeciesInfo[species].types[1] == TYPE_POISON)
             ret = TRUE;
         break;
     case STATUS1_FREEZE:
-        if (gBaseStats[species].type1 == TYPE_ICE || gBaseStats[species].type2 == TYPE_ICE)
+        if (gSpeciesInfo[species].types[0] == TYPE_ICE || gSpeciesInfo[species].types[1] == TYPE_ICE)
             ret = TRUE;
         break;
     case STATUS1_PARALYSIS:
-        if (gBaseStats[species].type1 == TYPE_GROUND || gBaseStats[species].type1 == TYPE_ELECTRIC
-            || gBaseStats[species].type2 == TYPE_GROUND || gBaseStats[species].type2 == TYPE_ELECTRIC)
+        if (gSpeciesInfo[species].types[0] == TYPE_GROUND || gSpeciesInfo[species].types[0] == TYPE_ELECTRIC
+            || gSpeciesInfo[species].types[1] == TYPE_GROUND || gSpeciesInfo[species].types[1] == TYPE_ELECTRIC)
             ret = TRUE;
         break;
     case STATUS1_BURN:
-        if (gBaseStats[species].type1 == TYPE_FIRE || gBaseStats[species].type2 == TYPE_FIRE)
+        if (gSpeciesInfo[species].types[0] == TYPE_FIRE || gSpeciesInfo[species].types[1] == TYPE_FIRE)
             ret = TRUE;
         break;
     case STATUS1_SLEEP:
@@ -1138,9 +1138,9 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
 
     SetMonData(&gEnemyParty[0],
                MON_DATA_EXP,
-               &gExperienceTables[gBaseStats[wildMons[headerId][pikeMonId].species].growthRate][monLevel]);
+               &gExperienceTables[gSpeciesInfo[wildMons[headerId][pikeMonId].species].growthRate][monLevel]);
 
-    if (gBaseStats[wildMons[headerId][pikeMonId].species].abilities[1])
+    if (gSpeciesInfo[wildMons[headerId][pikeMonId].species].abilities[1])
         abilityNum = Random() % 2;
     else
         abilityNum = 0;

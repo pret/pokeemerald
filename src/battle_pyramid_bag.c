@@ -160,7 +160,7 @@ static const struct ListMenuTemplate sListMenuTemplate =
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NARROW,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 enum {
@@ -578,7 +578,7 @@ static bool8 LoadPyramidBagGfx(void)
         }
         break;
     case 2:
-        LoadCompressedPalette(gBattlePyramidBagInterface_Pal, 0, 32);
+        LoadCompressedPalette(gBattlePyramidBagInterface_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         gPyramidBagMenu->state++;
         break;
     case 3:
@@ -1439,9 +1439,9 @@ static void InitPyramidBagWindows(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 0x1, 0xE0);
-    LoadMessageBoxGfx(0, 0xA, 0xD0);
-    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
+    LoadUserWindowBorderGfx(0, 0x1, BG_PLTT_ID(14));
+    LoadMessageBoxGfx(0, 0xA, BG_PLTT_ID(13));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
 
     for (i = 0; i < ARRAY_COUNT(sWindowTemplates); i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
@@ -1537,10 +1537,10 @@ static void FreeItemIconSprite(u8 spriteArrId)
 static void LoadPyramidBagPalette(void)
 {
     struct SpritePalette spritePalette;
-    u16 *palPtr = Alloc(0x40);
+    u16 *palPtr = Alloc(2 * PLTT_SIZE_4BPP);
 
     LZDecompressWram(gBattlePyramidBag_Pal, palPtr);
-    spritePalette.data = palPtr + (gSaveBlock2Ptr->frontier.lvlMode * 16);
+    spritePalette.data = palPtr + PLTT_ID(gSaveBlock2Ptr->frontier.lvlMode);
     spritePalette.tag = TAG_PYRAMID_BAG;
     LoadSpritePalette(&spritePalette);
     Free(palPtr);

@@ -11,7 +11,8 @@
 #define TRAINER_PIC_HEIGHT 64
 #define TRAINER_PIC_SIZE (TRAINER_PIC_WIDTH * TRAINER_PIC_HEIGHT / 2)
 
-#define MAX_TRAINER_PIC_FRAMES 4 // ? Red and Leaf's back pics have 5 frames
+// Red and Leaf's back pics have 5 frames, but this is presumably irrelevant in the places this is used.
+#define MAX_TRAINER_PIC_FRAMES 4
 
 enum {
     BATTLER_AFFINE_NORMAL,
