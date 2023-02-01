@@ -16,6 +16,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "test_runner.h"
 #include "constants/battle_anim.h"
 #include "constants/moves.h"
 
@@ -27,7 +28,10 @@
 #define ANIM_SPRITE_INDEX_COUNT 8
 
 extern const u16 gMovesWithQuietBGM[];
+extern const u8 *const gBattleAnims_General[];
 extern const u8 *const gBattleAnims_Moves[];
+extern const u8 *const gBattleAnims_Special[];
+extern const u8 *const gBattleAnims_StatusConditions[];
 
 static void Cmd_loadspritegfx(void);
 static void Cmd_unloadspritegfx(void);
@@ -211,17 +215,50 @@ void DoMoveAnim(u16 move)
                 gBattleAnimTarget = 0;
         }
     }
-    LaunchBattleAnimation(gBattleAnims_Moves, move, TRUE);
+    LaunchBattleAnimation(ANIM_TYPE_MOVE, move);
 }
 
-void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMoveAnim)
+static void Nop(void)
+{
+}
+
+void LaunchBattleAnimation(u32 animType, u32 animId)
 {
     s32 i;
-    bool32 hideHpBoxes = (tableId == MOVE_TRANSFORM) ? FALSE : TRUE;
+    const u8 *const *animsTable;
+    bool32 hideHpBoxes;
 
-    if (!isMoveAnim)
+    if (gTestRunnerEnabled)
     {
-        switch (tableId)
+        TestRunner_Battle_RecordAnimation(animType, animId);
+        if (gTestRunnerHeadless)
+        {
+            gAnimScriptCallback = Nop;
+            gAnimScriptActive = FALSE;
+            return;
+        }
+    }
+
+    switch (animType)
+    {
+    case ANIM_TYPE_GENERAL:
+        animsTable = gBattleAnims_General;
+        break;
+    case ANIM_TYPE_MOVE:
+        animsTable = gBattleAnims_Moves;
+        break;
+    case ANIM_TYPE_STATUS:
+        animsTable = gBattleAnims_StatusConditions;
+        break;
+    case ANIM_TYPE_SPECIAL:
+        animsTable = gBattleAnims_Special;
+        break;
+    }
+
+    hideHpBoxes = !(animType == ANIM_TYPE_MOVE && animId == MOVE_TRANSFORM);
+    if (animType != ANIM_TYPE_MOVE)
+    {
+        switch (animId)
         {
         case B_ANIM_TURN_TRAP:
         case B_ANIM_LEECH_SEED_DRAIN:
@@ -258,17 +295,17 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
             gAnimBattlerSpecies[i] = gContestResources->moveAnim->species;
     }
 
-    if (!isMoveAnim)
+    if (animType != ANIM_TYPE_MOVE)
         gAnimMoveIndex = 0;
     else
-        gAnimMoveIndex = tableId;
+        gAnimMoveIndex = animId;
 
     for (i = 0; i < ANIM_ARGS_COUNT; i++)
         gBattleAnimArgs[i] = 0;
 
     sMonAnimTaskIdArray[0] = TASK_NONE;
     sMonAnimTaskIdArray[1] = TASK_NONE;
-    sBattleAnimScriptPtr = animsTable[tableId];
+    sBattleAnimScriptPtr = animsTable[animId];
     gAnimScriptActive = TRUE;
     sAnimFramesToWait = 0;
     gAnimScriptCallback = RunAnimScriptCommand;
@@ -276,11 +313,11 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
     for (i = 0; i < ANIM_SPRITE_INDEX_COUNT; i++)
         sAnimSpriteIndexArray[i] = 0xFFFF;
 
-    if (isMoveAnim)
+    if (animType == ANIM_TYPE_MOVE)
     {
         for (i = 0; gMovesWithQuietBGM[i] != 0xFFFF; i++)
         {
-            if (tableId == gMovesWithQuietBGM[i])
+            if (animId == gMovesWithQuietBGM[i])
             {
                 m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 128);
                 break;

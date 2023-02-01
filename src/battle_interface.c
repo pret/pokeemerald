@@ -28,6 +28,7 @@
 #include "item.h"
 #include "item_icon.h"
 #include "item_use.h"
+#include "test_runner.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -3072,6 +3073,13 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
     const s16 (*coords)[2];
     u8 spriteId1, spriteId2, battlerPosition, taskId;
 
+    if (gTestRunnerEnabled)
+    {
+        TestRunner_Battle_RecordAbilityPopUp(battlerId, ability);
+        if (gTestRunnerHeadless)
+            return;
+    }
+
     if (gBattleScripting.abilityPopupOverwrite != 0)
         ability = gBattleScripting.abilityPopupOverwrite;
 
@@ -3187,9 +3195,12 @@ static void SpriteCb_AbilityPopUp(struct Sprite *sprite)
 
 void DestroyAbilityPopUp(u8 battlerId)
 {
-    gSprites[gBattleStruct->abilityPopUpSpriteIds[battlerId][0]].tFrames = 0;
-    gSprites[gBattleStruct->abilityPopUpSpriteIds[battlerId][1]].tFrames = 0;
-    gBattleScripting.fixedPopup = FALSE;
+    if (gBattleStruct->activeAbilityPopUps & gBitTable[battlerId])
+    {
+        gSprites[gBattleStruct->abilityPopUpSpriteIds[battlerId][0]].tFrames = 0;
+        gSprites[gBattleStruct->abilityPopUpSpriteIds[battlerId][1]].tFrames = 0;
+        gBattleScripting.fixedPopup = FALSE;
+    }
 }
 
 static void Task_FreeAbilityPopUpGfx(u8 taskId)
