@@ -1201,12 +1201,12 @@ void TryLoadAllMonIconPalettesAtOffset(u16 offset)
     s32 i;
     const struct SpritePalette* monIconPalettePtr;
 
-    if (offset <= 0xA0)
+    if (offset <= BG_PLTT_ID(10))
     {
         monIconPalettePtr = gMonIconPaletteTable;
-        for(i = ARRAY_COUNT(gMonIconPaletteTable) - 1; i >= 0; i--)
+        for (i = ARRAY_COUNT(gMonIconPaletteTable) - 1; i >= 0; i--)
         {
-            LoadPalette(monIconPalettePtr->data, offset, 0x20);
+            LoadPalette(monIconPalettePtr->data, offset, PLTT_SIZE_4BPP);
             offset += 0x10;
             monIconPalettePtr++;
         }

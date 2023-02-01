@@ -1079,9 +1079,7 @@ static void LoadOrbEffectPalette(bool8 blueOrb)
         color[0] = RGB_BLUE;
 
     for (i = 0; i < 16; i++)
-    {
-        LoadPalette(color, 0xF0 + i, 2);
-    }
+        LoadPalette(color, BG_PLTT_ID(15) + i, PLTT_SIZEOF(1));
 }
 
 static bool8 UpdateOrbEffectBlend(u16 shakeDir)
