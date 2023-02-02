@@ -8150,7 +8150,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_WOOD_HAMMER] =
     {
-        .effect = EFFECT_RECOIL_25,
+        .effect = EFFECT_RECOIL_33,
         .power = 120,
         .type = TYPE_GRASS,
         .accuracy = 100,

@@ -515,9 +515,11 @@ void HandleAction_UseMove(void)
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
         BattleArena_AddMindPoints(gBattlerAttacker);
 
-    // Record HP of each battler
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
         gBattleStruct->hpBefore[i] = gBattleMons[i].hp;
+        gSpecialStatuses[i].emergencyExited = FALSE;
+    }
 
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
@@ -5566,7 +5568,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
              && gBattleMons[gBattlerAttacker].hp != 0
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && TARGET_TURN_DAMAGED
-             && CanBePoisoned(gBattlerAttacker, gBattlerTarget)
+             && CanBePoisoned(gBattlerTarget, gBattlerAttacker)
              && IsMoveMakingContact(move, gBattlerAttacker)
              && (Random() % 3) == 0)
             {
@@ -5803,7 +5805,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && IS_MOVE_PHYSICAL(gCurrentMove)
              && TARGET_TURN_DAMAGED
-             && !(gSideStatuses[gBattlerAttacker] & SIDE_STATUS_TOXIC_SPIKES)
+             && !(gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_TOXIC_SPIKES)
              && IsBattlerAlive(gBattlerTarget))
             {
                 gBattlerTarget = gBattlerAttacker;
@@ -5895,6 +5897,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             switch (GetBattlerAbility(battler))
             {
             case ABILITY_IMMUNITY:
+            case ABILITY_PASTEL_VEIL:
                 if (gBattleMons[battler].status1 & (STATUS1_POISON | STATUS1_TOXIC_POISON | STATUS1_TOXIC_COUNTER))
                 {
                     StringCopy(gBattleTextBuff1, gStatusConditionString_PoisonJpn);
@@ -8142,7 +8145,7 @@ u32 GetBattlerHoldEffectParam(u8 battlerId)
 bool32 IsMoveMakingContact(u16 move, u8 battlerAtk)
 {
     u16 atkHoldEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
-    
+
     if (!(gBattleMoves[move].flags & FLAG_MAKES_CONTACT))
     {
         if (gBattleMoves[move].effect == EFFECT_SHELL_SIDE_ARM && gBattleStruct->swapDamageCategory)
@@ -8150,11 +8153,9 @@ bool32 IsMoveMakingContact(u16 move, u8 battlerAtk)
         else
             return FALSE;
     }
-    else if (GetBattlerAbility(battlerAtk) == ABILITY_LONG_REACH || atkHoldEffect == HOLD_EFFECT_PUNCHING_GLOVE)
-    {
-        return FALSE;
-    }
-    else if (atkHoldEffect == HOLD_EFFECT_PROTECTIVE_PADS)
+    else if ((atkHoldEffect == HOLD_EFFECT_PUNCHING_GLOVE && (gBattleMoves[move].flags & FLAG_IRON_FIST_BOOST))
+           || atkHoldEffect == HOLD_EFFECT_PROTECTIVE_PADS
+           || GetBattlerAbility(battlerAtk) == ABILITY_LONG_REACH)
     {
         return FALSE;
     }
@@ -10027,18 +10028,12 @@ bool32 CanMegaEvolve(u8 battlerId)
 
         // Can Mega Evolve via Mega Stone.
         if (holdEffect == HOLD_EFFECT_MEGA_STONE)
-        {
-            gBattleStruct->mega.isWishMegaEvo = FALSE;
             return TRUE;
-        }
     }
 
     // Check if there is an entry in the evolution table for Wish Mega Evolution.
     if (GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE) != SPECIES_NONE)
-    {
-        gBattleStruct->mega.isWishMegaEvo = TRUE;
         return TRUE;
-    }
 
     // No checks passed, the mon CAN'T mega evolve.
     return FALSE;

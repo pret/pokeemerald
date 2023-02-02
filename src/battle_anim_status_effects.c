@@ -13,7 +13,6 @@
 
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
-extern const u8 *const gBattleAnims_StatusConditions[];
 extern const struct OamData gOamData_AffineOff_ObjNormal_8x8;
 extern const struct OamData gOamData_AffineOff_ObjBlend_64x64;
 
@@ -568,7 +567,7 @@ void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId)
 
     gBattleAnimAttacker = battlerId;
     gBattleAnimTarget = battlerId;
-    LaunchBattleAnimation(gBattleAnims_StatusConditions, statusAnimId, FALSE);
+    LaunchBattleAnimation(ANIM_TYPE_STATUS, statusAnimId);
     taskId = CreateTask(Task_DoStatusAnimation, 10);
     gTasks[taskId].data[0] = battlerId;
 }

@@ -205,7 +205,7 @@ static const union AffineAnimCmd *const sRotatingBallAnimCmds_FullRotation[] =
 
 static const struct SpriteSheet sRotatingBallTable =
 {
-    sRotatingBall_Gfx, 0x80, TAG_ROTATING_BALL_GFX
+    sRotatingBall_Gfx, sizeof(sRotatingBall_Gfx), TAG_ROTATING_BALL_GFX
 };
 
 static const struct SpritePalette sRotatingBallPaletteTable =

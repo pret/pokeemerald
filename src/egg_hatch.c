@@ -145,14 +145,14 @@ static const union AnimCmd *const sSpriteAnimTable_Egg[] =
 static const struct SpriteSheet sEggHatch_Sheet =
 {
     .data = sEggHatchTiles,
-    .size = 0x800,
+    .size = sizeof(sEggHatchTiles),
     .tag = GFXTAG_EGG,
 };
 
 static const struct SpriteSheet sEggShards_Sheet =
 {
     .data = sEggShardTiles,
-    .size = 0x80,
+    .size = sizeof(sEggShardTiles),
     .tag = GFXTAG_EGG_SHARD,
 };
 
@@ -377,9 +377,6 @@ static void AddHatchedMonToParty(u8 id)
     GetSetPokedexFlag(species, FLAG_SET_CAUGHT);
 
     GetMonNickname2(mon, gStringVar1);
-
-    ball = ITEM_POKE_BALL;
-    SetMonData(mon, MON_DATA_POKEBALL, &ball);
 
     // A met level of 0 is interpreted on the summary screen as "hatched at"
     metLevel = 0;

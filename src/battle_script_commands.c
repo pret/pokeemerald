@@ -2880,11 +2880,11 @@ void SetMoveEffect(bool32 primary, u32 certain)
             statusChanged = TRUE;
             break;
         case STATUS1_POISON:
-            if (battlerAbility == ABILITY_IMMUNITY
+            if ((battlerAbility == ABILITY_IMMUNITY || battlerAbility == ABILITY_PASTEL_VEIL)
                 && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
             {
-                gLastUsedAbility = ABILITY_IMMUNITY;
-                RecordAbilityBattle(gEffectBattler, ABILITY_IMMUNITY);
+                gLastUsedAbility = battlerAbility;
+                RecordAbilityBattle(gEffectBattler, battlerAbility);
 
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_PSNPrevention;
@@ -3004,10 +3004,11 @@ void SetMoveEffect(bool32 primary, u32 certain)
             statusChanged = TRUE;
             break;
         case STATUS1_TOXIC_POISON:
-            if (battlerAbility == ABILITY_IMMUNITY && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
+            if ((battlerAbility == ABILITY_IMMUNITY || battlerAbility == ABILITY_PASTEL_VEIL)
+             && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
             {
-                gLastUsedAbility = ABILITY_IMMUNITY;
-                RecordAbilityBattle(gEffectBattler, ABILITY_IMMUNITY);
+                gLastUsedAbility = battlerAbility;
+                RecordAbilityBattle(gEffectBattler, battlerAbility);
 
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_PSNPrevention;
@@ -3485,7 +3486,9 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 }
                 break;
             case MOVE_EFFECT_FLAME_BURST:
-                if (IsBattlerAlive(BATTLE_PARTNER(gBattlerTarget)) && GetBattlerAbility(BATTLE_PARTNER(gBattlerTarget)) != ABILITY_MAGIC_GUARD)
+                if (IsBattlerAlive(BATTLE_PARTNER(gBattlerTarget))
+                        && !(gStatuses3[BATTLE_PARTNER(gBattlerTarget)] & STATUS3_SEMI_INVULNERABLE)
+                        && GetBattlerAbility(BATTLE_PARTNER(gBattlerTarget)) != ABILITY_MAGIC_GUARD)
                 {
                     gBattleScripting.savedBattler = BATTLE_PARTNER(gBattlerTarget);
                     gBattleMoveDamage = gBattleMons[BATTLE_PARTNER(gBattlerTarget)].hp / 16;
@@ -5402,7 +5405,7 @@ static void Cmd_moveend(void)
                     gStatuses3[gBattlerTarget] |= STATUS3_SMACKED_DOWN;
                     gStatuses3[gBattlerTarget] &= ~(STATUS3_MAGNET_RISE | STATUS3_TELEKINESIS | STATUS3_ON_AIR);
                     effect = TRUE;
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    BattleScriptPush(gBattlescriptCurrInstr);
                     gBattlescriptCurrInstr = BattleScript_MoveEffectSmackDown;
                 }
                 break;
@@ -5415,7 +5418,7 @@ static void Cmd_moveend(void)
                     BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
                     MarkBattlerForControllerExec(gActiveBattler);
                     effect = TRUE;
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    BattleScriptPush(gBattlescriptCurrInstr);
                     switch (gBattleMoves[gCurrentMove].argument)
                     {
                     case STATUS1_PARALYSIS:
@@ -5912,6 +5915,7 @@ static void Cmd_moveend(void)
                 if (gBattleResources->flags->flags[i] & RESOURCE_FLAG_EMERGENCY_EXIT)
                 {
                     gBattleResources->flags->flags[i] &= ~RESOURCE_FLAG_EMERGENCY_EXIT;
+                    gSpecialStatuses[i].emergencyExited = TRUE;
                     gBattlerTarget = gBattlerAbility = i;
                     BattleScriptPushCursor();
                     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER || GetBattlerSide(i) == B_SIDE_PLAYER)
@@ -6754,6 +6758,7 @@ static void Cmd_switchineffects(void)
             if (!(gBattleMons[gActiveBattler].status1 & STATUS1_ANY)
                 && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL)
                 && GetBattlerAbility(gActiveBattler) != ABILITY_IMMUNITY
+                && !IsAbilityOnSide(gActiveBattler, ABILITY_PASTEL_VEIL)
                 && !(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SAFEGUARD)
                 && !(gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN))
             {
@@ -10048,9 +10053,9 @@ static void Cmd_various(void)
         return;
     case VARIOUS_JUMP_IF_LAST_USED_ITEM_BERRY:
         if (ItemId_GetPocket(gLastUsedItem) == POCKET_BERRIES)
-            gBattlescriptCurrInstr += 7;
-        else
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
         return;
     case VARIOUS_JUMP_IF_LAST_USED_ITEM_HOLD_EFFECT:
         if (ItemId_GetHoldEffect(gLastUsedItem) == gBattlescriptCurrInstr[3])
@@ -10133,6 +10138,8 @@ static void Cmd_various(void)
                 break;
             }
             PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
+            gBattlescriptCurrInstr += 4;
+            return;
         }
         break;
     case VARIOUS_TEATIME_TARGETS:
@@ -10213,6 +10220,12 @@ static void Cmd_various(void)
             else
                 gBattlescriptCurrInstr += 7;
         }
+        return;
+    case VARIOUS_JUMP_IF_EMERGENCY_EXITED:
+        if (gSpecialStatuses[gActiveBattler].emergencyExited)
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
         return;
     } // End of switch (gBattlescriptCurrInstr[2])
 
@@ -12058,7 +12071,9 @@ static void Cmd_trysetencore(void)
             break;
     }
 
-    if (gLastMoves[gBattlerTarget] == MOVE_STRUGGLE
+    if (gLastMoves[gBattlerTarget] == MOVE_NONE
+     || gLastMoves[gBattlerTarget] == MOVE_UNAVAILABLE
+     || gLastMoves[gBattlerTarget] == MOVE_STRUGGLE
      || gLastMoves[gBattlerTarget] == MOVE_ENCORE
      || gLastMoves[gBattlerTarget] == MOVE_MIRROR_MOVE
      || gLastMoves[gBattlerTarget] == MOVE_SHELL_TRAP)

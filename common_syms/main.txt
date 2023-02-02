@@ -7,3 +7,4 @@ gIntrTable
 gLinkVSyncDisabled
 IntrMain_Buffer
 gPcmDmaCounter
+gAgbMainLoop_sp

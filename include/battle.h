@@ -196,6 +196,7 @@ struct SpecialStatus
     // End of byte
     u8 weatherAbilityDone:1;
     u8 terrainAbilityDone:1;
+    u8 emergencyExited:1;
 };
 
 struct SideTimer
@@ -483,7 +484,6 @@ struct MegaEvolutionData
     u8 battlerId;
     bool8 playerSelect;
     u8 triggerSpriteId;
-    bool8 isWishMegaEvo;
 };
 
 struct Illusion
