@@ -13198,10 +13198,11 @@ static void Cmd_setforcedtarget(void)
 
 static void Cmd_setcharge(void)
 {
-    gStatuses3[gBattlerAttacker] |= STATUS3_CHARGED_UP;
-    gDisableStructs[gBattlerAttacker].chargeTimer = 2;
-    gDisableStructs[gBattlerAttacker].chargeTimerStartValue = 2;
-    gBattlescriptCurrInstr++;
+    u8 battler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+    gStatuses3[battler] |= STATUS3_CHARGED_UP;
+    gDisableStructs[battler].chargeTimer = 2;
+    gDisableStructs[battler].chargeTimerStartValue = 2;
+    gBattlescriptCurrInstr += 2;
 }
 
 // Nature Power
