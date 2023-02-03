@@ -639,6 +639,8 @@ extern struct BattleTestRunnerState *gBattleTestRunnerState;
 
 /* Parametrize */
 
+#undef PARAMETRIZE // Override test/test.h's implementation.
+
 #define PARAMETRIZE if (gBattleTestRunnerState->parametersCount++ == i)
 
 /* Randomly */
