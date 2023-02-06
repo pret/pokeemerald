@@ -3036,24 +3036,24 @@ Move_MUD_BOMB:
 	end
 
 Move_PSYCHO_CUT:
-	loadspritegfx ANIM_TAG_SPIRAL 
-	loadspritegfx ANIM_TAG_PSYCHO_CUT 
+	loadspritegfx ANIM_TAG_SPIRAL
+	loadspritegfx ANIM_TAG_PSYCHO_CUT
 	loadspritegfx ANIM_TAG_CROSS_IMPACT
-	monbg ANIM_ATK_PARTNER 
+	monbg ANIM_ATK_PARTNER
 	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_CROSS_IMPACT, 0, 9, 9, RGB_PURPLE
 	createvisualtask AnimTask_SwayMon, 5, 0, 6, 2048, 2, ANIM_ATTACKER
 	createsprite gPsychoCutSpiralSpriteTemplate, 2, 4, 0, 0, 0, 0
 	createvisualtask AnimTask_BlendBattleAnimPal, 1, 1, 2, 0,  4, RGB_BLACK
 	createvisualtask AnimTask_BlendBattleAnimPal, 1, 2, 2, 0, 10, RGB(20, 12, 23)
 	delay 30
-	clearmonbg ANIM_ATK_PARTNER 
-	waitforvisualfinish 
-	monbg ANIM_TARGET 
-	splitbgprio ANIM_TARGET  
-	setalpha 12, 8 
-	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_ATTACKER, 
+	clearmonbg ANIM_ATK_PARTNER
+	waitforvisualfinish
+	monbg ANIM_TARGET
+	splitbgprio ANIM_TARGET
+	setalpha 12, 8
+	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_ATTACKER,
 	createsprite gPsychoCutSpriteTemplate, ANIM_TARGET, 2, 20, 0, -8, 0, 20
-	waitforvisualfinish 
+	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 7, 0, 9, 1
 	createsprite gCrossImpactSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 1, 20
 	createvisualtask AnimTask_BlendBattleAnimPal, 1, 1, 2, 4,  0, RGB_BLACK
@@ -14003,11 +14003,12 @@ Move_STRANGE_STEAM::
 	clearmonbg ANIM_DEF_PARTNER
 	end
 StrangeSteamCloud:
-	launchtemplate gStrangeSteamPinkCloudTemplate 0x82 0x5 0xf 0xf 0x14 0x0 0x0
-	launchtemplate gStrangeSteamGreenCloudTemplate 0x82 0x5 0xf 0xf 0x14 0xa 0x5
-	launchtemplate gStrangeSteamPinkCloudTemplate 0x82 0x5 0xf 0xf 0x14 0xfff6 0xfffb
-	launchtemplate gStrangeSteamGreenCloudTemplate 0x82 0x5 0xf 0xf 0x14 0x14 0xa
-	launchtemplate gStrangeSteamBlueCloudTemplate 0x82 0x5 0xf 0xf 0x14 0xffec 0xfff6
+	createsprite gStrangeSteamPinkCloudTemplate, ANIM_TARGET, 2, 0xf, 0xf, 0x14, 0, 0
+	createsprite gStrangeSteamGreenCloudTemplate, ANIM_TARGET, 2, 0xf, 0xf, 0x14, 0xa, 0x5
+	createsprite gStrangeSteamPinkCloudTemplate, ANIM_TARGET, 2, 0xf, 0xf, 0x14, 0xfff6, 0xfffb
+	delay 0x1
+	createsprite gStrangeSteamGreenCloudTemplate, ANIM_TARGET, 2, 0xf, 0xf, 0x14, 0x14, 0xa
+	createsprite gStrangeSteamBlueCloudTemplate, ANIM_TARGET, 2, 0xf, 0xf, 0x14, 0xffec, 0xfff6
 	delay 0x2
 	return
 
