@@ -5749,8 +5749,7 @@ static void Cmd_moveend(void)
             break;
         }
         case MOVEEND_EJECT_BUTTON:
-            if (gCurrentMove != MOVE_DRAGON_TAIL
-              && gCurrentMove != MOVE_CIRCLE_THROW
+            if (gBattleMoves[gCurrentMove].effect != EFFECT_HIT_SWITCH_TARGET
               && IsBattlerAlive(gBattlerAttacker)
               && !TestSheerForceFlag(gBattlerAttacker, gCurrentMove)
               && (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER || (gBattleTypeFlags & BATTLE_TYPE_TRAINER)))
@@ -5783,8 +5782,7 @@ static void Cmd_moveend(void)
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_RED_CARD:
-            if (gCurrentMove != MOVE_DRAGON_TAIL
-              && gCurrentMove != MOVE_CIRCLE_THROW
+            if (gBattleMoves[gCurrentMove].effect != EFFECT_HIT_SWITCH_TARGET
               && IsBattlerAlive(gBattlerAttacker)
               && !TestSheerForceFlag(gBattlerAttacker, gCurrentMove)
               && GetBattlerAbility(gBattlerAttacker) != ABILITY_GUARD_DOG)
