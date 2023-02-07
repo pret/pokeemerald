@@ -2427,25 +2427,18 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 break;
             }
             break;
+        case EFFECT_HEAL_PULSE: // and floral healing
+            if (!IsTargetingPartner(battlerAtk, battlerDef)) // Don't heal enemies
+            {
+                score -= 10;
+                break;
+            }
+            // fallthrough
         case EFFECT_HIT_ENEMY_HEAL_ALLY:    // pollen puff
             if (IsTargetingPartner(battlerAtk, battlerDef))
             {
                 if (gStatuses3[battlerDef] & STATUS3_HEAL_BLOCK)
                     return 0;
-                if (AtMaxHp(battlerDef))
-                    score -= 10;
-                else if (gBattleMons[battlerDef].hp > gBattleMons[battlerDef].maxHP / 2)
-                    score -= 5;
-                break;
-            }
-            // fallthrough
-        case EFFECT_HEAL_PULSE: // and floral healing
-            if (!IsTargetingPartner(battlerAtk, battlerDef)) // Don't heal enemies
-            {
-                score -= 10;
-            }
-            else
-            {
                 if (AtMaxHp(battlerDef))
                     score -= 10;
                 else if (gBattleMons[battlerDef].hp > gBattleMons[battlerDef].maxHP / 2)
