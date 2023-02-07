@@ -5566,17 +5566,26 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_AFTERMATH:
-            if (!IsAbilityOnField(ABILITY_DAMP)
-             && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && gBattleMons[gBattlerTarget].hp == 0
              && IsBattlerAlive(gBattlerAttacker)
              && IsMoveMakingContact(move, gBattlerAttacker))
             {
-                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
-                if (gBattleMoveDamage == 0)
-                    gBattleMoveDamage = 1;
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_AftermathDmg;
+                u8 battler;
+                if ((battler = IsAbilityOnField(ABILITY_DAMP)))
+                {
+                    gBattleScripting.battler = battler - 1;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_DampPreventsAftermath;
+                }
+                else
+                {
+                    gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_AftermathDmg;
+                }
                 effect++;
             }
             break;

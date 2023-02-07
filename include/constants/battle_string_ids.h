@@ -638,8 +638,9 @@
 #define STRINGID_ELECTRICTERRAINACTIVATEDABILITY      636
 #define STRINGID_ABILITYWEAKENEDFSURROUNDINGMONSSTAT  637
 #define STRINGID_ATTACKERGAINEDSTRENGTHFROMTHEFALLEN  638
+#define STRINGID_PKMNSABILITYPREVENTSABILITY          639
 
-#define BATTLESTRINGS_COUNT                           639
+#define BATTLESTRINGS_COUNT                           640
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
