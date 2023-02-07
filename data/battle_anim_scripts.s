@@ -21119,7 +21119,11 @@ Move_POISON_GAS:
 	createsprite gPoisonGasCloudSpriteTemplate, ANIM_TARGET, 0, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 40
 	loopsewithpan SE_M_MIST, SOUND_PAN_TARGET, 28, 6
+.if B_UPDATED_MOVE_DATA >= GEN_5
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_DEF_SIDE, 6, 2, 0, 12, RGB(26, 0, 26)
+.else
 	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_TARGET, 6, 2, 0, 12, RGB(26, 0, 26)
+.endif
 	waitforvisualfinish
 	blendoff
 	clearmonbg ANIM_DEF_PARTNER
