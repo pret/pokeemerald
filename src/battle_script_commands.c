@@ -2790,7 +2790,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
     u32 flags = 0;
     u16 battlerAbility;
 
-    if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_1ST_HIT 
+    if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_1ST_HIT
         && gBattleMons[gBattlerTarget].hp != 0
         && IsFinalStrikeEffect(gCurrentMove))
     {
@@ -2825,7 +2825,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
 
      // Just in case this flag is still set
     gBattleScripting.moveEffect &= ~MOVE_EFFECT_CERTAIN;
-    
+
     if ((battlerAbility == ABILITY_SHIELD_DUST
      || GetBattlerHoldEffect(gEffectBattler, TRUE) == HOLD_EFFECT_COVERT_CLOAK)
       && !(gHitMarker & HITMARKER_IGNORE_SAFEGUARD)
@@ -9361,7 +9361,7 @@ static void Cmd_various(void)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 3;
             else if ((gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP) && CanSleep(gBattlerTarget))
                 gBattleCommunication[MULTISTRING_CHOOSER] = 4;
-            else 
+            else
             {
                 gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
                 return;
@@ -9864,10 +9864,10 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 4;
             return;
         }
-        
+
         if (gBattlescriptCurrInstr[3])
             gLastUsedItem = gBattleMons[gActiveBattler].item;
-        
+
         gBattleScripting.battler = gEffectBattler = gBattlerTarget = gActiveBattler;    // Cover all berry effect battlerId cases. e.g. ChangeStatBuffs uses target ID
         if (ItemBattleEffects(ITEMEFFECT_USE_LAST_ITEM, gActiveBattler, FALSE))
             return;
@@ -10065,7 +10065,7 @@ static void Cmd_various(void)
         // Check taunt
         if (gDisableStructs[gActiveBattler].tauntTimer != 0)
         {
-            gDisableStructs[gActiveBattler].tauntTimer = gDisableStructs[gActiveBattler].tauntTimer2 = 0;
+            gDisableStructs[gActiveBattler].tauntTimer = 0;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MENTALHERBCURE_TAUNT;
             PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_TAUNT);
         }
@@ -10073,7 +10073,7 @@ static void Cmd_various(void)
         if (gDisableStructs[gActiveBattler].encoreTimer != 0)
         {
             gDisableStructs[gActiveBattler].encoredMove = 0;
-            gDisableStructs[gActiveBattler].encoreTimerStartValue = gDisableStructs[gActiveBattler].encoreTimer = 0;
+            gDisableStructs[gActiveBattler].encoreTimer = 0;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MENTALHERBCURE_ENCORE;   // STRINGID_PKMNENCOREENDED
         }
         // Check torment
@@ -10091,7 +10091,7 @@ static void Cmd_various(void)
         // Check disable
         if (gDisableStructs[gActiveBattler].disableTimer != 0)
         {
-            gDisableStructs[gActiveBattler].disableTimer = gDisableStructs[gActiveBattler].disableTimerStartValue = 0;
+            gDisableStructs[gActiveBattler].disableTimer = 0;
             gDisableStructs[gActiveBattler].disabledMove = 0;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MENTALHERBCURE_DISABLE;
         }
@@ -10970,7 +10970,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
             {
                 RecordItemEffectBattle(gActiveBattler, HOLD_EFFECT_CLEAR_AMULET);
             }
-            
+
             if (flags == STAT_CHANGE_ALLOW_PTR)
             {
                 if (gSpecialStatuses[gActiveBattler].statLowered)
@@ -11897,7 +11897,7 @@ static void Cmd_transformdataexecution(void)
 
         for (i = 0; i < offsetof(struct BattlePokemon, pp); i++)
             battleMonAttacker[i] = battleMonTarget[i];
-        
+
         gBattleStruct->overwrittenAbilities[gBattlerAttacker] = GetBattlerAbility(gBattlerTarget);
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
@@ -12105,7 +12105,6 @@ static void Cmd_disablelastusedattack(void)
     #else
         gDisableStructs[gBattlerTarget].disableTimer = 4;
     #endif
-        gDisableStructs[gBattlerTarget].disableTimerStartValue = gDisableStructs[gBattlerTarget].disableTimer; // used to save the random amount of turns?
         gBattlescriptCurrInstr += 5;
     }
     else
@@ -12140,7 +12139,7 @@ static void Cmd_trysetencore(void)
         gDisableStructs[gBattlerTarget].encoredMove = gBattleMons[gBattlerTarget].moves[i];
         gDisableStructs[gBattlerTarget].encoredMovePos = i;
         gDisableStructs[gBattlerTarget].encoreTimer = 3;
-        gDisableStructs[gBattlerTarget].encoreTimerStartValue = gDisableStructs[gBattlerTarget].encoreTimer;
+        gDisableStructs[gBattlerTarget].encoreTimer;
         gBattlescriptCurrInstr += 5;
     }
     else
@@ -12615,7 +12614,6 @@ static void Cmd_trysetperishsong(void)
         {
             gStatuses3[i] |= STATUS3_PERISH_SONG;
             gDisableStructs[i].perishSongTimer = 3;
-            gDisableStructs[i].perishSongTimerStartValue = 3;
         }
     }
 
@@ -13200,7 +13198,6 @@ static void Cmd_setcharge(void)
 {
     gStatuses3[gBattlerAttacker] |= STATUS3_CHARGED_UP;
     gDisableStructs[gBattlerAttacker].chargeTimer = 2;
-    gDisableStructs[gBattlerAttacker].chargeTimerStartValue = 2;
     gBattlescriptCurrInstr++;
 }
 
@@ -13290,7 +13287,7 @@ static void Cmd_settaunt(void)
             u8 turns = 2;
         #endif
 
-        gDisableStructs[gBattlerTarget].tauntTimer = gDisableStructs[gBattlerTarget].tauntTimer2 = turns;
+        gDisableStructs[gBattlerTarget].tauntTimer = turns;
         gBattlescriptCurrInstr += 5;
     }
     else
@@ -15022,7 +15019,7 @@ void BS_JumpIfHoldEffect(void)
 {
     u8 battler = gBattlescriptCurrInstr[5];
     u16 holdEffect = T1_READ_16(gBattlescriptCurrInstr + 6);
-    
+
     if (GetBattlerHoldEffect(battler, TRUE) == holdEffect)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 8);
@@ -15070,7 +15067,7 @@ static bool32 CriticalCapture(u32 odds)
 
 bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId)
 {
-    if (gBattleMoves[move].split != SPLIT_STATUS 
+    if (gBattleMoves[move].split != SPLIT_STATUS
         && !(sForbiddenMoves[move] & FORBIDDEN_PARENTAL_BOND))
     {
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
