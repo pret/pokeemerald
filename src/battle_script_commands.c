@@ -451,7 +451,7 @@ static void Cmd_manipulatedamage(void);
 static void Cmd_trysetrest(void);
 static void Cmd_jumpifnotfirstturn(void);
 static void Cmd_setmiracleeye(void);
-static void Cmd_jumpifcantmakeasleep(void);
+static void Cmd_jumpifuproarwakes(void);
 static void Cmd_stockpile(void);
 static void Cmd_stockpiletobasedamage(void);
 static void Cmd_stockpiletohpheal(void);
@@ -710,7 +710,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_trysetrest,                              //0x81
     Cmd_jumpifnotfirstturn,                      //0x82
     Cmd_setmiracleeye,                           //0x83
-    Cmd_jumpifcantmakeasleep,                    //0x84
+    Cmd_jumpifuproarwakes,                    //0x84
     Cmd_stockpile,                               //0x85
     Cmd_stockpiletobasedamage,                   //0x86
     Cmd_stockpiletohpheal,                       //0x87
@@ -10692,26 +10692,12 @@ bool8 UproarWakeUpCheck(u8 battlerId)
         return TRUE;
 }
 
-static void Cmd_jumpifcantmakeasleep(void)
+static void Cmd_jumpifuproarwakes(void)
 {
-    const u8 *jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-    u32 ability = GetBattlerAbility(gBattlerTarget);
-
     if (UproarWakeUpCheck(gBattlerTarget))
-    {
-        gBattlescriptCurrInstr = jumpPtr;
-    }
-    else if (ability == ABILITY_INSOMNIA || ability == ABILITY_VITAL_SPIRIT)
-    {
-        gLastUsedAbility = ability;
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STAYED_AWAKE_USING;
-        gBattlescriptCurrInstr = jumpPtr;
-        RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
-    }
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     else
-    {
         gBattlescriptCurrInstr += 5;
-    }
 }
 
 static void Cmd_stockpile(void)
