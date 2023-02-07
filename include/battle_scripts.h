@@ -451,6 +451,7 @@ extern const u8 BattleScript_EarthEaterActivates[];
 extern const u8 BattleScript_MimicryActivates_End3[];
 extern const u8 BattleScript_IceFaceNullsDamage[];
 extern const u8 BattleScript_BattlerFormChangeWithStringEnd3[];
+extern const u8 BattleScript_DampPreventsAftermath[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
