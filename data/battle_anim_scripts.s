@@ -14371,6 +14371,21 @@ Move_SCORCHING_SANDS::
 
 Move_JUNGLE_HEALING::
 	goto Move_AROMATHERAPY
+		
+Move_SILK_TRAP::
+	loadspritegfx ANIM_TAG_PROTECT
+	loadspritegfx ANIM_TAG_SPIDER_WEB
+	splitbgprio ANIM_ATTACKER
+	playsewithpan SE_M_STRING_SHOT2, SOUND_PAN_TARGET
+	createsprite gSpiderWebSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, FALSE
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_PROTECT, 0, 10, 10, RGB_LIME_GREEN
+	monbg ANIM_ATK_PARTNER 
+	waitplaysewithpan SE_M_REFLECT, SOUND_PAN_ATTACKER, 0x10 
+	createsprite gProtectSpriteTemplate, ANIM_ATTACKER, 2, 24, 0, 90
+	waitforvisualfinish
+	clearmonbg ANIM_ATK_PARTNER 
+	end
 
 Move_WICKED_BLOW::
 Move_SURGING_STRIKES::
@@ -14407,7 +14422,6 @@ Move_SANDSEAR_STORM::
 Move_LUNAR_BLESSING::
 Move_TAKE_HEART::
 Move_TERA_BLAST::
-Move_SILK_TRAP::
 Move_AXE_KICK::
 Move_LAST_RESPECTS::
 Move_LUMINA_CRASH::
