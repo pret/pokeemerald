@@ -187,7 +187,17 @@ void CB2_TestRunner(void)
 
             switch (gTestRunnerState.result)
             {
-            case TEST_RESULT_FAIL: result = "FAIL"; break;
+            case TEST_RESULT_FAIL:
+                if (gTestRunnerState.expectedResult == TEST_RESULT_FAIL)
+                {
+                    result = "KNOWN_FAILING";
+                    color = "\e[33m";
+                }
+                else
+                {
+                    result = "FAIL";
+                }
+                break;
             case TEST_RESULT_PASS: result = "PASS"; break;
             case TEST_RESULT_SKIP: result = "SKIP"; break;
             case TEST_RESULT_INVALID: result = "INVALID"; break;
