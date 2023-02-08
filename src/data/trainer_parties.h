@@ -1706,12 +1706,36 @@ static const struct TrainerMonNoItemCustomMoves sParty_Jessica5[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Winston1[] = {
+static const struct TrainerMonItemCustomMoves sParty_Winston1[] = {
     {
     .iv = 0,
-    .lvl = 7,
-    .species = SPECIES_ZIGZAGOON,
-    .heldItem = ITEM_NUGGET
+    .lvl = 10,
+    .species = SPECIES_EMOLGA,
+    .heldItem = ITEM_NONE,
+    .moves = {MOVE_VOLT_SWITCH, MOVE_NONE, MOVE_NONE, MOVE_NONE},
+    },
+    /*
+    {
+    .iv = 0,
+    .lvl = 4,
+    .species = SPECIES_ABRA,
+    .heldItem = ITEM_NONE,
+    .moves = {MOVE_VOLT_SWITCH, MOVE_NONE, MOVE_NONE, MOVE_NONE},
+    },
+    {
+    .iv = 0,
+    .lvl = 8,
+    .species = SPECIES_KADABRA,
+    .heldItem = ITEM_NONE,
+    .moves = {MOVE_VOLT_SWITCH, MOVE_NONE, MOVE_NONE, MOVE_NONE},
+    },
+    */
+    {
+    .iv = 250,
+    .lvl = 24,
+    .species = SPECIES_ZEBSTRIKA,
+    .heldItem = ITEM_SITRUS_BERRY,
+    .moves = {MOVE_VOLT_SWITCH, MOVE_VOLT_SWITCH, MOVE_VOLT_SWITCH, MOVE_VOLT_SWITCH},
     }
 };
 
