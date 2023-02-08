@@ -1641,8 +1641,8 @@ const struct Trainer gTrainers[] = {
         .trainerName = _("WINSTON"),
         .items = {ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE},
         .doubleBattle = FALSE,
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_ACE_POKEMON,
-        .party = ITEM_CUSTOM_MOVES(sParty_Winston1),
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
+        .party = ITEM_DEFAULT_MOVES(sParty_Winston1),
     },
 
     [TRAINER_MOLLIE] =
