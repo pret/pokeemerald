@@ -8,23 +8,13 @@
 #include "task.h"
 #include "gpu_regs.h"
 #include "trig.h"
-#include "rhh_copyright.h"
+#include "main.h"
+#include "intro.h"
+#include "expansion_intro.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-#if RHH_COPYRIGHT_INTRO == TRUE
-
-static const u32 sBgTiles_PoweredBy[] = INCBIN_U32("graphics/rhh_copyright/powered_by.4bpp.lz");
-static const u32 sBgTiles_RhhCredits[] = INCBIN_U32("graphics/rhh_copyright/rhh_credits.8bpp.lz");
-static const u32 sBgMap_PoweredBy[] = INCBIN_U32("graphics/rhh_copyright/powered_by.bin.lz");
-static const u32 sBgMap_RhhCredits[] = INCBIN_U32("graphics/rhh_copyright/rhh_credits.bin.lz");
-static const u32 sBgPal_Credits[] = INCBIN_U32("graphics/rhh_copyright/credits.gbapal.lz");
-static const u32 sSpriteTiles_DizzyEgg[] = INCBIN_U32("graphics/rhh_copyright/sprites/dizzy_egg.4bpp.lz");
-static const u32 sSpriteTiles_Porygon[] = INCBIN_U32("graphics/rhh_copyright/sprites/porygon.4bpp.lz");
-static const u16 sSpritePal_DizzyEgg[] = INCBIN_U16("graphics/rhh_copyright/sprites/dizzy_egg.gbapal");
-static const u16 sSpritePal_Porygon[] = INCBIN_U16("graphics/rhh_copyright/sprites/porygon.gbapal");
-static const u16 sSpritePal_PorygonShiny[] = INCBIN_U16("graphics/rhh_copyright/sprites/shiny.gbapal");
-
+#if EXPANSION_INTRO == TRUE
 
 #define TAG_DIZZY   20000
 #define TAG_PORYGON 20001
@@ -43,10 +33,47 @@ static const u16 sSpritePal_PorygonShiny[] = INCBIN_U16("graphics/rhh_copyright/
 #define DIZZY_ANIM_SPEED    4
 #define DIZZY_STARS_SPEED   12
 
-static void SpriteCallbacK_DizzyWalking(struct Sprite* sprite);
-static void SpriteCallback_PorygonFlying(struct Sprite* sprite);
+enum 
+{
+    EXPANSION_INTRO_BG2,
+    EXPANSION_INTRO_BG3    
+};
 
-static const union AnimCmd sAnimCmd_DizzyWalking[] = {
+enum
+{
+    ANIM_PORY_IDLE,
+    ANIM_PORY_HIT,
+    ANIM_PORY_GO_UP
+};
+
+enum
+{
+    ANIM_DIZZY_WALKING,
+    ANIM_DIZZY_DIZZY
+};
+
+static const u32 sBgTiles_PoweredBy[] = INCBIN_U32("graphics/expansion_intro/powered_by.4bpp.lz");
+static const u32 sBgTiles_RhhCredits[] = INCBIN_U32("graphics/expansion_intro/rhh_credits.8bpp.lz");
+static const u32 sBgMap_PoweredBy[] = INCBIN_U32("graphics/expansion_intro/powered_by.bin.lz");
+static const u32 sBgMap_RhhCredits[] = INCBIN_U32("graphics/expansion_intro/rhh_credits.bin.lz");
+static const u32 sBgPal_Credits[] = INCBIN_U32("graphics/expansion_intro/credits.gbapal.lz");
+static const u32 sSpriteTiles_DizzyEgg[] = INCBIN_U32("graphics/expansion_intro/sprites/dizzy_egg.4bpp.lz");
+static const u32 sSpriteTiles_Porygon[] = INCBIN_U32("graphics/expansion_intro/sprites/porygon.4bpp.lz");
+static const u16 sSpritePal_DizzyEgg[] = INCBIN_U16("graphics/expansion_intro/sprites/dizzy_egg.gbapal");
+static const u16 sSpritePal_Porygon[] = INCBIN_U16("graphics/expansion_intro/sprites/porygon.gbapal");
+static const u16 sSpritePal_PorygonShiny[] = INCBIN_U16("graphics/expansion_intro/sprites/shiny.gbapal");
+
+static void SpriteCallback_DizzyWalking(struct Sprite* sprite);
+static void SpriteCallback_PorygonFlying(struct Sprite* sprite);
+static void Task_ExpansionIntro_HandleBlend(u8 taskId);
+static void VBlankCB_ExpansionIntro(void);
+static void ExpansionIntro_InitBgs();
+static void ExpansionIntro_StartBlend();
+static void ExpansionIntro_LoadGraphics();
+static void ExpansionIntro_CreateSprites();
+
+static const union AnimCmd sAnimCmd_DizzyWalking[] =
+{
     ANIMCMD_FRAME(32, DIZZY_ANIM_SPEED),
     ANIMCMD_FRAME(16, DIZZY_ANIM_SPEED),
     ANIMCMD_FRAME(0, DIZZY_ANIM_SPEED),
@@ -58,7 +85,8 @@ static const union AnimCmd sAnimCmd_DizzyWalking[] = {
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd sAnimCmd_DizzyisDizzy[] = {
+static const union AnimCmd sAnimCmd_DizzyisDizzy[] =
+{
     ANIMCMD_FRAME(80, DIZZY_STARS_SPEED),
     ANIMCMD_FRAME(96, DIZZY_STARS_SPEED),
     ANIMCMD_FRAME(112, DIZZY_STARS_SPEED),
@@ -66,69 +94,77 @@ static const union AnimCmd sAnimCmd_DizzyisDizzy[] = {
     ANIMCMD_JUMP(0),
 };
 
-enum {ANIM_DIZZY_WALKING, ANIM_DIZZY_DIZZY};
-
-static const union AnimCmd *const sAnimCmdTable_DizzyEgg[] = {
+static const union AnimCmd *const sAnimCmdTable_DizzyEgg[] =
+{
     [ANIM_DIZZY_WALKING] = sAnimCmd_DizzyWalking,
     [ANIM_DIZZY_DIZZY] = sAnimCmd_DizzyisDizzy,
 };
 
-static const union AnimCmd sAnimCmd_PorygonIdle[] = {
+static const union AnimCmd sAnimCmd_PorygonIdle[] =
+{
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnimCmd_PorygonHitted[] = {
+static const union AnimCmd sAnimCmd_PorygonHitted[] =
+{
     ANIMCMD_FRAME(64, 0),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnimCmd_PorygonGoUp[] = {
+static const union AnimCmd sAnimCmd_PorygonGoUp[] =
+{
     ANIMCMD_FRAME(64, 20),
     ANIMCMD_FRAME(128, 10),
     ANIMCMD_END,
 };
 
-enum {ANIM_PORY_IDLE, ANIM_PORY_HIT, ANIM_PORY_GO_UP};
-
-static const union AnimCmd *const sAnimCmdTable_Porygon[] = {
+static const union AnimCmd *const sAnimCmdTable_Porygon[] =
+{
     [ANIM_PORY_IDLE] = sAnimCmd_PorygonIdle,
     [ANIM_PORY_HIT] = sAnimCmd_PorygonHitted,
     [ANIM_PORY_GO_UP] = sAnimCmd_PorygonGoUp,
 };
 
-static const union AffineAnimCmd sAffineAnimCmd_PorygonScale[] = {
+static const union AffineAnimCmd sAffineAnimCmd_PorygonScale[] =
+{
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd *const sAffineAnimCmdTable_Porygon[] = {
+static const union AffineAnimCmd *const sAffineAnimCmdTable_Porygon[] =
+{
     sAffineAnimCmd_PorygonScale,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_DizzyEgg = {
+static const struct CompressedSpriteSheet sSpriteSheet_DizzyEgg =
+{
     .data = sSpriteTiles_DizzyEgg,
     .size = 0x1000,
     .tag = TAG_DIZZY,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_Porygon = {
+static const struct CompressedSpriteSheet sSpriteSheet_Porygon =
+{
     .data = sSpriteTiles_Porygon,
     .size = 0x2800,
     .tag = PAL_TAG_PORYGON,
 };
 
-static const struct SpritePalette sSpritePalette_DizzyEgg = {
+static const struct SpritePalette sSpritePalette_DizzyEgg =
+{
     .data = sSpritePal_DizzyEgg,
     .tag = PAL_TAG_DIZZY,
 };
 
-static const struct SpritePalette sSpritePalette_Porygon = {
+static const struct SpritePalette sSpritePalette_Porygon =
+{
     .data = sSpritePal_Porygon,
     .tag = PAL_TAG_PORYGON,
 };
 
-static const struct OamData sOamData_DizzyEgg = {
+static const struct OamData sOamData_DizzyEgg =
+{
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -138,7 +174,8 @@ static const struct OamData sOamData_DizzyEgg = {
     .priority = 0,
 };
 
-static const struct OamData sOamData_Porygon = {
+static const struct OamData sOamData_Porygon =
+{
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -148,17 +185,19 @@ static const struct OamData sOamData_Porygon = {
     .priority = 0,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_DizzyEgg = {
+static const struct SpriteTemplate sSpriteTemplate_DizzyEgg =
+{
     .tileTag = TAG_DIZZY,
     .paletteTag = PAL_TAG_DIZZY,
     .oam = &sOamData_DizzyEgg,
     .anims = sAnimCmdTable_DizzyEgg,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbacK_DizzyWalking,
+    .callback = SpriteCallback_DizzyWalking,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_Porygon = {
+static const struct SpriteTemplate sSpriteTemplate_Porygon =
+{
     .tileTag = TAG_PORYGON,
     .paletteTag = PAL_TAG_PORYGON,
     .oam = &sOamData_Porygon,
@@ -168,53 +207,75 @@ static const struct SpriteTemplate sSpriteTemplate_Porygon = {
     .callback = SpriteCallback_PorygonFlying,
 };
 
-enum {BG_0, BG_1, BG_2, BG_3};
-
-static const struct BgTemplate sBgTemplates_RhhCopyrightScreen[] = {
-    [BG_0] = {
-        .bg = BG_0,
-        .charBaseIndex = 3,
-        .mapBaseIndex = 24,
-        .screenSize = 2,
-        .paletteMode = 0,
-        .priority = 0,
-        .baseTile = 0,
-    },
-    [BG_1] = {
-        .bg = BG_1,
-        .charBaseIndex = 3,
-        .mapBaseIndex = 24,
-        .screenSize = 2,
-        .paletteMode = 0,
-        .priority = 0,
-        .baseTile = 0,
-    },
-    [BG_2] = {
-        .bg = BG_2,
+static const struct BgTemplate sBgTemplates_RhhCopyrightScreen[] =
+{
+    [EXPANSION_INTRO_BG2] = {
+        .bg = 2,
         .charBaseIndex = 1,
         .mapBaseIndex = 20,
         .screenSize = 2,
-        .paletteMode = 1,
-        .priority = 0,
-        .baseTile = 0,
+        .paletteMode = 1
     },
-    [BG_3] = {
-        .bg = BG_3,
-        .charBaseIndex = 0,
+    [EXPANSION_INTRO_BG3] = {
+        .bg = 3,
         .mapBaseIndex = 22,
-        .screenSize = 2,
-        .paletteMode = 0,
-        .priority = 0,
-        .baseTile = 0,
+        .screenSize = 2
     },
 };
 
-static EWRAM_DATA u8 sDizzyId = 0;
-static EWRAM_DATA u8 sPoryId = 0;
+void CB2_ExpansionIntro(void)
+{
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
 
-static void Task_ShowRhhCredits(u8 taskId);
+#define tState gTasks[taskId].data[0]
+#define tFrameCounter gTasks[taskId].data[1]
+void Task_HandleExpansionIntro(u8 taskId)
+{
+    switch (tState)
+    {
+    case 0:
+        SetVBlankCallback(VBlankCB_ExpansionIntro);
+        ExpansionIntro_InitBgs();
+        ExpansionIntro_LoadGraphics();
+        CpuFastFill16(RGB_BLACK, gPlttBufferFaded, 32);
+        ShowBg(3);
+        BeginNormalPaletteFade(1, 0, 16, 0, RGB_BLACK);
+        ExpansionIntro_StartBlend();
+        ExpansionIntro_CreateSprites();
+        tState++;
+        break;
+    case 1:
+        if (!gPaletteFade.active)
+            tState++;
+        break;
+    case 2:
+        if (tFrameCounter == 208 || gMain.newKeys != 0)
+            tState++;
+        else
+            tFrameCounter++;
+        break;
+    case 3:
+        ResetSpriteData();
+        DestroyTask(taskId);
+        CreateTask(Task_Scene1_Load, 0);
+        SetMainCallback2(MainCB2_Intro);
+        break;
+    }
+}
+#undef tState
 
-void RhhIntro_InitCopyrightBgs()
+static void VBlankCB_ExpansionIntro(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+static void ExpansionIntro_InitBgs(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBgTemplates_RhhCopyrightScreen, ARRAY_COUNT(sBgTemplates_RhhCopyrightScreen));
@@ -224,42 +285,41 @@ void RhhIntro_InitCopyrightBgs()
     HideBg(0);
     HideBg(1);
     HideBg(2);
-    ShowBg(3);
+    HideBg(3);
 }
 
-void RhhIntro_LoadCopyrightBgGraphics()
+static void ExpansionIntro_LoadGraphics(void)
 {
-    LZ77UnCompVram(sBgTiles_PoweredBy, (void*) BG_CHAR_ADDR(sBgTemplates_RhhCopyrightScreen[BG_3].charBaseIndex));
-    LZ77UnCompVram(sBgMap_PoweredBy, (u16*) BG_SCREEN_ADDR(sBgTemplates_RhhCopyrightScreen[BG_3].mapBaseIndex));
-    LZ77UnCompVram(sBgTiles_RhhCredits, (void*) BG_CHAR_ADDR(sBgTemplates_RhhCopyrightScreen[BG_2].charBaseIndex));
-    LZ77UnCompVram(sBgMap_RhhCredits, (u16*) BG_SCREEN_ADDR(sBgTemplates_RhhCopyrightScreen[BG_2].mapBaseIndex));
+    LZ77UnCompVram(sBgTiles_PoweredBy, (void*) BG_CHAR_ADDR(sBgTemplates_RhhCopyrightScreen[EXPANSION_INTRO_BG3].charBaseIndex));
+    LZ77UnCompVram(sBgMap_PoweredBy, (u16*) BG_SCREEN_ADDR(sBgTemplates_RhhCopyrightScreen[EXPANSION_INTRO_BG3].mapBaseIndex));
+    LZ77UnCompVram(sBgTiles_RhhCredits, (void*) BG_CHAR_ADDR(sBgTemplates_RhhCopyrightScreen[EXPANSION_INTRO_BG2].charBaseIndex));
+    LZ77UnCompVram(sBgMap_RhhCredits, (u16*) BG_SCREEN_ADDR(sBgTemplates_RhhCopyrightScreen[EXPANSION_INTRO_BG2].mapBaseIndex));
     LoadCompressedPalette(sBgPal_Credits, 0x00, 0x60);
-}
 
-void RhhIntro_LoadCopyrightSpriteGraphics()
-{
     LoadCompressedSpriteSheet(&sSpriteSheet_DizzyEgg);
     LoadCompressedSpriteSheet(&sSpriteSheet_Porygon);
     LoadSpritePalette(&sSpritePalette_DizzyEgg);
     LoadSpritePalette(&sSpritePalette_Porygon);
 }
 
-void RhhIntro_CreateCopyRightSprites()
+static void ExpansionIntro_CreateSprites(void)
 {
-    sDizzyId = CreateSprite(&sSpriteTemplate_DizzyEgg, 0, DIZZY_POS_Y, 0);
-    gSprites[sDizzyId].x2 = DIZZY_POS_X;
+    u32 dizzyId, poryId;
 
-    sPoryId = CreateSprite(&sSpriteTemplate_Porygon, 0, PORY_POS_Y, 0);
-    gSprites[sPoryId].x2 = PORY_POS_X;
+    dizzyId = CreateSprite(&sSpriteTemplate_DizzyEgg, 0, DIZZY_POS_Y, 0);
+    gSprites[dizzyId].x2 = DIZZY_POS_X;
+
+    poryId = CreateSprite(&sSpriteTemplate_Porygon, 0, PORY_POS_Y, 0);
+    gSprites[poryId].x2 = PORY_POS_X;
 }
 
-void RhhIntro_ShowRhhCredits()
+static void ExpansionIntro_StartBlend(void)
 {
     ShowBg(2);
-    CreateTask(Task_ShowRhhCredits, 0);
+    CreateTask(Task_ExpansionIntro_HandleBlend, 0);
 }
 
-static void Task_ShowRhhCredits(u8 taskId)
+static void Task_ExpansionIntro_HandleBlend(u8 taskId)
 {
     if (GetGpuReg(REG_OFFSET_BLDY) != 0)
     {
@@ -273,7 +333,7 @@ static void Task_ShowRhhCredits(u8 taskId)
 }
 
 #define sTimer data[0]
-static void SpriteCallbacK_DizzyWalking(struct Sprite* sprite)
+static void SpriteCallback_DizzyWalking(struct Sprite* sprite)
 {
     sprite->x2--;
 
@@ -336,10 +396,4 @@ static void SpriteCallback_PorygonFlying(struct Sprite* sprite)
 }
 #undef sTimer
 
-void RhhIntro_DestroyRhhCreditSprites()
-{
-    DestroySpriteAndFreeResources(&gSprites[sDizzyId]);
-    DestroySpriteAndFreeResources(&gSprites[sPoryId]);
-}
-
-#endif //RHH_COPYRIGHT_INTRO
+#endif //EXPANSION_INTRO
