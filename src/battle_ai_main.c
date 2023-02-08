@@ -3009,6 +3009,13 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                     RETURN_SCORE_PLUS(1);
                 }
                 break;
+            case EFFECT_HEAL_PULSE:
+            case EFFECT_HIT_ENEMY_HEAL_ALLY:
+                if (AI_WhoStrikesFirst(battlerAtk, FOE(battlerAtk), move) == AI_IS_FASTER
+                  && AI_WhoStrikesFirst(battlerAtk, BATTLE_PARTNER(FOE(battlerAtk)), move) == AI_IS_FASTER
+                  && gBattleMons[battlerAtkPartner].hp < gBattleMons[battlerAtkPartner].maxHP / 2)
+                    RETURN_SCORE_PLUS(1);
+                break;
             } // attacker move effects
         } // check partner protecting
 
