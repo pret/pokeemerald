@@ -371,10 +371,7 @@ string generate_groups_text(Json groups_data) {
         text << "\n";
     }
 
-    if (version != "firered")
-        text << "\t.align 2\n";
-
-    text << "gMapGroups::\n";
+    text << "\t.align 2\n" << "gMapGroups::\n";
     for (auto &group : groups_data["group_order"].array_items())
         text << "\t.4byte " << json_to_string(group) << "\n";
     text << "\n";
