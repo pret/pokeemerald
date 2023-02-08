@@ -206,7 +206,7 @@ string generate_map_events_text(Json map_data) {
             // If no type field is present, assume it's a regular object event.
             if (type == "" || type == "object") {
                 text << "\tobject_event " << i + 1 << ", "
-                     << json_to_string(obj_event, "graphics_id") << ", 0, "
+                     << json_to_string(obj_event, "graphics_id") << ", "
                      << json_to_string(obj_event, "x") << ", "
                      << json_to_string(obj_event, "y") << ", "
                      << json_to_string(obj_event, "elevation") << ", "
