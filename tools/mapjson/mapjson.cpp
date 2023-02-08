@@ -224,6 +224,8 @@ string generate_map_events_text(Json map_data) {
                      << json_to_string(obj_event, "y") << ", "
                      << json_to_string(obj_event, "target_local_id") << ", "
                      << json_to_string(obj_event, "target_map") << "\n";
+            } else {
+                FATAL_ERROR("Unknown object event type '%s'. Expected 'object' or 'clone'.\n", type.c_str());
             }
         }
         text << "\n";
@@ -267,6 +269,8 @@ string generate_map_events_text(Json map_data) {
                      << json_to_string(coord_event, "y") << ", "
                      << json_to_string(coord_event, "elevation") << ", "
                      << json_to_string(coord_event, "weather") << "\n";
+            } else {
+                FATAL_ERROR("Unknown coord event type '%s'. Expected 'trigger' or 'weather'.\n", type.c_str());
             }
         }
         text << "\n";
@@ -307,6 +311,8 @@ string generate_map_events_text(Json map_data) {
                      << json_to_string(bg_event, "y") << ", "
                      << json_to_string(bg_event, "elevation") << ", "
                      << json_to_string(bg_event, "secret_base_id") << "\n";
+            } else {
+                FATAL_ERROR("Unknown bg event type '%s'. Expected 'sign', 'hidden_item', or 'secret_base'.\n", type.c_str());
             }
         }
         text << "\n";
