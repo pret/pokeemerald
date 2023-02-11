@@ -1576,15 +1576,15 @@
 	.4byte \value
 	.endm
 
-	@ Sets the eventLegal bit for the Pokemon in the specified slot of the player's party.
-	.macro setmoneventlegal slot:req
+	@ Sets the fatefulEncounter bit for the Pokemon in the specified slot of the player's party.
+	.macro setfatefulencounter slot:req
 	.byte 0xcd
 	.2byte \slot
 	.endm
 
-	@ Checks if the eventLegal bit is set for the Pokemon in the specified slot of the player's party. If it isn't set,
+	@ Checks if the fatefulEncounter bit is set for the Pokemon in the specified slot of the player's party. If it isn't set,
 	@ VAR_RESULT is TRUE. If the bit is set (or if the specified slot is empty or invalid), VAR_RESULT is FALSE.
-	.macro checkmoneventlegal slot:req
+	.macro checkfatefulencounter slot:req
 	.byte 0xce
 	.2byte \slot
 	.endm
@@ -1932,10 +1932,10 @@
 	closebraillemessage
 	.endm
 
-	@ Creates an "event legal" Pokémon for an encounter
-	.macro seteventmon species:req, level:req, item=ITEM_NONE
+	@ Creates a Pokémon with the fatefulEncounter bit set for an encounter
+	.macro setfatefulencountermon species:req, level:req, item=ITEM_NONE
 	setvar VAR_0x8004, \species
 	setvar VAR_0x8005, \level
 	setvar VAR_0x8006, \item
-	special CreateEventLegalEnemyMon
+	special CreateFatefulEncounterEnemyMon
 	.endm
