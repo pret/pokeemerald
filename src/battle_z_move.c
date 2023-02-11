@@ -372,7 +372,7 @@ static void ShowZMoveTriggerSprite(void)
 {
     struct Sprite *sprite = &gSprites[gBattleStruct->zmove.triggerSpriteId];
     gBattleStruct->zmove.viable = TRUE;
-    CreateZMoveTriggerSprite(sprite->tBattler, TRUE);
+    CreateZMoveTriggerSprite(gActiveBattler, TRUE);
 }
 
 void DestroyZMoveTriggerSprite(void)
