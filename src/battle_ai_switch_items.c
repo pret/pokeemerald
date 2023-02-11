@@ -703,8 +703,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
                 && i != *(gBattleStruct->monToSwitchIntoId + battlerIn1)
                 && i != *(gBattleStruct->monToSwitchIntoId + battlerIn2))
             {
-                u8 type1 = gSpeciesInfo[species].type1;
-                u8 type2 = gSpeciesInfo[species].type2;
+                u8 type1 = gSpeciesInfo[species].types[0];
+                u8 type2 = gSpeciesInfo[species].types[1];
                 u8 typeDmg = TYPE_MUL_NORMAL;
                 ModulateByTypeEffectiveness(gBattleMons[opposingBattler].type1, type1, type2, &typeDmg);
                 ModulateByTypeEffectiveness(gBattleMons[opposingBattler].type2, type1, type2, &typeDmg);
@@ -751,7 +751,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
     gMoveResultFlags = 0;
     gCritMultiplier = 1;
     bestDmg = 0;
-    bestMonId = 6;
+    bestMonId = PARTY_SIZE;
 
     // If we couldn't find the best mon in terms of typing, find the one that deals most damage.
     for (i = firstId; i < lastId; i++)

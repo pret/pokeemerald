@@ -1195,7 +1195,7 @@ static void CB2_LoadRoulette(void)
         ResetTempTileDataBuffers();
         break;
     case 3:
-        LoadPalette(&sWheel_Pal, 0, 0x1C0);
+        LoadPalette(&sWheel_Pal, BG_PLTT_ID(0), 14 * PLTT_SIZE_4BPP);
         DecompressAndCopyTileDataToVram(1, gRouletteMenu_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(2, gRouletteWheel_Gfx, 0, 0, 0);
         break;
@@ -2167,16 +2167,16 @@ static void FlashSelectionOnWheel(u8 selectionId)
         // The specific color of the poke it references doesn't matter, because the icons of a poke share a palette
         // So it just uses the first sprite ID of each
         case COL_WYNAUT:
-            palOffset = gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_ORANGE_WYNAUT]].oam.paletteNum * 16;
+            palOffset = PLTT_ID(gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_ORANGE_WYNAUT]].oam.paletteNum);
             break;
         case COL_AZURILL:
-            palOffset = gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_GREEN_AZURILL]].oam.paletteNum * 16;
+            palOffset = PLTT_ID(gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_GREEN_AZURILL]].oam.paletteNum);
             break;
         case COL_SKITTY:
-            palOffset = gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_PURPLE_SKITTY]].oam.paletteNum * 16;
+            palOffset = PLTT_ID(gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_PURPLE_SKITTY]].oam.paletteNum);
             break;
         case COL_MAKUHITA:
-            palOffset = gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_ORANGE_MAKUHITA]].oam.paletteNum * 16;
+            palOffset = PLTT_ID(gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_ORANGE_MAKUHITA]].oam.paletteNum);
             break;
         }
         if (numSelected == 1)

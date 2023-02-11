@@ -1354,8 +1354,8 @@ static void ModulateDmgByType(u8 multiplier)
 
 s32 GetTypeEffectiveness(struct Pokemon *mon, u8 moveType) {
     u16 species = GetMonData(mon, MON_DATA_SPECIES);
-    u8 type1 = gSpeciesInfo[species].type1;
-    u8 type2 = gSpeciesInfo[species].type2;
+    u8 type1 = gSpeciesInfo[species].types[0];
+    u8 type2 = gSpeciesInfo[species].types[1];
     s32 i = 0;
     u8 multiplier;
     s32 flags = 0;
@@ -1651,7 +1651,7 @@ u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
 {
     s32 i = 0;
     u8 flags = 0;
-    u8 type1 = gSpeciesInfo[targetSpecies].type1, type2 = gSpeciesInfo[targetSpecies].type2;
+    u8 type1 = gSpeciesInfo[targetSpecies].types[0], type2 = gSpeciesInfo[targetSpecies].types[1];
     u8 moveType;
 
     if (move == MOVE_STRUGGLE)
@@ -4660,8 +4660,8 @@ static void Cmd_switchindataupdate(void)
     for (i = 0; i < sizeof(struct BattlePokemon); i++)
         monData[i] = gBattleBufferB[gActiveBattler][4 + i];
 
-    gBattleMons[gActiveBattler].type1 = gSpeciesInfo[gBattleMons[gActiveBattler].species].type1;
-    gBattleMons[gActiveBattler].type2 = gSpeciesInfo[gBattleMons[gActiveBattler].species].type2;
+    gBattleMons[gActiveBattler].type1 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0];
+    gBattleMons[gActiveBattler].type2 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1];
     gBattleMons[gActiveBattler].ability = GetAbilityBySpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].abilityNum);
 
     // check knocked off item
@@ -6069,7 +6069,7 @@ static void InitLevelUpBanner(void)
     gBattle_BG2_Y = 0;
     gBattle_BG2_X = LEVEL_UP_BANNER_START;
 
-    LoadPalette(sLevelUpBanner_Pal, 0x60, 0x20);
+    LoadPalette(sLevelUpBanner_Pal, BG_PLTT_ID(6), PLTT_SIZE_4BPP);
     CopyToWindowPixelBuffer(B_WIN_LEVEL_UP_BANNER, sLevelUpBanner_Gfx, 0, 0);
     PutWindowTilemap(B_WIN_LEVEL_UP_BANNER);
     CopyWindowToVram(B_WIN_LEVEL_UP_BANNER, COPYWIN_FULL);

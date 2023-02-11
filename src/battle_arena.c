@@ -390,7 +390,7 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         BeginNormalPaletteFade(0x7FFFFF1C, 4, 0, 8, RGB_BLACK);
         SetGpuReg(REG_OFFSET_WININ, (WININ_WIN0_ALL & ~WININ_WIN0_BG0) | WININ_WIN1_ALL);
         LoadCompressedSpriteSheet(sBattleArenaJudgmentSymbolsSpriteSheet);
-        LoadCompressedPalette(gBattleArenaJudgmentSymbolsPalette, 0x1F0, 0x20);
+        LoadCompressedPalette(gBattleArenaJudgmentSymbolsPalette, OBJ_PLTT_ID(15), PLTT_SIZE_4BPP);
         gBattle_WIN0H = 0xFF;
         gBattle_WIN0V = 0x70;
         (*state)++;

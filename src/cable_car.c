@@ -307,7 +307,7 @@ static void CB2_LoadCableCar(void)
     case 3:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            LoadPalette(gCableCarBg_Pal, 0, 0x80);
+            LoadPalette(gCableCarBg_Pal, BG_PLTT_ID(0), 4 * PLTT_SIZE_4BPP);
             gMain.state++;
         }
         break;

@@ -18,7 +18,7 @@
 #define MB_MOSSDEEP_GYM_WARP 0x0E
 #define MB_MT_PYRE_HOLE 0x0F
 #define MB_POND_WATER 0x10
-#define MB_SEMI_DEEP_WATER 0x11
+#define MB_INTERIOR_DEEP_WATER 0x11 // Used by interior maps; functionally the same as MB_DEEP_WATER
 #define MB_DEEP_WATER 0x12
 #define MB_WATERFALL 0x13
 #define MB_SOOTOPOLIS_DEEP_WATER 0x14
