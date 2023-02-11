@@ -343,7 +343,7 @@ SECTIONS {
         src/battle_transition_frontier.o(.text);
         src/international_string_util.o(.text);
         src/pokemon_debug.o(.text);
-        src/rhh_copyright.o(.text);
+        src/expansion_intro.o(.text);
     } =0
 
     script_data :
@@ -710,7 +710,7 @@ SECTIONS {
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
         src/pokemon_debug.o(.rodata);
-        src/rhh_copyright.o(.rodata);
+        src/expansion_intro.o(.rodata);
     } =0
 
     song_data :

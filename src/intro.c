@@ -23,7 +23,7 @@
 #include "sound.h"
 #include "util.h"
 #include "title_screen.h"
-#include "rhh_copyright.h"
+#include "expansion_intro.h"
 #include "constants/rgb.h"
 #include "constants/battle_anim.h"
 
@@ -38,7 +38,6 @@
 */
 
 // Scene 1 main tasks
-static void Task_Scene1_Load(u8);
 static void Task_Scene1_FadeIn(u8);
 static void Task_Scene1_WaterDrops(u8);
 static void Task_Scene1_PanUp(u8);
@@ -1025,18 +1024,6 @@ static const struct SpritePalette sSpritePalette_RayquazaOrb[] =
     {},
 };
 
-#if RHH_COPYRIGHT_INTRO == TRUE
-static void VBlankCB_PretIntro()
-{
-    LoadOam();
-    ProcessSpriteCopyRequests();
-    TransferPlttBuffer();
-    ScanlineEffect_InitHBlankDmaTransfer();
-    RunTasks();
-    AnimateSprites();
-    BuildOamBuffer();
-}
-#endif
 
 static void VBlankCB_Intro(void)
 {
@@ -1046,7 +1033,7 @@ static void VBlankCB_Intro(void)
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
-static void MainCB2_Intro(void)
+void MainCB2_Intro(void)
 {
     RunTasks();
     AnimateSprites();
@@ -1093,14 +1080,11 @@ static u8 SetUpCopyrightScreen(void)
         CpuFill32(0, (void *)OAM, OAM_SIZE);
         CpuFill16(0, (void *)(PLTT + 2), PLTT_SIZE - 2);
         ResetPaletteFade();
-#if RHH_COPYRIGHT_INTRO == FALSE
         LoadCopyrightGraphics(0, 0x3800, BG_PLTT_ID(0));
-#endif
         ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();
-#if RHH_COPYRIGHT_INTRO == FALSE
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITEALPHA);
         SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0)
                                    | BGCNT_CHARBASE(0)
@@ -1110,59 +1094,14 @@ static u8 SetUpCopyrightScreen(void)
         EnableInterrupts(INTR_FLAG_VBLANK);
         SetVBlankCallback(VBlankCB_Intro);
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
-#else
-        SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0)
-                                   | BGCNT_CHARBASE(0)
-                                   | BGCNT_SCREENBASE(7)
-                                   | BGCNT_16COLOR
-                                   | BGCNT_TXT256x256);
-        EnableInterrupts(INTR_FLAG_VBLANK);
-        REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
-
-        gMain.state++;
-        break;
-    case 1:
-        RhhIntro_InitCopyrightBgs();
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_WHITEALPHA);
-        SetVBlankCallback(VBlankCB_PretIntro);
-#endif
         SetSerialCallback(SerialCB_CopyrightScreen);
         GameCubeMultiBoot_Init(&gMultibootProgramStruct);
     default:
-#if RHH_COPYRIGHT_INTRO == TRUE
-        RunTasks();
-        UpdatePaletteFade();
-        gMain.state++;
-        GameCubeMultiBoot_Main(&gMultibootProgramStruct);
-        break;
-    case 30:
-        RhhIntro_LoadCopyrightBgGraphics();
-        BeginNormalPaletteFade(0x00000001, 0, 0x10, 0, RGB_BLACK); 
-        UpdatePaletteFade(); 
-        GameCubeMultiBoot_Main(&gMultibootProgramStruct);
-        gMain.state++;
-        break;
-    case 31:
-        RhhIntro_LoadCopyrightSpriteGraphics();
-        RhhIntro_CreateCopyRightSprites();
-        UpdatePaletteFade(); 
-        GameCubeMultiBoot_Main(&gMultibootProgramStruct);
-        gMain.state++;
-        break;
-    case 45:
-        RhhIntro_ShowRhhCredits();
-        UpdatePaletteFade();
-        GameCubeMultiBoot_Main(&gMultibootProgramStruct);
-        gMain.state++;
-        break;
-    case 253:
-#else
         UpdatePaletteFade();
         gMain.state++;
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
         break;
     case 140:
-#endif
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
         if (gMultibootProgramStruct.gcmb_field_2 != 1)
         {
@@ -1170,22 +1109,16 @@ static u8 SetUpCopyrightScreen(void)
             gMain.state++;
         }
         break;
-#if RHH_COPYRIGHT_INTRO == TRUE
-    case 254:
-        if (UpdatePaletteFade())
-            break;
-        RhhIntro_DestroyRhhCreditSprites();
-        gMain.state++;
-        break;
-
-    case 255:
-#else
     case 141:
         if (UpdatePaletteFade())
             break;
-#endif
+#if EXPANSION_INTRO == TRUE
+        SetMainCallback2(CB2_ExpansionIntro);
+        CreateTask(Task_HandleExpansionIntro, 0);
+#else
         CreateTask(Task_Scene1_Load, 0);
         SetMainCallback2(MainCB2_Intro);
+#endif
         if (gMultibootProgramStruct.gcmb_field_2 != 0)
         {
             if (gMultibootProgramStruct.gcmb_field_2 == 2)
@@ -1232,7 +1165,7 @@ void CB2_InitCopyrightScreenAfterTitleScreen(void)
 
 #define sBigDropSpriteId data[0]
 
-static void Task_Scene1_Load(u8 taskId)
+void Task_Scene1_Load(u8 taskId)
 {
     SetVBlankCallback(NULL);
     sIntroCharacterGender = Random() & 1;
