@@ -3814,7 +3814,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 {
                     SetRandomMultiHitCounter();
                 }
-                
+
                 PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
             }
             else if (gBattleMoves[gCurrentMove].flags & FLAG_TWO_STRIKES)
@@ -3841,7 +3841,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                     party = gPlayerParty;
                 else
                     party = gEnemyParty;
-                
+
                 for (i = 0; i < PARTY_SIZE; i++)
                 {
                     if (GetMonData(&party[i], MON_DATA_HP)
@@ -5487,7 +5487,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                         RecordItemEffectBattle(gBattlerAttacker, HOLD_EFFECT_ABILITY_SHIELD);
                         break;
                     }
-                
+
                     gLastUsedAbility = gBattleMons[gBattlerAttacker].ability;
                     gBattleMons[gBattlerAttacker].ability = gBattleStruct->overwrittenAbilities[gBattlerAttacker] = gBattleMons[gBattlerTarget].ability;
                     gBattleMons[gBattlerTarget].ability = gBattleStruct->overwrittenAbilities[gBattlerTarget] = gLastUsedAbility;
@@ -6858,7 +6858,7 @@ static u8 ItemEffectMoveEnd(u32 battlerId, u16 holdEffect)
 {
     u8 effect = 0;
     u32 i;
-    
+
     switch (holdEffect)
     {
 #if B_HP_BERRIES >= GEN_4
@@ -7027,7 +7027,7 @@ static u8 ItemEffectMoveEnd(u32 battlerId, u16 holdEffect)
             && !(gBattleMons[battlerId].status2 & STATUS2_FOCUS_ENERGY)
             && HasEnoughHpToEatBerry(battlerId, GetBattlerItemHoldEffectParam(battlerId, gLastUsedItem), gLastUsedItem))
         {
-            gBattleMons[battlerId].status2 |= STATUS2_FOCUS_ENERGY;            
+            gBattleMons[battlerId].status2 |= STATUS2_FOCUS_ENERGY;
             gBattleScripting.battler = battlerId;
             gPotentialItemEffectBattler = battlerId;
             BattleScriptPushCursor();
@@ -7036,7 +7036,7 @@ static u8 ItemEffectMoveEnd(u32 battlerId, u16 holdEffect)
         }
         break;
     }
-    
+
     return effect;
 }
 
@@ -7053,7 +7053,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         gLastUsedItem = gBattleMons[battlerId].item;
         battlerHoldEffect = GetBattlerHoldEffect(battlerId, TRUE);
     }
-    
+
     atkItem = gBattleMons[gBattlerAttacker].item;
     atkHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
     atkHoldEffectParam = GetBattlerHoldEffectParam(gBattlerAttacker);
@@ -8184,7 +8184,7 @@ u32 GetBattlerHoldEffect(u8 battlerId, bool32 checkNegating)
         return ItemId_GetHoldEffect(gBattleMons[battlerId].item);
 }
 
-// 
+//
 static u32 GetBattlerItemHoldEffectParam(u8 battlerId, u16 item)
 {
     if (item == ITEM_ENIGMA_BERRY)
@@ -8234,7 +8234,7 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
         else if (gProtectStructs[battlerId].protected)
             return FALSE;
     }
-    
+
         if (move == MOVE_TEATIME)
     {
             return FALSE;
