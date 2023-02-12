@@ -2380,7 +2380,7 @@ static void SaveTradeGiftRibbons(void)
     {
         if (gSaveBlock1Ptr->giftRibbons[i] == 0 && sTradeMenu->giftRibbons[i] != 0)
         {
-            if (sTradeMenu->giftRibbons[i] < 64)
+            if (sTradeMenu->giftRibbons[i] < MAX_GIFT_RIBBON)
                 gSaveBlock1Ptr->giftRibbons[i] = sTradeMenu->giftRibbons[i];
         }
     }
