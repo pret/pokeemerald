@@ -882,6 +882,7 @@ static void HandleMoveSwitching(void)
 
     if (JOY_NEW(A_BUTTON | SELECT_BUTTON))
     {
+        struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[gActiveBattler][4]);
         PlaySE(SE_SELECT);
 
         if (gMoveSelectionCursor[gActiveBattler] != gMultiUsePlayerCursor)
@@ -973,6 +974,7 @@ static void HandleMoveSwitching(void)
         MoveSelectionDisplayPpString();
         MoveSelectionDisplayPpNumber();
         MoveSelectionDisplayMoveType();
+        GetUsableZMoves(gActiveBattler, moveInfo->moves);
     }
     else if (JOY_NEW(B_BUTTON | SELECT_BUTTON))
     {
