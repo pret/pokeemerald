@@ -205,7 +205,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
         if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON 
             && i == (CalculateEnemyPartyCount()-1))
             continue;
-        
+
 
         species = GetMonData(&party[i], MON_DATA_SPECIES);
         if (GetMonData(&party[i], MON_DATA_ABILITY_NUM) != 0)

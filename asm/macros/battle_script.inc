@@ -731,7 +731,7 @@
 	.4byte \ptr
 	.endm
 
-	.macro jumpifcantmakeasleep ptr:req
+	.macro jumpifuproarwakes ptr:req
 	.byte 0x84
 	.4byte \ptr
 	.endm

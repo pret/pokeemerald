@@ -2644,7 +2644,6 @@ GigaImpactContinuity:
 	delay 11
 	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 0, 26, 0, 0, 5
 	delay 6
-	waitbgfadeout
 	createsprite gBasicHitSplatSpriteTemplate, 4, 4, -10, 0, 1, 0
 	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
 	delay 1
@@ -3036,24 +3035,24 @@ Move_MUD_BOMB:
 	end
 
 Move_PSYCHO_CUT:
-	loadspritegfx ANIM_TAG_SPIRAL 
-	loadspritegfx ANIM_TAG_PSYCHO_CUT 
+	loadspritegfx ANIM_TAG_SPIRAL
+	loadspritegfx ANIM_TAG_PSYCHO_CUT
 	loadspritegfx ANIM_TAG_CROSS_IMPACT
-	monbg ANIM_ATK_PARTNER 
+	monbg ANIM_ATK_PARTNER
 	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_CROSS_IMPACT, 0, 9, 9, RGB_PURPLE
 	createvisualtask AnimTask_SwayMon, 5, 0, 6, 2048, 2, ANIM_ATTACKER
 	createsprite gPsychoCutSpiralSpriteTemplate, 2, 4, 0, 0, 0, 0
 	createvisualtask AnimTask_BlendBattleAnimPal, 1, 1, 2, 0,  4, RGB_BLACK
 	createvisualtask AnimTask_BlendBattleAnimPal, 1, 2, 2, 0, 10, RGB(20, 12, 23)
 	delay 30
-	clearmonbg ANIM_ATK_PARTNER 
-	waitforvisualfinish 
-	monbg ANIM_TARGET 
-	splitbgprio ANIM_TARGET  
-	setalpha 12, 8 
-	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_ATTACKER, 
+	clearmonbg ANIM_ATK_PARTNER
+	waitforvisualfinish
+	monbg ANIM_TARGET
+	splitbgprio ANIM_TARGET
+	setalpha 12, 8
+	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_ATTACKER,
 	createsprite gPsychoCutSpriteTemplate, ANIM_TARGET, 2, 20, 0, -8, 0, 20
-	waitforvisualfinish 
+	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 7, 0, 9, 1
 	createsprite gCrossImpactSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 1, 20
 	createvisualtask AnimTask_BlendBattleAnimPal, 1, 1, 2, 4,  0, RGB_BLACK
@@ -4333,12 +4332,12 @@ Move_SPACIAL_REND:
 	waitbgfadein
 	loopsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET, 3, 5
 	createsprite gSpacialRendBladesTemplate2, ANIM_TARGET, 1, 0, 10, SOUND_PAN_ATTACKER, 0xb0, 0x28
-	createsprite gSpacialRendBladesTemplate2, ANIM_TARGET, 1, 5, 0, 10, 0xff40, 0xf0, 0x28
-	createsprite gSpacialRendBladesTemplate2, ANIM_TARGET, 1, 5, 0, 10, SOUND_PAN_ATTACKER, 0xff60, 0x28
-	createsprite gSpacialRendBladesTemplate2, ANIM_TARGET, 1, 5, 0, 10, 0xff40, 0xff90, 0x28
-	createsprite gSpacialRendBladesTemplate2, ANIM_TARGET, 1, 5, 0, 10, 0xa0, 0x30, 0x28
-	createsprite gSpacialRendBladesTemplate2, ANIM_TARGET, 1, 5, 0, 10, 0xff20, 0xffe0, 0x28
-	createsprite gSpacialRendBladesTemplate2, ANIM_TARGET, 1, 5, 0, 10, 0x70, 0xff80, 0x28
+	createsprite gSpacialRendBladesTemplate2, ANIM_TARGET, 1, 0, 10, 0xff40, 0xf0, 0x28
+	createsprite gSpacialRendBladesTemplate2, ANIM_TARGET, 1, 0, 10, SOUND_PAN_ATTACKER, 0xff60, 0x28
+	createsprite gSpacialRendBladesTemplate2, ANIM_TARGET, 1, 0, 10, 0xff40, 0xff90, 0x28
+	createsprite gSpacialRendBladesTemplate2, ANIM_TARGET, 1, 0, 10, 0xa0, 0x30, 0x28
+	createsprite gSpacialRendBladesTemplate2, ANIM_TARGET, 1, 0, 10, 0xff20, 0xffe0, 0x28
+	createsprite gSpacialRendBladesTemplate2, ANIM_TARGET, 1, 0, 10, 0x70, 0xff80, 0x28
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 15, 1
 	waitforvisualfinish
 	restorebg
@@ -14003,11 +14002,12 @@ Move_STRANGE_STEAM::
 	clearmonbg ANIM_DEF_PARTNER
 	end
 StrangeSteamCloud:
-	launchtemplate gStrangeSteamPinkCloudTemplate 0x82 0x5 0xf 0xf 0x14 0x0 0x0
-	launchtemplate gStrangeSteamGreenCloudTemplate 0x82 0x5 0xf 0xf 0x14 0xa 0x5
-	launchtemplate gStrangeSteamPinkCloudTemplate 0x82 0x5 0xf 0xf 0x14 0xfff6 0xfffb
-	launchtemplate gStrangeSteamGreenCloudTemplate 0x82 0x5 0xf 0xf 0x14 0x14 0xa
-	launchtemplate gStrangeSteamBlueCloudTemplate 0x82 0x5 0xf 0xf 0x14 0xffec 0xfff6
+	createsprite gStrangeSteamPinkCloudTemplate, ANIM_TARGET, 2, 0xf, 0xf, 0x14, 0, 0
+	createsprite gStrangeSteamGreenCloudTemplate, ANIM_TARGET, 2, 0xf, 0xf, 0x14, 0xa, 0x5
+	createsprite gStrangeSteamPinkCloudTemplate, ANIM_TARGET, 2, 0xf, 0xf, 0x14, 0xfff6, 0xfffb
+	delay 0x1
+	createsprite gStrangeSteamGreenCloudTemplate, ANIM_TARGET, 2, 0xf, 0xf, 0x14, 0x14, 0xa
+	createsprite gStrangeSteamBlueCloudTemplate, ANIM_TARGET, 2, 0xf, 0xf, 0x14, 0xffec, 0xfff6
 	delay 0x2
 	return
 
@@ -14370,6 +14370,21 @@ Move_SCORCHING_SANDS::
 
 Move_JUNGLE_HEALING::
 	goto Move_AROMATHERAPY
+		
+Move_SILK_TRAP::
+	loadspritegfx ANIM_TAG_PROTECT
+	loadspritegfx ANIM_TAG_SPIDER_WEB
+	splitbgprio ANIM_ATTACKER
+	playsewithpan SE_M_STRING_SHOT2, SOUND_PAN_TARGET
+	createsprite gSpiderWebSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, FALSE
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_PROTECT, 0, 10, 10, RGB_LIME_GREEN
+	monbg ANIM_ATK_PARTNER 
+	waitplaysewithpan SE_M_REFLECT, SOUND_PAN_ATTACKER, 0x10 
+	createsprite gProtectSpriteTemplate, ANIM_ATTACKER, 2, 24, 0, 90
+	waitforvisualfinish
+	clearmonbg ANIM_ATK_PARTNER 
+	end
 
 Move_WICKED_BLOW::
 Move_SURGING_STRIKES::
@@ -14406,7 +14421,6 @@ Move_SANDSEAR_STORM::
 Move_LUNAR_BLESSING::
 Move_TAKE_HEART::
 Move_TERA_BLAST::
-Move_SILK_TRAP::
 Move_AXE_KICK::
 Move_LAST_RESPECTS::
 Move_LUMINA_CRASH::
@@ -21119,7 +21133,11 @@ Move_POISON_GAS:
 	createsprite gPoisonGasCloudSpriteTemplate, ANIM_TARGET, 0, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 40
 	loopsewithpan SE_M_MIST, SOUND_PAN_TARGET, 28, 6
+.if B_UPDATED_MOVE_DATA >= GEN_5
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_DEF_SIDE, 6, 2, 0, 12, RGB(26, 0, 26)
+.else
 	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_TARGET, 6, 2, 0, 12, RGB(26, 0, 26)
+.endif
 	waitforvisualfinish
 	blendoff
 	clearmonbg ANIM_DEF_PARTNER
