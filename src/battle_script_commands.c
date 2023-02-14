@@ -318,6 +318,7 @@ static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite *sprite);
 static bool32 CriticalCapture(u32 odds);
 static void BestowItem(u32 battlerAtk, u32 battlerDef);
 static bool8 IsFinalStrikeEffect(u16 move);
+static void TryUpdateRoundTurnOrder(void);
 
 static void Cmd_attackcanceler(void);
 static void Cmd_accuracycheck(void);
@@ -3659,6 +3660,10 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 // This seems unnecessary but is done to make it work properly with Parental Bond
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_DoubleShockRemoveType;
+                break;
+            case MOVE_EFFECT_ROUND:
+                TryUpdateRoundTurnOrder(); // If another Pokémon uses Round before the user this turn, the user will use Round directly after it
+                gBattlescriptCurrInstr++;
                 break;
             }
         }
@@ -14960,7 +14965,7 @@ static void Cmd_callnative(void)
     func();
 }
 
-// Callnative Funcs
+// Callnative Funcs    
 void BS_CalcMetalBurstDmg(void)
 {
     u8 sideAttacker = GetBattlerSide(gBattlerAttacker);
@@ -15089,3 +15094,51 @@ static bool8 IsFinalStrikeEffect(u16 move)
     }
     return FALSE;
 }
+
+static void TryUpdateRoundTurnOrder(void)
+{
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    {
+        u32 i;
+        u32 j = 0;
+        u32 k = 0;
+        u32 currRounder;
+        u8 roundUsers[3] = {0xFF, 0xFF, 0xFF};
+        u8 nonRoundUsers[3] = {0xFF, 0xFF, 0xFF};
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            if (gBattlerByTurnOrder[i] == gBattlerAttacker)
+            {
+                currRounder = i + 1; // Current battler going after attacker
+                break;
+            }
+        }
+
+        // Get battlers after us using round
+        for (i = currRounder; i < gBattlersCount; i++)
+        {
+            if (gChosenMoveByBattler[gBattlerByTurnOrder[i]] == MOVE_ROUND)
+                roundUsers[j++] = gBattlerByTurnOrder[i];
+            else
+                nonRoundUsers[k++] = gBattlerByTurnOrder[i];
+        }
+
+        // update turn order for round users
+        for (i = 0; roundUsers[i] != 0xFF && i < 3; i++)
+        {
+            gBattlerByTurnOrder[currRounder] = roundUsers[i];
+            gActionsByTurnOrder[currRounder] = gActionsByTurnOrder[roundUsers[i]];
+            gProtectStructs[roundUsers[i]].quash = TRUE; // Make it so their turn order can't be changed again
+            currRounder++;
+        }
+
+        // Update turn order for non-round users
+        for (i = 0; nonRoundUsers[i] != 0xFF && i < 3; i++)
+        {
+            gBattlerByTurnOrder[currRounder] = nonRoundUsers[i];
+            gActionsByTurnOrder[currRounder] = gActionsByTurnOrder[nonRoundUsers[i]];
+            currRounder++;
+        }
+    }
+}
+
