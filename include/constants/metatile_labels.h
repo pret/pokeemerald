@@ -47,12 +47,6 @@
 #define METATILE_Building_PC_Off 0x004
 #define METATILE_Building_PC_On  0x005
 
-// gTileset_PokemonCenter
-#define METATILE_PokemonCenter_Door_CableClub  0x264
-
-// gTileset_Shop
-#define METATILE_Shop_Door_Elevator 0x285
-
 // gTileset_Petalburg
 #define METATILE_Petalburg_Door_Littleroot    0x248
 #define METATILE_Petalburg_Door_BirchsLab     0x249
@@ -122,6 +116,7 @@
 #define METATILE_BrendansMaysHouse_BookOnTable      0x293
 
 // gTileset_Shop
+#define METATILE_Shop_Door_Elevator  0x285
 #define METATILE_Shop_Laptop1_Normal 0x29D
 #define METATILE_Shop_Laptop2_Normal 0x2A5
 #define METATILE_Shop_Laptop1_Flash  0x258
@@ -294,6 +289,7 @@
 #define METATILE_EverGrande_Door_PokemonLeague  0x21D
 
 // gTileset_PokemonCenter
+#define METATILE_PokemonCenter_Door_CableClub           0x264
 #define METATILE_PokemonCenter_Escalator1F_Tile0_Frame0 0x280
 #define METATILE_PokemonCenter_Escalator1F_Tile0_Frame1 0x282
 #define METATILE_PokemonCenter_Escalator1F_Tile0_Frame2 0x284
