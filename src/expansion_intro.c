@@ -260,6 +260,7 @@ void Task_HandleExpansionIntro(u8 taskId)
         break;
     case 3:
         ResetSpriteData();
+        FreeAllSpritePalettes();
         DestroyTask(taskId);
         CreateTask(Task_Scene1_Load, 0);
         SetMainCallback2(MainCB2_Intro);
