@@ -3908,7 +3908,6 @@ static void Cmd_jumpifability(void)
         gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 4);
         RecordAbilityBattle(battlerId, gLastUsedAbility);
         gBattlerAbility = battlerId;
-        while (1);
     }
     else
     {
