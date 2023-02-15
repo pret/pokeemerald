@@ -28,12 +28,21 @@ enum {
     COLORMODE_WHITE_DGRAY,
 };
 
-#define GROUPTYPE_TRADE   0
-#define GROUPTYPE_BATTLE  1
-#define GROUPTYPE_UNION   2
-#define GROUPTYPE_TOTAL   3
-#define GROUPTYPE_NONE   -1
-#define NUM_GROUPTYPES    4
+enum {
+    WIN_TITLE,
+    WIN_GROUP_NAMES,
+    WIN_GROUP_COUNTS,
+};
+
+enum {
+    GROUPTYPE_TRADE,
+    GROUPTYPE_BATTLE,
+    GROUPTYPE_UNION,
+    GROUPTYPE_TOTAL,
+    NUM_GROUPTYPES
+};
+
+#define GROUPTYPE_NONE 0xFF
 
 struct WirelessCommunicationStatusScreen
 {
@@ -88,7 +97,7 @@ static const struct BgTemplate sBgTemplates[] = {
 };
 
 static const struct WindowTemplate sWindowTemplates[] = {
-    {
+    [WIN_TITLE] = {
         .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 0,
@@ -96,7 +105,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 3,
         .paletteNum = 15,
         .baseBlock = 0x0001
-    }, {
+    },
+    [WIN_GROUP_NAMES] = {
         .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 4,
@@ -104,7 +114,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 15,
         .paletteNum = 15,
         .baseBlock = 0x0049
-    }, {
+    },
+    [WIN_GROUP_COUNTS] = {
         .bg = 0,
         .tilemapLeft = 24,
         .tilemapTop = 4,
@@ -253,24 +264,24 @@ static void CyclePalette(s16 * counter, s16 * palIdx)
 static void PrintHeaderTexts(void)
 {
     s32 i;
-    FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    FillWindowPixelBuffer(1, PIXEL_FILL(0));
-    FillWindowPixelBuffer(2, PIXEL_FILL(0));
+    FillWindowPixelBuffer(WIN_TITLE, PIXEL_FILL(0));
+    FillWindowPixelBuffer(WIN_GROUP_NAMES, PIXEL_FILL(0));
+    FillWindowPixelBuffer(WIN_GROUP_COUNTS, PIXEL_FILL(0));
 
     // Print title
-    WCSS_AddTextPrinterParameterized(0, FONT_NORMAL, sHeaderTexts[0], GetStringCenterAlignXOffset(FONT_NORMAL, sHeaderTexts[0], 0xC0), 6, COLORMODE_GREEN);
+    WCSS_AddTextPrinterParameterized(WIN_TITLE, FONT_NORMAL, sHeaderTexts[0], GetStringCenterAlignXOffset(FONT_NORMAL, sHeaderTexts[0], 0xC0), 6, COLORMODE_GREEN);
 
     // Print label for each group (excluding total)
     for (i = 0; i < NUM_GROUPTYPES - 1; i++)
-        WCSS_AddTextPrinterParameterized(1, FONT_NORMAL, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_WHITE_LGRAY);
+        WCSS_AddTextPrinterParameterized(WIN_GROUP_NAMES, FONT_NORMAL, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_WHITE_LGRAY);
 
     // Print label for total
-    WCSS_AddTextPrinterParameterized(1, FONT_NORMAL, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_RED);
+    WCSS_AddTextPrinterParameterized(WIN_GROUP_NAMES, FONT_NORMAL, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_RED);
 
-    PutWindowTilemap(0);
-    CopyWindowToVram(0, COPYWIN_GFX);
-    PutWindowTilemap(1);
-    CopyWindowToVram(1, COPYWIN_GFX);
+    PutWindowTilemap(WIN_TITLE);
+    CopyWindowToVram(WIN_TITLE, COPYWIN_GFX);
+    PutWindowTilemap(WIN_GROUP_NAMES);
+    CopyWindowToVram(WIN_GROUP_NAMES, COPYWIN_GFX);
 }
 
 #define tState data[0]
@@ -298,17 +309,17 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
     case 3:
         if (UpdateCommunicationCounts(sStatusScreen->groupCounts, sStatusScreen->prevGroupCounts, sStatusScreen->activities, sStatusScreen->rfuTaskId))
         {
-            FillWindowPixelBuffer(2, PIXEL_FILL(0));
+            FillWindowPixelBuffer(WIN_GROUP_COUNTS, PIXEL_FILL(0));
             for (i = 0; i < NUM_GROUPTYPES; i++)
             {
                 ConvertIntToDecimalStringN(gStringVar4, sStatusScreen->groupCounts[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
                 if (i != GROUPTYPE_TOTAL)
-                    WCSS_AddTextPrinterParameterized(2, FONT_NORMAL, gStringVar4, 12, 30 * i + 8, COLORMODE_WHITE_LGRAY);
+                    WCSS_AddTextPrinterParameterized(WIN_GROUP_COUNTS, FONT_NORMAL, gStringVar4, 12, 30 * i + 8, COLORMODE_WHITE_LGRAY);
                 else
-                    WCSS_AddTextPrinterParameterized(2, FONT_NORMAL, gStringVar4, 12, 98, COLORMODE_RED);
+                    WCSS_AddTextPrinterParameterized(WIN_GROUP_COUNTS, FONT_NORMAL, gStringVar4, 12, 98, COLORMODE_RED);
             }
-            PutWindowTilemap(2);
-            CopyWindowToVram(2, COPYWIN_FULL);
+            PutWindowTilemap(WIN_GROUP_COUNTS);
+            CopyWindowToVram(WIN_GROUP_COUNTS, COPYWIN_FULL);
         }
         if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {
@@ -382,7 +393,7 @@ static u32 CountPlayersInGroupAndGetActivity(struct RfuPlayer * player, u32 * gr
     for (i = 0; i < ARRAY_COUNT(sActivityGroupInfo); i++)
     {
 #ifdef UBFIX
-        // GROUPTYPE_NONE is -1, and shouldn't be used as an index into groupCounts.
+        // GROUPTYPE_NONE is 0xFF, and shouldn't be used as an index into groupCounts.
         // In theory the only activity with this group type (ACTIVITY_SEARCH) wouldn't
         // satisfy the condition below, but not necessarily.
         if (group_type(i) == GROUPTYPE_NONE)
