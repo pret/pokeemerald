@@ -32,7 +32,7 @@ enum {
 #define GROUPTYPE_BATTLE  1
 #define GROUPTYPE_UNION   2
 #define GROUPTYPE_TOTAL   3
-#define GROUPTYPE_NONE   -1
+#define GROUPTYPE_NONE    0xFF
 #define NUM_GROUPTYPES    4
 
 struct WirelessCommunicationStatusScreen
@@ -126,7 +126,6 @@ static const u8 *const sHeaderTexts[NUM_GROUPTYPES + 1] = {
 // Activity, group type, number of players
 // 0 players means the number of players can change and should be counted dynamically
 // GROUPTYPE_TOTAL have no unique group and are simply counted in the total of "people communicating"
-// UB: GROUPTYPE_NONE (-1) can potentially be used as an index into a u8[4] in CountPlayersInGroupAndGetActivity
 static const u8 sActivityGroupInfo[][3] = {
     {ACTIVITY_BATTLE_SINGLE,                 GROUPTYPE_BATTLE, 2},
     {ACTIVITY_BATTLE_DOUBLE,                 GROUPTYPE_BATTLE, 2},
@@ -382,6 +381,13 @@ static u32 CountPlayersInGroupAndGetActivity(struct RfuPlayer * player, u32 * gr
 
     for (i = 0; i < ARRAY_COUNT(sActivityGroupInfo); i++)
     {
+#ifdef UBFIX_
+        // GROUPTYPE_NONE is 0xFF, and shouldn't be used as an index into groupCounts.
+        // In theory the only activity with this group type (ACTIVITY_SEARCH) wouldn't
+        // satisfy the condition below, but not necessarily.
+        if (group_type(i) == GROUPTYPE_NONE)
+            continue;
+#endif
         if (activity == group_activity(i) && player->groupScheduledAnim == UNION_ROOM_SPAWN_IN)
         {
             if (group_players(i) == 0)

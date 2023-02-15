@@ -1080,7 +1080,7 @@ void UpdateAnimBg3ScreenSize(bool8 largeScreenSize)
     }
 }
 
-void TradeMenuBouncePartySprites(struct Sprite *sprite)
+void Trade_MoveSelectedMonToTarget(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->x;
     sprite->data[3] = sprite->y;

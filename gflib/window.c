@@ -4,11 +4,8 @@
 #include "bg.h"
 #include "blit.h"
 
-u32 gUnusedWindowVar1;
-u32 gUnusedWindowVar2;
 // This global is set to 0 and never changed.
 u8 gTransparentTileNumber;
-u32 gUnusedWindowVar3;
 void *gWindowBgTilemapBuffers[NUM_BACKGROUNDS];
 extern u32 gWindowTileAutoAllocEnabled;
 
