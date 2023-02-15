@@ -3908,6 +3908,7 @@ static void Cmd_jumpifability(void)
         gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 4);
         RecordAbilityBattle(battlerId, gLastUsedAbility);
         gBattlerAbility = battlerId;
+        while (1);
     }
     else
     {
@@ -8352,9 +8353,14 @@ static void Cmd_various(void)
         return;
     case VARIOUS_JUMP_IF_SHIELDS_DOWN_PROTECTED:
         if (IsShieldsDownProtected(gActiveBattler))
+        {
+            gBattlerAbility = gActiveBattler;
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        }
         else
+        {
             gBattlescriptCurrInstr += 7;
+        }
         return;
     case VARIOUS_JUMP_IF_NO_HOLD_EFFECT:
         if (GetBattlerHoldEffect(gActiveBattler, TRUE) != gBattlescriptCurrInstr[3])
@@ -14965,7 +14971,7 @@ static void Cmd_callnative(void)
     func();
 }
 
-// Callnative Funcs    
+// Callnative Funcs
 void BS_CalcMetalBurstDmg(void)
 {
     u8 sideAttacker = GetBattlerSide(gBattlerAttacker);
