@@ -1933,9 +1933,9 @@
 	.endm
 
 	@ Creates a Pokémon with the modernFatefulEncounter bit set for an encounter
-	.macro setmodernfatefulencountermon species:req, level:req, item=ITEM_NONE
+	.macro seteventmon species:req, level:req, item=ITEM_NONE
 	setvar VAR_0x8004, \species
 	setvar VAR_0x8005, \level
 	setvar VAR_0x8006, \item
-	special CreateModernFatefulEncounterEnemyMon
+	special CreateEnemyEventMon
 	.endm

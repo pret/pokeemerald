@@ -105,11 +105,11 @@ SouthernIsland_Interior_EventScript_Sign::
 	end
 
 SouthernIsland_Interior_EventScript_SetLatiosBattleVars::
-	setmodernfatefulencountermon SPECIES_LATIOS, 50, ITEM_SOUL_DEW
+	seteventmon SPECIES_LATIOS, 50, ITEM_SOUL_DEW
 	return
 
 SouthernIsland_Interior_EventScript_SetLatiasBattleVars::
-	setmodernfatefulencountermon SPECIES_LATIAS, 50, ITEM_SOUL_DEW
+	seteventmon SPECIES_LATIAS, 50, ITEM_SOUL_DEW
 	return
 
 SouthernIsland_Interior_Movement_CameraPanUp:
