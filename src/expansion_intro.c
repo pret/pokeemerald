@@ -1,6 +1,5 @@
 #include "global.h"
 #include "bg.h"
-#include "clear_save_data_menu.h"
 #include "decompress.h"
 #include "palette.h"
 #include "sound.h"
@@ -10,6 +9,7 @@
 #include "trig.h"
 #include "main.h"
 #include "intro.h"
+#include "m4a.h"
 #include "expansion_intro.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -253,17 +253,34 @@ void Task_HandleExpansionIntro(u8 taskId)
             tState++;
         break;
     case 2:
-        if (tFrameCounter == 208 || gMain.newKeys != 0)
+        if (tFrameCounter == 208)
+        {
             tState++;
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        }
+        else if (gMain.newKeys != 0)
+        {
+            CpuFill16(0, gPlttBufferFaded, sizeof(gPlttBufferFaded));
+            if (IsCryPlaying())
+                StopCry();
+            m4aSongNumStop(SE_BIKE_HOP);
+            m4aSongNumStop(SE_M_DOUBLE_SLAP);
+            tState++;
+        }
         else
+        {
             tFrameCounter++;
+        }
         break;
     case 3:
-        ResetSpriteData();
-        FreeAllSpritePalettes();
-        DestroyTask(taskId);
-        CreateTask(Task_Scene1_Load, 0);
-        SetMainCallback2(MainCB2_Intro);
+        if (!gPaletteFade.active)
+        {
+            ResetSpriteData();
+            FreeAllSpritePalettes();
+            DestroyTask(taskId);
+            CreateTask(Task_Scene1_Load, 0);
+            SetMainCallback2(MainCB2_Intro);
+        }
         break;
     }
 }
