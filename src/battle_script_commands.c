@@ -10890,8 +10890,9 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
     bool32 certain = FALSE;
     bool32 notProtectAffected = FALSE;
     u32 index;
-    bool32 affectsUser = (flags & MOVE_EFFECT_AFFECTS_USER);
     u16 activeBattlerAbility;
+    bool32 affectsUser = (flags & MOVE_EFFECT_AFFECTS_USER);
+    bool32 mirrorArmored = (flags & STAT_CHANGE_MIRROR_ARMOR);
 
     if (affectsUser)
         gActiveBattler = gBattlerAttacker;
@@ -10902,10 +10903,10 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
 
     gSpecialStatuses[gActiveBattler].changedStatsBattlerId = gBattlerAttacker;
 
-    flags &= ~MOVE_EFFECT_AFFECTS_USER;
+    flags &= ~(MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_MIRROR_ARMOR);
 
     if (flags & MOVE_EFFECT_CERTAIN)
-        certain++;
+        certain = TRUE;
     flags &= ~MOVE_EFFECT_CERTAIN;
 
     if (flags & STAT_CHANGE_NOT_PROTECT_AFFECTED)
@@ -10961,7 +10962,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
                   || activeBattlerAbility == ABILITY_CLEAR_BODY
                   || activeBattlerAbility == ABILITY_FULL_METAL_BODY
                   || activeBattlerAbility == ABILITY_WHITE_SMOKE)
-                 && !affectsUser && !certain && gCurrentMove != MOVE_CURSE)
+                 && (!affectsUser || mirrorArmored) && !certain && gCurrentMove != MOVE_CURSE)
         {
             if (GetBattlerHoldEffect(gActiveBattler, TRUE) == HOLD_EFFECT_CLEAR_AMULET)
             {
@@ -11023,7 +11024,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
             }
             return STAT_CHANGE_DIDNT_WORK;
         }
-        else if (activeBattlerAbility == ABILITY_MIRROR_ARMOR && !affectsUser && gBattlerAttacker != gBattlerTarget && gActiveBattler == gBattlerTarget)
+        else if (activeBattlerAbility == ABILITY_MIRROR_ARMOR && !affectsUser && !mirrorArmored && gBattlerAttacker != gBattlerTarget && gActiveBattler == gBattlerTarget)
         {
             if (flags == STAT_CHANGE_ALLOW_PTR)
             {
