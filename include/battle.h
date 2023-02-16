@@ -191,6 +191,7 @@ struct SpecialStatus
     u8 weatherAbilityDone:1;
     u8 terrainAbilityDone:1;
     u8 emergencyExited:1;
+    u8 afterYou:1;
 };
 
 struct SideTimer

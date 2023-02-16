@@ -9394,7 +9394,7 @@ static void Cmd_various(void)
         break;
     case VARIOUS_AFTER_YOU:
         if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget)
-            || GetBattlerTurnOrderNum(gBattlerAttacker) == GetBattlerTurnOrderNum(gBattlerTarget) + 1)
+            || GetBattlerTurnOrderNum(gBattlerAttacker) + 1 == GetBattlerTurnOrderNum(gBattlerTarget))
         {
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         }
@@ -9419,6 +9419,7 @@ static void Cmd_various(void)
                 gBattlerByTurnOrder[2] = gBattlerTarget;
                 gBattlerByTurnOrder[3] = data[2];
             }
+            gSpecialStatuses[gBattlerTarget].afterYou = 1;
             gBattlescriptCurrInstr += 7;
         }
         return;
