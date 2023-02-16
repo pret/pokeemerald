@@ -35,7 +35,7 @@
 // after gFrontierPassBg_Pal (by default, gFrontierPassBg_Gfx) as a palette.
 // Nothing uses these colors (except the Trainer Card, which correctly writes them)
 // so in practice this bug has no effect on the game.
-#ifdef BUGFIX_
+#ifdef BUGFIX
 #define NUM_BG_PAL_SLOTS 8
 #else
 #define NUM_BG_PAL_SLOTS 13

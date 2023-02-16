@@ -392,7 +392,7 @@ static u32 CountPlayersInGroupAndGetActivity(struct RfuPlayer * player, u32 * gr
 
     for (i = 0; i < ARRAY_COUNT(sActivityGroupInfo); i++)
     {
-#ifdef UBFIX_
+#ifdef UBFIX
         // GROUPTYPE_NONE is 0xFF, and shouldn't be used as an index into groupCounts.
         // In theory the only activity with this group type (ACTIVITY_SEARCH) wouldn't
         // satisfy the condition below, but not necessarily.
