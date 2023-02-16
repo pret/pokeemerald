@@ -294,7 +294,7 @@ struct BattlePokemon
     /*0x59*/ u8 metLevel;
 };
 
-struct SpeciesInfo
+struct SpeciesInfo /*0x24*/
 {
  /* 0x00 */ u8 baseHP;
  /* 0x01 */ u8 baseAttack;
@@ -304,25 +304,26 @@ struct SpeciesInfo
  /* 0x05 */ u8 baseSpDefense;
  /* 0x06 */ u8 types[2];
  /* 0x08 */ u8 catchRate;
- /* 0x09 */ u16 expYield;
- /* 0x0A */ u16 evYield_HP:2;
- /* 0x0A */ u16 evYield_Attack:2;
- /* 0x0A */ u16 evYield_Defense:2;
- /* 0x0A */ u16 evYield_Speed:2;
- /* 0x0B */ u16 evYield_SpAttack:2;
- /* 0x0B */ u16 evYield_SpDefense:2;
- /* 0x0C */ u16 itemCommon;
- /* 0x0E */ u16 itemRare;
- /* 0x10 */ u8 genderRatio;
- /* 0x11 */ u8 eggCycles;
- /* 0x12 */ u8 friendship;
- /* 0x13 */ u8 growthRate;
- /* 0x14 */ u8 eggGroups[2];
- /* 0x16 */ u16 abilities[NUM_ABILITY_SLOTS];
- /* 0x19 */ u8 safariZoneFleeRate;
- /* 0x1A */ u8 bodyColor : 7;
+ /* 0x09 padding */
+ /* 0x0A */ u16 expYield; // expYield was changed from u8 to u16 for the new Exp System.
+ /* 0x0C */ u16 evYield_HP:2;
+            u16 evYield_Attack:2;
+            u16 evYield_Defense:2;
+            u16 evYield_Speed:2;
+ /* 0x0D */ u16 evYield_SpAttack:2;
+            u16 evYield_SpDefense:2;
+ /* 0x0E */ u16 itemCommon;
+ /* 0x10 */ u16 itemRare;
+ /* 0x12 */ u8 genderRatio;
+ /* 0x13 */ u8 eggCycles;
+ /* 0x14 */ u8 friendship;
+ /* 0x15 */ u8 growthRate;
+ /* 0x16 */ u8 eggGroups[2];
+ /* 0x18 */ u16 abilities[NUM_ABILITY_SLOTS]; // 3 abilities, no longer u8 because we have over 255 abilities now.
+ /* 0x1E */ u8 safariZoneFleeRate;
+ /* 0x1F */ u8 bodyColor : 7;
             u8 noFlip : 1;
- /* 0x1B */ u16 flags;
+ /* 0x20 */ u16 flags;
 };
 
 struct BattleMove

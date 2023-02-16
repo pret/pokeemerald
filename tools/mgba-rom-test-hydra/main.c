@@ -30,7 +30,7 @@ struct Runner
 {
     pid_t pid;
     int outfd;
-    char rom_path[L_tmpnam];
+    char rom_path[FILENAME_MAX];
     char test_name[256];
     size_t input_buffer_size;
     size_t input_buffer_capacity;
@@ -234,53 +234,6 @@ int main(int argc, char *argv[])
             perror("pipe failed");
             exit(2);
         }
-        if (!tmpnam(runners[i].rom_path))
-        {
-            perror("tmpnam rom_path failed");
-            exit(2);
-        }
-        int tmpfd;
-        if ((tmpfd = open(runners[i].rom_path, O_WRONLY | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR)) == -1)
-        {
-            perror("open tmpfd failed");
-            _exit(2);
-        }
-        if ((write(tmpfd, elf, elfst.st_size)) == -1)
-        {
-            perror("write tmpfd failed");
-            _exit(2);
-        }
-        pid_t patchelfpid = fork();
-        if (patchelfpid == -1)
-        {
-            perror("fork patchelf failed");
-            _exit(2);
-        }
-        else if (patchelfpid == 0)
-        {
-            char n_arg[5], i_arg[5];
-            snprintf(n_arg, sizeof(n_arg), "\\x%02x", nrunners);
-            snprintf(i_arg, sizeof(i_arg), "\\x%02x", i);
-            if (execlp("tools/patchelf/patchelf", "tools/patchelf/patchelf", runners[i].rom_path, "gTestRunnerN", n_arg, "gTestRunnerI", i_arg, NULL) == -1)
-            {
-                perror("execlp patchelf failed");
-                _exit(2);
-            }
-        }
-        else
-        {
-            int wstatus;
-            if (waitpid(patchelfpid, &wstatus, 0) == -1)
-            {
-                perror("waitpid patchelfpid failed");
-                _exit(2);
-            }
-            if (!WIFEXITED(wstatus) || WEXITSTATUS(wstatus) != 0)
-            {
-                fprintf(stderr, "patchelf exited with an error\n");
-                _exit(2);
-            }
-        }
         pid_t pid = fork();
         if (pid == -1) {
             perror("fork mgba-rom-test failed");
@@ -310,15 +263,60 @@ int main(int argc, char *argv[])
                 perror("close pipefds[1] failed");
                 _exit(2);
             }
+            char rom_path[FILENAME_MAX];
+            sprintf(rom_path, "/tmp/file%05d", getpid());
+            int tmpfd;
+            if ((tmpfd = open(rom_path, O_WRONLY | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR)) == -1)
+            {
+                perror("open tmpfd failed");
+                _exit(2);
+            }
+            if ((write(tmpfd, elf, elfst.st_size)) == -1)
+            {
+                perror("write tmpfd failed");
+                _exit(2);
+            }
+            pid_t patchelfpid = fork();
+            if (patchelfpid == -1)
+            {
+                perror("fork patchelf failed");
+                _exit(2);
+            }
+            else if (patchelfpid == 0)
+            {
+                char n_arg[5], i_arg[5];
+                snprintf(n_arg, sizeof(n_arg), "\\x%02x", nrunners);
+                snprintf(i_arg, sizeof(i_arg), "\\x%02x", i);
+                if (execlp("tools/patchelf/patchelf", "tools/patchelf/patchelf", rom_path, "gTestRunnerN", n_arg, "gTestRunnerI", i_arg, NULL) == -1)
+                {
+                    perror("execlp patchelf failed");
+                    _exit(2);
+                }
+            }
+            else
+            {
+                int wstatus;
+                if (waitpid(patchelfpid, &wstatus, 0) == -1)
+                {
+                    perror("waitpid patchelfpid failed");
+                    _exit(2);
+                }
+                if (!WIFEXITED(wstatus) || WEXITSTATUS(wstatus) != 0)
+                {
+                    fprintf(stderr, "patchelf exited with an error\n");
+                    _exit(2);
+                }
+            }
             // stdbuf is required because otherwise mgba never flushes
             // stdout.
-            if (execlp("stdbuf", "stdbuf", "-oL", argv[1], "-l15", "-ClogLevel.gba.dma=16", "-Rr0", runners[i].rom_path, NULL) == -1)
+            if (execlp("stdbuf", "stdbuf", "-oL", argv[1], "-l15", "-ClogLevel.gba.dma=16", "-Rr0", rom_path, NULL) == -1)
             {
                 perror("execl stdbuf mgba-rom-test failed");
                 _exit(2);
             }
         } else {
             runners[i].pid = pid;
+            sprintf(runners[i].rom_path, "/tmp/file%05d", runners[i].pid);
             runners[i].outfd = pipefds[0];
             if (close(pipefds[1]) == -1)
             {

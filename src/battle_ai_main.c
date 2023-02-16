@@ -2427,25 +2427,18 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 break;
             }
             break;
+        case EFFECT_HEAL_PULSE: // and floral healing
+            if (!IsTargetingPartner(battlerAtk, battlerDef)) // Don't heal enemies
+            {
+                score -= 10;
+                break;
+            }
+            // fallthrough
         case EFFECT_HIT_ENEMY_HEAL_ALLY:    // pollen puff
             if (IsTargetingPartner(battlerAtk, battlerDef))
             {
                 if (gStatuses3[battlerDef] & STATUS3_HEAL_BLOCK)
                     return 0;
-                if (AtMaxHp(battlerDef))
-                    score -= 10;
-                else if (gBattleMons[battlerDef].hp > gBattleMons[battlerDef].maxHP / 2)
-                    score -= 5;
-                break;
-            }
-            // fallthrough
-        case EFFECT_HEAL_PULSE: // and floral healing
-            if (!IsTargetingPartner(battlerAtk, battlerDef)) // Don't heal enemies
-            {
-                score -= 10;
-            }
-            else
-            {
                 if (AtMaxHp(battlerDef))
                     score -= 10;
                 else if (gBattleMons[battlerDef].hp > gBattleMons[battlerDef].maxHP / 2)
@@ -3008,6 +3001,13 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                         break; // These moves need to go last
                     RETURN_SCORE_PLUS(1);
                 }
+                break;
+            case EFFECT_HEAL_PULSE:
+            case EFFECT_HIT_ENEMY_HEAL_ALLY:
+                if (AI_WhoStrikesFirst(battlerAtk, FOE(battlerAtk), move) == AI_IS_FASTER
+                  && AI_WhoStrikesFirst(battlerAtk, BATTLE_PARTNER(FOE(battlerAtk)), move) == AI_IS_FASTER
+                  && gBattleMons[battlerAtkPartner].hp < gBattleMons[battlerAtkPartner].maxHP / 2)
+                    RETURN_SCORE_PLUS(1);
                 break;
             } // attacker move effects
         } // check partner protecting
