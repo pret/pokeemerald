@@ -27,7 +27,7 @@ static bool32 AiExpectsToFaintPlayer(void);
 static bool32 AI_ShouldHeal(u32 healAmount);
 static bool32 AI_OpponentCanFaintAiWithMod(u32 healAmount);
 
-static bool32 isAceMon(u32 battlerId, u32 monPartyId)
+static bool32 IsAceMon(u32 battlerId, u32 monPartyId)
 {
     if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON
         && !(gBattleStruct->forcedSwitch)
@@ -118,7 +118,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
             continue;
         if (i == gBattlerPartyIndexes[gActiveBattler])
             continue;
-        if (isAceMon(gActiveBattler, i))
+        if (IsAceMon(gActiveBattler, i))
             continue;
 
         for (opposingBattler = GetBattlerAtPosition(opposingPosition), j = 0; j < MAX_MON_MOVES; j++)
@@ -210,7 +210,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
             continue;
         if (i == *(gBattleStruct->monToSwitchIntoId + battlerIn2))
             continue;
-        if (isAceMon(gActiveBattler, i))
+        if (IsAceMon(gActiveBattler, i))
             continue;
 
 
@@ -290,7 +290,7 @@ static bool8 ShouldSwitchIfGameStatePrompt(void)
 
                         for (i = firstId; i < lastId; i++)
                         {
-                            if (isAceMon(gActiveBattler, i))
+                            if (IsAceMon(gActiveBattler, i))
                                 continue;
 
                             //Look for mon in party that is able to be switched into and has ability that sets terrain
@@ -582,7 +582,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent)
             continue;
         if (i == *(gBattleStruct->monToSwitchIntoId + battlerIn2))
             continue;
-        if (isAceMon(gActiveBattler, i))
+        if (IsAceMon(gActiveBattler, i))
             continue;
 
 
@@ -674,7 +674,7 @@ bool32 ShouldSwitch(void)
             continue;
         if (i == *(gBattleStruct->monToSwitchIntoId + battlerIn2))
             continue;
-        if (isAceMon(gActiveBattler, i))
+        if (IsAceMon(gActiveBattler, i))
         {
             hasAceMon = TRUE;
             continue;
@@ -771,7 +771,7 @@ void AI_TrySwitchOrUseItem(void)
                             continue;
                         if (monToSwitchId == *(gBattleStruct->monToSwitchIntoId + battlerIn2))
                             continue;
-                        if (isAceMon(gActiveBattler, monToSwitchId))
+                        if (IsAceMon(gActiveBattler, monToSwitchId))
                             continue;
 
                         break;
@@ -974,7 +974,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
         {
             invalidMons |= gBitTable[i];
         }
-        else if (isAceMon(gActiveBattler, i))// Save Ace Pokemon for last.
+        else if (IsAceMon(gActiveBattler, i))// Save Ace Pokemon for last.
         {
             aceMonId = i;
             invalidMons |= gBitTable[i];
