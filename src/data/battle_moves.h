@@ -6073,10 +6073,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     {
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .flags = FLAG_SNATCH_AFFECTED | FLAG_SOUND,
+            .effect = EFFECT_ATTACK_UP_USER_ALLY,
         #else
             .flags = FLAG_SNATCH_AFFECTED,
+            .effect = EFFECT_ATTACK_UP,
         #endif
-        .effect = EFFECT_ATTACK_UP,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
