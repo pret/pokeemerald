@@ -3899,14 +3899,6 @@ static u32 GetEnemyMonCount(bool32 onlyAlive)
     return count;
 }
 
-static bool32 IsBattlerHpLow(u32 battler)
-{
-    if ((gBattleMons[battler].hp * 100) / gBattleMons[battler].maxHP < 25)
-        return TRUE;
-    else
-        return FALSE;
-}
-
 bool32 ShouldDoTrainerSlide(u32 battlerId, u32 trainerId, u32 which)
 {
     s32 i;
@@ -3931,7 +3923,7 @@ bool32 ShouldDoTrainerSlide(u32 battlerId, u32 trainerId, u32 which)
             case TRAINER_SLIDE_LAST_LOW_HP:
                 if (sTrainerSlides[i].msgLastLowHp != NULL
                     && GetEnemyMonCount(TRUE) == 1
-                    && IsBattlerHpLow(battlerId)
+                    && gBattleMons[battlerId].hp <= (gBattleMons[battlerId].maxHP / 4)
                     && !gBattleStruct->trainerSlideLowHpMsgDone)
                 {
                     gBattleStruct->trainerSlideLowHpMsgDone = TRUE;
