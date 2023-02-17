@@ -112,17 +112,17 @@
  * NOT STATUS_ICON(opponent, paralysis: TRUE); to say that Oddish was
  * not paralyzed without specifying the exact outputs which led to that.
  *
- * As a final example, to test that Howl works you might:
- * 1. Put a Wobbuffet that knows Howl and Tackle in your party.
+ * As a final example, to test that Meditate works you might:
+ * 1. Put a Wobbuffet that knows Meditate and Tackle in your party.
  * 2. Battle a wild Wobbuffet.
  * 3. Use Tackle and note the amount the HP bar reduced.
  * 4. Battle a wild Wobbuffet.
- * 5. Use Howl and that that the stat change animation and message play.
+ * 5. Use Meditate and that the stat change animation and message play.
  * 6. Use Tackle and check that the HP bar reduced by more than in 3.
  *
  * This can be translated to an automated test as follows:
  *
- *    SINGLE_BATTLE_TEST("Howl raises Attack", s16 damage)
+ *    SINGLE_BATTLE_TEST("Meditate raises Attack", s16 damage)
  *    {
  *        bool32 raiseAttack;
  *        PARAMETRIZE { raiseAttack = FALSE; }
@@ -132,11 +132,11 @@
  *            PLAYER(SPECIES_WOBBUFFET);
  *            OPPONENT(SPECIES_WOBBUFFET);
  *        } WHEN {
- *            if (raiseAttack) TURN { MOVE(player, MOVE_HOWL); } // 5.
+ *            if (raiseAttack) TURN { MOVE(player, MOVE_MEDITATE); } // 5.
  *            TURN { MOVE(player, MOVE_TACKLE); } // 3 & 6.
  *        } SCENE {
  *            if (raiseAttack) {
- *                ANIMATION(ANIM_TYPE_MOVE, MOVE_HOWL, player);
+ *                ANIMATION(ANIM_TYPE_MOVE, MOVE_MEDITATE, player);
  *                ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player); // 5.
  *                MESSAGE("Wobbuffet's attack rose!"); // 5.
  *            }
@@ -159,7 +159,7 @@
  * of the first battle (with a small tolerance to account for rounding).
  *
  * You might notice that all the tests check the outputs the player
- * could see rather than the internal battle state. e.g. the Howl test
+ * could see rather than the internal battle state. e.g. the Meditate test
  * could have used gBattleMons[B_POSITION_OPPONENT_LEFT].hp instead of
  * using HP_BAR to capture the damage. This is a deliberate choice, by
  * checking what the player can observe the tests are more robust to
