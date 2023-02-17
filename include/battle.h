@@ -620,7 +620,7 @@ struct BattleStruct
     struct MegaEvolutionData mega;
     struct ZMoveData zmove;
     const u8 *trainerSlideMsg;
-    bool8 trainerSlideLowHpMsgDone;
+    bool8 trainerSlideLowHpMsgDone:1;
     u8 introState;
     u8 ateBerry[2]; // array id determined by side, each party pokemon as bit
     u8 stolenStats[NUM_BATTLE_STATS]; // hp byte is used for which stats to raise, other inform about by how many stages
@@ -655,6 +655,13 @@ struct BattleStruct
     u16 overwrittenAbilities[MAX_BATTLERS_COUNT];    // abilities overwritten during battle (keep separate from battle history in case of switching)
     bool8 allowedToChangeFormInWeather[PARTY_SIZE][2]; // For each party member and side, used by Ice Face.
     u8 battleBondTransformed[NUM_BATTLE_SIDES]; // Bitfield for each party.
+    bool8 trainerSlideHalfHpMsgDone:1;
+    u8 trainerSlideFirstCriticalHitMsgState:2;
+    u8 trainerSlideFirstSuperEffectiveHitMsgState:2;
+    u8 trainerSlideFirstSTABMoveMsgState:2;
+    u8 trainerSlidePlayerMonUnaffectedMsgState:2;
+    bool8 trainerSlideMegaEvolutionMsgDone:1;
+    bool8 trainerSlideZMoveMsgDone:1;
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)
