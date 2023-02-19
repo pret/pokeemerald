@@ -682,14 +682,14 @@ void CreateWonderTradePokemon(u8 whichPlayerMon)
 #ifdef POKEMON_EXPANSION
     // 10% chance of giving the in coming Pokémon their HA, if they have one
     // Uncomment if your copy of the pokemon_expansion is up-to-date.
-    //if (gBaseStats[species].abilities[2] != ABILITY_NONE && (Random() % 99) < 10)
+    //if (gSpeciesInfo[species].abilities[2] != ABILITY_NONE && (Random() % 99) < 10)
     //{
     //    abilityNum = 2;
     //    SetMonData(pokemon, MON_DATA_ABILITY_NUM, &abilityNum);
     //}
 
     // Uncomment if your copy of the pokemon_expansion is not up-to-date.
-    //if (gBaseStats[species].abilityHidden != ABILITY_NONE && (Random() % 99) < 10)
+    //if (gSpeciesInfo[species].abilityHidden != ABILITY_NONE && (Random() % 99) < 10)
     //{
     //    abilityNum = 2;
     //    SetMonData(pokemon, MON_DATA_ABILITY_NUM, &abilityNum);
@@ -705,11 +705,11 @@ void CreateWonderTradePokemon(u8 whichPlayerMon)
     SetMonData(pokemon, MON_DATA_SPDEF_IV, &inGameTrade->ivs[5]);
     SetMonData(pokemon, MON_DATA_NICKNAME, name);
     SetMonData(pokemon, MON_DATA_OT_NAME, nameOT);
-    SetMonData(pokemon, MON_DATA_BEAUTY, &inGameTrade->stats[1]);
-    SetMonData(pokemon, MON_DATA_CUTE, &inGameTrade->stats[2]);
-    SetMonData(pokemon, MON_DATA_COOL, &inGameTrade->stats[0]);
-    SetMonData(pokemon, MON_DATA_SMART, &inGameTrade->stats[3]);
-    SetMonData(pokemon, MON_DATA_TOUGH, &inGameTrade->stats[4]);
+    SetMonData(pokemon, MON_DATA_BEAUTY, &inGameTrade->conditions[1]);
+    SetMonData(pokemon, MON_DATA_CUTE, &inGameTrade->conditions[2]);
+    SetMonData(pokemon, MON_DATA_COOL, &inGameTrade->conditions[0]);
+    SetMonData(pokemon, MON_DATA_SMART, &inGameTrade->conditions[3]);
+    SetMonData(pokemon, MON_DATA_TOUGH, &inGameTrade->conditions[4]);
     SetMonData(pokemon, MON_DATA_SHEEN, &inGameTrade->sheen);
     SetMonData(pokemon, MON_DATA_MET_LOCATION, &metLocation);
     SetMonData(pokemon, MON_DATA_OT_GENDER, &genderOT);
@@ -968,8 +968,8 @@ u16 determineEvolution(struct Pokemon *mon)
                 for (j = 0; j < PARTY_SIZE; j++)
                 {
                     u16 currSpecies = GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL);
-                    if (gBaseStats[currSpecies].type1 == TYPE_DARK
-                     || gBaseStats[currSpecies].type2 == TYPE_DARK)
+                    if (gSpeciesInfo[currSpecies].type1 == TYPE_DARK
+                     || gSpeciesInfo[currSpecies].type2 == TYPE_DARK)
                     {
                         targetSpecies = gEvolutionTable[species][i].targetSpecies;
                         break;
@@ -1235,8 +1235,8 @@ u16 GetValidWonderTradeItem(u16 item)
            || ItemId_GetHoldEffect(item) == HOLD_EFFECT_DRIVE
            || ItemId_GetHoldEffect(item) == HOLD_EFFECT_PLATE
            || ItemId_GetHoldEffect(item) == HOLD_EFFECT_GEMS)
-           && (gBaseStats[species].type1 != ItemId_GetHoldEffectParam(item)
-            || gBaseStats[species].type2 != ItemId_GetHoldEffectParam(item)))
+           && (gSpeciesInfo[species].type1 != ItemId_GetHoldEffectParam(item)
+            || gSpeciesInfo[species].type2 != ItemId_GetHoldEffectParam(item)))
         goto ROLL;
     else if (item >= ITEM_NORMALIUM_Z && item <= ITEM_ULTRANECROZIUM_Z)
         goto ROLL;
