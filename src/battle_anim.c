@@ -3,6 +3,7 @@
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
+#include "battle_util.h"
 #include "bg.h"
 #include "contest.h"
 #include "decompress.h"
@@ -81,7 +82,9 @@ static void Cmd_visible(void);
 static void Cmd_teamattack_moveback(void);
 static void Cmd_teamattack_movefwd(void);
 static void Cmd_stopsound(void);
-
+static void Cmd_createvisualtaskontargets(void);
+static void Cmd_createspriteontargets(void);
+static void Cmd_createspriteontargets_onpos(void);
 static void RunAnimScriptCommand(void);
 static void Task_UpdateMonBg(u8 taskId);
 static void FlipBattlerBgTiles(void);
@@ -169,6 +172,9 @@ static void (* const sScriptCmdTable[])(void) =
     Cmd_teamattack_moveback,  // 0x2D
     Cmd_teamattack_movefwd,   // 0x2E
     Cmd_stopsound,            // 0x2F
+    Cmd_createvisualtaskontargets,  // 0x30
+    Cmd_createspriteontargets,      // 0x31
+    Cmd_createspriteontargets_onpos, // 0x32
 };
 
 void ClearBattleAnimationVars(void)
@@ -425,29 +431,46 @@ static void Cmd_unloadspritegfx(void)
     ClearSpriteIndex(GET_TRUE_SPRITE_INDEX(index));
 }
 
-static void Cmd_createsprite(void)
+static u8 GetBattleAnimMoveTargets(u8 battlerArgIndex, u8 *targets)
 {
-    s32 i;
-    const struct SpriteTemplate *template;
-    u8 argVar;
-    u8 argsCount;
-    s16 subpriority;
-
-    sBattleAnimScriptPtr++;
-    template = (const struct SpriteTemplate *)(T2_READ_32(sBattleAnimScriptPtr));
-    sBattleAnimScriptPtr += 4;
-
-    argVar = sBattleAnimScriptPtr[0];
-    sBattleAnimScriptPtr++;
-
-    argsCount = sBattleAnimScriptPtr[0];
-    sBattleAnimScriptPtr++;
-    for (i = 0; i < argsCount; i++)
+    u8 numTargets = 1;
+    switch (GetBattlerMoveTargetType(gBattleAnimAttacker, gAnimMoveIndex))
     {
-        gBattleAnimArgs[i] = T1_READ_16(sBattleAnimScriptPtr);
-        sBattleAnimScriptPtr += 2;
+    case MOVE_TARGET_BOTH:
+        targets[0] = gBattleAnimArgs[battlerArgIndex];
+        numTargets = 1;
+        if (IsBattlerAlive(targets[0] ^ BIT_FLANK)) {
+            targets[1] = targets[0] ^ BIT_FLANK;
+            numTargets++;
+        }
+        break;
+    case MOVE_TARGET_FOES_AND_ALLY:
+        targets[0] = gBattleAnimArgs[battlerArgIndex];
+        numTargets = 1;
+        
+        if (IsBattlerAlive(targets[0] ^ BIT_FLANK)) {
+            targets[1] = targets[0] ^ BIT_FLANK;
+            numTargets++;
+        }
+        
+        if (IsBattlerAlive(gBattleAnimAttacker ^ BIT_FLANK)) {
+            targets[2] = gBattleAnimAttacker ^ BIT_FLANK; 
+            numTargets++;
+        }
+        break;
+    default:
+        targets[0] = gBattleAnimArgs[battlerArgIndex]; // original
+        numTargets = 1;
+        break;
     }
+    
+    return numTargets;
+}
 
+static s16 GetSubpriorityForMoveAnim(u8 argVar)
+{
+    s16 subpriority;
+    
     if (argVar & ANIMSPRITE_IS_TARGET)
     {
         argVar ^= ANIMSPRITE_IS_TARGET;
@@ -470,6 +493,34 @@ static void Cmd_createsprite(void)
 
     if (subpriority < 3)
         subpriority = 3;
+    
+    return subpriority;
+}
+
+static void Cmd_createsprite(void)
+{
+    s32 i;
+    const struct SpriteTemplate *template;
+    u8 argVar;
+    u8 argsCount;
+    s16 subpriority;
+
+    sBattleAnimScriptPtr++;
+    template = (const struct SpriteTemplate *)(T2_READ_32(sBattleAnimScriptPtr));
+    sBattleAnimScriptPtr += 4;
+
+    argVar = sBattleAnimScriptPtr[0];
+    sBattleAnimScriptPtr++;
+
+    argsCount = sBattleAnimScriptPtr[0];
+    sBattleAnimScriptPtr++;
+    for (i = 0; i < argsCount; i++)
+    {
+        gBattleAnimArgs[i] = T1_READ_16(sBattleAnimScriptPtr);
+        sBattleAnimScriptPtr += 2;
+    }
+    
+    subpriority = GetSubpriorityForMoveAnim(argVar);
 
     CreateSpriteAndAnimate(
         template,
@@ -477,6 +528,85 @@ static void Cmd_createsprite(void)
         GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET),
         subpriority);
     gAnimVisualTaskCount++;
+}
+
+static void CreateSpriteOnTargets(const struct SpriteTemplate *template, u8 argVar, u8 battlerArgIndex, u8 argsCount, bool32 overwriteAnimTgt)
+{
+    u32 i;
+    u8 targets[MAX_BATTLERS_COUNT];
+    int ntargets;
+    s16 subpriority;
+    
+    for (i = 0; i < argsCount; i++)
+    {
+        gBattleAnimArgs[i] = T1_READ_16(sBattleAnimScriptPtr);
+        sBattleAnimScriptPtr += 2;
+    }
+    
+    subpriority = GetSubpriorityForMoveAnim(argVar);
+    
+    ntargets = GetBattleAnimMoveTargets(battlerArgIndex, targets);
+    
+    for (i = 0; i < ntargets; i++) {
+        
+        if (overwriteAnimTgt)
+            gBattleAnimArgs[battlerArgIndex] = targets[i];
+        
+        CreateSpriteAndAnimate(
+            template,
+            GetBattlerSpriteCoord(targets[i], BATTLER_COORD_X_2),
+            GetBattlerSpriteCoord(targets[i], BATTLER_COORD_Y_PIC_OFFSET),
+            subpriority);
+        gAnimVisualTaskCount++;
+    }
+}
+
+// will NOT overwrite gBattleAnimArgs
+static void Cmd_createspriteontargets_onpos(void)
+{
+    const struct SpriteTemplate *template;
+    u8 argVar;
+    u8 argsCount;
+    u8 battlerArgIndex;
+
+    sBattleAnimScriptPtr++;
+    template = (const struct SpriteTemplate *)(T2_READ_32(sBattleAnimScriptPtr));
+    sBattleAnimScriptPtr += 4;
+
+    argVar = sBattleAnimScriptPtr[0];
+    sBattleAnimScriptPtr++;
+    
+    battlerArgIndex = sBattleAnimScriptPtr[0];
+    sBattleAnimScriptPtr++;
+
+    argsCount = sBattleAnimScriptPtr[0];
+    sBattleAnimScriptPtr++;
+    
+    CreateSpriteOnTargets(template, argVar, battlerArgIndex, argsCount, FALSE);
+}
+
+// DOES overwrite gBattleAnimArgs
+static void Cmd_createspriteontargets(void)
+{
+    const struct SpriteTemplate *template;
+    u8 argVar;
+    u8 argsCount;
+    u8 battlerArgIndex;
+
+    sBattleAnimScriptPtr++;
+    template = (const struct SpriteTemplate *)(T2_READ_32(sBattleAnimScriptPtr));
+    sBattleAnimScriptPtr += 4;
+
+    argVar = sBattleAnimScriptPtr[0];
+    sBattleAnimScriptPtr++;
+    
+    battlerArgIndex = sBattleAnimScriptPtr[0];
+    sBattleAnimScriptPtr++;
+
+    argsCount = sBattleAnimScriptPtr[0];
+    sBattleAnimScriptPtr++;
+    
+    CreateSpriteOnTargets(template, argVar, battlerArgIndex, argsCount, TRUE);
 }
 
 static void Cmd_createvisualtask(void)
@@ -508,6 +638,48 @@ static void Cmd_createvisualtask(void)
     taskFunc(taskId);
     gAnimVisualTaskCount++;
 }
+
+static void Cmd_createvisualtaskontargets(void)
+{
+    TaskFunc taskFunc;
+    u8 taskPriority;
+    u8 taskId;
+    u8 numArgs;
+    u8 battlerArgIndex; // index in gBattleAnimArgs that has the battlerId
+    s32 i;
+    u8 targets[MAX_BATTLERS_COUNT] = {0};
+
+    sBattleAnimScriptPtr++;
+
+    taskFunc = (TaskFunc)T2_READ_32(sBattleAnimScriptPtr);
+    sBattleAnimScriptPtr += 4;
+
+    taskPriority = sBattleAnimScriptPtr[0];
+    sBattleAnimScriptPtr++;
+    
+    battlerArgIndex = sBattleAnimScriptPtr[0];
+    sBattleAnimScriptPtr++;
+
+    numArgs = sBattleAnimScriptPtr[0];
+    sBattleAnimScriptPtr++;
+    
+    // copy task arguments
+    for (i = 0; i < numArgs; i++) {
+        gBattleAnimArgs[i] = T1_READ_16(sBattleAnimScriptPtr);
+        sBattleAnimScriptPtr += 2;
+    }
+    
+    numArgs = GetBattleAnimMoveTargets(battlerArgIndex, targets);
+    
+    for (i = 0; i < numArgs; i++)
+    {
+        gBattleAnimArgs[battlerArgIndex] = targets[i];
+        taskId = CreateTask(taskFunc, taskPriority);
+        taskFunc(taskId);
+        gAnimVisualTaskCount++;
+    }
+}
+
 
 static void Cmd_delay(void)
 {
