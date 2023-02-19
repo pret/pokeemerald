@@ -83,7 +83,7 @@ struct RfuGameCompatibilityData
     u16 hasNews:1;
     u16 hasCard:1;
     u16 unknown:1; // Never read
-    u16 isChampion:1;
+    u16 canLinkNationally:1;
     u16 hasNationalDex:1;
     u16 gameClear:1;
     u16 version:4;
@@ -109,7 +109,7 @@ struct __attribute__((packed, aligned(2))) RfuGameData
     u8 startedActivity:1;
     u8 playerGender:1;
     u8 tradeLevel:7;
-    u8 padding;
+    u8 filler;
 };
 
 // Constants for getting/setting information in 'partnerInfo' of RfuGameData.

@@ -213,7 +213,7 @@ bool8 CheckForTrainersWantingBattle(void)
 
         if (gNoOfApproachingTrainers > 1)
             break;
-        if (GetMonsStateToDoubles_2() != 0) // one trainer found and cant have a double battle
+        if (GetMonsStateToDoubles_2() != PLAYER_HAS_TWO_USABLE_MONS) // one trainer found and cant have a double battle
             break;
     }
 
@@ -280,7 +280,7 @@ static u8 CheckTrainer(u8 objectEventId)
             || scriptPtr[1] == TRAINER_BATTLE_REMATCH_DOUBLE
             || scriptPtr[1] == TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE)
         {
-            if (GetMonsStateToDoubles_2() != 0)
+            if (GetMonsStateToDoubles_2() != PLAYER_HAS_TWO_USABLE_MONS)
                 return 0;
 
             numTrainers = 2;
@@ -689,8 +689,8 @@ void TryPrepareSecondApproachingTrainer(void)
 #define sLocalId    data[0]
 #define sMapNum     data[1]
 #define sMapGroup   data[2]
-#define sData3      data[3]
-#define sData4      data[4]
+#define sYVelocity  data[3]
+#define sYOffset    data[4]
 #define sFldEffId   data[7]
 
 u8 FldEff_ExclamationMarkIcon(void)
@@ -736,7 +736,7 @@ static void SetIconSpriteData(struct Sprite *sprite, u16 fldEffId, u8 spriteAnim
     sprite->sLocalId = gFieldEffectArguments[0];
     sprite->sMapNum = gFieldEffectArguments[1];
     sprite->sMapGroup = gFieldEffectArguments[2];
-    sprite->sData3 = -5;
+    sprite->sYVelocity = -5;
     sprite->sFldEffId = fldEffId;
 
     StartSpriteAnim(sprite, spriteAnimNum);
@@ -754,23 +754,23 @@ static void SpriteCB_TrainerIcons(struct Sprite *sprite)
     else
     {
         struct Sprite *objEventSprite = &gSprites[gObjectEvents[objEventId].spriteId];
-        sprite->sData4 += sprite->sData3;
+        sprite->sYOffset += sprite->sYVelocity;
         sprite->x = objEventSprite->x;
         sprite->y = objEventSprite->y - 16;
         sprite->x2 = objEventSprite->x2;
-        sprite->y2 = objEventSprite->y2 + sprite->sData4;
-        if (sprite->sData4)
-            sprite->sData3++;
+        sprite->y2 = objEventSprite->y2 + sprite->sYOffset;
+        if (sprite->sYOffset)
+            sprite->sYVelocity++;
         else
-            sprite->sData3 = 0;
+            sprite->sYVelocity = 0;
     }
 }
 
 #undef sLocalId
 #undef sMapNum
 #undef sMapGroup
-#undef sData3
-#undef sData4
+#undef sYVelocity
+#undef sYOffset
 #undef sFldEffId
 
 u8 GetCurrentApproachingTrainerObjectEventId(void)

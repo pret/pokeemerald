@@ -240,9 +240,9 @@ s32 WonderCard_Enter(void)
     case 3:
         if (FreeTempTileDataBuffersIfPossible())
             return 0;
-        LoadPalette(GetTextWindowPalette(1), 0x20, 0x20);
+        LoadPalette(GetTextWindowPalette(1), BG_PLTT_ID(2), PLTT_SIZE_4BPP);
         gPaletteFade.bufferTransferDisabled = TRUE;
-        LoadPalette(sWonderCardData->gfx->pal, 0x10, 0x20);
+        LoadPalette(sWonderCardData->gfx->pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         LZ77UnCompWram(sWonderCardData->gfx->map, sWonderCardData->bgTilemapBuffer);
         CopyRectToBgTilemapBufferRect(2, sWonderCardData->bgTilemapBuffer, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT, 1, 0x008, 0);
         CopyBgTilemapBufferToVram(2);
@@ -310,7 +310,7 @@ s32 WonderCard_Exit(bool32 useCancel)
         FreeMonIconPalettes();
         break;
     case 5:
-        PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, useCancel);
+        PrintMysteryGiftOrEReaderHeader(gGiftIsFromEReader, useCancel);
         CopyBgTilemapBufferToVram(0);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         break;
@@ -703,9 +703,9 @@ s32 WonderNews_Enter(void)
     case 3:
         if (FreeTempTileDataBuffersIfPossible())
             return 0;
-        LoadPalette(GetTextWindowPalette(1), 0x20, 0x20);
+        LoadPalette(GetTextWindowPalette(1), BG_PLTT_ID(2), PLTT_SIZE_4BPP);
         gPaletteFade.bufferTransferDisabled = TRUE;
-        LoadPalette(sWonderNewsData->gfx->pal, 0x10, 0x20);
+        LoadPalette(sWonderNewsData->gfx->pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         LZ77UnCompWram(sWonderNewsData->gfx->map, sWonderNewsData->bgTilemapBuffer);
         CopyRectToBgTilemapBufferRect(1, sWonderNewsData->bgTilemapBuffer, 0, 0, DISPLAY_TILE_WIDTH, 3, 0, 0, DISPLAY_TILE_WIDTH, 3, 1, 8, 0);
         CopyRectToBgTilemapBufferRect(3, sWonderNewsData->bgTilemapBuffer, 0, 3, DISPLAY_TILE_WIDTH, 3 + DISPLAY_TILE_HEIGHT, 0, 3, DISPLAY_TILE_WIDTH, 3 + DISPLAY_TILE_HEIGHT, 1, 8, 0);
@@ -785,7 +785,7 @@ s32 WonderNews_Exit(bool32 useCancel)
         }
         break;
     case 5:
-        PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, useCancel);
+        PrintMysteryGiftOrEReaderHeader(gGiftIsFromEReader, useCancel);
         MG_DrawCheckerboardPattern(3);
         CopyBgTilemapBufferToVram(0);
         CopyBgTilemapBufferToVram(3);

@@ -301,11 +301,28 @@ const struct OamData gOamData_BattleSpritePlayerSide =
     .affineParam = 0,
 };
 
-// Unknown and unused data. Feel free to remove.
-static const u16 sUnused1[] = {0, 5, 0xfffe, 0};
-static const u16 *const sUnused1Ptr = sUnused1;
-static const u16 sUnused2[] = {0xfff0, 0, 0x0400, 0, 0, 0, 0x3c00, 0, 0x7ffe, 1, 0, 0};
-static const u16 *const sUnused2Ptr = sUnused2;
+static const union AnimCmd sAnim_Unused[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const sAnims_Unused[] =
+{
+    sAnim_Unused,
+};
+
+static const union AffineAnimCmd sAffineAnim_Unused[] =
+{
+    AFFINEANIMCMD_FRAME(-0x10, 0x0, 0, 4),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 0x3C),
+    AFFINEANIMCMD_JUMP(1),
+};
+
+static const union AffineAnimCmd *const sAffineAnims_Unused[] =
+{
+    sAffineAnim_Unused,
+};
 
 static const s8 sCenterToCornerVecXs[8] ={-32, -16, -16, -32, -32};
 
@@ -2214,7 +2231,7 @@ void CB2_InitEndLinkBattle(void)
         gBattle_BG3_Y = 0;
 
         InitBattleBgsVideo();
-        LoadCompressedPalette(gBattleTextboxPalette, 0, 64);
+        LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
         LoadBattleMenuWindowGfx();
         ResetSpriteData();
         ResetTasks();
@@ -3332,8 +3349,8 @@ void FaintClearSetData(void)
 
     gBattleResources->flags->flags[gActiveBattler] = 0;
 
-    gBattleMons[gActiveBattler].type1 = gSpeciesInfo[gBattleMons[gActiveBattler].species].type1;
-    gBattleMons[gActiveBattler].type2 = gSpeciesInfo[gBattleMons[gActiveBattler].species].type2;
+    gBattleMons[gActiveBattler].type1 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0];
+    gBattleMons[gActiveBattler].type2 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1];
 
     ClearBattlerMoveHistory(gActiveBattler);
     ClearBattlerAbilityHistory(gActiveBattler);
@@ -3400,8 +3417,8 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
             for (i = 0; i < sizeof(struct BattlePokemon); i++)
                 ptr[i] = gBattleBufferB[gActiveBattler][4 + i];
 
-            gBattleMons[gActiveBattler].type1 = gSpeciesInfo[gBattleMons[gActiveBattler].species].type1;
-            gBattleMons[gActiveBattler].type2 = gSpeciesInfo[gBattleMons[gActiveBattler].species].type2;
+            gBattleMons[gActiveBattler].type1 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0];
+            gBattleMons[gActiveBattler].type2 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1];
             gBattleMons[gActiveBattler].ability = GetAbilityBySpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].abilityNum);
             hpOnSwitchout = &gBattleStruct->hpOnSwitchout[GetBattlerSide(gActiveBattler)];
             *hpOnSwitchout = gBattleMons[gActiveBattler].hp;
