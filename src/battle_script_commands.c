@@ -12089,8 +12089,8 @@ static void Cmd_forcerandomswitch(void)
     s32 lastMonId = 0; // + 1
     s32 monsCount;
     struct Pokemon *party = NULL;
-    s32 validMons = 0;
-    s32 minNeeded;
+    u8 validMons[PARTY_SIZE];
+    s32 validMonsCount = 0;
 
     bool32 redCardForcedSwitch = FALSE;
 
@@ -12147,7 +12147,6 @@ static void Cmd_forcerandomswitch(void)
             firstMonId = 0;
             lastMonId = 6;
             monsCount = 6;
-            minNeeded = 2;
             battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
             battler1PartyId = gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerTarget)];
         }
@@ -12166,7 +12165,6 @@ static void Cmd_forcerandomswitch(void)
                 lastMonId = PARTY_SIZE / 2;
             }
             monsCount = PARTY_SIZE / 2;
-            minNeeded = 1;
             battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
             battler1PartyId = gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerTarget)];
         }
@@ -12184,7 +12182,6 @@ static void Cmd_forcerandomswitch(void)
                 lastMonId = PARTY_SIZE / 2;
             }
             monsCount = PARTY_SIZE / 2;
-            minNeeded = 1;
             battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
             battler1PartyId = gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerTarget)];
         }
@@ -12195,7 +12192,6 @@ static void Cmd_forcerandomswitch(void)
                 firstMonId = 0;
                 lastMonId = PARTY_SIZE;
                 monsCount = PARTY_SIZE;
-                minNeeded = 2; // since there are two opponents, it has to be a double battle
             }
             else
             {
@@ -12210,7 +12206,6 @@ static void Cmd_forcerandomswitch(void)
                     lastMonId = PARTY_SIZE / 2;
                 }
                 monsCount = PARTY_SIZE / 2;
-                minNeeded = 1;
             }
             battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
             battler1PartyId = gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerTarget)];
@@ -12220,7 +12215,6 @@ static void Cmd_forcerandomswitch(void)
             firstMonId = 0;
             lastMonId = PARTY_SIZE;
             monsCount = PARTY_SIZE;
-            minNeeded = 2;
             battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
             battler1PartyId = gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerTarget)];
         }
@@ -12229,7 +12223,6 @@ static void Cmd_forcerandomswitch(void)
             firstMonId = 0;
             lastMonId = PARTY_SIZE;
             monsCount = PARTY_SIZE;
-            minNeeded = 1;
             battler2PartyId = gBattlerPartyIndexes[gBattlerTarget]; // there is only one pokemon out in single battles
             battler1PartyId = gBattlerPartyIndexes[gBattlerTarget];
         }
@@ -12238,13 +12231,15 @@ static void Cmd_forcerandomswitch(void)
         {
             if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
              && !GetMonData(&party[i], MON_DATA_IS_EGG)
-             && GetMonData(&party[i], MON_DATA_HP) != 0)
+             && GetMonData(&party[i], MON_DATA_HP) != 0
+             && i != battler1PartyId
+             && i != battler2PartyId)
              {
-                 validMons++;
+                 validMons[validMonsCount++] = i;
              }
         }
 
-        if (!redCardForcedSwitch && validMons <= minNeeded)
+        if (validMonsCount == 0)
         {
             gBattlescriptCurrInstr = cmd->failInstr;
         }
@@ -12252,19 +12247,7 @@ static void Cmd_forcerandomswitch(void)
         {
             *(gBattleStruct->battlerPartyIndexes + gBattlerTarget) = gBattlerPartyIndexes[gBattlerTarget];
             gBattlescriptCurrInstr = BattleScript_RoarSuccessSwitch;
-
-            do
-            {
-                i = Random() % monsCount;
-                i += firstMonId;
-            }
-            while (i == battler2PartyId
-                   || i == battler1PartyId
-                   || GetMonData(&party[i], MON_DATA_SPECIES) == SPECIES_NONE
-                   || GetMonData(&party[i], MON_DATA_IS_EGG) == TRUE
-                   || GetMonData(&party[i], MON_DATA_HP) == 0);
-
-            *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
+            *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = validMons[Random() % validMonsCount];
 
             if (!IsMultiBattle())
                 SwitchPartyOrder(gBattlerTarget);
