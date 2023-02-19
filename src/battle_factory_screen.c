@@ -1175,16 +1175,16 @@ static void CB2_InitSelectScreen(void)
         LoadBgTiles(3, sSelectMonPicBgTilesetBuffer, 0x60, 0);
         CpuCopy16(gFrontierFactorySelectMenu_Tilemap, sSelectMenuTilemapBuffer, BG_SCREEN_SIZE);
         LoadBgTilemap(1, sSelectMenuTilemapBuffer, BG_SCREEN_SIZE, 0);
-        LoadPalette(gFrontierFactorySelectMenu_Pal, 0, 0x40);
-        LoadPalette(sSelectText_Pal, 0xF0, 8);
-        LoadPalette(sSelectText_Pal, 0xE0, 10);
+        LoadPalette(gFrontierFactorySelectMenu_Pal, 0, 2 * PLTT_SIZE_4BPP);
+        LoadPalette(sSelectText_Pal, BG_PLTT_ID(15), PLTT_SIZEOF(4));
+        LoadPalette(sSelectText_Pal, BG_PLTT_ID(14), PLTT_SIZEOF(5));
 #ifdef UBFIX
         if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
 #else
         if (sFactorySelectScreen->fromSummaryScreen == TRUE)
 #endif
             gPlttBufferUnfaded[228] = sFactorySelectScreen->speciesNameColorBackup;
-        LoadPalette(sMonPicBg_Pal, 0x20, 4);
+        LoadPalette(sMonPicBg_Pal, BG_PLTT_ID(2), PLTT_SIZEOF(2));
         gMain.state++;
         break;
     case 3:
@@ -2748,7 +2748,7 @@ static void Swap_Task_FadeOutSpeciesName(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 1:
-        LoadPalette(&gPlttBufferUnfaded[0xF0], 0xE0, 0xA);
+        LoadPalette(&gPlttBufferUnfaded[BG_PLTT_ID(15)], BG_PLTT_ID(14), PLTT_SIZEOF(5));
         gTasks[taskId].tState++;
         break;
     case 2:
@@ -2994,7 +2994,7 @@ static void Swap_Task_ScreenInfoTransitionOut(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        LoadPalette(sSwapText_Pal, 0xE0, sizeof(sSwapText_Pal));
+        LoadPalette(sSwapText_Pal, BG_PLTT_ID(14), sizeof(sSwapText_Pal));
         Swap_PrintActionStrings();
         PutWindowTilemap(SWAP_WIN_ACTION_FADE);
         gTasks[taskId].tState++;
@@ -3309,10 +3309,10 @@ static void CB2_InitSwapScreen(void)
         LoadBgTiles(3, sSwapMonPicBgTilesetBuffer, 0x60, 0);
         CpuCopy16(gFrontierFactorySelectMenu_Tilemap, sSwapMenuTilemapBuffer, BG_SCREEN_SIZE);
         LoadBgTilemap(1, sSwapMenuTilemapBuffer, BG_SCREEN_SIZE, 0);
-        LoadPalette(gFrontierFactorySelectMenu_Pal, 0, 0x40);
-        LoadPalette(sSwapText_Pal, 0xF0, sizeof(sSwapText_Pal));
-        LoadPalette(sSwapText_Pal, 0xE0, sizeof(sSwapText_Pal));
-        LoadPalette(sMonPicBg_Pal, 0x20, 4);
+        LoadPalette(gFrontierFactorySelectMenu_Pal, 0, 2 * PLTT_SIZE_4BPP);
+        LoadPalette(sSwapText_Pal, BG_PLTT_ID(15), sizeof(sSwapText_Pal));
+        LoadPalette(sSwapText_Pal, BG_PLTT_ID(14), sizeof(sSwapText_Pal));
+        LoadPalette(sMonPicBg_Pal, BG_PLTT_ID(2), PLTT_SIZEOF(2));
         gMain.state++;
         break;
     case 3:
@@ -3867,7 +3867,7 @@ static void Swap_PrintMonSpeciesAtFade(void)
         pal[4] = gPlttBufferFaded[228];
     else
         pal[4] = sFactorySwapScreen->speciesNameColorBackup;
-    LoadPalette(pal, 0xF0, sizeof(sSwapText_Pal));
+    LoadPalette(pal, BG_PLTT_ID(15), sizeof(sSwapText_Pal));
 
     PutWindowTilemap(SWAP_WIN_SPECIES_AT_FADE);
     FillWindowPixelBuffer(SWAP_WIN_SPECIES_AT_FADE, PIXEL_FILL(0));
@@ -3895,8 +3895,8 @@ static void Swap_PrintMonSpeciesForTransition(void)
     u16 species;
     u8 x;
 
-    LoadPalette(sSwapText_Pal, 0xE0, sizeof(sSwapText_Pal));
-    CpuCopy16(&gPlttBufferUnfaded[240], &gPlttBufferFaded[224], 10);
+    LoadPalette(sSwapText_Pal, BG_PLTT_ID(14), sizeof(sSwapText_Pal));
+    CpuCopy16(&gPlttBufferUnfaded[BG_PLTT_ID(15)], &gPlttBufferFaded[BG_PLTT_ID(14)], PLTT_SIZEOF(5));
 
     if (sFactorySwapScreen->cursorPos >= FRONTIER_PARTY_SIZE)
     {

@@ -1107,7 +1107,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
     struct BattleDebugMenu *data = GetStructPtr(taskId);
 
     // Exit the menu.
-    if (JOY_NEW(SELECT_BUTTON))
+    if (JOY_NEW(SELECT_BUTTON) || ((JOY_NEW(B_BUTTON)) && data->activeWindow == ACTIVE_WIN_MAIN))
     {
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
         gTasks[taskId].func = Task_DebugMenuFadeOut;
@@ -1759,7 +1759,7 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
     {
     case LIST_ITEM_ABILITY:
         data->modifyArrows.minValue = 0;
-        data->modifyArrows.maxValue = ABILITIES_COUNT_GEN8 - 1;
+        data->modifyArrows.maxValue = ABILITIES_COUNT - 1;
         data->modifyArrows.maxDigits = 3;
         data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].ability;
         data->modifyArrows.typeOfVal = VAL_U16;
@@ -1767,7 +1767,7 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         break;
     case LIST_ITEM_MOVES:
         data->modifyArrows.minValue = 0;
-        data->modifyArrows.maxValue = MOVES_COUNT_GEN8 - 1;
+        data->modifyArrows.maxValue = MOVES_COUNT - 1;
         data->modifyArrows.maxDigits = 3;
         if (data->currentSecondaryListItemId == 4)
         {

@@ -26,16 +26,15 @@
 #define ABILITYEFFECT_MOVE_END_ATTACKER          4
 #define ABILITYEFFECT_MOVE_END                   5
 #define ABILITYEFFECT_IMMUNITY                   6
-#define ABILITYEFFECT_WEATHER_FORM               7
-#define ABILITYEFFECT_SYNCHRONIZE                8
-#define ABILITYEFFECT_ATK_SYNCHRONIZE            9
-#define ABILITYEFFECT_INTIMIDATE1                10
-#define ABILITYEFFECT_INTIMIDATE2                11
-#define ABILITYEFFECT_TRACE1                     12
-#define ABILITYEFFECT_TRACE2                     13
-#define ABILITYEFFECT_MOVE_END_OTHER             14
-#define ABILITYEFFECT_NEUTRALIZINGGAS            15
-#define ABILITYEFFECT_FIELD_SPORT                16 // Only used if B_SPORT_TURNS < GEN_6
+#define ABILITYEFFECT_SYNCHRONIZE                7
+#define ABILITYEFFECT_ATK_SYNCHRONIZE            8
+#define ABILITYEFFECT_TRACE1                     9
+#define ABILITYEFFECT_TRACE2                     10
+#define ABILITYEFFECT_MOVE_END_OTHER             11
+#define ABILITYEFFECT_NEUTRALIZINGGAS            12
+#define ABILITYEFFECT_FIELD_SPORT                13 // Only used if B_SPORT_TURNS < GEN_6
+#define ABILITYEFFECT_ON_WEATHER                 14
+#define ABILITYEFFECT_ON_TERRAIN                 15
 // Special cases
 #define ABILITYEFFECT_MUD_SPORT                  252 // Only used if B_SPORT_TURNS < GEN_6
 #define ABILITYEFFECT_WATER_SPORT                253 // Only used if B_SPORT_TURNS < GEN_6
@@ -63,6 +62,35 @@ struct TypePower
     u8 type;
     u8 power;
     u16 effect;
+};
+
+enum
+{
+    CANCELLER_FLAGS,
+    CANCELLER_SKY_DROP,
+    CANCELLER_ASLEEP,
+    CANCELLER_FROZEN,
+    CANCELLER_TRUANT,
+    CANCELLER_RECHARGE,
+    CANCELLER_FLINCH,
+    CANCELLER_DISABLED,
+    CANCELLER_GRAVITY,
+    CANCELLER_HEAL_BLOCKED,
+    CANCELLER_TAUNTED,
+    CANCELLER_IMPRISONED,
+    CANCELLER_CONFUSED,
+    CANCELLER_PARALYSED,
+    CANCELLER_IN_LOVE,
+    CANCELLER_BIDE,
+    CANCELLER_THAW,
+    CANCELLER_POWDER_MOVE,
+    CANCELLER_POWDER_STATUS,
+    CANCELLER_THROAT_CHOP,
+    CANCELLER_MULTIHIT_MOVES,
+    CANCELLER_Z_MOVES,
+    CANCELLER_END,
+    CANCELLER_PSYCHIC_TERRAIN,
+    CANCELLER_END2,
 };
 
 extern const struct TypePower gNaturalGiftTable[];
@@ -144,6 +172,7 @@ u16 CalcTypeEffectivenessMultiplier(u16 move, u8 moveType, u8 battlerAtk, u8 bat
 u16 CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilityDef);
 u16 GetTypeModifier(u8 atkType, u8 defType);
 s32 GetStealthHazardDamage(u8 hazardType, u8 battlerId);
+s32 GetStealthHazardDamageByTypesAndHP(u8 hazardType, u8 type1, u8 type2, u32 maxHp);
 u16 GetMegaEvolutionSpecies(u16 preEvoSpecies, u16 heldItemId);
 u16 GetPrimalReversionSpecies(u16 preEvoSpecies, u16 heldItemId);
 u16 GetWishMegaEvolutionSpecies(u16 preEvoSpecies, u16 moveId1, u16 moveId2, u16 moveId3, u16 moveId4);
@@ -152,6 +181,7 @@ void UndoMegaEvolution(u32 monId);
 void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut);
 bool32 DoBattlersShareType(u32 battler1, u32 battler2);
 bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId);
+u32 GetIllusionMonSpecies(u32 battlerId);
 struct Pokemon *GetIllusionMonPtr(u32 battlerId);
 void ClearIllusionMon(u32 battlerId);
 bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId);
@@ -181,9 +211,6 @@ void DoBurmyFormChange(u32 monId);
 bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef, bool32 checkTarget);
 u16 GetUsedHeldItem(u8 battler);
 bool32 IsBattlerWeatherAffected(u8 battlerId, u32 weatherFlags);
-void TryToApplyMimicry(u8 battlerId, bool8 various);
-void TryToRevertMimicry(void);
-void RestoreBattlerOriginalTypes(u8 battlerId);
 u32 GetBattlerMoveTargetType(u8 battlerId, u16 move);
 bool32 CanTargetBattler(u8 battlerAtk, u8 battlerDef, u16 move);
 bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId);
@@ -204,5 +231,8 @@ bool32 CanBeFrozen(u8 battlerId);
 bool32 CanBeConfused(u8 battlerId);
 bool32 IsBattlerTerrainAffected(u8 battlerId, u32 terrainFlag);
 u32 GetBattlerFriendshipScore(u8 battlerId);
+u32 CountBattlerStatIncreases(u8 battlerId, bool32 countEvasionAcc);
+bool32 IsMyceliumMightOnField(void);
+bool8 ChangeTypeBasedOnTerrain(u8 battlerId);
 
 #endif // GUARD_BATTLE_UTIL_H

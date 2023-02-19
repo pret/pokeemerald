@@ -74,6 +74,7 @@
 #define BS_PLAYER2                  13 // for Cmd_updatestatusicon
 #define BS_OPPONENT2                14
 #define BS_ABILITY_BATTLER          15
+#define BS_ATTACKER_PARTNER         16
 
 // Cmd_accuracycheck
 #define NO_ACC_CALC_CHECK_LOCK_ON 0xFFFF
@@ -93,7 +94,7 @@
 #define VARIOUS_IS_RUNNING_IMPOSSIBLE               2
 #define VARIOUS_GET_MOVE_TARGET                     3
 #define VARIOUS_GET_BATTLER_FAINTED                 4
-#define VARIOUS_RESET_INTIMIDATE_TRACE_BITS         5
+#define VARIOUS_RESET_SWITCH_IN_ABILITY_BITS        5
 #define VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP        6
 #define VARIOUS_RESET_PLAYER_FAINTED                7
 #define VARIOUS_PALACE_FLAVOR_TEXT                  8
@@ -216,36 +217,46 @@
 #define VARIOUS_JUMP_IF_WEATHER_AFFECTED            125
 #define VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED        126
 #define VARIOUS_SET_ATTACKER_STICKY_WEB_USER        127
-#define VARIOUS_TRY_TO_APPLY_MIMICRY                128
-#define VARIOUS_PHOTON_GEYSER_CHECK                 129
-#define VARIOUS_SHELL_SIDE_ARM_CHECK                130
-#define VARIOUS_TRY_NO_RETREAT                      131
-#define VARIOUS_TRY_TAR_SHOT                        132
-#define VARIOUS_CAN_TAR_SHOT_WORK                   133
-#define VARIOUS_CHECK_POLTERGEIST                   134
-#define VARIOUS_SET_OCTOLOCK                        135
-#define VARIOUS_CUT_1_3_HP_RAISE_STATS              136
-#define VARIOUS_TRY_END_NEUTRALIZING_GAS            137
-#define VARIOUS_JUMP_IF_UNDER_200                   138
-#define VARIOUS_SET_SKY_DROP                        139
-#define VARIOUS_CLEAR_SKY_DROP                      140
-#define VARIOUS_SKY_DROP_YAWN                       141
-#define VARIOUS_JUMP_IF_CANT_FLING                  142
-#define VARIOUS_JUMP_IF_HOLD_EFFECT                 143
-#define VARIOUS_CURE_CERTAIN_STATUSES               144
-#define VARIOUS_TRY_RESET_NEGATIVE_STAT_STAGES      145
-#define VARIOUS_JUMP_IF_LAST_USED_ITEM_BERRY        146
-#define VARIOUS_JUMP_IF_LAST_USED_ITEM_HOLD_EFFECT  147
-#define VARIOUS_SAVE_BATTLER_ITEM                   148
-#define VARIOUS_RESTORE_BATTLER_ITEM                149
-#define VARIOUS_BATTLER_ITEM_TO_LAST_USED_ITEM      150
-#define VARIOUS_SET_BEAK_BLAST                      151
-#define VARIOUS_SWAP_SIDE_STATUSES                  152
-#define VARIOUS_SET_Z_EFFECT                        153
-#define VARIOUS_TRY_SYMBIOSIS                       154
-#define VARIOUS_CAN_TELEPORT                        155
-#define VARIOUS_GET_BATTLER_SIDE                    156
-#define VARIOUS_CHECK_PARENTAL_BOND_COUNTER         157
+#define VARIOUS_PHOTON_GEYSER_CHECK                 128
+#define VARIOUS_SHELL_SIDE_ARM_CHECK                129
+#define VARIOUS_TRY_NO_RETREAT                      130
+#define VARIOUS_TRY_TAR_SHOT                        131
+#define VARIOUS_CAN_TAR_SHOT_WORK                   132
+#define VARIOUS_CHECK_POLTERGEIST                   133
+#define VARIOUS_SET_OCTOLOCK                        134
+#define VARIOUS_CUT_1_3_HP_RAISE_STATS              135
+#define VARIOUS_TRY_END_NEUTRALIZING_GAS            136
+#define VARIOUS_JUMP_IF_UNDER_200                   137
+#define VARIOUS_SET_SKY_DROP                        138
+#define VARIOUS_CLEAR_SKY_DROP                      139
+#define VARIOUS_SKY_DROP_YAWN                       140
+#define VARIOUS_JUMP_IF_CANT_FLING                  141
+#define VARIOUS_JUMP_IF_HOLD_EFFECT                 142
+#define VARIOUS_CURE_CERTAIN_STATUSES               143
+#define VARIOUS_TRY_RESET_NEGATIVE_STAT_STAGES      144
+#define VARIOUS_JUMP_IF_LAST_USED_ITEM_BERRY        145
+#define VARIOUS_JUMP_IF_LAST_USED_ITEM_HOLD_EFFECT  146
+#define VARIOUS_SAVE_BATTLER_ITEM                   147
+#define VARIOUS_RESTORE_BATTLER_ITEM                148
+#define VARIOUS_BATTLER_ITEM_TO_LAST_USED_ITEM      149
+#define VARIOUS_SET_BEAK_BLAST                      150
+#define VARIOUS_SWAP_SIDE_STATUSES                  151
+#define VARIOUS_SET_Z_EFFECT                        152
+#define VARIOUS_TRY_SYMBIOSIS                       153
+#define VARIOUS_CAN_TELEPORT                        154
+#define VARIOUS_GET_BATTLER_SIDE                    155
+#define VARIOUS_CHECK_PARENTAL_BOND_COUNTER         156
+#define VARIOUS_SWAP_STATS                          157
+#define VARIOUS_JUMP_IF_ROD                         158
+#define VARIOUS_JUMP_IF_ABSORB                      159
+#define VARIOUS_JUMP_IF_MOTOR                       160
+#define VARIOUS_TEATIME_INVUL                       161
+#define VARIOUS_TEATIME_TARGETS                     162
+#define VARIOUS_TRY_WIND_RIDER_POWER                163
+#define VARIOUS_ACTIVATE_WEATHER_CHANGE_ABILITIES   164
+#define VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES   165
+#define VARIOUS_JUMP_IF_NO_VALID_TARGETS            166
+#define VARIOUS_JUMP_IF_EMERGENCY_EXITED            167
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
@@ -263,6 +274,7 @@
 
 // Cmd_statbuffchange
 #define STAT_CHANGE_ALLOW_PTR               (1 << 0)   // If set, allow use of jumpptr. Set in every use of statbuffchange
+#define STAT_CHANGE_MIRROR_ARMOR            (1 << 1)   // Stat change redirection caused by Mirror Armor ability.
 #define STAT_CHANGE_NOT_PROTECT_AFFECTED    (1 << 5)
 #define STAT_CHANGE_UPDATE_MOVE_EFFECT      (1 << 6)
 
