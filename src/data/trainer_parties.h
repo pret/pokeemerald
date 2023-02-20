@@ -400,17 +400,17 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Rose1[] = {
     {
     .iv = 0,
     .lvl = 14,
-    .species = SPECIES_ROSELIA,
+    .species = SPECIES_PORYGON,
     },
     {
     .iv = 0,
     .lvl = 14,
-    .species = SPECIES_SHROOMISH,
+    .species = SPECIES_PORYGON,
     },
     {
     .iv = 0,
     .lvl = 14,
-    .species = SPECIES_ROSELIA,
+    .species = SPECIES_PORYGON,
     }
 };
 
@@ -9631,17 +9631,17 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Deandre[] = {
     {
     .iv = 0,
     .lvl = 14,
-    .species = SPECIES_ZIGZAGOON,
+    .species = SPECIES_PORYGON,
     },
     {
     .iv = 0,
     .lvl = 14,
-    .species = SPECIES_ARON,
+    .species = SPECIES_PORYGON,
     },
     {
     .iv = 0,
     .lvl = 14,
-    .species = SPECIES_ELECTRIKE,
+    .species = SPECIES_PORYGON,
     }
 };
 
