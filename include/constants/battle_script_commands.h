@@ -257,6 +257,7 @@
 #define VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES   165
 #define VARIOUS_JUMP_IF_NO_VALID_TARGETS            166
 #define VARIOUS_JUMP_IF_EMERGENCY_EXITED            167
+#define VARIOUS_STORE_HEALING_WISH                  168
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

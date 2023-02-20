@@ -6924,6 +6924,24 @@ static void Cmd_switchineffects(void)
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_SwitchInAbilityMsgRet;
     }
+    // Healing Wish activates before hazards.
+    // Starting from Gen8 - it heals only pokemon which can be healed. In gens 5,6,7 the effect activates anyways.
+    else if (((gBattleStruct->storedHealingWish & gBitTable[gActiveBattler]) || (gBattleStruct->storedLunarDance & gBitTable[gActiveBattler]))
+        && (gBattleMons[gActiveBattler].hp != gBattleMons[gActiveBattler].maxHP || gBattleMons[gActiveBattler].status1 != 0 || B_HEALING_WISH_SWITCH < GEN_8))
+    {
+        if (gBattleStruct->storedHealingWish & gBitTable[gActiveBattler])
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_HealingWishActivates;
+            gBattleStruct->storedHealingWish  &= ~(gBitTable[gActiveBattler]);
+        }
+        else // Lunar Dance
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_LunarDanceActivates;
+            gBattleStruct->storedLunarDance  &= ~(gBitTable[gActiveBattler]);
+        }
+    }
     else if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES_DAMAGED)
         && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES)
         && GetBattlerAbility(gActiveBattler) != ABILITY_MAGIC_GUARD
@@ -11039,6 +11057,15 @@ static void Cmd_various(void)
         else
             gBattlescriptCurrInstr = cmd->nextInstr;
         return;
+    }
+    case VARIOUS_STORE_HEALING_WISH:
+    {
+        VARIOUS_ARGS();
+        if (gCurrentMove == MOVE_LUNAR_DANCE)
+            gBattleStruct->storedLunarDance |= gBitTable[gActiveBattler];
+        else
+            gBattleStruct->storedHealingWish |= gBitTable[gActiveBattler];
+        break;
     }
     } // End of switch (cmd->id)
 

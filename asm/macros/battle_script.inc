@@ -1322,6 +1322,11 @@
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
 	.endm
+	
+	@ Stores Healing Wish effect.
+	.macro storehealingwish battler:req
+	various \battler, VARIOUS_STORE_HEALING_WISH
+	.endm
 
 	.macro setmagiccoattarget battler:req
 	various \battler, VARIOUS_SET_MAGIC_COAT_TARGET
