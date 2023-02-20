@@ -75,13 +75,7 @@ DOUBLE_BATTLE_TEST("Intimidate doesn't activate on an empty field in a double ba
     } SCENE {
         HP_BAR(playerLeft, hp: 0);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, playerLeft);
-        // Leaving these messages as they're not that important to the test, to not exceed MAX_QUEUED_EVENTS.
-        /*
-        MESSAGE("Foe Wobbuffet fainted!");
-        MESSAGE("Wobbuffet fainted!");
-        MESSAGE("Foe Wobbuffet fainted!");
-        MESSAGE("Wobbuffet fainted!");
-        */
+        // Everyone faints.
 
         MESSAGE("Go! Staravia!");
         MESSAGE("2 sent out Staraptor!");
