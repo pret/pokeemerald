@@ -20,7 +20,11 @@ SINGLE_BATTLE_TEST("Intimidate (opponent) lowers player's attack after switch ou
         TURN { MOVE(player, MOVE_TACKLE); }
     } SCENE {
         if (ability == ABILITY_INTIMIDATE)
+        {
             ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+            MESSAGE("Foe Staraptor's Intimidate cuts Wobbuffet's ATTACK!");
+        }
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
         EXPECT_MUL_EQ(results[0].damage, Q_4_12(1.5), results[1].damage);
@@ -33,15 +37,20 @@ SINGLE_BATTLE_TEST("Intimidate (opponent) lowers player's attack after KO", s16 
     PARAMETRIZE { ability = ABILITY_INTIMIDATE; }
     PARAMETRIZE { ability = ABILITY_RECKLESS; }
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { Speed(2); Attack(120) ; };
+        PLAYER(SPECIES_WOBBUFFET) { Speed(2); };
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); Speed(1); };
         OPPONENT(SPECIES_STARAPTOR) { Ability(ability); Speed(1); };
     } WHEN {
         TURN { MOVE(player, MOVE_TACKLE); SEND_OUT(opponent, 1); }
         TURN { MOVE(player, MOVE_TACKLE); }
     } SCENE {
+        HP_BAR(opponent);
         if (ability == ABILITY_INTIMIDATE)
+        {
             ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+            MESSAGE("Foe Staraptor's Intimidate cuts Wobbuffet's ATTACK!");
+        }
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
         EXPECT_MUL_EQ(results[0].damage, Q_4_12(1.5), results[1].damage);
