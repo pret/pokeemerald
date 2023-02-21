@@ -6935,6 +6935,24 @@ static void Cmd_switchineffects(void)
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_SwitchInAbilityMsgRet;
     }
+    // Healing Wish activates before hazards.
+    // Starting from Gen8 - it heals only pokemon which can be healed. In gens 5,6,7 the effect activates anyways.
+    else if (((gBattleStruct->storedHealingWish & gBitTable[gActiveBattler]) || (gBattleStruct->storedLunarDance & gBitTable[gActiveBattler]))
+        && (gBattleMons[gActiveBattler].hp != gBattleMons[gActiveBattler].maxHP || gBattleMons[gActiveBattler].status1 != 0 || B_HEALING_WISH_SWITCH < GEN_8))
+    {
+        if (gBattleStruct->storedHealingWish & gBitTable[gActiveBattler])
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_HealingWishActivates;
+            gBattleStruct->storedHealingWish  &= ~(gBitTable[gActiveBattler]);
+        }
+        else // Lunar Dance
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_LunarDanceActivates;
+            gBattleStruct->storedLunarDance  &= ~(gBitTable[gActiveBattler]);
+        }
+    }
     else if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES_DAMAGED)
         && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES)
         && GetBattlerAbility(gActiveBattler) != ABILITY_MAGIC_GUARD
@@ -11051,6 +11069,15 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
+    case VARIOUS_STORE_HEALING_WISH:
+    {
+        VARIOUS_ARGS();
+        if (gCurrentMove == MOVE_LUNAR_DANCE)
+            gBattleStruct->storedLunarDance |= gBitTable[gActiveBattler];
+        else
+            gBattleStruct->storedHealingWish |= gBitTable[gActiveBattler];
+        break;
+    }
     case VARIOUS_TRY_TRAINER_SLIDE_MSG_Z_MOVE:
     {
         VARIOUS_ARGS();
@@ -14930,55 +14957,18 @@ static void Cmd_pickup(void)
 {
     CMD_ARGS();
 
-    s32 i;
-    u16 species, heldItem;
-    u16 ability;
+    u32 i, j;
+    u16 species, heldItem, ability;
     u8 lvlDivBy10;
 
-    if (InBattlePike())
+    if (!InBattlePike()) // No items in Battle Pike.
     {
-
-    }
-    else if (InBattlePyramid())
-    {
+        bool32 isInPyramid = InBattlePyramid_();
         for (i = 0; i < PARTY_SIZE; i++)
         {
             species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
             heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-
-            ability = gSpeciesInfo[species].abilities[GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM)];
-
-            if (ability == ABILITY_PICKUP
-                && species != SPECIES_NONE
-                && species != SPECIES_EGG
-                && heldItem == ITEM_NONE
-                && (Random() % 10) == 0)
-            {
-                heldItem = GetBattlePyramidPickupItemId();
-                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
-            }
-            #if (defined ITEM_HONEY)
-            else if (ability == ABILITY_HONEY_GATHER
-                && species != 0
-                && species != SPECIES_EGG
-                && heldItem == ITEM_NONE)
-            {
-                if ((lvlDivBy10 + 1 ) * 5 > Random() % 100)
-                {
-                    heldItem = ITEM_HONEY;
-                    SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
-                }
-            }
-            #endif
-        }
-    }
-    else
-    {
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
-            heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-            lvlDivBy10 = (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL)-1) / 10; //Moving this here makes it easier to add in abilities like Honey Gather
+            lvlDivBy10 = (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL)-1) / 10; //Moving this here makes it easier to add in abilities like Honey Gather.
             if (lvlDivBy10 > 9)
                 lvlDivBy10 = 9;
 
@@ -14990,24 +14980,30 @@ static void Cmd_pickup(void)
                 && heldItem == ITEM_NONE
                 && (Random() % 10) == 0)
             {
-                s32 j;
-                s32 rand = Random() % 100;
-
-                for (j = 0; j < (int)ARRAY_COUNT(sPickupProbabilities); j++)
+                if (isInPyramid)
                 {
-                    if (sPickupProbabilities[j] > rand)
+                    heldItem = GetBattlePyramidPickupItemId();
+                    SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+                }
+                else
+                {
+                    u32 rand = Random() % 100;
+
+                    for (j = 0; j < ARRAY_COUNT(sPickupProbabilities); j++)
                     {
-                        SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sPickupItems[lvlDivBy10 + j]);
-                        break;
-                    }
-                    else if (rand == 99 || rand == 98)
-                    {
-                        SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sRarePickupItems[lvlDivBy10 + (99 - rand)]);
-                        break;
+                        if (sPickupProbabilities[j] > rand)
+                        {
+                            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sPickupItems[lvlDivBy10 + j]);
+                            break;
+                        }
+                        else if (rand == 99 || rand == 98)
+                        {
+                            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sRarePickupItems[lvlDivBy10 + (99 - rand)]);
+                            break;
+                        }
                     }
                 }
             }
-            #if (defined ITEM_HONEY)
             else if (ability == ABILITY_HONEY_GATHER
                 && species != 0
                 && species != SPECIES_EGG
@@ -15018,6 +15014,14 @@ static void Cmd_pickup(void)
                     heldItem = ITEM_HONEY;
                     SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
                 }
+            }
+            #if P_SHUCKLE_BERRY_JUICE == TRUE
+            else if (species == SPECIES_SHUCKLE
+                && heldItem == ITEM_ORAN_BERRY
+                && (Random() % 16) == 0)
+            {
+                heldItem = ITEM_BERRY_JUICE;
+                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
             }
             #endif
         }
@@ -16108,10 +16112,8 @@ static bool32 CriticalCapture(u32 odds)
     else
         odds = (odds * 250) / 100;
 
-    #ifdef ITEM_CATCHING_CHARM
     if (CheckBagHasItem(ITEM_CATCHING_CHARM, 1))
         odds = (odds * (100 + B_CATCHING_CHARM_BOOST)) / 100;
-    #endif
 
     odds /= 6;
     if ((Random() % 255) < odds)

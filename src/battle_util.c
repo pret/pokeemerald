@@ -10276,6 +10276,14 @@ void ClearIllusionMon(u32 battlerId)
     memset(&gBattleStruct->illusion[battlerId], 0, sizeof(gBattleStruct->illusion[battlerId]));
 }
 
+u32 GetIllusionMonSpecies(u32 battlerId)
+{
+    struct Pokemon *illusionMon = GetIllusionMonPtr(battlerId);
+    if (illusionMon != NULL)
+        return GetMonData(illusionMon, MON_DATA_SPECIES);
+    return SPECIES_NONE;
+}
+
 bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId)
 {
     struct Pokemon *party, *partnerMon;
