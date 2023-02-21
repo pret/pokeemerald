@@ -1317,6 +1317,12 @@
 	.2byte \holdEffect
 	.4byte \jumpInstr
 	.endm
+	
+	.macro jumpifmorethanhalfHP battler:req, jumpInstr:req
+	callnative BS_JumpIfMoreThanHalfHP
+	.byte \battler
+	.4byte \jumpInstr
+	.endm
 
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req

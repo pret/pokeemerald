@@ -3417,27 +3417,20 @@ BattleScript_EffectFreezeHit::
 BattleScript_EffectParalyzeHit::
 	setmoveeffect MOVE_EFFECT_PARALYSIS
 	goto BattleScript_EffectHit
-
-BattleScript_EffectExplosion::
-	attackcanceler
-	attackstring
-	ppreduce
-@ Below jumps to BattleScript_DampStopsExplosion if it fails (only way it can)
-	tryexplosion
-	setatkhptozero
-	waitstate
-	jumpifbyte CMP_NO_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_MISSED, BattleScript_ExplosionDoAnimStartLoop
+	
+BattleScript_EffectExplosion_AnimDmgRet:
+	jumpifbyte CMP_NO_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_MISSED, BattleScript_ExplosionAnimRet
 	call BattleScript_PreserveMissedBitDoMoveAnim
-	goto BattleScript_ExplosionLoop
-BattleScript_ExplosionDoAnimStartLoop:
+	goto BattleScript_ExplosionDmgRet
+BattleScript_ExplosionAnimRet:
 	attackanimation
 	waitanimation
-BattleScript_ExplosionLoop:
+BattleScript_ExplosionDmgRet:
 	movevaluescleanup
 	critcalc
 	damagecalc
 	adjustdamage
-	accuracycheck BattleScript_ExplosionMissed, ACC_CURR_MOVE
+	accuracycheck BattleScript_ExplosionMissedRet, ACC_CURR_MOVE
 	effectivenesssound
 	hitanimation BS_TARGET
 	waitstate
@@ -3448,17 +3441,25 @@ BattleScript_ExplosionLoop:
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	tryfaintmon BS_TARGET
-	moveendto MOVEEND_NEXT_TARGET
-	jumpifnexttargetvalid BattleScript_ExplosionLoop
-	tryfaintmon BS_ATTACKER
-	moveendcase MOVEEND_CLEAR_BITS
-	end
-BattleScript_ExplosionMissed:
+BattleScript_ExplosionAnimEndRet_Return:
+	return
+BattleScript_ExplosionMissedRet:
 	effectivenesssound
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
-	moveendto MOVEEND_NEXT_TARGET
-	jumpifnexttargetvalid BattleScript_ExplosionLoop
+	goto BattleScript_ExplosionAnimEndRet_Return
+
+BattleScript_EffectExplosion::
+	attackcanceler
+	attackstring
+	ppreduce
+@ Below jumps to BattleScript_DampStopsExplosion if it fails (only way it can)
+	tryexplosion
+	waitstate
+BattleScript_EffectExplosion_AnimDmgFaintAttacker:
+	call BattleScript_EffectExplosion_AnimDmgRet
+	moveendall
+	setatkhptozero
 	tryfaintmon BS_ATTACKER
 	end
 
@@ -3466,14 +3467,28 @@ BattleScript_EffectMindBlown::
 	attackcanceler
 	attackstring
 	ppreduce
-	tryexplosion
+	jumpifbyte CMP_GREATER_THAN, sB_ANIM_TARGETS_HIT, 0, BattleScript_EffectMindBlown_NoHpLoss
+	jumpifabilitypresent ABILITY_DAMP, BattleScript_MindBlownDamp
+	jumpifmorethanhalfHP BS_ATTACKER, BattleScript_EffectMindBlown_HpDown
+	setbyte sMULTIHIT_EFFECT, 0 @ Note to faint the attacker
+	instanthpdrop BS_ATTACKER
+	waitstate
+	goto BattleScript_EffectExplosion_AnimDmgFaintAttacker
+BattleScript_EffectMindBlown_NoHpLoss:
+	jumpifbyte CMP_EQUAL, sMULTIHIT_EFFECT, 0, BattleScript_EffectExplosion_AnimDmgFaintAttacker
+	goto BattleScript_EffectMindBlown_AnimDmgNoFaint
+BattleScript_MindBlownDamp:
+	copybyte gBattlerTarget, gBattlerAbility
+	goto BattleScript_DampStopsExplosion
+BattleScript_EffectMindBlown_HpDown:
+	setbyte sMULTIHIT_EFFECT, 1 @ Note to not faint the attacker
 	dmg_1_2_attackerhp
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	waitstate
-	jumpifbyte CMP_NO_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_MISSED, BattleScript_ExplosionDoAnimStartLoop
-	call BattleScript_PreserveMissedBitDoMoveAnim
-	goto BattleScript_ExplosionLoop
+BattleScript_EffectMindBlown_AnimDmgNoFaint:
+	call BattleScript_EffectExplosion_AnimDmgRet
+	goto BattleScript_MoveEnd
 
 BattleScript_PreserveMissedBitDoMoveAnim:
 	bichalfword gMoveResultFlags, MOVE_RESULT_MISSED
@@ -8360,9 +8375,9 @@ BattleScript_AbilityRaisesDefenderStat::
 BattleScript_AbilityPopUp:
 	.if B_ABILITY_POP_UP == TRUE
 	showabilitypopup BS_ABILITY_BATTLER
-	recordability BS_ABILITY_BATTLER
 	pause 40
 	.endif
+	recordability BS_ABILITY_BATTLER
 	sethword sABILITY_OVERWRITE, 0
 	return
 

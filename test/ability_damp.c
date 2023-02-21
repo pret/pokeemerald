@@ -19,6 +19,26 @@ SINGLE_BATTLE_TEST("Damp prevents explosion-like moves from enemies")
     }
 }
 
+DOUBLE_BATTLE_TEST("Damp prevents explosion-like moves from enemies in a double battle")
+{
+    u32 move;
+    PARAMETRIZE { move = MOVE_EXPLOSION; }
+    PARAMETRIZE { move = MOVE_SELF_DESTRUCT; }
+    PARAMETRIZE { move = MOVE_MIND_BLOWN; }
+    PARAMETRIZE { move = MOVE_MISTY_EXPLOSION; }
+    GIVEN {
+        PLAYER(SPECIES_PARAS) { Ability(ABILITY_DAMP); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponentLeft, move); }
+    } SCENE {
+        ABILITY_POPUP(playerLeft, ABILITY_DAMP);
+        NONE_OF { HP_BAR(playerLeft); HP_BAR(opponentLeft); HP_BAR(playerRight); HP_BAR(opponentRight); }
+    }
+}
+
 SINGLE_BATTLE_TEST("Damp prevents explosion-like moves from self")
 {
     u32 move;

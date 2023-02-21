@@ -5017,10 +5017,17 @@ static void Cmd_jumpifabilitypresent(void)
 {
     CMD_ARGS(u16 ability, const u8 *jumpInstr);
 
-    if (IsAbilityOnField(cmd->ability))
+    u16 ability = cmd->ability;
+    u32 abilityBattler = IsAbilityOnField(ability);
+    if (abilityBattler)
+    {
+        gBattlerAbility = abilityBattler - 1;
         gBattlescriptCurrInstr = cmd->jumpInstr;
+    }
     else
+    {
         gBattlescriptCurrInstr = cmd->nextInstr;
+    }
 }
 
 static void Cmd_endselectionscript(void)
@@ -11183,14 +11190,15 @@ static void Cmd_tryexplosion(void)
 {
     CMD_ARGS();
 
+    u32 dampBattler;
     if (gBattleControllerExecFlags)
         return;
 
-    if ((gBattlerTarget = IsAbilityOnField(ABILITY_DAMP)))
+    if ((dampBattler = IsAbilityOnField(ABILITY_DAMP)))
     {
         // Failed, a battler has Damp
         gLastUsedAbility = ABILITY_DAMP;
-        RecordAbilityBattle(--gBattlerTarget, ABILITY_DAMP);
+        gBattlerTarget = --dampBattler;
         gBattlescriptCurrInstr = BattleScript_DampStopsExplosion;
         return;
     }
@@ -11200,14 +11208,6 @@ static void Cmd_tryexplosion(void)
     BtlController_EmitHealthBarUpdate(BUFFER_A, INSTANT_HP_BAR_DROP);
     MarkBattlerForControllerExec(gActiveBattler);
     gBattlescriptCurrInstr = cmd->nextInstr;
-
-    for (gBattlerTarget = 0; gBattlerTarget < gBattlersCount; gBattlerTarget++)
-    {
-        if (gBattlerTarget == gBattlerAttacker)
-            continue;
-        if (IsBattlerAlive(gBattlerTarget))
-            break;
-    }
 }
 
 static void Cmd_setatkhptozero(void)
@@ -16031,6 +16031,17 @@ void BS_CalcMetalBurstDmg(void)
         gSpecialStatuses[gBattlerAttacker].ppNotAffectedByPressure = TRUE;
         gBattlescriptCurrInstr = cmd->failInstr;
     }
+}
+
+void BS_JumpIfMoreThanHalfHP(void)
+{
+    NATIVE_ARGS(u8 battler, const u8 *jumpInstr);
+
+    u8 battler = GetBattlerForBattleScript(cmd->battler);
+    if (gBattleMons[battler].hp > (gBattleMons[battler].maxHP + 1) / 2)
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 void BS_JumpIfHoldEffect(void)
