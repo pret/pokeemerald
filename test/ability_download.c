@@ -4,7 +4,7 @@
 ASSUMPTIONS
 {
     ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
-    ASSUME(gBattleMoves[MOVE_TRI_ATTACK].split == SPLIT_PHYSICAL);
+    ASSUME(gBattleMoves[MOVE_TRI_ATTACK].split == SPLIT_SPECIAL);
 }
 
 SINGLE_BATTLE_TEST("Download raises Attack if player has lower Def than Sp.Def", s16 damage)
