@@ -1,17 +1,17 @@
 #include "global.h"
 #include "test_battle.h"
 
-SINGLE_BATTLE_TEST("Blaze boosts Fire-type moves in a pinch", s16 damage)
+SINGLE_BATTLE_TEST("Overgrow boosts Grass-type moves in a pinch", s16 damage)
 {
     u16 hp;
     PARAMETRIZE { hp = 99; }
     PARAMETRIZE { hp = 33; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_EMBER].type == TYPE_FIRE);
-        PLAYER(SPECIES_CHARMANDER) { Ability(ABILITY_BLAZE); MaxHP(99); HP(hp); }
+        ASSUME(gBattleMoves[MOVE_VINE_WHIP].type == TYPE_GRASS);
+        PLAYER(SPECIES_BULBASAUR) { Ability(ABILITY_OVERGROW); MaxHP(99); HP(hp); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_EMBER); }
+        TURN { MOVE(player, MOVE_VINE_WHIP); }
     } SCENE {
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {

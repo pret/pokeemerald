@@ -2128,9 +2128,14 @@ BattleScript_EffectHitSwitchTarget:
 	moveendall
 	jumpifability BS_TARGET, ABILITY_SUCTION_CUPS, BattleScript_AbilityPreventsPhasingOut
 	jumpifstatus3 BS_TARGET, STATUS3_ROOTED, BattleScript_PrintMonIsRooted
-	tryhitswitchtarget BattleScript_EffectHitSwitchTargetMoveEnd
-BattleScript_EffectHitSwitchTargetMoveEnd:
-	end
+	tryhitswitchtarget BattleScript_MoveEnd
+	forcerandomswitch BattleScript_HitSwitchTargetForceRandomSwitchFailed
+	goto BattleScript_MoveEnd
+
+BattleScript_HitSwitchTargetForceRandomSwitchFailed:
+	hitswitchtargetfailed
+	setbyte sSWITCH_CASE, B_SWITCH_NORMAL
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectClearSmog:
 	setmoveeffect MOVE_EFFECT_CLEAR_SMOG
@@ -3708,7 +3713,6 @@ BattleScript_EffectRoar::
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
 	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
 	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_ButItFailed
-BattleScript_ForceRandomSwitch::
 	forcerandomswitch BattleScript_ButItFailed
 
 BattleScript_EffectMultiHit::
