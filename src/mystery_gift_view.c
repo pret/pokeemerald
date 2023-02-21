@@ -310,7 +310,7 @@ s32 WonderCard_Exit(bool32 useCancel)
         FreeMonIconPalettes();
         break;
     case 5:
-        PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, useCancel);
+        PrintMysteryGiftOrEReaderHeader(gGiftIsFromEReader, useCancel);
         CopyBgTilemapBufferToVram(0);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         break;
@@ -785,7 +785,7 @@ s32 WonderNews_Exit(bool32 useCancel)
         }
         break;
     case 5:
-        PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, useCancel);
+        PrintMysteryGiftOrEReaderHeader(gGiftIsFromEReader, useCancel);
         MG_DrawCheckerboardPattern(3);
         CopyBgTilemapBufferToVram(0);
         CopyBgTilemapBufferToVram(3);

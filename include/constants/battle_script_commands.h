@@ -74,6 +74,7 @@
 #define BS_PLAYER2                  13 // for Cmd_updatestatusicon
 #define BS_OPPONENT2                14
 #define BS_ABILITY_BATTLER          15
+#define BS_ATTACKER_PARTNER         16
 
 // Cmd_accuracycheck
 #define NO_ACC_CALC_CHECK_LOCK_ON 0xFFFF
@@ -256,6 +257,8 @@
 #define VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES   165
 #define VARIOUS_JUMP_IF_NO_VALID_TARGETS            166
 #define VARIOUS_JUMP_IF_EMERGENCY_EXITED            167
+#define VARIOUS_STORE_HEALING_WISH                  168
+#define VARIOUS_HIT_SWITCH_TARGET_FAILED            169
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

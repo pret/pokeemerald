@@ -204,11 +204,7 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
     else
         holdEffect = ItemId_GetHoldEffect(item);
 
-    #ifdef ITEM_ULTRANECROZIUM_Z
-    if (holdEffect == HOLD_EFFECT_Z_CRYSTAL || item == ITEM_ULTRANECROZIUM_Z)
-    #else
     if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
-    #endif
     {
         u16 zMove = GetSignatureZMove(move, gBattleMons[battlerId].species, item);
         if (zMove != MOVE_NONE)
