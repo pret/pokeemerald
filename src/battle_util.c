@@ -304,14 +304,6 @@ void HandleAction_UseMove(void)
         gCurrentMove = gBattleStruct->zmove.toBeUsed[gBattlerAttacker];
     }
 
-    // check max move used
-    if (gBattleStruct->dynamax.usingMaxMove[gBattlerAttacker])
-    {
-        gCurrentMove = gChosenMove = GetMaxMove(gBattlerAttacker, gCurrentMove);
-        gBattleStruct->dynamax.activeSplit = gBattleStruct->dynamax.splits[gBattlerAttacker];
-        gBattleStruct->moveTarget[gBattlerAttacker] = GetMoveTarget(gCurrentMove, NO_TARGET_OVERRIDE);
-    }
-
     if (gBattleMons[gBattlerAttacker].hp != 0)
     {
         if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
@@ -323,6 +315,14 @@ void HandleAction_UseMove(void)
     // Set dynamic move type.
     SetTypeBeforeUsingMove(gChosenMove, gBattlerAttacker);
     GET_MOVE_TYPE(gChosenMove, moveType);
+
+    // check max move used
+    if (gBattleStruct->dynamax.usingMaxMove[gBattlerAttacker])
+    {
+        gCurrentMove = gChosenMove = GetMaxMove(gBattlerAttacker, gCurrentMove);
+        gBattleStruct->dynamax.activeSplit = gBattleStruct->dynamax.splits[gBattlerAttacker];
+        gBattleStruct->moveTarget[gBattlerAttacker] = GetMoveTarget(gCurrentMove, NO_TARGET_OVERRIDE);
+    }
 
     // choose target
     side = BATTLE_OPPOSITE(GetBattlerSide(gBattlerAttacker));
@@ -7918,7 +7918,7 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
             return FALSE;
     }
 
-    // Max Moves bypass any protection except Max Guard
+    // Max Moves bypass any protection except Max Guard.
     if (IsMaxMove(move))
     {
         if (gProtectStructs[battlerId].maxGuarded)

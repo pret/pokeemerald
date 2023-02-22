@@ -89,6 +89,11 @@ u16 GetMaxMove(u16 battlerId, u16 baseMove)
     {
 		move = MOVE_MAX_GUARD;
     }
+	else if (gBattleStruct->dynamicMoveType) // unsure of how to deal with Hidden Power
+	{
+		move = sMaxMoveTable[gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK];
+        gBattleStruct->dynamax.splits[battlerId] = gBattleMoves[baseMove].split;
+	}
 	else
     {
 		move = sMaxMoveTable[gBattleMoves[baseMove].type];
