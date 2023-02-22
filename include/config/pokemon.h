@@ -13,11 +13,14 @@
 #define P_EGG_HATCH_LEVEL           GEN_LATEST  // Since Gen 4, Pokémon will hatch from eggs at level 1 instead of 5.
 #define P_BALL_INHERITING           GEN_LATEST  // Since Gen 6, Eggs from the Daycare will inherit the Poké Ball from their mother. From Gen7 onwards, the father can pass it down as well, as long as it's of the same species as the mother.
 
-// Other settings
+// Species-specific settings
 #define P_SHEDINJA_BALL             GEN_LATEST  // Since Gen 4, Shedinja requires a Poké Ball for its evolution. In Gen 3, Shedinja inherits Nincada's Ball.
-#define P_LEGENDARY_PERFECT_IVS     GEN_LATEST  // Since Gen 6, Legendaries, Mythicals and Ultra Beasts found in the wild or given through gifts have at least 3 perfect IVs.
 #define P_KADABRA_EVERSTONE         GEN_LATEST  // Since Gen 4, Kadabra can evolve even when holding an Everstone.
 #define P_HIPPO_GENDER_DIFF_ICONS   TRUE        // If TRUE, will give Hippopotas and Hippowdon custom icons for their female forms.
+#define P_SHUCKLE_BERRY_JUICE       TRUE        // In Gen 2, Shuckle had a 1/16 chance of converting Berry that it's holding into Berry Juice. Setting this to TRUE will allow to do this with an Oran Berry, which is the spiritual succesor of the Berry item.
+
+// Other settings
+#define P_LEGENDARY_PERFECT_IVS     GEN_LATEST  // Since Gen 6, Legendaries, Mythicals and Ultra Beasts found in the wild or given through gifts have at least 3 perfect IVs.
 
 // Flag settings
 // To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.

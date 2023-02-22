@@ -4806,8 +4806,8 @@ void AnimTask_CycleMagicalLeafPal(u8 taskId)
 
 void AnimNeedleArmSpike(struct Sprite *sprite)
 {
-    u8 a;
-    u8 b;
+    s16 a;
+    s16 b;
     u16 c;
     u16 x;
     u16 y;
@@ -4820,13 +4820,27 @@ void AnimNeedleArmSpike(struct Sprite *sprite)
     {
         if (gBattleAnimArgs[0] == 0)
         {
-            a = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
-            b = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
+            if (IsDoubleBattle())
+            {
+                SetAverageBattlerPositions(gBattleAnimAttacker, TRUE, &a, &b);
+            }
+            else
+            {
+                a = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+                b = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
+            }
         }
         else
         {
-            a = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
-            b = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
+            if (IsDoubleBattle())
+            {
+                SetAverageBattlerPositions(gBattleAnimTarget, TRUE, &a, &b);
+            }
+            else
+            {
+                a = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+                b = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
+            }
         }
 
         sprite->data[0] = gBattleAnimArgs[4];

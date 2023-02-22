@@ -7,7 +7,7 @@
 #include "test.h"
 #include "test_runner.h"
 
-#define TIMEOUT_SECONDS 30
+#define TIMEOUT_SECONDS 55
 
 void CB2_TestRunner(void);
 
@@ -60,7 +60,6 @@ void CB2_TestRunner(void)
         gTestRunnerState.exitCode = 0;
         gTestRunnerState.tests = 0;
         gTestRunnerState.passes = 0;
-        gTestRunnerState.skips = 0;
         gTestRunnerState.skipFilename = NULL;
         gTestRunnerState.test = __start_tests - 1;
         break;
@@ -70,20 +69,15 @@ void CB2_TestRunner(void)
 
         if (gTestRunnerState.test == __stop_tests)
         {
-            MgbaPrintf_("%s%d/%d PASSED\e[0m", gTestRunnerState.exitCode == 0 ? "\e[32m" : "\e[31m", gTestRunnerState.passes, gTestRunnerState.tests);
-            if (gTestRunnerState.skips)
-            {
-                if (gTestRunnerSkipIsFail)
-                    MgbaPrintf_("\e[31m%d SKIPPED\e[0m", gTestRunnerState.skips);
-                else
-                    MgbaPrintf_("%d SKIPPED", gTestRunnerState.skips);
-            }
             gTestRunnerState.state = STATE_EXIT;
             return;
         }
 
-        if (!PrefixMatch(gTestRunnerArgv, gTestRunnerState.test->name))
+        if (gTestRunnerState.test->runner != &gAssumptionsRunner
+          && !PrefixMatch(gTestRunnerArgv, gTestRunnerState.test->name))
+        {
             return;
+        }
 
         // Greedily assign tests to processes based on estimated cost.
         // TODO: Make processCosts a min heap.
@@ -111,6 +105,7 @@ void CB2_TestRunner(void)
                 return;
         }
 
+        MgbaPrintf_(":N%s", gTestRunnerState.test->name);
         gTestRunnerState.state = STATE_REPORT_RESULT;
         gTestRunnerState.result = TEST_RESULT_PASS;
         gTestRunnerState.expectedResult = TEST_RESULT_PASS;
@@ -130,7 +125,6 @@ void CB2_TestRunner(void)
         }
         else
         {
-            MgbaPrintf_(":N%s", gTestRunnerState.test->name);
             if (gTestRunnerState.test->runner->setUp)
                 gTestRunnerState.test->runner->setUp(gTestRunnerState.test->data);
             gTestRunnerState.test->runner->run(gTestRunnerState.test->data);
@@ -149,12 +143,6 @@ void CB2_TestRunner(void)
         {
             if (gTestRunnerState.result != TEST_RESULT_PASS)
                 gTestRunnerState.skipFilename = gTestRunnerState.test->filename;
-        }
-        else if (gTestRunnerState.result == TEST_RESULT_SKIP)
-        {
-            gTestRunnerState.skips++;
-            if (gTestRunnerSkipIsFail)
-                gTestRunnerState.exitCode = 1;
         }
         else
         {
@@ -206,7 +194,10 @@ void CB2_TestRunner(void)
             default: result = "UNKNOWN"; break;
             }
 
-            MgbaPrintf_(":R%s%s\e[0m", color, result);
+            if (gTestRunnerState.expectedResult == gTestRunnerState.result)
+                MgbaPrintf_(":P%s%s\e[0m", color, result);
+            else
+                MgbaPrintf_(":F%s%s\e[0m", color, result);
         }
 
         break;

@@ -398,7 +398,8 @@
 #define EFFECT_VICTORY_DANCE                392
 #define EFFECT_TEATIME                      393
 #define EFFECT_ATTACK_UP_USER_ALLY          394 // Howl 8th Gen
+#define EFFECT_SHELL_TRAP                   395
 
-#define NUM_BATTLE_MOVE_EFFECTS             395
+#define NUM_BATTLE_MOVE_EFFECTS             396
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

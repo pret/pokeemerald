@@ -1317,10 +1317,21 @@
 	.2byte \holdEffect
 	.4byte \jumpInstr
 	.endm
+	
+	.macro jumpifmorethanhalfHP battler:req, jumpInstr:req
+	callnative BS_JumpIfMoreThanHalfHP
+	.byte \battler
+	.4byte \jumpInstr
+	.endm
 
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
+	.endm
+	
+	@ Stores Healing Wish effect.
+	.macro storehealingwish battler:req
+	various \battler, VARIOUS_STORE_HEALING_WISH
 	.endm
 
 	.macro setmagiccoattarget battler:req
@@ -2044,11 +2055,6 @@
 	various \battler, VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES
 	.endm
 
-	.macro jumpifnovalidtargets jumpInstr:req
-	various BS_ATTACKER, VARIOUS_JUMP_IF_NO_VALID_TARGETS
-	.4byte \jumpInstr
-	.endm
-
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER, \stat | \stages << 3 | \down << 7
@@ -2241,4 +2247,13 @@
 	.macro jumpifemergencyexited battler:req, jumpInstr:req
 	various \battler, VARIOUS_JUMP_IF_EMERGENCY_EXITED
 	.4byte \jumpInstr
+	.endm
+
+	.macro jumpifshelltrap battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_SHELL_TRAP
+	.4byte \ptr
+	.endm
+
+	.macro hitswitchtargetfailed
+	various 0, VARIOUS_HIT_SWITCH_TARGET_FAILED
 	.endm

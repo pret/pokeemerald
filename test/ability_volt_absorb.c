@@ -63,6 +63,30 @@ SINGLE_BATTLE_TEST("Volt Absorb is only triggered once on multi strike moves")
     }
 }
 
+DOUBLE_BATTLE_TEST("Volt Absorb does not stop Electric Typed Explosion from damaging other pokemon", s16 damage1, s16 damage2) // Fixed issue #1961
+{
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_EXPLOSION].effect == EFFECT_EXPLOSION);
+        ASSUME(gBattleMoves[MOVE_EXPLOSION].type == TYPE_NORMAL);
+        PLAYER(SPECIES_JOLTEON) { Ability(ABILITY_VOLT_ABSORB); HP(1); MaxHP(TEST_MAX_HP); }
+        PLAYER(SPECIES_ABRA);
+        OPPONENT(SPECIES_GRAVELER_ALOLAN) { Ability(ABILITY_GALVANIZE); }
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(opponentLeft, MOVE_EXPLOSION); }
+    } SCENE {
+        ABILITY_POPUP(playerLeft, ABILITY_VOLT_ABSORB);
+        HP_BAR(playerLeft, hp: TEST_MAX_HP / 4 + 1);
+        MESSAGE("Jolteon restored HP using its Volt Absorb!");
+        HP_BAR(playerRight, captureDamage: &results->damage1);
+        HP_BAR(opponentRight, captureDamage: &results->damage2);
+    }
+    FINALLY {
+        EXPECT_NE(results[0].damage1, 0);
+        EXPECT_NE(results[0].damage2, 0);
+    }
+}
+
 SINGLE_BATTLE_TEST("Volt Absorb prevents Cell Battery from activating")
 {
     GIVEN {
@@ -75,11 +99,11 @@ SINGLE_BATTLE_TEST("Volt Absorb prevents Cell Battery from activating")
         ABILITY_POPUP(player, ABILITY_VOLT_ABSORB);
         HP_BAR(player, hp: TEST_MAX_HP / 4 + 1);
         MESSAGE("Jolteon restored HP using its Volt Absorb!");
-        NONE_OF { 
+        NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
             MESSAGE("Using Cell Battery, the attack of Jolteon rose!");
         }
-        
+
     }
 }

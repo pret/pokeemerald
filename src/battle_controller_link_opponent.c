@@ -1149,7 +1149,9 @@ static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit)
 
     ClearTemporarySpeciesSpriteData(battlerId, dontClearSubstituteBit);
     gBattlerPartyIndexes[battlerId] = gBattleResources->bufferA[battlerId][1];
-    species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
+    species = GetIllusionMonSpecies(battlerId);
+    if (species == SPECIES_NONE)
+        species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
     gBattleControllerData[battlerId] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
     BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[battlerId]], battlerId);
     SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));

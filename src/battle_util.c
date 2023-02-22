@@ -948,7 +948,8 @@ void HandleAction_ActionFinished(void)
                 u8 battler1 = gBattlerByTurnOrder[i];
                 u8 battler2 = gBattlerByTurnOrder[j];
 
-                if (gProtectStructs[battler1].quash || gProtectStructs[battler2].quash)
+                if (gProtectStructs[battler1].quash || gProtectStructs[battler2].quash
+                    || gProtectStructs[battler1].shellTrap || gProtectStructs[battler2].shellTrap)
                     continue;
 
                 // We recalculate order only for action of the same priority. If any action other than switch/move has been taken, they should
@@ -3301,7 +3302,7 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
     return FALSE;
 }
 
-#define FAINTED_ACTIONS_MAX_CASE 7
+#define FAINTED_ACTIONS_MAX_CASE 8
 
 bool8 HandleFaintedMonActions(void)
 {
@@ -3386,7 +3387,19 @@ bool8 HandleFaintedMonActions(void)
             else
                 gBattleStruct->faintedActionsState = 4;
             break;
-        case 6:
+        case 6: // All battlers switch-in abilities happen here to prevent them happening against an empty field.
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (gBattleStruct->switchInAbilityPostponed & gBitTable[i])
+                {
+                    if (DoSwitchInAbilitiesItems(i))
+                        return TRUE;
+                    gBattleStruct->switchInAbilityPostponed &= ~(gBitTable[i]);
+                }
+            }
+            gBattleStruct->faintedActionsState++;
+            break;
+        case 7:
             if (ItemBattleEffects(ITEMEFFECT_NORMAL, 0, TRUE))
                 return TRUE;
             gBattleStruct->faintedActionsState++;
@@ -4749,6 +4762,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         case ABILITY_INTIMIDATE:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
+                gBattlerAttacker = battler;
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 SET_STATCHANGER(STAT_ATK, 1, TRUE);
                 BattleScriptPushCursorAndCallback(BattleScript_IntimidateActivates);
@@ -10264,6 +10278,14 @@ struct Pokemon *GetIllusionMonPtr(u32 battlerId)
 void ClearIllusionMon(u32 battlerId)
 {
     memset(&gBattleStruct->illusion[battlerId], 0, sizeof(gBattleStruct->illusion[battlerId]));
+}
+
+u32 GetIllusionMonSpecies(u32 battlerId)
+{
+    struct Pokemon *illusionMon = GetIllusionMonPtr(battlerId);
+    if (illusionMon != NULL)
+        return GetMonData(illusionMon, MON_DATA_SPECIES);
+    return SPECIES_NONE;
 }
 
 bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId)
