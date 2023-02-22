@@ -908,13 +908,13 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(GLASTRIER, gMonFrontPic_Glastrier),
     SPECIES_SPRITE(SPECTRIER, gMonFrontPic_Spectrier),
     SPECIES_SPRITE(CALYREX, gMonFrontPic_Calyrex),
-    SPECIES_SPRITE(WYRDEER, gMonFrontPic_CircledQuestionMark), //gMonFrontPic_Wyrdeer),
+    SPECIES_SPRITE(WYRDEER, gMonFrontPic_Wyrdeer),
     SPECIES_SPRITE(KLEAVOR, gMonFrontPic_Kleavor),
     SPECIES_SPRITE(URSALUNA, gMonFrontPic_Ursaluna),
-    SPECIES_SPRITE(BASCULEGION, gMonFrontPic_CircledQuestionMark), //gMonFrontPic_Basculegion),
-    SPECIES_SPRITE(SNEASLER, gMonFrontPic_CircledQuestionMark), //gMonFrontPic_Sneasler),
+    SPECIES_SPRITE(BASCULEGION, gMonFrontPic_Basculegion),
+    SPECIES_SPRITE(SNEASLER, gMonFrontPic_Sneasler),
     SPECIES_SPRITE(OVERQWIL, gMonFrontPic_Overqwil),
-    SPECIES_SPRITE(ENAMORUS, gMonFrontPic_CircledQuestionMark), //gMonFrontPic_Enamorus),
+    SPECIES_SPRITE(ENAMORUS, gMonFrontPic_Enamorus),
 #endif
     SPECIES_SPRITE(VENUSAUR_MEGA, gMonFrontPic_VenusaurMega),
     SPECIES_SPRITE(CHARIZARD_MEGA_X, gMonFrontPic_CharizardMegaX),
@@ -1023,7 +1023,7 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(QWILFISH_HISUIAN, gMonFrontPic_QwilfishHisuian),
     SPECIES_SPRITE(SNEASEL_HISUIAN, gMonFrontPic_SneaselHisuian),
 #if P_GEN_5_POKEMON == TRUE
-    SPECIES_SPRITE(SAMUROTT_HISUIAN, gMonFrontPic_CircledQuestionMark), //gMonFrontPic_SamurottHisuian),
+    SPECIES_SPRITE(SAMUROTT_HISUIAN, gMonFrontPic_SamurottHisuian),
     SPECIES_SPRITE(LILLIGANT_HISUIAN, gMonFrontPic_LilligantHisuian),
     SPECIES_SPRITE(ZORUA_HISUIAN, gMonFrontPic_ZoruaHisuian),
     SPECIES_SPRITE(ZOROARK_HISUIAN, gMonFrontPic_ZoroarkHisuian),
@@ -1035,7 +1035,7 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(AVALUGG_HISUIAN, gMonFrontPic_AvaluggHisuian),
 #endif
 #if P_GEN_7_POKEMON == TRUE
-    SPECIES_SPRITE(DECIDUEYE_HISUIAN, gMonFrontPic_CircledQuestionMark), //gMonFrontPic_DecidueyeHisuian),
+    SPECIES_SPRITE(DECIDUEYE_HISUIAN, gMonFrontPic_DecidueyeHisuian),
 #endif
 
     SPECIES_SPRITE(PIKACHU_COSPLAY, gMonFrontPic_PikachuCosplay),

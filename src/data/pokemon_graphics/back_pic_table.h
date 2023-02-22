@@ -908,13 +908,13 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(GLASTRIER, gMonBackPic_Glastrier),
     SPECIES_SPRITE(SPECTRIER, gMonBackPic_Spectrier),
     SPECIES_SPRITE(CALYREX, gMonBackPic_Calyrex),
-    SPECIES_SPRITE(WYRDEER, gMonBackPic_CircledQuestionMark), //gMonBackPic_Wyrdeer),
+    SPECIES_SPRITE(WYRDEER, gMonBackPic_Wyrdeer),
     SPECIES_SPRITE(KLEAVOR, gMonBackPic_Kleavor),
     SPECIES_SPRITE(URSALUNA, gMonBackPic_Ursaluna),
-    SPECIES_SPRITE(BASCULEGION, gMonBackPic_CircledQuestionMark), //gMonBackPic_Basculegion),
-    SPECIES_SPRITE(SNEASLER, gMonBackPic_CircledQuestionMark), //gMonBackPic_Sneasler),
+    SPECIES_SPRITE(BASCULEGION, gMonBackPic_Basculegion),
+    SPECIES_SPRITE(SNEASLER, gMonBackPic_Sneasler),
     SPECIES_SPRITE(OVERQWIL, gMonBackPic_Overqwil),
-    SPECIES_SPRITE(ENAMORUS, gMonBackPic_CircledQuestionMark), //gMonBackPic_Enamorus),
+    SPECIES_SPRITE(ENAMORUS, gMonBackPic_Enamorus),
 #endif
 
     SPECIES_SPRITE(VENUSAUR_MEGA, gMonBackPic_VenusaurMega),
@@ -1024,7 +1024,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(QWILFISH_HISUIAN, gMonBackPic_QwilfishHisuian),
     SPECIES_SPRITE(SNEASEL_HISUIAN, gMonBackPic_SneaselHisuian),
 #if P_GEN_5_POKEMON == TRUE
-    SPECIES_SPRITE(SAMUROTT_HISUIAN, gMonBackPic_CircledQuestionMark), //gMonBackPic_SamurottHisuian),
+    SPECIES_SPRITE(SAMUROTT_HISUIAN, gMonBackPic_SamurottHisuian),
     SPECIES_SPRITE(LILLIGANT_HISUIAN, gMonBackPic_LilligantHisuian),
     SPECIES_SPRITE(ZORUA_HISUIAN, gMonBackPic_ZoruaHisuian),
     SPECIES_SPRITE(ZOROARK_HISUIAN, gMonBackPic_ZoroarkHisuian),
@@ -1036,7 +1036,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(AVALUGG_HISUIAN, gMonBackPic_AvaluggHisuian),
 #endif
 #if P_GEN_8_POKEMON == TRUE
-    SPECIES_SPRITE(DECIDUEYE_HISUIAN, gMonBackPic_CircledQuestionMark), //gMonBackPic_DecidueyeHisuian),
+    SPECIES_SPRITE(DECIDUEYE_HISUIAN, gMonBackPic_DecidueyeHisuian),
 #endif
 
     SPECIES_SPRITE(PIKACHU_COSPLAY, gMonBackPic_PikachuCosplay),
