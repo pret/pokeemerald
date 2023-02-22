@@ -453,6 +453,7 @@ extern const u8 BattleScript_BattlerFormChangeWithStringEnd3[];
 extern const u8 BattleScript_DampPreventsAftermath[];
 extern const u8 BattleScript_HealingWishActivates[];
 extern const u8 BattleScript_LunarDanceActivates[];
+extern const u8 BattleScript_ShellTrapSetUp[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
