@@ -245,6 +245,9 @@
 #define VARIOUS_TRY_SYMBIOSIS                       154
 #define VARIOUS_CAN_TELEPORT                        155
 #define VARIOUS_GET_BATTLER_SIDE                    156
+#define VARIOUS_SET_MAX_MOVE_EFFECT                 157
+#define VARIOUS_JUMP_IF_TARGET_NOT_ALLY             158
+#define VARIOUS_JUMP_IF_TARGET_ABSENT               159
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

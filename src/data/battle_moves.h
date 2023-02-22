@@ -14355,6 +14355,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_PSYCHIC_TERRAIN,
 	},
+
 	[MOVE_MAX_ROCKFALL] =
 	{
 		.effect = EFFECT_MAX_MOVE,
@@ -14369,6 +14370,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_SANDSTORM,
 	},
+
 	[MOVE_MAX_QUAKE] =
 	{
 		.effect = EFFECT_MAX_MOVE,
@@ -14383,6 +14385,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_RAISE_TEAM_SP_DEF,
 	},
+
 	[MOVE_MAX_DARKNESS] =
 	{
 		.effect = EFFECT_MAX_MOVE,
@@ -14397,6 +14400,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_LOWER_SP_DEF,
 	},
+
 	[MOVE_MAX_OVERGROWTH] =
 	{
 		.effect = EFFECT_MAX_MOVE,
@@ -14411,6 +14415,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.split = SPLIT_PHYSICAL,
 		.argument = MAX_EFFECT_GRASSY_TERRAIN,
 	},
+
 	[MOVE_MAX_STEELSPIKE] =
 	{
 		.effect = EFFECT_MAX_MOVE,

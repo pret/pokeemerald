@@ -148,6 +148,7 @@ struct ProtectStruct
     u16 quickDraw:1;
     u16 beakBlastCharge:1;
     u16 quash:1;
+    u16 maxGuarded:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;
@@ -510,6 +511,14 @@ struct ZMoveData
     u8 splits[MAX_BATTLERS_COUNT];
 };
 
+struct DynamaxData
+{
+    u8 dynamaxTurns[MAX_BATTLERS_COUNT];
+    u8 usingMaxMove[MAX_BATTLERS_COUNT];
+    u8 activeSplit;
+    u8 splits[MAX_BATTLERS_COUNT];
+};
+
 struct StolenItem
 {
     u16 originalItem:15;
@@ -615,6 +624,7 @@ struct BattleStruct
     bool8 throwingPokeBall;
     struct MegaEvolutionData mega;
     struct ZMoveData zmove;
+    struct DynamaxData dynamax;
     const u8 *trainerSlideMsg;
     bool8 trainerSlideLowHpMsgDone;
     u8 introState;

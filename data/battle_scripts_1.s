@@ -417,14 +417,6 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectTerrainHit              @ EFFECT_DAMAGE_SET_TERRAIN
 	.4byte BattleScript_EffectMaxMove 				  @ EFFECT_MAX_MOVE
 
-BattleScript_EffectMaxMove::
-	attackcanceler
-	@setmaxmoveeffect
-	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
-	attackstring
-	ppreduce
-	goto BattleScript_HitFromCritCalc
-
 BattleScript_AffectionBasedEndurance::
 	playanimation BS_TARGET, B_ANIM_AFFECTION_HANGED_ON
 	printstring STRINGID_TARGETTOUGHEDITOUT
@@ -9888,4 +9880,68 @@ BattleScript_SymbiosisActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_SYMBIOSISITEMPASS
 	waitmessage B_WAIT_TIME_LONG
+	return
+
+@@@ MAX MOVES @@@
+BattleScript_EffectMaxMove::
+	attackcanceler
+	setmaxmoveeffect
+	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
+	attackstring
+	ppreduce
+	goto BattleScript_HitFromCritCalc
+
+BattleScript_EffectRaiseSideStats::
+	savetarget
+	setbyte gBattlerTarget, 0
+BattleScript_RaiseSideStatsLoop:
+	jumpiftargetnotally BattleScript_RaiseSideStatsIncrement
+	jumpiftargetabsent BattleScript_RaiseSideStatsIncrement
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_RaiseSideStatsIncrement
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_RaiseSideStatsIncrement
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_RaiseSideStatsIncrement:
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_RaiseSideStatsLoop
+BattleScript_RaiseSideStatsEnd:
+	restoretarget
+	return
+
+BattleScript_EffectLowerSideStats::
+	savetarget
+	setbyte gBattlerTarget, 0
+BattleScript_LowerSideStatsLoop:
+	jumpiftargetally BattleScript_LowerSideStatsIncrement
+	jumpiftargetabsent BattleScript_LowerSideStatsIncrement
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_LowerSideStatsIncrement
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_LowerSideStatsIncrement
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_LowerSideStatsIncrement:
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_LowerSideStatsLoop
+BattleScript_LowerSideStatsEnd:
+	restoretarget
+	return
+
+BattleScript_EffectSetWeather::
+	playanimation 0, B_ANIM_MAX_SET_WEATHER
+	printfromtable gMoveWeatherChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_WeatherFormChanges
+	return
+
+BattleScript_EffectSetTerrain::
+	printfromtable gTerrainStringIds
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG
+	call BattleScript_TerrainSeedLoop
+	jumpifabilitypresent ABILITY_MIMICRY, BattleScript_ApplyMimicry
 	return

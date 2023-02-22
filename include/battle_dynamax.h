@@ -1,5 +1,5 @@
-#ifndef GUARD_BATTLE_RAID_H
-#define GUARD_BATTLE_RAID_H
+#ifndef GUARD_BATTLE_DYNAMAX_H
+#define GUARD_BATTLE_DYNAMAX_H
 
 enum MaxMoveEffect
 {
@@ -51,5 +51,9 @@ enum MaxMoveEffect
 	MAX_EFFECT_LOWER_SPEED_2_FOES,
 	MAX_EFFECT_FIRE_SPIN_FOES,
 };
+
+bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove);
+u16 GetMaxMove(u16 battlerId, u16 baseMove);
+bool8 IsMaxMove(u16 move);
 
 #endif

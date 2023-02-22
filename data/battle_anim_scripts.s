@@ -916,6 +916,7 @@ gBattleAnims_General::
 	.4byte General_ShellTrapSetUp           @ B_ANIM_SHELL_TRAP_SETUP
 	.4byte General_ZMoveActivate            @ B_ANIM_ZMOVE_ACTIVATE
 	.4byte General_AffectionHangedOn        @ B_ANIM_AFFECTION_HANGED_ON
+	.4byte General_SetWeather 				@ B_ANIM_MAX_SET_WEATHER
 
 	.align 2
 gBattleAnims_Special::
@@ -30654,23 +30655,71 @@ SoulStealingSevenStarStrikeExplosion:
 	return
 
 @@@@@@@@@@ MAX MOVES @@@@@@@@@@
-Move_MAX_GUARD:
-Move_MAX_STRIKE:
+General_SetWeather::
+	createvisualtask AnimTask_GetWeatherToSet, 2
+	jumpreteq 1, General_Sun
+	jumpreteq 2, General_Rain
+	jumpreteq 3, General_Sandstorm
+	jumpreteq 4, General_Hail
+	end
+
 Move_MAX_KNUCKLE:
-Move_MAX_AIRSTREAM:
-Move_MAX_OOZE:
 Move_MAX_QUAKE:
 Move_MAX_ROCKFALL:
 Move_MAX_FLUTTERBY:
 Move_MAX_PHANTASM:
 Move_MAX_STEELSPIKE:
-Move_MAX_FLARE:
-Move_MAX_GEYSER:
-Move_MAX_OVERGROWTH:
-Move_MAX_LIGHTNING:
 Move_MAX_HAILSTORM:
 Move_MAX_MINDSTORM:
 Move_MAX_WYRMWIND:
 Move_MAX_DARKNESS:
 Move_MAX_STARFALL:
+	end
+
+Move_MAX_GUARD:
+	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	waitforvisualfinish
+	goto Move_PROTECT
+	end
+
+Move_MAX_STRIKE::
+	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	waitforvisualfinish
+	goto Move_GIGA_IMPACT
+	end
+
+Move_MAX_AIRSTREAM::
+	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	waitforvisualfinish
+	goto Move_AEROBLAST
+	end
+
+Move_MAX_OOZE::
+	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	waitforvisualfinish
+	goto Move_GUNK_SHOT
+	end
+
+Move_MAX_FLARE::
+	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	waitforvisualfinish
+	goto Move_BLAST_BURN
+	end
+
+Move_MAX_GEYSER::
+	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	waitforvisualfinish
+	goto Move_HYDRO_CANNON
+	end
+
+Move_MAX_OVERGROWTH::
+	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	waitforvisualfinish
+	goto Move_FRENZY_PLANT
+	end
+
+Move_MAX_LIGHTNING::
+	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	waitforvisualfinish
+	goto Move_ZAP_CANNON
 	end

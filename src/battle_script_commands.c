@@ -3616,6 +3616,89 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     gBattlescriptCurrInstr = BattleScript_DefDownSpeedUp;
                 }
                 break;
+            // MAX MOVE EFFECTS
+            case MOVE_EFFECT_RAISE_SIDE_STATS:
+                if (!NoAliveMonsForEitherParty())
+                {
+                    SET_STATCHANGER(gBattleMoves[gCurrentMove].argument, 1, FALSE); // see enum MaxMoveEffect
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_EffectRaiseSideStats;
+                    break;
+                }
+            case MOVE_EFFECT_LOWER_SIDE_STATS:
+                if (!NoAliveMonsForEitherParty())
+                {
+                    SET_STATCHANGER(gBattleMoves[gCurrentMove].argument - 5, 1, TRUE); // see enum MaxMoveEffect
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_EffectLowerSideStats;
+                    break;
+                }
+            case MOVE_EFFECT_WEATHER:
+            {
+                u8 weather, msg;
+                switch (gBattleMoves[gCurrentMove].argument)
+                {
+                    case MAX_EFFECT_SUN:
+                        weather = ENUM_WEATHER_SUN;
+                        msg = B_MSG_STARTED_SUNLIGHT;
+                        break;
+                    case MAX_EFFECT_RAIN:
+                        weather = ENUM_WEATHER_RAIN;
+                        msg = B_MSG_STARTED_RAIN;
+                        break;
+                    case MAX_EFFECT_SANDSTORM:
+                        weather = ENUM_WEATHER_SANDSTORM;
+                        msg = B_MSG_STARTED_SANDSTORM;
+                        break;
+                    case MAX_EFFECT_HAIL:
+                        weather = ENUM_WEATHER_HAIL;
+                        msg = B_MSG_STARTED_HAIL;
+                        break;
+                }
+                if (TryChangeBattleWeather(gBattlerAttacker, weather, FALSE))
+                {
+                    gBattleCommunication[MULTISTRING_CHOOSER] = msg;
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_EffectSetWeather;
+                }
+                break;
+            }
+            case MOVE_EFFECT_TERRAIN:
+            {
+                u32 statusFlag = 0;
+                u8 *timer = NULL;
+                switch (gBattleMoves[gCurrentMove].argument)
+                {
+                    case MAX_EFFECT_MISTY_TERRAIN:
+                        statusFlag = STATUS_FIELD_MISTY_TERRAIN, timer = &gFieldTimers.terrainTimer;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                        break;
+                    case MAX_EFFECT_GRASSY_TERRAIN:
+                        statusFlag = STATUS_FIELD_GRASSY_TERRAIN, timer = &gFieldTimers.terrainTimer;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                        break;
+                    case MAX_EFFECT_ELECTRIC_TERRAIN:
+                        statusFlag = STATUS_FIELD_ELECTRIC_TERRAIN, timer = &gFieldTimers.terrainTimer;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+                        break;
+                    case MAX_EFFECT_PSYCHIC_TERRAIN:
+                        statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN, timer = &gFieldTimers.terrainTimer;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+                        break;
+                }
+                if (!(gFieldStatuses & statusFlag) && statusFlag != 0)
+                {
+                    gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
+                    gFieldStatuses |= statusFlag;
+                    if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_TERRAIN_EXTENDER)
+                        *timer = 8;
+                    else
+                        *timer = 5;
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_EffectSetTerrain;
+                }
+                break;
+            }
             }
         }
     }
@@ -9898,6 +9981,49 @@ static void Cmd_various(void)
         else
             gBattleCommunication[0] = B_SIDE_OPPONENT;
         break;
+    case VARIOUS_SET_MAX_MOVE_EFFECT:
+        switch (gBattleMoves[gCurrentMove].argument)
+        {
+            case MAX_EFFECT_RAISE_TEAM_ATTACK:
+            case MAX_EFFECT_RAISE_TEAM_DEFENSE:
+            case MAX_EFFECT_RAISE_TEAM_SPEED:
+            case MAX_EFFECT_RAISE_TEAM_SP_ATK:
+            case MAX_EFFECT_RAISE_TEAM_SP_DEF:
+                gBattleScripting.moveEffect = MOVE_EFFECT_RAISE_SIDE_STATS;
+                break;
+            case MAX_EFFECT_LOWER_ATTACK:
+            case MAX_EFFECT_LOWER_DEFENSE:
+            case MAX_EFFECT_LOWER_SPEED:
+            case MAX_EFFECT_LOWER_SP_ATK:
+            case MAX_EFFECT_LOWER_SP_DEF:
+                gBattleScripting.moveEffect = MOVE_EFFECT_LOWER_SIDE_STATS;
+                break;
+            case MAX_EFFECT_SUN:
+            case MAX_EFFECT_RAIN:
+            case MAX_EFFECT_SANDSTORM:
+            case MAX_EFFECT_HAIL:
+                gBattleScripting.moveEffect = MOVE_EFFECT_WEATHER;
+                break;
+            case MAX_EFFECT_MISTY_TERRAIN:
+            case MAX_EFFECT_GRASSY_TERRAIN: // TODO: Grassy terrain not working?
+            case MAX_EFFECT_ELECTRIC_TERRAIN:
+            case MAX_EFFECT_PSYCHIC_TERRAIN:
+                gBattleScripting.moveEffect = MOVE_EFFECT_TERRAIN;
+                break;
+        }
+        break;
+    case VARIOUS_JUMP_IF_TARGET_NOT_ALLY:
+        if (GetBattlerSide(gBattlerTarget) != GetBattlerSide(gBattlerAttacker))
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
+    case VARIOUS_JUMP_IF_TARGET_ABSENT:
+        if (!IsBattlerAlive(gBattlerTarget))
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;
@@ -9947,6 +10073,11 @@ static void Cmd_setprotectlike(void)
             {
                 gProtectStructs[gBattlerAttacker].obstructed = TRUE;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            }
+            else if (gCurrentMove == MOVE_MAX_GUARD)
+            {
+                gProtectStructs[gBattlerAttacker].maxGuarded = TRUE;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PROTECTED_ITSELF;
             }
 
             gDisableStructs[gBattlerAttacker].protectUses++;

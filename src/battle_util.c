@@ -48,6 +48,7 @@
 #include "constants/pokemon.h"
 
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
+extern u8 gDynamaxMovePowers[MOVES_COUNT];
 
 /*
 NOTE: The data and functions in this file up until (but not including) sSoundMovesTable
@@ -301,6 +302,14 @@ void HandleAction_UseMove(void)
     if (gBattleStruct->zmove.toBeUsed[gBattlerAttacker] != MOVE_NONE && !IS_MOVE_STATUS(gCurrentMove))
     {
         gCurrentMove = gBattleStruct->zmove.toBeUsed[gBattlerAttacker];
+    }
+
+    // check max move used
+    if (gBattleStruct->dynamax.usingMaxMove[gBattlerAttacker])
+    {
+        gCurrentMove = gChosenMove = GetMaxMove(gBattlerAttacker, gCurrentMove);
+        gBattleStruct->dynamax.activeSplit = gBattleStruct->dynamax.splits[gBattlerAttacker];
+        gBattleStruct->moveTarget[gBattlerAttacker] = GetMoveTarget(gCurrentMove, NO_TARGET_OVERRIDE);
     }
 
     if (gBattleMons[gBattlerAttacker].hp != 0)
@@ -911,6 +920,7 @@ void HandleAction_ActionFinished(void)
     gBattleCommunication[4] = 0;
     gBattleScripting.multihitMoveEffect = 0;
     gBattleResources->battleScriptsStack->size = 0;
+    gBattleStruct->dynamax.usingMaxMove[gBattlerAttacker] = 0;
 
     #if B_RECALC_TURN_AFTER_ACTIONS >= GEN_8
     // i starts at `gCurrentTurnActionNumber` because we don't want to recalculate turn order for mon that have already
@@ -7908,6 +7918,15 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
             return FALSE;
     }
 
+    // Max Moves bypass any protection except Max Guard
+    if (IsMaxMove(move))
+    {
+        if (gProtectStructs[battlerId].maxGuarded)
+            return TRUE;
+        else
+            return FALSE;
+    }
+
     // Protective Pads doesn't stop Unseen Fist from bypassing Protect effects, so IsMoveMakingContact() isn't used here.
     // This means extra logic is needed to handle Shell Side Arm.
     if (GetBattlerAbility(gBattlerAttacker) == ABILITY_UNSEEN_FIST
@@ -8403,6 +8422,9 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
     case EFFECT_RISING_VOLTAGE:
         if (IsBattlerTerrainAffected(gBattlerTarget, STATUS_FIELD_ELECTRIC_TERRAIN))
             basePower *= 2;
+        break;
+    case EFFECT_MAX_MOVE:
+        basePower = gDynamaxMovePowers[gBattleMons[battlerAtk].moves[gBattleStruct->chosenMovePositions[battlerAtk]]];
         break;
     }
 
@@ -9869,6 +9891,8 @@ u8 GetBattleMoveSplit(u32 moveId)
 {
     if (gBattleStruct != NULL && gBattleStruct->zmove.active && !IS_MOVE_STATUS(moveId))
         return gBattleStruct->zmove.activeSplit;
+    if (gBattleStruct != NULL && IsMaxMove(moveId)) // TODO: Might be buggy depending on when this is called.
+        return gBattleStruct->dynamax.activeSplit;
     if (gBattleStruct != NULL && gBattleStruct->swapDamageCategory) // Photon Geyser, Shell Side Arm, Light That Burns the Sky
         return SPLIT_PHYSICAL;
 
