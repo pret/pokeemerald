@@ -194,8 +194,10 @@ void CB2_TestRunner(void)
             default: result = "UNKNOWN"; break;
             }
 
-            if (gTestRunnerState.expectedResult == gTestRunnerState.result)
+            if (gTestRunnerState.result == TEST_RESULT_PASS)
                 MgbaPrintf_(":P%s%s\e[0m", color, result);
+            else if (gTestRunnerState.expectedResult == gTestRunnerState.result)
+                MgbaPrintf_(":K%s%s\e[0m", color, result);
             else
                 MgbaPrintf_(":F%s%s\e[0m", color, result);
         }

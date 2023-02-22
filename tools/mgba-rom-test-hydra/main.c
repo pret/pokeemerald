@@ -9,7 +9,11 @@
  * COMMANDS
  * N: Sets the test name to the remainder of the line.
  * R: Sets the result to the remainder of the line, and flushes any
- *    output buffered since the previous R. */
+ *    output buffered since the previous R.
+ *
+ * //Missing P, F and K documentation, please tell me what to put here lol
+ * 
+ */
 #include <fcntl.h>
 #include <poll.h>
 #include <signal.h>
@@ -39,6 +43,7 @@ struct Runner
     size_t output_buffer_capacity;
     char *output_buffer;
     int passes;
+    int knownFails;
     int results;
 };
 
@@ -76,8 +81,11 @@ static void handle_read(struct Runner *runner)
 
                 case 'P':
                 case 'F':
+                case 'K':
                     if (soc[1] == 'P')
                         runner->passes++;
+                    else if (soc[1] == 'K')
+                        runner->knownFails++;
                     runner->results++;
                     soc += 2;
                     fprintf(stdout, "%s: ", runner->test_name);
@@ -411,6 +419,7 @@ int main(int argc, char *argv[])
     // Reap test runners and collate exit codes.
     int exit_code = 0;
     int passes = 0;
+    int knownFails = 0;
     int results = 0;
     for (int i = 0; i < nrunners; i++)
     {
@@ -425,9 +434,25 @@ int main(int argc, char *argv[])
         if (WIFEXITED(wstatus) && WEXITSTATUS(wstatus) > exit_code)
             exit_code = WEXITSTATUS(wstatus);
         passes += runners[i].passes;
+        knownFails += runners[i].knownFails;
         results += runners[i].results;
     }
-    fprintf(stdout, "%d/%d \e[32mPASS\e[0med\n", passes, results);
+
+    if (results == 0)
+    {
+        fprintf(stdout, "\nNo tests found.\n");
+    }
+    else
+    {
+        fprintf(stdout, "\n- Tests TOTAL:         %d\n", results);
+        fprintf(stdout, "- Tests \e[32mPASSED:       \e[0m %d\n", passes);
+        if (knownFails > 0)
+            fprintf(stdout, "- Tests \e[33mKNOWN_FAILING:\e[0m %d\n", knownFails);
+        if (passes + knownFails < results)
+            fprintf(stdout, "- Tests \e[31mFAILED:       \e[0m %d\n", results - passes - knownFails);
+    }
+    fprintf(stdout, "\n");
+
     fflush(stdout);
     return exit_code;
 }
