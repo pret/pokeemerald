@@ -6914,7 +6914,7 @@ bool32 ShouldPostponeSwitchInAbilities(u32 battlerId)
 {
     bool32 aliveOpposing1 = IsBattlerAlive(BATTLE_OPPOSITE(battlerId));
     bool32 aliveOpposing2 = IsBattlerAlive(BATTLE_PARTNER(BATTLE_OPPOSITE(battlerId)));
-    // No pokemon on opposing side - postopone.
+    // No pokemon on opposing side - postpone.
     if (!aliveOpposing1 && !aliveOpposing2)
         return TRUE;
 
