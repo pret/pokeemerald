@@ -187,7 +187,10 @@ void CB2_TestRunner(void)
                 }
                 break;
             case TEST_RESULT_PASS: result = "PASS"; break;
-            case TEST_RESULT_SKIP: result = "SKIP"; break;
+            case TEST_RESULT_SKIP:
+                result = "ASSUMPTION_FAIL";
+                color = "\e[33m";
+                break;
             case TEST_RESULT_INVALID: result = "INVALID"; break;
             case TEST_RESULT_ERROR: result = "ERROR"; break;
             case TEST_RESULT_TIMEOUT: result = "TIMEOUT"; break;
@@ -196,6 +199,8 @@ void CB2_TestRunner(void)
 
             if (gTestRunnerState.result == TEST_RESULT_PASS)
                 MgbaPrintf_(":P%s%s\e[0m", color, result);
+            else if (gTestRunnerState.result == TEST_RESULT_SKIP)
+                MgbaPrintf_(":A%s%s\e[0m", color, result);
             else if (gTestRunnerState.expectedResult == gTestRunnerState.result)
                 MgbaPrintf_(":K%s%s\e[0m", color, result);
             else
