@@ -8573,7 +8573,6 @@ BattleScript_TryAdrenalineOrbRet:
 	return
 
 BattleScript_IntimidateActivates::
-	jumpifnovalidtargets BattleScript_IntimidateEnd
 	showabilitypopup BS_ATTACKER
 	pause B_WAIT_TIME_LONG
 	destroyabilitypopup

@@ -11068,22 +11068,6 @@ static void Cmd_various(void)
         AbilityBattleEffects(ABILITYEFFECT_ON_TERRAIN, gActiveBattler, 0, 0, 0);
         return;
     }
-    case VARIOUS_JUMP_IF_NO_VALID_TARGETS:
-    {
-        VARIOUS_ARGS(const u8 *jumpInstr);
-        u32 count = 0;
-
-        for (i = 0; i < gBattlersCount; i++)
-        {
-            if (GetBattlerSide(i) != GetBattlerSide(gBattlerAttacker) && IsBattlerAlive(i))
-                count++;
-        }
-        if (count == 0)
-            gBattlescriptCurrInstr = cmd->jumpInstr;
-        else
-            gBattlescriptCurrInstr = cmd->nextInstr;
-        return;
-    }
     case VARIOUS_JUMP_IF_EMERGENCY_EXITED:
     {
         VARIOUS_ARGS(const u8 *jumpInstr);
