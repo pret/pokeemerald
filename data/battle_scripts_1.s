@@ -9164,16 +9164,6 @@ BattleScript_BattlerAbilityStatRaiseOnSwitchIn::
 	waitmessage B_WAIT_TIME_LONG
 	end3
 
-BattleScript_TargetAbilityStatRaiseOnMoveEnd::
-	call BattleScript_AbilityPopUp
-	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
-	setgraphicalstatchangevalues
-	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
-	waitanimation
-	printstring STRINGID_ABILITYRAISEDSTATDRASTICALLY
-	waitmessage B_WAIT_TIME_LONG
-	return
-
 BattleScript_ScriptingAbilityStatRaise::
 	copybyte gBattlerAbility, sBATTLER
 	call BattleScript_AbilityPopUp
