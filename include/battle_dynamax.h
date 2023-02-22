@@ -55,5 +55,6 @@ enum MaxMoveEffect
 bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove);
 u16 GetMaxMove(u16 battlerId, u16 baseMove);
 bool8 IsMaxMove(u16 move);
+const u8 *GetMaxMoveName(u16 move);
 
 #endif

@@ -1,6 +1,7 @@
 #include "global.h"
-#include "pokemon.h"
 #include "battle.h"
+#include "data.h"
+#include "pokemon.h"
 #include "constants/moves.h"
 
 // Constant Data
@@ -100,4 +101,12 @@ u16 GetMaxMove(u16 battlerId, u16 baseMove)
 bool8 IsMaxMove(u16 move)
 {
 	return move >= FIRST_MAX_MOVE && move <= LAST_MAX_MOVE;
+}
+
+const u8 *GetMaxMoveName(u16 move)
+{
+    if (IsMaxMove(move))
+        return gMaxMoveNames[move - FIRST_MAX_MOVE];
+    else
+        return gMaxMoveNames[0];   // Failsafe
 }
