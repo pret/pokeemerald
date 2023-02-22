@@ -10,9 +10,9 @@
  * N: Sets the test name to the remainder of the line.
  * R: Sets the result to the remainder of the line, and flushes any
  *    output buffered since the previous R.
- *
- * //Missing P, F and K documentation, please tell me what to put here lol
- * 
+ * P/K/F/A: Sets the result to the remaining of the line, flushes any
+ *    output since the previous P/K/F/A and increment the number of
+ *    passes/known fails/assumption fails/fails.
  */
 #include <fcntl.h>
 #include <poll.h>
