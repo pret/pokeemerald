@@ -8606,8 +8606,8 @@ BattleScript_IntimidateEffect:
 	setgraphicalstatchangevalues
 	jumpifability BS_TARGET, ABILITY_CONTRARY, BattleScript_IntimidateContrary
 	printstring STRINGID_PKMNCUTSATTACKWITH
+BattleScript_IntimidateEffect_WaitString:
 	waitmessage B_WAIT_TIME_LONG
-BattleScript_IntimidateEffect_AfterString:
 	copybyte sBATTLER, gBattlerTarget
 	call BattleScript_TryAdrenalineOrb
 BattleScript_IntimidateLoopIncrement:
@@ -8620,10 +8620,13 @@ BattleScript_IntimidateEnd:
 
 BattleScript_IntimidateContrary:
 	call BattleScript_AbilityPopUpTarget
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_IntimidateContrary_WontIncrease
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	printfromtable gStatUpStringIds
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_IntimidateEffect_AfterString
+	goto BattleScript_IntimidateEffect_WaitString
+BattleScript_IntimidateContrary_WontIncrease:
+	printstring STRINGID_TARGETSTATWONTGOHIGHER
+	goto BattleScript_IntimidateEffect_WaitString
 
 BattleScript_IntimidatePrevented:
 	call BattleScript_AbilityPopUp
