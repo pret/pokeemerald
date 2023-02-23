@@ -34,14 +34,14 @@
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_CORRIDORS_B1F",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 5,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_CORRIDORS_B1F",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     }
   ],
   "coord_events": [],

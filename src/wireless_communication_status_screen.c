@@ -18,6 +18,7 @@
 #include "union_room.h"
 #include "constants/songs.h"
 #include "constants/union_room.h"
+#include "constants/rgb.h"
 
 enum {
     COLORMODE_NORMAL,
@@ -27,12 +28,21 @@ enum {
     COLORMODE_WHITE_DGRAY,
 };
 
-#define GROUPTYPE_TRADE   0
-#define GROUPTYPE_BATTLE  1
-#define GROUPTYPE_UNION   2
-#define GROUPTYPE_TOTAL   3
-#define GROUPTYPE_NONE   -1
-#define NUM_GROUPTYPES    4
+enum {
+    WIN_TITLE,
+    WIN_GROUP_NAMES,
+    WIN_GROUP_COUNTS,
+};
+
+enum {
+    GROUPTYPE_TRADE,
+    GROUPTYPE_BATTLE,
+    GROUPTYPE_UNION,
+    GROUPTYPE_TOTAL,
+    NUM_GROUPTYPES
+};
+
+#define GROUPTYPE_NONE 0xFF
 
 struct WirelessCommunicationStatusScreen
 {
@@ -51,9 +61,26 @@ static void Task_WirelessCommunicationScreen(u8);
 static void WCSS_AddTextPrinterParameterized(u8, u8, const u8 *, u8, u8, u8);
 static bool32 UpdateCommunicationCounts(u32 *, u32 *, u32 *, u8);
 
-static const u16 sBgTiles_Pal[] = INCBIN_U16("graphics/link/wireless_info_screen.gbapal");
-static const u32 sBgTiles_Gfx[] = INCBIN_U32("graphics/link/wireless_info_screen.4bpp.lz");
-static const u32 sBgTiles_Tilemap[] = INCBIN_U32("graphics/link/wireless_info_screen.bin.lz");
+static const u16 sPalettes[][16] = {
+    INCBIN_U16("graphics/wireless_status_screen/default.gbapal"),
+    {}, // All black. Never read
+    INCBIN_U16("graphics/wireless_status_screen/anim_00.gbapal"),
+    INCBIN_U16("graphics/wireless_status_screen/anim_01.gbapal"),
+    INCBIN_U16("graphics/wireless_status_screen/anim_02.gbapal"),
+    INCBIN_U16("graphics/wireless_status_screen/anim_03.gbapal"),
+    INCBIN_U16("graphics/wireless_status_screen/anim_04.gbapal"),
+    INCBIN_U16("graphics/wireless_status_screen/anim_05.gbapal"),
+    INCBIN_U16("graphics/wireless_status_screen/anim_06.gbapal"),
+    INCBIN_U16("graphics/wireless_status_screen/anim_07.gbapal"),
+    INCBIN_U16("graphics/wireless_status_screen/anim_08.gbapal"),
+    INCBIN_U16("graphics/wireless_status_screen/anim_09.gbapal"),
+    INCBIN_U16("graphics/wireless_status_screen/anim_10.gbapal"),
+    INCBIN_U16("graphics/wireless_status_screen/anim_11.gbapal"),
+    INCBIN_U16("graphics/wireless_status_screen/anim_12.gbapal"),
+    INCBIN_U16("graphics/wireless_status_screen/anim_13.gbapal")
+};
+static const u32 sBgTiles_Gfx[] = INCBIN_U32("graphics/wireless_status_screen/bg.4bpp.lz");
+static const u32 sBgTiles_Tilemap[] = INCBIN_U32("graphics/wireless_status_screen/bg.bin.lz");
 
 static const struct BgTemplate sBgTemplates[] = {
     {
@@ -70,7 +97,7 @@ static const struct BgTemplate sBgTemplates[] = {
 };
 
 static const struct WindowTemplate sWindowTemplates[] = {
-    {
+    [WIN_TITLE] = {
         .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 0,
@@ -78,7 +105,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 3,
         .paletteNum = 15,
         .baseBlock = 0x0001
-    }, {
+    },
+    [WIN_GROUP_NAMES] = {
         .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 4,
@@ -86,7 +114,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 15,
         .paletteNum = 15,
         .baseBlock = 0x0049
-    }, {
+    },
+    [WIN_GROUP_COUNTS] = {
         .bg = 0,
         .tilemapLeft = 24,
         .tilemapTop = 4,
@@ -108,7 +137,6 @@ static const u8 *const sHeaderTexts[NUM_GROUPTYPES + 1] = {
 // Activity, group type, number of players
 // 0 players means the number of players can change and should be counted dynamically
 // GROUPTYPE_TOTAL have no unique group and are simply counted in the total of "people communicating"
-// UB: GROUPTYPE_NONE (-1) can potentially be used as an index into a u8[4] in CountPlayersInGroupAndGetActivity
 static const u8 sActivityGroupInfo[][3] = {
     {ACTIVITY_BATTLE_SINGLE,                 GROUPTYPE_BATTLE, 2},
     {ACTIVITY_BATTLE_DOUBLE,                 GROUPTYPE_BATTLE, 2},
@@ -193,10 +221,10 @@ static void CB2_InitWirelessCommunicationScreen(void)
     ChangeBgY(0, 0, BG_COORD_SET);
     ChangeBgX(1, 0, BG_COORD_SET);
     ChangeBgY(1, 0, BG_COORD_SET);
-    LoadPalette(sBgTiles_Pal, 0x00, 0x20);
+    LoadPalette(sPalettes, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     Menu_LoadStdPalAt(0xF0);
     DynamicPlaceholderTextUtil_Reset();
-    FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0x0F);
+    FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 15);
     CopyBgTilemapBufferToVram(1);
     SetMainCallback2(CB2_RunWirelessCommunicationScreen);
     RunTasks();
@@ -218,34 +246,42 @@ static void CB2_ExitWirelessCommunicationStatusScreen(void)
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
-static void WCSS_CyclePalette(s16 * counter, s16 * palIdx)
+// Cycle through palettes that relocate various shades of blue to create the wave effect at the bottom of the screen.
+static void CyclePalette(s16 * counter, s16 * palIdx)
 {
+    s32 idx;
     if (++(*counter) > 5)
     {
-        if (++(*palIdx) == 14)
+        if (++(*palIdx) == (int)ARRAY_COUNT(sPalettes) - 2)
             *palIdx = 0;
 
         *counter = 0;
     }
-    LoadPalette(sBgTiles_Pal + 16 * (*palIdx + 2), 0, 0x10);
+    idx = *palIdx + 2; // +2 skips over default.pal and the empty black palette after it
+    LoadPalette(sPalettes[idx], BG_PLTT_ID(0), PLTT_SIZEOF(8));
 }
 
 static void PrintHeaderTexts(void)
 {
     s32 i;
-    FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    FillWindowPixelBuffer(1, PIXEL_FILL(0));
-    FillWindowPixelBuffer(2, PIXEL_FILL(0));
-    WCSS_AddTextPrinterParameterized(0, FONT_NORMAL, sHeaderTexts[0], GetStringCenterAlignXOffset(FONT_NORMAL, sHeaderTexts[0], 0xC0), 6, COLORMODE_GREEN);
-    for (i = 0; i < (int)ARRAY_COUNT(*sHeaderTexts) - 1; i++)
-    {
-        WCSS_AddTextPrinterParameterized(1, FONT_NORMAL, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_WHITE_LGRAY);
-    }
-    WCSS_AddTextPrinterParameterized(1, FONT_NORMAL, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_RED);
-    PutWindowTilemap(0);
-    CopyWindowToVram(0, COPYWIN_GFX);
-    PutWindowTilemap(1);
-    CopyWindowToVram(1, COPYWIN_GFX);
+    FillWindowPixelBuffer(WIN_TITLE, PIXEL_FILL(0));
+    FillWindowPixelBuffer(WIN_GROUP_NAMES, PIXEL_FILL(0));
+    FillWindowPixelBuffer(WIN_GROUP_COUNTS, PIXEL_FILL(0));
+
+    // Print title
+    WCSS_AddTextPrinterParameterized(WIN_TITLE, FONT_NORMAL, sHeaderTexts[0], GetStringCenterAlignXOffset(FONT_NORMAL, sHeaderTexts[0], 0xC0), 6, COLORMODE_GREEN);
+
+    // Print label for each group (excluding total)
+    for (i = 0; i < NUM_GROUPTYPES - 1; i++)
+        WCSS_AddTextPrinterParameterized(WIN_GROUP_NAMES, FONT_NORMAL, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_WHITE_LGRAY);
+
+    // Print label for total
+    WCSS_AddTextPrinterParameterized(WIN_GROUP_NAMES, FONT_NORMAL, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_RED);
+
+    PutWindowTilemap(WIN_TITLE);
+    CopyWindowToVram(WIN_TITLE, COPYWIN_GFX);
+    PutWindowTilemap(WIN_GROUP_NAMES);
+    CopyWindowToVram(WIN_GROUP_NAMES, COPYWIN_GFX);
 }
 
 #define tState data[0]
@@ -260,7 +296,7 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 1:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, 0);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         ShowBg(1);
         CopyBgTilemapBufferToVram(0);
         ShowBg(0);
@@ -268,24 +304,22 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
         break;
     case 2:
         if (!gPaletteFade.active)
-        {
             gTasks[taskId].tState++;
-        }
         break;
     case 3:
         if (UpdateCommunicationCounts(sStatusScreen->groupCounts, sStatusScreen->prevGroupCounts, sStatusScreen->activities, sStatusScreen->rfuTaskId))
         {
-            FillWindowPixelBuffer(2, PIXEL_FILL(0));
+            FillWindowPixelBuffer(WIN_GROUP_COUNTS, PIXEL_FILL(0));
             for (i = 0; i < NUM_GROUPTYPES; i++)
             {
                 ConvertIntToDecimalStringN(gStringVar4, sStatusScreen->groupCounts[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
                 if (i != GROUPTYPE_TOTAL)
-                    WCSS_AddTextPrinterParameterized(2, FONT_NORMAL, gStringVar4, 12, 30 * i + 8, COLORMODE_WHITE_LGRAY);
+                    WCSS_AddTextPrinterParameterized(WIN_GROUP_COUNTS, FONT_NORMAL, gStringVar4, 12, 30 * i + 8, COLORMODE_WHITE_LGRAY);
                 else
-                    WCSS_AddTextPrinterParameterized(2, FONT_NORMAL, gStringVar4, 12, 98, COLORMODE_RED);
+                    WCSS_AddTextPrinterParameterized(WIN_GROUP_COUNTS, FONT_NORMAL, gStringVar4, 12, 98, COLORMODE_RED);
             }
-            PutWindowTilemap(2);
-            CopyWindowToVram(2, COPYWIN_FULL);
+            PutWindowTilemap(WIN_GROUP_COUNTS);
+            CopyWindowToVram(WIN_GROUP_COUNTS, COPYWIN_FULL);
         }
         if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {
@@ -293,10 +327,10 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
             gTasks[sStatusScreen->rfuTaskId].data[15] = 0xFF;
             gTasks[taskId].tState++;
         }
-        WCSS_CyclePalette(&gTasks[taskId].data[7], &gTasks[taskId].data[8]);
+        CyclePalette(&gTasks[taskId].data[7], &gTasks[taskId].data[8]);
         break;
     case 4:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, 0);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].tState++;
         break;
     case 5:
@@ -358,6 +392,13 @@ static u32 CountPlayersInGroupAndGetActivity(struct RfuPlayer * player, u32 * gr
 
     for (i = 0; i < ARRAY_COUNT(sActivityGroupInfo); i++)
     {
+#ifdef UBFIX
+        // GROUPTYPE_NONE is 0xFF, and shouldn't be used as an index into groupCounts.
+        // In theory the only activity with this group type (ACTIVITY_SEARCH) wouldn't
+        // satisfy the condition below, but not necessarily.
+        if (group_type(i) == GROUPTYPE_NONE)
+            continue;
+#endif
         if (activity == group_activity(i) && player->groupScheduledAnim == UNION_ROOM_SPAWN_IN)
         {
             if (group_players(i) == 0)

@@ -14,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "up",
+      "map": "MAP_ROUTE122",
       "offset": 100,
-      "map": "MAP_ROUTE122"
+      "direction": "up"
     },
     {
-      "direction": "left",
+      "map": "MAP_ROUTE118",
       "offset": 0,
-      "map": "MAP_ROUTE118"
+      "direction": "left"
     }
   ],
   "object_events": [
@@ -591,7 +591,7 @@
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_ROUTE123_BERRY_MASTERS_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

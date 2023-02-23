@@ -73,7 +73,7 @@
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_UNDERWATER_ROUTE128",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

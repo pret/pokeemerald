@@ -116,6 +116,13 @@ enum {
 // Shared by all above
 #define PALTAG_INTERFACE 0
 
+enum {
+    WIN_CHAT_HISTORY,
+    WIN_TEXT_ENTRY,
+    WIN_KEYBOARD,
+    WIN_SWAP_MENU,
+};
+
 struct UnionRoomChat
 {
     u32 filler1;
@@ -560,7 +567,7 @@ static const struct BgTemplate sBgTemplates[] = {
 };
 
 static const struct WindowTemplate sWinTemplates[] = {
-    {
+    [WIN_CHAT_HISTORY] = {
         .bg = 3,
         .tilemapLeft = 8,
         .tilemapTop = 1,
@@ -568,7 +575,8 @@ static const struct WindowTemplate sWinTemplates[] = {
         .height = 19,
         .paletteNum = 15,
         .baseBlock = 0x0001,
-    }, {
+    },
+    [WIN_TEXT_ENTRY] = {
         .bg = 1,
         .tilemapLeft = 9,
         .tilemapTop = 18,
@@ -576,7 +584,8 @@ static const struct WindowTemplate sWinTemplates[] = {
         .height = 2,
         .paletteNum = 12,
         .baseBlock = 0x007a,
-    }, {
+    },
+    [WIN_KEYBOARD] = {
         .bg = 1,
         .tilemapLeft = 0,
         .tilemapTop = 2,
@@ -584,7 +593,8 @@ static const struct WindowTemplate sWinTemplates[] = {
         .height = 15,
         .paletteNum = 7,
         .baseBlock = 0x0020,
-    }, {
+    },
+    [WIN_SWAP_MENU] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 2,
@@ -1171,7 +1181,7 @@ static void Chat_AskQuitChatting(void)
         input = ProcessMenuInput();
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             StartDisplaySubtask(CHATDISPLAY_FUNC_DESTROY_YESNO, 0);
             sChat->funcState = 3;
@@ -1210,7 +1220,7 @@ static void Chat_AskQuitChatting(void)
         input = ProcessMenuInput();
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             StartDisplaySubtask(CHATDISPLAY_FUNC_DESTROY_YESNO, 0);
             sChat->funcState = 3;
@@ -1512,7 +1522,7 @@ static void Chat_SaveAndExit(void)
         input = ProcessMenuInput();
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             sChat->funcState = 12;
             break;
@@ -1537,7 +1547,7 @@ static void Chat_SaveAndExit(void)
         input = ProcessMenuInput();
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             sChat->funcState = 12;
             break;
@@ -2280,7 +2290,7 @@ static bool32 Display_ShowKeyboardSwapMenu(u8 *state)
     {
     case 0:
         ShowKeyboardSwapMenu();
-        CopyWindowToVram(3, COPYWIN_FULL);
+        CopyWindowToVram(WIN_SWAP_MENU, COPYWIN_FULL);
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -2296,7 +2306,7 @@ static bool32 Display_HideKeyboardSwapMenu(u8 *state)
     {
     case 0:
         HideKeyboardSwapMenu();
-        CopyWindowToVram(3, COPYWIN_FULL);
+        CopyWindowToVram(WIN_SWAP_MENU, COPYWIN_FULL);
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -2316,7 +2326,7 @@ static bool32 Display_SwitchPages(u8 *state)
             return TRUE;
 
         PrintCurrentKeyboardPage();
-        CopyWindowToVram(2, COPYWIN_GFX);
+        CopyWindowToVram(WIN_KEYBOARD, COPYWIN_GFX);
         break;
     case 1:
         if (IsDma3ManagerBusyWithBgCopy())
@@ -2393,7 +2403,7 @@ static bool32 Display_UpdateMessageBuffer(u8 *state)
         FillTextEntryWindow(x, width, 0);
         str = GetMessageEntryBuffer();
         DrawTextEntryMessage(0, str, 3, 1, 2);
-        CopyWindowToVram(1, COPYWIN_GFX);
+        CopyWindowToVram(WIN_TEXT_ENTRY, COPYWIN_GFX);
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
@@ -2422,7 +2432,7 @@ static bool32 Display_AskRegisterText(u8 *state)
         length = StringLength_Multibyte(str);
         FillTextEntryWindow(x, length, PIXEL_FILL(6));
         DrawTextEntryMessage(x, str, 0, 4, 5);
-        CopyWindowToVram(1, COPYWIN_GFX);
+        CopyWindowToVram(WIN_TEXT_ENTRY, COPYWIN_GFX);
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
@@ -2463,7 +2473,7 @@ static bool32 Display_CancelRegister(u8 *state)
         length = StringLength_Multibyte(str);
         FillTextEntryWindow(x, length, PIXEL_FILL(0));
         DrawTextEntryMessage(x, str, 3, 1, 2);
-        CopyWindowToVram(1, COPYWIN_GFX);
+        CopyWindowToVram(WIN_TEXT_ENTRY, COPYWIN_GFX);
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
@@ -2501,7 +2511,7 @@ static bool32 Display_ReturnToKeyboard(u8 *state)
     {
     case 0:
         PrintCurrentKeyboardPage();
-        CopyWindowToVram(2, COPYWIN_GFX);
+        CopyWindowToVram(WIN_KEYBOARD, COPYWIN_GFX);
         (*state)++;
         break;
     case 1:
@@ -2527,7 +2537,7 @@ static bool32 Display_ScrollChat(u8 *state)
         str = GetLastReceivedMessage();
         colorIdx = GetReceivedPlayerIndex();
         PrintChatMessage(row, str, colorIdx);
-        CopyWindowToVram(0, COPYWIN_GFX);
+        CopyWindowToVram(WIN_CHAT_HISTORY, COPYWIN_GFX);
         break;
     case 1:
         if (IsDma3ManagerBusyWithBgCopy())
@@ -2546,8 +2556,8 @@ static bool32 Display_ScrollChat(u8 *state)
         }
         // fall through
     case 2:
-        ScrollWindow(0, 0, 5, PIXEL_FILL(1));
-        CopyWindowToVram(0, COPYWIN_GFX);
+        ScrollWindow(WIN_CHAT_HISTORY, 0, 5, PIXEL_FILL(1));
+        CopyWindowToVram(WIN_CHAT_HISTORY, COPYWIN_GFX);
         sDisplay->scrollCount++;
         (*state)++;
         // fall through
@@ -2864,7 +2874,7 @@ static void DestroyStdMessageWindow(void)
 
 static void FillTextEntryWindow(u16 x, u16 width, u8 fillValue)
 {
-    FillWindowPixelRect(1, fillValue, x * 8, 1, width * 8, 14);
+    FillWindowPixelRect(WIN_TEXT_ENTRY, fillValue, x * 8, 1, width * 8, 14);
 }
 
 static void DrawTextEntryMessage(u16 x, u8 *str, u8 bgColor, u8 fgColor, u8 shadowColor)
@@ -2881,7 +2891,7 @@ static void DrawTextEntryMessage(u16 x, u8 *str, u8 bgColor, u8 fgColor, u8 shad
     strBuffer[1] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
     strBuffer[2] = 8;
     StringCopy(&strBuffer[3], str);
-    AddTextPrinterParameterized3(1, FONT_SHORT, x * 8, 1, color, TEXT_SKIP_DRAW, strBuffer);
+    AddTextPrinterParameterized3(WIN_TEXT_ENTRY, FONT_SHORT, x * 8, 1, color, TEXT_SKIP_DRAW, strBuffer);
 }
 
 static void PrintCurrentKeyboardPage(void)
@@ -2894,7 +2904,7 @@ static void PrintCurrentKeyboardPage(void)
     u8 str[45];
     u8 *str2;
 
-    FillWindowPixelBuffer(2, PIXEL_FILL(15));
+    FillWindowPixelBuffer(WIN_KEYBOARD, PIXEL_FILL(15));
     page = GetCurrentKeyboardPage();
     color[0] = TEXT_COLOR_TRANSPARENT;
     color[1] = TEXT_DYNAMIC_COLOR_5;
@@ -2916,7 +2926,7 @@ static void PrintCurrentKeyboardPage(void)
                 return;
 
             StringCopy(&str[3], sUnionRoomKeyboardText[page][i]);
-            AddTextPrinterParameterized3(2, FONT_SMALL, left, top, color, TEXT_SKIP_DRAW, str);
+            AddTextPrinterParameterized3(WIN_KEYBOARD, FONT_SMALL, left, top, color, TEXT_SKIP_DRAW, str);
         }
     }
     else
@@ -2927,7 +2937,7 @@ static void PrintCurrentKeyboardPage(void)
             str2 = GetRegisteredTextByRow(i);
             if (GetStringWidth(FONT_SMALL, str2, 0) <= 40)
             {
-                AddTextPrinterParameterized3(2, FONT_SMALL, left, top, color, TEXT_SKIP_DRAW, str2);
+                AddTextPrinterParameterized3(WIN_KEYBOARD, FONT_SMALL, left, top, color, TEXT_SKIP_DRAW, str2);
             }
             else
             {
@@ -2938,8 +2948,8 @@ static void PrintCurrentKeyboardPage(void)
                     StringCopyN_Multibyte(str, str2, length);
                 } while (GetStringWidth(FONT_SMALL, str, 0) > 35);
 
-                AddTextPrinterParameterized3(2, FONT_SMALL, left, top, color, TEXT_SKIP_DRAW, str);
-                AddTextPrinterParameterized3(2, FONT_SMALL, left + 35, top, color, TEXT_SKIP_DRAW, sText_Ellipsis);
+                AddTextPrinterParameterized3(WIN_KEYBOARD, FONT_SMALL, left, top, color, TEXT_SKIP_DRAW, str);
+                AddTextPrinterParameterized3(WIN_KEYBOARD, FONT_SMALL, left + 35, top, color, TEXT_SKIP_DRAW, sText_Ellipsis);
             }
         }
     }
@@ -2989,17 +2999,17 @@ static bool32 SlideKeyboardPageIn(void)
 
 static void ShowKeyboardSwapMenu(void)
 {
-    FillWindowPixelBuffer(3, PIXEL_FILL(1));
-    DrawTextBorderOuter(3, 1, 13);
-    PrintMenuActionTextsAtPos(3, FONT_SHORT, 8, 1, 14, ARRAY_COUNT(sKeyboardPageTitleTexts), sKeyboardPageTitleTexts);
-    InitMenuNormal(3, FONT_SHORT, 0, 1, 14, 5, GetCurrentKeyboardPage());
-    PutWindowTilemap(3);
+    FillWindowPixelBuffer(WIN_SWAP_MENU, PIXEL_FILL(1));
+    DrawTextBorderOuter(WIN_SWAP_MENU, 1, 13);
+    PrintMenuActionTextsAtPos(WIN_SWAP_MENU, FONT_SHORT, 8, 1, 14, ARRAY_COUNT(sKeyboardPageTitleTexts), sKeyboardPageTitleTexts);
+    InitMenuNormal(WIN_SWAP_MENU, FONT_SHORT, 0, 1, 14, 5, GetCurrentKeyboardPage());
+    PutWindowTilemap(WIN_SWAP_MENU);
 }
 
 static void HideKeyboardSwapMenu(void)
 {
-    ClearStdWindowAndFrameToTransparent(3, FALSE);
-    ClearWindowTilemap(3);
+    ClearStdWindowAndFrameToTransparent(WIN_SWAP_MENU, FALSE);
+    ClearWindowTilemap(WIN_SWAP_MENU);
 }
 
 static void PrintChatMessage(u16 row, u8 *str, u8 colorIdx)
@@ -3009,8 +3019,8 @@ static void PrintChatMessage(u16 row, u8 *str, u8 colorIdx)
     color[0] = TEXT_COLOR_WHITE;
     color[1] = colorIdx * 2 + 2;
     color[2] = colorIdx * 2 + 3;
-    FillWindowPixelRect(0, PIXEL_FILL(1), 0, row * 15, 168, 15);
-    AddTextPrinterParameterized3(0, FONT_SHORT, 0, row * 15 + 1, color, TEXT_SKIP_DRAW, str);
+    FillWindowPixelRect(WIN_CHAT_HISTORY, PIXEL_FILL(1), 0, row * 15, 168, 15);
+    AddTextPrinterParameterized3(WIN_CHAT_HISTORY, FONT_SHORT, 0, row * 15 + 1, color, TEXT_SKIP_DRAW, str);
 }
 
 static void ResetGpuBgState(void)
@@ -3055,8 +3065,8 @@ static void ClearBg0(void)
 
 static void LoadChatWindowBorderGfx(void)
 {
-    LoadPalette(gUnionRoomChat_Window_Pal2, 0x70, 0x20);
-    LoadPalette(gUnionRoomChat_Window_Pal1, 0xC0, 0x20);
+    LoadPalette(gUnionRoomChat_Window_Pal2, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+    LoadPalette(gUnionRoomChat_Window_Pal1, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
     DecompressAndCopyTileDataToVram(1, gUnionRoomChat_Border_Gfx, 0, 0, 0);
     CopyToBgTilemapBuffer(1, gUnionRoomChat_Border_Tilemap, 0, 0);
     CopyBgTilemapBufferToVram(1);
@@ -3066,7 +3076,7 @@ static void LoadChatWindowGfx(void)
 {
     u8 *ptr;
 
-    LoadPalette(gUnionRoomChat_Background_Pal, 0, 0x20);
+    LoadPalette(gUnionRoomChat_Background_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     ptr = DecompressAndCopyTileDataToVram(2, gUnionRoomChat_Background_Gfx, 0, 0, 0);
     if (ptr)
     {
@@ -3080,23 +3090,23 @@ static void LoadChatWindowGfx(void)
 
 static void LoadChatUnkPalette(void)
 {
-    LoadPalette(sUnk_Palette1, 0x80, sizeof(sUnk_Palette1));
+    LoadPalette(sUnk_Palette1, BG_PLTT_ID(8), sizeof(sUnk_Palette1));
     RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + 0x20, 0x20, 1);
 }
 
 static void LoadChatMessagesWindow(void)
 {
-    LoadPalette(sUnk_Palette2, 0xF0, sizeof(sUnk_Palette2));
-    PutWindowTilemap(0);
-    FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    CopyWindowToVram(0, COPYWIN_FULL);
+    LoadPalette(sUnk_Palette2, BG_PLTT_ID(15), sizeof(sUnk_Palette2));
+    PutWindowTilemap(WIN_CHAT_HISTORY);
+    FillWindowPixelBuffer(WIN_CHAT_HISTORY, PIXEL_FILL(1));
+    CopyWindowToVram(WIN_CHAT_HISTORY, COPYWIN_FULL);
 }
 
 static void LoadKeyboardWindow(void)
 {
-    PutWindowTilemap(2);
+    PutWindowTilemap(WIN_KEYBOARD);
     PrintCurrentKeyboardPage();
-    CopyWindowToVram(2, COPYWIN_FULL);
+    CopyWindowToVram(WIN_KEYBOARD, COPYWIN_FULL);
 }
 
 static void LoadTextEntryWindow(void)
@@ -3107,19 +3117,19 @@ static void LoadTextEntryWindow(void)
     unused[1] = 0xFF;
 
     for (i = 0; i < MAX_MESSAGE_LENGTH; i++)
-        BlitBitmapToWindow(1, sDisplay->unk2128, i * 8, 0, 8, 16);
+        BlitBitmapToWindow(WIN_TEXT_ENTRY, sDisplay->unk2128, i * 8, 0, 8, 16);
 
-    FillWindowPixelBuffer(1, PIXEL_FILL(0));
-    PutWindowTilemap(1);
-    CopyWindowToVram(1, COPYWIN_FULL);
+    FillWindowPixelBuffer(WIN_TEXT_ENTRY, PIXEL_FILL(0));
+    PutWindowTilemap(WIN_TEXT_ENTRY);
+    CopyWindowToVram(WIN_TEXT_ENTRY, COPYWIN_FULL);
 }
 
 static void LoadKeyboardSwapWindow(void)
 {
-    FillWindowPixelBuffer(3, PIXEL_FILL(1));
-    LoadUserWindowBorderGfx(3, 1, 0xD0);
-    LoadUserWindowBorderGfx_(3, 0xA, 0x20);
-    LoadPalette(gStandardMenuPalette, 0xE0,  0x20);
+    FillWindowPixelBuffer(WIN_SWAP_MENU, PIXEL_FILL(1));
+    LoadUserWindowBorderGfx(WIN_SWAP_MENU, 1, BG_PLTT_ID(13));
+    LoadUserWindowBorderGfx_(WIN_SWAP_MENU, 0xA, BG_PLTT_ID(2));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(14),  PLTT_SIZE_4BPP);
 }
 
 static void InitScanlineEffect(void)
@@ -3202,7 +3212,7 @@ static void SetRegisteredTextPalette(bool32 registering)
 {
     const u16 *palette = &sUnionRoomChatInterfacePal[registering * 2 + 1];
     u8 index = IndexOfSpritePaletteTag(PALTAG_INTERFACE);
-    LoadPalette(palette, index * 16 + 0x101, 4);
+    LoadPalette(palette, OBJ_PLTT_ID(index) + 1, PLTT_SIZEOF(2));
 }
 
 static void StartKeyboardCursorAnim(void)

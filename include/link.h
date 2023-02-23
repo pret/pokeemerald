@@ -100,8 +100,8 @@
 #define LINKTYPE_BERRY_BLENDER_SETUP   0x4411
 #define LINKTYPE_BERRY_BLENDER         0x4422
 #define LINKTYPE_MYSTERY_EVENT         0x5501
-#define LINKTYPE_UNUSED_EREADER        0x5502 // Unused, inferred from gap
-#define LINKTYPE_EREADER               0x5503
+#define LINKTYPE_EREADER_FRLG          0x5502
+#define LINKTYPE_EREADER_EM            0x5503
 #define LINKTYPE_CONTEST_GMODE         0x6601
 #define LINKTYPE_CONTEST_EMODE         0x6602
 

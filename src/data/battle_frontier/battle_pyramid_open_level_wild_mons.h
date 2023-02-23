@@ -1038,7 +1038,7 @@ static const struct PyramidWildMon sOpenLevelWildMons_Round20[] =
     }
 };
 
-static const struct PyramidWildMon *const sOpenLevelWildMonPointers[TOTAL_ROUNDS] =
+static const struct PyramidWildMon *const sOpenLevelWildMonPointers[TOTAL_PYRAMID_ROUNDS] =
 {
     sOpenLevelWildMons_Round1,
     sOpenLevelWildMons_Round2,

@@ -3,7 +3,6 @@
 
 #include "sprite.h"
 #include "constants/region_map_sections.h"
-#include "constants/pokemon_config.h"
 #include "constants/map_groups.h"
 
 #define GET_BASE_SPECIES_ID(speciesId) (GetFormSpeciesId(speciesId, 0))
@@ -292,9 +291,10 @@ struct BattlePokemon
     /*0x4D*/ u32 status1;
     /*0x51*/ u32 status2;
     /*0x55*/ u32 otId;
+    /*0x59*/ u8 metLevel;
 };
 
-struct BaseStats
+struct SpeciesInfo /*0x24*/
 {
  /* 0x00 */ u8 baseHP;
  /* 0x01 */ u8 baseAttack;
@@ -302,32 +302,30 @@ struct BaseStats
  /* 0x03 */ u8 baseSpeed;
  /* 0x04 */ u8 baseSpAttack;
  /* 0x05 */ u8 baseSpDefense;
- /* 0x06 */ u8 type1;
- /* 0x07 */ u8 type2;
+ /* 0x06 */ u8 types[2];
  /* 0x08 */ u8 catchRate;
- /* 0x09 */ u16 expYield;
- /* 0x0A */ u16 evYield_HP:2;
- /* 0x0A */ u16 evYield_Attack:2;
- /* 0x0A */ u16 evYield_Defense:2;
- /* 0x0A */ u16 evYield_Speed:2;
- /* 0x0B */ u16 evYield_SpAttack:2;
- /* 0x0B */ u16 evYield_SpDefense:2;
- /* 0x0C */ u16 itemCommon;
- /* 0x0E */ u16 itemRare;
- /* 0x10 */ u8 genderRatio;
- /* 0x11 */ u8 eggCycles;
- /* 0x12 */ u8 friendship;
- /* 0x13 */ u8 growthRate;
- /* 0x14 */ u8 eggGroup1;
- /* 0x15 */ u8 eggGroup2;
- /* 0x16 */ u16 abilities[NUM_ABILITY_SLOTS];
-            u8 safariZoneFleeRate;
-            u8 bodyColor : 7;
+ /* 0x09 padding */
+ /* 0x0A */ u16 expYield; // expYield was changed from u8 to u16 for the new Exp System.
+ /* 0x0C */ u16 evYield_HP:2;
+            u16 evYield_Attack:2;
+            u16 evYield_Defense:2;
+            u16 evYield_Speed:2;
+ /* 0x0D */ u16 evYield_SpAttack:2;
+            u16 evYield_SpDefense:2;
+ /* 0x0E */ u16 itemCommon;
+ /* 0x10 */ u16 itemRare;
+ /* 0x12 */ u8 genderRatio;
+ /* 0x13 */ u8 eggCycles;
+ /* 0x14 */ u8 friendship;
+ /* 0x15 */ u8 growthRate;
+ /* 0x16 */ u8 eggGroups[2];
+ /* 0x18 */ u16 abilities[NUM_ABILITY_SLOTS]; // 3 abilities, no longer u8 because we have over 255 abilities now.
+ /* 0x1E */ u8 safariZoneFleeRate;
+ /* 0x1F */ u8 bodyColor : 7;
             u8 noFlip : 1;
-            u16 flags;
+ /* 0x20 */ u16 flags;
 };
 
-#include "constants/battle_config.h"
 struct BattleMove
 {
     u16 effect;
@@ -396,7 +394,7 @@ extern struct SpriteTemplate gMultiuseSpriteTemplate;
 extern const struct BattleMove gBattleMoves[];
 extern const u8 gFacilityClassToPicIndex[];
 extern const u8 gFacilityClassToTrainerClass[];
-extern const struct BaseStats gBaseStats[];
+extern const struct SpeciesInfo gSpeciesInfo[];
 extern const u8 *const gItemEffectTable[];
 extern const u32 gExperienceTables[][MAX_LEVEL + 1];
 extern const struct LevelUpMove *const gLevelUpLearnsets[];
@@ -566,5 +564,6 @@ u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove);
 bool32 ShouldShowFemaleDifferences(u16 species, u32 personality);
 void TryToSetBattleFormChangeMoves(struct Pokemon *mon);
 u32 GetMonFriendshipScore(struct Pokemon *pokemon);
+void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality);
 
 #endif // GUARD_POKEMON_H

@@ -1450,6 +1450,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_OmegaSymbol, 0x0200, ANIM_TAG_OMEGA_SYMBOL},
     {gBattleAnimSpriteGfx_Orbs, 0x0180, ANIM_TAG_STEEL_BEAM},
     {gBattleAnimSpriteGfx_AuraSphere, 0x200, ANIM_TAG_POLTERGEIST},
+    {gBattleAnimSpriteGfx_Teapot, 0x1800, ANIM_TAG_TEAPOT},
 };
 
 const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
@@ -1900,6 +1901,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_OmegaSymbol, ANIM_TAG_OMEGA_SYMBOL},
     {gBattleAnimSpritePal_SteelBeam, ANIM_TAG_STEEL_BEAM},
     {gBattleAnimSpritePal_Poltergeist, ANIM_TAG_POLTERGEIST},
+    {gBattleAnimSpritePal_Teapot, ANIM_TAG_TEAPOT},
 };
 
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
@@ -1935,7 +1937,7 @@ const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
     [BG_MAGMA_STORM]               = {gBattleAnimBgImage_InAir,                   gBattleAnimBgPalette_MagmaStorm,              gBattleAnimBgTilemap_InAir},
     [BG_GIGA_IMPACT_OPPONENT]      = {gBattleAnimBgImage_GigaImpact,              gBattleAnimBgPalette_GigaImpact,              gBattleAnimBgTilemap_GigaImpactOpponent},
     [BG_GIGA_IMPACT_PLAYER]        = {gBattleAnimBgImage_GigaImpact,              gBattleAnimBgPalette_GigaImpact,              gBattleAnimBgTilemap_GigaImpactPlayer},
-    [BG_GIGA_IMPACT_CONTEST]       = {gBattleAnimBgImage_GigaImpact,              gBattleAnimBgPalette_GigaImpact,              gBattleAnimBgTilemap_GigaImpactContest},
+    [BG_GIGA_IMPACT_CONTEST]       = {gBattleAnimBgImage_GigaImpactContest,       gBattleAnimBgPalette_GigaImpact,              gBattleAnimBgTilemap_GigaImpactContest},
     [BG_TRICK_ROOM]                = {gBattleAnimBgImage_TrickRoom,               gBattleAnimBgPalette_TrickRoom,               gBattleAnimBgTilemap_TrickRoom},
     [BG_ROCK_WRECKER]              = {gBattleAnimBgImage_Hurricane,               gBattleAnimBgPalette_RockWrecker,             gBattleAnimBgTilemap_Hurricane},
     [BG_SPACIAL_REND_ON_OPPONENT]  = {gBattleAnimBgImage_SpacialRend,             gBattleAnimBgPalette_SpacialRend,             gBattleAnimBgTilemap_GigaImpactOpponent},

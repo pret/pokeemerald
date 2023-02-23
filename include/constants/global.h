@@ -1,8 +1,11 @@
 #ifndef GUARD_CONSTANTS_GLOBAL_H
 #define GUARD_CONSTANTS_GLOBAL_H
 
-#include "constants/battle_config.h"
-#include "constants/overworld_config.h"
+#include "config/battle.h"
+#include "config/debug.h"
+#include "config/item.h"
+#include "config/pokemon.h"
+#include "config/overworld.h"
 
 // Invalid Versions show as "----------" in Gen 4 and Gen 5's summary screen.
 // In Gens 6 and 7, invalid versions instead show "a distant land" in the summary screen.

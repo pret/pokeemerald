@@ -14,17 +14,12 @@
 #include "malloc.h"
 #include "util.h"
 #include "task.h"
+#include "test_runner.h"
 #include "text.h"
 #include "battle_setup.h"
 #include "frontier_util.h"
 #include "constants/trainers.h"
 #include "constants/rgb.h"
-
-#define BATTLER_RECORD_SIZE 664
-#define ILLEGAL_BATTLE_TYPES ((BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_FIRST_BATTLE                  \
-                              | BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_ROAMER | BATTLE_TYPE_EREADER_TRAINER    \
-                              | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_RECORDED | BATTLE_TYPE_TRAINER_HILL          \
-                              | BATTLE_TYPE_SECRET_BASE | BATTLE_TYPE_RAID))
 
 struct PlayerInfo
 {
@@ -33,37 +28,6 @@ struct PlayerInfo
     u8 gender;
     u16 battlerId;
     u16 language;
-};
-
-struct RecordedBattleSave
-{
-    struct Pokemon playerParty[PARTY_SIZE];
-    struct Pokemon opponentParty[PARTY_SIZE];
-    u8 playersName[MAX_BATTLERS_COUNT][PLAYER_NAME_LENGTH + 1];
-    u8 playersGender[MAX_BATTLERS_COUNT];
-    u32 playersTrainerId[MAX_BATTLERS_COUNT];
-    u8 playersLanguage[MAX_BATTLERS_COUNT];
-    u32 rngSeed;
-    u32 battleFlags;
-    u8 playersBattlers[MAX_BATTLERS_COUNT];
-    u16 opponentA;
-    u16 opponentB;
-    u16 partnerId;
-    u16 multiplayerId;
-    u8 lvlMode;
-    u8 frontierFacility;
-    u8 frontierBrainSymbol;
-    u8 battleScene:1;
-    u8 textSpeed:3;
-    u32 AI_scripts;
-    u8 recordMixFriendName[PLAYER_NAME_LENGTH + 1];
-    u8 recordMixFriendClass;
-    u8 apprenticeId;
-    u16 easyChatSpeech[EASY_CHAT_BATTLE_WORDS_COUNT];
-    u8 recordMixFriendLanguage;
-    u8 apprenticeLanguage;
-    u8 battleRecord[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
-    u32 checksum;
 };
 
 // Save data using TryWriteSpecialSaveSector is allowed to exceed SECTOR_DATA_SIZE (up to the counter field)
@@ -209,8 +173,11 @@ void RecordedBattle_ClearBattlerAction(u8 battlerId, u8 bytesToClear)
     }
 }
 
-u8 RecordedBattle_GetBattlerAction(u8 battlerId)
+u8 RecordedBattle_GetBattlerAction(u32 actionType, u8 battlerId)
 {
+    if (gTestRunnerEnabled)
+        BattleTest_CheckBattleRecordActionType(battlerId, sBattlerRecordSizes[battlerId], actionType);
+
     // Trying to read past array or invalid action byte, battle is over.
     if (sBattlerRecordSizes[battlerId] >= BATTLER_RECORD_SIZE || sBattleRecords[battlerId][sBattlerRecordSizes[battlerId]] == 0xFF)
     {
@@ -300,7 +267,7 @@ static bool32 IsRecordedBattleSaveValid(struct RecordedBattleSave *save)
 {
     if (save->battleFlags == 0)
         return FALSE;
-    if (save->battleFlags & ILLEGAL_BATTLE_TYPES)
+    if (save->battleFlags & BATTLE_TYPE_RECORDED_INVALID)
         return FALSE;
     if (CalcByteArraySum((void *)(save), sizeof(*save) - 4) != save->checksum)
         return FALSE;
@@ -526,7 +493,7 @@ static void Task_StartAfterCountdown(u8 taskId)
     }
 }
 
-static void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
+void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
 {
     bool8 var;
     s32 i, j;
@@ -759,14 +726,14 @@ void RecordedBattle_CheckMovesetChanges(u8 mode)
 
                     // We know the current action is ACTION_MOVE_CHANGE, retrieve
                     // it without saving it to move on to the next action.
-                    RecordedBattle_GetBattlerAction(battlerId);
+                    RecordedBattle_GetBattlerAction(RECORDED_BYTE, battlerId);
 
                     for (j = 0; j < MAX_MON_MOVES; j++)
                         ppBonuses[j] = ((gBattleMons[battlerId].ppBonuses & (3 << (j << 1))) >> (j << 1));
 
                     for (j = 0; j < MAX_MON_MOVES; j++)
                     {
-                        moveSlots[j] = RecordedBattle_GetBattlerAction(battlerId);
+                        moveSlots[j] = RecordedBattle_GetBattlerAction(RECORDED_BYTE, battlerId);
                         movePp.moves[j] = gBattleMons[battlerId].moves[moveSlots[j]];
                         movePp.currentPp[j] = gBattleMons[battlerId].pp[moveSlots[j]];
                         movePp.maxPp[j] = ppBonuses[moveSlots[j]];

@@ -58,7 +58,7 @@
 #include "constants/species.h"
 #include "constants/weather.h"
 
-#if DEBUG_SYSTEM_ENABLE == TRUE
+#if DEBUG_OVERWORLD_MENU == TRUE
 // *******************************
 // Enums
 enum { // Main
@@ -2178,6 +2178,8 @@ static void DebugAction_Give_Pokemon_SelectLevel(u8 taskId)
         {
             PlaySE(MUS_LEVEL_UP);
             ScriptGiveMon(sDebugMonData->mon_speciesId, gTasks[taskId].data[3], ITEM_NONE, 0,0,0);
+            //Set flag for user convenience
+            FlagSet(FLAG_SYS_POKEMON_GET);
             Free(sDebugMonData); //Frees EWRAM of MonData Struct
             DebugAction_DestroyExtraWindow(taskId);
         }
@@ -2732,6 +2734,9 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
         break;
     }
 
+    //Set flag for user convenience
+    FlagSet(FLAG_SYS_POKEMON_GET);
+
     Free(sDebugMonData); //Frees EWRAM of MonData Struct
     DebugAction_DestroyExtraWindow(taskId); //return sentToPc;
 }
@@ -2790,16 +2795,6 @@ static void DebugAction_Give_CHEAT(u8 taskId)
     Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Debug_CheatStart);
-}
-
-static void Task_WaitFadeAccessPC(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        DestroyTask(taskId);
-        FlagSet(DEBUG_FLAG_PC_FROM_DEBUG_MENU);
-        EnterPokeStorage(2);
-    }
 }
 
 static void DebugAction_AccessPC(u8 taskId)
@@ -3525,4 +3520,4 @@ SOUND_LIST_SE
 };
 #undef X
 
-#endif //DEBUG_SYSTEM_ENABLE == TRUE
+#endif //DEBUG_OVERWORLD_MENU == TRUE

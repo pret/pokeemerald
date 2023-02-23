@@ -270,6 +270,50 @@
 	.macro stopsound
 	.byte 0x2f
 	.endm
+	
+	@ same as createvisualtask except takes in battlerargindex, which is the battle anim arg index of the battler to loop through
+	.macro createvisualtaskontargets addr:req, priority:req, battlerargindex:req, argv:vararg
+	.byte 0x30
+	.4byte \addr
+	.byte \priority
+	.byte \battlerargindex
+	.byte (.Lcreatetask_\@_2 - .Lcreatetask_\@_1) / 2	@ num_args
+.Lcreatetask_\@_1:
+	.2byte \argv
+.Lcreatetask_\@_2:
+	.endm
+	
+	@ same as createsprite except takes in battlerargindex, which is the battle anim arg index of the battler to loop through
+	.macro createspriteontargets template:req, anim_battler:req, subpriority_offset:req, battlerargindex:req, argv:vararg
+	.byte 0x31
+	.4byte \template
+	.if \anim_battler == ANIM_TARGET
+	.byte 0x80 | (\subpriority_offset & 0x7F)
+	.else
+	.byte (\subpriority_offset & 0x7F)
+	.endif
+	.byte \battlerargindex
+	.byte (.Lsprite_\@_2 - .Lsprite_\@_1) / 2
+.Lsprite_\@_1:
+	.2byte \argv
+.Lsprite_\@_2:
+	.endm
+	
+	@ does not overwrite gBattleAnimArgs[battlerargindex], some sprite templates are too dependent on the value (e.g. heal block)
+	.macro createspriteontargets_onpos template:req, anim_battler:req, subpriority_offset:req, battlerargindex:req, argv:vararg
+	.byte 0x32
+	.4byte \template
+	.if \anim_battler == ANIM_TARGET
+	.byte 0x80 | (\subpriority_offset & 0x7F)
+	.else
+	.byte (\subpriority_offset & 0x7F)
+	.endif
+	.byte \battlerargindex
+	.byte (.Lsprite_\@_2 - .Lsprite_\@_1) / 2
+.Lsprite_\@_1:
+	.2byte \argv
+.Lsprite_\@_2:
+	.endm
 
 @ useful macros
 	.macro jumpreteq value:req, ptr:req

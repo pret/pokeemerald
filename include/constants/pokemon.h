@@ -235,6 +235,8 @@
 #define FLAG_THAW_USER                            (1 << 25)
 #define FLAG_HIT_IN_SUBSTITUTE                    (1 << 26) // Hyperspace Fury
 #define FLAG_TWO_STRIKES                          (1 << 27) // A move with this flag will strike twice, and may apply its effect on each hit
+#define FLAG_WIND_MOVE                            (1 << 28)
+#define FLAG_SLICING_MOVE                         (1 << 29)
 
 // Split defines.
 #define SPLIT_PHYSICAL  0x0
@@ -330,9 +332,10 @@
 #define MON_PIC_HEIGHT 64
 #define MON_PIC_SIZE (MON_PIC_WIDTH * MON_PIC_HEIGHT / 2)
 
-#define BATTLE_ALIVE_EXCEPT_ACTIVE  0
-#define BATTLE_ALIVE_ATK_SIDE       1
-#define BATTLE_ALIVE_DEF_SIDE       2
+#define BATTLE_ALIVE_EXCEPT_ACTIVE   0
+#define BATTLE_ALIVE_ATK_SIDE        1
+#define BATTLE_ALIVE_DEF_SIDE        2
+#define BATTLE_ALIVE_EXCEPT_ATTACKER 3
 
 #define SKIP_FRONT_ANIM (1 << 7)
 
@@ -350,8 +353,7 @@
 #define SPECIES_FLAG_HISUIAN_FORM       (1 << 6)
 #define SPECIES_FLAG_GENDER_DIFFERENCE  (1 << 7)
 #define SPECIES_FLAG_ALL_PERFECT_IVS    (1 << 8)
-#define SPECIES_FLAG_SHINY_LOCKED       (1 << 9)
-#define SPECIES_FLAG_CANNOT_BE_TRADED   (1 << 10)
+#define SPECIES_FLAG_CANNOT_BE_TRADED   (1 << 9)
 
 #define LEGENDARY_PERFECT_IV_COUNT 3
 
