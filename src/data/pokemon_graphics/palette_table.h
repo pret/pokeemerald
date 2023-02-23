@@ -1359,6 +1359,6 @@ const struct CompressedSpritePalette gMonPaletteTableFemale[] =
     SPECIES_PAL(PYROAR, gMonPalette_Pyroar),
 #endif
 #if P_GEN_8_POKEMON == TRUE
-    SPECIES_PAL(BASCULEGION, gMonPalette_CircledQuestionMark), // gMonPalette_BasculegionF),
+    SPECIES_PAL(BASCULEGION, gMonPalette_BasculegionF),
 #endif
 };

@@ -1749,7 +1749,7 @@ gCryTable::
 	cry Cry_TornadusTherian
 	cry Cry_ThundurusTherian
 	cry Cry_LandorusTherian
-	cry Cry_Bulbasaur //Cry_EnamorusTherian
+	cry Cry_EnamorusTherian
 	@ Kyurem
 	cry Cry_KyuremWhite
 	cry Cry_KyuremBlack
@@ -3862,7 +3862,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_TornadusTherian
 	cry_reverse Cry_ThundurusTherian
 	cry_reverse Cry_LandorusTherian
-	cry_reverse Cry_Bulbasaur //Cry_EnamorusTherian
+	cry_reverse Cry_EnamorusTherian
 	@ Kyurem
 	cry_reverse Cry_KyuremWhite
 	cry_reverse Cry_KyuremBlack

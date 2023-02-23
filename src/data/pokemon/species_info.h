@@ -20946,7 +20946,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .catchRate = 25,
         .expYield = 186,
         .evYield_HP     = 2,
-        .genderRatio = PERCENT_FEMALE(50),
+        .genderRatio = MON_MALE,
         .eggCycles = 40,
         .friendship = 70,
         .growthRate = GROWTH_MEDIUM_FAST,
@@ -20954,7 +20954,28 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_RATTLED, ABILITY_ADAPTABILITY, ABILITY_MOLD_BREAKER},
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
-        .flags = SPECIES_FLAG_GENDER_DIFFERENCE,
+    },
+
+    [SPECIES_BASCULEGION_FEMALE] =
+    {
+        .baseHP        = 120,
+        .baseAttack    = 92,
+        .baseDefense   = 65,
+        .baseSpeed     = 78,
+        .baseSpAttack  = 100,
+        .baseSpDefense = 75,
+        .types = { TYPE_WATER, TYPE_GHOST},
+        .catchRate = 25,
+        .expYield = 186,
+        .evYield_HP     = 2,
+        .genderRatio = MON_FEMALE,
+        .eggCycles = 40,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_WATER_2, EGG_GROUP_WATER_2},
+        .abilities = {ABILITY_RATTLED, ABILITY_ADAPTABILITY, ABILITY_MOLD_BREAKER},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
     },
 
     [SPECIES_SNEASLER] =
