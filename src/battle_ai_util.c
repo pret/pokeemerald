@@ -802,6 +802,7 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness,
     }
     else
     {
+        effectivenessMultiplier = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, FALSE);
         dmg = 0;
     }
 
@@ -1166,7 +1167,7 @@ s32 AI_GetAbility(u32 battlerId)
     // We've had ability overwritten by e.g. Worry Seed. It is not part of AI_PARTY in case of switching
     if (gBattleStruct->overwrittenAbilities[battlerId])
         return gBattleStruct->overwrittenAbilities[battlerId];
-    
+
     // The AI knows its own ability.
     if (IsBattlerAIControlled(battlerId))
         return knownAbility;
