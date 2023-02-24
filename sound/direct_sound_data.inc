@@ -3522,11 +3522,11 @@ Cry_Jangmoo::
 	.incbin "sound/direct_sound_samples/cries/jangmo_o.bin"
 
 	.align 2
-Cry_Hakamoo::
+Cry_HakamoO::
 	.incbin "sound/direct_sound_samples/cries/hakamo_o.bin"
 
 	.align 2
-Cry_Kommoo::
+Cry_KommoO::
 	.incbin "sound/direct_sound_samples/cries/kommo_o.bin"
 
 	.align 2
