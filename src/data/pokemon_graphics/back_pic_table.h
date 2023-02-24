@@ -1331,7 +1331,9 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(CALYREX_ICE_RIDER, gMonBackPic_CalyrexIceRider),
     SPECIES_SPRITE(CALYREX_SHADOW_RIDER, gMonBackPic_CalyrexShadowRider),
 
-    SPECIES_SPRITE(ENAMORUS_THERIAN, gMonBackPic_CircledQuestionMark), //gMonBackPic_EnamorusTherian),
+    SPECIES_SPRITE(ENAMORUS_THERIAN, gMonBackPic_EnamorusTherian),
+
+    SPECIES_SPRITE(BASCULEGION_FEMALE, gMonBackPic_BasculegionFemale),
 #endif
     SPECIES_SPRITE(EGG, gMonFrontPic_Egg),
 };
@@ -1358,8 +1360,5 @@ const struct CompressedSpriteSheet gMonBackPicTableFemale[] =
 #endif
 #if P_GEN_6_POKEMON == TRUE
     SPECIES_SPRITE(PYROAR, gMonBackPic_PyroarF),
-#endif
-#if P_GEN_8_POKEMON == TRUE
-    SPECIES_SPRITE(BASCULEGION, gMonBackPic_BasculegionF),
 #endif
 };
