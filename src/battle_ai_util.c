@@ -802,7 +802,16 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness,
     }
     else
     {
-        effectivenessMultiplier = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, FALSE);
+        #if B_GLARE_GHOST == GEN_3
+        else if (move == MOVE_GLARE || move == MOVE_THUNDER_WAVE)
+            effectivenessMultiplier = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, FALSE);
+        else
+#       endif
+        if (move == MOVE_THUNDER_WAVE)
+            effectivenessMultiplier = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, FALSE);
+        else
+            effectivenessMultiplier = UQ_4_12(1.0);
+
         dmg = 0;
     }
 
