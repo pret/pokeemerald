@@ -79,7 +79,7 @@ bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove)
 	//	return !IsRaidBossUsingRegularMove(battlerId, baseMove);
 	if (gBattleStruct->dynamax.dynamaxTurns[battlerId] > 0)
 		return TRUE;
-	return TRUE;
+	return FALSE;
 }
 
 u16 GetMaxMove(u16 battlerId, u16 baseMove)
