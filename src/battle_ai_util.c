@@ -744,6 +744,10 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness,
     SetBattlerData(battlerDef);
 
     gBattleStruct->dynamicMoveType = 0;
+
+    if (move == MOVE_NATURE_POWER)
+        move = GetNaturePowerMove();
+
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
 
