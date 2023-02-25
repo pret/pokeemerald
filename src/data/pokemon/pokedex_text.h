@@ -4697,7 +4697,7 @@ const u8 gDhelmisePokedexText[] = _(
     "It maintains itself with new infusions of\n"
     "seabed detritus and seaweed.");
 
-const u8 gJangmooPokedexText[] = _(
+const u8 gJangmoOPokedexText[] = _(
     "It expresses its feelings by smacking its\n"
     "scales. Metallic sounds echo through the\n"
     "tall mountains where Jangmo-o live. They\n"

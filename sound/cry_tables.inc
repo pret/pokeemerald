@@ -1126,7 +1126,7 @@ gCryTable::
 	cry Cry_Bruxish
 	cry Cry_Drampa
 	cry Cry_Dhelmise
-	cry Cry_Jangmoo
+	cry Cry_JangmoO
 	cry Cry_HakamoO
 	cry Cry_KommoO
 	cry Cry_TapuKoko
@@ -3248,7 +3248,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Bruxish
 	cry_reverse Cry_Drampa
 	cry_reverse Cry_Dhelmise
-	cry_reverse Cry_Jangmoo
+	cry_reverse Cry_JangmoO
 	cry_reverse Cry_HakamoO
 	cry_reverse Cry_KommoO
 	cry_reverse Cry_TapuKoko
