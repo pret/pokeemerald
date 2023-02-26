@@ -8,7 +8,7 @@
 #define POCKET_POKE_BALLS   3
 #define POCKET_BATTLE_ITEMS 4
 #define POCKET_BERRIES      5
-#define POCKET_TREASURES    6
+#define POCKET_POWER_UP     6
 #define POCKET_MEGA_STONES  7
 #define POCKET_Z_CRYSTALS   8
 #define POCKET_TM_HM        9
@@ -19,7 +19,7 @@
 #define BALLS_POCKET        2
 #define BATTLEITEMS_POCKET  3
 #define BERRIES_POCKET      4
-#define TREASURES_POCKET    5
+#define POWERUP_POCKET      5
 #define MEGASTONES_POCKET   6
 #define ZCRYSTALS_POCKET    7
 #define TMHM_POCKET         8
