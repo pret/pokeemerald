@@ -4,6 +4,7 @@
 #include "event_data.h"
 #include "load_save.h"
 #include "menu.h"
+#include "palette.h"
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
@@ -228,7 +229,7 @@ void DisplayBerryPowderVendorMenu(void)
     sBerryPowderVendorWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sBerryPowderVendorWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sBerryPowderVendorWindowId);
-    LoadUserWindowBorderGfx_(sBerryPowderVendorWindowId, 0x21D, 0xD0);
+    LoadUserWindowBorderGfx_(sBerryPowderVendorWindowId, 0x21D, BG_PLTT_ID(13));
     DrawPlayerPowderAmount(sBerryPowderVendorWindowId, 0x21D, 13, GetBerryPowder());
 }
 

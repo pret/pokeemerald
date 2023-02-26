@@ -10,7 +10,7 @@ struct MultiBootParam
 {
     u32 system_work[5]; // 00
     u8 handshake_data;  // 14
-    u8 padding;         // 15
+    //u8 padding;         // 15
     u16 handshake_timeout; // 16
     u8 probe_count; // 18
     u8 client_data[MULTIBOOT_NCHILD]; // 19

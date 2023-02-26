@@ -34,8 +34,8 @@ EWRAM_DATA u8 gWirelessStatusIndicatorSpriteId = 0;
 
 static u8 sSequenceArrayValOffset;
 
-static const u16 sWirelessLinkIconPalette[] = INCBIN_U16("graphics/interface/wireless_link_icon.gbapal");
-static const u32 sWirelessLinkIconPic[] = INCBIN_U32("graphics/interface/wireless_link_icon.4bpp.lz");
+static const u16 sWirelessLinkIconPalette[] = INCBIN_U16("graphics/link/wireless_icon.gbapal");
+static const u32 sWirelessLinkIconPic[] = INCBIN_U32("graphics/link/wireless_icon.4bpp.lz");
 
 // Most of the below two tables won't make sense with ASCII encoding.
 static const u8 sWireless_ASCIItoRSETable[256] = {
@@ -134,7 +134,7 @@ static const u8 sWireless_ASCIItoRSETable[256] = {
     0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94
 };
 
-static const u8 sWireless_RSEtoASCIITable[256] = {
+const u8 gWireless_RSEtoASCIITable[256] = {
     [CHAR_SPACE] = ' ',
     0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d,
     0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94, 0x95,
@@ -612,7 +612,7 @@ static void PkmnStrToASCII(u8 *asciiStr, const u8 *pkmnStr)
     s32 i;
 
     for (i = 0; pkmnStr[i] != EOS; i++)
-        asciiStr[i] = sWireless_RSEtoASCIITable[pkmnStr[i]];
+        asciiStr[i] = gWireless_RSEtoASCIITable[pkmnStr[i]];
     asciiStr[i] = 0;
 }
 
@@ -677,7 +677,7 @@ void InitHostRfuGameData(struct RfuGameData *data, u8 activity, bool32 startedAc
     data->compatibility.hasNews = FALSE;
     data->compatibility.hasCard = FALSE;
     data->compatibility.unknown = FALSE;
-    data->compatibility.isChampion = FlagGet(FLAG_IS_CHAMPION);
+    data->compatibility.canLinkNationally = FlagGet(FLAG_IS_CHAMPION);
     data->compatibility.hasNationalDex = IsNationalPokedexEnabled();
     data->compatibility.gameClear = FlagGet(FLAG_SYS_GAME_CLEAR);
 }
@@ -824,7 +824,7 @@ void UpdateWirelessStatusIndicatorSprite(void)
         struct Sprite *sprite = &gSprites[gWirelessStatusIndicatorSpriteId];
         u8 signalStrength = RFU_LINK_ICON_LEVEL4_MAX;
         u8 i = 0;
-        
+
         // Get weakest signal strength
         if (gRfuLinkStatus->parentChild == MODE_PARENT)
         {
@@ -913,7 +913,7 @@ void SaveLinkTrainerNames(void)
         s32 j;
         s32 nextSpace;
         s32 connectedTrainerRecordIndices[MAX_RFU_PLAYERS];
-        struct TrainerNameRecord *newRecords = calloc(ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords), sizeof(struct TrainerNameRecord));
+        struct TrainerNameRecord *newRecords = AllocZeroed(sizeof(gSaveBlock1Ptr->trainerNameRecords));
 
         // Check if we already have a record saved for connected trainers.
         for (i = 0; i < GetLinkPlayerCount(); i++)
@@ -955,7 +955,7 @@ void SaveLinkTrainerNames(void)
 
         // Finalize the new list, and clean up.
         memcpy(gSaveBlock1Ptr->trainerNameRecords, newRecords, sizeof(gSaveBlock1Ptr->trainerNameRecords));
-        free(newRecords);
+        Free(newRecords);
     }
 }
 

@@ -14,9 +14,9 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "right",
+      "map": "MAP_BATTLE_FRONTIER_OUTSIDE_EAST",
       "offset": 0,
-      "map": "MAP_BATTLE_FRONTIER_OUTSIDE_EAST"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -339,77 +339,77 @@
       "y": 27,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 19,
       "y": 17,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_BATTLE_DOME_LOBBY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 11,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 45,
       "y": 44,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_LOUNGE2",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 51,
       "y": 51,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_MART",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 44,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_SCOTTS_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 53,
       "y": 44,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_LOUNGE4",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 5,
       "y": 20,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_LOUNGE7",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 26,
       "y": 65,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_RECEPTION_GATE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 26,
       "y": 61,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_RECEPTION_GATE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 39,
       "y": 55,
       "elevation": 0,
       "dest_map": "MAP_ARTISAN_CAVE_B1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

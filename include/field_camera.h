@@ -17,14 +17,14 @@ extern u16 gTotalCameraPixelOffsetY;
 
 void DrawWholeMapView(void);
 void CurrentMapDrawMetatileAt(int x, int y);
-void GetCameraOffsetWithPan(s16 *a0, s16 *a1);
+void GetCameraOffsetWithPan(s16 *x, s16 *y);
 void DrawDoorMetatileAt(int x, int y, u16 *arr);
 void ResetFieldCamera(void);
 void ResetCameraUpdateInfo(void);
-u32 InitCameraUpdateCallback(u8 a);
+u32 InitCameraUpdateCallback(u8 trackedSpriteId);
 void CameraUpdate(void);
-void SetCameraPanningCallback(void (*a)(void));
-void SetCameraPanning(s16 a, s16 b);
+void SetCameraPanningCallback(void (*callback)(void));
+void SetCameraPanning(s16 horizontal, s16 vertical);
 void InstallCameraPanAheadCallback(void);
 void UpdateCameraPanning(void);
 void FieldUpdateBgTilemapScroll(void);

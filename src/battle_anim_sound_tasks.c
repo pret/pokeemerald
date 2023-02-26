@@ -2,9 +2,12 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "contest.h"
+#include "m4a.h"
 #include "sound.h"
 #include "task.h"
 #include "constants/battle_anim.h"
+
+extern struct MusicPlayerInfo gMPlayInfo_SE1;
 
 static void SoundTask_FireBlast_Step1(u8 taskId);
 static void SoundTask_FireBlast_Step2(u8 taskId);
@@ -12,6 +15,7 @@ static void SoundTask_LoopSEAdjustPanning_Step(u8 taskId);
 static void SoundTask_PlayDoubleCry_Step(u8 taskId);
 static void SoundTask_PlayCryWithEcho_Step(u8 taskId);
 static void SoundTask_AdjustPanningVar_Step(u8 taskId);
+static void SoundTask_SeVolumeChange(u8 taskId);
 
 // Loops the specified sound effect and pans from the
 // attacker to the target. The second specified sound effect
@@ -100,7 +104,7 @@ void SoundTask_LoopSEAdjustPanning(u8 taskId)
     gTasks[taskId].data[12] = r9;
 
     gTasks[taskId].func = SoundTask_LoopSEAdjustPanning_Step;
-    SoundTask_LoopSEAdjustPanning_Step(taskId);
+    gTasks[taskId].func(taskId);
 }
 
 static void SoundTask_LoopSEAdjustPanning_Step(u8 taskId)
@@ -135,10 +139,12 @@ void SoundTask_PlayCryHighPitch(u8 taskId)
     {
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
             species = gContestResources->moveAnim->species;
-        #ifndef UBFIX
+    // Destroying the task twice (here and at end of function)
+    // results in an incorrect value for gAnimVisualTaskCount
+    #ifndef BUGFIX
         else
-            DestroyAnimVisualTask(taskId); // UB: task gets destroyed twice.
-        #endif
+            DestroyAnimVisualTask(taskId);
+    #endif
     }
     else
     {
@@ -181,10 +187,12 @@ void SoundTask_PlayDoubleCry(u8 taskId)
     {
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
             species = gContestResources->moveAnim->species;
-        #ifndef UBFIX
+    // Destroying the task twice (here and at end of function)
+    // results in an incorrect value for gAnimVisualTaskCount
+    #ifndef BUGFIX
         else
-            DestroyAnimVisualTask(taskId); // UB: task gets destroyed twice.
-        #endif
+            DestroyAnimVisualTask(taskId);
+    #endif
     }
     else
     {
@@ -381,7 +389,7 @@ void SoundTask_AdjustPanningVar(u8 taskId)
     gTasks[taskId].data[11] = sourcePan;
 
     gTasks[taskId].func = SoundTask_AdjustPanningVar_Step;
-    SoundTask_AdjustPanningVar_Step(taskId);
+    gTasks[taskId].func(taskId);
 }
 
 static void SoundTask_AdjustPanningVar_Step(u8 taskId)
@@ -400,4 +408,62 @@ static void SoundTask_AdjustPanningVar_Step(u8 taskId)
     gAnimCustomPanning = gTasks[taskId].data[11];
     if (gTasks[taskId].data[11] == gTasks[taskId].data[2])
         DestroyAnimVisualTask(taskId);
+}
+
+#define tSongNum        data[0]
+#define tPan            data[1]
+#define tCurrentVolume  data[2]
+#define tIncrementVal   data[3]
+#define tTargetVolume   data[4]
+#define tDelay          data[5]
+#define tFrameCounter   data[6]
+#define tInitialVolume  data[7]
+
+void SoundTask_PlaySeChangingVolume(u8 taskId)
+{
+    gTasks[taskId].tSongNum = gBattleAnimArgs[0];
+    gTasks[taskId].tPan = BattleAnimAdjustPanning(gBattleAnimArgs[1]);
+    gTasks[taskId].tCurrentVolume = gTasks[taskId].tInitialVolume = gBattleAnimArgs[2];
+    gTasks[taskId].tIncrementVal = gBattleAnimArgs[3];
+    gTasks[taskId].tTargetVolume = gBattleAnimArgs[4];
+    gTasks[taskId].tDelay = gBattleAnimArgs[5];
+
+    PlaySE1WithPanning(gTasks[taskId].tSongNum, gTasks[taskId].tPan);
+    m4aMPlayVolumeControl(&gMPlayInfo_SE1, 0xFFFF, gTasks[taskId].tCurrentVolume);
+    if (gTasks[taskId].tIncrementVal == 0) // Either increase or decrease volume.
+        DestroyAnimSoundTask(taskId);
+    else
+        gTasks[taskId].func = SoundTask_SeVolumeChange;
+}
+
+static void SoundTask_SeVolumeChange(u8 taskId)
+{
+    bool32 destroyTask = FALSE;
+
+    if (gTasks[taskId].tFrameCounter++ >= gTasks[taskId].tDelay)
+    {
+        gTasks[taskId].tFrameCounter = 0;
+        gTasks[taskId].tCurrentVolume += gTasks[taskId].tIncrementVal;
+
+        if (gTasks[taskId].tCurrentVolume < 0)
+            gTasks[taskId].tCurrentVolume = 0;
+        if (gTasks[taskId].tCurrentVolume > 256)
+            gTasks[taskId].tCurrentVolume = 256;
+
+        if (gTasks[taskId].tInitialVolume < gTasks[taskId].tTargetVolume) // Volume increasing.
+        {
+            if (gTasks[taskId].tCurrentVolume >= gTasks[taskId].tTargetVolume) // Target reached.
+                destroyTask = TRUE;
+        }
+        else // Volume decreasing.
+        {
+            if (gTasks[taskId].tCurrentVolume <= gTasks[taskId].tTargetVolume) // Target reached.
+                destroyTask = TRUE;
+        }
+
+        if (destroyTask)
+            DestroyAnimSoundTask(taskId);
+
+        m4aMPlayVolumeControl(&gMPlayInfo_SE1, 0xFFFF, gTasks[taskId].tCurrentVolume);
+    }
 }

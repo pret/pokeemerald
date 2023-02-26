@@ -14,19 +14,19 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "down",
+      "map": "MAP_MOSSDEEP_CITY",
       "offset": 0,
-      "map": "MAP_MOSSDEEP_CITY"
+      "direction": "down"
     },
     {
-      "direction": "left",
+      "map": "MAP_ROUTE124",
       "offset": 0,
-      "map": "MAP_ROUTE124"
+      "direction": "left"
     },
     {
-      "direction": "dive",
+      "map": "MAP_UNDERWATER_ROUTE125",
       "offset": 0,
-      "map": "MAP_UNDERWATER_ROUTE125"
+      "direction": "dive"
     }
   ],
   "object_events": [
@@ -167,7 +167,7 @@
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],
