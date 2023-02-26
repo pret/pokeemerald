@@ -5066,6 +5066,11 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
     ClearObjectEventMovement(objectEvent, sprite);
 
     if (objectEvent->invisible) { // Animate exiting pokeball
+      // Player is jumping, but follower is invisible
+      if (PlayerGetCopyableMovement() == COPY_MOVE_JUMP2) {
+        sprite->sTypeFuncId = 0; // return to shadowing state
+        return FALSE;
+      }
       MoveObjectEventToMapCoords(objectEvent, targetX, targetY);
       ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_EXIT_POKEBALL);
       objectEvent->singleMovementActive = 1;
