@@ -3518,15 +3518,15 @@ Cry_Dhelmise::
 	.incbin "sound/direct_sound_samples/cries/dhelmise.bin"
 
 	.align 2
-Cry_Jangmoo::
+Cry_JangmoO::
 	.incbin "sound/direct_sound_samples/cries/jangmo_o.bin"
 
 	.align 2
-Cry_Hakamoo::
+Cry_HakamoO::
 	.incbin "sound/direct_sound_samples/cries/hakamo_o.bin"
 
 	.align 2
-Cry_Kommoo::
+Cry_KommoO::
 	.incbin "sound/direct_sound_samples/cries/kommo_o.bin"
 
 	.align 2
