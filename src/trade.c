@@ -1281,7 +1281,7 @@ static void Leader_HandleCommunication(void)
         if (sTradeMenu->playerSelectStatus == STATUS_READY
          && sTradeMenu->partnerSelectStatus == STATUS_READY)
         {
-            // Both players have selected a pokemon to trade 
+            // Both players have selected a pokemon to trade
             sTradeMenu->callbackId = CB_SET_SELECTED_MONS;
             sTradeMenu->linkData[0] = LINKCMD_SET_MONS_TO_TRADE;
             sTradeMenu->linkData[1] = sTradeMenu->cursorPosition;
@@ -1900,7 +1900,7 @@ static void DrawSelectedMonScreen(u8 whichParty)
         StoreSpriteCallbackInData6(&gSprites[sTradeMenu->partySpriteIds[selectedMonParty][partyIdx]], SpriteCB_MonIcon);
         sTradeMenu->drawSelectedMonState[whichParty]++;
         Trade_MoveSelectedMonToTarget(&gSprites[sTradeMenu->partySpriteIds[selectedMonParty][partyIdx]]);
-        
+
         CopyToBgTilemapBufferRect_ChangePalette(1, sTradePartyBoxTilemap, whichParty * 15, 0, 15, 17, 0);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(0);

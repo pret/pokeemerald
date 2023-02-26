@@ -418,7 +418,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectTeatime                 @ EFFECT_TEATIME
 	.4byte BattleScript_EffectAttackUpUserAlly        @ EFFECT_ATTACK_UP_USER_ALLY
 	.4byte BattleScript_EffectShellTrap				  @ EFFECT_SHELL_TRAP
-	
+
 BattleScript_EffectAttackUpUserAlly:
 	jumpifnoally BS_ATTACKER, BattleScript_EffectAttackUp
 	attackcanceler
@@ -461,7 +461,7 @@ BattleScript_EffectTeatime::
 	attackstring
 	ppreduce
 	jumpifteanoberry BattleScript_ButItFailed
-@ at least one battler is affected 
+@ at least one battler is affected
 	attackanimation
 	waitanimation
 BattleScript_TeatimeLoop:
@@ -561,7 +561,7 @@ BattleScript_AffectionBasedStatusHeal_Continue:
 BattleScript_ShellTrapSetUp::
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 0x1
-	playanimation BS_ATTACKER, B_ANIM_SHELL_TRAP_SETUP, NULL	
+	playanimation BS_ATTACKER, B_ANIM_SHELL_TRAP_SETUP, NULL
 	printstring STRINGID_PREPARESHELLTRAP
 	waitmessage B_WAIT_TIME_LONG
 	end2
@@ -1428,7 +1428,7 @@ BattleScript_DoubleShockRemoveType::
 	printstring STRINGID_ATTACKERLOSTELECTRICTYPE
 	waitmessage B_WAIT_TIME_LONG
 	return
-	
+
 BattleScript_EffectPurify:
 	attackcanceler
 	attackstring
@@ -3342,7 +3342,7 @@ BattleScript_AbilityProtectsDoesntAffect:
 	call BattleScript_AbilityProtectsDoesntAffectRet
 	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	goto BattleScript_MoveEnd
-	
+
 BattleScript_InsomniaProtects:
 	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
@@ -3435,7 +3435,7 @@ BattleScript_EffectFreezeHit::
 BattleScript_EffectParalyzeHit::
 	setmoveeffect MOVE_EFFECT_PARALYSIS
 	goto BattleScript_EffectHit
-	
+
 BattleScript_EffectExplosion_AnimDmgRet:
 	jumpifbyte CMP_NO_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_MISSED, BattleScript_ExplosionAnimRet
 	call BattleScript_PreserveMissedBitDoMoveAnim
@@ -4255,7 +4255,7 @@ BattleScript_BattleScript_EffectParalyzeNoTypeCalc:
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
-	
+
 BattleScript_VoltAbsorbHeal:
 	copybyte gBattlerAbility, gBattlerTarget
 	tryhealquarterhealth BS_TARGET BattleScript_MonMadeMoveUseless @ Check if max hp
@@ -7727,7 +7727,7 @@ BattleScript_GrudgeTakesPp::
 	printstring STRINGID_PKMNLOSTPPGRUDGE
 	waitmessage B_WAIT_TIME_LONG
 	return
-	
+
 BattleScript_MagicCoatBounce::
 	attackstring
 	ppreduce
@@ -8009,7 +8009,7 @@ BattleScript_AftermathDmg::
 	waitmessage B_WAIT_TIME_LONG
 	tryfaintmon BS_ATTACKER
 	return
-	
+
 BattleScript_DampPreventsAftermath::
 	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
