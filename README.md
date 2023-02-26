@@ -1,7 +1,7 @@
 # About this branch
-This branch adds 3 new pockets to the bag based on changes to it from later generations:
+This branch adds 5 new pockets to the bag based on changes to it from later generations:
 * Medicine (HP, PP and status recovery items)
-* Treasures
+* Power-Up (Evolution Items, Vitamins, Mints, Candies)
 * Battle Items (X items, Pokédoll/FluffyTail and hold items with battle effects)
 * Mega Stones
 * Z-Crystals
@@ -12,7 +12,7 @@ The new order for the pockets is the following:
 * Poké Balls
 * Battle Items
 * Berries
-* Treasures
+* Power-Up
 * Mega Stones
 * Z-Crystals
 * TMs & HMs
