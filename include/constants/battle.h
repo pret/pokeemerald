@@ -374,16 +374,8 @@
 #define MOVE_EFFECT_TRAP_BOTH           70
 #define MOVE_EFFECT_DOUBLE_SHOCK        71
 #define MOVE_EFFECT_ROUND               72
-#define MOVE_EFFECT_RAISE_SIDE_STATS    73
-#define MOVE_EFFECT_LOWER_SIDE_STATS    74
-#define MOVE_EFFECT_WEATHER             75
-#define MOVE_EFFECT_TERRAIN             76
-#define MOVE_EFFECT_STEALTH_ROCK        77
-#define MOVE_EFFECT_STEELSURGE          78
-#define MOVE_EFFECT_DAMAGE_NON_TYPES    79
-#define MOVE_EFFECT_DEFOG               80
 
-#define NUM_MOVE_EFFECTS                81
+#define NUM_MOVE_EFFECTS                73
 
 #define MOVE_EFFECT_AFFECTS_USER        0x4000
 #define MOVE_EFFECT_CERTAIN             0x8000

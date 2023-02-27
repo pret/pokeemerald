@@ -2868,7 +2868,6 @@ void SetMoveEffect(bool32 primary, u32 certain)
     bool32 mirrorArmorReflected = (GetBattlerAbility(gBattlerTarget) == ABILITY_MIRROR_ARMOR);
     u32 flags = 0;
     u16 battlerAbility;
-    bool8 activateAfterFaint = FALSE;
 
     if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_1ST_HIT
         && gBattleMons[gBattlerTarget].hp != 0
@@ -2886,10 +2885,6 @@ void SetMoveEffect(bool32 primary, u32 certain)
         gBattleStruct->moveEffect2 = gBattleScripting.moveEffect;
         gBattlescriptCurrInstr++;
         return;
-    case MOVE_EFFECT_STEALTH_ROCK:
-    case MOVE_EFFECT_STEELSURGE:
-        activateAfterFaint = TRUE;
-        break;
     }
 
     if (gBattleScripting.moveEffect & MOVE_EFFECT_AFFECTS_USER)
@@ -2931,7 +2926,6 @@ void SetMoveEffect(bool32 primary, u32 certain)
         INCREMENT_RESET_RETURN
 
     if (gBattleMons[gEffectBattler].hp == 0
-        && !activateAfterFaint
         && gBattleScripting.moveEffect != MOVE_EFFECT_PAYDAY
         && gBattleScripting.moveEffect != MOVE_EFFECT_STEAL_ITEM
         && gBattleScripting.moveEffect != MOVE_EFFECT_BUG_BITE)
@@ -3748,143 +3742,6 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_ROUND:
                 TryUpdateRoundTurnOrder(); // If another Pokémon uses Round before the user this turn, the user will use Round directly after it
                 gBattlescriptCurrInstr++;
-                break;// MAX MOVE EFFECTS
-            case MOVE_EFFECT_RAISE_SIDE_STATS:
-                if (!NoAliveMonsForEitherParty())
-                {
-                    // Max Effects are ordered by stat ID.
-                    SET_STATCHANGER(gBattleMoves[gCurrentMove].argument, 1, FALSE);
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_EffectRaiseSideStats;
-                    break;
-                }
-            case MOVE_EFFECT_LOWER_SIDE_STATS:
-                if (!NoAliveMonsForEitherParty())
-                {
-                    u8 statId = 0;
-                    u8 stage = 1;
-                    switch (gBattleMoves[gCurrentMove].argument)
-                    {
-                        case MAX_EFFECT_LOWER_SPEED_2_FOES:
-                            statId = STAT_SPEED;
-                            stage = 2;
-                            break;
-                        case MAX_EFFECT_LOWER_EVASIVENESS_FOES:
-                            statId = STAT_EVASION;
-                            break;
-                        default:
-                            // Max Effects are ordered by stat ID.
-                            statId = gBattleMoves[gCurrentMove].argument - MAX_EFFECT_LOWER_ATTACK + 1;
-                            break;
-                    }
-                    SET_STATCHANGER(statId, stage, TRUE);
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_EffectLowerSideStats;
-                    break;
-                }
-            case MOVE_EFFECT_WEATHER:
-            {
-                u8 weather, msg;
-                switch (gBattleMoves[gCurrentMove].argument)
-                {
-                    case MAX_EFFECT_SUN:
-                        weather = ENUM_WEATHER_SUN;
-                        msg = B_MSG_STARTED_SUNLIGHT;
-                        break;
-                    case MAX_EFFECT_RAIN:
-                        weather = ENUM_WEATHER_RAIN;
-                        msg = B_MSG_STARTED_RAIN;
-                        break;
-                    case MAX_EFFECT_SANDSTORM:
-                        weather = ENUM_WEATHER_SANDSTORM;
-                        msg = B_MSG_STARTED_SANDSTORM;
-                        break;
-                    case MAX_EFFECT_HAIL:
-                        weather = ENUM_WEATHER_HAIL;
-                        msg = B_MSG_STARTED_HAIL;
-                        break;
-                }
-                if (TryChangeBattleWeather(gBattlerAttacker, weather, FALSE))
-                {
-                    gBattleCommunication[MULTISTRING_CHOOSER] = msg;
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_EffectSetWeather;
-                }
-                break;
-            }
-            case MOVE_EFFECT_TERRAIN:
-            {
-                u32 statusFlag = 0;
-                u8 *timer = NULL;
-                switch (gBattleMoves[gCurrentMove].argument)
-                {
-                    case MAX_EFFECT_MISTY_TERRAIN:
-                        statusFlag = STATUS_FIELD_MISTY_TERRAIN, timer = &gFieldTimers.terrainTimer;
-                        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-                        break;
-                    case MAX_EFFECT_GRASSY_TERRAIN:
-                        statusFlag = STATUS_FIELD_GRASSY_TERRAIN, timer = &gFieldTimers.terrainTimer;
-                        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-                        break;
-                    case MAX_EFFECT_ELECTRIC_TERRAIN:
-                        statusFlag = STATUS_FIELD_ELECTRIC_TERRAIN, timer = &gFieldTimers.terrainTimer;
-                        gBattleCommunication[MULTISTRING_CHOOSER] = 2;
-                        break;
-                    case MAX_EFFECT_PSYCHIC_TERRAIN:
-                        statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN, timer = &gFieldTimers.terrainTimer;
-                        gBattleCommunication[MULTISTRING_CHOOSER] = 3;
-                        break;
-                }
-                if (!(gFieldStatuses & statusFlag) && statusFlag != 0)
-                {
-                    gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
-                    gFieldStatuses |= statusFlag;
-                    if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_TERRAIN_EXTENDER)
-                        *timer = 8;
-                    else
-                        *timer = 5;
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_EffectSetTerrain;
-                }
-                break;
-            }
-            case MOVE_EFFECT_DAMAGE_NON_TYPES:
-            {
-                side = GetBattlerSide(gBattlerTarget);
-                if (!(gSideStatuses[side] & SIDE_STATUS_DAMAGE_NON_TYPES))
-                {
-                    gSideStatuses[side] |= SIDE_STATUS_DAMAGE_NON_TYPES;
-                    gSideTimers[side].damageNonTypesTimer = 4;
-                    gSideTimers[side].damageNonTypesType = gBattleMoves[gCurrentMove].type;
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    ChooseDamageNonTypesString(gBattleMoves[gCurrentMove].type);
-                    gBattlescriptCurrInstr = BattleScript_DamageNonTypesStarts;
-                }
-                break;
-            }
-            case MOVE_EFFECT_STEALTH_ROCK:
-                if (!(gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_STEALTH_ROCK))
-                {
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_StealthRockActivates;
-                }
-                break;
-            case MOVE_EFFECT_STEELSURGE:
-                if (!(gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_STEELSURGE))
-                {
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_SteelsurgeActivates;
-                }
-                break;
-            case MOVE_EFFECT_DEFOG:
-                if (gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_SCREEN_ANY
-                    || gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_HAZARDS_ANY
-                    || gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_HAZARDS_ANY
-                    || gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
-                {
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_DefogTryHazards;
-                }
                 break;
             }
         }
@@ -11299,52 +11156,8 @@ static void Cmd_various(void)
     case VARIOUS_SET_MAX_MOVE_EFFECT:
     {
         VARIOUS_ARGS();
-        switch (gBattleMoves[gCurrentMove].argument)
-        {
-            case MAX_EFFECT_RAISE_TEAM_ATTACK:
-            case MAX_EFFECT_RAISE_TEAM_DEFENSE:
-            case MAX_EFFECT_RAISE_TEAM_SPEED:
-            case MAX_EFFECT_RAISE_TEAM_SP_ATK:
-            case MAX_EFFECT_RAISE_TEAM_SP_DEF:
-                gBattleScripting.moveEffect = MOVE_EFFECT_RAISE_SIDE_STATS;
-                break;
-            case MAX_EFFECT_LOWER_ATTACK:
-            case MAX_EFFECT_LOWER_DEFENSE:
-            case MAX_EFFECT_LOWER_SPEED:
-            case MAX_EFFECT_LOWER_SP_ATK:
-            case MAX_EFFECT_LOWER_SP_DEF:
-            case MAX_EFFECT_LOWER_SPEED_2_FOES:
-            case MAX_EFFECT_LOWER_EVASIVENESS_FOES:
-                gBattleScripting.moveEffect = MOVE_EFFECT_LOWER_SIDE_STATS;
-                break;
-            case MAX_EFFECT_SUN:
-            case MAX_EFFECT_RAIN:
-            case MAX_EFFECT_SANDSTORM:
-            case MAX_EFFECT_HAIL:
-                gBattleScripting.moveEffect = MOVE_EFFECT_WEATHER;
-                break;
-            case MAX_EFFECT_MISTY_TERRAIN:
-            case MAX_EFFECT_GRASSY_TERRAIN:
-            case MAX_EFFECT_ELECTRIC_TERRAIN:
-            case MAX_EFFECT_PSYCHIC_TERRAIN:
-                gBattleScripting.moveEffect = MOVE_EFFECT_TERRAIN;
-                break;
-            case MAX_EFFECT_VINE_LASH:
-            case MAX_EFFECT_CANNONADE:
-            case MAX_EFFECT_WILDFIRE:
-            case MAX_EFFECT_VOLCALITH:
-                gBattleScripting.moveEffect = MOVE_EFFECT_DAMAGE_NON_TYPES;
-                break;
-            case MAX_EFFECT_STEALTH_ROCK:
-                gBattleScripting.moveEffect = MOVE_EFFECT_STEALTH_ROCK;
-                break;               
-            case MAX_EFFECT_STEELSURGE:
-                gBattleScripting.moveEffect = MOVE_EFFECT_STEELSURGE;
-                break;
-            case MAX_EFFECT_DEFOG:
-                gBattleScripting.moveEffect = MOVE_EFFECT_DEFOG;
-                break;
-        }
+        if(SetMaxMoveEffect(gCurrentMove))
+            return;
         break;
     }
     case VARIOUS_JUMP_IF_TARGET_NOT_ALLY:

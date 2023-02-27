@@ -10334,11 +10334,26 @@ BattleScript_SymbiosisActivates::
 @@@ MAX MOVES @@@
 BattleScript_EffectMaxMove::
 	attackcanceler
-	setmaxmoveeffect
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
 	attackstring
 	ppreduce
-	goto BattleScript_HitFromCritCalc
+	critcalc
+	damagecalc
+	adjustdamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	setmaxmoveeffect
+	tryfaintmon BS_TARGET
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectRaiseSideStats::
 	savetarget
