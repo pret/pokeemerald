@@ -86,7 +86,7 @@ bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove)
 	//	return !IsRaidBossUsingRegularMove(battlerId, baseMove);
 	if (gBattleStruct->dynamax.dynamaxTurns[battlerId] > 0)
 		return TRUE;
-	return TRUE;
+	return FALSE;
 }
 
 // Returns the appropriate Max Move or G-Max Move for a battler to use.
@@ -321,6 +321,20 @@ u16 SetMaxMoveEffect(u16 move)
 			{
 				BattleScriptPush(gBattlescriptCurrInstr + 1);
 				gBattlescriptCurrInstr = BattleScript_DefogTryHazards;
+				effect++;
+			}
+			break;
+		case MAX_EFFECT_AURORA_VEIL:
+			if (!(gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_AURORA_VEIL))
+			{
+				gSideStatuses[GetBattlerSide(gBattlerAttacker)] |= SIDE_STATUS_AURORA_VEIL;
+				if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LIGHT_CLAY)
+                	gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilTimer = 8;
+				else
+					gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilTimer = 5;
+            	gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilBattlerId = gBattlerAttacker;
+				BattleScriptPush(gBattlescriptCurrInstr + 1);
+				gBattlescriptCurrInstr = BattleScript_EffectSetAuroraVeil;
 				effect++;
 			}
 			break;

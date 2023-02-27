@@ -10451,6 +10451,11 @@ BattleScript_DamageNonTypesContinuesEnd::
 	bicword gHitMarker, HITMARKER_SKIP_DMG_TRACK | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE | HITMARKER_GRUDGE
 	end2
 
+BattleScript_EffectSetAuroraVeil::
+	printstring STRINGID_PKMNCOVEREDBYVEIL
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 BattleScript_PokemonCantUseTheMove::
 	attackstring
 	ppreduce
