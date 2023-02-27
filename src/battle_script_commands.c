@@ -3848,6 +3848,20 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 }
                 break;
             }
+            case MOVE_EFFECT_DAMAGE_NON_TYPES:
+            {
+                side = GetBattlerSide(gBattlerTarget);
+                if (!(gSideStatuses[side] & SIDE_STATUS_DAMAGE_NON_TYPES))
+                {
+                    gSideStatuses[side] |= SIDE_STATUS_DAMAGE_NON_TYPES;
+                    gSideTimers[side].damageNonTypesTimer = 4;
+                    gSideTimers[side].damageNonTypesType = gBattleMoves[gCurrentMove].type;
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    ChooseDamageNonTypesString(gBattleMoves[gCurrentMove].type);
+                    gBattlescriptCurrInstr = BattleScript_DamageNonTypesStarts;
+                }
+                break;
+            }
             case MOVE_EFFECT_STEALTH_ROCK:
                 if (!(gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_STEALTH_ROCK))
                 {
@@ -3862,20 +3876,16 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     gBattlescriptCurrInstr = BattleScript_SteelsurgeActivates;
                 }
                 break;
-            case MOVE_EFFECT_DAMAGE_NON_TYPES:
-            {
-                side = GetBattlerSide(gEffectBattler);
-                if (!(gSideStatuses[side] & SIDE_STATUS_DAMAGE_NON_TYPES))
+            case MOVE_EFFECT_DEFOG:
+                if (gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_SCREEN_ANY
+                    || gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_HAZARDS_ANY
+                    || gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_HAZARDS_ANY
+                    || gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
                 {
-                    gSideStatuses[side] |= SIDE_STATUS_DAMAGE_NON_TYPES;
-                    gSideTimers[side].damageNonTypesTimer = 4;
-                    gSideTimers[side].damageNonTypesType = gBattleMoves[gCurrentMove].type;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    ChooseDamageNonTypesString(gBattleMoves[gCurrentMove].type);
-                    gBattlescriptCurrInstr = BattleScript_DamageNonTypesStarts;
+                    gBattlescriptCurrInstr = BattleScript_DefogTryHazards;
                 }
                 break;
-            }
             }
         }
     }
@@ -11330,6 +11340,9 @@ static void Cmd_various(void)
                 break;               
             case MAX_EFFECT_STEELSURGE:
                 gBattleScripting.moveEffect = MOVE_EFFECT_STEELSURGE;
+                break;
+            case MAX_EFFECT_DEFOG:
+                gBattleScripting.moveEffect = MOVE_EFFECT_DEFOG;
                 break;
         }
         break;

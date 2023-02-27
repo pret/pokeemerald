@@ -454,6 +454,7 @@ extern const u8 BattleScript_HealingWishActivates[];
 extern const u8 BattleScript_LunarDanceActivates[];
 extern const u8 BattleScript_ShellTrapSetUp[];
 extern const u8 BattleScript_StealthRockActivates[];
+extern const u8 BattleScript_DefogTryHazards[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

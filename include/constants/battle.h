@@ -381,8 +381,9 @@
 #define MOVE_EFFECT_STEALTH_ROCK        77
 #define MOVE_EFFECT_STEELSURGE          78
 #define MOVE_EFFECT_DAMAGE_NON_TYPES    79
+#define MOVE_EFFECT_DEFOG               80
 
-#define NUM_MOVE_EFFECTS                80
+#define NUM_MOVE_EFFECTS                81
 
 #define MOVE_EFFECT_AFFECTS_USER        0x4000
 #define MOVE_EFFECT_CERTAIN             0x8000
