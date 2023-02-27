@@ -2890,6 +2890,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
     case MOVE_EFFECT_KNOCK_OFF:
     case MOVE_EFFECT_SMACK_DOWN:
     case MOVE_EFFECT_REMOVE_STATUS:
+    case MOVE_EFFECT_STOCKPILE_WORE_OFF:
         gBattleStruct->moveEffect2 = gBattleScripting.moveEffect;
         gBattlescriptCurrInstr++;
         return;
@@ -5608,6 +5609,15 @@ static void Cmd_moveend(void)
             {
             case MOVE_EFFECT_KNOCK_OFF:
                 effect = TryKnockOffBattleScript(gBattlerTarget);
+                break;
+            case MOVE_EFFECT_STOCKPILE_WORE_OFF:
+                if (gDisableStructs[gBattlerAttacker].stockpileCounter != 0)
+                {
+                    gDisableStructs[gBattlerAttacker].stockpileCounter = 0;
+                    effect = TRUE;
+                    BattleScriptPush(gBattlescriptCurrInstr);
+                    gBattlescriptCurrInstr = BattleScript_MoveEffectStockpileWoreOff;
+                }
                 break;
             case MOVE_EFFECT_SMACK_DOWN:
                 if (!IsBattlerGrounded(gBattlerTarget) && IsBattlerAlive(gBattlerTarget))
@@ -11651,10 +11661,7 @@ static void Cmd_stockpiletobasedamage(void)
 
         if (!(gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_1ST_HIT && gBattleMons[gBattlerTarget].hp != 0))
         {
-            gDisableStructs[gBattlerAttacker].stockpileCounter = 0;
-            // Restore stat changes from stockpile.
-            gBattleMons[gBattlerAttacker].statStages[STAT_DEF] -= gDisableStructs[gBattlerAttacker].stockpileDef;
-            gBattleMons[gBattlerAttacker].statStages[STAT_SPDEF] -= gDisableStructs[gBattlerAttacker].stockpileSpDef;
+            gBattleStruct->moveEffect2 = MOVE_EFFECT_STOCKPILE_WORE_OFF;
         }
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
@@ -11689,14 +11696,10 @@ static void Cmd_stockpiletohpheal(void)
             gBattleMoveDamage *= -1;
 
             gBattleScripting.animTurn = gDisableStructs[gBattlerAttacker].stockpileCounter;
-            gDisableStructs[gBattlerAttacker].stockpileCounter = 0;
+            gBattleStruct->moveEffect2 = MOVE_EFFECT_STOCKPILE_WORE_OFF;
             gBattlescriptCurrInstr = cmd->nextInstr;
             gBattlerTarget = gBattlerAttacker;
         }
-
-        // Restore stat changes from stockpile.
-        gBattleMons[gBattlerAttacker].statStages[STAT_DEF] -= gDisableStructs[gBattlerAttacker].stockpileDef;
-        gBattleMons[gBattlerAttacker].statStages[STAT_SPDEF] -= gDisableStructs[gBattlerAttacker].stockpileSpDef;
     }
 }
 
@@ -16133,6 +16136,31 @@ void BS_JumpIfHoldEffect(void)
         RecordItemEffectBattle(battler, holdEffect);
         gLastUsedItem = gBattleMons[battler].item;   // For B_LAST_USED_ITEM
         gBattlescriptCurrInstr += 12;
+    }
+}
+
+void BS_DoStockpileStatChangesWearOff(void)
+{
+    NATIVE_ARGS(u8 battler, const u8 *statChangeInstr);
+
+    u32 battler = GetBattlerForBattleScript(cmd->battler);
+    if (gDisableStructs[battler].stockpileDef != 0)
+    {
+        SET_STATCHANGER(STAT_DEF, abs(gDisableStructs[battler].stockpileDef), TRUE);
+        gDisableStructs[battler].stockpileDef = 0;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = cmd->statChangeInstr;
+    }
+    else if (gDisableStructs[battler].stockpileSpDef)
+    {
+        SET_STATCHANGER(STAT_SPDEF, abs(gDisableStructs[battler].stockpileSpDef), TRUE);
+        gDisableStructs[battler].stockpileSpDef = 0;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = cmd->statChangeInstr;
+    }
+    else
+    {
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
 
