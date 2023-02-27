@@ -433,7 +433,7 @@
 // NOTE: If the stack is too small the test runner will probably crash
 // or loop.
 #define BATTLE_TEST_STACK_SIZE 1024
-#define MAX_QUEUED_EVENTS 16
+#define MAX_QUEUED_EVENTS 25
 
 enum { BATTLE_TEST_SINGLES, BATTLE_TEST_DOUBLES };
 
