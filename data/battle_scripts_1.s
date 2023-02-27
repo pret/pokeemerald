@@ -420,7 +420,18 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectShellTrap				  @ EFFECT_SHELL_TRAP
 	.4byte BattleScript_EffectMaxMove 				  @ EFFECT_MAX_MOVE
 
-	
+BattleScript_StealthRockActivates::
+	setstealthrock BattleScript_MoveEnd
+	printstring STRINGID_POINTEDSTONESFLOAT
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_SteelsurgeActivates::
+	setsteelsurge BattleScript_MoveEnd
+	printstring STRINGID_SHARPSTEELFLOATS
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectAttackUpUserAlly:
 	jumpifnoally BS_ATTACKER, BattleScript_EffectAttackUp
 	attackcanceler
@@ -7451,6 +7462,11 @@ BattleScript_StickyWebFree::
 
 BattleScript_StealthRockFree::
 	printstring STRINGID_PKMNBLEWAWAYSTEALTHROCK
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_SteelsurgeFree::
+	printstring STRINGID_PKMNBLEWAWAYSHARPSTEEL
 	waitmessage B_WAIT_TIME_LONG
 	return
 

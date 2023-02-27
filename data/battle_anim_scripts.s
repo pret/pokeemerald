@@ -910,6 +910,40 @@ gBattleAnims_Moves::
 	.4byte Move_MAX_WYRMWIND
 	.4byte Move_MAX_DARKNESS
 	.4byte Move_MAX_STARFALL
+@@@@ G-MAX MOVES
+	.4byte Move_G_MAX_VINE_LASH
+	.4byte Move_G_MAX_WILDFIRE
+	.4byte Move_G_MAX_CANNONADE
+	.4byte Move_G_MAX_BEFUDDLE
+	.4byte Move_G_MAX_VOLT_CRASH
+	.4byte Move_G_MAX_GOLD_RUSH
+	.4byte Move_G_MAX_CHI_STRIKE
+	.4byte Move_G_MAX_TERROR
+	.4byte Move_G_MAX_FOAM_BURST
+	.4byte Move_G_MAX_RESONANCE
+	.4byte Move_G_MAX_CUDDLE
+	.4byte Move_G_MAX_REPLENISH
+	.4byte Move_G_MAX_MALODOR
+	.4byte Move_G_MAX_MELTDOWN
+	.4byte Move_G_MAX_DRUM_SOLO
+	.4byte Move_G_MAX_FIREBALL
+	.4byte Move_G_MAX_HYDROSNIPE
+	.4byte Move_G_MAX_WIND_RAGE
+	.4byte Move_G_MAX_GRAVITAS
+	.4byte Move_G_MAX_STONESURGE
+	.4byte Move_G_MAX_VOLCALITH
+	.4byte Move_G_MAX_TARTNESS
+	.4byte Move_G_MAX_SWEETNESS
+	.4byte Move_G_MAX_SANDBLAST
+	.4byte Move_G_MAX_STUN_SHOCK
+	.4byte Move_G_MAX_CENTIFERNO
+	.4byte Move_G_MAX_SMITE
+	.4byte Move_G_MAX_SNOOZE
+	.4byte Move_G_MAX_FINALE
+	.4byte Move_G_MAX_STEELSURGE
+	.4byte Move_G_MAX_DEPLETION
+	.4byte Move_G_MAX_ONE_BLOW
+	.4byte Move_G_MAX_RAPID_FLOW
 @@@ Last Move - cannot be reached
 	.4byte Move_COUNT
 
@@ -30821,6 +30855,8 @@ Move_MAX_MINDSTORM:
 Move_MAX_WYRMWIND:
 Move_MAX_DARKNESS:
 Move_MAX_STARFALL:
+	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	waitforvisualfinish
 	end
 
 Move_MAX_GUARD:
@@ -30869,4 +30905,41 @@ Move_MAX_LIGHTNING::
 	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
 	waitforvisualfinish
 	goto Move_ZAP_CANNON
+	end
+
+Move_G_MAX_VINE_LASH:
+Move_G_MAX_WILDFIRE:
+Move_G_MAX_CANNONADE:
+Move_G_MAX_BEFUDDLE:
+Move_G_MAX_VOLT_CRASH:
+Move_G_MAX_GOLD_RUSH:
+Move_G_MAX_CHI_STRIKE:
+Move_G_MAX_TERROR:
+Move_G_MAX_FOAM_BURST:
+Move_G_MAX_RESONANCE:
+Move_G_MAX_CUDDLE:
+Move_G_MAX_REPLENISH:
+Move_G_MAX_MALODOR:
+Move_G_MAX_MELTDOWN:
+Move_G_MAX_DRUM_SOLO:
+Move_G_MAX_FIREBALL:
+Move_G_MAX_HYDROSNIPE:
+Move_G_MAX_WIND_RAGE:
+Move_G_MAX_GRAVITAS:
+Move_G_MAX_STONESURGE:
+Move_G_MAX_VOLCALITH:
+Move_G_MAX_TARTNESS:
+Move_G_MAX_SWEETNESS:
+Move_G_MAX_SANDBLAST:
+Move_G_MAX_STUN_SHOCK:
+Move_G_MAX_CENTIFERNO:
+Move_G_MAX_SMITE:
+Move_G_MAX_SNOOZE:
+Move_G_MAX_FINALE:
+Move_G_MAX_STEELSURGE:
+Move_G_MAX_DEPLETION:
+Move_G_MAX_ONE_BLOW:
+Move_G_MAX_RAPID_FLOW:
+	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	waitforvisualfinish
 	end

@@ -2213,7 +2213,7 @@
 	various BS_ATTACKER, VARIOUS_TRY_SYMBIOSIS
 	.endm
 
-	@ The next few macros are used by Max Moves.
+	@ Used to active a different Max Move effects.
 	.macro setmaxmoveeffect
 	various 0, VARIOUS_SET_MAX_MOVE_EFFECT
 	.endm
@@ -2226,6 +2226,11 @@
 	.macro jumpiftargetnotally, ptr:req
 	various 0, VARIOUS_JUMP_IF_TARGET_NOT_ALLY
 	.4byte \ptr
+	.endm
+
+	.macro setsteelsurge, failInstr:req
+	various 0, VARIOUS_SET_STEELSURGE
+	.4byte \failInstr
 	.endm
 
 	@ Tries to increase or decrease a battler's stat's stat stage by a specified amount. If impossible, jumps to \script.

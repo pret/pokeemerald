@@ -2868,6 +2868,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
     bool32 mirrorArmorReflected = (GetBattlerAbility(gBattlerTarget) == ABILITY_MIRROR_ARMOR);
     u32 flags = 0;
     u16 battlerAbility;
+    bool8 activateAfterFaint = FALSE;
 
     if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_1ST_HIT
         && gBattleMons[gBattlerTarget].hp != 0
@@ -2885,6 +2886,10 @@ void SetMoveEffect(bool32 primary, u32 certain)
         gBattleStruct->moveEffect2 = gBattleScripting.moveEffect;
         gBattlescriptCurrInstr++;
         return;
+    case MOVE_EFFECT_STEALTH_ROCK:
+    case MOVE_EFFECT_STEELSURGE:
+        activateAfterFaint = TRUE;
+        break;
     }
 
     if (gBattleScripting.moveEffect & MOVE_EFFECT_AFFECTS_USER)
@@ -2926,6 +2931,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
         INCREMENT_RESET_RETURN
 
     if (gBattleMons[gEffectBattler].hp == 0
+        && !activateAfterFaint
         && gBattleScripting.moveEffect != MOVE_EFFECT_PAYDAY
         && gBattleScripting.moveEffect != MOVE_EFFECT_STEAL_ITEM
         && gBattleScripting.moveEffect != MOVE_EFFECT_BUG_BITE)
@@ -3825,6 +3831,20 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 }
                 break;
             }
+            case MOVE_EFFECT_STEALTH_ROCK:
+                if (!(gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_STEALTH_ROCK))
+                {
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_StealthRockActivates;
+                }
+                break;
+            case MOVE_EFFECT_STEELSURGE:
+                if (!(gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_STEELSURGE))
+                {
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_SteelsurgeActivates;
+                }
+                break;
             }
         }
     }
@@ -3911,7 +3931,7 @@ static void Cmd_tryfaintmon(void)
 
             BattleScriptPop();
             gBattlescriptCurrInstr = instr;
-            gSideStatuses[GetBattlerSide(gActiveBattler)] &= ~(SIDE_STATUS_SPIKES_DAMAGED | SIDE_STATUS_TOXIC_SPIKES_DAMAGED | SIDE_STATUS_STEALTH_ROCK_DAMAGED | SIDE_STATUS_STICKY_WEB_DAMAGED);
+            gSideStatuses[GetBattlerSide(gActiveBattler)] &= ~(SIDE_STATUS_SPIKES_DAMAGED | SIDE_STATUS_TOXIC_SPIKES_DAMAGED | SIDE_STATUS_STEALTH_ROCK_DAMAGED | SIDE_STATUS_STICKY_WEB_DAMAGED | SIDE_STATUS_STEELSURGE_DAMAGED);
         }
         else
         {
@@ -7150,6 +7170,17 @@ static void Cmd_switchineffects(void)
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_StickyWebOnSwitchIn;
     }
+    else if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_STEELSURGE_DAMAGED)
+        && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_STEELSURGE)
+        && IsBattlerAffectedByHazards(gActiveBattler, FALSE)
+        && GetBattlerAbility(gActiveBattler) != ABILITY_MAGIC_GUARD)
+    {
+        gSideStatuses[GetBattlerSide(gActiveBattler)] |= SIDE_STATUS_STEELSURGE_DAMAGED;
+        gBattleMoveDamage = GetStealthHazardDamage(gBattleMoves[MOVE_G_MAX_STEELSURGE].type, gActiveBattler);
+
+        if (gBattleMoveDamage != 0)
+            SetDmgHazardsBattlescript(gActiveBattler, 2);
+    }
     else if (gBattleMons[gActiveBattler].hp != gBattleMons[gActiveBattler].maxHP && gBattleStruct->zmove.healReplacement)
     {
         gBattleStruct->zmove.healReplacement = FALSE;
@@ -7183,7 +7214,7 @@ static void Cmd_switchineffects(void)
                 return;
         }
 
-        gSideStatuses[GetBattlerSide(gActiveBattler)] &= ~(SIDE_STATUS_SPIKES_DAMAGED | SIDE_STATUS_TOXIC_SPIKES_DAMAGED | SIDE_STATUS_STEALTH_ROCK_DAMAGED | SIDE_STATUS_STICKY_WEB_DAMAGED);
+        gSideStatuses[GetBattlerSide(gActiveBattler)] &= ~(SIDE_STATUS_SPIKES_DAMAGED | SIDE_STATUS_TOXIC_SPIKES_DAMAGED | SIDE_STATUS_STEALTH_ROCK_DAMAGED | SIDE_STATUS_STICKY_WEB_DAMAGED | SIDE_STATUS_STEELSURGE_DAMAGED);
 
         for (i = 0; i < gBattlersCount; i++)
         {
@@ -8514,6 +8545,7 @@ static bool32 ClearDefogHazards(u8 battlerAtk, bool32 clear)
         DEFOG_CLEAR(SIDE_STATUS_STEALTH_ROCK, stealthRockAmount, BattleScript_StealthRockFree, 0);
         DEFOG_CLEAR(SIDE_STATUS_TOXIC_SPIKES, toxicSpikesAmount, BattleScript_ToxicSpikesFree, 0);
         DEFOG_CLEAR(SIDE_STATUS_STICKY_WEB, stickyWebAmount, BattleScript_StickyWebFree, 0);
+        DEFOG_CLEAR(SIDE_STATUS_STEELSURGE, steelsurgeAmount, BattleScript_SteelsurgeFree, 0);
     }
 
     return FALSE;
@@ -8698,6 +8730,7 @@ static bool32 CourtChangeSwapSideStatuses(void)
     COURTCHANGE_SWAP(SIDE_STATUS_STEALTH_ROCK, stealthRockAmount, temp);
     COURTCHANGE_SWAP(SIDE_STATUS_TOXIC_SPIKES, toxicSpikesAmount, temp);
     COURTCHANGE_SWAP(SIDE_STATUS_STICKY_WEB, stickyWebAmount, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_STEELSURGE, stickyWebAmount, temp);
 
     // Change battler IDs of swapped effects. Needed for the correct string when they expire
     // E.g. "Foe's Reflect wore off!"
@@ -11206,6 +11239,22 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
+    case VARIOUS_STORE_HEALING_WISH:
+    {
+        VARIOUS_ARGS();
+        if (gCurrentMove == MOVE_LUNAR_DANCE)
+            gBattleStruct->storedLunarDance |= gBitTable[gActiveBattler];
+        else
+            gBattleStruct->storedHealingWish |= gBitTable[gActiveBattler];
+        break;
+    }
+    case VARIOUS_HIT_SWITCH_TARGET_FAILED:
+    {
+        VARIOUS_ARGS();
+        gBattleStruct->hitSwitchTargetFailed = TRUE;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
     case VARIOUS_SET_MAX_MOVE_EFFECT:
     {
         VARIOUS_ARGS();
@@ -11237,6 +11286,12 @@ static void Cmd_various(void)
             case MAX_EFFECT_PSYCHIC_TERRAIN:
                 gBattleScripting.moveEffect = MOVE_EFFECT_TERRAIN;
                 break;
+            case MAX_EFFECT_STEALTH_ROCK:
+                gBattleScripting.moveEffect = MOVE_EFFECT_STEALTH_ROCK;
+                break;               
+            case MAX_EFFECT_STEELSURGE:
+                gBattleScripting.moveEffect = MOVE_EFFECT_STEELSURGE;
+                break;
         }
         break;
     }
@@ -11258,20 +11313,20 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
-    case VARIOUS_STORE_HEALING_WISH:
+    case VARIOUS_SET_STEELSURGE:
     {
-        VARIOUS_ARGS();
-        if (gCurrentMove == MOVE_LUNAR_DANCE)
-            gBattleStruct->storedLunarDance |= gBitTable[gActiveBattler];
+        VARIOUS_ARGS(const u8 *failInstr);
+        u8 targetSide = GetBattlerSide(gBattlerTarget);
+        if (gSideStatuses[targetSide] & SIDE_STATUS_STEELSURGE)
+        {
+            gBattlescriptCurrInstr = cmd->failInstr;
+        }
         else
-            gBattleStruct->storedHealingWish |= gBitTable[gActiveBattler];
-        break;
-    }
-    case VARIOUS_HIT_SWITCH_TARGET_FAILED:
-    {
-        VARIOUS_ARGS();
-        gBattleStruct->hitSwitchTargetFailed = TRUE;
-        gBattlescriptCurrInstr = cmd->nextInstr;
+        {
+            gSideStatuses[targetSide] |= SIDE_STATUS_STEELSURGE;
+            gSideTimers[targetSide].steelsurgeAmount = 1;
+            gBattlescriptCurrInstr = cmd->nextInstr;
+        }
         return;
     }
     } // End of switch (cmd->id)
@@ -14064,6 +14119,13 @@ static void Cmd_rapidspinfree(void)
         gSideTimers[atkSide].stealthRockAmount = 0;
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_StealthRockFree;
+    }
+    else if (gSideStatuses[atkSide] & SIDE_STATUS_STEELSURGE)
+    {
+        gSideStatuses[atkSide] &= ~SIDE_STATUS_STEELSURGE;
+        gSideTimers[atkSide].steelsurgeAmount = 0;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_SteelsurgeFree;
     }
     else
     {

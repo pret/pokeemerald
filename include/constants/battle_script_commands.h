@@ -263,6 +263,7 @@
 #define VARIOUS_JUMP_IF_NO_VALID_TARGETS            171
 #define VARIOUS_JUMP_IF_TARGET_NOT_ALLY             172
 #define VARIOUS_JUMP_IF_TARGET_ABSENT               173
+#define VARIOUS_SET_STEELSURGE                      174
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
