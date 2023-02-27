@@ -10109,7 +10109,8 @@ static void Cmd_various(void)
         VARIOUS_ARGS(u8 case_);
         if (cmd->case_ == 0)
         {
-            gBattleScripting.savedDmg = gBattlerSpriteIds[gActiveBattler];
+            // Save sprite IDs, because trainer slide in will overwrite gBattlerSpriteIds variable.
+            gBattleScripting.savedDmg = (gBattlerSpriteIds[gActiveBattler] & 0xFF) | (gBattlerSpriteIds[BATTLE_PARTNER(gActiveBattler)] << 8);
             HideBattlerShadowSprite(gActiveBattler);
         }
         else if (cmd->case_ == 1)
@@ -10119,11 +10120,18 @@ static void Cmd_various(void)
         }
         else
         {
-            gBattlerSpriteIds[gActiveBattler] = gBattleScripting.savedDmg;
-            if (gBattleMons[gActiveBattler].hp != 0)
+            gBattlerSpriteIds[BATTLE_PARTNER(gActiveBattler)] = gBattleScripting.savedDmg >> 8;
+            gBattlerSpriteIds[gActiveBattler] = gBattleScripting.savedDmg & 0xFF;
+            if (IsBattlerAlive(gActiveBattler))
             {
                 SetBattlerShadowSpriteCallback(gActiveBattler, gBattleMons[gActiveBattler].species);
                 BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
+            }
+            i = BATTLE_PARTNER(gActiveBattler);
+            if (IsBattlerAlive(i))
+            {
+                SetBattlerShadowSpriteCallback(i, gBattleMons[i].species);
+                BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[i]], i);
             }
         }
         gBattlescriptCurrInstr = cmd->nextInstr;
@@ -10132,11 +10140,11 @@ static void Cmd_various(void)
     case VARIOUS_TRY_TRAINER_SLIDE_MSG_FIRST_OFF:
     {
         VARIOUS_ARGS();
-        if (ShouldDoTrainerSlide(gActiveBattler, gTrainerBattleOpponent_A, TRAINER_SLIDE_FIRST_DOWN))
+        if ((i = ShouldDoTrainerSlide(gActiveBattler, TRAINER_SLIDE_FIRST_DOWN)))
         {
             gBattleScripting.battler = gActiveBattler;
             BattleScriptPush(cmd->nextInstr);
-            gBattlescriptCurrInstr = BattleScript_TrainerSlideMsgRet;
+            gBattlescriptCurrInstr = (i == 1 ? BattleScript_TrainerASlideMsgRet : BattleScript_TrainerBSlideMsgRet);
             return;
         }
         break;
@@ -10144,11 +10152,11 @@ static void Cmd_various(void)
     case VARIOUS_TRY_TRAINER_SLIDE_MSG_LAST_ON:
     {
         VARIOUS_ARGS();
-        if (ShouldDoTrainerSlide(gActiveBattler, gTrainerBattleOpponent_A, TRAINER_SLIDE_LAST_SWITCHIN))
+        if ((i = ShouldDoTrainerSlide(gActiveBattler, TRAINER_SLIDE_LAST_SWITCHIN)))
         {
             gBattleScripting.battler = gActiveBattler;
             BattleScriptPush(cmd->nextInstr);
-            gBattlescriptCurrInstr = BattleScript_TrainerSlideMsgRet;
+            gBattlescriptCurrInstr = (i == 1 ? BattleScript_TrainerASlideMsgRet : BattleScript_TrainerBSlideMsgRet);
             return;
         }
         break;
