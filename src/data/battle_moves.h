@@ -15613,7 +15613,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.priority = 0,
 		.flags = 0,
 		.split = SPLIT_PHYSICAL,
-		.argument = MAX_EFFECT_VOLCAITH_FOES,
+		.argument = MAX_EFFECT_VOLCALITH,
 	},
 	
 	[MOVE_G_MAX_TARTNESS] =

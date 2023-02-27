@@ -224,6 +224,8 @@ struct SideTimer
     u8 followmeTarget:3;
     u8 followmePowder:1; // Rage powder, does not affect grass type pokemon.
     u8 retaliateTimer;
+    u8 damageNonTypesTimer;
+    u8 damageNonTypesType;
 };
 
 struct FieldTimer

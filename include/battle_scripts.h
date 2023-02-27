@@ -454,8 +454,6 @@ extern const u8 BattleScript_HealingWishActivates[];
 extern const u8 BattleScript_LunarDanceActivates[];
 extern const u8 BattleScript_ShellTrapSetUp[];
 extern const u8 BattleScript_StealthRockActivates[];
-extern const u8 BattleScript_SteelsurgeActivates[];
-extern const u8 BattleScript_SteelsurgeFree[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
@@ -471,5 +469,9 @@ extern const u8 BattleScript_EffectRaiseSideStats[];
 extern const u8 BattleScript_EffectLowerSideStats[];
 extern const u8 BattleScript_EffectSetWeather[];
 extern const u8 BattleScript_EffectSetTerrain[];
+extern const u8 BattleScript_SteelsurgeActivates[];
+extern const u8 BattleScript_SteelsurgeFree[];
+extern const u8 BattleScript_DamageNonTypesStarts[];
+extern const u8 BattleScript_DamageNonTypesContinues[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

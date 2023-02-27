@@ -3845,6 +3845,20 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     gBattlescriptCurrInstr = BattleScript_SteelsurgeActivates;
                 }
                 break;
+            case MOVE_EFFECT_DAMAGE_NON_TYPES:
+            {
+                side = GetBattlerSide(gEffectBattler);
+                if (!(gSideStatuses[side] & SIDE_STATUS_DAMAGE_NON_TYPES))
+                {
+                    gSideStatuses[side] |= SIDE_STATUS_DAMAGE_NON_TYPES;
+                    gSideTimers[side].damageNonTypesTimer = 4;
+                    gSideTimers[side].damageNonTypesType = gBattleMoves[gCurrentMove].type;
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    ChooseDamageNonTypesString(gBattleMoves[gCurrentMove].type);
+                    gBattlescriptCurrInstr = BattleScript_DamageNonTypesStarts;
+                }
+                break;
+            }
             }
         }
     }
@@ -11281,10 +11295,16 @@ static void Cmd_various(void)
                 gBattleScripting.moveEffect = MOVE_EFFECT_WEATHER;
                 break;
             case MAX_EFFECT_MISTY_TERRAIN:
-            case MAX_EFFECT_GRASSY_TERRAIN: // TODO: Grassy terrain not working?
+            case MAX_EFFECT_GRASSY_TERRAIN:
             case MAX_EFFECT_ELECTRIC_TERRAIN:
             case MAX_EFFECT_PSYCHIC_TERRAIN:
                 gBattleScripting.moveEffect = MOVE_EFFECT_TERRAIN;
+                break;
+            case MAX_EFFECT_VINE_LASH:
+            case MAX_EFFECT_CANNONADE:
+            case MAX_EFFECT_WILDFIRE:
+            case MAX_EFFECT_VOLCALITH:
+                gBattleScripting.moveEffect = MOVE_EFFECT_DAMAGE_NON_TYPES;
                 break;
             case MAX_EFFECT_STEALTH_ROCK:
                 gBattleScripting.moveEffect = MOVE_EFFECT_STEALTH_ROCK;
@@ -11328,6 +11348,22 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = cmd->nextInstr;
         }
         return;
+    }
+    case VARIOUS_DAMAGE_NON_TYPES:
+    {
+        VARIOUS_ARGS();
+        side = GetBattlerSide(gBattlerAttacker);
+        gBattleMoveDamage = 0;
+        if (gSideTimers[side].damageNonTypesTimer
+            && !IS_BATTLER_OF_TYPE(gBattlerAttacker, gSideTimers[side].damageNonTypesType)
+            && IsBattlerAlive(gBattlerAttacker) 
+            && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
+        {
+            gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 6;
+            if (gBattleMoveDamage == 0)
+                gBattleMoveDamage = 1;
+        }
+        break;
     }
     } // End of switch (cmd->id)
 

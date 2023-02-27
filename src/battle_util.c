@@ -2117,6 +2117,7 @@ enum
     ENDTURN_SANDSTORM,
     ENDTURN_SUN,
     ENDTURN_HAIL,
+    ENDTURN_DAMAGE_NON_TYPES,
     ENDTURN_GRAVITY,
     ENDTURN_WATER_SPORT,
     ENDTURN_MUD_SPORT,
@@ -2457,6 +2458,34 @@ u8 DoFieldEndTurnEffects(void)
                 effect++;
             }
             gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_DAMAGE_NON_TYPES:
+            while (gBattleStruct->turnSideTracker < 2)
+            {
+                side = gBattleStruct->turnSideTracker;
+                if (gSideStatuses[side] & SIDE_STATUS_DAMAGE_NON_TYPES)
+                {
+                    if (--gSideTimers[side].damageNonTypesTimer == 0)
+                    {
+                        gSideStatuses[side] &= ~SIDE_STATUS_DAMAGE_NON_TYPES;
+                        //gBattlescriptCurrInstr = BattleScript_DamageNonTypesEnds; TODO: no end message in-game?
+                        effect++;
+                    }
+                    else
+                    {
+                        ChooseDamageNonTypesString(gSideTimers[side].damageNonTypesType);
+                        BattleScriptExecute(BattleScript_DamageNonTypesContinues);
+                    }
+                }
+                gBattleStruct->turnSideTracker++;
+                if (effect != 0)
+                    break;
+            }
+            if (!effect)
+            {
+                gBattleStruct->turnCountersTracker++;
+                gBattleStruct->turnSideTracker = 0;
+            }
             break;
         case ENDTURN_TRICK_ROOM:
             if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM && --gFieldTimers.trickRoomTimer == 0)

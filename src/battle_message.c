@@ -779,9 +779,25 @@ static const u8 sText_ShellTrapDidntWork[] = _("{B_ATK_NAME_WITH_PREFIX}'s shell
 static const u8 sText_SharpSteelFloats[] = _("Sharp-pointed steel floats\naround {B_DEF_TEAM2} team!");
 static const u8 sText_SharpSteelDmg[] = _("Sharp steel bit into {B_DEF_NAME_WITH_PREFIX}!");
 static const u8 sText_PkmnBlewAwaySharpSteel[] = _("{B_ATK_NAME_WITH_PREFIX} blew away\nsharp steel!");
+static const u8 sText_TeamTrappedWithVines[] = _("{B_DEF_TEAM1} team got trapped\nwith vines!");
+static const u8 sText_PkmnHurtByVines[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt by\nG-Max Vine Lash's ferocious beating!");
+static const u8 sText_TeamCaughtInVortex[] = _("{B_DEF_TEAM1} team got caught\nin a vortex of water!");
+static const u8 sText_PkmnHurtByVortex[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt by\nG-Max Cannonade's vortex!");
+static const u8 sText_TeamSurroundedByFire[] = _("{B_DEF_TEAM1} team was surrounded\nby flames!");
+static const u8 sText_PkmnBurningUp[] = _("{B_ATK_NAME_WITH_PREFIX} is burning up\nwithin G-Max Wildfire's flames!");
+static const u8 sText_TeamSurroundedByRocks[] = _("{B_DEF_TEAM1} team was surrounded\nby rocks!");
+static const u8 sText_PkmnHurtByRocksThrown[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt by\nrocks thrown out by G-Max Volcalith!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_PKMNHURTBYROCKSTHROWN - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByRocksThrown,
+    [STRINGID_TEAMSURROUNDEDBYROCKS - BATTLESTRINGS_TABLE_START] = sText_TeamSurroundedByRocks,
+    [STRINGID_PKMNBURNINGUP - BATTLESTRINGS_TABLE_START] = sText_PkmnBurningUp,
+    [STRINGID_TEAMSURROUNDEDBYFIRE - BATTLESTRINGS_TABLE_START] = sText_TeamSurroundedByFire,
+    [STRINGID_PKMNHURTBYVORTEX - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByVortex,
+    [STRINGID_TEAMCAUGHTINVORTEX - BATTLESTRINGS_TABLE_START] = sText_TeamCaughtInVortex,
+    [STRINGID_PKMNHURTBYVINES - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByVines,
+    [STRINGID_TEAMTRAPPEDWITHVINES - BATTLESTRINGS_TABLE_START] = sText_TeamTrappedWithVines,
     [STRINGID_PKMNBLEWAWAYSHARPSTEEL - BATTLESTRINGS_TABLE_START] = sText_PkmnBlewAwaySharpSteel,
     [STRINGID_SHARPSTEELDMG - BATTLESTRINGS_TABLE_START] = sText_SharpSteelDmg,
     [STRINGID_SHARPSTEELFLOATS - BATTLESTRINGS_TABLE_START] = sText_SharpSteelFloats,
@@ -1875,6 +1891,16 @@ const u16 gRoomsStringIds[] =
 const u16 gStatusConditionsStringIds[] =
 {
     STRINGID_PKMNWASPOISONED, STRINGID_PKMNBADLYPOISONED, STRINGID_PKMNWASBURNED, STRINGID_PKMNWASPARALYZED, STRINGID_PKMNFELLASLEEP
+};
+
+const u16 gDamageNonTypesStartStringIds[] =
+{
+    STRINGID_TEAMTRAPPEDWITHVINES, STRINGID_TEAMCAUGHTINVORTEX, STRINGID_TEAMSURROUNDEDBYFIRE, STRINGID_TEAMSURROUNDEDBYROCKS
+};
+
+const u16 gDamageNonTypesDmgStringIds[] =
+{
+    STRINGID_PKMNHURTBYVINES, STRINGID_PKMNHURTBYVORTEX, STRINGID_PKMNBURNINGUP, STRINGID_PKMNHURTBYROCKSTHROWN
 };
 
 const u8 gText_PkmnIsEvolving[] = _("What?\n{STR_VAR_1} is evolving!");

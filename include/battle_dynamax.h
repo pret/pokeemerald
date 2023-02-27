@@ -40,7 +40,7 @@ enum MaxMoveEffect
 	MAX_EFFECT_HEAL_TEAM,
 	MAX_EFFECT_SPITE,
 	MAX_EFFECT_GRAVITY,
-	MAX_EFFECT_VOLCAITH_FOES,
+	MAX_EFFECT_VOLCALITH,
 	MAX_EFFECT_SANDBLAST_FOES,
 	MAX_EFFECT_YAWN_FOE,
 	MAX_EFFECT_LOWER_EVASIVENESS_FOES,
@@ -56,5 +56,6 @@ bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove);
 u16 GetMaxMove(u16 battlerId, u16 baseMove);
 bool8 IsMaxMove(u16 move);
 const u8 *GetMaxMoveName(u16 move);
+void ChooseDamageNonTypesString(u8 move);
 
 #endif

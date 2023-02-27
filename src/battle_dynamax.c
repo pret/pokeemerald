@@ -71,7 +71,7 @@ static const struct GMaxMove sGMaxMoveTable[] =
 	{SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GMAX,   TYPE_WATER,      MOVE_G_MAX_RAPID_FLOW},
 };
 
-// Functions:
+// Returns whether a move should be converted into a Max Move.
 bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove)
 {
     // TODO: Raids
@@ -82,6 +82,7 @@ bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove)
 	return FALSE;
 }
 
+// Returns the appropriate Max Move or G-Max Move for a battler to use.
 u16 GetMaxMove(u16 battlerId, u16 baseMove)
 {
 	u16 move = baseMove;
@@ -103,15 +104,36 @@ u16 GetMaxMove(u16 battlerId, u16 baseMove)
 	return move;
 }
 
+// Returns whether a move is a Max Move or not.
 bool8 IsMaxMove(u16 move)
 {
 	return move >= FIRST_MAX_MOVE && move <= LAST_MAX_MOVE;
 }
 
+// Returns the full name of a Max Move for the move usage text.
 const u8 *GetMaxMoveName(u16 move)
 {
     if (IsMaxMove(move))
         return gMaxMoveNames[move - FIRST_MAX_MOVE];
     else
         return gMaxMoveNames[0];   // Failsafe
+}
+
+// Assigns the multistring to use for the "Damage Non- Types" G-Max effect. 
+void ChooseDamageNonTypesString(u8 type)
+{
+	switch (type) {
+		case TYPE_GRASS:
+			gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+			break;
+		case TYPE_WATER:
+			gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+			break;
+		case TYPE_FIRE:
+			gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+			break;
+		case TYPE_ROCK:
+			gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+			break;
+	}
 }

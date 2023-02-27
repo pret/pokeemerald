@@ -644,8 +644,16 @@
 #define STRINGID_SHARPSTEELFLOATS                     642
 #define STRINGID_SHARPSTEELDMG                        643
 #define STRINGID_PKMNBLEWAWAYSHARPSTEEL               644
+#define STRINGID_TEAMTRAPPEDWITHVINES                 645
+#define STRINGID_PKMNHURTBYVINES                      646
+#define STRINGID_TEAMCAUGHTINVORTEX                   647
+#define STRINGID_PKMNHURTBYVORTEX                     648
+#define STRINGID_TEAMSURROUNDEDBYFIRE                 649
+#define STRINGID_PKMNBURNINGUP                        650
+#define STRINGID_TEAMSURROUNDEDBYROCKS                651
+#define STRINGID_PKMNHURTBYROCKSTHROWN                652
 
-#define BATTLESTRINGS_COUNT                           645
+#define BATTLESTRINGS_COUNT                           653
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
