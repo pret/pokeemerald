@@ -148,6 +148,7 @@ SINGLE_BATTLE_TEST("Stockpile temporarily raises Def and Sp.Def", s16 dmgPyhsica
     PARAMETRIZE {move = MOVE_STOCKPILE;}
     PARAMETRIZE {move = MOVE_CELEBRATE;}
     GIVEN {
+        ASSUME(B_STOCKPILE_RAISES_DEFS >= GEN_4);
         ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
         ASSUME(gBattleMoves[MOVE_GUST].split == SPLIT_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET) {Speed(2); }
@@ -183,6 +184,7 @@ DOUBLE_BATTLE_TEST("Stockpile's Def and Sp.Def boost is lost after using Spit Up
     PARAMETRIZE {count = 2, move = MOVE_SWALLOW;}
     PARAMETRIZE {count = 3, move = MOVE_SPIT_UP;}
     GIVEN {
+        ASSUME(B_STOCKPILE_RAISES_DEFS >= GEN_4);
         ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
         ASSUME(gBattleMoves[MOVE_GUST].split == SPLIT_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET) {Speed(4); HP(MAX_HP_TEST - 1); MaxHP(MAX_HP_TEST); }
