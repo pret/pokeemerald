@@ -159,6 +159,11 @@ u16 SetMaxMoveEffect(u16 move)
 {
 	u16 effect = 0;
 	u8 maxEffect = gBattleMoves[move].argument;
+
+	// Don't continue if the move didn't land.
+	if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+		return effect;
+	
 	switch (maxEffect)
 	{
 		case MAX_EFFECT_RAISE_TEAM_ATTACK:
