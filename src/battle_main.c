@@ -4964,6 +4964,9 @@ static void CheckChosenMoveForEffectsBeforeTurnStarts(void)
                 case MOVE_BEAK_BLAST:
                     BattleScriptExecute(BattleScript_BeakBlastSetUp);
                     return;
+                case MOVE_SHELL_TRAP:
+                    BattleScriptExecute(BattleScript_ShellTrapSetUp);
+                    return;
                 }
             }
         }

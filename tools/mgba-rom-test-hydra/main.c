@@ -38,6 +38,8 @@ struct Runner
     size_t output_buffer_size;
     size_t output_buffer_capacity;
     char *output_buffer;
+    int passes;
+    int results;
 };
 
 static unsigned nrunners = 0;
@@ -72,7 +74,11 @@ static void handle_read(struct Runner *runner)
                     runner->test_name[eol - soc - 1] = '\0';
                     break;
 
-                case 'R':
+                case 'P':
+                case 'F':
+                    if (soc[1] == 'P')
+                        runner->passes++;
+                    runner->results++;
                     soc += 2;
                     fprintf(stdout, "%s: ", runner->test_name);
                     fwrite(soc, 1, eol - soc, stdout);
@@ -404,6 +410,8 @@ int main(int argc, char *argv[])
 
     // Reap test runners and collate exit codes.
     int exit_code = 0;
+    int passes = 0;
+    int results = 0;
     for (int i = 0; i < nrunners; i++)
     {
         int wstatus;
@@ -412,8 +420,14 @@ int main(int argc, char *argv[])
             perror("waitpid runners[i] failed");
             exit(2);
         }
+        if (runners[i].output_buffer_size > 0)
+            fwrite(runners[i].output_buffer, 1, runners[i].output_buffer_size, stdout);
         if (WIFEXITED(wstatus) && WEXITSTATUS(wstatus) > exit_code)
             exit_code = WEXITSTATUS(wstatus);
+        passes += runners[i].passes;
+        results += runners[i].results;
     }
+    fprintf(stdout, "%d/%d \e[32mPASS\e[0med\n", passes, results);
+    fflush(stdout);
     return exit_code;
 }

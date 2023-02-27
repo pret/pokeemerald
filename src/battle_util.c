@@ -948,7 +948,8 @@ void HandleAction_ActionFinished(void)
                 u8 battler1 = gBattlerByTurnOrder[i];
                 u8 battler2 = gBattlerByTurnOrder[j];
 
-                if (gProtectStructs[battler1].quash || gProtectStructs[battler2].quash)
+                if (gProtectStructs[battler1].quash || gProtectStructs[battler2].quash
+                    || gProtectStructs[battler1].shellTrap || gProtectStructs[battler2].shellTrap)
                     continue;
 
                 // We recalculate order only for action of the same priority. If any action other than switch/move has been taken, they should
@@ -3307,7 +3308,7 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
     return FALSE;
 }
 
-#define FAINTED_ACTIONS_MAX_CASE 7
+#define FAINTED_ACTIONS_MAX_CASE 8
 
 bool8 HandleFaintedMonActions(void)
 {
@@ -3392,7 +3393,19 @@ bool8 HandleFaintedMonActions(void)
             else
                 gBattleStruct->faintedActionsState = 4;
             break;
-        case 6:
+        case 6: // All battlers switch-in abilities happen here to prevent them happening against an empty field.
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (gBattleStruct->switchInAbilityPostponed & gBitTable[i])
+                {
+                    if (DoSwitchInAbilitiesItems(i))
+                        return TRUE;
+                    gBattleStruct->switchInAbilityPostponed &= ~(gBitTable[i]);
+                }
+            }
+            gBattleStruct->faintedActionsState++;
+            break;
+        case 7:
             if (ItemBattleEffects(ITEMEFFECT_NORMAL, 0, TRUE))
                 return TRUE;
             gBattleStruct->faintedActionsState++;
@@ -4755,6 +4768,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         case ABILITY_INTIMIDATE:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
+                gBattlerAttacker = battler;
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 SET_STATCHANGER(STAT_ATK, 1, TRUE);
                 BattleScriptPushCursorAndCallback(BattleScript_IntimidateActivates);
@@ -9843,7 +9857,17 @@ static u16 CalcTypeEffectivenessMultiplierInternal(u16 move, u8 moveType, u8 bat
         && gBattleMons[battlerDef].type3 != gBattleMons[battlerDef].type1)
         MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, gBattleMons[battlerDef].type3, battlerAtk, recordAbilities);
 
-    if (moveType == TYPE_GROUND && !IsBattlerGrounded2(battlerDef, TRUE) && !(gBattleMoves[move].flags & FLAG_DMG_UNGROUNDED_IGNORE_TYPE_IF_FLYING))
+    if (gBattleMoves[move].split == SPLIT_STATUS && move != MOVE_THUNDER_WAVE)
+    {
+        modifier = UQ_4_12(1.0);
+        #if B_GLARE_GHOST <= GEN_3
+            if (move == MOVE_GLARE && IS_BATTLER_OF_TYPE(battlerDef, TYPE_GHOST))
+            {
+                modifier = UQ_4_12(0.0);
+            }
+        #endif
+    }
+    else if (moveType == TYPE_GROUND && !IsBattlerGrounded2(battlerDef, TRUE) && !(gBattleMoves[move].flags & FLAG_DMG_UNGROUNDED_IGNORE_TYPE_IF_FLYING))
     {
         modifier = UQ_4_12(0.0);
         if (recordAbilities && defAbility == ABILITY_LEVITATE)
@@ -9859,12 +9883,6 @@ static u16 CalcTypeEffectivenessMultiplierInternal(u16 move, u8 moveType, u8 bat
     else if (move == MOVE_SHEER_COLD && IS_BATTLER_OF_TYPE(battlerDef, TYPE_ICE))
     {
         modifier = UQ_4_12(0.0);
-    }
-#endif
-#if B_GLARE_GHOST >= GEN_4
-    else if (move == MOVE_GLARE && IS_BATTLER_OF_TYPE(battlerDef, TYPE_GHOST))
-    {
-        modifier = UQ_4_12(1.0);
     }
 #endif
 

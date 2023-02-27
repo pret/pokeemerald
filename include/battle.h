@@ -143,6 +143,7 @@ struct ProtectStruct
     u16 quickDraw:1;
     u16 beakBlastCharge:1;
     u16 quash:1;
+    u16 shellTrap:1;
     u16 silkTrapped:1;
     u32 physicalDmg;
     u32 specialDmg;
@@ -644,6 +645,8 @@ struct BattleStruct
     struct StolenItem itemStolen[PARTY_SIZE];  // Player's team that had items stolen (two bytes per party member)
     u8 blunderPolicy:1; // should blunder policy activate
     u8 swapDamageCategory:1; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
+    u8 forcedSwitch:4; // For each battler
+    u8 switchInAbilityPostponed:4; // To not activate against an empty field, each bit for battler
     u8 ballSpriteIds[2];    // item gfx, window gfx
     u8 stickyWebUser;
     u8 appearedInBattle; // Bitfield to track which Pokemon appeared in battle. Used for Burmy's form change
@@ -651,6 +654,7 @@ struct BattleStruct
     // When using a move which hits multiple opponents which is then bounced by a target, we need to make sure, the move hits both opponents, the one with bounce, and the one without.
     u8 attackerBeforeBounce:2;
     u8 beatUpSlot:3;
+    bool8 hitSwitchTargetFailed:1;
     u8 targetsDone[MAX_BATTLERS_COUNT]; // Each battler as a bit.
     u16 overwrittenAbilities[MAX_BATTLERS_COUNT];    // abilities overwritten during battle (keep separate from battle history in case of switching)
     bool8 allowedToChangeFormInWeather[PARTY_SIZE][2]; // For each party member and side, used by Ice Face.

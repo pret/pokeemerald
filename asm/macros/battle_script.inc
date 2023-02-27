@@ -1299,7 +1299,7 @@
 	.byte 0xfe
 	.4byte \failInstr
 	.endm
-	
+
 	.macro callnative func:req
 	.byte 0xff
 	.4byte \func
@@ -1318,11 +1318,17 @@
 	.4byte \jumpInstr
 	.endm
 
+	.macro jumpifmorethanhalfHP battler:req, jumpInstr:req
+	callnative BS_JumpIfMoreThanHalfHP
+	.byte \battler
+	.4byte \jumpInstr
+	.endm
+
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
 	.endm
-	
+
 	@ Stores Healing Wish effect.
 	.macro storehealingwish battler:req
 	various \battler, VARIOUS_STORE_HEALING_WISH
@@ -1948,7 +1954,7 @@
 	.macro shellsidearmcheck
 	various BS_ATTACKER, VARIOUS_SHELL_SIDE_ARM_CHECK
 	.endm
-	
+
 	.macro jumpifrodaffected battler:req, jumpInstr:req
 	various \battler, VARIOUS_JUMP_IF_ROD
 	.4byte \jumpInstr
@@ -2047,11 +2053,6 @@
 
 	.macro activateterrainchangeabilities battler:req
 	various \battler, VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES
-	.endm
-
-	.macro jumpifnovalidtargets jumpInstr:req
-	various BS_ATTACKER, VARIOUS_JUMP_IF_NO_VALID_TARGETS
-	.4byte \jumpInstr
 	.endm
 
 	.macro trytrainerslidezmovemsg battler:req
@@ -2254,4 +2255,13 @@
 	.macro jumpifemergencyexited battler:req, jumpInstr:req
 	various \battler, VARIOUS_JUMP_IF_EMERGENCY_EXITED
 	.4byte \jumpInstr
+	.endm
+
+	.macro jumpifshelltrap battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_SHELL_TRAP
+	.4byte \ptr
+	.endm
+
+	.macro hitswitchtargetfailed
+	various 0, VARIOUS_HIT_SWITCH_TARGET_FAILED
 	.endm
