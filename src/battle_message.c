@@ -776,9 +776,11 @@ static const u8 sText_AbilityWeakenedSurroundingMonsStat[] = _("{B_ATK_NAME_WITH
 static const u8 sText_AttackerGainedStrengthFromTheFallen[] = _("{B_ATK_NAME_WITH_PREFIX} gained strength\nfrom the fallen!");
 static const u8 sText_PrepareShellTrap[] = _("{B_ATK_NAME_WITH_PREFIX} set a shell trap!");
 static const u8 sText_ShellTrapDidntWork[] = _("{B_ATK_NAME_WITH_PREFIX}'s shell trap didn't work!");
+static const u8 sText_CouldntFullyProtect[] = _("{B_DEF_NAME_WITH_PREFIX} couldn't fully protect\nitself and got hurt!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_COULDNTFULLYPROTECT - BATTLESTRINGS_TABLE_START] = sText_CouldntFullyProtect,
     [STRINGID_ATTACKERGAINEDSTRENGTHFROMTHEFALLEN - BATTLESTRINGS_TABLE_START] = sText_AttackerGainedStrengthFromTheFallen,
     [STRINGID_ABILITYWEAKENEDFSURROUNDINGMONSSTAT - BATTLESTRINGS_TABLE_START] = sText_AbilityWeakenedSurroundingMonsStat,
     [STRINGID_ELECTRICTERRAINACTIVATEDABILITY - BATTLESTRINGS_TABLE_START] = sText_ElectricTerrainActivatedAbility,
@@ -3901,40 +3903,49 @@ static const struct TrainerSlide sTrainerSlides[] =
     */
 };
 
-static u32 GetAliveEnemyMonCount(void)
+static u32 GetEnemyMonCount(u32 firstId, u32 lastId, bool32 onlyAlive)
 {
     u32 i, count = 0;
 
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (i = firstId; i < lastId; i++)
     {
         u32 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL);
-        if (species != SPECIES_NONE && species != SPECIES_EGG && GetMonData(&gEnemyParty[i], MON_DATA_HP, NULL))
+        if (species != SPECIES_NONE
+            && species != SPECIES_EGG
+            && (!onlyAlive || GetMonData(&gEnemyParty[i], MON_DATA_HP, NULL)))
             count++;
     }
 
     return count;
 }
 
-static u32 GetTotalEnemyMonCount(void)
+u32 ShouldDoTrainerSlide(u32 battlerId, u32 which)
 {
-    u32 i, count = 0;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        u32 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL);
-        if (species != SPECIES_NONE && species != SPECIES_EGG)
-            count++;
-    }
-
-    return count;
-}
-
-bool32 ShouldDoTrainerSlide(u32 battlerId, u32 trainerId, u32 which)
-{
-    s32 i;
+    u32 i, firstId, lastId, trainerId, retValue = 1;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) || GetBattlerSide(battlerId) != B_SIDE_OPPONENT)
-        return FALSE;
+        return 0;
+
+    // Two opponents support.
+    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+    {
+        if (gBattlerPartyIndexes[battlerId] >= 3)
+        {
+            firstId = 3, lastId = PARTY_SIZE;
+            trainerId = gTrainerBattleOpponent_B;
+            retValue = 2;
+        }
+        else
+        {
+            firstId = 0, lastId = 3;
+            trainerId = gTrainerBattleOpponent_A;
+        }
+    }
+    else
+    {
+        firstId = 0, lastId = PARTY_SIZE;
+        trainerId = gTrainerBattleOpponent_A;
+    }
 
     for (i = 0; i < ARRAY_COUNT(sTrainerSlides); i++)
     {
@@ -3944,33 +3955,33 @@ bool32 ShouldDoTrainerSlide(u32 battlerId, u32 trainerId, u32 which)
             switch (which)
             {
             case TRAINER_SLIDE_LAST_SWITCHIN:
-                if (sTrainerSlides[i].msgLastSwitchIn != NULL && GetAliveEnemyMonCount() == 1)
+                if (sTrainerSlides[i].msgLastSwitchIn != NULL && !CanBattlerSwitch(battlerId))
                 {
                     gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgLastSwitchIn;
-                    return TRUE;
+                    return retValue;
                 }
                 break;
             case TRAINER_SLIDE_LAST_LOW_HP:
                 if (sTrainerSlides[i].msgLastLowHp != NULL
-                 && GetAliveEnemyMonCount() == 1
-                 && gBattleMons[battlerId].hp <= (gBattleMons[battlerId].maxHP / 4)
-                 && !gBattleStruct->trainerSlideLowHpMsgDone)
+                    && GetEnemyMonCount(firstId, lastId, TRUE) == 1
+                    && IsBattlerHpLow(battlerId)
+                    && !gBattleStruct->trainerSlideLowHpMsgDone)
                 {
                     gBattleStruct->trainerSlideLowHpMsgDone = TRUE;
                     gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgLastLowHp;
-                    return TRUE;
+                    return retValue;
                 }
                 break;
             case TRAINER_SLIDE_FIRST_DOWN:
-                if (sTrainerSlides[i].msgFirstDown != NULL && GetAliveEnemyMonCount() == GetTotalEnemyMonCount() - 1)
+                if (sTrainerSlides[i].msgFirstDown != NULL && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE) - 1)
                 {
                     gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgFirstDown;
-                    return TRUE;
+                    return retValue;
                 }
                 break;
             case TRAINER_SLIDE_LAST_HALF_HP:
                 if (sTrainerSlides[i].msgLastHalfHp != NULL
-                 && GetAliveEnemyMonCount() == 1
+                 && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE) - 1
                  && (gBattleMons[battlerId].hp <= (gBattleMons[battlerId].maxHP / 2) && gBattleMons[battlerId].hp > (gBattleMons[battlerId].maxHP / 4))
                  && !gBattleStruct->trainerSlideHalfHpMsgDone)
                 {
@@ -4000,7 +4011,7 @@ bool32 ShouldDoTrainerSlide(u32 battlerId, u32 trainerId, u32 which)
             case TRAINER_SLIDE_FIRST_STAB_MOVE:
                 if (sTrainerSlides[i].msgFirstSTABMove != NULL
                  && gBattleStruct->trainerSlideFirstSTABMoveMsgState == 1
-                 && GetAliveEnemyMonCount() == GetTotalEnemyMonCount())
+                 && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE))
                 {
                     gBattleStruct->trainerSlideFirstSTABMoveMsgState = 2;
                     gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgFirstSTABMove;
@@ -4010,7 +4021,7 @@ bool32 ShouldDoTrainerSlide(u32 battlerId, u32 trainerId, u32 which)
             case TRAINER_SLIDE_PLAYER_MON_UNAFFECTED:
                 if (sTrainerSlides[i].msgPlayerMonUnaffected != NULL
                  && gBattleStruct->trainerSlidePlayerMonUnaffectedMsgState == 1
-                 && GetAliveEnemyMonCount() == GetTotalEnemyMonCount())
+                 && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE))
                 {
                     gBattleStruct->trainerSlidePlayerMonUnaffectedMsgState = 2;
                     gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgPlayerMonUnaffected;
@@ -4038,5 +4049,5 @@ bool32 ShouldDoTrainerSlide(u32 battlerId, u32 trainerId, u32 which)
         }
     }
 
-    return FALSE;
+    return 0;
 }

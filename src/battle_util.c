@@ -8249,9 +8249,15 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
             return FALSE;
     }
 
-        if (move == MOVE_TEATIME)
+    if (move == MOVE_TEATIME)
     {
-            return FALSE;
+        return FALSE;
+    }
+
+    // Z-Moves and Max Moves bypass protection
+    if (gBattleStruct->zmove.active)
+    {
+        return FALSE;
     }
 
     // Protective Pads doesn't stop Unseen Fist from bypassing Protect effects, so IsMoveMakingContact() isn't used here.
@@ -9638,6 +9644,12 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
             MulModifier(&finalModifier, UQ_4_12(0.25));
     }
 
+    // Z-Moves and Max Moves bypass Protect and do 25% of their original damage
+    if (gBattleStruct->zmove.active && IS_BATTLER_PROTECTED(battlerDef))
+    {
+        MulModifier(&finalModifier, UQ_4_12(0.25));
+    }
+
     // attacker's abilities
     switch (abilityAtk)
     {
@@ -9823,6 +9835,18 @@ static void MulByTypeEffectiveness(u16 *modifier, u16 move, u8 moveType, u8 batt
     MulModifier(modifier, mod);
 }
 
+static void TryNoticeIllusionInTypeEffectiveness(u32 move, u32 moveType, u32 battlerAtk, u32 battlerDef, u16 resultingModifier, u32 illusionSpecies)
+{
+    // Check if the type effectiveness would've been different if the pokemon really had the types as the disguise.
+    u16 presumedModifier = UQ_4_12(1.0);
+    MulByTypeEffectiveness(&presumedModifier, move, moveType, battlerDef, gSpeciesInfo[illusionSpecies].types[0], battlerAtk, FALSE);
+    if (gSpeciesInfo[illusionSpecies].types[1] != gSpeciesInfo[illusionSpecies].types[0])
+        MulByTypeEffectiveness(&presumedModifier, move, moveType, battlerDef, gSpeciesInfo[illusionSpecies].types[1], battlerAtk, FALSE);
+
+    if (presumedModifier != resultingModifier)
+        RecordAbilityBattle(battlerDef, ABILITY_ILLUSION);
+}
+
 static void UpdateMoveResultFlags(u16 modifier)
 {
     if (modifier == UQ_4_12(0.0))
@@ -9848,6 +9872,7 @@ static void UpdateMoveResultFlags(u16 modifier)
 
 static u16 CalcTypeEffectivenessMultiplierInternal(u16 move, u8 moveType, u8 battlerAtk, u8 battlerDef, bool32 recordAbilities, u16 modifier)
 {
+    u32 illusionSpecies;
     u16 defAbility = GetBattlerAbility(battlerDef);
 
     MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, gBattleMons[battlerDef].type1, battlerAtk, recordAbilities);
@@ -9857,15 +9882,18 @@ static u16 CalcTypeEffectivenessMultiplierInternal(u16 move, u8 moveType, u8 bat
         && gBattleMons[battlerDef].type3 != gBattleMons[battlerDef].type1)
         MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, gBattleMons[battlerDef].type3, battlerAtk, recordAbilities);
 
+    if (recordAbilities && (illusionSpecies = GetIllusionMonSpecies(battlerDef)))
+        TryNoticeIllusionInTypeEffectiveness(move, moveType, battlerAtk, battlerDef, modifier, illusionSpecies);
+
     if (gBattleMoves[move].split == SPLIT_STATUS && move != MOVE_THUNDER_WAVE)
     {
         modifier = UQ_4_12(1.0);
-        #if B_GLARE_GHOST <= GEN_3
-            if (move == MOVE_GLARE && IS_BATTLER_OF_TYPE(battlerDef, TYPE_GHOST))
-            {
-                modifier = UQ_4_12(0.0);
-            }
-        #endif
+    #if B_GLARE_GHOST <= GEN_3
+        if (move == MOVE_GLARE && IS_BATTLER_OF_TYPE(battlerDef, TYPE_GHOST))
+        {
+            modifier = UQ_4_12(0.0);
+        }
+    #endif
     }
     else if (moveType == TYPE_GROUND && !IsBattlerGrounded2(battlerDef, TRUE) && !(gBattleMoves[move].flags & FLAG_DMG_UNGROUNDED_IGNORE_TYPE_IF_FLYING))
     {
