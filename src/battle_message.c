@@ -3964,7 +3964,7 @@ u32 ShouldDoTrainerSlide(u32 battlerId, u32 which)
             case TRAINER_SLIDE_LAST_LOW_HP:
                 if (sTrainerSlides[i].msgLastLowHp != NULL
                     && GetEnemyMonCount(firstId, lastId, TRUE) == 1
-                    && IsBattlerHpLow(battlerId)
+                    && gBattleMons[battlerId].hp <= (gBattleMons[battlerId].maxHP / 4)
                     && !gBattleStruct->trainerSlideLowHpMsgDone)
                 {
                     gBattleStruct->trainerSlideLowHpMsgDone = TRUE;
