@@ -47,7 +47,6 @@
 #include "constants/pokemon.h"
 
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
-extern u8 gDynamaxMovePowers[MOVES_COUNT];
 
 /*
 NOTE: The data and functions in this file up until (but not including) sSoundMovesTable
@@ -8802,7 +8801,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         #endif
         break;
     case EFFECT_MAX_MOVE:
-        basePower = gDynamaxMovePowers[gBattleMons[battlerAtk].moves[gBattleStruct->chosenMovePositions[battlerAtk]]];
+        basePower = GetMaxMovePower(gBattleMons[battlerAtk].moves[gBattleStruct->chosenMovePositions[battlerAtk]]);
         break;
     }
 

@@ -22,7 +22,7 @@ static const u16 sMaxMoveTable[] =
 	[TYPE_GHOST] = MOVE_MAX_PHANTASM,
 	[TYPE_STEEL] = MOVE_MAX_STEELSPIKE,
 	[TYPE_FIRE] = MOVE_MAX_FLARE,
-	[TYPE_WATER] = MOVE_MAX_GEYSER,
+	[TYPE_WATER] = MOVE_G_MAX_HYDROSNIPE,
 	[TYPE_GRASS] = MOVE_MAX_OVERGROWTH,
 	[TYPE_ELECTRIC] = MOVE_MAX_LIGHTNING,
 	[TYPE_PSYCHIC] = MOVE_MAX_MINDSTORM,
@@ -76,6 +76,8 @@ static const struct GMaxMove sGMaxMoveTable[] =
 	{SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GMAX,   TYPE_WATER,      MOVE_G_MAX_RAPID_FLOW},
 };
 
+extern u8 gMaxMovePowers[MOVES_COUNT];
+
 // Returns whether a move should be converted into a Max Move.
 bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove)
 {
@@ -107,6 +109,15 @@ u16 GetMaxMove(u16 battlerId, u16 baseMove)
     }
 
 	return move;
+}
+
+// Gets the base power of a Max Move.
+u8 GetMaxMovePower(u16 move)
+{
+	if (gBattleMoves[GetMaxMove(gBattlerAttacker, move)].argument == MAX_EFFECT_FIXED_POWER)
+		return 160;
+	else
+		return gMaxMovePowers[move]; // TODO: Rework to a field in gBattleMoves.
 }
 
 // Returns whether a move is a Max Move or not.

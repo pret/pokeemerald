@@ -15521,9 +15521,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.secondaryEffectChance = 100,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = 0,
+		.flags = FLAG_TARGET_ABILITY_IGNORED,
 		.split = SPLIT_PHYSICAL,
-		.argument = MAX_EFFECT_TORMENT_FOES, //EFFECT TODO
+		.argument = MAX_EFFECT_FIXED_POWER, //EFFECT TODO
 	},
 	
 	[MOVE_G_MAX_FIREBALL] =
@@ -15536,9 +15536,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.secondaryEffectChance = 100,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = 0,
+		.flags = FLAG_TARGET_ABILITY_IGNORED,
 		.split = SPLIT_PHYSICAL,
-		.argument = MAX_EFFECT_TORMENT_FOES, //EFFECT TODO
+		.argument = MAX_EFFECT_FIXED_POWER, //EFFECT TODO
 	},
 	
 	[MOVE_G_MAX_HYDROSNIPE] =
@@ -15551,9 +15551,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.secondaryEffectChance = 100,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = 0,
+		.flags = FLAG_TARGET_ABILITY_IGNORED,
 		.split = SPLIT_PHYSICAL,
-		.argument = MAX_EFFECT_TORMENT_FOES, //EFFECT TODO
+		.argument = MAX_EFFECT_FIXED_POWER, //EFFECT TODO
 	},
 	
 	[MOVE_G_MAX_WIND_RAGE] =
@@ -15799,7 +15799,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 	
 };
 
-const u8 gDynamaxMovePowers[MOVES_COUNT] =
+const u8 gMaxMovePowers[MOVES_COUNT] =
 {
 	[MOVE_POUND] = 90,
 	[MOVE_KARATE_CHOP] = 75,

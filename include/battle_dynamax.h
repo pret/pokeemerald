@@ -50,10 +50,12 @@ enum MaxMoveEffect
 	MAX_EFFECT_TORMENT_FOES,
 	MAX_EFFECT_LOWER_SPEED_2_FOES,
 	MAX_EFFECT_FIRE_SPIN_FOES,
+	MAX_EFFECT_FIXED_POWER,
 };
 
 bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove);
 u16 GetMaxMove(u16 battlerId, u16 baseMove);
+u8 GetMaxMovePower(u16 move);
 bool8 IsMaxMove(u16 move);
 const u8 *GetMaxMoveName(u16 move);
 void ChooseDamageNonTypesString(u8 move);
