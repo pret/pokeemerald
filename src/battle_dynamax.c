@@ -76,8 +76,6 @@ static const struct GMaxMove sGMaxMoveTable[] =
 	{SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GMAX,   TYPE_WATER,      MOVE_G_MAX_RAPID_FLOW},
 };
 
-extern u8 gMaxMovePowers[MOVES_COUNT];
-
 // Returns whether a move should be converted into a Max Move.
 bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove)
 {
@@ -114,10 +112,35 @@ u16 GetMaxMove(u16 battlerId, u16 baseMove)
 // Gets the base power of a Max Move.
 u8 GetMaxMovePower(u16 move)
 {
+	// G-Max Drum Solo, G-Max Hydrosnipe, and G-Max Fireball always have 160 base power. 
 	if (gBattleMoves[GetMaxMove(gBattlerAttacker, move)].argument == MAX_EFFECT_FIXED_POWER)
 		return 160;
+	// Fighting and Poison Max Moves are weaker than other types.
+	else if (gBattleMoves[move].type == TYPE_FIGHTING
+			 || gBattleMoves[move].type == TYPE_POISON)
+		switch (gBattleMoves[move].power)
+		{
+			default:
+			case 10 ... 40: return 70;
+			case 45 ... 50: return 75;
+			case 55 ... 60: return 80;
+			case 65 ... 70: return 85;
+			case 75 ... 100: return 90;
+			case 110 ... 140: return 95;
+			case 150 ... 250: return 100;
+		}
 	else
-		return gMaxMovePowers[move]; // TODO: Rework to a field in gBattleMoves.
+		switch (gBattleMoves[move].power)
+		{
+			default:
+			case 10 ... 40: return 90;
+			case 45 ... 50: return 100;
+			case 55 ... 60: return 110;
+			case 65 ... 70: return 120;
+			case 75 ... 100: return 130;
+			case 110 ... 140: return 140;
+			case 150 ... 250: return 150;
+		}
 }
 
 // Returns whether a move is a Max Move or not.
