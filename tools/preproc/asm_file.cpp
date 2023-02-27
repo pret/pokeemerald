@@ -41,6 +41,8 @@ AsmFile::AsmFile(std::string filename) : m_filename(filename)
 
     if (m_size < 0)
         FATAL_ERROR("File size of \"%s\" is less than zero.\n", filename.c_str());
+    else if (m_size == 0)
+        return; // Empty file
 
     m_buffer = new char[m_size + 1];
 
@@ -73,7 +75,7 @@ AsmFile::AsmFile(AsmFile&& other) : m_filename(std::move(other.m_filename))
 
 AsmFile::~AsmFile()
 {
-    delete[] m_buffer;
+    if (m_size > 0) delete[] m_buffer;
 }
 
 // Removes comments to simplify further processing.
