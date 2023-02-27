@@ -3752,7 +3752,8 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_RAISE_SIDE_STATS:
                 if (!NoAliveMonsForEitherParty())
                 {
-                    SET_STATCHANGER(gBattleMoves[gCurrentMove].argument, 1, FALSE); // see enum MaxMoveEffect
+                    // Max Effects are ordered by stat ID.
+                    SET_STATCHANGER(gBattleMoves[gCurrentMove].argument, 1, FALSE);
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_EffectRaiseSideStats;
                     break;
@@ -3760,7 +3761,23 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_LOWER_SIDE_STATS:
                 if (!NoAliveMonsForEitherParty())
                 {
-                    SET_STATCHANGER(gBattleMoves[gCurrentMove].argument - 5, 1, TRUE); // see enum MaxMoveEffect
+                    u8 statId = 0;
+                    u8 stage = 1;
+                    switch (gBattleMoves[gCurrentMove].argument)
+                    {
+                        case MAX_EFFECT_LOWER_SPEED_2_FOES:
+                            statId = STAT_SPEED;
+                            stage = 2;
+                            break;
+                        case MAX_EFFECT_LOWER_EVASIVENESS_FOES:
+                            statId = STAT_EVASION;
+                            break;
+                        default:
+                            // Max Effects are ordered by stat ID.
+                            statId = gBattleMoves[gCurrentMove].argument - MAX_EFFECT_LOWER_ATTACK + 1;
+                            break;
+                    }
+                    SET_STATCHANGER(statId, stage, TRUE);
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_EffectLowerSideStats;
                     break;
@@ -11286,6 +11303,8 @@ static void Cmd_various(void)
             case MAX_EFFECT_LOWER_SPEED:
             case MAX_EFFECT_LOWER_SP_ATK:
             case MAX_EFFECT_LOWER_SP_DEF:
+            case MAX_EFFECT_LOWER_SPEED_2_FOES:
+            case MAX_EFFECT_LOWER_EVASIVENESS_FOES:
                 gBattleScripting.moveEffect = MOVE_EFFECT_LOWER_SIDE_STATS;
                 break;
             case MAX_EFFECT_SUN:
