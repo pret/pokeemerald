@@ -6230,7 +6230,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         }
         break;
     case ABILITYEFFECT_ON_TERRAIN:  // For ability effects that activate when the field terrain changes.
-        battler = gBattlerAbility = gBattleScripting.battler;
         gLastUsedAbility = GetBattlerAbility(battler);
         switch (gLastUsedAbility)
         {
@@ -6239,6 +6238,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             {
                 gSpecialStatuses[battler].terrainAbilityDone = TRUE;
                 ChangeTypeBasedOnTerrain(battler);
+                gBattlerAbility = gBattleScripting.battler = battler;
                 BattleScriptPushCursorAndCallback(BattleScript_MimicryActivates_End3);
                 effect++;
             }
@@ -6247,6 +6247,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             if (!gSpecialStatuses[battler].terrainAbilityDone && IsBattlerTerrainAffected(battler, STATUS_FIELD_ELECTRIC_TERRAIN))
             {
                 gSpecialStatuses[battler].terrainAbilityDone = TRUE;
+                gBattlerAbility = gBattleScripting.battler = battler;
                 PREPARE_STAT_BUFFER(gBattleTextBuff1, GetHighestStatId(battler));
                 BattleScriptPushCursorAndCallback(BattleScript_QuarkDriveActivates);
                 effect++;
