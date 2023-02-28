@@ -8803,14 +8803,14 @@ BattleScript_ActivateSwitchInAbilities_Increment:
 	return
 
 BattleScript_ActivateTerrainAbilities:
-	copybyte sBATTLER, gBattlerAttacker
-	setbyte gBattlerAttacker, 0
+	savetarget
+	setbyte gBattlerTarget, 0
 BattleScript_ActivateTerrainAbilities_Loop:
 	activateterrainchangeabilities BS_ATTACKER
 BattleScript_ActivateTerrainAbilities_Increment:
-	addbyte gBattlerAttacker, 1
-	jumpifbytenotequal gBattlerAttacker, gBattlersCount, BattleScript_ActivateTerrainAbilities_Loop
-	copybyte gBattlerAttacker, sBATTLER
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_ActivateTerrainAbilities_Loop
+	restoretarget
 	return
 
 BattleScript_ElectricSurgeActivates::
