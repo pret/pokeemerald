@@ -465,8 +465,8 @@ extern const u8 BattleScript_HealReplacementZMove[];
 extern const u8 BattleScript_EffectExtremeEvoboost[];
 
 // max moves
-extern const u8 BattleScript_EffectRaiseSideStats[];
-extern const u8 BattleScript_EffectLowerSideStats[];
+extern const u8 BattleScript_EffectRaiseStatAllies[];
+extern const u8 BattleScript_EffectLowerStatFoes[];
 extern const u8 BattleScript_EffectSetWeather[];
 extern const u8 BattleScript_EffectSetTerrain[];
 extern const u8 BattleScript_SteelsurgeActivates[];
@@ -478,5 +478,8 @@ extern const u8 BattleScript_EffectAuroraVeilSuccess[];
 extern const u8 BattleScript_EffectGravitySuccess[];
 extern const u8 BattleScript_EffectYawnSuccess[];
 extern const u8 BattleScript_EffectTryReducePP[];
+extern const u8 BattleScript_EffectStatus1Foes[];
+extern const u8 BattleScript_EffectStatus2Foes[];
+extern const u8 BattleScript_TormentEnds[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

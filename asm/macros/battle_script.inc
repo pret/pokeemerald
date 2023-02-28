@@ -2237,6 +2237,16 @@
 	various 0, VARIOUS_DAMAGE_NON_TYPES
 	.endm
 
+	.macro trysetstatus1, ptr:req
+	various 0, VARIOUS_TRY_SET_STATUS1
+	.4byte \ptr
+	.endm
+
+	.macro trysetstatus2, ptr:req
+	various 0, VARIOUS_TRY_SET_STATUS2
+	.4byte \ptr
+	.endm
+
 	@ Tries to increase or decrease a battler's stat's stat stage by a specified amount. If impossible, jumps to \script.
 	.macro modifybattlerstatstage battler:req, stat:req, mode:req, amount:req, script:req, animation:req, customString
 

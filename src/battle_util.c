@@ -2675,6 +2675,7 @@ enum
     ENDTURN_SLOW_START,
     ENDTURN_PLASMA_FISTS,
     ENDTURN_CUD_CHEW,
+    ENDTURN_TORMENT,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -3220,6 +3221,16 @@ u8 DoBattlerEndTurnEffects(void)
         case ENDTURN_CUD_CHEW:
             if (GetBattlerAbility(gActiveBattler) == ABILITY_CUD_CHEW && !gDisableStructs[gActiveBattler].cudChew && ItemId_GetPocket(GetUsedHeldItem(gActiveBattler)) == POCKET_BERRIES)
                 gDisableStructs[gActiveBattler].cudChew = TRUE;
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_TORMENT:
+            if (gDisableStructs[gActiveBattler].tormentTimer <= 4
+                && --gDisableStructs[gActiveBattler].tormentTimer == 0)
+            {
+                gBattleMons[gActiveBattler].status2 &= ~STATUS2_TORMENT;
+                BattleScriptExecute(BattleScript_TormentEnds);
+                effect++;
+            }
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_BATTLER_COUNT:  // done

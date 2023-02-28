@@ -58,7 +58,8 @@ u16 GetMaxMove(u16 battlerId, u16 baseMove);
 u8 GetMaxMovePower(u16 move);
 bool8 IsMaxMove(u16 move);
 const u8 *GetMaxMoveName(u16 move);
-void ChooseDamageNonTypesString(u8 move);
+void ChooseDamageNonTypesString(u8 type);
+u32 GetMaxMoveStatusEffect(u16 move);
 u16 SetMaxMoveEffect(u16 move);
 
 #endif

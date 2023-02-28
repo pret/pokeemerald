@@ -96,6 +96,7 @@ struct DisableStruct
     u8 laserFocusTimer;
     u8 throatChopTimer;
     u8 wrapTurns;
+    u8 tormentTimer:4; // used for G-Max Meltdown
     u8 usedMoves:4;
     u8 noRetreat:1;
     u8 tarShot:1;

@@ -10358,7 +10358,7 @@ BattleScript_EffectMaxMove::
 	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectRaiseSideStats::
+BattleScript_EffectRaiseStatAllies::
 	savetarget
 	setbyte gBattlerTarget, 0
 BattleScript_RaiseSideStatsLoop:
@@ -10378,7 +10378,7 @@ BattleScript_RaiseSideStatsEnd:
 	restoretarget
 	return
 
-BattleScript_EffectLowerSideStats::
+BattleScript_EffectLowerStatFoes::
 	savetarget
 	setbyte gBattlerTarget, 0
 BattleScript_LowerSideStatsLoop:
@@ -10459,6 +10459,57 @@ BattleScript_EffectTryReducePP::
 	printstring STRINGID_PKMNREDUCEDPP
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectStatus1Foes::
+	savetarget
+	setbyte gBattlerTarget, 0
+BattleScript_Status1FoesLoop:
+	jumpiftargetally BattleScript_Status1FoesIncrement
+	jumpiftargetabsent BattleScript_Status1FoesIncrement
+	trysetstatus1 BattleScript_Status1FoesIncrement
+	statusanimation BS_TARGET
+	updatestatusicon BS_TARGET
+	printfromtable gStatusConditionsStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_UpdateEffectStatusIconRet
+BattleScript_Status1FoesIncrement:
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_Status1FoesLoop
+BattleScript_Status1FoesEnd:
+	restoretarget
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectStatus2Foes::
+	savetarget
+	setbyte gBattlerTarget, 0
+BattleScript_Status2FoesLoop:
+	jumpiftargetally BattleScript_Status2FoesIncrement
+	jumpiftargetabsent BattleScript_Status2FoesIncrement
+	trysetstatus2 BattleScript_Status2FoesIncrement
+	jumpifbyte CMP_EQUAL, gBattleCommunication, 1, BattleScript_DoConfuseAnim
+	jumpifbyte CMP_EQUAL, gBattleCommunication, 2, BattleScript_DoInfatuationAnim
+BattleScript_Status2FoesPrintMessage:
+	printfromtable gStatus2StringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_Status2FoesIncrement:
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_Status2FoesLoop
+BattleScript_Status2FoesEnd:
+	restoretarget
+	goto BattleScript_MoveEnd
+
+BattleScript_DoConfuseAnim:
+	status2animation BS_TARGET, STATUS2_CONFUSION
+	goto BattleScript_Status2FoesPrintMessage
+
+BattleScript_DoInfatuationAnim:
+	status2animation BS_TARGET, STATUS2_INFATUATION
+	goto BattleScript_Status2FoesPrintMessage
+
+BattleScript_TormentEnds::
+	printstring STRINGID_TORMENTEDNOMORE
+	waitmessage B_WAIT_TIME_LONG
+	end2
 
 BattleScript_PokemonCantUseTheMove::
 	attackstring

@@ -99,7 +99,11 @@ bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove)
 u16 GetMaxMove(u16 battlerId, u16 baseMove)
 {
 	u16 move = baseMove;
-	if (gBattleMoves[baseMove].split == SPLIT_STATUS)
+	if (baseMove == MOVE_STRUGGLE)
+	{
+		return MOVE_STRUGGLE;
+	}
+	else if (gBattleMoves[baseMove].split == SPLIT_STATUS)
     {
 		move = MOVE_MAX_GUARD;
     }
@@ -192,6 +196,45 @@ void ChooseDamageNonTypesString(u8 type)
 	}
 }
 
+// Returns the status effect that should be applied by a G-Max Move.
+u32 GetMaxMoveStatusEffect(u16 move)
+{
+	u8 maxEffect = gBattleMoves[move].argument;
+	switch (maxEffect)
+	{
+		// Status 1
+		case MAX_EFFECT_PARALYZE_FOES:
+			return STATUS1_PARALYSIS;
+		case MAX_EFFECT_POISON_FOES:
+			return STATUS1_POISON;
+		case MAX_EFFECT_POISON_PARALYZE_FOES:
+			if (Random() % 2)
+				return STATUS1_POISON;
+			else
+				return STATUS1_PARALYSIS;
+		case MAX_EFFECT_EFFECT_SPORE_FOES:
+		{
+			u8 effect = Random() % 3;
+			if (effect == 0)
+				return STATUS1_PARALYSIS;
+			else if (effect == 1)
+				return STATUS1_POISON;
+			else
+				return STATUS1_SLEEP;
+		}
+		// Status 2
+		case MAX_EFFECT_CONFUSE_FOES:
+		case MAX_EFFECT_CONFUSE_FOES_PAY_DAY:
+			return STATUS2_CONFUSION;
+		case MAX_EFFECT_INFATUATE_FOES:
+			return STATUS2_INFATUATION;
+		case MAX_EFFECT_MEAN_LOOK:
+			return STATUS2_ESCAPE_PREVENTION;
+		case MAX_EFFECT_TORMENT_FOES:
+			return STATUS2_TORMENT;
+	}
+}
+
 // Activates the secondary effect of a Max Move.
 u16 SetMaxMoveEffect(u16 move)
 {
@@ -214,7 +257,7 @@ u16 SetMaxMoveEffect(u16 move)
 				// Max Effects are ordered by stat ID.
 				SET_STATCHANGER(gBattleMoves[gCurrentMove].argument, 1, FALSE);
 				BattleScriptPush(gBattlescriptCurrInstr + 1);
-				gBattlescriptCurrInstr = BattleScript_EffectRaiseSideStats;
+				gBattlescriptCurrInstr = BattleScript_EffectRaiseStatAllies;
 				effect++;
 			}
 			break;
@@ -245,7 +288,7 @@ u16 SetMaxMoveEffect(u16 move)
 				}
 				SET_STATCHANGER(statId, stage, TRUE);
 				BattleScriptPush(gBattlescriptCurrInstr + 1);
-				gBattlescriptCurrInstr = BattleScript_EffectLowerSideStats;
+				gBattlescriptCurrInstr = BattleScript_EffectLowerStatFoes;
 				effect++;
 			}
 			break;
@@ -425,14 +468,7 @@ u16 SetMaxMoveEffect(u16 move)
 		}
 		case MAX_EFFECT_YAWN_FOE:
 			if (!(gStatuses3[gBattlerTarget] & STATUS3_YAWN)
-				&& !(gBattleMons[gBattlerTarget].status1 & STATUS1_ANY)
-				&& gBattleMons[gBattlerTarget].ability != ABILITY_VITAL_SPIRIT
-				&& gBattleMons[gBattlerTarget].ability != ABILITY_INSOMNIA
-				&& gBattleMons[gBattlerTarget].ability != ABILITY_COMATOSE
-				&& gBattleMons[gBattlerTarget].ability != ABILITY_PURIFYING_SALT
-				&& !IsFlowerVeilProtected(gBattlerTarget)
-				&& !(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
-				&& !UproarWakeUpCheck(gActiveBattler))
+				&& CanSleep(gBattlerTarget))
 			{
 				gStatuses3[gBattlerTarget] |= STATUS3_YAWN_TURN(2);
 				BattleScriptPush(gBattlescriptCurrInstr + 1);
@@ -448,6 +484,23 @@ u16 SetMaxMoveEffect(u16 move)
 				gBattlescriptCurrInstr = BattleScript_EffectTryReducePP;
 				effect++;
 			}
+			break;
+		case MAX_EFFECT_PARALYZE_FOES:
+		case MAX_EFFECT_POISON_FOES:
+		case MAX_EFFECT_POISON_PARALYZE_FOES:
+		case MAX_EFFECT_EFFECT_SPORE_FOES:
+			BattleScriptPush(gBattlescriptCurrInstr + 1);
+			gBattlescriptCurrInstr = BattleScript_EffectStatus1Foes;
+			effect++;
+			break;
+		case MAX_EFFECT_CONFUSE_FOES_PAY_DAY:
+		case MAX_EFFECT_CONFUSE_FOES:
+		case MAX_EFFECT_INFATUATE_FOES:
+		case MAX_EFFECT_TORMENT_FOES:
+		case MAX_EFFECT_MEAN_LOOK:
+			BattleScriptPush(gBattlescriptCurrInstr + 1);
+			gBattlescriptCurrInstr = BattleScript_EffectStatus2Foes;
+			effect++;
 			break;
 	}
 	return effect;

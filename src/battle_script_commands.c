@@ -11210,6 +11210,120 @@ static void Cmd_various(void)
         }
         break;
     }
+    case VARIOUS_TRY_SET_STATUS1:
+    {
+        VARIOUS_ARGS(const u8 *failInstr);
+        u8 effect = 0;
+        u32 status1 = GetMaxMoveStatusEffect(gCurrentMove);
+        switch (status1)
+        {
+            case STATUS1_POISON:
+                if (CanBePoisoned(gBattlerAttacker, gBattlerTarget))
+                {
+                    gBattleMons[gBattlerTarget].status1 |= STATUS1_POISON;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                    effect++;
+                }
+                break;
+            case STATUS1_PARALYSIS:
+                if (CanBeParalyzed(gBattlerTarget))
+                {
+                    gBattleMons[gBattlerTarget].status1 |= STATUS1_PARALYSIS;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+                    effect++;
+                }
+                break;
+            case STATUS1_SLEEP:
+                if (CanSleep(gBattlerTarget))
+                {
+                #if B_SLEEP_TURNS >= GEN_5
+                    gBattleMons[gBattlerTarget].status1 |=  STATUS1_SLEEP_TURN((Random() % 3) + 2);
+                #else
+                    gBattleMons[gBattlerTarget].status1 |=  STATUS1_SLEEP_TURN((Random() % 4) + 3);
+                #endif
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 4;
+                    effect++;
+                }
+                break;
+        }
+        if (effect)
+        {
+            gActiveBattler = gEffectBattler = gBattlerTarget;
+            BtlController_EmitSetMonData(BUFFER_A, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[gBattlerTarget].status1), &gBattleMons[gBattlerTarget].status1);
+            MarkBattlerForControllerExec(gActiveBattler);
+            gBattlescriptCurrInstr = cmd->nextInstr;
+        }   
+        else
+        {
+            gBattlescriptCurrInstr = cmd->failInstr;
+        }
+        return;
+    }
+    case VARIOUS_TRY_SET_STATUS2:
+    {
+        VARIOUS_ARGS(const u8 *failInstr);
+        u8 effect = 0;
+        u32 status2 = GetMaxMoveStatusEffect(gCurrentMove);
+        switch (status2)
+        {
+            case STATUS2_CONFUSION:
+                if (CanBeConfused(gBattlerTarget))
+                {
+                    gBattleMons[gBattlerTarget].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2);
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                    gBattleCommunication[MULTIUSE_STATE] = 1;
+                    effect++;
+                }
+                break;
+            case STATUS2_INFATUATION:
+            {
+                u8 atkGender = GetGenderFromSpeciesAndPersonality(gBattleMons[gBattlerAttacker].species, gBattleMons[gBattlerAttacker].personality);
+                u8 defGender = GetGenderFromSpeciesAndPersonality(gBattleMons[gBattlerTarget].species, gBattleMons[gBattlerTarget].personality);
+                if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_INFATUATION)
+                    && gBattleMons[gBattlerTarget].ability != ABILITY_OBLIVIOUS
+                    && !IsAbilityOnSide(gBattlerTarget, ABILITY_AROMA_VEIL)
+                    && atkGender != defGender
+                    && atkGender != MON_GENDERLESS
+                    && defGender != MON_GENDERLESS)
+                {
+                    gBattleMons[gBattlerTarget].status2 |= STATUS2_INFATUATED_WITH(gBattlerAttacker);
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                    gBattleCommunication[MULTIUSE_STATE] = 2;
+                    effect++;
+                }
+                break;
+            }
+            case STATUS2_ESCAPE_PREVENTION:
+                if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_ESCAPE_PREVENTION))
+                {
+                    gBattleMons[gBattlerTarget].status2 |= STATUS2_ESCAPE_PREVENTION;
+                    gDisableStructs[gBattlerTarget].battlerPreventingEscape = gBattlerAttacker;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+                    effect++;
+                }
+                break;
+            case STATUS2_TORMENT:
+                if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_TORMENT)
+                    && !IsAbilityOnSide(gBattlerTarget, ABILITY_AROMA_VEIL))
+                {
+                    gBattleMons[gBattlerTarget].status2 |= STATUS2_TORMENT;
+                    gDisableStructs[gBattlerTarget].tormentTimer = 4; // 3 turns excluding current turn
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+                    effect++;
+                }
+                break;
+        }
+        if (effect)
+        {
+            gEffectBattler = gBattlerTarget;
+            gBattlescriptCurrInstr = cmd->nextInstr;
+        }   
+        else
+        {
+            gBattlescriptCurrInstr = cmd->failInstr;
+        }
+        return;
+    }
     } // End of switch (cmd->id)
 
     gBattlescriptCurrInstr = cmd->nextInstr;
@@ -14342,7 +14456,9 @@ static void Cmd_settorment(void)
     }
     else
     {
+        // TODO: Torment does not affect Dynamaxed Pokemon and prints a failure string.
         gBattleMons[gBattlerTarget].status2 |= STATUS2_TORMENT;
+        gDisableStructs[gBattlerTarget].tormentTimer = 0xF; // permanent
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
