@@ -10496,6 +10496,7 @@ BattleScript_Status2FoesIncrement:
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_Status2FoesLoop
 BattleScript_Status2FoesEnd:
 	restoretarget
+	jumpifbyte CMP_EQUAL, gBattleCommunication + 1, 1, BattleScript_PrintCoinsScattered
 	goto BattleScript_MoveEnd
 
 BattleScript_DoConfuseAnim:
@@ -10506,10 +10507,33 @@ BattleScript_DoInfatuationAnim:
 	status2animation BS_TARGET, STATUS2_INFATUATION
 	goto BattleScript_Status2FoesPrintMessage
 
+BattleScript_PrintCoinsScattered:
+	printstring STRINGID_COINSSCATTERED
+	goto BattleScript_MoveEnd
+
 BattleScript_TormentEnds::
 	printstring STRINGID_TORMENTEDNOMORE
 	waitmessage B_WAIT_TIME_LONG
 	end2
+
+BattleScript_EffectRaiseCritAlliesAnim::
+	savetarget
+	setbyte gBattlerTarget, 0
+BattleScript_RaiseCritAlliesLoop:
+	jumpiftargetnotally BattleScript_RaiseCritAlliesIncrement
+	jumpiftargetabsent BattleScript_RaiseCritAlliesIncrement
+	setstatchanger STAT_ATK, 0, FALSE @ for animation
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_PKMNGETTINGPUMPED
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_RaiseCritAlliesIncrement:
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_RaiseCritAlliesLoop
+BattleScript_RaiseCritAlliesEnd:
+	restoretarget
+	return
 
 BattleScript_PokemonCantUseTheMove::
 	attackstring

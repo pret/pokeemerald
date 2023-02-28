@@ -481,5 +481,6 @@ extern const u8 BattleScript_EffectTryReducePP[];
 extern const u8 BattleScript_EffectStatus1Foes[];
 extern const u8 BattleScript_EffectStatus2Foes[];
 extern const u8 BattleScript_TormentEnds[];
+extern const u8 BattleScript_EffectRaiseCritAlliesAnim[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

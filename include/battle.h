@@ -677,6 +677,7 @@ struct BattleStruct
     u8 battleBondTransformed[NUM_BATTLE_SIDES]; // Bitfield for each party.
     u8 storedHealingWish:4; // Each battler as a bit.
     u8 storedLunarDance:4; // Each battler as a bit.
+    u8 sideCritStages[NUM_BATTLE_SIDES]; // G-Max Chi Strike boosts crit stages of allies.
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)

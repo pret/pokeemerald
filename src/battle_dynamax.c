@@ -29,7 +29,7 @@ static const u16 sMaxMoveTable[] =
 	[TYPE_STEEL] = MOVE_MAX_STEELSPIKE,
 	[TYPE_FIRE] = MOVE_MAX_FLARE,
 	[TYPE_WATER] = MOVE_MAX_GEYSER,
-	[TYPE_GRASS] = MOVE_MAX_OVERGROWTH,
+	[TYPE_GRASS] = MOVE_G_MAX_CHI_STRIKE,
 	[TYPE_ELECTRIC] = MOVE_G_MAX_DEPLETION,
 	[TYPE_PSYCHIC] = MOVE_MAX_MINDSTORM,
 	[TYPE_ICE] = MOVE_MAX_HAILSTORM,
@@ -92,7 +92,7 @@ bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove)
 	//	return !IsRaidBossUsingRegularMove(battlerId, baseMove);
 	if (gBattleStruct->dynamax.dynamaxTurns[battlerId] > 0)
 		return TRUE;
-	return FALSE;
+	return battlerId == B_POSITION_PLAYER_LEFT;
 }
 
 // Returns the appropriate Max Move or G-Max Move for a battler to use.
@@ -494,12 +494,27 @@ u16 SetMaxMoveEffect(u16 move)
 			effect++;
 			break;
 		case MAX_EFFECT_CONFUSE_FOES_PAY_DAY:
+			if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+			{
+				u16 payday = gPaydayMoney;
+				gPaydayMoney += (gBattleMons[gBattlerAttacker].level * 100);
+				if (payday > gPaydayMoney)
+					gPaydayMoney = 0xFFFF;
+				gBattleCommunication[CURSOR_POSITION] = 1; // add "Coins scattered." message
+			}
+			// fall through
 		case MAX_EFFECT_CONFUSE_FOES:
 		case MAX_EFFECT_INFATUATE_FOES:
 		case MAX_EFFECT_TORMENT_FOES:
 		case MAX_EFFECT_MEAN_LOOK:
 			BattleScriptPush(gBattlescriptCurrInstr + 1);
 			gBattlescriptCurrInstr = BattleScript_EffectStatus2Foes;
+			effect++;
+			break;
+		case MAX_EFFECT_CRIT_PLUS:
+			gBattleStruct->sideCritStages[GetBattlerSide(gBattlerAttacker)]++;
+			BattleScriptPush(gBattlescriptCurrInstr + 1);
+			gBattlescriptCurrInstr = BattleScript_EffectRaiseCritAlliesAnim;
 			effect++;
 			break;
 	}
