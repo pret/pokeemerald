@@ -4270,7 +4270,10 @@ static void HandleTurnActionSelectionState(void)
                             if (gBattleResources->bufferB[gActiveBattler][2] & RET_MEGA_EVOLUTION)
                                 gBattleStruct->mega.toEvolve |= gBitTable[gActiveBattler];
                             if (ShouldUseMaxMove(gActiveBattler, gChosenMoveByBattler[gActiveBattler])) // max move check
+                            {
+                                gBattleStruct->dynamax.moveSlot[gActiveBattler] = gBattleStruct->chosenMovePositions[gActiveBattler];
                                 gBattleStruct->dynamax.usingMaxMove[gActiveBattler] = TRUE;
+                            }
                             gBattleCommunication[gActiveBattler]++;
                         }
                         break;

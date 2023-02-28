@@ -474,6 +474,9 @@ extern const u8 BattleScript_SteelsurgeFree[];
 extern const u8 BattleScript_DamageNonTypesStarts[];
 extern const u8 BattleScript_DamageNonTypesContinues[];
 extern const u8 BattleScript_DefogTryHazards[];
-extern const u8 BattleScript_EffectSetAuroraVeil[];
+extern const u8 BattleScript_EffectAuroraVeilSuccess[];
+extern const u8 BattleScript_EffectGravitySuccess[];
+extern const u8 BattleScript_EffectYawnSuccess[];
+extern const u8 BattleScript_EffectTryReducePP[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

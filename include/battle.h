@@ -527,6 +527,7 @@ struct DynamaxData
     u8 usingMaxMove[MAX_BATTLERS_COUNT];
     u8 activeSplit;
     u8 splits[MAX_BATTLERS_COUNT];
+    u8 moveSlot[MAX_BATTLERS_COUNT]; // move slot of Max Move, used for Spite, TODO: Copycat, Encore, Grudge
 };
 
 struct StolenItem

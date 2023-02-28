@@ -1,10 +1,15 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "battle_controllers.h"
 #include "battle_scripts.h"
 #include "battle_script_commands.h"
 #include "data.h"
 #include "pokemon.h"
+#include "random.h"
+#include "string_util.h"
+#include "util.h"
+#include "constants/abilities.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_string_ids.h"
 #include "constants/hold_effects.h"
@@ -23,9 +28,9 @@ static const u16 sMaxMoveTable[] =
 	[TYPE_GHOST] = MOVE_MAX_PHANTASM,
 	[TYPE_STEEL] = MOVE_MAX_STEELSPIKE,
 	[TYPE_FIRE] = MOVE_MAX_FLARE,
-	[TYPE_WATER] = MOVE_G_MAX_HYDROSNIPE,
+	[TYPE_WATER] = MOVE_MAX_GEYSER,
 	[TYPE_GRASS] = MOVE_MAX_OVERGROWTH,
-	[TYPE_ELECTRIC] = MOVE_MAX_LIGHTNING,
+	[TYPE_ELECTRIC] = MOVE_G_MAX_DEPLETION,
 	[TYPE_PSYCHIC] = MOVE_MAX_MINDSTORM,
 	[TYPE_ICE] = MOVE_MAX_HAILSTORM,
 	[TYPE_DRAGON] = MOVE_MAX_WYRMWIND,
@@ -371,8 +376,76 @@ u16 SetMaxMoveEffect(u16 move)
 				else
 					gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilTimer = 5;
             	gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilBattlerId = gBattlerAttacker;
+				gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_SAFEGUARD;
 				BattleScriptPush(gBattlescriptCurrInstr + 1);
-				gBattlescriptCurrInstr = BattleScript_EffectSetAuroraVeil;
+				gBattlescriptCurrInstr = BattleScript_EffectAuroraVeilSuccess;
+				effect++;
+			}
+			break;
+		case MAX_EFFECT_GRAVITY:
+			if (!(gFieldStatuses & STATUS_FIELD_GRAVITY))
+			{
+				gFieldStatuses |= STATUS_FIELD_GRAVITY;
+				gFieldTimers.gravityTimer = 5;
+				BattleScriptPush(gBattlescriptCurrInstr + 1);
+				gBattlescriptCurrInstr = BattleScript_EffectGravitySuccess;
+				effect++;
+			}
+			break;
+		case MAX_EFFECT_SANDBLAST_FOES:
+		case MAX_EFFECT_FIRE_SPIN_FOES:
+		{
+			// Affects both opponents, but doesn't print strings so we can handle it here.
+			u8 battler;
+			for (battler = 0; battler < MAX_BATTLERS_COUNT; ++battler)
+			{
+				if (GetBattlerSide(battler) != GetBattlerSide(gBattlerTarget))
+					continue;
+				if (!(gBattleMons[battler].status2 & STATUS2_WRAPPED))
+				{
+					gBattleMons[battler].status2 |= STATUS2_WRAPPED;
+					if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_GRIP_CLAW)
+				#if B_BINDING_TURNS >= GEN_5
+						gDisableStructs[battler].wrapTurns = 7;
+					else
+						gDisableStructs[battler].wrapTurns = (Random() % 2) + 4;
+				#else
+						gDisableStructs[battler].wrapTurns = 5;
+					else
+						gDisableStructs[battler].wrapTurns = (Random() % 4) + 2;
+				#endif
+					gBattleStruct->wrappedBy[battler] = gBattlerAttacker;
+					if (maxEffect == MAX_EFFECT_SANDBLAST_FOES)
+						gBattleStruct->wrappedMove[battler] = MOVE_SAND_TOMB;
+					else
+						gBattleStruct->wrappedMove[battler] = MOVE_FIRE_SPIN;
+				}
+			}
+			break;
+		}
+		case MAX_EFFECT_YAWN_FOE:
+			if (!(gStatuses3[gBattlerTarget] & STATUS3_YAWN)
+				&& !(gBattleMons[gBattlerTarget].status1 & STATUS1_ANY)
+				&& gBattleMons[gBattlerTarget].ability != ABILITY_VITAL_SPIRIT
+				&& gBattleMons[gBattlerTarget].ability != ABILITY_INSOMNIA
+				&& gBattleMons[gBattlerTarget].ability != ABILITY_COMATOSE
+				&& gBattleMons[gBattlerTarget].ability != ABILITY_PURIFYING_SALT
+				&& !IsFlowerVeilProtected(gBattlerTarget)
+				&& !(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
+				&& !UproarWakeUpCheck(gActiveBattler))
+			{
+				gStatuses3[gBattlerTarget] |= STATUS3_YAWN_TURN(2);
+				BattleScriptPush(gBattlescriptCurrInstr + 1);
+				gBattlescriptCurrInstr = BattleScript_EffectYawnSuccess;
+				effect++;
+			}
+			break;
+		case MAX_EFFECT_SPITE:
+			if (gLastMoves[gBattlerTarget] != MOVE_NONE
+				&& gLastMoves[gBattlerTarget] != MOVE_UNAVAILABLE)
+			{
+				BattleScriptPush(gBattlescriptCurrInstr + 1);
+				gBattlescriptCurrInstr = BattleScript_EffectTryReducePP;
 				effect++;
 			}
 			break;

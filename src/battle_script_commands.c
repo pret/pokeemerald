@@ -13416,11 +13416,13 @@ static void Cmd_tryspiteppreduce(void)
     {
         s32 i;
 
-        for (i = 0; i < MAX_MON_MOVES; i++)
-        {
-            if (gLastMoves[gBattlerTarget] == gBattleMons[gBattlerTarget].moves[i])
-                break;
-        }
+        // Get move slot to reduce PP.
+        if (IsMaxMove(gLastMoves[gBattlerTarget]))
+            i = gBattleStruct->dynamax.moveSlot[gBattlerTarget];
+        else
+            for (i = 0; i < MAX_MON_MOVES; i++)
+                if (gLastMoves[gBattlerTarget] == gBattleMons[gBattlerTarget].moves[i])
+                    break;
 
     #if B_CAN_SPITE_FAIL <= GEN_3
         if (i != MAX_MON_MOVES && gBattleMons[gBattlerTarget].pp[i] > 1)
@@ -13433,6 +13435,9 @@ static void Cmd_tryspiteppreduce(void)
         #else
             s32 ppToDeduct = 4;
         #endif
+            // G-Max Depletion only deducts 2 PP.
+            if (IsMaxMove(gCurrentMove) && gBattleMoves[gCurrentMove].argument == MAX_EFFECT_SPITE)
+                ppToDeduct = 2;
 
             if (gBattleMons[gBattlerTarget].pp[i] < ppToDeduct)
                 ppToDeduct = gBattleMons[gBattlerTarget].pp[i];
