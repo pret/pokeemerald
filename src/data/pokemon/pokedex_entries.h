@@ -10880,5 +10880,5 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerScale = 296,
         .trainerOffset = 1,
     },
-
+#endif
 };
