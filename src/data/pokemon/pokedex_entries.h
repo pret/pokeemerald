@@ -4643,6 +4643,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerScale = 290,
         .trainerOffset = 2,
     },
+
 #if P_GEN_4_POKEMON == TRUE
     [NATIONAL_DEX_TURTWIG] =
     {
