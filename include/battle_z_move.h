@@ -26,5 +26,6 @@ const u8 *GetZMoveName(u16 move);
 void SetZEffect(void);
 bool32 IsZMoveUsable(u8 battlerId, u16 moveIndex);
 void GetUsableZMoves(u8 battlerId, u16 *moves);
+u16 GetZMovePower(u16 move);
 
 #endif // GUARD_BATTLE_Z_MOVE_H

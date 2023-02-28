@@ -339,7 +339,6 @@ struct BattleMove
     u32 flags;
     u8 split;
     u8 argument;
-    u8 zMovePower;
     u8 zMoveEffect;
 };
 

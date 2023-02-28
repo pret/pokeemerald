@@ -7,6 +7,7 @@
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_setup.h"
+#include "battle_z_move.h"
 #include "party_menu.h"
 #include "pokemon.h"
 #include "international_string_util.h"
@@ -8532,7 +8533,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
     u32 weight, hpFraction, speed;
 
     if (gBattleStruct->zmove.active)
-        return gBattleMoves[gBattleStruct->zmove.baseMoves[battlerAtk]].zMovePower;
+        return GetZMovePower(gBattleStruct->zmove.baseMoves[battlerAtk]);
 
     switch (gBattleMoves[move].effect)
     {
