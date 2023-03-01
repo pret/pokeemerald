@@ -10358,6 +10358,7 @@ BattleScript_EffectMaxMove::
 	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
 
+@ TODO: Maybe rework to use setallytonexttarget.
 BattleScript_EffectRaiseStatAllies::
 	savetarget
 	setbyte gBattlerTarget, 0
@@ -10532,6 +10533,61 @@ BattleScript_RaiseCritAlliesIncrement:
 	addbyte gBattlerTarget, 1
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_RaiseCritAlliesLoop
 BattleScript_RaiseCritAlliesEnd:
+	restoretarget
+	return
+
+BattleScript_EffectHealOneSixthAllies::
+	jumpifteamhealthy BS_ATTACKER, BattleScript_MoveEnd
+	setbyte gBattlerTarget, 0
+BattleScript_HealOneSixthAlliesLoop:
+	jumpiftargetnotally BattleScript_HealOneSixthAlliesIncrement
+	jumpiftargetabsent BattleScript_HealOneSixthAlliesIncrement
+	tryhealsixthhealth BattleScript_HealOneSixthAlliesIncrement
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	printstring STRINGID_PKMNREGAINEDHEALTH
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_HealOneSixthAlliesIncrement:
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_HealOneSixthAlliesLoop
+BattleScript_HealOneSixthAlliesEnd:
+	restoretarget
+	return
+
+BattleScript_EffectCureStatusAllies::
+	jumpifteamhealthy BS_ATTACKER, BattleScript_MoveEnd
+	setbyte gBattlerTarget, 0
+BattleScript_CureStatusAlliesLoop:
+	jumpiftargetnotally BattleScript_CureStatusAlliesIncrement
+	jumpiftargetabsent BattleScript_CureStatusAlliesIncrement
+	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_CureStatusActivate
+BattleScript_CureStatusAlliesIncrement:
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_CureStatusAlliesLoop
+BattleScript_CureStatusAlliesEnd:
+	restoretarget
+	return
+BattleScript_CureStatusActivate:
+	curestatus BS_TARGET
+	updatestatusicon BS_TARGET
+	printstring STRINGID_PKMNSTATUSNORMAL
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_CureStatusAlliesIncrement
+
+BattleScript_EffectRecycleBerriesAllies::
+	jumpifteamhealthy BS_ATTACKER, BattleScript_MoveEnd
+	setbyte gBattlerTarget, 0
+BattleScript_RecycleBerriesAlliesLoop:
+	jumpiftargetnotally BattleScript_RecycleBerriesAlliesIncrement
+	jumpiftargetabsent BattleScript_RecycleBerriesAlliesIncrement
+	tryrecycleberry BattleScript_RecycleBerriesAlliesIncrement
+	printstring STRINGID_XFOUNDONEY
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_RecycleBerriesAlliesIncrement:
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_RecycleBerriesAlliesLoop
+BattleScript_RecycleBerriesAlliesEnd:
 	restoretarget
 	return
 

@@ -267,6 +267,8 @@
 #define VARIOUS_DAMAGE_NON_TYPES                    175
 #define VARIOUS_TRY_SET_STATUS1                     176
 #define VARIOUS_TRY_SET_STATUS2                     177
+#define VARIOUS_TRY_HEAL_SIXTH_HP                   178
+#define VARIOUS_TRY_RECYCLE_BERRY                   179
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

@@ -8295,7 +8295,8 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
     // Max Moves bypass any protection except Max Guard.
     if (IsMaxMove(move))
     {
-        if (gProtectStructs[battlerId].maxGuarded)
+        if (gProtectStructs[battlerId].maxGuarded
+            && gBattleMoves[move].argument != MAX_EFFECT_BYPASS_PROTECT)
             return TRUE;
         else
             return FALSE;

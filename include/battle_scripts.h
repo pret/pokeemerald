@@ -482,5 +482,8 @@ extern const u8 BattleScript_EffectStatus1Foes[];
 extern const u8 BattleScript_EffectStatus2Foes[];
 extern const u8 BattleScript_TormentEnds[];
 extern const u8 BattleScript_EffectRaiseCritAlliesAnim[];
+extern const u8 BattleScript_EffectHealOneSixthAllies[];
+extern const u8 BattleScript_EffectCureStatusAllies[];
+extern const u8 BattleScript_EffectRecycleBerriesAllies[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

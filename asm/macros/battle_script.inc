@@ -2247,6 +2247,16 @@
 	.4byte \ptr
 	.endm
 
+	.macro tryhealsixthhealth, ptr:req
+	various 0, VARIOUS_TRY_HEAL_SIXTH_HP
+	.4byte \ptr
+	.endm
+
+	.macro tryrecycleberry, ptr:req
+	various 0, VARIOUS_TRY_RECYCLE_BERRY
+	.4byte \ptr
+	.endm
+
 	@ Tries to increase or decrease a battler's stat's stat stage by a specified amount. If impossible, jumps to \script.
 	.macro modifybattlerstatstage battler:req, stat:req, mode:req, amount:req, script:req, animation:req, customString
 

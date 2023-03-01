@@ -11325,6 +11325,44 @@ static void Cmd_various(void)
         }
         return;
     }
+    case VARIOUS_TRY_HEAL_SIXTH_HP:
+    {
+        VARIOUS_ARGS(const u8 *failInstr);
+        gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 6;
+        if (gBattleMoveDamage == 0)
+            gBattleMoveDamage = 1;
+        gBattleMoveDamage *= -1;
+
+        if (gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP)
+            gBattlescriptCurrInstr = cmd->failInstr;    // fail
+        else
+            gBattlescriptCurrInstr = cmd->nextInstr;   // can heal
+        return;
+    }
+    case VARIOUS_TRY_RECYCLE_BERRY:
+    {
+        VARIOUS_ARGS(const u8 *failInstr);
+        u16* usedHeldItem = &gBattleStruct->usedHeldItems[gBattlerPartyIndexes[gBattlerTarget]][GetBattlerSide(gBattlerTarget)];
+        if (gBattleMons[gBattlerTarget].item == ITEM_NONE
+            && gBattleStruct->changedItems[gBattlerTarget] == ITEM_NONE   // Will not inherit an item
+            && ItemId_GetPocket(*usedHeldItem) == POCKET_BERRIES
+            && Random() % 2 == 0)
+        {
+            gLastUsedItem = *usedHeldItem;
+            *usedHeldItem = ITEM_NONE;
+            gBattleMons[gActiveBattler].item = gLastUsedItem;
+
+            BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gBattlerTarget].item), &gBattleMons[gBattlerTarget].item);
+            MarkBattlerForControllerExec(gActiveBattler);
+
+            gBattlescriptCurrInstr = cmd->nextInstr;
+        }
+        else
+        {
+            gBattlescriptCurrInstr = cmd->failInstr;
+        }
+        return;
+    }
     } // End of switch (cmd->id)
 
     gBattlescriptCurrInstr = cmd->nextInstr;

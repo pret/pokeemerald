@@ -15779,7 +15779,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.priority = 0,
 		.flags = 0,
 		.split = SPLIT_PHYSICAL,
-		.argument = MAX_EFFECT_TORMENT_FOES, //EFFECT TODO
+		.argument = MAX_EFFECT_BYPASS_PROTECT, //EFFECT TODO
 	},
 	
 	[MOVE_G_MAX_RAPID_FLOW] =
@@ -15794,7 +15794,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 		.priority = 0,
 		.flags = 0,
 		.split = SPLIT_PHYSICAL,
-		.argument = MAX_EFFECT_TORMENT_FOES, //EFFECT TODO
+		.argument = MAX_EFFECT_BYPASS_PROTECT, //EFFECT TODO
 	},
 	
 };

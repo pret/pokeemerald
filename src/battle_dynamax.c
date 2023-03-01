@@ -29,8 +29,8 @@ static const u16 sMaxMoveTable[] =
 	[TYPE_STEEL] = MOVE_MAX_STEELSPIKE,
 	[TYPE_FIRE] = MOVE_MAX_FLARE,
 	[TYPE_WATER] = MOVE_MAX_GEYSER,
-	[TYPE_GRASS] = MOVE_G_MAX_CHI_STRIKE,
-	[TYPE_ELECTRIC] = MOVE_G_MAX_DEPLETION,
+	[TYPE_GRASS] = MOVE_MAX_OVERGROWTH,
+	[TYPE_ELECTRIC] = MOVE_MAX_LIGHTNING,
 	[TYPE_PSYCHIC] = MOVE_MAX_MINDSTORM,
 	[TYPE_ICE] = MOVE_MAX_HAILSTORM,
 	[TYPE_DRAGON] = MOVE_MAX_WYRMWIND,
@@ -92,7 +92,7 @@ bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove)
 	//	return !IsRaidBossUsingRegularMove(battlerId, baseMove);
 	if (gBattleStruct->dynamax.dynamaxTurns[battlerId] > 0)
 		return TRUE;
-	return battlerId == B_POSITION_PLAYER_LEFT;
+	return FALSE;
 }
 
 // Returns the appropriate Max Move or G-Max Move for a battler to use.
@@ -517,6 +517,22 @@ u16 SetMaxMoveEffect(u16 move)
 			gBattlescriptCurrInstr = BattleScript_EffectRaiseCritAlliesAnim;
 			effect++;
 			break;
+		case MAX_EFFECT_HEAL_TEAM:
+			BattleScriptPush(gBattlescriptCurrInstr + 1);
+			gBattlescriptCurrInstr = BattleScript_EffectHealOneSixthAllies;
+			effect++;
+			break;
+		case MAX_EFFECT_AROMATHERAPY:
+			BattleScriptPush(gBattlescriptCurrInstr + 1);
+			gBattlescriptCurrInstr = BattleScript_EffectCureStatusAllies;
+			effect++;
+			break;
+		case MAX_EFFECT_RECYCLE_BERRIES:
+			BattleScriptPush(gBattlescriptCurrInstr + 1);
+			gBattlescriptCurrInstr = BattleScript_EffectRecycleBerriesAllies;
+			effect++;
+			break;
+
 	}
 	return effect;
 }

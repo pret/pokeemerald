@@ -51,6 +51,7 @@ enum MaxMoveEffect
 	MAX_EFFECT_LOWER_SPEED_2_FOES,
 	MAX_EFFECT_FIRE_SPIN_FOES,
 	MAX_EFFECT_FIXED_POWER,
+	MAX_EFFECT_BYPASS_PROTECT,
 };
 
 bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove);
