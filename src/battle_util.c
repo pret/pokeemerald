@@ -8761,10 +8761,6 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         basePower = CalcBeatUpPower();
         #endif
         break;
-    case EFFECT_BARB_BARRAGE:
-        if (gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY)
-            basePower *= 2;
-        break;
     }
 
     // Move-specific base power changes
@@ -9130,6 +9126,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
         if (gBattleMons[battlerDef].hp <= (gBattleMons[battlerDef].maxHP / 2))
             MulModifier(&modifier, UQ_4_12(2.0));
         break;
+    case EFFECT_BARB_BARRAGE:
     case EFFECT_VENOSHOCK:
         if (gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY)
             MulModifier(&modifier, UQ_4_12(2.0));

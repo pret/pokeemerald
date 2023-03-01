@@ -3768,6 +3768,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_STEALTH_ROCK:
                 if (!(gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_STEALTH_ROCK))
                 {
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_POINTEDSTONESFLOAT;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_StealthRockActivates;
                 }
@@ -3775,6 +3776,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_SPIKES:
                 if (!(gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_SPIKES))
                 {
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SPIKESSCATTERED;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_SpikesActivate;
                 }
@@ -7045,7 +7047,7 @@ static void Cmd_switchineffects(void)
             gBattleMoveDamage = 1;
 
         gSideStatuses[GetBattlerSide(gActiveBattler)] |= SIDE_STATUS_SPIKES_DAMAGED;
-        SetDmgHazardsBattlescript(gActiveBattler, 0);
+        SetDmgHazardsBattlescript(gActiveBattler, B_MSG_PKMNHURTBYSPIKES);
     }
     else if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_STEALTH_ROCK_DAMAGED)
         && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_STEALTH_ROCK)
@@ -7056,7 +7058,7 @@ static void Cmd_switchineffects(void)
         gBattleMoveDamage = GetStealthHazardDamage(gBattleMoves[MOVE_STEALTH_ROCK].type, gActiveBattler);
 
         if (gBattleMoveDamage != 0)
-            SetDmgHazardsBattlescript(gActiveBattler, 1);
+            SetDmgHazardsBattlescript(gActiveBattler, B_MSG_STEALTHROCKDMG);
     }
     else if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_TOXIC_SPIKES_DAMAGED)
         && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_TOXIC_SPIKES)

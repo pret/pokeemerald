@@ -418,39 +418,13 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectTeatime                 @ EFFECT_TEATIME
 	.4byte BattleScript_EffectAttackUpUserAlly        @ EFFECT_ATTACK_UP_USER_ALLY
 	.4byte BattleScript_EffectShellTrap               @ EFFECT_SHELL_TRAP
-	.4byte BattleScript_EffectCeaselessEdge           @ EFFECT_CEASELESS_EDGE
+	.4byte BattleScript_EffectHitSetEntryHazard       @ EFFECT_HIT_SET_ENTRY_HAZARD
 	.4byte BattleScript_EffectDireClaw                @ EFFECT_DIRE_CLAW
-	.4byte BattleScript_EffectStoneAxe                @ EFFECT_STONE_AXE
 	.4byte BattleScript_EffectBarbBarrage             @ EFFECT_BARB_BARRAGE
-
-BattleScript_EffectStoneAxe::
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	attackstring
-	ppreduce
-	critcalc
-	damagecalc
-	adjustdamage
-	attackanimation
-	waitanimation
-	effectivenesssound
-	hitanimation BS_TARGET
-	waitstate
-	healthbarupdate BS_TARGET
-	datahpupdate BS_TARGET
-	critmessage
-	waitmessage B_WAIT_TIME_LONG
-	resultmessage
-	waitmessage B_WAIT_TIME_LONG
-	tryfaintmon BS_TARGET
-	setmoveeffect MOVE_EFFECT_STEALTH_ROCK
-	seteffectprimary
-	moveendall
-	end
 
 BattleScript_StealthRockActivates::
 	setstealthrock BattleScript_MoveEnd
-	printstring STRINGID_POINTEDSTONESFLOAT
+	printfromtable gDmgHazardsStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
@@ -458,7 +432,7 @@ BattleScript_EffectDireClaw::
 	setmoveeffect MOVE_EFFECT_DIRE_CLAW
 	goto BattleScript_EffectHit
 
-BattleScript_EffectCeaselessEdge::
+BattleScript_EffectHitSetEntryHazard::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
@@ -478,14 +452,14 @@ BattleScript_EffectCeaselessEdge::
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	tryfaintmon BS_TARGET
-	setmoveeffect MOVE_EFFECT_SPIKES
+	argumenttomoveeffect
 	seteffectprimary
 	moveendall
 	end
 
 BattleScript_SpikesActivate::
 	trysetspikes BattleScript_MoveEnd
-	printstring STRINGID_SPIKESSCATTERED
+	printfromtable gDmgHazardsStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 

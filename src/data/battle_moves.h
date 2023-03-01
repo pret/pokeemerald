@@ -13323,7 +13323,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_STONE_AXE] =
     {
-        .effect = EFFECT_STONE_AXE,
+        .effect = EFFECT_HIT_SET_ENTRY_HAZARD,
         .power = 65,
         .type = TYPE_ROCK,
         .accuracy = 90,
@@ -13335,6 +13335,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .split = SPLIT_PHYSICAL,
         .zMovePower = 120,
         .zMoveEffect = Z_EFFECT_NONE,
+        .argument = MOVE_EFFECT_STEALTH_ROCK,
     },
 
     [MOVE_SPRINGTIDE_STORM] =
@@ -13599,7 +13600,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_CEASELESS_EDGE] =
     {
-        .effect = EFFECT_CEASELESS_EDGE,
+        .effect = EFFECT_HIT_SET_ENTRY_HAZARD,
         .power = 65,
         .type = TYPE_DARK,
         .accuracy = 90,
@@ -13611,6 +13612,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .split = SPLIT_PHYSICAL,
         .zMovePower = 120,
         .zMoveEffect = Z_EFFECT_NONE,
+        .argument = MOVE_EFFECT_SPIKES,
     },
 
     [MOVE_BLEAKWIND_STORM] =
