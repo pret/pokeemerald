@@ -70,20 +70,15 @@ struct DisableStruct
     s8 stockpileBeforeDef;
     s8 stockpileBeforeSpDef;
     u8 substituteHP;
-    u8 disableTimer:4;
-    u8 disableTimerStartValue:4;
     u8 encoredMovePos;
+    u8 disableTimer:4;
     u8 encoreTimer:4;
-    u8 encoreTimerStartValue:4;
     u8 perishSongTimer:4;
-    u8 perishSongTimerStartValue:4;
     u8 furyCutterCounter;
     u8 rolloutTimer:4;
     u8 rolloutTimerStartValue:4;
     u8 chargeTimer:4;
-    u8 chargeTimerStartValue:4;
     u8 tauntTimer:4;
-    u8 tauntTimer2:4;
     u8 battlerPreventingEscape;
     u8 battlerWithSureHit;
     u8 isFirstTurn;
@@ -99,8 +94,8 @@ struct DisableStruct
     u8 healBlockTimer;
     u8 laserFocusTimer;
     u8 throatChopTimer;
-    u8 usedMoves:4;
     u8 wrapTurns;
+    u8 usedMoves:4;
     u8 noRetreat:1;
     u8 tarShot:1;
     u8 octolock:1;
@@ -148,6 +143,7 @@ struct ProtectStruct
     u16 quickDraw:1;
     u16 beakBlastCharge:1;
     u16 quash:1;
+    u16 shellTrap:1;
     u16 silkTrapped:1;
     u32 physicalDmg;
     u32 specialDmg;
@@ -196,6 +192,7 @@ struct SpecialStatus
     u8 weatherAbilityDone:1;
     u8 terrainAbilityDone:1;
     u8 emergencyExited:1;
+    u8 afterYou:1;
 };
 
 struct SideTimer
@@ -255,6 +252,7 @@ struct AI_SavedBattleMon
     u16 moves[MAX_MON_MOVES];
     u16 heldItem;
     u16 species;
+    u8 types[3];
 };
 
 struct AiPartyMon
@@ -648,6 +646,8 @@ struct BattleStruct
     struct StolenItem itemStolen[PARTY_SIZE];  // Player's team that had items stolen (two bytes per party member)
     u8 blunderPolicy:1; // should blunder policy activate
     u8 swapDamageCategory:1; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
+    u8 forcedSwitch:4; // For each battler
+    u8 switchInAbilityPostponed:4; // To not activate against an empty field, each bit for battler
     u8 ballSpriteIds[2];    // item gfx, window gfx
     u8 stickyWebUser;
     u8 appearedInBattle; // Bitfield to track which Pokemon appeared in battle. Used for Burmy's form change
@@ -655,9 +655,13 @@ struct BattleStruct
     // When using a move which hits multiple opponents which is then bounced by a target, we need to make sure, the move hits both opponents, the one with bounce, and the one without.
     u8 attackerBeforeBounce:2;
     u8 beatUpSlot:3;
+    bool8 hitSwitchTargetFailed:1;
     u8 targetsDone[MAX_BATTLERS_COUNT]; // Each battler as a bit.
     u16 overwrittenAbilities[MAX_BATTLERS_COUNT];    // abilities overwritten during battle (keep separate from battle history in case of switching)
     bool8 allowedToChangeFormInWeather[PARTY_SIZE][2]; // For each party member and side, used by Ice Face.
+    u8 battleBondTransformed[NUM_BATTLE_SIDES]; // Bitfield for each party.
+    u8 storedHealingWish:4; // Each battler as a bit.
+    u8 storedLunarDance:4; // Each battler as a bit.
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)

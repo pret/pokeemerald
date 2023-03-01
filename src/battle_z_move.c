@@ -50,7 +50,7 @@ static u16 GetSignatureZMove(u16 move, u16 species, u16 item);
 static u16 GetTypeBasedZMove(u16 move, u8 battler);
 static void ZMoveSelectionDisplayPpNumber(void);
 static void ZMoveSelectionDisplayPower(u16 move, u16 zMove);
-static void ShowZMoveTriggerSprite(void);
+static void ShowZMoveTriggerSprite(u8 battleId);
 static bool32 AreStatsMaxed(u8 battlerId, u8 n);
 static u8 GetZMoveScore(u8 battlerAtk, u8 battlerDef, u16 baseMove, u16 zMove);
 static void ZMoveSelectionDisplayMoveType(u16 zMove);
@@ -204,11 +204,7 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
     else
         holdEffect = ItemId_GetHoldEffect(item);
 
-    #ifdef ITEM_ULTRANECROZIUM_Z
-    if (holdEffect == HOLD_EFFECT_Z_CRYSTAL || item == ITEM_ULTRANECROZIUM_Z)
-    #else
     if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
-    #endif
     {
         u16 zMove = GetSignatureZMove(move, gBattleMons[battlerId].species, item);
         if (zMove != MOVE_NONE)
@@ -258,7 +254,7 @@ bool32 TryChangeZIndicator(u8 battlerId, u8 moveIndex)
     if (gBattleStruct->zmove.viable && !viableZMove)
         HideZMoveTriggerSprite();   // Was a viable z move, now is not -> slide out
     else if (!gBattleStruct->zmove.viable && viableZMove)
-        ShowZMoveTriggerSprite();   // Was not a viable z move, now is -> slide back in
+        ShowZMoveTriggerSprite(battlerId);   // Was not a viable z move, now is -> slide back in
 }
 
 #define SINGLES_Z_TRIGGER_POS_X_OPTIMAL     (29)
@@ -368,11 +364,11 @@ void HideZMoveTriggerSprite(void)
     gBattleStruct->zmove.viable = FALSE;
 }
 
-static void ShowZMoveTriggerSprite(void)
+static void ShowZMoveTriggerSprite(u8 battlerId)
 {
     struct Sprite *sprite = &gSprites[gBattleStruct->zmove.triggerSpriteId];
     gBattleStruct->zmove.viable = TRUE;
-    CreateZMoveTriggerSprite(sprite->tBattler, TRUE);
+    CreateZMoveTriggerSprite(battlerId, TRUE);
 }
 
 void DestroyZMoveTriggerSprite(void)

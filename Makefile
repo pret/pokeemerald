@@ -142,7 +142,8 @@ ROMTESTHYDRA := tools/mgba-rom-test-hydra/mgba-rom-test-hydra$(EXE)
 
 PERL := perl
 
-TOOLDIRS := $(filter-out tools/mgba tools/agbcc tools/binutils,$(wildcard tools/*))
+TOOLDIRS := tools/aif2pcm tools/bin2c tools/gbafix tools/gbagfx tools/jsonproc tools/mapjson tools/mid2agb tools/preproc tools/ramscrgen tools/rsfont tools/scaninc
+CHECKTOOLDIRS = tools/patchelf tools/mgba-rom-test-hydra
 TOOLBASE = $(TOOLDIRS:tools/%=%)
 TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
 
@@ -158,7 +159,7 @@ MAKEFLAGS += --no-print-directory
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS) libagbsyscall modern tidymodern tidynonmodern check
+.PHONY: all rom clean compare tidy tools check-tools mostlyclean clean-tools clean-check-tools $(TOOLDIRS) $(CHECKTOOLDIRS) libagbsyscall modern tidymodern tidynonmodern check
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
@@ -176,9 +177,9 @@ endif
 ifeq (,$(MAKECMDGOALS))
   SCAN_DEPS ?= 1
 else
-  # clean, tidy, tools, mostlyclean, clean-tools, $(TOOLDIRS), tidymodern, tidynonmodern don't even build the ROM
+  # clean, tidy, tools, check-tools, mostlyclean, clean-tools, clean-check-tools, $(TOOLDIRS), $(CHECKTOOLDIRS), tidymodern, tidynonmodern don't even build the ROM
   # libagbsyscall does its own thing
-  ifeq (,$(filter-out clean tidy tools mostlyclean clean-tools $(TOOLDIRS) tidymodern tidynonmodern libagbsyscall,$(MAKECMDGOALS)))
+  ifeq (,$(filter-out clean tidy tools mostlyclean clean-tools $(TOOLDIRS) clean-check-tools $(CHECKTOOLDIRS) tidymodern tidynonmodern libagbsyscall,$(MAKECMDGOALS)))
     SCAN_DEPS ?= 0
   else
     SCAN_DEPS ?= 1
@@ -229,9 +230,14 @@ all: rom
 
 tools: $(TOOLDIRS)
 
+check-tools: $(CHECKTOOLDIRS)
+
 syms: $(SYM)
 
 $(TOOLDIRS):
+	@$(MAKE) -C $@
+
+$(CHECKTOOLDIRS):
 	@$(MAKE) -C $@
 
 rom: $(ROM)
@@ -242,10 +248,13 @@ endif
 # For contributors to make sure a change didn't affect the contents of the ROM.
 compare: all
 
-clean: mostlyclean clean-tools
+clean: mostlyclean clean-tools clean-check-tools
 
 clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
+
+clean-check-tools:
+	@$(foreach tooldir,$(CHECKTOOLDIRS),$(MAKE) clean -C $(tooldir);)
 
 mostlyclean: tidynonmodern tidymodern
 	rm -f $(SAMPLE_SUBDIR)/*.bin
@@ -455,11 +464,11 @@ LD_SCRIPT_TEST := ld_script_test.txt
 $(OBJ_DIR)/ld_script_test.ld: $(LD_SCRIPT_TEST) $(LD_SCRIPT_DEPS)
 	cd $(OBJ_DIR) && sed "s#tools/#../../tools/#g" ../../$(LD_SCRIPT_TEST) > ld_script_test.ld
 
-$(TESTELF): $(OBJ_DIR)/ld_script_test.ld $(OBJS) $(TEST_OBJS) libagbsyscall
+$(TESTELF): $(OBJ_DIR)/ld_script_test.ld $(OBJS) $(TEST_OBJS) libagbsyscall tools check-tools
 	@echo "cd $(OBJ_DIR) && $(LD) -T ld_script_test.ld -o ../../$@ <objects> <test-objects> <lib>"
 	@cd $(OBJ_DIR) && $(LD) $(TESTLDFLAGS) -T ld_script_test.ld -o ../../$@ $(OBJS_REL) $(TEST_OBJS_REL) $(LIB)
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
-	$(PATCHELF) pokeemerald-test.elf gTestRunnerArgv "$(TESTS)\0"
+	$(PATCHELF) $(TESTELF) gTestRunnerArgv "$(TESTS)\0"
 
 ifeq ($(GITHUB_REPOSITORY_OWNER),rh-hideout)
 TEST_SKIP_IS_FAIL := \x01

@@ -397,11 +397,13 @@
 #define EFFECT_SPECIAL_ATTACK_UP_HIT        391
 #define EFFECT_VICTORY_DANCE                392
 #define EFFECT_TEATIME                      393
-#define EFFECT_CEASELESS_EDGE               394
-#define EFFECT_DIRE_CLAW                    395
-#define EFFECT_STONE_AXE                    396
-#define EFFECT_BARB_BARRAGE                 397
+#define EFFECT_ATTACK_UP_USER_ALLY          394 // Howl 8th Gen
+#define EFFECT_SHELL_TRAP                   395
+#define EFFECT_CEASELESS_EDGE               396
+#define EFFECT_DIRE_CLAW                    397
+#define EFFECT_STONE_AXE                    398
+#define EFFECT_BARB_BARRAGE                 399
 
-#define NUM_BATTLE_MOVE_EFFECTS             398
+#define NUM_BATTLE_MOVE_EFFECTS             400
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

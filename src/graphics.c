@@ -1381,6 +1381,7 @@ const u32 gBattleAnimBgTilemap_GigaImpactPlayer[] = INCBIN_U32("graphics/battle_
 const u32 gBattleAnimBgTilemap_GigaImpactOpponent[] = INCBIN_U32("graphics/battle_anims/backgrounds/giga_impact_opponent.bin.lz");
 const u32 gBattleAnimBgTilemap_GigaImpactContest[] = INCBIN_U32("graphics/battle_anims/backgrounds/giga_impact_contest.bin.lz");
 const u32 gBattleAnimBgImage_GigaImpact[] = INCBIN_U32("graphics/battle_anims/backgrounds/giga_impact.4bpp.lz");
+const u32 gBattleAnimBgImage_GigaImpactContest[] = INCBIN_U32("graphics/battle_anims/backgrounds/giga_impact_contest.4bpp.lz");
 const u32 gBattleAnimBgPalette_GigaImpact[] = INCBIN_U32("graphics/battle_anims/backgrounds/giga_impact.gbapal.lz");
 
 const u32 gBattleAnimBgImage_SpacialRend[] = INCBIN_U32("graphics/battle_anims/backgrounds/spacial_rend.4bpp.lz");
@@ -2012,7 +2013,6 @@ const u16 gTitleScreenPressStartPal[]      = INCBIN_U16("graphics/title_screen/p
 const u32 gTitleScreenPressStartGfx[]      = INCBIN_U32("graphics/title_screen/press_start.4bpp.lz");
 const u32 gTitleScreenPokemonLogoTilemap[] = INCBIN_U32("graphics/title_screen/pokemon_logo.bin.lz");
 
-// size in LoadPalette calls is reported as 0xD0 << 1, which is 0x1A0, but palette is only 0x100 bytes long so it loads garbage as well
 const u16 gFrontierPassBg_Pal[][16]                      = INCBIN_U16("graphics/frontier_pass/bg.gbapal");
 const u32 gFrontierPassBg_Gfx[]                          = INCBIN_U32("graphics/frontier_pass/bg.4bpp.lz");
 const u32 gFrontierPassMapAndCard_Gfx[]                  = INCBIN_U32("graphics/frontier_pass/map_and_card.8bpp.lz");

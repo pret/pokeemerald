@@ -982,6 +982,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     // stat raising effects
         case EFFECT_ATTACK_UP:
         case EFFECT_ATTACK_UP_2:
+        case EFFECT_ATTACK_UP_USER_ALLY:
             if (!BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_ATK) || !HasMoveWithSplit(battlerAtk, SPLIT_PHYSICAL))
                 score -= 10;
             break;
@@ -2427,25 +2428,18 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 break;
             }
             break;
+        case EFFECT_HEAL_PULSE: // and floral healing
+            if (!IsTargetingPartner(battlerAtk, battlerDef)) // Don't heal enemies
+            {
+                score -= 10;
+                break;
+            }
+            // fallthrough
         case EFFECT_HIT_ENEMY_HEAL_ALLY:    // pollen puff
             if (IsTargetingPartner(battlerAtk, battlerDef))
             {
                 if (gStatuses3[battlerDef] & STATUS3_HEAL_BLOCK)
                     return 0;
-                if (AtMaxHp(battlerDef))
-                    score -= 10;
-                else if (gBattleMons[battlerDef].hp > gBattleMons[battlerDef].maxHP / 2)
-                    score -= 5;
-                break;
-            }
-            // fallthrough
-        case EFFECT_HEAL_PULSE: // and floral healing
-            if (!IsTargetingPartner(battlerAtk, battlerDef)) // Don't heal enemies
-            {
-                score -= 10;
-            }
-            else
-            {
                 if (AtMaxHp(battlerDef))
                     score -= 10;
                 else if (gBattleMons[battlerDef].hp > gBattleMons[battlerDef].maxHP / 2)
@@ -2638,7 +2632,7 @@ static s16 AI_TryToFaint(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     if (CanIndexMoveFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex, 0) && gBattleMoves[move].effect != EFFECT_EXPLOSION)
     {
         // this move can faint the target
-        if (!WillAIStrikeFirst() || GetMovePriority(battlerAtk, move) > 0)
+        if (WillAIStrikeFirst() || GetMovePriority(battlerAtk, move) > 0)
             score += 4; // we go first or we're using priority move
         else
             score += 2;
@@ -3009,6 +3003,13 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                     RETURN_SCORE_PLUS(1);
                 }
                 break;
+            case EFFECT_HEAL_PULSE:
+            case EFFECT_HIT_ENEMY_HEAL_ALLY:
+                if (AI_WhoStrikesFirst(battlerAtk, FOE(battlerAtk), move) == AI_IS_FASTER
+                  && AI_WhoStrikesFirst(battlerAtk, BATTLE_PARTNER(FOE(battlerAtk)), move) == AI_IS_FASTER
+                  && gBattleMons[battlerAtkPartner].hp < gBattleMons[battlerAtkPartner].maxHP / 2)
+                    RETURN_SCORE_PLUS(1);
+                break;
             } // attacker move effects
         } // check partner protecting
 
@@ -3191,6 +3192,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 // stat raising effects
     case EFFECT_ATTACK_UP:
     case EFFECT_ATTACK_UP_2:
+    case EFFECT_ATTACK_UP_USER_ALLY:
         if (MovesWithSplitUnusable(battlerAtk, battlerDef, SPLIT_PHYSICAL))
         {
             score -= 8;
@@ -4827,6 +4829,7 @@ static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     switch (gBattleMoves[move].effect)
     {
     case EFFECT_ATTACK_UP:
+    case EFFECT_ATTACK_UP_USER_ALLY:
     case EFFECT_DEFENSE_UP:
     case EFFECT_SPEED_UP:
     case EFFECT_SPECIAL_ATTACK_UP:
@@ -5158,6 +5161,7 @@ static s16 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             switch (effect)
             {
             case EFFECT_ATTACK_UP:
+            case EFFECT_ATTACK_UP_USER_ALLY:
             case EFFECT_DEFENSE_UP:
             case EFFECT_SPEED_UP:
             case EFFECT_SPECIAL_ATTACK_UP:
