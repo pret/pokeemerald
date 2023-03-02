@@ -4697,19 +4697,19 @@ const u8 gDhelmisePokedexText[] = _(
     "It maintains itself with new infusions of\n"
     "seabed detritus and seaweed.");
 
-const u8 gJangmooPokedexText[] = _(
+const u8 gJangmoOPokedexText[] = _(
     "It expresses its feelings by smacking its\n"
     "scales. Metallic sounds echo through the\n"
     "tall mountains where Jangmo-o live. They\n"
     "grow little by little battling one another.");
 
-const u8 gHakamooPokedexText[] = _(
+const u8 gHakamoOPokedexText[] = _(
     "It sheds and regrows its scales on a\n"
     "continuous basis. The scales become\n"
     "harder each time they're regrown. Its\n"
     "scaly punches tear its foes to shreds.");
 
-const u8 gKommooPokedexText[] = _(
+const u8 gKommoOPokedexText[] = _(
     "Its rigid scales function as offense and\n"
     "defense. In the past, its scales were\n"
     "processed and used to make weapons\n"

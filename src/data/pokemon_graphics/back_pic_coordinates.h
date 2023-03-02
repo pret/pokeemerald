@@ -1046,7 +1046,7 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_QWILFISH_HISUIAN]             = { .size = MON_COORDS_SIZE(56, 56), .y_offset =  6 },
     [SPECIES_SNEASEL_HISUIAN]              = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  3 },
 #if P_GEN_5_POKEMON == TRUE
-    [SPECIES_SAMUROTT_HISUIAN]             = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    [SPECIES_SAMUROTT_HISUIAN]             = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  8 },
     [SPECIES_LILLIGANT_HISUIAN]            = { .size = MON_COORDS_SIZE(56, 56), .y_offset =  5 },
     [SPECIES_ZORUA_HISUIAN]                = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  1 },
     [SPECIES_ZOROARK_HISUIAN]              = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
@@ -1355,7 +1355,7 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_CALYREX_ICE_RIDER]            = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  7 },
     [SPECIES_CALYREX_SHADOW_RIDER]         = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  7 },
     // Enamorus
-    [SPECIES_ENAMORUS_THERIAN]             = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    [SPECIES_ENAMORUS_THERIAN]             = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  2 },
     // Basculegion
     [SPECIES_BASCULEGION_FEMALE]           = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
 #endif

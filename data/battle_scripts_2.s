@@ -192,16 +192,30 @@ BattleScript_ActionWallyThrow:
 	waitmessage B_WAIT_TIME_LONG
 	end2
 
-BattleScript_TrainerSlideMsgRet::
+BattleScript_TrainerASlideMsgRet::
 	handletrainerslidemsg BS_SCRIPTING, 0
-	trainerslidein 1
+	trainerslidein B_POSITION_OPPONENT_LEFT
 	handletrainerslidemsg BS_SCRIPTING, 1
 	waitstate
-	trainerslideout 1
-	handletrainerslidemsg BS_SCRIPTING, 2
+	trainerslideout B_POSITION_OPPONENT_LEFT
 	waitstate
+	handletrainerslidemsg BS_SCRIPTING, 2
 	return
 
-BattleScript_TrainerSlideMsgEnd2::
-	call BattleScript_TrainerSlideMsgRet
+BattleScript_TrainerASlideMsgEnd2::
+	call BattleScript_TrainerASlideMsgRet
+	end2
+	
+BattleScript_TrainerBSlideMsgRet::
+	handletrainerslidemsg BS_SCRIPTING, 0
+	trainerslidein B_POSITION_OPPONENT_RIGHT
+	handletrainerslidemsg BS_SCRIPTING, 1
+	waitstate
+	trainerslideout B_POSITION_OPPONENT_RIGHT
+	waitstate
+	handletrainerslidemsg BS_SCRIPTING, 2
+	return
+
+BattleScript_TrainerBSlideMsgEnd2::
+	call BattleScript_TrainerBSlideMsgRet
 	end2

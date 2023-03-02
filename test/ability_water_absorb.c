@@ -78,10 +78,10 @@ SINGLE_BATTLE_TEST("Water Absorb prevents Items from activating")
         ABILITY_POPUP(player, ABILITY_WATER_ABSORB);
         HP_BAR(player, hp: TEST_MAX_HP / 4 + 1);
         MESSAGE("Poliwag restored HP using its Water Absorb!");
-        NONE_OF { 
+        NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
         }
-        
+
     }
 }
