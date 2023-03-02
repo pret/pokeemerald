@@ -669,6 +669,7 @@ struct BattleStruct
     u8 trainerSlidePlayerMonUnaffectedMsgState:2;
     bool8 trainerSlideMegaEvolutionMsgDone:1;
     bool8 trainerSlideZMoveMsgDone:1;
+    bool8 trainerSlideBeforeFirstTurnMsgDone:1;
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)

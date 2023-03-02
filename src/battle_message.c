@@ -3881,6 +3881,7 @@ struct TrainerSlide
     const u8 *msgPlayerMonUnaffected;
     const u8 *msgMegaEvolution;
     const u8 *msgZMove;
+    const u8 *msgBeforeFirstTurn;
 };
 
 static const struct TrainerSlide sTrainerSlides[] =
@@ -3899,6 +3900,7 @@ static const struct TrainerSlide sTrainerSlides[] =
         .msgPlayerMonUnaffected = sText_ButNoEffect,
         .msgMegaEvolution = sText_PowderExplodes,
         .msgZMove = sText_Electromagnetism,
+        .msgBeforeFirstTurn = sText_GravityIntensified,
     },
     */
 };
@@ -4041,6 +4043,14 @@ u32 ShouldDoTrainerSlide(u32 battlerId, u32 which)
                 {
                     gBattleStruct->trainerSlideZMoveMsgDone = TRUE;
                     gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgZMove;
+                    return TRUE;
+                }
+                break;
+            case TRAINER_SLIDE_BEFORE_FIRST_TURN:
+                if (sTrainerSlides[i].msgBeforeFirstTurn != NULL && !gBattleStruct->trainerSlideBeforeFirstTurnMsgDone)
+                {
+                    gBattleStruct->trainerSlideBeforeFirstTurnMsgDone = TRUE;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgBeforeFirstTurn;
                     return TRUE;
                 }
                 break;
