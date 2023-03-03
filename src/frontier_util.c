@@ -1990,7 +1990,7 @@ static void CheckPartyIneligibility(void)
         numEligibleMons = 0;
         do
         {
-            u16 species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
+            u16 species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES_OR_EGG);
             u16 heldItem = GetMonData(&gPlayerParty[monId], MON_DATA_HELD_ITEM);
             u8 level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
             u16 hp = GetMonData(&gPlayerParty[monId], MON_DATA_HP);

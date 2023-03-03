@@ -3929,8 +3929,8 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
         for (i = 0; i < PARTY_SIZE; i++)
         {
             if (GetMonData(&party[i], MON_DATA_HP) != 0
-             && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
-             && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG
+             && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+             && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG
              && i != partyIdBattlerOn1 && i != partyIdBattlerOn2
              && i != *(gBattleStruct->monToSwitchIntoId + flankId) && i != playerId[gBattleStruct->monToSwitchIntoId])
                 break;
@@ -3948,8 +3948,8 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
         for (i = playerId * MULTI_PARTY_SIZE; i < playerId * MULTI_PARTY_SIZE + MULTI_PARTY_SIZE; i++)
         {
             if (GetMonData(&party[i], MON_DATA_HP) != 0
-             && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
-             && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+             && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+             && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
                 break;
         }
         return (i == playerId * MULTI_PARTY_SIZE + MULTI_PARTY_SIZE);
@@ -3988,8 +3988,8 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
         for (i = playerId * MULTI_PARTY_SIZE; i < playerId * MULTI_PARTY_SIZE + MULTI_PARTY_SIZE; i++)
         {
             if (GetMonData(&party[i], MON_DATA_HP) != 0
-             && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
-             && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+             && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+             && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
                 break;
         }
         return (i == playerId * MULTI_PARTY_SIZE + MULTI_PARTY_SIZE);
@@ -4006,8 +4006,8 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
         for (i = playerId; i < playerId + MULTI_PARTY_SIZE; i++)
         {
             if (GetMonData(&party[i], MON_DATA_HP) != 0
-             && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
-             && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+             && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+             && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
                 break;
         }
         return (i == playerId + 3);
@@ -4035,8 +4035,8 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
         for (i = 0; i < PARTY_SIZE; i++)
         {
             if (GetMonData(&party[i], MON_DATA_HP) != 0
-             && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
-             && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG
+             && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+             && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG
              && i != partyIdBattlerOn1 && i != partyIdBattlerOn2
              && i != *(gBattleStruct->monToSwitchIntoId + flankId) && i != playerId[gBattleStruct->monToSwitchIntoId])
                 break;
@@ -8029,14 +8029,14 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
     return targetBattler;
 }
 
-static bool32 IsMonEventLegal(u8 battlerId)
+static bool32 IsBattlerModernFatefulEncounter(u8 battlerId)
 {
     if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
         return TRUE;
     if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS
         && GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL) != SPECIES_MEW)
             return TRUE;
-    return GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_EVENT_LEGAL, NULL);
+    return GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_MODERN_FATEFUL_ENCOUNTER, NULL);
 }
 
 u8 IsMonDisobedient(void)
@@ -8051,7 +8051,7 @@ u8 IsMonDisobedient(void)
     if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)
         return 0;
 
-    if (IsMonEventLegal(gBattlerAttacker)) // only false if illegal Mew or Deoxys
+    if (IsBattlerModernFatefulEncounter(gBattlerAttacker)) // only false if illegal Mew or Deoxys
     {
         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && GetBattlerPosition(gBattlerAttacker) == 2)
             return 0;

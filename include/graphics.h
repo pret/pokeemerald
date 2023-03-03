@@ -10359,10 +10359,10 @@ extern const u32 gUsePokeblockCondition_Gfx[];
 extern const u16 gUnionRoomChat_Background_Pal[];
 extern const u32 gUnionRoomChat_Background_Gfx[];
 extern const u32 gUnionRoomChat_Background_Tilemap[];
-extern const u16 gUnionRoomChat_Window_Pal1[];
-extern const u16 gUnionRoomChat_Window_Pal2[];
-extern const u32 gUnionRoomChat_Border_Gfx[];
-extern const u32 gUnionRoomChat_Border_Tilemap[];
+extern const u16 gUnionRoomChat_InputText_Pal[];
+extern const u16 gUnionRoomChat_Keyboard_Pal[];
+extern const u32 gUnionRoomChat_Keyboard_Gfx[];
+extern const u32 gUnionRoomChat_Keyboard_Tilemap[];
 extern const u32 gUnionRoomChat_RButtonLabels[];
 
 // Use Pokeblock
