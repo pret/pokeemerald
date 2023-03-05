@@ -337,7 +337,7 @@
 #define MUS_MT_CHIMNEY              406 // MUS_TOZAN            // Also used in Desert Underpass, Mirage Tower, Seafloor Cavern and Sky Pillar.
 #define MUS_ENCOUNTER_FEMALE        407 // MUS_GIRLEYE
 #define MUS_LILYCOVE                408 // MUS_MINAMO           // Also used in Pacifidlog Town and the Diving Treasure Hunter's house.
-#define MUS_ROUTE111_DESERT         409 // MUS_ASHROAD
+#define MUS_DESERT                  409 // MUS_ASHROAD
 #define MUS_HELP                    410 // MUS_EVENT0
 #define MUS_UNDERWATER              411 // MUS_DEEPDEEP
 #define MUS_VICTORY_TRAINER         412 // MUS_KACHI1
@@ -372,7 +372,7 @@
 #define MUS_ENCOUNTER_MAGMA         441 // MUS_MGM0
 #define MUS_INTRO_BATTLE            442 // MUS_T_BATTLE
 #define MUS_ABNORMAL_WEATHER        443 // MUS_OOAME            // Replaces MUS_WEATHER_KYOGRE from R/S.
-#define MUS_WEATHER_GROUDON         444 // MUS_HIDERI           // Unused from R/S.
+#define MUS_WEATHER_GROUDON         444 // MUS_HIDERI           // Unused, from R/S.
 #define MUS_SOOTOPOLIS              445 // MUS_RUNECITY
 #define MUS_CONTEST_RESULTS         446 // MUS_CON_K
 #define MUS_HALL_OF_FAME_ROOM       447 // MUS_EIKOU_R
