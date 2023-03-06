@@ -33,10 +33,10 @@
 #define DIZZY_ANIM_SPEED    4
 #define DIZZY_STARS_SPEED   12
 
-enum 
+enum
 {
     EXPANSION_INTRO_BG2,
-    EXPANSION_INTRO_BG3    
+    EXPANSION_INTRO_BG3
 };
 
 enum

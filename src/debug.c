@@ -1149,8 +1149,8 @@ static void DebugAction_Util_PoisonMons(u8 taskId)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, 0)
-            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
-            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
         {
             u32 curStatus = STATUS1_POISON;
             SetMonData(&gPlayerParty[i], MON_DATA_STATUS, &curStatus);
@@ -1255,7 +1255,7 @@ static void DebugAction_Util_Weather_SelectId(u8 taskId)
         if (gTasks[taskId].data[3] <= 15 || gTasks[taskId].data[3] >= 20)
             StringCopyPadded(gStringVar1, sWeatherNames[gTasks[taskId].data[3]], CHAR_SPACE, 30);
         else
-            StringCopyPadded(gStringVar1, sText_WeatherNotDefined, CHAR_SPACE, 30); 
+            StringCopyPadded(gStringVar1, sText_WeatherNotDefined, CHAR_SPACE, 30);
 
         StringExpandPlaceholders(gStringVar4, sDebugText_Util_Weather_ID);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);

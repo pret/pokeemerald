@@ -1299,7 +1299,7 @@
 	.byte 0xfe
 	.4byte \failInstr
 	.endm
-	
+
 	.macro callnative func:req
 	.byte 0xff
 	.4byte \func
@@ -1318,6 +1318,12 @@
 	.4byte \jumpInstr
 	.endm
 	
+	.macro dostockpilestatchangeswearoff, battler:req, statChangeInstr:req
+	callnative BS_DoStockpileStatChangesWearOff
+	.byte \battler
+	.4byte \statChangeInstr
+	.endm
+
 	.macro jumpifmorethanhalfHP battler:req, jumpInstr:req
 	callnative BS_JumpIfMoreThanHalfHP
 	.byte \battler
@@ -1328,7 +1334,7 @@
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
 	.endm
-	
+
 	@ Stores Healing Wish effect.
 	.macro storehealingwish battler:req
 	various \battler, VARIOUS_STORE_HEALING_WISH
@@ -1954,7 +1960,7 @@
 	.macro shellsidearmcheck
 	various BS_ATTACKER, VARIOUS_SHELL_SIDE_ARM_CHECK
 	.endm
-	
+
 	.macro jumpifrodaffected battler:req, jumpInstr:req
 	various \battler, VARIOUS_JUMP_IF_ROD
 	.4byte \jumpInstr

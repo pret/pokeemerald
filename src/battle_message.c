@@ -177,8 +177,8 @@ static const u8 sText_PkmnCausedUproar[] = _("{B_ATK_NAME_WITH_PREFIX} caused\na
 static const u8 sText_PkmnMakingUproar[] = _("{B_ATK_NAME_WITH_PREFIX} is making\nan UPROAR!");
 static const u8 sText_PkmnCalmedDown[] = _("{B_ATK_NAME_WITH_PREFIX} calmed down.");
 static const u8 sText_PkmnCantSleepInUproar[] = _("But {B_DEF_NAME_WITH_PREFIX} can't\nsleep in an UPROAR!");
-static const u8 sText_PkmnStockpiled[] = _("{B_ATK_NAME_WITH_PREFIX} STOCKPILED\n{B_BUFF1}!");
-static const u8 sText_PkmnCantStockpile[] = _("{B_ATK_NAME_WITH_PREFIX} can't\nSTOCKPILE any more!");
+static const u8 sText_PkmnStockpiled[] = _("{B_ATK_NAME_WITH_PREFIX} stockpiled\n{B_BUFF1}!");
+static const u8 sText_PkmnCantStockpile[] = _("{B_ATK_NAME_WITH_PREFIX} can't\nstockpile any more!");
 static const u8 sText_PkmnCantSleepInUproar2[] = _("But {B_DEF_NAME_WITH_PREFIX} can't\nsleep in an UPROAR!");
 static const u8 sText_UproarKeptPkmnAwake[] = _("But the UPROAR kept\n{B_DEF_NAME_WITH_PREFIX} awake!");
 static const u8 sText_PkmnStayedAwakeUsing[] = _("{B_DEF_NAME_WITH_PREFIX} stayed awake\nusing its {B_DEF_ABILITY}!");
@@ -360,8 +360,8 @@ static const u8 sText_SunlightFaded[] = _("The sunlight faded.");
 static const u8 sText_StartedHail[] = _("It started to hail!");
 static const u8 sText_HailContinues[] = _("Hail continues to fall.");
 static const u8 sText_HailStopped[] = _("The hail stopped.");
-static const u8 sText_FailedToSpitUp[] = _("But it failed to SPIT UP\na thing!");
-static const u8 sText_FailedToSwallow[] = _("But it failed to SWALLOW\na thing!");
+static const u8 sText_FailedToSpitUp[] = _("But it failed to spit up\na thing!");
+static const u8 sText_FailedToSwallow[] = _("But it failed to swallow\na thing!");
 static const u8 sText_WindBecameHeatWave[] = _("The wind turned into a\nHEAT WAVE!");
 static const u8 sText_StatChangesGone[] = _("All stat changes were\neliminated!");
 static const u8 sText_CoinsScattered[] = _("Coins scattered everywhere!");
@@ -776,9 +776,13 @@ static const u8 sText_AbilityWeakenedSurroundingMonsStat[] = _("{B_ATK_NAME_WITH
 static const u8 sText_AttackerGainedStrengthFromTheFallen[] = _("{B_ATK_NAME_WITH_PREFIX} gained strength\nfrom the fallen!");
 static const u8 sText_PrepareShellTrap[] = _("{B_ATK_NAME_WITH_PREFIX} set a shell trap!");
 static const u8 sText_ShellTrapDidntWork[] = _("{B_ATK_NAME_WITH_PREFIX}'s shell trap didn't work!");
+static const u8 sText_CouldntFullyProtect[] = _("{B_DEF_NAME_WITH_PREFIX} couldn't fully protect\nitself and got hurt!");
+static const u8 sText_StockpiledEffectWoreOff[] = _("{B_ATK_NAME_WITH_PREFIX}'s stockpiled\neffect wore off!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_STOCKPILEDEFFECTWOREOFF - BATTLESTRINGS_TABLE_START] = sText_StockpiledEffectWoreOff,
+    [STRINGID_COULDNTFULLYPROTECT - BATTLESTRINGS_TABLE_START] = sText_CouldntFullyProtect,
     [STRINGID_ATTACKERGAINEDSTRENGTHFROMTHEFALLEN - BATTLESTRINGS_TABLE_START] = sText_AttackerGainedStrengthFromTheFallen,
     [STRINGID_ABILITYWEAKENEDFSURROUNDINGMONSSTAT - BATTLESTRINGS_TABLE_START] = sText_AbilityWeakenedSurroundingMonsStat,
     [STRINGID_ELECTRICTERRAINACTIVATEDABILITY - BATTLESTRINGS_TABLE_START] = sText_ElectricTerrainActivatedAbility,
@@ -3887,13 +3891,13 @@ static const struct TrainerSlide sTrainerSlides[] =
     */
 };
 
-static u32 GetEnemyMonCount(bool32 onlyAlive)
+static u32 GetEnemyMonCount(u32 firstId, u32 lastId, bool32 onlyAlive)
 {
     u32 i, count = 0;
 
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (i = firstId; i < lastId; i++)
     {
-        u32 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL);
+        u32 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG, NULL);
         if (species != SPECIES_NONE
             && species != SPECIES_EGG
             && (!onlyAlive || GetMonData(&gEnemyParty[i], MON_DATA_HP, NULL)))
@@ -3911,12 +3915,33 @@ static bool32 IsBattlerHpLow(u32 battler)
         return FALSE;
 }
 
-bool32 ShouldDoTrainerSlide(u32 battlerId, u32 trainerId, u32 which)
+u32 ShouldDoTrainerSlide(u32 battlerId, u32 which)
 {
-    s32 i;
+    u32 i, firstId, lastId, trainerId, retValue = 1;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) || GetBattlerSide(battlerId) != B_SIDE_OPPONENT)
-        return FALSE;
+        return 0;
+
+    // Two opponents support.
+    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+    {
+        if (gBattlerPartyIndexes[battlerId] >= 3)
+        {
+            firstId = 3, lastId = PARTY_SIZE;
+            trainerId = gTrainerBattleOpponent_B;
+            retValue = 2;
+        }
+        else
+        {
+            firstId = 0, lastId = 3;
+            trainerId = gTrainerBattleOpponent_A;
+        }
+    }
+    else
+    {
+        firstId = 0, lastId = PARTY_SIZE;
+        trainerId = gTrainerBattleOpponent_A;
+    }
 
     for (i = 0; i < ARRAY_COUNT(sTrainerSlides); i++)
     {
@@ -3926,28 +3951,28 @@ bool32 ShouldDoTrainerSlide(u32 battlerId, u32 trainerId, u32 which)
             switch (which)
             {
             case TRAINER_SLIDE_LAST_SWITCHIN:
-                if (sTrainerSlides[i].msgLastSwitchIn != NULL && GetEnemyMonCount(TRUE) == 1)
+                if (sTrainerSlides[i].msgLastSwitchIn != NULL && !CanBattlerSwitch(battlerId))
                 {
                     gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgLastSwitchIn;
-                    return TRUE;
+                    return retValue;
                 }
                 break;
             case TRAINER_SLIDE_LAST_LOW_HP:
                 if (sTrainerSlides[i].msgLastLowHp != NULL
-                    && GetEnemyMonCount(TRUE) == 1
+                    && GetEnemyMonCount(firstId, lastId, TRUE) == 1
                     && IsBattlerHpLow(battlerId)
                     && !gBattleStruct->trainerSlideLowHpMsgDone)
                 {
                     gBattleStruct->trainerSlideLowHpMsgDone = TRUE;
                     gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgLastLowHp;
-                    return TRUE;
+                    return retValue;
                 }
                 break;
             case TRAINER_SLIDE_FIRST_DOWN:
-                if (sTrainerSlides[i].msgFirstDown != NULL && GetEnemyMonCount(TRUE) == GetEnemyMonCount(FALSE) - 1)
+                if (sTrainerSlides[i].msgFirstDown != NULL && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE) - 1)
                 {
                     gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgFirstDown;
-                    return TRUE;
+                    return retValue;
                 }
                 break;
             }
@@ -3955,5 +3980,5 @@ bool32 ShouldDoTrainerSlide(u32 battlerId, u32 trainerId, u32 which)
         }
     }
 
-    return FALSE;
+    return 0;
 }
