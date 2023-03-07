@@ -17,6 +17,44 @@ SINGLE_BATTLE_TEST("Venusaur can Mega Evolve holding Venusaurite")
     }
 }
 
+DOUBLE_BATTLE_TEST("Mega Evolution's order is determined by Speed - opponent faster")
+{
+    GIVEN {
+        PLAYER(SPECIES_VENUSAUR) { Item(ITEM_VENUSAURITE); Speed(1); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(3);}
+        OPPONENT(SPECIES_GARDEVOIR) { Item(ITEM_GARDEVOIRITE); Speed(3);}
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(4);}
+    } WHEN {
+        TURN { MOVE(opponentLeft, MOVE_CELEBRATE, megaEvolve: TRUE); MOVE(playerLeft, MOVE_CELEBRATE, megaEvolve: TRUE); }
+    } SCENE {
+        MESSAGE("Foe Gardevoir's Gardevoirite is reacting to 's Mega Ring!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, opponentLeft);
+        MESSAGE("Foe Gardevoir has Mega Evolved into Mega Gardevoir!");
+        MESSAGE("Venusaur's Venusaurite is reacting to 1's Mega Ring!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, playerLeft);
+        MESSAGE("Venusaur has Mega Evolved into Mega Venusaur!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Mega Evolution's order is determined by Speed - player faster")
+{
+    GIVEN {
+        PLAYER(SPECIES_VENUSAUR) { Item(ITEM_VENUSAURITE); Speed(5); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(3);}
+        OPPONENT(SPECIES_GARDEVOIR) { Item(ITEM_GARDEVOIRITE); Speed(2);}
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(4);}
+    } WHEN {
+        TURN { MOVE(opponentLeft, MOVE_CELEBRATE, megaEvolve: TRUE); MOVE(playerLeft, MOVE_CELEBRATE, megaEvolve: TRUE); }
+    } SCENE {
+        MESSAGE("Venusaur's Venusaurite is reacting to 1's Mega Ring!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, playerLeft);
+        MESSAGE("Venusaur has Mega Evolved into Mega Venusaur!");
+        MESSAGE("Foe Gardevoir's Gardevoirite is reacting to 's Mega Ring!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, opponentLeft);
+        MESSAGE("Foe Gardevoir has Mega Evolved into Mega Gardevoir!");
+    }
+}
+
 SINGLE_BATTLE_TEST("Rayquaza can Mega Evolve knowing Dragon Ascent")
 {
     GIVEN {
