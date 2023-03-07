@@ -3166,6 +3166,9 @@ void SwitchInClearSetData(void)
     gSpecialStatuses[gActiveBattler].physicalDmg = 0;
     gSpecialStatuses[gActiveBattler].specialDmg = 0;
 
+    // Reset G-Max Chi Strike boosts.
+    gBattleStruct->bonusCritStages[gActiveBattler] = 0;
+
     gBattleStruct->overwrittenAbilities[gActiveBattler] = ABILITY_NONE;
 
     Ai_UpdateSwitchInData(gActiveBattler);

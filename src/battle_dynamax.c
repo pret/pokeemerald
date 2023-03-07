@@ -512,7 +512,8 @@ u16 SetMaxMoveEffect(u16 move)
 			effect++;
 			break;
 		case MAX_EFFECT_CRIT_PLUS:
-			gBattleStruct->sideCritStages[GetBattlerSide(gBattlerAttacker)]++;
+			gBattleStruct->bonusCritStages[gBattlerAttacker]++;
+			gBattleStruct->bonusCritStages[BATTLE_PARTNER(gBattlerAttacker)]++;
 			BattleScriptPush(gBattlescriptCurrInstr + 1);
 			gBattlescriptCurrInstr = BattleScript_EffectRaiseCritAlliesAnim;
 			effect++;
