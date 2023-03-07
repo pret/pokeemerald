@@ -8670,7 +8670,6 @@ static bool32 CourtChangeSwapSideStatuses(void)
     SWAP(sideTimerPlayer->stickyWebBattlerSide, sideTimerOpp->stickyWebBattlerSide, temp);
 }
 
-//cmd->case_, gActiveBattler, TRUE
 static void HandleScriptMegaPrimal(u32 caseId, u32 battlerId, bool32 isMega)
 {
     struct Pokemon *mon = GetBattlerPartyData(battlerId);
