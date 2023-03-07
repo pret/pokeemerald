@@ -2218,16 +2218,6 @@
 	various 0, VARIOUS_SET_MAX_MOVE_EFFECT
 	.endm
 
-	.macro jumpiftargetabsent, ptr:req
-	various 0, VARIOUS_JUMP_IF_TARGET_ABSENT
-	.4byte \ptr
-	.endm
-
-	.macro jumpiftargetnotally, ptr:req
-	various 0, VARIOUS_JUMP_IF_TARGET_NOT_ALLY
-	.4byte \ptr
-	.endm
-
 	.macro setsteelsurge, failInstr:req
 	various 0, VARIOUS_SET_STEELSURGE
 	.4byte \failInstr

@@ -261,14 +261,12 @@
 #define VARIOUS_JUMP_IF_SHELL_TRAP                  169
 #define VARIOUS_SET_MAX_MOVE_EFFECT                 170
 #define VARIOUS_JUMP_IF_NO_VALID_TARGETS            171
-#define VARIOUS_JUMP_IF_TARGET_NOT_ALLY             172
-#define VARIOUS_JUMP_IF_TARGET_ABSENT               173
-#define VARIOUS_SET_STEELSURGE                      174
-#define VARIOUS_DAMAGE_NON_TYPES                    175
-#define VARIOUS_TRY_SET_STATUS1                     176
-#define VARIOUS_TRY_SET_STATUS2                     177
-#define VARIOUS_TRY_HEAL_SIXTH_HP                   178
-#define VARIOUS_TRY_RECYCLE_BERRY                   179
+#define VARIOUS_SET_STEELSURGE                      172
+#define VARIOUS_DAMAGE_NON_TYPES                    173
+#define VARIOUS_TRY_SET_STATUS1                     174
+#define VARIOUS_TRY_SET_STATUS2                     175
+#define VARIOUS_TRY_HEAL_SIXTH_HP                   176
+#define VARIOUS_TRY_RECYCLE_BERRY                   177
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

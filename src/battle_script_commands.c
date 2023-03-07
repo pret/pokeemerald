@@ -11164,24 +11164,6 @@ static void Cmd_various(void)
             return;
         break;
     }
-    case VARIOUS_JUMP_IF_TARGET_NOT_ALLY:
-    {
-        VARIOUS_ARGS(const u8 *jumpInstr);
-        if (GetBattlerSide(gBattlerTarget) != GetBattlerSide(gBattlerAttacker))
-            gBattlescriptCurrInstr = cmd->jumpInstr;
-        else
-            gBattlescriptCurrInstr = cmd->nextInstr;
-        return;
-    }
-    case VARIOUS_JUMP_IF_TARGET_ABSENT:
-    {
-        VARIOUS_ARGS(const u8 *jumpInstr);
-        if (!IsBattlerAlive(gBattlerTarget))
-            gBattlescriptCurrInstr = cmd->jumpInstr;
-        else
-            gBattlescriptCurrInstr = cmd->nextInstr;
-        return;
-    }
     case VARIOUS_SET_STEELSURGE:
     {
         VARIOUS_ARGS(const u8 *failInstr);
