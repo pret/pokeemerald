@@ -1443,6 +1443,19 @@ static bool32 TryAegiFormChange(void)
     return TRUE;
 }
 
+bool32 ProteanTryChangeType(u32 battler, u32 ability, u32 move, u32 moveType)
+{
+      if ((ability == ABILITY_PROTEAN || ability == ABILITY_LIBERO)
+         && (gBattleMons[battler].type1 != moveType || gBattleMons[battler].type2 != moveType
+             || (gBattleMons[battler].type3 != moveType && gBattleMons[battler].type3 != TYPE_MYSTERY))
+         && move != MOVE_STRUGGLE)
+    {
+        SET_BATTLER_TYPE(gBattlerAttacker, moveType);
+        return TRUE;
+    }
+    return FALSE;
+}
+
 static void Cmd_attackcanceler(void)
 {
     CMD_ARGS();
@@ -1499,13 +1512,9 @@ static void Cmd_attackcanceler(void)
     }
 
     // Check Protean activation.
-    if ((attackerAbility == ABILITY_PROTEAN || attackerAbility == ABILITY_LIBERO)
-        && (gBattleMons[gBattlerAttacker].type1 != moveType || gBattleMons[gBattlerAttacker].type2 != moveType ||
-            (gBattleMons[gBattlerAttacker].type3 != moveType && gBattleMons[gBattlerAttacker].type3 != TYPE_MYSTERY))
-        && gCurrentMove != MOVE_STRUGGLE)
+    if (ProteanTryChangeType(gBattlerAttacker, attackerAbility, gCurrentMove, moveType))
     {
         PREPARE_TYPE_BUFFER(gBattleTextBuff1, moveType);
-        SET_BATTLER_TYPE(gBattlerAttacker, moveType);
         gBattlerAbility = gBattlerAttacker;
         BattleScriptPushCursor();
         PrepareStringBattle(STRINGID_EMPTYSTRING3, gBattlerAttacker);

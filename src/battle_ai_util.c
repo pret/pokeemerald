@@ -538,9 +538,10 @@ void SaveBattlerData(u8 battlerId)
         AI_THINKING_STRUCT->saved[battlerId].species = gBattleMons[battlerId].species;
         for (i = 0; i < 4; i++)
             AI_THINKING_STRUCT->saved[battlerId].moves[i] = gBattleMons[battlerId].moves[i];
-        AI_THINKING_STRUCT->saved[battlerId].types[0] = gBattleMons[battlerId].type1;
-        AI_THINKING_STRUCT->saved[battlerId].types[1] = gBattleMons[battlerId].type2;
     }
+    // Save and restore types even for AI controlled battlers in case it gets changed during move evaluation process.
+    AI_THINKING_STRUCT->saved[battlerId].types[0] = gBattleMons[battlerId].type1;
+    AI_THINKING_STRUCT->saved[battlerId].types[1] = gBattleMons[battlerId].type2;
 }
 
 static bool32 ShouldFailForIllusion(u16 illusionSpecies, u32 battlerId)
@@ -631,9 +632,9 @@ void RestoreBattlerData(u8 battlerId)
         gBattleMons[battlerId].species = AI_THINKING_STRUCT->saved[battlerId].species;
         for (i = 0; i < 4; i++)
             gBattleMons[battlerId].moves[i] = AI_THINKING_STRUCT->saved[battlerId].moves[i];
-        gBattleMons[battlerId].type1 = AI_THINKING_STRUCT->saved[battlerId].types[0];
-        gBattleMons[battlerId].type2 = AI_THINKING_STRUCT->saved[battlerId].types[1];
     }
+    gBattleMons[battlerId].type1 = AI_THINKING_STRUCT->saved[battlerId].types[0];
+    gBattleMons[battlerId].type2 = AI_THINKING_STRUCT->saved[battlerId].types[1];
 }
 
 u32 GetHealthPercentage(u8 battlerId)
@@ -801,6 +802,7 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness,
 
     if (gBattleMoves[move].power)
     {
+        ProteanTryChangeType(battlerAtk, AI_DATA->abilities[battlerAtk], move, moveType);
         critChance = GetInverseCritChance(battlerAtk, battlerDef, move);
         normalDmg = CalculateMoveDamageAndEffectiveness(move, battlerAtk, battlerDef, moveType, &effectivenessMultiplier);
         critDmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, TRUE, FALSE, FALSE);
