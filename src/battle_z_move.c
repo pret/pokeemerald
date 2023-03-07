@@ -535,7 +535,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove)
 static void ZMoveSelectionDisplayPower(u16 move, u16 zMove)
 {
     u8 *txtPtr;
-    u16 power = gBattleMoves[move].zMovePower;
+    u16 power = GetZMovePower(move);
 
     if (zMove >= MOVE_CATASTROPIKA)
         power = gBattleMoves[zMove].power;
@@ -696,5 +696,47 @@ static bool32 AreStatsMaxed(u8 battlerId, u8 n)
             return FALSE;
     }
     return TRUE;
+}
+
+u16 GetZMovePower(u16 move)
+{
+    if (gBattleMoves[move].split == SPLIT_STATUS)
+        return 0;
+    if (gBattleMoves[move].effect == EFFECT_OHKO)
+        return 180;
+
+    switch (move)
+    {
+        case MOVE_MEGA_DRAIN:    return 120;
+        case MOVE_CORE_ENFORCER: return 140;
+        case MOVE_WEATHER_BALL:  return 160;
+        case MOVE_HEX:           return 160;
+        case MOVE_FLYING_PRESS:  return 170;
+        case MOVE_GEAR_GRIND:    return 180;
+        case MOVE_V_CREATE:      return 220;
+        default:
+        {
+            if (gBattleMoves[move].power >= 140)
+                return 200;
+            else if (gBattleMoves[move].power >= 130)
+                return 195;
+            else if (gBattleMoves[move].power >= 120)
+                return 190;
+            else if (gBattleMoves[move].power >= 110)
+                return 185;
+            else if (gBattleMoves[move].power >= 100)
+                return 180;
+            else if (gBattleMoves[move].power >= 90)
+                return 175;
+            else if (gBattleMoves[move].power >= 80)
+                return 160;
+            else if (gBattleMoves[move].power >= 70)
+                return 140;
+            else if (gBattleMoves[move].power >= 60)
+                return 120;
+            else
+                return 100;
+        }
+    }
 }
 
