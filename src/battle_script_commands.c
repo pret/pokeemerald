@@ -8694,6 +8694,74 @@ static bool32 CourtChangeSwapSideStatuses(void)
     SWAP(sideTimerPlayer->stickyWebBattlerSide, sideTimerOpp->stickyWebBattlerSide, temp);
 }
 
+static void HandleScriptMegaPrimal(u32 caseId, u32 battlerId, bool32 isMega)
+{
+    struct Pokemon *mon = GetBattlerPartyData(battlerId);
+    u32 position = GetBattlerPosition(battlerId);
+    u32 side = GET_BATTLER_SIDE(battlerId);
+
+    // Change species.
+    if (caseId == 0)
+    {
+        u16 newSpecies;
+        if (isMega)
+        {
+            gBattleStruct->mega.evolvedSpecies[battlerId] = gBattleMons[battlerId].species;
+            if (position == B_POSITION_PLAYER_LEFT
+                || (position == B_POSITION_PLAYER_RIGHT && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))))
+            {
+                gBattleStruct->mega.playerEvolvedSpecies = gBattleStruct->mega.evolvedSpecies[battlerId];
+            }
+            //Checks regular Mega Evolution
+            newSpecies = GetMegaEvolutionSpecies(gBattleStruct->mega.evolvedSpecies[battlerId], gBattleMons[battlerId].item);
+            //Checks Wish Mega Evolution
+            if (newSpecies == SPECIES_NONE)
+            {
+                newSpecies = GetWishMegaEvolutionSpecies(gBattleStruct->mega.evolvedSpecies[battlerId],
+                                                         gBattleMons[battlerId].moves[0], gBattleMons[battlerId].moves[1], gBattleMons[battlerId].moves[2], gBattleMons[battlerId].moves[3]);
+            }
+        }
+        else
+        {
+            gBattleStruct->mega.primalRevertedSpecies[battlerId] = gBattleMons[battlerId].species;
+            if (position == B_POSITION_PLAYER_LEFT
+                || (position == B_POSITION_PLAYER_RIGHT && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))))
+            {
+                gBattleStruct->mega.playerPrimalRevertedSpecies = gBattleStruct->mega.primalRevertedSpecies[battlerId];
+            }
+            // Checks Primal Reversion.
+            newSpecies = GetPrimalReversionSpecies(gBattleStruct->mega.primalRevertedSpecies[battlerId], gBattleMons[battlerId].item);
+        }
+
+        gBattleMons[battlerId].species = newSpecies;
+        PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[battlerId].species);
+
+        BtlController_EmitSetMonData(BUFFER_A, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[battlerId]], sizeof(gBattleMons[battlerId].species), &gBattleMons[battlerId].species);
+        MarkBattlerForControllerExec(battlerId);
+    }
+    // Change stats.
+    else if (caseId == 1)
+    {
+        RecalcBattlerStats(battlerId, mon);
+        if (isMega)
+        {
+            gBattleStruct->mega.alreadyEvolved[position] = TRUE;
+            gBattleStruct->mega.evolvedPartyIds[side] |= gBitTable[gBattlerPartyIndexes[battlerId]];
+        }
+        else
+        {
+            gBattleStruct->mega.primalRevertedPartyIds[side] |= gBitTable[gBattlerPartyIndexes[battlerId]];
+        }
+    }
+    // Update healthbox and elevation and play cry.
+    else
+    {
+        UpdateHealthboxAttribute(gHealthboxSpriteIds[battlerId], mon, HEALTHBOX_ALL);
+        if (side == B_SIDE_OPPONENT)
+            SetBattlerShadowSpriteCallback(battlerId, gBattleMons[battlerId].species);
+    }
+}
+
 static bool32 CanTeleport(u8 battlerId)
 {
     u8 side = GetBattlerSide(battlerId);
@@ -9770,95 +9838,14 @@ static void Cmd_various(void)
     case VARIOUS_HANDLE_MEGA_EVO:
     {
         VARIOUS_ARGS(u8 case_);
-
-        if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
-            mon = &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]];
-        else
-            mon = &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]];
-
-        // Change species.
-        if (cmd->case_ == 0)
-        {
-            u16 megaSpecies;
-            gBattleStruct->mega.evolvedSpecies[gActiveBattler] = gBattleMons[gActiveBattler].species;
-            if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_LEFT
-                || (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))))
-            {
-                gBattleStruct->mega.playerEvolvedSpecies = gBattleStruct->mega.evolvedSpecies[gActiveBattler];
-            }
-            //Checks regular Mega Evolution
-            megaSpecies = GetMegaEvolutionSpecies(gBattleStruct->mega.evolvedSpecies[gActiveBattler], gBattleMons[gActiveBattler].item);
-            //Checks Wish Mega Evolution
-            if (megaSpecies == SPECIES_NONE)
-            {
-                megaSpecies = GetWishMegaEvolutionSpecies(gBattleStruct->mega.evolvedSpecies[gActiveBattler], gBattleMons[gActiveBattler].moves[0], gBattleMons[gActiveBattler].moves[1], gBattleMons[gActiveBattler].moves[2], gBattleMons[gActiveBattler].moves[3]);
-            }
-
-            gBattleMons[gActiveBattler].species = megaSpecies;
-            PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].species);
-
-            BtlController_EmitSetMonData(BUFFER_A, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[gActiveBattler]], sizeof(gBattleMons[gActiveBattler].species), &gBattleMons[gActiveBattler].species);
-            MarkBattlerForControllerExec(gActiveBattler);
-        }
-        // Change stats.
-        else if (cmd->case_ == 1)
-        {
-            RecalcBattlerStats(gActiveBattler, mon);
-            gBattleStruct->mega.alreadyEvolved[GetBattlerPosition(gActiveBattler)] = TRUE;
-            gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(gActiveBattler)] |= gBitTable[gBattlerPartyIndexes[gActiveBattler]];
-        }
-        // Update healthbox and elevation.
-        else
-        {
-            UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], mon, HEALTHBOX_ALL);
-            CreateMegaIndicatorSprite(gActiveBattler, 0);
-            if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
-                SetBattlerShadowSpriteCallback(gActiveBattler, gBattleMons[gActiveBattler].species);
-        }
+        HandleScriptMegaPrimal(cmd->case_, gActiveBattler, TRUE);
         gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
     case VARIOUS_HANDLE_PRIMAL_REVERSION:
     {
         VARIOUS_ARGS(u8 case_);
-        if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
-            mon = &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]];
-        else
-            mon = &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]];
-
-        // Change species.
-        if (cmd->case_ == 0)
-        {
-            u16 primalSpecies;
-            gBattleStruct->mega.primalRevertedSpecies[gActiveBattler] = gBattleMons[gActiveBattler].species;
-            if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_LEFT
-                || (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))))
-            {
-                gBattleStruct->mega.playerPrimalRevertedSpecies = gBattleStruct->mega.primalRevertedSpecies[gActiveBattler];
-            }
-            // Checks Primal Reversion
-            primalSpecies = GetPrimalReversionSpecies(gBattleStruct->mega.primalRevertedSpecies[gActiveBattler], gBattleMons[gActiveBattler].item);
-
-            gBattleMons[gActiveBattler].species = primalSpecies;
-            PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].species);
-
-            BtlController_EmitSetMonData(BUFFER_A, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[gActiveBattler]], sizeof(gBattleMons[gActiveBattler].species), &gBattleMons[gActiveBattler].species);
-            MarkBattlerForControllerExec(gActiveBattler);
-        }
-        // Change stats.
-        else if (cmd->case_ == 1)
-        {
-            RecalcBattlerStats(gActiveBattler, mon);
-            gBattleStruct->mega.primalRevertedPartyIds[GetBattlerSide(gActiveBattler)] |= gBitTable[gBattlerPartyIndexes[gActiveBattler]];
-        }
-        // Update healthbox and elevation.
-        else
-        {
-            UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], mon, HEALTHBOX_ALL);
-            CreateMegaIndicatorSprite(gActiveBattler, 0);
-            if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
-                SetBattlerShadowSpriteCallback(gActiveBattler, gBattleMons[gActiveBattler].species);
-        }
+        HandleScriptMegaPrimal(cmd->case_, gActiveBattler, FALSE);
         gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }

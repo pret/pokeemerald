@@ -2878,10 +2878,6 @@ static void SpriteCB_BounceEffect(struct Sprite *sprite)
 
     gSprites[bouncerSpriteId].y2 = y;
     sprite->sSinIndex = (sprite->sSinIndex + sprite->sDelta) & 0xFF;
-
-    bouncerSpriteId = GetMegaIndicatorSpriteId(sprite->sBouncerSpriteId);
-    if (sprite->sWhich == BOUNCE_HEALTHBOX && bouncerSpriteId != 0xFF)
-        gSprites[bouncerSpriteId].y2 = y;
 }
 
 #undef sSinIndex
@@ -4886,11 +4882,8 @@ static void CheckMegaEvolutionBeforeTurn(void)
             if (gBattleStruct->mega.toEvolve & gBitTable[gActiveBattler]
                 && !(gProtectStructs[gActiveBattler].noValidMoves))
             {
-                struct Pokemon *mon;
-                if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
-                    mon = &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]];
-                else
-                    mon = &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]];
+                struct Pokemon *mon = GetBattlerPartyData(gActiveBattler);
+
                 gBattleStruct->mega.toEvolve &= ~(gBitTable[gActiveBattler]);
                 gLastUsedItem = gBattleMons[gActiveBattler].item;
                 if (GetWishMegaEvolutionSpecies(GetMonData(mon, MON_DATA_SPECIES), GetMonData(mon, MON_DATA_MOVE1), GetMonData(mon, MON_DATA_MOVE2), GetMonData(mon, MON_DATA_MOVE3), GetMonData(mon, MON_DATA_MOVE4)))

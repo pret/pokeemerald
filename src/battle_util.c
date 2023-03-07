@@ -10157,7 +10157,7 @@ void UndoMegaEvolution(u32 monId)
     if (gBattleStruct->mega.evolvedPartyIds[B_SIDE_PLAYER] & gBitTable[monId])
     {
         gBattleStruct->mega.evolvedPartyIds[B_SIDE_PLAYER] &= ~(gBitTable[monId]);
-        SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &gBattleStruct->mega.playerEvolvedSpecies);
+        SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &baseSpecies);
         CalculateMonStats(&gPlayerParty[monId]);
     }
     else if (gBattleStruct->mega.primalRevertedPartyIds[B_SIDE_PLAYER] & gBitTable[monId])
