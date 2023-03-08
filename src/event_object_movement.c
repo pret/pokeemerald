@@ -1614,6 +1614,18 @@ static void MakeSpriteTemplateFromObjectEventTemplate(struct ObjectEventTemplate
     CopyObjectGraphicsInfoToSpriteTemplate_WithMovementType(objectEventTemplate->graphicsId, objectEventTemplate->movementType, spriteTemplate, subspriteTables);
 }
 
+// Loads information from graphicsId, with shininess separate
+// also can write palette tag to the template
+static u8 LoadDynamicFollowerPaletteFromGraphicsId(u16 graphicsId, bool8 shiny, struct SpriteTemplate *template) {
+    u16 species = ((graphicsId & OBJ_EVENT_GFX_SPECIES_MASK) - OBJ_EVENT_GFX_MON_BASE);
+    u8 form = (graphicsId >> OBJ_EVENT_GFX_SPECIES_BITS);
+    const struct CompressedSpritePalette *spritePalette = &(shiny ? gMonShinyPaletteTable : gMonPaletteTable)[species];
+    u8 paletteNum = LoadDynamicFollowerPalette(species, form, shiny);
+    if (template)
+        template->paletteTag = spritePalette->tag;
+    return paletteNum;
+}
+
 // Used to create a sprite using a graphicsId associated with object events.
 u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority)
 {
@@ -1621,29 +1633,16 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
     const struct SubspriteTable *subspriteTables;
     struct Sprite *sprite;
     u8 spriteId;
-    u16 species;
-    u8 form;
-    bool8 shiny;
-    u8 paletteNum;
+    u32 paletteNum;
 
     spriteTemplate = Alloc(sizeof(struct SpriteTemplate));
-    if (graphicsId >= OBJ_EVENT_GFX_MON_BASE && GetFollowerInfo(&species, &form, &shiny)) {
-        const struct ObjectEventGraphicsInfo *graphicsInfo = SpeciesToGraphicsInfo(species, form);
-        spriteTemplate->tileTag = graphicsInfo->tileTag;
-        spriteTemplate->paletteTag = graphicsInfo->paletteTag;
-        spriteTemplate->oam = graphicsInfo->oam;
-        spriteTemplate->anims = graphicsInfo->anims;
-        spriteTemplate->images = graphicsInfo->images;
-        spriteTemplate->affineAnims = graphicsInfo->affineAnims;
-        spriteTemplate->callback = callback;
-        subspriteTables = graphicsInfo->subspriteTables;
-    } else
-        CopyObjectGraphicsInfoToSpriteTemplate(graphicsId, callback, spriteTemplate, &subspriteTables);
+    CopyObjectGraphicsInfoToSpriteTemplate(graphicsId, callback, spriteTemplate, &subspriteTables);
 
     if (spriteTemplate->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC) {
-        const struct CompressedSpritePalette *spritePalette = &(shiny ? gMonShinyPaletteTable : gMonPaletteTable)[species];
-        paletteNum = LoadDynamicFollowerPalette(species, form, shiny);
-        spriteTemplate->paletteTag = spritePalette->tag;
+        struct ObjectEvent *obj = GetFollowerObject();
+        // Use shininess info from follower object
+        // in future this should be passed in
+        paletteNum = LoadDynamicFollowerPaletteFromGraphicsId(graphicsId, obj ? obj->shiny : FALSE, spriteTemplate);
     } else if (spriteTemplate->paletteTag != TAG_NONE)
         LoadObjectEventPalette(spriteTemplate->paletteTag);
 
