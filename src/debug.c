@@ -275,7 +275,8 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId);
 static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void DebugAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate);
 
-extern u8 Debug_FlagsNotSetMessage[];
+extern u8 Debug_FlagsNotSetOverworldConfigMessage[];
+extern u8 Debug_FlagsNotSetBattleConfigMessage[];
 extern u8 Debug_Script_1[];
 extern u8 Debug_Script_2[];
 extern u8 Debug_Script_3[];
@@ -1556,16 +1557,16 @@ static void DebugAction_Flags_ToggleFrontierPass(u8 taskId)
 }
 static void DebugAction_Flags_CollisionOnOff(u8 taskId)
 {
-#if DEBUG_FLAG_NO_COLLISION == 0
+#if OW_FLAG_NO_COLLISION == 0
     Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
-    ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
+    ScriptContext_SetupScript(Debug_FlagsNotSetOverworldConfigMessage);
 #else
-    if (FlagGet(DEBUG_FLAG_NO_COLLISION))
+    if (FlagGet(OW_FLAG_NO_COLLISION))
         PlaySE(SE_PC_OFF);
     else
         PlaySE(SE_PC_LOGIN);
-    FlagToggle(DEBUG_FLAG_NO_COLLISION);
+    FlagToggle(OW_FLAG_NO_COLLISION);
 #endif
 }
 static void DebugAction_Flags_EncounterOnOff(u8 taskId)
@@ -1573,7 +1574,7 @@ static void DebugAction_Flags_EncounterOnOff(u8 taskId)
 #if OW_FLAG_NO_ENCOUNTER == 0
     Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
-    ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
+    ScriptContext_SetupScript(Debug_FlagsNotSetOverworldConfigMessage);
 #else
     if (FlagGet(OW_FLAG_NO_ENCOUNTER))
         PlaySE(SE_PC_OFF);
@@ -1587,7 +1588,7 @@ static void DebugAction_Flags_TrainerSeeOnOff(u8 taskId)
 #if OW_FLAG_NO_TRAINER_SEE == 0
     Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
-    ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
+    ScriptContext_SetupScript(Debug_FlagsNotSetOverworldConfigMessage);
 #else
     if (FlagGet(OW_FLAG_NO_TRAINER_SEE))
         PlaySE(SE_PC_OFF);
@@ -1601,7 +1602,7 @@ static void DebugAction_Flags_BagUseOnOff(u8 taskId)
 #if B_FLAG_NO_BAG_USE == 0
     Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
-    ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
+    ScriptContext_SetupScript(Debug_FlagsNotSetBattleConfigMessage);
 #else
     if (FlagGet(B_FLAG_NO_BAG_USE))
         PlaySE(SE_PC_OFF);
@@ -1612,10 +1613,10 @@ static void DebugAction_Flags_BagUseOnOff(u8 taskId)
 }
 static void DebugAction_Flags_CatchingOnOff(u8 taskId)
 {
-#if B_FLAG_NO_CATCHING_USE == 0
+#if B_FLAG_NO_CATCHING == 0
     Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
-    ScriptContext_SetupScript(Debug_FlagsNotSetMessage);
+    ScriptContext_SetupScript(Debug_FlagsNotSetBattleConfigMessage);
 #else
     if (FlagGet(B_FLAG_NO_CATCHING))
         PlaySE(SE_PC_OFF);
