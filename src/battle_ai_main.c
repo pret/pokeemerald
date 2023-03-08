@@ -1120,8 +1120,6 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             if ((!BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_ATK) && !BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_SPATK))
              || (!HasMoveWithSplit(battlerAtk, SPLIT_PHYSICAL)  && !HasMoveWithSplit(battlerAtk, SPLIT_SPECIAL)))
                 score -= 10;
-            // else if (!BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_SPATK) || !HasMoveWithSplit(battlerAtk, SPLIT_SPECIAL))
-            //     score -= 8;
             break;
         case EFFECT_ROTOTILLER:
             if (isDoubleBattle)
