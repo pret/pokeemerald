@@ -85,6 +85,7 @@ enum { // Util
     DEBUG_UTIL_MENU_ITEM_TRAINER_NAME,
     DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER,
     DEBUG_UTIL_MENU_ITEM_TRAINER_ID,
+    DEBUG_UTIL_MENU_ITEM_CLEAR_BOXES,
 };
 enum { // Scripts
     DEBUG_UTIL_MENU_ITEM_SCRIPT_1,
@@ -224,6 +225,7 @@ static void DebugAction_Util_WatchCredits(u8 taskId);
 static void DebugAction_Util_Trainer_Name(u8 taskId);
 static void DebugAction_Util_Trainer_Gender(u8 taskId);
 static void DebugAction_Util_Trainer_Id(u8 taskId);
+static void DebugAction_Util_Clear_Boxes(u8 taskId);
 
 static void DebugAction_Flags_Flags(u8 taskId);
 static void DebugAction_Flags_FlagsSelect(u8 taskId);
@@ -330,6 +332,7 @@ static const u8 sDebugText_Util_WatchCredits[] =             _("Watch Credits");
 static const u8 sDebugText_Util_Trainer_Name[] =             _("Trainer name");
 static const u8 sDebugText_Util_Trainer_Gender[] =           _("Toggle T. Gender");
 static const u8 sDebugText_Util_Trainer_Id[] =               _("New Trainer Id");
+static const u8 sDebugText_Util_Clear_Boxes[] =              _("Clear Storage Boxes");
 // Flags Menu
 static const u8 sDebugText_Flags_Flags[] =              _("Set Flag XXXX");
 static const u8 sDebugText_Flags_SetPokedexFlags[] =    _("All Pokédex Flags");
@@ -451,6 +454,7 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_TRAINER_NAME]   = {sDebugText_Util_Trainer_Name,   DEBUG_UTIL_MENU_ITEM_TRAINER_NAME},
     [DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER] = {sDebugText_Util_Trainer_Gender, DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER},
     [DEBUG_UTIL_MENU_ITEM_TRAINER_ID]     = {sDebugText_Util_Trainer_Id,     DEBUG_UTIL_MENU_ITEM_TRAINER_ID},
+    [DEBUG_UTIL_MENU_ITEM_CLEAR_BOXES]    = {sDebugText_Util_Clear_Boxes,    DEBUG_UTIL_MENU_ITEM_CLEAR_BOXES},
 };
 static const struct ListMenuItem sDebugMenu_Items_Scripts[] =
 {
@@ -530,6 +534,7 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_TRAINER_NAME]   = DebugAction_Util_Trainer_Name,
     [DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER] = DebugAction_Util_Trainer_Gender,
     [DEBUG_UTIL_MENU_ITEM_TRAINER_ID]     = DebugAction_Util_Trainer_Id,
+    [DEBUG_UTIL_MENU_ITEM_CLEAR_BOXES]    = DebugAction_Util_Clear_Boxes,
 };
 static void (*const sDebugMenu_Actions_Scripts[])(u8) =
 {
@@ -1313,6 +1318,12 @@ static void DebugAction_Util_Trainer_Id(u8 taskId)
 {
     u32 trainerId = ((Random() << 16) | Random());
     SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
+    Debug_DestroyMenu_Full(taskId);
+    ScriptContext_Enable();
+}
+static void DebugAction_Util_Clear_Boxes(u8 taskId)
+{
+    ResetPokemonStorageSystem();
     Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
@@ -2179,7 +2190,7 @@ static void DebugAction_Give_Pokemon_SelectLevel(u8 taskId)
         {
             PlaySE(MUS_LEVEL_UP);
             ScriptGiveMon(sDebugMonData->mon_speciesId, gTasks[taskId].data[3], ITEM_NONE, 0,0,0);
-            //Set flag for user convenience
+            // Set flag for user convenience
             FlagSet(FLAG_SYS_POKEMON_GET);
             Free(sDebugMonData); //Frees EWRAM of MonData Struct
             DebugAction_DestroyExtraWindow(taskId);
@@ -2735,7 +2746,7 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
         break;
     }
 
-    //Set flag for user convenience
+    // Set flag for user convenience
     FlagSet(FLAG_SYS_POKEMON_GET);
 
     Free(sDebugMonData); //Frees EWRAM of MonData Struct
@@ -2767,11 +2778,12 @@ static void DebugAction_Give_FillPC(u8 taskId) //Credit: Sierraffinity
     int boxId, boxPosition;
     u32 personality;
     struct BoxPokemon boxMon;
+    u16 species = SPECIES_BULBASAUR;
 
     personality = Random32();
 
     CreateBoxMon(&boxMon,
-                 SPECIES_DEOXYS,
+                 species,
                  100,
                  32,
                  personality,
@@ -2786,9 +2798,16 @@ static void DebugAction_Give_FillPC(u8 taskId) //Credit: Sierraffinity
             if (!GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_SANITY_HAS_SPECIES))
             {
                 gPokemonStoragePtr->boxes[boxId][boxPosition] = boxMon;
+                SetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_SPECIES, &species);
+                GetSetPokedexFlag(species, FLAG_SET_SEEN);
+                GetSetPokedexFlag(species, FLAG_SET_CAUGHT);
+                species++;
             }
         }
     }
+
+    // Set flag for user convenience
+    FlagSet(FLAG_SYS_POKEMON_GET);
 }
 
 static void DebugAction_Give_CHEAT(u8 taskId)
