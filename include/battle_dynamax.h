@@ -54,6 +54,7 @@ enum MaxMoveEffect
 	MAX_EFFECT_BYPASS_PROTECT,
 };
 
+bool8 IsDynamaxed(u16 battlerId);
 bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove);
 u16 GetMaxMove(u16 battlerId, u16 baseMove);
 u8 GetMaxMovePower(u16 move);

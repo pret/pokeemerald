@@ -48,8 +48,8 @@ struct GMaxMove
 static const struct GMaxMove sGMaxMoveTable[] =
 {
 	{SPECIES_VENUSAUR_GMAX,	                    TYPE_GRASS,      MOVE_G_MAX_VINE_LASH},
-	{SPECIES_CHARIZARD_GMAX,                    TYPE_FIRE,       MOVE_G_MAX_WILDFIRE},
 	{SPECIES_BLASTOISE_GMAX,                    TYPE_WATER,      MOVE_G_MAX_CANNONADE},
+	{SPECIES_CHARIZARD_GMAX,                    TYPE_FIRE,       MOVE_G_MAX_WILDFIRE},
 	{SPECIES_BUTTERFREE_GMAX,                   TYPE_BUG,        MOVE_G_MAX_BEFUDDLE},
 	{SPECIES_PIKACHU_GMAX,                      TYPE_ELECTRIC,   MOVE_G_MAX_VOLT_CRASH},
 	{SPECIES_MEOWTH_GMAX,                       TYPE_NORMAL,     MOVE_G_MAX_GOLD_RUSH},
@@ -84,22 +84,51 @@ static const struct GMaxMove sGMaxMoveTable[] =
 
 extern u8 gMaxMovePowers[MOVES_COUNT];
 
+bool8 IsDynamaxed(u16 battlerId)
+{
+	if (/*IsRaidBoss(battlerId) ||*/ gBattleStruct->dynamax.dynamaxTurns[battlerId] > 0)
+		return TRUE;
+	return FALSE;
+}
+
 // Returns whether a move should be converted into a Max Move.
 bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove)
 {
     // TODO: Raids
 	//if (IsRaidBoss(battlerId))
 	//	return !IsRaidBossUsingRegularMove(battlerId, baseMove);
-	if (gBattleStruct->dynamax.dynamaxTurns[battlerId] > 0)
-		return TRUE;
-	return FALSE;
+	return IsDynamaxed(battlerId);
+}
+
+static u16 GetTypeBasedMaxMove(u16 battlerId, u16 type)
+{
+	u32 species;
+	if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+		species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL);
+	else
+		species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL);
+
+	// Gigantamax check
+	if (species >= (SPECIES_VENUSAUR_GMAX)
+		&& sGMaxMoveTable[species - (SPECIES_VENUSAUR_GMAX)].moveType == type)
+		return sGMaxMoveTable[species - (SPECIES_VENUSAUR_GMAX)].gmaxMove;
+
+	// regular Max Move
+	else
+	{
+		return sMaxMoveTable[type];
+	}
 }
 
 // Returns the appropriate Max Move or G-Max Move for a battler to use.
 u16 GetMaxMove(u16 battlerId, u16 baseMove)
 {
 	u16 move = baseMove;
-	if (baseMove == MOVE_STRUGGLE)
+	if (baseMove == MOVE_NONE) // for move display
+	{
+		return MOVE_NONE;
+	}
+	else if (baseMove == MOVE_STRUGGLE)
 	{
 		return MOVE_STRUGGLE;
 	}
@@ -109,12 +138,12 @@ u16 GetMaxMove(u16 battlerId, u16 baseMove)
     }
 	else if (gBattleStruct->dynamicMoveType) // unsure of how to deal with Hidden Power
 	{
-		move = sMaxMoveTable[gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK];
+		move = GetTypeBasedMaxMove(battlerId, gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK);
         gBattleStruct->dynamax.splits[battlerId] = gBattleMoves[baseMove].split;
 	}
 	else
     {
-		move = sMaxMoveTable[gBattleMoves[baseMove].type];
+		move = GetTypeBasedMaxMove(battlerId, gBattleMoves[baseMove].type);
         gBattleStruct->dynamax.splits[battlerId] = gBattleMoves[baseMove].split;
     }
 
