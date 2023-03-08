@@ -10301,31 +10301,31 @@ static const struct TrainerMonNoItemDefaultMoves sParty_MayRustboroTorchic[] = {
 static const struct TrainerMonItemCustomMoves sParty_Roxanne2[] = {
     {
     .iv = 255,
-    .lvl = 100,
-    .species = SPECIES_BEEDRILL,
-    .heldItem = 0,
-    .moves = {MOVE_FLING}
+    .lvl = 32,
+    .species = SPECIES_GOLEM,
+    .heldItem = ITEM_NONE,
+    .moves = {MOVE_PROTECT, MOVE_ROLLOUT, MOVE_MAGNITUDE, MOVE_EXPLOSION}
     },
     {
     .iv = 255,
-    .lvl = 100,
+    .lvl = 35,
     .species = SPECIES_KABUTO,
     .heldItem = ITEM_SITRUS_BERRY,
     .moves = {MOVE_SWORDS_DANCE, MOVE_ICE_BEAM, MOVE_SURF, MOVE_ROCK_SLIDE}
     },
     {
     .iv = 255,
-    .lvl = 100,
-    .species = SPECIES_THUNDURUS,
+    .lvl = 35,
+    .species = SPECIES_ONIX,
     .heldItem = ITEM_NONE,
-    .moves = {MOVE_THUNDER, MOVE_EXPLOSION, MOVE_ROAR, MOVE_ROCK_SLIDE}
+    .moves = {MOVE_IRON_TAIL, MOVE_EXPLOSION, MOVE_ROAR, MOVE_ROCK_SLIDE}
     },
     {
     .iv = 255,
-    .lvl = 99,
-    .species = SPECIES_SABLEYE,
+    .lvl = 37,
+    .species = SPECIES_NOSEPASS,
     .heldItem = ITEM_SITRUS_BERRY,
-    .moves = {MOVE_DOUBLE_TEAM, MOVE_EXPLOSION, MOVE_DARK_PULSE, MOVE_IRON_HEAD}
+    .moves = {MOVE_DOUBLE_TEAM, MOVE_EXPLOSION, MOVE_PROTECT, MOVE_ROCK_SLIDE}
     }
 };
 
@@ -10333,8 +10333,8 @@ static const struct TrainerMonItemCustomMoves sParty_Roxanne3[] = {
     {
     .iv = 255,
     .lvl = 37,
-    .species = SPECIES_MANECTRIC,
-    .heldItem = ITEM_MANECTITE,
+    .species = SPECIES_OMANYTE,
+    .heldItem = ITEM_NONE,
     .moves = {MOVE_PROTECT, MOVE_ICE_BEAM, MOVE_ROCK_SLIDE, MOVE_SURF}
     },
     {
@@ -10370,9 +10370,9 @@ static const struct TrainerMonItemCustomMoves sParty_Roxanne3[] = {
 static const struct TrainerMonItemCustomMoves sParty_Roxanne4[] = {
     {
     .iv = 255,
-    .lvl = 100,
-    .species = SPECIES_GARDEVOIR,
-    .heldItem = ITEM_GARDEVOIRITE,
+    .lvl = 42,
+    .species = SPECIES_OMASTAR,
+    .heldItem = ITEM_NONE,
     .moves = {MOVE_PROTECT, MOVE_ICE_BEAM, MOVE_ROCK_SLIDE, MOVE_SURF}
     },
     {

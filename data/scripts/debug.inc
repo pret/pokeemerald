@@ -55,7 +55,6 @@ Debug_FlagsNotSetMessage_Text:
 	.string "'include/constants/overworld{UNDERSCORE}config.h'!$"
 
 Debug_Script_1::
-	multi_fixed_2_vs_2 TRAINER_ROXANNE_2, Debug_FlagsNotSetMessage_Text, TRAINER_ROXANNE_3, Debug_FlagsNotSetMessage_Text, TRAINER_ROXANNE_4, 0
 	end
 
 Debug_Script_2::
