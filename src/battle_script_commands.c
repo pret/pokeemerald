@@ -23,6 +23,7 @@
 #include "main.h"
 #include "palette.h"
 #include "money.h"
+#include "malloc.h"
 #include "bg.h"
 #include "string_util.h"
 #include "pokemon_icon.h"
@@ -14766,38 +14767,40 @@ static void Cmd_assistattackselect(void)
     s32 chooseableMovesNo = 0;
     struct Pokemon *party;
     s32 monId, moveId;
-    u16 *validMoves = gBattleStruct->assistPossibleMoves;
+    u16 *validMoves = Alloc(sizeof(u16) * PARTY_SIZE * MAX_MON_MOVES);
 
-    if (GET_BATTLER_SIDE(gBattlerAttacker) != B_SIDE_PLAYER)
-        party = gEnemyParty;
-    else
-        party = gPlayerParty;
-
-    for (monId = 0; monId < PARTY_SIZE; monId++)
+    if (validMoves != NULL)
     {
-        if (monId == gBattlerPartyIndexes[gBattlerAttacker])
-            continue;
-        if (GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
-            continue;
-        if (GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
-            continue;
+        if (GET_BATTLER_SIDE(gBattlerAttacker) != B_SIDE_PLAYER)
+            party = gEnemyParty;
+        else
+            party = gPlayerParty;
 
-        for (moveId = 0; moveId < MAX_MON_MOVES; moveId++)
+        for (monId = 0; monId < PARTY_SIZE; monId++)
         {
-            s32 i = 0;
-            u16 move = GetMonData(&party[monId], MON_DATA_MOVE1 + moveId);
-
-            if (sForbiddenMoves[move] & FORBIDDEN_ASSIST)
+            if (monId == gBattlerPartyIndexes[gBattlerAttacker])
+                continue;
+            if (GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
+                continue;
+            if (GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
                 continue;
 
-            validMoves[chooseableMovesNo] = move;
-            chooseableMovesNo++;
+            for (moveId = 0; moveId < MAX_MON_MOVES; moveId++)
+            {
+                u16 move = GetMonData(&party[monId], MON_DATA_MOVE1 + moveId);
+
+                if (sForbiddenMoves[move] & FORBIDDEN_ASSIST)
+                    continue;
+
+                validMoves[chooseableMovesNo++] = move;
+            }
         }
     }
+
     if (chooseableMovesNo)
     {
         gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
-        gCalledMove = validMoves[((Random() & 0xFF) * chooseableMovesNo) >> 8];
+        gCalledMove = validMoves[Random() % chooseableMovesNo];
         gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
@@ -14805,6 +14808,8 @@ static void Cmd_assistattackselect(void)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
+
+    TRY_FREE_AND_SET_NULL(validMoves);
 }
 
 static void Cmd_trysetmagiccoat(void)

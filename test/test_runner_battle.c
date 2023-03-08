@@ -1227,6 +1227,7 @@ void Move(u32 sourceLine, struct BattlePokemon *battler, struct MoveContext ctx)
         const struct BattleMove *move = &gBattleMoves[moveId];
         if (move->target == MOVE_TARGET_RANDOM
          || move->target == MOVE_TARGET_BOTH
+         || move->target == MOVE_TARGET_DEPENDS
          || move->target == MOVE_TARGET_FOES_AND_ALLY
          || move->target == MOVE_TARGET_OPPONENTS_FIELD
          || move->target == MOVE_TARGET_ALL_BATTLERS)
