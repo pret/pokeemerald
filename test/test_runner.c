@@ -186,15 +186,25 @@ void CB2_TestRunner(void)
                     result = "FAIL";
                 }
                 break;
-            case TEST_RESULT_PASS: result = "PASS"; break;
+            case TEST_RESULT_PASS:
+                result = "PASS";
+                break;
             case TEST_RESULT_ASSUMPTION_FAIL:
                 result = "ASSUMPTION_FAIL";
                 color = "\e[33m";
                 break;
-            case TEST_RESULT_INVALID: result = "INVALID"; break;
-            case TEST_RESULT_ERROR: result = "ERROR"; break;
-            case TEST_RESULT_TIMEOUT: result = "TIMEOUT"; break;
-            default: result = "UNKNOWN"; break;
+            case TEST_RESULT_INVALID:
+                result = "INVALID";
+                break;
+            case TEST_RESULT_ERROR:
+                result = "ERROR";
+                break;
+            case TEST_RESULT_TIMEOUT:
+                result = "TIMEOUT";
+                break;
+            default:
+                result = "UNKNOWN";
+                break;
             }
 
             if (gTestRunnerState.result == TEST_RESULT_PASS)
