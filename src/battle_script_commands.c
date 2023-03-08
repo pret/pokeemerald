@@ -5464,6 +5464,9 @@ static void Cmd_moveend(void)
                 {
                     gProtectStructs[gBattlerAttacker].touchedProtectLike = FALSE;
                     gBattleMons[gBattlerAttacker].status1 = STATUS1_BURN;
+                    gActiveBattler = gBattlerAttacker;
+                    BtlController_EmitSetMonData(BUFFER_A, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[gActiveBattler].status1), &gBattleMons[gActiveBattler].status1);
+                    MarkBattlerForControllerExec(gActiveBattler);
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_BeakBlastBurn;
                     effect = 1;
