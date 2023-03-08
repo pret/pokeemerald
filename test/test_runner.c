@@ -121,7 +121,7 @@ void CB2_TestRunner(void)
         // NOTE: Assumes that the compiler interns __FILE__.
         if (gTestRunnerState.skipFilename == gTestRunnerState.test->filename)
         {
-            gTestRunnerState.result = TEST_RESULT_SKIP;
+            gTestRunnerState.result = TEST_RESULT_ASSUMPTION_FAIL;
         }
         else
         {
@@ -157,7 +157,7 @@ void CB2_TestRunner(void)
                 color = "\e[32m";
                 MgbaPrintf_(":N%s", gTestRunnerState.test->name);
             }
-            else if (gTestRunnerState.result != TEST_RESULT_SKIP || gTestRunnerSkipIsFail)
+            else if (gTestRunnerState.result != TEST_RESULT_ASSUMPTION_FAIL || gTestRunnerSkipIsFail)
             {
                 gTestRunnerState.exitCode = 1;
                 color = "\e[31m";
@@ -186,16 +186,33 @@ void CB2_TestRunner(void)
                     result = "FAIL";
                 }
                 break;
-            case TEST_RESULT_PASS: result = "PASS"; break;
-            case TEST_RESULT_SKIP: result = "SKIP"; break;
-            case TEST_RESULT_INVALID: result = "INVALID"; break;
-            case TEST_RESULT_ERROR: result = "ERROR"; break;
-            case TEST_RESULT_TIMEOUT: result = "TIMEOUT"; break;
-            default: result = "UNKNOWN"; break;
+            case TEST_RESULT_PASS:
+                result = "PASS";
+                break;
+            case TEST_RESULT_ASSUMPTION_FAIL:
+                result = "ASSUMPTION_FAIL";
+                color = "\e[33m";
+                break;
+            case TEST_RESULT_INVALID:
+                result = "INVALID";
+                break;
+            case TEST_RESULT_ERROR:
+                result = "ERROR";
+                break;
+            case TEST_RESULT_TIMEOUT:
+                result = "TIMEOUT";
+                break;
+            default:
+                result = "UNKNOWN";
+                break;
             }
 
-            if (gTestRunnerState.expectedResult == gTestRunnerState.result)
+            if (gTestRunnerState.result == TEST_RESULT_PASS)
                 MgbaPrintf_(":P%s%s\e[0m", color, result);
+            else if (gTestRunnerState.result == TEST_RESULT_ASSUMPTION_FAIL)
+                MgbaPrintf_(":A%s%s\e[0m", color, result);
+            else if (gTestRunnerState.expectedResult == gTestRunnerState.result)
+                MgbaPrintf_(":K%s%s\e[0m", color, result);
             else
                 MgbaPrintf_(":F%s%s\e[0m", color, result);
         }
