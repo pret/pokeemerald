@@ -720,7 +720,7 @@ static void CB2_BattleTest_NextTrial(void)
         case TEST_RESULT_PASS:
             STATE->observedPasses++;
             break;
-        case TEST_RESULT_SKIP:
+        case TEST_RESULT_ASSUMPTION_FAIL:
             STATE->skippedTrials++;
             if (STATE->skippedTrials > STATE->trials / 4)
                 Test_ExitWithResult(TEST_RESULT_INVALID, "25%% of the trials were SKIPed");
