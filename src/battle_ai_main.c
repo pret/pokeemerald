@@ -1118,7 +1118,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_GROWTH:
         case EFFECT_ATTACK_SPATK_UP:    // work up
             if ((!BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_ATK) && !BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_SPATK))
-             || (!HasMoveWithSplit(battlerAtk, SPLIT_PHYSICAL)  && !HasMoveWithSplit(battlerAtk, SPLIT_SPECIAL)))
+             || (!HasDamagingMove(battlerAtk)))
                 score -= 10;
             break;
         case EFFECT_ROTOTILLER:
