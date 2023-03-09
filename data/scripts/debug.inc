@@ -41,18 +41,31 @@ Debug_CheatStart::
 	release
 	end
 
-Debug_FlagsNotSetMessage::
+Debug_FlagsNotSetOverworldConfigMessage::
 	lockall
-	message Debug_FlagsNotSetMessage_Text
+	message Debug_FlagsNotSetOverworldConfigMessage_Text
 	waitmessage
 	waitbuttonpress
 	releaseall
 	end
 
-Debug_FlagsNotSetMessage_Text:
+Debug_FlagsNotSetOverworldConfigMessage_Text:
 	.string "Feature unavailable!\n"
 	.string "Please define a usable flag in:\l"
 	.string "'include/config/overworld.h'!$"
+
+Debug_FlagsNotSetBattleConfigMessage::
+	lockall
+	message Debug_FlagsNotSetBattleConfigMessage_Text
+	waitmessage
+	waitbuttonpress
+	releaseall
+	end
+
+Debug_FlagsNotSetBattleConfigMessage_Text:
+	.string "Feature unavailable!\n"
+	.string "Please define a usable flag in:\l"
+	.string "'include/config/battle.h'!$"
 
 Debug_Script_1::
 	end
