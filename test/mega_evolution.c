@@ -37,15 +37,15 @@ SINGLE_BATTLE_TEST("Mega Evolution affects turn order")
 {
     GIVEN {
         ASSUME(B_MEGA_EVO_TURN_ORDER);
-        PLAYER(SPECIES_DIANCIE) { Item(ITEM_DIANCITE); Speed(105); }
+        PLAYER(SPECIES_GARDEVOIR) { Item(ITEM_GARDEVOIRITE); Speed(105); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(106); }
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE, megaEvolve: TRUE); }
     } SCENE {
-        MESSAGE("Diancie used Celebrate!");
+        MESSAGE("Gardevoir used Celebrate!");
         MESSAGE("Foe Wobbuffet used Celebrate!");
     } THEN {
-        ASSUME(player->speed == 225);
+        ASSUME(player->speed == 205);
     }
 }
 

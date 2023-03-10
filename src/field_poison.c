@@ -19,7 +19,7 @@
 
 static bool32 IsMonValidSpecies(struct Pokemon *pokemon)
 {
-    u16 species = GetMonData(pokemon, MON_DATA_SPECIES2);
+    u16 species = GetMonData(pokemon, MON_DATA_SPECIES_OR_EGG);
     if (species == SPECIES_NONE || species == SPECIES_EGG)
         return FALSE;
 

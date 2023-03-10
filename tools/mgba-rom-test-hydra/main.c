@@ -9,7 +9,11 @@
  * COMMANDS
  * N: Sets the test name to the remainder of the line.
  * R: Sets the result to the remainder of the line, and flushes any
- *    output buffered since the previous R. */
+ *    output buffered since the previous R.
+ * P/K/F/A: Sets the result to the remaining of the line, flushes any
+ *    output since the previous P/K/F/A and increment the number of
+ *    passes/known fails/assumption fails/fails.
+ */
 #include <fcntl.h>
 #include <poll.h>
 #include <signal.h>
@@ -39,6 +43,9 @@ struct Runner
     size_t output_buffer_capacity;
     char *output_buffer;
     int passes;
+    int knownFails;
+    int assumptionFails;
+    int fails;
     int results;
 };
 
@@ -75,9 +82,17 @@ static void handle_read(struct Runner *runner)
                     break;
 
                 case 'P':
+                    runner->passes++;
+                    goto add_to_results;
+                case 'K':
+                    runner->knownFails++;
+                    goto add_to_results;
+                case 'A':
+                    runner->assumptionFails++;
+                    goto add_to_results;
                 case 'F':
-                    if (soc[1] == 'P')
-                        runner->passes++;
+                    runner->fails++;
+add_to_results:
                     runner->results++;
                     soc += 2;
                     fprintf(stdout, "%s: ", runner->test_name);
@@ -411,6 +426,9 @@ int main(int argc, char *argv[])
     // Reap test runners and collate exit codes.
     int exit_code = 0;
     int passes = 0;
+    int knownFails = 0;
+    int assumptionFails = 0;
+    int fails = 0;
     int results = 0;
     for (int i = 0; i < nrunners; i++)
     {
@@ -425,9 +443,29 @@ int main(int argc, char *argv[])
         if (WIFEXITED(wstatus) && WEXITSTATUS(wstatus) > exit_code)
             exit_code = WEXITSTATUS(wstatus);
         passes += runners[i].passes;
+        knownFails += runners[i].knownFails;
+        assumptionFails += runners[i].assumptionFails;
+        fails += runners[i].fails;
         results += runners[i].results;
     }
-    fprintf(stdout, "%d/%d \e[32mPASS\e[0med\n", passes, results);
+
+    if (results == 0)
+    {
+        fprintf(stdout, "\nNo tests found.\n");
+    }
+    else
+    {
+        fprintf(stdout, "\n- Tests TOTAL:         %d\n", results);
+        fprintf(stdout, "- Tests \e[32mPASSED\e[0m:        %d\n", passes);
+        if (knownFails > 0)
+            fprintf(stdout, "- Tests \e[33mKNOWN_FAILING\e[0m: %d\n", knownFails);
+        if (fails > 0)
+            fprintf(stdout, "- Tests \e[31mFAILED\e[0m :       %d\n", fails);
+        if (assumptionFails > 0)
+            fprintf(stdout, "- \e[33mASSUMPTIONS_FAILED\e[0m:  %d\n", assumptionFails);
+    }
+    fprintf(stdout, "\n");
+
     fflush(stdout);
     return exit_code;
 }
