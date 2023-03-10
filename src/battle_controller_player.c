@@ -379,6 +379,8 @@ static void HandleInputChooseTarget(void)
         gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCB_HideAsMoveTarget;
         if (gBattleStruct->mega.playerSelect)
             BtlController_EmitTwoReturnValues(BUFFER_B, 10, gMoveSelectionCursor[gActiveBattler] | RET_MEGA_EVOLUTION | (gMultiUsePlayerCursor << 8));
+        else if (gBattleStruct->dynamax.playerSelect)
+            BtlController_EmitTwoReturnValues(BUFFER_B, 10, gMoveSelectionCursor[gActiveBattler] | RET_DYNAMAX | (gMultiUsePlayerCursor << 8));
         else
             BtlController_EmitTwoReturnValues(BUFFER_B, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
         EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
@@ -537,6 +539,8 @@ static void HandleInputShowEntireFieldTargets(void)
         HideAllTargets();
         if (gBattleStruct->mega.playerSelect)
             BtlController_EmitTwoReturnValues(BUFFER_B, 10, gMoveSelectionCursor[gActiveBattler] | RET_MEGA_EVOLUTION | (gMultiUsePlayerCursor << 8));
+        else if (gBattleStruct->dynamax.playerSelect)
+            BtlController_EmitTwoReturnValues(BUFFER_B, 10, gMoveSelectionCursor[gActiveBattler] | RET_DYNAMAX | (gMultiUsePlayerCursor << 8));
         else
             BtlController_EmitTwoReturnValues(BUFFER_B, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
         HideMegaTriggerSprite();
@@ -565,6 +569,8 @@ static void HandleInputShowTargets(void)
         HideShownTargets();
         if (gBattleStruct->mega.playerSelect)
             BtlController_EmitTwoReturnValues(BUFFER_B, 10, gMoveSelectionCursor[gActiveBattler] | RET_MEGA_EVOLUTION | (gMultiUsePlayerCursor << 8));
+        else if (gBattleStruct->dynamax.playerSelect)
+            BtlController_EmitTwoReturnValues(BUFFER_B, 10, gMoveSelectionCursor[gActiveBattler] | RET_DYNAMAX | (gMultiUsePlayerCursor << 8));
         else
             BtlController_EmitTwoReturnValues(BUFFER_B, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
         HideTriggerSprites();
@@ -680,6 +686,8 @@ static void HandleInputChooseMove(void)
         default:
             if (gBattleStruct->mega.playerSelect)
                 BtlController_EmitTwoReturnValues(BUFFER_B, 10, gMoveSelectionCursor[gActiveBattler] | RET_MEGA_EVOLUTION | (gMultiUsePlayerCursor << 8));
+            else if (gBattleStruct->dynamax.playerSelect)
+                BtlController_EmitTwoReturnValues(BUFFER_B, 10, gMoveSelectionCursor[gActiveBattler] | RET_DYNAMAX | (gMultiUsePlayerCursor << 8));
             else
                 BtlController_EmitTwoReturnValues(BUFFER_B, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
             HideTriggerSprites();
@@ -716,6 +724,7 @@ static void HandleInputChooseMove(void)
         else
         {
             gBattleStruct->mega.playerSelect = FALSE;
+            gBattleStruct->dynamax.playerSelect = FALSE;
             gBattleStruct->zmove.viable = FALSE;
             BtlController_EmitTwoReturnValues(BUFFER_B, 10, 0xFFFF);
             HideTriggerSprites();
@@ -810,12 +819,20 @@ static void HandleInputChooseMove(void)
             else
                 ReloadMoveNames();
         }
+        else if (CanDynamax(gActiveBattler))
+        {
+            gBattleStruct->dynamax.playerSelect ^= 1;
+            MoveSelectionDisplayMoveNames();
+            MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBattler], 0);
+            PlaySE(SE_SELECT);
+        }
     }
 }
 
 static void ReloadMoveNames(void)
 {
     gBattleStruct->mega.playerSelect = FALSE;
+    gBattleStruct->dynamax.playerSelect = FALSE;
     gBattleStruct->zmove.viewing = FALSE;
     MoveSelectionDestroyCursorAt(0);
     MoveSelectionDisplayMoveNames();
@@ -1685,7 +1702,8 @@ static void MoveSelectionDisplayMoveNames(void)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         MoveSelectionDestroyCursorAt(i);
-        if (IsDynamaxed(gActiveBattler))
+        if ((gBattleStruct->dynamax.playerSelect && CanDynamax(gActiveBattler))
+            || IsDynamaxed(gActiveBattler))
             StringCopy(gDisplayedStringBattle, gMoveNames[GetMaxMove(gActiveBattler, moveInfo->moves[i])]);
         else
             StringCopy(gDisplayedStringBattle, gMoveNames[moveInfo->moves[i]]);
@@ -2867,6 +2885,7 @@ static void PlayerHandleChooseMove(void)
 
         InitMoveSelectionsVarsAndStrings();
         gBattleStruct->mega.playerSelect = FALSE;
+        gBattleStruct->dynamax.playerSelect = FALSE;
         if (!IsMegaTriggerSpriteActive())
             gBattleStruct->mega.triggerSpriteId = 0xFF;
         if (CanMegaEvolve(gActiveBattler))

@@ -2246,6 +2246,10 @@
 	various 0, VARIOUS_TRY_RECYCLE_BERRY
 	.4byte \ptr
 	.endm
+	
+	.macro applydynamaxhpmultiplier
+	various 0, VARIOUS_APPLY_DYNAMAX_HP_MULTIPLIER
+	.endm
 
 	@ Tries to increase or decrease a battler's stat's stat stage by a specified amount. If impossible, jumps to \script.
 	.macro modifybattlerstatstage battler:req, stat:req, mode:req, amount:req, script:req, animation:req, customString

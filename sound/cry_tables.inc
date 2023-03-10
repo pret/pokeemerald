@@ -4188,3 +4188,4 @@ gCryTable_Reverse::
 	cry_reverse Cry_Unown
 	cry_reverse Cry_Unown
 .endif
+@ TODO: Gigantamax Cries

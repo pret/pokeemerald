@@ -3169,6 +3169,9 @@ void SwitchInClearSetData(void)
     // Reset G-Max Chi Strike boosts.
     gBattleStruct->bonusCritStages[gActiveBattler] = 0;
 
+    // Reset Dynamax flags.
+    UndoDynamax(gActiveBattler);
+
     gBattleStruct->overwrittenAbilities[gActiveBattler] = ABILITY_NONE;
 
     Ai_UpdateSwitchInData(gActiveBattler);
@@ -3272,6 +3275,7 @@ void FaintClearSetData(void)
     UndoFormChange(gBattlerPartyIndexes[gActiveBattler], GET_BATTLER_SIDE(gActiveBattler), FALSE);
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         UndoMegaEvolution(gBattlerPartyIndexes[gActiveBattler]);
+    // TODO: UndoDynamax
 
     gBattleStruct->overwrittenAbilities[gActiveBattler] = ABILITY_NONE;
 
@@ -4267,11 +4271,13 @@ static void HandleTurnActionSelectionState(void)
                                 RecordedBattle_SetBattlerAction(gActiveBattler, gBattleResources->bufferB[gActiveBattler][2]);
                                 RecordedBattle_SetBattlerAction(gActiveBattler, gBattleResources->bufferB[gActiveBattler][3]);
                             }
-                            *(gBattleStruct->chosenMovePositions + gActiveBattler) = gBattleResources->bufferB[gActiveBattler][2] & ~RET_MEGA_EVOLUTION;
+                            *(gBattleStruct->chosenMovePositions + gActiveBattler) = gBattleResources->bufferB[gActiveBattler][2] & ~RET_MEGA_EVOLUTION & ~RET_DYNAMAX;
                             gChosenMoveByBattler[gActiveBattler] = gBattleMons[gActiveBattler].moves[*(gBattleStruct->chosenMovePositions + gActiveBattler)];
                             *(gBattleStruct->moveTarget + gActiveBattler) = gBattleResources->bufferB[gActiveBattler][3];
                             if (gBattleResources->bufferB[gActiveBattler][2] & RET_MEGA_EVOLUTION)
                                 gBattleStruct->mega.toEvolve |= gBitTable[gActiveBattler];
+                            else if (gBattleResources->bufferB[gActiveBattler][2] & RET_DYNAMAX)
+                                gBattleStruct->dynamax.toDynamax[gActiveBattler] = TRUE;
                             if (ShouldUseMaxMove(gActiveBattler, gChosenMoveByBattler[gActiveBattler])) // max move check
                             {
                                 gBattleStruct->dynamax.moveSlot[gActiveBattler] = gBattleStruct->chosenMovePositions[gActiveBattler];
@@ -4888,6 +4894,7 @@ void SpecialStatusesClear(void)
     memset(&gSpecialStatuses, 0, sizeof(gSpecialStatuses));
 }
 
+// TODO: Rename function to denote use for Dynamax, too.
 static void CheckMegaEvolutionBeforeTurn(void)
 {
     if (!(gHitMarker & HITMARKER_RUN))
@@ -4896,6 +4903,16 @@ static void CheckMegaEvolutionBeforeTurn(void)
         {
             gActiveBattler = gBattlerAttacker = gBattleStruct->mega.battlerId;
             gBattleStruct->mega.battlerId++;
+            // Dynamax Check
+            if (gBattleStruct->dynamax.toDynamax[gActiveBattler])
+            {
+                gBattleStruct->dynamax.toDynamax[gActiveBattler] = FALSE;
+                gBattleScripting.battler = gActiveBattler;
+                PrepareBattlerForDynamax(gActiveBattler);
+                BattleScriptExecute(BattleScript_DynamaxBegins);
+                return;
+            }
+            // Mega Evo Check
             if (gBattleStruct->mega.toEvolve & gBitTable[gActiveBattler]
                 && !(gProtectStructs[gActiveBattler].noValidMoves))
             {
@@ -5265,6 +5282,7 @@ static void HandleEndTurn_FinishBattle(void)
             UndoMegaEvolution(i);
             UndoFormChange(i, B_SIDE_PLAYER, FALSE);
             DoBurmyFormChange(i);
+            // TODO: UndoDynamax(i)
         }
     #if B_RECALCULATE_STATS >= GEN_5
         // Recalculate the stats of every party member before the end

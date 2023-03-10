@@ -84,11 +84,43 @@ static const struct GMaxMove sGMaxMoveTable[] =
 
 extern u8 gMaxMovePowers[MOVES_COUNT];
 
+// Returns whether a battler is Dynamaxed.
 bool8 IsDynamaxed(u16 battlerId)
 {
-	if (/*IsRaidBoss(battlerId) ||*/ gBattleStruct->dynamax.dynamaxTurns[battlerId] > 0)
+	u8 side = GetBattlerSide(battlerId);
+	if (gBattleStruct->dynamax.dynamaxed[battlerId]
+		/*|| IsRaidBoss(battlerId)*/)
 		return TRUE;
 	return FALSE;
+}
+
+// Returns whether a battler can Dynamax.
+bool8 CanDynamax(u16 battlerId)
+{
+	// TODO: Requires Dynamax Band if not in a Max Raid (as well as special flag).
+	if (!gBattleStruct->dynamax.alreadyDynamaxed[GetBattlerSide(battlerId)]
+		&& !gBattleStruct->dynamax.dynamaxed[battlerId]
+		&& !gBattleStruct->dynamax.dynamaxed[BATTLE_PARTNER(battlerId)]
+		&& !gBattleStruct->dynamax.toDynamax[BATTLE_PARTNER(battlerId)])
+		return TRUE;
+	return FALSE;
+}
+
+// Sets flags used for Dynamaxing.
+void PrepareBattlerForDynamax(u16 battlerId)
+{
+	u8 side = GetBattlerSide(battlerId);
+	gBattleStruct->dynamax.alreadyDynamaxed[side] = TRUE;
+	gBattleStruct->dynamax.dynamaxed[battlerId] = TRUE;
+	gBattleStruct->dynamax.dynamaxTurns[battlerId] = DYNAMAX_TURNS;
+}
+
+void UndoDynamax(u16 battlerId)
+{
+	u8 side = GetBattlerSide(battlerId);
+	gBattleStruct->dynamax.dynamaxed[battlerId] = FALSE;
+	gBattleStruct->dynamax.dynamaxTurns[battlerId] = 0; // safety check for switch-in / faint
+	// TODO: Undo Gigantamax form change.
 }
 
 // Returns whether a move should be converted into a Max Move.
@@ -97,7 +129,7 @@ bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove)
     // TODO: Raids
 	//if (IsRaidBoss(battlerId))
 	//	return !IsRaidBossUsingRegularMove(battlerId, baseMove);
-	return IsDynamaxed(battlerId);
+	return IsDynamaxed(battlerId) || gBattleStruct->dynamax.toDynamax[battlerId];
 }
 
 static u16 GetTypeBasedMaxMove(u16 battlerId, u16 type)

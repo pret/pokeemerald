@@ -11348,6 +11348,23 @@ static void Cmd_various(void)
         }
         return;
     }
+    case VARIOUS_APPLY_DYNAMAX_HP_MULTIPLIER:
+    {
+        VARIOUS_ARGS();
+
+        if (gBattleMons[gBattleScripting.battler].species != SPECIES_SHEDINJA)
+        {
+            u16 multiplier = UQ_4_12(2.0); // placeholder; TODO: Dynamax level
+
+            gBattleMons[gBattleScripting.battler].hp = UQ_4_12_TO_INT((gBattleMons[gBattleScripting.battler].hp * multiplier) + UQ_4_12_ROUND);
+            gBattleMons[gBattleScripting.battler].maxHP = UQ_4_12_TO_INT((gBattleMons[gBattleScripting.battler].maxHP * multiplier) + UQ_4_12_ROUND);
+
+            BtlController_EmitSetMonData(BUFFER_A, REQUEST_MAX_HP_BATTLE, 0, sizeof(gBattleMons[gBattleScripting.battler].maxHP), &gBattleMons[gBattleScripting.battler].maxHP);
+            BtlController_EmitSetMonData(BUFFER_A, REQUEST_HP_BATTLE, 0, sizeof(gBattleMons[gBattleScripting.battler].hp), &gBattleMons[gBattleScripting.battler].hp);
+            MarkBattlerForControllerExec(gBattleScripting.battler);
+        }
+        break;
+    }
     } // End of switch (cmd->id)
 
     gBattlescriptCurrInstr = cmd->nextInstr;

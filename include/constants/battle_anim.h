@@ -544,7 +544,8 @@
 #define B_ANIM_SHELL_TRAP_SETUP         34
 #define B_ANIM_ZMOVE_ACTIVATE           35 // Using Z Moves
 #define B_ANIM_AFFECTION_HANGED_ON      36
-#define B_ANIM_MAX_SET_WEATHER          37
+#define B_ANIM_DYNAMAX_GROWTH           37
+#define B_ANIM_MAX_SET_WEATHER          38
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

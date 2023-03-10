@@ -1746,7 +1746,7 @@ static bool32 IsBelchPreventingMove(u32 battler, u32 move)
 u8 TrySetCantSelectMoveBattleScript(void)
 {
     u32 limitations = 0;
-    u8 moveId = gBattleResources->bufferB[gActiveBattler][2] & ~RET_MEGA_EVOLUTION;
+    u8 moveId = gBattleResources->bufferB[gActiveBattler][2] & ~RET_MEGA_EVOLUTION & ~RET_DYNAMAX;
     u32 move = gBattleMons[gActiveBattler].moves[moveId];
     u32 holdEffect = GetBattlerHoldEffect(gActiveBattler, TRUE);
     u16 *choicedMove = &gBattleStruct->choicedMove[gActiveBattler];
@@ -2674,7 +2674,8 @@ enum
     ENDTURN_SLOW_START,
     ENDTURN_PLASMA_FISTS,
     ENDTURN_CUD_CHEW,
-    ENDTURN_TORMENT,
+    ENDTURN_TORMENT, // supposedly this goes after Taunt, before Encore, but Encore is first right now?
+    ENDTURN_DYNAMAX,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -3228,6 +3229,17 @@ u8 DoBattlerEndTurnEffects(void)
             {
                 gBattleMons[gActiveBattler].status2 &= ~STATUS2_TORMENT;
                 BattleScriptExecute(BattleScript_TormentEnds);
+                effect++;
+            }
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_DYNAMAX:
+            if (IsDynamaxed(gActiveBattler)
+                && --gBattleStruct->dynamax.dynamaxTurns[gActiveBattler] == 0)
+            {
+                gBattleScripting.battler = gActiveBattler;
+	            UndoDynamax(gActiveBattler);
+                BattleScriptExecute(BattleScript_DynamaxEnds);
                 effect++;
             }
             gBattleStruct->turnEffectsTracker++;

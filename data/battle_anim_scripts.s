@@ -999,6 +999,7 @@ gBattleAnims_General::
 	.4byte General_ShellTrapSetUp           @ B_ANIM_SHELL_TRAP_SETUP
 	.4byte General_ZMoveActivate            @ B_ANIM_ZMOVE_ACTIVATE
 	.4byte General_AffectionHangedOn        @ B_ANIM_AFFECTION_HANGED_ON
+	.4byte General_DynamaxGrowth			@ B_ANIM_DYNAMAX_GROWTH
 	.4byte General_SetWeather 				@ B_ANIM_MAX_SET_WEATHER
 
 	.align 2
@@ -30941,5 +30942,13 @@ Move_G_MAX_DEPLETION:
 Move_G_MAX_ONE_BLOW:
 Move_G_MAX_RAPID_FLOW:
 	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	waitforvisualfinish
+	end
+
+@@@ DYNAMAX AND MAX RAIDS
+General_DynamaxGrowth:: @ PORTED FROM CFRU
+	createvisualtask SoundTask_PlayCryWithEcho, 2, ANIM_ATTACKER, 2
+	delay 8
+	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x0
 	waitforvisualfinish
 	end

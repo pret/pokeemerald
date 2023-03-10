@@ -10588,7 +10588,24 @@ BattleScript_RecycleBerriesAlliesEnd:
 	restoretarget
 	goto BattleScript_MoveEnd
 
-@@ End Max Moves
+@@@ END MAX MOVES @@@
+
+BattleScript_DynamaxBegins::
+	printstring STRINGID_EMPTYSTRING3
+	playanimation BS_SCRIPTING, B_ANIM_SLIDE_OFFSCREEN
+	waitanimation
+	returntoball BS_SCRIPTING
+	@applydynamaxhpmultiplier
+	switchinanim BS_SCRIPTING, TRUE
+	playanimation BS_SCRIPTING, B_ANIM_DYNAMAX_GROWTH
+	waitanimation
+	end
+
+BattleScript_DynamaxEnds::
+	printstring STRINGID_EMPTYSTRING3
+	playanimation BS_SCRIPTING, B_ANIM_FORM_CHANGE
+	waitanimation
+	end2
 
 BattleScript_PokemonCantUseTheMove::
 	attackstring

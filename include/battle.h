@@ -524,6 +524,10 @@ struct ZMoveData
 
 struct DynamaxData
 {
+    bool8 playerSelect;
+    bool8 toDynamax[MAX_BATTLERS_COUNT];
+    bool8 alreadyDynamaxed[NUM_BATTLE_SIDES];
+    bool8 dynamaxed[MAX_BATTLERS_COUNT];
     u8 dynamaxTurns[MAX_BATTLERS_COUNT];
     u8 usingMaxMove[MAX_BATTLERS_COUNT];
     u8 activeSplit;
