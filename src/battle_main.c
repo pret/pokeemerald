@@ -301,11 +301,28 @@ const struct OamData gOamData_BattleSpritePlayerSide =
     .affineParam = 0,
 };
 
-// Unknown and unused data. Feel free to remove.
-static const u16 sUnused1[] = {0, 5, 0xfffe, 0};
-static const u16 *const sUnused1Ptr = sUnused1;
-static const u16 sUnused2[] = {0xfff0, 0, 0x0400, 0, 0, 0, 0x3c00, 0, 0x7ffe, 1, 0, 0};
-static const u16 *const sUnused2Ptr = sUnused2;
+static const union AnimCmd sAnim_Unused[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const sAnims_Unused[] =
+{
+    sAnim_Unused,
+};
+
+static const union AffineAnimCmd sAffineAnim_Unused[] =
+{
+    AFFINEANIMCMD_FRAME(-0x10, 0x0, 0, 4),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 0x3C),
+    AFFINEANIMCMD_JUMP(1),
+};
+
+static const union AffineAnimCmd *const sAffineAnims_Unused[] =
+{
+    sAffineAnim_Unused,
+};
 
 static const s8 sCenterToCornerVecXs[8] ={-32, -16, -16, -32, -32};
 
@@ -695,33 +712,33 @@ static void CB2_InitBattleInternal(void)
     gBattleCommunication[MULTIUSE_STATE] = 0;
 }
 
-#define BUFFER_PARTY_VS_SCREEN_STATUS(party, flags, i)              \
-    for ((i) = 0; (i) < PARTY_SIZE; (i)++)                          \
-    {                                                               \
-        u16 species = GetMonData(&(party)[(i)], MON_DATA_SPECIES2); \
-        u16 hp = GetMonData(&(party)[(i)], MON_DATA_HP);            \
-        u32 status = GetMonData(&(party)[(i)], MON_DATA_STATUS);    \
-                                                                    \
-        if (species == SPECIES_NONE)                                \
-            continue;                                               \
-                                                                    \
-        /* Is healthy mon? */                                       \
-        if (species != SPECIES_EGG && hp != 0 && status == 0)       \
-            (flags) |= 1 << (i) * 2;                                \
-                                                                    \
-        if (species == SPECIES_NONE) /* Redundant */                \
-            continue;                                               \
-                                                                    \
-        /* Is Egg or statused? */                                   \
-        if (hp != 0 && (species == SPECIES_EGG || status != 0))     \
-            (flags) |= 2 << (i) * 2;                                \
-                                                                    \
-        if (species == SPECIES_NONE) /* Redundant */                \
-            continue;                                               \
-                                                                    \
-        /* Is fainted? */                                           \
-        if (species != SPECIES_EGG && hp == 0)                      \
-            (flags) |= 3 << (i) * 2;                                \
+#define BUFFER_PARTY_VS_SCREEN_STATUS(party, flags, i)                      \
+    for ((i) = 0; (i) < PARTY_SIZE; (i)++)                                  \
+    {                                                                       \
+        u16 species = GetMonData(&(party)[(i)], MON_DATA_SPECIES_OR_EGG);   \
+        u16 hp = GetMonData(&(party)[(i)], MON_DATA_HP);                    \
+        u32 status = GetMonData(&(party)[(i)], MON_DATA_STATUS);            \
+                                                                            \
+        if (species == SPECIES_NONE)                                        \
+            continue;                                                       \
+                                                                            \
+        /* Is healthy mon? */                                               \
+        if (species != SPECIES_EGG && hp != 0 && status == 0)               \
+            (flags) |= 1 << (i) * 2;                                        \
+                                                                            \
+        if (species == SPECIES_NONE) /* Redundant */                        \
+            continue;                                                       \
+                                                                            \
+        /* Is Egg or statused? */                                           \
+        if (hp != 0 && (species == SPECIES_EGG || status != 0))             \
+            (flags) |= 2 << (i) * 2;                                        \
+                                                                            \
+        if (species == SPECIES_NONE) /* Redundant */                        \
+            continue;                                                       \
+                                                                            \
+        /* Is fainted? */                                                   \
+        if (species != SPECIES_EGG && hp == 0)                              \
+            (flags) |= 3 << (i) * 2;                                        \
     }
 
 // For Vs Screen at link battle start
@@ -3485,8 +3502,8 @@ static void BattleIntroDrawPartySummaryScreens(void)
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
-             || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+            if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE
+             || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
             {
                 hpStatus[i].hp = HP_EMPTY_SLOT;
                 hpStatus[i].status = 0;
@@ -3503,8 +3520,8 @@ static void BattleIntroDrawPartySummaryScreens(void)
 
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
-             || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE
+             || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
             {
                 hpStatus[i].hp = HP_EMPTY_SLOT;
                 hpStatus[i].status = 0;
@@ -3529,8 +3546,8 @@ static void BattleIntroDrawPartySummaryScreens(void)
 
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
-             || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE
+             || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
             {
                 hpStatus[i].hp = HP_EMPTY_SLOT;
                 hpStatus[i].status = 0;

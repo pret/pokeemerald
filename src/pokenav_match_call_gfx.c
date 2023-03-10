@@ -49,7 +49,7 @@ struct Pokenav_MatchCallGfx
     u8 unusedTilemapBuffer[BG_SCREEN_SIZE];
     u8 bgTilemapBuffer2[BG_SCREEN_SIZE];
     u8 *trainerPicGfxPtr;
-    u8 trainerPicGfx[0x800];
+    u8 trainerPicGfx[TRAINER_PIC_SIZE];
     u8 trainerPicPal[0x20];
 };
 
