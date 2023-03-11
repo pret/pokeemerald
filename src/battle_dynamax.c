@@ -122,7 +122,7 @@ void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon)
 	{
 		u16 mult = UQ_4_12(1.5); // placeholder
 		u16 hp = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_HP, NULL) * mult) + UQ_4_12_ROUND);
-		u16 maxHP = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_HP, NULL) * mult) + UQ_4_12_ROUND);
+		u16 maxHP = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_MAX_HP, NULL) * mult) + UQ_4_12_ROUND);
 		SetMonData(mon, MON_DATA_HP, &hp);
 		SetMonData(mon, MON_DATA_MAX_HP, &maxHP);
 	}
