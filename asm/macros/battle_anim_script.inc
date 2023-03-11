@@ -270,7 +270,7 @@
 	.macro stopsound
 	.byte 0x2f
 	.endm
-	
+
 	@ same as createvisualtask except takes in battlerargindex, which is the battle anim arg index of the battler to loop through
 	.macro createvisualtaskontargets addr:req, priority:req, battlerargindex:req, argv:vararg
 	.byte 0x30
@@ -282,7 +282,7 @@
 	.2byte \argv
 .Lcreatetask_\@_2:
 	.endm
-	
+
 	@ same as createsprite except takes in battlerargindex, which is the battle anim arg index of the battler to loop through
 	.macro createspriteontargets template:req, anim_battler:req, subpriority_offset:req, battlerargindex:req, argv:vararg
 	.byte 0x31
@@ -298,7 +298,7 @@
 	.2byte \argv
 .Lsprite_\@_2:
 	.endm
-	
+
 	@ does not overwrite gBattleAnimArgs[battlerargindex], some sprite templates are too dependent on the value (e.g. heal block)
 	.macro createspriteontargets_onpos template:req, anim_battler:req, subpriority_offset:req, battlerargindex:req, argv:vararg
 	.byte 0x32

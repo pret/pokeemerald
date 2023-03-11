@@ -11,7 +11,7 @@ SINGLE_BATTLE_TEST("Insomnia prevents sleep")
         TURN { MOVE(opponent, MOVE_SPORE); }
     } SCENE {
         ABILITY_POPUP(player, ABILITY_INSOMNIA);
-        NONE_OF { 
+        NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_SPORE, opponent);
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, player);
             STATUS_ICON(player, sleep: TRUE);
@@ -31,7 +31,7 @@ SINGLE_BATTLE_TEST("Insomnia prevents yawn")
         TURN { }
     } SCENE {
         ABILITY_POPUP(player, ABILITY_INSOMNIA);
-        NONE_OF { 
+        NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_YAWN, opponent);
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, player);
             STATUS_ICON(player, sleep: TRUE);
@@ -49,7 +49,7 @@ SINGLE_BATTLE_TEST("Insomnia prevents rest")
         TURN { MOVE(player, MOVE_REST); }
     } SCENE {
         ABILITY_POPUP(player, ABILITY_INSOMNIA);
-        NONE_OF { 
+        NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_REST, player);
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, player);
             STATUS_ICON(player, sleep: TRUE);

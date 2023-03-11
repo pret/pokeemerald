@@ -641,19 +641,25 @@
 #define STRINGID_PKMNSABILITYPREVENTSABILITY          639
 #define STRINGID_PREPARESHELLTRAP                     640
 #define STRINGID_SHELLTRAPDIDNTWORK                   641
-#define STRINGID_SHARPSTEELFLOATS                     642
-#define STRINGID_SHARPSTEELDMG                        643
-#define STRINGID_PKMNBLEWAWAYSHARPSTEEL               644
-#define STRINGID_TEAMTRAPPEDWITHVINES                 645
-#define STRINGID_PKMNHURTBYVINES                      646
-#define STRINGID_TEAMCAUGHTINVORTEX                   647
-#define STRINGID_PKMNHURTBYVORTEX                     648
-#define STRINGID_TEAMSURROUNDEDBYFIRE                 649
-#define STRINGID_PKMNBURNINGUP                        650
-#define STRINGID_TEAMSURROUNDEDBYROCKS                651
-#define STRINGID_PKMNHURTBYROCKSTHROWN                652
+#define STRINGID_SPIKESDISAPPEAREDFROMTEAM            642
+#define STRINGID_TOXICSPIKESDISAPPEAREDFROMTEAM       643
+#define STRINGID_STICKYWEBDISAPPEAREDFROMTEAM         644
+#define STRINGID_STEALTHROCKDISAPPEAREDFROMTEAM       645
+#define STRINGID_COULDNTFULLYPROTECT                  646
+#define STRINGID_STOCKPILEDEFFECTWOREOFF              647
+#define STRINGID_SHARPSTEELFLOATS                     648
+#define STRINGID_SHARPSTEELDMG                        649
+#define STRINGID_PKMNBLEWAWAYSHARPSTEEL               650
+#define STRINGID_TEAMTRAPPEDWITHVINES                 651
+#define STRINGID_PKMNHURTBYVINES                      652
+#define STRINGID_TEAMCAUGHTINVORTEX                   653
+#define STRINGID_PKMNHURTBYVORTEX                     654
+#define STRINGID_TEAMSURROUNDEDBYFIRE                 655
+#define STRINGID_PKMNBURNINGUP                        656
+#define STRINGID_TEAMSURROUNDEDBYROCKS                657
+#define STRINGID_PKMNHURTBYROCKSTHROWN                658
 
-#define BATTLESTRINGS_COUNT                           653
+#define BATTLESTRINGS_COUNT                           659
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -909,6 +915,13 @@
 #define B_MSG_TERRAINPREVENTS_MISTY     0
 #define B_MSG_TERRAINPREVENTS_ELECTRIC  1
 #define B_MSG_TERRAINPREVENTS_PSYCHIC   2
+
+// gTerrainEndingStringIds
+#define B_MSG_TERRAINENDS_MISTY     0
+#define B_MSG_TERRAINENDS_ELECTRIC  1
+#define B_MSG_TERRAINENDS_PSYCHIC   2
+#define B_MSG_TERRAINENDS_GRASS     3
+#define B_MSG_TERRAINENDS_COUNT     4
 
 // gWrappedStringIds
 #define B_MSG_WRAPPED_BIND        0
