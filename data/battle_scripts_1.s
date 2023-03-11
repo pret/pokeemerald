@@ -7915,6 +7915,7 @@ BattleScript_AttackerFormChangeEnd3::
 
 BattleScript_AttackerFormChangeEnd3NoPopup::
 	call BattleScript_AttackerFormChangeNoPopup
+	end3
 
 BattleScript_AttackerFormChangeMoveEffect::
 	waitmessage 1

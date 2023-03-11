@@ -3059,12 +3059,8 @@ static bool32 IsPinchBerryItemEffect(u16 holdEffect)
     case HOLD_EFFECT_SP_DEFENSE_UP:
     case HOLD_EFFECT_CRITICAL_UP:
     case HOLD_EFFECT_RANDOM_STAT_UP:
-    #ifdef HOLD_EFFECT_CUSTAP_BERRY
     case HOLD_EFFECT_CUSTAP_BERRY:
-    #endif
-    #ifdef HOLD_EFFECT_MICLE_BERRY
     case HOLD_EFFECT_MICLE_BERRY:
-    #endif
         return TRUE;
     }
 
@@ -3838,7 +3834,6 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 ProtectChecks(battlerAtk, battlerDef, move, predictedMove, &score);
             break;
         case MOVE_KINGS_SHIELD:
-            #if (defined SPECIES_AEGISLASH && defined SPECIES_AEGISLASH_BLADE)
             if (AI_DATA->abilities[battlerAtk] == ABILITY_STANCE_CHANGE //Special logic for Aegislash
               && gBattleMons[battlerAtk].species == SPECIES_AEGISLASH_BLADE
               && !IsBattlerIncapacitated(battlerDef, AI_DATA->abilities[battlerDef]))
@@ -3846,7 +3841,6 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score += 3;
                 break;
             }
-            #endif
             //fallthrough
         default: // protect
             ProtectChecks(battlerAtk, battlerDef, move, predictedMove, &score);
@@ -4514,7 +4508,6 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score += 3;
         break;
     case EFFECT_RELIC_SONG:
-        #if (defined SPECIES_MELOETTA && defined SPECIES_MELOETTA_PIROUETTE)
         if (!(gBattleMons[battlerAtk].status2 & STATUS2_TRANSFORMED)) // Don't try to change form if it's transformed.
         {
             if (gBattleMons[battlerAtk].species == SPECIES_MELOETTA && gBattleMons[battlerDef].defense < gBattleMons[battlerDef].spDefense)
@@ -4522,7 +4515,6 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             else if (gBattleMons[battlerAtk].species == SPECIES_MELOETTA_PIROUETTE && gBattleMons[battlerDef].spDefense < gBattleMons[battlerDef].defense)
                 score += 3; // Change to Aria if can do more damage
         }
-        #endif
         break;
     case EFFECT_ELECTRIC_TERRAIN:
     case EFFECT_MISTY_TERRAIN:

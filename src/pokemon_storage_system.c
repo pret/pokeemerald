@@ -36,6 +36,7 @@
 #include "trig.h"
 #include "walda_phrase.h"
 #include "window.h"
+#include "constants/form_change_types.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/rgb.h"
@@ -6893,7 +6894,7 @@ static void ReshowDisplayMon(void)
 
 void SetMonFormPSS(struct BoxPokemon *boxMon)
 {
-    u16 targetSpecies = GetFormChangeTargetSpeciesBoxMon(boxMon, FORM_ITEM_HOLD, 0);
+    u16 targetSpecies = GetFormChangeTargetSpeciesBoxMon(boxMon, FORM_CHANGE_ITEM_HOLD, 0);
     if (targetSpecies != SPECIES_NONE)
     {
         SetBoxMonData(boxMon, MON_DATA_SPECIES, &targetSpecies);

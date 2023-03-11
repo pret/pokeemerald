@@ -552,7 +552,7 @@ void HandleAction_Switch(void)
     if (gBattleResults.playerSwitchesCounter < 255)
         gBattleResults.playerSwitchesCounter++;
 
-    UndoFormChange(gBattlerPartyIndexes[gBattlerAttacker], GetBattlerSide(gBattlerAttacker), TRUE);
+    TryBattleFormChange(gBattlerAttacker, FORM_CHANGE_BATTLE_SWITCH);
 }
 
 void HandleAction_UseItem(void)
@@ -4257,51 +4257,6 @@ static bool32 TryChangeBattleTerrain(u32 battler, u32 statusFlag, u8 *timer)
     return FALSE;
 }
 
-static bool32 ShouldChangeFormHpBased(u32 battler)
-{
-    // Ability,     form >, form <=, hp divided
-    static const u16 forms[][4] =
-    {
-        {ABILITY_ZEN_MODE, SPECIES_DARMANITAN, SPECIES_DARMANITAN_ZEN_MODE, 2},
-        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR, SPECIES_MINIOR_CORE_RED, 2},
-        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_BLUE, SPECIES_MINIOR_CORE_BLUE, 2},
-        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_GREEN, SPECIES_MINIOR_CORE_GREEN, 2},
-        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_INDIGO, SPECIES_MINIOR_CORE_INDIGO, 2},
-        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_ORANGE, SPECIES_MINIOR_CORE_ORANGE, 2},
-        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_VIOLET, SPECIES_MINIOR_CORE_VIOLET, 2},
-        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_YELLOW, SPECIES_MINIOR_CORE_YELLOW, 2},
-        {ABILITY_SCHOOLING, SPECIES_WISHIWASHI_SCHOOL, SPECIES_WISHIWASHI, 4},
-        {ABILITY_GULP_MISSILE, SPECIES_CRAMORANT, SPECIES_CRAMORANT_GORGING, 2},
-        {ABILITY_GULP_MISSILE, SPECIES_CRAMORANT, SPECIES_CRAMORANT_GULPING, 1},
-        {ABILITY_ZEN_MODE, SPECIES_DARMANITAN_GALARIAN, SPECIES_DARMANITAN_ZEN_MODE_GALARIAN, 2},
-    };
-    u32 i;
-    u16 battlerAbility = GetBattlerAbility(battler);
-
-    if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
-        return FALSE;
-
-    for (i = 0; i < ARRAY_COUNT(forms); i++)
-    {
-        if (battlerAbility == forms[i][0])
-        {
-            if (gBattleMons[battler].species == forms[i][2]
-                && gBattleMons[battler].hp > gBattleMons[battler].maxHP / forms[i][3])
-            {
-                gBattleMons[battler].species = forms[i][1];
-                return TRUE;
-            }
-            if (gBattleMons[battler].species == forms[i][1]
-                && gBattleMons[battler].hp <= gBattleMons[battler].maxHP / forms[i][3])
-            {
-                gBattleMons[battler].species = forms[i][2];
-                return TRUE;
-            }
-        }
-    }
-    return FALSE;
-}
-
 static u8 ForewarnChooseMove(u32 battler)
 {
     struct Forewarn {
@@ -4855,8 +4810,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         case ABILITY_SCHOOLING:
             if (gBattleMons[battler].level < 20)
                 break;
+        // Fallthrough
+        case ABILITY_ZEN_MODE:
         case ABILITY_SHIELDS_DOWN:
-            if (ShouldChangeFormHpBased(battler))
+            if (TryBattleFormChange(battler, FORM_CHANGE_BATTLE_HP_PERCENT))
             {
                 BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3);
                 effect++;
@@ -5127,17 +5084,12 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             case ABILITY_SCHOOLING:
                 if (gBattleMons[battler].level < 20)
                     break;
+            // Fallthrough
             case ABILITY_ZEN_MODE:
             case ABILITY_SHIELDS_DOWN:
-                if ((effect = ShouldChangeFormHpBased(battler)))
-                    BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3);
-                break;
             case ABILITY_POWER_CONSTRUCT:
-                if ((gBattleMons[battler].species == SPECIES_ZYGARDE || gBattleMons[battler].species == SPECIES_ZYGARDE_10)
-                    && gBattleMons[battler].hp <= gBattleMons[battler].maxHP / 2)
+                if (TryBattleFormChange(battler, FORM_CHANGE_BATTLE_HP_PERCENT))
                 {
-                    gBattleStruct->changedSpecies[gBattlerPartyIndexes[battler]] = gBattleMons[battler].species;
-                    gBattleMons[battler].species = SPECIES_ZYGARDE_COMPLETE;
                     BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3);
                     effect++;
                 }
@@ -5157,18 +5109,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 }
                 break;
             case ABILITY_HUNGER_SWITCH:
-                if (!(gBattleMons[battler].status2 & STATUS2_TRANSFORMED))
+                if (TryBattleFormChange(battler, FORM_CHANGE_BATTLE_TURN_END))
                 {
-                    if (gBattleMons[battler].species == SPECIES_MORPEKO)
-                    {
-                        gBattleMons[battler].species = SPECIES_MORPEKO_HANGRY;
-                        BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3NoPopup);
-                    }
-                    else if (gBattleMons[battler].species == SPECIES_MORPEKO_HANGRY)
-                    {
-                        gBattleMons[battler].species = SPECIES_MORPEKO;
-                        BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3NoPopup);
-                    }
+                    BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3NoPopup);
                     effect++;
                 }
                 break;
@@ -5852,7 +5795,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             {
                 if (gBattleMons[gBattlerTarget].species == SPECIES_CRAMORANT_GORGING)
                 {
-                    gBattleStruct->changedSpecies[gBattlerPartyIndexes[gBattlerTarget]] = gBattleMons[gBattlerTarget].species;
                     gBattleMons[gBattlerTarget].species = SPECIES_CRAMORANT;
                     if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
                     {
@@ -5866,7 +5808,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 }
                 else if (gBattleMons[gBattlerTarget].species == SPECIES_CRAMORANT_GULPING)
                 {
-                    gBattleStruct->changedSpecies[gBattlerPartyIndexes[gBattlerTarget]] = gBattleMons[gBattlerTarget].species;
                     gBattleMons[gBattlerTarget].species = SPECIES_CRAMORANT;
                     if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
                     {
@@ -5988,7 +5929,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             break;
         case ABILITY_GULP_MISSILE:
             if (((gCurrentMove == MOVE_SURF && TARGET_TURN_DAMAGED) || gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER)
-             && (effect = ShouldChangeFormHpBased(gBattlerAttacker)))
+             && TryBattleFormChange(gBattlerAttacker, FORM_CHANGE_BATTLE_HP_PERCENT))
             {
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_AttackerFormChange;
@@ -9446,10 +9387,7 @@ static bool32 CanEvolve(u32 species)
 
     for (i = 0; i < EVOS_PER_MON; i++)
     {
-        if (gEvolutionTable[species][i].method
-         && gEvolutionTable[species][i].method != EVO_MEGA_EVOLUTION
-         && gEvolutionTable[species][i].method != EVO_MOVE_MEGA_EVOLUTION
-         && gEvolutionTable[species][i].method != EVO_PRIMAL_REVERSION)
+        if (gEvolutionTable[species][i].method)
             return TRUE;
     }
     return FALSE;
@@ -10110,46 +10048,27 @@ bool32 IsPartnerMonFromSameTrainer(u8 battlerId)
         return TRUE;
 }
 
-u16 GetMegaEvolutionSpecies(u16 preEvoSpecies, u16 heldItemId)
+bool32 DoesSpeciesUseHoldItemToChangeForm(u16 species, u16 heldItemId)
 {
     u32 i;
+    const struct FormChange *formChanges = gFormChangeTablePointers[species];
 
-    for (i = 0; i < EVOS_PER_MON; i++)
+    if (formChanges != NULL)
     {
-        if (gEvolutionTable[preEvoSpecies][i].method == EVO_MEGA_EVOLUTION
-         && gEvolutionTable[preEvoSpecies][i].param == heldItemId)
-            return gEvolutionTable[preEvoSpecies][i].targetSpecies;
-    }
-    return SPECIES_NONE;
-}
-
-u16 GetPrimalReversionSpecies(u16 preEvoSpecies, u16 heldItemId)
-{
-    u32 i;
-
-    for (i = 0; i < EVOS_PER_MON; i++)
-    {
-        if (gEvolutionTable[preEvoSpecies][i].method == EVO_PRIMAL_REVERSION
-         && gEvolutionTable[preEvoSpecies][i].param == heldItemId)
-            return gEvolutionTable[preEvoSpecies][i].targetSpecies;
-    }
-    return SPECIES_NONE;
-}
-
-u16 GetWishMegaEvolutionSpecies(u16 preEvoSpecies, u16 moveId1, u16 moveId2, u16 moveId3, u16 moveId4)
-{
-    u32 i, par;
-
-    for (i = 0; i < EVOS_PER_MON; i++)
-    {
-        if (gEvolutionTable[preEvoSpecies][i].method == EVO_MOVE_MEGA_EVOLUTION)
+        for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
         {
-            par = gEvolutionTable[preEvoSpecies][i].param;
-            if (par == moveId1 || par == moveId2 || par == moveId3 || par == moveId4)
-                return gEvolutionTable[preEvoSpecies][i].targetSpecies;
+            switch (formChanges[i].method)
+            {
+            case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM:
+            case FORM_CHANGE_BATTLE_PRIMAL_REVERSION:
+            case FORM_CHANGE_ITEM_HOLD:
+                if (formChanges[i].param1 == heldItemId)
+                    return TRUE;
+                break;
+            }
         }
     }
-    return SPECIES_NONE;
+    return FALSE;
 }
 
 bool32 CanMegaEvolve(u8 battlerId)
@@ -10192,7 +10111,7 @@ bool32 CanMegaEvolve(u8 battlerId)
     itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
 
     // Check if there is an entry in the evolution table for regular Mega Evolution.
-    if (GetMegaEvolutionSpecies(species, itemId) != SPECIES_NONE)
+    if (GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM) != SPECIES_NONE)
     {
     #if DEBUG_BATTLE_MENU == TRUE
         if (gBattleStruct->debugHoldEffects[battlerId])
@@ -10210,85 +10129,140 @@ bool32 CanMegaEvolve(u8 battlerId)
     }
 
     // Check if there is an entry in the evolution table for Wish Mega Evolution.
-    if (GetWishMegaEvolutionSpecies(species, GetMonData(mon, MON_DATA_MOVE1), GetMonData(mon, MON_DATA_MOVE2), GetMonData(mon, MON_DATA_MOVE3), GetMonData(mon, MON_DATA_MOVE4)))
+    if (GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE) != SPECIES_NONE)
         return TRUE;
 
     // No checks passed, the mon CAN'T mega evolve.
     return FALSE;
 }
 
-void UndoMegaEvolution(u32 monId)
+bool32 IsBattlerMegaEvolved(u8 battlerId)
 {
-    u16 baseSpecies = GET_BASE_SPECIES_ID(GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES));
-
-    if (gBattleStruct->mega.evolvedPartyIds[B_SIDE_PLAYER] & gBitTable[monId])
-    {
-        gBattleStruct->mega.evolvedPartyIds[B_SIDE_PLAYER] &= ~(gBitTable[monId]);
-        SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &baseSpecies);
-        CalculateMonStats(&gPlayerParty[monId]);
-    }
-    else if (gBattleStruct->mega.primalRevertedPartyIds[B_SIDE_PLAYER] & gBitTable[monId])
-    {
-        gBattleStruct->mega.primalRevertedPartyIds[B_SIDE_PLAYER] &= ~(gBitTable[monId]);
-        SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &baseSpecies);
-        CalculateMonStats(&gPlayerParty[monId]);
-    }
-    // While not exactly a mega evolution, Zygarde follows the same rules.
-    else if (GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, NULL) == SPECIES_ZYGARDE_COMPLETE)
-    {
-        SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &gBattleStruct->changedSpecies[monId]);
-        gBattleStruct->changedSpecies[monId] = 0;
-        CalculateMonStats(&gPlayerParty[monId]);
-    }
+    return (gSpeciesInfo[gBattleMons[battlerId].species].flags & SPECIES_FLAG_MEGA_EVOLUTION);
 }
 
-void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
+bool32 IsBattlerPrimalReverted(u8 battlerId)
 {
-    u32 i, currSpecies, targetSpecies;
-    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
-    static const u16 species[][3] =
-    {
-        // Changed Form ID                      Default Form ID               Should change on switch
-        {SPECIES_EISCUE_NOICE_FACE,             SPECIES_EISCUE,               TRUE},
-        {SPECIES_MIMIKYU_BUSTED,                SPECIES_MIMIKYU,              FALSE},
-        {SPECIES_GRENINJA_ASH,                  SPECIES_GRENINJA_BATTLE_BOND, FALSE},
-        {SPECIES_MELOETTA_PIROUETTE,            SPECIES_MELOETTA,             FALSE},
-        {SPECIES_AEGISLASH_BLADE,               SPECIES_AEGISLASH,            TRUE},
-        {SPECIES_DARMANITAN_ZEN_MODE,           SPECIES_DARMANITAN,           TRUE},
-        {SPECIES_MINIOR,                        SPECIES_MINIOR_CORE_RED,      TRUE},
-        {SPECIES_MINIOR_METEOR_BLUE,            SPECIES_MINIOR_CORE_BLUE,     TRUE},
-        {SPECIES_MINIOR_METEOR_GREEN,           SPECIES_MINIOR_CORE_GREEN,    TRUE},
-        {SPECIES_MINIOR_METEOR_INDIGO,          SPECIES_MINIOR_CORE_INDIGO,   TRUE},
-        {SPECIES_MINIOR_METEOR_ORANGE,          SPECIES_MINIOR_CORE_ORANGE,   TRUE},
-        {SPECIES_MINIOR_METEOR_VIOLET,          SPECIES_MINIOR_CORE_VIOLET,   TRUE},
-        {SPECIES_MINIOR_METEOR_YELLOW,          SPECIES_MINIOR_CORE_YELLOW,   TRUE},
-        {SPECIES_WISHIWASHI_SCHOOL,             SPECIES_WISHIWASHI,           TRUE},
-        {SPECIES_CRAMORANT_GORGING,             SPECIES_CRAMORANT,            TRUE},
-        {SPECIES_CRAMORANT_GULPING,             SPECIES_CRAMORANT,            TRUE},
-        {SPECIES_MORPEKO_HANGRY,                SPECIES_MORPEKO,              TRUE},
-        {SPECIES_DARMANITAN_ZEN_MODE_GALARIAN,  SPECIES_DARMANITAN_GALARIAN,  TRUE},
-    };
+    return (gSpeciesInfo[gBattleMons[battlerId].species].flags & SPECIES_FLAG_PRIMAL_REVERSION);
+}
 
-    currSpecies = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);
-    for (i = 0; i < ARRAY_COUNT(species); i++)
+// Returns SPECIES_NONE if no form change is possible
+u16 GetBattleFormChangeTargetSpecies(u8 battlerId, u16 method)
+{
+    u32 i, j;
+    u16 targetSpecies = SPECIES_NONE;
+    u16 species = gBattleMons[battlerId].species;
+    const struct FormChange *formChanges = gFormChangeTablePointers[species];
+    u16 heldItem;
+    u32 ability;
+
+    if (formChanges != NULL)
     {
-        if (currSpecies == species[i][0] && (!isSwitchingOut || species[i][2] == TRUE))
+        heldItem = gBattleMons[battlerId].item;
+        ability = GetBattlerAbility(battlerId);
+
+        for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
         {
-            SetMonData(&party[monId], MON_DATA_SPECIES, &species[i][1]);
-            CalculateMonStats(&party[monId]);
-            break;
+            if (method == formChanges[i].method && species != formChanges[i].targetSpecies)
+            {
+                switch (method)
+                {
+                case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM:
+                case FORM_CHANGE_BATTLE_PRIMAL_REVERSION:
+                    if (heldItem == formChanges[i].param1)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE:
+                    if (gBattleMons[battlerId].moves[0] == formChanges[i].param1
+                     || gBattleMons[battlerId].moves[1] == formChanges[i].param1
+                     || gBattleMons[battlerId].moves[2] == formChanges[i].param1
+                     || gBattleMons[battlerId].moves[3] == formChanges[i].param1)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_BATTLE_SWITCH:
+                    targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_BATTLE_HP_PERCENT:
+                    if (formChanges[i].param1 == GetBattlerAbility(battlerId))
+                    {
+                        // We multiply by 100 to make sure that integer division doesn't mess with the health check.
+                        u32 hpCheck = gBattleMons[battlerId].hp * 100 * 100 / gBattleMons[battlerId].maxHP;
+                        switch(formChanges[i].param2)
+                        {
+                        case HP_HIGHER_THAN:
+                            if (hpCheck > formChanges[i].param3 * 100)
+                                targetSpecies = formChanges[i].targetSpecies;
+                            break;
+                        case HP_LOWER_EQ_THAN:
+                            if (hpCheck <= formChanges[i].param3 * 100)
+                                targetSpecies = formChanges[i].targetSpecies;
+                            break;
+                        }
+                    }
+                    break;
+                case FORM_CHANGE_BATTLE_TURN_END:
+                    if (formChanges[i].param1 == GetBattlerAbility(battlerId))
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                }
+            }
         }
     }
-    if (!isSwitchingOut)
+
+    return targetSpecies;
+}
+
+bool32 TryBattleFormChange(u8 battlerId, u16 method)
+{
+    u8 monId = gBattlerPartyIndexes[battlerId];
+    u8 side = GET_BATTLER_SIDE(battlerId);
+    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    u16 targetSpecies;
+
+    // Can't change form if transformed.
+    if (gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)
+        return FALSE;
+
+    if (!DoesSpeciesHaveFormChangeMethod(gBattleMons[battlerId].species, method))
+        return FALSE;
+
+    targetSpecies = GetBattleFormChangeTargetSpecies(battlerId, method);
+    if (targetSpecies != SPECIES_NONE)
     {
-        targetSpecies = GetFormChangeTargetSpecies(&party[monId], FORM_BATTLE_END, 0);
-        if (targetSpecies != SPECIES_NONE)
-        {
-            SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
-            CalculateMonStats(&party[monId]);
-            TryToSetBattleFormChangeMoves(&party[monId]);
-        }
+        // Saves the original species on the first form change for the player.
+        if (side == B_SIDE_PLAYER && gBattleStruct->changedSpecies[monId] == SPECIES_NONE)
+            gBattleStruct->changedSpecies[monId] = gBattleMons[battlerId].species;
+
+        TryToSetBattleFormChangeMoves(&party[monId], method);
+        SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
+        gBattleMons[battlerId].species = targetSpecies;
+        RecalcBattlerStats(battlerId, &party[monId]);
+        return TRUE;
     }
+
+    targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
+    if (targetSpecies != SPECIES_NONE)
+    {
+        // Saves the original species on the first form change for the player.
+        if (side == B_SIDE_PLAYER && gBattleStruct->changedSpecies[monId] == SPECIES_NONE)
+            gBattleStruct->changedSpecies[monId] = targetSpecies;
+
+        TryToSetBattleFormChangeMoves(&party[monId], method);
+        SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
+        gBattleMons[battlerId].species = targetSpecies;
+        RecalcBattlerStats(battlerId, &party[monId]);
+        return TRUE;
+    }
+    else if ((method == FORM_CHANGE_END_BATTLE || method == FORM_CHANGE_FAINT)
+            && gBattleStruct->changedSpecies[monId] != SPECIES_NONE)
+    {
+        TryToSetBattleFormChangeMoves(&party[monId], method);
+        SetMonData(&party[monId], MON_DATA_SPECIES, &gBattleStruct->changedSpecies[monId]);
+        RecalcBattlerStats(battlerId, &party[monId]);
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 bool32 DoBattlersShareType(u32 battler1, u32 battler2)
@@ -10319,24 +10293,10 @@ bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId)
     // Mail can be stolen now
     if (itemId == ITEM_ENIGMA_BERRY_E_READER)
         return FALSE;
-    // Primal Reversion inducing items cannot be lost if pokemon's base species can undergo primal reversion with it.
-    else if (holdEffect == HOLD_EFFECT_PRIMAL_ORB && (GetPrimalReversionSpecies(GET_BASE_SPECIES_ID(species), itemId) != SPECIES_NONE))
+    else if (DoesSpeciesUseHoldItemToChangeForm(species, itemId))
         return FALSE;
-    // Mega stone cannot be lost if pokemon's base species can mega evolve with it.
-    else if (holdEffect == HOLD_EFFECT_MEGA_STONE && (GetMegaEvolutionSpecies(GET_BASE_SPECIES_ID(species), itemId) != SPECIES_NONE))
-        return FALSE;
-    else if (GET_BASE_SPECIES_ID(species) == SPECIES_GIRATINA && itemId == ITEM_GRISEOUS_ORB)
-        return FALSE;
-    else if (GET_BASE_SPECIES_ID(species) == SPECIES_GENESECT && holdEffect == HOLD_EFFECT_DRIVE)
-        return FALSE;
-    else if (GET_BASE_SPECIES_ID(species) == SPECIES_SILVALLY && holdEffect == HOLD_EFFECT_MEMORY)
-        return FALSE;
-    else if (GET_BASE_SPECIES_ID(species) == SPECIES_ARCEUS && holdEffect == HOLD_EFFECT_PLATE)
-        return FALSE;
-#ifdef HOLD_EFFECT_Z_CRYSTAL
     else if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
         return FALSE;
-#endif
     else
         return TRUE;
 }
@@ -10861,46 +10821,6 @@ bool32 TryRoomService(u8 battlerId)
     }
 }
 
-void DoBurmyFormChange(u32 monId)
-{
-    u16 newSpecies, currSpecies;
-    struct Pokemon *party = gPlayerParty;
-
-    currSpecies = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);
-
-    if ((GET_BASE_SPECIES_ID(currSpecies) == SPECIES_BURMY)
-        && (gBattleStruct->appearedInBattle & gBitTable[monId]) // Burmy appeared in battle
-        && GetMonData(&party[monId], MON_DATA_HP, NULL) != 0) // Burmy isn't fainted
-    {
-        switch (gBattleTerrain)
-        {
-            case BATTLE_TERRAIN_GRASS:
-            case BATTLE_TERRAIN_LONG_GRASS:
-            case BATTLE_TERRAIN_POND:
-            case BATTLE_TERRAIN_MOUNTAIN:
-            case BATTLE_TERRAIN_PLAIN:
-                newSpecies = SPECIES_BURMY;
-                break;
-            case BATTLE_TERRAIN_CAVE:
-            case BATTLE_TERRAIN_SAND:
-                newSpecies = SPECIES_BURMY_SANDY_CLOAK;
-                break;
-            case BATTLE_TERRAIN_BUILDING:
-                newSpecies = SPECIES_BURMY_TRASH_CLOAK;
-                break;
-            default: // Don't change form if last battle was water-related
-                newSpecies = SPECIES_NONE;
-                break;
-        }
-
-        if (newSpecies != SPECIES_NONE)
-        {
-            SetMonData(&party[monId], MON_DATA_SPECIES, &newSpecies);
-            CalculateMonStats(&party[monId]);
-        }
-    }
-}
-
 bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef, bool32 checkTarget)
 {
     #if B_PRANKSTER_DARK_TYPES >= GEN_7
@@ -10992,4 +10912,33 @@ static void SetRandomMultiHitCounter()
         // If roll 4 or 5 Loaded Dice doesn't do anything. Otherwise it rolls the number of hits as 5 minus a random integer from 0 to 1 inclusive.
         gMultiHitCounter = 5 - (Random() & 1);
     }
+}
+
+void CopyMonLevelAndBaseStatsToBattleMon(u32 battler, struct Pokemon *mon)
+{
+    gBattleMons[battler].level = GetMonData(mon, MON_DATA_LEVEL);
+    gBattleMons[battler].hp = GetMonData(mon, MON_DATA_HP);
+    gBattleMons[battler].maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+    gBattleMons[battler].attack = GetMonData(mon, MON_DATA_ATK);
+    gBattleMons[battler].defense = GetMonData(mon, MON_DATA_DEF);
+    gBattleMons[battler].speed = GetMonData(mon, MON_DATA_SPEED);
+    gBattleMons[battler].spAttack = GetMonData(mon, MON_DATA_SPATK);
+    gBattleMons[battler].spDefense = GetMonData(mon, MON_DATA_SPDEF);
+}
+
+void CopyMonAbilityAndTypesToBattleMon(u32 battler, struct Pokemon *mon)
+{
+    gBattleMons[battler].ability = GetMonAbility(mon);
+    gBattleMons[battler].type1 = gSpeciesInfo[gBattleMons[battler].species].types[0];
+    gBattleMons[battler].type2 = gSpeciesInfo[gBattleMons[battler].species].types[1];
+    gBattleMons[battler].type3 = TYPE_MYSTERY;
+}
+
+void RecalcBattlerStats(u32 battler, struct Pokemon *mon)
+{
+    CalculateMonStats(mon);
+    if (IsDynamaxed(battler) && gChosenActionByBattler[battler] != B_ACTION_SWITCH)
+        ApplyDynamaxHPMultiplier(battler, mon);
+    CopyMonLevelAndBaseStatsToBattleMon(battler, mon);
+    CopyMonAbilityAndTypesToBattleMon(battler, mon);
 }
