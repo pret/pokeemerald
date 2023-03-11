@@ -1450,7 +1450,7 @@ static const u8 ALIGNED(4) sMegaIndicatorGfx[] = INCBIN_U8("graphics/battle_inte
 static const u16 sMegaIndicatorPal[] = INCBIN_U16("graphics/battle_interface/mega_indicator.gbapal");
 static const u8 ALIGNED(4) sAlphaIndicatorGfx[] = INCBIN_U8("graphics/battle_interface/alpha_indicator.4bpp");
 static const u8 ALIGNED(4) sOmegaIndicatorGfx[] = INCBIN_U8("graphics/battle_interface/omega_indicator.4bpp");
-static const u16 sAlphaOmegaIndicatorPal[] = INCBIN_U16("graphics/battle_interface/alpha_indicator.gbapal");
+static const u16 sAlphaOmegaIndicatorPal[] = INCBIN_U16("graphics/battle_interface/misc_indicator.gbapal");
 
 static const struct SpriteSheet sMegaIndicator_SpriteSheets[] =
 {
@@ -1462,8 +1462,8 @@ static const struct SpriteSheet sMegaIndicator_SpriteSheets[] =
 static const struct SpritePalette sMegaIndicator_SpritePalettes[] =
 {
     [INDICATOR_MEGA] = {sMegaIndicatorPal, TAG_MEGA_INDICATOR_PAL},
-    [INDICATOR_ALPHA] = {sAlphaOmegaIndicatorPal, TAG_ALPHA_OMEGA_INDICATOR_PAL},
-    [INDICATOR_OMEGA] = {sAlphaOmegaIndicatorPal, TAG_ALPHA_OMEGA_INDICATOR_PAL},
+    [INDICATOR_ALPHA] = {sAlphaOmegaIndicatorPal, TAG_MISC_INDICATOR_PAL},
+    [INDICATOR_OMEGA] = {sAlphaOmegaIndicatorPal, TAG_MISC_INDICATOR_PAL},
     [INDICATOR_COUNT] = {0}
 };
 
@@ -1488,8 +1488,8 @@ static const struct SpriteTemplate sSpriteTemplate_MegaIndicator =
 static const u16 sMegaIndicatorTags[][2] =
 {
     [INDICATOR_MEGA] = {TAG_MEGA_INDICATOR_TILE, TAG_MEGA_INDICATOR_PAL},
-    [INDICATOR_ALPHA] = {TAG_ALPHA_INDICATOR_TILE, TAG_ALPHA_OMEGA_INDICATOR_PAL},
-    [INDICATOR_OMEGA] = {TAG_OMEGA_INDICATOR_TILE, TAG_ALPHA_OMEGA_INDICATOR_PAL},
+    [INDICATOR_ALPHA] = {TAG_ALPHA_INDICATOR_TILE, TAG_MISC_INDICATOR_PAL},
+    [INDICATOR_OMEGA] = {TAG_OMEGA_INDICATOR_TILE, TAG_MISC_INDICATOR_PAL},
 };
 
 static const s8 sIndicatorPositions[][2] =
