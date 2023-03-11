@@ -142,7 +142,7 @@ void PrepareBattlerForDynamax(u16 battlerId)
 	newSpecies = GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_BATTLE_GIGANTAMAX);
 	if (newSpecies != SPECIES_NONE)
 	{
-		gBattleStruct->changedSpecies = gBattleMons[battlerId].species;
+		gBattleStruct->changedSpecies[gBitTable[gBattlerPartyIndexes[battlerId]]] = gBattleMons[battlerId].species;
 		TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_GIGANTAMAX);
 	}
 }
