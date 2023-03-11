@@ -10618,8 +10618,8 @@ BattleScript_DynamaxBegins::
 	playanimation BS_SCRIPTING, B_ANIM_SLIDE_OFFSCREEN
 	waitanimation
 	returntoball BS_SCRIPTING
-	updatedynamax
 	switchinanim BS_SCRIPTING, TRUE
+	updatedynamax
 	playanimation BS_SCRIPTING, B_ANIM_DYNAMAX_GROWTH
 	waitanimation
 	end

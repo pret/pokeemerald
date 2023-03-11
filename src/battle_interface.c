@@ -785,6 +785,9 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
     // Create mega indicator sprites.
     MegaIndicator_CreateSprites(battlerId, healthboxLeftSpriteId);
 
+    // Create dynamax indicator sprites.
+    DynamaxIndicator_CreateSprite(battlerId, healthboxLeftSpriteId);
+
     gBattleStruct->ballSpriteIds[0] = MAX_SPRITES;
     gBattleStruct->ballSpriteIds[1] = MAX_SPRITES;
 
@@ -868,6 +871,7 @@ void SetHealthboxSpriteInvisible(u8 healthboxSpriteId)
     gSprites[gSprites[healthboxSpriteId].hMain_HealthBarSpriteId].invisible = TRUE;
     gSprites[gSprites[healthboxSpriteId].oam.affineParam].invisible = TRUE;
     MegaIndicator_SetVisibilities(healthboxSpriteId, TRUE);
+    DynamaxIndicator_SetVisibilities(healthboxSpriteId, TRUE);
 }
 
 void SetHealthboxSpriteVisible(u8 healthboxSpriteId)
@@ -876,6 +880,7 @@ void SetHealthboxSpriteVisible(u8 healthboxSpriteId)
     gSprites[gSprites[healthboxSpriteId].hMain_HealthBarSpriteId].invisible = FALSE;
     gSprites[gSprites[healthboxSpriteId].oam.affineParam].invisible = FALSE;
     MegaIndicator_SetVisibilities(healthboxSpriteId, FALSE);
+    DynamaxIndicator_SetVisibilities(healthboxSpriteId, FALSE);
 }
 
 static void UpdateSpritePos(u8 spriteId, s16 x, s16 y)
@@ -887,6 +892,7 @@ static void UpdateSpritePos(u8 spriteId, s16 x, s16 y)
 void DestoryHealthboxSprite(u8 healthboxSpriteId)
 {
     MegaIndicator_DestroySprites(healthboxSpriteId);
+    DynamaxIndicator_DestroySprite(healthboxSpriteId);
     DestroySprite(&gSprites[gSprites[healthboxSpriteId].oam.affineParam]);
     DestroySprite(&gSprites[gSprites[healthboxSpriteId].hMain_HealthBarSpriteId]);
     DestroySprite(&gSprites[healthboxSpriteId]);
@@ -910,6 +916,7 @@ static void TryToggleHealboxVisibility(u32 priority, u32 healthboxLeftSpriteId, 
     gSprites[healthboxRightSpriteId].invisible = invisible;
     gSprites[healthbarSpriteId].invisible = invisible;
     MegaIndicator_SetVisibilities(healthboxLeftSpriteId, invisible);
+    DynamaxIndicator_SetVisibilities(healthboxLeftSpriteId, invisible);
 }
 
 void UpdateOamPriorityInAllHealthboxes(u8 priority, bool32 hideHPBoxes)
@@ -927,6 +934,7 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority, bool32 hideHPBoxes)
         gSprites[healthbarSpriteId].oam.priority = priority;
 
         MegaIndicator_UpdateOamPriorities(healthboxLeftSpriteId, priority);
+        DynamaxIndicator_UpdateOamPriorities(healthboxLeftSpriteId, priority);
 
     #if B_HIDE_HEALTHBOX_IN_ANIMS
         if (hideHPBoxes && IsBattlerAlive(i))
@@ -983,14 +991,17 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     u8 *objVram;
     u8 battler = gSprites[healthboxSpriteId].hMain_Battler;
 
-    // Don't print Lv char if mon is mega evolved or primal reverted.
+    // Don't print Lv char if mon is mega evolved or primal reverted or Dynamaxed.
     if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battler)] & gBitTable[gBattlerPartyIndexes[battler]]
-     || gBattleStruct->mega.primalRevertedPartyIds[GetBattlerSide(battler)] & gBitTable[gBattlerPartyIndexes[battler]])
+     || gBattleStruct->mega.primalRevertedPartyIds[GetBattlerSide(battler)] & gBitTable[gBattlerPartyIndexes[battler]]
+     || IsDynamaxed(battler))
     {
         objVram = ConvertIntToDecimalStringN(text, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
         xPos = 5 * (3 - (objVram - (text + 2))) - 1;
         MegaIndicator_UpdateLevel(healthboxSpriteId, lvl);
         MegaIndicator_SetVisibilities(healthboxSpriteId, FALSE);
+        DynamaxIndicator_UpdateLevel(healthboxSpriteId, lvl);
+        DynamaxIndicator_SetVisibilities(healthboxSpriteId, FALSE);
     }
     else
     {

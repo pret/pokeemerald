@@ -90,6 +90,7 @@ void DestoryHealthboxSprite(u8 healthboxSpriteId);
 void DummyBattleInterfaceFunc(u8 healthboxSpriteId, bool8 isDoubleBattleBankOnly);
 void UpdateOamPriorityInAllHealthboxes(u8 priority, bool32 hideHpBoxes);
 void InitBattlerHealthboxCoords(u8 battler);
+void GetBattlerHealthboxCoords(u8 battler, s16 *x, s16 *y);
 void UpdateHpTextInHealthbox(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp, s16 maxHp);
 void SwapHpBarsWithHpText(void);
 void ChangeMegaTriggerSprite(u8 spriteId, u8 animId);

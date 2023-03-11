@@ -87,6 +87,10 @@ static const struct GMaxMove sGMaxMoveTable[] =
 
 extern u8 gMaxMovePowers[MOVES_COUNT];
 
+// forward declarations
+static void SpriteCb_DynamaxTrigger(struct Sprite *);
+static void SpriteCb_DynamaxIndicator(struct Sprite *);
+
 // Returns whether a battler is Dynamaxed.
 bool8 IsDynamaxed(u16 battlerId)
 {
@@ -618,7 +622,7 @@ u16 SetMaxMoveEffect(u16 move)
 	return effect;
 }
 
-// Sprite Data
+// DYNAMAX TRIGGER:
 static const u8 ALIGNED(4) sDynamaxTriggerGfx[] = INCBIN_U8("graphics/battle_interface/dynamax_trigger.4bpp");
 static const u16 sDynamaxTriggerPal[] = INCBIN_U16("graphics/battle_interface/dynamax_trigger.gbapal");
 
@@ -666,7 +670,6 @@ static const union AnimCmd *const sSpriteAnimTable_DynamaxTrigger[] =
     sSpriteAnim_DynamaxTriggerOn,
 };
 
-static void SpriteCb_DynamaxTrigger(struct Sprite *sprite);
 static const struct SpriteTemplate sSpriteTemplate_DynamaxTrigger =
 {
     .tileTag = TAG_DYNAMAX_TRIGGER_TILE,
@@ -799,3 +802,160 @@ void DestroyDynamaxTriggerSprite(void)
 
 #undef tBattler
 #undef tHide
+
+
+// DYNAMAX INDICATOR:
+static const u8 ALIGNED(4) sDynamaxIndicatorGfx[] = INCBIN_U8("graphics/battle_interface/dynamax_indicator.4bpp");
+static const u16 sDynamaxIndicatorPal[] = INCBIN_U16("graphics/battle_interface/dynamax_indicator.gbapal");
+
+static const struct SpriteSheet sSpriteSheet_DynamaxIndicator =
+{
+    sDynamaxIndicatorGfx, sizeof(sDynamaxIndicatorGfx), TAG_DYNAMAX_INDICATOR_TILE
+};
+static const struct SpritePalette sSpritePalette_DynamaxIndicator =
+{
+    sDynamaxIndicatorPal, TAG_DYNAMAX_INDICATOR_PAL
+};
+
+static const struct SpriteSheet sDynamaxIndicator_SpriteSheet[] =
+{
+    sDynamaxIndicatorGfx, sizeof(sDynamaxIndicatorGfx), TAG_DYNAMAX_INDICATOR_TILE
+};
+
+static const struct SpritePalette sDynamaxIndicator_SpritePalette[] =
+{
+    sDynamaxIndicatorPal, TAG_DYNAMAX_INDICATOR_PAL
+};
+
+static const struct OamData sOamData_DynamaxIndicator =
+{
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
+    .priority = 1,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_DynamaxIndicator =
+{
+    .tileTag = TAG_DYNAMAX_INDICATOR_TILE,
+    .paletteTag = TAG_DYNAMAX_INDICATOR_PAL,
+    .oam = &sOamData_DynamaxIndicator,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCb_DynamaxIndicator,
+};
+
+static const s8 sIndicatorPositions[][2] =
+{
+    [B_POSITION_PLAYER_LEFT] = {52, -9},
+    [B_POSITION_OPPONENT_LEFT] = {44, -9},
+    [B_POSITION_PLAYER_RIGHT] = {52, -9},
+    [B_POSITION_OPPONENT_RIGHT] = {44, -9},
+};
+
+// for sprite data fields
+#define tBattler        data[0]
+#define tType           data[1] // Indicator type: dynamax
+#define tPosX           data[2]
+#define tLevelXDelta    data[3] // X position depends whether level has 3, 2 or 1 digit
+
+// data fields for healthboxMain
+// oam.affineParam holds healthboxRight spriteId
+#define hMain_DynamaxIndicatorId    data[3]
+#define hMain_HealthBarSpriteId     data[5]
+#define hMain_Battler               data[6]
+#define hMain_Data7                 data[7]
+
+// data fields for healthboxRight
+#define hOther_HealthBoxSpriteId    data[5]
+
+// data fields for healthbar
+#define hBar_HealthBoxSpriteId      data[5]
+
+void DynamaxIndicator_LoadSpriteGfx(void)
+{
+    LoadSpriteSheet(sDynamaxIndicator_SpriteSheet);
+    LoadSpritePalette(sDynamaxIndicator_SpritePalette);
+}
+
+bool32 DynamaxIndicator_ShouldBeInvisible(u32 battlerId)
+{
+    return !IsDynamaxed(battlerId);
+}
+
+u8 DynamaxIndicator_GetSpriteId(u32 healthboxSpriteId)
+{
+    return gBattleStruct->dynamax.indicatorSpriteId[gSprites[healthboxSpriteId].hMain_Battler];
+}
+
+void DynamaxIndicator_SetVisibilities(u32 healthboxId, bool32 invisible)
+{
+    u32 i;
+    u8 spriteId = DynamaxIndicator_GetSpriteId(healthboxId);
+    u32 battlerId = gSprites[healthboxId].hMain_Battler;
+
+    if (invisible == TRUE)
+		gSprites[spriteId].invisible = TRUE;
+    else // Try visible.
+		gSprites[spriteId].invisible = DynamaxIndicator_ShouldBeInvisible(battlerId);
+}
+
+void DynamaxIndicator_UpdateOamPriorities(u32 healthboxId, u32 oamPriority)
+{
+    u32 i;
+    u8 spriteId = DynamaxIndicator_GetSpriteId(healthboxId);
+    gSprites[spriteId].oam.priority = oamPriority;
+}
+
+void DynamaxIndicator_UpdateLevel(u32 healthboxId, u32 level)
+{
+    u32 i;
+    s16 xDelta = 0;
+    u8 spriteId = DynamaxIndicator_GetSpriteId(healthboxId);
+
+    if (level >= 100)
+        xDelta -= 4;
+    else if (level < 10)
+        xDelta += 5;
+
+    gSprites[spriteId].tLevelXDelta = xDelta;
+}
+
+void DynamaxIndicator_CreateSprite(u32 battlerId, u32 healthboxSpriteId)
+{
+    u32 position, level;
+    u8 spriteId;
+    s16 xHealthbox = 0, y = 0;
+    s32 x = 0;
+
+    position = GetBattlerPosition(battlerId);
+    GetBattlerHealthboxCoords(battlerId, &xHealthbox, &y);
+
+    x = sIndicatorPositions[position][0];
+    y += sIndicatorPositions[position][1];
+
+    spriteId = gBattleStruct->dynamax.indicatorSpriteId[battlerId] = CreateSpriteAtEnd(&sSpriteTemplate_DynamaxIndicator, 0, y, 0);
+	gSprites[spriteId].tBattler = battlerId;
+	gSprites[spriteId].tPosX = x;
+	gSprites[spriteId].invisible = TRUE;
+}
+
+void DynamaxIndicator_DestroySprite(u32 healthboxSpriteId)
+{
+    u8 spriteId = DynamaxIndicator_GetSpriteId(healthboxSpriteId);
+	DestroySprite(&gSprites[spriteId]);
+}
+
+static void SpriteCb_DynamaxIndicator(struct Sprite *sprite)
+{
+    u32 battlerId = sprite->tBattler;
+
+    sprite->x = gSprites[gHealthboxSpriteIds[battlerId]].x + sprite->tPosX + sprite->tLevelXDelta;
+    sprite->x2 = gSprites[gHealthboxSpriteIds[battlerId]].x2;
+    sprite->y2 = gSprites[gHealthboxSpriteIds[battlerId]].y2;
+}
+
+#undef tBattler
+#undef tType
+#undef tPosX
+#undef tLevelXDelta

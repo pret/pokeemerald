@@ -69,10 +69,20 @@ const u8 *GetMaxMoveName(u16 move);
 void ChooseDamageNonTypesString(u8 type);
 u32 GetMaxMoveStatusEffect(u16 move);
 u16 SetMaxMoveEffect(u16 move);
+
 void ChangeDynamaxTriggerSprite(u8 spriteId, u8 animId);
 void CreateDynamaxTriggerSprite(u8, bool8);
 void HideDynamaxTriggerSprite(void);
 bool32 IsDynamaxTriggerSpriteActive(void);
 void DestroyDynamaxTriggerSprite(void);
+
+void DynamaxIndicator_LoadSpriteGfx(void);
+bool32 DynamaxIndicator_ShouldBeInvisible(u32 battlerId);
+u8 DynamaxIndicator_GetSpriteId(u32 healthboxSpriteId);
+void DynamaxIndicator_SetVisibilities(u32 healthboxId, bool32 invisible);
+void DynamaxIndicator_UpdateOamPriorities(u32 healthboxId, u32 oamPriority);
+void DynamaxIndicator_UpdateLevel(u32 healthboxId, u32 level);
+void DynamaxIndicator_CreateSprite(u32 battlerId, u32 healthboxSpriteId);
+void DynamaxIndicator_DestroySprite(u32 healthboxSpriteId);
 
 #endif
