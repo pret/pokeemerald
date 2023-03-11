@@ -1413,6 +1413,7 @@ void HideTriggerSprites(void)
 {
     HideMegaTriggerSprite();
     HideZMoveTriggerSprite();
+    HideDynamaxTriggerSprite();
 }
 
 void DestroyMegaTriggerSprite(void)

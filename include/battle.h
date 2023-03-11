@@ -526,6 +526,7 @@ struct ZMoveData
 struct DynamaxData
 {
     bool8 playerSelect;
+    u8 triggerSpriteId;
     bool8 toDynamax[MAX_BATTLERS_COUNT];
     bool8 alreadyDynamaxed[NUM_BATTLE_SIDES];
     bool8 dynamaxed[MAX_BATTLERS_COUNT];

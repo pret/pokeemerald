@@ -69,5 +69,10 @@ const u8 *GetMaxMoveName(u16 move);
 void ChooseDamageNonTypesString(u8 type);
 u32 GetMaxMoveStatusEffect(u16 move);
 u16 SetMaxMoveEffect(u16 move);
+void ChangeDynamaxTriggerSprite(u8 spriteId, u8 animId);
+void CreateDynamaxTriggerSprite(u8, bool8);
+void HideDynamaxTriggerSprite(void);
+bool32 IsDynamaxTriggerSpriteActive(void);
+void DestroyDynamaxTriggerSprite(void);
 
 #endif

@@ -543,7 +543,7 @@ static void HandleInputShowEntireFieldTargets(void)
             BtlController_EmitTwoReturnValues(BUFFER_B, 10, gMoveSelectionCursor[gActiveBattler] | RET_DYNAMAX | (gMultiUsePlayerCursor << 8));
         else
             BtlController_EmitTwoReturnValues(BUFFER_B, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
-        HideMegaTriggerSprite();
+        HideTriggerSprites();
         PlayerBufferExecCompleted();
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
@@ -824,6 +824,7 @@ static void HandleInputChooseMove(void)
             gBattleStruct->dynamax.playerSelect ^= 1;
             MoveSelectionDisplayMoveNames();
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBattler], 0);
+            ChangeDynamaxTriggerSprite(gBattleStruct->dynamax.triggerSpriteId, gBattleStruct->dynamax.playerSelect);
             PlaySE(SE_SELECT);
         }
     }
@@ -2892,6 +2893,10 @@ static void PlayerHandleChooseMove(void)
             CreateMegaTriggerSprite(gActiveBattler, 0);
         if (!IsZMoveTriggerSpriteActive())
             gBattleStruct->zmove.triggerSpriteId = 0xFF;
+        if (!IsDynamaxTriggerSpriteActive())
+            gBattleStruct->dynamax.triggerSpriteId = 0xFF;
+        if (CanDynamax(gActiveBattler)) // TODO: handle Dynamax + Mega + Z-Move
+            CreateDynamaxTriggerSprite(gActiveBattler, 0);
 
         GetUsableZMoves(gActiveBattler, moveInfo->moves);
         gBattleStruct->zmove.viable = IsZMoveUsable(gActiveBattler, gMoveSelectionCursor[gActiveBattler]);

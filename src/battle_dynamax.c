@@ -2,11 +2,14 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
+#include "battle_interface.h"
 #include "battle_scripts.h"
 #include "battle_script_commands.h"
 #include "data.h"
+#include "graphics.h"
 #include "pokemon.h"
 #include "random.h"
+#include "sprite.h"
 #include "string_util.h"
 #include "util.h"
 #include "constants/abilities.h"
@@ -614,3 +617,185 @@ u16 SetMaxMoveEffect(u16 move)
 	}
 	return effect;
 }
+
+// Sprite Data
+static const u8 ALIGNED(4) sDynamaxTriggerGfx[] = INCBIN_U8("graphics/battle_interface/dynamax_trigger.4bpp");
+static const u16 sDynamaxTriggerPal[] = INCBIN_U16("graphics/battle_interface/dynamax_trigger.gbapal");
+
+static const struct SpriteSheet sSpriteSheet_DynamaxTrigger =
+{
+    sDynamaxTriggerGfx, sizeof(sDynamaxTriggerGfx), TAG_DYNAMAX_TRIGGER_TILE
+};
+static const struct SpritePalette sSpritePalette_DynamaxTrigger =
+{
+    sDynamaxTriggerPal, TAG_DYNAMAX_TRIGGER_PAL
+};
+
+static const struct OamData sOamData_DynamaxTrigger =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = ST_OAM_SQUARE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_DynamaxTriggerOff[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_DynamaxTriggerOn[] =
+{
+    ANIMCMD_FRAME(16, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_DynamaxTrigger[] =
+{
+    sSpriteAnim_DynamaxTriggerOff,
+    sSpriteAnim_DynamaxTriggerOn,
+};
+
+static void SpriteCb_DynamaxTrigger(struct Sprite *sprite);
+static const struct SpriteTemplate sSpriteTemplate_DynamaxTrigger =
+{
+    .tileTag = TAG_DYNAMAX_TRIGGER_TILE,
+    .paletteTag = TAG_DYNAMAX_TRIGGER_PAL,
+    .oam = &sOamData_DynamaxTrigger,
+    .anims = sSpriteAnimTable_DynamaxTrigger,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCb_DynamaxTrigger
+};
+
+// Dynamax Evolution Trigger icon functions.
+void ChangeDynamaxTriggerSprite(u8 spriteId, u8 animId)
+{
+    StartSpriteAnim(&gSprites[spriteId], animId);
+}
+
+#define SINGLES_DYNAMAX_TRIGGER_POS_X_OPTIMAL (30)
+#define SINGLES_DYNAMAX_TRIGGER_POS_X_PRIORITY (31)
+#define SINGLES_DYNAMAX_TRIGGER_POS_X_SLIDE (15)
+#define SINGLES_DYNAMAX_TRIGGER_POS_Y_DIFF (-11)
+
+#define DOUBLES_DYNAMAX_TRIGGER_POS_X_OPTIMAL (30)
+#define DOUBLES_DYNAMAX_TRIGGER_POS_X_PRIORITY (31)
+#define DOUBLES_DYNAMAX_TRIGGER_POS_X_SLIDE (15)
+#define DOUBLES_DYNAMAX_TRIGGER_POS_Y_DIFF (-4)
+
+#define tBattler    data[0]
+#define tHide       data[1]
+
+void CreateDynamaxTriggerSprite(u8 battlerId, u8 palId)
+{
+    LoadSpritePalette(&sSpritePalette_DynamaxTrigger);
+    if (GetSpriteTileStartByTag(TAG_DYNAMAX_TRIGGER_TILE) == 0xFFFF)
+        LoadSpriteSheet(&sSpriteSheet_DynamaxTrigger);
+    if (gBattleStruct->dynamax.triggerSpriteId == 0xFF)
+    {
+        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            gBattleStruct->dynamax.triggerSpriteId = CreateSprite(&sSpriteTemplate_DynamaxTrigger,
+                                                             gSprites[gHealthboxSpriteIds[battlerId]].x - DOUBLES_DYNAMAX_TRIGGER_POS_X_SLIDE,
+                                                             gSprites[gHealthboxSpriteIds[battlerId]].y - DOUBLES_DYNAMAX_TRIGGER_POS_Y_DIFF, 0);
+        else
+            gBattleStruct->dynamax.triggerSpriteId = CreateSprite(&sSpriteTemplate_DynamaxTrigger,
+                                                             gSprites[gHealthboxSpriteIds[battlerId]].x - SINGLES_DYNAMAX_TRIGGER_POS_X_SLIDE,
+                                                             gSprites[gHealthboxSpriteIds[battlerId]].y - SINGLES_DYNAMAX_TRIGGER_POS_Y_DIFF, 0);
+    }
+    gSprites[gBattleStruct->dynamax.triggerSpriteId].tBattler = battlerId;
+    gSprites[gBattleStruct->dynamax.triggerSpriteId].tHide = FALSE;
+
+    ChangeDynamaxTriggerSprite(gBattleStruct->dynamax.triggerSpriteId, palId);
+}
+
+static void SpriteCb_DynamaxTrigger(struct Sprite *sprite)
+{
+    s32 xSlide, xPriority, xOptimal;
+    s32 yDiff;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    {
+        xSlide = DOUBLES_DYNAMAX_TRIGGER_POS_X_SLIDE;
+        xPriority = DOUBLES_DYNAMAX_TRIGGER_POS_X_PRIORITY;
+        xOptimal = DOUBLES_DYNAMAX_TRIGGER_POS_X_OPTIMAL;
+        yDiff = DOUBLES_DYNAMAX_TRIGGER_POS_Y_DIFF;
+    }
+    else
+    {
+        xSlide = SINGLES_DYNAMAX_TRIGGER_POS_X_SLIDE;
+        xPriority = SINGLES_DYNAMAX_TRIGGER_POS_X_PRIORITY;
+        xOptimal = SINGLES_DYNAMAX_TRIGGER_POS_X_OPTIMAL;
+        yDiff = SINGLES_DYNAMAX_TRIGGER_POS_Y_DIFF;
+    }
+
+    if (sprite->tHide)
+    {
+        if (sprite->x != gSprites[gHealthboxSpriteIds[sprite->tBattler]].x - xSlide)
+            sprite->x++;
+
+        if (sprite->x >= gSprites[gHealthboxSpriteIds[sprite->tBattler]].x - xPriority)
+            sprite->oam.priority = 2;
+        else
+            sprite->oam.priority = 1;
+
+        sprite->y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].y - yDiff;
+        sprite->y2 = gSprites[gHealthboxSpriteIds[sprite->tBattler]].y2 - yDiff;
+        if (sprite->x == gSprites[gHealthboxSpriteIds[sprite->tBattler]].x - xSlide)
+            DestroyDynamaxTriggerSprite();
+    }
+    else
+    {
+        if (sprite->x != gSprites[gHealthboxSpriteIds[sprite->tBattler]].x - xOptimal)
+            sprite->x--;
+
+        if (sprite->x >= gSprites[gHealthboxSpriteIds[sprite->tBattler]].x - xPriority)
+            sprite->oam.priority = 2;
+        else
+            sprite->oam.priority = 1;
+
+        sprite->y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].y - yDiff;
+        sprite->y2 = gSprites[gHealthboxSpriteIds[sprite->tBattler]].y2 - yDiff;
+    }
+}
+
+bool32 IsDynamaxTriggerSpriteActive(void)
+{
+    if (GetSpriteTileStartByTag(TAG_DYNAMAX_TRIGGER_TILE) == 0xFFFF)
+        return FALSE;
+    else if (IndexOfSpritePaletteTag(TAG_DYNAMAX_TRIGGER_PAL) != 0xFF)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void HideDynamaxTriggerSprite(void)
+{
+    if (gBattleStruct->dynamax.triggerSpriteId != 0xFF)
+    {
+        ChangeDynamaxTriggerSprite(gBattleStruct->dynamax.triggerSpriteId, 0);
+        gSprites[gBattleStruct->dynamax.triggerSpriteId].tHide = TRUE;
+    }
+}
+
+void DestroyDynamaxTriggerSprite(void)
+{
+    FreeSpritePaletteByTag(TAG_DYNAMAX_TRIGGER_PAL);
+    FreeSpriteTilesByTag(TAG_DYNAMAX_TRIGGER_TILE);
+    if (gBattleStruct->dynamax.triggerSpriteId != 0xFF)
+        DestroySprite(&gSprites[gBattleStruct->dynamax.triggerSpriteId]);
+    gBattleStruct->dynamax.triggerSpriteId = 0xFF;
+}
+
+#undef tBattler
+#undef tHide
