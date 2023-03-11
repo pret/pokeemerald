@@ -8312,13 +8312,11 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
     }
 
     // Z-Moves and Max Moves bypass protection (except Max Guard for Max Moves).
-    if (IsMaxMove(move) 
-         && !(gProtectStructs[battlerId].maxGuarded 
-         && gBattleMoves[move].argument != MAX_EFFECT_BYPASS_PROTECT)
+    if ((IsMaxMove(move) 
+          && !(gProtectStructs[battlerId].maxGuarded
+          && gBattleMoves[move].argument != MAX_EFFECT_BYPASS_PROTECT))
         || gBattleStruct->zmove.active)
-    {
         return FALSE;
-    }
 
     if (move == MOVE_TEATIME)
         return FALSE;
@@ -8344,6 +8342,8 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
     else if (gProtectStructs[battlerId].spikyShielded)
         return TRUE;
     else if (gProtectStructs[battlerId].kingsShielded && gBattleMoves[move].power != 0)
+        return TRUE;
+    else if (gProtectStructs[battlerId].maxGuarded)
         return TRUE;
     else if (gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_QUICK_GUARD
              && GetChosenMovePriority(gBattlerAttacker) > 0)
@@ -9689,7 +9689,8 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
     }
 
     // Z-Moves and Max Moves bypass Protect and do 25% of their original damage
-    if (gBattleStruct->zmove.active && IS_BATTLER_PROTECTED(battlerDef))
+    if ((gBattleStruct->zmove.active || IsMaxMove(move))
+         && IS_BATTLER_PROTECTED(battlerDef))
     {
         MulModifier(&finalModifier, UQ_4_12(0.25));
     }
