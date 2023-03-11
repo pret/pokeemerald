@@ -142,10 +142,8 @@ void PrepareBattlerForDynamax(u16 battlerId)
 	newSpecies = GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_BATTLE_GIGANTAMAX);
 	if (newSpecies != SPECIES_NONE)
 	{
-		gBattleMons[battlerId].species = newSpecies;
-        PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[battlerId].species);
-        BtlController_EmitSetMonData(BUFFER_A, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[battlerId]], sizeof(gBattleMons[battlerId].species), &gBattleMons[battlerId].species);
-        MarkBattlerForControllerExec(battlerId);
+		gBattleStruct->changedSpecies = gBattleMons[battlerId].species;
+		TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_GIGANTAMAX);
 	}
 }
 
