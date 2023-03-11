@@ -10,6 +10,8 @@
 // FORM_CHANGE_ITEM_USE param2 Arguments
 #define DAY    1
 #define NIGHT  2
+// FORM_CHANGE_BATTLE_SWITCH
+#define PRESERVE_MEGA   1
 
 #define FORM_CHANGE_TERMINATOR                  0
 

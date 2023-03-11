@@ -128,22 +128,34 @@ void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon)
 	}
 }
 
-// Sets flags used for Dynamaxing.
+// Sets flags used for Dynamaxing and checks Gigantamax forms.
 void PrepareBattlerForDynamax(u16 battlerId)
 {
 	u8 side = GetBattlerSide(battlerId);
+	u16 newSpecies;
+
 	gBattleStruct->dynamax.alreadyDynamaxed[side] = TRUE;
 	gBattleStruct->dynamax.dynamaxed[battlerId] = TRUE;
 	gBattleStruct->dynamax.dynamaxTurns[battlerId] = DYNAMAX_TURNS;
+
+	// Try Gigantamax form change.
+	newSpecies = GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_BATTLE_GIGANTAMAX);
+	if (newSpecies != SPECIES_NONE)
+	{
+		gBattleMons[battlerId].species = newSpecies;
+        PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[battlerId].species);
+        BtlController_EmitSetMonData(BUFFER_A, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[battlerId]], sizeof(gBattleMons[battlerId].species), &gBattleMons[battlerId].species);
+        MarkBattlerForControllerExec(battlerId);
+	}
 }
 
-// Sets flags needed for undoing Dynamax.
+// Sets flags needed for undoing Dynamax and undoes Gigantamax forms.
 void UndoDynamax(u16 battlerId)
 {
 	u8 side = GetBattlerSide(battlerId);
 	gBattleStruct->dynamax.dynamaxed[battlerId] = FALSE;
 	gBattleStruct->dynamax.dynamaxTurns[battlerId] = 0; // safety check for switch-in / faint
-	// TODO: Undo Gigantamax form change.
+	TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_SWITCH); // TODO: maybe nicer way to do this?
 }
 
 // Returns whether a move should be converted into a Max Move.
@@ -806,7 +818,7 @@ void DestroyDynamaxTriggerSprite(void)
 
 // DYNAMAX INDICATOR:
 static const u8 ALIGNED(4) sDynamaxIndicatorGfx[] = INCBIN_U8("graphics/battle_interface/dynamax_indicator.4bpp");
-static const u16 sDynamaxIndicatorPal[] = INCBIN_U16("graphics/battle_interface/dynamax_indicator.gbapal");
+static const u16 sDynamaxIndicatorPal[] = INCBIN_U16("graphics/battle_interface/misc_indicator.gbapal");
 
 static const struct SpriteSheet sSpriteSheet_DynamaxIndicator =
 {
@@ -814,7 +826,7 @@ static const struct SpriteSheet sSpriteSheet_DynamaxIndicator =
 };
 static const struct SpritePalette sSpritePalette_DynamaxIndicator =
 {
-    sDynamaxIndicatorPal, TAG_DYNAMAX_INDICATOR_PAL
+    sDynamaxIndicatorPal, TAG_MISC_INDICATOR_PAL
 };
 
 static const struct SpriteSheet sDynamaxIndicator_SpriteSheet[] =
@@ -824,7 +836,7 @@ static const struct SpriteSheet sDynamaxIndicator_SpriteSheet[] =
 
 static const struct SpritePalette sDynamaxIndicator_SpritePalette[] =
 {
-    sDynamaxIndicatorPal, TAG_DYNAMAX_INDICATOR_PAL
+    sDynamaxIndicatorPal, TAG_MISC_INDICATOR_PAL
 };
 
 static const struct OamData sOamData_DynamaxIndicator =
@@ -837,7 +849,7 @@ static const struct OamData sOamData_DynamaxIndicator =
 static const struct SpriteTemplate sSpriteTemplate_DynamaxIndicator =
 {
     .tileTag = TAG_DYNAMAX_INDICATOR_TILE,
-    .paletteTag = TAG_DYNAMAX_INDICATOR_PAL,
+    .paletteTag = TAG_MISC_INDICATOR_PAL,
     .oam = &sOamData_DynamaxIndicator,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

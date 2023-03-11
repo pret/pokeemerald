@@ -10180,7 +10180,8 @@ u16 GetBattleFormChangeTargetSpecies(u8 battlerId, u16 method)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_CHANGE_BATTLE_SWITCH:
-                    targetSpecies = formChanges[i].targetSpecies;
+                    if (!(IsBattlerMegaEvolved(battlerId) && formChanges[i].param1 == PRESERVE_MEGA))
+                        targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_CHANGE_BATTLE_HP_PERCENT:
                     if (formChanges[i].param1 == GetBattlerAbility(battlerId))
@@ -10199,6 +10200,11 @@ u16 GetBattleFormChangeTargetSpecies(u8 battlerId, u16 method)
                             break;
                         }
                     }
+                    break;
+                case FORM_CHANGE_BATTLE_GIGANTAMAX:
+                    // TODO: check Gigantamax factor
+                    if (IsDynamaxed(battlerId))
+                        targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_CHANGE_BATTLE_TURN_END:
                     if (formChanges[i].param1 == GetBattlerAbility(battlerId))
