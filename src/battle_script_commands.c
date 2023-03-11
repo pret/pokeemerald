@@ -8482,6 +8482,8 @@ u32 IsAbilityStatusProtected(u32 battler)
 static void RecalcBattlerStats(u32 battler, struct Pokemon *mon)
 {
     CalculateMonStats(mon);
+    if (IsDynamaxed(battler) && gChosenActionByBattler[battler] != B_ACTION_SWITCH)
+        ApplyDynamaxHPMultiplier(battler, mon);
     gBattleMons[battler].level = GetMonData(mon, MON_DATA_LEVEL);
     gBattleMons[battler].hp = GetMonData(mon, MON_DATA_HP);
     gBattleMons[battler].maxHP = GetMonData(mon, MON_DATA_MAX_HP);
@@ -11348,21 +11350,16 @@ static void Cmd_various(void)
         }
         return;
     }
-    case VARIOUS_APPLY_DYNAMAX_HP_MULTIPLIER:
+    case VARIOUS_UPDATE_DYNAMAX:
     {
         VARIOUS_ARGS();
-
-        if (gBattleMons[gBattleScripting.battler].species != SPECIES_SHEDINJA)
-        {
-            u16 multiplier = UQ_4_12(2.0); // placeholder; TODO: Dynamax level
-
-            gBattleMons[gBattleScripting.battler].hp = UQ_4_12_TO_INT((gBattleMons[gBattleScripting.battler].hp * multiplier) + UQ_4_12_ROUND);
-            gBattleMons[gBattleScripting.battler].maxHP = UQ_4_12_TO_INT((gBattleMons[gBattleScripting.battler].maxHP * multiplier) + UQ_4_12_ROUND);
-
-            BtlController_EmitSetMonData(BUFFER_A, REQUEST_MAX_HP_BATTLE, 0, sizeof(gBattleMons[gBattleScripting.battler].maxHP), &gBattleMons[gBattleScripting.battler].maxHP);
-            BtlController_EmitSetMonData(BUFFER_A, REQUEST_HP_BATTLE, 0, sizeof(gBattleMons[gBattleScripting.battler].hp), &gBattleMons[gBattleScripting.battler].hp);
-            MarkBattlerForControllerExec(gBattleScripting.battler);
-        }
+        u16 battler = gBattleScripting.battler;
+        if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+            mon = &gPlayerParty[gBattlerPartyIndexes[battler]];
+        else
+            mon = &gEnemyParty[gBattlerPartyIndexes[battler]];
+        RecalcBattlerStats(battler, mon);
+        UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], mon, HP_BOTH);
         break;
     }
     } // End of switch (cmd->id)

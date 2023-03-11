@@ -2247,8 +2247,8 @@
 	.4byte \ptr
 	.endm
 	
-	.macro applydynamaxhpmultiplier
-	various 0, VARIOUS_APPLY_DYNAMAX_HP_MULTIPLIER
+	.macro updatedynamax
+	various 0, VARIOUS_UPDATE_DYNAMAX
 	.endm
 
 	@ Tries to increase or decrease a battler's stat's stat stage by a specified amount. If impossible, jumps to \script.

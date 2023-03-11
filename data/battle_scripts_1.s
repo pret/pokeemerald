@@ -6684,6 +6684,7 @@ BattleScript_PursuitSwitchDmgLoop::
 BattleScript_DoSwitchOut::
 	decrementmultihit BattleScript_PursuitSwitchDmgLoop
 	switchoutabilities BS_ATTACKER
+	updatedynamax
 	waitstate
 	returnatktoball
 	waitstate
@@ -10595,7 +10596,7 @@ BattleScript_DynamaxBegins::
 	playanimation BS_SCRIPTING, B_ANIM_SLIDE_OFFSCREEN
 	waitanimation
 	returntoball BS_SCRIPTING
-	@applydynamaxhpmultiplier
+	updatedynamax
 	switchinanim BS_SCRIPTING, TRUE
 	playanimation BS_SCRIPTING, B_ANIM_DYNAMAX_GROWTH
 	waitanimation
@@ -10603,6 +10604,7 @@ BattleScript_DynamaxBegins::
 
 BattleScript_DynamaxEnds::
 	printstring STRINGID_EMPTYSTRING3
+	updatedynamax
 	playanimation BS_SCRIPTING, B_ANIM_FORM_CHANGE
 	waitanimation
 	end2

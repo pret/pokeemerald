@@ -106,6 +106,21 @@ bool8 CanDynamax(u16 battlerId)
 	return FALSE;
 }
 
+// Applies the HP Multiplier for Dynamaxed Pokemon and Raid Bosses.
+void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon)
+{
+	if (gBattleMons[battlerId].species == SPECIES_SHEDINJA)
+		return;
+	else
+	{
+		u16 mult = UQ_4_12(1.5); // placeholder
+		u16 hp = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_HP, NULL) * mult) + UQ_4_12_ROUND);
+		u16 maxHP = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_HP, NULL) * mult) + UQ_4_12_ROUND);
+		SetMonData(mon, MON_DATA_HP, &hp);
+		SetMonData(mon, MON_DATA_MAX_HP, &maxHP);
+	}
+}
+
 // Sets flags used for Dynamaxing.
 void PrepareBattlerForDynamax(u16 battlerId)
 {
@@ -115,6 +130,7 @@ void PrepareBattlerForDynamax(u16 battlerId)
 	gBattleStruct->dynamax.dynamaxTurns[battlerId] = DYNAMAX_TURNS;
 }
 
+// Sets flags needed for undoing Dynamax.
 void UndoDynamax(u16 battlerId)
 {
 	u8 side = GetBattlerSide(battlerId);

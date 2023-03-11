@@ -58,6 +58,7 @@ enum MaxMoveEffect
 
 bool8 IsDynamaxed(u16 battlerId);
 bool8 CanDynamax(u16 battlerId);
+void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon);
 void PrepareBattlerForDynamax(u16 battlerId);
 void UndoDynamax(u16 battlerId);
 bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove);
