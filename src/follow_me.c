@@ -233,7 +233,7 @@ void FollowMe(struct ObjectEvent* npc, u8 state, bool8 ignoreScriptActive)
         return;
     else if (!gSaveBlock2Ptr->follower.inProgress)
         return;
-    else if (ScriptContext2_IsEnabled() && !ignoreScriptActive)
+    else if (ArePlayerFieldControlsLocked() && !ignoreScriptActive)
         return; //Don't follow during a script
                 
     
