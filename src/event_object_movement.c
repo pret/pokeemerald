@@ -10147,6 +10147,7 @@ u8 MovementAction_FollowingPokemon_FaceWest_Step0(struct ObjectEvent *objectEven
 
 u8 MovementAction_FollowingPokemon_FaceEast_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
+    SetObjectEventDirection(objectEvent, DIR_EAST);
     RecreateObjectEvent(objectEvent, sprite);
     sprite->animNum = 3;
     sprite->x2 = -8;
