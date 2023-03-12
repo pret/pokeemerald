@@ -1,6 +1,6 @@
 	.align 2
 voicegroup150::
-	voice_keysplit_all voicegroup002
+	voice_keysplit_all voicegroup_drums_frlg
 	voice_directsound 60, 0, DirectSoundWaveData_steinway_b_piano, 255, 165, 103, 235
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

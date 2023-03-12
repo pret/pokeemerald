@@ -1,6 +1,6 @@
 	.align 2
 voicegroup104::
-	voice_keysplit_all voicegroup003
+	voice_keysplit_all voicegroup_drums_emerald_1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_unknown_koto_high, 255, 0, 206, 242

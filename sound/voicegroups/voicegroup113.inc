@@ -1,6 +1,6 @@
 	.align 2
 voicegroup113::
-	voice_keysplit_all voicegroup002
+	voice_keysplit_all voicegroup_drums_frlg
 	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_23, 0, 7, 15, 1
 	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_25, 0, 7, 15, 1
 	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_24, 0, 7, 15, 1
@@ -56,11 +56,11 @@ voicegroup113::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_keysplit voicegroup007, KeySplitTable3
+	voice_keysplit voicegroup_trumpet, KeySplitTable3
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_keysplit voicegroup009, KeySplitTable5
+	voice_keysplit voicegroup_french_horn, KeySplitTable5
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
