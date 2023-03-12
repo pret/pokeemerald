@@ -1217,6 +1217,9 @@ void Move(u32 sourceLine, struct BattlePokemon *battler, struct MoveContext ctx)
 
     if (ctx.explicitMegaEvolve && ctx.megaEvolve)
         moveSlot |= RET_MEGA_EVOLUTION;
+    
+    if (ctx.dynamax)
+        moveSlot |= RET_DYNAMAX;
 
     if (ctx.explicitTarget)
     {
