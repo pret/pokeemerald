@@ -746,7 +746,7 @@ static u8 RotatingGate_CreateGate(u8 gateId, s16 deltaX, s16 deltaY)
     if (template.paletteTag != 0xFFFF)
     {
         LoadObjectEventPalette(template.paletteTag);
-        UpdatePaletteGammaType(IndexOfSpritePaletteTag(template.paletteTag), GAMMA_ALT);
+        UpdatePaletteGammaType(IndexOfSpritePaletteTag(template.paletteTag), COLOR_MAP_CONTRAST);
     }
 
     sprite = &gSprites[spriteId];

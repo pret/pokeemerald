@@ -3877,16 +3877,6 @@ void UpdateFollowerPokemonGraphic(void)
     u16 leadMonGraphicId = GetMonData(&gPlayerParty[GetLeadMonNotFaintedIndex()], MON_DATA_SPECIES, NULL) + OBJ_EVENT_GFX_BULBASAUR - 1;
     struct ObjectEvent *follower = &gObjectEvents[gSaveBlock2Ptr->follower.objId];
 
-    // If the lead Pokemon is Unown, use the correct sprite
-    if (leadMonGraphicId == OBJ_EVENT_GFX_UNOWN_A)
-    {
-        u8 unownLetter = GET_UNOWN_LETTER(GetMonData(&gPlayerParty[GetLeadMonNotFaintedIndex()], MON_DATA_PERSONALITY));
-        
-        // If the Unown is not A, set the graphics id to the proper Unown
-        if (unownLetter)
-            leadMonGraphicId = OBJ_EVENT_GFX_DEOXYS_SPEED + unownLetter;
-    }
-    
     if(gSaveBlock2Ptr->follower.inProgress && leadMonGraphicId != gSaveBlock2Ptr->follower.graphicsId)
     {
         // Sets the follower's graphic data to the proper following Pokemon graphic data
@@ -3998,6 +3988,11 @@ bool8 IsBigSprite(u16 graphicsId)
         case OBJ_EVENT_GFX_LUGIA_FOLLOWER:
         case OBJ_EVENT_GFX_HOOH_FOLLOWER:
         case OBJ_EVENT_GFX_WAILORD:
+        case OBJ_EVENT_GFX_DIALGA:
+        case OBJ_EVENT_GFX_PALKIA:
+        case OBJ_EVENT_GFX_REGIGIGAS:
+        case OBJ_EVENT_GFX_GIRATINA_NORMAL:
+        case OBJ_EVENT_GFX_ARCEUS_NORMAL:
             return TRUE;
         default:
             return FALSE;
@@ -4024,14 +4019,11 @@ static void SparklePokeballCallback(struct Sprite *sprite)
         player->fixedPriority = FALSE;
 
         // Shift the location of the sparkle, depending on which way the follower will be facing
-        // Account for the other Unown forms
-        if (gSaveBlock2Ptr->follower.graphicsId > OBJ_EVENT_GFX_DEOXYS_SPEED)
-            graphicsId = 200;
         #ifndef POKEMON_EXPANSION
-        else if (gSaveBlock2Ptr->follower.graphicsId > OBJ_EVENT_GFX_CELEBI) // Gen 3+ OBJ_EVENT_GFX constants are 25 too high due to OLD_UNOWN constants.
+        if (gSaveBlock2Ptr->follower.graphicsId > OBJ_EVENT_GFX_CELEBI) // Gen 3+ OBJ_EVENT_GFX constants are 25 too high due to OLD_UNOWN constants.
             graphicsId = gSaveBlock2Ptr->follower.graphicsId - OBJ_EVENT_GFX_BULBASAUR - 25;
-        #endif
         else
+        #endif
             graphicsId = gSaveBlock2Ptr->follower.graphicsId - OBJ_EVENT_GFX_BULBASAUR;
 
         switch(gObjectEvents[gPlayerAvatar.objectEventId].facingDirection)
