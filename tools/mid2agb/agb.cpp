@@ -46,7 +46,7 @@ static int s_memaccParam2;
 void PrintAgbHeader()
 {
     std::fprintf(g_outputFile, "\t.include \"MPlayDef.s\"\n\n");
-    std::fprintf(g_outputFile, "\t.equ\t%s_grp, voicegroup%03u\n", g_asmLabel.c_str(), g_voiceGroup);
+    std::fprintf(g_outputFile, "\t.equ\t%s_grp, voicegroup%s\n", g_asmLabel.c_str(), g_voiceGroup.c_str());
     std::fprintf(g_outputFile, "\t.equ\t%s_pri, %u\n", g_asmLabel.c_str(), g_priority);
 
     if (g_reverb >= 0)

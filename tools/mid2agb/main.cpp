@@ -35,7 +35,7 @@ FILE* g_outputFile = nullptr;
 
 std::string g_asmLabel;
 int g_masterVolume = 127;
-int g_voiceGroup = 0;
+std::string g_voiceGroup = "000";
 int g_priority = 0;
 int g_reverb = -1;
 int g_clocksPerBeat = 1;
@@ -149,7 +149,7 @@ int main(int argc, char** argv)
                 arg = GetArgument(argc, argv, i);
                 if (arg == nullptr)
                     PrintUsage();
-                g_voiceGroup = std::stoi(arg);
+                g_voiceGroup = arg;
                 break;
             case 'L':
                 arg = GetArgument(argc, argv, i);

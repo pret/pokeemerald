@@ -124,7 +124,7 @@ $(MID_SUBDIR)/mus_hall_of_fame.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G082 -V078
 
 $(MID_SUBDIR)/mus_route110.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G010 -V080
+	$(MID) $< $@ -E -R$(STD_REVERB) -G_route110 -V080
 
 $(MID_SUBDIR)/mus_route120.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G014 -V080
