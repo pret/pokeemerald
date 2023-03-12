@@ -35,7 +35,7 @@ SINGLE_BATTLE_TEST("Pastel Veil immediately cures Mold Breaker poison")
 {
     GIVEN {
         ASSUME(gBattleMoves[MOVE_TOXIC].effect == EFFECT_TOXIC);
-        PLAYER(SPECIES_DRILBUR) { Ability(ABILITY_MOLD_BREAKER); }
+        PLAYER(SPECIES_PINSIR) { Ability(ABILITY_MOLD_BREAKER); }
         OPPONENT(SPECIES_PONYTA_GALARIAN) { Ability(ABILITY_PASTEL_VEIL); }
     } WHEN {
         TURN { MOVE(player, MOVE_TOXIC); }
@@ -52,7 +52,7 @@ DOUBLE_BATTLE_TEST("Pastel Veil does not cure Mold Breaker poison on partner")
 {
     GIVEN {
         ASSUME(gBattleMoves[MOVE_TOXIC].effect == EFFECT_TOXIC);
-        PLAYER(SPECIES_DRILBUR) { Ability(ABILITY_MOLD_BREAKER); }
+        PLAYER(SPECIES_PINSIR) { Ability(ABILITY_MOLD_BREAKER); }
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_PONYTA_GALARIAN) { Ability(ABILITY_PASTEL_VEIL); }
         OPPONENT(SPECIES_WYNAUT);
