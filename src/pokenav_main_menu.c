@@ -50,7 +50,7 @@ static void InitHelpBar(void);
 static u32 LoopedTask_SlideMenuHeaderUp(s32);
 static u32 LoopedTask_SlideMenuHeaderDown(s32);
 static void DrawHelpBar(u32);
-static void SpriteCB_SpinningPokenav(struct Sprite*);
+static void SpriteCB_SpinningPokenav(struct Sprite *);
 static u32 LoopedTask_InitPokenavMenu(s32);
 
 static const u16 sSpinningPokenav_Pal[] = INCBIN_U16("graphics/pokenav/nav_icon.gbapal");
@@ -349,7 +349,7 @@ static u32 LoopedTask_InitPokenavMenu(s32 state)
         DecompressAndCopyTileDataToVram(0, &gPokenavHeader_Gfx, 0, 0, 0);
         SetBgTilemapBuffer(0, menu->tilemapBuffer);
         CopyToBgTilemapBuffer(0, &gPokenavHeader_Tilemap, 0, 0);
-        CopyPaletteIntoBufferUnfaded(gPokenavHeader_Pal, 0, 0x20);
+        CopyPaletteIntoBufferUnfaded(gPokenavHeader_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         CopyBgTilemapBufferToVram(0);
         return LT_INC_AND_PAUSE;
     case 2:
@@ -460,8 +460,8 @@ void Pokenav_AllocAndLoadPalettes(const struct SpritePalette *palettes)
         }
         else
         {
-            index = (index * 16) + 0x100;
-            CopyPaletteIntoBufferUnfaded(current->data, index, 0x20);
+            index = OBJ_PLTT_ID(index);
+            CopyPaletteIntoBufferUnfaded(current->data, index, PLTT_SIZE_4BPP);
         }
     }
 }
@@ -683,7 +683,7 @@ static void LoadLeftHeaderGfxForMenu(u32 menuGfxId)
     menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
     tag = sMenuLeftHeaderSpriteSheets[menuGfxId].tag;
     size = GetDecompressedDataSize(sMenuLeftHeaderSpriteSheets[menuGfxId].data);
-    LoadPalette(&gPokenavLeftHeader_Pal[tag * 16], (IndexOfSpritePaletteTag(1) * 16) + 0x100, 0x20);
+    LoadPalette(&gPokenavLeftHeader_Pal[tag * 16], OBJ_PLTT_ID(IndexOfSpritePaletteTag(1)), PLTT_SIZE_4BPP);
     LZ77UnCompWram(sMenuLeftHeaderSpriteSheets[menuGfxId].data, gDecompressionBuffer);
     RequestDma3Copy(gDecompressionBuffer, (void *)OBJ_VRAM0 + (GetSpriteTileStartByTag(2) * 32), size, 1);
     menu->leftHeaderSprites[1]->oam.tileNum = GetSpriteTileStartByTag(2) + sMenuLeftHeaderSpriteSheets[menuGfxId].size;
@@ -703,7 +703,7 @@ static void LoadLeftHeaderGfxForSubMenu(u32 menuGfxId)
 
     tag = sPokenavSubMenuLeftHeaderSpriteSheets[menuGfxId].tag;
     size = GetDecompressedDataSize(sPokenavSubMenuLeftHeaderSpriteSheets[menuGfxId].data);
-    LoadPalette(&gPokenavLeftHeader_Pal[tag * 16], (IndexOfSpritePaletteTag(2) * 16) + 0x100, 0x20);
+    LoadPalette(&gPokenavLeftHeader_Pal[tag * 16], OBJ_PLTT_ID(IndexOfSpritePaletteTag(2)), PLTT_SIZE_4BPP);
     LZ77UnCompWram(sPokenavSubMenuLeftHeaderSpriteSheets[menuGfxId].data, &gDecompressionBuffer[0x1000]);
     RequestDma3Copy(&gDecompressionBuffer[0x1000], (void *)OBJ_VRAM0 + 0x800 + (GetSpriteTileStartByTag(2) * 32), size, 1);
 }

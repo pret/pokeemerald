@@ -730,7 +730,7 @@ void LoadIntroPart2Graphics(u8 scenery)
 {
     LZ77UnCompVram(sGrass_Gfx, (void *)(BG_CHAR_ADDR(1)));
     LZ77UnCompVram(sGrass_Tilemap, (void *)(BG_SCREEN_ADDR(15)));
-    LoadPalette(&sGrass_Pal, 240, sizeof(sGrass_Pal));
+    LoadPalette(&sGrass_Pal, BG_PLTT_ID(15), sizeof(sGrass_Pal));
     switch (scenery)
     {
     case 0:
@@ -739,17 +739,17 @@ void LoadIntroPart2Graphics(u8 scenery)
         // Clouds are never used in this part of the intro
         LZ77UnCompVram(sCloudsBg_Gfx, (void *)(VRAM));
         LZ77UnCompVram(sCloudsBg_Tilemap, (void *)(BG_SCREEN_ADDR(6)));
-        LoadPalette(&sCloudsBg_Pal, 0, sizeof(sCloudsBg_Pal));
+        LoadPalette(&sCloudsBg_Pal, BG_PLTT_ID(0), sizeof(sCloudsBg_Pal));
         LoadCompressedSpriteSheet(sSpriteSheet_Clouds);
-        LoadPalette(&sClouds_Pal, 256, sizeof(sClouds_Pal));
+        LoadPalette(&sClouds_Pal, OBJ_PLTT_ID(0), sizeof(sClouds_Pal));
         CreateCloudSprites();
         break;
     case 1:
         LZ77UnCompVram(sTrees_Gfx, (void *)(VRAM));
         LZ77UnCompVram(sTrees_Tilemap, (void *)(BG_SCREEN_ADDR(6)));
-        LoadPalette(&sTrees_Pal, 0, sizeof(sTrees_Pal));
+        LoadPalette(&sTrees_Pal, BG_PLTT_ID(0), sizeof(sTrees_Pal));
         LoadCompressedSpriteSheet(sSpriteSheet_TreesSmall);
-        LoadPalette(&sTreesSmall_Pal, 256, sizeof(sTreesSmall_Pal));
+        LoadPalette(&sTreesSmall_Pal, OBJ_PLTT_ID(0), sizeof(sTreesSmall_Pal));
         CreateTreeSprites();
         break;
     }
@@ -843,42 +843,42 @@ void LoadCreditsSceneGraphics(u8 scene)
     {
     case SCENE_OCEAN_MORNING:
     default:
-        LoadPalette(&sGrass_Pal, 240, sizeof(sGrass_Pal));
+        LoadPalette(&sGrass_Pal, BG_PLTT_ID(15), sizeof(sGrass_Pal));
         LZ77UnCompVram(sCloudsBg_Gfx, (void *)(VRAM));
         LZ77UnCompVram(sCloudsBg_Tilemap, (void *)(BG_SCREEN_ADDR(6)));
-        LoadPalette(&sCloudsBg_Pal, 0, sizeof(sCloudsBg_Pal));
+        LoadPalette(&sCloudsBg_Pal, BG_PLTT_ID(0), sizeof(sCloudsBg_Pal));
         LoadCompressedSpriteSheet(sSpriteSheet_Clouds);
         LZ77UnCompVram(sClouds_Gfx, (void *)(OBJ_VRAM0));
-        LoadPalette(&sClouds_Pal, 256, sizeof(sClouds_Pal));
+        LoadPalette(&sClouds_Pal, OBJ_PLTT_ID(0), sizeof(sClouds_Pal));
         CreateCloudSprites();
         break;
     case SCENE_OCEAN_SUNSET:
-        LoadPalette(&sGrassSunset_Pal, 240, sizeof(sGrassSunset_Pal));
+        LoadPalette(&sGrassSunset_Pal, BG_PLTT_ID(15), sizeof(sGrassSunset_Pal));
         LZ77UnCompVram(sCloudsBg_Gfx, (void *)(VRAM));
         LZ77UnCompVram(sCloudsBg_Tilemap, (void *)(BG_SCREEN_ADDR(6)));
-        LoadPalette(&sCloudsBgSunset_Pal, 0, sizeof(sCloudsBgSunset_Pal));
+        LoadPalette(&sCloudsBgSunset_Pal, BG_PLTT_ID(0), sizeof(sCloudsBgSunset_Pal));
         LoadCompressedSpriteSheet(sSpriteSheet_Clouds);
         LZ77UnCompVram(sClouds_Gfx, (void *)(OBJ_VRAM0));
-        LoadPalette(&sCloudsSunset_Pal, 256, sizeof(sCloudsSunset_Pal));
+        LoadPalette(&sCloudsSunset_Pal, OBJ_PLTT_ID(0), sizeof(sCloudsSunset_Pal));
         CreateCloudSprites();
         break;
     case SCENE_FOREST_RIVAL_ARRIVE:
     case SCENE_FOREST_CATCH_RIVAL:
-        LoadPalette(&sGrassSunset_Pal, 240, sizeof(sGrassSunset_Pal));
+        LoadPalette(&sGrassSunset_Pal, BG_PLTT_ID(15), sizeof(sGrassSunset_Pal));
         LZ77UnCompVram(sTrees_Gfx, (void *)(VRAM));
         LZ77UnCompVram(sTrees_Tilemap, (void *)(BG_SCREEN_ADDR(6)));
-        LoadPalette(&sTreesSunset_Pal, 0, sizeof(sTreesSunset_Pal));
+        LoadPalette(&sTreesSunset_Pal, BG_PLTT_ID(0), sizeof(sTreesSunset_Pal));
         LoadCompressedSpriteSheet(sSpriteSheet_TreesSmall);
-        LoadPalette(&sTreesSunset_Pal, 256, sizeof(sTreesSunset_Pal));
+        LoadPalette(&sTreesSunset_Pal, OBJ_PLTT_ID(0), sizeof(sTreesSunset_Pal));
         CreateTreeSprites();
         break;
     case SCENE_CITY_NIGHT:
-        LoadPalette(&sGrassNight_Pal, 240, sizeof(sGrassNight_Pal));
+        LoadPalette(&sGrassNight_Pal, BG_PLTT_ID(15), sizeof(sGrassNight_Pal));
         LZ77UnCompVram(sHouses_Gfx, (void *)(VRAM));
         LZ77UnCompVram(sHouses_Tilemap, (void *)(BG_SCREEN_ADDR(6)));
-        LoadPalette(&sHouses_Pal, 0, sizeof(sHouses_Pal));
+        LoadPalette(&sHouses_Pal, BG_PLTT_ID(0), sizeof(sHouses_Pal));
         LoadCompressedSpriteSheet(sSpriteSheet_HouseSilhouette);
-        LoadPalette(&sHouseSilhouette_Pal, 256, sizeof(sHouseSilhouette_Pal));
+        LoadPalette(&sHouseSilhouette_Pal, OBJ_PLTT_ID(0), sizeof(sHouseSilhouette_Pal));
         CreateHouseSprites();
         break;
     }
@@ -1006,8 +1006,8 @@ void CycleSceneryPalette(u8 mode)
                 x = gPlttBufferUnfaded[10];
                 y = gPlttBufferUnfaded[9];
             }
-            LoadPalette(&x, 9, sizeof(x));
-            LoadPalette(&y, 10, sizeof(y));
+            LoadPalette(&x, BG_PLTT_ID(0) + 9, sizeof(x));
+            LoadPalette(&y, BG_PLTT_ID(0) + 10, sizeof(y));
             break;
         case 2:
             if (gMain.vblankCounter1 & 3 || gPaletteFade.active)
@@ -1022,8 +1022,8 @@ void CycleSceneryPalette(u8 mode)
                 x = RGB(28, 24, 0);
                 y = RGB(7, 9, 15);
             }
-            LoadPalette(&x, 12, sizeof(x));
-            LoadPalette(&y, 13, sizeof(y));
+            LoadPalette(&x, BG_PLTT_ID(0) + 12, sizeof(x));
+            LoadPalette(&y, BG_PLTT_ID(0) + 13, sizeof(y));
             break;
         case 1:
             break;
@@ -1106,7 +1106,7 @@ static void SpriteCB_Player(struct Sprite *sprite)
 
 #define sPlayerSpriteId data[0]
 
-static void SpriteCB_Bicycle(struct Sprite* sprite)
+static void SpriteCB_Bicycle(struct Sprite *sprite)
 {
     sprite->invisible = gSprites[sprite->sPlayerSpriteId].invisible;
     sprite->x = gSprites[sprite->sPlayerSpriteId].x;
@@ -1139,7 +1139,7 @@ static void SpriteCB_FlygonLeftHalf(struct Sprite *sprite)
 
 #define sLeftSpriteId data[0]
 
-static void SpriteCB_FlygonRightHalf(struct Sprite* sprite)
+static void SpriteCB_FlygonRightHalf(struct Sprite *sprite)
 {
     sprite->invisible = gSprites[sprite->sLeftSpriteId].invisible;
     sprite->y = gSprites[sprite->sLeftSpriteId].y;

@@ -411,28 +411,28 @@
       "y": 36,
       "elevation": 0,
       "dest_map": "MAP_MT_CHIMNEY_CABLE_CAR_STATION",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 18,
       "y": 36,
       "elevation": 0,
       "dest_map": "MAP_MT_CHIMNEY_CABLE_CAR_STATION",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 20,
       "y": 41,
       "elevation": 3,
       "dest_map": "MAP_JAGGED_PASS",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 21,
       "y": 41,
       "elevation": 3,
       "dest_map": "MAP_JAGGED_PASS",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [],

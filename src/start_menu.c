@@ -139,7 +139,7 @@ static bool8 FieldCB_ReturnToFieldStartMenu(void);
 
 static const struct WindowTemplate sSafariBallsWindowTemplate = {0, 1, 1, 9, 4, 0xF, 8};
 
-static const u8* const sPyramidFloorNames[FRONTIER_STAGES_PER_CHALLENGE + 1] =
+static const u8 *const sPyramidFloorNames[FRONTIER_STAGES_PER_CHALLENGE + 1] =
 {
     gText_Floor1,
     gText_Floor2,
@@ -156,19 +156,19 @@ static const struct WindowTemplate sPyramidFloorWindowTemplate_1 = {0, 1, 1, 0xC
 
 static const struct MenuAction sStartMenuItems[] =
 {
-    {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
-    {gText_MenuPokemon, {.u8_void = StartMenuPokemonCallback}},
-    {gText_MenuBag, {.u8_void = StartMenuBagCallback}},
-    {gText_MenuPokenav, {.u8_void = StartMenuPokeNavCallback}},
-    {gText_MenuPlayer, {.u8_void = StartMenuPlayerNameCallback}},
-    {gText_MenuSave, {.u8_void = StartMenuSaveCallback}},
-    {gText_MenuOption, {.u8_void = StartMenuOptionCallback}},
-    {gText_MenuExit, {.u8_void = StartMenuExitCallback}},
-    {gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback}},
-    {gText_MenuPlayer, {.u8_void = StartMenuLinkModePlayerNameCallback}},
-    {gText_MenuRest, {.u8_void = StartMenuSaveCallback}},
-    {gText_MenuRetire, {.u8_void = StartMenuBattlePyramidRetireCallback}},
-    {gText_MenuBag, {.u8_void = StartMenuBattlePyramidBagCallback}}
+    [MENU_ACTION_POKEDEX]         = {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
+    [MENU_ACTION_POKEMON]         = {gText_MenuPokemon, {.u8_void = StartMenuPokemonCallback}},
+    [MENU_ACTION_BAG]             = {gText_MenuBag,     {.u8_void = StartMenuBagCallback}},
+    [MENU_ACTION_POKENAV]         = {gText_MenuPokenav, {.u8_void = StartMenuPokeNavCallback}},
+    [MENU_ACTION_PLAYER]          = {gText_MenuPlayer,  {.u8_void = StartMenuPlayerNameCallback}},
+    [MENU_ACTION_SAVE]            = {gText_MenuSave,    {.u8_void = StartMenuSaveCallback}},
+    [MENU_ACTION_OPTION]          = {gText_MenuOption,  {.u8_void = StartMenuOptionCallback}},
+    [MENU_ACTION_EXIT]            = {gText_MenuExit,    {.u8_void = StartMenuExitCallback}},
+    [MENU_ACTION_RETIRE_SAFARI]   = {gText_MenuRetire,  {.u8_void = StartMenuSafariZoneRetireCallback}},
+    [MENU_ACTION_PLAYER_LINK]     = {gText_MenuPlayer,  {.u8_void = StartMenuLinkModePlayerNameCallback}},
+    [MENU_ACTION_REST_FRONTIER]   = {gText_MenuRest,    {.u8_void = StartMenuSaveCallback}},
+    [MENU_ACTION_RETIRE_FRONTIER] = {gText_MenuRetire,  {.u8_void = StartMenuBattlePyramidRetireCallback}},
+    [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}}
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -535,7 +535,7 @@ void ShowReturnToFieldStartMenu(void)
 
 void Task_ShowStartMenu(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
 
     switch(task->data[0])
     {
@@ -562,7 +562,7 @@ void ShowStartMenu(void)
         StopPlayerAvatar();
     }
     CreateStartMenuTask(Task_ShowStartMenu);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static bool8 HandleStartMenuInput(void)
@@ -763,7 +763,7 @@ void ShowBattlePyramidStartMenu(void)
     ClearDialogWindowAndFrameToTransparent(0, FALSE);
     ScriptUnfreezeObjectEvents();
     CreateStartMenuTask(Task_ShowStartMenu);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static bool8 StartMenuBattlePyramidBagCallback(void)
@@ -804,7 +804,7 @@ static bool8 SaveCallback(void)
     case SAVE_ERROR:    // Close start menu
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         ScriptUnfreezeObjectEvents();
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         SoftResetInBattlePyramid();
         return TRUE;
     }
@@ -841,8 +841,8 @@ static bool8 BattlePyramidRetireCallback(void)
     case SAVE_CANCELED: // Yes (Retire from battle pyramid)
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         ScriptUnfreezeObjectEvents();
-        ScriptContext2_Disable();
-        ScriptContext1_SetupScript(BattlePyramid_Retire);
+        UnlockPlayerFieldControls();
+        ScriptContext_SetupScript(BattlePyramid_Retire);
         return TRUE;
     }
 
@@ -901,7 +901,7 @@ static void SaveGameTask(u8 taskId)
     }
 
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 static void HideSaveMessageWindow(void)
@@ -996,7 +996,7 @@ static u8 SaveConfirmInputCallback(void)
             sSaveDialogCallback = SaveFileExistsCallback;
             return SAVE_IN_PROGRESS;
         }
-    case -1: // B Button
+    case MENU_B_PRESSED:
     case 1: // No
         HideSaveInfoWindow();
         HideSaveMessageWindow();
@@ -1042,7 +1042,7 @@ static u8 SaveOverwriteInputCallback(void)
     case 0: // Yes
         sSaveDialogCallback = SaveSavingMessageCallback;
         return SAVE_IN_PROGRESS;
-    case -1: // B Button
+    case MENU_B_PRESSED:
     case 1: // No
         HideSaveInfoWindow();
         HideSaveMessageWindow();
@@ -1161,7 +1161,7 @@ static u8 BattlePyramidRetireInputCallback(void)
     {
     case 0: // Yes
         return SAVE_CANCELED;
-    case -1: // B Button
+    case MENU_B_PRESSED:
     case 1: // No
         HideSaveMessageWindow();
         return SAVE_SUCCESS;
@@ -1196,8 +1196,8 @@ static bool32 InitSaveWindowAfterLinkBattle(u8 *state)
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sBgTemplates_LinkBattleSave, ARRAY_COUNT(sBgTemplates_LinkBattleSave));
         InitWindows(sWindowTemplates_LinkBattleSave);
-        LoadUserWindowBorderGfx_(0, 8, 224);
-        Menu_LoadStdPalAt(240);
+        LoadUserWindowBorderGfx_(0, 8, BG_PLTT_ID(14));
+        Menu_LoadStdPalAt(BG_PLTT_ID(15));
         break;
     case 3:
         ShowBg(0);
@@ -1264,7 +1264,7 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
             }
             else
             {
-                gSoftResetDisabled = 1;
+                gSoftResetDisabled = TRUE;
                 *state = 1;
             }
             break;
@@ -1278,7 +1278,7 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
             {
                 ClearContinueGameWarpStatus2();
                 *state = 3;
-                gSoftResetDisabled = 0;
+                gSoftResetDisabled = FALSE;
             }
             break;
         case 3:
@@ -1378,7 +1378,7 @@ static void Task_WaitForBattleTowerLinkSave(u8 taskId)
     if (!FuncIsActiveTask(Task_LinkFullSave))
     {
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
 }
 
@@ -1398,7 +1398,7 @@ static void HideStartMenuWindow(void)
     ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
     ScriptUnfreezeObjectEvents();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 }
 
 void HideStartMenu(void)

@@ -642,8 +642,8 @@ static void AnimTask_SpiteTargetShadow_Step1(u8 taskId)
         }
         break;
     case 1:
-        task->data[14] = (task->data[14] + 16) * 16;
-        CpuCopy32(&gPlttBufferUnfaded[task->data[4]], &gPlttBufferFaded[task->data[14]], 32);
+        task->data[14] = OBJ_PLTT_ID2(task->data[14]);
+        CpuCopy32(&gPlttBufferUnfaded[task->data[4]], &gPlttBufferFaded[task->data[14]], PLTT_SIZE_4BPP);
         BlendPalette(task->data[4], 16, 10, RGB(13, 0, 15));
         task->data[15]++;
         break;
@@ -814,7 +814,7 @@ void AnimTask_DestinyBondWhiteShadow(u8 taskId)
         for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
         {
             if (battler != gBattleAnimAttacker
-             && battler != (gBattleAnimAttacker ^ 2)
+             && battler != BATTLE_PARTNER(gBattleAnimAttacker)
              && IsBattlerSpriteVisible(battler))
             {
                 spriteId = CreateSprite(&gDestinyBondWhiteShadowSpriteTemplate, baseX, baseY, 55);
@@ -1034,7 +1034,7 @@ static void AnimCurseNail(struct Sprite *sprite)
     s16 xDelta;
     s16 xDelta2;
 
-    InitSpritePosToAnimAttacker(sprite, 1);
+    InitSpritePosToAnimAttacker(sprite, TRUE);
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
         xDelta = 24;

@@ -160,7 +160,7 @@ static const struct ListMenuTemplate sListMenuTemplate =
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NARROW,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 enum {
@@ -309,7 +309,7 @@ static const struct OamData sOamData_PyramidBag =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -393,7 +393,7 @@ static void OpenBattlePyramidBagInBattle(void)
 // make room.
 void ChooseItemsToTossFromPyramidBag(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FadeScreen(FADE_TO_BLACK, 0);
     CreateTask(Task_ChooseItemsToTossFromPyramidBag, 10);
 }
@@ -578,7 +578,7 @@ static bool8 LoadPyramidBagGfx(void)
         }
         break;
     case 2:
-        LoadCompressedPalette(gBattlePyramidBagInterface_Pal, 0, 32);
+        LoadCompressedPalette(gBattlePyramidBagInterface_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         gPyramidBagMenu->state++;
         break;
     case 3:
@@ -645,7 +645,7 @@ static void BagCursorMoved(s32 itemIndex, bool8 onInit, struct ListMenu *list)
         if (itemIndex != LIST_CANCEL)
             ShowItemIcon(gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode][itemIndex], gPyramidBagMenu->isAltIcon);
         else
-            ShowItemIcon(0xFFFF, gPyramidBagMenu->isAltIcon); // Show exit arrow if on Cancel
+            ShowItemIcon(ITEM_LIST_END, gPyramidBagMenu->isAltIcon); // Show exit arrow if on Cancel
         gPyramidBagMenu->isAltIcon ^= 1;
         PrintItemDescription(itemIndex);
     }
@@ -1195,7 +1195,7 @@ static void Task_ChooseHowManyToToss(u8 taskId)
     {
         // Toss
         PlaySE(SE_SELECT);
-        ClearStdWindowAndFrameToTransparent(WIN_TOSS_NUM, 0);
+        ClearStdWindowAndFrameToTransparent(WIN_TOSS_NUM, FALSE);
         ClearWindowTilemap(WIN_TOSS_NUM);
         ScheduleBgCopyTilemapToVram(1);
         AskConfirmToss(taskId);
@@ -1204,7 +1204,7 @@ static void Task_ChooseHowManyToToss(u8 taskId)
     {
         // Cancel tossing
         PlaySE(SE_SELECT);
-        ClearStdWindowAndFrameToTransparent(WIN_TOSS_NUM, 0);
+        ClearStdWindowAndFrameToTransparent(WIN_TOSS_NUM, FALSE);
         ClearWindowTilemap(WIN_TOSS_NUM);
         ScheduleBgCopyTilemapToVram(1);
         DontTossItem(taskId);
@@ -1404,20 +1404,20 @@ void TryStoreHeldItemsInPyramidBag(void)
 {
     u8 i;
     struct Pokemon *party = gPlayerParty;
-    u16 *newItems = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
-    u8 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
+    u16 *newItems = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
+    u8 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
     u16 heldItem;
 
-    memcpy(newItems, gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode], PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
-    memcpy(newQuantities, gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode], PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
+    memcpy(newItems, gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode], PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
+    memcpy(newQuantities, gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode], PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         heldItem = GetMonData(&party[i], MON_DATA_HELD_ITEM);
         if (heldItem != ITEM_NONE && !AddBagItem(heldItem, 1))
         {
             // Cant store party held items in pyramid bag because bag is full
-            memcpy(gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode], newItems, PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
-            memcpy(gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode], newQuantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
+            memcpy(gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode], newItems, PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
+            memcpy(gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode], newQuantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
             Free(newItems);
             Free(newQuantities);
             gSpecialVar_Result = 1;
@@ -1439,9 +1439,9 @@ static void InitPyramidBagWindows(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 0x1, 0xE0);
-    LoadMessageBoxGfx(0, 0xA, 0xD0);
-    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
+    LoadUserWindowBorderGfx(0, 0x1, BG_PLTT_ID(14));
+    LoadMessageBoxGfx(0, 0xA, BG_PLTT_ID(13));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
 
     for (i = 0; i < ARRAY_COUNT(sWindowTemplates); i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
@@ -1464,7 +1464,7 @@ static void PyramidBagPrint_Quantity(u8 windowId, const u8 *src, u8 x, u8 y, u8 
 
 static void DrawTossNumberWindow(u8 windowId)
 {
-    DrawStdFrameWithCustomTileAndPalette(windowId, 0, 1, 0xE);
+    DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 1, 0xE);
     ScheduleBgCopyTilemapToVram(1);
 }
 
@@ -1537,10 +1537,10 @@ static void FreeItemIconSprite(u8 spriteArrId)
 static void LoadPyramidBagPalette(void)
 {
     struct SpritePalette spritePalette;
-    u16 *palPtr = Alloc(0x40);
+    u16 *palPtr = Alloc(2 * PLTT_SIZE_4BPP);
 
     LZDecompressWram(gBattlePyramidBag_Pal, palPtr);
-    spritePalette.data = palPtr + (gSaveBlock2Ptr->frontier.lvlMode * 16);
+    spritePalette.data = palPtr + PLTT_ID(gSaveBlock2Ptr->frontier.lvlMode);
     spritePalette.tag = TAG_PYRAMID_BAG;
     LoadSpritePalette(&spritePalette);
     Free(palPtr);

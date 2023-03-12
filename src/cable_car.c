@@ -202,7 +202,7 @@ static const struct OamData sOam_Cable =
     .paletteNum = 0,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_CableCar[] =
+static const struct SpriteTemplate sSpriteTemplates_CableCar[] =
 {
     {
         .tileTag = TAG_CABLE_CAR,
@@ -224,7 +224,8 @@ static const struct SpriteTemplate sSpriteTemplate_CableCar[] =
     },
 };
 
-static const struct SpriteTemplate sSpriteTemplate_Cable = {
+static const struct SpriteTemplate sSpriteTemplate_Cable =
+{
     .tileTag = TAG_CABLE,
     .paletteTag = TAG_CABLE_CAR,
     .oam = &sOam_Cable,
@@ -245,7 +246,7 @@ static void Task_LoadCableCar(u8 taskId)
 
 void CableCar(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(Task_LoadCableCar, 1);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB(0, 0, 0));
 }
@@ -306,7 +307,7 @@ static void CB2_LoadCableCar(void)
     case 3:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            LoadPalette(gCableCarBg_Pal, 0, 0x80);
+            LoadPalette(gCableCarBg_Pal, BG_PLTT_ID(0), 4 * PLTT_SIZE_4BPP);
             gMain.state++;
         }
         break;
@@ -836,12 +837,12 @@ static void CreateCableCarSprites(void)
                 gSprites[spriteId].sYPos = 73;
             }
             // Create car sprite
-            spriteId = CreateSprite(&sSpriteTemplate_CableCar[0], 176, 43, 0x67);
+            spriteId = CreateSprite(&sSpriteTemplates_CableCar[0], 176, 43, 0x67);
             gSprites[spriteId].x2 = gSprites[spriteId].y2 = 32;
             gSprites[spriteId].sXPos = 176;
             gSprites[spriteId].sYPos = 43;
             // Create door sprite
-            spriteId = CreateSprite(&sSpriteTemplate_CableCar[1], 200, 99, 0x65);
+            spriteId = CreateSprite(&sSpriteTemplates_CableCar[1], 200, 99, 0x65);
             gSprites[spriteId].x2 = 8;
             gSprites[spriteId].y2 = 4;
             gSprites[spriteId].sXPos = 200;
@@ -864,12 +865,12 @@ static void CreateCableCarSprites(void)
                 gSprites[spriteId].sYPos = 39;
             }
             // Create car sprite
-            spriteId = CreateSprite(&sSpriteTemplate_CableCar[0], 104, 9, 0x67);
+            spriteId = CreateSprite(&sSpriteTemplates_CableCar[0], 104, 9, 0x67);
             gSprites[spriteId].x2 = gSprites[spriteId].y2 = 32;
             gSprites[spriteId].sXPos = 104;
             gSprites[spriteId].sYPos = 9;
             // Create door sprite
-            spriteId = CreateSprite(&sSpriteTemplate_CableCar[1], 128, 65, 0x65);
+            spriteId = CreateSprite(&sSpriteTemplates_CableCar[1], 128, 65, 0x65);
             gSprites[spriteId].x2 = 8;
             gSprites[spriteId].y2 = 4;
             gSprites[spriteId].sXPos = 128;

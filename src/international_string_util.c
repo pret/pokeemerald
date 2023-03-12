@@ -48,7 +48,7 @@ int GetMaxWidthInMenuTable(const struct MenuAction *actions, int numActions)
     return ConvertPixelWidthToTileWidth(maxWidth);
 }
 
-int GetMaxWidthInSubsetOfMenuTable(const struct MenuAction *actions, const u8* actionIds, int numActions)
+int GetMaxWidthInSubsetOfMenuTable(const struct MenuAction *actions, const u8 *actionIds, int numActions)
 {
     int i, maxWidth;
 
@@ -133,7 +133,7 @@ void PadNameString(u8 *dest, u8 padChar)
         while (length < PLAYER_NAME_LENGTH - 1)
         {
             dest[length] = EXT_CTRL_CODE_BEGIN;
-            dest[length + 1] = EXT_CTRL_CODE_RESET_SIZE;
+            dest[length + 1] = EXT_CTRL_CODE_RESET_FONT;
             length += 2;
         }
     }
@@ -206,12 +206,13 @@ void TVShowConvertInternationalString(u8 *dest, const u8 *src, int language)
     ConvertInternationalString(dest, language);
 }
 
+// It's impossible to distinguish between Latin languages just from a string alone, so the function defaults to LANGUAGE_ENGLISH. This is the case in all of the versions of the game.
 int GetNicknameLanguage(u8 *str)
 {
     if (str[0] == EXT_CTRL_CODE_BEGIN && str[1] == EXT_CTRL_CODE_JPN)
         return LANGUAGE_JAPANESE;
     else
-        return GAME_LANGUAGE;
+        return LANGUAGE_ENGLISH;
 }
 
 // Used by Pokénav's Match Call to erase the previous trainer's flavor text when switching between their info pages.

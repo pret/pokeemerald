@@ -32,6 +32,7 @@ static void UpdateBobbingEffect(struct ObjectEvent *, struct Sprite *, struct Sp
 static void SpriteCB_UnderwaterSurfBlob(struct Sprite *);
 static u32 ShowDisguiseFieldEffect(u8, u8);
 static void LoadFieldEffectPalette_(u8 fieldEffect, bool8 updateGammaType);
+static void LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, u8 paletteIndex);
 
 void LoadSpecialReflectionPalette(struct Sprite *sprite);
 
@@ -107,7 +108,7 @@ void LoadSpecialReflectionPalette(struct Sprite *sprite)
 	u16 color;
 	u16* pal;
 	struct SpritePalette reflectionPalette;
-	
+
 	CpuCopy16(&gPlttBufferUnfaded[0x100 + sprite->oam.paletteNum * 16], gReflectionPaletteBuffer, 32);
 	pal = gReflectionPaletteBuffer;
 	for (i = 0; i < 16; ++i)
@@ -127,6 +128,20 @@ void LoadSpecialReflectionPalette(struct Sprite *sprite)
 	sprite->oam.paletteNum = IndexOfSpritePaletteTag(reflectionPalette.tag);
 	UpdatePaletteGammaType(sprite->oam.paletteNum, GAMMA_ALT);
 	UpdateSpritePaletteWithWeather(sprite->oam.paletteNum);
+}
+
+// When walking on a bridge high above water (Route 120), the reflection is a solid dark blue color.
+// This is so the sprite blends in with the dark water metatile underneath the bridge.
+static void LoadObjectHighBridgeReflectionPalette(struct ObjectEvent *objectEvent, u8 paletteNum)
+{
+    const struct ObjectEventGraphicsInfo *graphicsInfo;
+
+    graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
+    if (graphicsInfo->reflectionPaletteTag != OBJ_EVENT_PAL_TAG_NONE)
+    {
+        PatchObjectPalette(graphicsInfo->reflectionPaletteTag, paletteNum);
+        UpdateSpritePaletteWithWeather(paletteNum);
+    }
 }
 
 static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
@@ -1583,7 +1598,7 @@ void UpdateRayquazaSpotlightEffect(struct Sprite *sprite)
                 {
                     for (j = 12; j < 18; j++)
                     {
-                        ((u16*)(BG_SCREEN_ADDR(31)))[i * 32 + j] = 0xBFF4 + i * 6 + j + 1;
+                        ((u16 *)(BG_SCREEN_ADDR(31)))[i * 32 + j] = 0xBFF4 + i * 6 + j + 1;
                     }
                 }
             }
@@ -1669,7 +1684,7 @@ void UpdateRayquazaSpotlightEffect(struct Sprite *sprite)
             {
                 for (j = 12; j < 18; j++)
                 {
-                    ((u16*)(BG_SCREEN_ADDR(31)))[i * 32 + j] = 0;
+                    ((u16 *)(BG_SCREEN_ADDR(31)))[i * 32 + j] = 0;
                 }
             }
             SetGpuReg(REG_OFFSET_BG0VOFS, 0);

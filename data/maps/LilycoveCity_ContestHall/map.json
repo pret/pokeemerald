@@ -437,28 +437,28 @@
       "y": 32,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_CONTEST_LOBBY",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 30,
       "y": 32,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_CONTEST_LOBBY",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 20,
       "y": 32,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_CONTEST_LOBBY",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 31,
       "y": 32,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_CONTEST_LOBBY",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [],

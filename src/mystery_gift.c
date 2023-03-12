@@ -27,7 +27,7 @@ static void IncrementCardStatForNewTrainer(u32, u32, u32 *, int);
 void ClearMysteryGift(void)
 {
     CpuFill32(0, &gSaveBlock1Ptr->mysteryGift, sizeof(gSaveBlock1Ptr->mysteryGift));
-    ClearSavedWonderNewsMetadata(); // Clear is redundant, InitSavedWonderNews would be sufficient
+    ClearSavedWonderNewsMetadata(); // Clear is redundant, WonderNews_Reset would be sufficient
     InitQuestionnaireWords();
 }
 
@@ -109,7 +109,7 @@ static void ClearSavedWonderNews(void)
 static void ClearSavedWonderNewsMetadata(void)
 {
     CpuFill32(0, GetSavedWonderNewsMetadata(), sizeof(gSaveBlock1Ptr->mysteryGift.newsMetadata));
-    InitSavedWonderNews();
+    WonderNews_Reset();
 }
 
 bool32 IsWonderNewsSameAsSaved(const u8 *news)
@@ -171,8 +171,8 @@ static bool32 ValidateWonderCard(const struct WonderCard *card)
         return FALSE;
     if (card->type >= CARD_TYPE_COUNT)
         return FALSE;
-    if (!(card->sendType == SEND_TYPE_DISALLOWED 
-       || card->sendType == SEND_TYPE_ALLOWED 
+    if (!(card->sendType == SEND_TYPE_DISALLOWED
+       || card->sendType == SEND_TYPE_ALLOWED
        || card->sendType == SEND_TYPE_ALLOWED_ALWAYS))
         return FALSE;
     if (card->bgType >= NUM_WONDER_BGS)
@@ -429,7 +429,7 @@ u32 MysteryGift_CompareCardFlags(const u16 *flagId, const struct MysteryGiftLink
 u32 MysteryGift_CheckStamps(const u16 *stamp, const struct MysteryGiftLinkGameData *data, const void *unused)
 {
     int stampsMissing = data->maxStamps - GetNumStampsInMetadata(&data->cardMetadata, data->maxStamps);
-    
+
     // Has full stamp card?
     if (stampsMissing == 0)
         return 1;
@@ -598,7 +598,7 @@ void MysteryGift_TryIncrementStat(u32 stat, u32 trainerId)
         switch (stat)
         {
         case CARD_STAT_NUM_TRADES:
-            IncrementCardStatForNewTrainer(CARD_STAT_NUM_TRADES, 
+            IncrementCardStatForNewTrainer(CARD_STAT_NUM_TRADES,
                                             trainerId,
                                             gSaveBlock1Ptr->mysteryGift.trainerIds[1],
                                             ARRAY_COUNT(gSaveBlock1Ptr->mysteryGift.trainerIds[1]));

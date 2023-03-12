@@ -28,6 +28,13 @@
 #include "constants/rgb.h"
 #include "constants/trade.h"
 
+// Window IDs for the link error screens
+enum {
+    WIN_LINK_ERROR_TOP,
+    WIN_LINK_ERROR_MID,
+    WIN_LINK_ERROR_BOTTOM,
+};
+
 struct BlockTransfer
 {
     u16 pos;
@@ -193,28 +200,31 @@ static const struct BgTemplate sLinkErrorBgTemplates[] = {
         .priority = 1
     }
 };
+
 static const struct WindowTemplate sLinkErrorWindowTemplates[] = {
-    {
+    [WIN_LINK_ERROR_TOP] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
-        .width = 30,
+        .width = DISPLAY_TILE_WIDTH,
         .height = 5,
         .paletteNum = 15,
         .baseBlock = 0x002
-    }, {
+    },
+    [WIN_LINK_ERROR_MID] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 6,
-        .width = 30,
+        .width = DISPLAY_TILE_WIDTH,
         .height = 7,
         .paletteNum = 15,
         .baseBlock = 0x098
-    }, {
+    },
+    [WIN_LINK_ERROR_BOTTOM] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 13,
-        .width = 30,
+        .width = DISPLAY_TILE_WIDTH,
         .height = 7,
         .paletteNum = 15,
         .baseBlock = 0x16A
@@ -247,7 +257,7 @@ void Task_DestroySelf(u8 taskId)
 
 static void InitLinkTestBG(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charBaseBlock, u16 baseChar)
 {
-    LoadPalette(sLinkTestDigitsPal, paletteNum * 16, 0x20);
+    LoadPalette(sLinkTestDigitsPal, BG_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
     DmaCopy16(3, sLinkTestDigitsGfx, (u16 *)BG_CHAR_ADDR(charBaseBlock) + (16 * baseChar), sizeof sLinkTestDigitsGfx);
     gLinkTestBGInfo.screenBaseBlock = screenBaseBlock;
     gLinkTestBGInfo.paletteNum = paletteNum;
@@ -271,7 +281,7 @@ static void InitLinkTestBG(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charB
 // Unused
 static void LoadLinkTestBgGfx(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charBaseBlock)
 {
-    LoadPalette(sLinkTestDigitsPal, paletteNum * 16, 0x20);
+    LoadPalette(sLinkTestDigitsPal, BG_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
     DmaCopy16(3, sLinkTestDigitsGfx, (u16 *)BG_CHAR_ADDR(charBaseBlock), sizeof sLinkTestDigitsGfx);
     gLinkTestBGInfo.screenBaseBlock = screenBaseBlock;
     gLinkTestBGInfo.paletteNum = paletteNum;
@@ -1595,7 +1605,7 @@ void CB2_LinkError(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetPaletteFadeControl();
-    FillPalette(0, 0, 2);
+    SetBackdropFromColor(RGB_BLACK);
     ResetTasks();
     ScanlineEffect_Stop();
     if (gWirelessCommType)
@@ -1608,7 +1618,7 @@ void CB2_LinkError(void)
     SetVBlankCallback(VBlankCB_LinkError);
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sLinkErrorBgTemplates, ARRAY_COUNT(sLinkErrorBgTemplates));
-    sLinkErrorBgTilemapBuffer = tilemapBuffer = malloc(BG_SCREEN_SIZE);
+    sLinkErrorBgTilemapBuffer = tilemapBuffer = Alloc(BG_SCREEN_SIZE);
     SetBgTilemapBuffer(1, tilemapBuffer);
     if (InitWindows(sLinkErrorWindowTemplates))
     {
@@ -1621,7 +1631,7 @@ void CB2_LinkError(void)
         SetGpuReg(REG_OFFSET_BG1HOFS, 0);
         SetGpuReg(REG_OFFSET_BG1VOFS, 0);
         ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJWIN_ON);
-        LoadPalette(gStandardMenuPalette, 0xf0, 0x20);
+        LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         gSoftResetDisabled = FALSE;
         CreateTask(Task_DestroySelf, 0);
         StopMapMusic();
@@ -1641,26 +1651,26 @@ static void ErrorMsg_MoveCloserToPartner(void)
     CopyToBgTilemapBuffer(1, sWirelessLinkDisplayTilemap, 0, 0);
     CopyBgTilemapBufferToVram(1);
     LoadPalette(sWirelessLinkDisplayPal, 0, 0x20);
-    FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    FillWindowPixelBuffer(2, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(0, FONT_SHORT_COPY_1, 2, 6, sTextColors, 0, gText_CommErrorEllipsis);
-    AddTextPrinterParameterized3(2, FONT_SHORT_COPY_1, 2, 1, sTextColors, 0, gText_MoveCloserToLinkPartner);
-    PutWindowTilemap(0);
-    PutWindowTilemap(2);
-    CopyWindowToVram(0, COPYWIN_NONE); // Does nothing
-    CopyWindowToVram(2, COPYWIN_FULL);
+    FillWindowPixelBuffer(WIN_LINK_ERROR_TOP, PIXEL_FILL(0));
+    FillWindowPixelBuffer(WIN_LINK_ERROR_BOTTOM, PIXEL_FILL(0));
+    AddTextPrinterParameterized3(WIN_LINK_ERROR_TOP, FONT_SHORT_COPY_1, 2, 6, sTextColors, 0, gText_CommErrorEllipsis);
+    AddTextPrinterParameterized3(WIN_LINK_ERROR_BOTTOM, FONT_SHORT_COPY_1, 2, 1, sTextColors, 0, gText_MoveCloserToLinkPartner);
+    PutWindowTilemap(WIN_LINK_ERROR_TOP);
+    PutWindowTilemap(WIN_LINK_ERROR_BOTTOM);
+    CopyWindowToVram(WIN_LINK_ERROR_TOP, COPYWIN_NONE); // Does nothing
+    CopyWindowToVram(WIN_LINK_ERROR_BOTTOM, COPYWIN_FULL);
 }
 
 static void ErrorMsg_CheckConnections(void)
 {
     LoadBgTiles(0, sCommErrorBg_Gfx, 0x20, 0);
-    FillWindowPixelBuffer(1, PIXEL_FILL(0));
-    FillWindowPixelBuffer(2, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(1, FONT_SHORT_COPY_1, 2, 0, sTextColors, 0, gText_CommErrorCheckConnections);
-    PutWindowTilemap(1);
-    PutWindowTilemap(2);
-    CopyWindowToVram(1, COPYWIN_NONE); // Does nothing
-    CopyWindowToVram(2, COPYWIN_FULL);
+    FillWindowPixelBuffer(WIN_LINK_ERROR_MID, PIXEL_FILL(0));
+    FillWindowPixelBuffer(WIN_LINK_ERROR_BOTTOM, PIXEL_FILL(0));
+    AddTextPrinterParameterized3(WIN_LINK_ERROR_MID, FONT_SHORT_COPY_1, 2, 0, sTextColors, 0, gText_CommErrorCheckConnections);
+    PutWindowTilemap(WIN_LINK_ERROR_MID);
+    PutWindowTilemap(WIN_LINK_ERROR_BOTTOM);
+    CopyWindowToVram(WIN_LINK_ERROR_MID, COPYWIN_NONE); // Does nothing
+    CopyWindowToVram(WIN_LINK_ERROR_BOTTOM, COPYWIN_FULL);
 }
 
 static void CB2_PrintErrorMessage(void)
@@ -1691,9 +1701,9 @@ static void CB2_PrintErrorMessage(void)
             break;
         case 130:
             if (gWirelessCommType == 2)
-                AddTextPrinterParameterized3(0, FONT_SHORT_COPY_1, 2, 20, sTextColors, 0, gText_ABtnTitleScreen);
+                AddTextPrinterParameterized3(WIN_LINK_ERROR_TOP, FONT_SHORT_COPY_1, 2, 20, sTextColors, 0, gText_ABtnTitleScreen);
             else if (gWirelessCommType == 1)
-                AddTextPrinterParameterized3(0, FONT_SHORT_COPY_1, 2, 20, sTextColors, 0, gText_ABtnRegistrationCounter);
+                AddTextPrinterParameterized3(WIN_LINK_ERROR_TOP, FONT_SHORT_COPY_1, 2, 20, sTextColors, 0, gText_ABtnRegistrationCounter);
             break;
     }
     if (gMain.state == 160)

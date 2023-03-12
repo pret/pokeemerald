@@ -96,7 +96,7 @@ static void ApplyAffineAnimFrame(u8 matrixNum, struct AffineAnimFrameCmd *frameC
 static u8 IndexOfSpriteTileTag(u16 tag);
 static void AllocSpriteTileRange(u16 tag, u16 start, u16 count);
 static void DoLoadSpritePalette(const u16 *src, u16 paletteOffset);
-static void UpdateSpriteMatrixAnchorPos(struct Sprite*, s32, s32);
+static void UpdateSpriteMatrixAnchorPos(struct Sprite *, s32, s32);
 
 typedef void (*AnimFunc)(struct Sprite *);
 typedef void (*AnimCmdFunc)(struct Sprite *);
@@ -105,9 +105,9 @@ typedef void (*AffineAnimCmdFunc)(u8 matrixNum, struct Sprite *);
 #define DUMMY_OAM_DATA                      \
 {                                           \
     .y = DISPLAY_HEIGHT,                    \
-    .affineMode = 0,                        \
+    .affineMode = ST_OAM_AFFINE_OFF,        \
     .objMode = 0,                           \
-    .mosaic = 0,                            \
+    .mosaic = FALSE,                        \
     .bpp = 0,                               \
     .shape = SPRITE_SHAPE(8x8),             \
     .x = DISPLAY_WIDTH + 64,                \
@@ -1272,7 +1272,7 @@ u8 GetSpriteMatrixNum(struct Sprite *sprite)
 
 // Used to shift a sprite's position as it scales.
 // Only used by the minigame countdown, so that for instance the numbers don't slide up as they squish down before jumping.
-void SetSpriteMatrixAnchor(struct Sprite* sprite, s16 x, s16 y)
+void SetSpriteMatrixAnchor(struct Sprite *sprite, s16 x, s16 y)
 {
     sprite->sAnchorX = x;
     sprite->sAnchorY = y;
@@ -1686,7 +1686,7 @@ void LoadSpritePalettes(const struct SpritePalette *palettes)
 
 void DoLoadSpritePalette(const u16 *src, u16 paletteOffset)
 {
-    LoadPalette(src, paletteOffset + 0x100, 32);
+    LoadPalette(src, OBJ_PLTT_OFFSET + paletteOffset, PLTT_SIZE_4BPP);
 }
 
 u8 AllocSpritePalette(u16 tag)
