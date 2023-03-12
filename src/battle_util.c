@@ -10071,11 +10071,17 @@ bool32 CanMegaEvolve(u8 battlerId)
 
 bool32 IsBattlerMegaEvolved(u8 battlerId)
 {
+    // While Transform does copy stats and visuals, it shouldn't be counted as true Mega Evolution.
+    if (gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)
+        return FALSE;
     return (gSpeciesInfo[gBattleMons[battlerId].species].flags & SPECIES_FLAG_MEGA_EVOLUTION);
 }
 
 bool32 IsBattlerPrimalReverted(u8 battlerId)
 {
+    // While Transform does copy stats and visuals, it shouldn't be counted as true Primal Revesion.
+    if (gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)
+        return FALSE;
     return (gSpeciesInfo[gBattleMons[battlerId].species].flags & SPECIES_FLAG_PRIMAL_REVERSION);
 }
 
@@ -10145,6 +10151,18 @@ u16 GetBattleFormChangeTargetSpecies(u8 battlerId, u16 method)
     return targetSpecies;
 }
 
+bool32 CanBattlerFormChange(u8 battlerId, u16 method)
+{
+    // Can't change form if transformed.
+    if (gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)
+        return FALSE;
+    // Mega Evolved Pokémon should always revert to normal upon fainting or ending the battle.
+    if (IsBattlerMegaEvolved(battlerId)
+        && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
+        return TRUE;
+    return DoesSpeciesHaveFormChangeMethod(gBattleMons[battlerId].species, method);
+}
+
 bool32 TryBattleFormChange(u8 battlerId, u16 method)
 {
     u8 monId = gBattlerPartyIndexes[battlerId];
@@ -10152,14 +10170,12 @@ bool32 TryBattleFormChange(u8 battlerId, u16 method)
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
     u16 targetSpecies;
 
-    // Can't change form if transformed.
-    if (gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)
-        return FALSE;
-
-    if (!DoesSpeciesHaveFormChangeMethod(gBattleMons[battlerId].species, method))
+    if (!CanBattlerFormChange(battlerId, method))
         return FALSE;
 
     targetSpecies = GetBattleFormChangeTargetSpecies(battlerId, method);
+    if (targetSpecies == SPECIES_NONE)
+        targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
     if (targetSpecies != SPECIES_NONE)
     {
         // Saves the original species on the first form change for the player.
@@ -10172,27 +10188,26 @@ bool32 TryBattleFormChange(u8 battlerId, u16 method)
         RecalcBattlerStats(battlerId, &party[monId]);
         return TRUE;
     }
-
-    targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
-    if (targetSpecies != SPECIES_NONE)
+    else if (gBattleStruct->changedSpecies[monId] != SPECIES_NONE)
     {
-        // Saves the original species on the first form change for the player.
-        if (side == B_SIDE_PLAYER && gBattleStruct->changedSpecies[monId] == SPECIES_NONE)
-            gBattleStruct->changedSpecies[monId] = targetSpecies;
+        bool8 restoreSpecies = FALSE;
 
-        TryToSetBattleFormChangeMoves(&party[monId], method);
-        SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
-        gBattleMons[battlerId].species = targetSpecies;
-        RecalcBattlerStats(battlerId, &party[monId]);
-        return TRUE;
-    }
-    else if ((method == FORM_CHANGE_END_BATTLE || method == FORM_CHANGE_FAINT)
-            && gBattleStruct->changedSpecies[monId] != SPECIES_NONE)
-    {
-        TryToSetBattleFormChangeMoves(&party[monId], method);
-        SetMonData(&party[monId], MON_DATA_SPECIES, &gBattleStruct->changedSpecies[monId]);
-        RecalcBattlerStats(battlerId, &party[monId]);
-        return TRUE;
+        // Mega Evolved Pokémon should always revert to normal upon fainting or ending the battle, so no need to add it to the form change tables.
+        if (IsBattlerMegaEvolved(battlerId) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
+            restoreSpecies = TRUE;
+
+        // Unlike Megas, Primal Reversion isn't canceled on fainting.
+        else if (IsBattlerPrimalReverted(battlerId) && (method == FORM_CHANGE_END_BATTLE))
+            restoreSpecies = TRUE;
+
+        if (restoreSpecies)
+        {
+            // Reverts the original species
+            TryToSetBattleFormChangeMoves(&party[monId], method);
+            SetMonData(&party[monId], MON_DATA_SPECIES, &gBattleStruct->changedSpecies[monId]);
+            RecalcBattlerStats(battlerId, &party[monId]);
+            return TRUE;
+        }
     }
 
     return FALSE;
