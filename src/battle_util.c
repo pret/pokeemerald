@@ -10157,8 +10157,9 @@ bool32 CanBattlerFormChange(u8 battlerId, u16 method)
     if (gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)
         return FALSE;
     // Mega Evolved Pokémon should always revert to normal upon fainting or ending the battle.
-    if (IsBattlerMegaEvolved(battlerId)
-        && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
+    if (IsBattlerMegaEvolved(battlerId) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
+        return TRUE;
+    else if (IsBattlerPrimalReverted(battlerId) && (method == FORM_CHANGE_END_BATTLE))
         return TRUE;
     return DoesSpeciesHaveFormChangeMethod(gBattleMons[battlerId].species, method);
 }
