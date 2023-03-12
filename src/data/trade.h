@@ -55,7 +55,7 @@ static const u8 sText_OnlyPkmnForBattle[] = _("That's your only\nPOKéMON for ba
 static const u8 sText_WaitingForYourFriend[] = _("{COLOR DARK_GRAY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GRAY}Waiting for your friend\nto finish…");
 static const u8 sText_YourFriendWantsToTrade[] = _("Your friend wants\nto trade POKéMON.");
 
-static const struct OamData sTradeOamData_32x16 =
+static const struct OamData sOamData_MenuText =
 {
     .shape = SPRITE_SHAPE(32x16),
     .size = SPRITE_SIZE(32x16),
@@ -167,17 +167,17 @@ static const struct SpriteTemplate sSpriteTemplate_MenuText =
 {
     .tileTag = GFXTAG_MENU_TEXT,
     .paletteTag = PALTAG_MENU_TEXT,
-    .oam = &sTradeOamData_32x16,
+    .oam = &sOamData_MenuText,
     .anims = sAnims_MenuText,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
 };
 
-static const u16 sTradeScreenTextPalette[] = INCBIN_U16("graphics/trade/text.gbapal");
-static const struct SpritePalette sSpritePalette_TradeScreenText =
+static const u16 sMenuText_Pal[] = INCBIN_U16("graphics/trade/text.gbapal");
+static const struct SpritePalette sSpritePalette_MenuText =
 {
-    .data = sTradeScreenTextPalette,
+    .data = sMenuText_Pal,
     .tag = PALTAG_MENU_TEXT
 };
 
@@ -193,7 +193,7 @@ static const struct SpritePalette sSpritePalette_TradeScreenText =
 // 1st array is the current positions
 // 2nd array is directions of input
 // 3rd array is the next positions to go to (unoccupied spaces are skipped over)
-static const u8 sTradeNextSelectedMonTable[(PARTY_SIZE * 2) + 1][4][PARTY_SIZE] =
+static const u8 sCursorMoveDestinations[(PARTY_SIZE * 2) + 1][4][PARTY_SIZE] =
 {
     {
         {4,  2,  12, 12, 0,  0}, // UP
@@ -275,86 +275,67 @@ static const u8 sTradeNextSelectedMonTable[(PARTY_SIZE * 2) + 1][4][PARTY_SIZE] 
     }
 };
 
+#define COL0_X 1
+#define COL1_X 8
+#define COL2_X 16
+#define COL3_X 23
+#define ROW0_Y 5
+#define ROW1_Y 10
+#define ROW2_Y 15
+#define ROW3_Y 18
+
 static const u8 sTradeMonSpriteCoords[(PARTY_SIZE * 2) + 1][2] =
 {
-    // Your party
-    {1,  5 },
-    {8,  5 },
-    {1,  10},
-    {8,  10},
-    {1,  15},
-    {8,  15},
-
-    // Friend's party
-    {16, 5 },
-    {23, 5 },
-    {16, 10},
-    {23, 10},
-    {16, 15},
-    {23, 15},
-
-    {23, 18} // CANCEL
+    // Player's party
+    {COL0_X, ROW0_Y},
+    {COL1_X, ROW0_Y},
+    {COL0_X, ROW1_Y},
+    {COL1_X, ROW1_Y},
+    {COL0_X, ROW2_Y},
+    {COL1_X, ROW2_Y},
+    // Partners's party
+    {COL2_X, ROW0_Y},
+    {COL3_X, ROW0_Y},
+    {COL2_X, ROW1_Y},
+    {COL3_X, ROW1_Y},
+    {COL2_X, ROW2_Y},
+    {COL3_X, ROW2_Y},
+    // Cancel
+    {COL3_X, ROW3_Y}
 };
 
-static const u8 sTradeMonLevelCoords[][2][2] =
-{
-    // Your party
-    {
-        {5, 4},
-        {12, 4},
-    },
-    {
-        {5, 9},
-        {12, 9},
-    },
-    {
-        {5, 14},
+static const u8 sTradeMonLevelCoords[PARTY_SIZE * 2][2] = {
+    [TRADE_PLAYER] =
+        { 5,  4},
+        {12,  4},
+        { 5,  9},
+        {12,  9},
+        { 5, 14},
         {12, 14},
-    },
-    // Friend's party
-    {
-
-        {20, 4},
-        {27, 4},
-    },
-    {
-        {20, 9},
-        {27, 9},
-    },
-    {
+    [TRADE_PARTNER * PARTY_SIZE] =
+        {20,  4},
+        {27,  4},
+        {20,  9},
+        {27,  9},
         {20, 14},
         {27, 14},
-    },
 };
 
-static const u8 sTradeMonBoxCoords[][2][2] =
-{
-    // Your party
-    {
-        {1, 3},
-        {8, 3},
-    },
-    {
-        {1, 8},
-        {8, 8},
-    },
-    {
-        {1, 13},
-        {8, 13},
-    },
-    // Friend's party
-    {
-        {16, 3},
-        {23, 3},
-    },
-    {
-        {16, 8},
-        {23, 8},
-    },
-    {
+static const u8 sTradeMonBoxCoords[PARTY_SIZE * 2][2] = {
+    [TRADE_PLAYER] =
+        { 1,  3},
+        { 8,  3},
+        { 1,  8},
+        { 8,  8},
+        { 1, 13},
+        { 8, 13},
+    [TRADE_PARTNER * PARTY_SIZE] =
+        {16,  3},
+        {23,  3},
+        {16,  8},
+        {23,  8},
         {16, 13},
         {23, 13},
-    },
 };
 
 static const u8 sUnusedCoords[][2] =
@@ -379,14 +360,14 @@ static const u8 sUnusedCoords[][2] =
     {23, 12}
 };
 
-static const u8 *const sTradeActionTexts[] =
+static const u8 *const sActionTexts[] =
 {
-    [TRADE_TEXT_CANCEL]       = sText_Cancel,
-    [TRADE_TEXT_CHOOSE_MON]   = sText_ChooseAPkmn,
-    [TRADE_TEXT_SUMMARY]      = sText_Summary,
-    [TRADE_TEXT_TRADE]        = sText_Trade,
-    [TRADE_TEXT_CANCEL_TRADE] = sText_CancelTrade,
-    [TRADE_TEXT_JP_QUIT]      = sJPText_PressBButtonToQuit
+    [TEXT_CANCEL]       = sText_Cancel,
+    [TEXT_CHOOSE_MON]   = sText_ChooseAPkmn,
+    [TEXT_SUMMARY]      = sText_Summary,
+    [TEXT_TRADE]        = sText_Trade,
+    [TEXT_CANCEL_TRADE] = sText_CancelTrade,
+    [TEXT_JP_QUIT]      = sJPText_PressBButtonToQuit
 };
 
 static const struct MenuAction sSelectTradeMonActions[] =
@@ -395,17 +376,17 @@ static const struct MenuAction sSelectTradeMonActions[] =
     {sText_Trade2,   Task_DrawSelectionTrade}
 };
 
-static const u8 *const sTradeMessages[] =
+static const u8 *const sMessages[] =
 {
-    [TRADE_MSG_STANDBY]                    = sText_CommunicationStandby,
-    [TRADE_MSG_CANCELED]                   = sText_TheTradeHasBeenCanceled,
-    [TRADE_MSG_ONLY_MON1]                  = sText_OnlyPkmnForBattle,
-    [TRADE_MSG_ONLY_MON2]                  = gText_OnlyPkmnForBattle, //identical text to above
-    [TRADE_MSG_WAITING_FOR_FRIEND]         = sText_WaitingForYourFriend,
-    [TRADE_MSG_FRIEND_WANTS_TO_TRADE]      = sText_YourFriendWantsToTrade,
-    [TRADE_MSG_MON_CANT_BE_TRADED]         = gText_PkmnCantBeTradedNow,
-    [TRADE_MSG_EGG_CANT_BE_TRADED]         = gText_EggCantBeTradedNow,
-    [TRADE_MSG_FRIENDS_MON_CANT_BE_TRADED] = gText_OtherTrainersPkmnCantBeTraded
+    [MSG_STANDBY]                    = sText_CommunicationStandby,
+    [MSG_CANCELED]                   = sText_TheTradeHasBeenCanceled,
+    [MSG_ONLY_MON1]                  = sText_OnlyPkmnForBattle,
+    [MSG_ONLY_MON2]                  = gText_OnlyPkmnForBattle, //identical text to above
+    [MSG_WAITING_FOR_FRIEND]         = sText_WaitingForYourFriend,
+    [MSG_FRIEND_WANTS_TO_TRADE]      = sText_YourFriendWantsToTrade,
+    [MSG_MON_CANT_BE_TRADED]         = gText_PkmnCantBeTradedNow,
+    [MSG_EGG_CANT_BE_TRADED]         = gText_EggCantBeTradedNow,
+    [MSG_FRIENDS_MON_CANT_BE_TRADED] = gText_OtherTrainersPkmnCantBeTraded
 };
 
 static const u8 sTradeTextColors[] =
@@ -415,7 +396,7 @@ static const u8 sTradeTextColors[] =
     TEXT_COLOR_DARK_GRAY    //shadow color
 };
 
-static const struct BgTemplate sTradeMenuBgTemplates[] =
+static const struct BgTemplate sBgTemplates[] =
 {
     {
         .bg = 0,
@@ -455,7 +436,7 @@ static const struct BgTemplate sTradeMenuBgTemplates[] =
     },
 };
 
-static const struct WindowTemplate sTradeMenuWindowTemplates[] =
+static const struct WindowTemplate sWindowTemplates[] =
 {
     {
         .bg = 0,
@@ -633,8 +614,8 @@ static const struct WindowTemplate sTradeYesNoWindowTemplate =
     .baseBlock = 582
 };
 
-static const u8 sJPText_Shedinja[] = _("ヌケニン");
-static const u8 sTradeMenuPartyMonBoxDimensions[3][2] =
+static const u8 sText_ShedinjaJP[] = _("ヌケニン");
+static const u8 sSelectedMonLevelGenderCoords[3][2] =
 {
     [TRADE_PLAYER]  = {4,  3},
     [TRADE_PARTNER] = {19, 3}
@@ -643,8 +624,8 @@ static const u8 sTradeMenuPartyMonBoxDimensions[3][2] =
 static const u16 sPokeball_Pal[] = INCBIN_U16("graphics/trade/pokeball.gbapal");
 static const u8 sPokeball_Gfx[] = INCBIN_U8("graphics/trade/pokeball.4bpp");
 static const u8 sPokeballSymbol_Gfx[] = INCBIN_U8("graphics/trade/pokeball_symbol.8bpp"); // unused
-static const u16 sCrossingHighlightCable_Tilemap[] = INCBIN_U16("graphics/trade/crossing_highlight_cable.bin");
-static const u16 sTradeTilemap_PokeBallSymbol[] = INCBIN_U16("graphics/trade/pokeball_symbol_map.bin"); // unused?
+static const u16 sCableCloseup_Map[] = INCBIN_U16("graphics/trade/crossing_highlight_cable.bin");
+static const u16 sPokeballSymbol_Map[] = INCBIN_U16("graphics/trade/pokeball_symbol_map.bin"); // unused?
 static const u16 sUnusedPal1[] = INCBIN_U16("graphics/trade/unused1.gbapal");
 static const u16 sGba_Pal[] = INCBIN_U16("graphics/trade/gba.gbapal");
 static const u16 sUnusedPal2[] = INCBIN_U16("graphics/trade/unused2.gbapal");
@@ -657,11 +638,11 @@ static const u8 sGbaScreen_Gfx[] = INCBIN_U8("graphics/trade/gba_screen.4bpp");
 const u16 gTradePlatform_Tilemap[] = INCBIN_U16("graphics/trade/platform.bin");
 static const u8 sGbaAffine_Gfx[] = INCBIN_U8("graphics/trade/gba_affine.8bpp"); // Only the gfx for when the GBA is zooming in/out
 static const u8 sEmptyGfx[64] = {};
-static const u8 sGbaCable_AffineTilemap[] = INCBIN_U8("graphics/trade/gba_affine_map_cable.bin");
-static const u8 sGbaWireless_AffineTilemap[] = INCBIN_U8("graphics/trade/gba_affine_map_wireless.bin");
-static const u16 sGbaWireless_Tilemap[] = INCBIN_U16("graphics/trade/gba_map_wireless.bin");
-static const u16 sGbaCable_Tilemap[] = INCBIN_U16("graphics/trade/gba_map_cable.bin");
-static const u32 sCrossingHighlightWireless_Tilemap[] = INCBIN_U32("graphics/trade/crossing_highlight_wireless.bin.lz");
+static const u8 sGbaAffineMapCable[] = INCBIN_U8("graphics/trade/gba_affine_map_cable.bin");
+static const u8 sGbaAffineMapWireless[] = INCBIN_U8("graphics/trade/gba_affine_map_wireless.bin");
+static const u16 sGbaMapWireless[] = INCBIN_U16("graphics/trade/gba_map_wireless.bin");
+static const u16 sGbaMapCable[] = INCBIN_U16("graphics/trade/gba_map_cable.bin");
+static const u32 sWirelessCloseup_Map[] = INCBIN_U32("graphics/trade/crossing_highlight_wireless.bin.lz");
 static const u16 sWirelessSignalSend_Pal[] = INCBIN_U16("graphics/trade/wireless_signal_send.gbapal");
 static const u16 sWirelessSignalRecv_Pal[] = INCBIN_U16("graphics/trade/wireless_signal_receive.gbapal");
 static const u16 sWirelessSignalNone_Pal[] = INCBIN_U16("graphics/trade/wireless_signal_none.gbapal");
@@ -749,7 +730,7 @@ static const union AffineAnimCmd *const sAffineAnims_Pokeball[] =
 static const struct SpriteSheet sPokeBallSpriteSheet =
 {
     .data = sPokeball_Gfx,
-    .size = 0x600,
+    .size = sizeof(sPokeball_Gfx),
     .tag = GFXTAG_POKEBALL
 };
 
@@ -805,7 +786,7 @@ static const union AffineAnimCmd *const sAffineAnims_LinkMonGlow[] =
 static const struct SpriteSheet sSpriteSheet_LinkMonGlow =
 {
     .data = sLinkMonGlow_Gfx,
-    .size = 0x200,
+    .size = sizeof(sLinkMonGlow_Gfx),
     .tag = GFXTAG_LINK_MON_GLOW
 };
 
@@ -962,7 +943,7 @@ static const union AnimCmd *const sAnims_GbaScreen_Short[] =
 static const struct SpriteSheet sSpriteSheet_GbaScreen =
 {
     .data = sGbaScreen_Gfx,
-    .size = 0x1000,
+    .size = sizeof(sGbaScreen_Gfx),
     .tag = GFXTAG_GBA_SCREEN
 };
 
@@ -1185,7 +1166,7 @@ static const s8 sTradeBallVerticalVelocityTable[] =
      0,  0,  0,  1,  0,  1,  1,  2,  3
 };
 
-static const u8 sWirelessSignalTiming[][2] =
+static const u8 sWirelessSignalAnimParams[][2] =
 {
     { 0,  1},
     { 1,  1},

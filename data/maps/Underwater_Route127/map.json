@@ -14,19 +14,19 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "emerge",
+      "map": "MAP_ROUTE127",
       "offset": 0,
-      "map": "MAP_ROUTE127"
+      "direction": "emerge"
     },
     {
-      "direction": "left",
+      "map": "MAP_UNDERWATER_ROUTE126",
       "offset": 0,
-      "map": "MAP_UNDERWATER_ROUTE126"
+      "direction": "left"
     },
     {
-      "direction": "down",
+      "map": "MAP_UNDERWATER_ROUTE128",
       "offset": 0,
-      "map": "MAP_UNDERWATER_ROUTE128"
+      "direction": "down"
     }
   ],
   "object_events": [],
@@ -36,14 +36,14 @@
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_UNDERWATER_MARINE_CAVE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 67,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_UNDERWATER_MARINE_CAVE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

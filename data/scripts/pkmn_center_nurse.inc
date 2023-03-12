@@ -44,7 +44,7 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	special HealPlayerParty
 	updatefollowerpokemongraphic
 	return
-    
+
 EventScript_FollowerIntoPokeballDelay::
 	delay 21
 	setvar VAR_UNUSED_0x8014, 0

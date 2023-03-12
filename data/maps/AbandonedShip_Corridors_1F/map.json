@@ -47,84 +47,84 @@
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_DECK",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 8,
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_DECK",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 0,
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_DECK",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 1,
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_DECK",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 11,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_ROOMS_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 14,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_ROOMS_1F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 11,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_ROOMS_1F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 14,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_ROOMS_1F",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 3,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_ROOMS2_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 16,
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_CORRIDORS_B1F",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     },
     {
       "x": 5,
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_CORRIDORS_B1F",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 3,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_ROOMS2_1F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

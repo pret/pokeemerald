@@ -1040,11 +1040,11 @@ static const struct YesNoFuncTable sYesNoTable_KeepPlaying =
 
 static void CB2_Roulette(void)
 {
-	RunTasks();
-	AnimateSprites();
-	BuildOamBuffer();
-	if (sRoulette->flashUtil.enabled)
-	   RouletteFlash_Run(&sRoulette->flashUtil);
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    if (sRoulette->flashUtil.enabled)
+        RouletteFlash_Run(&sRoulette->flashUtil);
 }
 
 static void VBlankCB_Roulette(void)
@@ -1144,7 +1144,7 @@ static void InitRouletteTableData(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        switch (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2))
+        switch (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG))
         {
         case SPECIES_SHROOMISH:
             sRoulette->partySpeciesFlags |= HAS_SHROOMISH;
@@ -1195,7 +1195,7 @@ static void CB2_LoadRoulette(void)
         ResetTempTileDataBuffers();
         break;
     case 3:
-        LoadPalette(&sWheel_Pal, 0, 0x1C0);
+        LoadPalette(&sWheel_Pal, BG_PLTT_ID(0), 14 * PLTT_SIZE_4BPP);
         DecompressAndCopyTileDataToVram(1, gRouletteMenu_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(2, gRouletteWheel_Gfx, 0, 0, 0);
         break;
@@ -1293,7 +1293,7 @@ static void Task_StartPlaying(u8 taskId)
 static void Task_AskKeepPlaying(u8 taskId)
 {
     DisplayYesNoMenuDefaultYes();
-    DrawStdWindowFrame(sTextWindowId, 0);
+    DrawStdWindowFrame(sTextWindowId, FALSE);
     AddTextPrinterParameterized(sTextWindowId, FONT_NORMAL, Roulette_Text_KeepPlaying, 0, 1, TEXT_SKIP_DRAW, 0);
     CopyWindowToVram(sTextWindowId, COPYWIN_FULL);
     DoYesNoFuncWithChoice(taskId, &sYesNoTable_KeepPlaying);
@@ -2167,16 +2167,16 @@ static void FlashSelectionOnWheel(u8 selectionId)
         // The specific color of the poke it references doesn't matter, because the icons of a poke share a palette
         // So it just uses the first sprite ID of each
         case COL_WYNAUT:
-            palOffset = gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_ORANGE_WYNAUT]].oam.paletteNum * 16;
+            palOffset = PLTT_ID(gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_ORANGE_WYNAUT]].oam.paletteNum);
             break;
         case COL_AZURILL:
-            palOffset = gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_GREEN_AZURILL]].oam.paletteNum * 16;
+            palOffset = PLTT_ID(gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_GREEN_AZURILL]].oam.paletteNum);
             break;
         case COL_SKITTY:
-            palOffset = gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_PURPLE_SKITTY]].oam.paletteNum * 16;
+            palOffset = PLTT_ID(gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_PURPLE_SKITTY]].oam.paletteNum);
             break;
         case COL_MAKUHITA:
-            palOffset = gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_ORANGE_MAKUHITA]].oam.paletteNum * 16;
+            palOffset = PLTT_ID(gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_ORANGE_MAKUHITA]].oam.paletteNum);
             break;
         }
         if (numSelected == 1)
@@ -2662,7 +2662,7 @@ static const struct SpriteTemplate sSpriteTemplates_ColorHeaders[NUM_BOARD_COLOR
     }
 };
 
-static const struct SpriteTemplate sSpriteTemplate_GridIcons[NUM_BOARD_POKES] =
+static const struct SpriteTemplate sSpriteTemplates_GridIcons[NUM_BOARD_POKES] =
 {
     {
         .tileTag = GFXTAG_GRID_ICONS,
@@ -3401,7 +3401,7 @@ static void Task_DeclineMinBet(u8 taskId)
 {
     ClearStdWindowAndFrame(0, FALSE);
     HideCoinsWindow();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     DestroyTask(taskId);
 }
 
@@ -3413,7 +3413,7 @@ static void Task_NotEnoughForMinBet(u8 taskId)
         gSpecialVar_0x8004 = 1;
         HideCoinsWindow();
         ClearStdWindowAndFrame(0, TRUE);
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         DestroyTask(taskId);
     }
 }
@@ -3475,7 +3475,7 @@ static void Task_PrintRouletteEntryMsg(u8 taskId)
 void PlayRoulette(void)
 {
     u8 taskId;
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     ShowCoinsWindow(GetCoins(), 1, 1);
     taskId = CreateTask(Task_PrintRouletteEntryMsg, 0);
     gTasks[taskId].tCoins = GetCoins();
@@ -3537,7 +3537,7 @@ static void CreateGridSprites(void)
         u8 y = i * 24;
         for (j = 0; j < NUM_BOARD_POKES; j++)
         {
-            spriteId = sRoulette->spriteIds[(i * NUM_BOARD_POKES) + SPR_GRID_ICONS + j] = CreateSprite(&sSpriteTemplate_GridIcons[j], (j * 24) + 148, y + 92, 30);
+            spriteId = sRoulette->spriteIds[(i * NUM_BOARD_POKES) + SPR_GRID_ICONS + j] = CreateSprite(&sSpriteTemplates_GridIcons[j], (j * 24) + 148, y + 92, 30);
             gSprites[spriteId].animPaused = TRUE;
             y += 24;
             if (y >= 72)
@@ -4516,7 +4516,7 @@ static void SpriteCB_ShroomishExit(struct Sprite *sprite)
     // Delay for screen shaking, then exit left
     if (sprite->data[1]++ >= sprite->data[3])
     {
-	    sprite->x -= 2;
+        sprite->x -= 2;
         if (sprite->x < -16)
         {
             if (!sRoulette->ballUnstuck)

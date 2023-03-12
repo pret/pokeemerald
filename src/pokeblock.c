@@ -237,7 +237,7 @@ static const struct OamData sOamData_PokeblockCase =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -440,7 +440,7 @@ static const struct ListMenuTemplate sPokeblockListMenuTemplate =
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
     .fontId = FONT_NORMAL,
-    .cursorKind = 1
+    .cursorKind = CURSOR_INVISIBLE
 };
 
 void OpenPokeblockCase(u8 caseId, void (*callback)(void))
@@ -653,7 +653,7 @@ static bool8 LoadPokeblockMenuGfx(void)
         }
         break;
     case 2:
-        LoadCompressedPalette(gMenuPokeblock_Pal, 0, 0xC0);
+        LoadCompressedPalette(gMenuPokeblock_Pal, BG_PLTT_ID(0), 6 * PLTT_SIZE_4BPP);
         sPokeblockMenu->gfxState++;
         break;
     case 3:
@@ -679,9 +679,9 @@ static void HandleInitWindows(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 1, 0xE0);
-    LoadMessageBoxGfx(0, 0xA, 0xD0);
-    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
+    LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(14));
+    LoadMessageBoxGfx(0, 0xA, BG_PLTT_ID(13));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
 
     for (i = 0; i < ARRAY_COUNT(sWindowTemplates) - 1; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
@@ -765,7 +765,7 @@ static void DrawPokeblockInfo(s32 pkblId)
     struct Pokeblock *pokeblock;
     u16 rectTilemapSrc[2];
 
-    FillWindowPixelBuffer(7, PIXEL_FILL(0));
+    FillWindowPixelBuffer(WIN_FEEL, PIXEL_FILL(0));
 
     if (pkblId != LIST_CANCEL)
     {
@@ -802,7 +802,7 @@ static void DrawPokeblockInfo(s32 pkblId)
         for (i = 0; i < FLAVOR_COUNT; i++)
             CopyToBgTilemapBufferRect(2, rectTilemapSrc, (i / 3 * 6) + 1, (i % 3 * 2) + 13, 1, 2);
 
-        CopyWindowToVram(7, COPYWIN_GFX);
+        CopyWindowToVram(WIN_FEEL, COPYWIN_GFX);
     }
 
     ScheduleBgCopyTilemapToVram(0);
@@ -1148,7 +1148,7 @@ static void ShowPokeblockActionsWindow(u8 taskId)
         tWindowId = WIN_ACTIONS;
 
     DestroyScrollArrows();
-    DrawStdFrameWithCustomTileAndPalette(tWindowId, 0, 1, 0xE);
+    DrawStdFrameWithCustomTileAndPalette(tWindowId, FALSE, 1, 0xE);
     PrintMenuActionTextsInUpperLeftCorner(tWindowId, sPokeblockMenu->numActions, sPokeblockMenuActions, sPokeblockMenu->pokeblockActionIds);
     InitMenuInUpperLeftCornerNormal(tWindowId, sPokeblockMenu->numActions, 0);
     PutWindowTilemap(tWindowId);

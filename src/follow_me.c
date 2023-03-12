@@ -233,7 +233,7 @@ void FollowMe(struct ObjectEvent* npc, u8 state, bool8 ignoreScriptActive)
         return;
     else if (!gSaveBlock2Ptr->follower.inProgress)
         return;
-    else if (ScriptContext2_IsEnabled() && !ignoreScriptActive)
+    else if (ArePlayerFieldControlsLocked() && !ignoreScriptActive)
         return; //Don't follow during a script
                 
     
@@ -268,7 +268,7 @@ void FollowMe(struct ObjectEvent* npc, u8 state, bool8 ignoreScriptActive)
             gSaveBlock2Ptr->follower.comeOutDoorStairs = 0;
         }
         
-		// This makes sure the follower is still invisible after diving or surfacing or exiting a door while player is on a bike
+		// This makes sure the follower is still invisible after diving or surfacing or on a bike
 		if(!(TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_UNDERWATER) || TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) || TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_BIKE)))
 			follower->invisible = FALSE;
         MoveObjectEventToMapCoords(follower, player->currentCoords.x, player->currentCoords.y);

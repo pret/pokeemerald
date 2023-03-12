@@ -102,7 +102,7 @@ static const u8 sTextColors[2][3] =
 
 static const struct WindowTemplate sWindowTemplates[] =
 {
-    { // WIN_BERRY_NAME
+    [WIN_BERRY_NAME] = {
         .bg = 1,
         .tilemapLeft = 11,
         .tilemapTop = 4,
@@ -111,7 +111,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 69,
     },
-    { // WIN_SIZE_FIRM
+    [WIN_SIZE_FIRM] = {
         .bg = 1,
         .tilemapLeft = 11,
         .tilemapTop = 7,
@@ -120,7 +120,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 85,
     },
-    { // WIN_DESC
+    [WIN_DESC] = {
         .bg = 1,
         .tilemapLeft = 4,
         .tilemapTop = 14,
@@ -129,7 +129,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 157,
     },
-    { // WIN_BERRY_TAG
+    [WIN_BERRY_TAG] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 0,
@@ -276,7 +276,7 @@ static bool8 InitBerryTagScreen(void)
         gMain.state++;
         break;
     case 14:
-        BlendPalettes(PALETTES_ALL, 0x10, 0);
+        BlendPalettes(PALETTES_ALL, 0x10, RGB_BLACK);
         gMain.state++;
         break;
     case 15:
@@ -346,7 +346,7 @@ static bool8 LoadBerryTagGfx(void)
         sBerryTag->gfxState++;
         break;
     case 4:
-        LoadCompressedPalette(gBerryCheck_Pal, 0, 0xC0);
+        LoadCompressedPalette(gBerryCheck_Pal, BG_PLTT_ID(0), 6 * PLTT_SIZE_4BPP);
         sBerryTag->gfxState++;
         break;
     case 5:
@@ -367,7 +367,7 @@ static void HandleInitWindows(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadPalette(sFontPalette, 0xF0, 0x20);
+    LoadPalette(sFontPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     for (i = 0; i < ARRAY_COUNT(sWindowTemplates) - 1; i++)
         PutWindowTilemap(i);
     ScheduleBgCopyTilemapToVram(0);
@@ -599,7 +599,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
         switch (data[0])
         {
         case 0x30:
-            FillWindowPixelBuffer(0, PIXEL_FILL(0));
+            FillWindowPixelBuffer(WIN_BERRY_NAME, PIXEL_FILL(0));
             break;
         case 0x40:
             PrintBerryNumberAndName();
@@ -609,7 +609,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
             CreateBerrySprite();
             break;
         case 0x60:
-            FillWindowPixelBuffer(1, PIXEL_FILL(0));
+            FillWindowPixelBuffer(WIN_SIZE_FIRM, PIXEL_FILL(0));
             break;
         case 0x70:
             PrintBerrySize();
@@ -621,7 +621,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
             SetFlavorCirclesVisiblity();
             break;
         case 0xA0:
-            FillWindowPixelBuffer(2, PIXEL_FILL(0));
+            FillWindowPixelBuffer(WIN_DESC, PIXEL_FILL(0));
             break;
         case 0xB0:
             PrintBerryDescription1();
@@ -636,7 +636,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
         switch (data[0])
         {
         case 0x30:
-            FillWindowPixelBuffer(2, PIXEL_FILL(0));
+            FillWindowPixelBuffer(WIN_DESC, PIXEL_FILL(0));
             break;
         case 0x40:
             PrintBerryDescription2();
@@ -648,7 +648,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
             SetFlavorCirclesVisiblity();
             break;
         case 0x70:
-            FillWindowPixelBuffer(1, PIXEL_FILL(0));
+            FillWindowPixelBuffer(WIN_SIZE_FIRM, PIXEL_FILL(0));
             break;
         case 0x80:
             PrintBerryFirmness();
@@ -661,7 +661,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
             CreateBerrySprite();
             break;
         case 0xB0:
-            FillWindowPixelBuffer(0, PIXEL_FILL(0));
+            FillWindowPixelBuffer(WIN_BERRY_NAME, PIXEL_FILL(0));
             break;
         case 0xC0:
             PrintBerryNumberAndName();

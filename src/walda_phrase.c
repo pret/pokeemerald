@@ -140,7 +140,7 @@ static u8 GetLetterTableId(u8 letter)
 #define KEY          data[8]
 #define NUM_WALLPAPER_DATA_BYTES 9
 #define TO_BIT_OFFSET(i)  (3 + (8 * (i))) // Convert a position in the phrase to a bit number into the wallpaper data array
-static bool32 TryCalculateWallpaper(u16* backgroundClr, u16 *foregroundClr, u8 *iconId, u8 *patternId, u16 trainerId, u8 *phrase)
+static bool32 TryCalculateWallpaper(u16 *backgroundClr, u16 *foregroundClr, u8 *iconId, u8 *patternId, u16 trainerId, u8 *phrase)
 {
     s32 i;
     ALIGNED(2) u8 data[NUM_WALLPAPER_DATA_BYTES];
@@ -174,7 +174,7 @@ static bool32 TryCalculateWallpaper(u16* backgroundClr, u16 *foregroundClr, u8 *
     if (GetWallpaperDataBits(data, 0, 3) != GetWallpaperDataBits(charsByTableId, TO_BIT_OFFSET(WALDA_PHRASE_LENGTH - 1) + 2, 3))
         return FALSE;
 
-    // Perform some relatively arbitrary changes to the wallpaper data using the last byte (KEY) 
+    // Perform some relatively arbitrary changes to the wallpaper data using the last byte (KEY)
     RotateWallpaperDataLeft(data, NUM_WALLPAPER_DATA_BYTES,     21);
     RotateWallpaperDataLeft(data, NUM_WALLPAPER_DATA_BYTES - 1, KEY & 0xF);
     MaskWallpaperData(data, NUM_WALLPAPER_DATA_BYTES - 1, KEY >> 4);
@@ -186,10 +186,10 @@ static bool32 TryCalculateWallpaper(u16* backgroundClr, u16 *foregroundClr, u8 *
         return FALSE;
 
     // Successful phrase, save resulting wallpaper
-    ptr = (u16*) &BG_COLOR_LO;
+    ptr = (u16 *) &BG_COLOR_LO;
     *backgroundClr = *ptr;
 
-    ptr = (u16*) &FG_COLOR_LO;
+    ptr = (u16 *) &FG_COLOR_LO;
     *foregroundClr = *ptr;
 
     *iconId = ICON_ID;

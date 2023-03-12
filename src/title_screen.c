@@ -105,7 +105,7 @@ static const struct OamData sVersionBannerLeftOamData =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_8BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
@@ -122,7 +122,7 @@ static const struct OamData sVersionBannerRightOamData =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_8BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
@@ -193,7 +193,7 @@ static const struct OamData sOamData_CopyrightBanner =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
     .x = 0,
@@ -305,7 +305,7 @@ static const struct OamData sPokemonLogoShineOamData =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -548,7 +548,7 @@ void CB2_InitTitleScreen(void)
         // bg2
         LZ77UnCompVram(gTitleScreenPokemonLogoGfx, (void *)(BG_CHAR_ADDR(0)));
         LZ77UnCompVram(gTitleScreenPokemonLogoTilemap, (void *)(BG_SCREEN_ADDR(9)));
-        LoadPalette(gTitleScreenBgPalettes, 0, 0x1E0);
+        LoadPalette(gTitleScreenBgPalettes, BG_PLTT_ID(0), 15 * PLTT_SIZE_4BPP);
         // bg3
         LZ77UnCompVram(sTitleScreenRayquazaGfx, (void *)(BG_CHAR_ADDR(2)));
         LZ77UnCompVram(sTitleScreenRayquazaTilemap, (void *)(BG_SCREEN_ADDR(26)));
@@ -563,7 +563,7 @@ void CB2_InitTitleScreen(void)
         LoadCompressedSpriteSheet(&sSpriteSheet_EmeraldVersion[0]);
         LoadCompressedSpriteSheet(&sSpriteSheet_PressStart[0]);
         LoadCompressedSpriteSheet(&sPokemonLogoShineSpriteSheet[0]);
-        LoadPalette(gTitleScreenEmeraldVersionPal, 0x100, 0x20);
+        LoadPalette(gTitleScreenEmeraldVersionPal, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
         LoadSpritePalette(&sSpritePalette_PressStart[0]);
         gMain.state = 2;
         break;
@@ -634,7 +634,7 @@ static void MainCB2(void)
 static void Task_TitleScreenPhase1(u8 taskId)
 {
     // Skip to next phase when A, B, Start, or Select is pressed
-    if ((gMain.newKeys & A_B_START_SELECT) || gTasks[taskId].data[1] != 0)
+    if (JOY_NEW(A_B_START_SELECT) || gTasks[taskId].data[1] != 0)
     {
         gTasks[taskId].tSkipToNext = TRUE;
         gTasks[taskId].tCounter = 0;
@@ -681,7 +681,7 @@ static void Task_TitleScreenPhase2(u8 taskId)
     u32 yPos;
 
     // Skip to next phase when A, B, Start, or Select is pressed
-    if ((gMain.newKeys & A_B_START_SELECT) || gTasks[taskId].tSkipToNext)
+    if (JOY_NEW(A_B_START_SELECT) || gTasks[taskId].tSkipToNext)
     {
         gTasks[taskId].tSkipToNext = TRUE;
         gTasks[taskId].tCounter = 0;
@@ -812,6 +812,6 @@ static void UpdateLegendaryMarkingColor(u8 frameNum)
         s32 b = 12;
 
         u16 color = RGB(r, g, b);
-        LoadPalette(&color, 0xEF, sizeof(color));
+        LoadPalette(&color, BG_PLTT_ID(14) + 15, sizeof(color));
    }
 }

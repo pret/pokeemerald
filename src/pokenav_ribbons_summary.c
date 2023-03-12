@@ -3,6 +3,7 @@
 #include "dynamic_placeholder_text_util.h"
 #include "graphics.h"
 #include "international_string_util.h"
+#include "palette.h"
 #include "pokenav.h"
 #include "sound.h"
 #include "sprite.h"
@@ -572,7 +573,7 @@ static u32 LoopedTask_OpenRibbonsSummaryMenu(s32 state)
         DecompressAndCopyTileDataToVram(2, gPokenavRibbonsSummaryBg_Gfx, 0, 0, 0);
         SetBgTilemapBuffer(2, menu->tilemapBuffers[0]);
         CopyToBgTilemapBuffer(2, gPokenavRibbonsSummaryBg_Tilemap, 0, 0);
-        CopyPaletteIntoBufferUnfaded(gPokenavRibbonsSummaryBg_Pal, 0x10, 0x20);
+        CopyPaletteIntoBufferUnfaded(gPokenavRibbonsSummaryBg_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         CopyBgTilemapBufferToVram(2);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -582,8 +583,8 @@ static u32 LoopedTask_OpenRibbonsSummaryMenu(s32 state)
             DecompressAndCopyTileDataToVram(1, sRibbonIconsSmall_Gfx, 0, 1, 0);
             SetBgTilemapBuffer(1, menu->tilemapBuffers[1]);
             FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 32, 20);
-            CopyPaletteIntoBufferUnfaded(sRibbonIcons1_Pal, 0x20, 0xA0);
-            CopyPaletteIntoBufferUnfaded(sMonInfo_Pal, 0xA0, 0x20);
+            CopyPaletteIntoBufferUnfaded(sRibbonIcons1_Pal, BG_PLTT_ID(2), 5 * PLTT_SIZE_4BPP);
+            CopyPaletteIntoBufferUnfaded(sMonInfo_Pal, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
             CopyBgTilemapBufferToVram(1);
             return LT_INC_AND_PAUSE;
         }
@@ -1154,7 +1155,7 @@ static const struct OamData sOamData_RibbonIconBig =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,

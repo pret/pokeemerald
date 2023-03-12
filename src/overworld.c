@@ -39,6 +39,7 @@
 #include "new_game.h"
 #include "palette.h"
 #include "play_time.h"
+#include "pokemon.h"
 #include "random.h"
 #include "roamer.h"
 #include "rotating_gate.h"
@@ -132,9 +133,9 @@ static void CreateLinkPlayerSprites(void);
 static void ClearAllPlayerKeys(void);
 static void ResetAllPlayerLinkStates(void);
 static void UpdateHeldKeyCode(u16);
-static void UpdateAllLinkPlayers(u16*, s32);
+static void UpdateAllLinkPlayers(u16 *, s32);
 static u8 FlipVerticalAndClearForced(u8, u8);
-static u8 LinkPlayerDetectCollision(u8, u8, s16, s16);
+static u8 LinkPlayerGetCollision(u8, u8, s16, s16);
 static void CreateLinkPlayerSprite(u8, u8);
 static void GetLinkPlayerCoords(u8, u16 *, u16 *);
 static u8 GetLinkPlayerFacingDirection(u8);
@@ -993,7 +994,7 @@ static void (*const sMovementStatusHandler[])(struct LinkPlayerObjectEvent *, st
 // code
 void DoWhiteOut(void)
 {
-    ScriptContext2_RunNewScript(EventScript_WhiteOut);
+    RunScriptImmediately(EventScript_WhiteOut);
     SetMoney(&gSaveBlock1Ptr->money, GetMoney(&gSaveBlock1Ptr->money) / 2);
     HealPlayerParty();
     Overworld_ResetStateAfterWhiteOut();
@@ -1020,7 +1021,7 @@ void Overworld_ResetStateAfterTeleport(void)
     FlagClear(FLAG_SYS_SAFARI_MODE);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
-    ScriptContext2_RunNewScript(EventScript_ResetMrBriney);
+    RunScriptImmediately(EventScript_ResetMrBriney);
 }
 
 void Overworld_ResetStateAfterDigEscRope(void)
@@ -1296,9 +1297,9 @@ void SetWarpDestinationToDynamicWarp(u8 unusedWarpId)
 
 void SetWarpDestinationToHealLocation(u8 healLocationId)
 {
-    const struct HealLocation *warp = GetHealLocation(healLocationId);
-    if (warp)
-        SetWarpDestination(warp->group, warp->map, WARP_ID_NONE, warp->x, warp->y);
+    const struct HealLocation *healLocation = GetHealLocation(healLocationId);
+    if (healLocation)
+        SetWarpDestination(healLocation->group, healLocation->map, WARP_ID_NONE, healLocation->x, healLocation->y);
 }
 
 void SetWarpDestinationToLastHealLocation(void)
@@ -1366,9 +1367,9 @@ void SetContinueGameWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 
 void SetContinueGameWarpToHealLocation(u8 healLocationId)
 {
-    const struct HealLocation *warp = GetHealLocation(healLocationId);
-    if (warp)
-        SetWarpData(&gSaveBlock1Ptr->continueGameWarp, warp->group, warp->map, WARP_ID_NONE, warp->x, warp->y);
+    const struct HealLocation *healLocation = GetHealLocation(healLocationId);
+    if (healLocation)
+        SetWarpData(&gSaveBlock1Ptr->continueGameWarp, healLocation->group, healLocation->map, WARP_ID_NONE, healLocation->x, healLocation->y);
 }
 
 void SetContinueGameWarpToDynamicWarp(int unused)
@@ -1448,8 +1449,8 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     CopySecondaryTilesetToVramUsingHeap(gMapHeader.mapLayout);
     LoadSecondaryTilesetPalette(gMapHeader.mapLayout);
 
-    for (paletteIndex = 6; paletteIndex < 13; paletteIndex++)
-        ApplyWeatherGammaShiftToPal(paletteIndex);
+    for (paletteIndex = NUM_PALS_IN_PRIMARY; paletteIndex < NUM_PALS_TOTAL; paletteIndex++)
+        ApplyWeatherColorMapToPal(paletteIndex);
 
     InitSecondaryTilesetAnimation();
     UpdateLocationHistoryForRoamer();
@@ -1740,7 +1741,7 @@ u16 GetCurrLocationDefaultMusic(void)
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE111)
      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE111)
      && GetSavedWeather() == WEATHER_SANDSTORM)
-        return MUS_ROUTE111;
+        return MUS_DESERT;
 
     music = GetLocationMusic(&gSaveBlock1Ptr->location);
     if (music != MUS_ROUTE118)
@@ -2068,11 +2069,11 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
     UpdatePlayerAvatarTransitionState();
     FieldClearPlayerInput(&inputStruct);
     FieldGetPlayerInput(&inputStruct, newKeys, heldKeys);
-    if (!ScriptContext2_IsEnabled())
+    if (!ArePlayerFieldControlsLocked())
     {
         if (ProcessPlayerFieldInput(&inputStruct) == 1)
         {
-            ScriptContext2_Enable();
+            LockPlayerFieldControls();
             HideMapNamePopUpWindow();
         }
         else
@@ -2094,7 +2095,7 @@ void CB1_Overworld(void)
 
 static void OverworldBasic(void)
 {
-    ScriptContext2_RunScript();
+    ScriptContext_RunScript();
     RunTasks();
     AnimateSprites();
     CameraUpdate();
@@ -2181,8 +2182,8 @@ void CB2_NewGame(void)
     NewGameInitData();
     ResetInitialPlayerAvatarState();
     PlayTimeCounter_Start();
-    ScriptContext1_Init();
-    ScriptContext2_Disable();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
     gFieldCallback = ExecuteTruckSequence;
     gFieldCallback2 = NULL;
     DoMapLoadLoop(&gMain.state);
@@ -2202,8 +2203,8 @@ void CB2_WhiteOut(void)
         ResetSafariZoneFlag_();
         DoWhiteOut();
         ResetInitialPlayerAvatarState();
-        ScriptContext1_Init();
-        ScriptContext2_Disable();
+        ScriptContext_Init();
+        UnlockPlayerFieldControls();
         gFieldCallback = FieldCB_WarpExitFadeFromBlack;
         state = 0;
         DoMapLoadLoop(&state);
@@ -2216,8 +2217,8 @@ void CB2_WhiteOut(void)
 void CB2_LoadMap(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    ScriptContext1_Init();
-    ScriptContext2_Disable();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
     SetMainCallback1(NULL);
     SetMainCallback2(CB2_DoChangeMap);
     gMain.savedCallback = CB2_LoadMap2;
@@ -2236,8 +2237,8 @@ void CB2_ReturnToFieldContestHall(void)
     if (!gMain.state)
     {
         FieldClearVBlankHBlankCallbacks();
-        ScriptContext1_Init();
-        ScriptContext2_Disable();
+        ScriptContext_Init();
+        UnlockPlayerFieldControls();
         SetMainCallback1(NULL);
     }
     if (LoadMapInStepsLocal(&gMain.state, TRUE))
@@ -2306,8 +2307,8 @@ void CB2_ReturnToFieldFromMultiplayer(void)
     else
         gFieldCallback = FieldCB_ReturnToFieldCableLink;
 
-    ScriptContext1_Init();
-    ScriptContext2_Disable();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
     CB2_ReturnToField();
 }
 
@@ -2378,8 +2379,8 @@ void CB2_ContinueSavedGame(void)
         InitMapFromSavedGame();
 
     PlayTimeCounter_Start();
-    ScriptContext1_Init();
-    ScriptContext2_Disable();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
     InitMatchCallCounters();
     if (UseContinueGameWarp() == TRUE)
     {
@@ -2458,8 +2459,8 @@ static bool32 LoadMapInStepsLink(u8 *state)
     {
     case 0:
         InitOverworldBgs();
-        ScriptContext1_Init();
-        ScriptContext2_Disable();
+        ScriptContext_Init();
+        UnlockPlayerFieldControls();
         ResetMirageTowerAndSaveBlockPtrs();
         ResetScreenForMapLoad();
         (*state)++;
@@ -3158,7 +3159,7 @@ static void ResetPlayerHeldKeys(u16 *keys)
 
 static u16 KeyInterCB_SelfIdle(u32 key)
 {
-    if (ScriptContext2_IsEnabled() == TRUE)
+    if (ArePlayerFieldControlsLocked() == TRUE)
         return LINK_KEY_CODE_EMPTY;
     if (GetLinkRecvQueueLength() > 4)
         return LINK_KEY_CODE_HANDLE_RECV_QUEUE;
@@ -3173,12 +3174,11 @@ static u16 KeyInterCB_Idle(u32 key)
     return LINK_KEY_CODE_EMPTY;
 }
 
-// Ignore the player's inputs as long as there is an event script
-// in ScriptContext2.
+// Ignore the player's inputs as long as there is an event script being executed.
 static u16 KeyInterCB_DeferToEventScript(u32 key)
 {
     u16 retVal;
-    if (ScriptContext2_IsEnabled() == TRUE)
+    if (ArePlayerFieldControlsLocked() == TRUE)
     {
         retVal = LINK_KEY_CODE_EMPTY;
     }
@@ -3201,7 +3201,7 @@ static u16 KeyInterCB_DeferToRecvQueue(u32 key)
     else
     {
         retVal = LINK_KEY_CODE_IDLE;
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         SetKeyInterceptCallback(KeyInterCB_Idle);
     }
     return retVal;
@@ -3218,7 +3218,7 @@ static u16 KeyInterCB_DeferToSendQueue(u32 key)
     else
     {
         retVal = LINK_KEY_CODE_IDLE;
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         SetKeyInterceptCallback(KeyInterCB_Idle);
     }
     return retVal;
@@ -3271,7 +3271,7 @@ static u16 KeyInterCB_WaitForPlayersToExit(u32 keyOrPlayerId)
         CheckRfuKeepAliveTimer();
     if (AreAllPlayersInLinkState(PLAYER_LINK_STATE_EXITING_ROOM) == TRUE)
     {
-        ScriptContext1_SetupScript(EventScript_DoLinkRoomExit);
+        ScriptContext_SetupScript(EventScript_DoLinkRoomExit);
         SetKeyInterceptCallback(KeyInterCB_SendNothing);
     }
     return LINK_KEY_CODE_EMPTY;
@@ -3450,41 +3450,41 @@ static u16 GetDirectionForEventScript(const u8 *script)
 
 static void InitLinkPlayerQueueScript(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static void InitLinkRoomStartMenuScript(void)
 {
     PlaySE(SE_WIN_OPEN);
     ShowStartMenu();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static void RunInteractLocalPlayerScript(const u8 *script)
 {
     PlaySE(SE_SELECT);
-    ScriptContext1_SetupScript(script);
-    ScriptContext2_Enable();
+    ScriptContext_SetupScript(script);
+    LockPlayerFieldControls();
 }
 
 static void RunConfirmLeaveCableClubScript(void)
 {
     PlaySE(SE_WIN_OPEN);
-    ScriptContext1_SetupScript(EventScript_ConfirmLeaveCableClubRoom);
-    ScriptContext2_Enable();
+    ScriptContext_SetupScript(EventScript_ConfirmLeaveCableClubRoom);
+    LockPlayerFieldControls();
 }
 
 static void InitMenuBasedScript(const u8 *script)
 {
     PlaySE(SE_SELECT);
-    ScriptContext1_SetupScript(script);
-    ScriptContext2_Enable();
+    ScriptContext_SetupScript(script);
+    LockPlayerFieldControls();
 }
 
 static void RunTerminateLinkScript(void)
 {
-    ScriptContext1_SetupScript(EventScript_TerminateLink);
-    ScriptContext2_Enable();
+    ScriptContext_SetupScript(EventScript_TerminateLink);
+    LockPlayerFieldControls();
 }
 
 bool32 Overworld_IsRecvQueueAtMax(void)
@@ -3576,7 +3576,7 @@ static void ZeroObjectEvent(struct ObjectEvent *objEvent)
 // conflict with the usual Event Object struct, thus the definitions.
 #define linkGender(obj) obj->singleMovementActive
 // not even one can reference *byte* aligned bitfield members...
-#define linkDirection(obj) ((u8*)obj)[offsetof(typeof(*obj), fieldEffectSpriteId) - 1] // -> rangeX
+#define linkDirection(obj) ((u8 *)obj)[offsetof(typeof(*obj), fieldEffectSpriteId) - 1] // -> rangeX
 
 static void SpawnLinkPlayerObjectEvent(u8 linkPlayerId, s16 x, s16 y, u8 gender)
 {
@@ -3740,7 +3740,7 @@ static bool8 FacingHandler_DpadMovement(struct LinkPlayerObjectEvent *linkPlayer
     linkDirection(objEvent) = FlipVerticalAndClearForced(dir, linkDirection(objEvent));
     ObjectEventMoveDestCoords(objEvent, linkDirection(objEvent), &x, &y);
 
-    if (LinkPlayerDetectCollision(linkPlayerObjEvent->objEventId, linkDirection(objEvent), x, y))
+    if (LinkPlayerGetCollision(linkPlayerObjEvent->objEventId, linkDirection(objEvent), x, y))
     {
         return FALSE;
     }
@@ -3800,7 +3800,7 @@ static u8 FlipVerticalAndClearForced(u8 newFacing, u8 oldFacing)
     return oldFacing;
 }
 
-static bool8 LinkPlayerDetectCollision(u8 selfObjEventId, u8 direction, s16 x, s16 y)
+static u8 LinkPlayerGetCollision(u8 selfObjEventId, u8 direction, s16 x, s16 y)
 {
     u8 i;
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
@@ -3810,11 +3810,11 @@ static bool8 LinkPlayerDetectCollision(u8 selfObjEventId, u8 direction, s16 x, s
             if ((gObjectEvents[i].currentCoords.x == x && gObjectEvents[i].currentCoords.y == y)
              || (gObjectEvents[i].previousCoords.x == x && gObjectEvents[i].previousCoords.y == y))
             {
-                return TRUE;
+                return 1;
             }
         }
     }
-    return MapGridIsImpassableAt(x, y);
+    return MapGridGetCollisionAt(x, y);
 }
 
 static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion)
@@ -3862,7 +3862,7 @@ static void SpriteCB_LinkPlayer(struct Sprite *sprite)
     else
         StartSpriteAnimIfDifferent(sprite, GetMoveDirectionAnimNum(linkDirection(objEvent)));
 
-    UpdateObjectEventSpriteInvisibility(sprite, 0);
+    UpdateObjectEventSpriteInvisibility(sprite, FALSE);
     if (objEvent->triggerGroundEffectsOnMove)
     {
         sprite->invisible = ((sprite->data[7] & 4) >> 2);
@@ -3877,6 +3877,16 @@ void UpdateFollowerPokemonGraphic(void)
     u16 leadMonGraphicId = GetMonData(&gPlayerParty[GetLeadMonNotFaintedIndex()], MON_DATA_SPECIES, NULL) + OBJ_EVENT_GFX_BULBASAUR - 1;
     struct ObjectEvent *follower = &gObjectEvents[gSaveBlock2Ptr->follower.objId];
 
+    // If the lead Pokemon is Unown, use the correct sprite
+    if (leadMonGraphicId == OBJ_EVENT_GFX_UNOWN_A)
+    {
+        u8 unownLetter = GET_UNOWN_LETTER(GetMonData(&gPlayerParty[GetLeadMonNotFaintedIndex()], MON_DATA_PERSONALITY));
+        
+        // If the Unown is not A, set the graphics id to the proper Unown
+        if (unownLetter)
+            leadMonGraphicId = OBJ_EVENT_GFX_DEOXYS_SPEED + unownLetter;
+    }
+    
     if(gSaveBlock2Ptr->follower.inProgress && leadMonGraphicId != gSaveBlock2Ptr->follower.graphicsId)
     {
         // Sets the follower's graphic data to the proper following Pokemon graphic data
@@ -3972,7 +3982,7 @@ static void BigSparkleCallback(struct Sprite *sprite)
                 break;
         }
     }
-    
+
     if (++sprite->data[0] >= 19)
     {
         FreeSpriteOamMatrix(sprite);
@@ -3988,11 +3998,6 @@ bool8 IsBigSprite(u16 graphicsId)
         case OBJ_EVENT_GFX_LUGIA_FOLLOWER:
         case OBJ_EVENT_GFX_HOOH_FOLLOWER:
         case OBJ_EVENT_GFX_WAILORD:
-        case OBJ_EVENT_GFX_DIALGA:
-        case OBJ_EVENT_GFX_PALKIA:
-        case OBJ_EVENT_GFX_REGIGIGAS:
-        case OBJ_EVENT_GFX_GIRATINA_NORMAL:
-        case OBJ_EVENT_GFX_ARCEUS_NORMAL:
             return TRUE;
         default:
             return FALSE;
@@ -4002,7 +4007,7 @@ bool8 IsBigSprite(u16 graphicsId)
 static void SparklePokeballCallback(struct Sprite *sprite)
 {    
     sprite->data[0]++;
-    
+
     if (sprite->data[0] >= 10)
     {
         struct ObjectEvent *player = &gObjectEvents[gPlayerAvatar.objectEventId];
@@ -4011,58 +4016,60 @@ static void SparklePokeballCallback(struct Sprite *sprite)
         s16 y = gSprites[follower->spriteId].y;
         u8 spriteId;
         u16 graphicsId;
-        
+
         DestroySprite(sprite);
 
         gSprites[follower->spriteId].oam.priority = ElevationToPriority(follower->previousElevation);
         gSprites[gPlayerAvatar.spriteId].oam.priority = ElevationToPriority(player->previousElevation);
         player->fixedPriority = FALSE;
-        
+
         // Shift the location of the sparkle, depending on which way the follower will be facing
+        // Account for the other Unown forms
+        if (gSaveBlock2Ptr->follower.graphicsId > OBJ_EVENT_GFX_DEOXYS_SPEED)
+            graphicsId = 200;
         #ifndef POKEMON_EXPANSION
-        // Gen 3+ OBJ_EVENT_GFX constants are 25 too high due to OLD_UNOWN constants.
-        if (gSaveBlock2Ptr->follower.graphicsId > OBJ_EVENT_GFX_CELEBI)
+        else if (gSaveBlock2Ptr->follower.graphicsId > OBJ_EVENT_GFX_CELEBI) // Gen 3+ OBJ_EVENT_GFX constants are 25 too high due to OLD_UNOWN constants.
             graphicsId = gSaveBlock2Ptr->follower.graphicsId - OBJ_EVENT_GFX_BULBASAUR - 25;
-        else
         #endif
+        else
             graphicsId = gSaveBlock2Ptr->follower.graphicsId - OBJ_EVENT_GFX_BULBASAUR;
-        
+
         switch(gObjectEvents[gPlayerAvatar.objectEventId].facingDirection)
         {
             case DIR_SOUTH:
                 x -= 16 - FollowerSparkleCoords[graphicsId][0];
                 if (IsBigSprite(follower->graphicsId))
                     x -= 16;
-                
+
                 y += 16 - FollowerSparkleCoords[graphicsId][1];
-                
+
                 break;
             case DIR_NORTH:
                 x -= 16 - FollowerSparkleCoords[graphicsId][2];
                 if (IsBigSprite(follower->graphicsId))
                     x -= 16;
-                
+
                 y += 16 - FollowerSparkleCoords[graphicsId][3];
-                
+
                 break;
             case DIR_EAST:
                 x += 7 - FollowerSparkleCoords[graphicsId][4]; // 7 looks better than 8
                 if (IsBigSprite(follower->graphicsId))
                     x += 16;
-                
+
                 y += 16 - FollowerSparkleCoords[graphicsId][5];
-                
+
                 break;
             case DIR_WEST:
                 x -= 8 - FollowerSparkleCoords[graphicsId][4];
                 if (IsBigSprite(follower->graphicsId))
                     x -= 16;
-                
+
                 y += 16 - FollowerSparkleCoords[graphicsId][5];
-                
+
                 break;
         }
-        
+
         if (IsBigSprite(follower->graphicsId))
         {
             // North sparkle
@@ -4077,7 +4084,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
                 InitSpriteAffineAnim(&gSprites[spriteId]);
                 StartSpriteAffineAnim(&gSprites[spriteId], 0);
             }
-            
+
             // NorthEast sparkle
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &BigSparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
@@ -4090,7 +4097,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
                 InitSpriteAffineAnim(&gSprites[spriteId]);
                 StartSpriteAffineAnim(&gSprites[spriteId], 1);
             }
-            
+
             // East sparkle
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &BigSparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
@@ -4103,7 +4110,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
                 InitSpriteAffineAnim(&gSprites[spriteId]);
                 StartSpriteAffineAnim(&gSprites[spriteId], 2);
             }
-            
+
             // SouthEast sparkle
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &BigSparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
@@ -4116,7 +4123,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
                 InitSpriteAffineAnim(&gSprites[spriteId]);
                 StartSpriteAffineAnim(&gSprites[spriteId], 3);
             }
-            
+
             // South sparkle
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &BigSparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
@@ -4129,7 +4136,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
                 InitSpriteAffineAnim(&gSprites[spriteId]);
                 StartSpriteAffineAnim(&gSprites[spriteId], 4);
             }
-            
+
             // SouthWest sparkle
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &BigSparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
@@ -4142,7 +4149,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
                 InitSpriteAffineAnim(&gSprites[spriteId]);
                 StartSpriteAffineAnim(&gSprites[spriteId], 5);
             }
-            
+
             // West sparkle
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &BigSparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
@@ -4155,7 +4162,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
                 InitSpriteAffineAnim(&gSprites[spriteId]);
                 StartSpriteAffineAnim(&gSprites[spriteId], 6);
             }
-            
+
             // NorthWest sparkle
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &BigSparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
@@ -4182,7 +4189,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
                 InitSpriteAffineAnim(&gSprites[spriteId]);
                 StartSpriteAffineAnim(&gSprites[spriteId], 0);
             }
-            
+
             // NorthEast sparkle
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &SparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
@@ -4194,7 +4201,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
                 InitSpriteAffineAnim(&gSprites[spriteId]);
                 StartSpriteAffineAnim(&gSprites[spriteId], 1);
             }
-            
+
             // East sparkle
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &SparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
@@ -4206,7 +4213,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
                 InitSpriteAffineAnim(&gSprites[spriteId]);
                 StartSpriteAffineAnim(&gSprites[spriteId], 2);
             }
-            
+
             // SouthEast sparkle
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &SparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
@@ -4218,7 +4225,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
                 InitSpriteAffineAnim(&gSprites[spriteId]);
                 StartSpriteAffineAnim(&gSprites[spriteId], 3);
             }
-            
+
             // South sparkle
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &SparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
@@ -4230,7 +4237,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
                 InitSpriteAffineAnim(&gSprites[spriteId]);
                 StartSpriteAffineAnim(&gSprites[spriteId], 4);
             }
-            
+
             // SouthWest sparkle
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &SparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
@@ -4242,7 +4249,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
                 InitSpriteAffineAnim(&gSprites[spriteId]);
                 StartSpriteAffineAnim(&gSprites[spriteId], 5);
             }
-            
+
             // West sparkle
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &SparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
@@ -4254,7 +4261,7 @@ static void SparklePokeballCallback(struct Sprite *sprite)
                 InitSpriteAffineAnim(&gSprites[spriteId]);
                 StartSpriteAffineAnim(&gSprites[spriteId], 6);
             }
-            
+
             // NorthWest sparkle
             spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_EXPANDING_SPARKLE, &SparkleCallback, x, y, 0);
             if (spriteId != MAX_SPRITES)
@@ -4279,7 +4286,7 @@ void FollowerPokeballSparkle(void)
         s16 x = player->currentCoords.x;
         s16 y = player->currentCoords.y;
         u8 spriteId;
-        
+
         switch(player->facingDirection)
         {
             case DIR_SOUTH:
@@ -4297,7 +4304,7 @@ void FollowerPokeballSparkle(void)
                 break;
         }    
         gSprites[follower->spriteId].x = x;
-        
+
         switch(GetMonData(&gPlayerParty[GetLeadMonNotFaintedIndex()], MON_DATA_POKEBALL))
         {
             case ITEM_MASTER_BALL:
@@ -4381,20 +4388,20 @@ void FollowerPokeballSparkle(void)
                 spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_ITEM_BALL, &SparklePokeballCallback, x, y, 2);
                 break;
         }
-        
+
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].coordOffsetEnabled = TRUE;
             gSprites[spriteId].oam.priority = 2;
             gSprites[spriteId].data[0] = 0;
         }
-        
+
         follower->currentCoords.x = player->currentCoords.x;
         follower->currentCoords.y = player->currentCoords.y;
         follower->facingDirection = player->facingDirection;
-        
+
         gSprites[follower->spriteId].animNum = player->facingDirection - 1;
-        
+
         if (player->facingDirection == DIR_NORTH)
         {
             gSprites[follower->spriteId].oam.priority = 0;
@@ -4411,7 +4418,7 @@ void FollowerPokeballSparkle(void)
         }
         player->fixedPriority = TRUE;
         gPlayerAvatar.preventStep = TRUE;
-        
+
         SeekSpriteAnim(&gSprites[follower->spriteId], 0);        
         ObjectEventForceSetHeldMovement(follower, MOVEMENT_ACTION_FOLLOWING_POKEMON_GROW);
     }
