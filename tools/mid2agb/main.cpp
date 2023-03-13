@@ -35,7 +35,7 @@ FILE* g_outputFile = nullptr;
 
 std::string g_asmLabel;
 int g_masterVolume = 127;
-std::string g_voiceGroup = "000";
+std::string g_voiceGroup = "_dummy";
 int g_priority = 0;
 int g_reverb = -1;
 int g_clocksPerBeat = 1;

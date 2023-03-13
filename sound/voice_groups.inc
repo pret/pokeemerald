@@ -1,4 +1,4 @@
-.include "sound/voicegroups/voicegroup000.inc"
+.include "sound/voicegroups/voicegroup_dummy.inc"
 .include "sound/voicegroups/instruments/voicegroup_drums_rs.inc"
 .include "sound/voicegroups/instruments/voicegroup_drums_frlg.inc"
 .include "sound/voicegroups/instruments/voicegroup_drums_emerald_1.inc"
@@ -6,6 +6,7 @@
 .include "sound/voicegroups/instruments/voicegroup_piano.inc"
 .include "sound/voicegroups/instruments/voicegroup_strings.inc"
 .include "sound/voicegroups/instruments/voicegroup_trumpet.inc"
+.include "sound/voicegroups/voicegroup_unused.inc"
 .include "sound/voicegroups/instruments/voicegroup_tuba.inc"
 .include "sound/voicegroups/instruments/voicegroup_french_horn.inc"
 .include "sound/voicegroups/voicegroup010.inc"
