@@ -489,7 +489,7 @@ gSpecials::
 	def_special ScrollableMultichoice_ClosePersistentMenu
 	def_special DoDeoxysRockInteraction
 	def_special SetDeoxysRockPalette
-	def_special CreateEventLegalEnemyMon
+	def_special CreateEnemyEventMon
 	def_special StartMirageTowerDisintegration
 	def_special StartMirageTowerShake
 	def_special StartMirageTowerFossilFallAndSink

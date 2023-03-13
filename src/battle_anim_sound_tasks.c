@@ -283,6 +283,11 @@ void SoundTask_WaitForCry(u8 taskId)
     }
 }
 
+void SoundTask_PlayNormalCry(u8 taskId)
+{
+    PlayCry_ByMode(gBattleMons[gBattleAnimAttacker].species, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER), CRY_MODE_NORMAL);
+    gTasks[taskId].func = SoundTask_WaitForCry;
+}
 
 #define tSpecies data[1]
 #define tPan     data[2]
