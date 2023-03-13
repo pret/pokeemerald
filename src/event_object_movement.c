@@ -10119,6 +10119,7 @@ void RecreateObjectEvent(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 
 u8 MovementAction_FollowingPokemon_FaceSouth_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
+    SetObjectEventDirection(objectEvent, DIR_SOUTH);
     RecreateObjectEvent(objectEvent, sprite);
     sprite->animNum = 0;
     MoveObjectEventToMapCoords(objectEvent, objectEvent->currentCoords.x, objectEvent->currentCoords.y);
@@ -10128,6 +10129,7 @@ u8 MovementAction_FollowingPokemon_FaceSouth_Step0(struct ObjectEvent *objectEve
 
 u8 MovementAction_FollowingPokemon_FaceNorth_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
+    SetObjectEventDirection(objectEvent, DIR_NORTH);
     RecreateObjectEvent(objectEvent, sprite);
     sprite->animNum = 1;
     MoveObjectEventToMapCoords(objectEvent, objectEvent->currentCoords.x, objectEvent->currentCoords.y);
@@ -10137,6 +10139,7 @@ u8 MovementAction_FollowingPokemon_FaceNorth_Step0(struct ObjectEvent *objectEve
 
 u8 MovementAction_FollowingPokemon_FaceWest_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
+    SetObjectEventDirection(objectEvent, DIR_WEST);
     RecreateObjectEvent(objectEvent, sprite);
     sprite->animNum = 2;
     sprite->x2 = 8;
