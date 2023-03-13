@@ -10298,6 +10298,7 @@ u8 MovementAction_FollowingPokemon_Shrink_Step0(struct ObjectEvent *objectEvent,
     sprite->oam.priority = 1;
     sprite->subpriority = 1;
 
+    objectEvent->hasShadow = FALSE;
     sprite->data[2]++;
     return FALSE;
 }
@@ -10487,6 +10488,7 @@ u8 MovementAction_FollowingPokemon_Shrink_Step1(struct ObjectEvent *objectEvent,
         sprite->data[2]++;
     }
 
+    objectEvent->hasShadow = FALSE;
     return FALSE;
 }
 
