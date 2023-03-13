@@ -1334,13 +1334,13 @@ gCryTable::
 	cry Cry_Glastrier
 	cry Cry_Spectrier
 	cry Cry_Calyrex
-	cry Cry_Unown //Cry_Wyrdeer
-	cry Cry_Unown //Cry_Kleavor
-	cry Cry_Unown //Cry_Ursaluna
-	cry Cry_Unown //Cry_Basculegion
-	cry Cry_Unown //Cry_Sneasler
-	cry Cry_Unown //Cry_Overqwil
-	cry Cry_Unown //Cry_Enamorus
+	cry Cry_Wyrdeer
+	cry Cry_Kleavor
+	cry Cry_Ursaluna
+	cry Cry_Basculegion
+	cry Cry_Sneasler
+	cry Cry_Overqwil
+	cry Cry_Enamorus
 .else
 	cry Cry_Unown
 	cry Cry_Unown
@@ -1749,7 +1749,7 @@ gCryTable::
 	cry Cry_TornadusTherian
 	cry Cry_ThundurusTherian
 	cry Cry_LandorusTherian
-	cry Cry_Bulbasaur //Cry_EnamorusTherian
+	cry Cry_EnamorusTherian
 	@ Kyurem
 	cry Cry_KyuremWhite
 	cry Cry_KyuremBlack
@@ -3456,13 +3456,13 @@ gCryTable_Reverse::
 	cry_reverse Cry_Glastrier
 	cry_reverse Cry_Spectrier
 	cry_reverse Cry_Calyrex
-	cry_reverse Cry_Unown //Cry_Wyrdeer
-	cry_reverse Cry_Unown //Cry_Kleavor
-	cry_reverse Cry_Unown //Cry_Ursaluna
-	cry_reverse Cry_Unown //Cry_Basculegion
-	cry_reverse Cry_Unown //Cry_Sneasler
-	cry_reverse Cry_Unown //Cry_Overqwil
-	cry_reverse Cry_Unown //Cry_Enamorus
+	cry_reverse Cry_Wyrdeer
+	cry_reverse Cry_Kleavor
+	cry_reverse Cry_Ursaluna
+	cry_reverse Cry_Basculegion
+	cry_reverse Cry_Sneasler
+	cry_reverse Cry_Overqwil
+	cry_reverse Cry_Enamorus
 .else
 	cry_reverse Cry_Unown
 	cry_reverse Cry_Unown
@@ -3862,7 +3862,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_TornadusTherian
 	cry_reverse Cry_ThundurusTherian
 	cry_reverse Cry_LandorusTherian
-	cry_reverse Cry_Bulbasaur //Cry_EnamorusTherian
+	cry_reverse Cry_EnamorusTherian
 	@ Kyurem
 	cry_reverse Cry_KyuremWhite
 	cry_reverse Cry_KyuremBlack

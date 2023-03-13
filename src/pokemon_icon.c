@@ -1293,6 +1293,7 @@ const u8 *const gMonIconTable[] =
     [SPECIES_CALYREX_ICE_RIDER] = gMonIcon_CalyrexIceRider,
     [SPECIES_CALYREX_SHADOW_RIDER] = gMonIcon_CalyrexShadowRider,
     [SPECIES_ENAMORUS_THERIAN] = gMonIcon_EnamorusTherian,
+    [SPECIES_BASCULEGION_FEMALE] = gMonIcon_BasculegionFemale,
 #endif
     [SPECIES_EGG] = gMonIcon_Egg,
 };
@@ -1324,9 +1325,6 @@ const u8 *const gMonIconTableFemale[] =
 #endif
 #if P_GEN_6_POKEMON == TRUE
     [SPECIES_PYROAR] = gMonIcon_PyroarF,
-#endif
-#if P_GEN_8_POKEMON == TRUE
-    [SPECIES_BASCULEGION] = gMonIcon_BasculegionF,
 #endif
 };
 
@@ -2542,6 +2540,7 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_CALYREX_ICE_RIDER] = 0,
     [SPECIES_CALYREX_SHADOW_RIDER] = 0,
     [SPECIES_ENAMORUS_THERIAN] = 1,
+    [SPECIES_BASCULEGION_FEMALE] = 0,
 #endif
     [SPECIES_EGG] = 1,
 };

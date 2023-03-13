@@ -3986,7 +3986,7 @@ Cry_Spectrier::
 	.align 2
 Cry_Calyrex::
 	.incbin "sound/direct_sound_samples/cries/calyrex.bin"
-/*
+
 	.align 2
 Cry_Wyrdeer::
 	.incbin "sound/direct_sound_samples/cries/wyrdeer.bin"
@@ -4014,7 +4014,7 @@ Cry_Overqwil::
 	.align 2
 Cry_Enamorus::
 	.incbin "sound/direct_sound_samples/cries/enamorus.bin"
-*/
+
 .endif
 
 	.align 2
@@ -4360,11 +4360,10 @@ Cry_CalyrexIceRider::
 Cry_CalyrexShadowRider::
 	.incbin "sound/direct_sound_samples/cries/calyrex_shadow_rider.bin"
 
-/*
 	.align 2
 Cry_EnamorusTherian::
 	.incbin "sound/direct_sound_samples/cries/enamorus_therian.bin"
-*/
+
 .endif
 
 	.align 2
