@@ -2896,6 +2896,9 @@ void SetMoveEffect(bool32 primary, u32 certain)
         return;
     case MOVE_EFFECT_STEALTH_ROCK:
     case MOVE_EFFECT_SPIKES:
+    case MOVE_EFFECT_PAYDAY:
+    case MOVE_EFFECT_STEAL_ITEM:
+    case MOVE_EFFECT_BUG_BITE:
         activateAfterFaint = TRUE;
         break;
     }
@@ -2938,11 +2941,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
     if (TestSheerForceFlag(gBattlerAttacker, gCurrentMove) && affectsUser != MOVE_EFFECT_AFFECTS_USER)
         INCREMENT_RESET_RETURN
 
-    if (gBattleMons[gEffectBattler].hp == 0
-        && !activateAfterFaint
-        && gBattleScripting.moveEffect != MOVE_EFFECT_PAYDAY
-        && gBattleScripting.moveEffect != MOVE_EFFECT_STEAL_ITEM
-        && gBattleScripting.moveEffect != MOVE_EFFECT_BUG_BITE)
+    if (gBattleMons[gEffectBattler].hp == 0 && !activateAfterFaint)
         INCREMENT_RESET_RETURN
 
     if (DoesSubstituteBlockMove(gBattlerAttacker, gEffectBattler, gCurrentMove) && affectsUser != MOVE_EFFECT_AFFECTS_USER)
@@ -3761,7 +3760,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 if (!gBattleMons[gEffectBattler].status1)
                 {
                     static const u8 sDireClawEffects[] = { MOVE_EFFECT_POISON, MOVE_EFFECT_PARALYSIS, MOVE_EFFECT_SLEEP };
-                    gBattleScripting.moveEffect = sDireClawEffects[Random() % 3];
+                    gBattleScripting.moveEffect = sDireClawEffects[Random() % ARRAY_COUNT(sDireClawEffects)];
                     SetMoveEffect(TRUE, 0);
                 }
                 break;
@@ -3778,7 +3777,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 {
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SPIKESSCATTERED;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_SpikesActivate;
+                    gBattlescriptCurrInstr = BattleScript_SpikesActivates;
                 }
                 break;
             }

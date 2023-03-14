@@ -433,31 +433,10 @@ BattleScript_EffectDireClaw::
 	goto BattleScript_EffectHit
 
 BattleScript_EffectHitSetEntryHazard::
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	attackstring
-	ppreduce
-	critcalc
-	damagecalc
-	adjustdamage
-	attackanimation
-	waitanimation
-	effectivenesssound
-	hitanimation BS_TARGET
-	waitstate
-	healthbarupdate BS_TARGET
-	datahpupdate BS_TARGET
-	critmessage
-	waitmessage B_WAIT_TIME_LONG
-	resultmessage
-	waitmessage B_WAIT_TIME_LONG
-	tryfaintmon BS_TARGET
 	argumenttomoveeffect
-	seteffectprimary
-	moveendall
-	end
+	goto BattleScript_EffectHit
 
-BattleScript_SpikesActivate::
+BattleScript_SpikesActivates::
 	trysetspikes BattleScript_MoveEnd
 	printfromtable gDmgHazardsStringIds
 	waitmessage B_WAIT_TIME_LONG
