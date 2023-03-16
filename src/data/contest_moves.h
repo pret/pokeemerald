@@ -6062,6 +6062,10 @@ const struct ContestMove gContestMoves[MOVES_COUNT] =
     [MOVE_COMBAT_TORQUE] = {0}, // TODO
 
     [MOVE_MAGICAL_TORQUE] = {0}, // TODO
+
+    [MOVE_PSYBLADE] = {0}, // TODO
+
+    [MOVE_HYDRO_STEAM] = {0}, // TODO
 };
 
 const struct ContestEffect gContestEffects[] =
