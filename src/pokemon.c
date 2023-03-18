@@ -8670,7 +8670,7 @@ bool32 TryFormChange(u32 monId, u32 side, u16 method)
 
     targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
 
-    if (targetSpecies == SPECIES_NONE)
+    if (targetSpecies == SPECIES_NONE && gBattleStruct != NULL)
         targetSpecies = gBattleStruct->changedSpecies[monId];
 
     if (targetSpecies != SPECIES_NONE)
