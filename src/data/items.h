@@ -10010,7 +10010,7 @@ const struct Item gItems[] =
         .description = sScrollOfDarknessDesc,
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
+        .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
     },
 
@@ -10022,7 +10022,7 @@ const struct Item gItems[] =
         .description = sScrollOfWatersDesc,
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
+        .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
     },
 
