@@ -92,7 +92,7 @@ static void SpriteCb_DynamaxTrigger(struct Sprite *);
 static void SpriteCb_DynamaxIndicator(struct Sprite *);
 
 // Returns whether a battler is Dynamaxed.
-bool8 IsDynamaxed(u16 battlerId)
+bool32 IsDynamaxed(u16 battlerId)
 {
 	u8 side = GetBattlerSide(battlerId);
 	if (gBattleStruct->dynamax.dynamaxed[battlerId]
@@ -102,13 +102,17 @@ bool8 IsDynamaxed(u16 battlerId)
 }
 
 // Returns whether a battler can Dynamax.
-bool8 CanDynamax(u16 battlerId)
+bool32 CanDynamax(u16 battlerId)
 {
 	// TODO: Requires Dynamax Band if not in a Max Raid (as well as special flag).
+	u16 species = gBattleMons[battlerId].species;
 	if (!gBattleStruct->dynamax.alreadyDynamaxed[GetBattlerSide(battlerId)]
 		&& !gBattleStruct->dynamax.dynamaxed[battlerId]
 		&& !gBattleStruct->dynamax.dynamaxed[BATTLE_PARTNER(battlerId)]
-		&& !gBattleStruct->dynamax.toDynamax[BATTLE_PARTNER(battlerId)])
+		&& !gBattleStruct->dynamax.toDynamax[BATTLE_PARTNER(battlerId)]
+		&& species != SPECIES_ZACIAN && species != SPECIES_ZACIAN_CROWNED_SWORD
+		&& species != SPECIES_ZAMAZENTA && species != SPECIES_ZAMAZENTA_CROWNED_SHIELD
+		&& species != SPECIES_ETERNATUS && species != SPECIES_ETERNATUS_ETERNAMAX)
 		return TRUE;
 	return FALSE;
 }
@@ -138,6 +142,13 @@ void PrepareBattlerForDynamax(u16 battlerId)
 	gBattleStruct->dynamax.dynamaxed[battlerId] = TRUE;
 	gBattleStruct->dynamax.dynamaxTurns[battlerId] = DYNAMAX_TURNS;
 
+	// Substitute is removed upon Dynamaxing.
+	gBattleMons[battlerId].status2 &= ~STATUS2_SUBSTITUTE;
+	ClearBehindSubstituteBit(battlerId);
+
+	// Choiced Moves are reset upon Dynamaxing.
+	gBattleStruct->choicedMove[battlerId] = MOVE_NONE;
+
 	// Try Gigantamax form change.
 	newSpecies = GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_BATTLE_GIGANTAMAX);
 	if (newSpecies != SPECIES_NONE)
@@ -156,8 +167,21 @@ void UndoDynamax(u16 battlerId)
 	TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_SWITCH); // TODO: maybe nicer way to do this?
 }
 
+// Weight-based moves (and some other moves in Raids) are blocked by Dynamax.
+bool32 IsMoveBlockedByDynamax(u16 move)
+{
+	// TODO: Raid moves
+	switch (gBattleMoves[move].effect)
+	{
+		case EFFECT_HEAT_CRASH:
+		case EFFECT_LOW_KICK:
+			return TRUE;
+	}
+	return FALSE;
+}
+
 // Returns whether a move should be converted into a Max Move.
-bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove)
+bool32 ShouldUseMaxMove(u16 battlerId, u16 baseMove)
 {
     // TODO: Raids
 	//if (IsRaidBoss(battlerId))
@@ -257,7 +281,7 @@ u8 GetMaxMovePower(u16 move)
 }
 
 // Returns whether a move is a Max Move or not.
-bool8 IsMaxMove(u16 move)
+bool32 IsMaxMove(u16 move)
 {
 	return move >= FIRST_MAX_MOVE && move <= LAST_MAX_MOVE;
 }

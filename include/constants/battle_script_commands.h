@@ -267,7 +267,8 @@
 #define VARIOUS_TRY_SET_STATUS2                     175
 #define VARIOUS_TRY_HEAL_SIXTH_HP                   176
 #define VARIOUS_TRY_RECYCLE_BERRY                   177
-#define VARIOUS_UPDATE_DYNAMAX         178
+#define VARIOUS_UPDATE_DYNAMAX                      178
+#define VARIOUS_JUMP_IF_TARGET_DYNAMAXED            179
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

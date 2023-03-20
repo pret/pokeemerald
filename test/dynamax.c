@@ -2,19 +2,12 @@
 #include "test_battle.h"
 
 // TODO:
-// Max Moves cannot miss.
 // Max Guard protects against Transform, Block (not Mean Look), Flower Shield, Gear Up, and so on (see Bulba).
-// Max Moves penetrate Protect, but not Max Guard.
-// Feint damages through Max Guard, but doesn't break it.
-// You can ignore the effect of Encore / Disable with Max Moves.
-// You can Encore the base move of a Max Move after Dynamax, but not Disable or Instruct.
 // Imprison doesn't stop Max Moves.
-// Copycat copies the base move of a Max Move (even Trick Room!).
-// Assault Vest prevents the use of Max Guard; so does Taunt.
 // Max Moves change type as you'd expect with Normalize, Weather Ball, etc.
-// Dynamax Cannon and such do double damage on Dynamaxed opponents.
+// (Unrelated) Refactor code to remove dynamax.usingMaxMove?
 
-// DYNAMAX FEATURES
+// ============= DYNAMAX AND MAX MOVE INTERACTIONS ===================
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax increases HP and max HP by 1.5x")
 {
     GIVEN { // TODO: Dynamax level
@@ -56,7 +49,6 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax expires after three turns")
 
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot be flinched")
 {
-    KNOWN_FAILING;
     GIVEN {
         ASSUME(gBattleMoves[MOVE_FAKE_OUT].effect == EFFECT_FAKE_OUT);
         PLAYER(SPECIES_WOBBUFFET);
@@ -69,47 +61,45 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot be flinched")
     }
 }
 
+// Message is "Steelix shook its head. It seems like it can't use this move..."?
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot be hit by weight-based moves")
 {
-    // Message is "Steelix shook its head. It seems like it can't use this move..."?
-    KNOWN_FAILING;
     GIVEN {
         ASSUME(gBattleMoves[MOVE_HEAVY_SLAM].effect == EFFECT_HEAT_CRASH);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponent, MOVE_HEAVY_SLAM); MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+        TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); MOVE(opponent, MOVE_HEAVY_SLAM); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Heavy Slam!");
-        MESSAGE("Wobbuffet is unaffected!");
         MESSAGE("Wobbuffet used Max Strike!");
+        MESSAGE("Foe Wobbuffet used Heavy Slam!");
+        MESSAGE("The move was blocked by the power of Dynamax!");
+        NONE_OF { HP_BAR(player); }
     }
 }
 
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot be hit by OHKO moves")
 {
-    KNOWN_FAILING;
     GIVEN {
         ASSUME(gBattleMoves[MOVE_FISSURE].effect == EFFECT_OHKO);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_MACHAMP) { Ability(ABILITY_NO_GUARD); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_FISSURE); MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+        TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); MOVE(opponent, MOVE_FISSURE); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Fissure!");
+        MESSAGE("Wobbuffet used Max Strike!");
+        MESSAGE("Foe Machamp used Fissure!");
         MESSAGE("Wobbuffet is unaffected!");
         NONE_OF { HP_BAR(player); }
-        MESSAGE("Wobbuffet used Max Strike!");
     }
 }
 
 // can't be used at all in Raid, see "Documenting Dynamax"
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by Destiny Bond")
 {
-    KNOWN_FAILING;
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(50); };
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); Speed(100); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_DESTINY_BOND); MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
     } SCENE {
@@ -122,10 +112,9 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by Destiny Bond
 
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are affected by Grudge")
 {
-    KNOWN_FAILING;
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(50); };
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); Speed(100); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_GRUDGE); MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
     } SCENE {
@@ -138,28 +127,32 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are affected by Grudge")
 
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by phazing moves, but still take damage")
 {
-    KNOWN_FAILING;
     GIVEN {
         ASSUME(gBattleMoves[MOVE_DRAGON_TAIL].effect == EFFECT_HIT_SWITCH_TARGET);
+        ASSUME(gBattleMoves[MOVE_WHIRLWIND].effect == EFFECT_ROAR);
         PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_DRAGON_TAIL); MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
-        TURN {}
+        TURN { MOVE(opponent, MOVE_WHIRLWIND); MOVE(player, MOVE_TACKLE); }
     } SCENE {
         MESSAGE("Wobbuffet used Max Strike!");
         MESSAGE("Foe Wobbuffet used Dragon Tail!");
-        MESSAGE("The move was blocked by the power of Dynamax!");
         HP_BAR(player);
-        MESSAGE("Wobbuffet used Max Guard!");
+        MESSAGE("The move was blocked by the power of Dynamax!");
+        MESSAGE("Wobbuffet used Max Strike!");
+        MESSAGE("Foe Wobbuffet used Whirlwind!");
+        MESSAGE("The move was blocked by the power of Dynamax!");
     }
 }
 
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by Red Card")
 {
-    KNOWN_FAILING;
     GIVEN {
+        ASSUME(gItems[ITEM_RED_CARD].holdEffect == HOLD_EFFECT_RED_CARD);
         PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_RED_CARD); }
     } WHEN {
         TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); MOVE(opponent, MOVE_CELEBRATE); }
@@ -175,12 +168,12 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by Red Card")
 
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can be switched out by Eject Button")
 {
-    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); }
+        PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); MOVE(opponent, MOVE_TACKLE); SEND_OUT(player, 1); }
     } SCENE {
         MESSAGE("Wobbuffet used Max Strike!");
         MESSAGE("Foe Wobbuffet used Tackle!");
@@ -191,27 +184,25 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can be switched out by Eject But
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot have their ability swapped with another Pokemon")
+SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot have their ability swapped to another Pokemon's")
 {
-    KNOWN_FAILING;
     GIVEN {
         ASSUME(P_GEN_8_POKEMON == TRUE);
-        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_SHADOW_TAG); }
+        PLAYER(SPECIES_MILTANK) { Ability(ABILITY_SCRAPPY); }
         OPPONENT(SPECIES_RUNERIGUS) { Ability(ABILITY_WANDERING_SPIRIT); }
     } WHEN {
         TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); MOVE(opponent, MOVE_SKILL_SWAP); }
     } SCENE {
-        MESSAGE("Wobbuffet used Max Strike!");
-        MESSAGE("Foe Wobbuffet used Skill Swap!");
+        MESSAGE("Miltank used Max Strike!");
+        MESSAGE("Foe Runerigus used Skill Swap!");
         MESSAGE("But it failed!");
     } FINALLY {
-        EXPECT_EQ(player->ability, ABILITY_SHADOW_TAG);
+        EXPECT_EQ(player->ability, ABILITY_SCRAPPY);
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can have their ability changed")
+SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can have their ability changed or suppressed")
 {
-    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_SHADOW_TAG); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -228,7 +219,6 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can have their ability changed")
 
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are immune to Encore")
 {
-    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -241,10 +231,28 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are immune to Encore")
     }
 }
 
-// TODO: Test Cursed Body, too.
+SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can be encored immediately after reverting")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(50); };
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(100); };
+    } WHEN {
+        TURN { MOVE(player, MOVE_ARM_THRUST, dynamax: TRUE); }
+        TURN { MOVE(player, MOVE_ARM_THRUST); }
+        TURN { MOVE(player, MOVE_ARM_THRUST); }
+        TURN { MOVE(opponent, MOVE_ENCORE); MOVE(player, MOVE_TACKLE); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Max Knuckle!");
+        MESSAGE("Wobbuffet used Max Knuckle!");
+        MESSAGE("Wobbuffet used Max Knuckle!");
+        MESSAGE("Foe Wobbuffet used Encore!");
+        MESSAGE("Wobbuffet used Arm Thrust!");
+    }
+}
+
+// Max Moves don't make contact, so Cursed Body doesn't need to be tested? Implemented a check anyway
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon's Max Moves cannot be disabled")
 {
-    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -259,17 +267,19 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon's Max Moves cannot be disabled")
 
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can have base moves disabled on their first turn")
 {
-    KNOWN_FAILING;
     GIVEN {
         ASSUME(B_DISABLE_TURNS >= GEN_5);
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(50); };
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(100); };
     } WHEN {
+        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_TACKLE); }
         TURN { MOVE(opponent, MOVE_DISABLE); MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
         TURN {}
         TURN {}
-        TURN {} // TODO: Tackle should still be disabled.
+        TURN { MOVE(player, MOVE_TACKLE, allowed: FALSE); MOVE(player, MOVE_CELEBRATE); }
     } SCENE {
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet used Tackle!");
         MESSAGE("Foe Wobbuffet used Disable!");
         MESSAGE("Wobbuffet's Tackle was disabled!");
         MESSAGE("Wobbuffet used Max Strike!");
@@ -278,7 +288,6 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can have base moves disabled on 
 
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are immune to Torment")
 {
-    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -294,7 +303,6 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are immune to Torment")
 // This is true for all item-removing moves.
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not immune to Knock Off")
 {
-    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_POTION); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -303,13 +311,12 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not immune to Knock Off")
     } SCENE {
         MESSAGE("Wobbuffet used Max Strike!");
         MESSAGE("Foe Wobbuffet used Knock Off!");
-        MESSAGE("Wobbuffet's Potion was knocked off!");
+        MESSAGE("Foe Wobbuffet knocked off Wobbuffet's Potion!");
     }
 }
 
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon lose their substitutes")
 {
-    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -318,14 +325,153 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon lose their substitutes")
         TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); MOVE(opponent, MOVE_TACKLE); }
     } SCENE {
         MESSAGE("Wobbuffet used Substitute!");
-        MESSAGE("Wobbuffet set up a substitute!");
+        MESSAGE("Wobbuffet made a SUBSTITUTE!");
         MESSAGE("Wobbuffet used Max Strike!");
         MESSAGE("Foe Wobbuffet used Tackle!");
         HP_BAR(player);
     }
 }
 
-// ============= MAX MOVE EFFECTS ===================
+DOUBLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can have their base moves copied by Copycat")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_TRICK_ROOM, dynamax: TRUE, target: opponentLeft); MOVE(playerRight, MOVE_COPYCAT, target: opponentLeft); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Max Guard!");
+        MESSAGE("Wynaut used Trick Room!");
+    }
+}
+
+SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon take double damage from Dynamax Cannon", s16 damage)
+{
+    bool32 dynamaxed;
+    PARAMETRIZE { dynamaxed = FALSE; }
+    PARAMETRIZE { dynamaxed = TRUE; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE, dynamax: dynamaxed); MOVE(opponent, MOVE_DYNAMAX_CANNON); }
+    } SCENE {
+        HP_BAR(player, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_MUL_EQ(results[0].damage, UQ_4_12(2.0), results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves deal 1/4 damage through protect", s16 damage)
+{
+    bool32 protected;
+    KNOWN_FAILING; // rounding error? also messages are wonky
+    PARAMETRIZE { protected = FALSE; }
+    PARAMETRIZE { protected = TRUE; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        if (protected)
+            TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); MOVE(opponent, MOVE_PROTECT); }
+        else
+            TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+    } SCENE {
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_MUL_EQ(results[0].damage, UQ_4_12(0.25), results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves don't bypass Max Guard")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); MOVE(opponent, MOVE_PROTECT, dynamax: TRUE); }
+    } SCENE {
+        NONE_OF { HP_BAR(opponent); }
+    }
+}
+
+DOUBLE_BATTLE_TEST("(DYNAMAX) Feint bypasses Max Guard but doesn't break it")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_PROTECT, dynamax: TRUE);
+               MOVE(opponentLeft, MOVE_FEINT, target: playerLeft);
+               MOVE(opponentRight, MOVE_TACKLE, target: playerLeft);
+        }
+    } SCENE {
+        MESSAGE("Wobbuffet used Max Guard!");
+        MESSAGE("Foe Wobbuffet used Feint!");
+        HP_BAR(playerLeft);
+        MESSAGE("Foe Wynaut used Tackle!");
+        NONE_OF { HP_BAR(playerLeft); }
+    }
+}
+
+DOUBLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are immune to Instruct")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_TACKLE, dynamax: TRUE, target: opponentLeft);
+               MOVE(playerRight, MOVE_INSTRUCT, target: playerLeft);
+        }
+    } SCENE {
+        MESSAGE("Wobbuffet used Max Strike!");
+        MESSAGE("Wynaut used Instruct!");
+        MESSAGE("But it failed!");
+    }
+}
+
+// Move selection tests can't be simulated :(
+SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by Choice items", s16 damage)
+{
+    u16 item;
+    PARAMETRIZE { item = ITEM_CHOICE_BAND; }
+    PARAMETRIZE { item = ITEM_NONE; }
+    GIVEN {
+        ASSUME(gItems[ITEM_CHOICE_BAND].holdEffect == HOLD_EFFECT_CHOICE_BAND);
+        PLAYER(SPECIES_WOBBUFFET) { Item(item); };
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Max Strike!");
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_EQ(results[0].damage, results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot use Max Guard while holding Assault Vest")
+{
+    GIVEN {
+        ASSUME(gItems[ITEM_ASSAULT_VEST].holdEffect == HOLD_EFFECT_ASSAULT_VEST);
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_ASSAULT_VEST); };
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+        TURN { MOVE(player, MOVE_PROTECT, allowed: FALSE); MOVE(player, MOVE_TACKLE); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Max Strike!");
+        MESSAGE("Wobbuffet used Max Strike!");
+    }
+}
+
+// ============= MAX MOVE EFFECTS ==========================================
 SINGLE_BATTLE_TEST("(DYNAMAX) Max Strike lowers single opponent's speed")
 {
     GIVEN {

@@ -632,6 +632,13 @@ static void HandleInputChooseMove(void)
                 moveTarget = MOVE_TARGET_SELECTED;  //damaging z moves always have selected target
         }
 
+        // Status moves turn into Max Guard when Dynamaxed, targets user.
+        if ((IsDynamaxed(gActiveBattler) || gBattleStruct->dynamax.playerSelect)
+            && gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].split == SPLIT_STATUS)
+        {
+            moveTarget = MOVE_TARGET_USER;
+        }
+
         if (moveTarget & MOVE_TARGET_USER)
             gMultiUsePlayerCursor = gActiveBattler;
         else

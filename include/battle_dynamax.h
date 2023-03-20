@@ -56,15 +56,17 @@ enum MaxMoveEffect
 	MAX_EFFECT_BYPASS_PROTECT,
 };
 
-bool8 IsDynamaxed(u16 battlerId);
-bool8 CanDynamax(u16 battlerId);
+bool32 IsDynamaxed(u16 battlerId);
+bool32 CanDynamax(u16 battlerId);
 void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon);
 void PrepareBattlerForDynamax(u16 battlerId);
 void UndoDynamax(u16 battlerId);
-bool8 ShouldUseMaxMove(u16 battlerId, u16 baseMove);
+bool32 IsMoveBlockedByDynamax(u16 move);
+
+bool32 ShouldUseMaxMove(u16 battlerId, u16 baseMove);
 u16 GetMaxMove(u16 battlerId, u16 baseMove);
 u8 GetMaxMovePower(u16 move);
-bool8 IsMaxMove(u16 move);
+bool32 IsMaxMove(u16 move);
 const u8 *GetMaxMoveName(u16 move);
 void ChooseDamageNonTypesString(u8 type);
 u32 GetMaxMoveStatusEffect(u16 move);

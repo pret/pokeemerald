@@ -2257,6 +2257,11 @@
 	various 0, VARIOUS_UPDATE_DYNAMAX
 	.endm
 
+	.macro jumpiftargetdynamaxed, ptr:req
+	various 0, VARIOUS_JUMP_IF_TARGET_DYNAMAXED
+	.4byte \ptr
+	.endm
+
 	@ Tries to increase or decrease a battler's stat's stat stage by a specified amount. If impossible, jumps to \script.
 	.macro modifybattlerstatstage battler:req, stat:req, mode:req, amount:req, script:req, animation:req, customString
 

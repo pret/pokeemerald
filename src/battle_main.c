@@ -4156,6 +4156,8 @@ static void HandleTurnActionSelectionState(void)
                     }
 
                     gBattleStruct->mega.toEvolve &= ~(gBitTable[BATTLE_PARTNER(GetBattlerPosition(gActiveBattler))]);
+                    gBattleStruct->dynamax.toDynamax[gActiveBattler] = FALSE;
+                    gBattleStruct->dynamax.usingMaxMove[gActiveBattler] = FALSE;
                     gBattleStruct->zmove.toBeUsed[BATTLE_PARTNER(GetBattlerPosition(gActiveBattler))] = MOVE_NONE;
                     BtlController_EmitEndBounceEffect(BUFFER_A);
                     MarkBattlerForControllerExec(gActiveBattler);
@@ -4251,7 +4253,7 @@ static void HandleTurnActionSelectionState(void)
                                 gBattleStruct->dynamax.toDynamax[gActiveBattler] = TRUE;
                             if (ShouldUseMaxMove(gActiveBattler, gChosenMoveByBattler[gActiveBattler])) // max move check
                             {
-                                gBattleStruct->dynamax.moveSlot[gActiveBattler] = gBattleStruct->chosenMovePositions[gActiveBattler];
+                                gBattleStruct->dynamax.baseMove[gActiveBattler] = gBattleMons[gActiveBattler].moves[gBattleStruct->chosenMovePositions[gActiveBattler]];
                                 gBattleStruct->dynamax.usingMaxMove[gActiveBattler] = TRUE;
                             }
                             gBattleCommunication[gActiveBattler]++;
@@ -4520,7 +4522,7 @@ u32 GetBattlerTotalSpeedStat(u8 battlerId)
         speed /= 2;
     else if (holdEffect == HOLD_EFFECT_IRON_BALL)
         speed /= 2;
-    else if (holdEffect == HOLD_EFFECT_CHOICE_SCARF)
+    else if (holdEffect == HOLD_EFFECT_CHOICE_SCARF && !IsDynamaxed(battlerId))
         speed = (speed * 150) / 100;
     else if (holdEffect == HOLD_EFFECT_QUICK_POWDER && gBattleMons[battlerId].species == SPECIES_DITTO && !(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED))
         speed *= 2;
