@@ -150,12 +150,7 @@ void PrepareBattlerForDynamax(u16 battlerId)
 	gBattleStruct->choicedMove[battlerId] = MOVE_NONE;
 
 	// Try Gigantamax form change.
-	newSpecies = GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_BATTLE_GIGANTAMAX);
-	if (newSpecies != SPECIES_NONE)
-	{
-		gBattleStruct->changedSpecies[gBitTable[gBattlerPartyIndexes[battlerId]]] = gBattleMons[battlerId].species;
-		TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_GIGANTAMAX);
-	}
+	TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_GIGANTAMAX);
 }
 
 // Sets flags needed for undoing Dynamax and undoes Gigantamax forms.
@@ -164,7 +159,6 @@ void UndoDynamax(u16 battlerId)
 	u8 side = GetBattlerSide(battlerId);
 	gBattleStruct->dynamax.dynamaxed[battlerId] = FALSE;
 	gBattleStruct->dynamax.dynamaxTurns[battlerId] = 0; // safety check for switch-in / faint
-	TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_SWITCH); // TODO: maybe nicer way to do this?
 }
 
 // Weight-based moves (and some other moves in Raids) are blocked by Dynamax.

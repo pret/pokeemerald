@@ -436,6 +436,46 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are immune to Instruct")
     }
 }
 
+// TODO: Gigantamax factor
+SINGLE_BATTLE_TEST("(DYNAMAX) Pokemon with Gigantamax forms change upon Dynamaxing")
+{
+    GIVEN {
+        PLAYER(SPECIES_VENUSAUR);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+    } FINALLY {
+        EXPECT_EQ(gBattleMons[B_POSITION_PLAYER_LEFT].species, SPECIES_VENUSAUR_GMAX);
+    }
+}
+
+SINGLE_BATTLE_TEST("(DYNAMAX) Pokemon with Gigantamax forms revert upon switching")
+{
+    GIVEN {
+        PLAYER(SPECIES_VENUSAUR);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+        TURN { SWITCH(player, 1); }
+        TURN { SWITCH(player, 0); }
+    } FINALLY {
+        EXPECT_EQ(gBattleMons[B_POSITION_PLAYER_LEFT].species, SPECIES_VENUSAUR);
+    }
+}
+
+SINGLE_BATTLE_TEST("(DYNAMAX) Pokemon with Gigantamax forms revert upon fainting")
+{
+    GIVEN {
+        PLAYER(SPECIES_VENUSAUR) { HP(1); };
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); MOVE(opponent, MOVE_TACKLE); }
+    } FINALLY {
+        EXPECT_EQ(gBattleMons[B_POSITION_PLAYER_LEFT].species, SPECIES_VENUSAUR);
+    }
+}
+
 // Move selection tests can't be simulated :(
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by Choice items", s16 damage)
 {

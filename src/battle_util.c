@@ -10232,6 +10232,9 @@ bool32 CanBattlerFormChange(u8 battlerId, u16 method)
         return TRUE;
     else if (IsBattlerPrimalReverted(battlerId) && (method == FORM_CHANGE_END_BATTLE))
         return TRUE;
+    // Gigantamaxed Pokemon should revert upon fainting, switching, or ending the battle.
+    else if (IsDynamaxed(battlerId) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_BATTLE_SWITCH || method == FORM_CHANGE_END_BATTLE))
+        return TRUE;
     return DoesSpeciesHaveFormChangeMethod(gBattleMons[battlerId].species, method);
 }
 
@@ -10270,6 +10273,10 @@ bool32 TryBattleFormChange(u8 battlerId, u16 method)
 
         // Unlike Megas, Primal Reversion isn't canceled on fainting.
         else if (IsBattlerPrimalReverted(battlerId) && (method == FORM_CHANGE_END_BATTLE))
+            restoreSpecies = TRUE;
+
+        // Gigantamax Pokemon have their forms reverted after fainting, switching, or ending the battle.
+        else if (IsDynamaxed(battlerId) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_BATTLE_SWITCH || method == FORM_CHANGE_END_BATTLE))
             restoreSpecies = TRUE;
 
         if (restoreSpecies)
