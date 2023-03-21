@@ -13141,6 +13141,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     [SPECIES_CALYREX_ICE_RIDER] = sAnims_Calyrex,
     [SPECIES_CALYREX_SHADOW_RIDER] = sAnims_Calyrex,
     [SPECIES_ENAMORUS_THERIAN] = sAnims_EnamorusTherian,
+    [SPECIES_BASCULEGION_FEMALE] = sAnims_Basculegion,
 #endif
     [SPECIES_VENUSAUR_GMAX] = sAnims_VENUSAUR_GMAX,
     [SPECIES_CHARIZARD_GMAX] = sAnims_CHARIZARD_GMAX,

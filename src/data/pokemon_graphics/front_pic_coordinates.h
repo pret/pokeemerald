@@ -1336,7 +1336,10 @@ const struct MonCoords gMonFrontPicCoords[] =
     // Calyrex
     [SPECIES_CALYREX_ICE_RIDER]            = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_CALYREX_SHADOW_RIDER]         = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    // Enamorus
     [SPECIES_ENAMORUS_THERIAN]             = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    // Basculegion
+    [SPECIES_BASCULEGION_FEMALE]           = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     // Gigantamax Forms
     [SPECIES_VENUSAUR_GMAX] = { .size = MON_COORDS_SIZE(64, 64), .y_offset = 5 },
     [SPECIES_CHARIZARD_GMAX] = { .size = MON_COORDS_SIZE(64, 64), .y_offset = 0 },

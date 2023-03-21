@@ -171,6 +171,7 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_ZARUDE] = sZarudeFormSpeciesIdTable,
     [SPECIES_CALYREX] = sCalyrexFormSpeciesIdTable,
     [SPECIES_ENAMORUS] = sEnamorusFormSpeciesIdTable,
+    [SPECIES_BASCULEGION] = sBasculegionFormSpeciesIdTable,
 #endif
     // Megas
     [SPECIES_VENUSAUR_MEGA] = sVenusaurFormSpeciesIdTable,
@@ -590,6 +591,8 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_CALYREX_SHADOW_RIDER] = sCalyrexFormSpeciesIdTable,
     // Enamorus
     [SPECIES_ENAMORUS_THERIAN] = sEnamorusFormSpeciesIdTable,
+    // Basculegion
+    [SPECIES_BASCULEGION_FEMALE] = sBasculegionFormSpeciesIdTable,
     // Gigantamax Forms
     [SPECIES_VENUSAUR_GMAX] = sVenusaurFormSpeciesIdTable,
     [SPECIES_CHARIZARD_GMAX] = sCharizardFormSpeciesIdTable,

@@ -829,6 +829,8 @@ const u8 gMoveNames[MOVES_COUNT_DYNAMAX][MOVE_NAME_LENGTH + 1] =
     [MOVE_NOXIOUS_TORQUE] = _("Noxious Torque"),
     [MOVE_COMBAT_TORQUE] = _("Combat Torque"),
     [MOVE_MAGICAL_TORQUE] = _("Magical Torque"),
+    [MOVE_PSYBLADE] = _("Psyblade"),
+    [MOVE_HYDRO_STEAM] = _("Hydro Steam"),
     // Max Moves
     [MOVE_MAX_GUARD] = _("Max Guard"),
     [MOVE_MAX_STRIKE] = _("Max Strike"),
@@ -1715,6 +1717,8 @@ const u8 gMoveNames[MOVES_COUNT_DYNAMAX][MOVE_NAME_LENGTH + 1] =
     [MOVE_NOXIOUS_TORQUE] = _("NoxiusTorque"),
     [MOVE_COMBAT_TORQUE] = _("CombatTorque"),
     [MOVE_MAGICAL_TORQUE] = _("MagiclTorque"),
+    [MOVE_PSYBLADE] = _("Psyblade"),
+    [MOVE_HYDRO_STEAM] = _("Hydro Steam"),
     // Max Moves
     [MOVE_MAX_GUARD] = _("M-Guard"),
     [MOVE_MAX_STRIKE] = _("M-Strike"),

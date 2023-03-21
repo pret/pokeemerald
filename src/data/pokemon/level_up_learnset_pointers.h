@@ -1334,6 +1334,8 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_CALYREX_SHADOW_RIDER] = sCalyrexShadowRiderLevelUpLearnset,
     // Enamorus
     [SPECIES_ENAMORUS_THERIAN] = sEnamorusLevelUpLearnset,
+    // Basculegion
+    [SPECIES_BASCULEGION_FEMALE] = sBasculegionLevelUpLearnset,
     // Gigantamax Forms
     [SPECIES_VENUSAUR_GMAX] = sVenusaurLevelUpLearnset,
     [SPECIES_CHARIZARD_GMAX] = sCharizardLevelUpLearnset,

@@ -399,8 +399,10 @@
 #define EFFECT_TEATIME                      393
 #define EFFECT_ATTACK_UP_USER_ALLY          394 // Howl 8th Gen
 #define EFFECT_SHELL_TRAP                   395
-#define EFFECT_MAX_MOVE                     396
+#define EFFECT_PSYBLADE                     396
+#define EFFECT_HYDRO_STEAM                  397
+#define EFFECT_MAX_MOVE                     398
 
-#define NUM_BATTLE_MOVE_EFFECTS             397
+#define NUM_BATTLE_MOVE_EFFECTS             399
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

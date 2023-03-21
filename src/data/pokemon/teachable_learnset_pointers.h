@@ -1334,6 +1334,8 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_CALYREX_SHADOW_RIDER] = sCalyrexShadowRiderTeachableLearnset,
     // Enamorus
     [SPECIES_ENAMORUS_THERIAN] = sEnamorusTeachableLearnset,
+    // Basculegion
+    [SPECIES_BASCULEGION_FEMALE] = sBasculegionTeachableLearnset,
     // Gigantamax Forms
     [SPECIES_VENUSAUR_GMAX] = sVenusaurTeachableLearnset,
     [SPECIES_CHARIZARD_GMAX] = sCharizardTeachableLearnset,

@@ -1368,40 +1368,43 @@
 #define SPECIES_CALYREX_ICE_RIDER            FORMS_START + 327
 #define SPECIES_CALYREX_SHADOW_RIDER         FORMS_START + 328
 
+// Basculegion
+#define SPECIES_BASCULEGION_FEMALE           FORMS_START + 329
+
 // Gigantamax Forms
-#define SPECIES_VENUSAUR_GMAX                FORMS_START + 329
-#define SPECIES_BLASTOISE_GMAX               FORMS_START + 330
-#define SPECIES_CHARIZARD_GMAX               FORMS_START + 331
-#define SPECIES_BUTTERFREE_GMAX              FORMS_START + 332
-#define SPECIES_PIKACHU_GMAX                 FORMS_START + 333
-#define SPECIES_MEOWTH_GMAX                  FORMS_START + 334
-#define SPECIES_MACHAMP_GMAX                 FORMS_START + 335
-#define SPECIES_GENGAR_GMAX                  FORMS_START + 336
-#define SPECIES_KINGLER_GMAX                 FORMS_START + 337
-#define SPECIES_LAPRAS_GMAX                  FORMS_START + 338
-#define SPECIES_EEVEE_GMAX                   FORMS_START + 339
-#define SPECIES_SNORLAX_GMAX                 FORMS_START + 340
-#define SPECIES_GARBODOR_GMAX                FORMS_START + 341
-#define SPECIES_MELMETAL_GMAX                FORMS_START + 342
-#define SPECIES_RILLABOOM_GMAX               FORMS_START + 343
-#define SPECIES_CINDERACE_GMAX               FORMS_START + 344
-#define SPECIES_INTELEON_GMAX                FORMS_START + 345
-#define SPECIES_CORVIKNIGHT_GMAX             FORMS_START + 346
-#define SPECIES_ORBEETLE_GMAX                FORMS_START + 347
-#define SPECIES_DREDNAW_GMAX                 FORMS_START + 348
-#define SPECIES_COALOSSAL_GMAX               FORMS_START + 349
-#define SPECIES_FLAPPLE_GMAX                 FORMS_START + 350
-#define SPECIES_APPLETUN_GMAX                FORMS_START + 351
-#define SPECIES_SANDACONDA_GMAX              FORMS_START + 352
-#define SPECIES_TOXTRICITY_GMAX              FORMS_START + 353
-#define SPECIES_CENTISKORCH_GMAX             FORMS_START + 354
-#define SPECIES_HATTERENE_GMAX               FORMS_START + 355
-#define SPECIES_GRIMMSNARL_GMAX              FORMS_START + 356
-#define SPECIES_ALCREMIE_GMAX                FORMS_START + 357
-#define SPECIES_COPPERAJAH_GMAX              FORMS_START + 358
-#define SPECIES_DURALUDON_GMAX               FORMS_START + 359
-#define SPECIES_URSHIFU_GMAX                 FORMS_START + 360
-#define SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GMAX    FORMS_START + 361
+#define SPECIES_VENUSAUR_GMAX                      FORMS_START + 330
+#define SPECIES_BLASTOISE_GMAX                     FORMS_START + 331
+#define SPECIES_CHARIZARD_GMAX                     FORMS_START + 332
+#define SPECIES_BUTTERFREE_GMAX                    FORMS_START + 333
+#define SPECIES_PIKACHU_GMAX                       FORMS_START + 334
+#define SPECIES_MEOWTH_GMAX                        FORMS_START + 335
+#define SPECIES_MACHAMP_GMAX                       FORMS_START + 336
+#define SPECIES_GENGAR_GMAX                        FORMS_START + 337
+#define SPECIES_KINGLER_GMAX                       FORMS_START + 338
+#define SPECIES_LAPRAS_GMAX                        FORMS_START + 339
+#define SPECIES_EEVEE_GMAX                         FORMS_START + 340
+#define SPECIES_SNORLAX_GMAX                       FORMS_START + 341
+#define SPECIES_GARBODOR_GMAX                      FORMS_START + 342
+#define SPECIES_MELMETAL_GMAX                      FORMS_START + 343
+#define SPECIES_RILLABOOM_GMAX                     FORMS_START + 344
+#define SPECIES_CINDERACE_GMAX                     FORMS_START + 345
+#define SPECIES_INTELEON_GMAX                      FORMS_START + 346
+#define SPECIES_CORVIKNIGHT_GMAX                   FORMS_START + 347
+#define SPECIES_ORBEETLE_GMAX                      FORMS_START + 348
+#define SPECIES_DREDNAW_GMAX                       FORMS_START + 349
+#define SPECIES_COALOSSAL_GMAX                     FORMS_START + 350
+#define SPECIES_FLAPPLE_GMAX                       FORMS_START + 351
+#define SPECIES_APPLETUN_GMAX                      FORMS_START + 352
+#define SPECIES_SANDACONDA_GMAX                    FORMS_START + 353
+#define SPECIES_TOXTRICITY_GMAX                    FORMS_START + 354
+#define SPECIES_CENTISKORCH_GMAX                   FORMS_START + 355
+#define SPECIES_HATTERENE_GMAX                     FORMS_START + 356
+#define SPECIES_GRIMMSNARL_GMAX                    FORMS_START + 357
+#define SPECIES_ALCREMIE_GMAX                      FORMS_START + 358
+#define SPECIES_COPPERAJAH_GMAX                    FORMS_START + 359
+#define SPECIES_DURALUDON_GMAX                     FORMS_START + 360
+#define SPECIES_URSHIFU_GMAX                       FORMS_START + 361
+#define SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GMAX    FORMS_START + 362
 
 #define FORMS_START SPECIES_ENAMORUS
 #define SPECIES_EGG SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GMAX + 1
