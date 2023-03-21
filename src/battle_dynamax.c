@@ -132,6 +132,32 @@ void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon)
 	}
 }
 
+// Returns the non-Dynamax HP of a Pokemon.
+u16 GetNonDynamaxHP(u16 battlerId)
+{
+	if (!IsDynamaxed(battlerId) || gBattleMons[battlerId].species == SPECIES_SHEDINJA)
+		return gBattleMons[battlerId].hp;
+	else
+	{
+		u16 mult = UQ_4_12(1.0/1.5); // placeholder
+		u16 hp = UQ_4_12_TO_INT((gBattleMons[battlerId].hp * mult) + UQ_4_12_ROUND);
+		return hp;
+	}
+}
+
+// Returns the non-Dynamax Max HP of a Pokemon.
+u16 GetNonDynamaxMaxHP(u16 battlerId)
+{
+	if (!IsDynamaxed(battlerId) || gBattleMons[battlerId].species == SPECIES_SHEDINJA)
+		return gBattleMons[battlerId].maxHP;
+	else
+	{
+		u16 mult = UQ_4_12(1.0/1.5); // placeholder
+		u16 maxHP = UQ_4_12_TO_INT((gBattleMons[battlerId].maxHP * mult) + UQ_4_12_ROUND);
+		return maxHP;
+	}
+}
+
 // Sets flags used for Dynamaxing and checks Gigantamax forms.
 void PrepareBattlerForDynamax(u16 battlerId)
 {

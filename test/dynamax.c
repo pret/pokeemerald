@@ -2,10 +2,20 @@
 #include "test_battle.h"
 
 // TODO:
-// Max Guard protects against Transform, Block (not Mean Look), Flower Shield, Gear Up, and so on (see Bulba).
-// Imprison doesn't stop Max Moves.
-// Max Moves change type as you'd expect with Normalize, Weather Ball, etc.
-// (Unrelated) Refactor code to remove dynamax.usingMaxMove?
+// TEST: Max Guard protects against Transform, Block (not Mean Look), Flower Shield, Gear Up, and so on (see Bulba).
+// TEST: Imprison doesn't stop Max Moves. (how?)
+// TEST: Max Moves change type as you'd expect with Normalize, Weather Ball, etc.
+// TEST: Reverting HP after Dynamax rounds up, so does Endeavor?
+// TEST: You use Struggle while Dynamaxed if out of PP.
+// Refactor code to remove dynamax.usingMaxMove? Might keep for Raids
+// Ditto cannot turn into a Gigantamax form.
+// Interactions with a Dynamaxed Pokemon with Magic Bounce.
+// Dynamax should not reset Speed Swap, Soak, or anything else from form changing.
+// Multi Attack is treated in Max Move power calcs like a Fighting or Poison type move.
+// Max Moves cannot be used against allies.
+// G-Max Befuddle applies statuses before considering immunities.
+// G-Max Replenish guarantees either both allies' berries or neithers.
+// G-Max Sandwhatever still keeps Sand Tomb up when Sandaconda switches.
 
 // ============= DYNAMAX AND MAX MOVE INTERACTIONS ===================
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax increases HP and max HP by 1.5x")
@@ -353,6 +363,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon take double damage from Dynamax 
     PARAMETRIZE { dynamaxed = FALSE; }
     PARAMETRIZE { dynamaxed = TRUE; }
     GIVEN {
+        ASSUME(gBattleMoves[MOVE_DYNAMAX_CANNON].effect == EFFECT_DYNAMAX_DOUBLE_DMG);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -508,6 +519,100 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot use Max Guard while holdi
     } SCENE {
         MESSAGE("Wobbuffet used Max Strike!");
         MESSAGE("Wobbuffet used Max Strike!");
+    }
+}
+
+// Almost anything that calculates gBattleMoveDamage based on HP has been changed to non-Dynamax HP.
+// This includes Leftovers, Life Orb, Heal Pulse, Rocky Helmet, Sandstorm, etc. etc.
+// There are some redundant cases (i.e Substitute) that can never be used by a Dynamaxed pokemon.
+// Anything that is conditional based off max HP still uses gBattleMons[battler].maxHP.
+// Below are some tests, but very far from all encompassing:
+
+SINGLE_BATTLE_TEST("(DYNAMAX) Endeavor uses a Pokemon's non-Dynamax HP")
+{
+    s16 damage;
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_ENDEAVOR].effect == EFFECT_ENDEAVOR);
+        PLAYER(SPECIES_WOBBUFFET) { MaxHP(100); Speed(50); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); MaxHP(100); Speed(100); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_ENDEAVOR); MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+    } SCENE {
+        MESSAGE("Foe Wobbuffet used Endeavor!");
+        HP_BAR(player, captureDamage: &damage);
+    } FINALLY {
+        EXPECT_EQ(damage, 99); // difference between foe's HP and player's non-dynamax HP
+    }
+}
+
+SINGLE_BATTLE_TEST("(DYNAMAX) Super Fang uses a Pokemon's non-Dynamax HP")
+{
+    s16 damage;
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_SUPER_FANG].effect == EFFECT_SUPER_FANG);
+        PLAYER(SPECIES_WOBBUFFET) { HP(50); MaxHP(100); Speed(50); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(100); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SUPER_FANG); MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+    } SCENE {
+        MESSAGE("Foe Wobbuffet used Super Fang!");
+        HP_BAR(player, captureDamage: &damage);
+    } FINALLY {
+        EXPECT_EQ(damage, 25);
+    }
+}
+
+SINGLE_BATTLE_TEST("(DYNAMAX) Pain Split uses a Pokemon's non-Dynamax HP")
+{
+    s16 damage;
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_PAIN_SPLIT].effect == EFFECT_PAIN_SPLIT);
+        PLAYER(SPECIES_WOBBUFFET) { HP(60); MaxHP(100); Speed(50); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(40); MaxHP(100); Speed(100); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_PAIN_SPLIT); MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+    } SCENE {
+        MESSAGE("Foe Wobbuffet used Pain Split!");
+        HP_BAR(player, captureDamage: &damage);
+    } FINALLY {
+        EXPECT_EQ(damage, 10);
+    }
+}
+
+SINGLE_BATTLE_TEST("(DYNAMAX) Sitrus Berries heal based on a Pokemon's non-Dynamax HP")
+{
+    s16 damage;
+    GIVEN {
+        ASSUME(I_SITRUS_BERRY_HEAL >= GEN_4);
+        ASSUME(gItems[ITEM_SITRUS_BERRY].holdEffect == HOLD_EFFECT_RESTORE_PCT_HP);
+        PLAYER(SPECIES_WOBBUFFET) { HP(60); MaxHP(100); Speed(50); Item(ITEM_SITRUS_BERRY); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(40); MaxHP(100); Speed(100); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_PAIN_SPLIT); MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+    } SCENE {
+        MESSAGE("Foe Wobbuffet used Pain Split!");
+        HP_BAR(player);
+        MESSAGE("Wobbuffet's Sitrus Berry restored health!");
+        HP_BAR(player, captureDamage: &damage);
+    } FINALLY {
+        EXPECT_EQ(damage, 25);
+    }
+}
+
+SINGLE_BATTLE_TEST("(DYNAMAX) Heal Pulse heals based on a Pokemon's non-Dynamax HP")
+{
+    s16 damage;
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_HEAL_PULSE].effect == EFFECT_HEAL_PULSE);
+        PLAYER(SPECIES_WOBBUFFET) { HP(50); MaxHP(100); Speed(50); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(100); Speed(100); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_HEAL_PULSE); MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+    } SCENE {
+        MESSAGE("Foe Wobbuffet used Heal Pulse!");
+        HP_BAR(player, captureDamage: &damage);
+    } FINALLY {
+        EXPECT_EQ(damage, 50);
     }
 }
 
