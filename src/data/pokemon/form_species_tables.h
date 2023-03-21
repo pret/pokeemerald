@@ -1145,4 +1145,10 @@ static const u16 sEnamorusFormSpeciesIdTable[] = {
     FORM_SPECIES_END,
 };
 
+static const u16 sBasculegionFormSpeciesIdTable[] = {
+    SPECIES_BASCULEGION,
+    SPECIES_BASCULEGION_FEMALE,
+    FORM_SPECIES_END,
+};
+
 #endif

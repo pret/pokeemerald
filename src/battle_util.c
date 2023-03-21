@@ -8710,6 +8710,10 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         basePower = CalcBeatUpPower();
         #endif
         break;
+    case EFFECT_PSYBLADE:
+        if (IsBattlerTerrainAffected(gBattlerAttacker, STATUS_FIELD_ELECTRIC_TERRAIN))
+            MulModifier(&basePower, UQ_4_12(1.5));
+        break;
     }
 
     // Move-specific base power changes
@@ -9524,7 +9528,7 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
     }
     else if (IsBattlerWeatherAffected(battlerAtk, B_WEATHER_SUN))
     {
-        if (moveType == TYPE_FIRE)
+        if (moveType == TYPE_FIRE || gBattleMoves[move].effect == EFFECT_HYDRO_STEAM)
             dmg = ApplyModifier(UQ_4_12(1.5), dmg);
         else if (moveType == TYPE_WATER)
             dmg = ApplyModifier(UQ_4_12(0.5), dmg);

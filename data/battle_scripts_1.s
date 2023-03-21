@@ -417,7 +417,9 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectVictoryDance            @ EFFECT_VICTORY_DANCE
 	.4byte BattleScript_EffectTeatime                 @ EFFECT_TEATIME
 	.4byte BattleScript_EffectAttackUpUserAlly        @ EFFECT_ATTACK_UP_USER_ALLY
-	.4byte BattleScript_EffectShellTrap				  @ EFFECT_SHELL_TRAP
+	.4byte BattleScript_EffectShellTrap               @ EFFECT_SHELL_TRAP
+	.4byte BattleScript_EffectHit                     @ EFFECT_PSYBLADE
+	.4byte BattleScript_EffectHit                     @ EFFECT_HYDRO_STEAM
 
 BattleScript_EffectAttackUpUserAlly:
 	jumpifnoally BS_ATTACKER, BattleScript_EffectAttackUp
