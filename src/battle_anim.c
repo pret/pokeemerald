@@ -453,7 +453,7 @@ static u8 GetBattleAnimMoveTargets(u8 battlerArgIndex, u8 *targets)
             targets[1] = BATTLE_PARTNER(targets[0]);
             numTargets++;
         }
-        
+
         if (IsBattlerAlive(BATTLE_PARTNER(BATTLE_OPPOSITE(targets[0])))) {
             targets[2] = BATTLE_PARTNER(BATTLE_OPPOSITE(targets[0])); 
             numTargets++;
