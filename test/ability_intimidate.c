@@ -122,3 +122,40 @@ SINGLE_BATTLE_TEST("Intimidate and Eject Button force the opponent to Attack")
         }
     }
 }
+
+DOUBLE_BATTLE_TEST("Intimidate activates on an empty slot")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_CROAGUNK);
+        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_HITMONTOP) { Ability(ABILITY_INTIMIDATE); };
+        OPPONENT(SPECIES_RALTS);
+        OPPONENT(SPECIES_AZURILL);
+    } WHEN {
+        TURN {
+            SWITCH(playerLeft, 2);
+            MOVE(playerRight, MOVE_GUNK_SHOT, target: opponentLeft);
+            MOVE(opponentRight, MOVE_SPLASH);
+        }
+        TURN {
+            SWITCH(playerLeft, 3);
+            MOVE(playerRight, MOVE_SPLASH);
+            }
+
+
+    } SCENE {
+        MESSAGE("Wobbuffet, that's enough! Come back!");
+        MESSAGE("Go! Wynaut!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GUNK_SHOT, playerRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPLASH, opponentRight);
+        MESSAGE("Wynaut, that's enough! Come back!");
+        MESSAGE("Go! Hitmontop!");
+        ABILITY_POPUP(playerLeft, ABILITY_INTIMIDATE);
+        NONE_OF {
+            MESSAGE("Hitmontop's Intimidate cuts Foe Ralts's attack!");
+        }
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
+        MESSAGE("Hitmontop's Intimidate cuts Foe Azurill's attack!");
+    }
+}
