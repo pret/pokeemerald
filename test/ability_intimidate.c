@@ -95,3 +95,30 @@ DOUBLE_BATTLE_TEST("Intimidate doesn't activate on an empty field in a double ba
         MESSAGE("Foe Arbok's Intimidate cuts Abra's attack!");
     }
 }
+
+SINGLE_BATTLE_TEST("Intimidate and Eject Button force the opponent to Attack")
+{
+    GIVEN {
+        ASSUME(gItems[ITEM_EJECT_BUTTON].holdEffect == HOLD_EFFECT_EJECT_BUTTON);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); };
+        OPPONENT(SPECIES_HITMONTOP) { Moves(MOVE_TACKLE); };
+    } WHEN {
+        TURN { 
+               MOVE(player, MOVE_QUICK_ATTACK);
+               MOVE(opponent, MOVE_TACKLE);
+               SEND_OUT(opponent, 1);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, player);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
+        MESSAGE("Foe Wobbuffet is switched out with the Eject Button!");
+        MESSAGE("2 sent out Hitmontop!");
+        ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
+        MESSAGE("Foe Hitmontop's Intimidate cuts Wobbuffet's attack!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+            MESSAGE("Foe Hitmontop used Tackle!");
+        }
+    }
+}
