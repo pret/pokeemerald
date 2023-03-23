@@ -5247,6 +5247,12 @@ static void HandleEndTurn_FinishBattle(void)
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             TryRestoreStolenItems();
     #endif
+
+        // Undo Dynamax HP multiplier before recalculating stats.
+        for (i = 0; i < gBattlersCount; ++i)
+            if (IsDynamaxed(i))
+                UndoDynamax(i);
+
         for (i = 0; i < PARTY_SIZE; i++)
         {
             bool8 changedForm = FALSE;

@@ -477,6 +477,7 @@ extern const u8 BattleScript_EffectSetWeather[];
 extern const u8 BattleScript_EffectSetTerrain[];
 extern const u8 BattleScript_SteelsurgeActivates[];
 extern const u8 BattleScript_SteelsurgeFree[];
+extern const u8 BattleScript_SteelsurgeDefog[];
 extern const u8 BattleScript_DamageNonTypesStarts[];
 extern const u8 BattleScript_DamageNonTypesContinues[];
 extern const u8 BattleScript_DefogTryHazards[];

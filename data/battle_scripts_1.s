@@ -7483,6 +7483,11 @@ BattleScript_StealthRockFree::
 	waitmessage B_WAIT_TIME_LONG
 	return
 	
+BattleScript_SteelsurgeFree::
+	printstring STRINGID_PKMNBLEWAWAYSHARPSTEEL
+	waitmessage B_WAIT_TIME_LONG
+	return
+
 BattleScript_SpikesDefog::
 	printstring STRINGID_SPIKESDISAPPEAREDFROMTEAM
 	waitmessage B_WAIT_TIME_LONG
@@ -7503,8 +7508,8 @@ BattleScript_StealthRockDefog::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
-BattleScript_SteelsurgeFree::
-	printstring STRINGID_PKMNBLEWAWAYSHARPSTEEL
+BattleScript_SteelsurgeDefog::
+	printstring STRINGID_SHARPSTEELDISAPPEAREDFROMTEAM
 	waitmessage B_WAIT_TIME_LONG
 	return
 

@@ -5,7 +5,6 @@
 // TEST: Max Guard protects against Transform, Block (not Mean Look), Flower Shield, Gear Up, and so on (see Bulba).
 // TEST: Imprison doesn't stop Max Moves. (how?)
 // TEST: Max Moves change type as you'd expect with Normalize, Weather Ball, etc.
-// TEST: Reverting HP after Dynamax rounds up, so does Endeavor?
 // TEST: You use Struggle while Dynamaxed if out of PP.
 // Refactor code to remove dynamax.usingMaxMove? Might keep for Raids
 // Ditto cannot turn into a Gigantamax form.
@@ -677,6 +676,47 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) Max Strike lowers both opponents' speed")
     }
 }
 
+DOUBLE_BATTLE_TEST("(DYNAMAX) Max Knuckle raises both allies' attack")
+{
+    s16 damage[4];
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_MAX_KNUCKLE].argument == MAX_EFFECT_RAISE_TEAM_ATTACK);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_CLOSE_COMBAT, target: opponentLeft, dynamax: TRUE); \
+               MOVE(playerRight, MOVE_TACKLE, target: opponentRight); }
+        TURN { MOVE(playerLeft, MOVE_CLOSE_COMBAT, target: opponentLeft); \
+               MOVE(playerRight, MOVE_TACKLE, target: opponentRight); }
+    } SCENE {
+        // turn 1
+        MESSAGE("Wobbuffet used Max Knuckle!");
+        HP_BAR(opponentLeft, captureDamage: &damage[0]);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+        MESSAGE("Wobbuffet's attack rose!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
+        MESSAGE("Wynaut's attack rose!");
+        MESSAGE("Wynaut used Tackle!");
+        HP_BAR(opponentRight, captureDamage: &damage[1]);
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+        MESSAGE("Foe Wynaut used Celebrate!");
+        // turn 2
+        MESSAGE("Wobbuffet used Max Knuckle!");
+        HP_BAR(opponentLeft, captureDamage: &damage[2]);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+        MESSAGE("Wobbuffet's attack rose!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
+        MESSAGE("Wynaut's attack rose!");
+        MESSAGE("Wynaut used Tackle!");
+        HP_BAR(opponentRight, captureDamage: &damage[3]);
+    } FINALLY {
+        EXPECT_GT(damage[2], damage[0]);
+        EXPECT_GT(damage[3], damage[1]);
+    }
+}
+
 SINGLE_BATTLE_TEST("(DYNAMAX) Max Flare sets up sunlight")
 {
     GIVEN {
@@ -773,5 +813,106 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Mindstorm sets up Psychic Terrain")
         MESSAGE("Wobbuffet used Max Mindstorm!");
         MESSAGE("Foe Wobbuffet cannot use ExtremeSpeed!");
         MESSAGE("Wobbuffet used Max Mindstorm!");
+    }
+}
+
+SINGLE_BATTLE_TEST("(DYNAMAX) Max Lightning sets up Electric Terrain")
+{
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_MAX_LIGHTNING].argument == MAX_EFFECT_ELECTRIC_TERRAIN);
+        OPPONENT(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_THUNDERBOLT, dynamax: TRUE); MOVE(opponent, MOVE_SPORE); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Max Lightning!");
+        MESSAGE("Foe Wobbuffet used Spore!");
+        MESSAGE("Wobbuffet surrounds itself with electrified terrain!");
+    }
+}
+
+SINGLE_BATTLE_TEST("(DYNAMAX) Max Starfall sets up Misty Terrain")
+{
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_MAX_STARFALL].argument == MAX_EFFECT_MISTY_TERRAIN);
+        OPPONENT(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_MOONBLAST, dynamax: TRUE); MOVE(opponent, MOVE_TOXIC); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Max Starfall!");
+        MESSAGE("Foe Wobbuffet used Toxic!");
+        MESSAGE("Wobbuffet surrounds itself with a protective mist!");
+    }
+}
+
+SINGLE_BATTLE_TEST("(DYNAMAX) G-Max Stonesurge sets up Stealth Rocks")
+{
+    GIVEN {
+        ASSUME(P_GEN_8_POKEMON == TRUE);
+        ASSUME(gBattleMoves[MOVE_G_MAX_STONESURGE].argument == MAX_EFFECT_STEALTH_ROCK);
+        PLAYER(SPECIES_DREDNAW);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_LIQUIDATION, dynamax: TRUE); }
+        TURN { SWITCH(opponent, 1); }
+    } SCENE {
+        // turn 1
+        MESSAGE("Drednaw used G-Max Stonesurge!");
+        MESSAGE("Pointed stones float in the air around the opposing team!");
+        // turn 2
+        MESSAGE("Pointed stones dug into Foe Wobbuffet!");
+    }
+}
+
+// The test below also tests that sharp steel does type-based damage and can be Defogged away.
+SINGLE_BATTLE_TEST("(DYNAMAX) G-Max Steelsurge sets up sharp steel")
+{
+    s16 damage;
+    GIVEN {
+        ASSUME(P_GEN_8_POKEMON == TRUE);
+        ASSUME(gBattleMoves[MOVE_G_MAX_STEELSURGE].argument == MAX_EFFECT_STEELSURGE);
+        PLAYER(SPECIES_COPPERAJAH);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_CLEFABLE) { MaxHP(100); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_IRON_HEAD, dynamax: TRUE); }
+        TURN { SWITCH(opponent, 1); }
+        TURN { } // wait out Dynamax
+        TURN { MOVE(opponent, MOVE_DEFOG); }
+    } SCENE {
+        // turn 1
+        MESSAGE("Copperajah used G-Max Steelsurge!");
+        MESSAGE("Sharp-pointed steel floats around the opposing team!");
+        // turn 2
+        HP_BAR(opponent, captureDamage: &damage);
+        MESSAGE("Sharp steel bit into Foe Clefable!");
+        // turn 4
+        MESSAGE("Foe Clefable used Defog!");
+        MESSAGE("The sharp steel disappeared from the ground around the opposing team!");
+    } FINALLY {
+        EXPECT_EQ(damage, 25);
+    }
+}
+
+// The test below should apply to G-Max Fireball and G-Max Drum Solo, too.
+SINGLE_BATTLE_TEST("(DYNAMAX) G-Max Hydrosnipe has fixed power and ignores abilities", s16 damage)
+{
+    u16 move;
+    PARAMETRIZE { move = MOVE_WATER_GUN; }
+    PARAMETRIZE { move = MOVE_HYDRO_CANNON; }
+    GIVEN {
+        ASSUME(P_GEN_8_POKEMON == TRUE);
+        ASSUME(gBattleMoves[MOVE_G_MAX_HYDROSNIPE].argument == MAX_EFFECT_FIXED_POWER);
+        PLAYER(SPECIES_INTELEON);
+        OPPONENT(SPECIES_ARCTOVISH) { Ability(ABILITY_WATER_ABSORB); }
+    } WHEN {
+        TURN { MOVE(player, move, dynamax: TRUE); }
+    } SCENE {
+        MESSAGE("Inteleon used G-Max Hydrosnipe!");
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_EQ(results[0].damage, results[1].damage);
     }
 }

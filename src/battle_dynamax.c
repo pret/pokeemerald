@@ -179,12 +179,21 @@ void PrepareBattlerForDynamax(u16 battlerId)
 	TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_GIGANTAMAX);
 }
 
-// Sets flags needed for undoing Dynamax and undoes Gigantamax forms.
+// Unsets the flags used for Dynamaxing and reverts max HP if needed.
 void UndoDynamax(u16 battlerId)
 {
 	u8 side = GetBattlerSide(battlerId);
+	// Revert HP if battler is Dynamaxed.
+	if (IsDynamaxed(battlerId))
+	{
+		struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+		u16 mult = UQ_4_12(1.0/1.5); // placeholder
+		u16 hp = UQ_4_12_TO_INT((gBattleMons[battlerId].hp * mult + 1) + UQ_4_12_ROUND); // round up
+		SetMonData(&party[gBattlerPartyIndexes[battlerId]], MON_DATA_HP, &hp);
+	}
+	// Makes sure there are no Dynamax flags set, including on switch / faint.
 	gBattleStruct->dynamax.dynamaxed[battlerId] = FALSE;
-	gBattleStruct->dynamax.dynamaxTurns[battlerId] = 0; // safety check for switch-in / faint
+	gBattleStruct->dynamax.dynamaxTurns[battlerId] = 0;
 }
 
 // Weight-based moves (and some other moves in Raids) are blocked by Dynamax.
