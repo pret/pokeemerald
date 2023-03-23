@@ -965,7 +965,11 @@
 #define ITEM_STEEL_TERA_SHARD 790
 #define ITEM_WATER_TERA_SHARD 791
 
-#define ITEMS_COUNT 792
+#define ITEM_ADAMANT_CRYSTAL 792
+#define ITEM_GRISEOUS_CORE 793
+#define ITEM_LUSTROUS_GLOBE 794
+
+#define ITEMS_COUNT 795
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations

@@ -3877,3 +3877,18 @@ static const u8 sTeraShardDesc[] = _(
     "These shards may\n"
     "form when a Tera\n"
     "Pokémon faints.");
+
+static const u8 sAdamantCrystalDesc[] = _(
+    "A large, glowing gem\n"
+    "that lets Dialga\n"
+    "change form.");
+
+static const u8 sGriseousCoreDesc[] = _(
+    "A large, glowing gem\n"
+    "that lets Giratina\n"
+    "change form.");
+
+static const u8 sLustrousGlobeDesc[] = _(
+    "A large, glowing gem\n"
+    "that lets Palkia\n"
+    "change form.");

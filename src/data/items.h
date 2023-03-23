@@ -10247,4 +10247,40 @@ const struct Item gItems[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
+
+    [ITEM_ADAMANT_CRYSTAL] =
+    {
+        .name = _("AdamantCrystl"),
+        .itemId = ITEM_ADAMANT_CRYSTAL,
+        .price = 0,
+        .description = sAdamantCrystalDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 60,
+    },
+
+    [ITEM_GRISEOUS_CORE] =
+    {
+        .name = _("Griseous Core"),
+        .itemId = ITEM_GRISEOUS_CORE,
+        .price = 0,
+        .description = sGriseousCoreDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 60,
+    },
+
+    [ITEM_LUSTROUS_GLOBE] =
+    {
+        .name = _("LustrousGlobe"),
+        .itemId = ITEM_LUSTROUS_GLOBE,
+        .price = 0,
+        .description = sLustrousGlobeDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 60,
+    },
 };

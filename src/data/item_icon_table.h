@@ -837,6 +837,9 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_ROCK_TERA_SHARD] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // {gItemIcon_RockTeraShard, gItemIconPalette_RockTeraShard},
     [ITEM_STEEL_TERA_SHARD] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // {gItemIcon_SteelTeraShard, gItemIconPalette_SteelTeraShard},
     [ITEM_WATER_TERA_SHARD] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // {gItemIcon_WaterTeraShard, gItemIconPalette_WaterTeraShard},
+    [ITEM_ADAMANT_CRYSTAL] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // {gItemIcon_AdamantCrystal, gItemIconPalette_AdamantCrystal},
+    [ITEM_GRISEOUS_CORE] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // {gItemIcon_GriseousCore, gItemIconPalette_GriseousCore},
+    [ITEM_LUSTROUS_GLOBE] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // {gItemIcon_LustrousGlobe, gItemIconPalette_LustrousGlobe},
     // Return to field arrow
     [ITEMS_COUNT] = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
 };
