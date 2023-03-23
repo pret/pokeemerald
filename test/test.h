@@ -9,7 +9,7 @@ enum TestResult
 {
     TEST_RESULT_FAIL,
     TEST_RESULT_PASS,
-    TEST_RESULT_SKIP,
+    TEST_RESULT_ASSUMPTION_FAIL,
     TEST_RESULT_INVALID,
     TEST_RESULT_ERROR,
     TEST_RESULT_TIMEOUT,
@@ -77,7 +77,7 @@ s32 MgbaPrintf_(const char *fmt, ...);
     do \
     { \
         if (!(c)) \
-            Test_ExitWithResult(TEST_RESULT_SKIP, "%s:%d: ASSUME failed", gTestRunnerState.test->filename, __LINE__); \
+            Test_ExitWithResult(TEST_RESULT_ASSUMPTION_FAIL, "%s:%d: ASSUME failed", gTestRunnerState.test->filename, __LINE__); \
     } while (0)
 
 #define EXPECT(c) \

@@ -1317,6 +1317,12 @@
 	.2byte \holdEffect
 	.4byte \jumpInstr
 	.endm
+	
+	.macro dostockpilestatchangeswearoff, battler:req, statChangeInstr:req
+	callnative BS_DoStockpileStatChangesWearOff
+	.byte \battler
+	.4byte \statChangeInstr
+	.endm
 
 	.macro jumpifmorethanhalfHP battler:req, jumpInstr:req
 	callnative BS_JumpIfMoreThanHalfHP
