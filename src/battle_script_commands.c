@@ -3783,7 +3783,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 }
                 break;
             case MOVE_EFFECT_SPIKES:
-                if (!(gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_SPIKES))
+                if (gSideTimers[GetBattlerSide(gEffectBattler)].spikesAmount < 3)
                 {
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SPIKESSCATTERED;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
