@@ -10517,7 +10517,8 @@ BattleScript_Status1FoesLoop:
 	updatestatusicon BS_TARGET
 	printfromtable gStatusConditionsStringIds
 	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_UpdateEffectStatusIconRet
+	updatestatusicon BS_EFFECT_BATTLER
+	waitstate
 BattleScript_Status1FoesIncrement:
 	jumpifbytenotequal gBattlerTarget, sBATTLER, BattleScript_Status1FoesEnd
 	setallytonexttarget BattleScript_Status1FoesLoop
@@ -10545,11 +10546,11 @@ BattleScript_Status2FoesEnd:
 	goto BattleScript_MoveEnd
 
 BattleScript_DoConfuseAnim:
-	status2animation BS_TARGET, STATUS2_CONFUSION
+	status2animation BS_EFFECT_BATTLER, STATUS2_CONFUSION
 	goto BattleScript_Status2FoesPrintMessage
 
 BattleScript_DoInfatuationAnim:
-	status2animation BS_TARGET, STATUS2_INFATUATION
+	status2animation BS_EFFECT_BATTLER, STATUS2_INFATUATION
 	goto BattleScript_Status2FoesPrintMessage
 
 BattleScript_PrintCoinsScattered:

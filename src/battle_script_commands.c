@@ -11273,7 +11273,7 @@ static void Cmd_various(void)
                     && !IsAbilityOnSide(gBattlerTarget, ABILITY_AROMA_VEIL))
                 {
                     gBattleMons[gBattlerTarget].status2 |= STATUS2_TORMENT;
-                    gDisableStructs[gBattlerTarget].tormentTimer = 4; // 3 turns excluding current turn
+                    gDisableStructs[gBattlerTarget].tormentTimer = 3; // 3 turns excluding current turn
                     gBattleCommunication[MULTISTRING_CHOOSER] = 3;
                     effect++;
                 }

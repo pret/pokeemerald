@@ -2,18 +2,19 @@
 #include "test_battle.h"
 
 // TODO:
+// ==========
 // TEST: Max Guard protects against Transform, Block (not Mean Look), Flower Shield, Gear Up, and so on (see Bulba).
-// TEST: Imprison doesn't stop Max Moves. (how?)
-// TEST: Max Moves change type as you'd expect with Normalize, Weather Ball, etc.
-// TEST: You use Struggle while Dynamaxed if out of PP.
+// TEST: Imprison doesn't stop Max Moves. (YES!)
+// TEST: Max Moves change type as you'd expect with Normalize, Weather Ball, etc. (YES!)
+// TEST: You use Struggle while Dynamaxed if out of PP. (YES!)
+// TEST: G-Max Befuddle applies statuses before considering immunities. (YES!)
 // Refactor code to remove dynamax.usingMaxMove? Might keep for Raids
-// Ditto cannot turn into a Gigantamax form.
-// Interactions with a Dynamaxed Pokemon with Magic Bounce.
-// Dynamax should not reset Speed Swap, Soak, or anything else from form changing.
-// Multi Attack is treated in Max Move power calcs like a Fighting or Poison type move.
-// Max Moves cannot be used against allies.
-// G-Max Befuddle applies statuses before considering immunities.
-// G-Max Replenish guarantees either both allies' berries or neithers.
+// Ditto cannot turn into a Gigantamax form. (NO)
+// Interactions with a Dynamaxed Pokemon with Magic Bounce. (???)
+// Dynamax should not reset Speed Swap, Soak, or anything else from form changing. (NO)
+// Multi Attack is treated in Max Move power calcs like a Fighting or Poison type move. (NO)
+// Max Moves cannot be used against allies. (NO)
+// G-Max Replenish guarantees either both allies' berries or neither's. (NO)
 // G-Max Sandwhatever still keeps Sand Tomb up when Sandaconda switches.
 
 // ============= DYNAMAX AND MAX MOVE INTERACTIONS ===================
@@ -914,5 +915,224 @@ SINGLE_BATTLE_TEST("(DYNAMAX) G-Max Hydrosnipe has fixed power and ignores abili
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
         EXPECT_EQ(results[0].damage, results[1].damage);
+    }
+}
+
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Volt Crash paralyzes both opponents")
+{
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_G_MAX_VOLT_CRASH].argument == MAX_EFFECT_PARALYZE_FOES);
+        PLAYER(SPECIES_PIKACHU);
+        PLAYER(SPECIES_PICHU);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_THUNDERBOLT, target: opponentLeft, dynamax: TRUE); }
+    } SCENE {
+        MESSAGE("Pikachu used G-Max Volt Crash!");
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponentLeft);
+        STATUS_ICON(opponentLeft, paralysis: TRUE);
+        MESSAGE("Foe Wobbuffet is paralyzed! It may be unable to move!");
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponentRight);
+        STATUS_ICON(opponentRight, paralysis: TRUE);
+        MESSAGE("Foe Wynaut is paralyzed! It may be unable to move!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Stun Shock paralyzes or poisons both opponents")
+{
+    GIVEN {
+        ASSUME(P_GEN_8_POKEMON == TRUE);
+        ASSUME(gBattleMoves[MOVE_G_MAX_STUN_SHOCK].argument == MAX_EFFECT_POISON_PARALYZE_FOES);
+        PLAYER(SPECIES_TOXTRICITY);
+        PLAYER(SPECIES_TOXEL);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_THUNDERBOLT, target: opponentLeft, dynamax: TRUE); }
+    } SCENE {
+        MESSAGE("Toxtricity used G-Max Stun Shock!");
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponentLeft);
+        STATUS_ICON(opponentLeft, poison: TRUE);
+        MESSAGE("Foe Wobbuffet was poisoned!");
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponentRight);
+        STATUS_ICON(opponentRight, paralysis: TRUE);
+        MESSAGE("Foe Wynaut is paralyzed! It may be unable to move!");
+    }
+}
+
+// This test extends to G-Max Befuddle, too.
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Stun Shock chooses statuses before considering immunities")
+{
+    GIVEN {
+        ASSUME(P_GEN_8_POKEMON == TRUE);
+        ASSUME(gBattleMoves[MOVE_G_MAX_STUN_SHOCK].argument == MAX_EFFECT_POISON_PARALYZE_FOES);
+        PLAYER(SPECIES_TOXTRICITY);
+        PLAYER(SPECIES_TOXEL);
+        OPPONENT(SPECIES_GARBODOR);
+        OPPONENT(SPECIES_TRUBBISH);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_NUZZLE, target: opponentLeft, dynamax: TRUE); }
+    } SCENE {
+        MESSAGE("Toxtricity used G-Max Stun Shock!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponentLeft);
+            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponentLeft);
+        }
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponentRight);
+        MESSAGE("Foe Trubbish is paralyzed! It may be unable to move!");
+        STATUS_ICON(opponentRight, paralysis: TRUE);
+    } FINALLY {
+        EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].status1, STATUS1_NONE);
+    }
+}
+
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Befuddle paralyzes, poisons, or sleeps both opponents")
+{
+    GIVEN {
+        RNGSeed(0x10000);
+        ASSUME(gBattleMoves[MOVE_G_MAX_BEFUDDLE].argument == MAX_EFFECT_EFFECT_SPORE_FOES);
+        PLAYER(SPECIES_BUTTERFREE);
+        PLAYER(SPECIES_CATERPIE);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_BUG_BITE, target: opponentLeft, dynamax: TRUE); }
+        TURN { SWITCH(opponentLeft, 2); SWITCH(opponentRight, 3); \
+               MOVE(playerLeft, MOVE_BUG_BITE, target: opponentLeft); }
+    } SCENE {
+        // turn 1
+        MESSAGE("Butterfree used G-Max Befuddle!");
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponentLeft);
+        STATUS_ICON(opponentLeft, poison: TRUE);
+        MESSAGE("Foe Wobbuffet was poisoned!");
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponentRight);
+        STATUS_ICON(opponentRight, sleep: TRUE);
+        MESSAGE("Foe Wobbuffet fell asleep!");
+        // turn 2
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponentLeft);
+        MESSAGE("Foe Wobbuffet is paralyzed! It may be unable to move!");
+        STATUS_ICON(opponentLeft, paralysis: TRUE);
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponentRight);
+        MESSAGE("Foe Wobbuffet was poisoned!");
+        STATUS_ICON(opponentRight, poison: TRUE);
+    }
+}
+
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Gold Rush confuses both opponents and generates money")
+{
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_G_MAX_GOLD_RUSH].argument == MAX_EFFECT_CONFUSE_FOES_PAY_DAY);
+        PLAYER(SPECIES_MEOWTH);
+        PLAYER(SPECIES_PERSIAN);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft, dynamax: TRUE); }
+    } SCENE {
+        MESSAGE("Meowth used G-Max Gold Rush!");
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, opponentLeft);
+        MESSAGE("Foe Wobbuffet became confused!");
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, opponentRight);
+        MESSAGE("Foe Wobbuffet became confused!");
+        MESSAGE("Coins scattered everywhere!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Smite confuses both opponents")
+{
+    GIVEN {
+        ASSUME(P_GEN_8_POKEMON == TRUE);
+        ASSUME(gBattleMoves[MOVE_G_MAX_SMITE].argument == MAX_EFFECT_CONFUSE_FOES);
+        PLAYER(SPECIES_HATTERENE);
+        PLAYER(SPECIES_HATENNA);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_MOONBLAST, target: opponentLeft, dynamax: TRUE); }
+    } SCENE {
+        MESSAGE("Hatterene used G-Max Smite!");
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, opponentLeft);
+        MESSAGE("Foe Wobbuffet became confused!");
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, opponentRight);
+        MESSAGE("Foe Wobbuffet became confused!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Cuddle infatuates both opponents, if possible")
+{
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_G_MAX_CUDDLE].argument == MAX_EFFECT_INFATUATE_FOES);
+        PLAYER(SPECIES_EEVEE) { Gender(MON_MALE); }
+        PLAYER(SPECIES_EEVEE);
+        OPPONENT(SPECIES_WOBBUFFET) { Gender(MON_FEMALE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Gender(MON_MALE); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft, dynamax: TRUE); }
+    } SCENE {
+        MESSAGE("Eevee used G-Max Cuddle!");
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_INFATUATION, opponentLeft);
+        MESSAGE("Foe Wobbuffet fell in love!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_INFATUATION, opponentRight);
+            MESSAGE("Foe Wobbuffet became confused!");
+        }
+    }
+}
+
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Terror traps both opponents")
+{
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_G_MAX_TERROR].argument == MAX_EFFECT_MEAN_LOOK);
+        PLAYER(SPECIES_GENGAR);
+        PLAYER(SPECIES_GASTLY);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_LICK, target: opponentLeft, dynamax: TRUE); }
+    } SCENE {
+        MESSAGE("Gengar used G-Max Terror!");
+        MESSAGE("Foe Wobbuffet can't escape now!");
+        MESSAGE("Foe Wobbuffet can't escape now!");
+    } FINALLY { // Can't find good way to test trapping
+        EXPECT(gBattleMons[B_POSITION_OPPONENT_LEFT].status2 & STATUS2_ESCAPE_PREVENTION);
+    }
+}
+
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Meltdown torments both opponents for 3 turns")
+{
+    GIVEN {
+        ASSUME(P_GEN_7_POKEMON == TRUE);
+        ASSUME(gBattleMoves[MOVE_G_MAX_MELTDOWN].argument == MAX_EFFECT_TORMENT_FOES);
+        PLAYER(SPECIES_MELMETAL);
+        PLAYER(SPECIES_MELTAN);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_SPLASH, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WYNAUT) { Moves(MOVE_SPLASH, MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_IRON_HEAD, target: opponentLeft, dynamax: TRUE); \
+               MOVE(opponentLeft, MOVE_SPLASH); MOVE(opponentRight, MOVE_SPLASH); }
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE, target: opponentLeft); \
+               MOVE(opponentLeft, MOVE_SPLASH, allowed: FALSE); \
+               MOVE(opponentLeft, MOVE_CELEBRATE); \
+               MOVE(opponentRight, MOVE_SPLASH, allowed: FALSE); \
+               MOVE(opponentRight, MOVE_CELEBRATE); }
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE, target: opponentLeft); \
+               MOVE(opponentLeft, MOVE_SPLASH); \
+               MOVE(opponentRight, MOVE_SPLASH); }
+    } SCENE {
+        // turn 1
+        MESSAGE("Melmetal used G-Max Meltdown!");
+        MESSAGE("Foe Wobbuffet was subjected to torment!");
+        MESSAGE("Foe Wynaut was subjected to torment!");
+        MESSAGE("Foe Wobbuffet used Splash!");
+        MESSAGE("Foe Wynaut used Splash!");
+        // turn 2
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+        MESSAGE("Foe Wynaut used Celebrate!");
+        // end of turn 3
+        MESSAGE("Foe Wobbuffet is tormented no more!");
+        MESSAGE("Foe Wynaut is tormented no more!");
     }
 }
