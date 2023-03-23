@@ -7,15 +7,12 @@
 // TEST: Imprison doesn't stop Max Moves. (YES!)
 // TEST: Max Moves change type as you'd expect with Normalize, Weather Ball, etc. (YES!)
 // TEST: You use Struggle while Dynamaxed if out of PP. (YES!)
-// TEST: G-Max Befuddle applies statuses before considering immunities. (YES!)
 // Refactor code to remove dynamax.usingMaxMove? Might keep for Raids
 // Ditto cannot turn into a Gigantamax form. (NO)
 // Interactions with a Dynamaxed Pokemon with Magic Bounce. (???)
 // Dynamax should not reset Speed Swap, Soak, or anything else from form changing. (NO)
 // Multi Attack is treated in Max Move power calcs like a Fighting or Poison type move. (NO)
 // Max Moves cannot be used against allies. (NO)
-// G-Max Replenish guarantees either both allies' berries or neither's. (NO)
-// G-Max Sandwhatever still keeps Sand Tomb up when Sandaconda switches.
 
 // ============= DYNAMAX AND MAX MOVE INTERACTIONS ===================
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax increases HP and max HP by 1.5x")
@@ -378,7 +375,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon take double damage from Dynamax 
 SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves deal 1/4 damage through protect", s16 damage)
 {
     bool32 protected;
-    KNOWN_FAILING; // rounding error? also messages are wonky
+    KNOWN_FAILING; // // damage isn't equal because RNG misbehaves
     PARAMETRIZE { protected = FALSE; }
     PARAMETRIZE { protected = TRUE; }
     GIVEN {
@@ -641,6 +638,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Strike lowers single opponent's speed")
     }
 }
 
+// This test should apply to all stat-lowering Max Moves, including G-Max Foam Burst and G-Max Tartness.
 DOUBLE_BATTLE_TEST("(DYNAMAX) Max Strike lowers both opponents' speed")
 {
     GIVEN {
@@ -677,6 +675,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) Max Strike lowers both opponents' speed")
     }
 }
 
+// This test should apply to all stat-boosting Max Moves, too.
 DOUBLE_BATTLE_TEST("(DYNAMAX) Max Knuckle raises both allies' attack")
 {
     s16 damage[4];
@@ -1134,5 +1133,263 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Meltdown torments both opponents for 3 turns
         // end of turn 3
         MESSAGE("Foe Wobbuffet is tormented no more!");
         MESSAGE("Foe Wynaut is tormented no more!");
+    }
+}
+
+// This test applies to G-Max Cannonade, G-Max Vine Lash, and G-Max Volcalith, too.
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Wildfire sets a field effect that damages non-Fire types")
+{
+    s16 damage;
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_G_MAX_WILDFIRE].argument == MAX_EFFECT_WILDFIRE);
+        PLAYER(SPECIES_CHARIZARD);
+        PLAYER(SPECIES_CHARMANDER);
+        OPPONENT(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); }
+        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_ARCANINE);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_EMBER, target: opponentLeft, dynamax: TRUE); }
+        TURN { }
+        TURN { SWITCH(opponentLeft, 2); }
+        TURN { }
+        TURN { }
+    } SCENE {
+        // turn 1
+        MESSAGE("Charizard used G-Max Wildfire!");
+        MESSAGE("The opposing team was surrounded by flames!");
+        MESSAGE("Foe Wobbuffet is burning up within G-Max Wildfire's flames!");
+        HP_BAR(opponentLeft, captureDamage: &damage);
+        MESSAGE("Foe Wynaut is burning up within G-Max Wildfire's flames!");
+        HP_BAR(opponentRight);
+        // turn 2
+        MESSAGE("Foe Wobbuffet is burning up within G-Max Wildfire's flames!");
+        HP_BAR(opponentLeft);
+        MESSAGE("Foe Wynaut is burning up within G-Max Wildfire's flames!");
+        HP_BAR(opponentRight);
+        // turn 3
+        NONE_OF { MESSAGE("Foe Arcanine is burning up within G-Max Wildfire's flames!"); }
+        MESSAGE("Foe Wynaut is burning up within G-Max Wildfire's flames!");
+        HP_BAR(opponentRight);
+        // turn 4
+        MESSAGE("Foe Wynaut is burning up within G-Max Wildfire's flames!");
+        HP_BAR(opponentRight);
+        // turn 5
+        NONE_OF { 
+            HP_BAR(opponentRight);
+            MESSAGE("Foe Wynaut is burning up within G-Max Wildfire's flames!");
+        }
+    } FINALLY {
+        EXPECT_EQ(damage, 100);
+    }
+}
+
+// This should probably be tested to only occur 50% of the time.
+// I had some problems specific to Teatime with this where Snorlax stored
+// the used berry in usedHeldItem, while Munchlax stored it in changedItem.
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Replenish recycles allies' berries")
+{
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_G_MAX_REPLENISH].argument == MAX_EFFECT_RECYCLE_BERRIES);
+        PLAYER(SPECIES_SNORLAX) { Item(ITEM_APICOT_BERRY); }
+        PLAYER(SPECIES_MUNCHLAX) { Item(ITEM_APICOT_BERRY); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_APICOT_BERRY); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_APICOT_BERRY); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_STUFF_CHEEKS); \
+               MOVE(playerRight, MOVE_STUFF_CHEEKS); \
+               MOVE(opponentLeft, MOVE_STUFF_CHEEKS); \
+               MOVE(opponentRight, MOVE_STUFF_CHEEKS); }
+        TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft, dynamax: TRUE); }
+    } SCENE {
+        // turn 1
+        MESSAGE("Using Apicot Berry, the sp. defense of Snorlax rose!");
+        MESSAGE("Using Apicot Berry, the sp. defense of Munchlax rose!");
+        MESSAGE("Using Apicot Berry, the sp. defense of Foe Wobbuffet rose!");
+        MESSAGE("Using Apicot Berry, the sp. defense of Foe Wobbuffet rose!");
+        // turn 2
+        MESSAGE("Snorlax used G-Max Replenish!");
+        MESSAGE("Snorlax found one Apicot Berry!");
+        MESSAGE("Munchlax found one Apicot Berry!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Snooze makes only the target drowsy")
+{
+    GIVEN {
+        ASSUME(P_GEN_8_POKEMON == TRUE);
+        ASSUME(gBattleMoves[MOVE_G_MAX_SNOOZE].argument == MAX_EFFECT_YAWN_FOE);
+        PLAYER(SPECIES_GRIMMSNARL);
+        PLAYER(SPECIES_IMPIDIMP);
+        OPPONENT(SPECIES_BLISSEY);
+        OPPONENT(SPECIES_CHANSEY);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_DARK_PULSE, target: opponentLeft, dynamax: TRUE); }
+        TURN { }
+    } SCENE {
+        // turn 1
+        MESSAGE("Grimmsnarl used G-Max Snooze!");
+        MESSAGE("Grimmsnarl made Foe Blissey drowsy!");
+        NONE_OF { MESSAGE("Grimmsnarl made Foe Chansey drowsy!"); }
+        // turn 2
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponentLeft);
+        MESSAGE("Foe Blissey fell asleep!");
+        STATUS_ICON(opponentLeft, sleep: TRUE);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponentRight);
+            STATUS_ICON(opponentRight, sleep: TRUE);
+        }
+    }
+}
+
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Finale heals allies by 1/6 of their health")
+{
+    s16 damage1, damage2;
+    GIVEN {
+        ASSUME(P_GEN_8_POKEMON == TRUE);
+        ASSUME(gBattleMoves[MOVE_G_MAX_FINALE].argument == MAX_EFFECT_HEAL_TEAM);
+        PLAYER(SPECIES_ALCREMIE) { HP(200); MaxHP(300); }
+        PLAYER(SPECIES_MILCERY) { HP(200); MaxHP(300); }
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_MOONBLAST, target: opponentLeft, dynamax: TRUE); }
+    } SCENE {
+        // turn 1
+        MESSAGE("Alcremie used G-Max Finale!");
+        HP_BAR(playerLeft, captureDamage: &damage1);
+        HP_BAR(playerRight, captureDamage: &damage2);
+    } FINALLY {
+        EXPECT_EQ(damage1, -75); // heals based on Dynamax HP
+        EXPECT_EQ(damage2, -50);
+    }
+}
+
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Sweetness cures allies' status conditions")
+{
+    s16 damage1, damage2;
+    GIVEN {
+        ASSUME(P_GEN_8_POKEMON == TRUE);
+        ASSUME(gBattleMoves[MOVE_G_MAX_SWEETNESS].argument == MAX_EFFECT_AROMATHERAPY);
+        PLAYER(SPECIES_APPLETUN) { Status1(STATUS1_POISON); }
+        PLAYER(SPECIES_APPLIN)  { Status1(STATUS1_POISON); }
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_VINE_WHIP, target: opponentLeft, dynamax: TRUE); }
+    } SCENE {
+        MESSAGE("Appletun used G-Max Sweetness!");
+        STATUS_ICON(playerLeft, none: TRUE);
+        MESSAGE("Appletun's status returned to normal!");
+        STATUS_ICON(playerRight, none: TRUE);
+        MESSAGE("Applin's status returned to normal!");
+    }
+}
+
+// This test should apply to G-Max Sandblast, too.
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Centiferno traps both opponents in Fire Spin")
+{
+    s16 damage1, damage2;
+    GIVEN {
+        ASSUME(P_GEN_8_POKEMON == TRUE);
+        ASSUME(gBattleMoves[MOVE_G_MAX_CENTIFERNO].argument == MAX_EFFECT_FIRE_SPIN_FOES);
+        PLAYER(SPECIES_CENTISKORCH);
+        PLAYER(SPECIES_SIZZLIPEDE);
+        PLAYER(SPECIES_SIZZLIPEDE);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_FLAME_CHARGE, target: opponentLeft, dynamax: TRUE); }
+        TURN { SWITCH(playerLeft, 2); }
+    } SCENE {
+        // turn 1
+        MESSAGE("Centiskorc used G-Max Centiferno!");
+        MESSAGE("Foe Wobbuffet is hurt by Fire Spin!");
+        HP_BAR(opponentLeft);
+        MESSAGE("Foe Wynaut is hurt by Fire Spin!");
+        HP_BAR(opponentRight);
+        // turn 2 - Fire Spin continues even after Centiskorch switches out
+        MESSAGE("Foe Wobbuffet is hurt by Fire Spin!");
+        HP_BAR(opponentLeft);
+        MESSAGE("Foe Wynaut is hurt by Fire Spin!");
+        HP_BAR(opponentRight);
+    }
+}
+
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Chi Strike boosts allies' crit chance")
+{
+    s16 damage1, damage2;
+    GIVEN {
+        ASSUME(B_CRIT_CHANCE >= GEN_6);
+        ASSUME(gBattleMoves[MOVE_G_MAX_CHI_STRIKE].argument == MAX_EFFECT_CRIT_PLUS);
+        PLAYER(SPECIES_MACHAMP);
+        PLAYER(SPECIES_MACHOP);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_FORCE_PALM, target: opponentLeft, dynamax: TRUE); \
+               MOVE(playerRight, MOVE_FOCUS_ENERGY); }
+        TURN { MOVE(playerRight, MOVE_FORCE_PALM, target: opponentLeft); }
+    } SCENE {
+        // turn 1
+        MESSAGE("Machamp used G-Max Chi Strike!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+        MESSAGE("Machamp is getting pumped!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
+        MESSAGE("Machop is getting pumped!");
+        MESSAGE("Machop used Focus Energy!");
+        MESSAGE("Machop is getting pumped!");
+        // turn 2
+        MESSAGE("Machop used Force Palm!"); // Machop is at +3 crit stages, 100% crit chance
+        MESSAGE("A critical hit!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Depletion takes away 2 PP from the target's last move")
+{
+    GIVEN {
+        ASSUME(P_GEN_8_POKEMON == TRUE);
+        ASSUME(gBattleMoves[MOVE_G_MAX_DEPLETION].argument == MAX_EFFECT_SPITE);
+        PLAYER(SPECIES_DURALUDON);
+        PLAYER(SPECIES_WYNAUT);
+        // Dynamax behaves weird with test turn order because stats are recalculated.
+        OPPONENT(SPECIES_SABLEYE) { Ability(ABILITY_PRANKSTER); } 
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_DRAGON_CLAW, target: opponentLeft, dynamax: TRUE); }
+    } SCENE {
+        MESSAGE("Foe Sableye used Celebrate!");
+        MESSAGE("Duraludon used G-Max Depletion!");
+        MESSAGE("Reduced Foe Sableye's Celebrate by 2!");
+    }
+}
+
+// This test should apply to G-Max Rapid Flow, too.
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max One Blow bypasses Max Guard for full damage", s16 damage)
+{
+    bool32 protect;
+    KNOWN_FAILING; // damage isn't equal because RNG misbehaves
+    PARAMETRIZE { protect = TRUE; }
+    PARAMETRIZE { protect = FALSE; }
+    GIVEN {
+        ASSUME(P_GEN_8_POKEMON == TRUE);
+        ASSUME(gBattleMoves[MOVE_G_MAX_ONE_BLOW].argument == MAX_EFFECT_BYPASS_PROTECT);
+        PLAYER(SPECIES_URSHIFU);
+        PLAYER(SPECIES_KUBFU);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        if (protect)
+            TURN { MOVE(playerLeft, MOVE_WICKED_BLOW, target: opponentLeft, dynamax: TRUE); \
+                   MOVE(opponentLeft, MOVE_PROTECT, dynamax: TRUE); }
+        else
+            TURN { MOVE(playerLeft, MOVE_WICKED_BLOW, target: opponentLeft, dynamax: TRUE); \
+                   MOVE(opponentLeft, MOVE_PSYCHIC, target: playerLeft, dynamax: TRUE); }
+    } SCENE {
+        if (protect)
+            MESSAGE("Foe Wobbuffet used Max Guard!");
+        MESSAGE("Urshifu used G-Max One Blow!");
+        HP_BAR(opponentLeft, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_EQ(results[0].damage, results[1].damage);
     }
 }

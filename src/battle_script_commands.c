@@ -11311,15 +11311,14 @@ static void Cmd_various(void)
         u16* usedHeldItem = &gBattleStruct->usedHeldItems[gBattlerPartyIndexes[gBattlerTarget]][GetBattlerSide(gBattlerTarget)];
         if (gBattleMons[gBattlerTarget].item == ITEM_NONE
             && gBattleStruct->changedItems[gBattlerTarget] == ITEM_NONE   // Will not inherit an item
-            && ItemId_GetPocket(*usedHeldItem) == POCKET_BERRIES
-            && Random() % 2 == 0)
+            && ItemId_GetPocket(*usedHeldItem) == POCKET_BERRIES)
         {
             gLastUsedItem = *usedHeldItem;
             *usedHeldItem = ITEM_NONE;
-            gBattleMons[gActiveBattler].item = gLastUsedItem;
+            gBattleMons[gBattlerTarget].item = gLastUsedItem;
 
             BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gBattlerTarget].item), &gBattleMons[gBattlerTarget].item);
-            MarkBattlerForControllerExec(gActiveBattler);
+            MarkBattlerForControllerExec(gBattlerTarget);
 
             gBattlescriptCurrInstr = cmd->nextInstr;
         }

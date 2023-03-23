@@ -10475,8 +10475,6 @@ BattleScript_DamageNonTypesStarts::
 	goto BattleScript_MoveEnd
 
 BattleScript_DamageNonTypesContinues::
-	@printfromtable gDamageNonTypesStartStringIds
-	@waitmessage B_WAIT_TIME_LONG
 	setbyte gBattleCommunication, 0
 BattleScript_DamageNonTypesLoop::
 	copyarraywithindex gBattlerAttacker, gBattlerByTurnOrder, gBattleCommunication, 1
@@ -10486,8 +10484,6 @@ BattleScript_DamageNonTypesLoop::
 	waitmessage B_WAIT_TIME_LONG
 	effectivenesssound
 	hitanimation BS_ATTACKER
-	goto BattleScript_DamageNonTypesHpChange
-BattleScript_DamageNonTypesHpChange:
 	orword gHitMarker, HITMARKER_SKIP_DMG_TRACK | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE | HITMARKER_GRUDGE
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
@@ -10499,7 +10495,7 @@ BattleScript_DamageNonTypesLoopIncrement::
 	jumpifbytenotequal gBattleCommunication, gBattlersCount, BattleScript_DamageNonTypesLoop
 BattleScript_DamageNonTypesContinuesEnd::
 	bicword gHitMarker, HITMARKER_SKIP_DMG_TRACK | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE | HITMARKER_GRUDGE
-	end2
+	end
 
 BattleScript_EffectTryReducePP::
 	tryspiteppreduce BattleScript_MoveEnd
@@ -10570,8 +10566,10 @@ BattleScript_RaiseCritAlliesLoop:
 	setstatchanger STAT_ATK, 0, FALSE @ for animation
 	setgraphicalstatchangevalues
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	swapattackerwithtarget
 	printstring STRINGID_PKMNGETTINGPUMPED
 	waitmessage B_WAIT_TIME_LONG
+	swapattackerwithtarget
 BattleScript_RaiseCritAlliesIncrement:
 	setbyte sSTAT_ANIM_PLAYED, FALSE
 	jumpifbytenotequal gBattlerTarget, gBattlerAttacker, BattleScript_RaiseCritAlliesEnd
@@ -10607,7 +10605,7 @@ BattleScript_CureStatusAlliesLoop:
 	jumpifabsent BS_TARGET, BattleScript_CureStatusAlliesIncrement
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_CureStatusActivate
 BattleScript_CureStatusAlliesIncrement:
-	jumpifbytenotequal gBattlerTarget, gBattlerAttacker, BattleScript_CureStatusAlliesLoop
+	jumpifbytenotequal gBattlerTarget, gBattlerAttacker, BattleScript_CureStatusAlliesEnd
 	setallytonexttarget BattleScript_CureStatusAlliesLoop
 BattleScript_CureStatusAlliesEnd:
 	restoretarget
@@ -10616,19 +10614,22 @@ BattleScript_CureStatusAlliesEnd:
 BattleScript_CureStatusActivate:
 	curestatus BS_TARGET
 	updatestatusicon BS_TARGET
+	swapattackerwithtarget
 	printstring STRINGID_PKMNSTATUSNORMAL
 	waitmessage B_WAIT_TIME_LONG
+	swapattackerwithtarget
 	goto BattleScript_CureStatusAlliesIncrement
 
 BattleScript_EffectRecycleBerriesAllies::
-	jumpifteamhealthy BS_ATTACKER, BattleScript_MoveEnd
 	savetarget
 	copybyte gBattlerTarget, gBattlerAttacker
 BattleScript_RecycleBerriesAlliesLoop:
 	jumpifabsent BS_TARGET, BattleScript_RecycleBerriesAlliesIncrement
 	tryrecycleberry BattleScript_RecycleBerriesAlliesIncrement
+	swapattackerwithtarget
 	printstring STRINGID_XFOUNDONEY
 	waitmessage B_WAIT_TIME_LONG
+	swapattackerwithtarget
 BattleScript_RecycleBerriesAlliesIncrement:
 	jumpifbytenotequal gBattlerTarget, gBattlerAttacker, BattleScript_RecycleBerriesAlliesEnd
 	setallytonexttarget BattleScript_RecycleBerriesAlliesLoop

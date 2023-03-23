@@ -1829,7 +1829,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         }
     }
 
-    if !gBattleStruct->dynamax.playerSelect && gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE && IsGravityPreventingMove(move))
+    if (!gBattleStruct->dynamax.playerSelect && gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE && IsGravityPreventingMove(move))
     {
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
@@ -2481,8 +2481,8 @@ u8 DoFieldEndTurnEffects(void)
                 {
                     if (--gSideTimers[side].damageNonTypesTimer == 0)
                     {
+                        // There is no in-game message when this side status ends.
                         gSideStatuses[side] &= ~SIDE_STATUS_DAMAGE_NON_TYPES;
-                        //gBattlescriptCurrInstr = BattleScript_DamageNonTypesEnds; TODO: no end message in-game?
                         effect++;
                     }
                     else

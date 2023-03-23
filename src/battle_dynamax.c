@@ -125,8 +125,8 @@ void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon)
 	else
 	{
 		u16 mult = UQ_4_12(1.5); // placeholder
-		u16 hp = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_HP, NULL) * mult) + UQ_4_12_ROUND);
-		u16 maxHP = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_MAX_HP, NULL) * mult) + UQ_4_12_ROUND);
+		u16 hp = UQ_4_12_TO_INT((gBattleMons[battlerId].hp * mult) + UQ_4_12_ROUND);
+		u16 maxHP = UQ_4_12_TO_INT((gBattleMons[battlerId].maxHP * mult) + UQ_4_12_ROUND);
 		SetMonData(mon, MON_DATA_HP, &hp);
 		SetMonData(mon, MON_DATA_MAX_HP, &maxHP);
 	}
@@ -521,7 +521,7 @@ u16 SetMaxMoveEffect(u16 move)
 			if (!(gSideStatuses[side] & SIDE_STATUS_DAMAGE_NON_TYPES))
 			{
 				gSideStatuses[side] |= SIDE_STATUS_DAMAGE_NON_TYPES;
-				gSideTimers[side].damageNonTypesTimer = 4;
+				gSideTimers[side].damageNonTypesTimer = 5; // damage is dealt for 4 turns, ends on 5th
 				gSideTimers[side].damageNonTypesType = gBattleMoves[gCurrentMove].type;
 				BattleScriptPush(gBattlescriptCurrInstr + 1);
 				ChooseDamageNonTypesString(gBattleMoves[gCurrentMove].type);
@@ -604,7 +604,8 @@ u16 SetMaxMoveEffect(u16 move)
 					else
 						gDisableStructs[battler].wrapTurns = (Random() % 4) + 2;
 				#endif
-					gBattleStruct->wrappedBy[battler] = gBattlerAttacker;
+					// The Wrap effect does not expire when the user switches, so here's some cheese.
+					gBattleStruct->wrappedBy[battler] = gBattlerTarget;
 					if (maxEffect == MAX_EFFECT_SANDBLAST_FOES)
 						gBattleStruct->wrappedMove[battler] = MOVE_SAND_TOMB;
 					else
@@ -615,7 +616,8 @@ u16 SetMaxMoveEffect(u16 move)
 		}
 		case MAX_EFFECT_YAWN_FOE:
 			if (!(gStatuses3[gBattlerTarget] & STATUS3_YAWN)
-				&& CanSleep(gBattlerTarget))
+				&& CanSleep(gBattlerTarget)
+				&& Random() % 2) // 50% chance of success
 			{
 				gStatuses3[gBattlerTarget] |= STATUS3_YAWN_TURN(2);
 				BattleScriptPush(gBattlescriptCurrInstr + 1);
@@ -676,9 +678,12 @@ u16 SetMaxMoveEffect(u16 move)
 			effect++;
 			break;
 		case MAX_EFFECT_RECYCLE_BERRIES:
-			BattleScriptPush(gBattlescriptCurrInstr + 1);
-			gBattlescriptCurrInstr = BattleScript_EffectRecycleBerriesAllies;
-			effect++;
+			if (Random() % 2) // 50% chance of success
+			{
+				BattleScriptPush(gBattlescriptCurrInstr + 1);
+				gBattlescriptCurrInstr = BattleScript_EffectRecycleBerriesAllies;
+				effect++;
+			}
 			break;
 
 	}
