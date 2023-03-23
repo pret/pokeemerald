@@ -5770,9 +5770,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
     }
 
     // Skip using the item if it won't do anything
-    if (!ITEM_HAS_EFFECT(item))
-        return TRUE;
-    if (gItemEffectTable[item - ITEM_POTION] == NULL && item != ITEM_ENIGMA_BERRY_E_READER)
+    if (gItemEffectTable[item] == NULL && item != ITEM_ENIGMA_BERRY_E_READER)
         return TRUE;
 
     // Get item effect
@@ -5785,7 +5783,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
     }
     else
     {
-        itemEffect = gItemEffectTable[item - ITEM_POTION];
+        itemEffect = gItemEffectTable[item];
     }
 
     // Do item effect
@@ -6339,9 +6337,9 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
     offset = ITEM_EFFECT_ARG_START;
 
-    temp = gItemEffectTable[itemId - ITEM_POTION];
+    temp = gItemEffectTable[itemId];
 
-    if (!temp && itemId != ITEM_ENIGMA_BERRY_E_READER)
+    if (temp != NULL && !temp && itemId != ITEM_ENIGMA_BERRY_E_READER)
         return 0;
 
     if (itemId == ITEM_ENIGMA_BERRY_E_READER)
@@ -6469,7 +6467,7 @@ u8 *UseStatIncreaseItem(u16 itemId)
     }
     else
     {
-        itemEffect = gItemEffectTable[itemId - ITEM_POTION];
+        itemEffect = gItemEffectTable[itemId];
     }
 
     gPotentialItemEffectBattler = gBattlerInMenuId;
