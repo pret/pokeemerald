@@ -2135,17 +2135,14 @@ static bool32 EndTurnTerrain(u32 terrainFlag, u32 stringTableId)
         {
             gFieldStatuses &= ~terrainFlag;
             TryToRevertMimicry();
-            
-            if (terrainFlag != STATUS_FIELD_GRASSY_TERRAIN)
+            if (!(terrainFlag & STATUS_FIELD_GRASSY_TERRAIN))
             {
                 gBattleCommunication[MULTISTRING_CHOOSER] = stringTableId;
                 BattleScriptExecute(BattleScript_TerrainEnds);
             }
         }
-        if (terrainFlag == STATUS_FIELD_GRASSY_TERRAIN)
-        {
+        if (terrainFlag & STATUS_FIELD_GRASSY_TERRAIN)
             BattleScriptExecute(BattleScript_GrassyTerrainHeals);
-        }
         return TRUE;
     }
     return FALSE;
@@ -2502,19 +2499,19 @@ u8 DoFieldEndTurnEffects(void)
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_ELECTRIC_TERRAIN:
-            effect += EndTurnTerrain(STATUS_FIELD_ELECTRIC_TERRAIN, B_MSG_TERRAINENDS_ELECTRIC);
+            effect = EndTurnTerrain(STATUS_FIELD_ELECTRIC_TERRAIN, B_MSG_TERRAINENDS_ELECTRIC);
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_MISTY_TERRAIN:
-            effect += EndTurnTerrain(STATUS_FIELD_MISTY_TERRAIN, B_MSG_TERRAINENDS_MISTY);
+            effect = EndTurnTerrain(STATUS_FIELD_MISTY_TERRAIN, B_MSG_TERRAINENDS_MISTY);
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_GRASSY_TERRAIN:
-            effect += EndTurnTerrain(STATUS_FIELD_GRASSY_TERRAIN, B_MSG_TERRAINENDS_GRASS);
+            effect = EndTurnTerrain(STATUS_FIELD_GRASSY_TERRAIN, B_MSG_TERRAINENDS_GRASS);
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_PSYCHIC_TERRAIN:
-            effect += EndTurnTerrain(STATUS_FIELD_PSYCHIC_TERRAIN, B_MSG_TERRAINENDS_PSYCHIC);
+            effect = EndTurnTerrain(STATUS_FIELD_PSYCHIC_TERRAIN, B_MSG_TERRAINENDS_PSYCHIC);
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_WATER_SPORT:
