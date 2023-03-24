@@ -14,3 +14,6 @@ SINGLE_BATTLE_TEST("Grassy Terrain recovers 1/16th HP at end of turn")
         HP_BAR(player, damage: -maxHP / 16);
     }
 }
+
+TO_DO_BATTLE_TEST("Grassy Terrain increases power of Grass-type moves by 30/50 percent")
+TO_DO_BATTLE_TEST("Grassy Terrain decreases power of Earthquake, Magnitude and Bulldoze by 50 percent")
