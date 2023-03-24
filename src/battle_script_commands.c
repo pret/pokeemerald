@@ -11337,7 +11337,7 @@ static void Cmd_various(void)
         else
             mon = &gEnemyParty[gBattlerPartyIndexes[battler]];
         RecalcBattlerStats(battler, mon);
-        UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], mon, HP_BOTH);
+        UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], mon, HEALTHBOX_ALL);
         break;
     }
     case VARIOUS_JUMP_IF_TARGET_DYNAMAXED:
