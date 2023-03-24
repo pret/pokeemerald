@@ -87,8 +87,6 @@ static const struct GMaxMove sGMaxMoveTable[] =
 	{SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GMAX,   TYPE_WATER,      MOVE_G_MAX_RAPID_FLOW},
 };
 
-extern u8 gMaxMovePowers[MOVES_COUNT];
-
 // forward declarations
 static void SpriteCb_DynamaxTrigger(struct Sprite *);
 static void SpriteCb_DynamaxIndicator(struct Sprite *);
@@ -285,20 +283,87 @@ u8 GetMaxMovePower(u16 move)
 	// G-Max Drum Solo, G-Max Hydrosnipe, and G-Max Fireball always have 160 base power. 
 	if (gBattleMoves[GetMaxMove(gBattlerAttacker, move)].argument == MAX_EFFECT_FIXED_POWER)
 		return 160;
-	else if (gBattleMoves[move].effect == EFFECT_MULTI_HIT
-			 || gBattleMoves[move].effect == EFFECT_OHKO
-			 || gBattleMoves[move].effect == EFFECT_LEVEL_DAMAGE
-			 || gBattleMoves[move].effect == EFFECT_DRAGON_RAGE
-			 || gBattleMoves[move].effect == EFFECT_SONICBOOM
-			 || gBattleMoves[move].effect == EFFECT_PSYWAVE)
-		return gMaxMovePowers[move];
+	
+	// Some moves are exceptions to the general rules below.
+	switch (move)
+	{
+		case MOVE_CRUSH_GRIP:
+		case MOVE_WRING_OUT:
+		case MOVE_MAGNITUDE:
+		case MOVE_DOUBLE_IRON_BASH:
+		case MOVE_TRIPLE_AXEL:
+			return 140;
+		case MOVE_PIN_MISSILE:
+		case MOVE_POWER_TRIP:
+		case MOVE_PUNISHMENT:
+		case MOVE_DRAGON_DARTS:
+		case MOVE_DUAL_CHOP:
+		case MOVE_ELECTRO_BALL:
+		case MOVE_HEAT_CRASH:
+		case MOVE_BULLET_SEED:
+		case MOVE_GRASS_KNOT:
+		case MOVE_BONEMERANG:
+		case MOVE_BONE_RUSH:
+		case MOVE_FISSURE:
+		case MOVE_ICICLE_SPEAR:
+		case MOVE_SHEER_COLD:
+		case MOVE_WEATHER_BALL:
+		case MOVE_TAIL_SLAP:
+		case MOVE_GUILLOTINE:
+		case MOVE_HORN_DRILL:
+		case MOVE_FLAIL:
+		case MOVE_RETURN:
+		case MOVE_FRUSTRATION:
+		case MOVE_NATURAL_GIFT:
+		case MOVE_TRUMP_CARD:
+		case MOVE_STORED_POWER:
+		case MOVE_ROCK_BLAST:
+		case MOVE_GEAR_GRIND:
+		case MOVE_GYRO_BALL:
+		case MOVE_HEAVY_SLAM:
+		case MOVE_DUAL_WINGBEAT:
+		case MOVE_SCALE_SHOT:
+		case MOVE_TERRAIN_PULSE:
+			return 130;
+		case MOVE_DOUBLE_HIT:
+		case MOVE_SPIKE_CANNON:
+			return 120;
+		case MOVE_TWINEEDLE:
+		case MOVE_BEAT_UP:
+		case MOVE_FLING:
+		case MOVE_DRAGON_RAGE:
+		case MOVE_NATURES_MADNESS:
+		case MOVE_NIGHT_SHADE:
+		case MOVE_COMET_PUNCH:
+		case MOVE_FURY_SWIPES:
+		case MOVE_SONIC_BOOM:
+		case MOVE_BIDE:
+		case MOVE_SUPER_FANG:
+		case MOVE_PRESENT:
+		case MOVE_SPIT_UP:
+		case MOVE_PSYWAVE:
+		case MOVE_MIRROR_COAT:
+		case MOVE_METAL_BURST:
+		case MOVE_LOW_KICK:
+		case MOVE_REVERSAL:
+		case MOVE_FINAL_GAMBIT:
+			return 100;
+		case MOVE_DOUBLE_KICK:
+		case MOVE_TRIPLE_KICK:
+			return 80;
+		case MOVE_COUNTER:
+		case MOVE_SEISMIC_TOSS:
+			return 75;
+	} // TODO: maybe bring back gMaxMovePowers lol
+
 	// Fighting and Poison Max Moves are weaker than other types.
 	else if (gBattleMoves[move].type == TYPE_FIGHTING
-			 || gBattleMoves[move].type == TYPE_POISON)
+			 || gBattleMoves[move].type == TYPE_POISON
+			 || move == MOVE_MULTI_ATTACK)
 		switch (gBattleMoves[move].power)
 		{
 			default:
-			case 10 ... 40: return 70;
+			case 0 ... 40: return 70;
 			case 45 ... 50: return 75;
 			case 55 ... 60: return 80;
 			case 65 ... 70: return 85;
@@ -310,7 +375,7 @@ u8 GetMaxMovePower(u16 move)
 		switch (gBattleMoves[move].power)
 		{
 			default:
-			case 10 ... 40: return 90;
+			case 0 ... 40: return 90;
 			case 45 ... 50: return 100;
 			case 55 ... 60: return 110;
 			case 65 ... 70: return 120;
