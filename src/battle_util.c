@@ -8602,7 +8602,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
             basePower *= 2;
         break;
     case EFFECT_PURSUIT:
-        if (gActionsByTurnOrder[GetBattlerTurnOrderNum(gBattlerTarget)] == B_ACTION_SWITCH)
+        if (gActionsByTurnOrder[GetBattlerTurnOrderNum(battlerDef)] == B_ACTION_SWITCH)
             basePower *= 2;
         break;
     case EFFECT_NATURAL_GIFT:
@@ -8736,12 +8736,12 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         #if B_HIDDEN_POWER_DMG < GEN_6
         u8 powerBits;
 
-        powerBits = ((gBattleMons[gBattlerAttacker].hpIV & 2) >> 1)
-                | ((gBattleMons[gBattlerAttacker].attackIV & 2) << 0)
-                | ((gBattleMons[gBattlerAttacker].defenseIV & 2) << 1)
-                | ((gBattleMons[gBattlerAttacker].speedIV & 2) << 2)
-                | ((gBattleMons[gBattlerAttacker].spAttackIV & 2) << 3)
-                | ((gBattleMons[gBattlerAttacker].spDefenseIV & 2) << 4);
+        powerBits = ((gBattleMons[battlerAtk].hpIV & 2) >> 1)
+                | ((gBattleMons[battlerAtk].attackIV & 2) << 0)
+                | ((gBattleMons[battlerAtk].defenseIV & 2) << 1)
+                | ((gBattleMons[battlerAtk].speedIV & 2) << 2)
+                | ((gBattleMons[battlerAtk].spAttackIV & 2) << 3)
+                | ((gBattleMons[battlerAtk].spDefenseIV & 2) << 4);
 
         basePower = (40 * powerBits) / 63 + 30;
         #endif
@@ -8753,15 +8753,15 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         break;
     case EFFECT_TERRAIN_PULSE:
         if ((gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
-            && IsBattlerGrounded(gBattlerAttacker))
+            && IsBattlerGrounded(battlerAtk))
             basePower *= 2;
         break;
     case EFFECT_EXPANDING_FORCE:
-        if (IsBattlerTerrainAffected(gBattlerAttacker, STATUS_FIELD_PSYCHIC_TERRAIN))
+        if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_PSYCHIC_TERRAIN))
             MulModifier(&basePower, UQ_4_12(1.5));
         break;
     case EFFECT_RISING_VOLTAGE:
-        if (IsBattlerTerrainAffected(gBattlerTarget, STATUS_FIELD_ELECTRIC_TERRAIN))
+        if (IsBattlerTerrainAffected(battlerDef, STATUS_FIELD_ELECTRIC_TERRAIN))
             basePower *= 2;
         break;
     case EFFECT_BEAT_UP:
@@ -8770,7 +8770,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         #endif
         break;
     case EFFECT_PSYBLADE:
-        if (IsBattlerTerrainAffected(gBattlerAttacker, STATUS_FIELD_ELECTRIC_TERRAIN))
+        if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_ELECTRIC_TERRAIN))
             MulModifier(&basePower, UQ_4_12(1.5));
         break;
     }
@@ -9611,7 +9611,7 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
             || (gSideStatuses[defSide] & SIDE_STATUS_AURORA_VEIL))
         && abilityAtk != ABILITY_INFILTRATOR
         && !(isCrit)
-        && !gProtectStructs[gBattlerAttacker].confusionSelfDmg)
+        && !gProtectStructs[battlerAtk].confusionSelfDmg)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
             MulModifier(&finalModifier, UQ_4_12(0.66));
@@ -9620,7 +9620,7 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
     }
 
     // Parental Bond Second Strike
-    if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_2ND_HIT)
+    if (gSpecialStatuses[battlerAtk].parentalBondState == PARENTAL_BOND_2ND_HIT)
     {
         if (B_PARENTAL_BOND_DMG < GEN_7)
             MulModifier(&finalModifier, UQ_4_12(0.5));
