@@ -1106,6 +1106,31 @@ void Status1_(u32 sourceLine, u32 status1)
     SetMonData(DATA.currentMon, MON_DATA_STATUS, &status1);
 }
 
+static const char *const sBattlerIdentifiersSingles[] =
+{
+    "player",
+    "opponent",
+};
+
+static const char *const sBattlerIdentifiersDoubles[] =
+{
+    "playerLeft",
+    "opponentLeft",
+    "playerRight",
+    "opponentRight",
+};
+
+static const char *BattlerIdentifier(s32 battlerId)
+{
+    const struct BattleTest *test = gTestRunnerState.test->data;
+    switch (test->type)
+    {
+    case BATTLE_TEST_SINGLES: return sBattlerIdentifiersSingles[battlerId];
+    case BATTLE_TEST_DOUBLES: return sBattlerIdentifiersDoubles[battlerId];
+    }
+    return "<unknown>";
+}
+
 static void PushBattlerAction(u32 sourceLine, s32 battlerId, u32 actionType, u32 byte)
 {
     u32 recordIndex = DATA.recordIndexes[battlerId]++;
@@ -1267,7 +1292,6 @@ void Move(u32 sourceLine, struct BattlePokemon *battler, struct MoveContext ctx)
             else if (moveId == MOVE_NONE)
             {
                 INVALID_IF(DATA.explicitMoves[battlerId & BIT_SIDE] & (1 << DATA.currentMonIndexes[battlerId]), "Missing explicit %S", gMoveNames[ctx.move]);
-                INVALID_IF(i == MAX_MON_MOVES, "Too many different moves");
                 SetMonData(mon, MON_DATA_MOVE1 + i, &ctx.move);
                 SetMonData(DATA.currentMon, MON_DATA_PP1 + i, &gBattleMoves[ctx.move].pp);
                 moveSlot = i;
@@ -1275,6 +1299,7 @@ void Move(u32 sourceLine, struct BattlePokemon *battler, struct MoveContext ctx)
                 break;
             }
         }
+        INVALID_IF(i == MAX_MON_MOVES, "Too many different moves for %s", BattlerIdentifier(battlerId));
     }
     else if (ctx.explicitMoveSlot)
     {
