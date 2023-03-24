@@ -1595,6 +1595,9 @@ static void OpponentHandleChooseMove(void)
                         QueueZMove(gActiveBattler, chosenMove);
                     if (CanMegaEvolve(gActiveBattler)) // If opponent can mega evolve, do it.
                         BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
+                    else if (CanDynamax(gActiveBattler) // If opponent can Dynamax and is on final Pokemon, do it.
+                             && CountAIAliveNonEggMonsExcept(gBattlerPartyIndexes[gActiveBattler]) == 0) 
+                        BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (RET_DYNAMAX) | (gBattlerTarget << 8));
                     else
                         BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
                 }

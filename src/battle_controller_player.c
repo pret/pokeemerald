@@ -2898,16 +2898,18 @@ static void PlayerHandleChooseMove(void)
             gBattleStruct->mega.triggerSpriteId = 0xFF;
         if (CanMegaEvolve(gActiveBattler))
             CreateMegaTriggerSprite(gActiveBattler, 0);
+
         if (!IsZMoveTriggerSpriteActive())
             gBattleStruct->zmove.triggerSpriteId = 0xFF;
-        if (!IsDynamaxTriggerSpriteActive())
-            gBattleStruct->dynamax.triggerSpriteId = 0xFF;
-        if (CanDynamax(gActiveBattler)) // TODO: handle Dynamax + Mega + Z-Move
-            CreateDynamaxTriggerSprite(gActiveBattler, 0);
-
         GetUsableZMoves(gActiveBattler, moveInfo->moves);
         gBattleStruct->zmove.viable = IsZMoveUsable(gActiveBattler, gMoveSelectionCursor[gActiveBattler]);
         CreateZMoveTriggerSprite(gActiveBattler, gBattleStruct->zmove.viable);
+        
+        if (!IsDynamaxTriggerSpriteActive())
+            gBattleStruct->dynamax.triggerSpriteId = 0xFF;
+        if (CanDynamax(gActiveBattler))
+            CreateDynamaxTriggerSprite(gActiveBattler, 0);
+
         gBattlerControllerFuncs[gActiveBattler] = HandleChooseMoveAfterDma3;
     }
 }

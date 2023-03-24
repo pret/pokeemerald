@@ -7,6 +7,7 @@
 #include "battle_script_commands.h"
 #include "data.h"
 #include "graphics.h"
+#include "item.h"
 #include "pokemon.h"
 #include "random.h"
 #include "sprite.h"
@@ -16,6 +17,7 @@
 #include "constants/battle_move_effects.h"
 #include "constants/battle_string_ids.h"
 #include "constants/hold_effects.h"
+#include "constants/items.h"
 #include "constants/moves.h"
 
 // Constant Data
@@ -106,13 +108,15 @@ bool32 CanDynamax(u16 battlerId)
 {
 	// TODO: Requires Dynamax Band if not in a Max Raid (as well as special flag).
 	u16 species = gBattleMons[battlerId].species;
+	u16 holdEffect = ItemId_GetHoldEffect(gBattleMons[battlerId].item);
 	if (!gBattleStruct->dynamax.alreadyDynamaxed[GetBattlerSide(battlerId)]
-		&& !gBattleStruct->dynamax.dynamaxed[battlerId]
-		&& !gBattleStruct->dynamax.dynamaxed[BATTLE_PARTNER(battlerId)]
-		&& !gBattleStruct->dynamax.toDynamax[BATTLE_PARTNER(battlerId)]
-		&& species != SPECIES_ZACIAN && species != SPECIES_ZACIAN_CROWNED_SWORD
-		&& species != SPECIES_ZAMAZENTA && species != SPECIES_ZAMAZENTA_CROWNED_SHIELD
-		&& species != SPECIES_ETERNATUS && species != SPECIES_ETERNATUS_ETERNAMAX)
+		 && !gBattleStruct->dynamax.dynamaxed[battlerId]
+		 && !gBattleStruct->dynamax.dynamaxed[BATTLE_PARTNER(battlerId)]
+		 && !gBattleStruct->dynamax.toDynamax[BATTLE_PARTNER(battlerId)]
+		 && species != SPECIES_ZACIAN && species != SPECIES_ZACIAN_CROWNED_SWORD
+		 && species != SPECIES_ZAMAZENTA && species != SPECIES_ZAMAZENTA_CROWNED_SHIELD
+		 && species != SPECIES_ETERNATUS && species != SPECIES_ETERNATUS_ETERNAMAX
+		 && holdEffect != HOLD_EFFECT_MEGA_STONE && holdEffect != HOLD_EFFECT_Z_CRYSTAL)
 		return TRUE;
 	return FALSE;
 }
@@ -121,7 +125,9 @@ bool32 CanDynamax(u16 battlerId)
 void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon)
 {
 	if (gBattleMons[battlerId].species == SPECIES_SHEDINJA)
+	{
 		return;
+	}
 	else
 	{
 		u16 mult = UQ_4_12(1.5); // placeholder
@@ -136,7 +142,9 @@ void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon)
 u16 GetNonDynamaxHP(u16 battlerId)
 {
 	if (!IsDynamaxed(battlerId) || gBattleMons[battlerId].species == SPECIES_SHEDINJA)
+	{
 		return gBattleMons[battlerId].hp;
+	}
 	else
 	{
 		u16 mult = UQ_4_12(1.0/1.5); // placeholder
@@ -149,7 +157,9 @@ u16 GetNonDynamaxHP(u16 battlerId)
 u16 GetNonDynamaxMaxHP(u16 battlerId)
 {
 	if (!IsDynamaxed(battlerId) || gBattleMons[battlerId].species == SPECIES_SHEDINJA)
+	{
 		return gBattleMons[battlerId].maxHP;
+	}
 	else
 	{
 		u16 mult = UQ_4_12(1.0/1.5); // placeholder
