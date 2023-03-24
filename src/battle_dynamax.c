@@ -357,7 +357,7 @@ u8 GetMaxMovePower(u16 move)
 	} // TODO: maybe bring back gMaxMovePowers lol
 
 	// Fighting and Poison Max Moves are weaker than other types.
-	else if (gBattleMoves[move].type == TYPE_FIGHTING
+	if (gBattleMoves[move].type == TYPE_FIGHTING
 			 || gBattleMoves[move].type == TYPE_POISON
 			 || move == MOVE_MULTI_ATTACK)
 		switch (gBattleMoves[move].power)
