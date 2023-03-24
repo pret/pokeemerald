@@ -79,3 +79,41 @@ SINGLE_BATTLE_TEST("Zamazenta's Iron Head becomes Behemoth Bash upon form change
         EXPECT_EQ(player->moves[0], MOVE_BEHEMOTH_BASH);
     }
 }
+
+SINGLE_BATTLE_TEST("Aegislash reverts to Shield Form upon switching out")
+{
+    GIVEN {
+        ASSUME(P_GEN_6_POKEMON == TRUE);
+        PLAYER(SPECIES_AEGISLASH);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE); }
+        TURN { SWITCH(player, 1); }
+        TURN { SWITCH(player, 0); }
+    } SCENE {
+        ABILITY_POPUP(player, ABILITY_STANCE_CHANGE);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
+        MESSAGE("Aegislash used Tackle!");
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_AEGISLASH);
+    }
+}
+
+SINGLE_BATTLE_TEST("Aegislash reverts to Shield Form upon fainting")
+{
+    GIVEN {
+        ASSUME(P_GEN_6_POKEMON == TRUE);
+        PLAYER(SPECIES_AEGISLASH) { HP(1); };
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_GUST); SEND_OUT(player, 1);}
+    } SCENE {
+        MESSAGE("Foe Wobbuffet used Gust!");
+        MESSAGE("Aegislash fainted!");
+    } THEN {
+        EXPECT_EQ(GetMonData(&PLAYER_PARTY[0], MON_DATA_SPECIES), SPECIES_AEGISLASH);
+    }
+}

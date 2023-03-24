@@ -20,11 +20,11 @@ SINGLE_BATTLE_TEST("Zen Mode switches Darmanitan's form when HP is half or less 
     } WHEN {
             TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_TACKLE); }
     } SCENE {
-            MESSAGE("Darmanitan used Celebrate!");
-            MESSAGE("Foe Wobbuffet used Tackle!");
-            HP_BAR(player);
-            ABILITY_POPUP(player, ABILITY_ZEN_MODE);
-            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
+        MESSAGE("Darmanitan used Celebrate!");
+        MESSAGE("Foe Wobbuffet used Tackle!");
+        HP_BAR(player);
+        ABILITY_POPUP(player, ABILITY_ZEN_MODE);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
     } THEN {
         ASSUME(player->hp <= player->maxHP / 2);
         EXPECT_EQ(player->species, zenSpecies);
