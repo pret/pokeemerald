@@ -327,7 +327,6 @@ DOUBLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes Aurora Veil from p
 
 DOUBLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes everything it can")
 {
-    bool32 defogTurn = FALSE;
     GIVEN {
         ASSUME(gBattleMoves[MOVE_HAIL].effect == EFFECT_HAIL);
         ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TYPE_ICE);
@@ -343,33 +342,29 @@ DOUBLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes everything it can"
         TURN { MOVE(playerLeft, MOVE_STICKY_WEB); MOVE(playerRight, MOVE_SPIKES); MOVE(opponentLeft, MOVE_STICKY_WEB); MOVE(opponentRight, MOVE_SPIKES); }
         TURN { SWITCH(playerLeft, 2); SWITCH(playerRight, 3); SWITCH(opponentLeft, 2); SWITCH(opponentRight, 3);}
         TURN { MOVE(playerLeft, MOVE_TOXIC_SPIKES); MOVE(playerRight, MOVE_STEALTH_ROCK); MOVE(opponentLeft, MOVE_TOXIC_SPIKES); MOVE(opponentRight, MOVE_STEALTH_ROCK); }
-        TURN { MOVE(playerLeft, MOVE_HAIL); MOVE(playerRight, MOVE_AURORA_VEIL); MOVE(opponentLeft, MOVE_AURORA_VEIL); MOVE(opponentRight, MOVE_STEALTH_ROCK); }
-        TURN { MOVE(playerLeft, MOVE_REFLECT); MOVE(playerRight, MOVE_LIGHT_SCREEN); MOVE(opponentLeft, MOVE_REFLECT); MOVE(opponentRight, MOVE_LIGHT_SCREEN); }
-        TURN { MOVE(playerLeft, MOVE_MIST); MOVE(playerRight, MOVE_SAFEGUARD); MOVE(opponentLeft, MOVE_MIST); MOVE(opponentRight, MOVE_SAFEGUARD); }
-        TURN { defogTurn = TRUE ; MOVE(opponentRight, MOVE_DEFOG, target:playerLeft);}
+        TURN { MOVE(playerLeft, MOVE_HAIL); MOVE(playerRight, MOVE_AURORA_VEIL); MOVE(opponentLeft, MOVE_AURORA_VEIL); MOVE(opponentRight, MOVE_LIGHT_SCREEN); }
+        TURN { MOVE(playerLeft, MOVE_REFLECT); MOVE(playerRight, MOVE_LIGHT_SCREEN); MOVE(opponentLeft, MOVE_REFLECT); MOVE(opponentRight, MOVE_SAFEGUARD); }
+        TURN { MOVE(playerLeft, MOVE_MIST); MOVE(playerRight, MOVE_SAFEGUARD); MOVE(opponentLeft, MOVE_MIST); MOVE(opponentRight, MOVE_DEFOG, target: playerLeft); }
     } SCENE {
-        if (defogTurn == TRUE)
-        {
-            MESSAGE("Foe Glalie used Defog!");
-            MESSAGE("Glalie is protected by MIST!");
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_DEFOG, opponentRight);
-            // Player side
-            MESSAGE("Ally's Reflect wore off!");
-            MESSAGE("Ally's Light Screen wore off!");
-            MESSAGE("Ally's Mist wore off!");
-            MESSAGE("Ally's Aurora Veil wore off!");
-            MESSAGE("Ally's Safeguard wore off!");
+        MESSAGE("Foe Glalie used Defog!");
+        MESSAGE("Glalie is protected by MIST!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DEFOG, opponentRight);
+        // Player side
+        MESSAGE("Ally's Reflect wore off!");
+        MESSAGE("Ally's Light Screen wore off!");
+        MESSAGE("Ally's Mist wore off!");
+        MESSAGE("Ally's Aurora Veil wore off!");
+        MESSAGE("Ally's Safeguard wore off!");
 
-            MESSAGE("The spikes disappeared from the ground around your team!");
-            MESSAGE("The pointed stones disappeared from around your team!");
-            MESSAGE("The poison spikes disappeared from the ground around your team!");
-            MESSAGE("The sticky web has disappeared from the ground around your team!");
+        MESSAGE("The spikes disappeared from the ground around your team!");
+        MESSAGE("The pointed stones disappeared from around your team!");
+        MESSAGE("The poison spikes disappeared from the ground around your team!");
+        MESSAGE("The sticky web has disappeared from the ground around your team!");
 
-            // Opponent side
-            MESSAGE("The spikes disappeared from the ground around the opposing team!");
-            MESSAGE("The pointed stones disappeared from around the opposing team!");
-            MESSAGE("The poison spikes disappeared from the ground around the opposing team!");
-            MESSAGE("The sticky web has disappeared from the ground around the opposing team!");
-        }
+        // Opponent side
+        MESSAGE("The spikes disappeared from the ground around the opposing team!");
+        MESSAGE("The pointed stones disappeared from around the opposing team!");
+        MESSAGE("The poison spikes disappeared from the ground around the opposing team!");
+        MESSAGE("The sticky web has disappeared from the ground around the opposing team!");
     }
 }

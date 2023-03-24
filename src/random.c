@@ -31,3 +31,27 @@ u16 Random2(void)
     gRng2Value = ISO_RANDOMIZE1(gRng2Value);
     return gRng2Value >> 16;
 }
+
+__attribute__((weak, alias("RandomUniformDefault")))
+u32 RandomUniform(enum RandomTag tag, u32 lo, u32 hi);
+
+__attribute__((weak, alias("RandomWeightedArrayDefault")))
+u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights);
+
+u32 RandomUniformDefault(enum RandomTag tag, u32 lo, u32 hi)
+{
+    return lo + (((hi - lo) * Random()) >> 16);
+}
+
+u32 RandomWeightedArrayDefault(enum RandomTag tag, u32 sum, u32 n, const u8 *weights)
+{
+    s32 i, targetSum;
+    targetSum = (sum * Random()) >> 16;
+    for (i = 0; i < n - 1; i++)
+    {
+        targetSum -= weights[i];
+        if (targetSum < 0)
+            return i;
+    }
+    return n - 1;
+}

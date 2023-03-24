@@ -65,8 +65,9 @@
  * single turn. MOVE causes the player to use Stun Spore and adds the
  * move to the Pokémon's moveset if an explicit Moves was not specified.
  * Pokémon that are not mentioned in a TURN use Celebrate.
- * The test runner attempts to rig the RNG so that the first move used
- * in a turn does not miss and activates its secondary effects (if any).
+ * The test runner rigs the RNG so that unless otherwise specified,
+ * moves always hit, never critical hit, always activate their secondary
+ * effects, and always roll the same damage modifier.
  *
  * SCENE describes the player-visible output of the battle. In this case
  * ANIMATION checks that the Stun Spore animation played, MESSAGE checks
@@ -228,12 +229,35 @@
  *         }
  *     }
  *
- * PASSES_RANDOMLY(successes, trials)
- * Checks that the test passes approximately successes/trials. Used for
- * testing RNG-based attacks, e.g.:
+ * PASSES_RANDOMLY(successes, trials, [tag])
+ * Checks that the test passes successes/trials. If tag is provided, the
+ * test is run for each value that the tag can produce. For example, to
+ * check that Paralysis causes the turn to be skipped 25/100 times, we
+ * can write the following test that passes only if the Pokémon is fully
+ * paralyzed and specify that we expect it to pass 25/100 times when
+ * RNG_PARALYSIS varies:
+ *     SINGLE_BATTLE_TEST("Paralysis has a 25% chance of skipping the turn")
+ *     {
+ *         PASSES_RANDOMLY(25, 100, RNG_PARALYSIS);
+ *         GIVEN {
+ *             PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_PARALYSIS); }
+ *             OPPONENT(SPECIES_WOBBUFFET);
+ *         } WHEN {
+ *             TURN { MOVE(player, MOVE_CELEBRATE); }
+ *         } SCENE {
+ *             MESSAGE("Wobbuffet is paralyzed! It can't move!");
+ *         }
+ *     }
+ * All BattleRandom calls involving tag will return the same number, so
+ * this cannot be used to have two moves independently hit or miss, for
+ * example.
+ *
+ * If the tag is not provided, runs the test 50 times and computes an
+ * approximate pass ratio.
  *     PASSES_RANDOMLY(gBattleMoves[move].accuracy, 100);
- * Note that PASSES_RANDOMLY makes the tests run very slowly and should
- * be avoided where possible.
+ * Note that this mode of PASSES_RANDOMLY makes the tests run very
+ * slowly and should be avoided where possible. If the mechanic you are
+ * testing is missing its tag, you should add it.
  *
  * GIVEN
  * Contains the initial state of the parties before the battle.
@@ -419,6 +443,7 @@
 #include "battle_anim.h"
 #include "data.h"
 #include "item.h"
+#include "random.h"
 #include "recorded_battle.h"
 #include "test.h"
 #include "util.h"
@@ -433,6 +458,7 @@
 // NOTE: If the stack is too small the test runner will probably crash
 // or loop.
 #define BATTLE_TEST_STACK_SIZE 1024
+#define MAX_TURNS 16
 #define MAX_QUEUED_EVENTS 25
 
 enum { BATTLE_TEST_SINGLES, BATTLE_TEST_DOUBLES };
@@ -512,6 +538,13 @@ struct QueuedEvent
     } as;
 };
 
+struct BattlerTurn
+{
+    u8 hit:2;
+    u8 criticalHit:2;
+    u8 secondaryEffect:2;
+};
+
 struct BattleTestData
 {
     u8 stack[BATTLE_TEST_STACK_SIZE];
@@ -533,14 +566,13 @@ struct BattleTestData
     u8 turns;
     u8 actionBattlers;
     u8 moveBattlers;
-    bool8 hasRNGActions:1;
 
     struct RecordedBattleSave recordedBattle;
     u8 battleRecordTypes[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
     u8 battleRecordSourceLineOffsets[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
     u16 recordIndexes[MAX_BATTLERS_COUNT];
+    struct BattlerTurn battleRecordTurns[MAX_TURNS][MAX_BATTLERS_COUNT];
     u8 lastActionTurn;
-    u8 nextRNGTurn;
 
     u8 queuedEventsCount;
     u8 queueGroupType;
@@ -555,11 +587,12 @@ struct BattleTestRunnerState
     u8 parametersCount; // Valid only in BattleTest_Setup.
     u8 parameters;
     u8 runParameter;
+    u16 rngTag;
     u8 trials;
-    u8 expectedPasses;
-    u8 observedPasses;
-    u8 skippedTrials;
     u8 runTrial;
+    u16 expectedRatio;
+    u16 observedRatio;
+    u16 trialRatio;
     bool8 runRandomly:1;
     bool8 runGiven:1;
     bool8 runWhen:1;
@@ -639,13 +672,20 @@ extern struct BattleTestRunnerState *gBattleTestRunnerState;
 
 /* Parametrize */
 
+#undef PARAMETRIZE // Override test/test.h's implementation.
+
 #define PARAMETRIZE if (gBattleTestRunnerState->parametersCount++ == i)
 
 /* Randomly */
 
-#define PASSES_RANDOMLY(passes, trials) for (; gBattleTestRunnerState->runRandomly; gBattleTestRunnerState->runRandomly = FALSE) Randomly(__LINE__, passes, trials)
+#define PASSES_RANDOMLY(passes, trials, ...) for (; gBattleTestRunnerState->runRandomly; gBattleTestRunnerState->runRandomly = FALSE) Randomly(__LINE__, passes, trials, (struct RandomlyContext) { __VA_ARGS__ })
 
-void Randomly(u32 sourceLine, u32 passes, u32 trials);
+struct RandomlyContext
+{
+    u16 tag;
+};
+
+void Randomly(u32 sourceLine, u32 passes, u32 trials, struct RandomlyContext);
 
 /* Given */
 
@@ -719,6 +759,8 @@ struct MoveContext
     u16 explicitHit:1;
     u16 criticalHit:1;
     u16 explicitCriticalHit:1;
+    u16 secondaryEffect:1;
+    u16 explicitSecondaryEffect:1;
     u16 megaEvolve:1;
     u16 explicitMegaEvolve:1;
     // TODO: u8 zMove:1;

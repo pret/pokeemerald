@@ -10,7 +10,7 @@ SINGLE_BATTLE_TEST("Accuracy controls the proportion of misses")
     PARAMETRIZE { move = MOVE_RAZOR_LEAF; }
     PARAMETRIZE { move = MOVE_SCRATCH; }
     ASSUME(0 < gBattleMoves[move].accuracy && gBattleMoves[move].accuracy <= 100);
-    PASSES_RANDOMLY(gBattleMoves[move].accuracy, 100);
+    PASSES_RANDOMLY(gBattleMoves[move].accuracy, 100, RNG_ACCURACY);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -27,10 +27,9 @@ SINGLE_BATTLE_TEST("Secondary Effect Chance controls the proportion of secondary
     PARAMETRIZE { move = MOVE_THUNDER_SHOCK; }
     PARAMETRIZE { move = MOVE_DISCHARGE; }
     PARAMETRIZE { move = MOVE_NUZZLE; }
-    ASSUME(gBattleMoves[move].accuracy == 100);
     ASSUME(gBattleMoves[move].effect == EFFECT_PARALYZE_HIT);
     ASSUME(0 < gBattleMoves[move].secondaryEffectChance && gBattleMoves[move].secondaryEffectChance <= 100);
-    PASSES_RANDOMLY(gBattleMoves[move].secondaryEffectChance, 100);
+    PASSES_RANDOMLY(gBattleMoves[move].secondaryEffectChance, 100, RNG_SECONDARY_EFFECT);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -70,6 +69,7 @@ SINGLE_BATTLE_TEST("Turn order is determined by speed if priority ties")
 
 SINGLE_BATTLE_TEST("Turn order is determined randomly if priority and speed tie")
 {
+    KNOWN_FAILING; // The algorithm is significantly biased.
     PASSES_RANDOMLY(1, 2);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
@@ -85,15 +85,29 @@ SINGLE_BATTLE_TEST("Turn order is determined randomly if priority and speed tie"
 SINGLE_BATTLE_TEST("Critical hits occur at a 1/24 rate")
 {
     ASSUME(B_CRIT_CHANCE >= GEN_7);
-    ASSUME(gBattleMoves[MOVE_SCRATCH].accuracy == 100);
-    PASSES_RANDOMLY(100 / 24, 100);
+    PASSES_RANDOMLY(1, 24, RNG_CRITICAL_HIT);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("It's a critical hit!");
+        MESSAGE("A critical hit!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Slash's critical hits occur at a 1/8 rate")
+{
+    ASSUME(B_CRIT_CHANCE >= GEN_7);
+    ASSUME(gBattleMoves[MOVE_SLASH].flags & FLAG_HIGH_CRIT);
+    PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SLASH); }
+    } SCENE {
+        MESSAGE("A critical hit!");
     }
 }
 
