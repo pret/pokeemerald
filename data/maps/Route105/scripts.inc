@@ -2,7 +2,7 @@ Route105_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, Route105_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, Route105_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route105_OnFrame
-	.byte 0
+	end_map_scripts
 
 Route105_OnLoad:
 	call_if_unset FLAG_REGI_DOORS_OPENED, Route105_CloseRegiEntrance
@@ -23,7 +23,7 @@ Route105_OnTransition:
 
 Route105_OnFrame:
 	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
-	.2byte 0
+	end_map_script_table
 
 Route105_EventScript_Foster::
 	trainerbattle_single TRAINER_FOSTER, Route105_Text_FosterIntro, Route105_Text_FosterDefeated

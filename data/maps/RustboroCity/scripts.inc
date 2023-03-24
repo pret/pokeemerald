@@ -8,7 +8,7 @@
 RustboroCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, RustboroCity_OnFrame
-	.byte 0
+	end_map_scripts
 
 RustboroCity_OnTransition:
 	setflag FLAG_VISITED_RUSTBORO_CITY
@@ -33,7 +33,7 @@ RustboroCity_EventScript_HideMapNamePopup::
 
 RustboroCity_OnFrame:
 	map_script_2 VAR_RUSTBORO_CITY_STATE, 6, RustboroCity_EventScript_ScientistAddMatchCall
-	.2byte 0
+	end_map_script_table
 
 RustboroCity_EventScript_ScientistAddMatchCall::
 	lockall

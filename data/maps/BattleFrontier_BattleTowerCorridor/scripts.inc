@@ -3,7 +3,7 @@
 BattleFrontier_BattleTowerCorridor_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, BattleFrontier_BattleTowerCorridor_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerCorridor_OnFrame
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_BattleTowerCorridor_OnLoad:
 	goto_if_eq VAR_0x8006, 1, BattleFrontier_BattleTowerCorridor_EventScript_OpenFarDoor
@@ -18,7 +18,7 @@ BattleFrontier_BattleTowerCorridor_EventScript_OpenFarDoor::
 
 BattleFrontier_BattleTowerCorridor_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleTowerCorridor_EventScript_EnterCorridor
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattleTowerCorridor_EventScript_EnterCorridor::
 	setvar VAR_TEMP_0, 1

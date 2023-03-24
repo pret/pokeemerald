@@ -1,5 +1,5 @@
 MauvilleCity_GameCorner_MapScripts::
-	.byte 0
+	end_map_scripts
 
     @ Game Corner prices
 	.set TM32_COINS,  1500

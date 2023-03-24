@@ -2,7 +2,7 @@ DesertRuins_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, DesertRuins_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, DesertRuins_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, DesertRuins_OnTransition
-	.byte 0
+	end_map_scripts
 
 DesertRuins_OnResume:
 	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, DesertRuins_EventScript_TryRemoveRegirock

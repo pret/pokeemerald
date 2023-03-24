@@ -2,11 +2,11 @@
 
 FallarborTown_BattleTentCorridor_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FallarborTown_BattleTentCorridor_OnFrame
-	.byte 0
+	end_map_scripts
 
 FallarborTown_BattleTentCorridor_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, FallarborTown_BattleTentCorridor_EventScript_EnterCorridor
-	.2byte 0
+	end_map_script_table
 
 FallarborTown_BattleTentCorridor_EventScript_EnterCorridor::
 	lockall

@@ -4,7 +4,7 @@
 Route101_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route101_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route101_OnFrame
-	.byte 0
+	end_map_scripts
 
 Route101_OnTransition:
 	call ProfBirch_EventScript_UpdateLocation
@@ -12,7 +12,7 @@ Route101_OnTransition:
 
 Route101_OnFrame:
 	map_script_2 VAR_ROUTE101_STATE, 0, Route101_EventScript_HideMapNamePopup
-	.2byte 0
+	end_map_script_table
 
 Route101_EventScript_HideMapNamePopup::
 	setflag FLAG_HIDE_MAP_NAME_POPUP

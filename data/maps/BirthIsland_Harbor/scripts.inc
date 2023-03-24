@@ -2,7 +2,7 @@
 .set LOCALID_SS_TIDAL, 2
 
 BirthIsland_Harbor_MapScripts::
-	.byte 0
+	end_map_scripts
 
 BirthIsland_Harbor_EventScript_Sailor::
 	lock

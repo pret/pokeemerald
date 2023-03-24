@@ -5,7 +5,7 @@
 Route128_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route128_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route128_OnFrame
-	.byte 0
+	end_map_scripts
 
 Route128_OnTransition:
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
@@ -13,7 +13,7 @@ Route128_OnTransition:
 
 Route128_OnFrame:
 	map_script_2 VAR_ROUTE128_STATE, 1, Route128_EventScript_KyogreAwakenedScene
-	.2byte 0
+	end_map_script_table
 
 Route128_EventScript_KyogreAwakenedScene::
 	lockall

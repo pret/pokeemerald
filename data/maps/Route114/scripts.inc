@@ -2,7 +2,7 @@ Route114_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route114_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route114_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route114_OnFrame
-	.byte 0
+	end_map_scripts
 
 Route114_OnTransition:
 	call_if_eq VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_HideMapNamePopup
@@ -17,7 +17,7 @@ Route114_OnLoad:
 
 Route114_OnFrame:
 	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
-	.2byte 0
+	end_map_script_table
 
 Route114_EventScript_Man::
 	lock

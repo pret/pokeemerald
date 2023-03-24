@@ -3,7 +3,7 @@
 NavelRock_Bottom_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Bottom_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, NavelRock_Bottom_OnResume
-	.byte 0
+	end_map_scripts
 
 NavelRock_Bottom_OnTransition:
 	call_if_set FLAG_CAUGHT_LUGIA, NavelRock_Bottom_EventScript_HideLugia

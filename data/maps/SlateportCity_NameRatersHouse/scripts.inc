@@ -1,5 +1,5 @@
 SlateportCity_NameRatersHouse_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SlateportCity_NameRatersHouse_EventScript_NameRater::
 	lock

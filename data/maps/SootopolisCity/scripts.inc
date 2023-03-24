@@ -22,7 +22,7 @@ SootopolisCity_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, SootopolisCity_OnResume
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SootopolisCity_OnWarp
-	.byte 0
+	end_map_scripts
 
 SootopolisCity_OnLoad:
 	call_if_unset FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, SootopolisCity_EventScript_LockGymDoor
@@ -160,7 +160,7 @@ SootopolisCity_EventScript_SetExpertBlockCaveEntrance::
 
 SootopolisCity_OnWarp:
 	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, 5, SootopolisCity_EventScript_PlayerFaceLegendaries
-	.2byte 0
+	end_map_script_table
 
 SootopolisCity_EventScript_PlayerFaceLegendaries::
 	call_if_eq VAR_SKY_PILLAR_STATE, 1, SootopolisCity_EventScript_PlayerFaceLegendaries1
@@ -183,7 +183,7 @@ SootopolisCity_OnResume:
 SootopolisCity_OnFrame:
 	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, 1, SootopolisCity_EventScript_StartLegendariesScene
 	map_script_2 VAR_SKY_PILLAR_STATE, 1, SootopolisCity_EventScript_StartRayquazaScene
-	.2byte 0
+	end_map_script_table
 
 @ If not at PokeCenter, assumed to have arrived via Dive
 SootopolisCity_EventScript_StartLegendariesScene::

@@ -4,7 +4,7 @@ SkyPillar_Top_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, SkyPillar_Top_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_Top_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SkyPillar_Top_OnWarp
-	.byte 0
+	end_map_scripts
 
 SkyPillar_Top_OnResume:
 	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, SkyPillar_Top_EventScript_TryRemoveRayquaza
@@ -36,7 +36,7 @@ SkyPillar_Top_EventScript_ShowRayquaza::
 
 SkyPillar_Top_OnWarp:
 	map_script_2 VAR_SKY_PILLAR_STATE, 0, SkyPillar_Top_EventScript_RayquazaFaceDown
-	.2byte 0
+	end_map_script_table
 
 SkyPillar_Top_EventScript_RayquazaFaceDown::
 	turnobject LOCALID_RAYQUAZA_SLEEPING, DIR_SOUTH

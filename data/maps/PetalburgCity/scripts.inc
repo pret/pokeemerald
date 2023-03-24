@@ -7,7 +7,7 @@
 PetalburgCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, PetalburgCity_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, PetalburgCity_OnFrame
-	.byte 0
+	end_map_scripts
 
 PetalburgCity_OnTransition:
 	setflag FLAG_VISITED_PETALBURG_CITY
@@ -33,7 +33,7 @@ PetalburgCity_EventScript_SetGymDoorsUnlocked::
 PetalburgCity_OnFrame:
 	map_script_2 VAR_PETALBURG_CITY_STATE, 2, PetalburgCity_EventScript_WallyTutorial
 	map_script_2 VAR_PETALBURG_CITY_STATE, 4, PetalburgCity_EventScript_WalkToWallyHouse
-	.2byte 0
+	end_map_script_table
 
 PetalburgCity_EventScript_WallyTutorial::
 	lockall

@@ -7,7 +7,7 @@ PetalburgCity_Gym_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, PetalburgCity_Gym_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PetalburgCity_Gym_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, PetalburgCity_Gym_OnFrame
-	.byte 0
+	end_map_scripts
 
 PetalburgCity_Gym_OnLoad:
 	goto_if_eq VAR_PETALBURG_GYM_STATE, 6, PetalburgCity_Gym_EventScript_OpenUnlockedDoors
@@ -67,7 +67,7 @@ PetalburgCity_Gym_EventScript_DontMoveNormanToFront::
 
 PetalburgCity_Gym_OnWarp:
 	map_script_2 VAR_PETALBURG_GYM_STATE, 1, PetalburgCity_Gym_EventScript_TurnPlayerNorth
-	.2byte 0
+	end_map_script_table
 
 PetalburgCity_Gym_EventScript_TurnPlayerNorth::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
@@ -75,7 +75,7 @@ PetalburgCity_Gym_EventScript_TurnPlayerNorth::
 
 PetalburgCity_Gym_OnFrame:
 	map_script_2 VAR_PETALBURG_GYM_STATE, 1, PetalburgCity_Gym_EventScript_ReturnFromWallyTutorial
-	.2byte 0
+	end_map_script_table
 
 PetalburgCity_Gym_EventScript_ReturnFromWallyTutorial::
 	lockall

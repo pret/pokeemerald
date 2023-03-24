@@ -5,7 +5,7 @@ Route110_TrickHouseEnd_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHouseEnd_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_TrickHouseEnd_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route110_TrickHouseEnd_OnWarp
-	.byte 0
+	end_map_scripts
 
 Route110_TrickHouseEnd_OnResume:
 	call_if_eq VAR_TEMP_1, 1, Route110_TrickHouseEnd_EventScript_SetDoorClosedMetatile
@@ -19,7 +19,7 @@ Route110_TrickHouseEnd_OnTransition:
 
 Route110_TrickHouseEnd_OnWarp:
 	map_script_2 VAR_TEMP_2, 0, Route110_TrickHouseEnd_EventScript_SetTrickMasterPos
-	.2byte 0
+	end_map_script_table
 
 Route110_TrickHouseEnd_EventScript_SetTrickMasterPos::
 	addobject LOCALID_TRICK_MASTER
@@ -29,7 +29,7 @@ Route110_TrickHouseEnd_EventScript_SetTrickMasterPos::
 
 Route110_TrickHouseEnd_OnFrame:
 	map_script_2 VAR_TEMP_1, 0, Route110_TrickHouseEnd_EventScript_CloseDoor
-	.2byte 0
+	end_map_script_table
 
 Route110_TrickHouseEnd_EventScript_CloseDoor::
 	setvar VAR_TEMP_1, 1

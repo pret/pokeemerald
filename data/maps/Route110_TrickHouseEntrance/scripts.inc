@@ -4,7 +4,7 @@ Route110_TrickHouseEntrance_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHouseEntrance_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_TrickHouseEntrance_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route110_TrickHouseEntrance_OnWarp
-	.byte 0
+	end_map_scripts
 
 	@ State descriptions for VAR_TRICK_HOUSE_ENTRANCE_STATE
 	@ 0: Trick Master is hiding
@@ -123,7 +123,7 @@ Route110_TrickHouseEntrance_OnWarp:
 	map_script_2 VAR_TRICK_HOUSE_ENTRANCE_STATE, 4, Route110_TrickHouseEntrance_EventScript_RemoveTrickMaster
 	map_script_2 VAR_TRICK_HOUSE_ENTRANCE_STATE, 5, Route110_TrickHouseEntrance_EventScript_RemoveTrickMaster
 	map_script_2 VAR_TRICK_HOUSE_ENTRANCE_STATE, 6, Route110_TrickHouseEntrance_EventScript_SetTrickMasterInFrontOfDoor
-	.2byte 0
+	end_map_script_table
 
 Route110_TrickHouseEntrance_EventScript_TrickMasterFound::
 	addobject LOCALID_TRICK_MASTER
@@ -196,7 +196,7 @@ Route110_TrickHouseEntrance_EventScript_SetTrickMasterInFrontOfDoor::
 
 Route110_TrickHouseEntrance_OnFrame:
 	map_script_2 VAR_TRICK_HOUSE_FOUND_TRICK_MASTER, 1, Route110_TrickHouseEntrance_EventScript_BeginChallenge
-	.2byte 0
+	end_map_script_table
 
 Route110_TrickHouseEntrance_EventScript_BeginChallenge::
 	lockall

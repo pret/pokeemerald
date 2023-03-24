@@ -1,6 +1,6 @@
 ShoalCave_LowTideEntranceRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, ShoalCave_LowTideEntranceRoom_OnTransition
-	.byte 0
+	end_map_scripts
 
 ShoalCave_LowTideEntranceRoom_OnTransition:
 	special UpdateShoalTideFlag

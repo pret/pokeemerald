@@ -4,7 +4,7 @@ SkyPillar_Outside_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_Outside_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, SkyPillar_Outside_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SkyPillar_Outside_OnFrame
-	.byte 0
+	end_map_scripts
 
 SkyPillar_Outside_OnTransition:
 	call_if_eq VAR_SOOTOPOLIS_CITY_STATE, 3, SkyPillar_Outside_EventScript_HideMapNamePopup
@@ -30,7 +30,7 @@ SkyPillar_Outside_EventScript_OpenDoor::
 
 SkyPillar_Outside_OnFrame:
 	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, 3, SkyPillar_Outside_EventScript_WallaceScene
-	.2byte 0
+	end_map_script_table
 
 SkyPillar_Outside_EventScript_WallaceScene::
 	lockall

@@ -1,5 +1,5 @@
 PacifidlogTown_House3_MapScripts::
-	.byte 0
+	end_map_scripts
 
 PacifidlogTown_House3_EventScript_Trader::
 	lock

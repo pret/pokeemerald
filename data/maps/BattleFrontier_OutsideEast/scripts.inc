@@ -3,7 +3,7 @@
 BattleFrontier_OutsideEast_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_OutsideEast_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_OutsideEast_OnTransition
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_OutsideEast_OnResume:
 	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, BattleFrontier_OutsideEast_EventScript_TryRemoveSudowoodo

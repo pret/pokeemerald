@@ -3,7 +3,7 @@
 MauvilleCity_PokemonCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, MauvilleCity_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
-	.byte 0
+	end_map_scripts
 
 MauvilleCity_PokemonCenter_1F_OnTransition:
 	setrespawn HEAL_LOCATION_MAUVILLE_CITY

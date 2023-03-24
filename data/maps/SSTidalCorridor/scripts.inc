@@ -3,7 +3,7 @@
 
 SSTidalCorridor_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SSTidalCorridor_OnFrame
-	.byte 0
+	end_map_scripts
 
 SSTidalCorridor_OnFrame:
 	map_script_2 VAR_SS_TIDAL_SCOTT_STATE, 0, SSTidalCorridor_EventScript_ScottScene
@@ -11,7 +11,7 @@ SSTidalCorridor_OnFrame:
 	map_script_2 VAR_SS_TIDAL_STATE, SS_TIDAL_BOARD_LILYCOVE, SSTidalCorridor_EventScript_DepartLilycoveForSlateport
 	map_script_2 VAR_SS_TIDAL_STATE, SS_TIDAL_EXIT_CURRENTS_RIGHT, SSTidalCorridor_EventScript_HalfwayToLilycove
 	map_script_2 VAR_SS_TIDAL_STATE, SS_TIDAL_EXIT_CURRENTS_LEFT, SSTidalCorridor_EventScript_ArrivedInSlateport
-	.2byte 0
+	end_map_script_table
 
 SSTidalCorridor_EventScript_DepartSlateportForLilycove::
 	special SetSSTidalFlag

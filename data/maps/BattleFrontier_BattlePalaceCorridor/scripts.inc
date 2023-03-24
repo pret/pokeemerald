@@ -2,11 +2,11 @@
 
 BattleFrontier_BattlePalaceCorridor_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePalaceCorridor_OnFrame
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_BattlePalaceCorridor_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePalaceCorridor_EventScript_WalkThroughCorridor
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattlePalaceCorridor_EventScript_WalkThroughCorridor::
 	delay 16

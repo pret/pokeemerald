@@ -1,5 +1,5 @@
 FortreeCity_House3_MapScripts::
-	.byte 0
+	end_map_scripts
 
 FortreeCity_House3_EventScript_Maniac::
 	msgbox FortreeCity_House3_Text_MetStevenHadAmazingPokemon, MSGBOX_NPC

@@ -3,11 +3,11 @@
 SafariZone_South_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SafariZone_South_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SafariZone_South_OnFrame
-	.byte 0
+	end_map_scripts
 
 SafariZone_South_OnFrame:
 	map_script_2 VAR_SAFARI_ZONE_STATE, 2, SafariZone_South_EventScript_EnterSafariZone
-	.2byte 0
+	end_map_script_table
 
 SafariZone_South_EventScript_EnterSafariZone::
 	lockall

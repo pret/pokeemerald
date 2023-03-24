@@ -1,6 +1,6 @@
 Route114_FossilManiacsHouse_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route114_FossilManiacsHouse_OnTransition
-	.byte 0
+	end_map_scripts
 
 Route114_FossilManiacsHouse_OnTransition:
 	setflag FLAG_LANDMARK_FOSSIL_MANIACS_HOUSE

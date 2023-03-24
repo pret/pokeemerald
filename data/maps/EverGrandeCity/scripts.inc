@@ -1,6 +1,6 @@
 EverGrandeCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_OnTransition
-	.byte 0
+	end_map_scripts
 
 EverGrandeCity_OnTransition:
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather

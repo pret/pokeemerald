@@ -1,7 +1,7 @@
 .set LOCALID_DOCK, 1
 
 SlateportCity_SternsShipyard_1F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SlateportCity_SternsShipyard_1F_EventScript_Dock::
 	lockall

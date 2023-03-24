@@ -1,5 +1,5 @@
 SootopolisCity_House3_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SootopolisCity_House3_EventScript_Woman::
 	lock

@@ -3,7 +3,7 @@
 NavelRock_Top_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Top_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, NavelRock_Top_OnResume
-	.byte 0
+	end_map_scripts
 
 NavelRock_Top_OnTransition:
 	call_if_set FLAG_CAUGHT_HO_OH, NavelRock_Top_EventScript_HideHoOh

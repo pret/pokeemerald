@@ -3,7 +3,7 @@
 SouthernIsland_Interior_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, SouthernIsland_Interior_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, SouthernIsland_Interior_OnTransition
-	.byte 0
+	end_map_scripts
 
 SouthernIsland_Interior_OnResume:
 	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, SouthernIsland_Interior_EventScript_TryRemoveLati

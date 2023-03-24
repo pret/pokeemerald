@@ -1,5 +1,5 @@
 Route133_MapScripts::
-	.byte 0
+	end_map_scripts
 
 Route133_EventScript_Franklin::
 	trainerbattle_single TRAINER_FRANKLIN, Route133_Text_FranklinIntro, Route133_Text_FranklinDefeat

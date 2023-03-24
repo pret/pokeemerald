@@ -1,7 +1,7 @@
 .set LOCALID_OLD_WOMAN, 2
 
 BattleFrontier_Mart_MapScripts::
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_Mart_EventScript_Clerk::
 	lock

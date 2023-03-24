@@ -9,7 +9,7 @@ TrainerHill_Entrance_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, TrainerHill_Entrance_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, TrainerHill_Entrance_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, TrainerHill_Entrance_OnFrame
-	.byte 0
+	end_map_scripts
 
 TrainerHill_Entrance_OnTransition:
 	setflag FLAG_LANDMARK_TRAINER_HILL
@@ -58,7 +58,7 @@ TrainerHill_Entrance_OnFrame:
 	map_script_2 VAR_TEMP_D, 17, TrainerHill_Entrance_EventScript_ExitElevator
 	map_script_2 VAR_TEMP_5, 1, TrainerHill_Entrance_EventScript_EntryTrigger
 	map_script_2 VAR_TEMP_1, 1, TrainerHill_EventScript_WarpToEntranceCounter
-	.2byte 0
+	end_map_script_table
 
 TrainerHill_Entrance_EventScript_ExitElevator::
 	lockall

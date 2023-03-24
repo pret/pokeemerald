@@ -4,7 +4,7 @@
 .set LOCALID_PSYCHIC_M, 8
 
 DewfordTown_Hall_MapScripts::
-	.byte 0
+	end_map_scripts
 
 DewfordTown_Hall_EventScript_Girl::
 	lock

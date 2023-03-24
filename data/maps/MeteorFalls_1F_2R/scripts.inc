@@ -1,5 +1,5 @@
 MeteorFalls_1F_2R_MapScripts::
-	.byte 0
+	end_map_scripts
 
 MeteorFalls_1F_2R_EventScript_Nicolas::
 	trainerbattle_single TRAINER_NICOLAS_1, MeteorFalls_1F_2R_Text_NicolasIntro, MeteorFalls_1F_2R_Text_NicolasDefeat, MeteorFalls_1F_2R_EventScript_RegisterNicolas

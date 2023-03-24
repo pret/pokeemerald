@@ -14,7 +14,7 @@ BattleFrontier_BattleDomeBattleRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleDomeBattleRoom_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleDomeBattleRoom_OnWarp
 	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattleDomeBattleRoom_OnResume
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_BattleDomeBattleRoom_OnTransition:
 	dome_setopponentgfx
@@ -40,7 +40,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxFemale::
 
 BattleFrontier_BattleDomeBattleRoom_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleDomeBattleRoom_EventScript_EnterRoom
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_EnterRoom::
 	lockall
@@ -459,7 +459,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_DoDomeBattle::
 
 BattleFrontier_BattleDomeBattleRoom_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleDomeBattleRoom_EventScript_SetUpObjects
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_SetUpObjects::
 	hideobjectat LOCALID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM

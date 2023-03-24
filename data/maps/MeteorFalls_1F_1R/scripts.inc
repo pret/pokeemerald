@@ -6,7 +6,7 @@
 
 MeteorFalls_1F_1R_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, MeteorFalls_1F_1R_OnLoad
-	.byte 0
+	end_map_scripts
 
 MeteorFalls_1F_1R_OnLoad:
 	call_if_set FLAG_SYS_GAME_CLEAR, MeteorFalls_1F_1R_EventScript_OpenStevensCave

@@ -24,7 +24,7 @@
 SlateportCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SlateportCity_OnFrame
-	.byte 0
+	end_map_scripts
 
 SlateportCity_OnTransition:
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 0
@@ -71,7 +71,7 @@ SlateportCity_EventScript_MoveScottLeft::
 
 SlateportCity_OnFrame:
 	map_script_2 VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 1, SlateportCity_EventScript_ScottScene
-	.2byte 0
+	end_map_script_table
 
 SlateportCity_EventScript_ScottScene::
 	lockall

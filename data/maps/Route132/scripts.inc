@@ -1,5 +1,5 @@
 Route132_MapScripts::
-	.byte 0
+	end_map_scripts
 
 Route132_EventScript_Gilbert::
 	trainerbattle_single TRAINER_GILBERT, Route132_Text_GilbertIntro, Route132_Text_GilbertDefeat

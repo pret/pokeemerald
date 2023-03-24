@@ -2,7 +2,7 @@
 
 VictoryRoad_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, VictoryRoad_1F_OnTransition
-	.byte 0
+	end_map_scripts
 
 VictoryRoad_1F_OnTransition:
 	call_if_eq VAR_VICTORY_ROAD_1F_STATE, 1, VictoryRoad_1F_EventScript_SetEntranceWallyPos1

@@ -3,7 +3,7 @@
 
 FarawayIsland_Entrance_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, FarawayIsland_Entrance_OnTransition
-	.byte 0
+	end_map_scripts
 
 FarawayIsland_Entrance_OnTransition:
 	setflag FLAG_ARRIVED_ON_FARAWAY_ISLAND

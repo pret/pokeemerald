@@ -1,5 +1,5 @@
 PacifidlogTown_House4_MapScripts::
-	.byte 0
+	end_map_scripts
 
 PacifidlogTown_House4_EventScript_LittleGirl::
 	msgbox PacifidlogTown_House4_Text_SkyPokemon, MSGBOX_NPC

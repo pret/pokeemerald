@@ -3,7 +3,7 @@
 
 Route112_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route112_OnTransition
-	.byte 0
+	end_map_scripts
 
 Route112_OnTransition:
 	clearflag FLAG_FORCE_MIRAGE_TOWER_VISIBLE

@@ -6,7 +6,7 @@
 
 Route110_TrickHousePuzzle5_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle5_OnTransition
-	.byte 0
+	end_map_scripts
 
 Route110_TrickHousePuzzle5_OnTransition:
 	setvar VAR_TEMP_1, 0

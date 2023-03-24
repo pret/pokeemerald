@@ -1,5 +1,5 @@
 MauvilleCity_BikeShop_MapScripts::
-	.byte 0
+	end_map_scripts
 
 MauvilleCity_BikeShop_EventScript_Rydel::
 	lock

@@ -6,7 +6,7 @@ FallarborTown_BattleTentBattleRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_BattleTentBattleRoom_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FallarborTown_BattleTentBattleRoom_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, FallarborTown_BattleTentBattleRoom_OnWarp
-	.byte 0
+	end_map_scripts
 
 	@ On this map the player (OBJ_EVENT_ID_PLAYER) is hidden
 	@ The player is represented instead by object event 1, which has the gfx id VAR_OBJ_GFX_ID_1
@@ -34,7 +34,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale::
 
 FallarborTown_BattleTentBattleRoom_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, FallarborTown_BattleTentBattleRoom_EventScript_EnterRoom
-	.2byte 0
+	end_map_script_table
 
 FallarborTown_BattleTentBattleRoom_EventScript_EnterRoom::
 	lockall
@@ -231,7 +231,7 @@ FallarborTown_BattleTentBattleRoom_Movement_AttendantReturnToPos:
 
 FallarborTown_BattleTentBattleRoom_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, FallarborTown_BattleTentBattleRoom_EventScript_SetUpObjects
-	.2byte 0
+	end_map_script_table
 
 FallarborTown_BattleTentBattleRoom_EventScript_SetUpObjects::
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM

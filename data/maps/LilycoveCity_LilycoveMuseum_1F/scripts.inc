@@ -2,7 +2,7 @@
 .set LOCALID_ARTIST_2, 8
 
 LilycoveCity_LilycoveMuseum_1F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_Greeter::
 	msgbox LilycoveCity_LilycoveMuseum_1F_Text_WelcomeToLilycoveMuseum, MSGBOX_SIGN

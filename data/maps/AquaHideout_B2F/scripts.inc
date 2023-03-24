@@ -3,7 +3,7 @@
 
 AquaHideout_B2F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, AquaHideout_B2F_OnTransition
-	.byte 0
+	end_map_scripts
 
 AquaHideout_B2F_OnTransition:
 	call_if_set FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, AquaHideout_B2F_EventScript_PreventMattNoticing

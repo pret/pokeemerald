@@ -7,7 +7,7 @@ BattleFrontier_BattleTowerMultiCorridor_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerMultiCorridor_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerMultiCorridor_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerMultiCorridor_OnFrame
-	.byte 0
+	end_map_scripts
 
 	@ On this map the player (OBJ_EVENT_ID_PLAYER) is hidden
 	@ The player is represented instead by LOCALID_PLAYER, and has the gfx id VAR_OBJ_GFX_ID_F
@@ -35,7 +35,7 @@ BattleFrontier_BattleTowerMultiCorridor_EventScript_SetLinkPlayerGfx::
 
 BattleFrontier_BattleTowerMultiCorridor_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerMultiCorridor_EventScript_SetUpObjects
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattleTowerMultiCorridor_EventScript_SetUpObjects::
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
@@ -46,7 +46,7 @@ BattleFrontier_BattleTowerMultiCorridor_EventScript_SetUpObjects::
 
 BattleFrontier_BattleTowerMultiCorridor_OnFrame:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor::
 	lockall

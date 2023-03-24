@@ -12,11 +12,21 @@
 	.4byte \script
 	.endm
 
+	@ Terminates a list of map_script entries
+	.macro end_map_scripts
+	.byte 0
+	.endm
+
 	@ Defines an entry in a map script table (for either ON_WARP_INTO_MAP_TABLE or ON_FRAME_TABLE)
 	.macro map_script_2 var:req, compare:req, script:req
 	.2byte \var
 	.2byte \compare
 	.4byte \script
+	.endm
+
+	@ Terminates a list of map_script_2 entries
+	.macro end_map_script_table
+	.2byte 0
 	.endm
 
 	@ Defines an object event template for map data, to be used by a normal object. Mirrors the struct layout of ObjectEventTemplate in include/global.fieldmap.h

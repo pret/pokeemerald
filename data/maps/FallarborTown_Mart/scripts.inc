@@ -1,5 +1,5 @@
 FallarborTown_Mart_MapScripts::
-	.byte 0
+	end_map_scripts
 
 FallarborTown_Mart_EventScript_Clerk::
 	lock

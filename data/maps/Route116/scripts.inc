@@ -5,7 +5,7 @@ Route116_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route116_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route116_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route116_OnFrame
-	.byte 0
+	end_map_scripts
 
 Route116_OnTransition:
 	call_if_set FLAG_RECOVERED_DEVON_GOODS, Route116_EventScript_SetWandasBoyfriendPos
@@ -25,7 +25,7 @@ Route116_OnLoad:
 
 Route116_OnFrame:
 	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
-	.2byte 0
+	end_map_script_table
 
 Route116_EventScript_WandasBoyfriend::
 	lock

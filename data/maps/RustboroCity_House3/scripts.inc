@@ -1,5 +1,5 @@
 RustboroCity_House3_MapScripts::
-	.byte 0
+	end_map_scripts
 
 RustboroCity_House3_EventScript_OldMan::
 	msgbox RustboroCity_House3_Text_IGivePerfectlySuitedNicknames, MSGBOX_NPC

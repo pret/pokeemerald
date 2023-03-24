@@ -6,7 +6,7 @@ EverGrandeCity_ChampionsRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_ChampionsRoom_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_ChampionsRoom_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_ChampionsRoom_OnFrame
-	.byte 0
+	end_map_scripts
 
 EverGrandeCity_ChampionsRoom_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
@@ -14,7 +14,7 @@ EverGrandeCity_ChampionsRoom_OnTransition:
 
 EverGrandeCity_ChampionsRoom_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_ChampionsRoom_EventScript_PlayerTurnNorth
-	.2byte 0
+	end_map_script_table
 
 EverGrandeCity_ChampionsRoom_EventScript_PlayerTurnNorth::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
@@ -22,7 +22,7 @@ EverGrandeCity_ChampionsRoom_EventScript_PlayerTurnNorth::
 
 EverGrandeCity_ChampionsRoom_OnFrame:
 	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_ChampionsRoom_EventScript_EnterRoom
-	.2byte 0
+	end_map_script_table
 
 EverGrandeCity_ChampionsRoom_EventScript_EnterRoom::
 	lockall

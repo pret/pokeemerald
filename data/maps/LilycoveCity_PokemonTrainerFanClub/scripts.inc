@@ -10,13 +10,13 @@
 LilycoveCity_PokemonTrainerFanClub_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_PokemonTrainerFanClub_OnFrame
 	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_PokemonTrainerFanClub_OnTransition
-	.byte 0
+	end_map_scripts
 
 	@ See field_specials.c for a breakdown of the Fan Club and its variables
 
 LilycoveCity_PokemonTrainerFanClub_OnFrame:
 	map_script_2 VAR_LILYCOVE_FAN_CLUB_STATE, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_MeetFirstFans
-	.2byte 0
+	end_map_script_table
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_MeetFirstFans::
 	lockall

@@ -1,6 +1,6 @@
 MauvilleCity_Gym_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, MauvilleCity_Gym_OnLoad
-	.byte 0
+	end_map_scripts
 
 MauvilleCity_Gym_OnLoad:
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_DeactivatePuzzle

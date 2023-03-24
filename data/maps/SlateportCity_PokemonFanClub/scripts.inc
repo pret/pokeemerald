@@ -1,5 +1,5 @@
 SlateportCity_PokemonFanClub_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SlateportCity_PokemonFanClub_EventScript_Chairman::
 	lock

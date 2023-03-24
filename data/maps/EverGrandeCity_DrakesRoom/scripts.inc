@@ -2,12 +2,12 @@ EverGrandeCity_DrakesRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_DrakesRoom_OnFrame
 	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_DrakesRoom_OnLoad
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_SidneysRoom_OnWarp
-	.byte 0
+	end_map_scripts
 
 @ Unused, Drake uses Sidneys identical OnWarp for some reason
 EverGrandeCity_DrakesRoom_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_DrakesRoom_EventScript_PlayerTurnNorth
-	.2byte 0
+	end_map_script_table
 
 EverGrandeCity_DrakesRoom_EventScript_PlayerTurnNorth::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
@@ -15,7 +15,7 @@ EverGrandeCity_DrakesRoom_EventScript_PlayerTurnNorth::
 
 EverGrandeCity_DrakesRoom_OnFrame:
 	map_script_2 VAR_ELITE_4_STATE, 3, EverGrandeCity_DrakesRoom_EventScript_WalkInCloseDoor
-	.2byte 0
+	end_map_script_table
 
 EverGrandeCity_DrakesRoom_EventScript_WalkInCloseDoor::
 	lockall

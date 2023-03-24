@@ -1,5 +1,5 @@
 AbandonedShip_Rooms2_1F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 AbandonedShip_Rooms2_1F_EventScript_Dan::
 	trainerbattle_double TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_DanIntro, AbandonedShip_Rooms2_1F_Text_DanDefeat, AbandonedShip_Rooms2_1F_Text_DanNotEnoughMons, AbandonedShip_Rooms2_1F_EventScript_RegisterDan

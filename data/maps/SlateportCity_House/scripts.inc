@@ -1,5 +1,5 @@
 SlateportCity_House_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SlateportCity_House_EventScript_PokefanM::
 	msgbox SlateportCity_House_Text_NatureToDoWithStatGains, MSGBOX_NPC
