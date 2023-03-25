@@ -7,11 +7,7 @@
 // TEST: Imprison doesn't stop Max Moves. (YES!)
 // TEST: Max Moves change type as you'd expect with Normalize, Weather Ball, etc. (YES!)
 // TEST: You use Struggle while Dynamaxed if out of PP. (YES!)
-// Refactor code to remove dynamax.usingMaxMove? Might keep for Raids
-// Ditto cannot turn into a Gigantamax form. (NO)
-// Interactions with a Dynamaxed Pokemon with Magic Bounce. (???)
 // Dynamax should not reset Speed Swap, Soak, or anything else from form changing. (NO)
-// Multi Attack is treated in Max Move power calcs like a Fighting or Poison type move. (NO)
 // Max Moves cannot be used against allies. (NO)
 
 // ============= DYNAMAX AND MAX MOVE INTERACTIONS ===================

@@ -1418,7 +1418,17 @@ static void Task_GiveExpToMon(u8 taskId)
             u8 savedActiveBattler;
 
             SetMonData(mon, MON_DATA_EXP, &nextLvlExp);
+            gBattleStruct->dynamax.beforeLevelHP = GetMonData(mon, MON_DATA_HP);
             CalculateMonStats(mon);
+
+            // Prevent Dynamaxed HP from being reset upon level-up.
+            if (IsDynamaxed(battlerId))
+            {
+                ApplyDynamaxHPMultiplier(mon);
+                gBattleMons[battlerId].hp = gBattleStruct->dynamax.beforeLevelHP;
+                SetMonData(mon, MON_DATA_HP, &gBattleMons[battlerId].hp);
+            }
+
             gainedExp -= nextLvlExp - currExp;
             savedActiveBattler = gActiveBattler;
             gActiveBattler = battlerId;
