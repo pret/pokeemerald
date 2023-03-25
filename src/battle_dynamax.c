@@ -145,14 +145,14 @@ bool32 CanDynamax(u16 battlerId)
 }
 
 // Applies the HP Multiplier for Dynamaxed Pokemon and Raid Bosses.
-void ApplyDynamaxHPMultiplier(struct Pokemon* mon)
+void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon)
 {
 	if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_SHEDINJA)
 		return;
 	else
 	{
 		u16 mult = UQ_4_12(1.5); // placeholder
-		u16 hp = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_HP) * mult) + UQ_4_12_ROUND);
+		u16 hp = UQ_4_12_TO_INT((gBattleMons[battlerId].hp * mult) + UQ_4_12_ROUND);
 		u16 maxHP = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_MAX_HP) * mult) + UQ_4_12_ROUND);
 		SetMonData(mon, MON_DATA_HP, &hp);
 		SetMonData(mon, MON_DATA_MAX_HP, &maxHP);

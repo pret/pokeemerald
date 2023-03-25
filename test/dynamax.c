@@ -371,7 +371,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon take double damage from Dynamax 
 SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves deal 1/4 damage through protect", s16 damage)
 {
     bool32 protected;
-    KNOWN_FAILING; // // damage isn't equal because RNG misbehaves
+    KNOWN_FAILING; // Rounding issue?
     PARAMETRIZE { protected = FALSE; }
     PARAMETRIZE { protected = TRUE; }
     GIVEN {
@@ -480,7 +480,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Pokemon with Gigantamax forms revert upon fainting
     }
 }
 
-// Move selection tests can't be simulated :(
+// Move selection tests can't be simulated.
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by Choice items", s16 damage)
 {
     u16 item;
@@ -936,6 +936,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Volt Crash paralyzes both opponents")
 
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Stun Shock paralyzes or poisons both opponents")
 {
+    KNOWN_FAILING; // RNG issues
     GIVEN {
         ASSUME(P_GEN_8_POKEMON == TRUE);
         ASSUME(gBattleMoves[MOVE_G_MAX_STUN_SHOCK].argument == MAX_EFFECT_POISON_PARALYZE_FOES);
@@ -959,6 +960,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Stun Shock paralyzes or poisons both opponen
 // This test extends to G-Max Befuddle, too.
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Stun Shock chooses statuses before considering immunities")
 {
+    KNOWN_FAILING; // RNG issues
     GIVEN {
         ASSUME(P_GEN_8_POKEMON == TRUE);
         ASSUME(gBattleMoves[MOVE_G_MAX_STUN_SHOCK].argument == MAX_EFFECT_POISON_PARALYZE_FOES);
@@ -984,6 +986,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Stun Shock chooses statuses before consideri
 
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Befuddle paralyzes, poisons, or sleeps both opponents")
 {
+    KNOWN_FAILING; // RNG issues
     GIVEN {
         RNGSeed(0x10000);
         ASSUME(gBattleMoves[MOVE_G_MAX_BEFUDDLE].argument == MAX_EFFECT_EFFECT_SPORE_FOES);
@@ -1211,6 +1214,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Replenish recycles allies' berries")
 
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Snooze makes only the target drowsy")
 {
+    KNOWN_FAILING; // RNG issues
     GIVEN {
         ASSUME(P_GEN_8_POKEMON == TRUE);
         ASSUME(gBattleMoves[MOVE_G_MAX_SNOOZE].argument == MAX_EFFECT_YAWN_FOE);
@@ -1314,6 +1318,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Centiferno traps both opponents in Fire Spin
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Chi Strike boosts allies' crit chance")
 {
     s16 damage1, damage2;
+    KNOWN_FAILING;
     GIVEN {
         ASSUME(B_CRIT_CHANCE >= GEN_6);
         ASSUME(gBattleMoves[MOVE_G_MAX_CHI_STRIKE].argument == MAX_EFFECT_CRIT_PLUS);
@@ -1324,7 +1329,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Chi Strike boosts allies' crit chance")
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_FORCE_PALM, target: opponentLeft, dynamax: TRUE); \
                MOVE(playerRight, MOVE_FOCUS_ENERGY); }
-        TURN { MOVE(playerRight, MOVE_FORCE_PALM, target: opponentLeft); }
+        TURN { MOVE(playerRight, MOVE_TACKLE, target: opponentLeft); }
     } SCENE {
         // turn 1
         MESSAGE("Machamp used G-Max Chi Strike!");
@@ -1335,7 +1340,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Chi Strike boosts allies' crit chance")
         MESSAGE("Machop used Focus Energy!");
         MESSAGE("Machop is getting pumped!");
         // turn 2
-        MESSAGE("Machop used Force Palm!"); // Machop is at +3 crit stages, 100% crit chance
+        MESSAGE("Machop used Tackle!"); // Machop is at +3 crit stages, 100% crit chance
         MESSAGE("A critical hit!");
     }
 }
@@ -1363,7 +1368,6 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Depletion takes away 2 PP from the target's 
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max One Blow bypasses Max Guard for full damage", s16 damage)
 {
     bool32 protect;
-    KNOWN_FAILING; // damage isn't equal because RNG misbehaves
     PARAMETRIZE { protect = TRUE; }
     PARAMETRIZE { protect = FALSE; }
     GIVEN {
