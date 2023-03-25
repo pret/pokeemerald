@@ -8,7 +8,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Roar switches the target with a random non-fainted replacement")
 {
-    PASSES_RANDOMLY(1, 2);
+    PASSES_RANDOMLY(1, 2, RNG_FORCE_RANDOM_SWITCH);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -25,7 +25,7 @@ SINGLE_BATTLE_TEST("Roar switches the target with a random non-fainted replaceme
 
 DOUBLE_BATTLE_TEST("Roar switches the target with a random non-battler, non-fainted replacement")
 {
-    PASSES_RANDOMLY(1, 2);
+    PASSES_RANDOMLY(1, 2, RNG_FORCE_RANDOM_SWITCH);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);

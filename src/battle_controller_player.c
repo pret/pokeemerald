@@ -1424,7 +1424,7 @@ static void Task_GiveExpToMon(u8 taskId)
             // Prevent Dynamaxed HP from being reset upon level-up.
             if (IsDynamaxed(battlerId))
             {
-                ApplyDynamaxHPMultiplier(mon);
+                ApplyDynamaxHPMultiplier(battlerId, mon);
                 gBattleMons[battlerId].hp = gBattleStruct->dynamax.beforeLevelHP;
                 SetMonData(mon, MON_DATA_HP, &gBattleMons[battlerId].hp);
             }

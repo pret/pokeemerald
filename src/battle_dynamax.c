@@ -117,6 +117,13 @@ bool32 CanDynamax(u16 battlerId)
     #endif
         return FALSE;
 
+    // Check if Dynamax battle flag is set. This needs to be defined in include/config/battle.h
+    #if B_FLAG_DYNAMAX_BATTLE != 0
+    if (!FlagGet(B_FLAG_DYNAMAX_BATTLE))
+    #endif
+    //	return FALSE;
+
+
     // Check if Player has a Dynamax Band.
     if ((GetBattlerPosition(battlerId) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battlerId) == B_POSITION_PLAYER_RIGHT))
           && !CheckBagHasItem(ITEM_DYNAMAX_BAND, 1))
@@ -147,14 +154,14 @@ bool32 CanDynamax(u16 battlerId)
 }
 
 // Applies the HP Multiplier for Dynamaxed Pokemon and Raid Bosses.
-void ApplyDynamaxHPMultiplier(struct Pokemon* mon)
+void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon)
 {
     if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_SHEDINJA)
         return;
     else
     {
         u16 mult = UQ_4_12(1.5); // placeholder
-        u16 hp = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_HP) * mult) + UQ_4_12_ROUND);
+        u16 hp = UQ_4_12_TO_INT((gBattleMons[battlerId].hp * mult) + UQ_4_12_ROUND);
         u16 maxHP = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_MAX_HP) * mult) + UQ_4_12_ROUND);
         SetMonData(mon, MON_DATA_HP, &hp);
         SetMonData(mon, MON_DATA_MAX_HP, &maxHP);

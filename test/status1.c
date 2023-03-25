@@ -72,7 +72,7 @@ SINGLE_BATTLE_TEST("Burn reduces attack by 50%", s16 damage)
 
 SINGLE_BATTLE_TEST("Freeze has a 20% chance of being thawed")
 {
-    PASSES_RANDOMLY(20, 100);
+    PASSES_RANDOMLY(20, 100, RNG_FROZEN);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_FREEZE); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -90,9 +90,8 @@ SINGLE_BATTLE_TEST("Freeze is thawed by opponent's Fire-type attacks")
         PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_FREEZE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_EMBER); }
+        TURN { MOVE(opponent, MOVE_EMBER); MOVE(player, MOVE_CELEBRATE); }
     } SCENE {
-        MESSAGE("Wobbuffet is frozen solid!");
         MESSAGE("Foe Wobbuffet used Ember!");
         MESSAGE("Wobbuffet was defrosted!");
         STATUS_ICON(player, none: TRUE);
@@ -145,7 +144,7 @@ SINGLE_BATTLE_TEST("Paralysis reduces speed by 50%")
 
 SINGLE_BATTLE_TEST("Paralysis has a 25% chance of skipping the turn")
 {
-    PASSES_RANDOMLY(25, 100);
+    PASSES_RANDOMLY(25, 100, RNG_PARALYSIS);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_PARALYSIS); }
         OPPONENT(SPECIES_WOBBUFFET);
