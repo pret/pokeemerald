@@ -20,6 +20,8 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 
+static u8 GetMaxPowerTier(u16 move);
+
 // Constant Data
 static const u16 sMaxMoveTable[] =
 {
@@ -277,112 +279,146 @@ u16 GetMaxMove(u16 battlerId, u16 baseMove)
     return move;
 }
 
+// First value is for Fighting, Poison and Multi-Attack. The second is for everything else.
+enum
+{
+    MAX_POWER_TIER_1,   //  70 or 90 damage
+    MAX_POWER_TIER_2,   // 75 or 100 damage
+    MAX_POWER_TIER_3,   // 80 or 110 damage
+    MAX_POWER_TIER_4,   // 85 or 120 damage
+    MAX_POWER_TIER_5,   // 90 or 130 damage
+    MAX_POWER_TIER_6,   // 95 or 140 damage
+    MAX_POWER_TIER_7,   // 100 or 130 damage
+    MAX_POWER_TIER_8,   // 100 or 150 damage
+};
+
 // Gets the base power of a Max Move.
 u8 GetMaxMovePower(u16 move)
 {
-    // G-Max Drum Solo, G-Max Hydrosnipe, and G-Max Fireball always have 160 base power. 
+    u8 tier;
+    // G-Max Drum Solo, G-Max Hydrosnipe, and G-Max Fireball always have 160 base power.
     if (gBattleMoves[GetMaxMove(gBattlerAttacker, move)].argument == MAX_EFFECT_FIXED_POWER)
         return 160;
-    
-    // Some moves are exceptions to the general rules below.
+
+    // Exceptions to all other rules below:
     switch (move)
     {
-        case MOVE_CRUSH_GRIP:
-        case MOVE_WRING_OUT:
-        case MOVE_MAGNITUDE:
-        case MOVE_DOUBLE_IRON_BASH:
-        case MOVE_TRIPLE_AXEL:
-            return 140;
-        case MOVE_PIN_MISSILE:
-        case MOVE_POWER_TRIP:
-        case MOVE_PUNISHMENT:
-        case MOVE_DRAGON_DARTS:
-        case MOVE_DUAL_CHOP:
-        case MOVE_ELECTRO_BALL:
-        case MOVE_HEAT_CRASH:
-        case MOVE_BULLET_SEED:
-        case MOVE_GRASS_KNOT:
-        case MOVE_BONEMERANG:
-        case MOVE_BONE_RUSH:
-        case MOVE_FISSURE:
-        case MOVE_ICICLE_SPEAR:
-        case MOVE_SHEER_COLD:
-        case MOVE_WEATHER_BALL:
-        case MOVE_TAIL_SLAP:
-        case MOVE_GUILLOTINE:
-        case MOVE_HORN_DRILL:
-        case MOVE_FLAIL:
-        case MOVE_RETURN:
-        case MOVE_FRUSTRATION:
-        case MOVE_NATURAL_GIFT:
-        case MOVE_TRUMP_CARD:
-        case MOVE_STORED_POWER:
-        case MOVE_ROCK_BLAST:
-        case MOVE_GEAR_GRIND:
-        case MOVE_GYRO_BALL:
-        case MOVE_HEAVY_SLAM:
-        case MOVE_DUAL_WINGBEAT:
-        case MOVE_SCALE_SHOT:
-        case MOVE_TERRAIN_PULSE:
-            return 130;
-        case MOVE_DOUBLE_HIT:
-        case MOVE_SPIKE_CANNON:
-            return 120;
-        case MOVE_TWINEEDLE:
-        case MOVE_BEAT_UP:
-        case MOVE_FLING:
-        case MOVE_DRAGON_RAGE:
-        case MOVE_NATURES_MADNESS:
-        case MOVE_NIGHT_SHADE:
-        case MOVE_COMET_PUNCH:
-        case MOVE_FURY_SWIPES:
-        case MOVE_SONIC_BOOM:
-        case MOVE_BIDE:
-        case MOVE_SUPER_FANG:
-        case MOVE_PRESENT:
-        case MOVE_SPIT_UP:
-        case MOVE_PSYWAVE:
-        case MOVE_MIRROR_COAT:
-        case MOVE_METAL_BURST:
-        case MOVE_LOW_KICK:
-        case MOVE_REVERSAL:
-        case MOVE_FINAL_GAMBIT:
-            return 100;
-        case MOVE_DOUBLE_KICK:
-        case MOVE_TRIPLE_KICK:
-            return 80;
-        case MOVE_COUNTER:
-        case MOVE_SEISMIC_TOSS:
-            return 75;
-    } // TODO: maybe bring back gMaxMovePowers lol
+        case MOVE_TRIPLE_KICK:   return 80;
+        case MOVE_GEAR_GRIND:    return 100;
+        case MOVE_DUAL_WINGBEAT: return 100;
+        case MOVE_TRIPLE_AXEL:   return 140;
+    }
 
-    // Fighting and Poison Max Moves are weaker than other types.
+    tier = GetMaxPowerTier(move);
     if (gBattleMoves[move].type == TYPE_FIGHTING
-             || gBattleMoves[move].type == TYPE_POISON
-             || move == MOVE_MULTI_ATTACK)
-        switch (gBattleMoves[move].power)
+     || gBattleMoves[move].type == TYPE_POISON
+     || move == MOVE_MULTI_ATTACK)
+    {
+        switch (tier)
         {
             default:
-            case 0 ... 40: return 70;
-            case 45 ... 50: return 75;
-            case 55 ... 60: return 80;
-            case 65 ... 70: return 85;
-            case 75 ... 100: return 90;
-            case 110 ... 140: return 95;
-            case 150 ... 250: return 100;
+            case MAX_POWER_TIER_1: return 70;
+            case MAX_POWER_TIER_2: return 75;
+            case MAX_POWER_TIER_3: return 80;
+            case MAX_POWER_TIER_4: return 85;
+            case MAX_POWER_TIER_5: return 90;
+            case MAX_POWER_TIER_6: return 95;
+            case MAX_POWER_TIER_7: return 100;
+            case MAX_POWER_TIER_8: return 100;
         }
+    }
     else
-        switch (gBattleMoves[move].power)
+    {
+        switch (tier)
         {
             default:
-            case 0 ... 40: return 90;
-            case 45 ... 50: return 100;
-            case 55 ... 60: return 110;
-            case 65 ... 70: return 120;
-            case 75 ... 100: return 130;
-            case 110 ... 140: return 140;
-            case 150 ... 250: return 150;
+            case MAX_POWER_TIER_1: return 90;
+            case MAX_POWER_TIER_2: return 100;
+            case MAX_POWER_TIER_3: return 110;
+            case MAX_POWER_TIER_4: return 120;
+            case MAX_POWER_TIER_5: return 130;
+            case MAX_POWER_TIER_6: return 140;
+            case MAX_POWER_TIER_7: return 130;
+            case MAX_POWER_TIER_8: return 150;
         }
+    }
+}
+
+static u8 GetMaxPowerTier(u16 move)
+{
+    if (gBattleMoves[move].flags & FLAG_TWO_STRIKES)
+    {
+        switch(gBattleMoves[move].power)
+        {
+            case 0 ... 25:  return MAX_POWER_TIER_2;
+            case 26 ... 30: return MAX_POWER_TIER_3;
+            case 31 ... 35: return MAX_POWER_TIER_4;
+            case 36 ... 50: return MAX_POWER_TIER_5;
+            default:
+            case 51 ... 60: return MAX_POWER_TIER_6;
+        }
+    }
+
+    switch (gBattleMoves[move].effect)
+    {
+        case EFFECT_BIDE:
+        case EFFECT_SUPER_FANG:
+        case EFFECT_LEVEL_DAMAGE:
+        case EFFECT_PSYWAVE:
+        case EFFECT_COUNTER:
+        case EFFECT_PRESENT:
+        case EFFECT_BEAT_UP:
+        case EFFECT_WEATHER_BALL:
+        case EFFECT_FLING:
+        case EFFECT_ELECTRO_BALL:
+        case EFFECT_METAL_BURST:
+        case EFFECT_TERRAIN_PULSE:
+        case EFFECT_PUNISHMENT:
+        case EFFECT_TRUMP_CARD:
+        case EFFECT_SCALE_SHOT:
+        case EFFECT_SONICBOOM:
+        case EFFECT_SPIT_UP:
+        case EFFECT_NATURAL_GIFT:
+        case EFFECT_MIRROR_COAT:
+        case EFFECT_DRAGON_RAGE:
+        case EFFECT_FINAL_GAMBIT:
+        //case EFFECT_DRAGON_DARTS:
+            return MAX_POWER_TIER_2;
+        case EFFECT_OHKO:
+        case EFFECT_RETURN:
+        case EFFECT_FRUSTRATION:
+        case EFFECT_HEAT_CRASH:
+        case EFFECT_STORED_POWER:
+        case EFFECT_GYRO_BALL:
+            return MAX_POWER_TIER_5;
+        case EFFECT_MAGNITUDE:
+        case EFFECT_WRING_OUT:
+            return MAX_POWER_TIER_6;
+        case EFFECT_FLAIL:
+        case EFFECT_LOW_KICK:
+            return MAX_POWER_TIER_7;
+        case EFFECT_MULTI_HIT:
+            switch(gBattleMoves[move].power)
+            {
+                case 0 ... 15:    return MAX_POWER_TIER_1;
+                case 16 ... 18:   return MAX_POWER_TIER_2;
+                case 19 ... 20:   return MAX_POWER_TIER_4;
+                default:
+                case 21 ... 25:   return MAX_POWER_TIER_5;
+            }
+    }
+
+    switch (gBattleMoves[move].power)
+    {
+        case 0 ... 40:    return MAX_POWER_TIER_1;
+        case 45 ... 50:   return MAX_POWER_TIER_2;
+        case 55 ... 60:   return MAX_POWER_TIER_3;
+        case 65 ... 70:   return MAX_POWER_TIER_4;
+        case 75 ... 100:  return MAX_POWER_TIER_5;
+        case 110 ... 140: return MAX_POWER_TIER_6;
+        default:
+        case 150 ... 250: return MAX_POWER_TIER_8;
+    }
 }
 
 // Returns whether a move is a Max Move or not.
@@ -467,7 +503,7 @@ u16 SetMaxMoveEffect(u16 move)
     // Don't continue if the move didn't land.
     if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
         return effect;
-    
+
     switch (maxEffect)
     {
         case MAX_EFFECT_RAISE_TEAM_ATTACK:
