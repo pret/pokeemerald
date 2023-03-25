@@ -113,7 +113,7 @@ bool32 CanDynamax(u16 battlerId)
 	#if B_FLAG_DYNAMAX_BATTLE != 0
 	if (!FlagGet(B_FLAG_DYNAMAX_BATTLE))
 	#endif
-		return FALSE;
+	//	return FALSE;
 
 	// Check if Player has a Dynamax Band.
     if ((GetBattlerPosition(battlerId) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battlerId) == B_POSITION_PLAYER_RIGHT))
