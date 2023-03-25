@@ -30986,7 +30986,7 @@ Move_G_MAX_DEPLETION:
 Move_MAX_WYRMWIND:
 	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
 	waitforvisualfinish
-	@goto Move_DRACO_METEOR  broken
+	goto Move_SPACIAL_REND
 	end
 
 Move_G_MAX_SNOOZE:

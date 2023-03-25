@@ -115,7 +115,7 @@ bool32 CanDynamax(u16 battlerId)
     #if B_FLAG_DYNAMAX_BATTLE != 0
     if (!FlagGet(B_FLAG_DYNAMAX_BATTLE))
     #endif
-        return FALSE;
+        // return FALSE;
 
     // Check if Dynamax battle flag is set. This needs to be defined in include/config/battle.h
     #if B_FLAG_DYNAMAX_BATTLE != 0
