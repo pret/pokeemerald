@@ -259,9 +259,9 @@ static const struct ListMenuTemplate sItemListMenu =
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NARROW,
-    .cursorKind = 0
+    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const struct MenuAction sItemMenuActions[] = {
@@ -818,9 +818,9 @@ static bool8 LoadBagMenu_Graphics(void)
         break;
     case 2:
         if (!IsWallysBag() && gSaveBlock2Ptr->playerGender != MALE)
-            LoadCompressedPalette(gBagScreenFemale_Pal, 0, 0x40);
+            LoadCompressedPalette(gBagScreenFemale_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
         else
-            LoadCompressedPalette(gBagScreenMale_Pal, 0, 0x40);
+            LoadCompressedPalette(gBagScreenMale_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
         gBagMenu->graphicsLoadState++;
         break;
     case 3:
@@ -987,7 +987,7 @@ static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
         else
         {
             // Print registered icon
-            if (gSaveBlock1Ptr->registeredItem && gSaveBlock1Ptr->registeredItem == itemId)
+            if (gSaveBlock1Ptr->registeredItem != ITEM_NONE && gSaveBlock1Ptr->registeredItem == itemId)
                 BlitBitmapToWindow(windowId, sRegisteredSelect_Gfx, 96, y - 1, 24, 16);
         }
     }
@@ -1909,7 +1909,7 @@ static void ItemMenu_Register(u8 taskId)
     u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
 
     if (gSaveBlock1Ptr->registeredItem == gSpecialVar_ItemId)
-        gSaveBlock1Ptr->registeredItem = 0;
+        gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     else
         gSaveBlock1Ptr->registeredItem = gSpecialVar_ItemId;
     DestroyListMenuTask(tListTaskId, scrollPos, cursorPos);
@@ -2448,10 +2448,10 @@ static void LoadBagMenuTextWindows(void)
 
     InitWindows(sDefaultBagWindows);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 1, 0xE0);
-    LoadMessageBoxGfx(0, 10, 0xD0);
-    ListMenuLoadStdPalAt(0xC0, 1);
-    LoadPalette(&gStandardMenuPalette, 0xF0, 0x20);
+    LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(14));
+    LoadMessageBoxGfx(0, 10, BG_PLTT_ID(13));
+    ListMenuLoadStdPalAt(BG_PLTT_ID(12), 1);
+    LoadPalette(&gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     for (i = 0; i <= WIN_POCKET_NAME; i++)
     {
         FillWindowPixelBuffer(i, PIXEL_FILL(0));

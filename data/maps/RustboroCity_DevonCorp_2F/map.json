@@ -99,14 +99,14 @@
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_DEVON_CORP_1F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 2,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_DEVON_CORP_3F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

@@ -255,91 +255,91 @@
       "y": 31,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 17,
       "y": 29,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY_MART",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 31,
       "y": 32,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY_GYM_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 31,
       "y": 16,
       "elevation": 3,
       "dest_map": "MAP_CAVE_OF_ORIGIN_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 9,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY_HOUSE1",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 45,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY_HOUSE2",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 9,
       "y": 17,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY_HOUSE3",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 44,
       "y": 17,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY_HOUSE4",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 9,
       "y": 26,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY_HOUSE5",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 53,
       "y": 28,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY_HOUSE6",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 8,
       "y": 35,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY_HOUSE7",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 48,
       "y": 25,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY_LOTAD_AND_SEEDOT_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 51,
       "y": 36,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

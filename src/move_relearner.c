@@ -145,12 +145,19 @@
 
 // The different versions of hearts are selected using animation
 // commands.
-#define APPEAL_HEART_EMPTY 0
-#define APPEAL_HEART_FULL 1
-#define JAM_HEART_EMPTY 2
-#define JAM_HEART_FULL 3
+enum {
+    APPEAL_HEART_EMPTY,
+    APPEAL_HEART_FULL,
+    JAM_HEART_EMPTY,
+    JAM_HEART_FULL,
+};
 
-#define MAX_RELEARNER_MOVES (MAX_LEVEL_UP_MOVES > 25 ? MAX_LEVEL_UP_MOVES : 25)
+#define TAG_MODE_ARROWS 5325
+#define TAG_LIST_ARROWS 5425
+#define GFXTAG_UI       5525
+#define PALTAG_UI       5526
+
+#define MAX_RELEARNER_MOVES max(MAX_LEVEL_UP_MOVES, 25)
 
 static EWRAM_DATA struct
 {
@@ -174,11 +181,11 @@ static EWRAM_DATA struct {
     bool8 showContestInfo;
 } sMoveRelearnerMenuSate = {0};
 
-static const u16 sMoveRelearnerPaletteData[] = INCBIN_U16("graphics/interface/ui_learn_move.gbapal");
+static const u16 sUI_Pal[] = INCBIN_U16("graphics/interface/ui_learn_move.gbapal");
 
 // The arrow sprites in this spritesheet aren't used. The scroll-arrow system provides its own
 // arrow sprites.
-static const u8 sMoveRelearnerSpriteSheetData[] = INCBIN_U8("graphics/interface/ui_learn_move.4bpp");
+static const u8 sUI_Tiles[] = INCBIN_U8("graphics/interface/ui_learn_move.4bpp");
 
 static const struct OamData sHeartSpriteOamData =
 {
@@ -233,15 +240,15 @@ static const struct OamData sUnusedOam2 =
 
 static const struct SpriteSheet sMoveRelearnerSpriteSheet =
 {
-    .data = sMoveRelearnerSpriteSheetData,
-    .size = 0x180,
-    .tag = 5525
+    .data = sUI_Tiles,
+    .size = sizeof(sUI_Tiles),
+    .tag = GFXTAG_UI
 };
 
 static const struct SpritePalette sMoveRelearnerPalette =
 {
-    .data = sMoveRelearnerPaletteData,
-    .tag = 5526
+    .data = sUI_Pal,
+    .tag = PALTAG_UI
 };
 
 static const struct ScrollArrowsTemplate sDisplayModeArrowsTemplate =
@@ -254,8 +261,8 @@ static const struct ScrollArrowsTemplate sDisplayModeArrowsTemplate =
     .secondY = 16,
     .fullyUpThreshold = -1,
     .fullyDownThreshold = -1,
-    .tileTag = 5325,
-    .palTag = 5325,
+    .tileTag = TAG_MODE_ARROWS,
+    .palTag = TAG_MODE_ARROWS,
     .palNum = 0,
 };
 
@@ -269,8 +276,8 @@ static const struct ScrollArrowsTemplate sMoveListScrollArrowsTemplate =
     .secondY = 104,
     .fullyUpThreshold = 0,
     .fullyDownThreshold = 0,
-    .tileTag = 5425,
-    .palTag = 5425,
+    .tileTag = TAG_LIST_ARROWS,
+    .palTag = TAG_LIST_ARROWS,
     .palNum = 0,
 };
 
@@ -308,8 +315,8 @@ static const union AnimCmd *const sHeartSpriteAnimationCommands[] =
 
 static const struct SpriteTemplate sConstestMoveHeartSprite =
 {
-    .tileTag = 5525,
-    .paletteTag = 5526,
+    .tileTag = GFXTAG_UI,
+    .paletteTag = PALTAG_UI,
     .oam = &sHeartSpriteOamData,
     .anims = sHeartSpriteAnimationCommands,
     .images = NULL,
@@ -405,7 +412,7 @@ static void CB2_InitLearnMove(void)
     CreateUISprites();
 
     sMoveRelearnerStruct->moveListMenuTask = ListMenuInit(&gMultiuseListMenuTemplate, sMoveRelearnerMenuSate.listOffset, sMoveRelearnerMenuSate.listRow);
-    FillPalette(RGB_BLACK, 0, 2);
+    SetBackdropFromColor(RGB_BLACK);
     SetMainCallback2(CB2_MoveRelearnerMain);
 }
 
@@ -430,7 +437,7 @@ static void CB2_InitLearnMoveReturnFromSelectMove(void)
     CreateUISprites();
 
     sMoveRelearnerStruct->moveListMenuTask = ListMenuInit(&gMultiuseListMenuTemplate, sMoveRelearnerMenuSate.listOffset, sMoveRelearnerMenuSate.listRow);
-    FillPalette(RGB_BLACK, 0, 2);
+    SetBackdropFromColor(RGB_BLACK);
     SetMainCallback2(CB2_MoveRelearnerMain);
 }
 
@@ -553,7 +560,7 @@ static void DoMoveRelearnerMain(void)
                 gSpecialVar_0x8004 = FALSE;
                 sMoveRelearnerStruct->state = MENU_STATE_FADE_AND_RETURN;
             }
-            else if (selection == -1 || selection == 1)
+            else if (selection == MENU_B_PRESSED || selection == 1)
             {
                 if (sMoveRelearnerMenuSate.showContestInfo == FALSE)
                 {
@@ -579,14 +586,14 @@ static void DoMoveRelearnerMain(void)
         break;
     case MENU_STATE_CONFIRM_DELETE_OLD_MOVE:
         {
-            s8 var = Menu_ProcessInputNoWrapClearOnChoose();
+            s8 selection = Menu_ProcessInputNoWrapClearOnChoose();
 
-            if (var == 0)
+            if (selection == 0)
             {
                 FormatAndPrintText(gText_MoveRelearnerWhichMoveToForget);
                 sMoveRelearnerStruct->state = MENU_STATE_PRINT_WHICH_MOVE_PROMPT;
             }
-            else if (var == -1 || var == 1)
+            else if (selection == MENU_B_PRESSED || selection == 1)
             {
                 sMoveRelearnerStruct->state = MENU_STATE_PRINT_STOP_TEACHING;
             }
@@ -606,13 +613,13 @@ static void DoMoveRelearnerMain(void)
         break;
     case MENU_STATE_CONFIRM_STOP_TEACHING:
         {
-            s8 var = Menu_ProcessInputNoWrapClearOnChoose();
+            s8 selection = Menu_ProcessInputNoWrapClearOnChoose();
 
-            if (var == 0)
+            if (selection == 0)
             {
                 sMoveRelearnerStruct->state = MENU_STATE_CHOOSE_SETUP_STATE;
             }
-            else if (var == MENU_B_PRESSED || var == 1)
+            else if (selection == MENU_B_PRESSED || selection == 1)
             {
                 // What's the point? It gets set to MENU_STATE_PRINT_TRYING_TO_LEARN_PROMPT, anyway.
                 if (sMoveRelearnerMenuSate.showContestInfo == FALSE)

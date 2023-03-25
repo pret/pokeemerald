@@ -2635,21 +2635,21 @@ static void LoadPokedexBgPalette(bool8 isSearchResults)
     if (!HGSS_DARK_MODE)
     {
         if (isSearchResults == TRUE)
-            LoadPalette(gPokedexSearchResults_Pal + 1, 1, 0xBE);
+            LoadPalette(gPokedexSearchResults_Pal + 1, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(6 * 16 - 1));
         else if (!IsNationalPokedexEnabled())
-            LoadPalette(gPokedexDefault_Pal + 1, 1, 0xBE);
+            LoadPalette(gPokedexDefault_Pal + 1, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(6 * 16 - 1));
         else
-            LoadPalette(gPokedexNational_Pal + 1, 1, 0xBE);
+            LoadPalette(gPokedexNational_Pal + 1, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(6 * 16 - 1));
         LoadPalette(GetOverworldTextboxPalettePtr(), 0xF0, 32);
     }
     else
     {
         if (isSearchResults == TRUE)
-            LoadPalette(gPokedexSearchResults_dark_Pal + 1, 1, 0xBE);
+            LoadPalette(gPokedexSearchResults_dark_Pal + 1, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(6 * 16 - 1));
         else if (!IsNationalPokedexEnabled())
-            LoadPalette(gPokedexDefault_dark_Pal + 1, 1, 0xBE);
+            LoadPalette(gPokedexDefault_dark_Pal + 1, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(6 * 16 - 1));
         else
-            LoadPalette(gPokedexNational_dark_Pal + 1, 1, 0xBE);
+            LoadPalette(gPokedexNational_dark_Pal + 1, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(6 * 16 - 1));
         LoadPalette(GetOverworldTextboxPalettePtr(), 0xF0, 32);
     }
 
@@ -3815,7 +3815,7 @@ static void Task_LoadInfoScreen(u8 taskId)
     case 4:
         PrintMonInfo(sPokedexListItem->dexNum, sPokedexView->dexMode == DEX_MODE_HOENN ? FALSE : TRUE, sPokedexListItem->owned, 0);
         if (!sPokedexListItem->owned)
-            LoadPalette(gPlttBufferUnfaded + 1, 0x31, 0x1E);
+            LoadPalette(gPlttBufferUnfaded + 1, BG_PLTT_ID(3) + 1, PLTT_SIZEOF(16 - 1));
         CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
@@ -4210,7 +4210,7 @@ static void LoadPlayArrowPalette(bool8 cryPlaying)
         color = RGB(18, 28, 0);
     else
         color = RGB(15, 21, 0);
-    LoadPalette(&color, 0x5D, 2);
+    LoadPalette(&color, BG_PLTT_ID(5) + 13, PLTT_SIZEOF(1));
 }
 
 static void Task_LoadSizeScreen(u8 taskId)
@@ -4263,7 +4263,7 @@ static void Task_LoadSizeScreen(u8 taskId)
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].y2 = gPokedexEntries[sPokedexListItem->dexNum].trainerOffset;
         SetOamMatrix(1, gPokedexEntries[sPokedexListItem->dexNum].trainerScale, 0, 0, gPokedexEntries[sPokedexListItem->dexNum].trainerScale);
-        LoadPalette(sSizeScreenSilhouette_Pal, (gSprites[spriteId].oam.paletteNum + 16) * 16, 0x20);
+        LoadPalette(sSizeScreenSilhouette_Pal, OBJ_PLTT_ID2(gSprites[spriteId].oam.paletteNum), PLTT_SIZE_4BPP);
         gTasks[taskId].tTrainerSpriteId = spriteId;
         gMain.state++;
         break;
@@ -4274,7 +4274,7 @@ static void Task_LoadSizeScreen(u8 taskId)
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].y2 = gPokedexEntries[sPokedexListItem->dexNum].pokemonOffset;
         SetOamMatrix(2, gPokedexEntries[sPokedexListItem->dexNum].pokemonScale, 0, 0, gPokedexEntries[sPokedexListItem->dexNum].pokemonScale);
-        LoadPalette(sSizeScreenSilhouette_Pal, (gSprites[spriteId].oam.paletteNum + 16) * 16, 0x20);
+        LoadPalette(sSizeScreenSilhouette_Pal, OBJ_PLTT_ID2(gSprites[spriteId].oam.paletteNum), PLTT_SIZE_4BPP);
         gTasks[taskId].tMonSpriteId = spriteId;
         CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
         CopyBgTilemapBufferToVram(1);
@@ -4547,16 +4547,16 @@ static void Task_HandleCaughtMonPageInput(u8 taskId)
     else if (++gTasks[taskId].tPalTimer & 16)
     {
         if (!HGSS_DARK_MODE)
-            LoadPalette(gPokedexDefault_Pal + 1, 0x31, 14);
+            LoadPalette(gPokedexDefault_Pal + 1, BG_PLTT_ID(3) + 1, PLTT_SIZEOF(7));
         else
-            LoadPalette(gPokedexDefault_dark_Pal + 1, 0x31, 14);
+            LoadPalette(gPokedexDefault_dark_Pal + 1, BG_PLTT_ID(3) + 1, PLTT_SIZEOF(7));
     }
     else
     {
         if (!HGSS_DARK_MODE)
-            LoadPalette(gPokedexDefault_Pal + 1, 0x31, 14); //gPokedexCaughtScreen_Pal
+            LoadPalette(gPokedexDefault_Pal + 1, BG_PLTT_ID(3) + 1, PLTT_SIZEOF(7));
         else
-            LoadPalette(gPokedexDefault_dark_Pal + 1, 0x31, 14);
+            LoadPalette(gPokedexDefault_dark_Pal + 1, BG_PLTT_ID(3) + 1, PLTT_SIZEOF(7));
     }
 }
 
@@ -4585,7 +4585,7 @@ static void Task_ExitCaughtMonPage(u8 taskId)
         personality = ((u16)gTasks[taskId].tPersonalityHi << 16) | (u16)gTasks[taskId].tPersonalityLo;
         paletteNum = gSprites[gTasks[taskId].tMonSpriteId].oam.paletteNum;
         lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality);
-        LoadCompressedPalette(lzPaletteData, 0x100 | paletteNum * 16, 32);
+        LoadCompressedPalette(lzPaletteData, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
         DestroyTask(taskId);
     }
 }
@@ -4677,8 +4677,8 @@ static void PrintCurrentSpeciesTypeInfo(u8 newEntry, u16 species)
         type1 = GetTypeBySpecies(species, 1);
         type2 = GetTypeBySpecies(species, 2);
     #else
-        type1 = gBaseStats[species].type1;
-        type2 = gBaseStats[species].type2;
+        type1 = gSpeciesInfo[species].types[0];
+        type2 = gSpeciesInfo[species].types[1];
     #endif
     if (species == SPECIES_NONE)
         type1 = type2 = TYPE_MYSTERY;
@@ -5313,7 +5313,7 @@ bool8  SpeciesCanLearnLvlUpMove(u16 species, u16 move) //Move search PokedexPlus
 }
 
 
-static int DoPokedexSearch(u8 dexMode, u8 order, u8 abcGroup, u8 bodyColor, u8 type1, u8 type2) // ,u16 move)
+static int DoPokedexSearch(u8 dexMode, u8 order, u8 abcGroup, u8 bodyColor, u8 type1, u8 type2)
 {
     u16 species;
     u16 i,j;
@@ -5360,7 +5360,7 @@ static int DoPokedexSearch(u8 dexMode, u8 order, u8 abcGroup, u8 bodyColor, u8 t
         {
             species = NationalPokedexNumToSpecies(sPokedexView->pokedexList[i].dexNum);
 
-            if (bodyColor == gBaseStats[species].bodyColor)
+            if (bodyColor == gSpeciesInfo[species].bodyColor)
             {
                 sPokedexView->pokedexList[resultsCount] = sPokedexView->pokedexList[i];
                 resultsCount++;
@@ -5386,8 +5386,8 @@ static int DoPokedexSearch(u8 dexMode, u8 order, u8 abcGroup, u8 bodyColor, u8 t
                 {
                     species = NationalPokedexNumToSpecies(sPokedexView->pokedexList[i].dexNum);
 
-                    types[0] = gBaseStats[species].type1;
-                    types[1] = gBaseStats[species].type2;
+                    types[0] = gSpeciesInfo[species].types[0];
+                    types[1] = gSpeciesInfo[species].types[1];
                     if (types[0] == type1 || types[1] == type1)
                     {
                         sPokedexView->pokedexList[resultsCount] = sPokedexView->pokedexList[i];
@@ -5404,8 +5404,8 @@ static int DoPokedexSearch(u8 dexMode, u8 order, u8 abcGroup, u8 bodyColor, u8 t
                 {
                     species = NationalPokedexNumToSpecies(sPokedexView->pokedexList[i].dexNum);
 
-                    types[0] = gBaseStats[species].type1;
-                    types[1] = gBaseStats[species].type2;
+                    types[0] = gSpeciesInfo[species].types[0];
+                    types[1] = gSpeciesInfo[species].types[1];
                     if ((types[0] == type1 && types[1] == type2) || (types[0] == type2 && types[1] == type1))
                     {
                         sPokedexView->pokedexList[resultsCount] = sPokedexView->pokedexList[i];
@@ -5564,9 +5564,9 @@ static void Task_LoadSearchMenu(u8 taskId)
             else
                 CopyToBgTilemapBuffer(3, gPokedexScreenSearchNational_Tilemap, 0, 0);
             if (!HGSS_DARK_MODE)
-                LoadPalette(gPokedexMenuSearch_Pal + 1, 1, 0x7E);
+                LoadPalette(gPokedexMenuSearch_Pal + 1, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(4 * 16 - 1));
             else
-                LoadPalette(gPokedexMenuSearch_dark_Pal + 1, 1, 0x7E);
+                LoadPalette(gPokedexMenuSearch_dark_Pal + 1, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(4 * 16 - 1));
             gMain.state = 1;
         }
         break;
@@ -6479,7 +6479,7 @@ static void ResetStatsWindows(void)
 static void SaveMonDataInStruct(void)
 {
     u16 species = NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum);
-    u8 EVs[6] = {gBaseStats[species].evYield_HP, gBaseStats[species].evYield_Speed, gBaseStats[species].evYield_Attack, gBaseStats[species].evYield_SpAttack, gBaseStats[species].evYield_Defense, gBaseStats[species].evYield_SpDefense};
+    u8 EVs[6] = {gSpeciesInfo[species].evYield_HP, gSpeciesInfo[species].evYield_Speed, gSpeciesInfo[species].evYield_Attack, gSpeciesInfo[species].evYield_SpAttack, gSpeciesInfo[species].evYield_Defense, gSpeciesInfo[species].evYield_SpDefense};
     u8 differentEVs;
     u8 i;
 
@@ -6491,13 +6491,13 @@ static void SaveMonDataInStruct(void)
     }
 
     sPokedexView->sPokemonStats.species             = species;
-    sPokedexView->sPokemonStats.genderRatio         = gBaseStats[species].genderRatio;
-    sPokedexView->sPokemonStats.baseHP              = gBaseStats[species].baseHP;
-    sPokedexView->sPokemonStats.baseSpeed           = gBaseStats[species].baseSpeed;
-    sPokedexView->sPokemonStats.baseAttack          = gBaseStats[species].baseAttack;
-    sPokedexView->sPokemonStats.baseSpAttack        = gBaseStats[species].baseSpAttack;
-    sPokedexView->sPokemonStats.baseDefense         = gBaseStats[species].baseDefense;
-    sPokedexView->sPokemonStats.baseSpDefense       = gBaseStats[species].baseSpDefense;
+    sPokedexView->sPokemonStats.genderRatio         = gSpeciesInfo[species].genderRatio;
+    sPokedexView->sPokemonStats.baseHP              = gSpeciesInfo[species].baseHP;
+    sPokedexView->sPokemonStats.baseSpeed           = gSpeciesInfo[species].baseSpeed;
+    sPokedexView->sPokemonStats.baseAttack          = gSpeciesInfo[species].baseAttack;
+    sPokedexView->sPokemonStats.baseSpAttack        = gSpeciesInfo[species].baseSpAttack;
+    sPokedexView->sPokemonStats.baseDefense         = gSpeciesInfo[species].baseDefense;
+    sPokedexView->sPokemonStats.baseSpDefense       = gSpeciesInfo[species].baseSpDefense;
     sPokedexView->sPokemonStats.differentEVs        = differentEVs;
     sPokedexView->sPokemonStats.evYield_HP          = EVs[0];
     sPokedexView->sPokemonStats.evYield_Speed       = EVs[1];
@@ -6505,13 +6505,13 @@ static void SaveMonDataInStruct(void)
     sPokedexView->sPokemonStats.evYield_SpAttack    = EVs[3];
     sPokedexView->sPokemonStats.evYield_Defense     = EVs[4];
     sPokedexView->sPokemonStats.evYield_SpDefense   = EVs[5];
-    sPokedexView->sPokemonStats.catchRate           = gBaseStats[species].catchRate;
-    sPokedexView->sPokemonStats.growthRate          = gBaseStats[species].growthRate;
-    sPokedexView->sPokemonStats.eggGroup1           = gBaseStats[species].eggGroup1;
-    sPokedexView->sPokemonStats.eggGroup2           = gBaseStats[species].eggGroup2;
-    sPokedexView->sPokemonStats.eggCycles           = gBaseStats[species].eggCycles;
-    sPokedexView->sPokemonStats.expYield            = gBaseStats[species].expYield;
-    sPokedexView->sPokemonStats.friendship          = gBaseStats[species].friendship;
+    sPokedexView->sPokemonStats.catchRate           = gSpeciesInfo[species].catchRate;
+    sPokedexView->sPokemonStats.growthRate          = gSpeciesInfo[species].growthRate;
+    sPokedexView->sPokemonStats.eggGroup1           = gSpeciesInfo[species].eggGroups[0];
+    sPokedexView->sPokemonStats.eggGroup2           = gSpeciesInfo[species].eggGroups[1];
+    sPokedexView->sPokemonStats.eggCycles           = gSpeciesInfo[species].eggCycles;
+    sPokedexView->sPokemonStats.expYield            = gSpeciesInfo[species].expYield;
+    sPokedexView->sPokemonStats.friendship          = gSpeciesInfo[species].friendship;
     sPokedexView->sPokemonStats.ability0            = GetAbilityBySpecies(species, 0);
     sPokedexView->sPokemonStats.ability1            = GetAbilityBySpecies(species, 1);
     #ifdef POKEMON_EXPANSION  
@@ -8456,12 +8456,12 @@ static void CreateStatBar(u8 *dst, u32 y, u32 width)
 }
 static const u8 sBaseStatOffsets[] =
 {
-    offsetof(struct BaseStats, baseHP),
-    offsetof(struct BaseStats, baseAttack),
-    offsetof(struct BaseStats, baseDefense),
-    offsetof(struct BaseStats, baseSpAttack),
-    offsetof(struct BaseStats, baseSpDefense),
-    offsetof(struct BaseStats, baseSpeed),
+    offsetof(struct SpeciesInfo, baseHP),
+    offsetof(struct SpeciesInfo, baseAttack),
+    offsetof(struct SpeciesInfo, baseDefense),
+    offsetof(struct SpeciesInfo, baseSpAttack),
+    offsetof(struct SpeciesInfo, baseSpDefense),
+    offsetof(struct SpeciesInfo, baseSpeed),
 };
 static void TryDestroyStatBars(void)
 {
@@ -8504,7 +8504,7 @@ static void CreateStatBars(struct PokedexListItem *dexMon)
         memcpy(gfx, sStatBarsGfx, sizeof(sStatBarsGfx));
         for (i = 0; i < NUM_STATS; i++)
         {
-            statValue = *((u8*)(&gBaseStats[species]) + sBaseStatOffsets[i]);
+            statValue = *((u8*)(&gSpeciesInfo[species]) + sBaseStatOffsets[i]);
             if (statValue <= 100)
             {
                 width = statValue / 3;

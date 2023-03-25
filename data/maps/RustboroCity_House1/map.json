@@ -47,14 +47,14 @@
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     },
     {
       "x": 6,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     }
   ],
   "coord_events": [],

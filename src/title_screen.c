@@ -548,7 +548,7 @@ void CB2_InitTitleScreen(void)
         // bg2
         LZ77UnCompVram(gTitleScreenPokemonLogoGfx, (void *)(BG_CHAR_ADDR(0)));
         LZ77UnCompVram(gTitleScreenPokemonLogoTilemap, (void *)(BG_SCREEN_ADDR(9)));
-        LoadPalette(gTitleScreenBgPalettes, 0, 0x1E0);
+        LoadPalette(gTitleScreenBgPalettes, BG_PLTT_ID(0), 15 * PLTT_SIZE_4BPP);
         // bg3
         LZ77UnCompVram(sTitleScreenRayquazaGfx, (void *)(BG_CHAR_ADDR(2)));
         LZ77UnCompVram(sTitleScreenRayquazaTilemap, (void *)(BG_SCREEN_ADDR(26)));
@@ -563,7 +563,7 @@ void CB2_InitTitleScreen(void)
         LoadCompressedSpriteSheet(&sSpriteSheet_EmeraldVersion[0]);
         LoadCompressedSpriteSheet(&sSpriteSheet_PressStart[0]);
         LoadCompressedSpriteSheet(&sPokemonLogoShineSpriteSheet[0]);
-        LoadPalette(gTitleScreenEmeraldVersionPal, 0x100, 0x20);
+        LoadPalette(gTitleScreenEmeraldVersionPal, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
         LoadSpritePalette(&sSpritePalette_PressStart[0]);
         gMain.state = 2;
         break;
@@ -812,6 +812,6 @@ static void UpdateLegendaryMarkingColor(u8 frameNum)
         s32 b = 12;
 
         u16 color = RGB(r, g, b);
-        LoadPalette(&color, 0xEF, sizeof(color));
+        LoadPalette(&color, BG_PLTT_ID(14) + 15, sizeof(color));
    }
 }

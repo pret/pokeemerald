@@ -14,9 +14,9 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
+      "map": "MAP_ROUTE128",
       "offset": 40,
-      "map": "MAP_ROUTE128"
+      "direction": "left"
     }
   ],
   "object_events": [],
@@ -26,28 +26,28 @@
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 27,
       "y": 48,
       "elevation": 0,
       "dest_map": "MAP_EVER_GRANDE_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 18,
       "y": 41,
       "elevation": 0,
       "dest_map": "MAP_VICTORY_ROAD_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 18,
       "y": 27,
       "elevation": 0,
       "dest_map": "MAP_VICTORY_ROAD_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [

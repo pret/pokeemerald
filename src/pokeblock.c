@@ -440,7 +440,7 @@ static const struct ListMenuTemplate sPokeblockListMenuTemplate =
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
     .fontId = FONT_NORMAL,
-    .cursorKind = 1
+    .cursorKind = CURSOR_INVISIBLE
 };
 
 void OpenPokeblockCase(u8 caseId, void (*callback)(void))
@@ -653,7 +653,7 @@ static bool8 LoadPokeblockMenuGfx(void)
         }
         break;
     case 2:
-        LoadCompressedPalette(gMenuPokeblock_Pal, 0, 0xC0);
+        LoadCompressedPalette(gMenuPokeblock_Pal, BG_PLTT_ID(0), 6 * PLTT_SIZE_4BPP);
         sPokeblockMenu->gfxState++;
         break;
     case 3:
@@ -679,9 +679,9 @@ static void HandleInitWindows(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 1, 0xE0);
-    LoadMessageBoxGfx(0, 0xA, 0xD0);
-    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
+    LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(14));
+    LoadMessageBoxGfx(0, 0xA, BG_PLTT_ID(13));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
 
     for (i = 0; i < ARRAY_COUNT(sWindowTemplates) - 1; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));

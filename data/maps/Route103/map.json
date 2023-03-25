@@ -14,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "down",
+      "map": "MAP_OLDALE_TOWN",
       "offset": 0,
-      "map": "MAP_OLDALE_TOWN"
+      "direction": "down"
     },
     {
-      "direction": "right",
+      "map": "MAP_ROUTE110",
       "offset": -60,
-      "map": "MAP_ROUTE110"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -292,7 +292,7 @@
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_ALTERING_CAVE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

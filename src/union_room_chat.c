@@ -1171,7 +1171,7 @@ static void Chat_AskQuitChatting(void)
         input = ProcessMenuInput();
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             StartDisplaySubtask(CHATDISPLAY_FUNC_DESTROY_YESNO, 0);
             sChat->funcState = 3;
@@ -1210,7 +1210,7 @@ static void Chat_AskQuitChatting(void)
         input = ProcessMenuInput();
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             StartDisplaySubtask(CHATDISPLAY_FUNC_DESTROY_YESNO, 0);
             sChat->funcState = 3;
@@ -1512,7 +1512,7 @@ static void Chat_SaveAndExit(void)
         input = ProcessMenuInput();
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             sChat->funcState = 12;
             break;
@@ -1537,7 +1537,7 @@ static void Chat_SaveAndExit(void)
         input = ProcessMenuInput();
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             sChat->funcState = 12;
             break;
@@ -3055,8 +3055,8 @@ static void ClearBg0(void)
 
 static void LoadChatWindowBorderGfx(void)
 {
-    LoadPalette(gUnionRoomChat_Window_Pal2, 0x70, 0x20);
-    LoadPalette(gUnionRoomChat_Window_Pal1, 0xC0, 0x20);
+    LoadPalette(gUnionRoomChat_Window_Pal2, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+    LoadPalette(gUnionRoomChat_Window_Pal1, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
     DecompressAndCopyTileDataToVram(1, gUnionRoomChat_Border_Gfx, 0, 0, 0);
     CopyToBgTilemapBuffer(1, gUnionRoomChat_Border_Tilemap, 0, 0);
     CopyBgTilemapBufferToVram(1);
@@ -3066,7 +3066,7 @@ static void LoadChatWindowGfx(void)
 {
     u8 *ptr;
 
-    LoadPalette(gUnionRoomChat_Background_Pal, 0, 0x20);
+    LoadPalette(gUnionRoomChat_Background_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     ptr = DecompressAndCopyTileDataToVram(2, gUnionRoomChat_Background_Gfx, 0, 0, 0);
     if (ptr)
     {
@@ -3080,13 +3080,13 @@ static void LoadChatWindowGfx(void)
 
 static void LoadChatUnkPalette(void)
 {
-    LoadPalette(sUnk_Palette1, 0x80, sizeof(sUnk_Palette1));
+    LoadPalette(sUnk_Palette1, BG_PLTT_ID(8), sizeof(sUnk_Palette1));
     RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + 0x20, 0x20, 1);
 }
 
 static void LoadChatMessagesWindow(void)
 {
-    LoadPalette(sUnk_Palette2, 0xF0, sizeof(sUnk_Palette2));
+    LoadPalette(sUnk_Palette2, BG_PLTT_ID(15), sizeof(sUnk_Palette2));
     PutWindowTilemap(0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     CopyWindowToVram(0, COPYWIN_FULL);
@@ -3117,9 +3117,9 @@ static void LoadTextEntryWindow(void)
 static void LoadKeyboardSwapWindow(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
-    LoadUserWindowBorderGfx(3, 1, 0xD0);
-    LoadUserWindowBorderGfx_(3, 0xA, 0x20);
-    LoadPalette(gStandardMenuPalette, 0xE0,  0x20);
+    LoadUserWindowBorderGfx(3, 1, BG_PLTT_ID(13));
+    LoadUserWindowBorderGfx_(3, 0xA, BG_PLTT_ID(2));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(14),  PLTT_SIZE_4BPP);
 }
 
 static void InitScanlineEffect(void)
@@ -3202,7 +3202,7 @@ static void SetRegisteredTextPalette(bool32 registering)
 {
     const u16 *palette = &sUnionRoomChatInterfacePal[registering * 2 + 1];
     u8 index = IndexOfSpritePaletteTag(PALTAG_INTERFACE);
-    LoadPalette(palette, index * 16 + 0x101, 4);
+    LoadPalette(palette, OBJ_PLTT_ID(index) + 1, PLTT_SIZEOF(2));
 }
 
 static void StartKeyboardCursorAnim(void)

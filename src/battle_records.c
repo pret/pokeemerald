@@ -444,7 +444,7 @@ static void LoadTrainerHillRecordsWindowGfx(u8 bgId)
 {
     LoadBgTiles(bgId, sTrainerHillWindowTileset, sizeof(sTrainerHillWindowTileset), 0);
     CopyToBgTilemapBufferRect(bgId, sTrainerHillWindowTilemap, 0, 0, 0x20, 0x20);
-    LoadPalette(sTrainerHillWindowPalette, 0, 0x20);
+    LoadPalette(sTrainerHillWindowPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
 }
 
 static void VblankCB_TrainerHillRecords(void)
@@ -491,7 +491,7 @@ static void CB2_ShowTrainerHillRecords(void)
         break;
     case 3:
         LoadTrainerHillRecordsWindowGfx(3);
-        LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
+        LoadPalette(GetTextWindowPalette(0), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         gMain.state++;
         break;
     case 4:
