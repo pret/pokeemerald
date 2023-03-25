@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_DYNAMAX_H
 #define GUARD_BATTLE_DYNAMAX_H
 
-#define DYNAMAX_TURNS	3
+#define DYNAMAX_TURNS_COUNT	3
 
 enum MaxMoveEffect
 {
@@ -58,6 +58,7 @@ enum MaxMoveEffect
 
 bool32 IsDynamaxed(u16 battlerId);
 bool32 CanDynamax(u16 battlerId);
+bool32 IsGigantamaxed(u16 battlerId);
 void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon);
 void PrepareBattlerForDynamax(u16 battlerId);
 u16 GetNonDynamaxHP(u16 battlerId);

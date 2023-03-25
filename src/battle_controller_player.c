@@ -1418,14 +1418,15 @@ static void Task_GiveExpToMon(u8 taskId)
             u8 savedActiveBattler;
 
             SetMonData(mon, MON_DATA_EXP, &nextLvlExp);
-            gBattleStruct->dynamax.beforeLevelHP = GetMonData(mon, MON_DATA_HP) + gBattleScripting.levelUpHP;
+            gBattleStruct->dynamax.levelUpHP = GetMonData(mon, MON_DATA_HP) \
+                + UQ_4_12_TO_INT((gBattleScripting.levelUpHP * UQ_4_12(1.5)) + UQ_4_12_ROUND);
             CalculateMonStats(mon);
 
-            // Prevent Dynamaxed HP from being reset upon level-up.
-            if (IsDynamaxed(battlerId))
+            // Reapply Dynamax HP multiplier after stats are recalculated.
+            if (IsDynamaxed(battlerId) && monId == gBattlerPartyIndexes[battlerId])
             {
                 ApplyDynamaxHPMultiplier(battlerId, mon);
-                gBattleMons[battlerId].hp = gBattleStruct->dynamax.beforeLevelHP;
+                gBattleMons[battlerId].hp = gBattleStruct->dynamax.levelUpHP;
                 SetMonData(mon, MON_DATA_HP, &gBattleMons[battlerId].hp);
             }
 
@@ -1507,7 +1508,18 @@ static void Task_GiveExpWithExpBar(u8 taskId)
                 u8 savedActiveBattler;
 
                 SetMonData(&gPlayerParty[monId], MON_DATA_EXP, &expOnNextLvl);
+                gBattleStruct->dynamax.levelUpHP = GetMonData(&gPlayerParty[monId], MON_DATA_HP) \
+                    + UQ_4_12_TO_INT((gBattleScripting.levelUpHP * UQ_4_12(1.5)) + UQ_4_12_ROUND);
                 CalculateMonStats(&gPlayerParty[monId]);
+
+                // Reapply Dynamax HP multiplier after stats are recalculated.
+                if (IsDynamaxed(battlerId) && monId == gBattlerPartyIndexes[battlerId])
+                {
+                    ApplyDynamaxHPMultiplier(battlerId, &gPlayerParty[monId]);
+                    gBattleMons[battlerId].hp = gBattleStruct->dynamax.levelUpHP;
+                    SetMonData(&gPlayerParty[monId], MON_DATA_HP, &gBattleMons[battlerId].hp);
+                }
+
                 gainedExp -= expOnNextLvl - currExp;
                 savedActiveBattler = gActiveBattler;
                 gActiveBattler = battlerId;

@@ -10220,8 +10220,7 @@ u16 GetBattleFormChangeTargetSpecies(u8 battlerId, u16 method)
                     break;
                 case FORM_CHANGE_BATTLE_GIGANTAMAX:
                     // TODO: check Gigantamax factor
-                    if (IsDynamaxed(battlerId))
-                        targetSpecies = formChanges[i].targetSpecies;
+                    targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_CHANGE_BATTLE_TURN_END:
                     if (formChanges[i].param1 == GetBattlerAbility(battlerId))
@@ -10246,7 +10245,7 @@ bool32 CanBattlerFormChange(u8 battlerId, u16 method)
     else if (IsBattlerPrimalReverted(battlerId) && (method == FORM_CHANGE_END_BATTLE))
         return TRUE;
     // Gigantamaxed Pokemon should revert upon fainting, switching, or ending the battle.
-    else if (IsDynamaxed(battlerId) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_BATTLE_SWITCH || method == FORM_CHANGE_END_BATTLE))
+    else if (IsGigantamaxed(battlerId) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_BATTLE_SWITCH || method == FORM_CHANGE_END_BATTLE))
         return TRUE;
     return DoesSpeciesHaveFormChangeMethod(gBattleMons[battlerId].species, method);
 }
@@ -10289,7 +10288,7 @@ bool32 TryBattleFormChange(u8 battlerId, u16 method)
             restoreSpecies = TRUE;
 
         // Gigantamax Pokemon have their forms reverted after fainting, switching, or ending the battle.
-        else if (IsDynamaxed(battlerId) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_BATTLE_SWITCH || method == FORM_CHANGE_END_BATTLE))
+        else if (IsGigantamaxed(battlerId) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_BATTLE_SWITCH || method == FORM_CHANGE_END_BATTLE))
             restoreSpecies = TRUE;
 
         if (restoreSpecies)

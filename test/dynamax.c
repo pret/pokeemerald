@@ -39,7 +39,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax expires after three turns")
         TURN { MOVE(player, MOVE_TACKLE); } // 3rd max move
     } SCENE {
         int i;
-        for (i = 0; i < DYNAMAX_TURNS; ++i) {
+        for (i = 0; i < DYNAMAX_TURNS_COUNT; ++i) {
             MESSAGE("Wobbuffet used Max Strike!");
             MESSAGE("Foe Wobbuffet used Celebrate!");
         }

@@ -11348,7 +11348,8 @@ static void Cmd_various(void)
             mon = &gPlayerParty[gBattlerPartyIndexes[battler]];
         else
             mon = &gEnemyParty[gBattlerPartyIndexes[battler]];
-        RecalcBattlerStats(battler, mon);
+        if (!IsGigantamaxed(battler)) // RecalcBattlerStats will get called on form change.
+            RecalcBattlerStats(battler, mon);
         UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], mon, HEALTHBOX_ALL);
         break;
     }

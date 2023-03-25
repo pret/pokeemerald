@@ -115,13 +115,7 @@ bool32 CanDynamax(u16 battlerId)
     #if B_FLAG_DYNAMAX_BATTLE != 0
     if (!FlagGet(B_FLAG_DYNAMAX_BATTLE))
     #endif
-        // return FALSE;
-
-    // Check if Dynamax battle flag is set. This needs to be defined in include/config/battle.h
-    #if B_FLAG_DYNAMAX_BATTLE != 0
-    if (!FlagGet(B_FLAG_DYNAMAX_BATTLE))
-    #endif
-    //	return FALSE;
+        return FALSE;
 
 
     // Check if Player has a Dynamax Band.
@@ -153,6 +147,15 @@ bool32 CanDynamax(u16 battlerId)
     return TRUE;
 }
 
+// Returns whether a battler is transformed into a Gigantamax form.
+bool32 IsGigantamaxed(u16 battlerId) {
+    // TODO: Incorporate Gigantamax factor.
+    if (gBattleMons[battlerId].species >= (SPECIES_VENUSAUR_GMAX)
+        && gBattleMons[battlerId].species <= (SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GMAX))
+        return TRUE;
+    return FALSE;
+}
+
 // Applies the HP Multiplier for Dynamaxed Pokemon and Raid Bosses.
 void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon)
 {
@@ -161,7 +164,7 @@ void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon)
     else
     {
         u16 mult = UQ_4_12(1.5); // placeholder
-        u16 hp = UQ_4_12_TO_INT((gBattleMons[battlerId].hp * mult) + UQ_4_12_ROUND);
+        u16 hp = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_HP) * mult) + UQ_4_12_ROUND);
         u16 maxHP = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_MAX_HP) * mult) + UQ_4_12_ROUND);
         SetMonData(mon, MON_DATA_HP, &hp);
         SetMonData(mon, MON_DATA_MAX_HP, &maxHP);
@@ -202,7 +205,7 @@ void PrepareBattlerForDynamax(u16 battlerId)
 
     gBattleStruct->dynamax.alreadyDynamaxed[side] = TRUE;
     gBattleStruct->dynamax.dynamaxed[battlerId] = TRUE;
-    gBattleStruct->dynamax.dynamaxTurns[battlerId] = DYNAMAX_TURNS;
+    gBattleStruct->dynamax.dynamaxTurns[battlerId] = DYNAMAX_TURNS_COUNT;
 
     // Substitute is removed upon Dynamaxing.
     gBattleMons[battlerId].status2 &= ~STATUS2_SUBSTITUTE;
@@ -220,18 +223,24 @@ void PrepareBattlerForDynamax(u16 battlerId)
 void UndoDynamax(u16 battlerId)
 {
     u8 side = GetBattlerSide(battlerId);
-    // Revert HP and try form reversion if battler is Dynamaxed.
+    u8 monId = gBattlerPartyIndexes[battlerId];
+
+    // Revert HP if battler is still Dynamaxed.
     if (IsDynamaxed(battlerId))
     {
-        struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+        struct Pokemon *mon = (side == B_SIDE_PLAYER) ? &gPlayerParty[monId] : &gEnemyParty[monId];
         u16 mult = UQ_4_12(1.0/1.5); // placeholder
-        u16 hp = UQ_4_12_TO_INT((gBattleMons[battlerId].hp * mult + 1) + UQ_4_12_ROUND); // round up
-        SetMonData(&party[gBattlerPartyIndexes[battlerId]], MON_DATA_HP, &hp);
-        TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_SWITCH);
+        gBattleMons[battlerId].hp = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_HP) * mult + 1) + UQ_4_12_ROUND); // round up
+        SetMonData(mon, MON_DATA_HP, &gBattleMons[battlerId].hp);
     }
+
     // Makes sure there are no Dynamax flags set, including on switch / faint.
     gBattleStruct->dynamax.dynamaxed[battlerId] = FALSE;
     gBattleStruct->dynamax.dynamaxTurns[battlerId] = 0;
+
+    // Undo form change if needed.
+    if (IsGigantamaxed(battlerId))
+        TryBattleFormChange(battlerId, FORM_CHANGE_END_BATTLE);
 }
 
 // Weight-based moves (and some other moves in Raids) are blocked by Dynamax.
@@ -258,16 +267,19 @@ bool32 ShouldUseMaxMove(u16 battlerId, u16 baseMove)
 
 static u16 GetTypeBasedMaxMove(u16 battlerId, u16 type)
 {
-    u32 species;
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL);
-    else
-        species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL);
-
     // Gigantamax check
+    u16 species = gBattleMons[battlerId].species;
+    u16 targetSpecies = GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_BATTLE_GIGANTAMAX);
     if (species >= (SPECIES_VENUSAUR_GMAX)
         && sGMaxMoveTable[species - (SPECIES_VENUSAUR_GMAX)].moveType == type)
+    {
         return sGMaxMoveTable[species - (SPECIES_VENUSAUR_GMAX)].gmaxMove;
+    }
+    else if (targetSpecies != SPECIES_NONE
+             && sGMaxMoveTable[targetSpecies - (SPECIES_VENUSAUR_GMAX)].moveType == type)
+    {
+        return sGMaxMoveTable[targetSpecies - (SPECIES_VENUSAUR_GMAX)].gmaxMove;
+    }
 
     // regular Max Move
     else

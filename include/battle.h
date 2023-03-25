@@ -532,7 +532,7 @@ struct DynamaxData
     u8 splits[MAX_BATTLERS_COUNT];
     u16 baseMove[MAX_BATTLERS_COUNT]; // base move of Max Move
     u16 lastUsedBaseMove;
-    u16 beforeLevelHP;
+    u16 levelUpHP;
 };
 
 struct StolenItem
