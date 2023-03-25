@@ -6,6 +6,7 @@
 #include "battle_scripts.h"
 #include "battle_script_commands.h"
 #include "data.h"
+#include "event_data.h"
 #include "graphics.h"
 #include "item.h"
 #include "pokemon.h"
@@ -16,6 +17,7 @@
 #include "constants/abilities.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_string_ids.h"
+#include "constants/flags.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -104,33 +106,54 @@ bool32 IsDynamaxed(u16 battlerId)
 // Returns whether a battler can Dynamax.
 bool32 CanDynamax(u16 battlerId)
 {
-	// TODO: Requires Dynamax Band if not in a Max Raid (as well as special flag).
 	u16 species = gBattleMons[battlerId].species;
 	u16 holdEffect = ItemId_GetHoldEffect(gBattleMons[battlerId].item);
-	if (!gBattleStruct->dynamax.alreadyDynamaxed[GetBattlerSide(battlerId)]
-		 && !gBattleStruct->dynamax.dynamaxed[battlerId]
-		 && !gBattleStruct->dynamax.dynamaxed[BATTLE_PARTNER(battlerId)]
-		 && !gBattleStruct->dynamax.toDynamax[BATTLE_PARTNER(battlerId)]
-		 && species != SPECIES_ZACIAN && species != SPECIES_ZACIAN_CROWNED_SWORD
-		 && species != SPECIES_ZAMAZENTA && species != SPECIES_ZAMAZENTA_CROWNED_SHIELD
-		 && species != SPECIES_ETERNATUS && species != SPECIES_ETERNATUS_ETERNAMAX
-		 && holdEffect != HOLD_EFFECT_MEGA_STONE && holdEffect != HOLD_EFFECT_Z_CRYSTAL)
-		return TRUE;
-	return FALSE;
+
+	// Check if Dynamax battle flag is set. This needs to be defined in include/config/battle.h
+	#if B_FLAG_DYNAMAX_BATTLE != 0
+	if (!FlagGet(B_FLAG_DYNAMAX_BATTLE))
+	#endif
+		return FALSE;
+
+	// Check if Player has a Dynamax Band.
+    if ((GetBattlerPosition(battlerId) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battlerId) == B_POSITION_PLAYER_RIGHT))
+     	 && !CheckBagHasItem(ITEM_DYNAMAX_BAND, 1))
+        return FALSE;
+	
+	// Check if species isn't allowed to Dynamax.
+	if (species == SPECIES_ZACIAN && species == SPECIES_ZACIAN_CROWNED_SWORD
+		&& species == SPECIES_ZAMAZENTA && species == SPECIES_ZAMAZENTA_CROWNED_SHIELD
+		&& species == SPECIES_ETERNATUS && species == SPECIES_ETERNATUS_ETERNAMAX)
+		return FALSE;
+	
+	// Cannot Dynamax if you can Mega Evolve or use a Z-Move
+	if (holdEffect == HOLD_EFFECT_MEGA_STONE && holdEffect == HOLD_EFFECT_Z_CRYSTAL)
+		return FALSE;
+
+	// Cannot Dynamax if your side has already or will Dynamax.
+	if (gBattleStruct->dynamax.alreadyDynamaxed[GetBattlerSide(battlerId)]
+		|| gBattleStruct->dynamax.dynamaxed[BATTLE_PARTNER(battlerId)]
+		|| gBattleStruct->dynamax.toDynamax[BATTLE_PARTNER(battlerId)])
+		return FALSE;
+	
+	// TODO: Cannot Dynamax in a Max Raid if you don't have Dynamax Energy.
+	// if (gBattleTypeFlags & BATTLE_TYPE_RAID && gBattleStruct->raid.dynamaxEnergy != battlerId)
+	//    return FALSE;
+
+	// No checks failed, all set!
+	return TRUE;
 }
 
 // Applies the HP Multiplier for Dynamaxed Pokemon and Raid Bosses.
-void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon)
+void ApplyDynamaxHPMultiplier(struct Pokemon* mon)
 {
-	if (gBattleMons[battlerId].species == SPECIES_SHEDINJA)
-	{
+	if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_SHEDINJA)
 		return;
-	}
 	else
 	{
 		u16 mult = UQ_4_12(1.5); // placeholder
-		u16 hp = UQ_4_12_TO_INT((gBattleMons[battlerId].hp * mult) + UQ_4_12_ROUND);
-		u16 maxHP = UQ_4_12_TO_INT((gBattleMons[battlerId].maxHP * mult) + UQ_4_12_ROUND);
+		u16 hp = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_HP) * mult) + UQ_4_12_ROUND);
+		u16 maxHP = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_MAX_HP) * mult) + UQ_4_12_ROUND);
 		SetMonData(mon, MON_DATA_HP, &hp);
 		SetMonData(mon, MON_DATA_MAX_HP, &maxHP);
 	}
@@ -140,9 +163,7 @@ void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon)
 u16 GetNonDynamaxHP(u16 battlerId)
 {
 	if (!IsDynamaxed(battlerId) || gBattleMons[battlerId].species == SPECIES_SHEDINJA)
-	{
 		return gBattleMons[battlerId].hp;
-	}
 	else
 	{
 		u16 mult = UQ_4_12(1.0/1.5); // placeholder
@@ -155,9 +176,7 @@ u16 GetNonDynamaxHP(u16 battlerId)
 u16 GetNonDynamaxMaxHP(u16 battlerId)
 {
 	if (!IsDynamaxed(battlerId) || gBattleMons[battlerId].species == SPECIES_SHEDINJA)
-	{
 		return gBattleMons[battlerId].maxHP;
-	}
 	else
 	{
 		u16 mult = UQ_4_12(1.0/1.5); // placeholder
@@ -184,7 +203,8 @@ void PrepareBattlerForDynamax(u16 battlerId)
 	gBattleStruct->choicedMove[battlerId] = MOVE_NONE;
 
 	// Try Gigantamax form change.
-	TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_GIGANTAMAX);
+	if (!(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)) // Ditto cannot Gigantamax.
+		TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_GIGANTAMAX);
 }
 
 // Unsets the flags used for Dynamaxing and reverts max HP if needed.
@@ -208,7 +228,7 @@ void UndoDynamax(u16 battlerId)
 // Weight-based moves (and some other moves in Raids) are blocked by Dynamax.
 bool32 IsMoveBlockedByDynamax(u16 move)
 {
-	// TODO: Raid moves
+	// TODO: Certain moves are banned in raids.
 	switch (gBattleMoves[move].effect)
 	{
 		case EFFECT_HEAT_CRASH:
@@ -221,9 +241,9 @@ bool32 IsMoveBlockedByDynamax(u16 move)
 // Returns whether a move should be converted into a Max Move.
 bool32 ShouldUseMaxMove(u16 battlerId, u16 baseMove)
 {
-    // TODO: Raids
-	//if (IsRaidBoss(battlerId))
-	//	return !IsRaidBossUsingRegularMove(battlerId, baseMove);
+    // TODO: Raid bosses do not always use Max Moves.
+	// if (IsRaidBoss(battlerId))
+	//	  return !IsRaidBossUsingRegularMove(battlerId, baseMove);
 	return IsDynamaxed(battlerId) || gBattleStruct->dynamax.toDynamax[battlerId];
 }
 
@@ -263,7 +283,7 @@ u16 GetMaxMove(u16 battlerId, u16 baseMove)
     {
 		move = MOVE_MAX_GUARD;
     }
-	else if (gBattleStruct->dynamicMoveType) // unsure of how to deal with Hidden Power
+	else if (gBattleStruct->dynamicMoveType)
 	{
 		move = GetTypeBasedMaxMove(battlerId, gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK);
         gBattleStruct->dynamax.splits[battlerId] = gBattleMoves[baseMove].split;

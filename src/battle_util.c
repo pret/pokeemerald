@@ -10969,7 +10969,7 @@ void RecalcBattlerStats(u32 battler, struct Pokemon *mon)
 {
     CalculateMonStats(mon);
     if (IsDynamaxed(battler) && gChosenActionByBattler[battler] != B_ACTION_SWITCH)
-        ApplyDynamaxHPMultiplier(battler, mon);
+        ApplyDynamaxHPMultiplier(mon);
     CopyMonLevelAndBaseStatsToBattleMon(battler, mon);
     CopyMonAbilityAndTypesToBattleMon(battler, mon);
 }
