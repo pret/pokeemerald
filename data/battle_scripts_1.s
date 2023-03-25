@@ -8691,6 +8691,7 @@ BattleScript_IntimidateLoopIncrement:
 	addbyte gBattlerTarget, 1
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_IntimidateLoop
 BattleScript_IntimidateEnd:
+	copybyte sBATTLER, gBattlerAttacker
 	destroyabilitypopup
 	pause B_WAIT_TIME_MED
 	end3

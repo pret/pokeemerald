@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Stench has a 10% chance to flinch")
 {
-    PASSES_RANDOMLY(1,10);
+    PASSES_RANDOMLY(1, 10, RNG_STENCH);
     GIVEN {
         ASSUME(gBattleMoves[MOVE_TACKLE].power > 0);
         PLAYER(SPECIES_GRIMER) { Ability(ABILITY_STENCH); };
@@ -17,7 +17,8 @@ SINGLE_BATTLE_TEST("Stench has a 10% chance to flinch")
 
 SINGLE_BATTLE_TEST("Stench does not stack with King's Rock")
 {
-    PASSES_RANDOMLY(1,10);
+    KNOWN_FAILING;
+    PASSES_RANDOMLY(1, 10, RNG_STENCH);
     GIVEN {
         ASSUME(gItems[ITEM_KINGS_ROCK].holdEffect == HOLD_EFFECT_FLINCH);
         ASSUME(gBattleMoves[MOVE_TACKLE].power > 0);

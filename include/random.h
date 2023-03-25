@@ -20,4 +20,67 @@ u16 Random2(void);
 void SeedRng(u16 seed);
 void SeedRng2(u16 seed);
 
+/* Structured random number generator.
+ * Instead of the caller converting bits from Random() to a meaningful
+ * value, the caller provides metadata that is used to return the
+ * meaningful value directly. This allows code to interpret the random
+ * call, for example, battle tests know what the domain of a random call
+ * is, and can exhaustively test it.
+ *
+ * RandomTag identifies the purpose of the value.
+ *
+ * RandomUniform(tag, lo, hi) returns a number from lo to hi inclusive.
+ *
+ * RandomPercentage(tag, t) returns FALSE with probability (1-t)/100,
+ * and TRUE with probability t/100.
+ *
+ * RandomWeighted(tag, w0, w1, ... wN) returns a number from 0 to N
+ * inclusive. The return value is proportional to the weights, e.g.
+ * RandomWeighted(..., 1, 1) returns 50% 0s and 50% 1s.
+ * RandomWeighted(..., 2, 1) returns 2/3 0s and 1/3 1s. */
+
+enum RandomTag
+{
+    RNG_NONE,
+    RNG_ACCURACY,
+    RNG_CONFUSION,
+    RNG_CRITICAL_HIT,
+    RNG_CUTE_CHARM,
+    RNG_DAMAGE_MODIFIER,
+    RNG_FLAME_BODY,
+    RNG_FORCE_RANDOM_SWITCH,
+    RNG_FROZEN,
+    RNG_HOLD_EFFECT_FLINCH,
+    RNG_INFATUATION,
+    RNG_PARALYSIS,
+    RNG_POISON_POINT,
+    RNG_RAMPAGE_TURNS,
+    RNG_SECONDARY_EFFECT,
+    RNG_SLEEP_TURNS,
+    RNG_SPEED_TIE,
+    RNG_STATIC,
+    RNG_STENCH,
+};
+
+#define RandomWeighted(tag, ...) \
+    ({ \
+        const u8 weights[] = { __VA_ARGS__ }; \
+        u32 sum, i; \
+        for (i = 0, sum = 0; i < ARRAY_COUNT(weights); i++) \
+            sum += weights[i]; \
+        RandomWeightedArray(tag, sum, ARRAY_COUNT(weights), weights); \
+    })
+
+#define RandomPercentage(tag, t) \
+    ({ \
+        const u8 weights[] = { 100 - t, t }; \
+        RandomWeightedArray(tag, 100, ARRAY_COUNT(weights), weights); \
+    })
+
+u32 RandomUniform(enum RandomTag, u32 lo, u32 hi);
+u32 RandomWeightedArray(enum RandomTag, u32 sum, u32 n, const u8 *weights);
+
+u32 RandomUniformDefault(enum RandomTag, u32 lo, u32 hi);
+u32 RandomWeightedArrayDefault(enum RandomTag, u32 sum, u32 n, const u8 *weights);
+
 #endif // GUARD_RANDOM_H
