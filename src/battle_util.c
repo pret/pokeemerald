@@ -10268,6 +10268,10 @@ bool32 TryBattleFormChange(u8 battlerId, u16 method)
         // Saves the original species on the first form change for the player.
         if (side == B_SIDE_PLAYER && gBattleStruct->changedSpecies[monId] == SPECIES_NONE)
             gBattleStruct->changedSpecies[monId] = gBattleMons[battlerId].species;
+        
+        // Saves the original species for Gigantamax forms for the opponent.
+        if (side == B_SIDE_OPPONENT && gBattleStruct->dynamax.opponentBaseForm == SPECIES_NONE)
+            gBattleStruct->dynamax.opponentBaseForm = gBattleMons[battlerId].species;
 
         TryToSetBattleFormChangeMoves(&party[monId], method);
         SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
@@ -10275,7 +10279,8 @@ bool32 TryBattleFormChange(u8 battlerId, u16 method)
         RecalcBattlerStats(battlerId, &party[monId]);
         return TRUE;
     }
-    else if (gBattleStruct->changedSpecies[monId] != SPECIES_NONE)
+    else if (gBattleStruct->changedSpecies[monId] != SPECIES_NONE 
+             || gBattleStruct->dynamax.opponentBaseForm != SPECIES_NONE)
     {
         bool8 restoreSpecies = FALSE;
 
@@ -10295,7 +10300,10 @@ bool32 TryBattleFormChange(u8 battlerId, u16 method)
         {
             // Reverts the original species
             TryToSetBattleFormChangeMoves(&party[monId], method);
-            SetMonData(&party[monId], MON_DATA_SPECIES, &gBattleStruct->changedSpecies[monId]);
+            if (side == B_SIDE_PLAYER)
+                SetMonData(&party[monId], MON_DATA_SPECIES, &gBattleStruct->changedSpecies[monId]);
+            else
+                SetMonData(&party[monId], MON_DATA_SPECIES, &gBattleStruct->dynamax.opponentBaseForm);
             RecalcBattlerStats(battlerId, &party[monId]);
             return TRUE;
         }

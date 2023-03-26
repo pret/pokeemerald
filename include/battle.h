@@ -533,6 +533,7 @@ struct DynamaxData
     u16 baseMove[MAX_BATTLERS_COUNT]; // base move of Max Move
     u16 lastUsedBaseMove;
     u16 levelUpHP;
+    u16 opponentBaseForm; // changedSpecies isn't used for opposing Pokemon
 };
 
 struct StolenItem
