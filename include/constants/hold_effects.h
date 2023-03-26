@@ -159,6 +159,7 @@
 #define HOLD_EFFECT_PUNCHING_GLOVE      178
 #define HOLD_EFFECT_COVERT_CLOAK        179
 #define HOLD_EFFECT_LOADED_DICE         180
+#define HOLD_EFFECT_BOOSTER_ENERGY      181 // Not implemented.
 
 #define HOLD_EFFECT_CHOICE(holdEffect)((holdEffect == HOLD_EFFECT_CHOICE_BAND || holdEffect == HOLD_EFFECT_CHOICE_SCARF || holdEffect == HOLD_EFFECT_CHOICE_SPECS))
 
