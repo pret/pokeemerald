@@ -594,4 +594,10 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     // Basculegion
     [SPECIES_BASCULEGION_FEMALE] = sBasculegionFormSpeciesIdTable,
 #endif
+#if P_GEN_9_POKEMON == TRUE
+    // Squawkabilly
+    [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] = sSquawkabillyFormSpeciesIdTable,
+    [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] = sSquawkabillyFormSpeciesIdTable,
+    [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE] = sSquawkabillyFormSpeciesIdTable,
+#endif
 };

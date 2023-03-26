@@ -24967,6 +24967,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
+#define OINKOLOGNE_MISC_INFO                                \
+        .types = { TYPE_NORMAL, TYPE_NORMAL },              \
+        .catchRate = 100,                                   \
+        .expYield = 171,                                    \
+        .evYield_HP = 2,                                    \
+        .eggCycles = 15,                                    \
+        .friendship = 50,                                   \
+        .growthRate = GROWTH_MEDIUM_FAST,                   \
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},   \
+        .bodyColor = BODY_COLOR_GRAY,                       \
+        .noFlip = FALSE
+
     [SPECIES_OINKOLOGNE] =
     {
         .baseHP        = 110,
@@ -24975,18 +24987,22 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpeed     = 65,
         .baseSpAttack  = 59,
         .baseSpDefense = 80,
-        .types = { TYPE_NORMAL, TYPE_NORMAL },
-        .catchRate = 100,
-        .expYield = 171,
-        .evYield_HP = 2,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 15,
-        .friendship = 50,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .genderRatio = PERCENT_FEMALE(0),
         .abilities = {ABILITY_LINGERING_AROMA, ABILITY_GLUTTONY, ABILITY_THICK_FAT},
-        .bodyColor = BODY_COLOR_GRAY,
-        .noFlip = FALSE,
+        OINKOLOGNE_MISC_INFO,
+    },
+
+    [SPECIES_OINKOLOGNE_FEMALE] =
+    {
+        .baseHP        = 115,
+        .baseAttack    = 90,
+        .baseDefense   = 70,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 59,
+        .baseSpDefense = 90,
+        .genderRatio = PERCENT_FEMALE(100),
+        .abilities = {ABILITY_AROMA_VEIL, ABILITY_GLUTTONY, ABILITY_THICK_FAT},
+        OINKOLOGNE_MISC_INFO,
     },
 
     [SPECIES_TAROUNTULA] =
@@ -25297,26 +25313,50 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
+#define SQUAWKABILLY_MISC_INFO                                  \
+        .baseHP        = 82,                                    \
+        .baseAttack    = 96,                                    \
+        .baseDefense   = 51,                                    \
+        .baseSpeed     = 92,                                    \
+        .baseSpAttack  = 45,                                    \
+        .baseSpDefense = 51,                                    \
+        .types = { TYPE_NORMAL, TYPE_FLYING },                  \
+        .catchRate = 190,                                       \
+        .expYield = 146,                                        \
+        .evYield_Attack = 1,                                    \
+        .genderRatio = PERCENT_FEMALE(50),                      \
+        .eggCycles = 15,                                        \
+        .friendship = 50,                                       \
+        .growthRate = GROWTH_ERRATIC,                           \
+        .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING},     \
+        .noFlip = FALSE
+
     [SPECIES_SQUAWKABILLY] =
     {
-        .baseHP        = 82,
-        .baseAttack    = 96,
-        .baseDefense   = 51,
-        .baseSpeed     = 92,
-        .baseSpAttack  = 45,
-        .baseSpDefense = 51,
-        .types = { TYPE_NORMAL, TYPE_FLYING },
-        .catchRate = 190,
-        .expYield = 146,
-        .evYield_Attack = 1,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 15,
-        .friendship = 50,
-        .growthRate = GROWTH_ERRATIC,
-        .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING},
         .abilities = {ABILITY_INTIMIDATE, ABILITY_HUSTLE, ABILITY_GUTS},
         .bodyColor = BODY_COLOR_GREEN,
-        .noFlip = FALSE,
+        SQUAWKABILLY_MISC_INFO,
+    },
+
+    [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] =
+    {
+        .abilities = {ABILITY_INTIMIDATE, ABILITY_HUSTLE, ABILITY_GUTS},
+        .bodyColor = BODY_COLOR_BLUE,
+        SQUAWKABILLY_MISC_INFO,
+    },
+
+    [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] =
+    {
+        .abilities = {ABILITY_INTIMIDATE, ABILITY_HUSTLE, ABILITY_SHEER_FORCE},
+        .bodyColor = BODY_COLOR_YELLOW,
+        SQUAWKABILLY_MISC_INFO,
+    },
+
+    [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE] =
+    {
+        .abilities = {ABILITY_INTIMIDATE, ABILITY_HUSTLE, ABILITY_SHEER_FORCE},
+        .bodyColor = BODY_COLOR_WHITE,
+        SQUAWKABILLY_MISC_INFO,
     },
 
     [SPECIES_NACLI] =
@@ -26023,26 +26063,39 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
+#define PALAFIN_MISC_INFO                                   \
+        .baseHP        = 100,                               \
+        .baseSpeed     = 100,                               \
+        .types = { TYPE_WATER, TYPE_WATER },                \
+        .catchRate = 45,                                    \
+        .evYield_HP = 2,                                    \
+        .genderRatio = PERCENT_FEMALE(50),                  \
+        .eggCycles = 40,                                    \
+        .friendship = 50,                                   \
+        .growthRate = GROWTH_SLOW,                          \
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_WATER_2}, \
+        .abilities = {ABILITY_ZERO_TO_HERO, ABILITY_NONE},  \
+        .bodyColor = BODY_COLOR_BLUE,                       \
+        .noFlip = FALSE
+
     [SPECIES_PALAFIN] =
     {
-        .baseHP        = 100,
         .baseAttack    = 70,
         .baseDefense   = 72,
-        .baseSpeed     = 100,
         .baseSpAttack  = 53,
         .baseSpDefense = 62,
-        .types = { TYPE_WATER, TYPE_WATER },
-        .catchRate = 45,
-        .expYield = 160, //This is for Zero Form. Hero Form has a base experience yield of 228.
-        .evYield_HP = 2,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 40,
-        .friendship = 50,
-        .growthRate = GROWTH_SLOW,
-        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_WATER_2},
-        .abilities = {ABILITY_ZERO_TO_HERO, ABILITY_NONE},
-        .bodyColor = BODY_COLOR_BLUE,
-        .noFlip = FALSE,
+        .expYield = 160,
+        PALAFIN_MISC_INFO,
+    },
+
+    [SPECIES_PALAFIN_HERO] =
+    {
+        .baseAttack    = 160,
+        .baseDefense   = 97,
+        .baseSpAttack  = 106,
+        .baseSpDefense = 100,
+        .expYield = 228,
+        PALAFIN_MISC_INFO,
     },
 
     [SPECIES_VAROOM] =

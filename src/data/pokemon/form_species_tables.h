@@ -1151,4 +1151,12 @@ static const u16 sBasculegionFormSpeciesIdTable[] = {
     FORM_SPECIES_END,
 };
 
+static const u16 sSquawkabillyFormSpeciesIdTable[] = {
+    SPECIES_SQUAWKABILLY,
+    SPECIES_SQUAWKABILLY_BLUE_PLUMAGE,
+    SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE,
+    SPECIES_SQUAWKABILLY_WHITE_PLUMAGE,
+    FORM_SPECIES_END,
+};
+
 #endif
