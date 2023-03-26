@@ -54,6 +54,16 @@ extern const u8 gTestRunnerI;
 extern const char gTestRunnerArgv[256];
 
 extern const struct TestRunner gAssumptionsRunner;
+
+struct FunctionTestRunnerState
+{
+    u8 parameters;
+    u8 runParameter;
+};
+
+extern const struct TestRunner gFunctionTestRunner;
+extern struct FunctionTestRunnerState *gFunctionTestRunnerState;
+
 extern struct TestRunnerState gTestRunnerState;
 
 void CB2_TestRunner(void);
@@ -62,6 +72,17 @@ void Test_ExpectedResult(enum TestResult);
 void Test_ExitWithResult(enum TestResult, const char *fmt, ...);
 
 s32 MgbaPrintf_(const char *fmt, ...);
+
+#define TEST(_name) \
+    static void CAT(Test, __LINE__)(void); \
+    __attribute__((section(".tests"))) static const struct Test CAT(sTest, __LINE__) = \
+    { \
+        .name = _name, \
+        .filename = __FILE__, \
+        .runner = &gFunctionTestRunner, \
+        .data = (void *)CAT(Test, __LINE__), \
+    }; \
+    static void CAT(Test, __LINE__)(void)
 
 #define ASSUMPTIONS \
     static void Assumptions(void); \
@@ -138,6 +159,8 @@ s32 MgbaPrintf_(const char *fmt, ...);
 
 #define KNOWN_FAILING \
     Test_ExpectedResult(TEST_RESULT_FAIL)
+
+#define PARAMETRIZE if (gFunctionTestRunnerState->parameters++ == gFunctionTestRunnerState->runParameter)
 
 #define TO_DO \
     Test_ExpectedResult(TEST_RESULT_TODO)

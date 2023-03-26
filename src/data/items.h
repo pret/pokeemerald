@@ -9907,7 +9907,6 @@ const struct Item gItems[] =
 
     [ITEM_LOADED_DICE] =
     {
-                 //YellwApricorn
         .name = _("Loaded Dice"),
         .itemId = ITEM_LOADED_DICE,
         .price = 20000,
@@ -9917,5 +9916,371 @@ const struct Item gItems[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 30,
+    },
+
+    [ITEM_AUSPICIOUS_ARMOR] =
+    {
+        .name = _("AuspciousArmr"),
+        .itemId = ITEM_AUSPICIOUS_ARMOR,
+        .price = 3000,
+        .description = sAuspiciousArmorDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+        .flingPower = 30,
+    },
+
+    [ITEM_BOOSTER_ENERGY] =
+    {
+        .name = _("BoosterEnergy"),
+        .itemId = ITEM_BOOSTER_ENERGY,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_BOOSTER_ENERGY,
+        .description = sBoosterEnergyDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 30,
+    },
+
+    [ITEM_BIG_BAMBOO_SHOOT] =
+    {
+        .name = _("BigBmbooShoot"),
+        .itemId = ITEM_BIG_BAMBOO_SHOOT,
+        .price = 3000,
+        .description = sBigBambooShootDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 30,
+    },
+
+    [ITEM_GIMMIGHOUL_COIN] =
+    {
+        .name = _("GimighoulCoin"),
+        .itemId = ITEM_GIMMIGHOUL_COIN,
+        .price = 400,
+        .description = sGimmighoulCoinDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_LEADERS_CREST] =
+    {
+        .name = _("Leader'sCrest"),
+        .itemId = ITEM_LEADERS_CREST,
+        .price = 3000,
+        .description = sLeadersCrestDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_MALICIOUS_ARMOR] =
+    {
+        .name = _("MaliciousArmr"),
+        .itemId = ITEM_MALICIOUS_ARMOR,
+        .price = 3000,
+        .description = sMaliciousArmorDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+        .flingPower = 30,
+    },
+
+    [ITEM_MIRROR_HERB] =
+    {
+        .name = _("Mirror Herb"),
+        .itemId = ITEM_MIRROR_HERB,
+        .price = 30000,
+        .holdEffect = HOLD_EFFECT_MIRROR_HERB,
+        .description = sMirrorHerbDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 30,
+    },
+
+    [ITEM_SCROLL_OF_DARKNESS] =
+    {
+        .name = _("ScrllOfDrknss"),
+        .itemId = ITEM_SCROLL_OF_DARKNESS,
+        .price = 0,
+        .description = sScrollOfDarknessDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    },
+
+    [ITEM_SCROLL_OF_WATERS] =
+    {
+        .name = _("ScrollOfWatrs"),
+        .itemId = ITEM_SCROLL_OF_WATERS,
+        .price = 0,
+        .description = sScrollOfWatersDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    },
+
+    [ITEM_TERA_ORB] =
+    {
+        .name = _("Tera Orb"),
+        .itemId = ITEM_TERA_ORB,
+        .price = 0,
+        .description = sTeraOrbDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_TINY_BAMBOO_SHOOT] =
+    {
+        .name = _("TinyBmbooShot"),
+        .itemId = ITEM_TINY_BAMBOO_SHOOT,
+        .price = 750,
+        .description = sTinyBambooShootDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 30,
+    },
+
+    [ITEM_BUG_TERA_SHARD] =
+    {
+        .name = _("Bug TeraShard"),
+        .itemId = ITEM_BUG_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_DARK_TERA_SHARD] =
+    {
+        .name = _("DarkTeraShard"),
+        .itemId = ITEM_DARK_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_DRAGON_TERA_SHARD] =
+    {
+        .name = _("DragnTeraShrd"),
+        .itemId = ITEM_DRAGON_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_ELECTRIC_TERA_SHARD] =
+    {
+        .name = _("EltrcTeraShrd"),
+        .itemId = ITEM_ELECTRIC_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_FAIRY_TERA_SHARD] =
+    {
+        .name = _("FairyTeraShrd"),
+        .itemId = ITEM_FAIRY_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_FIGHTING_TERA_SHARD] =
+    {
+        .name = _("FghtngTerShrd"),
+        .itemId = ITEM_FIGHTING_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_FIRE_TERA_SHARD] =
+    {
+        .name = _("FireTeraShard"),
+        .itemId = ITEM_FIRE_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_FLYING_TERA_SHARD] =
+    {
+        .name = _("FlyngTeraShrd"),
+        .itemId = ITEM_FLYING_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_GHOST_TERA_SHARD] =
+    {
+        .name = _("GhostTeraShrd"),
+        .itemId = ITEM_GHOST_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_GRASS_TERA_SHARD] =
+    {
+        .name = _("GrassTeraShrd"),
+        .itemId = ITEM_GRASS_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_GROUND_TERA_SHARD] =
+    {
+        .name = _("GrondTeraShrd"),
+        .itemId = ITEM_GROUND_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_ICE_TERA_SHARD] =
+    {
+        .name = _("Ice TeraShard"),
+        .itemId = ITEM_ICE_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_NORMAL_TERA_SHARD] =
+    {
+        .name = _("NormlTeraShrd"),
+        .itemId = ITEM_NORMAL_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_POISON_TERA_SHARD] =
+    {
+        .name = _("PoisnTeraShrd"),
+        .itemId = ITEM_POISON_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_PSYCHIC_TERA_SHARD] =
+    {
+        .name = _("PschcTeraShrd"),
+        .itemId = ITEM_PSYCHIC_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_ROCK_TERA_SHARD] =
+    {
+        .name = _("RockTeraShard"),
+        .itemId = ITEM_ROCK_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_STEEL_TERA_SHARD] =
+    {
+        .name = _("SteelTeraShrd"),
+        .itemId = ITEM_STEEL_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_WATER_TERA_SHARD] =
+    {
+        .name = _("WaterTeraShrd"),
+        .itemId = ITEM_WATER_TERA_SHARD,
+        .price = 0,
+        .description = sTeraShardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_ADAMANT_CRYSTAL] =
+    {
+        .name = _("AdamantCrystl"),
+        .itemId = ITEM_ADAMANT_CRYSTAL,
+        .price = 0,
+        .description = sAdamantCrystalDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 60,
+    },
+
+    [ITEM_GRISEOUS_CORE] =
+    {
+        .name = _("Griseous Core"),
+        .itemId = ITEM_GRISEOUS_CORE,
+        .price = 0,
+        .description = sGriseousCoreDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 60,
+    },
+
+    [ITEM_LUSTROUS_GLOBE] =
+    {
+        .name = _("LustrousGlobe"),
+        .itemId = ITEM_LUSTROUS_GLOBE,
+        .price = 0,
+        .description = sLustrousGlobeDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 60,
     },
 };

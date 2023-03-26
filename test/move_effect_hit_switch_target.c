@@ -9,8 +9,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Dragon Tail switches the target with a random non-fainted replacement")
 {
-    KNOWN_FAILING; // Only 18/50. Waiting for an improved PASSES_RANDOMLY.
-    PASSES_RANDOMLY(90 * 1, 100 * 2);
+    PASSES_RANDOMLY(1, 2, RNG_FORCE_RANDOM_SWITCH);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -27,7 +26,7 @@ SINGLE_BATTLE_TEST("Dragon Tail switches the target with a random non-fainted re
 
 DOUBLE_BATTLE_TEST("Dragon Tail switches the target with a random non-battler, non-fainted replacement")
 {
-    PASSES_RANDOMLY(90 * 1, 100 * 2);
+    PASSES_RANDOMLY(1, 2, RNG_FORCE_RANDOM_SWITCH);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);

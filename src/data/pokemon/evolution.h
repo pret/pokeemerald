@@ -542,7 +542,9 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_DREEPY]                = {{EVO_LEVEL, 50, SPECIES_DRAKLOAK}},
     [SPECIES_DRAKLOAK]              = {{EVO_LEVEL, 60, SPECIES_DRAGAPULT}},
     [SPECIES_KUBFU]                 = {{EVO_DARK_SCROLL, 0, SPECIES_URSHIFU},
-                                       {EVO_WATER_SCROLL, 0, SPECIES_URSHIFU_RAPID_STRIKE_STYLE}},
+                                       {EVO_ITEM, ITEM_SCROLL_OF_DARKNESS, SPECIES_URSHIFU},
+                                       {EVO_WATER_SCROLL, 0, SPECIES_URSHIFU_RAPID_STRIKE_STYLE},
+                                       {EVO_ITEM, ITEM_SCROLL_OF_WATERS, SPECIES_URSHIFU_RAPID_STRIKE_STYLE}},
 #endif
     [SPECIES_RATTATA_ALOLAN]        = {{EVO_LEVEL_NIGHT, 20, SPECIES_RATICATE_ALOLAN}},
     [SPECIES_SANDSHREW_ALOLAN]      = {{EVO_ITEM, ITEM_ICE_STONE, SPECIES_SANDSLASH_ALOLAN}},
