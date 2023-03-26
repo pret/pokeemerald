@@ -634,6 +634,15 @@ extern struct BattleTestRunnerState *gBattleTestRunnerState;
 
 /* Test */
 
+#define TO_DO_BATTLE_TEST(_name) \
+    SINGLE_BATTLE_TEST("TODO: " _name) \
+    { \
+        TO_DO; \
+        GIVEN { PLAYER(SPECIES_WOBBUFFET); OPPONENT(SPECIES_WOBBUFFET); } \
+        WHEN { TURN { } } \
+        THEN { EXPECT_TO_DO; } \
+    }
+
 #define SINGLE_BATTLE_TEST(_name, ...) \
     struct CAT(Result, __LINE__) { MEMBERS(__VA_ARGS__) }; \
     static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, u32, struct BattlePokemon *, struct BattlePokemon *); \

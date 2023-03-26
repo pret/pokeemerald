@@ -13,6 +13,7 @@ enum TestResult
     TEST_RESULT_INVALID,
     TEST_RESULT_ERROR,
     TEST_RESULT_TIMEOUT,
+    TEST_RESULT_TODO,
 };
 
 struct TestRunner
@@ -160,5 +161,11 @@ s32 MgbaPrintf_(const char *fmt, ...);
     Test_ExpectedResult(TEST_RESULT_FAIL)
 
 #define PARAMETRIZE if (gFunctionTestRunnerState->parameters++ == gFunctionTestRunnerState->runParameter)
+
+#define TO_DO \
+    Test_ExpectedResult(TEST_RESULT_TODO)
+
+#define EXPECT_TO_DO \
+    Test_ExitWithResult(TEST_RESULT_TODO, "%s:%d: EXPECT_TO_DO", gTestRunnerState.test->filename, __LINE__)
 
 #endif

@@ -195,6 +195,10 @@ void CB2_TestRunner(void)
                 result = "ASSUMPTION_FAIL";
                 color = "\e[33m";
                 break;
+            case TEST_RESULT_TODO:
+                result = "TO_DO";
+                color = "\e[33m";
+                break;
             case TEST_RESULT_INVALID:
                 result = "INVALID";
                 break;
@@ -213,6 +217,8 @@ void CB2_TestRunner(void)
                 MgbaPrintf_(":P%s%s\e[0m", color, result);
             else if (gTestRunnerState.result == TEST_RESULT_ASSUMPTION_FAIL)
                 MgbaPrintf_(":A%s%s\e[0m", color, result);
+            else if (gTestRunnerState.result == TEST_RESULT_TODO)
+                MgbaPrintf_(":T%s%s\e[0m", color, result);
             else if (gTestRunnerState.expectedResult == gTestRunnerState.result)
                 MgbaPrintf_(":K%s%s\e[0m", color, result);
             else
