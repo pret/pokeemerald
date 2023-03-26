@@ -5342,7 +5342,8 @@ static bool32 TryKnockOffBattleScript(u32 battlerDef)
 
             gLastUsedItem = gBattleMons[battlerDef].item;
             gBattleMons[battlerDef].item = 0;
-            gBattleStruct->choicedMove[battlerDef] = 0;
+            if (gBattleMons[battlerDef].ability != ABILITY_GORILLA_TACTICS)
+                gBattleStruct->choicedMove[battlerDef] = 0;
             gWishFutureKnock.knockedOffMons[side] |= gBitTable[gBattlerPartyIndexes[battlerDef]];
             CheckSetUnburden(battlerDef);
 
