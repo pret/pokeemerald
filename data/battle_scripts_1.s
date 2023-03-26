@@ -420,6 +420,29 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectShellTrap               @ EFFECT_SHELL_TRAP
 	.4byte BattleScript_EffectHit                     @ EFFECT_PSYBLADE
 	.4byte BattleScript_EffectHit                     @ EFFECT_HYDRO_STEAM
+	.4byte BattleScript_EffectHitSetEntryHazard       @ EFFECT_HIT_SET_ENTRY_HAZARD
+	.4byte BattleScript_EffectDireClaw                @ EFFECT_DIRE_CLAW
+	.4byte BattleScript_EffectBarbBarrage             @ EFFECT_BARB_BARRAGE
+
+BattleScript_StealthRockActivates::
+	setstealthrock BattleScript_MoveEnd
+	printfromtable gDmgHazardsStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectDireClaw::
+	setmoveeffect MOVE_EFFECT_DIRE_CLAW
+	goto BattleScript_EffectHit
+
+BattleScript_EffectHitSetEntryHazard::
+	argumenttomoveeffect
+	goto BattleScript_EffectHit
+
+BattleScript_SpikesActivates::
+	trysetspikes BattleScript_MoveEnd
+	printfromtable gDmgHazardsStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectAttackUpUserAlly:
 	jumpifnoally BS_ATTACKER, BattleScript_EffectAttackUp
@@ -3372,6 +3395,7 @@ BattleScript_CantMakeAsleep::
 	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectBarbBarrage:
 BattleScript_EffectPoisonHit:
 	setmoveeffect MOVE_EFFECT_POISON
 	goto BattleScript_EffectHit
