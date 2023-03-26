@@ -479,26 +479,13 @@ BattleScript_AxeKickHitFromAtkString:
 	end
 
 BattleScript_EffectTakeHeart::
-@	TO DO: Use modifybattlerstatstage here once PR #2470 is merged.
 	printstring STRINGID_EMPTYSTRING3
-	playstatchangeanimation BS_ATTACKER, BIT_SPATK, 0
-	setstatchanger STAT_SPATK, 1, FALSE
-	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_TakeHeartTrySpDef
-	printfromtable gStatUpStringIds
-	waitmessage B_WAIT_TIME_LONG
+	modifybattlerstatstage BS_ATTACKER, STAT_SPATK, INCREASE, 1, BattleScript_TakeHeartTrySpDef, ANIM_ON
 BattleScript_TakeHeartTrySpDef:
 	printstring STRINGID_EMPTYSTRING3
-	playstatchangeanimation BS_ATTACKER, BIT_SPDEF, 0
-	setstatchanger STAT_SPDEF, 1, FALSE
-	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_TakeHeart_MoveEnd
-	printfromtable gStatUpStringIds
-	waitmessage B_WAIT_TIME_LONG
+	modifybattlerstatstage BS_ATTACKER, STAT_SPDEF, INCREASE, 1, BattleScript_TakeHeart_MoveEnd, ANIM_ON
 BattleScript_TakeHeart_MoveEnd:
 	goto BattleScript_MoveEnd
-
-BattleScript_EffectInfernalParade::
-	setmoveeffect MOVE_EFFECT_BURN
-	goto BattleScript_EffectHit
 
 BattleScript_EffectTripleArrows::
 	setmoveeffect MOVE_EFFECT_TRIPLE_ARROWS
@@ -3527,6 +3514,7 @@ BattleScript_AbsorbHealBlock::
 	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectInfernalParade::
 BattleScript_EffectBurnHit::
 	setmoveeffect MOVE_EFFECT_BURN
 	goto BattleScript_EffectHit

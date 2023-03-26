@@ -2082,8 +2082,7 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
                 #if B_AFFECTION_MECHANICS == TRUE
                     + 2 * (GetBattlerFriendshipScore(gBattlerAttacker) >= FRIENDSHIP_200_TO_254)
                 #endif
-                    + (abilityAtk == ABILITY_SUPER_LUCK)
-                    + (gBattleMoves[move].effect == EFFECT_TRIPLE_ARROWS);
+                    + (abilityAtk == ABILITY_SUPER_LUCK);
 
         if (critChance >= ARRAY_COUNT(sCriticalHitChance))
             critChance = ARRAY_COUNT(sCriticalHitChance) - 1;
@@ -3802,7 +3801,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             case MOVE_EFFECT_TRIPLE_ARROWS:
                 {
-                    u32 randomChance = Random() % 100;
+                    u8 randomChance = Random() % 100;
                     if (randomChance < 50) // Chance to reduce a foe's Defense by 1 stat stage.
                     {
                         BattleScriptPush(gBattlescriptCurrInstr + 1);
@@ -3810,15 +3809,12 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     }
                     if (randomChance >= 50 && randomChance <= 80) // Chance to cause a foe to flinch.
                     {
-                        if (battlerAbility == ABILITY_INNER_FOCUS)
+                        if (battlerAbility == ABILITY_INNER_FOCUS && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
                         {
-                            if (primary == TRUE || certain == MOVE_EFFECT_CERTAIN)
-                            {
-                                gLastUsedAbility = ABILITY_INNER_FOCUS;
-                                gBattlerAbility = gEffectBattler;
-                                RecordAbilityBattle(gEffectBattler, ABILITY_INNER_FOCUS);
-                                gBattlescriptCurrInstr = BattleScript_FlinchPrevention;
-                            }
+                            gLastUsedAbility = ABILITY_INNER_FOCUS;
+                            gBattlerAbility = gEffectBattler;
+                            RecordAbilityBattle(gEffectBattler, ABILITY_INNER_FOCUS);
+                            gBattlescriptCurrInstr = BattleScript_FlinchPrevention;
                         }
                         else
                         {
