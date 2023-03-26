@@ -115,7 +115,7 @@ bool32 CanDynamax(u16 battlerId)
     #if B_FLAG_DYNAMAX_BATTLE != 0
     if (!FlagGet(B_FLAG_DYNAMAX_BATTLE))
     #endif
-        //return FALSE;
+        return FALSE;
 
 
     // Check if Player has a Dynamax Band.
@@ -630,23 +630,22 @@ u16 SetMaxMoveEffect(u16 move)
         case MAX_EFFECT_PSYCHIC_TERRAIN:
         {
             u32 statusFlag = 0;
-            u8 *timer = NULL;
             switch (gBattleMoves[gCurrentMove].argument)
             {
                 case MAX_EFFECT_MISTY_TERRAIN:
-                    statusFlag = STATUS_FIELD_MISTY_TERRAIN, timer = &gFieldTimers.terrainTimer;
+                    statusFlag = STATUS_FIELD_MISTY_TERRAIN;
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                     break;
                 case MAX_EFFECT_GRASSY_TERRAIN:
-                    statusFlag = STATUS_FIELD_GRASSY_TERRAIN, timer = &gFieldTimers.terrainTimer;
+                    statusFlag = STATUS_FIELD_GRASSY_TERRAIN;
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                     break;
                 case MAX_EFFECT_ELECTRIC_TERRAIN:
-                    statusFlag = STATUS_FIELD_ELECTRIC_TERRAIN, timer = &gFieldTimers.terrainTimer;
+                    statusFlag = STATUS_FIELD_ELECTRIC_TERRAIN;
                     gBattleCommunication[MULTISTRING_CHOOSER] = 2;
                     break;
                 case MAX_EFFECT_PSYCHIC_TERRAIN:
-                    statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN, timer = &gFieldTimers.terrainTimer;
+                    statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN;
                     gBattleCommunication[MULTISTRING_CHOOSER] = 3;
                     break;
             }
@@ -655,11 +654,12 @@ u16 SetMaxMoveEffect(u16 move)
                 gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
                 gFieldStatuses |= statusFlag;
                 if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_TERRAIN_EXTENDER)
-                    *timer = 8;
+                    gFieldTimers.terrainTimer = 8;
                 else
-                    *timer = 5;
+                    gFieldTimers.terrainTimer = 5;
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_EffectSetTerrain;
+                effect++;
             }
             break;
         }

@@ -907,8 +907,8 @@ gBattleAnims_Moves::
 	.4byte Move_MAX_GEYSER
 	.4byte Move_MAX_OVERGROWTH
 	.4byte Move_MAX_LIGHTNING
-	.4byte Move_MAX_HAILSTORM
 	.4byte Move_MAX_MINDSTORM
+	.4byte Move_MAX_HAILSTORM
 	.4byte Move_MAX_WYRMWIND
 	.4byte Move_MAX_DARKNESS
 	.4byte Move_MAX_STARFALL
