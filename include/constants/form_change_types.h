@@ -87,8 +87,12 @@
 // param1: item to hold.
 #define FORM_CHANGE_BATTLE_PRIMAL_REVERSION     13
 
+// Form change that activates when a specific weather is set during battle.
+// param1: weather to check
+#define FORM_CHANGE_BATTLE_WEATHER              14
+
 // Form change that activates automatically when the turn ends.
 // param1: ability to check.
-#define FORM_CHANGE_BATTLE_TURN_END             14
+#define FORM_CHANGE_BATTLE_TURN_END             15
 
 #endif // GUARD_CONSTANTS_FORM_CHANGE_TYPES_H
