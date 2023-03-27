@@ -1,15 +1,6 @@
 #include "global.h"
 #include "test_battle.h"
 
-// TODO:
-// ==========
-// TEST: Max Guard protects against Transform, Block (not Mean Look), Flower Shield, Gear Up, and so on (see Bulba).
-// TEST: Imprison doesn't stop Max Moves. (YES!)
-// TEST: Max Moves change type as you'd expect with Normalize, Weather Ball, etc. (YES!)
-// TEST: You use Struggle while Dynamaxed if out of PP. (YES!)
-// Dynamax should not reset Speed Swap, Soak, or anything else from form changing. (NO)
-// Max Moves cannot be used against allies. (NO)
-
 // ============= DYNAMAX AND MAX MOVE INTERACTIONS ===================
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax increases HP and max HP by 1.5x")
 {

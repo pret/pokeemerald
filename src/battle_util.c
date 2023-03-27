@@ -8268,6 +8268,10 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
          && (!gProtectStructs[battlerId].maxGuarded 
              || gBattleMoves[move].argument == MAX_EFFECT_BYPASS_PROTECT))
         return FALSE;
+    
+    // Max Guard is silly about the moves it blocks, including Teatime.
+    if (gProtectStructs[battlerId].maxGuarded && IsMoveBlockedByMaxGuard(move))
+        return TRUE;
 
     if (move == MOVE_TEATIME)
         return FALSE;
@@ -8275,7 +8279,8 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
     // Protective Pads doesn't stop Unseen Fist from bypassing Protect effects, so IsMoveMakingContact() isn't used here.
     // This means extra logic is needed to handle Shell Side Arm.
     if (GetBattlerAbility(gBattlerAttacker) == ABILITY_UNSEEN_FIST
-        && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT || (gBattleMoves[move].effect == EFFECT_SHELL_SIDE_ARM && gBattleStruct->swapDamageCategory)))
+        && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT || (gBattleMoves[move].effect == EFFECT_SHELL_SIDE_ARM && gBattleStruct->swapDamageCategory))
+        && !gProtectStructs[battlerId].maxGuarded) // Max Guard cannot be bypassed by Unseen Fist
         return FALSE;
     else if (!(gBattleMoves[move].flags & FLAG_PROTECT_AFFECTED))
         return FALSE;
@@ -10265,13 +10270,9 @@ bool32 TryBattleFormChange(u8 battlerId, u16 method)
         targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
     if (targetSpecies != SPECIES_NONE)
     {
-        // Saves the original species on the first form change for the player.
-        if (side == B_SIDE_PLAYER && gBattleStruct->changedSpecies[monId] == SPECIES_NONE)
-            gBattleStruct->changedSpecies[monId] = gBattleMons[battlerId].species;
-        
-        // Saves the original species for Gigantamax forms for the opponent.
-        if (side == B_SIDE_OPPONENT && gBattleStruct->dynamax.opponentBaseForm == SPECIES_NONE)
-            gBattleStruct->dynamax.opponentBaseForm = gBattleMons[battlerId].species;
+        // Saves the original species on the first form change.
+        if (gBattleStruct->changedSpecies[side][monId] == SPECIES_NONE)
+            gBattleStruct->changedSpecies[side][monId] = gBattleMons[battlerId].species;
 
         TryToSetBattleFormChangeMoves(&party[monId], method);
         SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
@@ -10279,8 +10280,7 @@ bool32 TryBattleFormChange(u8 battlerId, u16 method)
         RecalcBattlerStats(battlerId, &party[monId]);
         return TRUE;
     }
-    else if (gBattleStruct->changedSpecies[monId] != SPECIES_NONE 
-             || gBattleStruct->dynamax.opponentBaseForm != SPECIES_NONE)
+    else if (gBattleStruct->changedSpecies[side][monId] != SPECIES_NONE)
     {
         bool8 restoreSpecies = FALSE;
 
@@ -10300,10 +10300,7 @@ bool32 TryBattleFormChange(u8 battlerId, u16 method)
         {
             // Reverts the original species
             TryToSetBattleFormChangeMoves(&party[monId], method);
-            if (side == B_SIDE_PLAYER)
-                SetMonData(&party[monId], MON_DATA_SPECIES, &gBattleStruct->changedSpecies[monId]);
-            else
-                SetMonData(&party[monId], MON_DATA_SPECIES, &gBattleStruct->dynamax.opponentBaseForm);
+            SetMonData(&party[monId], MON_DATA_SPECIES, &gBattleStruct->changedSpecies[side][monId]);
             RecalcBattlerStats(battlerId, &party[monId]);
             return TRUE;
         }

@@ -5265,7 +5265,7 @@ static void HandleEndTurn_FinishBattle(void)
                 changedForm = TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_END_BATTLE);
 
             // Clear original species field
-            gBattleStruct->changedSpecies[i] = SPECIES_NONE;
+            gBattleStruct->changedSpecies[B_SIDE_PLAYER][i] = SPECIES_NONE;
 
         #if B_RECALCULATE_STATS >= GEN_5
             // Recalculate the stats of every party member before the end

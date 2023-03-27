@@ -64,6 +64,7 @@ void PrepareBattlerForDynamax(u16 battlerId);
 u16 GetNonDynamaxHP(u16 battlerId);
 u16 GetNonDynamaxMaxHP(u16 battlerId);
 void UndoDynamax(u16 battlerId);
+bool32 IsMoveBlockedByMaxGuard(u16 move);
 bool32 IsMoveBlockedByDynamax(u16 move);
 
 bool32 ShouldUseMaxMove(u16 battlerId, u16 baseMove);

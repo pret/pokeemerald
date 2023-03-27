@@ -10496,7 +10496,7 @@ BattleScript_DamageNonTypesLoopIncrement::
 	jumpifbytenotequal gBattleCommunication, gBattlersCount, BattleScript_DamageNonTypesLoop
 BattleScript_DamageNonTypesContinuesEnd::
 	bicword gHitMarker, HITMARKER_SKIP_DMG_TRACK | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE | HITMARKER_GRUDGE
-	return
+	end2
 
 BattleScript_EffectTryReducePP::
 	tryspiteppreduce BattleScript_MoveEnd
