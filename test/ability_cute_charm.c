@@ -1,9 +1,6 @@
 #include "global.h"
 #include "test_battle.h"
 
-// TODO: Currently PASSES_RANDOMLY is incapable of testing Cute Charm
-// because it only activates 33% of the time, but we only want to
-// measure the 50% of the time that the infatuation prevents our move.
 SINGLE_BATTLE_TEST("Cute Charm inflicts infatuation on contact")
 {
     u32 move;

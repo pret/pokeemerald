@@ -23,6 +23,7 @@
 #include "main.h"
 #include "palette.h"
 #include "money.h"
+#include "malloc.h"
 #include "bg.h"
 #include "string_util.h"
 #include "pokemon_icon.h"
@@ -1917,15 +1918,25 @@ static void Cmd_accuracycheck(void)
     }
     else
     {
+        u32 accuracy;
+
         GET_MOVE_TYPE(move, type);
         if (JumpIfMoveAffectedByProtect(move))
             return;
         if (AccuracyCalcHelper(move))
             return;
 
-        // final calculation
-        if ((Random() % 100 + 1) > GetTotalAccuracy(gBattlerAttacker, gBattlerTarget, move, GetBattlerAbility(gBattlerAttacker), GetBattlerAbility(gBattlerTarget),
-                                                    GetBattlerHoldEffect(gBattlerAttacker, TRUE), GetBattlerHoldEffect(gBattlerTarget, TRUE)))
+        accuracy = GetTotalAccuracy(
+            gBattlerAttacker,
+            gBattlerTarget,
+            move,
+            GetBattlerAbility(gBattlerAttacker),
+            GetBattlerAbility(gBattlerTarget),
+            GetBattlerHoldEffect(gBattlerAttacker, TRUE),
+            GetBattlerHoldEffect(gBattlerTarget, TRUE)
+        );
+
+        if (!RandomPercentage(RNG_ACCURACY, accuracy))
         {
             gMoveResultFlags |= MOVE_RESULT_MISSED;
             if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_BLUNDER_POLICY)
@@ -2104,10 +2115,8 @@ static void Cmd_critcalc(void)
         gIsCriticalHit = FALSE;
     else if (critChance == -2)
         gIsCriticalHit = TRUE;
-    else if (Random() % sCriticalHitChance[critChance] == 0)
-        gIsCriticalHit = TRUE;
     else
-        gIsCriticalHit = FALSE;
+        gIsCriticalHit = RandomWeighted(RNG_CRITICAL_HIT, sCriticalHitChance[critChance] - 1, 1);
 
     // Counter for EVO_CRITICAL_HITS.
     partySlot = gBattlerPartyIndexes[gBattlerAttacker];
@@ -2885,6 +2894,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
     bool32 mirrorArmorReflected = (GetBattlerAbility(gBattlerTarget) == ABILITY_MIRROR_ARMOR);
     u32 flags = 0;
     u16 battlerAbility;
+    bool8 activateAfterFaint = FALSE;
 
     if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_1ST_HIT
         && gBattleMons[gBattlerTarget].hp != 0
@@ -2903,6 +2913,13 @@ void SetMoveEffect(bool32 primary, u32 certain)
         gBattleStruct->moveEffect2 = gBattleScripting.moveEffect;
         gBattlescriptCurrInstr++;
         return;
+    case MOVE_EFFECT_STEALTH_ROCK:
+    case MOVE_EFFECT_SPIKES:
+    case MOVE_EFFECT_PAYDAY:
+    case MOVE_EFFECT_STEAL_ITEM:
+    case MOVE_EFFECT_BUG_BITE:
+        activateAfterFaint = TRUE;
+        break;
     }
 
     if (gBattleScripting.moveEffect & MOVE_EFFECT_AFFECTS_USER)
@@ -2943,10 +2960,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
     if (TestSheerForceFlag(gBattlerAttacker, gCurrentMove) && affectsUser != MOVE_EFFECT_AFFECTS_USER)
         INCREMENT_RESET_RETURN
 
-    if (gBattleMons[gEffectBattler].hp == 0
-        && gBattleScripting.moveEffect != MOVE_EFFECT_PAYDAY
-        && gBattleScripting.moveEffect != MOVE_EFFECT_STEAL_ITEM
-        && gBattleScripting.moveEffect != MOVE_EFFECT_BUG_BITE)
+    if (gBattleMons[gEffectBattler].hp == 0 && !activateAfterFaint)
         INCREMENT_RESET_RETURN
 
     if (DoesSubstituteBlockMove(gBattlerAttacker, gEffectBattler, gCurrentMove) && affectsUser != MOVE_EFFECT_AFFECTS_USER)
@@ -3153,9 +3167,9 @@ void SetMoveEffect(bool32 primary, u32 certain)
 
             if (sStatusFlagsForMoveEffects[gBattleScripting.moveEffect] == STATUS1_SLEEP)
             #if B_SLEEP_TURNS >= GEN_5
-                gBattleMons[gEffectBattler].status1 |= ((Random() % 3) + 2);
+                gBattleMons[gEffectBattler].status1 |= STATUS1_SLEEP_TURN(1 + RandomUniform(RNG_SLEEP_TURNS, 1, 3));
             #else
-                gBattleMons[gEffectBattler].status1 |= ((Random() % 4) + 3);
+                gBattleMons[gEffectBattler].status1 |= STATUS1_SLEEP_TURN(1 + RandomUniform(RNG_SLEEP_TURNS, 2, 5));
             #endif
             else
                 gBattleMons[gEffectBattler].status1 |= sStatusFlagsForMoveEffects[gBattleScripting.moveEffect];
@@ -3558,7 +3572,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 {
                     gBattleMons[gEffectBattler].status2 |= STATUS2_MULTIPLETURNS;
                     gLockedMoves[gEffectBattler] = gCurrentMove;
-                    gBattleMons[gEffectBattler].status2 |= STATUS2_LOCK_CONFUSE_TURN((Random() & 1) + 2); // thrash for 2-3 turns
+                    gBattleMons[gEffectBattler].status2 |= STATUS2_LOCK_CONFUSE_TURN(RandomUniform(RNG_RAMPAGE_TURNS, 2, 3));
                 }
                 break;
             case MOVE_EFFECT_SP_ATK_TWO_DOWN: // Overheat
@@ -3761,6 +3775,30 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 TryUpdateRoundTurnOrder(); // If another Pokémon uses Round before the user this turn, the user will use Round directly after it
                 gBattlescriptCurrInstr++;
                 break;
+            case MOVE_EFFECT_DIRE_CLAW:
+                if (!gBattleMons[gEffectBattler].status1)
+                {
+                    static const u8 sDireClawEffects[] = { MOVE_EFFECT_POISON, MOVE_EFFECT_PARALYSIS, MOVE_EFFECT_SLEEP };
+                    gBattleScripting.moveEffect = sDireClawEffects[Random() % ARRAY_COUNT(sDireClawEffects)];
+                    SetMoveEffect(TRUE, 0);
+                }
+                break;
+            case MOVE_EFFECT_STEALTH_ROCK:
+                if (!(gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_STEALTH_ROCK))
+                {
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_POINTEDSTONESFLOAT;
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_StealthRockActivates;
+                }
+                break;
+            case MOVE_EFFECT_SPIKES:
+                if (gSideTimers[GetBattlerSide(gEffectBattler)].spikesAmount < 3)
+                {
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SPIKESSCATTERED;
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_SpikesActivates;
+                }
+                break;
             }
         }
     }
@@ -3779,20 +3817,23 @@ static void Cmd_seteffectwithchance(void)
     else
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
 
-    if (gBattleScripting.moveEffect & MOVE_EFFECT_CERTAIN
-        && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+     && gBattleScripting.moveEffect)
     {
-        gBattleScripting.moveEffect &= ~MOVE_EFFECT_CERTAIN;
-        SetMoveEffect(FALSE, MOVE_EFFECT_CERTAIN);
-    }
-    else if (Random() % 100 < percentChance
-             && gBattleScripting.moveEffect
-             && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
-    {
-        if (percentChance >= 100)
+        if (gBattleScripting.moveEffect & MOVE_EFFECT_CERTAIN
+         || percentChance >= 100)
+        {
+            gBattleScripting.moveEffect &= ~MOVE_EFFECT_CERTAIN;
             SetMoveEffect(FALSE, MOVE_EFFECT_CERTAIN);
-        else
+        }
+        else if (RandomPercentage(RNG_SECONDARY_EFFECT, percentChance))
+        {
             SetMoveEffect(FALSE, 0);
+        }
+        else
+        {
+            gBattlescriptCurrInstr = cmd->nextInstr;
+        }
     }
     else
     {
@@ -5322,7 +5363,8 @@ static bool32 TryKnockOffBattleScript(u32 battlerDef)
 
             gLastUsedItem = gBattleMons[battlerDef].item;
             gBattleMons[battlerDef].item = 0;
-            gBattleStruct->choicedMove[battlerDef] = 0;
+            if (gBattleMons[battlerDef].ability != ABILITY_GORILLA_TACTICS)
+                gBattleStruct->choicedMove[battlerDef] = 0;
             gWishFutureKnock.knockedOffMons[side] |= gBitTable[gBattlerPartyIndexes[battlerDef]];
             CheckSetUnburden(battlerDef);
 
@@ -6965,9 +7007,9 @@ bool32 ShouldPostponeSwitchInAbilities(u32 battlerId)
     // Checks for double battle, so abilities like Intimidate wait until all battlers are switched-in before activating.
     if (IsDoubleBattle())
     {
-        if (aliveOpposing1 && !aliveOpposing2 && !HasNoMonsToSwitch(BATTLE_OPPOSITE(battlerId), PARTY_SIZE, PARTY_SIZE))
+        if (aliveOpposing1 && !aliveOpposing2 && !HasNoMonsToSwitch(BATTLE_PARTNER(BATTLE_OPPOSITE(battlerId)), PARTY_SIZE, PARTY_SIZE))
             return TRUE;
-        if (!aliveOpposing1 && aliveOpposing2 && !HasNoMonsToSwitch(BATTLE_PARTNER(BATTLE_OPPOSITE(battlerId)), PARTY_SIZE, PARTY_SIZE))
+        if (!aliveOpposing1 && aliveOpposing2 && !HasNoMonsToSwitch(BATTLE_OPPOSITE(battlerId), PARTY_SIZE, PARTY_SIZE))
             return TRUE;
     }
 
@@ -7028,7 +7070,7 @@ static void Cmd_switchineffects(void)
             gBattleMoveDamage = 1;
 
         gSideStatuses[GetBattlerSide(gActiveBattler)] |= SIDE_STATUS_SPIKES_DAMAGED;
-        SetDmgHazardsBattlescript(gActiveBattler, 0);
+        SetDmgHazardsBattlescript(gActiveBattler, B_MSG_PKMNHURTBYSPIKES);
     }
     else if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_STEALTH_ROCK_DAMAGED)
         && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_STEALTH_ROCK)
@@ -7039,7 +7081,7 @@ static void Cmd_switchineffects(void)
         gBattleMoveDamage = GetStealthHazardDamage(gBattleMoves[MOVE_STEALTH_ROCK].type, gActiveBattler);
 
         if (gBattleMoveDamage != 0)
-            SetDmgHazardsBattlescript(gActiveBattler, 1);
+            SetDmgHazardsBattlescript(gActiveBattler, B_MSG_STEALTHROCKDMG);
     }
     else if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_TOXIC_SPIKES_DAMAGED)
         && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_TOXIC_SPIKES)
@@ -7481,6 +7523,12 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
         case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
             {
                 const struct TrainerMonItemCustomMoves *party = gTrainers[trainerId].party.ItemCustomMoves;
+                lastMonLevel = party[gTrainers[trainerId].partySize - 1].lvl;
+            }
+            break;
+        case F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED:
+            {
+                const struct TrainerMonCustomized *party = gTrainers[trainerId].party.EverythingCustomized;
                 lastMonLevel = party[gTrainers[trainerId].partySize - 1].lvl;
             }
             break;
@@ -12276,7 +12324,7 @@ static void Cmd_forcerandomswitch(void)
             *(gBattleStruct->battlerPartyIndexes + gBattlerTarget) = gBattlerPartyIndexes[gBattlerTarget];
             gBattlescriptCurrInstr = BattleScript_RoarSuccessSwitch;
             gBattleStruct->forcedSwitch |= gBitTable[gBattlerTarget];
-            *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = validMons[Random() % validMonsCount];
+            *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = validMons[RandomUniform(RNG_FORCE_RANDOM_SWITCH, 0, validMonsCount - 1)];
 
             if (!IsMultiBattle())
                 SwitchPartyOrder(gBattlerTarget);
@@ -12483,7 +12531,7 @@ static void Cmd_tryKO(void)
             if (gCurrentMove == MOVE_SHEER_COLD && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE))
                 odds -= 10;
         #endif
-            if (Random() % 100 + 1 < odds && gBattleMons[gBattlerAttacker].level >= gBattleMons[gBattlerTarget].level)
+            if (RandomPercentage(RNG_ACCURACY, odds) && gBattleMons[gBattlerAttacker].level >= gBattleMons[gBattlerTarget].level)
                 lands = TRUE;
         }
 
@@ -14699,38 +14747,40 @@ static void Cmd_assistattackselect(void)
     s32 chooseableMovesNo = 0;
     struct Pokemon *party;
     s32 monId, moveId;
-    u16 *validMoves = gBattleStruct->assistPossibleMoves;
+    u16 *validMoves = Alloc(sizeof(u16) * PARTY_SIZE * MAX_MON_MOVES);
 
-    if (GET_BATTLER_SIDE(gBattlerAttacker) != B_SIDE_PLAYER)
-        party = gEnemyParty;
-    else
-        party = gPlayerParty;
-
-    for (monId = 0; monId < PARTY_SIZE; monId++)
+    if (validMoves != NULL)
     {
-        if (monId == gBattlerPartyIndexes[gBattlerAttacker])
-            continue;
-        if (GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
-            continue;
-        if (GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
-            continue;
+        if (GET_BATTLER_SIDE(gBattlerAttacker) != B_SIDE_PLAYER)
+            party = gEnemyParty;
+        else
+            party = gPlayerParty;
 
-        for (moveId = 0; moveId < MAX_MON_MOVES; moveId++)
+        for (monId = 0; monId < PARTY_SIZE; monId++)
         {
-            s32 i = 0;
-            u16 move = GetMonData(&party[monId], MON_DATA_MOVE1 + moveId);
-
-            if (sForbiddenMoves[move] & FORBIDDEN_ASSIST)
+            if (monId == gBattlerPartyIndexes[gBattlerAttacker])
+                continue;
+            if (GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
+                continue;
+            if (GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
                 continue;
 
-            validMoves[chooseableMovesNo] = move;
-            chooseableMovesNo++;
+            for (moveId = 0; moveId < MAX_MON_MOVES; moveId++)
+            {
+                u16 move = GetMonData(&party[monId], MON_DATA_MOVE1 + moveId);
+
+                if (sForbiddenMoves[move] & FORBIDDEN_ASSIST)
+                    continue;
+
+                validMoves[chooseableMovesNo++] = move;
+            }
         }
     }
+
     if (chooseableMovesNo)
     {
         gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
-        gCalledMove = validMoves[((Random() & 0xFF) * chooseableMovesNo) >> 8];
+        gCalledMove = validMoves[Random() % chooseableMovesNo];
         gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
@@ -14738,6 +14788,8 @@ static void Cmd_assistattackselect(void)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
+
+    TRY_FREE_AND_SET_NULL(validMoves);
 }
 
 static void Cmd_trysetmagiccoat(void)

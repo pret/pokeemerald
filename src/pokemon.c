@@ -5783,9 +5783,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
     }
 
     // Skip using the item if it won't do anything
-    if (!ITEM_HAS_EFFECT(item))
-        return TRUE;
-    if (gItemEffectTable[item - ITEM_POTION] == NULL && item != ITEM_ENIGMA_BERRY_E_READER)
+    if (gItemEffectTable[item] == NULL && item != ITEM_ENIGMA_BERRY_E_READER)
         return TRUE;
 
     // Get item effect
@@ -5798,7 +5796,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
     }
     else
     {
-        itemEffect = gItemEffectTable[item - ITEM_POTION];
+        itemEffect = gItemEffectTable[item];
     }
 
     // Do item effect
@@ -6352,9 +6350,9 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
     offset = ITEM_EFFECT_ARG_START;
 
-    temp = gItemEffectTable[itemId - ITEM_POTION];
+    temp = gItemEffectTable[itemId];
 
-    if (!temp && itemId != ITEM_ENIGMA_BERRY_E_READER)
+    if (temp != NULL && !temp && itemId != ITEM_ENIGMA_BERRY_E_READER)
         return 0;
 
     if (itemId == ITEM_ENIGMA_BERRY_E_READER)
@@ -6482,7 +6480,7 @@ u8 *UseStatIncreaseItem(u16 itemId)
     }
     else
     {
-        itemEffect = gItemEffectTable[itemId - ITEM_POTION];
+        itemEffect = gItemEffectTable[itemId];
     }
 
     gPotentialItemEffectBattler = gBattlerInMenuId;
@@ -6556,7 +6554,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
         partnerSpecies = GetMonData(tradePartner, MON_DATA_SPECIES, 0);
         partnerHeldItem = GetMonData(tradePartner, MON_DATA_HELD_ITEM, 0);
 
-        if (partnerHeldItem == ITEM_ENIGMA_BERRY)
+        if (partnerHeldItem == ITEM_ENIGMA_BERRY_E_READER)
             partnerHoldEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
         else
             partnerHoldEffect = ItemId_GetHoldEffect(partnerHeldItem);
@@ -7226,7 +7224,7 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
     u8 bonus;
 
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
-    if (heldItem == ITEM_ENIGMA_BERRY)
+    if (heldItem == ITEM_ENIGMA_BERRY_E_READER)
     {
         if (gMain.inBattle)
             holdEffect = gEnigmaBerries[0].holdEffect;

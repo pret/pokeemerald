@@ -3473,6 +3473,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
     case EFFECT_TOXIC:
     case EFFECT_POISON:
+    case EFFECT_BARB_BARRAGE:
         IncreasePoisonScore(battlerAtk, battlerDef, move, &score);
         break;
     case EFFECT_LIGHT_SCREEN:
@@ -3864,6 +3865,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
 
     case EFFECT_SPIKES:
+    case EFFECT_HIT_SET_ENTRY_HAZARD:
     case EFFECT_STEALTH_ROCK:
     case EFFECT_STICKY_WEB:
     case EFFECT_TOXIC_SPIKES:
@@ -4898,6 +4900,7 @@ static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_HAIL:
     case EFFECT_GEOMANCY:
     case EFFECT_VICTORY_DANCE:
+    case EFFECT_HIT_SET_ENTRY_HAZARD:
         score += 2;
         break;
     default:
