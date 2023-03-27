@@ -247,6 +247,19 @@ static const struct FormChange sGalladeFormChangeTable[] = {
     {FORM_CHANGE_TERMINATOR},
 };
 
+
+static const struct FormChange sDialgaFormChangeTable[] = {
+    {FORM_CHANGE_ITEM_HOLD, SPECIES_DIALGA, ITEM_NONE},
+    {FORM_CHANGE_ITEM_HOLD, SPECIES_DIALGA_ORIGIN, ITEM_ADAMANT_CRYSTAL},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sPalkiaFormChangeTable[] = {
+    {FORM_CHANGE_ITEM_HOLD, SPECIES_PALKIA, ITEM_NONE},
+    {FORM_CHANGE_ITEM_HOLD, SPECIES_PALKIA_ORIGIN, ITEM_LUSTROUS_GLOBE},
+    {FORM_CHANGE_TERMINATOR},
+};
+
 static const struct FormChange sGiratinaFormChangeTable[] = {
     {FORM_CHANGE_ITEM_HOLD, SPECIES_GIRATINA, ITEM_NONE},
     {FORM_CHANGE_ITEM_HOLD, SPECIES_GIRATINA_ORIGIN, ITEM_GRISEOUS_ORB},

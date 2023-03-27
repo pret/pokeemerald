@@ -44,6 +44,7 @@ struct Runner
     char *output_buffer;
     int passes;
     int knownFails;
+    int todos;
     int assumptionFails;
     int fails;
     int results;
@@ -86,6 +87,9 @@ static void handle_read(struct Runner *runner)
                     goto add_to_results;
                 case 'K':
                     runner->knownFails++;
+                    goto add_to_results;
+                case 'T':
+                    runner->todos++;
                     goto add_to_results;
                 case 'A':
                     runner->assumptionFails++;
@@ -427,6 +431,7 @@ int main(int argc, char *argv[])
     int exit_code = 0;
     int passes = 0;
     int knownFails = 0;
+    int todos = 0;
     int assumptionFails = 0;
     int fails = 0;
     int results = 0;
@@ -444,6 +449,7 @@ int main(int argc, char *argv[])
             exit_code = WEXITSTATUS(wstatus);
         passes += runners[i].passes;
         knownFails += runners[i].knownFails;
+        todos += runners[i].todos;
         assumptionFails += runners[i].assumptionFails;
         fails += runners[i].fails;
         results += runners[i].results;
@@ -459,6 +465,8 @@ int main(int argc, char *argv[])
         fprintf(stdout, "- Tests \e[32mPASSED\e[0m:        %d\n", passes);
         if (knownFails > 0)
             fprintf(stdout, "- Tests \e[33mKNOWN_FAILING\e[0m: %d\n", knownFails);
+        if (todos > 0)
+            fprintf(stdout, "- Tests \e[33mTO_DO\e[0m:         %d\n", todos);
         if (fails > 0)
             fprintf(stdout, "- Tests \e[31mFAILED\e[0m :       %d\n", fails);
         if (assumptionFails > 0)

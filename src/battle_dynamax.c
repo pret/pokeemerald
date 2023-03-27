@@ -703,6 +703,7 @@ u16 SetMaxMoveEffect(u16 move)
         case MAX_EFFECT_STEALTH_ROCK:
             if (!(gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_STEALTH_ROCK))
             {
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_POINTEDSTONESFLOAT;
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_StealthRockActivates;
                 effect++;
@@ -711,6 +712,7 @@ u16 SetMaxMoveEffect(u16 move)
         case MAX_EFFECT_STEELSURGE:
             if (!(gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_STEELSURGE))
             {
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SHARPSTEELFLOATS;
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_SteelsurgeActivates;
                 effect++;

@@ -3817,3 +3817,78 @@ static const u8 sLoadedDiceDesc[] = _(
     "Rolls high numbers.\n"
     "Multihit strikes\n"
     "hit more times.");
+
+static const u8 sAuspiciousArmorDesc[] = _(
+    "Armor inhabited by\n"
+    "auspicious wishes.\n"
+    "Causes evolution.");
+
+static const u8 sBoosterEnergyDesc[] = _(
+    "Encapsuled energy\n"
+    "ups Pokémon with\n"
+    "certain Abilities.");
+
+static const u8 sBigBambooShootDesc[] = _(
+    "A large and rare\n"
+    "bamboo shoot. Best\n"
+    "sold to gourmands.");
+
+static const u8 sGimmighoulCoinDesc[] = _(
+    "Gimmighoul hoard\n"
+    "and treasure these\n"
+    "curious coins.");
+
+static const u8 sLeadersCrestDesc[] = _(
+    "A shard of an old\n"
+    "blade of some sort.\n"
+    "Held by Bisharp.");
+
+static const u8 sMaliciousArmorDesc[] = _(
+    "Armor inhabited by\n"
+    "malicious will.\n"
+    "Causes evolution.");
+
+static const u8 sMirrorHerbDesc[] = _(
+    "Mirrors an enemy's\n"
+    "stat increases\n"
+    "but only once.");
+
+static const u8 sScrollOfDarknessDesc[] = _(
+    "A peculiar scroll\n"
+    "with secrets of\n"
+    "the dark path.");
+
+static const u8 sScrollOfWatersDesc[] = _(
+    "A peculiar scroll\n"
+    "with secrets of\n"
+    "the water path.");
+
+static const u8 sTeraOrbDesc[] = _(
+    "Energy charges can\n"
+    "be used to cause\n"
+    "Terastallization.");
+
+static const u8 sTinyBambooShootDesc[] = _(
+    "A small and rare\n"
+    "bamboo shoot. Best\n"
+    "sold to gourmands.");
+
+static const u8 sTeraShardDesc[] = _(
+    "These shards may\n"
+    "form when a Tera\n"
+    "Pokémon faints.");
+
+static const u8 sAdamantCrystalDesc[] = _(
+    "A large, glowing gem\n"
+    "that lets Dialga\n"
+    "change form.");
+
+static const u8 sGriseousCoreDesc[] = _(
+    "A large, glowing gem\n"
+    "that lets Giratina\n"
+    "change form.");
+
+static const u8 sLustrousGlobeDesc[] = _(
+    "A large, glowing gem\n"
+    "that lets Palkia\n"
+    "change form.");

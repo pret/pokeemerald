@@ -946,4 +946,12 @@
 #define B_MSG_Z_STAT_UP       5
 #define B_MSG_Z_HP_TRAP       6
 
+// gDmgHazardsStringIds
+#define B_MSG_PKMNHURTBYSPIKES   0
+#define B_MSG_STEALTHROCKDMG     1
+#define B_MSG_SHARPSTEELDMG      2
+#define B_MSG_POINTEDSTONESFLOAT 3
+#define B_MSG_SPIKESSCATTERED    4
+#define B_MSG_SHARPSTEELFLOATS   5
+
 #endif // GUARD_CONSTANTS_BATTLE_STRING_IDS_H

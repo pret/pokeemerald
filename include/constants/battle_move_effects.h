@@ -401,8 +401,11 @@
 #define EFFECT_SHELL_TRAP                   395
 #define EFFECT_PSYBLADE                     396
 #define EFFECT_HYDRO_STEAM                  397
-#define EFFECT_MAX_MOVE                     398
+#define EFFECT_HIT_SET_ENTRY_HAZARD         398
+#define EFFECT_DIRE_CLAW                    399
+#define EFFECT_BARB_BARRAGE                 400
+#define EFFECT_MAX_MOVE                     401
 
-#define NUM_BATTLE_MOVE_EFFECTS             399
+#define NUM_BATTLE_MOVE_EFFECTS             402
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H
