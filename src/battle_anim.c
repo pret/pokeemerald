@@ -440,22 +440,24 @@ static u8 GetBattleAnimMoveTargets(u8 battlerArgIndex, u8 *targets)
     case MOVE_TARGET_BOTH:
         targets[0] = gBattleAnimArgs[battlerArgIndex];
         numTargets = 1;
-        if (IsBattlerAlive(targets[0] ^ BIT_FLANK)) {
-            targets[1] = targets[0] ^ BIT_FLANK;
-            numTargets++;
+        if (IsBattlerAlive(BATTLE_PARTNER(targets[0])))
+        {
+            targets[1] = BATTLE_PARTNER(targets[0]);
+            numTargets = 2;
         }
         break;
     case MOVE_TARGET_FOES_AND_ALLY:
         targets[0] = gBattleAnimArgs[battlerArgIndex];
         numTargets = 1;
-
-        if (IsBattlerAlive(targets[0] ^ BIT_FLANK)) {
-            targets[1] = targets[0] ^ BIT_FLANK;
+        if (IsBattlerAlive(BATTLE_PARTNER(targets[0])))
+        {
+            targets[1] = BATTLE_PARTNER(targets[0]);
             numTargets++;
         }
 
-        if (IsBattlerAlive(gBattleAnimAttacker ^ BIT_FLANK)) {
-            targets[2] = gBattleAnimAttacker ^ BIT_FLANK;
+        if (IsBattlerAlive(BATTLE_PARTNER(BATTLE_OPPOSITE(targets[0]))))
+        {
+            targets[2] = BATTLE_PARTNER(BATTLE_OPPOSITE(targets[0])); 
             numTargets++;
         }
         break;
