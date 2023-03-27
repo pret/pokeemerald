@@ -2566,14 +2566,14 @@ u8 DoFieldEndTurnEffects(void)
         case ENDTURN_WEATHER_FORM:
             for (i = 0; i < gBattlersCount; ++i)
             {
-                // This breaks Eiscue right now, because Eiscue doesn't use FORM_CHANGE_BATTLE_WEATHER.
-                if(TryBattleFormChange(i, FORM_CHANGE_BATTLE_WEATHER))
+                if (AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, i, 0, 0, 0))
                 {
-                    BattleScriptPushCursorAndCallback(BattleScript_BattlerFormChangeWithStringEnd3);
                     effect++;
+                    break;
                 }
             }
-            gBattleStruct->turnCountersTracker++;
+            if (effect == 0)
+                gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_STATUS_HEAL:
             for (gBattlerAttacker = 0; gBattlerAttacker < gBattlersCount; gBattlerAttacker++)
@@ -6163,7 +6163,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
 #else
         TRY_WEATHER_FORM:
 #endif
-            if (IsBattlerWeatherAffected(battler, gBattleWeather)
+            if ((IsBattlerWeatherAffected(battler, gBattleWeather) || gBattleWeather == B_WEATHER_NONE)
              && TryBattleFormChange(battler, FORM_CHANGE_BATTLE_WEATHER))
             {
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerFormChangeWithStringEnd3);
