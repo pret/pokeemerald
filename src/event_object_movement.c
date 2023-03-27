@@ -1318,11 +1318,12 @@ static u8 InitObjectEventStateFromTemplate(const struct ObjectEventTemplate *tem
     objectEvent->active = TRUE;
     objectEvent->triggerGroundEffectsOnMove = TRUE;
     objectEvent->graphicsId = PackGraphicsId(template);
+    SetObjectEventDynamicGraphicsId(objectEvent);
     if (objectEvent->graphicsId >= OBJ_EVENT_GFX_MON_BASE) {
         if (template->script && template->script[0] == 0x7d)
             objectEvent->shiny = T1_READ_16(&template->script[2]) >> 15;
         else if (template->trainerRange_berryTreeId)
-            objectEvent->shiny = template->trainerRange_berryTreeId >> 5;
+            objectEvent->shiny = VarGet(template->trainerRange_berryTreeId) >> 5;
     }
     objectEvent->movementType = template->movementType;
     objectEvent->localId = template->localId;
@@ -1343,7 +1344,6 @@ static u8 InitObjectEventStateFromTemplate(const struct ObjectEventTemplate *tem
     objectEvent->trainerRange_berryTreeId = template->trainerRange_berryTreeId;
     objectEvent->previousMovementDirection = gInitialMovementTypeFacingDirections[template->movementType];
     SetObjectEventDirection(objectEvent, objectEvent->previousMovementDirection);
-    SetObjectEventDynamicGraphicsId(objectEvent);
     if (sMovementTypeHasRange[objectEvent->movementType])
     {
         if (objectEvent->rangeX == 0)
@@ -1823,9 +1823,7 @@ static u8 GetOverworldCastformForm(void) {
     return CASTFORM_NORMAL;
 }
 
-// Retrieve graphic information about the following pokemon, if any
-static bool8 GetFollowerInfo(u16 *species, u8 *form, u8 *shiny) {
-    struct Pokemon *mon = GetFirstLiveMon();
+static bool8 GetMonInfo(struct Pokemon * mon, u16 *species, u8 *form, u8 *shiny) {
     if (!mon) {
         *species = SPECIES_NONE;
         *form = 0;
@@ -1845,6 +1843,11 @@ static bool8 GetFollowerInfo(u16 *species, u8 *form, u8 *shiny) {
         break;
     }
     return TRUE;
+}
+
+// Retrieve graphic information about the following pokemon, if any
+static bool8 GetFollowerInfo(u16 *species, u8 *form, u8 *shiny) {
+    return GetMonInfo(GetFirstLiveMon(), species, form, shiny);
 }
 
 void UpdateFollowingPokemon(void) { // Update following pokemon if any
@@ -10122,4 +10125,26 @@ u8 MovementAction_FlyDown_Step1(struct ObjectEvent *objectEvent, struct Sprite *
 u8 MovementAction_Fly_Finish(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     return TRUE;
+}
+
+// Get gfx data from daycare pokemon and store it in vars
+bool8 ScrFunc_getdaycaregfx(struct ScriptContext *ctx) {
+    u16 varGfx[] = {ScriptReadHalfword(ctx), ScriptReadHalfword(ctx)};
+    u16 varForm[] = {ScriptReadHalfword(ctx), ScriptReadHalfword(ctx)};
+    u16 specGfx;
+    u8 form;
+    u8 shiny;
+    s32 i;
+    for (i = 0; i < 2; i++) {
+        GetMonInfo((struct Pokemon *) &gSaveBlock1Ptr->daycare.mons[i].mon, &specGfx, &form, &shiny);
+        if (specGfx == SPECIES_NONE)
+            break;
+        // Assemble gfx ID like FollowerSetGraphics
+        specGfx = (OBJ_EVENT_GFX_MON_BASE + specGfx) & OBJ_EVENT_GFX_SPECIES_MASK;
+        specGfx |= form << OBJ_EVENT_GFX_SPECIES_BITS;
+        VarSet(varGfx[i], specGfx);
+        VarSet(varForm[i], form | (shiny << 5));
+    }
+    gSpecialVar_Result = i;
+    return FALSE;
 }
