@@ -10642,8 +10642,8 @@ BattleScript_RecycleBerriesAlliesEnd:
 
 BattleScript_DynamaxBegins::
 	printstring STRINGID_EMPTYSTRING3
-	playanimation BS_SCRIPTING, B_ANIM_SLIDE_OFFSCREEN
-	waitanimation
+	returnatktoball
+	pause B_WAIT_TIME_SHORT
 	returntoball BS_SCRIPTING
 	switchinanim BS_SCRIPTING, TRUE
 	updatedynamax
