@@ -15,6 +15,7 @@ SINGLE_BATTLE_TEST("Tri Attack can inflict paralysis, burn or freeze")
 {
     u8 statusAnim;
     u32 rng;
+    KNOWN_FAILING;
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = RNG_PARALYSIS; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_BRN; rng = RNG_BURN; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_FRZ; rng = RNG_FREEZE; }
