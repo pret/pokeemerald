@@ -145,6 +145,7 @@ struct ProtectStruct
     u16 quash:1;
     u16 shellTrap:1;
     u16 silkTrapped:1;
+    u16 eatMirrorHerb:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;
