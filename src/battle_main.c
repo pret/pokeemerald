@@ -4096,7 +4096,8 @@ static void HandleTurnActionSelectionState(void)
 
             // Do AI score computations here so we can use them in AI_TrySwitchOrUseItem
             if ((gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart())
-                    && (BattlerHasAi(gActiveBattler) && !(gBattleTypeFlags & BATTLE_TYPE_PALACE))) {
+                    && (BattlerHasAi(gActiveBattler) && !(gBattleTypeFlags & BATTLE_TYPE_PALACE)))
+            {
                 gBattleStruct->aiMoveOrAction[gActiveBattler] = ComputeBattleAiScores(gActiveBattler);
             }
             break;
