@@ -457,7 +457,7 @@ void RecordLastUsedMoveByTarget(void)
     RecordKnownMove(gBattlerTarget, gLastMoves[gBattlerTarget]);
 }
 
-bool32 IsBattlerAIControlled(u32 battlerId)
+bool32 BattlerHasAi(u32 battlerId)
 {
     switch (GetBattlerPosition(battlerId))
     {
@@ -471,6 +471,14 @@ bool32 IsBattlerAIControlled(u32 battlerId)
     case B_POSITION_OPPONENT_RIGHT:
         return TRUE;
     }
+}
+
+bool32 IsBattlerAIControlled(u32 battlerId)
+{
+    if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_OMNISCIENT)
+        return TRUE;
+    
+    return BattlerHasAi(battlerId);
 }
 
 void ClearBattlerMoveHistory(u8 battlerId)
@@ -1230,8 +1238,9 @@ s32 AI_GetAbility(u32 battlerId)
     if (knownAbility == ABILITY_NONE)
         return knownAbility;
 
-    if (BATTLE_HISTORY->abilities[battlerId] != ABILITY_NONE)
-        return BATTLE_HISTORY->abilities[battlerId];
+    if (AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].ability != ABILITY_NONE) {
+        return AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].ability;
+    }
 
     // Abilities that prevent fleeing - treat as always known
     if (knownAbility == ABILITY_SHADOW_TAG || knownAbility == ABILITY_MAGNET_PULL || knownAbility == ABILITY_ARENA_TRAP)
@@ -1257,10 +1266,10 @@ u16 AI_GetHoldEffect(u32 battlerId)
     u32 holdEffect;
 
     if (!IsBattlerAIControlled(battlerId))
-        holdEffect = BATTLE_HISTORY->itemEffects[battlerId];
+        holdEffect = AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].heldEffect;
     else
         holdEffect = GetBattlerHoldEffect(battlerId, FALSE);
-
+    
     if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_NEGATE_UNAWARE)
         return holdEffect;
 
