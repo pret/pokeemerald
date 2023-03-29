@@ -1370,8 +1370,16 @@ static void Task_UseFly(u8 taskId)
             gFieldEffectArguments[0] = 0;
 
         FieldEffectStart(FLDEFF_USE_FLY);
-        FollowerIntoPokeball();
-        
+
+        if (gSaveBlock2Ptr->follower.inProgress)
+        {
+            // In case the player just exited a building and the follower has not exited the building
+            gSaveBlock2Ptr->follower.comeOutDoorStairs = 0;
+            gSaveBlock2Ptr->follower.warpEnd = 0;
+            
+            FollowerIntoPokeball();
+        }
+
         task->data[0]++;
     }
     
