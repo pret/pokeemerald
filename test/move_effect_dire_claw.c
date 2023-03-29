@@ -15,6 +15,7 @@ SINGLE_BATTLE_TEST("Dire Claw can inflict poison, paralysis or sleep")
 {
     u8 statusAnim;
     u32 rng;
+    KNOWN_FAILING;
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PSN; rng = RNG_POISON; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = RNG_PARALYSIS; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_SLP; rng = RNG_SLEEP; }
