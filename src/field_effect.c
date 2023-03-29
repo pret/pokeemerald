@@ -3064,7 +3064,15 @@ static void SurfFieldEffect_FieldMovePose(struct Task *task)
         SetPlayerAvatarFieldMove();
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->tState++;
-        FollowerIntoPokeball();
+        
+        if (gSaveBlock2Ptr->follower.inProgress)
+        {
+            // in case the follower hasn't left a warp yet
+            gSaveBlock2Ptr->follower.comeOutDoorStairs = 0;
+            gSaveBlock2Ptr->follower.warpEnd = 0;
+            
+            FollowerIntoPokeball();
+        }
     }
 }
 
