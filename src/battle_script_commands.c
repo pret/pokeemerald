@@ -3801,13 +3801,13 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             case MOVE_EFFECT_TRIPLE_ARROWS:
                 {
-                    u8 randomChance = Random() % 100;
-                    if (randomChance < 50) // Chance to reduce a foe's Defense by 1 stat stage.
+                    u8 randomChance = RandomUniform(RNG_TRIPLE_ARROWS, 1, 10);
+                    if (randomChance <= 5) // Chance to reduce a foe's Defense by 1 stat stage.
                     {
                         BattleScriptPush(gBattlescriptCurrInstr + 1);
                         gBattlescriptCurrInstr = BattleScript_DefDown;
                     }
-                    if (randomChance >= 50 && randomChance <= 80) // Chance to cause a foe to flinch.
+                    if (randomChance > 5 && randomChance <= 8) // Chance to cause a foe to flinch.
                     {
                         if (battlerAbility == ABILITY_INNER_FOCUS && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
                         {
