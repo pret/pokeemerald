@@ -479,10 +479,22 @@ BattleScript_AxeKickHitFromAtkString:
 	end
 
 BattleScript_EffectTakeHeart::
-	printstring STRINGID_EMPTYSTRING3
+	attackcanceler
+	accuracycheck BattleScript_AxeKickMissedDoDamage, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	attackanimation
+	waitanimation
+	jumpifstatus BS_ATTACKER, STATUS1_ANY, BattleScript_TakeHeart_HealStatusConditions
+	goto BattleScript_TakeHeart_TryToRaiseSpecialStats
+BattleScript_TakeHeart_HealStatusConditions:
+	curestatus BS_ATTACKER
+	updatestatusicon BS_ATTACKER
+	printstring STRINGID_PKMNSTATUSNORMAL
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_TakeHeart_TryToRaiseSpecialStats:
 	modifybattlerstatstage BS_ATTACKER, STAT_SPATK, INCREASE, 1, BattleScript_TakeHeartTrySpDef, ANIM_ON
 BattleScript_TakeHeartTrySpDef:
-	printstring STRINGID_EMPTYSTRING3
 	modifybattlerstatstage BS_ATTACKER, STAT_SPDEF, INCREASE, 1, BattleScript_TakeHeart_MoveEnd, ANIM_ON
 BattleScript_TakeHeart_MoveEnd:
 	goto BattleScript_MoveEnd
