@@ -190,6 +190,9 @@
 #define FRIENDSHIP_200_TO_254  5
 #define FRIENDSHIP_MAX         6
 
+// Friendship value that the majority of species use. This was changed in Generation 8 to 50.
+#define STANDARD_FRIENDSHIP 70
+
 #define MAX_FRIENDSHIP  255
 #define MAX_SHEEN       255
 #define MAX_CONDITION   255
