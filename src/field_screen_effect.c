@@ -344,14 +344,23 @@ static void Task_ExitDoor(u8 taskId)
         if (IsPlayerStandingStill())
         {
             u8 objEventId;
-            task->data[1] = FieldAnimateDoorClose(*x, *y);
+            
+        #if FAST_FOLLOWERS == TRUE
+            if (!gSaveBlock2Ptr->follower.inProgress)
+        #endif
+                task->data[1] = FieldAnimateDoorClose(*x, *y);
+            
             objEventId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
             ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objEventId]);
             task->tState = 3;
         }
         break;
     case 3:
+    #if FAST_FOLLOWERS == TRUE
+        if (gSaveBlock2Ptr->follower.inProgress || task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
+    #else
         if (task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
+    #endif
         {
             FollowMe_SetIndicatorToComeOutDoor();
             FollowMe_WarpSetEnd();
@@ -362,6 +371,12 @@ static void Task_ExitDoor(u8 taskId)
     case 4:
         UnlockPlayerFieldControls();
         DestroyTask(taskId);
+        
+    #if FAST_FOLLOWERS == TRUE
+        if (gSaveBlock2Ptr->follower.inProgress)
+            FlagSet(FLAG_FOLLOWER_IN_BUILDING);
+    #endif
+        
         break;
     }
 }

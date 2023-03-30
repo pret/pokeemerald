@@ -1,8 +1,10 @@
 #include "global.h"
 #include "decompress.h"
+#include "event_data.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
 #include "field_control_avatar.h"
+#include "field_door.h"
 #include "field_effect.h"
 #include "field_effect_helpers.h"
 #include "field_player_avatar.h"
@@ -1371,6 +1373,18 @@ static void Task_UseFly(u8 taskId)
 
         FieldEffectStart(FLDEFF_USE_FLY);
 
+    #if FAST_FOLLOWERS == TRUE
+        if (FlagGet(FLAG_FOLLOWER_IN_BUILDING))
+        {
+            // In case the player just exited a building and the follower has not exited the building
+            FlagClear(FLAG_FOLLOWER_IN_BUILDING);
+            gSaveBlock2Ptr->follower.comeOutDoorStairs = 0;
+            gSaveBlock2Ptr->follower.warpEnd = 0;
+            FieldAnimateDoorClose(gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y - 1);
+        }
+        else
+            FollowerIntoPokeball();
+    #else
         if (gSaveBlock2Ptr->follower.inProgress)
         {
             // In case the player just exited a building and the follower has not exited the building
@@ -1379,6 +1393,7 @@ static void Task_UseFly(u8 taskId)
             
             FollowerIntoPokeball();
         }
+    #endif
 
         task->data[0]++;
     }
@@ -3065,6 +3080,18 @@ static void SurfFieldEffect_FieldMovePose(struct Task *task)
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->tState++;
         
+    #if FAST_FOLLOWERS == TRUE
+        if (FlagGet(FLAG_FOLLOWER_IN_BUILDING))
+        {
+            // in case the follower hasn't left a warp yet
+            FlagClear(FLAG_FOLLOWER_IN_BUILDING);
+            gSaveBlock2Ptr->follower.comeOutDoorStairs = 0;
+            gSaveBlock2Ptr->follower.warpEnd = 0;
+            FieldAnimateDoorClose(gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y - 1);
+        }
+        else
+            FollowerIntoPokeball();
+    #else
         if (gSaveBlock2Ptr->follower.inProgress)
         {
             // in case the follower hasn't left a warp yet
@@ -3073,6 +3100,7 @@ static void SurfFieldEffect_FieldMovePose(struct Task *task)
             
             FollowerIntoPokeball();
         }
+    #endif
     }
 }
 
