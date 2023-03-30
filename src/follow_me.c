@@ -249,6 +249,18 @@ void FollowMe(struct ObjectEvent* npc, u8 state, bool8 ignoreScriptActive)
     {
         gSaveBlock2Ptr->follower.warpEnd = 0;
 
+    #if FAST_FOLLOWERS == TRUE
+        if (gSaveBlock2Ptr->follower.comeOutDoorStairs == 1 || (FlagGet(FLAG_FOLLOWER_IN_BUILDING) && gMapHeader.mapType != MAP_TYPE_INDOOR))
+        {
+            if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_BIKE))
+            {
+                FlagClear(FLAG_FOLLOWER_IN_BUILDING);
+                gSaveBlock2Ptr->follower.comeOutDoorStairs = 0;
+                FieldAnimateDoorClose(player->currentCoords.x, player->currentCoords.y - 1);
+            }
+            else
+            {
+    #else
         if (gSaveBlock2Ptr->follower.comeOutDoorStairs == 1)
         {
             if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_BIKE))
@@ -256,6 +268,7 @@ void FollowMe(struct ObjectEvent* npc, u8 state, bool8 ignoreScriptActive)
             else
             {
                 gPlayerAvatar.preventStep = TRUE;
+    #endif
                 taskId = CreateTask(Task_FollowerOutOfDoor, 1);
                 gTasks[taskId].data[0] = 0;
                 gTasks[taskId].data[2] = follower->currentCoords.x;
@@ -809,12 +822,23 @@ void Task_DoDoorWarp(u8 taskId)
         FreezeObjectEvents();
         PlayerGetDestCoords(x, y);
         PlaySE(GetDoorSoundEffect(*x, *y - 1));
-        task->data[1] = FieldAnimateDoorOpen(*x, *y - 1);
+        
+    #if FAST_FOLLOWERS == TRUE
+        if (!FlagGet(FLAG_FOLLOWER_IN_BUILDING))
+    #endif
+            task->data[1] = FieldAnimateDoorOpen(*x, *y - 1);
+        
         task->data[0] = 1;
         break;
     case 1:
+    #if FAST_FOLLOWERS == TRUE
+        if (FlagGet(FLAG_FOLLOWER_IN_BUILDING) || task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
+        {
+            FlagClear(FLAG_FOLLOWER_IN_BUILDING);
+    #else
         if (task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
         {
+    #endif
             ObjectEventClearHeldMovementIfActive(&gObjectEvents[playerObjId]);
             ObjectEventSetHeldMovement(&gObjectEvents[playerObjId], MOVEMENT_ACTION_WALK_NORMAL_UP);
 
@@ -890,11 +914,35 @@ static void Task_FollowerOutOfDoor(u8 taskId)
     //if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH) && ObjectEventClearHeldMovementIfFinished(player))
         //SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT); //Temporarily stop running
 
+#if FAST_FOLLOWERS == FALSE
     if (ObjectEventClearHeldMovementIfFinished(player))
         ObjectEventTurn(player, GetPlayerFaceToDoorDirection(player, follower)); //The player should face towards the follow as the exit the door
+#endif
 
     switch (task->data[0])
     {
+#if FAST_FOLLOWERS == TRUE
+    case 0:
+        FlagClear(FLAG_FOLLOWER_IN_BUILDING);
+        FreezeObjectEvents();
+        
+        task->data[0] = 1;
+        break;
+    case 1:
+        follower->invisible = FALSE;
+        ObjectEventTurn(follower, DIR_SOUTH); //The follower should be facing down when it comes out the door
+        follower->singleMovementActive = FALSE;
+        follower->heldMovementActive = FALSE;
+        
+        if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH))
+            ObjectEventSetHeldMovement(follower, MOVEMENT_ACTION_WALK_FASTER_DOWN);
+        else
+            ObjectEventSetHeldMovement(follower, MOVEMENT_ACTION_WALK_FAST_DOWN); //follower step down
+        task->data[0] = 2;
+        break;
+    case 2:
+        if (/*ObjectEventClearHeldMovementIfFinished(follower)*/follower->currentCoords.y == *y + 1)
+#else
     case 0:
         FreezeObjectEvents();
         task->data[1] = FieldAnimateDoorOpen(follower->currentCoords.x, follower->currentCoords.y);
@@ -916,6 +964,7 @@ static void Task_FollowerOutOfDoor(u8 taskId)
         break;
     case 2:
         if (/*ObjectEventClearHeldMovementIfFinished(follower)*/follower->movementActionId == 0x9E)
+#endif
         {
             task->data[1] = FieldAnimateDoorClose(*x, *y);
             task->data[0] = 3;

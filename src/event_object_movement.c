@@ -49,6 +49,8 @@ enum {
     JUMP_DISTANCE_IN_PLACE,
     JUMP_DISTANCE_NORMAL,
     JUMP_DISTANCE_FAR,
+    JUMP_DISTANCE_FAR_QUICK,
+    JUMP_DISTANCE_FAR_QUICKER,
 };
 
 // Sprite data used throughout
@@ -6107,7 +6109,19 @@ bool8 MovementAction_WalkSlowDiagonalDownRight_Step1(struct ObjectEvent *objectE
 
 bool8 MovementAction_WalkSlowDown_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitWalkSlow(objectEvent, sprite, DIR_SOUTH);
+    if(gSaveBlock2Ptr->follower.inProgress && objectEvent == &gObjectEvents[gSaveBlock2Ptr->follower.objId])
+    {
+        if(sprite->data[7] != 19)
+        {
+            sprite->data[7] = 19;
+            sprite->animNum = 4;
+            sprite->x2 = 0;
+            SeekSpriteAnim(sprite, ++sprite->animCmdIndex);
+        }
+        InitWalkSlow(objectEvent, sprite, DIR_SOUTH);
+    }
+    else
+        InitWalkSlow(objectEvent, sprite, DIR_SOUTH);
     return MovementAction_WalkSlowDown_Step1(objectEvent, sprite);
 }
 
@@ -6123,7 +6137,19 @@ bool8 MovementAction_WalkSlowDown_Step1(struct ObjectEvent *objectEvent, struct 
 
 bool8 MovementAction_WalkSlowUp_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitWalkSlow(objectEvent, sprite, DIR_NORTH);
+    if(gSaveBlock2Ptr->follower.inProgress && objectEvent == &gObjectEvents[gSaveBlock2Ptr->follower.objId])
+    {
+        if(sprite->data[7] != 20)
+        {
+            sprite->data[7] = 20;
+            sprite->animNum = 5;
+            sprite->x2 = 0;
+            SeekSpriteAnim(sprite, ++sprite->animCmdIndex);
+        }
+        InitWalkSlow(objectEvent, sprite, DIR_NORTH);
+    }
+    else
+        InitWalkSlow(objectEvent, sprite, DIR_NORTH);
     return MovementAction_WalkSlowUp_Step1(objectEvent, sprite);
 }
 
@@ -6139,7 +6165,19 @@ bool8 MovementAction_WalkSlowUp_Step1(struct ObjectEvent *objectEvent, struct Sp
 
 bool8 MovementAction_WalkSlowLeft_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitWalkSlow(objectEvent, sprite, DIR_WEST);
+    if(gSaveBlock2Ptr->follower.inProgress && objectEvent == &gObjectEvents[gSaveBlock2Ptr->follower.objId])
+    {
+        if(sprite->data[7] != 21)
+        {
+            sprite->data[7] = 21;
+            sprite->animNum = 6;
+            sprite->x2 = 8;
+            SeekSpriteAnim(sprite, ++sprite->animCmdIndex);
+        }
+        InitWalkSlow(objectEvent, sprite, DIR_WEST);
+    }
+    else
+        InitWalkSlow(objectEvent, sprite, DIR_WEST);
     return MovementAction_WalkSlowLeft_Step1(objectEvent, sprite);
 }
 
@@ -6155,7 +6193,19 @@ bool8 MovementAction_WalkSlowLeft_Step1(struct ObjectEvent *objectEvent, struct 
 
 bool8 MovementAction_WalkSlowRight_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitWalkSlow(objectEvent, sprite, DIR_EAST);
+    if(gSaveBlock2Ptr->follower.inProgress && objectEvent == &gObjectEvents[gSaveBlock2Ptr->follower.objId])
+    {
+        if(sprite->data[7] != 22)
+        {
+            sprite->data[7] = 22;
+            sprite->animNum = 7;
+            sprite->x2 = -8;
+            SeekSpriteAnim(sprite, ++sprite->animCmdIndex);
+        }
+        InitWalkSlow(objectEvent, sprite, DIR_EAST);
+    }
+    else
+        InitWalkSlow(objectEvent, sprite, DIR_EAST);
     return MovementAction_WalkSlowRight_Step1(objectEvent, sprite);
 }
 
@@ -6352,6 +6402,9 @@ enum {
     JUMP_TYPE_HIGH,
     JUMP_TYPE_LOW,
     JUMP_TYPE_NORMAL,
+#if FAST_FOLLOWERS == TRUE
+    JUMP_TYPE_QUICK,
+#endif
 };
 
 static void InitJump(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 distance, u8 type)
@@ -6459,8 +6512,18 @@ bool8 MovementAction_Jump2Down_Step0(struct ObjectEvent *objectEvent, struct Spr
     {
         sprite->x2 = 0;
         sprite->data[7] = 10;
+#if FAST_FOLLOWERS == TRUE
+        if(TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH))
+            InitJumpRegular(objectEvent, sprite, DIR_SOUTH, JUMP_DISTANCE_FAR_QUICKER, JUMP_TYPE_QUICK);
+        else
+            InitJumpRegular(objectEvent, sprite, DIR_SOUTH, JUMP_DISTANCE_FAR_QUICK, JUMP_TYPE_QUICK);
+    }
+    else
+        InitJumpRegular(objectEvent, sprite, DIR_SOUTH, JUMP_DISTANCE_FAR, JUMP_TYPE_HIGH);
+#else
     }
     InitJumpRegular(objectEvent, sprite, DIR_SOUTH, JUMP_DISTANCE_FAR, JUMP_TYPE_HIGH);
+#endif
     return MovementAction_Jump2Down_Step1(objectEvent, sprite);
 }
 
@@ -6481,8 +6544,18 @@ bool8 MovementAction_Jump2Up_Step0(struct ObjectEvent *objectEvent, struct Sprit
     {
         sprite->x2 = 0;
         sprite->data[7] = 10;
+#if FAST_FOLLOWERS == TRUE
+        if(TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH))
+            InitJumpRegular(objectEvent, sprite, DIR_NORTH, JUMP_DISTANCE_FAR_QUICKER, JUMP_TYPE_QUICK);
+        else
+            InitJumpRegular(objectEvent, sprite, DIR_NORTH, JUMP_DISTANCE_FAR_QUICK, JUMP_TYPE_QUICK);
+    }
+    else
+        InitJumpRegular(objectEvent, sprite, DIR_NORTH, JUMP_DISTANCE_FAR, JUMP_TYPE_HIGH);
+#else
     }
     InitJumpRegular(objectEvent, sprite, DIR_NORTH, JUMP_DISTANCE_FAR, JUMP_TYPE_HIGH);
+#endif
     return MovementAction_Jump2Up_Step1(objectEvent, sprite);
 }
 
@@ -6503,8 +6576,18 @@ bool8 MovementAction_Jump2Left_Step0(struct ObjectEvent *objectEvent, struct Spr
     {
         sprite->x2 = 8;
         sprite->data[7] = 10;
+#if FAST_FOLLOWERS == TRUE
+        if(TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH))
+            InitJumpRegular(objectEvent, sprite, DIR_WEST, JUMP_DISTANCE_FAR_QUICKER, JUMP_TYPE_QUICK);
+        else
+            InitJumpRegular(objectEvent, sprite, DIR_WEST, JUMP_DISTANCE_FAR_QUICK, JUMP_TYPE_QUICK);
+    }
+    else
+        InitJumpRegular(objectEvent, sprite, DIR_WEST, JUMP_DISTANCE_FAR, JUMP_TYPE_HIGH);
+#else
     }
     InitJumpRegular(objectEvent, sprite, DIR_WEST, JUMP_DISTANCE_FAR, JUMP_TYPE_HIGH);
+#endif
     return MovementAction_Jump2Left_Step1(objectEvent, sprite);
 }
 
@@ -6525,8 +6608,18 @@ bool8 MovementAction_Jump2Right_Step0(struct ObjectEvent *objectEvent, struct Sp
     {
         sprite->x2 = -8;
         sprite->data[7] = 10;
+#if FAST_FOLLOWERS == TRUE
+        if(TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH))
+            InitJumpRegular(objectEvent, sprite, DIR_EAST, JUMP_DISTANCE_FAR_QUICKER, JUMP_TYPE_QUICK);
+        else
+            InitJumpRegular(objectEvent, sprite, DIR_EAST, JUMP_DISTANCE_FAR_QUICK, JUMP_TYPE_QUICK);
+    }
+    else
+        InitJumpRegular(objectEvent, sprite, DIR_EAST, JUMP_DISTANCE_FAR, JUMP_TYPE_HIGH);
+#else
     }
     InitJumpRegular(objectEvent, sprite, DIR_EAST, JUMP_DISTANCE_FAR, JUMP_TYPE_HIGH);
+#endif
     return MovementAction_Jump2Right_Step1(objectEvent, sprite);
 }
 
@@ -9594,10 +9687,19 @@ static const s8 sJumpY_Normal[] = {
     -9,  -8,  -6,  -5,  -3,  -2,   0,   0
 };
 
+#if FAST_FOLLOWERS == TRUE
+static const s8 sJumpY_Quick[] = {
+    -2, -4, -6, -8, -6, -4, -2, 0, 0
+};
+#endif
+
 static const s8 *const sJumpYTable[] = {
     [JUMP_TYPE_HIGH]   = sJumpY_High,
     [JUMP_TYPE_LOW]    = sJumpY_Low,
-    [JUMP_TYPE_NORMAL] = sJumpY_Normal
+    [JUMP_TYPE_NORMAL] = sJumpY_Normal,
+#if FAST_FOLLOWERS == TRUE
+    [JUMP_TYPE_QUICK] = sJumpY_Quick,
+#endif
 };
 
 static s16 GetJumpY(s16 i, u8 type)
@@ -9623,16 +9725,35 @@ static u8 DoJumpSpriteMovement(struct Sprite *sprite)
         [JUMP_DISTANCE_IN_PLACE] = 16,
         [JUMP_DISTANCE_NORMAL] = 16,
         [JUMP_DISTANCE_FAR] = 32,
+    #if FAST_FOLLOWERS == TRUE
+        [JUMP_DISTANCE_FAR_QUICK] = 16,
+        [JUMP_DISTANCE_FAR_QUICKER] = 8,
+    #endif
     };
     u8 distanceToShift[] = {
         [JUMP_DISTANCE_IN_PLACE] = 0,
         [JUMP_DISTANCE_NORMAL] = 0,
         [JUMP_DISTANCE_FAR] = 1,
+    #if FAST_FOLLOWERS == TRUE
+        [JUMP_DISTANCE_FAR_QUICK] = 1,
+        [JUMP_DISTANCE_FAR_QUICKER] = 0,
+    #endif
     };
     u8 result = 0;
 
     if (sprite->sDistance != JUMP_DISTANCE_IN_PLACE)
+#if FAST_FOLLOWERS == TRUE
+    {
+        if (sprite->sDistance == JUMP_DISTANCE_FAR_QUICKER)
+            Step4(sprite, sprite->sDirection);
+        else if (sprite->sDistance == JUMP_DISTANCE_FAR_QUICK)
+            Step2(sprite, sprite->sDirection);
+        else
+            Step1(sprite, sprite->sDirection);
+    }
+#else
         Step1(sprite, sprite->sDirection);
+#endif
 
     sprite->y2 = GetJumpY(sprite->sTimer >> distanceToShift[sprite->sDistance], sprite->sJumpType);
 
