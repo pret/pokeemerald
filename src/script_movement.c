@@ -1,4 +1,5 @@
 #include "global.h"
+#include "event_data.h"
 #include "script_movement.h"
 #include "event_object_movement.h"
 #include "task.h"
@@ -26,6 +27,14 @@ bool8 ScriptMovement_StartObjectMovementScript(u8 localId, u8 mapNum, u8 mapGrou
         return TRUE;
     if (!FuncIsActiveTask(ScriptMovement_MoveObjects))
         ScriptMovement_StartMoveObjects(50);
+    if (gSaveBlock2Ptr->follower.inProgress && objEventId == gSaveBlock2Ptr->follower.objId)
+    {
+        gSaveBlock2Ptr->follower.comeOutDoorStairs = 0;
+        gSaveBlock2Ptr->follower.warpEnd = 0;
+    #if FAST_FOLLOWERS == TRUE
+        FlagClear(FLAG_FOLLOWER_IN_BUILDING);
+    #endif
+    }
     return ScriptMovement_TryAddNewMovement(GetMoveObjectsTaskId(), objEventId, movementScript);
 }
 
