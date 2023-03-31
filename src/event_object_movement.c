@@ -20,6 +20,7 @@
 #include "palette.h"
 #include "pokemon.h"
 #include "random.h"
+#include "script.h"
 #include "sprite.h"
 #include "task.h"
 #include "trainer_see.h"
@@ -10313,7 +10314,8 @@ u8 MovementAction_FollowingPokemon_Step0(struct ObjectEvent *objectEvent, struct
             sprite->animNum = sprite->animNum % 4;
         SeekSpriteAnim(sprite, ++sprite->animCmdIndex);        
     }
-    return FALSE;
+    
+    return ArePlayerFieldControlsLocked();
 }
 
 void RecreateObjectEvent(struct ObjectEvent *objectEvent, struct Sprite *sprite)
