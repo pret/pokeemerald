@@ -11,6 +11,7 @@
 #include "event_scripts.h"
 #include "field_camera.h"
 #include "field_control_avatar.h"
+#include "field_door.h"
 #include "field_effect.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
