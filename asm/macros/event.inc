@@ -1984,3 +1984,8 @@
     setvar VAR_UNUSED_0x8014, 0
     callnative FollowerIntoPokeball
     .endm
+    
+    .macro setfollowerwarppos pos:req
+    setvar VAR_RESULT, \pos
+    callnative SetFollowerWarpPosition
+    .endm

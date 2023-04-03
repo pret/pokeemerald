@@ -10838,6 +10838,29 @@ u8 MovementAction_FollowingPokemon_Grow_Step1(struct ObjectEvent *objectEvent, s
             StartFieldEffectForObjectEvent(FLDEFF_FEET_IN_FLOWING_WATER, objectEvent);
         }
         gPlayerAvatar.preventStep = FALSE;
+        
+        // Account for warps in scripts where the follower needs to pop out of a pokeball afterwards
+        if (gSaveBlock2Ptr->follower.createSurfBlob == 2)
+        {
+            sprite->data[7] = 0;
+            gSaveBlock2Ptr->follower.createSurfBlob = 0;
+            switch(gObjectEvents[gPlayerAvatar.objectEventId].facingDirection)
+            {
+                case DIR_SOUTH:
+                    ObjectEventForceSetHeldMovement(objectEvent, MOVEMENT_ACTION_FOLLOWING_POKEMON_FACESOUTH);
+                    break;
+                case DIR_NORTH:
+                    ObjectEventForceSetHeldMovement(objectEvent, MOVEMENT_ACTION_FOLLOWING_POKEMON_FACENORTH);
+                    break;
+                case DIR_WEST:
+                    ObjectEventForceSetHeldMovement(objectEvent, MOVEMENT_ACTION_FOLLOWING_POKEMON_FACEWEST);
+                    break;
+                case DIR_EAST:
+                    ObjectEventForceSetHeldMovement(objectEvent, MOVEMENT_ACTION_FOLLOWING_POKEMON_FACEEAST);
+                    break;
+            }
+        }
+        
         sprite->data[2]++;
     }
 

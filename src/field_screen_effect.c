@@ -435,7 +435,11 @@ static void Task_ExitNonDoor(u8 taskId)
         if (WaitForWeatherFadeIn())
         {
             UnfreezeObjectEvents();
-            gSaveBlock2Ptr->follower.comeOutDoorStairs = 2;
+            
+            // Account for follower exiting pokeball after scripted warp
+            if (gSaveBlock2Ptr->follower.createSurfBlob != 2)
+                gSaveBlock2Ptr->follower.comeOutDoorStairs = 2;
+
             UnlockPlayerFieldControls();
             DestroyTask(taskId);
         }
@@ -979,7 +983,7 @@ static void Task_SpinEnterWarp(u8 taskId)
     case 1:
         if (WaitForWeatherFadeIn() && IsPlayerSpinEntranceActive() != TRUE)
         {
-            FollowMe_WarpSetEnd();
+            //FollowMe_WarpSetEnd();
             UnfreezeObjectEvents();
             UnlockPlayerFieldControls();
             DestroyTask(taskId);
