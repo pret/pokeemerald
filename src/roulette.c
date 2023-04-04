@@ -1088,7 +1088,7 @@ static void InitRouletteBgAndWindows(void)
 {
     u32 size = 0;
 
-    sRoulette = AllocZeroed(sizeof(*sRoulette));
+    sRoulette = Calloc(sizeof(*sRoulette));
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(1, sBgTemplates, ARRAY_COUNT(sBgTemplates));
     SetBgTilemapBuffer(0, sRoulette->tilemapBuffers[0]);

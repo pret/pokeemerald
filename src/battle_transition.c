@@ -1058,7 +1058,7 @@ static void LaunchBattleTransitionTask(u8 transitionId)
 {
     u8 taskId = CreateTask(Task_BattleTransition, 2);
     gTasks[taskId].tTransitionId = transitionId;
-    sTransitionData = AllocZeroed(sizeof(*sTransitionData));
+    sTransitionData = Calloc(sizeof(*sTransitionData));
 }
 
 static void Task_BattleTransition(u8 taskId)

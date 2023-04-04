@@ -128,7 +128,7 @@ void FreeInternal(void *heapStart, void *pointer)
     }
 }
 
-void *AllocZeroedInternal(void *heapStart, u32 size)
+void *CallocInternal(void *heapStart, u32 size)
 {
     void *mem = AllocInternal(heapStart, size);
 
@@ -180,9 +180,9 @@ void *Alloc(u32 size)
     return AllocInternal(sHeapStart, size);
 }
 
-void *AllocZeroed(u32 size)
+void *Calloc(u32 size)
 {
-    return AllocZeroedInternal(sHeapStart, size);
+    return CallocInternal(sHeapStart, size);
 }
 
 void Free(void *pointer)

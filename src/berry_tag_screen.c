@@ -175,7 +175,7 @@ static void HandleBagCursorPositionChange(s8 toMove);
 // code
 void DoBerryTagScreen(void)
 {
-    sBerryTag = AllocZeroed(sizeof(*sBerryTag));
+    sBerryTag = Calloc(sizeof(*sBerryTag));
     sBerryTag->berryId = ItemIdToBerryType(gSpecialVar_ItemId);
     SetMainCallback2(CB2_InitBerryTagScreen);
 }

@@ -416,7 +416,7 @@ void CB2_ReturnToPyramidBagMenu(void)
 
 void GoToBattlePyramidBagMenu(u8 location, void (*exitCallback)(void))
 {
-    gPyramidBagMenu = AllocZeroed(sizeof(*gPyramidBagMenu));
+    gPyramidBagMenu = Calloc(sizeof(*gPyramidBagMenu));
 
     if (location != PYRAMIDBAG_LOC_PREV)
         gPyramidBagMenuState.location = location;

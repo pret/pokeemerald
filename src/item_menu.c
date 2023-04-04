@@ -614,7 +614,7 @@ void QuizLadyOpenBagMenu(void)
 
 void GoToBagMenu(u8 location, u8 pocket, void ( *exitCallback)())
 {
-    gBagMenu = AllocZeroed(sizeof(*gBagMenu));
+    gBagMenu = Calloc(sizeof(*gBagMenu));
     if (gBagMenu == NULL)
     {
         // Alloc failed, exit
@@ -2285,7 +2285,7 @@ static void PrepareBagForWallyTutorial(void)
 {
     u32 i;
 
-    sTempWallyBag = AllocZeroed(sizeof(*sTempWallyBag));
+    sTempWallyBag = Calloc(sizeof(*sTempWallyBag));
     memcpy(sTempWallyBag->bagPocket_Items, gSaveBlock1Ptr->bagPocket_Items, sizeof(gSaveBlock1Ptr->bagPocket_Items));
     memcpy(sTempWallyBag->bagPocket_PokeBalls, gSaveBlock1Ptr->bagPocket_PokeBalls, sizeof(gSaveBlock1Ptr->bagPocket_PokeBalls));
     sTempWallyBag->pocket = gBagPosition.pocket;

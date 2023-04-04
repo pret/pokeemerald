@@ -86,11 +86,11 @@ static const struct SpritePalette sSpritePalettes_HealthBoxHealthBar[2] =
 // code
 void AllocateBattleSpritesData(void)
 {
-    gBattleSpritesDataPtr = AllocZeroed(sizeof(struct BattleSpriteData));
-    gBattleSpritesDataPtr->battlerData = AllocZeroed(sizeof(struct BattleSpriteInfo) * MAX_BATTLERS_COUNT);
-    gBattleSpritesDataPtr->healthBoxesData = AllocZeroed(sizeof(struct BattleHealthboxInfo) * MAX_BATTLERS_COUNT);
-    gBattleSpritesDataPtr->animationData = AllocZeroed(sizeof(struct BattleAnimationInfo));
-    gBattleSpritesDataPtr->battleBars = AllocZeroed(sizeof(struct BattleBarInfo) * MAX_BATTLERS_COUNT);
+    gBattleSpritesDataPtr = Calloc(sizeof(struct BattleSpriteData));
+    gBattleSpritesDataPtr->battlerData = Calloc(sizeof(struct BattleSpriteInfo) * MAX_BATTLERS_COUNT);
+    gBattleSpritesDataPtr->healthBoxesData = Calloc(sizeof(struct BattleHealthboxInfo) * MAX_BATTLERS_COUNT);
+    gBattleSpritesDataPtr->animationData = Calloc(sizeof(struct BattleAnimationInfo));
+    gBattleSpritesDataPtr->battleBars = Calloc(sizeof(struct BattleBarInfo) * MAX_BATTLERS_COUNT);
 }
 
 void FreeBattleSpritesData(void)
@@ -1253,8 +1253,8 @@ void AllocateMonSpritesGfx(void)
     u8 i = 0, j;
 
     gMonSpritesGfxPtr = NULL;
-    gMonSpritesGfxPtr = AllocZeroed(sizeof(*gMonSpritesGfxPtr));
-    gMonSpritesGfxPtr->firstDecompressed = AllocZeroed(MON_PIC_SIZE * 4 * MAX_BATTLERS_COUNT);
+    gMonSpritesGfxPtr = Calloc(sizeof(*gMonSpritesGfxPtr));
+    gMonSpritesGfxPtr->firstDecompressed = Calloc(MON_PIC_SIZE * 4 * MAX_BATTLERS_COUNT);
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
@@ -1270,7 +1270,7 @@ void AllocateMonSpritesGfx(void)
         gMonSpritesGfxPtr->templates[i].images = gMonSpritesGfxPtr->frameImages[i];
     }
 
-    gMonSpritesGfxPtr->barFontGfx = AllocZeroed(0x1000);
+    gMonSpritesGfxPtr->barFontGfx = Calloc(0x1000);
 }
 
 void FreeMonSpritesGfx(void)

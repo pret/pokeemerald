@@ -405,9 +405,9 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         data->state = LL_STATE_INIT2;
         break;
     case LL_STATE_INIT2:
-        data->incomingPlayerList = AllocZeroed(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
-        data->playerList = AllocZeroed(MAX_RFU_PLAYERS * sizeof(struct RfuPlayer));
-        data->playerListBackup = AllocZeroed(MAX_RFU_PLAYERS * sizeof(struct RfuPlayer));
+        data->incomingPlayerList = Calloc(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
+        data->playerList = Calloc(MAX_RFU_PLAYERS * sizeof(struct RfuPlayer));
+        data->playerListBackup = Calloc(MAX_RFU_PLAYERS * sizeof(struct RfuPlayer));
         ClearIncomingPlayerList(data->incomingPlayerList, RFU_CHILD_MAX);
         ClearRfuPlayerList(data->playerList->players, MAX_RFU_PLAYERS);
         CopyHostRfuGameDataAndUsername(&data->playerList->players[0].rfu.data, data->playerList->players[0].rfu.name);
@@ -996,8 +996,8 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         SetWirelessCommType1();
         OpenLink();
         InitializeRfuLinkManager_JoinGroup();
-        data->incomingPlayerList = AllocZeroed(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
-        data->playerList = AllocZeroed(MAX_RFU_PLAYER_LIST_SIZE * sizeof(struct RfuPlayer));
+        data->incomingPlayerList = Calloc(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
+        data->playerList = Calloc(MAX_RFU_PLAYER_LIST_SIZE * sizeof(struct RfuPlayer));
         data->state = LG_STATE_CHOOSE_LEADER_MSG;
         break;
     case LG_STATE_CHOOSE_LEADER_MSG:
@@ -1321,8 +1321,8 @@ static void Task_ListenToWireless(u8 taskId)
         OpenLink();
         InitializeRfuLinkManager_JoinGroup();
         RfuSetIgnoreError(TRUE);
-        data->incomingPlayerList = AllocZeroed(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
-        data->playerList = AllocZeroed(MAX_RFU_PLAYER_LIST_SIZE * sizeof(struct RfuPlayer));
+        data->incomingPlayerList = Calloc(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
+        data->playerList = Calloc(MAX_RFU_PLAYER_LIST_SIZE * sizeof(struct RfuPlayer));
         data->state = 2;
         break;
     case 2:
@@ -1896,9 +1896,9 @@ static void Task_SendMysteryGift(u8 taskId)
         data->state = 1;
         break;
     case 1:
-        data->incomingPlayerList = AllocZeroed(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
-        data->playerList = AllocZeroed(MAX_RFU_PLAYERS * sizeof(struct RfuPlayer));
-        data->playerListBackup = AllocZeroed(MAX_RFU_PLAYERS * sizeof(struct RfuPlayer));
+        data->incomingPlayerList = Calloc(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
+        data->playerList = Calloc(MAX_RFU_PLAYERS * sizeof(struct RfuPlayer));
+        data->playerListBackup = Calloc(MAX_RFU_PLAYERS * sizeof(struct RfuPlayer));
         ClearIncomingPlayerList(data->incomingPlayerList, RFU_CHILD_MAX);
         ClearRfuPlayerList(data->playerList->players, MAX_RFU_PLAYERS);
         CopyHostRfuGameDataAndUsername(&data->playerList->players[0].rfu.data, data->playerList->players[0].rfu.name);
@@ -2099,8 +2099,8 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
         SetWirelessCommType1();
         OpenLink();
         InitializeRfuLinkManager_JoinGroup();
-        data->incomingPlayerList = AllocZeroed(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
-        data->playerList = AllocZeroed(MAX_RFU_PLAYER_LIST_SIZE * sizeof(struct RfuPlayer));
+        data->incomingPlayerList = Calloc(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
+        data->playerList = Calloc(MAX_RFU_PLAYER_LIST_SIZE * sizeof(struct RfuPlayer));
         data->state = 1;
         break;
     case 1:
@@ -2267,8 +2267,8 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         SetWirelessCommType1();
         OpenLink();
         InitializeRfuLinkManager_JoinGroup();
-        data->incomingPlayerList = AllocZeroed(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
-        data->playerList = AllocZeroed(MAX_RFU_PLAYER_LIST_SIZE * sizeof(struct RfuPlayer));
+        data->incomingPlayerList = Calloc(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
+        data->playerList = Calloc(MAX_RFU_PLAYER_LIST_SIZE * sizeof(struct RfuPlayer));
         data->state = 1;
         break;
     case 1:
@@ -2428,7 +2428,7 @@ void RunUnionRoom(void)
     // dumb line needed to match
     sWirelessLinkMain.uRoom = sWirelessLinkMain.uRoom;
 
-    uroom = AllocZeroed(sizeof(*sWirelessLinkMain.uRoom));
+    uroom = Calloc(sizeof(*sWirelessLinkMain.uRoom));
     sWirelessLinkMain.uRoom = uroom;
     sURoom = uroom;
 
@@ -2490,10 +2490,10 @@ static void Task_RunUnionRoom(u8 taskId)
     switch (uroom->state)
     {
     case UR_STATE_INIT:
-        uroom->incomingChildList = AllocZeroed(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
-        uroom->incomingParentList = AllocZeroed(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
-        uroom->playerList = AllocZeroed(MAX_UNION_ROOM_LEADERS * sizeof(struct RfuPlayer));
-        uroom->spawnPlayer = AllocZeroed(sizeof(struct RfuPlayer));
+        uroom->incomingChildList = Calloc(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
+        uroom->incomingParentList = Calloc(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
+        uroom->playerList = Calloc(MAX_UNION_ROOM_LEADERS * sizeof(struct RfuPlayer));
+        uroom->spawnPlayer = Calloc(sizeof(struct RfuPlayer));
         ClearRfuPlayerList(uroom->playerList->players, MAX_UNION_ROOM_LEADERS);
         gPlayerCurrActivity = IN_UNION_ROOM;
         uroom->searchTaskId = CreateTask_SearchForChildOrParent(uroom->incomingParentList, uroom->incomingChildList, LINK_GROUP_UNION_ROOM_RESUME);
@@ -3298,7 +3298,7 @@ void InitUnionRoom(void)
     sUnionRoomPlayerName[0] = EOS;
     CreateTask(Task_InitUnionRoom, 0);
     sWirelessLinkMain.uRoom = sWirelessLinkMain.uRoom; // Needed to match.
-    sWirelessLinkMain.uRoom = data = AllocZeroed(sizeof(struct WirelessLink_URoom));
+    sWirelessLinkMain.uRoom = data = Calloc(sizeof(struct WirelessLink_URoom));
     sURoom = sWirelessLinkMain.uRoom;
     data->state = 0;
     data->textState = 0;
@@ -3327,13 +3327,13 @@ static void Task_InitUnionRoom(u8 taskId)
         data->state = 2;
         break;
     case 2:
-        data->incomingChildList = AllocZeroed(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
+        data->incomingChildList = Calloc(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
         ClearIncomingPlayerList(data->incomingChildList, RFU_CHILD_MAX);
-        data->incomingParentList = AllocZeroed(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
+        data->incomingParentList = Calloc(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
         ClearIncomingPlayerList(data->incomingParentList, RFU_CHILD_MAX);
-        data->playerList = AllocZeroed(MAX_UNION_ROOM_LEADERS * sizeof(struct RfuPlayer));
+        data->playerList = Calloc(MAX_UNION_ROOM_LEADERS * sizeof(struct RfuPlayer));
         ClearRfuPlayerList(data->playerList->players, MAX_UNION_ROOM_LEADERS);
-        data->spawnPlayer = AllocZeroed(sizeof(struct RfuPlayer));
+        data->spawnPlayer = Calloc(sizeof(struct RfuPlayer));
         ClearRfuPlayerList(&data->spawnPlayer->players[0], 1);
         data->searchTaskId = CreateTask_SearchForChildOrParent(data->incomingParentList, data->incomingChildList, LINK_GROUP_UNION_ROOM_INIT);
         data->state = 3;

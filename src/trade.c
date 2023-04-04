@@ -452,9 +452,9 @@ static void CB2_CreateTradeMenu(void)
     switch (gMain.state)
     {
     case 0:
-        sTradeMenu = AllocZeroed(sizeof(*sTradeMenu));
+        sTradeMenu = Calloc(sizeof(*sTradeMenu));
         InitTradeMenu();
-        sMenuTextTileBuffer = AllocZeroed(NUM_MENU_TEXT_SPRITES * 256);
+        sMenuTextTileBuffer = Calloc(NUM_MENU_TEXT_SPRITES * 256);
 
         for (i = 0; i < NUM_MENU_TEXT_SPRITES; i++)
             sMenuTextTileBuffers[i] = &sMenuTextTileBuffer[i * 256];
@@ -2834,7 +2834,7 @@ void CB2_LinkTrade(void)
             gLinkType = LINKTYPE_TRADE_DISCONNECTED;
             CloseLink();
         }
-        sTradeAnim = AllocZeroed(sizeof(*sTradeAnim));
+        sTradeAnim = Calloc(sizeof(*sTradeAnim));
         AllocateMonSpritesGfx();
         ResetTasks();
         ResetSpriteData();
@@ -3007,7 +3007,7 @@ static void CB2_InitInGameTrade(void)
         StringCopy(gLinkPlayers[1].name, otName);
         gLinkPlayers[0].language = GAME_LANGUAGE;
         gLinkPlayers[1].language = GetMonData(&gEnemyParty[0], MON_DATA_LANGUAGE);
-        sTradeAnim = AllocZeroed(sizeof(*sTradeAnim));
+        sTradeAnim = Calloc(sizeof(*sTradeAnim));
         AllocateMonSpritesGfx();
         ResetTasks();
         ResetSpriteData();

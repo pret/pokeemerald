@@ -1285,7 +1285,7 @@ static const struct BgTemplate sBgTemplates_ChasesAway[] =
 
 void DoRayquazaScene(u8 animId, bool8 endEarly, void (*exitCallback)(void))
 {
-    sRayScene = AllocZeroed(sizeof(*sRayScene));
+    sRayScene = Calloc(sizeof(*sRayScene));
     sRayScene->animId = animId;
     sRayScene->exitCallback = exitCallback;
     sRayScene->endEarly = endEarly;

@@ -1610,7 +1610,7 @@ void CB2_OpenPokedex(void)
         gMain.state++;
         break;
     case 2:
-        sPokedexView = AllocZeroed(sizeof(struct PokedexView));
+        sPokedexView = Calloc(sizeof(struct PokedexView));
         ResetPokedexView(sPokedexView);
         CreateTask(Task_OpenPokedexMainPage, 0);
         sPokedexView->dexMode = gSaveBlock2Ptr->pokedex.mode;
@@ -2062,10 +2062,10 @@ static bool8 LoadPokedexListPage(u8 page)
         SetGpuReg(REG_OFFSET_BG2VOFS, sPokedexView->initialVOffset);
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sPokedex_BgTemplate, ARRAY_COUNT(sPokedex_BgTemplate));
-        SetBgTilemapBuffer(3, AllocZeroed(BG_SCREEN_SIZE));
-        SetBgTilemapBuffer(2, AllocZeroed(BG_SCREEN_SIZE));
-        SetBgTilemapBuffer(1, AllocZeroed(BG_SCREEN_SIZE));
-        SetBgTilemapBuffer(0, AllocZeroed(BG_SCREEN_SIZE));
+        SetBgTilemapBuffer(3, Calloc(BG_SCREEN_SIZE));
+        SetBgTilemapBuffer(2, Calloc(BG_SCREEN_SIZE));
+        SetBgTilemapBuffer(1, Calloc(BG_SCREEN_SIZE));
+        SetBgTilemapBuffer(0, Calloc(BG_SCREEN_SIZE));
         DecompressAndLoadBgGfxUsingHeap(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
         CopyToBgTilemapBuffer(1, gPokedexList_Tilemap, 0, 0);
         CopyToBgTilemapBuffer(3, gPokedexListUnderlay_Tilemap, 0, 0);
@@ -3192,10 +3192,10 @@ static u8 LoadInfoScreen(struct PokedexListItem *item, u8 monSpriteId)
     gTasks[taskId].tTrainerSpriteId = SPRITE_NONE;
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sInfoScreen_BgTemplate, ARRAY_COUNT(sInfoScreen_BgTemplate));
-    SetBgTilemapBuffer(3, AllocZeroed(BG_SCREEN_SIZE));
-    SetBgTilemapBuffer(2, AllocZeroed(BG_SCREEN_SIZE));
-    SetBgTilemapBuffer(1, AllocZeroed(BG_SCREEN_SIZE));
-    SetBgTilemapBuffer(0, AllocZeroed(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(3, Calloc(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(2, Calloc(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(1, Calloc(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(0, Calloc(BG_SCREEN_SIZE));
     InitWindows(sInfoScreen_WindowTemplates);
     DeactivateAllTextPrinters();
 
@@ -3962,8 +3962,8 @@ static void Task_DisplayCaughtMonDexPage(u8 taskId)
             ResetOtherVideoRegisters(DISPCNT_BG0_ON);
             ResetBgsAndClearDma3BusyFlags(0);
             InitBgsFromTemplates(0, sNewEntryInfoScreen_BgTemplate, ARRAY_COUNT(sNewEntryInfoScreen_BgTemplate));
-            SetBgTilemapBuffer(3, AllocZeroed(BG_SCREEN_SIZE));
-            SetBgTilemapBuffer(2, AllocZeroed(BG_SCREEN_SIZE));
+            SetBgTilemapBuffer(3, Calloc(BG_SCREEN_SIZE));
+            SetBgTilemapBuffer(2, Calloc(BG_SCREEN_SIZE));
             InitWindows(sNewEntryInfoScreen_WindowTemplates);
             DeactivateAllTextPrinters();
             gTasks[taskId].tState = 1;
@@ -4823,10 +4823,10 @@ static void Task_LoadSearchMenu(u8 taskId)
             ResetOtherVideoRegisters(0);
             ResetBgsAndClearDma3BusyFlags(0);
             InitBgsFromTemplates(0, sSearchMenu_BgTemplate, ARRAY_COUNT(sSearchMenu_BgTemplate));
-            SetBgTilemapBuffer(3, AllocZeroed(BG_SCREEN_SIZE));
-            SetBgTilemapBuffer(2, AllocZeroed(BG_SCREEN_SIZE));
-            SetBgTilemapBuffer(1, AllocZeroed(BG_SCREEN_SIZE));
-            SetBgTilemapBuffer(0, AllocZeroed(BG_SCREEN_SIZE));
+            SetBgTilemapBuffer(3, Calloc(BG_SCREEN_SIZE));
+            SetBgTilemapBuffer(2, Calloc(BG_SCREEN_SIZE));
+            SetBgTilemapBuffer(1, Calloc(BG_SCREEN_SIZE));
+            SetBgTilemapBuffer(0, Calloc(BG_SCREEN_SIZE));
             InitWindows(sSearchMenu_WindowTemplate);
             DeactivateAllTextPrinters();
             PutWindowTilemap(0);

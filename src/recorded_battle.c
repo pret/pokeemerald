@@ -286,7 +286,7 @@ static u8 GetNextRecordedDataByte(u8 *data, u8 *idx, u8 *size)
 
 bool32 CanCopyRecordedBattleSaveData(void)
 {
-    struct RecordedBattleSave *dst = AllocZeroed(sizeof(struct RecordedBattleSave));
+    struct RecordedBattleSave *dst = Calloc(sizeof(struct RecordedBattleSave));
     bool32 ret = CopyRecordedBattleFromSave(dst);
     Free(dst);
     return ret;
@@ -325,8 +325,8 @@ bool32 MoveRecordedBattleToSaveData(void)
     u8 saveAttempts;
 
     saveAttempts = 0;
-    battleSave = AllocZeroed(sizeof(struct RecordedBattleSave));
-    savSection = AllocZeroed(SECTOR_SIZE);
+    battleSave = Calloc(sizeof(struct RecordedBattleSave));
+    savSection = Calloc(SECTOR_SIZE);
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -490,7 +490,7 @@ static bool32 TryCopyRecordedBattleSaveData(struct RecordedBattleSave *dst, stru
 
 static bool32 CopyRecordedBattleFromSave(struct RecordedBattleSave *dst)
 {
-    struct SaveSector *savBuffer = AllocZeroed(SECTOR_SIZE);
+    struct SaveSector *savBuffer = Calloc(SECTOR_SIZE);
     bool32 ret = TryCopyRecordedBattleSaveData(dst, savBuffer);
     Free(savBuffer);
 
@@ -586,7 +586,7 @@ static void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
 
 void PlayRecordedBattle(void (*CB2_After)(void))
 {
-    struct RecordedBattleSave *battleSave = AllocZeroed(sizeof(struct RecordedBattleSave));
+    struct RecordedBattleSave *battleSave = Calloc(sizeof(struct RecordedBattleSave));
     if (CopyRecordedBattleFromSave(battleSave) == TRUE)
     {
         u8 taskId;

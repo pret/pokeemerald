@@ -269,7 +269,7 @@ static void InitContestPaintingWindow(void)
     InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
     ChangeBgX(1, 0, BG_COORD_SET);
     ChangeBgY(1, 0, BG_COORD_SET);
-    SetBgTilemapBuffer(1, AllocZeroed(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(1, Calloc(BG_SCREEN_SIZE));
     sWindowId = AddWindow(&sWindowTemplate);
     DeactivateAllTextPrinters();
     FillWindowPixelBuffer(sWindowId, PIXEL_FILL(0));
@@ -548,8 +548,8 @@ static u8 GetImageEffectForContestWinner(u8 contestWinnerId)
 
 static void AllocPaintingResources(void)
 {
-    gContestPaintingMonPalette = AllocZeroed(OBJ_PLTT_SIZE);
-    gContestMonPixels = AllocZeroed(0x2000);
+    gContestPaintingMonPalette = Calloc(OBJ_PLTT_SIZE);
+    gContestMonPixels = Calloc(0x2000);
 }
 
 static void DoContestPaintingImageProcessing(u8 imageEffect)

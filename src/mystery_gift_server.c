@@ -24,13 +24,13 @@ extern const struct MysteryGiftServerCmd gMysteryGiftServerScript_SendWonderCard
 
 void MysterGiftServer_CreateForNews(void)
 {
-    sServer = AllocZeroed(sizeof(*sServer));
+    sServer = Calloc(sizeof(*sServer));
     MysteryGiftServer_Init(sServer, gMysteryGiftServerScript_SendWonderNews, 0, 1);
 }
 
 void MysterGiftServer_CreateForCard(void)
 {
-    sServer = AllocZeroed(sizeof(*sServer));
+    sServer = Calloc(sizeof(*sServer));
     MysteryGiftServer_Init(sServer, gMysteryGiftServerScript_SendWonderCard, 0, 1);
 }
 
@@ -53,10 +53,10 @@ static void MysteryGiftServer_Init(struct MysteryGiftServer * svr, const void * 
 {
     svr->unused = 0;
     svr->funcId = FUNC_INIT;
-    svr->card = AllocZeroed(sizeof(*svr->card));
-    svr->news = AllocZeroed(sizeof(*svr->news));
-    svr->recvBuffer = AllocZeroed(MG_LINK_BUFFER_SIZE);
-    svr->linkGameData = AllocZeroed(sizeof(*svr->linkGameData));
+    svr->card = Calloc(sizeof(*svr->card));
+    svr->news = Calloc(sizeof(*svr->news));
+    svr->recvBuffer = Calloc(MG_LINK_BUFFER_SIZE);
+    svr->linkGameData = Calloc(sizeof(*svr->linkGameData));
     svr->script = script;
     svr->cmdidx = 0;
     MysteryGiftLink_Init(&svr->link, sendPlayerId, recvPlayerId);

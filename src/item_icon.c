@@ -59,7 +59,7 @@ bool8 AllocItemIconTemporaryBuffers(void)
     if (gItemIconDecompressionBuffer == NULL)
         return FALSE;
 
-    gItemIcon4x4Buffer = AllocZeroed(0x200);
+    gItemIcon4x4Buffer = Calloc(0x200);
     if (gItemIcon4x4Buffer == NULL)
     {
         Free(gItemIconDecompressionBuffer);

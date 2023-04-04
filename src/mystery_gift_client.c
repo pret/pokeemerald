@@ -29,7 +29,7 @@ extern const struct MysteryGiftClientCmd gMysteryGiftClientScript_Init[];
 
 void MysteryGiftClient_Create(bool32 isWonderNews)
 {
-    sClient = AllocZeroed(sizeof(*sClient));
+    sClient = Calloc(sizeof(*sClient));
     MysteryGiftClient_Init(sClient, 1, 0);
     sClient->isWonderNews = isWonderNews;
 }
@@ -69,10 +69,10 @@ static void MysteryGiftClient_Init(struct MysteryGiftClient * client, u32 sendPl
     client->unused = 0;
     client->funcId = FUNC_INIT;
     client->funcState = 0;
-    client->sendBuffer = AllocZeroed(MG_LINK_BUFFER_SIZE);
-    client->recvBuffer = AllocZeroed(MG_LINK_BUFFER_SIZE);
-    client->script = AllocZeroed(MG_LINK_BUFFER_SIZE);
-    client->msg = AllocZeroed(CLIENT_MAX_MSG_SIZE);
+    client->sendBuffer = Calloc(MG_LINK_BUFFER_SIZE);
+    client->recvBuffer = Calloc(MG_LINK_BUFFER_SIZE);
+    client->script = Calloc(MG_LINK_BUFFER_SIZE);
+    client->msg = Calloc(CLIENT_MAX_MSG_SIZE);
     MysteryGiftLink_Init(&client->link, sendPlayerId, recvPlayerId);
 }
 

@@ -467,7 +467,7 @@ static bool32 TryWriteTrainerHill_Internal(struct EReaderTrainerHillSet * hillSe
 
 bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet * hillSet)
 {
-    void *buffer = AllocZeroed(SECTOR_SIZE);
+    void *buffer = Calloc(SECTOR_SIZE);
     bool32 result = TryWriteTrainerHill_Internal(hillSet, buffer);
     Free(buffer);
     return result;
@@ -487,7 +487,7 @@ static bool32 TryReadTrainerHill_Internal(struct EReaderTrainerHillSet * dest, u
 
 static bool32 TryReadTrainerHill(struct EReaderTrainerHillSet * hillSet)
 {
-    u8 *buffer = AllocZeroed(SECTOR_SIZE);
+    u8 *buffer = Calloc(SECTOR_SIZE);
     bool32 result = TryReadTrainerHill_Internal(hillSet, buffer);
     Free(buffer);
     return result;
@@ -495,7 +495,7 @@ static bool32 TryReadTrainerHill(struct EReaderTrainerHillSet * hillSet)
 
 bool32 ReadTrainerHillAndValidate(void)
 {
-    struct EReaderTrainerHillSet *hillSet = AllocZeroed(SECTOR_SIZE);
+    struct EReaderTrainerHillSet *hillSet = Calloc(SECTOR_SIZE);
     bool32 result = TryReadTrainerHill(hillSet);
     Free(hillSet);
     return result;

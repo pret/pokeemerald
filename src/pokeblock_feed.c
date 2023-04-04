@@ -617,7 +617,7 @@ static bool8 LoadPokeblockFeedScene(void)
     switch (gMain.state)
     {
     case 0:
-        sPokeblockFeed = AllocZeroed(sizeof(*sPokeblockFeed));
+        sPokeblockFeed = Calloc(sizeof(*sPokeblockFeed));
         SetVBlankHBlankCallbacksToNull();
         ClearScheduledBgCopiesToVram();
         gMain.state++;

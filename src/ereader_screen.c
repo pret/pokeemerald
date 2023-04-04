@@ -260,7 +260,7 @@ void CreateEReaderTask(void)
     data->unused2 = 0;
     data->unused3 = 0;
     data->status = 0;
-    data->unusedBuffer = AllocZeroed(CLIENT_MAX_MSG_SIZE);
+    data->unusedBuffer = Calloc(CLIENT_MAX_MSG_SIZE);
 }
 
 static void ResetTimer(u16 *timer)

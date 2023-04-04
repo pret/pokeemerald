@@ -1021,7 +1021,7 @@ void PlaySlotMachine(u8 machineId, MainCallback exitCallback)
 {
     u8 taskId;
 
-    sSlotMachine = AllocZeroed(sizeof(*sSlotMachine));
+    sSlotMachine = Calloc(sizeof(*sSlotMachine));
     PlaySlotMachine_Internal(machineId, exitCallback);
     taskId = CreateTask(Task_FadeToSlotMachine, 0);
     gTasks[taskId].tState = 0;
@@ -1229,8 +1229,8 @@ static void SlotMachineSetup_InitPalsSpritesTasks(void)
 static void SlotMachineSetup_InitTilemaps(void)
 {
     sSelectedPikaPowerTile = Alloc(8);
-    sReelOverlay_Tilemap = AllocZeroed(14);
-    sReelButtonPress_Tilemap = AllocZeroed(8);
+    sReelOverlay_Tilemap = Calloc(14);
+    sReelButtonPress_Tilemap = Calloc(8);
 
     // several of these are 1 bit off from each other
     sReelOverlay_Tilemap[0] = 0x2051;
@@ -4156,7 +4156,7 @@ static void CreateReelTimePikachuSprite(void)
     struct SpriteTemplate spriteTemplate;
     u8 spriteId;
     if (sImageTable_ReelTimePikachu == NULL)
-        sImageTable_ReelTimePikachu = AllocZeroed(sizeof(struct SpriteFrameImage) * 5);
+        sImageTable_ReelTimePikachu = Calloc(sizeof(struct SpriteFrameImage) * 5);
 
     sImageTable_ReelTimePikachu[0].data = sReelTimeGfxPtr + (0 * 0x800);
     sImageTable_ReelTimePikachu[0].size = 0x800;
@@ -4201,7 +4201,7 @@ static void CreateReelTimeMachineSprites(void)
     struct Sprite *sprite;
 
     if (sImageTable_ReelTimeMachineAntennae == NULL)
-        sImageTable_ReelTimeMachineAntennae = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+        sImageTable_ReelTimeMachineAntennae = Calloc(sizeof(struct SpriteFrameImage) * 1);
 
     sImageTable_ReelTimeMachineAntennae[0].data = sReelTimeGfxPtr + 0x2800;
     sImageTable_ReelTimeMachineAntennae[0].size = 0x300;
@@ -4215,7 +4215,7 @@ static void CreateReelTimeMachineSprites(void)
     sSlotMachine->reelTimeMachineSpriteIds[0] = spriteId;
 
     if (sImageTable_ReelTimeMachine == NULL)
-        sImageTable_ReelTimeMachine = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+        sImageTable_ReelTimeMachine = Calloc(sizeof(struct SpriteFrameImage) * 1);
 
     sImageTable_ReelTimeMachine[0].data = sReelTimeGfxPtr + 0x2800 + 0x300;
     sImageTable_ReelTimeMachine[0].size = 0x500;
@@ -4236,7 +4236,7 @@ static void CreateBrokenReelTimeMachineSprite(void)
     struct Sprite *sprite;
 
     if (sImageTable_BrokenReelTimeMachine == NULL)
-        sImageTable_BrokenReelTimeMachine = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+        sImageTable_BrokenReelTimeMachine = Calloc(sizeof(struct SpriteFrameImage) * 1);
 
     sImageTable_BrokenReelTimeMachine[0].data = sReelTimeGfxPtr + 0x3000;
     sImageTable_BrokenReelTimeMachine[0].size = 0x600;
@@ -5015,7 +5015,7 @@ static void LoadSlotMachineGfx(void)
     LZDecompressWram(gSlotMachineDigitalDisplay_Gfx, sDigitalDisplayGfxPtr);
     sReelTimeGfxPtr = Alloc(0x3600);
     LZDecompressWram(sReelTimeGfx, sReelTimeGfxPtr);
-    sSlotMachineSpritesheetsPtr = AllocZeroed(sizeof(struct SpriteSheet) * ARRAY_COUNT(sSlotMachineSpriteSheets));
+    sSlotMachineSpritesheetsPtr = Calloc(sizeof(struct SpriteSheet) * ARRAY_COUNT(sSlotMachineSpriteSheets));
     for (i = 0; i < ARRAY_COUNT(sSlotMachineSpriteSheets); i++)
     {
         sSlotMachineSpritesheetsPtr[i].data = sSlotMachineSpriteSheets[i].data;
@@ -5035,8 +5035,8 @@ static void LoadReelBackground(void)
     u8 *dest;
     u8 i, j;
 
-    sReelBackgroundSpriteSheet = AllocZeroed(sizeof(struct SpriteSheet));
-    sReelBackground_Gfx = AllocZeroed(0x2000); // Background is plain white
+    sReelBackgroundSpriteSheet = Calloc(sizeof(struct SpriteSheet));
+    sReelBackground_Gfx = Calloc(0x2000); // Background is plain white
     dest = sReelBackground_Gfx;
     for (i = 0; i < 0x40; i++)
     {
@@ -5143,53 +5143,53 @@ static void SetDigitalDisplayImagePtrs(void)
 
 static void AllocDigitalDisplayGfx(void)
 {
-    sImageTable_DigitalDisplay_Reel = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    sImageTable_DigitalDisplay_Reel = Calloc(sizeof(struct SpriteFrameImage) * 1);
     sImageTable_DigitalDisplay_Reel[0].data = sDigitalDisplayGfxPtr;
     sImageTable_DigitalDisplay_Reel[0].size = 0x600;
 
-    sImageTable_DigitalDisplay_Time = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    sImageTable_DigitalDisplay_Time = Calloc(sizeof(struct SpriteFrameImage) * 1);
     sImageTable_DigitalDisplay_Time[0].data = sDigitalDisplayGfxPtr + 0x600;
     sImageTable_DigitalDisplay_Time[0].size = 0x200;
 
-    sImageTable_DigitalDisplay_Insert = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    sImageTable_DigitalDisplay_Insert = Calloc(sizeof(struct SpriteFrameImage) * 1);
     sImageTable_DigitalDisplay_Insert[0].data = sDigitalDisplayGfxPtr + 0x800;
     sImageTable_DigitalDisplay_Insert[0].size = 0x200;
 
-    sImageTable_DigitalDisplay_Stop = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    sImageTable_DigitalDisplay_Stop = Calloc(sizeof(struct SpriteFrameImage) * 1);
     sImageTable_DigitalDisplay_Stop[0].data = sDigitalDisplayGfxPtr + 0xA00;
     sImageTable_DigitalDisplay_Stop[0].size = 0x200;
 
-    sImageTable_DigitalDisplay_Win = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    sImageTable_DigitalDisplay_Win = Calloc(sizeof(struct SpriteFrameImage) * 1);
     sImageTable_DigitalDisplay_Win[0].data = sDigitalDisplayGfxPtr + 0xC00;
     sImageTable_DigitalDisplay_Win[0].size = 0x300;
 
-    sImageTable_DigitalDisplay_Lose = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    sImageTable_DigitalDisplay_Lose = Calloc(sizeof(struct SpriteFrameImage) * 1);
     sImageTable_DigitalDisplay_Lose[0].data = sDigitalDisplayGfxPtr + 0x1000;
     sImageTable_DigitalDisplay_Lose[0].size = 0x400;
 
-    sImageTable_DigitalDisplay_Bonus = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    sImageTable_DigitalDisplay_Bonus = Calloc(sizeof(struct SpriteFrameImage) * 1);
     sImageTable_DigitalDisplay_Bonus[0].data = sDigitalDisplayGfxPtr + 0x1400;
     sImageTable_DigitalDisplay_Bonus[0].size = 0x200;
 
-    sImageTable_DigitalDisplay_Big = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    sImageTable_DigitalDisplay_Big = Calloc(sizeof(struct SpriteFrameImage) * 1);
     sImageTable_DigitalDisplay_Big[0].data = sDigitalDisplayGfxPtr + 0x1600;
     sImageTable_DigitalDisplay_Big[0].size = 0x300;
 
-    sImageTable_DigitalDisplay_Reg = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    sImageTable_DigitalDisplay_Reg = Calloc(sizeof(struct SpriteFrameImage) * 1);
     sImageTable_DigitalDisplay_Reg[0].data = sDigitalDisplayGfxPtr + 0x1900;
     sImageTable_DigitalDisplay_Reg[0].size = 0x300;
 
-    sImageTable_DigitalDisplay_AButton = AllocZeroed(sizeof(struct SpriteFrameImage) * 2);
+    sImageTable_DigitalDisplay_AButton = Calloc(sizeof(struct SpriteFrameImage) * 2);
     sImageTable_DigitalDisplay_AButton[0].data = sDigitalDisplayGfxPtr + 0x1C00;
     sImageTable_DigitalDisplay_AButton[0].size = 0x200;
     sImageTable_DigitalDisplay_AButton[1].data = sDigitalDisplayGfxPtr + 0x1E00;
     sImageTable_DigitalDisplay_AButton[1].size = 0x200;
 
-    sImageTable_DigitalDisplay_Smoke = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    sImageTable_DigitalDisplay_Smoke = Calloc(sizeof(struct SpriteFrameImage) * 1);
     sImageTable_DigitalDisplay_Smoke[0].data = sDigitalDisplayGfxPtr + 0x2000;
     sImageTable_DigitalDisplay_Smoke[0].size = 640;
 
-    sImageTable_DigitalDisplay_Number = AllocZeroed(sizeof(struct SpriteFrameImage) * 5);
+    sImageTable_DigitalDisplay_Number = Calloc(sizeof(struct SpriteFrameImage) * 5);
     sImageTable_DigitalDisplay_Number[0].data = sDigitalDisplayGfxPtr + 0x2280;
     sImageTable_DigitalDisplay_Number[0].size = 0x80;
     sImageTable_DigitalDisplay_Number[1].data = sDigitalDisplayGfxPtr + 0x2300;
@@ -5201,13 +5201,13 @@ static void AllocDigitalDisplayGfx(void)
     sImageTable_DigitalDisplay_Number[4].data = sDigitalDisplayGfxPtr + 0x2480;
     sImageTable_DigitalDisplay_Number[4].size = 0x80;
 
-    sImageTable_DigitalDisplay_Pokeball = AllocZeroed(sizeof(struct SpriteFrameImage) * 2);
+    sImageTable_DigitalDisplay_Pokeball = Calloc(sizeof(struct SpriteFrameImage) * 2);
     sImageTable_DigitalDisplay_Pokeball[0].data = sDigitalDisplayGfxPtr + 0x2600;
     sImageTable_DigitalDisplay_Pokeball[0].size = 0x480;
     sImageTable_DigitalDisplay_Pokeball[1].data = sDigitalDisplayGfxPtr + 10880;
     sImageTable_DigitalDisplay_Pokeball[1].size = 0x480;
 
-    sImageTable_DigitalDisplay_DPad = AllocZeroed(sizeof(struct SpriteFrameImage) * 2);
+    sImageTable_DigitalDisplay_DPad = Calloc(sizeof(struct SpriteFrameImage) * 2);
     sImageTable_DigitalDisplay_DPad[0].data = sDigitalDisplayGfxPtr + 0x2F00;
     sImageTable_DigitalDisplay_DPad[0].size = 0x180;
     sImageTable_DigitalDisplay_DPad[1].data = sDigitalDisplayGfxPtr + 0x3080;

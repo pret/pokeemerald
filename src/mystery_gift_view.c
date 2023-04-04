@@ -188,7 +188,7 @@ bool32 WonderCard_Init(struct WonderCard * card, struct WonderCardMetadata * met
 {
     if (card == NULL || metadata == NULL)
         return FALSE;
-    sWonderCardData = AllocZeroed(sizeof(*sWonderCardData));
+    sWonderCardData = Calloc(sizeof(*sWonderCardData));
     if (sWonderCardData == NULL)
         return FALSE;
     sWonderCardData->card = *card;
@@ -644,7 +644,7 @@ bool32 WonderNews_Init(const struct WonderNews * news)
 {
     if (news == NULL)
         return FALSE;
-    sWonderNewsData = AllocZeroed(sizeof(*sWonderNewsData));
+    sWonderNewsData = Calloc(sizeof(*sWonderNewsData));
     if (sWonderNewsData == NULL)
         return FALSE;
     sWonderNewsData->news = *news;

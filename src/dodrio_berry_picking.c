@@ -665,7 +665,7 @@ void StartDodrioBerryPicking(u16 partyId, void (*exitCallback)(void))
 {
     sExitingGame = FALSE;
 
-    if (gReceivedRemoteLinkPlayers && (sGame = AllocZeroed(sizeof(*sGame))))
+    if (gReceivedRemoteLinkPlayers && (sGame = Calloc(sizeof(*sGame))))
     {
         ResetTasksAndSprites();
         InitDodrioGame(sGame);
@@ -3820,7 +3820,7 @@ static const union AnimCmd *const sAnims_Cloud[] =
 
 static void LoadDodrioGfx(void)
 {
-    void *ptr = AllocZeroed(0x3000);
+    void *ptr = Calloc(0x3000);
     struct SpritePalette normal = {sDodrioNormal_Pal, PALTAG_DODRIO_NORMAL};
     struct SpritePalette shiny = {sDodrioShiny_Pal, PALTAG_DODRIO_SHINY};
 
@@ -3848,7 +3848,7 @@ static void CreateDodrioSprite(struct DodrioGame_MonInfo * monInfo, u8 playerId,
         .callback = SpriteCB_Dodrio,
     };
 
-    sDodrioSpriteIds[id] = AllocZeroed(4);
+    sDodrioSpriteIds[id] = Calloc(4);
     *sDodrioSpriteIds[id] = CreateSprite(&template, GetDodrioXPos(playerId, numPlayers), 136, 3);
     SetDodrioInvisibility(TRUE, id);
 }
@@ -4004,7 +4004,7 @@ static void InitStatusBarPos(void)
 static void CreateStatusBarSprites(void)
 {
     u8 i;
-    void *ptr = AllocZeroed(0x180);
+    void *ptr = Calloc(0x180);
     struct SpritePalette pal = {sStatus_Pal, PALTAG_STATUS};
 
     LZ77UnCompWram(sStatus_Gfx, ptr);
@@ -4023,7 +4023,7 @@ static void CreateStatusBarSprites(void)
             .callback = SpriteCB_Status,
         };
 
-        sStatusBar = AllocZeroed(sizeof(*sStatusBar));
+        sStatusBar = Calloc(sizeof(*sStatusBar));
         LoadSpriteSheet(&sheet);
         LoadSpritePalette(&pal);
         for (i = 0; i < NUM_STATUS_SQUARES; i++)
@@ -4146,7 +4146,7 @@ static const u8 sUnusedSounds[] = {
 
 static void LoadBerryGfx(void)
 {
-    void *ptr = AllocZeroed(0x480);
+    void *ptr = Calloc(0x480);
     struct SpritePalette pal = {sBerries_Pal, PALTAG_BERRIES};
 
     LZ77UnCompWram(sBerries_Gfx, ptr);
@@ -4191,7 +4191,7 @@ static void CreateBerrySprites(void)
     // Create berry sprites that fall during gameplay
     for (i = 0; i < NUM_BERRY_COLUMNS; i++)
     {
-        sBerrySpriteIds[i] = AllocZeroed(4);
+        sBerrySpriteIds[i] = Calloc(4);
         x = i * 16;
         *sBerrySpriteIds[i] = CreateSprite(&berry, x + (i * 8), 8, 1);
         SetBerryInvisibility(i, TRUE);
@@ -4200,7 +4200,7 @@ static void CreateBerrySprites(void)
     // Create berry icon sprites for results screen
     for (i = 0; i < NUM_BERRY_TYPES; i++)
     {
-        sBerryIconSpriteIds[i] = AllocZeroed(4);
+        sBerryIconSpriteIds[i] = Calloc(4);
         if (i == BERRY_MISSED)
             *sBerryIconSpriteIds[i] = CreateSprite(&berryIcon, sBerryIconXCoords[i], 49, 0);
         else
@@ -4295,7 +4295,7 @@ static const s16 sCloudStartCoords[NUM_CLOUDS][2] =
 static void CreateCloudSprites(void)
 {
     u8 i;
-    void *ptr = AllocZeroed(0x400);
+    void *ptr = Calloc(0x400);
     struct SpritePalette pal = {sCloud_Pal, PALTAG_CLOUD};
 
     LZ77UnCompWram(sCloud_Gfx, ptr);
@@ -4317,7 +4317,7 @@ static void CreateCloudSprites(void)
         LoadSpritePalette(&pal);
         for (i = 0; i < NUM_CLOUDS; i++)
         {
-            sCloudSpriteIds[i] = AllocZeroed(4);
+            sCloudSpriteIds[i] = Calloc(4);
             *sCloudSpriteIds[i] = CreateSprite(&template, sCloudStartCoords[i][0], sCloudStartCoords[i][1], 4);
         }
     }

@@ -267,7 +267,7 @@ static void CB2_LoadCableCar(void)
         DmaFillLarge16(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
         DmaFill32Defvars(3, 0, (void *)OAM, OAM_SIZE);
         DmaFill16Defvars(3, 0, (void *)PLTT, PLTT_SIZE);
-        sCableCar = AllocZeroed(sizeof(*sCableCar));
+        sCableCar = Calloc(sizeof(*sCableCar));
         gMain.state++;
         break;
     case 1:

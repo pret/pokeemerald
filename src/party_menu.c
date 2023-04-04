@@ -2149,7 +2149,7 @@ static u16 *GetPartyMenuPalBufferPtr(u8 paletteId)
 
 static void BlitBitmapToPartyWindow(u8 windowId, const u8 *b, u8 c, u8 x, u8 y, u8 width, u8 height)
 {
-    u8 *pixels = AllocZeroed(height * width * 32);
+    u8 *pixels = Calloc(height * width * 32);
     u8 i, j;
 
     if (pixels != NULL)

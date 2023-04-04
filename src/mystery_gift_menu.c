@@ -1124,7 +1124,7 @@ static void CreateMysteryGiftTask(void)
     data->unused2 = 0;
     data->unused3 = 0;
     data->msgId = 0;
-    data->clientMsg = AllocZeroed(CLIENT_MAX_MSG_SIZE);
+    data->clientMsg = Calloc(CLIENT_MAX_MSG_SIZE);
 }
 
 static void Task_MysteryGift(u8 taskId)

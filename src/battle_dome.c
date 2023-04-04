@@ -2279,8 +2279,8 @@ static void InitDomeTrainers(void)
     species[0] = 0;
     species[1] = 0;
     species[2] = 0;
-    rankingScores = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
-    statValues = AllocZeroed(sizeof(int) * NUM_STATS);
+    rankingScores = Calloc(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
+    statValues = Calloc(sizeof(int) * NUM_STATS);
 
     gSaveBlock2Ptr->frontier.domeLvlMode = gSaveBlock2Ptr->frontier.lvlMode + 1;
     gSaveBlock2Ptr->frontier.domeBattleMode = VarGet(VAR_FRONTIER_BATTLE_MODE) + 1;
@@ -3089,7 +3089,7 @@ static void Task_ShowTourneyInfoCard(u8 taskId)
         break;
     case 3:
         SetVBlankCallback(VblankCb_TourneyInfoCard);
-        sInfoCard = AllocZeroed(sizeof(*sInfoCard));
+        sInfoCard = Calloc(sizeof(*sInfoCard));
         for (i = 0; i < NUM_INFOCARD_SPRITES; i++)
             sInfoCard->spriteIds[i] = SPRITE_NONE;
         LoadMonIconPalettes();
@@ -4293,7 +4293,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     int windowId = WIN_TRAINER_NAME;
     int x = 0, y = 0;
     u8 palSlot = 0;
-    s16 *allocatedArray = AllocZeroed(sizeof(s16) * ALLOC_ARRAY_SIZE);
+    s16 *allocatedArray = Calloc(sizeof(s16) * ALLOC_ARRAY_SIZE);
     trainerId = DOME_TRAINERS[trainerTourneyId].trainerId;
 
     if (flags & CARD_ALTERNATE_SLOT)
@@ -5346,7 +5346,7 @@ static void Task_ShowTourneyTree(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 2:
-        sTilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
+        sTilemapBuffer = Calloc(BG_SCREEN_SIZE);
         LZDecompressWram(gDomeTourneyTree_Tilemap, sTilemapBuffer);
         SetBgTilemapBuffer(1, sTilemapBuffer);
         CopyBgTilemapBufferToVram(1);
@@ -5836,8 +5836,8 @@ static void InitRandomTourneyTreeResults(void)
     if ((gSaveBlock2Ptr->frontier.domeLvlMode != -gSaveBlock2Ptr->frontier.domeBattleMode) && gSaveBlock2Ptr->frontier.challengeStatus != CHALLENGE_STATUS_SAVING)
         return;
 
-    statSums = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
-    statValues = AllocZeroed(sizeof(int) * NUM_STATS);
+    statSums = Calloc(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
+    statValues = Calloc(sizeof(int) * NUM_STATS);
     lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     gSaveBlock2Ptr->frontier.lvlMode = FRONTIER_LVL_50;
     zero1 = 0;

@@ -1143,9 +1143,9 @@ static void CB2_InitSelectScreen(void)
         break;
     case 1:
         sSelectMenuTilesetBuffer = Alloc(0x440);
-        sSelectMonPicBgTilesetBuffer = AllocZeroed(0x440);
+        sSelectMonPicBgTilesetBuffer = Calloc(0x440);
         sSelectMenuTilemapBuffer = Alloc(BG_SCREEN_SIZE);
-        sSelectMonPicBgTilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
+        sSelectMonPicBgTilemapBuffer = Calloc(BG_SCREEN_SIZE);
         ChangeBgX(0, 0, BG_COORD_SET);
         ChangeBgY(0, 0, BG_COORD_SET);
         ChangeBgX(1, 0, BG_COORD_SET);
@@ -1281,7 +1281,7 @@ static void Select_InitMonsData(void)
     if (sFactorySelectScreen != NULL)
         return;
 
-    sFactorySelectScreen = AllocZeroed(sizeof(*sFactorySelectScreen));
+    sFactorySelectScreen = Calloc(sizeof(*sFactorySelectScreen));
     sFactorySelectScreen->cursorPos = 0;
     sFactorySelectScreen->selectingMonsState = 1;
     sFactorySelectScreen->fromSummaryScreen = FALSE;
@@ -1472,7 +1472,7 @@ static void Select_Task_OpenSummaryScreen(u8 taskId)
         DestroyTask(taskId);
         sFactorySelectScreen->fromSummaryScreen = TRUE;
         currMonId = sFactorySelectScreen->cursorPos;
-        sFactorySelectMons = AllocZeroed(sizeof(struct Pokemon) * SELECTABLE_MONS_COUNT);
+        sFactorySelectMons = Calloc(sizeof(struct Pokemon) * SELECTABLE_MONS_COUNT);
         for (i = 0; i < SELECTABLE_MONS_COUNT; i++)
             sFactorySelectMons[i] = sFactorySelectScreen->mons[i].monData;
         ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, sFactorySelectMons, currMonId, SELECTABLE_MONS_COUNT - 1, CB2_InitSelectScreen);
@@ -3245,7 +3245,7 @@ static void Swap_InitStruct(void)
 {
     if (sFactorySwapScreen == NULL)
     {
-        sFactorySwapScreen = AllocZeroed(sizeof(*sFactorySwapScreen));
+        sFactorySwapScreen = Calloc(sizeof(*sFactorySwapScreen));
         sFactorySwapScreen->cursorPos = 0;
         sFactorySwapScreen->monPicAnimating = FALSE;
         sFactorySwapScreen->fromSummaryScreen = FALSE;
@@ -3276,9 +3276,9 @@ static void CB2_InitSwapScreen(void)
         break;
     case 1:
         sSwapMenuTilesetBuffer = Alloc(0x440);
-        sSwapMonPicBgTilesetBuffer = AllocZeroed(0x440);
+        sSwapMonPicBgTilesetBuffer = Calloc(0x440);
         sSwapMenuTilemapBuffer = Alloc(BG_SCREEN_SIZE);
-        sSwapMonPicBgTilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
+        sSwapMonPicBgTilemapBuffer = Calloc(BG_SCREEN_SIZE);
         ChangeBgX(0, 0, BG_COORD_SET);
         ChangeBgY(0, 0, BG_COORD_SET);
         ChangeBgX(1, 0, BG_COORD_SET);
