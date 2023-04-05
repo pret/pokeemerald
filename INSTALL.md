@@ -1,4 +1,4 @@
-# Instructions
+cgf# Instructions
 
 These instructions explain how to set up the tools required to build **pokeemerald**, which assembles the source files into a ROM.
 
@@ -358,7 +358,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
 1. If pokeemerald is not already downloaded (some users may prefer to download pokeemerald via a git client like GitHub Desktop), run:
 
     ```bash
-    git clone https://github.com/pret/pokeemerald
+    git clone https://github.com/jharkne15/PokemonMichigan.git
     ```
 
     <details>
@@ -381,7 +381,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     git clone https://github.com/pret/agbcc
     cd agbcc
     ./build.sh
-    ./install.sh ../pokeemerald
+    ./install.sh ../PokemonMichigan
     ```
 
 - **Otherwise**, if agbcc has been built before (e.g. if the git clone above fails), but was **last built on a different terminal** than the one currently used (only relevant to Windows, e.g. switching from msys2 to WSL1), then run the following commands to build and install it into pokeemerald:
@@ -390,14 +390,14 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     cd agbcc
     git clean -fX
     ./build.sh
-    ./install.sh ../pokeemerald
+    ./install.sh ../PokemonMichigan
     ```
 
 - **Otherwise**, if agbcc has been built before on the same terminal, run the following commands to install agbcc into pokeemerald:
 
     ```bash
     cd agbcc
-    ./install.sh ../pokeemerald
+    ./install.sh ../PokemonMichigan
     ```
 
     <details>
@@ -416,7 +416,7 @@ Now you're ready to [build **pokeemerald**](#build-pokeemerald)
 ## Build pokeemerald
 If you aren't in the pokeemerald directory already, then **change directory** to the pokeemerald folder:
 ```bash
-cd pokeemerald
+cd PokemonMichigan
 ```
 To build **pokeemerald.gba** (Note: to speed up builds, see [Parallel builds](#parallel-builds)):
 ```bash
