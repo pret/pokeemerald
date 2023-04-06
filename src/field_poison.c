@@ -79,11 +79,7 @@ static void Task_TryFieldPoisonWhiteOut(u8 taskId)
             if (MonFaintedFromPoison(tPartyIdx))
             {
                 FaintFromFieldPoison(tPartyIdx);
-            #if OW_POISON_DAMAGE < GEN_4
                 ShowFieldMessage(gText_PkmnFainted_FldPsn);
-            #else
-                ShowFieldMessage(gText_PkmnSurvived_FldPsn);
-            #endif
                 tState++;
                 return;
             }
