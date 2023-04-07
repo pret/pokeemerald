@@ -155,8 +155,8 @@
 #define VAR_TERRAIN                 0     // If this var has a value, assigning a STATUS_FIELD_xx_TERRAIN to it before battle causes the battle to start with that terrain active
 #define B_VAR_WILD_AI_FLAGS         0     // If not 0, you can use this var to add to default wild AI flags. NOT usable with flags above (1 << 15)
 
-//Flag and Var settings
-#define B_RESET_FLAGS_VARS_AFTER_WHITEOUT TRUE // If set to TRUE, Flag and Var settings (B_FLAG_INVERSE_BATTLE,B_FLAG_FORCE_DOUBLE_WILD,B_SMART_WILD_AI_FLAG,B_FLAG_NO_BAG_USE,B_FLAG_NO_CATCHING,B_VAR_WILD_AI_FLAGS, and VAR_TERRAIN) will be reset when the player whites out.
+// Flag and Var settings
+#define B_RESET_FLAGS_VARS_AFTER_WHITEOUT TRUE // If TRUE, Overworld_ResetBattleFlagsAndVars will reset battle-related Flags and Vars when the player whites out.
 
 // Terrain settings
 #define B_TERRAIN_BG_CHANGE         TRUE       // If set to TRUE, terrain moves permanently change the default battle background until the effect fades.
