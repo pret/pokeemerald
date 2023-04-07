@@ -8952,6 +8952,13 @@ void ObjectEventUpdateElevation(struct ObjectEvent *objEvent)
 
     if (curElevation == 15 || prevElevation == 15)
         return;
+    
+    if (gSaveBlock2Ptr->follower.inProgress &&
+        objEvent == &gObjectEvents[gSaveBlock2Ptr->follower.objId] &&
+        objEvent->currentCoords.y == gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y - 1)
+    {
+        curElevation = gObjectEvents[gPlayerAvatar.objectEventId].currentElevation;
+    }
 
     objEvent->currentElevation = curElevation;
 
@@ -10341,6 +10348,7 @@ u8 MovementAction_FollowingPokemon_FaceSouth_Step0(struct ObjectEvent *objectEve
     SetObjectEventDirection(objectEvent, DIR_SOUTH);
     RecreateObjectEvent(objectEvent, sprite);
     sprite->animNum = 0;
+    sprite->x2 = 0;
     MoveObjectEventToMapCoords(objectEvent, objectEvent->currentCoords.x, objectEvent->currentCoords.y);
     sprite->data[2]++;
     return FALSE;
@@ -10351,6 +10359,7 @@ u8 MovementAction_FollowingPokemon_FaceNorth_Step0(struct ObjectEvent *objectEve
     SetObjectEventDirection(objectEvent, DIR_NORTH);
     RecreateObjectEvent(objectEvent, sprite);
     sprite->animNum = 1;
+    sprite->x2 = 0;
     MoveObjectEventToMapCoords(objectEvent, objectEvent->currentCoords.x, objectEvent->currentCoords.y);
     sprite->data[2]++;
     return FALSE;

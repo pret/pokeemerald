@@ -742,6 +742,7 @@ u32 FldEff_Splash(void)
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         linkedSprite = &gSprites[objectEvent->spriteId];
+        sprite->subpriority = linkedSprite->subpriority - 1;
         sprite->oam.priority = linkedSprite->oam.priority;
         sprite->data[0] = gFieldEffectArguments[0];
         sprite->data[1] = gFieldEffectArguments[1];
