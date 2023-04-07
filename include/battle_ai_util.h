@@ -144,6 +144,7 @@ bool32 AnyPartyMemberStatused(u8 battlerId, bool32 checkSoundproof);
 u32 ShouldTryToFlinch(u8 battlerAtk, u8 battlerDef, u16 atkAbility, u16 defAbility, u16 move);
 bool32 ShouldTrap(u8 battlerAtk, u8 battlerDef, u16 move);
 bool32 IsWakeupTurn(u8 battler);
+bool32 AI_IsBattlerAsleepOrComatose(u8 battlerId);
 
 // partner logic
 u16 GetAllyChosenMove(u8 battlerId);

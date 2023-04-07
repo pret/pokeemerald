@@ -3749,3 +3749,8 @@ bool32 ShouldUseZMove(u8 battlerAtk, u8 battlerDef, u16 chosenMove)
 
     return FALSE;
 }
+
+bool32 AI_IsBattlerAsleepOrComatose(u8 battlerId)
+{
+    return (gBattleMons[battlerId].status1 & STATUS1_SLEEP) || AI_DATA->abilities[battlerId] == ABILITY_COMATOSE;
+}
