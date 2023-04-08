@@ -81,7 +81,7 @@ TEST("CreateNPCTrainerPartyForTrainer generates customized Pokémon")
 
     EXPECT(GetMonData(&testParty[0], MON_DATA_HELD_ITEM, 0) == ITEM_ASSAULT_VEST);
     EXPECT(GetMonData(&testParty[1], MON_DATA_HELD_ITEM, 0) == ITEM_NONE);
-    
+
     EXPECT(GetMonData(&testParty[0], MON_DATA_HP_IV, 0) == 25);
     EXPECT(GetMonData(&testParty[0], MON_DATA_ATK_IV, 0) == 26);
     EXPECT(GetMonData(&testParty[0], MON_DATA_DEF_IV, 0) == 27);
