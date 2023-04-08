@@ -2111,7 +2111,13 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
         return 0;
     retVal = CreateNPCTrainerPartyFromTrainer(party, &gTrainers[trainerNum], firstTrainer, gBattleTypeFlags);
 
-    gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
+                                                                        | BATTLE_TYPE_EREADER_TRAINER
+                                                                        | BATTLE_TYPE_TRAINER_HILL)))
+    {
+        gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
+    }
+    return retVal;
 }
 
 void VBlankCB_Battle(void)
