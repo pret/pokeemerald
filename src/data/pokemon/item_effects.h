@@ -556,6 +556,9 @@ const u8 *const gItemEffectTable[ITEMS_COUNT] =
     [ITEM_MALICIOUS_ARMOR]    = gItemEffect_EvoItem,
     [ITEM_SCROLL_OF_DARKNESS] = gItemEffect_EvoItem,
     [ITEM_SCROLL_OF_WATERS]   = gItemEffect_EvoItem,
+    [ITEM_BLACK_AUGURITE]     = gItemEffect_EvoItem,
+    [ITEM_LINKING_CORD]       = gItemEffect_EvoItem,
+    [ITEM_PEAT_BLOCK]         = gItemEffect_EvoItem,
 
     // Berries
     [ITEM_CHERI_BERRY]        = gItemEffect_CheriBerry,
