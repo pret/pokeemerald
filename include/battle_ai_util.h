@@ -9,7 +9,8 @@
 
 bool32 AI_RandLessThan(u8 val);
 void RecordLastUsedMoveByTarget(void);
-bool32 IsBattlerAIControlled(u32 battlerId);
+bool32 BattlerHasAi(u32 battlerId);
+bool32 IsAiBattlerAware(u32 battlerId);
 void ClearBattlerMoveHistory(u8 battlerId);
 void RecordLastUsedMoveBy(u32 battlerId, u32 move);
 void RecordKnownMove(u8 battlerId, u32 move);
