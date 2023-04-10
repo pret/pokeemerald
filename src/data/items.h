@@ -10283,4 +10283,40 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 60,
     },
+
+    [ITEM_BLACK_AUGURITE] =
+    {
+        .name = _("BlackAugurite"),
+        .itemId = ITEM_BLACK_AUGURITE,
+        .price = 8000,
+        .description = sBlackAuguriteDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+        .flingPower = 30,
+    },
+
+    [ITEM_LINKING_CORD] =
+    {
+        .name = _("Linking Cord"),
+        .itemId = ITEM_LINKING_CORD,
+        .price = 8000,
+        .description = sLinkingCordDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+        .flingPower = 30,
+    },
+
+    [ITEM_PEAT_BLOCK] =
+    {
+        .name = _("Peat Block"),
+        .itemId = ITEM_PEAT_BLOCK,
+        .price = 10000,
+        .description = sPeatBlockDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+        .flingPower = 30,
+    },
 };

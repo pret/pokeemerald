@@ -34,6 +34,17 @@ TEST("RandomWeighted generates 0..n-1")
     }
 }
 
+TEST("RandomElement generates an element")
+{
+    u32 i;
+    static const u8 es[4] = { 1, 2, 4, 8 };
+    for (i = 0; i < 1024; i++)
+    {
+        u32 e = *(const u8 *)RandomElementArrayDefault(RNG_NONE, es, sizeof(es[0]), ARRAY_COUNT(es));
+        EXPECT(e == 1 || e == 2 || e == 4 || e == 8);
+    }
+}
+
 TEST("RandomUniform generates uniform distribution")
 {
     u32 i, error;
@@ -42,7 +53,7 @@ TEST("RandomUniform generates uniform distribution")
     memset(distribution, 0, sizeof(distribution));
     for (i = 0; i < 4096; i++)
     {
-        u32 r = RandomUniformDefault(RNG_NONE, 0, ARRAY_COUNT(distribution));
+        u32 r = RandomUniformDefault(RNG_NONE, 0, ARRAY_COUNT(distribution) - 1);
         EXPECT(0 <= r && r < ARRAY_COUNT(distribution));
         distribution[r]++;
     }
@@ -76,6 +87,26 @@ TEST("RandomWeighted generates distribution in proportion to the weights")
     error += abs(UQ_4_12(0.250) - distribution[1]);
     error += abs(UQ_4_12(0.250) - distribution[2]);
     error += abs(UQ_4_12(0.375) - distribution[3]);
+
+    EXPECT_LT(error, UQ_4_12(0.025));
+}
+
+TEST("RandomElement generates a uniform distribution")
+{
+    u32 i, error;
+    static const u8 es[4] = { 1, 2, 4, 8 };
+    u16 distribution[9];
+
+    memset(distribution, 0, sizeof(distribution));
+    for (i = 0; i < 4096; i++)
+    {
+        u32 e = *(const u8 *)RandomElementArrayDefault(RNG_NONE, es, sizeof(es[0]), ARRAY_COUNT(es));
+        distribution[e]++;
+    }
+
+    error = 0;
+    for (i = 0; i < ARRAY_COUNT(es); i++)
+        error += abs(UQ_4_12(0.25) - distribution[es[i]]);
 
     EXPECT_LT(error, UQ_4_12(0.025));
 }
