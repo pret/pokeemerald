@@ -292,6 +292,20 @@ static void BattleTest_Run(void *data)
 
 u32 RandomUniform(enum RandomTag tag, u32 lo, u32 hi)
 {
+    const struct BattlerTurn *turn = NULL;
+    u32 default_ = hi;
+
+    if (gCurrentTurnActionNumber < gBattlersCount)
+    {
+        u32 battlerId = gBattlerByTurnOrder[gCurrentTurnActionNumber];
+        turn = &DATA.battleRecordTurns[gBattleResults.battleTurnCounter][battlerId];
+    }
+
+    if (turn && turn->rng.tag == tag)
+    {
+        default_ = turn->rng.value;
+    }
+
     if (tag == STATE->rngTag)
     {
         u32 n = hi - lo + 1;
@@ -308,7 +322,7 @@ u32 RandomUniform(enum RandomTag tag, u32 lo, u32 hi)
         return STATE->runTrial + lo;
     }
 
-    return hi;
+    return default_;
 }
 
 u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights)
@@ -322,28 +336,35 @@ u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights)
         turn = &DATA.battleRecordTurns[gBattleResults.battleTurnCounter][battlerId];
     }
 
-    switch (tag)
+    if (turn && turn->rng.tag == tag)
     {
-    case RNG_ACCURACY:
-        ASSUME(n == 2);
-        if (turn && turn->hit)
-            return turn->hit - 1;
-        default_ = TRUE;
-        break;
+        default_ = turn->rng.value;
+    }
+    else
+    {
+        switch (tag)
+        {
+        case RNG_ACCURACY:
+            ASSUME(n == 2);
+            if (turn && turn->hit)
+                return turn->hit - 1;
+            default_ = TRUE;
+            break;
 
-    case RNG_CRITICAL_HIT:
-        ASSUME(n == 2);
-        if (turn && turn->criticalHit)
-            return turn->criticalHit - 1;
-        default_ = FALSE;
-        break;
+        case RNG_CRITICAL_HIT:
+            ASSUME(n == 2);
+            if (turn && turn->criticalHit)
+                return turn->criticalHit - 1;
+            default_ = FALSE;
+            break;
 
-    case RNG_SECONDARY_EFFECT:
-        ASSUME(n == 2);
-        if (turn && turn->secondaryEffect)
-            return turn->secondaryEffect - 1;
-        default_ = TRUE;
-        break;
+        case RNG_SECONDARY_EFFECT:
+            ASSUME(n == 2);
+            if (turn && turn->secondaryEffect)
+                return turn->secondaryEffect - 1;
+            default_ = TRUE;
+            break;
+        }
     }
 
     if (tag == STATE->rngTag)
@@ -363,6 +384,52 @@ u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights)
     }
 
     return default_;
+}
+
+const void *RandomElementArray(enum RandomTag tag, const void *array, size_t size, size_t count)
+{
+    const struct BattlerTurn *turn = NULL;
+    u32 index = count-1;
+
+    if (gCurrentTurnActionNumber < gBattlersCount)
+    {
+        u32 battlerId = gBattlerByTurnOrder[gCurrentTurnActionNumber];
+        turn = &DATA.battleRecordTurns[gBattleResults.battleTurnCounter][battlerId];
+    }
+
+    if (turn && turn->rng.tag == tag)
+    {
+        u32 element;
+        for (index = 0; index < count; index++)
+        {
+            memcpy(&element, (const u8 *)array + size * index, size);
+            if (element == turn->rng.value)
+                break;
+        }
+        if (index == count)
+        {
+            // TODO: Incorporate the line number.
+            const char *filename = gTestRunnerState.test->filename;
+            Test_ExitWithResult(TEST_RESULT_ERROR, "%s: RandomElement illegal value requested: %d", filename, turn->rng.value);
+        }
+    }
+
+    if (tag == STATE->rngTag)
+    {
+        if (STATE->trials == 1)
+        {
+            STATE->trials = count;
+            PrintTestName();
+        }
+        else if (STATE->trials != count)
+        {
+            Test_ExitWithResult(TEST_RESULT_ERROR, "RandomElement called with inconsistent trials %d and %d", STATE->trials, count);
+        }
+        STATE->trialRatio = Q_4_12(1) / count;
+        index = STATE->runTrial;
+    }
+
+    return (const u8 *)array + size * index;
 }
 
 static s32 TryAbilityPopUp(s32 i, s32 n, u32 battlerId, u32 ability)
@@ -1357,6 +1424,8 @@ void Move(u32 sourceLine, struct BattlePokemon *battler, struct MoveContext ctx)
         DATA.battleRecordTurns[DATA.turns][battlerId].criticalHit = 1 + ctx.criticalHit;
     if (ctx.explicitSecondaryEffect)
         DATA.battleRecordTurns[DATA.turns][battlerId].secondaryEffect = 1 + ctx.secondaryEffect;
+    if (ctx.explicitRNG)
+        DATA.battleRecordTurns[DATA.turns][battlerId].rng = ctx.rng;
 
     if (!(DATA.actionBattlers & (1 << battlerId)))
     {

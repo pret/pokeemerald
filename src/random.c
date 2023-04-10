@@ -38,9 +38,12 @@ u32 RandomUniform(enum RandomTag tag, u32 lo, u32 hi);
 __attribute__((weak, alias("RandomWeightedArrayDefault")))
 u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights);
 
+__attribute__((weak, alias("RandomElementArrayDefault")))
+const void *RandomElementArray(enum RandomTag tag, const void *array, size_t size, size_t count);
+
 u32 RandomUniformDefault(enum RandomTag tag, u32 lo, u32 hi)
 {
-    return lo + (((hi - lo) * Random()) >> 16);
+    return lo + (((hi - lo + 1) * Random()) >> 16);
 }
 
 u32 RandomWeightedArrayDefault(enum RandomTag tag, u32 sum, u32 n, const u8 *weights)
@@ -54,4 +57,9 @@ u32 RandomWeightedArrayDefault(enum RandomTag tag, u32 sum, u32 n, const u8 *wei
             return i;
     }
     return n - 1;
+}
+
+const void *RandomElementArrayDefault(enum RandomTag tag, const void *array, size_t size, size_t count)
+{
+    return (const u8 *)array + size * RandomUniformDefault(tag, 0, count - 1);
 }
