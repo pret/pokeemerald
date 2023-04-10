@@ -537,7 +537,7 @@ void ClearBattlerItemEffectHistory(u8 battlerId)
 
 void SaveBattlerData(u8 battlerId)
 {
-    if (!IsBattlerAIControlled(battlerId))
+    if (!BattlerHasAi(battlerId))
     {
         u32 i;
 
@@ -588,7 +588,7 @@ static bool32 ShouldFailForIllusion(u16 illusionSpecies, u32 battlerId)
 
 void SetBattlerData(u8 battlerId)
 {
-    if (!IsBattlerAIControlled(battlerId))
+    if (!BattlerHasAi(battlerId))
     {
         u32 i, species, illusionSpecies;
 
@@ -631,7 +631,7 @@ void SetBattlerData(u8 battlerId)
 
 void RestoreBattlerData(u8 battlerId)
 {
-    if (!IsBattlerAIControlled(battlerId))
+    if (!BattlerHasAi(battlerId))
     {
         u32 i;
 
