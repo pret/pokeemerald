@@ -120,8 +120,6 @@ static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite);
 static void TrySpecialEvolution(void);
 static u32 Crc32B (const u8 *data, u32 size);
 static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i);
-static void ModifyPersonalityForNature(u32 *personality, u32 newNature);
-static u32 GeneratePersonalityForGender(u32 gender, u32 species);
 static void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMonCustomized *partyEntry);
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
@@ -1926,7 +1924,7 @@ static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i)
     return Crc32B(buffer, n);
 }
 
-static void ModifyPersonalityForNature(u32 *personality, u32 newNature)
+void ModifyPersonalityForNature(u32 *personality, u32 newNature)
 {
     u32 nature = GetNatureFromPersonality(*personality);
     s32 diff = abs(nature - newNature);
@@ -1939,7 +1937,7 @@ static void ModifyPersonalityForNature(u32 *personality, u32 newNature)
     *personality -= (diff * sign);
 }
 
-static u32 GeneratePersonalityForGender(u32 gender, u32 species)
+u32 GeneratePersonalityForGender(u32 gender, u32 species)
 {
     const struct SpeciesInfo *speciesInfo = &gSpeciesInfo[species];
     if (gender == MON_MALE)
@@ -2130,7 +2128,13 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
         return 0;
     retVal = CreateNPCTrainerPartyFromTrainer(party, &gTrainers[trainerNum], firstTrainer, gBattleTypeFlags);
 
-    gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
+                                                                        | BATTLE_TYPE_EREADER_TRAINER
+                                                                        | BATTLE_TYPE_TRAINER_HILL)))
+    {
+        gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
+    }
+    return retVal;
 }
 
 void VBlankCB_Battle(void)

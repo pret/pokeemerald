@@ -44,7 +44,9 @@ static void FaintFromFieldPoison(u8 partyIdx)
     struct Pokemon *pokemon = &gPlayerParty[partyIdx];
     u32 status = STATUS1_NONE;
 
+#if OW_POISON_DAMAGE < GEN_4
     AdjustFriendship(pokemon, FRIENDSHIP_EVENT_FAINT_FIELD_PSN);
+#endif
     SetMonData(pokemon, MON_DATA_STATUS, &status);
     GetMonData(pokemon, MON_DATA_NICKNAME, gStringVar1);
     StringGet_Nickname(gStringVar1);
@@ -53,7 +55,11 @@ static void FaintFromFieldPoison(u8 partyIdx)
 static bool32 MonFaintedFromPoison(u8 partyIdx)
 {
     struct Pokemon *pokemon = &gPlayerParty[partyIdx];
+#if OW_POISON_DAMAGE < GEN_4
     if (IsMonValidSpecies(pokemon) && GetMonData(pokemon, MON_DATA_HP) == 0 && GetAilmentFromStatus(GetMonData(pokemon, MON_DATA_STATUS)) == AILMENT_PSN)
+#else
+    if (IsMonValidSpecies(pokemon) && GetMonData(pokemon, MON_DATA_HP) == 1 && GetAilmentFromStatus(GetMonData(pokemon, MON_DATA_STATUS)) == AILMENT_PSN)
+#endif
         return TRUE;
 
     return FALSE;
@@ -127,7 +133,11 @@ s32 DoPoisonFieldEffect(void)
         {
             // Apply poison damage
             hp = GetMonData(pokemon, MON_DATA_HP);
+        #if OW_POISON_DAMAGE < GEN_4
             if (hp == 0 || --hp == 0)
+        #else
+            if (hp == 1 || --hp == 1)
+        #endif
                 numFainted++;
 
             SetMonData(pokemon, MON_DATA_HP, &hp);

@@ -974,7 +974,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             }
             break;
         case EFFECT_DREAM_EATER:
-            if (!(gBattleMons[battlerDef].status1 & STATUS1_SLEEP) || AI_DATA->abilities[battlerDef] == ABILITY_COMATOSE)
+            if (!AI_IsBattlerAsleepOrComatose(battlerDef))
                 score -= 8;
             else if (effectiveness == AI_EFFECTIVENESS_x0)
                 score -= 10;
@@ -1453,7 +1453,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             break;
         case EFFECT_SNORE:
         case EFFECT_SLEEP_TALK:
-            if (IsWakeupTurn(battlerAtk) || (!(gBattleMons[battlerAtk].status1 & STATUS1_SLEEP) || AI_DATA->abilities[battlerAtk] != ABILITY_COMATOSE))
+            if (IsWakeupTurn(battlerAtk) || !AI_IsBattlerAsleepOrComatose(battlerAtk))
                 score -= 10;    // if mon will wake up, is not asleep, or is not comatose
             break;
         case EFFECT_MEAN_LOOK:
@@ -1463,7 +1463,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_NIGHTMARE:
             if (gBattleMons[battlerDef].status2 & STATUS2_NIGHTMARE)
                 score -= 10;
-            else if (!(gBattleMons[battlerDef].status1 & STATUS1_SLEEP) || AI_DATA->abilities[battlerDef] == ABILITY_COMATOSE)
+            else if (!AI_IsBattlerAsleepOrComatose(battlerDef))
                 score -= 8;
             else if (DoesPartnerHaveSameMoveEffect(BATTLE_PARTNER(battlerAtk), battlerDef, move, AI_DATA->partnerMove))
                 score -= 10;
@@ -3780,7 +3780,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_NIGHTMARE:
         if (AI_DATA->abilities[battlerDef] != ABILITY_MAGIC_GUARD
           && !(gBattleMons[battlerDef].status2 & STATUS2_NIGHTMARE)
-          && (AI_DATA->abilities[battlerDef] == ABILITY_COMATOSE || gBattleMons[battlerDef].status1 & STATUS1_SLEEP))
+          && AI_IsBattlerAsleepOrComatose(battlerDef))
         {
             score += 5;
             if (IsBattlerTrapped(battlerDef, TRUE))
