@@ -367,7 +367,7 @@ void GetAiLogicData(void)
     for (battlerAtk = 0; battlerAtk < gBattlersCount; battlerAtk++)
     {
         if (!IsBattlerAlive(battlerAtk)
-          || !IsBattlerAIControlled(battlerAtk)) {
+          || !IsAiBattlerAware(battlerAtk)) {
             continue;
         }
 

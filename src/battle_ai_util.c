@@ -473,7 +473,7 @@ bool32 BattlerHasAi(u32 battlerId)
     }
 }
 
-bool32 IsBattlerAIControlled(u32 battlerId)
+bool32 IsAiBattlerAware(u32 battlerId)
 {
     if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_OMNISCIENT)
         return TRUE;
@@ -1231,7 +1231,7 @@ s32 AI_GetAbility(u32 battlerId)
         return gBattleStruct->overwrittenAbilities[battlerId];
 
     // The AI knows its own ability.
-    if (IsBattlerAIControlled(battlerId))
+    if (IsAiBattlerAware(battlerId))
         return knownAbility;
 
     // Check neutralizing gas, gastro acid
@@ -1264,7 +1264,7 @@ u16 AI_GetHoldEffect(u32 battlerId)
 {
     u32 holdEffect;
 
-    if (!IsBattlerAIControlled(battlerId))
+    if (!IsAiBattlerAware(battlerId))
         holdEffect = AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].heldEffect;
     else
         holdEffect = GetBattlerHoldEffect(battlerId, FALSE);
@@ -1889,7 +1889,7 @@ bool32 CanIndexMoveFaintTarget(u8 battlerAtk, u8 battlerDef, u8 index, u8 numHit
 
 u16 *GetMovesArray(u32 battler)
 {
-    if (IsBattlerAIControlled(battler) || IsBattlerAIControlled(BATTLE_PARTNER(battler)))
+    if (IsAiBattlerAware(battler) || IsAiBattlerAware(BATTLE_PARTNER(battler)))
         return gBattleMons[battler].moves;
     else
         return gBattleResources->battleHistory->usedMoves[battler];
@@ -3144,7 +3144,7 @@ u16 GetAllyChosenMove(u8 battlerId)
 {
     u8 partnerBattler = BATTLE_PARTNER(battlerId);
 
-    if (!IsBattlerAlive(partnerBattler) || !IsBattlerAIControlled(partnerBattler))
+    if (!IsBattlerAlive(partnerBattler) || !IsAiBattlerAware(partnerBattler))
         return MOVE_NONE;
     else if (partnerBattler > battlerId) // Battler with the lower id chooses the move first.
         return gLastMoves[partnerBattler];
