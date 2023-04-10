@@ -1531,6 +1531,9 @@ void MegaIndicator_SetVisibilities(u32 healthboxId, bool32 invisible)
     u8 *spriteIds = MegaIndicator_GetSpriteIds(healthboxId);
     u32 battlerId = gSprites[healthboxId].hMain_Battler;
 
+    if (GetSafariZoneFlag())
+        return;
+
     for (i = 0; i < INDICATOR_COUNT; i++)
     {
         if (invisible == TRUE)
