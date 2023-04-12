@@ -3196,6 +3196,7 @@ static void BattleStartClearSetData(void)
     }
 
     gBattleStruct->swapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
+    gSelectedMonPartyId = PARTY_SIZE; // Revival Blessing
 }
 
 void SwitchInClearSetData(void)
@@ -3307,6 +3308,9 @@ void SwitchInClearSetData(void)
     gSpecialStatuses[gActiveBattler].specialDmg = 0;
 
     gBattleStruct->overwrittenAbilities[gActiveBattler] = ABILITY_NONE;
+
+    // Clear selected party ID so Revival Blessing doesn't get confused.
+    gSelectedMonPartyId = PARTY_SIZE;
 
     Ai_UpdateSwitchInData(gActiveBattler);
 }

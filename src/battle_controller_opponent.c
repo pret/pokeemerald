@@ -20,6 +20,7 @@
 #include "main.h"
 #include "m4a.h"
 #include "palette.h"
+#include "party_menu.h"
 #include "pokeball.h"
 #include "pokemon.h"
 #include "random.h"
@@ -33,6 +34,7 @@
 #include "constants/battle_anim.h"
 #include "constants/items.h"
 #include "constants/moves.h"
+#include "constants/party_menu.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "trainer_hill.h"
@@ -1674,7 +1676,13 @@ static void OpponentHandleChoosePokemon(void)
     s32 chosenMonId;
     s32 pokemonInBattle = 1;
 
-    if (*(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) == PARTY_SIZE)
+    // Choosing Revival Blessing target
+    if ((gBattleResources->bufferA[gActiveBattler][1] & 0xF) == PARTY_ACTION_CHOOSE_FAINTED_MON)
+    {
+        chosenMonId = gSelectedMonPartyId = GetFirstFaintedPartyIndex(gActiveBattler);
+    }
+    // Switching out
+    else if (*(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) == PARTY_SIZE)
     {
         chosenMonId = GetMostSuitableMonToSwitchInto();
 
@@ -1709,17 +1717,17 @@ static void OpponentHandleChoosePokemon(void)
                 }
             }
         }
+        *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = chosenMonId;
     }
     else
     {
         chosenMonId = *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler);
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
+        *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = chosenMonId;
     }
-
-
-    *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = chosenMonId;
     BtlController_EmitChosenMonReturnValue(BUFFER_B, chosenMonId, NULL);
     OpponentBufferExecCompleted();
+
 }
 
 static u8 CountAIAliveNonEggMonsExcept(u8 slotToIgnore)

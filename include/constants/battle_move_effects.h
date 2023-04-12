@@ -404,7 +404,8 @@
 #define EFFECT_HIT_SET_ENTRY_HAZARD         398
 #define EFFECT_DIRE_CLAW                    399
 #define EFFECT_BARB_BARRAGE                 400
+#define EFFECT_REVIVAL_BLESSING             401
 
-#define NUM_BATTLE_MOVE_EFFECTS             401
+#define NUM_BATTLE_MOVE_EFFECTS             402
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

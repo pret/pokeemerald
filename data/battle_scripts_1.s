@@ -423,6 +423,25 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHitSetEntryHazard       @ EFFECT_HIT_SET_ENTRY_HAZARD
 	.4byte BattleScript_EffectDireClaw                @ EFFECT_DIRE_CLAW
 	.4byte BattleScript_EffectBarbBarrage             @ EFFECT_BARB_BARRAGE
+	.4byte BattleScript_EffectRevivalBlessing         @ EFFECT_REVIVAL_BLESSING
+
+BattleScript_EffectRevivalBlessing::
+	attackcanceler
+	attackstring
+	ppreduce
+	attackanimation
+	waitanimation
+	tryrevivalblessing BattleScript_ButItFailed
+	printstring STRINGID_PKMNREVIVEDREADYTOFIGHT
+	waitmessage B_WAIT_TIME_LONG
+    jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_EffectRevivalBlessingSendOut
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectRevivalBlessingSendOut:
+    switchinanim BS_SCRIPTING, FALSE
+	waitstate
+	switchineffects BS_SCRIPTING
+    goto BattleScript_MoveEnd
 
 BattleScript_StealthRockActivates::
 	setstealthrock BattleScript_MoveEnd

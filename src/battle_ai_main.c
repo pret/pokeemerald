@@ -2623,6 +2623,15 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             if (gBattleMons[battlerAtk].hp <= gBattleMons[battlerAtk].maxHP / 3)
                 score -= 10;
             break;*/
+        case EFFECT_REVIVAL_BLESSING:
+            if (GetFirstFaintedPartyIndex(battlerAtk) == PARTY_SIZE)
+                score -= 10;
+            else if (CanAIFaintTarget(battlerAtk, battlerDef, 0))
+                score -= 10;
+            else if (CanTargetFaintAi(battlerDef, battlerAtk)
+             && AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER)
+                score -= 10;
+            break;
         case EFFECT_PLACEHOLDER:
             return 0;   // cannot even select
     } // move effect checks
@@ -4807,6 +4816,10 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         {
             score++;
         }
+        break;
+    case EFFECT_REVIVAL_BLESSING:
+        if (GetFirstFaintedPartyIndex(battlerAtk) != PARTY_SIZE)
+            score += 2;
         break;
     //case EFFECT_EXTREME_EVOBOOST: // TODO
         //break;

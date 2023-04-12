@@ -13048,7 +13048,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_REVIVAL_BLESSING] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_REVIVAL_BLESSING
+        .effect = EFFECT_REVIVAL_BLESSING,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
