@@ -5500,7 +5500,7 @@ static void ContestBG_FillBoxWithTile(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 wi
 static bool32 Contest_RunTextPrinters(void)
 {
     RunTextPrinters();
-    return IsTextPrinterActive(4);
+    return IsTextPrinterActive(WIN_GENERAL_TEXT);
 }
 
 static void Contest_SetBgCopyFlags(u32 flagIndex)
