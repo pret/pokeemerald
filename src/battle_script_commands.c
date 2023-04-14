@@ -6468,10 +6468,7 @@ bool32 CanBattlerSwitch(u32 battlerId)
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
-        if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
-            party = gEnemyParty;
-        else
-            party = gPlayerParty;
+        party = GetBattlerParty(battlerId);
 
         lastMonId = 0;
         if (battlerId & 2)
@@ -6512,10 +6509,7 @@ bool32 CanBattlerSwitch(u32 battlerId)
         }
         else
         {
-            if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
-                party = gEnemyParty;
-            else
-                party = gPlayerParty;
+            party = GetBattlerParty(battlerId);
 
             lastMonId = 0;
             if (GetLinkTrainerFlankId(GetBattlerMultiplayerId(battlerId)) == TRUE)
@@ -7669,10 +7663,7 @@ static void Cmd_drawpartystatussummary(void)
 
     gActiveBattler = GetBattlerForBattleScript(cmd->battler);
 
-    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-        party = gPlayerParty;
-    else
-        party = gEnemyParty;
+    party = GetBattlerParty(gActiveBattler);
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -8746,7 +8737,8 @@ static bool32 CourtChangeSwapSideStatuses(void)
 
 static void HandleScriptMegaPrimal(u32 caseId, u32 battlerId, bool32 isMega)
 {
-    struct Pokemon *mon = GetBattlerPartyData(battlerId);
+    struct Pokemon *party = GetBattlerParty(battlerId);
+    struct Pokemon *mon = &party[gBattlerPartyIndexes[battlerId]];
     u32 position = GetBattlerPosition(battlerId);
     u32 side = GET_BATTLER_SIDE(battlerId);
 
@@ -8814,8 +8806,7 @@ static void HandleScriptMegaPrimal(u32 caseId, u32 battlerId, bool32 isMega)
 
 static bool32 CanTeleport(u8 battlerId)
 {
-    u8 side = GetBattlerSide(battlerId);
-    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    struct Pokemon *party = GetBattlerParty(battlerId);
     u32 species, count, i;
 
     for (i = 0; i < PARTY_SIZE; i++)
@@ -11242,7 +11233,7 @@ static void Cmd_various(void)
         // Battler selected! Revive and go to next instruction.
         if (gSelectedMonPartyId != PARTY_SIZE)
         {
-            struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+            struct Pokemon *party = GetSideParty(side);
 
             u16 hp = GetMonData(&party[gSelectedMonPartyId], MON_DATA_MAX_HP) / 2;
             BtlController_EmitSetMonData(BUFFER_A, REQUEST_HP_BATTLE, gBitTable[gSelectedMonPartyId], sizeof(hp), &hp);
@@ -12326,10 +12317,7 @@ static void Cmd_forcerandomswitch(void)
         || redCardForcedSwitch
        )
     {
-        if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
-            party = gPlayerParty;
-        else
-            party = gEnemyParty;
+        party = GetBattlerParty(gBattlerTarget);
 
         if (BATTLE_TWO_VS_ONE_OPPONENT && GetBattlerSide(gBattlerTarget) == B_SIDE_OPPONENT)
         {
@@ -13528,15 +13516,10 @@ static void Cmd_healpartystatus(void)
 
     if (gCurrentMove == MOVE_HEAL_BELL)
     {
-        struct Pokemon *party;
+        struct Pokemon *party = GetBattlerParty(gBattlerAttacker);
         s32 i;
 
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_BELL;
-
-        if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-            party = gPlayerParty;
-        else
-            party = gEnemyParty;
 
         if (GetBattlerAbility(gBattlerAttacker) != ABILITY_SOUNDPROOF)
         {
@@ -14165,12 +14148,7 @@ static void Cmd_trydobeatup(void)
     gBattleStruct->beatUpSlot++;
     gBattlescriptCurrInstr = cmd->nextInstr;
 #else
-    struct Pokemon *party;
-
-    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-        party = gPlayerParty;
-    else
-        party = gEnemyParty;
+    struct Pokemon *party = GetBattlerParty(gBattlerAttacker);
 
     if (gBattleMons[gBattlerTarget].hp == 0)
     {
@@ -14864,10 +14842,7 @@ static void Cmd_assistattackselect(void)
 
     if (validMoves != NULL)
     {
-        if (GET_BATTLER_SIDE(gBattlerAttacker) != B_SIDE_PLAYER)
-            party = gEnemyParty;
-        else
-            party = gPlayerParty;
+        party = GetBattlerParty(gBattlerAttacker);
 
         for (monId = 0; monId < PARTY_SIZE; monId++)
         {
@@ -16396,7 +16371,7 @@ u8 GetFirstFaintedPartyIndex(u8 battlerId)
     u32 i;
     u32 start = 0;
     u32 end = PARTY_SIZE;
-    struct Pokemon *party = (GetBattlerSide(battlerId) == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    struct Pokemon *party = GetBattlerParty(battlerId);
 
     // Check whether partner is separate trainer.
     if ((GetBattlerSide(battlerId) == B_SIDE_PLAYER && gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
@@ -16435,7 +16410,7 @@ void BS_ItemRestoreHP(void) {
     u32 battlerId = MAX_BATTLERS_COUNT;
     u32 healParam = GetItemEffect(gLastUsedItem)[6];
     u32 side = GetBattlerSide(gBattlerAttacker);
-    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    struct Pokemon *party = GetSideParty(side);
     u16 hp = GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_HP);
     u16 maxHP = GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_MAX_HP);
     gBattleCommunication[MULTIUSE_STATE] = 0;
@@ -16493,7 +16468,7 @@ void BS_ItemRestoreHP(void) {
 
 void BS_ItemCureStatus(void) {
     NATIVE_ARGS();
-    struct Pokemon *party = (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    struct Pokemon *party = GetBattlerParty(gBattlerAttacker);
     
     // Heal Status1 conditions.
     HealStatusConditions(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], gBattleStruct->itemPartyIndex[gBattlerAttacker], GetItemStatus1Mask(gLastUsedItem), gBattlerAttacker);
