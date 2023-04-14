@@ -581,8 +581,6 @@ struct BattleStruct
     void (*savedCallback)(void);
     u16 usedHeldItems[PARTY_SIZE][NUM_BATTLE_SIDES]; // For each party member and side. For harvest, recycle
     u16 chosenItem[MAX_BATTLERS_COUNT];
-    u8 AI_itemType[2];
-    u8 AI_itemFlags[2];
     u16 choicedMove[MAX_BATTLERS_COUNT];
     u16 changedItems[MAX_BATTLERS_COUNT];
     u8 switchInItemsCounter;
@@ -662,6 +660,7 @@ struct BattleStruct
     u8 storedHealingWish:4; // Each battler as a bit.
     u8 storedLunarDance:4; // Each battler as a bit.
     u16 supremeOverlordModifier[MAX_BATTLERS_COUNT];
+    u8 itemPartyIndex[MAX_BATTLERS_COUNT];
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)

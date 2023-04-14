@@ -3,6 +3,7 @@
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "characters.h"
+#include "item_menu.h"
 #include "main.h"
 #include "malloc.h"
 #include "random.h"
@@ -1251,6 +1252,9 @@ void BattleTest_CheckBattleRecordActionType(u32 battlerId, u32 recordIndex, u32 
                 case B_ACTION_SWITCH:
                     actualMacro = "SWITCH";
                     break;
+                case B_ACTION_USE_ITEM:
+                    actualMacro = "USE_ITEM";
+                    break;
                 }
                 break;
             case RECORDED_PARTY_INDEX:
@@ -1506,6 +1510,40 @@ void SendOut(u32 sourceLine, struct BattlePokemon *battler, u32 partyIndex)
         Move(sourceLine, battler, (struct MoveContext) { move: MOVE_CELEBRATE, explicitMove: TRUE });
     PushBattlerAction(sourceLine, battlerId, RECORDED_PARTY_INDEX, partyIndex);
     DATA.currentMonIndexes[battlerId] = partyIndex;
+}
+
+void UseItem(u32 sourceLine, struct BattlePokemon *battler, struct ItemContext ctx)
+{
+    s32 i;
+    s32 battlerId = battler - gBattleMons;
+    bool32 requirePartyIndex = ItemId_GetType(ctx.itemId) == ITEM_USE_PARTY_MENU || ItemId_GetType(ctx.itemId) == ITEM_USE_PARTY_MENU_MOVES;
+    // Check general bad use.
+    INVALID_IF(DATA.turnState == TURN_CLOSED, "USE_ITEM outside TURN");
+    INVALID_IF(DATA.actionBattlers & (1 << battlerId), "Multiple battler actions");
+    INVALID_IF(ctx.itemId >= ITEMS_COUNT, "Illegal item: %d", ctx.itemId);
+    // Check party menu items.
+    INVALID_IF(requirePartyIndex && !ctx.explicitPartyIndex, "%S requires explicit party index", ItemId_GetName(ctx.itemId));
+    INVALID_IF(requirePartyIndex && ctx.partyIndex >= ((battlerId & BIT_SIDE) == B_SIDE_PLAYER ? DATA.playerPartySize : DATA.opponentPartySize), \
+                "USE_ITEM to invalid party index");
+    // Check move slot items.
+    if (ItemId_GetType(ctx.itemId) == ITEM_USE_PARTY_MENU_MOVES)
+    {
+        INVALID_IF(!ctx.explicitMove, "%S requires an explicit move", ItemId_GetName(ctx.itemId));
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            if (GetMonData(CurrentMon(battlerId), MON_DATA_MOVE1 + i, NULL) == ctx.move)
+                break;
+        }
+        INVALID_IF(i == MAX_MON_MOVES, "USE_ITEM on invalid move: %d", ctx.move);
+    }
+    PushBattlerAction(sourceLine, battlerId, RECORDED_ACTION_TYPE, B_ACTION_USE_ITEM);
+    PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_ID, (ctx.itemId >> 8) & 0xFF);
+    PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_ID, ctx.itemId & 0xFF);
+    if (ctx.explicitPartyIndex)
+        gBattleStruct->itemPartyIndex[battlerId] = ctx.partyIndex;
+    if (ctx.explicitMove)
+        gBattleStruct->itemPartyIndex[battlerId] = i;
+    DATA.actionBattlers |= 1 << battlerId;
 }
 
 static const char *const sQueueGroupTypeMacros[] =
