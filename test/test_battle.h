@@ -303,13 +303,14 @@
  * The inference process is naive, if your test contains anything that
  * modifies the speed of a battler you should specify them explicitly.
  *
- * MOVE(battler, move | moveSlot:, [megaEvolve:], [hit:], [criticalHit:], [target:], [allowed:])
+ * MOVE(battler, move | moveSlot:, [megaEvolve:], [hit:], [criticalHit:], [target:], [allowed:], [WITH_RNG(tag, value])
  * Used when the battler chooses Fight. Either the move ID or move slot
  * must be specified. megaEvolve: TRUE causes the battler to Mega Evolve
  * if able, hit: FALSE causes the move to miss, criticalHit: TRUE causes
  * the move to land a critical hit, target: is used in double battles to
  * choose the target (when necessary), and allowed: FALSE is used to
- * reject an illegal move e.g. a Disabled one.
+ * reject an illegal move e.g. a Disabled one. WITH_RNG allows the move
+ * to specify an explicit outcome for an RNG tag.
  *     MOVE(playerLeft, MOVE_TACKLE, target: opponentRight);
  * If the battler does not have an explicit Moves specified the moveset
  * will be populated based on the MOVEs it uses.
@@ -538,11 +539,18 @@ struct QueuedEvent
     } as;
 };
 
+struct TurnRNG
+{
+    u16 tag;
+    u16 value;
+};
+
 struct BattlerTurn
 {
     u8 hit:2;
     u8 criticalHit:2;
     u8 secondaryEffect:2;
+    struct TurnRNG rng;
 };
 
 struct BattleTestData
@@ -758,6 +766,8 @@ enum { TURN_CLOSED, TURN_OPEN, TURN_CLOSING };
 #define SKIP_TURN(battler) SkipTurn(__LINE__, battler)
 #define SEND_OUT(battler, partyIndex) SendOut(__LINE__, battler, partyIndex)
 
+#define WITH_RNG(tag, value) rng: ((struct TurnRNG) { tag, value })
+
 struct MoveContext
 {
     u16 move;
@@ -777,6 +787,8 @@ struct MoveContext
     u16 explicitAllowed:1;
     struct BattlePokemon *target;
     bool8 explicitTarget;
+    struct TurnRNG rng;
+    bool8 explicitRNG;
 };
 
 void OpenTurn(u32 sourceLine);

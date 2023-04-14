@@ -5109,7 +5109,7 @@ static bool8 IsEasyChatGroupUnlocked(u8 groupId)
     switch (groupId)
     {
     case EC_GROUP_TRENDY_SAYING:
-        return FlagGet(FLAG_SYS_HIPSTER_MEET);
+        return FlagGet(FLAG_UNLOCKED_TRENDY_SAYINGS);
     case EC_GROUP_EVENTS:
     case EC_GROUP_MOVE_1:
     case EC_GROUP_MOVE_2:
@@ -5425,80 +5425,99 @@ void BufferDeepLinkPhrase(void)
     CopyEasyChatWord(gStringVar2, easyChatWord);
 }
 
-static bool8 IsAdditionalPhraseUnlocked(u8 additionalPhraseId)
+/*
+    ### Trendy Sayings
+
+    Not to be confused with Dewford Town's "trendy phrase".
+
+    This is a group of easy chat words (EC_GROUP_TRENDY_SAYING) that are normally inaccessible.
+    They can be unlocked either through Mystery Event (where they're referred to as "rare" words)
+    or from the "Hipster" variety of the Mauville Old Man. The Hipster can unlock one word each
+    time he is received via record mixing (and once if he is the player's default Old Man).
+
+    Which words have been unlocked is saved in the unlockedTrendySayings bitfield in SaveBlock1
+
+    Unlocked trendy saying words are only accessible if the flag FLAG_UNLOCKED_TRENDY_SAYINGS is set.
+    It's set any time the player talks to the Hipster, but is not apparently set by Mystery Event,
+    meaning trendy saying words unlocked via Mystery Event may not be available until the player has
+    talked to the Hipster.
+*/
+static bool8 IsTrendySayingUnlocked(u8 wordIndex)
 {
-    int byteOffset = additionalPhraseId / 8;
-    int shift = additionalPhraseId % 8;
-    return (gSaveBlock1Ptr->additionalPhrases[byteOffset] >> shift) & 1;
+    int byteOffset = wordIndex / 8;
+    int shift = wordIndex % 8;
+    return (gSaveBlock1Ptr->unlockedTrendySayings[byteOffset] >> shift) & 1;
 }
 
-void UnlockAdditionalPhrase(u8 additionalPhraseId)
+void UnlockTrendySaying(u8 wordIndex)
 {
-    if (additionalPhraseId < NUM_ADDITIONAL_PHRASES)
+    if (wordIndex < NUM_TRENDY_SAYINGS)
     {
-        int byteOffset = additionalPhraseId / 8;
-        int shift = additionalPhraseId % 8;
-        gSaveBlock1Ptr->additionalPhrases[byteOffset] |= 1 << shift;
+        int byteOffset = wordIndex / 8;
+        int shift = wordIndex % 8;
+        gSaveBlock1Ptr->unlockedTrendySayings[byteOffset] |= 1 << shift;
     }
 }
 
-static u8 GetNumAdditionalPhrasesUnlocked(void)
+static u8 GetNumTrendySayingsUnlocked(void)
 {
     u8 i;
-    u8 numAdditionalPhrasesUnlocked;
+    u8 numUnlocked;
 
-    for (i = 0, numAdditionalPhrasesUnlocked = 0; i < NUM_ADDITIONAL_PHRASES; i++)
+    for (i = 0, numUnlocked = 0; i < NUM_TRENDY_SAYINGS; i++)
     {
-        if (IsAdditionalPhraseUnlocked(i))
-            numAdditionalPhrasesUnlocked++;
+        if (IsTrendySayingUnlocked(i))
+            numUnlocked++;
     }
 
-    return numAdditionalPhrasesUnlocked;
+    return numUnlocked;
 }
 
-u16 GetNewHipsterPhraseToTeach(void)
+u16 UnlockRandomTrendySaying(void)
 {
     u16 i;
-    u16 additionalPhraseId;
-    u8 numAdditionalPhrasesUnlocked = GetNumAdditionalPhrasesUnlocked();
-    if (numAdditionalPhrasesUnlocked == NUM_ADDITIONAL_PHRASES)
+    u16 numToSkip;
+    u8 numUnlocked = GetNumTrendySayingsUnlocked();
+    if (numUnlocked == NUM_TRENDY_SAYINGS)
         return EC_EMPTY_WORD;
 
-    additionalPhraseId = Random() % (NUM_ADDITIONAL_PHRASES - numAdditionalPhrasesUnlocked);
-    for (i = 0; i < NUM_ADDITIONAL_PHRASES; i++)
+    numToSkip = Random() % (NUM_TRENDY_SAYINGS - numUnlocked);
+    for (i = 0; i < NUM_TRENDY_SAYINGS; i++)
     {
-        if (!IsAdditionalPhraseUnlocked(i))
+        if (!IsTrendySayingUnlocked(i))
         {
-            if (additionalPhraseId)
+            if (numToSkip)
             {
-                additionalPhraseId--;
+                // Skip the first n locked words, as determined by the Random call above.
+                numToSkip--;
             }
             else
             {
-                UnlockAdditionalPhrase(i);
+                UnlockTrendySaying(i);
                 return EC_WORD(EC_GROUP_TRENDY_SAYING, i);
             }
         }
     }
 
+    // Would only be reached if there are no new words to teach, which is handled at the start.
     return EC_EMPTY_WORD;
 }
 
 // Unused
-u16 GetRandomTaughtHipsterPhrase(void)
+static u16 GetRandomUnlockedTrendySaying(void)
 {
     u16 i;
-    u16 additionalPhraseId = GetNumAdditionalPhrasesUnlocked();
-    if (additionalPhraseId == 0)
+    u16 n = GetNumTrendySayingsUnlocked();
+    if (n == 0)
         return EC_EMPTY_WORD;
 
-    additionalPhraseId = Random() % additionalPhraseId;
-    for (i = 0; i < NUM_ADDITIONAL_PHRASES; i++)
+    n = Random() % n;
+    for (i = 0; i < NUM_TRENDY_SAYINGS; i++)
     {
-        if (IsAdditionalPhraseUnlocked(i))
+        if (IsTrendySayingUnlocked(i))
         {
-            if (additionalPhraseId)
-                additionalPhraseId--;
+            if (n)
+                n--;
             else
                 return EC_WORD(EC_GROUP_TRENDY_SAYING, i);
         }
@@ -5569,10 +5588,10 @@ void InitEasyChatPhrases(void)
     // Mauville old man data is corrupted, which is initialized directly after
     // this function is called when starting a new game.
     for (i = 0; i < 64; i++)
-        gSaveBlock1Ptr->additionalPhrases[i] = 0;
+        gSaveBlock1Ptr->unlockedTrendySayings[i] = 0;
 #else
-    for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->additionalPhrases); i++)
-        gSaveBlock1Ptr->additionalPhrases[i] = 0;
+    for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->unlockedTrendySayings); i++)
+        gSaveBlock1Ptr->unlockedTrendySayings[i] = 0;
 #endif
 }
 
@@ -5611,7 +5630,7 @@ static void SetUnlockedEasyChatGroups(void)
         sWordData->unlockedGroupIds[sWordData->numUnlockedGroups++] = EC_GROUP_MOVE_2;
     }
 
-    if (FlagGet(FLAG_SYS_HIPSTER_MEET))
+    if (FlagGet(FLAG_UNLOCKED_TRENDY_SAYINGS))
         sWordData->unlockedGroupIds[sWordData->numUnlockedGroups++] = EC_GROUP_TRENDY_SAYING;
 
     if (IsNationalPokedexEnabled())
@@ -5800,7 +5819,7 @@ static bool8 IsEasyChatIndexAndGroupUnlocked(u16 wordIndex, u8 groupId)
     case EC_GROUP_MOVE_2:
         return TRUE;
     case EC_GROUP_TRENDY_SAYING:
-        return IsAdditionalPhraseUnlocked(wordIndex);
+        return IsTrendySayingUnlocked(wordIndex);
     default:
         return gEasyChatGroups[groupId].wordData.words[wordIndex].enabled;
     }

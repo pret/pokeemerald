@@ -198,9 +198,8 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
 
         if (GetMonData(&party[i], MON_DATA_HP) == 0)
             continue;
-        if (GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
-            continue;
-        if (GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
+        species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
+        if (species == SPECIES_NONE || species == SPECIES_EGG)
             continue;
         if (i == gBattlerPartyIndexes[battlerIn1])
             continue;
@@ -213,12 +212,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
         if (IsAceMon(gActiveBattler, i))
             continue;
 
-
-        species = GetMonData(&party[i], MON_DATA_SPECIES);
-        if (GetMonData(&party[i], MON_DATA_ABILITY_NUM) != 0)
-            monAbility = gSpeciesInfo[species].abilities[1];
-        else
-            monAbility = gSpeciesInfo[species].abilities[0];
+        monAbility = GetMonAbility(&party[i]);
 
         if (absorbingTypeAbility == monAbility && Random() & 1)
         {
@@ -570,9 +564,8 @@ static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent)
 
         if (GetMonData(&party[i], MON_DATA_HP) == 0)
             continue;
-        if (GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
-            continue;
-        if (GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
+        species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
+        if (species == SPECIES_NONE || species == SPECIES_EGG)
             continue;
         if (i == gBattlerPartyIndexes[battlerIn1])
             continue;
@@ -585,12 +578,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent)
         if (IsAceMon(gActiveBattler, i))
             continue;
 
-
-        species = GetMonData(&party[i], MON_DATA_SPECIES);
-        if (GetMonData(&party[i], MON_DATA_ABILITY_NUM) != 0)
-            monAbility = gSpeciesInfo[species].abilities[1];
-        else
-            monAbility = gSpeciesInfo[species].abilities[0];
+        monAbility = GetMonAbility(&party[i]);
 
         CalcPartyMonTypeEffectivenessMultiplier(gLastLandedMoves[gActiveBattler], species, monAbility);
         if (gMoveResultFlags & flags)
@@ -964,7 +952,9 @@ u8 GetMostSuitableMonToSwitchInto(void)
     // Get invalid slots ids.
     for (i = firstId; i < lastId; i++)
     {
-        if (GetMonData(&party[i], MON_DATA_SPECIES) == SPECIES_NONE
+        u16 species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
+        if (species == SPECIES_NONE
+            || species == SPECIES_EGG
             || GetMonData(&party[i], MON_DATA_HP) == 0
             || gBattlerPartyIndexes[battlerIn1] == i
             || gBattlerPartyIndexes[battlerIn2] == i

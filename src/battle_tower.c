@@ -3103,25 +3103,38 @@ static void FillPartnerParty(u16 trainerId)
             case F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED:
             {
                 const struct TrainerMonCustomized *partyData = gTrainers[trainerId - TRAINER_CUSTOM_PARTNER].party.EverythingCustomized;
+                u32 otIdType = OT_ID_RANDOM_NO_SHINY;
 
-                CreateMon(&gPlayerParty[i], partyData[i].species, partyData[i].lvl, 0, TRUE, j, TRUE, otID);
-                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
+                if (partyData[i].gender == TRAINER_MON_MALE)
+                    j = (j & 0xFFFFFF00) | GeneratePersonalityForGender(MON_MALE, partyData[i].species);
+                else if (partyData[i].gender == TRAINER_MON_FEMALE)
+                    j = (j & 0xFFFFFF00) | GeneratePersonalityForGender(MON_FEMALE, partyData[i].species);
+                if (partyData[i].nature != 0)
+                    ModifyPersonalityForNature(&j, partyData[i].nature - 1);
+                if (partyData[i].isShiny)
+                {
+                    otIdType = OT_ID_PRESET;
+                    otID = HIHALF(j) ^ LOHALF(j);
+                }
+
+                CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, 0, TRUE, j, otIdType, otID);
+                SetMonData(&gPlayerParty[i + 3], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
 
                 // TODO: Figure out a default strategy when moves are not set, to generate a good moveset
                 for (j = 0; j < MAX_MON_MOVES; ++j)
                 {
-                    SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
-                    SetMonData(&gPlayerParty[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
+                    SetMonData(&gPlayerParty[i+3], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
+                    SetMonData(&gPlayerParty[i+3], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
                 }
-                SetMonData(&gPlayerParty[i], MON_DATA_IVS, &(partyData[i].iv));
+                SetMonData(&gPlayerParty[i+3], MON_DATA_IVS, &(partyData[i].iv));
                 if (partyData[i].ev != NULL)
                 {
-                    SetMonData(&gPlayerParty[i], MON_DATA_HP_EV, &(partyData[i].ev[0]));
-                    SetMonData(&gPlayerParty[i], MON_DATA_ATK_EV, &(partyData[i].ev[1]));
-                    SetMonData(&gPlayerParty[i], MON_DATA_DEF_EV, &(partyData[i].ev[2]));
-                    SetMonData(&gPlayerParty[i], MON_DATA_SPATK_EV, &(partyData[i].ev[3]));
-                    SetMonData(&gPlayerParty[i], MON_DATA_SPDEF_EV, &(partyData[i].ev[4]));
-                    SetMonData(&gPlayerParty[i], MON_DATA_SPEED_EV, &(partyData[i].ev[5]));
+                    SetMonData(&gPlayerParty[i+3], MON_DATA_HP_EV, &(partyData[i].ev[0]));
+                    SetMonData(&gPlayerParty[i+3], MON_DATA_ATK_EV, &(partyData[i].ev[1]));
+                    SetMonData(&gPlayerParty[i+3], MON_DATA_DEF_EV, &(partyData[i].ev[2]));
+                    SetMonData(&gPlayerParty[i+3], MON_DATA_SPATK_EV, &(partyData[i].ev[3]));
+                    SetMonData(&gPlayerParty[i+3], MON_DATA_SPDEF_EV, &(partyData[i].ev[4]));
+                    SetMonData(&gPlayerParty[i+3], MON_DATA_SPEED_EV, &(partyData[i].ev[5]));
                 }
                 if (partyData[i].ability != ABILITY_NONE)
                 {
@@ -3133,19 +3146,19 @@ static void FillPartnerParty(u16 trainerId)
                             break;
                     }
                     if (j < maxAbilities)
-                        SetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM, &j);
+                        SetMonData(&gPlayerParty[i+3], MON_DATA_ABILITY_NUM, &j);
                 }
-                SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, &(partyData[i].friendship));
+                SetMonData(&gPlayerParty[i+3], MON_DATA_FRIENDSHIP, &(partyData[i].friendship));
                 if (partyData[i].ball != ITEM_NONE)
                 {
                     ball = partyData[i].ball;
-                    SetMonData(&gPlayerParty[i], MON_DATA_POKEBALL, &ball);
+                    SetMonData(&gPlayerParty[i+3], MON_DATA_POKEBALL, &ball);
                 }
                 if (partyData[i].nickname != NULL)
                 {
-                    SetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, partyData[i].nickname);
+                    SetMonData(&gPlayerParty[i+3], MON_DATA_NICKNAME, partyData[i].nickname);
                 }
-                CalculateMonStats(&gPlayerParty[i]);
+                CalculateMonStats(&gPlayerParty[i+3]);
             }
             }
 
