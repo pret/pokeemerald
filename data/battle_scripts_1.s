@@ -7872,7 +7872,7 @@ BattleScript_FocusPunchSetUp::
 
 BattleScript_MegaEvolution::
 	printstring STRINGID_MEGAEVOREACTING
-BattleScript_MegaEvolutionAfeterString:
+BattleScript_MegaEvolutionAfterString:
 	waitmessage B_WAIT_TIME_LONG
 	setbyte gIsCriticalHit, 0
 	handlemegaevo BS_ATTACKER, 0
@@ -7886,7 +7886,7 @@ BattleScript_MegaEvolutionAfeterString:
 
 BattleScript_WishMegaEvolution::
 	printstring STRINGID_FERVENTWISHREACHED
-	goto BattleScript_MegaEvolutionAfeterString
+	goto BattleScript_MegaEvolutionAfterString
 
 BattleScript_PrimalReversion::
 	printstring STRINGID_EMPTYSTRING3
