@@ -2021,6 +2021,7 @@ bool32 IsHealingMoveEffect(u16 effect)
     case EFFECT_HEALING_WISH:
     case EFFECT_HEAL_PULSE:
     case EFFECT_REST:
+    case EFFECT_JUNGLE_HEALING:
         return TRUE;
     default:
         return FALSE;
