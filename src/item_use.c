@@ -1229,10 +1229,11 @@ void ItemUseInBattle_BagMenu(u8 taskId)
     {
         PlaySE(SE_SELECT);
         RemoveUsedItem();
+        ScheduleBgCopyTilemapToVram(2);
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, Task_FadeAndCloseBagMenu);
+            gTasks[taskId].func = Task_FadeAndCloseBagMenu;
         else
-            DisplayItemMessageInBattlePyramid(taskId, gStringVar4, CloseBattlePyramidBag);
+            gTasks[taskId].func = CloseBattlePyramidBag;
     }
 }
 
