@@ -255,4 +255,3 @@ BattleScript_TrainerBSlideMsgRet::
 BattleScript_TrainerBSlideMsgEnd2::
     call BattleScript_TrainerBSlideMsgRet
     end2
-    end2
