@@ -16506,10 +16506,11 @@ void BS_ItemCureStatus(void) {
     {
         gBattleMons[gBattlerAttacker].status2 &= ~GetItemStatus2Mask(gLastUsedItem); 
         gBattlerTarget = BATTLE_PARTNER(gBattlerAttacker);
-        if (GetItemStatus1Mask(gLastUsedItem) & STATUS1_SLEEP)
-            gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_NIGHTMARE;
     }
     
+    if (GetItemStatus1Mask(gLastUsedItem) & STATUS1_SLEEP)
+        gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_NIGHTMARE;
+
     PREPARE_SPECIES_BUFFER(gBattleTextBuff1, GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_SPECIES));
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
