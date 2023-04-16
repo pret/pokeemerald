@@ -3801,26 +3801,47 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             case MOVE_EFFECT_TRIPLE_ARROWS:
                 {
-                    u8 randomChance = RandomUniform(RNG_TRIPLE_ARROWS, 1, 10);
-                    if (randomChance <= 5) // Chance to reduce a foe's Defense by 1 stat stage.
+                    u8 randomLowerDefenseChance;
+                    u8 randomFlinchChance;
+
+                    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_SERENE_GRACE)
+                    {
+                        randomLowerDefenseChance = RandomPercentage(RNG_TRIPLE_ARROWS_DEFENSE_DOWN, 100);
+                        randomFlinchChance = RandomPercentage(RNG_TRIPLE_ARROWS_FLINCH, 60);
+                    }
+                    else
+                    {
+                        randomLowerDefenseChance = RandomPercentage(RNG_TRIPLE_ARROWS_DEFENSE_DOWN, 50);
+                        randomFlinchChance = RandomPercentage(RNG_TRIPLE_ARROWS_FLINCH, 30);
+                    }
+
+                    if (randomLowerDefenseChance && randomFlinchChance)
                     {
                         BattleScriptPush(gBattlescriptCurrInstr + 1);
-                        gBattlescriptCurrInstr = BattleScript_DefDown;
+                        gBattlescriptCurrInstr = BattleScript_ReduceDefenseAndFlinch;
                     }
-                    if (randomChance > 5 && randomChance <= 8) // Chance to cause a foe to flinch.
+                    else
                     {
-                        if (battlerAbility == ABILITY_INNER_FOCUS && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
+                        if (randomLowerDefenseChance)
                         {
-                            gLastUsedAbility = ABILITY_INNER_FOCUS;
-                            gBattlerAbility = gEffectBattler;
-                            RecordAbilityBattle(gEffectBattler, ABILITY_INNER_FOCUS);
-                            gBattlescriptCurrInstr = BattleScript_FlinchPrevention;
+                            BattleScriptPush(gBattlescriptCurrInstr + 1);
+                            gBattlescriptCurrInstr = BattleScript_DefDown;
                         }
-                        else
+                        else if (randomFlinchChance)
                         {
-                            if (GetBattlerTurnOrderNum(gEffectBattler) > gCurrentTurnActionNumber)
-                                gBattleMons[gEffectBattler].status2 |= sStatusFlagsForMoveEffects[MOVE_EFFECT_FLINCH];
-                            gBattlescriptCurrInstr++;
+                            if (battlerAbility == ABILITY_INNER_FOCUS)
+                            {
+                                gLastUsedAbility = ABILITY_INNER_FOCUS;
+                                gBattlerAbility = gEffectBattler;
+                                RecordAbilityBattle(gEffectBattler, ABILITY_INNER_FOCUS);
+                                gBattlescriptCurrInstr = BattleScript_FlinchPrevention;
+                            }
+                            else
+                            {
+                                if (GetBattlerTurnOrderNum(gEffectBattler) > gCurrentTurnActionNumber)
+                                    gBattleMons[gEffectBattler].status2 |= sStatusFlagsForMoveEffects[MOVE_EFFECT_FLINCH];
+                                gBattlescriptCurrInstr++;
+                            }
                         }
                     }
                 }

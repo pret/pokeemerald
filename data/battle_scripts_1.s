@@ -480,24 +480,22 @@ BattleScript_AxeKickHitFromAtkString:
 
 BattleScript_EffectTakeHeart::
 	attackcanceler
-	accuracycheck BattleScript_AxeKickMissedDoDamage, ACC_CURR_MOVE
 	attackstring
 	ppreduce
+	cureifburnedparalysedorpoisoned BattleScript_EffectTakeHeart_TryToRaiseStats
 	attackanimation
 	waitanimation
-	jumpifstatus BS_ATTACKER, STATUS1_ANY, BattleScript_TakeHeart_HealStatusConditions
-	goto BattleScript_TakeHeart_TryToRaiseSpecialStats
-BattleScript_TakeHeart_HealStatusConditions:
-	curestatus BS_ATTACKER
 	updatestatusicon BS_ATTACKER
 	printstring STRINGID_PKMNSTATUSNORMAL
 	waitmessage B_WAIT_TIME_LONG
-BattleScript_TakeHeart_TryToRaiseSpecialStats:
-	modifybattlerstatstage BS_ATTACKER, STAT_SPATK, INCREASE, 1, BattleScript_TakeHeartTrySpDef, ANIM_ON
-BattleScript_TakeHeartTrySpDef:
-	modifybattlerstatstage BS_ATTACKER, STAT_SPDEF, INCREASE, 1, BattleScript_TakeHeart_MoveEnd, ANIM_ON
-BattleScript_TakeHeart_MoveEnd:
-	goto BattleScript_MoveEnd
+	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPATK, MAX_STAT_STAGE, BattleScript_CalmMindStatRaise
+	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPDEF, MAX_STAT_STAGE, BattleScript_CalmMindStatRaise
+	goto BattleScript_CantRaiseMultipleStats
+
+BattleScript_EffectTakeHeart_TryToRaiseStats:
+	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPATK, MAX_STAT_STAGE, BattleScript_CalmMindDoMoveAnim
+	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPDEF, MAX_STAT_STAGE, BattleScript_CalmMindDoMoveAnim
+	goto BattleScript_CantRaiseMultipleStats
 
 BattleScript_EffectTripleArrows::
 	setmoveeffect MOVE_EFFECT_TRIPLE_ARROWS
@@ -1534,6 +1532,13 @@ BattleScript_DefDown::
 	modifybattlerstatstage BS_TARGET, STAT_DEF, DECREASE, 1, BattleScript_DefDown_Ret, ANIM_ON
 BattleScript_DefDown_Ret:
 	return
+
+BattleScript_ReduceDefenseAndFlinch::
+	modifybattlerstatstage BS_TARGET, STAT_DEF, DECREASE, 1, BattleScript_DefDown_Ret, ANIM_ON
+	jumpifability BS_TARGET, ABILITY_INNER_FOCUS, BattleScript_FlinchPrevention
+	setmoveeffect MOVE_EFFECT_FLINCH
+	seteffectprimary
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectPurify:
 	attackcanceler
@@ -6387,6 +6392,7 @@ BattleScript_EffectCalmMind::
 BattleScript_CalmMindDoMoveAnim::
 	attackanimation
 	waitanimation
+BattleScript_CalmMindStatRaise::
 	setbyte sSTAT_ANIM_PLAYED, FALSE
 	playstatchangeanimation BS_ATTACKER, BIT_SPATK | BIT_SPDEF, 0
 	setstatchanger STAT_SPATK, 1, FALSE

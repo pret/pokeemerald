@@ -1788,7 +1788,6 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_RESTORE_HP:
         case EFFECT_SOFTBOILED:
         case EFFECT_ROOST:
-        case EFFECT_JUNGLE_HEALING:
             if (AtMaxHp(battlerAtk))
                 score -= 10;
             else if (AI_DATA->hpPercents[battlerAtk] >= 90)
@@ -2611,9 +2610,20 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             if (gBattleMons[battlerAtk].hp <= gBattleMons[battlerAtk].maxHP / 3)
                 score -= 10;
             break;*/
+        case EFFECT_JUNGLE_HEALING:
+            if (AtMaxHp(battlerAtk)
+             && AtMaxHp(BATTLE_PARTNER(battlerAtk))
+             && !(gBattleMons[battlerAtk].status1 & STATUS1_ANY)
+             && !(gBattleMons[BATTLE_PARTNER(battlerAtk)].status1 & STATUS1_ANY))
+                score -= 10;
+            else if (AI_DATA->hpPercents[battlerAtk] >= 90 || AI_DATA->hpPercents[BATTLE_PARTNER(battlerAtk)] >= 90)
+                score -= 9; //No point in healing, but should at least do it if nothing better
+            break;
         case EFFECT_TAKE_HEART:
             if ((!(gBattleMons[battlerAtk].status1 & STATUS1_ANY)
-             || PartnerHasSameMoveEffectWithoutTarget(BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove))
+             || PartnerMoveIs(BATTLE_PARTNER(battlerAtk), AI_DATA->partnerMove, MOVE_JUNGLE_HEALING)
+             || PartnerMoveIs(BATTLE_PARTNER(battlerAtk), AI_DATA->partnerMove, MOVE_HEAL_BELL)
+             || PartnerMoveIs(BATTLE_PARTNER(battlerAtk), AI_DATA->partnerMove, MOVE_AROMATHERAPY))
              && !BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_SPATK)
              && !BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_SPDEF))
                 score -= 10;
@@ -3482,11 +3492,6 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score += 3;
         if (AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_BIG_ROOT)
             score++;
-        break;
-    case EFFECT_JUNGLE_HEALING:
-        if (ShouldRecover(battlerAtk, battlerDef, move, 25)
-         || (ShouldRecover(BATTLE_PARTNER(battlerAtk), battlerDef, move, 25) && ShouldRecover(BATTLE_PARTNER(battlerAtk), BATTLE_PARTNER(battlerDef), move, 25)))
-            score += 3;
         break;
     case EFFECT_TOXIC:
     case EFFECT_POISON:
@@ -4371,7 +4376,9 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
     case EFFECT_REFRESH:
     case EFFECT_TAKE_HEART:
-        if (gBattleMons[battlerAtk].status1 & STATUS1_ANY)
+        if (gBattleMons[battlerAtk].status1 & STATUS1_ANY
+         || BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_SPATK)
+         || BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_SPDEF))
             score += 2;
         break;
     case EFFECT_PSYCHO_SHIFT:
@@ -4817,6 +4824,15 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         //break;
     //case EFFECT_SKY_DROP
         //break;
+    case EFFECT_JUNGLE_HEALING:
+        if (ShouldRecover(battlerAtk, battlerDef, move, 25)
+         || ShouldRecover(battlerAtk, BATTLE_PARTNER(battlerDef), move, 25)
+         || ShouldRecover(BATTLE_PARTNER(battlerAtk), battlerDef, move, 25)
+         || ShouldRecover(BATTLE_PARTNER(battlerAtk), BATTLE_PARTNER(battlerDef), move, 25)
+         || gBattleMons[battlerAtk].status1 & STATUS1_ANY
+         || gBattleMons[BATTLE_PARTNER(battlerAtk)].status1 & STATUS1_ANY)
+            score += 3;
+        break;
     } // move effect checks
 
     return score;
