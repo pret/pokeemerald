@@ -16500,16 +16500,19 @@ void BS_ItemCureStatus(void) {
     
     // Heal Status2 conditions if battler is active.
     if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
-        gBattleMons[gBattleStruct->itemPartyIndex[gBattlerAttacker]].status2 &= ~GetItemStatus2Mask(gLastUsedItem); 
+    {
+        gBattleMons[gBattlerAttacker].status2 &= ~GetItemStatus2Mask(gLastUsedItem);
+    }
     else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
                 && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerAttacker)])
     {
         gBattleMons[gBattlerAttacker].status2 &= ~GetItemStatus2Mask(gLastUsedItem); 
         gBattlerTarget = BATTLE_PARTNER(gBattlerAttacker);
-        if (GetItemStatus1Mask(gLastUsedItem) & STATUS1_SLEEP)
-            gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_NIGHTMARE;
     }
     
+    if (GetItemStatus1Mask(gLastUsedItem) & STATUS1_SLEEP)
+        gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_NIGHTMARE;
+
     PREPARE_SPECIES_BUFFER(gBattleTextBuff1, GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_SPECIES));
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
