@@ -9180,7 +9180,6 @@ BattleScript_WanderingSpiritActivates::
 	pause 20
 	destroyabilitypopup
 	pause 40
-
 	copybyte gBattlerAbility, gBattlerAttacker
 	setbyte sFIXED_ABILITY_POPUP, TRUE
 	copyhword sABILITY_OVERWRITE, gLastUsedAbility
