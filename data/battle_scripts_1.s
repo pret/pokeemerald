@@ -5612,7 +5612,7 @@ BattleScript_EffectStockpileSpDef::
 BattleScript_EffectStockpileEnd:
 	stockpile 1
 	goto BattleScript_MoveEnd
-	
+
 BattleScript_MoveEffectStockpileWoreOff::
 	.if B_STOCKPILE_RAISES_DEFS >= GEN_4
 	dostockpilestatchangeswearoff BS_ATTACKER, BattleScript_StockpileStatChangeDown
@@ -5620,7 +5620,7 @@ BattleScript_MoveEffectStockpileWoreOff::
 	waitmessage B_WAIT_TIME_SHORT
 	.endif
 	return
-	
+
 BattleScript_StockpileStatChangeDown:
 	statbuffchange MOVE_EFFECT_AFFECTS_USER, BattleScript_StockpileStatChangeDown_Ret
 	setgraphicalstatchangevalues
@@ -6943,7 +6943,7 @@ BattleScript_MagicRoomEnds::
 	printstring STRINGID_MAGICROOMENDS
 	waitmessage B_WAIT_TIME_LONG
 	end2
-	
+
 BattleScript_GrassyTerrainEnds:
 	setbyte cMULTISTRING_CHOOSER, B_MSG_TERRAINENDS_GRASS
 BattleScript_TerrainEnds_Ret::
@@ -6951,7 +6951,7 @@ BattleScript_TerrainEnds_Ret::
 	waitmessage B_WAIT_TIME_LONG
 	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG
 	return
-	
+
 BattleScript_TerrainEnds::
 	call BattleScript_TerrainEnds_Ret
 	end2
@@ -7496,7 +7496,7 @@ BattleScript_StealthRockFree::
 	printstring STRINGID_PKMNBLEWAWAYSTEALTHROCK
 	waitmessage B_WAIT_TIME_LONG
 	return
-	
+
 BattleScript_SpikesDefog::
 	printstring STRINGID_SPIKESDISAPPEAREDFROMTEAM
 	waitmessage B_WAIT_TIME_LONG
@@ -9180,7 +9180,7 @@ BattleScript_WanderingSpiritActivates::
 	pause 20
 	destroyabilitypopup
 	pause 40
-
+	copybyte gBattlerAbility, gBattlerAttacker
 	setbyte sFIXED_ABILITY_POPUP, TRUE
 	copyhword sABILITY_OVERWRITE, gLastUsedAbility
 	showabilitypopup BS_ATTACKER
