@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Confide lowers Special Attack", s16 damage)
         if (lowerSpecialAttack) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_CONFIDE, player);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Foe Wobbuffet's sp. attack fell!");
+            MESSAGE("Foe Wobbuffet's Sp. Atk fell!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GUST, opponent);
         HP_BAR(player, captureDamage: &results[i].damage);

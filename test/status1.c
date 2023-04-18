@@ -53,7 +53,7 @@ SINGLE_BATTLE_TEST("Burn deals 1/16th damage per turn")
     }
 }
 
-SINGLE_BATTLE_TEST("Burn reduces attack by 50%", s16 damage)
+SINGLE_BATTLE_TEST("Burn reduces Attack by 50%", s16 damage)
 {
     bool32 burned;
     PARAMETRIZE { burned = FALSE; }
@@ -113,7 +113,7 @@ SINGLE_BATTLE_TEST("Freeze is thawed by user's Flame Wheel")
     }
 }
 
-SINGLE_BATTLE_TEST("Paralysis reduces speed by 50%")
+SINGLE_BATTLE_TEST("Paralysis reduces Speed by 50%")
 {
     u16 playerSpeed;
     bool32 playerFirst;

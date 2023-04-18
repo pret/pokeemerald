@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test_battle.h"
 
-SINGLE_BATTLE_TEST("X-Attack sharply raises battler's attack stat", s16 damage)
+SINGLE_BATTLE_TEST("X-Attack sharply raises battler's Attack stat", s16 damage)
 {
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }
