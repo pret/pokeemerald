@@ -411,6 +411,5 @@
 #define EFFECT_AXE_KICK                     405
 
 #define NUM_BATTLE_MOVE_EFFECTS             406
->>>>>>> afdfe1503dcb8720cede18b69ed5216e770399e6
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H
