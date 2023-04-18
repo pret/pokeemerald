@@ -8,9 +8,13 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Triple Arrows lower's defense by one stage")
 {
-    PASSES_RANDOMLY(50, 100, RNG_TRIPLE_ARROWS_DEFENSE_DOWN);
+    u32 ability;
+    u32 chance;
+    PARAMETRIZE { ability = ABILITY_HUSTLE; chance = 50; }
+    PARAMETRIZE { ability = ABILITY_SERENE_GRACE; chance = 100; }
+    PASSES_RANDOMLY(chance, 100, RNG_TRIPLE_ARROWS_DEFENSE_DOWN);
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_TOGEPI) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_TRIPLE_ARROWS); }
@@ -23,18 +27,18 @@ SINGLE_BATTLE_TEST("Triple Arrows lower's defense by one stage")
 
 SINGLE_BATTLE_TEST("Triple Arrows flinch 30% of the time")
 {
-    PASSES_RANDOMLY(30, 100, RNG_TRIPLE_ARROWS_FLINCH);
+    u32 ability;
+    u32 chance;
+    PARAMETRIZE { ability = ABILITY_HUSTLE; chance = 30; }
+    PARAMETRIZE { ability = ABILITY_SERENE_GRACE; chance = 60; }
+    PASSES_RANDOMLY(chance, 100, RNG_TRIPLE_ARROWS_FLINCH);
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_TOGEPI) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_TRIPLE_ARROWS); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TRIPLE_ARROWS, player);
-        NONE_OF {
-            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Foe Wobbuffet's defense fell!");
-        }
         MESSAGE("Foe Wobbuffet flinched!");
     }
 }
