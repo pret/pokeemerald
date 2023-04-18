@@ -1330,6 +1330,22 @@
 	.4byte \jumpInstr
 	.endm
 
+	.macro itemrestorehp
+	callnative BS_ItemRestoreHP
+	.endm
+
+	.macro itemcurestatus
+	callnative BS_ItemCureStatus
+	.endm
+
+	.macro itemincreasestat
+	callnative BS_ItemIncreaseStat
+	.endm
+
+	.macro itemrestorepp
+	callnative BS_ItemRestorePP
+	.endm
+
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
@@ -2262,4 +2278,9 @@
 
 	.macro hitswitchtargetfailed
 	various 0, VARIOUS_HIT_SWITCH_TARGET_FAILED
+	.endm
+
+	.macro tryrevivalblessing, jumpInstr:req
+	various 0, VARIOUS_TRY_REVIVAL_BLESSING
+	.4byte \jumpInstr
 	.endm

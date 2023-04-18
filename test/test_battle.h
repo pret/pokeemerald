@@ -303,13 +303,14 @@
  * The inference process is naive, if your test contains anything that
  * modifies the speed of a battler you should specify them explicitly.
  *
- * MOVE(battler, move | moveSlot:, [megaEvolve:], [hit:], [criticalHit:], [target:], [allowed:])
+ * MOVE(battler, move | moveSlot:, [megaEvolve:], [hit:], [criticalHit:], [target:], [allowed:], [WITH_RNG(tag, value])
  * Used when the battler chooses Fight. Either the move ID or move slot
  * must be specified. megaEvolve: TRUE causes the battler to Mega Evolve
  * if able, hit: FALSE causes the move to miss, criticalHit: TRUE causes
  * the move to land a critical hit, target: is used in double battles to
  * choose the target (when necessary), and allowed: FALSE is used to
- * reject an illegal move e.g. a Disabled one.
+ * reject an illegal move e.g. a Disabled one. WITH_RNG allows the move
+ * to specify an explicit outcome for an RNG tag.
  *     MOVE(playerLeft, MOVE_TACKLE, target: opponentRight);
  * If the battler does not have an explicit Moves specified the moveset
  * will be populated based on the MOVEs it uses.
@@ -332,6 +333,13 @@
  * Used when the battler chooses to switch to another Pokémon but not
  * via Switch, e.g. after fainting or due to a U-turn.
  *     SEND_OUT(player, 1);
+ * 
+ * USE_ITEM(battler, itemId, [partyIndex:], [move:])
+ * Used when the battler chooses to use an item from the Bag. The item
+ * ID must be specified, and party index and move slot if applicable, e.g:
+ *      USE_ITEM(player, ITEM_X_ATTACK);
+ *      USE_ITEM(player, ITEM_POTION, partyIndex: 0);
+ *      USE_ITEM(player, ITEM_LEPPA_BERRY, partyIndex: 0, move: MOVE_TACKLE);
  *
  * SCENE
  * Contains an abridged description of the UI during the THEN. The order
@@ -538,11 +546,18 @@ struct QueuedEvent
     } as;
 };
 
+struct TurnRNG
+{
+    u16 tag;
+    u16 value;
+};
+
 struct BattlerTurn
 {
     u8 hit:2;
     u8 criticalHit:2;
     u8 secondaryEffect:2;
+    struct TurnRNG rng;
 };
 
 struct BattleTestData
@@ -757,6 +772,8 @@ enum { TURN_CLOSED, TURN_OPEN, TURN_CLOSING };
 #define SWITCH(battler, partyIndex) Switch(__LINE__, battler, partyIndex)
 #define SKIP_TURN(battler) SkipTurn(__LINE__, battler)
 #define SEND_OUT(battler, partyIndex) SendOut(__LINE__, battler, partyIndex)
+#define USE_ITEM(battler, ...) UseItem(__LINE__, battler, (struct ItemContext) { APPEND_TRUE(__VA_ARGS__) })
+#define WITH_RNG(tag, value) rng: ((struct TurnRNG) { tag, value })
 
 struct MoveContext
 {
@@ -777,6 +794,18 @@ struct MoveContext
     u16 explicitAllowed:1;
     struct BattlePokemon *target;
     bool8 explicitTarget;
+    struct TurnRNG rng;
+    bool8 explicitRNG;
+};
+
+struct ItemContext
+{
+    u16 itemId;
+    u16 explicitItemId:1;
+    u16 partyIndex;
+    u16 explicitPartyIndex:1;
+    u16 move;
+    u16 explicitMove:1;
 };
 
 void OpenTurn(u32 sourceLine);
@@ -785,7 +814,7 @@ void Move(u32 sourceLine, struct BattlePokemon *, struct MoveContext);
 void ForcedMove(u32 sourceLine, struct BattlePokemon *);
 void Switch(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
 void SkipTurn(u32 sourceLine, struct BattlePokemon *);
-
+void UseItem(u32 sourceLine, struct BattlePokemon *, struct ItemContext);
 void SendOut(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
 
 /* Scene */

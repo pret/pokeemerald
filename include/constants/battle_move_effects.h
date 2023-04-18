@@ -404,11 +404,13 @@
 #define EFFECT_HIT_SET_ENTRY_HAZARD         398
 #define EFFECT_DIRE_CLAW                    399
 #define EFFECT_BARB_BARRAGE                 400
-#define EFFECT_TRIPLE_ARROWS                401
-#define EFFECT_INFERNAL_PARADE              402
-#define EFFECT_TAKE_HEART                   403
-#define EFFECT_AXE_KICK                     404
+#define EFFECT_REVIVAL_BLESSING             401
+#define EFFECT_TRIPLE_ARROWS                402
+#define EFFECT_INFERNAL_PARADE              403
+#define EFFECT_TAKE_HEART                   404
+#define EFFECT_AXE_KICK                     405
 
-#define NUM_BATTLE_MOVE_EFFECTS             405
+#define NUM_BATTLE_MOVE_EFFECTS             406
+>>>>>>> afdfe1503dcb8720cede18b69ed5216e770399e6
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

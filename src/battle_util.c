@@ -21,6 +21,7 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "task.h"
+#include "test_runner.h"
 #include "trig.h"
 #include "window.h"
 #include "battle_message.h"
@@ -550,93 +551,13 @@ void HandleAction_Switch(void)
 
 void HandleAction_UseItem(void)
 {
-    gBattlerAttacker = gBattlerTarget = gBattlerByTurnOrder[gCurrentTurnActionNumber];
+    gActiveBattler = gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     ClearFuryCutterDestinyBondGrudge(gBattlerAttacker);
 
     gLastUsedItem = gBattleResources->bufferB[gBattlerAttacker][1] | (gBattleResources->bufferB[gBattlerAttacker][2] << 8);
-
-    if (gLastUsedItem <= LAST_BALL) // is ball
-    {
-        gBattlescriptCurrInstr = BattleScript_BallThrow;
-    }
-    else if (gLastUsedItem == ITEM_POKE_DOLL || gLastUsedItem == ITEM_FLUFFY_TAIL)
-    {
-        gBattlescriptCurrInstr = gBattlescriptsForRunningByItem[0]; // BattleScript_RunByUsingItem
-    }
-    else if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-    {
-        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[0]; // BattleScript_PlayerUsesItem
-    }
-    else
-    {
-        gBattleScripting.battler = gBattlerAttacker;
-
-        switch (*(gBattleStruct->AI_itemType + (gBattlerAttacker >> 1)))
-        {
-        case AI_ITEM_FULL_RESTORE:
-        case AI_ITEM_HEAL_HP:
-            break;
-        case AI_ITEM_CURE_CONDITION:
-            gBattleCommunication[MULTISTRING_CHOOSER] = AI_HEAL_CONFUSION;
-            if (*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & (1 << AI_HEAL_CONFUSION))
-            {
-                if (*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & 0x3E)
-                    gBattleCommunication[MULTISTRING_CHOOSER] = AI_HEAL_SLEEP;
-            }
-            else
-            {
-                // Check for other statuses, stopping at first (shouldn't be more than one)
-                while (!(*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & 1))
-                {
-                    *(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) >>= 1;
-                    gBattleCommunication[MULTISTRING_CHOOSER]++;
-                    // MULTISTRING_CHOOSER will be either AI_HEAL_PARALYSIS, AI_HEAL_FREEZE,
-                    // AI_HEAL_BURN, AI_HEAL_POISON, or AI_HEAL_SLEEP
-                }
-            }
-            break;
-        case AI_ITEM_X_STAT:
-            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STAT_ROSE_ITEM;
-            if (*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) & (1 << AI_DIRE_HIT))
-            {
-                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_USED_DIRE_HIT;
-            }
-            else
-            {
-                PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK)
-                PREPARE_STRING_BUFFER(gBattleTextBuff2, CHAR_X)
-
-                while (!((*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1))) & 1))
-                {
-                    *(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) >>= 1;
-                    gBattleTextBuff1[2]++;
-                }
-
-                gBattleScripting.animArg1 = gBattleTextBuff1[2] + 14;
-                gBattleScripting.animArg2 = 0;
-            }
-            break;
-        case AI_ITEM_GUARD_SPEC:
-            // It seems probable that at some point there was a special message for
-            // an AI trainer using Guard Spec in a double battle.
-            // There isn't now however, and the assignment to 2 below goes out of
-            // bounds for gMistUsedStringIds and instead prints "{mon} is getting pumped"
-            // from the next table, gFocusEnergyUsedStringIds.
-            // In any case this isn't an issue in the retail version, as no trainers
-            // are ever given any Guard Spec to use.
-#ifndef UBFIX
-            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                gBattleCommunication[MULTISTRING_CHOOSER] = 2;
-            else
-#endif
-                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_MIST;
-            break;
-        }
-
-        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[*(gBattleStruct->AI_itemType + gBattlerAttacker / 2)];
-    }
+    gBattlescriptCurrInstr = gBattlescriptsForUsingItem[ItemId_GetBattleUsage(gLastUsedItem) - 1];
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
@@ -914,7 +835,7 @@ void HandleAction_ActionFinished(void)
     u32 i, j;
     bool32 afterYouActive = gSpecialStatuses[gBattlerByTurnOrder[gCurrentTurnActionNumber + 1]].afterYou;
     #endif
-    *(gBattleStruct->monToSwitchIntoId + gBattlerByTurnOrder[gCurrentTurnActionNumber]) = PARTY_SIZE;
+    *(gBattleStruct->monToSwitchIntoId + gBattlerByTurnOrder[gCurrentTurnActionNumber]) = gSelectedMonPartyId = PARTY_SIZE;
     gCurrentTurnActionNumber++;
     gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
     SpecialStatusesClear();
@@ -8207,7 +8128,6 @@ u32 GetBattlerHoldEffect(u8 battlerId, bool32 checkNegating)
         return ItemId_GetHoldEffect(gBattleMons[battlerId].item);
 }
 
-//
 static u32 GetBattlerItemHoldEffectParam(u8 battlerId, u16 item)
 {
     if (item == ITEM_ENIGMA_BERRY_E_READER)
@@ -8609,7 +8529,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
             basePower *= 2;
         break;
     case EFFECT_PURSUIT:
-        if (gActionsByTurnOrder[GetBattlerTurnOrderNum(gBattlerTarget)] == B_ACTION_SWITCH)
+        if (gActionsByTurnOrder[GetBattlerTurnOrderNum(battlerDef)] == B_ACTION_SWITCH)
             basePower *= 2;
         break;
     case EFFECT_NATURAL_GIFT:
@@ -8744,12 +8664,12 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         #if B_HIDDEN_POWER_DMG < GEN_6
         u8 powerBits;
 
-        powerBits = ((gBattleMons[gBattlerAttacker].hpIV & 2) >> 1)
-                | ((gBattleMons[gBattlerAttacker].attackIV & 2) << 0)
-                | ((gBattleMons[gBattlerAttacker].defenseIV & 2) << 1)
-                | ((gBattleMons[gBattlerAttacker].speedIV & 2) << 2)
-                | ((gBattleMons[gBattlerAttacker].spAttackIV & 2) << 3)
-                | ((gBattleMons[gBattlerAttacker].spDefenseIV & 2) << 4);
+        powerBits = ((gBattleMons[battlerAtk].hpIV & 2) >> 1)
+                | ((gBattleMons[battlerAtk].attackIV & 2) << 0)
+                | ((gBattleMons[battlerAtk].defenseIV & 2) << 1)
+                | ((gBattleMons[battlerAtk].speedIV & 2) << 2)
+                | ((gBattleMons[battlerAtk].spAttackIV & 2) << 3)
+                | ((gBattleMons[battlerAtk].spDefenseIV & 2) << 4);
 
         basePower = (40 * powerBits) / 63 + 30;
         #endif
@@ -8761,15 +8681,15 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         break;
     case EFFECT_TERRAIN_PULSE:
         if ((gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
-            && IsBattlerGrounded(gBattlerAttacker))
+            && IsBattlerGrounded(battlerAtk))
             basePower *= 2;
         break;
     case EFFECT_EXPANDING_FORCE:
-        if (IsBattlerTerrainAffected(gBattlerAttacker, STATUS_FIELD_PSYCHIC_TERRAIN))
+        if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_PSYCHIC_TERRAIN))
             MulModifier(&basePower, UQ_4_12(1.5));
         break;
     case EFFECT_RISING_VOLTAGE:
-        if (IsBattlerTerrainAffected(gBattlerTarget, STATUS_FIELD_ELECTRIC_TERRAIN))
+        if (IsBattlerTerrainAffected(battlerDef, STATUS_FIELD_ELECTRIC_TERRAIN))
             basePower *= 2;
         break;
     case EFFECT_BEAT_UP:
@@ -8778,7 +8698,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         #endif
         break;
     case EFFECT_PSYBLADE:
-        if (IsBattlerTerrainAffected(gBattlerAttacker, STATUS_FIELD_ELECTRIC_TERRAIN))
+        if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_ELECTRIC_TERRAIN))
             MulModifier(&basePower, UQ_4_12(1.5));
         break;
     }
@@ -9620,7 +9540,7 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
             || (gSideStatuses[defSide] & SIDE_STATUS_AURORA_VEIL))
         && abilityAtk != ABILITY_INFILTRATOR
         && !(isCrit)
-        && !gProtectStructs[gBattlerAttacker].confusionSelfDmg)
+        && !gProtectStructs[battlerAtk].confusionSelfDmg)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
             MulModifier(&finalModifier, UQ_4_12(0.66));
@@ -9629,7 +9549,7 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
     }
 
     // Parental Bond Second Strike
-    if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_2ND_HIT)
+    if (gSpecialStatuses[battlerAtk].parentalBondState == PARENTAL_BOND_2ND_HIT)
     {
         if (B_PARENTAL_BOND_DMG < GEN_7)
             MulModifier(&finalModifier, UQ_4_12(0.5));

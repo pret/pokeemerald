@@ -3,6 +3,7 @@
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "characters.h"
+#include "item_menu.h"
 #include "main.h"
 #include "malloc.h"
 #include "random.h"
@@ -292,6 +293,20 @@ static void BattleTest_Run(void *data)
 
 u32 RandomUniform(enum RandomTag tag, u32 lo, u32 hi)
 {
+    const struct BattlerTurn *turn = NULL;
+    u32 default_ = hi;
+
+    if (gCurrentTurnActionNumber < gBattlersCount)
+    {
+        u32 battlerId = gBattlerByTurnOrder[gCurrentTurnActionNumber];
+        turn = &DATA.battleRecordTurns[gBattleResults.battleTurnCounter][battlerId];
+    }
+
+    if (turn && turn->rng.tag == tag)
+    {
+        default_ = turn->rng.value;
+    }
+
     if (tag == STATE->rngTag)
     {
         u32 n = hi - lo + 1;
@@ -308,7 +323,7 @@ u32 RandomUniform(enum RandomTag tag, u32 lo, u32 hi)
         return STATE->runTrial + lo;
     }
 
-    return hi;
+    return default_;
 }
 
 u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights)
@@ -322,28 +337,35 @@ u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights)
         turn = &DATA.battleRecordTurns[gBattleResults.battleTurnCounter][battlerId];
     }
 
-    switch (tag)
+    if (turn && turn->rng.tag == tag)
     {
-    case RNG_ACCURACY:
-        ASSUME(n == 2);
-        if (turn && turn->hit)
-            return turn->hit - 1;
-        default_ = TRUE;
-        break;
+        default_ = turn->rng.value;
+    }
+    else
+    {
+        switch (tag)
+        {
+        case RNG_ACCURACY:
+            ASSUME(n == 2);
+            if (turn && turn->hit)
+                return turn->hit - 1;
+            default_ = TRUE;
+            break;
 
-    case RNG_CRITICAL_HIT:
-        ASSUME(n == 2);
-        if (turn && turn->criticalHit)
-            return turn->criticalHit - 1;
-        default_ = FALSE;
-        break;
+        case RNG_CRITICAL_HIT:
+            ASSUME(n == 2);
+            if (turn && turn->criticalHit)
+                return turn->criticalHit - 1;
+            default_ = FALSE;
+            break;
 
-    case RNG_SECONDARY_EFFECT:
-        ASSUME(n == 2);
-        if (turn && turn->secondaryEffect)
-            return turn->secondaryEffect - 1;
-        default_ = TRUE;
-        break;
+        case RNG_SECONDARY_EFFECT:
+            ASSUME(n == 2);
+            if (turn && turn->secondaryEffect)
+                return turn->secondaryEffect - 1;
+            default_ = TRUE;
+            break;
+        }
     }
 
     if (tag == STATE->rngTag)
@@ -363,6 +385,52 @@ u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights)
     }
 
     return default_;
+}
+
+const void *RandomElementArray(enum RandomTag tag, const void *array, size_t size, size_t count)
+{
+    const struct BattlerTurn *turn = NULL;
+    u32 index = count-1;
+
+    if (gCurrentTurnActionNumber < gBattlersCount)
+    {
+        u32 battlerId = gBattlerByTurnOrder[gCurrentTurnActionNumber];
+        turn = &DATA.battleRecordTurns[gBattleResults.battleTurnCounter][battlerId];
+    }
+
+    if (turn && turn->rng.tag == tag)
+    {
+        u32 element;
+        for (index = 0; index < count; index++)
+        {
+            memcpy(&element, (const u8 *)array + size * index, size);
+            if (element == turn->rng.value)
+                break;
+        }
+        if (index == count)
+        {
+            // TODO: Incorporate the line number.
+            const char *filename = gTestRunnerState.test->filename;
+            Test_ExitWithResult(TEST_RESULT_ERROR, "%s: RandomElement illegal value requested: %d", filename, turn->rng.value);
+        }
+    }
+
+    if (tag == STATE->rngTag)
+    {
+        if (STATE->trials == 1)
+        {
+            STATE->trials = count;
+            PrintTestName();
+        }
+        else if (STATE->trials != count)
+        {
+            Test_ExitWithResult(TEST_RESULT_ERROR, "RandomElement called with inconsistent trials %d and %d", STATE->trials, count);
+        }
+        STATE->trialRatio = Q_4_12(1) / count;
+        index = STATE->runTrial;
+    }
+
+    return (const u8 *)array + size * index;
 }
 
 static s32 TryAbilityPopUp(s32 i, s32 n, u32 battlerId, u32 ability)
@@ -1184,6 +1252,9 @@ void BattleTest_CheckBattleRecordActionType(u32 battlerId, u32 recordIndex, u32 
                 case B_ACTION_SWITCH:
                     actualMacro = "SWITCH";
                     break;
+                case B_ACTION_USE_ITEM:
+                    actualMacro = "USE_ITEM";
+                    break;
                 }
                 break;
             case RECORDED_PARTY_INDEX:
@@ -1357,6 +1428,8 @@ void Move(u32 sourceLine, struct BattlePokemon *battler, struct MoveContext ctx)
         DATA.battleRecordTurns[DATA.turns][battlerId].criticalHit = 1 + ctx.criticalHit;
     if (ctx.explicitSecondaryEffect)
         DATA.battleRecordTurns[DATA.turns][battlerId].secondaryEffect = 1 + ctx.secondaryEffect;
+    if (ctx.explicitRNG)
+        DATA.battleRecordTurns[DATA.turns][battlerId].rng = ctx.rng;
 
     if (!(DATA.actionBattlers & (1 << battlerId)))
     {
@@ -1437,6 +1510,40 @@ void SendOut(u32 sourceLine, struct BattlePokemon *battler, u32 partyIndex)
         Move(sourceLine, battler, (struct MoveContext) { move: MOVE_CELEBRATE, explicitMove: TRUE });
     PushBattlerAction(sourceLine, battlerId, RECORDED_PARTY_INDEX, partyIndex);
     DATA.currentMonIndexes[battlerId] = partyIndex;
+}
+
+void UseItem(u32 sourceLine, struct BattlePokemon *battler, struct ItemContext ctx)
+{
+    s32 i;
+    s32 battlerId = battler - gBattleMons;
+    bool32 requirePartyIndex = ItemId_GetType(ctx.itemId) == ITEM_USE_PARTY_MENU || ItemId_GetType(ctx.itemId) == ITEM_USE_PARTY_MENU_MOVES;
+    // Check general bad use.
+    INVALID_IF(DATA.turnState == TURN_CLOSED, "USE_ITEM outside TURN");
+    INVALID_IF(DATA.actionBattlers & (1 << battlerId), "Multiple battler actions");
+    INVALID_IF(ctx.itemId >= ITEMS_COUNT, "Illegal item: %d", ctx.itemId);
+    // Check party menu items.
+    INVALID_IF(requirePartyIndex && !ctx.explicitPartyIndex, "%S requires explicit party index", ItemId_GetName(ctx.itemId));
+    INVALID_IF(requirePartyIndex && ctx.partyIndex >= ((battlerId & BIT_SIDE) == B_SIDE_PLAYER ? DATA.playerPartySize : DATA.opponentPartySize), \
+                "USE_ITEM to invalid party index");
+    // Check move slot items.
+    if (ItemId_GetType(ctx.itemId) == ITEM_USE_PARTY_MENU_MOVES)
+    {
+        INVALID_IF(!ctx.explicitMove, "%S requires an explicit move", ItemId_GetName(ctx.itemId));
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            if (GetMonData(CurrentMon(battlerId), MON_DATA_MOVE1 + i, NULL) == ctx.move)
+                break;
+        }
+        INVALID_IF(i == MAX_MON_MOVES, "USE_ITEM on invalid move: %d", ctx.move);
+    }
+    PushBattlerAction(sourceLine, battlerId, RECORDED_ACTION_TYPE, B_ACTION_USE_ITEM);
+    PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_ID, (ctx.itemId >> 8) & 0xFF);
+    PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_ID, ctx.itemId & 0xFF);
+    if (ctx.explicitPartyIndex)
+        gBattleStruct->itemPartyIndex[battlerId] = ctx.partyIndex;
+    if (ctx.explicitMove)
+        gBattleStruct->itemPartyIndex[battlerId] = i;
+    DATA.actionBattlers |= 1 << battlerId;
 }
 
 static const char *const sQueueGroupTypeMacros[] =
