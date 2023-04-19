@@ -3803,48 +3803,23 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             case MOVE_EFFECT_TRIPLE_ARROWS:
                 {
-                    u8 randomLowerDefenseChance;
-                    u8 randomFlinchChance;
-
-                    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_SERENE_GRACE)
-                    {
-                        randomLowerDefenseChance = RandomPercentage(RNG_TRIPLE_ARROWS_DEFENSE_DOWN, 100);
-                        randomFlinchChance = RandomPercentage(RNG_TRIPLE_ARROWS_FLINCH, 60);
-                    }
-                    else
-                    {
-                        randomLowerDefenseChance = RandomPercentage(RNG_TRIPLE_ARROWS_DEFENSE_DOWN, 50);
-                        randomFlinchChance = RandomPercentage(RNG_TRIPLE_ARROWS_FLINCH, 30);
-                    }
+                    u8 randomLowerDefenseChance = RandomPercentage(RNG_TRIPLE_ARROWS_DEFENSE_DOWN, GetMoveSecondaryEffectChance(gBattlerAttacker, 50));
+                    u8 randomFlinchChance = RandomPercentage(RNG_TRIPLE_ARROWS_FLINCH, GetMoveSecondaryEffectChance(gBattlerAttacker, 30));
 
                     if (randomLowerDefenseChance && randomFlinchChance)
                     {
                         BattleScriptPush(gBattlescriptCurrInstr + 1);
                         gBattlescriptCurrInstr = BattleScript_ReduceDefenseAndFlinch;
                     }
-                    else
+                    else if (randomLowerDefenseChance)
                     {
-                        if (randomLowerDefenseChance)
-                        {
-                            BattleScriptPush(gBattlescriptCurrInstr + 1);
-                            gBattlescriptCurrInstr = BattleScript_DefDown;
-                        }
-                        else if (randomFlinchChance)
-                        {
-                            if (battlerAbility == ABILITY_INNER_FOCUS)
-                            {
-                                gLastUsedAbility = ABILITY_INNER_FOCUS;
-                                gBattlerAbility = gEffectBattler;
-                                RecordAbilityBattle(gEffectBattler, ABILITY_INNER_FOCUS);
-                                gBattlescriptCurrInstr = BattleScript_FlinchPrevention;
-                            }
-                            else
-                            {
-                                if (GetBattlerTurnOrderNum(gEffectBattler) > gCurrentTurnActionNumber)
-                                    gBattleMons[gEffectBattler].status2 |= sStatusFlagsForMoveEffects[MOVE_EFFECT_FLINCH];
-                                gBattlescriptCurrInstr++;
-                            }
-                        }
+                        BattleScriptPush(gBattlescriptCurrInstr + 1);
+                        gBattlescriptCurrInstr = BattleScript_DefDown;
+                    }
+                    else if (randomFlinchChance && battlerAbility != ABILITY_INNER_FOCUS && GetBattlerTurnOrderNum(gEffectBattler) > gCurrentTurnActionNumber)
+                    {
+                        gBattleMons[gEffectBattler].status2 |= sStatusFlagsForMoveEffects[MOVE_EFFECT_FLINCH];
+                        gBattlescriptCurrInstr++;
                     }
                 }
                 break;
@@ -3859,12 +3834,7 @@ static void Cmd_seteffectwithchance(void)
 {
     CMD_ARGS();
 
-    u32 percentChance;
-
-    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_SERENE_GRACE)
-        percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance * 2;
-    else
-        percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
+    u32 percentChance = GetMoveSecondaryEffectChance(gBattlerAttacker, gBattleMoves[gCurrentMove].secondaryEffectChance);
 
     if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
      && gBattleScripting.moveEffect)

@@ -1553,11 +1553,12 @@ BattleScript_DefDown_Ret:
 	return
 
 BattleScript_ReduceDefenseAndFlinch::
-	modifybattlerstatstage BS_TARGET, STAT_DEF, DECREASE, 1, BattleScript_DefDown_Ret, ANIM_ON
-	jumpifability BS_TARGET, ABILITY_INNER_FOCUS, BattleScript_FlinchPrevention
+	modifybattlerstatstage BS_TARGET, STAT_DEF, DECREASE, 1, BattleScript_DefDownAndFlinch_Ret, ANIM_ON
+	jumpifability BS_TARGET, ABILITY_INNER_FOCUS, BattleScript_DefDownAndFlinch_Ret
 	setmoveeffect MOVE_EFFECT_FLINCH
 	seteffectprimary
-	goto BattleScript_MoveEnd
+BattleScript_DefDownAndFlinch_Ret:
+	return
 
 BattleScript_EffectPurify:
 	attackcanceler

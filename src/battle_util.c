@@ -10859,3 +10859,11 @@ static void SetRandomMultiHitCounter()
         gMultiHitCounter = 5 - (Random() & 1);
     }
 }
+
+u32 GetMoveSecondaryEffectChance(u8 battlerId, u8 secondaryEffectChance)
+{
+    if (GetBattlerAbility(battlerId) == ABILITY_SERENE_GRACE)
+        return (secondaryEffectChance * 2);
+
+    return secondaryEffectChance;
+}
