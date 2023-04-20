@@ -111,6 +111,7 @@ void CB2_TestRunner(void)
         gTestRunnerState.state = STATE_REPORT_RESULT;
         gTestRunnerState.result = TEST_RESULT_PASS;
         gTestRunnerState.expectedResult = TEST_RESULT_PASS;
+        gTestRunnerState.expectLeaks = FALSE;
         if (gTestRunnerHeadless)
             gTestRunnerState.timeoutSeconds = TIMEOUT_SECONDS;
         else
@@ -140,6 +141,26 @@ void CB2_TestRunner(void)
 
         if (gTestRunnerState.test->runner->tearDown)
             gTestRunnerState.test->runner->tearDown(gTestRunnerState.test->data);
+
+        if (!gTestRunnerState.expectLeaks)
+        {
+            const struct MemBlock *head = HeapHead();
+            const struct MemBlock *block = head;
+            do
+            {
+                if (block->allocated)
+                {
+                    const char *location = MemBlockLocation(block);
+                    if (location)
+                        MgbaPrintf_("%s: %d bytes not freed", location, block->size);
+                    else
+                        MgbaPrintf_("<unknown>: %d bytes not freed", block->size);
+                    gTestRunnerState.result = TEST_RESULT_FAIL;
+                }
+                block = block->next;
+            }
+            while (block != head);
+        }
 
         if (gTestRunnerState.test->runner == &gAssumptionsRunner)
         {
@@ -236,6 +257,11 @@ void CB2_TestRunner(void)
 void Test_ExpectedResult(enum TestResult result)
 {
     gTestRunnerState.expectedResult = result;
+}
+
+void Test_ExpectLeaks(bool32 expectLeaks)
+{
+    gTestRunnerState.expectLeaks = expectLeaks;
 }
 
 static void FunctionTest_SetUp(void *data)
