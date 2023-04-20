@@ -4944,7 +4944,7 @@ static void TryUseItemOnMove(u8 taskId)
         else
         {
             gBattleStruct->itemPartyIndex[gBattlerInMenuId] = GetPartyIdFromBattleSlot(gPartyMenu.slotId);
-            gChosenMovePos = ptr->data1;
+            gBattleStruct->itemMoveIndex[gBattlerInMenuId] = ptr->data1;
             gPartyMenuUseExitCallback = TRUE;
             RemoveBagItem(gSpecialVar_ItemId, 1);
             ScheduleBgCopyTilemapToVram(2);

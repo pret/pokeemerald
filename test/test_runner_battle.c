@@ -1564,6 +1564,10 @@ void UseItem(u32 sourceLine, struct BattlePokemon *battler, struct ItemContext c
         }
         INVALID_IF(i == MAX_MON_MOVES, "USE_ITEM on invalid move: %d", ctx.move);
     }
+    else
+    {
+        i = 0;
+    }
     PushBattlerAction(sourceLine, battlerId, RECORDED_ACTION_TYPE, B_ACTION_USE_ITEM);
     PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_ID, (ctx.itemId >> 8) & 0xFF);
     PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_ID, ctx.itemId & 0xFF);
