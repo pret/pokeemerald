@@ -7892,7 +7892,7 @@ static void BestowItem(u32 battlerAtk, u32 battlerDef)
 // Called by Cmd_removeitem. itemId represents the item that was removed, not being given.
 static bool32 TrySymbiosis(u32 battler, u32 itemId)
 {
-    if (!gBattleStruct->itemStolen[gBattlerPartyIndexes[battler]].stolen
+    if (!gBattleStruct->itemLost[gBattlerPartyIndexes[battler]].stolen
         && gBattleStruct->changedItems[battler] == ITEM_NONE
         && GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_EJECT_BUTTON
         && GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_EJECT_PACK
@@ -11264,7 +11264,7 @@ static void Cmd_various(void)
 
         // Open party menu, wait to go to next instruction.
         else
-        {   
+        {
             BtlController_EmitChoosePokemon(BUFFER_A, PARTY_ACTION_CHOOSE_FAINTED_MON, PARTY_SIZE, ABILITY_NONE, gBattleStruct->battlerPartyOrders[gBattlerAttacker]);
             MarkBattlerForControllerExec(gBattlerAttacker);
         }
@@ -16469,7 +16469,7 @@ void BS_ItemRestoreHP(void) {
     }
     if (hp + healAmount > maxHP)
         healAmount = maxHP - hp;
-    
+
     // Heal is applied as move damage if battler is active.
     if (battlerId != MAX_BATTLERS_COUNT && hp != 0)
     {
@@ -16494,10 +16494,10 @@ void BS_ItemRestoreHP(void) {
 void BS_ItemCureStatus(void) {
     NATIVE_ARGS();
     struct Pokemon *party = (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
-    
+
     // Heal Status1 conditions.
     HealStatusConditions(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], gBattleStruct->itemPartyIndex[gBattlerAttacker], GetItemStatus1Mask(gLastUsedItem), gBattlerAttacker);
-    
+
     // Heal Status2 conditions if battler is active.
     if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
     {
@@ -16506,10 +16506,10 @@ void BS_ItemCureStatus(void) {
     else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
                 && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerAttacker)])
     {
-        gBattleMons[gBattlerAttacker].status2 &= ~GetItemStatus2Mask(gLastUsedItem); 
+        gBattleMons[gBattlerAttacker].status2 &= ~GetItemStatus2Mask(gLastUsedItem);
         gBattlerTarget = BATTLE_PARTNER(gBattlerAttacker);
     }
-    
+
     if (GetItemStatus1Mask(gLastUsedItem) & STATUS1_SLEEP)
         gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_NIGHTMARE;
 

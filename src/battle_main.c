@@ -3189,7 +3189,7 @@ static void BattleStartClearSetData(void)
     {
         gBattleStruct->usedHeldItems[i][B_SIDE_PLAYER] = 0;
         gBattleStruct->usedHeldItems[i][B_SIDE_OPPONENT] = 0;
-        gBattleStruct->itemStolen[i].originalItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+        gBattleStruct->itemLost[i].originalItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
         gPartyCriticalHits[i] = 0;
         gBattleStruct->allowedToChangeFormInWeather[i][B_SIDE_PLAYER] = FALSE;
         gBattleStruct->allowedToChangeFormInWeather[i][B_SIDE_OPPONENT] = FALSE;
@@ -5387,9 +5387,9 @@ static void HandleEndTurn_FinishBattle(void)
             TestRunner_Battle_AfterLastTurn();
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
-    #if B_TRAINERS_KNOCK_OFF_ITEMS == TRUE
+    #if B_TRAINERS_KNOCK_OFF_ITEMS == TRUE || B_RESTORE_HELD_BATTLE_ITEMS == TRUE
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-            TryRestoreStolenItems();
+            TryRestoreHeldItems();
     #endif
         for (i = 0; i < PARTY_SIZE; i++)
         {
