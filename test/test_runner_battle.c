@@ -1540,9 +1540,11 @@ void UseItem(u32 sourceLine, struct BattlePokemon *battler, struct ItemContext c
     PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_ID, (ctx.itemId >> 8) & 0xFF);
     PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_ID, ctx.itemId & 0xFF);
     if (ctx.explicitPartyIndex)
-        gBattleStruct->itemPartyIndex[battlerId] = ctx.partyIndex;
-    if (ctx.explicitMove)
-        gBattleStruct->itemPartyIndex[battlerId] = i;
+        PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_TARGET, ctx.partyIndex);
+    else if (ctx.explicitMove)
+        PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_TARGET, i);
+    else
+        PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_TARGET, 0);
     DATA.actionBattlers |= 1 << battlerId;
 }
 

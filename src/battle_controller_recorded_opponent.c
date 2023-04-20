@@ -1441,6 +1441,7 @@ static void RecordedOpponentHandleChooseItem(void)
     u8 byte1 = RecordedBattle_GetBattlerAction(RECORDED_ITEM_ID, gActiveBattler);
     u8 byte2 = RecordedBattle_GetBattlerAction(RECORDED_ITEM_ID, gActiveBattler);
     gBattleStruct->chosenItem[gActiveBattler] = (byte1 << 8) | byte2;
+    gBattleStruct->itemPartyIndex[gActiveBattler] = RecordedBattle_GetBattlerAction(RECORDED_ITEM_TARGET, gActiveBattler);
     BtlController_EmitOneReturnValue(BUFFER_B, gBattleStruct->chosenItem[gActiveBattler]);
     RecordedOpponentBufferExecCompleted();
 }
