@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test_battle.h"
 
-SINGLE_BATTLE_TEST("Paralyze Heal heals a Pokemon from being paralyzed")
+SINGLE_BATTLE_TEST("Paralyze Heal heals a battler from being paralyzed")
 {
     GIVEN {
         ASSUME(gItems[ITEM_PARALYZE_HEAL].battleUsage == EFFECT_ITEM_CURE_STATUS);
@@ -14,7 +14,7 @@ SINGLE_BATTLE_TEST("Paralyze Heal heals a Pokemon from being paralyzed")
     }
 }
 
-SINGLE_BATTLE_TEST("Antidote heals a Pokemon from being poisoned")
+SINGLE_BATTLE_TEST("Antidote heals a battler from being poisoned")
 {
     GIVEN {
         ASSUME(gItems[ITEM_ANTIDOTE].battleUsage == EFFECT_ITEM_CURE_STATUS);
@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("Antidote heals a Pokemon from being poisoned")
     }
 }
 
-SINGLE_BATTLE_TEST("Antidote heals a Pokemon from being badly poisoned")
+SINGLE_BATTLE_TEST("Antidote heals a battler from being badly poisoned")
 {
     GIVEN {
         ASSUME(gItems[ITEM_ANTIDOTE].battleUsage == EFFECT_ITEM_CURE_STATUS);
@@ -40,7 +40,7 @@ SINGLE_BATTLE_TEST("Antidote heals a Pokemon from being badly poisoned")
     }
 }
 
-SINGLE_BATTLE_TEST("Awakening heals a Pokemon from being asleep")
+SINGLE_BATTLE_TEST("Awakening heals a battler from being asleep")
 {
     GIVEN {
         ASSUME(gItems[ITEM_AWAKENING].battleUsage == EFFECT_ITEM_CURE_STATUS);
@@ -53,7 +53,7 @@ SINGLE_BATTLE_TEST("Awakening heals a Pokemon from being asleep")
     }
 }
 
-SINGLE_BATTLE_TEST("Burn Heal heals a Pokemon from being burned")
+SINGLE_BATTLE_TEST("Burn Heal heals a battler from being burned")
 {
     GIVEN {
         ASSUME(gItems[ITEM_BURN_HEAL].battleUsage == EFFECT_ITEM_CURE_STATUS);
@@ -66,7 +66,7 @@ SINGLE_BATTLE_TEST("Burn Heal heals a Pokemon from being burned")
     }
 }
 
-SINGLE_BATTLE_TEST("Ice Heal heals a Pokemon from being paralyzed")
+SINGLE_BATTLE_TEST("Ice Heal heals a battler from being paralyzed")
 {
     GIVEN {
         ASSUME(gItems[ITEM_ICE_HEAL].battleUsage == EFFECT_ITEM_CURE_STATUS);
@@ -79,7 +79,7 @@ SINGLE_BATTLE_TEST("Ice Heal heals a Pokemon from being paralyzed")
     }
 }
 
-SINGLE_BATTLE_TEST("Full Heal heals a Pokemon from any primary status")
+SINGLE_BATTLE_TEST("Full Heal heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -99,7 +99,7 @@ SINGLE_BATTLE_TEST("Full Heal heals a Pokemon from any primary status")
     }
 }
 
-SINGLE_BATTLE_TEST("Pewter Crunchies heals a Pokemon from any primary status")
+SINGLE_BATTLE_TEST("Pewter Crunchies heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -119,7 +119,7 @@ SINGLE_BATTLE_TEST("Pewter Crunchies heals a Pokemon from any primary status")
     }
 }
 
-SINGLE_BATTLE_TEST("Lava Cookies heals a Pokemon from any primary status")
+SINGLE_BATTLE_TEST("Lava Cookies heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -139,7 +139,7 @@ SINGLE_BATTLE_TEST("Lava Cookies heals a Pokemon from any primary status")
     }
 }
 
-SINGLE_BATTLE_TEST("Rage Candy Bar heals a Pokemon from any primary status")
+SINGLE_BATTLE_TEST("Rage Candy Bar heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -159,7 +159,7 @@ SINGLE_BATTLE_TEST("Rage Candy Bar heals a Pokemon from any primary status")
     }
 }
 
-SINGLE_BATTLE_TEST("Old Gateu heals a Pokemon from any primary status")
+SINGLE_BATTLE_TEST("Old Gateu heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -179,7 +179,7 @@ SINGLE_BATTLE_TEST("Old Gateu heals a Pokemon from any primary status")
     }
 }
 
-SINGLE_BATTLE_TEST("Casteliacone heals a Pokemon from any primary status")
+SINGLE_BATTLE_TEST("Casteliacone heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -199,7 +199,7 @@ SINGLE_BATTLE_TEST("Casteliacone heals a Pokemon from any primary status")
     }
 }
 
-SINGLE_BATTLE_TEST("Lumiose Galette heals a Pokemon from any primary status")
+SINGLE_BATTLE_TEST("Lumiose Galette heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -219,7 +219,7 @@ SINGLE_BATTLE_TEST("Lumiose Galette heals a Pokemon from any primary status")
     }
 }
 
-SINGLE_BATTLE_TEST("Shalour Sable heals a Pokemon from any primary status")
+SINGLE_BATTLE_TEST("Shalour Sable heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -239,7 +239,7 @@ SINGLE_BATTLE_TEST("Shalour Sable heals a Pokemon from any primary status")
     }
 }
 
-SINGLE_BATTLE_TEST("Big Malasada heals a Pokemon from any primary status")
+SINGLE_BATTLE_TEST("Big Malasada heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -259,7 +259,7 @@ SINGLE_BATTLE_TEST("Big Malasada heals a Pokemon from any primary status")
     }
 }
 
-SINGLE_BATTLE_TEST("Full Heal and local specialties heal a Pokemon from being confused")
+SINGLE_BATTLE_TEST("Full Heal and local specialties heal a battler from being confused")
 {
     u16 item;
     PARAMETRIZE { item = ITEM_FULL_HEAL; }
