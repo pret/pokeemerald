@@ -23,3 +23,24 @@ SINGLE_BATTLE_TEST("Full Restore restores a battler's HP and cures any primary s
         EXPECT_EQ(player->status1, STATUS1_NONE);
     }
 }
+
+SINGLE_BATTLE_TEST("Full Restore restores a battler's HP and cures confusion")
+{
+    // known failing bc even though it passes there is an underlying bug still that is only obvious in the replay. see #2938
+    // this also means that this test is likely not very good so I advice this to be redone
+    KNOWN_FAILING; 
+    GIVEN {
+        ASSUME(gItems[ITEM_FULL_RESTORE].battleUsage == EFFECT_ITEM_HEAL_AND_CURE_STATUS);
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(300);};
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN{ MOVE(opponent, MOVE_CONFUSE_RAY); }
+        TURN{ USE_ITEM(player, ITEM_FULL_RESTORE, partyIndex: 0); }
+        TURN{ MOVE(player, MOVE_TACKLE); }
+    } SCENE {
+        MESSAGE("Full Restore restored Wobbuffet's health!");
+        NONE_OF { MESSAGE("Wobbuffet is confused!"); }
+    } FINALLY {
+        EXPECT_EQ(player->hp, player->maxHP);
+    }
+}
