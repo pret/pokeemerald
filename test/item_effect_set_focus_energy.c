@@ -9,7 +9,7 @@ SINGLE_BATTLE_TEST("Dire Hit increases a battler's critical hit chance by 2 stag
     GIVEN {
         ASSUME(gItems[ITEM_DIRE_HIT].battleUsage == EFFECT_ITEM_SET_FOCUS_ENERGY);
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_ABOMASNOW);
+        OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { USE_ITEM(player, ITEM_DIRE_HIT, partyIndex: 0); }
         TURN { MOVE(player, MOVE_SCRATCH); }
