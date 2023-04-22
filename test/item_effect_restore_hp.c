@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test_battle.h"
 
-SINGLE_BATTLE_TEST("Potion restores a battler's HP by 20")
+SINGLE_BATTLE_TEST("Restore HP: Potion restores a battler's HP by 20")
 {
     s16 damage;
     GIVEN {
@@ -17,7 +17,7 @@ SINGLE_BATTLE_TEST("Potion restores a battler's HP by 20")
     }
 }
 
-SINGLE_BATTLE_TEST("Super Potion restores a battler's HP by 50")
+SINGLE_BATTLE_TEST("Restore HP: Super Potion restores a battler's HP by 50")
 {
     s16 damage;
     GIVEN {
@@ -33,7 +33,7 @@ SINGLE_BATTLE_TEST("Super Potion restores a battler's HP by 50")
     }
 }
 
-SINGLE_BATTLE_TEST("Hyper Potion restores a battler's HP by 200")
+SINGLE_BATTLE_TEST("Restore HP: Hyper Potion restores a battler's HP by 200")
 {
     s16 damage;
     GIVEN {
@@ -49,7 +49,7 @@ SINGLE_BATTLE_TEST("Hyper Potion restores a battler's HP by 200")
     }
 }
 
-SINGLE_BATTLE_TEST("Max Potion restores a battler's HP fully")
+SINGLE_BATTLE_TEST("Restore HP: Max Potion restores a battler's HP fully")
 {
     s16 damage;
     GIVEN {
@@ -63,7 +63,7 @@ SINGLE_BATTLE_TEST("Max Potion restores a battler's HP fully")
     }
 }
 
-SINGLE_BATTLE_TEST("Fresh Water restores a battler's HP by 30")
+SINGLE_BATTLE_TEST("Restore HP: Fresh Water restores a battler's HP by 30")
 {
     s16 damage;
     GIVEN {
@@ -79,7 +79,7 @@ SINGLE_BATTLE_TEST("Fresh Water restores a battler's HP by 30")
     }
 }
 
-SINGLE_BATTLE_TEST("Soda Pop restores a battler's HP by 50")
+SINGLE_BATTLE_TEST("Restore HP: Soda Pop restores a battler's HP by 50")
 {
     s16 damage;
     GIVEN {
@@ -95,7 +95,7 @@ SINGLE_BATTLE_TEST("Soda Pop restores a battler's HP by 50")
     }
 }
 
-SINGLE_BATTLE_TEST("Lemonade restores a battler's HP by 70")
+SINGLE_BATTLE_TEST("Restore HP: Lemonade restores a battler's HP by 70")
 {
     s16 damage;
     GIVEN {
@@ -111,7 +111,7 @@ SINGLE_BATTLE_TEST("Lemonade restores a battler's HP by 70")
     }
 }
 
-SINGLE_BATTLE_TEST("Moomoo Milk restores a battler's HP by 100")
+SINGLE_BATTLE_TEST("Restore HP: Moomoo Milk restores a battler's HP by 100")
 {
     s16 damage;
     GIVEN {
@@ -127,7 +127,7 @@ SINGLE_BATTLE_TEST("Moomoo Milk restores a battler's HP by 100")
     }
 }
 
-SINGLE_BATTLE_TEST("Energy Powder restores a battler's HP by 50(60)")
+SINGLE_BATTLE_TEST("Restore HP: Energy Powder restores a battler's HP by 60(50)")
 {
     s16 damage;
     GIVEN {
@@ -147,7 +147,7 @@ SINGLE_BATTLE_TEST("Energy Powder restores a battler's HP by 50(60)")
     }
 }
 
-SINGLE_BATTLE_TEST("Energy Root restores a battler's HP by 120(200)")
+SINGLE_BATTLE_TEST("Restore HP: Energy Root restores a battler's HP by 120(200)")
 {
     s16 damage;
     GIVEN {
@@ -167,7 +167,7 @@ SINGLE_BATTLE_TEST("Energy Root restores a battler's HP by 120(200)")
     }
 }
 
-SINGLE_BATTLE_TEST("Sweet Heart restores a battler's HP by 20")
+SINGLE_BATTLE_TEST("Restore HP: Sweet Heart restores a battler's HP by 20")
 {
     s16 damage;
     GIVEN {
@@ -183,7 +183,7 @@ SINGLE_BATTLE_TEST("Sweet Heart restores a battler's HP by 20")
     }
 }
 
-SINGLE_BATTLE_TEST("Oran Berry restores a battler's HP by 10")
+SINGLE_BATTLE_TEST("Restore HP: Oran Berry restores a battler's HP by 10")
 {
     s16 damage;
     GIVEN {
@@ -199,7 +199,7 @@ SINGLE_BATTLE_TEST("Oran Berry restores a battler's HP by 10")
     }
 }
 
-SINGLE_BATTLE_TEST("Sitrus Berry restores a battler's HP")
+SINGLE_BATTLE_TEST("Restore HP: Sitrus Berry restores a battler's HP")
 {
     s16 damage;
     GIVEN {
