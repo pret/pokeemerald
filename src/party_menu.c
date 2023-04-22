@@ -4332,6 +4332,8 @@ static void GetMedicineItemEffectMessage(u16 item)
         break;
     case ITEM_EFFECT_CURE_FREEZE:
         StringExpandPlaceholders(gStringVar4, gText_PkmnThawedOut);
+        // TO DO: if it heals frostbite, use the following instead:
+        // StringExpandPlaceholders(gStringVar4, gText_PkmnFrostbiteHealed);
         break;
     case ITEM_EFFECT_CURE_PARALYSIS:
         StringExpandPlaceholders(gStringVar4, gText_PkmnCuredOfParalysis);
