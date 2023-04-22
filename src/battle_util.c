@@ -2523,6 +2523,7 @@ enum
     ENDTURN_POISON,
     ENDTURN_BAD_POISON,
     ENDTURN_BURN,
+    ENDTURN_FROSTBITE,
     ENDTURN_NIGHTMARES,
     ENDTURN_CURSE,
     ENDTURN_WRAP,
@@ -2732,6 +2733,23 @@ u8 DoBattlerEndTurnEffects(void)
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
                 BattleScriptExecute(BattleScript_BurnTurnDmg);
+                effect++;
+            }
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_FROSTBITE:  // burn
+            if ((gBattleMons[gActiveBattler].status1 & STATUS1_FROSTBITE)
+                && gBattleMons[gActiveBattler].hp != 0)
+            {
+                MAGIC_GUARD_CHECK;
+            #if B_BURN_DAMAGE >= GEN_7
+                gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
+            #else
+                gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
+            #endif
+                if (gBattleMoveDamage == 0)
+                    gBattleMoveDamage = 1;
+                BattleScriptExecute(BattleScript_FrostbiteTurnDmg);
                 effect++;
             }
             gBattleStruct->turnEffectsTracker++;
@@ -9502,6 +9520,14 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
 
     // check burn
     if (gBattleMons[battlerAtk].status1 & STATUS1_BURN && IS_MOVE_PHYSICAL(move)
+    #if B_BURN_FACADE_DMG >= GEN_6
+        && gBattleMoves[move].effect != EFFECT_FACADE
+    #endif
+        && abilityAtk != ABILITY_GUTS)
+        dmg = ApplyModifier(UQ_4_12(0.5), dmg);
+
+    // check frostbite
+    if (gBattleMons[battlerAtk].status1 & STATUS1_FROSTBITE && !IS_MOVE_PHYSICAL(move)
     #if B_BURN_FACADE_DMG >= GEN_6
         && gBattleMoves[move].effect != EFFECT_FACADE
     #endif
