@@ -481,6 +481,7 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_DOUBLE_SHOCK]               = 0, // TODO: Assign points
     [EFFECT_SPECIAL_ATTACK_UP_HIT]      = 1,
     [EFFECT_VICTORY_DANCE]              = 0, // TODO: Assign points
+    [EFFECT_FROSTBITE_HIT]              = 1,
 };
 
 static const u16 sPoints_Effectiveness[] =

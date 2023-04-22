@@ -61,6 +61,7 @@
 #include "constants/trainers.h"
 #include "battle_util.h"
 #include "constants/pokemon.h"
+#include "config/battle.h"
 
 // Helper for accessing command arguments and advancing gBattlescriptCurrInstr.
 //
@@ -896,6 +897,7 @@ static const u32 sStatusFlagsForMoveEffects[NUM_MOVE_EFFECTS] =
     [MOVE_EFFECT_FREEZE]         = STATUS1_FREEZE,
     [MOVE_EFFECT_PARALYSIS]      = STATUS1_PARALYSIS,
     [MOVE_EFFECT_TOXIC]          = STATUS1_TOXIC_POISON,
+    [MOVE_EFFECT_FROSTBITE]      = STATUS1_FROSTBITE,
     [MOVE_EFFECT_CONFUSION]      = STATUS2_CONFUSION,
     [MOVE_EFFECT_FLINCH]         = STATUS2_FLINCHED,
     [MOVE_EFFECT_UPROAR]         = STATUS2_UPROAR,
@@ -919,6 +921,7 @@ static const u8 *const sMoveEffectBS_Ptrs[] =
     [MOVE_EFFECT_UPROAR]           = BattleScript_MoveEffectUproar,
     [MOVE_EFFECT_PAYDAY]           = BattleScript_MoveEffectPayDay,
     [MOVE_EFFECT_WRAP]             = BattleScript_MoveEffectWrap,
+    [MOVE_EFFECT_FROSTBITE]        = BattleScript_MoveEffectFrostbite,
 };
 
 static const struct WindowTemplate sUnusedWinTemplate =
@@ -3161,6 +3164,12 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
             }
             break;
+        case STATUS1_FROSTBITE:
+            if (!CanBeFrozen(gEffectBattler))
+                break;
+
+            statusChanged = TRUE;
+            break;
         }
         if (statusChanged == TRUE)
         {
@@ -3319,7 +3328,11 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 }
                 else
                 {
+                #if B_USE_FROSTBITE == TRUE
+                    static const u8 sTriAttackEffects[] = { MOVE_EFFECT_BURN, MOVE_EFFECT_FROSTBITE, MOVE_EFFECT_PARALYSIS };
+                #else
                     static const u8 sTriAttackEffects[] = { MOVE_EFFECT_BURN, MOVE_EFFECT_FREEZE, MOVE_EFFECT_PARALYSIS };
+                #endif
                     gBattleScripting.moveEffect = RandomElement(RNG_TRI_ATTACK, sTriAttackEffects);
                     SetMoveEffect(FALSE, 0);
                 }
@@ -9960,6 +9973,9 @@ static void Cmd_various(void)
         case STATUS1_TOXIC_POISON:
             gBattleScripting.moveEffect = MOVE_EFFECT_TOXIC;
             break;
+        case STATUS1_FROSTBITE:
+            gBattleScripting.moveEffect = MOVE_EFFECT_FROSTBITE;
+            break;
         default:
             gBattleScripting.moveEffect = 0;
             break;
@@ -15079,7 +15095,11 @@ u16 GetSecretPowerMoveEffect(void)
             break;
         case BATTLE_TERRAIN_SNOW:
         case BATTLE_TERRAIN_ICE:
+        #if B_USE_FROSTBITE == TRUE
+            moveEffect = MOVE_EFFECT_FROSTBITE;
+        #else
             moveEffect = MOVE_EFFECT_FREEZE;
+        #endif
             break;
         case BATTLE_TERRAIN_VOLCANO:
             moveEffect = MOVE_EFFECT_BURN;

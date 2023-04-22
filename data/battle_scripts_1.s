@@ -286,7 +286,11 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHealPulse               @ EFFECT_HEAL_PULSE
 	.4byte BattleScript_EffectQuash                   @ EFFECT_QUASH
 	.4byte BattleScript_EffectIonDeluge               @ EFFECT_ION_DELUGE
+#if B_USE_FROSTBITE == TRUE
+	.4byte BattleScript_EffectFrostbiteHit            @ EFFECT_FREEZE_DRY
+#else
 	.4byte BattleScript_EffectFreezeHit               @ EFFECT_FREEZE_DRY
+#endif
 	.4byte BattleScript_EffectTopsyTurvy              @ EFFECT_TOPSY_TURVY
 	.4byte BattleScript_EffectMistyTerrain            @ EFFECT_MISTY_TERRAIN
 	.4byte BattleScript_EffectGrassyTerrain           @ EFFECT_GRASSY_TERRAIN
@@ -424,6 +428,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDireClaw                @ EFFECT_DIRE_CLAW
 	.4byte BattleScript_EffectBarbBarrage             @ EFFECT_BARB_BARRAGE
 	.4byte BattleScript_EffectRevivalBlessing         @ EFFECT_REVIVAL_BLESSING
+	.4byte BattleScript_EffectFrostbiteHit            @ EFFECT_FROSTBITE_HIT
 
 BattleScript_EffectRevivalBlessing::
 	attackcanceler
@@ -3462,6 +3467,10 @@ BattleScript_AbsorbHealBlock::
 
 BattleScript_EffectBurnHit::
 	setmoveeffect MOVE_EFFECT_BURN
+	goto BattleScript_EffectHit
+
+BattleScript_EffectFrostbiteHit::
+	setmoveeffect MOVE_EFFECT_FROSTBITE
 	goto BattleScript_EffectHit
 
 BattleScript_EffectSleepHit::
@@ -8362,6 +8371,12 @@ BattleScript_MoveEffectPoison::
 BattleScript_MoveEffectBurn::
 	statusanimation BS_EFFECT_BATTLER
 	printfromtable gGotBurnedStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_UpdateEffectStatusIconRet
+
+BattleScript_MoveEffectFrostbite::
+	statusanimation BS_EFFECT_BATTLER
+	printfromtable gGotFrostbiteStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_UpdateEffectStatusIconRet
 
