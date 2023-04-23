@@ -29414,7 +29414,7 @@ static const u16 sDhelmiseTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-static const u16 sJangmooTeachableLearnset[] = {
+static const u16 sJangmoOTeachableLearnset[] = {
     MOVE_AERIAL_ACE,
     MOVE_ATTRACT,
     MOVE_BRICK_BREAK,
@@ -29445,7 +29445,7 @@ static const u16 sJangmooTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-static const u16 sHakamooTeachableLearnset[] = {
+static const u16 sHakamoOTeachableLearnset[] = {
     MOVE_AERIAL_ACE,
     MOVE_ATTRACT,
     MOVE_BRICK_BREAK,
@@ -29475,7 +29475,7 @@ static const u16 sHakamooTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-static const u16 sKommooTeachableLearnset[] = {
+static const u16 sKommoOTeachableLearnset[] = {
     MOVE_AERIAL_ACE,
     MOVE_ATTRACT,
     MOVE_BRICK_BREAK,
@@ -30118,11 +30118,67 @@ static const u16 sZeraoraTeachableLearnset[] = {
 };
 
 static const u16 sMeltanTeachableLearnset[] = {
+    MOVE_HEADBUTT,
+    MOVE_REST,
+    MOVE_PROTECT,
+    MOVE_SUBSTITUTE,
+    MOVE_THUNDER_WAVE,
+    MOVE_TOXIC,
+    MOVE_THUNDERBOLT,
+    MOVE_FLASH_CANNON,
+    MOVE_SNORE,
+    MOVE_FACADE,
+    MOVE_ROUND,
+    MOVE_ENDURE,
+    MOVE_SLEEP_TALK,
+    MOVE_IRON_DEFENSE,
+    MOVE_GYRO_BALL,
+    MOVE_STEEL_BEAM,
     MOVE_HIDDEN_POWER,
     MOVE_UNAVAILABLE,
 };
 
 static const u16 sMelmetalTeachableLearnset[] = {
+    MOVE_HEADBUTT,
+    MOVE_REST,
+    MOVE_PROTECT,
+    MOVE_SUBSTITUTE,
+    MOVE_FACADE,
+    MOVE_BRICK_BREAK,
+    MOVE_THUNDER_WAVE,
+    MOVE_ROCK_SLIDE,
+    MOVE_THUNDER_PUNCH,
+    MOVE_TOXIC,
+    MOVE_ICE_PUNCH,
+    MOVE_THUNDERBOLT,
+    MOVE_THUNDER,
+    MOVE_EARTHQUAKE,
+    MOVE_SELF_DESTRUCT,
+    MOVE_SOLAR_BEAM,
+    MOVE_HYPER_BEAM,
+    MOVE_SUPERPOWER,
+    MOVE_FLASH_CANNON,
+    MOVE_ICE_BEAM,
+    MOVE_MEGA_PUNCH,
+    MOVE_MEGA_KICK,
+    MOVE_GIGA_IMPACT,
+    MOVE_SNORE,
+    MOVE_ROCK_TOMB,
+    MOVE_ROUND,
+    MOVE_ELECTRIC_TERRAIN,
+    MOVE_BRUTAL_SWING,
+    MOVE_BODY_SLAM,
+    MOVE_ENDURE,
+    MOVE_SLEEP_TALK,
+    MOVE_IRON_DEFENSE,
+    MOVE_GYRO_BALL,
+    MOVE_IRON_HEAD,
+    MOVE_HEAVY_SLAM,
+    MOVE_DARKEST_LARIAT,
+    MOVE_HIGH_HORSEPOWER,
+    MOVE_BODY_PRESS,
+    MOVE_STEEL_BEAM,
+    MOVE_STEEL_ROLLER,
     MOVE_HIDDEN_POWER,
     MOVE_UNAVAILABLE,
 };

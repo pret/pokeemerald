@@ -4,14 +4,16 @@
 #include "gpu_regs.h"
 #include "main.h"
 #include "malloc.h"
+#include "random.h"
 #include "test.h"
 #include "test_runner.h"
 
-#define TIMEOUT_SECONDS 30
+#define TIMEOUT_SECONDS 55
 
 void CB2_TestRunner(void);
 
 EWRAM_DATA struct TestRunnerState gTestRunnerState;
+EWRAM_DATA struct FunctionTestRunnerState *gFunctionTestRunnerState;
 
 void TestRunner_Battle(const struct Test *);
 
@@ -60,7 +62,6 @@ void CB2_TestRunner(void)
         gTestRunnerState.exitCode = 0;
         gTestRunnerState.tests = 0;
         gTestRunnerState.passes = 0;
-        gTestRunnerState.skips = 0;
         gTestRunnerState.skipFilename = NULL;
         gTestRunnerState.test = __start_tests - 1;
         break;
@@ -70,20 +71,15 @@ void CB2_TestRunner(void)
 
         if (gTestRunnerState.test == __stop_tests)
         {
-            MgbaPrintf_("%s%d/%d PASSED\e[0m", gTestRunnerState.exitCode == 0 ? "\e[32m" : "\e[31m", gTestRunnerState.passes, gTestRunnerState.tests);
-            if (gTestRunnerState.skips)
-            {
-                if (gTestRunnerSkipIsFail)
-                    MgbaPrintf_("\e[31m%d SKIPPED\e[0m", gTestRunnerState.skips);
-                else
-                    MgbaPrintf_("%d SKIPPED", gTestRunnerState.skips);
-            }
             gTestRunnerState.state = STATE_EXIT;
             return;
         }
 
-        if (!PrefixMatch(gTestRunnerArgv, gTestRunnerState.test->name))
+        if (gTestRunnerState.test->runner != &gAssumptionsRunner
+          && !PrefixMatch(gTestRunnerArgv, gTestRunnerState.test->name))
+        {
             return;
+        }
 
         // Greedily assign tests to processes based on estimated cost.
         // TODO: Make processCosts a min heap.
@@ -111,6 +107,7 @@ void CB2_TestRunner(void)
                 return;
         }
 
+        MgbaPrintf_(":N%s", gTestRunnerState.test->name);
         gTestRunnerState.state = STATE_REPORT_RESULT;
         gTestRunnerState.result = TEST_RESULT_PASS;
         gTestRunnerState.expectedResult = TEST_RESULT_PASS;
@@ -126,11 +123,10 @@ void CB2_TestRunner(void)
         // NOTE: Assumes that the compiler interns __FILE__.
         if (gTestRunnerState.skipFilename == gTestRunnerState.test->filename)
         {
-            gTestRunnerState.result = TEST_RESULT_SKIP;
+            gTestRunnerState.result = TEST_RESULT_ASSUMPTION_FAIL;
         }
         else
         {
-            MgbaPrintf_(":N%s", gTestRunnerState.test->name);
             if (gTestRunnerState.test->runner->setUp)
                 gTestRunnerState.test->runner->setUp(gTestRunnerState.test->data);
             gTestRunnerState.test->runner->run(gTestRunnerState.test->data);
@@ -150,12 +146,6 @@ void CB2_TestRunner(void)
             if (gTestRunnerState.result != TEST_RESULT_PASS)
                 gTestRunnerState.skipFilename = gTestRunnerState.test->filename;
         }
-        else if (gTestRunnerState.result == TEST_RESULT_SKIP)
-        {
-            gTestRunnerState.skips++;
-            if (gTestRunnerSkipIsFail)
-                gTestRunnerState.exitCode = 1;
-        }
         else
         {
             const char *color;
@@ -169,7 +159,7 @@ void CB2_TestRunner(void)
                 color = "\e[32m";
                 MgbaPrintf_(":N%s", gTestRunnerState.test->name);
             }
-            else if (gTestRunnerState.result != TEST_RESULT_SKIP || gTestRunnerSkipIsFail)
+            else if (gTestRunnerState.result != TEST_RESULT_ASSUMPTION_FAIL || gTestRunnerSkipIsFail)
             {
                 gTestRunnerState.exitCode = 1;
                 color = "\e[31m";
@@ -187,16 +177,52 @@ void CB2_TestRunner(void)
 
             switch (gTestRunnerState.result)
             {
-            case TEST_RESULT_FAIL: result = "FAIL"; break;
-            case TEST_RESULT_PASS: result = "PASS"; break;
-            case TEST_RESULT_SKIP: result = "SKIP"; break;
-            case TEST_RESULT_INVALID: result = "INVALID"; break;
-            case TEST_RESULT_ERROR: result = "ERROR"; break;
-            case TEST_RESULT_TIMEOUT: result = "TIMEOUT"; break;
-            default: result = "UNKNOWN"; break;
+            case TEST_RESULT_FAIL:
+                if (gTestRunnerState.expectedResult == TEST_RESULT_FAIL)
+                {
+                    result = "KNOWN_FAILING";
+                    color = "\e[33m";
+                }
+                else
+                {
+                    result = "FAIL";
+                }
+                break;
+            case TEST_RESULT_PASS:
+                result = "PASS";
+                break;
+            case TEST_RESULT_ASSUMPTION_FAIL:
+                result = "ASSUMPTION_FAIL";
+                color = "\e[33m";
+                break;
+            case TEST_RESULT_TODO:
+                result = "TO_DO";
+                color = "\e[33m";
+                break;
+            case TEST_RESULT_INVALID:
+                result = "INVALID";
+                break;
+            case TEST_RESULT_ERROR:
+                result = "ERROR";
+                break;
+            case TEST_RESULT_TIMEOUT:
+                result = "TIMEOUT";
+                break;
+            default:
+                result = "UNKNOWN";
+                break;
             }
 
-            MgbaPrintf_(":R%s%s\e[0m", color, result);
+            if (gTestRunnerState.result == TEST_RESULT_PASS)
+                MgbaPrintf_(":P%s%s\e[0m", color, result);
+            else if (gTestRunnerState.result == TEST_RESULT_ASSUMPTION_FAIL)
+                MgbaPrintf_(":A%s%s\e[0m", color, result);
+            else if (gTestRunnerState.result == TEST_RESULT_TODO)
+                MgbaPrintf_(":T%s%s\e[0m", color, result);
+            else if (gTestRunnerState.expectedResult == gTestRunnerState.result)
+                MgbaPrintf_(":K%s%s\e[0m", color, result);
+            else
+                MgbaPrintf_(":F%s%s\e[0m", color, result);
         }
 
         break;
@@ -211,6 +237,38 @@ void Test_ExpectedResult(enum TestResult result)
 {
     gTestRunnerState.expectedResult = result;
 }
+
+static void FunctionTest_SetUp(void *data)
+{
+    (void)data;
+    gFunctionTestRunnerState = AllocZeroed(sizeof(*gFunctionTestRunnerState));
+    SeedRng(0);
+}
+
+static void FunctionTest_Run(void *data)
+{
+    void (*function)(void) = data;
+    do
+    {
+        if (gFunctionTestRunnerState->parameters)
+            MgbaPrintf_(":N%s %d/%d", gTestRunnerState.test->name, gFunctionTestRunnerState->runParameter + 1, gFunctionTestRunnerState->parameters);
+        gFunctionTestRunnerState->parameters = 0;
+        function();
+    } while (++gFunctionTestRunnerState->runParameter < gFunctionTestRunnerState->parameters);
+}
+
+static void FunctionTest_TearDown(void *data)
+{
+    (void)data;
+    FREE_AND_SET_NULL(gFunctionTestRunnerState);
+}
+
+const struct TestRunner gFunctionTestRunner =
+{
+    .setUp = FunctionTest_SetUp,
+    .run = FunctionTest_Run,
+    .tearDown = FunctionTest_TearDown,
+};
 
 static void Assumptions_Run(void *data)
 {
@@ -270,11 +328,12 @@ static void Intr_Timer2(void)
 
 void Test_ExitWithResult(enum TestResult result, const char *fmt, ...)
 {
+    bool32 handled = FALSE;
     gTestRunnerState.result = result;
     ReinitCallbacks();
-    if (gTestRunnerState.test->runner->handleExitWithResult
-     && !gTestRunnerState.test->runner->handleExitWithResult(gTestRunnerState.test->data, result)
-     && gTestRunnerState.result != gTestRunnerState.expectedResult)
+    if (gTestRunnerState.test->runner->handleExitWithResult)
+        handled = gTestRunnerState.test->runner->handleExitWithResult(gTestRunnerState.test->data, result);
+    if (!handled && gTestRunnerState.result != gTestRunnerState.expectedResult)
     {
         va_list va;
         va_start(va, fmt);

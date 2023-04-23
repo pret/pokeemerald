@@ -38,7 +38,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AbandonedShip_HiddenFloorRooms_EventScript_ItemScanner",
-      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_4_SCANNER"
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_2_SCANNER"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",

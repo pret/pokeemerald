@@ -156,7 +156,7 @@ static void InitMenuBasedScript(const u8 *);
 static void LoadCableClubPlayer(s32, s32, struct CableClubPlayer *);
 static bool32 IsCableClubPlayerUnfrozen(struct CableClubPlayer *);
 static bool32 CanCableClubPlayerPressStart(struct CableClubPlayer *);
-static u8 *TryGetTileEventScript(struct CableClubPlayer *);
+static const u8 *TryGetTileEventScript(struct CableClubPlayer *);
 static bool32 PlayerIsAtSouthExit(struct CableClubPlayer *);
 static const u8 *TryInteractWithPlayer(struct CableClubPlayer *);
 static u16 KeyInterCB_DeferToRecvQueue(u32);
@@ -401,6 +401,25 @@ void Overworld_ResetStateAfterDigEscRope(void)
     FlagClear(FLAG_SYS_USE_FLASH);
 }
 
+#if B_RESET_FLAGS_VARS_AFTER_WHITEOUT  == TRUE
+    void Overworld_ResetBattleFlagsAndVars(void)
+{
+    #if VAR_TERRAIN != 0
+        VarSet(VAR_TERRAIN, 0);
+    #endif
+
+    #if B_VAR_WILD_AI_FLAGS != 0
+        VarSet(B_VAR_WILD_AI_FLAGS,0);
+    #endif
+
+    FlagClear(B_FLAG_INVERSE_BATTLE);
+    FlagClear(B_FLAG_FORCE_DOUBLE_WILD);
+    FlagClear(B_SMART_WILD_AI_FLAG);
+    FlagClear(B_FLAG_NO_BAG_USE);
+    FlagClear(B_FLAG_NO_CATCHING);
+}
+#endif
+
 static void Overworld_ResetStateAfterWhiteOut(void)
 {
     ResetInitialPlayerAvatarState();
@@ -409,8 +428,8 @@ static void Overworld_ResetStateAfterWhiteOut(void)
     FlagClear(FLAG_SYS_SAFARI_MODE);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
-#if VAR_TERRAIN != 0
-    VarSet(VAR_TERRAIN, 0);
+#if B_RESET_FLAGS_VARS_AFTER_WHITEOUT  == TRUE
+    Overworld_ResetBattleFlagsAndVars();
 #endif
     // If you were defeated by Kyogre/Groudon and the step counter has
     // maxed out, end the abnormal weather.
@@ -487,7 +506,7 @@ void LoadObjEventTemplatesFromHeader(void)
 
 void LoadSaveblockObjEventScripts(void)
 {
-    struct ObjectEventTemplate *mapHeaderObjTemplates = gMapHeader.events->objectEvents;
+    const struct ObjectEventTemplate *mapHeaderObjTemplates = gMapHeader.events->objectEvents;
     struct ObjectEventTemplate *savObjTemplates = gSaveBlock1Ptr->objectEventTemplates;
     s32 i;
 
@@ -1109,7 +1128,7 @@ u16 GetCurrLocationDefaultMusic(void)
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE111)
      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE111)
      && GetSavedWeather() == WEATHER_SANDSTORM)
-        return MUS_ROUTE111;
+        return MUS_DESERT;
 
     music = GetLocationMusic(&gSaveBlock1Ptr->location);
     if (music != MUS_ROUTE118)
@@ -2719,7 +2738,7 @@ static bool32 CanCableClubPlayerPressStart(struct CableClubPlayer *player)
         return FALSE;
 }
 
-static u8 *TryGetTileEventScript(struct CableClubPlayer *player)
+static const u8 *TryGetTileEventScript(struct CableClubPlayer *player)
 {
     if (player->movementMode != MOVEMENT_MODE_SCRIPTED)
         return FACING_NONE;

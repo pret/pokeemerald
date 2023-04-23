@@ -341,6 +341,8 @@ const u8 gText_Var1DisdainfullyAteVar2[] = _("{STR_VAR_1} disdainfully ate the\n
 const u8 gText_ShopBuy[] = _("BUY");
 const u8 gText_ShopSell[] = _("SELL");
 const u8 gText_ShopQuit[] = _("QUIT");
+const u8 gText_ThatItemIsSoldOut[] = _("I'm sorry, but that item is sold out.{PAUSE_UNTIL_PRESS}");
+const u8 gText_SoldOut[] = _("SOLD OUT");
 const u8 gText_InBagVar1[] = _("IN BAG: {STR_VAR_1}");
 const u8 gText_QuitShopping[] = _("Quit shopping.");
 const u8 gText_Var1CertainlyHowMany[] = _("{STR_VAR_1}? Certainly.\nHow many would you like?");
@@ -1191,7 +1193,11 @@ const u8 gText_PsychUp48BP[] = _("PSYCH UP{CLEAR_TO 0x4E}48BP");
 const u8 gText_IcePunch48BP[] = _("ICE PUNCH{CLEAR_TO 0x4E}48BP");
 const u8 gText_ThunderPunch48BP[] = _("THUNDERPUNCH{CLEAR_TO 0x4E}48BP");
 const u8 gText_FirePunch48BP[] = _("FIRE PUNCH{CLEAR_TO 0x4E}48BP");
+#if OW_POISON_DAMAGE < GEN_4
 const u8 gText_PkmnFainted_FldPsn[] = _("{STR_VAR_1} fainted…\p\n");
+#else
+const u8 gText_PkmnFainted_FldPsn[] = _("{STR_VAR_1} survived the poisoning.\nThe poison faded away!\p");
+#endif
 const u8 gText_Marco[] = _("MARCO");
 const u8 gText_TrainerCardName[] = _("NAME: ");
 const u8 gText_TrainerCardIDNo[] = _("IDNo.");

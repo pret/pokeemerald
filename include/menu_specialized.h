@@ -15,6 +15,15 @@ enum {
     MAILBOXWIN_COUNT
 };
 
+// Window IDs for the move relearner
+enum {
+    RELEARNERWIN_DESC_BATTLE,
+    RELEARNERWIN_DESC_CONTEST,
+    RELEARNERWIN_MOVE_LIST,
+    RELEARNERWIN_MSG,
+    RELEARNERWIN_YESNO,
+};
+
 enum {
     TAG_CONDITION_MON = 100,
     TAG_CONDITION_BALL,
@@ -117,11 +126,11 @@ void DestroyConditionSparkleSprites(struct Sprite **sprites);
 void FreeConditionSparkles(struct Sprite **sprites);
 
 // Move relearner
-void MoveRelearnerPrintText(u8 *str);
+void MoveRelearnerPrintMessage(u8 *str);
 bool16 MoveRelearnerRunTextPrinters(void);
 void MoveRelearnerCreateYesNoMenu(void);
 u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices);
-void InitMoveRelearnerWindows(bool8 useContextWindow);
+void InitMoveRelearnerWindows(bool8 useContestWindow);
 
 // Level up window
 void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bgClr, u8 fgClr, u8 shadowClr);

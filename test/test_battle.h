@@ -65,8 +65,9 @@
  * single turn. MOVE causes the player to use Stun Spore and adds the
  * move to the Pokémon's moveset if an explicit Moves was not specified.
  * Pokémon that are not mentioned in a TURN use Celebrate.
- * The test runner attempts to rig the RNG so that the first move used
- * in a turn does not miss and activates its secondary effects (if any).
+ * The test runner rigs the RNG so that unless otherwise specified,
+ * moves always hit, never critical hit, always activate their secondary
+ * effects, and always roll the same damage modifier.
  *
  * SCENE describes the player-visible output of the battle. In this case
  * ANIMATION checks that the Stun Spore animation played, MESSAGE checks
@@ -112,17 +113,17 @@
  * NOT STATUS_ICON(opponent, paralysis: TRUE); to say that Oddish was
  * not paralyzed without specifying the exact outputs which led to that.
  *
- * As a final example, to test that Howl works you might:
- * 1. Put a Wobbuffet that knows Howl and Tackle in your party.
+ * As a final example, to test that Meditate works you might:
+ * 1. Put a Wobbuffet that knows Meditate and Tackle in your party.
  * 2. Battle a wild Wobbuffet.
  * 3. Use Tackle and note the amount the HP bar reduced.
  * 4. Battle a wild Wobbuffet.
- * 5. Use Howl and that that the stat change animation and message play.
+ * 5. Use Meditate and that the stat change animation and message play.
  * 6. Use Tackle and check that the HP bar reduced by more than in 3.
  *
  * This can be translated to an automated test as follows:
  *
- *    SINGLE_BATTLE_TEST("Howl raises Attack", s16 damage)
+ *    SINGLE_BATTLE_TEST("Meditate raises Attack", s16 damage)
  *    {
  *        bool32 raiseAttack;
  *        PARAMETRIZE { raiseAttack = FALSE; }
@@ -132,11 +133,11 @@
  *            PLAYER(SPECIES_WOBBUFFET);
  *            OPPONENT(SPECIES_WOBBUFFET);
  *        } WHEN {
- *            if (raiseAttack) TURN { MOVE(player, MOVE_HOWL); } // 5.
+ *            if (raiseAttack) TURN { MOVE(player, MOVE_MEDITATE); } // 5.
  *            TURN { MOVE(player, MOVE_TACKLE); } // 3 & 6.
  *        } SCENE {
  *            if (raiseAttack) {
- *                ANIMATION(ANIM_TYPE_MOVE, MOVE_HOWL, player);
+ *                ANIMATION(ANIM_TYPE_MOVE, MOVE_MEDITATE, player);
  *                ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player); // 5.
  *                MESSAGE("Wobbuffet's attack rose!"); // 5.
  *            }
@@ -159,7 +160,7 @@
  * of the first battle (with a small tolerance to account for rounding).
  *
  * You might notice that all the tests check the outputs the player
- * could see rather than the internal battle state. e.g. the Howl test
+ * could see rather than the internal battle state. e.g. the Meditate test
  * could have used gBattleMons[B_POSITION_OPPONENT_LEFT].hp instead of
  * using HP_BAR to capture the damage. This is a deliberate choice, by
  * checking what the player can observe the tests are more robust to
@@ -228,12 +229,35 @@
  *         }
  *     }
  *
- * PASSES_RANDOMLY(successes, trials)
- * Checks that the test passes approximately successes/trials. Used for
- * testing RNG-based attacks, e.g.:
+ * PASSES_RANDOMLY(successes, trials, [tag])
+ * Checks that the test passes successes/trials. If tag is provided, the
+ * test is run for each value that the tag can produce. For example, to
+ * check that Paralysis causes the turn to be skipped 25/100 times, we
+ * can write the following test that passes only if the Pokémon is fully
+ * paralyzed and specify that we expect it to pass 25/100 times when
+ * RNG_PARALYSIS varies:
+ *     SINGLE_BATTLE_TEST("Paralysis has a 25% chance of skipping the turn")
+ *     {
+ *         PASSES_RANDOMLY(25, 100, RNG_PARALYSIS);
+ *         GIVEN {
+ *             PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_PARALYSIS); }
+ *             OPPONENT(SPECIES_WOBBUFFET);
+ *         } WHEN {
+ *             TURN { MOVE(player, MOVE_CELEBRATE); }
+ *         } SCENE {
+ *             MESSAGE("Wobbuffet is paralyzed! It can't move!");
+ *         }
+ *     }
+ * All BattleRandom calls involving tag will return the same number, so
+ * this cannot be used to have two moves independently hit or miss, for
+ * example.
+ *
+ * If the tag is not provided, runs the test 50 times and computes an
+ * approximate pass ratio.
  *     PASSES_RANDOMLY(gBattleMoves[move].accuracy, 100);
- * Note that PASSES_RANDOMLY makes the tests run very slowly and should
- * be avoided where possible.
+ * Note that this mode of PASSES_RANDOMLY makes the tests run very
+ * slowly and should be avoided where possible. If the mechanic you are
+ * testing is missing its tag, you should add it.
  *
  * GIVEN
  * Contains the initial state of the parties before the battle.
@@ -279,13 +303,14 @@
  * The inference process is naive, if your test contains anything that
  * modifies the speed of a battler you should specify them explicitly.
  *
- * MOVE(battler, move | moveSlot:, [megaEvolve:], [hit:], [criticalHit:], [target:], [allowed:])
+ * MOVE(battler, move | moveSlot:, [megaEvolve:], [hit:], [criticalHit:], [target:], [allowed:], [WITH_RNG(tag, value])
  * Used when the battler chooses Fight. Either the move ID or move slot
  * must be specified. megaEvolve: TRUE causes the battler to Mega Evolve
  * if able, hit: FALSE causes the move to miss, criticalHit: TRUE causes
  * the move to land a critical hit, target: is used in double battles to
  * choose the target (when necessary), and allowed: FALSE is used to
- * reject an illegal move e.g. a Disabled one.
+ * reject an illegal move e.g. a Disabled one. WITH_RNG allows the move
+ * to specify an explicit outcome for an RNG tag.
  *     MOVE(playerLeft, MOVE_TACKLE, target: opponentRight);
  * If the battler does not have an explicit Moves specified the moveset
  * will be populated based on the MOVEs it uses.
@@ -308,6 +333,13 @@
  * Used when the battler chooses to switch to another Pokémon but not
  * via Switch, e.g. after fainting or due to a U-turn.
  *     SEND_OUT(player, 1);
+ * 
+ * USE_ITEM(battler, itemId, [partyIndex:], [move:])
+ * Used when the battler chooses to use an item from the Bag. The item
+ * ID must be specified, and party index and move slot if applicable, e.g:
+ *      USE_ITEM(player, ITEM_X_ATTACK);
+ *      USE_ITEM(player, ITEM_POTION, partyIndex: 0);
+ *      USE_ITEM(player, ITEM_LEPPA_BERRY, partyIndex: 0, move: MOVE_TACKLE);
  *
  * SCENE
  * Contains an abridged description of the UI during the THEN. The order
@@ -419,6 +451,7 @@
 #include "battle_anim.h"
 #include "data.h"
 #include "item.h"
+#include "random.h"
 #include "recorded_battle.h"
 #include "test.h"
 #include "util.h"
@@ -433,7 +466,8 @@
 // NOTE: If the stack is too small the test runner will probably crash
 // or loop.
 #define BATTLE_TEST_STACK_SIZE 1024
-#define MAX_QUEUED_EVENTS 16
+#define MAX_TURNS 16
+#define MAX_QUEUED_EVENTS 25
 
 enum { BATTLE_TEST_SINGLES, BATTLE_TEST_DOUBLES };
 
@@ -512,6 +546,20 @@ struct QueuedEvent
     } as;
 };
 
+struct TurnRNG
+{
+    u16 tag;
+    u16 value;
+};
+
+struct BattlerTurn
+{
+    u8 hit:2;
+    u8 criticalHit:2;
+    u8 secondaryEffect:2;
+    struct TurnRNG rng;
+};
+
 struct BattleTestData
 {
     u8 stack[BATTLE_TEST_STACK_SIZE];
@@ -533,14 +581,13 @@ struct BattleTestData
     u8 turns;
     u8 actionBattlers;
     u8 moveBattlers;
-    bool8 hasRNGActions:1;
 
     struct RecordedBattleSave recordedBattle;
     u8 battleRecordTypes[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
     u8 battleRecordSourceLineOffsets[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
     u16 recordIndexes[MAX_BATTLERS_COUNT];
+    struct BattlerTurn battleRecordTurns[MAX_TURNS][MAX_BATTLERS_COUNT];
     u8 lastActionTurn;
-    u8 nextRNGTurn;
 
     u8 queuedEventsCount;
     u8 queueGroupType;
@@ -555,11 +602,12 @@ struct BattleTestRunnerState
     u8 parametersCount; // Valid only in BattleTest_Setup.
     u8 parameters;
     u8 runParameter;
+    u16 rngTag;
     u8 trials;
-    u8 expectedPasses;
-    u8 observedPasses;
-    u8 skippedTrials;
     u8 runTrial;
+    u16 expectedRatio;
+    u16 observedRatio;
+    u16 trialRatio;
     bool8 runRandomly:1;
     bool8 runGiven:1;
     bool8 runWhen:1;
@@ -601,6 +649,15 @@ extern struct BattleTestRunnerState *gBattleTestRunnerState;
 
 /* Test */
 
+#define TO_DO_BATTLE_TEST(_name) \
+    SINGLE_BATTLE_TEST("TODO: " _name) \
+    { \
+        TO_DO; \
+        GIVEN { PLAYER(SPECIES_WOBBUFFET); OPPONENT(SPECIES_WOBBUFFET); } \
+        WHEN { TURN { } } \
+        THEN { EXPECT_TO_DO; } \
+    }
+
 #define SINGLE_BATTLE_TEST(_name, ...) \
     struct CAT(Result, __LINE__) { MEMBERS(__VA_ARGS__) }; \
     static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, u32, struct BattlePokemon *, struct BattlePokemon *); \
@@ -639,13 +696,20 @@ extern struct BattleTestRunnerState *gBattleTestRunnerState;
 
 /* Parametrize */
 
+#undef PARAMETRIZE // Override test/test.h's implementation.
+
 #define PARAMETRIZE if (gBattleTestRunnerState->parametersCount++ == i)
 
 /* Randomly */
 
-#define PASSES_RANDOMLY(passes, trials) for (; gBattleTestRunnerState->runRandomly; gBattleTestRunnerState->runRandomly = FALSE) Randomly(__LINE__, passes, trials)
+#define PASSES_RANDOMLY(passes, trials, ...) for (; gBattleTestRunnerState->runRandomly; gBattleTestRunnerState->runRandomly = FALSE) Randomly(__LINE__, passes, trials, (struct RandomlyContext) { __VA_ARGS__ })
 
-void Randomly(u32 sourceLine, u32 passes, u32 trials);
+struct RandomlyContext
+{
+    u16 tag;
+};
+
+void Randomly(u32 sourceLine, u32 passes, u32 trials, struct RandomlyContext);
 
 /* Given */
 
@@ -708,6 +772,8 @@ enum { TURN_CLOSED, TURN_OPEN, TURN_CLOSING };
 #define SWITCH(battler, partyIndex) Switch(__LINE__, battler, partyIndex)
 #define SKIP_TURN(battler) SkipTurn(__LINE__, battler)
 #define SEND_OUT(battler, partyIndex) SendOut(__LINE__, battler, partyIndex)
+#define USE_ITEM(battler, ...) UseItem(__LINE__, battler, (struct ItemContext) { APPEND_TRUE(__VA_ARGS__) })
+#define WITH_RNG(tag, value) rng: ((struct TurnRNG) { tag, value })
 
 struct MoveContext
 {
@@ -719,6 +785,8 @@ struct MoveContext
     u16 explicitHit:1;
     u16 criticalHit:1;
     u16 explicitCriticalHit:1;
+    u16 secondaryEffect:1;
+    u16 explicitSecondaryEffect:1;
     u16 megaEvolve:1;
     u16 explicitMegaEvolve:1;
     // TODO: u8 zMove:1;
@@ -726,6 +794,18 @@ struct MoveContext
     u16 explicitAllowed:1;
     struct BattlePokemon *target;
     bool8 explicitTarget;
+    struct TurnRNG rng;
+    bool8 explicitRNG;
+};
+
+struct ItemContext
+{
+    u16 itemId;
+    u16 explicitItemId:1;
+    u16 partyIndex;
+    u16 explicitPartyIndex:1;
+    u16 move;
+    u16 explicitMove:1;
 };
 
 void OpenTurn(u32 sourceLine);
@@ -734,7 +814,7 @@ void Move(u32 sourceLine, struct BattlePokemon *, struct MoveContext);
 void ForcedMove(u32 sourceLine, struct BattlePokemon *);
 void Switch(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
 void SkipTurn(u32 sourceLine, struct BattlePokemon *);
-
+void UseItem(u32 sourceLine, struct BattlePokemon *, struct ItemContext);
 void SendOut(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
 
 /* Scene */

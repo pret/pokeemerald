@@ -74,6 +74,7 @@
 #define BS_PLAYER2                  13 // for Cmd_updatestatusicon
 #define BS_OPPONENT2                14
 #define BS_ABILITY_BATTLER          15
+#define BS_ATTACKER_PARTNER         16
 
 // Cmd_accuracycheck
 #define NO_ACC_CALC_CHECK_LOCK_ON 0xFFFF
@@ -254,8 +255,11 @@
 #define VARIOUS_TRY_WIND_RIDER_POWER                163
 #define VARIOUS_ACTIVATE_WEATHER_CHANGE_ABILITIES   164
 #define VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES   165
-#define VARIOUS_JUMP_IF_NO_VALID_TARGETS            166
-#define VARIOUS_JUMP_IF_EMERGENCY_EXITED            167
+#define VARIOUS_JUMP_IF_EMERGENCY_EXITED            166
+#define VARIOUS_STORE_HEALING_WISH                  167
+#define VARIOUS_HIT_SWITCH_TARGET_FAILED            168
+#define VARIOUS_JUMP_IF_SHELL_TRAP                  169
+#define VARIOUS_TRY_REVIVAL_BLESSING                170
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
@@ -273,6 +277,7 @@
 
 // Cmd_statbuffchange
 #define STAT_CHANGE_ALLOW_PTR               (1 << 0)   // If set, allow use of jumpptr. Set in every use of statbuffchange
+#define STAT_CHANGE_MIRROR_ARMOR            (1 << 1)   // Stat change redirection caused by Mirror Armor ability.
 #define STAT_CHANGE_NOT_PROTECT_AFFECTED    (1 << 5)
 #define STAT_CHANGE_UPDATE_MOVE_EFFECT      (1 << 6)
 

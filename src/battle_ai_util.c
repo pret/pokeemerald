@@ -457,7 +457,7 @@ void RecordLastUsedMoveByTarget(void)
     RecordKnownMove(gBattlerTarget, gLastMoves[gBattlerTarget]);
 }
 
-bool32 IsBattlerAIControlled(u32 battlerId)
+bool32 BattlerHasAi(u32 battlerId)
 {
     switch (GetBattlerPosition(battlerId))
     {
@@ -471,6 +471,14 @@ bool32 IsBattlerAIControlled(u32 battlerId)
     case B_POSITION_OPPONENT_RIGHT:
         return TRUE;
     }
+}
+
+bool32 IsAiBattlerAware(u32 battlerId)
+{
+    if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_OMNISCIENT)
+        return TRUE;
+
+    return BattlerHasAi(battlerId);
 }
 
 void ClearBattlerMoveHistory(u8 battlerId)
@@ -529,7 +537,7 @@ void ClearBattlerItemEffectHistory(u8 battlerId)
 
 void SaveBattlerData(u8 battlerId)
 {
-    if (!IsBattlerAIControlled(battlerId))
+    if (!BattlerHasAi(battlerId))
     {
         u32 i;
 
@@ -539,22 +547,73 @@ void SaveBattlerData(u8 battlerId)
         for (i = 0; i < 4; i++)
             AI_THINKING_STRUCT->saved[battlerId].moves[i] = gBattleMons[battlerId].moves[i];
     }
+    // Save and restore types even for AI controlled battlers in case it gets changed during move evaluation process.
+    AI_THINKING_STRUCT->saved[battlerId].types[0] = gBattleMons[battlerId].type1;
+    AI_THINKING_STRUCT->saved[battlerId].types[1] = gBattleMons[battlerId].type2;
+}
+
+static bool32 ShouldFailForIllusion(u16 illusionSpecies, u32 battlerId)
+{
+    u32 i, j;
+
+    if (BATTLE_HISTORY->abilities[battlerId] == ABILITY_ILLUSION)
+        return FALSE;
+
+    // Don't fall for Illusion if the mon used a move it cannot know.
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u16 move = BATTLE_HISTORY->usedMoves[battlerId][i];
+        if (move == MOVE_NONE)
+            continue;
+
+        for (j = 0; gLevelUpLearnsets[illusionSpecies][j].move != MOVE_UNAVAILABLE; j++)
+        {
+            if (gLevelUpLearnsets[illusionSpecies][j].move == move)
+                break;
+        }
+        // The used move is in the learnsets of the fake species.
+        if (gLevelUpLearnsets[illusionSpecies][j].move != MOVE_UNAVAILABLE)
+            continue;
+
+        // The used move can be learned from Tm/Hm or Move Tutors.
+        if (CanLearnTeachableMove(illusionSpecies, move))
+            continue;
+
+        // 'Illegal move', AI won't fail for the illusion.
+        return FALSE;
+    }
+
+    return TRUE;
 }
 
 void SetBattlerData(u8 battlerId)
 {
-    if (!IsBattlerAIControlled(battlerId))
+    if (!BattlerHasAi(battlerId))
     {
-        struct Pokemon *illusionMon;
-        u32 i;
+        u32 i, species, illusionSpecies;
+
+        // Simulate Illusion
+        species = gBattleMons[battlerId].species;
+        illusionSpecies = GetIllusionMonSpecies(battlerId);
+        if (illusionSpecies != SPECIES_NONE && ShouldFailForIllusion(illusionSpecies, battlerId))
+        {
+            // If the battler's type has not been changed, AI assumes the types of the illusion mon.
+            if (gBattleMons[battlerId].type1 == gSpeciesInfo[species].types[0]
+                && gBattleMons[battlerId].type2 == gSpeciesInfo[species].types[1])
+            {
+                gBattleMons[battlerId].type1 = gSpeciesInfo[illusionSpecies].types[0];
+                gBattleMons[battlerId].type2 = gSpeciesInfo[illusionSpecies].types[1];
+            }
+            species = illusionSpecies;
+        }
 
         // Use the known battler's ability.
         if (BATTLE_HISTORY->abilities[battlerId] != ABILITY_NONE)
             gBattleMons[battlerId].ability = BATTLE_HISTORY->abilities[battlerId];
         // Check if mon can only have one ability.
-        else if (gSpeciesInfo[gBattleMons[battlerId].species].abilities[1] == ABILITY_NONE
-                 || gSpeciesInfo[gBattleMons[battlerId].species].abilities[1] == gSpeciesInfo[gBattleMons[battlerId].species].abilities[0])
-            gBattleMons[battlerId].ability = gSpeciesInfo[gBattleMons[battlerId].species].abilities[0];
+        else if (gSpeciesInfo[species].abilities[1] == ABILITY_NONE
+                 || gSpeciesInfo[species].abilities[1] == gSpeciesInfo[species].abilities[0])
+            gBattleMons[battlerId].ability = gSpeciesInfo[species].abilities[0];
         // The ability is unknown.
         else
             gBattleMons[battlerId].ability = ABILITY_NONE;
@@ -567,16 +626,12 @@ void SetBattlerData(u8 battlerId)
             if (BATTLE_HISTORY->usedMoves[battlerId][i] == 0)
                 gBattleMons[battlerId].moves[i] = 0;
         }
-
-        // Simulate Illusion
-        if ((illusionMon = GetIllusionMonPtr(battlerId)) != NULL)
-            gBattleMons[battlerId].species = GetMonData(illusionMon, MON_DATA_SPECIES2);
     }
 }
 
 void RestoreBattlerData(u8 battlerId)
 {
-    if (!IsBattlerAIControlled(battlerId))
+    if (!BattlerHasAi(battlerId))
     {
         u32 i;
 
@@ -586,6 +641,8 @@ void RestoreBattlerData(u8 battlerId)
         for (i = 0; i < 4; i++)
             gBattleMons[battlerId].moves[i] = AI_THINKING_STRUCT->saved[battlerId].moves[i];
     }
+    gBattleMons[battlerId].type1 = AI_THINKING_STRUCT->saved[battlerId].types[0];
+    gBattleMons[battlerId].type2 = AI_THINKING_STRUCT->saved[battlerId].types[1];
 }
 
 u32 GetHealthPercentage(u8 battlerId)
@@ -744,11 +801,16 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness,
     SetBattlerData(battlerDef);
 
     gBattleStruct->dynamicMoveType = 0;
+
+    if (move == MOVE_NATURE_POWER)
+        move = GetNaturePowerMove();
+
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
 
     if (gBattleMoves[move].power)
     {
+        ProteanTryChangeType(battlerAtk, AI_DATA->abilities[battlerAtk], move, moveType);
         critChance = GetInverseCritChance(battlerAtk, battlerDef, move);
         normalDmg = CalculateMoveDamageAndEffectiveness(move, battlerAtk, battlerDef, moveType, &effectivenessMultiplier);
         critDmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, TRUE, FALSE, FALSE);
@@ -802,6 +864,7 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness,
     }
     else
     {
+        effectivenessMultiplier = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, FALSE);
         dmg = 0;
     }
 
@@ -1066,7 +1129,7 @@ bool32 CanTargetFaintAi(u8 battlerDef, u8 battlerAtk)
 {
     s32 i, dmg;
     u32 unusable = AI_DATA->moveLimitations[battlerDef];
-    u16 *moves = gBattleResources->battleHistory->usedMoves[battlerDef];
+    u16 *moves = GetMovesArray(battlerDef);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -1166,17 +1229,17 @@ s32 AI_GetAbility(u32 battlerId)
     // We've had ability overwritten by e.g. Worry Seed. It is not part of AI_PARTY in case of switching
     if (gBattleStruct->overwrittenAbilities[battlerId])
         return gBattleStruct->overwrittenAbilities[battlerId];
-    
+
     // The AI knows its own ability.
-    if (IsBattlerAIControlled(battlerId))
+    if (IsAiBattlerAware(battlerId))
         return knownAbility;
 
     // Check neutralizing gas, gastro acid
     if (knownAbility == ABILITY_NONE)
         return knownAbility;
 
-    if (BATTLE_HISTORY->abilities[battlerId] != ABILITY_NONE)
-        return BATTLE_HISTORY->abilities[battlerId];
+    if (AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].ability != ABILITY_NONE)
+        return AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].ability;
 
     // Abilities that prevent fleeing - treat as always known
     if (knownAbility == ABILITY_SHADOW_TAG || knownAbility == ABILITY_MAGNET_PULL || knownAbility == ABILITY_ARENA_TRAP)
@@ -1201,8 +1264,8 @@ u16 AI_GetHoldEffect(u32 battlerId)
 {
     u32 holdEffect;
 
-    if (!IsBattlerAIControlled(battlerId))
-        holdEffect = BATTLE_HISTORY->itemEffects[battlerId];
+    if (!IsAiBattlerAware(battlerId))
+        holdEffect = AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].heldEffect;
     else
         holdEffect = GetBattlerHoldEffect(battlerId, FALSE);
 
@@ -1826,7 +1889,7 @@ bool32 CanIndexMoveFaintTarget(u8 battlerAtk, u8 battlerDef, u8 index, u8 numHit
 
 u16 *GetMovesArray(u32 battler)
 {
-    if (IsBattlerAIControlled(battler) || IsBattlerAIControlled(BATTLE_PARTNER(battler)))
+    if (IsAiBattlerAware(battler) || IsAiBattlerAware(BATTLE_PARTNER(battler)))
         return gBattleMons[battler].moves;
     else
         return gBattleResources->battleHistory->usedMoves[battler];
@@ -3081,7 +3144,7 @@ u16 GetAllyChosenMove(u8 battlerId)
 {
     u8 partnerBattler = BATTLE_PARTNER(battlerId);
 
-    if (!IsBattlerAlive(partnerBattler) || !IsBattlerAIControlled(partnerBattler))
+    if (!IsBattlerAlive(partnerBattler) || !IsAiBattlerAware(partnerBattler))
         return MOVE_NONE;
     else if (partnerBattler > battlerId) // Battler with the lower id chooses the move first.
         return gLastMoves[partnerBattler];
@@ -3322,8 +3385,8 @@ s32 CountUsablePartyMons(u8 battlerId)
     {
         if (i != battlerOnField1 && i != battlerOnField2
          && GetMonData(&party[i], MON_DATA_HP) != 0
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+         && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+         && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
         {
             ret++;
         }
@@ -3346,8 +3409,8 @@ bool32 IsPartyFullyHealedExceptBattler(u8 battlerId)
     {
         if (i != gBattlerPartyIndexes[battlerId]
          && GetMonData(&party[i], MON_DATA_HP) != 0
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG
+         && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+         && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG
          && GetMonData(&party[i], MON_DATA_HP) < GetMonData(&party[i], MON_DATA_MAX_HP))
             return FALSE;
     }
@@ -3693,4 +3756,9 @@ bool32 ShouldUseZMove(u8 battlerAtk, u8 battlerDef, u16 chosenMove)
     }
 
     return FALSE;
+}
+
+bool32 AI_IsBattlerAsleepOrComatose(u8 battlerId)
+{
+    return (gBattleMons[battlerId].status1 & STATUS1_SLEEP) || AI_DATA->abilities[battlerId] == ABILITY_COMATOSE;
 }

@@ -56,8 +56,7 @@ enum
 
 #define TAG_MEGA_TRIGGER_PAL            0xD777
 #define TAG_MEGA_INDICATOR_PAL          0xD778
-#define TAG_ALPHA_INDICATOR_PAL         0xD779
-#define TAG_OMEGA_INDICATOR_PAL         0xD77A
+#define TAG_ALPHA_OMEGA_INDICATOR_PAL   0xD779 // Alpha and Omega indicators use the same palette as each of them only uses 4 different colors.
 #define TAG_ZMOVE_TRIGGER_PAL           0xD77B
 
 enum
@@ -77,13 +76,11 @@ enum
 };
 
 u32 WhichBattleCoords(u32 battlerId);
-u8 GetMegaIndicatorSpriteId(u32 healthboxSpriteId);
 u8 CreateBattlerHealthboxSprites(u8 battler);
 u8 CreateSafariPlayerHealthboxSprites(void);
 void SetBattleBarStruct(u8 battler, u8 healthboxSpriteId, s32 maxVal, s32 currVal, s32 receivedValue);
 void SetHealthboxSpriteInvisible(u8 healthboxSpriteId);
 void SetHealthboxSpriteVisible(u8 healthboxSpriteId);
-void DestoryHealthboxSprite(u8 healthboxSpriteId);
 void DummyBattleInterfaceFunc(u8 healthboxSpriteId, bool8 isDoubleBattleBankOnly);
 void UpdateOamPriorityInAllHealthboxes(u8 priority, bool32 hideHpBoxes);
 void InitBattlerHealthboxCoords(u8 battler);
@@ -94,8 +91,7 @@ void CreateMegaTriggerSprite(u8 battlerId, u8 palId);
 bool32 IsMegaTriggerSpriteActive(void);
 void HideMegaTriggerSprite(void);
 void DestroyMegaTriggerSprite(void);
-u32 CreateMegaIndicatorSprite(u32 battlerId, u32 which);
-void DestroyMegaIndicatorSprite(u32 healthboxSpriteId);
+void MegaIndicator_LoadSpritesGfx(void);
 u8 CreatePartyStatusSummarySprites(u8 battler, struct HpAndStatus *partyInfo, bool8 skipPlayer, bool8 isBattleStart);
 void Task_HidePartyStatusSummary(u8 taskId);
 void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elementId);

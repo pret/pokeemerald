@@ -64,6 +64,35 @@ struct TypePower
     u16 effect;
 };
 
+enum
+{
+    CANCELLER_FLAGS,
+    CANCELLER_SKY_DROP,
+    CANCELLER_ASLEEP,
+    CANCELLER_FROZEN,
+    CANCELLER_TRUANT,
+    CANCELLER_RECHARGE,
+    CANCELLER_FLINCH,
+    CANCELLER_DISABLED,
+    CANCELLER_GRAVITY,
+    CANCELLER_HEAL_BLOCKED,
+    CANCELLER_TAUNTED,
+    CANCELLER_IMPRISONED,
+    CANCELLER_CONFUSED,
+    CANCELLER_PARALYSED,
+    CANCELLER_IN_LOVE,
+    CANCELLER_BIDE,
+    CANCELLER_THAW,
+    CANCELLER_POWDER_MOVE,
+    CANCELLER_POWDER_STATUS,
+    CANCELLER_THROAT_CHOP,
+    CANCELLER_MULTIHIT_MOVES,
+    CANCELLER_Z_MOVES,
+    CANCELLER_END,
+    CANCELLER_PSYCHIC_TERRAIN,
+    CANCELLER_END2,
+};
+
 extern const struct TypePower gNaturalGiftTable[];
 
 void HandleAction_ThrowBall(void);
@@ -152,6 +181,7 @@ void UndoMegaEvolution(u32 monId);
 void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut);
 bool32 DoBattlersShareType(u32 battler1, u32 battler2);
 bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId);
+u32 GetIllusionMonSpecies(u32 battlerId);
 struct Pokemon *GetIllusionMonPtr(u32 battlerId);
 void ClearIllusionMon(u32 battlerId);
 bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId);
@@ -167,7 +197,7 @@ bool32 IsPartnerMonFromSameTrainer(u8 battlerId);
 u8 GetSplitBasedOnStats(u8 battlerId);
 void SortBattlersBySpeed(u8 *battlers, bool8 slowToFast);
 bool32 TestSheerForceFlag(u8 battler, u16 move);
-void TryRestoreStolenItems(void);
+void TryRestoreHeldItems(void);
 bool32 CanStealItem(u8 battlerStealing, u8 battlerItem, u16 item);
 void TrySaveExchangedItem(u8 battlerId, u16 stolenItem);
 bool32 IsPartnerMonFromSameTrainer(u8 battlerId);

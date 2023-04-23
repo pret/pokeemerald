@@ -143,6 +143,7 @@ struct ProtectStruct
     u16 quickDraw:1;
     u16 beakBlastCharge:1;
     u16 quash:1;
+    u16 shellTrap:1;
     u16 silkTrapped:1;
     u32 physicalDmg;
     u32 specialDmg;
@@ -191,6 +192,7 @@ struct SpecialStatus
     u8 weatherAbilityDone:1;
     u8 terrainAbilityDone:1;
     u8 emergencyExited:1;
+    u8 afterYou:1;
 };
 
 struct SideTimer
@@ -250,6 +252,7 @@ struct AI_SavedBattleMon
     u16 moves[MAX_MON_MOVES];
     u16 heldItem;
     u16 species;
+    u8 types[3];
 };
 
 struct AiPartyMon
@@ -269,8 +272,8 @@ struct AiPartyMon
 
 struct AIPartyData // Opposing battlers - party mons.
 {
-    struct AiPartyMon mons[2][PARTY_SIZE]; // 2 parties(player, opponent). Used to save information on opposing party.
-    u8 count[2];
+    struct AiPartyMon mons[NUM_BATTLE_SIDES][PARTY_SIZE]; // 2 parties(player, opponent). Used to save information on opposing party.
+    u8 count[NUM_BATTLE_SIDES];
 };
 
 struct AiLogicData
@@ -514,7 +517,7 @@ struct ZMoveData
     u8 splits[MAX_BATTLERS_COUNT];
 };
 
-struct StolenItem
+struct LostItem
 {
     u16 originalItem:15;
     u16 stolen:1;
@@ -531,7 +534,6 @@ struct BattleStruct
     u8 wildVictorySong;
     u8 dynamicMoveType;
     u8 wrappedBy[MAX_BATTLERS_COUNT];
-    u16 assistPossibleMoves[PARTY_SIZE * MAX_MON_MOVES]; // Each of mons can know max 4 moves.
     u8 focusPunchBattlerId;
     u8 battlerPreventingSwitchout;
     u8 moneyMultiplier:6;
@@ -579,8 +581,6 @@ struct BattleStruct
     void (*savedCallback)(void);
     u16 usedHeldItems[PARTY_SIZE][NUM_BATTLE_SIDES]; // For each party member and side. For harvest, recycle
     u16 chosenItem[MAX_BATTLERS_COUNT];
-    u8 AI_itemType[2];
-    u8 AI_itemFlags[2];
     u16 choicedMove[MAX_BATTLERS_COUNT];
     u16 changedItems[MAX_BATTLERS_COUNT];
     u8 switchInItemsCounter;
@@ -640,9 +640,11 @@ struct BattleStruct
     u16 moveEffect2; // For Knock Off
     u16 changedSpecies[PARTY_SIZE]; // For Zygarde or future forms when multiple mons can change into the same pokemon.
     u8 quickClawBattlerId;
-    struct StolenItem itemStolen[PARTY_SIZE];  // Player's team that had items stolen (two bytes per party member)
+    struct LostItem itemLost[PARTY_SIZE];  // Player's team that had items consumed or stolen (two bytes per party member)
     u8 blunderPolicy:1; // should blunder policy activate
     u8 swapDamageCategory:1; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
+    u8 forcedSwitch:4; // For each battler
+    u8 switchInAbilityPostponed:4; // To not activate against an empty field, each bit for battler
     u8 ballSpriteIds[2];    // item gfx, window gfx
     u8 stickyWebUser;
     u8 appearedInBattle; // Bitfield to track which Pokemon appeared in battle. Used for Burmy's form change
@@ -650,9 +652,15 @@ struct BattleStruct
     // When using a move which hits multiple opponents which is then bounced by a target, we need to make sure, the move hits both opponents, the one with bounce, and the one without.
     u8 attackerBeforeBounce:2;
     u8 beatUpSlot:3;
+    bool8 hitSwitchTargetFailed:1;
     u8 targetsDone[MAX_BATTLERS_COUNT]; // Each battler as a bit.
     u16 overwrittenAbilities[MAX_BATTLERS_COUNT];    // abilities overwritten during battle (keep separate from battle history in case of switching)
     bool8 allowedToChangeFormInWeather[PARTY_SIZE][2]; // For each party member and side, used by Ice Face.
+    u8 battleBondTransformed[NUM_BATTLE_SIDES]; // Bitfield for each party.
+    u8 storedHealingWish:4; // Each battler as a bit.
+    u8 storedLunarDance:4; // Each battler as a bit.
+    u16 supremeOverlordModifier[MAX_BATTLERS_COUNT];
+    u8 itemPartyIndex[MAX_BATTLERS_COUNT];
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)
@@ -844,7 +852,7 @@ struct MonSpritesGfx
         u8 *byte[MAX_BATTLERS_COUNT];
     } sprites;
     struct SpriteTemplate templates[MAX_BATTLERS_COUNT];
-    struct SpriteFrameImage frameImages[MAX_BATTLERS_COUNT][4];
+    struct SpriteFrameImage frameImages[MAX_BATTLERS_COUNT][MAX_MON_PIC_FRAMES];
     u8 unusedArr[0x80];
     u8 *barFontGfx;
     void *unusedPtr;

@@ -882,6 +882,7 @@ static void HandleMoveSwitching(void)
 
     if (JOY_NEW(A_BUTTON | SELECT_BUTTON))
     {
+        struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[gActiveBattler][4]);
         PlaySE(SE_SELECT);
 
         if (gMoveSelectionCursor[gActiveBattler] != gMultiUsePlayerCursor)
@@ -973,6 +974,7 @@ static void HandleMoveSwitching(void)
         MoveSelectionDisplayPpString();
         MoveSelectionDisplayPpNumber();
         MoveSelectionDisplayMoveType();
+        GetUsableZMoves(gActiveBattler, moveInfo->moves);
     }
     else if (JOY_NEW(B_BUTTON | SELECT_BUTTON))
     {
@@ -2905,7 +2907,8 @@ static void PlayerHandleChoosePokemon(void)
     for (i = 0; i < ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
         gBattlePartyCurrentOrder[i] = gBattleResources->bufferA[gActiveBattler][4 + i];
 
-    if (gBattleTypeFlags & BATTLE_TYPE_ARENA && (gBattleResources->bufferA[gActiveBattler][1] & 0xF) != PARTY_ACTION_CANT_SWITCH)
+    if (gBattleTypeFlags & BATTLE_TYPE_ARENA && (gBattleResources->bufferA[gActiveBattler][1] & 0xF) != PARTY_ACTION_CANT_SWITCH
+        && (gBattleResources->bufferA[gActiveBattler][1] & 0xF) != PARTY_ACTION_CHOOSE_FAINTED_MON)
     {
         BtlController_EmitChosenMonReturnValue(BUFFER_B, gBattlerPartyIndexes[gActiveBattler] + 1, gBattlePartyCurrentOrder);
         PlayerBufferExecCompleted();

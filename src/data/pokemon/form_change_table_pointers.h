@@ -1,6 +1,10 @@
 const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
 {
 #if P_GEN_4_POKEMON == TRUE
+    [SPECIES_DIALGA] = sDialgaFormChangeTable,
+    [SPECIES_DIALGA_ORIGIN] = sDialgaFormChangeTable,
+    [SPECIES_PALKIA] = sPalkiaFormChangeTable,
+    [SPECIES_PALKIA_ORIGIN] = sPalkiaFormChangeTable,
     [SPECIES_GIRATINA] = sGiratinaFormChangeTable,
     [SPECIES_GIRATINA_ORIGIN] = sGiratinaFormChangeTable,
     [SPECIES_SHAYMIN] = sShayminFormChangeTable,

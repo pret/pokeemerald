@@ -1,6 +1,8 @@
 #ifndef GUARD_WINDOW_H
 #define GUARD_WINDOW_H
 
+#define WINDOWS_MAX  32
+
 #define PIXEL_FILL(num) ((num) | ((num) << 4))
 
 enum {
@@ -74,8 +76,5 @@ void CopyWindowToVram8Bit(u8 windowId, u8 mode);
 
 extern struct Window gWindows[];
 extern void *gWindowBgTilemapBuffers[];
-extern u32 gUnusedWindowVar1;
-extern u32 gUnusedWindowVar2;
-extern u32 gUnusedWindowVar3;
 
 #endif // GUARD_WINDOW_H
