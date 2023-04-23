@@ -986,6 +986,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         #else
             .power = 95,
         #endif
+        // The following effect is also relevant in battle_pike.c
+        // If you cherry-pick this to use something other than the config, make sure to update it there too
         #if B_USE_FROSTBITE == TRUE
             .effect = EFFECT_FROSTBITE_HIT,
         #else
