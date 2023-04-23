@@ -10536,18 +10536,20 @@ void SortBattlersBySpeed(u8 *battlers, bool8 slowToFast)
     }
 }
 
-void TryRestoreStolenItems(void)
+void TryRestoreHeldItems(void)
 {
     u32 i;
-    u16 stolenItem = ITEM_NONE;
+    u16 lostItem = ITEM_NONE;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (gBattleStruct->itemStolen[i].stolen)
+    #if B_RESTORE_HELD_BATTLE_ITEMS == FALSE
+        if (gBattleStruct->itemLost[i].stolen)
+    #endif
         {
-            stolenItem = gBattleStruct->itemStolen[i].originalItem;
-            if (stolenItem != ITEM_NONE && ItemId_GetPocket(stolenItem) != POCKET_BERRIES)
-                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &stolenItem);  // Restore stolen non-berry items
+            lostItem = gBattleStruct->itemLost[i].originalItem;
+            if (lostItem != ITEM_NONE && ItemId_GetPocket(lostItem) != POCKET_BERRIES)
+                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &lostItem);  // Restore stolen non-berry items
         }
     }
 }
@@ -10601,8 +10603,8 @@ void TrySaveExchangedItem(u8 battlerId, u16 stolenItem)
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
       && !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
       && GetBattlerSide(battlerId) == B_SIDE_PLAYER
-      && stolenItem == gBattleStruct->itemStolen[gBattlerPartyIndexes[battlerId]].originalItem)
-        gBattleStruct->itemStolen[gBattlerPartyIndexes[battlerId]].stolen = TRUE;
+      && stolenItem == gBattleStruct->itemLost[gBattlerPartyIndexes[battlerId]].originalItem)
+        gBattleStruct->itemLost[gBattlerPartyIndexes[battlerId]].stolen = TRUE;
 #endif
 }
 
