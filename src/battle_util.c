@@ -4916,7 +4916,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                         StringCopy(gBattleTextBuff1, gStatusConditionString_ParalysisJpn);
                     if (gBattleMons[battler].status1 & STATUS1_BURN)
                         StringCopy(gBattleTextBuff1, gStatusConditionString_BurnJpn);
-                    if (gBattleMons[battler].status1 & STATUS1_FREEZE)
+                    if (gBattleMons[battler].status1 & (STATUS1_FREEZE | STATUS1_FROSTBITE))
                         StringCopy(gBattleTextBuff1, gStatusConditionString_IceJpn);
 
                     gBattleMons[battler].status1 = 0;
@@ -5957,7 +5957,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 }
                 break;
             case ABILITY_MAGMA_ARMOR:
-                if (gBattleMons[battler].status1 & STATUS1_FREEZE)
+                if (gBattleMons[battler].status1 & (STATUS1_FREEZE | STATUS1_FROSTBITE))
                 {
                     StringCopy(gBattleTextBuff1, gStatusConditionString_IceJpn);
                     effect = 1;
@@ -6904,6 +6904,13 @@ static u8 ItemEffectMoveEnd(u32 battlerId, u16 holdEffect)
             gBattlescriptCurrInstr = BattleScript_BerryCureFrzRet;
             effect = ITEM_STATUS_CHANGE;
         }
+        if (gBattleMons[battlerId].status1 & STATUS1_FROSTBITE && !UnnerveOn(battlerId, gLastUsedItem))
+        {
+            gBattleMons[battlerId].status1 &= ~STATUS1_FROSTBITE;
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_BerryCureFsbRet;
+            effect = ITEM_STATUS_CHANGE;
+        }
         break;
     case HOLD_EFFECT_CURE_SLP:
         if (gBattleMons[battlerId].status1 & STATUS1_SLEEP && !UnnerveOn(battlerId, gLastUsedItem))
@@ -6952,7 +6959,7 @@ static u8 ItemEffectMoveEnd(u32 battlerId, u16 holdEffect)
             if (gBattleMons[battlerId].status1 & STATUS1_BURN)
                 StringCopy(gBattleTextBuff1, gStatusConditionString_BurnJpn);
 
-            if (gBattleMons[battlerId].status1 & STATUS1_FREEZE)
+            if (gBattleMons[battlerId].status1 & STATUS1_FREEZE || gBattleMons[battlerId].status1 & STATUS1_FROSTBITE)
                 StringCopy(gBattleTextBuff1, gStatusConditionString_IceJpn);
 
             if (gBattleMons[battlerId].status2 & STATUS2_CONFUSION)
@@ -7125,6 +7132,12 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     BattleScriptExecute(BattleScript_BerryCureFrzEnd2);
                     effect = ITEM_STATUS_CHANGE;
                 }
+                if (gBattleMons[battlerId].status1 & STATUS1_FROSTBITE && !UnnerveOn(battlerId, gLastUsedItem))
+                {
+                    gBattleMons[battlerId].status1 &= ~STATUS1_FROSTBITE;
+                    BattleScriptExecute(BattleScript_BerryCureFsbEnd2);
+                    effect = ITEM_STATUS_CHANGE;
+                }
                 break;
             case HOLD_EFFECT_CURE_SLP:
                 if (gBattleMons[battlerId].status1 & STATUS1_SLEEP && !UnnerveOn(battlerId, gLastUsedItem))
@@ -7160,7 +7173,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                         StringCopy(gBattleTextBuff1, gStatusConditionString_BurnJpn);
                         i++;
                     }
-                    if (gBattleMons[battlerId].status1 & STATUS1_FREEZE)
+                    if (gBattleMons[battlerId].status1 & STATUS1_FREEZE || gBattleMons[battlerId].status1 & STATUS1_FROSTBITE)
                     {
                         StringCopy(gBattleTextBuff1, gStatusConditionString_IceJpn);
                         i++;
@@ -7443,6 +7456,12 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     BattleScriptExecute(BattleScript_BerryCureFrzEnd2);
                     effect = ITEM_STATUS_CHANGE;
                 }
+                if (gBattleMons[battlerId].status1 & STATUS1_FROSTBITE && !UnnerveOn(battlerId, gLastUsedItem))
+                {
+                    gBattleMons[battlerId].status1 &= ~STATUS1_FROSTBITE;
+                    BattleScriptExecute(BattleScript_BerryCureFsbEnd2);
+                    effect = ITEM_STATUS_CHANGE;
+                }
                 break;
             case HOLD_EFFECT_CURE_SLP:
                 if (gBattleMons[battlerId].status1 & STATUS1_SLEEP && !UnnerveOn(battlerId, gLastUsedItem))
@@ -7486,7 +7505,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                         StringCopy(gBattleTextBuff1, gStatusConditionString_BurnJpn);
                         i++;
                     }
-                    if (gBattleMons[battlerId].status1 & STATUS1_FREEZE)
+                    if (gBattleMons[battlerId].status1 & STATUS1_FREEZE || gBattleMons[battlerId].status1 & STATUS1_FROSTBITE)
                     {
                         StringCopy(gBattleTextBuff1, gStatusConditionString_IceJpn);
                         i++;
@@ -9054,7 +9073,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
     switch (gBattleMoves[move].effect)
     {
     case EFFECT_FACADE:
-        if (gBattleMons[battlerAtk].status1 & (STATUS1_BURN | STATUS1_PSN_ANY | STATUS1_PARALYSIS))
+        if (gBattleMons[battlerAtk].status1 & (STATUS1_BURN | STATUS1_PSN_ANY | STATUS1_PARALYSIS | STATUS1_FROSTBITE))
             MulModifier(&modifier, UQ_4_12(2.0));
         break;
     case EFFECT_BRINE:
