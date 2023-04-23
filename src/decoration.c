@@ -41,7 +41,7 @@
 
 #define PLACE_DECORATION_SELECTOR_TAG 0xbe5
 #define PLACE_DECORATION_PLAYER_TAG   0x008
-#define NUM_DECORATION_FLAGS (FLAG_DECORATION_14 - FLAG_DECORATION_1 + 1)
+#define NUM_DECORATION_FLAGS (FLAG_DECORATION_13 - FLAG_DECORATION_1 + 1)
 
 #define tCursorX data[0]
 #define tCursorY data[1]
@@ -1360,6 +1360,7 @@ static void Task_PlaceDecoration(u8 taskId)
             }
             break;
         case 1:
+            RemoveFollowingPokemon();
             gPaletteFade.bufferTransferDisabled = TRUE;
             ConfigureCameraObjectForPlacingDecoration(&sPlaceDecorationGraphicsDataBuffer, gCurDecorationItems[gCurDecorationIndex]);
             SetUpDecorationShape(taskId);
@@ -1614,6 +1615,14 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
                 return FALSE;
         }
         break;
+    }
+
+    // If sprite(like), check if there is an available object event slot for it
+    if (decoration->permission == DECORPERM_SPRITE) {
+        for (i = 0; i < NUM_DECORATION_FLAGS; i++)
+            if (FlagGet(FLAG_DECORATION_1 + i) == TRUE)
+                return TRUE;
+        return FALSE;
     }
     return TRUE;
 }
@@ -2316,6 +2325,7 @@ static void Task_ContinuePuttingAwayDecorations(u8 taskId)
         }
         break;
     case 1:
+        RemoveFollowingPokemon();
         SetUpPuttingAwayDecorationPlayerAvatar();
         FadeInFromBlack();
         tState = 2;
