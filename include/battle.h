@@ -661,6 +661,14 @@ struct BattleStruct
     u8 storedLunarDance:4; // Each battler as a bit.
     u16 supremeOverlordModifier[MAX_BATTLERS_COUNT];
     u8 itemPartyIndex[MAX_BATTLERS_COUNT];
+    bool8 trainerSlideHalfHpMsgDone;
+    u8 trainerSlideFirstCriticalHitMsgState:2;
+    u8 trainerSlideFirstSuperEffectiveHitMsgState:2;
+    u8 trainerSlideFirstSTABMoveMsgState:2;
+    u8 trainerSlidePlayerMonUnaffectedMsgState:2;
+    bool8 trainerSlideMegaEvolutionMsgDone;
+    bool8 trainerSlideZMoveMsgDone;
+    bool8 trainerSlideBeforeFirstTurnMsgDone;
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)
