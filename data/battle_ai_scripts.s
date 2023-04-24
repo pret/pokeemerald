@@ -1099,15 +1099,18 @@ AI_CV_AttackDown3:
 	score -2
 AI_CV_AttackDown4:
 	get_target_type1
-	if_in_bytes AI_CV_AttackDown_UnknownTypeList, AI_CV_AttackDown_End
+	if_in_bytes AI_CV_AttackDown_PhysicalTypeList, AI_CV_AttackDown_End
 	get_target_type2
-	if_in_bytes AI_CV_AttackDown_UnknownTypeList, AI_CV_AttackDown_End
+	if_in_bytes AI_CV_AttackDown_PhysicalTypeList, AI_CV_AttackDown_End
 	if_random_less_than 50, AI_CV_AttackDown_End
 	score -2
 AI_CV_AttackDown_End:
 	end
 
-AI_CV_AttackDown_UnknownTypeList:
+@ If the target is not of any type in this list then using the move may be discouraged.
+@ It seems likely this was meant to be "discourage reducing the target's attack if they're
+@ not a physical type", but they've left out Flying, Poison, and Ghost.
+AI_CV_AttackDown_PhysicalTypeList:
 	.byte TYPE_NORMAL
 	.byte TYPE_FIGHTING
 	.byte TYPE_GROUND

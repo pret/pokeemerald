@@ -156,7 +156,7 @@ static void InitMenuBasedScript(const u8 *);
 static void LoadCableClubPlayer(s32, s32, struct CableClubPlayer *);
 static bool32 IsCableClubPlayerUnfrozen(struct CableClubPlayer *);
 static bool32 CanCableClubPlayerPressStart(struct CableClubPlayer *);
-static u8 *TryGetTileEventScript(struct CableClubPlayer *);
+static const u8 *TryGetTileEventScript(struct CableClubPlayer *);
 static bool32 PlayerIsAtSouthExit(struct CableClubPlayer *);
 static const u8 *TryInteractWithPlayer(struct CableClubPlayer *);
 static u16 KeyInterCB_DeferToRecvQueue(u32);
@@ -482,7 +482,7 @@ void LoadObjEventTemplatesFromHeader(void)
 
 void LoadSaveblockObjEventScripts(void)
 {
-    struct ObjectEventTemplate *mapHeaderObjTemplates = gMapHeader.events->objectEvents;
+    const struct ObjectEventTemplate *mapHeaderObjTemplates = gMapHeader.events->objectEvents;
     struct ObjectEventTemplate *savObjTemplates = gSaveBlock1Ptr->objectEventTemplates;
     s32 i;
 
@@ -1104,7 +1104,7 @@ u16 GetCurrLocationDefaultMusic(void)
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE111)
      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE111)
      && GetSavedWeather() == WEATHER_SANDSTORM)
-        return MUS_ROUTE111;
+        return MUS_DESERT;
 
     music = GetLocationMusic(&gSaveBlock1Ptr->location);
     if (music != MUS_ROUTE118)
@@ -2714,7 +2714,7 @@ static bool32 CanCableClubPlayerPressStart(struct CableClubPlayer *player)
         return FALSE;
 }
 
-static u8 *TryGetTileEventScript(struct CableClubPlayer *player)
+static const u8 *TryGetTileEventScript(struct CableClubPlayer *player)
 {
     if (player->movementMode != MOVEMENT_MODE_SCRIPTED)
         return FACING_NONE;

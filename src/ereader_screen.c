@@ -343,7 +343,7 @@ static void Task_EReader(u8 taskId)
     case ER_STATE_MSG_SELECT_CONNECT:
         if (PrintMysteryGiftMenuMessage(&data->textState, gJPText_SelectConnectFromEReaderMenu))
         {
-            AddTextPrinterToWindow1(gJPText_SelectConnectWithGBA);
+            MG_AddMessageTextPrinter(gJPText_SelectConnectWithGBA);
             ResetTimer(&data->timer);
             data->state = ER_STATE_MSG_SELECT_CONNECT_WAIT;
         }
@@ -397,7 +397,7 @@ static void Task_EReader(u8 taskId)
             data->state = ER_STATE_MSG_SELECT_CONNECT;
         break;
     case ER_STATE_CONNECTING:
-        AddTextPrinterToWindow1(gJPText_Connecting);
+        MG_AddMessageTextPrinter(gJPText_Connecting);
         // XXX: This (u32 *) cast is discarding the const qualifier from gMultiBootProgram_EReader_Start
         EReader_Load(&gEReaderData, gMultiBootProgram_EReader_End - gMultiBootProgram_EReader_Start, (u32 *)gMultiBootProgram_EReader_Start);
         data->state = ER_STATE_TRANSFER;
@@ -416,7 +416,7 @@ static void Task_EReader(u8 taskId)
         else if (data->status == TRANSFER_SUCCESS)
         {
             ResetTimer(&data->timer);
-            AddTextPrinterToWindow1(gJPText_PleaseWaitAMoment);
+            MG_AddMessageTextPrinter(gJPText_PleaseWaitAMoment);
             data->state = ER_STATE_TRANSFER_SUCCESS;
         }
         else // TRANSFER_CANCELED
@@ -430,7 +430,7 @@ static void Task_EReader(u8 taskId)
         break;
     case ER_STATE_LOAD_CARD_START:
         OpenEReaderLink();
-        AddTextPrinterToWindow1(gJPText_AllowEReaderToLoadCard);
+        MG_AddMessageTextPrinter(gJPText_AllowEReaderToLoadCard);
         data->state = ER_STATE_LOAD_CARD;
         break;
     case ER_STATE_LOAD_CARD:
@@ -439,7 +439,7 @@ static void Task_EReader(u8 taskId)
         case RECV_ACTIVE:
             break;
         case RECV_SUCCESS:
-            AddTextPrinterToWindow1(gJPText_Connecting);
+            MG_AddMessageTextPrinter(gJPText_Connecting);
             data->state = ER_STATE_WAIT_RECV_CARD;
             break;
         case RECV_CANCELED:
@@ -487,7 +487,7 @@ static void Task_EReader(u8 taskId)
     case ER_STATE_SAVE:
         if (TryWriteTrainerHill((struct EReaderTrainerHillSet *)&gDecompressionBuffer))
         {
-            AddTextPrinterToWindow1(gJPText_ConnectionComplete);
+            MG_AddMessageTextPrinter(gJPText_ConnectionComplete);
             ResetTimer(&data->timer);
             data->state = ER_STATE_SUCCESS_MSG;
         }
@@ -499,7 +499,7 @@ static void Task_EReader(u8 taskId)
     case ER_STATE_SUCCESS_MSG:
         if (UpdateTimer(&data->timer, 120))
         {
-            AddTextPrinterToWindow1(gJPText_NewTrainerHasComeToHoenn);
+            MG_AddMessageTextPrinter(gJPText_NewTrainerHasComeToHoenn);
             PlayFanfare(MUS_OBTAIN_ITEM);
             data->state = ER_STATE_SUCCESS_END;
         }
