@@ -622,7 +622,7 @@ struct BattleStruct
     struct MegaEvolutionData mega;
     struct ZMoveData zmove;
     const u8 *trainerSlideMsg;
-    bool8 trainerSlideLowHpMsgDone:1;
+    bool8 trainerSlideLowHpMsgDone;
     u8 introState;
     u8 ateBerry[2]; // array id determined by side, each party pokemon as bit
     u8 stolenStats[NUM_BATTLE_STATS]; // hp byte is used for which stats to raise, other inform about by how many stages
@@ -663,14 +663,14 @@ struct BattleStruct
     u8 storedHealingWish:4; // Each battler as a bit.
     u8 storedLunarDance:4; // Each battler as a bit.
     u16 supremeOverlordModifier[MAX_BATTLERS_COUNT];
-    bool8 trainerSlideHalfHpMsgDone:1;
+    bool8 trainerSlideHalfHpMsgDone;
     u8 trainerSlideFirstCriticalHitMsgState:2;
     u8 trainerSlideFirstSuperEffectiveHitMsgState:2;
     u8 trainerSlideFirstSTABMoveMsgState:2;
     u8 trainerSlidePlayerMonUnaffectedMsgState:2;
-    bool8 trainerSlideMegaEvolutionMsgDone:1;
-    bool8 trainerSlideZMoveMsgDone:1;
-    bool8 trainerSlideBeforeFirstTurnMsgDone:1;
+    bool8 trainerSlideMegaEvolutionMsgDone;
+    bool8 trainerSlideZMoveMsgDone;
+    bool8 trainerSlideBeforeFirstTurnMsgDone;
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)

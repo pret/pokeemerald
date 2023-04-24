@@ -3934,6 +3934,37 @@ static u32 GetEnemyMonCount(u32 firstId, u32 lastId, bool32 onlyAlive)
     return count;
 }
 
+enum
+{
+    LESS_THAN,
+    EQUAL,
+    GREATER_THAN,
+    LESS_THAN_OR_EQUAL,
+    GREATER_THAN_OR_EQUAL,
+    NOT_EQUAL,
+};
+
+u32 BattlerHPPercentage(u32 battlerId, u32 operation, u32 threshold)
+{
+    switch (operation)
+    {
+    case LESS_THAN:
+        return gBattleMons[battlerId].hp < (gBattleMons[battlerId].maxHP / threshold);
+    case EQUAL:
+        return gBattleMons[battlerId].hp == (gBattleMons[battlerId].maxHP / threshold);
+    case GREATER_THAN:
+        return gBattleMons[battlerId].hp > (gBattleMons[battlerId].maxHP / threshold);
+    case LESS_THAN_OR_EQUAL:
+        return gBattleMons[battlerId].hp <= (gBattleMons[battlerId].maxHP / threshold);
+    case GREATER_THAN_OR_EQUAL:
+        return gBattleMons[battlerId].hp >= (gBattleMons[battlerId].maxHP / threshold);
+    case NOT_EQUAL:
+        return gBattleMons[battlerId].hp != (gBattleMons[battlerId].maxHP / threshold);
+    default:
+        break;
+    }
+}
+
 u32 ShouldDoTrainerSlide(u32 battlerId, u32 which)
 {
     u32 i, firstId, lastId, trainerId, retValue = 1;
@@ -3979,7 +4010,7 @@ u32 ShouldDoTrainerSlide(u32 battlerId, u32 which)
             case TRAINER_SLIDE_LAST_LOW_HP:
                 if (sTrainerSlides[i].msgLastLowHp != NULL
                     && GetEnemyMonCount(firstId, lastId, TRUE) == 1
-                    && gBattleMons[battlerId].hp <= (gBattleMons[battlerId].maxHP / 4)
+                    && BattlerHPPercentage(battlerId, GREATER_THAN_OR_EQUAL, 4)
                     && !gBattleStruct->trainerSlideLowHpMsgDone)
                 {
                     gBattleStruct->trainerSlideLowHpMsgDone = TRUE;
@@ -3997,7 +4028,7 @@ u32 ShouldDoTrainerSlide(u32 battlerId, u32 which)
             case TRAINER_SLIDE_LAST_HALF_HP:
                 if (sTrainerSlides[i].msgLastHalfHp != NULL
                  && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE) - 1
-                 && (gBattleMons[battlerId].hp <= (gBattleMons[battlerId].maxHP / 2) && gBattleMons[battlerId].hp > (gBattleMons[battlerId].maxHP / 4))
+                 && BattlerHPPercentage(battlerId, LESS_THAN_OR_EQUAL, 2) && BattlerHPPercentage(battlerId, GREATER_THAN, 4)
                  && !gBattleStruct->trainerSlideHalfHpMsgDone)
                 {
                     gBattleStruct->trainerSlideHalfHpMsgDone = TRUE;
