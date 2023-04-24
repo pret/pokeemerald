@@ -2568,6 +2568,11 @@ static void Cmd_critmessage(void)
         if (gIsCriticalHit == TRUE && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
         {
             PrepareStringBattle(STRINGID_CRITICALHIT, gBattlerAttacker);
+
+            // Signal for the trainer slide-in system.
+            if (GetBattlerSide(gBattlerTarget) != B_SIDE_PLAYER && gBattleStruct->trainerSlideFirstCriticalHitMsgState != 2)
+                gBattleStruct->trainerSlideFirstCriticalHitMsgState = 1;
+
             gBattleCommunication[MSG_DISPLAY] = 1;
         }
         gBattlescriptCurrInstr = cmd->nextInstr;
@@ -2647,7 +2652,13 @@ static void Cmd_resultmessage(void)
         {
         case MOVE_RESULT_SUPER_EFFECTIVE:
             if (!gMultiHitCounter)  // Don't print effectiveness on each hit in a multi hit attack
+            {
+                // Signal for the trainer slide-in system.
+                if (GetBattlerSide(gBattlerTarget) != B_SIDE_PLAYER && gBattleStruct->trainerSlideFirstSuperEffectiveHitMsgState != 2)
+                    gBattleStruct->trainerSlideFirstSuperEffectiveHitMsgState = 1;
+
                 stringId = STRINGID_SUPEREFFECTIVE;
+            }
             break;
         case MOVE_RESULT_NOT_VERY_EFFECTIVE:
             if (!gMultiHitCounter)
@@ -7892,7 +7903,7 @@ static void BestowItem(u32 battlerAtk, u32 battlerDef)
 // Called by Cmd_removeitem. itemId represents the item that was removed, not being given.
 static bool32 TrySymbiosis(u32 battler, u32 itemId)
 {
-    if (!gBattleStruct->itemStolen[gBattlerPartyIndexes[battler]].stolen
+    if (!gBattleStruct->itemLost[gBattlerPartyIndexes[battler]].stolen
         && gBattleStruct->changedItems[battler] == ITEM_NONE
         && GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_EJECT_BUTTON
         && GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_EJECT_PACK
@@ -11185,15 +11196,6 @@ static void Cmd_various(void)
         AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, gActiveBattler, 0, 0, 0);
         return;
     }
-    case VARIOUS_JUMP_IF_SHELL_TRAP:
-    {
-        VARIOUS_ARGS(const u8 *jumpInstr);
-        if (gProtectStructs[gActiveBattler].shellTrap)
-            gBattlescriptCurrInstr = cmd->jumpInstr;
-        else
-            gBattlescriptCurrInstr = cmd->nextInstr;
-        return;
-    }
     case VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES:
     {
         VARIOUS_ARGS();
@@ -11224,6 +11226,15 @@ static void Cmd_various(void)
         VARIOUS_ARGS();
         gBattleStruct->hitSwitchTargetFailed = TRUE;
         gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
+    case VARIOUS_JUMP_IF_SHELL_TRAP:
+    {
+        VARIOUS_ARGS(const u8 *jumpInstr);
+        if (gProtectStructs[gActiveBattler].shellTrap)
+            gBattlescriptCurrInstr = cmd->jumpInstr;
+        else
+            gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
     case VARIOUS_TRY_REVIVAL_BLESSING:
@@ -11264,11 +11275,35 @@ static void Cmd_various(void)
 
         // Open party menu, wait to go to next instruction.
         else
-        {   
+        {
             BtlController_EmitChoosePokemon(BUFFER_A, PARTY_ACTION_CHOOSE_FAINTED_MON, PARTY_SIZE, ABILITY_NONE, gBattleStruct->battlerPartyOrders[gBattlerAttacker]);
             MarkBattlerForControllerExec(gBattlerAttacker);
         }
         return;
+    }
+    case VARIOUS_TRY_TRAINER_SLIDE_MSG_Z_MOVE:
+    {
+        VARIOUS_ARGS();
+        if ((i = ShouldDoTrainerSlide(gActiveBattler, TRAINER_SLIDE_Z_MOVE)))
+        {
+            gBattleScripting.battler = gActiveBattler;
+            BattleScriptPush(cmd->nextInstr);
+            gBattlescriptCurrInstr = (i == 1 ? BattleScript_TrainerASlideMsgRet : BattleScript_TrainerBSlideMsgRet);
+            return;
+        }
+        break;
+    }
+    case VARIOUS_TRY_TRAINER_SLIDE_MSG_MEGA_EVOLUTION:
+    {
+        VARIOUS_ARGS();
+        if ((i = ShouldDoTrainerSlide(gActiveBattler, TRAINER_SLIDE_MEGA_EVOLUTION)))
+        {
+            gBattleScripting.battler = gActiveBattler;
+            BattleScriptPush(cmd->nextInstr);
+            gBattlescriptCurrInstr = (i == 1 ? BattleScript_TrainerASlideMsgRet : BattleScript_TrainerBSlideMsgRet);
+            return;
+        }
+        break;
     }
     } // End of switch (cmd->id)
 
@@ -16469,7 +16504,7 @@ void BS_ItemRestoreHP(void) {
     }
     if (hp + healAmount > maxHP)
         healAmount = maxHP - hp;
-    
+
     // Heal is applied as move damage if battler is active.
     if (battlerId != MAX_BATTLERS_COUNT && hp != 0)
     {
@@ -16494,10 +16529,10 @@ void BS_ItemRestoreHP(void) {
 void BS_ItemCureStatus(void) {
     NATIVE_ARGS();
     struct Pokemon *party = (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
-    
+
     // Heal Status1 conditions.
     HealStatusConditions(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], gBattleStruct->itemPartyIndex[gBattlerAttacker], GetItemStatus1Mask(gLastUsedItem), gBattlerAttacker);
-    
+
     // Heal Status2 conditions if battler is active.
     if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
     {
@@ -16506,10 +16541,10 @@ void BS_ItemCureStatus(void) {
     else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
                 && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerAttacker)])
     {
-        gBattleMons[gBattlerAttacker].status2 &= ~GetItemStatus2Mask(gLastUsedItem); 
+        gBattleMons[gBattlerAttacker].status2 &= ~GetItemStatus2Mask(gLastUsedItem);
         gBattlerTarget = BATTLE_PARTNER(gBattlerAttacker);
     }
-    
+
     if (GetItemStatus1Mask(gLastUsedItem) & STATUS1_SLEEP)
         gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_NIGHTMARE;
 
