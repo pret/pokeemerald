@@ -928,13 +928,52 @@
 #define ITEM_RUBY 756
 #define ITEM_SAPPHIRE 757
 
+// GEN IX ITEMS
 #define ITEM_ABILITY_SHIELD 758
 #define ITEM_CLEAR_AMULET 759
 #define ITEM_PUNCHING_GLOVE 760
 #define ITEM_COVERT_CLOAK 761
 #define ITEM_LOADED_DICE 762
+#define ITEM_AUSPICIOUS_ARMOR 763
+#define ITEM_BOOSTER_ENERGY 764
+#define ITEM_BIG_BAMBOO_SHOOT 765
+#define ITEM_GIMMIGHOUL_COIN 766
+#define ITEM_LEADERS_CREST 767
+#define ITEM_MALICIOUS_ARMOR 768
+#define ITEM_MIRROR_HERB 769
+#define ITEM_SCROLL_OF_DARKNESS 770
+#define ITEM_SCROLL_OF_WATERS 771
+#define ITEM_TERA_ORB 772
+#define ITEM_TINY_BAMBOO_SHOOT 773
 
-#define ITEMS_COUNT 763
+#define ITEM_BUG_TERA_SHARD 774
+#define ITEM_DARK_TERA_SHARD 775
+#define ITEM_DRAGON_TERA_SHARD 776
+#define ITEM_ELECTRIC_TERA_SHARD 777
+#define ITEM_FAIRY_TERA_SHARD 778
+#define ITEM_FIGHTING_TERA_SHARD 779
+#define ITEM_FIRE_TERA_SHARD 780
+#define ITEM_FLYING_TERA_SHARD 781
+#define ITEM_GHOST_TERA_SHARD 782
+#define ITEM_GRASS_TERA_SHARD 783
+#define ITEM_GROUND_TERA_SHARD 784
+#define ITEM_ICE_TERA_SHARD 785
+#define ITEM_NORMAL_TERA_SHARD 786
+#define ITEM_POISON_TERA_SHARD 787
+#define ITEM_PSYCHIC_TERA_SHARD 788
+#define ITEM_ROCK_TERA_SHARD 789
+#define ITEM_STEEL_TERA_SHARD 790
+#define ITEM_WATER_TERA_SHARD 791
+
+#define ITEM_ADAMANT_CRYSTAL 792
+#define ITEM_GRISEOUS_CORE 793
+#define ITEM_LUSTROUS_GLOBE 794
+
+#define ITEM_BLACK_AUGURITE 795
+#define ITEM_LINKING_CORD 796
+#define ITEM_PEAT_BLOCK 797
+
+#define ITEMS_COUNT 798
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
@@ -991,17 +1030,27 @@
 #define EXP_30000 5
 
 // Item type IDs (used to determine the exit callback)
-#define ITEM_USE_MAIL        0
-#define ITEM_USE_PARTY_MENU  1
-#define ITEM_USE_FIELD       2
-#define ITEM_USE_PBLOCK_CASE 3
-#define ITEM_USE_BAG_MENU    4 // No exit callback, stays in bag menu
+#define ITEM_USE_MAIL             0
+#define ITEM_USE_PARTY_MENU       1
+#define ITEM_USE_FIELD            2
+#define ITEM_USE_PBLOCK_CASE      3
+#define ITEM_USE_BAG_MENU         4 // No exit callback, stays in bag menu
+#define ITEM_USE_PARTY_MENU_MOVES 5
 
-// Item battle usage IDs (only checked to see if nonzero)
-#define ITEM_B_USE_MEDICINE 1
-#define ITEM_B_USE_OTHER    2
+// Item battle script IDs (need to be non-zero)
+#define EFFECT_ITEM_RESTORE_HP              1
+#define EFFECT_ITEM_CURE_STATUS             2
+#define EFFECT_ITEM_HEAL_AND_CURE_STATUS    3
+#define EFFECT_ITEM_INCREASE_STAT           4
+#define EFFECT_ITEM_SET_MIST                5
+#define EFFECT_ITEM_SET_FOCUS_ENERGY        6
+#define EFFECT_ITEM_ESCAPE                  7
+#define EFFECT_ITEM_THROW_BALL              8
+#define EFFECT_ITEM_REVIVE                  9
+#define EFFECT_ITEM_RESTORE_PP              10
+#define EFFECT_ITEM_INCREASE_ALL_STATS      11
 
-// Check if the item is one that can be used on a Pokemon.
-#define ITEM_HAS_EFFECT(item) ((item) >= ITEM_POTION && (item) <= LAST_BERRY_INDEX)
+// Enigma Berry dummy constant
+#define EFFECT_ITEM_ENIGMA_BERRY_EREADER    1
 
 #endif  // GUARD_CONSTANTS_ITEMS_H

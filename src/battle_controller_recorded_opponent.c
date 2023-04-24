@@ -10,11 +10,13 @@
 #include "battle_tv.h"
 #include "bg.h"
 #include "data.h"
+#include "item_menu.h"
 #include "item_use.h"
 #include "link.h"
 #include "main.h"
 #include "m4a.h"
 #include "palette.h"
+#include "party_menu.h"
 #include "pokeball.h"
 #include "pokemon.h"
 #include "recorded_battle.h"
@@ -1436,12 +1438,17 @@ static void RecordedOpponentHandleChooseMove(void)
 
 static void RecordedOpponentHandleChooseItem(void)
 {
+    u8 byte1 = RecordedBattle_GetBattlerAction(RECORDED_ITEM_ID, gActiveBattler);
+    u8 byte2 = RecordedBattle_GetBattlerAction(RECORDED_ITEM_ID, gActiveBattler);
+    gBattleStruct->chosenItem[gActiveBattler] = (byte1 << 8) | byte2;
+    BtlController_EmitOneReturnValue(BUFFER_B, gBattleStruct->chosenItem[gActiveBattler]);
     RecordedOpponentBufferExecCompleted();
 }
 
 static void RecordedOpponentHandleChoosePokemon(void)
 {
     *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = RecordedBattle_GetBattlerAction(RECORDED_PARTY_INDEX, gActiveBattler);
+    gSelectedMonPartyId = gBattleStruct->monToSwitchIntoId[gActiveBattler]; // Revival Blessing
     BtlController_EmitChosenMonReturnValue(BUFFER_B, *(gBattleStruct->monToSwitchIntoId + gActiveBattler), NULL);
     RecordedOpponentBufferExecCompleted();
 }

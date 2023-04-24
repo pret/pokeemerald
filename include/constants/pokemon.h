@@ -191,6 +191,9 @@
 #define FRIENDSHIP_200_TO_254  5
 #define FRIENDSHIP_MAX         6
 
+// Friendship value that the majority of species use. This was changed in Generation 8 to 50.
+#define STANDARD_FRIENDSHIP 70
+
 #define MAX_FRIENDSHIP  255
 #define MAX_SHEEN       255
 #define MAX_CONDITION   255
@@ -198,7 +201,11 @@
 #define MAX_PER_STAT_IVS 31
 #define MAX_IV_MASK 31
 #define USE_RANDOM_IVS (MAX_PER_STAT_IVS + 1)
+#if P_EV_CAP >= GEN_6
+#define MAX_PER_STAT_EVS 252
+#else
 #define MAX_PER_STAT_EVS 255
+#endif
 #define MAX_TOTAL_EVS 510
 #if I_VITAMIN_EV_CAP >= GEN_8
 #define EV_ITEM_RAISE_LIMIT MAX_PER_STAT_EVS
@@ -307,6 +314,7 @@
 #define EVO_SCRIPT_TRIGGER_DMG            36     // Pokémon has specified HP below max, then player interacts trigger
 #define EVO_DARK_SCROLL                   37     // interacts with Scroll of Darkness
 #define EVO_WATER_SCROLL                  38     // interacts with Scroll of Waters
+#define EVO_ITEM_NIGHT                    39     // specified item is used on Pokémon at night
 
 #define EVOS_PER_MON 10
 

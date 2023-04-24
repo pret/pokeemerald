@@ -199,7 +199,7 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
         holdEffect = gBattleStruct->debugHoldEffects[battlerId];
     else
 #endif
-    if (item == ITEM_ENIGMA_BERRY)
+    if (item == ITEM_ENIGMA_BERRY_E_READER)
         return FALSE;   // HoldEffect = gEnigmaBerries[battlerId].holdEffect;
     else
         holdEffect = ItemId_GetHoldEffect(item);
@@ -215,11 +215,7 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
 
         if (move != MOVE_NONE && zMove != MOVE_Z_STATUS && gBattleMoves[move].type == ItemId_GetSecondaryId(item))
         {
-            if (IS_MOVE_STATUS(move))
-                gBattleStruct->zmove.chosenZMove = move;
-            else
-                gBattleStruct->zmove.chosenZMove = GetTypeBasedZMove(move, battlerId);
-
+            gBattleStruct->zmove.chosenZMove = GetTypeBasedZMove(move, battlerId);
             return TRUE;
         }
     }

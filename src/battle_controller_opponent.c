@@ -20,6 +20,7 @@
 #include "main.h"
 #include "m4a.h"
 #include "palette.h"
+#include "party_menu.h"
 #include "pokeball.h"
 #include "pokemon.h"
 #include "random.h"
@@ -33,6 +34,7 @@
 #include "constants/battle_anim.h"
 #include "constants/items.h"
 #include "constants/moves.h"
+#include "constants/party_menu.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "trainer_hill.h"
@@ -226,9 +228,11 @@ static void Intro_DelayAndEnd(void)
     }
 }
 
-static bool32 TwoIntroMons(u32 battlerId) // Double battle with both player pokemon active.
+static bool32 TwoIntroMons(u32 battlerId) // Double battle with both opponent pokemon active.
 {
-    return (IsDoubleBattle() && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battlerId)]]));
+    return (IsDoubleBattle()
+            && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[battlerId]])
+            && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battlerId)]]));
 }
 
 static void Intro_WaitForShinyAnimAndHealthbox(void)
@@ -1665,7 +1669,7 @@ static void OpponentHandleChooseMove(void)
 
 static void OpponentHandleChooseItem(void)
 {
-    BtlController_EmitOneReturnValue(BUFFER_B, *(gBattleStruct->chosenItem + (gActiveBattler / 2) * 2));
+    BtlController_EmitOneReturnValue(BUFFER_B, gBattleStruct->chosenItem[gActiveBattler]);
     OpponentBufferExecCompleted();
 }
 
@@ -1674,7 +1678,13 @@ static void OpponentHandleChoosePokemon(void)
     s32 chosenMonId;
     s32 pokemonInBattle = 1;
 
-    if (*(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) == PARTY_SIZE)
+    // Choosing Revival Blessing target
+    if ((gBattleResources->bufferA[gActiveBattler][1] & 0xF) == PARTY_ACTION_CHOOSE_FAINTED_MON)
+    {
+        chosenMonId = gSelectedMonPartyId = GetFirstFaintedPartyIndex(gActiveBattler);
+    }
+    // Switching out
+    else if (*(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) == PARTY_SIZE)
     {
         chosenMonId = GetMostSuitableMonToSwitchInto();
 
@@ -1709,17 +1719,17 @@ static void OpponentHandleChoosePokemon(void)
                 }
             }
         }
+        *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = chosenMonId;
     }
     else
     {
         chosenMonId = *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler);
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
+        *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = chosenMonId;
     }
-
-
-    *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = chosenMonId;
     BtlController_EmitChosenMonReturnValue(BUFFER_B, chosenMonId, NULL);
     OpponentBufferExecCompleted();
+
 }
 
 static u8 CountAIAliveNonEggMonsExcept(u8 slotToIgnore)
@@ -1961,7 +1971,7 @@ static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite)
 
 static void Task_StartSendOutAnim(u8 taskId)
 {
-    u8 savedActiveBank = gActiveBattler;
+    u8 savedActiveBattler = gActiveBattler;
 
     gActiveBattler = gTasks[taskId].data[0];
     if ((!TwoIntroMons(gActiveBattler) || (gBattleTypeFlags & BATTLE_TYPE_MULTI)) && !BATTLE_TWO_VS_ONE_OPPONENT)
@@ -1969,7 +1979,7 @@ static void Task_StartSendOutAnim(u8 taskId)
         gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         StartSendOutAnim(gActiveBattler, FALSE);
     }
-    else if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS))
+    else if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) || (BATTLE_TWO_VS_ONE_OPPONENT && !TwoIntroMons(gActiveBattler)))
     {
         gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         StartSendOutAnim(gActiveBattler, FALSE);
@@ -1984,7 +1994,7 @@ static void Task_StartSendOutAnim(u8 taskId)
         gActiveBattler ^= BIT_FLANK;
     }
     gBattlerControllerFuncs[gActiveBattler] = Intro_TryShinyAnimShowHealthbox;
-    gActiveBattler = savedActiveBank;
+    gActiveBattler = savedActiveBattler;
     DestroyTask(taskId);
 }
 

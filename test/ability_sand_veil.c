@@ -16,7 +16,7 @@ SINGLE_BATTLE_TEST("Sand Veil prevents damage from sandstorm")
 
 SINGLE_BATTLE_TEST("Sand Veil reduces accuracy during sandstorm")
 {
-    PASSES_RANDOMLY(4,5);
+    PASSES_RANDOMLY(4, 5, RNG_ACCURACY);
     GIVEN {
         ASSUME(gBattleMoves[MOVE_POUND].accuracy == 100);
         PLAYER(SPECIES_SANDSHREW) { Ability(ABILITY_SAND_VEIL); };

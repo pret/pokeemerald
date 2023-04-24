@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Harden raises Defense", s16 damage)
         if (raiseDefense) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_HARDEN, player);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Wobbuffet's defense rose!");
+            MESSAGE("Wobbuffet's Defense rose!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
         HP_BAR(player, captureDamage: &results[i].damage);

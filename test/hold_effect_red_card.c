@@ -8,7 +8,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Red Card switches the attacker with a random non-fainted replacement")
 {
-    PASSES_RANDOMLY(1, 2);
+    PASSES_RANDOMLY(1, 2, RNG_FORCE_RANDOM_SWITCH);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_RED_CARD); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("Red Card switches the attacker with a random non-fainted rep
 
 DOUBLE_BATTLE_TEST("Red Card switches the target with a random non-battler, non-fainted replacement")
 {
-    PASSES_RANDOMLY(1, 2);
+    PASSES_RANDOMLY(1, 2, RNG_FORCE_RANDOM_SWITCH);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_RED_CARD); }
         PLAYER(SPECIES_WYNAUT);

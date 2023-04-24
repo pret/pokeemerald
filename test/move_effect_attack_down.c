@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Growl lowers Attack", s16 damage)
         if (lowerAttack) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_GROWL, player);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Foe Wobbuffet's attack fell!");
+            MESSAGE("Foe Wobbuffet's Attack fell!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
         HP_BAR(player, captureDamage: &results[i].damage);

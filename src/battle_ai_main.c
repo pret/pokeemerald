@@ -257,6 +257,8 @@ static void CopyBattlerDataToAIParty(u32 bPosition, u32 side)
 void Ai_InitPartyStruct(void)
 {
     u32 i;
+    bool32 isOmniscient = (AI_THINKING_STRUCT->aiFlags & AI_FLAG_OMNISCIENT);
+    struct Pokemon *mon;
 
     AI_PARTY->count[B_SIDE_PLAYER] = gPlayerPartyCount;
     AI_PARTY->count[B_SIDE_OPPONENT] = gEnemyPartyCount;
@@ -278,6 +280,17 @@ void Ai_InitPartyStruct(void)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
             AI_PARTY->mons[B_SIDE_PLAYER][i].isFainted = TRUE;
+        
+        if (isOmniscient)
+        {
+            u32 j;
+            mon = &gPlayerParty[i];
+            AI_PARTY->mons[B_SIDE_PLAYER][i].item = GetMonData(mon, MON_DATA_HELD_ITEM);
+            AI_PARTY->mons[B_SIDE_PLAYER][i].heldEffect = ItemId_GetHoldEffect(AI_PARTY->mons[B_SIDE_PLAYER][i].item);
+            AI_PARTY->mons[B_SIDE_PLAYER][i].ability = GetMonAbility(mon);
+            for (j = 0; j < MAX_MON_MOVES; j++)
+                AI_PARTY->mons[B_SIDE_PLAYER][i].moves[j] = GetMonData(mon, MON_DATA_MOVE1 + j);
+        }
     }
 }
 
@@ -354,7 +367,7 @@ void GetAiLogicData(void)
     for (battlerAtk = 0; battlerAtk < gBattlersCount; battlerAtk++)
     {
         if (!IsBattlerAlive(battlerAtk)
-          || !IsBattlerAIControlled(battlerAtk)) {
+          || !IsAiBattlerAware(battlerAtk)) {
             continue;
         }
 
@@ -974,7 +987,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             }
             break;
         case EFFECT_DREAM_EATER:
-            if (!(gBattleMons[battlerDef].status1 & STATUS1_SLEEP) || AI_DATA->abilities[battlerDef] == ABILITY_COMATOSE)
+            if (!AI_IsBattlerAsleepOrComatose(battlerDef))
                 score -= 8;
             else if (effectiveness == AI_EFFECTIVENESS_x0)
                 score -= 10;
@@ -1453,7 +1466,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             break;
         case EFFECT_SNORE:
         case EFFECT_SLEEP_TALK:
-            if (IsWakeupTurn(battlerAtk) || (!(gBattleMons[battlerAtk].status1 & STATUS1_SLEEP) || AI_DATA->abilities[battlerAtk] != ABILITY_COMATOSE))
+            if (IsWakeupTurn(battlerAtk) || !AI_IsBattlerAsleepOrComatose(battlerAtk))
                 score -= 10;    // if mon will wake up, is not asleep, or is not comatose
             break;
         case EFFECT_MEAN_LOOK:
@@ -1463,7 +1476,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_NIGHTMARE:
             if (gBattleMons[battlerDef].status2 & STATUS2_NIGHTMARE)
                 score -= 10;
-            else if (!(gBattleMons[battlerDef].status1 & STATUS1_SLEEP) || AI_DATA->abilities[battlerDef] == ABILITY_COMATOSE)
+            else if (!AI_IsBattlerAsleepOrComatose(battlerDef))
                 score -= 8;
             else if (DoesPartnerHaveSameMoveEffect(BATTLE_PARTNER(battlerAtk), battlerDef, move, AI_DATA->partnerMove))
                 score -= 10;
@@ -2610,6 +2623,15 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             if (gBattleMons[battlerAtk].hp <= gBattleMons[battlerAtk].maxHP / 3)
                 score -= 10;
             break;*/
+        case EFFECT_REVIVAL_BLESSING:
+            if (GetFirstFaintedPartyIndex(battlerAtk) == PARTY_SIZE)
+                score -= 10;
+            else if (CanAIFaintTarget(battlerAtk, battlerDef, 0))
+                score -= 10;
+            else if (CanTargetFaintAi(battlerDef, battlerAtk)
+             && AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER)
+                score -= 10;
+            break;
         case EFFECT_PLACEHOLDER:
             return 0;   // cannot even select
     } // move effect checks
@@ -3477,6 +3499,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
     case EFFECT_TOXIC:
     case EFFECT_POISON:
+    case EFFECT_BARB_BARRAGE:
         IncreasePoisonScore(battlerAtk, battlerDef, move, &score);
         break;
     case EFFECT_LIGHT_SCREEN:
@@ -3779,7 +3802,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_NIGHTMARE:
         if (AI_DATA->abilities[battlerDef] != ABILITY_MAGIC_GUARD
           && !(gBattleMons[battlerDef].status2 & STATUS2_NIGHTMARE)
-          && (AI_DATA->abilities[battlerDef] == ABILITY_COMATOSE || gBattleMons[battlerDef].status1 & STATUS1_SLEEP))
+          && AI_IsBattlerAsleepOrComatose(battlerDef))
         {
             score += 5;
             if (IsBattlerTrapped(battlerDef, TRUE))
@@ -3870,6 +3893,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
 
     case EFFECT_SPIKES:
+    case EFFECT_HIT_SET_ENTRY_HAZARD:
     case EFFECT_STEALTH_ROCK:
     case EFFECT_STICKY_WEB:
     case EFFECT_TOXIC_SPIKES:
@@ -4793,6 +4817,10 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score++;
         }
         break;
+    case EFFECT_REVIVAL_BLESSING:
+        if (GetFirstFaintedPartyIndex(battlerAtk) != PARTY_SIZE)
+            score += 2;
+        break;
     //case EFFECT_EXTREME_EVOBOOST: // TODO
         //break;
     //case EFFECT_CLANGOROUS_SOUL:  // TODO
@@ -4906,6 +4934,7 @@ static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_HAIL:
     case EFFECT_GEOMANCY:
     case EFFECT_VICTORY_DANCE:
+    case EFFECT_HIT_SET_ENTRY_HAZARD:
         score += 2;
         break;
     default:
