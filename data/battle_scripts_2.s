@@ -76,7 +76,7 @@ BattleScript_ItemCureStatus::
 BattleScript_ItemHealAndCureStatus::
     call BattleScript_UseItemMessage
     itemrestorehp
-    curestatus BS_ATTACKER
+    itemcurestatus
     printstring STRINGID_ITEMRESTOREDSPECIESHEALTH
     waitmessage B_WAIT_TIME_LONG
     bichalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
