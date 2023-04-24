@@ -405,7 +405,7 @@ static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenu
         template.firstX = (newWidth / 2) * 8 + 12 + (left) * 8;
         template.firstY = top * 8 + 5;
         template.secondX = template.firstX;
-        template.secondY = windowHeight * 8 + 12;
+        template.secondY = top * 8 + windowHeight * 8 + 12;
         template.fullyUpThreshold = 0;
         template.fullyDownThreshold = argc - maxBeforeScroll;
         template.firstArrowType = SCROLL_ARROW_UP;
