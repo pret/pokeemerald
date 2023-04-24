@@ -99,6 +99,26 @@ SINGLE_BATTLE_TEST("Cure Status: Full Heal heals a battler from any primary stat
     }
 }
 
+SINGLE_BATTLE_TEST("Cure Status: Heal Powder heals a battler from any primary status")
+{
+    u16 status;
+    PARAMETRIZE{ status = STATUS1_BURN; }
+    PARAMETRIZE{ status = STATUS1_FREEZE; }
+    PARAMETRIZE{ status = STATUS1_PARALYSIS; }
+    PARAMETRIZE{ status = STATUS1_POISON; }
+    PARAMETRIZE{ status = STATUS1_TOXIC_POISON; }
+    PARAMETRIZE{ status = STATUS1_SLEEP; }
+    GIVEN {
+        ASSUME(gItems[ITEM_HEAL_POWDER].battleUsage == EFFECT_ITEM_CURE_STATUS);
+        PLAYER(SPECIES_WOBBUFFET) { Status1(status); }
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { USE_ITEM(player, ITEM_HEAL_POWDER, partyIndex: 0); }
+    } SCENE {
+        MESSAGE("Wobbuffet had its status healed!");
+    }
+}
+
 SINGLE_BATTLE_TEST("Cure Status: Pewter Crunchies heals a battler from any primary status")
 {
     u16 status;
@@ -263,6 +283,7 @@ SINGLE_BATTLE_TEST("Cure Status: Full Heal and local specialties heal a battler 
 {
     u16 item;
     PARAMETRIZE { item = ITEM_FULL_HEAL; }
+    PARAMETRIZE { item = ITEM_HEAL_POWDER; }
     PARAMETRIZE { item = ITEM_PEWTER_CRUNCHIES; }
     PARAMETRIZE { item = ITEM_LAVA_COOKIE; }
     PARAMETRIZE { item = ITEM_RAGE_CANDY_BAR; }

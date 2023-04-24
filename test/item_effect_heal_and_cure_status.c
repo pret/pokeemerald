@@ -26,8 +26,6 @@ SINGLE_BATTLE_TEST("Full Restore restores a battler's HP and cures any primary s
 
 SINGLE_BATTLE_TEST("Full Restore restores a battler's HP and cures confusion")
 {
-    // known failing bc even though it passes there is an underlying bug still that is only obvious in the replay. see #2938
-    // this also means that this test is likely not very good so I advice this to be redone
     GIVEN {
         ASSUME(gItems[ITEM_FULL_RESTORE].battleUsage == EFFECT_ITEM_HEAL_AND_CURE_STATUS);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(300);};
