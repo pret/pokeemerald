@@ -10,7 +10,7 @@ SINGLE_BATTLE_TEST("Cure Status: Paralyze Heal heals a battler from being paraly
     } WHEN {
         TURN { USE_ITEM(player, ITEM_PARALYZE_HEAL, partyIndex: 0); }
     } SCENE {
-        MESSAGE("Paralyze Heal cured Wobbuffet's status!");
+        MESSAGE("Wobbuffet had its status healed!");
     }
 }
 
@@ -23,7 +23,7 @@ SINGLE_BATTLE_TEST("Cure Status: Antidote heals a battler from being poisoned")
     } WHEN {
         TURN { USE_ITEM(player, ITEM_ANTIDOTE, partyIndex: 0); }
     } SCENE {
-        MESSAGE("Antidote cured Wobbuffet's status!");
+        MESSAGE("Wobbuffet had its status healed!");
     }
 }
 
@@ -36,7 +36,7 @@ SINGLE_BATTLE_TEST("Cure Status: Antidote heals a battler from being badly poiso
     } WHEN {
         TURN { USE_ITEM(player, ITEM_ANTIDOTE, partyIndex: 0); }
     } SCENE {
-        MESSAGE("Antidote cured Wobbuffet's status!");
+        MESSAGE("Wobbuffet had its status healed!");
     }
 }
 
@@ -49,7 +49,7 @@ SINGLE_BATTLE_TEST("Cure Status: Awakening heals a battler from being asleep")
     } WHEN {
         TURN { USE_ITEM(player, ITEM_AWAKENING, partyIndex: 0); }
     } SCENE {
-        MESSAGE("Awakening cured Wobbuffet's status!");
+        MESSAGE("Wobbuffet had its status healed!");
     }
 }
 
@@ -62,7 +62,7 @@ SINGLE_BATTLE_TEST("Cure Status: Burn Heal heals a battler from being burned")
     } WHEN {
         TURN { USE_ITEM(player, ITEM_BURN_HEAL, partyIndex: 0); }
     } SCENE {
-        MESSAGE("Burn Heal cured Wobbuffet's status!");
+        MESSAGE("Wobbuffet had its status healed!");
     }
 }
 
@@ -75,7 +75,7 @@ SINGLE_BATTLE_TEST("Cure Status: Ice Heal heals a battler from being paralyzed")
     } WHEN {
         TURN { USE_ITEM(player, ITEM_ICE_HEAL, partyIndex: 0); }
     } SCENE {
-        MESSAGE("Ice Heal cured Wobbuffet's status!");
+        MESSAGE("Wobbuffet had its status healed!");
     }
 }
 
@@ -95,7 +95,7 @@ SINGLE_BATTLE_TEST("Cure Status: Full Heal heals a battler from any primary stat
     } WHEN {
         TURN { USE_ITEM(player, ITEM_FULL_HEAL, partyIndex: 0); }
     } SCENE {
-        MESSAGE("Full Heal cured Wobbuffet's status!");
+        MESSAGE("Wobbuffet had its status healed!");
     }
 }
 
@@ -115,7 +115,7 @@ SINGLE_BATTLE_TEST("Cure Status: Pewter Crunchies heals a battler from any prima
     } WHEN {
         TURN { USE_ITEM(player, ITEM_PEWTER_CRUNCHIES, partyIndex: 0); }
     } SCENE {
-        MESSAGE("PewtrCrnches cured Wobbuffet's status!");
+        MESSAGE("Wobbuffet had its status healed!");
     }
 }
 
@@ -135,7 +135,7 @@ SINGLE_BATTLE_TEST("Cure Status: Lava Cookies heals a battler from any primary s
     } WHEN {
         TURN { USE_ITEM(player, ITEM_LAVA_COOKIE, partyIndex: 0); }
     } SCENE {
-        MESSAGE("Lava Cookie cured Wobbuffet's status!");
+        MESSAGE("Wobbuffet had its status healed!");
     }
 }
 
@@ -155,7 +155,7 @@ SINGLE_BATTLE_TEST("Cure Status: Rage Candy Bar heals a battler from any primary
     } WHEN {
         TURN { USE_ITEM(player, ITEM_RAGE_CANDY_BAR, partyIndex: 0); }
     } SCENE {
-        MESSAGE("RageCandyBar cured Wobbuffet's status!");
+        MESSAGE("Wobbuffet had its status healed!");
     }
 }
 
@@ -175,7 +175,7 @@ SINGLE_BATTLE_TEST("Cure Status: Old Gateu heals a battler from any primary stat
     } WHEN {
         TURN { USE_ITEM(player, ITEM_OLD_GATEAU, partyIndex: 0); }
     } SCENE {
-        MESSAGE("Old Gateau cured Wobbuffet's status!");
+        MESSAGE("Wobbuffet had its status healed!");
     }
 }
 
@@ -195,7 +195,7 @@ SINGLE_BATTLE_TEST("Cure Status: Casteliacone heals a battler from any primary s
     } WHEN {
         TURN { USE_ITEM(player, ITEM_CASTELIACONE, partyIndex: 0); }
     } SCENE {
-        MESSAGE("Casteliacone cured Wobbuffet's status!");
+        MESSAGE("Wobbuffet had its status healed!");
     }
 }
 
@@ -215,7 +215,7 @@ SINGLE_BATTLE_TEST("Cure Status: Lumiose Galette heals a battler from any primar
     } WHEN {
         TURN { USE_ITEM(player, ITEM_LUMIOSE_GALETTE, partyIndex: 0); }
     } SCENE {
-        MESSAGE("LumioseGlete cured Wobbuffet's status!");
+        MESSAGE("Wobbuffet had its status healed!");;
     }
 }
 
@@ -235,7 +235,7 @@ SINGLE_BATTLE_TEST("Cure Status: Shalour Sable heals a battler from any primary 
     } WHEN {
         TURN { USE_ITEM(player, ITEM_SHALOUR_SABLE, partyIndex: 0); }
     } SCENE {
-        MESSAGE("ShalourSable cured Wobbuffet's status!");
+        MESSAGE("Wobbuffet had its status healed!");
     }
 }
 
@@ -255,7 +255,7 @@ SINGLE_BATTLE_TEST("Cure Status: Big Malasada heals a battler from any primary s
     } WHEN {
         TURN { USE_ITEM(player, ITEM_BIG_MALASADA, partyIndex: 0); }
     } SCENE {
-        MESSAGE("Big Malasada cured Wobbuffet's status!");
+        MESSAGE("Wobbuffet had its status healed!");
     }
 }
 
@@ -279,35 +279,6 @@ SINGLE_BATTLE_TEST("Cure Status: Full Heal and local specialties heal a battler 
         TURN { MOVE(opponent, MOVE_CONFUSE_RAY); }
         TURN { USE_ITEM(player, item, partyIndex: 0); }
     } SCENE {
-        switch (item)
-        {
-            case ITEM_FULL_HEAL:
-                MESSAGE("Full Heal cured Wobbuffet's status!");
-                break;
-            case ITEM_PEWTER_CRUNCHIES:
-                MESSAGE("PewtrCrnches cured Wobbuffet's status!");
-                break;
-            case ITEM_LAVA_COOKIE:
-                MESSAGE("Lava Cookie cured Wobbuffet's status!");
-                break;
-            case ITEM_RAGE_CANDY_BAR:
-                MESSAGE("RageCandyBar cured Wobbuffet's status!");
-                break;
-            case ITEM_OLD_GATEAU:
-                MESSAGE("Old Gateau cured Wobbuffet's status!");
-                break;
-            case ITEM_CASTELIACONE:
-                MESSAGE("Casteliacone cured Wobbuffet's status!");
-                break;
-            case ITEM_LUMIOSE_GALETTE:
-                MESSAGE("LumioseGlete cured Wobbuffet's status!");
-                break;
-            case ITEM_SHALOUR_SABLE:
-                MESSAGE("ShalourSable cured Wobbuffet's status!");
-                break;
-            case ITEM_BIG_MALASADA:
-                MESSAGE("Big Malasada cured Wobbuffet's status!");
-                break;
-        }
+        MESSAGE("Wobbuffet had its status healed!");
     }
 }
