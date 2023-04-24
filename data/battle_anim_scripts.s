@@ -24463,6 +24463,7 @@ General_TurnTrap:
 	jumpargeq 0, TRAP_ANIM_MAGMA_STORM, Status_MagmaStorm
 	jumpargeq 0, TRAP_ANIM_INFESTATION, Status_Infestation
 	jumpargeq 0, TRAP_ANIM_SNAP_TRAP, Status_Snap_Trap
+	jumpargeq 0, TRAP_ANIM_THUNDER_CAGE, Status_Thunder_Cage
 	goto Status_BindWrap
 Status_BindWrap:
 	loadspritegfx ANIM_TAG_TENDRILS
@@ -24548,6 +24549,10 @@ Status_Clamp:
 	blendoff
 	waitforvisualfinish
 	end
+
+Status_Thunder_Cage:
+	@ TODO
+	goto Move_THUNDER_CAGE
 
 Status_Snap_Trap: @ placeholder
 	goto Move_BITE
