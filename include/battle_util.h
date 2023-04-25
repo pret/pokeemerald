@@ -234,5 +234,6 @@ u32 GetBattlerFriendshipScore(u8 battlerId);
 u32 CountBattlerStatIncreases(u8 battlerId, bool32 countEvasionAcc);
 bool32 IsMyceliumMightOnField(void);
 bool8 ChangeTypeBasedOnTerrain(u8 battlerId);
+void RemoveConfusionStatus(u8 battlerId);
 
 #endif // GUARD_BATTLE_UTIL_H
