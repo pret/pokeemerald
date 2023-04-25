@@ -3650,7 +3650,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 }
                 effect = 2;
             }
-            if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FROSTBITE)
+            if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FROSTBITE && (gBattleMoves[gCurrentMove].flags & FLAG_THAW_USER))
             {
                 if (!(gBattleMoves[gCurrentMove].effect == EFFECT_BURN_UP && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_FIRE)))
                 {
