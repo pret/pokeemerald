@@ -46,6 +46,7 @@ enum
     RECORDED_BATTLE_PALACE_ACTION,
     RECORDED_ITEM_ID,
     RECORDED_ITEM_TARGET,
+    RECORDED_ITEM_MOVE,
 };
 
 extern u32 gRecordedBattleRngSeed;

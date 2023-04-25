@@ -16563,8 +16563,7 @@ void BS_ItemIncreaseStat(void) {
 void BS_ItemRestorePP(void) {
     NATIVE_ARGS();
     const u8 *effect = GetItemEffect(gLastUsedItem);
-    u32 i, pp, maxPP, moveId;
-    u32 loopEnd = MAX_MON_MOVES;
+    u32 i, pp, maxPP, moveId, loopEnd;
     u32 battlerId = MAX_BATTLERS_COUNT;
     struct Pokemon *mon = (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER) ? &gPlayerParty[gBattleStruct->itemPartyIndex[gBattlerAttacker]] : &gEnemyParty[gBattleStruct->itemPartyIndex[gBattlerAttacker]];
 
@@ -16573,6 +16572,11 @@ void BS_ItemRestorePP(void) {
     {
         i = gChosenMovePos;
         loopEnd = gChosenMovePos + 1;
+    }
+    else 
+    {
+        i = 0;
+        loopEnd = MAX_MON_MOVES;
     }
 
     // Check if the recipient is an active battler.
@@ -16583,7 +16587,7 @@ void BS_ItemRestorePP(void) {
         battlerId = BATTLE_PARTNER(gBattlerAttacker);
 
     // Heal PP!
-    for (i = 0; i < loopEnd; i++)
+    for (; i < loopEnd; i++)
     {
         pp = GetMonData(mon, MON_DATA_PP1 + i, NULL);
         moveId = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
