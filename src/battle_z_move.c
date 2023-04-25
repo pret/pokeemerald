@@ -215,11 +215,7 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
 
         if (move != MOVE_NONE && zMove != MOVE_Z_STATUS && gBattleMoves[move].type == ItemId_GetSecondaryId(item))
         {
-            if (IS_MOVE_STATUS(move))
-                gBattleStruct->zmove.chosenZMove = move;
-            else
-                gBattleStruct->zmove.chosenZMove = GetTypeBasedZMove(move, battlerId);
-
+            gBattleStruct->zmove.chosenZMove = GetTypeBasedZMove(move, battlerId);
             return TRUE;
         }
     }

@@ -477,7 +477,7 @@ bool32 IsAiBattlerAware(u32 battlerId)
 {
     if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_OMNISCIENT)
         return TRUE;
-    
+
     return BattlerHasAi(battlerId);
 }
 
@@ -1129,7 +1129,7 @@ bool32 CanTargetFaintAi(u8 battlerDef, u8 battlerAtk)
 {
     s32 i, dmg;
     u32 unusable = AI_DATA->moveLimitations[battlerDef];
-    u16 *moves = gBattleResources->battleHistory->usedMoves[battlerDef];
+    u16 *moves = GetMovesArray(battlerDef);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {

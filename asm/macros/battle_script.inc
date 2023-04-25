@@ -2077,6 +2077,14 @@
 	various \battler, VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES
 	.endm
 
+	.macro trytrainerslidezmovemsg battler:req
+	various \battler, VARIOUS_TRY_TRAINER_SLIDE_MSG_Z_MOVE
+	.endm
+
+	.macro trytrainerslidemegaevolutionmsg battler:req
+	various \battler, VARIOUS_TRY_TRAINER_SLIDE_MSG_MEGA_EVOLUTION
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER, \stat | \stages << 3 | \down << 7
