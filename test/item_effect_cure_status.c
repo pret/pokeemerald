@@ -11,7 +11,7 @@ SINGLE_BATTLE_TEST("Cure Status: Paralyze Heal heals a battler from being paraly
         TURN { USE_ITEM(player, ITEM_PARALYZE_HEAL, partyIndex: 0); }
     } SCENE {
         MESSAGE("Wobbuffet had its status healed!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->status1, STATUS1_NONE);
     }
 }
@@ -26,7 +26,7 @@ SINGLE_BATTLE_TEST("Cure Status: Antidote heals a battler from being poisoned")
         TURN { USE_ITEM(player, ITEM_ANTIDOTE, partyIndex: 0); }
     } SCENE {
         MESSAGE("Wobbuffet had its status healed!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->status1, STATUS1_NONE);
     }
 }
@@ -41,7 +41,7 @@ SINGLE_BATTLE_TEST("Cure Status: Antidote heals a battler from being badly poiso
         TURN { USE_ITEM(player, ITEM_ANTIDOTE, partyIndex: 0); }
     } SCENE {
         MESSAGE("Wobbuffet had its status healed!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->status1, STATUS1_NONE);
     }
 }
@@ -56,7 +56,7 @@ SINGLE_BATTLE_TEST("Cure Status: Awakening heals a battler from being asleep")
         TURN { USE_ITEM(player, ITEM_AWAKENING, partyIndex: 0); }
     } SCENE {
         MESSAGE("Wobbuffet had its status healed!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->status1, STATUS1_NONE);
     }
 }
@@ -71,7 +71,7 @@ SINGLE_BATTLE_TEST("Cure Status: Burn Heal heals a battler from being burned")
         TURN { USE_ITEM(player, ITEM_BURN_HEAL, partyIndex: 0); }
     } SCENE {
         MESSAGE("Wobbuffet had its status healed!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->status1, STATUS1_NONE);
     }
 }
@@ -86,7 +86,7 @@ SINGLE_BATTLE_TEST("Cure Status: Ice Heal heals a battler from being paralyzed")
         TURN { USE_ITEM(player, ITEM_ICE_HEAL, partyIndex: 0); }
     } SCENE {
         MESSAGE("Wobbuffet had its status healed!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->status1, STATUS1_NONE);
     }
 }
@@ -108,7 +108,7 @@ SINGLE_BATTLE_TEST("Cure Status: Full Heal heals a battler from any primary stat
         TURN { USE_ITEM(player, ITEM_FULL_HEAL, partyIndex: 0); }
     } SCENE {
         MESSAGE("Wobbuffet had its status healed!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->status1, STATUS1_NONE);
     }
 }
@@ -130,7 +130,7 @@ SINGLE_BATTLE_TEST("Cure Status: Heal Powder heals a battler from any primary st
         TURN { USE_ITEM(player, ITEM_HEAL_POWDER, partyIndex: 0); }
     } SCENE {
         MESSAGE("Wobbuffet had its status healed!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->status1, STATUS1_NONE);
     }
 }
@@ -152,7 +152,7 @@ SINGLE_BATTLE_TEST("Cure Status: Pewter Crunchies heals a battler from any prima
         TURN { USE_ITEM(player, ITEM_PEWTER_CRUNCHIES, partyIndex: 0); }
     } SCENE {
         MESSAGE("Wobbuffet had its status healed!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->status1, STATUS1_NONE);
     }
 }
@@ -174,7 +174,7 @@ SINGLE_BATTLE_TEST("Cure Status: Lava Cookies heals a battler from any primary s
         TURN { USE_ITEM(player, ITEM_LAVA_COOKIE, partyIndex: 0); }
     } SCENE {
         MESSAGE("Wobbuffet had its status healed!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->status1, STATUS1_NONE);
     }
 }
@@ -196,7 +196,7 @@ SINGLE_BATTLE_TEST("Cure Status: Rage Candy Bar heals a battler from any primary
         TURN { USE_ITEM(player, ITEM_RAGE_CANDY_BAR, partyIndex: 0); }
     } SCENE {
         MESSAGE("Wobbuffet had its status healed!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->status1, STATUS1_NONE);
     }
 }
@@ -218,7 +218,7 @@ SINGLE_BATTLE_TEST("Cure Status: Old Gateu heals a battler from any primary stat
         TURN { USE_ITEM(player, ITEM_OLD_GATEAU, partyIndex: 0); }
     } SCENE {
         MESSAGE("Wobbuffet had its status healed!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->status1, STATUS1_NONE);
     }
 }
@@ -240,7 +240,7 @@ SINGLE_BATTLE_TEST("Cure Status: Casteliacone heals a battler from any primary s
         TURN { USE_ITEM(player, ITEM_CASTELIACONE, partyIndex: 0); }
     } SCENE {
         MESSAGE("Wobbuffet had its status healed!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->status1, STATUS1_NONE);
     }
 }
@@ -262,7 +262,7 @@ SINGLE_BATTLE_TEST("Cure Status: Lumiose Galette heals a battler from any primar
         TURN { USE_ITEM(player, ITEM_LUMIOSE_GALETTE, partyIndex: 0); }
     } SCENE {
         MESSAGE("Wobbuffet had its status healed!");;
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->status1, STATUS1_NONE);
     }
 }
@@ -284,7 +284,7 @@ SINGLE_BATTLE_TEST("Cure Status: Shalour Sable heals a battler from any primary 
         TURN { USE_ITEM(player, ITEM_SHALOUR_SABLE, partyIndex: 0); }
     } SCENE {
         MESSAGE("Wobbuffet had its status healed!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->status1, STATUS1_NONE);
     }
 }
@@ -306,12 +306,12 @@ SINGLE_BATTLE_TEST("Cure Status: Big Malasada heals a battler from any primary s
         TURN { USE_ITEM(player, ITEM_BIG_MALASADA, partyIndex: 0); }
     } SCENE {
         MESSAGE("Wobbuffet had its status healed!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->status1, STATUS1_NONE);
     }
 }
 
-SINGLE_BATTLE_TEST("Cure Status: Full Heal and local specialties heal a battler from being confused")
+SINGLE_BATTLE_TEST("Cure Status: Full Heal, Heal Powder and Local Specialties heal a battler from being confused")
 {
     u16 item;
     PARAMETRIZE { item = ITEM_FULL_HEAL; }
@@ -333,7 +333,7 @@ SINGLE_BATTLE_TEST("Cure Status: Full Heal and local specialties heal a battler 
         TURN { USE_ITEM(player, item, partyIndex: 0); }
     } SCENE {
         MESSAGE("Wobbuffet had its status healed!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->status2, STATUS1_NONE); // because we dont have STATUS2_NONE
     }
 }

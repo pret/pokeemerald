@@ -3,24 +3,6 @@
 
 #define MAX_HP 200
 
-SINGLE_BATTLE_TEST("Revive: Super Potion restores a fainted battler's HP to half")
-{
-    GIVEN {
-        ASSUME(gItems[ITEM_SUPER_POTION].battleUsage == EFFECT_ITEM_RESTORE_HP);
-        PLAYER(SPECIES_WYNAUT) { HP(1); MaxHP(MAX_HP); }
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_TACKLE); SEND_OUT(player, 1); }
-        TURN { USE_ITEM(player, ITEM_SUPER_POTION, partyIndex: 0); }
-        TURN { SWITCH(player, 0); }
-    } SCENE {
-        MESSAGE("Wynaut had its HP restored!");
-    } FINALLY {
-        EXPECT_EQ(player->hp, 60);
-    }
-}
-
 SINGLE_BATTLE_TEST("Revive: Revive restores a fainted battler's HP to half")
 {
     GIVEN {
@@ -34,7 +16,7 @@ SINGLE_BATTLE_TEST("Revive: Revive restores a fainted battler's HP to half")
         TURN { SWITCH(player, 0); }
     } SCENE {
         MESSAGE("Wynaut had its HP restored!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->hp, MAX_HP/2);
     }
 }
@@ -52,7 +34,7 @@ SINGLE_BATTLE_TEST("Revive: Max Revive restores a fainted battler's HP fully")
         TURN { SWITCH(player, 0); }
     } SCENE {
         MESSAGE("Wynaut had its HP restored!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->hp, MAX_HP);
     }
 }
@@ -70,7 +52,7 @@ SINGLE_BATTLE_TEST("Revive: Revival Herb restores a fainted battler's HP fully")
         TURN { SWITCH(player, 0); }
     } SCENE {
         MESSAGE("Wynaut had its HP restored!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->hp, MAX_HP);
     }
 }
@@ -88,7 +70,7 @@ SINGLE_BATTLE_TEST("Revive: Max Honey restores a fainted battler's HP fully")
         TURN { SWITCH(player, 0); }
     } SCENE {
         MESSAGE("Wynaut had its HP restored!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(player->hp, MAX_HP);
     }
 }
