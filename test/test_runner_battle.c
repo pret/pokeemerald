@@ -1161,6 +1161,21 @@ void Moves_(u32 sourceLine, const u16 moves[MAX_MON_MOVES])
     DATA.explicitMoves[DATA.currentSide] |= 1 << DATA.currentPartyIndex;
 }
 
+void MovesWithPP_(u32 sourceLine, const u16 moves[MAX_MON_MOVES], const u8 pp[MAX_MON_MOVES])
+{
+    s32 i;
+    INVALID_IF(!DATA.currentMon, "Moves outside of PLAYER/OPPONENT");
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i] == MOVE_NONE)
+            break;
+        INVALID_IF(moves[i] >= MOVES_COUNT, "Illegal move: %d", moves[i]);
+        SetMonData(DATA.currentMon, MON_DATA_MOVE1 + i, &moves[i]);
+        SetMonData(DATA.currentMon, MON_DATA_PP1 + i, &pp[i]);
+    }
+    DATA.explicitMoves[DATA.currentSide] |= 1 << DATA.currentPartyIndex;
+}
+
 void Friendship_(u32 sourceLine, u32 friendship)
 {
     INVALID_IF(!DATA.currentMon, "Friendship outside of PLAYER/OPPONENT");
