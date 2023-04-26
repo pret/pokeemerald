@@ -226,14 +226,9 @@ static const u16 sEntrainmentTargetSimpleBeamBannedAbilities[] =
 
 static u8 CalcBeatUpPower(void)
 {
-    struct Pokemon *party;
     u8 basePower;
     u16 species;
-
-    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-        party = gPlayerParty;
-    else
-        party = gEnemyParty;
+    struct Pokemon *party = GetBattlerParty(gBattlerAttacker);
 
     // Party slot is incremented by the battle script for Beat Up after this damage calculation
     species = GetMonData(&party[gBattleStruct->beatUpSlot], MON_DATA_SPECIES);
@@ -1995,7 +1990,7 @@ u8 GetImprisonedMovesCount(u8 battlerId, u16 move)
 u32 GetBattlerFriendshipScore(u8 battlerId)
 {
     u8 side = GetBattlerSide(battlerId);
-    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    struct Pokemon *party = GetSideParty(side);
     u16 species = GetMonData(&party[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
 
     if (side != B_SIDE_PLAYER)
@@ -3755,13 +3750,8 @@ u8 AtkCanceller_UnableToUseMove(void)
             #if B_BEAT_UP >= GEN_5
             else if (gBattleMoves[gCurrentMove].effect == EFFECT_BEAT_UP)
             {
-                struct Pokemon* party;
+                struct Pokemon* party = GetBattlerParty(gBattlerAttacker);
                 int i;
-
-                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-                    party = gPlayerParty;
-                else
-                    party = gEnemyParty;
 
                 for (i = 0; i < PARTY_SIZE; i++)
                 {
@@ -3859,10 +3849,7 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
-        if (GetBattlerSide(battler) == B_SIDE_PLAYER)
-            party = gPlayerParty;
-        else
-            party = gEnemyParty;
+        party = GetBattlerParty(battler);
 
         playerId = ((battler & BIT_FLANK) / 2);
         for (i = playerId * MULTI_PARTY_SIZE; i < playerId * MULTI_PARTY_SIZE + MULTI_PARTY_SIZE; i++)
@@ -3896,12 +3883,7 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
         else
         {
             flankId = GetBattlerMultiplayerId(battler);
-
-            if (GetBattlerSide(battler) == B_SIDE_PLAYER)
-                party = gPlayerParty;
-            else
-                party = gEnemyParty;
-
+            party = GetBattlerParty(battler);
             playerId = GetLinkTrainerFlankId(flankId);
         }
 
@@ -4070,7 +4052,7 @@ static void ShouldChangeFormInWeather(u8 battler)
 {
     int i;
     int side = GetBattlerSide(battler);
-    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    struct Pokemon *party = GetSideParty(side);
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -4261,8 +4243,7 @@ bool8 ChangeTypeBasedOnTerrain(u8 battlerId)
 static u16 GetSupremeOverlordModifier(u8 battlerId)
 {
     u32 i;
-    u8 side = GetBattlerSide(battlerId);
-    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    struct Pokemon *party = GetBattlerParty(battlerId);
     u16 modifier = UQ_4_12(1.0);
     bool8 appliedFirstBoost = FALSE;
 
@@ -7291,11 +7272,11 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             case HOLD_EFFECT_RESTORE_PP:
                 if (!moveTurn)
                 {
-                    struct Pokemon *mon;
+                    struct Pokemon *party = GetBattlerParty(battlerId);
+                    struct Pokemon *mon = &party[gBattlerPartyIndexes[battlerId]];
                     u8 ppBonuses;
                     u16 move;
 
-                    mon = GetBattlerPartyData(battlerId);
                     for (i = 0; i < MAX_MON_MOVES; i++)
                     {
                         move = GetMonData(mon, MON_DATA_MOVE1 + i);
@@ -10169,7 +10150,7 @@ void UndoMegaEvolution(u32 monId)
 void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
 {
     u32 i, currSpecies, targetSpecies;
-    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    struct Pokemon *party = GetSideParty(side);
     static const u16 species[][3] =
     {
         // Changed Form ID                      Default Form ID               Should change on switch
@@ -10304,10 +10285,7 @@ bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId)
     if (GetMonAbility(mon) != ABILITY_ILLUSION)
         return FALSE;
 
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        party = gPlayerParty;
-    else
-        party = gEnemyParty;
+    party = GetBattlerParty(battlerId);
 
     if (IsBattlerAlive(BATTLE_PARTNER(battlerId)))
         partnerMon = &party[gBattlerPartyIndexes[BATTLE_PARTNER(battlerId)]];
@@ -10430,17 +10408,6 @@ bool32 TestMoveFlags(u16 move, u32 flag)
     if (gBattleMoves[move].flags & flag)
         return TRUE;
     return FALSE;
-}
-
-struct Pokemon *GetBattlerPartyData(u8 battlerId)
-{
-    struct Pokemon *mon;
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        mon = &gPlayerParty[gBattlerPartyIndexes[battlerId]];
-    else
-        mon = &gEnemyParty[gBattlerPartyIndexes[battlerId]];
-
-    return mon;
 }
 
 static u8 GetFlingPowerFromItemId(u16 itemId)

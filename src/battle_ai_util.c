@@ -3420,7 +3420,7 @@ bool32 IsPartyFullyHealedExceptBattler(u8 battlerId)
 bool32 PartyHasMoveSplit(u8 battlerId, u8 split)
 {
     u8 firstId, lastId;
-    struct Pokemon* party = GetBattlerPartyData(battlerId);
+    struct Pokemon *party = GetBattlerParty(battlerId);
     u32 i, j;
 
     for (i = 0; i < PARTY_SIZE; i++)
