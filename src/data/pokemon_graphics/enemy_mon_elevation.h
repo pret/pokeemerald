@@ -277,8 +277,9 @@ const u8 gEnemyMonElevation[NUM_SPECIES + 1] =
     [SPECIES_GLIMMORA] = 10,
     [SPECIES_VELUZA] = 1,
     [SPECIES_DONDOZO] = 1,
-    [SPECIES_FLUTTER_MANE] = 11,
-    [SPECIES_IRON_MOTH] = 8,
-    [SPECIES_CHI_YU] = 11,
+    [SPECIES_FLUTTER_MANE] = 5,
+    [SPECIES_IRON_JUGULIS] = 7,
+    [SPECIES_IRON_MOTH] = 4,
+    [SPECIES_CHI_YU] = 2,
 #endif
 };

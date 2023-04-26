@@ -772,6 +772,32 @@ const u8 gTaurosPokedexText[] = _(
     "Tauros to battle, it will charge at thick\n"
     "trees and knock them down to calm itself.");
 
+const u8 gTaurosCombatBreedPokedexText[] = _(
+    "This Pokémon has a muscular body\n"
+    "and excels at close-quarters combat.\n"
+    "It uses its short horns to strike\n"
+    "the opponent’s weak spots.");
+
+const u8 gTaurosBlazeBreedPokedexText[] = _(
+    "When heated by fire energy, its horns can\n"
+    "get hotter than 1,800 degrees Fahrenheit.\n"
+    "Those gored by them will suffer\n"
+    "both wounds and burns.");
+
+// Placeholder
+const u8 gTaurosAquaBreedPokedexText[] = _(
+    "When heated by fire energy, its horns can\n"
+    "get hotter than 1,800 degrees Fahrenheit.\n"
+    "Those gored by them will suffer\n"
+    "both wounds and burns.");
+
+// Error massage: array `gTaurosAquaBreedPokedexText' assumed to have one element
+// const u8 gTaurosAquaBreedPokedexText[] = _(
+//     "This Pokémon blasts water from holes on\n"
+//     "the tips of its horns—the high-pressure\n"
+//     "jets pierce right through\n"
+//     "Tauros’s enemies.");
+
 const u8 gMagikarpPokedexText[] = _(
     "Its swimming muscles are weak, so it is\n"
     "easily washed away by currents. In places\n"
@@ -1167,6 +1193,12 @@ const u8 gWooperPokedexText[] = _(
     "out onto land seeking food occasionally.\n"
     "On land, they coat their bodies with a\n"
     "gooey, toxic film.");
+
+const u8 gWooperPaldeaPokedexText[] = _(
+    "After losing a territorial struggle,\n"
+    "Wooper began living on land.\n"
+    "The Pokémon changed over time, developing\n"
+    "a poisonous film to protect its body.");
 
 const u8 gQuagsirePokedexText[] = _(
     "A Quagsire hunts by leaving its mouth wide\n"

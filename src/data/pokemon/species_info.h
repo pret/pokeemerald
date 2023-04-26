@@ -3801,27 +3801,57 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
+#define TAUROS_MISC_INFO                                      \
+        .baseHP        = 75,                                  \
+        .baseAttack    = 100,                                 \
+        .baseDefense   = 95,                                  \
+        .baseSpeed     = 110,                                 \
+        .baseSpAttack  = 40,                                  \
+        .baseSpDefense = 70,                                  \
+        .catchRate = 45,                                      \
+        .expYield = 172,                                      \
+        .genderRatio = MON_MALE,                              \
+        .eggCycles = 20,                                      \
+        .friendship = STANDARD_FRIENDSHIP,                    \
+        .growthRate = GROWTH_SLOW,                            \
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},     \
+        .noFlip = FALSE
+
     [SPECIES_TAUROS] =
     {
-        .baseHP        = 75,
-        .baseAttack    = 100,
-        .baseDefense   = 95,
-        .baseSpeed     = 110,
-        .baseSpAttack  = 40,
-        .baseSpDefense = 70,
         .types = { TYPE_NORMAL, TYPE_NORMAL },
-        .catchRate = 45,
-        .expYield = 172,
         .evYield_Attack    = 1,
         .evYield_Speed     = 1,
-        .genderRatio = MON_MALE,
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_SLOW,
-        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
         .abilities = {ABILITY_INTIMIDATE, ABILITY_ANGER_POINT, ABILITY_SHEER_FORCE},
         .bodyColor = BODY_COLOR_BROWN,
-        .noFlip = FALSE,
+        TAUROS_MISC_INFO
+    },
+
+    [SPECIES_TAUROS_PALDEAN] =
+    {
+        .types = { TYPE_FIGHTING, TYPE_FIGHTING },
+        .evYield_Attack    = 2,
+        .abilities = {ABILITY_INTIMIDATE, ABILITY_ANGER_POINT, ABILITY_CUD_CHEW},
+        .bodyColor = BODY_COLOR_BROWN,
+        TAUROS_MISC_INFO
+    },
+
+    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] =
+    {
+        .types = { TYPE_FIGHTING, TYPE_FIRE },
+        .evYield_Attack    = 2,
+        .abilities = {ABILITY_INTIMIDATE, ABILITY_ANGER_POINT, ABILITY_CUD_CHEW},
+        .bodyColor = BODY_COLOR_BROWN,
+        TAUROS_MISC_INFO
+    },
+
+    [SPECIES_TAUROS_PALDEAN_AQUA_BREED] =
+    {
+        .types = { TYPE_FIGHTING, TYPE_WATER },
+        .evYield_Attack    = 2,
+        .abilities = {ABILITY_INTIMIDATE, ABILITY_ANGER_POINT, ABILITY_CUD_CHEW},
+        .bodyColor = BODY_COLOR_BROWN,
+        TAUROS_MISC_INFO
     },
 
     [SPECIES_MAGIKARP] =
@@ -5314,26 +5344,37 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
+#define WOOPER_MISC_INFO                                                        \
+        .baseHP        = 55,                                                    \
+        .baseAttack    = 45,                                                    \
+        .baseDefense   = 45,                                                    \
+        .baseSpeed     = 15,                                                    \
+        .baseSpAttack  = 25,                                                    \
+        .baseSpDefense = 25,                                                    \
+        .catchRate = 255,                                                       \
+        .expYield = 42,                                                         \
+        .evYield_HP        = 1,                                                 \
+        .genderRatio = PERCENT_FEMALE(50),                                      \
+        .eggCycles = 20,                                                        \
+        .friendship = STANDARD_FRIENDSHIP,                                      \
+        .growthRate = GROWTH_MEDIUM_FAST,                                       \
+        .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_FIELD},                     \
+        .noFlip = FALSE
+
     [SPECIES_WOOPER] =
     {
-        .baseHP        = 55,
-        .baseAttack    = 45,
-        .baseDefense   = 45,
-        .baseSpeed     = 15,
-        .baseSpAttack  = 25,
-        .baseSpDefense = 25,
         .types = { TYPE_WATER, TYPE_GROUND },
-        .catchRate = 255,
-        .expYield = 42,
-        .evYield_HP        = 1,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_FIELD},
         .abilities = {ABILITY_DAMP, ABILITY_WATER_ABSORB, ABILITY_UNAWARE},
         .bodyColor = BODY_COLOR_BLUE,
-        .noFlip = FALSE,
+        WOOPER_MISC_INFO
+    },
+
+    [SPECIES_WOOPER_PALDEAN] =
+    {
+        .types = { TYPE_WATER, TYPE_GROUND },
+        .abilities = {ABILITY_POISON_POINT, ABILITY_WATER_ABSORB, ABILITY_UNAWARE},
+        .bodyColor = BODY_COLOR_BROWN,
+        WOOPER_MISC_INFO
     },
 
     [SPECIES_QUAGSIRE] =
