@@ -34,7 +34,7 @@ SINGLE_BATTLE_TEST("Misty Terrain activates Misty Seed and Mimicry")
         MESSAGE("Using Misty Seed, the Sp. Def of Wobbuffet rose!");
         ABILITY_POPUP(opponent);
         MESSAGE("Foe Stunfisk's type changed to Fairy!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].type1, TYPE_FAIRY);
     }
 }

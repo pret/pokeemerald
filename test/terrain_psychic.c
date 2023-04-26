@@ -33,7 +33,7 @@ SINGLE_BATTLE_TEST("Psychic Terrain activates Psychic Seed and Mimicry")
         MESSAGE("Using Psychic Seed, the Sp. Def of Wobbuffet rose!");
         ABILITY_POPUP(opponent);
         MESSAGE("Foe Stunfisk's type changed to Psychc!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].type1, TYPE_PSYCHIC);
     }
 }

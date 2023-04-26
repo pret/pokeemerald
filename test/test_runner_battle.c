@@ -1719,7 +1719,6 @@ void QueueMessage(u32 sourceLine, const u8 *pattern)
     };
 }
 
-
 void QueueStatus(u32 sourceLine, struct BattlePokemon *battler, struct StatusEventContext ctx)
 {
     s32 battlerId = battler - gBattleMons;
@@ -1758,4 +1757,12 @@ void QueueStatus(u32 sourceLine, struct BattlePokemon *battler, struct StatusEve
             .mask = mask,
         }},
     };
+}
+
+void ValidateFinally(u32 sourceLine)
+{
+    // Defer this error until after estimating the cost.
+    if (STATE->results == NULL)
+        return;
+    INVALID_IF(STATE->parametersCount == 0, "FINALLY without PARAMETRIZE");
 }

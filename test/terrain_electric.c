@@ -34,7 +34,7 @@ SINGLE_BATTLE_TEST("Electric Terrain activates Electric Seed and Mimicry")
         MESSAGE("Using Electric Seed, the Defense of Wobbuffet rose!");
         ABILITY_POPUP(opponent);
         MESSAGE("Foe Stunfisk's type changed to Electr!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].type1, TYPE_ELECTRIC);
     }
 }

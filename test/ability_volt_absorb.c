@@ -80,8 +80,7 @@ DOUBLE_BATTLE_TEST("Volt Absorb does not stop Electric Typed Explosion from dama
         MESSAGE("Jolteon restored HP using its Volt Absorb!");
         HP_BAR(playerRight, captureDamage: &results->damage1);
         HP_BAR(opponentRight, captureDamage: &results->damage2);
-    }
-    FINALLY {
+    } THEN {
         EXPECT_NE(results[0].damage1, 0);
         EXPECT_NE(results[0].damage2, 0);
     }
