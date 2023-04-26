@@ -142,7 +142,7 @@ SINGLE_BATTLE_TEST("Swallow heals HP depending on Stockpile's count", s16 hpHeal
     }
 }
 
-SINGLE_BATTLE_TEST("Stockpile temporarily raises Def and Sp.Def", s16 dmgPyhsical, s16 dmgSpecial)
+SINGLE_BATTLE_TEST("Stockpile temporarily raises Def and Sp. Def", s16 dmgPyhsical, s16 dmgSpecial)
 {
     u16 move;
     PARAMETRIZE {move = MOVE_STOCKPILE;}
@@ -161,8 +161,8 @@ SINGLE_BATTLE_TEST("Stockpile temporarily raises Def and Sp.Def", s16 dmgPyhsica
         if (move == MOVE_STOCKPILE) {
             MESSAGE("Wobbuffet stockpiled 1!");
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Wobbuffet's defense rose!");
-            MESSAGE("Wobbuffet's sp. defense rose!");
+            MESSAGE("Wobbuffet's Defense rose!");
+            MESSAGE("Wobbuffet's Sp. Def rose!");
         }
 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
@@ -176,7 +176,7 @@ SINGLE_BATTLE_TEST("Stockpile temporarily raises Def and Sp.Def", s16 dmgPyhsica
     }
 }
 
-DOUBLE_BATTLE_TEST("Stockpile's Def and Sp.Def boost is lost after using Spit Up or Swallow", s16 dmgPyhsicalBefore, s16 dmgPhysicalAfter, s16 dmgSpecialBefore, s16 dmgSpecialAfter)
+DOUBLE_BATTLE_TEST("Stockpile's Def and Sp. Def boost is lost after using Spit Up or Swallow", s16 dmgPyhsicalBefore, s16 dmgPhysicalAfter, s16 dmgSpecialBefore, s16 dmgSpecialAfter)
 {
     u8 count;
     u16 move;
@@ -217,24 +217,24 @@ DOUBLE_BATTLE_TEST("Stockpile's Def and Sp.Def boost is lost after using Spit Up
         ANIMATION(ANIM_TYPE_MOVE, move, playerLeft);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
         if (count == 1) {
-            MESSAGE("Wobbuffet's defense fell!");
+            MESSAGE("Wobbuffet's Defense fell!");
         }
         else if (count == 2) {
-            MESSAGE("Wobbuffet's defense harshly fell!");
+            MESSAGE("Wobbuffet's Defense harshly fell!");
         }
         else {
-            MESSAGE("Wobbuffet's defense severely fell!");
+            MESSAGE("Wobbuffet's Defense severely fell!");
         }
 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
         if (count == 1) {
-            MESSAGE("Wobbuffet's sp. defense fell!");
+            MESSAGE("Wobbuffet's Sp. Def fell!");
         }
         else if (count == 2) {
-            MESSAGE("Wobbuffet's sp. defense harshly fell!");
+            MESSAGE("Wobbuffet's Sp. Def harshly fell!");
         }
         else {
-            MESSAGE("Wobbuffet's sp. defense severely fell!");
+            MESSAGE("Wobbuffet's Sp. Def severely fell!");
         }
         MESSAGE("Wobbuffet's stockpiled effect wore off!");
 

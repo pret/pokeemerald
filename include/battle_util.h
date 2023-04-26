@@ -196,7 +196,7 @@ bool32 IsPartnerMonFromSameTrainer(u8 battlerId);
 u8 GetSplitBasedOnStats(u8 battlerId);
 void SortBattlersBySpeed(u8 *battlers, bool8 slowToFast);
 bool32 TestSheerForceFlag(u8 battler, u16 move);
-void TryRestoreStolenItems(void);
+void TryRestoreHeldItems(void);
 bool32 CanStealItem(u8 battlerStealing, u8 battlerItem, u16 item);
 void TrySaveExchangedItem(u8 battlerId, u16 stolenItem);
 bool32 IsPartnerMonFromSameTrainer(u8 battlerId);
@@ -233,5 +233,6 @@ u32 GetBattlerFriendshipScore(u8 battlerId);
 u32 CountBattlerStatIncreases(u8 battlerId, bool32 countEvasionAcc);
 bool32 IsMyceliumMightOnField(void);
 bool8 ChangeTypeBasedOnTerrain(u8 battlerId);
+void RemoveConfusionStatus(u8 battlerId);
 
 #endif // GUARD_BATTLE_UTIL_H

@@ -843,6 +843,7 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_BLACK_AUGURITE] = {gItemIcon_BlackAugurite, gItemIconPalette_BlackAugurite},
     [ITEM_LINKING_CORD] = {gItemIcon_LinkingCord, gItemIconPalette_LinkingCord},
     [ITEM_PEAT_BLOCK] = {gItemIcon_PeatBlock, gItemIconPalette_PeatBlock},
+    [ITEM_BERSERK_GENE] = {gItemIcon_BerserkGene, gItemIconPalette_BerserkGene},
     // Return to field arrow
     [ITEMS_COUNT] = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
 };

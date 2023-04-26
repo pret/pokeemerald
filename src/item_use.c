@@ -1154,7 +1154,7 @@ static bool32 CannotUseBagBattleItem(u16 itemId)
     }
     // Dire Hit
     if (battleUsage == EFFECT_ITEM_SET_FOCUS_ENERGY
-        && !(gBattleMons[gBattlerInMenuId].status2 & STATUS2_FOCUS_ENERGY))
+        && (gBattleMons[gBattlerInMenuId].status2 & STATUS2_FOCUS_ENERGY))
     {
         cannotUse++;
     }
@@ -1229,10 +1229,11 @@ void ItemUseInBattle_BagMenu(u8 taskId)
     {
         PlaySE(SE_SELECT);
         RemoveUsedItem();
+        ScheduleBgCopyTilemapToVram(2);
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, Task_FadeAndCloseBagMenu);
+            gTasks[taskId].func = Task_FadeAndCloseBagMenu;
         else
-            DisplayItemMessageInBattlePyramid(taskId, gStringVar4, CloseBattlePyramidBag);
+            gTasks[taskId].func = CloseBattlePyramidBag;
     }
 }
 

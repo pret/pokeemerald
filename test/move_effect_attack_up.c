@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Meditate raises Attack", s16 damage)
         if (raiseAttack) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_MEDITATE, player);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Wobbuffet's attack rose!");
+            MESSAGE("Wobbuffet's Attack rose!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
         HP_BAR(opponent, captureDamage: &results[i].damage);

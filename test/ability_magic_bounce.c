@@ -74,11 +74,11 @@ DOUBLE_BATTLE_TEST("Magic Bounce bounces back moves hitting both foes at two foe
         MESSAGE("Abra's Leer was bounced back by Foe Espeon's Magic Bounce!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LEER, opponentLeft);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Abra's defense fell!");
+        MESSAGE("Abra's Defense fell!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Kadabra's defense fell!");
+        MESSAGE("Kadabra's Defense fell!");
         // Also check if second original target gets hit by Leer as this was once bugged
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("Foe Wynaut's defense fell!");
+        MESSAGE("Foe Wynaut's Defense fell!");
     }
 }

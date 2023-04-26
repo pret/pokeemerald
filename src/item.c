@@ -973,6 +973,8 @@ u32 GetItemStatus1Mask(u16 itemId)
     const u8 *effect = GetItemEffect(itemId);
     switch (effect[3])
     {
+        case ITEM3_PARALYSIS:
+            return STATUS1_PARALYSIS;
         case ITEM3_FREEZE:
             return STATUS1_FREEZE;
         case ITEM3_BURN:

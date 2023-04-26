@@ -1919,7 +1919,7 @@ const struct SpindaSpot gSpindaSpotGraphics[] =
 #include "data/pokemon/item_effects.h"
 
 const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
-{                      // Attack  Defense  Speed  Sp.Atk  Sp.Def
+{                      // Attack  Defense  Speed  Sp.Atk  Sp. Def
     [NATURE_HARDY]   = {    0,      0,      0,      0,      0   },
     [NATURE_LONELY]  = {   +1,     -1,      0,      0,      0   },
     [NATURE_BRAVE]   = {   +1,      0,     -1,      0,      0   },
@@ -5854,7 +5854,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             if (itemEffect[10] & ITEM10_IS_VITAMIN)
                                 evCap = EV_ITEM_RAISE_LIMIT;
                             else
-                                evCap = 252;
+                                evCap = MAX_PER_STAT_EVS;
 
                             if (dataSigned >= evCap)
                                 break;
@@ -5880,6 +5880,10 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                 break;
                             }
                             dataSigned += evChange;
+                            #if I_EV_LOWERING_BERRY_JUMP == GEN_4
+                            if (dataSigned > 100)
+                                dataSigned = 100;
+                            #endif
                             if (dataSigned < 0)
                                 dataSigned = 0;
                         }
@@ -6030,7 +6034,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             if (itemEffect[10] & ITEM10_IS_VITAMIN)
                                 evCap = EV_ITEM_RAISE_LIMIT;
                             else
-                                evCap = 252;
+                                evCap = MAX_PER_STAT_EVS;
 
                             if (dataSigned >= evCap)
                                 break;
@@ -6056,6 +6060,10 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                 break;
                             }
                             dataSigned += evChange;
+                            #if I_BERRY_EV_JUMP == GEN_4
+                            if (dataSigned > 100)
+                                dataSigned = 100;
+                            #endif
                             if (dataSigned < 0)
                                 dataSigned = 0;
                         }
@@ -6626,7 +6634,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                 RtcCalcLocalTime();
                 if (gLocalTime.hours >= 0 && gLocalTime.hours < 12 && gEvolutionTable[species][i].param == evolutionItem)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
-                break;   
+                break;
             }
         }
         break;
