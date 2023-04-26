@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test_battle.h"
 
-SINGLE_BATTLE_TEST("X Attack sharply raises battler's Attack stat", s16 damage)
+SINGLE_BATTLE_TEST("Increase Stat: X Attack sharply raises battler's Attack stat", s16 damage)
 {
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("X Attack sharply raises battler's Attack stat", s16 damage)
     }
 }
 
-SINGLE_BATTLE_TEST("X Defense sharply raises battler's Defense stat", s16 damage)
+SINGLE_BATTLE_TEST("Increase Stat: X Defense sharply raises battler's Defense stat", s16 damage)
 {
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("X Defense sharply raises battler's Defense stat", s16 damage
     }
 }
 
-SINGLE_BATTLE_TEST("X Sp. Atk sharply raises battler's Sp. Attack stat", s16 damage)
+SINGLE_BATTLE_TEST("Increase Stat: X Sp. Atk sharply raises battler's Sp. Attack stat", s16 damage)
 {
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -70,7 +70,7 @@ SINGLE_BATTLE_TEST("X Sp. Atk sharply raises battler's Sp. Attack stat", s16 dam
     }
 }
 
-SINGLE_BATTLE_TEST("X Sp. Def sharply raises battler's Sp. Defense stat", s16 damage)
+SINGLE_BATTLE_TEST("Increase Stat: X Sp. Def sharply raises battler's Sp. Defense stat", s16 damage)
 {
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -93,7 +93,7 @@ SINGLE_BATTLE_TEST("X Sp. Def sharply raises battler's Sp. Defense stat", s16 da
     }
 }
 
-SINGLE_BATTLE_TEST("X Speed sharply raises battler's Speed stat", s16 damage)
+SINGLE_BATTLE_TEST("Increase Stat: X Speed sharply raises battler's Speed stat", s16 damage)
 {
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -106,7 +106,7 @@ SINGLE_BATTLE_TEST("X Speed sharply raises battler's Speed stat", s16 damage)
         OPPONENT(SPECIES_WOBBUFFET) { Speed(4); };
     }
     else
-    { 
+    {
         PLAYER(SPECIES_WOBBUFFET) { Speed(4); };
         OPPONENT(SPECIES_WOBBUFFET) { Speed(5); };
     }
@@ -118,7 +118,7 @@ SINGLE_BATTLE_TEST("X Speed sharply raises battler's Speed stat", s16 damage)
         {
             MESSAGE("Wobbuffet used Tackle!");
             MESSAGE("Foe Wobbuffet used Tackle!");
-        } else 
+        } else
         {
             MESSAGE("Foe Wobbuffet used Tackle!");
             MESSAGE("Wobbuffet used Tackle!");
@@ -126,7 +126,7 @@ SINGLE_BATTLE_TEST("X Speed sharply raises battler's Speed stat", s16 damage)
     }
 }
 
-SINGLE_BATTLE_TEST("X Accuracy sharply raises battler's Accuracy stat", s16 damage)
+SINGLE_BATTLE_TEST("Increase Stat: X Accuracy sharply raises battler's Accuracy stat", s16 damage)
 {
 
     ASSUME(gBattleMoves[MOVE_SING].accuracy == 55);
@@ -144,5 +144,110 @@ SINGLE_BATTLE_TEST("X Accuracy sharply raises battler's Accuracy stat", s16 dama
     } SCENE {
         MESSAGE("Wobbuffet used Sing!");
         MESSAGE("Foe Wobbuffet fell asleep!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Increase Stat: Max Mushrooms raises battler's Attack stat", s16 damage)
+{
+    u16 useItem;
+    PARAMETRIZE { useItem = FALSE; }
+    PARAMETRIZE { useItem = TRUE; }
+    GIVEN {
+        ASSUME(gItems[ITEM_MAX_MUSHROOMS].battleUsage == EFFECT_ITEM_INCREASE_ALL_STATS);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        if (useItem) TURN { USE_ITEM(player, ITEM_MAX_MUSHROOMS); }
+        TURN { MOVE(player, MOVE_TACKLE); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Tackle!");
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_MUL_EQ(results[0].damage, Q_4_12(1.5), results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Increase Stat: Max Mushrooms raises battler's Defense stat", s16 damage)
+{
+    u16 useItem;
+    PARAMETRIZE { useItem = FALSE; }
+    PARAMETRIZE { useItem = TRUE; }
+    GIVEN {
+        ASSUME(gItems[ITEM_MAX_MUSHROOMS].battleUsage == EFFECT_ITEM_INCREASE_ALL_STATS);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        if (useItem) TURN { USE_ITEM(player, ITEM_MAX_MUSHROOMS); }
+        TURN { MOVE(opponent, MOVE_TACKLE); }
+    } SCENE {
+        MESSAGE("Foe Wobbuffet used Tackle!");
+        HP_BAR(player, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_MUL_EQ(results[0].damage, Q_4_12(0.66), results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Increase Stat: Max Mushrooms raises battler's Sp. Attack stat", s16 damage)
+{
+    u16 useItem;
+    PARAMETRIZE { useItem = FALSE; }
+    PARAMETRIZE { useItem = TRUE; }
+    GIVEN {
+        ASSUME(gItems[ITEM_MAX_MUSHROOMS].battleUsage == EFFECT_ITEM_INCREASE_ALL_STATS);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        if (useItem) TURN { USE_ITEM(player, ITEM_MAX_MUSHROOMS); }
+        TURN { MOVE(player, MOVE_DISARMING_VOICE); }
+    } SCENE {
+        MESSAGE("Wobbuffet used DisrmngVoice!");
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_MUL_EQ(results[0].damage, Q_4_12(1.5), results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Increase Stat: Max Mushrooms battler's Sp. Defense stat", s16 damage)
+{
+    u16 useItem;
+    PARAMETRIZE { useItem = FALSE; }
+    PARAMETRIZE { useItem = TRUE; }
+    GIVEN {
+        ASSUME(gItems[ITEM_MAX_MUSHROOMS].battleUsage == EFFECT_ITEM_INCREASE_ALL_STATS);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        if (useItem) TURN { USE_ITEM(player, ITEM_MAX_MUSHROOMS); }
+        TURN { MOVE(opponent, MOVE_DISARMING_VOICE); }
+    } SCENE {
+        MESSAGE("Foe Wobbuffet used DisrmngVoice!");
+        HP_BAR(player, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_MUL_EQ(results[0].damage, Q_4_12(0.66), results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Increase Stat: Max Mushrooms raises battler's Speed stat", s16 damage)
+{
+    u16 useItem;
+    PARAMETRIZE { useItem = FALSE; }
+    PARAMETRIZE { useItem = TRUE; }
+    GIVEN {
+        ASSUME(gItems[ITEM_MAX_MUSHROOMS].battleUsage == EFFECT_ITEM_INCREASE_ALL_STATS);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(4); };
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); };
+    } WHEN {
+        if (useItem) TURN { USE_ITEM(player, ITEM_MAX_MUSHROOMS); }
+        TURN { MOVE(player, MOVE_TACKLE); MOVE(opponent, MOVE_TACKLE); }
+    } SCENE {
+        if (useItem)
+        {
+            MESSAGE("Wobbuffet used Tackle!");
+            MESSAGE("Foe Wobbuffet used Tackle!");
+        } else
+        {
+            MESSAGE("Foe Wobbuffet used Tackle!");
+            MESSAGE("Wobbuffet used Tackle!");
+        }
     }
 }
