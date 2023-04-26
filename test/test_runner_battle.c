@@ -939,6 +939,8 @@ static bool32 BattleTest_HandleExitWithResult(void *data, enum TestResult result
 
 void Randomly(u32 sourceLine, u32 passes, u32 trials, struct RandomlyContext ctx)
 {
+    const struct BattleTest *test = gTestRunnerState.test->data;
+    INVALID_IF(test->resultsSize > 0, "PASSES_RANDOMLY is incompatible with results");
     INVALID_IF(passes > trials, "%d passes specified, but only %d trials", passes, trials);
     STATE->rngTag = ctx.tag;
     STATE->runTrial = 0;
