@@ -491,7 +491,7 @@ static void Task_HandleScrollingMultichoiceInput(u8 taskId)
     case LIST_NOTHING_CHOSEN:
         break;
     case LIST_CANCEL:
-        if (gTasks[taskId].data[1])
+        if (!gTasks[taskId].data[1])
         {
             gSpecialVar_Result = 0x7F;
             done = TRUE;
