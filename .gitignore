@@ -35,7 +35,13 @@ prefabs.json
 .vscode/
 *.a
 .fuse_hidden*
+.ccls-cache/*
+.ropeproject/
+/overworld/
+/icons/
 *.sna
 *.diff
 *.sym
 *.js
+agbcc/
+/*.zip
