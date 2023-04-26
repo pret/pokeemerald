@@ -5174,7 +5174,7 @@ BattleScript_MoveWeatherChange::
 	waitanimation
 	printfromtable gMoveWeatherChangeStringIds
 	waitmessage B_WAIT_TIME_LONG
-	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectSunnyDay::
@@ -6878,7 +6878,7 @@ BattleScript_OverworldWeatherStarts::
 	printfromtable gWeatherStartsStringIds
 	waitmessage B_WAIT_TIME_LONG
 	playanimation_var BS_ATTACKER, sB_ANIM_ARG1
-	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_OverworldTerrain::
@@ -8430,7 +8430,7 @@ BattleScript_DrizzleActivates::
 	printstring STRINGID_PKMNMADEITRAIN
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_RAIN_CONTINUES
-	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_AbilityRaisesDefenderStat::
@@ -8592,7 +8592,7 @@ BattleScript_SandstreamActivates::
 	printstring STRINGID_PKMNSXWHIPPEDUPSANDSTORM
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_SANDSTORM_CONTINUES
-	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_SandSpitActivates::
@@ -8601,7 +8601,7 @@ BattleScript_SandSpitActivates::
 	printstring STRINGID_ASANDSTORMKICKEDUP
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_SANDSTORM_CONTINUES
-	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	return
 
 BattleScript_ShedSkinActivates::
@@ -8611,37 +8611,15 @@ BattleScript_ShedSkinActivates::
 	updatestatusicon BS_ATTACKER
 	end3
 
-BattleScript_WeatherFormChanges::
-	setbyte sBATTLER, 0
-BattleScript_WeatherFormChangesLoop::
-	tryweatherformdatachange
-	activateweatherchangeabilities BS_SCRIPTING
-	addbyte sBATTLER, 1
-	jumpifbytenotequal sBATTLER, gBattlersCount, BattleScript_WeatherFormChangesLoop
-	return
-
-BattleScript_WeatherFormChange::
-	call BattleScript_DoWeatherFormChange
-	end3
-
-BattleScript_DoWeatherFormChange::
-	copybyte gBattlerAbility, sBATTLER
-.if B_WEATHER_FORMS >= GEN_5
-	jumpifspecies BS_SCRIPTING, SPECIES_CASTFORM, BattleScript_DoWeatherFormChange_ForecastCheck
-BattleScript_DoWeatherFormChange_FlowerGiftCheck:
-	jumpifability BS_SCRIPTING, ABILITY_FLOWER_GIFT, BattleScript_DoWeatherFormChange_PopUp
-	goto BattleScript_DoWeatherFormChange_AfterPopUp
-.endif
-BattleScript_DoWeatherFormChange_ForecastCheck:
-	jumpifability BS_SCRIPTING, ABILITY_FORECAST, BattleScript_DoWeatherFormChange_PopUp
-	goto BattleScript_DoWeatherFormChange_AfterPopUp
-BattleScript_DoWeatherFormChange_PopUp:
-	call BattleScript_AbilityPopUp
-BattleScript_DoWeatherFormChange_AfterPopUp:
-	doweatherformchangeanimation
-	waitstate
-	printstring STRINGID_PKMNTRANSFORMED
-	waitmessage B_WAIT_TIME_LONG
+BattleScript_ActivateWeatherAbilities:
+	copybyte sBATTLER, gBattlerAttacker
+	setbyte gBattlerAttacker, 0
+BattleScript_ActivateWeatherAbilities_Loop:
+	activateweatherchangeabilities BS_ATTACKER
+BattleScript_ActivateWeatherAbilities_Increment:
+	addbyte gBattlerAttacker, 1
+	jumpifbytenotequal gBattlerAttacker, gBattlersCount, BattleScript_ActivateWeatherAbilities_Loop
+	copybyte gBattlerAttacker, sBATTLER
 	return
 
 BattleScript_TryAdrenalineOrb:
@@ -8736,7 +8714,7 @@ BattleScript_DroughtActivates::
 	printstring STRINGID_PKMNSXINTENSIFIEDSUN
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_SUN_CONTINUES
-	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_DesolateLandActivates::
@@ -8745,7 +8723,7 @@ BattleScript_DesolateLandActivates::
 	printstring STRINGID_EXTREMELYHARSHSUNLIGHT
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_SUN_CONTINUES
-	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_DesolateLandEvaporatesWaterTypeMoves::
@@ -8765,7 +8743,7 @@ BattleScript_PrimordialSeaActivates::
 	printstring STRINGID_HEAVYRAIN
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_RAIN_CONTINUES
-	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_PrimordialSeaFizzlesOutFireTypeMoves::
@@ -8842,7 +8820,7 @@ BattleScript_SnowWarningActivates::
 	printstring STRINGID_SNOWWARNINGHAIL
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_HAIL_CONTINUES
-	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_ActivateTerrainEffects:
@@ -10005,7 +9983,7 @@ BattleScript_AnnounceAirLockCloudNine::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_AIRLOCKACTIVATES
 	waitmessage B_WAIT_TIME_LONG
-	call BattleScript_WeatherFormChanges
+	call BattleScript_ActivateWeatherAbilities
 	end3
 
 BattleScript_QuickClawActivation::

@@ -2564,8 +2564,16 @@ u8 DoFieldEndTurnEffects(void)
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_WEATHER_FORM:
-            AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, 0, 0, 0, 0);
-            gBattleStruct->turnCountersTracker++;
+            for (i = 0; i < gBattlersCount; ++i)
+            {
+                if (AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, i, 0, 0, 0))
+                {
+                    effect++;
+                    break;
+                }
+            }
+            if (effect == 0)
+                gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_STATUS_HEAL:
             for (gBattlerAttacker = 0; gBattlerAttacker < gBattlersCount; gBattlerAttacker++)
@@ -6155,11 +6163,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
 #else
         TRY_WEATHER_FORM:
 #endif
-            effect = TryWeatherFormChange(battler);
-            if (effect != 0)
+            if ((IsBattlerWeatherAffected(battler, gBattleWeather) || gBattleWeather == B_WEATHER_NONE)
+             && TryBattleFormChange(battler, FORM_CHANGE_BATTLE_WEATHER))
             {
-                BattleScriptPushCursorAndCallback(BattleScript_WeatherFormChange);
-                *(&gBattleStruct->formToChangeInto) = effect - 1;
+                BattleScriptPushCursorAndCallback(BattleScript_BattlerFormChangeWithStringEnd3);
+                effect++;
             }
             break;
         case ABILITY_ICE_FACE:
@@ -10153,6 +10161,11 @@ u16 GetBattleFormChangeTargetSpecies(u8 battlerId, u16 method)
                         }
                     }
                     break;
+                case FORM_CHANGE_BATTLE_WEATHER:
+                    if (gBattleWeather & formChanges[i].param1
+                        || (gBattleWeather == B_WEATHER_NONE && formChanges[i].param1 == B_WEATHER_NONE))
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
                 case FORM_CHANGE_BATTLE_TURN_END:
                     if (formChanges[i].param1 == GetBattlerAbility(battlerId))
                         targetSpecies = formChanges[i].targetSpecies;
@@ -10168,7 +10181,8 @@ u16 GetBattleFormChangeTargetSpecies(u8 battlerId, u16 method)
 bool32 CanBattlerFormChange(u8 battlerId, u16 method)
 {
     // Can't change form if transformed.
-    if (gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)
+    if (gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED
+        && B_TRANSFORM_FORM_CHANGES >= GEN_5)
         return FALSE;
     // Mega Evolved Pokémon should always revert to normal upon fainting or ending the battle.
     if (IsBattlerMegaEvolved(battlerId) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))

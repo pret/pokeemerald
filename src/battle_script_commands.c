@@ -6217,28 +6217,6 @@ static void Cmd_moveend(void)
             }
             gBattleScripting.moveendState++;
             break;
-        case MOVEEND_WEATHER_FORM:
-            for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-            {
-                switch (gBattleMons[i].species)
-                {
-                case SPECIES_CASTFORM:
-                case SPECIES_CASTFORM_RAINY:
-                case SPECIES_CASTFORM_SNOWY:
-                case SPECIES_CASTFORM_SUNNY:
-                case SPECIES_CHERRIM:
-                case SPECIES_CHERRIM_SUNSHINE:
-                    effect = TryWeatherFormChange(i);
-                    if (effect)
-                    {
-                        BattleScriptPushCursorAndCallback(BattleScript_WeatherFormChange);
-                        gBattleScripting.battler = i;
-                        gBattleStruct->formToChangeInto = effect - 1;
-                    }
-                }
-            }
-            gBattleScripting.moveendState++;
-            break;
         case MOVEEND_SYMBIOSIS:
             for (i = 0; i < gBattlersCount; i++)
             {
@@ -15125,13 +15103,13 @@ static void Cmd_tryweatherformdatachange(void)
 
     u8 form;
 
-    gBattlescriptCurrInstr = cmd->nextInstr;
-    form = TryWeatherFormChange(gBattleScripting.battler);
-    if (form)
-    {
-        BattleScriptPushCursorAndCallback(BattleScript_WeatherFormChange);
-        *(&gBattleStruct->formToChangeInto) = form - 1;
-    }
+    // gBattlescriptCurrInstr = cmd->nextInstr;
+    // form = TryWeatherFormChange(gBattleScripting.battler);
+    // if (form)
+    // {
+    //     BattleScriptPushCursorAndCallback(BattleScript_WeatherFormChange);
+    //     *(&gBattleStruct->formToChangeInto) = form - 1;
+    // }
 }
 
 // Water and Mud Sport
