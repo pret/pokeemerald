@@ -134,6 +134,8 @@ static void BattleTest_SetUp(void *data)
         Test_ExitWithResult(TEST_RESULT_ERROR, "OOM: STATE = AllocZerod(%d)", sizeof(*STATE));
     InvokeTestFunction(test);
     STATE->parameters = STATE->parametersCount;
+    if (STATE->parametersCount == 0 && test->resultsSize > 0)
+        Test_ExitWithResult(TEST_RESULT_INVALID, "results without PARAMETRIZE");
     STATE->results = AllocZeroed(test->resultsSize * STATE->parameters);
     if (!STATE->results)
         Test_ExitWithResult(TEST_RESULT_ERROR, "OOM: STATE->results = AllocZerod(%d)", sizeof(test->resultsSize * STATE->parameters));

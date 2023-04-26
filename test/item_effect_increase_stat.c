@@ -126,7 +126,7 @@ SINGLE_BATTLE_TEST("X Speed sharply raises battler's Speed stat", s16 damage)
     }
 }
 
-SINGLE_BATTLE_TEST("X Accuracy sharply raises battler's Accuracy stat", s16 damage)
+SINGLE_BATTLE_TEST("X Accuracy sharply raises battler's Accuracy stat")
 {
 
     ASSUME(gBattleMoves[MOVE_SING].accuracy == 55);
