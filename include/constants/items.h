@@ -972,8 +972,9 @@
 #define ITEM_BLACK_AUGURITE 795
 #define ITEM_LINKING_CORD 796
 #define ITEM_PEAT_BLOCK 797
+#define ITEM_BERSERK_GENE 798
 
-#define ITEMS_COUNT 798
+#define ITEMS_COUNT 799
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
@@ -1030,14 +1031,27 @@
 #define EXP_30000 5
 
 // Item type IDs (used to determine the exit callback)
-#define ITEM_USE_MAIL        0
-#define ITEM_USE_PARTY_MENU  1
-#define ITEM_USE_FIELD       2
-#define ITEM_USE_PBLOCK_CASE 3
-#define ITEM_USE_BAG_MENU    4 // No exit callback, stays in bag menu
+#define ITEM_USE_MAIL             0
+#define ITEM_USE_PARTY_MENU       1
+#define ITEM_USE_FIELD            2
+#define ITEM_USE_PBLOCK_CASE      3
+#define ITEM_USE_BAG_MENU         4 // No exit callback, stays in bag menu
+#define ITEM_USE_PARTY_MENU_MOVES 5
 
-// Item battle usage IDs (only checked to see if nonzero)
-#define ITEM_B_USE_MEDICINE 1
-#define ITEM_B_USE_OTHER    2
+// Item battle script IDs (need to be non-zero)
+#define EFFECT_ITEM_RESTORE_HP              1
+#define EFFECT_ITEM_CURE_STATUS             2
+#define EFFECT_ITEM_HEAL_AND_CURE_STATUS    3
+#define EFFECT_ITEM_INCREASE_STAT           4
+#define EFFECT_ITEM_SET_MIST                5
+#define EFFECT_ITEM_SET_FOCUS_ENERGY        6
+#define EFFECT_ITEM_ESCAPE                  7
+#define EFFECT_ITEM_THROW_BALL              8
+#define EFFECT_ITEM_REVIVE                  9
+#define EFFECT_ITEM_RESTORE_PP              10
+#define EFFECT_ITEM_INCREASE_ALL_STATS      11
+
+// Enigma Berry dummy constant
+#define EFFECT_ITEM_ENIGMA_BERRY_EREADER    1
 
 #endif  // GUARD_CONSTANTS_ITEMS_H

@@ -165,7 +165,7 @@ DOUBLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes Stealth Rock and S
             MESSAGE("Pointed stones dug into Wobbuffet!");
             MESSAGE("Wobbuffet was caught in a Sticky Web!");
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-            MESSAGE("Wobbuffet's speed fell!");
+            MESSAGE("Wobbuffet's Speed fell!");
         }
         else {
             NONE_OF {
@@ -173,7 +173,7 @@ DOUBLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes Stealth Rock and S
                 MESSAGE("Pointed stones dug into Wobbuffet!");
                 MESSAGE("Wobbuffet was caught in a Sticky Web!");
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-                MESSAGE("Wobbuffet's speed fell!");
+                MESSAGE("Wobbuffet's Speed fell!");
             }
         }
     }

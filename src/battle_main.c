@@ -594,6 +594,7 @@ static void CB2_InitBattleInternal(void)
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
             CreateNPCTrainerParty(&gEnemyParty[PARTY_SIZE / 2], gTrainerBattleOpponent_B, FALSE);
         SetWildMonHeldItem();
+        CalculateEnemyPartyCount();
     }
 
     gMain.inBattle = TRUE;
@@ -3177,7 +3178,7 @@ static void BattleStartClearSetData(void)
     {
         gBattleStruct->usedHeldItems[i][B_SIDE_PLAYER] = 0;
         gBattleStruct->usedHeldItems[i][B_SIDE_OPPONENT] = 0;
-        gBattleStruct->itemStolen[i].originalItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+        gBattleStruct->itemLost[i].originalItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
         gPartyCriticalHits[i] = 0;
         gBattleStruct->allowedToChangeFormInWeather[i][B_SIDE_PLAYER] = FALSE;
         gBattleStruct->allowedToChangeFormInWeather[i][B_SIDE_OPPONENT] = FALSE;
@@ -3214,7 +3215,7 @@ void SwitchInClearSetData(void)
         gStatuses3[gActiveBattler] &= (STATUS3_LEECHSEED_BATTLER | STATUS3_LEECHSEED | STATUS3_ALWAYS_HITS | STATUS3_PERISH_SONG | STATUS3_ROOTED
                                        | STATUS3_GASTRO_ACID | STATUS3_EMBARGO | STATUS3_TELEKINESIS | STATUS3_MAGNET_RISE | STATUS3_HEAL_BLOCK
                                        | STATUS3_AQUA_RING | STATUS3_POWER_TRICK);
-        gStatuses4[gActiveBattler] &= (STATUS4_MUD_SPORT | STATUS4_WATER_SPORT);
+        gStatuses4[gActiveBattler] &= (STATUS4_MUD_SPORT | STATUS4_WATER_SPORT | STATUS4_INFINITE_CONFUSION);
         for (i = 0; i < gBattlersCount; i++)
         {
             if (GetBattlerSide(gActiveBattler) != GetBattlerSide(i)
@@ -3785,7 +3786,9 @@ static void TryDoEventsBeforeFirstTurn(void)
     {
         for (i = 0; i < gBattlersCount; i++)
         {
-            if (gBattleMons[i].hp == 0 || gBattleMons[i].species == SPECIES_NONE || GetMonData(GetBattlerPartyData(i), MON_DATA_IS_EGG))
+            struct Pokemon *party = GetBattlerParty(i);
+            struct Pokemon *mon = &party[gBattlerPartyIndexes[i]];
+            if (gBattleMons[i].hp == 0 || gBattleMons[i].species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG))
                 gAbsentBattlerFlags |= gBitTable[i];
         }
     }
@@ -3896,6 +3899,9 @@ static void TryDoEventsBeforeFirstTurn(void)
         StopCryAndClearCrySongs();
         BattleScriptExecute(BattleScript_ArenaTurnBeginning);
     }
+
+    if ((i = ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), TRAINER_SLIDE_BEFORE_FIRST_TURN)))
+        BattleScriptExecute(i == 1 ? BattleScript_TrainerASlideMsgEnd2 : BattleScript_TrainerBSlideMsgEnd2);
 }
 
 static void HandleEndTurn_ContinueBattle(void)
@@ -3987,6 +3993,16 @@ void BattleTurnPassed(void)
     else if (gBattleTypeFlags & BATTLE_TYPE_ARENA && gBattleStruct->arenaTurnCounter == 0)
         BattleScriptExecute(BattleScript_ArenaTurnBeginning);
     else if ((i = ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), TRAINER_SLIDE_LAST_LOW_HP)))
+        BattleScriptExecute(i == 1 ? BattleScript_TrainerASlideMsgEnd2 : BattleScript_TrainerBSlideMsgEnd2);
+    else if ((i = ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), TRAINER_SLIDE_LAST_HALF_HP)))
+        BattleScriptExecute(i == 1 ? BattleScript_TrainerASlideMsgEnd2 : BattleScript_TrainerBSlideMsgEnd2);
+    else if ((i = ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), TRAINER_SLIDE_FIRST_CRITICAL_HIT)))
+        BattleScriptExecute(i == 1 ? BattleScript_TrainerASlideMsgEnd2 : BattleScript_TrainerBSlideMsgEnd2);
+    else if ((i = ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), TRAINER_SLIDE_FIRST_SUPER_EFFECTIVE_HIT)))
+        BattleScriptExecute(i == 1 ? BattleScript_TrainerASlideMsgEnd2 : BattleScript_TrainerBSlideMsgEnd2);
+    else if ((i = ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), TRAINER_SLIDE_FIRST_STAB_MOVE)))
+        BattleScriptExecute(i == 1 ? BattleScript_TrainerASlideMsgEnd2 : BattleScript_TrainerBSlideMsgEnd2);
+    else if ((i = ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), TRAINER_SLIDE_PLAYER_MON_UNAFFECTED)))
         BattleScriptExecute(i == 1 ? BattleScript_TrainerASlideMsgEnd2 : BattleScript_TrainerBSlideMsgEnd2);
 }
 
@@ -4138,6 +4154,7 @@ static void HandleTurnActionSelectionState(void)
                     }
                     else
                     {
+                        gBattleStruct->itemPartyIndex[gActiveBattler] = PARTY_SIZE;
                         BtlController_EmitChooseAction(BUFFER_A, gChosenActionByBattler[0], gBattleResources->bufferB[0][1] | (gBattleResources->bufferB[0][2] << 8));
                         MarkBattlerForControllerExec(gActiveBattler);
                         gBattleCommunication[gActiveBattler]++;
@@ -4205,10 +4222,11 @@ static void HandleTurnActionSelectionState(void)
                         return;
                     }
 
-                    if ((gBattleTypeFlags & (BATTLE_TYPE_LINK
+                    if (((gBattleTypeFlags & (BATTLE_TYPE_LINK
                                             | BATTLE_TYPE_FRONTIER_NO_PYRAMID
                                             | BATTLE_TYPE_EREADER_TRAINER
                                             | BATTLE_TYPE_RECORDED_LINK))
+                                            && !gTestRunnerEnabled)
                                             // Or if currently held by Sky Drop
                                             || gStatuses3[gActiveBattler] & STATUS3_SKY_DROPPED)
                     {
@@ -5007,7 +5025,8 @@ static void CheckMegaEvolutionBeforeTurn(void)
             if (gBattleStruct->mega.toEvolve & gBitTable[gActiveBattler]
                 && !(gProtectStructs[gActiveBattler].noValidMoves))
             {
-                struct Pokemon *mon = GetBattlerPartyData(gActiveBattler);
+                struct Pokemon *party = GetBattlerParty(gActiveBattler);
+                struct Pokemon *mon = &party[gBattlerPartyIndexes[gActiveBattler]];
 
                 gBattleStruct->mega.toEvolve &= ~(gBitTable[gActiveBattler]);
                 gLastUsedItem = gBattleMons[gActiveBattler].item;
@@ -5361,9 +5380,9 @@ static void HandleEndTurn_FinishBattle(void)
             TestRunner_Battle_AfterLastTurn();
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
-    #if B_TRAINERS_KNOCK_OFF_ITEMS == TRUE
+    #if B_TRAINERS_KNOCK_OFF_ITEMS == TRUE || B_RESTORE_HELD_BATTLE_ITEMS == TRUE
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-            TryRestoreStolenItems();
+            TryRestoreHeldItems();
     #endif
         for (i = 0; i < PARTY_SIZE; i++)
         {
