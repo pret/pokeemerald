@@ -21,6 +21,7 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "task.h"
+#include "test_runner.h"
 #include "trig.h"
 #include "window.h"
 #include "battle_message.h"
@@ -63,6 +64,7 @@ static void SetRandomMultiHitCounter();
 static u32 GetBattlerItemHoldEffectParam(u8 battlerId, u16 item);
 static u16 GetInverseTypeMultiplier(u16 multiplier);
 static u16 GetSupremeOverlordModifier(u8 battlerId);
+static bool8 CanBeInfinitelyConfused(u8 battlerId);
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForRunningByItem[];
@@ -224,14 +226,9 @@ static const u16 sEntrainmentTargetSimpleBeamBannedAbilities[] =
 
 static u8 CalcBeatUpPower(void)
 {
-    struct Pokemon *party;
     u8 basePower;
     u16 species;
-
-    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-        party = gPlayerParty;
-    else
-        party = gEnemyParty;
+    struct Pokemon *party = GetBattlerParty(gBattlerAttacker);
 
     // Party slot is incremented by the battle script for Beat Up after this damage calculation
     species = GetMonData(&party[gBattleStruct->beatUpSlot], MON_DATA_SPECIES);
@@ -550,93 +547,13 @@ void HandleAction_Switch(void)
 
 void HandleAction_UseItem(void)
 {
-    gBattlerAttacker = gBattlerTarget = gBattlerByTurnOrder[gCurrentTurnActionNumber];
+    gActiveBattler = gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     ClearFuryCutterDestinyBondGrudge(gBattlerAttacker);
 
     gLastUsedItem = gBattleResources->bufferB[gBattlerAttacker][1] | (gBattleResources->bufferB[gBattlerAttacker][2] << 8);
-
-    if (gLastUsedItem <= LAST_BALL) // is ball
-    {
-        gBattlescriptCurrInstr = BattleScript_BallThrow;
-    }
-    else if (gLastUsedItem == ITEM_POKE_DOLL || gLastUsedItem == ITEM_FLUFFY_TAIL)
-    {
-        gBattlescriptCurrInstr = gBattlescriptsForRunningByItem[0]; // BattleScript_RunByUsingItem
-    }
-    else if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-    {
-        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[0]; // BattleScript_PlayerUsesItem
-    }
-    else
-    {
-        gBattleScripting.battler = gBattlerAttacker;
-
-        switch (*(gBattleStruct->AI_itemType + (gBattlerAttacker >> 1)))
-        {
-        case AI_ITEM_FULL_RESTORE:
-        case AI_ITEM_HEAL_HP:
-            break;
-        case AI_ITEM_CURE_CONDITION:
-            gBattleCommunication[MULTISTRING_CHOOSER] = AI_HEAL_CONFUSION;
-            if (*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & (1 << AI_HEAL_CONFUSION))
-            {
-                if (*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & 0x3E)
-                    gBattleCommunication[MULTISTRING_CHOOSER] = AI_HEAL_SLEEP;
-            }
-            else
-            {
-                // Check for other statuses, stopping at first (shouldn't be more than one)
-                while (!(*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & 1))
-                {
-                    *(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) >>= 1;
-                    gBattleCommunication[MULTISTRING_CHOOSER]++;
-                    // MULTISTRING_CHOOSER will be either AI_HEAL_PARALYSIS, AI_HEAL_FREEZE,
-                    // AI_HEAL_BURN, AI_HEAL_POISON, or AI_HEAL_SLEEP
-                }
-            }
-            break;
-        case AI_ITEM_X_STAT:
-            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STAT_ROSE_ITEM;
-            if (*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) & (1 << AI_DIRE_HIT))
-            {
-                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_USED_DIRE_HIT;
-            }
-            else
-            {
-                PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK)
-                PREPARE_STRING_BUFFER(gBattleTextBuff2, CHAR_X)
-
-                while (!((*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1))) & 1))
-                {
-                    *(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) >>= 1;
-                    gBattleTextBuff1[2]++;
-                }
-
-                gBattleScripting.animArg1 = gBattleTextBuff1[2] + 14;
-                gBattleScripting.animArg2 = 0;
-            }
-            break;
-        case AI_ITEM_GUARD_SPEC:
-            // It seems probable that at some point there was a special message for
-            // an AI trainer using Guard Spec in a double battle.
-            // There isn't now however, and the assignment to 2 below goes out of
-            // bounds for gMistUsedStringIds and instead prints "{mon} is getting pumped"
-            // from the next table, gFocusEnergyUsedStringIds.
-            // In any case this isn't an issue in the retail version, as no trainers
-            // are ever given any Guard Spec to use.
-#ifndef UBFIX
-            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                gBattleCommunication[MULTISTRING_CHOOSER] = 2;
-            else
-#endif
-                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_MIST;
-            break;
-        }
-
-        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[*(gBattleStruct->AI_itemType + gBattlerAttacker / 2)];
-    }
+    gBattlescriptCurrInstr = gBattlescriptsForUsingItem[ItemId_GetBattleUsage(gLastUsedItem) - 1];
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
@@ -914,7 +831,7 @@ void HandleAction_ActionFinished(void)
     u32 i, j;
     bool32 afterYouActive = gSpecialStatuses[gBattlerByTurnOrder[gCurrentTurnActionNumber + 1]].afterYou;
     #endif
-    *(gBattleStruct->monToSwitchIntoId + gBattlerByTurnOrder[gCurrentTurnActionNumber]) = PARTY_SIZE;
+    *(gBattleStruct->monToSwitchIntoId + gBattlerByTurnOrder[gCurrentTurnActionNumber]) = gSelectedMonPartyId = PARTY_SIZE;
     gCurrentTurnActionNumber++;
     gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
     SpecialStatusesClear();
@@ -1610,6 +1527,12 @@ void PrepareStringBattle(u16 stringId, u8 battler)
     }
 #endif
 
+    // Signal for the trainer slide-in system.
+    if ((stringId == STRINGID_ITDOESNTAFFECT || stringId == STRINGID_PKMNWASNTAFFECTED || stringId == STRINGID_PKMNUNAFFECTED)
+     && GetBattlerSide(gBattlerTarget) == B_SIDE_OPPONENT
+     && gBattleStruct->trainerSlidePlayerMonUnaffectedMsgState != 2)
+        gBattleStruct->trainerSlidePlayerMonUnaffectedMsgState = 1;
+
     gActiveBattler = battler;
     BtlController_EmitPrintString(BUFFER_A, stringId);
     MarkBattlerForControllerExec(gActiveBattler);
@@ -2067,7 +1990,7 @@ u8 GetImprisonedMovesCount(u8 battlerId, u16 move)
 u32 GetBattlerFriendshipScore(u8 battlerId)
 {
     u8 side = GetBattlerSide(battlerId);
-    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    struct Pokemon *party = GetSideParty(side);
     u16 species = GetMonData(&party[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
 
     if (side != B_SIDE_PLAYER)
@@ -3607,7 +3530,8 @@ u8 AtkCanceller_UnableToUseMove(void)
         case CANCELLER_CONFUSED: // confusion
             if (gBattleMons[gBattlerAttacker].status2 & STATUS2_CONFUSION)
             {
-                gBattleMons[gBattlerAttacker].status2 -= STATUS2_CONFUSION_TURN(1);
+                if (!(gStatuses4[gBattlerAttacker] & STATUS4_INFINITE_CONFUSION))
+                    gBattleMons[gBattlerAttacker].status2 -= STATUS2_CONFUSION_TURN(1);
                 if (gBattleMons[gBattlerAttacker].status2 & STATUS2_CONFUSION)
                 {
                      // confusion dmg
@@ -3834,13 +3758,8 @@ u8 AtkCanceller_UnableToUseMove(void)
             #if B_BEAT_UP >= GEN_5
             else if (gBattleMoves[gCurrentMove].effect == EFFECT_BEAT_UP)
             {
-                struct Pokemon* party;
+                struct Pokemon* party = GetBattlerParty(gBattlerAttacker);
                 int i;
-
-                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-                    party = gPlayerParty;
-                else
-                    party = gEnemyParty;
 
                 for (i = 0; i < PARTY_SIZE; i++)
                 {
@@ -3938,10 +3857,7 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
-        if (GetBattlerSide(battler) == B_SIDE_PLAYER)
-            party = gPlayerParty;
-        else
-            party = gEnemyParty;
+        party = GetBattlerParty(battler);
 
         playerId = ((battler & BIT_FLANK) / 2);
         for (i = playerId * MULTI_PARTY_SIZE; i < playerId * MULTI_PARTY_SIZE + MULTI_PARTY_SIZE; i++)
@@ -3975,12 +3891,7 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
         else
         {
             flankId = GetBattlerMultiplayerId(battler);
-
-            if (GetBattlerSide(battler) == B_SIDE_PLAYER)
-                party = gPlayerParty;
-            else
-                party = gEnemyParty;
-
+            party = GetBattlerParty(battler);
             playerId = GetLinkTrainerFlankId(flankId);
         }
 
@@ -4149,7 +4060,7 @@ static void ShouldChangeFormInWeather(u8 battler)
 {
     int i;
     int side = GetBattlerSide(battler);
-    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    struct Pokemon *party = GetSideParty(side);
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -4295,8 +4206,7 @@ bool8 ChangeTypeBasedOnTerrain(u8 battlerId)
 static u16 GetSupremeOverlordModifier(u8 battlerId)
 {
     u32 i;
-    u8 side = GetBattlerSide(battlerId);
-    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    struct Pokemon *party = GetBattlerParty(battlerId);
     u16 modifier = UQ_4_12(1.0);
     bool8 appliedFirstBoost = FALSE;
 
@@ -5990,7 +5900,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                     gBattlescriptCurrInstr = BattleScript_AbilityCuredStatus;
                     break;
                 case 2: // get rid of confusion
-                    gBattleMons[battler].status2 &= ~STATUS2_CONFUSION;
+                    RemoveConfusionStatus(battler);
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_AbilityCuredStatus;
                     break;
@@ -6928,7 +6838,7 @@ static u8 ItemEffectMoveEnd(u32 battlerId, u16 holdEffect)
     case HOLD_EFFECT_CURE_CONFUSION:
         if (gBattleMons[battlerId].status2 & STATUS2_CONFUSION && !UnnerveOn(battlerId, gLastUsedItem))
         {
-            gBattleMons[battlerId].status2 &= ~STATUS2_CONFUSION;
+            RemoveConfusionStatus(battlerId);
             BattleScriptPushCursor();
             gBattlescriptCurrInstr = BattleScript_BerryCureConfusionRet;
             effect = ITEM_EFFECT_OTHER;
@@ -6969,7 +6879,7 @@ static u8 ItemEffectMoveEnd(u32 battlerId, u16 holdEffect)
                 StringCopy(gBattleTextBuff1, gStatusConditionString_ConfusionJpn);
 
             gBattleMons[battlerId].status1 = 0;
-            gBattleMons[battlerId].status2 &= ~STATUS2_CONFUSION;
+            RemoveConfusionStatus(battlerId);
             BattleScriptPushCursor();
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CURED_PROBLEM;
             gBattlescriptCurrInstr = BattleScript_BerryCureChosenStatusRet;
@@ -7006,6 +6916,21 @@ static u8 ItemEffectMoveEnd(u32 battlerId, u16 holdEffect)
             gBattlescriptCurrInstr = BattleScript_BerryFocusEnergyRet;
             effect = ITEM_EFFECT_OTHER;
         }
+        break;
+    case HOLD_EFFECT_BERSERK_GENE:
+        BufferStatChange(battlerId, STAT_ATK, STRINGID_STATROSE);
+        gEffectBattler = battlerId;
+        if (CanBeInfinitelyConfused(gEffectBattler))
+        {
+            gStatuses4[gEffectBattler] |= STATUS4_INFINITE_CONFUSION;
+        }
+        SET_STATCHANGER(STAT_ATK, 2, FALSE);
+
+        gBattleScripting.animArg1 = 14 + STAT_ATK;
+        gBattleScripting.animArg2 = 0;
+
+        BattleScriptPushCursorAndCallback(BattleScript_BerserkGeneRet);
+        effect = ITEM_STATS_CHANGE;
         break;
     }
 
@@ -7185,7 +7110,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     else
                         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_NORMALIZED_STATUS;
                     gBattleMons[battlerId].status1 = 0;
-                    gBattleMons[battlerId].status2 &= ~STATUS2_CONFUSION;
+                    RemoveConfusionStatus(battlerId);
                     BattleScriptExecute(BattleScript_BerryCureChosenStatusEnd2);
                     effect = ITEM_STATUS_CHANGE;
                 }
@@ -7246,6 +7171,21 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     }
                 }
                 break;
+            case HOLD_EFFECT_BERSERK_GENE:
+                BufferStatChange(battlerId, STAT_ATK, STRINGID_STATROSE);
+                gEffectBattler = battlerId;
+                if (CanBeInfinitelyConfused(gEffectBattler))
+                {
+                    gStatuses4[gEffectBattler] |= STATUS4_INFINITE_CONFUSION;
+                }
+                SET_STATCHANGER(STAT_ATK, 2, FALSE);
+
+                gBattleScripting.animArg1 = 14 + STAT_ATK;
+                gBattleScripting.animArg2 = 0;
+
+                BattleScriptPushCursorAndCallback(BattleScript_BerserkGeneRet);
+                effect = ITEM_STATS_CHANGE;
+                break;
             }
             if (effect != 0)
             {
@@ -7281,11 +7221,11 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             case HOLD_EFFECT_RESTORE_PP:
                 if (!moveTurn)
                 {
-                    struct Pokemon *mon;
+                    struct Pokemon *party = GetBattlerParty(battlerId);
+                    struct Pokemon *mon = &party[gBattlerPartyIndexes[battlerId]];
                     u8 ppBonuses;
                     u16 move;
 
-                    mon = GetBattlerPartyData(battlerId);
                     for (i = 0; i < MAX_MON_MOVES; i++)
                     {
                         move = GetMonData(mon, MON_DATA_MOVE1 + i);
@@ -7466,7 +7406,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             case HOLD_EFFECT_CURE_CONFUSION:
                 if (gBattleMons[battlerId].status2 & STATUS2_CONFUSION && !UnnerveOn(battlerId, gLastUsedItem))
                 {
-                    gBattleMons[battlerId].status2 &= ~STATUS2_CONFUSION;
+                    RemoveConfusionStatus(battlerId);
                     BattleScriptExecute(BattleScript_BerryCureConfusionEnd2);
                     effect = ITEM_EFFECT_OTHER;
                 }
@@ -7511,7 +7451,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     else
                         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_NORMALIZED_STATUS;
                     gBattleMons[battlerId].status1 = 0;
-                    gBattleMons[battlerId].status2 &= ~STATUS2_CONFUSION;
+                    RemoveConfusionStatus(battlerId);
                     BattleScriptExecute(BattleScript_BerryCureChosenStatusEnd2);
                     effect = ITEM_STATUS_CHANGE;
                 }
@@ -7528,6 +7468,21 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             case HOLD_EFFECT_MICLE_BERRY:
                 if (!moveTurn)
                     effect = TrySetMicleBerry(battlerId, gLastUsedItem, TRUE);
+                break;
+            case HOLD_EFFECT_BERSERK_GENE:
+                BufferStatChange(battlerId, STAT_ATK, STRINGID_STATROSE);
+                gEffectBattler = battlerId;
+                if (CanBeInfinitelyConfused(gEffectBattler))
+                {
+                    gStatuses4[gEffectBattler] |= STATUS4_INFINITE_CONFUSION;
+                }
+                SET_STATCHANGER(STAT_ATK, 2, FALSE);
+
+                gBattleScripting.animArg1 = 14 + STAT_ATK;
+                gBattleScripting.animArg2 = 0;
+
+                BattleScriptPushCursorAndCallback(BattleScript_BerserkGeneRet);
+                effect = ITEM_STATS_CHANGE;
                 break;
             }
 
@@ -8156,7 +8111,6 @@ u32 GetBattlerHoldEffect(u8 battlerId, bool32 checkNegating)
         return ItemId_GetHoldEffect(gBattleMons[battlerId].item);
 }
 
-//
 static u32 GetBattlerItemHoldEffectParam(u8 battlerId, u16 item)
 {
     if (item == ITEM_ENIGMA_BERRY_E_READER)
@@ -9874,6 +9828,10 @@ static u16 CalcTypeEffectivenessMultiplierInternal(u16 move, u8 moveType, u8 bat
         }
     }
 
+    // Signal for the trainer slide-in system.
+    if (GetBattlerSide(battlerDef) != B_SIDE_PLAYER && modifier && gBattleStruct->trainerSlideFirstSTABMoveMsgState != 2)
+        gBattleStruct->trainerSlideFirstSTABMoveMsgState = 1;
+
     return modifier;
 }
 
@@ -10317,10 +10275,7 @@ bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId)
     if (GetMonAbility(mon) != ABILITY_ILLUSION)
         return FALSE;
 
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        party = gPlayerParty;
-    else
-        party = gEnemyParty;
+    party = GetBattlerParty(battlerId);
 
     if (IsBattlerAlive(BATTLE_PARTNER(battlerId)))
         partnerMon = &party[gBattlerPartyIndexes[BATTLE_PARTNER(battlerId)]];
@@ -10443,17 +10398,6 @@ bool32 TestMoveFlags(u16 move, u32 flag)
     if (gBattleMoves[move].flags & flag)
         return TRUE;
     return FALSE;
-}
-
-struct Pokemon *GetBattlerPartyData(u8 battlerId)
-{
-    struct Pokemon *mon;
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        mon = &gPlayerParty[gBattlerPartyIndexes[battlerId]];
-    else
-        mon = &gEnemyParty[gBattlerPartyIndexes[battlerId]];
-
-    return mon;
 }
 
 static u8 GetFlingPowerFromItemId(u16 itemId)
@@ -10606,18 +10550,20 @@ void SortBattlersBySpeed(u8 *battlers, bool8 slowToFast)
     }
 }
 
-void TryRestoreStolenItems(void)
+void TryRestoreHeldItems(void)
 {
     u32 i;
-    u16 stolenItem = ITEM_NONE;
+    u16 lostItem = ITEM_NONE;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (gBattleStruct->itemStolen[i].stolen)
+    #if B_RESTORE_HELD_BATTLE_ITEMS == FALSE
+        if (gBattleStruct->itemLost[i].stolen)
+    #endif
         {
-            stolenItem = gBattleStruct->itemStolen[i].originalItem;
-            if (stolenItem != ITEM_NONE && ItemId_GetPocket(stolenItem) != POCKET_BERRIES)
-                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &stolenItem);  // Restore stolen non-berry items
+            lostItem = gBattleStruct->itemLost[i].originalItem;
+            if (lostItem != ITEM_NONE && ItemId_GetPocket(lostItem) != POCKET_BERRIES)
+                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &lostItem);  // Restore stolen non-berry items
         }
     }
 }
@@ -10671,8 +10617,8 @@ void TrySaveExchangedItem(u8 battlerId, u16 stolenItem)
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
       && !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
       && GetBattlerSide(battlerId) == B_SIDE_PLAYER
-      && stolenItem == gBattleStruct->itemStolen[gBattlerPartyIndexes[battlerId]].originalItem)
-        gBattleStruct->itemStolen[gBattlerPartyIndexes[battlerId]].stolen = TRUE;
+      && stolenItem == gBattleStruct->itemLost[gBattlerPartyIndexes[battlerId]].originalItem)
+        gBattleStruct->itemLost[gBattlerPartyIndexes[battlerId]].stolen = TRUE;
 #endif
 }
 
@@ -10915,3 +10861,21 @@ void RecalcBattlerStats(u32 battler, struct Pokemon *mon)
     CopyMonLevelAndBaseStatsToBattleMon(battler, mon);
     CopyMonAbilityAndTypesToBattleMon(battler, mon);
 }
+
+void RemoveConfusionStatus(u8 battlerId)
+{
+    gBattleMons[battlerId].status2 &= ~STATUS2_CONFUSION;
+    gStatuses4[battlerId] &= ~STATUS4_INFINITE_CONFUSION;
+}
+
+static bool8 CanBeInfinitelyConfused(u8 battlerId)
+{
+    if  (gBattleMons[battlerId].ability == ABILITY_OWN_TEMPO
+         || IsBattlerTerrainAffected(battlerId, STATUS_FIELD_MISTY_TERRAIN)
+         || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_SAFEGUARD)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+

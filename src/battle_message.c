@@ -435,11 +435,11 @@ static const u8 sText_ExclamationMark3[] = _("!");
 static const u8 sText_ExclamationMark4[] = _("!");
 static const u8 sText_ExclamationMark5[] = _("!");
 static const u8 sText_HP[] = _("HP");
-static const u8 sText_Attack[] = _("attack");
-static const u8 sText_Defense[] = _("defense");
-static const u8 sText_Speed[] = _("speed");
-static const u8 sText_SpAttack[] = _("sp. attack");
-static const u8 sText_SpDefense[] = _("sp. defense");
+static const u8 sText_Attack[] = _("Attack");
+static const u8 sText_Defense[] = _("Defense");
+static const u8 sText_Speed[] = _("Speed");
+static const u8 sText_SpAttack[] = _("Sp. Atk");
+static const u8 sText_SpDefense[] = _("Sp. Def");
 static const u8 sText_Accuracy[] = _("accuracy");
 static const u8 sText_Evasiveness[] = _("evasiveness");
 
@@ -465,9 +465,9 @@ const u8 *const gPokeblockWasTooXStringTable[FLAVOR_COUNT] =
     [FLAVOR_SOUR]   = sText_PokeblockWasTooSour
 };
 
-static const u8 sText_PlayerUsedItem[] = _("{B_PLAYER_NAME} used\n{B_LAST_ITEM}!");
+static const u8 sText_PlayerUsedItem[] = _("You used\n{B_LAST_ITEM}!");
 static const u8 sText_WallyUsedItem[] = _("WALLY used\n{B_LAST_ITEM}!");
-static const u8 sText_Trainer1UsedItem[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nused {B_LAST_ITEM}!");
+static const u8 sText_Trainer1UsedItem[] = _("{B_ATK_TRAINER_CLASS} {B_ATK_TRAINER_NAME}\nused {B_LAST_ITEM}!");
 static const u8 sText_TrainerBlockedBall[] = _("The TRAINER blocked the BALL!");
 static const u8 sText_DontBeAThief[] = _("Don't be a thief!");
 static const u8 sText_ItDodgedBall[] = _("It dodged the thrown BALL!\nThis POKéMON can't be caught!");
@@ -555,7 +555,7 @@ static const u8 sText_VanishedInstantly[] =_("{B_ATK_NAME_WITH_PREFIX} vanished\
 static const u8 sText_ProtectedTeam[] =_("{B_CURRENT_MOVE} protected\n{B_ATK_TEAM2} team!");
 static const u8 sText_SharedItsGuard[] =_("{B_ATK_NAME_WITH_PREFIX} shared its\nguard with the target!");
 static const u8 sText_SharedItsPower[] =_("{B_ATK_NAME_WITH_PREFIX} shared its\npower with the target!");
-static const u8 sText_SwapsDefAndSpDefOfAllPkmn[] =_("It created a bizarre area in which the\nDefense and Sp.Def stats are swapped!");
+static const u8 sText_SwapsDefAndSpDefOfAllPkmn[] =_("It created a bizarre area in which the\nDefense and Sp. Def stats are swapped!");
 static const u8 sText_BecameNimble[] =_("{B_ATK_NAME_WITH_PREFIX} became nimble!");
 static const u8 sText_HurledIntoTheAir[] =_("{B_DEF_NAME_WITH_PREFIX} was hurled\ninto the air!");
 static const u8 sText_HeldItemsLoseEffects[] =_("It created a bizarre area in which\nPokémon's held items lose their effects!");
@@ -783,9 +783,17 @@ static const u8 sText_ShellTrapDidntWork[] = _("{B_ATK_NAME_WITH_PREFIX}'s shell
 static const u8 sText_CouldntFullyProtect[] = _("{B_DEF_NAME_WITH_PREFIX} couldn't fully protect\nitself and got hurt!");
 static const u8 sText_StockpiledEffectWoreOff[] = _("{B_ATK_NAME_WITH_PREFIX}'s stockpiled\neffect wore off!");
 static const u8 sText_PkmnRevivedReadyToFight[] = _("{B_BUFF1} was revived and\nis ready to fight again!");
+static const u8 sText_ItemRestoredSpeciesHealth[] = _("{B_BUFF1} had its\nHP restored!");
+static const u8 sText_ItemCuredSpeciesStatus[] = _("{B_BUFF1} had\nits status healed!");
+static const u8 sText_ItemRestoredSpeciesPP[] = _("{B_BUFF1} had its\nPP restored!");
+static const u8 sText_AtkTrappedDef[] = _("{B_ATK_NAME_WITH_PREFIX} trapped\nthe {B_DEF_NAME_WITH_PREFIX}!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_THUNDERCAGETRAPPED - BATTLESTRINGS_TABLE_START] = sText_AtkTrappedDef,
+    [STRINGID_ITEMRESTOREDSPECIESHEALTH - BATTLESTRINGS_TABLE_START] = sText_ItemRestoredSpeciesHealth,
+    [STRINGID_ITEMCUREDSPECIESSTATUS - BATTLESTRINGS_TABLE_START] = sText_ItemCuredSpeciesStatus,
+    [STRINGID_ITEMRESTOREDSPECIESPP - BATTLESTRINGS_TABLE_START] = sText_ItemRestoredSpeciesPP,
     [STRINGID_PKMNREVIVEDREADYTOFIGHT - BATTLESTRINGS_TABLE_START] = sText_PkmnRevivedReadyToFight,
     [STRINGID_STOCKPILEDEFFECTWOREOFF - BATTLESTRINGS_TABLE_START] = sText_StockpiledEffectWoreOff,
     [STRINGID_COULDNTFULLYPROTECT - BATTLESTRINGS_TABLE_START] = sText_CouldntFullyProtect,
@@ -1424,6 +1432,11 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_PKMNSABILITYPREVENTSABILITY - BATTLESTRINGS_TABLE_START] = sText_PkmnsAbilityPreventsAbility,
 };
 
+const u16 gTrainerUsedItemStringIds[] =
+{
+    STRINGID_PLAYERUSEDITEM, STRINGID_TRAINER1USEDITEM
+};
+
 const u16 gZEffectStringIds[] =
 {
     [B_MSG_Z_RESET_STATS] = STRINGID_ZMOVERESETSSTATS,
@@ -1668,6 +1681,7 @@ const u16 gWrappedStringIds[NUM_TRAPPING_MOVES] =
     [B_MSG_WRAPPED_MAGMA_STORM] = STRINGID_TRAPPEDBYSWIRLINGMAGMA, // MOVE_MAGMA_STORM
     [B_MSG_WRAPPED_INFESTATION] = STRINGID_INFESTATION,            // MOVE_INFESTATION
     [B_MSG_WRAPPED_SNAP_TRAP]   = STRINGID_PKMNINSNAPTRAP,         // MOVE_SNAP_TRAP
+    [B_MSG_WRAPPED_THUNDER_CAGE]= STRINGID_THUNDERCAGETRAPPED,     // MOVE_THUNDER_CAGE
 };
 
 const u16 gMistUsedStringIds[] =
@@ -1818,16 +1832,6 @@ const u16 gSafariPokeblockResultStringIds[] =
     [B_MSG_MON_CURIOUS]    = STRINGID_PKMNCURIOUSABOUTX,
     [B_MSG_MON_ENTHRALLED] = STRINGID_PKMNENTHRALLEDBYX,
     [B_MSG_MON_IGNORED]    = STRINGID_PKMNIGNOREDX
-};
-
-const u16 gTrainerItemCuredStatusStringIds[] =
-{
-    [AI_HEAL_CONFUSION] = STRINGID_PKMNSITEMSNAPPEDOUT,
-    [AI_HEAL_PARALYSIS] = STRINGID_PKMNSITEMCUREDPARALYSIS,
-    [AI_HEAL_FREEZE]    = STRINGID_PKMNSITEMDEFROSTEDIT,
-    [AI_HEAL_BURN]      = STRINGID_PKMNSITEMHEALEDBURN,
-    [AI_HEAL_POISON]    = STRINGID_PKMNSITEMCUREDPOISON,
-    [AI_HEAL_SLEEP]     = STRINGID_PKMNSITEMWOKEIT
 };
 
 const u16 gBerryEffectStringIds[] =
@@ -3892,6 +3896,14 @@ struct TrainerSlide
     const u8 *msgLastSwitchIn;
     const u8 *msgLastLowHp;
     const u8 *msgFirstDown;
+    const u8 *msgLastHalfHp;
+    const u8 *msgFirstCriticalHit;
+    const u8 *msgFirstSuperEffectiveHit;
+    const u8 *msgFirstSTABMove;
+    const u8 *msgPlayerMonUnaffected;
+    const u8 *msgMegaEvolution;
+    const u8 *msgZMove;
+    const u8 *msgBeforeFirstTurn;
 };
 
 static const struct TrainerSlide sTrainerSlides[] =
@@ -3903,6 +3915,14 @@ static const struct TrainerSlide sTrainerSlides[] =
         .msgLastSwitchIn = sText_AarghAlmostHadIt,
         .msgLastLowHp = sText_BoxIsFull,
         .msgFirstDown = sText_123Poof,
+        .msgLastHalfHp = sText_ShootSoClose,
+        .msgFirstCriticalHit = sText_CriticalHit,
+        .msgFirstSuperEffectiveHit = sText_SuperEffective,
+        .msgFirstSTABMove = sText_ABoosted,
+        .msgPlayerMonUnaffected = sText_ButNoEffect,
+        .msgMegaEvolution = sText_PowderExplodes,
+        .msgZMove = sText_Electromagnetism,
+        .msgBeforeFirstTurn = sText_GravityIntensified,
     },
     */
 };
@@ -3923,12 +3943,35 @@ static u32 GetEnemyMonCount(u32 firstId, u32 lastId, bool32 onlyAlive)
     return count;
 }
 
-static bool32 IsBattlerHpLow(u32 battler)
+enum
 {
-    if ((gBattleMons[battler].hp * 100) / gBattleMons[battler].maxHP < 25)
-        return TRUE;
-    else
-        return FALSE;
+    LESS_THAN,
+    EQUAL,
+    GREATER_THAN,
+    LESS_THAN_OR_EQUAL,
+    GREATER_THAN_OR_EQUAL,
+    NOT_EQUAL,
+};
+
+u32 BattlerHPPercentage(u32 battlerId, u32 operation, u32 threshold)
+{
+    switch (operation)
+    {
+    case LESS_THAN:
+        return gBattleMons[battlerId].hp < (gBattleMons[battlerId].maxHP / threshold);
+    case EQUAL:
+        return gBattleMons[battlerId].hp == (gBattleMons[battlerId].maxHP / threshold);
+    case GREATER_THAN:
+        return gBattleMons[battlerId].hp > (gBattleMons[battlerId].maxHP / threshold);
+    case LESS_THAN_OR_EQUAL:
+        return gBattleMons[battlerId].hp <= (gBattleMons[battlerId].maxHP / threshold);
+    case GREATER_THAN_OR_EQUAL:
+        return gBattleMons[battlerId].hp >= (gBattleMons[battlerId].maxHP / threshold);
+    case NOT_EQUAL:
+        return gBattleMons[battlerId].hp != (gBattleMons[battlerId].maxHP / threshold);
+    default:
+        break;
+    }
 }
 
 u32 ShouldDoTrainerSlide(u32 battlerId, u32 which)
@@ -3976,7 +4019,7 @@ u32 ShouldDoTrainerSlide(u32 battlerId, u32 which)
             case TRAINER_SLIDE_LAST_LOW_HP:
                 if (sTrainerSlides[i].msgLastLowHp != NULL
                     && GetEnemyMonCount(firstId, lastId, TRUE) == 1
-                    && IsBattlerHpLow(battlerId)
+                    && BattlerHPPercentage(battlerId, GREATER_THAN_OR_EQUAL, 4)
                     && !gBattleStruct->trainerSlideLowHpMsgDone)
                 {
                     gBattleStruct->trainerSlideLowHpMsgDone = TRUE;
@@ -3989,6 +4032,79 @@ u32 ShouldDoTrainerSlide(u32 battlerId, u32 which)
                 {
                     gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgFirstDown;
                     return retValue;
+                }
+                break;
+            case TRAINER_SLIDE_LAST_HALF_HP:
+                if (sTrainerSlides[i].msgLastHalfHp != NULL
+                 && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE) - 1
+                 && BattlerHPPercentage(battlerId, LESS_THAN_OR_EQUAL, 2) && BattlerHPPercentage(battlerId, GREATER_THAN, 4)
+                 && !gBattleStruct->trainerSlideHalfHpMsgDone)
+                {
+                    gBattleStruct->trainerSlideHalfHpMsgDone = TRUE;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgLastHalfHp;
+                    return TRUE;
+                }
+                break;
+            case TRAINER_SLIDE_FIRST_CRITICAL_HIT:
+                if (sTrainerSlides[i].msgFirstCriticalHit != NULL && gBattleStruct->trainerSlideFirstCriticalHitMsgState == 1)
+                {
+                    gBattleStruct->trainerSlideFirstCriticalHitMsgState = 2;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgFirstCriticalHit;
+                    return TRUE;
+                }
+                break;
+            case TRAINER_SLIDE_FIRST_SUPER_EFFECTIVE_HIT:
+                if (sTrainerSlides[i].msgFirstSuperEffectiveHit != NULL
+                    && gBattleStruct->trainerSlideFirstSuperEffectiveHitMsgState == 1
+                    && gBattleMons[battlerId].hp)
+                {
+                    gBattleStruct->trainerSlideFirstSuperEffectiveHitMsgState = 2;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgFirstSuperEffectiveHit;
+                    return TRUE;
+                }
+                break;
+            case TRAINER_SLIDE_FIRST_STAB_MOVE:
+                if (sTrainerSlides[i].msgFirstSTABMove != NULL
+                 && gBattleStruct->trainerSlideFirstSTABMoveMsgState == 1
+                 && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE))
+                {
+                    gBattleStruct->trainerSlideFirstSTABMoveMsgState = 2;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgFirstSTABMove;
+                    return TRUE;
+                }
+                break;
+            case TRAINER_SLIDE_PLAYER_MON_UNAFFECTED:
+                if (sTrainerSlides[i].msgPlayerMonUnaffected != NULL
+                 && gBattleStruct->trainerSlidePlayerMonUnaffectedMsgState == 1
+                 && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE))
+                {
+                    gBattleStruct->trainerSlidePlayerMonUnaffectedMsgState = 2;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgPlayerMonUnaffected;
+                    return TRUE;
+                }
+                break;
+            case TRAINER_SLIDE_MEGA_EVOLUTION:
+                if (sTrainerSlides[i].msgMegaEvolution != NULL && !gBattleStruct->trainerSlideMegaEvolutionMsgDone)
+                {
+                    gBattleStruct->trainerSlideMegaEvolutionMsgDone = TRUE;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgMegaEvolution;
+                    return TRUE;
+                }
+                break;
+            case TRAINER_SLIDE_Z_MOVE:
+                if (sTrainerSlides[i].msgZMove != NULL && !gBattleStruct->trainerSlideZMoveMsgDone)
+                {
+                    gBattleStruct->trainerSlideZMoveMsgDone = TRUE;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgZMove;
+                    return TRUE;
+                }
+                break;
+            case TRAINER_SLIDE_BEFORE_FIRST_TURN:
+                if (sTrainerSlides[i].msgBeforeFirstTurn != NULL && !gBattleStruct->trainerSlideBeforeFirstTurnMsgDone)
+                {
+                    gBattleStruct->trainerSlideBeforeFirstTurnMsgDone = TRUE;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgBeforeFirstTurn;
+                    return TRUE;
                 }
                 break;
             }

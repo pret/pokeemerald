@@ -512,7 +512,7 @@ struct ZMoveData
     u8 splits[MAX_BATTLERS_COUNT];
 };
 
-struct StolenItem
+struct LostItem
 {
     u16 originalItem:15;
     u16 stolen:1;
@@ -576,8 +576,6 @@ struct BattleStruct
     void (*savedCallback)(void);
     u16 usedHeldItems[PARTY_SIZE][NUM_BATTLE_SIDES]; // For each party member and side. For harvest, recycle
     u16 chosenItem[MAX_BATTLERS_COUNT];
-    u8 AI_itemType[2];
-    u8 AI_itemFlags[2];
     u16 choicedMove[MAX_BATTLERS_COUNT];
     u16 changedItems[MAX_BATTLERS_COUNT];
     u8 switchInItemsCounter;
@@ -637,7 +635,7 @@ struct BattleStruct
     u16 moveEffect2; // For Knock Off
     u16 changedSpecies[PARTY_SIZE]; // For Zygarde or future forms when multiple mons can change into the same pokemon.
     u8 quickClawBattlerId;
-    struct StolenItem itemStolen[PARTY_SIZE];  // Player's team that had items stolen (two bytes per party member)
+    struct LostItem itemLost[PARTY_SIZE];  // Player's team that had items consumed or stolen (two bytes per party member)
     u8 blunderPolicy:1; // should blunder policy activate
     u8 swapDamageCategory:1; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
     u8 forcedSwitch:4; // For each battler
@@ -657,6 +655,15 @@ struct BattleStruct
     u8 storedHealingWish:4; // Each battler as a bit.
     u8 storedLunarDance:4; // Each battler as a bit.
     u16 supremeOverlordModifier[MAX_BATTLERS_COUNT];
+    u8 itemPartyIndex[MAX_BATTLERS_COUNT];
+    bool8 trainerSlideHalfHpMsgDone;
+    u8 trainerSlideFirstCriticalHitMsgState:2;
+    u8 trainerSlideFirstSuperEffectiveHitMsgState:2;
+    u8 trainerSlideFirstSTABMoveMsgState:2;
+    u8 trainerSlidePlayerMonUnaffectedMsgState:2;
+    bool8 trainerSlideMegaEvolutionMsgDone;
+    bool8 trainerSlideZMoveMsgDone;
+    bool8 trainerSlideBeforeFirstTurnMsgDone;
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)
@@ -714,6 +721,17 @@ struct BattleStruct
 
 #define SET_STATCHANGER(statId, stage, goesDown)(gBattleScripting.statChanger = (statId) + ((stage) << 3) + (goesDown << 7))
 #define SET_STATCHANGER2(dst, statId, stage, goesDown)(dst = (statId) + ((stage) << 3) + (goesDown << 7))
+
+static inline struct Pokemon *GetSideParty(u32 side)
+{
+    return side == B_SIDE_PLAYER ? gPlayerParty : gEnemyParty;
+}
+
+static inline struct Pokemon *GetBattlerParty(u32 battlerId)
+{
+    extern u8 GetBattlerSide(u8 battler);
+    return GetSideParty(GetBattlerSide(battlerId));
+}
 
 // NOTE: The members of this struct have hard-coded offsets
 //       in include/constants/battle_script_commands.h

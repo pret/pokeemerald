@@ -533,8 +533,6 @@ const u8 *const gItemEffectTable[ITEMS_COUNT] =
     [ITEM_DIRE_HIT]           = gItemEffect_DireHit,
     [ITEM_GUARD_SPEC]         = gItemEffect_GuardSpec,
 
-    //[ITEM_MAX_MUSHROOMS]      = gItemEffect_MaxMushrooms, // Todo
-
     // Evolution Items
     [ITEM_FIRE_STONE]         = gItemEffect_EvoItem,
     [ITEM_WATER_STONE]        = gItemEffect_EvoItem,

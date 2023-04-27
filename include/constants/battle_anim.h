@@ -583,6 +583,7 @@
 #define TRAP_ANIM_MAGMA_STORM 5
 #define TRAP_ANIM_INFESTATION 6
 #define TRAP_ANIM_SNAP_TRAP 7
+#define TRAP_ANIM_THUNDER_CAGE 8
 
 // Weather defines for battle animation scripts.
 #define ANIM_WEATHER_NONE 0

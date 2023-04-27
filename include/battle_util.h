@@ -187,7 +187,6 @@ bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId);
 bool8 ShouldGetStatBadgeBoost(u16 flagId, u8 battlerId);
 u8 GetBattleMoveSplit(u32 moveId);
 bool32 TestMoveFlags(u16 move, u32 flag);
-struct Pokemon *GetBattlerPartyData(u8 battlerId);
 bool32 CanFling(u8 battlerId);
 bool32 IsTelekinesisBannedSpecies(u16 species);
 bool32 IsHealBlockPreventingMove(u32 battler, u32 move);
@@ -196,7 +195,7 @@ bool32 IsPartnerMonFromSameTrainer(u8 battlerId);
 u8 GetSplitBasedOnStats(u8 battlerId);
 void SortBattlersBySpeed(u8 *battlers, bool8 slowToFast);
 bool32 TestSheerForceFlag(u8 battler, u16 move);
-void TryRestoreStolenItems(void);
+void TryRestoreHeldItems(void);
 bool32 CanStealItem(u8 battlerStealing, u8 battlerItem, u16 item);
 void TrySaveExchangedItem(u8 battlerId, u16 stolenItem);
 bool32 IsPartnerMonFromSameTrainer(u8 battlerId);
@@ -235,5 +234,6 @@ u32 GetBattlerFriendshipScore(u8 battlerId);
 u32 CountBattlerStatIncreases(u8 battlerId, bool32 countEvasionAcc);
 bool32 IsMyceliumMightOnField(void);
 bool8 ChangeTypeBasedOnTerrain(u8 battlerId);
+void RemoveConfusionStatus(u8 battlerId);
 
 #endif // GUARD_BATTLE_UTIL_H

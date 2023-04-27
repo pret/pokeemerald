@@ -54,7 +54,7 @@ SINGLE_BATTLE_TEST("Turn order is determined by priority")
     }
 }
 
-SINGLE_BATTLE_TEST("Turn order is determined by speed if priority ties")
+SINGLE_BATTLE_TEST("Turn order is determined by Speed if priority ties")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Speed(2); }
@@ -67,7 +67,7 @@ SINGLE_BATTLE_TEST("Turn order is determined by speed if priority ties")
     }
 }
 
-SINGLE_BATTLE_TEST("Turn order is determined randomly if priority and speed tie")
+SINGLE_BATTLE_TEST("Turn order is determined randomly if priority and Speed tie")
 {
     KNOWN_FAILING; // The algorithm is significantly biased.
     PASSES_RANDOMLY(1, 2);

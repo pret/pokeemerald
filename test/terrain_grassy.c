@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("Grassy Terrain activates Grassy Seed and Mimicry")
         TURN { MOVE(player, MOVE_GRASSY_TERRAIN); }
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Using Grassy Seed, the defense of Wobbuffet rose!");
+        MESSAGE("Using Grassy Seed, the Defense of Wobbuffet rose!");
         ABILITY_POPUP(opponent);
         MESSAGE("Foe Stunfisk's type changed to Grass!");
     } FINALLY {
