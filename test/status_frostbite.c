@@ -10,18 +10,16 @@ SINGLE_BATTLE_TEST("Frostbite reduces the special attack by 50 percent")
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_FROSTBITE); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_SWIFT); MOVE(player, MOVE_FIRE_PUNCH); }
+        TURN { MOVE(opponent, MOVE_SWIFT); MOVE(player, MOVE_FLAME_WHEEL); }
         TURN { MOVE(opponent, MOVE_SWIFT); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SWIFT, opponent);
         HP_BAR(player, captureDamage: &reducedDamage);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRE_PUNCH, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLAME_WHEEL, player);
         HP_BAR(opponent);
-        MESSAGE("Foe Wobbuffet is hurt by its frostbite!");
-        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_FRZ, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SWIFT, opponent);
         HP_BAR(player, captureDamage: &normaleDamage);
-   } THEN { EXPECT_EQ(reducedDamage, normaleDamage); }
+   } THEN { EXPECT_EQ(reducedDamage * 2, normaleDamage); }
 }
 
 SINGLE_BATTLE_TEST("Frostbite deals 1/16 damage to effected pokemon")
