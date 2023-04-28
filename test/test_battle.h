@@ -333,7 +333,7 @@
  * Used when the battler chooses to switch to another Pokémon but not
  * via Switch, e.g. after fainting or due to a U-turn.
  *     SEND_OUT(player, 1);
- * 
+ *
  * USE_ITEM(battler, itemId, [partyIndex:], [move:])
  * Used when the battler chooses to use an item from the Bag. The item
  * ID must be specified, and party index and move slot if applicable, e.g:
@@ -526,8 +526,7 @@ struct QueuedMessageEvent
 struct QueuedStatusEvent
 {
     u32 battlerId:3;
-    u32 mask:8;
-    u32 unused_01:21;
+    u32 mask:29;
 };
 
 struct QueuedEvent
@@ -872,6 +871,7 @@ struct StatusEventContext
     bool8 freeze:1;
     bool8 paralysis:1;
     bool8 badPoison:1;
+    bool8 frostbite:1;
 };
 
 void OpenQueueGroup(u32 sourceLine, enum QueueGroupType);
