@@ -136,3 +136,32 @@ SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority field moves", s16 dam
         MESSAGE("Sableye used Sunny Day!");
     }
 }
+
+SINGLE_BATTLE_TEST("Psychic Terrain lasts for 5 turns")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_PSYCHIC_TERRAIN); }
+        TURN {}
+        TURN {}
+        TURN {}
+        TURN {}
+    } SCENE {
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_PSYCHIC_TERRAIN, player);
+        MESSAGE("The battlefield got weird!");
+
+        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+
+        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+
+        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+
+        MESSAGE("The weirdness disappeared from the battlefield.");
+    }
+}
