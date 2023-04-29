@@ -1372,7 +1372,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_AURORA_VEIL:
             if (gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_AURORA_VEIL
               || PartnerHasSameMoveEffectWithoutTarget(BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove)
-              || !(gBattleWeather & B_WEATHER_HAIL))
+              || !(gBattleWeather & B_WEATHER_HAIL && gBattleWeather & B_WEATHER_SNOW))
                 score -= 10;
             break;
         case EFFECT_OHKO:
@@ -1578,7 +1578,12 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 8;
             break;
         case EFFECT_HAIL:
-            if (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_PRIMAL_ANY)
+            if (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_PRIMAL_ANY) // should hail be discouraged if snow is up?
+             || PartnerMoveEffectIsWeather(BATTLE_PARTNER(battlerAtk), AI_DATA->partnerMove))
+                score -= 8;
+            break;
+        case EFFECT_SNOW:
+            if (gBattleWeather & (B_WEATHER_SNOW | B_WEATHER_PRIMAL_ANY) // should snow be discouraged if hail is up?
              || PartnerMoveEffectIsWeather(BATTLE_PARTNER(battlerAtk), AI_DATA->partnerMove))
                 score -= 8;
             break;
@@ -2800,6 +2805,13 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             RETURN_SCORE_PLUS(2);   // our partner benefits from hail
         }
         break;
+    case EFFECT_SNOW:
+        if (IsBattlerAlive(battlerAtkPartner)
+         && ShouldSetSnow(battlerAtkPartner, atkPartnerAbility, atkPartnerHoldEffect))
+        {
+            RETURN_SCORE_PLUS(2);   // our partner benefits from snow
+        }
+        break;
     } // global move effect check
 
 
@@ -3949,6 +3961,22 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score += 2;
         }
         break;
+    case EFFECT_SNOW: // any other reasons? 
+        if (ShouldSetSnow(battlerAtk, AI_DATA->abilities[battlerAtk], AI_DATA->holdEffects[battlerAtk]))
+        {
+            if ((HasMoveEffect(battlerAtk, EFFECT_AURORA_VEIL) || HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_AURORA_VEIL))
+              && ShouldSetScreen(battlerAtk, battlerDef, EFFECT_AURORA_VEIL))
+                score += 3;
+
+            score++;
+            if (AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_ICY_ROCK)
+                score++;
+            if (HasMoveEffect(battlerDef, EFFECT_MORNING_SUN)
+              || HasMoveEffect(battlerDef, EFFECT_SYNTHESIS)
+              || HasMoveEffect(battlerDef, EFFECT_MOONLIGHT))
+                score += 2;
+        }
+        break;
     case EFFECT_RAIN_DANCE:
         if (ShouldSetRain(battlerAtk, AI_DATA->abilities[battlerAtk], AI_DATA->holdEffects[battlerAtk]))
         {
@@ -4932,6 +4960,7 @@ static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_SUNNY_DAY:
     case EFFECT_SANDSTORM:
     case EFFECT_HAIL:
+    case EFFECT_SNOW:
     case EFFECT_GEOMANCY:
     case EFFECT_VICTORY_DANCE:
     case EFFECT_HIT_SET_ENTRY_HAZARD:
@@ -5158,6 +5187,7 @@ static s16 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             case EFFECT_SUNNY_DAY:
             case EFFECT_SANDSTORM:
             case EFFECT_HAIL:
+            case EFFECT_SNOW:
             case EFFECT_RAIN_DANCE:
                 score -= 2;
                 break;

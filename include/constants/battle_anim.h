@@ -544,6 +544,7 @@
 #define B_ANIM_SHELL_TRAP_SETUP         34
 #define B_ANIM_ZMOVE_ACTIVATE           35 // Using Z Moves
 #define B_ANIM_AFFECTION_HANGED_ON      36
+#define B_ANIM_SNOW_CONTINUES           37
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
@@ -591,6 +592,7 @@
 #define ANIM_WEATHER_RAIN 2
 #define ANIM_WEATHER_SANDSTORM 3
 #define ANIM_WEATHER_HAIL 4
+#define ANIM_WEATHER_SNOW 5
 
 // mon pal blend
 #define ANIM_PAL_BG             0x1

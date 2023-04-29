@@ -424,6 +424,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDireClaw                @ EFFECT_DIRE_CLAW
 	.4byte BattleScript_EffectBarbBarrage             @ EFFECT_BARB_BARRAGE
 	.4byte BattleScript_EffectRevivalBlessing         @ EFFECT_REVIVAL_BLESSING
+	.4byte BattleScript_EffectSnow					  @ EFFECT_SNOW
 
 BattleScript_EffectRevivalBlessing::
 	attackcanceler
@@ -6858,6 +6859,14 @@ BattleScript_DamagingWeatherContinuesEnd::
 	bicword gHitMarker, HITMARKER_SKIP_DMG_TRACK | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE | HITMARKER_GRUDGE
 	end2
 
+BattleScript_SnowContinuesOrEnds::
+	printfromtable gSnowContinuesStringIds
+	waitmessage B_WAIT_TIME_LONG
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_SNOW_STOPPED, BattleScript_SnowContinuesOrEndsEnd
+	playanimation BS_ATTACKER, B_ANIM_SNOW_CONTINUES
+BattleScript_SnowContinuesOrEndsEnd::
+	end2
+
 BattleScript_SandStormHailEnds::
 	printfromtable gSandStormHailEndStringIds
 	waitmessage B_WAIT_TIME_LONG
@@ -8840,12 +8849,21 @@ BattleScript_MimicryActivates_End3::
 	waitmessage B_WAIT_TIME_SHORT
 	end3
 
-BattleScript_SnowWarningActivates::
+BattleScript_SnowWarningActivatesHail::
 	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_SNOWWARNINGHAIL
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_HAIL_CONTINUES
+	call BattleScript_WeatherFormChanges
+	end3
+
+BattleScript_SnowWarningActivatesSnow::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_SNOWWARNINGSNOW
+	waitstate
+	playanimation BS_BATTLER_0, B_ANIM_SNOW_CONTINUES
 	call BattleScript_WeatherFormChanges
 	end3
 
@@ -10422,3 +10440,13 @@ BattleScript_BerserkGeneRet_OwnTempoPrevents:
 BattleScript_BerserkGeneRet_End:
 	removeitem BS_SCRIPTING
 	end3
+
+BattleScript_EffectSnow::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN_PRIMAL, BattleScript_ExtremelyHarshSunlightWasNotLessened
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN_PRIMAL, BattleScript_NoReliefFromHeavyRain
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_STRONG_WINDS, BattleScript_MysteriousAirCurrentBlowsOn
+	setsnow
+	goto BattleScript_MoveWeatherChange

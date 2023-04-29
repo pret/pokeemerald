@@ -652,8 +652,15 @@
 #define STRINGID_ITEMCUREDSPECIESSTATUS               650
 #define STRINGID_ITEMRESTOREDSPECIESPP                651
 #define STRINGID_THUNDERCAGETRAPPED                   652
+#define STRINGID_STARTEDSNOW                          653
+#define STRINGID_SNOWCONTINUES                        654
+#define STRINGID_SNOWSTOPPED                          655
+#define STRINGID_STARTEDSNOW                          653
+#define STRINGID_SNOWCONTINUES                        654
+#define STRINGID_SNOWSTOPPED                          655
+#define STRINGID_SNOWWARNINGSNOW                      656
 
-#define BATTLESTRINGS_COUNT                           653
+#define BATTLESTRINGS_COUNT                           657
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -719,11 +726,16 @@
 #define B_MSG_STARTED_SANDSTORM 3
 #define B_MSG_STARTED_SUNLIGHT  4
 #define B_MSG_STARTED_HAIL      5
+#define B_MSG_STARTED_SNOW      6
 
 // gRainContinuesStringIds
 #define B_MSG_RAIN_CONTINUES     0
 #define B_MSG_DOWNPOUR_CONTINUES 1
 #define B_MSG_RAIN_STOPPED       2
+
+// gSnowContinuesStringIds
+#define B_MSG_SNOW_CONTINUES    0
+#define B_MSG_SNOW_STOPPED      1
 
 // gSandStormHailContinuesStringIds / gSandStormHailDmgStringIds/ gSandStormHailEndStringIds
 #define B_MSG_SANDSTORM  0
