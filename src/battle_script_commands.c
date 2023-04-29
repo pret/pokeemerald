@@ -15148,15 +15148,7 @@ static void Cmd_tryweatherformdatachange(void)
 {
     CMD_ARGS();
 
-    u8 form;
-
-    // gBattlescriptCurrInstr = cmd->nextInstr;
-    // form = TryWeatherFormChange(gBattleScripting.battler);
-    // if (form)
-    // {
-    //     BattleScriptPushCursorAndCallback(BattleScript_WeatherFormChange);
-    //     *(&gBattleStruct->formToChangeInto) = form - 1;
-    // }
+    // removed in favor of new form system
 }
 
 // Water and Mud Sport
