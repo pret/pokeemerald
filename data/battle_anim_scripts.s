@@ -947,6 +947,7 @@ gBattleAnims_General::
 	.4byte General_ShellTrapSetUp           @ B_ANIM_SHELL_TRAP_SETUP
 	.4byte General_ZMoveActivate            @ B_ANIM_ZMOVE_ACTIVATE
 	.4byte General_AffectionHangedOn        @ B_ANIM_AFFECTION_HANGED_ON
+	.4byte General_Snow						@ B_ANIM_SNOW_CONTINUES
 
 	.align 2
 gBattleAnims_Special::
@@ -14448,7 +14449,19 @@ Move_ELECTRO_DRIFT::
 Move_SHED_TAIL::
 Move_CHILLY_RECEPTION::
 Move_TIDY_UP::
-Move_SNOWSCAPE::
+
+@ Also used by Snow weather. Currently identical with Move_HAIL
+Move_SNOWSCAPE:
+	loadspritegfx ANIM_TAG_HAIL
+	loadspritegfx ANIM_TAG_ICE_CRYSTALS
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 3, 0, 6, RGB_BLACK
+	waitforvisualfinish
+	createvisualtask AnimTask_Hail, 5
+	loopsewithpan SE_M_HAIL, 0, 8, 10
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 3, 6, 0, RGB_BLACK
+	end
+
 Move_POUNCE::
 Move_TRAILBLAZE::
 Move_CHILLING_WATER::
@@ -23924,6 +23937,7 @@ Move_WEATHER_BALL:
 	jumpreteq ANIM_WEATHER_RAIN, WeatherBallWater
 	jumpreteq ANIM_WEATHER_SANDSTORM, WeatherBallSandstorm
 	jumpreteq ANIM_WEATHER_HAIL, WeatherBallIce
+	jumpreteq ANIM_WEATHER_SNOW, WeatherBallIce
 WeatherBallNormal:
 	loadspritegfx ANIM_TAG_IMPACT
 	createsprite gWeatherBallNormalDownSpriteTemplate, ANIM_TARGET, 2, -30, -100, 25, 1, 0, 0
@@ -24678,6 +24692,9 @@ General_Sandstorm:
 
 General_Hail:
 	goto Move_HAIL
+
+General_Snow:
+	goto Move_SNOWSCAPE
 
 General_LeechSeedDrain:
 	createvisualtask AnimTask_GetBattlersFromArg, 5

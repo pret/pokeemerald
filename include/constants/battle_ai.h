@@ -30,6 +30,7 @@
 #define AI_WEATHER_RAIN 2
 #define AI_WEATHER_SANDSTORM 3
 #define AI_WEATHER_HAIL 4
+#define AI_WEATHER_SNOW 5
 
 // get_how_powerful_move_is
 #define MOVE_POWER_OTHER  0
