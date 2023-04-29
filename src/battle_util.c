@@ -2487,7 +2487,7 @@ u8 DoFieldEndTurnEffects(void)
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_WEATHER_FORM:
-            for (i = 0; i < gBattlersCount; ++i)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 if (AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, i, 0, 0, 0))
                 {
@@ -10154,7 +10154,7 @@ bool32 TryBattleFormChange(u8 battlerId, u16 method)
 {
     u8 monId = gBattlerPartyIndexes[battlerId];
     u8 side = GET_BATTLER_SIDE(battlerId);
-    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    struct Pokemon *party = GetBattlerParty(battlerId);
     u16 targetSpecies;
 
     if (!CanBattlerFormChange(battlerId, method))
