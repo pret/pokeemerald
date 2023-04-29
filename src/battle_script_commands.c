@@ -15147,6 +15147,8 @@ static void Cmd_doweatherformchangeanimation(void)
 static void Cmd_tryweatherformdatachange(void)
 {
     CMD_ARGS();
+
+    // removed in favor of new form system
 }
 
 // Water and Mud Sport
