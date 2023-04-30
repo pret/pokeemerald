@@ -63,7 +63,6 @@ static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 perso
 static void EncryptBoxMon(struct BoxPokemon *boxMon);
 static void DecryptBoxMon(struct BoxPokemon *boxMon);
 static void Task_PlayMapChosenOrBattleBGM(u8 taskId);
-static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static bool8 ShouldSkipFriendshipChange(void);
 static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
 void TrySpecialOverworldEvo();
@@ -4194,7 +4193,7 @@ u16 GiveMoveToMon(struct Pokemon *mon, u16 move)
     return GiveMoveToBoxMon(&mon->box, move);
 }
 
-static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
+u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
 {
     s32 i;
     for (i = 0; i < MAX_MON_MOVES; i++)

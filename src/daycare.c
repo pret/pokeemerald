@@ -34,6 +34,7 @@ static void SetInitialEggData(struct Pokemon *mon, u16 species, struct DayCare *
 static u8 GetDaycareCompatibilityScore(struct DayCare *daycare);
 static void DaycarePrintMonInfo(u8 windowId, u32 daycareSlotId, u8 y);
 static u8 ModifyBreedingScoreForOvalCharm(u8 score);
+static u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves);
 
 // RAM buffers used to assist with BuildEggMoveset()
 EWRAM_DATA static u16 sHatchedEggLevelUpMoves[EGG_LVL_UP_MOVES_ARRAY_COUNT] = {0};
@@ -164,6 +165,51 @@ static s8 Daycare_FindEmptySpot(struct DayCare *daycare)
     return -1;
 }
 
+static void TransferEggMoves(void)
+{
+    u32 i, j, k, l;
+    u16 numEggMoves;
+    struct Pokemon mon;
+
+    for (i = 0; i < DAYCARE_MON_COUNT; i++)
+    {
+        if (!GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[i].mon, MON_DATA_SANITY_HAS_SPECIES))
+            continue;
+
+        // Get list of egg moves for mon
+        BoxMonToMon(&gSaveBlock1Ptr->daycare.mons[i].mon, &mon);
+        for (j = 0; j < EGG_MOVES_ARRAY_COUNT; j++)
+            sHatchedEggEggMoves[j] = MOVE_NONE;
+        numEggMoves = GetEggMoves(&mon, sHatchedEggEggMoves);
+        for (j = 0; j < numEggMoves; j++)
+        {
+            // Go through other Daycare mons
+            for (k = 0; k < DAYCARE_MON_COUNT; k++)
+            {
+                if (k == i || !GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[k].mon, MON_DATA_SANITY_HAS_SPECIES))
+                    continue;
+                
+                // Check if you can inherit from them
+                if (GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[k].mon, MON_DATA_SPECIES) != GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[i].mon, MON_DATA_SPECIES)
+            #if P_EGG_MOVE_TRANSFER >= GEN_9
+                    && GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[i].mon, MON_DATA_HELD_ITEM) != ITEM_MIRROR_HERB
+            #endif
+                )
+                    continue;
+
+                for (l = 0; l < MAX_MON_MOVES; l++)
+                {
+                    if (GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[k].mon, MON_DATA_MOVE1 + l) != sHatchedEggEggMoves[j])
+                        continue;
+
+                    if (GiveMoveToBoxMon(&gSaveBlock1Ptr->daycare.mons[i].mon, sHatchedEggEggMoves[j]) == MON_HAS_MAX_MOVES)
+                        break;
+                }
+            }
+        }
+    }
+}
+
 static void StorePokemonInDaycare(struct Pokemon *mon, struct DaycareMon *daycareMon)
 {
     if (MonHasMail(mon))
@@ -186,6 +232,10 @@ static void StorePokemonInDaycare(struct Pokemon *mon, struct DaycareMon *daycar
     ZeroMonData(mon);
     CompactPartySlots();
     CalculatePlayerPartyCount();
+
+#if P_EGG_MOVE_TRANSFER >= GEN_8
+    TransferEggMoves();
+#endif
 }
 
 static void StorePokemonInEmptyDaycareSlot(struct Pokemon *mon, struct DayCare *daycare)
