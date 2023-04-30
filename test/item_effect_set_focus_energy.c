@@ -3,7 +3,10 @@
 
 SINGLE_BATTLE_TEST("Dire Hit increases a battler's critical hit chance by 2 stages")
 {
-    KNOWN_FAILING; // Displays Message "Foe Wobbuffet used Dire Hit.." when facing off against Wobbuffet. Doesnt happen against other species?
+    /* KNOWN_FAILING due to message mismatch for "Wobbuffet used Dire Hit to get pumped!"
+     * As of the time of writing, this test passes if the above mentioned message is removed
+     * For more details refer to description of PR #2940 */
+    KNOWN_FAILING;
     ASSUME(B_CRIT_CHANCE >= GEN_7);
     PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
     GIVEN {
