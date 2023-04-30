@@ -165,6 +165,14 @@ static s8 Daycare_FindEmptySpot(struct DayCare *daycare)
     return -1;
 }
 
+static void ClearHatchedEggMoves(void)
+{
+    u16 i;
+
+    for (i = 0; i < EGG_MOVES_ARRAY_COUNT; i++)
+        sHatchedEggEggMoves[i] = MOVE_NONE;
+}
+
 static void TransferEggMoves(void)
 {
     u32 i, j, k, l;
@@ -176,10 +184,8 @@ static void TransferEggMoves(void)
         if (!GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[i].mon, MON_DATA_SANITY_HAS_SPECIES))
             continue;
 
-        // Get list of egg moves for mon
         BoxMonToMon(&gSaveBlock1Ptr->daycare.mons[i].mon, &mon);
-        for (j = 0; j < EGG_MOVES_ARRAY_COUNT; j++)
-            sHatchedEggEggMoves[j] = MOVE_NONE;
+        ClearHatchedEggMoves();
         numEggMoves = GetEggMoves(&mon, sHatchedEggEggMoves);
         for (j = 0; j < numEggMoves; j++)
         {
@@ -753,8 +759,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
         sHatchedEggFatherMoves[i] = MOVE_NONE;
         sHatchedEggFinalMoves[i] = MOVE_NONE;
     }
-    for (i = 0; i < EGG_MOVES_ARRAY_COUNT; i++)
-        sHatchedEggEggMoves[i] = MOVE_NONE;
+    ClearHatchedEggMoves();
     for (i = 0; i < EGG_LVL_UP_MOVES_ARRAY_COUNT; i++)
         sHatchedEggLevelUpMoves[i] = MOVE_NONE;
 
