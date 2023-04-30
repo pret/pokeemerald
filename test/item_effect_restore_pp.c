@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test_battle.h"
 
-SINGLE_BATTLE_TEST("Restore PP: Ether restores the PP of one of a battler's moves by 10 ")
+SINGLE_BATTLE_TEST("Ether restores the PP of one of a battler's moves by 10 ")
 {
     GIVEN {
         ASSUME(gItems[ITEM_ETHER].battleUsage == EFFECT_ITEM_RESTORE_PP);
@@ -16,7 +16,7 @@ SINGLE_BATTLE_TEST("Restore PP: Ether restores the PP of one of a battler's move
     }
 }
 
-SINGLE_BATTLE_TEST("Restore PP: Max Ether restores the PP of one of a battler's moves fully")
+SINGLE_BATTLE_TEST("Max Ether restores the PP of one of a battler's moves fully")
 {
     GIVEN {
         ASSUME(gItems[ITEM_MAX_ETHER].battleUsage == EFFECT_ITEM_RESTORE_PP);
@@ -31,7 +31,7 @@ SINGLE_BATTLE_TEST("Restore PP: Max Ether restores the PP of one of a battler's 
     }
 }
 
-SINGLE_BATTLE_TEST("Restore PP: Elixir restores the PP of all of a battler's moves by 10")
+SINGLE_BATTLE_TEST("Elixir restores the PP of all of a battler's moves by 10")
 {
     GIVEN {
         ASSUME(gItems[ITEM_ELIXIR].battleUsage == EFFECT_ITEM_RESTORE_PP);
@@ -48,7 +48,7 @@ SINGLE_BATTLE_TEST("Restore PP: Elixir restores the PP of all of a battler's mov
     }
 }
 
-SINGLE_BATTLE_TEST("Restore PP: Max Elixir restores the PP of all of a battler's moves fully")
+SINGLE_BATTLE_TEST("Max Elixir restores the PP of all of a battler's moves fully")
 {
     GIVEN {
         ASSUME(gItems[ITEM_MAX_ELIXIR].battleUsage == EFFECT_ITEM_RESTORE_PP);

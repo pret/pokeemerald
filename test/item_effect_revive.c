@@ -3,7 +3,7 @@
 
 #define MAX_HP 200
 
-SINGLE_BATTLE_TEST("Revive: Revive restores a fainted battler's HP to half")
+SINGLE_BATTLE_TEST("Revive restores a fainted battler's HP to half")
 {
     GIVEN {
         ASSUME(gItems[ITEM_REVIVE].battleUsage == EFFECT_ITEM_REVIVE);
@@ -21,7 +21,7 @@ SINGLE_BATTLE_TEST("Revive: Revive restores a fainted battler's HP to half")
     }
 }
 
-SINGLE_BATTLE_TEST("Revive: Max Revive restores a fainted battler's HP fully")
+SINGLE_BATTLE_TEST("Max Revive restores a fainted battler's HP fully")
 {
     GIVEN {
         ASSUME(gItems[ITEM_MAX_REVIVE].battleUsage == EFFECT_ITEM_REVIVE);
@@ -39,7 +39,7 @@ SINGLE_BATTLE_TEST("Revive: Max Revive restores a fainted battler's HP fully")
     }
 }
 
-SINGLE_BATTLE_TEST("Revive: Revival Herb restores a fainted battler's HP fully")
+SINGLE_BATTLE_TEST("Revival Herb restores a fainted battler's HP fully")
 {
     GIVEN {
         ASSUME(gItems[ITEM_REVIVAL_HERB].battleUsage == EFFECT_ITEM_REVIVE);
@@ -57,7 +57,7 @@ SINGLE_BATTLE_TEST("Revive: Revival Herb restores a fainted battler's HP fully")
     }
 }
 
-SINGLE_BATTLE_TEST("Revive: Max Honey restores a fainted battler's HP fully")
+SINGLE_BATTLE_TEST("Max Honey restores a fainted battler's HP fully")
 {
     GIVEN {
         ASSUME(gItems[ITEM_MAX_HONEY].battleUsage == EFFECT_ITEM_REVIVE);

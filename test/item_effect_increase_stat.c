@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test_battle.h"
 
-SINGLE_BATTLE_TEST("Increase Stat: X Attack sharply raises battler's Attack stat", s16 damage)
+SINGLE_BATTLE_TEST("X Attack sharply raises battler's Attack stat", s16 damage)
 {
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Increase Stat: X Attack sharply raises battler's Attack stat
     }
 }
 
-SINGLE_BATTLE_TEST("Increase Stat: X Defense sharply raises battler's Defense stat", s16 damage)
+SINGLE_BATTLE_TEST("X Defense sharply raises battler's Defense stat", s16 damage)
 {
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Increase Stat: X Defense sharply raises battler's Defense st
     }
 }
 
-SINGLE_BATTLE_TEST("Increase Stat: X Sp. Atk sharply raises battler's Sp. Attack stat", s16 damage)
+SINGLE_BATTLE_TEST("X Sp. Atk sharply raises battler's Sp. Attack stat", s16 damage)
 {
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -70,7 +70,7 @@ SINGLE_BATTLE_TEST("Increase Stat: X Sp. Atk sharply raises battler's Sp. Attack
     }
 }
 
-SINGLE_BATTLE_TEST("Increase Stat: X Sp. Def sharply raises battler's Sp. Defense stat", s16 damage)
+SINGLE_BATTLE_TEST("X Sp. Def sharply raises battler's Sp. Defense stat", s16 damage)
 {
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -93,7 +93,7 @@ SINGLE_BATTLE_TEST("Increase Stat: X Sp. Def sharply raises battler's Sp. Defens
     }
 }
 
-SINGLE_BATTLE_TEST("Increase Stat: X Speed sharply raises battler's Speed stat", s16 damage)
+SINGLE_BATTLE_TEST("X Speed sharply raises battler's Speed stat", s16 damage)
 {
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -126,7 +126,7 @@ SINGLE_BATTLE_TEST("Increase Stat: X Speed sharply raises battler's Speed stat",
     }
 }
 
-SINGLE_BATTLE_TEST("Increase Stat: X Accuracy sharply raises battler's Accuracy stat", s16 damage)
+SINGLE_BATTLE_TEST("X Accuracy sharply raises battler's Accuracy stat", s16 damage)
 {
 
     ASSUME(gBattleMoves[MOVE_SING].accuracy == 55);
@@ -147,7 +147,7 @@ SINGLE_BATTLE_TEST("Increase Stat: X Accuracy sharply raises battler's Accuracy 
     }
 }
 
-SINGLE_BATTLE_TEST("Increase Stat: Max Mushrooms raises battler's Attack stat", s16 damage)
+SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Attack stat", s16 damage)
 {
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -167,7 +167,7 @@ SINGLE_BATTLE_TEST("Increase Stat: Max Mushrooms raises battler's Attack stat", 
     }
 }
 
-SINGLE_BATTLE_TEST("Increase Stat: Max Mushrooms raises battler's Defense stat", s16 damage)
+SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Defense stat", s16 damage)
 {
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -187,7 +187,7 @@ SINGLE_BATTLE_TEST("Increase Stat: Max Mushrooms raises battler's Defense stat",
     }
 }
 
-SINGLE_BATTLE_TEST("Increase Stat: Max Mushrooms raises battler's Sp. Attack stat", s16 damage)
+SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Sp. Attack stat", s16 damage)
 {
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -207,7 +207,7 @@ SINGLE_BATTLE_TEST("Increase Stat: Max Mushrooms raises battler's Sp. Attack sta
     }
 }
 
-SINGLE_BATTLE_TEST("Increase Stat: Max Mushrooms battler's Sp. Defense stat", s16 damage)
+SINGLE_BATTLE_TEST("Max Mushrooms battler's Sp. Defense stat", s16 damage)
 {
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -227,7 +227,7 @@ SINGLE_BATTLE_TEST("Increase Stat: Max Mushrooms battler's Sp. Defense stat", s1
     }
 }
 
-SINGLE_BATTLE_TEST("Increase Stat: Max Mushrooms raises battler's Speed stat", s16 damage)
+SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Speed stat", s16 damage)
 {
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }

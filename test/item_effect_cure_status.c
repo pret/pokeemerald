@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test_battle.h"
 
-SINGLE_BATTLE_TEST("Cure Status: Paralyze Heal heals a battler from being paralyzed")
+SINGLE_BATTLE_TEST("Paralyze Heal heals a battler from being paralyzed")
 {
     GIVEN {
         ASSUME(gItems[ITEM_PARALYZE_HEAL].battleUsage == EFFECT_ITEM_CURE_STATUS);
@@ -16,7 +16,7 @@ SINGLE_BATTLE_TEST("Cure Status: Paralyze Heal heals a battler from being paraly
     }
 }
 
-SINGLE_BATTLE_TEST("Cure Status: Antidote heals a battler from being poisoned")
+SINGLE_BATTLE_TEST("Antidote heals a battler from being poisoned")
 {
     GIVEN {
         ASSUME(gItems[ITEM_ANTIDOTE].battleUsage == EFFECT_ITEM_CURE_STATUS);
@@ -31,7 +31,7 @@ SINGLE_BATTLE_TEST("Cure Status: Antidote heals a battler from being poisoned")
     }
 }
 
-SINGLE_BATTLE_TEST("Cure Status: Antidote heals a battler from being badly poisoned")
+SINGLE_BATTLE_TEST("Antidote heals a battler from being badly poisoned")
 {
     GIVEN {
         ASSUME(gItems[ITEM_ANTIDOTE].battleUsage == EFFECT_ITEM_CURE_STATUS);
@@ -46,7 +46,7 @@ SINGLE_BATTLE_TEST("Cure Status: Antidote heals a battler from being badly poiso
     }
 }
 
-SINGLE_BATTLE_TEST("Cure Status: Awakening heals a battler from being asleep")
+SINGLE_BATTLE_TEST("Awakening heals a battler from being asleep")
 {
     GIVEN {
         ASSUME(gItems[ITEM_AWAKENING].battleUsage == EFFECT_ITEM_CURE_STATUS);
@@ -61,7 +61,7 @@ SINGLE_BATTLE_TEST("Cure Status: Awakening heals a battler from being asleep")
     }
 }
 
-SINGLE_BATTLE_TEST("Cure Status: Burn Heal heals a battler from being burned")
+SINGLE_BATTLE_TEST("Burn Heal heals a battler from being burned")
 {
     GIVEN {
         ASSUME(gItems[ITEM_BURN_HEAL].battleUsage == EFFECT_ITEM_CURE_STATUS);
@@ -76,7 +76,7 @@ SINGLE_BATTLE_TEST("Cure Status: Burn Heal heals a battler from being burned")
     }
 }
 
-SINGLE_BATTLE_TEST("Cure Status: Ice Heal heals a battler from being paralyzed")
+SINGLE_BATTLE_TEST("Ice Heal heals a battler from being paralyzed")
 {
     GIVEN {
         ASSUME(gItems[ITEM_ICE_HEAL].battleUsage == EFFECT_ITEM_CURE_STATUS);
@@ -91,7 +91,7 @@ SINGLE_BATTLE_TEST("Cure Status: Ice Heal heals a battler from being paralyzed")
     }
 }
 
-SINGLE_BATTLE_TEST("Cure Status: Full Heal heals a battler from any primary status")
+SINGLE_BATTLE_TEST("Full Heal heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -113,7 +113,7 @@ SINGLE_BATTLE_TEST("Cure Status: Full Heal heals a battler from any primary stat
     }
 }
 
-SINGLE_BATTLE_TEST("Cure Status: Heal Powder heals a battler from any primary status")
+SINGLE_BATTLE_TEST("Heal Powder heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -135,7 +135,7 @@ SINGLE_BATTLE_TEST("Cure Status: Heal Powder heals a battler from any primary st
     }
 }
 
-SINGLE_BATTLE_TEST("Cure Status: Pewter Crunchies heals a battler from any primary status")
+SINGLE_BATTLE_TEST("Pewter Crunchies heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -157,7 +157,7 @@ SINGLE_BATTLE_TEST("Cure Status: Pewter Crunchies heals a battler from any prima
     }
 }
 
-SINGLE_BATTLE_TEST("Cure Status: Lava Cookies heals a battler from any primary status")
+SINGLE_BATTLE_TEST("Lava Cookies heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -179,7 +179,7 @@ SINGLE_BATTLE_TEST("Cure Status: Lava Cookies heals a battler from any primary s
     }
 }
 
-SINGLE_BATTLE_TEST("Cure Status: Rage Candy Bar heals a battler from any primary status")
+SINGLE_BATTLE_TEST("Rage Candy Bar heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -201,7 +201,7 @@ SINGLE_BATTLE_TEST("Cure Status: Rage Candy Bar heals a battler from any primary
     }
 }
 
-SINGLE_BATTLE_TEST("Cure Status: Old Gateu heals a battler from any primary status")
+SINGLE_BATTLE_TEST("Old Gateu heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -223,7 +223,7 @@ SINGLE_BATTLE_TEST("Cure Status: Old Gateu heals a battler from any primary stat
     }
 }
 
-SINGLE_BATTLE_TEST("Cure Status: Casteliacone heals a battler from any primary status")
+SINGLE_BATTLE_TEST("Casteliacone heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -245,7 +245,7 @@ SINGLE_BATTLE_TEST("Cure Status: Casteliacone heals a battler from any primary s
     }
 }
 
-SINGLE_BATTLE_TEST("Cure Status: Lumiose Galette heals a battler from any primary status")
+SINGLE_BATTLE_TEST("Lumiose Galette heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -267,7 +267,7 @@ SINGLE_BATTLE_TEST("Cure Status: Lumiose Galette heals a battler from any primar
     }
 }
 
-SINGLE_BATTLE_TEST("Cure Status: Shalour Sable heals a battler from any primary status")
+SINGLE_BATTLE_TEST("Shalour Sable heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -289,7 +289,7 @@ SINGLE_BATTLE_TEST("Cure Status: Shalour Sable heals a battler from any primary 
     }
 }
 
-SINGLE_BATTLE_TEST("Cure Status: Big Malasada heals a battler from any primary status")
+SINGLE_BATTLE_TEST("Big Malasada heals a battler from any primary status")
 {
     u16 status;
     PARAMETRIZE{ status = STATUS1_BURN; }
@@ -311,7 +311,7 @@ SINGLE_BATTLE_TEST("Cure Status: Big Malasada heals a battler from any primary s
     }
 }
 
-SINGLE_BATTLE_TEST("Cure Status: Full Heal, Heal Powder and Local Specialties heal a battler from being confused")
+SINGLE_BATTLE_TEST("Full Heal, Heal Powder and Local Specialties heal a battler from being confused")
 {
     u16 item;
     PARAMETRIZE { item = ITEM_FULL_HEAL; }

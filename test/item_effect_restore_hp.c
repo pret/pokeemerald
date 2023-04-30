@@ -4,7 +4,7 @@
 #define TEST_HP 1
 #define MAX_HP 400
 
-SINGLE_BATTLE_TEST("Restore HP: Potion restores a battler's HP by 20")
+SINGLE_BATTLE_TEST("Potion restores a battler's HP by 20")
 {
     GIVEN {
         ASSUME(gItems[ITEM_POTION].battleUsage == EFFECT_ITEM_RESTORE_HP);
@@ -17,7 +17,7 @@ SINGLE_BATTLE_TEST("Restore HP: Potion restores a battler's HP by 20")
     }
 }
 
-SINGLE_BATTLE_TEST("Restore HP: Super Potion restores a battler's HP by 60")
+SINGLE_BATTLE_TEST("Super Potion restores a battler's HP by 60")
 {
     GIVEN {
         ASSUME(gItems[ITEM_SUPER_POTION].battleUsage == EFFECT_ITEM_RESTORE_HP);
@@ -30,7 +30,7 @@ SINGLE_BATTLE_TEST("Restore HP: Super Potion restores a battler's HP by 60")
     }
 }
 
-SINGLE_BATTLE_TEST("Restore HP: Hyper Potion restores a battler's HP by 120")
+SINGLE_BATTLE_TEST("Hyper Potion restores a battler's HP by 120")
 {
     GIVEN {
         ASSUME(gItems[ITEM_HYPER_POTION].battleUsage == EFFECT_ITEM_RESTORE_HP);
@@ -43,7 +43,7 @@ SINGLE_BATTLE_TEST("Restore HP: Hyper Potion restores a battler's HP by 120")
     }
 }
 
-SINGLE_BATTLE_TEST("Restore HP: Max Potion restores a battler's HP fully")
+SINGLE_BATTLE_TEST("Max Potion restores a battler's HP fully")
 {
     GIVEN {
         ASSUME(gItems[ITEM_MAX_POTION].battleUsage == EFFECT_ITEM_RESTORE_HP);
@@ -56,7 +56,7 @@ SINGLE_BATTLE_TEST("Restore HP: Max Potion restores a battler's HP fully")
     }
 }
 
-SINGLE_BATTLE_TEST("Restore HP: Fresh Water restores a battler's HP by 30")
+SINGLE_BATTLE_TEST("Fresh Water restores a battler's HP by 30")
 {
     GIVEN {
         ASSUME(gItems[ITEM_FRESH_WATER].battleUsage == EFFECT_ITEM_RESTORE_HP);
@@ -69,7 +69,7 @@ SINGLE_BATTLE_TEST("Restore HP: Fresh Water restores a battler's HP by 30")
     }
 }
 
-SINGLE_BATTLE_TEST("Restore HP: Soda Pop restores a battler's HP by 50")
+SINGLE_BATTLE_TEST("Soda Pop restores a battler's HP by 50")
 {
     GIVEN {
         ASSUME(gItems[ITEM_SODA_POP].battleUsage == EFFECT_ITEM_RESTORE_HP);
@@ -82,7 +82,7 @@ SINGLE_BATTLE_TEST("Restore HP: Soda Pop restores a battler's HP by 50")
     }
 }
 
-SINGLE_BATTLE_TEST("Restore HP: Lemonade restores a battler's HP by 70")
+SINGLE_BATTLE_TEST("Lemonade restores a battler's HP by 70")
 {
     GIVEN {
         ASSUME(gItems[ITEM_LEMONADE].battleUsage == EFFECT_ITEM_RESTORE_HP);
@@ -95,7 +95,7 @@ SINGLE_BATTLE_TEST("Restore HP: Lemonade restores a battler's HP by 70")
     }
 }
 
-SINGLE_BATTLE_TEST("Restore HP: Moomoo Milk restores a battler's HP by 100")
+SINGLE_BATTLE_TEST("Moomoo Milk restores a battler's HP by 100")
 {
     GIVEN {
         ASSUME(gItems[ITEM_MOOMOO_MILK].battleUsage == EFFECT_ITEM_RESTORE_HP);
@@ -108,7 +108,7 @@ SINGLE_BATTLE_TEST("Restore HP: Moomoo Milk restores a battler's HP by 100")
     }
 }
 
-SINGLE_BATTLE_TEST("Restore HP: Energy Powder restores a battler's HP by 60(50)")
+SINGLE_BATTLE_TEST("Energy Powder restores a battler's HP by 60(50)")
 {
     GIVEN {
         ASSUME(gItems[ITEM_ENERGY_POWDER].battleUsage == EFFECT_ITEM_RESTORE_HP);
@@ -124,7 +124,7 @@ SINGLE_BATTLE_TEST("Restore HP: Energy Powder restores a battler's HP by 60(50)"
     }
 }
 
-SINGLE_BATTLE_TEST("Restore HP: Energy Root restores a battler's HP by 120(200)")
+SINGLE_BATTLE_TEST("Energy Root restores a battler's HP by 120(200)")
 {
     GIVEN {
         ASSUME(gItems[ITEM_ENERGY_ROOT].battleUsage == EFFECT_ITEM_RESTORE_HP);
@@ -140,7 +140,7 @@ SINGLE_BATTLE_TEST("Restore HP: Energy Root restores a battler's HP by 120(200)"
     }
 }
 
-SINGLE_BATTLE_TEST("Restore HP: Sweet Heart restores a battler's HP by 20")
+SINGLE_BATTLE_TEST("Sweet Heart restores a battler's HP by 20")
 {
     GIVEN {
         ASSUME(gItems[ITEM_SWEET_HEART].battleUsage == EFFECT_ITEM_RESTORE_HP);
@@ -153,7 +153,7 @@ SINGLE_BATTLE_TEST("Restore HP: Sweet Heart restores a battler's HP by 20")
     }
 }
 
-SINGLE_BATTLE_TEST("Restore HP: Oran Berry restores a battler's HP by 10")
+SINGLE_BATTLE_TEST("Oran Berry restores a battler's HP by 10")
 {
     GIVEN {
         ASSUME(gItems[ITEM_ORAN_BERRY].battleUsage == EFFECT_ITEM_RESTORE_HP);
@@ -166,7 +166,7 @@ SINGLE_BATTLE_TEST("Restore HP: Oran Berry restores a battler's HP by 10")
     }
 }
 
-SINGLE_BATTLE_TEST("Restore HP: Sitrus Berry restores a battler's HP by 25% of its max HP(30HP flat)")
+SINGLE_BATTLE_TEST("Sitrus Berry restores a battler's HP by 25% of its max HP(30HP flat)")
 {
     GIVEN {
         ASSUME(gItems[ITEM_SITRUS_BERRY].battleUsage == EFFECT_ITEM_RESTORE_HP);
