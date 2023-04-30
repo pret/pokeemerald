@@ -1444,8 +1444,9 @@ BattleScript_EffectBurnUp:
 	goto BattleScript_ButItFailed
 
 BattleScript_BurnUpWorks:
-	setmoveeffect MOVE_EFFECT_BURN_UP | MOVE_EFFECT_CERTAIN
-	goto BattleScript_EffectHit
+	setmoveeffect MOVE_EFFECT_BURN_UP | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	goto BattleScript_HitFromCritCalc
 
 BattleScript_BurnUpRemoveType::
 	losetype BS_ATTACKER, TYPE_FIRE
@@ -1461,8 +1462,9 @@ BattleScript_EffectDoubleShock:
 	goto BattleScript_ButItFailed
 
 BattleScript_DoubleShockWorks:
-	setmoveeffect MOVE_EFFECT_DOUBLE_SHOCK | MOVE_EFFECT_CERTAIN
-	goto BattleScript_EffectHit
+	setmoveeffect MOVE_EFFECT_DOUBLE_SHOCK | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	goto BattleScript_HitFromCritCalc
 
 BattleScript_DoubleShockRemoveType::
 	losetype BS_ATTACKER, TYPE_ELECTRIC
