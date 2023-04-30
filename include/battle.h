@@ -3,6 +3,7 @@
 
 // should they be included here or included individually by every file?
 #include "constants/battle.h"
+#include "constants/form_change_types.h"
 #include "battle_main.h"
 #include "battle_message.h"
 #include "battle_util.h"
@@ -477,13 +478,7 @@ struct LinkBattlerHeader
 struct MegaEvolutionData
 {
     u8 toEvolve; // As flags using gBitTable.
-    u8 evolvedPartyIds[2]; // As flags using gBitTable;
     bool8 alreadyEvolved[4]; // Array id is used for mon position.
-    u16 evolvedSpecies[MAX_BATTLERS_COUNT];
-    u16 playerEvolvedSpecies;
-    u8 primalRevertedPartyIds[2]; // As flags using gBitTable;
-    u16 primalRevertedSpecies[MAX_BATTLERS_COUNT];
-    u16 playerPrimalRevertedSpecies;
     u8 battlerId;
     bool8 playerSelect;
     u8 triggerSpriteId;

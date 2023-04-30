@@ -607,21 +607,9 @@ static void CB2_InitBattleInternal(void)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         // Player's side
-        targetSpecies = GetFormChangeTargetSpecies(&gPlayerParty[i], FORM_BATTLE_BEGIN, 0);
-        if (targetSpecies != SPECIES_NONE)
-        {
-            SetMonData(&gPlayerParty[i], MON_DATA_SPECIES, &targetSpecies);
-            CalculateMonStats(&gPlayerParty[i]);
-            TryToSetBattleFormChangeMoves(&gPlayerParty[i]);
-        }
+        TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_BEGIN_BATTLE);
         // Opponent's side
-        targetSpecies = GetFormChangeTargetSpecies(&gEnemyParty[i], FORM_BATTLE_BEGIN, 0);
-        if (targetSpecies != SPECIES_NONE)
-        {
-            SetMonData(&gEnemyParty[i], MON_DATA_SPECIES, &targetSpecies);
-            CalculateMonStats(&gEnemyParty[i]);
-            TryToSetBattleFormChangeMoves(&gEnemyParty[i]);
-        }
+        TryFormChange(i, B_SIDE_OPPONENT, FORM_CHANGE_BEGIN_BATTLE);
     }
 
     gBattleCommunication[MULTIUSE_STATE] = 0;
@@ -3411,9 +3399,7 @@ void FaintClearSetData(void)
     gBattleMons[gActiveBattler].type3 = TYPE_MYSTERY;
 
     Ai_UpdateFaintData(gActiveBattler);
-    UndoFormChange(gBattlerPartyIndexes[gActiveBattler], GET_BATTLER_SIDE(gActiveBattler), FALSE);
-    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-        UndoMegaEvolution(gBattlerPartyIndexes[gActiveBattler]);
+    TryBattleFormChange(gActiveBattler, FORM_CHANGE_FAINT);
 
     gBattleStruct->overwrittenAbilities[gActiveBattler] = ABILITY_NONE;
 
@@ -3845,24 +3831,6 @@ static void TryDoEventsBeforeFirstTurn(void)
     }
     memset(gTotemBoosts, 0, sizeof(gTotemBoosts));  // erase all totem boosts just to be safe
 
-    // Primal Reversion
-    for (i = 0; i < gBattlersCount; i++)
-    {
-        if (GetBattlerHoldEffect(i, TRUE) == HOLD_EFFECT_PRIMAL_ORB)
-        {
-            for (j = 0; j < EVOS_PER_MON; j++)
-            {
-                if (gEvolutionTable[gBattleMons[i].species][j].targetSpecies != SPECIES_NONE
-                 && gEvolutionTable[gBattleMons[i].species][j].method == EVO_PRIMAL_REVERSION)
-                {
-                    gBattlerAttacker = i;
-                    BattleScriptExecute(BattleScript_PrimalReversion);
-                    return;
-                }
-            }
-        }
-    }
-
     // Check neutralizing gas
     if (AbilityBattleEffects(ABILITYEFFECT_NEUTRALIZINGGAS, 0, 0, 0, 0) != 0)
         return;
@@ -3871,6 +3839,14 @@ static void TryDoEventsBeforeFirstTurn(void)
     while (gBattleStruct->switchInAbilitiesCounter < gBattlersCount)
     {
         gBattlerAttacker = gBattlerByTurnOrder[gBattleStruct->switchInAbilitiesCounter++];
+
+        // Primal Reversion
+        if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_PRIMAL_ORB
+            && GetBattleFormChangeTargetSpecies(gBattlerAttacker, FORM_CHANGE_BATTLE_PRIMAL_REVERSION) != SPECIES_NONE)
+        {
+            BattleScriptExecute(BattleScript_PrimalReversion);
+            return;
+        }
         if (AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, gBattlerAttacker, 0, 0, 0) != 0)
             return;
     }
@@ -5054,7 +5030,7 @@ static void CheckMegaEvolutionBeforeTurn(void)
 
                 gBattleStruct->mega.toEvolve &= ~(gBitTable[gActiveBattler]);
                 gLastUsedItem = gBattleMons[gActiveBattler].item;
-                if (GetWishMegaEvolutionSpecies(GetMonData(mon, MON_DATA_SPECIES), GetMonData(mon, MON_DATA_MOVE1), GetMonData(mon, MON_DATA_MOVE2), GetMonData(mon, MON_DATA_MOVE3), GetMonData(mon, MON_DATA_MOVE4)))
+                if (GetBattleFormChangeTargetSpecies(gActiveBattler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE) != SPECIES_NONE)
                     BattleScriptExecute(BattleScript_WishMegaEvolution);
                 else
                     BattleScriptExecute(BattleScript_MegaEvolution);
@@ -5410,21 +5386,31 @@ static void HandleEndTurn_FinishBattle(void)
     #endif
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            UndoMegaEvolution(i);
-            UndoFormChange(i, B_SIDE_PLAYER, FALSE);
-            DoBurmyFormChange(i);
-        }
-    #if B_RECALCULATE_STATS >= GEN_5
-        // Recalculate the stats of every party member before the end
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
-             && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
-            {
+            bool8 changedForm = FALSE;
+
+            // Appeared in battle and didn't faint
+            if ((gBattleStruct->appearedInBattle & gBitTable[i]) && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0)
+                changedForm = TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_END_BATTLE_TERRAIN);
+
+            if (!changedForm)
+                changedForm = TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_END_BATTLE);
+
+            // Clear original species field
+            gBattleStruct->changedSpecies[i] = SPECIES_NONE;
+
+        #if B_RECALCULATE_STATS >= GEN_5
+            // Recalculate the stats of every party member before the end
+            if (!changedForm)
                 CalculateMonStats(&gPlayerParty[i]);
-            }
+        #endif
         }
-    #endif
+        // Clear battle mon species to avoid a bug on the next battle that causes
+        // healthboxes loading incorrectly due to it trying to create a Mega Indicator
+        // if the previous battler would've had it.
+        for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+        {
+            gBattleMons[i].species = SPECIES_NONE;
+        }
         gBattleMainFunc = FreeResetData_ReturnToOvOrDoEvolutions;
         gCB2_AfterEvolution = BattleMainCB2;
     }

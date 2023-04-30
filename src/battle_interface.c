@@ -980,8 +980,7 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     u8 battler = gSprites[healthboxSpriteId].hMain_Battler;
 
     // Don't print Lv char if mon is mega evolved or primal reverted.
-    if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battler)] & gBitTable[gBattlerPartyIndexes[battler]]
-     || gBattleStruct->mega.primalRevertedPartyIds[GetBattlerSide(battler)] & gBitTable[gBattlerPartyIndexes[battler]])
+    if (IsBattlerMegaEvolved(battler) || IsBattlerPrimalReverted(battler))
     {
         objVram = ConvertIntToDecimalStringN(text, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
         xPos = 5 * (3 - (objVram - (text + 2))) - 1;
@@ -1503,22 +1502,16 @@ static bool32 MegaIndicator_ShouldBeInvisible(u32 battlerId, u32 indicatorType)
     u32 side = GetBattlerSide(battlerId);
     if (indicatorType == INDICATOR_MEGA)
     {
-        if (gBattleStruct->mega.evolvedPartyIds[side] & gBitTable[gBattlerPartyIndexes[battlerId]])
+        if (IsBattlerMegaEvolved(battlerId))
             return FALSE;
     }
     else
     {
-        if (indicatorType == INDICATOR_ALPHA)
-        {
-            if (gBattleMons[battlerId].species != SPECIES_KYOGRE_PRIMAL)
-                return TRUE;
-        }
-        else if (indicatorType == INDICATOR_OMEGA)
-        {
-            if (gBattleMons[battlerId].species != SPECIES_GROUDON_PRIMAL)
-                return TRUE;
-        }
-        if (gBattleStruct->mega.primalRevertedPartyIds[side] & gBitTable[gBattlerPartyIndexes[battlerId]])
+        if (indicatorType == INDICATOR_ALPHA && gBattleMons[battlerId].species != SPECIES_KYOGRE_PRIMAL)
+            return TRUE;
+        else if (indicatorType == INDICATOR_OMEGA && gBattleMons[battlerId].species != SPECIES_GROUDON_PRIMAL)
+            return TRUE;
+        if (IsBattlerPrimalReverted(battlerId))
             return FALSE;
     }
     return TRUE;

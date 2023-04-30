@@ -42,6 +42,7 @@
 #include "constants/battle_frontier.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
+#include "constants/form_change_types.h"
 #include "constants/hold_effects.h"
 #include "constants/item_effects.h"
 #include "constants/items.h"
@@ -4138,13 +4139,14 @@ void CalculateMonStats(struct Pokemon *mon)
     {
         if (currentHP == 0 && oldMaxHP == 0)
             currentHP = newMaxHP;
-        else if (currentHP != 0) {
-            // BUG: currentHP is unintentionally able to become <= 0 after the instruction below. This causes the pomeg berry glitch.
-            currentHP += newMaxHP - oldMaxHP;
-            #ifdef BUGFIX
+        else if (currentHP != 0)
+        {
+            if (newMaxHP > oldMaxHP)
+                currentHP += newMaxHP - oldMaxHP;
             if (currentHP <= 0)
                 currentHP = 1;
-            #endif
+            if (currentHP > newMaxHP)
+                currentHP = newMaxHP;
         }
         else
             return;
@@ -4233,6 +4235,17 @@ void SetMonMoveSlot(struct Pokemon *mon, u16 move, u8 slot)
 {
     SetMonData(mon, MON_DATA_MOVE1 + slot, &move);
     SetMonData(mon, MON_DATA_PP1 + slot, &gBattleMoves[move].pp);
+}
+
+static void SetMonMoveSlot_KeepPP(struct Pokemon *mon, u16 move, u8 slot)
+{
+    u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES, NULL);
+    u8 currPP = GetMonData(mon, MON_DATA_PP1 + slot, NULL);
+    u8 newPP = CalculatePPWithBonus(move, ppBonuses, slot);
+    u8 finalPP = min(currPP, newPP);
+
+    SetMonData(mon, MON_DATA_MOVE1 + slot, &move);
+    SetMonData(mon, MON_DATA_PP1 + slot, &finalPP);
 }
 
 void SetBattleMonMoveSlot(struct BattlePokemon *mon, u16 move, u8 slot)
@@ -8311,18 +8324,18 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
         heldItem = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM, NULL);
         ability = GetAbilityBySpecies(species, GetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, NULL));
 
-        for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
+        for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
         {
             if (method == formChanges[i].method && species != formChanges[i].targetSpecies)
             {
                 switch (method)
                 {
-                case FORM_ITEM_HOLD:
+                case FORM_CHANGE_ITEM_HOLD:
                     if ((heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
                      && (ability == formChanges[i].param2 || formChanges[i].param2 == ABILITY_NONE))
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
-                case FORM_ITEM_USE:
+                case FORM_CHANGE_ITEM_USE:
                     if (arg == formChanges[i].param1)
                     {
                         switch (formChanges[i].param2)
@@ -8343,20 +8356,46 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
                         }
                     }
                     break;
-                case FORM_MOVE:
+                case FORM_CHANGE_MOVE:
                     if (BoxMonKnowsMove(boxMon, formChanges[i].param1) != formChanges[i].param2)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
-                case FORM_BATTLE_BEGIN:
-                case FORM_BATTLE_END:
+                case FORM_CHANGE_BEGIN_BATTLE:
+                case FORM_CHANGE_END_BATTLE:
                     if (heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
                         targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_END_BATTLE_TERRAIN:
+                    if (gBattleTerrain == formChanges[i].param1)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_WITHDRAW:
+                case FORM_CHANGE_FAINT:
+                    targetSpecies = formChanges[i].targetSpecies;
+                    break;
                 }
             }
         }
     }
 
     return targetSpecies;
+}
+
+bool32 DoesSpeciesHaveFormChangeMethod(u16 species, u16 method)
+{
+    u32 i, j;
+    const struct FormChange *formChanges = gFormChangeTablePointers[species];
+
+    if (formChanges != NULL)
+    {
+        for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
+        {
+            if (method == formChanges[i].method && species != formChanges[i].targetSpecies)
+                return TRUE;
+        }
+    }
+
+    return FALSE;
 }
 
 u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove)
@@ -8441,20 +8480,47 @@ bool32 ShouldShowFemaleDifferences(u16 species, u32 personality)
     return (gSpeciesInfo[species].flags & SPECIES_FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
 }
 
-void TryToSetBattleFormChangeMoves(struct Pokemon *mon)
+bool32 TryFormChange(u32 monId, u32 side, u16 method)
+{
+    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    u16 targetSpecies;
+
+    if (GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_NONE
+     || GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_EGG)
+        return FALSE;
+
+    targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
+
+    if (targetSpecies == SPECIES_NONE && gBattleStruct != NULL)
+        targetSpecies = gBattleStruct->changedSpecies[monId];
+
+    if (targetSpecies != SPECIES_NONE)
+    {
+        TryToSetBattleFormChangeMoves(&party[monId], method);
+        SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
+        CalculateMonStats(&party[monId]);
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method)
 {
     int i, j;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     const struct FormChange *formChanges = gFormChangeTablePointers[species];
-    u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES, NULL);
 
-    if (formChanges == NULL)
+    if (formChanges == NULL
+        || (method != FORM_CHANGE_BEGIN_BATTLE && method != FORM_CHANGE_END_BATTLE))
         return;
 
-    for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
+    for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
     {
-        if ((formChanges[i].method == FORM_BATTLE_BEGIN || formChanges[i].method == FORM_BATTLE_END)
-         && formChanges[i].param2 && formChanges[i].param3 && formChanges[i].targetSpecies == species)
+        if (formChanges[i].method == method
+            && formChanges[i].param2
+            && formChanges[i].param3
+            && formChanges[i].targetSpecies != species)
         {
             u16 originalMove = formChanges[i].param2;
             u16 newMove = formChanges[i].param3;
@@ -8462,20 +8528,9 @@ void TryToSetBattleFormChangeMoves(struct Pokemon *mon)
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 u16 currMove = GetMonData(mon, MON_DATA_MOVE1 + j, NULL);
-                u8 totalPp = gBattleMoves[currMove].pp; // Get current move's max PP
-                u8 currPp = GetMonData(mon, MON_DATA_PP1 + j, NULL); // Get current move's remaining PP
-                u8 diffPp = totalPp - currPp; // Current move's PP difference
-                u8 finalPp = gBattleMoves[newMove].pp - diffPp; // Apply the PP difference to the new move
-
                 if (currMove == originalMove)
-                {
-                    if (finalPp > gBattleMoves[newMove].pp)
-                        finalPp = 0;
-                    SetMonMoveSlot(mon, newMove, j);
-                    SetMonData(mon, MON_DATA_PP1 + j, &finalPp);
-                }
+                    SetMonMoveSlot_KeepPP(mon, newMove, j);
             }
-            SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
             break;
         }
     }

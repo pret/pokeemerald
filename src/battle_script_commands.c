@@ -4480,15 +4480,7 @@ static void Cmd_getexp(void)
 
                 if (battlerId != 0xFF)
                 {
-                    gBattleMons[battlerId].level = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL);
-                    gBattleMons[battlerId].hp = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP);
-                    gBattleMons[battlerId].maxHP = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MAX_HP);
-                    gBattleMons[battlerId].attack = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_ATK);
-                    gBattleMons[battlerId].defense = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_DEF);
-                    gBattleMons[battlerId].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPEED);
-                    gBattleMons[battlerId].spAttack = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPATK);
-                    gBattleMons[battlerId].spDefense = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPDEF);
-
+                    CopyMonLevelAndBaseStatsToBattleMon(battlerId, &gPlayerParty[gBattleStruct->expGetterMonId]);
                     if (gStatuses3[battlerId] & STATUS3_POWER_TRICK)
                         SWAP(gBattleMons[battlerId].attack, gBattleMons[battlerId].defense, temp);
                 }
@@ -6269,28 +6261,6 @@ static void Cmd_moveend(void)
                     #endif
                     }
                     return;
-                }
-            }
-            gBattleScripting.moveendState++;
-            break;
-        case MOVEEND_WEATHER_FORM:
-            for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-            {
-                switch (gBattleMons[i].species)
-                {
-                case SPECIES_CASTFORM:
-                case SPECIES_CASTFORM_RAINY:
-                case SPECIES_CASTFORM_SNOWY:
-                case SPECIES_CASTFORM_SUNNY:
-                case SPECIES_CHERRIM:
-                case SPECIES_CHERRIM_SUNSHINE:
-                    effect = TryWeatherFormChange(i);
-                    if (effect)
-                    {
-                        BattleScriptPushCursorAndCallback(BattleScript_WeatherFormChange);
-                        gBattleScripting.battler = i;
-                        gBattleStruct->formToChangeInto = effect - 1;
-                    }
                 }
             }
             gBattleScripting.moveendState++;
@@ -8614,22 +8584,6 @@ u32 IsAbilityStatusProtected(u32 battler)
         || IsShieldsDownProtected(battler);
 }
 
-static void RecalcBattlerStats(u32 battler, struct Pokemon *mon)
-{
-    CalculateMonStats(mon);
-    gBattleMons[battler].level = GetMonData(mon, MON_DATA_LEVEL);
-    gBattleMons[battler].hp = GetMonData(mon, MON_DATA_HP);
-    gBattleMons[battler].maxHP = GetMonData(mon, MON_DATA_MAX_HP);
-    gBattleMons[battler].attack = GetMonData(mon, MON_DATA_ATK);
-    gBattleMons[battler].defense = GetMonData(mon, MON_DATA_DEF);
-    gBattleMons[battler].speed = GetMonData(mon, MON_DATA_SPEED);
-    gBattleMons[battler].spAttack = GetMonData(mon, MON_DATA_SPATK);
-    gBattleMons[battler].spDefense = GetMonData(mon, MON_DATA_SPDEF);
-    gBattleMons[battler].ability = GetMonAbility(mon);
-    gBattleMons[battler].type1 = gSpeciesInfo[gBattleMons[battler].species].types[0];
-    gBattleMons[battler].type2 = gSpeciesInfo[gBattleMons[battler].species].types[1];
-}
-
 u32 GetHighestStatId(u32 battlerId)
 {
     u32 i, highestId = STAT_ATK, highestStat = gBattleMons[battlerId].attack;
@@ -8792,55 +8746,18 @@ static void HandleScriptMegaPrimal(u32 caseId, u32 battlerId, bool32 isMega)
     // Change species.
     if (caseId == 0)
     {
-        u16 newSpecies;
         if (isMega)
         {
-            gBattleStruct->mega.evolvedSpecies[battlerId] = gBattleMons[battlerId].species;
-            if (position == B_POSITION_PLAYER_LEFT
-                || (position == B_POSITION_PLAYER_RIGHT && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))))
-            {
-                gBattleStruct->mega.playerEvolvedSpecies = gBattleStruct->mega.evolvedSpecies[battlerId];
-            }
-            //Checks regular Mega Evolution
-            newSpecies = GetMegaEvolutionSpecies(gBattleStruct->mega.evolvedSpecies[battlerId], gBattleMons[battlerId].item);
-            //Checks Wish Mega Evolution
-            if (newSpecies == SPECIES_NONE)
-            {
-                newSpecies = GetWishMegaEvolutionSpecies(gBattleStruct->mega.evolvedSpecies[battlerId],
-                                                         gBattleMons[battlerId].moves[0], gBattleMons[battlerId].moves[1], gBattleMons[battlerId].moves[2], gBattleMons[battlerId].moves[3]);
-            }
+            if (!TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM))
+                TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE);
         }
         else
-        {
-            gBattleStruct->mega.primalRevertedSpecies[battlerId] = gBattleMons[battlerId].species;
-            if (position == B_POSITION_PLAYER_LEFT
-                || (position == B_POSITION_PLAYER_RIGHT && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))))
-            {
-                gBattleStruct->mega.playerPrimalRevertedSpecies = gBattleStruct->mega.primalRevertedSpecies[battlerId];
-            }
-            // Checks Primal Reversion.
-            newSpecies = GetPrimalReversionSpecies(gBattleStruct->mega.primalRevertedSpecies[battlerId], gBattleMons[battlerId].item);
-        }
+            TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_PRIMAL_REVERSION);
 
-        gBattleMons[battlerId].species = newSpecies;
         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[battlerId].species);
 
         BtlController_EmitSetMonData(BUFFER_A, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[battlerId]], sizeof(gBattleMons[battlerId].species), &gBattleMons[battlerId].species);
         MarkBattlerForControllerExec(battlerId);
-    }
-    // Change stats.
-    else if (caseId == 1)
-    {
-        RecalcBattlerStats(battlerId, mon);
-        if (isMega)
-        {
-            gBattleStruct->mega.alreadyEvolved[position] = TRUE;
-            gBattleStruct->mega.evolvedPartyIds[side] |= gBitTable[gBattlerPartyIndexes[battlerId]];
-        }
-        else
-        {
-            gBattleStruct->mega.primalRevertedPartyIds[side] |= gBitTable[gBattlerPartyIndexes[battlerId]];
-        }
     }
     // Update healthbox and elevation and play cry.
     else
@@ -8848,6 +8765,8 @@ static void HandleScriptMegaPrimal(u32 caseId, u32 battlerId, bool32 isMega)
         UpdateHealthboxAttribute(gHealthboxSpriteIds[battlerId], mon, HEALTHBOX_ALL);
         if (side == B_SIDE_OPPONENT)
             SetBattlerShadowSpriteCallback(battlerId, gBattleMons[battlerId].species);
+        if (isMega)
+            gBattleStruct->mega.alreadyEvolved[position] = TRUE;
     }
 }
 
@@ -10751,15 +10670,7 @@ static void Cmd_various(void)
     case VARIOUS_JUMP_IF_CANT_REVERT_TO_PRIMAL:
     {
         VARIOUS_ARGS(const u8 *jumpInstr);
-        bool8 canDoPrimalReversion = FALSE;
-
-        for (i = 0; i < EVOS_PER_MON; i++)
-        {
-            if (gEvolutionTable[gBattleMons[gActiveBattler].species][i].method == EVO_PRIMAL_REVERSION
-            && gEvolutionTable[gBattleMons[gActiveBattler].species][i].param == gBattleMons[gActiveBattler].item)
-                canDoPrimalReversion = TRUE;
-        }
-        if (!canDoPrimalReversion)
+        if (GetBattleFormChangeTargetSpecies(gActiveBattler, FORM_CHANGE_BATTLE_PRIMAL_REVERSION) == SPECIES_NONE)
             gBattlescriptCurrInstr = cmd->jumpInstr;
         else
             gBattlescriptCurrInstr = cmd->nextInstr;
@@ -15237,15 +15148,7 @@ static void Cmd_tryweatherformdatachange(void)
 {
     CMD_ARGS();
 
-    u8 form;
-
-    gBattlescriptCurrInstr = cmd->nextInstr;
-    form = TryWeatherFormChange(gBattleScripting.battler);
-    if (form)
-    {
-        BattleScriptPushCursorAndCallback(BattleScript_WeatherFormChange);
-        *(&gBattleStruct->formToChangeInto) = form - 1;
-    }
+    // removed in favor of new form system
 }
 
 // Water and Mud Sport
@@ -15732,7 +15635,7 @@ static void Cmd_handleballthrow(void)
         {
             BtlController_EmitBallThrowAnim(BUFFER_A, BALL_3_SHAKES_SUCCESS);
             MarkBattlerForControllerExec(gActiveBattler);
-            UndoFormChange(gBattlerPartyIndexes[gBattlerTarget], GET_BATTLER_SIDE(gBattlerTarget), FALSE);
+            TryBattleFormChange(gBattlerTarget, FORM_CHANGE_END_BATTLE);
             gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
             SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_POKEBALL, &gLastUsedItem);
 
@@ -15786,7 +15689,7 @@ static void Cmd_handleballthrow(void)
                 if (IsCriticalCapture())
                     gBattleSpritesDataPtr->animationData->criticalCaptureSuccess = TRUE;
 
-                UndoFormChange(gBattlerPartyIndexes[gBattlerTarget], GET_BATTLER_SIDE(gBattlerTarget), FALSE);
+                TryBattleFormChange(gBattlerTarget, FORM_CHANGE_END_BATTLE);
                 gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
                 SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_POKEBALL, &gLastUsedItem);
 
