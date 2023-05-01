@@ -3212,7 +3212,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             }
             break;
         case STATUS1_FROSTBITE:
-            if (!CanBeFrozen(gEffectBattler))
+            if (!CanGetFrostbite(gEffectBattler))
                 break;
 
             statusChanged = TRUE;
