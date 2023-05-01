@@ -29,7 +29,12 @@ void SeedRng2(u16 seed);
  *
  * RandomTag identifies the purpose of the value.
  *
- * RandomUniform(tag, lo, hi) returns a number from lo to hi inclusive.
+ * RandomUniform(tag, lo, hi) returns a number from lo to hi inclusive
+ * with uniform probability.
+ *
+ * RandomElement(tag, array) returns an element in array with uniform
+ * probability. The array must be known at compile-time (e.g. a global
+ * const array).
  *
  * RandomPercentage(tag, t) returns FALSE with probability (1-t)/100,
  * and TRUE with probability t/100.
@@ -47,6 +52,7 @@ enum RandomTag
     RNG_CRITICAL_HIT,
     RNG_CUTE_CHARM,
     RNG_DAMAGE_MODIFIER,
+    RNG_DIRE_CLAW,
     RNG_FLAME_BODY,
     RNG_FORCE_RANDOM_SWITCH,
     RNG_FROZEN,
@@ -60,6 +66,7 @@ enum RandomTag
     RNG_SPEED_TIE,
     RNG_STATIC,
     RNG_STENCH,
+    RNG_TRI_ATTACK,
 };
 
 #define RandomWeighted(tag, ...) \
@@ -73,14 +80,34 @@ enum RandomTag
 
 #define RandomPercentage(tag, t) \
     ({ \
-        const u8 weights[] = { 100 - t, t }; \
-        RandomWeightedArray(tag, 100, ARRAY_COUNT(weights), weights); \
+        u32 r; \
+        if (t <= 0) \
+        { \
+            r = FALSE; \
+        } \
+        else if (t >= 100) \
+        { \
+            r = TRUE; \
+        } \
+        else \
+        { \
+          const u8 weights[] = { 100 - t, t }; \
+          r = RandomWeightedArray(tag, 100, ARRAY_COUNT(weights), weights); \
+        } \
+        r; \
+    })
+
+#define RandomElement(tag, array) \
+    ({ \
+        *(typeof((array)[0]) *)RandomElementArray(tag, array, sizeof((array)[0]), ARRAY_COUNT(array)); \
     })
 
 u32 RandomUniform(enum RandomTag, u32 lo, u32 hi);
 u32 RandomWeightedArray(enum RandomTag, u32 sum, u32 n, const u8 *weights);
+const void *RandomElementArray(enum RandomTag, const void *array, size_t size, size_t count);
 
 u32 RandomUniformDefault(enum RandomTag, u32 lo, u32 hi);
 u32 RandomWeightedArrayDefault(enum RandomTag, u32 sum, u32 n, const u8 *weights);
+const void *RandomElementArrayDefault(enum RandomTag, const void *array, size_t size, size_t count);
 
 #endif // GUARD_RANDOM_H

@@ -201,7 +201,11 @@
 #define MAX_PER_STAT_IVS 31
 #define MAX_IV_MASK 31
 #define USE_RANDOM_IVS (MAX_PER_STAT_IVS + 1)
+#if P_EV_CAP >= GEN_6
+#define MAX_PER_STAT_EVS 252
+#else
 #define MAX_PER_STAT_EVS 255
+#endif
 #define MAX_TOTAL_EVS 510
 #if I_VITAMIN_EV_CAP >= GEN_8
 #define EV_ITEM_RAISE_LIMIT MAX_PER_STAT_EVS
@@ -269,9 +273,6 @@
 #define F_SUMMARY_SCREEN_FLIP_SPRITE 0x80
 
 // Evolution types
-#define EVO_MEGA_EVOLUTION                0xffff // Not an actual evolution, used to temporarily mega evolve in battle.
-#define EVO_MOVE_MEGA_EVOLUTION           0xfffe // Mega Evolution that checks for a move instead of held item.
-#define EVO_PRIMAL_REVERSION              0xfffd // Not an actual evolution, used to undergo primal reversion in battle.
 #define EVO_FRIENDSHIP                    1      // Pokémon levels up with friendship ≥ 220
 #define EVO_FRIENDSHIP_DAY                2      // Pokémon levels up during the day with friendship ≥ 220
 #define EVO_FRIENDSHIP_NIGHT              3      // Pokémon levels up at night with friendship ≥ 220
@@ -310,6 +311,7 @@
 #define EVO_SCRIPT_TRIGGER_DMG            36     // Pokémon has specified HP below max, then player interacts trigger
 #define EVO_DARK_SCROLL                   37     // interacts with Scroll of Darkness
 #define EVO_WATER_SCROLL                  38     // interacts with Scroll of Waters
+#define EVO_ITEM_NIGHT                    39     // specified item is used on Pokémon at night
 
 #define EVOS_PER_MON 10
 
@@ -320,15 +322,6 @@
 #define EVO_MODE_ITEM_CHECK        3 // If an Everstone is being held, still want to show that the stone *could* be used on that Pokémon to evolve
 #define EVO_MODE_BATTLE_SPECIAL    4
 #define EVO_MODE_OVERWORLD_SPECIAL 5
-
-// Form change types
-#define FORM_CHANGE_END         0
-#define FORM_ITEM_HOLD          1
-#define FORM_ITEM_USE           2
-#define FORM_MOVE               3
-#define FORM_WITHDRAW           4
-#define FORM_BATTLE_BEGIN       5
-#define FORM_BATTLE_END         6
 
 #define MON_PIC_WIDTH 64
 #define MON_PIC_HEIGHT 64
@@ -357,13 +350,14 @@
 #define SPECIES_FLAG_LEGENDARY          (1 << 0)
 #define SPECIES_FLAG_MYTHICAL           (1 << 1)
 #define SPECIES_FLAG_MEGA_EVOLUTION     (1 << 2)
-#define SPECIES_FLAG_ULTRA_BEAST        (1 << 3)
-#define SPECIES_FLAG_ALOLAN_FORM        (1 << 4)
-#define SPECIES_FLAG_GALARIAN_FORM      (1 << 5)
-#define SPECIES_FLAG_HISUIAN_FORM       (1 << 6)
-#define SPECIES_FLAG_GENDER_DIFFERENCE  (1 << 7)
-#define SPECIES_FLAG_ALL_PERFECT_IVS    (1 << 8)
-#define SPECIES_FLAG_CANNOT_BE_TRADED   (1 << 9)
+#define SPECIES_FLAG_PRIMAL_REVERSION   (1 << 3)
+#define SPECIES_FLAG_ULTRA_BEAST        (1 << 4)
+#define SPECIES_FLAG_ALOLAN_FORM        (1 << 5)
+#define SPECIES_FLAG_GALARIAN_FORM      (1 << 6)
+#define SPECIES_FLAG_HISUIAN_FORM       (1 << 7)
+#define SPECIES_FLAG_GENDER_DIFFERENCE  (1 << 8)
+#define SPECIES_FLAG_ALL_PERFECT_IVS    (1 << 9)
+#define SPECIES_FLAG_CANNOT_BE_TRADED   (1 << 10)
 
 #define LEGENDARY_PERFECT_IV_COUNT 3
 

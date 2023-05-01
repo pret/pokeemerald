@@ -111,8 +111,8 @@ gSpecials::
 	def_special Script_GetCurrentMauvilleMan
 	def_special HasBardSongBeenChanged
 	def_special SaveBardSongLyrics
-	def_special GetHipsterSpokenFlag
-	def_special SetHipsterSpokenFlag
+	def_special HasHipsterTaughtWord
+	def_special SetHipsterTaughtWord
 	def_special HipsterTryTeachWord
 	def_special PlayBardSong
 	def_special SetMauvilleOldManObjEventGfx

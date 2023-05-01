@@ -1300,6 +1300,21 @@ static const u8 sEverstoneDesc[] = _(
     "item that prevents\n"
     "evolution.");
 
+static const u8 sBlackAuguriteDesc[] = _(
+    "A black stone that\n"
+    "makes some Pokémon\n"
+    "evolve.");;
+
+static const u8 sLinkingCordDesc[] = _(
+    "A mysterious string\n"
+    "that makes some\n"
+    "Pokémon evolve.");
+
+static const u8 sPeatBlockDesc[] = _(
+    "A block of material\n"
+    "that makes some\n"
+    "Pokémon evolve.");
+
 // Nectars
 static const u8 sRedNectarDesc[] = _(
     "Flower nectar that\n"
@@ -3892,3 +3907,8 @@ static const u8 sLustrousGlobeDesc[] = _(
     "A large, glowing gem\n"
     "that lets Palkia\n"
     "change form.");
+
+static const u8 sBerserkGene[] = _(
+    "Sharply boosts\n"
+    "Attack, but causes\n"
+    "lasting confusion.");

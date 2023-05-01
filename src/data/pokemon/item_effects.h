@@ -533,8 +533,6 @@ const u8 *const gItemEffectTable[ITEMS_COUNT] =
     [ITEM_DIRE_HIT]           = gItemEffect_DireHit,
     [ITEM_GUARD_SPEC]         = gItemEffect_GuardSpec,
 
-    //[ITEM_MAX_MUSHROOMS]      = gItemEffect_MaxMushrooms, // Todo
-
     // Evolution Items
     [ITEM_FIRE_STONE]         = gItemEffect_EvoItem,
     [ITEM_WATER_STONE]        = gItemEffect_EvoItem,
@@ -556,6 +554,9 @@ const u8 *const gItemEffectTable[ITEMS_COUNT] =
     [ITEM_MALICIOUS_ARMOR]    = gItemEffect_EvoItem,
     [ITEM_SCROLL_OF_DARKNESS] = gItemEffect_EvoItem,
     [ITEM_SCROLL_OF_WATERS]   = gItemEffect_EvoItem,
+    [ITEM_BLACK_AUGURITE]     = gItemEffect_EvoItem,
+    [ITEM_LINKING_CORD]       = gItemEffect_EvoItem,
+    [ITEM_PEAT_BLOCK]         = gItemEffect_EvoItem,
 
     // Berries
     [ITEM_CHERI_BERRY]        = gItemEffect_CheriBerry,

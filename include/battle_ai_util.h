@@ -9,7 +9,8 @@
 
 bool32 AI_RandLessThan(u8 val);
 void RecordLastUsedMoveByTarget(void);
-bool32 IsBattlerAIControlled(u32 battlerId);
+bool32 BattlerHasAi(u32 battlerId);
+bool32 IsAiBattlerAware(u32 battlerId);
 void ClearBattlerMoveHistory(u8 battlerId);
 void RecordLastUsedMoveBy(u32 battlerId, u32 move);
 void RecordKnownMove(u8 battlerId, u32 move);
@@ -129,6 +130,7 @@ bool32 IsSemiInvulnerable(u8 battlerDef, u16 move);
 
 // status checks
 bool32 AI_CanBeBurned(u8 battler, u16 ability);
+bool32 AI_CanGetFrostbite(u8 battler, u16 ability);
 bool32 AI_CanBeConfused(u8 battler, u16 ability);
 bool32 AI_CanSleep(u8 battler, u16 ability);
 bool32 IsBattlerIncapacitated(u8 battler, u16 ability);
@@ -139,11 +141,13 @@ bool32 AI_CanParalyze(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u1
 bool32 AI_CanConfuse(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 battlerAtkPartner, u16 move, u16 partnerMove);
 bool32 ShouldBurnSelf(u8 battler, u16 ability);
 bool32 AI_CanBurn(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 battlerAtkPartner, u16 move, u16 partnerMove);
+bool32 AI_CanGiveFrostbite(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 battlerAtkPartner, u16 move, u16 partnerMove);
 bool32 AI_CanBeInfatuated(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 atkGender, u8 defGender);
 bool32 AnyPartyMemberStatused(u8 battlerId, bool32 checkSoundproof);
 u32 ShouldTryToFlinch(u8 battlerAtk, u8 battlerDef, u16 atkAbility, u16 defAbility, u16 move);
 bool32 ShouldTrap(u8 battlerAtk, u8 battlerDef, u16 move);
 bool32 IsWakeupTurn(u8 battler);
+bool32 AI_IsBattlerAsleepOrComatose(u8 battlerId);
 
 // partner logic
 u16 GetAllyChosenMove(u8 battlerId);
@@ -168,10 +172,11 @@ bool32 SideHasMoveSplit(u8 battlerId, u8 split);
 
 // score increases
 void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score);
-void IncreasePoisonScore(u8 battlerAtk, u8 battlerdef, u16 move, s16 *score);
-void IncreaseBurnScore(u8 battlerAtk, u8 battlerdef, u16 move, s16 *score);
+void IncreasePoisonScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score);
+void IncreaseBurnScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score);
 void IncreaseParalyzeScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score);
 void IncreaseSleepScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score);
 void IncreaseConfusionScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score);
+void IncreaseFrostbiteScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score);
 
 #endif //GUARD_BATTLE_AI_UTIL_H
