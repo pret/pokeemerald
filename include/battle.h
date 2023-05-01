@@ -62,6 +62,7 @@ struct ResourceFlags
 struct DisableStruct
 {
     u32 transformedMonPersonality;
+    u32 transformedMonOtId;
     u16 disabledMove;
     u16 encoredMove;
     u8 protectUses;
@@ -976,6 +977,7 @@ extern u8 gBattlerStatusSummaryTaskId[MAX_BATTLERS_COUNT];
 extern u8 gBattlerInMenuId;
 extern bool8 gDoingBattleAnim;
 extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
+extern u32 gTransformedOtIds[MAX_BATTLERS_COUNT];
 extern u8 gPlayerDpadHoldFrames;
 extern struct BattleSpriteData *gBattleSpritesDataPtr;
 extern struct MonSpritesGfx *gMonSpritesGfxPtr;
