@@ -941,7 +941,7 @@ u8 ItemId_GetBattleUsage(u16 itemId)
             case ITEM_EFFECT_CURE_POISON:
             case ITEM_EFFECT_CURE_SLEEP:
             case ITEM_EFFECT_CURE_BURN:
-            case ITEM_EFFECT_CURE_FREEZE:
+            case ITEM_EFFECT_CURE_FREEZE_FROSTBITE:
             case ITEM_EFFECT_CURE_PARALYSIS:
             case ITEM_EFFECT_CURE_ALL_STATUS:
             case ITEM_EFFECT_CURE_CONFUSION:
@@ -976,7 +976,7 @@ u32 GetItemStatus1Mask(u16 itemId)
         case ITEM3_PARALYSIS:
             return STATUS1_PARALYSIS;
         case ITEM3_FREEZE:
-            return STATUS1_FREEZE;
+            return STATUS1_FREEZE | STATUS1_FROSTBITE;
         case ITEM3_BURN:
             return STATUS1_BURN;
         case ITEM3_POISON:
