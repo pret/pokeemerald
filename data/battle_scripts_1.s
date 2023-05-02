@@ -8883,6 +8883,15 @@ BattleScript_SnowWarningActivatesSnow::
 	call BattleScript_WeatherFormChanges
 	end3
 
+BattleScript_SnowWarningActivatesSnow::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_SNOWWARNINGSNOW
+	waitstate
+	playanimation BS_BATTLER_0, B_ANIM_SNOW_CONTINUES
+	call BattleScript_WeatherFormChanges
+	end3
+
 BattleScript_ActivateTerrainEffects:
 	savetarget
 	setbyte gBattlerTarget, 0
