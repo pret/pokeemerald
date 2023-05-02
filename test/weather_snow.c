@@ -6,11 +6,9 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_SNOWSCAPE].effect == EFFECT_SNOW);
-    ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[0] == TYPE_PSYCHIC);
-    ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[1] == TYPE_PSYCHIC);
-    ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TYPE_ICE);
-    ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[1] == TYPE_ICE);
+    ASSUME(gBattleMoves[MOVE_SNOWSCAPE].effect == EFFECT_SNOWSCAPE);
+    ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[0] != TYPE_ICE && gSpeciesInfo[SPECIES_WOBBUFFET].types[1] != TYPE_ICE);
+    ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TYPE_ICE || gSpeciesInfo[SPECIES_GLALIE].types[1] == TYPE_ICE);
 }
 
 SINGLE_BATTLE_TEST("Snow increases the defense of Ice types by 50 %", s16 damage)

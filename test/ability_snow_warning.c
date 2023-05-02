@@ -1,7 +1,11 @@
 #include "global.h"
 #include "test_battle.h"
 
-SINGLE_BATTLE_TEST("Snow Warning summons hail(snow)")
+#if B_SNOW_WARNING < GEN_9
+SINGLE_BATTLE_TEST("Snow Warning summons hail")
+#elif B_SNOW_WARNING >= GEN_9
+SINGLE_BATTLE_TEST("Snow Warning summons snow")
+#endif
 {
     GIVEN {
         PLAYER(SPECIES_ABOMASNOW) { Ability(ABILITY_SNOW_WARNING); };

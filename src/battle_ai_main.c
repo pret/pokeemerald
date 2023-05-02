@@ -1582,7 +1582,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
              || PartnerMoveEffectIsWeather(BATTLE_PARTNER(battlerAtk), AI_DATA->partnerMove))
                 score -= 8;
             break;
-        case EFFECT_SNOW:
+        case EFFECT_SNOWSCAPE:
             if (gBattleWeather & (B_WEATHER_SNOW | B_WEATHER_PRIMAL_ANY) // should snow be discouraged if hail is up?
              || PartnerMoveEffectIsWeather(BATTLE_PARTNER(battlerAtk), AI_DATA->partnerMove))
                 score -= 8;
@@ -2808,7 +2808,7 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             RETURN_SCORE_PLUS(2);   // our partner benefits from hail
         }
         break;
-    case EFFECT_SNOW:
+    case EFFECT_SNOWSCAPE:
         if (IsBattlerAlive(battlerAtkPartner)
          && ShouldSetSnow(battlerAtkPartner, atkPartnerAbility, atkPartnerHoldEffect))
         {
@@ -3977,7 +3977,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score += 2;
         }
         break;
-    case EFFECT_SNOW: // any other reasons? 
+    case EFFECT_SNOWSCAPE: // any other reasons? 
         if (ShouldSetSnow(battlerAtk, AI_DATA->abilities[battlerAtk], AI_DATA->holdEffects[battlerAtk]))
         {
             if ((HasMoveEffect(battlerAtk, EFFECT_AURORA_VEIL) || HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_AURORA_VEIL))
@@ -4976,7 +4976,7 @@ static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_SUNNY_DAY:
     case EFFECT_SANDSTORM:
     case EFFECT_HAIL:
-    case EFFECT_SNOW:
+    case EFFECT_SNOWSCAPE:
     case EFFECT_GEOMANCY:
     case EFFECT_VICTORY_DANCE:
     case EFFECT_HIT_SET_ENTRY_HAZARD:
@@ -5203,7 +5203,7 @@ static s16 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             case EFFECT_SUNNY_DAY:
             case EFFECT_SANDSTORM:
             case EFFECT_HAIL:
-            case EFFECT_SNOW:
+            case EFFECT_SNOWSCAPE:
             case EFFECT_RAIN_DANCE:
                 score -= 2;
                 break;

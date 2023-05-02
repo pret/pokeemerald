@@ -331,7 +331,7 @@ static const u16 sEncouragedEncoreEffects[] =
     EFFECT_SPIT_UP,
     EFFECT_SWALLOW,
     EFFECT_HAIL,
-    EFFECT_SNOW,
+    EFFECT_SNOWSCAPE,
     EFFECT_TORMENT,
     EFFECT_WILL_O_WISP,
     EFFECT_FOLLOW_ME,
@@ -3264,7 +3264,7 @@ bool32 PartnerMoveEffectIsWeather(u8 battlerAtkPartner, u16 partnerMove)
       || gBattleMoves[partnerMove].effect == EFFECT_RAIN_DANCE
       || gBattleMoves[partnerMove].effect == EFFECT_SANDSTORM
       || gBattleMoves[partnerMove].effect == EFFECT_HAIL
-      || gBattleMoves[partnerMove].effect == EFFECT_SNOW))
+      || gBattleMoves[partnerMove].effect == EFFECT_SNOWSCAPE))
         return TRUE;
 
     return FALSE;
