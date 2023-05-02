@@ -3779,7 +3779,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                     // TODO
                 }
             }
-            else if (gBattleMoves[gCurrentMove].effect == EFFECT_TRIPLE_KICK || gCurrentMove == MOVE_SURGING_STRIKES)
+            else if (gBattleMoves[gCurrentMove].effect == EFFECT_TRIPLE_KICK || gBattleMoves[gCurrentMove].flags & FLAG_THREE_STRIKES)
             {
                 gMultiHitCounter = 3;
                 PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)

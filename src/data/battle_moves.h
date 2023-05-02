@@ -12338,7 +12338,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_IRON_FIST_BOOST,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_IRON_FIST_BOOST | FLAG_THREE_STRIKES,
         .split = SPLIT_PHYSICAL,
         .zMoveEffect = Z_EFFECT_NONE,
     },
@@ -13106,7 +13106,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_TRIPLE_DIVE] =
     {
-        .effect = EFFECT_TRIPLE_KICK,
+        .effect = EFFECT_HIT,
         .power = 30,
         .type = TYPE_WATER,
         .accuracy = 95,
@@ -13114,7 +13114,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_THREE_STRIKES,
         .split = SPLIT_PHYSICAL,
         .zMoveEffect = Z_EFFECT_NONE,
     },
