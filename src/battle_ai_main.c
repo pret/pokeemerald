@@ -1372,7 +1372,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_AURORA_VEIL:
             if (gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_AURORA_VEIL
               || PartnerHasSameMoveEffectWithoutTarget(BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove)
-              || !(gBattleWeather & B_WEATHER_HAIL && gBattleWeather & B_WEATHER_SNOW))
+              || !(gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)))
                 score -= 10;
             break;
         case EFFECT_OHKO:
