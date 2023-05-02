@@ -655,9 +655,6 @@
 #define STRINGID_STARTEDSNOW                          653
 #define STRINGID_SNOWCONTINUES                        654
 #define STRINGID_SNOWSTOPPED                          655
-#define STRINGID_STARTEDSNOW                          653
-#define STRINGID_SNOWCONTINUES                        654
-#define STRINGID_SNOWSTOPPED                          655
 #define STRINGID_SNOWWARNINGSNOW                      656
 
 #define BATTLESTRINGS_COUNT                           657
