@@ -1580,7 +1580,7 @@ bool32 ShouldSetHail(u8 battler, u16 ability, u16 holdEffect)
 {
     if (!AI_WeatherHasEffect())
         return FALSE;
-    else if (gBattleWeather & B_WEATHER_HAIL) // dont set hail if snow is up? 
+    else if (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW))
         return FALSE;
 
     if (ability == ABILITY_SNOW_CLOAK
@@ -1650,11 +1650,11 @@ bool32 ShouldSetSun(u8 battlerAtk, u16 atkAbility, u16 holdEffect)
     return FALSE;
 }
 
-bool32 ShouldSetSnow(u8 battler, u16 ability, u16 holdEffect) // any other reasons snow should be set? 
+bool32 ShouldSetSnow(u8 battler, u16 ability, u16 holdEffect)
 {
     if (!AI_WeatherHasEffect())
         return FALSE;
-    else if (gBattleWeather & B_WEATHER_SNOW) // dont set snow if hail is up? 
+    else if (gBattleWeather & (B_WEATHER_SNOW | B_WEATHER_HAIL))
         return FALSE;
 
     if (ability == ABILITY_SNOW_CLOAK

@@ -280,7 +280,7 @@ void Ai_InitPartyStruct(void)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
             AI_PARTY->mons[B_SIDE_PLAYER][i].isFainted = TRUE;
-        
+
         if (isOmniscient)
         {
             u32 j;
@@ -1578,14 +1578,18 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 8;
             break;
         case EFFECT_HAIL:
-            if (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_PRIMAL_ANY) // should hail be discouraged if snow is up?
+            if (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_PRIMAL_ANY)
              || PartnerMoveEffectIsWeather(BATTLE_PARTNER(battlerAtk), AI_DATA->partnerMove))
                 score -= 8;
+            else if (gBattleWeather & B_WEATHER_SNOW)
+                score -= 2; // mainly to prevent looping between hail and snow
             break;
         case EFFECT_SNOWSCAPE:
-            if (gBattleWeather & (B_WEATHER_SNOW | B_WEATHER_PRIMAL_ANY) // should snow be discouraged if hail is up?
+            if (gBattleWeather & (B_WEATHER_SNOW | B_WEATHER_PRIMAL_ANY)
              || PartnerMoveEffectIsWeather(BATTLE_PARTNER(battlerAtk), AI_DATA->partnerMove))
                 score -= 8;
+            else if (gBattleWeather & B_WEATHER_HAIL)
+                score -= 2; // mainly to prevent looping between hail and snow
             break;
         case EFFECT_ATTRACT:
             if (!AI_CanBeInfatuated(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef],
@@ -3977,7 +3981,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score += 2;
         }
         break;
-    case EFFECT_SNOWSCAPE: // any other reasons? 
+    case EFFECT_SNOWSCAPE:
         if (ShouldSetSnow(battlerAtk, AI_DATA->abilities[battlerAtk], AI_DATA->holdEffects[battlerAtk]))
         {
             if ((HasMoveEffect(battlerAtk, EFFECT_AURORA_VEIL) || HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_AURORA_VEIL))
