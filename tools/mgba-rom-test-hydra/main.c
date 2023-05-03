@@ -23,7 +23,9 @@
 #include <string.h>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
+#ifndef __APPLE__
 #include <sys/prctl.h>
+#endif
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <unistd.h>
@@ -176,9 +178,9 @@ static void exit2(int _)
 
 int main(int argc, char *argv[])
 {
-    if (argc < 3)
+    if (argc < 4)
     {
-        fprintf(stderr, "usage %s mgba-rom-test rom\n", argv[0]);
+        fprintf(stderr, "usage %s mgba-rom-test objcopy rom\n", argv[0]);
         exit(2);
     }
 
@@ -205,7 +207,7 @@ int main(int argc, char *argv[])
     }
 
     int elffd;
-    if ((elffd = open(argv[2], O_RDONLY)) == -1)
+    if ((elffd = open(argv[3], O_RDONLY)) == -1)
     {
         perror("open elffd failed");
         exit(2);
@@ -264,11 +266,13 @@ int main(int argc, char *argv[])
             perror("fork mgba-rom-test failed");
             exit(2);
         } else if (pid == 0) {
+            #ifndef __APPLE__
             if (prctl(PR_SET_PDEATHSIG, SIGTERM) == -1)
             {
                 perror("prctl failed");
                 _exit(2);
             }
+            #endif
             if (getppid() != parent_pid) // Parent died.
             {
                 _exit(2);
@@ -332,6 +336,36 @@ int main(int argc, char *argv[])
                     _exit(2);
                 }
             }
+#ifdef __APPLE__
+            pid_t objcopypid = fork();
+            if (objcopypid == -1)
+            {
+                perror("fork objcopy failed");
+                _exit(2);
+            }
+            else if (objcopypid == 0)
+            {
+                if (execlp(argv[2], argv[2], "-O", "binary", rom_path, rom_path, NULL) == -1)
+                {
+                    perror("execlp objcopy failed");
+                    _exit(2);
+                }
+            }
+            else
+            {
+                int wstatus;
+                if (waitpid(objcopypid, &wstatus, 0) == -1)
+                {
+                    perror("waitpid objcopy failed");
+                    _exit(2);
+                }
+                if (!WIFEXITED(wstatus) || WEXITSTATUS(wstatus) != 0)
+                {
+                    fprintf(stderr, "objcopy exited with an error\n");
+                    _exit(2);
+                }
+            }
+#endif
             // stdbuf is required because otherwise mgba never flushes
             // stdout.
             if (execlp("stdbuf", "stdbuf", "-oL", argv[1], "-l15", "-ClogLevel.gba.dma=16", "-Rr0", rom_path, NULL) == -1)
