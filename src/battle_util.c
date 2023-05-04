@@ -2341,7 +2341,7 @@ u8 DoFieldEndTurnEffects(void)
                 if (!(gBattleWeather & B_WEATHER_SANDSTORM_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
                 {
                     gBattleWeather &= ~B_WEATHER_SANDSTORM_TEMPORARY;
-                    gBattlescriptCurrInstr = BattleScript_SandStormHailEnds;
+                    gBattlescriptCurrInstr = BattleScript_SandStormHailSnowEnds;
                 }
                 else
                 {
@@ -2381,7 +2381,7 @@ u8 DoFieldEndTurnEffects(void)
                 if (!(gBattleWeather & B_WEATHER_HAIL_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
                 {
                     gBattleWeather &= ~B_WEATHER_HAIL_TEMPORARY;
-                    gBattlescriptCurrInstr = BattleScript_SandStormHailEnds;
+                    gBattlescriptCurrInstr = BattleScript_SandStormHailSnowEnds;
                 }
                 else
                 {
@@ -2398,20 +2398,19 @@ u8 DoFieldEndTurnEffects(void)
         case ENDTURN_SNOW:
             if (gBattleWeather & B_WEATHER_SNOW)
             {
-                if (!(gBattleWeather & B_WEATHER_SNOW_PERMANENT))
+                if (!(gBattleWeather & B_WEATHER_SNOW_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
                 {
-                    if (--gWishFutureKnock.weatherDuration == 0)
-                    {
-                        gBattleWeather &= ~B_WEATHER_SNOW_TEMPORARY;
-                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SNOW_STOPPED;
-                    }
+                    gBattleWeather &= ~B_WEATHER_SNOW_TEMPORARY;
+                    gBattlescriptCurrInstr = BattleScript_SandStormHailSnowEnds;
                 }
                 else
                 {
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SNOW_CONTINUES;
+                    gBattlescriptCurrInstr = BattleScript_DamagingWeatherContinues;
                 }
 
-                BattleScriptExecute(BattleScript_SnowContinuesOrEnds);
+                gBattleScripting.animArg1 = B_ANIM_SNOW_CONTINUES;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SNOW;
+                BattleScriptExecute(gBattlescriptCurrInstr);
                 effect++;
             }
             gBattleStruct->turnCountersTracker++;

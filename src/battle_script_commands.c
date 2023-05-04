@@ -12769,6 +12769,20 @@ static void Cmd_weatherdamage(void)
                     gBattleMoveDamage = 1;
             }
         }
+        if (gBattleWeather & B_WEATHER_SNOW)
+        {
+            if (ability == ABILITY_ICE_BODY
+                && !(gStatuses3[gBattlerAttacker] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
+                && !BATTLER_MAX_HP(gBattlerAttacker)
+                && !(gStatuses3[gBattlerAttacker] & STATUS3_HEAL_BLOCK))
+            {
+                gBattlerAbility = gBattlerAttacker;
+                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
+                if (gBattleMoveDamage == 0)
+                    gBattleMoveDamage = 1;
+                gBattleMoveDamage *= -1;
+            }
+        }
     }
 
     gBattlescriptCurrInstr = cmd->nextInstr;

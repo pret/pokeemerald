@@ -737,13 +737,10 @@
 #define B_MSG_DOWNPOUR_CONTINUES 1
 #define B_MSG_RAIN_STOPPED       2
 
-// gSnowContinuesStringIds
-#define B_MSG_SNOW_CONTINUES    0
-#define B_MSG_SNOW_STOPPED      1
-
-// gSandStormHailContinuesStringIds / gSandStormHailDmgStringIds/ gSandStormHailEndStringIds
+// gSandStormHailSnowContinuesStringIds / gSandStormHailDmgStringIds/ gSandStormHailSnowEndStringIds
 #define B_MSG_SANDSTORM  0
 #define B_MSG_HAIL       1
+#define B_MSG_SNOW       2
 
 // gReflectLightScreenSafeguardStringIds
 #define B_MSG_SIDE_STATUS_FAILED     0

@@ -1568,10 +1568,11 @@ const u16 gMoveWeatherChangeStringIds[] =
     [B_MSG_STARTED_SNOW]      = STRINGID_STARTEDSNOW,
 };
 
-const u16 gSandStormHailContinuesStringIds[] =
+const u16 gSandStormHailSnowContinuesStringIds[] =
 {
     [B_MSG_SANDSTORM] = STRINGID_SANDSTORMRAGES,
     [B_MSG_HAIL]      = STRINGID_HAILCONTINUES,
+    [B_MSG_SNOW]      = STRINGID_SNOWCONTINUES,
 };
 
 const u16 gSandStormHailDmgStringIds[] =
@@ -1580,10 +1581,11 @@ const u16 gSandStormHailDmgStringIds[] =
     [B_MSG_HAIL]      = STRINGID_PKMNPELTEDBYHAIL
 };
 
-const u16 gSandStormHailEndStringIds[] =
+const u16 gSandStormHailSnowEndStringIds[] =
 {
     [B_MSG_SANDSTORM] = STRINGID_SANDSTORMSUBSIDED,
     [B_MSG_HAIL]      = STRINGID_HAILSTOPPED,
+    [B_MSG_SNOW]      = STRINGID_SNOWSTOPPED,
 };
 
 const u16 gRainContinuesStringIds[] =
@@ -1591,12 +1593,6 @@ const u16 gRainContinuesStringIds[] =
     [B_MSG_RAIN_CONTINUES]     = STRINGID_RAINCONTINUES,
     [B_MSG_DOWNPOUR_CONTINUES] = STRINGID_DOWNPOURCONTINUES,
     [B_MSG_RAIN_STOPPED]       = STRINGID_RAINSTOPPED
-};
-
-const u16 gSnowContinuesStringIds[] =
-{
-    [B_MSG_SNOW_CONTINUES] = STRINGID_SNOWCONTINUES,
-    [B_MSG_SNOW_STOPPED]   = STRINGID_SNOWSTOPPED,
 };
 
 const u16 gProtectLikeUsedStringIds[] =

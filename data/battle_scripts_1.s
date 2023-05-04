@@ -6851,7 +6851,7 @@ BattleScript_RainContinuesOrEndsEnd::
 	end2
 
 BattleScript_DamagingWeatherContinues::
-	printfromtable gSandStormHailContinuesStringIds
+	printfromtable gSandStormHailSnowContinuesStringIds
 	waitmessage B_WAIT_TIME_LONG
 	playanimation_var BS_ATTACKER, sB_ANIM_ARG1
 	setbyte gBattleCommunication, 0
@@ -6883,16 +6883,8 @@ BattleScript_DamagingWeatherContinuesEnd::
 	bicword gHitMarker, HITMARKER_SKIP_DMG_TRACK | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE | HITMARKER_GRUDGE
 	end2
 
-BattleScript_SnowContinuesOrEnds::
-	printfromtable gSnowContinuesStringIds
-	waitmessage B_WAIT_TIME_LONG
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_SNOW_STOPPED, BattleScript_SnowContinuesOrEndsEnd
-	playanimation BS_ATTACKER, B_ANIM_SNOW_CONTINUES
-BattleScript_SnowContinuesOrEndsEnd::
-	end2
-
-BattleScript_SandStormHailEnds::
-	printfromtable gSandStormHailEndStringIds
+BattleScript_SandStormHailSnowEnds::
+	printfromtable gSandStormHailSnowEndStringIds
 	waitmessage B_WAIT_TIME_LONG
 	end2
 

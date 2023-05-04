@@ -45,7 +45,7 @@ extern const u8 BattleScript_LevelUp[];
 extern const u8 BattleScript_RainContinuesOrEnds[];
 extern const u8 BattleScript_SnowContinuesOrEnds[];
 extern const u8 BattleScript_DamagingWeatherContinues[];
-extern const u8 BattleScript_SandStormHailEnds[];
+extern const u8 BattleScript_SandStormHailSnowEnds[];
 extern const u8 BattleScript_SunlightContinues[];
 extern const u8 BattleScript_SunlightFaded[];
 extern const u8 BattleScript_OverworldWeatherStarts[];
