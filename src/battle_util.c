@@ -3984,96 +3984,6 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
     }
 }
 
-u8 TryWeatherFormChange(u8 battler)
-{
-    u8 ret = 0;
-    bool32 weatherEffect = WEATHER_HAS_EFFECT;
-    u16 holdEffect = GetBattlerHoldEffect(battler, TRUE);
-
-    switch (gBattleMons[battler].species)
-    {
-    case SPECIES_CASTFORM:
-/*  Placeholder
-    case SPECIES_CASTFORM_RAINY:
-    case SPECIES_CASTFORM_SNOWY:
-    case SPECIES_CASTFORM_SUNNY:*/
-#if B_WEATHER_FORMS >= GEN_5
-        if (gBattleMons[battler].hp == 0)
-        {
-            ret = 0; // No change
-        }
-        else if (GetBattlerAbility(battler) != ABILITY_FORECAST || !weatherEffect)
-        {
-            if (!IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL))
-            {
-                SET_BATTLER_TYPE(battler, TYPE_NORMAL);
-                ret = CASTFORM_NORMAL + 1;
-            }
-            else
-            {
-                ret = 0; // No change
-            }
-        }
-#else
-        if (GetBattlerAbility(battler) != ABILITY_FORECAST || gBattleMons[battler].hp == 0)
-        {
-            ret = 0; // No change
-        }
-        else if (!weatherEffect)
-        {
-            if (!IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL))
-            {
-                SET_BATTLER_TYPE(battler, TYPE_NORMAL);
-                ret = CASTFORM_NORMAL + 1;
-            }
-            else
-            {
-                ret = 0; // No change
-            }
-        }
-#endif
-        else if (holdEffect == HOLD_EFFECT_UTILITY_UMBRELLA || (!(gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SUN | B_WEATHER_HAIL)) && !IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL)))
-        {
-            SET_BATTLER_TYPE(battler, TYPE_NORMAL);
-            ret = CASTFORM_NORMAL + 1;
-        }
-        else if (gBattleWeather & B_WEATHER_SUN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && !IS_BATTLER_OF_TYPE(battler, TYPE_FIRE))
-        {
-            SET_BATTLER_TYPE(battler, TYPE_FIRE);
-            ret = CASTFORM_FIRE + 1;
-        }
-        else if (gBattleWeather & B_WEATHER_RAIN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && !IS_BATTLER_OF_TYPE(battler, TYPE_WATER))
-        {
-            SET_BATTLER_TYPE(battler, TYPE_WATER);
-            ret = CASTFORM_WATER + 1;
-        }
-        else if (gBattleWeather & B_WEATHER_HAIL && !IS_BATTLER_OF_TYPE(battler, TYPE_ICE))
-        {
-            SET_BATTLER_TYPE(battler, TYPE_ICE);
-            ret = CASTFORM_ICE + 1;
-        }
-        break;
-    case SPECIES_CHERRIM:
-//  case SPECIES_CHERRIM_SUNSHINE:
-        if (gBattleMons[battler].hp == 0)
-            ret = 0; // No change
-#if B_WEATHER_FORMS >= GEN_5
-        if (GetBattlerAbility(battler) != ABILITY_FLOWER_GIFT)
-            if (gBattleMonForms[battler] != 0)
-                ret = CHERRIM_OVERCAST + 1;
-            else
-                ret = 0; // No change
-#endif
-        else if (gBattleMonForms[battler] == 0 && weatherEffect && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && gBattleWeather & B_WEATHER_SUN)
-            ret = CHERRIM_SUNSHINE + 1;
-        else if (gBattleMonForms[battler] != 0 && (!weatherEffect || holdEffect == HOLD_EFFECT_UTILITY_UMBRELLA || !(gBattleWeather & B_WEATHER_SUN)))
-            ret = CHERRIM_OVERCAST + 1;
-        break;
-    }
-
-    return ret;
-}
-
 static const u16 sWeatherFlagsInfo[][3] =
 {
     [ENUM_WEATHER_RAIN] = {B_WEATHER_RAIN_TEMPORARY, B_WEATHER_RAIN_PERMANENT, HOLD_EFFECT_DAMP_ROCK},
@@ -9273,7 +9183,7 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
         break;
     #endif
     case ABILITY_FLOWER_GIFT:
-        if (gBattleMons[battlerAtk].species == SPECIES_CHERRIM && IsBattlerWeatherAffected(battlerAtk, B_WEATHER_SUN) && IS_MOVE_PHYSICAL(move))
+        if (gBattleMons[battlerAtk].species == SPECIES_CHERRIM_SUNSHINE && IsBattlerWeatherAffected(battlerAtk, B_WEATHER_SUN) && IS_MOVE_PHYSICAL(move))
             MulModifier(&modifier, UQ_4_12(1.5));
         break;
     case ABILITY_HUSTLE:
@@ -9313,7 +9223,7 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
         switch (GetBattlerAbility(BATTLE_PARTNER(battlerAtk)))
         {
         case ABILITY_FLOWER_GIFT:
-            if (gBattleMons[BATTLE_PARTNER(battlerAtk)].species == SPECIES_CHERRIM && IsBattlerWeatherAffected(BATTLE_PARTNER(battlerAtk), B_WEATHER_SUN) && IS_MOVE_PHYSICAL(move))
+            if (gBattleMons[BATTLE_PARTNER(battlerAtk)].species == SPECIES_CHERRIM_SUNSHINE && IsBattlerWeatherAffected(BATTLE_PARTNER(battlerAtk), B_WEATHER_SUN) && IS_MOVE_PHYSICAL(move))
                 MulModifier(&modifier, UQ_4_12(1.5));
             break;
         }
@@ -9447,7 +9357,7 @@ static u32 CalcDefenseStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, 
         }
         break;
     case ABILITY_FLOWER_GIFT:
-        if (gBattleMons[battlerDef].species == SPECIES_CHERRIM && IsBattlerWeatherAffected(battlerDef, B_WEATHER_SUN) && !usesDefStat)
+        if (gBattleMons[battlerDef].species == SPECIES_CHERRIM_SUNSHINE && IsBattlerWeatherAffected(battlerDef, B_WEATHER_SUN) && !usesDefStat)
             MulModifier(&modifier, UQ_4_12(1.5));
         break;
     case ABILITY_PUNK_ROCK:
@@ -9466,7 +9376,7 @@ static u32 CalcDefenseStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, 
         switch (GetBattlerAbility(BATTLE_PARTNER(battlerDef)))
         {
         case ABILITY_FLOWER_GIFT:
-            if (gBattleMons[BATTLE_PARTNER(battlerDef)].species == SPECIES_CHERRIM && IsBattlerWeatherAffected(BATTLE_PARTNER(battlerDef), B_WEATHER_SUN) && !usesDefStat)
+            if (gBattleMons[BATTLE_PARTNER(battlerDef)].species == SPECIES_CHERRIM_SUNSHINE && IsBattlerWeatherAffected(BATTLE_PARTNER(battlerDef), B_WEATHER_SUN) && !usesDefStat)
                 MulModifier(&modifier, UQ_4_12(1.5));
             break;
         }
