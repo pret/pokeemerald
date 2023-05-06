@@ -369,7 +369,7 @@
  *     s16 damage;
  *     HP_BAR(player, captureDamage: &damage);
  * If none of the above are used, causes the test to fail if the HP
- * changes at all.
+ * does not change at all.
  *
  * MESSAGE(pattern)
  * Causes the test to fail if the message in pattern is not displayed.
