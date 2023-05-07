@@ -6,7 +6,7 @@ SINGLE_BATTLE_TEST("Compound Eyes raises accuracy")
     PASSES_RANDOMLY(91, 100, RNG_ACCURACY);
     GIVEN {
         ASSUME(gBattleMoves[MOVE_THUNDER].accuracy == 70);
-        PLAYER(SPECIES_BUTTERFREE) { Ability(ABILITY_COMPOUND_EYES); };
+        PLAYER(SPECIES_BUTTERFREE) { Ability(ABILITY_COMPOUND_EYES); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_THUNDER); }
@@ -16,16 +16,13 @@ SINGLE_BATTLE_TEST("Compound Eyes raises accuracy")
     }
 }
 
-// This fails even though the ability works correctly. The failure is due to
-// a statistical anomaly in the test system where FISSURE hits 3 times more often
-// than we expect.
 SINGLE_BATTLE_TEST("Compound Eyes does not affect OHKO moves")
 {
     PASSES_RANDOMLY(30, 100, RNG_ACCURACY);
     GIVEN {
         ASSUME(gBattleMoves[MOVE_FISSURE].accuracy == 30);
         ASSUME(gBattleMoves[MOVE_FISSURE].effect == EFFECT_OHKO);
-        PLAYER(SPECIES_BUTTERFREE) { Ability(ABILITY_COMPOUND_EYES); };
+        PLAYER(SPECIES_BUTTERFREE) { Ability(ABILITY_COMPOUND_EYES); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_FISSURE); }
