@@ -119,6 +119,7 @@ EWRAM_DATA u8 gBattleAnimAttacker = 0;
 EWRAM_DATA u8 gBattleAnimTarget = 0;
 EWRAM_DATA u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gAnimCustomPanning = 0;
+EWRAM_DATA static bool8 sAnimHideHpBoxes = FALSE;
 
 #include "data/battle_anim.h"
 
@@ -232,7 +233,6 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
 {
     s32 i;
     const u8 *const *animsTable;
-    bool32 hideHpBoxes;
 
     if (gTestRunnerEnabled)
     {
@@ -261,7 +261,7 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
         break;
     }
 
-    hideHpBoxes = !(animType == ANIM_TYPE_MOVE && animId == MOVE_TRANSFORM);
+    sAnimHideHpBoxes = !(animType == ANIM_TYPE_MOVE && animId == MOVE_TRANSFORM);
     if (animType != ANIM_TYPE_MOVE)
     {
         switch (animId)
@@ -276,10 +276,10 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
         case B_ANIM_MEGA_EVOLUTION:
         case B_ANIM_PRIMAL_REVERSION:
         case B_ANIM_GULP_MISSILE:
-            hideHpBoxes = TRUE;
+            sAnimHideHpBoxes = TRUE;
             break;
         default:
-            hideHpBoxes = FALSE;
+            sAnimHideHpBoxes = FALSE;
             break;
         }
     }
@@ -287,7 +287,7 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
     if (!IsContest())
     {
         InitPrioritiesForVisibleBattlers();
-        UpdateOamPriorityInAllHealthboxes(0, hideHpBoxes);
+        UpdateOamPriorityInAllHealthboxes(0, sAnimHideHpBoxes);
         for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
             if (GetBattlerSide(i) != B_SIDE_PLAYER)
@@ -764,7 +764,8 @@ static void Cmd_end(void)
         if (!IsContest())
         {
             InitPrioritiesForVisibleBattlers();
-            UpdateOamPriorityInAllHealthboxes(1, TRUE);
+            UpdateOamPriorityInAllHealthboxes(1, sAnimHideHpBoxes);
+            sAnimHideHpBoxes = FALSE;
         }
         gAnimScriptActive = FALSE;
     }
