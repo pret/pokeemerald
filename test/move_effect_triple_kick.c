@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(gBattleMoves[MOVE_TRIPLE_KICK].effect & EFFECT_TRIPLE_KICK);
 }
 
-SINGLE_BATTLE_TEST("Triple Kick damage is increaased by its base damage for each hit")
+SINGLE_BATTLE_TEST("Triple Kick damage is increased by its base damage for each hit")
 {
     s16 firstHit;
     s16 secondHit;
@@ -24,8 +24,8 @@ SINGLE_BATTLE_TEST("Triple Kick damage is increaased by its base damage for each
         HP_BAR(opponent, captureDamage: &secondHit);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TRIPLE_KICK, player);
         HP_BAR(opponent, captureDamage: &thirdHit);
-    } FINALLY {
-        EXPECT_EQ(secondHit, firstHit * 2);
-        EXPECT_EQ(thirdHit, firstHit * 3);
+    } THEN {
+        EXPECT_MUL_EQ(firstHit, Q_4_12(2.0), secondHit);
+        EXPECT_MUL_EQ(firstHit, Q_4_12(3.0), thirdHit);
     }
 }

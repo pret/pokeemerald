@@ -12132,6 +12132,20 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
         {
             gBattleCommunication[MULTISTRING_CHOOSER] = (gBattlerTarget == gActiveBattler);
             gProtectStructs[gActiveBattler].statRaised = TRUE;
+            
+            // check mirror herb
+            for (index = 0; index < gBattlersCount; index++)
+            {
+                if (GetBattlerSide(index) == GetBattlerSide(gActiveBattler))
+                    continue; // Only triggers on opposing side 
+                if (GetBattlerHoldEffect(index, TRUE) == HOLD_EFFECT_MIRROR_HERB
+                        && gBattleMons[index].statStages[statId] < MAX_STAT_STAGE)
+                {                    
+                    gProtectStructs[index].eatMirrorHerb = 1;
+                    gTotemBoosts[index].stats |= (1 << (statId - 1));    // -1 to start at atk
+                    gTotemBoosts[index].statChanges[statId - 1] = statValue;
+                }
+            }
         }
     }
 
@@ -16531,16 +16545,20 @@ void BS_ItemIncreaseStat(void) {
 void BS_ItemRestorePP(void) {
     NATIVE_ARGS();
     const u8 *effect = GetItemEffect(gLastUsedItem);
-    u32 i, pp, maxPP, moveId;
-    u32 loopEnd = MAX_MON_MOVES;
+    u32 i, pp, maxPP, moveId, loopEnd;
     u32 battlerId = MAX_BATTLERS_COUNT;
     struct Pokemon *mon = (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER) ? &gPlayerParty[gBattleStruct->itemPartyIndex[gBattlerAttacker]] : &gEnemyParty[gBattleStruct->itemPartyIndex[gBattlerAttacker]];
 
     // Check whether to apply to all moves.
     if (effect[4] & ITEM4_HEAL_PP_ONE)
     {
-        i = gChosenMovePos;
-        loopEnd = gChosenMovePos + 1;
+        i = gBattleStruct->itemMoveIndex[gBattlerAttacker];
+        loopEnd = i + 1;
+    }
+    else
+    {
+        i = 0;
+        loopEnd = MAX_MON_MOVES;
     }
 
     // Check if the recipient is an active battler.
@@ -16551,7 +16569,7 @@ void BS_ItemRestorePP(void) {
         battlerId = BATTLE_PARTNER(gBattlerAttacker);
 
     // Heal PP!
-    for (i = 0; i < loopEnd; i++)
+    for (; i < loopEnd; i++)
     {
         pp = GetMonData(mon, MON_DATA_PP1 + i, NULL);
         moveId = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);

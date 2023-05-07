@@ -33,7 +33,7 @@ SINGLE_BATTLE_TEST("Psychic Terrain activates Psychic Seed and Mimicry")
         MESSAGE("Using Psychic Seed, the Sp. Def of Wobbuffet rose!");
         ABILITY_POPUP(opponent);
         MESSAGE("Foe Stunfisk's type changed to Psychc!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].type1, TYPE_PSYCHIC);
     }
 }
@@ -61,7 +61,7 @@ SINGLE_BATTLE_TEST("Psychic Terrain increases power of Psychic-type moves by 30/
     }
 }
 
-SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target the user", s16 damage)
+SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target the user")
 {
     GIVEN {
         PLAYER(SPECIES_SABLEYE) { Ability(ABILITY_PRANKSTER); HP(1); }
@@ -76,7 +76,7 @@ SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target the
     }
 }
 
-SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target all battlers", s16 damage)
+SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target all battlers")
 {
     KNOWN_FAILING;
     GIVEN {
@@ -91,7 +91,7 @@ SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target all
     }
 }
 
-SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target all opponents", s16 damage)
+SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target all opponents")
 {
     KNOWN_FAILING;
     GIVEN {
@@ -106,7 +106,7 @@ SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target all
     }
 }
 
-DOUBLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target allies", s16 damage)
+DOUBLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target allies")
 {
     GIVEN {
         PLAYER(SPECIES_SABLEYE) { Ability(ABILITY_PRANKSTER); }
@@ -122,7 +122,7 @@ DOUBLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target all
     }
 }
 
-SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority field moves", s16 damage)
+SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority field moves")
 {
     KNOWN_FAILING;
     GIVEN {

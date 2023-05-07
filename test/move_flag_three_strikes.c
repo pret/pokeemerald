@@ -20,7 +20,7 @@ SINGLE_BATTLE_TEST("Three-strike flag turns a move into a 3-hit move")
         HP_BAR(opponent, captureDamage: &secondHit);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TRIPLE_DIVE, player);
         HP_BAR(opponent, captureDamage: &thirdHit);
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(firstHit, secondHit);
         EXPECT_EQ(secondHit, thirdHit);
         EXPECT_EQ(firstHit, thirdHit);
@@ -49,7 +49,7 @@ SINGLE_BATTLE_TEST("Surging Strikes hits 3 times with each hit being a critical 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SURGING_STRIKES, player);
         HP_BAR(opponent, captureDamage: &thirdHit);
         MESSAGE("A critical hit!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(firstHit, secondHit);
         EXPECT_EQ(secondHit, thirdHit);
         EXPECT_EQ(firstHit, thirdHit);

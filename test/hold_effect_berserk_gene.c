@@ -11,14 +11,11 @@ SINGLE_BATTLE_TEST("Berserk Gene sharply raises attack at the start of battle", 
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }
     PARAMETRIZE { useItem = TRUE; }
-    if (useItem) PASSES_RANDOMLY(66, 100, RNG_CONFUSION);
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { if (useItem) Item(ITEM_BERSERK_GENE); };
+        PLAYER(SPECIES_WOBBUFFET) { if (useItem) Item(ITEM_BERSERK_GENE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN {
-            MOVE(player, MOVE_TACKLE);
-        }
+        TURN { MOVE(player, MOVE_TACKLE, WITH_RNG(RNG_CONFUSION, FALSE)); }
     } SCENE {
         if (useItem)
         {
@@ -38,17 +35,13 @@ SINGLE_BATTLE_TEST("Berserk Gene activates on switch in", s16 damage)
     u16 useItem;
     PARAMETRIZE { useItem = FALSE; }
     PARAMETRIZE { useItem = TRUE; }
-    if (useItem) PASSES_RANDOMLY(66, 100, RNG_CONFUSION);
     GIVEN {
         PLAYER(SPECIES_WYNAUT);
-        PLAYER(SPECIES_WOBBUFFET) { if (useItem) Item(ITEM_BERSERK_GENE); };
+        PLAYER(SPECIES_WOBBUFFET) { if (useItem) Item(ITEM_BERSERK_GENE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN {
-            SWITCH(player, 1);
-        } TURN {
-            MOVE(player, MOVE_TACKLE);
-        }
+        TURN { SWITCH(player, 1); }
+        TURN { MOVE(player, MOVE_TACKLE, WITH_RNG(RNG_CONFUSION, FALSE)); }
     } SCENE {
         if (useItem)
         {
