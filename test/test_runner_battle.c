@@ -893,6 +893,15 @@ static void BattleTest_TearDown(void *data)
 {
     if (STATE)
     {
+        // Free resources that aren't cleaned up when the battle was
+        // aborted unexpectedly.
+        if (STATE->tearDownBattle)
+        {
+            FreeMonSpritesGfx();
+            FreeBattleSpritesData();
+            FreeBattleResources();
+            FreeAllWindowBuffers();
+        }
         FREE_AND_SET_NULL(STATE->results);
         FREE_AND_SET_NULL(STATE);
     }
@@ -923,6 +932,7 @@ static bool32 BattleTest_HandleExitWithResult(void *data, enum TestResult result
     }
     else
     {
+        STATE->tearDownBattle = TRUE;
         return FALSE;
     }
 }

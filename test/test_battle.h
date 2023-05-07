@@ -614,6 +614,7 @@ struct BattleTestRunnerState
     bool8 runThen:1;
     bool8 runFinally:1;
     bool8 runningFinally:1;
+    bool8 tearDownBattle:1;
     struct BattleTestData data;
     u8 *results;
     u8 checkProgressParameter;
