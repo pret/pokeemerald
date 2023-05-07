@@ -1164,6 +1164,21 @@ void Moves_(u32 sourceLine, const u16 moves[MAX_MON_MOVES])
     DATA.explicitMoves[DATA.currentSide] |= 1 << DATA.currentPartyIndex;
 }
 
+void MovesWithPP_(u32 sourceLine, struct moveWithPP moveWithPP[MAX_MON_MOVES])
+{
+    s32 i;
+    INVALID_IF(!DATA.currentMon, "Moves outside of PLAYER/OPPONENT");
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moveWithPP[i].moveId == MOVE_NONE)
+            break;
+        INVALID_IF(moveWithPP[i].moveId >= MOVES_COUNT, "Illegal move: %d", &moveWithPP[i].moveId);
+        SetMonData(DATA.currentMon, MON_DATA_MOVE1 + i, &moveWithPP[i].moveId);
+        SetMonData(DATA.currentMon, MON_DATA_PP1 + i, &moveWithPP[i].pp);
+    }
+    DATA.explicitMoves[DATA.currentSide] |= 1 << DATA.currentPartyIndex;
+}
+
 void Friendship_(u32 sourceLine, u32 friendship)
 {
     INVALID_IF(!DATA.currentMon, "Friendship outside of PLAYER/OPPONENT");
@@ -1542,10 +1557,8 @@ void UseItem(u32 sourceLine, struct BattlePokemon *battler, struct ItemContext c
     PushBattlerAction(sourceLine, battlerId, RECORDED_ACTION_TYPE, B_ACTION_USE_ITEM);
     PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_ID, (ctx.itemId >> 8) & 0xFF);
     PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_ID, ctx.itemId & 0xFF);
-    if (ctx.explicitPartyIndex)
-        gBattleStruct->itemPartyIndex[battlerId] = ctx.partyIndex;
-    if (ctx.explicitMove)
-        gBattleStruct->itemPartyIndex[battlerId] = i;
+    PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_TARGET, ctx.partyIndex);
+    PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_MOVE, i);
     DATA.actionBattlers |= 1 << battlerId;
 }
 

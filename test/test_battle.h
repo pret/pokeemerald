@@ -712,6 +712,11 @@ void Randomly(u32 sourceLine, u32 passes, u32 trials, struct RandomlyContext);
 
 /* Given */
 
+struct moveWithPP {
+    u16 moveId;
+    u8 pp;
+};
+
 #define GIVEN for (; gBattleTestRunnerState->runGiven; gBattleTestRunnerState->runGiven = FALSE)
 
 #define RNGSeed(seed) RNGSeed_(__LINE__, seed)
@@ -732,6 +737,7 @@ void Randomly(u32 sourceLine, u32 passes, u32 trials, struct RandomlyContext);
 #define Speed(speed) Speed_(__LINE__, speed)
 #define Item(item) Item_(__LINE__, item)
 #define Moves(move1, ...) Moves_(__LINE__, (const u16 [MAX_MON_MOVES]) { move1, __VA_ARGS__ })
+#define MovesWithPP(movewithpp1, ...) MovesWithPP_(__LINE__, (struct moveWithPP[MAX_MON_MOVES]) {movewithpp1, __VA_ARGS__})
 #define Friendship(friendship) Friendship_(__LINE__, friendship)
 #define Status1(status1) Status1_(__LINE__, status1)
 
@@ -752,6 +758,7 @@ void SpDefense_(u32 sourceLine, u32 spDefense);
 void Speed_(u32 sourceLine, u32 speed);
 void Item_(u32 sourceLine, u32 item);
 void Moves_(u32 sourceLine, const u16 moves[MAX_MON_MOVES]);
+void MovesWithPP_(u32 sourceLine, struct moveWithPP moveWithPP[MAX_MON_MOVES]);
 void Friendship_(u32 sourceLine, u32 friendship);
 void Status1_(u32 sourceLine, u32 status1);
 
