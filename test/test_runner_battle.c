@@ -134,6 +134,8 @@ static void BattleTest_SetUp(void *data)
         Test_ExitWithResult(TEST_RESULT_ERROR, "OOM: STATE = AllocZerod(%d)", sizeof(*STATE));
     InvokeTestFunction(test);
     STATE->parameters = STATE->parametersCount;
+    if (STATE->parametersCount == 0 && test->resultsSize > 0)
+        Test_ExitWithResult(TEST_RESULT_INVALID, "results without PARAMETRIZE");
     STATE->results = AllocZeroed(test->resultsSize * STATE->parameters);
     if (!STATE->results)
         Test_ExitWithResult(TEST_RESULT_ERROR, "OOM: STATE->results = AllocZerod(%d)", sizeof(test->resultsSize * STATE->parameters));
@@ -939,6 +941,8 @@ static bool32 BattleTest_HandleExitWithResult(void *data, enum TestResult result
 
 void Randomly(u32 sourceLine, u32 passes, u32 trials, struct RandomlyContext ctx)
 {
+    const struct BattleTest *test = gTestRunnerState.test->data;
+    INVALID_IF(test->resultsSize > 0, "PASSES_RANDOMLY is incompatible with results");
     INVALID_IF(passes > trials, "%d passes specified, but only %d trials", passes, trials);
     STATE->rngTag = ctx.tag;
     STATE->runTrial = 0;
@@ -1564,6 +1568,10 @@ void UseItem(u32 sourceLine, struct BattlePokemon *battler, struct ItemContext c
         }
         INVALID_IF(i == MAX_MON_MOVES, "USE_ITEM on invalid move: %d", ctx.move);
     }
+    else
+    {
+        i = 0;
+    }
     PushBattlerAction(sourceLine, battlerId, RECORDED_ACTION_TYPE, B_ACTION_USE_ITEM);
     PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_ID, (ctx.itemId >> 8) & 0xFF);
     PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_ID, ctx.itemId & 0xFF);
@@ -1719,7 +1727,6 @@ void QueueMessage(u32 sourceLine, const u8 *pattern)
     };
 }
 
-
 void QueueStatus(u32 sourceLine, struct BattlePokemon *battler, struct StatusEventContext ctx)
 {
     s32 battlerId = battler - gBattleMons;
@@ -1758,4 +1765,12 @@ void QueueStatus(u32 sourceLine, struct BattlePokemon *battler, struct StatusEve
             .mask = mask,
         }},
     };
+}
+
+void ValidateFinally(u32 sourceLine)
+{
+    // Defer this error until after estimating the cost.
+    if (STATE->results == NULL)
+        return;
+    INVALID_IF(STATE->parametersCount == 0, "FINALLY without PARAMETRIZE");
 }

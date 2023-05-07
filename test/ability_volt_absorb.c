@@ -63,8 +63,9 @@ SINGLE_BATTLE_TEST("Volt Absorb is only triggered once on multi strike moves")
     }
 }
 
-DOUBLE_BATTLE_TEST("Volt Absorb does not stop Electric Typed Explosion from damaging other pokemon", s16 damage1, s16 damage2) // Fixed issue #1961
+DOUBLE_BATTLE_TEST("Volt Absorb does not stop Electric Typed Explosion from damaging other pokemon") // Fixed issue #1961
 {
+    s16 damage1, damage2;
     GIVEN {
         ASSUME(gBattleMoves[MOVE_EXPLOSION].effect == EFFECT_EXPLOSION);
         ASSUME(gBattleMoves[MOVE_EXPLOSION].type == TYPE_NORMAL);
@@ -78,12 +79,11 @@ DOUBLE_BATTLE_TEST("Volt Absorb does not stop Electric Typed Explosion from dama
         ABILITY_POPUP(playerLeft, ABILITY_VOLT_ABSORB);
         HP_BAR(playerLeft, hp: TEST_MAX_HP / 4 + 1);
         MESSAGE("Jolteon restored HP using its Volt Absorb!");
-        HP_BAR(playerRight, captureDamage: &results->damage1);
-        HP_BAR(opponentRight, captureDamage: &results->damage2);
-    }
-    FINALLY {
-        EXPECT_NE(results[0].damage1, 0);
-        EXPECT_NE(results[0].damage2, 0);
+        HP_BAR(playerRight, captureDamage: &damage1);
+        HP_BAR(opponentRight, captureDamage: &damage2);
+    } THEN {
+        EXPECT_NE(damage1, 0);
+        EXPECT_NE(damage2, 0);
     }
 }
 

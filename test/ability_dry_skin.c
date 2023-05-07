@@ -33,10 +33,13 @@ SINGLE_BATTLE_TEST("Dry Skin heals 1/8th Max HP in Rain")
 
 SINGLE_BATTLE_TEST("Dry Skin increases damage taken from Fire-type moves by 25%", s16 damage)
 {
+    u32 ability;
+    PARAMETRIZE { ability = ABILITY_EFFECT_SPORE; }
+    PARAMETRIZE { ability = ABILITY_DRY_SKIN; }
     GIVEN {
         ASSUME(gBattleMoves[MOVE_EMBER].type == TYPE_FIRE);
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_PARASECT) { Ability(ABILITY_DRY_SKIN); };
+        OPPONENT(SPECIES_PARASECT) { Ability(ability); };
     } WHEN {
         TURN {MOVE(player, MOVE_EMBER); }
     } SCENE {

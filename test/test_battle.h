@@ -897,7 +897,9 @@ void QueueStatus(u32 sourceLine, struct BattlePokemon *battler, struct StatusEve
 
 /* Finally */
 
-#define FINALLY for (; gBattleTestRunnerState->runFinally; gBattleTestRunnerState->runFinally = FALSE) if ((gBattleTestRunnerState->runningFinally = TRUE))
+#define FINALLY for (ValidateFinally(__LINE__); gBattleTestRunnerState->runFinally; gBattleTestRunnerState->runFinally = FALSE) if ((gBattleTestRunnerState->runningFinally = TRUE))
+
+void ValidateFinally(u32 sourceLine);
 
 /* Expect */
 

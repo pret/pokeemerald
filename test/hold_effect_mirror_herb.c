@@ -9,8 +9,8 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Mirror Herb copies all of foe's stat changes in a turn", s16 damage)
 {
     u32 item;
-    PARAMETRIZE{ item = ITEM_NONE; }
-    PARAMETRIZE{ item = ITEM_MIRROR_HERB; }
+    PARAMETRIZE { item = ITEM_NONE; }
+    PARAMETRIZE { item = ITEM_MIRROR_HERB; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(5); Item(item); }
@@ -34,7 +34,7 @@ SINGLE_BATTLE_TEST("Mirror Herb copies all of foe's stat changes in a turn", s16
     }
 }
 
-SINGLE_BATTLE_TEST("Mirror Herb copies all of of Stuff Cheeks", s16 damage)
+SINGLE_BATTLE_TEST("Mirror Herb copies all of of Stuff Cheeks")
 {
     GIVEN {
         ASSUME(gItems[ITEM_LIECHI_BERRY].holdEffect == HOLD_EFFECT_ATTACK_UP);

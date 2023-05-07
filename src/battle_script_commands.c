@@ -16536,10 +16536,10 @@ void BS_ItemRestorePP(void) {
     // Check whether to apply to all moves.
     if (effect[4] & ITEM4_HEAL_PP_ONE)
     {
-        i = gChosenMovePos;
-        loopEnd = gChosenMovePos + 1;
+        i = gBattleStruct->itemMoveIndex[gBattlerAttacker];
+        loopEnd = i + 1;
     }
-    else 
+    else
     {
         i = 0;
         loopEnd = MAX_MON_MOVES;
