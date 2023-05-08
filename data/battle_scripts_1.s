@@ -9373,8 +9373,8 @@ BattleScript_FriskActivates::
 	end3
 
 BattleScript_ImposterActivates::
-	transformdataexecution
 	call BattleScript_AbilityPopUp
+	transformdataexecution
 	playmoveanimation BS_ATTACKER, MOVE_TRANSFORM
 	waitanimation
 	printstring STRINGID_IMPOSTERTRANSFORM
