@@ -2032,6 +2032,7 @@ enum
     ENDTURN_SANDSTORM,
     ENDTURN_SUN,
     ENDTURN_HAIL,
+    ENDTURN_SNOW,
     ENDTURN_GRAVITY,
     ENDTURN_WATER_SPORT,
     ENDTURN_MUD_SPORT,
@@ -2340,7 +2341,7 @@ u8 DoFieldEndTurnEffects(void)
                 if (!(gBattleWeather & B_WEATHER_SANDSTORM_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
                 {
                     gBattleWeather &= ~B_WEATHER_SANDSTORM_TEMPORARY;
-                    gBattlescriptCurrInstr = BattleScript_SandStormHailEnds;
+                    gBattlescriptCurrInstr = BattleScript_SandStormHailSnowEnds;
                 }
                 else
                 {
@@ -2380,7 +2381,7 @@ u8 DoFieldEndTurnEffects(void)
                 if (!(gBattleWeather & B_WEATHER_HAIL_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
                 {
                     gBattleWeather &= ~B_WEATHER_HAIL_TEMPORARY;
-                    gBattlescriptCurrInstr = BattleScript_SandStormHailEnds;
+                    gBattlescriptCurrInstr = BattleScript_SandStormHailSnowEnds;
                 }
                 else
                 {
@@ -2389,6 +2390,26 @@ u8 DoFieldEndTurnEffects(void)
 
                 gBattleScripting.animArg1 = B_ANIM_HAIL_CONTINUES;
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_HAIL;
+                BattleScriptExecute(gBattlescriptCurrInstr);
+                effect++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_SNOW:
+            if (gBattleWeather & B_WEATHER_SNOW)
+            {
+                if (!(gBattleWeather & B_WEATHER_SNOW_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
+                {
+                    gBattleWeather &= ~B_WEATHER_SNOW_TEMPORARY;
+                    gBattlescriptCurrInstr = BattleScript_SandStormHailSnowEnds;
+                }
+                else
+                {
+                    gBattlescriptCurrInstr = BattleScript_DamagingWeatherContinues;
+                }
+
+                gBattleScripting.animArg1 = B_ANIM_SNOW_CONTINUES;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SNOW;
                 BattleScriptExecute(gBattlescriptCurrInstr);
                 effect++;
             }
@@ -4032,7 +4053,7 @@ u8 TryWeatherFormChange(u8 battler)
             }
         }
 #endif
-        else if (holdEffect == HOLD_EFFECT_UTILITY_UMBRELLA || (!(gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SUN | B_WEATHER_HAIL)) && !IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL)))
+        else if (holdEffect == HOLD_EFFECT_UTILITY_UMBRELLA || (!(gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SUN | B_WEATHER_HAIL | B_WEATHER_SNOW)) && !IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL)))
         {
             SET_BATTLER_TYPE(battler, TYPE_NORMAL);
             ret = CASTFORM_NORMAL + 1;
@@ -4047,7 +4068,7 @@ u8 TryWeatherFormChange(u8 battler)
             SET_BATTLER_TYPE(battler, TYPE_WATER);
             ret = CASTFORM_WATER + 1;
         }
-        else if (gBattleWeather & B_WEATHER_HAIL && !IS_BATTLER_OF_TYPE(battler, TYPE_ICE))
+        else if (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW) && !IS_BATTLER_OF_TYPE(battler, TYPE_ICE))
         {
             SET_BATTLER_TYPE(battler, TYPE_ICE);
             ret = CASTFORM_ICE + 1;
@@ -4083,6 +4104,7 @@ static const u16 sWeatherFlagsInfo[][3] =
     [ENUM_WEATHER_SANDSTORM] = {B_WEATHER_SANDSTORM_TEMPORARY, B_WEATHER_SANDSTORM_PERMANENT, HOLD_EFFECT_SMOOTH_ROCK},
     [ENUM_WEATHER_HAIL] = {B_WEATHER_HAIL_TEMPORARY, B_WEATHER_HAIL_PERMANENT, HOLD_EFFECT_ICY_ROCK},
     [ENUM_WEATHER_STRONG_WINDS] = {B_WEATHER_STRONG_WINDS, B_WEATHER_STRONG_WINDS, HOLD_EFFECT_NONE},
+    [ENUM_WEATHER_SNOW] = {B_WEATHER_SNOW_TEMPORARY, B_WEATHER_SNOW_PERMANENT, HOLD_EFFECT_ICY_ROCK},
 };
 
 static void ShouldChangeFormInWeather(u8 battler)
@@ -4103,7 +4125,6 @@ static void ShouldChangeFormInWeather(u8 battler)
 bool32 TryChangeBattleWeather(u8 battler, u32 weatherEnumId, bool32 viaAbility)
 {
     u16 battlerAbility = GetBattlerAbility(battler);
-
     if (gBattleWeather & B_WEATHER_PRIMAL_ANY
         && battlerAbility != ABILITY_DESOLATE_LAND
         && battlerAbility != ABILITY_PRIMORDIAL_SEA
@@ -4129,7 +4150,6 @@ bool32 TryChangeBattleWeather(u8 battler, u32 weatherEnumId, bool32 viaAbility)
         ShouldChangeFormInWeather(battler);
         return TRUE;
     }
-
     return FALSE;
 }
 
@@ -4634,11 +4654,19 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_SNOW_WARNING:
-            if (TryChangeBattleWeather(battler, ENUM_WEATHER_HAIL, TRUE))
+            #if B_SNOW_WARNING >= GEN_9
+            if (TryChangeBattleWeather(battler, ENUM_WEATHER_SNOW, TRUE))
             {
-                BattleScriptPushCursorAndCallback(BattleScript_SnowWarningActivates);
+                BattleScriptPushCursorAndCallback(BattleScript_SnowWarningActivatesSnow);
                 effect++;
             }
+            #else
+            if (TryChangeBattleWeather(battler, ENUM_WEATHER_HAIL, TRUE))
+            {
+                BattleScriptPushCursorAndCallback(BattleScript_SnowWarningActivatesHail);
+                effect++;
+            }
+            #endif
             else if (gBattleWeather & B_WEATHER_PRIMAL_ANY && WEATHER_HAS_EFFECT && !gSpecialStatuses[battler].switchInAbilityDone)
             {
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
@@ -6111,7 +6139,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_ICE_FACE:
-            if (IsBattlerWeatherAffected(battler, B_WEATHER_HAIL)
+            if (IsBattlerWeatherAffected(battler, B_WEATHER_HAIL | B_WEATHER_SNOW)
              && gBattleMons[battler].species == SPECIES_EISCUE_NOICE_FACE
              && !(gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
              && gBattleStruct->allowedToChangeFormInWeather[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)])
@@ -9125,7 +9153,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
             MulModifier(&modifier, UQ_4_12(2.0));
         break;
     case EFFECT_SOLAR_BEAM:
-        if (IsBattlerWeatherAffected(battlerAtk, (B_WEATHER_HAIL | B_WEATHER_SANDSTORM | B_WEATHER_RAIN)))
+        if (IsBattlerWeatherAffected(battlerAtk, (B_WEATHER_HAIL | B_WEATHER_SANDSTORM | B_WEATHER_RAIN | B_WEATHER_SNOW)))
             MulModifier(&modifier, UQ_4_12(0.5));
         break;
     case EFFECT_STOMPING_TANTRUM:
@@ -9529,6 +9557,9 @@ static u32 CalcDefenseStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, 
 
     // sandstorm sp.def boost for rock types
     if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_ROCK) && gBattleWeather & B_WEATHER_SANDSTORM && WEATHER_HAS_EFFECT && !usesDefStat)
+        MulModifier(&modifier, UQ_4_12(1.5));
+    // snow def boost for ice types
+    if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_ICE) && gBattleWeather & B_WEATHER_SNOW && WEATHER_HAS_EFFECT && usesDefStat)
         MulModifier(&modifier, UQ_4_12(1.5));
 
     // The defensive stats of a Player's Pokémon are boosted by x1.1 (+10%) if they have the 5th badge and 7th badges.
