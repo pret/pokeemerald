@@ -6413,7 +6413,6 @@ bool32 CanBePoisoned(u8 battlerAttacker, u8 battlerTarget)
      || ability == ABILITY_IMMUNITY
      || ability == ABILITY_COMATOSE
      || IsAbilityOnSide(battlerTarget, ABILITY_PASTEL_VEIL)
-     || gBattleMons[battlerTarget].status1 & STATUS1_ANY
      || IsAbilityStatusProtected(battlerTarget)
      || IsBattlerTerrainAffected(battlerTarget, STATUS_FIELD_MISTY_TERRAIN))
         return FALSE;
