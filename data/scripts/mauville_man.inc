@@ -64,9 +64,9 @@ MauvilleCity_PokemonCenter_1F_EventScript_DeclineWritingLyrics::
 MauvilleCity_PokemonCenter_1F_EventScript_Hipster::
 	lock
 	faceplayer
-	setflag FLAG_SYS_HIPSTER_MEET
+	setflag FLAG_UNLOCKED_TRENDY_SAYINGS
 	msgbox MauvilleCity_PokemonCenter_1F_Text_TeachWhatsHipAndHappening, MSGBOX_DEFAULT
-	special GetHipsterSpokenFlag
+	special HasHipsterTaughtWord
 	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_PokemonCenter_1F_EventScript_TryTeachWord
 	msgbox MauvilleCity_PokemonCenter_1F_Text_IAlreadyTaughtYou, MSGBOX_DEFAULT
 	release
@@ -80,8 +80,8 @@ MauvilleCity_PokemonCenter_1F_EventScript_TryTeachWord::
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_TeachWord::
-	msgbox MauvilleCity_PokemonCenter_1F_Text_HaveYouHeardOfPhrase, MSGBOX_DEFAULT
-	special SetHipsterSpokenFlag
+	msgbox MauvilleCity_PokemonCenter_1F_Text_HaveYouHeardOfWord, MSGBOX_DEFAULT
+	special SetHipsterTaughtWord
 	release
 	end
 
@@ -315,7 +315,7 @@ MauvilleCity_PokemonCenter_1F_Text_TrendsStartedStory::
 	.string "the HOENN region!$"
 
 MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedTitle::
-    .string "The BERRY-Planting TRAINER$"
+	.string "The BERRY-Planting TRAINER$"
 
 MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedAction::
 	.string "Planted BERRIES$"
@@ -969,7 +969,7 @@ MauvilleCity_PokemonCenter_1F_Text_IveGotNothingNewToTeach:
 	.string "what's hip and happening.\p"
 	.string "I've got nothing new to teach you!$"
 
-MauvilleCity_PokemonCenter_1F_Text_HaveYouHeardOfPhrase:
+MauvilleCity_PokemonCenter_1F_Text_HaveYouHeardOfWord:
 	.string "Hey, have you heard about\n"
 	.string "“{STR_VAR_1}”?\p"
 	.string "What's it mean? Well…\n"

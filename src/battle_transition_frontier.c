@@ -58,7 +58,7 @@ static const struct OamData sOamData_LogoCircles =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -226,7 +226,7 @@ static void LoadLogoGfx(void)
     GetBg0TilesDst(&tilemap, &tileset);
     LZ77UnCompVram(sLogoCenter_Gfx, tileset);
     LZ77UnCompVram(sLogoCenter_Tilemap, tilemap);
-    LoadPalette(sLogo_Pal, 0xF0, sizeof(sLogo_Pal));
+    LoadPalette(sLogo_Pal, BG_PLTT_ID(15), sizeof(sLogo_Pal));
     LoadCompressedSpriteSheet(&sSpriteSheet_LogoCircles);
     LoadSpritePalette(&sSpritePalette_LogoCircles);
 }

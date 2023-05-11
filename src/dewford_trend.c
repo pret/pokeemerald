@@ -8,7 +8,6 @@
 #include "text.h"
 #include "tv.h"
 #include "string_util.h"
-#include "constants/easy_chat.h"
 
 /*
     ## Overview ##

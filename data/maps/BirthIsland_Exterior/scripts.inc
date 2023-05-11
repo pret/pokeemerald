@@ -48,21 +48,24 @@ BirthIsland_Exterior_EventScript_Triangle::
 	special DoDeoxysRockInteraction
 	waitstate
 	switch VAR_RESULT
-	case 0, BirthIsland_Exterior_EventScript_NotSolved1
-	case 1, BirthIsland_Exterior_EventScript_NotSolved2
-	case 2, BirthIsland_Exterior_EventScript_Deoxys
-	case 3, BirthIsland_Exterior_EventScript_NotSolved3
+	case DEOXYS_ROCK_FAILED,     BirthIsland_Exterior_EventScript_Failed
+	case DEOXYS_ROCK_PROGRESSED, BirthIsland_Exterior_EventScript_Progressed
+	case DEOXYS_ROCK_SOLVED,     BirthIsland_Exterior_EventScript_Deoxys
+	case DEOXYS_ROCK_COMPLETE,   BirthIsland_Exterior_EventScript_Complete
 	end
 
-BirthIsland_Exterior_EventScript_NotSolved1::
+@ The actual rock triangle movement is handled by DoDeoxysRockInteraction.
+@ Unless the player has solved the puzzle and needs to encounter Deoxys,
+@ there's nothing else the script needs to do.
+BirthIsland_Exterior_EventScript_Failed::
 	release
 	end
 
-BirthIsland_Exterior_EventScript_NotSolved2::
+BirthIsland_Exterior_EventScript_Progressed::
 	release
 	end
 
-BirthIsland_Exterior_EventScript_NotSolved3::
+BirthIsland_Exterior_EventScript_Complete::
 	release
 	end
 
@@ -82,10 +85,7 @@ BirthIsland_Exterior_EventScript_Deoxys::
 	delay 40
 	waitmoncry
 	setvar VAR_LAST_TALKED, LOCALID_DEOXYS
-	setvar VAR_0x8004, SPECIES_DEOXYS
-	setvar VAR_0x8005, 30 @ level
-	setvar VAR_0x8006, ITEM_NONE
-	special CreateEventLegalEnemyMon
+	seteventmon SPECIES_DEOXYS, 30
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	waitstate

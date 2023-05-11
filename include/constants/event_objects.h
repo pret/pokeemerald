@@ -241,6 +241,15 @@
 #define OBJ_EVENT_GFX_LUGIA                      237
 #define OBJ_EVENT_GFX_HOOH                       238
 
+// NOTE: By default, the max value for NUM_OBJ_EVENT_GFX is 239.
+//
+// Object event graphics ids are 1 byte in size (max value of 255), and the dynamic
+// graphics ids that start after NUM_OBJ_EVENT_GFX reach this limit. No graphics id
+// uses the value 239 itself, so removing the "+ 1" in OBJ_EVENT_GFX_VARS would
+// allow increasing NUM_OBJ_EVENT_GFX to 240. There are also a handful of unused
+// object graphics that can be removed. If more graphics are needed, anything that
+// stores graphics ids will need to be increased in size. See wiki entry below:
+// https://github.com/pret/pokeemerald/wiki/Feature-Branches#overworld-expansion
 #define NUM_OBJ_EVENT_GFX                        239
 
 
@@ -278,6 +287,9 @@
 #define TRACKS_BIKE_TIRE  2
 
 #define FIRST_DECORATION_SPRITE_GFX OBJ_EVENT_GFX_PICHU_DOLL
+
+#define OBJ_KIND_NORMAL 0
+#define OBJ_KIND_CLONE  255 // Exclusive to FRLG
 
 // Special object event local ids
 #define OBJ_EVENT_ID_PLAYER 0xFF

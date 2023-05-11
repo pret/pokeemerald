@@ -3,11 +3,11 @@
 
 struct BardSound
 {
-    /*0x00*/ u8 var00;
-    /*0x01*/ s8 var01;
-    /*0x02*/ u16 var02;
+    /*0x00*/ u8 songLengthId;
+    /*0x01*/ s8 songLengthOffset;
+    /*0x02*/ u16 unused;
     /*0x04*/ s16 volume;
-    /*0x06*/ u16 var06;
+    /*0x06*/ u16 unused2;
 };
 
 struct BardPhoneme

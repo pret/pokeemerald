@@ -60,21 +60,21 @@
       "y": 21,
       "elevation": 0,
       "dest_map": "MAP_MAGMA_HIDEOUT_4F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 21,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_MAGMA_HIDEOUT_3F_2R",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 23,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_MAGMA_HIDEOUT_2F_1R",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

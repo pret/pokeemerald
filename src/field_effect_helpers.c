@@ -97,18 +97,12 @@ static void LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, 
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     if (graphicsInfo->reflectionPaletteTag != OBJ_EVENT_PAL_TAG_NONE)
     {
-        if (graphicsInfo->paletteSlot == 0)
-        {
+        if (graphicsInfo->paletteSlot == PALSLOT_PLAYER)
             LoadPlayerObjectReflectionPalette(graphicsInfo->paletteTag, paletteIndex);
-        }
-        else if (graphicsInfo->paletteSlot == 10)
-        {
+        else if (graphicsInfo->paletteSlot == PALSLOT_NPC_SPECIAL)
             LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, paletteIndex);
-        }
         else
-        {
             PatchObjectPalette(GetObjectPaletteTag(paletteIndex), paletteIndex);
-        }
         UpdateSpritePaletteWithWeather(paletteIndex);
     }
 }
@@ -359,7 +353,7 @@ void UpdateTallGrassFieldEffect(struct Sprite *sprite)
          || objectEvent->previousCoords.y != sprite->sY))
             sprite->sObjectMoved = TRUE;
 
-        // Metatile behavior var re-used
+        // Metatile behavior var re-used as subpriority
         metatileBehavior = 0;
         if (sprite->animCmdIndex == 0)
             metatileBehavior = 4;
@@ -423,7 +417,7 @@ u32 FldEff_LongGrass(void)
     {
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
-        sprite->oam.priority = ZCoordToPriority(gFieldEffectArguments[2]);
+        sprite->oam.priority = ElevationToPriority(gFieldEffectArguments[2]);
         sprite->sElevation = gFieldEffectArguments[2];
         sprite->sX = gFieldEffectArguments[0];
         sprite->sY = gFieldEffectArguments[1];
@@ -487,6 +481,8 @@ void UpdateLongGrassFieldEffect(struct Sprite *sprite)
 #undef sCurrentMap
 #undef sObjectMoved
 
+// Effectively unused as it's not possible in vanilla to jump onto long grass (no adjacent ledges, and can't ride the Acro Bike in it).
+// The graphics for this effect do not visually correspond to long grass either. Perhaps these graphics were its original design?
 u32 FldEff_JumpLongGrass(void)
 {
     u8 spriteId;
@@ -1108,7 +1104,7 @@ void SynchroniseSurfPosition(struct ObjectEvent *playerObj, struct Sprite *sprit
         for (i = DIR_SOUTH; i <= DIR_EAST; i++, x = sprite->data[6], y = sprite->data[7])
         {
             MoveCoords(i, &x, &y);
-            if (MapGridGetZCoordAt(x, y) == 3)
+            if (MapGridGetElevationAt(x, y) == 3)
             {
                 sprite->data[5]++;
                 break;
@@ -1523,7 +1519,7 @@ void UpdateRayquazaSpotlightEffect(struct Sprite *sprite)
                 {
                     for (j = 12; j < 18; j++)
                     {
-                        ((u16*)(BG_SCREEN_ADDR(31)))[i * 32 + j] = 0xBFF4 + i * 6 + j + 1;
+                        ((u16 *)(BG_SCREEN_ADDR(31)))[i * 32 + j] = 0xBFF4 + i * 6 + j + 1;
                     }
                 }
             }
@@ -1609,7 +1605,7 @@ void UpdateRayquazaSpotlightEffect(struct Sprite *sprite)
             {
                 for (j = 12; j < 18; j++)
                 {
-                    ((u16*)(BG_SCREEN_ADDR(31)))[i * 32 + j] = 0;
+                    ((u16 *)(BG_SCREEN_ADDR(31)))[i * 32 + j] = 0;
                 }
             }
             SetGpuReg(REG_OFFSET_BG0VOFS, 0);
@@ -1646,7 +1642,7 @@ void UpdateJumpImpactEffect(struct Sprite *sprite)
     else
     {
         UpdateObjectEventSpriteInvisibility(sprite, FALSE);
-        SetObjectSubpriorityByZCoord(sprite->sElevation, sprite, 0);
+        SetObjectSubpriorityByElevation(sprite->sElevation, sprite, 0);
     }
 }
 
@@ -1658,14 +1654,14 @@ void WaitFieldEffectSpriteAnim(struct Sprite *sprite)
         UpdateObjectEventSpriteInvisibility(sprite, FALSE);
 }
 
-static void UpdateGrassFieldEffectSubpriority(struct Sprite *sprite, u8 z, u8 offset)
+static void UpdateGrassFieldEffectSubpriority(struct Sprite *sprite, u8 elevation, u8 subpriority)
 {
     u8 i;
     s16 var, xhi, lyhi, yhi, ylo;
     const struct ObjectEventGraphicsInfo *graphicsInfo; // Unused Variable
     struct Sprite *linkedSprite;
 
-    SetObjectSubpriorityByZCoord(z, sprite, offset);
+    SetObjectSubpriorityByElevation(elevation, sprite, subpriority);
     for (i = 0; i < OBJECT_EVENTS_COUNT; i ++)
     {
         struct ObjectEvent *objectEvent = &gObjectEvents[i];

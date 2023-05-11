@@ -1,10 +1,10 @@
-const u32 gBerryCheck_Gfx[] = INCBIN_U32("graphics/interface/check_berry.4bpp.lz");
-const u32 gBerryCheck_Pal[] = INCBIN_U32("graphics/interface/check_berry.gbapal.lz");
+const u32 gBerryCheck_Gfx[] = INCBIN_U32("graphics/bag/check_berry.4bpp.lz");
+const u32 gBerryCheck_Pal[] = INCBIN_U32("graphics/bag/check_berry.gbapal.lz");
 
-const u32 gBerryTag_Gfx[] = INCBIN_U32("graphics/interface/berry_tag.bin.lz");
-const u32 gBerryTag_Pal[] = INCBIN_U32("graphics/interface/berry_tag_title.bin.lz");
+const u32 gBerryTag_Gfx[] = INCBIN_U32("graphics/bag/berry_tag.bin.lz");
+const u32 gBerryTag_Pal[] = INCBIN_U32("graphics/bag/berry_tag_title.bin.lz");
 
-const u32 gBerryCheckCircle_Gfx[] = INCBIN_U32("graphics/interface/check_berry_circle.4bpp.lz");
+const u32 gBerryCheckCircle_Gfx[] = INCBIN_U32("graphics/bag/check_berry_circle.4bpp.lz");
 
 const u32 gBerryPic_Cheri[] = INCBIN_U32("graphics/berries/cheri.4bpp.lz");
 const u32 gBerryPic_Oran[] = INCBIN_U32("graphics/berries/oran.4bpp.lz");

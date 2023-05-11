@@ -1,7 +1,6 @@
 #include "global.h"
 #include "main.h"
 #include "constants/songs.h"
-#include "constants/easy_chat.h"
 #include "constants/event_objects.h"
 #include "mauville_old_man.h"
 #include "event_data.h"
@@ -89,7 +88,7 @@ static void SetupHipster(void)
     struct MauvilleManHipster *hipster = &gSaveBlock1Ptr->oldMan.hipster;
 
     hipster->id = MAUVILLE_MAN_HIPSTER;
-    hipster->alreadySpoken = FALSE;
+    hipster->taughtWord = FALSE;
     hipster->language = gGameLanguage;
 }
 
@@ -223,30 +222,31 @@ static void PrepareSongText(void)
 void PlayBardSong(void)
 {
     StartBardSong(gSpecialVar_0x8004);
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
 }
 
-void GetHipsterSpokenFlag(void)
+void HasHipsterTaughtWord(void)
 {
-    gSpecialVar_Result = (&gSaveBlock1Ptr->oldMan.hipster)->alreadySpoken;
+    gSpecialVar_Result = (&gSaveBlock1Ptr->oldMan.hipster)->taughtWord;
 }
 
-void SetHipsterSpokenFlag(void)
+void SetHipsterTaughtWord(void)
 {
-    (&gSaveBlock1Ptr->oldMan.hipster)->alreadySpoken = TRUE;
+    (&gSaveBlock1Ptr->oldMan.hipster)->taughtWord = TRUE;
 }
 
 void HipsterTryTeachWord(void)
 {
-    u16 phrase = GetNewHipsterPhraseToTeach();
+    u16 word = UnlockRandomTrendySaying();
 
-    if (phrase == EC_EMPTY_WORD)
+    if (word == EC_EMPTY_WORD)
     {
+        // All words already unlocked
         gSpecialVar_Result = FALSE;
     }
     else
     {
-        CopyEasyChatWord(gStringVar1, phrase);
+        CopyEasyChatWord(gStringVar1, word);
         gSpecialVar_Result = TRUE;
     }
 }
@@ -370,7 +370,7 @@ static void ResetBardFlag(void)
 
 static void ResetHipsterFlag(void)
 {
-    (&gSaveBlock1Ptr->oldMan.hipster)->alreadySpoken = FALSE;
+    (&gSaveBlock1Ptr->oldMan.hipster)->taughtWord = FALSE;
 }
 
 static void ResetTraderFlag(void)
@@ -439,14 +439,14 @@ static void EnableTextPrinters(void)
     gDisableTextPrinters = FALSE;
 }
 
-static void DisableTextPrinters(struct TextPrinterTemplate * printer, u16 a1)
+static void DisableTextPrinters(struct TextPrinterTemplate * printer, u16 renderCmd)
 {
     gDisableTextPrinters = TRUE;
 }
 
 static void DrawSongTextWindow(const u8 * str)
 {
-    DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, str, 0, 1, 1, DisableTextPrinters);
     gDisableTextPrinters = TRUE;
     CopyWindowToVram(0, COPYWIN_FULL);
@@ -480,7 +480,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
         song->sound = GetWordSounds(word);
         GetWordPhonemes(song, MACRO1(word));
         song->currWord++;
-        if (song->sound->var00 != 0xFF)
+        if (song->sound->songLengthId != 0xFF)
             song->state = 0;
         else
         {
@@ -498,9 +498,9 @@ static void BardSing(struct Task *task, struct BardSong *song)
         {
         case 0:
             song->phonemeTimer = song->phonemes[song->currPhoneme].length;
-            if (sound->var00 <= 50)
+            if (sound->songLengthId <= 50)
             {
-                u8 num = sound->var00 / 3;
+                u8 num = sound->songLengthId / 3;
                 m4aSongNumStart(PH_TRAP_HELD + 3 * num);
             }
             song->state = 2;
@@ -508,7 +508,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
             break;
         case 2:
             song->state = 1;
-            if (sound->var00 <= 50)
+            if (sound->songLengthId <= 50)
             {
                 song->volume = 0x100 + sound->volume * 16;
                 m4aMPlayVolumeControl(&gMPlayInfo_SE2, TRACKS_ALL, song->volume);
@@ -530,7 +530,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
             if (song->phonemeTimer == 0)
             {
                 song->currPhoneme++;
-                if (song->currPhoneme != 6 && song->sound[song->currPhoneme].var00 != 0xFF)
+                if (song->currPhoneme != 6 && song->sound[song->currPhoneme].songLengthId != 0xFF)
                     song->state = 0;
                 else
                 {
@@ -628,7 +628,7 @@ static void Task_BardSong(u8 taskId)
             // End song
             FadeInBGM(6);
             m4aMPlayFadeOutTemporarily(&gMPlayInfo_SE2, 2);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
             DestroyTask(taskId);
         }
         else if (gStringVar4[task->tCharIndex] == CHAR_SPACE)
@@ -1337,7 +1337,7 @@ static void PrintStoryList(void)
             width = curWidth;
     }
     sStorytellerWindowId = CreateWindowFromRect(0, 0, ConvertPixelWidthToTileWidth(width), GetFreeStorySlot() * 2 + 2);
-    SetStandardWindowBorderStyle(sStorytellerWindowId, 0);
+    SetStandardWindowBorderStyle(sStorytellerWindowId, FALSE);
     for (i = 0; i < NUM_STORYTELLER_TALES; i++)
     {
         u16 gameStatID = sStorytellerPtr->gameStatIDs[i];
@@ -1376,7 +1376,7 @@ static void Task_StoryListMenu(u8 taskId)
         }
         ClearToTransparentAndRemoveWindow(sStorytellerWindowId);
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         break;
     }
 }

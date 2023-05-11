@@ -23,9 +23,7 @@
 #include "task.h"
 #include "text.h"
 #include "constants/battle_frontier.h"
-#include "constants/easy_chat.h"
 #include "constants/items.h"
-#include "constants/pokemon.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "constants/moves.h"
@@ -134,9 +132,9 @@ void BufferApprenticeChallengeText(u8 saveApprenticeId)
     StringExpandPlaceholders(gStringVar4, challengeText);
 }
 
-void Apprentice_EnableBothScriptContexts(void)
+void Apprentice_ScriptContext_Enable(void)
 {
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 void ResetApprenticeStruct(struct Apprentice *apprentice)
@@ -640,7 +638,7 @@ static void CreateApprenticeMenu(u8 menu)
     width = ConvertPixelWidthToTileWidth(pixelWidth);
     left = ScriptMenu_AdjustLeftCoordFromWidth(left, width);
     windowId = CreateAndShowWindow(left, top, width, count * 2);
-    SetStandardWindowBorderStyle(windowId, 0);
+    SetStandardWindowBorderStyle(windowId, FALSE);
 
     for (i = 0; i < count; i++)
         AddTextPrinterParameterized(windowId, FONT_NORMAL, strings[i], 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
@@ -681,7 +679,7 @@ static void Task_ChooseAnswer(u8 taskId)
 
     RemoveAndHideWindow(tWindowId);
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 static u8 CreateAndShowWindow(u8 left, u8 top, u8 width, u8 height)
@@ -817,9 +815,9 @@ static void Task_WaitForPrintingMessage(u8 taskId)
     {
         DestroyTask(taskId);
         if (gSpecialVar_0x8005)
-            ExecuteFuncAfterButtonPress(EnableBothScriptContexts);
+            ExecuteFuncAfterButtonPress(ScriptContext_Enable);
         else
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
     }
 }
 
@@ -897,7 +895,7 @@ static void PrintApprenticeMessage(void)
     }
     else
     {
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         return;
     }
 
@@ -908,11 +906,11 @@ static void PrintApprenticeMessage(void)
 
 static void Script_PrintApprenticeMessage(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     PlayerFreeze();
     StopPlayerAvatar();
-    DrawDialogueFrame(0, 1);
+    DrawDialogueFrame(0, TRUE);
     PrintApprenticeMessage();
 }
 
@@ -1291,7 +1289,7 @@ static void Task_ExecuteFuncAfterButtonPress(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
-        gApprenticeFunc = (void*)(u32)(((u16)gTasks[taskId].data[0] | (gTasks[taskId].data[1] << 16)));
+        gApprenticeFunc = (void *)(u32)(((u16)gTasks[taskId].data[0] | (gTasks[taskId].data[1] << 16)));
         gApprenticeFunc();
         DestroyTask(taskId);
     }
