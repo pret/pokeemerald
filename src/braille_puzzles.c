@@ -80,24 +80,24 @@ void DoBrailleDigEffect(void)
     MapGridSetMetatileIdAt( 9 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopLeft);
     MapGridSetMetatileIdAt(10 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopMid);
     MapGridSetMetatileIdAt(11 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopRight);
-    MapGridSetMetatileIdAt( 9 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt( 9 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomLeft | MAPGRID_COLLISION_MASK);
     MapGridSetMetatileIdAt(10 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomMid);
-    MapGridSetMetatileIdAt(11 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(11 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomRight | MAPGRID_COLLISION_MASK);
     DrawWholeMapView();
     PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_BRAILLE_DIG);
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 }
 
 bool8 CheckRelicanthWailord(void)
 {
     // Emerald change: why did they flip it?
     // First comes Wailord
-    if (GetMonData(&gPlayerParty[0], MON_DATA_SPECIES2, 0) == SPECIES_WAILORD)
+    if (GetMonData(&gPlayerParty[0], MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_WAILORD)
     {
         CalculatePlayerPartyCount();
         // Last comes Relicanth
-        if (GetMonData(&gPlayerParty[gPlayerPartyCount - 1], MON_DATA_SPECIES2, 0) == SPECIES_RELICANTH)
+        if (GetMonData(&gPlayerParty[gPlayerPartyCount - 1], MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_RELICANTH)
             return TRUE;
     }
     return FALSE;
@@ -152,7 +152,7 @@ static void Task_SealedChamberShakingEffect(u8 taskId)
         if (task->tShakeCounter == task->tNumShakes)
         {
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
             InstallCameraPanAheadCallback();
         }
     }
@@ -207,13 +207,13 @@ static void DoBrailleRegirockEffect(void)
     MapGridSetMetatileIdAt(7 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopLeft);
     MapGridSetMetatileIdAt(8 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopMid);
     MapGridSetMetatileIdAt(9 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopRight);
-    MapGridSetMetatileIdAt(7 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(7 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomLeft | MAPGRID_COLLISION_MASK);
     MapGridSetMetatileIdAt(8 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomMid);
-    MapGridSetMetatileIdAt(9 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(9 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomRight | MAPGRID_COLLISION_MASK);
     DrawWholeMapView();
     PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED);
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 }
 
 bool8 ShouldDoBrailleRegisteelEffect(void)
@@ -246,13 +246,13 @@ static void DoBrailleRegisteelEffect(void)
     MapGridSetMetatileIdAt(7 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopLeft);
     MapGridSetMetatileIdAt(8 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopMid);
     MapGridSetMetatileIdAt(9 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_TopRight);
-    MapGridSetMetatileIdAt(7 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(7 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomLeft | MAPGRID_COLLISION_MASK);
     MapGridSetMetatileIdAt(8 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomMid);
-    MapGridSetMetatileIdAt(9 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(9 + MAP_OFFSET, 20 + MAP_OFFSET, METATILE_Cave_SealedChamberEntrance_BottomRight | MAPGRID_COLLISION_MASK);
     DrawWholeMapView();
     PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED);
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 }
 
 // theory: another commented out DoBrailleWait and Task_BrailleWait.

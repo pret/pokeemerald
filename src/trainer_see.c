@@ -59,9 +59,9 @@ bool8 gTrainerApproachedPlayer;
 EWRAM_DATA u8 gApproachingTrainerId = 0;
 
 // const rom data
-static const u8 sEmotion_ExclamationMarkGfx[] = INCBIN_U8("graphics/misc/emotion_exclamation.4bpp");
-static const u8 sEmotion_QuestionMarkGfx[] = INCBIN_U8("graphics/misc/emotion_question.4bpp");
-static const u8 sEmotion_HeartGfx[] = INCBIN_U8("graphics/misc/emotion_heart.4bpp");
+static const u8 sEmotion_ExclamationMarkGfx[] = INCBIN_U8("graphics/field_effects/pics/emotion_exclamation.4bpp");
+static const u8 sEmotion_QuestionMarkGfx[] = INCBIN_U8("graphics/field_effects/pics/emotion_question.4bpp");
+static const u8 sEmotion_HeartGfx[] = INCBIN_U8("graphics/field_effects/pics/emotion_heart.4bpp");
 
 static u8 (*const sDirectionalApproachDistanceFuncs[])(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y) =
 {
@@ -115,7 +115,7 @@ static const struct OamData sOamData_Icons =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -213,7 +213,7 @@ bool8 CheckForTrainersWantingBattle(void)
 
         if (gNoOfApproachingTrainers > 1)
             break;
-        if (GetMonsStateToDoubles_2() != 0) // one trainer found and cant have a double battle
+        if (GetMonsStateToDoubles_2() != PLAYER_HAS_TWO_USABLE_MONS) // one trainer found and cant have a double battle
             break;
     }
 
@@ -280,7 +280,7 @@ static u8 CheckTrainer(u8 objectEventId)
             || scriptPtr[1] == TRAINER_BATTLE_REMATCH_DOUBLE
             || scriptPtr[1] == TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE)
         {
-            if (GetMonsStateToDoubles_2() != 0)
+            if (GetMonsStateToDoubles_2() != PLAYER_HAS_TWO_USABLE_MONS)
                 return 0;
 
             numTrainers = 2;
@@ -367,8 +367,6 @@ static u8 GetTrainerApproachDistanceEast(struct ObjectEvent *trainerObj, s16 ran
         return 0;
 }
 
-#define COLLISION_MASK (~1)
-
 static u8 CheckPathBetweenTrainerAndPlayer(struct ObjectEvent *trainerObj, u8 approachDistance, u8 direction)
 {
     s16 x, y;
@@ -385,8 +383,9 @@ static u8 CheckPathBetweenTrainerAndPlayer(struct ObjectEvent *trainerObj, u8 ap
     MoveCoords(direction, &x, &y);
     for (i = 0; i < approachDistance - 1; i++, MoveCoords(direction, &x, &y))
     {
+        // Check for collisions on approach, ignoring the "out of range" collision for regular movement
         collision = GetCollisionFlagsAtCoords(trainerObj, x, y, direction);
-        if (collision != 0 && (collision & COLLISION_MASK))
+        if (collision != 0 && (collision & ~(1 << (COLLISION_OUTSIDE_RANGE - 1))))
             return 0;
     }
 
@@ -661,7 +660,7 @@ void DoTrainerApproach(void)
 static void Task_EndTrainerApproach(u8 taskId)
 {
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 void TryPrepareSecondApproachingTrainer(void)
@@ -690,8 +689,8 @@ void TryPrepareSecondApproachingTrainer(void)
 #define sLocalId    data[0]
 #define sMapNum     data[1]
 #define sMapGroup   data[2]
-#define sData3      data[3]
-#define sData4      data[4]
+#define sYVelocity  data[3]
+#define sYOffset    data[4]
 #define sFldEffId   data[7]
 
 u8 FldEff_ExclamationMarkIcon(void)
@@ -737,7 +736,7 @@ static void SetIconSpriteData(struct Sprite *sprite, u16 fldEffId, u8 spriteAnim
     sprite->sLocalId = gFieldEffectArguments[0];
     sprite->sMapNum = gFieldEffectArguments[1];
     sprite->sMapGroup = gFieldEffectArguments[2];
-    sprite->sData3 = -5;
+    sprite->sYVelocity = -5;
     sprite->sFldEffId = fldEffId;
 
     StartSpriteAnim(sprite, spriteAnimNum);
@@ -755,23 +754,23 @@ static void SpriteCB_TrainerIcons(struct Sprite *sprite)
     else
     {
         struct Sprite *objEventSprite = &gSprites[gObjectEvents[objEventId].spriteId];
-        sprite->sData4 += sprite->sData3;
+        sprite->sYOffset += sprite->sYVelocity;
         sprite->x = objEventSprite->x;
         sprite->y = objEventSprite->y - 16;
         sprite->x2 = objEventSprite->x2;
-        sprite->y2 = objEventSprite->y2 + sprite->sData4;
-        if (sprite->sData4)
-            sprite->sData3++;
+        sprite->y2 = objEventSprite->y2 + sprite->sYOffset;
+        if (sprite->sYOffset)
+            sprite->sYVelocity++;
         else
-            sprite->sData3 = 0;
+            sprite->sYVelocity = 0;
     }
 }
 
 #undef sLocalId
 #undef sMapNum
 #undef sMapGroup
-#undef sData3
-#undef sData4
+#undef sYVelocity
+#undef sYOffset
 #undef sFldEffId
 
 u8 GetCurrentApproachingTrainerObjectEventId(void)

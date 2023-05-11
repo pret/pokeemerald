@@ -276,8 +276,8 @@
 	.2byte SPECIAL_\function
 	.endm
 
-	@ Blocks script execution until a command or C code manually unblocks it. Generally used with specific 
-	@ commands and specials. Calling EnableBothScriptContexts for instance will allow execution to continue.
+	@ Blocks script execution until a command or C code manually unblocks it. Generally used with specific
+	@ commands and specials. Calling ScriptContext_Enable for instance will allow execution to continue.
 	.macro waitstate
 	.byte 0x27
 	.endm
@@ -469,7 +469,7 @@
 	formatwarp \map, \a, \b, \c
 	.endm
 
-	@ Sets the dynamic warp destination. Warps with a destination map of MAP_NONE will target this destination.
+	@ Sets the dynamic warp destination. Warps with a destination map of MAP_DYNAMIC will target this destination.
 	@ Warp commands can be given either the id of which warp location to go to on the destination map
 	@ or a pair of x/y coordinates to go to directly on the destination map.
 	.macro setdynamicwarp map:req, a, b, c
@@ -604,9 +604,8 @@
 	.endm
 
 	@ Blocks script execution until the movements being applied to the specified (localId) object finish.
-	@ If the specified object is 0, then the command will block script execution until all objects
-	@ affected by applymovement finish their movements. If the specified object is not currently being
-	@ manipulated with applymovement, then this command does nothing.
+	@ If localId is 0, then the id of the last-moved object will be used instead. If the specified object
+	@ is not currently being manipulated with applymovement, then this command does nothing.
 	@ If no map is specified, then the current map is used.
 	.macro waitmovement localId:req, map
 		.ifb \map
@@ -829,10 +828,10 @@
 	.endm
 
 	@ Sets the movement type (MOVEMENT_TYPE_*) for an object's template.
-	.macro setobjectmovementtype word:req, byte:req
+	.macro setobjectmovementtype localId:req, movementType:req
 	.byte 0x65
-	.2byte \word
-	.byte \byte
+	.2byte \localId
+	.byte \movementType
 	.endm
 
 	@ If a standard message box (or its text) is being drawn on-screen, this command blocks script execution until the
@@ -986,8 +985,8 @@
 	.endm
 
 	@ Gives the player a Pokémon of the specified species and level, holding the specified item. The trailing 0s are unused parameters.
-	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome. 
-	.macro givemon species:req, level:req, item:req
+	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
+	.macro givemon species:req, level:req, item=ITEM_NONE
 	.byte 0x79
 	.2byte \species
 	.byte \level
@@ -998,7 +997,7 @@
 	.endm
 
 	@ Gives the player an Egg of the specified species.
-	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome. 
+	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
 	.macro giveegg species:req
 	.byte 0x7a
 	.2byte \species
@@ -1416,7 +1415,7 @@
 	.2byte \out
 	.endm
 
-	@ Gives 'count' coins to the player, up to a total of MAX_COINS. 
+	@ Gives 'count' coins to the player, up to a total of MAX_COINS.
 	@ If the player already has MAX_COINS then VAR_RESULT is set to TRUE, otherwise it is set to FALSE.
 	.macro addcoins count:req
 	.byte 0xb4
@@ -1433,7 +1432,7 @@
 
 	@ Prepares to start a wild battle against a 'species' at 'level' holding 'item'. Running this command will not affect
 	@ normal wild battles. You start the prepared battle with dowildbattle.
-	.macro setwildbattle species:req, level:req, item:req
+	.macro setwildbattle species:req, level:req, item=ITEM_NONE
 	.byte 0xb6
 	.2byte \species
 	.byte \level
@@ -1452,48 +1451,48 @@
 	.endm
 
 	@ Equivalent to goto using the relative address set by setvaddress.
-	.macro vgoto pointer:req
+	.macro vgoto destination:req
 	.byte 0xb9
-	.4byte \pointer
+	.4byte \destination
 	.endm
 
 	@ Equivalent to call using the relative address set by setvaddress.
-	.macro vcall pointer:req
+	.macro vcall destination:req
 	.byte 0xba
-	.4byte \pointer
+	.4byte \destination
 	.endm
 
 	@ Equivalent to goto_if using the relative address set by setvaddress.
-	.macro vgoto_if byte:req, pointer:req
+	.macro vgoto_if condition:req, destination:req
 	.byte 0xbb
-	.byte \byte
-	.4byte \pointer
+	.byte \condition
+	.4byte \destination
 	.endm
 
 	@ Equivalent to call_if using the relative address set by setvaddress.
-	.macro vcall_if byte:req, pointer:req
+	.macro vcall_if condition:req, destination:req
 	.byte 0xbc
-	.byte \byte
-	.4byte \pointer
+	.byte \condition
+	.4byte \destination
 	.endm
 
 	@ Equivalent to message using the relative address set by setvaddress.
-	.macro vmessage pointer:req
+	.macro vmessage text:req
 	.byte 0xbd
-	.4byte \pointer
+	.4byte \text
 	.endm
 
 	@ Expands the given text at the pointer (- the relative address set by setvaddress) into gStringVar4
-	.macro vbuffermessage ptr:req
+	.macro vbuffermessage text:req
 	.byte 0xbe
-	.4byte \ptr
+	.4byte \text
 	.endm
 
 	@ Equivalent to bufferstring using the relative address set by setvaddress.
-	.macro vbufferstring stringVarIndex:req, pointer:req
+	.macro vbufferstring stringVarIndex:req, text:req
 	.byte 0xbf
 	stringvar \stringVarIndex
-	.4byte \pointer
+	.4byte \text
 	.endm
 
 	@ Create a window showing how many Coins the player has.
@@ -1550,9 +1549,9 @@
 	.endm
 
 	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro loadhelp pointer:req
+	.macro loadhelp text:req
 	.byte 0xc8
-	.4byte \pointer
+	.4byte \text
 	.endm
 
 	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
@@ -1577,15 +1576,15 @@
 	.4byte \value
 	.endm
 
-	@ Sets the eventLegal bit for the Pokemon in the specified slot of the player's party.
-	.macro setmoneventlegal slot:req
+	@ Sets the modernFatefulEncounter bit for the Pokemon in the specified slot of the player's party.
+	.macro setmodernfatefulencounter slot:req
 	.byte 0xcd
 	.2byte \slot
 	.endm
 
-	@ Checks if the eventLegal bit is set for the Pokemon in the specified slot of the player's party. If it isn't set,
+	@ Checks if the modernFatefulEncounter bit is set for the Pokemon in the specified slot of the player's party. If it isn't set,
 	@ VAR_RESULT is TRUE. If the bit is set (or if the specified slot is empty or invalid), VAR_RESULT is FALSE.
-	.macro checkmoneventlegal slot:req
+	.macro checkmodernfatefulencounter slot:req
 	.byte 0xce
 	.2byte \slot
 	.endm
@@ -1888,7 +1887,7 @@
 
 	@ Gives 'amount' of the specified 'item' to the player and prints a message with fanfare.
 	@ If the player doesn't have space for all the items then as many are added as possible, the
-	@ message indicates there is no room, and VAR_RESULT is set to FALSE. 
+	@ message indicates there is no room, and VAR_RESULT is set to FALSE.
 	@ Otherwise VAR_RESULT is set to TRUE, and the message indicates they have received the item(s).
 	.macro giveitem item:req, amount=1
 	setorcopyvar VAR_0x8000, \item
@@ -1931,4 +1930,12 @@
 	braillemessage \text
 	waitbuttonpress
 	closebraillemessage
+	.endm
+
+	@ Creates a Pokémon with the modernFatefulEncounter bit set for an encounter
+	.macro seteventmon species:req, level:req, item=ITEM_NONE
+	setvar VAR_0x8004, \species
+	setvar VAR_0x8005, \level
+	setvar VAR_0x8006, \item
+	special CreateEnemyEventMon
 	.endm

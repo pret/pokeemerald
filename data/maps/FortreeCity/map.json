@@ -14,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
+      "map": "MAP_ROUTE119",
       "offset": 0,
-      "map": "MAP_ROUTE119"
+      "direction": "left"
     },
     {
-      "direction": "right",
+      "map": "MAP_ROUTE120",
       "offset": 0,
-      "map": "MAP_ROUTE120"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -123,63 +123,63 @@
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_FORTREE_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 10,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_FORTREE_CITY_HOUSE1",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 22,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_FORTREE_CITY_GYM",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 4,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_FORTREE_CITY_MART",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 17,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_FORTREE_CITY_HOUSE2",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 25,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_FORTREE_CITY_HOUSE3",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 32,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_FORTREE_CITY_HOUSE4",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 12,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_FORTREE_CITY_HOUSE5",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 37,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_FORTREE_CITY_DECORATION_SHOP",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

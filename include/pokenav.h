@@ -116,21 +116,21 @@ enum
 #define POKENAV_MENU_IDS_START 100000
 enum
 {
-	POKENAV_MAIN_MENU = POKENAV_MENU_IDS_START, // The main menu where the player selects Hoenn Map/Condition/Match Call/Ribbons 
-	POKENAV_MAIN_MENU_CURSOR_ON_MAP,
-	POKENAV_CONDITION_MENU,                     // The first Condition screen where the player selects Party or Search
-	POKENAV_CONDITION_SEARCH_MENU,              // The Condition search menu where the player selects a search parameter
-	POKENAV_MAIN_MENU_CURSOR_ON_MATCH_CALL,
-	POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS,
-	POKENAV_REGION_MAP,
-	POKENAV_CONDITION_GRAPH_PARTY,              // The Condition graph screen when Party has been selected
-	POKENAV_CONDITION_SEARCH_RESULTS,           // The list of results from a Condition search
-	POKENAV_CONDITION_GRAPH_SEARCH,             // The Condition graph screen when a search result has been selected
-	POKENAV_RETURN_CONDITION_SEARCH,            // Exited the graph screen back to the list of Condition search results
-	POKENAV_MATCH_CALL,
-	POKENAV_RIBBONS_MON_LIST,                   // The list of Pokémon with ribbons
-	POKENAV_RIBBONS_SUMMARY_SCREEN,             // The ribbon summary screen shown when a Pokémon has been selected
-	POKENAV_RIBBONS_RETURN_TO_MON_LIST,         // Exited the summary screen back to the ribbon list
+    POKENAV_MAIN_MENU = POKENAV_MENU_IDS_START, // The main menu where the player selects Hoenn Map/Condition/Match Call/Ribbons
+    POKENAV_MAIN_MENU_CURSOR_ON_MAP,
+    POKENAV_CONDITION_MENU,                     // The first Condition screen where the player selects Party or Search
+    POKENAV_CONDITION_SEARCH_MENU,              // The Condition search menu where the player selects a search parameter
+    POKENAV_MAIN_MENU_CURSOR_ON_MATCH_CALL,
+    POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS,
+    POKENAV_REGION_MAP,
+    POKENAV_CONDITION_GRAPH_PARTY,              // The Condition graph screen when Party has been selected
+    POKENAV_CONDITION_SEARCH_RESULTS,           // The list of results from a Condition search
+    POKENAV_CONDITION_GRAPH_SEARCH,             // The Condition graph screen when a search result has been selected
+    POKENAV_RETURN_CONDITION_SEARCH,            // Exited the graph screen back to the list of Condition search results
+    POKENAV_MATCH_CALL,
+    POKENAV_RIBBONS_MON_LIST,                   // The list of Pokémon with ribbons
+    POKENAV_RIBBONS_SUMMARY_SCREEN,             // The ribbon summary screen shown when a Pokémon has been selected
+    POKENAV_RIBBONS_RETURN_TO_MON_LIST,         // Exited the summary screen back to the ribbon list
 };
 
 enum
@@ -185,28 +185,28 @@ enum
 
 enum
 {
-	MC_HEADER_MR_STONE,
-	MC_HEADER_PROF_BIRCH,
-	MC_HEADER_BRENDAN,
-	MC_HEADER_MAY,
-	MC_HEADER_WALLY,
-	MC_HEADER_NORMAN,
-	MC_HEADER_MOM,
-	MC_HEADER_STEVEN,
-	MC_HEADER_SCOTT,
-	MC_HEADER_ROXANNE,
-	MC_HEADER_BRAWLY,
-	MC_HEADER_WATTSON,
-	MC_HEADER_FLANNERY,
-	MC_HEADER_WINONA,
-	MC_HEADER_TATE_LIZA,
-	MC_HEADER_JUAN,
-	MC_HEADER_SIDNEY,
-	MC_HEADER_PHOEBE,
-	MC_HEADER_GLACIA,
-	MC_HEADER_DRAKE,
-	MC_HEADER_WALLACE,
-	MC_HEADER_COUNT
+    MC_HEADER_MR_STONE,
+    MC_HEADER_PROF_BIRCH,
+    MC_HEADER_BRENDAN,
+    MC_HEADER_MAY,
+    MC_HEADER_WALLY,
+    MC_HEADER_NORMAN,
+    MC_HEADER_MOM,
+    MC_HEADER_STEVEN,
+    MC_HEADER_SCOTT,
+    MC_HEADER_ROXANNE,
+    MC_HEADER_BRAWLY,
+    MC_HEADER_WATTSON,
+    MC_HEADER_FLANNERY,
+    MC_HEADER_WINONA,
+    MC_HEADER_TATE_LIZA,
+    MC_HEADER_JUAN,
+    MC_HEADER_SIDNEY,
+    MC_HEADER_PHOEBE,
+    MC_HEADER_GLACIA,
+    MC_HEADER_DRAKE,
+    MC_HEADER_WALLACE,
+    MC_HEADER_COUNT
 };
 
 enum
@@ -356,10 +356,10 @@ void MatchCall_GetNameAndDesc(u32 idx, const u8 **desc, const u8 **name);
 // pokenav_main_menu.c
 bool32 InitPokenavMainMenu(void);
 void CopyPaletteIntoBufferUnfaded(const u16 *palette, u32 bufferOffset, u32 size);
-void RunMainMenuLoopedTask(u32 a0);
+void RunMainMenuLoopedTask(u32 state);
 u32 IsActiveMenuLoopTaskActive(void);
-void LoadLeftHeaderGfxForIndex(u32 arg0);
-void ShowLeftHeaderGfx(u32 menugfxId, bool32 arg1, bool32 isOnRightSide);
+void LoadLeftHeaderGfxForIndex(u32 menuGfxId);
+void ShowLeftHeaderGfx(u32 menugfxId, bool32 isMain, bool32 isOnRightSide);
 void PokenavFadeScreen(s32 fadeType);
 bool32 AreLeftHeaderSpritesMoving(void);
 void InitBgTemplates(const struct BgTemplate *templates, int count);
@@ -373,7 +373,7 @@ void PokenavCopyPalette(const u16 *a0, const u16 *a1, int a2, int a3, int a4, u1
 void FadeToBlackExceptPrimary(void);
 struct Sprite *GetSpinningPokenavSprite(void);
 void HideSpinningPokenavSprite(void);
-void UpdateRegionMapRightHeaderTiles(u32 arg0);
+void UpdateRegionMapRightHeaderTiles(u32 menuGfxId);
 void HideMainOrSubMenuLeftHeader(u32 id, bool32 onRightSide);
 void SlideMenuHeaderUp(void);
 void PokenavFillPalette(u32 palIndex, u16 fillValue);
@@ -412,13 +412,13 @@ int GetNumberRegistered(void);
 struct PokenavMatchCallEntry *GetMatchCallList(void);
 u16 GetMatchCallMapSec(int);
 bool32 ShouldDrawRematchPokeballIcon(int index);
-void ClearRematchPokeballIcon(u16 windowId, u32 a1);
+void ClearRematchPokeballIcon(u16 windowId, u32 tileOffset);
 int GetMatchCallTrainerPic(int index);
 const u8 *GetMatchCallFlavorText(int index, int textType);
 const u8 *GetMatchCallMessageText(int index, bool8 *newRematchRequest);
 u16 GetMatchCallOptionCursorPos(void);
-u16 GetMatchCallOptionId(int arg0);
-void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry * arg0, u8 *str);
+u16 GetMatchCallOptionId(int optionId);
+void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry *matchCallEntry, u8 *str);
 u8 GetMatchTableMapSectionId(int rematchIndex);
 int GetIndexDeltaOfNextCheckPageDown(int index);
 int GetIndexDeltaOfNextCheckPageUp(int index);

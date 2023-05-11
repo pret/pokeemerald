@@ -38,7 +38,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MtPyre_6F_EventScript_ItemTM30",
-      "flag": "FLAG_ITEM_MT_PYRE_6F_TM_30"
+      "flag": "FLAG_ITEM_MT_PYRE_6F_TM30"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PSYCHIC_M",
@@ -60,14 +60,14 @@
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_5F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 1,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_5F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

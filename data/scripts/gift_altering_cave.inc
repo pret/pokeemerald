@@ -1,7 +1,7 @@
 MysteryGiftScript_AlteringCave::
 	setvaddress MysteryGiftScript_AlteringCave
 	addvar VAR_ALTERING_CAVE_WILD_SET, 1
-	vgoto_if_ne VAR_ALTERING_CAVE_WILD_SET, 10, MysteryGiftScript_AlteringCave_
+	vgoto_if_ne VAR_ALTERING_CAVE_WILD_SET, (NUM_ALTERING_CAVE_TABLES + 1), MysteryGiftScript_AlteringCave_
 	setvar VAR_ALTERING_CAVE_WILD_SET, 0
 MysteryGiftScript_AlteringCave_:
 	lock
@@ -12,7 +12,7 @@ MysteryGiftScript_AlteringCave_:
 	release
 	end
 
-sText_MysteryGiftAlteringCave::
+sText_MysteryGiftAlteringCave:
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
 	.string "There appears to be a rumor about\n"

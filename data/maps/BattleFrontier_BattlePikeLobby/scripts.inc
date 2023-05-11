@@ -31,7 +31,7 @@ BattleFrontier_BattlePikeLobby_EventScript_QuitWithoutSaving::
 	lockall
 	msgbox BattleFrontier_BattlePikeLobby_Text_FailedToSaveBeforeQuitting, MSGBOX_DEFAULT
 	closemessage
-	pike_set PIKE_DATA_WIN_STREAK 0
+	pike_set PIKE_DATA_WIN_STREAK, 0
 	pike_set PIKE_DATA_WIN_STREAK_ACTIVE, FALSE
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_0, 255
@@ -364,7 +364,8 @@ BattleFrontier_BattlePikeLobby_Text_AwardYouTheseBattlePoints2:
 @ Unused
 BattleFrontier_BattlePikeLobby_Text_ReachedBattlePointLimit:
 	.string "You appear to have reached the limit\n"
-	.string "for Battle Points…\pPlease exchange some Battle Points\n"
+	.string "for Battle Points…\p"
+	.string "Please exchange some Battle Points\n"
 	.string "for prizes, then return…$"
 
 BattleFrontier_BattlePikeLobby_Text_FailedToSaveBeforeQuitting:

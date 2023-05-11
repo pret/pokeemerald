@@ -33,7 +33,7 @@ struct BgConfig2
     u32 basePalette:4;
     u32 unk_3:18;
 
-    void* tilemap;
+    void *tilemap;
     s32 bg_x;
     s32 bg_y;
 };
@@ -183,14 +183,14 @@ u8 LoadBgVram(u8 bg, const void *src, u16 size, u16 destOffset, u8 mode)
     case 0x1:
         offset = sGpuBgConfigs.configs[bg].charBaseIndex * BG_CHAR_SIZE;
         offset = destOffset + offset;
-        cursor = RequestDma3Copy(src, (void*)(offset + BG_VRAM), size, 0);
+        cursor = RequestDma3Copy(src, (void *)(offset + BG_VRAM), size, 0);
         if (cursor == -1)
             return -1;
         break;
     case 0x2:
         offset = sGpuBgConfigs.configs[bg].mapBaseIndex * BG_SCREEN_SIZE;
         offset = destOffset + offset;
-        cursor = RequestDma3Copy(src, (void*)(offset + BG_VRAM), size, 0);
+        cursor = RequestDma3Copy(src, (void *)(offset + BG_VRAM), size, 0);
         if (cursor == -1)
             return -1;
         break;
@@ -372,7 +372,7 @@ void SetBgMode(u8 bgMode)
     SetBgModeInternal(bgMode);
 }
 
-u16 LoadBgTiles(u8 bg, const void* src, u16 size, u16 destOffset)
+u16 LoadBgTiles(u8 bg, const void *src, u16 size, u16 destOffset)
 {
     u16 tileOffset;
     u8 cursor;
@@ -422,7 +422,7 @@ u16 Unused_LoadBgPalette(u8 bg, const void *src, u16 size, u16 destOffset)
     if (!IsInvalidBg32(bg))
     {
         u16 paletteOffset = (sGpuBgConfigs2[bg].basePalette * 0x20) + (destOffset * 2);
-        cursor = RequestDma3Copy(src, (void*)(paletteOffset + BG_PLTT), size, 0);
+        cursor = RequestDma3Copy(src, (void *)(paletteOffset + BG_PLTT), size, 0);
 
         if (cursor == -1)
         {
@@ -776,75 +776,75 @@ void SetBgAffine(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispCenterX, s16 dis
     SetBgAffineInternal(bg, srcCenterX, srcCenterY, dispCenterX, dispCenterY, scaleX, scaleY, rotationAngle);
 }
 
-u8 Unused_AdjustBgMosaic(u8 a1, u8 a2)
+u8 Unused_AdjustBgMosaic(u8 val, u8 mode)
 {
-    u16 result = GetGpuReg(REG_OFFSET_MOSAIC);
-    s16 test1 = result & 0xF;
-    s16 test2 = (result >> 4) & 0xF;
+    u16 mosaic = GetGpuReg(REG_OFFSET_MOSAIC);
+    s16 bgH = mosaic & 0xF;
+    s16 bgV = (mosaic >> 4) & 0xF;
 
-    result &= 0xFF00;
+    mosaic &= 0xFF00; // clear background mosaic sizes
 
-    switch (a2)
+    switch (mode)
     {
-    case 0:
+    case BG_MOSAIC_SET_HV:
     default:
-        test1 = a1 & 0xF;
-        test2 = a1 >> 0x4;
+        bgH = val & 0xF;
+        bgV = val >> 0x4;
         break;
-    case 1:
-        test1 = a1 & 0xF;
+    case BG_MOSAIC_SET_H:
+        bgH = val & 0xF;
         break;
-    case 2:
-        if ((test1 + a1) > 0xF)
+    case BG_MOSAIC_ADD_H:
+        if ((bgH + val) > 0xF)
         {
-            test1 = 0xF;
+            bgH = 0xF;
         }
         else
         {
-            test1 += a1;
+            bgH += val;
         }
         break;
-    case 3:
-        if ((test1 - a1) < 0)
+    case BG_MOSAIC_SUB_H:
+        if ((bgH - val) < 0)
         {
-            test1 = 0x0;
+            bgH = 0x0;
         }
         else
         {
-            test1 -= a1;
+            bgH -= val;
         }
         break;
-    case 4:
-        test2 = a1 & 0xF;
+    case BG_MOSAIC_SET_V:
+        bgV = val & 0xF;
         break;
-    case 5:
-        if ((test2 + a1) > 0xF)
+    case BG_MOSAIC_ADD_V:
+        if ((bgV + val) > 0xF)
         {
-            test2 = 0xF;
+            bgV = 0xF;
         }
         else
         {
-            test2 += a1;
+            bgV += val;
         }
         break;
-    case 6:
-        if ((test2 - a1) < 0)
+    case BG_MOSAIC_SUB_V:
+        if ((bgV - val) < 0)
         {
-            test2 = 0x0;
+            bgV = 0x0;
         }
         else
         {
-            test2 -= a1;
+            bgV -= val;
         }
         break;
     }
 
-    result |= ((test2 << 0x4) & 0xF0);
-    result |= (test1 & 0xF);
+    mosaic |= ((bgV << 0x4) & 0xF0);
+    mosaic |= (bgH & 0xF);
 
-    SetGpuReg(REG_OFFSET_MOSAIC, result);
+    SetGpuReg(REG_OFFSET_MOSAIC, mosaic);
 
-    return result;
+    return mosaic;
 }
 
 void SetBgTilemapBuffer(u8 bg, void *tilemap)
@@ -863,7 +863,7 @@ void UnsetBgTilemapBuffer(u8 bg)
     }
 }
 
-void* GetBgTilemapBuffer(u8 bg)
+void *GetBgTilemapBuffer(u8 bg)
 {
     if (IsInvalidBg32(bg))
         return NULL;
@@ -906,7 +906,7 @@ void CopyBgTilemapBufferToVram(u8 bg)
     }
 }
 
-void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 width, u8 height)
+void CopyToBgTilemapBufferRect(u8 bg, const void *src, u8 destX, u8 destY, u8 width, u8 height)
 {
     u16 destX16;
     u16 destY16;
@@ -923,7 +923,7 @@ void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 wi
             {
                 for (destX16 = destX; destX16 < (destX + width); destX16++)
                 {
-                    ((u16*)sGpuBgConfigs2[bg].tilemap)[((destY16 * 0x20) + destX16)] = *srcCopy++;
+                    ((u16 *)sGpuBgConfigs2[bg].tilemap)[((destY16 * 0x20) + destX16)] = *srcCopy++;
                 }
             }
             break;
@@ -936,7 +936,7 @@ void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 wi
             {
                 for (destX16 = destX; destX16 < (destX + width); destX16++)
                 {
-                    ((u8*)sGpuBgConfigs2[bg].tilemap)[((destY16 * mode) + destX16)] = *srcCopy++;
+                    ((u8 *)sGpuBgConfigs2[bg].tilemap)[((destY16 * mode) + destX16)] = *srcCopy++;
                 }
             }
             break;
@@ -984,7 +984,7 @@ void CopyRectToBgTilemapBufferRect(u8 bg, const void *src, u8 srcX, u8 srcY, u8 
             {
                 for (j = destX; j < (destX + rectWidth); j++)
                 {
-                    *(u8*)(sGpuBgConfigs2[bg].tilemap + ((var * i) + j)) = *(u8*)(srcPtr) + tileOffset;
+                    *(u8 *)(sGpuBgConfigs2[bg].tilemap + ((var * i) + j)) = *(u8 *)(srcPtr) + tileOffset;
                     srcPtr++;
                 }
                 srcPtr += (srcWidth - rectWidth);
@@ -1009,7 +1009,7 @@ void FillBgTilemapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, 
             {
                 for (x16 = x; x16 < (x + width); x16++)
                 {
-                    ((u16*)sGpuBgConfigs2[bg].tilemap)[((y16 * 0x20) + x16)] = tileNum;
+                    ((u16 *)sGpuBgConfigs2[bg].tilemap)[((y16 * 0x20) + x16)] = tileNum;
                 }
             }
             break;
@@ -1019,7 +1019,7 @@ void FillBgTilemapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, 
             {
                 for (x16 = x; x16 < (x + width); x16++)
                 {
-                    ((u8*)sGpuBgConfigs2[bg].tilemap)[((y16 * mode) + x16)] = tileNum;
+                    ((u8 *)sGpuBgConfigs2[bg].tilemap)[((y16 * mode) + x16)] = tileNum;
                 }
             }
             break;
@@ -1052,8 +1052,8 @@ void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 widt
             {
                 for (x16 = x; x16 < (x + width); x16++)
                 {
-                    CopyTileMapEntry(&firstTileNum, &((u16*)sGpuBgConfigs2[bg].tilemap)[(u16)GetTileMapIndexFromCoords(x16, y16, attribute, mode, mode2)], paletteSlot, 0, 0);
-                    firstTileNum = (firstTileNum & (METATILE_COLLISION_MASK | METATILE_ELEVATION_MASK)) + ((firstTileNum + tileNumDelta) & METATILE_ID_MASK);
+                    CopyTileMapEntry(&firstTileNum, &((u16 *)sGpuBgConfigs2[bg].tilemap)[(u16)GetTileMapIndexFromCoords(x16, y16, attribute, mode, mode2)], paletteSlot, 0, 0);
+                    firstTileNum = (firstTileNum & 0xFC00) + ((firstTileNum + tileNumDelta) & 0x3FF);
                 }
             }
             break;
@@ -1063,8 +1063,8 @@ void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 widt
             {
                 for (x16 = x; x16 < (x + width); x16++)
                 {
-                    ((u8*)sGpuBgConfigs2[bg].tilemap)[(y16 * mode3) + x16] = firstTileNum;
-                    firstTileNum = (firstTileNum & (METATILE_COLLISION_MASK | METATILE_ELEVATION_MASK)) + ((firstTileNum + tileNumDelta) & METATILE_ID_MASK);
+                    ((u8 *)sGpuBgConfigs2[bg].tilemap)[(y16 * mode3) + x16] = firstTileNum;
+                    firstTileNum = (firstTileNum & 0xFC00) + ((firstTileNum + tileNumDelta) & 0x3FF);
                 }
             }
             break;
@@ -1240,7 +1240,7 @@ bool32 IsInvalidBg32(u8 bg)
 
 bool32 IsTileMapOutsideWram(u8 bg)
 {
-    if (sGpuBgConfigs2[bg].tilemap > (void*)IWRAM_END)
+    if (sGpuBgConfigs2[bg].tilemap > (void *)IWRAM_END)
         return TRUE;
     else if (sGpuBgConfigs2[bg].tilemap == NULL)
         return TRUE;

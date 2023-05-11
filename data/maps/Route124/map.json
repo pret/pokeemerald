@@ -14,29 +14,29 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "down",
+      "map": "MAP_ROUTE126",
       "offset": 0,
-      "map": "MAP_ROUTE126"
+      "direction": "down"
     },
     {
-      "direction": "left",
+      "map": "MAP_LILYCOVE_CITY",
       "offset": 10,
-      "map": "MAP_LILYCOVE_CITY"
+      "direction": "left"
     },
     {
-      "direction": "right",
+      "map": "MAP_ROUTE125",
       "offset": 0,
-      "map": "MAP_ROUTE125"
+      "direction": "right"
     },
     {
-      "direction": "right",
+      "map": "MAP_MOSSDEEP_CITY",
       "offset": 40,
-      "map": "MAP_MOSSDEEP_CITY"
+      "direction": "right"
     },
     {
-      "direction": "dive",
+      "map": "MAP_UNDERWATER_ROUTE124",
       "offset": 0,
-      "map": "MAP_UNDERWATER_ROUTE124"
+      "direction": "dive"
     }
   ],
   "object_events": [
@@ -203,7 +203,7 @@
       "y": 48,
       "elevation": 3,
       "dest_map": "MAP_ROUTE124_DIVING_TREASURE_HUNTERS_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

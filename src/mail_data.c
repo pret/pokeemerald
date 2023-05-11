@@ -5,7 +5,6 @@
 #include "pokemon_icon.h"
 #include "text.h"
 #include "international_string_util.h"
-#include "constants/easy_chat.h"
 
 #define UNOWN_OFFSET 30000
 
