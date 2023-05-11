@@ -168,7 +168,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PetalburgWoods_EventScript_ItemParalyzeHeal",
-      "flag": "FLAG_ITEM_PETALBURD_WOODS_PARALYZE_HEAL"
+      "flag": "FLAG_ITEM_PETALBURG_WOODS_PARALYZE_HEAL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
@@ -190,42 +190,42 @@
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_ROUTE104",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 15,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_ROUTE104",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 16,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_ROUTE104",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 17,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_ROUTE104",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 36,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_ROUTE104",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 37,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_ROUTE104",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     }
   ],
   "coord_events": [

@@ -44,8 +44,7 @@ u32 MysterGiftServer_Run(u16 * endVal)
     {
         *endVal = sServer->param;
         MysteryGiftServer_Free(sServer);
-        Free(sServer);
-        sServer = NULL;
+        FREE_AND_SET_NULL(sServer);
     }
     return result;
 }

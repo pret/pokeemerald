@@ -86,14 +86,14 @@
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 1,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

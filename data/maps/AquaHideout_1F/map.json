@@ -60,21 +60,21 @@
       "y": 27,
       "elevation": 1,
       "dest_map": "MAP_LILYCOVE_CITY",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 14,
       "y": 27,
       "elevation": 1,
       "dest_map": "MAP_LILYCOVE_CITY",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 22,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_AQUA_HIDEOUT_B1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

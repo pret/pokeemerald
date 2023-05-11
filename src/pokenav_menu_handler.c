@@ -12,7 +12,7 @@ struct Pokenav_Menu
     u16 currMenuItem;
     u16 helpBarIndex;
     u32 menuId;
-    u32 (*callback)(struct Pokenav_Menu*);
+    u32 (*callback)(struct Pokenav_Menu *);
 };
 
 static bool32 UpdateMenuCursorPos(struct Pokenav_Menu *);
@@ -28,7 +28,7 @@ static u32 HandleCantOpenRibbonsInput(struct Pokenav_Menu *);
 static u32 HandleMainMenuInputEndTutorial(struct Pokenav_Menu *);
 static u32 HandleMainMenuInputTutorial(struct Pokenav_Menu *);
 static u32 HandleMainMenuInput(struct Pokenav_Menu *);
-static u32 (*GetMainMenuInputHandler(void))(struct Pokenav_Menu*);
+static u32 (*GetMainMenuInputHandler(void))(struct Pokenav_Menu *);
 static void SetMenuInputHandler(struct Pokenav_Menu *);
 
 // Number of entries - 1 for that menu type
@@ -186,7 +186,7 @@ static void SetMenuInputHandler(struct Pokenav_Menu *menu)
     }
 }
 
-static u32 (*GetMainMenuInputHandler(void))(struct Pokenav_Menu*)
+static u32 (*GetMainMenuInputHandler(void))(struct Pokenav_Menu *)
 {
     switch (GetPokenavMode())
     {

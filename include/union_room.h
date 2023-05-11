@@ -7,7 +7,7 @@
 
 // In the Union Room the player is only ever connected to ≤ 4 other players.
 // However, there can be up to MAX_UNION_ROOM_LEADERS (8) object events to
-// represent leaders of recently discovered link groups, and each of those groups 
+// represent leaders of recently discovered link groups, and each of those groups
 // may have up to MAX_RFU_PLAYERS (5) players in it including the leader.
 // These players are represented on-screen by NPC sprites drawn around the leader.
 // Thus there can be 40 sprites of other players on-screen, in 8 groups of 5.
@@ -16,7 +16,7 @@
 // The maximum number of recently connected players that can be tracked.
 // Note that this is significantly less than NUM_UNION_ROOM_SPRITES, i.e. not
 // every player that can be shown in the Union Room can be tracked at once.
-// Information such as a group member's gender can instead be read from partnerInfo  
+// Information such as a group member's gender can instead be read from partnerInfo
 // of the leader's RfuGameData by tracking at least all of the group leaders.
 #define MAX_RFU_PLAYER_LIST_SIZE 16
 

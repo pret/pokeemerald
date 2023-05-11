@@ -25,7 +25,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "ScorchedSlab_EventScript_ItemTM11",
-      "flag": "FLAG_ITEM_SCORCHED_SLAB_TM_11"
+      "flag": "FLAG_ITEM_SCORCHED_SLAB_TM11"
     }
   ],
   "warp_events": [
@@ -34,7 +34,7 @@
       "y": 16,
       "elevation": 1,
       "dest_map": "MAP_ROUTE120",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

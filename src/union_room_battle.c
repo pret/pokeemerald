@@ -43,7 +43,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 15,
         .width = 24,
         .height = 4,
-        .paletteNum = 0xE,
+        .paletteNum = 14,
         .baseBlock = 0x014
     },
     DUMMY_WIN_TEMPLATE
@@ -129,9 +129,9 @@ void CB2_UnionRoomBattle(void)
         ClearWindowTilemap(0);
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 0xF);
-        LoadUserWindowBorderGfx(0, 1, 0xD0);
-        LoadUserWindowBorderGfx_(0, 1, 0xD0);
+        FillBgTilemapBufferRect(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT, 0xF);
+        LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(13));
+        LoadUserWindowBorderGfx_(0, 1, BG_PLTT_ID(13));
         Menu_LoadStdPal();
         SetVBlankCallback(VBlankCB_UnionRoomBattle);
         gMain.state++;
