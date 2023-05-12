@@ -1429,3 +1429,35 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max One Blow bypasses Max Guard for full damage"
         EXPECT_EQ(results[0].damage, results[1].damage);
     }
 }
+
+// Bug Testing
+DOUBLE_BATTLE_TEST("(DYNAMAX) Max Flare doesn't softlock the game when fainting player partner")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); };
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_PROTECT, dynamax: TRUE);
+               MOVE(opponentLeft, MOVE_V_CREATE, target: playerRight, dynamax: TRUE);
+               SEND_OUT(playerRight, 2); }
+        TURN { }
+    }
+}
+
+SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves don't execute effects on fainted battlers")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); };
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_DYNAMAX_GROWTH, player);
+        MESSAGE("Wobbuffet used Max Strike!");
+        MESSAGE("Foe Wobbuffet fainted!");
+        NOT MESSAGE("Foe Wobbuffet's Speed fell!");
+    }
+}

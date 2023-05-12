@@ -10501,8 +10501,8 @@ BattleScript_EffectMaxMove::
 	waitmessage B_WAIT_TIME_LONG
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
-	setmaxmoveeffect
 	tryfaintmon BS_TARGET
+	setmaxmoveeffect
 	moveendall
 	end
 
