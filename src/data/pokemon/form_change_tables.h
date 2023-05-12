@@ -159,6 +159,18 @@ static const struct FormChange sAbsolFormChangeTable[] = {
     {FORM_CHANGE_TERMINATOR},
 };
 
+static const struct FormChange sCastformFormChangeTable[] = {
+    {FORM_CHANGE_BATTLE_WEATHER,                SPECIES_CASTFORM_SUNNY, B_WEATHER_SUN},
+    {FORM_CHANGE_BATTLE_WEATHER,                SPECIES_CASTFORM_RAINY, B_WEATHER_RAIN},
+    {FORM_CHANGE_BATTLE_WEATHER,                SPECIES_CASTFORM_SNOWY, B_WEATHER_HAIL},
+    {FORM_CHANGE_BATTLE_WEATHER,                SPECIES_CASTFORM, ~(B_WEATHER_SUN | B_WEATHER_RAIN | B_WEATHER_HAIL)},
+    {FORM_CHANGE_BATTLE_WEATHER,                SPECIES_CASTFORM, B_WEATHER_NONE},
+    {FORM_CHANGE_BATTLE_SWITCH,                 SPECIES_CASTFORM},
+    {FORM_CHANGE_FAINT,                         SPECIES_CASTFORM},
+    {FORM_CHANGE_END_BATTLE,                    SPECIES_CASTFORM},
+    {FORM_CHANGE_TERMINATOR},
+};
+
 static const struct FormChange sBanetteFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM,    SPECIES_BANETTE_MEGA, ITEM_BANETTITE},
     {FORM_CHANGE_TERMINATOR},
@@ -222,6 +234,16 @@ static const struct FormChange sBurmyFormChangeTable[] = {
     {FORM_CHANGE_TERMINATOR},
 };
 
+static const struct FormChange sCherrimFormChangeTable[] = {
+    {FORM_CHANGE_BATTLE_WEATHER,                SPECIES_CHERRIM_SUNSHINE, B_WEATHER_SUN},
+    {FORM_CHANGE_BATTLE_WEATHER,                SPECIES_CHERRIM, ~B_WEATHER_SUN},
+    {FORM_CHANGE_BATTLE_WEATHER,                SPECIES_CHERRIM, B_WEATHER_NONE},
+    {FORM_CHANGE_BATTLE_SWITCH,                 SPECIES_CHERRIM},
+    {FORM_CHANGE_FAINT,                         SPECIES_CHERRIM},
+    {FORM_CHANGE_END_BATTLE,                    SPECIES_CHERRIM},
+    {FORM_CHANGE_TERMINATOR},
+};
+
 static const struct FormChange sLopunnyFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM,    SPECIES_LOPUNNY_MEGA, ITEM_LOPUNNITE},
     {FORM_CHANGE_TERMINATOR},
@@ -247,7 +269,6 @@ static const struct FormChange sGalladeFormChangeTable[] = {
     {FORM_CHANGE_TERMINATOR},
 };
 
-
 static const struct FormChange sDialgaFormChangeTable[] = {
     {FORM_CHANGE_ITEM_HOLD, SPECIES_DIALGA, ITEM_NONE},
     {FORM_CHANGE_ITEM_HOLD, SPECIES_DIALGA_ORIGIN, ITEM_ADAMANT_CRYSTAL},
@@ -262,7 +283,10 @@ static const struct FormChange sPalkiaFormChangeTable[] = {
 
 static const struct FormChange sGiratinaFormChangeTable[] = {
     {FORM_CHANGE_ITEM_HOLD, SPECIES_GIRATINA, ITEM_NONE},
+#if I_GRISEOUS_ORB_FORM_CHANGE < GEN_9
     {FORM_CHANGE_ITEM_HOLD, SPECIES_GIRATINA_ORIGIN, ITEM_GRISEOUS_ORB},
+#endif
+    {FORM_CHANGE_ITEM_HOLD, SPECIES_GIRATINA_ORIGIN, ITEM_GRISEOUS_CORE},
     {FORM_CHANGE_TERMINATOR},
 };
 

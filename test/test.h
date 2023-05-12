@@ -46,6 +46,7 @@ struct TestRunnerState
 
     u8 result;
     u8 expectedResult;
+    bool8 expectLeaks:1;
     u32 timeoutSeconds;
 };
 
@@ -69,6 +70,7 @@ extern struct TestRunnerState gTestRunnerState;
 void CB2_TestRunner(void);
 
 void Test_ExpectedResult(enum TestResult);
+void Test_ExpectLeaks(bool32);
 void Test_ExitWithResult(enum TestResult, const char *fmt, ...);
 
 s32 MgbaPrintf_(const char *fmt, ...);
@@ -159,6 +161,9 @@ s32 MgbaPrintf_(const char *fmt, ...);
 
 #define KNOWN_FAILING \
     Test_ExpectedResult(TEST_RESULT_FAIL)
+
+#define KNOWN_LEAKING \
+    Test_ExpectLeaks(TRUE)
 
 #define PARAMETRIZE if (gFunctionTestRunnerState->parameters++ == gFunctionTestRunnerState->runParameter)
 

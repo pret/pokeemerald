@@ -685,7 +685,8 @@ static u16 GetMetatileForFloor(u8 floorId, u32 x, u32 y, u32 floorWidth) // floo
 void GenerateTrainerHillFloorLayout(u16 *mapArg)
 {
     s32 y, x;
-    u16 *src, *dst;
+    const u16 *src;
+    u16 *dst;
     u8 mapId = GetCurrentTrainerHillMapId();
 
     if (mapId == TRAINER_HILL_ENTRANCE)

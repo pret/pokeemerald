@@ -182,6 +182,7 @@ static const u8 sText_SideStatus[] = _("Side Status");
 static const u8 sText_MaxHp[] = _("HP Max");
 static const u8 sText_CurrHp[] = _("HP Current");
 static const u8 sText_Freeze[] = _("Freeze");
+static const u8 sText_Frostbite[] = _("Frostbite");
 static const u8 sText_ToxicPoison[] = _("Toxic Poison");
 static const u8 sText_ToxicCounter[] = _("Toxic Counter");
 static const u8 sText_Flinch[] = _("Flinch");
@@ -260,6 +261,7 @@ static const struct BitfieldInfo sStatus1Bitfield[] =
     {/*Paralysis*/1, 6},
     {/*Toxic Poison*/ 1, 7},
     {/*Toxic Counter*/ 4, 8},
+    {/*Frostbite*/ 1, 12},
 };
 
 static const struct BitfieldInfo sStatus2Bitfield[] =
@@ -399,6 +401,7 @@ static const struct ListMenuItem sStatus1ListItems[] =
     {gText_Paralysis, 4},
     {sText_ToxicPoison, 5},
     {sText_ToxicCounter, 6},
+    {sText_Frostbite, 7},
 };
 
 static const struct ListMenuItem sStatus2ListItems[] =
@@ -777,7 +780,7 @@ static void Task_ShowAiPoints(u8 taskId)
 
         // Swap battler if it's player mon
         data->aiBattlerId = data->battlerId;
-        while (!IsBattlerAIControlled(data->aiBattlerId))
+        while (!BattlerHasAi(data->aiBattlerId))
         {
             if (++data->aiBattlerId >= gBattlersCount)
                 data->aiBattlerId = 0;
@@ -934,7 +937,7 @@ static void Task_ShowAiKnowledge(u8 taskId)
 
         // Swap battler if it's player mon
         data->aiBattlerId = data->battlerId;
-        while (!IsBattlerAIControlled(data->aiBattlerId))
+        while (!BattlerHasAi(data->aiBattlerId))
         {
             if (++data->aiBattlerId >= gBattlersCount)
                 data->aiBattlerId = 0;

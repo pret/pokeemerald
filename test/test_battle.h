@@ -303,13 +303,14 @@
  * The inference process is naive, if your test contains anything that
  * modifies the speed of a battler you should specify them explicitly.
  *
- * MOVE(battler, move | moveSlot:, [megaEvolve:], [hit:], [criticalHit:], [target:], [allowed:])
+ * MOVE(battler, move | moveSlot:, [megaEvolve:], [hit:], [criticalHit:], [target:], [allowed:], [WITH_RNG(tag, value])
  * Used when the battler chooses Fight. Either the move ID or move slot
  * must be specified. megaEvolve: TRUE causes the battler to Mega Evolve
  * if able, hit: FALSE causes the move to miss, criticalHit: TRUE causes
  * the move to land a critical hit, target: is used in double battles to
  * choose the target (when necessary), and allowed: FALSE is used to
- * reject an illegal move e.g. a Disabled one.
+ * reject an illegal move e.g. a Disabled one. WITH_RNG allows the move
+ * to specify an explicit outcome for an RNG tag.
  *     MOVE(playerLeft, MOVE_TACKLE, target: opponentRight);
  * If the battler does not have an explicit Moves specified the moveset
  * will be populated based on the MOVEs it uses.
@@ -332,6 +333,13 @@
  * Used when the battler chooses to switch to another Pokémon but not
  * via Switch, e.g. after fainting or due to a U-turn.
  *     SEND_OUT(player, 1);
+ *
+ * USE_ITEM(battler, itemId, [partyIndex:], [move:])
+ * Used when the battler chooses to use an item from the Bag. The item
+ * ID must be specified, and party index and move slot if applicable, e.g:
+ *      USE_ITEM(player, ITEM_X_ATTACK);
+ *      USE_ITEM(player, ITEM_POTION, partyIndex: 0);
+ *      USE_ITEM(player, ITEM_LEPPA_BERRY, partyIndex: 0, move: MOVE_TACKLE);
  *
  * SCENE
  * Contains an abridged description of the UI during the THEN. The order
@@ -361,7 +369,7 @@
  *     s16 damage;
  *     HP_BAR(player, captureDamage: &damage);
  * If none of the above are used, causes the test to fail if the HP
- * changes at all.
+ * does not change at all.
  *
  * MESSAGE(pattern)
  * Causes the test to fail if the message in pattern is not displayed.
@@ -518,8 +526,7 @@ struct QueuedMessageEvent
 struct QueuedStatusEvent
 {
     u32 battlerId:3;
-    u32 mask:8;
-    u32 unused_01:21;
+    u32 mask:29;
 };
 
 struct QueuedEvent
@@ -538,11 +545,18 @@ struct QueuedEvent
     } as;
 };
 
+struct TurnRNG
+{
+    u16 tag;
+    u16 value;
+};
+
 struct BattlerTurn
 {
     u8 hit:2;
     u8 criticalHit:2;
     u8 secondaryEffect:2;
+    struct TurnRNG rng;
 };
 
 struct BattleTestData
@@ -600,6 +614,7 @@ struct BattleTestRunnerState
     bool8 runThen:1;
     bool8 runFinally:1;
     bool8 runningFinally:1;
+    bool8 tearDownBattle:1;
     struct BattleTestData data;
     u8 *results;
     u8 checkProgressParameter;
@@ -698,6 +713,11 @@ void Randomly(u32 sourceLine, u32 passes, u32 trials, struct RandomlyContext);
 
 /* Given */
 
+struct moveWithPP {
+    u16 moveId;
+    u8 pp;
+};
+
 #define GIVEN for (; gBattleTestRunnerState->runGiven; gBattleTestRunnerState->runGiven = FALSE)
 
 #define RNGSeed(seed) RNGSeed_(__LINE__, seed)
@@ -718,6 +738,7 @@ void Randomly(u32 sourceLine, u32 passes, u32 trials, struct RandomlyContext);
 #define Speed(speed) Speed_(__LINE__, speed)
 #define Item(item) Item_(__LINE__, item)
 #define Moves(move1, ...) Moves_(__LINE__, (const u16 [MAX_MON_MOVES]) { move1, __VA_ARGS__ })
+#define MovesWithPP(movewithpp1, ...) MovesWithPP_(__LINE__, (struct moveWithPP[MAX_MON_MOVES]) {movewithpp1, __VA_ARGS__})
 #define Friendship(friendship) Friendship_(__LINE__, friendship)
 #define Status1(status1) Status1_(__LINE__, status1)
 
@@ -738,6 +759,7 @@ void SpDefense_(u32 sourceLine, u32 spDefense);
 void Speed_(u32 sourceLine, u32 speed);
 void Item_(u32 sourceLine, u32 item);
 void Moves_(u32 sourceLine, const u16 moves[MAX_MON_MOVES]);
+void MovesWithPP_(u32 sourceLine, struct moveWithPP moveWithPP[MAX_MON_MOVES]);
 void Friendship_(u32 sourceLine, u32 friendship);
 void Status1_(u32 sourceLine, u32 status1);
 
@@ -757,6 +779,8 @@ enum { TURN_CLOSED, TURN_OPEN, TURN_CLOSING };
 #define SWITCH(battler, partyIndex) Switch(__LINE__, battler, partyIndex)
 #define SKIP_TURN(battler) SkipTurn(__LINE__, battler)
 #define SEND_OUT(battler, partyIndex) SendOut(__LINE__, battler, partyIndex)
+#define USE_ITEM(battler, ...) UseItem(__LINE__, battler, (struct ItemContext) { APPEND_TRUE(__VA_ARGS__) })
+#define WITH_RNG(tag, value) rng: ((struct TurnRNG) { tag, value })
 
 struct MoveContext
 {
@@ -778,6 +802,18 @@ struct MoveContext
     u16 explicitAllowed:1;
     struct BattlePokemon *target;
     bool8 explicitTarget;
+    struct TurnRNG rng;
+    bool8 explicitRNG;
+};
+
+struct ItemContext
+{
+    u16 itemId;
+    u16 explicitItemId:1;
+    u16 partyIndex;
+    u16 explicitPartyIndex:1;
+    u16 move;
+    u16 explicitMove:1;
 };
 
 void OpenTurn(u32 sourceLine);
@@ -786,7 +822,7 @@ void Move(u32 sourceLine, struct BattlePokemon *, struct MoveContext);
 void ForcedMove(u32 sourceLine, struct BattlePokemon *);
 void Switch(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
 void SkipTurn(u32 sourceLine, struct BattlePokemon *);
-
+void UseItem(u32 sourceLine, struct BattlePokemon *, struct ItemContext);
 void SendOut(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
 
 /* Scene */
@@ -844,6 +880,7 @@ struct StatusEventContext
     bool8 freeze:1;
     bool8 paralysis:1;
     bool8 badPoison:1;
+    bool8 frostbite:1;
 };
 
 void OpenQueueGroup(u32 sourceLine, enum QueueGroupType);
@@ -861,7 +898,9 @@ void QueueStatus(u32 sourceLine, struct BattlePokemon *battler, struct StatusEve
 
 /* Finally */
 
-#define FINALLY for (; gBattleTestRunnerState->runFinally; gBattleTestRunnerState->runFinally = FALSE) if ((gBattleTestRunnerState->runningFinally = TRUE))
+#define FINALLY for (ValidateFinally(__LINE__); gBattleTestRunnerState->runFinally; gBattleTestRunnerState->runFinally = FALSE) if ((gBattleTestRunnerState->runningFinally = TRUE))
+
+void ValidateFinally(u32 sourceLine);
 
 /* Expect */
 
