@@ -470,12 +470,6 @@ BattleScript_SpikesActivates::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
-BattleScript_SteelsurgeActivates::
-	setsteelsurge BattleScript_MoveEnd
-	printfromtable gDmgHazardsStringIds
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_MoveEnd
-
 BattleScript_EffectAttackUpUserAlly:
 	jumpifnoally BS_ATTACKER, BattleScript_EffectAttackUp
 	attackcanceler
@@ -10507,8 +10501,8 @@ BattleScript_EffectMaxMove::
 	waitmessage B_WAIT_TIME_LONG
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
-	tryfaintmon BS_TARGET
 	setmaxmoveeffect
+	tryfaintmon BS_TARGET
 	moveendall
 	end
 
@@ -10529,7 +10523,7 @@ BattleScript_RaiseSideStatsIncrement:
 	setallytonexttarget BattleScript_RaiseSideStatsLoop
 BattleScript_RaiseSideStatsEnd:
 	restoretarget
-	return
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectLowerStatFoes::
 	savetarget
@@ -10548,26 +10542,26 @@ BattleScript_LowerSideStatsIncrement:
 	setallytonexttarget BattleScript_LowerSideStatsLoop
 BattleScript_LowerSideStatsEnd:
 	restoretarget
-	return
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectSetWeather::
 	playanimation 0, B_ANIM_MAX_SET_WEATHER
 	printfromtable gMoveWeatherChangeStringIds
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_ActivateWeatherAbilities
-	return
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectSetTerrain::
 	printfromtable gTerrainStringIds
 	waitmessage B_WAIT_TIME_LONG
 	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG
 	call BattleScript_ActivateTerrainEffects
-	return
+	goto BattleScript_MoveEnd
 
 BattleScript_DamageNonTypesStarts::
 	printfromtable gDamageNonTypesStartStringIds
 	waitmessage B_WAIT_TIME_LONG
-	return
+	goto BattleScript_MoveEnd
 
 BattleScript_DamageNonTypesContinues::
 	setbyte gBattleCommunication, 0
@@ -10596,7 +10590,7 @@ BattleScript_EffectTryReducePP::
 	tryspiteppreduce BattleScript_MoveEnd
 	printstring STRINGID_PKMNREDUCEDPP
 	waitmessage B_WAIT_TIME_LONG
-	return
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectStatus1Foes::
 	savetarget
@@ -10615,7 +10609,7 @@ BattleScript_Status1FoesIncrement:
 	setallytonexttarget BattleScript_Status1FoesLoop
 BattleScript_Status1FoesEnd:
 	restoretarget
-	return
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectStatus2Foes::
 	savetarget
@@ -10634,7 +10628,7 @@ BattleScript_Status2FoesIncrement:
 BattleScript_Status2FoesEnd:
 	restoretarget
 	jumpifbyte CMP_EQUAL, gBattleCommunication + 1, 1, BattleScript_PrintCoinsScattered @ Gold Rush
-	return
+	goto BattleScript_MoveEnd
 
 BattleScript_DoConfuseAnim:
 	status2animation BS_EFFECT_BATTLER, STATUS2_CONFUSION
@@ -10671,7 +10665,7 @@ BattleScript_RaiseCritAlliesIncrement:
 	setallytonexttarget BattleScript_RaiseCritAlliesLoop
 BattleScript_RaiseCritAlliesEnd:
 	restoretarget
-	return
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectHealOneSixthAllies::
 	jumpifteamhealthy BS_ATTACKER, BattleScript_MoveEnd
@@ -10690,7 +10684,7 @@ BattleScript_HealOneSixthAlliesIncrement:
 	setallytonexttarget BattleScript_HealOneSixthAlliesLoop
 BattleScript_HealOneSixthAlliesEnd:
 	restoretarget
-	return
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectCureStatusAllies::
 	jumpifteamhealthy BS_ATTACKER, BattleScript_MoveEnd
@@ -10704,7 +10698,7 @@ BattleScript_CureStatusAlliesIncrement:
 	setallytonexttarget BattleScript_CureStatusAlliesLoop
 BattleScript_CureStatusAlliesEnd:
 	restoretarget
-	return
+	goto BattleScript_MoveEnd
 
 BattleScript_CureStatusActivate:
 	curestatus BS_TARGET
@@ -10730,7 +10724,19 @@ BattleScript_RecycleBerriesAlliesIncrement:
 	setallytonexttarget BattleScript_RecycleBerriesAlliesLoop
 BattleScript_RecycleBerriesAlliesEnd:
 	restoretarget
-	return
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectStonesurge::
+	setstealthrock BattleScript_MoveEnd
+	printfromtable gDmgHazardsStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectSteelsurge::
+	setsteelsurge BattleScript_MoveEnd
+	printfromtable gDmgHazardsStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
 
 @@@ END MAX MOVES @@@
 

@@ -67,6 +67,10 @@ enum RandomTag
     RNG_STATIC,
     RNG_STENCH,
     RNG_TRI_ATTACK,
+    RNG_G_MAX_STUN_SHOCK,
+    RNG_G_MAX_BEFUDDLE,
+    RNG_G_MAX_REPLENISH,
+    RNG_G_MAX_SNOOZE,
 };
 
 #define RandomWeighted(tag, ...) \

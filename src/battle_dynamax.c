@@ -525,19 +525,14 @@ u32 GetMaxMoveStatusEffect(u16 move)
         case MAX_EFFECT_POISON_FOES:
             return STATUS1_POISON;
         case MAX_EFFECT_POISON_PARALYZE_FOES:
-            if (Random() % 2)
-                return STATUS1_POISON;
-            else
-                return STATUS1_PARALYSIS;
+        {
+            static const u8 sStunShockEffects[] = {STATUS1_PARALYSIS, STATUS1_POISON};
+            return RandomElement(RNG_G_MAX_STUN_SHOCK, sStunShockEffects);
+        }
         case MAX_EFFECT_EFFECT_SPORE_FOES:
         {
-            u8 effect = Random() % 3;
-            if (effect == 0)
-                return STATUS1_PARALYSIS;
-            else if (effect == 1)
-                return STATUS1_POISON;
-            else
-                return STATUS1_SLEEP;
+            static const u8 sBefuddleEffects[] = {STATUS1_PARALYSIS, STATUS1_POISON, STATUS1_SLEEP};
+            return RandomElement(RNG_G_MAX_BEFUDDLE, sBefuddleEffects);
         }
         // Status 2
         case MAX_EFFECT_CONFUSE_FOES:
@@ -705,7 +700,7 @@ u16 SetMaxMoveEffect(u16 move)
             {
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_POINTEDSTONESFLOAT;
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_StealthRockActivates;
+                gBattlescriptCurrInstr = BattleScript_EffectStonesurge;
                 effect++;
             }
             break;
@@ -714,7 +709,7 @@ u16 SetMaxMoveEffect(u16 move)
             {
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SHARPSTEELFLOATS;
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_SteelsurgeActivates;
+                gBattlescriptCurrInstr = BattleScript_EffectSteelsurge;
                 effect++;
             }
             break;
@@ -787,9 +782,11 @@ u16 SetMaxMoveEffect(u16 move)
             break;
         }
         case MAX_EFFECT_YAWN_FOE:
+        {
+            static const u8 sSnoozeEffects[] = {TRUE, FALSE};
             if (!(gStatuses3[gBattlerTarget] & STATUS3_YAWN)
                 && CanSleep(gBattlerTarget)
-                && Random() % 2) // 50% chance of success
+                && RandomElement(RNG_G_MAX_SNOOZE, sSnoozeEffects)) // 50% chance of success
             {
                 gStatuses3[gBattlerTarget] |= STATUS3_YAWN_TURN(2);
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
@@ -797,6 +794,7 @@ u16 SetMaxMoveEffect(u16 move)
                 effect++;
             }
             break;
+        }
         case MAX_EFFECT_SPITE:
             if (gLastMoves[gBattlerTarget] != MOVE_NONE
                 && gLastMoves[gBattlerTarget] != MOVE_UNAVAILABLE)
@@ -850,14 +848,16 @@ u16 SetMaxMoveEffect(u16 move)
             effect++;
             break;
         case MAX_EFFECT_RECYCLE_BERRIES:
-            if (Random() % 2) // 50% chance of success
+        {
+            static const u8 sReplenishEffects[] = {TRUE, FALSE};
+            if (RandomElement(RNG_G_MAX_REPLENISH, sReplenishEffects)) // 50% chance of success
             {
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_EffectRecycleBerriesAllies;
                 effect++;
             }
             break;
-
+        }
     }
     return effect;
 }

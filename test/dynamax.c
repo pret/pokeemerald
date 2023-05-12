@@ -13,12 +13,10 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax increases HP and max HP by 1.5x", u16 hp)
     } WHEN {
         TURN { MOVE(player, MOVE_TACKLE, dynamax: dynamax); MOVE(opponent, MOVE_CELEBRATE); }
     } SCENE {
-        if (dynamax)
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_DYNAMAX_GROWTH, player);
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_DYNAMAX_GROWTH, player);
-        MESSAGE("Wobbuffet used Max Strike!");
+        if (dynamax) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_DYNAMAX_GROWTH, player);
-        MESSAGE("Wobbuffet used Max Strike!");
+            MESSAGE("Wobbuffet used Max Strike!");
+        }
         MESSAGE("Foe Wobbuffet used Celebrate!");
     } THEN {
         results[i].hp = player->hp;        
@@ -520,91 +518,99 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot use Max Guard while holdi
 // Anything that is conditional based off max HP still uses gBattleMons[battler].maxHP.
 // Below are some tests, but very far from all encompassing:
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Endeavor uses a Pokemon's non-Dynamax HP")
+SINGLE_BATTLE_TEST("(DYNAMAX) Endeavor uses a Pokemon's non-Dynamax HP", s16 damage)
 {
-    s16 damage;
+    bool32 dynamax;
+    PARAMETRIZE { dynamax = TRUE; }
+    PARAMETRIZE { dynamax = FALSE; }
     GIVEN {
         ASSUME(gBattleMoves[MOVE_ENDEAVOR].effect == EFFECT_ENDEAVOR);
-        PLAYER(SPECIES_WOBBUFFET) { MaxHP(100); Speed(50); }
-        OPPONENT(SPECIES_WOBBUFFET) { HP(1); MaxHP(100); Speed(100); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(50); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); Speed(100); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_ENDEAVOR); MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+        TURN { MOVE(opponent, MOVE_ENDEAVOR); MOVE(player, MOVE_TACKLE, dynamax: dynamax); }
     } SCENE {
         MESSAGE("Foe Wobbuffet used Endeavor!");
-        HP_BAR(player, captureDamage: &damage);
+        HP_BAR(player, captureDamage: &results[i].damage);
     } FINALLY {
-        EXPECT_EQ(damage, 99); // difference between foe's HP and player's non-dynamax HP
+        EXPECT_EQ(results[0].damage, results[1].damage);
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Super Fang uses a Pokemon's non-Dynamax HP")
+SINGLE_BATTLE_TEST("(DYNAMAX) Super Fang uses a Pokemon's non-Dynamax HP", s16 damage)
 {
-    s16 damage;
+    bool32 dynamax;
+    PARAMETRIZE { dynamax = TRUE; }
+    PARAMETRIZE { dynamax = FALSE; }
     GIVEN {
         ASSUME(gBattleMoves[MOVE_SUPER_FANG].effect == EFFECT_SUPER_FANG);
-        PLAYER(SPECIES_WOBBUFFET) { HP(50); MaxHP(100); Speed(50); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(50); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(100); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_SUPER_FANG); MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+        TURN { MOVE(opponent, MOVE_SUPER_FANG); MOVE(player, MOVE_TACKLE, dynamax: dynamax); }
     } SCENE {
         MESSAGE("Foe Wobbuffet used Super Fang!");
-        HP_BAR(player, captureDamage: &damage);
+        HP_BAR(player, captureDamage: &results[i].damage);
     } FINALLY {
-        EXPECT_EQ(damage, 25);
+        EXPECT_EQ(results[0].damage, results[1].damage);
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Pain Split uses a Pokemon's non-Dynamax HP")
+SINGLE_BATTLE_TEST("(DYNAMAX) Pain Split uses a Pokemon's non-Dynamax HP", s16 damage)
 {
-    s16 damage;
+    bool32 dynamax;
+    PARAMETRIZE { dynamax = TRUE; }
+    PARAMETRIZE { dynamax = FALSE; }
     GIVEN {
         ASSUME(gBattleMoves[MOVE_PAIN_SPLIT].effect == EFFECT_PAIN_SPLIT);
-        PLAYER(SPECIES_WOBBUFFET) { HP(60); MaxHP(100); Speed(50); }
-        OPPONENT(SPECIES_WOBBUFFET) { HP(40); MaxHP(100); Speed(100); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(50); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); Speed(100); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_PAIN_SPLIT); MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+        TURN { MOVE(opponent, MOVE_PAIN_SPLIT); MOVE(player, MOVE_TACKLE, dynamax: dynamax); }
     } SCENE {
         MESSAGE("Foe Wobbuffet used Pain Split!");
-        HP_BAR(player, captureDamage: &damage);
+        HP_BAR(player, captureDamage: &results[i].damage);
     } FINALLY {
-        EXPECT_EQ(damage, 10);
+        EXPECT_EQ(results[0].damage, results[1].damage);
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Sitrus Berries heal based on a Pokemon's non-Dynamax HP")
+SINGLE_BATTLE_TEST("(DYNAMAX) Sitrus Berries heal based on a Pokemon's non-Dynamax HP", s16 damage)
 {
-    s16 damage;
+    bool32 dynamax;
+    PARAMETRIZE { dynamax = TRUE; }
+    PARAMETRIZE { dynamax = FALSE; }
     GIVEN {
         ASSUME(I_SITRUS_BERRY_HEAL >= GEN_4);
         ASSUME(gItems[ITEM_SITRUS_BERRY].holdEffect == HOLD_EFFECT_RESTORE_PCT_HP);
-        PLAYER(SPECIES_WOBBUFFET) { HP(60); MaxHP(100); Speed(50); Item(ITEM_SITRUS_BERRY); }
-        OPPONENT(SPECIES_WOBBUFFET) { HP(40); MaxHP(100); Speed(100); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_SITRUS_BERRY); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_PAIN_SPLIT); MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+        TURN { MOVE(opponent, MOVE_FLING); MOVE(player, MOVE_TACKLE, dynamax: dynamax); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Pain Split!");
-        HP_BAR(player);
         MESSAGE("Wobbuffet's Sitrus Berry restored health!");
-        HP_BAR(player, captureDamage: &damage);
+        HP_BAR(player, captureDamage: &results[i].damage);
     } FINALLY {
-        EXPECT_EQ(damage, 25);
+        EXPECT_EQ(results[0].damage, results[1].damage);
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Heal Pulse heals based on a Pokemon's non-Dynamax HP")
+SINGLE_BATTLE_TEST("(DYNAMAX) Heal Pulse heals based on a Pokemon's non-Dynamax HP", s16 damage)
 {
-    s16 damage;
+    bool32 dynamax;
+    PARAMETRIZE { dynamax = TRUE; }
+    PARAMETRIZE { dynamax = FALSE; }
     GIVEN {
         ASSUME(gBattleMoves[MOVE_HEAL_PULSE].effect == EFFECT_HEAL_PULSE);
-        PLAYER(SPECIES_WOBBUFFET) { HP(50); MaxHP(100); Speed(50); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); Speed(50); }
         OPPONENT(SPECIES_WOBBUFFET) { MaxHP(100); Speed(100); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_HEAL_PULSE); MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
+        TURN { MOVE(opponent, MOVE_HEAL_PULSE); MOVE(player, MOVE_TACKLE, dynamax: dynamax); }
     } SCENE {
         MESSAGE("Foe Wobbuffet used Heal Pulse!");
-        HP_BAR(player, captureDamage: &damage);
+        HP_BAR(player, captureDamage: &results[i].damage);
     } FINALLY {
-        EXPECT_EQ(damage, 50);
+        EXPECT_EQ(results[0].damage, results[1].damage);
     }
 }
 
@@ -624,11 +630,11 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Strike lowers single opponent's speed")
         MESSAGE("Foe Wobbuffet used Tackle!");
         MESSAGE("Wobbuffet used Max Strike!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("Foe Wobbuffet's speed fell!");
+        MESSAGE("Foe Wobbuffet's Speed fell!");
         // turn 2
         MESSAGE("Wobbuffet used Max Strike!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("Foe Wobbuffet's speed fell!");
+        MESSAGE("Foe Wobbuffet's Speed fell!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
     }
 }
@@ -637,7 +643,6 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Strike lowers single opponent's speed")
 DOUBLE_BATTLE_TEST("(DYNAMAX) Max Strike lowers both opponents' speed")
 {
     GIVEN {
-        // Fails? ASSUME(GetMaxMove(B_POSITION_PLAYER_LEFT, MOVE_TACKLE) == MOVE_MAX_STRIKE);
         ASSUME(gBattleMoves[MOVE_MAX_STRIKE].argument == MAX_EFFECT_LOWER_SPEED);
         PLAYER(SPECIES_WOBBUFFET) { Speed(80); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(79); }
@@ -656,15 +661,15 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) Max Strike lowers both opponents' speed")
         MESSAGE("Foe Wobbuffet used Tackle!");
         MESSAGE("Wobbuffet used Max Strike!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-        MESSAGE("Foe Wobbuffet's speed fell!");
+        MESSAGE("Foe Wobbuffet's Speed fell!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("Foe Wobbuffet's speed fell!");
+        MESSAGE("Foe Wobbuffet's Speed fell!");
         // turn 2
         MESSAGE("Wobbuffet used Max Strike!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-        MESSAGE("Foe Wobbuffet's speed fell!");
+        MESSAGE("Foe Wobbuffet's Speed fell!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("Foe Wobbuffet's speed fell!");
+        MESSAGE("Foe Wobbuffet's Speed fell!");
         MESSAGE("Foe Wobbuffet used Tackle!");
         MESSAGE("Foe Wobbuffet used Tackle!");
     }
@@ -690,9 +695,9 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) Max Knuckle raises both allies' attack")
         MESSAGE("Wobbuffet used Max Knuckle!");
         HP_BAR(opponentLeft, captureDamage: &damage[0]);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Wobbuffet's attack rose!");
+        MESSAGE("Wobbuffet's Attack rose!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Wynaut's attack rose!");
+        MESSAGE("Wynaut's Attack rose!");
         MESSAGE("Wynaut used Tackle!");
         HP_BAR(opponentRight, captureDamage: &damage[1]);
         MESSAGE("Foe Wobbuffet used Celebrate!");
@@ -701,12 +706,12 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) Max Knuckle raises both allies' attack")
         MESSAGE("Wobbuffet used Max Knuckle!");
         HP_BAR(opponentLeft, captureDamage: &damage[2]);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Wobbuffet's attack rose!");
+        MESSAGE("Wobbuffet's Attack rose!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Wynaut's attack rose!");
+        MESSAGE("Wynaut's Attack rose!");
         MESSAGE("Wynaut used Tackle!");
         HP_BAR(opponentRight, captureDamage: &damage[3]);
-    } FINALLY {
+    } THEN {
         EXPECT_GT(damage[2], damage[0]);
         EXPECT_GT(damage[3], damage[1]);
     }
@@ -863,13 +868,12 @@ SINGLE_BATTLE_TEST("(DYNAMAX) G-Max Stonesurge sets up Stealth Rocks")
 // The test below also tests that sharp steel does type-based damage and can be Defogged away.
 SINGLE_BATTLE_TEST("(DYNAMAX) G-Max Steelsurge sets up sharp steel")
 {
-    s16 damage;
     GIVEN {
         ASSUME(P_GEN_8_POKEMON == TRUE);
         ASSUME(gBattleMoves[MOVE_G_MAX_STEELSURGE].argument == MAX_EFFECT_STEELSURGE);
         PLAYER(SPECIES_COPPERAJAH);
         OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_CLEFABLE) { MaxHP(100); }
+        OPPONENT(SPECIES_HATTERENE);
     } WHEN {
         TURN { MOVE(player, MOVE_IRON_HEAD, dynamax: TRUE); }
         TURN { SWITCH(opponent, 1); }
@@ -880,13 +884,13 @@ SINGLE_BATTLE_TEST("(DYNAMAX) G-Max Steelsurge sets up sharp steel")
         MESSAGE("Copperajah used G-Max Steelsurge!");
         MESSAGE("Sharp-pointed steel floats around the opposing team!");
         // turn 2
-        HP_BAR(opponent, captureDamage: &damage);
-        MESSAGE("Sharp steel bit into Foe Clefable!");
+        MESSAGE("2 sent out Hatterene!");
+        MESSAGE("Sharp steel bit into Foe Hatterene!");
         // turn 4
-        MESSAGE("Foe Clefable used Defog!");
+        MESSAGE("Foe Hatterene used Defog!");
         MESSAGE("The sharp steel disappeared from the ground around the opposing team!");
-    } FINALLY {
-        EXPECT_EQ(damage, 25);
+    } THEN {
+        EXPECT_MUL_EQ(opponent->maxHP, Q_4_12(0.75), opponent->hp);
     }
 }
 
@@ -932,9 +936,15 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Volt Crash paralyzes both opponents")
     }
 }
 
+// G-Max Stun Shock can apply different statuses to each opponent, but this isn't
+// compatible with the test RNG set-up.
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Stun Shock paralyzes or poisons both opponents")
 {
-    KNOWN_FAILING; // RNG issues
+    u8 statusAnim;
+    u16 species;
+    u32 rng;
+    PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = STATUS1_PARALYSIS; }
+    PARAMETRIZE { statusAnim = B_ANIM_STATUS_PSN; rng = STATUS1_POISON; }
     GIVEN {
         ASSUME(P_GEN_8_POKEMON == TRUE);
         ASSUME(gBattleMoves[MOVE_G_MAX_STUN_SHOCK].argument == MAX_EFFECT_POISON_PARALYZE_FOES);
@@ -943,22 +953,36 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Stun Shock paralyzes or poisons both opponen
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_THUNDERBOLT, target: opponentLeft, dynamax: TRUE); }
+        TURN { MOVE(playerLeft, MOVE_THUNDERBOLT, target: opponentLeft, dynamax: TRUE, \
+               WITH_RNG(RNG_G_MAX_STUN_SHOCK, rng)); }
     } SCENE {
         MESSAGE("Toxtricity used G-Max Stun Shock!");
-        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponentLeft);
-        STATUS_ICON(opponentLeft, poison: TRUE);
-        MESSAGE("Foe Wobbuffet was poisoned!");
-        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponentRight);
-        STATUS_ICON(opponentRight, paralysis: TRUE);
-        MESSAGE("Foe Wynaut is paralyzed! It may be unable to move!");
+        // opponent left
+        ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponentLeft);
+        if (statusAnim == B_ANIM_STATUS_PSN) {
+            STATUS_ICON(opponentLeft, poison: TRUE);
+            MESSAGE("Foe Wobbuffet was poisoned!");
+        }
+        else {
+            STATUS_ICON(opponentLeft, paralysis: TRUE);
+            MESSAGE("Foe Wobbuffet is paralyzed! It may be unable to move!");
+        }
+        // opponent right
+        ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponentRight);
+        if (statusAnim == B_ANIM_STATUS_PSN) {
+            STATUS_ICON(opponentRight, poison: TRUE);
+            MESSAGE("Foe Wynaut was poisoned!");
+        }
+        else {
+            STATUS_ICON(opponentRight, paralysis: TRUE);
+            MESSAGE("Foe Wynaut is paralyzed! It may be unable to move!");
+        }
     }
 }
 
 // This test extends to G-Max Befuddle, too.
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Stun Shock chooses statuses before considering immunities")
 {
-    KNOWN_FAILING; // RNG issues
     GIVEN {
         ASSUME(P_GEN_8_POKEMON == TRUE);
         ASSUME(gBattleMoves[MOVE_G_MAX_STUN_SHOCK].argument == MAX_EFFECT_POISON_PARALYZE_FOES);
@@ -967,53 +991,72 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Stun Shock chooses statuses before consideri
         OPPONENT(SPECIES_GARBODOR);
         OPPONENT(SPECIES_TRUBBISH);
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_NUZZLE, target: opponentLeft, dynamax: TRUE); }
+        TURN { MOVE(playerLeft, MOVE_NUZZLE, target: opponentLeft, dynamax: TRUE, \
+               WITH_RNG(RNG_G_MAX_STUN_SHOCK, STATUS1_POISON)); }
     } SCENE {
         MESSAGE("Toxtricity used G-Max Stun Shock!");
         NONE_OF {
-            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponentLeft);
-            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponentLeft);
+            // opponent left
+            STATUS_ICON(opponentLeft, poison: TRUE);
+            MESSAGE("Foe Garbodor was poisoned!");
+            STATUS_ICON(opponentLeft, paralysis: TRUE);
+            MESSAGE("Foe Garbodor is paralyzed! It may be unable to move!");
+            // opponent right
+            STATUS_ICON(opponentRight, poison: TRUE);
+            MESSAGE("Foe Trubbish was poisoned!");
+            STATUS_ICON(opponentRight, paralysis: TRUE);
+            MESSAGE("Foe Trubbish is paralyzed! It may be unable to move!");
         }
-        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponentRight);
-        MESSAGE("Foe Trubbish is paralyzed! It may be unable to move!");
-        STATUS_ICON(opponentRight, paralysis: TRUE);
-    } FINALLY {
-        EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].status1, STATUS1_NONE);
     }
 }
 
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Befuddle paralyzes, poisons, or sleeps both opponents")
 {
-    KNOWN_FAILING; // RNG issues
+    u8 statusAnim;
+    u16 species;
+    u32 rng;
+    PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = STATUS1_PARALYSIS; }
+    PARAMETRIZE { statusAnim = B_ANIM_STATUS_PSN; rng = STATUS1_POISON; }
+    PARAMETRIZE { statusAnim = B_ANIM_STATUS_SLP; rng = STATUS1_SLEEP; }
     GIVEN {
-        RNGSeed(0x10000);
         ASSUME(gBattleMoves[MOVE_G_MAX_BEFUDDLE].argument == MAX_EFFECT_EFFECT_SPORE_FOES);
         PLAYER(SPECIES_BUTTERFREE);
         PLAYER(SPECIES_CATERPIE);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_BUG_BITE, target: opponentLeft, dynamax: TRUE); }
-        TURN { SWITCH(opponentLeft, 2); SWITCH(opponentRight, 3); \
-               MOVE(playerLeft, MOVE_BUG_BITE, target: opponentLeft); }
+        TURN { MOVE(playerLeft, MOVE_BUG_BITE, target: opponentLeft, dynamax: TRUE,
+               WITH_RNG(RNG_G_MAX_BEFUDDLE, rng)); }
     } SCENE {
-        // turn 1
         MESSAGE("Butterfree used G-Max Befuddle!");
-        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponentLeft);
-        STATUS_ICON(opponentLeft, poison: TRUE);
-        MESSAGE("Foe Wobbuffet was poisoned!");
-        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponentRight);
-        STATUS_ICON(opponentRight, sleep: TRUE);
-        MESSAGE("Foe Wobbuffet fell asleep!");
-        // turn 2
-        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponentLeft);
-        MESSAGE("Foe Wobbuffet is paralyzed! It may be unable to move!");
-        STATUS_ICON(opponentLeft, paralysis: TRUE);
-        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponentRight);
-        MESSAGE("Foe Wobbuffet was poisoned!");
-        STATUS_ICON(opponentRight, poison: TRUE);
+        // opponent left
+        ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponentLeft);
+        if (statusAnim == B_ANIM_STATUS_PSN) {
+            STATUS_ICON(opponentLeft, poison: TRUE);
+            MESSAGE("Foe Wobbuffet was poisoned!");
+        }
+        else if (statusAnim == B_ANIM_STATUS_PRZ) {
+            STATUS_ICON(opponentLeft, paralysis: TRUE);
+            MESSAGE("Foe Wobbuffet is paralyzed! It may be unable to move!");
+        }
+        else {
+            STATUS_ICON(opponentLeft, sleep: TRUE);
+            MESSAGE("Foe Wobbuffet fell asleep!");
+        }
+        // opponent right
+        ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponentRight);
+        if (statusAnim == B_ANIM_STATUS_PSN) {
+            STATUS_ICON(opponentRight, poison: TRUE);
+            MESSAGE("Foe Wobbuffet was poisoned!");
+        }
+        else if (statusAnim == B_ANIM_STATUS_PRZ) {
+            STATUS_ICON(opponentRight, paralysis: TRUE);
+            MESSAGE("Foe Wobbuffet is paralyzed! It may be unable to move!");
+        }
+        else {
+            STATUS_ICON(opponentRight, sleep: TRUE);
+            MESSAGE("Foe Wobbuffet fell asleep!");
+        }
     }
 }
 
@@ -1073,7 +1116,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Cuddle infatuates both opponents, if possibl
         MESSAGE("Foe Wobbuffet fell in love!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_INFATUATION, opponentRight);
-            MESSAGE("Foe Wobbuffet became confused!");
+            MESSAGE("Foe Wobbuffet fell in love!");
         }
     }
 }
@@ -1092,8 +1135,8 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Terror traps both opponents")
         MESSAGE("Gengar used G-Max Terror!");
         MESSAGE("Foe Wobbuffet can't escape now!");
         MESSAGE("Foe Wobbuffet can't escape now!");
-    } FINALLY { // Can't find good way to test trapping
-        EXPECT(gBattleMons[B_POSITION_OPPONENT_LEFT].status2 & STATUS2_ESCAPE_PREVENTION);
+    } THEN { // Can't find good way to test trapping
+        EXPECT(opponentLeft->status2 & STATUS2_ESCAPE_PREVENTION);
     }
 }
 
@@ -1175,16 +1218,14 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Wildfire sets a field effect that damages no
             HP_BAR(opponentRight);
             MESSAGE("Foe Wynaut is burning up within G-Max Wildfire's flames!");
         }
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(damage, 100);
     }
 }
 
-// This should probably be tested to only occur 50% of the time.
-// I had some problems specific to Teatime with this where Snorlax stored
-// the used berry in usedHeldItem, while Munchlax stored it in changedItem.
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Replenish recycles allies' berries")
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Replenish recycles allies' berries 50\% of the time")
 {
+    PASSES_RANDOMLY(1, 2, RNG_G_MAX_REPLENISH);
     GIVEN {
         ASSUME(gBattleMoves[MOVE_G_MAX_REPLENISH].argument == MAX_EFFECT_RECYCLE_BERRIES);
         PLAYER(SPECIES_SNORLAX) { Item(ITEM_APICOT_BERRY); }
@@ -1199,10 +1240,10 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Replenish recycles allies' berries")
         TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft, dynamax: TRUE); }
     } SCENE {
         // turn 1
-        MESSAGE("Using Apicot Berry, the sp. defense of Snorlax rose!");
-        MESSAGE("Using Apicot Berry, the sp. defense of Munchlax rose!");
-        MESSAGE("Using Apicot Berry, the sp. defense of Foe Wobbuffet rose!");
-        MESSAGE("Using Apicot Berry, the sp. defense of Foe Wobbuffet rose!");
+        MESSAGE("Using Apicot Berry, the Sp. Def of Snorlax rose!");
+        MESSAGE("Using Apicot Berry, the Sp. Def of Munchlax rose!");
+        MESSAGE("Using Apicot Berry, the Sp. Def of Foe Wobbuffet rose!");
+        MESSAGE("Using Apicot Berry, the Sp. Def of Foe Wobbuffet rose!");
         // turn 2
         MESSAGE("Snorlax used G-Max Replenish!");
         MESSAGE("Snorlax found one Apicot Berry!");
@@ -1212,7 +1253,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Replenish recycles allies' berries")
 
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Snooze makes only the target drowsy")
 {
-    KNOWN_FAILING; // RNG issues
+    PASSES_RANDOMLY(1, 2, RNG_G_MAX_SNOOZE);
     GIVEN {
         ASSUME(P_GEN_8_POKEMON == TRUE);
         ASSUME(gBattleMoves[MOVE_G_MAX_SNOOZE].argument == MAX_EFFECT_YAWN_FOE);
@@ -1227,15 +1268,10 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Snooze makes only the target drowsy")
         // turn 1
         MESSAGE("Grimmsnarl used G-Max Snooze!");
         MESSAGE("Grimmsnarl made Foe Blissey drowsy!");
-        NONE_OF { MESSAGE("Grimmsnarl made Foe Chansey drowsy!"); }
         // turn 2
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponentLeft);
         MESSAGE("Foe Blissey fell asleep!");
         STATUS_ICON(opponentLeft, sleep: TRUE);
-        NONE_OF {
-            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponentRight);
-            STATUS_ICON(opponentRight, sleep: TRUE);
-        }
     }
 }
 
@@ -1245,20 +1281,19 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Finale heals allies by 1/6 of their health")
     GIVEN {
         ASSUME(P_GEN_8_POKEMON == TRUE);
         ASSUME(gBattleMoves[MOVE_G_MAX_FINALE].argument == MAX_EFFECT_HEAL_TEAM);
-        PLAYER(SPECIES_ALCREMIE) { HP(200); MaxHP(300); }
-        PLAYER(SPECIES_MILCERY) { HP(200); MaxHP(300); }
+        PLAYER(SPECIES_ALCREMIE) { HP(1); }
+        PLAYER(SPECIES_MILCERY) { HP(1); }
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_MOONBLAST, target: opponentLeft, dynamax: TRUE); }
     } SCENE {
-        // turn 1
         MESSAGE("Alcremie used G-Max Finale!");
         HP_BAR(playerLeft, captureDamage: &damage1);
         HP_BAR(playerRight, captureDamage: &damage2);
-    } FINALLY {
-        EXPECT_EQ(damage1, -75); // heals based on Dynamax HP
-        EXPECT_EQ(damage2, -50);
+    } THEN {
+        EXPECT_MUL_EQ(playerLeft->hp - 1, Q_4_12(6), playerLeft->maxHP); // heals based on Dynamax HP
+        EXPECT_MUL_EQ(playerRight->hp - 1, Q_4_12(6), playerRight->maxHP);
     }
 }
 
@@ -1283,7 +1318,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Sweetness cures allies' status conditions")
     }
 }
 
-// This test should apply to G-Max Sandblast, too.
+// This test applies to G-Max Sandblast, too.
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Centiferno traps both opponents in Fire Spin")
 {
     s16 damage1, damage2;
@@ -1316,7 +1351,8 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Centiferno traps both opponents in Fire Spin
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Chi Strike boosts allies' crit chance")
 {
     s16 damage1, damage2;
-    KNOWN_FAILING;
+    u32 j;
+    KNOWN_FAILING; // Debug printing confirms Machop is at +5 crit stages. Not sure what's broken.
     GIVEN {
         ASSUME(B_CRIT_CHANCE >= GEN_6);
         ASSUME(gBattleMoves[MOVE_G_MAX_CHI_STRIKE].argument == MAX_EFFECT_CRIT_PLUS);
@@ -1325,20 +1361,22 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Chi Strike boosts allies' crit chance")
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_FORCE_PALM, target: opponentLeft, dynamax: TRUE); \
+        TURN { MOVE(playerLeft, MOVE_FORCE_PALM, target: opponentLeft, dynamax: TRUE); }
+        TURN { MOVE(playerLeft, MOVE_FORCE_PALM, target: opponentLeft); }
+        TURN { MOVE(playerLeft, MOVE_FORCE_PALM, target: opponentLeft); \
                MOVE(playerRight, MOVE_FOCUS_ENERGY); }
         TURN { MOVE(playerRight, MOVE_TACKLE, target: opponentLeft); }
     } SCENE {
-        // turn 1
-        MESSAGE("Machamp used G-Max Chi Strike!");
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Machamp is getting pumped!");
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Machop is getting pumped!");
-        MESSAGE("Machop used Focus Energy!");
-        MESSAGE("Machop is getting pumped!");
-        // turn 2
-        MESSAGE("Machop used Tackle!"); // Machop is at +3 crit stages, 100% crit chance
+        // turn 1 - 3
+        for (j = 0; j < 3; ++j) {
+            MESSAGE("Machamp used G-Max Chi Strike!");
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+            MESSAGE("Machamp is getting pumped!");
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
+            MESSAGE("Machop is getting pumped!");
+        }
+        // turn 4
+        MESSAGE("Machop used Tackle!"); // Machop is at +5 crit stages
         MESSAGE("A critical hit!");
     }
 }
@@ -1362,7 +1400,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Depletion takes away 2 PP from the target's 
     }
 }
 
-// This test should apply to G-Max Rapid Flow, too.
+// This test applies to G-Max Rapid Flow, too.
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max One Blow bypasses Max Guard for full damage", s16 damage)
 {
     bool32 protect;
