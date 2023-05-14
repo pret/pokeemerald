@@ -262,16 +262,6 @@
 #define VARIOUS_TRY_REVIVAL_BLESSING                 170
 #define VARIOUS_TRY_TRAINER_SLIDE_MSG_Z_MOVE         171
 #define VARIOUS_TRY_TRAINER_SLIDE_MSG_MEGA_EVOLUTION 172
-#define VARIOUS_SET_MAX_MOVE_EFFECT                  173
-#define VARIOUS_JUMP_IF_NO_VALID_TARGETS             174
-#define VARIOUS_SET_STEELSURGE                       175
-#define VARIOUS_DAMAGE_NON_TYPES                     176
-#define VARIOUS_TRY_SET_STATUS1                      177
-#define VARIOUS_TRY_SET_STATUS2                      178
-#define VARIOUS_TRY_HEAL_SIXTH_HP                    179
-#define VARIOUS_TRY_RECYCLE_BERRY                    180
-#define VARIOUS_UPDATE_DYNAMAX                       181
-#define VARIOUS_JUMP_IF_TARGET_DYNAMAXED             182
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

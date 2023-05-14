@@ -2249,44 +2249,44 @@
 
 	@ Used to active a different Max Move effects.
 	.macro setmaxmoveeffect
-	various 0, VARIOUS_SET_MAX_MOVE_EFFECT
+	callnative BS_SetMaxMoveEffect
 	.endm
 
 	.macro setsteelsurge, failInstr:req
-	various 0, VARIOUS_SET_STEELSURGE
+	callnative BS_SetSteelsurge
 	.4byte \failInstr
 	.endm
 
 	.macro damagenontypes
-	various 0, VARIOUS_DAMAGE_NON_TYPES
+	callnative BS_DamageNonTypes
 	.endm
 
 	.macro trysetstatus1, ptr:req
-	various 0, VARIOUS_TRY_SET_STATUS1
+	callnative BS_TrySetStatus1
 	.4byte \ptr
 	.endm
 
 	.macro trysetstatus2, ptr:req
-	various 0, VARIOUS_TRY_SET_STATUS2
+	callnative BS_TrySetStatus2
 	.4byte \ptr
 	.endm
 
 	.macro tryhealsixthhealth, ptr:req
-	various 0, VARIOUS_TRY_HEAL_SIXTH_HP
+	callnative BS_HealOneSixth
 	.4byte \ptr
 	.endm
 
 	.macro tryrecycleberry, ptr:req
-	various 0, VARIOUS_TRY_RECYCLE_BERRY
+	callnative BS_TryRecycleBerry
 	.4byte \ptr
 	.endm
 	
 	.macro updatedynamax
-	various 0, VARIOUS_UPDATE_DYNAMAX
+	callnative BS_UpdateDynamax
 	.endm
 
 	.macro jumpiftargetdynamaxed, ptr:req
-	various 0, VARIOUS_JUMP_IF_TARGET_DYNAMAXED
+	callnative BS_JumpIfDynamaxed
 	.4byte \ptr
 	.endm
 

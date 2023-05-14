@@ -73,8 +73,16 @@ u8 GetMaxMovePower(u16 move);
 bool32 IsMaxMove(u16 move);
 const u8 *GetMaxMoveName(u16 move);
 void ChooseDamageNonTypesString(u8 type);
-u32 GetMaxMoveStatusEffect(u16 move);
-u16 SetMaxMoveEffect(u16 move);
+
+void BS_UpdateDynamax(void);
+void BS_SetMaxMoveEffect(void);
+void BS_SetSteelsurge(void);
+void BS_TrySetStatus1(void);
+void BS_TrySetStatus2(void);
+void BS_DamageNonTypes(void);
+void BS_HealOneSixth(void);
+void BS_TryRecycleBerry(void);
+void BS_JumpIfDynamaxed(void);
 
 void ChangeDynamaxTriggerSprite(u8 spriteId, u8 animId);
 void CreateDynamaxTriggerSprite(u8, bool8);
