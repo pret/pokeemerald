@@ -12699,12 +12699,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     {
         #if B_UPDATED_MOVE_DATA >= GEN_9
             .power = 80,
+            .accuracy = 100,
         #else
             .power = 75,
+            .accuracy = 90,
         #endif
         .effect = EFFECT_SPEED_UP_HIT,
         .type = TYPE_PSYCHIC,
-        .accuracy = 90,
         .pp = 10,
         .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
