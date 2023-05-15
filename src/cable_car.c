@@ -27,9 +27,11 @@
 
 #define STATE_END 0xFF
 
-#define TAG_CABLE_CAR 1
-#define TAG_DOOR      2
-#define TAG_CABLE     3
+enum {
+    TAG_CABLE_CAR = 1,
+    TAG_DOOR,
+    TAG_CABLE,
+};
 
 struct CableCar
 {
@@ -62,8 +64,8 @@ struct CableCar
     u16 *groundTilemap;
     u16 *treesTilemap;
     u16 *bgMountainsTilemap;
-    const u16 *pylonHookTilemapEntries;
-    u8 *pylonStemTilemap;
+    const u16 *pylonTopTilemap;
+    u16 *pylonPoleTilemap;
 };
 
 static EWRAM_DATA struct CableCar *sCableCar = NULL;
@@ -129,24 +131,11 @@ static const struct BgTemplate sBgTemplates[4] = {
     },
 };
 
-static const u8 sGround_Tilemap[] = INCBIN_U8("graphics/cable_car/ground.bin.lz");
-static const u8 sTrees_Tilemap[] = INCBIN_U8("graphics/cable_car/trees.bin.lz");
-static const u8 sBgMountains_Tilemap[] = INCBIN_U8("graphics/cable_car/bg_mountains.bin.lz");
-
-static const u16 sPylonHook_TilemapEntries[] = {
-    0x3000,
-    0x3001,
-    0x3002,
-    0x3003,
-    0x3004,
-    0x3005,
-    0x3006,
-    0x3007,
-    0x3008,
-    0x3009,
-};
-
-static const u8 sPylonStems_Tilemap[] = INCBIN_U8("graphics/cable_car/pylons.bin.lz");
+static const u16 sGround_Tilemap[] = INCBIN_U16("graphics/cable_car/ground.bin.lz");
+static const u16 sTrees_Tilemap[] = INCBIN_U16("graphics/cable_car/trees.bin.lz");
+static const u16 sBgMountains_Tilemap[] = INCBIN_U16("graphics/cable_car/bg_mountains.bin.lz");
+static const u16 sPylonTop_Tilemap[] = INCBIN_U16("graphics/cable_car/pylon_top.bin");
+static const u16 sPylonPole_Tilemap[] = INCBIN_U16("graphics/cable_car/pylon_pole.bin.lz");
 
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
     { gCableCar_Gfx,      0x800, TAG_CABLE_CAR },
@@ -299,8 +288,8 @@ static void CB2_LoadCableCar(void)
         sCableCar->groundTilemap = malloc_and_decompress(sGround_Tilemap, &sizeOut);
         sCableCar->treesTilemap = malloc_and_decompress(sTrees_Tilemap, &sizeOut);
         sCableCar->bgMountainsTilemap = malloc_and_decompress(sBgMountains_Tilemap, &sizeOut);
-        sCableCar->pylonStemTilemap = malloc_and_decompress(sPylonStems_Tilemap, &sizeOut);
-        sCableCar->pylonHookTilemapEntries = sPylonHook_TilemapEntries;
+        sCableCar->pylonPoleTilemap = malloc_and_decompress(sPylonPole_Tilemap, &sizeOut);
+        sCableCar->pylonTopTilemap = sPylonTop_Tilemap;
         DecompressAndCopyTileDataToVram(0, gCableCarBg_Gfx, 0, 0, 0);
         gMain.state++;
         break;
@@ -335,8 +324,8 @@ static void CB2_LoadCableCar(void)
     case 6:
         CopyToBgTilemapBufferRect_ChangePalette(1, sCableCar->treesTilemap, 0, 17, 32, 15, 17);
         CopyToBgTilemapBufferRect_ChangePalette(2, sCableCar->bgMountainsTilemap, 0, 0, 30, 20, 17);
-        CopyToBgTilemapBufferRect_ChangePalette(3, sCableCar->pylonHookTilemapEntries, 0, 0, 5, 2, 17);
-        CopyToBgTilemapBufferRect_ChangePalette(3, sCableCar->pylonStemTilemap, 0, 2, 2, 20, 17);
+        CopyToBgTilemapBufferRect_ChangePalette(3, sCableCar->pylonTopTilemap, 0, 0, 5, 2, 17);
+        CopyToBgTilemapBufferRect_ChangePalette(3, sCableCar->pylonPoleTilemap, 0, 2, 2, 20, 17);
         gMain.state++;
         break;
     case 7:
@@ -404,8 +393,8 @@ static void CB2_EndCableCar(void)
     UnsetBgTilemapBuffer(2);
     UnsetBgTilemapBuffer(3);
     ResetBgsAndClearDma3BusyFlags(0);
-    sCableCar->pylonHookTilemapEntries = NULL;
-    FREE_AND_SET_NULL(sCableCar->pylonStemTilemap);
+    sCableCar->pylonTopTilemap = NULL;
+    FREE_AND_SET_NULL(sCableCar->pylonPoleTilemap);
     FREE_AND_SET_NULL(sCableCar->bgMountainsTilemap);
     FREE_AND_SET_NULL(sCableCar->treesTilemap);
     FREE_AND_SET_NULL(sCableCar->groundTilemap);
@@ -514,8 +503,8 @@ static void Task_AnimateBgGoingUp(u8 taskId)
             FillBgTilemapBufferRect(3, 0, 2, 0, 1, 2, 17);
             break;
         case 16:
-            CopyToBgTilemapBufferRect_ChangePalette(3, sCableCar->pylonHookTilemapEntries, 0, 0, 5,  2, 17);
-            CopyToBgTilemapBufferRect_ChangePalette(3, sCableCar->pylonStemTilemap, 0, 2, 2, 30, 17);
+            CopyToBgTilemapBufferRect_ChangePalette(3, sCableCar->pylonTopTilemap, 0, 0, 5,  2, 17);
+            CopyToBgTilemapBufferRect_ChangePalette(3, sCableCar->pylonPoleTilemap, 0, 2, 2, 30, 17);
             sCableCar->bg3VerticalOffset = 64;
             break;
         }
@@ -542,7 +531,7 @@ static void Task_AnimateBgGoingDown(u8 taskId)
         switch (sCableCar->bg3HorizontalOffset)
         {
         case 176:
-            CopyToBgTilemapBufferRect_ChangePalette(3, sCableCar->pylonStemTilemap, 0, 2, 2, 30, 17);
+            CopyToBgTilemapBufferRect_ChangePalette(3, sCableCar->pylonPoleTilemap, 0, 2, 2, 30, 17);
             break;
         case 16:
             FillBgTilemapBufferRect(3, 0, 2,  0, 3,  2, 17);
@@ -550,14 +539,14 @@ static void Task_AnimateBgGoingDown(u8 taskId)
             sCableCar->bg3VerticalOffset = 192;
             break;
         case 32:
-            FillBgTilemapBufferRect(3, sCableCar->pylonHookTilemapEntries[2], 2, 0, 1, 1, 17);
-            FillBgTilemapBufferRect(3, sCableCar->pylonHookTilemapEntries[3], 3, 0, 1, 1, 17);
-            FillBgTilemapBufferRect(3, sCableCar->pylonHookTilemapEntries[7], 2, 1, 1, 1, 17);
-            FillBgTilemapBufferRect(3, sCableCar->pylonHookTilemapEntries[8], 3, 1, 1, 1, 17);
+            FillBgTilemapBufferRect(3, sCableCar->pylonTopTilemap[2], 2, 0, 1, 1, 17);
+            FillBgTilemapBufferRect(3, sCableCar->pylonTopTilemap[3], 3, 0, 1, 1, 17);
+            FillBgTilemapBufferRect(3, sCableCar->pylonTopTilemap[7], 2, 1, 1, 1, 17);
+            FillBgTilemapBufferRect(3, sCableCar->pylonTopTilemap[8], 3, 1, 1, 1, 17);
             break;
         case 40:
-            FillBgTilemapBufferRect(3, sCableCar->pylonHookTilemapEntries[4], 4, 0, 1, 1, 17);
-            FillBgTilemapBufferRect(3, sCableCar->pylonHookTilemapEntries[9], 4, 1, 1, 1, 17);
+            FillBgTilemapBufferRect(3, sCableCar->pylonTopTilemap[4], 4, 0, 1, 1, 17);
+            FillBgTilemapBufferRect(3, sCableCar->pylonTopTilemap[9], 4, 1, 1, 1, 17);
             break;
         }
     }

@@ -36,6 +36,11 @@ AsmFile::AsmFile(std::string path)
 
     m_size = std::ftell(fp);
 
+    if (m_size < 0)
+        FATAL_ERROR("File size of \"%s\" is less than zero.\n", path.c_str());
+    else if (m_size == 0)
+        return; // Empty file
+
     m_buffer = new char[m_size];
 
     std::rewind(fp);
@@ -51,7 +56,7 @@ AsmFile::AsmFile(std::string path)
 
 AsmFile::~AsmFile()
 {
-    delete[] m_buffer;
+    if (m_size > 0) delete[] m_buffer;
 }
 
 IncDirectiveType AsmFile::ReadUntilIncDirective(std::string &path)

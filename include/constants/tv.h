@@ -74,6 +74,7 @@
 // for TV shows from TVGROUP_NORMAL. The remainder are for TV
 // shows from TVGROUP_RECORD_MIX.
 #define NUM_NORMAL_TVSHOW_SLOTS 5
+#define TV_SHOWS_COUNT (NUM_NORMAL_TVSHOW_SLOTS + 20)
 
 #define PLAYERS_HOUSE_TV_NONE  0
 #define PLAYERS_HOUSE_TV_LATI  1

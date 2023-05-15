@@ -3271,7 +3271,7 @@ s32 GetHighestLevelInPlayerParty(void)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL)
-            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_EGG)
+            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG)
         {
             s32 level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL, NULL);
             if (level > highestLevel)
