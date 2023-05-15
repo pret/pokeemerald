@@ -9,6 +9,8 @@
 #define NUM_PALS_TOTAL 13
 #define MAX_MAP_DATA_SIZE 10240
 
+#define NUM_TILES_PER_METATILE 8
+
 // Map coordinates are offset by 7 when using the map
 // buffer because it needs to load sufficient border
 // metatiles to fill the player's view (the player has
@@ -46,8 +48,8 @@ void LoadSecondaryTilesetPalette(struct MapLayout const *mapLayout);
 void CopySecondaryTilesetToVramUsingHeap(struct MapLayout const *mapLayout);
 void CopyPrimaryTilesetToVram(const struct MapLayout *);
 void CopySecondaryTilesetToVram(const struct MapLayout *);
-struct MapHeader const *const GetMapHeaderFromConnection(struct MapConnection *connection);
-struct MapConnection *GetMapConnectionAtPos(s16 x, s16 y);
+const struct MapHeader *const GetMapHeaderFromConnection(const struct MapConnection *connection);
+const struct MapConnection *GetMapConnectionAtPos(s16 x, s16 y);
 void MapGridSetMetatileImpassabilityAt(int x, int y, bool32 impassable);
 
 // field_region_map.c

@@ -3518,15 +3518,15 @@ Cry_Dhelmise::
 	.incbin "sound/direct_sound_samples/cries/dhelmise.bin"
 
 	.align 2
-Cry_Jangmoo::
+Cry_JangmoO::
 	.incbin "sound/direct_sound_samples/cries/jangmo_o.bin"
 
 	.align 2
-Cry_Hakamoo::
+Cry_HakamoO::
 	.incbin "sound/direct_sound_samples/cries/hakamo_o.bin"
 
 	.align 2
-Cry_Kommoo::
+Cry_KommoO::
 	.incbin "sound/direct_sound_samples/cries/kommo_o.bin"
 
 	.align 2
@@ -3986,7 +3986,7 @@ Cry_Spectrier::
 	.align 2
 Cry_Calyrex::
 	.incbin "sound/direct_sound_samples/cries/calyrex.bin"
-/*
+
 	.align 2
 Cry_Wyrdeer::
 	.incbin "sound/direct_sound_samples/cries/wyrdeer.bin"
@@ -4014,7 +4014,7 @@ Cry_Overqwil::
 	.align 2
 Cry_Enamorus::
 	.incbin "sound/direct_sound_samples/cries/enamorus.bin"
-*/
+
 .endif
 
 	.align 2
@@ -4247,6 +4247,10 @@ Cry_LandorusTherian::
 	.incbin "sound/direct_sound_samples/cries/landorus_therian.bin"
 
 	.align 2
+Cry_EnamorusTherian::
+	.incbin "sound/direct_sound_samples/cries/enamorus_therian.bin"
+
+	.align 2
 Cry_KyuremWhite::
 	.incbin "sound/direct_sound_samples/cries/kyurem_white.bin"
 
@@ -4360,11 +4364,6 @@ Cry_CalyrexIceRider::
 Cry_CalyrexShadowRider::
 	.incbin "sound/direct_sound_samples/cries/calyrex_shadow_rider.bin"
 
-/*
-	.align 2
-Cry_EnamorusTherian::
-	.incbin "sound/direct_sound_samples/cries/enamorus_therian.bin"
-*/
 .endif
 
 	.align 2

@@ -2447,6 +2447,39 @@ const struct SpriteTemplate gFollowMeFingerSpriteTemplate =
     .callback = AnimFollowMeFinger,
 };
 
+const union AffineAnimCmd gTeaAffineAnimCmds1[] =
+{
+        AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
+        AFFINEANIMCMD_FRAME(0x1E, 0x1E, 0, 8),
+        AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gTeaAffineAnimCmds2[] =
+{
+        AFFINEANIMCMD_FRAME(0x0, 0x0, -3, 11),
+        AFFINEANIMCMD_FRAME(0x0, 0x0, 3, 11),
+        AFFINEANIMCMD_LOOP(2),
+        AFFINEANIMCMD_FRAME(0xFFE2, 0xFFE2, 0, 8),
+        AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gTeaAffineAnimTable[] =
+{
+        gTeaAffineAnimCmds1,
+        gTeaAffineAnimCmds2,
+};
+
+const struct SpriteTemplate gTeapotSpriteTemplate =
+{
+        .tileTag = ANIM_TAG_TEAPOT,
+        .paletteTag = ANIM_TAG_TEAPOT,
+        .oam = &gOamData_AffineDouble_ObjNormal_64x64,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gTeaAffineAnimTable,
+        .callback = AnimMetronomeFinger,
+};
+
 const union AnimCmd gTauntFingerAnimCmds1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -4747,8 +4780,8 @@ void AnimTask_CycleMagicalLeafPal(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        task->data[8] = IndexOfSpritePaletteTag(ANIM_TAG_LEAF) * 16 + 256;
-        task->data[12] = IndexOfSpritePaletteTag(ANIM_TAG_RAZOR_LEAF) * 16 + 256;
+        task->data[8] = OBJ_PLTT_ID(IndexOfSpritePaletteTag(ANIM_TAG_LEAF));
+        task->data[12] = OBJ_PLTT_ID(IndexOfSpritePaletteTag(ANIM_TAG_RAZOR_LEAF));
         task->data[0]++;
         break;
     case 1:
@@ -4773,8 +4806,8 @@ void AnimTask_CycleMagicalLeafPal(u8 taskId)
 
 void AnimNeedleArmSpike(struct Sprite *sprite)
 {
-    u8 a;
-    u8 b;
+    s16 a;
+    s16 b;
     u16 c;
     u16 x;
     u16 y;
@@ -4787,13 +4820,27 @@ void AnimNeedleArmSpike(struct Sprite *sprite)
     {
         if (gBattleAnimArgs[0] == 0)
         {
-            a = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
-            b = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
+            if (IsDoubleBattle())
+            {
+                SetAverageBattlerPositions(gBattleAnimAttacker, TRUE, &a, &b);
+            }
+            else
+            {
+                a = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+                b = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
+            }
         }
         else
         {
-            a = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
-            b = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
+            if (IsDoubleBattle())
+            {
+                SetAverageBattlerPositions(gBattleAnimTarget, TRUE, &a, &b);
+            }
+            else
+            {
+                a = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+                b = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
+            }
         }
 
         sprite->data[0] = gBattleAnimArgs[4];
@@ -5455,7 +5502,7 @@ static void AnimLockOnTarget_Step4(struct Sprite *sprite)
         int pal;
         sprite->data[2]++;
         pal = sprite->oam.paletteNum;
-        LoadPalette(&gPlttBufferUnfaded[0x108 + pal * 16], pal * 16 | 0x101, 4);
+        LoadPalette(&gPlttBufferUnfaded[OBJ_PLTT_ID(pal) + 8], OBJ_PLTT_ID(pal) + 1, PLTT_SIZEOF(2));
         PlaySE12WithPanning(SE_M_LEER, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
     }
     else if (sprite->data[1] == 0)
@@ -5667,11 +5714,11 @@ static void AnimTipMon_Step(struct Sprite *sprite)
 
 void AnimTask_SkullBashPosition(u8 taskId)
 {
-    u8 a;
+    u8 side;
 
     gTasks[taskId].data[0] = gBattlerSpriteIds[gBattleAnimAttacker];
-    a = GetBattlerSide(gBattleAnimAttacker);
-    gTasks[taskId].data[1] = a;
+    side = GetBattlerSide(gBattleAnimAttacker);
+    gTasks[taskId].data[1] = side;
     gTasks[taskId].data[2] = 0;
     switch (gBattleAnimArgs[0])
     {
@@ -5683,7 +5730,7 @@ void AnimTask_SkullBashPosition(u8 taskId)
         gTasks[taskId].data[3] = 8;
         gTasks[taskId].data[4] = 0;
         gTasks[taskId].data[5] = 3;
-        if (a == 0)
+        if (side == B_SIDE_PLAYER)
             gTasks[taskId].data[5] *= -1;
 
         gTasks[taskId].func = AnimTask_SkullBashPositionSet;
@@ -5692,7 +5739,7 @@ void AnimTask_SkullBashPosition(u8 taskId)
         gTasks[taskId].data[3] = 8;
         gTasks[taskId].data[4] = 0x600;
         gTasks[taskId].data[5] = 0xC0;
-        if (a == 0)
+        if (side == B_SIDE_PLAYER)
         {
             gTasks[taskId].data[4] = -gTasks[taskId].data[4];
             gTasks[taskId].data[5] = -gTasks[taskId].data[5];
@@ -6279,8 +6326,8 @@ void AnimTask_DoubleTeam(u8 taskId)
     struct Task *task = &gTasks[taskId];
     task->data[0] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     task->data[1] = AllocSpritePalette(ANIM_TAG_BENT_SPOON);
-    r3 = (task->data[1] * 16) + 0x100;
-    r4 = (gSprites[task->data[0]].oam.paletteNum + 16) << 4;
+    r3 = OBJ_PLTT_ID(task->data[1]);
+    r4 = OBJ_PLTT_ID2(gSprites[task->data[0]].oam.paletteNum);
     for (i = 1; i < 16; i++)
         gPlttBufferUnfaded[r3 + i] = gPlttBufferUnfaded[r4 + i];
 

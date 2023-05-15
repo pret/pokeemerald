@@ -181,6 +181,7 @@ static const u8 sText_SideStatus[] = _("Side Status");
 static const u8 sText_MaxHp[] = _("HP Max");
 static const u8 sText_CurrHp[] = _("HP Current");
 static const u8 sText_Freeze[] = _("Freeze");
+static const u8 sText_Frostbite[] = _("Frostbite");
 static const u8 sText_ToxicPoison[] = _("Toxic Poison");
 static const u8 sText_ToxicCounter[] = _("Toxic Counter");
 static const u8 sText_Flinch[] = _("Flinch");
@@ -258,6 +259,7 @@ static const struct BitfieldInfo sStatus1Bitfield[] =
     {/*Paralysis*/1, 6},
     {/*Toxic Poison*/ 1, 7},
     {/*Toxic Counter*/ 4, 8},
+    {/*Frostbite*/ 1, 12},
 };
 
 static const struct BitfieldInfo sStatus2Bitfield[] =
@@ -397,6 +399,7 @@ static const struct ListMenuItem sStatus1ListItems[] =
     {gText_Paralysis, 4},
     {sText_ToxicPoison, 5},
     {sText_ToxicCounter, 6},
+    {sText_Frostbite, 7},
 };
 
 static const struct ListMenuItem sStatus2ListItems[] =
@@ -774,7 +777,7 @@ static void Task_ShowAiPoints(u8 taskId)
 
         // Swap battler if it's player mon
         data->aiBattlerId = data->battlerId;
-        while (!IsBattlerAIControlled(data->aiBattlerId))
+        while (!BattlerHasAi(data->aiBattlerId))
         {
             if (++data->aiBattlerId >= gBattlersCount)
                 data->aiBattlerId = 0;
@@ -931,7 +934,7 @@ static void Task_ShowAiKnowledge(u8 taskId)
 
         // Swap battler if it's player mon
         data->aiBattlerId = data->battlerId;
-        while (!IsBattlerAIControlled(data->aiBattlerId))
+        while (!BattlerHasAi(data->aiBattlerId))
         {
             if (++data->aiBattlerId >= gBattlersCount)
                 data->aiBattlerId = 0;
@@ -1107,7 +1110,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
     struct BattleDebugMenu *data = GetStructPtr(taskId);
 
     // Exit the menu.
-    if (JOY_NEW(SELECT_BUTTON))
+    if (JOY_NEW(SELECT_BUTTON) || ((JOY_NEW(B_BUTTON)) && data->activeWindow == ACTIVE_WIN_MAIN))
     {
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
         gTasks[taskId].func = Task_DebugMenuFadeOut;
@@ -1759,7 +1762,7 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
     {
     case LIST_ITEM_ABILITY:
         data->modifyArrows.minValue = 0;
-        data->modifyArrows.maxValue = ABILITIES_COUNT_GEN8 - 1;
+        data->modifyArrows.maxValue = ABILITIES_COUNT - 1;
         data->modifyArrows.maxDigits = 3;
         data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].ability;
         data->modifyArrows.typeOfVal = VAL_U16;
@@ -1767,7 +1770,7 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         break;
     case LIST_ITEM_MOVES:
         data->modifyArrows.minValue = 0;
-        data->modifyArrows.maxValue = MOVES_COUNT_GEN8 - 1;
+        data->modifyArrows.maxValue = MOVES_COUNT - 1;
         data->modifyArrows.maxDigits = 3;
         if (data->currentSecondaryListItemId == 4)
         {

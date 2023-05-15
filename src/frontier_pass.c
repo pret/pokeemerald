@@ -30,6 +30,17 @@
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
 
+// gFrontierPassBg_Pal has 8*16 colors, but they attempt to load 13*16 colors.
+// As a result it goes out of bounds and interprets 160 bytes of whatever comes
+// after gFrontierPassBg_Pal (by default, gFrontierPassBg_Gfx) as a palette.
+// Nothing uses these colors (except the Trainer Card, which correctly writes them)
+// so in practice this bug has no effect on the game.
+#ifdef BUGFIX
+#define NUM_BG_PAL_SLOTS 8
+#else
+#define NUM_BG_PAL_SLOTS 13
+#endif
+
 // All windows displayed in the frontier pass.
 enum
 {
@@ -768,9 +779,9 @@ static bool32 InitFrontierPass(void)
         CopyBgTilemapBufferToVram(2);
         break;
     case 8:
-        LoadPalette(gFrontierPassBg_Pal[0], 0, 0x1A0);
-        LoadPalette(gFrontierPassBg_Pal[1 + sPassData->trainerStars], 0x10, 0x20);
-        LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
+        LoadPalette(gFrontierPassBg_Pal, 0, NUM_BG_PAL_SLOTS * PLTT_SIZE_4BPP);
+        LoadPalette(gFrontierPassBg_Pal[1 + sPassData->trainerStars], BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+        LoadPalette(GetTextWindowPalette(0), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         DrawFrontierPassBg();
         UpdateAreaHighlight(sPassData->cursorArea, sPassData->previousCursorArea);
         if (sPassData->areaToShow == CURSOR_AREA_MAP || sPassData->areaToShow == CURSOR_AREA_CARD)
@@ -1412,8 +1423,8 @@ static bool32 InitFrontierMap(void)
     case 5:
         if (FreeTempTileDataBuffersIfPossible())
             return FALSE;
-        LoadPalette(gFrontierPassBg_Pal[0], 0, 0x1A0);
-        LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
+        LoadPalette(gFrontierPassBg_Pal, BG_PLTT_ID(0), NUM_BG_PAL_SLOTS * PLTT_SIZE_4BPP);
+        LoadPalette(GetTextWindowPalette(0), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         CopyToBgTilemapBuffer(2, sMapScreen_Tilemap, 0, 0);
         CopyBgTilemapBufferToVram(2);
         break;

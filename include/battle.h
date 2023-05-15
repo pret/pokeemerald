@@ -3,6 +3,7 @@
 
 // should they be included here or included individually by every file?
 #include "constants/battle.h"
+#include "constants/form_change_types.h"
 #include "battle_main.h"
 #include "battle_message.h"
 #include "battle_util.h"
@@ -53,7 +54,7 @@ struct ResourceFlags
 #define RESOURCE_FLAG_FLASH_FIRE        0x1
 #define RESOURCE_FLAG_ROOST             0x2
 #define RESOURCE_FLAG_UNBURDEN          0x4
-#define RESOURCE_FLAG_INTIMIDATED       0x8
+#define RESOURCE_FLAG_UNUSED            0x8
 #define RESOURCE_FLAG_TRACED            0x10
 #define RESOURCE_FLAG_EMERGENCY_EXIT    0x20
 #define RESOURCE_FLAG_NEUTRALIZING_GAS  0x40
@@ -61,6 +62,7 @@ struct ResourceFlags
 struct DisableStruct
 {
     u32 transformedMonPersonality;
+    u32 transformedMonOtId;
     u16 disabledMove;
     u16 encoredMove;
     u8 protectUses;
@@ -70,20 +72,15 @@ struct DisableStruct
     s8 stockpileBeforeDef;
     s8 stockpileBeforeSpDef;
     u8 substituteHP;
-    u8 disableTimer:4;
-    u8 disableTimerStartValue:4;
     u8 encoredMovePos;
+    u8 disableTimer:4;
     u8 encoreTimer:4;
-    u8 encoreTimerStartValue:4;
     u8 perishSongTimer:4;
-    u8 perishSongTimerStartValue:4;
     u8 furyCutterCounter;
     u8 rolloutTimer:4;
     u8 rolloutTimerStartValue:4;
     u8 chargeTimer:4;
-    u8 chargeTimerStartValue:4;
     u8 tauntTimer:4;
-    u8 tauntTimer2:4;
     u8 battlerPreventingEscape;
     u8 battlerWithSureHit;
     u8 isFirstTurn;
@@ -99,11 +96,12 @@ struct DisableStruct
     u8 healBlockTimer;
     u8 laserFocusTimer;
     u8 throatChopTimer;
-    u8 usedMoves:4;
     u8 wrapTurns;
+    u8 usedMoves:4;
     u8 noRetreat:1;
     u8 tarShot:1;
     u8 octolock:1;
+    u8 cudChew:1;
 };
 
 struct ProtectStruct
@@ -147,6 +145,9 @@ struct ProtectStruct
     u16 quickDraw:1;
     u16 beakBlastCharge:1;
     u16 quash:1;
+    u16 shellTrap:1;
+    u16 silkTrapped:1;
+    u16 eatMirrorHerb:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;
@@ -155,41 +156,46 @@ struct ProtectStruct
 
 struct SpecialStatus
 {
-    u8 statLowered:1;
-    u8 lightningRodRedirected:1;
-    u8 restoredBattlerSprite: 1;
-    u8 intimidatedMon:1;
-    u8 traced:1;
-    u8 ppNotAffectedByPressure:1;
-    u8 faintedHasReplacement:1;
-    u8 focusBanded:1;
-    // End of byte
-    u8 focusSashed:1;
-    u8 sturdied:1;
-    u8 stormDrainRedirected:1;
-    u8 switchInAbilityDone:1;
-    u8 switchInItemDone:1;
-    u8 instructedChosenTarget:3;
-    // End of byte
-    u8 berryReduced:1;
-    u8 gemBoost:1;
-    u8 rototillerAffected:1;  // to be affected by rototiller
-    u8 parentalBondState:2;
-    u8 multiHitOn:1;
-    // End of byte, two bits unused
-    u8 gemParam;
-    u8 damagedMons:4; // Mons that have been damaged directly by using a move, includes substitute.
-    u8 dancerUsedMove:1;
-    u8 dancerOriginalTarget:3;
-    u8 announceNeutralizingGas:1;   // See Cmd_switchineffects
-    u8 neutralizingGasRemoved:1;    // See VARIOUS_TRY_END_NEUTRALIZING_GAS
-    u8 affectionEndured:1;
     s32 dmg;
     s32 physicalDmg;
     s32 specialDmg;
     u8 physicalBattlerId;
     u8 specialBattlerId;
     u8 changedStatsBattlerId; // Battler that was responsible for the latest stat change. Can be self.
+    u8 statLowered:1;
+    u8 lightningRodRedirected:1;
+    u8 restoredBattlerSprite: 1;
+    u8 traced:1;
+    u8 ppNotAffectedByPressure:1;
+    u8 faintedHasReplacement:1;
+    u8 focusBanded:1;
+    u8 focusSashed:1;
+    // End of byte
+    u8 sturdied:1;
+    u8 stormDrainRedirected:1;
+    u8 switchInAbilityDone:1;
+    u8 switchInItemDone:1;
+    u8 instructedChosenTarget:3;
+    u8 berryReduced:1;
+    // End of byte
+    u8 gemParam;
+    // End of byte
+    u8 gemBoost:1;
+    u8 rototillerAffected:1;  // to be affected by rototiller
+    u8 parentalBondState:2;
+    u8 multiHitOn:1;
+    u8 announceNeutralizingGas:1;   // See Cmd_switchineffects
+    u8 neutralizingGasRemoved:1;    // See VARIOUS_TRY_END_NEUTRALIZING_GAS
+    u8 affectionEndured:1;
+    // End of byte
+    u8 damagedMons:4; // Mons that have been damaged directly by using a move, includes substitute.
+    u8 dancerUsedMove:1;
+    u8 dancerOriginalTarget:3;
+    // End of byte
+    u8 weatherAbilityDone:1;
+    u8 terrainAbilityDone:1;
+    u8 emergencyExited:1;
+    u8 afterYou:1;
 };
 
 struct SideTimer
@@ -240,7 +246,7 @@ struct WishFutureKnock
     u8 wishCounter[MAX_BATTLERS_COUNT];
     u8 wishPartyId[MAX_BATTLERS_COUNT];
     u8 weatherDuration;
-    u8 knockedOffMons[2]; // Each battler is represented by a bit. The array entry is dependent on the battler's side.
+    u8 knockedOffMons[NUM_BATTLE_SIDES]; // Each battler is represented by a bit.
 };
 
 struct AI_SavedBattleMon
@@ -249,6 +255,7 @@ struct AI_SavedBattleMon
     u16 moves[MAX_MON_MOVES];
     u16 heldItem;
     u16 species;
+    u8 types[3];
 };
 
 struct AiPartyMon
@@ -268,8 +275,8 @@ struct AiPartyMon
 
 struct AIPartyData // Opposing battlers - party mons.
 {
-    struct AiPartyMon mons[2][PARTY_SIZE]; // 2 parties(player, opponent). Used to save information on opposing party.
-    u8 count[2];
+    struct AiPartyMon mons[NUM_BATTLE_SIDES][PARTY_SIZE]; // 2 parties(player, opponent). Used to save information on opposing party.
+    u8 count[NUM_BATTLE_SIDES];
 };
 
 struct AiLogicData
@@ -451,9 +458,9 @@ struct BattleTv_Mon
 
 struct BattleTv
 {
-    struct BattleTv_Mon mon[2][PARTY_SIZE]; // [side][partyId]
-    struct BattleTv_Position pos[2][2]; // [side][flank]
-    struct BattleTv_Side side[2]; // [side]
+    struct BattleTv_Mon mon[NUM_BATTLE_SIDES][PARTY_SIZE];
+    struct BattleTv_Position pos[NUM_BATTLE_SIDES][2]; // [side][flank]
+    struct BattleTv_Side side[NUM_BATTLE_SIDES];
 };
 
 struct BattleTvMovePoints
@@ -473,17 +480,10 @@ struct LinkBattlerHeader
 struct MegaEvolutionData
 {
     u8 toEvolve; // As flags using gBitTable.
-    u8 evolvedPartyIds[2]; // As flags using gBitTable;
     bool8 alreadyEvolved[4]; // Array id is used for mon position.
-    u16 evolvedSpecies[MAX_BATTLERS_COUNT];
-    u16 playerEvolvedSpecies;
-    u8 primalRevertedPartyIds[2]; // As flags using gBitTable;
-    u16 primalRevertedSpecies[MAX_BATTLERS_COUNT];
-    u16 playerPrimalRevertedSpecies;
     u8 battlerId;
     bool8 playerSelect;
     u8 triggerSpriteId;
-    bool8 isWishMegaEvo;
 };
 
 struct Illusion
@@ -514,7 +514,7 @@ struct ZMoveData
     u8 splits[MAX_BATTLERS_COUNT];
 };
 
-struct StolenItem
+struct LostItem
 {
     u16 originalItem:15;
     u16 stolen:1;
@@ -531,8 +531,7 @@ struct BattleStruct
     u8 wildVictorySong;
     u8 dynamicMoveType;
     u8 wrappedBy[MAX_BATTLERS_COUNT];
-    u16 assistPossibleMoves[PARTY_SIZE * MAX_MON_MOVES]; // Each of mons can know max 4 moves.
-    u8 focusPunchBattlerId;
+    u8 focusPunchBattlers; // as bits
     u8 battlerPreventingSwitchout;
     u8 moneyMultiplier:6;
     u8 moneyMultiplierItem:1;
@@ -570,20 +569,17 @@ struct BattleStruct
     u8 wallyWaitFrames;
     u8 wallyMoveFrames;
     u16 lastTakenMove[MAX_BATTLERS_COUNT]; // Last move that a battler was hit with.
-    u16 hpOnSwitchout[2];
+    u16 hpOnSwitchout[NUM_BATTLE_SIDES];
     u32 savedBattleTypeFlags;
     u16 abilityPreventingSwitchout;
     u8 hpScale;
     u16 synchronizeMoveEffect;
     bool8 anyMonHasTransformed;
     void (*savedCallback)(void);
-    u16 usedHeldItems[PARTY_SIZE][2];   // For each party member and side. For harvest, recycle
+    u16 usedHeldItems[PARTY_SIZE][NUM_BATTLE_SIDES]; // For each party member and side. For harvest, recycle
     u16 chosenItem[MAX_BATTLERS_COUNT];
-    u8 AI_itemType[2];
-    u8 AI_itemFlags[2];
     u16 choicedMove[MAX_BATTLERS_COUNT];
     u16 changedItems[MAX_BATTLERS_COUNT];
-    u8 intimidateBattler;
     u8 switchInItemsCounter;
     u8 arenaTurnCounter;
     u8 turnSideTracker;
@@ -611,7 +607,7 @@ struct BattleStruct
     u8 debugBattler;
     u8 magnitudeBasePower;
     u8 presentBasePower;
-    u8 roostTypes[MAX_BATTLERS_COUNT][3];
+    u8 roostTypes[MAX_BATTLERS_COUNT][2];
     u8 savedBattlerTarget;
     bool8 ateBoost[MAX_BATTLERS_COUNT];
     u8 activeAbilityPopUps; // as bits for each battler
@@ -641,17 +637,37 @@ struct BattleStruct
     u16 moveEffect2; // For Knock Off
     u16 changedSpecies[PARTY_SIZE]; // For Zygarde or future forms when multiple mons can change into the same pokemon.
     u8 quickClawBattlerId;
-    struct StolenItem itemStolen[PARTY_SIZE];  // Player's team that had items stolen (two bytes per party member)
+    struct LostItem itemLost[PARTY_SIZE];  // Player's team that had items consumed or stolen (two bytes per party member)
     u8 blunderPolicy:1; // should blunder policy activate
     u8 swapDamageCategory:1; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
+    u8 forcedSwitch:4; // For each battler
+    u8 switchInAbilityPostponed:4; // To not activate against an empty field, each bit for battler
     u8 ballSpriteIds[2];    // item gfx, window gfx
     u8 stickyWebUser;
     u8 appearedInBattle; // Bitfield to track which Pokemon appeared in battle. Used for Burmy's form change
     u8 skyDropTargets[MAX_BATTLERS_COUNT]; // For Sky Drop, to account for if multiple Pokemon use Sky Drop in a double battle.
     // When using a move which hits multiple opponents which is then bounced by a target, we need to make sure, the move hits both opponents, the one with bounce, and the one without.
     u8 attackerBeforeBounce:2;
+    u8 beatUpSlot:3;
+    bool8 hitSwitchTargetFailed:1;
+    bool8 effectsBeforeUsingMoveDone:1; // Mega Evo and Focus Punch/Shell Trap effects.
     u8 targetsDone[MAX_BATTLERS_COUNT]; // Each battler as a bit.
     u16 overwrittenAbilities[MAX_BATTLERS_COUNT];    // abilities overwritten during battle (keep separate from battle history in case of switching)
+    bool8 allowedToChangeFormInWeather[PARTY_SIZE][2]; // For each party member and side, used by Ice Face.
+    u8 battleBondTransformed[NUM_BATTLE_SIDES]; // Bitfield for each party.
+    u8 storedHealingWish:4; // Each battler as a bit.
+    u8 storedLunarDance:4; // Each battler as a bit.
+    u16 supremeOverlordModifier[MAX_BATTLERS_COUNT];
+    u8 itemPartyIndex[MAX_BATTLERS_COUNT];
+    u8 itemMoveIndex[MAX_BATTLERS_COUNT];
+    bool8 trainerSlideHalfHpMsgDone;
+    u8 trainerSlideFirstCriticalHitMsgState:2;
+    u8 trainerSlideFirstSuperEffectiveHitMsgState:2;
+    u8 trainerSlideFirstSTABMoveMsgState:2;
+    u8 trainerSlidePlayerMonUnaffectedMsgState:2;
+    bool8 trainerSlideMegaEvolutionMsgDone;
+    bool8 trainerSlideZMoveMsgDone;
+    bool8 trainerSlideBeforeFirstTurnMsgDone;
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)
@@ -681,6 +697,13 @@ struct BattleStruct
     gBattleMons[battlerId].type2 = type;            \
     gBattleMons[battlerId].type3 = TYPE_MYSTERY;    \
 }
+#define RESTORE_BATTLER_TYPE(battlerId)                                                     \
+{                                                                                           \
+    gBattleMons[battlerId].type1 = gSpeciesInfo[gBattleMons[battlerId].species].types[0];   \
+    gBattleMons[battlerId].type2 = gSpeciesInfo[gBattleMons[battlerId].species].types[1];   \
+    gBattleMons[battlerId].type3 = TYPE_MYSTERY;                                            \
+}
+
 
 #define IS_BATTLER_PROTECTED(battlerId)(gProtectStructs[battlerId].protected                                           \
                                         || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_WIDE_GUARD           \
@@ -690,7 +713,8 @@ struct BattleStruct
                                         || gProtectStructs[battlerId].spikyShielded                                    \
                                         || gProtectStructs[battlerId].kingsShielded                                    \
                                         || gProtectStructs[battlerId].banefulBunkered                                  \
-                                        || gProtectStructs[battlerId].obstructed)                                      \
+                                        || gProtectStructs[battlerId].obstructed                                       \
+                                        || gProtectStructs[battlerId].silkTrapped)
 
 #define GET_STAT_BUFF_ID(n)((n & 7))              // first three bits 0x1, 0x2, 0x4
 #define GET_STAT_BUFF_VALUE_WITH_SIGN(n)((n & 0xF8))
@@ -701,6 +725,17 @@ struct BattleStruct
 
 #define SET_STATCHANGER(statId, stage, goesDown)(gBattleScripting.statChanger = (statId) + ((stage) << 3) + (goesDown << 7))
 #define SET_STATCHANGER2(dst, statId, stage, goesDown)(dst = (statId) + ((stage) << 3) + (goesDown << 7))
+
+static inline struct Pokemon *GetSideParty(u32 side)
+{
+    return side == B_SIDE_PLAYER ? gPlayerParty : gEnemyParty;
+}
+
+static inline struct Pokemon *GetBattlerParty(u32 battlerId)
+{
+    extern u8 GetBattlerSide(u8 battler);
+    return GetSideParty(GetBattlerSide(battlerId));
+}
 
 // NOTE: The members of this struct have hard-coded offsets
 //       in include/constants/battle_script_commands.h
@@ -835,7 +870,7 @@ struct MonSpritesGfx
         u8 *byte[MAX_BATTLERS_COUNT];
     } sprites;
     struct SpriteTemplate templates[MAX_BATTLERS_COUNT];
-    struct SpriteFrameImage frameImages[MAX_BATTLERS_COUNT][4];
+    struct SpriteFrameImage frameImages[MAX_BATTLERS_COUNT][MAX_MON_PIC_FRAMES];
     u8 unusedArr[0x80];
     u8 *barFontGfx;
     void *unusedPtr;
@@ -916,8 +951,8 @@ extern u16 gMoveResultFlags;
 extern u32 gHitMarker;
 extern u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT];
 extern u8 gUnusedFirstBattleVar2;
-extern u32 gSideStatuses[2];
-extern struct SideTimer gSideTimers[2];
+extern u32 gSideStatuses[NUM_BATTLE_SIDES];
+extern struct SideTimer gSideTimers[NUM_BATTLE_SIDES];
 extern u32 gStatuses3[MAX_BATTLERS_COUNT];
 extern u32 gStatuses4[MAX_BATTLERS_COUNT];
 extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
@@ -945,6 +980,7 @@ extern u8 gBattlerStatusSummaryTaskId[MAX_BATTLERS_COUNT];
 extern u8 gBattlerInMenuId;
 extern bool8 gDoingBattleAnim;
 extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
+extern u32 gTransformedOtIds[MAX_BATTLERS_COUNT];
 extern u8 gPlayerDpadHoldFrames;
 extern struct BattleSpriteData *gBattleSpritesDataPtr;
 extern struct MonSpritesGfx *gMonSpritesGfxPtr;

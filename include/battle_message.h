@@ -229,6 +229,14 @@ enum
     TRAINER_SLIDE_LAST_SWITCHIN,
     TRAINER_SLIDE_LAST_LOW_HP,
     TRAINER_SLIDE_FIRST_DOWN,
+    TRAINER_SLIDE_LAST_HALF_HP,
+    TRAINER_SLIDE_FIRST_CRITICAL_HIT,
+    TRAINER_SLIDE_FIRST_SUPER_EFFECTIVE_HIT,
+    TRAINER_SLIDE_FIRST_STAB_MOVE,
+    TRAINER_SLIDE_PLAYER_MON_UNAFFECTED,
+    TRAINER_SLIDE_MEGA_EVOLUTION,
+    TRAINER_SLIDE_Z_MOVE,
+    TRAINER_SLIDE_BEFORE_FIRST_TURN,
 };
 
 void BufferStringBattle(u16 stringID);
@@ -237,7 +245,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst);
 void BattlePutTextOnWindow(const u8 *text, u8 windowId);
 void SetPpNumbersPaletteInMoveSelection(void);
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
-bool32 ShouldDoTrainerSlide(u32 battlerId, u32 trainerId, u32 which);
+u32 ShouldDoTrainerSlide(u32 battlerId, u32 which); // return 1 for TrainerA, 2 forTrainerB
 void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
 extern struct BattleMsgData *gBattleMsgDataPtr;

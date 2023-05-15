@@ -264,14 +264,14 @@ static const struct OamData sOamData_RotatingGateRegular =
 
 static const struct SpriteSheet sRotatingGatesGraphicsTable[] =
 {
-    {sRotatingGateTiles_1, 0x200, ROTATING_GATE_TILE_TAG + GATE_SHAPE_L1},
-    {sRotatingGateTiles_2, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_L2},
-    {sRotatingGateTiles_3, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_L3},
-    {sRotatingGateTiles_4, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_L4},
-    {sRotatingGateTiles_5, 0x200, ROTATING_GATE_TILE_TAG + GATE_SHAPE_T1},
-    {sRotatingGateTiles_6, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_T2},
-    {sRotatingGateTiles_7, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_T3},
-    {sRotatingGateTiles_8, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_T4},
+    {sRotatingGateTiles_1, sizeof(sRotatingGateTiles_1), ROTATING_GATE_TILE_TAG + GATE_SHAPE_L1},
+    {sRotatingGateTiles_2, sizeof(sRotatingGateTiles_2), ROTATING_GATE_TILE_TAG + GATE_SHAPE_L2},
+    {sRotatingGateTiles_3, sizeof(sRotatingGateTiles_3), ROTATING_GATE_TILE_TAG + GATE_SHAPE_L3},
+    {sRotatingGateTiles_4, sizeof(sRotatingGateTiles_4), ROTATING_GATE_TILE_TAG + GATE_SHAPE_L4},
+    {sRotatingGateTiles_5, sizeof(sRotatingGateTiles_5), ROTATING_GATE_TILE_TAG + GATE_SHAPE_T1},
+    {sRotatingGateTiles_6, sizeof(sRotatingGateTiles_6), ROTATING_GATE_TILE_TAG + GATE_SHAPE_T2},
+    {sRotatingGateTiles_7, sizeof(sRotatingGateTiles_7), ROTATING_GATE_TILE_TAG + GATE_SHAPE_T3},
+    {sRotatingGateTiles_8, sizeof(sRotatingGateTiles_8), ROTATING_GATE_TILE_TAG + GATE_SHAPE_T4},
     {NULL},
 };
 

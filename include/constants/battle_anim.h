@@ -394,12 +394,21 @@
 #define ANIM_TAG_OMEGA_SYMBOL               (ANIM_SPRITES_START + 382)
 #define ANIM_TAG_STEEL_BEAM                 (ANIM_SPRITES_START + 383)
 #define ANIM_TAG_POLTERGEIST                (ANIM_SPRITES_START + 384)
+#define ANIM_TAG_TEAPOT                     (ANIM_SPRITES_START + 385)
+
 
 // battlers
-#define ANIM_ATTACKER    0
-#define ANIM_TARGET      1
-#define ANIM_ATK_PARTNER 2
-#define ANIM_DEF_PARTNER 3
+#define ANIM_ATTACKER         0
+#define ANIM_TARGET           1
+#define ANIM_ATK_PARTNER      2
+#define ANIM_DEF_PARTNER      3
+
+// Below are used by AnimTask_ShakeMon2 and AnimTask_SetGrayscaleOrOriginalPal
+#define ANIM_PLAYER_LEFT      (MAX_BATTLERS_COUNT + 0)
+#define ANIM_PLAYER_RIGHT     (MAX_BATTLERS_COUNT + 1)
+#define ANIM_OPPONENT_LEFT    (MAX_BATTLERS_COUNT + 2)
+#define ANIM_OPPONENT_RIGHT   (MAX_BATTLERS_COUNT + 3)
+#define ANIM_ATTACKER_FORCE   (MAX_BATTLERS_COUNT + 4)
 
 // stereo panning constants [0-255]
 //
@@ -535,6 +544,7 @@
 #define B_ANIM_SHELL_TRAP_SETUP         34
 #define B_ANIM_ZMOVE_ACTIVATE           35 // Using Z Moves
 #define B_ANIM_AFFECTION_HANGED_ON      36
+#define B_ANIM_SNOW_CONTINUES           37
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
@@ -574,6 +584,7 @@
 #define TRAP_ANIM_MAGMA_STORM 5
 #define TRAP_ANIM_INFESTATION 6
 #define TRAP_ANIM_SNAP_TRAP 7
+#define TRAP_ANIM_THUNDER_CAGE 8
 
 // Weather defines for battle animation scripts.
 #define ANIM_WEATHER_NONE 0
@@ -581,6 +592,7 @@
 #define ANIM_WEATHER_RAIN 2
 #define ANIM_WEATHER_SANDSTORM 3
 #define ANIM_WEATHER_HAIL 4
+#define ANIM_WEATHER_SNOW 5
 
 // mon pal blend
 #define ANIM_PAL_BG             0x1

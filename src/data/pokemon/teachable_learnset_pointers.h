@@ -789,9 +789,9 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_BRUXISH] = sBruxishTeachableLearnset,
     [SPECIES_DRAMPA] = sDrampaTeachableLearnset,
     [SPECIES_DHELMISE] = sDhelmiseTeachableLearnset,
-    [SPECIES_JANGMO_O] = sJangmooTeachableLearnset,
-    [SPECIES_HAKAMO_O] = sHakamooTeachableLearnset,
-    [SPECIES_KOMMO_O] = sKommooTeachableLearnset,
+    [SPECIES_JANGMO_O] = sJangmoOTeachableLearnset,
+    [SPECIES_HAKAMO_O] = sHakamoOTeachableLearnset,
+    [SPECIES_KOMMO_O] = sKommoOTeachableLearnset,
     [SPECIES_TAPU_KOKO] = sTapuKokoTeachableLearnset,
     [SPECIES_TAPU_LELE] = sTapuLeleTeachableLearnset,
     [SPECIES_TAPU_BULU] = sTapuBuluTeachableLearnset,
@@ -1334,5 +1334,6 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_CALYREX_SHADOW_RIDER] = sCalyrexShadowRiderTeachableLearnset,
     // Enamorus
     [SPECIES_ENAMORUS_THERIAN] = sEnamorusTeachableLearnset,
+    [SPECIES_BASCULEGION_FEMALE] = sBasculegionTeachableLearnset,
 #endif
 };

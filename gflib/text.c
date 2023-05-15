@@ -36,7 +36,7 @@ static u32 GetGlyphWidth_Narrow(u16, bool32);
 static u32 GetGlyphWidth_SmallNarrow(u16, bool32);
 
 static EWRAM_DATA struct TextPrinter sTempTextPrinter = {0};
-static EWRAM_DATA struct TextPrinter sTextPrinters[NUM_TEXT_PRINTERS] = {0};
+static EWRAM_DATA struct TextPrinter sTextPrinters[WINDOWS_MAX] = {0};
 
 static u16 sFontHalfRowLookupTable[0x51];
 static u16 sLastTextBgColor;
@@ -244,7 +244,7 @@ static void SetFontsPointer(const struct FontInfo *fonts)
 void DeactivateAllTextPrinters(void)
 {
     int printer;
-    for (printer = 0; printer < NUM_TEXT_PRINTERS; ++printer)
+    for (printer = 0; printer < WINDOWS_MAX; ++printer)
         sTextPrinters[printer].active = FALSE;
 }
 
@@ -322,7 +322,7 @@ void RunTextPrinters(void)
 
     if (!gDisableTextPrinters)
     {
-        for (i = 0; i < NUM_TEXT_PRINTERS; ++i)
+        for (i = 0; i < WINDOWS_MAX; ++i)
         {
             if (sTextPrinters[i].active)
             {
@@ -1009,7 +1009,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
                 subStruct->fontId = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 return RENDER_REPEAT;
-            case EXT_CTRL_CODE_RESET_SIZE:
+            case EXT_CTRL_CODE_RESET_FONT:
                 return RENDER_REPEAT;
             case EXT_CTRL_CODE_PAUSE:
                 textPrinter->delayCounter = *textPrinter->printerTemplate.currentChar;
@@ -1042,7 +1042,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentChar++;
                 PlaySE(currChar);
                 return RENDER_REPEAT;
-            case EXT_CTRL_CODE_SHIFT_TEXT:
+            case EXT_CTRL_CODE_SHIFT_RIGHT:
                 textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x + *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 return RENDER_REPEAT;
@@ -1271,7 +1271,7 @@ static u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpaci
             case EXT_CTRL_CODE_FONT:
             case EXT_CTRL_CODE_PAUSE:
             case EXT_CTRL_CODE_ESCAPE:
-            case EXT_CTRL_CODE_SHIFT_TEXT:
+            case EXT_CTRL_CODE_SHIFT_RIGHT:
             case EXT_CTRL_CODE_SHIFT_DOWN:
             case EXT_CTRL_CODE_CLEAR:
             case EXT_CTRL_CODE_SKIP:
@@ -1279,7 +1279,7 @@ static u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpaci
             case EXT_CTRL_CODE_MIN_LETTER_SPACING:
                 ++strPos;
                 break;
-            case EXT_CTRL_CODE_RESET_SIZE:
+            case EXT_CTRL_CODE_RESET_FONT:
             case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
             case EXT_CTRL_CODE_WAIT_SE:
             case EXT_CTRL_CODE_FILL_WINDOW:
@@ -1413,7 +1413,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             case EXT_CTRL_CODE_PALETTE:
             case EXT_CTRL_CODE_PAUSE:
             case EXT_CTRL_CODE_ESCAPE:
-            case EXT_CTRL_CODE_SHIFT_TEXT:
+            case EXT_CTRL_CODE_SHIFT_RIGHT:
             case EXT_CTRL_CODE_SHIFT_DOWN:
                 ++str;
                 break;
@@ -1444,7 +1444,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             case EXT_CTRL_CODE_ENG:
                 isJapanese = 0;
                 break;
-            case EXT_CTRL_CODE_RESET_SIZE:
+            case EXT_CTRL_CODE_RESET_FONT:
             case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
             case EXT_CTRL_CODE_WAIT_SE:
             case EXT_CTRL_CODE_FILL_WINDOW:
@@ -1556,7 +1556,7 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
             case EXT_CTRL_CODE_PALETTE:
             case EXT_CTRL_CODE_PAUSE:
             case EXT_CTRL_CODE_ESCAPE:
-            case EXT_CTRL_CODE_SHIFT_TEXT:
+            case EXT_CTRL_CODE_SHIFT_RIGHT:
             case EXT_CTRL_CODE_SHIFT_DOWN:
             case EXT_CTRL_CODE_CLEAR:
             case EXT_CTRL_CODE_SKIP:
@@ -1564,7 +1564,7 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
             case EXT_CTRL_CODE_MIN_LETTER_SPACING:
                 ++strPos;
                 break;
-            case EXT_CTRL_CODE_RESET_SIZE:
+            case EXT_CTRL_CODE_RESET_FONT:
             case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
             case EXT_CTRL_CODE_WAIT_SE:
             case EXT_CTRL_CODE_FILL_WINDOW:

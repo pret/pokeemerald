@@ -815,9 +815,9 @@ const u8 *const gMonIconTable[] =
     [SPECIES_BRUXISH] = gMonIcon_Bruxish,
     [SPECIES_DRAMPA] = gMonIcon_Drampa,
     [SPECIES_DHELMISE] = gMonIcon_Dhelmise,
-    [SPECIES_JANGMO_O] = gMonIcon_Jangmoo,
-    [SPECIES_HAKAMO_O] = gMonIcon_Hakamoo,
-    [SPECIES_KOMMO_O] = gMonIcon_Kommoo,
+    [SPECIES_JANGMO_O] = gMonIcon_JangmoO,
+    [SPECIES_HAKAMO_O] = gMonIcon_HakamoO,
+    [SPECIES_KOMMO_O] = gMonIcon_KommoO,
     [SPECIES_TAPU_KOKO] = gMonIcon_TapuKoko,
     [SPECIES_TAPU_LELE] = gMonIcon_TapuLele,
     [SPECIES_TAPU_BULU] = gMonIcon_TapuBulu,
@@ -1293,6 +1293,7 @@ const u8 *const gMonIconTable[] =
     [SPECIES_CALYREX_ICE_RIDER] = gMonIcon_CalyrexIceRider,
     [SPECIES_CALYREX_SHADOW_RIDER] = gMonIcon_CalyrexShadowRider,
     [SPECIES_ENAMORUS_THERIAN] = gMonIcon_EnamorusTherian,
+    [SPECIES_BASCULEGION_FEMALE] = gMonIcon_BasculegionFemale,
 #endif
     [SPECIES_EGG] = gMonIcon_Egg,
 };
@@ -1309,8 +1310,13 @@ const u8 *const gMonIconTableFemale[] =
     [SPECIES_KRICKETUNE] = gMonIcon_Kricketune,
     [SPECIES_SHINX] = gMonIcon_Shinx,
     [SPECIES_COMBEE] = gMonIcon_Combee,
+#if P_HIPPO_GENDER_DIFF_ICONS == TRUE
+    [SPECIES_HIPPOPOTAS] = gMonIcon_HippopotasF,
+    [SPECIES_HIPPOWDON] = gMonIcon_HippowdonF,
+#else
     [SPECIES_HIPPOPOTAS] = gMonIcon_Hippopotas,
     [SPECIES_HIPPOWDON] = gMonIcon_Hippowdon,
+#endif
 #endif
 #if P_GEN_5_POKEMON == TRUE
     [SPECIES_UNFEZANT] = gMonIcon_UnfezantF,
@@ -1319,9 +1325,6 @@ const u8 *const gMonIconTableFemale[] =
 #endif
 #if P_GEN_6_POKEMON == TRUE
     [SPECIES_PYROAR] = gMonIcon_PyroarF,
-#endif
-#if P_GEN_8_POKEMON == TRUE
-    [SPECIES_BASCULEGION] = gMonIcon_BasculegionF,
 #endif
 };
 
@@ -2537,6 +2540,7 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_CALYREX_ICE_RIDER] = 0,
     [SPECIES_CALYREX_SHADOW_RIDER] = 0,
     [SPECIES_ENAMORUS_THERIAN] = 1,
+    [SPECIES_BASCULEGION_FEMALE] = 0,
 #endif
     [SPECIES_EGG] = 1,
 };
@@ -2865,12 +2869,12 @@ void TryLoadAllMonIconPalettesAtOffset(u16 offset)
     s32 i;
     const struct SpritePalette* monIconPalettePtr;
 
-    if (offset <= 0xA0)
+    if (offset <= BG_PLTT_ID(10))
     {
         monIconPalettePtr = gMonIconPaletteTable;
-        for(i = ARRAY_COUNT(gMonIconPaletteTable) - 1; i >= 0; i--)
+        for (i = ARRAY_COUNT(gMonIconPaletteTable) - 1; i >= 0; i--)
         {
-            LoadPalette(monIconPalettePtr->data, offset, 0x20);
+            LoadPalette(monIconPalettePtr->data, offset, PLTT_SIZE_4BPP);
             offset += 0x10;
             monIconPalettePtr++;
         }

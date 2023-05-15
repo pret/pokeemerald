@@ -14,8 +14,8 @@
 
 // IDs for dynamic warps. Both are used in the dest_warp_id field for warp events, but they
 // are never read in practice. A dest_map of MAP_DYNAMIC is used to indicate that a
-// dynamic warp should be used, at which point the warp id is ignored. It can be passed to
-// SetDynamicWarp/SetDynamicWarpWithCoords as the first argument, but this argument is unused.
+// dynamic warp should be used, at which point the warp id is ignored. They can be passed
+// as the argument to SetWarpDestinationToDynamicWarp, but this argument is unused.
 // As only one dynamic warp is saved at a time there's no need to distinguish between them.
 #define WARP_ID_SECRET_BASE 0x7E
 #define WARP_ID_DYNAMIC     0x7F

@@ -331,6 +331,7 @@ static const u16 sEncouragedEncoreEffects[] =
     EFFECT_SPIT_UP,
     EFFECT_SWALLOW,
     EFFECT_HAIL,
+    EFFECT_SNOWSCAPE,
     EFFECT_TORMENT,
     EFFECT_WILL_O_WISP,
     EFFECT_FOLLOW_ME,
@@ -457,7 +458,7 @@ void RecordLastUsedMoveByTarget(void)
     RecordKnownMove(gBattlerTarget, gLastMoves[gBattlerTarget]);
 }
 
-bool32 IsBattlerAIControlled(u32 battlerId)
+bool32 BattlerHasAi(u32 battlerId)
 {
     switch (GetBattlerPosition(battlerId))
     {
@@ -471,6 +472,14 @@ bool32 IsBattlerAIControlled(u32 battlerId)
     case B_POSITION_OPPONENT_RIGHT:
         return TRUE;
     }
+}
+
+bool32 IsAiBattlerAware(u32 battlerId)
+{
+    if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_OMNISCIENT)
+        return TRUE;
+
+    return BattlerHasAi(battlerId);
 }
 
 void ClearBattlerMoveHistory(u8 battlerId)
@@ -529,7 +538,7 @@ void ClearBattlerItemEffectHistory(u8 battlerId)
 
 void SaveBattlerData(u8 battlerId)
 {
-    if (!IsBattlerAIControlled(battlerId))
+    if (!BattlerHasAi(battlerId))
     {
         u32 i;
 
@@ -539,22 +548,73 @@ void SaveBattlerData(u8 battlerId)
         for (i = 0; i < 4; i++)
             AI_THINKING_STRUCT->saved[battlerId].moves[i] = gBattleMons[battlerId].moves[i];
     }
+    // Save and restore types even for AI controlled battlers in case it gets changed during move evaluation process.
+    AI_THINKING_STRUCT->saved[battlerId].types[0] = gBattleMons[battlerId].type1;
+    AI_THINKING_STRUCT->saved[battlerId].types[1] = gBattleMons[battlerId].type2;
+}
+
+static bool32 ShouldFailForIllusion(u16 illusionSpecies, u32 battlerId)
+{
+    u32 i, j;
+
+    if (BATTLE_HISTORY->abilities[battlerId] == ABILITY_ILLUSION)
+        return FALSE;
+
+    // Don't fall for Illusion if the mon used a move it cannot know.
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u16 move = BATTLE_HISTORY->usedMoves[battlerId][i];
+        if (move == MOVE_NONE)
+            continue;
+
+        for (j = 0; gLevelUpLearnsets[illusionSpecies][j].move != MOVE_UNAVAILABLE; j++)
+        {
+            if (gLevelUpLearnsets[illusionSpecies][j].move == move)
+                break;
+        }
+        // The used move is in the learnsets of the fake species.
+        if (gLevelUpLearnsets[illusionSpecies][j].move != MOVE_UNAVAILABLE)
+            continue;
+
+        // The used move can be learned from Tm/Hm or Move Tutors.
+        if (CanLearnTeachableMove(illusionSpecies, move))
+            continue;
+
+        // 'Illegal move', AI won't fail for the illusion.
+        return FALSE;
+    }
+
+    return TRUE;
 }
 
 void SetBattlerData(u8 battlerId)
 {
-    if (!IsBattlerAIControlled(battlerId))
+    if (!BattlerHasAi(battlerId))
     {
-        struct Pokemon *illusionMon;
-        u32 i;
+        u32 i, species, illusionSpecies;
+
+        // Simulate Illusion
+        species = gBattleMons[battlerId].species;
+        illusionSpecies = GetIllusionMonSpecies(battlerId);
+        if (illusionSpecies != SPECIES_NONE && ShouldFailForIllusion(illusionSpecies, battlerId))
+        {
+            // If the battler's type has not been changed, AI assumes the types of the illusion mon.
+            if (gBattleMons[battlerId].type1 == gSpeciesInfo[species].types[0]
+                && gBattleMons[battlerId].type2 == gSpeciesInfo[species].types[1])
+            {
+                gBattleMons[battlerId].type1 = gSpeciesInfo[illusionSpecies].types[0];
+                gBattleMons[battlerId].type2 = gSpeciesInfo[illusionSpecies].types[1];
+            }
+            species = illusionSpecies;
+        }
 
         // Use the known battler's ability.
         if (BATTLE_HISTORY->abilities[battlerId] != ABILITY_NONE)
             gBattleMons[battlerId].ability = BATTLE_HISTORY->abilities[battlerId];
         // Check if mon can only have one ability.
-        else if (gBaseStats[gBattleMons[battlerId].species].abilities[1] == ABILITY_NONE
-                 || gBaseStats[gBattleMons[battlerId].species].abilities[1] == gBaseStats[gBattleMons[battlerId].species].abilities[0])
-            gBattleMons[battlerId].ability = gBaseStats[gBattleMons[battlerId].species].abilities[0];
+        else if (gSpeciesInfo[species].abilities[1] == ABILITY_NONE
+                 || gSpeciesInfo[species].abilities[1] == gSpeciesInfo[species].abilities[0])
+            gBattleMons[battlerId].ability = gSpeciesInfo[species].abilities[0];
         // The ability is unknown.
         else
             gBattleMons[battlerId].ability = ABILITY_NONE;
@@ -567,16 +627,12 @@ void SetBattlerData(u8 battlerId)
             if (BATTLE_HISTORY->usedMoves[battlerId][i] == 0)
                 gBattleMons[battlerId].moves[i] = 0;
         }
-
-        // Simulate Illusion
-        if ((illusionMon = GetIllusionMonPtr(battlerId)) != NULL)
-            gBattleMons[battlerId].species = GetMonData(illusionMon, MON_DATA_SPECIES2);
     }
 }
 
 void RestoreBattlerData(u8 battlerId)
 {
-    if (!IsBattlerAIControlled(battlerId))
+    if (!BattlerHasAi(battlerId))
     {
         u32 i;
 
@@ -586,6 +642,8 @@ void RestoreBattlerData(u8 battlerId)
         for (i = 0; i < 4; i++)
             gBattleMons[battlerId].moves[i] = AI_THINKING_STRUCT->saved[battlerId].moves[i];
     }
+    gBattleMons[battlerId].type1 = AI_THINKING_STRUCT->saved[battlerId].types[0];
+    gBattleMons[battlerId].type2 = AI_THINKING_STRUCT->saved[battlerId].types[1];
 }
 
 u32 GetHealthPercentage(u8 battlerId)
@@ -628,12 +686,12 @@ bool32 IsBattlerTrapped(u8 battler, bool8 checkSwitch)
 
 u32 GetTotalBaseStat(u32 species)
 {
-    return gBaseStats[species].baseHP
-        + gBaseStats[species].baseAttack
-        + gBaseStats[species].baseDefense
-        + gBaseStats[species].baseSpeed
-        + gBaseStats[species].baseSpAttack
-        + gBaseStats[species].baseSpDefense;
+    return gSpeciesInfo[species].baseHP
+        + gSpeciesInfo[species].baseAttack
+        + gSpeciesInfo[species].baseDefense
+        + gSpeciesInfo[species].baseSpeed
+        + gSpeciesInfo[species].baseSpAttack
+        + gSpeciesInfo[species].baseSpDefense;
 }
 
 bool32 IsTruantMonVulnerable(u32 battlerAI, u32 opposingBattler)
@@ -744,11 +802,16 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness,
     SetBattlerData(battlerDef);
 
     gBattleStruct->dynamicMoveType = 0;
+
+    if (move == MOVE_NATURE_POWER)
+        move = GetNaturePowerMove();
+
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
 
     if (gBattleMoves[move].power)
     {
+        ProteanTryChangeType(battlerAtk, AI_DATA->abilities[battlerAtk], move, moveType);
         critChance = GetInverseCritChance(battlerAtk, battlerDef, move);
         normalDmg = CalculateMoveDamageAndEffectiveness(move, battlerAtk, battlerDef, moveType, &effectivenessMultiplier);
         critDmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, TRUE, FALSE, FALSE);
@@ -794,7 +857,7 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness,
         // Handle other multi-strike moves
         if (gBattleMoves[move].flags & FLAG_TWO_STRIKES)
             dmg *= 2;
-        else if (move == MOVE_SURGING_STRIKES || (move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH))
+        else if (gBattleMoves[move].flags & FLAG_THREE_STRIKES || (move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH))
             dmg *= 3;
 
         if (dmg == 0)
@@ -802,6 +865,7 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness,
     }
     else
     {
+        effectivenessMultiplier = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, FALSE);
         dmg = 0;
     }
 
@@ -1066,7 +1130,7 @@ bool32 CanTargetFaintAi(u8 battlerDef, u8 battlerAtk)
 {
     s32 i, dmg;
     u32 unusable = AI_DATA->moveLimitations[battlerDef];
-    u16 *moves = gBattleResources->battleHistory->usedMoves[battlerDef];
+    u16 *moves = GetMovesArray(battlerDef);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -1166,29 +1230,29 @@ s32 AI_GetAbility(u32 battlerId)
     // We've had ability overwritten by e.g. Worry Seed. It is not part of AI_PARTY in case of switching
     if (gBattleStruct->overwrittenAbilities[battlerId])
         return gBattleStruct->overwrittenAbilities[battlerId];
-    
+
     // The AI knows its own ability.
-    if (IsBattlerAIControlled(battlerId))
+    if (IsAiBattlerAware(battlerId))
         return knownAbility;
 
     // Check neutralizing gas, gastro acid
     if (knownAbility == ABILITY_NONE)
         return knownAbility;
 
-    if (BATTLE_HISTORY->abilities[battlerId] != ABILITY_NONE)
-        return BATTLE_HISTORY->abilities[battlerId];
+    if (AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].ability != ABILITY_NONE)
+        return AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].ability;
 
     // Abilities that prevent fleeing - treat as always known
     if (knownAbility == ABILITY_SHADOW_TAG || knownAbility == ABILITY_MAGNET_PULL || knownAbility == ABILITY_ARENA_TRAP)
         return knownAbility;
 
     // Else, guess the ability
-    if (gBaseStats[gBattleMons[battlerId].species].abilities[0] != ABILITY_NONE)
+    if (gSpeciesInfo[gBattleMons[battlerId].species].abilities[0] != ABILITY_NONE)
     {
         u16 abilityGuess = ABILITY_NONE;
         while (abilityGuess == ABILITY_NONE)
         {
-            abilityGuess = gBaseStats[gBattleMons[battlerId].species].abilities[Random() % NUM_ABILITY_SLOTS];
+            abilityGuess = gSpeciesInfo[gBattleMons[battlerId].species].abilities[Random() % NUM_ABILITY_SLOTS];
         }
 
         return abilityGuess;
@@ -1201,8 +1265,8 @@ u16 AI_GetHoldEffect(u32 battlerId)
 {
     u32 holdEffect;
 
-    if (!IsBattlerAIControlled(battlerId))
-        holdEffect = BATTLE_HISTORY->itemEffects[battlerId];
+    if (!IsAiBattlerAware(battlerId))
+        holdEffect = AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].heldEffect;
     else
         holdEffect = GetBattlerHoldEffect(battlerId, FALSE);
 
@@ -1441,7 +1505,7 @@ bool32 IsMoveEncouragedToHit(u8 battlerAtk, u8 battlerDef, u16 move)
     // increased accuracy but don't always hit
     if ((AI_WeatherHasEffect() &&
             (((gBattleWeather & B_WEATHER_RAIN) && (gBattleMoves[move].effect == EFFECT_THUNDER || gBattleMoves[move].effect == EFFECT_HURRICANE))
-            || (((gBattleWeather & B_WEATHER_HAIL) && move == MOVE_BLIZZARD))))
+            || (((gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)) && move == MOVE_BLIZZARD))))
         || (gBattleMoves[move].effect == EFFECT_VITAL_THROW)
     #if B_MINIMIZE_DMG_ACC >= GEN_6
         || ((gStatuses3[battlerDef] & STATUS3_MINIMIZED) && (gBattleMoves[move].flags & FLAG_DMG_MINIMIZE))
@@ -1516,7 +1580,7 @@ bool32 ShouldSetHail(u8 battler, u16 ability, u16 holdEffect)
 {
     if (!AI_WeatherHasEffect())
         return FALSE;
-    else if (gBattleWeather & B_WEATHER_HAIL)
+    else if (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW))
         return FALSE;
 
     if (ability == ABILITY_SNOW_CLOAK
@@ -1586,6 +1650,26 @@ bool32 ShouldSetSun(u8 battlerAtk, u16 atkAbility, u16 holdEffect)
     return FALSE;
 }
 
+bool32 ShouldSetSnow(u8 battler, u16 ability, u16 holdEffect)
+{
+    if (!AI_WeatherHasEffect())
+        return FALSE;
+    else if (gBattleWeather & (B_WEATHER_SNOW | B_WEATHER_HAIL))
+        return FALSE;
+
+    if (ability == ABILITY_SNOW_CLOAK
+      || ability == ABILITY_ICE_BODY
+      || ability == ABILITY_FORECAST
+      || ability == ABILITY_SLUSH_RUSH
+      || IS_BATTLER_OF_TYPE(battler, TYPE_ICE)
+      || HasMove(battler, MOVE_BLIZZARD)
+      || HasMoveEffect(battler, EFFECT_AURORA_VEIL)
+      || HasMoveEffect(battler, EFFECT_WEATHER_BALL))
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
 
 void ProtectChecks(u8 battlerAtk, u8 battlerDef, u16 move, u16 predictedMove, s16 *score)
 {
@@ -1615,7 +1699,7 @@ void ProtectChecks(u8 battlerAtk, u8 battlerDef, u16 move, u16 predictedMove, s1
             (*score) -= min(uses, 3);
     }
 
-    if (gBattleMons[battlerAtk].status1 & (STATUS1_PSN_ANY | STATUS1_BURN)
+    if (gBattleMons[battlerAtk].status1 & (STATUS1_PSN_ANY | STATUS1_BURN | STATUS1_FROSTBITE)
      || gBattleMons[battlerAtk].status2 & (STATUS2_CURSED | STATUS2_INFATUATION)
      || gStatuses3[battlerAtk] & (STATUS3_PERISH_SONG | STATUS3_LEECHSEED | STATUS3_YAWN))
     {
@@ -1634,7 +1718,8 @@ bool32 ShouldLowerStat(u8 battler, u16 battlerAbility, u8 stat)
     if ((gBattleMons[battler].statStages[stat] > MIN_STAT_STAGE && battlerAbility != ABILITY_CONTRARY)
       || (battlerAbility == ABILITY_CONTRARY && gBattleMons[battler].statStages[stat] < MAX_STAT_STAGE))
     {
-        if (battlerAbility == ABILITY_CLEAR_BODY
+        if (AI_DATA->holdEffects[battler] == HOLD_EFFECT_CLEAR_AMULET
+         || battlerAbility == ABILITY_CLEAR_BODY
          || battlerAbility == ABILITY_WHITE_SMOKE
          || battlerAbility == ABILITY_FULL_METAL_BODY)
             return FALSE;
@@ -1711,7 +1796,8 @@ bool32 ShouldLowerAttack(u8 battlerAtk, u8 battlerDef, u16 defAbility)
       && defAbility != ABILITY_CLEAR_BODY
       && defAbility != ABILITY_WHITE_SMOKE
       && defAbility != ABILITY_FULL_METAL_BODY
-      && defAbility != ABILITY_HYPER_CUTTER)
+      && defAbility != ABILITY_HYPER_CUTTER
+      && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_CLEAR_AMULET)
         return TRUE;
     return FALSE;
 }
@@ -1727,7 +1813,8 @@ bool32 ShouldLowerDefense(u8 battlerAtk, u8 battlerDef, u16 defAbility)
       && defAbility != ABILITY_CLEAR_BODY
       && defAbility != ABILITY_WHITE_SMOKE
       && defAbility != ABILITY_FULL_METAL_BODY
-      && defAbility != ABILITY_BIG_PECKS)
+      && defAbility != ABILITY_BIG_PECKS
+      && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_CLEAR_AMULET)
         return TRUE;
     return FALSE;
 }
@@ -1741,7 +1828,8 @@ bool32 ShouldLowerSpeed(u8 battlerAtk, u8 battlerDef, u16 defAbility)
       && defAbility != ABILITY_CONTRARY
       && defAbility != ABILITY_CLEAR_BODY
       && defAbility != ABILITY_FULL_METAL_BODY
-      && defAbility != ABILITY_WHITE_SMOKE)
+      && defAbility != ABILITY_WHITE_SMOKE
+      && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_CLEAR_AMULET)
         return TRUE;
     return FALSE;
 }
@@ -1756,7 +1844,8 @@ bool32 ShouldLowerSpAtk(u8 battlerAtk, u8 battlerDef, u16 defAbility)
       && defAbility != ABILITY_CONTRARY
       && defAbility != ABILITY_CLEAR_BODY
       && defAbility != ABILITY_FULL_METAL_BODY
-      && defAbility != ABILITY_WHITE_SMOKE)
+      && defAbility != ABILITY_WHITE_SMOKE
+      && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_CLEAR_AMULET)
         return TRUE;
     return FALSE;
 }
@@ -1771,7 +1860,8 @@ bool32 ShouldLowerSpDef(u8 battlerAtk, u8 battlerDef, u16 defAbility)
       && defAbility != ABILITY_CONTRARY
       && defAbility != ABILITY_CLEAR_BODY
       && defAbility != ABILITY_FULL_METAL_BODY
-      && defAbility != ABILITY_WHITE_SMOKE)
+      && defAbility != ABILITY_WHITE_SMOKE
+      && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_CLEAR_AMULET)
         return TRUE;
     return FALSE;
 }
@@ -1785,7 +1875,8 @@ bool32 ShouldLowerAccuracy(u8 battlerAtk, u8 battlerDef, u16 defAbility)
       && defAbility != ABILITY_CLEAR_BODY
       && defAbility != ABILITY_WHITE_SMOKE
       && defAbility != ABILITY_FULL_METAL_BODY
-      && defAbility != ABILITY_KEEN_EYE)
+      && defAbility != ABILITY_KEEN_EYE
+      && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_CLEAR_AMULET)
         return TRUE;
     return FALSE;
 }
@@ -1799,7 +1890,8 @@ bool32 ShouldLowerEvasion(u8 battlerAtk, u8 battlerDef, u16 defAbility)
       && defAbility != ABILITY_CONTRARY
       && defAbility != ABILITY_CLEAR_BODY
       && defAbility != ABILITY_FULL_METAL_BODY
-      && defAbility != ABILITY_WHITE_SMOKE)
+      && defAbility != ABILITY_WHITE_SMOKE
+      && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_CLEAR_AMULET)
         return TRUE;
     return FALSE;
 }
@@ -1818,7 +1910,7 @@ bool32 CanIndexMoveFaintTarget(u8 battlerAtk, u8 battlerDef, u8 index, u8 numHit
 
 u16 *GetMovesArray(u32 battler)
 {
-    if (IsBattlerAIControlled(battler) || IsBattlerAIControlled(BATTLE_PARTNER(battler)))
+    if (IsAiBattlerAware(battler) || IsAiBattlerAware(BATTLE_PARTNER(battler)))
         return gBattleMons[battler].moves;
     else
         return gBattleResources->battleHistory->usedMoves[battler];
@@ -2091,6 +2183,7 @@ bool32 IsStatRaisingEffect(u16 effect)
     case EFFECT_BULK_UP:
     case EFFECT_GEOMANCY:
     case EFFECT_STOCKPILE:
+    case EFFECT_VICTORY_DANCE:
         return TRUE;
     default:
         return FALSE;
@@ -2428,19 +2521,41 @@ static bool32 PartyBattlerShouldAvoidHazards(u8 currBattler, u8 switchBattler)
 {
     struct Pokemon *mon = GetPartyBattlerPartyData(currBattler, switchBattler);
     u16 ability = GetMonAbility(mon);   // we know our own party data
-    u16 holdEffect = GetBattlerHoldEffect(GetMonData(mon, MON_DATA_HELD_ITEM), TRUE);
+    u16 holdEffect;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES);
     u32 flags = gSideStatuses[GetBattlerSide(currBattler)] & (SIDE_STATUS_SPIKES | SIDE_STATUS_STEALTH_ROCK | SIDE_STATUS_STICKY_WEB | SIDE_STATUS_TOXIC_SPIKES);
+    s32 hazardDamage = 0;
+    u8 type1 = gSpeciesInfo[species].types[0];
+    u8 type2 = gSpeciesInfo[species].types[1];
+    u32 maxHp = GetMonData(mon, MON_DATA_MAX_HP);
 
     if (flags == 0)
         return FALSE;
 
-    if (ability == ABILITY_MAGIC_GUARD || ability == ABILITY_LEVITATE
-      || holdEffect == HOLD_EFFECT_HEAVY_DUTY_BOOTS)
+    if (ability == ABILITY_MAGIC_GUARD)
+        return FALSE;
+    if (gFieldStatuses & STATUS_FIELD_MAGIC_ROOM || ability == ABILITY_KLUTZ)
+        holdEffect = HOLD_EFFECT_NONE;
+    else
+        holdEffect = gItems[GetMonData(mon, MON_DATA_HELD_ITEM)].holdEffect;
+    if (holdEffect == HOLD_EFFECT_HEAVY_DUTY_BOOTS)
         return FALSE;
 
-    if (flags & (SIDE_STATUS_SPIKES | SIDE_STATUS_STEALTH_ROCK) && GetMonData(mon, MON_DATA_HP) < (GetMonData(mon, MON_DATA_MAX_HP) / 8))
-        return TRUE;
+    if (flags & SIDE_STATUS_STEALTH_ROCK)
+        hazardDamage += GetStealthHazardDamageByTypesAndHP(gBattleMoves[MOVE_STEALTH_ROCK].type, type1, type2, maxHp);
 
+    if (flags & SIDE_STATUS_SPIKES && ((type1 != TYPE_FLYING && type2 != TYPE_FLYING
+        && ability != ABILITY_LEVITATE && holdEffect != HOLD_EFFECT_AIR_BALLOON)
+        || holdEffect == HOLD_EFFECT_IRON_BALL || gFieldStatuses & STATUS_FIELD_GRAVITY))
+    {
+        u8 spikesDmg = maxHp / ((5 - gSideTimers[GetBattlerSide(currBattler)].spikesAmount) * 2);
+        if (spikesDmg == 0)
+            spikesDmg = 1;
+        hazardDamage += spikesDmg;
+    }
+
+    if (hazardDamage >= GetMonData(mon, MON_DATA_HP))
+        return TRUE;
     return FALSE;
 }
 
@@ -2672,6 +2787,7 @@ bool32 AI_CanSleep(u8 battler, u16 ability)
 {
     if (ability == ABILITY_INSOMNIA
       || ability == ABILITY_VITAL_SPIRIT
+      || ability == ABILITY_COMATOSE
       || gBattleMons[battler].status1 & STATUS1_ANY
       || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
       || (gFieldStatuses & (STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN))
@@ -2745,6 +2861,7 @@ bool32 AI_CanPoison(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 
 static bool32 AI_CanBeParalyzed(u8 battler, u16 ability)
 {
     if (ability == ABILITY_LIMBER
+      || ability == ABILITY_COMATOSE
       || IS_BATTLER_OF_TYPE(battler, TYPE_ELECTRIC)
       || gBattleMons[battler].status1 & STATUS1_ANY
       || IsAbilityStatusProtected(battler))
@@ -2790,7 +2907,20 @@ bool32 AI_CanBeBurned(u8 battler, u16 ability)
 {
     if (ability == ABILITY_WATER_VEIL
       || ability == ABILITY_WATER_BUBBLE
+      || ability == ABILITY_COMATOSE
       || IS_BATTLER_OF_TYPE(battler, TYPE_FIRE)
+      || gBattleMons[battler].status1 & STATUS1_ANY
+      || IsAbilityStatusProtected(battler)
+      || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD)
+        return FALSE;
+    return TRUE;
+}
+
+bool32 AI_CanGetFrostbite(u8 battler, u16 ability)
+{
+    if (ability == ABILITY_MAGMA_ARMOR
+      || ability == ABILITY_COMATOSE
+      || IS_BATTLER_OF_TYPE(battler, TYPE_ICE)
       || gBattleMons[battler].status1 & STATUS1_ANY
       || IsAbilityStatusProtected(battler)
       || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD)
@@ -2815,6 +2945,18 @@ bool32 ShouldBurnSelf(u8 battler, u16 ability)
 bool32 AI_CanBurn(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 battlerAtkPartner, u16 move, u16 partnerMove)
 {
     if (!AI_CanBeBurned(battlerDef, defAbility)
+      || AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0
+      || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
+      || PartnerMoveEffectIsStatusSameTarget(battlerAtkPartner, battlerDef, partnerMove))
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool32 AI_CanGiveFrostbite(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 battlerAtkPartner, u16 move, u16 partnerMove)
+{
+    if (!AI_CanGetFrostbite(battlerDef, defAbility)
       || AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
       || PartnerMoveEffectIsStatusSameTarget(battlerAtkPartner, battlerDef, partnerMove))
@@ -3016,7 +3158,7 @@ bool32 ShouldSetScreen(u8 battlerAtk, u8 battlerDef, u16 moveEffect)
     {
     case EFFECT_AURORA_VEIL:
         // Use only in Hail and only if AI doesn't already have Reflect, Light Screen or Aurora Veil itself active.
-        if (gBattleWeather & B_WEATHER_HAIL
+        if ((gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW))
             && !(gSideStatuses[atkSide] & (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL)))
             return TRUE;
         break;
@@ -3050,7 +3192,7 @@ u16 GetAllyChosenMove(u8 battlerId)
 {
     u8 partnerBattler = BATTLE_PARTNER(battlerId);
 
-    if (!IsBattlerAlive(partnerBattler) || !IsBattlerAIControlled(partnerBattler))
+    if (!IsBattlerAlive(partnerBattler) || !IsAiBattlerAware(partnerBattler))
         return MOVE_NONE;
     else if (partnerBattler > battlerId) // Battler with the lower id chooses the move first.
         return gLastMoves[partnerBattler];
@@ -3121,7 +3263,8 @@ bool32 PartnerMoveEffectIsWeather(u8 battlerAtkPartner, u16 partnerMove)
      && (gBattleMoves[partnerMove].effect == EFFECT_SUNNY_DAY
       || gBattleMoves[partnerMove].effect == EFFECT_RAIN_DANCE
       || gBattleMoves[partnerMove].effect == EFFECT_SANDSTORM
-      || gBattleMoves[partnerMove].effect == EFFECT_HAIL))
+      || gBattleMoves[partnerMove].effect == EFFECT_HAIL
+      || gBattleMoves[partnerMove].effect == EFFECT_SNOWSCAPE))
         return TRUE;
 
     return FALSE;
@@ -3291,8 +3434,8 @@ s32 CountUsablePartyMons(u8 battlerId)
     {
         if (i != battlerOnField1 && i != battlerOnField2
          && GetMonData(&party[i], MON_DATA_HP) != 0
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+         && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+         && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
         {
             ret++;
         }
@@ -3315,8 +3458,8 @@ bool32 IsPartyFullyHealedExceptBattler(u8 battlerId)
     {
         if (i != gBattlerPartyIndexes[battlerId]
          && GetMonData(&party[i], MON_DATA_HP) != 0
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG
+         && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+         && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG
          && GetMonData(&party[i], MON_DATA_HP) < GetMonData(&party[i], MON_DATA_MAX_HP))
             return FALSE;
     }
@@ -3326,7 +3469,7 @@ bool32 IsPartyFullyHealedExceptBattler(u8 battlerId)
 bool32 PartyHasMoveSplit(u8 battlerId, u8 split)
 {
     u8 firstId, lastId;
-    struct Pokemon* party = GetBattlerPartyData(battlerId);
+    struct Pokemon *party = GetBattlerParty(battlerId);
     u32 i, j;
 
     for (i = 0; i < PARTY_SIZE; i++)
@@ -3623,6 +3766,25 @@ void IncreaseConfusionScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
     }
 }
 
+void IncreaseFrostbiteScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
+{
+    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+        return;
+
+    if (AI_CanGiveFrostbite(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove))
+    {
+        (*score)++; // frostbite is good
+        if (HasMoveWithSplit(battlerDef, SPLIT_SPECIAL))
+        {
+            if (CanTargetFaintAi(battlerDef, battlerAtk))
+                *score += 2; // frostbiting the target to stay alive is cool
+        }
+
+        if (HasMoveEffect(battlerAtk, EFFECT_HEX) || HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_HEX))
+            (*score)++;
+    }
+}
+
 bool32 AI_MoveMakesContact(u32 ability, u32 holdEffect, u16 move)
 {
     if (TestMoveFlags(move, FLAG_MAKES_CONTACT)
@@ -3662,4 +3824,9 @@ bool32 ShouldUseZMove(u8 battlerAtk, u8 battlerDef, u16 chosenMove)
     }
 
     return FALSE;
+}
+
+bool32 AI_IsBattlerAsleepOrComatose(u8 battlerId)
+{
+    return (gBattleMons[battlerId].status1 & STATUS1_SLEEP) || AI_DATA->abilities[battlerId] == ABILITY_COMATOSE;
 }
