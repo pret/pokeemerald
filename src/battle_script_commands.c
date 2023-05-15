@@ -8805,7 +8805,7 @@ static bool32 CanTeleport(u8 battlerId)
 {
     struct Pokemon *party = GetBattlerParty(battlerId);
     u32 species, count, i;
-
+    
     for (i = 0; i < PARTY_SIZE; i++)
     {
         species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
@@ -16317,33 +16317,33 @@ static bool8 IsFinalStrikeEffect(u16 move)
 // 10 bytes long (callnative(5) + counter(1) + ptr(4))
 void BS_CheckParentalBondCounter(void)
 {
+    NATIVE_ARGS(u8 counter, const u8 *jumpInstr);
     // Some effects should only happen on the first or second strike of Parental Bond,
     // so a way to check this in battle scripts is useful
-    u8 counter = T1_READ_8(gBattlescriptCurrInstr + 5);
-    if (gSpecialStatuses[gBattlerAttacker].parentalBondState == counter && gBattleMons[gBattlerTarget].hp != 0)
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 6);
+    if (gSpecialStatuses[gBattlerAttacker].parentalBondState == cmd->counter && gBattleMons[gBattlerTarget].hp != 0)
+        gBattlescriptCurrInstr = cmd->jumpInstr;
     else
-        gBattlescriptCurrInstr += 10;
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 // 6 bytes long (callnative(5) + battler(1))
 void BS_GetBattlerSide(void)
 {
-    gBattleCommunication[0] = GetBattlerSide(gBattlescriptCurrInstr[5]);   
-    gBattlescriptCurrInstr += 6;
+    NATIVE_ARGS(u8 battler);
+    gBattleCommunication[0] = GetBattlerSide(cmd->battler);   
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-// 6 bytes long (callnative(5) + battler(1))
 void BS_CanTeleport(void)
 {
-    u8 battler = gBattlescriptCurrInstr[5];
-    gBattleCommunication[0] = CanTeleport(battler);
-    gBattlescriptCurrInstr += 6;
+    NATIVE_ARGS(u8 battler);
+    gBattleCommunication[0] = CanTeleport(cmd->battler);
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-// 5 bytes long
 void BS_TrySymbiosis(void)
 {
+    NATIVE_ARGS();
     //called by Bestow, Fling, and Bug Bite, which don't work with Cmd_removeitem.
     gActiveBattler = gBattlerAttacker;
     if (SYMBIOSIS_CHECK(gBattlerAttacker, BATTLE_PARTNER(gActiveBattler)))
@@ -16357,7 +16357,7 @@ void BS_TrySymbiosis(void)
         return;
     }
     
-    gBattlescriptCurrInstr += 5;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 void BS_SetZEffect(void)
