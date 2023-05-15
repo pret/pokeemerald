@@ -32,7 +32,7 @@ bool8 TryDoDiveWarp(struct MapPosition *position, u16 b);
 int SetCableClubWarp(void);
 u8 TrySetDiveWarp(void);
 const u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatileBehavior, u8 direction);
-u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *position);
+const u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *position);
 void ClearPoisonStepCounter(void);
 
 #endif // GUARD_FIELDCONTROLAVATAR_H

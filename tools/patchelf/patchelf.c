@@ -1,5 +1,5 @@
 #include <ctype.h>
-#include <elf.h>
+#include "elf.h"
 #include <errno.h>
 #include <fcntl.h>
 #include <stdbool.h>

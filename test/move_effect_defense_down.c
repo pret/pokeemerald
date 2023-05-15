@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Tail Whip lowers Defense", s16 damage)
         if (lowerDefense) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_TAIL_WHIP, player);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Foe Wobbuffet's defense fell!");
+            MESSAGE("Foe Wobbuffet's Defense fell!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
         HP_BAR(opponent, captureDamage: &results[i].damage);

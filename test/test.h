@@ -9,10 +9,11 @@ enum TestResult
 {
     TEST_RESULT_FAIL,
     TEST_RESULT_PASS,
-    TEST_RESULT_SKIP,
+    TEST_RESULT_ASSUMPTION_FAIL,
     TEST_RESULT_INVALID,
     TEST_RESULT_ERROR,
     TEST_RESULT_TIMEOUT,
+    TEST_RESULT_TODO,
 };
 
 struct TestRunner
@@ -45,6 +46,7 @@ struct TestRunnerState
 
     u8 result;
     u8 expectedResult;
+    bool8 expectLeaks:1;
     u32 timeoutSeconds;
 };
 
@@ -53,14 +55,36 @@ extern const u8 gTestRunnerI;
 extern const char gTestRunnerArgv[256];
 
 extern const struct TestRunner gAssumptionsRunner;
+
+struct FunctionTestRunnerState
+{
+    u8 parameters;
+    u8 runParameter;
+};
+
+extern const struct TestRunner gFunctionTestRunner;
+extern struct FunctionTestRunnerState *gFunctionTestRunnerState;
+
 extern struct TestRunnerState gTestRunnerState;
 
 void CB2_TestRunner(void);
 
 void Test_ExpectedResult(enum TestResult);
+void Test_ExpectLeaks(bool32);
 void Test_ExitWithResult(enum TestResult, const char *fmt, ...);
 
 s32 MgbaPrintf_(const char *fmt, ...);
+
+#define TEST(_name) \
+    static void CAT(Test, __LINE__)(void); \
+    __attribute__((section(".tests"))) static const struct Test CAT(sTest, __LINE__) = \
+    { \
+        .name = _name, \
+        .filename = __FILE__, \
+        .runner = &gFunctionTestRunner, \
+        .data = (void *)CAT(Test, __LINE__), \
+    }; \
+    static void CAT(Test, __LINE__)(void)
 
 #define ASSUMPTIONS \
     static void Assumptions(void); \
@@ -77,7 +101,7 @@ s32 MgbaPrintf_(const char *fmt, ...);
     do \
     { \
         if (!(c)) \
-            Test_ExitWithResult(TEST_RESULT_SKIP, "%s:%d: ASSUME failed", gTestRunnerState.test->filename, __LINE__); \
+            Test_ExitWithResult(TEST_RESULT_ASSUMPTION_FAIL, "%s:%d: ASSUME failed", gTestRunnerState.test->filename, __LINE__); \
     } while (0)
 
 #define EXPECT(c) \
@@ -137,5 +161,16 @@ s32 MgbaPrintf_(const char *fmt, ...);
 
 #define KNOWN_FAILING \
     Test_ExpectedResult(TEST_RESULT_FAIL)
+
+#define KNOWN_LEAKING \
+    Test_ExpectLeaks(TRUE)
+
+#define PARAMETRIZE if (gFunctionTestRunnerState->parameters++ == gFunctionTestRunnerState->runParameter)
+
+#define TO_DO \
+    Test_ExpectedResult(TEST_RESULT_TODO)
+
+#define EXPECT_TO_DO \
+    Test_ExitWithResult(TEST_RESULT_TODO, "%s:%d: EXPECT_TO_DO", gTestRunnerState.test->filename, __LINE__)
 
 #endif

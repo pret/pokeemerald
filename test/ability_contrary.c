@@ -21,7 +21,7 @@ SINGLE_BATTLE_TEST("Contrary raises Attack when Intimidated", s16 damage)
         if (ability == ABILITY_CONTRARY) {
             ABILITY_POPUP(opponent, ABILITY_CONTRARY);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Foe Spinda's attack rose!");
+            MESSAGE("Foe Spinda's Attack rose!");
         }
         HP_BAR(player, captureDamage: &results[i].damage);
     }
@@ -49,11 +49,11 @@ SINGLE_BATTLE_TEST("Contrary raises stats after using a move which would normall
         if (ability == ABILITY_CONTRARY) {
             // ABILITY_POPUP(opponent, ABILITY_CONTRARY);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Foe Spinda's sp. attack sharply rose!");
+            MESSAGE("Foe Spinda's Sp. Atk sharply rose!");
         }
         else {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Foe Spinda's sp. attack harshly fell!");
+            MESSAGE("Foe Spinda's Sp. Atk harshly fell!");
         }
 
         // MESSAGE("Foe Spinda used Overheat!");
@@ -61,11 +61,11 @@ SINGLE_BATTLE_TEST("Contrary raises stats after using a move which would normall
         if (ability == ABILITY_CONTRARY) {
             // ABILITY_POPUP(opponent, ABILITY_CONTRARY);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Foe Spinda's sp. attack sharply rose!");
+            MESSAGE("Foe Spinda's Sp. Atk sharply rose!");
         }
         else {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Foe Spinda's sp. attack harshly fell!");
+            MESSAGE("Foe Spinda's Sp. Atk harshly fell!");
         }
     }
     FINALLY {
@@ -95,11 +95,11 @@ SINGLE_BATTLE_TEST("Contrary lowers a stat after using a move which would normal
         if (ability == ABILITY_CONTRARY) {
             // ABILITY_POPUP(opponent, ABILITY_CONTRARY);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Foe Spinda's attack harshly fell!");
+            MESSAGE("Foe Spinda's Attack harshly fell!");
         }
         else {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Foe Spinda's attack sharply rose!");
+            MESSAGE("Foe Spinda's Attack sharply rose!");
         }
 
         // MESSAGE("Foe Spinda used Tackle!");
@@ -127,11 +127,11 @@ SINGLE_BATTLE_TEST("Contrary raises a stat after using a move which would normal
         if (ability == ABILITY_CONTRARY) {
             // ABILITY_POPUP(opponent, ABILITY_CONTRARY);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Foe Spinda's attack rose!");
+            MESSAGE("Foe Spinda's Attack rose!");
         }
         else {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Foe Spinda's attack fell!");
+            MESSAGE("Foe Spinda's Attack fell!");
         }
 
         MESSAGE("Foe Spinda used Tackle!");

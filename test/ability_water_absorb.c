@@ -63,7 +63,7 @@ SINGLE_BATTLE_TEST("Water Absorb is only triggered once on multi strike moves")
     }
 }
 
-SINGLE_BATTLE_TEST("Water Absorb prevents Items from activating")
+SINGLE_BATTLE_TEST("Water Absorb prevents Absorb Bulb and Luminous Moss from activating")
 {
     u32 item;
     PARAMETRIZE { item = ITEM_ABSORB_BULB; }
