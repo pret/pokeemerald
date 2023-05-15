@@ -8805,7 +8805,7 @@ static bool32 CanTeleport(u8 battlerId)
 {
     struct Pokemon *party = GetBattlerParty(battlerId);
     u32 species, count, i;
-    
+
     for (i = 0; i < PARTY_SIZE; i++)
     {
         species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
@@ -16314,7 +16314,6 @@ static bool8 IsFinalStrikeEffect(u16 move)
     return FALSE;
 }
 
-// 10 bytes long (callnative(5) + counter(1) + ptr(4))
 void BS_CheckParentalBondCounter(void)
 {
     NATIVE_ARGS(u8 counter, const u8 *jumpInstr);
@@ -16326,7 +16325,6 @@ void BS_CheckParentalBondCounter(void)
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-// 6 bytes long (callnative(5) + battler(1))
 void BS_GetBattlerSide(void)
 {
     NATIVE_ARGS(u8 battler);
