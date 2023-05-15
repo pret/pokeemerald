@@ -1105,7 +1105,7 @@ u16 GetRandomScaledFrontierTrainerId(u8 challengeNum, u8 battleNum)
 {
     u16 trainerId;
 
-    if (challengeNum <= 7)
+    if (challengeNum <= FRONTIER_REPEAT_CHALLENGES_START_HARDEST_RANGE)
     {
         if (battleNum == FRONTIER_STAGES_PER_CHALLENGE - 1)
         {
@@ -1122,8 +1122,8 @@ u16 GetRandomScaledFrontierTrainerId(u8 challengeNum, u8 battleNum)
     else
     {
         // After challenge 7, trainer IDs always come from the last, hardest range, which is the same for both trainer ID tables
-        trainerId = (sFrontierTrainerIdRanges[7][1] - sFrontierTrainerIdRanges[7][0]) + 1;
-        trainerId = sFrontierTrainerIdRanges[7][0] + (Random() % trainerId);
+        trainerId = (sFrontierTrainerIdRanges[FRONTIER_REPEAT_CHALLENGES_START_HARDEST_RANGE][1] - sFrontierTrainerIdRanges[FRONTIER_REPEAT_CHALLENGES_START_HARDEST_RANGE][0]) + 1;
+        trainerId = sFrontierTrainerIdRanges[FRONTIER_REPEAT_CHALLENGES_START_HARDEST_RANGE][0] + (Random() % trainerId);
     }
 
     return trainerId;
@@ -1134,7 +1134,7 @@ static void GetRandomScaledFrontierTrainerIdRange(u8 challengeNum, u8 battleNum,
 {
     u16 trainerId, range;
 
-    if (challengeNum <= 7)
+    if (challengeNum <= FRONTIER_REPEAT_CHALLENGES_START_HARDEST_RANGE)
     {
         if (battleNum == FRONTIER_STAGES_PER_CHALLENGE - 1)
         {
@@ -1151,8 +1151,8 @@ static void GetRandomScaledFrontierTrainerIdRange(u8 challengeNum, u8 battleNum,
     else
     {
         // After challenge 7, trainer IDs always come from the last, hardest range, which is the same for both trainer ID tables
-        range = (sFrontierTrainerIdRanges[7][1] - sFrontierTrainerIdRanges[7][0]) + 1;
-        trainerId = sFrontierTrainerIdRanges[7][0];
+        range = (sFrontierTrainerIdRanges[FRONTIER_REPEAT_CHALLENGES_START_HARDEST_RANGE][1] - sFrontierTrainerIdRanges[FRONTIER_REPEAT_CHALLENGES_START_HARDEST_RANGE][0]) + 1;
+        trainerId = sFrontierTrainerIdRanges[FRONTIER_REPEAT_CHALLENGES_START_HARDEST_RANGE][0];
     }
 
     *trainerIdPtr = trainerId;

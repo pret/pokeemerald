@@ -56,6 +56,11 @@
 // There are 2 facilities that differ: Battle Dome (DOME_ROUNDS_COUNT) and Battle Pike (NUM_PIKE_ROOMS).
 #define FRONTIER_STAGES_PER_CHALLENGE 7
 
+// Every time you complete 7 battles, the Battle Frontier challenge repeats. After 7 repeats, the Battle
+// Frontier uses trainer IDs that always come from the last, hardest range, which is the same for both
+// trainer ID tables.
+#define FRONTIER_REPEAT_CHALLENGES_START_HARDEST_RANGE 7
+
 // These sets of facility ids would be redundant if the order was consistent
 // The order is important for this set so that all the non-link records can be continuous
 #define RANKING_HALL_TOWER_SINGLES   0
