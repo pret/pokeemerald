@@ -4,15 +4,10 @@
 #include "bg.h"
 #include "blit.h"
 
-u32 gUnusedWindowVar1;
-u32 gUnusedWindowVar2;
 // This global is set to 0 and never changed.
 u8 gTransparentTileNumber;
-u32 gUnusedWindowVar3;
 void *gWindowBgTilemapBuffers[NUM_BACKGROUNDS];
 extern u32 gWindowTileAutoAllocEnabled;
-
-#define WINDOWS_MAX  32
 
 EWRAM_DATA struct Window gWindows[WINDOWS_MAX] = {0};
 EWRAM_DATA static struct Window* sWindowPtr = NULL;
