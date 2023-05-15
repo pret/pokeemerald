@@ -4490,7 +4490,7 @@ void ItemUseCB_BattleChooseMove(u8 taskId, TaskFunc task)
     gTasks[taskId].func = Task_HandleWhichMoveInput;
 }
 
-void ItemUsevoid ItemUseCB_Medicine(u8 taskId, TaskFunc task)
+void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
 {
     u16 hp = 0;
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
