@@ -9550,6 +9550,14 @@ static void Cmd_getsecretpowereffect(void)
     gBattlescriptCurrInstr++;
 }
 
+static void AutoPickup(struct Pokemon *mon){
+    u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
+    if (AddBagItem(item, 1)){
+        item = ITEM_NONE;
+        SetMonData(mon, MON_DATA_HELD_ITEM, &item);
+    }
+}
+
 static void Cmd_pickup(void)
 {
     s32 i;
@@ -9620,6 +9628,7 @@ static void Cmd_pickup(void)
                         break;
                     }
                 }
+                AutoPickup(&gPlayerParty[i]);
             }
         }
     }
