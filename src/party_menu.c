@@ -4663,7 +4663,6 @@ void Task_AbilityPatch(u8 taskId)
         // Can't use.
         if (gSpeciesInfo[tSpecies].abilities[tAbilityNum] == 0
             || !tSpecies
-            || GetMonData(&gPlayerParty[tMonId], MON_DATA_ABILITY_NUM, NULL) > 1
             )
         {
             gPartyMenuUseExitCallback = FALSE;
@@ -4734,7 +4733,10 @@ void ItemUseCB_AbilityPatch(u8 taskId, TaskFunc task)
     tState = 0;
     tMonId = gPartyMenu.slotId;
     tSpecies = GetMonData(&gPlayerParty[tMonId], MON_DATA_SPECIES, NULL);
-    tAbilityNum = 2;
+    if (GetMonData(&gPlayerParty[tMonId], MON_DATA_ABILITY_NUM, NULL) == 2)
+        tAbilityNum = 0;
+    else
+        tAbilityNum = 2;
     SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
     gTasks[taskId].func = Task_AbilityPatch;
 }
@@ -4944,7 +4946,7 @@ static void TryUseItemOnMove(u8 taskId)
         else
         {
             gBattleStruct->itemPartyIndex[gBattlerInMenuId] = GetPartyIdFromBattleSlot(gPartyMenu.slotId);
-            gChosenMovePos = ptr->data1;
+            gBattleStruct->itemMoveIndex[gBattlerInMenuId] = ptr->data1;
             gPartyMenuUseExitCallback = TRUE;
             RemoveBagItem(gSpecialVar_ItemId, 1);
             ScheduleBgCopyTilemapToVram(2);

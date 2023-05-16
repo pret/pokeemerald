@@ -28,7 +28,7 @@ SINGLE_BATTLE_TEST("Bide deals twice the taken damage over two turns")
         MESSAGE("Wobbuffet unleashed energy!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BIDE, player);
         HP_BAR(opponent, captureDamage: &bideDamage);
-    } FINALLY {
-        EXPECT_EQ(bideDamage, damage1 + damage2);
+    } THEN {
+        EXPECT_EQ(bideDamage, 2 * (damage1 + damage2));
     }
 }

@@ -1812,7 +1812,7 @@ static bool32 AccuracyCalcHelper(u16 move)
             return TRUE;
         }
     #if B_BLIZZARD_HAIL >= GEN_4
-        else if ((gBattleWeather & B_WEATHER_HAIL) && move == MOVE_BLIZZARD)
+        else if ((gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)) && move == MOVE_BLIZZARD)
         {
             // thunder/hurricane ignore acc checks in rain unless target is holding utility umbrella
             JumpIfMoveFailed(7, move);
@@ -1892,7 +1892,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
 
     if (defAbility == ABILITY_SAND_VEIL && WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_SANDSTORM)
         calc = (calc * 80) / 100; // 1.2 sand veil loss
-    else if (defAbility == ABILITY_SNOW_CLOAK && WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_HAIL)
+    else if (defAbility == ABILITY_SNOW_CLOAK && WEATHER_HAS_EFFECT && (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)))
         calc = (calc * 80) / 100; // 1.2 snow cloak loss
     else if (defAbility == ABILITY_TANGLED_FEET && gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
         calc = (calc * 50) / 100; // 1.5 tangled feet loss
@@ -5190,7 +5190,8 @@ static void Cmd_playanimation(void)
     else if (animId == B_ANIM_RAIN_CONTINUES
           || animId == B_ANIM_SUN_CONTINUES
           || animId == B_ANIM_SANDSTORM_CONTINUES
-          || animId == B_ANIM_HAIL_CONTINUES)
+          || animId == B_ANIM_HAIL_CONTINUES
+          || animId == B_ANIM_SNOW_CONTINUES)
     {
         BtlController_EmitBattleAnimation(BUFFER_A, animId, *argPtr);
         MarkBattlerForControllerExec(gActiveBattler);
@@ -5239,7 +5240,8 @@ static void Cmd_playanimation_var(void)
     else if (*animIdPtr == B_ANIM_RAIN_CONTINUES
           || *animIdPtr == B_ANIM_SUN_CONTINUES
           || *animIdPtr == B_ANIM_SANDSTORM_CONTINUES
-          || *animIdPtr == B_ANIM_HAIL_CONTINUES)
+          || *animIdPtr == B_ANIM_HAIL_CONTINUES
+          || *animIdPtr == B_ANIM_SNOW_CONTINUES)
     {
         BtlController_EmitBattleAnimation(BUFFER_A, *animIdPtr, *argPtr);
         MarkBattlerForControllerExec(gActiveBattler);
@@ -5560,6 +5562,9 @@ static void Cmd_moveend(void)
                 {
                     gProtectStructs[gBattlerAttacker].touchedProtectLike = FALSE;
                     gBattleMons[gBattlerAttacker].status1 = STATUS1_BURN;
+                    gActiveBattler = gBattlerAttacker;
+                    BtlController_EmitSetMonData(BUFFER_A, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[gActiveBattler].status1), &gBattleMons[gActiveBattler].status1);
+                    MarkBattlerForControllerExec(gActiveBattler);
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_BeakBlastBurn;
                     effect = 1;
@@ -10250,7 +10255,7 @@ static void Cmd_various(void)
     {
         VARIOUS_ARGS();
         if (gSideStatuses[GET_BATTLER_SIDE(gActiveBattler)] & SIDE_STATUS_AURORA_VEIL
-            || !(WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_HAIL))
+            || !(WEATHER_HAS_EFFECT && gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)))
         {
             gMoveResultFlags |= MOVE_RESULT_MISSED;
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
@@ -10328,12 +10333,6 @@ static void Cmd_various(void)
             }
             gBattlescriptCurrInstr = cmd->nextInstr;    // exit if loop failed (failsafe)
         }
-        return;
-    }
-    case VARIOUS_SET_Z_EFFECT:
-    {
-        VARIOUS_ARGS();
-        SetZEffect();   //handles battle script jumping internally
         return;
     }
     case VARIOUS_MOVEEND_ITEM_EFFECTS:
@@ -11014,48 +11013,6 @@ static void Cmd_various(void)
         CourtChangeSwapSideStatuses();
         break;
     }
-    case VARIOUS_TRY_SYMBIOSIS: //called by Bestow, Fling, and Bug Bite, which don't work with Cmd_removeitem.
-    {
-        VARIOUS_ARGS();
-        if (SYMBIOSIS_CHECK(gActiveBattler, BATTLE_PARTNER(gActiveBattler)))
-        {
-            BestowItem(BATTLE_PARTNER(gActiveBattler), gActiveBattler);
-            gLastUsedAbility = gBattleMons[BATTLE_PARTNER(gActiveBattler)].ability;
-            gBattleScripting.battler = gBattlerAbility = BATTLE_PARTNER(gActiveBattler);
-            gBattlerAttacker = gActiveBattler;
-            BattleScriptPushCursor();
-            gBattlescriptCurrInstr = BattleScript_SymbiosisActivates;
-            return;
-        }
-        break;
-    }
-    case VARIOUS_CAN_TELEPORT:
-    {
-        VARIOUS_ARGS();
-        gBattleCommunication[0] = CanTeleport(gActiveBattler);
-        break;
-    }
-    case VARIOUS_GET_BATTLER_SIDE:
-    {
-        VARIOUS_ARGS();
-        if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-            gBattleCommunication[0] = B_SIDE_PLAYER;
-        else
-            gBattleCommunication[0] = B_SIDE_OPPONENT;
-        break;
-    }
-    case VARIOUS_CHECK_PARENTAL_BOND_COUNTER:
-        {
-            VARIOUS_ARGS(u8 counter, const u8 *jumpInstr);
-            // Some effects should only happen on the first or second strike of Parental Bond,
-            // so a way to check this in battle scripts is useful
-            u8 counter = cmd->counter;
-            if (gSpecialStatuses[gBattlerAttacker].parentalBondState == counter && gBattleMons[gBattlerTarget].hp != 0)
-                gBattlescriptCurrInstr = cmd->jumpInstr;
-            else
-                gBattlescriptCurrInstr = cmd->nextInstr;
-            return;
-        }
     case VARIOUS_SWAP_STATS:
         {
             VARIOUS_ARGS(u8 stat);
@@ -12130,6 +12087,20 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
         {
             gBattleCommunication[MULTISTRING_CHOOSER] = (gBattlerTarget == gActiveBattler);
             gProtectStructs[gActiveBattler].statRaised = TRUE;
+            
+            // check mirror herb
+            for (index = 0; index < gBattlersCount; index++)
+            {
+                if (GetBattlerSide(index) == GetBattlerSide(gActiveBattler))
+                    continue; // Only triggers on opposing side 
+                if (GetBattlerHoldEffect(index, TRUE) == HOLD_EFFECT_MIRROR_HERB
+                        && gBattleMons[index].statStages[statId] < MAX_STAT_STAGE)
+                {                    
+                    gProtectStructs[index].eatMirrorHerb = 1;
+                    gTotemBoosts[index].stats |= (1 << (statId - 1));    // -1 to start at atk
+                    gTotemBoosts[index].statChanges[statId - 1] = statValue;
+                }
+            }
         }
     }
 
@@ -12765,6 +12736,20 @@ static void Cmd_weatherdamage(void)
                 gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
+            }
+        }
+        if (gBattleWeather & B_WEATHER_SNOW)
+        {
+            if (ability == ABILITY_ICE_BODY
+                && !(gStatuses3[gBattlerAttacker] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
+                && !BATTLER_MAX_HP(gBattlerAttacker)
+                && !(gStatuses3[gBattlerAttacker] & STATUS3_HEAL_BLOCK))
+            {
+                gBattlerAbility = gBattlerAttacker;
+                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
+                if (gBattleMoveDamage == 0)
+                    gBattleMoveDamage = 1;
+                gBattleMoveDamage *= -1;
             }
         }
     }
@@ -16329,6 +16314,55 @@ static bool8 IsFinalStrikeEffect(u16 move)
     return FALSE;
 }
 
+void BS_CheckParentalBondCounter(void)
+{
+    NATIVE_ARGS(u8 counter, const u8 *jumpInstr);
+    // Some effects should only happen on the first or second strike of Parental Bond,
+    // so a way to check this in battle scripts is useful
+    if (gSpecialStatuses[gBattlerAttacker].parentalBondState == cmd->counter && gBattleMons[gBattlerTarget].hp != 0)
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_GetBattlerSide(void)
+{
+    NATIVE_ARGS(u8 battler);
+    gBattleCommunication[0] = GetBattlerSide(cmd->battler);   
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_CanTeleport(void)
+{
+    NATIVE_ARGS(u8 battler);
+    gBattleCommunication[0] = CanTeleport(cmd->battler);
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_TrySymbiosis(void)
+{
+    NATIVE_ARGS();
+    //called by Bestow, Fling, and Bug Bite, which don't work with Cmd_removeitem.
+    gActiveBattler = gBattlerAttacker;
+    if (SYMBIOSIS_CHECK(gBattlerAttacker, BATTLE_PARTNER(gActiveBattler)))
+    {
+        BestowItem(BATTLE_PARTNER(gActiveBattler), gActiveBattler);
+        gLastUsedAbility = gBattleMons[BATTLE_PARTNER(gActiveBattler)].ability;
+        gBattleScripting.battler = gBattlerAbility = BATTLE_PARTNER(gActiveBattler);
+        gBattlerAttacker = gActiveBattler;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_SymbiosisActivates;
+        return;
+    }
+    
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetZEffect(void)
+{
+    SetZEffect();   // Handles battle script jumping internally
+}
+
 static void TryUpdateRoundTurnOrder(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
@@ -16519,16 +16553,20 @@ void BS_ItemRestorePP(void)
 {
     NATIVE_ARGS();
     const u8 *effect = GetItemEffect(gLastUsedItem);
-    u32 i, pp, maxPP, moveId;
-    u32 loopEnd = MAX_MON_MOVES;
+    u32 i, pp, maxPP, moveId, loopEnd;
     u32 battlerId = MAX_BATTLERS_COUNT;
     struct Pokemon *mon = (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER) ? &gPlayerParty[gBattleStruct->itemPartyIndex[gBattlerAttacker]] : &gEnemyParty[gBattleStruct->itemPartyIndex[gBattlerAttacker]];
 
     // Check whether to apply to all moves.
     if (effect[4] & ITEM4_HEAL_PP_ONE)
     {
-        i = gChosenMovePos;
-        loopEnd = gChosenMovePos + 1;
+        i = gBattleStruct->itemMoveIndex[gBattlerAttacker];
+        loopEnd = i + 1;
+    }
+    else
+    {
+        i = 0;
+        loopEnd = MAX_MON_MOVES;
     }
 
     // Check if the recipient is an active battler.
@@ -16539,7 +16577,7 @@ void BS_ItemRestorePP(void)
         battlerId = BATTLE_PARTNER(gBattlerAttacker);
 
     // Heal PP!
-    for (i = 0; i < loopEnd; i++)
+    for (; i < loopEnd; i++)
     {
         pp = GetMonData(mon, MON_DATA_PP1 + i, NULL);
         moveId = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
@@ -16574,6 +16612,23 @@ void BS_TryRevertWeatherForm(void)
         BattleScriptPush(cmd->nextInstr);
         gBattlescriptCurrInstr = BattleScript_TargetFormChangeWithStringNoPopup;
         return;
+    }
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetSnow(void)
+{
+    NATIVE_ARGS();
+
+    if (!TryChangeBattleWeather(gBattlerAttacker, ENUM_WEATHER_SNOW, FALSE))
+    {
+        gMoveResultFlags |= MOVE_RESULT_MISSED;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;
+
+    }
+    else
+    {
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SNOW;
     }
     gBattlescriptCurrInstr = cmd->nextInstr;
 }

@@ -429,14 +429,15 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectBarbBarrage             @ EFFECT_BARB_BARRAGE
 	.4byte BattleScript_EffectRevivalBlessing         @ EFFECT_REVIVAL_BLESSING
 	.4byte BattleScript_EffectFrostbiteHit            @ EFFECT_FROSTBITE_HIT
+	.4byte BattleScript_EffectSnow                    @ EFFECT_SNOWSCAPE
 
 BattleScript_EffectRevivalBlessing::
 	attackcanceler
 	attackstring
 	ppreduce
+	tryrevivalblessing BattleScript_ButItFailed
 	attackanimation
 	waitanimation
-	tryrevivalblessing BattleScript_ButItFailed
 	printstring STRINGID_PKMNREVIVEDREADYTOFIGHT
 	waitmessage B_WAIT_TIME_LONG
     jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_EffectRevivalBlessingSendOut
@@ -614,7 +615,7 @@ BattleScript_ShellTrapSetUp::
 	playanimation BS_ATTACKER, B_ANIM_SHELL_TRAP_SETUP, NULL
 	printstring STRINGID_PREPARESHELLTRAP
 	waitmessage B_WAIT_TIME_LONG
-	end2
+	end3
 
 BattleScript_EffectShellTrap::
 	attackcanceler
@@ -688,7 +689,7 @@ BattleScript_BeakBlastSetUp::
 	playanimation BS_ATTACKER, B_ANIM_BEAK_BLAST_SETUP, NULL
 	printstring STRINGID_HEATUPBEAK
 	waitmessage B_WAIT_TIME_LONG
-	end2
+	end3
 
 BattleScript_BeakBlastBurn::
 	setbyte cMULTISTRING_CHOOSER, 0
@@ -6855,7 +6856,7 @@ BattleScript_RainContinuesOrEndsEnd::
 	end2
 
 BattleScript_DamagingWeatherContinues::
-	printfromtable gSandStormHailContinuesStringIds
+	printfromtable gSandStormHailSnowContinuesStringIds
 	waitmessage B_WAIT_TIME_LONG
 	playanimation_var BS_ATTACKER, sB_ANIM_ARG1
 	setbyte gBattleCommunication, 0
@@ -6888,8 +6889,8 @@ BattleScript_DamagingWeatherContinuesEnd::
 	call BattleScript_ActivateWeatherAbilities
 	end2
 
-BattleScript_SandStormHailEnds::
-	printfromtable gSandStormHailEndStringIds
+BattleScript_SandStormHailSnowEnds::
+	printfromtable gSandStormHailSnowEndStringIds
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_ActivateWeatherAbilities
 	end2
@@ -7901,7 +7902,7 @@ BattleScript_FocusPunchSetUp::
 	playanimation BS_ATTACKER, B_ANIM_FOCUS_PUNCH_SETUP
 	printstring STRINGID_PKMNTIGHTENINGFOCUS
 	waitmessage B_WAIT_TIME_LONG
-	end2
+	end3
 
 BattleScript_MegaEvolution::
 	printstring STRINGID_EMPTYSTRING3
@@ -7917,7 +7918,7 @@ BattleScript_MegaEvolutionAfterString:
 	printstring STRINGID_MEGAEVOEVOLVED
 	waitmessage B_WAIT_TIME_LONG
 	switchinabilities BS_ATTACKER
-	end2
+	end3
 
 BattleScript_WishMegaEvolution::
 	printstring STRINGID_EMPTYSTRING3
@@ -8879,12 +8880,21 @@ BattleScript_MimicryActivates_End3::
 	waitmessage B_WAIT_TIME_SHORT
 	end3
 
-BattleScript_SnowWarningActivates::
+BattleScript_SnowWarningActivatesHail::
 	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_SNOWWARNINGHAIL
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_HAIL_CONTINUES
+	call BattleScript_ActivateWeatherAbilities
+	end3
+
+BattleScript_SnowWarningActivatesSnow::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_SNOWWARNINGSNOW
+	waitstate
+	playanimation BS_BATTLER_0, B_ANIM_SNOW_CONTINUES
 	call BattleScript_ActivateWeatherAbilities
 	end3
 
@@ -9377,8 +9387,8 @@ BattleScript_FriskActivates::
 	end3
 
 BattleScript_ImposterActivates::
-	transformdataexecution
 	call BattleScript_AbilityPopUp
+	transformdataexecution
 	playmoveanimation BS_ATTACKER, MOVE_TRANSFORM
 	waitanimation
 	printstring STRINGID_IMPOSTERTRANSFORM
@@ -10038,23 +10048,42 @@ BattleScript_PrintPlayerForfeitedLinkBattle::
 	end2
 
 BattleScript_TotemFlaredToLife::
-	playanimation BS_ATTACKER, B_ANIM_TOTEM_FLARE
+	playanimation BS_ATTACKER, B_ANIM_TOTEM_FLARE, NULL
 	printstring STRINGID_AURAFLAREDTOLIFE
 	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_ApplyTotemVarBoost
+	call BattleScript_ApplyTotemVarBoost
+	end2
+
+@ remove the mirror herb, do totem loop
+BattleScript_MirrorHerbCopyStatChangeEnd2::
+	call BattleScript_MirrorHerbCopyStatChange
+	end2
+
+BattleScript_MirrorHerbCopyStatChange::
+	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, NULL
+	printstring STRINGID_MIRRORHERBCOPIED
+	waitmessage B_WAIT_TIME_LONG
+	removeitem BS_SCRIPTING
+	call BattleScript_TotemVar_Ret
+	copybyte gBattlerAttacker, sSAVED_BATTLER	@ restore the original attacker just to be safe
+	return
 
 BattleScript_TotemVar::
+	call BattleScript_TotemVar_Ret
+	end2
+
+BattleScript_TotemVar_Ret::
 	gettotemboost BattleScript_ApplyTotemVarBoost
 BattleScript_TotemVarEnd:
-	end2
+	return
 BattleScript_ApplyTotemVarBoost:
 	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_TotemVarEnd
 	setgraphicalstatchangevalues
 	playanimation BS_SCRIPTING, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
-BattleScript_TotemVarPrintStatMsg:
 	printfromtable gStatUpStringIds
 	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_TotemVar  @loop until stats bitfield is empty
+	goto BattleScript_TotemVar_Ret  @loop until stats bitfield is empty
+
 
 BattleScript_AnnounceAirLockCloudNine::
 	call BattleScript_AbilityPopUp
@@ -10473,3 +10502,13 @@ BattleScript_BerserkGeneRet_OwnTempoPrevents:
 BattleScript_BerserkGeneRet_End:
 	removeitem BS_SCRIPTING
 	end3
+
+BattleScript_EffectSnow::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN_PRIMAL, BattleScript_ExtremelyHarshSunlightWasNotLessened
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN_PRIMAL, BattleScript_NoReliefFromHeavyRain
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_STRONG_WINDS, BattleScript_MysteriousAirCurrentBlowsOn
+	setsnow
+	goto BattleScript_MoveWeatherChange

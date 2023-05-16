@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_SCRIPTS_H
 #define GUARD_BATTLE_SCRIPTS_H
 
+extern const u8 BattleScript_MirrorHerbCopyStatChange[];
+extern const u8 BattleScript_MirrorHerbCopyStatChangeEnd2[];
 extern const u8 BattleScript_NotAffected[];
 extern const u8 BattleScript_HitFromCritCalc[];
 extern const u8 BattleScript_MoveEnd[];
@@ -43,8 +45,9 @@ extern const u8 BattleScript_ActionSwitch[];
 extern const u8 BattleScript_Pausex20[];
 extern const u8 BattleScript_LevelUp[];
 extern const u8 BattleScript_RainContinuesOrEnds[];
+extern const u8 BattleScript_SnowContinuesOrEnds[];
 extern const u8 BattleScript_DamagingWeatherContinues[];
-extern const u8 BattleScript_SandStormHailEnds[];
+extern const u8 BattleScript_SandStormHailSnowEnds[];
 extern const u8 BattleScript_SunlightContinues[];
 extern const u8 BattleScript_SunlightFaded[];
 extern const u8 BattleScript_OverworldWeatherStarts[];
@@ -272,7 +275,8 @@ extern const u8 BattleScript_CursedBodyActivates[];
 extern const u8 BattleScript_MummyActivates[];
 extern const u8 BattleScript_WeakArmorActivates[];
 extern const u8 BattleScript_FellStingerRaisesStat[];
-extern const u8 BattleScript_SnowWarningActivates[];
+extern const u8 BattleScript_SnowWarningActivatesHail[];
+extern const u8 BattleScript_SnowWarningActivatesSnow[];
 extern const u8 BattleScript_HarvestActivates[];
 extern const u8 BattleScript_ImposterActivates[];
 extern const u8 BattleScript_SelectingNotAllowedMoveAssaultVest[];
