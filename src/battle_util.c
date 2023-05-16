@@ -10161,8 +10161,7 @@ u16 GetBattleFormChangeTargetSpecies(u8 battlerId, u16 method)
                     // Check if there is a required ability and if the battler's ability does not match it
                     // or is suppressed. If so, revert to the no weather form.
                     if (formChanges[i].param2
-                        && (gBattleMons[battlerId].ability != formChanges[i].param2
-                        || (gStatuses3[gBattlerTarget] & STATUS3_GASTRO_ACID))
+                        && GetBattlerAbility(battlerId) != formChanges[i].param2
                         && formChanges[i].param1 == B_WEATHER_NONE)
                     {
                         targetSpecies = formChanges[i].targetSpecies;
