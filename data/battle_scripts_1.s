@@ -1580,7 +1580,7 @@ BattleScript_MoveEffectCoreEnforcer::
 	printstring STRINGID_PKMNSABILITYSUPPRESSED
 	waitmessage B_WAIT_TIME_LONG
 	trytoclearprimalweather
-	trytorevertweatherform
+	tryrevertweatherform
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
 BattleScript_CoreEnforcerRet:
@@ -2729,7 +2729,7 @@ BattleScript_EffectSimpleBeam:
 	printstring STRINGID_PKMNACQUIREDSIMPLE
 	waitmessage B_WAIT_TIME_LONG
 	trytoclearprimalweather
-	trytorevertweatherform
+	tryrevertweatherform
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
 	tryendneutralizinggas BS_TARGET
@@ -2829,7 +2829,7 @@ BattleScript_EffectWorrySeed:
 	printstring STRINGID_PKMNACQUIREDABILITY
 	waitmessage B_WAIT_TIME_LONG
 	trytoclearprimalweather
-	trytorevertweatherform
+	tryrevertweatherform
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
 	goto BattleScript_MoveEnd
@@ -2961,7 +2961,7 @@ BattleScript_EffectGastroAcid:
 	printstring STRINGID_PKMNSABILITYSUPPRESSED
 	waitmessage B_WAIT_TIME_LONG
 	trytoclearprimalweather
-	trytorevertweatherform
+	tryrevertweatherform
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
 	tryendneutralizinggas BS_TARGET
@@ -8003,9 +8003,7 @@ BattleScript_CudChewActivates::
 	setbyte sBERRY_OVERRIDE, 0
 	end3
 
-BattleScript_TargetFormChange::
-	pause 5
-	call BattleScript_AbilityPopUpTarget
+BattleScript_TargetFormChangeNoPopup:
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
 	handleformchange BS_TARGET, 0
@@ -8015,32 +8013,25 @@ BattleScript_TargetFormChange::
 	handleformchange BS_TARGET, 2
 	return
 
+BattleScript_TargetFormChange::
+	pause 5
+	call BattleScript_AbilityPopUpTarget
+	call BattleScript_TargetFormChangeNoPopup
+	return
+
 BattleScript_TargetFormChangeWithString::
 	pause 5
 	call BattleScript_AbilityPopUpTarget
-	printstring STRINGID_EMPTYSTRING3
-	waitmessage 1
-	handleformchange BS_TARGET, 0
-	handleformchange BS_TARGET, 1
-	playanimation BS_TARGET, B_ANIM_FORM_CHANGE, NULL
-	waitanimation
-	handleformchange BS_TARGET, 2
+	call BattleScript_TargetFormChangeNoPopup
 	printstring STRINGID_PKMNTRANSFORMED
 	waitmessage B_WAIT_TIME_LONG
 	return
 
-BattleScript_TargetFormChangeWithStringNoPopupEnd3::
-	pause 5
-	printstring STRINGID_EMPTYSTRING3
-	waitmessage 1
-	handleformchange BS_TARGET, 0
-	handleformchange BS_TARGET, 1
-	playanimation BS_TARGET, B_ANIM_FORM_CHANGE, NULL
-	waitanimation
-	handleformchange BS_TARGET, 2
+BattleScript_TargetFormChangeWithStringNoPopup::
+	call BattleScript_TargetFormChangeNoPopup
 	printstring STRINGID_PKMNTRANSFORMED
 	waitmessage B_WAIT_TIME_LONG
-	end3
+	return
 
 BattleScript_BattlerFormChangeWithStringEnd3::
 	pause 5

@@ -16567,13 +16567,12 @@ void BS_ItemRestorePP(void)
 void BS_TryRevertWeatherForm(void)
 {
     NATIVE_ARGS();
-    u16 ability = gBattleMons[gBattlerTarget].ability;
     if (B_WEATHER_FORM_SUPPRESS >= GEN_5
-        && (ability == ABILITY_FORECAST || ability == ABILITY_FLOWER_GIFT)
-        && TryBattleFormChange(gBattlerTarget, FORM_CHANGE_BATTLE_SWITCH)) // revert form
+        && TryBattleFormChange(gBattlerTarget, FORM_CHANGE_BATTLE_WEATHER))
     {
         gBattleScripting.battler = gBattlerTarget;
-        BattleScriptPushCursorAndCallback(BattleScript_TargetFormChangeWithStringNoPopupEnd3);
+        BattleScriptPush(cmd->nextInstr);
+        gBattlescriptCurrInstr = BattleScript_TargetFormChangeWithStringNoPopup;
         return;
     }
     gBattlescriptCurrInstr = cmd->nextInstr;

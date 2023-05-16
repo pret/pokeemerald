@@ -6013,8 +6013,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
 #else
         TRY_WEATHER_FORM:
 #endif
-            if ((IsBattlerWeatherAffected(battler, gBattleWeather) || gBattleWeather == B_WEATHER_NONE)
-             && TryBattleFormChange(battler, FORM_CHANGE_BATTLE_WEATHER))
+            if ((IsBattlerWeatherAffected(battler, gBattleWeather)
+                 || gBattleWeather == B_WEATHER_NONE
+                 || !WEATHER_HAS_EFFECT) // Air Lock active
+                 && TryBattleFormChange(battler, FORM_CHANGE_BATTLE_WEATHER))
             {
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerFormChangeWithStringEnd3);
                 effect++;
@@ -10101,9 +10103,26 @@ u16 GetBattleFormChangeTargetSpecies(u8 battlerId, u16 method)
                     }
                     break;
                 case FORM_CHANGE_BATTLE_WEATHER:
-                    if (gBattleWeather & formChanges[i].param1
-                        || (gBattleWeather == B_WEATHER_NONE && formChanges[i].param1 == B_WEATHER_NONE))
+                    // Check if there is a required ability and if the battler's ability does not match it
+                    // or is suppressed. If so, revert to the no weather form.
+                    if (formChanges[i].param2
+                        && (gBattleMons[battlerId].ability != formChanges[i].param2
+                        || (gStatuses3[gBattlerTarget] & STATUS3_GASTRO_ACID))
+                        && formChanges[i].param1 == B_WEATHER_NONE)
+                    {
                         targetSpecies = formChanges[i].targetSpecies;
+                    }
+                    // We need to revert the weather form if the field is under Air Lock, too.
+                    if (!WEATHER_HAS_EFFECT && formChanges[i].param1 == B_WEATHER_NONE)
+                    {
+                        targetSpecies = formChanges[i].targetSpecies;
+                    }
+                    // Otherwise, just check for a match between the weather and the form change table.
+                    else if (gBattleWeather & formChanges[i].param1
+                        || (gBattleWeather == B_WEATHER_NONE && formChanges[i].param1 == B_WEATHER_NONE))
+                    {
+                        targetSpecies = formChanges[i].targetSpecies;
+                    }
                     break;
                 case FORM_CHANGE_BATTLE_TURN_END:
                     if (formChanges[i].param1 == GetBattlerAbility(battlerId))

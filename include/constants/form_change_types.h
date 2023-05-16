@@ -89,6 +89,7 @@
 
 // Form change that activates when a specific weather is set during battle.
 // param1: weather to check
+// param2: (optional) revert if specified ability is lost
 #define FORM_CHANGE_BATTLE_WEATHER              14
 
 // Form change that activates automatically when the turn ends.
