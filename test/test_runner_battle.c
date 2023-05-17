@@ -402,7 +402,7 @@ const void *RandomElementArray(enum RandomTag tag, const void *array, size_t siz
 
     if (turn && turn->rng.tag == tag)
     {
-        u32 element;
+        u32 element = 0;
         for (index = 0; index < count; index++)
         {
             memcpy(&element, (const u8 *)array + size * index, size);
