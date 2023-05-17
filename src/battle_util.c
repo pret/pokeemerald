@@ -4552,7 +4552,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
 
                 if (CompareStat(battler, statId, MAX_STAT_STAGE, CMP_LESS_THAN))
                 {
-                    gBattleMons[battler].statStages[statId]++;
                     SET_STATCHANGER(statId, 1, FALSE);
                     gBattlerAttacker = battler;
                     PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
@@ -4925,9 +4924,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             case ABILITY_SPEED_BOOST:
                 if (CompareStat(battler, STAT_SPEED, MAX_STAT_STAGE, CMP_LESS_THAN) && gDisableStructs[battler].isFirstTurn != 2)
                 {
-                    gBattleMons[battler].statStages[STAT_SPEED]++;
-                    gBattleScripting.animArg1 = 14 + STAT_SPEED;
-                    gBattleScripting.animArg2 = 0;
+                    SET_STATCHANGER(STAT_SPEED, 1, FALSE);
                     BattleScriptPushCursorAndCallback(BattleScript_SpeedBoostActivates);
                     gBattleScripting.battler = battler;
                     effect++;
@@ -5222,7 +5219,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
 
                     SET_STATCHANGER(statId, statAmount, FALSE);
                 #if B_ABSORBING_ABILITY_STRING < GEN_5
-                    gBattleMons[battler].statStages[statId]++;
                     PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
                 #endif
                 }
