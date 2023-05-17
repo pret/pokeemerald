@@ -585,7 +585,7 @@ const u8 *GetZMoveName(u16 move)
         return gZMoveNames[0];   // Failsafe
 }
 
-#define Z_EFFECT_BS_LENGTH  3
+#define Z_EFFECT_BS_LENGTH  5
 // This function kinda cheats by setting a return battle script to after the setzeffect various command
 // and then jumping to a z effect script
 void SetZEffect(void)
@@ -676,7 +676,7 @@ void SetZEffect(void)
         gBattlescriptCurrInstr = BattleScript_StatUpZMove;
         break;
     default:
-        gBattlescriptCurrInstr += 3;
+        gBattlescriptCurrInstr += Z_EFFECT_BS_LENGTH;
         break;
     }
 

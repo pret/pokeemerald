@@ -136,7 +136,7 @@ bool32 CanDynamax(u16 battlerId)
     // Cannot Dynamax if your side has already or will Dynamax.
     if (gBattleStruct->dynamax.alreadyDynamaxed[GetBattlerSide(battlerId)]
         || gBattleStruct->dynamax.dynamaxed[BATTLE_PARTNER(battlerId)]
-        || gBattleStruct->dynamax.toDynamax[BATTLE_PARTNER(battlerId)])
+        || gBattleStruct->dynamax.toDynamax & gBitTable[BATTLE_PARTNER(battlerId)])
         return FALSE;
 
     // TODO: Cannot Dynamax in a Max Raid if you don't have Dynamax Energy.
@@ -281,7 +281,7 @@ bool32 ShouldUseMaxMove(u16 battlerId, u16 baseMove)
     // TODO: Raid bosses do not always use Max Moves.
     // if (IsRaidBoss(battlerId))
     //	  return !IsRaidBossUsingRegularMove(battlerId, baseMove);
-    return IsDynamaxed(battlerId) || gBattleStruct->dynamax.toDynamax[battlerId];
+    return IsDynamaxed(battlerId) || gBattleStruct->dynamax.toDynamax & gBitTable[battlerId];
 }
 
 static u16 GetTypeBasedMaxMove(u16 battlerId, u16 type)

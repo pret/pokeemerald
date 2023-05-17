@@ -525,7 +525,7 @@ struct DynamaxData
     bool8 playerSelect;
     u8 triggerSpriteId;
     u8 indicatorSpriteId[MAX_BATTLERS_COUNT];
-    bool8 toDynamax[MAX_BATTLERS_COUNT];
+    u8 toDynamax; // flags using gBitTable
     bool8 alreadyDynamaxed[NUM_BATTLE_SIDES];
     bool8 dynamaxed[MAX_BATTLERS_COUNT];
     u8 dynamaxTurns[MAX_BATTLERS_COUNT];
@@ -554,7 +554,7 @@ struct BattleStruct
     u8 wildVictorySong;
     u8 dynamicMoveType;
     u8 wrappedBy[MAX_BATTLERS_COUNT];
-    u8 focusPunchBattlerId;
+    u8 focusPunchBattlers; // as bits
     u8 battlerPreventingSwitchout;
     u8 moneyMultiplier:6;
     u8 moneyMultiplierItem:1;
@@ -674,6 +674,7 @@ struct BattleStruct
     u8 attackerBeforeBounce:2;
     u8 beatUpSlot:3;
     bool8 hitSwitchTargetFailed:1;
+    bool8 effectsBeforeUsingMoveDone:1; // Mega Evo and Focus Punch/Shell Trap effects.
     u8 targetsDone[MAX_BATTLERS_COUNT]; // Each battler as a bit.
     u16 overwrittenAbilities[MAX_BATTLERS_COUNT];    // abilities overwritten during battle (keep separate from battle history in case of switching)
     bool8 allowedToChangeFormInWeather[PARTY_SIZE][2]; // For each party member and side, used by Ice Face.

@@ -798,6 +798,7 @@ struct MoveContext
     u16 explicitMegaEvolve:1;
     // TODO: u8 zMove:1;
     u16 dynamax:1;
+    u16 explicitDynamax:1;
     u16 allowed:1;
     u16 explicitAllowed:1;
     struct BattlePokemon *target;
