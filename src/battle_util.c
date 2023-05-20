@@ -2062,11 +2062,8 @@ static bool32 EndTurnTerrain(u32 terrainFlag, u32 stringTableId)
         {
             gFieldStatuses &= ~terrainFlag;
             TryToRevertMimicry();
-            if (!(terrainFlag & STATUS_FIELD_GRASSY_TERRAIN))
-            {
-                gBattleCommunication[MULTISTRING_CHOOSER] = stringTableId;
-                BattleScriptExecute(BattleScript_TerrainEnds);
-            }
+            gBattleCommunication[MULTISTRING_CHOOSER] = stringTableId;
+            BattleScriptExecute(BattleScript_TerrainEnds);
             return TRUE;
         }
     }
