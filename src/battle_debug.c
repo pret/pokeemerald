@@ -1015,11 +1015,13 @@ static void Task_ShowAiParty(u8 taskId)
             gSprites[gSprites[data->spriteIds.aiPartyIcons[i]].sConditionSpriteId].oam.priority = 0;
             if (aiMons[i].isFainted)
                 ailment = AILMENT_FNT;
-            else if (aiMons[i].status)
-                ailment = GetAilmentFromStatus(aiMons[i].status);
             else
-                ailment = AILMENT_FNT + 1; // blank
-            StartSpriteAnim(&gSprites[gSprites[data->spriteIds.aiPartyIcons[i]].sConditionSpriteId], ailment - 1);
+                ailment = GetAilmentFromStatus(aiMons[i].status);
+
+            if (ailment != AILMENT_NONE)
+                StartSpriteAnim(&gSprites[gSprites[data->spriteIds.aiPartyIcons[i]].sConditionSpriteId], ailment - 1);
+            else
+                gSprites[gSprites[data->spriteIds.aiPartyIcons[i]].sConditionSpriteId].invisible = TRUE;
         }
         for (; i < PARTY_SIZE; i++)
             data->spriteIds.aiPartyIcons[i] = 0xFF;
