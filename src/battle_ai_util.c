@@ -591,7 +591,8 @@ void SetBattlerData(u8 battlerId)
 {
     if (!BattlerHasAi(battlerId))
     {
-        u32 i, species, illusionSpecies;
+        u32 i, species, illusionSpecies, side;
+        side = GetBattlerSide(battlerId);
 
         // Simulate Illusion
         species = gBattleMons[battlerId].species;
@@ -609,22 +610,22 @@ void SetBattlerData(u8 battlerId)
         }
 
         // Use the known battler's ability.
-        if (BATTLE_HISTORY->abilities[battlerId] != ABILITY_NONE)
-            gBattleMons[battlerId].ability = BATTLE_HISTORY->abilities[battlerId];
+        if (AI_PARTY->mons[side][gBattlerPartyIndexes[battlerId]].ability != ABILITY_NONE)
+            gBattleMons[battlerId].ability = AI_PARTY->mons[side][gBattlerPartyIndexes[battlerId]].ability;
         // Check if mon can only have one ability.
         else if (gSpeciesInfo[species].abilities[1] == ABILITY_NONE
-                 || gSpeciesInfo[species].abilities[1] == gSpeciesInfo[species].abilities[0])
+                || gSpeciesInfo[species].abilities[1] == gSpeciesInfo[species].abilities[0])
             gBattleMons[battlerId].ability = gSpeciesInfo[species].abilities[0];
         // The ability is unknown.
         else
             gBattleMons[battlerId].ability = ABILITY_NONE;
 
-        if (BATTLE_HISTORY->itemEffects[battlerId] == 0)
+        if (AI_PARTY->mons[side][gBattlerPartyIndexes[battlerId]].heldEffect == 0)
             gBattleMons[battlerId].item = 0;
 
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            if (BATTLE_HISTORY->usedMoves[battlerId][i] == 0)
+            if (AI_PARTY->mons[side][gBattlerPartyIndexes[battlerId]].moves[i] == 0)
                 gBattleMons[battlerId].moves[i] = 0;
         }
     }
