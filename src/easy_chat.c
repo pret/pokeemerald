@@ -3930,12 +3930,12 @@ static void LoadEasyChatPalettes(void)
 {
     ResetPaletteFade();
     LoadPalette(gEasyChatMode_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-    LoadPalette(sTextInputFrameOrange_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
-    LoadPalette(sTextInputFrameGreen_Pal, BG_PLTT_ID(4), PLTT_SIZE_4BPP);
-    LoadPalette(sTitleText_Pal, BG_PLTT_ID(10), PLTT_SIZEOF(4));
-    LoadPalette(sText_Pal, BG_PLTT_ID(11), PLTT_SIZEOF(6));
-    LoadPalette(sText_Pal, BG_PLTT_ID(15), PLTT_SIZEOF(6));
-    LoadPalette(sText_Pal, BG_PLTT_ID(3), PLTT_SIZEOF(6));
+    LoadPalette(sTextInputFrameOrange_Pal, BG_PLTT_ID(1), sizeof(sTextInputFrameOrange_Pal));
+    LoadPalette(sTextInputFrameGreen_Pal, BG_PLTT_ID(4), sizeof(sTextInputFrameGreen_Pal));
+    LoadPalette(sTitleText_Pal, BG_PLTT_ID(10), sizeof(sTitleText_Pal));
+    LoadPalette(sText_Pal, BG_PLTT_ID(11), sizeof(sText_Pal));
+    LoadPalette(sText_Pal, BG_PLTT_ID(15), sizeof(sText_Pal));
+    LoadPalette(sText_Pal, BG_PLTT_ID(3), sizeof(sText_Pal));
 }
 
 static void PrintTitle(void)
