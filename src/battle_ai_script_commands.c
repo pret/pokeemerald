@@ -478,9 +478,9 @@ static u8 ChooseMoveOrAction_Doubles(void)
         else
         {
             if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
-                BattleAI_SetupAIData(gBattleStruct->palaceFlags >> 4);
+                BattleAI_SetupAIData(gBattleStruct->palaceFlags >> MAX_BATTLERS_COUNT);
             else
-                BattleAI_SetupAIData((1 << MAX_MON_MOVES) - 1);
+                BattleAI_SetupAIData(ALL_MOVES_MASK);
 
             gBattlerTarget = i;
 

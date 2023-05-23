@@ -157,8 +157,10 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     // Pass selected moves to AI, pick one
     if (selectedMoves != 0)
     {
-        gBattleStruct->palaceFlags &= 0xF;
-        gBattleStruct->palaceFlags |= (selectedMoves << 4);
+        // Lower 4 bits of palaceFlags are flags for each battler.
+        // Clear the rest of palaceFlags, then set the selected moves in the upper 4 bits.
+        gBattleStruct->palaceFlags &= (1 << MAX_BATTLERS_COUNT) - 1;
+        gBattleStruct->palaceFlags |= (selectedMoves << MAX_BATTLERS_COUNT);
         BattleAI_SetupAIData(selectedMoves);
         chosenMoveId = BattleAI_ChooseMoveOrAction();
     }
@@ -168,7 +170,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     // If a move is chosen this way, there's a 50% chance that it will be unable to use it anyway
     if (chosenMoveId == -1)
     {
-        if (unusableMovesBits != 0xF)
+        if (unusableMovesBits != ALL_MOVES_MASK)
         {
             validMoveFlags = 0, numValidMoveGroups = 0;
 
