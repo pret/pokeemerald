@@ -237,6 +237,7 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform when weather changes")
 SINGLE_BATTLE_TEST("Forecast transforms Castform back to normal when its ability is suppressed")
 {
     GIVEN {
+        ASSUME(B_WEATHER_FORMS >= GEN_5);
         PLAYER(SPECIES_CASTFORM) { Ability(ABILITY_FORECAST); };
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

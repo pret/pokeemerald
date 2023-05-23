@@ -4759,12 +4759,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
-#if B_WEATHER_FORMS < GEN_5
-        default:
-            if (gBattleMons[battler].species == SPECIES_CHERRIM)
-                goto TRY_WEATHER_FORM;
-            break;
-#endif
         }
         break;
     case ABILITYEFFECT_ENDTURN: // 1
@@ -6037,11 +6031,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         switch (gLastUsedAbility)
         {
         case ABILITY_FORECAST:
-#if B_WEATHER_FORMS >= GEN_5
         case ABILITY_FLOWER_GIFT:
-#else
-        TRY_WEATHER_FORM:
-#endif
             if ((IsBattlerWeatherAffected(battler, gBattleWeather)
                  || gBattleWeather == B_WEATHER_NONE
                  || !WEATHER_HAS_EFFECT) // Air Lock active

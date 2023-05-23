@@ -38,6 +38,7 @@ SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back to normal when weather c
 SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back to normal when its ability is suppressed")
 {
     GIVEN {
+        ASSUME(B_WEATHER_FORMS >= GEN_5);
         PLAYER(SPECIES_CHERRIM) { Ability(ABILITY_FLOWER_GIFT); };
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
