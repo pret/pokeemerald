@@ -16605,7 +16605,6 @@ void BS_ItemRestorePP(void)
 void BS_TryRevertWeatherForm(void)
 {
     NATIVE_ARGS();
-#if B_WEATHER_FORM_SUPPRESS >= GEN_5
     if (TryBattleFormChange(gBattlerTarget, FORM_CHANGE_BATTLE_WEATHER))
     {
         gBattleScripting.battler = gBattlerTarget;
@@ -16613,7 +16612,6 @@ void BS_TryRevertWeatherForm(void)
         gBattlescriptCurrInstr = BattleScript_TargetFormChangeWithStringNoPopup;
         return;
     }
-#endif
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

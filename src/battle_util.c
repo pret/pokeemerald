@@ -10167,7 +10167,7 @@ u16 GetBattleFormChangeTargetSpecies(u8 battlerId, u16 method)
                         targetSpecies = formChanges[i].targetSpecies;
                     }
                     // We need to revert the weather form if the field is under Air Lock, too.
-                    if (!WEATHER_HAS_EFFECT && formChanges[i].param1 == B_WEATHER_NONE)
+                    else if (!WEATHER_HAS_EFFECT && formChanges[i].param1 == B_WEATHER_NONE)
                     {
                         targetSpecies = formChanges[i].targetSpecies;
                     }
