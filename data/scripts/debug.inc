@@ -68,6 +68,12 @@ Debug_FlagsNotSetBattleConfigMessage_Text:
 	.string "'include/config/battle.h'!$"
 
 Debug_Script_1::
+	givemon SPECIES_TREECKO, 20, ITEM_NONE
+	givemon SPECIES_TORCHIC, 20, ITEM_NONE
+	giveitem ITEM_REVIVE, 3
+	giveitem ITEM_HYPER_POTION, 3
+	setwildbattle SPECIES_UNOWN, 20, 0, SPECIES_UNOWN, 20, 0
+	dowildbattle
 	end
 
 Debug_Script_2::

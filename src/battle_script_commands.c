@@ -16444,7 +16444,8 @@ u8 GetFirstFaintedPartyIndex(u8 battlerId)
     return PARTY_SIZE;
 }
 
-void BS_ItemRestoreHP(void) {
+void BS_ItemRestoreHP(void)
+{
     NATIVE_ARGS();
     u16 healAmount;
     u32 battlerId = MAX_BATTLERS_COUNT;
@@ -16499,6 +16500,7 @@ void BS_ItemRestoreHP(void) {
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && battlerId != MAX_BATTLERS_COUNT)
         {
             gAbsentBattlerFlags &= ~gBitTable[battlerId];
+            gBattleScripting.battler = battlerId;
             gBattleCommunication[MULTIUSE_STATE] = TRUE;
         }
     }
@@ -16506,7 +16508,8 @@ void BS_ItemRestoreHP(void) {
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-void BS_ItemCureStatus(void) {
+void BS_ItemCureStatus(void)
+{
     NATIVE_ARGS();
     struct Pokemon *party = GetBattlerParty(gBattlerAttacker);
 
@@ -16534,7 +16537,8 @@ void BS_ItemCureStatus(void) {
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-void BS_ItemIncreaseStat(void) {
+void BS_ItemIncreaseStat(void)
+{
     NATIVE_ARGS();
     u16 statId = GetItemEffect(gLastUsedItem)[1];
     u16 stages = ItemId_GetHoldEffectParam(gLastUsedItem);
@@ -16542,7 +16546,8 @@ void BS_ItemIncreaseStat(void) {
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-void BS_ItemRestorePP(void) {
+void BS_ItemRestorePP(void)
+{
     NATIVE_ARGS();
     const u8 *effect = GetItemEffect(gLastUsedItem);
     u32 i, pp, maxPP, moveId, loopEnd;
