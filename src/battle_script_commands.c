@@ -16324,7 +16324,7 @@ void BS_CheckParentalBondCounter(void)
 void BS_GetBattlerSide(void)
 {
     NATIVE_ARGS(u8 battler);
-    gBattleCommunication[0] = GetBattlerSide(cmd->battler);   
+    gBattleCommunication[0] = GetBattlerSide(GetBattlerForBattleScript(cmd->battler));   
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
