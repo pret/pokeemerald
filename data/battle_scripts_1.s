@@ -6984,8 +6984,6 @@ BattleScript_TerrainEnds_Ret::
 	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG
 	return
 
-BattleScript_GrassyTerrainEnds:
-	setbyte cMULTISTRING_CHOOSER, B_MSG_TERRAINENDS_GRASS
 BattleScript_TerrainEnds::
 	call BattleScript_TerrainEnds_Ret
 	end2
@@ -7182,8 +7180,10 @@ BattleScript_MistProtected::
 	return
 
 BattleScript_RageIsBuilding::
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_RageIsBuildingEnd
 	printstring STRINGID_PKMNRAGEBUILDING
 	waitmessage B_WAIT_TIME_LONG
+BattleScript_RageIsBuildingEnd:
 	return
 
 BattleScript_MoveUsedIsDisabled::
@@ -8520,10 +8520,12 @@ BattleScript_AbilityPopUp:
 	return
 
 BattleScript_SpeedBoostActivates::
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_SpeedBoostActivatesEnd
 	call BattleScript_AbilityPopUp
 	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	printstring STRINGID_PKMNRAISEDSPEED
 	waitmessage B_WAIT_TIME_LONG
+BattleScript_SpeedBoostActivatesEnd:
 	end3
 
 @ Can't compare directly to a value, have to compare to value at pointer
@@ -9036,8 +9038,8 @@ BattleScript_MoveStatDrain::
 	setgraphicalstatchangevalues
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	waitanimation
-.if B_ABSORBING_ABILITY_STRING >= GEN_5
 	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_MoveStatDrain_Cont
+.if B_ABSORBING_ABILITY_STRING >= GEN_5
 	printfromtable gStatUpStringIds
 	waitmessage B_WAIT_TIME_LONG
 .else
@@ -9176,7 +9178,6 @@ BattleScript_GrassyTerrainLoopIncrement::
 BattleScript_GrassyTerrainLoopEnd::
 	bicword gHitMarker, HITMARKER_SKIP_DMG_TRACK | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
 	jumpifword CMP_COMMON_BITS, gFieldStatuses, STATUS_FIELD_TERRAIN_PERMANENT, BattleScript_GrassyTerrainHealEnd
-	jumpifbyte CMP_EQUAL, gFieldTimers + 5, 0, BattleScript_GrassyTerrainEnds
 BattleScript_GrassyTerrainHealEnd:
 	end2
 
@@ -9317,6 +9318,7 @@ BattleScript_WeakArmorActivatesEnd:
 	return
 
 BattleScript_RaiseStatOnFaintingTarget::
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_RaiseStatOnFaintingTarget_End
 	copybyte gBattlerAbility, gBattlerAttacker
 	call BattleScript_AbilityPopUp
 	setgraphicalstatchangevalues
@@ -9324,9 +9326,11 @@ BattleScript_RaiseStatOnFaintingTarget::
 	waitanimation
 	printstring STRINGID_LASTABILITYRAISEDSTAT
 	waitmessage B_WAIT_TIME_LONG
+BattleScript_RaiseStatOnFaintingTarget_End:
 	return
 
 BattleScript_AttackerAbilityStatRaise::
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_AttackerAbilityStatRaise_End
 	copybyte gBattlerAbility, gBattlerAttacker
 	call BattleScript_AbilityPopUp
 	setgraphicalstatchangevalues
@@ -9334,6 +9338,7 @@ BattleScript_AttackerAbilityStatRaise::
 	waitanimation
 	printstring STRINGID_ATTACKERABILITYSTATRAISE
 	waitmessage B_WAIT_TIME_LONG
+BattleScript_AttackerAbilityStatRaise_End:
 	return
 
 BattleScript_FellStingerRaisesStat::

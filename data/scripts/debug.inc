@@ -90,3 +90,22 @@ Debug_Script_7::
 
 Debug_Script_8::
 	end
+
+Debug_CheckSaveBlock::
+	callnative CheckSaveBlock1Size
+	msgbox Debug_SaveBlock1Size, MSGBOX_DEFAULT
+	callnative CheckSaveBlock2Size
+	msgbox Debug_SaveBlock2Size, MSGBOX_DEFAULT
+	callnative CheckPokemonStorageSize
+	msgbox Debug_PokemonStorageSize, MSGBOX_DEFAULT
+	release
+	end
+
+Debug_SaveBlock1Size::
+	.string "SaveBlock1 size: {STR_VAR_1}/{STR_VAR_2}.$"
+
+Debug_SaveBlock2Size::
+	.string "SaveBlock2 size: {STR_VAR_1}/{STR_VAR_2}.$"
+
+Debug_PokemonStorageSize::
+	.string "{PKMN}Storage size: {STR_VAR_1}/{STR_VAR_2}.$"
