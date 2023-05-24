@@ -1,3 +1,5 @@
+.if DEBUG_OVERWORLD_MENU == TRUE
+
 Debug_ShowFieldMessageStringVar4::
 	special ShowFieldMessageStringVar4
 	waitmessage
@@ -109,3 +111,5 @@ Debug_SaveBlock2Size::
 
 Debug_PokemonStorageSize::
 	.string "{PKMN}Storage size: {STR_VAR_1}/{STR_VAR_2}.$"
+
+.endif
