@@ -2513,6 +2513,7 @@ static void Cmd_datahpupdate(void)
             gBattleMons[gActiveBattler].species = SPECIES_MIMIKYU_BUSTED;
             BattleScriptPush(cmd->nextInstr);
             gBattlescriptCurrInstr = BattleScript_TargetFormChange;
+            return;
         }
         else
         {
