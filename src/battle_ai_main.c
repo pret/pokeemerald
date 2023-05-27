@@ -248,7 +248,7 @@ static void CopyBattlerDataToAIParty(u32 bPosition, u32 side)
     aiMon->species = bMon->species;
     aiMon->level = bMon->level;
     aiMon->status = bMon->status1;
-    aiMon->gender = GetGenderFromSpeciesAndPersonality(bMon->species, bMon->personality);
+    aiMon->gender = GetBattlerGender(battler);
     aiMon->isFainted = FALSE;
     aiMon->wasSentInBattle = TRUE;
     aiMon->switchInCount++;
@@ -1287,12 +1287,8 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 8;
             break;
         case EFFECT_CAPTIVATE:
-            {
-                u8 atkGender = GetGenderFromSpeciesAndPersonality(gBattleMons[battlerAtk].species, gBattleMons[battlerAtk].personality);
-                u8 defGender = GetGenderFromSpeciesAndPersonality(gBattleMons[battlerDef].species, gBattleMons[battlerDef].personality);
-                if (atkGender == MON_GENDERLESS || defGender == MON_GENDERLESS || atkGender == defGender)
-                    score -= 10;
-            }
+            if (!AreBattlersOfOppositeGender(battlerAtk, battlerDef))
+                score -= 10;
             break;
     // other
         case EFFECT_HAZE:
@@ -1592,9 +1588,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 2; // mainly to prevent looping between hail and snow
             break;
         case EFFECT_ATTRACT:
-            if (!AI_CanBeInfatuated(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef],
-             GetGenderFromSpeciesAndPersonality(gBattleMons[battlerAtk].species, gBattleMons[battlerAtk].personality),
-             GetGenderFromSpeciesAndPersonality(gBattleMons[battlerDef].species, gBattleMons[battlerDef].personality)))
+            if (!AI_CanBeInfatuated(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef]))
                 score -= 10;
             break;
         case EFFECT_SAFEGUARD:
