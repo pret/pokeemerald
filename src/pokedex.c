@@ -93,6 +93,13 @@ enum
     NAME_YZ,
 };
 
+enum {
+    WIN_INFO,
+    WIN_FOOTPRINT,
+    WIN_CRY_WAVE,
+    WIN_VU_METER,
+};
+
 // For scrolling search parameter
 #define MAX_SEARCH_PARAM_ON_SCREEN   6
 #define MAX_SEARCH_PARAM_CURSOR_POS  (MAX_SEARCH_PARAM_ON_SCREEN - 1)
@@ -887,11 +894,6 @@ static const struct BgTemplate sInfoScreen_BgTemplate[] =
         .baseTile = 0
     }
 };
-
-#define WIN_INFO 0
-#define WIN_FOOTPRINT 1
-#define WIN_CRY_WAVE 2
-#define WIN_VU_METER 3
 
 static const struct WindowTemplate sInfoScreen_WindowTemplates[] =
 {
@@ -4570,26 +4572,38 @@ static void PrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top)
     PrintInfoSubMenuText(windowId, str, left, top);
 }
 
+// The footprints are drawn on WIN_FOOTPRINT, which uses BG palette 15 (loaded with graphics/text_window/message_box.gbapal)
+// The footprint pixels are stored as 1BPP, and set to the below color index in this palette when converted to 4BPP.
+#define FOOTPRINT_COLOR_IDX  2
+
+#define NUM_FOOTPRINT_TILES  4
+
 static void DrawFootprint(u8 windowId, u16 dexNum)
 {
-    u8 footprint[32 * 4];
+    u8 footprint4bpp[TILE_SIZE_4BPP * NUM_FOOTPRINT_TILES];
     const u8 * footprintGfx = gMonFootprintTable[NationalPokedexNumToSpecies(dexNum)];
     u16 tileIdx = 0;
     u16 i, j;
 
-    for (i = 0; i < 32; i++)
+    for (i = 0; i < TILE_SIZE_1BPP * NUM_FOOTPRINT_TILES; i++)
     {
-        u8 tile = footprintGfx[i];
+        u8 footprint1bpp = footprintGfx[i];
+
+        // Convert the 8 pixels in the above 1BPP byte to 4BPP.
+        // Each iteration creates one 4BPP byte (2 pixels),
+        // so we need 4 iterations to do all 8 pixels.
         for (j = 0; j < 4; j++)
         {
-            u8 value = ((tile >> (2 * j)) & 1 ? 2 : 0);
-            if (tile & (2 << (2 * j)))
-                value |= 0x20;
-            footprint[tileIdx] = value;
+            u8 tile = 0;
+            if (footprint1bpp & (1 << (2 * j)))
+                tile |= FOOTPRINT_COLOR_IDX; // Set pixel
+            if (footprint1bpp & (2 << (2 * j)))
+                tile |= FOOTPRINT_COLOR_IDX << 4; // Set pixel
+            footprint4bpp[tileIdx] = tile;
             tileIdx++;
         }
     }
-    CopyToWindowPixelBuffer(windowId, footprint, sizeof(footprint), 0);
+    CopyToWindowPixelBuffer(windowId, footprint4bpp, sizeof(footprint4bpp), 0);
 }
 
 // Unused Ruby/Sapphire function.
