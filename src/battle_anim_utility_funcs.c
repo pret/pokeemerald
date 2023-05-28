@@ -663,7 +663,7 @@ static void SetPalettesToColor(u32 selectedPalettes, u16 color)
     {
         if (selectedPalettes & 1)
         {
-            u16 curOffset = i * 16;
+            u16 curOffset = PLTT_ID(i);
             u16 paletteOffset = curOffset;
             while (curOffset < paletteOffset + 16)
             {
@@ -932,7 +932,7 @@ void AnimTask_CopyPalUnfadedToBackup(u8 taskId)
         paletteIndex = gBattleAnimTarget + 16;
     }
 
-    memcpy(&gMonSpritesGfxPtr->buffer[gBattleAnimArgs[1] * 16], &gPlttBufferUnfaded[paletteIndex * 16], 32);
+    memcpy(&gMonSpritesGfxPtr->buffer[gBattleAnimArgs[1] * 16], &gPlttBufferUnfaded[PLTT_ID(paletteIndex)], PLTT_SIZE_4BPP);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -959,7 +959,7 @@ void AnimTask_CopyPalUnfadedFromBackup(u8 taskId)
         paletteIndex = gBattleAnimTarget + 16;
     }
 
-    memcpy(&gPlttBufferUnfaded[paletteIndex * 16], &gMonSpritesGfxPtr->buffer[gBattleAnimArgs[1] * 16], 32);
+    memcpy(&gPlttBufferUnfaded[PLTT_ID(paletteIndex)], &gMonSpritesGfxPtr->buffer[gBattleAnimArgs[1] * 16], PLTT_SIZE_4BPP);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -986,7 +986,7 @@ void AnimTask_CopyPalFadedToUnfaded(u8 taskId)
         paletteIndex = gBattleAnimTarget + 16;
     }
 
-    memcpy(&gPlttBufferUnfaded[paletteIndex * 16], &gPlttBufferFaded[paletteIndex * 16], 32);
+    memcpy(&gPlttBufferUnfaded[PLTT_ID(paletteIndex)], &gPlttBufferFaded[PLTT_ID(paletteIndex)], PLTT_SIZE_4BPP);
     DestroyAnimVisualTask(taskId);
 }
 

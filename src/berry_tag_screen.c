@@ -367,7 +367,7 @@ static void HandleInitWindows(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadPalette(sFontPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+    LoadPalette(sFontPalette, BG_PLTT_ID(15), sizeof(sFontPalette));
     for (i = 0; i < ARRAY_COUNT(sWindowTemplates) - 1; i++)
         PutWindowTilemap(i);
     ScheduleBgCopyTilemapToVram(0);

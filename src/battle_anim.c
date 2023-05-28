@@ -824,27 +824,15 @@ static void Task_UpdateMonBg(u8 taskId)
 
     if (!gTasks[taskId].t2_InBg2)
     {
-        u16 *src;
-        u16 *dst;
-
         gBattle_BG1_X = x + gTasks[taskId].t2_BgX;
         gBattle_BG1_Y = y + gTasks[taskId].t2_BgY;
-
-        src = &gPlttBufferFaded[0x100 + battlerId * 16];
-        dst = &gPlttBufferFaded[0x100 + animBg.paletteId * 16 - 256];
-        CpuCopy32(src, dst, 32);
+        CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(battlerId)], &gPlttBufferFaded[BG_PLTT_ID(animBg.paletteId)], PLTT_SIZE_4BPP);
     }
     else
     {
-        u16 *src;
-        u16 *dst;
-
         gBattle_BG2_X = x + gTasks[taskId].t2_BgX;
         gBattle_BG2_Y = y + gTasks[taskId].t2_BgY;
-
-        src = &gPlttBufferFaded[0x100 + battlerId * 16];
-        dst = &gPlttBufferFaded[0x100 - 112];
-        CpuCopy32(src, dst, 32);
+        CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(battlerId)], &gPlttBufferFaded[BG_PLTT_ID(9)], PLTT_SIZE_4BPP);
     }
 }
 
