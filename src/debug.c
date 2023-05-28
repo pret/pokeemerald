@@ -57,6 +57,7 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/weather.h"
+#include "save.h"
 
 #if DEBUG_OVERWORLD_MENU == TRUE
 // *******************************
@@ -292,6 +293,7 @@ extern u8 Debug_ShowFieldMessageStringVar4[];
 extern u8 Debug_CheatStart[];
 extern u8 PlayersHouse_2F_EventScript_SetWallClock[];
 extern u8 PlayersHouse_2F_EventScript_CheckWallClock[];
+extern u8 Debug_CheckSaveBlock[];
 
 #include "data/map_group_count.h"
 
@@ -1165,18 +1167,35 @@ static void DebugAction_Util_PoisonMons(u8 taskId)
     PlaySE(SE_FIELD_POISON);
 }
 
+void CheckSaveBlock1Size(void)
+{
+    u32 currSb1Size = sizeof(struct SaveBlock1);
+    u32 maxSb1Size = SECTOR_DATA_SIZE * (SECTOR_ID_SAVEBLOCK1_END - SECTOR_ID_SAVEBLOCK1_START + 1);
+    ConvertIntToDecimalStringN(gStringVar1, currSb1Size, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar2, maxSb1Size, STR_CONV_MODE_LEFT_ALIGN, 6);
+}
+
+void CheckSaveBlock2Size(void)
+{
+    u32 currSb2Size = (sizeof(struct SaveBlock2));
+    u32 maxSb2Size = SECTOR_DATA_SIZE;
+    ConvertIntToDecimalStringN(gStringVar1, currSb2Size, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar2, maxSb2Size, STR_CONV_MODE_LEFT_ALIGN, 6);
+}
+
+void CheckPokemonStorageSize(void)
+{
+    u32 currPkmnStorageSize = sizeof(struct PokemonStorage);
+    u32 maxPkmnStorageSize = SECTOR_DATA_SIZE * (SECTOR_ID_PKMN_STORAGE_END - SECTOR_ID_PKMN_STORAGE_START + 1);
+    ConvertIntToDecimalStringN(gStringVar1, currPkmnStorageSize, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar2, maxPkmnStorageSize, STR_CONV_MODE_LEFT_ALIGN, 6);
+}
+
 static void DebugAction_Util_CheckSaveBlock(u8 taskId)
 {
-    static const u8 sDebugText_SaveBlockSize[] =  _("SaveBlock1 is {STR_VAR_1} bytes long.\nMax size is 15872 bytes.\pSaveBlock2 is {STR_VAR_2} bytes long.\nMax size is 3968 bytes.\pPokemonStorage is {STR_VAR_3} bytes long.\nMax size is 35712 bytes.");
-
-    ConvertIntToDecimalStringN(gStringVar1, sizeof(struct SaveBlock1), STR_CONV_MODE_LEFT_ALIGN, 6);
-    ConvertIntToDecimalStringN(gStringVar2, sizeof(struct SaveBlock2), STR_CONV_MODE_LEFT_ALIGN, 6);
-    ConvertIntToDecimalStringN(gStringVar3, sizeof(struct PokemonStorage), STR_CONV_MODE_LEFT_ALIGN, 6);
-    StringExpandPlaceholders(gStringVar4, sDebugText_SaveBlockSize);
-
     Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
-    ScriptContext_SetupScript(Debug_ShowFieldMessageStringVar4);
+    ScriptContext_SetupScript(Debug_CheckSaveBlock);
 }
 
 static const u8 sWeatherNames[22][24] = {
@@ -2758,7 +2777,7 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
 
 static void DebugAction_Give_MaxMoney(u8 taskId)
 {
-    SetMoney(&gSaveBlock1Ptr->money, 999999);
+    SetMoney(&gSaveBlock1Ptr->money, MAX_MONEY);
 }
 
 static void DebugAction_Give_MaxCoins(u8 taskId)

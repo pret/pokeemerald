@@ -1346,6 +1346,10 @@
 	callnative BS_ItemRestorePP
 	.endm
 
+	.macro tryrevertweatherform
+	callnative BS_TryRevertWeatherForm
+	.endm
+
 	.macro setsnow
 	callnative BS_SetSnow
 	.endm

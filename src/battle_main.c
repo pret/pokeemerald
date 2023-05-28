@@ -5440,7 +5440,6 @@ static void HandleEndTurn_FinishBattle(void)
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
     #if B_TRAINERS_KNOCK_OFF_ITEMS == TRUE || B_RESTORE_HELD_BATTLE_ITEMS == TRUE
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             TryRestoreHeldItems();
     #endif
 

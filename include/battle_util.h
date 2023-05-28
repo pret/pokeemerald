@@ -139,7 +139,6 @@ void TryClearRageAndFuryCutter(void);
 u8 AtkCanceller_UnableToUseMove(void);
 u8 AtkCanceller_UnableToUseMove2(void);
 bool8 HasNoMonsToSwitch(u8 battlerId, u8 r1, u8 r2);
-u8 TryWeatherFormChange(u8 battlerId);
 bool32 TryChangeBattleWeather(u8 battler, u32 weatherEnumId, bool32 viaAbility);
 u8 AbilityBattleEffects(u8 caseID, u8 battlerId, u16 ability, u8 special, u16 moveArg);
 bool32 IsNeutralizingGasOnField(void);
@@ -235,5 +234,7 @@ u32 CountBattlerStatIncreases(u8 battlerId, bool32 countEvasionAcc);
 bool32 IsMyceliumMightOnField(void);
 bool8 ChangeTypeBasedOnTerrain(u8 battlerId);
 void RemoveConfusionStatus(u8 battlerId);
+u8 GetBattlerGender(u8 battlerId);
+bool8 AreBattlersOfOppositeGender(u8 battler1, u8 battler2);
 
 #endif // GUARD_BATTLE_UTIL_H
