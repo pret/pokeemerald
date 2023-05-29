@@ -30872,28 +30872,28 @@ General_SetWeather::
 	end
 
 Move_MAX_GUARD:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_PROTECT
 	end
 
 Move_MAX_STRIKE:
 Move_G_MAX_REPLENISH:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_GIGA_IMPACT
 	end
 
 Move_MAX_AIRSTREAM:
 Move_G_MAX_WIND_RAGE:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_AEROBLAST
 	end
 
 Move_MAX_OOZE:
 Move_G_MAX_MALODOR:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_GUNK_SHOT
 	end
@@ -30902,7 +30902,7 @@ Move_G_MAX_WILDFIRE:
 Move_G_MAX_FIREBALL:
 Move_G_MAX_CENTIFERNO:
 Move_MAX_FLARE:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_BLAST_BURN
 	end
@@ -30911,7 +30911,7 @@ Move_G_MAX_CANNONADE:
 Move_G_MAX_HYDROSNIPE:
 Move_G_MAX_FOAM_BURST:
 Move_MAX_GEYSER:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_HYDRO_CANNON
 	end
@@ -30921,14 +30921,14 @@ Move_G_MAX_DRUM_SOLO:
 Move_G_MAX_TARTNESS:
 Move_G_MAX_SWEETNESS:
 Move_MAX_OVERGROWTH:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_FRENZY_PLANT
 	end
 
 Move_MAX_LIGHTNING:
 Move_G_MAX_STUN_SHOCK:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_ZAP_CANNON
 	end
@@ -30937,28 +30937,28 @@ Move_G_MAX_CHI_STRIKE:
 Move_G_MAX_ONE_BLOW:
 Move_G_MAX_RAPID_FLOW:
 Move_MAX_KNUCKLE:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_CLOSE_COMBAT
 	end
 
 Move_G_MAX_RESONANCE:
 Move_MAX_HAILSTORM:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_SHEER_COLD
 	end
 
 Move_G_MAX_SANDBLAST:
 Move_MAX_QUAKE:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_FISSURE
 	end
 
 Move_G_MAX_BEFUDDLE:
 Move_MAX_FLUTTERBY:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_BUG_BUZZ
 	end
@@ -30966,21 +30966,21 @@ Move_MAX_FLUTTERBY:
 Move_G_MAX_STEELSURGE:
 Move_G_MAX_MELTDOWN:
 Move_MAX_STEELSPIKE:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_HEAVY_SLAM
 	end
 
 Move_G_MAX_TERROR:
 Move_MAX_PHANTASM:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_PHANTOM_FORCE
 	end
 
 Move_G_MAX_GRAVITAS:
 Move_MAX_MINDSTORM:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_PSYCHO_BOOST
 	end
@@ -30988,7 +30988,7 @@ Move_MAX_MINDSTORM:
 Move_G_MAX_SMITE:
 Move_G_MAX_FINALE:
 Move_MAX_STARFALL:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_MOONBLAST
 	end
@@ -30996,39 +30996,39 @@ Move_MAX_STARFALL:
 Move_G_MAX_STONESURGE:
 Move_G_MAX_VOLCALITH:
 Move_MAX_ROCKFALL:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_ROCK_WRECKER
 	end
 
 Move_G_MAX_DEPLETION:
 Move_MAX_WYRMWIND:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_SPACIAL_REND
 	end
 
 Move_G_MAX_SNOOZE:
 Move_MAX_DARKNESS:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_DARK_PULSE
 	end
 
 Move_G_MAX_CUDDLE:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_COVET
 	end
 
 Move_G_MAX_VOLT_CRASH:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_VOLT_TACKLE
 	end
 
 Move_G_MAX_GOLD_RUSH:
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x1
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x1
 	waitforvisualfinish
 	goto Move_PAY_DAY
 	end
@@ -31037,6 +31037,6 @@ Move_G_MAX_GOLD_RUSH:
 General_DynamaxGrowth:: @ PORTED FROM CFRU
 	createvisualtask SoundTask_PlayCryWithEcho, 2, ANIM_ATTACKER, 2
 	delay 8
-	launchtask AnimTask_DynamaxGrowth 0x5 0x1 0x0
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x0
 	waitforvisualfinish
 	end
