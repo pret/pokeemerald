@@ -4537,7 +4537,7 @@ static void PrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top)
 
 static void DrawFootprint(u8 windowId, u16 dexNum)
 {
-    u8 footprint4bpp[TILE_SIZE_4BPP * NUM_FOOTPRINT_TILES] = {0};
+    u8 footprint4bpp[TILE_SIZE_4BPP * NUM_FOOTPRINT_TILES];
     const u8 *footprintGfx = gMonFootprintTable[NationalPokedexNumToSpecies(dexNum)];
     u32 i, j, tileIdx = 0;
 
@@ -4561,6 +4561,10 @@ static void DrawFootprint(u8 windowId, u16 dexNum)
                 tileIdx++;
             }
         }
+    }
+    else
+    {
+        CpuFastFill(0, footprint4bpp, sizeof(footprint4bpp));
     }
     CopyToWindowPixelBuffer(windowId, footprint4bpp, sizeof(footprint4bpp), 0);
 }
