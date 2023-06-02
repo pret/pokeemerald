@@ -585,7 +585,7 @@ static void AnimDefensiveWall(struct Sprite *sprite)
         sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y) + gBattleAnimArgs[1];
     }
 
-    sprite->data[0] = 256 + IndexOfSpritePaletteTag(gBattleAnimArgs[2]) * 16;
+    sprite->data[0] = OBJ_PLTT_ID(IndexOfSpritePaletteTag(gBattleAnimArgs[2]));
 
     if (isContest)
     {

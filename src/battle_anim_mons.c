@@ -1415,18 +1415,17 @@ void SetGrayscaleOrOriginalPalette(u16 paletteNum, bool8 restoreOriginalColor)
     struct PlttData *originalColor;
     struct PlttData *destColor;
     u16 average;
-
-    paletteNum *= 16;
+    u16 paletteOffset = PLTT_ID(paletteNum);
 
     if (!restoreOriginalColor)
     {
         for (i = 0; i < 16; i++)
         {
-            originalColor = (struct PlttData *)&gPlttBufferUnfaded[paletteNum + i];
+            originalColor = (struct PlttData *)&gPlttBufferUnfaded[paletteOffset + i];
             average = originalColor->r + originalColor->g + originalColor->b;
             average /= 3;
 
-            destColor = (struct PlttData *)&gPlttBufferFaded[paletteNum + i];
+            destColor = (struct PlttData *)&gPlttBufferFaded[paletteOffset + i];
             destColor->r = average;
             destColor->g = average;
             destColor->b = average;
@@ -1434,7 +1433,7 @@ void SetGrayscaleOrOriginalPalette(u16 paletteNum, bool8 restoreOriginalColor)
     }
     else
     {
-        CpuCopy32(&gPlttBufferUnfaded[paletteNum], &gPlttBufferFaded[paletteNum], 32);
+        CpuCopy32(&gPlttBufferUnfaded[paletteOffset], &gPlttBufferFaded[paletteOffset], PLTT_SIZE_4BPP);
     }
 }
 

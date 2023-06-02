@@ -5528,7 +5528,7 @@ static void InitBoxTitle(u8 boxId)
 
     tagIndex = IndexOfSpritePaletteTag(PALTAG_BOX_TITLE);
     sStorage->boxTitlePalOffset = OBJ_PLTT_ID(tagIndex) + 14;
-    sStorage->wallpaperPalBits |= 0x10000 << tagIndex;
+    sStorage->wallpaperPalBits |= (1 << 16) << tagIndex;
 
     // The below seems intended to have separately tracked
     // the incoming wallpaper title's palette, but as they now
@@ -5536,7 +5536,7 @@ static void InitBoxTitle(u8 boxId)
     // this is redundant along with the use of boxTitleAltPalOffset
     tagIndex = IndexOfSpritePaletteTag(PALTAG_BOX_TITLE);
     sStorage->boxTitleAltPalOffset = OBJ_PLTT_ID(tagIndex) + 14;
-    sStorage->wallpaperPalBits |= 0x10000 << tagIndex;
+    sStorage->wallpaperPalBits |= (1 << 16) << tagIndex;
 
     StringCopyPadded(sStorage->boxTitleText, GetBoxNamePtr(boxId), 0, BOX_NAME_LENGTH);
     DrawTextWindowAndBufferTiles(sStorage->boxTitleText, sStorage->boxTitleTiles, 0, 0, 2);
@@ -5654,9 +5654,9 @@ static void CycleBoxTitleColor(void)
     u8 boxId = StorageGetCurrentBox();
     u8 wallpaperId = GetBoxWallpaper(boxId);
     if (sStorage->boxTitleCycleId == 0)
-        CpuCopy16(sBoxTitleColors[wallpaperId], gPlttBufferUnfaded + sStorage->boxTitlePalOffset, 4);
+        CpuCopy16(sBoxTitleColors[wallpaperId], &gPlttBufferUnfaded[sStorage->boxTitlePalOffset], PLTT_SIZEOF(2));
     else
-        CpuCopy16(sBoxTitleColors[wallpaperId], gPlttBufferUnfaded + sStorage->boxTitleAltPalOffset, 4);
+        CpuCopy16(sBoxTitleColors[wallpaperId], &gPlttBufferUnfaded[sStorage->boxTitleAltPalOffset], PLTT_SIZEOF(2));
 }
 
 static s16 GetBoxTitleBaseX(const u8 *string)
@@ -8794,8 +8794,7 @@ static void CreateItemIconSprites(void)
             LoadCompressedSpriteSheet(&spriteSheet);
             sStorage->itemIcons[i].tiles = GetSpriteTileStartByTag(spriteSheet.tag) * TILE_SIZE_4BPP + (void *)(OBJ_VRAM0);
             sStorage->itemIcons[i].palIndex = AllocSpritePalette(PALTAG_ITEM_ICON_0 + i);
-            sStorage->itemIcons[i].palIndex *= 16;
-            sStorage->itemIcons[i].palIndex += 0x100;
+            sStorage->itemIcons[i].palIndex = OBJ_PLTT_ID(sStorage->itemIcons[i].palIndex);
             spriteTemplate.tileTag = GFXTAG_ITEM_ICON_0 + i;
             spriteTemplate.paletteTag = PALTAG_ITEM_ICON_0 + i;
             spriteId = CreateSprite(&spriteTemplate, 0, 0, 11);
