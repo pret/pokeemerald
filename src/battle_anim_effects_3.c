@@ -1465,11 +1465,11 @@ static void SetPsychicBackground_Step(u8 taskId)
 
     if (++gTasks[taskId].data[5] == 4)
     {
-        lastColor = gPlttBufferFaded[paletteIndex * 16 + 11];
+        lastColor = gPlttBufferFaded[BG_PLTT_ID(paletteIndex) + 11];
         for (i = 10; i > 0; i--)
-            gPlttBufferFaded[paletteIndex * 16 + i + 1] = gPlttBufferFaded[paletteIndex * 16 + i];
+            gPlttBufferFaded[BG_PLTT_ID(paletteIndex) + i + 1] = gPlttBufferFaded[BG_PLTT_ID(paletteIndex) + i];
 
-        gPlttBufferFaded[paletteIndex * 16 + 1] = lastColor;
+        gPlttBufferFaded[BG_PLTT_ID(paletteIndex) + 1] = lastColor;
         gTasks[taskId].data[5] = 0;
     }
 
@@ -1491,15 +1491,15 @@ static void FadeScreenToWhite_Step(u8 taskId)
 
     if (++gTasks[taskId].data[5] == 4)
     {
-        lastColor = gPlttBufferFaded[paletteIndex * 16 + 11];
+        lastColor = gPlttBufferFaded[BG_PLTT_ID(paletteIndex) + 11];
         for (i = 10; i > 0; i--)
-            gPlttBufferFaded[paletteIndex * 16 + i + 1] = gPlttBufferFaded[paletteIndex * 16 + i];
-        gPlttBufferFaded[paletteIndex * 16 + 1] = lastColor;
+            gPlttBufferFaded[BG_PLTT_ID(paletteIndex) + i + 1] = gPlttBufferFaded[BG_PLTT_ID(paletteIndex) + i];
+        gPlttBufferFaded[BG_PLTT_ID(paletteIndex) + 1] = lastColor;
 
-        lastColor = gPlttBufferUnfaded[paletteIndex * 16 + 11];
+        lastColor = gPlttBufferUnfaded[BG_PLTT_ID(paletteIndex) + 11];
         for (i = 10; i > 0; i--)
-            gPlttBufferUnfaded[paletteIndex * 16 + i + 1] = gPlttBufferUnfaded[paletteIndex * 16 + i];
-        gPlttBufferUnfaded[paletteIndex * 16 + 1] = lastColor;
+            gPlttBufferUnfaded[BG_PLTT_ID(paletteIndex) + i + 1] = gPlttBufferUnfaded[BG_PLTT_ID(paletteIndex) + i];
+        gPlttBufferUnfaded[BG_PLTT_ID(paletteIndex) + 1] = lastColor;
 
         gTasks[taskId].data[5] = 0;
     }

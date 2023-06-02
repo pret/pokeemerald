@@ -204,6 +204,18 @@ static void ConvertToTiles8Bpp(unsigned char *src, unsigned char *dest, int numT
 	}
 }
 
+// For untiled, plain images
+static void CopyPlainPixels(unsigned char *src, unsigned char *dest, int size, int dataWidth, bool invertColors)
+{
+	if (dataWidth == 0) return;
+	for (int i = 0; i < size; i += dataWidth) {
+		for (int j = dataWidth; j > 0; j--) {
+			unsigned char pixels = src[i + j - 1];
+			*dest++ = invertColors ? ~pixels : pixels;
+		}
+	}
+}
+
 static void DecodeAffineTilemap(unsigned char *input, unsigned char *output, unsigned char *tilemap, int tileSize, int numTiles)
 {
     for (int i = 0; i < numTiles; i++)
@@ -345,9 +357,9 @@ static unsigned char *DecodeTilemap(unsigned char *tiles, struct Tilemap *tilema
     return decoded;
 }
 
-void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors)
+void ReadTileImage(char *path, int tilesWidth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors)
 {
-	int tileSize = bitDepth * 8;
+	int tileSize = image->bitDepth * 8;
 
 	int fileSize;
 	unsigned char *buffer = ReadWholeFile(path, &fileSize);
@@ -355,26 +367,25 @@ void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int 
 	int numTiles = fileSize / tileSize;
 	if (image->tilemap.data.affine != NULL)
     {
-	    int outTileSize = (bitDepth == 4 && image->palette.numColors > 16) ? 64 : tileSize;
-        buffer = DecodeTilemap(buffer, &image->tilemap, &numTiles, image->isAffine, tileSize, outTileSize, bitDepth);
+	    int outTileSize = (image->bitDepth == 4 && image->palette.numColors > 16) ? 64 : tileSize;
+        buffer = DecodeTilemap(buffer, &image->tilemap, &numTiles, image->isAffine, tileSize, outTileSize, image->bitDepth);
         if (outTileSize == 64)
         {
             tileSize = 64;
-            image->bitDepth = bitDepth = 8;
+            image->bitDepth = 8;
         }
     }
 
 	int tilesHeight = (numTiles + tilesWidth - 1) / tilesWidth;
 
 	if (tilesWidth % metatileWidth != 0)
-		FATAL_ERROR("The width in tiles (%d) isn't a multiple of the specified metatile width (%d)", tilesWidth, metatileWidth);
+		FATAL_ERROR("The width in tiles (%d) isn't a multiple of the specified metatile width (%d)\n", tilesWidth, metatileWidth);
 
 	if (tilesHeight % metatileHeight != 0)
-		FATAL_ERROR("The height in tiles (%d) isn't a multiple of the specified metatile height (%d)", tilesHeight, metatileHeight);
+		FATAL_ERROR("The height in tiles (%d) isn't a multiple of the specified metatile height (%d)\n", tilesHeight, metatileHeight);
 
 	image->width = tilesWidth * 8;
 	image->height = tilesHeight * 8;
-	image->bitDepth = bitDepth;
 	image->pixels = calloc(tilesWidth * tilesHeight, tileSize);
 
 	if (image->pixels == NULL)
@@ -382,7 +393,7 @@ void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int 
 
 	int metatilesWide = tilesWidth / metatileWidth;
 
-	switch (bitDepth) {
+	switch (image->bitDepth) {
 	case 1:
 		ConvertFromTiles1Bpp(buffer, image->pixels, numTiles, metatilesWide, metatileWidth, metatileHeight, invertColors);
 		break;
@@ -397,9 +408,9 @@ void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int 
 	free(buffer);
 }
 
-void WriteImage(char *path, enum NumTilesMode numTilesMode, int numTiles, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors)
+void WriteTileImage(char *path, enum NumTilesMode numTilesMode, int numTiles, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors)
 {
-	int tileSize = bitDepth * 8;
+	int tileSize = image->bitDepth * 8;
 
 	if (image->width % 8 != 0)
 		FATAL_ERROR("The width in pixels (%d) isn't a multiple of 8.\n", image->width);
@@ -411,10 +422,10 @@ void WriteImage(char *path, enum NumTilesMode numTilesMode, int numTiles, int bi
 	int tilesHeight = image->height / 8;
 
 	if (tilesWidth % metatileWidth != 0)
-		FATAL_ERROR("The width in tiles (%d) isn't a multiple of the specified metatile width (%d)", tilesWidth, metatileWidth);
+		FATAL_ERROR("The width in tiles (%d) isn't a multiple of the specified metatile width (%d)\n", tilesWidth, metatileWidth);
 
 	if (tilesHeight % metatileHeight != 0)
-		FATAL_ERROR("The height in tiles (%d) isn't a multiple of the specified metatile height (%d)", tilesHeight, metatileHeight);
+		FATAL_ERROR("The height in tiles (%d) isn't a multiple of the specified metatile height (%d)\n", tilesHeight, metatileHeight);
 
 	int maxNumTiles = tilesWidth * tilesHeight;
 
@@ -432,7 +443,7 @@ void WriteImage(char *path, enum NumTilesMode numTilesMode, int numTiles, int bi
 
 	int metatilesWide = tilesWidth / metatileWidth;
 
-	switch (bitDepth) {
+	switch (image->bitDepth) {
 	case 1:
 		ConvertToTiles1Bpp(image->pixels, buffer, maxNumTiles, metatilesWide, metatileWidth, metatileHeight, invertColors);
 		break;
@@ -464,6 +475,57 @@ void WriteImage(char *path, enum NumTilesMode numTilesMode, int numTiles, int bi
 	}
 
 	WriteWholeFile(path, buffer, zeroPadded ? bufferSize : maxBufferSize);
+
+	free(buffer);
+}
+
+void ReadPlainImage(char *path, int dataWidth, struct Image *image, bool invertColors)
+{
+	int fileSize;
+	unsigned char *buffer = ReadWholeFile(path, &fileSize);
+
+	if (fileSize % dataWidth != 0)
+		FATAL_ERROR("The image data size (%d) isn't a multiple of the specified data width %d.\n", fileSize, dataWidth);
+
+	// png scanlines have wasted bits if they do not align to byte boundaries.
+	// pngs misaligned in this way are not currently handled.
+	int pixelsPerByte = 8 / image->bitDepth;
+	if (image->width % pixelsPerByte != 0)
+		FATAL_ERROR("The width in pixels (%d) isn't a multiple of %d.\n", image->width, pixelsPerByte);
+
+	int numPixels = fileSize * pixelsPerByte;
+	image->height = (numPixels + image->width - 1) / image->width;
+	image->pixels = calloc(image->width * image->height * image->bitDepth / 8, 1);
+
+	if (image->pixels == NULL)
+		FATAL_ERROR("Failed to allocate memory for pixels.\n");
+
+	CopyPlainPixels(buffer, image->pixels, fileSize, dataWidth, invertColors);
+
+	free(buffer);
+}
+
+void WritePlainImage(char *path, int dataWidth, struct Image *image, bool invertColors)
+{
+	int bufferSize = image->width * image->height * image->bitDepth / 8;
+
+	if (bufferSize % dataWidth != 0)
+		FATAL_ERROR("The image data size (%d) isn't a multiple of the specified data width %d.\n", bufferSize, dataWidth);
+
+	// png scanlines have wasted bits if they do not align to byte boundaries.
+	// pngs misaligned in this way are not currently handled.
+	int pixelsPerByte = 8 / image->bitDepth;
+	if (image->width % pixelsPerByte != 0)
+		FATAL_ERROR("The width in pixels (%d) isn't a multiple of %d.\n", image->width, pixelsPerByte);
+
+	unsigned char *buffer = malloc(bufferSize);
+
+	if (buffer == NULL)
+		FATAL_ERROR("Failed to allocate memory for pixels.\n");
+
+	CopyPlainPixels(image->pixels, buffer, bufferSize, dataWidth, invertColors);
+
+	WriteWholeFile(path, buffer, bufferSize);
 
 	free(buffer);
 }

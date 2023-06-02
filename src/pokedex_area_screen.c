@@ -224,7 +224,7 @@ static bool8 DrawAreaGlow(void)
     case 3:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            CpuCopy32(sAreaGlow_Pal, &gPlttBufferUnfaded[GLOW_PALETTE * 16], sizeof(sAreaGlow_Pal));
+            CpuCopy32(sAreaGlow_Pal, &gPlttBufferUnfaded[BG_PLTT_ID(GLOW_PALETTE)], sizeof(sAreaGlow_Pal));
             sPokedexAreaScreen->drawAreaGlowState++;
         }
         return TRUE;
