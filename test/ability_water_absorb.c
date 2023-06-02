@@ -63,7 +63,7 @@ SINGLE_BATTLE_TEST("Water Absorb is only triggered once on multi strike moves")
     }
 }
 
-SINGLE_BATTLE_TEST("Water Absorb prevents Items from activating")
+SINGLE_BATTLE_TEST("Water Absorb prevents Absorb Bulb and Luminous Moss from activating")
 {
     u32 item;
     PARAMETRIZE { item = ITEM_ABSORB_BULB; }
@@ -78,10 +78,10 @@ SINGLE_BATTLE_TEST("Water Absorb prevents Items from activating")
         ABILITY_POPUP(player, ABILITY_WATER_ABSORB);
         HP_BAR(player, hp: TEST_MAX_HP / 4 + 1);
         MESSAGE("Poliwag restored HP using its Water Absorb!");
-        NONE_OF { 
+        NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
         }
-        
+
     }
 }

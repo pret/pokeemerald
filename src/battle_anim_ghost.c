@@ -693,7 +693,7 @@ static void AnimTask_SpiteTargetShadow_Step1(u8 taskId)
                 task->data[2] = 0;
                 task->data[3] = 16;
                 task->data[13] = GetAnimBattlerSpriteId(ANIM_TARGET);
-                task->data[4] = (gSprites[task->data[13]].oam.paletteNum + 16) * 16;
+                task->data[4] = OBJ_PLTT_ID2(gSprites[task->data[13]].oam.paletteNum);
                 if (position == 1) {
                     u16 mask = DISPCNT_BG1_ON;
                     mask2 = mask;

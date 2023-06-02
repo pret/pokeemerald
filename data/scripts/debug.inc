@@ -1,3 +1,5 @@
+.if DEBUG_OVERWORLD_MENU == TRUE
+
 Debug_ShowFieldMessageStringVar4::
 	special ShowFieldMessageStringVar4
 	waitmessage
@@ -21,7 +23,7 @@ Debug_CheatStart::
 	setflag FLAG_SYS_POKEDEX_GET
 	special SetUnlockedPokedexFlags
 	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
-	setvar VAR_CABLE_CLUB_TUTORIAL_STATE, 1
+	setvar VAR_CABLE_CLUB_TUTORIAL_STATE, 2
 	setflag FLAG_SYS_NATIONAL_DEX
 	special EnableNationalPokedex
 	setflag FLAG_RECEIVED_RUNNING_SHOES
@@ -41,18 +43,31 @@ Debug_CheatStart::
 	release
 	end
 
-Debug_FlagsNotSetMessage::
+Debug_FlagsNotSetOverworldConfigMessage::
 	lockall
-	message Debug_FlagsNotSetMessage_Text
+	message Debug_FlagsNotSetOverworldConfigMessage_Text
 	waitmessage
 	waitbuttonpress
 	releaseall
 	end
 
-Debug_FlagsNotSetMessage_Text:
+Debug_FlagsNotSetOverworldConfigMessage_Text:
 	.string "Feature unavailable!\n"
 	.string "Please define a usable flag in:\l"
 	.string "'include/config/overworld.h'!$"
+
+Debug_FlagsNotSetBattleConfigMessage::
+	lockall
+	message Debug_FlagsNotSetBattleConfigMessage_Text
+	waitmessage
+	waitbuttonpress
+	releaseall
+	end
+
+Debug_FlagsNotSetBattleConfigMessage_Text:
+	.string "Feature unavailable!\n"
+	.string "Please define a usable flag in:\l"
+	.string "'include/config/battle.h'!$"
 
 Debug_Script_1::
 	end
@@ -77,3 +92,24 @@ Debug_Script_7::
 
 Debug_Script_8::
 	end
+
+Debug_CheckSaveBlock::
+	callnative CheckSaveBlock1Size
+	msgbox Debug_SaveBlock1Size, MSGBOX_DEFAULT
+	callnative CheckSaveBlock2Size
+	msgbox Debug_SaveBlock2Size, MSGBOX_DEFAULT
+	callnative CheckPokemonStorageSize
+	msgbox Debug_PokemonStorageSize, MSGBOX_DEFAULT
+	release
+	end
+
+Debug_SaveBlock1Size::
+	.string "SaveBlock1 size: {STR_VAR_1}/{STR_VAR_2}.$"
+
+Debug_SaveBlock2Size::
+	.string "SaveBlock2 size: {STR_VAR_1}/{STR_VAR_2}.$"
+
+Debug_PokemonStorageSize::
+	.string "{PKMN}Storage size: {STR_VAR_1}/{STR_VAR_2}.$"
+
+.endif

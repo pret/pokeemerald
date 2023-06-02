@@ -860,7 +860,7 @@ static const struct RouletteFlashSettings sFlashData_Colors[NUM_ROULETTE_SLOTS +
 {
     { // F_FLASH_COLOR_O_WYNAUT
         .color = FLASHUTIL_USE_EXISTING_COLOR,
-        .paletteOffset = 0x5,
+        .paletteOffset = BG_PLTT_ID(0) + 5,
         .numColors = 1,
         .delay = 1,
         .unk6 = -1,
@@ -870,7 +870,7 @@ static const struct RouletteFlashSettings sFlashData_Colors[NUM_ROULETTE_SLOTS +
     },
     { // F_FLASH_COLOR_G_AZURILL
         .color = FLASHUTIL_USE_EXISTING_COLOR,
-        .paletteOffset = 0xA,
+        .paletteOffset = BG_PLTT_ID(0) + 10,
         .numColors = 1,
         .delay = 1,
         .unk6 = -1,
@@ -880,7 +880,7 @@ static const struct RouletteFlashSettings sFlashData_Colors[NUM_ROULETTE_SLOTS +
     },
     { // F_FLASH_COLOR_P_SKITTY
         .color = FLASHUTIL_USE_EXISTING_COLOR,
-        .paletteOffset = 0x15,
+        .paletteOffset = BG_PLTT_ID(1) + 5,
         .numColors = 1,
         .delay = 1,
         .unk6 = -1,
@@ -890,7 +890,7 @@ static const struct RouletteFlashSettings sFlashData_Colors[NUM_ROULETTE_SLOTS +
     },
     { // F_FLASH_COLOR_O_MAKUHITA
         .color = FLASHUTIL_USE_EXISTING_COLOR,
-        .paletteOffset = 0x55,
+        .paletteOffset = BG_PLTT_ID(5) + 5,
         .numColors = 1,
         .delay = 1,
         .unk6 = -1,
@@ -900,7 +900,7 @@ static const struct RouletteFlashSettings sFlashData_Colors[NUM_ROULETTE_SLOTS +
     },
     { // F_FLASH_COLOR_G_WYNAUT
         .color = FLASHUTIL_USE_EXISTING_COLOR,
-        .paletteOffset = 0x5A,
+        .paletteOffset = BG_PLTT_ID(5) + 10,
         .numColors = 1,
         .delay = 1,
         .unk6 = -1,
@@ -910,7 +910,7 @@ static const struct RouletteFlashSettings sFlashData_Colors[NUM_ROULETTE_SLOTS +
     },
     { // F_FLASH_COLOR_P_AZURILL
         .color = FLASHUTIL_USE_EXISTING_COLOR,
-        .paletteOffset = 0x65,
+        .paletteOffset = BG_PLTT_ID(6) + 5,
         .numColors = 1,
         .delay = 1,
         .unk6 = -1,
@@ -920,7 +920,7 @@ static const struct RouletteFlashSettings sFlashData_Colors[NUM_ROULETTE_SLOTS +
     },
     { // F_FLASH_COLOR_O_SKITTY
         .color = FLASHUTIL_USE_EXISTING_COLOR,
-        .paletteOffset = 0x75,
+        .paletteOffset = BG_PLTT_ID(7) + 5,
         .numColors = 1,
         .delay = 1,
         .unk6 = -1,
@@ -930,7 +930,7 @@ static const struct RouletteFlashSettings sFlashData_Colors[NUM_ROULETTE_SLOTS +
     },
     { // F_FLASH_COLOR_G_MAKUHITA
         .color = FLASHUTIL_USE_EXISTING_COLOR,
-        .paletteOffset = 0x7A,
+        .paletteOffset = BG_PLTT_ID(7) + 10,
         .numColors = 1,
         .delay = 1,
         .unk6 = -1,
@@ -940,7 +940,7 @@ static const struct RouletteFlashSettings sFlashData_Colors[NUM_ROULETTE_SLOTS +
     },
     { // F_FLASH_COLOR_P_WYNAUT
         .color = FLASHUTIL_USE_EXISTING_COLOR,
-        .paletteOffset = 0x85,
+        .paletteOffset = BG_PLTT_ID(8) + 5,
         .numColors = 1,
         .delay = 1,
         .unk6 = -1,
@@ -950,7 +950,7 @@ static const struct RouletteFlashSettings sFlashData_Colors[NUM_ROULETTE_SLOTS +
     },
     { // F_FLASH_COLOR_O_AZURILL
         .color = FLASHUTIL_USE_EXISTING_COLOR,
-        .paletteOffset = 0x95,
+        .paletteOffset = BG_PLTT_ID(9) + 5,
         .numColors = 1,
         .delay = 1,
         .unk6 = -1,
@@ -960,7 +960,7 @@ static const struct RouletteFlashSettings sFlashData_Colors[NUM_ROULETTE_SLOTS +
     },
     { // F_FLASH_COLOR_G_SKITTY
         .color = FLASHUTIL_USE_EXISTING_COLOR,
-        .paletteOffset = 0x9A,
+        .paletteOffset = BG_PLTT_ID(9) + 10,
         .numColors = 1,
         .delay = 1,
         .unk6 = -1,
@@ -970,7 +970,7 @@ static const struct RouletteFlashSettings sFlashData_Colors[NUM_ROULETTE_SLOTS +
     },
     { // F_FLASH_COLOR_P_MAKUHITA
         .color = FLASHUTIL_USE_EXISTING_COLOR,
-        .paletteOffset = 0xA5,
+        .paletteOffset = BG_PLTT_ID(10) + 5,
         .numColors = 1,
         .delay = 1,
         .unk6 = -1,
@@ -980,7 +980,7 @@ static const struct RouletteFlashSettings sFlashData_Colors[NUM_ROULETTE_SLOTS +
     },
     { // F_FLASH_OUTER_EDGES
         .color = RGB(22, 30, 29),
-        .paletteOffset = 0x28,
+        .paletteOffset = BG_PLTT_ID(2) + 8,
         .numColors = 2,
         .delay = 10,
         .unk6 = -1,
@@ -996,7 +996,7 @@ static const struct RouletteFlashSettings sFlashData_PokeIcons[NUM_BOARD_COLORS]
 {
     [GET_ROW_IDX(ROW_ORANGE)] = {
         .color = RGB(31, 31, 20),
-        .paletteOffset = 0x101,
+        .paletteOffset = OBJ_PLTT_ID(0) + 1,
         .numColors = 5,
         .delay = 30,
         .unk6 = -1,
@@ -1006,7 +1006,7 @@ static const struct RouletteFlashSettings sFlashData_PokeIcons[NUM_BOARD_COLORS]
     },
     [GET_ROW_IDX(ROW_GREEN)] = {
         .color = RGB(27, 31, 31),
-        .paletteOffset = 0x106,
+        .paletteOffset = OBJ_PLTT_ID(0) + 6,
         .numColors = 5,
         .delay = 30,
         .unk6 = -1,
@@ -1016,7 +1016,7 @@ static const struct RouletteFlashSettings sFlashData_PokeIcons[NUM_BOARD_COLORS]
     },
     [GET_ROW_IDX(ROW_PURPLE)] = {
         .color = RGB(31, 27, 31),
-        .paletteOffset = 0x10B,
+        .paletteOffset = OBJ_PLTT_ID(0) + 11,
         .numColors = 5,
         .delay = 30,
         .unk6 = -1,
@@ -1129,9 +1129,9 @@ static void InitRouletteTableData(void)
 
     // Left table (with min bet of 1) has red background, other table has green
     if (sRoulette->minBet == 1)
-        gPlttBufferUnfaded[0] = gPlttBufferUnfaded[0x51] = gPlttBufferFaded[0] = gPlttBufferFaded[0x51] = bgColors[0];
+        gPlttBufferUnfaded[BG_PLTT_ID(0)] = gPlttBufferUnfaded[BG_PLTT_ID(5) + 1] = gPlttBufferFaded[BG_PLTT_ID(0)] = gPlttBufferFaded[BG_PLTT_ID(5) + 1] = bgColors[0];
     else
-        gPlttBufferUnfaded[0] = gPlttBufferUnfaded[0x51] = gPlttBufferFaded[0] = gPlttBufferFaded[0x51] = bgColors[1];
+        gPlttBufferUnfaded[BG_PLTT_ID(0)] = gPlttBufferUnfaded[BG_PLTT_ID(5) + 1] = gPlttBufferFaded[BG_PLTT_ID(0)] = gPlttBufferFaded[BG_PLTT_ID(5) + 1] = bgColors[1];
 
     RouletteFlash_Reset(&sRoulette->flashUtil);
 
@@ -1144,7 +1144,7 @@ static void InitRouletteTableData(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        switch (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2))
+        switch (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG))
         {
         case SPECIES_SHROOMISH:
             sRoulette->partySpeciesFlags |= HAS_SHROOMISH;

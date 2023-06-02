@@ -544,6 +544,7 @@
 #define B_ANIM_SHELL_TRAP_SETUP         34
 #define B_ANIM_ZMOVE_ACTIVATE           35 // Using Z Moves
 #define B_ANIM_AFFECTION_HANGED_ON      36
+#define B_ANIM_SNOW_CONTINUES           37
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
@@ -583,6 +584,7 @@
 #define TRAP_ANIM_MAGMA_STORM 5
 #define TRAP_ANIM_INFESTATION 6
 #define TRAP_ANIM_SNAP_TRAP 7
+#define TRAP_ANIM_THUNDER_CAGE 8
 
 // Weather defines for battle animation scripts.
 #define ANIM_WEATHER_NONE 0
@@ -590,21 +592,7 @@
 #define ANIM_WEATHER_RAIN 2
 #define ANIM_WEATHER_SANDSTORM 3
 #define ANIM_WEATHER_HAIL 4
-
-// mon pal blend
-#define ANIM_PAL_BG             0x1
-#define ANIM_PAL_ATK            0x2
-#define ANIM_PAL_DEF            0x4
-#define ANIM_PAL_ATK_PARTNER    0x8
-#define ANIM_PAL_DEF_PARTNER    0x10
-#define ANIM_PAL_ALL            0x1f
-#define ANIM_PAL_BG_4           0x20
-#define ANIM_PAL_BG_5           0x40
-#define ANIM_PAL_ALL_BATTLERS   0x780
-#define ANIM_PAL_PLAYER1        0x80
-#define ANIM_PAL_PLAYER2        0x100
-#define ANIM_PAL_OPPONENT1      0x200
-#define ANIM_PAL_OPPONENT2      0x400
+#define ANIM_WEATHER_SNOW 5
 
 // horseshoe/fist frames
 #define ANIM_RIGHT_FIST  0
@@ -623,19 +611,18 @@
 
 // Flags given to various functions to indicate which palettes to consider.
 // Handled by UnpackSelectedBattlePalettes
-#define F_PAL_BG          (1 << 0)
-#define F_PAL_ATTACKER    (1 << 1)
-#define F_PAL_TARGET      (1 << 2)
-#define F_PAL_ATK_PARTNER (1 << 3)
-#define F_PAL_DEF_PARTNER (1 << 4)
-#define F_PAL_ANIM_1      (1 << 5) // Palette set for GetBattleAnimBg1Data/GetBgDataForTransform. Only used (ineffectually?) by Aromatherapy.
-#define F_PAL_ANIM_2      (1 << 6) // Palette set for GetBattleAnimBgData/GetBgDataForTransform. Unused.
-#define F_PAL_ATK_SIDE    (F_PAL_ATTACKER | F_PAL_ATK_PARTNER)
-#define F_PAL_DEF_SIDE    (F_PAL_TARGET | F_PAL_DEF_PARTNER)
-#define F_PAL_BATTLERS    (F_PAL_ATK_SIDE | F_PAL_DEF_SIDE)
-// The below are only used by AnimTask_BlendBattleAnimPal to get battler sprite palettes by position rather than by role.
-// It's redundant with F_PAL_BATTLERS, because they're only ever used together to refer to all the battlers at once.
-#define F_PAL_BATTLERS_2  (1 << 7 | 1 << 8 | 1 << 9 | 1 << 10)
-
+#define F_PAL_BG                  (1 << 0)
+#define F_PAL_ATTACKER            (1 << 1)
+#define F_PAL_TARGET              (1 << 2)
+#define F_PAL_ATK_PARTNER         (1 << 3)
+#define F_PAL_DEF_PARTNER         (1 << 4)
+#define F_PAL_ANIM_1              (1 << 5) // Palette set for GetBattleAnimBg1Data/GetBgDataForTransform. Only used (ineffectually?) by Aromatherapy.
+#define F_PAL_ANIM_2              (1 << 6) // Palette set for GetBattleAnimBgData/GetBgDataForTransform. Unused.
+#define F_PAL_ATK_SIDE            (F_PAL_ATTACKER | F_PAL_ATK_PARTNER)
+#define F_PAL_DEF_SIDE            (F_PAL_TARGET | F_PAL_DEF_PARTNER)
+#define F_PAL_BATTLERS            (F_PAL_ATK_SIDE | F_PAL_DEF_SIDE)
+#define F_PAL_ADJACENT            (F_PAL_DEF_SIDE | F_PAL_ATK_PARTNER)
+#define F_PAL_ALL_BUT_DEF         (F_PAL_ATK_SIDE | F_PAL_DEF_PARTNER)
+#define F_PAL_ALL_BUT_ATK_PARTNER (F_PAL_ATTACKER | F_PAL_DEF_SIDE)
 
 #endif // GUARD_CONSTANTS_BATTLE_ANIM_H

@@ -789,9 +789,9 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_BRUXISH] = sBruxishLevelUpLearnset,
     [SPECIES_DRAMPA] = sDrampaLevelUpLearnset,
     [SPECIES_DHELMISE] = sDhelmiseLevelUpLearnset,
-    [SPECIES_JANGMO_O] = sJangmooLevelUpLearnset,
-    [SPECIES_HAKAMO_O] = sHakamooLevelUpLearnset,
-    [SPECIES_KOMMO_O] = sKommooLevelUpLearnset,
+    [SPECIES_JANGMO_O] = sJangmoOLevelUpLearnset,
+    [SPECIES_HAKAMO_O] = sHakamoOLevelUpLearnset,
+    [SPECIES_KOMMO_O] = sKommoOLevelUpLearnset,
     [SPECIES_TAPU_KOKO] = sTapuKokoLevelUpLearnset,
     [SPECIES_TAPU_LELE] = sTapuLeleLevelUpLearnset,
     [SPECIES_TAPU_BULU] = sTapuBuluLevelUpLearnset,
@@ -1334,5 +1334,6 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_CALYREX_SHADOW_RIDER] = sCalyrexShadowRiderLevelUpLearnset,
     // Enamorus
     [SPECIES_ENAMORUS_THERIAN] = sEnamorusLevelUpLearnset,
+    [SPECIES_BASCULEGION_FEMALE] = sBasculegionLevelUpLearnset,
 #endif
 };

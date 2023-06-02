@@ -30,6 +30,7 @@
 #define AI_WEATHER_RAIN 2
 #define AI_WEATHER_SANDSTORM 3
 #define AI_WEATHER_HAIL 4
+#define AI_WEATHER_SNOW 5
 
 // get_how_powerful_move_is
 #define MOVE_POWER_OTHER  0
@@ -57,6 +58,7 @@
 #define AI_FLAG_SCREENER              (1 << 14)  // AI prefers screening effects like reflect, mist, etc. TODO unfinished
 #define AI_FLAG_SMART_SWITCHING       (1 << 15)  // AI includes a lot more switching checks
 #define AI_FLAG_ACE_POKEMON           (1 << 16)  // AI has an Ace Pokemon. The last Pokemon in the party will not be used until it's the last one remaining.
+#define AI_FLAG_OMNISCIENT            (1 << 17)  // AI has full knowledge of player moves, abilities, hold items
 
 // 'other' ai logic flags
 #define AI_FLAG_ROAMING               (1 << 29)

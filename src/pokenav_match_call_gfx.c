@@ -49,7 +49,7 @@ struct Pokenav_MatchCallGfx
     u8 unusedTilemapBuffer[BG_SCREEN_SIZE];
     u8 bgTilemapBuffer2[BG_SCREEN_SIZE];
     u8 *trainerPicGfxPtr;
-    u8 trainerPicGfx[0x800];
+    u8 trainerPicGfx[TRAINER_PIC_SIZE];
     u8 trainerPicPal[0x20];
 };
 
@@ -333,7 +333,7 @@ static u32 LoopedTask_OpenMatchCall(s32 state)
         SetBgTilemapBuffer(2, gfx->bgTilemapBuffer2);
         CopyToBgTilemapBuffer(2, sMatchCallUI_Tilemap, 0, 0);
         CopyBgTilemapBufferToVram(2);
-        CopyPaletteIntoBufferUnfaded(sMatchCallUI_Pal, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
+        CopyPaletteIntoBufferUnfaded(sMatchCallUI_Pal, BG_PLTT_ID(2), sizeof(sMatchCallUI_Pal));
         CopyBgTilemapBufferToVram(2);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -343,7 +343,7 @@ static u32 LoopedTask_OpenMatchCall(s32 state)
         BgDmaFill(1, 0, 0, 1);
         SetBgTilemapBuffer(1, gfx->bgTilemapBuffer1);
         FillBgTilemapBufferRect_Palette0(1, 0x1000, 0, 0, 32, 20);
-        CopyPaletteIntoBufferUnfaded(sCallWindow_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+        CopyPaletteIntoBufferUnfaded(sCallWindow_Pal, BG_PLTT_ID(1), sizeof(sCallWindow_Pal));
         CopyBgTilemapBufferToVram(1);
         return LT_INC_AND_PAUSE;
     case 2:
@@ -352,7 +352,7 @@ static u32 LoopedTask_OpenMatchCall(s32 state)
 
         LoadCallWindowAndFade(gfx);
         DecompressAndCopyTileDataToVram(3, sPokeball_Gfx, 0, 0, 0);
-        CopyPaletteIntoBufferUnfaded(sListWindow_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
+        CopyPaletteIntoBufferUnfaded(sListWindow_Pal, BG_PLTT_ID(3), sizeof(sListWindow_Pal));
         CopyPaletteIntoBufferUnfaded(sPokeball_Pal, BG_PLTT_ID(5), PLTT_SIZE_4BPP);
         return LT_INC_AND_PAUSE;
     case 3:
@@ -913,9 +913,9 @@ static void Task_FlashPokeballIcons(u8 taskId)
         tSinIdx += 4;
         tSinIdx &= 0x7F;
         tSinVal = gSineTable[tSinIdx] >> 4;
-        PokenavCopyPalette(sPokeball_Pal, &sPokeball_Pal[0x10], 0x10, 0x10, tSinVal, &gPlttBufferUnfaded[0x50]);
+        PokenavCopyPalette(sPokeball_Pal, &sPokeball_Pal[0x10], 0x10, 0x10, tSinVal, &gPlttBufferUnfaded[BG_PLTT_ID(5)]);
         if (!gPaletteFade.active)
-            CpuCopy32(&gPlttBufferUnfaded[0x50], &gPlttBufferFaded[0x50], 0x20);
+            CpuCopy32(&gPlttBufferUnfaded[BG_PLTT_ID(5)], &gPlttBufferFaded[BG_PLTT_ID(5)], PLTT_SIZE_4BPP);
     }
 }
 
