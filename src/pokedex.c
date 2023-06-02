@@ -4552,7 +4552,9 @@ static void DrawFootprint(u8 windowId, u16 dexNum)
             // so we need 4 iterations to do all 8 pixels.
             for (j = 0; j < 4; j++)
             {
-                u8 tile = ((footprint1bpp >> (2 * j)) & 1 ? 2 : 0);
+                u8 tile = 0;
+                if (footprint1bpp & (1 << (2 * j)))
+                    tile |= FOOTPRINT_COLOR_IDX; // Set pixel
                 if (footprint1bpp & (2 << (2 * j)))
                     tile |= FOOTPRINT_COLOR_IDX << 4; // Set pixel
                 footprint4bpp[tileIdx] = tile;
