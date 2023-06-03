@@ -1090,14 +1090,11 @@ void Ability_(u32 sourceLine, u32 ability)
             break;
         }
     }
-
     // Store forced ability to be set when the battle starts if invalid.
     if (i == NUM_ABILITY_SLOTS)
     {
         DATA.forcedAbilities[DATA.currentSide][DATA.currentPartyIndex] = ability;
     }
-        
-    // INVALID_IF(i == NUM_ABILITY_SLOTS, "%S cannot have %S", gSpeciesNames[species], gAbilityNames[ability]);
 }
 
 void Level_(u32 sourceLine, u32 level)
