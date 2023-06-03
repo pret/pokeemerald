@@ -1090,7 +1090,14 @@ void Ability_(u32 sourceLine, u32 ability)
             break;
         }
     }
-    INVALID_IF(i == NUM_ABILITY_SLOTS, "%S cannot have %S", gSpeciesNames[species], gAbilityNames[ability]);
+
+    // Store forced ability to be set when the battle starts if invalid.
+    if (i == NUM_ABILITY_SLOTS)
+    {
+        DATA.forcedAbilities[DATA.currentSide][DATA.currentPartyIndex] = ability;
+    }
+        
+    // INVALID_IF(i == NUM_ABILITY_SLOTS, "%S cannot have %S", gSpeciesNames[species], gAbilityNames[ability]);
 }
 
 void Level_(u32 sourceLine, u32 level)
@@ -1773,4 +1780,9 @@ void ValidateFinally(u32 sourceLine)
     if (STATE->results == NULL)
         return;
     INVALID_IF(STATE->parametersCount == 0, "FINALLY without PARAMETRIZE");
+}
+
+u32 TestRunner_Battle_GetForcedAbility(u32 side, u32 partyIndex)
+{
+    return DATA.forcedAbilities[side][partyIndex];
 }
