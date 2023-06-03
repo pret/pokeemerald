@@ -1,7 +1,7 @@
-name: 🐛 Battle Engine mechanic bugs
-description: File a bug report related to battle mechanic, be it moves, abilities and/or items.
-title: "[Bug]: "
-labels: ["bug", "status: unconfirmed", "category: battle-mechanic"]
+name: 💾 Other errors 🖥️
+description: Everything else that doesn't fit in the above categories.
+title: ""
+labels: ["bug", "status: unconfirmed"]
 body:
   - type: markdown
     attributes:
@@ -24,17 +24,13 @@ body:
       label: Version
       description: What version of pokeemerald-expansion are you using as a base?
       options:
-        - 1.5.0 (Default)
         - upcoming (Edge)
+        - 1.5.0 (Default)
         - 1.4.3
         - 1.4.2
         - 1.4.1
         - 1.4.0
-        - 1.3.0
-        - 1.2.0
-        - 1.1.0
-        - 1.0.0
-        - pre-1.0.0
+        - pre-1.4.0
     validations:
       required: true
   - type: input
