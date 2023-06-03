@@ -1,5 +1,5 @@
-name: 🐛 Report a Battle Engine Bug
-description: File a bug report
+name: 🐛 Battle Engine mechanic bugs
+description: File a bug report related to battle mechanic, be it moves, abilities and/or items.
 title: "[Bug]: "
 labels: ["bug", "status: unconfirmed", "category: battle-mechanic"]
 body:
