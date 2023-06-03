@@ -1,6 +1,5 @@
 name: 🙏 Feature Request 🙏
 description: Do you want a feature to be added to the Expansion? Let us know!
-title: ""
 labels: ["feature-request"]
 body:
   - type: markdown

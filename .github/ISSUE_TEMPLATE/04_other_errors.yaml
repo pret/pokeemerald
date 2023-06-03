@@ -1,6 +1,5 @@
 name: 💾 Other errors 🖥️
 description: Everything else that doesn't fit in the above categories.
-title: ""
 labels: ["bug", "status: unconfirmed"]
 body:
   - type: markdown

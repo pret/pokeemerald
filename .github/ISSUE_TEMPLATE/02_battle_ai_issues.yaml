@@ -1,6 +1,5 @@
 name: 🧠 Battle AI bugs 🐛
 description: File a bug report related to battle AI.
-title: ""
 labels: ["bug", "status: unconfirmed", "category: battle-ai"]
 body:
   - type: markdown
