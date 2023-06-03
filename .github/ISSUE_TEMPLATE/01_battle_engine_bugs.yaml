@@ -1,6 +1,5 @@
 name: ⚔️ Battle Engine mechanical bugs 🐛
 description: File a bug report related to battle mechanic, be it moves, abilities and/or items.
-title: ""
 labels: ["bug", "status: unconfirmed", "category: battle-mechanic"]
 body:
   - type: markdown
