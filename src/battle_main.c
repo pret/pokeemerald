@@ -3307,7 +3307,8 @@ void SwitchInClearSetData(void)
     {
         u32 side = GetBattlerSide(gActiveBattler);
         u32 partyIndex = gBattlerPartyIndexes[gActiveBattler];
-        gBattleMons[gActiveBattler].ability = gBattleStruct->overwrittenAbilities[gActiveBattler] = TestRunner_Battle_GetForcedAbility(side, partyIndex);
+        if (TestRunner_Battle_GetForcedAbility(side, partyIndex))
+            gBattleMons[i].ability = gBattleStruct->overwrittenAbilities[i] = TestRunner_Battle_GetForcedAbility(side, partyIndex);
     }
 
     Ai_UpdateSwitchInData(gActiveBattler);
