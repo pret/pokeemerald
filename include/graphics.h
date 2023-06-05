@@ -3186,9 +3186,9 @@ extern const u16 gWallClockFemale_Pal[];
 extern const u32 gWallClockStart_Tilemap[];
 extern const u32 gWallClockView_Tilemap[];
 
-extern const u32 gBerryFixGameboy_Gfx[];
-extern const u32 gBerryFixGameboy_Tilemap[];
-extern const u16 gBerryFixGameboy_Pal[];
+extern const u32 gBerryFixGbaConnect_Gfx[];
+extern const u32 gBerryFixGbaConnect_Tilemap[];
+extern const u16 gBerryFixGbaConnect_Pal[];
 extern const u32 gBerryFixGameboyLogo_Gfx[];
 extern const u32 gBerryFixGameboyLogo_Tilemap[];
 extern const u16 gBerryFixGameboyLogo_Pal[];

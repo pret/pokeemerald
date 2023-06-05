@@ -8,9 +8,9 @@ static const struct {
     const u16 *pltt;
 } sBerryFixGraphics[] = {
     {
-        gBerryFixGameboy_Gfx,
-        gBerryFixGameboy_Tilemap,
-        gBerryFixGameboy_Pal
+        gBerryFixGbaConnect_Gfx,
+        gBerryFixGbaConnect_Tilemap,
+        gBerryFixGbaConnect_Pal
     }, {
         gBerryFixGameboyLogo_Gfx,
         gBerryFixGameboyLogo_Tilemap,
