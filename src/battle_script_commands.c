@@ -3872,12 +3872,15 @@ void SetMoveEffect(bool32 primary, u32 certain)
                         BattleScriptPush(gBattlescriptCurrInstr + 1);
                         gBattlescriptCurrInstr = BattleScript_ReduceDefenseAndFlinch;
                     }
-                    else if (randomLowerDefenseChance)
+                    else if (randomLowerDefenseChance && !randomFlinchChance)
                     {
                         BattleScriptPush(gBattlescriptCurrInstr + 1);
                         gBattlescriptCurrInstr = BattleScript_DefDown;
                     }
-                    else if (randomFlinchChance && battlerAbility != ABILITY_INNER_FOCUS && GetBattlerTurnOrderNum(gEffectBattler) > gCurrentTurnActionNumber)
+                    else if (randomFlinchChance
+                          && !randomLowerDefenseChance
+                          && battlerAbility != ABILITY_INNER_FOCUS
+                          && GetBattlerTurnOrderNum(gEffectBattler) > gCurrentTurnActionNumber)
                     {
                         gBattleMons[gEffectBattler].status2 |= sStatusFlagsForMoveEffects[MOVE_EFFECT_FLINCH];
                         gBattlescriptCurrInstr++;
