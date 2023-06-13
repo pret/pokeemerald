@@ -25,7 +25,7 @@ SINGLE_BATTLE_TEST("Triple Arrows lowers Defense by one stage")
     }
 }
 
-SINGLE_BATTLE_TEST("Triple Arrows make the foe flinch 30% of the time")
+SINGLE_BATTLE_TEST("Triple Arrows makes the foe flinch 30% of the time")
 {
     u32 ability;
     u32 chance;
