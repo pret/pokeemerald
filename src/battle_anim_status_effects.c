@@ -442,10 +442,10 @@ static void AnimTask_FrozenIceCube_Step2(u8 taskId)
         {
             u16 temp;
 
-            temp = gPlttBufferFaded[0x100 + palIndex * 16 + 13];
-            gPlttBufferFaded[0x100 + palIndex * 16 + 13] = gPlttBufferFaded[0x100 + palIndex * 16 + 14];
-            gPlttBufferFaded[0x100 + palIndex * 16 + 14] = gPlttBufferFaded[0x100 + palIndex * 16 + 15];
-            gPlttBufferFaded[0x100 + palIndex * 16 + 15] = temp;
+            temp = gPlttBufferFaded[OBJ_PLTT_ID(palIndex) + 13];
+            gPlttBufferFaded[OBJ_PLTT_ID(palIndex) + 13] = gPlttBufferFaded[OBJ_PLTT_ID(palIndex) + 14];
+            gPlttBufferFaded[OBJ_PLTT_ID(palIndex) + 14] = gPlttBufferFaded[OBJ_PLTT_ID(palIndex) + 15];
+            gPlttBufferFaded[OBJ_PLTT_ID(palIndex) + 15] = temp;
 
             gTasks[taskId].data[2] = 0;
             gTasks[taskId].data[3]++;

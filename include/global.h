@@ -147,6 +147,9 @@
 #define CAT(a, b) CAT_(a, b)
 #define CAT_(a, b) a ## b
 
+#define STR(a) STR_(a)
+#define STR_(a) #a
+
 // Converts a string to a compound literal, essentially making it a pointer to const u8
 #define COMPOUND_STRING(str) (const u8[]) _(str)
 

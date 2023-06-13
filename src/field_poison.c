@@ -15,6 +15,7 @@
 #include "task.h"
 #include "trainer_hill.h"
 #include "constants/field_poison.h"
+#include "constants/form_change_types.h"
 #include "constants/party_menu.h"
 
 static bool32 IsMonValidSpecies(struct Pokemon *pokemon)
@@ -135,10 +136,14 @@ s32 DoPoisonFieldEffect(void)
             hp = GetMonData(pokemon, MON_DATA_HP);
         #if OW_POISON_DAMAGE < GEN_4
             if (hp == 0 || --hp == 0)
+            {
+                TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_FAINT);
+                numFainted++;
+            }
         #else
             if (hp == 1 || --hp == 1)
-        #endif
                 numFainted++;
+        #endif
 
             SetMonData(pokemon, MON_DATA_HP, &hp);
             numPoisoned++;

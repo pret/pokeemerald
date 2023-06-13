@@ -27,10 +27,10 @@ SINGLE_BATTLE_TEST("Grassy Terrain activates Grassy Seed and Mimicry")
         TURN { MOVE(player, MOVE_GRASSY_TERRAIN); }
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Using Grassy Seed, the defense of Wobbuffet rose!");
+        MESSAGE("Using Grassy Seed, the Defense of Wobbuffet rose!");
         ABILITY_POPUP(opponent);
         MESSAGE("Foe Stunfisk's type changed to Grass!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].type1, TYPE_GRASS);
     }
 }
@@ -82,5 +82,34 @@ SINGLE_BATTLE_TEST("Grassy Terrain decreases power of Earthquake and Bulldoze by
     } FINALLY {
         EXPECT_MUL_EQ(results[0].damage, Q_4_12(0.5), results[1].damage);
         EXPECT_MUL_EQ(results[2].damage, Q_4_12(0.5), results[3].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Grassy Terrain lasts for 5 turns")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_GRASSY_TERRAIN); }
+        TURN {}
+        TURN {}
+        TURN {}
+        TURN {}
+    } SCENE {
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GRASSY_TERRAIN, player);
+        MESSAGE("Grass grew to cover the battlefield!");
+
+        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+
+        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+
+        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+
+        MESSAGE("The grass disappeared from the battlefield.");
     }
 }

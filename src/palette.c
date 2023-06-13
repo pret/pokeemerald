@@ -64,7 +64,7 @@ static EWRAM_DATA struct PaletteStruct sPaletteStructs[NUM_PALETTE_STRUCTS] = {0
 EWRAM_DATA struct PaletteFadeControl gPaletteFade = {0};
 static EWRAM_DATA u32 sFiller = 0;
 static EWRAM_DATA u32 sPlttBufferTransferPending = 0;
-EWRAM_DATA u8 gPaletteDecompressionBuffer[PLTT_DECOMP_BUFFER_SIZE] = {0};
+EWRAM_DATA u8 gPaletteDecompressionBuffer[PLTT_SIZE] = {0};
 
 static const struct PaletteStructTemplate sDummyPaletteStructTemplate = {
     .id = 0xFFFF,
@@ -148,7 +148,7 @@ static void ReadPlttIntoBuffers(void)
     u16 i;
     u16 *pltt = (u16 *)PLTT;
 
-    for (i = 0; i < PLTT_SIZE / 2; i++)
+    for (i = 0; i < PLTT_BUFFER_SIZE; i++)
     {
         gPlttBufferUnfaded[i] = pltt[i];
         gPlttBufferFaded[i] = pltt[i];
@@ -592,13 +592,13 @@ static u8 UpdateFastPaletteFade(void)
 
     if (gPaletteFade.objPaletteToggle)
     {
-        paletteOffsetStart = 256;
-        paletteOffsetEnd = 512;
+        paletteOffsetStart = OBJ_PLTT_OFFSET;
+        paletteOffsetEnd = PLTT_BUFFER_SIZE;
     }
     else
     {
         paletteOffsetStart = 0;
-        paletteOffsetEnd = 256;
+        paletteOffsetEnd = OBJ_PLTT_OFFSET;
     }
 
     switch (gPaletteFade_submode)

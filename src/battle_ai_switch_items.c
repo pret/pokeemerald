@@ -1079,7 +1079,7 @@ static bool8 ShouldUseItem(void)
                 shouldUse = TRUE;
             if (itemEffects[3] & ITEM3_BURN && gBattleMons[gActiveBattler].status1 & STATUS1_BURN)
                 shouldUse = TRUE;
-            if (itemEffects[3] & ITEM3_FREEZE && gBattleMons[gActiveBattler].status1 & STATUS1_FREEZE)
+            if (itemEffects[3] & ITEM3_FREEZE && (gBattleMons[gActiveBattler].status1 & STATUS1_FREEZE || gBattleMons[gActiveBattler].status1 & STATUS1_FROSTBITE))
                 shouldUse = TRUE;
             if (itemEffects[3] & ITEM3_PARALYSIS && gBattleMons[gActiveBattler].status1 & STATUS1_PARALYSIS)
                 shouldUse = TRUE;

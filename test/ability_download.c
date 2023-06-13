@@ -7,7 +7,7 @@ ASSUMPTIONS
     ASSUME(gBattleMoves[MOVE_TRI_ATTACK].split == SPLIT_SPECIAL);
 }
 
-SINGLE_BATTLE_TEST("Download raises Attack if player has lower Def than Sp.Def", s16 damage)
+SINGLE_BATTLE_TEST("Download raises Attack if player has lower Def than Sp. Def", s16 damage)
 {
     u32 ability;
     PARAMETRIZE { ability = ABILITY_TRACE; }
@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Download raises Attack if player has lower Def than Sp.Def",
         {
             ABILITY_POPUP(opponent, ABILITY_DOWNLOAD);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Foe Porygon's Download raised its attack!");
+            MESSAGE("Foe Porygon's Download raised its Attack!");
         }
         HP_BAR(player, captureDamage: &results[i].damage);
     } FINALLY {
@@ -30,7 +30,7 @@ SINGLE_BATTLE_TEST("Download raises Attack if player has lower Def than Sp.Def",
     }
 }
 
-SINGLE_BATTLE_TEST("Download raises Sp.Attack if enemy has lower Sp.Def than Def", s16 damage)
+SINGLE_BATTLE_TEST("Download raises Sp.Attack if enemy has lower Sp. Def than Def", s16 damage)
 {
     u32 ability;
     PARAMETRIZE { ability = ABILITY_TRACE; }
@@ -45,7 +45,7 @@ SINGLE_BATTLE_TEST("Download raises Sp.Attack if enemy has lower Sp.Def than Def
         {
             ABILITY_POPUP(player, ABILITY_DOWNLOAD);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Porygon's Download raised its sp. attack!");
+            MESSAGE("Porygon's Download raised its Sp. Atk!");
         }
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
@@ -79,10 +79,10 @@ SINGLE_BATTLE_TEST("Download doesn't activate if target hasn't been sent out yet
         {
             ABILITY_POPUP(player, ABILITY_DOWNLOAD);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Porygon's Download raised its attack!");
+            MESSAGE("Porygon's Download raised its Attack!");
             ABILITY_POPUP(opponent, ABILITY_DOWNLOAD);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Foe Porygon2's Download raised its sp. attack!");
+            MESSAGE("Foe Porygon2's Download raised its Sp. Atk!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
         HP_BAR(opponent, captureDamage: &results[i].damagePhysical);

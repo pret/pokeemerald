@@ -251,6 +251,7 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_SWALLOW]                    = 3,
 //    [EFFECT_UNUSED_A3]                = 1,
     [EFFECT_HAIL]                       = 4,
+    [EFFECT_SNOWSCAPE]                  = 4,
     [EFFECT_TORMENT]                    = 7,
     [EFFECT_FLATTER]                    = 7,
     [EFFECT_WILL_O_WISP]                = 5,
@@ -481,6 +482,7 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_DOUBLE_SHOCK]               = 0, // TODO: Assign points
     [EFFECT_SPECIAL_ATTACK_UP_HIT]      = 1,
     [EFFECT_VICTORY_DANCE]              = 0, // TODO: Assign points
+    [EFFECT_FROSTBITE_HIT]              = 1,
 };
 
 static const u16 sPoints_Effectiveness[] =
@@ -1769,6 +1771,6 @@ static void AddPointsBasedOnWeather(u16 weatherFlags, u16 moveId, u8 moveSlot)
         AddMovePoints(PTS_SUN, moveId, moveSlot, 0);
     else if (weatherFlags & B_WEATHER_SANDSTORM)
         AddMovePoints(PTS_SANDSTORM, moveId, moveSlot, 0);
-    else if (weatherFlags & B_WEATHER_HAIL)
+    else if (weatherFlags & (B_WEATHER_HAIL | B_WEATHER_SNOW))
         AddMovePoints(PTS_HAIL, moveId, moveSlot, 0);
 }

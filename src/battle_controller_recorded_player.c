@@ -1335,6 +1335,7 @@ static void RecordedPlayerHandleMoveAnimation(void)
         gWeatherMoveAnim = gBattleResources->bufferA[gActiveBattler][12] | (gBattleResources->bufferA[gActiveBattler][13] << 8);
         gAnimDisableStructPtr = (struct DisableStruct *)&gBattleResources->bufferA[gActiveBattler][16];
         gTransformedPersonalities[gActiveBattler] = gAnimDisableStructPtr->transformedMonPersonality;
+        gTransformedOtIds[gActiveBattler] = gAnimDisableStructPtr->transformedMonOtId;
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
         gBattlerControllerFuncs[gActiveBattler] = RecordedPlayerDoMoveAnimation;
     }
@@ -1465,6 +1466,8 @@ static void RecordedPlayerHandleChooseItem(void)
     u8 byte1 = RecordedBattle_GetBattlerAction(RECORDED_ITEM_ID, gActiveBattler);
     u8 byte2 = RecordedBattle_GetBattlerAction(RECORDED_ITEM_ID, gActiveBattler);
     gBattleStruct->chosenItem[gActiveBattler] = (byte1 << 8) | byte2;
+    gBattleStruct->itemPartyIndex[gActiveBattler] = RecordedBattle_GetBattlerAction(RECORDED_ITEM_TARGET, gActiveBattler);
+    gBattleStruct->itemMoveIndex[gActiveBattler] = RecordedBattle_GetBattlerAction(RECORDED_ITEM_MOVE, gActiveBattler);
     BtlController_EmitOneReturnValue(BUFFER_B, gBattleStruct->chosenItem[gActiveBattler]);
     RecordedPlayerBufferExecCompleted();
 }

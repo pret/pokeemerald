@@ -4247,6 +4247,10 @@ Cry_LandorusTherian::
 	.incbin "sound/direct_sound_samples/cries/landorus_therian.bin"
 
 	.align 2
+Cry_EnamorusTherian::
+	.incbin "sound/direct_sound_samples/cries/enamorus_therian.bin"
+
+	.align 2
 Cry_KyuremWhite::
 	.incbin "sound/direct_sound_samples/cries/kyurem_white.bin"
 
@@ -4359,10 +4363,6 @@ Cry_CalyrexIceRider::
 	.align 2
 Cry_CalyrexShadowRider::
 	.incbin "sound/direct_sound_samples/cries/calyrex_shadow_rider.bin"
-
-	.align 2
-Cry_EnamorusTherian::
-	.incbin "sound/direct_sound_samples/cries/enamorus_therian.bin"
 
 .endif
 

@@ -31,10 +31,10 @@ SINGLE_BATTLE_TEST("Misty Terrain activates Misty Seed and Mimicry")
         TURN { MOVE(player, MOVE_MISTY_TERRAIN); }
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Using Misty Seed, the sp. defense of Wobbuffet rose!");
+        MESSAGE("Using Misty Seed, the Sp. Def of Wobbuffet rose!");
         ABILITY_POPUP(opponent);
         MESSAGE("Foe Stunfisk's type changed to Fairy!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].type1, TYPE_FAIRY);
     }
 }
@@ -76,5 +76,34 @@ SINGLE_BATTLE_TEST("Misty Terrain decreases power of Dragon-type moves by 50 per
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
         EXPECT_MUL_EQ(results[0].damage, Q_4_12(0.5), results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Misty Terrain lasts for 5 turns")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_MISTY_TERRAIN); }
+        TURN {}
+        TURN {}
+        TURN {}
+        TURN {}
+    } SCENE {
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MISTY_TERRAIN, player);
+        MESSAGE("Mist swirled about the battlefield!");
+
+        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+
+        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+
+        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+
+        MESSAGE("The mist disappeared from the battlefield.");
     }
 }

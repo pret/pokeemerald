@@ -228,9 +228,11 @@ static void Intro_DelayAndEnd(void)
     }
 }
 
-static bool32 TwoIntroMons(u32 battlerId) // Double battle with both player pokemon active.
+static bool32 TwoIntroMons(u32 battlerId) // Double battle with both opponent pokemon active.
 {
-    return (IsDoubleBattle() && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battlerId)]]));
+    return (IsDoubleBattle()
+            && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[battlerId]])
+            && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battlerId)]]));
 }
 
 static void Intro_WaitForShinyAnimAndHealthbox(void)
@@ -1468,6 +1470,7 @@ static void OpponentHandleMoveAnimation(void)
         gWeatherMoveAnim = gBattleResources->bufferA[gActiveBattler][12] | (gBattleResources->bufferA[gActiveBattler][13] << 8);
         gAnimDisableStructPtr = (struct DisableStruct *)&gBattleResources->bufferA[gActiveBattler][16];
         gTransformedPersonalities[gActiveBattler] = gAnimDisableStructPtr->transformedMonPersonality;
+        gTransformedOtIds[gActiveBattler] = gAnimDisableStructPtr->transformedMonOtId;
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
         gBattlerControllerFuncs[gActiveBattler] = OpponentDoMoveAnimation;
     }
@@ -1969,7 +1972,7 @@ static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite)
 
 static void Task_StartSendOutAnim(u8 taskId)
 {
-    u8 savedActiveBank = gActiveBattler;
+    u8 savedActiveBattler = gActiveBattler;
 
     gActiveBattler = gTasks[taskId].data[0];
     if ((!TwoIntroMons(gActiveBattler) || (gBattleTypeFlags & BATTLE_TYPE_MULTI)) && !BATTLE_TWO_VS_ONE_OPPONENT)
@@ -1977,7 +1980,7 @@ static void Task_StartSendOutAnim(u8 taskId)
         gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         StartSendOutAnim(gActiveBattler, FALSE);
     }
-    else if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS))
+    else if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) || (BATTLE_TWO_VS_ONE_OPPONENT && !TwoIntroMons(gActiveBattler)))
     {
         gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         StartSendOutAnim(gActiveBattler, FALSE);
@@ -1992,7 +1995,7 @@ static void Task_StartSendOutAnim(u8 taskId)
         gActiveBattler ^= BIT_FLANK;
     }
     gBattlerControllerFuncs[gActiveBattler] = Intro_TryShinyAnimShowHealthbox;
-    gActiveBattler = savedActiveBank;
+    gActiveBattler = savedActiveBattler;
     DestroyTask(taskId);
 }
 

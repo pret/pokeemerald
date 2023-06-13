@@ -383,17 +383,17 @@ static void AnimTask_AnimateGustTornadoPalette_Step(u8 taskId)
     {
         gTasks[taskId].data[10] = 0;
         data2 = gTasks[taskId].data[2];
-        temp = gPlttBufferFaded[16 * data2 + 0x108];
+        temp = gPlttBufferFaded[OBJ_PLTT_ID(data2) + 8];
         i = 7;
-        base = data2 * 16;
+        base = PLTT_ID(data2);
 
         do
         {
-            gPlttBufferFaded[base + 0x101 + i] = gPlttBufferFaded[base + 0x100 + i];
+            gPlttBufferFaded[base + OBJ_PLTT_OFFSET + 1 + i] = gPlttBufferFaded[base + OBJ_PLTT_OFFSET + i];
             i--;
         } while (i > 0);
 
-        gPlttBufferFaded[base + 0x101] = temp;
+        gPlttBufferFaded[base + OBJ_PLTT_OFFSET + 1] = temp;
     }
 
     if (--gTasks[taskId].data[0] == 0)

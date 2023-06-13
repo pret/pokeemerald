@@ -31,10 +31,10 @@ SINGLE_BATTLE_TEST("Electric Terrain activates Electric Seed and Mimicry")
         TURN { MOVE(player, MOVE_ELECTRIC_TERRAIN); }
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Using Electric Seed, the defense of Wobbuffet rose!");
+        MESSAGE("Using Electric Seed, the Defense of Wobbuffet rose!");
         ABILITY_POPUP(opponent);
         MESSAGE("Foe Stunfisk's type changed to Electr!");
-    } FINALLY {
+    } THEN {
         EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].type1, TYPE_ELECTRIC);
     }
 }
@@ -59,5 +59,34 @@ SINGLE_BATTLE_TEST("Electric Terrain increases power of Electric-type moves by 3
             EXPECT_MUL_EQ(results[0].damage, Q_4_12(1.3), results[1].damage);
         else
             EXPECT_MUL_EQ(results[0].damage, Q_4_12(1.5), results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Electric Terrain lasts for 5 turns")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_ELECTRIC_TERRAIN); }
+        TURN {}
+        TURN {}
+        TURN {}
+        TURN {}
+    } SCENE {
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ELECTRIC_TERRAIN, player);
+        MESSAGE("An electric current runs across the battlefield!");
+
+        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+
+        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+
+        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Foe Wobbuffet used Celebrate!");
+
+        MESSAGE("The electricity disappeared from the battlefield.");
     }
 }

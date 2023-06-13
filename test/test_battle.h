@@ -333,7 +333,7 @@
  * Used when the battler chooses to switch to another Pokémon but not
  * via Switch, e.g. after fainting or due to a U-turn.
  *     SEND_OUT(player, 1);
- * 
+ *
  * USE_ITEM(battler, itemId, [partyIndex:], [move:])
  * Used when the battler chooses to use an item from the Bag. The item
  * ID must be specified, and party index and move slot if applicable, e.g:
@@ -369,7 +369,7 @@
  *     s16 damage;
  *     HP_BAR(player, captureDamage: &damage);
  * If none of the above are used, causes the test to fail if the HP
- * changes at all.
+ * does not change at all.
  *
  * MESSAGE(pattern)
  * Causes the test to fail if the message in pattern is not displayed.
@@ -526,8 +526,7 @@ struct QueuedMessageEvent
 struct QueuedStatusEvent
 {
     u32 battlerId:3;
-    u32 mask:8;
-    u32 unused_01:21;
+    u32 mask:29;
 };
 
 struct QueuedEvent
@@ -615,6 +614,7 @@ struct BattleTestRunnerState
     bool8 runThen:1;
     bool8 runFinally:1;
     bool8 runningFinally:1;
+    bool8 tearDownBattle:1;
     struct BattleTestData data;
     u8 *results;
     u8 checkProgressParameter;
@@ -713,6 +713,11 @@ void Randomly(u32 sourceLine, u32 passes, u32 trials, struct RandomlyContext);
 
 /* Given */
 
+struct moveWithPP {
+    u16 moveId;
+    u8 pp;
+};
+
 #define GIVEN for (; gBattleTestRunnerState->runGiven; gBattleTestRunnerState->runGiven = FALSE)
 
 #define RNGSeed(seed) RNGSeed_(__LINE__, seed)
@@ -733,6 +738,7 @@ void Randomly(u32 sourceLine, u32 passes, u32 trials, struct RandomlyContext);
 #define Speed(speed) Speed_(__LINE__, speed)
 #define Item(item) Item_(__LINE__, item)
 #define Moves(move1, ...) Moves_(__LINE__, (const u16 [MAX_MON_MOVES]) { move1, __VA_ARGS__ })
+#define MovesWithPP(movewithpp1, ...) MovesWithPP_(__LINE__, (struct moveWithPP[MAX_MON_MOVES]) {movewithpp1, __VA_ARGS__})
 #define Friendship(friendship) Friendship_(__LINE__, friendship)
 #define Status1(status1) Status1_(__LINE__, status1)
 
@@ -753,6 +759,7 @@ void SpDefense_(u32 sourceLine, u32 spDefense);
 void Speed_(u32 sourceLine, u32 speed);
 void Item_(u32 sourceLine, u32 item);
 void Moves_(u32 sourceLine, const u16 moves[MAX_MON_MOVES]);
+void MovesWithPP_(u32 sourceLine, struct moveWithPP moveWithPP[MAX_MON_MOVES]);
 void Friendship_(u32 sourceLine, u32 friendship);
 void Status1_(u32 sourceLine, u32 status1);
 
@@ -872,6 +879,7 @@ struct StatusEventContext
     bool8 freeze:1;
     bool8 paralysis:1;
     bool8 badPoison:1;
+    bool8 frostbite:1;
 };
 
 void OpenQueueGroup(u32 sourceLine, enum QueueGroupType);
@@ -889,7 +897,9 @@ void QueueStatus(u32 sourceLine, struct BattlePokemon *battler, struct StatusEve
 
 /* Finally */
 
-#define FINALLY for (; gBattleTestRunnerState->runFinally; gBattleTestRunnerState->runFinally = FALSE) if ((gBattleTestRunnerState->runningFinally = TRUE))
+#define FINALLY for (ValidateFinally(__LINE__); gBattleTestRunnerState->runFinally; gBattleTestRunnerState->runFinally = FALSE) if ((gBattleTestRunnerState->runningFinally = TRUE))
+
+void ValidateFinally(u32 sourceLine);
 
 /* Expect */
 
