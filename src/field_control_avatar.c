@@ -118,7 +118,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
     {
         if (tileTransitionState == T_TILE_CENTER && runningState == MOVING)
             input->tookStep = TRUE;
-        if (forcedMove == FALSE && tileTransitionState == T_TILE_CENTER)
+        if (forcedMove == FALSE && tileTransitionState == T_TILE_CENTER && !gPlayerAvatar.preventStep)
             input->checkStandardWildEncounter = TRUE;
     }
 
