@@ -436,54 +436,8 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectAxeKick                 @ EFFECT_AXE_KICK
 
 BattleScript_EffectAxeKick::
-	attackcanceler
-	accuracycheck BattleScript_AxeKickMissedDoDamage, ACC_CURR_MOVE
-	typecalc
-	jumpifhalfword CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE, BattleScript_AxeKickMissedDoDamage
-	goto BattleScript_AxeKickHitFromAtkString
-BattleScript_AxeKickMissedDoDamage::
-	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_PrintMoveMissed
-	attackstring
-	ppreduce
-	pause B_WAIT_TIME_LONG
-	resultmessage
-	waitmessage B_WAIT_TIME_LONG
-	printstring STRINGID_PKMNCRASHED
-	waitmessage B_WAIT_TIME_LONG
-	damagecalc
-	typecalc
-	adjustdamage
-	manipulatedamage DMG_RECOIL_FROM_MISS
-	bichalfword gMoveResultFlags, MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE
-	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE
-	healthbarupdate BS_ATTACKER
-	datahpupdate BS_ATTACKER
-	tryfaintmon BS_ATTACKER
-	orhalfword gMoveResultFlags, MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE
-	goto BattleScript_MoveEnd
-
-BattleScript_AxeKickHitFromAtkString:
-	attackstring
-	ppreduce
-	critcalc
-	damagecalc
-	adjustdamage
-	attackanimation
-	waitanimation
-	effectivenesssound
-	hitanimation BS_TARGET
-	waitstate
-	healthbarupdate BS_TARGET
-	datahpupdate BS_TARGET
-	critmessage
-	waitmessage B_WAIT_TIME_LONG
-	resultmessage
-	waitmessage B_WAIT_TIME_LONG
 	setmoveeffect MOVE_EFFECT_CONFUSION
-	seteffectwithchance
-	tryfaintmon BS_TARGET
-	moveendall
-	end
+	goto BattleScript_EffectRecoilIfMiss
 
 BattleScript_EffectTakeHeart::
 	attackcanceler
