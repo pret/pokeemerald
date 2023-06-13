@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(gBattleMoves[MOVE_TRIPLE_ARROWS].effect == EFFECT_TRIPLE_ARROWS);
 }
 
-SINGLE_BATTLE_TEST("Triple Arrows lowers Defense by one stage")
+SINGLE_BATTLE_TEST("Triple Arrows may lower Defense by one stage")
 {
     u32 ability;
     u32 chance;
@@ -21,7 +21,7 @@ SINGLE_BATTLE_TEST("Triple Arrows lowers Defense by one stage")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TRIPLE_ARROWS, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("Foe Wobbuffet's defense fell!");
+        MESSAGE("Foe Wobbuffet's Defense fell!");
     }
 }
 
@@ -69,7 +69,7 @@ SINGLE_BATTLE_TEST("Triple Arrows can lower Defense and cause flinch at the time
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TRIPLE_ARROWS, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("Foe Wobbuffet's defense fell!");
+        MESSAGE("Foe Wobbuffet's Defense fell!");
         MESSAGE("Foe Wobbuffet flinched!");
     }
 }
