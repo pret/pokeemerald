@@ -2644,8 +2644,11 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
              && !(gBattleMons[battlerAtk].status1 & STATUS1_ANY)
              && !(gBattleMons[BATTLE_PARTNER(battlerAtk)].status1 & STATUS1_ANY))
                 score -= 10;
-            else if (AI_DATA->hpPercents[battlerAtk] >= 90 || AI_DATA->hpPercents[BATTLE_PARTNER(battlerAtk)] >= 90)
-                score -= 9; //No point in healing, but should at least do it if nothing better
+            else if (gBattleMons[battlerAtk].status1 & STATUS1_ANY
+                  || gBattleMons[BATTLE_PARTNER(battlerAtk)].status1 & STATUS1_ANY
+                  || AI_DATA->hpPercents[battlerAtk] >= 90
+                  || AI_DATA->hpPercents[BATTLE_PARTNER(battlerAtk)] >= 90)
+                score -= 9; // No point in healing, but should at least do it if there's nothing better or if it's afflicted by a status ailment.
             break;
         case EFFECT_TAKE_HEART:
             if ((!(gBattleMons[battlerAtk].status1 & STATUS1_ANY)
@@ -2654,6 +2657,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
              || PartnerMoveIs(BATTLE_PARTNER(battlerAtk), AI_DATA->partnerMove, MOVE_AROMATHERAPY))
              && !BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_SPATK)
              && !BattlerStatCanRise(battlerAtk, AI_DATA->abilities[battlerAtk], STAT_SPDEF))
+                score -= 10;
             break;
         case EFFECT_PLACEHOLDER:
             return 0;   // cannot even select
@@ -4893,9 +4897,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         //break;
     case EFFECT_JUNGLE_HEALING:
         if (ShouldRecover(battlerAtk, battlerDef, move, 25)
-         || ShouldRecover(battlerAtk, BATTLE_PARTNER(battlerDef), move, 25)
          || ShouldRecover(BATTLE_PARTNER(battlerAtk), battlerDef, move, 25)
-         || ShouldRecover(BATTLE_PARTNER(battlerAtk), BATTLE_PARTNER(battlerDef), move, 25)
          || gBattleMons[battlerAtk].status1 & STATUS1_ANY
          || gBattleMons[BATTLE_PARTNER(battlerAtk)].status1 & STATUS1_ANY)
             score += 3;

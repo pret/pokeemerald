@@ -443,7 +443,7 @@ BattleScript_EffectTakeHeart::
 	attackcanceler
 	attackstring
 	ppreduce
-	cureifburnedparalysedorpoisoned BattleScript_EffectTakeHeart_TryToRaiseStats
+	cureifburnedparalysedorpoisoned BattleScript_CalmMindTryToRaiseStats
 	attackanimation
 	waitanimation
 	updatestatusicon BS_ATTACKER
@@ -451,11 +451,6 @@ BattleScript_EffectTakeHeart::
 	waitmessage B_WAIT_TIME_LONG
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPATK, MAX_STAT_STAGE, BattleScript_CalmMindStatRaise
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPDEF, MAX_STAT_STAGE, BattleScript_CalmMindStatRaise
-	goto BattleScript_CantRaiseMultipleStats
-
-BattleScript_EffectTakeHeart_TryToRaiseStats:
-	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPATK, MAX_STAT_STAGE, BattleScript_CalmMindDoMoveAnim
-	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPDEF, MAX_STAT_STAGE, BattleScript_CalmMindDoMoveAnim
 	goto BattleScript_CantRaiseMultipleStats
 
 BattleScript_EffectTripleArrows::
@@ -1520,7 +1515,6 @@ BattleScript_DefDown_Ret:
 
 BattleScript_ReduceDefenseAndFlinch::
 	modifybattlerstatstage BS_TARGET, STAT_DEF, DECREASE, 1, BattleScript_DefDownAndFlinch_Ret, ANIM_ON
-	jumpifability BS_TARGET, ABILITY_INNER_FOCUS, BattleScript_DefDownAndFlinch_Ret
 	setmoveeffect MOVE_EFFECT_FLINCH
 	seteffectprimary
 BattleScript_DefDownAndFlinch_Ret:
@@ -6389,6 +6383,7 @@ BattleScript_EffectCalmMind::
 	attackcanceler
 	attackstring
 	ppreduce
+BattleScript_CalmMindTryToRaiseStats::
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPATK, MAX_STAT_STAGE, BattleScript_CalmMindDoMoveAnim
 	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPDEF, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
 BattleScript_CalmMindDoMoveAnim::
