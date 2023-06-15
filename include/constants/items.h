@@ -275,12 +275,14 @@
 #define ITEM_0F5 245
 #define ITEM_0F6 246
 #define ITEM_0F7 247
-#define ITEM_0F8 248
-#define ITEM_0F9 249
-#define ITEM_0FA 250
-#define ITEM_0FB 251
-#define ITEM_0FC 252
-#define ITEM_0FD 253
+
+// HM Items
+#define ITEM_SURFBOARD 248
+#define ITEM_AXE 249
+#define ITEM_HAMMER 250
+#define ITEM_DIVING_SUIT 251
+#define ITEM_LANTERN 252
+#define ITEM_POWER_GLOVE 253
 
 // Contest held items
 #define ITEM_RED_SCARF 254

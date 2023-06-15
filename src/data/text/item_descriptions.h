@@ -947,6 +947,37 @@ static const u8 sStickDesc[] = _(
     "raises FARFETCH'D's\n"
     "critical-hit ratio.");
 
+// HM Items
+static const u8 sSurfboardDesc[] = _(
+	"This flat board\n"
+    "is shaped for\n"
+    "riding waves.");
+
+static const u8 sAxeDesc[] = _(
+	"A small cutting\n"
+    "instrument best for\n"
+    "clearing bushes.");
+
+static const u8 sHammerDesc[] = _(
+	"A small rubber\n"
+    "mallet. It may can\n"
+    "smash rocks.");
+
+static const u8 sDivingSuitDesc[] = _(
+	"Portable suit made\n"
+    "for diving from\n"
+    "the SURFBOARD.");
+
+static const u8 sLanternDesc[] = _(
+	"A bright lantern\n"
+    "that can light dark\n"
+    "caves.");
+
+static const u8 sPowerGloveDesc[] = _(
+	"A special glove\n"
+    "that makes moving\n"
+    "heavy rocks easy.");
+
 static const u8 sRedScarfDesc[] = _(
     "A hold item that\n"
     "raises COOL in\n"
