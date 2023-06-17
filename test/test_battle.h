@@ -574,6 +574,7 @@ struct BattleTestData
     struct Pokemon *currentMon;
     u8 gender;
     u8 nature;
+    u16 forcedAbilities[NUM_BATTLE_SIDES][PARTY_SIZE];
 
     u8 currentMonIndexes[MAX_BATTLERS_COUNT];
     u8 turnState;
