@@ -88,7 +88,6 @@ IslandCave_EventScript_ClearSteps::
 	return
 
 IslandCave_EventScript_Regice::
-	bufferspeciesname 0, SPECIES_REGICE
 	lock
 	faceplayer
 	waitse
