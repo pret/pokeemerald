@@ -17,6 +17,8 @@ void TestRunner_Battle_AfterLastTurn(void);
 
 void TestRunner_Battle_CheckBattleRecordActionType(u32 battlerId, u32 recordIndex, u32 actionType);
 
+u32 TestRunner_Battle_GetForcedAbility(u32 side, u32 partyIndex);
+
 #else
 
 #define TestRunner_Battle_RecordAbilityPopUp(...) (void)0
@@ -27,6 +29,8 @@ void TestRunner_Battle_CheckBattleRecordActionType(u32 battlerId, u32 recordInde
 #define TestRunner_Battle_AfterLastTurn(...) (void)0
 
 #define TestRunner_Battle_CheckBattleRecordActionType(...) (void)0
+
+#define TestRunner_Battle_GetForcedAbility(...) (u32)0
 
 #endif
 
