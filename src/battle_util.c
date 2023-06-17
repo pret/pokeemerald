@@ -9900,6 +9900,29 @@ static u16 GetInverseTypeMultiplier(u16 multiplier)
     }
 }
 
+u16 GetTypeEffectiveness(struct Pokemon *mon, u8 moveType)
+{
+    u16 modifier = UQ_4_12(1.0);
+    u16 abilityDef = GetMonAbility(mon);
+    u16 speciesDef = GetMonData(&mon, MON_DATA_SPECIES);
+    u8 type1 = gSpeciesInfo[speciesDef].types[0];
+    u8 type2 = gSpeciesInfo[speciesDef].types[1];
+
+    if (moveType != TYPE_MYSTERY)
+    {
+        MulByTypeEffectiveness(&modifier, MOVE_POUND, moveType, 0, type1, 0, FALSE);
+        if (type2 != type1)
+            MulByTypeEffectiveness(&modifier, MOVE_POUND, moveType, 0, type2, 0, FALSE);
+
+        if (moveType == TYPE_GROUND && abilityDef == ABILITY_LEVITATE)
+            modifier = UQ_4_12(0.0);
+        if (abilityDef == ABILITY_WONDER_GUARD && modifier <= UQ_4_12(1.0))
+            modifier = UQ_4_12(0.0);
+    }
+    
+    return modifier;
+}
+
 u16 GetTypeModifier(u8 atkType, u8 defType)
 {
 #if B_FLAG_INVERSE_BATTLE != 0

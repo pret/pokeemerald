@@ -2489,6 +2489,12 @@ void SetLinkContestPlayerGfx(void)
     }
 }
 
+// copied from event_object_movement
+#define OBJ_EVENT_PAL_TAG_BRENDAN                 0x1100
+#define OBJ_EVENT_PAL_TAG_MAY                     0x1110
+#define OBJ_EVENT_PAL_TAG_RS_BRENDAN              0x1122
+#define OBJ_EVENT_PAL_TAG_RS_MAY                  0x1123
+
 void LoadLinkContestPlayerPalettes(void)
 {
     int i;
@@ -2497,28 +2503,28 @@ void LoadLinkContestPlayerPalettes(void)
     struct Sprite *sprite;
     static const u8 sContestantLocalIds[CONTESTANT_COUNT] = { 3, 4, 5, 14 };
 
-    gReservedSpritePaletteCount = 12;
+    // gReservedSpritePaletteCount = 12;
+    // TODO: Does dynamically allocating link player palettes break link contests?
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
         for (i = 0; i < gNumLinkContestPlayers; i++)
         {
             objectEventId = GetObjectEventIdByLocalIdAndMap(sContestantLocalIds[i], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
             sprite = &gSprites[gObjectEvents[objectEventId].spriteId];
-            sprite->oam.paletteNum = 6 + i;
             version = (u8)gLinkPlayers[i].version;
             if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
             {
                 if (gLinkPlayers[i].gender == MALE)
-                    LoadPalette(gObjectEventPal_RubySapphireBrendan, OBJ_PLTT_ID(6 + i), PLTT_SIZE_4BPP);
+                    sprite->oam.paletteNum = LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_RS_BRENDAN);
                 else
-                    LoadPalette(gObjectEventPal_RubySapphireMay, OBJ_PLTT_ID(6 + i), PLTT_SIZE_4BPP);
+                    sprite->oam.paletteNum = LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_RS_MAY);
             }
             else
             {
                 if (gLinkPlayers[i].gender == MALE)
-                    LoadPalette(gObjectEventPal_Brendan, OBJ_PLTT_ID(6 + i), PLTT_SIZE_4BPP);
+                    sprite->oam.paletteNum = LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_BRENDAN);
                 else
-                    LoadPalette(gObjectEventPal_May, OBJ_PLTT_ID(6 + i), PLTT_SIZE_4BPP);
+                    sprite->oam.paletteNum = LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_MAY);
             }
         }
     }

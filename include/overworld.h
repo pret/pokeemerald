@@ -25,6 +25,10 @@
 #define MOVEMENT_MODE_SCRIPTED 2
 
 #define SKIP_OBJECT_EVENT_LOAD  1
+#define TIME_OF_DAY_NIGHT 0
+#define TIME_OF_DAY_TWILIGHT 1
+#define TIME_OF_DAY_DAY 2
+#define TIME_OF_DAY_MAX TIME_OF_DAY_DAY
 
 struct InitialPlayerAvatarState
 {

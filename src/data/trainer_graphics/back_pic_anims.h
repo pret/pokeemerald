@@ -18,6 +18,16 @@ static const union AnimCmd sAnimCmd_May_Steven_1[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnimCmd_Point_HGSS[] =
+{
+    ANIMCMD_FRAME(3, 9),
+    ANIMCMD_FRAME(0, 9),
+    ANIMCMD_FRAME(2, 24),
+    ANIMCMD_FRAME(2, 24),
+    ANIMCMD_FRAME(3, 50),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd sAnimCmd_Wally_1[] =
 {
     ANIMCMD_FRAME(0, 24),
@@ -48,6 +58,16 @@ static const union AnimCmd sAnimCmd_Leaf_1[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnimCmd_Point_HGSS_Red_Leaf[] =
+{
+    ANIMCMD_FRAME(0, 9),
+    ANIMCMD_FRAME(1, 9),
+    ANIMCMD_FRAME(3, 24),
+    ANIMCMD_FRAME(3, 24),
+    ANIMCMD_FRAME(0, 50),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd sAnimCmd_RubySapphireBrendan_1[] =
 {
     ANIMCMD_FRAME(0, 24),
@@ -72,48 +92,56 @@ static const union AnimCmd *const sBackAnims_Brendan[] =
 {
     sAnim_GeneralFrame3,
     sAnimCmd_Brendan_1,
+    sAnimCmd_Point_HGSS,
 };
 
 static const union AnimCmd *const sBackAnims_May[] =
 {
     sAnim_GeneralFrame3,
     sAnimCmd_May_Steven_1,
+    sAnimCmd_Point_HGSS,
 };
 
 static const union AnimCmd *const sBackAnims_Red[] =
 {
     sAnim_GeneralFrame0,
     sAnimCmd_Red_1,
+    sAnimCmd_Point_HGSS_Red_Leaf,
 };
 
 static const union AnimCmd *const sBackAnims_Leaf[] =
 {
     sAnim_GeneralFrame0,
     sAnimCmd_Leaf_1,
+    sAnimCmd_Point_HGSS_Red_Leaf,
 };
 
 static const union AnimCmd *const sBackAnims_RubySapphireBrendan[] =
 {
     sAnim_GeneralFrame3,
     sAnimCmd_RubySapphireBrendan_1,
+    sAnimCmd_Point_HGSS,
 };
 
 static const union AnimCmd *const sBackAnims_RubySapphireMay[] =
 {
     sAnim_GeneralFrame3,
     sAnimCmd_RubySapphireMay_1,
+    sAnimCmd_Point_HGSS,
 };
 
 static const union AnimCmd *const sBackAnims_Wally[] =
 {
     sAnim_GeneralFrame3,
     sAnimCmd_Wally_1,
+    sAnimCmd_Point_HGSS,
 };
 
 static const union AnimCmd *const sBackAnims_Steven[] =
 {
     sAnim_GeneralFrame3,
     sAnimCmd_May_Steven_1,
+    sAnimCmd_Point_HGSS,
 };
 
 const union AnimCmd *const *const gTrainerBackAnimsPtrTable[] =

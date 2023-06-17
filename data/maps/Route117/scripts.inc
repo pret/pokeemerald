@@ -1,12 +1,60 @@
 .set LOCALID_DAYCARE_MAN, 3
+.set LOCALID_DAYCARE_MON_0, 25
+.set LOCALID_DAYCARE_MON_1, 26
 
 Route117_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route117_OnTransition
 	.byte 0
 
+.macro getdaycaregfx var0:req var1:req var2:req var3:req
+callfunc ScrFunc_getdaycaregfx
+.2byte \var0
+.2byte \var1
+.2byte \var2
+.2byte \var3
+.endm
+
 Route117_OnTransition:
 	call Route117_EventScript_TryMoveDayCareMan
+	@ set flags for OW daycare mons
+	setflag FLAG_TEMP_1
+	setflag FLAG_TEMP_2
+	getdaycaregfx VAR_OBJ_GFX_ID_0, VAR_OBJ_GFX_ID_1, VAR_TEMP_0, VAR_TEMP_1
+	switch VAR_RESULT
+	case 2, Route117_EventScript_ShowDaycareMon1
+	case 1, Route117_EventScript_ShowDaycareMon0
 	end
+
+Route117_EventScript_ShowDaycareMon1:
+	@ set pokemon movement type based on compatibility
+	special SetDaycareCompatibilityString
+	@ 0:
+	call_if_eq VAR_RESULT, PARENTS_INCOMPATIBLE, Route117_EventScript_DaycareMonIncompatible
+	@ 20: do nothing if low compatibility
+	@ call_if_eq VAR_RESULT, PARENTS_LOW_COMPATIBILITY, Route117_EventScript_DaycareMonLowCompatibility
+	@ 50:
+	call_if_eq VAR_RESULT, PARENTS_MED_COMPATIBILITY, Route117_EventScript_DaycareMonMedCompatibility
+	@ 70:
+	call_if_eq VAR_RESULT, PARENTS_MAX_COMPATIBILITY, Route117_EventScript_DaycareMonMaxCompatibility
+	clearflag FLAG_TEMP_2
+Route117_EventScript_ShowDaycareMon0:
+	clearflag FLAG_TEMP_1
+	end
+
+Route117_EventScript_DaycareMonIncompatible: @ mons never face each other
+	setobjectmovementtype LOCALID_DAYCARE_MON_0, MOVEMENT_TYPE_FACE_DOWN_UP_AND_LEFT
+	setobjectmovementtype LOCALID_DAYCARE_MON_1, MOVEMENT_TYPE_FACE_DOWN_UP_AND_RIGHT
+	return
+
+Route117_EventScript_DaycareMonMedCompatibility: @ down and towards each other
+	setobjectmovementtype LOCALID_DAYCARE_MON_0, MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT
+	setobjectmovementtype LOCALID_DAYCARE_MON_1, MOVEMENT_TYPE_FACE_DOWN_AND_LEFT
+	return
+
+Route117_EventScript_DaycareMonMaxCompatibility: @ facing; walk in place
+	setobjectmovementtype LOCALID_DAYCARE_MON_0, MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT
+	setobjectmovementtype LOCALID_DAYCARE_MON_1, MOVEMENT_TYPE_WALK_IN_PLACE_LEFT
+	return
 
 Route117_EventScript_TryMoveDayCareMan::
 	goto_if_unset FLAG_PENDING_DAYCARE_EGG, Route117_EventScript_StopMoveDayCareMan
@@ -205,4 +253,3 @@ Route117_Text_RouteSignMauville:
 Route117_Text_DayCareSign:
 	.string "POKéMON DAY CARE\n"
 	.string "“Let us raise your POKéMON.”$"
-

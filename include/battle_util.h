@@ -170,6 +170,7 @@ s32 CalculateMoveDamageAndEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef, 
 u16 CalcTypeEffectivenessMultiplier(u16 move, u8 moveType, u8 battlerAtk, u8 battlerDef, bool32 recordAbilities);
 u16 CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilityDef);
 u16 GetTypeModifier(u8 atkType, u8 defType);
+u16 GetTypeEffectiveness(struct Pokemon *mon, u8 moveType);
 s32 GetStealthHazardDamage(u8 hazardType, u8 battlerId);
 s32 GetStealthHazardDamageByTypesAndHP(u8 hazardType, u8 type1, u8 type2, u32 maxHp);
 bool32 CanMegaEvolve(u8 battlerId);

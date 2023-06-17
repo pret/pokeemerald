@@ -347,6 +347,11 @@ ifeq ($(DINFO),1)
 override CFLAGS += -g
 endif
 
+ifeq ($(DDEBUG),1)
+override ASFLAGS += --defsym DEBUG=1
+override CPPFLAGS += -D DEBUG=1
+endif
+
 # The dep rules have to be explicit or else missing files won't be reported.
 # As a side effect, they're evaluated immediately instead of when the rule is invoked.
 # It doesn't look like $(shell) can be deferred so there might not be a better way.
@@ -474,7 +479,7 @@ $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS) libagbsyscall
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
-	$(FIX) $@ -p --silent
+	$(FIX) $@ --silent
 
 modern: all
 
