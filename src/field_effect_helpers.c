@@ -320,8 +320,8 @@ u32 FldEff_Shadow(void)
     }
     objectEventId = GetObjectEventIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[objectEventId].graphicsId);
-    if (graphicsInfo->shadowSize == SHADOW_SIZE_NONE) // don't create a shadow at all
-      return 0;
+    if (graphicsInfo->shadowSize == SHADOW_NONE) // don't create a shadow at all
+        return 0;
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[sShadowEffectTemplateIds[graphicsInfo->shadowSize]], 0, 0, 0x94);
     if (spriteId != MAX_SPRITES)
     {
