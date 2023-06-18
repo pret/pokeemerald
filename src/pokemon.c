@@ -5031,9 +5031,6 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
                 | (substruct3->worldRibbon << 26);
         }
         break;
-    case MON_DATA_NATURE:
-        return boxMon->personality % 25;
-        break;
     default:
         break;
     }
@@ -5085,10 +5082,6 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
         SET8(mon->mail);
         break;
     case MON_DATA_SPECIES_OR_EGG:
-        break;
-    case MON_DATA_NATURE: // Calculate stats after settings
-        SetBoxMonData(&mon->box, field, data);
-        CalculateMonStats(mon);
         break;
     default:
         SetBoxMonData(&mon->box, field, data);
@@ -5355,81 +5348,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         substruct3->spAttackIV = (ivs >> 20) & MAX_IV_MASK;
         substruct3->spDefenseIV = (ivs >> 25) & MAX_IV_MASK;
         break;
-    }
-    case MON_DATA_NATURE:
-    {
-      u32 pid = boxMon->personality;
-      u32 otId = boxMon->otId;
-      s8 diff = (data[0] % 25) - (pid % 25); // difference between new nature and current nature, [-24,24]
-      bool8 preserveShiny = FALSE;
-      bool8 preserveLetter = FALSE;
-      u16 shinyValue = HIHALF(pid) ^ LOHALF(pid);
-      s32 tweak;
-      u32 pidTemp;
-      // See https://bulbapedia.bulbagarden.net/wiki/Personality_value#Nature
-      // Goal here is to preserve as much of the PID as possible
-      // To preserve gender & substruct order, we add/subtract multiples of 5376 that is 0 % 256, 0 % 24, 1 % 25
-      // i.e, to increase the nature by n % 25, we add n*5376 % 19200 (LCM of 24, 25, 256) to the pid
-      // Ability number is determined by parity and so adding multiples of 5376 preserves it
-      // TODO: For genderless pokemon, 576/600 can be used instead of 5376/19200
-      if (diff == 0) // No change
-        break;
-      else if (diff < 0)
-        diff = 25+diff;
-      tweak = (diff*5376) % 19200;
-      pidTemp = pid + tweak;
-      // If the pokemon is shiny or if changing the PID would make it shiny, preserve its shiny value
-      if (IsShinyOtIdPersonality(otId, pid) || IsShinyOtIdPersonality(otId, pidTemp))
-        preserveShiny = TRUE;
-      if (substruct0->species == SPECIES_UNOWN) // Preserve Unown letter
-        preserveLetter = TRUE;
-      if (preserveShiny && preserveLetter) { // honestly though, how many shiny Unown are out there ?
-        while (pidTemp > pid) {
-          if ((HIHALF(pidTemp) ^ LOHALF(pidTemp) ^ shinyValue) < SHINY_ODDS)
-            if (GET_UNOWN_LETTER(pidTemp) == GET_UNOWN_LETTER(pid))
-              break;
-          pidTemp += 19200;
-        }
-      } else if (preserveShiny) {
-        while (pidTemp > pid) {
-          if ((HIHALF(pidTemp) ^ LOHALF(pidTemp) ^ shinyValue) < SHINY_ODDS)
-            break;
-          pidTemp += 19200;
-        }
-      } else if (preserveLetter) {
-        while (pidTemp > pid) {
-          if (GET_UNOWN_LETTER(pidTemp) == GET_UNOWN_LETTER(pid))
-            break;
-          pidTemp += 19200;
-        }
-      }
-      if (pidTemp < pid) { // overflow; search backwards
-        tweak -= 19200;
-        pidTemp = pid + tweak;
-        if (preserveShiny && preserveLetter) {
-          while (pidTemp < pid) {
-            if ((HIHALF(pidTemp) ^ LOHALF(pidTemp) ^ shinyValue) < SHINY_ODDS)
-              if (GET_UNOWN_LETTER(pidTemp) == GET_UNOWN_LETTER(pid))
-                break;
-            pidTemp -= 19200;
-          }
-        } else if (preserveShiny) {
-          while (pidTemp < pid) {
-            if ((HIHALF(pidTemp) ^ LOHALF(pidTemp) ^ shinyValue) < SHINY_ODDS)
-              break;
-            pidTemp -= 19200;
-          }
-        } else if (preserveLetter) {
-          while (pidTemp < pid) {
-            if (GET_UNOWN_LETTER(pidTemp) == GET_UNOWN_LETTER(pid))
-              break;
-            pidTemp -= 19200;
-          }
-        }
-      }
-      if (pid % 24 == pidTemp % 24 || pid % 256 == pidTemp % 256)
-        boxMon->personality = pidTemp;
-      break;
     }
     default:
         break;
