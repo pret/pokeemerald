@@ -2664,6 +2664,22 @@ u8 LoadObjectEventPalette(u16 paletteTag)
     return LoadSpritePaletteIfTagExists(&sObjectEventSpritePalettes[i]);
 }
 
+u8 LoadPlayerObjectEventPalette(u8 gender)
+{
+    u16 paletteTag;
+    switch (gender)
+    {
+        default:
+        case MALE:
+            paletteTag = FLDEFF_PAL_TAG_BRENDAN;
+            break;
+        case FEMALE:
+            paletteTag = FLDEFF_PAL_TAG_MAY;
+            break;
+    }
+    LoadObjectEventPalette(paletteTag);
+}
+
 // Unused
 static void LoadObjectEventPaletteSet(u16 *paletteTags)
 {
