@@ -271,7 +271,8 @@ static const union AnimCmd *const sSpriteAnimTable_Icons[] =
     sSpriteAnim_Icons2
 };
 
-static const union AnimCmd *const sSpriteAnimTable_Emotes[] = {
+static const union AnimCmd *const sSpriteAnimTable_Emotes[] =
+{
     sSpriteAnim_Emotes0,
     sSpriteAnim_Emotes1,
     sSpriteAnim_Emotes2,
@@ -601,7 +602,7 @@ static bool8 TrainerExclamationMark(u8 taskId, struct Task *task, struct ObjectE
     FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON);
     direction = GetFaceDirectionMovementAction(trainerObj->facingDirection);
     ObjectEventSetHeldMovement(trainerObj, direction);
-    task->tFuncId++;
+    task->tFuncId++; // TRSEE_EXCLAMATION_WAIT
     return TRUE;
 }
 
@@ -871,6 +872,7 @@ u8 FldEff_QuestionMarkIcon(void)
 u8 FldEff_HeartIcon(void)
 {
     u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_HeartIcon, 0, 0, 0x52);
+
     if (spriteId != MAX_SPRITES)
     {
         struct Sprite *sprite = &gSprites[spriteId];
