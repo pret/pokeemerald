@@ -190,7 +190,7 @@ void FreezeForApproachingTrainers(void)
         }
     }
     if (followerObj) // Unfreeze follower so it can move behind player
-      UnfreezeObjectEvent(followerObj);
+        UnfreezeObjectEvent(followerObj);
 }
 
 bool8 IsFreezeObjectAndPlayerFinished(void)

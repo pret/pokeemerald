@@ -246,11 +246,11 @@ static const union AnimCmd sAnim_GoNorth[] =
 
 static const union AnimCmd sAnim_GoNorth2F[] =
 {
-  ANIMCMD_FRAME(2, 6),
-  ANIMCMD_FRAME(3, 6),
-  ANIMCMD_FRAME(3, 6),
-  ANIMCMD_FRAME(2, 6),
-  ANIMCMD_JUMP(0),
+    ANIMCMD_FRAME(2, 6),
+    ANIMCMD_FRAME(3, 6),
+    ANIMCMD_FRAME(3, 6),
+    ANIMCMD_FRAME(2, 6),
+    ANIMCMD_JUMP(0),
 };
 
 static const union AnimCmd sAnim_GoWest[] =

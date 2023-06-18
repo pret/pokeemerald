@@ -46,11 +46,12 @@ u32 FldEff_Shadow(void);
 #define sReflectionVerticalOffset   data[2]
 #define sIsStillReflection          data[7]
 
-void SetUpShadow(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
-  gFieldEffectArguments[0] = objectEvent->localId;
-  gFieldEffectArguments[1] = gSaveBlock1Ptr->location.mapNum;
-  gFieldEffectArguments[2] = gSaveBlock1Ptr->location.mapGroup;
-  FldEff_Shadow();
+void SetUpShadow(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    gFieldEffectArguments[0] = objectEvent->localId;
+    gFieldEffectArguments[1] = gSaveBlock1Ptr->location.mapNum;
+    gFieldEffectArguments[2] = gSaveBlock1Ptr->location.mapGroup;
+    FldEff_Shadow();
 }
 
 void SetUpReflection(struct ObjectEvent *objectEvent, struct Sprite *sprite, bool8 stillReflection)
@@ -103,41 +104,45 @@ static void LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct 
 }
 
 // Apply a blue tint effect to a palette
-static void ApplyPondFilter(u8 paletteNum, u16 *dest) {
-  u8 i, val, r, g, b;
-  // CpuCopy16(gPlttBufferUnfaded + 0x100 + paletteNum * 16, dest, 32);
-  u16 *src = gPlttBufferUnfaded + 0x100 + paletteNum * 16;
-  for (i = 0; i < 16; i++) {
-    r = src[i] & 0x1F;
-    g = (src[i] >> 5) & 0x1F;
-    b = (src[i] >> 10) & 0x1F;
-    b += 10;
-    if (b > 31)
-      b = 31;
-    *dest++ = (b << 10) | (g << 5) | r;
-  }
+static void ApplyPondFilter(u8 paletteNum, u16 *dest)
+{
+    u8 i, val, r, g, b;
+    // CpuCopy16(gPlttBufferUnfaded + 0x100 + paletteNum * 16, dest, 32);
+    u16 *src = gPlttBufferUnfaded + 0x100 + paletteNum * 16;
+    for (i = 0; i < 16; i++)
+    {
+        r = src[i] & 0x1F;
+        g = (src[i] >> 5) & 0x1F;
+        b = (src[i] >> 10) & 0x1F;
+        b += 10;
+        if (b > 31)
+            b = 31;
+        *dest++ = (b << 10) | (g << 5) | r;
+    }
 }
 
 // Apply a ice tint effect to a palette
-static void ApplyIceFilter(u8 paletteNum, u16 *dest) {
-  u8 i, val, r, g, b;
-  // CpuCopy16(gPlttBufferUnfaded + 0x100 + paletteNum * 16, dest, 32);
-  u16 *src = gPlttBufferUnfaded + 0x100 + paletteNum * 16;
-  for (i = 0; i < 16; i++) {
-    r = src[i] & 0x1F;
-    r -= 5;
-    if (r > 31)
-      r = 0;
-    g = (src[i] >> 5) & 0x1F;
-    g += 3;
-    if (g > 31)
-      g = 31;
-    b = (src[i] >> 10) & 0x1F;
-    b += 16;
-    if (b > 31)
-      b = 31;
-    *dest++ = (b << 10) | (g << 5) | r;
-  }
+static void ApplyIceFilter(u8 paletteNum, u16 *dest)
+{
+    u8 i, val, r, g, b;
+    // CpuCopy16(gPlttBufferUnfaded + 0x100 + paletteNum * 16, dest, 32);
+    u16 *src = gPlttBufferUnfaded + 0x100 + paletteNum * 16;
+    for (i = 0; i < 16; i++)
+    {
+        r = src[i] & 0x1F;
+        r -= 5;
+        if (r > 31)
+            r = 0;
+        g = (src[i] >> 5) & 0x1F;
+        g += 3;
+        if (g > 31)
+            g = 31;
+        b = (src[i] >> 10) & 0x1F;
+        b += 16;
+        if (b > 31)
+            b = 31;
+        *dest++ = (b << 10) | (g << 5) | r;
+    }
 }
 
 static void LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite)
@@ -147,16 +152,17 @@ static void LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, 
     u16 baseTag = GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum);
     u16 paletteTag = baseTag == 0xFFFF ? mainSprite->oam.paletteNum + PAL_RAW_REFLECTION_OFFSET : baseTag + PAL_TAG_REFLECTION_OFFSET;
     u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
-    if (paletteNum == 0xFF) { // Load filtered palette
-      u16 filteredData[16] = {0};
-      struct SpritePalette filteredPalette = {.tag = paletteTag, .data = filteredData};
-      if (sprite->data[7] == FALSE) {
-        ApplyPondFilter(mainSprite->oam.paletteNum, filteredData);
-      } else {
-        ApplyIceFilter(mainSprite->oam.paletteNum, filteredData);
-      }
-      paletteNum = LoadSpritePalette(&filteredPalette);
-      UpdateSpritePaletteWithWeather(paletteNum);
+    if (paletteNum == 0xFF)
+    {
+        // Load filtered palette
+        u16 filteredData[16] = {0};
+        struct SpritePalette filteredPalette = {.tag = paletteTag, .data = filteredData};
+        if (sprite->data[7] == FALSE)
+            ApplyPondFilter(mainSprite->oam.paletteNum, filteredData);
+        else
+            ApplyIceFilter(mainSprite->oam.paletteNum, filteredData);
+        paletteNum = LoadSpritePalette(&filteredPalette);
+        UpdateSpritePaletteWithWeather(paletteNum);
     }
     sprite->oam.paletteNum = paletteNum;
     sprite->oam.objMode = 1; // Alpha blending
@@ -171,9 +177,9 @@ static void LoadObjectHighBridgeReflectionPalette(struct ObjectEvent *objectEven
     u16 blueData[16] = {0};
     struct SpritePalette bluePalette = {.tag = HIGH_BRIDGE_PAL_TAG, .data = blueData};
     u8 i;
-    for (i = 1; i < 16; i++) {
-      blueData[i] = 0x55c9;
-    }
+    for (i = 1; i < 16; i++)
+        blueData[i] = 0x55c9;
+    
     sprite->oam.paletteNum = LoadSpritePalette(&bluePalette);
     UpdateSpritePaletteWithWeather(sprite->oam.paletteNum);
 }
@@ -191,26 +197,29 @@ static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
     }
 
     // Only filter palette if not using the high bridge blue palette
-    if (IndexOfSpritePaletteTag(HIGH_BRIDGE_PAL_TAG) != reflectionSprite->oam.paletteNum) {
-      u16 baseTag = GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum);
-      u16 paletteTag = baseTag == 0xFFFF ? mainSprite->oam.paletteNum + PAL_RAW_REFLECTION_OFFSET : baseTag + PAL_TAG_REFLECTION_OFFSET;
-      u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
-      if (paletteNum == 0xFF) { // Build filtered palette
-        u16 filteredData[16] = {0};
-        struct SpritePalette filteredPalette = {.tag = paletteTag, .data = filteredData};
-        // Free palette if unused
-        reflectionSprite->inUse = FALSE;
-        FieldEffectFreePaletteIfUnused(reflectionSprite->oam.paletteNum);
-        reflectionSprite->inUse = TRUE;
-        if (reflectionSprite->data[7] == FALSE) {
-          ApplyPondFilter(mainSprite->oam.paletteNum, filteredData);
-        } else {
-          ApplyIceFilter(mainSprite->oam.paletteNum, filteredData);
+    if (IndexOfSpritePaletteTag(HIGH_BRIDGE_PAL_TAG) != reflectionSprite->oam.paletteNum)
+    {
+        u16 baseTag = GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum);
+        u16 paletteTag = baseTag == 0xFFFF ? mainSprite->oam.paletteNum + PAL_RAW_REFLECTION_OFFSET : baseTag + PAL_TAG_REFLECTION_OFFSET;
+        u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
+        if (paletteNum == 0xFF)
+        {
+            // Build filtered palette
+            u16 filteredData[16] = {0};
+            struct SpritePalette filteredPalette = {.tag = paletteTag, .data = filteredData};
+            // Free palette if unused
+            reflectionSprite->inUse = FALSE;
+            FieldEffectFreePaletteIfUnused(reflectionSprite->oam.paletteNum);
+            reflectionSprite->inUse = TRUE;
+            if (reflectionSprite->data[7] == FALSE)
+                ApplyPondFilter(mainSprite->oam.paletteNum, filteredData);
+            else
+                ApplyIceFilter(mainSprite->oam.paletteNum, filteredData);
+            
+            paletteNum = LoadSpritePalette(&filteredPalette);
+            UpdateSpritePaletteWithWeather(paletteNum);
         }
-        paletteNum = LoadSpritePalette(&filteredPalette);
-        UpdateSpritePaletteWithWeather(paletteNum);
-      }
-      reflectionSprite->oam.paletteNum = paletteNum;
+        reflectionSprite->oam.paletteNum = paletteNum;
     }
     reflectionSprite->oam.shape = mainSprite->oam.shape;
     reflectionSprite->oam.size = mainSprite->oam.size;
@@ -313,10 +322,11 @@ u32 FldEff_Shadow(void)
     const struct ObjectEventGraphicsInfo *graphicsInfo;
     u8 spriteId;
     u8 i;
-    for (i = 0; i < MAX_SPRITES; i++) {
-      // Return early if a shadow sprite already exists
-      if (gSprites[i].data[0] == gFieldEffectArguments[0] && gSprites[i].callback == UpdateShadowFieldEffect)
-        return 0;
+    for (i = 0; i < MAX_SPRITES; i++)
+    {
+        // Return early if a shadow sprite already exists
+        if (gSprites[i].data[0] == gFieldEffectArguments[0] && gSprites[i].callback == UpdateShadowFieldEffect)
+            return 0;
     }
     objectEventId = GetObjectEventIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[objectEventId].graphicsId);

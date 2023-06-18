@@ -318,7 +318,7 @@ u16 FreeAndDestroyMonPicSprite(u16 spriteId)
 
 u16 FreeAndDestroyMonPicSpriteNoPalette(u16 spriteId)
 {
-      return FreeAndDestroyPicSpriteInternal(spriteId, FALSE);
+    return FreeAndDestroyPicSpriteInternal(spriteId, FALSE);
 }
 
 // Unused

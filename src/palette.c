@@ -422,7 +422,7 @@ static u8 UpdateTimeOfDayPaletteFade(void) // Like normal, but respects sprite p
         return PALETTE_FADE_STATUS_DONE;
 
     if (IsSoftwarePaletteFadeFinishing())
-      return gPaletteFade.active ? PALETTE_FADE_STATUS_ACTIVE : PALETTE_FADE_STATUS_DONE;
+        return gPaletteFade.active ? PALETTE_FADE_STATUS_ACTIVE : PALETTE_FADE_STATUS_DONE;
 
     if (!gPaletteFade.objPaletteToggle)
     {
@@ -446,20 +446,29 @@ static u8 UpdateTimeOfDayPaletteFade(void) // Like normal, but respects sprite p
         paletteOffset = 256;
     }
 
-    for (paletteNum = 0; paletteNum < 16; paletteNum++, selectedPalettes >>= 1, paletteOffset += 16) {
-      if (selectedPalettes & 1) {
-        if (gPaletteFade.yDec) {
-          if (gPaletteFade.objPaletteToggle) { // sprite palettes
-            if (gPaletteFade.y >= gPaletteFade.targetY || GetSpritePaletteTagByPaletteNum(paletteNum) & 0x8000)
-              BlendPalette(paletteOffset, 16, gPaletteFade.y, gPaletteFade.blendColor);
-          // tile palettes
-          } else if (gPaletteFade.y >= gPaletteFade.targetY || (paletteNum >= 13 && paletteNum <= 15)) {
-              BlendPalette(paletteOffset, 16, gPaletteFade.y, gPaletteFade.blendColor);
-          }
-        } else {
-          BlendPalette(paletteOffset, 16, gPaletteFade.y, gPaletteFade.blendColor);
+    for (paletteNum = 0; paletteNum < 16; paletteNum++, selectedPalettes >>= 1, paletteOffset += 16)
+    {
+        if (selectedPalettes & 1)
+        {
+            if (gPaletteFade.yDec)
+            {
+                if (gPaletteFade.objPaletteToggle)
+                {
+                    // sprite palettes
+                    if (gPaletteFade.y >= gPaletteFade.targetY || GetSpritePaletteTagByPaletteNum(paletteNum) & 0x8000)
+                        BlendPalette(paletteOffset, 16, gPaletteFade.y, gPaletteFade.blendColor);
+                    // tile palettes
+                }
+                else if (gPaletteFade.y >= gPaletteFade.targetY || (paletteNum >= 13 && paletteNum <= 15))
+                {
+                    BlendPalette(paletteOffset, 16, gPaletteFade.y, gPaletteFade.blendColor);
+                }
+            }
+            else
+            {
+                BlendPalette(paletteOffset, 16, gPaletteFade.y, gPaletteFade.blendColor);
+            }
         }
-      }
     }
 
     gPaletteFade.objPaletteToggle ^= 1;
@@ -680,6 +689,7 @@ static u8 UpdateFastPaletteFade(void)
 
     if (IsSoftwarePaletteFadeFinishing())
         return gPaletteFade.active ? PALETTE_FADE_STATUS_ACTIVE : PALETTE_FADE_STATUS_DONE;
+
 
     if (gPaletteFade.objPaletteToggle)
     {

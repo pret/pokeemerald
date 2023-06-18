@@ -1042,7 +1042,8 @@ static void HandleBallAnimEnd(struct Sprite *sprite)
     bool8 affineAnimEnded = FALSE;
     u8 battlerId = sprite->sBattler;
 
-    if (sprite->data[7] == POKEBALL_PLAYER_SLIDEIN) {
+    if (sprite->data[7] == POKEBALL_PLAYER_SLIDEIN)
+    {
         gSprites[gBattlerSpriteIds[sprite->sBattler]].callback = SpriteCB_PlayerMonSlideIn;
         AnimateSprite(&gSprites[gBattlerSpriteIds[sprite->sBattler]]);
         gSprites[gBattlerSpriteIds[sprite->sBattler]].data[1] = 0x1000;
