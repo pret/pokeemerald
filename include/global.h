@@ -540,8 +540,6 @@ struct SaveBlock2
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
-extern bool8 IsAccurateGBA(void);
-
 struct SecretBaseParty
 {
     u32 personality[PARTY_SIZE];
