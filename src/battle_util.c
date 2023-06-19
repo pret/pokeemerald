@@ -10930,7 +10930,7 @@ bool8 AreBattlersOfOppositeGender(u8 battler1, u8 battler2)
     return (gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS && gender1 != gender2);
 }
 
-u32 CalcMoveSecondaryEffectChance(u8 battlerId, u8 secondaryEffectChance)
+u32 CalcSecondaryEffectChance(u8 battlerId, u8 secondaryEffectChance)
 {
     if (GetBattlerAbility(battlerId) == ABILITY_SERENE_GRACE)
         secondaryEffectChance *= 2;

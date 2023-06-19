@@ -2639,16 +2639,11 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 10;
             break;
         case EFFECT_JUNGLE_HEALING:
-            if (AtMaxHp(battlerAtk)
-             && AtMaxHp(BATTLE_PARTNER(battlerAtk))
-             && !(gBattleMons[battlerAtk].status1 & STATUS1_ANY)
-             && !(gBattleMons[BATTLE_PARTNER(battlerAtk)].status1 & STATUS1_ANY))
+           if (AtMaxHp(battlerAtk)
+            && AtMaxHp(BATTLE_PARTNER(battlerAtk))
+            && !(gBattleMons[battlerAtk].status1 & STATUS1_ANY)
+            && !(gBattleMons[BATTLE_PARTNER(battlerAtk)].status1 & STATUS1_ANY))
                 score -= 10;
-            else if (gBattleMons[battlerAtk].status1 & STATUS1_ANY
-                  || gBattleMons[BATTLE_PARTNER(battlerAtk)].status1 & STATUS1_ANY
-                  || AI_DATA->hpPercents[battlerAtk] >= 90
-                  || AI_DATA->hpPercents[BATTLE_PARTNER(battlerAtk)] >= 90)
-                score -= 9; // No point in healing, but should at least do it if there's nothing better or if it's afflicted by a status ailment.
             break;
         case EFFECT_TAKE_HEART:
             if ((!(gBattleMons[battlerAtk].status1 & STATUS1_ANY)

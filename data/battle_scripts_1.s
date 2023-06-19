@@ -1513,13 +1513,6 @@ BattleScript_DefDown::
 BattleScript_DefDown_Ret:
 	return
 
-BattleScript_ReduceDefenseAndFlinch::
-	modifybattlerstatstage BS_TARGET, STAT_DEF, DECREASE, 1, BattleScript_DefDownAndFlinch_Ret, ANIM_ON
-	setmoveeffect MOVE_EFFECT_FLINCH
-	seteffectprimary
-BattleScript_DefDownAndFlinch_Ret:
-	return
-
 BattleScript_EffectPurify:
 	attackcanceler
 	attackstring
