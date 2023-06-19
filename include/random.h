@@ -67,6 +67,8 @@ enum RandomTag
     RNG_STATIC,
     RNG_STENCH,
     RNG_TRI_ATTACK,
+    RNG_TRIPLE_ARROWS_DEFENSE_DOWN,
+    RNG_TRIPLE_ARROWS_FLINCH,
 };
 
 #define RandomWeighted(tag, ...) \

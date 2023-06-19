@@ -8537,6 +8537,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         basePower = 120 * gBattleMons[battlerDef].hp / gBattleMons[battlerDef].maxHP;
         break;
     case EFFECT_HEX:
+    case EFFECT_INFERNAL_PARADE:
         if (gBattleMons[battlerDef].status1 & STATUS1_ANY || GetBattlerAbility(battlerDef) == ABILITY_COMATOSE)
             basePower *= 2;
         break;
@@ -10927,4 +10928,12 @@ bool8 AreBattlersOfOppositeGender(u8 battler1, u8 battler2)
     u8 gender2 = GetBattlerGender(battler2);
 
     return (gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS && gender1 != gender2);
+}
+
+u32 CalcSecondaryEffectChance(u8 battlerId, u8 secondaryEffectChance)
+{
+    if (GetBattlerAbility(battlerId) == ABILITY_SERENE_GRACE)
+        secondaryEffectChance *= 2;
+
+    return secondaryEffectChance;
 }
