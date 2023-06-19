@@ -1096,10 +1096,11 @@ u8 AI_WhoStrikesFirst(u8 battlerAI, u8 battler2, u16 moveConsidered)
     prioAI = GetMovePriority(battlerAI, moveConsidered);
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (battler2Moves[i] == 0 || battler2Moves[i] == 0xFFFF)
+        prioBattler2 = GetMovePriority(battler2, battler2Moves[i]);
+        if (battler2Moves[i] == 0 || battler2Moves[i] == 0xFFFF
+            || (prioBattler2 > prioAI && !CanIndexMoveFaintTarget(battler2, battlerAI, i , 2)))
             continue;
 
-        prioBattler2 = GetMovePriority(battler2, battler2Moves[i]);
         if (prioAI > prioBattler2)
             fasterAI++;
         else if (prioBattler2 > prioAI)
