@@ -844,9 +844,14 @@ void TestRunner_Battle_AfterLastTurn(void)
 static void CB2_BattleTest_NextParameter(void)
 {
     if (++STATE->runParameter >= STATE->parameters)
+    {
         SetMainCallback2(CB2_TestRunner);
+    }
     else
+    {
+        STATE->trials = 0;
         BattleTest_Run(gTestRunnerState.test->data);
+    }
 }
 
 static void CB2_BattleTest_NextTrial(void)
@@ -942,6 +947,7 @@ static bool32 BattleTest_HandleExitWithResult(void *data, enum TestResult result
 void Randomly(u32 sourceLine, u32 passes, u32 trials, struct RandomlyContext ctx)
 {
     const struct BattleTest *test = gTestRunnerState.test->data;
+    INVALID_IF(STATE->trials != 0, "PASSES_RANDOMLY can only be used once per test");
     INVALID_IF(test->resultsSize > 0, "PASSES_RANDOMLY is incompatible with results");
     INVALID_IF(passes > trials, "%d passes specified, but only %d trials", passes, trials);
     STATE->rngTag = ctx.tag;
