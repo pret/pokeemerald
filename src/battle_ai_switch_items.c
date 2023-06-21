@@ -822,7 +822,7 @@ static u32 GetBestMonTypeMatchup(struct Pokemon *party, int firstId, int lastId,
 
     while (bits != 0x3F) // All mons were checked.
     {
-        u32 bestResist = UQ_4_12(1.0);
+        u16 bestResist = UQ_4_12(1.0);
         int bestMonId = PARTY_SIZE;
         // Find the mon whose type is the most suitable defensively.
         for (i = firstId; i < lastId; i++)
@@ -830,21 +830,21 @@ static u32 GetBestMonTypeMatchup(struct Pokemon *party, int firstId, int lastId,
             if (!(gBitTable[i] & invalidMons) && !(gBitTable[i] & bits))
             {
                 u16 species = GetMonData(&party[i], MON_DATA_SPECIES);
-                u32 typeEffectiveness = UQ_4_12(1.0);
+                u16 typeEffectiveness = UQ_4_12(1.0);
 
                 u8 atkType1 = gBattleMons[opposingBattler].type1;
                 u8 atkType2 = gBattleMons[opposingBattler].type2;
                 u8 defType1 = gSpeciesInfo[species].types[0];
                 u8 defType2 = gSpeciesInfo[species].types[1];
 
-                typeEffectiveness *= GetTypeModifier(atkType1, defType1);
+                MulModifier(&typeEffectiveness, (GetTypeModifier(atkType1, defType1)));
                 if (atkType2 != atkType1)
-                    typeEffectiveness *= GetTypeModifier(atkType2, defType1);
+                    MulModifier(&typeEffectiveness, (GetTypeModifier(atkType2, defType1)));
                 if (defType2 != defType1)
                 {
-                    typeEffectiveness *= GetTypeModifier(atkType1, defType2);
+                    MulModifier(&typeEffectiveness, (GetTypeModifier(atkType1, defType2)));
                     if (atkType2 != atkType1)
-                        typeEffectiveness *= GetTypeModifier(atkType2, defType2);
+                        MulModifier(&typeEffectiveness, (GetTypeModifier(atkType2, defType2)));
                 }
                 if (typeEffectiveness < bestResist)
                 {
@@ -989,9 +989,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
     if (bestMonId != PARTY_SIZE)
         return bestMonId;
 
-    // If ace mon is the last available Pokemon and U-Turn/Volt Switch was used - switch to the mon.
-    if (aceMonId != PARTY_SIZE
-        && (gBattleMoves[gLastUsedMove].effect == EFFECT_HIT_ESCAPE || gBattleMoves[gLastUsedMove].effect == EFFECT_PARTING_SHOT))
+    // If ace mon is the last available Pokemon and switch move was used - switch to the mon.
+    if (aceMonId != PARTY_SIZE)
         return aceMonId;
 
     return PARTY_SIZE;
