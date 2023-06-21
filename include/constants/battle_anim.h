@@ -1,6 +1,8 @@
 #ifndef GUARD_CONSTANTS_BATTLE_ANIM_H
 #define GUARD_CONSTANTS_BATTLE_ANIM_H
 
+#include "battle_anim_scripts.h"
+
 // Sprites start at 10000 and thus must be subtracted of 10000 to account for the true index.
 #define GET_TRUE_SPRITE_INDEX(i) ((i - ANIM_SPRITES_START))
 
@@ -505,6 +507,7 @@
 #define BG_AURA_SPHERE 77
 #define BG_STEEL_BEAM_OPPONENT 78
 #define BG_STEEL_BEAM_PLAYER 79
+#define BG_CHLOROBLAST 80
 
 // table ids for general animations (gBattleAnims_General)
 #define B_ANIM_CASTFORM_CHANGE          0

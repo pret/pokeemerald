@@ -97,7 +97,6 @@ static void AnimSlashSlice(struct Sprite *);
 static void AnimFalseSwipeSlice(struct Sprite *);
 static void AnimFalseSwipeSlice_Step1(struct Sprite *);
 static void AnimFalseSwipeSlice_Step2(struct Sprite *);
-static void AnimFalseSwipeSlice_Step3(struct Sprite *);
 static void AnimFalseSwipePositionedSlice(struct Sprite *);
 static void AnimEndureEnergy_Step(struct Sprite *);
 static void AnimSharpenSphere(struct Sprite *);
@@ -5914,7 +5913,7 @@ static void AnimFalseSwipeSlice_Step2(struct Sprite *sprite)
     sprite->callback = AnimFalseSwipeSlice_Step3;
 }
 
-static void AnimFalseSwipeSlice_Step3(struct Sprite *sprite)
+void AnimFalseSwipeSlice_Step3(struct Sprite *sprite)
 {
     if (++sprite->data[0] > 1)
     {

@@ -119,7 +119,7 @@ const union AnimCmd *const gAnims_IceCrystalLarge[] =
     sAnim_IceCrystalLarge,
 };
 
-static const union AnimCmd *const sAnims_IceCrystalSmall[] =
+const union AnimCmd *const gAnims_IceCrystalSmall[] =
 {
     sAnim_IceCrystalSmall,
 };
@@ -166,7 +166,7 @@ const struct SpriteTemplate gIceCrystalSpiralInwardSmall =
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjBlend_8x8,
-    .anims = sAnims_IceCrystalSmall,
+    .anims = gAnims_IceCrystalSmall,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimIcePunchSwirlingParticle,
@@ -199,7 +199,7 @@ const struct SpriteTemplate gIceBeamOuterCrystalSpriteTemplate =
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjBlend_8x8,
-    .anims = sAnims_IceCrystalSmall,
+    .anims = gAnims_IceCrystalSmall,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimIceBeamParticle,
@@ -234,7 +234,7 @@ const struct SpriteTemplate gIceCrystalHitSmallSpriteTemplate =
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_AffineNormal_ObjBlend_8x8,
-    .anims = sAnims_IceCrystalSmall,
+    .anims = gAnims_IceCrystalSmall,
     .images = NULL,
     .affineAnims = gAffineAnims_IceCrystalHit,
     .callback = AnimIceEffectParticle,
@@ -515,7 +515,7 @@ const struct SpriteTemplate gIceBallImpactShardSpriteTemplate =
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = sAnims_IceCrystalSmall,
+    .anims = gAnims_IceCrystalSmall,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = InitIceBallParticle,
