@@ -989,9 +989,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
     if (bestMonId != PARTY_SIZE)
         return bestMonId;
 
-    // If ace mon is the last available Pokemon and U-Turn/Volt Switch was used - switch to the mon.
-    if (aceMonId != PARTY_SIZE
-        && (gBattleMoves[gLastUsedMove].effect == EFFECT_HIT_ESCAPE || gBattleMoves[gLastUsedMove].effect == EFFECT_PARTING_SHOT))
+    // If ace mon is the last available Pokemon and switch move was used - switch to the mon.
+    if (aceMonId != PARTY_SIZE)
         return aceMonId;
 
     return PARTY_SIZE;
