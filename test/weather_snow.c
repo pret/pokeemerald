@@ -50,7 +50,7 @@ SINGLE_BATTLE_TEST("Snow turns Weather Ball to an Ice-type move and doubles its 
 
 SINGLE_BATTLE_TEST("Snow allows Blizzard to bypass accuracy checks")
 {
-    PASSES_RANDOMLY(100, 100);
+    PASSES_RANDOMLY(100, 100, RNG_ACCURACY);
     GIVEN {
         ASSUME(gBattleMoves[MOVE_BLIZZARD].accuracy == 70);
         PLAYER(SPECIES_WOBBUFFET);
