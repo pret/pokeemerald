@@ -296,7 +296,7 @@ int main(int argc, char *argv[])
                 _exit(2);
             }
             char rom_path[FILENAME_MAX];
-            sprintf(rom_path, "/tmp/file%05d", getpid());
+            sprintf(rom_path, "/tmp/mgba-rom-test-hydra-%05d", getpid());
             int tmpfd;
             if ((tmpfd = open(rom_path, O_WRONLY | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR)) == -1)
             {
@@ -378,7 +378,7 @@ int main(int argc, char *argv[])
             }
         } else {
             runners[i].pid = pid;
-            sprintf(runners[i].rom_path, "/tmp/file%05d", runners[i].pid);
+            sprintf(runners[i].rom_path, "/tmp/mgba-rom-test-hydra-%05d", runners[i].pid);
             runners[i].outfd = pipefds[0];
             if (close(pipefds[1]) == -1)
             {
