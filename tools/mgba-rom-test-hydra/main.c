@@ -168,7 +168,11 @@ static void unlink_roms(void)
         if (runners[i].rom_path[0])
         {
             if (unlink(runners[i].rom_path) == -1)
-                perror("unlink rom_path failed");
+            {
+                int fd;
+                if ((fd = open(runners[i].rom_path, O_RDONLY)) != -1)
+                    perror("unlink rom_path failed");
+            }
         }
     }
 }
