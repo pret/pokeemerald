@@ -15,6 +15,7 @@
  *    passes/known fails/assumption fails/fails.
  */
 #include <fcntl.h>
+#include <math.h>
 #include <poll.h>
 #include <signal.h>
 #include <stdbool.h>
@@ -53,9 +54,10 @@ struct Runner
 };
 
 static unsigned nrunners = 0;
+static unsigned runners_digits = 0;
 static struct Runner *runners = NULL;
 
-static void handle_read(struct Runner *runner)
+static void handle_read(int i, struct Runner *runner)
 {
     char *sol = runner->input_buffer;
     char *eol;
@@ -101,7 +103,7 @@ static void handle_read(struct Runner *runner)
 add_to_results:
                     runner->results++;
                     soc += 2;
-                    fprintf(stdout, "%s: ", runner->test_name);
+                    fprintf(stdout, "[%0*d] %s: ", runners_digits, i, runner->test_name);
                     fwrite(soc, 1, eol - soc, stdout);
                     fwrite(runner->output_buffer, 1, runner->output_buffer_size, stdout);
                     strcpy(runner->test_name, "WAITING...");
@@ -230,6 +232,7 @@ int main(int argc, char *argv[])
     nrunners = sysconf(_SC_NPROCESSORS_ONLN);
     if (nrunners > MAX_PROCESSES)
         nrunners = MAX_PROCESSES;
+    runners_digits = ceil(log10(nrunners));
     runners = calloc(nrunners, sizeof(*runners));
     if (!runners)
     {
@@ -244,7 +247,7 @@ int main(int argc, char *argv[])
         runners[i].output_buffer = malloc(runners[i].output_buffer_capacity);
         strcpy(runners[i].test_name, "WAITING...");
         if (tty)
-            fprintf(stdout, "%s\n", runners[i].test_name);
+            fprintf(stdout, "[%0*d] %s\n", runners_digits, i, runners[i].test_name);
     }
     fflush(stdout);
     atexit(unlink_roms);
@@ -412,7 +415,7 @@ int main(int argc, char *argv[])
             for (int i = 0; i < nrunners; i++)
             {
                 if (runners[i].outfd >= 0)
-                    scrollback += (strlen(runners[i].test_name) + winsize.ws_col - 1) / winsize.ws_col;
+                    scrollback += (3 + runners_digits + strlen(runners[i].test_name) + winsize.ws_col - 1) / winsize.ws_col;
             }
             if (scrollback > 0)
                 fprintf(stdout, "\e[%dF\e[J", scrollback);
@@ -434,7 +437,7 @@ int main(int argc, char *argv[])
                     exit(2);
                 }
                 runners[i].input_buffer_size += n;
-                handle_read(&runners[i]);
+                handle_read(i, &runners[i]);
             }
 
             if (pollfds[i].revents & (POLLERR | POLLHUP))
@@ -454,7 +457,7 @@ int main(int argc, char *argv[])
             for (int i = 0; i < nrunners; i++)
             {
                 if (runners[i].outfd >= 0)
-                    fprintf(stdout, "%s\n", runners[i].test_name);
+                    fprintf(stdout, "[%0*d] %s\n", runners_digits, i, runners[i].test_name);
             }
 
             fflush(stdout);
