@@ -36,8 +36,8 @@ SINGLE_BATTLE_TEST("Defog lowers evasiveness by 1")
 SINGLE_BATTLE_TEST("Defog does not lower evasiveness if target behind Substitute")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) {Speed(4); }
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(5); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_SUBSTITUTE); MOVE(player, MOVE_DEFOG); }
     } SCENE {
@@ -58,14 +58,14 @@ DOUBLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes Reflect and Light 
     PARAMETRIZE { move = MOVE_DEFOG; }
     PARAMETRIZE { move = MOVE_CELEBRATE; }
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) {Speed(4); }
-        PLAYER(SPECIES_WOBBUFFET) {Speed(3); }
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(2); }
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(1); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(1); }
     } WHEN {
         TURN { MOVE(opponentLeft, MOVE_REFLECT); MOVE(opponentRight, MOVE_LIGHT_SCREEN); }
-        TURN { MOVE(playerLeft, move, target:opponentLeft); }
-        TURN { MOVE(playerLeft, MOVE_TACKLE, target:opponentLeft); MOVE(playerRight, MOVE_GUST, target:opponentRight); }
+        TURN { MOVE(playerLeft, move, target: opponentLeft); }
+        TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft); MOVE(playerRight, MOVE_GUST, target: opponentRight); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_REFLECT, opponentLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LIGHT_SCREEN, opponentRight);
@@ -93,14 +93,14 @@ DOUBLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes Mist and Safeguard
     PARAMETRIZE { move = MOVE_DEFOG; }
     PARAMETRIZE { move = MOVE_CELEBRATE; }
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) {Speed(4); }
-        PLAYER(SPECIES_WOBBUFFET) {Speed(3); }
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(2); }
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(1); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(1); }
     } WHEN {
         TURN { MOVE(opponentLeft, MOVE_MIST); MOVE(opponentRight, MOVE_SAFEGUARD); }
-        TURN { MOVE(playerLeft, move, target:opponentLeft); }
-        TURN { MOVE(playerLeft, MOVE_SCREECH, target:opponentLeft); MOVE(playerRight, MOVE_TOXIC, target:opponentRight); }
+        TURN { MOVE(playerLeft, move, target: opponentLeft); }
+        TURN { MOVE(playerLeft, MOVE_SCREECH, target: opponentLeft); MOVE(playerRight, MOVE_TOXIC, target: opponentRight); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MIST, opponentLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SAFEGUARD, opponentRight);
@@ -138,14 +138,14 @@ DOUBLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes Stealth Rock and S
     PARAMETRIZE { move = MOVE_DEFOG; }
     PARAMETRIZE { move = MOVE_CELEBRATE; }
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) {Speed(4); }
-        PLAYER(SPECIES_WOBBUFFET) {Speed(3); }
-        PLAYER(SPECIES_WOBBUFFET) {Speed(3); }
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(2); }
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(1); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(1); }
     } WHEN {
         TURN { MOVE(opponentLeft, MOVE_STEALTH_ROCK); MOVE(opponentRight, MOVE_STICKY_WEB); }
-        TURN { MOVE(playerLeft, move, target:opponentLeft); }
+        TURN { MOVE(playerLeft, move, target: opponentLeft); }
         TURN { SWITCH(playerLeft, 2); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STEALTH_ROCK, opponentLeft);
@@ -186,9 +186,9 @@ SINGLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes Spikes from player
     PARAMETRIZE { move = MOVE_DEFOG; }
     PARAMETRIZE { move = MOVE_CELEBRATE; }
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) {Speed(2); }
-        PLAYER(SPECIES_WOBBUFFET) {Speed(2); }
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(5); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(2); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(2); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_SPIKES); MOVE(player, move); }
         TURN { SWITCH(player, 1); }
@@ -226,8 +226,8 @@ SINGLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes terrain")
     PARAMETRIZE { move = MOVE_GRASSY_TERRAIN; }
     GIVEN {
         ASSUME(B_DEFOG_CLEARS_TERRAIN >= GEN_8);
-        PLAYER(SPECIES_WOBBUFFET) {Speed(50); }
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(5); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(50); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
     } WHEN {
         TURN { MOVE(player, move); MOVE(opponent, MOVE_DEFOG); }
     } SCENE {
@@ -258,9 +258,9 @@ SINGLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes Toxic Spikes from 
     PARAMETRIZE { move = MOVE_DEFOG; }
     PARAMETRIZE { move = MOVE_CELEBRATE; }
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) {Speed(5); }
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(2); }
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(2); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(5); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
     } WHEN {
         TURN { MOVE(player, MOVE_TOXIC_SPIKES); MOVE(opponent, move); }
         TURN { SWITCH(opponent, 1); }
@@ -298,14 +298,14 @@ DOUBLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes Aurora Veil from p
     GIVEN {
         ASSUME(gBattleMoves[MOVE_HAIL].effect == EFFECT_HAIL);
         ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TYPE_ICE);
-        PLAYER(SPECIES_GLALIE) {Speed(4); }
-        PLAYER(SPECIES_GLALIE) {Speed(3); }
-        OPPONENT(SPECIES_GLALIE) {Speed(2); }
-        OPPONENT(SPECIES_GLALIE) {Speed(1); }
+        PLAYER(SPECIES_GLALIE) { Speed(4); }
+        PLAYER(SPECIES_GLALIE) { Speed(3); }
+        OPPONENT(SPECIES_GLALIE) { Speed(2); }
+        OPPONENT(SPECIES_GLALIE) { Speed(1); }
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_HAIL); MOVE(playerRight, MOVE_AURORA_VEIL); }
-        TURN { MOVE(opponentLeft, move, target:playerLeft); }
-        TURN { MOVE(opponentLeft, MOVE_TACKLE, target:playerLeft); MOVE(opponentRight, MOVE_GUST, target:playerRight); }
+        TURN { MOVE(opponentLeft, move, target: playerLeft); }
+        TURN { MOVE(opponentLeft, MOVE_TACKLE, target: playerLeft); MOVE(opponentRight, MOVE_GUST, target: playerRight); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HAIL, playerLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_AURORA_VEIL, playerRight);
@@ -330,17 +330,17 @@ DOUBLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes everything it can"
     GIVEN {
         ASSUME(gBattleMoves[MOVE_HAIL].effect == EFFECT_HAIL);
         ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TYPE_ICE);
-        PLAYER(SPECIES_GLALIE) {Speed(4); }
-        PLAYER(SPECIES_GLALIE) {Speed(3); }
-        PLAYER(SPECIES_GLALIE) {Speed(12); }
-        PLAYER(SPECIES_GLALIE) {Speed(3); }
-        OPPONENT(SPECIES_GLALIE) {Speed(2); }
-        OPPONENT(SPECIES_GLALIE) {Speed(1); }
-        OPPONENT(SPECIES_GLALIE) {Speed(1); }
-        OPPONENT(SPECIES_GLALIE) {Speed(1); }
+        PLAYER(SPECIES_GLALIE) { Speed(4); }
+        PLAYER(SPECIES_GLALIE) { Speed(3); }
+        PLAYER(SPECIES_GLALIE) { Speed(12); }
+        PLAYER(SPECIES_GLALIE) { Speed(3); }
+        OPPONENT(SPECIES_GLALIE) { Speed(2); }
+        OPPONENT(SPECIES_GLALIE) { Speed(1); }
+        OPPONENT(SPECIES_GLALIE) { Speed(1); }
+        OPPONENT(SPECIES_GLALIE) { Speed(1); }
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_STICKY_WEB); MOVE(playerRight, MOVE_SPIKES); MOVE(opponentLeft, MOVE_STICKY_WEB); MOVE(opponentRight, MOVE_SPIKES); }
-        TURN { SWITCH(playerLeft, 2); SWITCH(playerRight, 3); SWITCH(opponentLeft, 2); SWITCH(opponentRight, 3);}
+        TURN { SWITCH(playerLeft, 2); SWITCH(playerRight, 3); SWITCH(opponentLeft, 2); SWITCH(opponentRight, 3); }
         TURN { MOVE(playerLeft, MOVE_TOXIC_SPIKES); MOVE(playerRight, MOVE_STEALTH_ROCK); MOVE(opponentLeft, MOVE_TOXIC_SPIKES); MOVE(opponentRight, MOVE_STEALTH_ROCK); }
         TURN { MOVE(playerLeft, MOVE_HAIL); MOVE(playerRight, MOVE_AURORA_VEIL); MOVE(opponentLeft, MOVE_AURORA_VEIL); MOVE(opponentRight, MOVE_LIGHT_SCREEN); }
         TURN { MOVE(playerLeft, MOVE_REFLECT); MOVE(playerRight, MOVE_LIGHT_SCREEN); MOVE(opponentLeft, MOVE_REFLECT); MOVE(opponentRight, MOVE_SAFEGUARD); }

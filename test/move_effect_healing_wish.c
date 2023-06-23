@@ -56,7 +56,7 @@ SINGLE_BATTLE_TEST("Healing Wish effect activates only if the switched pokemon c
         PLAYER(SPECIES_GARDEVOIR) { Speed(300); }
         PLAYER(SPECIES_NINJASK) { Speed(400); }
         PLAYER(SPECIES_WYNAUT) { HP(50); MaxHP(100); Status1(STATUS1_PARALYSIS); Speed(50); }
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(50); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(50); }
     } WHEN {
         TURN { MOVE(player, MOVE_HEALING_WISH); SEND_OUT(player, 1); }
         TURN { MOVE(player, MOVE_U_TURN); SEND_OUT(player, 2); }

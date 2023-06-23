@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Rain Dish recovers 1/16th of Max HP in Rain")
 {
     GIVEN {
-        PLAYER(SPECIES_LUDICOLO) { Ability(ABILITY_RAIN_DISH); HP(1); MaxHP(100); };
+        PLAYER(SPECIES_LUDICOLO) { Ability(ABILITY_RAIN_DISH); HP(1); MaxHP(100); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_RAIN_DANCE); }
