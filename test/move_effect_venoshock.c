@@ -14,7 +14,7 @@ SINGLE_BATTLE_TEST("Venoshock's power doubles if the target is poisoned/badly po
     PARAMETRIZE { status1 = STATUS1_TOXIC_POISON; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) {Status1(status1);}
+        OPPONENT(SPECIES_WOBBUFFET) { Status1(status1); }
     } WHEN {
         TURN { MOVE(player, MOVE_VENOSHOCK); }
     } SCENE {

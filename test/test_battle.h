@@ -651,12 +651,9 @@ extern struct BattleTestRunnerState *gBattleTestRunnerState;
 /* Test */
 
 #define TO_DO_BATTLE_TEST(_name) \
-    SINGLE_BATTLE_TEST("TODO: " _name) \
+    TEST("TODO: " _name) \
     { \
         TO_DO; \
-        GIVEN { PLAYER(SPECIES_WOBBUFFET); OPPONENT(SPECIES_WOBBUFFET); } \
-        WHEN { TURN { } } \
-        THEN { EXPECT_TO_DO; } \
     }
 
 #define SINGLE_BATTLE_TEST(_name, ...) \

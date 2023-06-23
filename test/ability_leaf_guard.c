@@ -52,7 +52,7 @@ SINGLE_BATTLE_TEST("Leaf Guard prevents non-volatile status conditions in sun")
                 MESSAGE("It's super effective!");
                 break;
         }
-        NONE_OF {STATUS_ICON(player, status1: TRUE);}
+        NONE_OF { STATUS_ICON(player, status1: TRUE); }
     }
 }
 
@@ -64,16 +64,16 @@ SINGLE_BATTLE_TEST("Leaf Guard prevents status conditions from Flame Orb and Tox
     GIVEN {
         ASSUME(gItems[ITEM_FLAME_ORB].holdEffect == HOLD_EFFECT_FLAME_ORB);
         ASSUME(gItems[ITEM_TOXIC_ORB].holdEffect == HOLD_EFFECT_TOXIC_ORB);
-        PLAYER(SPECIES_LEAFEON) {Ability(ABILITY_LEAF_GUARD); Item(item); };
+        PLAYER(SPECIES_LEAFEON) { Ability(ABILITY_LEAF_GUARD); Item(item); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_SUNNY_DAY); }
     } SCENE {
         if (item == ITEM_FLAME_ORB) {
-            NONE_OF { MESSAGE("Leafeon was burned!"); STATUS_ICON(player, burn: TRUE);}
+            NONE_OF { MESSAGE("Leafeon was burned!"); STATUS_ICON(player, burn: TRUE); }
         }
         else {
-            NONE_OF { MESSAGE("Leafeon is badly poisoned!"); STATUS_ICON(player, poison: TRUE);}
+            NONE_OF { MESSAGE("Leafeon is badly poisoned!"); STATUS_ICON(player, poison: TRUE); }
         }
     }
 }
@@ -83,13 +83,13 @@ SINGLE_BATTLE_TEST("Leaf Guard prevents Rest during sun")
     GIVEN {
         ASSUME(B_LEAF_GUARD_PREVENTS_REST >= GEN_5);
         ASSUME(gBattleMoves[MOVE_REST].effect == EFFECT_REST);
-        PLAYER(SPECIES_LEAFEON) { Ability(ABILITY_LEAF_GUARD); HP(100); MaxHP(200); };
+        PLAYER(SPECIES_LEAFEON) { Ability(ABILITY_LEAF_GUARD); HP(100); MaxHP(200); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_SUNNY_DAY); MOVE(player, MOVE_REST); }
     } SCENE {
         MESSAGE("But it failed!");
         NOT STATUS_ICON(player, sleep: TRUE);
-        NONE_OF {HP_BAR(player);}
+        NONE_OF { HP_BAR(player); }
     }
 }

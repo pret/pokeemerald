@@ -10,8 +10,8 @@ SINGLE_BATTLE_TEST("Eject Button is not triggered when there is nothing to switc
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); };
-        OPPONENT(SPECIES_WOBBUFFET) { HP(0); };
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(0); }
     } WHEN {
         TURN {
             MOVE(player, MOVE_QUICK_ATTACK);
@@ -30,8 +30,8 @@ SINGLE_BATTLE_TEST("Eject Button is not triggered when there is nothing to switc
 SINGLE_BATTLE_TEST("Eject Button is not activated by a Sheer Force boosted move")
 {
     GIVEN {
-        PLAYER(SPECIES_NIDOKING) { Ability(ABILITY_SHEER_FORCE); };
-        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); };
+        PLAYER(SPECIES_NIDOKING) { Ability(ABILITY_SHEER_FORCE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN {
@@ -52,7 +52,7 @@ SINGLE_BATTLE_TEST("Eject Button will not activate under Substitute")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_RAICHU) { Item(ITEM_EJECT_BUTTON); };
+        OPPONENT(SPECIES_RAICHU) { Item(ITEM_EJECT_BUTTON); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { 
@@ -74,8 +74,8 @@ SINGLE_BATTLE_TEST("Eject Button will not activate under Substitute")
 SINGLE_BATTLE_TEST("Eject Button is not blocked by trapping abilities or moves")
 {
     GIVEN {
-        PLAYER(SPECIES_DUGTRIO) { Ability(ABILITY_ARENA_TRAP); };
-        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); };
+        PLAYER(SPECIES_DUGTRIO) { Ability(ABILITY_ARENA_TRAP); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN {
@@ -94,7 +94,7 @@ SINGLE_BATTLE_TEST("Eject Button is not triggered after the mon loses Eject Butt
 {
     GIVEN {
         PLAYER(SPECIES_RAICHU);
-        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); };
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN {
@@ -114,9 +114,9 @@ SINGLE_BATTLE_TEST("Eject Button is not triggered after the mon loses Eject Butt
 SINGLE_BATTLE_TEST("Eject Button is not triggered after given to player by Picketpocket")
 {
     GIVEN {
-        PLAYER(SPECIES_REGIELEKI) { Item(ITEM_EJECT_BUTTON); };
+        PLAYER(SPECIES_REGIELEKI) { Item(ITEM_EJECT_BUTTON); }
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_SNEASEL) { Ability(ABILITY_PICKPOCKET); };
+        OPPONENT(SPECIES_SNEASEL) { Ability(ABILITY_PICKPOCKET); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN {
@@ -135,7 +135,7 @@ SINGLE_BATTLE_TEST("Eject Button has no chance to activate after Dragon Tail")
 {
     GIVEN {
         PLAYER(SPECIES_KOMMO_O);
-        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); };
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); }
         OPPONENT(SPECIES_CHANSEY);
     } WHEN {
         TURN {
@@ -157,7 +157,7 @@ SINGLE_BATTLE_TEST("Eject Button prevents Volt Switch / U-Turn from activating")
     GIVEN {
         PLAYER(SPECIES_MANECTRIC);
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); };
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); }
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {
         TURN {
@@ -174,7 +174,7 @@ SINGLE_BATTLE_TEST("Eject Button is activated before Emergency Exit")
 {
     GIVEN {
         PLAYER(SPECIES_LATIAS);
-        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); Item(ITEM_EJECT_BUTTON); };
+        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); Item(ITEM_EJECT_BUTTON); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN {

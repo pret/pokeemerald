@@ -100,16 +100,16 @@ SINGLE_BATTLE_TEST("X Speed sharply raises battler's Speed stat", s16 damage)
     PARAMETRIZE { useItem = TRUE; }
     GIVEN {
         ASSUME(gItems[ITEM_X_SPEED].battleUsage == EFFECT_ITEM_INCREASE_STAT);
-    if (B_X_ITEMS_BUFF >= GEN_7)
-    {
-        PLAYER(SPECIES_WOBBUFFET) { Speed(3); };
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(4); };
-    }
-    else
-    {
-        PLAYER(SPECIES_WOBBUFFET) { Speed(4); };
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); };
-    }
+        if (B_X_ITEMS_BUFF >= GEN_7)
+        {
+            PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
+            OPPONENT(SPECIES_WOBBUFFET) { Speed(4); }
+        }
+        else
+        {
+            PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
+            OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
+        }
     } WHEN {
         if (useItem) TURN { USE_ITEM(player, ITEM_X_SPEED); }
         TURN { MOVE(player, MOVE_TACKLE); MOVE(opponent, MOVE_TACKLE); }
@@ -118,7 +118,8 @@ SINGLE_BATTLE_TEST("X Speed sharply raises battler's Speed stat", s16 damage)
         {
             MESSAGE("Wobbuffet used Tackle!");
             MESSAGE("Foe Wobbuffet used Tackle!");
-        } else
+        }
+        else
         {
             MESSAGE("Foe Wobbuffet used Tackle!");
             MESSAGE("Wobbuffet used Tackle!");
@@ -234,8 +235,8 @@ SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Speed stat", s16 damage)
     PARAMETRIZE { useItem = TRUE; }
     GIVEN {
         ASSUME(gItems[ITEM_MAX_MUSHROOMS].battleUsage == EFFECT_ITEM_INCREASE_ALL_STATS);
-        PLAYER(SPECIES_WOBBUFFET) { Speed(4); };
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); };
+        PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
     } WHEN {
         if (useItem) TURN { USE_ITEM(player, ITEM_MAX_MUSHROOMS); }
         TURN { MOVE(player, MOVE_TACKLE); MOVE(opponent, MOVE_TACKLE); }
@@ -244,7 +245,8 @@ SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Speed stat", s16 damage)
         {
             MESSAGE("Wobbuffet used Tackle!");
             MESSAGE("Foe Wobbuffet used Tackle!");
-        } else
+        }
+        else
         {
             MESSAGE("Foe Wobbuffet used Tackle!");
             MESSAGE("Wobbuffet used Tackle!");

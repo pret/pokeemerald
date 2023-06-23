@@ -1,9 +1,6 @@
 #include "global.h"
 #include "test_battle.h"
 
-#define TEST_HP 1
-#define MAX_HP 400
-
 ASSUMPTIONS
 {
     ASSUME(gBattleMoves[MOVE_SNOWSCAPE].effect == EFFECT_SNOWSCAPE);
@@ -50,7 +47,7 @@ SINGLE_BATTLE_TEST("Snow turns Weather Ball to an Ice-type move and doubles its 
 
 SINGLE_BATTLE_TEST("Snow allows Blizzard to bypass accuracy checks")
 {
-    PASSES_RANDOMLY(100, 100);
+    PASSES_RANDOMLY(100, 100, RNG_ACCURACY);
     GIVEN {
         ASSUME(gBattleMoves[MOVE_BLIZZARD].accuracy == 70);
         PLAYER(SPECIES_WOBBUFFET);
@@ -105,12 +102,12 @@ SINGLE_BATTLE_TEST("Snow causes Moonlight to recover 1/4 of the user's max HP")
 {
     GIVEN {
         ASSUME(gBattleMoves[MOVE_MOONLIGHT].effect == EFFECT_MOONLIGHT);
-        PLAYER(SPECIES_WOBBUFFET) { HP(TEST_HP); MaxHP(MAX_HP); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(400); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_SNOWSCAPE); MOVE(player, MOVE_MOONLIGHT); }
     } SCENE {
-        HP_BAR(player, hp: TEST_HP + (MAX_HP/4));
+        HP_BAR(player, damage: -(400 / 4));
     }
 }
 
@@ -118,12 +115,12 @@ SINGLE_BATTLE_TEST("Snow causes Moonlight to recover 1/4 of the user's max HP")
 {
     GIVEN {
         ASSUME(gBattleMoves[MOVE_MOONLIGHT].effect == EFFECT_MOONLIGHT);
-        PLAYER(SPECIES_WOBBUFFET) { HP(TEST_HP); MaxHP(MAX_HP); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(400); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_SNOWSCAPE); MOVE(player, MOVE_MOONLIGHT); }
     } SCENE {
-        HP_BAR(player, hp: TEST_HP + (MAX_HP/4));
+        HP_BAR(player, damage: -(400 / 4));
     }
 }
 
@@ -131,12 +128,12 @@ SINGLE_BATTLE_TEST("Snow causes Synthesis to recover 1/4 of the user's max HP")
 {
     GIVEN {
         ASSUME(gBattleMoves[MOVE_SYNTHESIS].effect == EFFECT_SYNTHESIS);
-        PLAYER(SPECIES_WOBBUFFET) { HP(TEST_HP); MaxHP(MAX_HP); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(400); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_SNOWSCAPE); MOVE(player, MOVE_SYNTHESIS); }
     } SCENE {
-        HP_BAR(player, hp: TEST_HP + (MAX_HP/4));
+        HP_BAR(player, damage: -(400 / 4));
     }
 }
 
@@ -144,14 +141,11 @@ SINGLE_BATTLE_TEST("Snow causes Morning Sun to recover 1/4 of the user's max HP"
 {
     GIVEN {
         ASSUME(gBattleMoves[MOVE_MORNING_SUN].effect == EFFECT_MORNING_SUN);
-        PLAYER(SPECIES_WOBBUFFET) { HP(TEST_HP); MaxHP(MAX_HP); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(400); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_SNOWSCAPE); MOVE(player, MOVE_MORNING_SUN); }
     } SCENE {
-        HP_BAR(player, hp: TEST_HP + (MAX_HP/4));
+        HP_BAR(player, damage: -(400 / 4));
     }
 }
-
-#undef MAX_HP
-#undef TEST_HP

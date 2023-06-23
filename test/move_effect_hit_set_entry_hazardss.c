@@ -10,8 +10,8 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Stone Axe / Ceaseless Edge set up hazards after hitting the target")
 {
     u16 move;
-    PARAMETRIZE {move = MOVE_STONE_AXE; }
-    PARAMETRIZE {move = MOVE_CEASELESS_EDGE; }
+    PARAMETRIZE { move = MOVE_STONE_AXE; }
+    PARAMETRIZE { move = MOVE_CEASELESS_EDGE; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

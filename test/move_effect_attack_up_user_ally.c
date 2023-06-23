@@ -38,10 +38,10 @@ DOUBLE_BATTLE_TEST("Howl raises user's and partner's Attack", s16 damageLeft, s1
     PARAMETRIZE { raiseAttack = TRUE; }
     GIVEN {
         ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
-        PLAYER(SPECIES_WOBBUFFET) { Speed(15); };
-        PLAYER(SPECIES_WYNAUT) { Speed(10); };
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(13); };
-        OPPONENT(SPECIES_WYNAUT) { Speed(12); };
+        PLAYER(SPECIES_WOBBUFFET) { Speed(15); }
+        PLAYER(SPECIES_WYNAUT) { Speed(10); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(13); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(12); }
     } WHEN {
         if (raiseAttack) TURN { MOVE(playerLeft, MOVE_HOWL); }
         TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft); }
