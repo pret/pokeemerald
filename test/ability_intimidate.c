@@ -61,7 +61,7 @@ DOUBLE_BATTLE_TEST("Intimidate doesn't activate on an empty field in a double ba
 {
     GIVEN {
         ASSUME(gBattleMoves[MOVE_EXPLOSION].effect == EFFECT_EXPLOSION);
-        PLAYER(SPECIES_WOBBUFFET) {}
+        PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); }
         PLAYER(SPECIES_EKANS) { Ability(ABILITY_INTIMIDATE); }
         PLAYER(SPECIES_ABRA);
