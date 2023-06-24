@@ -5224,7 +5224,7 @@ u8 *CopyEasyChatWord(u8 *dest, u16 easyChatWord)
     {
         u16 index = EC_INDEX(easyChatWord);
         u8 groupId = EC_GROUP(easyChatWord);
-        resultStr = StringCopy(dest, GetEasyChatWord(groupId, index));
+        resultStr = StringCopyUppercase(dest, GetEasyChatWord(groupId, index));
     }
     else
     {
