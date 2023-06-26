@@ -1300,7 +1300,19 @@ const u8 *const gMonIconTable[] =
 
 const u8 *const gMonIconTableFemale[] =
 {
+    [SPECIES_PIKACHU] = gMonIcon_Pikachu,
+    [SPECIES_RAICHU] = gMonIcon_Raichu,
+    [SPECIES_GLOOM] = gMonIcon_Gloom,
+    [SPECIES_VILEPLUME] = gMonIcon_Vileplume,
+    [SPECIES_DODUO] = gMonIcon_Doduo,
+    [SPECIES_DODRIO] = gMonIcon_Dodrio,
+    [SPECIES_GOLDEEN] = gMonIcon_Goldeen,
+    [SPECIES_SEAKING] = gMonIcon_Seaking,
     [SPECIES_EEVEE] = gMonIcon_Eevee,
+    [SPECIES_XATU] = gMonIcon_Xatu,
+    [SPECIES_POLITOED] = gMonIcon_Politoed,
+    [SPECIES_MEDITITE] = gMonIcon_Meditite,
+    [SPECIES_MEDICHAM] = gMonIcon_Medicham,
 #if P_GEN_4_POKEMON == TRUE
     [SPECIES_STARLY] = gMonIcon_Starly,
     [SPECIES_STARAVIA] = gMonIcon_Staravia,
@@ -1310,6 +1322,9 @@ const u8 *const gMonIconTableFemale[] =
     [SPECIES_KRICKETUNE] = gMonIcon_Kricketune,
     [SPECIES_SHINX] = gMonIcon_Shinx,
     [SPECIES_COMBEE] = gMonIcon_Combee,
+    [SPECIES_GIBLE] = gMonIcon_Gible,
+    [SPECIES_GABITE] = gMonIcon_Gabite,
+    [SPECIES_GARCHOMP] = gMonIcon_Garchomp,
 #if P_HIPPO_GENDER_DIFF_ICONS == TRUE
     [SPECIES_HIPPOPOTAS] = gMonIcon_HippopotasF,
     [SPECIES_HIPPOWDON] = gMonIcon_HippowdonF,
@@ -2547,7 +2562,19 @@ const u8 gMonIconPaletteIndices[] =
 
 const u8 gMonIconPaletteIndicesFemale[] =
 {
+    [SPECIES_PIKACHU] = 2,
+    [SPECIES_RAICHU] = 0,
+    [SPECIES_GLOOM] = 0,
+    [SPECIES_VILEPLUME] = 0,
+    [SPECIES_DODUO] = 2,
+    [SPECIES_DODRIO] = 2,
+    [SPECIES_GOLDEEN] = 0,
+    [SPECIES_SEAKING] = 0,
     [SPECIES_EEVEE] = 2,
+    [SPECIES_XATU] = 1,
+    [SPECIES_POLITOED] = 1,
+    [SPECIES_MEDITITE] = 0,
+    [SPECIES_MEDICHAM] = 0,
 #if P_GEN_4_POKEMON == TRUE
     [SPECIES_STARLY] = 0,
     [SPECIES_STARAVIA] = 0,
@@ -2556,6 +2583,9 @@ const u8 gMonIconPaletteIndicesFemale[] =
     [SPECIES_KRICKETUNE] = 2,
     [SPECIES_SHINX] = 0,
     [SPECIES_COMBEE] = 0,
+    [SPECIES_GIBLE] = 0,
+    [SPECIES_GABITE] = 0,
+    [SPECIES_GARCHOMP] = 0,
     [SPECIES_HIPPOPOTAS] = 1,
     [SPECIES_HIPPOWDON] = 1,
 #endif
