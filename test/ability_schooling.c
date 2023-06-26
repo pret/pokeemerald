@@ -15,7 +15,7 @@ SINGLE_BATTLE_TEST("Schooling switches Level 20+ Wishiwashi's form when HP is 25
             Level(level);
             HP(GetMonData(&PLAYER_PARTY[0], MON_DATA_MAX_HP) / 2);
             Ability(ABILITY_SCHOOLING);
-        };
+        }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_SUPER_FANG); }
@@ -55,7 +55,7 @@ SINGLE_BATTLE_TEST("Schooling switches Level 20+ Wishiwashi's form when HP is ov
             Level(level);
             HP(GetMonData(&PLAYER_PARTY[0], MON_DATA_MAX_HP) / (overQuarterHP ? 2 : 4));
             Ability(ABILITY_SCHOOLING);
-        };
+        }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_CELEBRATE); }
@@ -89,7 +89,7 @@ SINGLE_BATTLE_TEST("Schooling switches Level 20+ Wishiwashi's form when HP is he
             Level(level);
             HP(GetMonData(&PLAYER_PARTY[0], MON_DATA_MAX_HP) / 4);
             Ability(ABILITY_SCHOOLING);
-        };
+        }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_HEAL_PULSE); }

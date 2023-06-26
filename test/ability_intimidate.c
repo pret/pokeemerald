@@ -14,7 +14,7 @@ SINGLE_BATTLE_TEST("Intimidate (opponent) lowers player's attack after switch ou
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_ARBOK) { Ability(ability); };
+        OPPONENT(SPECIES_ARBOK) { Ability(ability); }
     } WHEN {
         TURN { SWITCH(opponent, 1); }
         TURN { MOVE(player, MOVE_TACKLE); }
@@ -37,9 +37,9 @@ SINGLE_BATTLE_TEST("Intimidate (opponent) lowers player's attack after KO", s16 
     PARAMETRIZE { ability = ABILITY_INTIMIDATE; }
     PARAMETRIZE { ability = ABILITY_SHED_SKIN; }
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { Speed(2); };
-        OPPONENT(SPECIES_WOBBUFFET) { HP(1); Speed(1); };
-        OPPONENT(SPECIES_ARBOK) { Ability(ability); Speed(1); };
+        PLAYER(SPECIES_WOBBUFFET) { Speed(2); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); Speed(1); }
+        OPPONENT(SPECIES_ARBOK) { Ability(ability); Speed(1); }
     } WHEN {
         TURN { MOVE(player, MOVE_TACKLE); SEND_OUT(opponent, 1); }
         TURN { MOVE(player, MOVE_TACKLE); }
@@ -61,17 +61,17 @@ DOUBLE_BATTLE_TEST("Intimidate doesn't activate on an empty field in a double ba
 {
     GIVEN {
         ASSUME(gBattleMoves[MOVE_EXPLOSION].effect == EFFECT_EXPLOSION);
-        PLAYER(SPECIES_WOBBUFFET) { };
-        PLAYER(SPECIES_WOBBUFFET) { HP(1); };
-        PLAYER(SPECIES_EKANS) { Ability(ABILITY_INTIMIDATE); };
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        PLAYER(SPECIES_EKANS) { Ability(ABILITY_INTIMIDATE); }
         PLAYER(SPECIES_ABRA);
-        OPPONENT(SPECIES_WOBBUFFET) { HP(1); };
-        OPPONENT(SPECIES_WOBBUFFET) { HP(1); };
-        OPPONENT(SPECIES_ARBOK) { Ability(ABILITY_INTIMIDATE); };
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
+        OPPONENT(SPECIES_ARBOK) { Ability(ABILITY_INTIMIDATE); }
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_EXPLOSION); SEND_OUT(playerLeft, 2); SEND_OUT(opponentLeft, 2); SEND_OUT(playerRight, 3); SEND_OUT(opponentRight, 3); }
-        TURN { MOVE(playerLeft, MOVE_CELEBRATE);}
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE); }
     } SCENE {
         HP_BAR(playerLeft, hp: 0);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, playerLeft);
@@ -101,8 +101,8 @@ SINGLE_BATTLE_TEST("Intimidate and Eject Button force the opponent to Attack")
     GIVEN {
         ASSUME(gItems[ITEM_EJECT_BUTTON].holdEffect == HOLD_EFFECT_EJECT_BUTTON);
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); };
-        OPPONENT(SPECIES_HITMONTOP) { Moves(MOVE_TACKLE); };
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); }
+        OPPONENT(SPECIES_HITMONTOP) { Moves(MOVE_TACKLE); }
     } WHEN {
         TURN {
                MOVE(player, MOVE_QUICK_ATTACK);
@@ -129,7 +129,7 @@ DOUBLE_BATTLE_TEST("Intimidate activates on an empty slot")
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_CROAGUNK);
         PLAYER(SPECIES_WYNAUT);
-        PLAYER(SPECIES_HITMONTOP) { Ability(ABILITY_INTIMIDATE); };
+        PLAYER(SPECIES_HITMONTOP) { Ability(ABILITY_INTIMIDATE); }
         OPPONENT(SPECIES_RALTS);
         OPPONENT(SPECIES_AZURILL);
     } WHEN {

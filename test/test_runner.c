@@ -155,7 +155,8 @@ void CB2_TestRunner(void)
         if (gTestRunnerState.test->runner->tearDown)
             gTestRunnerState.test->runner->tearDown(gTestRunnerState.test->data);
 
-        if (!gTestRunnerState.expectLeaks)
+        if (gTestRunnerState.result == gTestRunnerState.expectedResult
+         && !gTestRunnerState.expectLeaks)
         {
             const struct MemBlock *head = HeapHead();
             const struct MemBlock *block = head;
@@ -372,10 +373,10 @@ void Test_ExitWithResult(enum TestResult result, const char *fmt, ...)
     gTestRunnerState.result = result;
     ReinitCallbacks();
     if (gTestRunnerState.state == STATE_REPORT_RESULT
-     && gTestRunnerState.test->runner->handleExitWithResult)
+     && gTestRunnerState.result != gTestRunnerState.expectedResult)
     {
-        if (!gTestRunnerState.test->runner->handleExitWithResult(gTestRunnerState.test->data, result)
-         && gTestRunnerState.result != gTestRunnerState.expectedResult)
+        if (!gTestRunnerState.test->runner->handleExitWithResult
+         || !gTestRunnerState.test->runner->handleExitWithResult(gTestRunnerState.test->data, result))
         {
             va_list va;
             va_start(va, fmt);

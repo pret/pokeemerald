@@ -7,14 +7,12 @@ ASSUMPTIONS
     ASSUME(gBattleMoves[MOVE_LUNAR_DANCE].effect == EFFECT_HEALING_WISH);
 }
 
-#define TEST_MAX_HP (100)
-
 SINGLE_BATTLE_TEST("Healing Wish causes the user to faint and fully heals the replacement")
 {
     GIVEN {
         ASSUME(B_HEALING_WISH_SWITCH >= GEN_5);
         PLAYER(SPECIES_GARDEVOIR);
-        PLAYER(SPECIES_WYNAUT) { HP(1); MaxHP(TEST_MAX_HP); Status1(STATUS1_POISON); }
+        PLAYER(SPECIES_WYNAUT) { HP(1); MaxHP(100); Status1(STATUS1_POISON); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_HEALING_WISH); SEND_OUT(player, 1); }
@@ -23,7 +21,7 @@ SINGLE_BATTLE_TEST("Healing Wish causes the user to faint and fully heals the re
         HP_BAR(player, hp: 0);
         MESSAGE("Gardevoir fainted!");
         MESSAGE("The healing wish came true for Wynaut!");
-        HP_BAR(player, hp: TEST_MAX_HP);
+        HP_BAR(player, hp: 100);
         STATUS_ICON(player, none: TRUE);
         MESSAGE("Wynaut regained health!");
     }
@@ -35,7 +33,7 @@ DOUBLE_BATTLE_TEST("Lunar Dance causes the user to faint and fully heals the rep
         ASSUME(B_HEALING_WISH_SWITCH >= GEN_5);
         PLAYER(SPECIES_GARDEVOIR) { Speed(300); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(50); }
-        PLAYER(SPECIES_WYNAUT) { HP(TEST_MAX_HP - 1); MaxHP(TEST_MAX_HP); Status1(STATUS1_BURN); Speed(50); }
+        PLAYER(SPECIES_WYNAUT) { HP(99); MaxHP(100); Status1(STATUS1_BURN); Speed(50); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(50); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(50); }
     } WHEN {
@@ -45,7 +43,7 @@ DOUBLE_BATTLE_TEST("Lunar Dance causes the user to faint and fully heals the rep
         HP_BAR(playerLeft, hp: 0);
         MESSAGE("Gardevoir fainted!");
         MESSAGE("Wynaut became cloaked in mystical moonlight!");
-        HP_BAR(playerLeft, hp: TEST_MAX_HP);
+        HP_BAR(playerLeft, hp: 100);
         STATUS_ICON(playerLeft, none: TRUE);
         MESSAGE("Wynaut regained health!");
     }
@@ -57,8 +55,8 @@ SINGLE_BATTLE_TEST("Healing Wish effect activates only if the switched pokemon c
         ASSUME(B_HEALING_WISH_SWITCH >= GEN_8);
         PLAYER(SPECIES_GARDEVOIR) { Speed(300); }
         PLAYER(SPECIES_NINJASK) { Speed(400); }
-        PLAYER(SPECIES_WYNAUT) { HP(TEST_MAX_HP / 2); MaxHP(TEST_MAX_HP); Status1(STATUS1_PARALYSIS); Speed(50); }
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(50); }
+        PLAYER(SPECIES_WYNAUT) { HP(50); MaxHP(100); Status1(STATUS1_PARALYSIS); Speed(50); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(50); }
     } WHEN {
         TURN { MOVE(player, MOVE_HEALING_WISH); SEND_OUT(player, 1); }
         TURN { MOVE(player, MOVE_U_TURN); SEND_OUT(player, 2); }
@@ -73,7 +71,7 @@ SINGLE_BATTLE_TEST("Healing Wish effect activates only if the switched pokemon c
         ANIMATION(ANIM_TYPE_MOVE, MOVE_U_TURN, player);
         MESSAGE("Do it! Wynaut!");
         MESSAGE("The healing wish came true for Wynaut!");
-        HP_BAR(player, hp: TEST_MAX_HP);
+        HP_BAR(player, hp: 100);
         STATUS_ICON(player, none: TRUE);
         MESSAGE("Wynaut regained health!");
     }

@@ -30,7 +30,7 @@ SINGLE_BATTLE_TEST("Frostbite deals 1/16 damage to effected pokemon")
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_FROSTBITE); }
     } WHEN {
-        TURN { }
+        TURN {}
     } SCENE {
         MESSAGE("Foe Wobbuffet is hurt by its frostbite!");
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_FRZ, opponent);

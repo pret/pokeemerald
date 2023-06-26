@@ -8,7 +8,7 @@ SINGLE_BATTLE_TEST("Drizzle summons rain", s16 damage)
     PARAMETRIZE { ability = ABILITY_DAMP; }
 
     GIVEN {
-        PLAYER(SPECIES_POLITOED) { Ability(ability); };
+        PLAYER(SPECIES_POLITOED) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_BUBBLE); }

@@ -8,8 +8,8 @@ SINGLE_BATTLE_TEST("Hunger Switch switches Morpeko's forms at the end of the tur
     PARAMETRIZE { species = SPECIES_MORPEKO_HANGRY; }
     GIVEN {
         ASSUME(P_GEN_8_POKEMON == TRUE);
-        PLAYER(species) { Speed(2); };
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(1); };
+        PLAYER(species) { Speed(2); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(1); }
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE); }
     } SCENE {

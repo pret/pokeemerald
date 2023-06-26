@@ -841,6 +841,14 @@ void TestRunner_Battle_AfterLastTurn(void)
     STATE->runFinally = FALSE;
 }
 
+static void TearDownBattle(void)
+{
+    FreeMonSpritesGfx();
+    FreeBattleSpritesData();
+    FreeBattleResources();
+    FreeAllWindowBuffers();
+}
+
 static void CB2_BattleTest_NextParameter(void)
 {
     if (++STATE->runParameter >= STATE->parameters)
@@ -856,10 +864,7 @@ static void CB2_BattleTest_NextParameter(void)
 
 static void CB2_BattleTest_NextTrial(void)
 {
-    FreeMonSpritesGfx();
-    FreeBattleSpritesData();
-    FreeBattleResources();
-    FreeAllWindowBuffers();
+    TearDownBattle();
 
     SetMainCallback2(CB2_BattleTest_NextParameter);
 
@@ -903,12 +908,7 @@ static void BattleTest_TearDown(void *data)
         // Free resources that aren't cleaned up when the battle was
         // aborted unexpectedly.
         if (STATE->tearDownBattle)
-        {
-            FreeMonSpritesGfx();
-            FreeBattleSpritesData();
-            FreeBattleResources();
-            FreeAllWindowBuffers();
-        }
+            TearDownBattle();
         FREE_AND_SET_NULL(STATE->results);
         FREE_AND_SET_NULL(STATE);
     }

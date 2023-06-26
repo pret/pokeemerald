@@ -27,8 +27,8 @@ SINGLE_BATTLE_TEST("Insomnia prevents yawn")
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_SPORE); }
-        TURN { }
-        TURN { }
+        TURN {}
+        TURN {}
     } SCENE {
         ABILITY_POPUP(player, ABILITY_INSOMNIA);
         NONE_OF {
