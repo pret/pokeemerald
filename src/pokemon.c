@@ -4074,12 +4074,19 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
     return checksum;
 }
 
+#if B_FRIENDSHIP_BOOST == TRUE
+#define CALC_FRIENDSHIP_BOOST() n = n + ((n * 10 * friendship) / (MAX_FRIENDSHIP * 100));
+#else
+#define CALC_FRIENDSHIP_BOOST()
+#endif
+
 #define CALC_STAT(base, iv, ev, statIndex, field)               \
 {                                                               \
     u8 baseStat = gSpeciesInfo[species].base;                   \
     s32 n = (((2 * baseStat + iv + ev / 4) * level) / 100) + 5; \
     u8 nature = GetNature(mon);                                 \
     n = ModifyStatByNature(nature, n, statIndex);               \
+    CALC_FRIENDSHIP_BOOST()                                     \
     SetMonData(mon, field, &n);                                 \
 }
 
@@ -4100,6 +4107,7 @@ void CalculateMonStats(struct Pokemon *mon)
     s32 spDefenseIV = GetMonData(mon, MON_DATA_SPDEF_IV, NULL);
     s32 spDefenseEV = GetMonData(mon, MON_DATA_SPDEF_EV, NULL);
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u8 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
     s32 level = GetLevelFromMonExp(mon);
     s32 newMaxHP;
 

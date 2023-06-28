@@ -9,12 +9,15 @@
 #define B_MULTI_HIT_CHANCE          GEN_LATEST // In Gen5+, multi-hit moves have different %. See Cmd_setmultihitcounter for values.
 #define B_WHITEOUT_MONEY            GEN_LATEST // In Gen4+, the amount of money lost by losing a battle is determined by the amount of badges earned. Previously, it would cut the current money by half. (While this change was also in FRLG, for the sake of simplicity, setting this to GEN_3 will result in RSE behavior.)
 
-// Exp and stat settings
+// Experience settings
 #define B_EXP_CATCH                 GEN_LATEST // In Gen6+, Pokémon get experience from catching.
 #define B_TRAINER_EXP_MULTIPLIER    GEN_LATEST // In Gen7+, trainer battles no longer give a 1.5 multiplier to EXP gain.
 #define B_SPLIT_EXP                 GEN_LATEST // In Gen6+, all participating mon get full experience.
 #define B_SCALED_EXP                GEN_LATEST // In Gen5 and Gen7+, experience is weighted by level difference.
+
+// Stat settings
 #define B_BADGE_BOOST               GEN_LATEST // In Gen4+, Gym Badges no longer boost a Pokémon's stats.
+#define B_FRIENDSHIP_BOOST          FALSE      // In LGPE only, all stats except HP are boosted up to 10% based on Friendship. Unlike B_BADGE_BOOST, these boosts are accounted when calculating base stats.
 #define B_MAX_LEVEL_EV_GAINS        GEN_LATEST // In Gen5+, Lv100 Pokémon can obtain Effort Values normally.
 #define B_RECALCULATE_STATS         GEN_LATEST // In Gen5+, the stats of the Pokémon who participate in battle are recalculated at the end of each battle.
 
