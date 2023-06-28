@@ -1340,17 +1340,32 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
 
 const struct CompressedSpriteSheet gMonBackPicTableFemale[] =
 {
+    SPECIES_SPRITE(VENUSAUR, gMonBackPic_VenusaurF),
+    SPECIES_SPRITE(BUTTERFREE, gMonBackPic_ButterfreeF),
+    SPECIES_SPRITE(RATTATA, gMonBackPic_RattataF),
+    SPECIES_SPRITE(RATICATE, gMonBackPic_RaticateF),
     SPECIES_SPRITE(PIKACHU, gMonBackPic_PikachuF),
     SPECIES_SPRITE(RAICHU, gMonBackPic_Raichu),
+    SPECIES_SPRITE(ZUBAT, gMonBackPic_ZubatF),
+    SPECIES_SPRITE(GOLBAT, gMonBackPic_GolbatF),
     SPECIES_SPRITE(GLOOM, gMonBackPic_GloomF),
     SPECIES_SPRITE(VILEPLUME, gMonBackPic_VileplumeF),
+    SPECIES_SPRITE(KADABRA, gMonBackPic_KadabraF),
+    SPECIES_SPRITE(ALAKAZAM, gMonBackPic_AlakazamF),
     SPECIES_SPRITE(DODUO, gMonBackPic_DoduoF),
     SPECIES_SPRITE(DODRIO, gMonBackPic_DodrioF),
+    SPECIES_SPRITE(HYPNO, gMonBackPic_HypnoF),
+    SPECIES_SPRITE(RHYHORN, gMonBackPic_RhyhornF),
+    SPECIES_SPRITE(RHYDON, gMonBackPic_RhydonF),
     SPECIES_SPRITE(GOLDEEN, gMonBackPic_GoldeenF),
     SPECIES_SPRITE(SEAKING, gMonBackPic_SeakingF),
+    SPECIES_SPRITE(SCYTHER, gMonBackPic_Scyther),
+    SPECIES_SPRITE(MAGIKARP, gMonBackPic_MagikarpF),
+    SPECIES_SPRITE(GYARADOS, gMonBackPic_GyaradosF),
     SPECIES_SPRITE(EEVEE, gMonBackPic_EeveeF),
     SPECIES_SPRITE(XATU, gMonBackPic_Xatu),
     SPECIES_SPRITE(POLITOED, gMonBackPic_PolitoedF),
+    SPECIES_SPRITE(SCIZOR, gMonBackPic_Scizor),
     SPECIES_SPRITE(MEDITITE, gMonBackPic_MedititeF),
     SPECIES_SPRITE(MEDICHAM, gMonBackPic_MedichamF),
 
@@ -1368,6 +1383,7 @@ const struct CompressedSpriteSheet gMonBackPicTableFemale[] =
     SPECIES_SPRITE(GARCHOMP, gMonBackPic_Garchomp),
     SPECIES_SPRITE(HIPPOPOTAS, gMonBackPic_Hippopotas),
     SPECIES_SPRITE(HIPPOWDON, gMonBackPic_Hippowdon),
+    SPECIES_SPRITE(RHYPERIOR, gMonBackPic_RhyperiorF),
 #endif
 #if P_GEN_5_POKEMON == TRUE
     SPECIES_SPRITE(UNFEZANT, gMonBackPic_UnfezantF),

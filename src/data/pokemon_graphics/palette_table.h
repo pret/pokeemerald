@@ -1338,17 +1338,32 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
 
 const struct CompressedSpritePalette gMonPaletteTableFemale[] =
 {
+    SPECIES_PAL(VENUSAUR, gMonPalette_Venusaur),
+    SPECIES_PAL(BUTTERFREE, gMonPalette_Butterfree),
+    SPECIES_PAL(RATTATA, gMonPalette_Rattata),
+    SPECIES_PAL(RATICATE, gMonPalette_Raticate),
     SPECIES_PAL(PIKACHU, gMonPalette_Pikachu),
     SPECIES_PAL(RAICHU, gMonPalette_Raichu),
+    SPECIES_PAL(ZUBAT, gMonPalette_Zubat),
+    SPECIES_PAL(GOLBAT, gMonPalette_Golbat),
     SPECIES_PAL(GLOOM, gMonPalette_Gloom),
     SPECIES_PAL(VILEPLUME, gMonPalette_Vileplume),
+    SPECIES_PAL(KADABRA, gMonPalette_Kadabra),
+    SPECIES_PAL(ALAKAZAM, gMonPalette_Alakazam),
     SPECIES_PAL(DODUO, gMonPalette_Doduo),
     SPECIES_PAL(DODRIO, gMonPalette_Dodrio),
+    SPECIES_PAL(HYPNO, gMonPalette_Hypno),
+    SPECIES_PAL(RHYHORN, gMonPalette_Rhyhorn),
+    SPECIES_PAL(RHYDON, gMonPalette_Rhydon),
     SPECIES_PAL(GOLDEEN, gMonPalette_Goldeen),
     SPECIES_PAL(SEAKING, gMonPalette_Seaking),
+    SPECIES_PAL(SCYTHER, gMonPalette_Scyther),
+    SPECIES_PAL(MAGIKARP, gMonPalette_Magikarp),
+    SPECIES_PAL(GYARADOS, gMonPalette_Gyarados),
     SPECIES_PAL(EEVEE, gMonPalette_Eevee),
     SPECIES_PAL(XATU, gMonPalette_Xatu),
     SPECIES_PAL(POLITOED, gMonPalette_Politoed),
+    SPECIES_PAL(SCIZOR, gMonPalette_Scizor),
     SPECIES_PAL(MEDITITE, gMonPalette_Meditite),
     SPECIES_PAL(MEDICHAM, gMonPalette_Medicham),
 
@@ -1366,6 +1381,7 @@ const struct CompressedSpritePalette gMonPaletteTableFemale[] =
     SPECIES_PAL(GARCHOMP, gMonPalette_Garchomp),
     SPECIES_PAL(HIPPOPOTAS, gMonPalette_HippopotasF),
     SPECIES_PAL(HIPPOWDON, gMonPalette_HippowdonF),
+    SPECIES_PAL(RHYPERIOR, gMonPalette_Rhyperior),
 #endif
 #if P_GEN_5_POKEMON == TRUE
     SPECIES_PAL(UNFEZANT, gMonPalette_UnfezantF),

@@ -1337,17 +1337,32 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
 
 const struct CompressedSpritePalette gMonShinyPaletteTableFemale[] =
 {
+    SPECIES_SHINY_PAL(VENUSAUR, gMonShinyPalette_Venusaur),
+    SPECIES_SHINY_PAL(BUTTERFREE, gMonShinyPalette_Butterfree),
+    SPECIES_SHINY_PAL(RATTATA, gMonShinyPalette_Rattata),
+    SPECIES_SHINY_PAL(RATICATE, gMonShinyPalette_Raticate),
     SPECIES_SHINY_PAL(PIKACHU, gMonShinyPalette_Pikachu),
     SPECIES_SHINY_PAL(RAICHU, gMonShinyPalette_Raichu),
+    SPECIES_SHINY_PAL(ZUBAT, gMonShinyPalette_Zubat),
+    SPECIES_SHINY_PAL(GOLBAT, gMonShinyPalette_Golbat),
     SPECIES_SHINY_PAL(GLOOM, gMonShinyPalette_Gloom),
     SPECIES_SHINY_PAL(VILEPLUME, gMonShinyPalette_Vileplume),
+    SPECIES_SHINY_PAL(KADABRA, gMonShinyPalette_Kadabra),
+    SPECIES_SHINY_PAL(ALAKAZAM, gMonShinyPalette_Alakazam),
     SPECIES_SHINY_PAL(DODUO, gMonShinyPalette_Doduo),
     SPECIES_SHINY_PAL(DODRIO, gMonShinyPalette_Dodrio),
+    SPECIES_SHINY_PAL(HYPNO, gMonShinyPalette_Hypno),
+    SPECIES_SHINY_PAL(RHYHORN, gMonShinyPalette_Rhyhorn),
+    SPECIES_SHINY_PAL(RHYDON, gMonShinyPalette_Rhydon),
     SPECIES_SHINY_PAL(GOLDEEN, gMonShinyPalette_Goldeen),
     SPECIES_SHINY_PAL(SEAKING, gMonShinyPalette_Seaking),
+    SPECIES_SHINY_PAL(SCYTHER, gMonShinyPalette_Scyther),
+    SPECIES_SHINY_PAL(MAGIKARP, gMonShinyPalette_Magikarp),
+    SPECIES_SHINY_PAL(GYARADOS, gMonShinyPalette_Gyarados),
     SPECIES_SHINY_PAL(EEVEE, gMonShinyPalette_Eevee),
     SPECIES_SHINY_PAL(XATU, gMonShinyPalette_Xatu),
     SPECIES_SHINY_PAL(POLITOED, gMonShinyPalette_Politoed),
+    SPECIES_SHINY_PAL(SCIZOR, gMonShinyPalette_Scizor),
     SPECIES_SHINY_PAL(MEDITITE, gMonShinyPalette_Meditite),
     SPECIES_SHINY_PAL(MEDICHAM, gMonShinyPalette_Medicham),
 
@@ -1365,6 +1380,7 @@ const struct CompressedSpritePalette gMonShinyPaletteTableFemale[] =
     SPECIES_SHINY_PAL(GARCHOMP, gMonShinyPalette_Garchomp),
     SPECIES_SHINY_PAL(HIPPOPOTAS, gMonShinyPalette_HippopotasF),
     SPECIES_SHINY_PAL(HIPPOWDON, gMonShinyPalette_HippowdonF),
+    SPECIES_SHINY_PAL(RHYPERIOR, gMonShinyPalette_Rhyperior),
 #endif
 #if P_GEN_5_POKEMON == TRUE
     SPECIES_SHINY_PAL(UNFEZANT, gMonShinyPalette_UnfezantF),

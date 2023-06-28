@@ -1300,17 +1300,32 @@ const u8 *const gMonIconTable[] =
 
 const u8 *const gMonIconTableFemale[] =
 {
+    [SPECIES_VENUSAUR] = gMonIcon_Venusaur,
+    [SPECIES_BUTTERFREE] = gMonIcon_Butterfree,
+    [SPECIES_RATTATA] = gMonIcon_Rattata,
+    [SPECIES_RATICATE] = gMonIcon_Raticate,
     [SPECIES_PIKACHU] = gMonIcon_Pikachu,
     [SPECIES_RAICHU] = gMonIcon_Raichu,
+    [SPECIES_ZUBAT] = gMonIcon_Zubat,
+    [SPECIES_GOLBAT] = gMonIcon_Golbat,
     [SPECIES_GLOOM] = gMonIcon_Gloom,
     [SPECIES_VILEPLUME] = gMonIcon_Vileplume,
+    [SPECIES_KADABRA] = gMonIcon_Kadabra,
+    [SPECIES_ALAKAZAM] = gMonIcon_Alakazam,
     [SPECIES_DODUO] = gMonIcon_Doduo,
     [SPECIES_DODRIO] = gMonIcon_Dodrio,
+    [SPECIES_HYPNO] = gMonIcon_Hypno,
+    [SPECIES_RHYHORN] = gMonIcon_Rhyhorn,
+    [SPECIES_RHYDON] = gMonIcon_Rhydon,
     [SPECIES_GOLDEEN] = gMonIcon_Goldeen,
     [SPECIES_SEAKING] = gMonIcon_Seaking,
+    [SPECIES_SCYTHER] = gMonIcon_Scyther,
+    [SPECIES_MAGIKARP] = gMonIcon_Magikarp,
+    [SPECIES_GYARADOS] = gMonIcon_Gyarados,
     [SPECIES_EEVEE] = gMonIcon_Eevee,
     [SPECIES_XATU] = gMonIcon_Xatu,
     [SPECIES_POLITOED] = gMonIcon_Politoed,
+    [SPECIES_SCIZOR] = gMonIcon_Scizor,
     [SPECIES_MEDITITE] = gMonIcon_Meditite,
     [SPECIES_MEDICHAM] = gMonIcon_Medicham,
 #if P_GEN_4_POKEMON == TRUE
@@ -1332,6 +1347,7 @@ const u8 *const gMonIconTableFemale[] =
     [SPECIES_HIPPOPOTAS] = gMonIcon_Hippopotas,
     [SPECIES_HIPPOWDON] = gMonIcon_Hippowdon,
 #endif
+    [SPECIES_RHYPERIOR] = gMonIcon_Rhyperior,
 #endif
 #if P_GEN_5_POKEMON == TRUE
     [SPECIES_UNFEZANT] = gMonIcon_UnfezantF,
@@ -2562,17 +2578,32 @@ const u8 gMonIconPaletteIndices[] =
 
 const u8 gMonIconPaletteIndicesFemale[] =
 {
+    [SPECIES_VENUSAUR] = 4,
+    [SPECIES_BUTTERFREE] = 0,
+    [SPECIES_RATTATA] = 2,
+    [SPECIES_RATICATE] = 2,
     [SPECIES_PIKACHU] = 2,
     [SPECIES_RAICHU] = 0,
+    [SPECIES_ZUBAT] = 2,
+    [SPECIES_GOLBAT] = 2,
     [SPECIES_GLOOM] = 0,
     [SPECIES_VILEPLUME] = 0,
+    [SPECIES_KADABRA] = 2,
+    [SPECIES_ALAKAZAM] = 2,
     [SPECIES_DODUO] = 2,
     [SPECIES_DODRIO] = 2,
+    [SPECIES_HYPNO] = 2,
+    [SPECIES_RHYHORN] = 1,
+    [SPECIES_RHYDON] = 1,
     [SPECIES_GOLDEEN] = 0,
     [SPECIES_SEAKING] = 0,
+    [SPECIES_SCYTHER] = 1,
+    [SPECIES_MAGIKARP] = 0,
+    [SPECIES_GYARADOS] = 0,
     [SPECIES_EEVEE] = 2,
     [SPECIES_XATU] = 1,
     [SPECIES_POLITOED] = 1,
+    [SPECIES_SCIZOR] = 0,
     [SPECIES_MEDITITE] = 0,
     [SPECIES_MEDICHAM] = 0,
 #if P_GEN_4_POKEMON == TRUE
@@ -2588,6 +2619,7 @@ const u8 gMonIconPaletteIndicesFemale[] =
     [SPECIES_GARCHOMP] = 0,
     [SPECIES_HIPPOPOTAS] = 1,
     [SPECIES_HIPPOWDON] = 1,
+    [SPECIES_RHYPERIOR] = 0,
 #endif
 #if P_GEN_5_POKEMON == TRUE
     [SPECIES_UNFEZANT] = 1,
