@@ -1013,7 +1013,7 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_GOLEM_ALOLAN]                 = { .size = MON_COORDS_SIZE(64, 48), .y_offset = 13 },
     [SPECIES_GRIMER_ALOLAN]                = { .size = MON_COORDS_SIZE(64, 40), .y_offset = 14 },
     [SPECIES_MUK_ALOLAN]                   = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  6 },
-    [SPECIES_EXEGGUTOR_ALOLAN]             = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  4 },
+    [SPECIES_EXEGGUTOR_ALOLAN]             = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  0 },
     [SPECIES_MAROWAK_ALOLAN]               = { .size = MON_COORDS_SIZE(56, 56), .y_offset =  6 },
     // Galarian Forms
     [SPECIES_MEOWTH_GALARIAN]              = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  8 },
