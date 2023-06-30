@@ -12,6 +12,8 @@ SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim in harsh sunlight")
         ABILITY_POPUP(player, ABILITY_FLOWER_GIFT);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Cherrim transformed!");
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_CHERRIM_SUNSHINE);
     }
 }
 
@@ -32,6 +34,8 @@ SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back to normal when weather c
         ABILITY_POPUP(player, ABILITY_FLOWER_GIFT);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Cherrim transformed!");
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_CHERRIM);
     }
 }
 
@@ -52,6 +56,8 @@ SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back to normal when its abili
         // back to normal
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Cherrim transformed!");
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_CHERRIM);
     }
 }
 

@@ -333,11 +333,10 @@
 
 // Most pokemon have 2 frames (a default and an alternate for their animation).
 // There are 4 exceptions:
-// - Castform has 4 frames, 1 for each form
 // - Deoxys has 2 frames, 1 for each form
 // - Spinda has 1 frame, presumably to avoid the work of animating its spots
 // - Unown has 1 frame, presumably to avoid the work of animating all 28 of its forms
-#define MAX_MON_PIC_FRAMES 4
+#define MAX_MON_PIC_FRAMES 2
 
 #define BATTLE_ALIVE_EXCEPT_ACTIVE   0
 #define BATTLE_ALIVE_ATK_SIDE        1

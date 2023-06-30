@@ -2314,6 +2314,9 @@ const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_FEEBAS - 1]        = ANIM_BOUNCE_ROTATE_TO_SIDES_SLOW,
     [SPECIES_MILOTIC - 1]       = ANIM_CIRCULAR_STRETCH_TWICE,
     [SPECIES_CASTFORM - 1]      = ANIM_H_SLIDE_WOBBLE,
+    [SPECIES_CASTFORM_SUNNY - 1] = ANIM_H_SLIDE_WOBBLE,
+    [SPECIES_CASTFORM_RAINY - 1] = ANIM_H_SLIDE_WOBBLE,
+    [SPECIES_CASTFORM_SNOWY - 1] = ANIM_H_SLIDE_WOBBLE,
     [SPECIES_KECLEON - 1]       = ANIM_FLICKER_INCREASING,
     [SPECIES_SHUPPET - 1]       = ANIM_V_SLIDE_WOBBLE,
     [SPECIES_BANETTE - 1]       = ANIM_CIRCULAR_STRETCH_TWICE,
@@ -7506,13 +7509,6 @@ bool32 IsSpeciesInHoennDex(u16 species)
         return FALSE;
     else
         return TRUE;
-}
-
-void ClearBattleMonForms(void)
-{
-    int i;
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-        gBattleMonForms[i] = 0;
 }
 
 u16 GetBattleBGM(void)

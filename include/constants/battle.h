@@ -423,16 +423,6 @@
 #define B_WAIT_TIME_SHORT       (B_WAIT_TIME_MULTIPLIER * 2)
 #define B_WAIT_TIME_SHORTEST    (B_WAIT_TIME_MULTIPLIER)
 
-#define CHERRIM_OVERCAST  0
-#define CHERRIM_SUNSHINE  1
-
-#define CASTFORM_NORMAL     0
-#define CASTFORM_FIRE       1
-#define CASTFORM_WATER      2
-#define CASTFORM_ICE        3
-#define NUM_CASTFORM_FORMS  4
-#define CASTFORM_SUBSTITUTE (1 << 7)
-
 #define FLEE_ITEM    1
 #define FLEE_ABILITY 2
 
