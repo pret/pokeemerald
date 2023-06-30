@@ -4828,8 +4828,6 @@ BattleScript_PartyHealEnd::
 BattleScript_EffectTripleKick::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	attackstring
-	ppreduce
 	jumpifmove MOVE_TRIPLE_AXEL BS_TripleAxel
 	addbyte sTRIPLE_KICK_POWER, 10 @ triple kick gets +10 power
 	goto BattleScript_HitFromAtkString
@@ -8751,10 +8749,7 @@ BattleScript_IntimidateLoop:
 	jumpiftargetally BattleScript_IntimidateLoopIncrement
 	jumpifabsent BS_TARGET, BattleScript_IntimidateLoopIncrement
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_IntimidateLoopIncrement
-	jumpifholdeffect BS_TARGET, HOLD_EFFECT_CLEAR_AMULET, BattleScript_IntimidatePrevented_Item
-	jumpifability BS_TARGET, ABILITY_CLEAR_BODY, BattleScript_IntimidatePrevented
 	jumpifability BS_TARGET, ABILITY_HYPER_CUTTER, BattleScript_IntimidatePrevented
-	jumpifability BS_TARGET, ABILITY_WHITE_SMOKE, BattleScript_IntimidatePrevented
 .if B_UPDATED_INTIMIDATE >= GEN_8
 	jumpifability BS_TARGET, ABILITY_INNER_FOCUS, BattleScript_IntimidatePrevented
 	jumpifability BS_TARGET, ABILITY_SCRAPPY, BattleScript_IntimidatePrevented
@@ -8795,7 +8790,6 @@ BattleScript_IntimidateContrary_WontIncrease:
 BattleScript_IntimidatePrevented:
 	call BattleScript_AbilityPopUp
 	pause B_WAIT_TIME_LONG
-BattleScript_IntimidatePrevented_Item:
 	setbyte gBattleCommunication STAT_ATK
 	stattextbuffer BS_TARGET
 	printstring STRINGID_STATWASNOTLOWERED
@@ -9120,6 +9114,12 @@ BattleScript_AbilityNoStatLoss::
 	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_PKMNPREVENTSSTATLOSSWITH
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_ItemNoStatLoss::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_STATWASNOTLOWERED
 	waitmessage B_WAIT_TIME_LONG
 	return
 
@@ -9569,6 +9569,7 @@ BattleScript_IgnoresWhileAsleep::
 BattleScript_IgnoresAndUsesRandomMove::
 	printstring STRINGID_PKMNIGNOREDORDERS
 	waitmessage B_WAIT_TIME_LONG
+	setbyte sMOVE_EFFECT, 0
 	jumptocalledmove FALSE
 
 BattleScript_MoveUsedLoafingAround::

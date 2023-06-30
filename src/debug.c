@@ -750,6 +750,7 @@ static void DebugAction_DestroyExtraWindow(u8 taskId)
     ClearStdWindowAndFrame(gTasks[taskId].data[2], TRUE);
     RemoveWindow(gTasks[taskId].data[2]);
 
+    DestroyListMenuTask(gTasks[taskId].data[0], NULL, NULL);
     DestroyTask(taskId);
     ScriptContext_Enable();
     UnfreezeObjectEvents();
