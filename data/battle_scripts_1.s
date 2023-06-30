@@ -9535,6 +9535,7 @@ BattleScript_IgnoresWhileAsleep::
 BattleScript_IgnoresAndUsesRandomMove::
 	printstring STRINGID_PKMNIGNOREDORDERS
 	waitmessage B_WAIT_TIME_LONG
+	setbyte sMOVE_EFFECT, 0
 	jumptocalledmove FALSE
 
 BattleScript_MoveUsedLoafingAround::
