@@ -1378,6 +1378,19 @@ const struct CompressedSpritePalette gMonPaletteTableFemale[] =
     SPECIES_PAL(SCIZOR, gMonPalette_Scizor),
     SPECIES_PAL(HERACROSS, gMonPalette_Heracross),
     SPECIES_PAL(SNEASEL, gMonPalette_Sneasel),
+    SPECIES_PAL(URSARING, gMonPalette_Ursaring),
+    SPECIES_PAL(PILOSWINE, gMonPalette_Piloswine),
+    SPECIES_PAL(OCTILLERY, gMonPalette_Octillery),
+    SPECIES_PAL(HOUNDOOM, gMonPalette_Houndoom),
+    SPECIES_PAL(DONPHAN, gMonPalette_Donphan),
+    SPECIES_PAL(TORCHIC, gMonPalette_Torchic),
+    SPECIES_PAL(COMBUSKEN, gMonPalette_Combusken),
+    SPECIES_PAL(BLAZIKEN, gMonPalette_Blaziken),
+    SPECIES_PAL(BEAUTIFLY, gMonPalette_Beautifly),
+    SPECIES_PAL(DUSTOX, gMonPalette_Dustox),
+    SPECIES_PAL(LUDICOLO, gMonPalette_Ludicolo),
+    SPECIES_PAL(NUZLEAF, gMonPalette_Nuzleaf),
+    SPECIES_PAL(SHIFTRY, gMonPalette_Shiftry),
     SPECIES_PAL(MEDITITE, gMonPalette_Meditite),
     SPECIES_PAL(MEDICHAM, gMonPalette_Medicham),
 
@@ -1399,6 +1412,7 @@ const struct CompressedSpritePalette gMonPaletteTableFemale[] =
     SPECIES_PAL(WEAVILE, gMonPalette_Weavile),
     SPECIES_PAL(RHYPERIOR, gMonPalette_Rhyperior),
     SPECIES_PAL(TANGROWTH, gMonPalette_Tangrowth),
+    SPECIES_PAL(MAMOSWINE, gMonPalette_Mamoswine),
 #endif
 #if P_GEN_5_POKEMON == TRUE
     SPECIES_PAL(UNFEZANT, gMonPalette_UnfezantF),

@@ -5872,6 +5872,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_GUTS, ABILITY_QUICK_FEET, ABILITY_UNNERVE},
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_SLUGMA] =
@@ -5966,6 +5967,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_OBLIVIOUS, ABILITY_SNOW_CLOAK, ABILITY_THICK_FAT},
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_CORSOLA] =
@@ -6041,6 +6043,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_SUCTION_CUPS, ABILITY_SNIPER, ABILITY_MOODY},
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_DELIBIRD] =
@@ -6156,6 +6159,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_EARLY_BIRD, ABILITY_FLASH_FIRE, ABILITY_UNNERVE},
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_KINGDRA] =
@@ -6226,6 +6230,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_STURDY, ABILITY_NONE, ABILITY_SAND_VEIL},
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_PORYGON2] =
@@ -6762,6 +6767,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_SPEED_BOOST},
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_COMBUSKEN] =
@@ -6785,6 +6791,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_SPEED_BOOST},
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_BLAZIKEN] =
@@ -6807,6 +6814,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_SPEED_BOOST},
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_MUDKIP] =
@@ -7038,6 +7046,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_SWARM, ABILITY_NONE, ABILITY_RIVALRY},
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_CASCOON] =
@@ -7083,6 +7092,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_SHIELD_DUST, ABILITY_NONE, ABILITY_COMPOUND_EYES},
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_LOTAD] =
@@ -7152,6 +7162,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_SWIFT_SWIM, ABILITY_RAIN_DISH, ABILITY_OWN_TEMPO},
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_SEEDOT] =
@@ -7198,6 +7209,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_CHLOROPHYLL, ABILITY_EARLY_BIRD, ABILITY_PICKPOCKET},
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_SHIFTRY] =
@@ -7221,6 +7233,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_CHLOROPHYLL, ABILITY_EARLY_BIRD, ABILITY_PICKPOCKET},
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_TAILLOW] =
@@ -11732,6 +11745,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_OBLIVIOUS, ABILITY_SNOW_CLOAK, ABILITY_THICK_FAT},
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_PORYGON_Z] =
