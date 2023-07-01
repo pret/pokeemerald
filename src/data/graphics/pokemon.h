@@ -1090,6 +1090,7 @@ const u32 gMonFrontPic_ElectrodeHisuian[] = INCBIN_U32("graphics/pokemon/electro
 const u32 gMonFrontPic_TyphlosionHisuian[] = INCBIN_U32("graphics/pokemon/typhlosion/hisuian/front.4bpp.lz");
 const u32 gMonFrontPic_QwilfishHisuian[] = INCBIN_U32("graphics/pokemon/qwilfish/hisuian/front.4bpp.lz");
 const u32 gMonFrontPic_SneaselHisuian[] = INCBIN_U32("graphics/pokemon/sneasel/hisuian/front.4bpp.lz");
+const u32 gMonFrontPic_SneaselHisuianF[] = INCBIN_U32("graphics/pokemon/sneasel/hisuian/frontf.4bpp.lz");
 #if P_GEN_5_POKEMON == TRUE
 const u32 gMonFrontPic_SamurottHisuian[] = INCBIN_U32("graphics/pokemon/samurott/hisuian/front.4bpp.lz");
 const u32 gMonFrontPic_LilligantHisuian[] = INCBIN_U32("graphics/pokemon/lilligant/hisuian/front.4bpp.lz");
@@ -2357,6 +2358,7 @@ const u32 gMonBackPic_ElectrodeHisuian[] = INCBIN_U32("graphics/pokemon/electrod
 const u32 gMonBackPic_TyphlosionHisuian[] = INCBIN_U32("graphics/pokemon/typhlosion/hisuian/back.4bpp.lz");
 const u32 gMonBackPic_QwilfishHisuian[] = INCBIN_U32("graphics/pokemon/qwilfish/hisuian/back.4bpp.lz");
 const u32 gMonBackPic_SneaselHisuian[] = INCBIN_U32("graphics/pokemon/sneasel/hisuian/back.4bpp.lz");
+const u32 gMonBackPic_SneaselHisuianF[] = INCBIN_U32("graphics/pokemon/sneasel/hisuian/backf.4bpp.lz");
 #if P_GEN_5_POKEMON == TRUE
 const u32 gMonBackPic_SamurottHisuian[] = INCBIN_U32("graphics/pokemon/samurott/hisuian/back.4bpp.lz");
 const u32 gMonBackPic_LilligantHisuian[] = INCBIN_U32("graphics/pokemon/lilligant/hisuian/back.4bpp.lz");

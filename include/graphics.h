@@ -1157,6 +1157,7 @@ extern const u32 gMonFrontPic_ElectrodeHisuian[];
 extern const u32 gMonFrontPic_TyphlosionHisuian[];
 extern const u32 gMonFrontPic_QwilfishHisuian[];
 extern const u32 gMonFrontPic_SneaselHisuian[];
+extern const u32 gMonFrontPic_SneaselHisuianF[];
 #if P_GEN_5_POKEMON == TRUE
 extern const u32 gMonFrontPic_SamurottHisuian[];
 extern const u32 gMonFrontPic_LilligantHisuian[];
@@ -2426,6 +2427,7 @@ extern const u32 gMonBackPic_ElectrodeHisuian[];
 extern const u32 gMonBackPic_TyphlosionHisuian[];
 extern const u32 gMonBackPic_QwilfishHisuian[];
 extern const u32 gMonBackPic_SneaselHisuian[];
+extern const u32 gMonBackPic_SneaselHisuianF[];
 #if P_GEN_5_POKEMON == TRUE
 extern const u32 gMonBackPic_SamurottHisuian[];
 extern const u32 gMonBackPic_LilligantHisuian[];

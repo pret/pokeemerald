@@ -1423,4 +1423,6 @@ const struct CompressedSpriteSheet gMonFrontPicTableFemale[] =
 #if P_GEN_6_POKEMON == TRUE
     SPECIES_SPRITE(PYROAR, gMonFrontPic_PyroarF),
 #endif
+
+    SPECIES_SPRITE(SNEASEL_HISUIAN, gMonFrontPic_SneaselHisuianF),
 };

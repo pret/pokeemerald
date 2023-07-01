@@ -23319,7 +23319,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_INNER_FOCUS, ABILITY_KEEN_EYE, ABILITY_POISON_TOUCH},
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = TRUE,
-	    .flags = SPECIES_FLAG_HISUIAN_FORM,
+	    .flags = SPECIES_FLAG_HISUIAN_FORM | SPECIES_FLAG_GENDER_DIFFERENCE,
     },
 
 #if P_GEN_5_POKEMON == TRUE

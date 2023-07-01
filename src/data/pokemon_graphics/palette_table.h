@@ -1021,8 +1021,8 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(ELECTRODE_HISUIAN, gMonPalette_ElectrodeHisuian),
     SPECIES_PAL(TYPHLOSION_HISUIAN, gMonPalette_TyphlosionHisuian),
     SPECIES_PAL(QWILFISH_HISUIAN, gMonPalette_QwilfishHisuian),
-#if P_GEN_5_POKEMON == TRUE
     SPECIES_PAL(SNEASEL_HISUIAN, gMonPalette_SneaselHisuian),
+#if P_GEN_5_POKEMON == TRUE
     SPECIES_PAL(SAMUROTT_HISUIAN, gMonPalette_SamurottHisuian),
     SPECIES_PAL(LILLIGANT_HISUIAN, gMonPalette_LilligantHisuian),
     SPECIES_PAL(ZORUA_HISUIAN, gMonPalette_ZoruaHisuian),
@@ -1422,4 +1422,6 @@ const struct CompressedSpritePalette gMonPaletteTableFemale[] =
 #if P_GEN_6_POKEMON == TRUE
     SPECIES_PAL(PYROAR, gMonPalette_Pyroar),
 #endif
+
+    SPECIES_PAL(SNEASEL_HISUIAN, gMonPalette_SneaselHisuian),
 };

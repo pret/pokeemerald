@@ -1388,6 +1388,7 @@ const u8 *const gMonIconTableFemale[] =
 #if P_GEN_6_POKEMON == TRUE
     [SPECIES_PYROAR] = gMonIcon_PyroarF,
 #endif
+    [SPECIES_SNEASEL_HISUIAN] = gMonIcon_SneaselHisuian,
 };
 
 const u8 gMonIconPaletteIndices[] =
@@ -2694,6 +2695,7 @@ const u8 gMonIconPaletteIndicesFemale[] =
 #if P_GEN_8_POKEMON == TRUE
     [SPECIES_BASCULEGION] = 0,
 #endif
+    [SPECIES_SNEASEL_HISUIAN] = 2,
 };
 
 const struct SpritePalette gMonIconPaletteTable[] =

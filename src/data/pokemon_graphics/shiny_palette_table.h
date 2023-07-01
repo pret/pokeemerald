@@ -1421,4 +1421,6 @@ const struct CompressedSpritePalette gMonShinyPaletteTableFemale[] =
 #if P_GEN_6_POKEMON == TRUE
     SPECIES_SHINY_PAL(PYROAR, gMonShinyPalette_Pyroar),
 #endif
+
+    SPECIES_SHINY_PAL(SNEASEL_HISUIAN, gMonShinyPalette_SneaselHisuian),
 };
