@@ -1298,8 +1298,9 @@ static void ApplyOffsetSpriteValues(struct PokemonDebugMenu *data)
     gSprites[data->backspriteId].y = DEBUG_MON_BACK_Y + gMonBackPicCoords[species].y_offset + data->offsetsSpriteValues.offset_back_picCoords;
     //Front
     gSprites[data->frontspriteId].y = GetBattlerSpriteFinal_YCustom(species, data->offsetsSpriteValues.offset_front_picCoords, data->offsetsSpriteValues.offset_front_elevation);
-    //Shadow if one was added
-    UpdateShadowSpriteInvisible(data);
+    
+    if (data->currentSubmenu == 2)
+        UpdateShadowSpriteInvisible(data);
 }
 
 static void UpdateSubmenuOneOptionValue(u8 taskId, bool8 increment)
