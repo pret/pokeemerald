@@ -3823,13 +3823,13 @@ static void TryDoEventsBeforeFirstTurn(void)
         }
     }
     if (!gBattleStruct->overworldWeatherDone
-        && AbilityBattleEffects(0, 0, 0, ABILITYEFFECT_SWITCH_IN_WEATHER, 0) != 0)
+        && AbilityBattleEffects(ABILITYEFFECT_SWITCH_IN_WEATHER, 0, 0, ABILITYEFFECT_SWITCH_IN_WEATHER, 0) != 0)
     {
         gBattleStruct->overworldWeatherDone = TRUE;
         return;
     }
 
-    if (!gBattleStruct->terrainDone && AbilityBattleEffects(0, 0, 0, ABILITYEFFECT_SWITCH_IN_TERRAIN, 0) != 0)
+    if (!gBattleStruct->terrainDone && AbilityBattleEffects(ABILITYEFFECT_SWITCH_IN_TERRAIN, 0, 0, ABILITYEFFECT_SWITCH_IN_TERRAIN, 0) != 0)
     {
         gBattleStruct->terrainDone = TRUE;
         return;

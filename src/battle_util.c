@@ -4157,84 +4157,86 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
 
     switch (caseID)
     {
+    case ABILITYEFFECT_SWITCH_IN_TERRAIN:
+        gBattleScripting.battler = battler;
+        if (VarGet(VAR_TERRAIN) & STATUS_FIELD_TERRAIN_ANY)
+        {
+            u16 terrainFlags = VarGet(VAR_TERRAIN) & STATUS_FIELD_TERRAIN_ANY;    // only works for status flag (1 << 15)
+            gFieldStatuses = terrainFlags | STATUS_FIELD_TERRAIN_PERMANENT; // terrain is permanent
+            switch (VarGet(VAR_TERRAIN) & STATUS_FIELD_TERRAIN_ANY)
+            {
+            case STATUS_FIELD_ELECTRIC_TERRAIN:
+                gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+                break;
+            case STATUS_FIELD_MISTY_TERRAIN:
+                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                break;
+            case STATUS_FIELD_GRASSY_TERRAIN:
+                gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                break;
+            case STATUS_FIELD_PSYCHIC_TERRAIN:
+                gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+                break;
+            }
+
+            BattleScriptPushCursorAndCallback(BattleScript_OverworldTerrain);
+            effect++;
+        }
+    #if B_THUNDERSTORM_TERRAIN == TRUE
+        else if (GetCurrentWeather() == WEATHER_RAIN_THUNDERSTORM && !(gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN))
+        {
+            // overworld weather started rain, so just do electric terrain anim
+            gFieldStatuses = (STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_TERRAIN_PERMANENT);
+            gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+            BattleScriptPushCursorAndCallback(BattleScript_OverworldTerrain);
+            effect++;
+        }
+    #endif
+        break;
+    case ABILITYEFFECT_SWITCH_IN_WEATHER:
+        gBattleScripting.battler = battler;
+        if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
+        {
+            switch (GetCurrentWeather())
+            {
+            case WEATHER_RAIN:
+            case WEATHER_RAIN_THUNDERSTORM:
+            case WEATHER_DOWNPOUR:
+                if (!(gBattleWeather & B_WEATHER_RAIN))
+                {
+                    gBattleWeather = (B_WEATHER_RAIN_TEMPORARY | B_WEATHER_RAIN_PERMANENT);
+                    gBattleScripting.animArg1 = B_ANIM_RAIN_CONTINUES;
+                    effect++;
+                }
+                break;
+            case WEATHER_SANDSTORM:
+                if (!(gBattleWeather & B_WEATHER_SANDSTORM))
+                {
+                    gBattleWeather = B_WEATHER_SANDSTORM;
+                    gBattleScripting.animArg1 = B_ANIM_SANDSTORM_CONTINUES;
+                    effect++;
+                }
+                break;
+            case WEATHER_DROUGHT:
+                if (!(gBattleWeather & B_WEATHER_SUN))
+                {
+                    gBattleWeather = (B_WEATHER_SUN_PERMANENT | B_WEATHER_SUN_TEMPORARY);
+                    gBattleScripting.animArg1 = B_ANIM_SUN_CONTINUES;
+                    effect++;
+                }
+                break;
+            }
+        }
+        if (effect != 0)
+        {
+            gBattleCommunication[MULTISTRING_CHOOSER] = GetCurrentWeather();
+            BattleScriptPushCursorAndCallback(BattleScript_OverworldWeatherStarts);
+        }
+        break;
     case ABILITYEFFECT_ON_SWITCHIN: // 0
         gBattleScripting.battler = battler;
         switch (gLastUsedAbility)
         {
-        case ABILITYEFFECT_SWITCH_IN_TERRAIN:
-            if (VarGet(VAR_TERRAIN) & STATUS_FIELD_TERRAIN_ANY)
-            {
-                u16 terrainFlags = VarGet(VAR_TERRAIN) & STATUS_FIELD_TERRAIN_ANY;    // only works for status flag (1 << 15)
-                gFieldStatuses = terrainFlags | STATUS_FIELD_TERRAIN_PERMANENT; // terrain is permanent
-                switch (VarGet(VAR_TERRAIN) & STATUS_FIELD_TERRAIN_ANY)
-                {
-                case STATUS_FIELD_ELECTRIC_TERRAIN:
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 2;
-                    break;
-                case STATUS_FIELD_MISTY_TERRAIN:
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-                    break;
-                case STATUS_FIELD_GRASSY_TERRAIN:
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-                    break;
-                case STATUS_FIELD_PSYCHIC_TERRAIN:
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 3;
-                    break;
-                }
-
-                BattleScriptPushCursorAndCallback(BattleScript_OverworldTerrain);
-                effect++;
-            }
-        #if B_THUNDERSTORM_TERRAIN == TRUE
-            else if (GetCurrentWeather() == WEATHER_RAIN_THUNDERSTORM && !(gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN))
-            {
-                // overworld weather started rain, so just do electric terrain anim
-                gFieldStatuses = (STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_TERRAIN_PERMANENT);
-                gBattleCommunication[MULTISTRING_CHOOSER] = 2;
-                BattleScriptPushCursorAndCallback(BattleScript_OverworldTerrain);
-                effect++;
-            }
-        #endif
-            break;
-        case ABILITYEFFECT_SWITCH_IN_WEATHER:
-            if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-            {
-                switch (GetCurrentWeather())
-                {
-                case WEATHER_RAIN:
-                case WEATHER_RAIN_THUNDERSTORM:
-                case WEATHER_DOWNPOUR:
-                    if (!(gBattleWeather & B_WEATHER_RAIN))
-                    {
-                        gBattleWeather = (B_WEATHER_RAIN_TEMPORARY | B_WEATHER_RAIN_PERMANENT);
-                        gBattleScripting.animArg1 = B_ANIM_RAIN_CONTINUES;
-                        effect++;
-                    }
-                    break;
-                case WEATHER_SANDSTORM:
-                    if (!(gBattleWeather & B_WEATHER_SANDSTORM))
-                    {
-                        gBattleWeather = B_WEATHER_SANDSTORM;
-                        gBattleScripting.animArg1 = B_ANIM_SANDSTORM_CONTINUES;
-                        effect++;
-                    }
-                    break;
-                case WEATHER_DROUGHT:
-                    if (!(gBattleWeather & B_WEATHER_SUN))
-                    {
-                        gBattleWeather = (B_WEATHER_SUN_PERMANENT | B_WEATHER_SUN_TEMPORARY);
-                        gBattleScripting.animArg1 = B_ANIM_SUN_CONTINUES;
-                        effect++;
-                    }
-                    break;
-                }
-            }
-            if (effect != 0)
-            {
-                gBattleCommunication[MULTISTRING_CHOOSER] = GetCurrentWeather();
-                BattleScriptPushCursorAndCallback(BattleScript_OverworldWeatherStarts);
-            }
-            break;
         case ABILITY_IMPOSTER:
             if (IsBattlerAlive(BATTLE_OPPOSITE(battler))
                 && !(gBattleMons[BATTLE_OPPOSITE(battler)].status2 & (STATUS2_TRANSFORMED | STATUS2_SUBSTITUTE))
