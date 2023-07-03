@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Powder Moves are blocked by Grass Types")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_STUN_SPORE].flags & FLAG_POWDER);
+        ASSUME(gBattleMoves[MOVE_STUN_SPORE].powderMove);
         ASSUME(gSpeciesInfo[SPECIES_ODDISH].types[0] == TYPE_GRASS);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_ODDISH);
@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Powder Moves are blocked by Grass Types")
 SINGLE_BATTLE_TEST("Powder Moves are blocked by Ability Overcoat")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_STUN_SPORE].flags & FLAG_POWDER);
+        ASSUME(gBattleMoves[MOVE_STUN_SPORE].powderMove);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_PINECO) { Ability(ABILITY_OVERCOAT); }
     } WHEN {
@@ -34,7 +34,7 @@ SINGLE_BATTLE_TEST("Powder Moves are blocked by Ability Overcoat")
 SINGLE_BATTLE_TEST("Powder Moves are blocked by Item Safety Goggles")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_STUN_SPORE].flags & FLAG_POWDER);
+        ASSUME(gBattleMoves[MOVE_STUN_SPORE].powderMove);
         ASSUME(gItems[ITEM_SAFETY_GOGGLES].holdEffect == HOLD_EFFECT_SAFETY_GOGGLES);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_ABRA) { Item(ITEM_SAFETY_GOGGLES); }

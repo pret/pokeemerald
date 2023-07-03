@@ -46,7 +46,7 @@ SINGLE_BATTLE_TEST("Triple Arrows makes the foe flinch 30% of the time")
 SINGLE_BATTLE_TEST("Triple Arrows lands a critical hit")
 {
     ASSUME(B_CRIT_CHANCE >= GEN_7);
-    ASSUME(gBattleMoves[MOVE_TRIPLE_ARROWS].flags & FLAG_HIGH_CRIT);
+    ASSUME(gBattleMoves[MOVE_TRIPLE_ARROWS].highCritRatio == TRUE);
     PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);

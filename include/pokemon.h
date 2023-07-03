@@ -344,10 +344,47 @@ struct BattleMove
     u8 secondaryEffectChance;
     u16 target;
     s8 priority;
-    u32 flags;
     u8 split;
     u16 argument;
     u8 zMoveEffect;
+    // Flags
+    u32 makesContact:1;
+    u32 ignoresProtect:1;
+    u32 magicCoatAffected:1;
+    u32 snatchAffected:1;
+    u32 mirrorMoveBanned:1;
+    u32 ignoresKingsRock:1;
+    u32 highCritRatio:1;
+    u32 punchingMove:1;
+    u32 sheerForceBoost:1;
+    u32 bitingMove:1;
+    u32 pulseMove:1;
+    u32 soundMove:1;
+    u32 ballisticMove:1;
+    u32 protectionMove:1;
+    u32 powderMove:1;
+    u32 danceMove:1;
+    u32 windMove:1;
+    u32 slicingMove:1;
+    u32 minimizeDoubleDamage:1;
+    u32 ignoresTargetAbility:1;
+    u32 ignoresTargetDefenseEvasionStages:1;
+    u32 damagesUnderground:1;
+    u32 damagesUnderwater:1;
+    u32 damagesAirborne:1;
+    u32 damagesAirborneDoubleDamage:1;
+    u32 ignoreTypeIfFlyingAndUngrounded:1;
+    u32 thawsUser:1;
+    u32 ignoresSubstitute:1;
+    u32 twoStrikes:1; // May apply its effect on each hit.
+    u32 threeStrikes:1; // May apply its effect on each hit.
+    u32 meFirstBanned:1;
+    u32 gravityBanned:1;
+    u32 mimicBanned:1;
+    u32 metronomeBanned:1;
+    u32 copycatBanned:1;
+    u32 sleepTalkBanned:1;
+    u32 instructBanned:1;
 };
 
 #define SPINDA_SPOT_WIDTH 16

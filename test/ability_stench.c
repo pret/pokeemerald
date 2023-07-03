@@ -17,7 +17,6 @@ SINGLE_BATTLE_TEST("Stench has a 10% chance to flinch")
 
 SINGLE_BATTLE_TEST("Stench does not stack with King's Rock")
 {
-    KNOWN_FAILING;
     PASSES_RANDOMLY(1, 10, RNG_STENCH);
     GIVEN {
         ASSUME(gItems[ITEM_KINGS_ROCK].holdEffect == HOLD_EFFECT_FLINCH);

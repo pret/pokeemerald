@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("Jump Kick has 50% recoil on protect")
 {
     s16 recoil;
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_JUMP_KICK].flags & FLAG_PROTECT_AFFECTED);
+        ASSUME(!gBattleMoves[MOVE_JUMP_KICK].ignoresProtect);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

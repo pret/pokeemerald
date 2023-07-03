@@ -21,6 +21,16 @@
 #include "constants/moves.h"
 #include "constants/items.h"
 
+#define CHECK_MOVE_FLAG(flag)                                                                                   \
+    s32 i;                                                                                                      \
+    u16 *moves = GetMovesArray(battler);                                                                        \
+    for (i = 0; i < MAX_MON_MOVES; i++)                                                                         \
+    {                                                                                                           \
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && gBattleMoves[moves[i]].flag)               \
+            return TRUE;                                                                                        \
+    }                                                                                                           \
+    return FALSE
+
 static u32 AI_GetEffectiveness(u16 multiplier);
 
 // Const Data
@@ -381,35 +391,6 @@ static const u16 sIgnoreMoldBreakerMoves[] =
     MOVE_SEARING_SUNRAZE_SMASH,
 };
 
-static const u16 sInstructBannedMoves[] =
-{
-    MOVE_INSTRUCT,
-    MOVE_BIDE,
-    MOVE_FOCUS_PUNCH,
-    MOVE_BEAK_BLAST,
-    MOVE_SHELL_TRAP,
-    MOVE_SKETCH,
-    MOVE_TRANSFORM,
-    MOVE_MIMIC,
-    MOVE_KINGS_SHIELD,
-    MOVE_STRUGGLE,
-    MOVE_BOUNCE,
-    MOVE_DIG,
-    MOVE_DIVE,
-    MOVE_FLY,
-    MOVE_FREEZE_SHOCK,
-    MOVE_GEOMANCY,
-    MOVE_ICE_BURN,
-    MOVE_PHANTOM_FORCE,
-    MOVE_RAZOR_WIND,
-    MOVE_SHADOW_FORCE,
-    MOVE_SKULL_BASH,
-    MOVE_SKY_ATTACK,
-    MOVE_SKY_DROP,
-    MOVE_SOLAR_BEAM,
-    MOVE_SOLAR_BLADE,
-};
-
 static const u16 sRechargeMoves[] =
 {
     MOVE_HYPER_BEAM,
@@ -734,7 +715,7 @@ bool32 MovesWithSplitUnusable(u32 attacker, u32 target, u32 split)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (moves[i] != MOVE_NONE
-            && moves[i] != 0xFFFF
+            && moves[i] != MOVE_UNAVAILABLE
             && GetBattleMoveSplit(moves[i]) == split
             && !(unusable & gBitTable[i]))
         {
@@ -760,15 +741,15 @@ static bool32 AI_GetIfCrit(u32 move, u8 battlerAtk, u8 battlerDef)
         isCrit = FALSE;
         break;
     case 1:
-        if (gBattleMoves[move].flags & FLAG_HIGH_CRIT && (Random() % 5 == 0))
+        if (gBattleMoves[move].highCritRatio && (Random() % 5 == 0))
             isCrit = TRUE;
         else
             isCrit = FALSE;
         break;
     case 2:
-        if (gBattleMoves[move].flags & FLAG_HIGH_CRIT && (Random() % 2 == 0))
+        if (gBattleMoves[move].highCritRatio && (Random() % 2 == 0))
             isCrit = TRUE;
-        else if (!(gBattleMoves[move].flags & FLAG_HIGH_CRIT) && (Random() % 4) == 0)
+        else if (!(gBattleMoves[move].highCritRatio) && (Random() % 4) == 0)
             isCrit = TRUE;
         else
             isCrit = FALSE;
@@ -855,9 +836,9 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness,
             }
 
             // Handle other multi-strike moves
-            if (gBattleMoves[move].flags & FLAG_TWO_STRIKES)
+            if (gBattleMoves[move].twoStrikes)
                 dmg *= 2;
-            else if (gBattleMoves[move].flags & FLAG_THREE_STRIKES || (move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH))
+            else if (gBattleMoves[move].threeStrikes || (move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH))
                 dmg *= 3;
 
             if (dmg == 0)
@@ -899,30 +880,10 @@ static u32 WhichMoveBetter(u32 move1, u32 move2)
     // Check recoil
     if (GetBattlerAbility(sBattler_AI) != ABILITY_ROCK_HEAD)
     {
-        if (((gBattleMoves[move1].effect == EFFECT_RECOIL_25
-                || gBattleMoves[move1].effect == EFFECT_RECOIL_IF_MISS
-                || gBattleMoves[move1].effect == EFFECT_RECOIL_50
-                || gBattleMoves[move1].effect == EFFECT_RECOIL_33
-                || gBattleMoves[move1].effect == EFFECT_RECOIL_33_STATUS)
-            && (gBattleMoves[move2].effect != EFFECT_RECOIL_25
-                 && gBattleMoves[move2].effect != EFFECT_RECOIL_IF_MISS
-                 && gBattleMoves[move2].effect != EFFECT_RECOIL_50
-                 && gBattleMoves[move2].effect != EFFECT_RECOIL_33
-                 && gBattleMoves[move2].effect != EFFECT_RECOIL_33_STATUS
-                 && gBattleMoves[move2].effect != EFFECT_RECHARGE)))
+        if (IS_MOVE_RECOIL(move1) && !IS_MOVE_RECOIL(move2) && gBattleMoves[move2].effect != EFFECT_RECHARGE)
             return 1;
 
-        if (((gBattleMoves[move2].effect == EFFECT_RECOIL_25
-                || gBattleMoves[move2].effect == EFFECT_RECOIL_IF_MISS
-                || gBattleMoves[move2].effect == EFFECT_RECOIL_50
-                || gBattleMoves[move2].effect == EFFECT_RECOIL_33
-                || gBattleMoves[move2].effect == EFFECT_RECOIL_33_STATUS)
-            && (gBattleMoves[move1].effect != EFFECT_RECOIL_25
-                 && gBattleMoves[move1].effect != EFFECT_RECOIL_IF_MISS
-                 && gBattleMoves[move1].effect != EFFECT_RECOIL_50
-                 && gBattleMoves[move1].effect != EFFECT_RECOIL_33
-                 && gBattleMoves[move1].effect != EFFECT_RECOIL_33_STATUS
-                 && gBattleMoves[move1].effect != EFFECT_RECHARGE)))
+        if (IS_MOVE_RECOIL(move2) && !IS_MOVE_RECOIL(move1) && gBattleMoves[move1].effect != EFFECT_RECHARGE)
             return 0;
     }
     // Check recharge
@@ -1097,7 +1058,7 @@ u8 AI_WhoStrikesFirst(u8 battlerAI, u8 battler2, u16 moveConsidered)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         prioBattler2 = GetMovePriority(battler2, battler2Moves[i]);
-        if (battler2Moves[i] == 0 || battler2Moves[i] == 0xFFFF
+        if (battler2Moves[i] == MOVE_NONE || battler2Moves[i] == MOVE_UNAVAILABLE
             || (prioBattler2 > prioAI && !CanIndexMoveFaintTarget(battler2, battlerAI, i , 2)))
             continue;
 
@@ -1136,7 +1097,7 @@ bool32 CanTargetFaintAi(u8 battlerDef, u8 battlerAtk)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && !(unusable & gBitTable[i])
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && !(unusable & gBitTable[i])
             && AI_DATA->simulatedDmg[battlerDef][battlerAtk][moves[i]] >= gBattleMons[battlerAtk].hp)
         {
             return TRUE;
@@ -1156,7 +1117,7 @@ bool32 CanAIFaintTarget(u8 battlerAtk, u8 battlerDef, u8 numHits)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && !(moveLimitations & gBitTable[i]))
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && !(moveLimitations & gBitTable[i]))
         {
             // Use the pre-calculated value in simulatedDmg instead of re-calculating it
             dmg = AI_DATA->simulatedDmg[battlerAtk][battlerDef][i];
@@ -1205,7 +1166,7 @@ bool32 CanTargetFaintAiWithMod(u8 battlerDef, u8 battlerAtk, s32 hpMod, s32 dmgM
         if (dmgMod)
             dmg *= dmgMod;
 
-        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && !(unusable & gBitTable[i]) && dmg >= hpCheck)
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && !(unusable & gBitTable[i]) && dmg >= hpCheck)
         {
             return TRUE;
         }
@@ -1470,11 +1431,11 @@ bool32 IsSemiInvulnerable(u8 battlerDef, u16 move)
 {
     if (gStatuses3[battlerDef] & STATUS3_PHANTOM_FORCE)
         return TRUE;
-    else if (!TestMoveFlags(move, FLAG_DMG_IN_AIR) && gStatuses3[battlerDef] & STATUS3_ON_AIR)
+    else if (!gBattleMoves[move].damagesAirborne && gStatuses3[battlerDef] & STATUS3_ON_AIR)
         return TRUE;
-    else if (!TestMoveFlags(move, FLAG_DMG_UNDERWATER) && gStatuses3[battlerDef] & STATUS3_UNDERWATER)
+    else if (!gBattleMoves[move].damagesUnderwater && gStatuses3[battlerDef] & STATUS3_UNDERWATER)
         return TRUE;
-    else if (!TestMoveFlags(move, FLAG_DMG_UNDERGROUND) && gStatuses3[battlerDef] & STATUS3_UNDERGROUND)
+    else if (!gBattleMoves[move].damagesUnderground && gStatuses3[battlerDef] & STATUS3_UNDERGROUND)
         return TRUE;
     else
         return FALSE;
@@ -1510,7 +1471,7 @@ bool32 IsMoveEncouragedToHit(u8 battlerAtk, u8 battlerDef, u16 move)
             || (((gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)) && move == MOVE_BLIZZARD))))
         || (gBattleMoves[move].effect == EFFECT_VITAL_THROW)
     #if B_MINIMIZE_DMG_ACC >= GEN_6
-        || ((gStatuses3[battlerDef] & STATUS3_MINIMIZED) && (gBattleMoves[move].flags & FLAG_DMG_MINIMIZE))
+        || ((gStatuses3[battlerDef] & STATUS3_MINIMIZED) && gBattleMoves[move].minimizeDoubleDamage)
     #endif
         || (gBattleMoves[move].accuracy == 0))
     {
@@ -1927,7 +1888,7 @@ bool32 HasOnlyMovesWithSplit(u32 battlerId, u32 split, bool32 onlyOffensive)
     {
         if (onlyOffensive && IS_MOVE_STATUS(moves[i]))
             continue;
-        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && GetBattleMoveSplit(moves[i]) != split)
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && GetBattleMoveSplit(moves[i]) != split)
             return FALSE;
     }
 
@@ -1941,7 +1902,7 @@ bool32 HasMoveWithSplit(u32 battler, u32 split)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && GetBattleMoveSplit(moves[i]) == split)
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && GetBattleMoveSplit(moves[i]) == split)
             return TRUE;
     }
 
@@ -1955,7 +1916,7 @@ bool32 HasMoveWithType(u32 battler, u8 type)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && gBattleMoves[moves[i]].type == type)
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && gBattleMoves[moves[i]].type == type)
             return TRUE;
     }
 
@@ -1969,7 +1930,7 @@ bool32 HasMoveEffect(u32 battlerId, u16 moveEffect)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && gBattleMoves[moves[i]].effect == moveEffect)
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && gBattleMoves[moves[i]].effect == moveEffect)
             return TRUE;
     }
 
@@ -1983,7 +1944,7 @@ bool32 HasMove(u32 battlerId, u32 move)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && moves[i] == move)
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && moves[i] == move)
             return TRUE;
     }
 
@@ -1998,7 +1959,7 @@ bool32 HasMoveWithLowAccuracy(u8 battlerAtk, u8 battlerDef, u8 accCheck, bool32 
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] == MOVE_NONE || moves[i] == 0xFFFF)
+        if (moves[i] == MOVE_NONE || moves[i] == MOVE_UNAVAILABLE)
             continue;
 
         if (!(gBitTable[i] & moveLimitations))
@@ -2066,7 +2027,7 @@ bool32 HasHealingEffect(u32 battlerId)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && IsHealingMoveEffect(gBattleMoves[moves[i]].effect))
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && IsHealingMoveEffect(gBattleMoves[moves[i]].effect))
             return TRUE;
     }
 
@@ -2095,25 +2056,16 @@ bool32 HasTrappingMoveEffect(u8 battler)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && IsTrappingMoveEffect(gBattleMoves[moves[i]].effect))
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && IsTrappingMoveEffect(gBattleMoves[moves[i]].effect))
             return TRUE;
     }
 
     return FALSE;
 }
 
-bool32 HasThawingMove(u8 battlerId)
+bool32 HasThawingMove(u8 battler)
 {
-    s32 i;
-    u16 *moves = GetMovesArray(battlerId);
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && TestMoveFlags(moves[i], FLAG_THAW_USER))
-            return TRUE;
-    }
-
-    return FALSE;
+    CHECK_MOVE_FLAG(thawsUser);
 }
 
 bool32 IsUngroundingEffect(u16 effect)
@@ -2228,7 +2180,7 @@ bool32 HasDamagingMove(u8 battlerId)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && gBattleMoves[moves[i]].power != 0)
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && gBattleMoves[moves[i]].power != 0)
             return TRUE;
     }
 
@@ -2242,7 +2194,7 @@ bool32 HasDamagingMoveOfType(u8 battlerId, u8 type)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE
           && gBattleMoves[moves[i]].type == type && gBattleMoves[moves[i]].power != 0)
             return TRUE;
     }
@@ -2250,15 +2202,24 @@ bool32 HasDamagingMoveOfType(u8 battlerId, u8 type)
     return FALSE;
 }
 
-bool32 IsInstructBannedMove(u16 move)
+bool32 HasSoundMove(u8 battler)
 {
-    u32 i;
-    for (i = 0; i < ARRAY_COUNT(sInstructBannedMoves); i++)
-    {
-        if (move == sInstructBannedMoves[i])
-            return TRUE;
-    }
-    return FALSE;
+    CHECK_MOVE_FLAG(soundMove);
+}
+
+bool32 HasHighCritRatioMove(u8 battler)
+{
+    CHECK_MOVE_FLAG(highCritRatio);
+}
+
+bool32 HasMagicCoatAffectedMove(u8 battler)
+{
+    CHECK_MOVE_FLAG(magicCoatAffected);
+}
+
+bool32 HasSnatchAffectedMove(u8 battler)
+{
+    CHECK_MOVE_FLAG(snatchAffected);
 }
 
 bool32 IsEncoreEncouragedEffect(u16 moveEffect)
@@ -2290,19 +2251,6 @@ bool32 MoveCallsOtherMove(u16 move)
     for (i = 0; i < ARRAY_COUNT(sOtherMoveCallingMoves); i++)
     {
         if (move == sOtherMoveCallingMoves[i])
-            return TRUE;
-    }
-    return FALSE;
-}
-
-bool32 TestMoveFlagsInMoveset(u8 battler, u32 flags)
-{
-    s32 i;
-    u16 *moves = GetMovesArray(battler);
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && TestMoveFlags(moves[i], flags))
             return TRUE;
     }
     return FALSE;
@@ -3788,7 +3736,7 @@ void IncreaseFrostbiteScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 
 bool32 AI_MoveMakesContact(u32 ability, u32 holdEffect, u16 move)
 {
-    if (TestMoveFlags(move, FLAG_MAKES_CONTACT)
+    if (gBattleMoves[move].makesContact
       && ability != ABILITY_LONG_REACH
       && holdEffect != HOLD_EFFECT_PROTECTIVE_PADS)
         return TRUE;
