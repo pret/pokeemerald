@@ -52,7 +52,7 @@ struct TrainerMon
     bool8 isShiny : 1;
 };
 
-#define EVERYTHING_CUSTOMIZED(partyArray) partyArray, .partySize = ARRAY_COUNT(partyArray)
+#define TRAINER_PARTY(partyArray) partyArray, .partySize = ARRAY_COUNT(partyArray)
 
 struct Trainer
 {
