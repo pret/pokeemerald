@@ -833,6 +833,20 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness,
             case EFFECT_FINAL_GAMBIT:
                 dmg = gBattleMons[battlerAtk].hp;
                 break;
+            #if B_BEAT_UP >= GEN_5
+            case EFFECT_BEAT_UP:
+                {
+                    u32 partyCount = CalculatePartyCount(GetBattlerParty(battlerAtk));
+                    u32 i;
+                    gBattleStruct->beatUpSlot = 0;
+                    dmg = 0;
+                    for (i = 0; i < partyCount; i++) {
+                        dmg += CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, FALSE, FALSE, FALSE);
+                    }
+                    gBattleStruct->beatUpSlot = 0;
+                }
+                break;
+            #endif
             }
 
             // Handle other multi-strike moves

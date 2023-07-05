@@ -5432,29 +5432,28 @@ u8 SendMonToPC(struct Pokemon* mon)
     return MON_CANT_GIVE;
 }
 
+u8 CalculatePartyCount(struct Pokemon *party)
+{
+    u32 partyCount = 0;
+
+    while (partyCount < PARTY_SIZE
+        && GetMonData(&party[partyCount], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
+    {
+        partyCount++;
+    }
+    
+    return partyCount;
+}
+
 u8 CalculatePlayerPartyCount(void)
 {
-    gPlayerPartyCount = 0;
-
-    while (gPlayerPartyCount < PARTY_SIZE
-        && GetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
-    {
-        gPlayerPartyCount++;
-    }
-
+    gPlayerPartyCount = CalculatePartyCount(gPlayerParty);
     return gPlayerPartyCount;
 }
 
 u8 CalculateEnemyPartyCount(void)
 {
-    gEnemyPartyCount = 0;
-
-    while (gEnemyPartyCount < PARTY_SIZE
-        && GetMonData(&gEnemyParty[gEnemyPartyCount], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
-    {
-        gEnemyPartyCount++;
-    }
-
+    gEnemyPartyCount = CalculatePartyCount(gEnemyParty);
     return gEnemyPartyCount;
 }
 
