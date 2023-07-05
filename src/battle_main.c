@@ -1890,11 +1890,6 @@ static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i)
         buffer = (const u8 *) &trainer->party.NoItemDefaultMoves[i];
         n = sizeof(*trainer->party.NoItemDefaultMoves);
     }
-    else if (trainer->partyFlags == F_TRAINER_PARTY_CUSTOM_MOVESET)
-    {
-        buffer = (const u8 *) &trainer->party.NoItemCustomMoves[i];
-        n = sizeof(*trainer->party.NoItemCustomMoves);
-    }
     else if (trainer->partyFlags == F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED)
     {
         buffer = (const u8 *) &trainer->party.EverythingCustomized[i];
@@ -1992,19 +1987,6 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 const struct TrainerMonNoItemDefaultMoves *partyData = trainer->party.NoItemDefaultMoves;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
                 CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
-                break;
-            }
-            case F_TRAINER_PARTY_CUSTOM_MOVESET:
-            {
-                const struct TrainerMonNoItemCustomMoves *partyData = trainer->party.NoItemCustomMoves;
-                fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
-
-                for (j = 0; j < MAX_MON_MOVES; j++)
-                {
-                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
-                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
-                }
                 break;
             }
             case F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED:
