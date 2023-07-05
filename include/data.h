@@ -35,7 +35,7 @@ struct MonCoords
 #define TRAINER_PARTY_EVS(hp, atk, def, speed, spatk, spdef) ((const u8[6]){hp,atk,def,spatk,spdef,speed})
 #define TRAINER_PARTY_NATURE(nature) (nature+1)
 
-struct TrainerMonCustomized
+struct TrainerMon
 {
     const u8 *nickname;
     const u8 *ev;
@@ -57,7 +57,7 @@ struct TrainerMonCustomized
 struct Trainer
 {
     /*0x00*/ u32 aiFlags;
-    /*0x04*/ const struct TrainerMonCustomized *party;
+    /*0x04*/ const struct TrainerMon *party;
     /*0x08*/ u16 items[MAX_TRAINER_ITEMS];
     /*0x10*/ u8 trainerClass;
     /*0x11*/ u8 encounterMusic_gender; // last bit is gender
