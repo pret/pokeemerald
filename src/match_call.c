@@ -1796,14 +1796,7 @@ static void PopulateSpeciesFromTrainerParty(int matchCallId, u8 *destStr)
     trainerId = GetLastBeatenRematchTrainerId(sMatchCallTrainers[matchCallId].trainerId);
     party = gTrainers[trainerId].party;
     monId = Random() % gTrainers[trainerId].partySize;
-
-    switch (gTrainers[trainerId].partyFlags)
-    {
-    default:
-    case F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED:
-        speciesName = gSpeciesNames[party.EverythingCustomized[monId].species];
-        break;
-    }
+    speciesName = gSpeciesNames[party.EverythingCustomized[monId].species];
 
     StringCopy(destStr, speciesName);
 }
