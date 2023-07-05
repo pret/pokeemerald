@@ -155,7 +155,7 @@ void CB2_TestRunner(void)
         if (gTestRunnerState.test->runner->tearDown)
             gTestRunnerState.test->runner->tearDown(gTestRunnerState.test->data);
 
-        if (gTestRunnerState.result == gTestRunnerState.expectedResult
+        if (gTestRunnerState.result == TEST_RESULT_PASS
          && !gTestRunnerState.expectLeaks)
         {
             const struct MemBlock *head = HeapHead();
