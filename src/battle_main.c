@@ -1885,12 +1885,7 @@ static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i)
 {
     const u8 *buffer;
     u32 n;
-    if (trainer->partyFlags == 0)
-    {
-        buffer = (const u8 *) &trainer->party.NoItemDefaultMoves[i];
-        n = sizeof(*trainer->party.NoItemDefaultMoves);
-    }
-    else if (trainer->partyFlags == F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED)
+    if (trainer->partyFlags == F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED)
     {
         buffer = (const u8 *) &trainer->party.EverythingCustomized[i];
         n = sizeof(*trainer->party.EverythingCustomized);
@@ -1982,13 +1977,6 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             personalityValue += personalityHash << 8;
             switch (trainer->partyFlags)
             {
-            case 0:
-            {
-                const struct TrainerMonNoItemDefaultMoves *partyData = trainer->party.NoItemDefaultMoves;
-                fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
-                break;
-            }
             case F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED:
             {
                 const struct TrainerMonCustomized *partyData = trainer->party.EverythingCustomized;

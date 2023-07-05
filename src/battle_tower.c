@@ -3056,13 +3056,6 @@ static void FillPartnerParty(u16 trainerId)
 
             switch (gTrainers[trainerId - TRAINER_CUSTOM_PARTNER].partyFlags)
             {
-            case 0:
-            {
-                const struct TrainerMonNoItemDefaultMoves *partyData = gTrainers[trainerId - TRAINER_CUSTOM_PARTNER].party.NoItemDefaultMoves;
-
-                CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, partyData[i].iv * 31 / 255, TRUE, j, TRUE, otID);
-                break;
-            }
             case F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED:
             {
                 const struct TrainerMonCustomized *partyData = gTrainers[trainerId - TRAINER_CUSTOM_PARTNER].party.EverythingCustomized;

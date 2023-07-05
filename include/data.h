@@ -52,19 +52,10 @@ struct TrainerMonCustomized
     bool8 isShiny : 1;
 };
 
-struct TrainerMonNoItemDefaultMoves
-{
-    u16 iv;
-    u8 lvl;
-    u16 species;
-};
-
-#define NO_ITEM_DEFAULT_MOVES(party) { .NoItemDefaultMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = 0
 #define EVERYTHING_CUSTOMIZED(party) { .EverythingCustomized = party}, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED
 
 union TrainerMonPtr
 {
-    const struct TrainerMonNoItemDefaultMoves *NoItemDefaultMoves;
     const struct TrainerMonCustomized *EverythingCustomized;
 };
 

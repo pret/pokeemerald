@@ -1799,10 +1799,7 @@ static void PopulateSpeciesFromTrainerParty(int matchCallId, u8 *destStr)
 
     switch (gTrainers[trainerId].partyFlags)
     {
-    case 0:
     default:
-        speciesName = gSpeciesNames[party.NoItemDefaultMoves[monId].species];
-        break;
     case F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED:
         speciesName = gSpeciesNames[party.EverythingCustomized[monId].species];
         break;

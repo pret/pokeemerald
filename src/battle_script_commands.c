@@ -7339,12 +7339,6 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     {
         switch (gTrainers[trainerId].partyFlags)
         {
-        case 0:
-            {
-                const struct TrainerMonNoItemDefaultMoves *party = gTrainers[trainerId].party.NoItemDefaultMoves;
-                lastMonLevel = party[gTrainers[trainerId].partySize - 1].lvl;
-            }
-            break;
         case F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED:
             {
                 const struct TrainerMonCustomized *party = gTrainers[trainerId].party.EverythingCustomized;
