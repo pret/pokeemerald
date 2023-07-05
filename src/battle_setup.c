@@ -765,7 +765,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
 
     sum = 0;
 
-    party = gTrainers[opponentId].party.EverythingCustomized;
+    party = gTrainers[opponentId].party;
     for (i = 0; i < count; i++)
         sum += party[i].lvl;
 

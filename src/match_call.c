@@ -1789,14 +1789,14 @@ static void PopulateSpeciesFromTrainerLocation(int matchCallId, u8 *destStr)
 static void PopulateSpeciesFromTrainerParty(int matchCallId, u8 *destStr)
 {
     u16 trainerId;
-    union TrainerMonPtr party;
+    const struct TrainerMonCustomized *party;
     u8 monId;
     const u8 *speciesName;
 
     trainerId = GetLastBeatenRematchTrainerId(sMatchCallTrainers[matchCallId].trainerId);
     party = gTrainers[trainerId].party;
     monId = Random() % gTrainers[trainerId].partySize;
-    speciesName = gSpeciesNames[party.EverythingCustomized[monId].species];
+    speciesName = gSpeciesNames[party[monId].species];
 
     StringCopy(destStr, speciesName);
 }

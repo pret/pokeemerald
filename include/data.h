@@ -52,17 +52,12 @@ struct TrainerMonCustomized
     bool8 isShiny : 1;
 };
 
-#define EVERYTHING_CUSTOMIZED(party) { .EverythingCustomized = party}, .partySize = ARRAY_COUNT(party)
-
-union TrainerMonPtr
-{
-    const struct TrainerMonCustomized *EverythingCustomized;
-};
+#define EVERYTHING_CUSTOMIZED(partyArray) partyArray, .partySize = ARRAY_COUNT(partyArray)
 
 struct Trainer
 {
     /*0x00*/ u32 aiFlags;
-    /*0x04*/ union TrainerMonPtr party;
+    /*0x04*/ const struct TrainerMonCustomized *party;
     /*0x08*/ u16 items[MAX_TRAINER_ITEMS];
     /*0x10*/ u8 trainerClass;
     /*0x11*/ u8 encounterMusic_gender; // last bit is gender

@@ -1883,8 +1883,8 @@ static u32 Crc32B (const u8 *data, u32 size)
 
 static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i)
 {
-    const u8 *buffer = (const u8 *) &trainer->party.EverythingCustomized[i];
-    u32 n = sizeof(*trainer->party.EverythingCustomized);
+    const u8 *buffer = (const u8 *) &trainer->party[i];
+    u32 n = sizeof(*trainer->party);
     return Crc32B(buffer, n);
 }
 
@@ -1962,7 +1962,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
         for (i = 0; i < monsCount; i++)
         {
             u32 personalityHash = GeneratePartyHash(trainer, i);
-            const struct TrainerMonCustomized *partyData = trainer->party.EverythingCustomized;
+            const struct TrainerMonCustomized *partyData = trainer->party;
             u32 otIdType = OT_ID_RANDOM_NO_SHINY;
             u32 fixedOtId = 0;
 
