@@ -1,4 +1,4 @@
-const struct CompressedSpriteSheet gMonFrontPicTable[] =
+const struct CompressedSpriteSheet gMonFrontPicTable[NUM_SPECIES + 1] =
 {
     SPECIES_SPRITE(NONE, gMonFrontPic_CircledQuestionMark),
     SPECIES_SPRITE(BULBASAUR, gMonFrontPic_Bulbasaur),
@@ -1337,7 +1337,7 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(EGG, gMonFrontPic_Egg),
 };
 
-const struct CompressedSpriteSheet gMonFrontPicTableFemale[] =
+const struct CompressedSpriteSheet gMonFrontPicTableFemale[NUM_SPECIES + 1] =
 {
     SPECIES_SPRITE(VENUSAUR, gMonFrontPic_VenusaurF),
     SPECIES_SPRITE(BUTTERFREE, gMonFrontPic_ButterfreeF),
@@ -1394,7 +1394,6 @@ const struct CompressedSpriteSheet gMonFrontPicTableFemale[] =
     SPECIES_SPRITE(SHIFTRY, gMonFrontPic_ShiftryF),
     SPECIES_SPRITE(MEDITITE, gMonFrontPic_MedititeF),
     SPECIES_SPRITE(MEDICHAM, gMonFrontPic_MedichamF),
-
 #if P_GEN_4_POKEMON == TRUE
     SPECIES_SPRITE(STARLY, gMonFrontPic_StarlyF),
     SPECIES_SPRITE(STARAVIA, gMonFrontPic_StaraviaF),
@@ -1403,13 +1402,10 @@ const struct CompressedSpriteSheet gMonFrontPicTableFemale[] =
     SPECIES_SPRITE(KRICKETOT, gMonFrontPic_KricketotF),
     SPECIES_SPRITE(KRICKETUNE, gMonFrontPic_KricketuneF),
     SPECIES_SPRITE(SHINX, gMonFrontPic_ShinxF),
-    SPECIES_SPRITE(COMBEE, gMonFrontPic_Combee),
     SPECIES_SPRITE(AMBIPOM, gMonFrontPic_AmbipomF),
     SPECIES_SPRITE(GIBLE, gMonFrontPic_GibleF),
     SPECIES_SPRITE(GABITE, gMonFrontPic_GabiteF),
     SPECIES_SPRITE(GARCHOMP, gMonFrontPic_GarchompF),
-    SPECIES_SPRITE(HIPPOPOTAS, gMonFrontPic_Hippopotas),
-    SPECIES_SPRITE(HIPPOWDON, gMonFrontPic_Hippowdon),
     SPECIES_SPRITE(WEAVILE, gMonFrontPic_WeavileF),
     SPECIES_SPRITE(RHYPERIOR, gMonFrontPic_RhyperiorF),
     SPECIES_SPRITE(TANGROWTH, gMonFrontPic_TangrowthF),
@@ -1423,6 +1419,5 @@ const struct CompressedSpriteSheet gMonFrontPicTableFemale[] =
 #if P_GEN_6_POKEMON == TRUE
     SPECIES_SPRITE(PYROAR, gMonFrontPic_PyroarF),
 #endif
-
     SPECIES_SPRITE(SNEASEL_HISUIAN, gMonFrontPic_SneaselHisuianF),
 };

@@ -4478,6 +4478,11 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
         return MON_MALE;
 }
 
+bool32 IsPersonalityFemale(u16 species, u32 personality)
+{
+    return GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
+}
+
 u32 GetUnownSpeciesId(u32 personality)
 {
     u16 unownLetter = GetUnownLetterByPersonality(personality);
@@ -4502,9 +4507,19 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
         gMultiuseSpriteTemplate.anims = gAnims_MonPic;
     else if (speciesTag > SPECIES_SHINY_TAG)
+    {
+        if (gMonFrontAnimsPtrTable[speciesTag - SPECIES_SHINY_TAG] != NULL)
         gMultiuseSpriteTemplate.anims = gMonFrontAnimsPtrTable[speciesTag - SPECIES_SHINY_TAG];
     else
+            gMultiuseSpriteTemplate.anims = gMonFrontAnimsPtrTable[SPECIES_NONE];
+    }
+    else
+    {
+        if (gMonFrontAnimsPtrTable[speciesTag] != NULL)
         gMultiuseSpriteTemplate.anims = gMonFrontAnimsPtrTable[speciesTag];
+        else
+            gMultiuseSpriteTemplate.anims = gMonFrontAnimsPtrTable[SPECIES_NONE];
+    }
 }
 
 void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerPicId, u8 battlerPosition)
@@ -7627,17 +7642,21 @@ const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 p
     shinyValue = GET_SHINY_VALUE(otId, personality);
     if (shinyValue < SHINY_ODDS)
     {
-        if (ShouldShowFemaleDifferences(species, personality))
+        if (gMonShinyPaletteTableFemale[species].data != NULL && IsPersonalityFemale(species, personality))
             return gMonShinyPaletteTableFemale[species].data;
-        else
+        else if (gMonShinyPaletteTable[species].data != NULL)
             return gMonShinyPaletteTable[species].data;
+        else
+            return gMonShinyPaletteTable[SPECIES_NONE].data;
     }
     else
     {
-        if (ShouldShowFemaleDifferences(species, personality))
+        if (gMonPaletteTableFemale[species].data != NULL && IsPersonalityFemale(species, personality))
             return gMonPaletteTableFemale[species].data;
-        else
+        else if (gMonPaletteTable[species].data != NULL)
             return gMonPaletteTable[species].data;
+        else
+            return gMonPaletteTable[SPECIES_NONE].data;
     }
 }
 
@@ -7656,17 +7675,21 @@ const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u
     shinyValue = GET_SHINY_VALUE(otId, personality);
     if (shinyValue < SHINY_ODDS)
     {
-        if (ShouldShowFemaleDifferences(species, personality))
+        if (gMonShinyPaletteTableFemale[species].data != NULL && IsPersonalityFemale(species, personality))
             return &gMonShinyPaletteTableFemale[species];
-        else
+        else if (gMonShinyPaletteTable[species].data != NULL)
             return &gMonShinyPaletteTable[species];
+        else
+            return &gMonShinyPaletteTable[SPECIES_NONE];
     }
     else
     {
-        if (ShouldShowFemaleDifferences(species, personality))
+        if (gMonPaletteTableFemale[species].data != NULL && IsPersonalityFemale(species, personality))
             return &gMonPaletteTableFemale[species];
-        else
+        else if (gMonPaletteTable[species].data != NULL)
             return &gMonPaletteTable[species];
+        else
+            return &gMonPaletteTable[SPECIES_NONE];
     }
 }
 
@@ -8491,11 +8514,16 @@ void TrySpecialOverworldEvo(void)
     SetMainCallback2(CB2_ReturnToField);
 }
 
-bool32 ShouldShowFemaleDifferences(u16 species, u32 personality)
+bool32 SpeciesHasGenderDifferences(u16 species)
 {
-    if (species >= NUM_SPECIES)
-        return FALSE;
-    return (gSpeciesInfo[species].flags & SPECIES_FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
+    if (gMonFrontPicTableFemale[species].data != NULL
+     || gMonPaletteTableFemale[species].data != NULL
+     || gMonBackPicTableFemale[species].data != NULL
+     || gMonShinyPaletteTableFemale[species].data != NULL
+     || gMonIconTableFemale[species] != NULL)
+        return TRUE;
+
+    return FALSE;
 }
 
 bool32 TryFormChange(u32 monId, u32 side, u16 method)
