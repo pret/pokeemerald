@@ -31,7 +31,7 @@
     }                                                                                                           \
     return FALSE
 
-static u32 AI_GetEffectiveness(u16 multiplier);
+static u32 AI_GetEffectiveness(uq4_12_t multiplier);
 
 // Const Data
 static const s8 sAiAbilityRatings[ABILITIES_COUNT] =
@@ -768,7 +768,7 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness,
 {
     s32 dmg, moveType, critDmg, normalDmg;
     s8 critChance;
-    u16 effectivenessMultiplier;
+    uq4_12_t effectivenessMultiplier;
 
     if (considerZPower && IsViableZMove(battlerAtk, move))
     {
@@ -1003,9 +1003,10 @@ u32 GetCurrDamageHpPercent(u8 battlerAtk, u8 battlerDef)
     return (bestDmg * 100) / gBattleMons[battlerDef].maxHP;
 }
 
-u16 AI_GetTypeEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef)
+uq4_12_t AI_GetTypeEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef)
 {
-    u16 typeEffectiveness, moveType;
+    uq4_12_t typeEffectiveness;
+    u16 moveType;
 
     SaveBattlerData(battlerAtk);
     SaveBattlerData(battlerDef);
@@ -1030,7 +1031,7 @@ u32 AI_GetMoveEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef)
     return AI_GetEffectiveness(AI_GetTypeEffectiveness(move, battlerAtk, battlerDef));
 }
 
-static u32 AI_GetEffectiveness(u16 multiplier)
+static u32 AI_GetEffectiveness(uq4_12_t multiplier)
 {
     switch (multiplier)
     {
