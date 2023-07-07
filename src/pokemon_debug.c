@@ -493,7 +493,7 @@ static void PrintDigitChars(struct PokemonDebugMenu *data)
     }
 
     text[i++] = CHAR_SPACE;
-    StringCopy(&text[i], gSpeciesNames[species]);
+    StringCopy(&text[i], GetSpeciesName(species));
 
     FillWindowPixelBuffer(WIN_NAME_NUMBERS, 0x11);
     AddTextPrinterParameterized(WIN_NAME_NUMBERS, 1, text, 6, 0, 0, NULL);

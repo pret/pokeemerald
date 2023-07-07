@@ -161,7 +161,7 @@ extern const struct CompressedSpriteSheet gMonFrontPicTableFemale[];
 
 extern const struct Trainer gTrainers[];
 extern const u8 gTrainerClassNames[][13];
-extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
+extern const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1];
 extern const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1];
 extern const u8 *const gZMoveNames[];
 

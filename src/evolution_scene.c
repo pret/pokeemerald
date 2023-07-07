@@ -254,7 +254,7 @@ void EvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopEvo, u
 
     GetMonData(mon, MON_DATA_NICKNAME, name);
     StringCopy_Nickname(gStringVar1, name);
-    StringCopy(gStringVar2, gSpeciesNames[postEvoSpecies]);
+    StringCopy(gStringVar2, GetSpeciesName(postEvoSpecies));
 
     // preEvo sprite
     currSpecies = GetMonData(mon, MON_DATA_SPECIES);
@@ -476,7 +476,7 @@ void TradeEvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, u8 preEvoSprit
 
     GetMonData(mon, MON_DATA_NICKNAME, name);
     StringCopy_Nickname(gStringVar1, name);
-    StringCopy(gStringVar2, gSpeciesNames[postEvoSpecies]);
+    StringCopy(gStringVar2, GetSpeciesName(postEvoSpecies));
 
     gAffineAnimsDisabled = TRUE;
 
@@ -561,7 +561,7 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon *mon)
 
         CopyMon(&gPlayerParty[gPlayerPartyCount], mon, sizeof(struct Pokemon));
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_SPECIES, &gEvolutionTable[preEvoSpecies][1].targetSpecies);
-        SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_NICKNAME, gSpeciesNames[gEvolutionTable[preEvoSpecies][1].targetSpecies]);
+        SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_NICKNAME, GetSpeciesName(gEvolutionTable[preEvoSpecies][1].targetSpecies));
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_HELD_ITEM, &data);
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_MARKINGS, &data);
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_ENCRYPT_SEPARATOR, &data);

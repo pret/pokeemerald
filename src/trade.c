@@ -1165,7 +1165,7 @@ static bool8 BufferTradeParties(void)
                     GetMonData(mon, MON_DATA_NICKNAME, name);
 
                     if (!StringCompareWithoutExtCtrlCodes(name, sText_ShedinjaJP))
-                        SetMonData(mon, MON_DATA_NICKNAME, gSpeciesNames[SPECIES_SHEDINJA]);
+                        SetMonData(mon, MON_DATA_NICKNAME, GetSpeciesName(SPECIES_SHEDINJA));
                 }
             }
         }
@@ -4541,8 +4541,8 @@ static void SpriteCB_BouncingPokeballArrive(struct Sprite *sprite)
 u16 GetInGameTradeSpeciesInfo(void)
 {
     const struct InGameTrade *inGameTrade = &sIngameTrades[gSpecialVar_0x8004];
-    StringCopy(gStringVar1, gSpeciesNames[inGameTrade->requestedSpecies]);
-    StringCopy(gStringVar2, gSpeciesNames[inGameTrade->species]);
+    StringCopy(gStringVar1, GetSpeciesName(inGameTrade->requestedSpecies));
+    StringCopy(gStringVar2, GetSpeciesName(inGameTrade->species));
     return inGameTrade->requestedSpecies;
 }
 
@@ -4552,7 +4552,7 @@ static void BufferInGameTradeMonName(void)
     const struct InGameTrade *inGameTrade = &sIngameTrades[gSpecialVar_0x8004];
     GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
     StringCopy_Nickname(gStringVar1, nickname);
-    StringCopy(gStringVar2, gSpeciesNames[inGameTrade->species]);
+    StringCopy(gStringVar2, GetSpeciesName(inGameTrade->species));
 }
 
 static void CreateInGameTradePokemonInternal(u8 whichPlayerMon, u8 whichInGameTrade)
