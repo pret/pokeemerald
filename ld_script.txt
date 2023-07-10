@@ -66,8 +66,8 @@ SECTIONS {
         gflib/blit.o(.text);
         gflib/window.o(.text);
         gflib/text.o(.text);
-        gflib/sprite.o(.text);
-        gflib/string_util.o(.text);
+        src/sprite.o(.text);
+        src/string_util.o(.text);
         src/link.o(.text);
         src/AgbRfu_LinkManager.o(.text);
         src/link_rfu_3.o(.text);
@@ -451,9 +451,9 @@ SECTIONS {
         gflib/bg.o(.rodata);
         gflib/window.o(.rodata);
         gflib/text.o(.rodata);
-        gflib/sprite.o(.rodata);
+        src/sprite.o(.rodata);
         gflib/io_reg.o(.rodata);
-        gflib/string_util.o(.rodata);
+        src/string_util.o(.rodata);
         src/link.o(.rodata);
         src/link.o(.rodata.str1.4);
         src/AgbRfu_LinkManager.o(.rodata);
