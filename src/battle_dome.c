@@ -5206,7 +5206,7 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
                 u32 personality = 0;
                 u32 targetSpecies = 0;
                 u32 targetAbility = 0;
-                u32 typeMultiplier = 0;
+                uq4_12_t typeMultiplier = 0;
                 do
                 {
                     personality = Random32();
