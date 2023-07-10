@@ -24,7 +24,7 @@ gCurGlyph:
 	.align 2
 gTextFlags:
 	.space 4
-    @ ../gflib/sprite.o
+    @ ../src/sprite.o
 	.align 2
 gOamMatrixAllocBitmap:
 	.space 4
