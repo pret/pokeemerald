@@ -11665,7 +11665,7 @@ SINGLE_ANIMATION(LycanrocDusk);
 SINGLE_ANIMATION(EnamorusTherian);
 #endif
 
-const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
+const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
 {
     [SPECIES_NONE]        = sAnims_None,
     [SPECIES_BULBASAUR]   = sAnims_Bulbasaur,
