@@ -15,6 +15,16 @@ void CB2_TestRunner(void);
 EWRAM_DATA struct TestRunnerState gTestRunnerState;
 EWRAM_DATA struct FunctionTestRunnerState *gFunctionTestRunnerState;
 
+enum {
+    CURRENT_TEST_STATE_ESTIMATE,
+    CURRENT_TEST_STATE_RUN,
+};
+
+__attribute__((section(".persistent"))) static struct {
+    u32 address:28;
+    u32 state:1;
+} sCurrentTest = {0};
+
 void TestRunner_Battle(const struct Test *);
 
 static bool32 MgbaOpen_(void);
@@ -51,6 +61,47 @@ enum
     STATE_EXIT,
 };
 
+static u32 MinCostProcess(void)
+{
+    u32 i;
+    u32 minCost, minCostProcess;
+
+    minCost = gTestRunnerState.processCosts[0];
+    minCostProcess = 0;
+    for (i = 1; i < gTestRunnerN; i++)
+    {
+        if (gTestRunnerState.processCosts[i] < minCost)
+        {
+            minCost = gTestRunnerState.processCosts[i];
+            minCostProcess = i;
+        }
+    }
+
+    return minCostProcess;
+}
+
+// Greedily assign tests to processes based on estimated cost.
+// TODO: Make processCosts a min heap.
+static u32 AssignCostToRunner(void)
+{
+    u32 minCostProcess;
+
+    if (gTestRunnerState.test->runner == &gAssumptionsRunner)
+        return TRUE;
+
+    minCostProcess = MinCostProcess();
+
+    // XXX: If estimateCost returns only on some processes, or
+    // returns inconsistent results then processCosts will be
+    // inconsistent and some tests may not run.
+    if (gTestRunnerState.test->runner->estimateCost)
+        gTestRunnerState.processCosts[minCostProcess] += gTestRunnerState.test->runner->estimateCost(gTestRunnerState.test->data);
+    else
+        gTestRunnerState.processCosts[minCostProcess] += 1;
+
+    return minCostProcess;
+}
+
 void CB2_TestRunner(void)
 {
     switch (gTestRunnerState.state)
@@ -65,12 +116,43 @@ void CB2_TestRunner(void)
 
         gIntrTable[7] = Intr_Timer2;
 
-        gTestRunnerState.state = STATE_NEXT_TEST;
+        // The current test restarted the ROM (e.g. by jumping to NULL).
+        if (sCurrentTest.address != 0)
+        {
+            gTestRunnerState.test = __start_tests;
+            while ((uintptr_t)gTestRunnerState.test != sCurrentTest.address)
+            {
+                AssignCostToRunner();
+                gTestRunnerState.test++;
+            }
+            if (sCurrentTest.state == CURRENT_TEST_STATE_ESTIMATE)
+            {
+                u32 runner = MinCostProcess();
+                gTestRunnerState.processCosts[runner] += 1;
+                if (runner == gTestRunnerI)
+                {
+                    gTestRunnerState.state = STATE_REPORT_RESULT;
+                    gTestRunnerState.result = TEST_RESULT_CRASH;
+                }
+                else
+                {
+                    gTestRunnerState.state = STATE_NEXT_TEST;
+                }
+            }
+            else
+            {
+                gTestRunnerState.state = STATE_REPORT_RESULT;
+                gTestRunnerState.result = TEST_RESULT_CRASH;
+            }
+        }
+        else
+        {
+            gTestRunnerState.state = STATE_NEXT_TEST;
+            gTestRunnerState.test = __start_tests - 1;
+        }
         gTestRunnerState.exitCode = 0;
-        gTestRunnerState.tests = 0;
-        gTestRunnerState.passes = 0;
         gTestRunnerState.skipFilename = NULL;
-        gTestRunnerState.test = __start_tests - 1;
+
         break;
 
     case STATE_NEXT_TEST:
@@ -108,40 +190,19 @@ void CB2_TestRunner(void)
             return;
         }
 
-        // Greedily assign tests to processes based on estimated cost.
-        // TODO: Make processCosts a min heap.
-        if (gTestRunnerState.test->runner != &gAssumptionsRunner)
-        {
-            u32 i;
-            u32 minCost, minCostProcess;
-            minCost = gTestRunnerState.processCosts[0];
-            minCostProcess = 0;
-            for (i = 1; i < gTestRunnerN; i++)
-            {
-                if (gTestRunnerState.processCosts[i] < minCost)
-                {
-                    minCost = gTestRunnerState.processCosts[i];
-                    minCostProcess = i;
-                }
-            }
+        sCurrentTest.address = (uintptr_t)gTestRunnerState.test;
+        sCurrentTest.state = CURRENT_TEST_STATE_ESTIMATE;
 
-            if (minCostProcess == gTestRunnerI)
-                gTestRunnerState.state = STATE_RUN_TEST;
-            else
-                gTestRunnerState.state = STATE_NEXT_TEST;
-
-            // XXX: If estimateCost exits only on some processes then
-            // processCosts will be inconsistent.
-            if (gTestRunnerState.test->runner->estimateCost)
-                gTestRunnerState.processCosts[minCostProcess] += gTestRunnerState.test->runner->estimateCost(gTestRunnerState.test->data);
-            else
-                gTestRunnerState.processCosts[minCostProcess] += 1;
-        }
+        if (AssignCostToRunner() == gTestRunnerI)
+            gTestRunnerState.state = STATE_RUN_TEST;
+        else
+            gTestRunnerState.state = STATE_NEXT_TEST;
 
         break;
 
     case STATE_RUN_TEST:
         gTestRunnerState.state = STATE_REPORT_RESULT;
+        sCurrentTest.state = CURRENT_TEST_STATE_RUN;
         if (gTestRunnerState.test->runner->setUp)
             gTestRunnerState.test->runner->setUp(gTestRunnerState.test->data);
         gTestRunnerState.test->runner->run(gTestRunnerState.test->data);
@@ -186,11 +247,8 @@ void CB2_TestRunner(void)
             const char *color;
             const char *result;
 
-            gTestRunnerState.tests++;
-
             if (gTestRunnerState.result == gTestRunnerState.expectedResult)
             {
-                gTestRunnerState.passes++;
                 color = "\e[32m";
                 MgbaPrintf_(":N%s", gTestRunnerState.test->name);
             }
@@ -242,6 +300,9 @@ void CB2_TestRunner(void)
                 break;
             case TEST_RESULT_TIMEOUT:
                 result = "TIMEOUT";
+                break;
+            case TEST_RESULT_CRASH:
+                result = "CRASH";
                 break;
             default:
                 result = "UNKNOWN";

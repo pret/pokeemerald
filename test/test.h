@@ -13,6 +13,7 @@ enum TestResult
     TEST_RESULT_INVALID,
     TEST_RESULT_ERROR,
     TEST_RESULT_TIMEOUT,
+    TEST_RESULT_CRASH,
     TEST_RESULT_TODO,
 };
 
@@ -38,8 +39,6 @@ struct TestRunnerState
 {
     u8 state;
     u8 exitCode;
-    s32 tests;
-    s32 passes;
     const char *skipFilename;
     const struct Test *test;
     u32 processCosts[MAX_PROCESSES];
