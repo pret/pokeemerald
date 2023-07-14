@@ -1,7 +1,7 @@
 #ifndef FPMATH_H_
 #define FPMATH_H_
 
-typedef s32 q4_12_t;
+typedef s16 q4_12_t;
 typedef u32 uq4_12_t;
 
 #define Q_4_12_SHIFT (12)
@@ -15,7 +15,7 @@ typedef u32 uq4_12_t;
 #define UQ_4_12(n)  ((uq4_12_t)((n) * 4096))
 
 // Converts a number to Q24.8 fixed-point format
-#define Q_24_8(n)  ((s32)((n) * 256))
+#define Q_24_8(n)  ((s32)((n) << 8))
 
 // Converts a Q8.8 fixed-point format number to a regular integer
 #define Q_8_8_TO_INT(n) ((s32)((n) / 256))
@@ -25,7 +25,7 @@ typedef u32 uq4_12_t;
 #define UQ_4_12_TO_INT(n)  ((u32)((n) / 4096))
 
 // Converts a Q24.8 fixed-point format number to a regular integer
-#define Q_24_8_TO_INT(n) ((s32)((n) / 256))
+#define Q_24_8_TO_INT(n) ((s32)((n) >> 8))
 
 // Rounding value for Q4.12 fixed-point format
 #define Q_4_12_ROUND ((1) << (Q_4_12_SHIFT - 1))
