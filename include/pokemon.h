@@ -337,7 +337,7 @@ struct SpeciesInfo /*0x24*/
 struct BattleMove
 {
     u16 effect;
-    u16 power;  //higher than 255 for z moves
+    u8 power;
     u8 type;
     u8 accuracy;
     u8 pp;
