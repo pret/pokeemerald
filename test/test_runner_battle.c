@@ -10,6 +10,17 @@
 #include "test_battle.h"
 #include "window.h"
 
+#if defined(__INTELLISENSE__)
+#undef TestRunner_Battle_RecordAbilityPopUp
+#undef TestRunner_Battle_RecordAnimation
+#undef TestRunner_Battle_RecordHP
+#undef TestRunner_Battle_RecordMessage
+#undef TestRunner_Battle_RecordStatus1
+#undef TestRunner_Battle_AfterLastTurn
+#undef TestRunner_Battle_CheckBattleRecordActionType
+#undef TestRunner_Battle_GetForcedAbility
+#endif
+
 #define INVALID(fmt, ...) Test_ExitWithResult(TEST_RESULT_INVALID, "%s:%d: " fmt, gTestRunnerState.test->filename, sourceLine, ##__VA_ARGS__)
 #define INVALID_IF(c, fmt, ...) do { if (c) Test_ExitWithResult(TEST_RESULT_INVALID, "%s:%d: " fmt, gTestRunnerState.test->filename, sourceLine, ##__VA_ARGS__); } while (0)
 
