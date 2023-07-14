@@ -223,6 +223,15 @@ void CB2_TestRunner(void)
             const struct MemBlock *block = head;
             do
             {
+                if (block->magic != MALLOC_SYSTEM_ID
+                 || !(EWRAM_START <= (uintptr_t)block->next && (uintptr_t)block->next < EWRAM_END)
+                 || (block->next <= block && block->next != head))
+                {
+                    MgbaPrintf_("gHeap corrupted block at 0x%p", block);
+                    gTestRunnerState.result = TEST_RESULT_ERROR;
+                    break;
+                }
+
                 if (block->allocated)
                 {
                     const char *location = MemBlockLocation(block);
@@ -495,6 +504,7 @@ static s32 MgbaVPrintf_(const char *fmt, va_list va)
 {
     s32 i = 0;
     s32 c, d;
+    u32 p;
     const char *s;
     while (*fmt)
     {
@@ -526,6 +536,20 @@ static s32 MgbaVPrintf_(const char *fmt, va_list va)
                     }
                     while (n > 0)
                         i = MgbaPutchar_(i, buffer[--n]);
+                }
+                break;
+            case 'p':
+                p = va_arg(va, unsigned);
+                {
+                    s32 n;
+                    for (n = 0; n < 7; n++)
+                    {
+                        unsigned nybble = (p >> (24 - (4*n))) & 0xF;
+                        if (nybble <= 9)
+                            i = MgbaPutchar_(i, '0' + nybble);
+                        else
+                            i = MgbaPutchar_(i, 'a' + nybble - 10);
+                    }
                 }
                 break;
             case 'q':
