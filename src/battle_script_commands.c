@@ -7042,7 +7042,8 @@ static void SetDmgHazardsBattlescript(u8 battlerId, u8 multistringId)
 
 bool32 DoSwitchInAbilitiesItems(u32 battlerId)
 {
-    return (AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, battlerId, 0, 0, 0)
+    return (TryPrimalReversion(battlerId)
+             || AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, battlerId, 0, 0, 0)
              || (gBattleWeather & B_WEATHER_ANY && WEATHER_HAS_EFFECT && AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, battlerId, 0, 0, 0))
              || (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY && AbilityBattleEffects(ABILITYEFFECT_ON_TERRAIN, battlerId, 0, 0, 0))
              || ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, battlerId, FALSE)

@@ -3861,14 +3861,9 @@ static void TryDoEventsBeforeFirstTurn(void)
     while (gBattleStruct->switchInAbilitiesCounter < gBattlersCount)
     {
         gBattlerAttacker = gBattlerByTurnOrder[gBattleStruct->switchInAbilitiesCounter++];
-
-        // Primal Reversion
-        if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_PRIMAL_ORB
-            && GetBattleFormChangeTargetSpecies(gBattlerAttacker, FORM_CHANGE_BATTLE_PRIMAL_REVERSION) != SPECIES_NONE)
-        {
-            BattleScriptExecute(BattleScript_PrimalReversion);
+    
+        if (TryPrimalReversion(gBattlerAttacker))
             return;
-        }
         if (AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, gBattlerAttacker, 0, 0, 0) != 0)
             return;
     }

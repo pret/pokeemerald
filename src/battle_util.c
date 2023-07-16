@@ -6092,6 +6092,27 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
     return effect;
 }
 
+bool32 TryPrimalReversion(u8 battlerId)
+{
+    if (GetBattlerHoldEffect(battlerId, FALSE) == HOLD_EFFECT_PRIMAL_ORB
+     && GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_BATTLE_PRIMAL_REVERSION) != SPECIES_NONE)
+    {
+        if (gBattlerAttacker == battlerId)
+        {
+            BattleScriptExecute(BattleScript_PrimalReversion);
+        }
+        else
+        {
+            // edge case for scenarios like a switch-in after activated eject button
+            gBattleScripting.savedBattler = gBattlerAttacker;
+            gBattlerAttacker = battlerId;
+            BattleScriptExecute(BattleScript_PrimalReversionRestoreAttacker);
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
+
 bool32 IsNeutralizingGasBannedAbility(u32 ability)
 {
     switch (ability)
