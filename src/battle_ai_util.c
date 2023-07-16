@@ -953,6 +953,11 @@ static u32 WhichMoveBetter(u32 move1, u32 move2)
     return 2;
 }
 
+u32 GetNoOfHitsToKO(u32 dmg, s32 hp)
+{
+    return hp / (dmg + 1) + 1;
+}
+
 u8 GetMoveDamageResult(u16 move)
 {
     s32 i, checkedMove, bestId, currId, hp;
@@ -1018,9 +1023,8 @@ u8 GetMoveDamageResult(u16 move)
         currId = AI_THINKING_STRUCT->movesetIndex;
         if (currId == bestId)
             AI_THINKING_STRUCT->funcResult = MOVE_POWER_BEST;
-        // Compare percentage difference.
         else if ((moveDmgs[currId] >= hp || moveDmgs[bestId] < hp) // If current move can faint as well, or if neither can
-                 && (moveDmgs[bestId] * 100 / hp) - (moveDmgs[currId] * 100 / hp) <= 30
+                 && GetNoOfHitsToKO(moveDmgs[currId], hp) - GetNoOfHitsToKO(moveDmgs[bestId], hp) <= 2 // Consider a move weak if it needs to be used at least 2 times more to faint the target, compared to the best move.
                  && WhichMoveBetter(gBattleMons[sBattler_AI].moves[bestId], gBattleMons[sBattler_AI].moves[currId]) != 0)
             AI_THINKING_STRUCT->funcResult = MOVE_POWER_GOOD;
         else
