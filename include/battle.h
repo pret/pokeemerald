@@ -593,6 +593,7 @@ struct BattleStruct
     u8 wishPerishSongBattlerId;
     bool8 overworldWeatherDone;
     bool8 terrainDone;
+    u8 isAtkCancelerForCalledMove; // Certain cases in atk canceler should only be checked once, when the original move is called, however others need to be checked the twice.
     u8 atkCancellerTracker;
     struct BattleTvMovePoints tvMovePoints;
     struct BattleTv tv;
