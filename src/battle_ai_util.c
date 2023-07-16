@@ -766,7 +766,7 @@ static bool32 AI_GetIfCrit(u32 move, u8 battlerAtk, u8 battlerDef)
 
 s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness, bool32 considerZPower)
 {
-    s32 dmg, moveType, critDmg, normalDmg;
+    s32 dmg, moveType, critDmg, normalDmg, fixedBasePower, n;
     s8 critChance;
     uq4_12_t effectivenessMultiplier;
 
@@ -795,8 +795,22 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness,
     {
         ProteanTryChangeType(battlerAtk, AI_DATA->abilities[battlerAtk], move, moveType);
         critChance = GetInverseCritChance(battlerAtk, battlerDef, move);
-        normalDmg = CalculateMoveDamageAndEffectiveness(move, battlerAtk, battlerDef, moveType, &effectivenessMultiplier);
-        critDmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, TRUE, FALSE, FALSE);
+        // Certain moves like Rollout calculate damage based on values which change during the move execution, but before calling dmg calc.
+        switch (gBattleMoves[move].effect)
+        {
+        case EFFECT_ROLLOUT:
+            n = gDisableStructs[battlerAtk].rolloutTimer - 1;
+            fixedBasePower = CalcRolloutBasePower(battlerAtk, gBattleMoves[move].power, n < 0 ? 5 : n);
+            break;
+        case EFFECT_FURY_CUTTER:
+            fixedBasePower = CalcFuryCutterBasePower(gBattleMoves[move].power, min(gDisableStructs[battlerAtk].furyCutterCounter + 1, 5));
+            break;
+        default:
+            fixedBasePower = 0;
+            break;
+        }
+        normalDmg = CalculateMoveDamageAndEffectiveness(move, battlerAtk, battlerDef, moveType, fixedBasePower, &effectivenessMultiplier);
+        critDmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, fixedBasePower, TRUE, FALSE, FALSE);
 
         if (critChance == -1)
             dmg = normalDmg;
@@ -914,6 +928,11 @@ static u32 WhichMoveBetter(u32 move1, u32 move2)
     return 2;
 }
 
+u32 GetNoOfHitsToKO(u32 dmg, s32 hp)
+{
+    return hp / (dmg + 1) + 1;
+}
+
 u8 GetMoveDamageResult(u16 move)
 {
     s32 i, checkedMove, bestId, currId, hp;
@@ -979,9 +998,8 @@ u8 GetMoveDamageResult(u16 move)
         currId = AI_THINKING_STRUCT->movesetIndex;
         if (currId == bestId)
             AI_THINKING_STRUCT->funcResult = MOVE_POWER_BEST;
-        // Compare percentage difference.
         else if ((moveDmgs[currId] >= hp || moveDmgs[bestId] < hp) // If current move can faint as well, or if neither can
-                 && (moveDmgs[bestId] * 100 / hp) - (moveDmgs[currId] * 100 / hp) <= 30
+                 && GetNoOfHitsToKO(moveDmgs[currId], hp) - GetNoOfHitsToKO(moveDmgs[bestId], hp) <= 2 // Consider a move weak if it needs to be used at least 2 times more to faint the target, compared to the best move.
                  && WhichMoveBetter(gBattleMons[sBattler_AI].moves[bestId], gBattleMons[sBattler_AI].moves[currId]) != 0)
             AI_THINKING_STRUCT->funcResult = MOVE_POWER_GOOD;
         else
