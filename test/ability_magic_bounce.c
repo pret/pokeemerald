@@ -56,7 +56,6 @@ SINGLE_BATTLE_TEST("Magic Bounce cannot bounce back powder moves against Grass T
     }
 }
 
-
 DOUBLE_BATTLE_TEST("Magic Bounce bounces back moves hitting both foes at two foes")
 {
     GIVEN {

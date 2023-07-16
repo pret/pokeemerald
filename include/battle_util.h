@@ -136,6 +136,7 @@ u8 DoBattlerEndTurnEffects(void);
 bool8 HandleWishPerishSongOnTurnEnd(void);
 bool8 HandleFaintedMonActions(void);
 void TryClearRageAndFuryCutter(void);
+void SetAtkCancellerForCalledMove(void);
 u8 AtkCanceller_UnableToUseMove(void);
 u8 AtkCanceller_UnableToUseMove2(void);
 bool8 HasNoMonsToSwitch(u8 battlerId, u8 r1, u8 r2);
