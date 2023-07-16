@@ -17,6 +17,7 @@
 #include <fcntl.h>
 #include <math.h>
 #include <poll.h>
+#include <regex.h>
 #include <signal.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -36,6 +37,8 @@
 #define MAX_PROCESSES               32 // See also test/test.h
 #define MAX_FAILED_TESTS_TO_LIST    100
 #define MAX_TEST_LIST_BUFFER_LENGTH 256
+
+#define ARRAY_COUNT(arr) (sizeof((arr)) / sizeof((arr)[0]))
 
 struct Runner
 {
@@ -248,7 +251,29 @@ int main(int argc, char *argv[])
         exit(2);
     }
 
-    nrunners = sysconf(_SC_NPROCESSORS_ONLN);
+    nrunners = 1;
+    const char *makeflags = getenv("MAKEFLAGS");
+    if (makeflags)
+    {
+        int e;
+        regex_t preg;
+        regmatch_t pmatch[4];
+        if ((e = regcomp(&preg, "(^| )-j([0-9]*)($| )", REG_EXTENDED)) != 0)
+        {
+            char errbuf[256];
+            regerror(e, &preg, errbuf, sizeof(errbuf));
+            fprintf(stderr, "regcomp failed: '%s'\n", errbuf);
+            exit(2);
+        }
+        if (regexec(&preg, makeflags, ARRAY_COUNT(pmatch), pmatch, 0) != REG_NOMATCH)
+        {
+            if (pmatch[2].rm_so == pmatch[2].rm_eo)
+                nrunners = sysconf(_SC_NPROCESSORS_ONLN);
+            else
+                sscanf(makeflags + pmatch[2].rm_so, "%d", &nrunners);
+        }
+        regfree(&preg);
+    }
     if (nrunners > MAX_PROCESSES)
         nrunners = MAX_PROCESSES;
     runners_digits = ceil(log10(nrunners));

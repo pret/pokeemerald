@@ -1,7 +1,7 @@
 /* Embedded DSL for automated black-box testing of battle mechanics.
  *
  * To run all the tests use:
- *     make check
+ *     make check -j
  * To run specific tests, e.g. Spikes ones, use:
  *     make check TESTS='Spikes'
  * To build a ROM (pokemerald-test.elf) that can be opened in mgba to
