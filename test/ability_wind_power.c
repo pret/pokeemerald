@@ -9,6 +9,9 @@ ASSUMPTIONS
     ASSUME(gBattleMoves[MOVE_AIR_CUTTER].power != 0);
     ASSUME(gBattleMoves[MOVE_AIR_CUTTER].target == MOVE_TARGET_BOTH);
     ASSUME(gBattleMoves[MOVE_AIR_CUTTER].flags & FLAG_WIND_MOVE);
+    ASSUME(gBattleMoves[MOVE_PETAL_BLIZZARD].power != 0);
+    ASSUME(gBattleMoves[MOVE_PETAL_BLIZZARD].target == MOVE_TARGET_FOES_AND_ALLY);
+    ASSUME(gBattleMoves[MOVE_PETAL_BLIZZARD].flags & FLAG_WIND_MOVE);
     ASSUME(!(gBattleMoves[MOVE_TACKLE].flags & FLAG_WIND_MOVE));
 }
 
@@ -102,11 +105,11 @@ SINGLE_BATTLE_TEST("Wind Power sets up Charge for opponent when hit by a wind mo
     }
 }
 
-DOUBLE_BATTLE_TEST("Wind Power activates correctly for every battler with the ability when hit by a multi target move")
+DOUBLE_BATTLE_TEST("Wind Power activates correctly for every battler with the ability when hit by a 2/3 target move")
 {
-    u16 abilityLeft, abilityRight;
+    u16 move, abilityLeft, abilityRight;
 
-    PARAMETRIZE {abilityLeft = ABILITY_NONE, abilityRight = ABILITY_WIND_POWER; }
+    PARAMETRIZE {abilityLeft = ABILITY_NONE, abilityRight = ABILITY_WIND_POWER;}
     PARAMETRIZE {abilityLeft = ABILITY_WIND_POWER, abilityRight = ABILITY_NONE; }
     PARAMETRIZE {abilityLeft = ABILITY_WIND_POWER, abilityRight = ABILITY_WIND_POWER; }
 
@@ -116,7 +119,7 @@ DOUBLE_BATTLE_TEST("Wind Power activates correctly for every battler with the ab
         OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_LIMBER); Speed(20); }
         OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_LIMBER); Speed(15); }
     } WHEN {
-        TURN { MOVE(opponentLeft, MOVE_AIR_CUTTER);}
+        TURN { MOVE(opponentLeft, MOVE_AIR_CUTTER); MOVE(opponentRight, MOVE_AIR_CUTTER);}
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_AIR_CUTTER, opponentLeft);
 
@@ -125,9 +128,6 @@ DOUBLE_BATTLE_TEST("Wind Power activates correctly for every battler with the ab
             ABILITY_POPUP(playerLeft, ABILITY_WIND_POWER);
             MESSAGE("Being hit by Air Cutter charged Wobbuffet with power!");
         }
-        NOT HP_BAR(opponentLeft);
-        NOT HP_BAR(opponentRight);
-
         HP_BAR(playerRight);
         if (abilityRight == ABILITY_WIND_POWER) {
             ABILITY_POPUP(playerRight, ABILITY_WIND_POWER);
@@ -141,5 +141,81 @@ DOUBLE_BATTLE_TEST("Wind Power activates correctly for every battler with the ab
         EXPECT_NE(playerRight->hp, playerRight->maxHP);
         EXPECT_EQ(opponentRight->hp, opponentRight->maxHP);
         EXPECT_EQ(opponentLeft->hp, opponentLeft->maxHP);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Wind Power activates correctly for every battler with the ability when hit by a 3 target move")
+{
+    u16 abilityLeft, abilityRight;
+
+    PARAMETRIZE {abilityLeft = ABILITY_NONE, abilityRight = ABILITY_WIND_POWER; }
+    PARAMETRIZE {abilityLeft = ABILITY_WIND_POWER, abilityRight = ABILITY_NONE; }
+    PARAMETRIZE {abilityLeft = ABILITY_WIND_POWER, abilityRight = ABILITY_WIND_POWER; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Ability(abilityLeft); Speed(10); }
+        PLAYER(SPECIES_WOBBUFFET) { Ability(abilityRight); Speed(5); }
+        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_LIMBER); Speed(20); }
+        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_LIMBER); Speed(15); }
+    } WHEN {
+        TURN { MOVE(opponentLeft, MOVE_PETAL_BLIZZARD);}
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_PETAL_BLIZZARD, opponentLeft);
+
+        HP_BAR(playerLeft);
+        if (abilityLeft == ABILITY_WIND_POWER) {
+            ABILITY_POPUP(playerLeft, ABILITY_WIND_POWER);
+            MESSAGE("Being hit by PetalBlizzrd charged Wobbuffet with power!");
+        }
+        HP_BAR(playerRight);
+        if (abilityRight == ABILITY_WIND_POWER) {
+            ABILITY_POPUP(playerRight, ABILITY_WIND_POWER);
+            MESSAGE("Being hit by PetalBlizzrd charged Wobbuffet with power!");
+        }
+        HP_BAR(opponentRight);
+        NOT HP_BAR(opponentLeft);
+    }
+    THEN {
+        EXPECT_NE(playerLeft->hp, playerLeft->maxHP);
+        EXPECT_NE(playerRight->hp, playerRight->maxHP);
+        EXPECT_NE(opponentRight->hp, opponentRight->maxHP);
+        EXPECT_EQ(opponentLeft->hp, opponentLeft->maxHP);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Wind Power activates correctly when Tailwind is used")
+{
+    bool8 opponentSide;
+
+    PARAMETRIZE {opponentSide = TRUE;}
+    PARAMETRIZE {opponentSide = FALSE;}
+
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_TAILWIND].effect == EFFECT_TAILWIND);
+        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_WIND_POWER); Speed(10); }
+        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_WIND_POWER); Speed(5); }
+        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_WIND_POWER); Speed(20); }
+        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_WIND_POWER); Speed(15); }
+    } WHEN {
+        TURN { MOVE((opponentSide == TRUE) ? opponentLeft : playerLeft, MOVE_TAILWIND);}
+    } SCENE {
+        if (opponentSide) {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_TAILWIND, opponentLeft);
+
+            ABILITY_POPUP(opponentLeft, ABILITY_WIND_POWER);
+            MESSAGE("Being hit by Tailwind charged Foe Wobbuffet with power!");
+
+            ABILITY_POPUP(opponentRight, ABILITY_WIND_POWER);
+            MESSAGE("Being hit by Tailwind charged Foe Wobbuffet with power!");
+        }
+        else {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_TAILWIND, playerLeft);
+
+            ABILITY_POPUP(playerLeft, ABILITY_WIND_POWER);
+            MESSAGE("Being hit by Tailwind charged Wobbuffet with power!");
+
+            ABILITY_POPUP(playerRight, ABILITY_WIND_POWER);
+            MESSAGE("Being hit by Tailwind charged Wobbuffet with power!");
+        }
     }
 }
