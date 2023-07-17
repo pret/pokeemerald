@@ -1053,8 +1053,9 @@
 	.byte 0xca
 	.endm
 
-	.macro setcharge
+	.macro setcharge battler:req
 	.byte 0xcb
+	.byte \battler
 	.endm
 
 	.macro callterrainattack

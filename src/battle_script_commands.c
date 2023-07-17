@@ -14274,10 +14274,11 @@ static void Cmd_setforcedtarget(void)
 
 static void Cmd_setcharge(void)
 {
-    CMD_ARGS();
+    CMD_ARGS(u8 battler);
 
-    gStatuses3[gBattlerAttacker] |= STATUS3_CHARGED_UP;
-    gDisableStructs[gBattlerAttacker].chargeTimer = 2;
+    u8 battler = GetBattlerForBattleScript(cmd->battler);
+    gStatuses3[battler] |= STATUS3_CHARGED_UP;
+    gDisableStructs[battler].chargeTimer = 2;
     gBattlescriptCurrInstr++;
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
