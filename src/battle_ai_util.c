@@ -3368,16 +3368,27 @@ bool32 ShouldUseWishAromatherapy(u8 battlerAtk, u8 battlerDef, u16 move)
     return FALSE;
 }
 
+#define SIZE_G_BATTLE_MONS (sizeof(struct BattlePokemon) * MAX_BATTLERS_COUNT)
+
+struct BattlePokemon *AllocSaveBattleMons(void)
+{
+    struct BattlePokemon *savedBattleMons = Alloc(SIZE_G_BATTLE_MONS);
+    memcpy(savedBattleMons, gBattleMons, SIZE_G_BATTLE_MONS);
+    return savedBattleMons;
+}
+
+void FreeRestoreBattleMons(struct BattlePokemon *savedBattleMons)
+{
+    memcpy(gBattleMons, savedBattleMons, SIZE_G_BATTLE_MONS);
+    Free(savedBattleMons);
+}
+
 // party logic
 s32 AI_CalcPartyMonBestMoveDamage(u32 battlerAtk, u32 battlerDef, struct Pokemon *attackerMon, struct Pokemon *targetMon)
 {
-    s32 bestDmg, dmg;
-    u32 i, move;
+    s32 i, move, bestDmg, dmg;
     u8 effectiveness;
-    struct BattlePokemon *battleMons = Alloc(sizeof(struct BattlePokemon) * MAX_BATTLERS_COUNT);
-
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-        battleMons[i] = gBattleMons[i];
+    struct BattlePokemon *savedBattleMons = AllocSaveBattleMons();
 
     if (attackerMon != NULL)
         PokemonToBattleMon(attackerMon, &gBattleMons[battlerAtk]);
@@ -3399,10 +3410,7 @@ s32 AI_CalcPartyMonBestMoveDamage(u32 battlerAtk, u32 battlerDef, struct Pokemon
         }
     }
 
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-        gBattleMons[i] = battleMons[i];
-
-    Free(battleMons);
+    FreeRestoreBattleMons(savedBattleMons);
     return dmg;
 }
 

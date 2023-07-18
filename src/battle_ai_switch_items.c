@@ -788,7 +788,7 @@ void AI_TrySwitchOrUseItem(void)
 
 // If there are two(or more) mons to choose from, always choose one that has baton pass
 // as most often it can't do much on its own.
-static u32 GetBestMonBatonPass(struct Pokemon *party, int firstId, int lastId, u8 invalidMons, int aliveCount)
+static u32 GetBestMonBatonPass(struct Pokemon *party, int firstId, int lastId, u8 invalidMons, int aliveCount, u32 opposingBattler)
 {
     int i, j, bits = 0;
 
@@ -796,7 +796,7 @@ static u32 GetBestMonBatonPass(struct Pokemon *party, int firstId, int lastId, u
     {
         if (invalidMons & gBitTable[i])
             continue;
-        if (IsAiPartyMonOHKOBy(BATTLE_OPPOSITE(gActiveBattler), &party[i]))
+        if (IsAiPartyMonOHKOBy(opposingBattler, &party[i]))
             continue;
 
         for (j = 0; j < MAX_MON_MOVES; j++)
@@ -980,7 +980,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
         }
     }
 
-    bestMonId = GetBestMonBatonPass(party, firstId, lastId, invalidMons, aliveCount);
+    bestMonId = GetBestMonBatonPass(party, firstId, lastId, invalidMons, aliveCount, opposingBattler);
     if (bestMonId != PARTY_SIZE)
         return bestMonId;
 
@@ -1161,17 +1161,26 @@ static bool32 AI_OpponentCanFaintAiWithMod(u32 healAmount)
 
 static bool32 IsAiPartyMonOHKOBy(u32 battlerAtk, struct Pokemon *aiMon)
 {
-    struct BattlePokemon *battleMon;
+    bool32 ret = FALSE;
+    struct BattlePokemon *savedBattleMons;
     s32 hp = GetMonData(aiMon, MON_DATA_HP);
     s32 bestDmg = AI_CalcPartyMonBestMoveDamage(battlerAtk, gActiveBattler, NULL, aiMon);
 
     switch (GetNoOfHitsToKO(bestDmg, hp))
     {
     case 1:
-        return TRUE;
-    case 2: // TODO: Compare speeds, if AI mon is faster allow 2 turns
-        return TRUE;
+        ret = TRUE;
+        break;
+    case 2: // if AI mon is faster allow 2 turns
+        savedBattleMons = AllocSaveBattleMons();
+        PokemonToBattleMon(aiMon, &gBattleMons[gActiveBattler]);
+        if (AI_WhoStrikesFirst(gActiveBattler, battlerAtk, 0) == AI_IS_SLOWER)
+            ret = TRUE;
+        else
+            ret = FALSE;
+        FreeRestoreBattleMons(savedBattleMons);
+        break;
     }
 
-    return FALSE;
+    return ret;
 }

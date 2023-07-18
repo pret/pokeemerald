@@ -3366,39 +3366,25 @@ static const struct TrainerMonItemCustomMoves sParty_Drake[] = {
 
 static const struct TrainerMonItemCustomMoves sParty_Roxanne1[] = {
     {
-    .iv = 46,
-    .lvl = 46,
-    .species = SPECIES_SKARMORY,
+    .iv = 100,
+    .lvl = 12,
+    .species = SPECIES_GEODUDE,
     .heldItem = ITEM_NONE,
-    .moves = {MOVE_SPIKES, MOVE_TOXIC, MOVE_WHIRLWIND, MOVE_ROOST}
+    .moves = {MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_ROCK_THROW, MOVE_ROCK_TOMB}
     },
     {
     .iv = 100,
-    .lvl = 46,
-    .species = SPECIES_TROPIUS,
+    .lvl = 12,
+    .species = SPECIES_GEODUDE,
     .heldItem = ITEM_NONE,
-    .moves = {MOVE_LEAF_TORNADO, MOVE_BODY_SLAM, MOVE_PROTECT, MOVE_ROOST}
-    },
-    {
-    .iv = 47,
-    .lvl = 47,
-    .species = SPECIES_HAWLUCHA,
-    .heldItem = ITEM_ORAN_BERRY,
-    .moves = {MOVE_SUPERPOWER, MOVE_ACROBATICS, MOVE_U_TURN, MOVE_ROOST}
-    },
-    {
-    .iv = 47,
-    .lvl = 47,
-    .species = SPECIES_MANTINE,
-    .heldItem = ITEM_ORAN_BERRY,
-    .moves = {MOVE_CONFUSE_RAY, MOVE_WATER_PULSE, MOVE_AIR_SLASH, MOVE_ROOST}
+    .moves = {MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_ROCK_THROW, MOVE_ROCK_TOMB}
     },
     {
     .iv = 200,
-    .lvl = 48,
-    .species = SPECIES_ALTARIA,
+    .lvl = 15,
+    .species = SPECIES_NOSEPASS,
     .heldItem = ITEM_ORAN_BERRY,
-    .moves = {MOVE_DRAGON_PULSE, MOVE_TOXIC, MOVE_COTTON_GUARD, MOVE_ROOST}
+    .moves = {MOVE_BLOCK, MOVE_HARDEN, MOVE_TACKLE, MOVE_ROCK_TOMB}
     }
 };
 
