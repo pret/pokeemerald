@@ -376,8 +376,7 @@ struct BattleMove
     u32 ignoreTypeIfFlyingAndUngrounded:1;
     u32 thawsUser:1;
     u32 ignoresSubstitute:1;
-    u32 twoStrikes:1; // May apply its effect on each hit.
-    u32 threeStrikes:1; // May apply its effect on each hit.
+    u32 strikeCount:4;  // Max 15 hits. Defaults to 1 if not set. May apply its effect on each hit.
     u32 meFirstBanned:1;
     u32 gravityBanned:1;
     u32 mimicBanned:1;

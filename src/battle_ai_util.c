@@ -864,9 +864,9 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness,
             }
 
             // Handle other multi-strike moves
-            if (gBattleMoves[move].twoStrikes)
-                dmg *= 2;
-            else if (gBattleMoves[move].threeStrikes || (move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH))
+            if (gBattleMoves[move].strikeCount > 1)
+                dmg *= gBattleMoves[move].strikeCount;
+            else if (move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH)
                 dmg *= 3;
 
             if (dmg == 0)
