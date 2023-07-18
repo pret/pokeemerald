@@ -8,6 +8,7 @@
 #include "battle_setup.h"
 #include "battle_z_move.h"
 #include "data.h"
+#include "debug.h"
 #include "event_data.h"
 #include "item.h"
 #include "pokemon.h"
@@ -152,6 +153,11 @@ static u32 GetWildAiFlags(void)
 
 void BattleAI_SetupFlags(void)
 {
+#if DEBUG_OVERWORLD_MENU == TRUE
+    if (gIsDebugBattle)
+        AI_THINKING_STRUCT->aiFlags = gDebugAIFlags;
+    else
+#endif
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         AI_THINKING_STRUCT->aiFlags = GetAiScriptsInRecordedBattle();
     else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
