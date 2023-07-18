@@ -28,6 +28,7 @@ static bool8 ShouldUseItem(void);
 static bool32 AiExpectsToFaintPlayer(void);
 static bool32 AI_ShouldHeal(u32 healAmount);
 static bool32 AI_OpponentCanFaintAiWithMod(u32 healAmount);
+static bool32 IsAiPartyMonOHKOBy(u32 battlerAtk, struct Pokemon *aiMon);
 
 static bool32 IsAceMon(u32 battlerId, u32 monPartyId)
 {
@@ -753,6 +754,8 @@ void AI_TrySwitchOrUseItem(void)
                     {
                         if (GetMonData(&party[monToSwitchId], MON_DATA_HP) == 0)
                             continue;
+                        if (GetMonData(&party[monToSwitchId], MON_DATA_SPECIES) == SPECIES_NONE)
+                            continue;
                         if (monToSwitchId == gBattlerPartyIndexes[battlerIn1])
                             continue;
                         if (monToSwitchId == gBattlerPartyIndexes[battlerIn2])
@@ -792,6 +795,8 @@ static u32 GetBestMonBatonPass(struct Pokemon *party, int firstId, int lastId, u
     for (i = firstId; i < lastId; i++)
     {
         if (invalidMons & gBitTable[i])
+            continue;
+        if (IsAiPartyMonOHKOBy(BATTLE_OPPOSITE(gActiveBattler), &party[i]))
             continue;
 
         for (j = 0; j < MAX_MON_MOVES; j++)
@@ -837,6 +842,9 @@ static u32 GetBestMonTypeMatchup(struct Pokemon *party, int firstId, int lastId,
                 u8 defType1 = gSpeciesInfo[species].types[0];
                 u8 defType2 = gSpeciesInfo[species].types[1];
 
+                if (IsAiPartyMonOHKOBy(opposingBattler, &party[i]))
+                    continue;
+
                 typeEffectiveness = uq4_12_multiply(typeEffectiveness, (GetTypeModifier(atkType1, defType1)));
                 if (atkType2 != atkType1)
                     typeEffectiveness = uq4_12_multiply(typeEffectiveness, (GetTypeModifier(atkType2, defType1)));
@@ -881,7 +889,7 @@ static u32 GetBestMonTypeMatchup(struct Pokemon *party, int firstId, int lastId,
 static u32 GetBestMonDmg(struct Pokemon *party, int firstId, int lastId, u8 invalidMons, u32 opposingBattler)
 {
     int i, j;
-    int bestDmg = 0;
+    int dmg, bestDmg = 0;
     int bestMonId = PARTY_SIZE;
 
     gMoveResultFlags = 0;
@@ -890,19 +898,14 @@ static u32 GetBestMonDmg(struct Pokemon *party, int firstId, int lastId, u8 inva
     {
         if (gBitTable[i] & invalidMons)
             continue;
+        if (IsAiPartyMonOHKOBy(opposingBattler, &party[i]))
+            continue;
 
-        for (j = 0; j < MAX_MON_MOVES; j++)
+        dmg = AI_CalcPartyMonBestMoveDamage(gActiveBattler, opposingBattler, &party[i], NULL);
+        if (bestDmg < dmg)
         {
-            u32 move = GetMonData(&party[i], MON_DATA_MOVE1 + j);
-            if (move != MOVE_NONE && gBattleMoves[move].power != 0)
-            {
-                s32 dmg = AI_CalcPartyMonDamage(move, gActiveBattler, opposingBattler, &party[i]);
-                if (bestDmg < dmg)
-                {
-                    bestDmg = dmg;
-                    bestMonId = i;
-                }
-            }
+            bestDmg = dmg;
+            bestMonId = i;
         }
     }
 
@@ -912,7 +915,7 @@ static u32 GetBestMonDmg(struct Pokemon *party, int firstId, int lastId, u8 inva
 u8 GetMostSuitableMonToSwitchInto(void)
 {
     u32 opposingBattler = 0;
-    u32 bestMonId = 0;
+    u32 bestMonId = PARTY_SIZE;
     u8 battlerIn1 = 0, battlerIn2 = 0;
     s32 firstId = 0;
     s32 lastId = 0; // + 1
@@ -1153,5 +1156,22 @@ static bool32 AI_OpponentCanFaintAiWithMod(u32 healAmount)
             }
         }
     }
+    return FALSE;
+}
+
+static bool32 IsAiPartyMonOHKOBy(u32 battlerAtk, struct Pokemon *aiMon)
+{
+    struct BattlePokemon *battleMon;
+    s32 hp = GetMonData(aiMon, MON_DATA_HP);
+    s32 bestDmg = AI_CalcPartyMonBestMoveDamage(battlerAtk, gActiveBattler, NULL, aiMon);
+
+    switch (GetNoOfHitsToKO(bestDmg, hp))
+    {
+    case 1:
+        return TRUE;
+    case 2: // TODO: Compare speeds, if AI mon is faster allow 2 turns
+        return TRUE;
+    }
+
     return FALSE;
 }
