@@ -211,6 +211,8 @@ enum { //Sound
 #define DEBUG_NUMBER_ICON_X 210
 #define DEBUG_NUMBER_ICON_Y 50
 
+#define DEBUG_MAX_MENU_ITEMS 50
+
 // *******************************
 struct DebugMonData
 {
@@ -234,7 +236,7 @@ struct DebugMonData
 struct DebugMenuListData
 {
     struct ListMenuItem listItems[20 + 1];
-    u8 itemNames[PC_ITEMS_COUNT + 1][26];
+    u8 itemNames[DEBUG_MAX_MENU_ITEMS + 1][26];
     u8 listId;
 };
 
@@ -1132,6 +1134,8 @@ static void Debug_RefreshListMenu(u8 taskId)
         totalItems = 7;
     }
 
+    // Failsafe to prevent memory corruption
+    totalItems = min(totalItems, DEBUG_MAX_MENU_ITEMS);
     // Copy item names for all entries but the last (which is Cancel)
     for(i = 0; i < totalItems; i++)
     {
