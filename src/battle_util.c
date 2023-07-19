@@ -9484,6 +9484,10 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
             finalModifier = uq4_12_multiply(finalModifier, UQ_4_12(1.5));
     }
 
+    // Collision Course, Electro Drift
+    if (gBattleMoves[move].effect == EFFECT_COLLISION_COURSE && typeEffectivenessModifier >= UQ_4_12(2.0))
+        finalModifier = uq4_12_multiply(finalModifier, UQ_4_12(1.3333));
+
     // reflect, light screen, aurora veil
     if (((gSideStatuses[defSide] & SIDE_STATUS_REFLECT && IS_MOVE_PHYSICAL(move))
             || (gSideStatuses[defSide] & SIDE_STATUS_LIGHTSCREEN && IS_MOVE_SPECIAL(move))
