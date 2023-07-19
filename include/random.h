@@ -32,6 +32,10 @@ void SeedRng2(u16 seed);
  * RandomUniform(tag, lo, hi) returns a number from lo to hi inclusive
  * with uniform probability.
  *
+ * RandomUniformExcept(tag, lo, hi, reject) returns a number from lo to
+ * hi inclusive with uniform probability, excluding those for which
+ * reject returns TRUE.
+ *
  * RandomElement(tag, array) returns an element in array with uniform
  * probability. The array must be known at compile-time (e.g. a global
  * const array).
@@ -58,6 +62,7 @@ enum RandomTag
     RNG_FROZEN,
     RNG_HOLD_EFFECT_FLINCH,
     RNG_INFATUATION,
+    RNG_METRONOME,
     RNG_PARALYSIS,
     RNG_POISON_POINT,
     RNG_RAMPAGE_TURNS,
@@ -103,10 +108,12 @@ enum RandomTag
     })
 
 u32 RandomUniform(enum RandomTag, u32 lo, u32 hi);
+u32 RandomUniformExcept(enum RandomTag, u32 lo, u32 hi, bool32 (*reject)(u32));
 u32 RandomWeightedArray(enum RandomTag, u32 sum, u32 n, const u8 *weights);
 const void *RandomElementArray(enum RandomTag, const void *array, size_t size, size_t count);
 
 u32 RandomUniformDefault(enum RandomTag, u32 lo, u32 hi);
+u32 RandomUniformExceptDefault(enum RandomTag, u32 lo, u32 hi, bool32 (*reject)(u32));
 u32 RandomWeightedArrayDefault(enum RandomTag, u32 sum, u32 n, const u8 *weights);
 const void *RandomElementArrayDefault(enum RandomTag, const void *array, size_t size, size_t count);
 

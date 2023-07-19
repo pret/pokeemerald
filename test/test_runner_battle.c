@@ -332,7 +332,42 @@ u32 RandomUniform(enum RandomTag tag, u32 lo, u32 hi)
         {
             Test_ExitWithResult(TEST_RESULT_ERROR, "RandomUniform called with inconsistent trials %d and %d", STATE->trials, n);
         }
-        STATE->trialRatio = Q_4_12(1) / n;
+        STATE->trialRatio = Q_4_12(1) / STATE->trials;
+        return STATE->runTrial + lo;
+    }
+
+    return hi;
+}
+
+u32 RandomUniformExcept(enum RandomTag tag, u32 lo, u32 hi, bool32 (*reject)(u32))
+{
+    const struct BattlerTurn *turn = NULL;
+    u32 default_;
+
+    if (gCurrentTurnActionNumber < gBattlersCount)
+    {
+        u32 battlerId = gBattlerByTurnOrder[gCurrentTurnActionNumber];
+        turn = &DATA.battleRecordTurns[gBattleResults.battleTurnCounter][battlerId];
+        if (turn && turn->rng.tag == tag)
+        {
+            if (reject(turn->rng.value))
+                Test_ExitWithResult(TEST_RESULT_INVALID, "WITH_RNG specified a rejected value (%d)", turn->rng.value);
+            return turn->rng.value;
+        }
+    }
+
+    if (tag == STATE->rngTag)
+    {
+        if (STATE->trials == 1)
+        {
+            u32 n = 0, i;
+            for (i = lo; i < hi; i++)
+                if (!reject(i))
+                    n++;
+            STATE->trials = n;
+            PrintTestName();
+        }
+        STATE->trialRatio = Q_4_12(1) / STATE->trials;
         return STATE->runTrial + lo;
     }
 
@@ -962,6 +997,7 @@ void Randomly(u32 sourceLine, u32 passes, u32 trials, struct RandomlyContext ctx
     INVALID_IF(test->resultsSize > 0, "PASSES_RANDOMLY is incompatible with results");
     INVALID_IF(passes > trials, "%d passes specified, but only %d trials", passes, trials);
     STATE->rngTag = ctx.tag;
+    STATE->rngTrialOffset = 0;
     STATE->runTrial = 0;
     STATE->expectedRatio = Q_4_12(passes) / trials;
     STATE->observedRatio = 0;

@@ -603,8 +603,9 @@ struct BattleTestRunnerState
     u8 parameters;
     u8 runParameter;
     u16 rngTag;
-    u8 trials;
-    u8 runTrial;
+    u16 rngTrialOffset;
+    u16 trials;
+    u16 runTrial;
     u16 expectedRatio;
     u16 observedRatio;
     u16 trialRatio;
