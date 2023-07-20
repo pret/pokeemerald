@@ -307,17 +307,13 @@ static void BattleTest_Run(void *data)
 u32 RandomUniform(enum RandomTag tag, u32 lo, u32 hi)
 {
     const struct BattlerTurn *turn = NULL;
-    u32 default_ = hi;
 
     if (gCurrentTurnActionNumber < gBattlersCount)
     {
         u32 battlerId = gBattlerByTurnOrder[gCurrentTurnActionNumber];
         turn = &DATA.battleRecordTurns[gBattleResults.battleTurnCounter][battlerId];
-    }
-
-    if (turn && turn->rng.tag == tag)
-    {
-        default_ = turn->rng.value;
+        if (turn && turn->rng.tag == tag)
+            return turn->rng.value;
     }
 
     if (tag == STATE->rngTag)
@@ -463,22 +459,17 @@ const void *RandomElementArray(enum RandomTag tag, const void *array, size_t siz
     {
         u32 battlerId = gBattlerByTurnOrder[gCurrentTurnActionNumber];
         turn = &DATA.battleRecordTurns[gBattleResults.battleTurnCounter][battlerId];
-    }
-
-    if (turn && turn->rng.tag == tag)
-    {
-        u32 element = 0;
-        for (index = 0; index < count; index++)
+        if (turn && turn->rng.tag == tag)
         {
-            memcpy(&element, (const u8 *)array + size * index, size);
-            if (element == turn->rng.value)
-                break;
-        }
-        if (index == count)
-        {
+            u32 element = 0;
+            for (index = 0; index < count; index++)
+            {
+                memcpy(&element, (const u8 *)array + size * index, size);
+                if (element == turn->rng.value)
+                    return (const u8 *)array + size * index;
+            }
             // TODO: Incorporate the line number.
-            const char *filename = gTestRunnerState.test->filename;
-            Test_ExitWithResult(TEST_RESULT_ERROR, "%s: RandomElement illegal value requested: %d", filename, turn->rng.value);
+            Test_ExitWithResult(TEST_RESULT_ERROR, "%s: RandomElement illegal value requested: %d", gTestRunnerState.test->filename, turn->rng.value);
         }
     }
 
@@ -494,10 +485,8 @@ const void *RandomElementArray(enum RandomTag tag, const void *array, size_t siz
             Test_ExitWithResult(TEST_RESULT_ERROR, "RandomElement called with inconsistent trials %d and %d", STATE->trials, count);
         }
         STATE->trialRatio = Q_4_12(1) / count;
-        index = STATE->runTrial;
+        return (const u8 *)array + size * STATE->runTrial;
     }
-
-    return (const u8 *)array + size * index;
 }
 
 static s32 TryAbilityPopUp(s32 i, s32 n, u32 battlerId, u32 ability)
