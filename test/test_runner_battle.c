@@ -368,52 +368,40 @@ u32 RandomUniformExcept(enum RandomTag tag, u32 lo, u32 hi, bool32 (*reject)(u32
             PrintTestName();
         }
         STATE->trialRatio = Q_4_12(1) / STATE->trials;
-        return STATE->runTrial + lo;
+
+        while (reject(STATE->runTrial + lo + STATE->rngTrialOffset))
+        {
+            if (STATE->runTrial + lo + STATE->rngTrialOffset > hi)
+                Test_ExitWithResult(TEST_RESULT_INVALID, "RandomUniformExcept called with inconsistent reject");
+            STATE->rngTrialOffset++;
+        }
+
+        return STATE->runTrial + lo + STATE->rngTrialOffset;
     }
 
+    default_ = hi;
+    while (reject(default_))
+    {
+        if (default_ == lo)
+            Test_ExitWithResult(TEST_RESULT_INVALID, "RandomUniformExcept rejected all values");
+        default_--;
+    }
     return default_;
 }
 
 u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights)
 {
     const struct BattlerTurn *turn = NULL;
-    u32 default_ = n-1;
+
+    if (sum == 0)
+        Test_ExitWithResult(TEST_RESULT_ERROR, "RandomWeightedArray called with zero sum");
 
     if (gCurrentTurnActionNumber < gBattlersCount)
     {
         u32 battlerId = gBattlerByTurnOrder[gCurrentTurnActionNumber];
         turn = &DATA.battleRecordTurns[gBattleResults.battleTurnCounter][battlerId];
-    }
-
-    if (turn && turn->rng.tag == tag)
-    {
-        default_ = turn->rng.value;
-    }
-    else
-    {
-        switch (tag)
-        {
-        case RNG_ACCURACY:
-            ASSUME(n == 2);
-            if (turn && turn->hit)
-                return turn->hit - 1;
-            default_ = TRUE;
-            break;
-
-        case RNG_CRITICAL_HIT:
-            ASSUME(n == 2);
-            if (turn && turn->criticalHit)
-                return turn->criticalHit - 1;
-            default_ = FALSE;
-            break;
-
-        case RNG_SECONDARY_EFFECT:
-            ASSUME(n == 2);
-            if (turn && turn->secondaryEffect)
-                return turn->secondaryEffect - 1;
-            default_ = TRUE;
-            break;
-        }
+        if (turn && turn->rng.tag == tag)
+            return turn->rng.value;
     }
 
     if (tag == STATE->rngTag)
@@ -432,7 +420,38 @@ u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights)
         return STATE->runTrial;
     }
 
-    return default_;
+    switch (tag)
+    {
+    case RNG_ACCURACY:
+        ASSUME(n == 2);
+        if (turn && turn->hit)
+            return turn->hit - 1;
+        else
+            return TRUE;
+
+    case RNG_CRITICAL_HIT:
+        ASSUME(n == 2);
+        if (turn && turn->criticalHit)
+            return turn->criticalHit - 1;
+        else
+            return FALSE;
+
+    case RNG_SECONDARY_EFFECT:
+        ASSUME(n == 2);
+        if (turn && turn->secondaryEffect)
+            return turn->secondaryEffect - 1;
+        else
+            return TRUE;
+
+    default:
+        while (weights[n-1] == 0)
+        {
+            if (n == 1)
+                Test_ExitWithResult(TEST_RESULT_ERROR, "RandomWeightedArray called with all zero weights");
+            n--;
+        }
+        return n-1;
+    }
 }
 
 const void *RandomElementArray(enum RandomTag tag, const void *array, size_t size, size_t count)

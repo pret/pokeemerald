@@ -9,8 +9,8 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Mirror Move copies the last used move by the target")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) {Speed(2);}
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(5);}
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_TACKLE); MOVE(player, MOVE_MIRROR_MOVE); }
     } SCENE {
@@ -26,10 +26,10 @@ SINGLE_BATTLE_TEST("Mirror Move copies the last used move by the target")
 SINGLE_BATTLE_TEST("Mirror Move fails if no move was used before")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) {Speed(5);}
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(2);}
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponent, MOVE_TACKLE); MOVE(player, MOVE_MIRROR_MOVE); }
+        TURN { MOVE(player, MOVE_MIRROR_MOVE); MOVE(opponent, MOVE_TACKLE); }
     } SCENE {
         MESSAGE("Wobbuffet used Mirror Move!");
         MESSAGE("The Mirror Move failed!");
@@ -44,8 +44,8 @@ SINGLE_BATTLE_TEST("Mirror Move's called powder move fails against Grass Types")
         ASSUME(gBattleMoves[MOVE_STUN_SPORE].flags & FLAG_POWDER);
         ASSUME(gSpeciesInfo[SPECIES_ODDISH].types[0] == TYPE_GRASS);
         ASSUME(gBattleMoves[MOVE_STUN_SPORE].effect == EFFECT_PARALYZE);
-        PLAYER(SPECIES_ODDISH) {Speed(5);}
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(2);}
+        PLAYER(SPECIES_ODDISH);
+        OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_STUN_SPORE); MOVE(opponent, MOVE_MIRROR_MOVE); }
     } SCENE {
@@ -59,19 +59,18 @@ SINGLE_BATTLE_TEST("Mirror Move's called powder move fails against Grass Types")
     }
 }
 
-// It hits first 2 times, then 5 times with the default rng seed.
 SINGLE_BATTLE_TEST("Mirror Move's called multi-hit move hits multiple times")
 {
     GIVEN {
         ASSUME(gBattleMoves[MOVE_BULLET_SEED].effect == EFFECT_MULTI_HIT);
-        PLAYER(SPECIES_WOBBUFFET) {Speed(5);}
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(2);}
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_BULLET_SEED); MOVE(opponent, MOVE_MIRROR_MOVE); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BULLET_SEED, player);
         HP_BAR(opponent);
-        MESSAGE("Hit 2 time(s)!");
+        MESSAGE("Hit 5 time(s)!");
         MESSAGE("Foe Wobbuffet used Mirror Move!");
         MESSAGE("Foe Wobbuffet used Bullet Seed!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BULLET_SEED, opponent);

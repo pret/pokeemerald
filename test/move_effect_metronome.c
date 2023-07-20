@@ -56,6 +56,6 @@ SINGLE_BATTLE_TEST("Metronome's called multi-hit move hits multiple times")
         MESSAGE("Wobbuffet used Rock Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ROCK_BLAST, player);
         HP_BAR(opponent);
-        MESSAGE("Hit 2 time(s)!");
+        MESSAGE("Hit 5 time(s)!");
     }
 }
