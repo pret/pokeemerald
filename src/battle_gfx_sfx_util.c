@@ -1210,7 +1210,7 @@ void AllocateMonSpritesGfx(void)
 
         for (j = 0; j < 4; j++)
         {
-            if (gMonSpritesGfxPtr->sprites.ptr[i] + (j * MON_PIC_SIZE))
+            if (gMonSpritesGfxPtr->sprites.ptr[i])
             {
                 gMonSpritesGfxPtr->frameImages[i][j].data = gMonSpritesGfxPtr->sprites.ptr[i] + (j * MON_PIC_SIZE);
                 gMonSpritesGfxPtr->frameImages[i][j].size = MON_PIC_SIZE;
