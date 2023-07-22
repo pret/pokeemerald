@@ -677,8 +677,10 @@ bool8 CameraMove(int x, int y)
             gSaveBlock1Ptr->pos.y += y;
             MoveMapViewToBackup(direction);
         }
-        else 
+        else
+        {
             DebugPrintfLevel(MGBA_LOG_WARN, "GetIncomingConnection returned an invalid connection inside CameraMove!");
+        }
         
     }
     return gCamera.active;
