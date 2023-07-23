@@ -12206,30 +12206,14 @@ static void Cmd_setmultihitcounter(void)
         }
         else
         {
-        #if B_MULTI_HIT_CHANCE >= GEN_5
-            // Based on Gen 5's odds
-            // 35% for 2 hits
-            // 35% for 3 hits
-            // 15% for 4 hits
-            // 15% for 5 hits
-            gMultiHitCounter = Random() % 100;
-            if (gMultiHitCounter < 35)
-                gMultiHitCounter = 2;
-            else if (gMultiHitCounter < 35 + 35)
-                gMultiHitCounter = 3;
-            else if (gMultiHitCounter < 35 + 35 + 15)
-                gMultiHitCounter = 4;
-            else
-                gMultiHitCounter = 5;
-        #else
-            // 2 and 3 hits: 37.5%
-            // 4 and 5 hits: 12.5%
-            gMultiHitCounter = Random() % 4;
-            if (gMultiHitCounter > 1)
-                gMultiHitCounter = (Random() % 4) + 2;
-            else
-                gMultiHitCounter += 2;
-        #endif
+            // WARNING: These seem to be unused, see SetRandomMultiHitCounter.
+            #if B_MULTI_HIT_CHANCE >= GEN_5
+                // 35%: 2 hits, 35%: 3 hits, 15% 4 hits, 15% 5 hits.
+                gMultiHitCounter = RandomWeighted(RNG_HITS, 0, 0, 7, 7, 3, 3);
+            #else
+                // 37.5%: 2 hits, 37.5%: 3 hits, 12.5% 4 hits, 12.5% 5 hits.
+                gMultiHitCounter = RandomWeighted(RNG_HITS, 0, 0, 3, 3, 1, 1);
+            #endif
         }
     }
 
@@ -12977,41 +12961,37 @@ static void Cmd_mimicattackcopy(void)
     }
 }
 
+static bool32 InvalidMetronomeMove(u32 move)
+{
+    return gBattleMoves[move].effect == EFFECT_PLACEHOLDER
+        || sForbiddenMoves[move] & FORBIDDEN_METRONOME;
+}
+
 static void Cmd_metronome(void)
 {
     CMD_ARGS();
 
 #if B_METRONOME_MOVES >= GEN_9
-    u16 moveCount = MOVES_COUNT_GEN9;
+    u32 moveCount = MOVES_COUNT_GEN9;
 #elif B_METRONOME_MOVES >= GEN_8
-    u16 moveCount = MOVES_COUNT_GEN8;
+    u32 moveCount = MOVES_COUNT_GEN8;
 #elif B_METRONOME_MOVES >= GEN_7
-    u16 moveCount = MOVES_COUNT_GEN7;
+    u32 moveCount = MOVES_COUNT_GEN7;
 #elif B_METRONOME_MOVES >= GEN_6
-    u16 moveCount = MOVES_COUNT_GEN6;
+    u32 moveCount = MOVES_COUNT_GEN6;
 #elif B_METRONOME_MOVES >= GEN_5
-    u16 moveCount = MOVES_COUNT_GEN5;
+    u32 moveCount = MOVES_COUNT_GEN5;
 #elif B_METRONOME_MOVES >= GEN_4
-    u16 moveCount = MOVES_COUNT_GEN4;
+    u32 moveCount = MOVES_COUNT_GEN4;
 #elif B_METRONOME_MOVES >= GEN_3
-    u16 moveCount = MOVES_COUNT_GEN3;
+    u32 moveCount = MOVES_COUNT_GEN3;
 #endif
 
-    while (TRUE)
-    {
-        gCurrentMove = (Random() % (moveCount - 1)) + 1;
-        if (gBattleMoves[gCurrentMove].effect == EFFECT_PLACEHOLDER)
-            continue;
-
-        if (!(sForbiddenMoves[gCurrentMove] & FORBIDDEN_METRONOME))
-        {
-            gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
-            SetAtkCancellerForCalledMove();
-            gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
-            gBattlerTarget = GetMoveTarget(gCurrentMove, NO_TARGET_OVERRIDE);
-            return;
-        }
-    }
+    gCurrentMove = RandomUniformExcept(RNG_METRONOME, 1, moveCount - 1, InvalidMetronomeMove);
+    gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
+    SetAtkCancellerForCalledMove();
+    gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
+    gBattlerTarget = GetMoveTarget(gCurrentMove, NO_TARGET_OVERRIDE);
 }
 
 static void Cmd_dmgtolevel(void)
