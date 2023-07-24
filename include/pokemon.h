@@ -436,10 +436,11 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition);
 void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosition);
 void SetMultiuseSpriteTemplateToTrainerFront(u16 trainerPicId, u8 battlerPosition);
 
-/* GameFreak call GetMonData with either 2 or 3 arguments. This macro
- * dispatches to GetMonData3/GetMonData2 depending on the number of
+/* GameFreak called Get(Box)MonData with either 2 or 3 arguments, for
+ * type safety we have a Get(Box)MonData macro which dispatches to
+ * either Get(Box)MonData2 or Get(Box)MonData3 based on the number of
  * arguments. The two functions are aliases of each other, but they
- * differ for matching purposes. */
+ * differ for matching purposes in the caller's codegen. */
 #define GetMonData(...) CAT(GetMonData, NARG_8(__VA_ARGS__))(__VA_ARGS__)
 #define GetBoxMonData(...) CAT(GetBoxMonData, NARG_8(__VA_ARGS__))(__VA_ARGS__)
 u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data);

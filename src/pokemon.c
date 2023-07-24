@@ -3622,6 +3622,10 @@ static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 perso
     return substruct;
 }
 
+/* GameFreak called GetMonData with either 2 or 3 arguments, for type
+ * safety we have a GetMonData macro (in include/pokemon.h) which
+ * dispatches to either GetMonData2 or GetMonData3 based on the number
+ * of arguments. */
 u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data)
 {
     u32 ret;
@@ -3692,6 +3696,10 @@ u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data)
 
 u32 GetMonData2(struct Pokemon *mon, s32 field) __attribute__((alias("GetMonData3")));
 
+/* GameFreak called GetBoxMonData with either 2 or 3 arguments, for type
+ * safety we have a GetBoxMonData macro (in include/pokemon.h) which
+ * dispatches to either GetBoxMonData2 or GetBoxMonData3 based on the
+ * number of arguments. */
 u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
 {
     s32 i;

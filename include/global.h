@@ -134,6 +134,7 @@
 #define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
 #define NUM_TRENDY_SAYING_BYTES ROUND_BITS_TO_BYTES(NUM_TRENDY_SAYINGS)
 
+// This returns the number of arguments passed to it (up to 8).
 #define NARG_8(...) NARG_8_(_, ##__VA_ARGS__, 8, 7, 6, 5, 4, 3, 2, 1, 0)
 #define NARG_8_(_, a, b, c, d, e, f, g, h, N, ...) N
 
