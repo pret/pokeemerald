@@ -72,6 +72,7 @@ bool32 IsWildMonSmart(void);
 u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer *trainer, bool32 firstTrainer, u32 battleTypeFlags);
 void ModifyPersonalityForNature(u32 *personality, u32 newNature);
 u32 GeneratePersonalityForGender(u32 gender, u32 species);
+void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMonCustomized *partyEntry);
 
 extern struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE];
 

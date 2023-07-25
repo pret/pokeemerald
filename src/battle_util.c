@@ -8846,16 +8846,16 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
     }
 
     if (IsAbilityOnField(ABILITY_VESSEL_OF_RUIN) && atkAbility != ABILITY_VESSEL_OF_RUIN && IS_MOVE_SPECIAL(gCurrentMove))
-        modifier = uq4_12_multiply(modifier, UQ_4_12(0.25));
+        modifier = uq4_12_multiply(modifier, UQ_4_12(0.75));
 
     if (IsAbilityOnField(ABILITY_SWORD_OF_RUIN) && defAbility != ABILITY_SWORD_OF_RUIN && IS_MOVE_PHYSICAL(gCurrentMove))
-        modifier = uq4_12_multiply(modifier, UQ_4_12(0.25));
+        modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
 
     if (IsAbilityOnField(ABILITY_TABLETS_OF_RUIN) && atkAbility != ABILITY_TABLETS_OF_RUIN && IS_MOVE_PHYSICAL(gCurrentMove))
-        modifier = uq4_12_multiply(modifier, UQ_4_12(0.25));
+        modifier = uq4_12_multiply(modifier, UQ_4_12(0.75));
 
     if (IsAbilityOnField(ABILITY_BEADS_OF_RUIN) && defAbility != ABILITY_BEADS_OF_RUIN && IS_MOVE_SPECIAL(gCurrentMove))
-        modifier = uq4_12_multiply(modifier, UQ_4_12(0.25));
+        modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
 
     // attacker partner's abilities
     if (IsBattlerAlive(BATTLE_PARTNER(battlerAtk)))
@@ -10829,35 +10829,19 @@ bool32 CanTargetBattler(u8 battlerAtk, u8 battlerDef, u16 move)
 
 static void SetRandomMultiHitCounter()
 {
-#if (B_MULTI_HIT_CHANCE >= GEN_5)
-    // Based on Gen 5's odds
-    // 35% for 2 hits
-    // 35% for 3 hits
-    // 15% for 4 hits
-    // 15% for 5 hits
-    gMultiHitCounter = Random() % 100;
-    if (gMultiHitCounter < 35)
-        gMultiHitCounter = 2;
-    else if (gMultiHitCounter < 35 + 35)
-        gMultiHitCounter = 3;
-    else if (gMultiHitCounter < 35 + 35 + 15)
-        gMultiHitCounter = 4;
-    else
-        gMultiHitCounter = 5;
-#else
-    // 2 and 3 hits: 37.5%
-    // 4 and 5 hits: 12.5%
-    gMultiHitCounter = Random() % 4;
-    if (gMultiHitCounter > 1)
-        gMultiHitCounter = (Random() % 4) + 2;
-    else
-        gMultiHitCounter += 2;
-#endif
-
-    if (gMultiHitCounter < 4 && GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LOADED_DICE)
+    if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LOADED_DICE)
     {
-        // If roll 4 or 5 Loaded Dice doesn't do anything. Otherwise it rolls the number of hits as 5 minus a random integer from 0 to 1 inclusive.
-        gMultiHitCounter = 5 - (Random() & 1);
+        gMultiHitCounter = RandomUniform(RNG_LOADED_DICE, 4, 5);
+    }
+    else
+    {
+#if B_MULTI_HIT_CHANCE >= GEN_5
+        // 35%: 2 hits, 35%: 3 hits, 15% 4 hits, 15% 5 hits.
+        gMultiHitCounter = RandomWeighted(RNG_HITS, 0, 0, 7, 7, 3, 3);
+#else
+        // 37.5%: 2 hits, 37.5%: 3 hits, 12.5% 4 hits, 12.5% 5 hits.
+        gMultiHitCounter = RandomWeighted(RNG_HITS, 0, 0, 3, 3, 1, 1);
+#endif
     }
 }
 
