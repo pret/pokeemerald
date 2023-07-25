@@ -159,7 +159,7 @@ s32 MgbaPrintf_(const char *fmt, ...);
             Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: EXPECT_GE(%d, %d) failed", gTestRunnerState.test->filename, __LINE__, _a, _b); \
     } while (0)
 
-struct Benchmark { u32 ticks; };
+struct Benchmark { s32 ticks; };
 
 static inline void BenchmarkStart(void)
 {
@@ -188,6 +188,7 @@ static inline struct Benchmark BenchmarkStop(void)
     do \
     { \
         u32 a_ = (a).ticks; u32 b_ = (b).ticks; \
+        MgbaPrintf_(#a ": %d ticks, " #b ": %d ticks", a_, b_); \
         if (((a_ - BENCHMARK_ABS) * BENCHMARK_REL) >= (b_ * 100)) \
             Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: EXPECT_FASTER(" #a ", " #b ") failed", gTestRunnerState.test->filename, __LINE__); \
     } while (0)
@@ -196,6 +197,7 @@ static inline struct Benchmark BenchmarkStop(void)
     do \
     { \
         u32 a_ = (a).ticks; u32 b_ = (b).ticks; \
+        MgbaPrintf_(#a ": %d ticks, " #b ": %d ticks", a_, b_); \
         if ((a_ * 100) <= ((b_ - BENCHMARK_ABS) * BENCHMARK_REL)) \
             Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: EXPECT_SLOWER(" #a ", " #b ") failed", gTestRunnerState.test->filename, __LINE__); \
     } while (0)
