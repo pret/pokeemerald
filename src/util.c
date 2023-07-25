@@ -158,7 +158,7 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
 {
     u8 x, y;
     s8 i, j;
-    u8 xflip[32];
+    u8 ALIGNED(4) xflip[32];
     u8 h = sSpriteDimensions[shape][size][1];
     u8 w = sSpriteDimensions[shape][size][0];
 
