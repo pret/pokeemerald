@@ -3935,6 +3935,7 @@ u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp)
 struct TrainerSlide
 {
     u16 trainerId;
+    bool8 isFrontierTrainer;
     const u8 *msgLastSwitchIn;
     const u8 *msgLastLowHp;
     const u8 *msgFirstDown;
@@ -3954,6 +3955,7 @@ static const struct TrainerSlide sTrainerSlides[] =
     Example:
     {
         .trainerId = TRAINER_WALLY_VR_2,
+        .isFrontierTrainer = FALSE,
         .msgLastSwitchIn = sText_AarghAlmostHadIt,
         .msgLastLowHp = sText_BoxIsFull,
         .msgFirstDown = sText_123Poof,
@@ -4046,7 +4048,9 @@ u32 ShouldDoTrainerSlide(u32 battlerId, u32 which)
 
     for (i = 0; i < ARRAY_COUNT(sTrainerSlides); i++)
     {
-        if (trainerId == sTrainerSlides[i].trainerId)
+        if (trainerId == sTrainerSlides[i].trainerId
+            && (((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && sTrainerSlides[i].isFrontierTrainer)
+                || (!(gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && !sTrainerSlides[i].isFrontierTrainer)))
         {
             gBattleScripting.battler = battlerId;
             switch (which)
