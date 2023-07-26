@@ -91,6 +91,7 @@ enum { // Util
     DEBUG_UTIL_MENU_ITEM_TRAINER_ID,
     DEBUG_UTIL_MENU_ITEM_CLEAR_BOXES,
     DEBUG_UTIL_MENU_ITEM_CHEAT,
+    DEBUG_UTIL_MENU_ITEM_HATCH_AN_EGG,
 };
 enum { // Scripts
     DEBUG_UTIL_MENU_ITEM_SCRIPT_1,
@@ -211,6 +212,8 @@ enum { //Sound
 #define DEBUG_NUMBER_ICON_X 210
 #define DEBUG_NUMBER_ICON_Y 50
 
+#define DEBUG_MAX_MENU_ITEMS 50
+
 // *******************************
 struct DebugMonData
 {
@@ -234,7 +237,7 @@ struct DebugMonData
 struct DebugMenuListData
 {
     struct ListMenuItem listItems[20 + 1];
-    u8 itemNames[PC_ITEMS_COUNT + 1][26];
+    u8 itemNames[DEBUG_MAX_MENU_ITEMS + 1][26];
     u8 listId;
 };
 
@@ -312,6 +315,7 @@ static void DebugAction_Util_Trainer_Gender(u8 taskId);
 static void DebugAction_Util_Trainer_Id(u8 taskId);
 static void DebugAction_Util_Clear_Boxes(u8 taskId);
 static void DebugAction_Util_CheatStart(u8 taskId);
+static void DebugAction_Util_HatchAnEgg(u8 taskId);
 
 static void DebugAction_FlagsVars_Flags(u8 taskId);
 static void DebugAction_FlagsVars_FlagsSelect(u8 taskId);
@@ -381,6 +385,7 @@ extern u8 Debug_Script_8[];
 
 extern u8 Debug_ShowFieldMessageStringVar4[];
 extern u8 Debug_CheatStart[];
+extern u8 Debug_HatchAnEgg[];
 extern u8 PlayersHouse_2F_EventScript_SetWallClock[];
 extern u8 PlayersHouse_2F_EventScript_CheckWallClock[];
 extern u8 Debug_CheckSaveBlock[];
@@ -436,6 +441,7 @@ static const u8 sDebugText_Util_Trainer_Gender[] =          _("Toggle T. Gender"
 static const u8 sDebugText_Util_Trainer_Id[] =              _("New Trainer Id");
 static const u8 sDebugText_Util_Clear_Boxes[] =             _("Clear Storage Boxes");
 static const u8 sDebugText_Util_CheatStart[] =              _("CHEAT Start");
+static const u8 sDebugText_Util_HatchAnEgg[] =              _("Hatch an Egg");
 // Flags/Vars Menu
 static const u8 sDebugText_FlagsVars_Flags[] =                  _("Set Flag XYZ…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_FlagsVars_Flag[] =                   _("Flag: {STR_VAR_1}{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}\n{STR_VAR_3}");
@@ -597,6 +603,7 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_TRAINER_ID]       = {sDebugText_Util_Trainer_Id,       DEBUG_UTIL_MENU_ITEM_TRAINER_ID},
     [DEBUG_UTIL_MENU_ITEM_CLEAR_BOXES]      = {sDebugText_Util_Clear_Boxes,      DEBUG_UTIL_MENU_ITEM_CLEAR_BOXES},
     [DEBUG_UTIL_MENU_ITEM_CHEAT]            = {sDebugText_Util_CheatStart,       DEBUG_UTIL_MENU_ITEM_CHEAT},
+    [DEBUG_UTIL_MENU_ITEM_HATCH_AN_EGG]     = {sDebugText_Util_HatchAnEgg,       DEBUG_UTIL_MENU_ITEM_HATCH_AN_EGG},
 };
 static const struct ListMenuItem sDebugMenu_Items_Scripts[] =
 {
@@ -729,6 +736,7 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_TRAINER_ID]       = DebugAction_Util_Trainer_Id,
     [DEBUG_UTIL_MENU_ITEM_CLEAR_BOXES]      = DebugAction_Util_Clear_Boxes,
     [DEBUG_UTIL_MENU_ITEM_CHEAT]            = DebugAction_Util_CheatStart,
+    [DEBUG_UTIL_MENU_ITEM_HATCH_AN_EGG]     = DebugAction_Util_HatchAnEgg,
 };
 static void (*const sDebugMenu_Actions_Scripts[])(u8) =
 {
@@ -1132,6 +1140,8 @@ static void Debug_RefreshListMenu(u8 taskId)
         totalItems = 7;
     }
 
+    // Failsafe to prevent memory corruption
+    totalItems = min(totalItems, DEBUG_MAX_MENU_ITEMS);
     // Copy item names for all entries but the last (which is Cancel)
     for(i = 0; i < totalItems; i++)
     {
@@ -1975,6 +1985,10 @@ static void DebugAction_Util_Clear_Boxes(u8 taskId)
 static void DebugAction_Util_CheatStart(u8 taskId)
 {
     Debug_DestroyMenu_Full_Script(taskId, Debug_CheatStart);
+}
+static void DebugAction_Util_HatchAnEgg(u8 taskId)
+{
+    Debug_DestroyMenu_Full_Script(taskId, Debug_HatchAnEgg);
 }
 
 // *******************************

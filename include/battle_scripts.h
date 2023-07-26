@@ -418,6 +418,7 @@ extern const u8 BattleScript_AttackWeakenedByStrongWinds[];
 extern const u8 BattleScript_BlockedByPrimalWeatherEnd3[];
 extern const u8 BattleScript_BlockedByPrimalWeatherRet[];
 extern const u8 BattleScript_PrimalReversion[];
+extern const u8 BattleScript_PrimalReversionRestoreAttacker[];
 extern const u8 BattleScript_HyperspaceFuryRemoveProtect[];
 extern const u8 BattleScript_SelectingNotAllowedMoveGorillaTactics[];
 extern const u8 BattleScript_SelectingNotAllowedMoveGorillaTacticsInPalace[];
