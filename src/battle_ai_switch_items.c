@@ -113,11 +113,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
     // Find a Pokemon in the party that has a super effective move.
     for (i = firstId; i < lastId; i++)
     {
-        if (GetMonData(&party[i], MON_DATA_HP) == 0)
-            continue;
-        if (GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
-            continue;
-        if (GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
+        if (!IsValidForBattle(&party[i]))
             continue;
         if (i == gBattlerPartyIndexes[gActiveBattler])
             continue;
@@ -196,13 +192,9 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
 
     for (i = firstId; i < lastId; i++)
     {
-        u16 species;
         u16 monAbility;
 
-        if (GetMonData(&party[i], MON_DATA_HP) == 0)
-            continue;
-        species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
-        if (species == SPECIES_NONE || species == SPECIES_EGG)
+        if (!IsValidForBattle(&party[i]))
             continue;
         if (i == gBattlerPartyIndexes[battlerIn1])
             continue;
@@ -216,7 +208,6 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
             continue;
 
         monAbility = GetMonAbility(&party[i]);
-
         if (absorbingTypeAbility == monAbility && Random() & 1)
         {
             // we found a mon.
@@ -291,9 +282,7 @@ static bool8 ShouldSwitchIfGameStatePrompt(void)
                                 continue;
 
                             //Look for mon in party that is able to be switched into and has ability that sets terrain
-                            if (GetMonData(&party[i], MON_DATA_HP) != 0
-                                && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
-                                && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG
+                            if (IsValidForBattle(&party[i])
                                 && i != gBattlerPartyIndexes[gActiveBattler]
                                 && i != gBattlerPartyIndexes[BATTLE_PARTNER(gActiveBattler)]
                                 && IsBattlerGrounded(gActiveBattler)
@@ -562,13 +551,9 @@ static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent)
 
     for (i = firstId; i < lastId; i++)
     {
-        u16 species;
-        u16 monAbility;
+        u16 species, monAbility;
 
-        if (GetMonData(&party[i], MON_DATA_HP) == 0)
-            continue;
-        species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
-        if (species == SPECIES_NONE || species == SPECIES_EGG)
+        if (!IsValidForBattle(&party[i]))
             continue;
         if (i == gBattlerPartyIndexes[battlerIn1])
             continue;
@@ -581,8 +566,8 @@ static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent)
         if (IsAceMon(gActiveBattler, i))
             continue;
 
+        species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
         monAbility = GetMonAbility(&party[i]);
-
         CalcPartyMonTypeEffectivenessMultiplier(gLastLandedMoves[gActiveBattler], species, monAbility);
         if (gMoveResultFlags & flags)
         {
@@ -651,11 +636,7 @@ bool32 ShouldSwitch(void)
 
     for (i = firstId; i < lastId; i++)
     {
-        if (GetMonData(&party[i], MON_DATA_HP) == 0)
-            continue;
-        if (GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
-            continue;
-        if (GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
+        if (!IsValidForBattle(&party[i]))
             continue;
         if (i == gBattlerPartyIndexes[battlerIn1])
             continue;
@@ -752,9 +733,7 @@ void AI_TrySwitchOrUseItem(void)
 
                     for (monToSwitchId = (lastId-1); monToSwitchId >= firstId; monToSwitchId--)
                     {
-                        if (GetMonData(&party[monToSwitchId], MON_DATA_HP) == 0)
-                            continue;
-                        if (GetMonData(&party[monToSwitchId], MON_DATA_SPECIES) == SPECIES_NONE)
+                        if (!IsValidForBattle(&party[monToSwitchId]))
                             continue;
                         if (monToSwitchId == gBattlerPartyIndexes[battlerIn1])
                             continue;
@@ -957,10 +936,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
     // Get invalid slots ids.
     for (i = firstId; i < lastId; i++)
     {
-        u16 species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
-        if (species == SPECIES_NONE
-            || species == SPECIES_EGG
-            || GetMonData(&party[i], MON_DATA_HP) == 0
+        if (!IsValidForBattle(&party[i])
             || gBattlerPartyIndexes[battlerIn1] == i
             || gBattlerPartyIndexes[battlerIn2] == i
             || i == *(gBattleStruct->monToSwitchIntoId + battlerIn1)
@@ -1043,9 +1019,7 @@ static bool8 ShouldUseItem(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (GetMonData(&party[i], MON_DATA_HP) != 0
-            && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
-            && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
+        if (IsValidForBattle(&party[i]))
         {
             validMons++;
         }
