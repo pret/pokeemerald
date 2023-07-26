@@ -8866,14 +8866,16 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
     case ABILITY_PROTOSYNTHESIS:
         {
             u8 atkHighestStat = GetHighestStatId(battlerAtk);
-            if (gBattleWeather & B_WEATHER_SUN && WEATHER_HAS_EFFECT && (atkHighestStat == STAT_ATK || atkHighestStat == STAT_SPATK))
+            if (gBattleWeather & B_WEATHER_SUN && WEATHER_HAS_EFFECT
+            && ((IS_MOVE_PHYSICAL(move) && atkHighestStat == STAT_ATK) || (IS_MOVE_SPECIAL(move) && atkHighestStat == STAT_SPATK)))
                 MulModifier(&modifier, UQ_4_12(1.3));
         }
         break;
     case ABILITY_QUARK_DRIVE:
         {
             u8 atkHighestStat = GetHighestStatId(battlerAtk);
-            if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && (atkHighestStat == STAT_ATK || atkHighestStat == STAT_SPATK))
+            if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN
+            && ((IS_MOVE_PHYSICAL(move) && atkHighestStat == STAT_ATK) || (IS_MOVE_SPECIAL(move) && atkHighestStat == STAT_SPATK)))
                 MulModifier(&modifier, UQ_4_12(1.3));
         }
         break;
@@ -8964,14 +8966,16 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
     case ABILITY_PROTOSYNTHESIS:
         {
             u8 defHighestStat = GetHighestStatId(battlerDef);
-            if (gBattleWeather & B_WEATHER_SUN && WEATHER_HAS_EFFECT && (defHighestStat == STAT_DEF || defHighestStat == STAT_SPDEF))
+            if (gBattleWeather & B_WEATHER_SUN && WEATHER_HAS_EFFECT
+            && ((IS_MOVE_PHYSICAL(move) && defHighestStat == STAT_DEF) || (IS_MOVE_SPECIAL(move) && defHighestStat == STAT_SPDEF)))
                 MulModifier(&modifier, UQ_4_12(0.7));
         }
         break;
     case ABILITY_QUARK_DRIVE:
         {
             u8 defHighestStat = GetHighestStatId(battlerDef);
-            if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && (defHighestStat == STAT_DEF || defHighestStat == STAT_SPDEF))
+            if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN
+            && ((IS_MOVE_PHYSICAL(move) && defHighestStat == STAT_DEF) || (IS_MOVE_SPECIAL(move) && defHighestStat == STAT_SPDEF)))
                 MulModifier(&modifier, UQ_4_12(0.7));
         }
         break;
@@ -9014,10 +9018,6 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
         if ((gBattleMons[battlerAtk].species == SPECIES_LATIAS || gBattleMons[battlerAtk].species == SPECIES_LATIOS) && !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && IS_MOVE_SPECIAL(move))
     #endif
             MulModifier(&modifier, holdEffectModifier);
-        break;
-    case HOLD_EFFECT_GEMS:
-        if (gSpecialStatuses[battlerAtk].gemBoost && gBattleMons[battlerAtk].item)
-            MulModifier(&modifier, UQ_4_12(1.0) + sPercentToModifier[gSpecialStatuses[battlerAtk].gemParam]);
         break;
     case HOLD_EFFECT_BUG_POWER:
     case HOLD_EFFECT_STEEL_POWER:
@@ -9109,6 +9109,8 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
     // various effects
     if (gProtectStructs[battlerAtk].helpingHand)
         MulModifier(&modifier, UQ_4_12(1.5));
+    if (gSpecialStatuses[battlerAtk].gemBoost)
+        MulModifier(&modifier, UQ_4_12(1.0) + sPercentToModifier[gSpecialStatuses[battlerAtk].gemParam]);
     if (gStatuses3[battlerAtk] & STATUS3_CHARGED_UP && moveType == TYPE_ELECTRIC)
         MulModifier(&modifier, UQ_4_12(2.0));
     if (gStatuses3[battlerAtk] & STATUS3_ME_FIRST)
@@ -9505,6 +9507,8 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
     u32 defSide = GET_BATTLER_SIDE(battlerDef);
     u16 finalModifier = UQ_4_12(1.0);
     u16 itemDef = gBattleMons[battlerDef].item;
+    u16 holdEffectAtk = GetBattlerHoldEffect(battlerAtk, TRUE);
+    u16 holdEffectDef = GetBattlerHoldEffect(battlerDef, TRUE);
 
     // check multiple targets in double battle
     if (GetMoveTargetCount(move, battlerAtk, battlerDef) >= 2)
@@ -9534,28 +9538,15 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
         dmg = ApplyModifier(UQ_4_12(0.5), dmg);
 
     // check frostbite
-    if (gBattleMons[battlerAtk].status1 & STATUS1_FROSTBITE && !IS_MOVE_PHYSICAL(move)
+    if (gBattleMons[battlerAtk].status1 & STATUS1_FROSTBITE && IS_MOVE_SPECIAL(move)
     #if B_BURN_FACADE_DMG >= GEN_6
         && gBattleMoves[move].effect != EFFECT_FACADE
     #endif
         && abilityAtk != ABILITY_GUTS)
         dmg = ApplyModifier(UQ_4_12(0.5), dmg);
 
-    // check sunny/rain weather
-    if (IsBattlerWeatherAffected(battlerAtk, B_WEATHER_RAIN))
-    {
-        if (moveType == TYPE_FIRE)
-            dmg = ApplyModifier(UQ_4_12(0.5), dmg);
-        else if (moveType == TYPE_WATER)
-            dmg = ApplyModifier(UQ_4_12(1.5), dmg);
-    }
-    else if (IsBattlerWeatherAffected(battlerAtk, B_WEATHER_SUN))
-    {
-        if (moveType == TYPE_FIRE || gBattleMoves[move].effect == EFFECT_HYDRO_STEAM)
-            dmg = ApplyModifier(UQ_4_12(1.5), dmg);
-        else if (moveType == TYPE_WATER)
-            dmg = ApplyModifier(UQ_4_12(0.5), dmg);
-    }
+    // check weather
+    dmg = ApplyWeatherDamageMultiplier(battlerAtk, move, moveType, dmg, holdEffectAtk, holdEffectDef);
 
     // check stab
     if (IS_BATTLER_OF_TYPE(battlerAtk, moveType) && move != MOVE_STRUGGLE && move != MOVE_NONE)
@@ -9640,7 +9631,7 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
     }
 
     // attacker's hold effect
-    switch (GetBattlerHoldEffect(battlerAtk, TRUE))
+    switch (holdEffectAtk)
     {
     case HOLD_EFFECT_METRONOME:
         percentBoost = min((gBattleStruct->sameMoveTurns[battlerAtk] * GetBattlerHoldEffectParam(battlerAtk)), 100);
@@ -9656,7 +9647,7 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
     }
 
     // target's hold effect
-    switch (GetBattlerHoldEffect(battlerDef, TRUE))
+    switch (holdEffectDef)
     {
     // berries reducing dmg
     case HOLD_EFFECT_RESIST_BERRY:
@@ -10235,8 +10226,8 @@ bool32 TryBattleFormChange(u8 battlerId, u16 method)
     if (targetSpecies != SPECIES_NONE)
     {
         // Saves the original species on the first form change for the player.
-        if (side == B_SIDE_PLAYER && gBattleStruct->changedSpecies[monId] == SPECIES_NONE)
-            gBattleStruct->changedSpecies[monId] = gBattleMons[battlerId].species;
+        if (gBattleStruct->changedSpecies[side][monId] == SPECIES_NONE)
+            gBattleStruct->changedSpecies[side][monId] = gBattleMons[battlerId].species;
 
         TryToSetBattleFormChangeMoves(&party[monId], method);
         SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
@@ -10244,7 +10235,7 @@ bool32 TryBattleFormChange(u8 battlerId, u16 method)
         RecalcBattlerStats(battlerId, &party[monId]);
         return TRUE;
     }
-    else if (gBattleStruct->changedSpecies[monId] != SPECIES_NONE)
+    else if (gBattleStruct->changedSpecies[side][monId] != SPECIES_NONE)
     {
         bool8 restoreSpecies = FALSE;
 
@@ -10260,7 +10251,7 @@ bool32 TryBattleFormChange(u8 battlerId, u16 method)
         {
             // Reverts the original species
             TryToSetBattleFormChangeMoves(&party[monId], method);
-            SetMonData(&party[monId], MON_DATA_SPECIES, &gBattleStruct->changedSpecies[monId]);
+            SetMonData(&party[monId], MON_DATA_SPECIES, &gBattleStruct->changedSpecies[side][monId]);
             RecalcBattlerStats(battlerId, &party[monId]);
             return TRUE;
         }
@@ -10853,6 +10844,34 @@ bool32 IsBattlerWeatherAffected(u8 battlerId, u32 weatherFlags)
         return TRUE;
     }
     return FALSE;
+}
+
+// Utility Umbrella holders take normal damage from what would be rain- and sun-weakened attacks.
+u32 ApplyWeatherDamageMultiplier(u8 battlerAtk, u16 move, u8 moveType, u32 dmg, u16 holdEffectAtk, u16 holdEffectDef)
+{
+    if (WEATHER_HAS_EFFECT)
+    {
+        if (gBattleMoves[move].effect == EFFECT_HYDRO_STEAM && (gBattleWeather & B_WEATHER_SUN) && holdEffectAtk != HOLD_EFFECT_UTILITY_UMBRELLA)
+            dmg = ApplyModifier(UQ_4_12(1.5), dmg);
+        else if (holdEffectDef != HOLD_EFFECT_UTILITY_UMBRELLA)
+        {
+            if (gBattleWeather & B_WEATHER_RAIN)
+            {
+                if (moveType == TYPE_FIRE)
+                    dmg = ApplyModifier(UQ_4_12(0.5), dmg);
+                else if (moveType == TYPE_WATER)
+                    dmg = ApplyModifier(UQ_4_12(1.5), dmg);
+            }
+            else if (gBattleWeather & B_WEATHER_SUN)
+            {
+                if (moveType == TYPE_FIRE)
+                    dmg = ApplyModifier(UQ_4_12(1.5), dmg);
+                else if (moveType == TYPE_WATER)
+                    dmg = ApplyModifier(UQ_4_12(0.5), dmg);
+            }
+        }
+    }
+    return dmg;
 }
 
 // Gets move target before redirection effects etc. are applied

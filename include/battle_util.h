@@ -210,6 +210,7 @@ void BufferStatChange(u8 battlerId, u8 statId, u8 stringId);
 bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef, bool32 checkTarget);
 u16 GetUsedHeldItem(u8 battler);
 bool32 IsBattlerWeatherAffected(u8 battlerId, u32 weatherFlags);
+u32 ApplyWeatherDamageMultiplier(u8 battlerAtk, u16 move, u8 moveType, u32 dmg, u16 holdEffectAtk, u16 holdEffectDef);
 u32 GetBattlerMoveTargetType(u8 battlerId, u16 move);
 bool32 CanTargetBattler(u8 battlerAtk, u8 battlerDef, u16 move);
 bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId);
