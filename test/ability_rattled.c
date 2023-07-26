@@ -82,7 +82,7 @@ SINGLE_BATTLE_TEST("Rattled triggers correctly when hit by U-Turn") // Specific 
     } WHEN {
         TURN { MOVE(player, MOVE_U_TURN); SEND_OUT(player, 1); }
     } SCENE {
-        MESSAGE("Wobbuffet used U-Turn!");
+        MESSAGE("Wobbuffet used U-turn!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_U_TURN, player);
         HP_BAR(opponent);
         ABILITY_POPUP(opponent, ABILITY_RATTLED);
