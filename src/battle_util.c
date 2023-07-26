@@ -3748,11 +3748,6 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gMultiHitCounter = gBattleMoves[gCurrentMove].strikeCount;
                 PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 3, 0)
             }
-            else if (gBattleMoves[gCurrentMove].effect == EFFECT_TRIPLE_KICK)
-            {
-                gMultiHitCounter = 3;
-                PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
-            }
         #if B_BEAT_UP >= GEN_5
             else if (gBattleMoves[gCurrentMove].effect == EFFECT_BEAT_UP)
             {
