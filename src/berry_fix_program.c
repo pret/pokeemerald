@@ -117,7 +117,7 @@ static const struct WindowTemplate sBerryFixWindowTemplates[] = {
     DUMMY_WIN_TEMPLATE
 };
 
-static const u16 sText_Pal[] = INCBIN_U16("graphics/berry_fix/text.gbapal");
+static const u16 ALIGNED(4) sText_Pal[] = INCBIN_U16("graphics/berry_fix/text.gbapal");
 static const u8 sBerryProgramTextColors[] = {TEXT_DYNAMIC_COLOR_1, TEXT_DYNAMIC_COLOR_2, TEXT_DYNAMIC_COLOR_3};
 static const u8 sGameTitleTextColors[] = { TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_1, TEXT_DYNAMIC_COLOR_4};
 
