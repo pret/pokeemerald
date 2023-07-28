@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_TRIPLE_KICK].effect & EFFECT_TRIPLE_KICK);
+    ASSUME(gBattleMoves[MOVE_TRIPLE_KICK].effect == EFFECT_TRIPLE_KICK);
 }
 
 SINGLE_BATTLE_TEST("Triple Kick damage is increased by its base damage for each hit")
@@ -29,3 +29,7 @@ SINGLE_BATTLE_TEST("Triple Kick damage is increased by its base damage for each 
         EXPECT_MUL_EQ(firstHit, Q_4_12(3.0), thirdHit);
     }
 }
+
+TO_DO_BATTLE_TEST("Accuracy for Triple Kick is checked independently for each hit")
+TO_DO_BATTLE_TEST("Accuracy for Triple Kick is only checked for the first hit with Skill Link")
+TO_DO_BATTLE_TEST("Accuracy for Triple Kick is only checked for the first hit with Loaded Dice")
