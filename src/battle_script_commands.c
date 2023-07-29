@@ -1708,6 +1708,8 @@ static void Cmd_accuracycheck(void)
 
     u16 type, move = cmd->move;
     u16 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, move);
+    u16 gBattlerAttackerAbility = GetBattlerAbility(gBattlerAttacker);
+    u8 gBattlerAttackerHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
 
     if (move == ACC_CURR_MOVE)
         move = gCurrentMove;
@@ -1723,7 +1725,7 @@ static void Cmd_accuracycheck(void)
     }
     else if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_2ND_HIT
         || (gSpecialStatuses[gBattlerAttacker].multiHitOn
-        && (GetBattlerAbility(gBattlerAttacker) == ABILITY_SKILL_LINK || GetBattlerHoldEffect(gBattlerAttacker, TRUE)
+        && (gBattlerAttackerAbility == ABILITY_SKILL_LINK || gBattlerAttackerHoldEffect == HOLD_EFFECT_LOADED_DICE
         || !(gBattleMoves[move].effect == EFFECT_TRIPLE_KICK || gBattleMoves[move].effect == EFFECT_POPULATION_BOMB))))
     {
         // No acc checks for second hit of Parental Bond or multi hit moves, except Triple Kick/Triple Axel/Population Bomb
@@ -1743,16 +1745,16 @@ static void Cmd_accuracycheck(void)
             gBattlerAttacker,
             gBattlerTarget,
             move,
-            GetBattlerAbility(gBattlerAttacker),
+            gBattlerAttackerAbility,
             GetBattlerAbility(gBattlerTarget),
-            GetBattlerHoldEffect(gBattlerAttacker, TRUE),
+            gBattlerAttackerHoldEffect,
             GetBattlerHoldEffect(gBattlerTarget, TRUE)
         );
 
         if (!RandomPercentage(RNG_ACCURACY, accuracy))
         {
             gMoveResultFlags |= MOVE_RESULT_MISSED;
-            if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_BLUNDER_POLICY)
+            if (gBattlerAttackerHoldEffect == HOLD_EFFECT_BLUNDER_POLICY)
                 gBattleStruct->blunderPolicy = TRUE;    // Only activates from missing through acc/evasion checks
 
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE &&
