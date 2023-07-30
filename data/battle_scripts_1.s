@@ -8782,15 +8782,14 @@ BattleScript_DesolateLandActivates::
 	call BattleScript_ActivateWeatherAbilities
 	end3
 
-BattleScript_DesolateLandEvaporatesWaterTypeMoves::
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+BattleScript_PrimalWeatherBlocksMove::
+	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_ATTACKSTRING_PRINTED, BattleScript_MoveEnd @in case of multi-target moves, if move fails once, no point in printing the message twice
+	accuracycheck BattleScript_PrintMoveMissed, NO_ACC_CALC_CHECK_LOCK_ON
 	attackstring
 	pause B_WAIT_TIME_SHORT
 	ppreduce
-	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_STRING_PRINTED, BattleScript_MoveEnd
-	printstring STRINGID_MOVEEVAPORATEDINTHEHARSHSUNLIGHT
+	printfromtable gPrimalWeatherBlocksStringIds
 	waitmessage B_WAIT_TIME_LONG
-	orword gHitMarker, HITMARKER_STRING_PRINTED
 	goto BattleScript_MoveEnd
 
 BattleScript_PrimordialSeaActivates::
@@ -8801,17 +8800,6 @@ BattleScript_PrimordialSeaActivates::
 	playanimation BS_BATTLER_0, B_ANIM_RAIN_CONTINUES
 	call BattleScript_ActivateWeatherAbilities
 	end3
-
-BattleScript_PrimordialSeaFizzlesOutFireTypeMoves::
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	attackstring
-	pause B_WAIT_TIME_SHORT
-	ppreduce
-	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_STRING_PRINTED, BattleScript_MoveEnd
-	printstring STRINGID_MOVEFIZZLEDOUTINTHEHEAVYRAIN
-	waitmessage B_WAIT_TIME_LONG
-	orword gHitMarker, HITMARKER_STRING_PRINTED
-	goto BattleScript_MoveEnd
 
 BattleScript_DeltaStreamActivates::
 	pause B_WAIT_TIME_SHORT

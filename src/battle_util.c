@@ -3389,10 +3389,9 @@ void SetAtkCancellerForCalledMove(void)
     gBattleStruct->isAtkCancelerForCalledMove = TRUE;
 }
 
-u8 AtkCanceller_UnableToUseMove(void)
+u8 AtkCanceller_UnableToUseMove(u32 moveType)
 {
     u8 effect = 0;
-    s32 *bideDmg = &gBattleScripting.bideDmg;
     do
     {
         switch (gBattleStruct->atkCancellerTracker)
@@ -3653,7 +3652,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                     if (gTakenDmg[gBattlerAttacker])
                     {
                         gCurrentMove = MOVE_BIDE;
-                        *bideDmg = gTakenDmg[gBattlerAttacker] * 2;
+                        gBattleScripting.bideDmg = gTakenDmg[gBattlerAttacker] * 2;
                         gBattlerTarget = gTakenDmgByBattler[gBattlerAttacker];
                         if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
                             gBattlerTarget = GetMoveTarget(MOVE_BIDE, MOVE_TARGET_SELECTED + 1);
@@ -3723,8 +3722,6 @@ u8 AtkCanceller_UnableToUseMove(void)
         case CANCELLER_POWDER_STATUS:
             if (gBattleMons[gBattlerAttacker].status2 & STATUS2_POWDER)
             {
-                u32 moveType;
-                GET_MOVE_TYPE(gCurrentMove, moveType);
                 if (moveType == TYPE_FIRE)
                 {
                     gProtectStructs[gBattlerAttacker].powderSelfDmg = TRUE;
