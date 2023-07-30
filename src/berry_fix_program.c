@@ -117,7 +117,7 @@ static const struct WindowTemplate sBerryFixWindowTemplates[] = {
     DUMMY_WIN_TEMPLATE
 };
 
-static const u16 sBerryFixPalColors[] = {
+static const u16 ALIGNED(4) sBerryFixPalColors[] = {
     RGB_WHITE,       RGB_WHITE,       RGB(12, 12, 12), RGB(26, 26, 25),
     RGB(28, 1, 1),   RGB(31, 23, 14), RGB(4, 19, 1),   RGB(18, 30, 18),
     RGB(6, 10, 25),  RGB(20, 24, 30), RGB_WHITE,       RGB(12, 12, 12),
