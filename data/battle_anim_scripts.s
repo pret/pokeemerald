@@ -3777,7 +3777,7 @@ Move_STONE_EDGE:
 Move_CAPTIVATE:
 	loadspritegfx ANIM_TAG_MAGENTA_HEART
 	loadspritegfx ANIM_TAG_SPARKLE_2
-	createvisualtask AnimTask_RockMonBackAndForth, 5, 3, 0, 2, 0
+	createvisualtask AnimTask_RockMonBackAndForth, 5, ANIM_DEF_PARTNER, 0, 2, 0
 	createsprite gMagentaHeartSpriteTemplate, 3, 2, 0, 20
 	playsewithpan SE_M_CHARM, SOUND_PAN_ATTACKER
 	delay 15
@@ -4694,7 +4694,7 @@ Move_WIDE_GUARD:
 	loadspritegfx ANIM_TAG_WATER_ORB @blue color
 	monbg ANIM_ATTACKER
 	setalpha 12, 8
-	createvisualtask AnimTask_RockMonBackAndForth, 0x5, 0x0, 0x3, 0x0
+	createvisualtask AnimTask_RockMonBackAndForth, 5, ANIM_ATTACKER, 3, 0
 	waitplaysewithpan SE_M_PSYBEAM2, SOUND_PAN_ATTACKER, 0x10
 	createsprite gWideGuardBlueConversionTemplate, ANIM_ATTACKER, 0x2, 0xffe8, 0xffe8
 	delay 3
@@ -6460,7 +6460,7 @@ Move_DRILL_RUN:
 	setalpha 12, 8
 	fadetobg BG_FISSURE
 	waitbgfadeout
-	createvisualtask AnimTask_PositionFissureBgOnBattler, 0x5, 0x1, 0x5, 0xffff
+	createvisualtask AnimTask_PositionFissureBgOnBattler, 5, ANIM_TARGET, 5, -1
 	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 0x0
 	playsewithpan SE_M_HEADBUTT, SOUND_PAN_ATTACKER
 	waitforvisualfinish
@@ -9679,7 +9679,7 @@ Move_NUZZLE::
 	loadspritegfx ANIM_TAG_ITEM_BAG
 	loadspritegfx ANIM_TAG_SPARK_2
 	loadspritegfx ANIM_TAG_IMPACT
-	createvisualtask AnimTask_RockMonBackAndForth, 0x5, 0x0, 0x2, 0x0
+	createvisualtask AnimTask_RockMonBackAndForth, 5, ANIM_ATTACKER, 2, 0
 	createsprite gMagentaHeartSpriteTemplate, ANIM_ATTACKER, 3, 0x0, 0x14
 	playsewithpan SE_M_CHARM, SOUND_PAN_ATTACKER
 	delay 0xf
@@ -10045,7 +10045,7 @@ Move_LANDS_WRATH::
 	playsewithpan SE_M_EARTHQUAKE, 0x0
 	createvisualtask AnimTask_HorizontalShake, 0x5, 0x5, 0xa, 0x32
 	createvisualtask AnimTask_HorizontalShake, 0x5, 0x4, 0xa, 0x32
-	createvisualtask AnimTask_PositionFissureBgOnBattler, 0x5, 0x1, 0x5, 0xffff
+	createvisualtask AnimTask_PositionFissureBgOnBattler, 5, ANIM_TARGET, 5, -1
 	waitbgfadein
 	waitforvisualfinish
 	call UnsetPsychicBg
@@ -10210,7 +10210,7 @@ Move_PRECIPICE_BLADES::
 	setalpha 12, 8
 	fadetobg 0x15
 	waitbgfadeout
-	createvisualtask AnimTask_PositionFissureBgOnBattler, 0x5, 0x1, 0x5, 0xffff
+	createvisualtask AnimTask_PositionFissureBgOnBattler, 5, ANIM_TARGET, 5, -1
 	createvisualtask AnimTask_HorizontalShake, 0x5, 0x5, 0xa, 0x5
 	createvisualtask AnimTask_HorizontalShake, 0x5, 0x4, 0xa, 0x5
 	playsewithpan SE_M_EARTHQUAKE, 0x0
@@ -11077,7 +11077,7 @@ PollenPuffOpponent:
 	setalpha 12, 8
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0x8, 0x0
 	waitforvisualfinish
-	createvisualtask AnimTask_RockMonBackAndForth, 0x5, 0x0, 0x2, 0x0
+	createvisualtask AnimTask_RockMonBackAndForth, 5, ANIM_ATTACKER, 2, 0
 	createsprite gPollenPuffPinkStarTemplate, ANIM_ATTACKER, 2, 0xa, 0xa, 0x19, 0x0
 	playsewithpan SE_M_MORNING_SUN, SOUND_PAN_ATTACKER
 	delay 0xD
@@ -11133,7 +11133,7 @@ PollenPuffAlly:
 	setalpha 12, 8
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0x8, 0x0
 	waitforvisualfinish
-	createvisualtask AnimTask_RockMonBackAndForth, 0x5, 0x0, 0x2, 0x0
+	createvisualtask AnimTask_RockMonBackAndForth, 5, ANIM_ATTACKER, 2, 0
 	createsprite gPollenPuffPinkStarTemplate, ANIM_ATTACKER, 2, 0xa, 0xa, 0x19, 0x0
 	playsewithpan SE_M_MORNING_SUN, SOUND_PAN_ATTACKER
 	delay 0xD
@@ -11545,7 +11545,7 @@ Move_REVELATION_DANCE::
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0xF, 0x0
 	waitforvisualfinish
 	playsewithpan SE_M_PETAL_DANCE, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_RockMonBackAndForth, 0x5, 0x0, 0x2, 0x0
+	createvisualtask AnimTask_RockMonBackAndForth, 5, ANIM_ATTACKER, 2, 0
 	createsprite gRevelationDanceYellowOrbsTemplate, ANIM_ATTACKER, 2, 0x0, 0xffe8, 0x8, 0x8c
 	createsprite gRevelationDanceYellowFlowerTemplate, ANIM_ATTACKER, 2, 0x10, 0xffe8, 0x8, 0x64
 	createsprite gRevelationDanceYellowFlowerTemplate, ANIM_ATTACKER, 2, 0xfff0, 0xffe8, 0x8, 0x64
@@ -11561,7 +11561,7 @@ Move_REVELATION_DANCE::
 	createsprite gRevelationDanceYellowFlowerTemplate, ANIM_ATTACKER, 2, 0x10, 0xffe8, 0x0, 0x64
 	createsprite gRevelationDanceYellowFlowerTemplate, ANIM_ATTACKER, 2, 0xfff0, 0xffe8, 0x0, 0x64
 	delay 0x1e
-	createvisualtask AnimTask_RockMonBackAndForth, 0x5, 0x0, 0x2, 0x0
+	createvisualtask AnimTask_RockMonBackAndForth, 5, ANIM_ATTACKER, 2, 0
 	createsprite gRevelationDanceYellowFlowerTemplate, ANIM_ATTACKER, 2, 0x14, 0xfff0, 0xe, 0x50
 	createsprite gRevelationDanceYellowFlowerTemplate, ANIM_ATTACKER, 2, 0xffec, 0xfff2, 0x10, 0x50
 	waitforvisualfinish
@@ -13629,7 +13629,7 @@ Move_CLANGOROUS_SOUL::
 	loadspritegfx ANIM_TAG_POISON_BUBBLE @purple
 	loadspritegfx ANIM_TAG_AIR_WAVE_2 @white/grey
 	loadspritegfx ANIM_TAG_SPARKLE_2 @stars
-	createvisualtask AnimTask_RockMonBackAndForth, 0x5, 0x0, 0x2, 0x0
+	createvisualtask AnimTask_RockMonBackAndForth, 5, ANIM_ATTACKER, 2, 0
 	call ClangorousSoulStarBuffEffect
 	call ClangorousSoulStarBuffEffect
 	call ClangorousSoulStarBuffEffect
@@ -31489,7 +31489,7 @@ Move_LETS_SNUGGLE_FOREVER::
 	loadspritegfx ANIM_TAG_VERTICAL_HEX @red
 	createvisualtask AnimTask_AllBattlersInvisibleExceptAttackerAndTarget, 0xA
 	waitforvisualfinish
-	createvisualtask AnimTask_RockMonBackAndForth, 0x5, 0x0, 0x2, 0x0
+	createvisualtask AnimTask_RockMonBackAndForth, 5, ANIM_ATTACKER, 2, 0
 	createsprite gSnuggleForeverHeartSpriteTemplate, ANIM_ATTACKER, 3, 0x0, 0x14
 	playsewithpan SE_M_CHARM, SOUND_PAN_ATTACKER
 	createsprite gSlowFlyingMusicNotesSpriteTemplate, ANIM_ATTACKER, 2, 0x1, 0x1, 0x1, 0x0
@@ -31618,7 +31618,7 @@ Move_CLANGOROUS_SOULBLAZE::
 	loadspritegfx ANIM_TAG_SPARKLE_2 @stars
 	fadetobg BG_CLANGOROUS_SOULBLAZE
 	waitbgfadein
-	createvisualtask AnimTask_RockMonBackAndForth, 0x5, 0x0, 0x2, 0x0
+	createvisualtask AnimTask_RockMonBackAndForth, 5, ANIM_ATTACKER, 2, 0
 	call ClangorousSoulblazeBuffEffect
 	call ClangorousSoulblazeBuffEffect
 	call ClangorousSoulblazeBuffEffect
@@ -31937,7 +31937,7 @@ Move_GUARDIAN_OF_ALOLA::
 	fadetobg BG_FISSURE
 	waitbgfadeout
 	call GuardianOfAlolaRocksPlayer
-	createvisualtask AnimTask_PositionFissureBgOnBattler, 0x5, 0x1, 0x5, 0xffff
+	createvisualtask AnimTask_PositionFissureBgOnBattler, 5, ANIM_TARGET, 5, -1
 	waitbgfadein
 	playsewithpan SE_M_DOUBLE_TEAM, SOUND_PAN_TARGET
 	createsprite gGuardianOfAlolaFistSpriteTemplate, ANIM_TARGET, 3, 0x0, 0xffd0, 0x1f
