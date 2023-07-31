@@ -435,6 +435,30 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_COLLISION_COURSE
 	.4byte BattleScript_EffectSpinOut                 @ EFFECT_SPIN_OUT
 	.4byte BattleScript_EffectMakeItRain              @ EFFECT_MAKE_IT_RAIN
+	.4byte BattleScript_EffectCorrosiveGas            @ EFFECT_CORROSIVE_GAS
+	
+BattleScript_EffectCorrosiveGas:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	jumpifsubstituteblocks BattleScript_CorrosiveGasFail
+	jumpifcantloseitem BS_TARGET, BattleScript_CorrosiveGasFail
+	attackanimation
+	waitanimation
+	jumpifability BS_TARGET, ABILITY_STICKY_HOLD, BattleScript_StickyHoldActivates
+	setlastuseditem BS_TARGET
+	removeitem BS_TARGET
+	printstring STRINGID_PKMNITEMMELTED
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+	
+BattleScript_CorrosiveGasFail:
+	pause B_WAIT_TIME_SHORT
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
+	printstring STRINGID_NOEFFECTONTARGET
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectMakeItRain:
 	setmoveeffect MOVE_EFFECT_PAYDAY
