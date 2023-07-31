@@ -478,7 +478,10 @@ make -j<output of nproc>
 ```
 Replace `<output of nproc>` with the number that the `nproc` command returned.
 
-`nproc` is not available on macOS. The alternative is `sysctl -n hw.ncpu` ([relevant Stack Overflow thread](https://stackoverflow.com/questions/1715580)).
+`nproc` is not available on macOS. The alternatives are:
+Installing `nproc` through installing GNU coreutils through Homebrew (`brew install coreutils`)
+`sysctl -n hw.ncpu` ([relevant Stack Overflow thread](https://stackoverflow.com/questions/1715580))
+`nproc 2>/dev/null || echo 8` for those who can't or don't want to install `nproc` or use `sysctl -n hw.cpu`
 
 ## Compare ROM to the original
 
