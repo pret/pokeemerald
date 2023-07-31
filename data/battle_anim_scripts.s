@@ -3138,7 +3138,7 @@ Move_FLASH_CANNON:
 	loadspritegfx ANIM_TAG_FLASH_CANNON_BALL
 	monbg ANIM_ATTACKER
 	setalpha 13, 8
-	createvisualtask AnimTask_ElectricChargingParticles, 2, 0, 60, 2, 12
+	createvisualtask AnimTask_ElectricChargingParticles, 2, ANIM_ATTACKER, 60, 2, 12
 	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
 	delay 30
 	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
@@ -6265,7 +6265,7 @@ Move_STRUGGLE_BUG:
 	setalpha 12, 8
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 9, 0x0a1f
 	waitforvisualfinish
-	createvisualtask AnimTask_FlailMovement, 2, 0
+	createvisualtask AnimTask_FlailMovement, 2, ANIM_ATTACKER
 	createsprite gMovementWavesSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 2
 	createsprite gMovementWavesSpriteTemplate, ANIM_ATTACKER, 2, 0, 1, 2
 	loopsewithpan SE_M_HEADBUTT, SOUND_PAN_ATTACKER, 0x8, 0x2
@@ -6876,7 +6876,7 @@ Move_SEARING_SHOT:
 	setalpha 8, 8
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0x10, 0x0
 	waitforvisualfinish
-	createvisualtask AnimTask_ElectricChargingParticles, 0x2, 0x0, 0x3c, 0x2, 0xc
+	createvisualtask AnimTask_ElectricChargingParticles, 2, ANIM_ATTACKER, 60, 2, 12
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xA, F_PAL_ATTACKER, 0x2, 0x0, 0x9, 0x1F
 	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
 	delay 0x1e
@@ -7563,7 +7563,7 @@ Move_BOLT_STRIKE::
 	setalpha 12, 8
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0x10, 0x0
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_ATTACKER, 0x2, 0x0, 0x9, 0x07FE
-	createvisualtask AnimTask_ElectricChargingParticles, 0x2, 0x0, 0x40, 0x0, 0x2
+	createvisualtask AnimTask_ElectricChargingParticles, 2, ANIM_ATTACKER, 64, 0, 2
 	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
 	delay 0xc
 	createsprite gGrowingShockWaveOrbSpriteTemplate, ANIM_ATTACKER, 2
@@ -10077,7 +10077,7 @@ Move_LIGHT_OF_RUIN::
 	loadspritegfx ANIM_TAG_EXPLOSION @explosion
 	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_ELECTRIC_ORBS, 0, 0xC, 0xC, 0x6DDE @Pink
 	waitforvisualfinish
-	createvisualtask AnimTask_ElectricChargingParticles, 0x2, 0x0, 0x14, 0x0, 0x2
+	createvisualtask AnimTask_ElectricChargingParticles, 2, ANIM_ATTACKER, 20, 0, 2
 	panse SE_M_SOLAR_BEAM, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 0x2, 0x0
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0xF, 0x6B1F
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_ATTACKER, 0, 4, 50, 1
@@ -14131,7 +14131,7 @@ Move_METEOR_ASSAULT::
 	loadspritegfx ANIM_TAG_EXPLOSION
 	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_ELECTRIC_ORBS, 0, 12, 12, 0x0B1D   @Light orange
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 9, 0x0B1D	  @Light orange
-	createvisualtask AnimTask_ElectricChargingParticles, 0x2, 0x0, 0x30, 0x0, 0x4
+	createvisualtask AnimTask_ElectricChargingParticles, 2, ANIM_ATTACKER, 48, 0, 4
 	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
 	waitforvisualfinish
 	invisible ANIM_ATTACKER
@@ -14174,7 +14174,7 @@ Move_STEEL_BEAM::
 	delay 48
 	loadspritegfx ANIM_TAG_ELECTRIC_ORBS
 	loadspritegfx ANIM_TAG_GUST
-	createvisualtask AnimTask_ElectricChargingParticles, 0x2, 0x0, 0x14, 0x0, 0x2
+	createvisualtask AnimTask_ElectricChargingParticles, 2, ANIM_ATTACKER, 20, 0, 2
 	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
 	delay 20
 	loadspritegfx ANIM_TAG_STEEL_BEAM
@@ -14530,7 +14530,7 @@ Move_RISING_VOLTAGE::
 ANIM_RISING_VOLTAGE_NORMAL:
 	createvisualtask AnimTask_BlendBattleAnimPal, 0x2, F_PAL_BG, 0x1, 0x0, 0x4, 0x0 @;To black
 	waitforvisualfinish
-	createvisualtask AnimTask_ElectricChargingParticles, 0x2, ANIM_ATTACKER, 30, 0, 3 @;Amount, Slowness, Slowness, Compaction
+	createvisualtask AnimTask_ElectricChargingParticles, 2, ANIM_ATTACKER, 30, 0, 3 @;Amount, Slowness, Slowness, Compaction
 	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
 	delay 0xc
 	createsprite gGrowingShockWaveOrbSpriteTemplate, ANIM_ATTACKER, 0, 0x0
@@ -14554,7 +14554,7 @@ ANIM_RISING_VOLTAGE_NORMAL:
 ANIM_RISING_VOLTAGE_STRONGER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 0x2, F_PAL_BG, 0x1, 0x0, 0xC, 0x0 @;To black
 	waitforvisualfinish
-	createvisualtask AnimTask_ElectricChargingParticles, 0x2, ANIM_ATTACKER, 55, 0, 0 @;Amount, Slowness, Slowness, Compaction
+	createvisualtask AnimTask_ElectricChargingParticles, 2, ANIM_ATTACKER, 55, 0, 0 @;Amount, Slowness, Slowness, Compaction
 	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
 	delay 0xc
 	createsprite gGrowingShockWaveOrbSpriteTemplate, ANIM_ATTACKER, 2,
@@ -14736,7 +14736,7 @@ Move_BURNING_JEALOUSY::
 	waitforvisualfinish
 	monbg ANIM_TARGET
 	playsewithpan SE_M_FLAME_WHEEL2, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_FlailMovement, 0x2, ANIM_ATTACKER
+	createvisualtask AnimTask_FlailMovement, 2, ANIM_ATTACKER
 	call BurningJealousyFlames
 	delay 0x8
 	call BurningJealousyFlames
@@ -15959,7 +15959,7 @@ Move_BARB_BARRAGE::
 	monbg ANIM_TARGET
 	call BarbBarrageSpikeShoot
 	loopsewithpan SE_M_DIG, SOUND_PAN_ATTACKER, 0x7, 0x3
-	createvisualtask AnimTask_FlailMovement, 0x2, ANIM_ATTACKER
+	createvisualtask AnimTask_FlailMovement, 2, ANIM_ATTACKER
 	delay 0x14
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 7, 0, 32, 1
 	call PoisonBubblesEffect
@@ -28632,7 +28632,7 @@ Move_GIGAVOLT_HAVOC::
 	playsewithpan SE_M_THUNDERBOLT2, SOUND_PAN_ATTACKER
 	monbg ANIM_ATTACKER
 	playsewithpan SE_M_THUNDERBOLT2, SOUND_PAN_ATTACKER
-@	createvisualtask AnimTask_ElectricChargingParticles, 0x2, 0x0, 0x3c, 0x2, 0xc 	@charge particles to user
+@	createvisualtask AnimTask_ElectricChargingParticles, 2, ANIM_ATTACKER, 60, 2, 12 	@charge particles to user
 @	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_TARGET, 2, 0x0, 0x0, 0x10, 0x2c, 0x20, 0x28, 0x0, 0x3
 	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_TARGET, 2, 0x0, 0x0, 0x10, 0x2c, 0x60, 0x28, 0x1, 0x3
 @	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_TARGET, 2, 0x0, 0x0, 0x10, 0x2c, 0xa0, 0x28, 0x0, 0x3
@@ -29635,7 +29635,7 @@ CatastropikaFinish:
 	loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT @charge
 	loadspritegfx ANIM_TAG_SPARK_2 @spark
 	playsewithpan SE_M_THUNDERBOLT2, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_ElectricChargingParticles, 0x2, 0x0, 0x3c, 0x2, 0xc 	@charge particles to user
+	createvisualtask AnimTask_ElectricChargingParticles, 2, ANIM_ATTACKER, 60, 2, 12 	@charge particles to user
 	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0x0, 0x0, 0x10, 0x2c, 0x20, 0x28, 0x0, 0x3
 	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0x0, 0x0, 0x10, 0x2c, 0x60, 0x28, 0x1, 0x3
 	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0x0, 0x0, 0x10, 0x2c, 0xa0, 0x28, 0x0, 0x3
@@ -29809,7 +29809,7 @@ Move_10000000_VOLT_THUNDERBOLT::
 	waitbgfadein
 	visible ANIM_ATTACKER
 	playsewithpan SE_M_THUNDERBOLT2, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_ElectricChargingParticles, 0x2, 0x0, 0x3c, 0x2, 0xc 	@charge particles to user
+	createvisualtask AnimTask_ElectricChargingParticles, 2, ANIM_ATTACKER, 60, 2, 12 	@charge particles to user
 	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0x0, 0x0, 0x10, 0x2c, 0x20, 0x28, 0x0, 0x3
 	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0x0, 0x0, 0x10, 0x2c, 0x60, 0x28, 0x1, 0x3
 	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0x0, 0x0, 0x10, 0x2c, 0xa0, 0x28, 0x0, 0x3
@@ -30076,7 +30076,7 @@ StokedSparksurferFinish:
 	loadspritegfx ANIM_TAG_ELECTRIC_ORBS @charge
 	loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT @charge
 	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_ElectricChargingParticles, 0x2, 0x0, 0x1c, 0x2, 0xc
+	createvisualtask AnimTask_ElectricChargingParticles, 2, ANIM_ATTACKER, 28, 2, 12
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 60, 1
 	call EndureEffect
 	delay 0x8
@@ -32434,7 +32434,7 @@ Move_LIGHT_THAT_BURNS_THE_SKY::
 	setalpha 12, 8
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, (F_PAL_BG | F_PAL_ADJACENT), 0x2, 0x0, 0xF, 0x0000
 	waitforvisualfinish
-	createvisualtask AnimTask_ElectricChargingParticles, 0x2, 0x0, 0x3c, 0x2, 0xc 	@ charge particles to attacker
+	createvisualtask AnimTask_ElectricChargingParticles, 2, ANIM_ATTACKER, 60, 2, 12 	@ charge particles to attacker
 	delay 0x1e
 	loopsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER, 0xe, 0xa
 	createsprite gSuperpowerOrbSpriteTemplate, ANIM_TARGET, 3, 0x0
