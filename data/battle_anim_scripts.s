@@ -6237,7 +6237,7 @@ Move_VOLT_SWITCH:
 	delay 4
 	call ElectricityEffect
 	playsewithpan SE_M_THUNDERBOLT2, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_CanBattlerSwitch 1, ANIM_ATTACKER
+	createvisualtask AnimTask_CanBattlerSwitch, 1, ANIM_ATTACKER
 	jumpretfalse VoltSwitchContinue
 	createvisualtask AnimTask_IsTargetSameSide 1
 	jumprettrue VoltSwitchAgainstPartner
@@ -6246,7 +6246,7 @@ VoltSwitchContinue:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	blendoff
-	createvisualtask AnimTask_CanBattlerSwitch 1, ANIM_ATTACKER
+	createvisualtask AnimTask_CanBattlerSwitch, 1, ANIM_ATTACKER
 	jumpretfalse VoltSwitchLast
 	invisible ANIM_ATTACKER
 VoltSwitchLast:
@@ -9649,7 +9649,7 @@ Move_HOLD_HANDS::
 	delay 0x14
 	playsewithpan SE_M_ENCORE, 0x0
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATK_PARTNER, 3, 0, 10, 1
-	createvisualtask AnimTask_BlendMonInAndOut, 0x2, 0x2, 0x3ff, 0xc, 0x1, 0x1
+	createvisualtask AnimTask_BlendMonInAndOut, 2, ANIM_ATK_PARTNER, RGB(31, 31, 0), 12, 1, 1
 	end
 
 Move_BABY_DOLL_EYES::
@@ -11318,7 +11318,7 @@ Move_FIRE_LASH::
 	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, 0x18, 0x0, 0x0, 0x6
 	delay 0x4
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 8, 1
-	createvisualtask AnimTask_BlendMonInAndOut, 0x3, 0x1, 0x1f, 0xc, 0x1, 0x1
+	createvisualtask AnimTask_BlendMonInAndOut, 3, ANIM_TARGET, RGB(31, 0, 0), 12, 1, 1
 	playsewithpan SE_M_FLAME_WHEEL2, SOUND_PAN_TARGET
 	loadspritegfx ANIM_TAG_SLASH
 	createsprite gSlashSliceSpriteTemplate, ANIM_TARGET, 2, 0x1, 0xfff8, 0x0
@@ -11843,14 +11843,14 @@ Move_INSTRUCT::
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_TARGET, 0x2, 0x0, 0x8, 0x7DB9
 	delay 0x4
 	monbg ANIM_TARGET
-	createvisualtask AnimTask_BlendMonInAndOut, 0x5, 0x0, 0x37b, 0xc, 0x1, 0x1
+	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_ATTACKER, RGB(27, 27, 0), 12, 1, 1
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 41, 1
 	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
 	delay 0x1A
-	createvisualtask AnimTask_BlendMonInAndOut, 0x5, 0x0, 0x37b, 0xc, 0x1, 0x1
+	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_ATTACKER, RGB(27, 27, 0), 12, 1, 1
 	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
 	delay 0x1A
-	createvisualtask AnimTask_BlendMonInAndOut, 0x5, 0x0, 0x37b, 0xc, 0x1, 0x1
+	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_ATTACKER, RGB(27, 27, 0), 12, 1, 1
 	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
 	delay 0x1D
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_TARGET, 0x2, 0x8, 0x0, 0x7DB9
@@ -14745,8 +14745,8 @@ Move_BURNING_JEALOUSY::
 	playsewithpan SE_M_FIRE_PUNCH, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 12, 1
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_DEF_PARTNER, 2, 0, 12, 1
-	createvisualtask AnimTask_BlendMonInAndOut, 0x3, ANIM_TARGET, 0x1f, 0xc, 0x1, 0x1
-	createvisualtask AnimTask_BlendMonInAndOut, 0x3, ANIM_DEF_PARTNER, 0x1f, 0xc, 0x1, 0x1
+	createvisualtask AnimTask_BlendMonInAndOut, 3, ANIM_TARGET, RGB(31, 0, 0), 12, 1, 1
+	createvisualtask AnimTask_BlendMonInAndOut, 3, ANIM_DEF_PARTNER, RGB(31, 0, 0), 12, 1, 1
 	call FireSpreadEffect		@ INCINERATE_BURN_CHANCE
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -15458,7 +15458,7 @@ Move_GLACIAL_LANCE::
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0xA, 0x3C00 @;Royal Blue
 	monbg ANIM_TARGET
 	playsewithpan SE_M_HAIL, SOUND_PAN_TARGET
-	createvisualtask AnimTask_CentredFrozenIceCube, ANIM_TARGET, 0x0
+	createvisualtask AnimTask_CentredFrozenIceCube, ANIM_TARGET, 0
 	createsprite gSpriteTemplate_GlacialLance, ANIM_TARGET, 2, 0, 40, 0, 0, 40, 50, 10
 	delay 60
 	createvisualtask AnimTask_FlashAnimTagWithColor, 0x2, ANIM_TAG_ICICLE_SPEAR, 0x4, 0x1, 0x7FFF, 0x10, 0x0, 0x0
