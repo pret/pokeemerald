@@ -4870,7 +4870,7 @@ Move_RAGE_POWDER::
 	call RagePowderSprinkle
 	call RagePowderSprinkle
 	call RagePowderSprinkle
-	createvisualtask AnimTask_BlendColorCycle, ANIM_ATTACKER, 2, F_PAL_ATTACKER, 2, 2, 0, 11, RGB(31, 0, 0)
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 2, 2, 0, 11, RGB(31, 0, 0)
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
