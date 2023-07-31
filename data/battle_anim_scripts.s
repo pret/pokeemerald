@@ -2831,7 +2831,7 @@ Move_SHADOW_CLAW:
 	setalpha 12, 8
 	createsprite gHorizontalLungeSpriteTemplate ANIM_ATTACKER, 2, 6, 4
 	delay 4
-	createvisualtask AnimTask_ShakeMon2 2, ANIM_TARGET, 2, 0, 18, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 18, 1
 	createsprite gClawSlashSpriteTemplate, ANIM_TARGET, 2, -10, -10, 0
 	createsprite gClawSlashSpriteTemplate, ANIM_TARGET, 2, -10, 10, 0
 	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
@@ -3367,9 +3367,9 @@ Move_LAVA_PLUME:
 	loadspritegfx ANIM_TAG_FIRE_PLUME
 	loopsewithpan 152, SOUND_PAN_ATTACKER, 9, 2
 	createvisualtask AnimTask_BlendColorCycle, 2, 2, 2, 2, 0, 11, RGB_RED
-	createvisualtask AnimTask_ShakeMon2 2, ANIM_TARGET, 1, 0, 32, 1
-	createvisualtask AnimTask_ShakeMon2 2, ANIM_DEF_PARTNER, 1, 0, 32, 1
-	createvisualtask AnimTask_ShakeMon2 2, ANIM_ATK_PARTNER, 1, 0, 32, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 1, 0, 32, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_DEF_PARTNER, 1, 0, 32, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATK_PARTNER, 1, 0, 32, 1
 	waitforvisualfinish
 	createsprite gLavaPlumeSpriteTemplate, 130, 1, 0
 	createsprite gLavaPlumeSpriteTemplate, 130, 1, 32
@@ -4520,7 +4520,7 @@ Move_SEED_FLARE:
 	delay 2
 	createsprite gSeedFlareGreenCirclesTemplate, ANIM_ATTACKER, 2, 0xffd8, -20, 16
 	delay 30
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 0x28, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 40, 1
 	createsprite gSeedFlareGreenWavesTemplate, ANIM_ATTACKER, 0x28, 10, 0x900, 0x60, 1
 	createsprite gRazorLeafCutterSpriteTemplate, ANIM_TARGET, 3, 20, -10, 20, 0, 0x16, 20, 1
 	createsprite gRazorLeafCutterSpriteTemplate, ANIM_TARGET, 3, 20, -10, 20, 0, 0x16, -20, 1
@@ -4648,7 +4648,7 @@ ShadowForceAttack:
 	playsewithpan SOUND_PAN_ATTACKER, 192
 	createvisualtask AnimTask_NightShadeClone, 5, 85
 	delay 70
-	createvisualtask AnimTask_ShakeMon2 2, ANIM_TARGET, 2, 0, 12, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 12, 1
 	createvisualtask AnimTask_BlendColorCycle 2, 4, 0, 2, 0, 13, 0
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
@@ -5184,9 +5184,9 @@ Move_COIL:
 	delay 0x7
 	createsprite gConstrictBindingSpriteTemplate, ANIM_TARGET, 3, 0x0, 0xfff8, 0x1, 0x2
 	delay 0x8
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x3, 0x0, 0x6, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 3, 0, 6, 1
 	delay 0x14
-	createvisualtask AnimTask_ShakeMon2, 0x83, 0x1, 0x4, 0x0, 0x5, 0x1
+	createvisualtask AnimTask_ShakeMon2, 131, ANIM_TARGET, 4, 0, 5, 1
 	createvisualtask AnimTask_StretchTargetUp, 0x3
 	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
 	setarg 0x7 0xffff
@@ -5356,7 +5356,7 @@ Move_ECHOED_VOICE:
 	loadspritegfx ANIM_TAG_METAL_SOUND_WAVES
 	monbg ANIM_DEF_PARTNER
 	splitbgprio_foes ANIM_TARGET
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x2, 0x0, 0x8, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 2, 0, 8, 1
 	call MetalSoundPlayNote
 	call MetalSoundPlayNote
 	call MetalSoundPlayNote
@@ -5818,7 +5818,7 @@ Move_FINAL_GAMBIT:
 	loadspritegfx ANIM_TAG_EXPLOSION @explosion animation
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0xC, 0x0 @Darken
 	waitforvisualfinish
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0xa, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 10, 1
 	createvisualtask AnimTask_BlendColorCycle, 0x2, F_PAL_ATTACKER, 0x0, 0x2, 0x0, 0x8, 0x7fff
 	waitforvisualfinish
 	playsewithpan SE_M_SAND_ATTACK, SOUND_PAN_ATTACKER
@@ -6539,7 +6539,7 @@ Move_HEART_STAMP:
 	delay 0x1E
 	clearmonbg ANIM_TARGET
 	playsewithpan SE_M_DOUBLE_SLAP, SOUND_PAN_TARGET
-	createvisualtask AnimTask_ShakeMon2, 0x83, 0x1, 0x4, 0x0, 0x5, 0x1
+	createvisualtask AnimTask_ShakeMon2, 131, ANIM_TARGET, 4, 0, 5, 1
 	createvisualtask AnimTask_StretchTargetUp, 0x3
 	waitforvisualfinish
 	end
@@ -7012,7 +7012,7 @@ TechnoBlastNormal:
 	createsprite gTechnoBlastWhiteSparkTemplate, ANIM_TARGET, 4, 0xa, 0x0, 0x8, 0x1e, 0xe0, 0x28, 0x2
 	waitforvisualfinish
 	playsewithpan SE_M_EMBER, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x5, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
 	createsprite gTechnoBlastWhiteSmokeTemplate, ANIM_TARGET, 2, 0x8, 0x8, 0x1, 0x0
 	delay 0x2
 	createsprite gTechnoBlastWhiteSmokeTemplate, ANIM_TARGET, 2, 0xfff8, 0xfff8, 0x1, 0x0
@@ -7098,7 +7098,7 @@ TechnoBlastElectric:
 	createsprite gTechnoBlastYellowSparkTemplate, ANIM_TARGET, 4, 0xa, 0x0, 0x8, 0x1e, 0xe0, 0x28, 0x2
 	waitforvisualfinish
 	playsewithpan SE_M_EMBER, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x5, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
 	createsprite gTechnoBlastYellowSmokeTemplate, ANIM_TARGET, 2, 0x8, 0x8, 0x1, 0x0
 	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 0x5, 0x0, 0x5, 0x0
 	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 0xfffb, 0xa, 0x5, 0x1
@@ -7232,7 +7232,7 @@ TechnoBlastWater:
 	createsprite gTechnoBlastBlueSparkTemplate, ANIM_TARGET, 4, 0xa, 0x0, 0x8, 0x1e, 0xe0, 0x28, 0x2
 	waitforvisualfinish
 	playsewithpan SE_M_EMBER, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x5, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
 	createsprite gTechnoBlastBlueSmokeTemplate, ANIM_TARGET, 2, 0x8, 0x8, 0x1, 0x0
 	createsprite gTechnoBlastBlueBubbleTemplate, ANIM_ATTACKER, 2, 0xa, 0xa, 0x19, 0x1
 	createsprite gTechnoBlastBlueBubbleTemplate, ANIM_ATTACKER, 2, 0xfff1, 0x0, 0x19, 0x1
@@ -7285,7 +7285,7 @@ TechnoBlastFire:
 	createsprite gTechnoBlastRedSparkTemplate, ANIM_TARGET, 4, 0xa, 0x0, 0x8, 0x1e, 0xe0, 0x28, 0x2
 	waitforvisualfinish
 	playsewithpan SE_M_EMBER, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x5, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
 	createsprite gTechnoBlastRedSmokeTemplate, ANIM_TARGET, 2, 0x8, 0x8, 0x1, 0x0
 	createsprite gFireSpreadSpriteTemplate, ANIM_TARGET, 1, 0, 10, 192, 176, 40
 	createsprite gFireSpreadSpriteTemplate, ANIM_TARGET, 1, 0, 10, -192, 240, 40
@@ -7369,7 +7369,7 @@ TechnoBlastIce:
 	createsprite gTechnoBlastIceSparkTemplate, ANIM_TARGET, 4, 0xa, 0x0, 0x8, 0x1e, 0xe0, 0x28, 0x2
 	waitforvisualfinish
 	playsewithpan SE_M_EMBER, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x5, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
 	createsprite gTechnoBlastIceSmokeTemplate, ANIM_TARGET, 2, 0x8, 0x8, 0x1, 0x0
 	createsprite gIceCrystalHitLargeSpriteTemplate, ANIM_TARGET, 2, 0xfff6, 0xfff6, 0x0
 	delay 0x2
@@ -7581,7 +7581,7 @@ Move_BOLT_STRIKE::
 	delay 0x6
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 4, 0xfff6, 0x0, 0x1, 0x0
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_TARGET, 0x2, 0x0, 0x9, 0x07FE
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_TARGET, 0x2, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 32, 1
 	playsewithpan SE_M_TRI_ATTACK2, SOUND_PAN_TARGET
 	call ElectricityEffect
 	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, 0x0, 0x5
@@ -7718,7 +7718,7 @@ FreezeShockAttack:
 	createsprite gZapCannonSparkSpriteTemplate, ANIM_TARGET, 4, 0xa, 0x0, 0x8, 0x1e, 0xa0, 0x28, 0x0
 	createsprite gZapCannonSparkSpriteTemplate, ANIM_TARGET, 4, 0xa, 0x0, 0x8, 0x1e, 0xe0, 0x28, 0x2
 	waitforvisualfinish
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x5, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
 	delay 0xf
 	waitplaysewithpan SE_M_THUNDERBOLT2, SOUND_PAN_TARGET, 0x13
 	call ElectricityEffect
@@ -7984,7 +7984,7 @@ Move_FUSION_FLARE::
 	call FusionFlareBuff
 	delay 0x8
 	createvisualtask AnimTask_BlendColorCycle, 0x2, F_PAL_ATTACKER, 0x2, 0x2, 0x0, 0xb, 0x1F
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	createsprite gVerticalDipSpriteTemplate, ANIM_ATTACKER, 2, 0x8, 0x1, 0x0
 	delay 0x8
 	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
@@ -8055,7 +8055,7 @@ Move_FUSION_BOLT::
 	createsprite gFusionBoltBallTemplate, ANIM_TARGET, 2, 0x10
 	playsewithpan SE_M_THUNDERBOLT, SOUND_PAN_ATTACKER
 	delay 0x8
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0xa, 0x0, 0x12, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 10, 0, 18, 1
 	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
 	createsprite gElectricPuffSpriteTemplate, ANIM_ATTACKER, 2, 0x1, 0x10, 0x10
 	delay 0x2
@@ -8063,7 +8063,7 @@ Move_FUSION_BOLT::
 	delay 0x8
 	createvisualtask AnimTask_VoltTackleAttackerReappear, 0x5
 	waitforvisualfinish
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x3, 0x0, 0x9, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 3, 0, 9, 1
 	playsewithpan SE_M_THUNDERBOLT2, SOUND_PAN_ATTACKER
 	createsprite gElectricPuffSpriteTemplate, ANIM_ATTACKER, 2, 0x0, 0x10, 0x10
 	delay 0x2
@@ -8368,7 +8368,7 @@ Move_FORESTS_CURSE:
 	createsprite gForestsCurseIngrainTemplate, ANIM_ATTACKER, 66, 0x8c, 0x64, 0x10, 0x1, 0x14, 0x1e, 0x1
 	waitforvisualfinish
 	createsprite gCurseGhostSpriteTemplate, ANIM_TARGET, 2
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x2, 0x0, 0xe, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 14, 1
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_TARGET, 0x2, 0x8, 0x0, 0x02E3
 	delay 0x3
@@ -8467,8 +8467,8 @@ Move_DISARMING_VOICE::
 	createvisualtask SoundTask_PlayDoubleCry, 2, ANIM_ATTACKER, DOUBLE_CRY_GROWL
 	call RoarEffect
 	delay 0xA
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x1, 0x0, 0x1A, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x3, 0x1, 0x0, 0x1A, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 1, 0, 26, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_DEF_PARTNER, 1, 0, 26, 1
 	waitforvisualfinish
 	createvisualtask SoundTask_WaitForCry, 0x5
 	waitforvisualfinish
@@ -8832,7 +8832,7 @@ Move_FAIRY_WIND::
 	createsprite gFairyWindCloudTemplate, ANIM_TARGET, 3, 0x14, 0xfff6, 0x14, 0x5, 0x16, 0xffee, 0x1
 	delay 0x5
 	createsprite gFairyWindCloudTemplate, ANIM_TARGET, 3, 0x14, 0xfff6, 0x14, 0xfff6, 0x16, 0xf, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x2, 0x0, 0x12, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 18, 1
 	delay 0x5
 	createsprite gFairyWindCloudTemplate, ANIM_TARGET, 3, 0x14, 0xfff6, 0x14, 0x0, 0x16, 0xffec, 0x1
 	delay 0x5
@@ -9049,7 +9049,7 @@ Move_STEAM_ERUPTION::
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_TARGET, 0x1, 0x0, 0x9, 0x1f
 	call SteamEruptionBreath
 	delay 0x2
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x2, 0x0, 0x15, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 21, 1
 	call SteamEruptionBreath
 	call SteamEruptionBreath
 	call SteamEruptionBreath
@@ -9126,7 +9126,7 @@ Move_HYPERSPACE_HOLE::
 	end
 HyperspaceHoleMovement:
 	playsewithpan SE_M_DOUBLE_SLAP, SOUND_PAN_TARGET
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_TARGET, 0x3, 0x0, 0xf, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 3, 0, 15, 1
 	delay 0x4
 	return
 
@@ -9158,7 +9158,7 @@ Move_MYSTICAL_FIRE::
 	loadspritegfx ANIM_TAG_FIRE
 	setalpha 8, 8
 	playse 0xb1
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0xa, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 10, 1
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x0, 0x2, 0x0, 0x8, 0x7fff
 	waitforvisualfinish
 	waitsound
@@ -9642,13 +9642,13 @@ Move_HOLD_HANDS::
 	createsprite gHelpingHandClapSpriteTemplate, ANIM_ATTACKER, 40, 0x1
 	delay 0x13
 	playsewithpan SE_M_ENCORE, 0x0
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x2, 0x2, 0x0, 0x5, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATK_PARTNER, 2, 0, 5, 1
 	delay 0xe
 	playsewithpan SE_M_ENCORE, 0x0
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x2, 0x2, 0x0, 0x5, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATK_PARTNER, 2, 0, 5, 1
 	delay 0x14
 	playsewithpan SE_M_ENCORE, 0x0
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x2, 0x3, 0x0, 0xa, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATK_PARTNER, 3, 0, 10, 1
 	createvisualtask AnimTask_BlendMonInAndOut, 0x2, 0x2, 0x3ff, 0xc, 0x1, 0x1
 	end
 
@@ -9666,8 +9666,8 @@ Move_BABY_DOLL_EYES::
 	createvisualtask AnimTask_ScaleMonAndRestore, 0x5, 0xfffb, 0xfffb, 0xa, 0x0, 0x1
 	waitforvisualfinish
 	delay 0xa
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x1, 0x0, 0x9, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x3, 0x1, 0x0, 0x9, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 1, 0, 9, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_DEF_PARTNER, 1, 0, 9, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x0, 0xA, 0x0, 0x7FFF
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -9707,7 +9707,7 @@ Move_HOLD_BACK::
 	playsewithpan SE_M_SWAGGER, SOUND_PAN_TARGET
 	createsprite gHoldBackSwipeTemplate, ANIM_TARGET, 2, 0x0, 0x0, 0x1
 	waitforvisualfinish
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x3, 0x0, 0xa, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 3, 0, 10, 1
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0x0, 0x0, 0x1, 0x2
 	createsprite gHoldBackRingTemplate, ANIM_ATTACKER, 3, 0x0, 0x0, 0x100, 0x0
 	createsprite gHoldBackStarsTemplate, ANIM_TARGET, 3, 0xfff0, 0xfff8, 0xa0, 0xffe0
@@ -10087,7 +10087,7 @@ Move_LIGHT_OF_RUIN::
 	call LightOfRuinBeam
 	call LightOfRuinBeam
 	call LightOfRuinBeam
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x32, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 50, 1
 	call LightOfRuinBeam
 	call LightOfRuinBeam
 	call LightOfRuinBeam
@@ -10363,7 +10363,7 @@ Move_HYPERSPACE_FURY::
 	delay 0x7
 	createvisualtask SoundTask_PlayDoubleCry, 2, ANIM_ATTACKER, DOUBLE_CRY_GROWL
 	visible ANIM_ATTACKER
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_TARGET, 0x0, 0x3, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 0, 3, 32, 1
 	playsewithpan SE_M_FIRE_PUNCH, SOUND_PAN_TARGET
 	invisible ANIM_ATTACKER
 	call UnsetPsychicBg
@@ -10414,7 +10414,7 @@ Move_FIRST_IMPRESSION::
 	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 0x0, 0x1
 	playsewithpan SE_M_SKETCH, SOUND_PAN_TARGET
 	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 0x1, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x5, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
 	createvisualtask AnimTask_StretchTargetUp, 0x3
 	waitforvisualfinish
 	delay 0x19
@@ -10769,7 +10769,7 @@ Move_HIGH_HORSEPOWER::
 	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
 	call SetImpactBackground
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0x0, 0x0, 0x1, 0x0
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x16, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 22, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_TARGET, 0x2, 0x0, 0x0, 0x7fff
 	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 0x1f, 0x3, 0x1, 0x0, 0x8, 0x0, 0x0
 	waitforvisualfinish
@@ -10873,7 +10873,7 @@ SolarBladeUnleash:
 	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
 	createsprite gSolarBladeImpactTemplate, ANIM_TARGET, 2, 0x0, 0x0, 0x1
 	delay 0x2
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_TARGET, 0x2, 0x0, 0xC, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 12, 1
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal 10, (F_PAL_BG | F_PAL_BATTLERS), 1, 6, 0, 0x7fff
 	waitforvisualfinish
@@ -11325,7 +11325,7 @@ Move_FIRE_LASH::
 	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
 	delay 0x4
 	createsprite gSlashSliceSpriteTemplate, ANIM_TARGET, 2, 0x1, 0x8, 0x0
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x12, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 18, 1
 	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
 	delay 0x7
 	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, 0x0, 0x9
@@ -11343,7 +11343,7 @@ Move_POWER_TRIP::
 	call PowerTripBuffUp
 	delay 0x8
 	createvisualtask AnimTask_BlendColorCycle, 0x2, F_PAL_ATTACKER, 0x2, 0x2, 0x0, 0xb, 0x0
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call PowerTripBuffUp
 	delay 0x8
 	call PowerTripBuffUp
@@ -11723,8 +11723,8 @@ Move_CORE_ENFORCER::
 	monbg ANIM_TARGET
 	createvisualtask AnimTask_CreateSmallSolarBeamOrbs, 0x5
 	panse SE_M_SOLAR_BEAM, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 0x2, 0x0
-	createvisualtask AnimTask_ShakeMon2, 0x5, ANIM_TARGET, 0x2, 0x0, 0x41, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x5, ANIM_DEF_PARTNER, 0x2, 0x0, 0x41, 0x1
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 2, 0, 65, 1
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_DEF_PARTNER, 2, 0, 65, 1
 	createsprite gCoreEnforcerBeamTemplate, ANIM_TARGET, 3, 0xf, 0x0, 0x14, 0x0
 	createsprite gCoreEnforcerImpactTemplate, ANIM_TARGET, 3, 0xfff5, 0xffe2, 0x1, 0x3
 	delay 0x1
@@ -11782,9 +11782,9 @@ Move_CORE_ENFORCER::
 	createsprite gCoreEnforcerBeamTemplate, ANIM_TARGET, 3, 0xf, 0x0, 0x14, 0x6
 	delay 0x7
 	createsprite gCoreEnforcerSnoreTemplate, ANIM_ATTACKER, 2, 0x0, 0x0
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_TARGET, 0x2, 0x0, 0x1e, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_DEF_PARTNER, 0x2, 0x0, 0x1e, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_ATK_PARTNER, 0x2, 0x0, 0x1e, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 30, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_DEF_PARTNER, 2, 0, 30, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATK_PARTNER, 2, 0, 30, 1
 	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
 	createsprite gCoreEnforcerExplosionTemplate, ANIM_ATTACKER, 3, 0x0, 0x0, ANIM_TARGET, 0x1
 	delay 0x6
@@ -11879,7 +11879,7 @@ Move_BEAK_BLAST::
 	delay 0x2
 	loopsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET 0x4 0x8
 	createvisualtask AnimTask_DrillPeckHitSplats, 0x5
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x12, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 18, 1
 	waitforvisualfinish
 	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 0x2
 	waitforvisualfinish
@@ -11897,7 +11897,7 @@ Move_CLANGING_SCALES::
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0xC, 0x2002
 	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_METAL_SOUND_WAVES, 0, 10, 10, 0x642D
 	waitforvisualfinish
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x2, 0x0, 0x8, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 2, 0, 8, 1
 	call ClangingScalesMetalSound
 	call ClangingScalesMetalSound
 	call ClangingScalesMetalSound
@@ -12224,7 +12224,7 @@ Move_FLEUR_CANNON::
 	call FleurCannonBeam
 	call FleurCannonBeam
 	call FleurCannonBeam
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x32, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 50, 1
 	call FleurCannonBeam
 	call FleurCannonBeam
 	call FleurCannonBeam
@@ -12646,7 +12646,7 @@ SpectralThiefSteal:
 	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
 	call SpectralThiefBuffUp
 	delay 0x8
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call SpectralThiefBuffUp
 	delay 0x8
 	call SpectralThiefBuffUp
@@ -12759,7 +12759,7 @@ Move_MOONGEIST_BEAM::
 	call MoongeistBeamOrbs
 	call MoongeistBeamOrbs
 	call MoongeistBeamOrbs
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x32, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 50, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_TARGET, 0x2, 0x0, 0xb, 0x6739
 	call MoongeistBeamOrbs
 	call MoongeistBeamOrbs
@@ -12979,7 +12979,7 @@ Move_MULTI_ATTACK::
 	call MultiAttackBuff
 	delay 0x8
 	createvisualtask AnimTask_BlendColorCycle, 0x2, F_PAL_ATTACKER, 0x2, 0x2, 0x0, 0xb, 0x7fff
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call MultiAttackBuff
 	delay 0x8
 	call MultiAttackBuff
@@ -13019,9 +13019,9 @@ Move_MIND_BLOWN::
 	playsewithpan SE_FALL, SOUND_PAN_TARGET
 	createsprite gMindBlownHeadTemplate, ANIM_TARGET, 2, 0x0, 0x0, 0x25
 	waitforvisualfinish
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_TARGET, 0x2, 0x0, 0xf, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_DEF_PARTNER, 0x2, 0x0, 0xf, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_ATK_PARTNER, 0x2, 0x0, 0xf, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 15, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_DEF_PARTNER, 2, 0, 15, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATK_PARTNER, 2, 0, 15, 1
 	delay 0x1
 	playsewithpan SE_M_EXPLOSION, SOUND_PAN_ATTACKER
 	createsprite gMindBlownBlueImpactTemplate, ANIM_TARGET, 3, 0x1, 0x0
@@ -13209,7 +13209,7 @@ Move_PHOTON_GEYSER::
 	waitforvisualfinish
 	monbg ANIM_TARGET
 	createsprite gPhotonGeyserYellowRingTemplate, ANIM_ATTACKER, 3, 0x0, 0x0, 0x1, 0x0, 0x1f, 0x8
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x5, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
 	playsewithpan SE_M_EXPLOSION, SOUND_PAN_ATTACKER
 	unloadspritegfx ANIM_TAG_YELLOW_BALL @confuse ray (for zap cannon)
 	unloadspritegfx ANIM_TAG_BLACK_BALL_2 @zap cannon
@@ -13343,7 +13343,7 @@ Move_SNIPE_SHOT::
 	playsewithpan SE_M_GIGA_DRAIN, SOUND_PAN_TARGET
 	createsprite gSnipeShotBallTemplate, ANIM_TARGET, 2, 0, 0, 16
 	waitforvisualfinish
-	createvisualtask AnimTask_ShakeMon2, 2, 1, 4, 0, 8, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 8, 1
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 16, 0, 0 @;Black
 	waitforvisualfinish
@@ -13426,7 +13426,7 @@ Move_TAR_SHOT::
 	createsprite gAppleAcidLaunchTemplate, ANIM_TARGET, 2, 0x14, 0x0, 0x28, 0x1, 0xffe8, 0x0
 	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
 	delay 0xf
-	createvisualtask AnimTask_ShakeMon2, 0x5, ANIM_TARGET, 0x2, 0x0, 0xa, 0x1
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 2, 0, 10, 1
 	createvisualtask AnimTask_BlendColorCycle, 0x2, F_PAL_TARGET, 0x2, 0x2, 0x0, 0x10, 0x0 @;Black
 	createsprite gAppleAcidDripTemplate, ANIM_TARGET, 2, 0xffe6, 0xffe8, 0x0, 0xf, 0x37
 	playsewithpan SE_M_BUBBLE, SOUND_PAN_TARGET
@@ -13505,7 +13505,7 @@ Move_OCTOLOCK::
 	delay 0x7
 	createsprite gConstrictBindingSpriteTemplate, ANIM_TARGET, 3, 0x0, 0xfff8, 0x1, 0x2
 	delay 0x8
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x3, 0x0, 0x6, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 3, 0, 6, 1
 	delay 0x14
 	createvisualtask AnimTask_BlendColorCycle, 0x2, F_PAL_TARGET, 0x2, 0x2, 0x0, 0x8, 0x1f
 	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
@@ -13887,8 +13887,8 @@ OverdriveRings:
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 0x1f, 0x3, 0x8, 0x0, 0x3ff
 	createvisualtask AnimTask_ScaleMonAndRestore, 0x5, 0xfffb, 0xfffb, 0x5, 0x0, 0x0
 	createsprite gHyperVoiceRingSpriteTemplate, ANIM_ATTACKER, 0, 0x2d, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x1, 0x0, 0x6, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x3, 0x1, 0x0, 0x6, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 1, 0, 6, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_DEF_PARTNER, 1, 0, 6, 1
 	createvisualtask AnimTask_ShakeBattleTerrain, 0x2, 0x1, 0x0, 0x6, 0x1
 	createvisualtask SoundTask_WaitForCry, 0x5
 	return
@@ -13910,7 +13910,7 @@ Move_APPLE_ACID::
 	createsprite gAppleAcidLaunchTemplate, ANIM_TARGET, 2, 0x14, 0x0, 0x28, 0x1, 0xffe8, 0x0
 	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
 	delay 0xf
-	createvisualtask AnimTask_ShakeMon2, 0x5, ANIM_TARGET, 0x2, 0x0, 0xa, 0x1
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 2, 0, 10, 1
 	createsprite gAppleAcidDripTemplate, ANIM_TARGET, 2, 0x0, 0xffea, 0x0, 0xf, 0x37
 	playsewithpan SE_M_BUBBLE, SOUND_PAN_TARGET
 	delay 0xa
@@ -14017,7 +14017,7 @@ Move_STRANGE_STEAM::
 	call StrangeSteamCloud
 	call StrangeSteamCloud
 	call StrangeSteamCloud
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_TARGET, 0x2, 0x0, 0x2A, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 42, 1
 	call StrangeSteamCloud
 	call StrangeSteamCloud
 	call StrangeSteamCloud
@@ -14235,7 +14235,7 @@ Move_EXPANDING_FORCE::
 	createvisualtask AnimTask_BlendParticle, 0x5, ANIM_TAG_EXPLOSION_2, 0x0, 0xA, 0xA, 0x7DDE
 	monbg ANIM_DEF_PARTNER
 	call SetPsychicBackground
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_ATTACKER, 0x1, 0x0, 0xa, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 10, 1
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, F_PAL_ATTACKER, 0x2, 0x0, 0x8, 0x2ff
 	waitforvisualfinish
 	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_TARGET
@@ -14407,7 +14407,7 @@ METEOR_BEAM_BLAST:
 	call MeteorBeamRockLaunch
 	call MeteorBeamRockLaunch
 	call MeteorBeamRockLaunch
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x0, 0x4, 0x51, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 0, 4, 81, 1
 	call MeteorBeamRockLaunch
 	call MeteorBeamRockLaunch
 	call MeteorBeamRockLaunch
@@ -14480,7 +14480,7 @@ Move_SHELL_SIDE_ARM_SPECIAL: @ Modified Snipe Shot, placeholder
 	playsewithpan SE_M_GIGA_DRAIN, SOUND_PAN_TARGET
 	createsprite gSnipeShotBallTemplate, ANIM_TARGET, 2, 0, 0, 24
 	waitforvisualfinish
-	createvisualtask AnimTask_ShakeMon2, 2, 1, 4, 0, 8, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 8, 1
 	waitforvisualfinish
 	end
 
@@ -14488,11 +14488,11 @@ Move_SHELL_SIDE_ARM_SPECIAL: @ Modified Snipe Shot, placeholder
 Move_MISTY_EXPLOSION::
 	loadspritegfx ANIM_TAG_EXPLOSION
 	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 0x1, 0x8, 0x9, 0x7A5B, 0x8, 0x0, 0x8
-	createvisualtask AnimTask_ShakeMon2, 0x5, 0x4, 0x8, 0x0, 0x28, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x5, 0x5, 0x8, 0x0, 0x28, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x5, 0x6, 0x8, 0x0, 0x28, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x5, 0x7, 0x8, 0x0, 0x28, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x5, 0x8, 0x8, 0x0, 0x28, 0x1
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_PLAYER_LEFT, 8, 0, 40, 1
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_PLAYER_RIGHT, 8, 0, 40, 1
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_OPPONENT_LEFT, 8, 0, 40, 1
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_OPPONENT_RIGHT, 8, 0, 40, 1
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_ATTACKER_FORCE, 8, 0, 40, 1
 	call Explosion1
 	call Explosion1
 	waitforvisualfinish
@@ -14743,8 +14743,8 @@ Move_BURNING_JEALOUSY::
 	delay 0x8
 	call BurningJealousyFlames
 	playsewithpan SE_M_FIRE_PUNCH, SOUND_PAN_TARGET
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_TARGET, 0x2, 0x0, 0xC, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_DEF_PARTNER, 0x2, 0x0, 0xC, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 12, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_DEF_PARTNER, 2, 0, 12, 1
 	createvisualtask AnimTask_BlendMonInAndOut, 0x3, ANIM_TARGET, 0x1f, 0xc, 0x1, 0x1
 	createvisualtask AnimTask_BlendMonInAndOut, 0x3, ANIM_DEF_PARTNER, 0x1f, 0xc, 0x1, 0x1
 	call FireSpreadEffect		@ INCINERATE_BURN_CHANCE
@@ -14786,7 +14786,7 @@ Move_LASH_OUT::
 	call PowerTripBuffUp
 	delay 0x8
 	createvisualtask AnimTask_BlendColorCycle, 0x2, F_PAL_ATTACKER, 0x2, 0x2, 0x0, 0xb, 0x1F
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call PowerTripBuffUp
 	delay 0x8
 	call PowerTripBuffUp
@@ -15122,7 +15122,7 @@ Move_WICKED_BLOW::
 	call WickedBlowBuffEffect
 	delay 0x8
 	createvisualtask AnimTask_BlendColorCycle, 0x2, F_PAL_ATTACKER, 0x2, 0x2, 0x0, 0xb, 0x0
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call WickedBlowBuffEffect
 	delay 0x8
 	call WickedBlowBuffEffect
@@ -15186,7 +15186,7 @@ SURGING_STRIKES_0:
 	playsewithpan SE_M_GIGA_DRAIN, SOUND_PAN_TARGET
 	createsprite gSpriteTemplate_SurgingStrikesImpact, ANIM_TARGET, 2, 40, 20, 0, 0, 10, 20 @Bottom right
 	createsprite gWaterHitSplatSpriteTemplate, ANIM_TARGET, 1, -5, -5, ANIM_TARGET, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x8, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 8, 1
 	delay 5
 	createsprite gWaterHitSplatSpriteTemplate, ANIM_TARGET, 1, 5, 5, ANIM_TARGET, 0x1
 	waitforvisualfinish
@@ -15199,7 +15199,7 @@ SURGING_STRIKES_1:
 	playsewithpan SE_M_GIGA_DRAIN, SOUND_PAN_TARGET
 	createsprite gSpriteTemplate_SurgingStrikesImpact, ANIM_TARGET, 2, -40, 20, 0, 0, 10, 20 @Bottom left
 	createsprite gWaterHitSplatSpriteTemplate, ANIM_TARGET, 1, 5, -5, ANIM_TARGET, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x8, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 8, 1
 	delay 5
 	createsprite gWaterHitSplatSpriteTemplate, ANIM_TARGET, 1, -5, 5, ANIM_TARGET, 0x1
 	waitforvisualfinish
@@ -15212,7 +15212,7 @@ SURGING_STRIKES_2:
 	playsewithpan SE_M_GIGA_DRAIN, SOUND_PAN_TARGET
 	createsprite gSpriteTemplate_SurgingStrikesImpact, ANIM_TARGET, 2, 40, -20, 0, 0, 10, -20 @Top Right
 	createsprite gWaterHitSplatSpriteTemplate, ANIM_TARGET, 1, -5, -5, ANIM_TARGET, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x0, 0x4, 0x8, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 0, 4, 8, 1
 	delay 5
 	createsprite gWaterHitSplatSpriteTemplate, ANIM_TARGET, 1, 5, -5, ANIM_TARGET, 0x1
 	waitforvisualfinish
@@ -15349,8 +15349,8 @@ Move_FIERY_WRATH::
 	waitforvisualfinish
 	loopsewithpan SE_M_PSYBEAM, SOUND_PAN_TARGET, 20, 3
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_DEF_SIDE, 0x4, 0x0, 0xF, 0x3006
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_TARGET, 0x4, 0x0, 0x3C, 0x1
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_DEF_PARTNER, 0x4, 0x0, 0x3C, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 60, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_DEF_PARTNER, 4, 0, 60, 1
 	call FieryWrathGeyser
 	call FieryWrathGeyser
 	call FieryWrathGeyser
@@ -15439,7 +15439,7 @@ Move_THUNDEROUS_KICK::
 	delay 0x7
 	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0x0, 0x0, 0x1, 0x0
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_TARGET, 0x4, 0x0, 0x16, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 22, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x0, 0x10, 0x0, 0x7fff
 	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 0x1f, 0x3, 0x1, 0x0, 0x8, 0x0, 0x0
 	waitforvisualfinish
@@ -15535,7 +15535,7 @@ Move_DIRE_CLAW::
 	delay 0x2
 	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
 	createsprite gSlashSliceSpriteTemplate, ANIM_TARGET, 2, ANIM_TARGET, 0x0, 0x0
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x24, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 36, 1
 	delay 0x2
 	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
 	createsprite gSlashSliceSpriteTemplate, ANIM_TARGET, 2, ANIM_TARGET, 0x0, 0x0
@@ -15721,7 +15721,7 @@ Move_RAGING_FURY::
 	call OutrageFlames
 	call OutrageFlames
 	delay 10
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_TARGET, 0x4, 0x0, 0x18, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 24, 1
 	playsewithpan SE_M_FIRE_PUNCH, SOUND_PAN_TARGET
 	call FlameBurstSpread
 	waitforvisualfinish
@@ -15888,7 +15888,7 @@ Move_HEADLONG_RUSH::
 	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, 0x2a, 0x0, 0x0, 0x5
 	createsprite gSpriteTemplate_HeadlongRushImpact, ANIM_TARGET, 4, 0xfff6, 0x0, 0x1, 0x0
 	delay 0x5
-	createvisualtask AnimTask_ShakeMon2, 0x5, ANIM_TARGET, 0x4, 0x0, 0x2C, 0x1
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 4, 0, 44, 1
 	call MaxQuake_DirtGeyser
 	call MaxQuake_DirtGeyser
 	waitforvisualfinish
@@ -15999,7 +15999,7 @@ Move_ESPER_WING::
 	playsewithpan SE_M_WING_ATTACK, SOUND_PAN_ATTACKER
 	delay ESPER_WING_SPEED / 2
 	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_TARGET, 0x4, 0x0, 0xC, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 12, 1
 	call WingAttackFeatherScatter
 	waitforvisualfinish
 	call UnsetPsychicBg
@@ -16028,7 +16028,7 @@ Move_BITTER_MALICE::
 	loadspritegfx ANIM_TAG_ICE_CRYSTALS
 	playsewithpan SE_M_SACRED_FIRE2, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ScaryFace, 0x5		@ internally checks side
-	createvisualtask AnimTask_ShakeMon2, 0x5, 0x1, 0x2, 0x0, 0x4C, 0x1
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 2, 0, 76, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_TARGET, 0x4, 0x0, 0xF, 0x3006 @;Dark Purple
 	createvisualtask AnimTask_BlendParticle, 0x5, ANIM_TAG_PURPLE_RING, 0x4, 0x0, 0xE, 0x3006 @;Dark Purple
 	call BitterMaliceSwirl
@@ -16089,7 +16089,7 @@ Move_TRIPLE_ARROWS::
 	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_ATTACKER
 	createsprite gSpiritShackleArrowTemplate, ANIM_TARGET, 2, 40, 0, 0, 0, TRIPLE_ARROW_FLY_TIME
 	delay 0x3
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_TARGET, 0x3, 0x0, 0xa, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 3, 0, 10, 1
 	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_IsAttackerPlayerSide, 0x2,
 	jumpargeq 0x7, FALSE, TripleArrowsOnOpponent
@@ -16161,7 +16161,7 @@ Move_CEASELESS_EDGE::
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, (F_PAL_ATTACKER | F_PAL_TARGET), 0x0, 0x10, 0x10, 0x0 @;Fully to to, Black
 	createvisualtask AnimTask_AllBattlersInvisibleExceptAttackerAndTarget, 0xa,
 	delay 0x10
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_TARGET, 0x3, 0x0, 0x30, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 3, 0, 48, 1
 	call CeaselessEdgeSlashes
 	call CeaselessEdgeSlashes
 	call CeaselessEdgeSlashes
@@ -27207,7 +27207,7 @@ Move_ALL_OUT_PUMMELING:
 	call EndureEffect
 	loopsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER 0x9 0x2
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x2, 0x2, 0x0, 0xb, 0x1f
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call EndureEffect
 	waitforvisualfinish
 	fadetobg BG_ROCK_WRECKER
@@ -27574,7 +27574,7 @@ Move_CONTINENTAL_CRUSH::
 	call ContinentalCrashBuffEffect
 	delay 0x8
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x2, 0x2, 0x0, 0xb, 0x2dd3
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call ContinentalCrashBuffEffect
 	delay 0x8
 	call ContinentalCrashBuffEffect
@@ -27607,14 +27607,14 @@ FinishContinentalCrush:
 	visible ANIM_ATTACKER
 	delay 0x4
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x2, 0x2, 0x0, 0xb, 0x2dd3
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER
 	call ContinentalCrushStockpileRocks
 	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER
 	call ContinentalCrushStockpileRocks
 	createsprite gContinentalCrushGrowingRockSpriteTemplate, ANIM_ATTACKER, 2, 0x0
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x2, 0x2, 0x0, 0xb, 0x2dd3
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER
 	call ContinentalCrushStockpileRocks
 	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER
@@ -27875,7 +27875,7 @@ Move_NEVER_ENDING_NIGHTMARE::
 	call NeverendingNightmareBuffEffect
 	delay 0x8
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x2, 0x2, 0x0, 0xb, 0x40c0
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call NeverendingNightmareBuffEffect
 	delay 0x8
 	call NeverendingNightmareBuffEffect
@@ -28212,7 +28212,7 @@ FinishInfernoOverdrive:
 	createsprite gInfernoOverdriveSuperpowerSpriteTemplate, ANIM_TARGET, 3, 0x0 		@ super power shot
 	playsewithpan SE_M_FLAME_WHEEL2, SOUND_PAN_ATTACKER
 	delay 0x10
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x8, 0x0, 0x10, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 8, 0, 16, 1
 	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
 	unloadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT
 	createvisualtask AnimTask_ShakeMon, 0x5, ANIM_TARGET, 0x0, 0x2, 0x4f, 0x1
@@ -28323,7 +28323,7 @@ Move_HYDRO_VORTEX::
 	loadspritegfx ANIM_TAG_FOCUS_ENERGY
 	playsewithpan SE_M_WATERFALL, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x2, 0x2, 0x0, 0xb, 0x5da0
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	waitforvisualfinish
 	unloadspritegfx ANIM_TAG_SPLASH
 	unloadspritegfx ANIM_TAG_SWEAT_BEAD
@@ -28472,7 +28472,7 @@ Move_BLOOM_DOOM::
 	call BloomDoomHyperBeam
 	call BloomDoomHyperBeam
 	call BloomDoomHyperBeam
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x72, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 114, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, 0x4, 0x2, 0x0, 0xb, 0x33ed
 	call BloomDoomHyperBeam
 	call BloomDoomHyperBeam
@@ -28974,7 +28974,7 @@ SubzeroSlammerFinish:
 	waitforvisualfinish
 	call SubzeroSlammerIceSwirl
 	createvisualtask AnimTask_BlendColorCycle, 0x2, F_PAL_ATTACKER, 0x2, 0x2, 0x0, 0xb, 0x7e80
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call SubzeroSlammerIceSwirl
 	call SubzeroSlammerIceSwirl
 	delay 0xa
@@ -28987,7 +28987,7 @@ SubzeroSlammerFinish:
 	call IceBeamCreateCrystals
 	call IceBeamCreateCrystals
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_TARGET, 0x4, 0x0, 0x7, 0x7e80
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x2, 0x0, 0x19, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 25, 1
 	call IceBeamCreateCrystals
 	call IceBeamCreateCrystals
 	call IceBeamCreateCrystals
@@ -29086,7 +29086,7 @@ Move_DEVASTATING_DRAKE::
 	call DevastatingDrakeBuffEffect
 	delay 0x8
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x2, 0x2, 0x0, 0xb, 0x40c0
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call DevastatingDrakeBuffEffect
 	delay 0x8
 	call DevastatingDrakeBuffEffect
@@ -29311,7 +29311,7 @@ Move_BLACK_HOLE_ECLIPSE::
 	call EndureEffect
 	delay 0x8
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x2, 0x2, 0x0, 0xb, 0x0000
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call EndureEffect
 	delay 0x8
 	call EndureEffect
@@ -29607,7 +29607,7 @@ Move_CATASTROPIKA::
 	call EndureEffect
 	delay 0x8
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x2, 0x2, 0x0, 0xb, 0x5bff
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call EndureEffect
 	delay 0x8
 	call EndureEffect
@@ -29892,12 +29892,12 @@ Move_10000000_VOLT_THUNDERBOLT::
 @	createvisualtask AnimTask_FlashAnimTagWithColor, 0x2, ANIM_TAG_ORBS, 0x1, 0xc, 0x1f, 0x10, 0x0, 0x0
 	call TenMillionVoltThunderboltBeamRed
 	call TenMillionVoltThunderboltBeamBlue
-	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_TARGET, 0x4, 0x0, 0x32, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 50, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_TARGET, 0x2, 0x0, 0x9, 0x07FE
 	call TenMillionVoltThunderboltBeamPink
 	call TenMillionVoltThunderboltBeamYellow
 	call TenMillionVoltThunderboltBeamGreen
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x32, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 50, 1
 	call TenMillionVoltThunderboltBeamPurple
 	call TenMillionVoltThunderboltBeamRed
 	call TenMillionVoltThunderboltBeamBlue
@@ -30077,7 +30077,7 @@ StokedSparksurferFinish:
 	loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT @charge
 	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_ElectricChargingParticles, 0x2, 0x0, 0x1c, 0x2, 0xc
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x3c, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 60, 1
 	call EndureEffect
 	delay 0x8
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_ATTACKER, 0x5, 0x0, 0x10, 0x5bff
@@ -30436,14 +30436,14 @@ Move_GENESIS_SUPERNOVA::
 GenesisSupernovaOnOpponent:
 	call GenesisSupernovaBuffEffectPlayer_1
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_ATTACKER, 0x2, 0x0, 0xb, 0xd87c
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x70, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 112, 1
 	call GenesisSupernovaBuffEffectPlayer_2
 	call GenesisSupernovaBuffEffectPlayer_1
 	goto GenesisSupernovaFinish
 GenesisSupernovaOnPlayer:
 	call GenesisSupernovaBuffOpponent_1
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_ATTACKER, 0x2, 0x0, 0xb, 0xd87c
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x70, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 112, 1
 	call GenesisSupernovaBuffOpponent_2
 	call GenesisSupernovaBuffOpponent_1
 GenesisSupernovaFinish:
@@ -31051,7 +31051,7 @@ Move_OCEANIC_OPERETTA::
 	call OceanicOperettaBuffEffect
 	delay 0x8
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x2, 0x2, 0x0, 0xb, 0x7fff
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call OceanicOperettaBuffEffect
 	delay 0x8
 	call OceanicOperettaBuffEffect
@@ -31255,7 +31255,7 @@ SplinteredStormshardsByPlayer:
 	delay 0x1
 	createsprite gSplinteredShardsRisingSpearSpriteTemplate, ANIM_ATTACKER, 50, 0x60, 0x80, 0x60, 0x30, 0x30
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x2, 0x2, 0x0, 0xb, 0x5bff
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	delay 0x2
 	call SplinteredStormshardsPlayer_Rising2
 	call SplinteredStormshardsPlayer_Rising1
@@ -31337,7 +31337,7 @@ SplinteredStormshardsByOpponent:
 	delay 0x1
 	createsprite gSplinteredShardsRisingSpearSpriteTemplate, ANIM_ATTACKER, 50, 0xd0, 0x40, 0xd0, 0x0, 0x30
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x2, 0x2, 0x0, 0xb, 0x5bff
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	delay 0x2
 	call SplinteredStormshardsOpponent_Rising2
 	call SplinteredStormshardsOpponent_Rising1
@@ -32004,7 +32004,7 @@ Move_SEARING_SUNRAZE_SMASH::
 	delay 0x8
 	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x2, 0x2, 0x0, 0xb, 0x7fff
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call SearingSunrazeSmashFlare
 	delay 0x8
 	call SearingSunrazeSmashFlare
@@ -32235,7 +32235,7 @@ Move_MENACING_MOONRAZE_MAELSTROM::
 	call MenacingMoonrazeMaelstromFlare
 	delay 0x8
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x2, 0x2, 0x0, 0xc, 0x0000
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call MenacingMoonrazeMaelstromFlare
 	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
 	delay 0x8
@@ -32295,7 +32295,7 @@ MenacingMoonrazeMaelstromFinish:
 	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER
 	call MenacingMoonrazeMaelstromChargeUp
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x2, 0x2, 0x0, 0xc, 0x0000
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call MenacingMoonrazeMaelstromChargeUp
 	call MenacingMoonrazeMaelstromChargeUp
 	createsoundtask SoundTask_LoopSEAdjustPanning, 0xf0, 0xffc0, SOUND_PAN_TARGET, 0x1, 0xf, 0x0, 0x5
@@ -32304,7 +32304,7 @@ MenacingMoonrazeMaelstromFinish:
 	call MenacingMoonrazeMaelstromBeam
 	call MenacingMoonrazeMaelstromBeam
 	call MenacingMoonrazeMaelstromBeam
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x3c, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 60, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 0x2, F_PAL_TARGET, 0x4, 0x0, 0xc, 0x0000
 	call MenacingMoonrazeMaelstromBeam
 	call MenacingMoonrazeMaelstromBeam
@@ -32337,7 +32337,7 @@ MenacingMoonrazeMaelstromFinish:
 	unloadspritegfx ANIM_TAG_ORBS @hyper beam
 	unloadspritegfx ANIM_TAG_HANDS_AND_FEET @black
 	loadspritegfx ANIM_TAG_EXPLOSION_2 @explosion
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x4c, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 76, 1
 	call MenacingMoonrazeMaelstromExplosion
 	call MenacingMoonrazeMaelstromExplosion
 	createvisualtask AnimTask_BlendBattleAnimPal, 0x2, (F_PAL_BG | F_PAL_BATTLERS), 0x2, 0x0, 0x10, 0x7fff
@@ -32424,7 +32424,7 @@ Move_LIGHT_THAT_BURNS_THE_SKY::
 	call EndureEffect
 	delay 0x8
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x2, 0x2, 0x0, 0xb, 0x5bff
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call EndureEffect
 	delay 0x8
 	call EndureEffect
@@ -32601,7 +32601,7 @@ Move_SOUL_STEALING_7_STAR_STRIKE::
 	call SoulStealingSevenStarStrikeBuffEffect
 	delay 0x8
 	createvisualtask AnimTask_BlendColorCycle, 0x2, 0x2, 0x2, 0x2, 0x0, 0xb, 0x0
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x0, 0x1, 0x0, 0x20, 0x1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call SoulStealingSevenStarStrikeBuffEffect
 	delay 0x8
 	call SoulStealingSevenStarStrikeBuffEffect
