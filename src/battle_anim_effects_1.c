@@ -147,6 +147,9 @@ static void AnimGrassKnotStep(struct Sprite *);
 static void AnimGrassKnot(struct Sprite *);
 static void AnimWoodHammerSmall(struct Sprite *);
 static void AnimWoodHammerBig(struct Sprite *);
+static void AnimWoodHammerHammer(struct Sprite *);
+static void AnimWoodHammerHammer_WaitForPunch(struct Sprite *);
+static void AnimWoodHammerHammer_WaitForDestruction(struct Sprite *);
 static void AnimTask_DoubleTeam_Step(u8);
 static void AnimDoubleTeam(struct Sprite *);
 static void AnimNightSlash(struct Sprite *);
@@ -2847,21 +2850,64 @@ const union AffineAnimCmd *const gWoodHammerBigAffineAnims[] =
     gWoodHammerBigAffineAnimCmd_2,
 };
 
-const union AnimCmd gWoodHammerSmallAnimCmd_1[] =
+#define WOOD_HAMMER_SCALE_STEP 5
+#define WOOD_HAMMER_CC_ROTATION_STEP 2
+#define WOOD_HAMMER_BACKWARDS_DURATION 40
+#define WOOD_HAMMER_ROTATED_AMOUNT (WOOD_HAMMER_CC_ROTATION_STEP * WOOD_HAMMER_BACKWARDS_DURATION)
+#define WOOD_HAMMER_SCALED_AMOUNT (WOOD_HAMMER_SCALE_STEP * WOOD_HAMMER_BACKWARDS_DURATION)
+
+const union AffineAnimCmd gWoodHammerHammerAffineAnimCmd_BackwardsRotateAndScale[] =
 {
-    ANIMCMD_FRAME(32, 1),
-    ANIMCMD_END,
+    AFFINEANIMCMD_FRAME(WOOD_HAMMER_SCALE_STEP, WOOD_HAMMER_SCALE_STEP, WOOD_HAMMER_CC_ROTATION_STEP, WOOD_HAMMER_BACKWARDS_DURATION),
+    AFFINEANIMCMD_END
 };
 
-const union AnimCmd gWoodHammerSmallAnimCmd_2[] =
+const union AffineAnimCmd gWoodHammerHammerAffineAnimCmd_BackwardsRotateAndScaleFlipped[] =
+{
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(-WOOD_HAMMER_SCALE_STEP, WOOD_HAMMER_SCALE_STEP, -WOOD_HAMMER_CC_ROTATION_STEP, WOOD_HAMMER_BACKWARDS_DURATION),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd gWoodHammerHammerAffineAnimCmd_PunchClockwise[] =
+{
+    AFFINEANIMCMD_FRAME(0x100 + WOOD_HAMMER_SCALED_AMOUNT, 0x100 + WOOD_HAMMER_SCALED_AMOUNT, WOOD_HAMMER_ROTATED_AMOUNT, 0),
+    AFFINEANIMCMD_FRAME(0, 0, -16, 7),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd gWoodHammerHammerAffineAnimCmd_PunchCounterClockwise[] =
+{
+    AFFINEANIMCMD_FRAME(-0x100 - WOOD_HAMMER_SCALED_AMOUNT, 0x100 + WOOD_HAMMER_SCALED_AMOUNT, -WOOD_HAMMER_ROTATED_AMOUNT, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 16, 7),
+    AFFINEANIMCMD_END
+};
+
+// Animations 0, 2 are for the player side attacking
+// Animations 1, 3 are for the opponent side attacking (flipped)
+const union AffineAnimCmd *const gWoodHammerHammerAffineAnims[] =
+{
+    gWoodHammerHammerAffineAnimCmd_BackwardsRotateAndScale,
+    gWoodHammerHammerAffineAnimCmd_BackwardsRotateAndScaleFlipped,
+    gWoodHammerHammerAffineAnimCmd_PunchClockwise,
+    gWoodHammerHammerAffineAnimCmd_PunchCounterClockwise,
+};
+
+const union AnimCmd gWoodHammerSmallAnimCmd_1[] =
 {
     ANIMCMD_FRAME(48, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gWoodHammerSmallAnimCmd_3[] =
+const union AnimCmd gWoodHammerSmallAnimCmd_2[] =
 {
     ANIMCMD_FRAME(64, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gWoodHammerSmallAnimCmd_3[] =
+{
+    ANIMCMD_FRAME(80, 1),
     ANIMCMD_END,
 };
 
@@ -2903,6 +2949,17 @@ const struct SpriteTemplate gWoodHammerSmallSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimWoodHammerSmall,
+};
+
+const struct SpriteTemplate gWoodHammerHammerSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_WOOD_HAMMER_HAMMER,
+    .paletteTag = ANIM_TAG_WOOD_HAMMER_HAMMER,
+    .oam = &gOamData_AffineDouble_ObjNormal_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gWoodHammerHammerAffineAnims,
+    .callback = AnimWoodHammerHammer,
 };
 
 const struct SpriteTemplate gJudgmentGrayOutwardSpikesTemplate =
@@ -3021,6 +3078,65 @@ static void AnimWoodHammerSmall(struct Sprite *sprite)
     sprite->callback = TranslateSpriteLinearFixedPoint;
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
 }
+
+#define HAMMER_X_OFFSET 40
+#define HAMMER_PUNCH_WAIT_FRAMES 37
+
+static void AnimWoodHammerHammer(struct Sprite *sprite)
+{
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+    {
+        sprite->x += HAMMER_X_OFFSET;
+        StartSpriteAffineAnim(sprite, 1);
+    }
+    else
+    {
+        sprite->x -= HAMMER_X_OFFSET;
+        StartSpriteAffineAnim(sprite, 0);
+    }
+    sprite->data[6] = HAMMER_PUNCH_WAIT_FRAMES;
+    sprite->callback = AnimWoodHammerHammer_WaitForPunch;
+}
+
+static void AnimWoodHammerHammer_WaitForPunch(struct Sprite *sprite)
+{
+    if (!sprite->affineAnimEnded)
+        return;
+
+    if (sprite->data[6] != 0)
+    {
+        sprite->data[6]--;
+        if (sprite->data[6] & 1)
+        {
+            if ((sprite->data[6] / 2) & 1)
+                sprite->x2++;
+            else
+                sprite->x2--;
+        }
+        return;
+    }
+
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+    {
+        StartSpriteAffineAnim(sprite, 3);
+    }
+    else
+    {
+        StartSpriteAffineAnim(sprite, 2);
+    }
+    sprite->callback = AnimWoodHammerHammer_WaitForDestruction;
+}
+
+static void AnimWoodHammerHammer_WaitForDestruction(struct Sprite *sprite)
+{
+    if (sprite->affineAnimEnded)
+    {
+        DestroySpriteAndMatrix(sprite);
+    }
+}
+
+#undef HAMMER_X_OFFSET
+#undef HAMMER_PUNCH_WAIT_FRAMES
 
 // Animates the falling particles that horizontally wave back and forth.
 // Used by Sleep Powder, Stun Spore, and Poison Powder.

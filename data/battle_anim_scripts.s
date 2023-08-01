@@ -4051,30 +4051,33 @@ Move_CHARGE_BEAM:
 	end
 
 Move_WOOD_HAMMER:
+	loadspritegfx ANIM_TAG_WOOD_HAMMER
+	loadspritegfx ANIM_TAG_WOOD_HAMMER_HAMMER
 	loadspritegfx ANIM_TAG_IMPACT
-	monbg ANIM_TARGET
-	setalpha 12, 8
 	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_TranslateMonEllipticalRespectSide, 2, ANIM_ATTACKER, 18, 6, 2, 4
+	createvisualtask AnimTask_TranslateMonEllipticalRespectSide, 2, ANIM_ATTACKER, 12, 4, 2, 4
+	createsprite gWoodHammerHammerSpriteTemplate, ANIM_TARGET, 2
+	delay 60
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 3, 0, 12, 4
+	delay 18
+	createvisualtask AnimTask_SquishTarget, 0x2
+	delay 6
+	call WoodHammerImpact
 	waitforvisualfinish
-	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 0, 20, 0, 0, 4
-	delay 3
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 3, 1, 0, 10, 0, 0
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 4, -10, 0, 1, 0
-	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
-	delay 1
-	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 1, -16, 0, 0, 4
-	waitforvisualfinish
-	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 4, 0, 12, 1
-	waitforvisualfinish
-	delay 2
-	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 5
-	delay 3
-	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 7
-	waitforvisualfinish
-	clearmonbg ANIM_TARGET
-	blendoff
 	end
+
+WoodHammerImpact:
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, ANIM_TARGET, 2
+	createsprite gWoodHammerSmallSpriteTemplate, ANIM_TARGET, 2, 0, 0, 20, 24, 14, 1
+	createsprite gWoodHammerSmallSpriteTemplate, ANIM_TARGET, 2, 5, 0, -20, 24, 14, 0
+	createsprite gWoodHammerSmallSpriteTemplate, ANIM_TARGET, 2, 0, 5, 20, -24, 14, 1
+	createsprite gWoodHammerSmallSpriteTemplate, ANIM_TARGET, 2, -5, 0, -20, -24, 14, 0
+	createsprite gWoodHammerSmallSpriteTemplate, ANIM_TARGET, 2, 0, 0, 20, 24, 20, 2
+	createsprite gWoodHammerSmallSpriteTemplate, ANIM_TARGET, 2, 5, 0, -20, 24, 20, 2
+	createsprite gWoodHammerSmallSpriteTemplate, ANIM_TARGET, 2, 0, 5, 20, -24, 20, 2
+	createsprite gWoodHammerSmallSpriteTemplate, ANIM_TARGET, 2, -5, 0, -20, -24, 20, 2
+	return
 
 Move_AQUA_JET:
 	loadspritegfx ANIM_TAG_SPARKLE_6

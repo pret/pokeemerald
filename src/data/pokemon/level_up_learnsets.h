@@ -15,6 +15,7 @@ static const struct LevelUpMove sBulbasaurLevelUpLearnset[] = {
     LEVEL_UP_MOVE(31, MOVE_WORRY_SEED),
     LEVEL_UP_MOVE(33, MOVE_SYNTHESIS),
     LEVEL_UP_MOVE(37, MOVE_SEED_BOMB),
+    LEVEL_UP_MOVE(56, MOVE_WOOD_HAMMER),
     LEVEL_UP_END
 };
 

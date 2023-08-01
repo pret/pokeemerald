@@ -10161,6 +10161,8 @@ extern const u32 gBattleAnimSpriteGfx_ZMoveSymbol[];
 extern const u32 gBattleAnimSpritePal_ZMoveSymbol[];
 extern const u32 gBattleAnimSpriteGfx_Teapot[];
 extern const u32 gBattleAnimSpritePal_Teapot[];
+extern const u32 gBattleAnimSpriteGfx_WoodHammerHammer[];
+extern const u32 gBattleAnimSpritePal_WoodHammerHammer[];
 
 extern const u32 gBattleAnimBgImage_Dark[];
 extern const u32 gBattleAnimBgImage_Ghost[];
