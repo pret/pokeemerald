@@ -21,7 +21,6 @@
 #define BLOCK_CROSS_JUMP asm("");
 
 // to help in decompiling
-#define asm_comment(x) asm volatile("@ -- " x " -- ")
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
 #define NAKED __attribute__((naked))
 
@@ -116,6 +115,8 @@
 
 // Calls m0/m1/.../m8 depending on how many arguments are passed.
 #define VARARG_8(m, ...) CAT(m, NARG_8(__VA_ARGS__))(__VA_ARGS__)
+
+// This returns the number of arguments passed to it (up to 8).
 #define NARG_8(...) NARG_8_(_, ##__VA_ARGS__, 8, 7, 6, 5, 4, 3, 2, 1, 0)
 #define NARG_8_(_, a, b, c, d, e, f, g, h, N, ...) N
 
@@ -831,7 +832,7 @@ struct WaldaPhrase
 struct TrainerNameRecord
 {
     u32 trainerId;
-    u8 trainerName[PLAYER_NAME_LENGTH + 1];
+    u8 ALIGNED(2) trainerName[PLAYER_NAME_LENGTH + 1];
 };
 
 struct TrainerHillSave
