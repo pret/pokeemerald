@@ -941,9 +941,8 @@ void GabbyAndTyBeforeInterview(void)
     gSaveBlock1Ptr->gabbyAndTyData.mon2 = gBattleResults.playerMon2Species;
     gSaveBlock1Ptr->gabbyAndTyData.lastMove = gBattleResults.lastUsedMovePlayer;
     if (gSaveBlock1Ptr->gabbyAndTyData.battleNum != 0xFF)
-    {
         gSaveBlock1Ptr->gabbyAndTyData.battleNum++;
-    }
+
     gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn = gBattleResults.playerMonWasDamaged;
 
     if (gBattleResults.playerFaintCounter != 0)
@@ -975,9 +974,7 @@ void GabbyAndTyBeforeInterview(void)
 
     TakeGabbyAndTyOffTheAir();
     if (gSaveBlock1Ptr->gabbyAndTyData.lastMove == MOVE_NONE)
-    {
-        FlagSet(FLAG_TEMP_1);
-    }
+        FlagSet(FLAG_TEMP_SKIP_GABBY_INTERVIEW);
 }
 
 void GabbyAndTyAfterInterview(void)
