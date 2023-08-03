@@ -1707,8 +1707,7 @@ static void OpponentHandleChoosePokemon(void)
 
             for (chosenMonId = (lastId-1); chosenMonId >= firstId; chosenMonId--)
             {
-                if (GetMonData(&gEnemyParty[chosenMonId], MON_DATA_HP) != 0
-                    && GetMonData(&gEnemyParty[chosenMonId], MON_DATA_SPECIES) != SPECIES_NONE
+                if (IsValidForBattle(&gEnemyParty[chosenMonId])
                     && chosenMonId != gBattlerPartyIndexes[battler1]
                     && chosenMonId != gBattlerPartyIndexes[battler2]
                     && (!(AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON)
