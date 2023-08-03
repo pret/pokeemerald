@@ -4183,11 +4183,7 @@ static void Cmd_jumpifsideaffecting(void)
     u32 flags;
     const u8 *jumpInstr;
 
-    if (cmd->battler == BS_ATTACKER)
-        side = GET_BATTLER_SIDE(gBattlerAttacker);
-    else
-        side = GET_BATTLER_SIDE(gBattlerTarget);
-
+    side = GET_BATTLER_SIDE(GetBattlerForBattleScript(cmd->battler));
     flags = cmd->flags;
     jumpInstr = cmd->jumpInstr;
 
