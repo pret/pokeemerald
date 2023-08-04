@@ -410,33 +410,33 @@
 	.byte \endMode
 	.byte \endState
 	.endm
-	
+
 	@ Help macros for 5 uses of moveend command
-	
+
 	@ All cases
 	.macro moveendall
 	setbyte sMOVEEND_STATE, 0
 	moveend 0, 0
 	.endm
-	
+
 	@ Chosen case
 	.macro moveendcase case:req
 	setbyte sMOVEEND_STATE, \case
 	moveend 1, 0
 	.endm
-	
+
 	@ All cases from (inclusive)
 	.macro moveendfrom from:req
 	setbyte sMOVEEND_STATE, \from
 	moveend 0, 0
 	.endm
-	
+
 	@ All cases from 0 to (not inclusive)
 	.macro moveendto to:req
 	setbyte sMOVEEND_STATE, 0
 	moveend 2, \to
 	.endm
-	
+
 	@ Cases from (inclusive) to (not inclusive)
 	.macro moveendfromto from:req, to:req
 	setbyte sMOVEEND_STATE, \from
@@ -668,7 +668,7 @@
 	.byte 0x77
 	.endm
 
-	.macro faintifabilitynotdamp
+	.macro tryexplosion
 	.byte 0x78
 	.endm
 
@@ -1031,7 +1031,7 @@
 	.byte 0xc8
 	.endm
 
-	.macro jumpifattackandspecialattackcannotfall ptr:req
+	.macro trymemento ptr:req
 	.byte 0xc9
 	.4byte \ptr
 	.endm
@@ -1252,165 +1252,165 @@
 	.byte 0xf8
 	.byte \position
 	.endm
-	
+
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
 	.endm
-	
+
 	.macro setmagiccoattarget battler:req
 	various \battler, VARIOUS_SET_MAGIC_COAT_TARGET
 	.endm
-	
+
 	.macro getifcantrunfrombattle battler:req
 	various \battler, VARIOUS_IS_RUNNING_IMPOSSIBLE
 	.endm
-	
+
 	.macro getmovetarget battler:req
 	various \battler, VARIOUS_GET_MOVE_TARGET
 	.endm
-	
+
 	.macro getbattlerfainted battler:req
 	various \battler, VARIOUS_GET_BATTLER_FAINTED
 	.endm
-	
+
 	.macro resetintimidatetracebits battler:req
 	various \battler, VARIOUS_RESET_INTIMIDATE_TRACE_BITS
 	.endm
-	
+
 	.macro updatechoicemoveonlvlup battler:req
 	various \battler, VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP
 	.endm
-	
+
 	.macro resetplayerfainted
 	various BS_ATTACKER, VARIOUS_RESET_PLAYER_FAINTED
 	.endm
-	
+
 	.macro palaceflavortext battler:req
 	various \battler, VARIOUS_PALACE_FLAVOR_TEXT
 	.endm
-	
+
 	.macro arenajudgmentwindow
 	various BS_ATTACKER, VARIOUS_ARENA_JUDGMENT_WINDOW
 	.endm
-	
+
 	.macro arenaopponentmonlost
 	various BS_ATTACKER, VARIOUS_ARENA_OPPONENT_MON_LOST
 	.endm
-	
+
 	.macro arenaplayermonlost
 	various BS_ATTACKER, VARIOUS_ARENA_PLAYER_MON_LOST
 	.endm
-	
+
 	.macro arenabothmonlost
 	various BS_ATTACKER, VARIOUS_ARENA_BOTH_MONS_LOST
 	.endm
-	
+
 	.macro forfeityesnobox battler:req
 	various \battler, VARIOUS_EMIT_YESNOBOX
 	.endm
-	
+
 	.macro arenadrawreftextbox
 	various BS_ATTACKER, VARIOUS_DRAW_ARENA_REF_TEXT_BOX
 	.endm
-	
+
 	.macro arenaerasereftextbox
 	various BS_ATTACKER, VARIOUS_ERASE_ARENA_REF_TEXT_BOX
 	.endm
-	
+
 	.macro arenajudgmentstring id:req
 	various \id, VARIOUS_ARENA_JUDGMENT_STRING
 	.endm
-	
+
 	.macro arenawaitmessage id:req
 	various \id, VARIOUS_ARENA_WAIT_STRING
 	.endm
-	
+
 	.macro waitcry battler:req
 	various \battler, VARIOUS_WAIT_CRY
 	.endm
-	
+
 	.macro returnopponentmon1toball battler:req
 	various \battler, VARIOUS_RETURN_OPPONENT_MON1
 	.endm
-	
+
 	.macro returnopponentmon2toball battler:req
 	various \battler, VARIOUS_RETURN_OPPONENT_MON2
 	.endm
-	
+
 	.macro volumedown
 	various BS_ATTACKER, VARIOUS_VOLUME_DOWN
 	.endm
-	
+
 	.macro volumeup
 	various BS_ATTACKER, VARIOUS_VOLUME_UP
 	.endm
-	
+
 	.macro setalreadystatusedmoveattempt battler:req
 	various \battler, VARIOUS_SET_ALREADY_STATUS_MOVE_ATTEMPT
 	.endm
-	
+
 	.macro palacetryescapestatus battler:req
 	various \battler, VARIOUS_PALACE_TRY_ESCAPE_STATUS
 	.endm
-	
+
 	.macro setoutcomeonteleport battler:req
 	various \battler, VARIOUS_SET_TELEPORT_OUTCOME
 	.endm
-	
+
 	.macro playtrainerdefeatbgm battler:req
 	various \battler, VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC
 	.endm
-	
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER, \stat | \stages << 4 | \down << 7
 	.endm
-	
+
 	.macro setmoveeffect effect:req
 	setbyte cEFFECT_CHOOSER, \effect
 	.endm
-	
+
 	.macro chosenstatus1animation battler:req, status:req
 	chosenstatusanimation \battler, 0x0, \status
 	.endm
-	
+
 	.macro chosenstatus2animation battler:req, status:req
 	chosenstatusanimation \battler, 0x1, \status
 	.endm
-	
+
 	.macro sethword dst:req, value:req
 	setbyte \dst, (\value) & 0xFF
 	setbyte \dst + 1, ((\value) >> 8) & 0xFF
 	.endm
-	
+
 	.macro setword dst:req, value:req
 	setbyte \dst, (\value) & 0xFF
 	setbyte \dst + 1, ((\value) >> 8) & 0xFF
 	setbyte \dst + 2, ((\value) >> 16) & 0xFF
 	setbyte \dst + 3, ((\value) >> 24) & 0xFF
 	.endm
-	
+
 	.macro copybyte dst:req, src:req
 	copyarray \dst, \src, 0x1
 	.endm
-	
+
 	.macro copyhword dst:req, src:req
 	copyarray \dst, \src, 0x2
 	.endm
-	
+
 	.macro copyword dst:req, src:req
 	copyarray \dst, \src, 0x4
 	.endm
-	
+
 	.macro jumpifbytenotequal byte1:req, byte2:req, jumpptr:req
 	jumpifarraynotequal \byte1, \byte2, 0x1, \jumpptr
 	.endm
-	
+
 	.macro jumpifbyteequal byte1:req, byte2:req, jumpptr:req
 	jumpifarrayequal \byte1, \byte2, 0x1, \jumpptr
 	.endm
-	
+
 	.macro jumpifmove move:req, jumpptr:req
 	jumpifhalfword CMP_EQUAL, gCurrentMove, \move, \jumpptr
 	.endm
@@ -1418,23 +1418,23 @@
 	.macro jumpifnotmove move:req, jumpptr:req
 	jumpifhalfword CMP_NOT_EQUAL, gCurrentMove, \move, \jumpptr
 	.endm
-	
+
 	.macro jumpifstatus3 battler:req, status:req, jumpptr:req
 	jumpifstatus3condition \battler, \status, FALSE, \jumpptr
 	.endm
-	
+
 	.macro jumpifnostatus3 battler:req, status:req, jumpptr:req
 	jumpifstatus3condition \battler, \status, TRUE, \jumpptr
 	.endm
-	
+
 	.macro jumpifmovehadnoeffect jumpptr:req
 	jumpifbyte CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_NO_EFFECT, \jumpptr
 	.endm
-	
+
 	.macro jumpifbattletype flags:req, jumpptr:req
 	jumpifword CMP_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
 	.endm
-	
+
 	.macro jumpifnotbattletype flags:req, jumpptr:req
 	jumpifword CMP_NO_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
 	.endm

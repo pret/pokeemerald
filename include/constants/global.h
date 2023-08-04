@@ -35,7 +35,9 @@
 #define FRONTIER_PARTY_SIZE         3
 #define FRONTIER_DOUBLES_PARTY_SIZE 4
 #define FRONTIER_MULTI_PARTY_SIZE   2
-#define MAX_FRONTIER_PARTY_SIZE     FRONTIER_DOUBLES_PARTY_SIZE
+#define MAX_FRONTIER_PARTY_SIZE    (max(FRONTIER_PARTY_SIZE,        \
+                                    max(FRONTIER_DOUBLES_PARTY_SIZE,\
+                                        FRONTIER_MULTI_PARTY_SIZE)))
 #define UNION_ROOM_PARTY_SIZE       2
 
 // capacities of various saveblock objects
@@ -44,7 +46,6 @@
 #define OBJECT_EVENTS_COUNT 16
 #define MAIL_COUNT (10 + PARTY_SIZE)
 #define SECRET_BASES_COUNT 20
-#define TV_SHOWS_COUNT 25
 #define POKE_NEWS_COUNT 16
 #define PC_ITEMS_COUNT 50
 #define BAG_ITEMS_COUNT 30
@@ -101,6 +102,9 @@
 #define WONDER_NEWS_TEXT_LENGTH 40
 #define WONDER_CARD_BODY_TEXT_LINES 4
 #define WONDER_NEWS_BODY_TEXT_LINES 10
+#define TYPE_NAME_LENGTH 6
+#define ABILITY_NAME_LENGTH 12
+#define TRAINER_NAME_LENGTH 10
 
 #define MAX_STAMP_CARD_STAMPS 7
 

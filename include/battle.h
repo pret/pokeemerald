@@ -13,9 +13,8 @@
 #include "battle_bg.h"
 #include "pokeball.h"
 
-#define GET_BATTLER_POSITION(battler)     (gBattlerPositions[battler])
 #define GET_BATTLER_SIDE(battler)         (GetBattlerPosition(battler) & BIT_SIDE)
-#define GET_BATTLER_SIDE2(battler)        (GET_BATTLER_POSITION(battler) & BIT_SIDE)
+#define GET_BATTLER_SIDE2(battler)        (gBattlerPositions[battler] & BIT_SIDE)
 
 // Used to exclude moves learned temporarily by Transform or Mimic
 #define MOVE_IS_PERMANENT(battler, moveSlot)                        \
@@ -165,7 +164,7 @@ struct WishFutureKnock
     u8 wishCounter[MAX_BATTLERS_COUNT];
     u8 wishMonId[MAX_BATTLERS_COUNT];
     u8 weatherDuration;
-    u8 knockedOffMons[2]; // Each battler is represented by a bit. The array entry is dependent on the battler's side.
+    u8 knockedOffMons[NUM_BATTLE_SIDES]; // Each battler is represented by a bit.
 };
 
 struct AI_ThinkingStruct
@@ -327,9 +326,9 @@ struct BattleTv_Mon
 
 struct BattleTv
 {
-    struct BattleTv_Mon mon[2][PARTY_SIZE]; // [side][partyId]
-    struct BattleTv_Position pos[2][2]; // [side][flank]
-    struct BattleTv_Side side[2]; // [side]
+    struct BattleTv_Mon mon[NUM_BATTLE_SIDES][PARTY_SIZE];
+    struct BattleTv_Position pos[NUM_BATTLE_SIDES][2]; // [side][flank]
+    struct BattleTv_Side side[NUM_BATTLE_SIDES];
 };
 
 struct BattleTvMovePoints
@@ -368,7 +367,7 @@ struct BattleStruct
     u8 faintedActionsState;
     u8 faintedActionsBattlerId;
     u16 expValue;
-    u8 field_52;
+    u8 scriptPartyIdx; // for printing the nickname
     u8 sentInPokes;
     bool8 selectionScriptFinished[MAX_BATTLERS_COUNT];
     u8 battlerPartyIndexes[MAX_BATTLERS_COUNT];
@@ -400,7 +399,7 @@ struct BattleStruct
     u8 wallyWaitFrames;
     u8 wallyMoveFrames;
     u8 lastTakenMove[MAX_BATTLERS_COUNT * 2 * 2]; // Last move that a battler was hit with. This field seems to erroneously take 16 bytes instead of 8.
-    u16 hpOnSwitchout[2];
+    u16 hpOnSwitchout[NUM_BATTLE_SIDES];
     u32 savedBattleTypeFlags;
     u8 abilityPreventingSwitchout;
     u8 hpScale;
@@ -474,7 +473,7 @@ struct BattleStruct
 
 #define SET_STATCHANGER(statId, stage, goesDown)(gBattleScripting.statChanger = (statId) + (stage << 4) + (goesDown << 7))
 
-// NOTE: The members of this struct have hard-coded offsets 
+// NOTE: The members of this struct have hard-coded offsets
 //       in include/constants/battle_script_commands.h
 struct BattleScripting
 {
@@ -551,7 +550,7 @@ struct BattleHealthboxInfo
     u8 specialAnimActive:1; // x40
     u8 triedShinyMonAnim:1;
     u8 finishedShinyMonAnim:1;
-    u8 field_1_x1E:4;
+    u8 opponentDrawPartyStatusSummaryDelay:4;
     u8 bgmRestored:1;
     u8 waitForCry:1;
     u8 healthboxSlideInStarted:1;
@@ -588,13 +587,13 @@ struct BattleSpriteData
 
 struct MonSpritesGfx
 {
-    void* firstDecompressed; // ptr to the decompressed sprite of the first pokemon
+    void *firstDecompressed; // ptr to the decompressed sprite of the first pokemon
     union {
-        void* ptr[MAX_BATTLERS_COUNT];
-        u8* byte[MAX_BATTLERS_COUNT];
+        void *ptr[MAX_BATTLERS_COUNT];
+        u8 *byte[MAX_BATTLERS_COUNT];
     } sprites;
     struct SpriteTemplate templates[MAX_BATTLERS_COUNT];
-    struct SpriteFrameImage frameImages[MAX_BATTLERS_COUNT][4];
+    struct SpriteFrameImage frameImages[MAX_BATTLERS_COUNT][MAX_MON_PIC_FRAMES];
     u8 unusedArr[0x80];
     u8 *barFontGfx;
     void *unusedPtr;
@@ -671,8 +670,8 @@ extern u8 gMoveResultFlags;
 extern u32 gHitMarker;
 extern u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT];
 extern u8 gUnusedFirstBattleVar2;
-extern u16 gSideStatuses[2];
-extern struct SideTimer gSideTimers[2];
+extern u16 gSideStatuses[NUM_BATTLE_SIDES];
+extern struct SideTimer gSideTimers[NUM_BATTLE_SIDES];
 extern u32 gStatuses3[MAX_BATTLERS_COUNT];
 extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
 extern u16 gPauseCounterBattle;

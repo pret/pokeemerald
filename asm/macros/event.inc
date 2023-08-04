@@ -276,8 +276,8 @@
 	.2byte SPECIAL_\function
 	.endm
 
-	@ Blocks script execution until a command or C code manually unblocks it. Generally used with specific 
-	@ commands and specials. Calling EnableBothScriptContexts for instance will allow execution to continue.
+	@ Blocks script execution until a command or C code manually unblocks it. Generally used with specific
+	@ commands and specials. Calling ScriptContext_Enable for instance will allow execution to continue.
 	.macro waitstate
 	.byte 0x27
 	.endm
@@ -469,7 +469,7 @@
 	formatwarp \map, \a, \b, \c
 	.endm
 
-	@ Sets the dynamic warp destination. Warps with a destination map of MAP_NONE will target this destination.
+	@ Sets the dynamic warp destination. Warps with a destination map of MAP_DYNAMIC will target this destination.
 	@ Warp commands can be given either the id of which warp location to go to on the destination map
 	@ or a pair of x/y coordinates to go to directly on the destination map.
 	.macro setdynamicwarp map:req, a, b, c
@@ -985,7 +985,7 @@
 	.endm
 
 	@ Gives the player a Pokémon of the specified species and level, holding the specified item. The trailing 0s are unused parameters.
-	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome. 
+	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
 	.macro givemon species:req, level:req, item=ITEM_NONE
 	.byte 0x79
 	.2byte \species
@@ -997,7 +997,7 @@
 	.endm
 
 	@ Gives the player an Egg of the specified species.
-	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome. 
+	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
 	.macro giveegg species:req
 	.byte 0x7a
 	.2byte \species
@@ -1415,7 +1415,7 @@
 	.2byte \out
 	.endm
 
-	@ Gives 'count' coins to the player, up to a total of MAX_COINS. 
+	@ Gives 'count' coins to the player, up to a total of MAX_COINS.
 	@ If the player already has MAX_COINS then VAR_RESULT is set to TRUE, otherwise it is set to FALSE.
 	.macro addcoins count:req
 	.byte 0xb4
@@ -1576,15 +1576,15 @@
 	.4byte \value
 	.endm
 
-	@ Sets the eventLegal bit for the Pokemon in the specified slot of the player's party.
-	.macro setmoneventlegal slot:req
+	@ Sets the modernFatefulEncounter bit for the Pokemon in the specified slot of the player's party.
+	.macro setmodernfatefulencounter slot:req
 	.byte 0xcd
 	.2byte \slot
 	.endm
 
-	@ Checks if the eventLegal bit is set for the Pokemon in the specified slot of the player's party. If it isn't set,
+	@ Checks if the modernFatefulEncounter bit is set for the Pokemon in the specified slot of the player's party. If it isn't set,
 	@ VAR_RESULT is TRUE. If the bit is set (or if the specified slot is empty or invalid), VAR_RESULT is FALSE.
-	.macro checkmoneventlegal slot:req
+	.macro checkmodernfatefulencounter slot:req
 	.byte 0xce
 	.2byte \slot
 	.endm
@@ -1887,7 +1887,7 @@
 
 	@ Gives 'amount' of the specified 'item' to the player and prints a message with fanfare.
 	@ If the player doesn't have space for all the items then as many are added as possible, the
-	@ message indicates there is no room, and VAR_RESULT is set to FALSE. 
+	@ message indicates there is no room, and VAR_RESULT is set to FALSE.
 	@ Otherwise VAR_RESULT is set to TRUE, and the message indicates they have received the item(s).
 	.macro giveitem item:req, amount=1
 	setorcopyvar VAR_0x8000, \item
@@ -1932,10 +1932,10 @@
 	closebraillemessage
 	.endm
 
-	@ Creates an "event legal" Pokémon for an encounter
+	@ Creates a Pokémon with the modernFatefulEncounter bit set for an encounter
 	.macro seteventmon species:req, level:req, item=ITEM_NONE
 	setvar VAR_0x8004, \species
 	setvar VAR_0x8005, \level
 	setvar VAR_0x8006, \item
-	special CreateEventLegalEnemyMon
+	special CreateEnemyEventMon
 	.endm

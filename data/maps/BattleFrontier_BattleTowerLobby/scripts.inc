@@ -411,11 +411,22 @@ BattleFrontier_BattleTowerLobby_EventScript_SaveBeforeLinkMultisChallenge::
 	special LoadPlayerParty
 	closemessage
 	delay 2
+@ The command tower_save ultimately calls TrySavingData(SAVE_LINK), which writes data in SaveBlock1 and SaveBlock2
+@ to the flash, but not data in PokemonStorage. The SaveGame script that follows asks the player to do a full save,
+@ which they can opt out of. As a result the player can save their party and quit without having saved the PC.
+@ This allows players to clone pokemon and their held items by withdrawing them (or erase them by despositing).
+.ifndef BUGFIX
 	tower_save 0
+.endif
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleTowerLobby_EventScript_CancelChallengeSaveFailed
+@ GAME_STAT_ENTERED_BATTLE_TOWER should not be incremented here, for two reasons:
+@ 1. It is incremented again in BattleFrontier_BattleTowerLobby_EventScript_CableLinkSuccessful or BattleFrontier_BattleTowerLobby_EventScript_WirelessLinkSuccessful
+@ 2. If the player tries to save, but fails, the counter will still be incremented even if the player never enters the tower.
+.ifndef BUGFIX
 	incrementgamestat GAME_STAT_ENTERED_BATTLE_TOWER
+.endif
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleTowerLobby_EventScript_TryWirelessLink
 	goto BattleFrontier_BattleTowerLobby_EventScript_TryCableLink
@@ -911,7 +922,7 @@ BattleFrontier_BattleTowerLobby_EventScript_ExitRules::
 	end
 
 @ Unused
-BattleFrontier_BattleTowerLobby_EventScript_DirectYouToBattleRoom:
+BattleFrontier_BattleTowerLobby_Text_DirectYouToBattleRoom:
 	.string "I'll direct you to your BATTLE ROOM now.$"
 
 BattleFrontier_BattleTowerLobby_Text_DidntSaveBeforeQuitting:

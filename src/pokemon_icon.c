@@ -1186,12 +1186,12 @@ void SpriteCB_MonIcon(struct Sprite *sprite)
     UpdateMonIconFrame(sprite);
 }
 
-const u8* GetMonIconTiles(u16 species, bool32 handleDeoxys)
+const u8 *GetMonIconTiles(u16 species, bool32 handleDeoxys)
 {
-    const u8* iconSprite = gMonIconTable[species];
+    const u8 *iconSprite = gMonIconTable[species];
     if (species == SPECIES_DEOXYS && handleDeoxys == TRUE)
     {
-        iconSprite = (const u8*)(0x400 + (u32)iconSprite); // use the specific Deoxys form icon (Speed in this case)
+        iconSprite = (const u8 *)(0x400 + (u32)iconSprite); // use the specific Deoxys form icon (Speed in this case)
     }
     return iconSprite;
 }
@@ -1199,16 +1199,12 @@ const u8* GetMonIconTiles(u16 species, bool32 handleDeoxys)
 void TryLoadAllMonIconPalettesAtOffset(u16 offset)
 {
     s32 i;
-    const struct SpritePalette* monIconPalettePtr;
-
-    if (offset <= 0xA0)
+    if (offset <= BG_PLTT_ID(16 - ARRAY_COUNT(gMonIconPaletteTable)))
     {
-        monIconPalettePtr = gMonIconPaletteTable;
-        for(i = ARRAY_COUNT(gMonIconPaletteTable) - 1; i >= 0; i--)
+        for (i = 0; i < (int)ARRAY_COUNT(gMonIconPaletteTable); i++)
         {
-            LoadPalette(monIconPalettePtr->data, offset, 0x20);
-            offset += 0x10;
-            monIconPalettePtr++;
+            LoadPalette(gMonIconPaletteTable[i].data, offset, PLTT_SIZE_4BPP);
+            offset += 16;
         }
     }
 }
@@ -1225,7 +1221,7 @@ u8 GetMonIconPaletteIndexFromSpecies(u16 species)
     return gMonIconPaletteIndices[species];
 }
 
-const u16* GetValidMonIconPalettePtr(u16 species)
+const u16 *GetValidMonIconPalettePtr(u16 species)
 {
     if (species > NUM_SPECIES)
         species = INVALID_ICON_SPECIES;

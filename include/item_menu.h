@@ -71,14 +71,14 @@ struct BagMenu
     u8 unused1[2];
     u8 pocketScrollArrowsTask;
     u8 pocketSwitchArrowsTask;
-    const u8* contextMenuItemsPtr;
+    const u8 *contextMenuItemsPtr;
     u8 contextMenuItemsBuffer[4];
     u8 contextMenuNumItems;
     u8 numItemStacks[POCKETS_COUNT];
     u8 numShownItems[POCKETS_COUNT];
     s16 graphicsLoadState;
     u8 unused2[14];
-    u8 pocketNameBuffer[32][32];
+    u8 ALIGNED(4) pocketNameBuffer[32][32];
     u8 unused3[4];
 };
 

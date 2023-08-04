@@ -233,7 +233,7 @@ static const struct OamData sOamData_RotatingGateLarge =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -250,7 +250,7 @@ static const struct OamData sOamData_RotatingGateRegular =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -264,14 +264,14 @@ static const struct OamData sOamData_RotatingGateRegular =
 
 static const struct SpriteSheet sRotatingGatesGraphicsTable[] =
 {
-    {sRotatingGateTiles_1, 0x200, ROTATING_GATE_TILE_TAG + GATE_SHAPE_L1},
-    {sRotatingGateTiles_2, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_L2},
-    {sRotatingGateTiles_3, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_L3},
-    {sRotatingGateTiles_4, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_L4},
-    {sRotatingGateTiles_5, 0x200, ROTATING_GATE_TILE_TAG + GATE_SHAPE_T1},
-    {sRotatingGateTiles_6, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_T2},
-    {sRotatingGateTiles_7, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_T3},
-    {sRotatingGateTiles_8, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_T4},
+    {sRotatingGateTiles_1, sizeof(sRotatingGateTiles_1), ROTATING_GATE_TILE_TAG + GATE_SHAPE_L1},
+    {sRotatingGateTiles_2, sizeof(sRotatingGateTiles_2), ROTATING_GATE_TILE_TAG + GATE_SHAPE_L2},
+    {sRotatingGateTiles_3, sizeof(sRotatingGateTiles_3), ROTATING_GATE_TILE_TAG + GATE_SHAPE_L3},
+    {sRotatingGateTiles_4, sizeof(sRotatingGateTiles_4), ROTATING_GATE_TILE_TAG + GATE_SHAPE_L4},
+    {sRotatingGateTiles_5, sizeof(sRotatingGateTiles_5), ROTATING_GATE_TILE_TAG + GATE_SHAPE_T1},
+    {sRotatingGateTiles_6, sizeof(sRotatingGateTiles_6), ROTATING_GATE_TILE_TAG + GATE_SHAPE_T2},
+    {sRotatingGateTiles_7, sizeof(sRotatingGateTiles_7), ROTATING_GATE_TILE_TAG + GATE_SHAPE_T3},
+    {sRotatingGateTiles_8, sizeof(sRotatingGateTiles_8), ROTATING_GATE_TILE_TAG + GATE_SHAPE_T4},
     {NULL},
 };
 
@@ -874,7 +874,12 @@ static s32 RotatingGate_CanRotate(u8 gateId, s32 rotationDirection)
 
             if (sRotatingGate_ArmLayout[shape][2 * i + j])
             {
-                if (MapGridIsImpassableAt(x + armPos[armIndex].x, y + armPos[armIndex].y) == TRUE)
+            #ifdef BUGFIX
+                // Collision has a range 0-3, any value != 0 is impassable
+                if (MapGridGetCollisionAt(x + armPos[armIndex].x, y + armPos[armIndex].y))
+            #else
+                if (MapGridGetCollisionAt(x + armPos[armIndex].x, y + armPos[armIndex].y) == 1)
+            #endif
                     return FALSE;
             }
         }

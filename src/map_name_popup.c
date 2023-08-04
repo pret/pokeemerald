@@ -12,6 +12,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "constants/battle_frontier.h"
 #include "constants/layouts.h"
 #include "constants/region_map_sections.h"
 #include "constants/weather.h"
@@ -185,7 +186,7 @@ static const u8 sText_PyramidFloor6[] = _("PYRAMID FLOOR 6");
 static const u8 sText_PyramidFloor7[] = _("PYRAMID FLOOR 7");
 static const u8 sText_Pyramid[] = _("PYRAMID");
 
-static const u8 * const sBattlePyramid_MapHeaderStrings[] =
+static const u8 * const sBattlePyramid_MapHeaderStrings[FRONTIER_STAGES_PER_CHALLENGE + 1] =
 {
     sText_PyramidFloor1,
     sText_PyramidFloor2,
@@ -302,14 +303,14 @@ static void ShowMapNamePopUpWindow(void)
     u8 mapDisplayHeader[24];
     u8 *withoutPrefixPtr;
     u8 x;
-    const u8* mapDisplayHeaderSource;
+    const u8 *mapDisplayHeaderSource;
 
     if (InBattlePyramid())
     {
         if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP)
         {
             withoutPrefixPtr = &(mapDisplayHeader[3]);
-            mapDisplayHeaderSource = sBattlePyramid_MapHeaderStrings[7];
+            mapDisplayHeaderSource = sBattlePyramid_MapHeaderStrings[FRONTIER_STAGES_PER_CHALLENGE];
         }
         else
         {
@@ -384,8 +385,8 @@ static void LoadMapNamePopUpWindowBg(void)
     CallWindowFunction(popupWindowId, DrawMapNamePopUpFrame);
     PutWindowTilemap(popupWindowId);
     if (gMapHeader.weather == WEATHER_UNDERWATER_BUBBLES)
-        LoadPalette(&sMapPopUp_Palette_Underwater, 0xE0, sizeof(sMapPopUp_Palette_Underwater));
+        LoadPalette(&sMapPopUp_Palette_Underwater, BG_PLTT_ID(14), sizeof(sMapPopUp_Palette_Underwater));
     else
-        LoadPalette(sMapPopUp_PaletteTable[popUpThemeId], 0xE0, sizeof(sMapPopUp_PaletteTable[0]));
+        LoadPalette(sMapPopUp_PaletteTable[popUpThemeId], BG_PLTT_ID(14), sizeof(sMapPopUp_PaletteTable[0]));
     BlitBitmapToWindow(popupWindowId, sMapPopUp_Table[popUpThemeId], 0, 0, 80, 24);
 }

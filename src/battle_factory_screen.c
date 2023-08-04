@@ -268,7 +268,7 @@ static const u8 sActionHighlightMiddle_Gfx[] = INCBIN_U8( "graphics/battle_front
 static const u8 sActionHighlightRight_Gfx[]  = INCBIN_U8( "graphics/battle_frontier/factory_screen/action_highlight_right.4bpp");
 static const u8 sMonPicBgAnim_Gfx[]          = INCBIN_U8( "graphics/battle_frontier/factory_screen/mon_pic_bg_anim.4bpp");
 static const u8 sMonPicBg_Tilemap[]          = INCBIN_U8( "graphics/battle_frontier/factory_screen/mon_pic_bg.bin");
-static const u8 sMonPicBg_Gfx[]              = INCBIN_U8( "graphics/battle_frontier/factory_screen/mon_pic_bg.4bpp");
+static const u16 sMonPicBg_Gfx[]             = INCBIN_U16("graphics/battle_frontier/factory_screen/mon_pic_bg.4bpp");
 static const u16 sMonPicBg_Pal[]             = INCBIN_U16("graphics/battle_frontier/factory_screen/mon_pic_bg.gbapal");
 
 static const struct SpriteSheet sSelect_SpriteSheets[] =
@@ -410,7 +410,7 @@ static const struct OamData sOam_Select_Pokeball =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -427,7 +427,7 @@ static const struct OamData sOam_Select_Arrow =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -444,7 +444,7 @@ static const struct OamData sOam_Select_MenuHighlight =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
@@ -461,7 +461,7 @@ static const struct OamData sOam_Select_MonPicBgAnim =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -661,7 +661,7 @@ static const struct OamData sOam_Swap_Pokeball =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -678,7 +678,7 @@ static const struct OamData sOam_Swap_Arrow =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -695,7 +695,7 @@ static const struct OamData sOam_Swap_MenuHighlight =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
@@ -712,7 +712,7 @@ static const struct OamData sOam_Swap_MonPicBgAnim =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -1175,16 +1175,16 @@ static void CB2_InitSelectScreen(void)
         LoadBgTiles(3, sSelectMonPicBgTilesetBuffer, 0x60, 0);
         CpuCopy16(gFrontierFactorySelectMenu_Tilemap, sSelectMenuTilemapBuffer, BG_SCREEN_SIZE);
         LoadBgTilemap(1, sSelectMenuTilemapBuffer, BG_SCREEN_SIZE, 0);
-        LoadPalette(gFrontierFactorySelectMenu_Pal, 0, 0x40);
-        LoadPalette(sSelectText_Pal, 0xF0, 8);
-        LoadPalette(sSelectText_Pal, 0xE0, 10);
+        LoadPalette(gFrontierFactorySelectMenu_Pal, 0, 2 * PLTT_SIZE_4BPP);
+        LoadPalette(sSelectText_Pal, BG_PLTT_ID(15), PLTT_SIZEOF(4));
+        LoadPalette(sSelectText_Pal, BG_PLTT_ID(14), PLTT_SIZEOF(5));
 #ifdef UBFIX
         if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
 #else
         if (sFactorySelectScreen->fromSummaryScreen == TRUE)
 #endif
-            gPlttBufferUnfaded[228] = sFactorySelectScreen->speciesNameColorBackup;
-        LoadPalette(sMonPicBg_Pal, 0x20, 4);
+            gPlttBufferUnfaded[BG_PLTT_ID(14) + 4] = sFactorySelectScreen->speciesNameColorBackup;
+        LoadPalette(sMonPicBg_Pal, BG_PLTT_ID(2), PLTT_SIZEOF(2));
         gMain.state++;
         break;
     case 3:
@@ -1449,7 +1449,7 @@ static void Select_Task_OpenSummaryScreen(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case STATE_SUMMARY_FADE:
-        gPlttBufferUnfaded[228] = gPlttBufferFaded[228];
+        gPlttBufferUnfaded[BG_PLTT_ID(14) + 4] = gPlttBufferFaded[BG_PLTT_ID(14) + 4];
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].tState = STATE_SUMMARY_CLEAN;
         break;
@@ -1468,7 +1468,7 @@ static void Select_Task_OpenSummaryScreen(u8 taskId)
         }
         break;
     case STATE_SUMMARY_SHOW:
-        sFactorySelectScreen->speciesNameColorBackup = gPlttBufferUnfaded[228];
+        sFactorySelectScreen->speciesNameColorBackup = gPlttBufferUnfaded[BG_PLTT_ID(14) + 4];
         DestroyTask(taskId);
         sFactorySelectScreen->fromSummaryScreen = TRUE;
         currMonId = sFactorySelectScreen->cursorPos;
@@ -1641,8 +1641,8 @@ static void Select_Task_HandleMenu(u8 taskId)
         {
             if (sFactorySelectScreen->fromSummaryScreen == TRUE)
             {
-                gPlttBufferFaded[228] = sFactorySelectScreen->speciesNameColorBackup;
-                gPlttBufferUnfaded[228] = gPlttBufferUnfaded[244];
+                gPlttBufferFaded[BG_PLTT_ID(14) + 4] = sFactorySelectScreen->speciesNameColorBackup;
+                gPlttBufferUnfaded[BG_PLTT_ID(14) + 4] = gPlttBufferUnfaded[BG_PLTT_ID(15) + 4];
             }
             sFactorySelectScreen->fromSummaryScreen = FALSE;
             gTasks[taskId].tState = STATE_MENU_HANDLE_INPUT;
@@ -1747,9 +1747,9 @@ static void CreateFrontierFactorySelectableMons(u8 firstMonId)
         u16 monId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
         sFactorySelectScreen->mons[i + firstMonId].monId = monId;
         if (i < rentalRank)
-            ivs = GetFactoryMonFixedIV(challengeNum + 1, 0);
+            ivs = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
         else
-            ivs = GetFactoryMonFixedIV(challengeNum, 0);
+            ivs = GetFactoryMonFixedIV(challengeNum, FALSE);
         CreateMonWithEVSpreadNatureOTID(&sFactorySelectScreen->mons[i + firstMonId].monData,
                                              gFacilityTrainerMons[monId].species,
                                              level,
@@ -2388,7 +2388,7 @@ static void Swap_Task_OpenSummaryScreen(u8 taskId)
     case STATE_SUMMARY_SHOW:
         DestroyTask(taskId);
         sFactorySwapScreen->fromSummaryScreen = TRUE;
-        sFactorySwapScreen->speciesNameColorBackup = gPlttBufferUnfaded[244];
+        sFactorySwapScreen->speciesNameColorBackup = gPlttBufferUnfaded[BG_PLTT_ID(15) + 4];
         ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, gPlayerParty, sFactorySwapScreen->cursorPos, FRONTIER_PARTY_SIZE - 1, CB2_InitSwapScreen);
         break;
     }
@@ -2473,7 +2473,7 @@ static void Swap_Task_HandleYesNo(u8 taskId)
                 gTasks[taskId].tSaidYes = TRUE;
                 hiPtr = gTasks[taskId].tFollowUpTaskPtrHi;
                 loPtr = gTasks[taskId].tFollowUpTaskPtrLo;
-                gTasks[taskId].func = (void*)((hiPtr << 16) | loPtr);
+                gTasks[taskId].func = (void *)((hiPtr << 16) | loPtr);
             }
             else
             {
@@ -2482,7 +2482,7 @@ static void Swap_Task_HandleYesNo(u8 taskId)
                 Swap_ErasePopupMenu(SWAP_WIN_YES_NO);
                 hiPtr = gTasks[taskId].tFollowUpTaskPtrHi;
                 loPtr = gTasks[taskId].tFollowUpTaskPtrLo;
-                gTasks[taskId].func = (void*)((hiPtr << 16) | loPtr);
+                gTasks[taskId].func = (void *)((hiPtr << 16) | loPtr);
             }
         }
         else if (JOY_NEW(B_BUTTON))
@@ -2492,7 +2492,7 @@ static void Swap_Task_HandleYesNo(u8 taskId)
             Swap_ErasePopupMenu(SWAP_WIN_YES_NO);
             hiPtr = gTasks[taskId].tFollowUpTaskPtrHi;
             loPtr = gTasks[taskId].tFollowUpTaskPtrLo;
-            gTasks[taskId].func = (void*)((hiPtr << 16) | loPtr);
+            gTasks[taskId].func = (void *)((hiPtr << 16) | loPtr);
         }
         else if (JOY_REPEAT(DPAD_UP))
         {
@@ -2748,7 +2748,7 @@ static void Swap_Task_FadeOutSpeciesName(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 1:
-        LoadPalette(&gPlttBufferUnfaded[0xF0], 0xE0, 0xA);
+        LoadPalette(&gPlttBufferUnfaded[BG_PLTT_ID(15)], BG_PLTT_ID(14), PLTT_SIZEOF(5));
         gTasks[taskId].tState++;
         break;
     case 2:
@@ -2761,7 +2761,7 @@ static void Swap_Task_FadeOutSpeciesName(u8 taskId)
         if (sFactorySwapScreen->fadeSpeciesNameCoeffDelay > 3)
         {
             sFactorySwapScreen->fadeSpeciesNameCoeffDelay = 0;
-            gPlttBufferUnfaded[244] = gPlttBufferFaded[228];
+            gPlttBufferUnfaded[BG_PLTT_ID(15) + 4] = gPlttBufferFaded[BG_PLTT_ID(14) + 4];
             sFactorySwapScreen->fadeSpeciesNameCoeff++;
         }
         BlendPalettes(0x4000, sFactorySwapScreen->fadeSpeciesNameCoeff, 0);
@@ -2994,7 +2994,7 @@ static void Swap_Task_ScreenInfoTransitionOut(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        LoadPalette(sSwapText_Pal, 0xE0, sizeof(sSwapText_Pal));
+        LoadPalette(sSwapText_Pal, BG_PLTT_ID(14), sizeof(sSwapText_Pal));
         Swap_PrintActionStrings();
         PutWindowTilemap(SWAP_WIN_ACTION_FADE);
         gTasks[taskId].tState++;
@@ -3125,7 +3125,7 @@ static void Swap_Task_ScreenInfoTransitionIn(u8 taskId)
         if (gTasks[taskId].tSlideFinishedPkmn == TRUE
          && gTasks[taskId].tSlideFinishedCancel == TRUE)
         {
-            gPlttBufferFaded[226] = sPokeballGray_Pal[37];
+            gPlttBufferFaded[BG_PLTT_ID(14) + 2] = sPokeballGray_Pal[37];
             Swap_PrintActionStrings();
             PutWindowTilemap(SWAP_WIN_ACTION_FADE);
             gTasks[taskId].tState++;
@@ -3309,10 +3309,10 @@ static void CB2_InitSwapScreen(void)
         LoadBgTiles(3, sSwapMonPicBgTilesetBuffer, 0x60, 0);
         CpuCopy16(gFrontierFactorySelectMenu_Tilemap, sSwapMenuTilemapBuffer, BG_SCREEN_SIZE);
         LoadBgTilemap(1, sSwapMenuTilemapBuffer, BG_SCREEN_SIZE, 0);
-        LoadPalette(gFrontierFactorySelectMenu_Pal, 0, 0x40);
-        LoadPalette(sSwapText_Pal, 0xF0, sizeof(sSwapText_Pal));
-        LoadPalette(sSwapText_Pal, 0xE0, sizeof(sSwapText_Pal));
-        LoadPalette(sMonPicBg_Pal, 0x20, 4);
+        LoadPalette(gFrontierFactorySelectMenu_Pal, 0, 2 * PLTT_SIZE_4BPP);
+        LoadPalette(sSwapText_Pal, BG_PLTT_ID(15), sizeof(sSwapText_Pal));
+        LoadPalette(sSwapText_Pal, BG_PLTT_ID(14), sizeof(sSwapText_Pal));
+        LoadPalette(sMonPicBg_Pal, BG_PLTT_ID(2), PLTT_SIZEOF(2));
         gMain.state++;
         break;
     case 3:
@@ -3864,10 +3864,10 @@ static void Swap_PrintMonSpeciesAtFade(void)
 
     CpuCopy16(sSwapText_Pal, pal, 8);
     if (!sFactorySwapScreen->fromSummaryScreen)
-        pal[4] = gPlttBufferFaded[228];
+        pal[4] = gPlttBufferFaded[BG_PLTT_ID(14) + 4];
     else
         pal[4] = sFactorySwapScreen->speciesNameColorBackup;
-    LoadPalette(pal, 0xF0, sizeof(sSwapText_Pal));
+    LoadPalette(pal, BG_PLTT_ID(15), sizeof(sSwapText_Pal));
 
     PutWindowTilemap(SWAP_WIN_SPECIES_AT_FADE);
     FillWindowPixelBuffer(SWAP_WIN_SPECIES_AT_FADE, PIXEL_FILL(0));
@@ -3895,8 +3895,8 @@ static void Swap_PrintMonSpeciesForTransition(void)
     u16 species;
     u8 x;
 
-    LoadPalette(sSwapText_Pal, 0xE0, sizeof(sSwapText_Pal));
-    CpuCopy16(&gPlttBufferUnfaded[240], &gPlttBufferFaded[224], 10);
+    LoadPalette(sSwapText_Pal, BG_PLTT_ID(14), sizeof(sSwapText_Pal));
+    CpuCopy16(&gPlttBufferUnfaded[BG_PLTT_ID(15)], &gPlttBufferFaded[BG_PLTT_ID(14)], PLTT_SIZEOF(5));
 
     if (sFactorySwapScreen->cursorPos >= FRONTIER_PARTY_SIZE)
     {
@@ -4220,17 +4220,12 @@ static void Task_OpenMonPic(u8 taskId)
             return;
         break;
     default:
-        #ifndef UBFIX
         DestroyTask(taskId);
-        #endif
-        // UB: Should not use the task after it has been deleted.
+        // Accessing data of destroyed task. Task data isn't reset until a new task needs that task id.
         if (gTasks[taskId].tIsSwapScreen == TRUE)
             Swap_CreateMonSprite();
         else
             Select_CreateMonSprite();
-        #ifdef UBFIX
-        DestroyTask(taskId);
-        #endif
         return;
     }
     task->tState++;

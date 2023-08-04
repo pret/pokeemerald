@@ -158,7 +158,7 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
 {
     u8 x, y;
     s8 i, j;
-    u8 xflip[32];
+    u8 ALIGNED(4) xflip[32];
     u8 h = sSpriteDimensions[shape][size][1];
     u8 w = sSpriteDimensions[shape][size][0];
 
@@ -253,7 +253,7 @@ u16 CalcCRC16WithTable(const u8 *data, u32 length)
     return ~crc;
 }
 
-u32 CalcByteArraySum(const u8* data, u32 length)
+u32 CalcByteArraySum(const u8 *data, u32 length)
 {
     u32 sum, i;
     for (sum = 0, i = 0; i < length; i++)

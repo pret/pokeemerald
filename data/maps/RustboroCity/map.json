@@ -14,19 +14,19 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "up",
+      "map": "MAP_ROUTE115",
       "offset": 0,
-      "map": "MAP_ROUTE115"
+      "direction": "up"
     },
     {
-      "direction": "down",
+      "map": "MAP_ROUTE104",
       "offset": 0,
-      "map": "MAP_ROUTE104"
+      "direction": "down"
     },
     {
-      "direction": "right",
+      "map": "MAP_ROUTE116",
       "offset": 0,
-      "map": "MAP_ROUTE116"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -245,84 +245,84 @@
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_GYM",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 13,
       "y": 30,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_FLAT1_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 16,
       "y": 45,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_MART",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 16,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 27,
       "y": 34,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_POKEMON_SCHOOL",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 11,
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_DEVON_CORP_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 12,
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_DEVON_CORP_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 33,
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_HOUSE1",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 9,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_CUTTERS_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 30,
       "y": 28,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_HOUSE2",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 5,
       "y": 51,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_FLAT2_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 26,
       "y": 46,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_HOUSE3",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

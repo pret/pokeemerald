@@ -23,9 +23,15 @@
  *  For the fly map, and utility functions all of the maps use, see region_map.c
  */
 
-// Static type declarations
+enum {
+    WIN_MAPSEC_NAME,
+    WIN_TITLE,
+};
 
-// Static RAM declarations
+enum {
+    TAG_PLAYER_ICON,
+    TAG_CURSOR,
+};
 
 static EWRAM_DATA struct {
     MainCallback callback;
@@ -34,15 +40,11 @@ static EWRAM_DATA struct {
     u16 state;
 } *sFieldRegionMapHandler = NULL;
 
-// Static ROM declarations
-
 static void MCB2_InitRegionMapRegisters(void);
 static void VBCB_FieldUpdateRegionMap(void);
 static void MCB2_FieldUpdateRegionMap(void);
 static void FieldUpdateRegionMap(void);
 static void PrintRegionMapSecName(void);
-
-// .rodata
 
 static const struct BgTemplate sFieldRegionMapBgTemplates[] = {
     {
@@ -66,7 +68,7 @@ static const struct BgTemplate sFieldRegionMapBgTemplates[] = {
 
 static const struct WindowTemplate sFieldRegionMapWindowTemplates[] =
 {
-    {
+    [WIN_MAPSEC_NAME] = {
         .bg = 0,
         .tilemapLeft = 17,
         .tilemapTop = 17,
@@ -75,7 +77,7 @@ static const struct WindowTemplate sFieldRegionMapWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 1
     },
-    {
+    [WIN_TITLE] = {
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 1,
@@ -87,12 +89,10 @@ static const struct WindowTemplate sFieldRegionMapWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-// .text
-
 void FieldInitRegionMap(MainCallback callback)
 {
     SetVBlankCallback(NULL);
-    sFieldRegionMapHandler = malloc(sizeof(*sFieldRegionMapHandler));
+    sFieldRegionMapHandler = Alloc(sizeof(*sFieldRegionMapHandler));
     sFieldRegionMapHandler->state = 0;
     sFieldRegionMapHandler->callback = callback;
     SetMainCallback2(MCB2_InitRegionMapRegisters);
@@ -115,7 +115,7 @@ static void MCB2_InitRegionMapRegisters(void)
     InitBgsFromTemplates(1, sFieldRegionMapBgTemplates, ARRAY_COUNT(sFieldRegionMapBgTemplates));
     InitWindows(sFieldRegionMapWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 0x27, 0xd0);
+    LoadUserWindowBorderGfx(0, 0x27, BG_PLTT_ID(13));
     ClearScheduledBgCopiesToVram();
     SetMainCallback2(MCB2_FieldUpdateRegionMap);
     SetVBlankCallback(VBCB_FieldUpdateRegionMap);
@@ -145,16 +145,16 @@ static void FieldUpdateRegionMap(void)
     {
         case 0:
             InitRegionMap(&sFieldRegionMapHandler->regionMap, FALSE);
-            CreateRegionMapPlayerIcon(0, 0);
-            CreateRegionMapCursor(1, 1);
+            CreateRegionMapPlayerIcon(TAG_PLAYER_ICON, TAG_PLAYER_ICON);
+            CreateRegionMapCursor(TAG_CURSOR, TAG_CURSOR);
             sFieldRegionMapHandler->state++;
             break;
         case 1:
-            DrawStdFrameWithCustomTileAndPalette(1, 0, 0x27, 0xd);
+            DrawStdFrameWithCustomTileAndPalette(WIN_TITLE, FALSE, 0x27, 0xd);
             offset = GetStringCenterAlignXOffset(FONT_NORMAL, gText_Hoenn, 0x38);
-            AddTextPrinterParameterized(1, FONT_NORMAL, gText_Hoenn, offset, 1, 0, NULL);
+            AddTextPrinterParameterized(WIN_TITLE, FONT_NORMAL, gText_Hoenn, offset, 1, 0, NULL);
             ScheduleBgCopyTilemapToVram(0);
-            DrawStdFrameWithCustomTileAndPalette(0, 0, 0x27, 0xd);
+            DrawStdFrameWithCustomTileAndPalette(WIN_MAPSEC_NAME, FALSE, 0x27, 0xd);
             PrintRegionMapSecName();
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             sFieldRegionMapHandler->state++;
@@ -203,13 +203,13 @@ static void PrintRegionMapSecName(void)
 {
     if (sFieldRegionMapHandler->regionMap.mapSecType != MAPSECTYPE_NONE)
     {
-        FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized(0, FONT_NORMAL, sFieldRegionMapHandler->regionMap.mapSecName, 0, 1, 0, NULL);
-        ScheduleBgCopyTilemapToVram(0);
+        FillWindowPixelBuffer(WIN_MAPSEC_NAME, PIXEL_FILL(1));
+        AddTextPrinterParameterized(WIN_MAPSEC_NAME, FONT_NORMAL, sFieldRegionMapHandler->regionMap.mapSecName, 0, 1, 0, NULL);
+        ScheduleBgCopyTilemapToVram(WIN_MAPSEC_NAME);
     }
     else
     {
-        FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        CopyWindowToVram(0, COPYWIN_FULL);
+        FillWindowPixelBuffer(WIN_MAPSEC_NAME, PIXEL_FILL(1));
+        CopyWindowToVram(WIN_MAPSEC_NAME, COPYWIN_FULL);
     }
 }

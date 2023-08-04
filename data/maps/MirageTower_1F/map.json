@@ -20,14 +20,14 @@
       "y": 14,
       "elevation": 3,
       "dest_map": "MAP_ROUTE111",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 15,
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_MIRAGE_TOWER_2F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

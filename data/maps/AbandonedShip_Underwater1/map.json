@@ -20,14 +20,14 @@
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_UNDERWATER2",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 4,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_UNDERWATER2",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

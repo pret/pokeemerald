@@ -216,7 +216,7 @@ static const struct OamData sOamData_Sparkle =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -284,7 +284,7 @@ static const struct OamData sOamData_Volbeat =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -320,7 +320,7 @@ static const struct OamData sOamData_Torchic =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -380,7 +380,7 @@ static const struct OamData sOamData_Manectric =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -428,7 +428,7 @@ static const struct OamData sOamData_Lightning =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -519,7 +519,7 @@ static const struct OamData sOamData_Bubbles =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x32),
     .x = 0,
@@ -558,7 +558,7 @@ static const struct OamData sOamData_WaterDrop =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -660,7 +660,7 @@ static const struct OamData sOamData_GameFreakLetter =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -676,7 +676,7 @@ static const struct OamData sOamData_PresentsLetter =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
@@ -692,7 +692,7 @@ static const struct OamData sOamData_GameFreakLogo =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x64),
     .x = 0,
@@ -931,7 +931,7 @@ static const struct OamData sOamData_FlygonSilhouette =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
@@ -983,7 +983,7 @@ static const struct OamData sOamData_RayquazaOrb =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -1039,7 +1039,7 @@ static void MainCB2_Intro(void)
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
-    if (gMain.newKeys && !gPaletteFade.active)
+    if (gMain.newKeys != 0 && !gPaletteFade.active)
         SetMainCallback2(MainCB2_EndIntro);
     else if (gIntroFrameCounter != -1)
         gIntroFrameCounter++;
@@ -1051,11 +1051,11 @@ static void MainCB2_EndIntro(void)
         SetMainCallback2(CB2_InitTitleScreen);
 }
 
-static void LoadCopyrightGraphics(u16 tilesetAddress, u16 tilemapAddress, u16 paletteAddress)
+static void LoadCopyrightGraphics(u16 tilesetAddress, u16 tilemapAddress, u16 paletteOffset)
 {
     LZ77UnCompVram(gIntroCopyright_Gfx, (void *)(VRAM + tilesetAddress));
     LZ77UnCompVram(gIntroCopyright_Tilemap, (void *)(VRAM + tilemapAddress));
-    LoadPalette(gIntroCopyright_Pal, paletteAddress, 32);
+    LoadPalette(gIntroCopyright_Pal, paletteOffset, PLTT_SIZE_4BPP);
 }
 
 static void SerialCB_CopyrightScreen(void)
@@ -1080,7 +1080,7 @@ static u8 SetUpCopyrightScreen(void)
         CpuFill32(0, (void *)OAM, OAM_SIZE);
         CpuFill16(0, (void *)(PLTT + 2), PLTT_SIZE - 2);
         ResetPaletteFade();
-        LoadCopyrightGraphics(0, 0x3800, 0);
+        LoadCopyrightGraphics(0, 0x3800, BG_PLTT_ID(0));
         ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
@@ -1178,7 +1178,7 @@ static void Task_Scene1_Load(u8 taskId)
     DmaClear16(3, BG_SCREEN_ADDR(21), BG_SCREEN_SIZE);
     LZ77UnCompVram(sIntro1Bg3_Tilemap, (void *)(BG_SCREEN_ADDR(22)));
     DmaClear16(3, BG_SCREEN_ADDR(23), BG_SCREEN_SIZE);
-    LoadPalette(sIntro1Bg_Pal, 0, sizeof(sIntro1Bg_Pal));
+    LoadPalette(sIntro1Bg_Pal, BG_PLTT_ID(0), sizeof(sIntro1Bg_Pal));
     SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(22) | BGCNT_16COLOR | BGCNT_TXT256x512);
     SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(20) | BGCNT_16COLOR | BGCNT_TXT256x512);
     SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(18) | BGCNT_16COLOR | BGCNT_TXT256x512);
@@ -1188,13 +1188,13 @@ static void Task_Scene1_Load(u8 taskId)
     LoadSpritePalettes(sSpritePalettes_Intro1);
     LoadCompressedSpriteSheet(sSpriteSheet_Sparkle);
     LoadSpritePalettes(sSpritePalette_Sparkle);
-    CpuCopy16(&gPlttBufferUnfaded[0x100], &gPlttBufferUnfaded[0x1F0], 0x20);
-    CpuCopy16(&gPlttBufferUnfaded[0x100], &gPlttBufferUnfaded[0x1E1], 0x1E);
-    CpuCopy16(&gPlttBufferUnfaded[0x100], &gPlttBufferUnfaded[0x1D2], 0x1C);
-    CpuCopy16(&gPlttBufferUnfaded[0x100], &gPlttBufferUnfaded[0x1C3], 0x1A);
-    CpuCopy16(&gPlttBufferUnfaded[0x100], &gPlttBufferUnfaded[0x1B4], 0x18);
-    CpuCopy16(&gPlttBufferUnfaded[0x100], &gPlttBufferUnfaded[0x1A5], 0x16);
-    CpuCopy16(&gPlttBufferUnfaded[0x100], &gPlttBufferUnfaded[0x196], 0x14);
+    CpuCopy16(&gPlttBufferUnfaded[OBJ_PLTT_ID(0)], &gPlttBufferUnfaded[OBJ_PLTT_ID(15) + 0], PLTT_SIZEOF(16 - 0));
+    CpuCopy16(&gPlttBufferUnfaded[OBJ_PLTT_ID(0)], &gPlttBufferUnfaded[OBJ_PLTT_ID(14) + 1], PLTT_SIZEOF(16 - 1) + 1); // Copying an extra half color?
+    CpuCopy16(&gPlttBufferUnfaded[OBJ_PLTT_ID(0)], &gPlttBufferUnfaded[OBJ_PLTT_ID(13) + 2], PLTT_SIZEOF(16 - 2));
+    CpuCopy16(&gPlttBufferUnfaded[OBJ_PLTT_ID(0)], &gPlttBufferUnfaded[OBJ_PLTT_ID(12) + 3], PLTT_SIZEOF(16 - 3));
+    CpuCopy16(&gPlttBufferUnfaded[OBJ_PLTT_ID(0)], &gPlttBufferUnfaded[OBJ_PLTT_ID(11) + 4], PLTT_SIZEOF(16 - 4));
+    CpuCopy16(&gPlttBufferUnfaded[OBJ_PLTT_ID(0)], &gPlttBufferUnfaded[OBJ_PLTT_ID(10) + 5], PLTT_SIZEOF(16 - 5));
+    CpuCopy16(&gPlttBufferUnfaded[OBJ_PLTT_ID(0)], &gPlttBufferUnfaded[OBJ_PLTT_ID( 9) + 6], PLTT_SIZEOF(16 - 6));
     CreateGameFreakLogoSprites(120, 80, 0);
     gTasks[taskId].sBigDropSpriteId = CreateWaterDrop(236, -14, 0x200, 1, 0x78, FALSE);
     gTasks[taskId].func = Task_Scene1_FadeIn;
@@ -1717,7 +1717,7 @@ static void Task_Scene3_Load(u8 taskId)
     IntroResetGpuRegs();
     LZ77UnCompVram(sIntroPokeball_Gfx, (void *)VRAM);
     LZ77UnCompVram(sIntroPokeball_Tilemap, (void *)(BG_CHAR_ADDR(1)));
-    LoadPalette(sIntroPokeball_Pal, 0, sizeof(sIntroPokeball_Pal));
+    LoadPalette(sIntroPokeball_Pal, BG_PLTT_ID(0), sizeof(sIntroPokeball_Pal));
     gTasks[taskId].tAlpha = 0;
     gTasks[taskId].tZoomDiv = 0;
     gTasks[taskId].tZoomDivSpeed = 0;
@@ -1884,7 +1884,7 @@ static void Task_Scene3_Groudon(u8 taskId)
         if (--tDelay == 0)
         {
             tDelay = 2;
-            CpuCopy16(&gIntro3Bg_Pal[tPalIdx], &gPlttBufferFaded[31], sizeof(u16));
+            CpuCopy16(&gIntro3Bg_Pal[tPalIdx], &gPlttBufferFaded[BG_PLTT_ID(1) + 15], PLTT_SIZEOF(1));
             tPalIdx += 2;
             if (tPalIdx == 0x1EC)
                 tState++;
@@ -1901,7 +1901,7 @@ static void Task_Scene3_Groudon(u8 taskId)
         if (--tDelay == 0)
         {
             tDelay = 2;
-            CpuCopy16(&gIntro3Bg_Pal[tPalIdx], &gPlttBufferFaded[31], sizeof(u16));
+            CpuCopy16(&gIntro3Bg_Pal[tPalIdx], &gPlttBufferFaded[BG_PLTT_ID(1) + 15], PLTT_SIZEOF(1));
             tPalIdx -= 2;
             if (tPalIdx == 0x1E0)
             {
@@ -2143,7 +2143,7 @@ static void Task_Scene3_Kyogre(u8 taskId)
         if (--tDelay == 0)
         {
             tDelay = 4;
-            CpuCopy16(&gIntro3Bg_Pal[tPalIdx], &gPlttBufferFaded[47], sizeof(u16));
+            CpuCopy16(&gIntro3Bg_Pal[tPalIdx], &gPlttBufferFaded[BG_PLTT_ID(2) + 15], PLTT_SIZEOF(1));
             tPalIdx -= 2;
             if (tPalIdx == 0x1E0)
                 tState++;
@@ -2161,7 +2161,7 @@ static void Task_Scene3_Kyogre(u8 taskId)
         if (--tDelay == 0)
         {
             tDelay = 4;
-            CpuCopy16(&gIntro3Bg_Pal[tPalIdx], &gPlttBufferFaded[47], sizeof(u16));
+            CpuCopy16(&gIntro3Bg_Pal[tPalIdx], &gPlttBufferFaded[BG_PLTT_ID(2) + 15], PLTT_SIZEOF(1));
             tPalIdx += 2;
             if (tPalIdx == 0x1EE)
             {
@@ -2492,7 +2492,7 @@ static void SpriteCB_Lightning(struct Sprite *sprite)
         sprite->sPalIdx = 0x1C2;
         sprite->sState++;
     case 1:
-        CpuCopy16(&gIntro3Bg_Pal[sprite->sPalIdx], &gPlttBufferFaded[93], 2);
+        CpuCopy16(&gIntro3Bg_Pal[sprite->sPalIdx], &gPlttBufferFaded[BG_PLTT_ID(5) + 13], PLTT_SIZEOF(1));
         sprite->sPalIdx += 2;
         if (sprite->sPalIdx != 0x1CE)
             break;
@@ -2503,7 +2503,7 @@ static void SpriteCB_Lightning(struct Sprite *sprite)
         if (--sprite->sDelay == 0)
         {
             sprite->sDelay = 4;
-            CpuCopy16(&gIntro3Bg_Pal[sprite->sPalIdx], &gPlttBufferFaded[93], 2);
+            CpuCopy16(&gIntro3Bg_Pal[sprite->sPalIdx], &gPlttBufferFaded[BG_PLTT_ID(5) + 13], PLTT_SIZEOF(1));
             sprite->sPalIdx -= 2;
             if (sprite->sPalIdx == 0x1C0)
                 DestroySprite(sprite);
@@ -2606,7 +2606,7 @@ static void Task_RayquazaAttack(u8 taskId)
     case 0:
         if ((data[2] & 1) != 0)
         {
-            CpuCopy16(&gIntro3Bg_Pal[0x1A2 + data[1] * 2], &gPlttBufferFaded[94], 2);
+            CpuCopy16(&gIntro3Bg_Pal[0x1A2 + data[1] * 2], &gPlttBufferFaded[BG_PLTT_ID(5) + 14], PLTT_SIZEOF(1));
             data[1]++;
         }
         if (data[1] == 6)
@@ -2621,7 +2621,7 @@ static void Task_RayquazaAttack(u8 taskId)
         {
             if ((data[2] & 1) != 0)
             {
-                CpuCopy16(&gIntro3Bg_Pal[0x1A2 + data[1] * 2], &gPlttBufferFaded[88], 2);
+                CpuCopy16(&gIntro3Bg_Pal[0x1A2 + data[1] * 2], &gPlttBufferFaded[BG_PLTT_ID(5) + 8], PLTT_SIZEOF(1));
                 data[1]++;
             }
             if (data[1] == 6)
@@ -2640,7 +2640,7 @@ static void Task_RayquazaAttack(u8 taskId)
         {
             if ((data[2] & 1) != 0)
             {
-                CpuCopy16(&gIntro3Bg_Pal[0x182 + data[1] * 2], &gPlttBufferFaded[92], 2);
+                CpuCopy16(&gIntro3Bg_Pal[0x182 + data[1] * 2], &gPlttBufferFaded[BG_PLTT_ID(5) + 12], PLTT_SIZEOF(1));
                 data[1]++;
             }
             if (data[1] == 6)
@@ -2663,10 +2663,10 @@ static void Task_RayquazaAttack(u8 taskId)
         {
             if (--data[3] != 0)
             {
-                BlendPalette(0x50, 16, data[3], RGB(9, 10, 10));
-                CpuCopy16(&gIntro3Bg_Pal[0x1AC], &gPlttBufferFaded[94], 2);
-                CpuCopy16(&gIntro3Bg_Pal[0x1AC], &gPlttBufferFaded[88], 2);
-                CpuCopy16(&gIntro3Bg_Pal[0x18C], &gPlttBufferFaded[92], 2);
+                BlendPalette(BG_PLTT_ID(5), 16, data[3], RGB(9, 10, 10));
+                CpuCopy16(&gIntro3Bg_Pal[428], &gPlttBufferFaded[BG_PLTT_ID(5) + 14], PLTT_SIZEOF(1));
+                CpuCopy16(&gIntro3Bg_Pal[428], &gPlttBufferFaded[BG_PLTT_ID(5) + 8], PLTT_SIZEOF(1));
+                CpuCopy16(&gIntro3Bg_Pal[396], &gPlttBufferFaded[BG_PLTT_ID(5) + 12], PLTT_SIZEOF(1));
             }
             else
             {
@@ -2933,7 +2933,7 @@ static void SpriteCB_WaterDrop_ReachLeafEnd(struct Sprite *sprite)
     SetOamMatrix(sprite->data[1], sprite->data[6] + 64, 0, 0, sprite->data[6] + 64);
     SetOamMatrix(sprite->data[1] + 1, sprite->data[6] + 64, 0, 0, sprite->data[6] + 64);
     SetOamMatrix(sprite->data[1] + 2, sprite->data[6] + 64, 0, 0, sprite->data[6] + 64);
-    if (sprite->data[4] != 64)
+    if (sprite->data[4] != MAX_SPRITES)
     {
         u16 sinIdx;
         sprite->data[4] -= 8;
@@ -3197,16 +3197,16 @@ static void SpriteCB_LogoLetter(struct Sprite *sprite)
             sprite->sColorDelay = 2;
             if (sprite->sTimer != 0)
             {
-                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer],      &gPlttBufferFaded[0x11F], 2);
-                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 16], &gPlttBufferFaded[0x114], 2);
-                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 32], &gPlttBufferFaded[0x11A], 2);
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer],      &gPlttBufferFaded[OBJ_PLTT_ID(1) + 15], PLTT_SIZEOF(1));
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 16], &gPlttBufferFaded[OBJ_PLTT_ID(1) + 4], PLTT_SIZEOF(1));
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 32], &gPlttBufferFaded[OBJ_PLTT_ID(1) + 10], PLTT_SIZEOF(1));
                 sprite->sTimer--;
             }
             else
             {
-                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer],      &gPlttBufferFaded[0x11F], 2);
-                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 16], &gPlttBufferFaded[0x114], 2);
-                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 32], &gPlttBufferFaded[0x11A], 2);
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer],      &gPlttBufferFaded[OBJ_PLTT_ID(1) + 15], PLTT_SIZEOF(1));
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 16], &gPlttBufferFaded[OBJ_PLTT_ID(1) + 4], PLTT_SIZEOF(1));
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 32], &gPlttBufferFaded[OBJ_PLTT_ID(1) + 10], PLTT_SIZEOF(1));
                 sprite->sState++;
             }
         }
@@ -3226,9 +3226,9 @@ static void SpriteCB_LogoLetter(struct Sprite *sprite)
             sprite->sColorDelay = 2;
             if (sprite->sTimer <= COLOR_CHANGES)
             {
-                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer],      &gPlttBufferFaded[0x11F], 2);
-                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 16], &gPlttBufferFaded[0x114], 2);
-                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 32], &gPlttBufferFaded[0x11A], 2);
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer],      &gPlttBufferFaded[OBJ_PLTT_ID(1) + 15], PLTT_SIZEOF(1));
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 16], &gPlttBufferFaded[OBJ_PLTT_ID(1) + 4], PLTT_SIZEOF(1));
+                CpuCopy16(&gIntroGameFreakTextFade_Pal[sprite->sTimer + 32], &gPlttBufferFaded[OBJ_PLTT_ID(1) + 10], PLTT_SIZEOF(1));
                 sprite->sTimer++;
             }
             else
@@ -3322,24 +3322,29 @@ static u8 CreateGameFreakLogoSprites(s16 x, s16 y, s16 unused)
 #undef sLetterX
 #undef COLOR_CHANGES
 
+#define sScale   data[1]
+#define sRot     data[2]
+#define sPos     data[3]
+#define sTimer   data[7]
+
 static void SpriteCB_FlygonSilhouette(struct Sprite *sprite)
 {
-    sprite->data[7]++;
+    sprite->sTimer++;
 
     if (sprite->sState != 0)
     {
-        s16 sin1;
-        s16 sin2;
+        s16 sin;
+        s16 cos;
 
         s16 a, b, c, d;
-
-        sin1 = gSineTable[(u8)sprite->data[2]];
-        sin2 = gSineTable[(u8)(sprite->data[2] + 64)];
-
-        d = Q_8_8_TO_INT(sin2 * sprite->data[1]);
-        c = Q_8_8_TO_INT(-sin1 * sprite->data[1]);
-        b = Q_8_8_TO_INT(sin1 * sprite->data[1]);
-        a = Q_8_8_TO_INT(sin2 * sprite->data[1]);
+        // Determines rotation of the sprite
+        sin = gSineTable[(u8)sprite->sRot];
+        cos = gSineTable[(u8)(sprite->sRot + 64)];
+        // Converts rotation and scale into the OAM matrix
+        d = Q_8_8_TO_INT( cos * sprite->sScale);
+        c = Q_8_8_TO_INT(-sin * sprite->sScale);
+        b = Q_8_8_TO_INT( sin * sprite->sScale);
+        a = Q_8_8_TO_INT( cos * sprite->sScale);
 
         SetOamMatrix(1, a, b, c, d);
     }
@@ -3353,35 +3358,40 @@ static void SpriteCB_FlygonSilhouette(struct Sprite *sprite)
         CalcCenterToCornerVec(sprite, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_DOUBLE);
         sprite->invisible = FALSE;
         sprite->sState = 1;
-        sprite->data[1] = 0x80;
-        sprite->data[2] = 0;
-        sprite->data[3] = 0;
+        sprite->sScale = 128;
+        sprite->sRot = 0;
+        sprite->sPos = 0;
         break;
     case 1:
-        sprite->x2 = -Sin((u8)sprite->data[3], 140);
-        sprite->y2 = -Sin((u8)sprite->data[3], 120);
-        sprite->data[1] += 7;
-        sprite->data[3] += 3;
+        sprite->x2 = -Sin((u8)sprite->sPos, 140);
+        sprite->y2 = -Sin((u8)sprite->sPos, 120);
+        sprite->sScale += 7;
+        sprite->sPos += 3;
         if (sprite->x + sprite->x2 <= -16)
         {
             sprite->oam.priority = 3;
             sprite->sState++;
             sprite->x = 20;
             sprite->y = 40;
-            sprite->data[1] = 0x200;
-            sprite->data[2] = 0;
-            sprite->data[3] = 0x10;
+            sprite->sScale = 512;
+            sprite->sRot = 0;
+            sprite->sPos = 16;
         }
         break;
     case 2:
-        sprite->x2 = Sin((u8)sprite->data[3], 34);
-        sprite->y2 = -Cos((u8)sprite->data[3], 60);
-        sprite->data[1] += 2;
-        if (sprite->data[7] % 5 == 0)
-            sprite->data[3]++;
+        sprite->x2 = Sin((u8)sprite->sPos, 34);
+        sprite->y2 = -Cos((u8)sprite->sPos, 60);
+        sprite->sScale += 2;
+        if (sprite->sTimer % 5 == 0)
+            sprite->sPos++;
         break;
     }
 }
+
+#undef sScale
+#undef sRot
+#undef sPos
+#undef sTimer
 
 static void SpriteCB_RayquazaOrb(struct Sprite *sprite)
 {
