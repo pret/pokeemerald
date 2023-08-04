@@ -374,7 +374,7 @@ void HandleAction_UseItem(void)
                     gBattleTextBuff1[2]++;
                 }
 
-                gBattleScripting.animArg1 = gBattleTextBuff1[2] + 14;
+                gBattleScripting.animArg1 = gBattleTextBuff1[2] + STAT_ANIM_PLUS1;
                 gBattleScripting.animArg2 = 0;
             }
             break;
@@ -2625,7 +2625,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     if (gBattleMons[battler].statStages[STAT_SPEED] < MAX_STAT_STAGE && gDisableStructs[battler].isFirstTurn != 2)
                     {
                         gBattleMons[battler].statStages[STAT_SPEED]++;
-                        gBattleScripting.animArg1 = 14 + STAT_SPEED;
+                        gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + STAT_SPEED;
                         gBattleScripting.animArg2 = 0;
                         BattleScriptPushCursorAndCallback(BattleScript_SpeedBoostActivates);
                         gBattleScripting.battler = battler;
@@ -3229,7 +3229,7 @@ enum
         PREPARE_STAT_BUFFER(gBattleTextBuff1, stat);                                        \
         gEffectBattler = battlerId;                                                         \
         SET_STATCHANGER(stat, 1, FALSE);                                                    \
-        gBattleScripting.animArg1 = 14 + (stat);                                            \
+        gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + (stat);                               \
         gBattleScripting.animArg2 = 0;                                                      \
         BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);                               \
         effect = ITEM_STATS_CHANGE;                                                         \
@@ -3415,7 +3415,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE); // Only the Attack stat-up berry has this
                     gEffectBattler = battlerId;
                     SET_STATCHANGER(STAT_ATK, 1, FALSE);
-                    gBattleScripting.animArg1 = 14 + STAT_ATK;
+                    gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + STAT_ATK;
                     gBattleScripting.animArg2 = 0;
                     BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
                     effect = ITEM_STATS_CHANGE;
@@ -3470,7 +3470,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 
                         gEffectBattler = battlerId;
                         SET_STATCHANGER(i + 1, 2, FALSE);
-                        gBattleScripting.animArg1 = 0x21 + i + 6;
+                        gBattleScripting.animArg1 = STAT_ANIM_PLUS2 + (i + 1);
                         gBattleScripting.animArg2 = 0;
                         BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
                         effect = ITEM_STATS_CHANGE;

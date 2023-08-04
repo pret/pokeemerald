@@ -393,7 +393,7 @@ void InitStatsChangeAnimation(u8 taskId)
     u8 i;
 
     sAnimStatsChangeData = AllocZeroed(sizeof(struct AnimStatsChangeData));
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(sAnimStatsChangeData->data); i++)
         sAnimStatsChangeData->data[i] = gBattleAnimArgs[i];
 
     gTasks[taskId].func = StatsChangeAnimation_Step1;
@@ -477,28 +477,29 @@ static void StatsChangeAnimation_Step2(u8 taskId)
     AnimLoadCompressedBgGfx(animBgData.bgId, gBattleStatMask_Gfx, animBgData.tilesOffset);
     switch (sAnimStatsChangeData->data[1])
     {
-    case 0:
+    case STAT_ANIM_PAL_ATK:
         LoadCompressedPalette(gBattleStatMask2_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
-    case 1:
+    case STAT_ANIM_PAL_DEF:
         LoadCompressedPalette(gBattleStatMask1_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
-    case 2:
+    case STAT_ANIM_PAL_ACC:
         LoadCompressedPalette(gBattleStatMask3_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
-    case 3:
+    case STAT_ANIM_PAL_SPEED:
         LoadCompressedPalette(gBattleStatMask4_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
-    case 4:
+    case STAT_ANIM_PAL_EVASION:
         LoadCompressedPalette(gBattleStatMask6_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
-    case 5:
+    case STAT_ANIM_PAL_SPATK:
         LoadCompressedPalette(gBattleStatMask7_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
-    case 6:
+    case STAT_ANIM_PAL_SPDEF:
         LoadCompressedPalette(gBattleStatMask8_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     default:
+ // case STAT_ANIM_PAL_MULTIPLE:
         LoadCompressedPalette(gBattleStatMask5_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     }
