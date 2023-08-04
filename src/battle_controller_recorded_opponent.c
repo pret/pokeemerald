@@ -96,7 +96,6 @@ static void RecordedOpponentBufferExecCompleted(void);
 static void SwitchIn_HandleSoundAndEnd(void);
 static u32 CopyRecordedOpponentMonData(u8 monId, u8 *dst);
 static void SetRecordedOpponentMonData(u8 monId);
-static void DoSwitchOutAnimation(void);
 static void RecordedOpponentDoMoveAnimation(void);
 static void Task_StartSendOutAnim(u8 taskId);
 static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite);
@@ -170,6 +169,7 @@ static void RecordedOpponentDummy(void)
 
 void SetControllerToRecordedOpponent(void)
 {
+    gBattlerControllerEndFuncs[gActiveBattler] = RecordedOpponentBufferExecCompleted;
     gBattlerControllerFuncs[gActiveBattler] = RecordedOpponentBufferRunCommand;
 }
 
@@ -391,18 +391,6 @@ static void HideHealthboxAfterMonFaint(void)
     }
 }
 
-static void FreeMonSpriteAfterSwitchOutAnim(void)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
-    {
-        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        HideBattlerShadowSprite(gActiveBattler);
-        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
-        RecordedOpponentBufferExecCompleted();
-    }
-}
-
 static void CompleteOnInactiveTextPrinter(void)
 {
     if (!IsTextPrinterActive(B_WIN_MSG))
@@ -519,7 +507,7 @@ static void RecordedOpponentBufferExecCompleted(void)
 
 static void RecordedOpponentHandleGetMonData(void)
 {
-    BtlController_HandleGetMonData(gActiveBattler, gEnemyParty, RecordedOpponentBufferExecCompleted);
+    BtlController_HandleGetMonData(gActiveBattler, gEnemyParty);
 }
 
 static void RecordedOpponentHandleGetRawMonData(void)
@@ -529,12 +517,12 @@ static void RecordedOpponentHandleGetRawMonData(void)
 
 static void RecordedOpponentHandleSetMonData(void)
 {
-    BtlController_HandleSetMonData(gActiveBattler, gEnemyParty, RecordedOpponentBufferExecCompleted);
+    BtlController_HandleSetMonData(gActiveBattler, gEnemyParty);
 }
 
 static void RecordedOpponentHandleSetRawMonData(void)
 {
-    BtlController_HandleSetRawMonData(gActiveBattler, gEnemyParty, RecordedOpponentBufferExecCompleted);
+    BtlController_HandleSetRawMonData(gActiveBattler, gEnemyParty);
 }
 
 static void RecordedOpponentHandleLoadMonSprite(void)
@@ -549,40 +537,7 @@ static void RecordedOpponentHandleSwitchInAnim(void)
 
 static void RecordedOpponentHandleReturnMonToBall(void)
 {
-    if (gBattleResources->bufferA[gActiveBattler][1] == 0)
-    {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
-        gBattlerControllerFuncs[gActiveBattler] = DoSwitchOutAnimation;
-    }
-    else
-    {
-        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        HideBattlerShadowSprite(gActiveBattler);
-        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
-        RecordedOpponentBufferExecCompleted();
-    }
-}
-
-static void DoSwitchOutAnimation(void)
-{
-    switch (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState)
-    {
-    case 0:
-        if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute)
-            InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SUBSTITUTE_TO_MON);
-
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 1;
-        break;
-    case 1:
-        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
-        {
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
-            InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SWITCH_OUT_OPPONENT_MON);
-            gBattlerControllerFuncs[gActiveBattler] = FreeMonSpriteAfterSwitchOutAnim;
-        }
-        break;
-    }
+    BtlController_HandleReturnMonToBall(gActiveBattler);
 }
 
 #define sSpeedX data[0]

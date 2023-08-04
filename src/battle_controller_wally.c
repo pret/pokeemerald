@@ -169,6 +169,7 @@ static void SpriteCB_Null7(void)
 
 void SetControllerToWally(void)
 {
+    gBattlerControllerEndFuncs[gActiveBattler] = WallyBufferExecCompleted;
     gBattlerControllerFuncs[gActiveBattler] = WallyBufferRunCommand;
     gBattleStruct->wallyBattleState = 0;
     gBattleStruct->wallyMovesState = 0;
@@ -380,17 +381,6 @@ static void DoHitAnimBlinkSpriteEffect(void)
     }
 }
 
-static void DoSwitchOutAnimation(void)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
-    {
-        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
-        WallyBufferExecCompleted();
-    }
-}
-
 static void CompleteOnBankSpriteCallbackDummy2(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
@@ -427,17 +417,17 @@ static void CompleteOnFinishedStatusAnimation(void)
 
 static void WallyHandleGetMonData(void)
 {
-    BtlController_HandleGetMonData(gActiveBattler, gPlayerParty, WallyBufferExecCompleted);
+    BtlController_HandleGetMonData(gActiveBattler, gPlayerParty);
 }
 
 static void WallyHandleGetRawMonData(void)
 {
-    BtlController_HandleGetRawMonData(gActiveBattler, gPlayerParty, WallyBufferExecCompleted);
+    BtlController_HandleGetRawMonData(gActiveBattler, gPlayerParty);
 }
 
 static void WallyHandleSetMonData(void)
 {
-    BtlController_HandleSetMonData(gActiveBattler, gPlayerParty, WallyBufferExecCompleted);
+    BtlController_HandleSetMonData(gActiveBattler, gPlayerParty);
 }
 
 static void WallyHandleSetRawMonData(void)
@@ -457,18 +447,7 @@ static void WallyHandleSwitchInAnim(void)
 
 static void WallyHandleReturnMonToBall(void)
 {
-    if (gBattleResources->bufferA[gActiveBattler][1] == 0)
-    {
-        InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SWITCH_OUT_PLAYER_MON);
-        gBattlerControllerFuncs[gActiveBattler] = DoSwitchOutAnimation;
-    }
-    else
-    {
-        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
-        WallyBufferExecCompleted();
-    }
+    BtlController_HandleReturnMonToBall(gActiveBattler);
 }
 
 #define sSpeedX data[0]

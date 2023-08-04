@@ -37,6 +37,7 @@
 #include "constants/trainers.h"
 #include "constants/rgb.h"
 
+static void PlayerBufferExecCompleted(void);
 static void PlayerHandleGetMonData(void);
 static void PlayerHandleGetRawMonData(void);
 static void PlayerHandleSetMonData(void);
@@ -115,7 +116,6 @@ static void Task_UpdateLvlInHealthbox(u8);
 static void PrintLinkStandbyMsg(void);
 static u32 CopyPlayerMonData(u8, u8 *);
 static void SetPlayerMonData(u8);
-static void DoSwitchOutAnimation(void);
 static void PlayerDoMoveAnimation(void);
 static void Task_StartSendOutAnim(u8);
 static void EndDrawPartyStatusSummary(void);
@@ -184,15 +184,13 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TERMINATOR_NOP]           = PlayerCmdEnd
 };
 
-// unknown unused data
-static const u8 sUnused[] = {0x48, 0x48, 0x20, 0x5a, 0x50, 0x50, 0x50, 0x58};
-
 void BattleControllerDummy(void)
 {
 }
 
 void SetControllerToPlayer(void)
 {
+    gBattlerControllerEndFuncs[gActiveBattler] = PlayerBufferExecCompleted;
     gBattlerControllerFuncs[gActiveBattler] = PlayerBufferRunCommand;
     gDoingBattleAnim = FALSE;
     gPlayerDpadHoldFrames = 0;
@@ -1545,17 +1543,6 @@ static void FreeMonSpriteAfterFaintAnim(void)
     }
 }
 
-static void FreeMonSpriteAfterSwitchOutAnim(void)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
-    {
-        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
-        PlayerBufferExecCompleted();
-    }
-}
-
 static void CompleteOnInactiveTextPrinter2(void)
 {
     if (!IsTextPrinterActive(B_WIN_MSG))
@@ -1801,22 +1788,22 @@ static void PrintLinkStandbyMsg(void)
 
 static void PlayerHandleGetMonData(void)
 {
-    BtlController_HandleGetMonData(gActiveBattler, gPlayerParty, PlayerBufferExecCompleted);
+    BtlController_HandleGetMonData(gActiveBattler, gPlayerParty);
 }
 
 static void PlayerHandleGetRawMonData(void)
 {
-    BtlController_HandleGetRawMonData(gActiveBattler, gPlayerParty, PlayerBufferExecCompleted);
+    BtlController_HandleGetRawMonData(gActiveBattler, gPlayerParty);
 }
 
 static void PlayerHandleSetMonData(void)
 {
-    BtlController_HandleSetMonData(gActiveBattler, gPlayerParty, PlayerBufferExecCompleted);
+    BtlController_HandleSetMonData(gActiveBattler, gPlayerParty);
 }
 
 static void PlayerHandleSetRawMonData(void)
 {
-    BtlController_HandleSetRawMonData(gActiveBattler, gPlayerParty, PlayerBufferExecCompleted);
+    BtlController_HandleSetRawMonData(gActiveBattler, gPlayerParty);
 }
 
 static void PlayerHandleLoadMonSprite(void)
@@ -1835,40 +1822,7 @@ static void PlayerHandleSwitchInAnim(void)
 
 static void PlayerHandleReturnMonToBall(void)
 {
-    if (!gBattleResources->bufferA[gActiveBattler][1])
-    {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
-        gBattlerControllerFuncs[gActiveBattler] = DoSwitchOutAnimation;
-    }
-    else
-    {
-        // Skip animation, just remove battler
-        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
-        PlayerBufferExecCompleted();
-    }
-}
-
-static void DoSwitchOutAnimation(void)
-{
-    switch (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState)
-    {
-    case 0:
-        if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute)
-            InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SUBSTITUTE_TO_MON);
-
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 1;
-        break;
-    case 1:
-        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
-        {
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
-            InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SWITCH_OUT_PLAYER_MON);
-            gBattlerControllerFuncs[gActiveBattler] = FreeMonSpriteAfterSwitchOutAnim;
-        }
-        break;
-    }
+    BtlController_HandleReturnMonToBall(gActiveBattler);
 }
 
 #define sSpeedX data[0]

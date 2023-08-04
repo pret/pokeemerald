@@ -93,7 +93,6 @@ static void LinkOpponentBufferExecCompleted(void);
 static void SwitchIn_HandleSoundAndEnd(void);
 static u32 CopyLinkOpponentMonData(u8 monId, u8 *dst);
 static void SetLinkOpponentMonData(u8 monId);
-static void DoSwitchOutAnimation(void);
 static void LinkOpponentDoMoveAnimation(void);
 static void Task_StartSendOutAnim(u8 taskId);
 static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite);
@@ -167,6 +166,7 @@ static void LinkOpponentDummy(void)
 
 void SetControllerToLinkOpponent(void)
 {
+    gBattlerControllerEndFuncs[gActiveBattler] = LinkOpponentBufferExecCompleted;
     gBattlerControllerFuncs[gActiveBattler] = LinkOpponentBufferRunCommand;
 }
 
@@ -401,18 +401,6 @@ static void HideHealthboxAfterMonFaint(void)
     }
 }
 
-static void FreeMonSpriteAfterSwitchOutAnim(void)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
-    {
-        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        HideBattlerShadowSprite(gActiveBattler);
-        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
-        LinkOpponentBufferExecCompleted();
-    }
-}
-
 static void CompleteOnInactiveTextPrinter(void)
 {
     if (!IsTextPrinterActive(B_WIN_MSG))
@@ -530,7 +518,7 @@ static void LinkOpponentBufferExecCompleted(void)
 
 static void LinkOpponentHandleGetMonData(void)
 {
-    BtlController_HandleGetMonData(gActiveBattler, gEnemyParty, LinkOpponentBufferExecCompleted);
+    BtlController_HandleGetMonData(gActiveBattler, gEnemyParty);
 }
 
 static void LinkOpponentHandleGetRawMonData(void)
@@ -540,12 +528,12 @@ static void LinkOpponentHandleGetRawMonData(void)
 
 static void LinkOpponentHandleSetMonData(void)
 {
-    BtlController_HandleSetMonData(gActiveBattler, gEnemyParty, LinkOpponentBufferExecCompleted);
+    BtlController_HandleSetMonData(gActiveBattler, gEnemyParty);
 }
 
 static void LinkOpponentHandleSetRawMonData(void)
 {
-    BtlController_HandleSetRawMonData(gActiveBattler, gEnemyParty, LinkOpponentBufferExecCompleted);
+    BtlController_HandleSetRawMonData(gActiveBattler, gEnemyParty);
 }
 
 static void LinkOpponentHandleLoadMonSprite(void)
@@ -560,40 +548,7 @@ static void LinkOpponentHandleSwitchInAnim(void)
 
 static void LinkOpponentHandleReturnMonToBall(void)
 {
-    if (gBattleResources->bufferA[gActiveBattler][1] == 0)
-    {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
-        gBattlerControllerFuncs[gActiveBattler] = DoSwitchOutAnimation;
-    }
-    else
-    {
-        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        HideBattlerShadowSprite(gActiveBattler);
-        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
-        LinkOpponentBufferExecCompleted();
-    }
-}
-
-static void DoSwitchOutAnimation(void)
-{
-    switch (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState)
-    {
-    case 0:
-        if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute)
-            InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SUBSTITUTE_TO_MON);
-
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 1;
-        break;
-    case 1:
-        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
-        {
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
-            InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SWITCH_OUT_OPPONENT_MON);
-            gBattlerControllerFuncs[gActiveBattler] = FreeMonSpriteAfterSwitchOutAnim;
-        }
-        break;
-    }
+    BtlController_HandleReturnMonToBall(gActiveBattler);
 }
 
 #define sSpeedX data[0]

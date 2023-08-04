@@ -4,6 +4,7 @@
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_gfx_sfx_util.h"
+#include "battle_interface.h"
 #include "battle_message.h"
 #include "battle_setup.h"
 #include "cable_club.h"
@@ -18,7 +19,7 @@
 
 static EWRAM_DATA u8 sLinkSendTaskId = 0;
 static EWRAM_DATA u8 sLinkReceiveTaskId = 0;
-static EWRAM_DATA u8 sUnused = 0; // Debug? Never read
+EWRAM_DATA void (*gBattlerControllerEndFuncs[MAX_BATTLERS_COUNT])(void) = {NULL}; // Controller's buffer complete function for each battler
 EWRAM_DATA struct UnusedControllerStruct gUnusedControllerStruct = {}; // Debug? Unused code that writes to it, never read
 static EWRAM_DATA u8 sBattleBuffersTransferData[0x100] = {};
 
@@ -696,8 +697,6 @@ static void CreateTasksForSendRecvLinkBuffers(void)
     gTasks[sLinkReceiveTaskId].data[13] = 0;
     gTasks[sLinkReceiveTaskId].data[14] = 0;
     gTasks[sLinkReceiveTaskId].data[15] = 0;
-
-    sUnused = 0;
 }
 
 enum
@@ -1550,6 +1549,11 @@ void BtlController_EmitDebugMenu(u8 bufferId)
 }
 
 // Standardized Controller functions
+void BattleControllerComplete(u32 battler)
+{
+    gBattlerControllerEndFuncs[battler]();
+}
+
 static u32 GetBattlerMonData(u32 battler, struct Pokemon *party, u32 monId, u8 *dst)
 {
     struct BattlePokemon battleMon;
@@ -2109,7 +2113,46 @@ void StartSendOutAnim(u32 battler, bool32 dontClearSubstituteBit)
     gSprites[gBattleControllerData[battler]].data[0] = DoPokeballSendOutAnimation(0, (side == B_SIDE_OPPONENT) ? POKEBALL_OPPONENT_SENDOUT : POKEBALL_PLAYER_SENDOUT);
 }
 
-void BtlController_HandleGetMonData(u32 battler, struct Pokemon *party,  void (*execCompleteFunc)(void))
+static void FreeMonSprite(u32 battler)
+{
+    FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[battler]]);
+    DestroySprite(&gSprites[gBattlerSpriteIds[battler]]);
+    if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        HideBattlerShadowSprite(battler);
+    SetHealthboxSpriteInvisible(gHealthboxSpriteIds[battler]);
+}
+
+static void FreeMonSpriteAfterSwitchOutAnim(void)
+{
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
+    {
+        FreeMonSprite(gActiveBattler);
+        BattleControllerComplete(gActiveBattler);
+    }
+}
+
+static void DoSwitchOutAnimation(void)
+{
+    switch (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState)
+    {
+    case 0:
+        if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute)
+            InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SUBSTITUTE_TO_MON);
+
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 1;
+        break;
+    case 1:
+        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
+        {
+            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
+            InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT) ? B_ANIM_SWITCH_OUT_OPPONENT_MON : B_ANIM_SWITCH_OUT_PLAYER_MON);
+            gBattlerControllerFuncs[gActiveBattler] = FreeMonSpriteAfterSwitchOutAnim;
+        }
+        break;
+    }
+}
+
+void BtlController_HandleGetMonData(u32 battler, struct Pokemon *party)
 {
     u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two pokemon, trying to get more will result in overwriting data
     u32 size = 0;
@@ -2131,10 +2174,10 @@ void BtlController_HandleGetMonData(u32 battler, struct Pokemon *party,  void (*
         }
     }
     BtlController_EmitDataTransfer(BUFFER_B, size, monData);
-    execCompleteFunc();
+    BattleControllerComplete(battler);
 }
 
-void BtlController_HandleGetRawMonData(u32 battler, struct Pokemon *party,  void (*execCompleteFunc)(void))
+void BtlController_HandleGetRawMonData(u32 battler, struct Pokemon *party)
 {
     struct BattlePokemon battleMon;
     u8 *src = (u8 *)&party[gBattlerPartyIndexes[battler]] + gBattleResources->bufferA[battler][1];
@@ -2145,10 +2188,10 @@ void BtlController_HandleGetRawMonData(u32 battler, struct Pokemon *party,  void
         dst[i] = src[i];
 
     BtlController_EmitDataTransfer(BUFFER_B, gBattleResources->bufferA[battler][2], dst);
-    execCompleteFunc();
+    BattleControllerComplete(battler);
 }
 
-void BtlController_HandleSetMonData(u32 battler, struct Pokemon *party,  void (*execCompleteFunc)(void))
+void BtlController_HandleSetMonData(u32 battler, struct Pokemon *party)
 {
     u32 i, monToCheck;
 
@@ -2166,10 +2209,10 @@ void BtlController_HandleSetMonData(u32 battler, struct Pokemon *party,  void (*
             monToCheck >>= 1;
         }
     }
-    execCompleteFunc();
+    BattleControllerComplete(battler);
 }
 
-void BtlController_HandleSetRawMonData(u32 battler, struct Pokemon *party,  void (*execCompleteFunc)(void))
+void BtlController_HandleSetRawMonData(u32 battler, struct Pokemon *party)
 {
     u32 i;
     u8 *dst = (u8 *)&party[gBattlerPartyIndexes[battler]] + gBattleResources->bufferA[battler][1];
@@ -2177,7 +2220,7 @@ void BtlController_HandleSetRawMonData(u32 battler, struct Pokemon *party,  void
     for (i = 0; i < gBattleResources->bufferA[battler][2]; i++)
         dst[i] = gBattleResources->bufferA[battler][3 + i];
 
-    execCompleteFunc();
+    BattleControllerComplete(battler);
 }
 
 void BtlController_HandleLoadMonSprite(u32 battler, struct Pokemon *party,  void (*controllerFunc)(void))
@@ -2212,4 +2255,18 @@ void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*c
         BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
     StartSendOutAnim(battler, gBattleResources->bufferA[battler][2]);
     gBattlerControllerFuncs[battler] = controllerFunc;
+}
+
+void BtlController_HandleReturnMonToBall(u32 battler)
+{
+    if (gBattleResources->bufferA[battler][1] == 0)
+    {
+        gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 0;
+        gBattlerControllerFuncs[battler] = DoSwitchOutAnimation;
+    }
+    else
+    {
+        FreeMonSprite(battler);
+        BattleControllerComplete(battler);
+    }
 }

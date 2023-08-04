@@ -91,7 +91,6 @@ static void RecordedPlayerBufferExecCompleted(void);
 static void SwitchIn_WaitAndEnd(void);
 static u32 CopyRecordedPlayerMonData(u8 monId, u8 *dst);
 static void SetRecordedPlayerMonData(u8 monId);
-static void DoSwitchOutAnimation(void);
 static void RecordedPlayerDoMoveAnimation(void);
 static void Task_StartSendOutAnim(u8 taskId);
 static void EndDrawPartyStatusSummary(void);
@@ -163,6 +162,7 @@ static void RecordedPlayerDummy(void)
 
 void SetControllerToRecordedPlayer(void)
 {
+    gBattlerControllerEndFuncs[gActiveBattler] = RecordedPlayerBufferExecCompleted;
     gBattlerControllerFuncs[gActiveBattler] = RecordedPlayerBufferRunCommand;
 }
 
@@ -376,17 +376,6 @@ static void FreeMonSpriteAfterFaintAnim(void)
     }
 }
 
-static void FreeMonSpriteAfterSwitchOutAnim(void)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
-    {
-        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
-        RecordedPlayerBufferExecCompleted();
-    }
-}
-
 static void CompleteOnInactiveTextPrinter(void)
 {
     if (!IsTextPrinterActive(B_WIN_MSG))
@@ -500,7 +489,7 @@ static void CompleteOnFinishedBattleAnimation(void)
 
 static void RecordedPlayerHandleGetMonData(void)
 {
-    BtlController_HandleGetMonData(gActiveBattler, gPlayerParty, RecordedPlayerBufferExecCompleted);
+    BtlController_HandleGetMonData(gActiveBattler, gPlayerParty);
 }
 
 static void RecordedPlayerHandleGetRawMonData(void)
@@ -510,12 +499,12 @@ static void RecordedPlayerHandleGetRawMonData(void)
 
 static void RecordedPlayerHandleSetMonData(void)
 {
-    BtlController_HandleSetMonData(gActiveBattler, gPlayerParty, RecordedPlayerBufferExecCompleted);
+    BtlController_HandleSetMonData(gActiveBattler, gPlayerParty);
 }
 
 static void RecordedPlayerHandleSetRawMonData(void)
 {
-    BtlController_HandleSetRawMonData(gActiveBattler, gPlayerParty, RecordedPlayerBufferExecCompleted);
+    BtlController_HandleSetRawMonData(gActiveBattler, gPlayerParty);
 }
 
 static void RecordedPlayerHandleLoadMonSprite(void)
@@ -530,39 +519,7 @@ static void RecordedPlayerHandleSwitchInAnim(void)
 
 static void RecordedPlayerHandleReturnMonToBall(void)
 {
-    if (gBattleResources->bufferA[gActiveBattler][1] == 0)
-    {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
-        gBattlerControllerFuncs[gActiveBattler] = DoSwitchOutAnimation;
-    }
-    else
-    {
-        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
-        RecordedPlayerBufferExecCompleted();
-    }
-}
-
-static void DoSwitchOutAnimation(void)
-{
-    switch (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState)
-    {
-    case 0:
-        if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute)
-            InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SUBSTITUTE_TO_MON);
-
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 1;
-        break;
-    case 1:
-        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
-        {
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
-            InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SWITCH_OUT_PLAYER_MON);
-            gBattlerControllerFuncs[gActiveBattler] = FreeMonSpriteAfterSwitchOutAnim;
-        }
-        break;
-    }
+    BtlController_HandleReturnMonToBall(gActiveBattler);
 }
 
 #define sSpeedX data[0]

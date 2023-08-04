@@ -155,6 +155,7 @@ static void SpriteCB_Null4(void)
 
 void SetControllerToSafari(void)
 {
+    gBattlerControllerEndFuncs[gActiveBattler] = SafariBufferExecCompleted;
     gBattlerControllerFuncs[gActiveBattler] = SafariBufferRunCommand;
 }
 
