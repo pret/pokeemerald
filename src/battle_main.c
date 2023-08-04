@@ -565,8 +565,8 @@ static void CB2_InitBattleInternal(void)
     gBattle_BG3_X = 0;
     gBattle_BG3_Y = 0;
 
-#if DEBUG_OVERWORLD_MENU == FALSE 
-    
+#if DEBUG_OVERWORLD_MENU == FALSE
+
     gBattleTerrain = BattleSetup_GetTerrainId();
 #else
     if (!gIsDebugBattle)
@@ -594,7 +594,7 @@ static void CB2_InitBattleInternal(void)
     else
         SetMainCallback2(CB2_HandleStartBattle);
 
-#if DEBUG_OVERWORLD_MENU == FALSE 
+#if DEBUG_OVERWORLD_MENU == FALSE
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED)))
     {
         CreateNPCTrainerParty(&gEnemyParty[0], gTrainerBattleOpponent_A, TRUE);
@@ -2814,8 +2814,6 @@ void SpriteCB_FaintOpponentMon(struct Sprite *sprite)
         species = gBattleSpritesDataPtr->battlerData[battler].transformSpecies;
     else
         species = sprite->sSpeciesId;
-
-    GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_PERSONALITY);  // Unused return value.
 
     if (species == SPECIES_UNOWN)
     {

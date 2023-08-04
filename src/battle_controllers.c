@@ -13,9 +13,11 @@
 #include "party_menu.h"
 #include "recorded_battle.h"
 #include "string_util.h"
+#include "sound.h"
 #include "task.h"
 #include "util.h"
 #include "constants/abilities.h"
+#include "constants/songs.h"
 
 static EWRAM_DATA u8 sLinkSendTaskId = 0;
 static EWRAM_DATA u8 sLinkReceiveTaskId = 0;
@@ -2122,7 +2124,7 @@ static void FreeMonSprite(u32 battler)
     SetHealthboxSpriteInvisible(gHealthboxSpriteIds[battler]);
 }
 
-static void FreeMonSpriteAfterSwitchOutAnim(void)
+static void Controller_ReturnMonToBall2(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
     {
@@ -2131,7 +2133,7 @@ static void FreeMonSpriteAfterSwitchOutAnim(void)
     }
 }
 
-static void DoSwitchOutAnimation(void)
+static void Controller_ReturnMonToBall(void)
 {
     switch (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState)
     {
@@ -2146,12 +2148,35 @@ static void DoSwitchOutAnimation(void)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
             InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT) ? B_ANIM_SWITCH_OUT_OPPONENT_MON : B_ANIM_SWITCH_OUT_PLAYER_MON);
-            gBattlerControllerFuncs[gActiveBattler] = FreeMonSpriteAfterSwitchOutAnim;
+            gBattlerControllerFuncs[gActiveBattler] = Controller_ReturnMonToBall2;
         }
         break;
     }
 }
 
+static void Controller_FaintPlayerMon(void)
+{
+    u32 spriteId = gBattlerSpriteIds[gActiveBattler];
+    if (gSprites[spriteId].y + gSprites[spriteId].y2 > DISPLAY_HEIGHT)
+    {
+        BattleGfxSfxDummy2(GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES));
+        FreeOamMatrix(gSprites[spriteId].oam.matrixNum);
+        DestroySprite(&gSprites[spriteId]);
+        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
+        BattleControllerComplete(gActiveBattler);
+    }
+}
+
+static void Controller_FaintOpponentMon(void)
+{
+    if (!gSprites[gBattlerSpriteIds[gActiveBattler]].inUse)
+    {
+        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
+        BattleControllerComplete(gActiveBattler);
+    }
+}
+
+// Handlers of all the controller commands
 void BtlController_HandleGetMonData(u32 battler, struct Pokemon *party)
 {
     u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two pokemon, trying to get more will result in overwriting data
@@ -2223,7 +2248,7 @@ void BtlController_HandleSetRawMonData(u32 battler, struct Pokemon *party)
     BattleControllerComplete(battler);
 }
 
-void BtlController_HandleLoadMonSprite(u32 battler, struct Pokemon *party,  void (*controllerFunc)(void))
+void BtlController_HandleLoadMonSprite(u32 battler, struct Pokemon *party, void (*controllerCallback)(void))
 {
     u16 species = GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
 
@@ -2243,10 +2268,10 @@ void BtlController_HandleLoadMonSprite(u32 battler, struct Pokemon *party,  void
 
     SetBattlerShadowSpriteCallback(battler, species);
 
-    gBattlerControllerFuncs[battler] = controllerFunc;
+    gBattlerControllerFuncs[battler] = controllerCallback;
 }
 
-void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*controllerFunc)(void))
+void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*controllerCallback)(void))
 {
     if (isPlayerSide)
         ClearTemporarySpeciesSpriteData(battler, gBattleResources->bufferA[battler][2]);
@@ -2254,7 +2279,7 @@ void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*c
     if (isPlayerSide)
         BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
     StartSendOutAnim(battler, gBattleResources->bufferA[battler][2]);
-    gBattlerControllerFuncs[battler] = controllerFunc;
+    gBattlerControllerFuncs[battler] = controllerCallback;
 }
 
 void BtlController_HandleReturnMonToBall(u32 battler)
@@ -2262,7 +2287,7 @@ void BtlController_HandleReturnMonToBall(u32 battler)
     if (gBattleResources->bufferA[battler][1] == 0)
     {
         gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 0;
-        gBattlerControllerFuncs[battler] = DoSwitchOutAnimation;
+        gBattlerControllerFuncs[battler] = Controller_ReturnMonToBall;
     }
     else
     {
@@ -2270,3 +2295,43 @@ void BtlController_HandleReturnMonToBall(u32 battler)
         BattleControllerComplete(battler);
     }
 }
+
+#define sSpeedX data[1]
+#define sSpeedY data[2]
+
+void BtlController_HandleFaintAnimation(u32 battler)
+{
+    if (gBattleSpritesDataPtr->healthBoxesData[battler].animationState == 0)
+    {
+        if (gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
+            InitAndLaunchSpecialAnimation(battler, battler, battler, B_ANIM_SUBSTITUTE_TO_MON);
+        gBattleSpritesDataPtr->healthBoxesData[battler].animationState++;
+    }
+    else
+    {
+        if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive)
+        {
+            gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 0;
+            if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+            {
+                HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
+                gSprites[gBattlerSpriteIds[battler]].sSpeedX = 0;
+                gSprites[gBattlerSpriteIds[battler]].sSpeedY = 5;
+                PlaySE12WithPanning(SE_FAINT, SOUND_PAN_ATTACKER);
+                gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_FaintSlideAnim;
+                gBattlerControllerFuncs[battler] = Controller_FaintPlayerMon;
+            }
+            else
+            {
+                PlaySE12WithPanning(SE_FAINT, SOUND_PAN_TARGET);
+                gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_FaintOpponentMon;
+                gBattlerControllerFuncs[battler] = Controller_FaintOpponentMon;
+            }
+            // The player's sprite callback just slides the mon, the opponent's removes the sprite.
+            // The player's sprite is removed in Controller_FaintPlayerMon. Controller_FaintOpponentMon only removes the healthbox once the sprite is removed by SpriteCB_FaintOpponentMon.
+        }
+    }
+}
+
+#undef sSpeedX
+#undef sSpeedY

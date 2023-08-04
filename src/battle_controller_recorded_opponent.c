@@ -382,15 +382,6 @@ static void CompleteOnHealthbarDone(void)
         RecordedOpponentBufferExecCompleted();
 }
 
-static void HideHealthboxAfterMonFaint(void)
-{
-    if (!gSprites[gBattlerSpriteIds[gActiveBattler]].inUse)
-    {
-        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
-        RecordedOpponentBufferExecCompleted();
-    }
-}
-
 static void CompleteOnInactiveTextPrinter(void)
 {
     if (!IsTextPrinterActive(B_WIN_MSG))
@@ -615,22 +606,7 @@ static void RecordedOpponentHandleTrainerSlideBack(void)
 
 static void RecordedOpponentHandleFaintAnimation(void)
 {
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState == 0)
-    {
-        if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute)
-            InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SUBSTITUTE_TO_MON);
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState++;
-    }
-    else
-    {
-        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
-        {
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
-            PlaySE12WithPanning(SE_FAINT, SOUND_PAN_TARGET);
-            gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_FaintOpponentMon;
-            gBattlerControllerFuncs[gActiveBattler] = HideHealthboxAfterMonFaint;
-        }
-    }
+    BtlController_HandleFaintAnimation(gActiveBattler);
 }
 
 static void RecordedOpponentHandlePaletteFade(void)

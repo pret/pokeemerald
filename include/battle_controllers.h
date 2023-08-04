@@ -258,9 +258,10 @@ void BtlController_HandleGetMonData(u32 battler, struct Pokemon *party);
 void BtlController_HandleGetRawMonData(u32 battler, struct Pokemon *party);
 void BtlController_HandleSetMonData(u32 battler, struct Pokemon *party);
 void BtlController_HandleSetRawMonData(u32 battler, struct Pokemon *party);
-void BtlController_HandleLoadMonSprite(u32 battler, struct Pokemon *party,  void (*controllerFunc)(void));
-void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*controllerFunc)(void));
+void BtlController_HandleLoadMonSprite(u32 battler, struct Pokemon *party,  void (*controllerCallback)(void));
+void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*controllerCallback)(void));
 void BtlController_HandleReturnMonToBall(u32 battler);
+void BtlController_HandleFaintAnimation(u32 battler);
 
 // player controller
 void SetControllerToPlayer(void);
