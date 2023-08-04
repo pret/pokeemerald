@@ -251,10 +251,15 @@ void BtlController_EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
 void BtlController_EmitEndLinkBattle(u8 bufferId, u8 battleOutcome);
 void BtlController_EmitDebugMenu(u8 bufferId);
 
+void BtlController_HandleGetMonData(u32 battler, struct Pokemon *party,  void (*execCompleteFunc)(void));
+void BtlController_HandleGetRawMonData(u32 battler, struct Pokemon *party,  void (*execCompleteFunc)(void));
+void BtlController_HandleSetMonData(u32 battler, struct Pokemon *party,  void (*execCompleteFunc)(void));
+void BtlController_HandleSetRawMonData(u32 battler, struct Pokemon *party,  void (*execCompleteFunc)(void));
+void BtlController_HandleLoadMonSprite(u32 battler, struct Pokemon *party,  void (*controllerFunc)(void));
+
 // player controller
 void SetControllerToPlayer(void);
 void BattleControllerDummy(void);
-void PlayerHandleGetRawMonData(void);
 void SetBattleEndCallbacks(void);
 void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);
 void CB2_SetUpReshowBattleScreenAfterMenu(void);
