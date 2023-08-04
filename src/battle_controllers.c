@@ -863,7 +863,7 @@ void TryReceiveLinkBattleData(void)
 static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
 {
     u16 blockSize;
-    u8 battlerId;
+    u8 battler;
     u8 var;
 
     if (gTasks[taskId].data[15] != gTasks[taskId].data[14])
@@ -874,17 +874,17 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
             gTasks[taskId].data[12] = 0;
             gTasks[taskId].data[15] = 0;
         }
-        battlerId = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_ACTIVE_BATTLER];
+        battler = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_ACTIVE_BATTLER];
         blockSize = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_SIZE_LO] | (gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_SIZE_HI] << 8);
 
         switch (gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 0])
         {
         case 0:
-            if (gBattleControllerExecFlags & gBitTable[battlerId])
+            if (gBattleControllerExecFlags & gBitTable[battler])
                 return;
 
-            memcpy(gBattleResources->bufferA[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA], blockSize);
-            MarkBattlerReceivedLinkData(battlerId);
+            memcpy(gBattleResources->bufferA[battler], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA], blockSize);
+            MarkBattlerReceivedLinkData(battler);
 
             if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
             {
@@ -895,11 +895,11 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
             }
             break;
         case 1:
-            memcpy(gBattleResources->bufferB[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA], blockSize);
+            memcpy(gBattleResources->bufferB[battler], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA], blockSize);
             break;
         case 2:
             var = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA];
-            gBattleControllerExecFlags &= ~(gBitTable[battlerId] << (var * 4));
+            gBattleControllerExecFlags &= ~(gBitTable[battler] << (var * 4));
             break;
         }
 
@@ -2075,6 +2075,39 @@ static void SetBattlerMonData(u32 battler, struct Pokemon *party, u32 monId)
         HandleLowHpMusicChange(&party[gBattlerPartyIndexes[battler]], battler);
 }
 
+void StartSendOutAnim(u32 battler, bool32 dontClearSubstituteBit)
+{
+    u16 species;
+    u32 side = GetBattlerSide(battler);
+    struct Pokemon *party = GetBattlerParty(battler);
+
+    ClearTemporarySpeciesSpriteData(battler, dontClearSubstituteBit);
+    gBattlerPartyIndexes[battler] = gBattleResources->bufferA[battler][1];
+    species = GetIllusionMonSpecies(battler);
+    if (species == SPECIES_NONE)
+        species = GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
+    gBattleControllerData[battler] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
+    // Load sprite for opponent only, player sprite is expected to be already loaded.
+    if (side == B_SIDE_OPPONENT)
+        BattleLoadMonSpriteGfx(&party[gBattlerPartyIndexes[battler]], battler);
+    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battler));
+
+    gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,
+                                        GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2),
+                                        GetBattlerSpriteDefault_Y(battler),
+                                        GetBattlerSpriteSubpriority(battler));
+
+    gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
+    gSprites[gBattlerSpriteIds[battler]].data[2] = species;
+    gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
+    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 0);
+    gSprites[gBattlerSpriteIds[battler]].invisible = TRUE;
+    gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
+
+    gSprites[gBattleControllerData[battler]].data[1] = gBattlerSpriteIds[battler];
+    gSprites[gBattleControllerData[battler]].data[2] = battler;
+    gSprites[gBattleControllerData[battler]].data[0] = DoPokeballSendOutAnimation(0, (side == B_SIDE_OPPONENT) ? POKEBALL_OPPONENT_SENDOUT : POKEBALL_PLAYER_SENDOUT);
+}
 
 void BtlController_HandleGetMonData(u32 battler, struct Pokemon *party,  void (*execCompleteFunc)(void))
 {
@@ -2151,7 +2184,7 @@ void BtlController_HandleLoadMonSprite(u32 battler, struct Pokemon *party,  void
 {
     u16 species = GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
 
-    BattleLoadMonSpriteGfx(&party[gBattlerPartyIndexes[battler]], battler, GetBattlerSide(battler));
+    BattleLoadMonSpriteGfx(&party[gBattlerPartyIndexes[battler]], battler);
     SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battler));
 
     gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,
@@ -2167,5 +2200,16 @@ void BtlController_HandleLoadMonSprite(u32 battler, struct Pokemon *party,  void
 
     SetBattlerShadowSpriteCallback(battler, species);
 
+    gBattlerControllerFuncs[battler] = controllerFunc;
+}
+
+void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*controllerFunc)(void))
+{
+    if (isPlayerSide)
+        ClearTemporarySpeciesSpriteData(battler, gBattleResources->bufferA[battler][2]);
+    gBattlerPartyIndexes[battler] = gBattleResources->bufferA[battler][1];
+    if (isPlayerSide)
+        BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
+    StartSendOutAnim(battler, gBattleResources->bufferA[battler][2]);
     gBattlerControllerFuncs[battler] = controllerFunc;
 }
