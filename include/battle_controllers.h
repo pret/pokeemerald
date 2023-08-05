@@ -257,10 +257,10 @@ void BtlController_TerminatorNop(void); // Dummy function at the end of the tabl
 void StartSendOutAnim(u32 battler, bool32 dontClearSubstituteBit);
 
 // handlers
-void BtlController_HandleGetMonData(u32 battler, struct Pokemon *party);
-void BtlController_HandleGetRawMonData(u32 battler, struct Pokemon *party);
-void BtlController_HandleSetMonData(u32 battler, struct Pokemon *party);
-void BtlController_HandleSetRawMonData(u32 battler, struct Pokemon *party);
+void BtlController_HandleGetMonData(void);
+void BtlController_HandleGetRawMonData(void);
+void BtlController_HandleSetMonData(void);
+void BtlController_HandleSetRawMonData(void);
 void BtlController_HandleLoadMonSprite(u32 battler, struct Pokemon *party,  void (*controllerCallback)(void));
 void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*controllerCallback)(void));
 void BtlController_HandleReturnMonToBall(u32 battler);

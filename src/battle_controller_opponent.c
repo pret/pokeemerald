@@ -39,10 +39,6 @@
 #include "constants/trainers.h"
 #include "trainer_hill.h"
 
-static void OpponentHandleGetMonData(void);
-static void OpponentHandleGetRawMonData(void);
-static void OpponentHandleSetMonData(void);
-static void OpponentHandleSetRawMonData(void);
 static void OpponentHandleLoadMonSprite(void);
 static void OpponentHandleSwitchInAnim(void);
 static void OpponentHandleReturnMonToBall(void);
@@ -85,10 +81,10 @@ static void EndDrawPartyStatusSummary(void);
 
 static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
-    [CONTROLLER_GETMONDATA]               = OpponentHandleGetMonData,
-    [CONTROLLER_GETRAWMONDATA]            = OpponentHandleGetRawMonData,
-    [CONTROLLER_SETMONDATA]               = OpponentHandleSetMonData,
-    [CONTROLLER_SETRAWMONDATA]            = OpponentHandleSetRawMonData,
+    [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,
+    [CONTROLLER_GETRAWMONDATA]            = BtlController_HandleGetRawMonData,
+    [CONTROLLER_SETMONDATA]               = BtlController_HandleSetMonData,
+    [CONTROLLER_SETRAWMONDATA]            = BtlController_HandleSetRawMonData,
     [CONTROLLER_LOADMONSPRITE]            = OpponentHandleLoadMonSprite,
     [CONTROLLER_SWITCHINANIM]             = OpponentHandleSwitchInAnim,
     [CONTROLLER_RETURNMONTOBALL]          = OpponentHandleReturnMonToBall,
@@ -497,26 +493,6 @@ static void OpponentBufferExecCompleted(void)
     {
         gBattleControllerExecFlags &= ~gBitTable[gActiveBattler];
     }
-}
-
-static void OpponentHandleGetMonData(void)
-{
-    BtlController_HandleGetMonData(gActiveBattler, gEnemyParty);
-}
-
-static void OpponentHandleGetRawMonData(void)
-{
-    BtlController_HandleGetRawMonData(gActiveBattler, gEnemyParty);
-}
-
-static void OpponentHandleSetMonData(void)
-{
-    BtlController_HandleSetMonData(gActiveBattler, gEnemyParty);
-}
-
-static void OpponentHandleSetRawMonData(void)
-{
-    BtlController_HandleSetRawMonData(gActiveBattler, gEnemyParty);
 }
 
 static void OpponentHandleLoadMonSprite(void)

@@ -2195,10 +2195,12 @@ void BtlController_TerminatorNop(void)
 {
 }
 
-// Handlers of all the controller commands
-void BtlController_HandleGetMonData(u32 battler, struct Pokemon *party)
+// Handlers of the controller commands
+void BtlController_HandleGetMonData(void)
 {
     u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two pokemon, trying to get more will result in overwriting data
+    u32 battler = gActiveBattler;
+    struct Pokemon *party = GetBattlerParty(battler);
     u32 size = 0;
     u8 monToCheck;
     s32 i;
@@ -2221,9 +2223,12 @@ void BtlController_HandleGetMonData(u32 battler, struct Pokemon *party)
     BattleControllerComplete(battler);
 }
 
-void BtlController_HandleGetRawMonData(u32 battler, struct Pokemon *party)
+void BtlController_HandleGetRawMonData(void)
 {
     struct BattlePokemon battleMon;
+    u32 battler = gActiveBattler;
+    struct Pokemon *party = GetBattlerParty(battler);
+
     u8 *src = (u8 *)&party[gBattlerPartyIndexes[battler]] + gBattleResources->bufferA[battler][1];
     u8 *dst = (u8 *)&battleMon + gBattleResources->bufferA[battler][1];
     u8 i;
@@ -2235,8 +2240,10 @@ void BtlController_HandleGetRawMonData(u32 battler, struct Pokemon *party)
     BattleControllerComplete(battler);
 }
 
-void BtlController_HandleSetMonData(u32 battler, struct Pokemon *party)
+void BtlController_HandleSetMonData(void)
 {
+    u32 battler = gActiveBattler;
+    struct Pokemon *party = GetBattlerParty(battler);
     u32 i, monToCheck;
 
     if (gBattleResources->bufferA[battler][2] == 0)
@@ -2256,9 +2263,11 @@ void BtlController_HandleSetMonData(u32 battler, struct Pokemon *party)
     BattleControllerComplete(battler);
 }
 
-void BtlController_HandleSetRawMonData(u32 battler, struct Pokemon *party)
+void BtlController_HandleSetRawMonData(void)
 {
     u32 i;
+    u32 battler = gActiveBattler;
+    struct Pokemon *party = GetBattlerParty(battler);
     u8 *dst = (u8 *)&party[gBattlerPartyIndexes[battler]] + gBattleResources->bufferA[battler][1];
 
     for (i = 0; i < gBattleResources->bufferA[battler][2]; i++)

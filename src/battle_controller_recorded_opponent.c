@@ -32,9 +32,6 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
-static void RecordedOpponentHandleGetMonData(void);
-static void RecordedOpponentHandleSetMonData(void);
-static void RecordedOpponentHandleSetRawMonData(void);
 static void RecordedOpponentHandleLoadMonSprite(void);
 static void RecordedOpponentHandleSwitchInAnim(void);
 static void RecordedOpponentHandleReturnMonToBall(void);
@@ -75,10 +72,10 @@ static void EndDrawPartyStatusSummary(void);
 
 static void (*const sRecordedOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
-    [CONTROLLER_GETMONDATA]               = RecordedOpponentHandleGetMonData,
+    [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,
     [CONTROLLER_GETRAWMONDATA]            = BtlController_Empty,
-    [CONTROLLER_SETMONDATA]               = RecordedOpponentHandleSetMonData,
-    [CONTROLLER_SETRAWMONDATA]            = RecordedOpponentHandleSetRawMonData,
+    [CONTROLLER_SETMONDATA]               = BtlController_HandleSetMonData,
+    [CONTROLLER_SETRAWMONDATA]            = BtlController_HandleSetRawMonData,
     [CONTROLLER_LOADMONSPRITE]            = RecordedOpponentHandleLoadMonSprite,
     [CONTROLLER_SWITCHINANIM]             = RecordedOpponentHandleSwitchInAnim,
     [CONTROLLER_RETURNMONTOBALL]          = RecordedOpponentHandleReturnMonToBall,
@@ -466,21 +463,6 @@ static void RecordedOpponentBufferExecCompleted(void)
     {
         gBattleControllerExecFlags &= ~gBitTable[gActiveBattler];
     }
-}
-
-static void RecordedOpponentHandleGetMonData(void)
-{
-    BtlController_HandleGetMonData(gActiveBattler, gEnemyParty);
-}
-
-static void RecordedOpponentHandleSetMonData(void)
-{
-    BtlController_HandleSetMonData(gActiveBattler, gEnemyParty);
-}
-
-static void RecordedOpponentHandleSetRawMonData(void)
-{
-    BtlController_HandleSetRawMonData(gActiveBattler, gEnemyParty);
 }
 
 static void RecordedOpponentHandleLoadMonSprite(void)

@@ -38,10 +38,6 @@
 #include "constants/rgb.h"
 
 static void PlayerBufferExecCompleted(void);
-static void PlayerHandleGetMonData(void);
-static void PlayerHandleGetRawMonData(void);
-static void PlayerHandleSetMonData(void);
-static void PlayerHandleSetRawMonData(void);
 static void PlayerHandleLoadMonSprite(void);
 static void PlayerHandleSwitchInAnim(void);
 static void PlayerHandleReturnMonToBall(void);
@@ -117,10 +113,10 @@ static void ReloadMoveNames(void);
 
 static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
-    [CONTROLLER_GETMONDATA]               = PlayerHandleGetMonData,
-    [CONTROLLER_GETRAWMONDATA]            = PlayerHandleGetRawMonData,
-    [CONTROLLER_SETMONDATA]               = PlayerHandleSetMonData,
-    [CONTROLLER_SETRAWMONDATA]            = PlayerHandleSetRawMonData,
+    [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,
+    [CONTROLLER_GETRAWMONDATA]            = BtlController_HandleGetRawMonData,
+    [CONTROLLER_SETMONDATA]               = BtlController_HandleSetMonData,
+    [CONTROLLER_SETRAWMONDATA]            = BtlController_HandleSetRawMonData,
     [CONTROLLER_LOADMONSPRITE]            = PlayerHandleLoadMonSprite,
     [CONTROLLER_SWITCHINANIM]             = PlayerHandleSwitchInAnim,
     [CONTROLLER_RETURNMONTOBALL]          = PlayerHandleReturnMonToBall,
@@ -1757,26 +1753,6 @@ static void PrintLinkStandbyMsg(void)
         gBattle_BG0_Y = 0;
         BattlePutTextOnWindow(gText_LinkStandby, B_WIN_MSG);
     }
-}
-
-static void PlayerHandleGetMonData(void)
-{
-    BtlController_HandleGetMonData(gActiveBattler, gPlayerParty);
-}
-
-static void PlayerHandleGetRawMonData(void)
-{
-    BtlController_HandleGetRawMonData(gActiveBattler, gPlayerParty);
-}
-
-static void PlayerHandleSetMonData(void)
-{
-    BtlController_HandleSetMonData(gActiveBattler, gPlayerParty);
-}
-
-static void PlayerHandleSetRawMonData(void)
-{
-    BtlController_HandleSetRawMonData(gActiveBattler, gPlayerParty);
 }
 
 static void PlayerHandleLoadMonSprite(void)

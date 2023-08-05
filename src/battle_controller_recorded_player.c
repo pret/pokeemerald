@@ -28,9 +28,6 @@
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
 
-static void RecordedPlayerHandleGetMonData(void);
-static void RecordedPlayerHandleSetMonData(void);
-static void RecordedPlayerHandleSetRawMonData(void);
 static void RecordedPlayerHandleLoadMonSprite(void);
 static void RecordedPlayerHandleSwitchInAnim(void);
 static void RecordedPlayerHandleReturnMonToBall(void);
@@ -70,10 +67,10 @@ static void EndDrawPartyStatusSummary(void);
 
 static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
-    [CONTROLLER_GETMONDATA]               = RecordedPlayerHandleGetMonData,
+    [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,
     [CONTROLLER_GETRAWMONDATA]            = BtlController_Empty,
-    [CONTROLLER_SETMONDATA]               = RecordedPlayerHandleSetMonData,
-    [CONTROLLER_SETRAWMONDATA]            = RecordedPlayerHandleSetRawMonData,
+    [CONTROLLER_SETMONDATA]               = BtlController_HandleSetMonData,
+    [CONTROLLER_SETRAWMONDATA]            = BtlController_HandleSetRawMonData,
     [CONTROLLER_LOADMONSPRITE]            = RecordedPlayerHandleLoadMonSprite,
     [CONTROLLER_SWITCHINANIM]             = RecordedPlayerHandleSwitchInAnim,
     [CONTROLLER_RETURNMONTOBALL]          = RecordedPlayerHandleReturnMonToBall,
@@ -445,21 +442,6 @@ static void CompleteOnFinishedBattleAnimation(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animFromTableActive)
         RecordedPlayerBufferExecCompleted();
-}
-
-static void RecordedPlayerHandleGetMonData(void)
-{
-    BtlController_HandleGetMonData(gActiveBattler, gPlayerParty);
-}
-
-static void RecordedPlayerHandleSetMonData(void)
-{
-    BtlController_HandleSetMonData(gActiveBattler, gPlayerParty);
-}
-
-static void RecordedPlayerHandleSetRawMonData(void)
-{
-    BtlController_HandleSetRawMonData(gActiveBattler, gPlayerParty);
 }
 
 static void RecordedPlayerHandleLoadMonSprite(void)

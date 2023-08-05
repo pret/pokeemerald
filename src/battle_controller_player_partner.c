@@ -31,9 +31,6 @@
 #include "constants/party_menu.h"
 #include "constants/trainers.h"
 
-static void PlayerPartnerHandleGetMonData(void);
-static void PlayerPartnerHandleSetMonData(void);
-static void PlayerPartnerHandleSetRawMonData(void);
 static void PlayerPartnerHandleLoadMonSprite(void);
 static void PlayerPartnerHandleSwitchInAnim(void);
 static void PlayerPartnerHandleReturnMonToBall(void);
@@ -78,10 +75,10 @@ static void EndDrawPartyStatusSummary(void);
 
 static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
-    [CONTROLLER_GETMONDATA]               = PlayerPartnerHandleGetMonData,
+    [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,
     [CONTROLLER_GETRAWMONDATA]            = BtlController_Empty,
-    [CONTROLLER_SETMONDATA]               = PlayerPartnerHandleSetMonData,
-    [CONTROLLER_SETRAWMONDATA]            = PlayerPartnerHandleSetRawMonData,
+    [CONTROLLER_SETMONDATA]               = BtlController_HandleSetMonData,
+    [CONTROLLER_SETRAWMONDATA]            = BtlController_HandleSetRawMonData,
     [CONTROLLER_LOADMONSPRITE]            = PlayerPartnerHandleLoadMonSprite,
     [CONTROLLER_SWITCHINANIM]             = PlayerPartnerHandleSwitchInAnim,
     [CONTROLLER_RETURNMONTOBALL]          = PlayerPartnerHandleReturnMonToBall,
@@ -546,21 +543,6 @@ static void CompleteOnFinishedBattleAnimation(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animFromTableActive)
         PlayerPartnerBufferExecCompleted();
-}
-
-static void PlayerPartnerHandleGetMonData(void)
-{
-    BtlController_HandleGetMonData(gActiveBattler, gPlayerParty);
-}
-
-static void PlayerPartnerHandleSetMonData(void)
-{
-    BtlController_HandleSetMonData(gActiveBattler, gPlayerParty);
-}
-
-static void PlayerPartnerHandleSetRawMonData(void)
-{
-    BtlController_HandleSetRawMonData(gActiveBattler, gPlayerParty);
 }
 
 static void PlayerPartnerHandleLoadMonSprite(void)

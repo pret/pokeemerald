@@ -32,10 +32,6 @@
 #include "constants/trainers.h"
 #include "constants/rgb.h"
 
-// this file's functions
-static void WallyHandleGetMonData(void);
-static void WallyHandleGetRawMonData(void);
-static void WallyHandleSetMonData(void);
 static void WallyHandleReturnMonToBall(void);
 static void WallyHandleDrawTrainerPic(void);
 static void WallyHandleTrainerSlide(void);
@@ -68,9 +64,9 @@ static void Task_StartSendOutAnim(u8 taskId);
 
 static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
-    [CONTROLLER_GETMONDATA]               = WallyHandleGetMonData,
-    [CONTROLLER_GETRAWMONDATA]            = WallyHandleGetRawMonData,
-    [CONTROLLER_SETMONDATA]               = WallyHandleSetMonData,
+    [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,
+    [CONTROLLER_GETRAWMONDATA]            = BtlController_HandleGetRawMonData,
+    [CONTROLLER_SETMONDATA]               = BtlController_HandleSetMonData,
     [CONTROLLER_SETRAWMONDATA]            = BtlController_Empty,
     [CONTROLLER_LOADMONSPRITE]            = BtlController_Empty,
     [CONTROLLER_SWITCHINANIM]             = BtlController_Empty,
@@ -366,21 +362,6 @@ static void WallyBufferExecCompleted(void)
     {
         gBattleControllerExecFlags &= ~gBitTable[gActiveBattler];
     }
-}
-
-static void WallyHandleGetMonData(void)
-{
-    BtlController_HandleGetMonData(gActiveBattler, gPlayerParty);
-}
-
-static void WallyHandleGetRawMonData(void)
-{
-    BtlController_HandleGetRawMonData(gActiveBattler, gPlayerParty);
-}
-
-static void WallyHandleSetMonData(void)
-{
-    BtlController_HandleSetMonData(gActiveBattler, gPlayerParty);
 }
 
 static void WallyHandleReturnMonToBall(void)
