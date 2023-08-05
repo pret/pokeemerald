@@ -2578,6 +2578,50 @@ void BtlController_HandleSpriteInvisibility(void)
     BattleControllerComplete(gActiveBattler);
 }
 
+void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite)
+{
+    u8 battlerId = sprite->sBattlerId;
+
+    // Free player trainer sprite
+    FreeSpriteOamMatrix(sprite);
+    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));
+    DestroySprite(sprite);
+
+    // Load mon sprite
+    BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battlerId]], battlerId);
+    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerId]], 0);
+}
+
+void BtlController_HandleIntroTrainerBallThrow(u32 battlerId, u16  const u32 *trainerPal, TaskFunc *introTask)
+{
+    u8 paletteNum;
+    u8 taskId;
+
+    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[battler]]);
+
+    gSprites[gBattlerSpriteIds[battler]].data[0] = 50;
+    gSprites[gBattlerSpriteIds[battler]].data[2] = -40;
+    gSprites[gBattlerSpriteIds[battler]].data[4] = gSprites[gBattlerSpriteIds[battler]].y;
+    gSprites[gBattlerSpriteIds[battler]].callback = StartAnimLinearTranslation;
+    gSprites[gBattlerSpriteIds[battler]].sBattlerId = battler;
+
+    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[battler]], SpriteCB_FreePlayerSpriteLoadMonSprite);
+    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 1);
+
+    paletteNum = AllocSpritePalette(0xD6F8);
+    LoadCompressedPalette(trainerPal, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
+    gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = paletteNum;
+
+    taskId = CreateTask(Task_StartSendOutAnim, 5);
+    gTasks[taskId].tBattlerId = battler;
+
+    if (gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[battler]].func = introTask;
+
+    gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
+    gBattlerControllerFuncs[battler] = BattleControllerDummy;
+}
+
 void BtlController_HandleDrawPartyStatusSummary(u32 battler, u32 side, bool32 considerDelay)
 {
     if (gBattleResources->bufferA[battler][1] != 0 && GetBattlerSide(battler) == B_SIDE_PLAYER)

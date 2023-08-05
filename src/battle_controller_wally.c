@@ -262,7 +262,6 @@ static void Intro_TryShinyAnimShowHealthbox(void)
         gBattleSpritesDataPtr->animationData->introAnimActive = FALSE;
         gBattlerControllerFuncs[gActiveBattler] = Intro_WaitForShinyAnimAndHealthbox;
     }
-
 }
 
 static void Intro_WaitForShinyAnimAndHealthbox(void)
