@@ -680,7 +680,7 @@ static void RecordedPlayerHandleStatusIconUpdate(void)
     {
         DoStatusIconUpdate(gActiveBattler);
         if (gTestRunnerEnabled)
-            TestRunner_Battle_RecordStatus1(battlerId, GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_STATUS));
+            TestRunner_Battle_RecordStatus1(gActiveBattler, GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_STATUS));
     }
 }
 

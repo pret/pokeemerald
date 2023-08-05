@@ -286,6 +286,7 @@ void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE, bool32 up
 void SetControllerToPlayer(void);
 void BattleControllerDummy(void);
 void SetBattleEndCallbacks(void);
+void PlayerHandleExpUpdate(void);
 void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);
 void CB2_SetUpReshowBattleScreenAfterMenu(void);
 void CB2_SetUpReshowBattleScreenAfterMenu2(void);

@@ -666,7 +666,7 @@ static void RecordedOpponentHandleStatusIconUpdate(void)
     {
         DoStatusIconUpdate(gActiveBattler);
         if (gTestRunnerEnabled)
-            TestRunner_Battle_RecordStatus1(battlerId, GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_STATUS));
+            TestRunner_Battle_RecordStatus1(gActiveBattler, GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_STATUS));
     }
 }
 
