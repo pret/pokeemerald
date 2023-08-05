@@ -43,7 +43,6 @@ static void RecordedPlayerHandleStatusIconUpdate(void);
 static void RecordedPlayerHandleStatusAnimation(void);
 static void RecordedPlayerHandleIntroTrainerBallThrow(void);
 static void RecordedPlayerHandleDrawPartyStatusSummary(void);
-static void RecordedPlayerHandleHidePartyStatusSummary(void);
 static void RecordedPlayerHandleBattleAnimation(void);
 static void RecordedPlayerHandleEndLinkBattle(void);
 
@@ -54,7 +53,6 @@ static u32 CopyRecordedPlayerMonData(u8 monId, u8 *dst);
 static void SetRecordedPlayerMonData(u8 monId);
 static void RecordedPlayerDoMoveAnimation(void);
 static void Task_StartSendOutAnim(u8 taskId);
-static void EndDrawPartyStatusSummary(void);
 
 static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
@@ -107,7 +105,7 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) 
     [CONTROLLER_INTROSLIDE]               = BtlController_HandleIntroSlide,
     [CONTROLLER_INTROTRAINERBALLTHROW]    = RecordedPlayerHandleIntroTrainerBallThrow,
     [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = RecordedPlayerHandleDrawPartyStatusSummary,
-    [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = RecordedPlayerHandleHidePartyStatusSummary,
+    [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = BtlController_HandleHidePartyStatusSummary,
     [CONTROLLER_ENDBOUNCE]                = BtlController_Empty,
     [CONTROLLER_SPRITEINVISIBILITY]       = BtlController_HandleSpriteInvisibility,
     [CONTROLLER_BATTLEANIMATION]          = RecordedPlayerHandleBattleAnimation,
@@ -754,37 +752,7 @@ static void Task_StartSendOutAnim(u8 taskId)
 
 static void RecordedPlayerHandleDrawPartyStatusSummary(void)
 {
-    if (gBattleResources->bufferA[gActiveBattler][1] != 0 && GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-    {
-        RecordedPlayerBufferExecCompleted();
-    }
-    else
-    {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown = 1;
-        gBattlerStatusSummaryTaskId[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleResources->bufferA[gActiveBattler][4], gBattleResources->bufferA[gActiveBattler][1], gBattleResources->bufferA[gActiveBattler][2]);
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer = 0;
-
-        if (gBattleResources->bufferA[gActiveBattler][2] != 0)
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer = 93;
-
-        gBattlerControllerFuncs[gActiveBattler] = EndDrawPartyStatusSummary;
-    }
-}
-
-static void EndDrawPartyStatusSummary(void)
-{
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer++ > 92)
-    {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer = 0;
-        RecordedPlayerBufferExecCompleted();
-    }
-}
-
-static void RecordedPlayerHandleHidePartyStatusSummary(void)
-{
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
-    RecordedPlayerBufferExecCompleted();
+    BtlController_HandleDrawPartyStatusSummary(gActiveBattler, B_SIDE_PLAYER, TRUE);
 }
 
 static void RecordedPlayerHandleBattleAnimation(void)

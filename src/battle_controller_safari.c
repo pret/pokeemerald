@@ -36,7 +36,6 @@ static void SafariHandleFaintingCry(void);
 static void SafariHandleIntroTrainerBallThrow(void);
 static void SafariHandleBattleAnimation(void);
 static void SafariHandleEndLinkBattle(void);
-static void SafariHandleBattleDebug(void);
 
 static void SafariBufferRunCommand(void);
 static void SafariBufferExecCompleted(void);
@@ -361,9 +360,4 @@ static void SafariHandleEndLinkBattle(void)
     SafariBufferExecCompleted();
     if ((gBattleTypeFlags & BATTLE_TYPE_LINK) && !(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
         gBattlerControllerFuncs[gActiveBattler] = SafariSetBattleEndCallbacks;
-}
-
-static void SafariHandleBattleDebug(void)
-{
-    SafariBufferExecCompleted();
 }

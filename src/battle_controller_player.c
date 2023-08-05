@@ -66,7 +66,6 @@ static void PlayerHandleOneReturnValue(void);
 static void PlayerHandleOneReturnValue_Duplicate(void);
 static void PlayerHandleIntroTrainerBallThrow(void);
 static void PlayerHandleDrawPartyStatusSummary(void);
-static void PlayerHandleHidePartyStatusSummary(void);
 static void PlayerHandleEndBounceEffect(void);
 static void PlayerHandleBattleAnimation(void);
 static void PlayerHandleLinkStandbyMsg(void);
@@ -95,7 +94,6 @@ static u32 CopyPlayerMonData(u8, u8 *);
 static void SetPlayerMonData(u8);
 static void PlayerDoMoveAnimation(void);
 static void Task_StartSendOutAnim(u8);
-static void EndDrawPartyStatusSummary(void);
 
 static void ReloadMoveNames(void);
 
@@ -150,7 +148,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_INTROSLIDE]               = BtlController_HandleIntroSlide,
     [CONTROLLER_INTROTRAINERBALLTHROW]    = PlayerHandleIntroTrainerBallThrow,
     [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = PlayerHandleDrawPartyStatusSummary,
-    [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = PlayerHandleHidePartyStatusSummary,
+    [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = BtlController_HandleHidePartyStatusSummary,
     [CONTROLLER_ENDBOUNCE]                = PlayerHandleEndBounceEffect,
     [CONTROLLER_SPRITEINVISIBILITY]       = BtlController_HandleSpriteInvisibility,
     [CONTROLLER_BATTLEANIMATION]          = PlayerHandleBattleAnimation,
@@ -2311,38 +2309,7 @@ static void Task_StartSendOutAnim(u8 taskId)
 
 static void PlayerHandleDrawPartyStatusSummary(void)
 {
-    if (gBattleResources->bufferA[gActiveBattler][1] != 0 && GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-    {
-        PlayerBufferExecCompleted();
-    }
-    else
-    {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown = 1;
-        gBattlerStatusSummaryTaskId[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleResources->bufferA[gActiveBattler][4], gBattleResources->bufferA[gActiveBattler][1], gBattleResources->bufferA[gActiveBattler][2]);
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer = 0;
-
-        // If intro, skip the delay after drawing
-        if (gBattleResources->bufferA[gActiveBattler][2] != 0)
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer = 93;
-
-        gBattlerControllerFuncs[gActiveBattler] = EndDrawPartyStatusSummary;
-    }
-}
-
-static void EndDrawPartyStatusSummary(void)
-{
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer++ > 92)
-    {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer = 0;
-        PlayerBufferExecCompleted();
-    }
-}
-
-static void PlayerHandleHidePartyStatusSummary(void)
-{
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
-    PlayerBufferExecCompleted();
+    BtlController_HandleDrawPartyStatusSummary(gActiveBattler, B_SIDE_PLAYER, TRUE);
 }
 
 static void PlayerHandleEndBounceEffect(void)
@@ -2405,7 +2372,7 @@ static void PlayerHandleEndLinkBattle(void)
     gBattlerControllerFuncs[gActiveBattler] = SetBattleEndCallbacks;
 }
 
-static void WaitForDebug(void)
+static void Controller_WaitForDebug(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
@@ -2417,5 +2384,5 @@ static void PlayerHandleBattleDebug(void)
 {
     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
     SetMainCallback2(CB2_BattleDebugMenu);
-    gBattlerControllerFuncs[gActiveBattler] = WaitForDebug;
+    gBattlerControllerFuncs[gActiveBattler] = Controller_WaitForDebug;
 }

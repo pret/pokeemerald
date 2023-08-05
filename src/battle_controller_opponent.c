@@ -53,7 +53,6 @@ static void OpponentHandleChoosePokemon(void);
 static void OpponentHandleHealthBarUpdate(void);
 static void OpponentHandleIntroTrainerBallThrow(void);
 static void OpponentHandleDrawPartyStatusSummary(void);
-static void OpponentHandleHidePartyStatusSummary(void);
 static void OpponentHandleBattleAnimation(void);
 static void OpponentHandleEndLinkBattle(void);
 static u8 CountAIAliveNonEggMonsExcept(u8 slotToIgnore);
@@ -66,7 +65,6 @@ static void SetOpponentMonData(u8 monId);
 static void OpponentDoMoveAnimation(void);
 static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite);
 static void Task_StartSendOutAnim(u8 taskId);
-static void EndDrawPartyStatusSummary(void);
 
 static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
@@ -119,7 +117,7 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_INTROSLIDE]               = BtlController_HandleIntroSlide,
     [CONTROLLER_INTROTRAINERBALLTHROW]    = OpponentHandleIntroTrainerBallThrow,
     [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = OpponentHandleDrawPartyStatusSummary,
-    [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = OpponentHandleHidePartyStatusSummary,
+    [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = BtlController_HandleHidePartyStatusSummary,
     [CONTROLLER_ENDBOUNCE]                = BtlController_Empty,
     [CONTROLLER_SPRITEINVISIBILITY]       = BtlController_HandleSpriteInvisibility,
     [CONTROLLER_BATTLEANIMATION]          = OpponentHandleBattleAnimation,
@@ -989,51 +987,7 @@ static void Task_StartSendOutAnim(u8 taskId)
 
 static void OpponentHandleDrawPartyStatusSummary(void)
 {
-    if (gBattleResources->bufferA[gActiveBattler][1] != 0 && GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-    {
-        OpponentBufferExecCompleted();
-    }
-    else
-    {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown = 1;
-
-        if (gBattleResources->bufferA[gActiveBattler][2] != 0)
-        {
-            if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].opponentDrawPartyStatusSummaryDelay < 2)
-            {
-                gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].opponentDrawPartyStatusSummaryDelay++;
-                return;
-            }
-            else
-            {
-                gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].opponentDrawPartyStatusSummaryDelay = 0;
-            }
-        }
-
-        gBattlerStatusSummaryTaskId[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleResources->bufferA[gActiveBattler][4], gBattleResources->bufferA[gActiveBattler][1], gBattleResources->bufferA[gActiveBattler][2]);
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer = 0;
-
-        if (gBattleResources->bufferA[gActiveBattler][2] != 0)
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer = 93;
-
-        gBattlerControllerFuncs[gActiveBattler] = EndDrawPartyStatusSummary;
-    }
-}
-
-static void EndDrawPartyStatusSummary(void)
-{
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer++ > 92)
-    {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer = 0;
-        OpponentBufferExecCompleted();
-    }
-}
-
-static void OpponentHandleHidePartyStatusSummary(void)
-{
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
-    OpponentBufferExecCompleted();
+    BtlController_HandleDrawPartyStatusSummary(gActiveBattler, B_SIDE_OPPONENT, TRUE);
 }
 
 static void OpponentHandleBattleAnimation(void)

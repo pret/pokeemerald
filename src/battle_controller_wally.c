@@ -601,16 +601,7 @@ static void Task_StartSendOutAnim(u8 taskId)
 
 static void WallyHandleDrawPartyStatusSummary(void)
 {
-    if (gBattleResources->bufferA[gActiveBattler][1] != 0 && GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-    {
-        WallyBufferExecCompleted();
-    }
-    else
-    {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown = 1;
-        gBattlerStatusSummaryTaskId[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleResources->bufferA[gActiveBattler][4], gBattleResources->bufferA[gActiveBattler][1], gBattleResources->bufferA[gActiveBattler][2]);
-        WallyBufferExecCompleted();
-    }
+    BtlController_HandleDrawPartyStatusSummary(gActiveBattler, B_SIDE_PLAYER, FALSE);
 }
 
 static void WallyHandleBattleAnimation(void)

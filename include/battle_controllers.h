@@ -282,6 +282,8 @@ void BtlController_HandlePlayFanfareOrBGM(void);
 void BtlController_HandleFaintingCry(void);
 void BtlController_HandleIntroSlide(void);
 void BtlController_HandleSpriteInvisibility(void);
+void BtlController_HandleDrawPartyStatusSummary(u32 battler, u32 side, bool32 considerDelay);
+void BtlController_HandleHidePartyStatusSummary(void);
 void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE, bool32 updateTvData);
 
 // player controller

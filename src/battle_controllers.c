@@ -2205,6 +2205,15 @@ void Controller_WaitForString(void)
         BattleControllerComplete(gActiveBattler);
 }
 
+static void Controller_WaitForPartyStatusSummary(void)
+{
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer++ > 92)
+    {
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer = 0;
+        BattleControllerComplete(gActiveBattler);
+    }
+}
+
 static void Controller_HitAnimation(void)
 {
     u32 spriteId = gBattlerSpriteIds[gActiveBattler];
@@ -2566,6 +2575,47 @@ void BtlController_HandleSpriteInvisibility(void)
         gSprites[gBattlerSpriteIds[gActiveBattler]].invisible = gBattleResources->bufferA[gActiveBattler][1];
         CopyBattleSpriteInvisibility(gActiveBattler);
     }
+    BattleControllerComplete(gActiveBattler);
+}
+
+void BtlController_HandleDrawPartyStatusSummary(u32 battler, u32 side, bool32 considerDelay)
+{
+    if (gBattleResources->bufferA[battler][1] != 0 && GetBattlerSide(battler) == B_SIDE_PLAYER)
+    {
+        BattleControllerComplete(battler);
+    }
+    else
+    {
+        gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown = 1;
+
+        if (side == B_SIDE_OPPONENT && gBattleResources->bufferA[battler][2] != 0)
+        {
+            if (gBattleSpritesDataPtr->healthBoxesData[battler].opponentDrawPartyStatusSummaryDelay < 2)
+            {
+                gBattleSpritesDataPtr->healthBoxesData[battler].opponentDrawPartyStatusSummaryDelay++;
+                return;
+            }
+            else
+            {
+                gBattleSpritesDataPtr->healthBoxesData[battler].opponentDrawPartyStatusSummaryDelay = 0;
+            }
+        }
+
+        gBattlerStatusSummaryTaskId[battler] = CreatePartyStatusSummarySprites(battler, (struct HpAndStatus *)&gBattleResources->bufferA[battler][4], gBattleResources->bufferA[battler][1], gBattleResources->bufferA[battler][2]);
+        gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusDelayTimer = 0;
+
+        // If intro, skip the delay after drawing
+        if (considerDelay && gBattleResources->bufferA[battler][2] != 0)
+            gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusDelayTimer = 93;
+
+        gBattlerControllerFuncs[battler] = Controller_WaitForPartyStatusSummary;
+    }
+}
+
+void BtlController_HandleHidePartyStatusSummary(void)
+{
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
     BattleControllerComplete(gActiveBattler);
 }
 
