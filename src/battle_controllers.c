@@ -2191,6 +2191,12 @@ static void Controller_WaitForBattleAnimation(void)
         BattleControllerComplete(gActiveBattler);
 }
 
+static void Controller_WaitForStatusAnimation(void)
+{
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].statusAnimActive)
+        BattleControllerComplete(gActiveBattler);
+}
+
 static void Controller_HitAnimation(void)
 {
     u32 spriteId = gBattlerSpriteIds[gActiveBattler];
@@ -2411,6 +2417,33 @@ void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId, bool
 {
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = gBattleResources->bufferA[battler][1];
     HandleBallThrow(battler, target, animId, allowCriticalCapture);
+}
+
+void DoStatusIconUpdate(u32 battler)
+{
+    struct Pokemon *party = GetBattlerParty(battler);
+
+    UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &party[gBattlerPartyIndexes[battler]], HEALTHBOX_STATUS_ICON);
+    gBattleSpritesDataPtr->healthBoxesData[battler].statusAnimActive = 0;
+    gBattlerControllerFuncs[battler] = Controller_WaitForStatusAnimation;
+}
+
+void BtlController_HandleStatusIconUpdate(void)
+{
+    if (!IsBattleSEPlaying(gActiveBattler))
+    {
+        DoStatusIconUpdate(gActiveBattler);
+    }
+}
+
+void BtlController_HandleStatusAnimation(void)
+{
+    if (!IsBattleSEPlaying(gActiveBattler))
+    {
+        InitAndLaunchChosenStatusAnimation(gBattleResources->bufferA[gActiveBattler][1],
+                        gBattleResources->bufferA[gActiveBattler][2] | (gBattleResources->bufferA[gActiveBattler][3] << 8) | (gBattleResources->bufferA[gActiveBattler][4] << 16) | (gBattleResources->bufferA[gActiveBattler][5] << 24));
+        gBattlerControllerFuncs[gActiveBattler] = Controller_WaitForStatusAnimation;
+    }
 }
 
 void BtlController_HandleClearUnkVar(void)
