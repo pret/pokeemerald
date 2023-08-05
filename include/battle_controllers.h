@@ -267,6 +267,9 @@ void BtlController_HandleReturnMonToBall(u32 battler);
 void BtlController_HandleFaintAnimation(u32 battler);
 void BtlController_HandleSuccessBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
 void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
+void BtlController_HandlePlaySE(void);
+void BtlController_HandlePlayFanfareOrBGM(void);
+void BtlController_HandleFaintingCry(void);
 
 // player controller
 void SetControllerToPlayer(void);

@@ -32,8 +32,6 @@ static void SafariHandlePrintSelectionString(void);
 static void SafariHandleChooseAction(void);
 static void SafariHandleChooseItem(void);
 static void SafariHandleStatusIconUpdate(void);
-static void SafariHandlePlaySE(void);
-static void SafariHandlePlayFanfareOrBGM(void);
 static void SafariHandleFaintingCry(void);
 static void SafariHandleIntroSlide(void);
 static void SafariHandleIntroTrainerBallThrow(void);
@@ -90,8 +88,8 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TOGGLEUNKFLAG]            = BtlController_Empty,
     [CONTROLLER_HITANIMATION]             = BtlController_Empty,
     [CONTROLLER_CANTSWITCH]               = BtlController_Empty,
-    [CONTROLLER_PLAYSE]                   = SafariHandlePlaySE,
-    [CONTROLLER_PLAYFANFAREORBGM]         = SafariHandlePlayFanfareOrBGM,
+    [CONTROLLER_PLAYSE]                   = BtlController_HandlePlaySE,
+    [CONTROLLER_PLAYFANFAREORBGM]         = BtlController_HandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = SafariHandleFaintingCry,
     [CONTROLLER_INTROSLIDE]               = SafariHandleIntroSlide,
     [CONTROLLER_INTROTRAINERBALLTHROW]    = SafariHandleIntroTrainerBallThrow,
@@ -352,34 +350,8 @@ static void SafariHandleStatusIconUpdate(void)
     SafariBufferExecCompleted();
 }
 
-static void SafariHandlePlaySE(void)
-{
-    s8 pan;
-
-    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-        pan = SOUND_PAN_ATTACKER;
-    else
-        pan = SOUND_PAN_TARGET;
-
-    PlaySE12WithPanning(gBattleResources->bufferA[gActiveBattler][1] | (gBattleResources->bufferA[gActiveBattler][2] << 8), pan);
-    SafariBufferExecCompleted();
-}
-
-static void SafariHandlePlayFanfareOrBGM(void)
-{
-    if (gBattleResources->bufferA[gActiveBattler][3])
-    {
-        BattleStopLowHpSound();
-        PlayBGM(gBattleResources->bufferA[gActiveBattler][1] | (gBattleResources->bufferA[gActiveBattler][2] << 8));
-    }
-    else
-    {
-        PlayFanfare(gBattleResources->bufferA[gActiveBattler][1] | (gBattleResources->bufferA[gActiveBattler][2] << 8));
-    }
-
-    SafariBufferExecCompleted();
-}
-
+// All of the other controllers(except Wally's) use CRY_MODE_FAINT.
+// Player is not a pokemon, so it can't really faint in the Safari anyway.
 static void SafariHandleFaintingCry(void)
 {
     u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);

@@ -50,7 +50,6 @@ static void WallyHandleChooseItem(void);
 static void WallyHandleHealthBarUpdate(void);
 static void WallyHandleHitAnimation(void);
 static void WallyHandlePlaySE(void);
-static void WallyHandlePlayFanfareOrBGM(void);
 static void WallyHandleFaintingCry(void);
 static void WallyHandleIntroSlide(void);
 static void WallyHandleIntroTrainerBallThrow(void);
@@ -113,7 +112,7 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_HITANIMATION]             = WallyHandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = BtlController_Empty,
     [CONTROLLER_PLAYSE]                   = WallyHandlePlaySE,
-    [CONTROLLER_PLAYFANFAREORBGM]         = WallyHandlePlayFanfareOrBGM,
+    [CONTROLLER_PLAYFANFAREORBGM]         = BtlController_HandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = WallyHandleFaintingCry,
     [CONTROLLER_INTROSLIDE]               = WallyHandleIntroSlide,
     [CONTROLLER_INTROTRAINERBALLTHROW]    = WallyHandleIntroTrainerBallThrow,
@@ -614,33 +613,19 @@ static void WallyHandleHitAnimation(void)
     }
 }
 
+// For some reason Wally's SE don't take side into account and pan is always the same. Possibly a bug
 static void WallyHandlePlaySE(void)
 {
     PlaySE(gBattleResources->bufferA[gActiveBattler][1] | (gBattleResources->bufferA[gActiveBattler][2] << 8));
     WallyBufferExecCompleted();
 }
 
-static void WallyHandlePlayFanfareOrBGM(void)
-{
-    if (gBattleResources->bufferA[gActiveBattler][3])
-    {
-        BattleStopLowHpSound();
-        PlayBGM(gBattleResources->bufferA[gActiveBattler][1] | (gBattleResources->bufferA[gActiveBattler][2] << 8));
-    }
-    else
-    {
-        PlayFanfare(gBattleResources->bufferA[gActiveBattler][1] | (gBattleResources->bufferA[gActiveBattler][2] << 8));
-    }
-
-    WallyBufferExecCompleted();
-}
-
+// All of the other controllers use CRY_MODE_FAINT.
+// Wally's Pokémon during the tutorial is never intended to faint, so that's probably why it's different here.
 static void WallyHandleFaintingCry(void)
 {
     u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
-    // Seems that it doesn't bother using CRY_MODE_FAINT because
-    // Wally's Pokémon during the tutorial is never intended to faint.
     PlayCry_Normal(species, 25);
     WallyBufferExecCompleted();
 }

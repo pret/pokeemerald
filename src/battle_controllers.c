@@ -2376,3 +2376,46 @@ void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId, bool
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = gBattleResources->bufferA[battler][1];
     HandleBallThrow(battler, target, animId, allowCriticalCapture);
 }
+
+void BtlController_HandlePlaySE(void)
+{
+    s8 pan = (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER) ? SOUND_PAN_ATTACKER : SOUND_PAN_TARGET;
+
+    PlaySE12WithPanning(gBattleResources->bufferA[gActiveBattler][1] | (gBattleResources->bufferA[gActiveBattler][2] << 8), pan);
+    BattleControllerComplete(gActiveBattler);
+}
+
+void BtlController_HandlePlayFanfareOrBGM(void)
+{
+    if (gBattleResources->bufferA[gActiveBattler][3])
+    {
+        BattleStopLowHpSound();
+        PlayBGM(gBattleResources->bufferA[gActiveBattler][1] | (gBattleResources->bufferA[gActiveBattler][2] << 8));
+    }
+    else
+    {
+        PlayFanfare(gBattleResources->bufferA[gActiveBattler][1] | (gBattleResources->bufferA[gActiveBattler][2] << 8));
+    }
+
+    BattleControllerComplete(gActiveBattler);
+}
+
+void BtlController_HandleFaintingCry(void)
+{
+    struct Pokemon *party;
+    s8 pan;
+
+    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
+    {
+        party = gPlayerParty;
+        pan = -25;
+    }
+    else
+    {
+        party = gEnemyParty;
+        pan = 25;
+    }
+
+    PlayCry_ByMode(GetMonData(&party[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES), pan, CRY_MODE_FAINT);
+    BattleControllerComplete(gActiveBattler);
+}
