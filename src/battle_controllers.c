@@ -1551,6 +1551,8 @@ void BtlController_EmitDebugMenu(u8 bufferId)
 }
 
 // Standardized Controller functions
+
+// Can be used for all the controllers.
 void BattleControllerComplete(u32 battler)
 {
     gBattlerControllerEndFuncs[battler]();
@@ -2176,6 +2178,23 @@ static void Controller_FaintOpponentMon(void)
     }
 }
 
+static void Controller_WaitForBallThrow(void)
+{
+    if (!gDoingBattleAnim || !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
+        BattleControllerComplete(gActiveBattler);
+}
+
+// Used for all the commands which do nothing.
+void BtlController_Empty(void)
+{
+    BattleControllerComplete(gActiveBattler);
+}
+
+// Dummy function at the end of the table.
+void BtlController_TerminatorNop(void)
+{
+}
+
 // Handlers of all the controller commands
 void BtlController_HandleGetMonData(u32 battler, struct Pokemon *party)
 {
@@ -2335,3 +2354,25 @@ void BtlController_HandleFaintAnimation(u32 battler)
 
 #undef sSpeedX
 #undef sSpeedY
+
+static void HandleBallThrow(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture)
+{
+    gDoingBattleAnim = TRUE;
+    if (allowCriticalCapture && IsCriticalCapture())
+        animId = B_ANIM_CRITICAL_CAPTURE_THROW;
+    InitAndLaunchSpecialAnimation(battler, battler, target, animId);
+
+    gBattlerControllerFuncs[battler] = Controller_WaitForBallThrow;
+}
+
+void BtlController_HandleSuccessBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture)
+{
+    gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
+    HandleBallThrow(battler, target, animId, allowCriticalCapture);
+}
+
+void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture)
+{
+    gBattleSpritesDataPtr->animationData->ballThrowCaseId = gBattleResources->bufferA[battler][1];
+    HandleBallThrow(battler, target, animId, allowCriticalCapture);
+}

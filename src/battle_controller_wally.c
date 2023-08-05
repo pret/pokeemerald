@@ -36,61 +36,27 @@
 static void WallyHandleGetMonData(void);
 static void WallyHandleGetRawMonData(void);
 static void WallyHandleSetMonData(void);
-static void WallyHandleSetRawMonData(void);
-static void WallyHandleLoadMonSprite(void);
-static void WallyHandleSwitchInAnim(void);
 static void WallyHandleReturnMonToBall(void);
 static void WallyHandleDrawTrainerPic(void);
 static void WallyHandleTrainerSlide(void);
-static void WallyHandleTrainerSlideBack(void);
-static void WallyHandleFaintAnimation(void);
-static void WallyHandlePaletteFade(void);
 static void WallyHandleSuccessBallThrowAnim(void);
 static void WallyHandleBallThrowAnim(void);
-static void WallyHandlePause(void);
 static void WallyHandleMoveAnimation(void);
 static void WallyHandlePrintString(void);
 static void WallyHandlePrintSelectionString(void);
 static void WallyHandleChooseAction(void);
-static void WallyHandleYesNoBox(void);
 static void WallyHandleChooseMove(void);
 static void WallyHandleChooseItem(void);
-static void WallyHandleChoosePokemon(void);
-static void WallyHandleCmd23(void);
 static void WallyHandleHealthBarUpdate(void);
-static void WallyHandleExpUpdate(void);
-static void WallyHandleStatusIconUpdate(void);
-static void WallyHandleStatusAnimation(void);
-static void WallyHandleStatusXor(void);
-static void WallyHandleDataTransfer(void);
-static void WallyHandleDMA3Transfer(void);
-static void WallyHandlePlayBGM(void);
-static void WallyHandleCmd32(void);
-static void WallyHandleTwoReturnValues(void);
-static void WallyHandleChosenMonReturnValue(void);
-static void WallyHandleOneReturnValue(void);
-static void WallyHandleOneReturnValue_Duplicate(void);
-static void WallyHandleClearUnkVar(void);
-static void WallyHandleSetUnkVar(void);
-static void WallyHandleClearUnkFlag(void);
-static void WallyHandleToggleUnkFlag(void);
 static void WallyHandleHitAnimation(void);
-static void WallyHandleCantSwitch(void);
 static void WallyHandlePlaySE(void);
 static void WallyHandlePlayFanfareOrBGM(void);
 static void WallyHandleFaintingCry(void);
 static void WallyHandleIntroSlide(void);
 static void WallyHandleIntroTrainerBallThrow(void);
 static void WallyHandleDrawPartyStatusSummary(void);
-static void WallyHandleHidePartyStatusSummary(void);
-static void WallyHandleEndBounceEffect(void);
-static void WallyHandleSpriteInvisibility(void);
 static void WallyHandleBattleAnimation(void);
-static void WallyHandleLinkStandbyMsg(void);
-static void WallyHandleResetActionMoveSelection(void);
 static void WallyHandleEndLinkBattle(void);
-static void WallyHandleBattleDebug(void);
-static void WallyCmdEnd(void);
 
 static void WallyBufferRunCommand(void);
 static void WallyBufferExecCompleted(void);
@@ -106,61 +72,61 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_GETMONDATA]               = WallyHandleGetMonData,
     [CONTROLLER_GETRAWMONDATA]            = WallyHandleGetRawMonData,
     [CONTROLLER_SETMONDATA]               = WallyHandleSetMonData,
-    [CONTROLLER_SETRAWMONDATA]            = WallyHandleSetRawMonData,
-    [CONTROLLER_LOADMONSPRITE]            = WallyHandleLoadMonSprite,
-    [CONTROLLER_SWITCHINANIM]             = WallyHandleSwitchInAnim,
+    [CONTROLLER_SETRAWMONDATA]            = BtlController_Empty,
+    [CONTROLLER_LOADMONSPRITE]            = BtlController_Empty,
+    [CONTROLLER_SWITCHINANIM]             = BtlController_Empty,
     [CONTROLLER_RETURNMONTOBALL]          = WallyHandleReturnMonToBall,
     [CONTROLLER_DRAWTRAINERPIC]           = WallyHandleDrawTrainerPic,
     [CONTROLLER_TRAINERSLIDE]             = WallyHandleTrainerSlide,
-    [CONTROLLER_TRAINERSLIDEBACK]         = WallyHandleTrainerSlideBack,
-    [CONTROLLER_FAINTANIMATION]           = WallyHandleFaintAnimation,
-    [CONTROLLER_PALETTEFADE]              = WallyHandlePaletteFade,
+    [CONTROLLER_TRAINERSLIDEBACK]         = BtlController_Empty,
+    [CONTROLLER_FAINTANIMATION]           = BtlController_Empty,
+    [CONTROLLER_PALETTEFADE]              = BtlController_Empty,
     [CONTROLLER_SUCCESSBALLTHROWANIM]     = WallyHandleSuccessBallThrowAnim,
     [CONTROLLER_BALLTHROWANIM]            = WallyHandleBallThrowAnim,
-    [CONTROLLER_PAUSE]                    = WallyHandlePause,
+    [CONTROLLER_PAUSE]                    = BtlController_Empty,
     [CONTROLLER_MOVEANIMATION]            = WallyHandleMoveAnimation,
     [CONTROLLER_PRINTSTRING]              = WallyHandlePrintString,
     [CONTROLLER_PRINTSTRINGPLAYERONLY]    = WallyHandlePrintSelectionString,
     [CONTROLLER_CHOOSEACTION]             = WallyHandleChooseAction,
-    [CONTROLLER_YESNOBOX]                 = WallyHandleYesNoBox,
+    [CONTROLLER_YESNOBOX]                 = BtlController_Empty,
     [CONTROLLER_CHOOSEMOVE]               = WallyHandleChooseMove,
     [CONTROLLER_OPENBAG]                  = WallyHandleChooseItem,
-    [CONTROLLER_CHOOSEPOKEMON]            = WallyHandleChoosePokemon,
-    [CONTROLLER_23]                       = WallyHandleCmd23,
+    [CONTROLLER_CHOOSEPOKEMON]            = BtlController_Empty,
+    [CONTROLLER_23]                       = BtlController_Empty,
     [CONTROLLER_HEALTHBARUPDATE]          = WallyHandleHealthBarUpdate,
-    [CONTROLLER_EXPUPDATE]                = WallyHandleExpUpdate,
-    [CONTROLLER_STATUSICONUPDATE]         = WallyHandleStatusIconUpdate,
-    [CONTROLLER_STATUSANIMATION]          = WallyHandleStatusAnimation,
-    [CONTROLLER_STATUSXOR]                = WallyHandleStatusXor,
-    [CONTROLLER_DATATRANSFER]             = WallyHandleDataTransfer,
-    [CONTROLLER_DMA3TRANSFER]             = WallyHandleDMA3Transfer,
-    [CONTROLLER_PLAYBGM]                  = WallyHandlePlayBGM,
-    [CONTROLLER_32]                       = WallyHandleCmd32,
-    [CONTROLLER_TWORETURNVALUES]          = WallyHandleTwoReturnValues,
-    [CONTROLLER_CHOSENMONRETURNVALUE]     = WallyHandleChosenMonReturnValue,
-    [CONTROLLER_ONERETURNVALUE]           = WallyHandleOneReturnValue,
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = WallyHandleOneReturnValue_Duplicate,
-    [CONTROLLER_CLEARUNKVAR]              = WallyHandleClearUnkVar,
-    [CONTROLLER_SETUNKVAR]                = WallyHandleSetUnkVar,
-    [CONTROLLER_CLEARUNKFLAG]             = WallyHandleClearUnkFlag,
-    [CONTROLLER_TOGGLEUNKFLAG]            = WallyHandleToggleUnkFlag,
+    [CONTROLLER_EXPUPDATE]                = BtlController_Empty,
+    [CONTROLLER_STATUSICONUPDATE]         = BtlController_Empty,
+    [CONTROLLER_STATUSANIMATION]          = BtlController_Empty,
+    [CONTROLLER_STATUSXOR]                = BtlController_Empty,
+    [CONTROLLER_DATATRANSFER]             = BtlController_Empty,
+    [CONTROLLER_DMA3TRANSFER]             = BtlController_Empty,
+    [CONTROLLER_PLAYBGM]                  = BtlController_Empty,
+    [CONTROLLER_32]                       = BtlController_Empty,
+    [CONTROLLER_TWORETURNVALUES]          = BtlController_Empty,
+    [CONTROLLER_CHOSENMONRETURNVALUE]     = BtlController_Empty,
+    [CONTROLLER_ONERETURNVALUE]           = BtlController_Empty,
+    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = BtlController_Empty,
+    [CONTROLLER_CLEARUNKVAR]              = BtlController_Empty,
+    [CONTROLLER_SETUNKVAR]                = BtlController_Empty,
+    [CONTROLLER_CLEARUNKFLAG]             = BtlController_Empty,
+    [CONTROLLER_TOGGLEUNKFLAG]            = BtlController_Empty,
     [CONTROLLER_HITANIMATION]             = WallyHandleHitAnimation,
-    [CONTROLLER_CANTSWITCH]               = WallyHandleCantSwitch,
+    [CONTROLLER_CANTSWITCH]               = BtlController_Empty,
     [CONTROLLER_PLAYSE]                   = WallyHandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = WallyHandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = WallyHandleFaintingCry,
     [CONTROLLER_INTROSLIDE]               = WallyHandleIntroSlide,
     [CONTROLLER_INTROTRAINERBALLTHROW]    = WallyHandleIntroTrainerBallThrow,
     [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = WallyHandleDrawPartyStatusSummary,
-    [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = WallyHandleHidePartyStatusSummary,
-    [CONTROLLER_ENDBOUNCE]                = WallyHandleEndBounceEffect,
-    [CONTROLLER_SPRITEINVISIBILITY]       = WallyHandleSpriteInvisibility,
+    [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = BtlController_Empty,
+    [CONTROLLER_ENDBOUNCE]                = BtlController_Empty,
+    [CONTROLLER_SPRITEINVISIBILITY]       = BtlController_Empty,
     [CONTROLLER_BATTLEANIMATION]          = WallyHandleBattleAnimation,
-    [CONTROLLER_LINKSTANDBYMSG]           = WallyHandleLinkStandbyMsg,
-    [CONTROLLER_RESETACTIONMOVESELECTION] = WallyHandleResetActionMoveSelection,
+    [CONTROLLER_LINKSTANDBYMSG]           = BtlController_Empty,
+    [CONTROLLER_RESETACTIONMOVESELECTION] = BtlController_Empty,
     [CONTROLLER_ENDLINKBATTLE]            = WallyHandleEndLinkBattle,
-    [CONTROLLER_DEBUGMENU]                = WallyHandleBattleDebug,
-    [CONTROLLER_TERMINATOR_NOP]           = WallyCmdEnd
+    [CONTROLLER_DEBUGMENU]                = BtlController_Empty,
+    [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
 
 static void SpriteCB_Null7(void)
@@ -257,12 +223,6 @@ static void CompleteOnBattlerSpriteCallbackDummy(void)
 static void CompleteOnInactiveTextPrinter(void)
 {
     if (!IsTextPrinterActive(B_WIN_MSG))
-        WallyBufferExecCompleted();
-}
-
-static void CompleteOnFinishedAnimation(void)
-{
-    if (!gDoingBattleAnim)
         WallyBufferExecCompleted();
 }
 
@@ -409,12 +369,6 @@ static void WallyBufferExecCompleted(void)
     }
 }
 
-static void CompleteOnFinishedStatusAnimation(void)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].statusAnimActive)
-        WallyBufferExecCompleted();
-}
-
 static void WallyHandleGetMonData(void)
 {
     BtlController_HandleGetMonData(gActiveBattler, gPlayerParty);
@@ -428,21 +382,6 @@ static void WallyHandleGetRawMonData(void)
 static void WallyHandleSetMonData(void)
 {
     BtlController_HandleSetMonData(gActiveBattler, gPlayerParty);
-}
-
-static void WallyHandleSetRawMonData(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleLoadMonSprite(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleSwitchInAnim(void)
-{
-    WallyBufferExecCompleted();
 }
 
 static void WallyHandleReturnMonToBall(void)
@@ -484,42 +423,14 @@ static void WallyHandleTrainerSlide(void)
 
 #undef sSpeedX
 
-static void WallyHandleTrainerSlideBack(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleFaintAnimation(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandlePaletteFade(void)
-{
-    WallyBufferExecCompleted();
-}
-
 static void WallyHandleSuccessBallThrowAnim(void)
 {
-    gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
-    gDoingBattleAnim = TRUE;
-    InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_BALL_THROW_WITH_TRAINER);
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedAnimation;
+    BtlController_HandleSuccessBallThrowAnim(gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_BALL_THROW_WITH_TRAINER, FALSE);
 }
 
 static void WallyHandleBallThrowAnim(void)
 {
-    u8 ballThrowCaseId = gBattleResources->bufferA[gActiveBattler][1];
-
-    gBattleSpritesDataPtr->animationData->ballThrowCaseId = ballThrowCaseId;
-    gDoingBattleAnim = TRUE;
-    InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_BALL_THROW_WITH_TRAINER);
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedAnimation;
-}
-
-static void WallyHandlePause(void)
-{
-    WallyBufferExecCompleted();
+    BtlController_HandleBallThrowAnim(gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_BALL_THROW_WITH_TRAINER, FALSE);
 }
 
 static void WallyHandleMoveAnimation(void)
@@ -628,11 +539,6 @@ static void WallyHandleChooseAction(void)
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
 }
 
-static void WallyHandleYesNoBox(void)
-{
-    WallyBufferExecCompleted();
-}
-
 static void WallyHandleChooseMove(void)
 {
     switch (gBattleStruct->wallyMovesState)
@@ -668,16 +574,6 @@ static void WallyHandleChooseItem(void)
     gBattlerInMenuId = gActiveBattler;
 }
 
-static void WallyHandleChoosePokemon(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleCmd23(void)
-{
-    WallyBufferExecCompleted();
-}
-
 static void WallyHandleHealthBarUpdate(void)
 {
     s16 hpVal;
@@ -703,86 +599,6 @@ static void WallyHandleHealthBarUpdate(void)
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
 }
 
-static void WallyHandleExpUpdate(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleStatusIconUpdate(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleStatusAnimation(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleStatusXor(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleDataTransfer(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleDMA3Transfer(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandlePlayBGM(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleCmd32(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleTwoReturnValues(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleChosenMonReturnValue(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleOneReturnValue(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleOneReturnValue_Duplicate(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleClearUnkVar(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleSetUnkVar(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleClearUnkFlag(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleToggleUnkFlag(void)
-{
-    WallyBufferExecCompleted();
-}
-
 static void WallyHandleHitAnimation(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].invisible == TRUE)
@@ -796,11 +612,6 @@ static void WallyHandleHitAnimation(void)
         DoHitAnimHealthboxEffect(gActiveBattler);
         gBattlerControllerFuncs[gActiveBattler] = DoHitAnimBlinkSpriteEffect;
     }
-}
-
-static void WallyHandleCantSwitch(void)
-{
-    WallyBufferExecCompleted();
 }
 
 static void WallyHandlePlaySE(void)
@@ -904,21 +715,6 @@ static void WallyHandleDrawPartyStatusSummary(void)
     }
 }
 
-static void WallyHandleHidePartyStatusSummary(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleEndBounceEffect(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleSpriteInvisibility(void)
-{
-    WallyBufferExecCompleted();
-}
-
 static void WallyHandleBattleAnimation(void)
 {
     u8 animationId = gBattleResources->bufferA[gActiveBattler][1];
@@ -930,16 +726,6 @@ static void WallyHandleBattleAnimation(void)
         gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation;
 }
 
-static void WallyHandleLinkStandbyMsg(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleResetActionMoveSelection(void)
-{
-    WallyBufferExecCompleted();
-}
-
 static void WallyHandleEndLinkBattle(void)
 {
     gBattleOutcome = gBattleResources->bufferA[gActiveBattler][1];
@@ -949,13 +735,4 @@ static void WallyHandleEndLinkBattle(void)
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER) && gBattleTypeFlags & BATTLE_TYPE_LINK)
         gBattlerControllerFuncs[gActiveBattler] = SetBattleEndCallbacks;
-}
-
-static void WallyHandleBattleDebug(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyCmdEnd(void)
-{
 }

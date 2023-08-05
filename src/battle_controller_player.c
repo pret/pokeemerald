@@ -1585,12 +1585,6 @@ static void CompleteWhenChoseItem(void)
     }
 }
 
-static void CompleteOnSpecialAnimDone(void)
-{
-    if (!gDoingBattleAnim || !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
-        PlayerBufferExecCompleted();
-}
-
 static void DoHitAnimBlinkSpriteEffect(void)
 {
     u8 spriteId = gBattlerSpriteIds[gActiveBattler];
@@ -1964,28 +1958,12 @@ static void PlayerHandlePaletteFade(void)
 
 static void PlayerHandleSuccessBallThrowAnim(void)
 {
-    gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
-    gDoingBattleAnim = TRUE;
-    if (IsCriticalCapture())
-        InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gBattlerTarget, B_ANIM_CRITICAL_CAPTURE_THROW);
-    else
-        InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gBattlerTarget, B_ANIM_BALL_THROW);
-
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnSpecialAnimDone;
+    BtlController_HandleSuccessBallThrowAnim(gActiveBattler, gBattlerTarget, B_ANIM_BALL_THROW, TRUE);
 }
 
 static void PlayerHandleBallThrowAnim(void)
 {
-    u8 ballThrowCaseId = gBattleResources->bufferA[gActiveBattler][1];
-
-    gBattleSpritesDataPtr->animationData->ballThrowCaseId = ballThrowCaseId;
-    gDoingBattleAnim = TRUE;
-    if (IsCriticalCapture())
-        InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gBattlerTarget, B_ANIM_CRITICAL_CAPTURE_THROW);
-    else
-        InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gBattlerTarget, B_ANIM_BALL_THROW);
-
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnSpecialAnimDone;
+    BtlController_HandleBallThrowAnim(gActiveBattler, gBattlerTarget, B_ANIM_BALL_THROW, TRUE);
 }
 
 static void PlayerHandlePause(void)

@@ -252,8 +252,11 @@ void BtlController_EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
 void BtlController_EmitEndLinkBattle(u8 bufferId, u8 battleOutcome);
 void BtlController_EmitDebugMenu(u8 bufferId);
 
+void BtlController_Empty(void); // Empty command, does nothing, only completes the execution.
+void BtlController_TerminatorNop(void); // Dummy function at the end of the table.
 void StartSendOutAnim(u32 battler, bool32 dontClearSubstituteBit);
 
+// handlers
 void BtlController_HandleGetMonData(u32 battler, struct Pokemon *party);
 void BtlController_HandleGetRawMonData(u32 battler, struct Pokemon *party);
 void BtlController_HandleSetMonData(u32 battler, struct Pokemon *party);
@@ -262,6 +265,8 @@ void BtlController_HandleLoadMonSprite(u32 battler, struct Pokemon *party,  void
 void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*controllerCallback)(void));
 void BtlController_HandleReturnMonToBall(u32 battler);
 void BtlController_HandleFaintAnimation(u32 battler);
+void BtlController_HandleSuccessBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
+void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
 
 // player controller
 void SetControllerToPlayer(void);
