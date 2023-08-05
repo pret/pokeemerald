@@ -255,6 +255,7 @@ void BtlController_EmitDebugMenu(u8 bufferId);
 void BtlController_Empty(void); // Empty command, does nothing, only completes the execution.
 void BtlController_TerminatorNop(void); // Dummy function at the end of the table.
 void StartSendOutAnim(u32 battler, bool32 dontClearSubstituteBit);
+void Controller_WaitForString(void);
 
 // handlers
 void BtlController_HandleGetMonData(void);
@@ -267,6 +268,7 @@ void BtlController_HandleReturnMonToBall(void);
 void BtlController_HandleFaintAnimation(void);
 void BtlController_HandleSuccessBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
 void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
+void BtlController_HandlePrintString(u32 battler, bool32 updateTvData, bool32 arenaPtsDeduct);
 void DoStatusIconUpdate(u32 battler);
 void BtlController_HandleStatusIconUpdate(void);
 void BtlController_HandleStatusAnimation(void);

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_ai_main.h"
+#include "battle_arena.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_gfx_sfx_util.h"
@@ -17,6 +18,7 @@
 #include "sound.h"
 #include "task.h"
 #include "util.h"
+#include "text.h"
 #include "constants/abilities.h"
 #include "constants/songs.h"
 
@@ -2197,6 +2199,12 @@ static void Controller_WaitForStatusAnimation(void)
         BattleControllerComplete(gActiveBattler);
 }
 
+void Controller_WaitForString(void)
+{
+    if (!IsTextPrinterActive(B_WIN_MSG))
+        BattleControllerComplete(gActiveBattler);
+}
+
 static void Controller_HitAnimation(void)
 {
     u32 spriteId = gBattlerSpriteIds[gActiveBattler];
@@ -2417,6 +2425,22 @@ void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId, bool
 {
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = gBattleResources->bufferA[battler][1];
     HandleBallThrow(battler, target, animId, allowCriticalCapture);
+}
+
+void BtlController_HandlePrintString(u32 battler, bool32 updateTvData, bool32 arenaPtsDeduct)
+{
+    u16 *stringId;
+
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+    stringId = (u16 *)(&gBattleResources->bufferA[battler][2]);
+    BufferStringBattle(*stringId);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
+    gBattlerControllerFuncs[battler] = Controller_WaitForString;
+    if (updateTvData)
+        BattleTv_SetDataBasedOnString(*stringId);
+    if (arenaPtsDeduct)
+        BattleArena_DeductSkillPoints(battler, *stringId);
 }
 
 void DoStatusIconUpdate(u32 battler)

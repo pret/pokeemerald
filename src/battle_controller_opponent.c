@@ -375,12 +375,6 @@ static void CompleteOnHealthbarDone(void)
         OpponentBufferExecCompleted();
 }
 
-static void CompleteOnInactiveTextPrinter(void)
-{
-    if (!IsTextPrinterActive(B_WIN_MSG))
-        OpponentBufferExecCompleted();
-}
-
 static void SwitchIn_ShowSubstitute(void)
 {
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
@@ -704,15 +698,7 @@ static void OpponentDoMoveAnimation(void)
 
 static void OpponentHandlePrintString(void)
 {
-    u16 *stringId;
-
-    gBattle_BG0_X = 0;
-    gBattle_BG0_Y = 0;
-    stringId = (u16 *)(&gBattleResources->bufferA[gActiveBattler][2]);
-    BufferStringBattle(*stringId);
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
-    BattleArena_DeductSkillPoints(gActiveBattler, *stringId);
+    BtlController_HandlePrintString(gActiveBattler, FALSE, TRUE);
 }
 
 static void OpponentHandleChooseAction(void)

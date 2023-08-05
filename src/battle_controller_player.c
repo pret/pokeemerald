@@ -87,7 +87,7 @@ static void WaitForMonSelection(void);
 static void CompleteWhenChoseItem(void);
 static void Task_LaunchLvlUpAnim(u8);
 static void Task_PrepareToGiveExpWithExpBar(u8);
-static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8);
+static void Task_SetControllerToWaitForString(u8);
 static void Task_GiveExpWithExpBar(u8);
 static void Task_UpdateLvlInHealthbox(u8);
 static void PrintLinkStandbyMsg(void);
@@ -1329,12 +1329,6 @@ static void CompleteOnHealthbarDone(void)
     }
 }
 
-static void CompleteOnInactiveTextPrinter(void)
-{
-    if (!IsTextPrinterActive(B_WIN_MSG))
-        PlayerBufferExecCompleted();
-}
-
 #define tExpTask_monId          data[0]
 #define tExpTask_battler        data[2]
 #define tExpTask_gainedExp_1    data[3]
@@ -1375,13 +1369,13 @@ static void Task_GiveExpToMon(u8 taskId)
              && (monId == gBattlerPartyIndexes[battlerId] || monId == gBattlerPartyIndexes[BATTLE_PARTNER(battlerId)]))
                 gTasks[taskId].func = Task_LaunchLvlUpAnim;
             else
-                gTasks[taskId].func = DestroyExpTaskAndCompleteOnInactiveTextPrinter;
+                gTasks[taskId].func = Task_SetControllerToWaitForString;
         }
         else
         {
             currExp += gainedExp;
             SetMonData(mon, MON_DATA_EXP, &currExp);
-            gBattlerControllerFuncs[battlerId] = CompleteOnInactiveTextPrinter;
+            gBattlerControllerFuncs[battlerId] = Controller_WaitForString;
             DestroyTask(taskId);
         }
     }
@@ -1453,7 +1447,7 @@ static void Task_GiveExpWithExpBar(u8 taskId)
             {
                 currExp += gainedExp;
                 SetMonData(&gPlayerParty[monId], MON_DATA_EXP, &currExp);
-                gBattlerControllerFuncs[battlerId] = CompleteOnInactiveTextPrinter;
+                gBattlerControllerFuncs[battlerId] = Controller_WaitForString;
                 DestroyTask(taskId);
             }
         }
@@ -1485,21 +1479,15 @@ static void Task_UpdateLvlInHealthbox(u8 taskId)
         else
             UpdateHealthboxAttribute(gHealthboxSpriteIds[battlerId], &gPlayerParty[monIndex], HEALTHBOX_ALL);
 
-        gTasks[taskId].func = DestroyExpTaskAndCompleteOnInactiveTextPrinter;
+        gTasks[taskId].func = Task_SetControllerToWaitForString;
     }
 }
 
-static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId)
+static void Task_SetControllerToWaitForString(u8 taskId)
 {
     u8 battlerId = gTasks[taskId].tExpTask_battler;
-    gBattlerControllerFuncs[battlerId] = CompleteOnInactiveTextPrinter;
+    gBattlerControllerFuncs[battlerId] = Controller_WaitForString;
     DestroyTask(taskId);
-}
-
-static void CompleteOnInactiveTextPrinter2(void)
-{
-    if (!IsTextPrinterActive(B_WIN_MSG))
-        PlayerBufferExecCompleted();
 }
 
 static void OpenPartyMenuToChooseMon(void)
@@ -1953,16 +1941,7 @@ static void PlayerDoMoveAnimation(void)
 
 static void PlayerHandlePrintString(void)
 {
-    u16 *stringId;
-
-    gBattle_BG0_X = 0;
-    gBattle_BG0_Y = 0;
-    stringId = (u16 *)(&gBattleResources->bufferA[gActiveBattler][2]);
-    BufferStringBattle(*stringId);
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter2;
-    BattleTv_SetDataBasedOnString(*stringId);
-    BattleArena_DeductSkillPoints(gActiveBattler, *stringId);
+    BtlController_HandlePrintString(gActiveBattler, TRUE, TRUE);
 }
 
 static void PlayerHandlePrintSelectionString(void)

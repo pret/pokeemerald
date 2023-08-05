@@ -212,12 +212,6 @@ static void CompleteOnBattlerSpriteCallbackDummy(void)
         WallyBufferExecCompleted();
 }
 
-static void CompleteOnInactiveTextPrinter(void)
-{
-    if (!IsTextPrinterActive(B_WIN_MSG))
-        WallyBufferExecCompleted();
-}
-
 static void OpenBagAfterPaletteFade(void)
 {
     if (!gPaletteFade.active)
@@ -443,14 +437,7 @@ static void WallyDoMoveAnimation(void)
 
 static void WallyHandlePrintString(void)
 {
-    u16 *stringId;
-
-    gBattle_BG0_X = 0;
-    gBattle_BG0_Y = 0;
-    stringId = (u16 *)(&gBattleResources->bufferA[gActiveBattler][2]);
-    BufferStringBattle(*stringId);
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
+    BtlController_HandlePrintString(gActiveBattler, FALSE, FALSE);
 }
 
 static void WallyHandlePrintSelectionString(void)

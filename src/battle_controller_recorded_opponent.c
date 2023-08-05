@@ -342,12 +342,6 @@ static void CompleteOnHealthbarDone(void)
         RecordedOpponentBufferExecCompleted();
 }
 
-static void CompleteOnInactiveTextPrinter(void)
-{
-    if (!IsTextPrinterActive(B_WIN_MSG))
-        RecordedOpponentBufferExecCompleted();
-}
-
 static void SwitchIn_ShowSubstitute(void)
 {
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
@@ -591,7 +585,7 @@ static void RecordedOpponentHandlePrintString(void)
     }
 
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
+    gBattlerControllerFuncs[gActiveBattler] = Controller_WaitForString;
 }
 
 static void RecordedOpponentHandleChooseAction(void)

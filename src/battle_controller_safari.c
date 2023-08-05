@@ -192,12 +192,6 @@ static void CompleteOnBattlerSpriteCallbackDummy(void)
         SafariBufferExecCompleted();
 }
 
-static void CompleteOnInactiveTextPrinter(void)
-{
-    if (!IsTextPrinterActive(B_WIN_MSG))
-        SafariBufferExecCompleted();
-}
-
 static void CompleteOnHealthboxSpriteCallbackDummy(void)
 {
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
@@ -287,14 +281,7 @@ static void SafariHandleBallThrowAnim(void)
 
 static void SafariHandlePrintString(void)
 {
-    u16 *stringId;
-
-    gBattle_BG0_X = 0;
-    gBattle_BG0_Y = 0;
-    stringId = (u16 *)(&gBattleResources->bufferA[gActiveBattler][2]);
-    BufferStringBattle(*stringId);
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
+    BtlController_HandlePrintString(gActiveBattler, FALSE, FALSE);
 }
 
 static void SafariHandlePrintSelectionString(void)
