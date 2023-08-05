@@ -30,7 +30,6 @@
 #include "recorded_battle.h"
 
 static void LinkOpponentHandleGetMonData(void);
-static void LinkOpponentHandleGetRawMonData(void);
 static void LinkOpponentHandleSetMonData(void);
 static void LinkOpponentHandleSetRawMonData(void);
 static void LinkOpponentHandleLoadMonSprite(void);
@@ -40,38 +39,16 @@ static void LinkOpponentHandleDrawTrainerPic(void);
 static void LinkOpponentHandleTrainerSlide(void);
 static void LinkOpponentHandleTrainerSlideBack(void);
 static void LinkOpponentHandleFaintAnimation(void);
-static void LinkOpponentHandlePaletteFade(void);
-static void LinkOpponentHandleSuccessBallThrowAnim(void);
-static void LinkOpponentHandleBallThrowAnim(void);
-static void LinkOpponentHandlePause(void);
 static void LinkOpponentHandleMoveAnimation(void);
 static void LinkOpponentHandlePrintString(void);
-static void LinkOpponentHandlePrintSelectionString(void);
-static void LinkOpponentHandleChooseAction(void);
-static void LinkOpponentHandleYesNoBox(void);
-static void LinkOpponentHandleChooseMove(void);
-static void LinkOpponentHandleChooseItem(void);
-static void LinkOpponentHandleChoosePokemon(void);
-static void LinkOpponentHandleCmd23(void);
 static void LinkOpponentHandleHealthBarUpdate(void);
-static void LinkOpponentHandleExpUpdate(void);
 static void LinkOpponentHandleStatusIconUpdate(void);
 static void LinkOpponentHandleStatusAnimation(void);
-static void LinkOpponentHandleStatusXor(void);
-static void LinkOpponentHandleDataTransfer(void);
-static void LinkOpponentHandleDMA3Transfer(void);
-static void LinkOpponentHandlePlayBGM(void);
-static void LinkOpponentHandleCmd32(void);
-static void LinkOpponentHandleTwoReturnValues(void);
-static void LinkOpponentHandleChosenMonReturnValue(void);
-static void LinkOpponentHandleOneReturnValue(void);
-static void LinkOpponentHandleOneReturnValue_Duplicate(void);
 static void LinkOpponentHandleClearUnkVar(void);
 static void LinkOpponentHandleSetUnkVar(void);
 static void LinkOpponentHandleClearUnkFlag(void);
 static void LinkOpponentHandleToggleUnkFlag(void);
 static void LinkOpponentHandleHitAnimation(void);
-static void LinkOpponentHandleCantSwitch(void);
 static void LinkOpponentHandlePlaySE(void);
 static void LinkOpponentHandlePlayFanfareOrBGM(void);
 static void LinkOpponentHandleFaintingCry(void);
@@ -79,14 +56,10 @@ static void LinkOpponentHandleIntroSlide(void);
 static void LinkOpponentHandleIntroTrainerBallThrow(void);
 static void LinkOpponentHandleDrawPartyStatusSummary(void);
 static void LinkOpponentHandleHidePartyStatusSummary(void);
-static void LinkOpponentHandleEndBounceEffect(void);
 static void LinkOpponentHandleSpriteInvisibility(void);
 static void LinkOpponentHandleBattleAnimation(void);
 static void LinkOpponentHandleLinkStandbyMsg(void);
-static void LinkOpponentHandleResetActionMoveSelection(void);
 static void LinkOpponentHandleEndLinkBattle(void);
-static void LinkOpponentHandleBattleDebug(void);
-static void LinkOpponentCmdEnd(void);
 
 static void LinkOpponentBufferRunCommand(void);
 static void LinkOpponentBufferExecCompleted(void);
@@ -101,7 +74,7 @@ static void EndDrawPartyStatusSummary(void);
 static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
     [CONTROLLER_GETMONDATA]               = LinkOpponentHandleGetMonData,
-    [CONTROLLER_GETRAWMONDATA]            = LinkOpponentHandleGetRawMonData,
+    [CONTROLLER_GETRAWMONDATA]            = BtlController_Empty,
     [CONTROLLER_SETMONDATA]               = LinkOpponentHandleSetMonData,
     [CONTROLLER_SETRAWMONDATA]            = LinkOpponentHandleSetRawMonData,
     [CONTROLLER_LOADMONSPRITE]            = LinkOpponentHandleLoadMonSprite,
@@ -111,38 +84,38 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TRAINERSLIDE]             = LinkOpponentHandleTrainerSlide,
     [CONTROLLER_TRAINERSLIDEBACK]         = LinkOpponentHandleTrainerSlideBack,
     [CONTROLLER_FAINTANIMATION]           = LinkOpponentHandleFaintAnimation,
-    [CONTROLLER_PALETTEFADE]              = LinkOpponentHandlePaletteFade,
-    [CONTROLLER_SUCCESSBALLTHROWANIM]     = LinkOpponentHandleSuccessBallThrowAnim,
-    [CONTROLLER_BALLTHROWANIM]            = LinkOpponentHandleBallThrowAnim,
-    [CONTROLLER_PAUSE]                    = LinkOpponentHandlePause,
+    [CONTROLLER_PALETTEFADE]              = BtlController_Empty,
+    [CONTROLLER_SUCCESSBALLTHROWANIM]     = BtlController_Empty,
+    [CONTROLLER_BALLTHROWANIM]            = BtlController_Empty,
+    [CONTROLLER_PAUSE]                    = BtlController_Empty,
     [CONTROLLER_MOVEANIMATION]            = LinkOpponentHandleMoveAnimation,
     [CONTROLLER_PRINTSTRING]              = LinkOpponentHandlePrintString,
-    [CONTROLLER_PRINTSTRINGPLAYERONLY]    = LinkOpponentHandlePrintSelectionString,
-    [CONTROLLER_CHOOSEACTION]             = LinkOpponentHandleChooseAction,
-    [CONTROLLER_YESNOBOX]                 = LinkOpponentHandleYesNoBox,
-    [CONTROLLER_CHOOSEMOVE]               = LinkOpponentHandleChooseMove,
-    [CONTROLLER_OPENBAG]                  = LinkOpponentHandleChooseItem,
-    [CONTROLLER_CHOOSEPOKEMON]            = LinkOpponentHandleChoosePokemon,
-    [CONTROLLER_23]                       = LinkOpponentHandleCmd23,
+    [CONTROLLER_PRINTSTRINGPLAYERONLY]    = BtlController_Empty,
+    [CONTROLLER_CHOOSEACTION]             = BtlController_Empty,
+    [CONTROLLER_YESNOBOX]                 = BtlController_Empty,
+    [CONTROLLER_CHOOSEMOVE]               = BtlController_Empty,
+    [CONTROLLER_OPENBAG]                  = BtlController_Empty,
+    [CONTROLLER_CHOOSEPOKEMON]            = BtlController_Empty,
+    [CONTROLLER_23]                       = BtlController_Empty,
     [CONTROLLER_HEALTHBARUPDATE]          = LinkOpponentHandleHealthBarUpdate,
-    [CONTROLLER_EXPUPDATE]                = LinkOpponentHandleExpUpdate,
+    [CONTROLLER_EXPUPDATE]                = BtlController_Empty,
     [CONTROLLER_STATUSICONUPDATE]         = LinkOpponentHandleStatusIconUpdate,
     [CONTROLLER_STATUSANIMATION]          = LinkOpponentHandleStatusAnimation,
-    [CONTROLLER_STATUSXOR]                = LinkOpponentHandleStatusXor,
-    [CONTROLLER_DATATRANSFER]             = LinkOpponentHandleDataTransfer,
-    [CONTROLLER_DMA3TRANSFER]             = LinkOpponentHandleDMA3Transfer,
-    [CONTROLLER_PLAYBGM]                  = LinkOpponentHandlePlayBGM,
-    [CONTROLLER_32]                       = LinkOpponentHandleCmd32,
-    [CONTROLLER_TWORETURNVALUES]          = LinkOpponentHandleTwoReturnValues,
-    [CONTROLLER_CHOSENMONRETURNVALUE]     = LinkOpponentHandleChosenMonReturnValue,
-    [CONTROLLER_ONERETURNVALUE]           = LinkOpponentHandleOneReturnValue,
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = LinkOpponentHandleOneReturnValue_Duplicate,
+    [CONTROLLER_STATUSXOR]                = BtlController_Empty,
+    [CONTROLLER_DATATRANSFER]             = BtlController_Empty,
+    [CONTROLLER_DMA3TRANSFER]             = BtlController_Empty,
+    [CONTROLLER_PLAYBGM]                  = BtlController_Empty,
+    [CONTROLLER_32]                       = BtlController_Empty,
+    [CONTROLLER_TWORETURNVALUES]          = BtlController_Empty,
+    [CONTROLLER_CHOSENMONRETURNVALUE]     = BtlController_Empty,
+    [CONTROLLER_ONERETURNVALUE]           = BtlController_Empty,
+    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = BtlController_Empty,
     [CONTROLLER_CLEARUNKVAR]              = LinkOpponentHandleClearUnkVar,
     [CONTROLLER_SETUNKVAR]                = LinkOpponentHandleSetUnkVar,
     [CONTROLLER_CLEARUNKFLAG]             = LinkOpponentHandleClearUnkFlag,
     [CONTROLLER_TOGGLEUNKFLAG]            = LinkOpponentHandleToggleUnkFlag,
     [CONTROLLER_HITANIMATION]             = LinkOpponentHandleHitAnimation,
-    [CONTROLLER_CANTSWITCH]               = LinkOpponentHandleCantSwitch,
+    [CONTROLLER_CANTSWITCH]               = BtlController_Empty,
     [CONTROLLER_PLAYSE]                   = LinkOpponentHandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = LinkOpponentHandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = LinkOpponentHandleFaintingCry,
@@ -150,14 +123,14 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_INTROTRAINERBALLTHROW]    = LinkOpponentHandleIntroTrainerBallThrow,
     [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = LinkOpponentHandleDrawPartyStatusSummary,
     [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = LinkOpponentHandleHidePartyStatusSummary,
-    [CONTROLLER_ENDBOUNCE]                = LinkOpponentHandleEndBounceEffect,
+    [CONTROLLER_ENDBOUNCE]                = BtlController_Empty,
     [CONTROLLER_SPRITEINVISIBILITY]       = LinkOpponentHandleSpriteInvisibility,
     [CONTROLLER_BATTLEANIMATION]          = LinkOpponentHandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = LinkOpponentHandleLinkStandbyMsg,
-    [CONTROLLER_RESETACTIONMOVESELECTION] = LinkOpponentHandleResetActionMoveSelection,
+    [CONTROLLER_RESETACTIONMOVESELECTION] = BtlController_Empty,
     [CONTROLLER_ENDLINKBATTLE]            = LinkOpponentHandleEndLinkBattle,
-    [CONTROLLER_DEBUGMENU]                = LinkOpponentHandleBattleDebug,
-    [CONTROLLER_TERMINATOR_NOP]           = LinkOpponentCmdEnd
+    [CONTROLLER_DEBUGMENU]                = BtlController_Empty,
+    [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
 
 static void LinkOpponentDummy(void)
@@ -512,11 +485,6 @@ static void LinkOpponentHandleGetMonData(void)
     BtlController_HandleGetMonData(gActiveBattler, gEnemyParty);
 }
 
-static void LinkOpponentHandleGetRawMonData(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
 static void LinkOpponentHandleSetMonData(void)
 {
     BtlController_HandleSetMonData(gActiveBattler, gEnemyParty);
@@ -674,26 +642,6 @@ static void LinkOpponentHandleFaintAnimation(void)
     BtlController_HandleFaintAnimation(gActiveBattler);
 }
 
-static void LinkOpponentHandlePaletteFade(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleSuccessBallThrowAnim(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleBallThrowAnim(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandlePause(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
 static void LinkOpponentHandleMoveAnimation(void)
 {
     if (!IsBattleSEPlaying(gActiveBattler))
@@ -776,41 +724,6 @@ static void LinkOpponentHandlePrintString(void)
     BattleTv_SetDataBasedOnString(*stringId);
 }
 
-static void LinkOpponentHandlePrintSelectionString(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleChooseAction(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleYesNoBox(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleChooseMove(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleChooseItem(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleChoosePokemon(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleCmd23(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
 static void LinkOpponentHandleHealthBarUpdate(void)
 {
     s16 hpVal;
@@ -835,11 +748,6 @@ static void LinkOpponentHandleHealthBarUpdate(void)
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
 }
 
-static void LinkOpponentHandleExpUpdate(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
 static void LinkOpponentHandleStatusIconUpdate(void)
 {
     if (!IsBattleSEPlaying(gActiveBattler))
@@ -861,51 +769,6 @@ static void LinkOpponentHandleStatusAnimation(void)
                         gBattleResources->bufferA[gActiveBattler][2] | (gBattleResources->bufferA[gActiveBattler][3] << 8) | (gBattleResources->bufferA[gActiveBattler][4] << 16) | (gBattleResources->bufferA[gActiveBattler][5] << 24));
         gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedStatusAnimation;
     }
-}
-
-static void LinkOpponentHandleStatusXor(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleDataTransfer(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleDMA3Transfer(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandlePlayBGM(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleCmd32(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleTwoReturnValues(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleChosenMonReturnValue(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleOneReturnValue(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleOneReturnValue_Duplicate(void)
-{
-    LinkOpponentBufferExecCompleted();
 }
 
 static void LinkOpponentHandleClearUnkVar(void)
@@ -945,11 +808,6 @@ static void LinkOpponentHandleHitAnimation(void)
         DoHitAnimHealthboxEffect(gActiveBattler);
         gBattlerControllerFuncs[gActiveBattler] = DoHitAnimBlinkSpriteEffect;
     }
-}
-
-static void LinkOpponentHandleCantSwitch(void)
-{
-    LinkOpponentBufferExecCompleted();
 }
 
 static void LinkOpponentHandlePlaySE(void)
@@ -1098,11 +956,6 @@ static void LinkOpponentHandleHidePartyStatusSummary(void)
     LinkOpponentBufferExecCompleted();
 }
 
-static void LinkOpponentHandleEndBounceEffect(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
 static void LinkOpponentHandleSpriteInvisibility(void)
 {
     if (IsBattlerSpritePresent(gActiveBattler))
@@ -1135,11 +988,6 @@ static void LinkOpponentHandleLinkStandbyMsg(void)
     LinkOpponentBufferExecCompleted();
 }
 
-static void LinkOpponentHandleResetActionMoveSelection(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
 static void LinkOpponentHandleEndLinkBattle(void)
 {
     RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[gActiveBattler][4]);
@@ -1154,13 +1002,4 @@ static void LinkOpponentHandleEndLinkBattle(void)
     BeginFastPaletteFade(3);
     LinkOpponentBufferExecCompleted();
     gBattlerControllerFuncs[gActiveBattler] = SetBattleEndCallbacks;
-}
-
-static void LinkOpponentHandleBattleDebug(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentCmdEnd(void)
-{
 }

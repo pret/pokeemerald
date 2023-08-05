@@ -67,10 +67,8 @@ static void PlayerHandleExpUpdate(void);
 static void PlayerHandleStatusIconUpdate(void);
 static void PlayerHandleStatusAnimation(void);
 static void PlayerHandleStatusXor(void);
-static void PlayerHandleDataTransfer(void);
 static void PlayerHandleDMA3Transfer(void);
 static void PlayerHandlePlayBGM(void);
-static void PlayerHandleCmd32(void);
 static void PlayerHandleTwoReturnValues(void);
 static void PlayerHandleChosenMonReturnValue(void);
 static void PlayerHandleOneReturnValue(void);
@@ -80,7 +78,6 @@ static void PlayerHandleSetUnkVar(void);
 static void PlayerHandleClearUnkFlag(void);
 static void PlayerHandleToggleUnkFlag(void);
 static void PlayerHandleHitAnimation(void);
-static void PlayerHandleCantSwitch(void);
 static void PlayerHandlePlaySE(void);
 static void PlayerHandlePlayFanfareOrBGM(void);
 static void PlayerHandleFaintingCry(void);
@@ -95,7 +92,6 @@ static void PlayerHandleLinkStandbyMsg(void);
 static void PlayerHandleResetActionMoveSelection(void);
 static void PlayerHandleEndLinkBattle(void);
 static void PlayerHandleBattleDebug(void);
-static void PlayerCmdEnd(void);
 
 static void PlayerBufferRunCommand(void);
 static void HandleInputChooseTarget(void);
@@ -153,10 +149,10 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_STATUSICONUPDATE]         = PlayerHandleStatusIconUpdate,
     [CONTROLLER_STATUSANIMATION]          = PlayerHandleStatusAnimation,
     [CONTROLLER_STATUSXOR]                = PlayerHandleStatusXor,
-    [CONTROLLER_DATATRANSFER]             = PlayerHandleDataTransfer,
+    [CONTROLLER_DATATRANSFER]             = BtlController_Empty,
     [CONTROLLER_DMA3TRANSFER]             = PlayerHandleDMA3Transfer,
     [CONTROLLER_PLAYBGM]                  = PlayerHandlePlayBGM,
-    [CONTROLLER_32]                       = PlayerHandleCmd32,
+    [CONTROLLER_32]                       = BtlController_Empty,
     [CONTROLLER_TWORETURNVALUES]          = PlayerHandleTwoReturnValues,
     [CONTROLLER_CHOSENMONRETURNVALUE]     = PlayerHandleChosenMonReturnValue,
     [CONTROLLER_ONERETURNVALUE]           = PlayerHandleOneReturnValue,
@@ -166,7 +162,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_CLEARUNKFLAG]             = PlayerHandleClearUnkFlag,
     [CONTROLLER_TOGGLEUNKFLAG]            = PlayerHandleToggleUnkFlag,
     [CONTROLLER_HITANIMATION]             = PlayerHandleHitAnimation,
-    [CONTROLLER_CANTSWITCH]               = PlayerHandleCantSwitch,
+    [CONTROLLER_CANTSWITCH]               = BtlController_Empty,
     [CONTROLLER_PLAYSE]                   = PlayerHandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = PlayerHandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = PlayerHandleFaintingCry,
@@ -181,7 +177,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_RESETACTIONMOVESELECTION] = PlayerHandleResetActionMoveSelection,
     [CONTROLLER_ENDLINKBATTLE]            = PlayerHandleEndLinkBattle,
     [CONTROLLER_DEBUGMENU]                = PlayerHandleBattleDebug,
-    [CONTROLLER_TERMINATOR_NOP]           = PlayerCmdEnd
+    [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
 
 void BattleControllerDummy(void)
@@ -2303,11 +2299,6 @@ static void PlayerHandleStatusXor(void)
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleDataTransfer(void)
-{
-    PlayerBufferExecCompleted();
-}
-
 static void PlayerHandleDMA3Transfer(void)
 {
     u32 dstArg = gBattleResources->bufferA[gActiveBattler][1]
@@ -2338,11 +2329,6 @@ static void PlayerHandleDMA3Transfer(void)
 static void PlayerHandlePlayBGM(void)
 {
     PlayBGM(gBattleResources->bufferA[gActiveBattler][1] | (gBattleResources->bufferA[gActiveBattler][2] << 8));
-    PlayerBufferExecCompleted();
-}
-
-static void PlayerHandleCmd32(void)
-{
     PlayerBufferExecCompleted();
 }
 
@@ -2407,11 +2393,6 @@ static void PlayerHandleHitAnimation(void)
         DoHitAnimHealthboxEffect(gActiveBattler);
         gBattlerControllerFuncs[gActiveBattler] = DoHitAnimBlinkSpriteEffect;
     }
-}
-
-static void PlayerHandleCantSwitch(void)
-{
-    PlayerBufferExecCompleted();
 }
 
 static void PlayerHandlePlaySE(void)
@@ -2675,8 +2656,4 @@ static void PlayerHandleBattleDebug(void)
     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
     SetMainCallback2(CB2_BattleDebugMenu);
     gBattlerControllerFuncs[gActiveBattler] = WaitForDebug;
-}
-
-static void PlayerCmdEnd(void)
-{
 }
