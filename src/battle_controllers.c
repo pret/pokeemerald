@@ -7,6 +7,7 @@
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "battle_setup.h"
+#include "battle_tv.h"
 #include "cable_club.h"
 #include "link.h"
 #include "link_rfu.h"
@@ -2184,6 +2185,31 @@ static void Controller_WaitForBallThrow(void)
         BattleControllerComplete(gActiveBattler);
 }
 
+static void Controller_WaitForBattleAnimation(void)
+{
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animFromTableActive)
+        BattleControllerComplete(gActiveBattler);
+}
+
+static void Controller_HitAnimation(void)
+{
+    u32 spriteId = gBattlerSpriteIds[gActiveBattler];
+
+    if (gSprites[spriteId].data[1] == 32)
+    {
+        gSprites[spriteId].data[1] = 0;
+        gSprites[spriteId].invisible = FALSE;
+        gDoingBattleAnim = FALSE;
+        BattleControllerComplete(gActiveBattler);
+    }
+    else
+    {
+        if ((gSprites[spriteId].data[1] % 4) == 0)
+            gSprites[spriteId].invisible ^= 1;
+        gSprites[spriteId].data[1]++;
+    }
+}
+
 // Used for all the commands which do nothing.
 void BtlController_Empty(void)
 {
@@ -2310,25 +2336,26 @@ void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*c
     gBattlerControllerFuncs[battler] = controllerCallback;
 }
 
-void BtlController_HandleReturnMonToBall(u32 battler)
+void BtlController_HandleReturnMonToBall(void)
 {
-    if (gBattleResources->bufferA[battler][1] == 0)
+    if (gBattleResources->bufferA[gActiveBattler][1] == 0)
     {
-        gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 0;
-        gBattlerControllerFuncs[battler] = Controller_ReturnMonToBall;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
+        gBattlerControllerFuncs[gActiveBattler] = Controller_ReturnMonToBall;
     }
     else
     {
-        FreeMonSprite(battler);
-        BattleControllerComplete(battler);
+        FreeMonSprite(gActiveBattler);
+        BattleControllerComplete(gActiveBattler);
     }
 }
 
 #define sSpeedX data[1]
 #define sSpeedY data[2]
 
-void BtlController_HandleFaintAnimation(u32 battler)
+void BtlController_HandleFaintAnimation(void)
 {
+    u32 battler = gActiveBattler;
     if (gBattleSpritesDataPtr->healthBoxesData[battler].animationState == 0)
     {
         if (gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
@@ -2386,6 +2413,45 @@ void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId, bool
     HandleBallThrow(battler, target, animId, allowCriticalCapture);
 }
 
+void BtlController_HandleClearUnkVar(void)
+{
+    gUnusedControllerStruct.unk = 0;
+    BattleControllerComplete(gActiveBattler);
+}
+
+void BtlController_HandleSetUnkVar(void)
+{
+    gUnusedControllerStruct.unk = gBattleResources->bufferA[gActiveBattler][1];
+    BattleControllerComplete(gActiveBattler);
+}
+
+void BtlController_HandleClearUnkFlag(void)
+{
+    gUnusedControllerStruct.flag = 0;
+    BattleControllerComplete(gActiveBattler);
+}
+
+void BtlController_HandleToggleUnkFlag(void)
+{
+    gUnusedControllerStruct.flag ^= 1;
+    BattleControllerComplete(gActiveBattler);
+}
+
+void BtlController_HandleHitAnimation(void)
+{
+    if (gSprites[gBattlerSpriteIds[gActiveBattler]].invisible == TRUE)
+    {
+        BattleControllerComplete(gActiveBattler);
+    }
+    else
+    {
+        gDoingBattleAnim = TRUE;
+        gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
+        DoHitAnimHealthboxEffect(gActiveBattler);
+        gBattlerControllerFuncs[gActiveBattler] = Controller_HitAnimation;
+    }
+}
+
 void BtlController_HandlePlaySE(void)
 {
     s8 pan = (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER) ? SOUND_PAN_ATTACKER : SOUND_PAN_TARGET;
@@ -2427,4 +2493,38 @@ void BtlController_HandleFaintingCry(void)
 
     PlayCry_ByMode(GetMonData(&party[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES), pan, CRY_MODE_FAINT);
     BattleControllerComplete(gActiveBattler);
+}
+
+void BtlController_HandleIntroSlide(void)
+{
+    HandleIntroSlide(gBattleResources->bufferA[gActiveBattler][1]);
+    gIntroSlideFlags |= 1;
+    BattleControllerComplete(gActiveBattler);
+}
+
+void BtlController_HandleSpriteInvisibility(void)
+{
+    if (IsBattlerSpritePresent(gActiveBattler))
+    {
+        gSprites[gBattlerSpriteIds[gActiveBattler]].invisible = gBattleResources->bufferA[gActiveBattler][1];
+        CopyBattleSpriteInvisibility(gActiveBattler);
+    }
+    BattleControllerComplete(gActiveBattler);
+}
+
+void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE, bool32 updateTvData)
+{
+    if (ignoreSE || !IsBattleSEPlaying(battler))
+    {
+        u8 animationId = gBattleResources->bufferA[battler][1];
+        u16 argument = gBattleResources->bufferA[battler][2] | (gBattleResources->bufferA[battler][3] << 8);
+
+        if (TryHandleLaunchBattleTableAnimation(battler, battler, battler, animationId, argument))
+            BattleControllerComplete(battler);
+        else
+            gBattlerControllerFuncs[battler] = Controller_WaitForBattleAnimation;
+
+        if (updateTvData)
+            BattleTv_SetDataBasedOnAnimation(animationId);
+    }
 }

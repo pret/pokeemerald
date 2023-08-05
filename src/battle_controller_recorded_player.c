@@ -30,10 +30,8 @@
 
 static void RecordedPlayerHandleLoadMonSprite(void);
 static void RecordedPlayerHandleSwitchInAnim(void);
-static void RecordedPlayerHandleReturnMonToBall(void);
 static void RecordedPlayerHandleDrawTrainerPic(void);
 static void RecordedPlayerHandleTrainerSlideBack(void);
-static void RecordedPlayerHandleFaintAnimation(void);
 static void RecordedPlayerHandleMoveAnimation(void);
 static void RecordedPlayerHandlePrintString(void);
 static void RecordedPlayerHandleChooseAction(void);
@@ -43,16 +41,9 @@ static void RecordedPlayerHandleChoosePokemon(void);
 static void RecordedPlayerHandleHealthBarUpdate(void);
 static void RecordedPlayerHandleStatusIconUpdate(void);
 static void RecordedPlayerHandleStatusAnimation(void);
-static void RecordedPlayerHandleClearUnkVar(void);
-static void RecordedPlayerHandleSetUnkVar(void);
-static void RecordedPlayerHandleClearUnkFlag(void);
-static void RecordedPlayerHandleToggleUnkFlag(void);
-static void RecordedPlayerHandleHitAnimation(void);
-static void RecordedPlayerHandleIntroSlide(void);
 static void RecordedPlayerHandleIntroTrainerBallThrow(void);
 static void RecordedPlayerHandleDrawPartyStatusSummary(void);
 static void RecordedPlayerHandleHidePartyStatusSummary(void);
-static void RecordedPlayerHandleSpriteInvisibility(void);
 static void RecordedPlayerHandleBattleAnimation(void);
 static void RecordedPlayerHandleEndLinkBattle(void);
 
@@ -73,11 +64,11 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) 
     [CONTROLLER_SETRAWMONDATA]            = BtlController_HandleSetRawMonData,
     [CONTROLLER_LOADMONSPRITE]            = RecordedPlayerHandleLoadMonSprite,
     [CONTROLLER_SWITCHINANIM]             = RecordedPlayerHandleSwitchInAnim,
-    [CONTROLLER_RETURNMONTOBALL]          = RecordedPlayerHandleReturnMonToBall,
+    [CONTROLLER_RETURNMONTOBALL]          = BtlController_HandleReturnMonToBall,
     [CONTROLLER_DRAWTRAINERPIC]           = RecordedPlayerHandleDrawTrainerPic,
     [CONTROLLER_TRAINERSLIDE]             = BtlController_Empty,
     [CONTROLLER_TRAINERSLIDEBACK]         = RecordedPlayerHandleTrainerSlideBack,
-    [CONTROLLER_FAINTANIMATION]           = RecordedPlayerHandleFaintAnimation,
+    [CONTROLLER_FAINTANIMATION]           = BtlController_HandleFaintAnimation,
     [CONTROLLER_PALETTEFADE]              = BtlController_Empty,
     [CONTROLLER_SUCCESSBALLTHROWANIM]     = BtlController_Empty,
     [CONTROLLER_BALLTHROWANIM]            = BtlController_Empty,
@@ -104,21 +95,21 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) 
     [CONTROLLER_CHOSENMONRETURNVALUE]     = BtlController_Empty,
     [CONTROLLER_ONERETURNVALUE]           = BtlController_Empty,
     [CONTROLLER_ONERETURNVALUE_DUPLICATE] = BtlController_Empty,
-    [CONTROLLER_CLEARUNKVAR]              = RecordedPlayerHandleClearUnkVar,
-    [CONTROLLER_SETUNKVAR]                = RecordedPlayerHandleSetUnkVar,
-    [CONTROLLER_CLEARUNKFLAG]             = RecordedPlayerHandleClearUnkFlag,
-    [CONTROLLER_TOGGLEUNKFLAG]            = RecordedPlayerHandleToggleUnkFlag,
-    [CONTROLLER_HITANIMATION]             = RecordedPlayerHandleHitAnimation,
+    [CONTROLLER_CLEARUNKVAR]              = BtlController_HandleClearUnkVar,
+    [CONTROLLER_SETUNKVAR]                = BtlController_HandleSetUnkVar,
+    [CONTROLLER_CLEARUNKFLAG]             = BtlController_HandleClearUnkFlag,
+    [CONTROLLER_TOGGLEUNKFLAG]            = BtlController_HandleToggleUnkFlag,
+    [CONTROLLER_HITANIMATION]             = BtlController_HandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = BtlController_Empty,
     [CONTROLLER_PLAYSE]                   = BtlController_HandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = BtlController_HandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = BtlController_HandleFaintingCry,
-    [CONTROLLER_INTROSLIDE]               = RecordedPlayerHandleIntroSlide,
+    [CONTROLLER_INTROSLIDE]               = BtlController_HandleIntroSlide,
     [CONTROLLER_INTROTRAINERBALLTHROW]    = RecordedPlayerHandleIntroTrainerBallThrow,
     [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = RecordedPlayerHandleDrawPartyStatusSummary,
     [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = RecordedPlayerHandleHidePartyStatusSummary,
     [CONTROLLER_ENDBOUNCE]                = BtlController_Empty,
-    [CONTROLLER_SPRITEINVISIBILITY]       = RecordedPlayerHandleSpriteInvisibility,
+    [CONTROLLER_SPRITEINVISIBILITY]       = BtlController_HandleSpriteInvisibility,
     [CONTROLLER_BATTLEANIMATION]          = RecordedPlayerHandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = BtlController_Empty,
     [CONTROLLER_RESETACTIONMOVESELECTION] = BtlController_Empty,
@@ -339,25 +330,6 @@ static void CompleteOnInactiveTextPrinter(void)
         RecordedPlayerBufferExecCompleted();
 }
 
-static void DoHitAnimBlinkSpriteEffect(void)
-{
-    u8 spriteId = gBattlerSpriteIds[gActiveBattler];
-
-    if (gSprites[spriteId].data[1] == 32)
-    {
-        gSprites[spriteId].data[1] = 0;
-        gSprites[spriteId].invisible = FALSE;
-        gDoingBattleAnim = FALSE;
-        RecordedPlayerBufferExecCompleted();
-    }
-    else
-    {
-        if ((gSprites[spriteId].data[1] % 4) == 0)
-            gSprites[spriteId].invisible ^= 1;
-        gSprites[spriteId].data[1]++;
-    }
-}
-
 static void SwitchIn_ShowSubstitute(void)
 {
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
@@ -438,12 +410,6 @@ static void CompleteOnFinishedStatusAnimation(void)
         RecordedPlayerBufferExecCompleted();
 }
 
-static void CompleteOnFinishedBattleAnimation(void)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animFromTableActive)
-        RecordedPlayerBufferExecCompleted();
-}
-
 static void RecordedPlayerHandleLoadMonSprite(void)
 {
     BtlController_HandleLoadMonSprite(gActiveBattler, gPlayerParty, WaitForMonAnimAfterLoad);
@@ -452,11 +418,6 @@ static void RecordedPlayerHandleLoadMonSprite(void)
 static void RecordedPlayerHandleSwitchInAnim(void)
 {
     BtlController_HandleSwitchInAnim(gActiveBattler, TRUE, SwitchIn_TryShinyAnim);
-}
-
-static void RecordedPlayerHandleReturnMonToBall(void)
-{
-    BtlController_HandleReturnMonToBall(gActiveBattler);
 }
 
 #define sSpeedX data[0]
@@ -543,11 +504,6 @@ static void RecordedPlayerHandleTrainerSlideBack(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCallbackDummy);
     gBattlerControllerFuncs[gActiveBattler] = FreeTrainerSpriteAfterSlide;
-}
-
-static void RecordedPlayerHandleFaintAnimation(void)
-{
-    BtlController_HandleFaintAnimation(gActiveBattler);
 }
 
 static void RecordedPlayerHandleMoveAnimation(void)
@@ -750,52 +706,6 @@ static void RecordedPlayerHandleStatusAnimation(void)
     }
 }
 
-static void RecordedPlayerHandleClearUnkVar(void)
-{
-    gUnusedControllerStruct.unk = 0;
-    RecordedPlayerBufferExecCompleted();
-}
-
-static void RecordedPlayerHandleSetUnkVar(void)
-{
-    gUnusedControllerStruct.unk = gBattleResources->bufferA[gActiveBattler][1];
-    RecordedPlayerBufferExecCompleted();
-}
-
-static void RecordedPlayerHandleClearUnkFlag(void)
-{
-    gUnusedControllerStruct.flag = 0;
-    RecordedPlayerBufferExecCompleted();
-}
-
-static void RecordedPlayerHandleToggleUnkFlag(void)
-{
-    gUnusedControllerStruct.flag ^= 1;
-    RecordedPlayerBufferExecCompleted();
-}
-
-static void RecordedPlayerHandleHitAnimation(void)
-{
-    if (gSprites[gBattlerSpriteIds[gActiveBattler]].invisible == TRUE)
-    {
-        RecordedPlayerBufferExecCompleted();
-    }
-    else
-    {
-        gDoingBattleAnim = TRUE;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
-        DoHitAnimHealthboxEffect(gActiveBattler);
-        gBattlerControllerFuncs[gActiveBattler] = DoHitAnimBlinkSpriteEffect;
-    }
-}
-
-static void RecordedPlayerHandleIntroSlide(void)
-{
-    HandleIntroSlide(gBattleResources->bufferA[gActiveBattler][1]);
-    gIntroSlideFlags |= 1;
-    RecordedPlayerBufferExecCompleted();
-}
-
 static void RecordedPlayerHandleIntroTrainerBallThrow(void)
 {
     u8 paletteNum;
@@ -900,28 +810,9 @@ static void RecordedPlayerHandleHidePartyStatusSummary(void)
     RecordedPlayerBufferExecCompleted();
 }
 
-static void RecordedPlayerHandleSpriteInvisibility(void)
-{
-    if (IsBattlerSpritePresent(gActiveBattler))
-    {
-        gSprites[gBattlerSpriteIds[gActiveBattler]].invisible = gBattleResources->bufferA[gActiveBattler][1];
-        CopyBattleSpriteInvisibility(gActiveBattler);
-    }
-    RecordedPlayerBufferExecCompleted();
-}
-
 static void RecordedPlayerHandleBattleAnimation(void)
 {
-    if (!IsBattleSEPlaying(gActiveBattler))
-    {
-        u8 animationId = gBattleResources->bufferA[gActiveBattler][1];
-        u16 argument = gBattleResources->bufferA[gActiveBattler][2] | (gBattleResources->bufferA[gActiveBattler][3] << 8);
-
-        if (TryHandleLaunchBattleTableAnimation(gActiveBattler, gActiveBattler, gActiveBattler, animationId, argument))
-            RecordedPlayerBufferExecCompleted();
-        else
-            gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation;
-    }
+    BtlController_HandleBattleAnimation(gActiveBattler, FALSE, FALSE);
 }
 
 static void RecordedPlayerHandleEndLinkBattle(void)

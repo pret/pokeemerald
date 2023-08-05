@@ -33,10 +33,8 @@
 
 static void PlayerPartnerHandleLoadMonSprite(void);
 static void PlayerPartnerHandleSwitchInAnim(void);
-static void PlayerPartnerHandleReturnMonToBall(void);
 static void PlayerPartnerHandleDrawTrainerPic(void);
 static void PlayerPartnerHandleTrainerSlideBack(void);
-static void PlayerPartnerHandleFaintAnimation(void);
 static void PlayerPartnerHandleMoveAnimation(void);
 static void PlayerPartnerHandlePrintString(void);
 static void PlayerPartnerHandleChooseAction(void);
@@ -46,16 +44,9 @@ static void PlayerPartnerHandleHealthBarUpdate(void);
 static void PlayerPartnerHandleExpUpdate(void);
 static void PlayerPartnerHandleStatusIconUpdate(void);
 static void PlayerPartnerHandleStatusAnimation(void);
-static void PlayerPartnerHandleClearUnkVar(void);
-static void PlayerPartnerHandleSetUnkVar(void);
-static void PlayerPartnerHandleClearUnkFlag(void);
-static void PlayerPartnerHandleToggleUnkFlag(void);
-static void PlayerPartnerHandleHitAnimation(void);
-static void PlayerPartnerHandleIntroSlide(void);
 static void PlayerPartnerHandleIntroTrainerBallThrow(void);
 static void PlayerPartnerHandleDrawPartyStatusSummary(void);
 static void PlayerPartnerHandleHidePartyStatusSummary(void);
-static void PlayerPartnerHandleSpriteInvisibility(void);
 static void PlayerPartnerHandleBattleAnimation(void);
 static void PlayerPartnerHandleEndLinkBattle(void);
 
@@ -81,11 +72,11 @@ static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_SETRAWMONDATA]            = BtlController_HandleSetRawMonData,
     [CONTROLLER_LOADMONSPRITE]            = PlayerPartnerHandleLoadMonSprite,
     [CONTROLLER_SWITCHINANIM]             = PlayerPartnerHandleSwitchInAnim,
-    [CONTROLLER_RETURNMONTOBALL]          = PlayerPartnerHandleReturnMonToBall,
+    [CONTROLLER_RETURNMONTOBALL]          = BtlController_HandleReturnMonToBall,
     [CONTROLLER_DRAWTRAINERPIC]           = PlayerPartnerHandleDrawTrainerPic,
     [CONTROLLER_TRAINERSLIDE]             = BtlController_Empty,
     [CONTROLLER_TRAINERSLIDEBACK]         = PlayerPartnerHandleTrainerSlideBack,
-    [CONTROLLER_FAINTANIMATION]           = PlayerPartnerHandleFaintAnimation,
+    [CONTROLLER_FAINTANIMATION]           = BtlController_HandleFaintAnimation,
     [CONTROLLER_PALETTEFADE]              = BtlController_Empty,
     [CONTROLLER_SUCCESSBALLTHROWANIM]     = BtlController_Empty,
     [CONTROLLER_BALLTHROWANIM]            = BtlController_Empty,
@@ -112,21 +103,21 @@ static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_CHOSENMONRETURNVALUE]     = BtlController_Empty,
     [CONTROLLER_ONERETURNVALUE]           = BtlController_Empty,
     [CONTROLLER_ONERETURNVALUE_DUPLICATE] = BtlController_Empty,
-    [CONTROLLER_CLEARUNKVAR]              = PlayerPartnerHandleClearUnkVar,
-    [CONTROLLER_SETUNKVAR]                = PlayerPartnerHandleSetUnkVar,
-    [CONTROLLER_CLEARUNKFLAG]             = PlayerPartnerHandleClearUnkFlag,
-    [CONTROLLER_TOGGLEUNKFLAG]            = PlayerPartnerHandleToggleUnkFlag,
-    [CONTROLLER_HITANIMATION]             = PlayerPartnerHandleHitAnimation,
+    [CONTROLLER_CLEARUNKVAR]              = BtlController_HandleClearUnkVar,
+    [CONTROLLER_SETUNKVAR]                = BtlController_HandleSetUnkVar,
+    [CONTROLLER_CLEARUNKFLAG]             = BtlController_HandleClearUnkFlag,
+    [CONTROLLER_TOGGLEUNKFLAG]            = BtlController_HandleToggleUnkFlag,
+    [CONTROLLER_HITANIMATION]             = BtlController_HandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = BtlController_Empty,
     [CONTROLLER_PLAYSE]                   = BtlController_HandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = BtlController_HandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = BtlController_HandleFaintingCry,
-    [CONTROLLER_INTROSLIDE]               = PlayerPartnerHandleIntroSlide,
+    [CONTROLLER_INTROSLIDE]               = BtlController_HandleIntroSlide,
     [CONTROLLER_INTROTRAINERBALLTHROW]    = PlayerPartnerHandleIntroTrainerBallThrow,
     [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = PlayerPartnerHandleDrawPartyStatusSummary,
     [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = PlayerPartnerHandleHidePartyStatusSummary,
     [CONTROLLER_ENDBOUNCE]                = BtlController_Empty,
-    [CONTROLLER_SPRITEINVISIBILITY]       = PlayerPartnerHandleSpriteInvisibility,
+    [CONTROLLER_SPRITEINVISIBILITY]       = BtlController_HandleSpriteInvisibility,
     [CONTROLLER_BATTLEANIMATION]          = PlayerPartnerHandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = BtlController_Empty,
     [CONTROLLER_RESETACTIONMOVESELECTION] = BtlController_Empty,
@@ -440,25 +431,6 @@ static void CompleteOnInactiveTextPrinter2(void)
         PlayerPartnerBufferExecCompleted();
 }
 
-static void DoHitAnimBlinkSpriteEffect(void)
-{
-    u8 spriteId = gBattlerSpriteIds[gActiveBattler];
-
-    if (gSprites[spriteId].data[1] == 32)
-    {
-        gSprites[spriteId].data[1] = 0;
-        gSprites[spriteId].invisible = FALSE;
-        gDoingBattleAnim = FALSE;
-        PlayerPartnerBufferExecCompleted();
-    }
-    else
-    {
-        if ((gSprites[spriteId].data[1] % 4) == 0)
-            gSprites[spriteId].invisible ^= 1;
-        gSprites[spriteId].data[1]++;
-    }
-}
-
 static void SwitchIn_ShowSubstitute(void)
 {
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
@@ -539,12 +511,6 @@ static void CompleteOnFinishedStatusAnimation(void)
         PlayerPartnerBufferExecCompleted();
 }
 
-static void CompleteOnFinishedBattleAnimation(void)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animFromTableActive)
-        PlayerPartnerBufferExecCompleted();
-}
-
 static void PlayerPartnerHandleLoadMonSprite(void)
 {
     BtlController_HandleLoadMonSprite(gActiveBattler, gPlayerParty, WaitForMonAnimAfterLoad);
@@ -553,11 +519,6 @@ static void PlayerPartnerHandleLoadMonSprite(void)
 static void PlayerPartnerHandleSwitchInAnim(void)
 {
     BtlController_HandleSwitchInAnim(gActiveBattler, TRUE, SwitchIn_TryShinyAnim);
-}
-
-static void PlayerPartnerHandleReturnMonToBall(void)
-{
-    BtlController_HandleReturnMonToBall(gActiveBattler);
 }
 
 #define sSpeedX data[0]
@@ -630,11 +591,6 @@ static void PlayerPartnerHandleTrainerSlideBack(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCallbackDummy);
     gBattlerControllerFuncs[gActiveBattler] = FreeTrainerSpriteAfterSlide;
-}
-
-static void PlayerPartnerHandleFaintAnimation(void)
-{
-    BtlController_HandleFaintAnimation(gActiveBattler);
 }
 
 static void PlayerPartnerHandleMoveAnimation(void)
@@ -861,52 +817,6 @@ static void PlayerPartnerHandleStatusAnimation(void)
     }
 }
 
-static void PlayerPartnerHandleClearUnkVar(void)
-{
-    gUnusedControllerStruct.unk = 0;
-    PlayerPartnerBufferExecCompleted();
-}
-
-static void PlayerPartnerHandleSetUnkVar(void)
-{
-    gUnusedControllerStruct.unk = gBattleResources->bufferA[gActiveBattler][1];
-    PlayerPartnerBufferExecCompleted();
-}
-
-static void PlayerPartnerHandleClearUnkFlag(void)
-{
-    gUnusedControllerStruct.flag = 0;
-    PlayerPartnerBufferExecCompleted();
-}
-
-static void PlayerPartnerHandleToggleUnkFlag(void)
-{
-    gUnusedControllerStruct.flag ^= 1;
-    PlayerPartnerBufferExecCompleted();
-}
-
-static void PlayerPartnerHandleHitAnimation(void)
-{
-    if (gSprites[gBattlerSpriteIds[gActiveBattler]].invisible == TRUE)
-    {
-        PlayerPartnerBufferExecCompleted();
-    }
-    else
-    {
-        gDoingBattleAnim = TRUE;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
-        DoHitAnimHealthboxEffect(gActiveBattler);
-        gBattlerControllerFuncs[gActiveBattler] = DoHitAnimBlinkSpriteEffect;
-    }
-}
-
-static void PlayerPartnerHandleIntroSlide(void)
-{
-    HandleIntroSlide(gBattleResources->bufferA[gActiveBattler][1]);
-    gIntroSlideFlags |= 1;
-    PlayerPartnerBufferExecCompleted();
-}
-
 static void PlayerPartnerHandleIntroTrainerBallThrow(void)
 {
     u8 paletteNum;
@@ -1020,28 +930,9 @@ static void PlayerPartnerHandleHidePartyStatusSummary(void)
     PlayerPartnerBufferExecCompleted();
 }
 
-static void PlayerPartnerHandleSpriteInvisibility(void)
-{
-    if (IsBattlerSpritePresent(gActiveBattler))
-    {
-        gSprites[gBattlerSpriteIds[gActiveBattler]].invisible = gBattleResources->bufferA[gActiveBattler][1];
-        CopyBattleSpriteInvisibility(gActiveBattler);
-    }
-    PlayerPartnerBufferExecCompleted();
-}
-
 static void PlayerPartnerHandleBattleAnimation(void)
 {
-    if (!IsBattleSEPlaying(gActiveBattler))
-    {
-        u8 animationId = gBattleResources->bufferA[gActiveBattler][1];
-        u16 argument = gBattleResources->bufferA[gActiveBattler][2] | (gBattleResources->bufferA[gActiveBattler][3] << 8);
-
-        if (TryHandleLaunchBattleTableAnimation(gActiveBattler, gActiveBattler, gActiveBattler, animationId, argument))
-            PlayerPartnerBufferExecCompleted();
-        else
-            gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation;
-    }
+    BtlController_HandleBattleAnimation(gActiveBattler, FALSE, FALSE);
 }
 
 static void PlayerPartnerHandleEndLinkBattle(void)

@@ -33,7 +33,6 @@ static void SafariHandleChooseAction(void);
 static void SafariHandleChooseItem(void);
 static void SafariHandleStatusIconUpdate(void);
 static void SafariHandleFaintingCry(void);
-static void SafariHandleIntroSlide(void);
 static void SafariHandleIntroTrainerBallThrow(void);
 static void SafariHandleBattleAnimation(void);
 static void SafariHandleEndLinkBattle(void);
@@ -91,7 +90,7 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_PLAYSE]                   = BtlController_HandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = BtlController_HandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = SafariHandleFaintingCry,
-    [CONTROLLER_INTROSLIDE]               = SafariHandleIntroSlide,
+    [CONTROLLER_INTROSLIDE]               = BtlController_HandleIntroSlide,
     [CONTROLLER_INTROTRAINERBALLTHROW]    = SafariHandleIntroTrainerBallThrow,
     [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = BtlController_Empty,
     [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = BtlController_Empty,
@@ -234,12 +233,6 @@ static void CompleteWhenChosePokeblock(void)
     }
 }
 
-static void CompleteOnFinishedBattleAnimation(void)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animFromTableActive)
-        SafariBufferExecCompleted();
-}
-
 static void SafariBufferExecCompleted(void)
 {
     gBattlerControllerFuncs[gActiveBattler] = SafariBufferRunCommand;
@@ -360,13 +353,6 @@ static void SafariHandleFaintingCry(void)
     SafariBufferExecCompleted();
 }
 
-static void SafariHandleIntroSlide(void)
-{
-    HandleIntroSlide(gBattleResources->bufferA[gActiveBattler][1]);
-    gIntroSlideFlags |= 1;
-    SafariBufferExecCompleted();
-}
-
 static void SafariHandleIntroTrainerBallThrow(void)
 {
     UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_SAFARI_ALL_TEXT);
@@ -377,13 +363,7 @@ static void SafariHandleIntroTrainerBallThrow(void)
 
 static void SafariHandleBattleAnimation(void)
 {
-    u8 animationId = gBattleResources->bufferA[gActiveBattler][1];
-    u16 argument = gBattleResources->bufferA[gActiveBattler][2] | (gBattleResources->bufferA[gActiveBattler][3] << 8);
-
-    if (TryHandleLaunchBattleTableAnimation(gActiveBattler, gActiveBattler, gActiveBattler, animationId, argument))
-        SafariBufferExecCompleted();
-    else
-        gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation;
+    BtlController_HandleBattleAnimation(gActiveBattler, TRUE, FALSE);
 }
 
 static void SafariHandleEndLinkBattle(void)

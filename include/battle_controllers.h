@@ -263,13 +263,21 @@ void BtlController_HandleSetMonData(void);
 void BtlController_HandleSetRawMonData(void);
 void BtlController_HandleLoadMonSprite(u32 battler, struct Pokemon *party,  void (*controllerCallback)(void));
 void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*controllerCallback)(void));
-void BtlController_HandleReturnMonToBall(u32 battler);
-void BtlController_HandleFaintAnimation(u32 battler);
+void BtlController_HandleReturnMonToBall(void);
+void BtlController_HandleFaintAnimation(void);
 void BtlController_HandleSuccessBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
 void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
+void BtlController_HandleClearUnkVar(void);
+void BtlController_HandleSetUnkVar(void);
+void BtlController_HandleClearUnkFlag(void);
+void BtlController_HandleToggleUnkFlag(void);
+void BtlController_HandleHitAnimation(void);
 void BtlController_HandlePlaySE(void);
 void BtlController_HandlePlayFanfareOrBGM(void);
 void BtlController_HandleFaintingCry(void);
+void BtlController_HandleIntroSlide(void);
+void BtlController_HandleSpriteInvisibility(void);
+void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE, bool32 updateTvData);
 
 // player controller
 void SetControllerToPlayer(void);

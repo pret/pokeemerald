@@ -32,7 +32,6 @@
 #include "constants/trainers.h"
 #include "constants/rgb.h"
 
-static void WallyHandleReturnMonToBall(void);
 static void WallyHandleDrawTrainerPic(void);
 static void WallyHandleTrainerSlide(void);
 static void WallyHandleSuccessBallThrowAnim(void);
@@ -44,10 +43,8 @@ static void WallyHandleChooseAction(void);
 static void WallyHandleChooseMove(void);
 static void WallyHandleChooseItem(void);
 static void WallyHandleHealthBarUpdate(void);
-static void WallyHandleHitAnimation(void);
 static void WallyHandlePlaySE(void);
 static void WallyHandleFaintingCry(void);
-static void WallyHandleIntroSlide(void);
 static void WallyHandleIntroTrainerBallThrow(void);
 static void WallyHandleDrawPartyStatusSummary(void);
 static void WallyHandleBattleAnimation(void);
@@ -70,7 +67,7 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_SETRAWMONDATA]            = BtlController_Empty,
     [CONTROLLER_LOADMONSPRITE]            = BtlController_Empty,
     [CONTROLLER_SWITCHINANIM]             = BtlController_Empty,
-    [CONTROLLER_RETURNMONTOBALL]          = WallyHandleReturnMonToBall,
+    [CONTROLLER_RETURNMONTOBALL]          = BtlController_HandleReturnMonToBall,
     [CONTROLLER_DRAWTRAINERPIC]           = WallyHandleDrawTrainerPic,
     [CONTROLLER_TRAINERSLIDE]             = WallyHandleTrainerSlide,
     [CONTROLLER_TRAINERSLIDEBACK]         = BtlController_Empty,
@@ -105,12 +102,12 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_SETUNKVAR]                = BtlController_Empty,
     [CONTROLLER_CLEARUNKFLAG]             = BtlController_Empty,
     [CONTROLLER_TOGGLEUNKFLAG]            = BtlController_Empty,
-    [CONTROLLER_HITANIMATION]             = WallyHandleHitAnimation,
+    [CONTROLLER_HITANIMATION]             = BtlController_HandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = BtlController_Empty,
     [CONTROLLER_PLAYSE]                   = WallyHandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = BtlController_HandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = WallyHandleFaintingCry,
-    [CONTROLLER_INTROSLIDE]               = WallyHandleIntroSlide,
+    [CONTROLLER_INTROSLIDE]               = BtlController_HandleIntroSlide,
     [CONTROLLER_INTROTRAINERBALLTHROW]    = WallyHandleIntroTrainerBallThrow,
     [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = WallyHandleDrawPartyStatusSummary,
     [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = BtlController_Empty,
@@ -317,34 +314,9 @@ static void CompleteOnHealthbarDone(void)
     }
 }
 
-static void DoHitAnimBlinkSpriteEffect(void)
-{
-    u8 spriteId = gBattlerSpriteIds[gActiveBattler];
-
-    if (gSprites[spriteId].data[1] == 32)
-    {
-        gSprites[spriteId].data[1] = 0;
-        gSprites[spriteId].invisible = FALSE;
-        gDoingBattleAnim = FALSE;
-        WallyBufferExecCompleted();
-    }
-    else
-    {
-        if ((gSprites[spriteId].data[1] % 4) == 0)
-            gSprites[spriteId].invisible ^= 1;
-        gSprites[spriteId].data[1]++;
-    }
-}
-
 static void CompleteOnBankSpriteCallbackDummy2(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
-        WallyBufferExecCompleted();
-}
-
-static void CompleteOnFinishedBattleAnimation(void)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animFromTableActive)
         WallyBufferExecCompleted();
 }
 
@@ -362,11 +334,6 @@ static void WallyBufferExecCompleted(void)
     {
         gBattleControllerExecFlags &= ~gBitTable[gActiveBattler];
     }
-}
-
-static void WallyHandleReturnMonToBall(void)
-{
-    BtlController_HandleReturnMonToBall(gActiveBattler);
 }
 
 #define sSpeedX data[0]
@@ -579,21 +546,6 @@ static void WallyHandleHealthBarUpdate(void)
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
 }
 
-static void WallyHandleHitAnimation(void)
-{
-    if (gSprites[gBattlerSpriteIds[gActiveBattler]].invisible == TRUE)
-    {
-        WallyBufferExecCompleted();
-    }
-    else
-    {
-        gDoingBattleAnim = TRUE;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
-        DoHitAnimHealthboxEffect(gActiveBattler);
-        gBattlerControllerFuncs[gActiveBattler] = DoHitAnimBlinkSpriteEffect;
-    }
-}
-
 // For some reason Wally's SE don't take side into account and pan is always the same. Possibly a bug
 static void WallyHandlePlaySE(void)
 {
@@ -608,13 +560,6 @@ static void WallyHandleFaintingCry(void)
     u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
     PlayCry_Normal(species, 25);
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleIntroSlide(void)
-{
-    HandleIntroSlide(gBattleResources->bufferA[gActiveBattler][1]);
-    gIntroSlideFlags |= 1;
     WallyBufferExecCompleted();
 }
 
@@ -683,13 +628,7 @@ static void WallyHandleDrawPartyStatusSummary(void)
 
 static void WallyHandleBattleAnimation(void)
 {
-    u8 animationId = gBattleResources->bufferA[gActiveBattler][1];
-    u16 argument = gBattleResources->bufferA[gActiveBattler][2] | (gBattleResources->bufferA[gActiveBattler][3] << 8);
-
-    if (TryHandleLaunchBattleTableAnimation(gActiveBattler, gActiveBattler, gActiveBattler, animationId, argument))
-        WallyBufferExecCompleted();
-    else
-        gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation;
+    BtlController_HandleBattleAnimation(gActiveBattler, TRUE, FALSE);
 }
 
 static void WallyHandleEndLinkBattle(void)

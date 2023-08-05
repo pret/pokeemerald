@@ -41,11 +41,9 @@
 
 static void OpponentHandleLoadMonSprite(void);
 static void OpponentHandleSwitchInAnim(void);
-static void OpponentHandleReturnMonToBall(void);
 static void OpponentHandleDrawTrainerPic(void);
 static void OpponentHandleTrainerSlide(void);
 static void OpponentHandleTrainerSlideBack(void);
-static void OpponentHandleFaintAnimation(void);
 static void OpponentHandleMoveAnimation(void);
 static void OpponentHandlePrintString(void);
 static void OpponentHandleChooseAction(void);
@@ -55,16 +53,9 @@ static void OpponentHandleChoosePokemon(void);
 static void OpponentHandleHealthBarUpdate(void);
 static void OpponentHandleStatusIconUpdate(void);
 static void OpponentHandleStatusAnimation(void);
-static void OpponentHandleClearUnkVar(void);
-static void OpponentHandleSetUnkVar(void);
-static void OpponentHandleClearUnkFlag(void);
-static void OpponentHandleToggleUnkFlag(void);
-static void OpponentHandleHitAnimation(void);
-static void OpponentHandleIntroSlide(void);
 static void OpponentHandleIntroTrainerBallThrow(void);
 static void OpponentHandleDrawPartyStatusSummary(void);
 static void OpponentHandleHidePartyStatusSummary(void);
-static void OpponentHandleSpriteInvisibility(void);
 static void OpponentHandleBattleAnimation(void);
 static void OpponentHandleEndLinkBattle(void);
 static u8 CountAIAliveNonEggMonsExcept(u8 slotToIgnore);
@@ -87,11 +78,11 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_SETRAWMONDATA]            = BtlController_HandleSetRawMonData,
     [CONTROLLER_LOADMONSPRITE]            = OpponentHandleLoadMonSprite,
     [CONTROLLER_SWITCHINANIM]             = OpponentHandleSwitchInAnim,
-    [CONTROLLER_RETURNMONTOBALL]          = OpponentHandleReturnMonToBall,
+    [CONTROLLER_RETURNMONTOBALL]          = BtlController_HandleReturnMonToBall,
     [CONTROLLER_DRAWTRAINERPIC]           = OpponentHandleDrawTrainerPic,
     [CONTROLLER_TRAINERSLIDE]             = OpponentHandleTrainerSlide,
     [CONTROLLER_TRAINERSLIDEBACK]         = OpponentHandleTrainerSlideBack,
-    [CONTROLLER_FAINTANIMATION]           = OpponentHandleFaintAnimation,
+    [CONTROLLER_FAINTANIMATION]           = BtlController_HandleFaintAnimation,
     [CONTROLLER_PALETTEFADE]              = BtlController_Empty,
     [CONTROLLER_SUCCESSBALLTHROWANIM]     = BtlController_Empty,
     [CONTROLLER_BALLTHROWANIM]            = BtlController_Empty,
@@ -118,21 +109,21 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_CHOSENMONRETURNVALUE]     = BtlController_Empty,
     [CONTROLLER_ONERETURNVALUE]           = BtlController_Empty,
     [CONTROLLER_ONERETURNVALUE_DUPLICATE] = BtlController_Empty,
-    [CONTROLLER_CLEARUNKVAR]              = OpponentHandleClearUnkVar,
-    [CONTROLLER_SETUNKVAR]                = OpponentHandleSetUnkVar,
-    [CONTROLLER_CLEARUNKFLAG]             = OpponentHandleClearUnkFlag,
-    [CONTROLLER_TOGGLEUNKFLAG]            = OpponentHandleToggleUnkFlag,
-    [CONTROLLER_HITANIMATION]             = OpponentHandleHitAnimation,
+    [CONTROLLER_CLEARUNKVAR]              = BtlController_HandleClearUnkVar,
+    [CONTROLLER_SETUNKVAR]                = BtlController_HandleSetUnkVar,
+    [CONTROLLER_CLEARUNKFLAG]             = BtlController_HandleClearUnkFlag,
+    [CONTROLLER_TOGGLEUNKFLAG]            = BtlController_HandleToggleUnkFlag,
+    [CONTROLLER_HITANIMATION]             = BtlController_HandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = BtlController_Empty,
     [CONTROLLER_PLAYSE]                   = BtlController_HandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = BtlController_HandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = BtlController_HandleFaintingCry,
-    [CONTROLLER_INTROSLIDE]               = OpponentHandleIntroSlide,
+    [CONTROLLER_INTROSLIDE]               = BtlController_HandleIntroSlide,
     [CONTROLLER_INTROTRAINERBALLTHROW]    = OpponentHandleIntroTrainerBallThrow,
     [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = OpponentHandleDrawPartyStatusSummary,
     [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = OpponentHandleHidePartyStatusSummary,
     [CONTROLLER_ENDBOUNCE]                = BtlController_Empty,
-    [CONTROLLER_SPRITEINVISIBILITY]       = OpponentHandleSpriteInvisibility,
+    [CONTROLLER_SPRITEINVISIBILITY]       = BtlController_HandleSpriteInvisibility,
     [CONTROLLER_BATTLEANIMATION]          = OpponentHandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = BtlController_Empty,
     [CONTROLLER_RESETACTIONMOVESELECTION] = BtlController_Empty,
@@ -392,25 +383,6 @@ static void CompleteOnInactiveTextPrinter(void)
         OpponentBufferExecCompleted();
 }
 
-static void DoHitAnimBlinkSpriteEffect(void)
-{
-    u8 spriteId = gBattlerSpriteIds[gActiveBattler];
-
-    if (gSprites[spriteId].data[1] == 32)
-    {
-        gSprites[spriteId].data[1] = 0;
-        gSprites[spriteId].invisible = FALSE;
-        gDoingBattleAnim = FALSE;
-        OpponentBufferExecCompleted();
-    }
-    else
-    {
-        if ((gSprites[spriteId].data[1] % 4) == 0)
-            gSprites[spriteId].invisible ^= 1;
-        gSprites[spriteId].data[1]++;
-    }
-}
-
 static void SwitchIn_ShowSubstitute(void)
 {
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
@@ -473,12 +445,6 @@ static void CompleteOnFinishedStatusAnimation(void)
         OpponentBufferExecCompleted();
 }
 
-static void CompleteOnFinishedBattleAnimation(void)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animFromTableActive)
-        OpponentBufferExecCompleted();
-}
-
 static void OpponentBufferExecCompleted(void)
 {
     gBattlerControllerFuncs[gActiveBattler] = OpponentBufferRunCommand;
@@ -504,11 +470,6 @@ static void OpponentHandleSwitchInAnim(void)
 {
     gBattleStruct->monToSwitchIntoId[gActiveBattler] = PARTY_SIZE;
     BtlController_HandleSwitchInAnim(gActiveBattler, FALSE, SwitchIn_TryShinyAnim);
-}
-
-static void OpponentHandleReturnMonToBall(void)
-{
-    BtlController_HandleReturnMonToBall(gActiveBattler);
 }
 
 #define sSpeedX data[0]
@@ -679,11 +640,6 @@ static void OpponentHandleTrainerSlideBack(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCallbackDummy);
     gBattlerControllerFuncs[gActiveBattler] = FreeTrainerSpriteAfterSlide;
-}
-
-static void OpponentHandleFaintAnimation(void)
-{
-    BtlController_HandleFaintAnimation(gActiveBattler);
 }
 
 static void OpponentHandleMoveAnimation(void)
@@ -1017,52 +973,6 @@ static void OpponentHandleStatusAnimation(void)
     }
 }
 
-static void OpponentHandleClearUnkVar(void)
-{
-    gUnusedControllerStruct.unk = 0;
-    OpponentBufferExecCompleted();
-}
-
-static void OpponentHandleSetUnkVar(void)
-{
-    gUnusedControllerStruct.unk = gBattleResources->bufferA[gActiveBattler][1];
-    OpponentBufferExecCompleted();
-}
-
-static void OpponentHandleClearUnkFlag(void)
-{
-    gUnusedControllerStruct.flag = 0;
-    OpponentBufferExecCompleted();
-}
-
-static void OpponentHandleToggleUnkFlag(void)
-{
-    gUnusedControllerStruct.flag ^= 1;
-    OpponentBufferExecCompleted();
-}
-
-static void OpponentHandleHitAnimation(void)
-{
-    if (gSprites[gBattlerSpriteIds[gActiveBattler]].invisible == TRUE)
-    {
-        OpponentBufferExecCompleted();
-    }
-    else
-    {
-        gDoingBattleAnim = TRUE;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
-        DoHitAnimHealthboxEffect(gActiveBattler);
-        gBattlerControllerFuncs[gActiveBattler] = DoHitAnimBlinkSpriteEffect;
-    }
-}
-
-static void OpponentHandleIntroSlide(void)
-{
-    HandleIntroSlide(gBattleResources->bufferA[gActiveBattler][1]);
-    gIntroSlideFlags |= 1;
-    OpponentBufferExecCompleted();
-}
-
 static void OpponentHandleIntroTrainerBallThrow(void)
 {
     u8 taskId;
@@ -1171,28 +1081,9 @@ static void OpponentHandleHidePartyStatusSummary(void)
     OpponentBufferExecCompleted();
 }
 
-static void OpponentHandleSpriteInvisibility(void)
-{
-    if (IsBattlerSpritePresent(gActiveBattler))
-    {
-        gSprites[gBattlerSpriteIds[gActiveBattler]].invisible = gBattleResources->bufferA[gActiveBattler][1];
-        CopyBattleSpriteInvisibility(gActiveBattler);
-    }
-    OpponentBufferExecCompleted();
-}
-
 static void OpponentHandleBattleAnimation(void)
 {
-    if (!IsBattleSEPlaying(gActiveBattler))
-    {
-        u8 animationId = gBattleResources->bufferA[gActiveBattler][1];
-        u16 argument = gBattleResources->bufferA[gActiveBattler][2] | (gBattleResources->bufferA[gActiveBattler][3] << 8);
-
-        if (TryHandleLaunchBattleTableAnimation(gActiveBattler, gActiveBattler, gActiveBattler, animationId, argument))
-            OpponentBufferExecCompleted();
-        else
-            gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation;
-    }
+    BtlController_HandleBattleAnimation(gActiveBattler, FALSE, FALSE);
 }
 
 static void OpponentHandleEndLinkBattle(void)

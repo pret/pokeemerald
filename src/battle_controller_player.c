@@ -40,11 +40,9 @@
 static void PlayerBufferExecCompleted(void);
 static void PlayerHandleLoadMonSprite(void);
 static void PlayerHandleSwitchInAnim(void);
-static void PlayerHandleReturnMonToBall(void);
 static void PlayerHandleDrawTrainerPic(void);
 static void PlayerHandleTrainerSlide(void);
 static void PlayerHandleTrainerSlideBack(void);
-static void PlayerHandleFaintAnimation(void);
 static void PlayerHandlePaletteFade(void);
 static void PlayerHandleSuccessBallThrowAnim(void);
 static void PlayerHandleBallThrowAnim(void);
@@ -69,17 +67,10 @@ static void PlayerHandleTwoReturnValues(void);
 static void PlayerHandleChosenMonReturnValue(void);
 static void PlayerHandleOneReturnValue(void);
 static void PlayerHandleOneReturnValue_Duplicate(void);
-static void PlayerHandleClearUnkVar(void);
-static void PlayerHandleSetUnkVar(void);
-static void PlayerHandleClearUnkFlag(void);
-static void PlayerHandleToggleUnkFlag(void);
-static void PlayerHandleHitAnimation(void);
-static void PlayerHandleIntroSlide(void);
 static void PlayerHandleIntroTrainerBallThrow(void);
 static void PlayerHandleDrawPartyStatusSummary(void);
 static void PlayerHandleHidePartyStatusSummary(void);
 static void PlayerHandleEndBounceEffect(void);
-static void PlayerHandleSpriteInvisibility(void);
 static void PlayerHandleBattleAnimation(void);
 static void PlayerHandleLinkStandbyMsg(void);
 static void PlayerHandleResetActionMoveSelection(void);
@@ -119,11 +110,11 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_SETRAWMONDATA]            = BtlController_HandleSetRawMonData,
     [CONTROLLER_LOADMONSPRITE]            = PlayerHandleLoadMonSprite,
     [CONTROLLER_SWITCHINANIM]             = PlayerHandleSwitchInAnim,
-    [CONTROLLER_RETURNMONTOBALL]          = PlayerHandleReturnMonToBall,
+    [CONTROLLER_RETURNMONTOBALL]          = BtlController_HandleReturnMonToBall,
     [CONTROLLER_DRAWTRAINERPIC]           = PlayerHandleDrawTrainerPic,
     [CONTROLLER_TRAINERSLIDE]             = PlayerHandleTrainerSlide,
     [CONTROLLER_TRAINERSLIDEBACK]         = PlayerHandleTrainerSlideBack,
-    [CONTROLLER_FAINTANIMATION]           = PlayerHandleFaintAnimation,
+    [CONTROLLER_FAINTANIMATION]           = BtlController_HandleFaintAnimation,
     [CONTROLLER_PALETTEFADE]              = PlayerHandlePaletteFade,
     [CONTROLLER_SUCCESSBALLTHROWANIM]     = PlayerHandleSuccessBallThrowAnim,
     [CONTROLLER_BALLTHROWANIM]            = PlayerHandleBallThrowAnim,
@@ -150,21 +141,21 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_CHOSENMONRETURNVALUE]     = PlayerHandleChosenMonReturnValue,
     [CONTROLLER_ONERETURNVALUE]           = PlayerHandleOneReturnValue,
     [CONTROLLER_ONERETURNVALUE_DUPLICATE] = PlayerHandleOneReturnValue_Duplicate,
-    [CONTROLLER_CLEARUNKVAR]              = PlayerHandleClearUnkVar,
-    [CONTROLLER_SETUNKVAR]                = PlayerHandleSetUnkVar,
-    [CONTROLLER_CLEARUNKFLAG]             = PlayerHandleClearUnkFlag,
-    [CONTROLLER_TOGGLEUNKFLAG]            = PlayerHandleToggleUnkFlag,
-    [CONTROLLER_HITANIMATION]             = PlayerHandleHitAnimation,
+    [CONTROLLER_CLEARUNKVAR]              = BtlController_HandleClearUnkVar,
+    [CONTROLLER_SETUNKVAR]                = BtlController_HandleSetUnkVar,
+    [CONTROLLER_CLEARUNKFLAG]             = BtlController_HandleClearUnkFlag,
+    [CONTROLLER_TOGGLEUNKFLAG]            = BtlController_HandleToggleUnkFlag,
+    [CONTROLLER_HITANIMATION]             = BtlController_HandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = BtlController_Empty,
     [CONTROLLER_PLAYSE]                   = BtlController_HandlePlaySE,
     [CONTROLLER_PLAYFANFAREORBGM]         = BtlController_HandlePlayFanfareOrBGM,
     [CONTROLLER_FAINTINGCRY]              = BtlController_HandleFaintingCry,
-    [CONTROLLER_INTROSLIDE]               = PlayerHandleIntroSlide,
+    [CONTROLLER_INTROSLIDE]               = BtlController_HandleIntroSlide,
     [CONTROLLER_INTROTRAINERBALLTHROW]    = PlayerHandleIntroTrainerBallThrow,
     [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = PlayerHandleDrawPartyStatusSummary,
     [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = PlayerHandleHidePartyStatusSummary,
     [CONTROLLER_ENDBOUNCE]                = PlayerHandleEndBounceEffect,
-    [CONTROLLER_SPRITEINVISIBILITY]       = PlayerHandleSpriteInvisibility,
+    [CONTROLLER_SPRITEINVISIBILITY]       = BtlController_HandleSpriteInvisibility,
     [CONTROLLER_BATTLEANIMATION]          = PlayerHandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = PlayerHandleLinkStandbyMsg,
     [CONTROLLER_RESETACTIONMOVESELECTION] = PlayerHandleResetActionMoveSelection,
@@ -1574,25 +1565,6 @@ static void CompleteWhenChoseItem(void)
     }
 }
 
-static void DoHitAnimBlinkSpriteEffect(void)
-{
-    u8 spriteId = gBattlerSpriteIds[gActiveBattler];
-
-    if (gSprites[spriteId].data[1] == 32)
-    {
-        gSprites[spriteId].data[1] = 0;
-        gSprites[spriteId].invisible = FALSE;
-        gDoingBattleAnim = FALSE;
-        PlayerBufferExecCompleted();
-    }
-    else
-    {
-        if ((gSprites[spriteId].data[1] % 4) == 0)
-            gSprites[spriteId].invisible ^= 1;
-        gSprites[spriteId].data[1]++;
-    }
-}
-
 static void PlayerHandleYesNoInput(void)
 {
     if (JOY_NEW(DPAD_UP) && gMultiUsePlayerCursor != 0)
@@ -1739,12 +1711,6 @@ static void CompleteOnFinishedStatusAnimation(void)
         PlayerBufferExecCompleted();
 }
 
-static void CompleteOnFinishedBattleAnimation(void)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animFromTableActive)
-        PlayerBufferExecCompleted();
-}
-
 static void PrintLinkStandbyMsg(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -1767,11 +1733,6 @@ static void PlayerHandleSwitchInAnim(void)
     gActionSelectionCursor[gActiveBattler] = 0;
     gMoveSelectionCursor[gActiveBattler] = 0;
     BtlController_HandleSwitchInAnim(gActiveBattler, TRUE, SwitchIn_TryShinyAnimShowHealthbox);
-}
-
-static void PlayerHandleReturnMonToBall(void)
-{
-    BtlController_HandleReturnMonToBall(gActiveBattler);
 }
 
 #define sSpeedX data[0]
@@ -1912,11 +1873,6 @@ static void PlayerHandleTrainerSlideBack(void)
     StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCallbackDummy);
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 1);
     gBattlerControllerFuncs[gActiveBattler] = FreeTrainerSpriteAfterSlide;
-}
-
-static void PlayerHandleFaintAnimation(void)
-{
-    BtlController_HandleFaintAnimation(gActiveBattler);
 }
 
 static void PlayerHandlePaletteFade(void)
@@ -2329,52 +2285,6 @@ static void PlayerHandleOneReturnValue_Duplicate(void)
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleClearUnkVar(void)
-{
-    gUnusedControllerStruct.unk = 0;
-    PlayerBufferExecCompleted();
-}
-
-static void PlayerHandleSetUnkVar(void)
-{
-    gUnusedControllerStruct.unk = gBattleResources->bufferA[gActiveBattler][1];
-    PlayerBufferExecCompleted();
-}
-
-static void PlayerHandleClearUnkFlag(void)
-{
-    gUnusedControllerStruct.flag = 0;
-    PlayerBufferExecCompleted();
-}
-
-static void PlayerHandleToggleUnkFlag(void)
-{
-    gUnusedControllerStruct.flag ^= 1;
-    PlayerBufferExecCompleted();
-}
-
-static void PlayerHandleHitAnimation(void)
-{
-    if (gSprites[gBattlerSpriteIds[gActiveBattler]].invisible == TRUE)
-    {
-        PlayerBufferExecCompleted();
-    }
-    else
-    {
-        gDoingBattleAnim = TRUE;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
-        DoHitAnimHealthboxEffect(gActiveBattler);
-        gBattlerControllerFuncs[gActiveBattler] = DoHitAnimBlinkSpriteEffect;
-    }
-}
-
-static void PlayerHandleIntroSlide(void)
-{
-    HandleIntroSlide(gBattleResources->bufferA[gActiveBattler][1]);
-    gIntroSlideFlags |= 1;
-    PlayerBufferExecCompleted();
-}
-
 // Task data for Task_StartSendOutAnim
 #define tBattlerId  data[0]
 #define tStartTimer data[1]
@@ -2506,30 +2416,9 @@ static void PlayerHandleEndBounceEffect(void)
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleSpriteInvisibility(void)
-{
-    if (IsBattlerSpritePresent(gActiveBattler))
-    {
-        gSprites[gBattlerSpriteIds[gActiveBattler]].invisible = gBattleResources->bufferA[gActiveBattler][1];
-        CopyBattleSpriteInvisibility(gActiveBattler);
-    }
-    PlayerBufferExecCompleted();
-}
-
 static void PlayerHandleBattleAnimation(void)
 {
-    if (!IsBattleSEPlaying(gActiveBattler))
-    {
-        u8 animationId = gBattleResources->bufferA[gActiveBattler][1];
-        u16 argument = gBattleResources->bufferA[gActiveBattler][2] | (gBattleResources->bufferA[gActiveBattler][3] << 8);
-
-        if (TryHandleLaunchBattleTableAnimation(gActiveBattler, gActiveBattler, gActiveBattler, animationId, argument))
-            PlayerBufferExecCompleted();
-        else
-            gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation;
-
-        BattleTv_SetDataBasedOnAnimation(animationId);
-    }
+    BtlController_HandleBattleAnimation(gActiveBattler, FALSE, TRUE);
 }
 
 static void PlayerHandleLinkStandbyMsg(void)
