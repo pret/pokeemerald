@@ -1119,17 +1119,12 @@ static void Intro_DelayAndEnd(void)
     }
 }
 
-static bool32 TwoIntroMons(u32 battlerId) // Double battle with both player pokemon active.
-{
-    return (IsDoubleBattle() && IsValidForBattle(&gPlayerParty[gBattlerPartyIndexes[battlerId ^ BIT_FLANK]]));
-}
-
 static void Intro_WaitForShinyAnimAndHealthbox(void)
 {
     bool8 healthboxAnimDone = FALSE;
 
     // Check if healthbox has finished sliding in
-    if (TwoIntroMons(gActiveBattler) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+    if (TwoPlayerIntroMons(gActiveBattler) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
         if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy
          && gSprites[gHealthboxSpriteIds[BATTLE_PARTNER(gActiveBattler)]].callback == SpriteCallbackDummy)
@@ -1155,7 +1150,7 @@ static void Intro_WaitForShinyAnimAndHealthbox(void)
 
         HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
 
-        if (TwoIntroMons(gActiveBattler))
+        if (TwoPlayerIntroMons(gActiveBattler))
             HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[BATTLE_PARTNER(gActiveBattler)]], BATTLE_PARTNER(gActiveBattler));
 
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].introEndDelay = 3;
@@ -1184,7 +1179,7 @@ static void Intro_TryShinyAnimShowHealthbox(void)
     {
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].healthboxSlideInStarted)
         {
-            if (TwoIntroMons(gActiveBattler) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+            if (TwoPlayerIntroMons(gActiveBattler) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
             {
                 UpdateHealthboxAttribute(gHealthboxSpriteIds[BATTLE_PARTNER(gActiveBattler)], &gPlayerParty[gBattlerPartyIndexes[BATTLE_PARTNER(gActiveBattler)]], HEALTHBOX_ALL);
                 StartHealthboxSlideIn(BATTLE_PARTNER(gActiveBattler));
@@ -1215,7 +1210,7 @@ static void Intro_TryShinyAnimShowHealthbox(void)
     }
 
     // Wait for battler anims
-    if (TwoIntroMons(gActiveBattler) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+    if (TwoPlayerIntroMons(gActiveBattler) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
         if (gSprites[gBattleControllerData[gActiveBattler]].callback == SpriteCallbackDummy
             && gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy
@@ -1237,7 +1232,7 @@ static void Intro_TryShinyAnimShowHealthbox(void)
     // Clean up
     if (bgmRestored && battlerAnimsDone)
     {
-        if (TwoIntroMons(gActiveBattler) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+        if (TwoPlayerIntroMons(gActiveBattler) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
             DestroySprite(&gSprites[gBattleControllerData[BATTLE_PARTNER(gActiveBattler)]]);
         DestroySprite(&gSprites[gBattleControllerData[gActiveBattler]]);
 
@@ -2219,93 +2214,11 @@ static void PlayerHandleOneReturnValue_Duplicate(void)
     PlayerBufferExecCompleted();
 }
 
-// Task data for Task_StartSendOutAnim
-#define tBattlerId  data[0]
-#define tStartTimer data[1]
-
-#define sBattlerId data[5]
-
 static void PlayerHandleIntroTrainerBallThrow(void)
 {
-    u8 paletteNum;
-    u8 taskId;
-
-    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].sBattlerId = gActiveBattler;
-
-    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCB_FreePlayerSpriteLoadMonSprite);
-    StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 1);
-
-    paletteNum = AllocSpritePalette(0xD6F8);
-    LoadCompressedPalette(gTrainerBackPicPaletteTable[gSaveBlock2Ptr->playerGender].data, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
-    gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
-
-    taskId = CreateTask(Task_StartSendOutAnim, 5);
-    gTasks[taskId].tBattlerId = gActiveBattler;
-
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
-
-    gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
-    gBattlerControllerFuncs[gActiveBattler] = BattleControllerDummy;
+    const u32 *trainerPal = gTrainerBackPicPaletteTable[gSaveBlock2Ptr->playerGender].data;
+    BtlController_HandleIntroTrainerBallThrow(gActiveBattler, 0xD6F8, trainerPal, 31, Intro_TryShinyAnimShowHealthbox);
 }
-
-void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite)
-{
-    u8 battlerId = sprite->sBattlerId;
-
-    // Free player trainer sprite
-    FreeSpriteOamMatrix(sprite);
-    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));
-    DestroySprite(sprite);
-
-    // Load mon sprite
-    BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battlerId]], battlerId);
-    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerId]], 0);
-}
-
-#undef sBattlerId
-
-// Send out at start of battle
-static void Task_StartSendOutAnim(u8 taskId)
-{
-    if (gTasks[taskId].tStartTimer < 31)
-    {
-        gTasks[taskId].tStartTimer++;
-    }
-    else
-    {
-        u8 savedActiveBattler = gActiveBattler;
-
-        gActiveBattler = gTasks[taskId].tBattlerId;
-        if (TwoIntroMons(gActiveBattler) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
-        {
-            gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-            StartSendOutAnim(gActiveBattler, FALSE);
-            gActiveBattler ^= BIT_FLANK;
-            gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-            BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
-            StartSendOutAnim(gActiveBattler, FALSE);
-            gActiveBattler ^= BIT_FLANK;
-        }
-        else
-        {
-            gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-            StartSendOutAnim(gActiveBattler, FALSE);
-        }
-        gBattlerControllerFuncs[gActiveBattler] = Intro_TryShinyAnimShowHealthbox;
-        gActiveBattler = savedActiveBattler;
-        DestroyTask(taskId);
-    }
-}
-
-#undef tBattlerId
-#undef tStartTimer
 
 static void PlayerHandleDrawPartyStatusSummary(void)
 {

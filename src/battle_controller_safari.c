@@ -185,13 +185,13 @@ static void HandleInputChooseAction(void)
     }
 }
 
-static void CompleteOnBattlerSpriteCallbackDummy(void)
+static void Controller_WaitForTrainerPic(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         SafariBufferExecCompleted();
 }
 
-static void CompleteOnHealthboxSpriteCallbackDummy(void)
+static void Controller_WaitForHealthbox(void)
 {
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         SafariBufferExecCompleted();
@@ -263,7 +263,7 @@ static void SafariHandleDrawTrainerPic(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = DISPLAY_WIDTH;
     gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = -2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
+    gBattlerControllerFuncs[gActiveBattler] = Controller_WaitForTrainerPic;
 }
 
 #undef sSpeedX
@@ -344,7 +344,7 @@ static void SafariHandleIntroTrainerBallThrow(void)
     UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_SAFARI_ALL_TEXT);
     StartHealthboxSlideIn(gActiveBattler);
     SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthboxSpriteCallbackDummy;
+    gBattlerControllerFuncs[gActiveBattler] = Controller_WaitForHealthbox;
 }
 
 static void SafariHandleBattleAnimation(void)

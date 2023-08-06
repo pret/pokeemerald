@@ -128,10 +128,6 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
 
-static void OpponentDummy(void)
-{
-}
-
 void SetControllerToOpponent(void)
 {
     gBattlerControllerEndFuncs[gActiveBattler] = OpponentBufferExecCompleted;
@@ -181,19 +177,12 @@ static void Intro_DelayAndEnd(void)
     }
 }
 
-static bool32 TwoIntroMons(u32 battlerId) // Double battle with both opponent pokemon active.
-{
-    return (IsDoubleBattle()
-            && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[battlerId]])
-            && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battlerId)]]));
-}
-
 static void Intro_WaitForShinyAnimAndHealthbox(void)
 {
     bool8 healthboxAnimDone = FALSE;
     bool8 twoMons;
 
-    twoMons = TwoIntroMons(gActiveBattler);
+    twoMons = TwoOpponentIntroMons(gActiveBattler);
     if (!twoMons || ((twoMons && (gBattleTypeFlags & BATTLE_TYPE_MULTI) && !BATTLE_TWO_VS_ONE_OPPONENT) || (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)))
     {
         if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
@@ -263,7 +252,7 @@ static void Intro_TryShinyAnimShowHealthbox(void)
      && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim)
         TryShinyAnimation(gActiveBattler, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]]);
 
-    twoMons = TwoIntroMons(gActiveBattler);
+    twoMons = TwoOpponentIntroMons(gActiveBattler);
     if (!(gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
      && (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) || BATTLE_TWO_VS_ONE_OPPONENT)
      && twoMons
@@ -928,61 +917,7 @@ static void OpponentHandleHealthBarUpdate(void)
 
 static void OpponentHandleIntroTrainerBallThrow(void)
 {
-    u8 taskId;
-
-    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 35;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 280;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
-
-    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCB_FreeOpponentSprite);
-
-    taskId = CreateTask(Task_StartSendOutAnim, 5);
-    gTasks[taskId].data[0] = gActiveBattler;
-
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
-
-    gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
-    gBattlerControllerFuncs[gActiveBattler] = OpponentDummy;
-}
-
-static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite)
-{
-    FreeTrainerFrontPicPalette(sprite->oam.affineParam);
-    FreeSpriteOamMatrix(sprite);
-    DestroySprite(sprite);
-}
-
-static void Task_StartSendOutAnim(u8 taskId)
-{
-    u8 savedActiveBattler = gActiveBattler;
-
-    gActiveBattler = gTasks[taskId].data[0];
-    if ((!TwoIntroMons(gActiveBattler) || (gBattleTypeFlags & BATTLE_TYPE_MULTI)) && !BATTLE_TWO_VS_ONE_OPPONENT)
-    {
-        gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-        StartSendOutAnim(gActiveBattler, FALSE);
-    }
-    else if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) || (BATTLE_TWO_VS_ONE_OPPONENT && !TwoIntroMons(gActiveBattler)))
-    {
-        gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-        StartSendOutAnim(gActiveBattler, FALSE);
-    }
-    else
-    {
-        gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-        StartSendOutAnim(gActiveBattler, FALSE);
-        gActiveBattler ^= BIT_FLANK;
-        gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-        StartSendOutAnim(gActiveBattler, FALSE);
-        gActiveBattler ^= BIT_FLANK;
-    }
-    gBattlerControllerFuncs[gActiveBattler] = Intro_TryShinyAnimShowHealthbox;
-    gActiveBattler = savedActiveBattler;
-    DestroyTask(taskId);
+    BtlController_HandleIntroTrainerBallThrow(gActiveBattler, 0, NULL, 0, Intro_TryShinyAnimShowHealthbox);
 }
 
 static void OpponentHandleDrawPartyStatusSummary(void)

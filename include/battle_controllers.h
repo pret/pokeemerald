@@ -252,6 +252,7 @@ void BtlController_EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
 void BtlController_EmitEndLinkBattle(u8 bufferId, u8 battleOutcome);
 void BtlController_EmitDebugMenu(u8 bufferId);
 
+void BattleControllerComplete(u32 battler); // Can be used for all the controllers.
 void BtlController_Empty(void); // Empty command, does nothing, only completes the execution.
 void BtlController_TerminatorNop(void); // Dummy function at the end of the table.
 void StartSendOutAnim(u32 battler, bool32 dontClearSubstituteBit);
@@ -282,6 +283,9 @@ void BtlController_HandlePlayFanfareOrBGM(void);
 void BtlController_HandleFaintingCry(void);
 void BtlController_HandleIntroSlide(void);
 void BtlController_HandleSpriteInvisibility(void);
+bool32 TwoPlayerIntroMons(u32 battlerId); // Double battle with both player pokemon active.
+bool32 TwoOpponentIntroMons(u32 battlerId); // Double battle with both opponent pokemon active.
+void BtlController_HandleIntroTrainerBallThrow(u32 battler, u16 tagTrainerPal, const u32 *trainerPal, s16 framesToWait, void (*controllerCallback)(void));
 void BtlController_HandleDrawPartyStatusSummary(u32 battler, u32 side, bool32 considerDelay);
 void BtlController_HandleHidePartyStatusSummary(void);
 void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE, bool32 updateTvData);
@@ -291,7 +295,6 @@ void SetControllerToPlayer(void);
 void BattleControllerDummy(void);
 void SetBattleEndCallbacks(void);
 void PlayerHandleExpUpdate(void);
-void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);
 void CB2_SetUpReshowBattleScreenAfterMenu(void);
 void CB2_SetUpReshowBattleScreenAfterMenu2(void);
 void Task_PlayerController_RestoreBgmAfterCry(u8 taskId);
@@ -308,6 +311,7 @@ void SetControllerToRecordedPlayer(void);
 void SetControllerToOpponent(void);
 
 // player partner controller
+void Controller_PlayerPartnerShowIntroHealthbox(void); // Also used by the link partner.
 void SetControllerToPlayerPartner(void);
 
 // safari controller

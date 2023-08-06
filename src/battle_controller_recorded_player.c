@@ -27,6 +27,7 @@
 #include "window.h"
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
+#include "constants/trainers.h"
 
 static void RecordedPlayerHandleLoadMonSprite(void);
 static void RecordedPlayerHandleSwitchInAnim(void);
@@ -115,10 +116,6 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) 
     [CONTROLLER_DEBUGMENU]                = BtlController_Empty,
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
-
-static void RecordedPlayerDummy(void)
-{
-}
 
 void SetControllerToRecordedPlayer(void)
 {
@@ -683,71 +680,16 @@ static void RecordedPlayerHandleStatusAnimation(void)
 
 static void RecordedPlayerHandleIntroTrainerBallThrow(void)
 {
-    u8 paletteNum;
-    u8 taskId;
     u32 trainerPicId;
+    const u32 *trainerPal;
 
-    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gActiveBattler;
-
-    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCB_FreePlayerSpriteLoadMonSprite);
-    StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 1);
-
-    paletteNum = AllocSpritePalette(0xD6F9);
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
-        trainerPicId = gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].gender;
+        trainerPicId = gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].gender + TRAINER_BACK_PIC_BRENDAN;
     else
-        trainerPicId = gSaveBlock2Ptr->playerGender;
+        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_BRENDAN;
 
-    LoadCompressedPalette(gTrainerBackPicPaletteTable[trainerPicId].data, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
-
-    gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
-
-    taskId = CreateTask(Task_StartSendOutAnim, 5);
-    gTasks[taskId].data[0] = gActiveBattler;
-
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
-
-    gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
-    gBattlerControllerFuncs[gActiveBattler] = RecordedPlayerDummy;
-}
-
-static void Task_StartSendOutAnim(u8 taskId)
-{
-    if (gTasks[taskId].data[1] < 24)
-    {
-        gTasks[taskId].data[1]++;
-    }
-    else
-    {
-        u8 savedActiveBank = gActiveBattler;
-
-        gActiveBattler = gTasks[taskId].data[0];
-        if (!IsDoubleBattle() || (gBattleTypeFlags & BATTLE_TYPE_MULTI))
-        {
-            gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-            StartSendOutAnim(gActiveBattler, FALSE);
-        }
-        else
-        {
-            gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-            StartSendOutAnim(gActiveBattler, FALSE);
-            gActiveBattler ^= BIT_FLANK;
-            gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-            BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
-            StartSendOutAnim(gActiveBattler, FALSE);
-            gActiveBattler ^= BIT_FLANK;
-        }
-        gBattlerControllerFuncs[gActiveBattler] = Intro_TryShinyAnimShowHealthbox;
-        gActiveBattler = savedActiveBank;
-        DestroyTask(taskId);
-    }
+    trainerPal = gTrainerFrontPicPaletteTable[trainerPicId].data;
+    BtlController_HandleIntroTrainerBallThrow(gActiveBattler, 0xD6F9, trainerPal, 24, Intro_TryShinyAnimShowHealthbox);
 }
 
 static void RecordedPlayerHandleDrawPartyStatusSummary(void)

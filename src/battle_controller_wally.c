@@ -57,7 +57,6 @@ static void Intro_WaitForShinyAnimAndHealthbox(void);
 static u32 CopyWallyMonData(u8 monId, u8 *dst);
 static void SetWallyMonData(u8 monId);
 static void WallyDoMoveAnimation(void);
-static void Task_StartSendOutAnim(u8 taskId);
 
 static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
@@ -120,10 +119,6 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_DEBUGMENU]                = BtlController_Empty,
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
-
-static void SpriteCB_Null7(void)
-{
-}
 
 void SetControllerToWally(void)
 {
@@ -551,51 +546,8 @@ static void WallyHandleFaintingCry(void)
 
 static void WallyHandleIntroTrainerBallThrow(void)
 {
-    u8 paletteNum;
-    u8 taskId;
-
-    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gActiveBattler;
-
-    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCB_FreePlayerSpriteLoadMonSprite);
-    StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 1);
-
-    paletteNum = AllocSpritePalette(0xD6F8);
-    LoadCompressedPalette(gTrainerBackPicPaletteTable[TRAINER_BACK_PIC_WALLY].data, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
-    gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
-
-    taskId = CreateTask(Task_StartSendOutAnim, 5);
-    gTasks[taskId].data[0] = gActiveBattler;
-
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
-
-    gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
-    gBattlerControllerFuncs[gActiveBattler] = BattleControllerDummy;
-}
-
-static void Task_StartSendOutAnim(u8 taskId)
-{
-    if (gTasks[taskId].data[1] < 31)
-    {
-        gTasks[taskId].data[1]++;
-    }
-    else
-    {
-        u8 savedActiveBank = gActiveBattler;
-
-        gActiveBattler = gTasks[taskId].data[0];
-        gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-        StartSendOutAnim(gActiveBattler, FALSE);
-        gBattlerControllerFuncs[gActiveBattler] = Intro_TryShinyAnimShowHealthbox;
-        gActiveBattler = savedActiveBank;
-        DestroyTask(taskId);
-    }
+    const u32 *trainerPal = gTrainerBackPicPaletteTable[TRAINER_BACK_PIC_WALLY].data;
+    BtlController_HandleIntroTrainerBallThrow(gActiveBattler, 0xD6F8, trainerPal, 31, Intro_TryShinyAnimShowHealthbox);
 }
 
 static void WallyHandleDrawPartyStatusSummary(void)

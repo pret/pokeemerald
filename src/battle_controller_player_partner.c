@@ -121,10 +121,6 @@ static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
 
-static void PlayerPartnerDummy(void)
-{
-}
-
 void SetControllerToPlayerPartner(void)
 {
     gBattlerControllerEndFuncs[gActiveBattler] = PlayerPartnerBufferExecCompleted;
@@ -164,7 +160,7 @@ static void Intro_DelayAndEnd(void)
     if (--gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].introEndDelay == (u8)-1)
     {
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].introEndDelay = 0;
-        PlayerPartnerBufferExecCompleted();
+        BattleControllerComplete(gActiveBattler);
     }
 }
 
@@ -196,7 +192,8 @@ static void Intro_WaitForHealthbox(void)
     }
 }
 
-static void Intro_ShowHealthbox(void)
+// Also used by the link partner.
+void Controller_PlayerPartnerShowIntroHealthbox(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive
         && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(gActiveBattler)].ballAnimActive
@@ -569,87 +566,18 @@ static void PlayerPartnerHandleHealthBarUpdate(void)
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
 }
 
-#undef tExpTask_monId
-#undef tExpTask_gainedExp
-#undef tExpTask_bank
-#undef tExpTask_frames
-
 static void PlayerPartnerHandleIntroTrainerBallThrow(void)
 {
-    u8 paletteNum;
-    u8 taskId;
+    const u32 *trainerPal;
 
-    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gActiveBattler;
-
-    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCB_FreePlayerSpriteLoadMonSprite);
-    StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 1);
-
-    paletteNum = AllocSpritePalette(0xD6F9);
     if (gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
-    {
-        u8 spriteId = TRAINER_BACK_PIC_STEVEN;
-        LoadCompressedPalette(gTrainerBackPicPaletteTable[spriteId].data, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
-    }
-    else if (gPartnerTrainerId >= TRAINER_CUSTOM_PARTNER)
-    {
-        u8 spriteId = gPartnerSpriteId;
-        LoadCompressedPalette(gTrainerBackPicPaletteTable[spriteId].data, 0x100 + paletteNum * 16, 32);
-    }
+        trainerPal = gTrainerBackPicPaletteTable[TRAINER_STEVEN_PARTNER].data;
+    else if (gPartnerTrainerId >= TRAINER_CUSTOM_PARTNER) // Custom multi battle.
+        trainerPal = gTrainerBackPicPaletteTable[gPartnerSpriteId].data;
     else
-    {
-        u8 spriteId = GetFrontierTrainerFrontSpriteId(gPartnerTrainerId);
-        LoadCompressedPalette(gTrainerFrontPicPaletteTable[spriteId].data, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
-    }
+        trainerPal = gTrainerFrontPicPaletteTable[GetFrontierTrainerFrontSpriteId(gPartnerTrainerId)].data; // 2 vs 2 multi battle in Battle Frontier, load front sprite and pal.
 
-
-    gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
-
-    taskId = CreateTask(Task_StartSendOutAnim, 5);
-    gTasks[taskId].data[0] = gActiveBattler;
-
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
-
-    gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
-    gBattlerControllerFuncs[gActiveBattler] = PlayerPartnerDummy;
-}
-
-static void Task_StartSendOutAnim(u8 taskId)
-{
-    if (gTasks[taskId].data[1] < 24)
-    {
-        gTasks[taskId].data[1]++;
-    }
-    else
-    {
-        u8 savedActiveBank = gActiveBattler;
-
-        gActiveBattler = gTasks[taskId].data[0];
-        if (!IsDoubleBattle() || (gBattleTypeFlags & BATTLE_TYPE_MULTI))
-        {
-            gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-            StartSendOutAnim(gActiveBattler, FALSE);
-        }
-        else
-        {
-            gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-            StartSendOutAnim(gActiveBattler, FALSE);
-            gActiveBattler ^= BIT_FLANK;
-            gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-            BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
-            StartSendOutAnim(gActiveBattler, FALSE);
-            gActiveBattler ^= BIT_FLANK;
-        }
-        gBattlerControllerFuncs[gActiveBattler] = Intro_ShowHealthbox;
-        gActiveBattler = savedActiveBank;
-        DestroyTask(taskId);
-    }
+    BtlController_HandleIntroTrainerBallThrow(gActiveBattler, 0xD6F9, trainerPal, 24, Controller_PlayerPartnerShowIntroHealthbox);
 }
 
 static void PlayerPartnerHandleDrawPartyStatusSummary(void)
