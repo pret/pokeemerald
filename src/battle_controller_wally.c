@@ -302,12 +302,6 @@ static void CompleteOnHealthbarDone(void)
     }
 }
 
-static void CompleteOnBankSpriteCallbackDummy2(void)
-{
-    if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
-        WallyBufferExecCompleted();
-}
-
 static void WallyBufferExecCompleted(void)
 {
     gBattlerControllerFuncs[gActiveBattler] = WallyBufferRunCommand;
@@ -328,17 +322,9 @@ static void WallyBufferExecCompleted(void)
 
 static void WallyHandleDrawTrainerPic(void)
 {
-    DecompressTrainerBackPic(TRAINER_BACK_PIC_WALLY, gActiveBattler);
-    SetMultiuseSpriteTemplateToTrainerBack(TRAINER_BACK_PIC_WALLY, GetBattlerPosition(gActiveBattler));
-    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
-                                               80,
-                                               80 + 4 * (8 - gTrainerBackPicCoords[TRAINER_BACK_PIC_WALLY].size),
-                                               30);
-    gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = DISPLAY_WIDTH;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = -2;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
+    BtlController_HandleDrawTrainerPic(gActiveBattler, TRAINER_BACK_PIC_WALLY, FALSE,
+                                       80, 80 + 4 * (8 - gTrainerBackPicCoords[TRAINER_BACK_PIC_WALLY].size),
+                                       30);
 }
 
 static void WallyHandleTrainerSlide(void)
@@ -353,7 +339,7 @@ static void WallyHandleTrainerSlide(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -96;
     gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = 2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy2;
+    //gBattlerControllerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy2;
 }
 
 #undef sSpeedX

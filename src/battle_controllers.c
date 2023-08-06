@@ -2203,6 +2203,12 @@ static void Controller_WaitForStatusAnimation(void)
         BattleControllerComplete(gActiveBattler);
 }
 
+static void Controller_WaitForTrainerPic(void)
+{
+    if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
+        BattleControllerComplete(gActiveBattler);
+}
+
 void Controller_WaitForString(void)
 {
     if (!IsTextPrinterActive(B_WIN_MSG))
@@ -2376,6 +2382,71 @@ void BtlController_HandleReturnMonToBall(void)
         BattleControllerComplete(gActiveBattler);
     }
 }
+
+// In emerald it's possible to have a tag battle in the battle frontier facilities with AI
+// which use the front sprite for both the player and the partner as opposed to any other battles (including the one with Steven)
+// that use an animated back pic.
+
+#define sSpeedX data[0]
+
+void BtlController_HandleDrawTrainerPic(u32 battler, u32 trainerPicId, bool32 isFrontPic, s16 xPos, s16 yPos, s32 subpriority)
+{
+    if (GetBattlerSide(battler) == B_SIDE_OPPONENT) // Always the front sprite for the opponent.
+    {
+        DecompressTrainerFrontPic(trainerPicId, battler);
+        SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(battler));
+        if (subpriority == -1)
+            subpriority = GetBattlerSpriteSubpriority(battler);
+        gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,
+                                                   xPos,
+                                                   yPos,
+                                                   subpriority);
+
+        gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
+        gSprites[gBattlerSpriteIds[battler]].x2 = -DISPLAY_WIDTH;
+        gSprites[gBattlerSpriteIds[battler]].sSpeedX = 2;
+        gSprites[gBattlerSpriteIds[battler]].oam.affineParam = trainerPicId;
+    }
+    else // Player's side
+    {
+        if (isFrontPic)
+        {
+            DecompressTrainerFrontPic(trainerPicId, battler);
+            SetMultiuseSpriteTemplateToTrainerFront(trainerPicId, GetBattlerPosition(battler));
+            if (subpriority == -1)
+                subpriority = GetBattlerSpriteSubpriority(battler);
+            gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,
+                                                             xPos,
+                                                             yPos,
+                                                             subpriority);
+
+            gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
+            gSprites[gBattlerSpriteIds[battler]].oam.affineMode = ST_OAM_AFFINE_OFF;
+            gSprites[gBattlerSpriteIds[battler]].hFlip = 1;
+            gSprites[gBattlerSpriteIds[battler]].y2 = 48;
+        }
+        else
+        {
+            DecompressTrainerBackPic(trainerPicId, battler);
+            SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(battler));
+            if (subpriority == -1)
+                subpriority = GetBattlerSpriteSubpriority(battler);
+            gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,
+                                                             xPos,
+                                                             yPos,
+                                                             subpriority);
+
+            gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
+        }
+        gSprites[gBattlerSpriteIds[battler]].x2 = DISPLAY_WIDTH;
+        gSprites[gBattlerSpriteIds[battler]].sSpeedX = -2;
+    }
+    gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_TrainerSlideIn;
+
+    gBattlerControllerFuncs[gActiveBattler] = Controller_WaitForTrainerPic;
+}
+
+#undef sSpeedX
 
 #define sSpeedX data[1]
 #define sSpeedY data[2]

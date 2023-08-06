@@ -145,12 +145,6 @@ static void OpponentBufferRunCommand(void)
     }
 }
 
-static void CompleteOnBattlerSpriteCallbackDummy(void)
-{
-    if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
-        OpponentBufferExecCompleted();
-}
-
 static void CompleteOnBankSpriteCallbackDummy2(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
@@ -445,12 +439,9 @@ static void OpponentHandleSwitchInAnim(void)
     BtlController_HandleSwitchInAnim(gActiveBattler, FALSE, SwitchIn_TryShinyAnim);
 }
 
-#define sSpeedX data[0]
-
-static void OpponentHandleDrawTrainerPic(void)
+static u32 OpponentGetTrainerPicId(u32 battlerId)
 {
     u32 trainerPicId;
-    s16 xPos;
 
     if (gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)
     {
@@ -464,7 +455,7 @@ static void OpponentHandleDrawTrainerPic(void)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
         {
-            if (gActiveBattler == 1)
+            if (battlerId == 1)
                 trainerPicId = GetTrainerHillTrainerFrontSpriteId(gTrainerBattleOpponent_A);
             else
                 trainerPicId = GetTrainerHillTrainerFrontSpriteId(gTrainerBattleOpponent_B);
@@ -478,7 +469,7 @@ static void OpponentHandleDrawTrainerPic(void)
     {
         if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
         {
-            if (gActiveBattler == 1)
+            if (battlerId == 1)
                 trainerPicId = GetFrontierTrainerFrontSpriteId(gTrainerBattleOpponent_A);
             else
                 trainerPicId = GetFrontierTrainerFrontSpriteId(gTrainerBattleOpponent_B);
@@ -494,7 +485,7 @@ static void OpponentHandleDrawTrainerPic(void)
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
     {
-        if (gActiveBattler != 1)
+        if (battlerId != 1)
             trainerPicId = gTrainers[gTrainerBattleOpponent_B].trainerPic;
         else
             trainerPicId = gTrainers[gTrainerBattleOpponent_A].trainerPic;
@@ -503,6 +494,16 @@ static void OpponentHandleDrawTrainerPic(void)
     {
         trainerPicId = gTrainers[gTrainerBattleOpponent_A].trainerPic;
     }
+
+    return trainerPicId;
+}
+
+#define sSpeedX data[0]
+
+static void OpponentHandleDrawTrainerPic(void)
+{
+    s16 xPos;
+    u32 trainerPicId = OpponentGetTrainerPicId(gActiveBattler);
 
     if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS) && !BATTLE_TWO_VS_ONE_OPPONENT)
     {
@@ -516,77 +517,14 @@ static void OpponentHandleDrawTrainerPic(void)
         xPos = 176;
     }
 
-    DecompressTrainerFrontPic(trainerPicId, gActiveBattler);
-    SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
-    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
-                                               xPos,
-                                               (8 - gTrainerFrontPicCoords[trainerPicId].size) * 4 + 40,
-                                               GetBattlerSpriteSubpriority(gActiveBattler));
-
-    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -DISPLAY_WIDTH;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = 2;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
-    gSprites[gBattlerSpriteIds[gActiveBattler]].oam.affineParam = trainerPicId;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
-
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
+    BtlController_HandleDrawTrainerPic(gActiveBattler, trainerPicId, TRUE,
+                                       xPos, 40 + 4 * (8 - gTrainerFrontPicCoords[trainerPicId].size),
+                                       -1);
 }
 
 static void OpponentHandleTrainerSlide(void)
 {
-    u32 trainerPicId;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)
-    {
-        trainerPicId = GetSecretBaseTrainerPicIndex();
-    }
-    else if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
-    {
-        trainerPicId = GetFrontierBrainTrainerPicIndex();
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
-    {
-        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-        {
-            if (gActiveBattler == 1)
-                trainerPicId = GetTrainerHillTrainerFrontSpriteId(gTrainerBattleOpponent_A);
-            else
-                trainerPicId = GetTrainerHillTrainerFrontSpriteId(gTrainerBattleOpponent_B);
-        }
-        else
-        {
-            trainerPicId = GetTrainerHillTrainerFrontSpriteId(gTrainerBattleOpponent_A);
-        }
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
-    {
-        if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
-        {
-            if (gActiveBattler == 1)
-                trainerPicId = GetFrontierTrainerFrontSpriteId(gTrainerBattleOpponent_A);
-            else
-                trainerPicId = GetFrontierTrainerFrontSpriteId(gTrainerBattleOpponent_B);
-        }
-        else
-        {
-            trainerPicId = GetFrontierTrainerFrontSpriteId(gTrainerBattleOpponent_A);
-        }
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
-    {
-        trainerPicId = GetEreaderTrainerFrontSpriteId();
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-    {
-        if (gActiveBattler != 1)
-            trainerPicId = gTrainers[gTrainerBattleOpponent_B].trainerPic;
-        else
-            trainerPicId = gTrainers[gTrainerBattleOpponent_A].trainerPic;
-    }
-    else
-    {
-        trainerPicId = gTrainers[gTrainerBattleOpponent_A].trainerPic;
-    }
+    u32 trainerPicId = OpponentGetTrainerPicId(gActiveBattler);
 
     DecompressTrainerFrontPic(trainerPicId, gActiveBattler);
     SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));

@@ -22,6 +22,7 @@
 #include "window.h"
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
+#include "constants/trainers.h"
 #include "constants/rgb.h"
 
 static void SafariHandleDrawTrainerPic(void);
@@ -185,12 +186,6 @@ static void HandleInputChooseAction(void)
     }
 }
 
-static void Controller_WaitForTrainerPic(void)
-{
-    if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
-        SafariBufferExecCompleted();
-}
-
 static void Controller_WaitForHealthbox(void)
 {
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
@@ -252,18 +247,11 @@ static void CompleteOnFinishedStatusAnimation(void)
 
 static void SafariHandleDrawTrainerPic(void)
 {
-    DecompressTrainerBackPic(gSaveBlock2Ptr->playerGender, gActiveBattler);
-    SetMultiuseSpriteTemplateToTrainerBack(gSaveBlock2Ptr->playerGender, GetBattlerPosition(gActiveBattler));
-    gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gMultiuseSpriteTemplate,
-      80,
-      (8 - gTrainerBackPicCoords[gSaveBlock2Ptr->playerGender].size) * 4 + 80,
-      30);
-    gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = DISPLAY_WIDTH;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = -2;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
-    gBattlerControllerFuncs[gActiveBattler] = Controller_WaitForTrainerPic;
+    u32 trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_BRENDAN;
+
+    BtlController_HandleDrawTrainerPic(gActiveBattler, trainerPicId, FALSE,
+                                       80, 80 + 4 * (8 - gTrainerBackPicCoords[trainerPicId].size),
+                                       30);
 }
 
 #undef sSpeedX

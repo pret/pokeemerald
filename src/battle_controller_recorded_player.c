@@ -134,12 +134,6 @@ static void RecordedPlayerBufferRunCommand(void)
     }
 }
 
-static void CompleteOnBattlerSpriteCallbackDummy(void)
-{
-    if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
-        RecordedPlayerBufferExecCompleted();
-}
-
 static void FreeTrainerSpriteAfterSlide(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
@@ -403,10 +397,9 @@ static void RecordedPlayerHandleSwitchInAnim(void)
     BtlController_HandleSwitchInAnim(gActiveBattler, TRUE, SwitchIn_TryShinyAnim);
 }
 
-#define sSpeedX data[0]
-
 static void RecordedPlayerHandleDrawTrainerPic(void)
 {
+    bool32 isFrontPic;
     s16 xPos, yPos;
     u32 trainerPicId;
 
@@ -447,36 +440,12 @@ static void RecordedPlayerHandleDrawTrainerPic(void)
     }
 
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-    {
-        trainerPicId = PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender);
-        DecompressTrainerFrontPic(trainerPicId, gActiveBattler);
-        SetMultiuseSpriteTemplateToTrainerFront(trainerPicId, GetBattlerPosition(gActiveBattler));
-        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, xPos, yPos, GetBattlerSpriteSubpriority(gActiveBattler));
-
-        gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
-        gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = DISPLAY_WIDTH;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].y2 = 48;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = -2;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].oam.affineMode = ST_OAM_AFFINE_OFF;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].hFlip = 1;
-    }
+        isFrontPic = TRUE;
     else
-    {
-        DecompressTrainerBackPic(trainerPicId, gActiveBattler);
-        SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
-        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, xPos, yPos, GetBattlerSpriteSubpriority(gActiveBattler));
+        isFrontPic = FALSE;
 
-        gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = DISPLAY_WIDTH;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = -2;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
-    }
-
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
+    BtlController_HandleDrawTrainerPic(gActiveBattler, trainerPicId, isFrontPic, xPos, yPos, -1);
 }
-
-#undef sSpeedX
 
 static void RecordedPlayerHandleTrainerSlideBack(void)
 {

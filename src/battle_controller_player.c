@@ -1087,12 +1087,6 @@ void SetBattleEndCallbacks(void)
     }
 }
 
-static void CompleteOnBattlerSpriteCallbackDummy(void)
-{
-    if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
-        PlayerBufferExecCompleted();
-}
-
 static void CompleteOnBankSpriteCallbackDummy2(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
@@ -1699,35 +1693,43 @@ static void PlayerHandleSwitchInAnim(void)
 
 #define sSpeedX data[0]
 
+u32 LinkPlayerGetTrainerPicId(u32 multiplayerId)
+{
+    u32 trainerPicId;
+
+    u8 gender = gLinkPlayers[multiplayerId].gender;
+    u8 version = gLinkPlayers[multiplayerId].version & 0xFF;
+
+    if (version == VERSION_FIRE_RED || version == VERSION_LEAF_GREEN)
+        trainerPicId = gender + TRAINER_BACK_PIC_RED;
+    else if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
+        trainerPicId = gender + TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN;
+    else
+        trainerPicId = gender + TRAINER_BACK_PIC_BRENDAN;
+
+    return trainerPicId;
+}
+
+static u32 PlayerGetTrainerBackPicId(void)
+{
+    u32 trainerPicId;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+        trainerPicId = LinkPlayerGetTrainerPicId(GetMultiplayerId());
+    else
+        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_BRENDAN;
+
+    return trainerPicId;
+}
+
 // In emerald it's possible to have a tag battle in the battle frontier facilities with AI
 // which use the front sprite for both the player and the partner as opposed to any other battles (including the one with Steven)
 // that use an animated back pic.
 static void PlayerHandleDrawTrainerPic(void)
 {
+    bool32 isFrontPic;
     s16 xPos, yPos;
-    u32 trainerPicId;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-    {
-        if ((gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_FIRE_RED
-            || (gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_LEAF_GREEN)
-        {
-            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender + TRAINER_BACK_PIC_RED;
-        }
-        else if ((gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_RUBY
-                 || (gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_SAPPHIRE)
-        {
-            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender + TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN;
-        }
-        else
-        {
-            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender + TRAINER_BACK_PIC_BRENDAN;
-        }
-    }
-    else
-    {
-        trainerPicId = gSaveBlock2Ptr->playerGender;
-    }
+    u32 trainerPicId, gender;
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
@@ -1753,63 +1755,24 @@ static void PlayerHandleDrawTrainerPic(void)
         yPos = (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80;
     }
 
-    // Use front pic table for any tag battles unless your partner is Steven.
+    // Use front pic table for any tag battles unless your partner is Steven or a custom partner.
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId != TRAINER_STEVEN_PARTNER && gPartnerTrainerId < TRAINER_CUSTOM_PARTNER)
     {
         trainerPicId = PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender);
-        DecompressTrainerFrontPic(trainerPicId, gActiveBattler);
-        SetMultiuseSpriteTemplateToTrainerFront(trainerPicId, GetBattlerPosition(gActiveBattler));
-        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, xPos, yPos, GetBattlerSpriteSubpriority(gActiveBattler));
-
-        gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
-        gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = DISPLAY_WIDTH;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].y2 = 48;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = -2;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].oam.affineMode = ST_OAM_AFFINE_OFF;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].hFlip = 1;
+        isFrontPic = TRUE;
     }
-    // Use the back pic in any other scenario.
-    else
+    else // Use back pic in all the other usual circumstances.
     {
-        DecompressTrainerBackPic(trainerPicId, gActiveBattler);
-        SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
-        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, xPos, yPos, GetBattlerSpriteSubpriority(gActiveBattler));
-
-        gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = DISPLAY_WIDTH;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = -2;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
+        trainerPicId = PlayerGetTrainerBackPicId();
+        isFrontPic = FALSE;
     }
 
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
+    BtlController_HandleDrawTrainerPic(gActiveBattler, trainerPicId, isFrontPic, xPos, yPos, -1);
 }
 
 static void PlayerHandleTrainerSlide(void)
 {
-    u32 trainerPicId;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-    {
-        if ((gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_FIRE_RED
-            || (gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_LEAF_GREEN)
-        {
-            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender + TRAINER_BACK_PIC_RED;
-        }
-        else if ((gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_RUBY
-                 || (gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_SAPPHIRE)
-        {
-            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender + TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN;
-        }
-        else
-        {
-            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender + TRAINER_BACK_PIC_BRENDAN;
-        }
-    }
-    else
-    {
-        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_BRENDAN;
-    }
+    u32 trainerPicId = PlayerGetTrainerBackPicId();
 
     DecompressTrainerBackPic(trainerPicId, gActiveBattler);
     SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
