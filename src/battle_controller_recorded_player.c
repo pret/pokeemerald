@@ -134,17 +134,6 @@ static void RecordedPlayerBufferRunCommand(void)
     }
 }
 
-static void FreeTrainerSpriteAfterSlide(void)
-{
-    if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
-    {
-        BattleGfxSfxDummy3(MALE);
-        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        RecordedPlayerBufferExecCompleted();
-    }
-}
-
 static void Intro_DelayAndEnd(void)
 {
     if (--gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].introEndDelay == (u8)-1)
@@ -449,13 +438,7 @@ static void RecordedPlayerHandleDrawTrainerPic(void)
 
 static void RecordedPlayerHandleTrainerSlideBack(void)
 {
-    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 35;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
-    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCallbackDummy);
-    gBattlerControllerFuncs[gActiveBattler] = FreeTrainerSpriteAfterSlide;
+    BtlController_HandleTrainerSlideBack(gActiveBattler, 35, FALSE);
 }
 
 static void RecordedPlayerHandleMoveAnimation(void)

@@ -2185,6 +2185,18 @@ static void Controller_FaintOpponentMon(void)
     }
 }
 
+static void Controller_HandleTrainerSlideBack(void)
+{
+    if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
+    {
+        if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
+            FreeTrainerFrontPicPalette(gSprites[gBattlerSpriteIds[gActiveBattler]].oam.affineParam);
+        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+        BattleControllerComplete(gActiveBattler);
+    }
+}
+
 static void Controller_WaitForBallThrow(void)
 {
     if (!gDoingBattleAnim || !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
@@ -2443,10 +2455,58 @@ void BtlController_HandleDrawTrainerPic(u32 battler, u32 trainerPicId, bool32 is
     }
     gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_TrainerSlideIn;
 
-    gBattlerControllerFuncs[gActiveBattler] = Controller_WaitForTrainerPic;
+    gBattlerControllerFuncs[battler] = Controller_WaitForTrainerPic;
+}
+
+void BtlController_HandleTrainerSlide(u32 battler, u32 trainerPicId)
+{
+    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+    {
+        DecompressTrainerBackPic(trainerPicId, battler);
+        SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(battler));
+        gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,
+                                                         80,
+                                                         (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80,
+                                                         30);
+        gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
+        gSprites[gBattlerSpriteIds[battler]].x2 = -96;
+        gSprites[gBattlerSpriteIds[battler]].sSpeedX = 2;
+    }
+    else
+    {
+        DecompressTrainerFrontPic(trainerPicId, battler);
+        SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(battler));
+        gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,
+                                                  176,
+                                                  (8 - gTrainerFrontPicCoords[trainerPicId].size) * 4 + 40,
+                                                  30);
+        gSprites[gBattlerSpriteIds[battler]].oam.affineParam = trainerPicId;
+        gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
+        gSprites[gBattlerSpriteIds[battler]].x2 = 96;
+        gSprites[gBattlerSpriteIds[battler]].x += 32;
+        gSprites[gBattlerSpriteIds[battler]].sSpeedX = -2;
+    }
+    gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_TrainerSlideIn;
+
+    gBattlerControllerFuncs[battler] = Controller_WaitForTrainerPic;
 }
 
 #undef sSpeedX
+
+void BtlController_HandleTrainerSlideBack(u32 battlerId, s16 data0, bool32 startAnim)
+{
+    u32 side = GetBattlerSide(battlerId);
+
+    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[battlerId]]);
+    gSprites[gBattlerSpriteIds[battlerId]].data[0] = data0;
+    gSprites[gBattlerSpriteIds[battlerId]].data[2] = (side == B_SIDE_PLAYER) ? -40 : 280;
+    gSprites[gBattlerSpriteIds[battlerId]].data[4] = gSprites[gBattlerSpriteIds[battlerId]].y;
+    gSprites[gBattlerSpriteIds[battlerId]].callback = StartAnimLinearTranslation;
+    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[battlerId]], SpriteCallbackDummy);
+    if (startAnim)
+        StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerId]], 1);
+    gBattlerControllerFuncs[battlerId] = Controller_HandleTrainerSlideBack;
+}
 
 #define sSpeedX data[1]
 #define sSpeedY data[2]
@@ -2653,16 +2713,16 @@ void BtlController_HandleSpriteInvisibility(void)
     BattleControllerComplete(gActiveBattler);
 }
 
-bool32 TwoPlayerIntroMons(u32 battlerId) // Double battle with both player pokemon active.
+bool32 TwoPlayerIntroMons(u32 battler) // Double battle with both player pokemon active.
 {
-    return (IsDoubleBattle() && IsValidForBattle(&gPlayerParty[gBattlerPartyIndexes[battlerId ^ BIT_FLANK]]));
+    return (IsDoubleBattle() && IsValidForBattle(&gPlayerParty[gBattlerPartyIndexes[battler ^ BIT_FLANK]]));
 }
 
-bool32 TwoOpponentIntroMons(u32 battlerId) // Double battle with both opponent pokemon active.
+bool32 TwoOpponentIntroMons(u32 battler) // Double battle with both opponent pokemon active.
 {
     return (IsDoubleBattle()
-            && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[battlerId]])
-            && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battlerId)]]));
+            && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[battler]])
+            && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]]));
 }
 
 // Task data for Task_StartSendOutAnim
@@ -2722,20 +2782,20 @@ void BtlController_HandleIntroTrainerBallThrow(u32 battler, u16 tagTrainerPal, c
     gBattlerControllerFuncs[battler] = BattleControllerDummy;
 }
 
-static bool32 TwoMonsAtSendOut(u32 battlerId)
+static bool32 TwoMonsAtSendOut(u32 battler)
 {
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
     {
-        if (TwoPlayerIntroMons(battlerId) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+        if (TwoPlayerIntroMons(battler) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
             return TRUE;
         else
             return FALSE;
     }
     else
     {
-        if ((!TwoOpponentIntroMons(battlerId) || (gBattleTypeFlags & BATTLE_TYPE_MULTI)) && !BATTLE_TWO_VS_ONE_OPPONENT)
+        if ((!TwoOpponentIntroMons(battler) || (gBattleTypeFlags & BATTLE_TYPE_MULTI)) && !BATTLE_TWO_VS_ONE_OPPONENT)
             return FALSE;
-        else if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) || (BATTLE_TWO_VS_ONE_OPPONENT && !TwoOpponentIntroMons(battlerId)))
+        else if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) || (BATTLE_TWO_VS_ONE_OPPONENT && !TwoOpponentIntroMons(battler)))
             return FALSE;
         else
             return TRUE;
@@ -2784,7 +2844,7 @@ static void Task_StartSendOutAnim(u8 taskId)
 
 static void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite)
 {
-    u8 battlerId = sprite->sBattlerId;
+    u8 battler = sprite->sBattlerId;
 
     // Free player trainer sprite
     FreeSpriteOamMatrix(sprite);
@@ -2792,8 +2852,8 @@ static void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite)
     DestroySprite(sprite);
 
     // Load mon sprite
-    BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battlerId]], battlerId);
-    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerId]], 0);
+    BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
+    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 0);
 }
 
 static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite)

@@ -632,10 +632,6 @@ void DecompressTrainerBackPic(u16 backPicId, u8 battlerId)
                           OBJ_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
 }
 
-void BattleGfxSfxDummy3(u8 gender)
-{
-}
-
 void FreeTrainerFrontPicPalette(u16 frontPicId)
 {
     FreeSpritePaletteByTag(gTrainerFrontPicPaletteTable[frontPicId].tag);

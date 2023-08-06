@@ -143,17 +143,6 @@ static void CompleteOnBankSpriteCallbackDummy2(void)
         RecordedOpponentBufferExecCompleted();
 }
 
-static void FreeTrainerSpriteAfterSlide(void)
-{
-    if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
-    {
-        FreeTrainerFrontPicPalette(gSprites[gBattlerSpriteIds[gActiveBattler]].oam.affineParam);
-        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        RecordedOpponentBufferExecCompleted();
-    }
-}
-
 static void Intro_DelayAndEnd(void)
 {
     if (--gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].introEndDelay == (u8)-1)
@@ -416,8 +405,6 @@ static void RecordedOpponentHandleSwitchInAnim(void)
     BtlController_HandleSwitchInAnim(gActiveBattler, FALSE, SwitchIn_TryShinyAnim);
 }
 
-#define sSpeedX data[0]
-
 static void RecordedOpponentHandleDrawTrainerPic(void)
 {
     s16 xPos;
@@ -460,17 +447,9 @@ static void RecordedOpponentHandleDrawTrainerPic(void)
                                        -1);
 }
 
-#undef sSpeedX
-
 static void RecordedOpponentHandleTrainerSlideBack(void)
 {
-    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 35;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 280;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
-    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCallbackDummy);
-    gBattlerControllerFuncs[gActiveBattler] = FreeTrainerSpriteAfterSlide;
+    BtlController_HandleTrainerSlideBack(gActiveBattler, 35, FALSE);
 }
 
 static void RecordedOpponentHandleMoveAnimation(void)

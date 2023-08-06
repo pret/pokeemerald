@@ -129,17 +129,6 @@ static void LinkPartnerBufferRunCommand(void)
     }
 }
 
-static void FreeTrainerSpriteAfterSlide(void)
-{
-    if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
-    {
-        BattleGfxSfxDummy3(MALE);
-        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        LinkPartnerBufferExecCompleted();
-    }
-}
-
 static void WaitForMonAnimAfterLoad(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].animEnded && gSprites[gBattlerSpriteIds[gActiveBattler]].x2 == 0)
@@ -247,8 +236,6 @@ static void LinkPartnerHandleSwitchInAnim(void)
     BtlController_HandleSwitchInAnim(gActiveBattler, TRUE, SwitchIn_TryShinyAnim);
 }
 
-#define sSpeedX data[0]
-
 static void LinkPartnerHandleDrawTrainerPic(void)
 {
     s16 xPos;
@@ -272,17 +259,9 @@ static void LinkPartnerHandleDrawTrainerPic(void)
                                        -1);
 }
 
-#undef sSpeedX
-
 static void LinkPartnerHandleTrainerSlideBack(void)
 {
-    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 35;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
-    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCallbackDummy);
-    gBattlerControllerFuncs[gActiveBattler] = FreeTrainerSpriteAfterSlide;
+    BtlController_HandleTrainerSlideBack(gActiveBattler, 35, FALSE);
 }
 
 static void LinkPartnerHandleMoveAnimation(void)

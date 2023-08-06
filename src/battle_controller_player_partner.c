@@ -138,17 +138,6 @@ static void PlayerPartnerBufferRunCommand(void)
     }
 }
 
-static void FreeTrainerSpriteAfterSlide(void)
-{
-    if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
-    {
-        BattleGfxSfxDummy3(MALE);
-        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        PlayerPartnerBufferExecCompleted();
-    }
-}
-
 static void Intro_DelayAndEnd(void)
 {
     if (--gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].introEndDelay == (u8)-1)
@@ -323,8 +312,6 @@ static void PlayerPartnerHandleSwitchInAnim(void)
     BtlController_HandleSwitchInAnim(gActiveBattler, TRUE, SwitchIn_TryShinyAnim);
 }
 
-#define sSpeedX data[0]
-
 // some explanation here
 // in emerald it's possible to have a tag battle in the battle frontier facilities with AI
 // which use the front sprite for both the player and the partner as opposed to any other battles (including the one with Steven) that use the back pic as well as animate it
@@ -362,17 +349,9 @@ static void PlayerPartnerHandleDrawTrainerPic(void)
     BtlController_HandleDrawTrainerPic(gActiveBattler, trainerPicId, isFrontPic, xPos, yPos, -1);
 }
 
-#undef sSpeedX
-
 static void PlayerPartnerHandleTrainerSlideBack(void)
 {
-    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 35;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
-    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCallbackDummy);
-    gBattlerControllerFuncs[gActiveBattler] = FreeTrainerSpriteAfterSlide;
+    BtlController_HandleTrainerSlideBack(gActiveBattler, 35, FALSE);
 }
 
 static void PlayerPartnerHandleMoveAnimation(void)
