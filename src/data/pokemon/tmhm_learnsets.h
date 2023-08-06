@@ -1,9 +1,17 @@
+/* Expands to:
+ * struct TMHMLearnset
+ * {
+ *     u32 FOCUS_PUNCH:1;
+ *     ...
+ *     u32 CUT:1;
+ *     ...
+ * }; */
 #define TMHM_LEARN(id) u32 id:1;
-
 struct TMHMLearnset
 {
     FOREACH_TMHM(TMHM_LEARN)
 };
+#undef TMHM_LEARN
 
 const union {
     struct TMHMLearnset learnset;

@@ -50,9 +50,6 @@
     b = temp;               \
 }
 
-#define CAT(a, b) XCAT(a, b)
-#define XCAT(a, b) a ## b
-
 // useful math macros
 
 // Converts a number to Q8.8 fixed-point format

@@ -4,7 +4,7 @@ FallarborTown_CozmosHouse_MapScripts::
 FallarborTown_CozmosHouse_EventScript_ProfCozmo::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM27, FallarborTown_CozmosHouse_EventScript_GaveMeteorite
+	goto_if_set FLAG_RECEIVED_TM_RETURN, FallarborTown_CozmosHouse_EventScript_GaveMeteorite
 	checkitem ITEM_METEORITE
 	goto_if_eq VAR_RESULT, TRUE, FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite
 	msgbox FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow, MSGBOX_DEFAULT
@@ -20,7 +20,7 @@ FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite::
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setvar VAR_0x8004, ITEM_METEORITE
 	call Common_EventScript_PlayerHandedOverTheItem
-	setflag FLAG_RECEIVED_TM27
+	setflag FLAG_RECEIVED_TM_RETURN
 	msgbox FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch, MSGBOX_DEFAULT
 	release
 	end
@@ -48,7 +48,7 @@ FallarborTown_CozmosHouse_EventScript_GaveMeteorite::
 FallarborTown_CozmosHouse_EventScript_CozmosWife::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM27, FallarborTown_CozmosHouse_EventScript_CozmoIsHappy
+	goto_if_set FLAG_RECEIVED_TM_RETURN, FallarborTown_CozmosHouse_EventScript_CozmoIsHappy
 	goto_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, FallarborTown_CozmosHouse_EventScript_CozmoIsSad
 	msgbox FallarborTown_CozmosHouse_Text_CozmoWentToMeteorFalls, MSGBOX_DEFAULT
 	release

@@ -58,7 +58,7 @@ Route110_EventScript_ItemElixir::
 	finditem ITEM_ELIXIR
 	end
 
-Route111_EventScript_ItemTM37::
+Route111_EventScript_ItemTMSandstorm::
 	finditem ITEM_TM_SANDSTORM
 	end
 
@@ -106,7 +106,7 @@ Route115_EventScript_ItemSuperPotion::
 	finditem ITEM_SUPER_POTION
 	end
 
-Route115_EventScript_ItemTM01::
+Route115_EventScript_ItemTMFocusPunch::
 	finditem ITEM_TM_FOCUS_PUNCH
 	end
 
@@ -374,11 +374,11 @@ FieryPath_EventScript_ItemFireStone::
 	finditem ITEM_FIRE_STONE
 	end
 
-FieryPath_EventScript_ItemTM06::
+FieryPath_EventScript_ItemTMToxic::
 	finditem ITEM_TM_TOXIC
 	end
 
-MeteorFalls_1F_1R_EventScript_ItemTM23::
+MeteorFalls_1F_1R_EventScript_ItemTMIronTail::
 	finditem ITEM_TM_IRON_TAIL
 	end
 
@@ -394,7 +394,7 @@ MeteorFalls_1F_1R_EventScript_ItemPPUP::
 	finditem ITEM_PP_UP
 	end
 
-MeteorFalls_B1F_2R_EventScript_ItemTM02::
+MeteorFalls_B1F_2R_EventScript_ItemTMDragonClaw::
 	finditem ITEM_TM_DRAGON_CLAW
 	end
 
@@ -430,7 +430,7 @@ AbandonedShip_Rooms2_B1F_EventScript_ItemDiveBall::
 	finditem ITEM_DIVE_BALL
 	end
 
-AbandonedShip_Room_B1F_EventScript_ItemTM13::
+AbandonedShip_Room_B1F_EventScript_ItemTMIceBeam::
 	finditem ITEM_TM_ICE_BEAM
 	end
 
@@ -454,15 +454,15 @@ AbandonedShip_HiddenFloorRooms_EventScript_ItemWaterStone::
 	finditem ITEM_WATER_STONE
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_ItemTM18::
+AbandonedShip_HiddenFloorRooms_EventScript_ItemTMRainDance::
 	finditem ITEM_TM_RAIN_DANCE
 	end
 
-ScorchedSlab_EventScript_ItemTM11::
+ScorchedSlab_EventScript_ItemTMSunnyDay::
 	finditem ITEM_TM_SUNNY_DAY
 	end
 
-SafariZone_Northwest_EventScript_ItemTM22::
+SafariZone_Northwest_EventScript_ItemTMSolarBeam::
 	finditem ITEM_TM_SOLAR_BEAM
 	end
 
@@ -498,7 +498,7 @@ MtPyre_5F_EventScript_ItemLaxIncense::
 	finditem ITEM_LAX_INCENSE
 	end
 
-MtPyre_6F_EventScript_ItemTM30::
+MtPyre_6F_EventScript_ItemTMShadowBall::
 	finditem ITEM_TM_SHADOW_BALL
 	end
 
@@ -506,7 +506,7 @@ MtPyre_Exterior_EventScript_ItemMaxPotion::
 	finditem ITEM_MAX_POTION
 	end
 
-MtPyre_Exterior_EventScript_ItemTM48::
+MtPyre_Exterior_EventScript_ItemTMSkillSwap::
 	finditem ITEM_TM_SKILL_SWAP
 	end
 
@@ -554,7 +554,7 @@ ShoalCave_LowTideStairsRoom_EventScript_ItemIceHeal::
 	finditem ITEM_ICE_HEAL
 	end
 
-ShoalCave_LowTideIceRoom_EventScript_ItemTM07::
+ShoalCave_LowTideIceRoom_EventScript_ItemTMHail::
 	finditem ITEM_TM_HAIL
 	end
 
@@ -562,7 +562,7 @@ ShoalCave_LowTideIceRoom_EventScript_ItemNeverMeltIce::
 	finditem ITEM_NEVER_MELT_ICE
 	end
 
-SeafloorCavern_Room9_EventScript_ItemTM26::
+SeafloorCavern_Room9_EventScript_ItemTMEarthquake::
 	finditem ITEM_TM_EARTHQUAKE
 	end
 
@@ -610,7 +610,7 @@ VictoryRoad_1F_EventScript_ItemPPUp::
 	finditem ITEM_PP_UP
 	end
 
-VictoryRoad_B1F_EventScript_ItemTM29::
+VictoryRoad_B1F_EventScript_ItemTMPsychic::
 	finditem ITEM_TM_PSYCHIC
 	end
 

@@ -56,7 +56,6 @@
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
-	.include "constants/tms_hms.inc"
 
 	.section script_data, "aw", %progbits
 

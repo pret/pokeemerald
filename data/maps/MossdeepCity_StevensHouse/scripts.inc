@@ -41,7 +41,7 @@ MossdeepCity_StevensHouse_EventScript_StevenGivesDive::
 	waitmovement 0
 	msgbox MossdeepCity_StevensHouse_Text_YouveEarnedHMDive, MSGBOX_DEFAULT
 	giveitem ITEM_HM_DIVE
-	setflag FLAG_RECEIVED_HM08
+	setflag FLAG_RECEIVED_HM_DIVE
 	setflag FLAG_OMIT_DIVE_FROM_STEVEN_LETTER
 	msgbox MossdeepCity_StevensHouse_Text_ExplainDive, MSGBOX_DEFAULT
 	closemessage
@@ -147,7 +147,7 @@ MossdeepCity_StevensHouse_EventScript_Letter::
 @ Unused, leftover from RS
 MossdeepCity_StevensHouse_EventScript_DiveItemBall::
 	finditem ITEM_HM_DIVE
-	setflag FLAG_RECEIVED_HM08
+	setflag FLAG_RECEIVED_HM_DIVE
 	end
 
 MossdeepCity_StevensHouse_Text_YouveEarnedHMDive:

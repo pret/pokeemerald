@@ -6200,15 +6200,26 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
     {
         return 0;
     }
-    else if (tm < 32)
+
+    // Fewer than 64 moves, use GF's method (for matching).
+    if (sizeof(struct TMHMLearnset) <= 8)
     {
-        u32 mask = 1 << tm;
-        return gTMHMLearnsets[species].as_u32s[0] & mask;
+        if (tm < 32)
+        {
+            u32 mask = 1 << tm;
+            return gTMHMLearnsets[species].as_u32s[0] & mask;
+        }
+        else
+        {
+            u32 mask = 1 << (tm - 32);
+            return gTMHMLearnsets[species].as_u32s[1] & mask;
+        }
     }
     else
     {
-        u32 mask = 1 << (tm - 32);
-        return gTMHMLearnsets[species].as_u32s[1] & mask;
+        u32 index = tm / 32;
+        u32 mask = 1 << (tm % 32);
+        return gTMHMLearnsets[species].as_u32s[index] & mask;
     }
 }
 

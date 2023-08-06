@@ -24,8 +24,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FieryPath_EventScript_ItemTM06",
-      "flag": "FLAG_ITEM_FIERY_PATH_TM06"
+      "script": "FieryPath_EventScript_ItemTMToxic",
+      "flag": "FLAG_ITEM_FIERY_PATH_TM_TOXIC"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",

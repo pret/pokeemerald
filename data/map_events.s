@@ -14,7 +14,6 @@
 #include "constants/berry.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
-	.include "constants/tms_hms.inc"
 
 	.section .rodata
 
