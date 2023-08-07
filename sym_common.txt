@@ -37,6 +37,7 @@ gReservedSpritePaletteCount:
 	.include "link_rfu_2.o"
 	.include "rtc.o"
 	.include "battle_main.o"
+	.include "battle_controllers.o"
 	.include "random.o"
 	.include "load_save.o"
 	.include "berry_blender.o"
