@@ -664,6 +664,7 @@
 #define TIMER_64CLK       0x01
 #define TIMER_256CLK      0x02
 #define TIMER_1024CLK     0x03
+#define TIMER_COUNTUP     0x04
 #define TIMER_INTR_ENABLE 0x40
 #define TIMER_ENABLE      0x80
 

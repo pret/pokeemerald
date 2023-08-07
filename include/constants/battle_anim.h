@@ -397,6 +397,7 @@
 #define ANIM_TAG_STEEL_BEAM                 (ANIM_SPRITES_START + 383)
 #define ANIM_TAG_POLTERGEIST                (ANIM_SPRITES_START + 384)
 #define ANIM_TAG_TEAPOT                     (ANIM_SPRITES_START + 385)
+#define ANIM_TAG_WOOD_HAMMER_HAMMER         (ANIM_SPRITES_START + 386)
 
 
 // battlers

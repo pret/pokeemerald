@@ -116,10 +116,12 @@ static const LoopedTask sLoopedTaskFuncs[] =
     [CONDITION_FUNC_CLOSE_MARKINGS] = LoopedTask_CloseMonMarkingsWindow
 };
 
+typedef u8 ALIGNED(4) TilemapBuffer[BG_SCREEN_SIZE];
+
 struct Pokenav_ConditionMenuGfx
 {
     u32 loopedTaskId;
-    u8 tilemapBuffers[3][BG_SCREEN_SIZE];
+    TilemapBuffer tilemapBuffers[3];
     u8 filler[2];
     u8 partyPokeballSpriteIds[PARTY_SIZE + 1];
     u32 (*callback)(void);

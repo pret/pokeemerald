@@ -1300,8 +1300,8 @@ static void Task_ReadyStartLinkContest(u8 taskId)
 
 static bool8 SetupContestGraphics(u8 *stateVar)
 {
-    u16 tempPalette1[16];
-    u16 tempPalette2[16];
+    u16 ALIGNED(4) tempPalette1[16];
+    u16 ALIGNED(4) tempPalette2[16];
 
     switch (*stateVar)
     {

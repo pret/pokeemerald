@@ -3369,25 +3369,49 @@ bool32 ShouldUseWishAromatherapy(u8 battlerAtk, u8 battlerDef, u16 move)
     return FALSE;
 }
 
-// party logic
-s32 AI_CalcPartyMonDamage(u16 move, u8 battlerAtk, u8 battlerDef, struct Pokemon *mon)
+#define SIZE_G_BATTLE_MONS (sizeof(struct BattlePokemon) * MAX_BATTLERS_COUNT)
+
+struct BattlePokemon *AllocSaveBattleMons(void)
 {
-    s32 dmg;
-    u32 i;
+    struct BattlePokemon *savedBattleMons = Alloc(SIZE_G_BATTLE_MONS);
+    memcpy(savedBattleMons, gBattleMons, SIZE_G_BATTLE_MONS);
+    return savedBattleMons;
+}
+
+void FreeRestoreBattleMons(struct BattlePokemon *savedBattleMons)
+{
+    memcpy(gBattleMons, savedBattleMons, SIZE_G_BATTLE_MONS);
+    Free(savedBattleMons);
+}
+
+// party logic
+s32 AI_CalcPartyMonBestMoveDamage(u32 battlerAtk, u32 battlerDef, struct Pokemon *attackerMon, struct Pokemon *targetMon)
+{
+    s32 i, move, bestDmg, dmg;
     u8 effectiveness;
-    struct BattlePokemon *battleMons = Alloc(sizeof(struct BattlePokemon) * MAX_BATTLERS_COUNT);
+    struct BattlePokemon *savedBattleMons = AllocSaveBattleMons();
 
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-        battleMons[i] = gBattleMons[i];
+    if (attackerMon != NULL)
+        PokemonToBattleMon(attackerMon, &gBattleMons[battlerAtk]);
+    if (targetMon != NULL)
+        PokemonToBattleMon(targetMon, &gBattleMons[battlerDef]);
 
-    PokemonToBattleMon(mon, &gBattleMons[battlerAtk]);
-    dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness, FALSE);
+    for (bestDmg = 0, i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (BattlerHasAi(battlerAtk))
+            move = GetMonData(attackerMon, MON_DATA_MOVE1 + i);
+        else
+            move = AI_PARTY->mons[GET_BATTLER_SIDE2(battlerAtk)][gBattlerPartyIndexes[battlerAtk]].moves[i];
 
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-        gBattleMons[i] = battleMons[i];
+        if (move != MOVE_NONE && gBattleMoves[move].power != 0)
+        {
+            dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness, FALSE);
+            if (dmg > bestDmg)
+                bestDmg = dmg;
+        }
+    }
 
-    Free(battleMons);
-
+    FreeRestoreBattleMons(savedBattleMons);
     return dmg;
 }
 
