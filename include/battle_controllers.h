@@ -272,6 +272,7 @@ void BtlController_HandleTrainerSlideBack(u32 battlerId, s16 data0, bool32 start
 void BtlController_HandleFaintAnimation(void);
 void BtlController_HandleSuccessBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
 void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
+void BtlController_HandleMoveAnimation(u32 battler, bool32 updateTvData);
 void BtlController_HandlePrintString(u32 battler, bool32 updateTvData, bool32 arenaPtsDeduct);
 void DoStatusIconUpdate(u32 battler);
 void BtlController_HandleStatusIconUpdate(void);
