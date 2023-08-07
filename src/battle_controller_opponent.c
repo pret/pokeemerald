@@ -324,16 +324,6 @@ static void TryShinyAnimAfterMonAnim(void)
     }
 }
 
-static void CompleteOnHealthbarDone(void)
-{
-    s16 hpValue = MoveBattleBar(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR, 0);
-    SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
-    if (hpValue != -1)
-        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], HP_CURRENT, hpValue, gBattleMons[gActiveBattler].maxHP);
-    else
-        OpponentBufferExecCompleted();
-}
-
 static void SwitchIn_ShowSubstitute(void)
 {
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
@@ -724,26 +714,7 @@ static u8 CountAIAliveNonEggMonsExcept(u8 slotToIgnore)
 
 static void OpponentHandleHealthBarUpdate(void)
 {
-    s16 hpVal;
-
-    LoadBattleBarGfx(0);
-    hpVal = (gBattleResources->bufferA[gActiveBattler][3] << 8) | gBattleResources->bufferA[gActiveBattler][2];
-
-    if (hpVal != INSTANT_HP_BAR_DROP)
-    {
-        u32 maxHP = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
-        u32 curHP = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_HP);
-
-        SetBattleBarStruct(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, curHP, hpVal);
-    }
-    else
-    {
-        u32 maxHP = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
-
-        SetBattleBarStruct(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, 0, hpVal);
-    }
-
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
+    BtlController_HandleHealthBarUpdate(gActiveBattler, FALSE);
 }
 
 static void OpponentHandleIntroTrainerBallThrow(void)

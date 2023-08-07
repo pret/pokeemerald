@@ -317,13 +317,6 @@ static void HandleInputChooseAction(void)
 #endif
 }
 
-static void UnusedEndBounceEffect(void)
-{
-    EndBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX);
-    EndBounceEffect(gActiveBattler, BOUNCE_MON);
-    gBattlerControllerFuncs[gActiveBattler] = HandleInputChooseTarget;
-}
-
 static void HandleInputChooseTarget(void)
 {
     s32 i;
@@ -1282,23 +1275,6 @@ void Task_PlayerController_RestoreBgmAfterCry(u8 taskId)
     }
 }
 
-static void CompleteOnHealthbarDone(void)
-{
-    s16 hpValue = MoveBattleBar(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR, 0);
-
-    SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
-
-    if (hpValue != -1)
-    {
-        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], HP_CURRENT, hpValue, gBattleMons[gActiveBattler].maxHP);
-    }
-    else
-    {
-        HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
-        PlayerBufferExecCompleted();
-    }
-}
-
 #define tExpTask_monId          data[0]
 #define tExpTask_battler        data[2]
 #define tExpTask_gainedExp_1    data[3]
@@ -1955,31 +1931,7 @@ static void PlayerHandleCmd23(void)
 
 static void PlayerHandleHealthBarUpdate(void)
 {
-    s16 hpVal;
-
-    LoadBattleBarGfx(0);
-    hpVal = gBattleResources->bufferA[gActiveBattler][2] | (gBattleResources->bufferA[gActiveBattler][3] << 8);
-
-    // gPlayerPartyLostHP used by Battle Dome, but never read
-    if (hpVal > 0)
-        gPlayerPartyLostHP += hpVal;
-
-    if (hpVal != INSTANT_HP_BAR_DROP)
-    {
-        u32 maxHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
-        u32 curHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_HP);
-
-        SetBattleBarStruct(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, curHP, hpVal);
-    }
-    else
-    {
-        u32 maxHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
-
-        SetBattleBarStruct(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, 0, hpVal);
-        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], HP_CURRENT, 0, maxHP);
-    }
-
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
+    BtlController_HandleHealthBarUpdate(gActiveBattler, TRUE);
 }
 
 void PlayerHandleExpUpdate(void)

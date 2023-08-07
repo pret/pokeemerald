@@ -281,23 +281,6 @@ static void WaitForMonAnimAfterLoad(void)
         RecordedPlayerBufferExecCompleted();
 }
 
-static void CompleteOnHealthbarDone(void)
-{
-    s16 hpValue = MoveBattleBar(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR, 0);
-
-    SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
-
-    if (hpValue != -1)
-    {
-        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], HP_CURRENT, hpValue, gBattleMons[gActiveBattler].maxHP);
-    }
-    else
-    {
-        HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
-        RecordedPlayerBufferExecCompleted();
-    }
-}
-
 static void SwitchIn_ShowSubstitute(void)
 {
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
@@ -545,7 +528,7 @@ static void RecordedPlayerHandleHealthBarUpdate(void)
         TestRunner_Battle_RecordHP(gActiveBattler, curHP, 0);
     }
 
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
+    gBattlerControllerFuncs[gActiveBattler] = Controller_WaitForHealthBar;
 }
 
 static void RecordedPlayerHandleStatusIconUpdate(void)

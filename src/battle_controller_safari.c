@@ -237,14 +237,6 @@ static void SafariBufferExecCompleted(void)
     }
 }
 
-static void CompleteOnFinishedStatusAnimation(void)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].statusAnimActive)
-        SafariBufferExecCompleted();
-}
-
-#define sSpeedX data[0]
-
 static void SafariHandleDrawTrainerPic(void)
 {
     u32 trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_BRENDAN;
@@ -253,8 +245,6 @@ static void SafariHandleDrawTrainerPic(void)
                                        80, 80 + 4 * (8 - gTrainerBackPicCoords[trainerPicId].size),
                                        30);
 }
-
-#undef sSpeedX
 
 static void SafariHandleSuccessBallThrowAnim(void)
 {

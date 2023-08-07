@@ -2247,6 +2247,23 @@ static void Controller_HandleTrainerSlideBack(void)
     }
 }
 
+void Controller_WaitForHealthBar(void)
+{
+    s16 hpValue = MoveBattleBar(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR, 0);
+
+    SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
+    if (hpValue != -1)
+    {
+        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], HP_CURRENT, hpValue, gBattleMons[gActiveBattler].maxHP);
+    }
+    else
+    {
+        if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
+            HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
+        BattleControllerComplete(gActiveBattler);
+    }
+}
+
 static void Controller_WaitForBallThrow(void)
 {
     if (!gDoingBattleAnim || !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
@@ -2656,6 +2673,33 @@ void BtlController_HandlePrintString(u32 battler, bool32 updateTvData, bool32 ar
         BattleTv_SetDataBasedOnString(*stringId);
     if (arenaPtsDeduct)
         BattleArena_DeductSkillPoints(battler, *stringId);
+}
+
+void BtlController_HandleHealthBarUpdate(u32 battler, bool32 updateHpText)
+{
+    s16 hpVal;
+    struct Pokemon *party = GetBattlerParty(battler);
+
+    LoadBattleBarGfx(0);
+    hpVal = gBattleResources->bufferA[battler][2] | (gBattleResources->bufferA[battler][3] << 8);
+
+    if (hpVal != INSTANT_HP_BAR_DROP)
+    {
+        u32 maxHP = GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_MAX_HP);
+        u32 curHP = GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_HP);
+
+        SetBattleBarStruct(battler, gHealthboxSpriteIds[battler], maxHP, curHP, hpVal);
+    }
+    else
+    {
+        u32 maxHP = GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_MAX_HP);
+
+        SetBattleBarStruct(battler, gHealthboxSpriteIds[battler], maxHP, 0, hpVal);
+        if (updateHpText)
+            UpdateHpTextInHealthbox(gHealthboxSpriteIds[battler], HP_CURRENT, 0, maxHP);
+    }
+
+    gBattlerControllerFuncs[battler] = Controller_WaitForHealthBar;
 }
 
 void DoStatusIconUpdate(u32 battler)
