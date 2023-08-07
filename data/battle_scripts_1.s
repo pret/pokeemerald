@@ -5401,15 +5401,14 @@ BattleScript_EffectHurricane:
 BattleScript_EffectTeleport:
 	attackcanceler
 	attackstring
-	ppreduce
 .if B_TELEPORT_BEHAVIOR >= GEN_7
-	canteleport BS_ATTACKER
-	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_EffectTeleportNew
-	goto BattleScript_ButItFailed
+	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_EffectBatonPass
+	jumpifside BS_ATTACKER, B_SIDE_PLAYER, BattleScript_EffectBatonPass
 .else
 	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_ButItFailed
 .endif
 BattleScript_EffectTeleportTryToRunAway:
+	ppreduce
 	getifcantrunfrombattle BS_ATTACKER
 	jumpifbyte CMP_EQUAL, gBattleCommunication, BATTLE_RUN_FORBIDDEN, BattleScript_ButItFailed
 	jumpifbyte CMP_EQUAL, gBattleCommunication, BATTLE_RUN_FAILURE, BattleScript_PrintAbilityMadeIneffective
@@ -5418,29 +5417,6 @@ BattleScript_EffectTeleportTryToRunAway:
 	printstring STRINGID_PKMNFLEDFROMBATTLE
 	waitmessage B_WAIT_TIME_LONG
 	setoutcomeonteleport BS_ATTACKER
-	goto BattleScript_MoveEnd
-
-BattleScript_EffectTeleportNew:
-	getbattlerside BS_ATTACKER
-	jumpifbyte CMP_EQUAL, gBattleCommunication, B_SIDE_OPPONENT, BattleScript_EffectTeleportTryToRunAway
-	attackanimation
-	waitanimation
-	openpartyscreen BS_ATTACKER, BattleScript_EffectTeleportNewEnd
-	switchoutabilities BS_ATTACKER
-	waitstate
-	switchhandleorder BS_ATTACKER, 2
-	returntoball BS_ATTACKER
-	getswitchedmondata BS_ATTACKER
-	switchindataupdate BS_ATTACKER
-	hpthresholds BS_ATTACKER
-	trytoclearprimalweather
-	printstring STRINGID_EMPTYSTRING3
-	waitmessage 1
-	printstring STRINGID_SWITCHINMON
-	switchinanim BS_ATTACKER, TRUE
-	waitstate
-	switchineffects BS_ATTACKER
-BattleScript_EffectTeleportNewEnd:
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectBeatUp::
@@ -7897,7 +7873,7 @@ BattleScript_WishMegaEvolution::
 BattleScript_PrimalReversion::
 	call BattleScript_PrimalReversionRet
 	end2
-	
+
 BattleScript_PrimalReversionRestoreAttacker::
 	call BattleScript_PrimalReversionRet
 	copybyte gBattlerAttacker, sSAVED_BATTLER
@@ -8944,7 +8920,7 @@ BattleScript_BadDreams_ShowPopUp:
 	goto BattleScript_BadDreams_DmgAfterPopUp
 BattleScript_BadDreams_HidePopUp:
 	destroyabilitypopup
-	tryfaintmon BS_TARGET 
+	tryfaintmon BS_TARGET
 	goto BattleScript_BadDreamsIncrement
 
 BattleScript_TookAttack::

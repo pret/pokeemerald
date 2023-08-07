@@ -8837,33 +8837,6 @@ static void HandleScriptMegaPrimal(u32 caseId, u32 battlerId, bool32 isMega)
     }
 }
 
-static bool32 CanTeleport(u8 battlerId)
-{
-    struct Pokemon *party = GetBattlerParty(battlerId);
-    u32 species, count, i;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
-        if (species != SPECIES_NONE && species != SPECIES_EGG && GetMonData(&party[i], MON_DATA_HP) != 0)
-            count++;
-    }
-
-    switch (GetBattlerSide(battlerId))
-    {
-    case B_SIDE_OPPONENT:
-        if (count == 1 || gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-            return FALSE;
-        break;
-    case B_SIDE_PLAYER:
-        if (count == 1 || (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && count <= 2))
-            return FALSE;
-        break;
-    }
-
-    return TRUE;
-}
-
 // Return True if the order was changed, and false if the order was not changed(for example because the target would move after the attacker anyway).
 static bool32 ChangeOrderTargetAfterAttacker(void)
 {
@@ -16324,13 +16297,6 @@ void BS_GetBattlerSide(void)
 {
     NATIVE_ARGS(u8 battler);
     gBattleCommunication[0] = GetBattlerSide(GetBattlerForBattleScript(cmd->battler));
-    gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-void BS_CanTeleport(void)
-{
-    NATIVE_ARGS(u8 battler);
-    gBattleCommunication[0] = CanTeleport(cmd->battler);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
