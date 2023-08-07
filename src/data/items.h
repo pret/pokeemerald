@@ -3513,7 +3513,7 @@ const struct Item gItems[] =
 
 // TMs/HMs
 
-    [ITEM_TM_FOCUS_PUNCH] =
+    [ITEM_TM01] =
     {
         .name = _("TM01"),
         .itemId = ITEM_TM01,
@@ -3524,7 +3524,7 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM_DRAGON_CLAW] =
+    [ITEM_TM02] =
     {
         .name = _("TM02"),
         .itemId = ITEM_TM02,
@@ -3535,7 +3535,7 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM_WATER_PULSE] =
+    [ITEM_TM03] =
     {
         .name = _("TM03"),
         .itemId = ITEM_TM03,
@@ -3546,7 +3546,7 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM_CALM_MIND] =
+    [ITEM_TM04] =
     {
         .name = _("TM04"),
         .itemId = ITEM_TM04,
@@ -3557,7 +3557,7 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM_ROAR] =
+    [ITEM_TM05] =
     {
         .name = _("TM05"),
         .itemId = ITEM_TM05,
