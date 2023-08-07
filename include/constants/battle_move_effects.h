@@ -413,7 +413,9 @@
 #define EFFECT_SPIN_OUT                     407
 #define EFFECT_MAKE_IT_RAIN                 408
 #define EFFECT_CORROSIVE_GAS                409
+#define EFFECT_POPULATION_BOMB              410
+#define EFFECT_MORTAL_SPIN                  411
 
-#define NUM_BATTLE_MOVE_EFFECTS             410
+#define NUM_BATTLE_MOVE_EFFECTS             412
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

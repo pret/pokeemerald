@@ -3742,13 +3742,15 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
             }
             else if (gBattleMoves[gCurrentMove].strikeCount > 1)
             {
-                gMultiHitCounter = gBattleMoves[gCurrentMove].strikeCount;
-                PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 3, 0)
-            }
-            else if (gBattleMoves[gCurrentMove].effect == EFFECT_TRIPLE_KICK)
-            {
-                gMultiHitCounter = 3;
-                PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
+                if (gBattleMoves[gCurrentMove].effect == EFFECT_POPULATION_BOMB && GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LOADED_DICE)
+                {
+                    gMultiHitCounter = RandomUniform(RNG_LOADED_DICE, 4, 10);
+                }
+                else
+                {
+                    gMultiHitCounter = gBattleMoves[gCurrentMove].strikeCount;
+                    PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 3, 0)
+                }
             }
         #if B_BEAT_UP >= GEN_5
             else if (gBattleMoves[gCurrentMove].effect == EFFECT_BEAT_UP)
