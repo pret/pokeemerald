@@ -533,7 +533,7 @@ BattleScript_EffectEvasionDown::
 	setstatchanger STAT_EVASION, 1, TRUE
 BattleScript_EffectStatDown::
 	attackcanceler
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailedAtkStringPpReduce
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailedPpReduceAtkString
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
@@ -1216,7 +1216,7 @@ BattleScript_EffectPsywave::
 
 BattleScript_EffectCounter::
 	attackcanceler
-	counterdamagecalculator BattleScript_ButItFailedAtkStringPpReduce
+	counterdamagecalculator BattleScript_ButItFailedPpReduceAtkString
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
@@ -1543,7 +1543,7 @@ BattleScript_EffectEndure::
 
 BattleScript_EffectSpikes::
 	attackcanceler
-	trysetspikes BattleScript_ButItFailedAtkStringPpReduce
+	trysetspikes BattleScript_ButItFailedPpReduceAtkString
 	attackstring
 	ppreduce
 	attackanimation
@@ -1800,7 +1800,7 @@ BattleScript_EffectPsychUp::
 
 BattleScript_EffectMirrorCoat::
 	attackcanceler
-	mirrorcoatdamagecalculator BattleScript_ButItFailedAtkStringPpReduce
+	mirrorcoatdamagecalculator BattleScript_ButItFailedPpReduceAtkString
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
@@ -2047,11 +2047,11 @@ BattleScript_AlreadyAtFullHp::
 
 BattleScript_EffectFakeOut::
 	attackcanceler
-	jumpifnotfirstturn BattleScript_ButItFailedAtkStringPpReduce
+	jumpifnotfirstturn BattleScript_ButItFailedPpReduceAtkString
 	setmoveeffect MOVE_EFFECT_FLINCH | MOVE_EFFECT_CERTAIN
 	goto BattleScript_EffectHit
 
-BattleScript_ButItFailedAtkStringPpReduce::
+BattleScript_ButItFailedPpReduceAtkString::
 	attackstring
 BattleScript_ButItFailedPpReduce::
 	ppreduce
@@ -2391,7 +2391,7 @@ BattleScript_EffectSuperpower::
 
 BattleScript_EffectMagicCoat::
 	attackcanceler
-	trysetmagiccoat BattleScript_ButItFailedAtkStringPpReduce
+	trysetmagiccoat BattleScript_ButItFailedPpReduceAtkString
 	attackstring
 	ppreduce
 	attackanimation
@@ -2542,7 +2542,7 @@ BattleScript_EffectGrudge::
 
 BattleScript_EffectSnatch::
 	attackcanceler
-	trysetsnatch BattleScript_ButItFailedAtkStringPpReduce
+	trysetsnatch BattleScript_ButItFailedPpReduceAtkString
 	attackstring
 	ppreduce
 	attackanimation
