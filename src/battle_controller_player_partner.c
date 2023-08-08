@@ -1524,23 +1524,30 @@ static void PlayerPartnerHandleChooseMove(void)
     chosenMoveId = gBattleStruct->aiMoveOrAction[gActiveBattler];
     gBattlerTarget = gBattleStruct->aiChosenTarget[gActiveBattler];
 
-    if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED))
-        gBattlerTarget = gActiveBattler;
-    if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
+    if (chosenMoveId == AI_CHOICE_SWITCH)
     {
-        gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-        if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
-            gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+        BtlController_EmitTwoReturnValues(BUFFER_B, 10, 0xFFFF);
     }
-
-    if (ShouldUseZMove(gActiveBattler, gBattlerTarget, moveInfo->moves[chosenMoveId]))
-        QueueZMove(gActiveBattler, moveInfo->moves[chosenMoveId]);
-
-    // If partner can mega evolve, do it.
-    if (CanMegaEvolve(gActiveBattler))
-        BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
     else
-        BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
+    {
+        if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED))
+            gBattlerTarget = gActiveBattler;
+        if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
+        {
+            gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+            if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
+                gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+        }
+
+        if (ShouldUseZMove(gActiveBattler, gBattlerTarget, moveInfo->moves[chosenMoveId]))
+            QueueZMove(gActiveBattler, moveInfo->moves[chosenMoveId]);
+
+        // If partner can mega evolve, do it.
+        if (CanMegaEvolve(gActiveBattler))
+            BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
+        else
+            BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
+    }
 
     PlayerPartnerBufferExecCompleted();
 }
@@ -1559,7 +1566,7 @@ static void PlayerPartnerHandleChoosePokemon(void)
         chosenMonId = gSelectedMonPartyId = GetFirstFaintedPartyIndex(gActiveBattler);
     }
     // Switching out
-    else
+    else if (gBattleStruct->monToSwitchIntoId[gActiveBattler] == PARTY_SIZE)
     {
         chosenMonId = GetMostSuitableMonToSwitchInto();
         if (chosenMonId == PARTY_SIZE) // just switch to the next mon
@@ -1577,6 +1584,12 @@ static void PlayerPartnerHandleChoosePokemon(void)
                 }
             }
         }
+        *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = chosenMonId;
+    }
+    else // Mon to switch out has been already chosen.
+    {
+        chosenMonId = gBattleStruct->monToSwitchIntoId[gActiveBattler];
+        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
         *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = chosenMonId;
     }
     BtlController_EmitChosenMonReturnValue(BUFFER_B, chosenMonId, NULL);
