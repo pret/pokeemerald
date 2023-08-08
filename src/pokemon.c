@@ -2406,7 +2406,7 @@ void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedI
 void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src)
 {
     s32 i;
-    u8 nickname[30];
+    u8 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
     u8 language;
     u8 value;
 
@@ -2460,7 +2460,7 @@ void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src)
 void CreateBattleTowerMon_HandleLevel(struct Pokemon *mon, struct BattleTowerPokemon *src, bool8 lvl50)
 {
     s32 i;
-    u8 nickname[30];
+    u8 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
     u8 level;
     u8 language;
     u8 value;
@@ -4629,7 +4629,7 @@ void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
 {
     u16 *hpSwitchout;
     s32 i;
-    u8 nickname[POKEMON_NAME_LENGTH * 2];
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
 
     gBattleMons[battlerId].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES, NULL);
     gBattleMons[battlerId].item = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM, NULL);
