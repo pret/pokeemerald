@@ -508,7 +508,7 @@ static u8 ChooseMoveOrAction_Singles(void)
 
     gActiveBattler = sBattler_AI;
 
-    // Swith mon if there are no good moves to use.
+    // Switch mon if there are no good moves to use.
     if (AI_ShouldSwitchIfBadMoves(sBattler_AI, FALSE))
         return AI_CHOICE_SWITCH;
 
