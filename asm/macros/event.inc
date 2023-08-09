@@ -2021,7 +2021,7 @@
 	
 	.macro ai_vs_ai_battle trainer1:req, trainer2:req
 	setflag B_FLAG_AI_VS_AI_BATTLE
-	setvar VAR_0x8004, trainer1
+	setvar VAR_0x8004, \trainer1
 	callnative CreateTrainerPartyForPlayer
-	trainerbattle_no_intro trainer2, NULL
+	trainerbattle_no_intro \trainer2, NULL
 	.endm
