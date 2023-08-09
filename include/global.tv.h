@@ -113,17 +113,17 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 trainerName[PLAYER_NAME_LENGTH + 1];
+        /*0x02*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
         /*0x0A*/ u16 species;
-        /*0x0C*/ u8 pokemonName[8];
+        /*0x0C*/ u8 opponentName[PLAYER_NAME_LENGTH + 1];
         /*0x14*/ u16 defeatedSpecies;
         /*0x16*/ u16 numFights;
         /*0x18*/ u16 words[1];
         /*0x1A*/ u8 btLevel;
         /*0x1B*/ u8 interviewResponse;
         /*0x1C*/ bool8 wonTheChallenge;
-        /*0x1D*/ u8 language;
-        /*0x1E*/ u8 pokemonNameLanguage;
+        /*0x1D*/ u8 playerLanguage;
+        /*0x1E*/ u8 opponentLanguage;
         /*0x1F*/ //u8 padding;
     } bravoTrainerTower;
 
