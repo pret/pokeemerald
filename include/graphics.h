@@ -4769,17 +4769,18 @@ extern const u32 gMetalShineTilemap[];
 
 extern const u32 gBattleAnimMaskImage_Curse[];
 extern const u32 gBattleAnimMaskTilemap_Curse[];
-extern const u32 gBattleStatMask_Gfx[];
-extern const u32 gBattleStatMask1_Tilemap[];
-extern const u32 gBattleStatMask2_Tilemap[];
-extern const u32 gBattleStatMask1_Pal[];
-extern const u32 gBattleStatMask2_Pal[];
-extern const u32 gBattleStatMask3_Pal[];
-extern const u32 gBattleStatMask4_Pal[];
-extern const u32 gBattleStatMask5_Pal[];
-extern const u32 gBattleStatMask6_Pal[];
-extern const u32 gBattleStatMask7_Pal[];
-extern const u32 gBattleStatMask8_Pal[];
+
+extern const u32 gStatAnim_Gfx[];
+extern const u32 gStatAnim_Increase_Tilemap[];
+extern const u32 gStatAnim_Decrease_Tilemap[];
+extern const u32 gStatAnim_Defense_Pal[];
+extern const u32 gStatAnim_Attack_Pal[];
+extern const u32 gStatAnim_Accuracy_Pal[];
+extern const u32 gStatAnim_Speed_Pal[];
+extern const u32 gStatAnim_Multiple_Pal[];
+extern const u32 gStatAnim_Evasion_Pal[];
+extern const u32 gStatAnim_SpAttack_Pal[];
+extern const u32 gStatAnim_SpDefense_Pal[];
 
 extern const u32 gContestInterfaceGfx[];
 extern const u32 gContestAudienceGfx[];

@@ -532,8 +532,8 @@ void AnimTask_StatsChange(u8 taskId)
 
     gBattleAnimArgs[0] = goesDown;
     gBattleAnimArgs[1] = animStatId;
-    gBattleAnimArgs[2] = 0;
-    gBattleAnimArgs[3] = 0;
+    gBattleAnimArgs[2] = FALSE; // Whether it's the target, rather than attacker
+    gBattleAnimArgs[3] = FALSE; // Whether it hits multiple battlers
     gBattleAnimArgs[4] = sharply;
     gTasks[taskId].func = InitStatsChangeAnimation;
     gTasks[taskId].func(taskId);
