@@ -1219,8 +1219,8 @@ const u32 gRouletteMultiplier_Gfx[] = INCBIN_U32("graphics/roulette/multiplier.4
 const u16 gFrontierFactorySelectMenu_Pal[] = INCBIN_U16("graphics/battle_frontier/factory_menu1.gbapal");
 const u16 gFrontierFactorySelectMenu_Pal2[] = INCBIN_U16("graphics/battle_frontier/factory_menu2.gbapal");
 
-const u8 gFrontierFactorySelectMenu_Gfx[] = INCBIN_U8("graphics/battle_frontier/factory_menu1.4bpp");
-const u8 gFrontierFactorySelectMenu_Gfx2[] = INCBIN_U8("graphics/battle_frontier/factory_menu2.4bpp");
+const u16 gFrontierFactorySelectMenu_Gfx[] = INCBIN_U16("graphics/battle_frontier/factory_menu1.4bpp");
+const u16 gFrontierFactorySelectMenu_Gfx2[] = INCBIN_U16("graphics/battle_frontier/factory_menu2.4bpp");
 
 const u16 gFrontierFactorySelectMenu_Tilemap[] = INCBIN_U16("graphics/battle_frontier/factory_menu.bin");
 

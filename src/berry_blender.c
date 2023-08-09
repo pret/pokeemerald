@@ -1033,11 +1033,12 @@ static void InitBerryBlenderWindows(void)
         s32 i;
 
         DeactivateAllTextPrinters();
-        for (i = 0; i < 5; i++)
+        // Initialize only the main text windows (player names and message box; excludes results screen)
+        for (i = 0; i < WIN_RESULTS; i++)
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
 
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
-        Menu_LoadStdPalAt(0xE0);
+        Menu_LoadStdPalAt(BG_PLTT_ID(14));
     }
 }
 

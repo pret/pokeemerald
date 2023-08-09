@@ -36,7 +36,7 @@ static u32 GetGlyphWidth_Narrow(u16, bool32);
 static u32 GetGlyphWidth_SmallNarrow(u16, bool32);
 
 static EWRAM_DATA struct TextPrinter sTempTextPrinter = {0};
-static EWRAM_DATA struct TextPrinter sTextPrinters[NUM_TEXT_PRINTERS] = {0};
+static EWRAM_DATA struct TextPrinter sTextPrinters[WINDOWS_MAX] = {0};
 
 static u16 sFontHalfRowLookupTable[0x51];
 static u16 sLastTextBgColor;
@@ -244,7 +244,7 @@ static void SetFontsPointer(const struct FontInfo *fonts)
 void DeactivateAllTextPrinters(void)
 {
     int printer;
-    for (printer = 0; printer < NUM_TEXT_PRINTERS; ++printer)
+    for (printer = 0; printer < WINDOWS_MAX; ++printer)
         sTextPrinters[printer].active = FALSE;
 }
 
@@ -322,7 +322,7 @@ void RunTextPrinters(void)
 
     if (!gDisableTextPrinters)
     {
-        for (i = 0; i < NUM_TEXT_PRINTERS; ++i)
+        for (i = 0; i < WINDOWS_MAX; ++i)
         {
             if (sTextPrinters[i].active)
             {

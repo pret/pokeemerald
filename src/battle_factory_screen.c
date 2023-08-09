@@ -268,7 +268,7 @@ static const u8 sActionHighlightMiddle_Gfx[] = INCBIN_U8( "graphics/battle_front
 static const u8 sActionHighlightRight_Gfx[]  = INCBIN_U8( "graphics/battle_frontier/factory_screen/action_highlight_right.4bpp");
 static const u8 sMonPicBgAnim_Gfx[]          = INCBIN_U8( "graphics/battle_frontier/factory_screen/mon_pic_bg_anim.4bpp");
 static const u8 sMonPicBg_Tilemap[]          = INCBIN_U8( "graphics/battle_frontier/factory_screen/mon_pic_bg.bin");
-static const u8 sMonPicBg_Gfx[]              = INCBIN_U8( "graphics/battle_frontier/factory_screen/mon_pic_bg.4bpp");
+static const u16 sMonPicBg_Gfx[]             = INCBIN_U16("graphics/battle_frontier/factory_screen/mon_pic_bg.4bpp");
 static const u16 sMonPicBg_Pal[]             = INCBIN_U16("graphics/battle_frontier/factory_screen/mon_pic_bg.gbapal");
 
 static const struct SpriteSheet sSelect_SpriteSheets[] =
@@ -1183,7 +1183,7 @@ static void CB2_InitSelectScreen(void)
 #else
         if (sFactorySelectScreen->fromSummaryScreen == TRUE)
 #endif
-            gPlttBufferUnfaded[228] = sFactorySelectScreen->speciesNameColorBackup;
+            gPlttBufferUnfaded[BG_PLTT_ID(14) + 4] = sFactorySelectScreen->speciesNameColorBackup;
         LoadPalette(sMonPicBg_Pal, BG_PLTT_ID(2), PLTT_SIZEOF(2));
         gMain.state++;
         break;
@@ -1449,7 +1449,7 @@ static void Select_Task_OpenSummaryScreen(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case STATE_SUMMARY_FADE:
-        gPlttBufferUnfaded[228] = gPlttBufferFaded[228];
+        gPlttBufferUnfaded[BG_PLTT_ID(14) + 4] = gPlttBufferFaded[BG_PLTT_ID(14) + 4];
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].tState = STATE_SUMMARY_CLEAN;
         break;
@@ -1468,7 +1468,7 @@ static void Select_Task_OpenSummaryScreen(u8 taskId)
         }
         break;
     case STATE_SUMMARY_SHOW:
-        sFactorySelectScreen->speciesNameColorBackup = gPlttBufferUnfaded[228];
+        sFactorySelectScreen->speciesNameColorBackup = gPlttBufferUnfaded[BG_PLTT_ID(14) + 4];
         DestroyTask(taskId);
         sFactorySelectScreen->fromSummaryScreen = TRUE;
         currMonId = sFactorySelectScreen->cursorPos;
@@ -1641,8 +1641,8 @@ static void Select_Task_HandleMenu(u8 taskId)
         {
             if (sFactorySelectScreen->fromSummaryScreen == TRUE)
             {
-                gPlttBufferFaded[228] = sFactorySelectScreen->speciesNameColorBackup;
-                gPlttBufferUnfaded[228] = gPlttBufferUnfaded[244];
+                gPlttBufferFaded[BG_PLTT_ID(14) + 4] = sFactorySelectScreen->speciesNameColorBackup;
+                gPlttBufferUnfaded[BG_PLTT_ID(14) + 4] = gPlttBufferUnfaded[BG_PLTT_ID(15) + 4];
             }
             sFactorySelectScreen->fromSummaryScreen = FALSE;
             gTasks[taskId].tState = STATE_MENU_HANDLE_INPUT;
@@ -2388,7 +2388,7 @@ static void Swap_Task_OpenSummaryScreen(u8 taskId)
     case STATE_SUMMARY_SHOW:
         DestroyTask(taskId);
         sFactorySwapScreen->fromSummaryScreen = TRUE;
-        sFactorySwapScreen->speciesNameColorBackup = gPlttBufferUnfaded[244];
+        sFactorySwapScreen->speciesNameColorBackup = gPlttBufferUnfaded[BG_PLTT_ID(15) + 4];
         ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, gPlayerParty, sFactorySwapScreen->cursorPos, FRONTIER_PARTY_SIZE - 1, CB2_InitSwapScreen);
         break;
     }
@@ -2761,7 +2761,7 @@ static void Swap_Task_FadeOutSpeciesName(u8 taskId)
         if (sFactorySwapScreen->fadeSpeciesNameCoeffDelay > 3)
         {
             sFactorySwapScreen->fadeSpeciesNameCoeffDelay = 0;
-            gPlttBufferUnfaded[244] = gPlttBufferFaded[228];
+            gPlttBufferUnfaded[BG_PLTT_ID(15) + 4] = gPlttBufferFaded[BG_PLTT_ID(14) + 4];
             sFactorySwapScreen->fadeSpeciesNameCoeff++;
         }
         BlendPalettes(0x4000, sFactorySwapScreen->fadeSpeciesNameCoeff, 0);
@@ -3125,7 +3125,7 @@ static void Swap_Task_ScreenInfoTransitionIn(u8 taskId)
         if (gTasks[taskId].tSlideFinishedPkmn == TRUE
          && gTasks[taskId].tSlideFinishedCancel == TRUE)
         {
-            gPlttBufferFaded[226] = sPokeballGray_Pal[37];
+            gPlttBufferFaded[BG_PLTT_ID(14) + 2] = sPokeballGray_Pal[37];
             Swap_PrintActionStrings();
             PutWindowTilemap(SWAP_WIN_ACTION_FADE);
             gTasks[taskId].tState++;
@@ -3864,7 +3864,7 @@ static void Swap_PrintMonSpeciesAtFade(void)
 
     CpuCopy16(sSwapText_Pal, pal, 8);
     if (!sFactorySwapScreen->fromSummaryScreen)
-        pal[4] = gPlttBufferFaded[228];
+        pal[4] = gPlttBufferFaded[BG_PLTT_ID(14) + 4];
     else
         pal[4] = sFactorySwapScreen->speciesNameColorBackup;
     LoadPalette(pal, BG_PLTT_ID(15), sizeof(sSwapText_Pal));
