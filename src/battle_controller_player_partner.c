@@ -11,7 +11,6 @@
 #include "battle_z_move.h"
 #include "bg.h"
 #include "data.h"
-#include "event_data.h"
 #include "item_use.h"
 #include "link.h"
 #include "main.h"
@@ -1317,7 +1316,7 @@ static void PlayerPartnerHandleDrawTrainerPic(void)
         xPos = 90;
         yPos = (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80;
     }
-    else if (FlagGet(B_FLAG_AI_VS_AI_BATTLE))
+    else if (IsAiVsAiBattle())
     {
         trainerPicId = gTrainers[gPartnerTrainerId].trainerPic;
         xPos = 60;
@@ -1830,7 +1829,7 @@ static void PlayerPartnerHandleIntroTrainerBallThrow(void)
         u8 spriteId = gPartnerSpriteId;
         LoadCompressedPalette(gTrainerBackPicPaletteTable[spriteId].data, 0x100 + paletteNum * 16, 32);
     }
-    else if (FlagGet(B_FLAG_AI_VS_AI_BATTLE))
+    else if (IsAiVsAiBattle())
     {
         u8 spriteId = gTrainers[gPartnerTrainerId].trainerPic;
         LoadCompressedPalette(gTrainerFrontPicPaletteTable[spriteId].data, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);

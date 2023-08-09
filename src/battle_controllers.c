@@ -1,12 +1,12 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_ai_main.h"
+#include "battle_ai_util.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_message.h"
 #include "battle_setup.h"
 #include "cable_club.h"
-#include "event_data.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "party_menu.h"
@@ -171,7 +171,7 @@ static void InitSinglePlayerBtlControllers(void)
             gBattlerControllerFuncs[0] = SetControllerToSafari;
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
             gBattlerControllerFuncs[0] = SetControllerToWally;
-        else if (FlagGet(B_FLAG_AI_VS_AI_BATTLE))
+        else if (IsAiVsAiBattle())
             gBattlerControllerFuncs[0] = SetControllerToPlayerPartner;
         else
             gBattlerControllerFuncs[0] = SetControllerToPlayer;
@@ -224,7 +224,7 @@ static void InitSinglePlayerBtlControllers(void)
     {
         gBattleMainFunc = BeginBattleIntro;
 
-        if (FlagGet(B_FLAG_AI_VS_AI_BATTLE))
+        if (IsAiVsAiBattle())
             gBattlerControllerFuncs[0] = SetControllerToPlayerPartner;
         else
             gBattlerControllerFuncs[0] = SetControllerToPlayer;
@@ -233,7 +233,7 @@ static void InitSinglePlayerBtlControllers(void)
         gBattlerControllerFuncs[1] = SetControllerToOpponent;
         gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
 
-        if (FlagGet(B_FLAG_AI_VS_AI_BATTLE))
+        if (IsAiVsAiBattle())
             gBattlerControllerFuncs[2] = SetControllerToPlayerPartner;
         else
             gBattlerControllerFuncs[2] = SetControllerToPlayer;
