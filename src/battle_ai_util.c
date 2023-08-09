@@ -453,7 +453,10 @@ bool32 BattlerHasAi(u32 battlerId)
     case B_POSITION_OPPONENT_LEFT:
         return TRUE;
     case B_POSITION_PLAYER_RIGHT:
-        return ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) != 0);
+        if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) || FlagGet(B_FLAG_AI_VS_AI_BATTLE))
+            return TRUE;
+        else
+            return FALSE;
     case B_POSITION_OPPONENT_RIGHT:
         return TRUE;
     }
