@@ -565,8 +565,8 @@ static void CB2_InitBattleInternal(void)
     gBattle_BG3_X = 0;
     gBattle_BG3_Y = 0;
 
-#if DEBUG_OVERWORLD_MENU == FALSE 
-    
+#if DEBUG_OVERWORLD_MENU == FALSE
+
     gBattleTerrain = BattleSetup_GetTerrainId();
 #else
     if (!gIsDebugBattle)
@@ -594,7 +594,7 @@ static void CB2_InitBattleInternal(void)
     else
         SetMainCallback2(CB2_HandleStartBattle);
 
-#if DEBUG_OVERWORLD_MENU == FALSE 
+#if DEBUG_OVERWORLD_MENU == FALSE
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED)))
     {
         CreateNPCTrainerParty(&gEnemyParty[0], gTrainerBattleOpponent_A, TRUE);
@@ -2143,6 +2143,12 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
         gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
     }
     return retVal;
+}
+
+void CreateTrainerPartyForPlayer(void)
+{
+    ZeroPlayerPartyMons();
+    CreateNPCTrainerPartyFromTrainer(gPlayerParty, &gTrainers[gSpecialVar_0x8004], TRUE, 0);
 }
 
 void VBlankCB_Battle(void)

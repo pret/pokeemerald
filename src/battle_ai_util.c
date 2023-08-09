@@ -8,6 +8,7 @@
 #include "battle_ai_switch_items.h"
 #include "battle_factory.h"
 #include "battle_setup.h"
+#include "event_data.h"
 #include "data.h"
 #include "item.h"
 #include "pokemon.h"
@@ -445,6 +446,8 @@ bool32 BattlerHasAi(u32 battlerId)
     switch (GetBattlerPosition(battlerId))
     {
     case B_POSITION_PLAYER_LEFT:
+        if (FlagGet(B_FLAG_AI_VS_AI_BATTLE))
+            return TRUE;
     default:
         return FALSE;
     case B_POSITION_OPPONENT_LEFT:
