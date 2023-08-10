@@ -3109,10 +3109,10 @@ static void DrawBlenderCenter(struct BgAffineSrcData *dest)
 {
     struct BgAffineSrcData affineSrc;
 
-    affineSrc.texX = 0x7800;
-    affineSrc.texY = 0x5000;
-    affineSrc.scrX = 0x78 - sBerryBlender->bg_X;
-    affineSrc.scrY = 0x50 - sBerryBlender->bg_Y;
+    affineSrc.texX = (DISPLAY_WIDTH / 2) << 8;
+    affineSrc.texY = (DISPLAY_HEIGHT / 2) << 8;
+    affineSrc.scrX = DISPLAY_WIDTH / 2 - sBerryBlender->bg_X;
+    affineSrc.scrY = DISPLAY_HEIGHT / 2 - sBerryBlender->bg_Y;
     affineSrc.sx = sBerryBlender->centerScale;
     affineSrc.sy = sBerryBlender->centerScale;
     affineSrc.alpha = sBerryBlender->arrowPos;
