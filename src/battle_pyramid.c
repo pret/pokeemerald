@@ -38,6 +38,8 @@
 #include "constants/moves.h"
 #include "constants/trainers.h"
 
+#define NUM_LAYOUT_OFFSETS 8 // Assumed to be a power of 2
+
 extern const struct MapLayout *const gMapLayouts[];
 
 struct PyramidWildMon
@@ -55,7 +57,7 @@ struct PyramidFloorTemplate
     u8 itemPositions;
     u8 trainerPositions;
     u8 runMultiplier;
-    u8 layoutOffsets[8];
+    u8 layoutOffsets[NUM_LAYOUT_OFFSETS];
 };
 
 struct PyramidTrainerEncounterMusic
@@ -1902,7 +1904,7 @@ static void GetPyramidFloorLayoutOffsets(u8 *layoutOffsets)
 
     for (i = 0; i < NUM_PYRAMID_FLOOR_SQUARES; i++)
     {
-        layoutOffsets[i] = sPyramidFloorTemplates[id].layoutOffsets[rand & 0x7];
+        layoutOffsets[i] = sPyramidFloorTemplates[id].layoutOffsets[rand & (NUM_LAYOUT_OFFSETS - 1)];
         rand >>= 3;
         if (i == 7)
         {

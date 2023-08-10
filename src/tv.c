@@ -45,7 +45,6 @@
 #include "constants/metatile_labels.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
-#include "constants/script_menu.h"
 
 #define LAST_TVSHOW_IDX (TV_SHOWS_COUNT - 1)
 
