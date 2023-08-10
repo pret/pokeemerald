@@ -1647,18 +1647,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             break;
         case EFFECT_FAKE_OUT:
             if (!gDisableStructs[battlerAtk].isFirstTurn)
-            {
                 score -= 10;
-            }
-            else if (move == MOVE_FAKE_OUT) // filter out first impression
-            {
-                if ((AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_CHOICE_BAND || AI_DATA->abilities[battlerAtk] == ABILITY_GORILLA_TACTICS)
-                  && (CountUsablePartyMons(battlerDef) > 0 || !CanIndexMoveFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex, 0)))
-                {
-                    if (CountUsablePartyMons(battlerAtk) == 0)
-                        score -= 10; // Don't lock the attacker into Fake Out if they can't switch out afterwards.
-                }
-            }
             break;
         case EFFECT_STOCKPILE:
             if (gDisableStructs[battlerAtk].stockpileCounter >= 3)
@@ -3094,7 +3083,7 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
               || IS_BATTLER_OF_TYPE(battlerAtkPartner, TYPE_POISON)
               || IS_BATTLER_OF_TYPE(battlerAtkPartner, TYPE_ROCK))
                 score -= 10;    // partner will be hit by earthquake and is weak to it
-            else
+            else if (IsBattlerAlive(battlerAtkPartner))
                 score -= 3;
             break;
         }
@@ -4137,9 +4126,13 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         IncreaseStatUpScore(battlerAtk, battlerDef, STAT_DEF, &score);
         break;
     case EFFECT_FAKE_OUT:
-        if (move == MOVE_FAKE_OUT    // filter out first impression
-          && ShouldFakeOut(battlerAtk, battlerDef, move))
-            score += 8;
+        if (move == MOVE_FAKE_OUT) // filter out first impression
+        {
+            if (ShouldFakeOut(battlerAtk, battlerDef, move))
+                score += 4;
+            else
+                score -= 10;
+        }
         break;
     case EFFECT_STOCKPILE:
         if (AI_DATA->abilities[battlerAtk] == ABILITY_CONTRARY)
