@@ -4998,7 +4998,8 @@ static void Cmd_playanimation(void)
      || animId == B_ANIM_ILLUSION_OFF
      || animId == B_ANIM_FORM_CHANGE
      || animId == B_ANIM_SUBSTITUTE_FADE
-     || animId == B_ANIM_PRIMAL_REVERSION)
+     || animId == B_ANIM_PRIMAL_REVERSION
+     || animId == B_ANIM_ULTRA_BURST)
     {
         BtlController_EmitBattleAnimation(BUFFER_A, animId, *argPtr);
         MarkBattlerForControllerExec(gActiveBattler);
@@ -5049,7 +5050,8 @@ static void Cmd_playanimation_var(void)
      || *animIdPtr == B_ANIM_ILLUSION_OFF
      || *animIdPtr == B_ANIM_FORM_CHANGE
      || *animIdPtr == B_ANIM_SUBSTITUTE_FADE
-     || *animIdPtr == B_ANIM_PRIMAL_REVERSION)
+     || *animIdPtr == B_ANIM_PRIMAL_REVERSION
+     || *animIdPtr == B_ANIM_ULTRA_BURST)
     {
         BtlController_EmitBattleAnimation(BUFFER_A, *animIdPtr, *argPtr);
         MarkBattlerForControllerExec(gActiveBattler);
@@ -8593,7 +8595,7 @@ static bool32 CourtChangeSwapSideStatuses(void)
     SWAP(sideTimerPlayer->stickyWebBattlerSide, sideTimerOpp->stickyWebBattlerSide, temp);
 }
 
-static void HandleScriptMegaPrimal(u32 caseId, u32 battlerId, bool32 isMega)
+static void HandleScriptMegaPrimalBurst(u32 caseId, u32 battlerId, u32 type)
 {
     struct Pokemon *party = GetBattlerParty(battlerId);
     struct Pokemon *mon = &party[gBattlerPartyIndexes[battlerId]];
@@ -8603,13 +8605,15 @@ static void HandleScriptMegaPrimal(u32 caseId, u32 battlerId, bool32 isMega)
     // Change species.
     if (caseId == 0)
     {
-        if (isMega)
+        if (type == 0)
         {
             if (!TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM))
                 TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE);
         }
-        else
+        else if (type == 1)
             TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_PRIMAL_REVERSION);
+        else
+            TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_ULTRA_BURST);
 
         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[battlerId].species);
 
@@ -8622,7 +8626,7 @@ static void HandleScriptMegaPrimal(u32 caseId, u32 battlerId, bool32 isMega)
         UpdateHealthboxAttribute(gHealthboxSpriteIds[battlerId], mon, HEALTHBOX_ALL);
         if (side == B_SIDE_OPPONENT)
             SetBattlerShadowSpriteCallback(battlerId, gBattleMons[battlerId].species);
-        if (isMega)
+        if (type == 0)
             gBattleStruct->mega.alreadyEvolved[position] = TRUE;
     }
 }
@@ -9680,14 +9684,21 @@ static void Cmd_various(void)
     case VARIOUS_HANDLE_MEGA_EVO:
     {
         VARIOUS_ARGS(u8 case_);
-        HandleScriptMegaPrimal(cmd->case_, gActiveBattler, TRUE);
+        HandleScriptMegaPrimalBurst(cmd->case_, gActiveBattler, 0);
         gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
     case VARIOUS_HANDLE_PRIMAL_REVERSION:
     {
         VARIOUS_ARGS(u8 case_);
-        HandleScriptMegaPrimal(cmd->case_, gActiveBattler, FALSE);
+        HandleScriptMegaPrimalBurst(cmd->case_, gActiveBattler, 1);
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
+    case VARIOUS_HANDLE_ULTRA_BURST:
+    {
+        VARIOUS_ARGS(u8 case_);
+        HandleScriptMegaPrimalBurst(cmd->case_, gActiveBattler, 2);
         gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
