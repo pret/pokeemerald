@@ -2491,11 +2491,11 @@ void TryShinyAnimation(u8 battler, struct Pokemon *mon)
     illusionMon = GetIllusionMonPtr(battler);
     if (illusionMon != NULL)
         mon = illusionMon;
-    
+
     otId = GetMonData(mon, MON_DATA_OT_ID);
     personality = GetMonData(mon, MON_DATA_PERSONALITY);
 
-    if (IsBattlerSpriteVisible(battler))
+    if (IsBattlerSpriteVisible(battler) && IsValidForBattle(mon))
     {
         shinyValue = GET_SHINY_VALUE(otId, personality);
         if (shinyValue < SHINY_ODDS)
@@ -2771,7 +2771,7 @@ void AnimTask_GetTrappedMoveAnimId(u8 taskId)
         gBattleAnimArgs[0] = TRAP_ANIM_BIND;
         break;
     }
-    
+
     DestroyAnimVisualTask(taskId);
 }
 

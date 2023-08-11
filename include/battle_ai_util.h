@@ -85,9 +85,10 @@ bool32 ShouldLowerEvasion(u8 battlerAtk, u8 battlerDef, u16 defAbility);
 bool32 IsAffectedByPowder(u8 battler, u16 ability, u16 holdEffect);
 bool32 MovesWithSplitUnusable(u32 attacker, u32 target, u32 split);
 s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *effectiveness, bool32 considerZPower);
+u32 GetNoOfHitsToKO(u32 dmg, s32 hp);
 u8 GetMoveDamageResult(u16 move);
 u32 GetCurrDamageHpPercent(u8 battlerAtk, u8 battlerDef);
-u16 AI_GetTypeEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef);
+uq4_12_t AI_GetTypeEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef);
 u32 AI_GetMoveEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef);
 u16 *GetMovesArray(u32 battler);
 bool32 IsConfusionMoveEffect(u16 moveEffect);
@@ -167,7 +168,9 @@ bool32 PartnerMoveIsSameNoTarget(u8 battlerAtkPartner, u16 move, u16 partnerMove
 bool32 ShouldUseWishAromatherapy(u8 battlerAtk, u8 battlerDef, u16 move);
 
 // party logic
-s32 AI_CalcPartyMonDamage(u16 move, u8 battlerAtk, u8 battlerDef, struct Pokemon *mon);
+struct BattlePokemon *AllocSaveBattleMons(void);
+void FreeRestoreBattleMons(struct BattlePokemon *savedBattleMons);
+s32 AI_CalcPartyMonBestMoveDamage(u32 battlerAtk, u32 battlerDef, struct Pokemon *attackerMon, struct Pokemon *targetMon);
 s32 CountUsablePartyMons(u8 battlerId);
 bool32 IsPartyFullyHealedExceptBattler(u8 battler);
 bool32 PartyHasMoveSplit(u8 battlerId, u8 split);

@@ -20,6 +20,22 @@ u16 Random2(void);
 void SeedRng(u16 seed);
 void SeedRng2(u16 seed);
 
+void Shuffle8(void *data, size_t n);
+void Shuffle16(void *data, size_t n);
+void Shuffle32(void *data, size_t n);
+void ShuffleN(void *data, size_t n, size_t size);
+
+static inline void Shuffle(void *data, size_t n, size_t size)
+{
+    switch (size)
+    {
+    case 1: Shuffle8(data, n); break;
+    case 2: Shuffle16(data, n); break;
+    case 4: Shuffle32(data, n); break;
+    default: ShuffleN(data, n, size); break;
+    }
+}
+
 /* Structured random number generator.
  * Instead of the caller converting bits from Random() to a meaningful
  * value, the caller provides metadata that is used to return the
@@ -31,6 +47,10 @@ void SeedRng2(u16 seed);
  *
  * RandomUniform(tag, lo, hi) returns a number from lo to hi inclusive
  * with uniform probability.
+ *
+ * RandomUniformExcept(tag, lo, hi, reject) returns a number from lo to
+ * hi inclusive with uniform probability, excluding those for which
+ * reject returns TRUE.
  *
  * RandomElement(tag, array) returns an element in array with uniform
  * probability. The array must be known at compile-time (e.g. a global
@@ -56,8 +76,11 @@ enum RandomTag
     RNG_FLAME_BODY,
     RNG_FORCE_RANDOM_SWITCH,
     RNG_FROZEN,
+    RNG_HITS,
     RNG_HOLD_EFFECT_FLINCH,
     RNG_INFATUATION,
+    RNG_LOADED_DICE,
+    RNG_METRONOME,
     RNG_PARALYSIS,
     RNG_POISON_POINT,
     RNG_RAMPAGE_TURNS,
@@ -105,10 +128,12 @@ enum RandomTag
     })
 
 u32 RandomUniform(enum RandomTag, u32 lo, u32 hi);
+u32 RandomUniformExcept(enum RandomTag, u32 lo, u32 hi, bool32 (*reject)(u32));
 u32 RandomWeightedArray(enum RandomTag, u32 sum, u32 n, const u8 *weights);
 const void *RandomElementArray(enum RandomTag, const void *array, size_t size, size_t count);
 
 u32 RandomUniformDefault(enum RandomTag, u32 lo, u32 hi);
+u32 RandomUniformExceptDefault(enum RandomTag, u32 lo, u32 hi, bool32 (*reject)(u32));
 u32 RandomWeightedArrayDefault(enum RandomTag, u32 sum, u32 n, const u8 *weights);
 const void *RandomElementArrayDefault(enum RandomTag, const void *array, size_t size, size_t count);
 

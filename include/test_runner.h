@@ -3,10 +3,9 @@
 
 extern const bool8 gTestRunnerEnabled;
 extern const bool8 gTestRunnerHeadless;
+extern const bool8 gTestRunnerSkipIsFail;
 
 #if TESTING
-
-extern const bool8 gTestRunnerSkipIsFail;
 
 void TestRunner_Battle_RecordAbilityPopUp(u32 battlerId, u32 ability);
 void TestRunner_Battle_RecordAnimation(u32 animType, u32 animId);

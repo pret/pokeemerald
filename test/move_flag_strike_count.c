@@ -1,14 +1,29 @@
 #include "global.h"
 #include "test_battle.h"
 
-SINGLE_BATTLE_TEST("Three-strike flag turns a move into a 3-hit move")
+SINGLE_BATTLE_TEST("Two strike count turns a move into a 2-hit move")
+{
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_DOUBLE_KICK].strikeCount == 2);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_DOUBLE_KICK); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DOUBLE_KICK, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DOUBLE_KICK, player);
+        MESSAGE("Hit 2 time(s)!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Three strike count turns a move into a 3-hit move")
 {
     s16 firstHit;
     s16 secondHit;
     s16 thirdHit;
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TRIPLE_DIVE].threeStrikes);
+        ASSUME(gBattleMoves[MOVE_TRIPLE_DIVE].strikeCount == 3);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -34,7 +49,7 @@ SINGLE_BATTLE_TEST("Surging Strikes hits 3 times with each hit being a critical 
     s16 thirdHit;
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SURGING_STRIKES].threeStrikes);
+        ASSUME(gBattleMoves[MOVE_SURGING_STRIKES].strikeCount == 3);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

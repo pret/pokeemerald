@@ -1,7 +1,7 @@
 #ifndef GUARD_GBA_MACRO_H
 #define GUARD_GBA_MACRO_H
 
-#define CPU_FILL(value, dest, size, bit)                                          \
+#define CPU_FILL_UNCHECKED(value, dest, size, bit)                                          \
 {                                                                                 \
     vu##bit tmp = (vu##bit)(value);                                               \
     CpuSet((void *)&tmp,                                                          \
@@ -9,10 +9,33 @@
            CPU_SET_##bit##BIT | CPU_SET_SRC_FIXED | ((size)/(bit/8) & 0x1FFFFF)); \
 }
 
+#if MODERN
+#define CPU_FILL(value, dest, size, bit) \
+    do \
+    { \
+        _Static_assert(_Alignof(dest) >= (bit / 8), "destination potentially unaligned"); \
+        CPU_FILL_UNCHECKED(value, dest, size, bit); \
+    } while (0)
+#else
+#define CPU_FILL(value, dest, size, bit) CPU_FILL_UNCHECKED(value, dest, size, bit)
+#endif
+
 #define CpuFill16(value, dest, size) CPU_FILL(value, dest, size, 16)
 #define CpuFill32(value, dest, size) CPU_FILL(value, dest, size, 32)
 
-#define CPU_COPY(src, dest, size, bit) CpuSet(src, dest, CPU_SET_##bit##BIT | ((size)/(bit/8) & 0x1FFFFF))
+#define CPU_COPY_UNCHECKED(src, dest, size, bit) CpuSet(src, dest, CPU_SET_##bit##BIT | ((size)/(bit/8) & 0x1FFFFF))
+
+#if MODERN
+#define CPU_COPY(src, dest, size, bit) \
+    do \
+    { \
+        _Static_assert(_Alignof(src) >= (bit / 8), "source potentially unaligned"); \
+        _Static_assert(_Alignof(dest) >= (bit / 8), "destination potentially unaligned"); \
+        CPU_COPY_UNCHECKED(src, dest, size, bit); \
+    } while (0)
+#else
+#define CPU_COPY(src, dest, size, bit) CPU_COPY_UNCHECKED(src, dest, size, bit)
+#endif
 
 #define CpuCopy16(src, dest, size) CPU_COPY(src, dest, size, 16)
 #define CpuCopy32(src, dest, size) CPU_COPY(src, dest, size, 32)
@@ -31,7 +54,7 @@
 
 #define CpuFastCopy(src, dest, size) CpuFastSet(src, dest, ((size)/(32/8) & 0x1FFFFF))
 
-#define DmaSet(dmaNum, src, dest, control)        \
+#define DmaSetUnchecked(dmaNum, src, dest, control) \
 {                                                 \
     vu32 *dmaRegs = (vu32 *)REG_ADDR_DMA##dmaNum; \
     dmaRegs[0] = (vu32)(src);                     \
@@ -40,7 +63,21 @@
     dmaRegs[2];                                   \
 }
 
-#define DMA_FILL(dmaNum, value, dest, size, bit)                                              \
+#if MODERN
+// NOTE: Assumes 16-bit DMAs.
+#define DmaSet(dmaNum, src, dest, control) \
+    do \
+    { \
+        _Static_assert(_Alignof(src) >= __builtin_choose_expr(__builtin_constant_p(control), ((control) & (DMA_32BIT << 16)) ? 4 : 2, 2), "source potentially unaligned"); \
+        _Static_assert(_Alignof(dest) >= __builtin_choose_expr(__builtin_constant_p(control), ((control) & (DMA_32BIT << 16)) ? 4 : 2, 2), "destination potentially unaligned"); \
+        DmaSetUnchecked(dmaNum, src, dest, control); \
+    } while (0)
+#else
+#define DmaSet(dmaNum, src, dest, control) \
+    DmaSetUnchecked(dmaNum, src, dest, control)
+#endif
+
+#define DMA_FILL_UNCHECKED(dmaNum, value, dest, size, bit)                                    \
 {                                                                                             \
     vu##bit tmp = (vu##bit)(value);                                                           \
     DmaSet(dmaNum,                                                                            \
@@ -50,6 +87,17 @@
          | ((size)/(bit/8)));                                                                 \
 }
 
+#if MODERN
+#define DMA_FILL(dmaNum, value, dest, size, bit) \
+    do \
+    { \
+        _Static_assert(_Alignof(dest) >= (bit / 8), "destination potentially unaligned"); \
+        DMA_FILL_UNCHECKED(dmaNum, value, dest, size, bit); \
+    } while (0)
+#else
+#define DMA_FILL(dmaNum, value, dest, size, bit) DMA_FILL_UNCHECKED(dmaNum, value, dest, size, bit)
+#endif
+
 #define DmaFill16(dmaNum, value, dest, size) DMA_FILL(dmaNum, value, dest, size, 16)
 #define DmaFill32(dmaNum, value, dest, size) DMA_FILL(dmaNum, value, dest, size, 32)
 
@@ -58,22 +106,45 @@
 // unit size (2 or 4 bytes) and then combined with the DMA control flags using a
 // bitwise OR operation.
 
-#define DMA_CLEAR(dmaNum, dest, size, bit)  \
+#define DMA_CLEAR_UNCHECKED(dmaNum, dest, size, bit) \
 {                                           \
     vu##bit *_dest = (vu##bit *)(dest);     \
     u32 _size = size;                       \
     DmaFill##bit(dmaNum, 0, _dest, _size);  \
 }
 
+#if MODERN
+#define DMA_CLEAR(dmaNum, dest, size, bit) \
+    do \
+    { \
+        _Static_assert(_Alignof(dest) >= (bit / 8), "destination potentially unaligned"); \
+        DMA_CLEAR_UNCHECKED(dmaNum, dest, size, bit); \
+    } while (0)
+#else
+#define DMA_CLEAR(dmaNum, dest, size, bit) DMA_CLEAR_UNCHECKED(dmaNum, dest, size, bit)
+#endif
+
 #define DmaClear16(dmaNum, dest, size) DMA_CLEAR(dmaNum, dest, size, 16)
 #define DmaClear32(dmaNum, dest, size) DMA_CLEAR(dmaNum, dest, size, 32)
 
-#define DMA_COPY(dmaNum, src, dest, size, bit)                                              \
+#define DMA_COPY_UNCHECKED(dmaNum, src, dest, size, bit)                                    \
     DmaSet(dmaNum,                                                                          \
            src,                                                                             \
            dest,                                                                            \
            (DMA_ENABLE | DMA_START_NOW | DMA_##bit##BIT | DMA_SRC_INC | DMA_DEST_INC) << 16 \
          | ((size)/(bit/8)))
+
+#if MODERN
+#define DMA_COPY(dmaNum, src, dest, size, bit) \
+    do \
+    { \
+        _Static_assert(_Alignof(src) >= (bit / 8), "source potentially unaligned"); \
+        _Static_assert(_Alignof(dest) >= (bit / 8), "destination potentially unaligned"); \
+        DMA_COPY_UNCHECKED(dmaNum, src, dest, size, bit); \
+    } while (0)
+#else
+#define DMA_COPY(dmaNum, src, dest, size, bit) DMA_COPY_UNCHECKED(dmaNum, src, dest, size, bit)
+#endif
 
 #define DmaCopy16(dmaNum, src, dest, size) DMA_COPY(dmaNum, src, dest, size, 16)
 #define DmaCopy32(dmaNum, src, dest, size) DMA_COPY(dmaNum, src, dest, size, 32)

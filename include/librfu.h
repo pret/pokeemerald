@@ -329,7 +329,7 @@ struct RfuIntrStruct
 {
     union RfuPacket rxPacketAlloc;
     union RfuPacket txPacketAlloc;
-    u8 block1[0x960]; // size of librfu_intr.s binary
+    u8 ALIGNED(2) block1[0x960]; // size of librfu_intr.s binary
     struct STWIStatus block2;
 };
 

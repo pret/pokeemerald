@@ -17,6 +17,7 @@
 #include <fcntl.h>
 #include <math.h>
 #include <poll.h>
+#include <regex.h>
 #include <signal.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -31,7 +32,13 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-#define MAX_PROCESSES 32 // See also test/test.h
+#define min(a, b) ((a) < (b) ? (a) : (b))
+
+#define MAX_PROCESSES               32 // See also test/test.h
+#define MAX_FAILED_TESTS_TO_LIST    100
+#define MAX_TEST_LIST_BUFFER_LENGTH 256
+
+#define ARRAY_COUNT(arr) (sizeof((arr)) / sizeof((arr)[0]))
 
 struct Runner
 {
@@ -51,6 +58,7 @@ struct Runner
     int assumptionFails;
     int fails;
     int results;
+    char failedTestNames[MAX_FAILED_TESTS_TO_LIST][MAX_TEST_LIST_BUFFER_LENGTH];
 };
 
 static unsigned nrunners = 0;
@@ -99,6 +107,8 @@ static void handle_read(int i, struct Runner *runner)
                     runner->assumptionFails++;
                     goto add_to_results;
                 case 'F':
+                    if (runner->fails < MAX_FAILED_TESTS_TO_LIST)
+                        strcpy(runner->failedTestNames[runner->fails], runner->test_name);
                     runner->fails++;
 add_to_results:
                     runner->results++;
@@ -182,6 +192,14 @@ static void exit2(int _)
     exit(2);
 }
 
+int compare_strings(const void * a, const void * b)
+{
+    const char *arg1 = (const char *) a;
+    const char *arg2 = (const char *) b;
+
+    return strcmp(arg1, arg2);
+}
+
 int main(int argc, char *argv[])
 {
     if (argc < 4)
@@ -233,7 +251,29 @@ int main(int argc, char *argv[])
         exit(2);
     }
 
-    nrunners = sysconf(_SC_NPROCESSORS_ONLN);
+    nrunners = 1;
+    const char *makeflags = getenv("MAKEFLAGS");
+    if (makeflags)
+    {
+        int e;
+        regex_t preg;
+        regmatch_t pmatch[4];
+        if ((e = regcomp(&preg, "(^| )-j([0-9]*)($| )", REG_EXTENDED)) != 0)
+        {
+            char errbuf[256];
+            regerror(e, &preg, errbuf, sizeof(errbuf));
+            fprintf(stderr, "regcomp failed: '%s'\n", errbuf);
+            exit(2);
+        }
+        if (regexec(&preg, makeflags, ARRAY_COUNT(pmatch), pmatch, 0) != REG_NOMATCH)
+        {
+            if (pmatch[2].rm_so == pmatch[2].rm_eo)
+                nrunners = sysconf(_SC_NPROCESSORS_ONLN);
+            else
+                sscanf(makeflags + pmatch[2].rm_so, "%d", &nrunners);
+        }
+        regfree(&preg);
+    }
     if (nrunners > MAX_PROCESSES)
         nrunners = MAX_PROCESSES;
     runners_digits = ceil(log10(nrunners));
@@ -476,6 +516,9 @@ int main(int argc, char *argv[])
     int assumptionFails = 0;
     int fails = 0;
     int results = 0;
+
+    char failedTestNames[MAX_FAILED_TESTS_TO_LIST * MAX_PROCESSES][MAX_TEST_LIST_BUFFER_LENGTH];
+
     for (int i = 0; i < nrunners; i++)
     {
         int wstatus;
@@ -492,9 +535,16 @@ int main(int argc, char *argv[])
         knownFails += runners[i].knownFails;
         todos += runners[i].todos;
         assumptionFails += runners[i].assumptionFails;
-        fails += runners[i].fails;
+        for (int j = 0; j < runners[i].fails; j++)
+        {
+            if (j < MAX_FAILED_TESTS_TO_LIST)
+                strcpy(failedTestNames[fails], runners[i].failedTestNames[j]);
+            fails++;
+        }
         results += runners[i].results;
     }
+
+    qsort(failedTestNames, min(fails, MAX_FAILED_TESTS_TO_LIST), sizeof(char) * MAX_TEST_LIST_BUFFER_LENGTH, compare_strings);
 
     if (results == 0)
     {
@@ -502,16 +552,28 @@ int main(int argc, char *argv[])
     }
     else
     {
-        fprintf(stdout, "\n- Tests TOTAL:         %d\n", results);
+        if (fails > 0)
+        {
+            fprintf(stdout, "\n- Tests \e[31mFAILED\e[0m :       %d    Add TESTS='X' to run tests with the defined prefix.\n", fails);
+            for (int i = 0; i < fails; i++)
+            {
+                if (i >= MAX_FAILED_TESTS_TO_LIST)
+                {
+                    fprintf(stdout, "  - \e[31mand %d more...\e[0m\n", fails - MAX_FAILED_TESTS_TO_LIST);
+                    break;
+                }
+                fprintf(stdout, "  - \e[31m%s\e[0m.\n", failedTestNames[i]);
+            }
+        }
         fprintf(stdout, "- Tests \e[32mPASSED\e[0m:        %d\n", passes);
         if (knownFails > 0)
             fprintf(stdout, "- Tests \e[33mKNOWN_FAILING\e[0m: %d\n", knownFails);
         if (todos > 0)
             fprintf(stdout, "- Tests \e[33mTO_DO\e[0m:         %d\n", todos);
-        if (fails > 0)
-            fprintf(stdout, "- Tests \e[31mFAILED\e[0m :       %d\n", fails);
         if (assumptionFails > 0)
             fprintf(stdout, "- \e[33mASSUMPTIONS_FAILED\e[0m:  %d\n", assumptionFails);
+
+        fprintf(stdout, "- Tests \e[34mTOTAL\e[0m:         %d\n", results);
     }
     fprintf(stdout, "\n");
 

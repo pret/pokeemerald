@@ -16,6 +16,7 @@
 #include "berry.h"
 #include "bg.h"
 #include "data.h"
+#include "debug.h"
 #include "decompress.h"
 #include "dma3.h"
 #include "event_data.h"
@@ -120,7 +121,6 @@ static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite);
 static void TrySpecialEvolution(void);
 static u32 Crc32B (const u8 *data, u32 size);
 static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i);
-static void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon *partyEntry);
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
 EWRAM_DATA u16 gBattle_BG0_Y = 0;
@@ -565,7 +565,13 @@ static void CB2_InitBattleInternal(void)
     gBattle_BG3_X = 0;
     gBattle_BG3_Y = 0;
 
+#if DEBUG_OVERWORLD_MENU == FALSE 
+    
     gBattleTerrain = BattleSetup_GetTerrainId();
+#else
+    if (!gIsDebugBattle)
+        gBattleTerrain = BattleSetup_GetTerrainId();
+#endif
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         gBattleTerrain = BATTLE_TERRAIN_BUILDING;
 
@@ -588,6 +594,7 @@ static void CB2_InitBattleInternal(void)
     else
         SetMainCallback2(CB2_HandleStartBattle);
 
+#if DEBUG_OVERWORLD_MENU == FALSE 
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED)))
     {
         CreateNPCTrainerParty(&gEnemyParty[0], gTrainerBattleOpponent_A, TRUE);
@@ -596,6 +603,18 @@ static void CB2_InitBattleInternal(void)
         SetWildMonHeldItem();
         CalculateEnemyPartyCount();
     }
+#else
+    if (!gIsDebugBattle)
+    {
+        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED)))
+        {
+            CreateNPCTrainerParty(&gEnemyParty[0], gTrainerBattleOpponent_A, TRUE);
+            if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+                CreateNPCTrainerParty(&gEnemyParty[PARTY_SIZE / 2], gTrainerBattleOpponent_B, FALSE);
+            SetWildMonHeldItem();
+        }
+    }
+#endif
 
     gMain.inBattle = TRUE;
     gSaveBlock2Ptr->frontier.disableRecordBattle = FALSE;
@@ -1910,7 +1929,7 @@ u32 GeneratePersonalityForGender(u32 gender, u32 species)
         return speciesInfo->genderRatio / 2;
 }
 
-static void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon *partyEntry)
+void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon *partyEntry)
 {
     bool32 noMoveSet = TRUE;
     u32 j;
@@ -1939,7 +1958,6 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
     u8 fixedIV;
     s32 i, j;
     u8 monsCount;
-    s32 ball = -1;
     if (battleTypeFlags & BATTLE_TYPE_TRAINER && !(battleTypeFlags & (BATTLE_TYPE_FRONTIER
                                                                         | BATTLE_TYPE_EREADER_TRAINER
                                                                         | BATTLE_TYPE_TRAINER_HILL)))
@@ -1961,6 +1979,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
 
         for (i = 0; i < monsCount; i++)
         {
+            s32 ball = -1;
             u32 personalityHash = GeneratePartyHash(trainer, i);
             const struct TrainerMon *partyData = trainer->party;
             u32 otIdType = OT_ID_RANDOM_NO_SHINY;
@@ -3036,6 +3055,9 @@ static void BattleStartClearSetData(void)
 
     gBattlerAttacker = 0;
     gBattlerTarget = 0;
+    gEffectBattler = 0;
+    gBattleScripting.battler = 0;
+    gBattlerAbility = 0;
     gBattleWeather = 0;
     gHitMarker = 0;
 
@@ -3782,13 +3804,8 @@ static void TryDoEventsBeforeFirstTurn(void)
     {
         gBattlerAttacker = gBattlerByTurnOrder[gBattleStruct->switchInAbilitiesCounter++];
 
-        // Primal Reversion
-        if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_PRIMAL_ORB
-            && GetBattleFormChangeTargetSpecies(gBattlerAttacker, FORM_CHANGE_BATTLE_PRIMAL_REVERSION) != SPECIES_NONE)
-        {
-            BattleScriptExecute(BattleScript_PrimalReversion);
+        if (TryPrimalReversion(gBattlerAttacker))
             return;
-        }
         if (AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, gBattlerAttacker, 0, 0, 0) != 0)
             return;
     }
@@ -5360,7 +5377,8 @@ static void HandleEndTurn_FinishBattle(void)
                 changedForm = TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_END_BATTLE);
 
             // Clear original species field
-            gBattleStruct->changedSpecies[i] = SPECIES_NONE;
+            gBattleStruct->changedSpecies[B_SIDE_PLAYER][i] = SPECIES_NONE;
+            gBattleStruct->changedSpecies[B_SIDE_OPPONENT][i] = SPECIES_NONE;
 
         #if B_RECALCULATE_STATS >= GEN_5
             // Recalculate the stats of every party member before the end

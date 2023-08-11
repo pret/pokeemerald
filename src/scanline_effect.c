@@ -13,7 +13,7 @@ static void CopyValue32Bit(void);
 // Per-scanline register values.
 // This is double buffered so that it can be safely written to at any time
 // without overwriting the buffer that the DMA is currently reading
-EWRAM_DATA u16 gScanlineEffectRegBuffers[2][0x3C0] = {0};
+EWRAM_DATA u16 ALIGNED(4) gScanlineEffectRegBuffers[2][0x3C0] = {0};
 
 EWRAM_DATA struct ScanlineEffect gScanlineEffect = {0};
 EWRAM_DATA static bool8 sShouldStopWaveTask = FALSE;

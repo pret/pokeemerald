@@ -1,4 +1,4 @@
-const struct CompressedSpriteSheet gMonFrontPicTable[] =
+const struct CompressedSpriteSheet gMonFrontPicTable[NUM_SPECIES + 1] =
 {
     SPECIES_SPRITE(NONE, gMonFrontPic_CircledQuestionMark),
     SPECIES_SPRITE(BULBASAUR, gMonFrontPic_Bulbasaur),
@@ -1337,7 +1337,7 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(EGG, gMonFrontPic_Egg),
 };
 
-const struct CompressedSpriteSheet gMonFrontPicTableFemale[] =
+const struct CompressedSpriteSheet gMonFrontPicTableFemale[NUM_SPECIES + 1] =
 {
     SPECIES_SPRITE(VENUSAUR, gMonFrontPic_VenusaurF),
     SPECIES_SPRITE(BUTTERFREE, gMonFrontPic_ButterfreeF),
@@ -1384,7 +1384,6 @@ const struct CompressedSpriteSheet gMonFrontPicTableFemale[] =
     SPECIES_SPRITE(OCTILLERY, gMonFrontPic_OctilleryF),
     SPECIES_SPRITE(HOUNDOOM, gMonFrontPic_HoundoomF),
     SPECIES_SPRITE(DONPHAN, gMonFrontPic_DonphanF),
-    SPECIES_SPRITE(TORCHIC, gMonFrontPic_Torchic),
     SPECIES_SPRITE(COMBUSKEN, gMonFrontPic_CombuskenF),
     SPECIES_SPRITE(BLAZIKEN, gMonFrontPic_BlazikenF),
     SPECIES_SPRITE(BEAUTIFLY, gMonFrontPic_BeautiflyF),
@@ -1394,22 +1393,37 @@ const struct CompressedSpriteSheet gMonFrontPicTableFemale[] =
     SPECIES_SPRITE(SHIFTRY, gMonFrontPic_ShiftryF),
     SPECIES_SPRITE(MEDITITE, gMonFrontPic_MedititeF),
     SPECIES_SPRITE(MEDICHAM, gMonFrontPic_MedichamF),
-
+    SPECIES_SPRITE(ROSELIA, gMonFrontPic_RoseliaF),
+    SPECIES_SPRITE(GULPIN, gMonFrontPic_GulpinF),
+    SPECIES_SPRITE(SWALOT, gMonFrontPic_SwalotF),
+    SPECIES_SPRITE(NUMEL, gMonFrontPic_NumelF),
+    SPECIES_SPRITE(CAMERUPT, gMonFrontPic_CameruptF),
+    SPECIES_SPRITE(CACTURNE, gMonFrontPic_CacturneF),
+    SPECIES_SPRITE(MILOTIC, gMonFrontPic_MiloticF),
+    SPECIES_SPRITE(RELICANTH, gMonFrontPic_RelicanthF),
 #if P_GEN_4_POKEMON == TRUE
     SPECIES_SPRITE(STARLY, gMonFrontPic_StarlyF),
     SPECIES_SPRITE(STARAVIA, gMonFrontPic_StaraviaF),
     SPECIES_SPRITE(STARAPTOR, gMonFrontPic_StaraptorF),
     SPECIES_SPRITE(BIDOOF, gMonFrontPic_BidoofF),
+    SPECIES_SPRITE(BIBAREL, gMonFrontPic_BibarelF),
     SPECIES_SPRITE(KRICKETOT, gMonFrontPic_KricketotF),
     SPECIES_SPRITE(KRICKETUNE, gMonFrontPic_KricketuneF),
     SPECIES_SPRITE(SHINX, gMonFrontPic_ShinxF),
-    SPECIES_SPRITE(COMBEE, gMonFrontPic_Combee),
+    SPECIES_SPRITE(LUXIO, gMonFrontPic_LuxioF),
+    SPECIES_SPRITE(LUXRAY, gMonFrontPic_LuxrayF),
+    SPECIES_SPRITE(ROSERADE, gMonFrontPic_RoseradeF),
     SPECIES_SPRITE(AMBIPOM, gMonFrontPic_AmbipomF),
+    SPECIES_SPRITE(PACHIRISU, gMonFrontPic_PachirisuF),
     SPECIES_SPRITE(GIBLE, gMonFrontPic_GibleF),
     SPECIES_SPRITE(GABITE, gMonFrontPic_GabiteF),
     SPECIES_SPRITE(GARCHOMP, gMonFrontPic_GarchompF),
-    SPECIES_SPRITE(HIPPOPOTAS, gMonFrontPic_Hippopotas),
-    SPECIES_SPRITE(HIPPOWDON, gMonFrontPic_Hippowdon),
+    SPECIES_SPRITE(CROAGUNK, gMonFrontPic_CroagunkF),
+    SPECIES_SPRITE(TOXICROAK, gMonFrontPic_ToxicroakF),
+    SPECIES_SPRITE(FINNEON, gMonFrontPic_FinneonF),
+    SPECIES_SPRITE(LUMINEON, gMonFrontPic_LumineonF),
+    SPECIES_SPRITE(SNOVER, gMonFrontPic_SnoverF),
+    SPECIES_SPRITE(ABOMASNOW, gMonFrontPic_AbomasnowF),
     SPECIES_SPRITE(WEAVILE, gMonFrontPic_WeavileF),
     SPECIES_SPRITE(RHYPERIOR, gMonFrontPic_RhyperiorF),
     SPECIES_SPRITE(TANGROWTH, gMonFrontPic_TangrowthF),
@@ -1423,6 +1437,5 @@ const struct CompressedSpriteSheet gMonFrontPicTableFemale[] =
 #if P_GEN_6_POKEMON == TRUE
     SPECIES_SPRITE(PYROAR, gMonFrontPic_PyroarF),
 #endif
-
     SPECIES_SPRITE(SNEASEL_HISUIAN, gMonFrontPic_SneaselHisuianF),
 };

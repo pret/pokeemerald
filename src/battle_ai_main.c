@@ -8,6 +8,7 @@
 #include "battle_setup.h"
 #include "battle_z_move.h"
 #include "data.h"
+#include "debug.h"
 #include "event_data.h"
 #include "item.h"
 #include "pokemon.h"
@@ -152,6 +153,11 @@ static u32 GetWildAiFlags(void)
 
 void BattleAI_SetupFlags(void)
 {
+#if DEBUG_OVERWORLD_MENU == TRUE
+    if (gIsDebugBattle)
+        AI_THINKING_STRUCT->aiFlags = gDebugAIFlags;
+    else
+#endif
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         AI_THINKING_STRUCT->aiFlags = GetAiScriptsInRecordedBattle();
     else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
@@ -3118,6 +3124,19 @@ static bool32 IsPinchBerryItemEffect(u16 holdEffect)
     return FALSE;
 }
 
+static u32 GetAIMostDamagingMoveId(u8 battlerAtk, u8 battlerDef)
+{
+    u32 i, id = 0;
+    u32 mostDmg = 0;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (AI_DATA->simulatedDmg[battlerAtk][battlerDef][i] > mostDmg)
+            id = i, mostDmg = AI_DATA->simulatedDmg[battlerAtk][battlerDef][i];
+    }
+    return id;
+}
+
 // AI_FLAG_CHECK_VIABILITY - a weird mix of increasing and decreasing scores
 static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
@@ -3138,6 +3157,14 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     // check always hits
     if (!IS_MOVE_STATUS(move) && gBattleMoves[move].accuracy == 0)
     {
+        // If 2 moves can KO the target in the same number of turns, but one of them always hits and there is a risk the other move could miss, prioritize the always hits move.
+        if (gBattleMons[battlerDef].statStages[STAT_EVASION] > 6 || gBattleMons[battlerAtk].statStages[STAT_ACC] < 6)
+        {
+            u32 mostDmgMoveId = GetAIMostDamagingMoveId(battlerAtk, battlerDef);
+            u32 *dmgs = AI_DATA->simulatedDmg[battlerAtk][battlerDef];
+            if (GetNoOfHitsToKO(dmgs[mostDmgMoveId], gBattleMons[battlerDef].hp) == GetNoOfHitsToKO(dmgs[AI_THINKING_STRUCT->movesetIndex], gBattleMons[battlerDef].hp))
+                score++;
+        }
         if (gBattleMons[battlerDef].statStages[STAT_EVASION] >= 10 || gBattleMons[battlerAtk].statStages[STAT_ACC] <= 2)
             score++;
         if (AI_RandLessThan(100) && (gBattleMons[battlerDef].statStages[STAT_EVASION] >= 8 || gBattleMons[battlerAtk].statStages[STAT_ACC] <= 4))
@@ -3544,6 +3571,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_TOXIC:
     case EFFECT_POISON:
     case EFFECT_BARB_BARRAGE:
+    case EFFECT_MORTAL_SPIN:
         IncreasePoisonScore(battlerAtk, battlerDef, move, &score);
         break;
     case EFFECT_LIGHT_SCREEN:
@@ -4219,6 +4247,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             }
             break;
         case MOVE_RAPID_SPIN:
+        case MOVE_MORTAL_SPIN:
             if (gStatuses3[battlerAtk] & STATUS3_LEECHSEED || gBattleMons[battlerAtk].status2 & STATUS2_WRAPPED)
                 score += 3;
             break;
@@ -4362,8 +4391,9 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
     case EFFECT_SUPERPOWER:
     case EFFECT_OVERHEAT:
+    case EFFECT_MAKE_IT_RAIN:
         if (AI_DATA->abilities[battlerAtk] == ABILITY_CONTRARY)
-            score += 10;
+            score += 3;
         break;
     case EFFECT_MAGIC_COAT:
         if (IS_MOVE_STATUS(predictedMove) && AI_GetBattlerMoveTargetType(battlerDef, predictedMove) & (MOVE_TARGET_SELECTED | MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_BOTH))
@@ -5170,7 +5200,6 @@ static s16 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             case EFFECT_ROOST:
             case EFFECT_MEMENTO:
             case EFFECT_GRUDGE:
-            case EFFECT_OVERHEAT:
                 score -= 2;
                 break;
             default:

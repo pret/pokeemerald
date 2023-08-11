@@ -194,11 +194,6 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
             return FALSE;   // Partner has mega evolved or is about to mega evolve
     }
 
-#if DEBUG_BATTLE_MENU == TRUE
-    if (gBattleStruct->debugHoldEffects[battlerId])
-        holdEffect = gBattleStruct->debugHoldEffects[battlerId];
-    else
-#endif
     if (item == ITEM_ENIGMA_BERRY_E_READER)
         return FALSE;   // HoldEffect = gEnigmaBerries[battlerId].holdEffect;
     else
@@ -628,6 +623,10 @@ void SetZEffect(void)
             BattleScriptPush(gBattlescriptCurrInstr + Z_EFFECT_BS_LENGTH);
             gBattlescriptCurrInstr = BattleScript_ZEffectPrintString;
         }
+        else
+        {
+            gBattlescriptCurrInstr += Z_EFFECT_BS_LENGTH;
+        }
         break;
     case Z_EFFECT_BOOST_CRITS:
         if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY))
@@ -636,6 +635,10 @@ void SetZEffect(void)
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_Z_BOOST_CRITS;
             BattleScriptPush(gBattlescriptCurrInstr + Z_EFFECT_BS_LENGTH);
             gBattlescriptCurrInstr = BattleScript_ZEffectPrintString;
+        }
+        else
+        {
+            gBattlescriptCurrInstr += Z_EFFECT_BS_LENGTH;
         }
         break;
     case Z_EFFECT_FOLLOW_ME:
@@ -652,6 +655,10 @@ void SetZEffect(void)
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_Z_RECOVER_HP;
             BattleScriptPush(gBattlescriptCurrInstr + Z_EFFECT_BS_LENGTH);
             gBattlescriptCurrInstr = BattleScript_RecoverHPZMove;
+        }
+        else
+        {
+            gBattlescriptCurrInstr += Z_EFFECT_BS_LENGTH;
         }
         break;
     case Z_EFFECT_RESTORE_REPLACEMENT_HP:

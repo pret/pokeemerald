@@ -60,10 +60,12 @@ enum
 
 #define MAX_SMOKE 10
 
+typedef u8 ALIGNED(4) TilemapBuffer[BG_SCREEN_SIZE];
+
 struct RayquazaScene
 {
     MainCallback exitCallback;
-    u8 tilemapBuffers[4][BG_SCREEN_SIZE];
+    TilemapBuffer tilemapBuffers[4];
     u16 unk; // never read
     u8 animId;
     bool8 endEarly;
