@@ -8628,6 +8628,8 @@ static void HandleScriptMegaPrimalBurst(u32 caseId, u32 battlerId, u32 type)
             SetBattlerShadowSpriteCallback(battlerId, gBattleMons[battlerId].species);
         if (type == 0)
             gBattleStruct->mega.alreadyEvolved[position] = TRUE;
+        if (type == 2)
+            gBattleStruct->burst.alreadyBursted[position] = TRUE;
     }
 }
 

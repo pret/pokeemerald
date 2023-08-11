@@ -4438,9 +4438,9 @@ static void HandleTurnActionSelectionState(void)
                                 RecordedBattle_SetBattlerAction(gActiveBattler, gBattleResources->bufferB[gActiveBattler][2]);
                                 RecordedBattle_SetBattlerAction(gActiveBattler, gBattleResources->bufferB[gActiveBattler][3]);
                             }
-                            gBattleStruct->chosenMovePositions[gActiveBattler] = gBattleResources->bufferB[gActiveBattler][2] & ~(RET_MEGA_EVOLUTION | RET_ULTRA_BURST);
-                            gChosenMoveByBattler[gActiveBattler] = gBattleMons[gActiveBattler].moves[gBattleStruct->chosenMovePositions[gActiveBattler]];
-                            gBattleStruct->moveTarget[gActiveBattler] = gBattleResources->bufferB[gActiveBattler][3];
+                            *(gBattleStruct->chosenMovePositions + gActiveBattler) = gBattleResources->bufferB[gActiveBattler][2] & ~(RET_MEGA_EVOLUTION | RET_ULTRA_BURST);
+                            gChosenMoveByBattler[gActiveBattler] = gBattleMons[gActiveBattler].moves[*(gBattleStruct->chosenMovePositions + gActiveBattler)];
+                            *(gBattleStruct->moveTarget + gActiveBattler) = gBattleResources->bufferB[gActiveBattler][3];
                             if (gBattleResources->bufferB[gActiveBattler][2] & RET_MEGA_EVOLUTION)
                                 gBattleStruct->mega.toEvolve |= gBitTable[gActiveBattler];
                             else if (gBattleResources->bufferB[gActiveBattler][2] & RET_ULTRA_BURST)

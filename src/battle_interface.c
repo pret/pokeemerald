@@ -677,8 +677,8 @@ static const struct SpriteTemplate sSpriteTemplate_MegaTrigger =
     .callback = SpriteCb_MegaTrigger
 };
 
-static const u8 ALIGNED(4) sBurstTriggerGfx[] = INCBIN_U8("graphics/battle_interface/mega_trigger.4bpp");
-static const u16 sBurstTriggerPal[] = INCBIN_U16("graphics/battle_interface/mega_trigger.gbapal");
+static const u8 ALIGNED(4) sBurstTriggerGfx[] = INCBIN_U8("graphics/battle_interface/burst_trigger.4bpp");
+static const u16 sBurstTriggerPal[] = INCBIN_U16("graphics/battle_interface/burst_trigger.gbapal");
 
 static const struct SpriteSheet sSpriteSheet_BurstTrigger =
 {

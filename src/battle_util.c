@@ -10036,7 +10036,28 @@ bool32 CanUltraBurst(u8 battlerId)
     struct Pokemon *mon;
     u8 battlerPosition = GetBattlerPosition(battlerId);
     u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battlerId));
-    struct UltraBurstData *burst = &(((struct ChooseMoveStruct *)(&gBattleResources->bufferA[gActiveBattler][4]))->burst);
+
+    // Check if Player has a Z Ring
+    if ((GetBattlerPosition(battlerId) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battlerId) == B_POSITION_PLAYER_RIGHT))
+     && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
+        return FALSE;
+
+    // Check if trainer already ultra bursted a pokemon.
+    if (gBattleStruct->burst.alreadyBursted[battlerPosition])
+        return FALSE;
+
+    // Cannot use z move and ultra burst on same turn
+    if (gBattleStruct->zmove.toBeUsed[battlerId])
+        return FALSE;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+     && IsPartnerMonFromSameTrainer(battlerId)
+     && (gBattleStruct->burst.alreadyBursted[partnerPosition] || (gBattleStruct->burst.toBurst & gBitTable[BATTLE_PARTNER(battlerId)])))
+        return FALSE;
+
+    // Check if mon is currently held by Sky Drop
+    if (gStatuses3[battlerId] & STATUS3_SKY_DROPPED)
+        return FALSE;
     
     // Gets mon data.
     if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
