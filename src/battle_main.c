@@ -4595,7 +4595,11 @@ static void HandleTurnActionSelectionState(void)
         {
             // if we choose to throw a ball with our second mon, skip the action of the first
             // (if we have chosen throw ball with first, second's is already skipped)
-            gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)] = B_ACTION_NOTHING_FAINTED;
+            // if throwing a ball in a wild battle with an in-game partner, skip partner's turn when throwing a ball
+            if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+                gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)] = B_ACTION_NOTHING_FAINTED;
+            else
+                gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)] = B_ACTION_NOTHING_FAINTED;
         }
 
         gBattleMainFunc = SetActionsAndBattlersTurnOrder;
