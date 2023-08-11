@@ -81,7 +81,6 @@ SINGLE_BATTLE_TEST("Snow halves the power of Solar Beam", s16 damage)
 SINGLE_BATTLE_TEST("Snow halves the power of Solar Blade", s16 damage)
 {
     u16 move;
-    KNOWN_FAILING; // fails bc the bp of solar blade gets rounded up which leads to slightly incorrect calcs down the line
     PARAMETRIZE{ move = MOVE_CELEBRATE; }
     PARAMETRIZE{ move = MOVE_SNOWSCAPE; }
     GIVEN {

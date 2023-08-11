@@ -209,14 +209,12 @@ void BufferStatChange(u8 battlerId, u8 statId, u8 stringId);
 bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef, bool32 checkTarget);
 u16 GetUsedHeldItem(u8 battler);
 bool32 IsBattlerWeatherAffected(u8 battlerId, u32 weatherFlags);
-u32 ApplyWeatherDamageMultiplier(u8 battlerAtk, u16 move, u8 moveType, u32 dmg, u16 holdEffectAtk, u16 holdEffectDef);
 u32 GetBattlerMoveTargetType(u8 battlerId, u16 move);
 bool32 CanTargetBattler(u8 battlerAtk, u8 battlerDef, u16 move);
 bool8 IsMoveAffectedByParentalBond(u16 move, u8 battlerId);
 void CopyMonLevelAndBaseStatsToBattleMon(u32 battler, struct Pokemon *mon);
 void CopyMonAbilityAndTypesToBattleMon(u32 battler, struct Pokemon *mon);
 void RecalcBattlerStats(u32 battler, struct Pokemon *mon);
-void MulModifier(u16 *modifier, u16 val);
 bool32 IsAlly(u32 battlerAtk, u32 battlerDef);
 
 // Ability checks
@@ -244,10 +242,5 @@ void RemoveConfusionStatus(u8 battlerId);
 u8 GetBattlerGender(u8 battlerId);
 bool8 AreBattlersOfOppositeGender(u8 battler1, u8 battler2);
 u32 CalcSecondaryEffectChance(u8 battlerId, u8 secondaryEffectChance);
-
-static inline u32 ApplyModifier(uq4_12_t modifier, u32 val)
-{
-    return UQ_4_12_TO_INT((modifier * val) + UQ_4_12_ROUND);
-}
 
 #endif // GUARD_BATTLE_UTIL_H
