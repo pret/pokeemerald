@@ -8,7 +8,6 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Jump Kick has 50% recoil on miss")
 {
-    s16 recoil;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -25,7 +24,6 @@ SINGLE_BATTLE_TEST("Jump Kick has 50% recoil on miss")
 
 SINGLE_BATTLE_TEST("Jump Kick has 50% recoil on protect")
 {
-    s16 recoil;
     GIVEN {
         ASSUME(!gBattleMoves[MOVE_JUMP_KICK].ignoresProtect);
         PLAYER(SPECIES_WOBBUFFET);
@@ -53,5 +51,50 @@ SINGLE_BATTLE_TEST("Jump Kick has no recoil if no target")
         s32 maxHP = GetMonData(&PLAYER_PARTY[0], MON_DATA_MAX_HP);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HEALING_WISH, opponent);
         NOT HP_BAR(player, damage: maxHP / 2);
+    }
+}
+
+SINGLE_BATTLE_TEST("Jump Kick's recoil happens after Spiky Shield damage and Pokemon can faint from either of these")
+{
+    s16 hp, maxHp = 256;
+    bool32 faintOnSpiky = FALSE, faintOnJumpKick = FALSE;
+
+    PARAMETRIZE { hp = maxHp; }
+    PARAMETRIZE { hp = maxHp / 2; faintOnJumpKick = TRUE; } // Faints after Jump Kick's recoil
+    PARAMETRIZE { hp = maxHp / 8; faintOnSpiky = TRUE; } // Faints after Spiky Shield's recoil
+
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_SPIKY_SHIELD].effect == EFFECT_PROTECT);
+        PLAYER(SPECIES_WOBBUFFET) { HP(hp); MaxHP(maxHp); }
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        if (!faintOnJumpKick && !faintOnSpiky) {
+            TURN { MOVE(opponent, MOVE_SPIKY_SHIELD); MOVE(player, MOVE_JUMP_KICK, hit: FALSE); }
+        } else {
+            TURN { MOVE(opponent, MOVE_SPIKY_SHIELD); MOVE(player, MOVE_JUMP_KICK, hit: FALSE); SEND_OUT(player, 1); }
+        }
+        TURN { ; }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPIKY_SHIELD, opponent);
+        MESSAGE("Wobbuffet used Jump Kick!");
+        MESSAGE("Foe Wobbuffet protected itself!");
+        HP_BAR(player, damage: maxHp / 8);
+        MESSAGE("Wobbuffet was hurt by Foe Wobbuffet's Spiky Shield!");
+        if (faintOnSpiky){
+            MESSAGE("Wobbuffet fainted!");
+            MESSAGE("Go! Wynaut!");
+            NONE_OF {
+                MESSAGE("Wobbuffet kept going and crashed!");
+                HP_BAR(player);
+            }
+        } else {
+            MESSAGE("Wobbuffet kept going and crashed!");
+            HP_BAR(player);
+            if (faintOnJumpKick) {
+                MESSAGE("Wobbuffet fainted!");
+                MESSAGE("Go! Wynaut!");
+            }
+        }
     }
 }
