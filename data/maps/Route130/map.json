@@ -62,7 +62,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_130_LIECHI",
       "script": "BerryTreeScript",
-      "flag": "FLAG_TEMP_11"
+      "flag": "FLAG_TEMP_HIDE_MIRAGE_ISLAND_BERRY_TREE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
