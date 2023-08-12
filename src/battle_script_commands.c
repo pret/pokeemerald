@@ -8605,12 +8605,12 @@ static void HandleScriptMegaPrimalBurst(u32 caseId, u32 battlerId, u32 type)
     // Change species.
     if (caseId == 0)
     {
-        if (type == 0)
+        if (type == HANDLE_TYPE_MEGA_EVOLUTION)
         {
             if (!TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM))
                 TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE);
         }
-        else if (type == 1)
+        else if (type == HANDLE_TYPE_PRIMAL_REVERSION)
             TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_PRIMAL_REVERSION);
         else
             TryBattleFormChange(battlerId, FORM_CHANGE_BATTLE_ULTRA_BURST);
@@ -8626,9 +8626,9 @@ static void HandleScriptMegaPrimalBurst(u32 caseId, u32 battlerId, u32 type)
         UpdateHealthboxAttribute(gHealthboxSpriteIds[battlerId], mon, HEALTHBOX_ALL);
         if (side == B_SIDE_OPPONENT)
             SetBattlerShadowSpriteCallback(battlerId, gBattleMons[battlerId].species);
-        if (type == 0)
+        if (type == HANDLE_TYPE_MEGA_EVOLUTION)
             gBattleStruct->mega.alreadyEvolved[position] = TRUE;
-        if (type == 2)
+        if (type == HANDLE_TYPE_ULTRA_BURST)
             gBattleStruct->burst.alreadyBursted[position] = TRUE;
     }
 }
@@ -9686,21 +9686,21 @@ static void Cmd_various(void)
     case VARIOUS_HANDLE_MEGA_EVO:
     {
         VARIOUS_ARGS(u8 case_);
-        HandleScriptMegaPrimalBurst(cmd->case_, gActiveBattler, 0);
+        HandleScriptMegaPrimalBurst(cmd->case_, gActiveBattler, HANDLE_TYPE_MEGA_EVOLUTION);
         gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
     case VARIOUS_HANDLE_PRIMAL_REVERSION:
     {
         VARIOUS_ARGS(u8 case_);
-        HandleScriptMegaPrimalBurst(cmd->case_, gActiveBattler, 1);
+        HandleScriptMegaPrimalBurst(cmd->case_, gActiveBattler, HANDLE_TYPE_PRIMAL_REVERSION);
         gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
     case VARIOUS_HANDLE_ULTRA_BURST:
     {
         VARIOUS_ARGS(u8 case_);
-        HandleScriptMegaPrimalBurst(cmd->case_, gActiveBattler, 2);
+        HandleScriptMegaPrimalBurst(cmd->case_, gActiveBattler, HANDLE_TYPE_ULTRA_BURST);
         gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
