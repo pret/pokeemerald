@@ -1,5 +1,5 @@
 #include "global.h"
-#include "test.h"
+#include "test/test.h"
 #include "random.h"
 
 TEST("RandomUniform generates lo..hi")
