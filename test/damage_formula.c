@@ -1,5 +1,5 @@
 #include "global.h"
-#include "test_battle.h"
+#include "test/battle.h"
 
 // From https://bulbapedia.bulbagarden.net/wiki/Damage#Example
 
