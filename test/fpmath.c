@@ -1,5 +1,5 @@
 #include "global.h"
-#include "test.h"
+#include "test/test.h"
 
 TEST("uq4_12_add adds 4.12 numbers") {
     EXPECT_EQ(uq4_12_add(UQ_4_12(3.5), UQ_4_12(2.5)), UQ_4_12(6.0));

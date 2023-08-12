@@ -7,7 +7,7 @@
 #include "main.h"
 #include "malloc.h"
 #include "random.h"
-#include "test_battle.h"
+#include "test/battle.h"
 #include "window.h"
 
 #if defined(__INTELLISENSE__)

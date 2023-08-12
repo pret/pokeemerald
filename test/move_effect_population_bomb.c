@@ -1,5 +1,5 @@
 #include "global.h"
-#include "test_battle.h"
+#include "test/battle.h"
 
 SINGLE_BATTLE_TEST("Population Bomb can hit ten times")
 {

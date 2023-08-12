@@ -1,5 +1,5 @@
 #include "global.h"
-#include "test_battle.h"
+#include "test/battle.h"
 
 ASSUMPTIONS {
     ASSUME(gBattleMoves[MOVE_MINIMIZE].effect == EFFECT_MINIMIZE);

@@ -6,8 +6,8 @@
 #include "main.h"
 #include "malloc.h"
 #include "random.h"
-#include "test.h"
 #include "test_runner.h"
+#include "test/test.h"
 
 #define TIMEOUT_SECONDS 55
 
