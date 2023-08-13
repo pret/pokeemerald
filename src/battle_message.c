@@ -2307,7 +2307,7 @@ static const u8 *TryGetStatusString(u8 *src)
 
 // Ensure the defined length for an item name can contain the full defined length of a berry name.
 // This ensures that custom Enigma Berry names will fit in the text buffer at the top of BattleStringExpandPlaceholders.
-STATIC_ASSERT(BERRY_NAME_LENGTH + 1 + ARRAY_COUNT(sText_BerrySuffix) <= ITEM_NAME_LENGTH, BerryNameTooLong);
+STATIC_ASSERT(BERRY_NAME_LENGTH + ARRAY_COUNT(sText_BerrySuffix) <= ITEM_NAME_LENGTH, BerryNameTooLong);
 
 u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
 {
