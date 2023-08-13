@@ -2775,7 +2775,7 @@ static bool8 IsPlayerLinkLeader(void)
 
 void CreateContestMonFromParty(u8 partyIndex)
 {
-    u8 name[20];
+    u8 name[max(PLAYER_NAME_LENGTH + 1, POKEMON_NAME_BUFFER_SIZE)];
     u16 heldItem;
     s16 cool;
     s16 beauty;
@@ -2785,10 +2785,8 @@ void CreateContestMonFromParty(u8 partyIndex)
 
     StringCopy(name, gSaveBlock2Ptr->playerName);
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
-    {
         StripPlayerNameForLinkContest(name);
-    }
-    memcpy(gContestMons[gContestPlayerMonIndex].trainerName, name, 8);
+    memcpy(gContestMons[gContestPlayerMonIndex].trainerName, name, PLAYER_NAME_LENGTH + 1);
     if (gSaveBlock2Ptr->playerGender == MALE)
         gContestMons[gContestPlayerMonIndex].trainerGfxId = OBJ_EVENT_GFX_LINK_BRENDAN;
     else
@@ -6020,8 +6018,10 @@ static u8 GetMonNicknameLanguage(u8 *nickname)
     if (nickname[0] == EXT_CTRL_CODE_BEGIN && nickname[1] == EXT_CTRL_CODE_JPN)
         return GAME_LANGUAGE;
 
-    if (StringLength(nickname) < PLAYER_NAME_LENGTH - 1)
+    if (StringLength(nickname) <= 5)
     {
+        // Name is short enough that it might be Japanese.
+        // Make sure  all the character values are valid latin name characters.
         while (*nickname != EOS)
         {
             if ((*nickname >= CHAR_A && *nickname <= CHAR_z)
@@ -6039,12 +6039,18 @@ static u8 GetMonNicknameLanguage(u8 *nickname)
                 || *nickname == CHAR_DBL_QUOTE_LEFT
                 || *nickname == CHAR_DBL_QUOTE_RIGHT
                 || *nickname == CHAR_SGL_QUOTE_LEFT
-                || *nickname == CHAR_DBL_QUOTE_LEFT) // Most likely a typo, CHAR_SGL_QUOTE_RIGHT should be here instead.
+#ifdef BUGFIX
+                || *nickname == CHAR_SGL_QUOTE_RIGHT
+#else
+                || *nickname == CHAR_DBL_QUOTE_LEFT // Most likely a typo, CHAR_SGL_QUOTE_RIGHT should be here instead.
+#endif
+                )
             {
                 nickname++;
             }
             else
             {
+                // Invalid latin name character, assume the name was Japanese.
                 ret = LANGUAGE_JAPANESE;
                 break;
             }
@@ -6101,7 +6107,7 @@ void StripPlayerAndMonNamesForLinkContest(struct ContestPokemon *mon, s32 langua
     name = mon->trainerName;
     if (language == LANGUAGE_JAPANESE)
     {
-        name[PLAYER_NAME_LENGTH] = EOS;
+        name[7] = EOS;
         name[6] = name[4];
         name[5] = name[3];
         name[4] = name[2];
