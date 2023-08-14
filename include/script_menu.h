@@ -2,6 +2,7 @@
 #define GUARD_SCRIPT_MENU_H
 
 #include "list_menu.h"
+#include "constants/script_menu.h"
 
 // The default size the stack for dynamic multichoice is initialized to
 // If you try to push an element when the stack is full, it will be reallocated

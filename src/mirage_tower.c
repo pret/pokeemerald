@@ -8,6 +8,7 @@
 #include "gpu_regs.h"
 #include "menu.h"
 #include "random.h"
+#include "palette.h"
 #include "palette_util.h"
 #include "script.h"
 #include "sound.h"
@@ -74,7 +75,7 @@ static void Task_FossilFallAndSink(u8);
 static void SpriteCB_FallingFossil(struct Sprite *);
 static void UpdateDisintegrationEffect(u8 *, u16, u8, u8, u8);
 
-static const u8 sBlankTile_Gfx[32] = {0};
+static const u8 ALIGNED(2) sBlankTile_Gfx[32] = {0};
 static const u8 sMirageTower_Gfx[] = INCBIN_U8("graphics/misc/mirage_tower.4bpp");
 static const u16 sMirageTowerTilemap[] = INCBIN_U16("graphics/misc/mirage_tower.bin");
 static const u16 sFossil_Pal[] = INCBIN_U16("graphics/object_events/pics/misc/fossil.gbapal"); // Unused
@@ -163,7 +164,7 @@ static const struct SpriteTemplate sSpriteTemplate_FallingFossil =
 
 const struct PulseBlendSettings gMirageTowerPulseBlendSettings = {
     .blendColor = RGB(27, 25, 16),
-    .paletteOffset = 0x61,
+    .paletteOffset = BG_PLTT_ID(6) + 1,
     .numColors = 15,
     .delay = 5,
     .numFadeCycles = -1,

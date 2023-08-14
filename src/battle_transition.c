@@ -1069,7 +1069,7 @@ static void Task_BattleTransition(u8 taskId)
 static bool8 Transition_StartIntro(struct Task *task)
 {
     SetWeatherScreenFadeOut();
-    CpuCopy32(gPlttBufferFaded, gPlttBufferUnfaded, sizeof(gPlttBufferUnfaded));
+    CpuCopy32(gPlttBufferFaded, gPlttBufferUnfaded, PLTT_SIZE);
     if (sTasks_Intro[task->tTransitionId] != NULL)
     {
         CreateTask(sTasks_Intro[task->tTransitionId], 4);
@@ -4498,7 +4498,7 @@ static bool8 FrontierSquares_Shrink(struct Task *task)
         switch (task->tShrinkState)
         {
         case 0:
-            for (i = 250; i < 255; i++)
+            for (i = BG_PLTT_ID(15) + 10; i < BG_PLTT_ID(15) + 15; i++)
             {
                 gPlttBufferUnfaded[i] = RGB_BLACK;
                 gPlttBufferFaded[i] = RGB_BLACK;
