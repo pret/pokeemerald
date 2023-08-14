@@ -5128,7 +5128,7 @@ BattleScript_EffectBatonPass::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectRapidSpin::
-.if B_SPEED_BUFFING_RAPID_SPIN == GEN_8
+.if B_SPEED_BUFFING_RAPID_SPIN >= GEN_8
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
