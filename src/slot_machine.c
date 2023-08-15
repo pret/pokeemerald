@@ -4672,9 +4672,9 @@ static void SpriteCB_DigitalDisplay_Reel(struct Sprite *sprite)
     {
     case 0:
         sprite->x += 4;
-        if (sprite->x >= 0xd0)
+        if (sprite->x >= DISPLAY_WIDTH - 32)
         {
-            sprite->x = 0xd0;
+            sprite->x = DISPLAY_WIDTH - 32;
             sprite->sState++;
         }
         break;
@@ -4684,7 +4684,7 @@ static void SpriteCB_DigitalDisplay_Reel(struct Sprite *sprite)
         break;
     case 2:
         sprite->x += 4;
-        if (sprite->x >= 0x110)
+        if (sprite->x >= DISPLAY_WIDTH + 32)
             sprite->sState++;
         break;
     case 3:
@@ -4700,9 +4700,9 @@ static void SpriteCB_DigitalDisplay_Time(struct Sprite *sprite)
     {
     case 0:
         sprite->x -= 4;
-        if (sprite->x <= 0xd0)
+        if (sprite->x <= DISPLAY_WIDTH - 32)
         {
-            sprite->x = 0xd0;
+            sprite->x = DISPLAY_WIDTH - 32;
             sprite->sState++;
         }
         break;
@@ -4712,7 +4712,7 @@ static void SpriteCB_DigitalDisplay_Time(struct Sprite *sprite)
         break;
     case 2:
         sprite->x -= 4;
-        if (sprite->x <= 0x90)
+        if (sprite->x <= 144)
             sprite->sState++;
         break;
     case 3:
@@ -4738,9 +4738,9 @@ static void SpriteCB_DigitalDisplay_ReelTimeNumber(struct Sprite *sprite)
         break;
     case 2:
         sprite->x += 4;
-        if (sprite->x >= 0xd0)
+        if (sprite->x >= DISPLAY_WIDTH - 32)
         {
-            sprite->x = 0xd0;
+            sprite->x = DISPLAY_WIDTH - 32;
             sprite->sState++;
         }
         break;
@@ -4750,7 +4750,7 @@ static void SpriteCB_DigitalDisplay_ReelTimeNumber(struct Sprite *sprite)
         break;
     case 4:
         sprite->x += 4;
-        if (sprite->x >= 0xf8)
+        if (sprite->x >= DISPLAY_WIDTH + 8)
             sprite->sState++;
         break;
     case 5:

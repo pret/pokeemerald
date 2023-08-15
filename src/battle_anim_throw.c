@@ -2117,7 +2117,7 @@ void AnimTask_SwapMonSpriteToFromSubstitute(u8 taskId)
 
         gTasks[taskId].data[0] &= 0xFF;
         x = gSprites[spriteId].x + gSprites[spriteId].x2 + 32;
-        if (x > 304)
+        if (x > DISPLAY_WIDTH + 64)
             gTasks[taskId].data[10]++;
         break;
     case 1:

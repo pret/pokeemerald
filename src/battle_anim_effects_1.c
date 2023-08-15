@@ -3578,13 +3578,13 @@ static void AnimFlyingParticle(struct Sprite *sprite)
     {
         sprite->data[4] = 0;
         sprite->data[2] = gBattleAnimArgs[3];
-        sprite->x = 0xFFF0;
+        sprite->x = -16;
     }
     else
     {
         sprite->data[4] = 1;
         sprite->data[2] = -gBattleAnimArgs[3];
-        sprite->x = 0x100;
+        sprite->x = DISPLAY_WIDTH + 16;
     }
 
     sprite->data[1] = gBattleAnimArgs[1];
@@ -3623,7 +3623,7 @@ static void AnimFlyingParticle_Step(struct Sprite *sprite)
     sprite->data[0] = (sprite->data[3] * a) & 0xFF;
     if (!sprite->data[4])
     {
-        if (sprite->x2 + sprite->x <= 0xF7)
+        if (sprite->x2 + sprite->x < DISPLAY_WIDTH + 8)
             return;
     }
     else

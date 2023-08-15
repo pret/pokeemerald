@@ -6,6 +6,8 @@
 #include "contest_effect.h"
 #include "constants/moves.h"
 
+#define AI_ACTION_DONE (1 << 0)
+
 extern const u8 *gAIScriptPtr;
 extern const u8 *gContestAI_ScriptsTable[];
 
@@ -362,9 +364,9 @@ static void ContestAI_DoAIProcessing(void)
                 else
                 {
                     eContestAI.moveScores[eContestAI.nextMoveIndex] = 0; // don't consider a move that doesn't exist.
-                    eContestAI.aiAction |= 1;
+                    eContestAI.aiAction |= AI_ACTION_DONE;
                 }
-                if (eContestAI.aiAction & 1)
+                if (eContestAI.aiAction & AI_ACTION_DONE)
                 {
                     eContestAI.nextMoveIndex++;
                     if (eContestAI.nextMoveIndex < MAX_MON_MOVES)
@@ -372,7 +374,7 @@ static void ContestAI_DoAIProcessing(void)
                     else
                         // aiState = CONTESTAI_FINISHED
                         eContestAI.aiState++;
-                    eContestAI.aiAction &= 0xFE; // TODO: Define action flags
+                    eContestAI.aiAction &= ~AI_ACTION_DONE;
                 }
                 break;
         }
@@ -1667,7 +1669,7 @@ static void ContestAICmd_call(void)
 static void ContestAICmd_end(void)
 {
     if (!AIStackPop())
-        eContestAI.aiAction |= 1;
+        eContestAI.aiAction |= AI_ACTION_DONE;
 }
 
 static void AIStackPushVar(const u8 *ptr)
