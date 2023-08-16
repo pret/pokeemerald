@@ -2773,11 +2773,12 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 {
                     do
                     {
+                        // Pick either MOVE_EFFECT_SLEEP, MOVE_EFFECT_POISON or MOVE_EFFECT_BURN
                         gBattleCommunication[MOVE_EFFECT_BYTE] = Random() & 3;
                     } while (gBattleCommunication[MOVE_EFFECT_BYTE] == 0);
-
+                    // Replace MOVE_EFFECT_BURN with MOVE_EFFECT_PARALYSIS
                     if (gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_BURN)
-                        gBattleCommunication[MOVE_EFFECT_BYTE] += 2; // 5 MOVE_EFFECT_PARALYSIS
+                        gBattleCommunication[MOVE_EFFECT_BYTE] += (MOVE_EFFECT_PARALYSIS - MOVE_EFFECT_BURN);
 
                     gBattleCommunication[MOVE_EFFECT_BYTE] += MOVE_EFFECT_AFFECTS_USER;
                     BattleScriptPushCursor();
@@ -3956,7 +3957,7 @@ u8 IsMonDisobedient(void)
         {
             // Randomly select, then print a disobedient string
             // B_MSG_LOAFING, B_MSG_WONT_OBEY, B_MSG_TURNED_AWAY, or B_MSG_PRETEND_NOT_NOTICE
-            gBattleCommunication[MULTISTRING_CHOOSER] = Random() & (NUM_LOAF_STRINGS - 1);
+            gBattleCommunication[MULTISTRING_CHOOSER] = MOD(Random(), NUM_LOAF_STRINGS);
             gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAround;
             return 1;
         }
@@ -3964,7 +3965,7 @@ u8 IsMonDisobedient(void)
         {
             do
             {
-                gCurrMovePos = gChosenMovePos = Random() & (MAX_MON_MOVES - 1);
+                gCurrMovePos = gChosenMovePos = MOD(Random(), MAX_MON_MOVES);
             } while (gBitTable[gCurrMovePos] & calc);
 
             gCalledMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
@@ -4007,7 +4008,7 @@ u8 IsMonDisobedient(void)
         {
             // Randomly select, then print a disobedient string
             // B_MSG_LOAFING, B_MSG_WONT_OBEY, B_MSG_TURNED_AWAY, or B_MSG_PRETEND_NOT_NOTICE
-            gBattleCommunication[MULTISTRING_CHOOSER] = Random() & (NUM_LOAF_STRINGS - 1);
+            gBattleCommunication[MULTISTRING_CHOOSER] = MOD(Random(), NUM_LOAF_STRINGS);
             gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAround;
             return 1;
         }

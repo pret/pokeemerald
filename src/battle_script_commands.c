@@ -7350,7 +7350,7 @@ static void Cmd_tryconversiontypechange(void)
     {
         do
         {
-            while ((moveChecked = Random() & (MAX_MON_MOVES - 1)) >= validMoves);
+            while ((moveChecked = MOD(Random(), MAX_MON_MOVES)) >= validMoves);
 
             moveType = gBattleMoves[gBattleMons[gBattlerAttacker].moves[moveChecked]].type;
 
@@ -8189,7 +8189,7 @@ static void Cmd_trychoosesleeptalkmove(void)
 
         do
         {
-            movePosition = Random() & (MAX_MON_MOVES - 1);
+            movePosition = MOD(Random(), MAX_MON_MOVES);
         } while ((gBitTable[movePosition] & unusableMovesBits));
 
         gCalledMove = gBattleMons[gBattlerAttacker].moves[movePosition];

@@ -1588,7 +1588,7 @@ static void OpponentHandleChooseMove(void)
             u16 move;
             do
             {
-                chosenMoveId = Random() & 3;
+                chosenMoveId = MOD(Random(), MAX_MON_MOVES);
                 move = moveInfo->moves[chosenMoveId];
             } while (move == MOVE_NONE);
 
