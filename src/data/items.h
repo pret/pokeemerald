@@ -6,7 +6,7 @@
     #define EVO_HELD_ITEM_FIELD_FUNC ItemUseOutOfBattle_CannotUse
 #endif
 
-#if I_GEM_BOOST_POWER >= GEN_5
+#if I_GEM_BOOST_POWER >= GEN_6
     #define GEM_BOOST_PARAM 30
 #else
     #define GEM_BOOST_PARAM 50
