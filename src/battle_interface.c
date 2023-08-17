@@ -1600,7 +1600,6 @@ void HideBurstTriggerSprite(void)
         return;
     ChangeBurstTriggerSprite(gBattleStruct->burst.triggerSpriteId, 0);
     gSprites[gBattleStruct->burst.triggerSpriteId].tHide = TRUE;
-
 }
 
 void DestroyBurstTriggerSprite(void)
