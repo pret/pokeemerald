@@ -1596,11 +1596,11 @@ bool32 IsBurstTriggerSpriteActive(void)
 
 void HideBurstTriggerSprite(void)
 {
-    if (gBattleStruct->burst.triggerSpriteId != 0xFF)
-    {
-        ChangeBurstTriggerSprite(gBattleStruct->burst.triggerSpriteId, 0);
-        gSprites[gBattleStruct->burst.triggerSpriteId].tHide = TRUE;
-    }
+    if (gBattleStruct->burst.triggerSpriteId >= MAX_SPRITES)
+        return;
+    ChangeBurstTriggerSprite(gBattleStruct->burst.triggerSpriteId, 0);
+    gSprites[gBattleStruct->burst.triggerSpriteId].tHide = TRUE;
+
 }
 
 void DestroyBurstTriggerSprite(void)
