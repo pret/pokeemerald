@@ -3113,7 +3113,10 @@ static void BattleStartClearSetData(void)
 
     gBattleStruct->mega.triggerSpriteId = 0xFF;
 
-    gBattleStruct->stickyWebUser = 0xFF;
+    for (i = 0; i < ARRAY_COUNT(gSideTimers); i++)
+    {
+        gSideTimers[i].stickyWebBattlerId = 0xFF;
+    }
     gBattleStruct->appearedInBattle = 0;
     gBattleStruct->beatUpSlot = 0;
 
@@ -3219,8 +3222,12 @@ void SwitchInClearSetData(void)
     gBattleStruct->lastMoveFailed &= ~(gBitTable[gActiveBattler]);
     gBattleStruct->palaceFlags &= ~(gBitTable[gActiveBattler]);
 
-    if (gActiveBattler == gBattleStruct->stickyWebUser)
-        gBattleStruct->stickyWebUser = 0xFF;    // Switched into sticky web user slot so reset it
+    for (i = 0; i < ARRAY_COUNT(gSideTimers); i++)
+    {
+        // Switched into sticky web user slot, so reset stored battler ID
+        if (gSideTimers[i].stickyWebBattlerId == gActiveBattler)
+            gSideTimers[i].stickyWebBattlerId = 0xFF;
+    }
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -3333,8 +3340,12 @@ void FaintClearSetData(void)
 
     gBattleStruct->palaceFlags &= ~(gBitTable[gActiveBattler]);
 
-    if (gActiveBattler == gBattleStruct->stickyWebUser)
-        gBattleStruct->stickyWebUser = 0xFF;    // User of sticky web fainted, so reset the stored battler ID
+    for (i = 0; i < ARRAY_COUNT(gSideTimers); i++)
+    {
+        // User of sticky web fainted, so reset the stored battler ID
+        if (gSideTimers[i].stickyWebBattlerId == gActiveBattler)
+            gSideTimers[i].stickyWebBattlerId = 0xFF;
+    }
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -4527,7 +4538,11 @@ static void HandleTurnActionSelectionState(void)
         {
             // if we choose to throw a ball with our second mon, skip the action of the first
             // (if we have chosen throw ball with first, second's is already skipped)
-            gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)] = B_ACTION_NOTHING_FAINTED;
+            // if throwing a ball in a wild battle with an in-game partner, skip partner's turn when throwing a ball
+            if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+                gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)] = B_ACTION_NOTHING_FAINTED;
+            else
+                gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)] = B_ACTION_NOTHING_FAINTED;
         }
 
         gBattleMainFunc = SetActionsAndBattlersTurnOrder;

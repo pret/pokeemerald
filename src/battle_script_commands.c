@@ -1414,7 +1414,7 @@ static void Cmd_attackcanceler(void)
         return;
     }
 
-    // Z-moves and Max Moves bypass protection, but deal reduced damage (factored in CalcFinalDmg)
+    // Z-moves and Max Moves bypass protection, but deal reduced damage (factored in AccumulateOtherModifiers)
     if (gBattleStruct->zmove.active && IS_BATTLER_PROTECTED(gBattlerTarget))
     {
         BattleScriptPush(cmd->nextInstr);
@@ -8518,8 +8518,9 @@ static bool32 IsTeatimeAffected(u32 battlerId)
 
 #define UPDATE_COURTCHANGED_BATTLER(structField)\
 {                                               \
-    sideTimerPlayer->structField ^= BIT_SIDE;        \
-    sideTimerOpp->structField ^= BIT_SIDE;        \
+    temp = sideTimerPlayer->structField;        \
+    sideTimerPlayer->structField = BATTLE_OPPOSITE(sideTimerOpp->structField);        \
+    sideTimerOpp->structField = BATTLE_OPPOSITE(temp);        \
 }                                               \
 
 static bool32 CourtChangeSwapSideStatuses(void)
@@ -8554,9 +8555,7 @@ static bool32 CourtChangeSwapSideStatuses(void)
     UPDATE_COURTCHANGED_BATTLER(auroraVeilBattlerId);
     UPDATE_COURTCHANGED_BATTLER(tailwindBattlerId);
     UPDATE_COURTCHANGED_BATTLER(luckyChantBattlerId);
-
-    // For Mirror Armor only
-    gBattleStruct->stickyWebUser = gBattlerAttacker;
+    UPDATE_COURTCHANGED_BATTLER(stickyWebBattlerId);
 
     // Track which side originally set the Sticky Web
     SWAP(sideTimerPlayer->stickyWebBattlerSide, sideTimerOpp->stickyWebBattlerSide, temp);
@@ -8594,33 +8593,6 @@ static void HandleScriptMegaPrimal(u32 caseId, u32 battlerId, bool32 isMega)
         if (isMega)
             gBattleStruct->mega.alreadyEvolved[position] = TRUE;
     }
-}
-
-static bool32 CanTeleport(u8 battlerId)
-{
-    struct Pokemon *party = GetBattlerParty(battlerId);
-    u32 species, count, i;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
-        if (species != SPECIES_NONE && species != SPECIES_EGG && GetMonData(&party[i], MON_DATA_HP) != 0)
-            count++;
-    }
-
-    switch (GetBattlerSide(battlerId))
-    {
-    case B_SIDE_OPPONENT:
-        if (count == 1 || gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-            return FALSE;
-        break;
-    case B_SIDE_PLAYER:
-        if (count == 1 || (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && count <= 2))
-            return FALSE;
-        break;
-    }
-
-    return TRUE;
 }
 
 // Return True if the order was changed, and false if the order was not changed(for example because the target would move after the attacker anyway).
@@ -10571,8 +10543,8 @@ static void Cmd_various(void)
         //  If Pokémon which set up Sticky Web is not on the field, no Pokémon have their Speed lowered."
         gBattlerAttacker = gBattlerTarget;  // Initialize 'fail' condition
         SET_STATCHANGER(STAT_SPEED, 1, TRUE);
-        if (gBattleStruct->stickyWebUser != 0xFF)
-            gBattlerAttacker = gBattleStruct->stickyWebUser;
+        if (gSideTimers[GetBattlerSide(gActiveBattler)].stickyWebBattlerId != 0xFF)
+            gBattlerAttacker = gSideTimers[GetBattlerSide(gActiveBattler)].stickyWebBattlerId;
         break;
     }
     case VARIOUS_CUT_1_3_HP_RAISE_STATS:
@@ -13640,7 +13612,7 @@ static void Cmd_jumpifnopursuitswitchdmg(void)
         && !(gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP | STATUS1_FREEZE))
         && gBattleMons[gBattlerAttacker].hp
         && !gDisableStructs[gBattlerTarget].truantCounter
-        && gChosenMoveByBattler[gBattlerTarget] == MOVE_PURSUIT)
+        && gBattleMoves[gChosenMoveByBattler[gBattlerTarget]].effect == EFFECT_PURSUIT)
     {
         s32 i;
 
@@ -13650,7 +13622,7 @@ static void Cmd_jumpifnopursuitswitchdmg(void)
                 gActionsByTurnOrder[i] = B_ACTION_TRY_FINISH;
         }
 
-        gCurrentMove = MOVE_PURSUIT;
+        gCurrentMove = gChosenMoveByBattler[gBattlerTarget];
         gCurrMovePos = gChosenMovePos = *(gBattleStruct->chosenMovePositions + gBattlerTarget);
         gBattlescriptCurrInstr = cmd->nextInstr;
         gBattleScripting.animTurn = 1;
@@ -13834,9 +13806,9 @@ static void Cmd_setstickyweb(void)
     else
     {
         gSideStatuses[targetSide] |= SIDE_STATUS_STICKY_WEB;
+        gSideTimers[targetSide].stickyWebBattlerId = gBattlerAttacker; // For Mirror Armor
         gSideTimers[targetSide].stickyWebBattlerSide = GetBattlerSide(gBattlerAttacker); // For Court Change/Defiant - set this to the user's side
         gSideTimers[targetSide].stickyWebAmount = 1;
-        gBattleStruct->stickyWebUser = gBattlerAttacker;    // For Mirror Armor
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
@@ -15070,10 +15042,10 @@ static void Cmd_pursuitdoubles(void)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
         && !(gAbsentBattlerFlags & gBitTable[gActiveBattler])
         && gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_MOVE
-        && gChosenMoveByBattler[gActiveBattler] == MOVE_PURSUIT)
+        && gBattleMoves[gChosenMoveByBattler[gActiveBattler]].effect == EFFECT_PURSUIT)
     {
         gActionsByTurnOrder[gActiveBattler] = B_ACTION_TRY_FINISH;
-        gCurrentMove = MOVE_PURSUIT;
+        gCurrentMove = gChosenMoveByBattler[gActiveBattler];
         gBattlescriptCurrInstr = cmd->nextInstr;
         gBattleScripting.animTurn = 1;
         gBattleScripting.savedBattler = gBattlerAttacker;
@@ -16098,13 +16070,6 @@ void BS_GetBattlerSide(void)
 {
     NATIVE_ARGS(u8 battler);
     gBattleCommunication[0] = GetBattlerSide(GetBattlerForBattleScript(cmd->battler));
-    gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-void BS_CanTeleport(void)
-{
-    NATIVE_ARGS(u8 battler);
-    gBattleCommunication[0] = CanTeleport(cmd->battler);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

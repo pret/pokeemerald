@@ -4023,6 +4023,8 @@ BattleScript_MoveMissedDoDamage::
 .if B_CRASH_IF_TARGET_IMMUNE < GEN_4
 	jumpifhalfword CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE, BattleScript_MoveEnd
 .endif
+	moveendcase MOVEEND_PROTECT_LIKE_EFFECT @ Spiky Shield's damage happens before recoil.
+	jumpifhasnohp BS_ATTACKER, BattleScript_MoveEnd
 	printstring STRINGID_PKMNCRASHED
 	waitmessage B_WAIT_TIME_LONG
 	damagecalc
@@ -5048,7 +5050,7 @@ BattleScript_EffectBatonPass::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectRapidSpin::
-.if B_SPEED_BUFFING_RAPID_SPIN == GEN_8
+.if B_SPEED_BUFFING_RAPID_SPIN >= GEN_8
 	call BattleScript_EffectHit_Ret
 	jumpifhalfword CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE, BattleScript_MoveEnd
 	setmoveeffect MOVE_EFFECT_RAPIDSPIN | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
@@ -5300,15 +5302,14 @@ BattleScript_EffectHurricane:
 BattleScript_EffectTeleport:
 	attackcanceler
 	attackstring
-	ppreduce
 .if B_TELEPORT_BEHAVIOR >= GEN_7
-	canteleport BS_ATTACKER
-	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_EffectTeleportNew
-	goto BattleScript_ButItFailed
+	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_EffectBatonPass
+	jumpifside BS_ATTACKER, B_SIDE_PLAYER, BattleScript_EffectBatonPass
 .else
 	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_ButItFailed
 .endif
 BattleScript_EffectTeleportTryToRunAway:
+	ppreduce
 	getifcantrunfrombattle BS_ATTACKER
 	jumpifbyte CMP_EQUAL, gBattleCommunication, BATTLE_RUN_FORBIDDEN, BattleScript_ButItFailed
 	jumpifbyte CMP_EQUAL, gBattleCommunication, BATTLE_RUN_FAILURE, BattleScript_PrintAbilityMadeIneffective
@@ -5317,29 +5318,6 @@ BattleScript_EffectTeleportTryToRunAway:
 	printstring STRINGID_PKMNFLEDFROMBATTLE
 	waitmessage B_WAIT_TIME_LONG
 	setoutcomeonteleport BS_ATTACKER
-	goto BattleScript_MoveEnd
-
-BattleScript_EffectTeleportNew:
-	getbattlerside BS_ATTACKER
-	jumpifbyte CMP_EQUAL, gBattleCommunication, B_SIDE_OPPONENT, BattleScript_EffectTeleportTryToRunAway
-	attackanimation
-	waitanimation
-	openpartyscreen BS_ATTACKER, BattleScript_EffectTeleportNewEnd
-	switchoutabilities BS_ATTACKER
-	waitstate
-	switchhandleorder BS_ATTACKER, 2
-	returntoball BS_ATTACKER
-	getswitchedmondata BS_ATTACKER
-	switchindataupdate BS_ATTACKER
-	hpthresholds BS_ATTACKER
-	trytoclearprimalweather
-	printstring STRINGID_EMPTYSTRING3
-	waitmessage 1
-	printstring STRINGID_SWITCHINMON
-	switchinanim BS_ATTACKER, TRUE
-	waitstate
-	switchineffects BS_ATTACKER
-BattleScript_EffectTeleportNewEnd:
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectBeatUp::

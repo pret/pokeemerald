@@ -1,5 +1,5 @@
 #include "global.h"
-#include "test.h"
+#include "test/test.h"
 #include "random.h"
 
 // We expect each element to have an indexSum of 3.5 * 1024.

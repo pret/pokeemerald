@@ -1318,7 +1318,7 @@
 	.2byte \holdEffect
 	.4byte \jumpInstr
 	.endm
-	
+
 	.macro dostockpilestatchangeswearoff, battler:req, statChangeInstr:req
 	callnative BS_DoStockpileStatChangesWearOff
 	.byte \battler
@@ -1354,7 +1354,7 @@
 	.macro setsnow
 	callnative BS_SetSnow
 	.endm
-	
+
 	.macro setzeffect
 	callnative BS_SetZEffect
 	.endm
@@ -1362,12 +1362,6 @@
 	@ Used by effects that may proc Symbiosis but do not call removeitem.
 	.macro trysymbiosis
 	callnative BS_TrySymbiosis
-	.endm
-
-	@ returns TRUE or FALSE to gBattleCommunication[0]
-	.macro canteleport battler:req
-	callnative BS_CanTeleport
-	.byte \battler
 	.endm
 
 	@ returns B_SIDE_x to gBattleCommunication[0]
@@ -2083,7 +2077,7 @@
 	.macro swapsidestatuses
 	various BS_ATTACKER, VARIOUS_SWAP_SIDE_STATUSES
 	.endm
-	
+
 	.macro swapstats stat:req
 	various BS_ATTACKER, VARIOUS_SWAP_STATS
 	.byte \stat
@@ -2182,6 +2176,11 @@
 
 	.macro jumpifmovehadnoeffect jumpInstr:req
 	jumpifbyte CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_NO_EFFECT, \jumpInstr
+	.endm
+
+	.macro jumpifside battler:req, side:req, equalJumpInstr:req
+	getbattlerside \battler
+	jumpifbyte CMP_EQUAL, gBattleCommunication, \side, \equalJumpInstr
 	.endm
 
 	.macro jumpifbattletype flags:req, jumpInstr:req
