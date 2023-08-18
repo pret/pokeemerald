@@ -1148,6 +1148,8 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
 #if P_GEN_7_POKEMON == TRUE
     [SPECIES_DECIDUEYE_HISUIAN] = _("Decidueye"),
 #endif
+    [SPECIES_WOOPER_PALDEAN] = _("Wooper"),
+    [SPECIES_TAUROS_PALDEAN] = _("Tauros"),
 
     // Cosplay Pikachu
     [SPECIES_PIKACHU_COSPLAY] = _("Pikachu"),
@@ -1445,4 +1447,26 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_CALYREX_SHADOW_RIDER] = _("Calyrex"),
     [SPECIES_BASCULEGION_FEMALE] = _("Bsculegion"),
 #endif
+#if P_GEN_9_POKEMON == TRUE
+    // Oinkologne
+    [SPECIES_OINKOLOGNE_FEMALE] = _("Oinkologne"),
+    // Maushold
+    [SPECIES_MAUSHOLD_FAMILY_OF_THREE] = _("Maushold"),
+    // Squawkabilly
+    [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] = _("Squawkabil"),
+    [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] = _("Squawkabil"),
+    [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE] = _("Squawkabil"),
+    // Palafin
+    [SPECIES_PALAFIN_HERO] = _("Palafin"),
+    // Tatsugiri
+    [SPECIES_TATSUGIRI_DROOPY] = _("Tatsugiri"),
+    [SPECIES_TATSUGIRI_STRETCHY] = _("Tatsugiri"),
+    // Dudunsparce
+    [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = _("Dudunsparc"),
+    // Gimmighoul
+    [SPECIES_GIMMIGHOUL_ROAMING] = _("Gimmighoul"),
+#endif
+    // Tauros-Paldea
+    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = _("Tauros"),
+    [SPECIES_TAUROS_PALDEAN_AQUA_BREED] = _("Tauros"),
 };

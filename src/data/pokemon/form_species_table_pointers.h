@@ -39,6 +39,7 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_KANGASKHAN] = sKangaskhanFormSpeciesIdTable,
     [SPECIES_MR_MIME] = sMrMimeFormSpeciesIdTable,
     [SPECIES_PINSIR] = sPinsirFormSpeciesIdTable,
+    [SPECIES_TAUROS] = sTaurosFormSpeciesIdTable,
     [SPECIES_GYARADOS] = sGyaradosFormSpeciesIdTable,
     [SPECIES_AERODACTYL] = sAerodactylFormSpeciesIdTable,
     [SPECIES_ARTICUNO] = sArticunoFormSpeciesIdTable,
@@ -48,6 +49,7 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_TYPHLOSION] = sTyphlosionFormSpeciesIdTable,
     [SPECIES_PICHU] = sPichuFormSpeciesIdTable,
     [SPECIES_AMPHAROS] = sAmpharosFormSpeciesIdTable,
+    [SPECIES_WOOPER] = sWooperFormSpeciesIdTable,
     [SPECIES_SLOWKING] = sSlowkingFormSpeciesIdTable,
     [SPECIES_QWILFISH] = sQwilfishFormSpeciesIdTable,
     [SPECIES_SNEASEL] = sSneaselFormSpeciesIdTable,
@@ -173,6 +175,15 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_ENAMORUS] = sEnamorusFormSpeciesIdTable,
     [SPECIES_BASCULEGION] = sBasculegionFormSpeciesIdTable,
 #endif
+#if P_GEN_9_POKEMON == TRUE
+    [SPECIES_OINKOLOGNE] = sOinkologneFormSpeciesIdTable,
+    [SPECIES_MAUSHOLD] = sMausholdFormSpeciesIdTable,
+    [SPECIES_SQUAWKABILLY] = sSquawkabillyFormSpeciesIdTable,
+    [SPECIES_PALAFIN] = sPalafinFormSpeciesIdTable,
+    [SPECIES_TATSUGIRI] = sTatsugiriFormSpeciesIdTable,
+    [SPECIES_DUDUNSPARCE] = sDudunsparceFormSpeciesIdTable,
+    [SPECIES_GIMMIGHOUL] = sGimmighoulFormSpeciesIdTable,
+#endif
     // Megas
     [SPECIES_VENUSAUR_MEGA] = sVenusaurFormSpeciesIdTable,
     [SPECIES_CHARIZARD_MEGA_X] = sCharizardFormSpeciesIdTable,
@@ -295,6 +306,8 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
 #if P_GEN_7_POKEMON == TRUE
     [SPECIES_DECIDUEYE_HISUIAN] = sDecidueyeFormSpeciesIdTable,
 #endif
+    [SPECIES_WOOPER_PALDEAN] = sWooperFormSpeciesIdTable,
+    [SPECIES_TAUROS_PALDEAN] = sTaurosFormSpeciesIdTable,
     // Misc Forms
     // Cosplay Pikachu
     [SPECIES_PIKACHU_COSPLAY] = sPikachuFormSpeciesIdTable,
@@ -595,9 +608,25 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_BASCULEGION_FEMALE] = sBasculegionFormSpeciesIdTable,
 #endif
 #if P_GEN_9_POKEMON == TRUE
+    // Oinkologne
+    [SPECIES_OINKOLOGNE_FEMALE] = sOinkologneFormSpeciesIdTable,
+    // Maushold
+    [SPECIES_MAUSHOLD_FAMILY_OF_THREE] = sMausholdFormSpeciesIdTable,
     // Squawkabilly
     [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] = sSquawkabillyFormSpeciesIdTable,
     [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] = sSquawkabillyFormSpeciesIdTable,
     [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE] = sSquawkabillyFormSpeciesIdTable,
+    // Palafin
+    [SPECIES_PALAFIN_HERO] = sPalafinFormSpeciesIdTable,
+    // Tatsugiri
+    [SPECIES_TATSUGIRI_DROOPY] = sTatsugiriFormSpeciesIdTable,
+    [SPECIES_TATSUGIRI_STRETCHY] = sTatsugiriFormSpeciesIdTable,
+    // Dudunsparce
+    [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = sDudunsparceFormSpeciesIdTable,
+    // Gimmighoul
+    [SPECIES_GIMMIGHOUL_ROAMING] = sGimmighoulFormSpeciesIdTable,
 #endif
+    // Tauros-Paldea
+    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = sTaurosFormSpeciesIdTable,
+    [SPECIES_TAUROS_PALDEAN_AQUA_BREED] = sTaurosFormSpeciesIdTable,
 };
