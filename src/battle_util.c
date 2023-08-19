@@ -4238,6 +4238,21 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                     effect++;
                 }
                 break;
+            case WEATHER_SNOW:
+                if (!(gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)))
+                {
+                    #if B_OVERWORLD_SNOW >= GEN_9
+                        gBattleWeather = B_WEATHER_SNOW;
+                        gBattleScripting.animArg1 = B_ANIM_SNOW_CONTINUES;
+                        effect++;
+                    #else  
+                        gBattleWeather = B_WEATHER_HAIL;
+                        gBattleScripting.animArg1 = B_ANIM_HAIL_CONTINUES;
+                        effect++;
+                    #endif
+
+                }
+                break;
             }
         }
         if (effect != 0)
