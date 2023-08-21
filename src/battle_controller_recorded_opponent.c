@@ -375,7 +375,7 @@ static void SwitchIn_TryShinyAnim(u32 battler)
 
 static void RecordedOpponentHandleLoadMonSprite(u32 battler)
 {
-    BtlController_HandleLoadMonSprite(battler, gEnemyParty, TryShinyAnimAfterMonAnim);
+    BtlController_HandleLoadMonSprite(battler, TryShinyAnimAfterMonAnim);
 }
 
 static void RecordedOpponentHandleSwitchInAnim(u32 battler)

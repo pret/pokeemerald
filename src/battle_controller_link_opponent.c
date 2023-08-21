@@ -381,7 +381,7 @@ static void LinkOpponentBufferExecCompleted(u32 battler)
 
 static void LinkOpponentHandleLoadMonSprite(u32 battler)
 {
-    BtlController_HandleLoadMonSprite(battler, gEnemyParty, TryShinyAnimAfterMonAnim);
+    BtlController_HandleLoadMonSprite(battler, TryShinyAnimAfterMonAnim);
 }
 
 static void LinkOpponentHandleSwitchInAnim(u32 battler)

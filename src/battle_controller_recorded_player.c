@@ -357,7 +357,7 @@ static void RecordedPlayerBufferExecCompleted(u32 battler)
 
 static void RecordedPlayerHandleLoadMonSprite(u32 battler)
 {
-    BtlController_HandleLoadMonSprite(battler, gPlayerParty, WaitForMonAnimAfterLoad);
+    BtlController_HandleLoadMonSprite(battler, WaitForMonAnimAfterLoad);
 }
 
 static void RecordedPlayerHandleSwitchInAnim(u32 battler)

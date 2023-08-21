@@ -2417,8 +2417,9 @@ void BtlController_HandleSetRawMonData(u32 battler)
     BattleControllerComplete(battler);
 }
 
-void BtlController_HandleLoadMonSprite(u32 battler, struct Pokemon *party, void (*controllerCallback)(u32 battler))
+void BtlController_HandleLoadMonSprite(u32 battler, void (*controllerCallback)(u32 battler))
 {
+    struct Pokemon *party = GetBattlerParty(battler);
     u16 species = GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
 
     BattleLoadMonSpriteGfx(&party[gBattlerPartyIndexes[battler]], battler);

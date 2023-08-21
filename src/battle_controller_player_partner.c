@@ -278,7 +278,7 @@ static void PlayerPartnerBufferExecCompleted(u32 battler)
 
 static void PlayerPartnerHandleLoadMonSprite(u32 battler)
 {
-    BtlController_HandleLoadMonSprite(battler, gPlayerParty, WaitForMonAnimAfterLoad);
+    BtlController_HandleLoadMonSprite(battler, WaitForMonAnimAfterLoad);
 }
 
 static void PlayerPartnerHandleSwitchInAnim(u32 battler)
