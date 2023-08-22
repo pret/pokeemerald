@@ -1810,10 +1810,10 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     [SPECIES_DUDUNSPARCE_THREE_SEGMENT - 1] = NATIONAL_DEX_DUDUNSPARCE,
     // Gimmighoul
     [SPECIES_GIMMIGHOUL_ROAMING - 1] = NATIONAL_DEX_GIMMIGHOUL,
+#endif
     // Tauros-Paldea
     [SPECIES_TAUROS_PALDEAN_BLAZE_BREED - 1] = NATIONAL_DEX_TAUROS,
     [SPECIES_TAUROS_PALDEAN_AQUA_BREED - 1] = NATIONAL_DEX_TAUROS,
-#endif
 };
 
 // Assigns all Hoenn Dex Indexes to a National Dex Index

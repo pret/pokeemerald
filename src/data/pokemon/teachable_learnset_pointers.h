@@ -1463,8 +1463,8 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = sDudunsparceTeachableLearnset,
     // Gimmighoul
     [SPECIES_GIMMIGHOUL_ROAMING] = sGimmighoulTeachableLearnset,
+#endif
     // Tauros-Paldea
     [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = sTaurosPaldeanBlazeBreedTeachableLearnset,
     [SPECIES_TAUROS_PALDEAN_AQUA_BREED] = sTaurosPaldeanAquaBreedTeachableLearnset,
-#endif
 };

@@ -2251,9 +2251,6 @@ gCryTable::
 	cry Cry_Dudunsparce
 	@ Gimmighoul
 	cry Cry_Gimmighoul
-	@ Tauros-Paldea
-	cry Cry_Tauros
-	cry Cry_Tauros
 .else
 	@ Oinkologne
 	cry Cry_Unown
@@ -2272,10 +2269,10 @@ gCryTable::
 	cry Cry_Unown
 	@ Gimmighoul
 	cry Cry_Unown
-	@ Tauros-Paldea
-	cry Cry_Unown
-	cry Cry_Unown
 .endif
+@ Tauros-Paldea
+cry Cry_Tauros
+cry Cry_Tauros
 
 	.align 2
 gCryTable_Reverse::
@@ -4476,9 +4473,6 @@ gCryTable_Reverse::
 	cry_reverse Cry_Dudunsparce
 	@ Gimmighoul
 	cry_reverse Cry_Gimmighoul
-	@ Tauros-Paldea
-	cry_reverse Cry_Tauros
-	cry_reverse Cry_Tauros
 .else
 	@ Oinkologne
 	cry_reverse Cry_Unown
@@ -4497,7 +4491,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Unown
 	@ Gimmighoul
 	cry_reverse Cry_Unown
-	@ Tauros-Paldea
-	cry_reverse Cry_Unown
-	cry_reverse Cry_Unown
 .endif
+@ Tauros-Paldea
+cry_reverse Cry_Tauros
+cry_reverse Cry_Tauros

@@ -13277,8 +13277,8 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_TATSUGIRI_STRETCHY] = sAnims_Tatsugiri,
     [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = sAnims_Dudunsparce,
     [SPECIES_GIMMIGHOUL_ROAMING] = sAnims_Gimmighoul,
+#endif
     [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = sAnims_TaurosPaldean,
     [SPECIES_TAUROS_PALDEAN_AQUA_BREED] = sAnims_TaurosPaldean,
-#endif
     [SPECIES_EGG]         = sAnims_Egg,
 };
