@@ -59,7 +59,7 @@ const struct MonCoords gMonFrontPicCoords[NUM_SPECIES + 1] =
     [SPECIES_MEOWTH]                       = { .size = MON_COORDS_SIZE(48, 48), .y_offset = 10 },
     [SPECIES_PERSIAN]                      = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  4 },
     [SPECIES_PSYDUCK]                      = { .size = MON_COORDS_SIZE(40, 48), .y_offset = 11 },
-    [SPECIES_GOLDUCK]                      = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  2 },
+    [SPECIES_GOLDUCK]                      = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  4 },
     [SPECIES_MANKEY]                       = { .size = MON_COORDS_SIZE(56, 48), .y_offset = 11 },
     [SPECIES_PRIMEAPE]                     = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  6 },
     [SPECIES_GROWLITHE]                    = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
