@@ -202,7 +202,7 @@
 #define SPECIES_MURKROW                                      198
 #define SPECIES_SLOWKING                                     199
 #define SPECIES_MISDREAVUS                                   200
-#define SPECIES_UNOWN_A                                      201
+#define SPECIES_UNOWN                                        201
 #define SPECIES_WOBBUFFET                                    202
 #define SPECIES_GIRAFARIG                                    203
 #define SPECIES_PINECO                                       204
@@ -253,6 +253,7 @@
 #define SPECIES_LUGIA                                        249
 #define SPECIES_HO_OH                                        250
 #define SPECIES_CELEBI                                       251
+#define SPECIES_UNOWN_A                                      SPECIES_UNOWN
 #define SPECIES_UNOWN_B                                      252
 #define SPECIES_UNOWN_C                                      253
 #define SPECIES_UNOWN_D                                      254
@@ -1600,7 +1601,5 @@
 #define SPECIES_EGG                                          SPECIES_IRON_LEAVES + 1
 
 #define NUM_SPECIES SPECIES_EGG
-
-#define SPECIES_UNOWN NUM_SPECIES + 1    // Used for random Unown form based on personality.
 
 #endif  // GUARD_CONSTANTS_SPECIES_H
