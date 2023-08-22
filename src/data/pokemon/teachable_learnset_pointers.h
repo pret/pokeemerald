@@ -1145,6 +1145,8 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
 #if P_GEN_7_POKEMON == TRUE
     [SPECIES_DECIDUEYE_HISUIAN] = sDecidueyeHisuianTeachableLearnset,
 #endif
+    [SPECIES_WOOPER_PALDEAN] = sWooperPaldeanTeachableLearnset,
+    [SPECIES_TAUROS_PALDEAN] = sTaurosPaldeanTeachableLearnset,
     // Misc Forms
     // Cosplay Pikachu
     [SPECIES_PIKACHU_COSPLAY] = sPikachuTeachableLearnset,
@@ -1442,5 +1444,27 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     // Enamorus
     [SPECIES_ENAMORUS_THERIAN] = sEnamorusTeachableLearnset,
     [SPECIES_BASCULEGION_FEMALE] = sBasculegionTeachableLearnset,
+#endif
+#if P_GEN_9_POKEMON == TRUE
+    // Oinkologne
+    [SPECIES_OINKOLOGNE_FEMALE] = sOinkologneFemaleTeachableLearnset,
+    // Maushold
+    [SPECIES_MAUSHOLD_FAMILY_OF_THREE] = sMausholdTeachableLearnset,
+    // Squawkabilly
+    [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] = sSquawkabillyTeachableLearnset,
+    [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] = sSquawkabillyTeachableLearnset,
+    [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE] = sSquawkabillyTeachableLearnset,
+    // Palafin
+    [SPECIES_PALAFIN_HERO] = sPalafinTeachableLearnset,
+    // Tatsugiri
+    [SPECIES_TATSUGIRI_DROOPY] = sTatsugiriTeachableLearnset,
+    [SPECIES_TATSUGIRI_STRETCHY] = sTatsugiriTeachableLearnset,
+    // Dudunsparce
+    [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = sDudunsparceTeachableLearnset,
+    // Gimmighoul
+    [SPECIES_GIMMIGHOUL_ROAMING] = sGimmighoulTeachableLearnset,
+    // Tauros-Paldea
+    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = sTaurosPaldeanBlazeBreedTeachableLearnset,
+    [SPECIES_TAUROS_PALDEAN_AQUA_BREED] = sTaurosPaldeanAquaBreedTeachableLearnset,
 #endif
 };

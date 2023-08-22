@@ -1145,6 +1145,8 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
 #if P_GEN_7_POKEMON == TRUE
     [SPECIES_DECIDUEYE_HISUIAN] = sDecidueyeHisuianLevelUpLearnset,
 #endif
+    [SPECIES_WOOPER_PALDEAN] = sWooperPaldeanLevelUpLearnset,
+    [SPECIES_TAUROS_PALDEAN] = sTaurosPaldeanLevelUpLearnset,
     // Misc Forms
     // Cosplay Pikachu
     [SPECIES_PIKACHU_COSPLAY] = sPikachuLevelUpLearnset,
@@ -1442,5 +1444,27 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     // Enamorus
     [SPECIES_ENAMORUS_THERIAN] = sEnamorusLevelUpLearnset,
     [SPECIES_BASCULEGION_FEMALE] = sBasculegionLevelUpLearnset,
+#endif
+#if P_GEN_9_POKEMON == TRUE
+    // Oinkologne
+    [SPECIES_OINKOLOGNE_FEMALE] = sOinkologneFemaleLevelUpLearnset,
+    // Maushold
+    [SPECIES_MAUSHOLD_FAMILY_OF_THREE] = sMausholdLevelUpLearnset,
+    // Squawkabilly
+    [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] = sSquawkabillyLevelUpLearnset,
+    [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] = sSquawkabillyLevelUpLearnset,
+    [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE] = sSquawkabillyLevelUpLearnset,
+    // Palafin
+    [SPECIES_PALAFIN_HERO] = sPalafinLevelUpLearnset,
+    // Tatsugiri
+    [SPECIES_TATSUGIRI_DROOPY] = sTatsugiriLevelUpLearnset,
+    [SPECIES_TATSUGIRI_STRETCHY] = sTatsugiriLevelUpLearnset,
+    // Dudunsparce
+    [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = sDudunsparceLevelUpLearnset,
+    // Gimmighoul
+    [SPECIES_GIMMIGHOUL_ROAMING] = sGimmighoulLevelUpLearnset,
+    // Tauros-Paldea
+    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = sTaurosPaldeanBlazeBreedLevelUpLearnset,
+    [SPECIES_TAUROS_PALDEAN_AQUA_BREED] = sTaurosPaldeanAquaBreedLevelUpLearnset,
 #endif
 };
