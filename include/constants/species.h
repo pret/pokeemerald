@@ -1398,9 +1398,9 @@
 #define SPECIES_ZIGZAGOON_GALARIAN                           1313
 #define SPECIES_LINOONE_GALARIAN                             1314
 #define SPECIES_DARUMAKA_GALARIAN                            1315
-#define SPECIES_DARMANITAN_GALARIAN                          SPECIES_DARMANITAN_GALARIAN_STANDARD_MODE
-#define SPECIES_DARMANITAN_GALARIAN_STANDARD_MODE            1316
-#define SPECIES_DARMANITAN_GALARIAN_ZEN_MODE                 1317
+#define SPECIES_DARMANITAN_GALARIAN                          SPECIES_DARMANITAN_STANDARD_MODE_GALARIAN
+#define SPECIES_DARMANITAN_STANDARD_MODE_GALARIAN            1316
+#define SPECIES_DARMANITAN_ZEN_MODE_GALARIAN                 1317
 #define SPECIES_YAMASK_GALARIAN                              1318
 #define SPECIES_GARBODOR_GIGANTAMAX                          1319 // Todo
 #define SPECIES_STUNFISK_GALARIAN                            1320
