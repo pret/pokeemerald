@@ -315,7 +315,7 @@ void MailboxMenu_Free(void)
 // conditions (Beauty, Tough, etc.).
 // It works by using scanlines to
 // selectively reveal a bg that has been
-// filled with the graph color.
+// filled with the graph color
 //---------------------------------------
 
 #define SHIFT_RIGHT_ADJUSTED(n, s)(((n) >> (s)) + (((n) >> ((s) - 1)) & 1))
