@@ -15155,6 +15155,7 @@ static void Cmd_handleballthrow(void)
         u8 catchRate;
 
         gLastThrownBall = gLastUsedItem;
+        gBallToDisplay = gLastThrownBall;
         if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
             catchRate = gBattleStruct->safariCatchFactor * 1275 / 100;
         else
