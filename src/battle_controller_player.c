@@ -326,7 +326,7 @@ static void HandleInputChooseAction(void)
             SwapBallToDisplay(sameBall);
             PlaySE(SE_SELECT);
         }
-        else if (!JOY_HELD(B_LAST_USED_BALL_BUTTON) && sBallSwapped)
+        else if (JOY_NEW(B_BUTTON) || (!JOY_HELD(B_LAST_USED_BALL_BUTTON) && sBallSwapped))
         {
             sAckBallUseBtn = FALSE;
             sBallSwapped = FALSE;

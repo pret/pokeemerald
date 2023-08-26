@@ -3256,13 +3256,13 @@ static const struct SpriteSheet sSpriteSheet_LastUsedBallWindow =
     sLastUsedBallWindowGfx, sizeof(sLastUsedBallWindowGfx), LAST_BALL_WINDOW_TAG
 };
 
-#define LAST_USED_BALL_X_F    15
-#define LAST_USED_BALL_X_0    -15
+#define LAST_USED_BALL_X_F    14
+#define LAST_USED_BALL_X_0    -14
 #define LAST_USED_BALL_Y      ((IsDoubleBattle()) ? 78 : 68)
 #define LAST_USED_BALL_Y_BNC  ((IsDoubleBattle()) ? 76 : 66)
 
-#define LAST_BALL_WIN_X_F       (LAST_USED_BALL_X_F - 1)
-#define LAST_BALL_WIN_X_0       (LAST_USED_BALL_X_0 - 1)
+#define LAST_BALL_WIN_X_F       (LAST_USED_BALL_X_F - 0)
+#define LAST_BALL_WIN_X_0       (LAST_USED_BALL_X_0 - 0)
 #define LAST_USED_WIN_Y         (LAST_USED_BALL_Y - 8)
 
 #define sHide  data[0]
