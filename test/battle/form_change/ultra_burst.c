@@ -4,6 +4,7 @@
 SINGLE_BATTLE_TEST("Dusk Mane Necrozma can Ultra Burst holding Ultranecrozium Z")
 {
     GIVEN {
+        ASSUME(P_GEN_7_POKEMON == TRUE);
         PLAYER(SPECIES_NECROZMA_DUSK_MANE) { Item(ITEM_ULTRANECROZIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -20,6 +21,7 @@ SINGLE_BATTLE_TEST("Dusk Mane Necrozma can Ultra Burst holding Ultranecrozium Z"
 DOUBLE_BATTLE_TEST("Ultra Burst's order is determined by Speed - opponent faster")
 {
     GIVEN {
+        ASSUME(P_GEN_7_POKEMON == TRUE);
         PLAYER(SPECIES_NECROZMA_DUSK_MANE) { Item(ITEM_ULTRANECROZIUM_Z); Speed(1); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
         OPPONENT(SPECIES_NECROZMA_DAWN_WINGS) { Item(ITEM_ULTRANECROZIUM_Z); Speed(3); }
@@ -39,6 +41,7 @@ DOUBLE_BATTLE_TEST("Ultra Burst's order is determined by Speed - opponent faster
 DOUBLE_BATTLE_TEST("Ultra Burst's order is determined by Speed - player faster")
 {
     GIVEN {
+        ASSUME(P_GEN_7_POKEMON == TRUE);
         PLAYER(SPECIES_NECROZMA_DUSK_MANE) { Item(ITEM_ULTRANECROZIUM_Z); Speed(5); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
         OPPONENT(SPECIES_NECROZMA_DAWN_WINGS) { Item(ITEM_ULTRANECROZIUM_Z); Speed(2); }
@@ -58,6 +61,7 @@ DOUBLE_BATTLE_TEST("Ultra Burst's order is determined by Speed - player faster")
 SINGLE_BATTLE_TEST("Ultra Burst affects turn order")
 {
     GIVEN {
+        ASSUME(P_GEN_7_POKEMON == TRUE);
         ASSUME(B_MEGA_EVO_TURN_ORDER);
         PLAYER(SPECIES_NECROZMA_DUSK_MANE) { Item(ITEM_ULTRANECROZIUM_Z); Speed(105); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(106); }
@@ -67,13 +71,14 @@ SINGLE_BATTLE_TEST("Ultra Burst affects turn order")
         MESSAGE("Necrozma used Celebrate!");
         MESSAGE("Foe Wobbuffet used Celebrate!");
     } THEN {
-        ASSUME(player->speed == 234);
+        ASSUME(player->speed == 263);
     }
 }
 
 DOUBLE_BATTLE_TEST("Ultra Burst happens after switching, but before Focus Punch-like Moves")
 {
     GIVEN {
+        ASSUME(P_GEN_7_POKEMON == TRUE);
         ASSUME(gBattleMoves[MOVE_FOCUS_PUNCH].effect == EFFECT_FOCUS_PUNCH);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_NECROZMA_DUSK_MANE) { Item(ITEM_ULTRANECROZIUM_Z); }
@@ -102,6 +107,7 @@ DOUBLE_BATTLE_TEST("Ultra Burst happens after switching, but before Focus Punch-
 SINGLE_BATTLE_TEST("Ultra Burst and Mega Evolution can happen on the same turn")
 {
     GIVEN {
+        ASSUME(P_GEN_7_POKEMON == TRUE);
         PLAYER(SPECIES_NECROZMA_DUSK_MANE) { Item(ITEM_ULTRANECROZIUM_Z); Speed(3); }
         OPPONENT(SPECIES_GARDEVOIR) { Item(ITEM_GARDEVOIRITE); Speed(2); }
     } WHEN {
