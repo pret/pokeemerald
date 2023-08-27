@@ -121,9 +121,9 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     #define selectedGroup percent
     #define selectedMoves var2
     #define moveTarget var1
-    #define validMoveFlags var1
-    #define numValidMoveGroups var2
-    #define validMoveGroup var2
+    #define numMovesPerGroup var1
+    #define numMultipleMoveGroups var2
+    #define randSelectGroup var2
 
     // If battler is < 50% HP and not asleep, use second set of move group likelihoods
     // otherwise use first set
@@ -157,8 +157,10 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     // Pass selected moves to AI, pick one
     if (selectedMoves != 0)
     {
-        gBattleStruct->palaceFlags &= 0xF;
-        gBattleStruct->palaceFlags |= (selectedMoves << 4);
+        // Lower 4 bits of palaceFlags are flags for each battler.
+        // Clear the rest of palaceFlags, then set the selected moves in the upper 4 bits.
+        gBattleStruct->palaceFlags &= (1 << MAX_BATTLERS_COUNT) - 1;
+        gBattleStruct->palaceFlags |= (selectedMoves << MAX_BATTLERS_COUNT);
         BattleAI_SetupAIData(selectedMoves);
         chosenMoveId = BattleAI_ChooseMoveOrAction();
     }
@@ -168,34 +170,47 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     // If a move is chosen this way, there's a 50% chance that it will be unable to use it anyway
     if (chosenMoveId == -1)
     {
-        if (unusableMovesBits != 0xF)
+        if (unusableMovesBits != ALL_MOVES_MASK)
         {
-            validMoveFlags = 0, numValidMoveGroups = 0;
+            numMovesPerGroup = 0, numMultipleMoveGroups = 0;
 
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
-                // validMoveFlags is used here as a bitfield for which moves can be used for each move group type
-                // first 4 bits are for attack (1 for each move), then 4 bits for defense, and 4 for support
+                // Count the number of usable moves the battler has in each move group.
+                // The totals will be stored separately in 3 groups of 4 bits each in numMovesPerGroup.
                 if (GetBattlePalaceMoveGroup(moveInfo->moves[i]) == PALACE_MOVE_GROUP_ATTACK && !(gBitTable[i] & unusableMovesBits))
-                    validMoveFlags += (1 << 0);
+                    numMovesPerGroup += (1 << 0);
                 if (GetBattlePalaceMoveGroup(moveInfo->moves[i]) == PALACE_MOVE_GROUP_DEFENSE && !(gBitTable[i] & unusableMovesBits))
-                    validMoveFlags += (1 << 4);
+                    numMovesPerGroup += (1 << 4);
                 if (GetBattlePalaceMoveGroup(moveInfo->moves[i]) == PALACE_MOVE_GROUP_SUPPORT && !(gBitTable[i] & unusableMovesBits))
-                    validMoveFlags += (1 << 8);
+                    numMovesPerGroup += (1 << 8);
             }
 
-            // Count the move groups the pokemon has
-            if ((validMoveFlags & 0xF) > 1)
-                numValidMoveGroups++;
-            if ((validMoveFlags & 0xF0) > 0x1F)
-                numValidMoveGroups++;
-            if ((validMoveFlags & 0xF0) > 0x1FF)
-                numValidMoveGroups++;
+            // Count the number of move groups for which the battler has at least 2 usable moves.
+            // This is a roundabout way to determine if there is a move group that should be
+            // preferred, because it has multiple move options and the others do not.
+            // The condition intended to check the total for the Support group is accidentally
+            // checking the Defense total, and is never true. As a result the preferences for
+            // random move selection here will skew away from the Support move group.
+            if ((numMovesPerGroup & 0xF) >= 2)
+                numMultipleMoveGroups++;
+            if ((numMovesPerGroup & (0xF << 4)) >= (2 << 4))
+                numMultipleMoveGroups++;
+#ifdef BUGFIX
+            if ((numMovesPerGroup & (0xF << 8)) >= (2 << 8))
+#else
+            if ((numMovesPerGroup & (0xF << 4)) >= (2 << 8))
+#endif
+                numMultipleMoveGroups++;
 
 
-            // If more than 1 possible move group, or no possible move groups
-            // then choose move randomly
-            if (numValidMoveGroups > 1 || numValidMoveGroups == 0)
+            // By this point we already know the battler only has usable moves from at most 2 of the 3 move groups,
+            // because they had no usable moves from the move group that was selected based on Nature.
+            //
+            // The below condition is effectively 'numMultipleMoveGroups != 1'.
+            // There is no stand-out group with multiple moves to choose from, so we pick randomly.
+            // Note that because of the bug above the battler may actually have any number of Support moves.
+            if (numMultipleMoveGroups > 1 || numMultipleMoveGroups == 0)
             {
                 do
                 {
@@ -204,27 +219,36 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
                         chosenMoveId = i;
                 } while (chosenMoveId == -1);
             }
-            // Otherwise randomly choose move of only available move group
             else
             {
-                if ((validMoveFlags & 0xF) > 1)
-                    validMoveGroup = PALACE_MOVE_GROUP_ATTACK;
-                if ((validMoveFlags & 0xF0) > 0x1F)
-                    validMoveGroup = PALACE_MOVE_GROUP_DEFENSE;
-                if ((validMoveFlags & 0xF0) > 0x1FF)
-                    validMoveGroup = PALACE_MOVE_GROUP_SUPPORT;
+                // The battler has just 1 move group with multiple move options to choose from.
+                // Choose a move randomly from this group.
+
+                // Same bug as the previous set of conditions (the condition for Support is never true).
+                // This bug won't cause a softlock below, because if Support is the only group with multiple
+                // moves then it won't have been counted, and the 'numMultipleMoveGroups == 0' above will be true.
+                if ((numMovesPerGroup & 0xF) >= 2)
+                    randSelectGroup = PALACE_MOVE_GROUP_ATTACK;
+                if ((numMovesPerGroup & (0xF << 4)) >= (2 << 4))
+                    randSelectGroup = PALACE_MOVE_GROUP_DEFENSE;
+#ifdef BUGFIX
+                if ((numMovesPerGroup & (0xF << 8)) >= (2 << 8))
+#else
+                if ((numMovesPerGroup & (0xF << 4)) >= (2 << 8))
+#endif
+                    randSelectGroup = PALACE_MOVE_GROUP_SUPPORT;
 
                 do
                 {
                     i = Random() % MAX_MON_MOVES;
-                    if (!(gBitTable[i] & unusableMovesBits) && validMoveGroup == GetBattlePalaceMoveGroup(moveInfo->moves[i]))
+                    if (!(gBitTable[i] & unusableMovesBits) && randSelectGroup == GetBattlePalaceMoveGroup(moveInfo->moves[i]))
                         chosenMoveId = i;
                 } while (chosenMoveId == -1);
             }
 
-            // If a move was selected (and in this case was not from the Nature-chosen group)
-            // then there's a 50% chance it won't be used anyway
-            if (Random() % 100 > 49)
+            // Because the selected move was not from the Nature-chosen move group there's a 50% chance
+            // that it will be unable to use it. This could have been checked earlier to avoid the above work.
+            if (Random() % 100 >= 50)
             {
                 gProtectStructs[gActiveBattler].palaceUnableToUseMove = TRUE;
                 return 0;
@@ -232,6 +256,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
         }
         else
         {
+            // All the battler's moves were flagged as unusable.
             gProtectStructs[gActiveBattler].palaceUnableToUseMove = TRUE;
             return 0;
         }
@@ -264,9 +289,9 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
 #undef selectedGroup
 #undef selectedMoves
 #undef moveTarget
-#undef validMoveFlags
-#undef numValidMoveGroups
-#undef validMoveGroup
+#undef numMovesPerGroup
+#undef numMultipleMoveGroups
+#undef randSelectGroup
 
 static u8 GetBattlePalaceMoveGroup(u16 move)
 {

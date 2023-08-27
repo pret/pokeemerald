@@ -849,7 +849,7 @@ static const u8 sBallCatchBonuses[] =
 // In Battle Palace, moves are chosen based on the pokemons nature rather than by the player
 // Moves are grouped into "Attack", "Defense", or "Support" (see PALACE_MOVE_GROUP_*)
 // Each nature has a certain percent chance of selecting a move from a particular group
-// and a separate percent chance for each group when below 50% HP
+// and a separate percent chance for each group when at or below 50% HP
 // The table below doesn't list percentages for Support because you can subtract the other two
 // Support percentages are listed in comments off to the side instead
 #define PALACE_STYLE(atk, def, atkLow, defLow) {atk, atk + def, atkLow, atkLow + defLow}
@@ -7350,7 +7350,7 @@ static void Cmd_tryconversiontypechange(void)
     {
         do
         {
-            while ((moveChecked = Random() & (MAX_MON_MOVES - 1)) >= validMoves);
+            while ((moveChecked = MOD(Random(), MAX_MON_MOVES)) >= validMoves);
 
             moveType = gBattleMoves[gBattleMons[gBattlerAttacker].moves[moveChecked]].type;
 
@@ -8179,7 +8179,7 @@ static void Cmd_trychoosesleeptalkmove(void)
     }
 
     unusableMovesBits = CheckMoveLimitations(gBattlerAttacker, unusableMovesBits, ~MOVE_LIMITATION_PP);
-    if (unusableMovesBits == (1 << MAX_MON_MOVES) - 1) // all 4 moves cannot be chosen
+    if (unusableMovesBits == ALL_MOVES_MASK) // all 4 moves cannot be chosen
     {
         gBattlescriptCurrInstr += 5;
     }
@@ -8189,7 +8189,7 @@ static void Cmd_trychoosesleeptalkmove(void)
 
         do
         {
-            movePosition = Random() & (MAX_MON_MOVES - 1);
+            movePosition = MOD(Random(), MAX_MON_MOVES);
         } while ((gBitTable[movePosition] & unusableMovesBits));
 
         gCalledMove = gBattleMons[gBattlerAttacker].moves[movePosition];
