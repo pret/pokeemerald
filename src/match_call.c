@@ -1789,33 +1789,14 @@ static void PopulateSpeciesFromTrainerLocation(int matchCallId, u8 *destStr)
 static void PopulateSpeciesFromTrainerParty(int matchCallId, u8 *destStr)
 {
     u16 trainerId;
-    union TrainerMonPtr party;
+    const struct TrainerMon *party;
     u8 monId;
     const u8 *speciesName;
 
     trainerId = GetLastBeatenRematchTrainerId(sMatchCallTrainers[matchCallId].trainerId);
     party = gTrainers[trainerId].party;
     monId = Random() % gTrainers[trainerId].partySize;
-
-    switch (gTrainers[trainerId].partyFlags)
-    {
-    case 0:
-    default:
-        speciesName = GetSpeciesName(party.NoItemDefaultMoves[monId].species);
-        break;
-    case F_TRAINER_PARTY_CUSTOM_MOVESET:
-        speciesName = GetSpeciesName(party.NoItemCustomMoves[monId].species);
-        break;
-    case F_TRAINER_PARTY_HELD_ITEM:
-        speciesName = GetSpeciesName(party.ItemDefaultMoves[monId].species);
-        break;
-    case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
-        speciesName = GetSpeciesName(party.ItemCustomMoves[monId].species);
-        break;
-    case F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED:
-        speciesName = GetSpeciesName(party.EverythingCustomized[monId].species);
-        break;
-    }
+    speciesName = GetSpeciesName(party[monId].species);
 
     StringCopy(destStr, speciesName);
 }

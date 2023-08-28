@@ -904,12 +904,6 @@ u8 ItemId_GetImportance(u16 itemId)
     return gItems[SanitizeItemId(itemId)].importance;
 }
 
-// Unused
-u8 ItemId_GetRegistrability(u16 itemId)
-{
-    return gItems[SanitizeItemId(itemId)].registrability;
-}
-
 u8 ItemId_GetPocket(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].pocket;

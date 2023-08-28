@@ -14883,7 +14883,6 @@ Move_CORROSIVE_GAS::
 	clearmonbg ANIM_ATTACKER
 	end
 
-
 @Credits to Skeli
 Move_COACHING::
 	playsewithpan SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER
