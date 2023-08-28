@@ -197,6 +197,9 @@ enum
 };
 
 extern struct UnusedControllerStruct gUnusedControllerStruct;
+extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(u32 battler);
+extern void (*gBattlerControllerEndFuncs[MAX_BATTLERS_COUNT])(u32 battler);
+extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 
 // general functions
 void HandleLinkBattleSetup(void);
@@ -251,43 +254,88 @@ void BtlController_EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
 void BtlController_EmitEndLinkBattle(u8 bufferId, u8 battleOutcome);
 void BtlController_EmitDebugMenu(u8 bufferId);
 
+void BattleControllerComplete(u32 battler); // Can be used for all the controllers.
+void BtlController_Empty(u32 battler); // Empty command, does nothing, only completes the execution.
+void BtlController_TerminatorNop(u32 battler); // Dummy function at the end of the table.
+void BattleControllerDummy(u32 battler);
+void StartSendOutAnim(u32 battler, bool32 dontClearSubstituteBit);
+void Controller_WaitForString(u32 battler);
+void Controller_WaitForHealthBar(u32 battler);
+
+// handlers
+void BtlController_HandleGetMonData(u32 battler);
+void BtlController_HandleGetRawMonData(u32 battler);
+void BtlController_HandleSetMonData(u32 battler);
+void BtlController_HandleSetRawMonData(u32 battler);
+void BtlController_HandleLoadMonSprite(u32 battler, void (*controllerCallback)(u32 battler));
+void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*controllerCallback)(u32 battler));
+void BtlController_HandleReturnMonToBall(u32 battler);
+void BtlController_HandleDrawTrainerPic(u32 battlerId, u32 trainerPicId, bool32 isFrontPic, s16 xPos, s16 yPos, s32 subpriority);
+void BtlController_HandleTrainerSlide(u32 battler, u32 trainerPicId);
+void BtlController_HandleTrainerSlideBack(u32 battlerId, s16 data0, bool32 startAnim);
+void BtlController_HandleFaintAnimation(u32 battler);
+void BtlController_HandleSuccessBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
+void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
+void BtlController_HandleMoveAnimation(u32 battler, bool32 updateTvData);
+void BtlController_HandlePrintString(u32 battler, bool32 updateTvData, bool32 arenaPtsDeduct);
+void BtlController_HandleHealthBarUpdate(u32 battler, bool32 updateHpText);
+void DoStatusIconUpdate(u32 battler);
+void BtlController_HandleStatusIconUpdate(u32 battler);
+void BtlController_HandleStatusAnimation(u32 battler);
+void BtlController_HandleClearUnkVar(u32 battler);
+void BtlController_HandleSetUnkVar(u32 battler);
+void BtlController_HandleClearUnkFlag(u32 battler);
+void BtlController_HandleToggleUnkFlag(u32 battler);
+void BtlController_HandleHitAnimation(u32 battler);
+void BtlController_HandlePlaySE(u32 battler);
+void BtlController_HandlePlayFanfareOrBGM(u32 battler);
+void BtlController_HandleFaintingCry(u32 battler);
+void BtlController_HandleIntroSlide(u32 battler);
+void BtlController_HandleSpriteInvisibility(u32 battler);
+bool32 TwoPlayerIntroMons(u32 battlerId); // Double battle with both player pokemon active.
+bool32 TwoOpponentIntroMons(u32 battlerId); // Double battle with both opponent pokemon active.
+void BtlController_HandleIntroTrainerBallThrow(u32 battler, u16 tagTrainerPal, const u32 *trainerPal, s16 framesToWait, void (*controllerCallback)(u32 battler));
+void BtlController_HandleDrawPartyStatusSummary(u32 battler, u32 side, bool32 considerDelay);
+void BtlController_HandleHidePartyStatusSummary(u32 battler);
+void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE, bool32 updateTvData);
+
 // player controller
-void SetControllerToPlayer(void);
-void BattleControllerDummy(void);
-void PlayerHandleGetRawMonData(void);
-void SetBattleEndCallbacks(void);
-void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);
+void SetControllerToPlayer(u32 battler);
+void SetBattleEndCallbacks(u32 battler);
+void PlayerHandleExpUpdate(u32 battler);
+u32 LinkPlayerGetTrainerPicId(u32 multiplayerId);
 void CB2_SetUpReshowBattleScreenAfterMenu(void);
 void CB2_SetUpReshowBattleScreenAfterMenu2(void);
 void Task_PlayerController_RestoreBgmAfterCry(u8 taskId);
 void ActionSelectionCreateCursorAt(u8 cursorPos, u8 unused);
 void ActionSelectionDestroyCursorAt(u8 cursorPos);
-void InitMoveSelectionsVarsAndStrings(void);
+void InitMoveSelectionsVarsAndStrings(u32 battler);
 void MoveSelectionCreateCursorAt(u8 cursorPos, u8 arg1);
 void MoveSelectionDestroyCursorAt(u8 cursorPosition);
 
 // recorded player controller
-void SetControllerToRecordedPlayer(void);
+void SetControllerToRecordedPlayer(u32 battler);
 
 // opponent controller
-void SetControllerToOpponent(void);
+void SetControllerToOpponent(u32 battler);
 
 // player partner controller
-void SetControllerToPlayerPartner(void);
+void Controller_PlayerPartnerShowIntroHealthbox(u32 battler); // Also used by the link partner.
+void SetControllerToPlayerPartner(u32 battler);
 
 // safari controller
-void SetControllerToSafari(void);
+void SetControllerToSafari(u32 battler);
 
 // wally controller
-void SetControllerToWally(void);
+void SetControllerToWally(u32 battler);
 
 // recorded opponent controller
-void SetControllerToRecordedOpponent(void);
+void SetControllerToRecordedOpponent(u32 battler);
 
 // link opponent
-void SetControllerToLinkOpponent(void);
+void SetControllerToLinkOpponent(u32 battler);
 
 // link partner
-void SetControllerToLinkPartner(void);
+void SetControllerToLinkPartner(u32 battler);
 
 #endif // GUARD_BATTLE_CONTROLLERS_H
