@@ -3870,7 +3870,7 @@ static void Cmd_cleareffectsonfaint(void)
             MarkBattlerForControllerExec(battler);
         }
 
-        FaintClearSetData(); // Effects like attractions, trapping, etc.
+        FaintClearSetData(battler); // Effects like attractions, trapping, etc.
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
@@ -6203,7 +6203,7 @@ static void Cmd_switchindataupdate(void)
         gBattleMons[battler].status2 = oldData.status2;
     }
 
-    SwitchInClearSetData();
+    SwitchInClearSetData(battler);
 
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE
         && gBattleMons[battler].maxHP / 2 >= gBattleMons[battler].hp
@@ -8873,7 +8873,7 @@ static void Cmd_various(void)
     case VARIOUS_IS_RUNNING_IMPOSSIBLE:
     {
         VARIOUS_ARGS();
-        gBattleCommunication[0] = IsRunningFromBattleImpossible();
+        gBattleCommunication[0] = IsRunningFromBattleImpossible(battler);
         break;
     }
     case VARIOUS_GET_MOVE_TARGET:
@@ -9096,7 +9096,7 @@ static void Cmd_various(void)
             gBattleMons[battler].hp = 0;
             SetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_HP, &gBattleMons[battler].hp);
             SetHealthboxSpriteInvisible(gHealthboxSpriteIds[battler]);
-            FaintClearSetData();
+            FaintClearSetData(battler);
         }
         else if (GetBattlerSide(battler) == B_SIDE_PLAYER)
         {
