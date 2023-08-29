@@ -2557,7 +2557,7 @@ bool32 ShouldPivot(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u8 mo
     u8 battlerToSwitch;
 
     gActiveBattler = battlerAtk;
-    shouldSwitch = ShouldSwitch();
+    shouldSwitch = ShouldSwitch(battlerAtk);
     battlerToSwitch = *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler);
     gActiveBattler = backupBattler;
 

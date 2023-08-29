@@ -267,7 +267,7 @@ static void PlayerPartnerBufferExecCompleted(u32 battler)
     {
         u8 playerId = GetMultiplayerId();
 
-        PrepareBufferDataTransferLink(2, 4, &playerId);
+        PrepareBufferDataTransferLink(battler, 2, 4, &playerId);
         gBattleResources->bufferA[battler][0] = CONTROLLER_TERMINATOR_NOP;
     }
     else
@@ -340,7 +340,7 @@ static void PlayerPartnerHandlePrintString(u32 battler)
 
 static void PlayerPartnerHandleChooseAction(u32 battler)
 {
-    AI_TrySwitchOrUseItem();
+    AI_TrySwitchOrUseItem(battler);
     PlayerPartnerBufferExecCompleted(battler);
 }
 
@@ -366,9 +366,9 @@ static void PlayerPartnerHandleChooseMove(u32 battler)
 
     // If partner can mega evolve, do it.
     if (CanMegaEvolve(battler))
-        BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
+        BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
     else
-        BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
+        BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
 
     PlayerPartnerBufferExecCompleted(battler);
 }
@@ -384,7 +384,7 @@ static void PlayerPartnerHandleChoosePokemon(u32 battler)
     // Switching out
     else
     {
-        chosenMonId = GetMostSuitableMonToSwitchInto();
+        chosenMonId = GetMostSuitableMonToSwitchInto(battler);
         if (chosenMonId == PARTY_SIZE) // just switch to the next mon
         {
             u8 playerMonIdentity = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
@@ -402,7 +402,7 @@ static void PlayerPartnerHandleChoosePokemon(u32 battler)
         }
         *(gBattleStruct->monToSwitchIntoId + battler) = chosenMonId;
     }
-    BtlController_EmitChosenMonReturnValue(BUFFER_B, chosenMonId, NULL);
+    BtlController_EmitChosenMonReturnValue(battler, BUFFER_B, chosenMonId, NULL);
     PlayerPartnerBufferExecCompleted(battler);
 }
 
