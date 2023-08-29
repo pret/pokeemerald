@@ -2,11 +2,12 @@
 #include "global.h"
 #include "characters.h"
 #include "gpu_regs.h"
+#include "load_save.h"
 #include "main.h"
 #include "malloc.h"
 #include "random.h"
-#include "test.h"
 #include "test_runner.h"
+#include "test/test.h"
 
 #define TIMEOUT_SECONDS 55
 
@@ -113,6 +114,10 @@ void CB2_TestRunner(void)
             gTestRunnerState.exitCode = 2;
             return;
         }
+
+        MoveSaveBlocks_ResetHeap();
+        ClearSav1();
+        ClearSav2();
 
         gIntrTable[7] = Intr_Timer2;
 

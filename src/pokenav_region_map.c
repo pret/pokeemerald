@@ -35,7 +35,7 @@ struct Pokenav_RegionMapGfx
     u32 loopTaskId;
     u16 infoWindowId;
     struct Sprite *cityZoomTextSprites[3];
-    u8 tilemapBuffer[BG_SCREEN_SIZE];
+    u8 ALIGNED(2) tilemapBuffer[BG_SCREEN_SIZE];
     u8 cityZoomPics[NUM_CITY_MAPS][200];
 };
 
