@@ -865,7 +865,7 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 *typeEffectiveness,
             }
 
             // Handle other multi-strike moves
-            if (gBattleMoves[move].strikeCount > 1)
+            if (gBattleMoves[move].strikeCount > 1 && gBattleMoves[move].effect != EFFECT_TRIPLE_KICK)
                 dmg *= gBattleMoves[move].strikeCount;
             else if (move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH)
                 dmg *= 3;
@@ -2964,24 +2964,23 @@ bool32 AI_CanBeInfatuated(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 
 u32 ShouldTryToFlinch(u8 battlerAtk, u8 battlerDef, u16 atkAbility, u16 defAbility, u16 move)
 {
-    if (defAbility == ABILITY_INNER_FOCUS
+    if (((AI_DATA->abilities[battlerAtk] != ABILITY_MOLD_BREAKER && (defAbility == ABILITY_SHIELD_DUST || defAbility == ABILITY_INNER_FOCUS))
+      || AI_GetHoldEffect(battlerDef) == HOLD_EFFECT_COVERT_CLOAK
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
-      || AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER) // Opponent goes first
+      || AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER)) // Opponent goes first
     {
-        return 0;   // don't try to flinch
+        return 0;
     }
-    else if ((gBattleMons[battlerDef].status1 & STATUS1_SLEEP) && !HasMoveEffect(battlerDef, EFFECT_SLEEP_TALK) && !HasMoveEffect(battlerDef, EFFECT_SNORE))
-    {
-        return 0;   // don't try to flinch sleeping pokemon
-    }
-    else if (atkAbility == ABILITY_SERENE_GRACE
+    else if ((atkAbility == ABILITY_SERENE_GRACE
       || gBattleMons[battlerDef].status1 & STATUS1_PARALYSIS
       || gBattleMons[battlerDef].status2 & STATUS2_INFATUATION
       || gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
+      || ((AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER) && CanTargetFaintAi(battlerDef, battlerAtk)))
     {
         return 2;   // good idea to flinch
     }
-    return 1;   // decent idea to flinch
+
+    return 0;   // don't try to flinch
 }
 
 bool32 ShouldTrap(u8 battlerAtk, u8 battlerDef, u16 move)
@@ -3000,15 +2999,16 @@ bool32 ShouldTrap(u8 battlerAtk, u8 battlerDef, u16 move)
 
 bool32 ShouldFakeOut(u8 battlerAtk, u8 battlerDef, u16 move)
 {
-    if (AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_CHOICE_BAND && CountUsablePartyMons(battlerAtk) == 0)
-        return FALSE;   // don't lock attacker into fake out if can't switch out
+    if (!gDisableStructs[battlerAtk].isFirstTurn
+    || AI_DATA->abilities[battlerAtk] == ABILITY_GORILLA_TACTICS
+    || AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_CHOICE_BAND
+    || AI_GetHoldEffect(battlerDef) == HOLD_EFFECT_COVERT_CLOAK
+    || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
+    || (AI_DATA->abilities[battlerAtk] != ABILITY_MOLD_BREAKER
+    && (AI_DATA->abilities[battlerDef] == ABILITY_SHIELD_DUST || AI_DATA->abilities[battlerDef] == ABILITY_INNER_FOCUS)))
+        return FALSE;
 
-    if (gDisableStructs[battlerAtk].isFirstTurn
-      && ShouldTryToFlinch(battlerAtk, battlerDef, AI_DATA->abilities[battlerAtk], AI_DATA->abilities[battlerDef], move)
-      && !DoesSubstituteBlockMove(battlerAtk, battlerDef, move))
-        return TRUE;
-
-    return FALSE;
+    return TRUE;
 }
 
 static u32 FindMoveUsedXTurnsAgo(u32 battlerId, u32 x)
@@ -3369,25 +3369,49 @@ bool32 ShouldUseWishAromatherapy(u8 battlerAtk, u8 battlerDef, u16 move)
     return FALSE;
 }
 
-// party logic
-s32 AI_CalcPartyMonDamage(u16 move, u8 battlerAtk, u8 battlerDef, struct Pokemon *mon)
+#define SIZE_G_BATTLE_MONS (sizeof(struct BattlePokemon) * MAX_BATTLERS_COUNT)
+
+struct BattlePokemon *AllocSaveBattleMons(void)
 {
-    s32 dmg;
-    u32 i;
+    struct BattlePokemon *savedBattleMons = Alloc(SIZE_G_BATTLE_MONS);
+    memcpy(savedBattleMons, gBattleMons, SIZE_G_BATTLE_MONS);
+    return savedBattleMons;
+}
+
+void FreeRestoreBattleMons(struct BattlePokemon *savedBattleMons)
+{
+    memcpy(gBattleMons, savedBattleMons, SIZE_G_BATTLE_MONS);
+    Free(savedBattleMons);
+}
+
+// party logic
+s32 AI_CalcPartyMonBestMoveDamage(u32 battlerAtk, u32 battlerDef, struct Pokemon *attackerMon, struct Pokemon *targetMon)
+{
+    s32 i, move, bestDmg, dmg;
     u8 effectiveness;
-    struct BattlePokemon *battleMons = Alloc(sizeof(struct BattlePokemon) * MAX_BATTLERS_COUNT);
+    struct BattlePokemon *savedBattleMons = AllocSaveBattleMons();
 
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-        battleMons[i] = gBattleMons[i];
+    if (attackerMon != NULL)
+        PokemonToBattleMon(attackerMon, &gBattleMons[battlerAtk]);
+    if (targetMon != NULL)
+        PokemonToBattleMon(targetMon, &gBattleMons[battlerDef]);
 
-    PokemonToBattleMon(mon, &gBattleMons[battlerAtk]);
-    dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness, FALSE);
+    for (bestDmg = 0, i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (BattlerHasAi(battlerAtk))
+            move = GetMonData(attackerMon, MON_DATA_MOVE1 + i);
+        else
+            move = AI_PARTY->mons[GET_BATTLER_SIDE2(battlerAtk)][gBattlerPartyIndexes[battlerAtk]].moves[i];
 
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-        gBattleMons[i] = battleMons[i];
+        if (move != MOVE_NONE && gBattleMoves[move].power != 0)
+        {
+            dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness, FALSE);
+            if (dmg > bestDmg)
+                bestDmg = dmg;
+        }
+    }
 
-    Free(battleMons);
-
+    FreeRestoreBattleMons(savedBattleMons);
     return dmg;
 }
 
@@ -3652,7 +3676,8 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
 
 void IncreasePoisonScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
-    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_PSN || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_STATUS)
         return;
 
     if (AI_CanPoison(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], move, AI_DATA->partnerMove) && AI_DATA->hpPercents[battlerDef] > 20)
@@ -3675,7 +3700,8 @@ void IncreasePoisonScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 
 void IncreaseBurnScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
-    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_BRN || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_STATUS)
         return;
 
     if (AI_CanBurn(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove))
@@ -3694,7 +3720,8 @@ void IncreaseBurnScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 
 void IncreaseParalyzeScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
-    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_PAR || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_STATUS)
         return;
 
     if (AI_CanParalyze(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], move, AI_DATA->partnerMove))
@@ -3715,7 +3742,8 @@ void IncreaseParalyzeScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 
 void IncreaseSleepScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
-    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_SLP || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_STATUS)
         return;
 
     if (AI_CanPutToSleep(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], move, AI_DATA->partnerMove))
@@ -3733,7 +3761,8 @@ void IncreaseSleepScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 
 void IncreaseConfusionScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
-    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_CONFUSION || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_STATUS)
         return;
 
     if (AI_CanConfuse(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove)

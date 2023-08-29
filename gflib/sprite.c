@@ -48,11 +48,7 @@ struct OamDimensions
     s8 height;
 };
 
-static void UpdateOamCoords(void);
-static void BuildSpritePriorities(void);
-static void SortSprites(void);
-static void CopyMatricesToOamBuffer(void);
-static void AddSpritesToOamBuffer(void);
+static void SortSprites(u32 *spritePriorities, s32 n);
 static u8 CreateSpriteAt(u8 index, const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
 static void ResetOamMatrices(void);
 static void ResetSprite(struct Sprite *sprite);
@@ -280,12 +276,12 @@ u32 gOamMatrixAllocBitmap;
 u8 gReservedSpritePaletteCount;
 
 EWRAM_DATA struct Sprite gSprites[MAX_SPRITES + 1] = {0};
-EWRAM_DATA static u16 sSpritePriorities[MAX_SPRITES] = {0};
 EWRAM_DATA static u8 sSpriteOrder[MAX_SPRITES] = {0};
 EWRAM_DATA static bool8 sShouldProcessSpriteCopyRequests = 0;
 EWRAM_DATA static u8 sSpriteCopyRequestCount = 0;
 EWRAM_DATA static struct SpriteCopyRequest sSpriteCopyRequests[MAX_SPRITES] = {0};
 EWRAM_DATA u8 gOamLimit = 0;
+static EWRAM_DATA u8 gOamDummyIndex = 0;
 EWRAM_DATA u16 gReservedSpriteTileCount = 0;
 EWRAM_DATA static u8 sSpriteTileAllocBitmap[128] = {0};
 EWRAM_DATA s16 gSpriteCoordOffsetX = 0;
@@ -296,6 +292,7 @@ EWRAM_DATA bool8 gAffineAnimsDisabled = FALSE;
 void ResetSpriteData(void)
 {
     ResetOamRange(0, 128);
+    gOamDummyIndex = 0;
     ResetAllSprites();
     ClearSpriteCopyRequests();
     ResetAffineAnimData();
@@ -326,179 +323,128 @@ void AnimateSprites(void)
 
 void BuildOamBuffer(void)
 {
-    u8 temp;
-    UpdateOamCoords();
-    BuildSpritePriorities();
-    SortSprites();
-    temp = gMain.oamLoadDisabled;
+    bool32 oamLoadDisabled;
+    u32 i, stride;
+    u8 oamIndex;
+
+    // All attributes which affect sorting packed into a single u32:
+    // { priority:2, subpriority:8, y:9, :5, index:8 }.
+    // Index has its own byte even though it only needs 6 bits so that
+    // we can load it with a ldrb instead of having to mask out the
+    // bottom 6 bits.
+    u32 spritePriorities[MAX_SPRITES];
+    s32 toSort = 0;
+    u8 skippedSprites[MAX_SPRITES];
+    u32 skippedSpritesN = 0;
+    u32 matrices = 0;
+
+    for (i = 0; i < MAX_SPRITES; i++)
+    {
+        // Reuse existing sSpriteOrder because we expect the order to be
+        // relatively stable between frames.
+        u32 index = sSpriteOrder[i];
+        struct Sprite *sprite = &gSprites[index];
+        s32 y;
+        if (!sprite->inUse || sprite->invisible)
+        {
+            skippedSprites[skippedSpritesN++] = index;
+            continue;
+        }
+
+        if (sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK)
+            matrices |= 1 << sprite->oam.matrixNum;
+
+        if (sprite->coordOffsetEnabled)
+        {
+            sprite->oam.x = sprite->x + sprite->x2 + sprite->centerToCornerVecX + gSpriteCoordOffsetX;
+            sprite->oam.y = sprite->y + sprite->y2 + sprite->centerToCornerVecY + gSpriteCoordOffsetY;
+        }
+        else
+        {
+            sprite->oam.x = sprite->x + sprite->x2 + sprite->centerToCornerVecX;
+            sprite->oam.y = sprite->y + sprite->y2 + sprite->centerToCornerVecY;
+        }
+
+        y = sprite->oam.y;
+        if (y >= DISPLAY_HEIGHT)
+        {
+            y -= 256;
+        }
+        else if (sprite->oam.affineMode == ST_OAM_AFFINE_DOUBLE
+              && sprite->oam.size == ST_OAM_SIZE_3)
+        {
+            u32 shape = sprite->oam.shape;
+            if (shape == ST_OAM_SQUARE || shape == ST_OAM_V_RECTANGLE)
+            {
+                if (y > 128)
+                    y -= 256;
+            }
+        }
+
+        // y in [-128...159], so (159 - y) in [0..287].
+        spritePriorities[toSort++]
+            = (sprite->oam.priority << 30)
+            | (sprite->subpriority << 22)
+            | (((159 - y) & 0x1FF) << 13)
+            | (index << 0);
+    }
+
+    SortSprites(spritePriorities, toSort);
+
+    for (i = 0; i < toSort; i++)
+        sSpriteOrder[i] = spritePriorities[i] & 0xFF;
+    for (i = 0; i < skippedSpritesN; i++)
+        sSpriteOrder[toSort + i] = skippedSprites[i];
+
+    oamLoadDisabled = gMain.oamLoadDisabled;
     gMain.oamLoadDisabled = TRUE;
-    AddSpritesToOamBuffer();
-    CopyMatricesToOamBuffer();
-    gMain.oamLoadDisabled = temp;
+
+    for (i = 0, oamIndex = 0; i < toSort; i++)
+    {
+        if (AddSpriteToOamBuffer(&gSprites[spritePriorities[i] & 0xFF], &oamIndex))
+            break;
+    }
+
+    for (i = oamIndex; i < gOamDummyIndex; i++)
+        gMain.oamBuffer[i] = gDummyOamData;
+    gOamDummyIndex = oamIndex;
+
+    for (i = 0; matrices != 0; i++, matrices >>= 1)
+    {
+        if (matrices & 1)
+        {
+            u32 base = 4 * i;
+            gMain.oamBuffer[base + 0].affineParam = gOamMatrices[i].a;
+            gMain.oamBuffer[base + 1].affineParam = gOamMatrices[i].b;
+            gMain.oamBuffer[base + 2].affineParam = gOamMatrices[i].c;
+            gMain.oamBuffer[base + 3].affineParam = gOamMatrices[i].d;
+        }
+    }
+
+    gMain.oamLoadDisabled = oamLoadDisabled;
     sShouldProcessSpriteCopyRequests = TRUE;
 }
 
-void UpdateOamCoords(void)
+static inline void InsertionSort(u32 *spritePriorities, s32 n)
 {
-    u8 i;
-    for (i = 0; i < MAX_SPRITES; i++)
+    s32 i = 1;
+    while (i < n)
     {
-        struct Sprite *sprite = &gSprites[i];
-        if (sprite->inUse && !sprite->invisible)
+        u32 x = spritePriorities[i];
+        s32 j = i - 1;
+        while (j >= 0 && spritePriorities[j] > x)
         {
-            if (sprite->coordOffsetEnabled)
-            {
-                sprite->oam.x = sprite->x + sprite->x2 + sprite->centerToCornerVecX + gSpriteCoordOffsetX;
-                sprite->oam.y = sprite->y + sprite->y2 + sprite->centerToCornerVecY + gSpriteCoordOffsetY;
-            }
-            else
-            {
-                sprite->oam.x = sprite->x + sprite->x2 + sprite->centerToCornerVecX;
-                sprite->oam.y = sprite->y + sprite->y2 + sprite->centerToCornerVecY;
-            }
-        }
-    }
-}
-
-void BuildSpritePriorities(void)
-{
-    u16 i;
-    for (i = 0; i < MAX_SPRITES; i++)
-    {
-        struct Sprite *sprite = &gSprites[i];
-        u16 priority = sprite->subpriority | (sprite->oam.priority << 8);
-        sSpritePriorities[i] = priority;
-    }
-}
-
-void SortSprites(void)
-{
-    u8 i;
-    for (i = 1; i < MAX_SPRITES; i++)
-    {
-        u8 j = i;
-        struct Sprite *sprite1 = &gSprites[sSpriteOrder[i - 1]];
-        struct Sprite *sprite2 = &gSprites[sSpriteOrder[i]];
-        u16 sprite1Priority = sSpritePriorities[sSpriteOrder[i - 1]];
-        u16 sprite2Priority = sSpritePriorities[sSpriteOrder[i]];
-        s16 sprite1Y = sprite1->oam.y;
-        s16 sprite2Y = sprite2->oam.y;
-
-        if (sprite1Y >= DISPLAY_HEIGHT)
-            sprite1Y = sprite1Y - 256;
-
-        if (sprite2Y >= DISPLAY_HEIGHT)
-            sprite2Y = sprite2Y - 256;
-
-        if (sprite1->oam.affineMode == ST_OAM_AFFINE_DOUBLE
-         && sprite1->oam.size == ST_OAM_SIZE_3)
-        {
-            u32 shape = sprite1->oam.shape;
-            if (shape == ST_OAM_SQUARE || shape == ST_OAM_V_RECTANGLE)
-            {
-                if (sprite1Y > 128)
-                    sprite1Y = sprite1Y - 256;
-            }
-        }
-
-        if (sprite2->oam.affineMode == ST_OAM_AFFINE_DOUBLE
-         && sprite2->oam.size == ST_OAM_SIZE_3)
-        {
-            u32 shape = sprite2->oam.shape;
-            if (shape == ST_OAM_SQUARE || shape == ST_OAM_V_RECTANGLE)
-            {
-                if (sprite2Y > 128)
-                    sprite2Y = sprite2Y - 256;
-            }
-        }
-
-        while (j > 0
-            && ((sprite1Priority > sprite2Priority)
-             || (sprite1Priority == sprite2Priority && sprite1Y < sprite2Y)))
-        {
-            u8 temp = sSpriteOrder[j];
-            sSpriteOrder[j] = sSpriteOrder[j - 1];
-            sSpriteOrder[j - 1] = temp;
-
-            // UB: If j equals 1, then j-- makes j equal 0.
-            // Then, sSpriteOrder[-1] gets accessed below.
-            // Although this doesn't result in a bug in the ROM,
-            // the behavior is undefined.
+            spritePriorities[j + 1] = spritePriorities[j];
             j--;
-#ifdef UBFIX
-            if (j == 0)
-                break;
-#endif
-
-            sprite1 = &gSprites[sSpriteOrder[j - 1]];
-            sprite2 = &gSprites[sSpriteOrder[j]];
-            sprite1Priority = sSpritePriorities[sSpriteOrder[j - 1]];
-            sprite2Priority = sSpritePriorities[sSpriteOrder[j]];
-            sprite1Y = sprite1->oam.y;
-            sprite2Y = sprite2->oam.y;
-
-            if (sprite1Y >= DISPLAY_HEIGHT)
-                sprite1Y = sprite1Y - 256;
-
-            if (sprite2Y >= DISPLAY_HEIGHT)
-                sprite2Y = sprite2Y - 256;
-
-            if (sprite1->oam.affineMode == ST_OAM_AFFINE_DOUBLE
-             && sprite1->oam.size == ST_OAM_SIZE_3)
-            {
-                u32 shape = sprite1->oam.shape;
-                if (shape == ST_OAM_SQUARE || shape == ST_OAM_V_RECTANGLE)
-                {
-                    if (sprite1Y > 128)
-                        sprite1Y = sprite1Y - 256;
-                }
-            }
-
-            if (sprite2->oam.affineMode == ST_OAM_AFFINE_DOUBLE
-             && sprite2->oam.size == ST_OAM_SIZE_3)
-            {
-                u32 shape = sprite2->oam.shape;
-                if (shape == ST_OAM_SQUARE || shape == ST_OAM_V_RECTANGLE)
-                {
-                    if (sprite2Y > 128)
-                        sprite2Y = sprite2Y - 256;
-                }
-            }
         }
-    }
-}
-
-void CopyMatricesToOamBuffer(void)
-{
-    u8 i;
-    for (i = 0; i < OAM_MATRIX_COUNT; i++)
-    {
-        u32 base = 4 * i;
-        gMain.oamBuffer[base + 0].affineParam = gOamMatrices[i].a;
-        gMain.oamBuffer[base + 1].affineParam = gOamMatrices[i].b;
-        gMain.oamBuffer[base + 2].affineParam = gOamMatrices[i].c;
-        gMain.oamBuffer[base + 3].affineParam = gOamMatrices[i].d;
-    }
-}
-
-void AddSpritesToOamBuffer(void)
-{
-    u8 i = 0;
-    u8 oamIndex = 0;
-
-    while (i < MAX_SPRITES)
-    {
-        struct Sprite *sprite = &gSprites[sSpriteOrder[i]];
-        if (sprite->inUse && !sprite->invisible && AddSpriteToOamBuffer(sprite, &oamIndex))
-            return;
+        spritePriorities[j + 1] = x;
         i++;
     }
+}
 
-    while (oamIndex < gOamLimit)
-    {
-        gMain.oamBuffer[oamIndex] = gDummyOamData;
-        oamIndex++;
-    }
+static void SortSprites(u32 *spritePriorities, s32 n)
+{
+    InsertionSort(spritePriorities, n);
 }
 
 u8 CreateSprite(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority)
@@ -849,7 +795,7 @@ void CopyToSprites(u8 *src)
 
 void ResetAllSprites(void)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < MAX_SPRITES; i++)
     {
