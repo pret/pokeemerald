@@ -1,9 +1,9 @@
 #include "global.h"
-#include "test.h"
 #include "main.h"
 #include "malloc.h"
 #include "random.h"
 #include "sprite.h"
+#include "test/test.h"
 
 #define OAM_MATRIX_COUNT 32
 

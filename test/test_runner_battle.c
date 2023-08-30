@@ -7,7 +7,7 @@
 #include "main.h"
 #include "malloc.h"
 #include "random.h"
-#include "test_battle.h"
+#include "test/battle.h"
 #include "window.h"
 
 #if defined(__INTELLISENSE__)
@@ -1482,6 +1482,9 @@ void Move(u32 sourceLine, struct BattlePokemon *battler, struct MoveContext ctx)
 
     if (ctx.explicitMegaEvolve && ctx.megaEvolve)
         moveSlot |= RET_MEGA_EVOLUTION;
+
+    if (ctx.explicitUltraBurst && ctx.ultraBurst)
+        moveSlot |= RET_ULTRA_BURST;
 
     if (ctx.explicitTarget)
     {

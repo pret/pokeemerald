@@ -4761,6 +4761,18 @@ const struct SpriteTemplate gSpriteTemplate_BitterMaliceRing = {
     .callback = AnimParticleInVortex 
 };
 
+//ultra burst
+const struct SpriteTemplate gUltraBurstSymbolSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ULTRA_BURST_SYMBOL,
+    .paletteTag = ANIM_TAG_ULTRA_BURST_SYMBOL,
+    .oam = &gOamData_AffineDouble_ObjBlend_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_LusterPurgeCircle,
+    .callback = AnimSpriteOnMonPos
+};
+
 // Z MOVES
 //activate
 const struct SpriteTemplate gZMoveSymbolSpriteTemplate =

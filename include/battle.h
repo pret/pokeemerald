@@ -212,6 +212,7 @@ struct SideTimer
     u8 toxicSpikesAmount;
     u8 stealthRockAmount;
     u8 stickyWebAmount;
+    u8 stickyWebBattlerId;
     u8 stickyWebBattlerSide; // Used for Court Change
     u8 auroraVeilTimer;
     u8 auroraVeilBattlerId;
@@ -291,6 +292,8 @@ struct AiLogicData
     s32 simulatedDmg[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // attacker, target, moveIndex
     u8 effectiveness[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // attacker, target, moveIndex
     u8 moveLimitations[MAX_BATTLERS_COUNT];
+    bool8 shouldSwitchMon; // Because all available moves have no/little effect. Each bit per battler.
+    u8 monToSwitchId[MAX_BATTLERS_COUNT]; // ID of the mon to switch.
 };
 
 struct AI_ThinkingStruct
@@ -303,8 +306,7 @@ struct AI_ThinkingStruct
     u32 aiFlags;
     u8 aiAction;
     u8 aiLogicId;
-    struct AI_SavedBattleMon saved[4];
-    bool8 switchMon; // Because all available moves have no/little effect.
+    struct AI_SavedBattleMon saved[MAX_BATTLERS_COUNT];
 };
 
 #define AI_MOVE_HISTORY_COUNT 3
@@ -486,6 +488,15 @@ struct MegaEvolutionData
     u8 triggerSpriteId;
 };
 
+struct UltraBurstData
+{
+    u8 toBurst; // As flags using gBitTable.
+    bool8 alreadyBursted[4]; // Array id is used for mon position.
+    u8 battlerId;
+    bool8 playerSelect;
+    u8 triggerSpriteId;
+};
+
 struct Illusion
 {
     u8 on;
@@ -614,6 +625,7 @@ struct BattleStruct
     u8 abilityPopUpSpriteIds[MAX_BATTLERS_COUNT][2];    // two per battler
     bool8 throwingPokeBall;
     struct MegaEvolutionData mega;
+    struct UltraBurstData burst;
     struct ZMoveData zmove;
     const u8 *trainerSlideMsg;
     bool8 trainerSlideLowHpMsgDone;
@@ -642,7 +654,6 @@ struct BattleStruct
     u8 forcedSwitch:4; // For each battler
     u8 switchInAbilityPostponed:4; // To not activate against an empty field, each bit for battler
     u8 ballSpriteIds[2];    // item gfx, window gfx
-    u8 stickyWebUser;
     u8 appearedInBattle; // Bitfield to track which Pokemon appeared in battle. Used for Burmy's form change
     u8 skyDropTargets[MAX_BATTLERS_COUNT]; // For Sky Drop, to account for if multiple Pokemon use Sky Drop in a double battle.
     // When using a move which hits multiple opponents which is then bounced by a target, we need to make sure, the move hits both opponents, the one with bounce, and the one without.
@@ -1002,14 +1013,14 @@ extern void (*gPreBattleCallback1)(void);
 extern void (*gBattleMainFunc)(void);
 extern struct BattleResults gBattleResults;
 extern u8 gLeveledUpInBattle;
-extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
 extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gMultiUsePlayerCursor;
 extern u8 gNumberOfMovesToChoose;
-extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 extern bool8 gHasFetchedBall;
 extern u8 gLastUsedBall;
 extern u16 gLastThrownBall;
+extern u16 gBallToDisplay;
+extern bool8 gLastUsedBallMenuPresent;
 extern u8 gPartyCriticalHits[PARTY_SIZE];
 
 #endif // GUARD_BATTLE_H

@@ -52,10 +52,30 @@ static inline uq4_12_t uq4_12_multiply(uq4_12_t a, uq4_12_t b)
     return (product + UQ_4_12_ROUND) >> UQ_4_12_SHIFT;
 }
 
+static inline uq4_12_t uq4_12_multiply_half_down(uq4_12_t a, uq4_12_t b)
+{
+    u32 product = (u32) a * b;
+    return (product + UQ_4_12_ROUND - 1) >> UQ_4_12_SHIFT;
+}
+
 static inline uq4_12_t uq4_12_divide(uq4_12_t dividend, uq4_12_t divisor)
 {
     if (divisor == UQ_4_12(0.0)) return UQ_4_12(0);
     return (dividend << UQ_4_12_SHIFT) / divisor;
+}
+
+// Multiplies value by the UQ_4_12 number modifier.
+// Returns an integer, rounded to nearest (rounding down on n.5)
+static inline u32 uq4_12_multiply_by_int_half_down(uq4_12_t modifier, u32 value)
+{
+    return UQ_4_12_TO_INT((modifier * value) + UQ_4_12_ROUND - 1);
+}
+
+// Multiplies value by the UQ_4_12 number modifier.
+// Returns an integer, rounded to nearest (rounding up on n.5)
+static inline u32 uq4_12_multiply_by_int_half_up(uq4_12_t modifier, u32 value)
+{
+    return UQ_4_12_TO_INT((modifier * value) + UQ_4_12_ROUND);
 }
 
 #endif // FPMATH_H_
