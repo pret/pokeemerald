@@ -96,4 +96,9 @@
 // param1: ability to check.
 #define FORM_CHANGE_BATTLE_TURN_END             15
 
+// Form change that activates when the mon has the defined item.
+// If it's on the player's side, it also requires for the player to trigger it by pressing START before selecting a move.
+// param1: item to hold.
+#define FORM_CHANGE_BATTLE_ULTRA_BURST          16
+
 #endif // GUARD_CONSTANTS_FORM_CHANGE_TYPES_H

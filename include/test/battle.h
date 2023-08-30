@@ -796,6 +796,8 @@ struct MoveContext
     u16 explicitSecondaryEffect:1;
     u16 megaEvolve:1;
     u16 explicitMegaEvolve:1;
+    u16 ultraBurst:1;
+    u16 explicitUltraBurst:1;
     // TODO: u8 zMove:1;
     u16 allowed:1;
     u16 explicitAllowed:1;

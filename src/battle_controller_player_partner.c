@@ -373,6 +373,8 @@ static void PlayerPartnerHandleChooseMove(u32 battler)
         // If partner can mega evolve, do it.
         if (CanMegaEvolve(battler))
             BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
+        else if (CanUltraBurst(battler))
+            BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (RET_ULTRA_BURST) | (gBattlerTarget << 8));
         else
             BtlController_EmitTwoReturnValues(BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
     }

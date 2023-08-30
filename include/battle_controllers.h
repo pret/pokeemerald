@@ -99,6 +99,7 @@ enum {
 // Special return values in gBattleBufferB from Battle Controller functions.
 #define RET_VALUE_LEVELED_UP   11
 #define RET_MEGA_EVOLUTION 0x80
+#define RET_ULTRA_BURST 0x70
 
 struct UnusedControllerStruct
 {
@@ -129,6 +130,7 @@ struct ChooseMoveStruct
     u8 monType2;
     u8 monType3;
     struct MegaEvolutionData mega;
+    struct UltraBurstData burst;
     struct ZMoveData zmove;
 };
 

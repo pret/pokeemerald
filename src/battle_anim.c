@@ -275,6 +275,7 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
         case B_ANIM_WISH_HEAL:
         case B_ANIM_MEGA_EVOLUTION:
         case B_ANIM_PRIMAL_REVERSION:
+        case B_ANIM_ULTRA_BURST:
         case B_ANIM_GULP_MISSILE:
             sAnimHideHpBoxes = TRUE;
             break;

@@ -210,6 +210,8 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_MINIOR_CORE_VIOLET] = sMiniorVioletFormChangeTable,
     [SPECIES_MINIOR_METEOR_YELLOW] = sMiniorYellowFormChangeTable,
     [SPECIES_MINIOR_CORE_YELLOW] = sMiniorYellowFormChangeTable,
+    [SPECIES_NECROZMA_DUSK_MANE] = sNecrozmaDuskManeFormChangeTable,
+    [SPECIES_NECROZMA_DAWN_WINGS] = sNecrozmaDawnWingsFormChangeTable,
 #endif
 #if P_GEN_8_POKEMON == TRUE
     [SPECIES_CRAMORANT] = sCramorantFormChangeTable,
