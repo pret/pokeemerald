@@ -205,7 +205,7 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves, u32 battler)
         defaultScoreMoves >>= 1;
     }
 
-    moveLimitations = AI_DATA->moveLimitations[gActiveBattler];
+    moveLimitations = AI_DATA->moveLimitations[battler];
 
     // Ignore moves that aren't possible to use.
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -214,7 +214,7 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves, u32 battler)
             AI_THINKING_STRUCT->score[i] = 0;
     }
 
-    //sBattler_AI = gActiveBattler;
+    //sBattler_AI = battler;
     gBattlerTarget = SetRandomTarget(sBattler_AI);
     gBattleStruct->aiChosenTarget[sBattler_AI] = gBattlerTarget;
 }
@@ -241,7 +241,7 @@ u8 BattleAI_ChooseMoveOrAction(void)
 u8 ComputeBattleAiScores(u8 battler)
 {
     sBattler_AI = battler;
-    BattleAI_SetupAIData(0xF);
+    BattleAI_SetupAIData(0xF, sBattler_AI);
     return BattleAI_ChooseMoveOrAction();
 }
 
@@ -339,15 +339,15 @@ void Ai_UpdateFaintData(u32 battler)
     aiMon->isFainted = TRUE;
 }
 
-static void SetBattlerAiData(u8 battlerId)
+static void SetBattlerAiData(u8 battler)
 {
-    AI_DATA->abilities[battlerId] = AI_GetAbility(battlerId);
-    AI_DATA->items[battlerId] = gBattleMons[battlerId].item;
-    AI_DATA->holdEffects[battlerId] = AI_GetHoldEffect(battlerId);
-    AI_DATA->holdEffectParams[battlerId] = GetBattlerHoldEffectParam(battlerId);
-    AI_DATA->predictedMoves[battlerId] = gLastMoves[battlerId];
-    AI_DATA->hpPercents[battlerId] = GetHealthPercentage(battlerId);
-    AI_DATA->moveLimitations[battlerId] = CheckMoveLimitations(battlerId, 0, MOVE_LIMITATIONS_ALL);
+    AI_DATA->abilities[battler] = AI_GetAbility(battler);
+    AI_DATA->items[battler] = gBattleMons[battler].item;
+    AI_DATA->holdEffects[battler] = AI_GetHoldEffect(battler);
+    AI_DATA->holdEffectParams[battler] = GetBattlerHoldEffectParam(battler);
+    AI_DATA->predictedMoves[battler] = gLastMoves[battler];
+    AI_DATA->hpPercents[battler] = GetHealthPercentage(battler);
+    AI_DATA->moveLimitations[battler] = CheckMoveLimitations(battler, 0, MOVE_LIMITATIONS_ALL);
 }
 
 void GetAiLogicData(void)
@@ -523,9 +523,9 @@ static u8 ChooseMoveOrAction_Doubles(void)
         else
         {
             if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
-                BattleAI_SetupAIData(gBattleStruct->palaceFlags >> 4);
+                BattleAI_SetupAIData(gBattleStruct->palaceFlags >> 4, sBattler_AI);
             else
-                BattleAI_SetupAIData(0xF);
+                BattleAI_SetupAIData(0xF, sBattler_AI);
 
             gBattlerTarget = i;
             if ((i & BIT_SIDE) != (sBattler_AI & BIT_SIDE))
