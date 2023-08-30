@@ -670,13 +670,13 @@ static void SetBattlePartyIds(void)
     }
 }
 
-static void PrepareBufferDataTransfer(u32 battlerId, u32 bufferId, u8 *data, u16 size)
+static void PrepareBufferDataTransfer(u32 battler, u32 bufferId, u8 *data, u16 size)
 {
     s32 i;
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
-        PrepareBufferDataTransferLink(battlerId, bufferId, size, data);
+        PrepareBufferDataTransferLink(battler, bufferId, size, data);
     }
     else
     {
@@ -684,11 +684,11 @@ static void PrepareBufferDataTransfer(u32 battlerId, u32 bufferId, u8 *data, u16
         {
         case BUFFER_A:
             for (i = 0; i < size; data++, i++)
-                gBattleResources->bufferA[battlerId][i] = *data;
+                gBattleResources->bufferA[battler][i] = *data;
             break;
         case BUFFER_B:
             for (i = 0; i < size; data++, i++)
-                gBattleResources->bufferB[battlerId][i] = *data;
+                gBattleResources->bufferB[battler][i] = *data;
             break;
         }
     }
@@ -723,7 +723,7 @@ enum
     LINK_BUFF_DATA,
 };
 
-void PrepareBufferDataTransferLink(u32 battlerId, u32 bufferId, u16 size, u8 *data)
+void PrepareBufferDataTransferLink(u32 battler, u32 bufferId, u16 size, u8 *data)
 {
     s32 alignedSize;
     s32 i;
@@ -735,7 +735,7 @@ void PrepareBufferDataTransferLink(u32 battlerId, u32 bufferId, u16 size, u8 *da
         gTasks[sLinkSendTaskId].data[14] = 0;
     }
     gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_BUFFER_ID] = bufferId;
-    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_ACTIVE_BATTLER] = battlerId;
+    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_ACTIVE_BATTLER] = battler;
     gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_ATTACKER] = gBattlerAttacker;
     gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_TARGET] = gBattlerTarget;
     gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_SIZE_LO] = alignedSize;
@@ -2562,19 +2562,19 @@ void BtlController_HandleTrainerSlide(u32 battler, u32 trainerPicId)
 
 #undef sSpeedX
 
-void BtlController_HandleTrainerSlideBack(u32 battlerId, s16 data0, bool32 startAnim)
+void BtlController_HandleTrainerSlideBack(u32 battler, s16 data0, bool32 startAnim)
 {
-    u32 side = GetBattlerSide(battlerId);
+    u32 side = GetBattlerSide(battler);
 
-    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[battlerId]]);
-    gSprites[gBattlerSpriteIds[battlerId]].data[0] = data0;
-    gSprites[gBattlerSpriteIds[battlerId]].data[2] = (side == B_SIDE_PLAYER) ? -40 : 280;
-    gSprites[gBattlerSpriteIds[battlerId]].data[4] = gSprites[gBattlerSpriteIds[battlerId]].y;
-    gSprites[gBattlerSpriteIds[battlerId]].callback = StartAnimLinearTranslation;
-    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[battlerId]], SpriteCallbackDummy);
+    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[battler]]);
+    gSprites[gBattlerSpriteIds[battler]].data[0] = data0;
+    gSprites[gBattlerSpriteIds[battler]].data[2] = (side == B_SIDE_PLAYER) ? -40 : 280;
+    gSprites[gBattlerSpriteIds[battler]].data[4] = gSprites[gBattlerSpriteIds[battler]].y;
+    gSprites[gBattlerSpriteIds[battler]].callback = StartAnimLinearTranslation;
+    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[battler]], SpriteCallbackDummy);
     if (startAnim)
-        StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerId]], 1);
-    gBattlerControllerFuncs[battlerId] = Controller_HandleTrainerSlideBack;
+        StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 1);
+    gBattlerControllerFuncs[battler] = Controller_HandleTrainerSlideBack;
 }
 
 #define sSpeedX data[1]
@@ -2667,7 +2667,7 @@ void BtlController_HandlePrintString(u32 battler, bool32 updateTvData, bool32 ar
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     stringId = (u16 *)(&gBattleResources->bufferA[battler][2]);
-    BufferStringBattle(*stringId);
+    BufferStringBattle(*stringId, battler);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
     gBattlerControllerFuncs[battler] = Controller_WaitForString;
     if (updateTvData)

@@ -239,13 +239,13 @@ enum
     TRAINER_SLIDE_BEFORE_FIRST_TURN,
 };
 
-void BufferStringBattle(u16 stringID);
+void BufferStringBattle(u16 stringID, u32 battler);
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src);
 u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst);
 void BattlePutTextOnWindow(const u8 *text, u8 windowId);
-void SetPpNumbersPaletteInMoveSelection(void);
+void SetPpNumbersPaletteInMoveSelection(u32 battler);
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
-u32 ShouldDoTrainerSlide(u32 battlerId, u32 which); // return 1 for TrainerA, 2 forTrainerB
+u32 ShouldDoTrainerSlide(u32 battler, u32 which); // return 1 for TrainerA, 2 forTrainerB
 void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
 extern struct BattleMsgData *gBattleMsgDataPtr;

@@ -374,7 +374,7 @@ static void RecordedPlayerHandleDrawTrainerPic(u32 battler)
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-            trainerPicId = GetActiveBattlerLinkPlayerGender();
+            trainerPicId = GetBattlerLinkPlayerGender(battler);
         else
             trainerPicId = gLinkPlayers[gRecordedBattleMultiplayerId].gender;
     }
@@ -432,7 +432,7 @@ static void RecordedPlayerHandlePrintString(u32 battler)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     stringId = (u16 *)(&gBattleResources->bufferA[battler][2]);
-    BufferStringBattle(*stringId);
+    BufferStringBattle(*stringId, battler);
 
     if (gTestRunnerEnabled)
     {

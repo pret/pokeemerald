@@ -184,7 +184,7 @@ void BattleAI_SetupFlags(void)
 }
 
 // sBattler_AI set in ComputeBattleAiScores
-void BattleAI_SetupAIData(u8 defaultScoreMoves)
+void BattleAI_SetupAIData(u8 defaultScoreMoves, u32 battler)
 {
     s32 i, move, dmg;
     u8 moveLimitations;
@@ -434,13 +434,11 @@ static u8 ChooseMoveOrAction_Singles(void)
     if (AI_THINKING_STRUCT->aiAction & AI_ACTION_WATCH)
         return AI_CHOICE_WATCH;
 
-    gActiveBattler = sBattler_AI;
-
     // If can switch.
     if (CountUsablePartyMons(sBattler_AI) > 0
         && !IsAbilityPreventingEscape(sBattler_AI)
-        && !(gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION))
-        && !(gStatuses3[gActiveBattler] & STATUS3_ROOTED)
+        && !(gBattleMons[sBattler_AI].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION))
+        && !(gStatuses3[sBattler_AI] & STATUS3_ROOTED)
         && !(gBattleTypeFlags & (BATTLE_TYPE_ARENA | BATTLE_TYPE_PALACE))
         && AI_THINKING_STRUCT->aiFlags & (AI_FLAG_CHECK_VIABILITY | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_PREFER_BATON_PASS))
     {

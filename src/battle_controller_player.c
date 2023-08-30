@@ -863,7 +863,7 @@ static void HandleInputChooseMove(u32 battler)
             //TODO: brighten z move symbol
             PlaySE(SE_SELECT);
             if (!gBattleStruct->zmove.viewing)
-                MoveSelectionDisplayZMove(gBattleStruct->zmove.chosenZMove);
+                MoveSelectionDisplayZMove(gBattleStruct->zmove.chosenZMove, battler);
             else
                 ReloadMoveNames(battler);
         }
@@ -1638,7 +1638,7 @@ static void MoveSelectionDisplayPpNumber(u32 battler)
     if (gBattleResources->bufferA[battler][2] == TRUE) // check if we didn't want to display pp number
         return;
 
-    SetPpNumbersPaletteInMoveSelection();
+    SetPpNumbersPaletteInMoveSelection(battler);
     moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
     txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[gMoveSelectionCursor[battler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
     *(txtPtr)++ = CHAR_SLASH;
