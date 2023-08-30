@@ -27004,6 +27004,7 @@ General_PrimalReversion_Omega:
 	end
 
 General_UltraBurst::
+	loadspritegfx ANIM_TAG_ULTRA_BURST_SYMBOL
 	loadspritegfx ANIM_TAG_SPARK_2 @spark
 	loadspritegfx ANIM_TAG_LEAF @green
 	loadspritegfx ANIM_TAG_ELECTRIC_ORBS @charge particles
@@ -27025,12 +27026,16 @@ General_UltraBurst::
 	call LightThatBurnsTheSkyGreenSparks
 	call LightThatBurnsTheSkyGreenSparks
 	call LightThatBurnsTheSkyGreenSparks
-	delay 0xe
+	delay 20
+	createvisualtask AnimTask_BlendBattleAnimPalExclude, 5, 5, 2, 0, 16, RGB_WHITEALPHA
 	createvisualtask AnimTask_TransformMon, 2, 1, 0
+	createsprite gUltraBurstSymbolSpriteTemplate, ANIM_ATTACKER, 0x0, 0x0, 0x0, 0x0, 0x0
+	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPalExclude, 5, 5, 2, 16, 0, RGB_WHITEALPHA
 	createvisualtask AnimTask_HorizontalShake, 5, ANIM_TARGET, 5, 14
 	waitforvisualfinish
 	createvisualtask SoundTask_PlayNormalCry, 0
+	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
 	end
