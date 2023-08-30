@@ -60,10 +60,10 @@ void GetAIPartyIndexes(u32 battlerId, s32 *firstId, s32 *lastId)
 
 static bool8 ShouldSwitchIfAllBadMoves(void)
 {
-    if (gBattleResources->ai->switchMon)
+    if (AI_DATA->shouldSwitchMon & gBitTable[gActiveBattler])
     {
-        gBattleResources->ai->switchMon = 0;
-        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
+        AI_DATA->shouldSwitchMon &= ~(gBitTable[gActiveBattler]);
+        gBattleStruct->AI_monToSwitchIntoId[gActiveBattler] = AI_DATA->monToSwitchId[gActiveBattler];
         BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_SWITCH, 0);
         return TRUE;
     }
@@ -142,11 +142,12 @@ static bool8 ShouldSwitchIfWonderGuard(void)
 static bool8 FindMonThatAbsorbsOpponentsMove(void)
 {
     u8 battlerIn1, battlerIn2;
-    u16 absorbingTypeAbility;
+    u8 numAbsorbingAbilities = 0; 
+    u16 absorbingTypeAbilities[3]; // Array size is maximum number of absorbing abilities for a single type
     s32 firstId;
     s32 lastId; // + 1
     struct Pokemon *party;
-    s32 i;
+    s32 i, j;
 
     if (HasSuperEffectiveMoveAgainstOpponents(TRUE) && Random() % 3 != 0)
         return FALSE;
@@ -171,17 +172,42 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
         battlerIn2 = gActiveBattler;
     }
 
+    // Create an array of possible absorb abilities so the AI considers all of them
     if (gBattleMoves[gLastLandedMoves[gActiveBattler]].type == TYPE_FIRE)
-        absorbingTypeAbility = ABILITY_FLASH_FIRE;
+    {
+        absorbingTypeAbilities[0] = ABILITY_FLASH_FIRE;
+        numAbsorbingAbilities = 1;
+    }
     else if (gBattleMoves[gLastLandedMoves[gActiveBattler]].type == TYPE_WATER)
-        absorbingTypeAbility = ABILITY_WATER_ABSORB;
+    {
+        absorbingTypeAbilities[0] = ABILITY_WATER_ABSORB;
+        absorbingTypeAbilities[1] = ABILITY_STORM_DRAIN;
+        absorbingTypeAbilities[2] = ABILITY_DRY_SKIN;
+        numAbsorbingAbilities = 3;
+    }
     else if (gBattleMoves[gLastLandedMoves[gActiveBattler]].type == TYPE_ELECTRIC)
-        absorbingTypeAbility = ABILITY_VOLT_ABSORB;
+    {
+        absorbingTypeAbilities[0] = ABILITY_VOLT_ABSORB;
+        absorbingTypeAbilities[1] = ABILITY_MOTOR_DRIVE;
+        absorbingTypeAbilities[2] = ABILITY_LIGHTNING_ROD;
+        numAbsorbingAbilities = 3;
+    }
+    else if (gBattleMoves[gLastLandedMoves[gActiveBattler]].type == TYPE_GRASS)
+    {
+        absorbingTypeAbilities[0] = ABILITY_SAP_SIPPER;
+        numAbsorbingAbilities = 1;
+    }
     else
+    {
         return FALSE;
+    }
 
-    if (AI_DATA->abilities[gActiveBattler] == absorbingTypeAbility)
-        return FALSE;
+    // Check current mon for all absorbing abilities
+    for (i = 0; i < numAbsorbingAbilities; i++)
+    {
+        if (AI_DATA->abilities[gActiveBattler] == absorbingTypeAbilities[i])
+            return FALSE;
+    }
 
     GetAIPartyIndexes(gActiveBattler, &firstId, &lastId);
 
@@ -208,15 +234,18 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
             continue;
 
         monAbility = GetMonAbility(&party[i]);
-        if (absorbingTypeAbility == monAbility && Random() & 1)
+
+        for (j = 0; j < numAbsorbingAbilities; j++)
         {
-            // we found a mon.
-            *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = i;
-            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_SWITCH, 0);
-            return TRUE;
+            if (absorbingTypeAbilities[j] == monAbility && Random() & 1)
+            {
+                // we found a mon.
+                *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = i;
+                BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
+                return TRUE;
+            }
         }
     }
-
     return FALSE;
 }
 
