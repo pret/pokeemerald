@@ -665,8 +665,10 @@
 #define STRINGID_SNOWSTOPPED                          663
 #define STRINGID_SNOWWARNINGSNOW                      664
 #define STRINGID_PKMNITEMMELTED                       665
+#define STRINGID_ULTRABURSTREACTING                   666
+#define STRINGID_ULTRABURSTCOMPLETED                  667
 
-#define BATTLESTRINGS_COUNT                           666
+#define BATTLESTRINGS_COUNT                           668
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

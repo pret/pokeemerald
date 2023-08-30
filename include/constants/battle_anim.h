@@ -548,6 +548,7 @@
 #define B_ANIM_ZMOVE_ACTIVATE           34 // Using Z Moves
 #define B_ANIM_AFFECTION_HANGED_ON      35
 #define B_ANIM_SNOW_CONTINUES           36
+#define B_ANIM_ULTRA_BURST              37
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

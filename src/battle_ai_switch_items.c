@@ -60,10 +60,10 @@ void GetAIPartyIndexes(u32 battler, s32 *firstId, s32 *lastId)
 
 static bool8 ShouldSwitchIfAllBadMoves(u32 battler)
 {
-    if (gBattleResources->ai->switchMon)
+    if (AI_DATA->shouldSwitchMon & gBitTable[battler])
     {
-        gBattleResources->ai->switchMon = 0;
-        *(gBattleStruct->AI_monToSwitchIntoId + battler) = PARTY_SIZE;
+        AI_DATA->shouldSwitchMon &= ~(gBitTable[battler]);
+        gBattleStruct->AI_monToSwitchIntoId[battler] = AI_DATA->monToSwitchId[battler];
         BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_SWITCH, 0);
         return TRUE;
     }

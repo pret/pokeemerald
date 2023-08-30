@@ -292,6 +292,8 @@ struct AiLogicData
     s32 simulatedDmg[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // attacker, target, moveIndex
     u8 effectiveness[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // attacker, target, moveIndex
     u8 moveLimitations[MAX_BATTLERS_COUNT];
+    bool8 shouldSwitchMon; // Because all available moves have no/little effect. Each bit per battler.
+    u8 monToSwitchId[MAX_BATTLERS_COUNT]; // ID of the mon to switch.
 };
 
 struct AI_ThinkingStruct
@@ -304,8 +306,7 @@ struct AI_ThinkingStruct
     u32 aiFlags;
     u8 aiAction;
     u8 aiLogicId;
-    struct AI_SavedBattleMon saved[4];
-    bool8 switchMon; // Because all available moves have no/little effect.
+    struct AI_SavedBattleMon saved[MAX_BATTLERS_COUNT];
 };
 
 #define AI_MOVE_HISTORY_COUNT 3
@@ -488,6 +489,15 @@ struct MegaEvolutionData
     u8 triggerSpriteId;
 };
 
+struct UltraBurstData
+{
+    u8 toBurst; // As flags using gBitTable.
+    bool8 alreadyBursted[4]; // Array id is used for mon position.
+    u8 battlerId;
+    bool8 playerSelect;
+    u8 triggerSpriteId;
+};
+
 struct Illusion
 {
     u8 on;
@@ -616,6 +626,7 @@ struct BattleStruct
     u8 abilityPopUpSpriteIds[MAX_BATTLERS_COUNT][2];    // two per battler
     bool8 throwingPokeBall;
     struct MegaEvolutionData mega;
+    struct UltraBurstData burst;
     struct ZMoveData zmove;
     const u8 *trainerSlideMsg;
     bool8 trainerSlideLowHpMsgDone;

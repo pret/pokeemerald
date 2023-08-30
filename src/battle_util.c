@@ -1608,7 +1608,7 @@ static bool32 IsBelchPreventingMove(u32 battler, u32 move)
 u32 TrySetCantSelectMoveBattleScript(u32 battler)
 {
     u32 limitations = 0;
-    u8 moveId = gBattleResources->bufferB[battler][2] & ~RET_MEGA_EVOLUTION;
+    u8 moveId = gBattleResources->bufferB[battler][2] & ~(RET_MEGA_EVOLUTION | RET_ULTRA_BURST);
     u32 move = gBattleMons[battler].moves[moveId];
     u32 holdEffect = GetBattlerHoldEffect(battler, TRUE);
     u16 *choicedMove = &gBattleStruct->choicedMove[battler];
@@ -10083,6 +10083,7 @@ bool32 DoesSpeciesUseHoldItemToChangeForm(u16 species, u16 heldItemId)
             {
             case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM:
             case FORM_CHANGE_BATTLE_PRIMAL_REVERSION:
+            case FORM_CHANGE_BATTLE_ULTRA_BURST:
             case FORM_CHANGE_ITEM_HOLD:
                 if (formChanges[i].param1 == heldItemId)
                     return TRUE;
@@ -10157,6 +10158,61 @@ bool32 CanMegaEvolve(u8 battler)
     return FALSE;
 }
 
+bool32 CanUltraBurst(u8 battler)
+{
+    u32 itemId, holdEffect, species;
+    struct Pokemon *mon;
+    u8 battlerPosition = GetBattlerPosition(battler);
+    u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battler));
+
+    // Check if Player has a Z Ring
+    if ((GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))
+     && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
+        return FALSE;
+
+    // Check if trainer already ultra bursted a pokemon.
+    if (gBattleStruct->burst.alreadyBursted[battlerPosition])
+        return FALSE;
+
+    // Cannot use z move and ultra burst on same turn
+    if (gBattleStruct->zmove.toBeUsed[battler])
+        return FALSE;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+     && IsPartnerMonFromSameTrainer(battler)
+     && (gBattleStruct->burst.alreadyBursted[partnerPosition] || (gBattleStruct->burst.toBurst & gBitTable[BATTLE_PARTNER(battler)])))
+        return FALSE;
+
+    // Check if mon is currently held by Sky Drop
+    if (gStatuses3[battler] & STATUS3_SKY_DROPPED)
+        return FALSE;
+
+    // Gets mon data.
+    if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        mon = &gEnemyParty[gBattlerPartyIndexes[battler]];
+    else
+        mon = &gPlayerParty[gBattlerPartyIndexes[battler]];
+
+    species = GetMonData(mon, MON_DATA_SPECIES);
+    itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
+
+    // Check if there is an entry in the evolution table for Ultra Burst.
+    if (GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_ULTRA_BURST) != SPECIES_NONE)
+    {
+        if (itemId == ITEM_ENIGMA_BERRY_E_READER)
+            holdEffect = gEnigmaBerries[battler].holdEffect;
+        else
+            holdEffect = ItemId_GetHoldEffect(itemId);
+
+        // Can Ultra Burst via Z Crystal.
+        if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
+            return TRUE;
+    }
+
+    // No checks passed, the mon CAN'T ultra burst.
+    return FALSE;
+}
+
 bool32 IsBattlerMegaEvolved(u8 battler)
 {
     // While Transform does copy stats and visuals, it shouldn't be counted as true Mega Evolution.
@@ -10171,6 +10227,14 @@ bool32 IsBattlerPrimalReverted(u8 battler)
     if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
         return FALSE;
     return (gSpeciesInfo[gBattleMons[battler].species].flags & SPECIES_FLAG_PRIMAL_REVERSION);
+}
+
+bool32 IsBattlerUltraBursted(u8 battler)
+{
+    // While Transform does copy stats and visuals, it shouldn't be counted as true Ultra Burst.
+    if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
+        return FALSE;
+    return (gSpeciesInfo[gBattleMons[battler].species].flags & SPECIES_FLAG_ULTRA_BURST);
 }
 
 // Returns SPECIES_NONE if no form change is possible
@@ -10196,6 +10260,7 @@ u16 GetBattleFormChangeTargetSpecies(u8 battler, u16 method)
                 {
                 case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM:
                 case FORM_CHANGE_BATTLE_PRIMAL_REVERSION:
+                case FORM_CHANGE_BATTLE_ULTRA_BURST:
                     if (heldItem == formChanges[i].param1)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
@@ -10266,8 +10331,8 @@ bool32 CanBattlerFormChange(u8 battler, u16 method)
     if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED
         && B_TRANSFORM_FORM_CHANGES >= GEN_5)
         return FALSE;
-    // Mega Evolved Pokémon should always revert to normal upon fainting or ending the battle.
-    if (IsBattlerMegaEvolved(battler) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
+    // Mega Evolved and Ultra Bursted Pokémon should always revert to normal upon fainting or ending the battle.
+    if ((IsBattlerMegaEvolved(battler) || IsBattlerUltraBursted(battler)) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
         return TRUE;
     else if (IsBattlerPrimalReverted(battler) && (method == FORM_CHANGE_END_BATTLE))
         return TRUE;
@@ -10303,8 +10368,8 @@ bool32 TryBattleFormChange(u8 battler, u16 method)
     {
         bool8 restoreSpecies = FALSE;
 
-        // Mega Evolved Pokémon should always revert to normal upon fainting or ending the battle, so no need to add it to the form change tables.
-        if (IsBattlerMegaEvolved(battler) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
+        // Mega Evolved and Ultra Bursted Pokémon should always revert to normal upon fainting or ending the battle, so no need to add it to the form change tables.
+        if ((IsBattlerMegaEvolved(battler) || IsBattlerUltraBursted(battler)) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
             restoreSpecies = TRUE;
 
         // Unlike Megas, Primal Reversion isn't canceled on fainting.

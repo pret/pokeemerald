@@ -561,6 +561,8 @@ static void OpponentHandleChooseMove(u32 battler)
                         QueueZMove(battler, chosenMove);
                     if (CanMegaEvolve(battler)) // If opponent can mega evolve, do it.
                         BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
+                    else if (CanUltraBurst(battler))
+                        BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_ULTRA_BURST) | (gBattlerTarget << 8));
                     else
                         BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
                 }

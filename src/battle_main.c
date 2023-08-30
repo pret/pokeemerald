@@ -3111,6 +3111,7 @@ static void BattleStartClearSetData(void)
     gBattleStruct->arenaLostOpponentMons = 0;
 
     gBattleStruct->mega.triggerSpriteId = 0xFF;
+    gBattleStruct->burst.triggerSpriteId = 0xFF;
 
     for (i = 0; i < ARRAY_COUNT(gSideTimers); i++)
     {
@@ -4288,6 +4289,7 @@ static void HandleTurnActionSelectionState(void)
                     }
 
                     gBattleStruct->mega.toEvolve &= ~(gBitTable[BATTLE_PARTNER(GetBattlerPosition(battler))]);
+                    gBattleStruct->burst.toBurst &= ~(gBitTable[BATTLE_PARTNER(GetBattlerPosition(battler))]);
                     gBattleStruct->zmove.toBeUsed[BATTLE_PARTNER(GetBattlerPosition(battler))] = MOVE_NONE;
                     BtlController_EmitEndBounceEffect(battler, BUFFER_A);
                     MarkBattlerForControllerExec(battler);
@@ -4374,11 +4376,14 @@ static void HandleTurnActionSelectionState(void)
                                 RecordedBattle_SetBattlerAction(battler, gBattleResources->bufferB[battler][2]);
                                 RecordedBattle_SetBattlerAction(battler, gBattleResources->bufferB[battler][3]);
                             }
-                            *(gBattleStruct->chosenMovePositions + battler) = gBattleResources->bufferB[battler][2] & ~RET_MEGA_EVOLUTION;
-                            gChosenMoveByBattler[battler] = gBattleMons[battler].moves[*(gBattleStruct->chosenMovePositions + battler)];
-                            *(gBattleStruct->moveTarget + battler) = gBattleResources->bufferB[battler][3];
+
+                            gBattleStruct->chosenMovePositions[battler] = gBattleResources->bufferB[battler][2] & ~(RET_MEGA_EVOLUTION | RET_ULTRA_BURST);
+                            gChosenMoveByBattler[battler] = gBattleMons[battler].moves[gBattleStruct->chosenMovePositions[battler]];
+                            gBattleStruct->moveTarget[battler] = gBattleResources->bufferB[battler][3];
                             if (gBattleResources->bufferB[battler][2] & RET_MEGA_EVOLUTION)
                                 gBattleStruct->mega.toEvolve |= gBitTable[battler];
+                            else if (gBattleResources->bufferB[battler][2] & RET_ULTRA_BURST)
+                                gBattleStruct->burst.toBurst |= gBitTable[battler];
                             gBattleCommunication[battler]++;
                         }
                         break;
@@ -4996,9 +5001,9 @@ static void PopulateArrayWithBattlers(u8 *battlers)
 
 static bool32 TryDoMegaEvosBeforeMoves(void)
 {
-    if (!(gHitMarker & HITMARKER_RUN) && gBattleStruct->mega.toEvolve)
+    if (!(gHitMarker & HITMARKER_RUN) && (gBattleStruct->mega.toEvolve || gBattleStruct->burst.toBurst))
     {
-        u32 i;
+        u32 i, battler;
         struct Pokemon *party;
         struct Pokemon *mon;
         u8 megaOrder[MAX_BATTLERS_COUNT];
@@ -5019,6 +5024,18 @@ static bool32 TryDoMegaEvosBeforeMoves(void)
                     BattleScriptExecute(BattleScript_WishMegaEvolution);
                 else
                     BattleScriptExecute(BattleScript_MegaEvolution);
+                return TRUE;
+            }
+
+            if (gBattleStruct->burst.toBurst & gBitTable[megaOrder[i]]
+                && !(gProtectStructs[megaOrder[i]].noValidMoves))
+            {
+                battler = gBattlerAttacker = megaOrder[i];
+                gBattleStruct->burst.toBurst &= ~(gBitTable[battler]);
+                gLastUsedItem = gBattleMons[battler].item;
+                party = GetBattlerParty(battler);
+                mon = &party[gBattlerPartyIndexes[battler]];
+                BattleScriptExecute(BattleScript_UltraBurst);
                 return TRUE;
             }
         }
