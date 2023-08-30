@@ -1576,7 +1576,8 @@ static bool8 FallWarpEffect_End(struct Task *task)
     UnfreezeObjectEvents();
     InstallCameraPanAheadCallback();
     DestroyTask(FindTaskIdByFunc(Task_FallWarpFieldEffect));
-    FollowMe_WarpSetEnd();
+    //FollowMe_WarpSetEnd();
+    gSaveBlock2Ptr->follower.warpEnd = 0;
     return FALSE;
 }
 
