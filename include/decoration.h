@@ -53,8 +53,8 @@ struct Decoration
 };
 
 extern const struct Decoration gDecorations[];
-extern EWRAM_DATA u8 *gCurDecorationItems;
-extern EWRAM_DATA u8 gCurDecorationIndex;
+extern u8 *gCurDecorationItems;
+extern u8 gCurDecorationIndex;
 
 void InitDecorationContextItems(void);
 void DoSecretBaseDecorationMenu(u8 taskId);

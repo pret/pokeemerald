@@ -794,7 +794,7 @@ static void AnimTask_FlashAnimTagWithColor_Step2(u8 taskId)
     if (!gPaletteFade.active)
     {
         selectedPalettes = 1 << (IndexOfSpritePaletteTag(gTasks[taskId].data[7]) + 16);
-        BeginNormalPaletteFade(selectedPalettes, 0, 0, 0, RGB(0, 0, 0));
+        BeginNormalPaletteFade(selectedPalettes, 0, 0, 0, RGB_BLACK);
         DestroyAnimVisualTask(taskId);
     }
 }
