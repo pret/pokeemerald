@@ -1327,10 +1327,10 @@ const struct SpriteTemplate gSilverWindSmallSparkSpriteTemplate =
 
 const u16 gMagicalLeafBlendColors[] =
 {
-    RGB(31, 0, 0),
+    RGB_RED,
     RGB(31, 19, 0),
-    RGB(31, 31, 0),
-    RGB(0, 31, 0),
+    RGB_YELLOW,
+    RGB_GREEN,
     RGB(5, 14, 31),
     RGB(22, 10, 31),
     RGB(22, 21, 31),
@@ -2286,10 +2286,10 @@ const struct SpriteTemplate gWavyMusicNotesSpriteTemplate =
 
 const u16 gParticlesColorBlendTable[][6] =
 {
-    {ANIM_TAG_MUSIC_NOTES,     RGB(31, 31, 31), RGB(31, 26, 28), RGB(31, 22, 26), RGB(31, 17, 24), RGB(31, 13, 22)},
-    {ANIM_TAG_BENT_SPOON,      RGB(31, 31, 31), RGB(25, 31, 26), RGB(20, 31, 21), RGB(15, 31, 16), RGB(10, 31, 12)},
-    {ANIM_TAG_SPHERE_TO_CUBE,  RGB(31, 31, 31), RGB(31, 31, 24), RGB(31, 31, 17), RGB(31, 31, 10), RGB(31, 31, 3)},
-    {ANIM_TAG_LARGE_FRESH_EGG, RGB(31, 31, 31), RGB(26, 28, 31), RGB(21, 26, 31), RGB(16, 24, 31), RGB(12, 22, 31)},
+    {ANIM_TAG_MUSIC_NOTES,     RGB_WHITE, RGB(31, 26, 28), RGB(31, 22, 26), RGB(31, 17, 24), RGB(31, 13, 22)},
+    {ANIM_TAG_BENT_SPOON,      RGB_WHITE, RGB(25, 31, 26), RGB(20, 31, 21), RGB(15, 31, 16), RGB(10, 31, 12)},
+    {ANIM_TAG_SPHERE_TO_CUBE,  RGB_WHITE, RGB(31, 31, 24), RGB(31, 31, 17), RGB(31, 31, 10), RGB(31, 31, 3)},
+    {ANIM_TAG_LARGE_FRESH_EGG, RGB_WHITE, RGB(26, 28, 31), RGB(21, 26, 31), RGB(16, 24, 31), RGB(12, 22, 31)},
 };
 
 const struct SpriteTemplate gFastFlyingMusicNotesSpriteTemplate =
@@ -4832,13 +4832,13 @@ static void AnimFlyingParticle(struct Sprite *sprite)
     {
         sprite->data[4] = 0;
         sprite->data[2] = gBattleAnimArgs[3];
-        sprite->x = 0xFFF0;
+        sprite->x = -16;
     }
     else
     {
         sprite->data[4] = 1;
         sprite->data[2] = -gBattleAnimArgs[3];
-        sprite->x = 0x100;
+        sprite->x = DISPLAY_WIDTH + 16;
     }
 
     sprite->data[1] = gBattleAnimArgs[1];
@@ -4877,7 +4877,7 @@ static void AnimFlyingParticle_Step(struct Sprite *sprite)
     sprite->data[0] = (sprite->data[3] * a) & 0xFF;
     if (!sprite->data[4])
     {
-        if (sprite->x2 + sprite->x <= 0xF7)
+        if (sprite->x2 + sprite->x < DISPLAY_WIDTH + 8)
             return;
     }
     else
@@ -5611,7 +5611,7 @@ static void AnimLockOnTarget_Step4(struct Sprite *sprite)
         sprite->data[1] = 0;
     }
 
-    BlendPalettes(GetBattlePalettesMask(TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE), sprite->data[1], RGB(31, 31, 31));
+    BlendPalettes(GetBattlePalettesMask(TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE), sprite->data[1], RGB_WHITE);
     if (sprite->data[1] == 16)
     {
         int pal;
@@ -6446,7 +6446,7 @@ void AnimTask_DoubleTeam(u8 taskId)
     for (i = 1; i < 16; i++)
         gPlttBufferUnfaded[r3 + i] = gPlttBufferUnfaded[r4 + i];
 
-    BlendPalette(r3, 16, 11, RGB(0, 0, 0));
+    BlendPalette(r3, 16, 11, RGB_BLACK);
     task->data[3] = 0;
     i = 0;
     while (i < 2 && (obj = CloneBattlerSpriteWithBlend(0)) >= 0)
