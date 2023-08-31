@@ -7961,7 +7961,7 @@ u8 IsMonDisobedient(void)
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return 0;
-    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)
+    if (BattlerHasAi(gBattlerAttacker))
         return 0;
 
     if (IsBattlerModernFatefulEncounter(gBattlerAttacker)) // only false if illegal Mew or Deoxys
