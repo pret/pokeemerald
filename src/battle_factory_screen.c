@@ -639,8 +639,7 @@ static const struct SpriteSheet sSwap_SpriteSheets[] =
     {sActionBoxLeft_Gfx,         sizeof(sActionBoxLeft_Gfx),         GFXTAG_ACTION_BOX_LEFT},
     {sActionBoxRight_Gfx,        sizeof(sActionBoxRight_Gfx),        GFXTAG_ACTION_BOX_RIGHT},
 #ifdef BUGFIX
-    {sActionHighlightLeft_Gfx,   8 * TILE_SIZE_4BPP, /* Incorrect size */ GFXTAG_ACTION_HIGHLIGHT_LEFT},
-    //{sActionHighlightLeft_Gfx,   sizeof(sActionHighlightLeft_Gfx),   GFXTAG_ACTION_HIGHLIGHT_LEFT}, TODOMERGE
+    {sActionHighlightLeft_Gfx,   sizeof(sActionHighlightLeft_Gfx),   GFXTAG_ACTION_HIGHLIGHT_LEFT},
 #else
     {sActionHighlightLeft_Gfx,   8 * TILE_SIZE_4BPP, /* Incorrect size */ GFXTAG_ACTION_HIGHLIGHT_LEFT},
 #endif
@@ -1153,8 +1152,7 @@ static void CB2_InitSelectScreen(void)
     case 1:
         sSelectMenuTilesetBuffer = Alloc(sizeof(gFrontierFactoryMenu_Gfx));
 #ifdef BUGFIX
-        //sSelectMonPicBgTilesetBuffer = AllocZeroed(sizeof(sMonPicBg_Gfx)); //TODOMERGE
-        sSelectMonPicBgTilesetBuffer = AllocZeroed(sizeof(gFrontierFactoryMenu_Gfx)); // Incorrect size
+        sSelectMonPicBgTilesetBuffer = AllocZeroed(sizeof(sMonPicBg_Gfx));
 #else
         sSelectMonPicBgTilesetBuffer = AllocZeroed(sizeof(gFrontierFactoryMenu_Gfx)); // Incorrect size
 #endif
@@ -3291,8 +3289,7 @@ static void CB2_InitSwapScreen(void)
     case 1:
         sSwapMenuTilesetBuffer = Alloc(sizeof(gFrontierFactoryMenu_Gfx));
 #ifdef BUGFIX
-        //sSwapMonPicBgTilesetBuffer = AllocZeroed(sizeof(sMonPicBg_Gfx)); TODOMERGE
-        sSwapMonPicBgTilesetBuffer = AllocZeroed(sizeof(gFrontierFactoryMenu_Gfx)); // Incorrect size
+        sSwapMonPicBgTilesetBuffer = AllocZeroed(sizeof(sMonPicBg_Gfx));
 #else
         sSwapMonPicBgTilesetBuffer = AllocZeroed(sizeof(gFrontierFactoryMenu_Gfx)); // Incorrect size
 #endif

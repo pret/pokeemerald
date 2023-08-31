@@ -197,8 +197,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
             if ((numMovesPerGroup & (0xF << 4)) >= (2 << 4))
                 numMultipleMoveGroups++;
 #ifdef BUGFIX
-            if ((numMovesPerGroup & (0xF << 4)) >= (2 << 8))
-            //if ((numMovesPerGroup & (0xF << 8)) >= (2 << 8)) TODOMERGE
+            if ((numMovesPerGroup & (0xF << 8)) >= (2 << 8))
 #else
             if ((numMovesPerGroup & (0xF << 4)) >= (2 << 8))
 #endif
@@ -233,8 +232,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
                 if ((numMovesPerGroup & (0xF << 4)) >= (2 << 4))
                     randSelectGroup = PALACE_MOVE_GROUP_DEFENSE;
 #ifdef BUGFIX
-                if ((numMovesPerGroup & (0xF << 4)) >= (2 << 8))
-                //if ((numMovesPerGroup & (0xF << 8)) >= (2 << 8)) TODOMERGE
+                if ((numMovesPerGroup & (0xF << 8)) >= (2 << 8))
 #else
                 if ((numMovesPerGroup & (0xF << 4)) >= (2 << 8))
 #endif

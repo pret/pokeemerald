@@ -6032,8 +6032,7 @@ static u8 GetMonNicknameLanguage(u8 *nickname)
                 || *nickname == CHAR_DBL_QUOTE_RIGHT
                 || *nickname == CHAR_SGL_QUOTE_LEFT
 #ifdef BUGFIX
-                || *nickname == CHAR_DBL_QUOTE_LEFT // Most likely a typo, CHAR_SGL_QUOTE_RIGHT should be here instead.
-                //|| *nickname == CHAR_SGL_QUOTE_RIGHT //TODOMERGE
+                || *nickname == CHAR_SGL_QUOTE_RIGHT
 #else
                 || *nickname == CHAR_DBL_QUOTE_LEFT // Most likely a typo, CHAR_SGL_QUOTE_RIGHT should be here instead.
 #endif
