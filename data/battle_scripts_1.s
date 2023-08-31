@@ -5401,15 +5401,15 @@ BattleScript_EffectHurricane:
 	goto BattleScript_EffectHit
 
 BattleScript_EffectTeleport:
-	attackcanceler
-	attackstring
 .if B_TELEPORT_BEHAVIOR >= GEN_7
 	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_EffectBatonPass
 	jumpifside BS_ATTACKER, B_SIDE_PLAYER, BattleScript_EffectBatonPass
 .else
-	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_ButItFailed
+	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_ButItFailedAtkCanceler
 .endif
 BattleScript_EffectTeleportTryToRunAway:
+	attackcanceler
+	attackstring
 	ppreduce
 	getifcantrunfrombattle BS_ATTACKER
 	jumpifbyte CMP_EQUAL, gBattleCommunication, BATTLE_RUN_FORBIDDEN, BattleScript_ButItFailed
@@ -5546,6 +5546,8 @@ BattleScript_EffectFakeOut::
 	setmoveeffect MOVE_EFFECT_FLINCH
 	goto BattleScript_EffectHit
 
+BattleScript_ButItFailedAtkCanceler::
+	attackcanceler
 BattleScript_ButItFailedAtkStringPpReduce::
 	attackstring
 BattleScript_ButItFailedPpReduce::
