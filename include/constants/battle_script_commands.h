@@ -210,7 +210,6 @@
 #define VARIOUS_TRY_ACTIVATE_BATTLE_BOND             118
 #define VARIOUS_CONSUME_BERRY                        119
 #define VARIOUS_JUMP_IF_CANT_REVERT_TO_PRIMAL        120
-#define VARIOUS_HANDLE_PRIMAL_REVERSION              121
 #define VARIOUS_APPLY_PLASMA_FISTS                   122
 #define VARIOUS_JUMP_IF_SPECIES                      123
 #define VARIOUS_UPDATE_ABILITY_POPUP                 124
@@ -257,7 +256,6 @@
 #define VARIOUS_TRY_REVIVAL_BLESSING                 165
 #define VARIOUS_TRY_TRAINER_SLIDE_MSG_Z_MOVE         166
 #define VARIOUS_TRY_TRAINER_SLIDE_MSG_MEGA_EVOLUTION 167
-#define VARIOUS_HANDLE_ULTRA_BURST                   168
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

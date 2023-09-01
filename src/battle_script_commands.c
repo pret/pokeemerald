@@ -9626,27 +9626,6 @@ static void Cmd_various(void)
         }
         return;
     }
-    case VARIOUS_HANDLE_MEGA_EVO:
-    {
-        VARIOUS_ARGS(u8 case_);
-        HandleScriptMegaPrimalBurst(cmd->case_, gActiveBattler, HANDLE_TYPE_MEGA_EVOLUTION);
-        gBattlescriptCurrInstr = cmd->nextInstr;
-        return;
-    }
-    case VARIOUS_HANDLE_PRIMAL_REVERSION:
-    {
-        VARIOUS_ARGS(u8 case_);
-        HandleScriptMegaPrimalBurst(cmd->case_, gActiveBattler, HANDLE_TYPE_PRIMAL_REVERSION);
-        gBattlescriptCurrInstr = cmd->nextInstr;
-        return;
-    }
-    case VARIOUS_HANDLE_ULTRA_BURST:
-    {
-        VARIOUS_ARGS(u8 case_);
-        HandleScriptMegaPrimalBurst(cmd->case_, gActiveBattler, HANDLE_TYPE_ULTRA_BURST);
-        gBattlescriptCurrInstr = cmd->nextInstr;
-        return;
-    }
     case VARIOUS_HANDLE_FORM_CHANGE:
     {
         VARIOUS_ARGS(u8 case_);
@@ -16381,5 +16360,32 @@ void BS_SetSnow(void)
     {
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SNOW;
     }
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_HandleMegaEvolution(void)
+{
+    NATIVE_ARGS(u8 battler, u8 caseId);
+
+    gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+    HandleScriptMegaPrimalBurst(cmd->caseId, gActiveBattler, HANDLE_TYPE_MEGA_EVOLUTION);
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_HandlePrimalReversion(void)
+{
+    NATIVE_ARGS(u8 battler, u8 caseId);
+
+    gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+    HandleScriptMegaPrimalBurst(cmd->caseId, gActiveBattler, HANDLE_TYPE_PRIMAL_REVERSION);
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_HandleUltraBurst(void)
+{
+    NATIVE_ARGS(u8 battler, u8 caseId);
+
+    gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+    HandleScriptMegaPrimalBurst(cmd->caseId, gActiveBattler, HANDLE_TYPE_ULTRA_BURST);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }

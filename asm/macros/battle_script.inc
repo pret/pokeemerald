@@ -1382,6 +1382,24 @@
 	.4byte \ptr
 	.endm
 
+	.macro handlemegaevo battler:req, case:req
+	callnative BS_HandleMegaEvolution
+	.byte \battler
+	.byte \case
+	.endm
+
+	.macro handleprimalreversion battler:req, case:req
+	callnative BS_HandlePrimalReversion
+	.byte \battler
+	.byte \case
+	.endm
+
+	.macro handleultraburst battler:req, case:req
+	callnative BS_HandleUltraBurst
+	.byte \battler
+	.byte \case
+	.endm
+
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
@@ -1625,21 +1643,6 @@
 	.macro trysoak failInstr:req
 	various BS_ATTACKER, VARIOUS_TRY_SOAK
 	.4byte \failInstr
-	.endm
-
-	.macro handlemegaevo battler:req, case:req
-	various \battler, VARIOUS_HANDLE_MEGA_EVO
-	.byte \case
-	.endm
-
-	.macro handleprimalreversion battler:req, case:req
-	various \battler, VARIOUS_HANDLE_PRIMAL_REVERSION
-	.byte \case
-	.endm
-
-	.macro handleultraburst battler:req, case:req
-	various \battler, VARIOUS_HANDLE_ULTRA_BURST
-	.byte \case
 	.endm
 
 	.macro handleformchange battler:req, case:req
