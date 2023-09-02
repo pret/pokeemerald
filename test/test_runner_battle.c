@@ -9,6 +9,7 @@
 #include "random.h"
 #include "test/battle.h"
 #include "window.h"
+#include "constants/trainers.h"
 
 #if defined(__INTELLISENSE__)
 #undef TestRunner_Battle_RecordAbilityPopUp
@@ -232,11 +233,15 @@ static void BattleTest_Run(void *data)
     memset(&DATA, 0, sizeof(DATA));
 
     DATA.recordedBattle.rngSeed = RNG_SEED_DEFAULT;
+    DATA.recordedBattle.opponentA = TRAINER_LINK_OPPONENT;
 
     DATA.recordedBattle.textSpeed = OPTIONS_TEXT_SPEED_FAST;
     DATA.recordedBattle.battleFlags = BATTLE_TYPE_RECORDED_IS_MASTER | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_TRAINER | BATTLE_TYPE_IS_MASTER;
     if (test->type == BATTLE_TEST_DOUBLES)
+    {
         DATA.recordedBattle.battleFlags |= BATTLE_TYPE_DOUBLE;
+        DATA.recordedBattle.opponentB = TRAINER_LINK_OPPONENT;
+    }
     for (i = 0; i < STATE->battlersCount; i++)
     {
         DATA.recordedBattle.playersName[i][0] = CHAR_1 + i;

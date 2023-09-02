@@ -1407,11 +1407,11 @@ static void MovePoisonGasCloud(struct Sprite *sprite)
             sprite->data[3] = sprite->y += sprite->y2;
             sprite->data[4] = sprite->y + 4;
             if (IsContest())
-                sprite->data[2] = -0x10;
+                sprite->data[2] = -16;
             else if (GET_BATTLER_SIDE2(gBattleAnimTarget) != B_SIDE_PLAYER)
-                sprite->data[2] = 0x100;
+                sprite->data[2] = DISPLAY_WIDTH + 16;
             else
-                sprite->data[2] = -0x10;
+                sprite->data[2] = -16;
 
             sprite->data[7]++;
             sprite->x2 = sprite->y2 = 0;

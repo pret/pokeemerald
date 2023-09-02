@@ -12729,7 +12729,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         #else
             .power = 120,
         #endif
-        .effect = EFFECT_RECOIL_50,
+        .effect = EFFECT_STEEL_BEAM,
         .type = TYPE_GRASS,
         .accuracy = 95,
         .pp = 5,

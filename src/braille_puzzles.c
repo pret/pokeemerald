@@ -278,6 +278,8 @@ bool8 FldEff_UsePuzzleEffect(void)
     return FALSE;
 }
 
+// The puzzle to unlock Regice's cave requires the player to interact with the braille message on the back wall,
+// step on every space on the perimeter of the cave (and only those spaces) then return to the back wall.
 bool8 ShouldDoBrailleRegicePuzzle(void)
 {
     u8 i;
@@ -287,9 +289,11 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
     {
         if (FlagGet(FLAG_SYS_BRAILLE_REGICE_COMPLETED))
             return FALSE;
-        if (FlagGet(FLAG_TEMP_2) == FALSE)
+        // Set when the player interacts with the braille message
+        if (FlagGet(FLAG_TEMP_REGICE_PUZZLE_STARTED) == FALSE)
             return FALSE;
-        if (FlagGet(FLAG_TEMP_3) == TRUE)
+        // Cleared when the player interacts with the braille message
+        if (FlagGet(FLAG_TEMP_REGICE_PUZZLE_FAILED) == TRUE)
             return FALSE;
 
         for (i = 0; i < ARRAY_COUNT(sRegicePathCoords); i++)
@@ -298,8 +302,7 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
             u8 yPos = sRegicePathCoords[i][1];
             if (gSaveBlock1Ptr->pos.x == xPos && gSaveBlock1Ptr->pos.y == yPos)
             {
-                u16 varValue;
-
+                // Player is standing on a correct space, set the corresponding bit
                 if (i < 16)
                 {
                     u16 val = VarGet(VAR_REGICE_STEPS_1);
@@ -319,11 +322,11 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
                     VarSet(VAR_REGICE_STEPS_3, val);
                 }
 
-                varValue = VarGet(VAR_REGICE_STEPS_1);
-                if (varValue != 0xFFFF || VarGet(VAR_REGICE_STEPS_2) != 0xFFFF || VarGet(VAR_REGICE_STEPS_3) != 0xF)
+                // Make sure a full lap has been completed. There are 36 steps in a lap, so 16+16+4 bits to check across the 3 vars.
+                if (VarGet(VAR_REGICE_STEPS_1) != 0xFFFF || VarGet(VAR_REGICE_STEPS_2) != 0xFFFF || VarGet(VAR_REGICE_STEPS_3) != 0xF)
                     return FALSE;
 
-                // This final check is redundant.
+                // A lap has been completed, the puzzle is complete when the player returns to the braille message.
                 if (gSaveBlock1Ptr->pos.x == 8 && gSaveBlock1Ptr->pos.y == 21)
                     return TRUE;
                 else
@@ -331,8 +334,9 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
             }
         }
 
-        FlagSet(FLAG_TEMP_3);
-        FlagClear(FLAG_TEMP_2);
+        // Player stepped on an incorrect space, puzzle failed.
+        FlagSet(FLAG_TEMP_REGICE_PUZZLE_FAILED);
+        FlagClear(FLAG_TEMP_REGICE_PUZZLE_STARTED);
     }
 
     return FALSE;

@@ -725,7 +725,7 @@ void TryContestEModeLinkup(void)
 u8 CreateTask_ReestablishCableClubLink(void)
 {
     if (FuncIsActiveTask(Task_ReestablishLink) != FALSE)
-        return 0xFF;
+        return TASK_NONE;
 
     switch (gSpecialVar_0x8004)
     {
