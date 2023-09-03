@@ -13,7 +13,7 @@
 #define GAME_STAT_TRAINER_BATTLES              9
 #define GAME_STAT_ENTERED_HOF                 10
 #define GAME_STAT_POKEMON_CAPTURES            11
-#define GAME_STAT_FISHING_CAPTURES            12
+#define GAME_STAT_FISHING_ENCOUNTERS          12
 #define GAME_STAT_HATCHED_EGGS                13
 #define GAME_STAT_EVOLVED_POKEMON             14
 #define GAME_STAT_USED_POKECENTER             15

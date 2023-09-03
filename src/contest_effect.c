@@ -147,7 +147,7 @@ static void ContestEffect_StartleFrontMon(void)
                 break;
         }
         eContestAppealResults.jamQueue[0] = i;
-        eContestAppealResults.jamQueue[1] = 0xFF;
+        eContestAppealResults.jamQueue[1] = CONTESTANT_NONE;
         idx = WasAtLeastOneOpponentJammed();
     }
     if (idx == 0)
@@ -171,7 +171,7 @@ static void ContestEffect_StartlePrevMons(void)
                 eContestAppealResults.jamQueue[j++] = i;
         }
 
-        eContestAppealResults.jamQueue[j] = 0xFF;
+        eContestAppealResults.jamQueue[j] = CONTESTANT_NONE;
         idx = WasAtLeastOneOpponentJammed();
     }
     if (idx == 0)
@@ -214,7 +214,7 @@ static void ContestEffect_StartlePrevMons2(void)
                 u8 rval, jam;
 
                 eContestAppealResults.jamQueue[0] = i;
-                eContestAppealResults.jamQueue[1] = 0xFF;
+                eContestAppealResults.jamQueue[1] = CONTESTANT_NONE;
                 rval = Random() % 10;
 
                 if (rval == 0)
@@ -291,7 +291,7 @@ static void ContestEffect_StartleMonWithJudgesAttention(void)
                 else
                     eContestAppealResults.jam = 10;
                 eContestAppealResults.jamQueue[0] = i;
-                eContestAppealResults.jamQueue[1] = 0xFF;
+                eContestAppealResults.jamQueue[1] = CONTESTANT_NONE;
                 if (WasAtLeastOneOpponentJammed())
                     numStartled++;
             }
@@ -396,7 +396,7 @@ static void ContestEffect_MakeFollowingMonsNervous(void)
     s16 oddsMod[CONTESTANT_COUNT];
     s16 odds[CONTESTANT_COUNT];
 
-    memset(contestantIds, 0xFF, ARRAY_COUNT(contestantIds));
+    memset(contestantIds, CONTESTANT_NONE, ARRAY_COUNT(contestantIds));
     for (i = 0, numAfter = 0; i < CONTESTANT_COUNT; i++)
     {
         if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] < eContestAppealResults.turnOrder[i] &&
@@ -434,7 +434,7 @@ static void ContestEffect_MakeFollowingMonsNervous(void)
     }
     if (odds[0] != 0)
     {
-        for (i = 0; contestantIds[i] != 0xFF; i++)
+        for (i = 0; contestantIds[i] != CONTESTANT_NONE; i++)
         {
             if (Random() % 100 < odds[i] + oddsMod[contestantIds[i]])
             {
@@ -507,7 +507,7 @@ static void ContestEffect_BadlyStartlesMonsInGoodCondition(void)
             else
                 eContestAppealResults.jam = 10;
             eContestAppealResults.jamQueue[0] = i;
-            eContestAppealResults.jamQueue[1] = 0xFF;
+            eContestAppealResults.jamQueue[1] = CONTESTANT_NONE;
             if (WasAtLeastOneOpponentJammed())
                 numHit++;
         }
@@ -758,7 +758,7 @@ static void ContestEffect_NextAppealEarlier(void)
         for (i = 0; i < CONTESTANT_COUNT; i++)
             turnOrder[i] = eContestantStatus[i].nextTurnOrder;
 
-        turnOrder[eContestAppealResults.contestant] = 0xFF;
+        turnOrder[eContestAppealResults.contestant] = CONTESTANT_NONE;
 
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
@@ -800,7 +800,7 @@ static void ContestEffect_NextAppealLater(void)
         for (i = 0; i < CONTESTANT_COUNT; i++)
             turnOrder[i] = eContestantStatus[i].nextTurnOrder;
 
-        turnOrder[eContestAppealResults.contestant] = 0xFF;
+        turnOrder[eContestAppealResults.contestant] = CONTESTANT_NONE;
 
         for (i = CONTESTANT_COUNT - 1; i > -1; i--)
         {
@@ -858,12 +858,12 @@ static void ContestEffect_ScrambleNextTurnOrder(void)
 
             for (j = 0; j < CONTESTANT_COUNT; j++)
             {
-                if (unselectedContestants[j] != 0xFF)
+                if (unselectedContestants[j] != CONTESTANT_NONE)
                 {
                     if (rval == 0)
                     {
                         turnOrder[j] = i;
-                        unselectedContestants[j] = 0xFF;
+                        unselectedContestants[j] = CONTESTANT_NONE;
                         break;
                     }
                     else
@@ -909,7 +909,7 @@ static void ContestEffect_BadlyStartleMonsWithGoodAppeals(void)
             else
                 eContestAppealResults.jam = 10;
             eContestAppealResults.jamQueue[0] = i;
-            eContestAppealResults.jamQueue[1] = 0xFF;
+            eContestAppealResults.jamQueue[1] = CONTESTANT_NONE;
             if (WasAtLeastOneOpponentJammed())
                 numJammed++;
         }
@@ -977,7 +977,7 @@ static void JamByMoveCategory(u8 category)
             else
                 eContestAppealResults.jam = 10;
             eContestAppealResults.jamQueue[0] = i;
-            eContestAppealResults.jamQueue[1] = 0xFF;
+            eContestAppealResults.jamQueue[1] = CONTESTANT_NONE;
             if (WasAtLeastOneOpponentJammed())
                 numJammed++;
         }
@@ -1016,7 +1016,7 @@ static bool8 WasAtLeastOneOpponentJammed(void)
     s16 jamBuffer[CONTESTANT_COUNT] = {0};
     int i;
 
-    for (i = 0; eContestAppealResults.jamQueue[i] != 0xFF; i++)
+    for (i = 0; eContestAppealResults.jamQueue[i] != CONTESTANT_NONE; i++)
     {
         u8 contestant = eContestAppealResults.jamQueue[i];
         if (CanUnnerveContestant(contestant))

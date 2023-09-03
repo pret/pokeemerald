@@ -998,13 +998,13 @@ void CycleSceneryPalette(u8 mode)
                 break;
             if (gMain.vblankCounter1 & 4)
             {
-                x = gPlttBufferUnfaded[9];
-                y = gPlttBufferUnfaded[10];
+                x = gPlttBufferUnfaded[BG_PLTT_ID(0) + 9];
+                y = gPlttBufferUnfaded[BG_PLTT_ID(0) + 10];
             }
             else
             {
-                x = gPlttBufferUnfaded[10];
-                y = gPlttBufferUnfaded[9];
+                x = gPlttBufferUnfaded[BG_PLTT_ID(0) + 10];
+                y = gPlttBufferUnfaded[BG_PLTT_ID(0) + 9];
             }
             LoadPalette(&x, BG_PLTT_ID(0) + 9, sizeof(x));
             LoadPalette(&y, BG_PLTT_ID(0) + 10, sizeof(y));

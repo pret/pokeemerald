@@ -1605,7 +1605,7 @@ u8 LoadSpritePalette(const struct SpritePalette *palette)
         for (i = 0; i < 16; i++) {
           debugPtr[i] = sSpritePaletteTags[i];
         }
-        DoLoadSpritePalette(palette->data, index * 16);
+        DoLoadSpritePalette(palette->data, PLTT_ID(index));
         return index;
     }
 }
@@ -1757,7 +1757,7 @@ bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u
             destOam[i].y = baseY + y;
             destOam[i].tileNum = tileNum + subspriteTable->subsprites[i].tileOffset;
 
-            if (sprite->subspriteMode != SUBSPRITES_IGNORE_PRIORITY)
+            if (sprite->subspriteMode < SUBSPRITES_IGNORE_PRIORITY)
                 destOam[i].priority = subspriteTable->subsprites[i].priority;
         }
     }
