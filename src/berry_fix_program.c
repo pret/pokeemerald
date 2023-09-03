@@ -117,13 +117,7 @@ static const struct WindowTemplate sBerryFixWindowTemplates[] = {
     DUMMY_WIN_TEMPLATE
 };
 
-static const u16 sBerryFixPalColors[] = {
-    RGB_WHITE,       RGB_WHITE,       RGB(12, 12, 12), RGB(26, 26, 25),
-    RGB(28, 1, 1),   RGB(31, 23, 14), RGB(4, 19, 1),   RGB(18, 30, 18),
-    RGB(6, 10, 25),  RGB(20, 24, 30), RGB_WHITE,       RGB(12, 12, 12),
-    RGB(26, 26, 25), RGB_BLACK,       RGB_BLACK,       RGB_BLACK
-};
-
+static const u16 ALIGNED(4) sText_Pal[] = INCBIN_U16("graphics/berry_fix/text.gbapal");
 static const u8 sBerryProgramTextColors[] = {TEXT_DYNAMIC_COLOR_1, TEXT_DYNAMIC_COLOR_2, TEXT_DYNAMIC_COLOR_3};
 static const u8 sGameTitleTextColors[] = { TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_1, TEXT_DYNAMIC_COLOR_4};
 
@@ -152,9 +146,9 @@ static const struct {
     const u16 *palette;
 } sBerryFixGraphics[] = {
     [SCENE_ENSURE_CONNECT] = {
-        gBerryFixGameboy_Gfx,
-        gBerryFixGameboy_Tilemap,
-        gBerryFixGameboy_Pal
+        gBerryFixGbaConnect_Gfx,
+        gBerryFixGbaConnect_Tilemap,
+        gBerryFixGbaConnect_Pal
     },
     [SCENE_TURN_OFF_POWER] = {
         gBerryFixGameboyLogo_Gfx,
@@ -304,7 +298,7 @@ static void BerryFix_GpuSet(void)
     InitWindows(sBerryFixWindowTemplates);
     DeactivateAllTextPrinters();
 
-    DmaCopy32(3, sBerryFixPalColors, BG_PLTT + 0x1E0, sizeof(sBerryFixPalColors));
+    DmaCopy32(3, sText_Pal, BG_PLTT + PLTT_OFFSET_4BPP(15), sizeof(sText_Pal));
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP);
     FillWindowPixelBuffer(WIN_GAME_NAMES, PIXEL_FILL(0));
     FillWindowPixelBuffer(WIN_TURN_OFF_TITLE, PIXEL_FILL(0));
@@ -374,7 +368,9 @@ static void BerryFix_SetScene(int scene)
     CopyBgTilemapBufferToVram(0);
     LZ77UnCompVram(sBerryFixGraphics[scene].gfx, (void *)BG_CHAR_ADDR(1));
     LZ77UnCompVram(sBerryFixGraphics[scene].tilemap, (void *)BG_SCREEN_ADDR(31));
-    CpuCopy32(sBerryFixGraphics[scene].palette, (void *)BG_PLTT, 0x100);
+    // These palettes range in size from 32-48 colors, so the below is interpreting whatever
+    // follows the palette (by default, the corresponding tiles) as the remaining 80-96.
+    CpuCopy32(sBerryFixGraphics[scene].palette, (void *)BG_PLTT, PLTT_SIZEOF(128));
     ShowBg(0);
     ShowBg(1);
 }

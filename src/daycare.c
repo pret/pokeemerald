@@ -93,16 +93,14 @@ static const u8 sJapaneseEggNickname[] = _("タマゴ"); // "tamago" ("egg" in J
 
 u8 *GetMonNickname2(struct Pokemon *mon, u8 *dest)
 {
-    u8 nickname[POKEMON_NAME_LENGTH * 2];
-
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
     GetMonData(mon, MON_DATA_NICKNAME, nickname);
     return StringCopy_Nickname(dest, nickname);
 }
 
 u8 *GetBoxMonNickname(struct BoxPokemon *mon, u8 *dest)
 {
-    u8 nickname[POKEMON_NAME_LENGTH * 2];
-
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
     GetBoxMonData(mon, MON_DATA_NICKNAME, nickname);
     return StringCopy_Nickname(dest, nickname);
 }
@@ -341,7 +339,7 @@ static void Debug_AddDaycareSteps(u16 numSteps)
 
 u8 GetNumLevelsGainedFromDaycare(void)
 {
-    if (GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[gSpecialVar_0x8004], MON_DATA_SPECIES) != 0)
+    if (GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[gSpecialVar_0x8004].mon, MON_DATA_SPECIES) != 0)
         return GetNumLevelsGainedForDaycareMon(&gSaveBlock1Ptr->daycare.mons[gSpecialVar_0x8004]);
 
     return 0;
@@ -685,7 +683,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
         {
             for (j = 0; j < NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES; j++)
             {
-                if (sHatchedEggFatherMoves[i] == ItemIdToBattleMoveId(ITEM_TM01_FOCUS_PUNCH + j) && CanMonLearnTMHM(egg, j))
+                if (sHatchedEggFatherMoves[i] == ItemIdToBattleMoveId(ITEM_TM01 + j) && CanMonLearnTMHM(egg, j))
                 {
                     if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == MON_HAS_MAX_MOVES)
                         DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFatherMoves[i]);
@@ -946,12 +944,12 @@ static bool8 IsEggPending(struct DayCare *daycare)
 // gStringVar3 = first mon trainer's name
 static void _GetDaycareMonNicknames(struct DayCare *daycare)
 {
-    u8 text[12];
+    u8 otName[max(12, PLAYER_NAME_LENGTH + 1)];
     if (GetBoxMonData(&daycare->mons[0].mon, MON_DATA_SPECIES) != 0)
     {
         GetBoxMonNickname(&daycare->mons[0].mon, gStringVar1);
-        GetBoxMonData(&daycare->mons[0].mon, MON_DATA_OT_NAME, text);
-        StringCopy(gStringVar3, text);
+        GetBoxMonData(&daycare->mons[0].mon, MON_DATA_OT_NAME, otName);
+        StringCopy(gStringVar3, otName);
     }
 
     if (GetBoxMonData(&daycare->mons[1].mon, MON_DATA_SPECIES) != 0)
@@ -1146,7 +1144,7 @@ static u8 *AppendMonGenderSymbol(u8 *name, struct BoxPokemon *boxMon)
 
 static void GetDaycareLevelMenuText(struct DayCare *daycare, u8 *dest)
 {
-    u8 monNames[DAYCARE_MON_COUNT][20];
+    u8 monNames[DAYCARE_MON_COUNT][POKEMON_NAME_BUFFER_SIZE];
     u8 i;
 
     *dest = EOS;
@@ -1204,8 +1202,7 @@ static void DaycareAddTextPrinter(u8 windowId, const u8 *text, u32 x, u32 y)
 
 static void DaycarePrintMonNickname(struct DayCare *daycare, u8 windowId, u32 daycareSlotId, u32 y)
 {
-    u8 nickname[POKEMON_NAME_LENGTH * 2];
-
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
     GetBoxMonNickname(&daycare->mons[daycareSlotId].mon, nickname);
     AppendMonGenderSymbol(nickname, &daycare->mons[daycareSlotId].mon);
     DaycareAddTextPrinter(windowId, nickname, 8, y);

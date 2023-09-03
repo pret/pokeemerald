@@ -708,7 +708,7 @@ static void ClearInWildMonRoom(void)
 static void SavePikeChallenge(void)
 {
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
-    VarSet(VAR_TEMP_0, 0);
+    VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveMapView();
     TrySavingData(SAVE_LINK);
@@ -1267,6 +1267,10 @@ static void TryHealMons(u8 healCount)
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         indices[i] = i;
+
+    // Only 'healCount' number of pokemon will be healed.
+    // The order in which they're (attempted to be) healed is random,
+    // and determined by performing 10 random swaps to this index array.
     for (k = 0; k < 10; k++)
     {
         u8 temp;
@@ -1423,6 +1427,7 @@ static void PrepareTwoTrainers(void)
     gFacilityTrainers = gBattleFrontierTrainers;
     do
     {
+        // Pick the 1st trainer, making sure it's not one that's been encountered yet in this challenge.
         trainerId = GetRandomScaledFrontierTrainerId(challengeNum, 1);
         for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1; i++)
         {
@@ -1438,6 +1443,7 @@ static void PrepareTwoTrainers(void)
 
     do
     {
+        // Pick the 2nd trainer, making sure it's not one that's been encountered yet in this challenge.
         trainerId = GetRandomScaledFrontierTrainerId(challengeNum, 1);
         for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum; i++)
         {

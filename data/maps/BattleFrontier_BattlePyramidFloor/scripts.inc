@@ -6,7 +6,7 @@ BattleFrontier_BattlePyramidFloor_MapScripts::
 
 BattleFrontier_BattlePyramidFloor_OnFrame:
 	map_script_2 VAR_TEMP_D, 1, BattleFrontier_BattlePyramidFloor_EventScript_UpdateLight
-	map_script_2 VAR_TEMP_E, 0, BattleFrontier_BattlePyramidFloor_EventScript_PlayPyramidMusic
+	map_script_2 VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0, BattleFrontier_BattlePyramidFloor_EventScript_PlayPyramidMusic
 	map_script_2 VAR_TEMP_F, 1, BattleFrontier_BattlePyramidFloor_EventScript_ShowMapName
 	.2byte 0
 
@@ -33,13 +33,13 @@ BattleFrontier_BattlePyramidFloor_EventScript_ShowMapName::
 
 BattleFrontier_BattlePyramidFloor_EventScript_PlayPyramidMusic::
 	playbgm MUS_B_PYRAMID, FALSE
-	setvar VAR_TEMP_E, 1
+	setvar VAR_TEMP_PLAYING_PYRAMID_MUSIC, 1
 	end
 
 BattleFrontier_BattlePyramidFloor_OnResume:
 	pyramid_setfloorpal
 	frontier_getstatus
-	switch VAR_TEMP_0
+	switch VAR_TEMP_CHALLENGE_STATUS
 	case 0, BattleFrontier_BattlePyramidFloor_EventScript_ReadyChallenge
 	case CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePyramid_EventScript_WarpToLobby
 	case CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePyramidFloor_EventScript_ReadyChallenge

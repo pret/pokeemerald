@@ -100,6 +100,9 @@ static const struct PacifidlogMetatileOffsets sFloatingBridgeMetatileOffsets[] =
 };
 
 // Each element corresponds to a y coordinate row in the sootopolis gym 1F map.
+// The rows with ice each have a temp var used to track the ice steps. Each bit in the var
+// represents whether ice at that x coordinate (starting from the left edge) has been visited.
+// This method of tracking steps will break if the ice puzzle is more than 16 map spaces wide.
 static const u16 sSootopolisGymIceRowVars[] =
 {
     0,

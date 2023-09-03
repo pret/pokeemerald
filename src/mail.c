@@ -551,9 +551,7 @@ static bool8 MailReadBuildGraphics(void)
             break;
         case 9:
             if (FreeTempTileDataBuffersIfPossible())
-            {
                 return FALSE;
-            }
             break;
         case 10:
             FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
@@ -567,23 +565,20 @@ static bool8 MailReadBuildGraphics(void)
             break;
         case 12:
             LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+            gPlttBufferUnfaded[BG_PLTT_ID(15) + 10] = sMailGraphics[sMailRead->mailType].textColor;
+            gPlttBufferFaded[BG_PLTT_ID(15) + 10] = sMailGraphics[sMailRead->mailType].textColor;
+            gPlttBufferUnfaded[BG_PLTT_ID(15) + 11] = sMailGraphics[sMailRead->mailType].textShadow;
+            gPlttBufferFaded[BG_PLTT_ID(15) + 11] = sMailGraphics[sMailRead->mailType].textShadow;
 
-            gPlttBufferUnfaded[250] = sMailGraphics[sMailRead->mailType].textColor;
-            gPlttBufferFaded[250] = sMailGraphics[sMailRead->mailType].textColor;
-            gPlttBufferUnfaded[251] = sMailGraphics[sMailRead->mailType].textShadow;
-            gPlttBufferFaded[251] = sMailGraphics[sMailRead->mailType].textShadow;
             LoadPalette(sMailGraphics[sMailRead->mailType].palette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-
-            gPlttBufferUnfaded[10] = sBgColors[gSaveBlock2Ptr->playerGender][0];
-            gPlttBufferFaded[10] = sBgColors[gSaveBlock2Ptr->playerGender][0];
-            gPlttBufferUnfaded[11] = sBgColors[gSaveBlock2Ptr->playerGender][1];
-            gPlttBufferFaded[11] = sBgColors[gSaveBlock2Ptr->playerGender][1];
+            gPlttBufferUnfaded[BG_PLTT_ID(0) + 10] = sBgColors[gSaveBlock2Ptr->playerGender][0];
+            gPlttBufferFaded[BG_PLTT_ID(0) + 10] = sBgColors[gSaveBlock2Ptr->playerGender][0];
+            gPlttBufferUnfaded[BG_PLTT_ID(0) + 11] = sBgColors[gSaveBlock2Ptr->playerGender][1];
+            gPlttBufferFaded[BG_PLTT_ID(0) + 11] = sBgColors[gSaveBlock2Ptr->playerGender][1];
             break;
         case 13:
             if (sMailRead->hasText)
-            {
                 BufferMailText();
-            }
             break;
         case 14:
             if (sMailRead->hasText)

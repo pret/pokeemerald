@@ -1346,10 +1346,10 @@ static const u16 sHoennToNationalOrder[NUM_SPECIES - 1] =
 
 const struct SpindaSpot gSpindaSpotGraphics[] =
 {
-    {.x = 16, .y = 7, .image = INCBIN_U16("graphics/spinda_spots/spot_0.bin")},
-    {.x = 40, .y = 8, .image = INCBIN_U16("graphics/spinda_spots/spot_1.bin")},
-    {.x = 22, .y = 25, .image = INCBIN_U16("graphics/spinda_spots/spot_2.bin")},
-    {.x = 34, .y = 26, .image = INCBIN_U16("graphics/spinda_spots/spot_3.bin")}
+    {.x = 16, .y = 7, .image = INCBIN_U16("graphics/spinda_spots/spot_0.1bpp")},
+    {.x = 40, .y = 8, .image = INCBIN_U16("graphics/spinda_spots/spot_1.1bpp")},
+    {.x = 22, .y = 25, .image = INCBIN_U16("graphics/spinda_spots/spot_2.1bpp")},
+    {.x = 34, .y = 26, .image = INCBIN_U16("graphics/spinda_spots/spot_3.1bpp")}
 };
 
 #include "data/pokemon/item_effects.h"
@@ -2406,7 +2406,7 @@ void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedI
 void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src)
 {
     s32 i;
-    u8 nickname[30];
+    u8 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
     u8 language;
     u8 value;
 
@@ -2460,7 +2460,7 @@ void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src)
 void CreateBattleTowerMon_HandleLevel(struct Pokemon *mon, struct BattleTowerPokemon *src, bool8 lvl50)
 {
     s32 i;
-    u8 nickname[30];
+    u8 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
     u8 level;
     u8 language;
     u8 value;
@@ -3622,7 +3622,11 @@ static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 perso
     return substruct;
 }
 
-u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data)
+/* GameFreak called GetMonData with either 2 or 3 arguments, for type
+ * safety we have a GetMonData macro (in include/pokemon.h) which
+ * dispatches to either GetMonData2 or GetMonData3 based on the number
+ * of arguments. */
+u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data)
 {
     u32 ret;
 
@@ -3690,7 +3694,13 @@ u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data)
     return ret;
 }
 
-u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
+u32 GetMonData2(struct Pokemon *mon, s32 field) __attribute__((alias("GetMonData3")));
+
+/* GameFreak called GetBoxMonData with either 2 or 3 arguments, for type
+ * safety we have a GetBoxMonData macro (in include/pokemon.h) which
+ * dispatches to either GetBoxMonData2 or GetBoxMonData3 based on the
+ * number of arguments. */
+u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
 {
     s32 i;
     u32 retVal = 0;
@@ -4048,6 +4058,8 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
 
     return retVal;
 }
+
+u32 GetBoxMonData2(struct BoxPokemon *boxMon, s32 field) __attribute__((alias("GetBoxMonData3")));
 
 #define SET8(lhs) (lhs) = *data
 #define SET16(lhs) (lhs) = data[0] + (data[1] << 8)
@@ -4699,7 +4711,7 @@ void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
 {
     u16 *hpSwitchout;
     s32 i;
-    u8 nickname[POKEMON_NAME_LENGTH * 2];
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
 
     gBattleMons[battlerId].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES, NULL);
     gBattleMons[battlerId].item = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM, NULL);
@@ -6269,15 +6281,26 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
     {
         return 0;
     }
-    else if (tm < 32)
+
+    // Fewer than 64 moves, use GF's method (for matching).
+    if (sizeof(struct TMHMLearnset) <= 8)
     {
-        u32 mask = 1 << tm;
-        return gTMHMLearnsets[species][0] & mask;
+        if (tm < 32)
+        {
+            u32 mask = 1 << tm;
+            return gTMHMLearnsets[species].as_u32s[0] & mask;
+        }
+        else
+        {
+            u32 mask = 1 << (tm - 32);
+            return gTMHMLearnsets[species].as_u32s[1] & mask;
+        }
     }
     else
     {
-        u32 mask = 1 << (tm - 32);
-        return gTMHMLearnsets[species][1] & mask;
+        u32 index = tm / 32;
+        u32 mask = 1 << (tm % 32);
+        return gTMHMLearnsets[species].as_u32s[index] & mask;
     }
 }
 
@@ -6287,15 +6310,25 @@ u32 CanSpeciesLearnTMHM(u16 species, u8 tm)
     {
         return 0;
     }
-    else if (tm < 32)
+    // Fewer than 64 moves, use GF's method (for matching).
+    if (sizeof(struct TMHMLearnset) <= 8)
     {
-        u32 mask = 1 << tm;
-        return gTMHMLearnsets[species][0] & mask;
+        if (tm < 32)
+        {
+            u32 mask = 1 << tm;
+            return gTMHMLearnsets[species].as_u32s[0] & mask;
+        }
+        else
+        {
+            u32 mask = 1 << (tm - 32);
+            return gTMHMLearnsets[species].as_u32s[1] & mask;
+        }
     }
     else
     {
-        u32 mask = 1 << (tm - 32);
-        return gTMHMLearnsets[species][1] & mask;
+        u32 index = tm / 32;
+        u32 mask = 1 << (tm % 32);
+        return gTMHMLearnsets[species].as_u32s[index] & mask;
     }
 }
 
