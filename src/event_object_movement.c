@@ -1845,8 +1845,8 @@ void UpdateFollowingPokemon(void) { // Update following pokemon if any
   u16 species;
   bool8 shiny;
   u8 form;
-  // Avoid spawning large (64x64) follower pokemon inside buildings
-  if (GetFollowerInfo(&species, &form, &shiny) && !(gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(species, 0)->height == 64) && !FlagGet(FLAG_TEMP_HIDE_FOLLOWER)) {
+  // Avoid spawning large (>32x32) follower pokemon inside buildings
+  if (GetFollowerInfo(&species, &form, &shiny) && !(gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(species, 0)->height > 32) && !FlagGet(FLAG_TEMP_HIDE_FOLLOWER)) {
     if (objEvent == NULL) { // Spawn follower
       struct ObjectEventTemplate template = {
         .localId = OBJ_EVENT_ID_FOLLOWER,
@@ -6785,6 +6785,9 @@ bool8 MovementAction_EnterPokeball_Step1(struct ObjectEvent *objectEvent, struct
       LoadFillColorPalette(RGB_WHITE, OBJ_EVENT_PAL_TAG_WHITE, sprite);
       sprite->affineAnims = sAffineAnims_PokeballFollower;
       sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
+      #if LARGE_OW_SUPPORT
+      sprite->subspriteTableNum = 1;
+      #endif
       InitSpriteAffineAnim(sprite);
       StartSpriteAffineAnim(sprite, sprite->data[6]);
     } else if (sprite->data[3] == 7) { // Free white palette and change to pokeball, disable affine
@@ -8812,7 +8815,14 @@ static void UpdateObjectEventElevationAndPriority(struct ObjectEvent *objEvent, 
     if (objEvent->fixedPriority)
         return;
 
-    ObjectEventUpdateElevation(objEvent);
+    ObjectEventUpdateElevation(objEvent, sprite);
+    #if LARGE_OW_SUPPORT
+    if (objEvent->localId == OBJ_EVENT_ID_FOLLOWER) {
+        // keep subspriteMode synced with player's
+        // so that it disappears under bridges when they do
+        sprite->subspriteMode |= gSprites[gPlayerAvatar.spriteId].subspriteMode & SUBSPRITES_IGNORE_PRIORITY;
+    }
+    #endif
 
     sprite->subspriteTableNum = sElevationToSubspriteTableNum[objEvent->previousElevation];
     sprite->oam.priority = sElevationToPriority[objEvent->previousElevation];
@@ -8829,13 +8839,23 @@ u8 ElevationToPriority(u8 elevation)
     return sElevationToPriority[elevation];
 }
 
-void ObjectEventUpdateElevation(struct ObjectEvent *objEvent)
+// Returns current elevation, or 15 for bridges
+void ObjectEventUpdateElevation(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
     u8 curElevation = MapGridGetElevationAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
     u8 prevElevation = MapGridGetElevationAt(objEvent->previousCoords.x, objEvent->previousCoords.y);
 
-    if (curElevation == 15 || prevElevation == 15)
+    if (curElevation == 15 || prevElevation == 15) {
+        #if LARGE_OW_SUPPORT
+        // Ignore subsprite priorities under bridges
+        // so all subsprites will display below it
+        sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
+        #endif
         return;
+    }
+    #if LARGE_OW_SUPPORT
+    sprite->subspriteMode = SUBSPRITES_ON;
+    #endif
 
     objEvent->currentElevation = curElevation;
 

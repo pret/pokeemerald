@@ -205,7 +205,7 @@ void UpdateObjectEventsForCameraUpdate(s16 x, s16 y);
 u8 GetWalkSlowMovementAction(u32);
 u8 GetJumpMovementAction(u32);
 u8 ElevationToPriority(u8 elevation);
-void ObjectEventUpdateElevation(struct ObjectEvent *objEvent);
+void ObjectEventUpdateElevation(struct ObjectEvent *objEvent, struct Sprite *);
 void SetObjectSubpriorityByElevation(u8 elevation, struct Sprite *, u8 subpriority);
 void UnfreezeObjectEvent(struct ObjectEvent *);
 u8 FindLockedObjectEventIndex(struct ObjectEvent *);
