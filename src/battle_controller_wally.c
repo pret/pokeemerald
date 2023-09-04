@@ -149,7 +149,7 @@ static void WallyHandleActions(u32 battler)
         if (--gBattleStruct->wallyWaitFrames == 0)
         {
             PlaySE(SE_SELECT);
-            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_USE_MOVE, 0);
+            BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_USE_MOVE, 0);
             WallyBufferExecCompleted(battler);
             gBattleStruct->wallyBattleState++;
             gBattleStruct->wallyMovesState = 0;
@@ -160,7 +160,7 @@ static void WallyHandleActions(u32 battler)
         if (--gBattleStruct->wallyWaitFrames == 0)
         {
             PlaySE(SE_SELECT);
-            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_USE_MOVE, 0);
+            BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_USE_MOVE, 0);
             WallyBufferExecCompleted(battler);
             gBattleStruct->wallyBattleState++;
             gBattleStruct->wallyMovesState = 0;
@@ -170,7 +170,7 @@ static void WallyHandleActions(u32 battler)
     case 3:
         if (--gBattleStruct->wallyWaitFrames == 0)
         {
-            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_WALLY_THROW, 0);
+            BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_WALLY_THROW, 0);
             WallyBufferExecCompleted(battler);
             gBattleStruct->wallyBattleState++;
             gBattleStruct->wallyMovesState = 0;
@@ -191,7 +191,7 @@ static void WallyHandleActions(u32 battler)
         if (--gBattleStruct->wallyWaitFrames == 0)
         {
             PlaySE(SE_SELECT);
-            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_USE_ITEM, 0);
+            BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_USE_ITEM, 0);
             WallyBufferExecCompleted(battler);
         }
         break;
@@ -213,7 +213,7 @@ static void CompleteOnChosenItem(u32 battler)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
-        BtlController_EmitOneReturnValue(BUFFER_B, gSpecialVar_ItemId);
+        BtlController_EmitOneReturnValue(battler, BUFFER_B, gSpecialVar_ItemId);
         WallyBufferExecCompleted(battler);
     }
 }
@@ -283,7 +283,7 @@ static void WallyBufferExecCompleted(u32 battler)
     {
         u8 playerId = GetMultiplayerId();
 
-        PrepareBufferDataTransferLink(2, 4, &playerId);
+        PrepareBufferDataTransferLink(battler, 2, 4, &playerId);
         gBattleResources->bufferA[battler][0] = CONTROLLER_TERMINATOR_NOP;
     }
     else
@@ -382,7 +382,7 @@ static void WallyHandleChooseMove(u32 battler)
         if (--gBattleStruct->wallyMoveFrames == 0)
         {
             PlaySE(SE_SELECT);
-            BtlController_EmitTwoReturnValues(BUFFER_B, 10, 0x100);
+            BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, 0x100);
             WallyBufferExecCompleted(battler);
         }
         break;

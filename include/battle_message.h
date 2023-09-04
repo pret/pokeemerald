@@ -27,7 +27,7 @@
 #define B_TXT_ATK_NAME_WITH_PREFIX 0xF
 #define B_TXT_DEF_NAME_WITH_PREFIX 0x10
 #define B_TXT_EFF_NAME_WITH_PREFIX 0x11 // EFF = short for gEffectBank
-#define B_TXT_ACTIVE_NAME_WITH_PREFIX 0x12
+// #define B_TXT_ACTIVE_NAME_WITH_PREFIX 0x12 - removed
 #define B_TXT_SCR_ACTIVE_NAME_WITH_PREFIX 0x13
 #define B_TXT_CURRENT_MOVE 0x14
 #define B_TXT_LAST_MOVE 0x15
@@ -69,8 +69,8 @@
 #define B_TXT_DEF_NAME 0x39
 #define B_TXT_DEF_TEAM1 0x3A // Your/The opposing
 #define B_TXT_DEF_TEAM2 0x3B // your/the opposing
-#define B_TXT_ACTIVE_NAME 0x3C
-#define B_TXT_ACTIVE_NAME2 0x3D // no Illusion check
+// #define B_TXT_SELECTION_NAME 0x3C - removed
+// #define B_TXT_SELECTION_NAME2 0x3D no Illusion check - removed
 
 // for B_TXT_BUFF1, B_TXT_BUFF2 and B_TXT_BUFF3
 
@@ -240,13 +240,13 @@ enum
     TRAINER_SLIDE_BEFORE_FIRST_TURN,
 };
 
-void BufferStringBattle(u16 stringID);
+void BufferStringBattle(u16 stringID, u32 battler);
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src);
 u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst);
 void BattlePutTextOnWindow(const u8 *text, u8 windowId);
-void SetPpNumbersPaletteInMoveSelection(void);
+void SetPpNumbersPaletteInMoveSelection(u32 battler);
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
-u32 ShouldDoTrainerSlide(u32 battlerId, u32 which); // return 1 for TrainerA, 2 forTrainerB
+u32 ShouldDoTrainerSlide(u32 battler, u32 which); // return 1 for TrainerA, 2 forTrainerB
 void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
 extern struct BattleMsgData *gBattleMsgDataPtr;
