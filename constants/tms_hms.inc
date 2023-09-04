@@ -1,3 +1,6 @@
+#ifndef GUARD_CONSTANTS_TMS_HMS_INC
+#define GUARD_CONSTANTS_TMS_HMS_INC
+
 #include "constants/tms_hms.h"
 
 /* Expands to:
@@ -15,3 +18,5 @@ FOREACH_TM(EQUIV_TM)
 FOREACH_HM(EQUIV_HM)
 #undef EQUIV_TM
 #undef EQUIV_HM
+
+#endif @ GUARD_CONSTANTS_TMS_HMS_INC
