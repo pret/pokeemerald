@@ -926,7 +926,6 @@ extern u8 gBattleTerrain;
 extern u32 gUnusedFirstBattleVar1;
 extern u8 *gBattleAnimBgTileBuffer;
 extern u8 *gBattleAnimBgTilemapBuffer;
-extern u8 gSelectionBattler;
 extern u32 gBattleControllerExecFlags;
 extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
