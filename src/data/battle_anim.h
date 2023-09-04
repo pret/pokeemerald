@@ -1156,11 +1156,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_Shock2, 0x0600, ANIM_TAG_SHOCK_2},
     {gBattleAnimSpriteGfx_ClosingEye2, 0x0200, ANIM_TAG_CLOSING_EYE_2},
     {gBattleAnimSpriteGfx_MetalBall, 0x0080, ANIM_TAG_METAL_BALL},
-#if NEW_SUBSTITUTE_PARTICLE
-    {gBattleAnimSpriteGfx_NewSubstituteFront, 0x0200, ANIM_TAG_MONSTER_DOLL},
-#else
     {gBattleAnimSpriteGfx_MonsterDoll, 0x0200, ANIM_TAG_MONSTER_DOLL},
-#endif
     {gBattleAnimSpriteGfx_Whirlwind, 0x0800, ANIM_TAG_WHIRLWIND},
     {gBattleAnimSpriteGfx_Whirlwind2, 0x0080, ANIM_TAG_WHIRLWIND_2},
     {gBattleAnimSpriteGfx_Explosion4, 0x0a00, ANIM_TAG_EXPLOSION_4},
@@ -1607,11 +1603,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_Shock2, ANIM_TAG_SHOCK_2},
     {gBattleAnimSpritePal_ClosingEye2, ANIM_TAG_CLOSING_EYE_2},
     {gBattleAnimSpritePal_MetalBall, ANIM_TAG_METAL_BALL},
-#if NEW_SUBSTITUTE_PARTICLE
-    {gBattleAnimSpritePal_NewSubstituteFront, ANIM_TAG_MONSTER_DOLL},
-#else
     {gBattleAnimSpritePal_MonsterDoll, ANIM_TAG_MONSTER_DOLL},
-#endif
     {gBattleAnimSpritePal_Whirlwind, ANIM_TAG_WHIRLWIND},
     {gBattleAnimSpritePal_Whirlwind, ANIM_TAG_WHIRLWIND_2},
     {gBattleAnimSpritePal_Explosion4, ANIM_TAG_EXPLOSION_4},

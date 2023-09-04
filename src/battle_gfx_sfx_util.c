@@ -955,17 +955,18 @@ void BattleLoadSubstituteOrMonSpriteGfx(u8 battler, bool8 loadMonSprite)
 
     if (!loadMonSprite)
     {
+
         if (IsContest())
             position = B_POSITION_PLAYER_LEFT;
         else
             position = GetBattlerPosition(battler);
 
         if (IsContest())
-            LZDecompressVram(gSubstituteDollBackGfx, gMonSpritesGfxPtr->sprites.ptr[position]);
+            LZDecompressVram(gBattleAnimSpriteGfx_SubstituteBack, gMonSpritesGfxPtr->sprites.ptr[position]);
         else if (GetBattlerSide(battler) != B_SIDE_PLAYER)
-            LZDecompressVram(gSubstituteDollFrontGfx, gMonSpritesGfxPtr->sprites.ptr[position]);
+            LZDecompressVram(gBattleAnimSpriteGfx_Substitute, gMonSpritesGfxPtr->sprites.ptr[position]);
         else
-            LZDecompressVram(gSubstituteDollBackGfx, gMonSpritesGfxPtr->sprites.ptr[position]);
+            LZDecompressVram(gBattleAnimSpriteGfx_SubstituteBack, gMonSpritesGfxPtr->sprites.ptr[position]);
 
         for (i = 1; i < 4; i++)
         {
@@ -973,7 +974,7 @@ void BattleLoadSubstituteOrMonSpriteGfx(u8 battler, bool8 loadMonSprite)
         }
 
         palOffset = OBJ_PLTT_ID(battler);
-        LoadCompressedPalette(gSubstituteDollPal, palOffset, PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gBattleAnimSpritePal_Substitute, palOffset, PLTT_SIZE_4BPP);
     }
     else
     {
