@@ -8,6 +8,7 @@
 #include "battle_ai_switch_items.h"
 #include "battle_factory.h"
 #include "battle_setup.h"
+#include "event_data.h"
 #include "data.h"
 #include "item.h"
 #include "pokemon.h"
@@ -440,17 +441,27 @@ void RecordLastUsedMoveByTarget(void)
     RecordKnownMove(gBattlerTarget, gLastMoves[gBattlerTarget]);
 }
 
+bool32 IsAiVsAiBattle(void)
+{
+    return (B_FLAG_AI_VS_AI_BATTLE && FlagGet(B_FLAG_AI_VS_AI_BATTLE));
+}
+
 bool32 BattlerHasAi(u32 battlerId)
 {
     switch (GetBattlerPosition(battlerId))
     {
     case B_POSITION_PLAYER_LEFT:
+        if (IsAiVsAiBattle())
+            return TRUE;
     default:
         return FALSE;
     case B_POSITION_OPPONENT_LEFT:
         return TRUE;
     case B_POSITION_PLAYER_RIGHT:
-        return ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) != 0);
+        if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) || IsAiVsAiBattle())
+            return TRUE;
+        else
+            return FALSE;
     case B_POSITION_OPPONENT_RIGHT:
         return TRUE;
     }

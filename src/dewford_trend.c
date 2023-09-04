@@ -224,7 +224,7 @@ static void SortTrends(struct DewfordTrend *trends, u16 numTrends, u8 mode)
 }
 
 #define SAVED_TRENDS_SIZE (sizeof(struct DewfordTrend) * SAVED_TRENDS_COUNT)
-#define BUFFER_SIZE (SAVED_TRENDS_SIZE * MAX_LINK_PLAYERS > 0x100 ? SAVED_TRENDS_SIZE * MAX_LINK_PLAYERS : 0x100) // More space was allocated than needed
+#define BUFFER_SIZE max(SAVED_TRENDS_SIZE * MAX_LINK_PLAYERS, 0x100) // More space was allocated than needed
 
 void ReceiveDewfordTrendData(struct DewfordTrend *linkedTrends, size_t size, u8 unused)
 {

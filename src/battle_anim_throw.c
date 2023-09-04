@@ -1574,12 +1574,12 @@ static void SpriteCB_Ball_Capture_Step(struct Sprite *sprite)
     if (sprite->sTimer == 40)
     {
         PlaySE(SE_RG_BALL_CLICK);
-        BlendPalettes(0x10000 << sprite->oam.paletteNum, 6, RGB(0, 0, 0));
+        BlendPalettes(0x10000 << sprite->oam.paletteNum, 6, RGB_BLACK);
         MakeCaptureStars(sprite);
     }
     else if (sprite->sTimer == 60)
     {
-        BeginNormalPaletteFade(0x10000 << sprite->oam.paletteNum, 2, 6, 0, RGB(0, 0, 0));
+        BeginNormalPaletteFade(0x10000 << sprite->oam.paletteNum, 2, 6, 0, RGB_BLACK);
     }
     else if (sprite->sTimer == 95)
     {
@@ -1617,7 +1617,7 @@ static void SpriteCB_Ball_FadeOut(struct Sprite *sprite)
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 0));
         paletteIndex = IndexOfSpritePaletteTag(sprite->template->paletteTag);
-        BeginNormalPaletteFade(1 << (paletteIndex + 0x10), 0, 0, 16, RGB(31, 31, 31));
+        BeginNormalPaletteFade(1 << (paletteIndex + 0x10), 0, 0, 16, RGB_WHITE);
         sprite->sState++;
         break;
     case 1:
@@ -2306,7 +2306,7 @@ u8 LaunchBallFadeMonTask(bool8 unfadeLater, u8 spritePalNum, u32 selectedPalette
         gTasks[taskId].func = Task_FadeMon_ToNormal;
     }
 
-    BeginNormalPaletteFade(selectedPalettes, 0, 0, 16, RGB(31, 31, 31));
+    BeginNormalPaletteFade(selectedPalettes, 0, 0, 16, RGB_WHITE);
     return taskId;
 }
 
@@ -2382,7 +2382,7 @@ void AnimTask_SwapMonSpriteToFromSubstitute(u8 taskId)
 
         gTasks[taskId].data[0] &= 0xFF;
         x = gSprites[spriteId].x + gSprites[spriteId].x2 + 32;
-        if (x > 304)
+        if (x > DISPLAY_WIDTH + 64)
             gTasks[taskId].data[10]++;
         break;
     case 1:
