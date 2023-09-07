@@ -265,10 +265,6 @@ const u32 gBattleAnimSpritePal_SteelBeam[] = INCBIN_U32("graphics/battle_anims/s
 const u32 gBattleAnimSpriteGfx_StraightBeam[] = INCBIN_U32("graphics/battle_anims/sprites/straight_beam.4bpp.lz");
 const u32 gBattleAnimSpritePal_StraightBeam[] = INCBIN_U32("graphics/battle_anims/sprites/straight_beam.gbapal.lz");
 
-const u32 gBattleAnimSpriteGfx_SubstituteBack[] = INCBIN_U32("graphics/battle_anims/sprites/substitute_back_new.4bpp.lz");
-const u32 gBattleAnimSpriteGfx_NewSubstituteFront[] = INCBIN_U32("graphics/battle_anims/sprites/substitute_new.4bpp.lz");
-const u32 gBattleAnimSpritePal_NewSubstituteFront[] = INCBIN_U32("graphics/battle_anims/sprites/substitute_new.gbapal.lz");
-
 const u32 gBattleAnimSpritePal_NewSurf[] = INCBIN_U32("graphics/battle_anims/sprites/surf_new.gbapal.lz");
 
 const u32 gBattleAnimSpriteGfx_NewSword[] = INCBIN_U32("graphics/battle_anims/sprites/sword_new.4bpp.lz");
@@ -1174,9 +1170,9 @@ const u32 gBattleAnimSpritePal_HandsAndFeet[] = INCBIN_U32("graphics/battle_anim
 const u32 gBattleAnimSpriteGfx_Confetti[] = INCBIN_U32("graphics/battle_anims/sprites/confetti.4bpp.lz");
 const u32 gBattleAnimSpritePal_Confetti[] = INCBIN_U32("graphics/battle_anims/sprites/confetti.gbapal.lz");
 
-const u32 gSubstituteDollPal[] = INCBIN_U32("graphics/battle_anims/sprites/substitute.gbapal.lz");
-const u32 gSubstituteDollFrontGfx[] = INCBIN_U32("graphics/battle_anims/sprites/substitute.4bpp.lz");
-const u32 gSubstituteDollBackGfx[] = INCBIN_U32("graphics/battle_anims/sprites/substitute_back.4bpp.lz");
+const u32 gBattleAnimSpriteGfx_Substitute[] = INCBIN_U32("graphics/battle_anims/sprites/substitute.4bpp.lz");
+const u32 gBattleAnimSpriteGfx_SubstituteBack[] = INCBIN_U32("graphics/battle_anims/sprites/substitute_back.4bpp.lz");
+const u32 gBattleAnimSpritePal_Substitute[] = INCBIN_U32("graphics/battle_anims/sprites/substitute.gbapal.lz");
 
 const u32 gBattleAnimSpriteGfx_GreenStar[] = INCBIN_U32("graphics/battle_anims/sprites/green_star.4bpp.lz");
 const u32 gBattleAnimSpritePal_GreenStar[] = INCBIN_U32("graphics/battle_anims/sprites/green_star.gbapal.lz");

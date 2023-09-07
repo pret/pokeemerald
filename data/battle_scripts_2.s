@@ -112,6 +112,7 @@ BattleScript_ItemSetFocusEnergy::
     setfocusenergy
     playmoveanimation BS_ATTACKER, MOVE_FOCUS_ENERGY
     waitanimation
+	copybyte sBATTLER, gBattlerAttacker
     printstring STRINGID_PKMNUSEDXTOGETPUMPED
     waitmessage B_WAIT_TIME_LONG
     end

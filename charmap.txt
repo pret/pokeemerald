@@ -367,7 +367,7 @@ B_ATK_PARTNER_NAME = FD 0E
 B_ATK_NAME_WITH_PREFIX = FD 0F
 B_DEF_NAME_WITH_PREFIX = FD 10
 B_EFF_NAME_WITH_PREFIX = FD 11 @ EFF = short for gEffectBattler
-B_ACTIVE_NAME_WITH_PREFIX = FD 12
+@ FD 12 - preiously gActiveBattler with prefix
 B_SCR_ACTIVE_NAME_WITH_PREFIX = FD 13
 B_CURRENT_MOVE = FD 14
 B_LAST_MOVE = FD 15
@@ -409,8 +409,8 @@ B_ATK_TEAM2 = FD 38
 B_DEF_NAME = FD 39
 B_DEF_TEAM1 = FD 3A
 B_DEF_TEAM2 = FD 3B
-B_ACTIVE_NAME = FD 3C
-B_ACTIVE_NAME2 = FD 3D @ no Illusion check
+@ FD 3C - preiously gActiveBattler
+@ FD 3D - preiously gActiveBattler without Illusion Check
 
 @ indicates the end of a town/city name (before " TOWN" or " CITY")
 NAME_END = FC 00
