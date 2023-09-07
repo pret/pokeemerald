@@ -1311,6 +1311,12 @@
 	callnative BS_CalcMetalBurstDmg
 	.4byte \failInstr
 	.endm
+	
+	.macro jumpifcantfling battler:req, jumpInstr:req
+	callnative BS_JumpIfCantFling
+	.byte \battler
+	.4byte \jumpInstr
+	.endm
 
 	.macro jumpifholdeffect battler:req, holdEffect:req, jumpInstr:req
 	callnative BS_JumpIfHoldEffect
@@ -2036,11 +2042,6 @@
 
 	.macro jumpifteainvulnerable battler:req, jumpInstr:req
 	various \battler, VARIOUS_TEATIME_INVUL
-	.4byte \jumpInstr
-	.endm
-
-	.macro jumpifcantfling battler:req, jumpInstr:req
-	various \battler, VARIOUS_JUMP_IF_CANT_FLING
 	.4byte \jumpInstr
 	.endm
 

@@ -10,6 +10,7 @@ extern const u8 BattleScript_MakeMoveMissed[];
 extern const u8 BattleScript_PrintMoveMissed[];
 extern const u8 BattleScript_MoveMissedPause[];
 extern const u8 BattleScript_MoveMissed[];
+extern const u8 BattleScript_FlingFailConsumeItem[];
 extern const u8 BattleScript_FailedFromAtkString[];
 extern const u8 BattleScript_ButItFailed[];
 extern const u8 BattleScript_StatUp[];
