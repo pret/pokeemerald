@@ -7761,6 +7761,15 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     gBattleScripting.statChanger = SET_STATCHANGER(STAT_SPATK, 1, FALSE);
                 }
                 break;
+            case HOLD_EFFECT_ENIGMA_BERRY: // consume and heal if hit by super effective move
+                if (IsBattlerAlive(battlerId)
+                    && TARGET_TURN_DAMAGED
+                    && gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)
+                {
+                    effect = ItemHealHp(battlerId, gLastUsedItem, TRUE, TRUE);
+                }
+                break;
+
             case HOLD_EFFECT_JABOCA_BERRY:  // consume and damage attacker if used physical move
                 if (IsBattlerAlive(battlerId)
                  && TARGET_TURN_DAMAGED

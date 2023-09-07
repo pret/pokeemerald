@@ -7630,6 +7630,7 @@ const struct Item gItems[] =
         .itemId = ITEM_ENIGMA_BERRY,
         .price = 20,
         .holdEffect = HOLD_EFFECT_ENIGMA_BERRY,
+        .holdEffectParam = 25,
         .description = sEnigmaBerryDesc,
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
