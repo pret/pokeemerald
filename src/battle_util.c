@@ -11106,3 +11106,12 @@ bool32 IsAlly(u32 battlerAtk, u32 battlerDef)
 {
     return (GetBattlerSide(battlerAtk) == GetBattlerSide(battlerDef));
 }
+
+bool32 IsGen6ExpShareEnabled(void)
+{
+#if I_EXP_SHARE_ITEM < GEN_6
+    return FALSE;
+#else
+    return FlagGet(I_EXP_SHARE_FLAG);
+#endif
+}
