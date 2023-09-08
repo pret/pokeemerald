@@ -6965,7 +6965,7 @@ void IsLastMonThatKnowsSurf(void)
     }
 }
 
-u16 GetTMHMMoves(u16 position)
+u16 GetTMHMMoves(u16 item)
 {
-    return sTMHMMoves[position];
+   return (ItemId_GetPocket(item) == POCKET_TM_HM) ? gItems[item].secondaryId : MOVE_NONE;
 }

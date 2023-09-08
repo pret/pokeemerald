@@ -97,7 +97,7 @@ void BufferMoveDeleterNicknameAndMove(void);
 void GetNumMovesSelectedMonHas(void);
 void MoveDeleterChooseMoveToForget(void);
 #if POKEDEX_PLUS_HGSS == TRUE
-u16 GetTMHMMoves(u16 position);
+u16 GetTMHMMoves(u16 item);
 #endif
 
 #endif // GUARD_PARTY_MENU_H
