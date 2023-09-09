@@ -6350,6 +6350,8 @@ static u8 PrintPreEvolutions(u8 taskId, u16 species)
 }
 
 #define EVO_SCREEN_LVL_DIGITS 2
+#define EVO_SCREEN_CRITS_DIGITS 1
+#define EVO_SCREEN_DMG_DIGITS 2
 
 static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth, u8 depth_i)
 {
@@ -6539,6 +6541,47 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
                 mapHeader = Overworld_GetMapHeaderByGroupAndId(gEvolutionTable[species][i].param >> 8, gEvolutionTable[species][i].param & 0xFF);
                 GetMapName(gStringVar2, mapHeader->regionMapSectionId, 0);
                 StringExpandPlaceholders(gStringVar4, gText_EVO_SPECIFIC_MAP );
+                break;
+            case EVO_LEVEL_NATURE_AMPED:
+                ConvertIntToDecimalStringN(gStringVar2, gEvolutionTable[species][i].param, STR_CONV_MODE_LEADING_ZEROS, EVO_SCREEN_LVL_DIGITS); //level                
+                StringExpandPlaceholders(gStringVar4, gText_EVO_LEVEL_NATURE_AMPED);
+                break;
+            case EVO_LEVEL_NATURE_LOW_KEY:
+                ConvertIntToDecimalStringN(gStringVar2, gEvolutionTable[species][i].param, STR_CONV_MODE_LEADING_ZEROS, EVO_SCREEN_LVL_DIGITS); //level                
+                StringExpandPlaceholders(gStringVar4, gText_EVO_LEVEL_NATURE_LOW_KEY);
+                break;
+            case EVO_CRITICAL_HITS:
+                ConvertIntToDecimalStringN(gStringVar2, gEvolutionTable[species][i].param, STR_CONV_MODE_LEADING_ZEROS, EVO_SCREEN_CRITS_DIGITS); //crits                
+                StringExpandPlaceholders(gStringVar4, gText_EVO_CRITICAL_HITS);
+                break;                    
+            case EVO_SCRIPT_TRIGGER_DMG:
+                ConvertIntToDecimalStringN(gStringVar2, gEvolutionTable[species][i].param, STR_CONV_MODE_LEADING_ZEROS, EVO_SCREEN_DMG_DIGITS); //damage                
+                StringExpandPlaceholders(gStringVar4, gText_EVO_SCRIPT_TRIGGER_DMG);
+                break;    
+            case EVO_DARK_SCROLL:
+                item = gEvolutionTable[species][i].param;
+                CopyItemName(item, gStringVar2);
+                StringExpandPlaceholders(gStringVar4, gText_EVO_DARK_SCROLL );
+                break;
+            case EVO_WATER_SCROLL:
+                item = gEvolutionTable[species][i].param;
+                CopyItemName(item, gStringVar2);
+                StringExpandPlaceholders(gStringVar4, gText_EVO_WATER_SCROLL );
+                break;
+            case EVO_ITEM_NIGHT:
+                item = gEvolutionTable[species][i].param;
+                CopyItemName(item, gStringVar2);
+                StringExpandPlaceholders(gStringVar4, gText_EVO_ITEM_NIGHT );
+                break;
+            case EVO_ITEM_DAY:
+                item = gEvolutionTable[species][i].param;
+                CopyItemName(item, gStringVar2);
+                StringExpandPlaceholders(gStringVar4, gText_EVO_ITEM_DAY );
+                break;
+            case EVO_ITEM_HOLD:
+                item = gEvolutionTable[species][i].param;
+                CopyItemName(item, gStringVar2);
+                StringExpandPlaceholders(gStringVar4, gText_EVO_ITEM_HOLD );
                 break;
         default:
             StringExpandPlaceholders(gStringVar4, gText_EVO_UNKNOWN );

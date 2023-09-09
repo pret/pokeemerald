@@ -1943,6 +1943,15 @@ const u8 gText_EVO_SPECIFIC_MON_IN_PARTY[]          = _("LvlUp with {STR_VAR_2} 
 const u8 gText_EVO_LEVEL_DARK_TYPE_MON_IN_PARTY[]   = _("LvlUp with dark type in party");
 const u8 gText_EVO_TRADE_SPECIFIC_MON[]             = _("Traded for {STR_VAR_2}");
 const u8 gText_EVO_SPECIFIC_MAP[]                   = _("LvlUp on {STR_VAR_2}");
+const u8 gText_EVO_LEVEL_NATURE_AMPED[]             = _("LvlUp to {STR_VAR_2}, Amped natures");
+const u8 gText_EVO_LEVEL_NATURE_LOW_KEY[]           = _("LvlUp to {STR_VAR_2}, Low Key natures");
+const u8 gText_EVO_CRITICAL_HITS[]                  = _("Land {STR_VAR_2} critical hits in\nsingle battle");
+const u8 gText_EVO_SCRIPT_TRIGGER_DMG[]             = _("Takes at least {STR_VAR_2} HP in damage");
+const u8 gText_EVO_DARK_SCROLL[]                    = _("ScrllOfDrknss is used");
+const u8 gText_EVO_WATER_SCROLL[]                   = _("ScrollOfWatrs is used");
+const u8 gText_EVO_ITEM_NIGHT[]                     = _("{STR_VAR_2} is used, night");
+const u8 gText_EVO_ITEM_DAY[]                       = _("{STR_VAR_2} is used, day");
+const u8 gText_EVO_ITEM_HOLD[]                      = _("LvlUp, holds {STR_VAR_2}");
 const u8 gText_EVO_UNKNOWN[]                        = _("Method unknown");
 const u8 gText_EVO_NONE[]                           = _("{STR_VAR_1} has no evolution.");
 
