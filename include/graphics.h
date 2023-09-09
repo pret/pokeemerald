@@ -7712,7 +7712,6 @@ extern const u32 gPokedexPlusHGSS_ScreenSearchHoenn_Tilemap[];
 extern const u32 gPokedexPlusHGSS_ScreenSearchNational_Tilemap[];
 #endif
 
-
 // berry tag screen
 extern const u32 gBerryCheck_Gfx[];
 extern const u32 gBerryCheck_Pal[];

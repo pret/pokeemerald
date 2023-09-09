@@ -658,7 +658,6 @@ extern const u8 gText_FORMS_Buttons_Submenu_Decapped_PE[];
 extern const u8 gText_FORMS_NONE[];
 #endif
 
-
 // birch dex rating text
 extern const u8 gBirchDexRatingText_LessThan10[];
 extern const u8 gBirchDexRatingText_LessThan20[];

@@ -806,7 +806,6 @@ u8 GetEggMovesSpecies(u16 species, u16 *eggMoves)
 
     return numEggMoves;
 }
-#endif
 
 bool8 SpeciesCanLearnEggMove(u16 species, u16 move) //Move search PokedexPlus HGSS_Ui
 {
@@ -832,6 +831,7 @@ bool8 SpeciesCanLearnEggMove(u16 species, u16 move) //Move search PokedexPlus HG
     }
     return FALSE;
 }
+#endif
 
 static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, struct BoxPokemon *mother)
 {
