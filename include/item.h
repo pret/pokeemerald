@@ -10,7 +10,6 @@ typedef void (*ItemUseFunc)(u8);
 struct Item
 {
     u8 name[ITEM_NAME_LENGTH];
-    u16 itemId;
     u16 price;
     u8 holdEffect;
     u8 holdEffectParam;
