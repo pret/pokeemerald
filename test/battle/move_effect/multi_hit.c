@@ -133,3 +133,49 @@ SINGLE_BATTLE_TEST("Multi hit Moves hit five times 50 Percent of the time with L
         MESSAGE("Hit 5 time(s)!");
     }
 }
+
+SINGLE_BATTLE_TEST("Scale Shot decreses defense and increases speed after final hit")
+{
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_SCALE_SHOT].effect == EFFECT_MULTI_HIT);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCALE_SHOT); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
+        MESSAGE("Hit 5 time(s)!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Wobbuffet's Defense fell!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Wobbuffet's Speed rose!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Endure does not prevent multiply hits and stat changes accure at the end of the turn")
+{
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_SCALE_SHOT].effect == EFFECT_MULTI_HIT);
+        ASSUME(gBattleMoves[MOVE_ENDURE].effect == EFFECT_ENDURE);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_ENDURE); MOVE(player, MOVE_SCALE_SHOT); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENDURE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
+        MESSAGE("Hit 5 time(s)!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Wobbuffet's Defense fell!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Wobbuffet's Speed rose!");
+    }
+}

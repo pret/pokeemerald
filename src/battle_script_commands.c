@@ -3626,13 +3626,6 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 gBattleMons[gBattlerTarget].status2 |= STATUS2_ESCAPE_PREVENTION;
                 gBattleMons[gBattlerAttacker].status2 |= STATUS2_ESCAPE_PREVENTION;
                 break;
-            case MOVE_EFFECT_SCALE_SHOT:
-                if (!NoAliveMonsForEitherParty())
-                {
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_DefDownSpeedUp;
-                }
-                break;
             case MOVE_EFFECT_BURN_UP:
                 // This seems unnecessary but is done to make it work properly with Parental Bond
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
@@ -5801,6 +5794,12 @@ static void Cmd_moveend(void)
                 gBattleScripting.multihitString[4]++;
                 if (--gMultiHitCounter == 0)
                 {
+                    if (gBattleMoves[gCurrentMove].argument == MOVE_EFFECT_SCALE_SHOT && !NoAliveMonsForEitherParty())
+                    {
+                        BattleScriptPush(gBattlescriptCurrInstr + 1);
+                        gBattlescriptCurrInstr = BattleScript_DefDownSpeedUp;
+                    }
+
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_MultiHitPrintStrings;
                     effect = TRUE;
@@ -8528,6 +8527,16 @@ static bool32 ChangeOrderTargetAfterAttacker(void)
     return TRUE;
 }
 
+static u32 CalculateBattlerPartyCount(u32 battler)
+{
+    u32 count;
+    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+        count = CalculatePlayerPartyCount();
+    else
+        count = CalculateEnemyPartyCount();
+    return count;
+}
+
 static void Cmd_various(void)
 {
     CMD_ARGS(u8 battler, u8 id);
@@ -10320,7 +10329,7 @@ static void Cmd_various(void)
         VARIOUS_ARGS();
         if (gBattleMons[gBattlerAttacker].species == SPECIES_GRENINJA_BATTLE_BOND
             && HasAttackerFaintedTarget()
-            && CalculateEnemyPartyCount() > 1
+            && CalculateBattlerPartyCount(gBattlerTarget) > 1
             && !(gBattleStruct->battleBondTransformed[GET_BATTLER_SIDE2(gBattlerAttacker)] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]))
         {
             gBattleStruct->battleBondTransformed[GET_BATTLER_SIDE2(gBattlerAttacker)] |= gBitTable[gBattlerPartyIndexes[gBattlerAttacker]];
@@ -15886,7 +15895,6 @@ static const u16 sParentalBondBannedEffects[] =
     EFFECT_MULTI_HIT,
     EFFECT_OHKO,
     EFFECT_ROLLOUT,
-    EFFECT_SCALE_SHOT,
     EFFECT_SEMI_INVULNERABLE,
     EFFECT_SKULL_BASH,
     EFFECT_SKY_DROP,
