@@ -1235,8 +1235,12 @@ void ItemUseOutOfBattle_Lantern(u8 taskId)
 
 static void ItemUseOnFieldCB_Lantern(u8 taskId)
 {
-	LockPlayerFieldControls();
+    LockPlayerFieldControls();
+    PlaySE(SE_M_REFLECT);
+    FlagSet(FLAG_SYS_USE_FLASH);
     ScriptContext_SetupScript(EventScript_UseFlash);
+    gFieldCallback2 = NULL;
+    gPostMenuFieldCallback = NULL;
     DestroyTask(taskId);
 }
 
