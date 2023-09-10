@@ -211,7 +211,7 @@ void ItemUseOutOfBattle_ExpShare(u8 taskId)
         if (!gTasks[taskId].data[2]) // to account for pressing select in the overworld
             DisplayItemMessageOnField(taskId, gText_ExpShareOff, Task_CloseCantUseKeyItemMessage);
         else
-            DisplayItemMessage(taskId, 1, gText_ExpShareOff, CloseItemMessage);
+            DisplayItemMessage(taskId, FONT_NORMAL, gText_ExpShareOff, CloseItemMessage);
     }
     else
     {
@@ -219,7 +219,7 @@ void ItemUseOutOfBattle_ExpShare(u8 taskId)
         if (!gTasks[taskId].data[2]) // to account for pressing select in the overworld
             DisplayItemMessageOnField(taskId, gText_ExpShareOn, Task_CloseCantUseKeyItemMessage);
         else
-            DisplayItemMessage(taskId, 1, gText_ExpShareOn, CloseItemMessage);
+            DisplayItemMessage(taskId, FONT_NORMAL, gText_ExpShareOn, CloseItemMessage);
     }
     FlagToggle(I_EXP_SHARE_FLAG);
 #else
