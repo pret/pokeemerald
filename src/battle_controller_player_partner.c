@@ -397,19 +397,21 @@ static void PlayerPartnerHandleChoosePokemon(u32 battler)
         chosenMonId = gSelectedMonPartyId = GetFirstFaintedPartyIndex(battler);
     }
     // Switching out
-    else if (gBattleStruct->monToSwitchIntoId[battler] == PARTY_SIZE)
+    else if (gBattleStruct->monToSwitchIntoId[battler] >= PARTY_SIZE || !IsValidForBattle(&gPlayerParty[gBattleStruct->monToSwitchIntoId[battler]]))
     {
         chosenMonId = GetMostSuitableMonToSwitchInto(battler);
-        if (chosenMonId == PARTY_SIZE) // just switch to the next mon
-        {
-            u8 playerMonIdentity = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-            u8 selfIdentity = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
 
-            for (chosenMonId = PARTY_SIZE / 2; chosenMonId < PARTY_SIZE; chosenMonId++)
+        if (chosenMonId == PARTY_SIZE || !IsValidForBattle(&gPlayerParty[chosenMonId])) // just switch to the next mon
+        {
+            s32 firstId = (IsAiVsAiBattle()) ? 0 : (PARTY_SIZE / 2);
+            u32 battler1 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+            u32 battler2 = IsDoubleBattle() ? GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT) : battler1;
+
+            for (chosenMonId = firstId; chosenMonId < PARTY_SIZE; chosenMonId++)
             {
                 if (GetMonData(&gPlayerParty[chosenMonId], MON_DATA_HP) != 0
-                    && chosenMonId != gBattlerPartyIndexes[playerMonIdentity]
-                    && chosenMonId != gBattlerPartyIndexes[selfIdentity])
+                    && chosenMonId != gBattlerPartyIndexes[battler1]
+                    && chosenMonId != gBattlerPartyIndexes[battler2])
                 {
                     break;
                 }
