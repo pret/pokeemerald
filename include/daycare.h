@@ -30,9 +30,7 @@ void SetDaycareCompatibilityString(void);
 bool8 NameHasGenderSymbol(const u8 *name, u8 genderRatio);
 void ShowDaycareLevelMenu(void);
 void ChooseSendDaycareMon(void);
-#if POKEDEX_PLUS_HGSS == TRUE
 u8 GetEggMovesSpecies(u16 species, u16 *eggMoves);
 bool8 SpeciesCanLearnEggMove(u16 species, u16 move);
-#endif
 
 #endif // GUARD_DAYCARE_H

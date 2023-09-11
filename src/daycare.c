@@ -774,7 +774,6 @@ static u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves)
     return numEggMoves;
 }
 
-#if POKEDEX_PLUS_HGSS == TRUE
 u8 GetEggMovesSpecies(u16 species, u16 *eggMoves)
 {
     u16 eggMoveIdx;
@@ -831,7 +830,6 @@ bool8 SpeciesCanLearnEggMove(u16 species, u16 move) //Move search PokedexPlus HG
     }
     return FALSE;
 }
-#endif
 
 static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, struct BoxPokemon *mother)
 {

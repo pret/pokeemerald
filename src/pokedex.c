@@ -14,11 +14,9 @@
 #include "overworld.h"
 #include "palette.h"
 #include "pokedex.h"
-#if POKEDEX_PLUS_HGSS == TRUE
-#include "pokedex_plus_hgss.h"
-#endif
 #include "pokedex_area_screen.h"
 #include "pokedex_cry_screen.h"
+#include "pokedex_plus_hgss.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "sprite.h"
