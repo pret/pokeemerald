@@ -1781,7 +1781,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .flingPower = 30,
+        .flingPower = 130,
     },
 
     [ITEM_TINY_MUSHROOM] =
