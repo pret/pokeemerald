@@ -1807,7 +1807,7 @@ static void DebugAction_Util_PoisonMons(u8 taskId)
     PlaySE(SE_FIELD_POISON);
 }
 
-void CheckSaveBlock1Size(void)
+void CheckSaveBlock1Size(struct ScriptContext *ctx)
 {
     u32 currSb1Size = sizeof(struct SaveBlock1);
     u32 maxSb1Size = SECTOR_DATA_SIZE * (SECTOR_ID_SAVEBLOCK1_END - SECTOR_ID_SAVEBLOCK1_START + 1);
@@ -1815,7 +1815,7 @@ void CheckSaveBlock1Size(void)
     ConvertIntToDecimalStringN(gStringVar2, maxSb1Size, STR_CONV_MODE_LEFT_ALIGN, 6);
 }
 
-void CheckSaveBlock2Size(void)
+void CheckSaveBlock2Size(struct ScriptContext *ctx)
 {
     u32 currSb2Size = (sizeof(struct SaveBlock2));
     u32 maxSb2Size = SECTOR_DATA_SIZE;
@@ -1823,7 +1823,7 @@ void CheckSaveBlock2Size(void)
     ConvertIntToDecimalStringN(gStringVar2, maxSb2Size, STR_CONV_MODE_LEFT_ALIGN, 6);
 }
 
-void CheckPokemonStorageSize(void)
+void CheckPokemonStorageSize(struct ScriptContext *ctx)
 {
     u32 currPkmnStorageSize = sizeof(struct PokemonStorage);
     u32 maxPkmnStorageSize = SECTOR_DATA_SIZE * (SECTOR_ID_PKMN_STORAGE_END - SECTOR_ID_PKMN_STORAGE_START + 1);
