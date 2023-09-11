@@ -6802,6 +6802,21 @@ static u8 ItemEffectMoveEnd(u32 battlerId, u16 holdEffect)
     case HOLD_EFFECT_SP_DEFENSE_UP:
         effect = StatRaiseBerry(battlerId, gLastUsedItem, STAT_SPDEF, FALSE);
         break;
+    case HOLD_EFFECT_ENIGMA_BERRY: // consume and heal if hit by super effective move
+        if (IsBattlerAlive(battlerId)
+        && TARGET_TURN_DAMAGED
+        && (gBattleScripting.overrideBerryRequirements
+            || (!DoesSubstituteBlockMove(gBattlerAttacker, battlerId, gCurrentMove) && (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE))))
+        {
+            gBattleMoveDamage = (gBattleMons[battlerId].maxHP * 25 / 100) * -1;
+            if (GetBattlerAbility(battlerId) == ABILITY_RIPEN)
+                gBattleMoveDamage *= 2;
+
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_ItemHealHP_RemoveItemRet;
+            return ITEM_HP_CHANGE;
+        }
+        break;
     case HOLD_EFFECT_KEE_BERRY:  // consume and boost defense if used physical move
         effect = DamagedStatBoostBerryEffect(battlerId, STAT_DEF, SPLIT_PHYSICAL);
         break;
