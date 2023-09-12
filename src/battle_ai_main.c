@@ -1,4 +1,5 @@
 #include "global.h"
+#include "main.h"
 #include "malloc.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -335,7 +336,7 @@ void Ai_UpdateFaintData(u32 battler)
     aiMon->isFainted = TRUE;
 }
 
-static void SetBattlerAiData(u8 battler)
+static void SetBattlerAiData(u32 battler)
 {
     AI_DATA->abilities[battler] = AI_GetAbility(battler);
     AI_DATA->items[battler] = gBattleMons[battler].item;
@@ -346,12 +347,13 @@ static void SetBattlerAiData(u8 battler)
     AI_DATA->moveLimitations[battler] = CheckMoveLimitations(battler, 0, MOVE_LIMITATIONS_ALL);
 }
 
-void GetAiLogicData(void)
+void SetAiLogicDataForTurn(void)
 {
     u32 battlerAtk, battlerDef, i, move;
     u8 effectiveness;
     s32 dmg;
 
+    gBattleStruct->aiDelayTimer = gMain.vblankCounter1;
     memset(AI_DATA, 0, sizeof(struct AiLogicData));
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_HAS_AI) && !IsWildMonSmart())

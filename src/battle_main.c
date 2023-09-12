@@ -3724,7 +3724,7 @@ static void DoBattleIntro(void)
             gBattleStruct->switchInAbilitiesCounter = 0;
             gBattleStruct->switchInItemsCounter = 0;
             gBattleStruct->overworldWeatherDone = FALSE;
-            GetAiLogicData(); // get assumed abilities, hold effects, etc of all battlers
+            SetAiLogicDataForTurn(); // get assumed abilities, hold effects, etc of all battlers
             Ai_InitPartyStruct(); // Save mons party counts, and first 2/4 mons on the battlefield.
             gBattleMainFunc = TryDoEventsBeforeFirstTurn;
         }
@@ -3857,7 +3857,7 @@ static void TryDoEventsBeforeFirstTurn(void)
 
     gRandomTurnNumber = Random();
 
-    GetAiLogicData(); // get assumed abilities, hold effects, etc of all battlers
+    SetAiLogicDataForTurn(); // get assumed abilities, hold effects, etc of all battlers
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
     {
@@ -3949,7 +3949,7 @@ void BattleTurnPassed(void)
 
     *(&gBattleStruct->absentBattlerFlags) = gAbsentBattlerFlags;
     BattlePutTextOnWindow(gText_EmptyString3, B_WIN_MSG);
-    GetAiLogicData(); // get assumed abilities, hold effects, etc of all battlers
+    SetAiLogicDataForTurn(); // get assumed abilities, hold effects, etc of all battlers
     gBattleMainFunc = HandleTurnActionSelectionState;
     gRandomTurnNumber = Random();
 
