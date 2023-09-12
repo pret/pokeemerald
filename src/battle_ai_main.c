@@ -353,11 +353,12 @@ void SetAiLogicDataForTurn(void)
     u8 effectiveness;
     s32 dmg;
 
-    gBattleStruct->aiDelayTimer = gMain.vblankCounter1;
     memset(AI_DATA, 0, sizeof(struct AiLogicData));
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_HAS_AI) && !IsWildMonSmart())
         return;
+
+    gBattleStruct->aiDelayTimer = gMain.vblankCounter1;
 
     // get/assume all battler data
     for (i = 0; i < gBattlersCount; i++)
