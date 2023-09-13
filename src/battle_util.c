@@ -5710,10 +5710,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && IS_MOVE_PHYSICAL(gCurrentMove)
              && TARGET_TURN_DAMAGED
-             && !(gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_TOXIC_SPIKES)
+             && (gSideTimers[gBattlerAttacker].toxicSpikesAmount != 2)
              && IsBattlerAlive(gBattlerTarget))
             {
-                gBattlerTarget = gBattlerAttacker;
+                SWAP(gBattlerAttacker, gBattlerTarget, i);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_ToxicDebrisActivates;
                 effect++;
