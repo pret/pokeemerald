@@ -27,7 +27,7 @@ u8 BattleAI_ChooseMoveOrAction(void);
 void Ai_InitPartyStruct(void);
 void Ai_UpdateSwitchInData(u32 battler);
 void Ai_UpdateFaintData(u32 battler);
-void SetAiLogicDataForTurn(void);
+void SetAiLogicDataForTurn(struct AiLogicData *aiData);
 
 extern u8 sBattler_AI;
 

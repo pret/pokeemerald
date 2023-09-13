@@ -70,6 +70,7 @@ Debug_BoxFilledMessage_Text:
 	.string "Storage boxes filled!$"
 
 Debug_Script_1::
+	multi_fixed_2_vs_2 TRAINER_WALLACE, NULL, TRAINER_JUAN_5, NULL, TRAINER_STEVEN, TRAINER_BACK_PIC_STEVEN
 	end
 
 Debug_Script_2::

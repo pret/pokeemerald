@@ -277,6 +277,7 @@ struct AIPartyData // Opposing battlers - party mons.
     u8 count[NUM_BATTLE_SIDES];
 };
 
+// Ai Data used when deciding which move to use, computed only once before each turn's start.
 struct AiLogicData
 {
     u16 abilities[MAX_BATTLERS_COUNT];
@@ -293,6 +294,7 @@ struct AiLogicData
     u8 moveLimitations[MAX_BATTLERS_COUNT];
     bool8 shouldSwitchMon; // Because all available moves have no/little effect. Each bit per battler.
     u8 monToSwitchId[MAX_BATTLERS_COUNT]; // ID of the mon to switch.
+    bool8 weatherHasEffect; // WEATHER_HAS_EFFECT, so it doesn't have to be used all the time
 };
 
 struct AI_ThinkingStruct

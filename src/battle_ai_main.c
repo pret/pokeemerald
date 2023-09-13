@@ -350,14 +350,15 @@ static void SetBattlerAiData(u32 battler, struct AiLogicData *aiData)
     aiData->speedStats[battler] = GetBattlerTotalSpeedStatArgs(battler, ability, holdEffect);
 }
 
-static void SetBattlerAiMovesData(u32 battlerAtk, u32 battlersCount)
+static void SetBattlerAiMovesData(struct AiLogicData *aiData, u32 battlerAtk, u32 battlersCount)
 {
-    u32 battlerDef, i;
+    u32 battlerDef, i, weather;
     u16 *moves;
 
     // Simulate dmg for both ai controlled mons and for player controlled mons.
     SaveBattlerData(battlerAtk);
     moves = GetMovesArray(battlerAtk);
+    weather = AI_GetWeather(aiData);
     for (battlerDef = 0; battlerDef < battlersCount; battlerDef++)
     {
         if (battlerAtk == battlerDef)
@@ -373,28 +374,29 @@ static void SetBattlerAiMovesData(u32 battlerAtk, u32 battlersCount)
             if (move != 0
              && move != 0xFFFF
              //&& gBattleMoves[move].power != 0  /* we want to get effectiveness of status moves */
-             && !(AI_DATA->moveLimitations[battlerAtk] & gBitTable[i])) {
-                dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness, TRUE);
+             && !(aiData->moveLimitations[battlerAtk] & gBitTable[i])) {
+                dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness, TRUE, weather);
             }
 
-            AI_DATA->simulatedDmg[battlerAtk][battlerDef][i] = dmg;
-            AI_DATA->effectiveness[battlerAtk][battlerDef][i] = effectiveness;
+            aiData->simulatedDmg[battlerAtk][battlerDef][i] = dmg;
+            aiData->effectiveness[battlerAtk][battlerDef][i] = effectiveness;
         }
     }
     SetMoveDamageResult(battlerAtk, moves);
 }
 
-void SetAiLogicDataForTurn(void)
+void SetAiLogicDataForTurn(struct AiLogicData *aiData)
 {
     u32 battlerAtk, battlersCount;
 
-    memset(AI_DATA, 0, sizeof(struct AiLogicData));
-
+    memset(aiData, 0, sizeof(struct AiLogicData));
     if (!(gBattleTypeFlags & BATTLE_TYPE_HAS_AI) && !IsWildMonSmart())
         return;
 
+    // Set delay timer to count how long it takes for AI to choose action/move
     gBattleStruct->aiDelayTimer = gMain.vblankCounter1;
 
+    aiData->weatherHasEffect = WEATHER_HAS_EFFECT;
     // get/assume all battler data and simulate AI damage
     battlersCount = gBattlersCount;
     for (battlerAtk = 0; battlerAtk < battlersCount; battlerAtk++)
@@ -402,8 +404,8 @@ void SetAiLogicDataForTurn(void)
         if (!IsBattlerAlive(battlerAtk))
             continue;
 
-        SetBattlerAiData(battlerAtk, AI_DATA);
-        SetBattlerAiMovesData(battlerAtk, battlersCount);
+        SetBattlerAiData(battlerAtk, aiData);
+        SetBattlerAiMovesData(aiData, battlerAtk, battlersCount);
     }
 }
 
@@ -891,7 +893,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
                     RETURN_SCORE_MINUS(10);
                 break;
             case ABILITY_LEAF_GUARD:
-                if (AI_WeatherHasEffect() && (gBattleWeather & B_WEATHER_SUN)
+                if ((AI_GetWeather(AI_DATA) & B_WEATHER_SUN)
                   && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_UTILITY_UMBRELLA
                   && IsNonVolatileStatusMoveEffect(moveEffect))
                     RETURN_SCORE_MINUS(10);
@@ -971,7 +973,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
     if (gStatuses3[battlerAtk] & STATUS3_HEAL_BLOCK && IsHealBlockPreventingMove(battlerAtk, move))
         return 0; // Can't even select heal blocked move
     // primal weather check
-    if (WEATHER_HAS_EFFECT)
+    if (gBattleWeather && WEATHER_HAS_EFFECT)
     {
         if (gBattleWeather & B_WEATHER_PRIMAL_ANY)
         {
@@ -1848,7 +1850,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
         case EFFECT_MORNING_SUN:
         case EFFECT_SYNTHESIS:
         case EFFECT_MOONLIGHT:
-            if (AI_WeatherHasEffect() && (gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL)))
+            if ((AI_GetWeather(AI_DATA) & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL)))
                 score -= 3;
             else if (AtMaxHp(battlerAtk))
                 score -= 10;
@@ -2124,7 +2126,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
             break;
         case EFFECT_SOLAR_BEAM:
             if (AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_POWER_HERB
-              || (AI_WeatherHasEffect() && gBattleWeather & B_WEATHER_SUN && AI_DATA->holdEffects[battlerAtk] != HOLD_EFFECT_UTILITY_UMBRELLA))
+              || ((AI_GetWeather(AI_DATA) & B_WEATHER_SUN) && AI_DATA->holdEffects[battlerAtk] != HOLD_EFFECT_UTILITY_UMBRELLA))
                 break;
             if (CanTargetFaintAi(battlerDef, battlerAtk)) //Attacker can be knocked out
                 score -= 4;
@@ -4354,17 +4356,17 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u16 move, s32 score
             score += 3;
             break;
         case HOLD_EFFECT_UTILITY_UMBRELLA:
-            if (AI_DATA->abilities[battlerAtk] != ABILITY_SOLAR_POWER && AI_DATA->abilities[battlerAtk] != ABILITY_DRY_SKIN && AI_WeatherHasEffect())
+            if (AI_DATA->abilities[battlerAtk] != ABILITY_SOLAR_POWER && AI_DATA->abilities[battlerAtk] != ABILITY_DRY_SKIN)
             {
                 switch (AI_DATA->abilities[battlerDef])
                 {
                 case ABILITY_SWIFT_SWIM:
-                    if (gBattleWeather & B_WEATHER_RAIN)
+                    if (AI_GetWeather(AI_DATA) & B_WEATHER_RAIN)
                         score += 3; // Slow 'em down
                     break;
                 case ABILITY_CHLOROPHYLL:
                 case ABILITY_FLOWER_GIFT:
-                    if (gBattleWeather & B_WEATHER_SUN)
+                    if (AI_GetWeather(AI_DATA) & B_WEATHER_SUN)
                         score += 3; // Slow 'em down
                     break;
                 }
@@ -4901,7 +4903,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u16 move, s32 score
         }
         break;
     case EFFECT_SHORE_UP:
-        if (AI_WeatherHasEffect() && (gBattleWeather & B_WEATHER_SANDSTORM)
+        if ((AI_GetWeather(AI_DATA) & B_WEATHER_SANDSTORM)
           && ShouldRecover(battlerAtk, battlerDef, move, 67))
             score += 3;
         else if (ShouldRecover(battlerAtk, battlerDef, move, 50))
