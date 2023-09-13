@@ -329,7 +329,7 @@ void Ai_UpdateSwitchInData(u32 battler)
 
 void Ai_UpdateFaintData(u32 battler)
 {
-    struct AiPartyMon *aiMon = &AI_PARTY->mons[GET_BATTLER_SIDE(battler)][gBattlerPartyIndexes[battler]];
+    struct AiPartyMon *aiMon = &AI_PARTY->mons[GetBattlerSide(battler)][gBattlerPartyIndexes[battler]];
     ClearBattlerMoveHistory(battler);
     ClearBattlerAbilityHistory(battler);
     ClearBattlerItemEffectHistory(battler);
@@ -2590,7 +2590,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
                 score -= 10;
             break;
         case EFFECT_LUCKY_CHANT:
-            if (gSideTimers[GET_BATTLER_SIDE(battlerAtk)].luckyChantTimer != 0
+            if (gSideTimers[GetBattlerSide(battlerAtk)].luckyChantTimer != 0
               || PartnerMoveIsSameNoTarget(BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove))
                 score -= 10;
             break;
