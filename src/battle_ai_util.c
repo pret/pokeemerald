@@ -3409,7 +3409,7 @@ s32 AI_CalcPartyMonBestMoveDamage(u32 battlerAtk, u32 battlerDef, struct Pokemon
         if (BattlerHasAi(battlerAtk))
             move = GetMonData(attackerMon, MON_DATA_MOVE1 + i);
         else
-            move = AI_PARTY->mons[GET_BATTLER_SIDE2(battlerAtk)][gBattlerPartyIndexes[battlerAtk]].moves[i];
+            move = AI_PARTY->mons[GetBattlerSide(battlerAtk)][gBattlerPartyIndexes[battlerAtk]].moves[i];
 
         if (move != MOVE_NONE && gBattleMoves[move].power != 0)
         {

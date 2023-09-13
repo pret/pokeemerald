@@ -629,7 +629,7 @@ static void SetBattlePartyIds(void)
             {
                 if (i < 2)
                 {
-                    if (GET_BATTLER_SIDE2(i) == B_SIDE_PLAYER)
+                    if (GetBattlerSide(i) == B_SIDE_PLAYER)
                     {
                         if (IsValidForBattle(&gPlayerParty[j]))
                         {
@@ -648,7 +648,7 @@ static void SetBattlePartyIds(void)
                 }
                 else
                 {
-                    if (GET_BATTLER_SIDE2(i) == B_SIDE_PLAYER)
+                    if (GetBattlerSide(i) == B_SIDE_PLAYER)
                     {
                         if (IsValidForBattle(&gPlayerParty[j]) && gBattlerPartyIndexes[i - 2] != j)
                         {

@@ -216,7 +216,7 @@ void DoMoveAnim(u16 move)
     // Make sure the anim target of moves hitting everyone is at the opposite side.
     if (GetBattlerMoveTargetType(gBattlerAttacker, move) & MOVE_TARGET_FOES_AND_ALLY && IsDoubleBattle())
     {
-        while (GET_BATTLER_SIDE(gBattleAnimAttacker) == GET_BATTLER_SIDE(gBattleAnimTarget))
+        while (GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget))
         {
             if (++gBattleAnimTarget >= MAX_BATTLERS_COUNT)
                 gBattleAnimTarget = 0;

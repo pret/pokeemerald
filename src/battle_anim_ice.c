@@ -1276,12 +1276,12 @@ static void InitPoisonGasCloudAnim(struct Sprite *sprite)
     if (GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2) < GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2))
         sprite->data[7] = 0x8000;
 
-    if (GET_BATTLER_SIDE2(gBattleAnimTarget) == B_SIDE_PLAYER)
+    if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         gBattleAnimArgs[3] = -gBattleAnimArgs[3];
 
-        if ((sprite->data[7] & 0x8000) && GET_BATTLER_SIDE2(gBattleAnimAttacker) == B_SIDE_PLAYER)
+        if ((sprite->data[7] & 0x8000) && GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
             sprite->subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority + 1;
 
         sprite->data[6] = 1;
@@ -1362,7 +1362,7 @@ static void MovePoisonGasCloud(struct Sprite *sprite)
             sprite->data[7]++;
             if (IsContest())
                 sprite->data[5] = 80;
-            else if (GET_BATTLER_SIDE2(gBattleAnimTarget) != B_SIDE_PLAYER)
+            else if (GetBattlerSide(gBattleAnimTarget) != B_SIDE_PLAYER)
                 sprite->data[5] = 204;
             else
                 sprite->data[5] = 80;
@@ -1408,7 +1408,7 @@ static void MovePoisonGasCloud(struct Sprite *sprite)
             sprite->data[4] = sprite->y + 4;
             if (IsContest())
                 sprite->data[2] = -16;
-            else if (GET_BATTLER_SIDE2(gBattleAnimTarget) != B_SIDE_PLAYER)
+            else if (GetBattlerSide(gBattleAnimTarget) != B_SIDE_PLAYER)
                 sprite->data[2] = DISPLAY_WIDTH + 16;
             else
                 sprite->data[2] = -16;
