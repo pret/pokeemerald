@@ -424,11 +424,6 @@ u16 GetAIChosenMove(u8 battlerId)
     return (gBattleMons[battlerId].moves[gBattleStruct->aiMoveOrAction[battlerId]]);
 }
 
-bool32 WillAIStrikeFirst(void)
-{
-    return (AI_WhoStrikesFirst(sBattler_AI, gBattlerTarget, AI_THINKING_STRUCT->moveConsidered) == AI_IS_FASTER);
-}
-
 bool32 AI_RandLessThan(u8 val)
 {
     if ((Random() % 0xFF) < val)
@@ -945,85 +940,91 @@ u32 GetNoOfHitsToKO(u32 dmg, s32 hp)
     return hp / (dmg + 1) + 1;
 }
 
-u8 GetMoveDamageResult(u16 move)
+void SetMoveDamageResult(u32 battlerAtk, u16 *moves)
 {
-    s32 i, checkedMove, bestId, currId, hp;
+    s32 i, j, battlerDef, bestId, currId, hp, result;
     s32 moveDmgs[MAX_MON_MOVES];
-    u8 result;
+    bool8 isNotConsidered[MAX_MON_MOVES];
 
-    for (i = 0; sIgnoredPowerfulMoveEffects[i] != IGNORED_MOVES_END; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (gBattleMoves[move].effect == sIgnoredPowerfulMoveEffects[i])
-            break;
-    }
-
-    if (gBattleMoves[move].power != 0 && sIgnoredPowerfulMoveEffects[i] == IGNORED_MOVES_END)
-    {
-        // Considered move has power and is not in sIgnoredPowerfulMoveEffects
-        // Check all other moves and calculate their power
-        for (checkedMove = 0; checkedMove < MAX_MON_MOVES; checkedMove++)
+        u16 move = moves[i];
+        for (j = 0; sIgnoredPowerfulMoveEffects[j] != IGNORED_MOVES_END; j++)
         {
-            for (i = 0; sIgnoredPowerfulMoveEffects[i] != IGNORED_MOVES_END; i++)
-            {
-                if (gBattleMoves[gBattleMons[sBattler_AI].moves[checkedMove]].effect == sIgnoredPowerfulMoveEffects[i])
-                    break;
-            }
+            if (gBattleMoves[move].effect == sIgnoredPowerfulMoveEffects[j])
+                break;
+        }
+        if (move == 0 || move == 0xFFFF || gBattleMoves[move].power == 0 || sIgnoredPowerfulMoveEffects[j] != IGNORED_MOVES_END)
+            isNotConsidered[i] = TRUE;
+        else
+            isNotConsidered[i] = FALSE;
 
-            if (gBattleMons[sBattler_AI].moves[checkedMove] != MOVE_NONE
-                && sIgnoredPowerfulMoveEffects[i] == IGNORED_MOVES_END
-                && gBattleMoves[gBattleMons[sBattler_AI].moves[checkedMove]].power != 0)
+        for (battlerDef = 0; battlerDef < MAX_BATTLERS_COUNT; battlerDef++)
+        {
+            if (battlerDef == battlerAtk)
+                continue;
+
+            if (isNotConsidered[i])
             {
-                moveDmgs[checkedMove] = AI_DATA->simulatedDmg[sBattler_AI][gBattlerTarget][checkedMove];
+                AI_DATA->moveDmgResult[battlerAtk][battlerDef][i] = MOVE_POWER_OTHER; // Move has a power of 0/1, or is in the group sIgnoredPowerfulMoveEffects
             }
             else
             {
-                moveDmgs[checkedMove] = 0;
-            }
-        }
-
-        hp = gBattleMons[gBattlerTarget].hp + (20 * gBattleMons[gBattlerTarget].hp / 100); // 20 % add to make sure the battler is always fainted
-        // If a move can faint battler, it doesn't matter how much damage it does
-        for (i = 0; i < MAX_MON_MOVES; i++)
-        {
-            if (moveDmgs[i] > hp)
-                moveDmgs[i] = hp;
-        }
-
-        for (bestId = 0, i = 1; i < MAX_MON_MOVES; i++)
-        {
-            if (moveDmgs[i] > moveDmgs[bestId])
-                bestId = i;
-            if (moveDmgs[i] == moveDmgs[bestId])
-            {
-                switch (WhichMoveBetter(gBattleMons[sBattler_AI].moves[bestId], gBattleMons[sBattler_AI].moves[i]))
+                // Considered move has power and is not in sIgnoredPowerfulMoveEffects
+                // Check all other moves and calculate their power
+                for (j = 0; j < MAX_MON_MOVES; j++)
                 {
-                case 2:
-                    if (Random() & 1)
-                        break;
-                case 1:
-                    bestId = i;
-                    break;
+                    if (!isNotConsidered[j])
+                        moveDmgs[j] = AI_DATA->simulatedDmg[battlerAtk][battlerDef][j];
+                    else
+                        moveDmgs[j] = 0;
                 }
+
+                hp = gBattleMons[battlerDef].hp + (20 * gBattleMons[battlerDef].hp / 100); // 20 % add to make sure the battler is always fainted
+                // If a move can faint battler, it doesn't matter how much damage it does
+                for (j = 0; j < MAX_MON_MOVES; j++)
+                {
+                    if (moveDmgs[j] > hp)
+                        moveDmgs[j] = hp;
+                }
+
+                for (bestId = 0, j = 1; j < MAX_MON_MOVES; j++)
+                {
+                    if (moveDmgs[j] > moveDmgs[bestId])
+                        bestId = j;
+                    if (moveDmgs[j] == moveDmgs[bestId])
+                    {
+                        switch (WhichMoveBetter(gBattleMons[battlerAtk].moves[bestId], gBattleMons[battlerAtk].moves[j]))
+                        {
+                        case 2:
+                            if (Random() & 1)
+                                break;
+                        case 1:
+                            bestId = j;
+                            break;
+                        }
+                    }
+                }
+
+                currId = i;
+                if (currId == bestId)
+                    result = MOVE_POWER_BEST;
+                else if ((moveDmgs[currId] >= hp || moveDmgs[bestId] < hp) // If current move can faint as well, or if neither can
+                         && GetNoOfHitsToKO(moveDmgs[currId], hp) - GetNoOfHitsToKO(moveDmgs[bestId], hp) <= 2 // Consider a move weak if it needs to be used at least 2 times more to faint the target, compared to the best move.
+                         && WhichMoveBetter(gBattleMons[battlerAtk].moves[bestId], gBattleMons[battlerAtk].moves[currId]) != 0)
+                    result = MOVE_POWER_GOOD;
+                else
+                    result = MOVE_POWER_WEAK;
+
+                AI_DATA->moveDmgResult[battlerAtk][battlerDef][i] = result;
             }
         }
-
-        currId = AI_THINKING_STRUCT->movesetIndex;
-        if (currId == bestId)
-            AI_THINKING_STRUCT->funcResult = MOVE_POWER_BEST;
-        else if ((moveDmgs[currId] >= hp || moveDmgs[bestId] < hp) // If current move can faint as well, or if neither can
-                 && GetNoOfHitsToKO(moveDmgs[currId], hp) - GetNoOfHitsToKO(moveDmgs[bestId], hp) <= 2 // Consider a move weak if it needs to be used at least 2 times more to faint the target, compared to the best move.
-                 && WhichMoveBetter(gBattleMons[sBattler_AI].moves[bestId], gBattleMons[sBattler_AI].moves[currId]) != 0)
-            AI_THINKING_STRUCT->funcResult = MOVE_POWER_GOOD;
-        else
-            AI_THINKING_STRUCT->funcResult = MOVE_POWER_WEAK;
     }
-    else
-    {
-        // Move has a power of 0/1, or is in the group sIgnoredPowerfulMoveEffects
-        AI_THINKING_STRUCT->funcResult = MOVE_POWER_OTHER;
-    }
+}
 
-    return AI_THINKING_STRUCT->funcResult;
+u32 GetMoveDamageResult(u32 battlerAtk, u32 battlerDef, u32 moveIndex)
+{
+    return AI_DATA->moveDmgResult[battlerAtk][battlerDef][moveIndex];
 }
 
 u32 GetCurrDamageHpPercent(u32 battlerAtk, u32 battlerDef)
@@ -1090,7 +1091,7 @@ static u32 AI_GetEffectiveness(uq4_12_t multiplier)
     * AI_IS_FASTER: is user(ai) faster
     * AI_IS_SLOWER: is target faster
 */
-u8 AI_WhoStrikesFirst(u8 battlerAI, u8 battler2, u16 moveConsidered)
+u32 AI_WhoStrikesFirst(u32 battlerAI, u32 battler2, u32 moveConsidered)
 {
     u32 fasterAI = 0, fasterPlayer = 0, i;
     s8 prioAI = 0;
@@ -1126,7 +1127,11 @@ u8 AI_WhoStrikesFirst(u8 battlerAI, u8 battler2, u16 moveConsidered)
         if (prioAI > prioBattler2)
             return AI_IS_FASTER;    // if we didn't know any of battler 2's moves to compare priorities, assume they don't have a prio+ move
         // Priorities are the same(at least comparing to moves the AI is aware of), decide by speed.
-        if (GetWhoStrikesFirst(battlerAI, battler2, TRUE) == 0)
+        if (GetWhichBattlerFasterArgs(battlerAI, battler2, TRUE,
+                                      AI_DATA->abilities[battlerAI], AI_DATA->abilities[battler2],
+                                      AI_DATA->holdEffects[battlerAI], AI_DATA->holdEffects[battler2],
+                                      AI_DATA->speedStats[battlerAI], AI_DATA->speedStats[battler2],
+                                      prioAI, prioBattler2) == 0)
             return AI_IS_FASTER;
         else
             return AI_IS_SLOWER;
@@ -1795,7 +1800,7 @@ u32 CountNegativeStatStages(u8 battlerId)
 
 bool32 ShouldLowerAttack(u32 battlerAtk, u32 battlerDef, u16 defAbility)
 {
-    if (WillAIStrikeFirst() && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (AI_STRIKES_FIRST(battlerAtk, battlerDef, AI_THINKING_STRUCT->moveConsidered) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_ATK] > 4
@@ -1812,7 +1817,7 @@ bool32 ShouldLowerAttack(u32 battlerAtk, u32 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerDefense(u32 battlerAtk, u32 battlerDef, u16 defAbility)
 {
-    if (WillAIStrikeFirst() && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (AI_STRIKES_FIRST(battlerAtk, battlerDef, AI_THINKING_STRUCT->moveConsidered) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_DEF] > 4
@@ -1829,10 +1834,10 @@ bool32 ShouldLowerDefense(u32 battlerAtk, u32 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerSpeed(u32 battlerAtk, u32 battlerDef, u16 defAbility)
 {
-    if (WillAIStrikeFirst() && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (AI_STRIKES_FIRST(battlerAtk, battlerDef, AI_THINKING_STRUCT->moveConsidered) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
-    if (!WillAIStrikeFirst()
+    if (!AI_STRIKES_FIRST(battlerAtk, battlerDef, AI_THINKING_STRUCT->moveConsidered)
       && defAbility != ABILITY_CONTRARY
       && defAbility != ABILITY_CLEAR_BODY
       && defAbility != ABILITY_FULL_METAL_BODY
@@ -1844,7 +1849,7 @@ bool32 ShouldLowerSpeed(u32 battlerAtk, u32 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerSpAtk(u32 battlerAtk, u32 battlerDef, u16 defAbility)
 {
-    if (WillAIStrikeFirst() && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (AI_STRIKES_FIRST(battlerAtk, battlerDef, AI_THINKING_STRUCT->moveConsidered) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_SPATK] > 4
@@ -1860,7 +1865,7 @@ bool32 ShouldLowerSpAtk(u32 battlerAtk, u32 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerSpDef(u32 battlerAtk, u32 battlerDef, u16 defAbility)
 {
-    if (WillAIStrikeFirst() && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (AI_STRIKES_FIRST(battlerAtk, battlerDef, AI_THINKING_STRUCT->moveConsidered) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_SPDEF] > 4
@@ -1876,7 +1881,7 @@ bool32 ShouldLowerSpDef(u32 battlerAtk, u32 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerAccuracy(u32 battlerAtk, u32 battlerDef, u16 defAbility)
 {
-    if (WillAIStrikeFirst() && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (AI_STRIKES_FIRST(battlerAtk, battlerDef, AI_THINKING_STRUCT->moveConsidered) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (defAbility != ABILITY_CONTRARY
@@ -1891,7 +1896,7 @@ bool32 ShouldLowerAccuracy(u32 battlerAtk, u32 battlerDef, u16 defAbility)
 
 bool32 ShouldLowerEvasion(u32 battlerAtk, u32 battlerDef, u16 defAbility)
 {
-    if (WillAIStrikeFirst() && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
+    if (AI_STRIKES_FIRST(battlerAtk, battlerDef, AI_THINKING_STRUCT->moveConsidered) && (AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_EVASION] > DEFAULT_STAT_STAGE
@@ -3637,7 +3642,7 @@ void IncreaseStatUpScore(u32 battlerAtk, u32 battlerDef, u8 statId, s32 *score)
         }
         break;
     case STAT_SPEED:
-        if (!WillAIStrikeFirst())
+        if (!AI_STRIKES_FIRST(battlerAtk, battlerDef, AI_THINKING_STRUCT->moveConsidered))
         {
             if (gBattleMons[battlerAtk].statStages[STAT_SPEED] < STAT_UP_2_STAGE)
                 *score += 2;

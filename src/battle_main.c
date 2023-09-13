@@ -3771,7 +3771,7 @@ static void TryDoEventsBeforeFirstTurn(void)
         {
             for (j = i + 1; j < gBattlersCount; j++)
             {
-                if (GetWhoStrikesFirst(gBattlerByTurnOrder[i], gBattlerByTurnOrder[j], TRUE) != 0)
+                if (GetWhichBattlerFaster(gBattlerByTurnOrder[i], gBattlerByTurnOrder[j], TRUE) != 0)
                     SwapTurnOrder(i, j);
             }
         }
@@ -4598,11 +4598,10 @@ void SwapTurnOrder(u8 id1, u8 id2)
     SWAP(gBattlerByTurnOrder[id1], gBattlerByTurnOrder[id2], temp);
 }
 
-u32 GetBattlerTotalSpeedStat(u8 battler)
+// For AI, so it doesn't 'cheat' by knowing player's ability
+u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect)
 {
     u32 speed = gBattleMons[battler].speed;
-    u32 ability = GetBattlerAbility(battler);
-    u32 holdEffect = GetBattlerHoldEffect(battler, TRUE);
     u32 highestStat = GetHighestStatId(battler);
 
     // weather abilities
@@ -4669,6 +4668,13 @@ u32 GetBattlerTotalSpeedStat(u8 battler)
     return speed;
 }
 
+u32 GetBattlerTotalSpeedStat(u32 battler)
+{
+    u32 ability = GetBattlerAbility(battler);
+    u32 holdEffect = GetBattlerHoldEffect(battler, TRUE);
+    return GetBattlerTotalSpeedStatArgs(battler, ability, holdEffect);
+}
+
 s8 GetChosenMovePriority(u32 battler)
 {
     u16 move;
@@ -4733,17 +4739,13 @@ s8 GetMovePriority(u32 battler, u16 move)
     return priority;
 }
 
-u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
+// Function for AI with variables provided as arguments to speed the computation time
+u32 GetWhichBattlerFasterArgs(u32 battler1, u32 battler2, bool32 ignoreChosenMoves, u32 ability1, u32 ability2,
+                              u32 holdEffectBattler1, u32 holdEffectBattler2, u32 speedBattler1, u32 speedBattler2, s32 priority1, s32 priority2)
 {
-    u8 strikesFirst = 0;
-    u32 speedBattler1 = 0, speedBattler2 = 0;
-    u32 holdEffectBattler1 = 0, holdEffectBattler2 = 0;
-    s8 priority1 = 0, priority2 = 0;
-    u16 ability1 = GetBattlerAbility(battler1), ability2 = GetBattlerAbility(battler2);
+    u32 strikesFirst = 0;
 
     // Battler 1
-    speedBattler1 = GetBattlerTotalSpeedStat(battler1);
-    holdEffectBattler1 = GetBattlerHoldEffect(battler1, TRUE);
     // Quick Draw
     if (!ignoreChosenMoves && ability1 == ABILITY_QUICK_DRAW && !IS_MOVE_STATUS(gChosenMoveByBattler[battler1]) && Random() % 100 < 30)
         gProtectStructs[battler1].quickDraw = TRUE;
@@ -4754,8 +4756,6 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
         gProtectStructs[battler1].usedCustapBerry = TRUE;
 
     // Battler 2
-    speedBattler2 = GetBattlerTotalSpeedStat(battler2);
-    holdEffectBattler2 = GetBattlerHoldEffect(battler2, TRUE);
     // Quick Draw
     if (!ignoreChosenMoves && ability2 == ABILITY_QUICK_DRAW && !IS_MOVE_STATUS(gChosenMoveByBattler[battler2]) && Random() % 100 < 30)
         gProtectStructs[battler2].quickDraw = TRUE;
@@ -4764,14 +4764,6 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
      && ((holdEffectBattler2 == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * GetBattlerHoldEffectParam(battler2)) / 100)
      || (holdEffectBattler2 == HOLD_EFFECT_CUSTAP_BERRY && HasEnoughHpToEatBerry(battler2, 4, gBattleMons[battler2].item))))
         gProtectStructs[battler2].usedCustapBerry = TRUE;
-
-    if (!ignoreChosenMoves)
-    {
-        if (gChosenActionByBattler[battler1] == B_ACTION_USE_MOVE)
-            priority1 = GetChosenMovePriority(battler1);
-        if (gChosenActionByBattler[battler2] == B_ACTION_USE_MOVE)
-            priority2 = GetChosenMovePriority(battler2);
-    }
 
     if (priority1 == priority2)
     {
@@ -4833,6 +4825,28 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     }
 
     return strikesFirst;
+}
+
+u32 GetWhichBattlerFaster(u32 battler1, u32 battler2, bool32 ignoreChosenMoves)
+{
+    s32 priority1 = 0, priority2 = 0;
+    u32 ability1 = GetBattlerAbility(battler1);
+    u32 speedBattler1 = GetBattlerTotalSpeedStat(battler1);
+    u32 holdEffectBattler1 = GetBattlerHoldEffect(battler1, TRUE);
+    u32 speedBattler2 = GetBattlerTotalSpeedStat(battler2);
+    u32 holdEffectBattler2 = GetBattlerHoldEffect(battler2, TRUE);
+    u32 ability2 = GetBattlerAbility(battler2);
+
+    if (!ignoreChosenMoves)
+    {
+        if (gChosenActionByBattler[battler1] == B_ACTION_USE_MOVE)
+            priority1 = GetChosenMovePriority(battler1);
+        if (gChosenActionByBattler[battler2] == B_ACTION_USE_MOVE)
+            priority2 = GetChosenMovePriority(battler2);
+    }
+
+    return GetWhichBattlerFasterArgs(battler1, battler2, ignoreChosenMoves, ability1, ability2,
+                                     holdEffectBattler1, holdEffectBattler2, speedBattler1, speedBattler2, priority1, priority2);
 }
 
 static void SetActionsAndBattlersTurnOrder(void)
@@ -4928,7 +4942,7 @@ static void SetActionsAndBattlersTurnOrder(void)
                         && gActionsByTurnOrder[i] != B_ACTION_THROW_BALL
                         && gActionsByTurnOrder[j] != B_ACTION_THROW_BALL)
                     {
-                        if (GetWhoStrikesFirst(battler1, battler2, FALSE))
+                        if (GetWhichBattlerFaster(battler1, battler2, FALSE))
                             SwapTurnOrder(i, j);
                     }
                 }
@@ -5092,7 +5106,7 @@ static void TryChangeTurnOrder(void)
             if (gActionsByTurnOrder[i] == B_ACTION_USE_MOVE
                 && gActionsByTurnOrder[j] == B_ACTION_USE_MOVE)
             {
-                if (GetWhoStrikesFirst(battler1, battler2, FALSE))
+                if (GetWhichBattlerFaster(battler1, battler2, FALSE))
                     SwapTurnOrder(i, j);
             }
         }

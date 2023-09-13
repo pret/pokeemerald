@@ -59,10 +59,13 @@ void BattleTurnPassed(void);
 u8 IsRunningFromBattleImpossible(u32 battler);
 void SwitchPartyOrder(u8 battlerId);
 void SwapTurnOrder(u8 id1, u8 id2);
-u32 GetBattlerTotalSpeedStat(u8 battlerId);
+u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect);
+u32 GetBattlerTotalSpeedStat(u32 battler);
 s8 GetChosenMovePriority(u32 battlerId);
 s8 GetMovePriority(u32 battlerId, u16 move);
-u8 GetWhoStrikesFirst(u8 battlerId1, u8 battlerId2, bool8 ignoreChosenMoves);
+u32 GetWhichBattlerFasterArgs(u32 battler1, u32 battler2, bool32 ignoreChosenMoves, u32 ability1, u32 ability2,
+                              u32 holdEffectBattler1, u32 holdEffectBattler2, u32 speedBattler1, u32 speedBattler2, s32 priority1, s32 priority2);
+u32 GetWhichBattlerFaster(u32 battler1, u32 battler2, bool32 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
 void SpecialStatusesClear(void);

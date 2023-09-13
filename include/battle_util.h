@@ -167,7 +167,7 @@ u32 GetBattlerHoldEffectParam(u32 battler);
 bool32 IsMoveMakingContact(u32 move, u32 battlerAtk);
 bool32 IsBattlerGrounded(u32 battler);
 bool32 IsBattlerAlive(u32 battler);
-u32 GetBattleMonMoveSlot(struct BattlePokemon *battleMon, u32 move);
+u32 GetMoveSlot(u16 *moves, u32 move);
 u32 GetBattlerWeight(u32 battler);
 u32 CalcRolloutBasePower(u32 battlerAtk, u32 basePower, u32 rolloutTimer);
 u32 CalcFuryCutterBasePower(u32 basePower, u32 furyCutterCounter);

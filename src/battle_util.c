@@ -875,12 +875,12 @@ void HandleAction_ActionFinished(void)
                 // have been executed before. The only recalculation needed is for moves/switch. Mega evolution is handled in src/battle_main.c/TryChangeOrder
                 if((gActionsByTurnOrder[i] == B_ACTION_USE_MOVE && gActionsByTurnOrder[j] == B_ACTION_USE_MOVE))
                 {
-                    if (GetWhoStrikesFirst(battler1, battler2, FALSE))
+                    if (GetWhichBattlerFaster(battler1, battler2, FALSE))
                         SwapTurnOrder(i, j);
                 }
                 else if ((gActionsByTurnOrder[i] == B_ACTION_SWITCH && gActionsByTurnOrder[j] == B_ACTION_SWITCH))
                 {
-                    if (GetWhoStrikesFirst(battler1, battler2, TRUE)) // If the actions chosen are switching, we recalc order but ignoring the moves
+                    if (GetWhichBattlerFaster(battler1, battler2, TRUE)) // If the actions chosen are switching, we recalc order but ignoring the moves
                         SwapTurnOrder(i, j);
                 }
             }
@@ -2043,7 +2043,7 @@ u8 DoFieldEndTurnEffects(void)
                 {
                     if (!gProtectStructs[i].quash
                             && !gProtectStructs[j].quash
-                            && GetWhoStrikesFirst(gBattlerByTurnOrder[i], gBattlerByTurnOrder[j], FALSE))
+                            && GetWhichBattlerFaster(gBattlerByTurnOrder[i], gBattlerByTurnOrder[j], FALSE))
                         SwapTurnOrder(i, j);
                 }
             }
@@ -8259,13 +8259,13 @@ bool32 IsBattlerAlive(u32 battler)
         return TRUE;
 }
 
-u32 GetBattleMonMoveSlot(struct BattlePokemon *battleMon, u32 move)
+u32 GetMoveSlot(u16 *moves, u32 move)
 {
     u32 i;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (battleMon->moves[i] == move)
+        if (moves[i] == move)
             break;
     }
     return i;
@@ -8555,8 +8555,8 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
             basePower *= 2;
         break;
     case EFFECT_TRUMP_CARD:
-        i = GetBattleMonMoveSlot(&gBattleMons[battlerAtk], move);
-        if (i != 4)
+        i = GetMoveSlot(gBattleMons[battlerAtk].moves, move);
+        if (i != MAX_MON_MOVES)
         {
             if (gBattleMons[battlerAtk].pp[i] >= ARRAY_COUNT(sTrumpCardPowerTable))
                 basePower = sTrumpCardPowerTable[ARRAY_COUNT(sTrumpCardPowerTable) - 1];

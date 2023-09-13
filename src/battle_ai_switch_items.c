@@ -400,7 +400,7 @@ static bool8 ShouldSwitchIfGameStatePrompt(u32 battler)
                 && AnyStatIsRaised(battler))
                 switchMon = FALSE;
             if (AiExpectsToFaintPlayer(battler)
-                && !WillAIStrikeFirst()
+                && !AI_STRIKES_FIRST(battler, opposingBattler, 0)
                 && !AI_OpponentCanFaintAiWithMod(battler, 0))
                 switchMon = FALSE;
         }

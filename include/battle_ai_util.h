@@ -7,6 +7,8 @@
 
 #define FOE(battler) ((BATTLE_OPPOSITE(battler)) & BIT_SIDE)
 
+#define AI_STRIKES_FIRST(battlerAi, battlerDef, move)((AI_WhoStrikesFirst(battlerAi, battlerDef, move) == AI_IS_FASTER))
+
 bool32 AI_RandLessThan(u8 val);
 bool32 IsAiVsAiBattle(void);
 bool32 BattlerHasAi(u32 battlerId);
@@ -23,13 +25,12 @@ void SetBattlerData(u32 battlerId);
 void RestoreBattlerData(u32 battlerId);
 u16 GetAIChosenMove(u8 battlerId);
 
-bool32 WillAIStrikeFirst(void);
 u32 GetTotalBaseStat(u32 species);
 bool32 IsTruantMonVulnerable(u32 battlerAI, u32 opposingBattler);
 bool32 AtMaxHp(u8 battler);
 u32 GetHealthPercentage(u8 battler);
 bool32 IsBattlerTrapped(u8 battler, bool8 switching);
-u8 AI_WhoStrikesFirst(u8 battlerAI, u8 battler2, u16 consideredMove);
+u32 AI_WhoStrikesFirst(u32 battlerAI, u32 battler2, u32 moveConsidered);
 bool32 CanTargetFaintAi(u32 battlerDef, u32 battlerAtk);
 bool32 CanMoveFaintBattler(u16 move, u32 battlerDef, u32 battlerAtk, u8 nHits);
 bool32 CanTargetFaintAiWithMod(u32 battlerDef, u32 battlerAtk, s32 hpMod, s32 dmgMod);
@@ -87,7 +88,8 @@ bool32 MovesWithSplitUnusable(u32 attacker, u32 target, u32 split);
 s32 AI_CalcDamageSaveBattlers(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, bool32 considerZPower);
 s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, bool32 considerZPower);
 u32 GetNoOfHitsToKO(u32 dmg, s32 hp);
-u8 GetMoveDamageResult(u16 move);
+void SetMoveDamageResult(u32 battlerAtk, u16 *moves);
+u32 GetMoveDamageResult(u32 battlerAtk, u32 battlerDef, u32 moveIndex);
 u32 GetCurrDamageHpPercent(u32 battlerAtk, u32 battlerDef);
 uq4_12_t AI_GetTypeEffectiveness(u16 move, u32 battlerAtk, u32 battlerDef);
 u32 AI_GetMoveEffectiveness(u16 move, u32 battlerAtk, u32 battlerDef);
