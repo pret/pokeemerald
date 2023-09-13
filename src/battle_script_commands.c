@@ -1952,10 +1952,10 @@ s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordA
 }
 #undef BENEFITS_FROM_LEEK
 
-s8 GetInverseCritChance(u32 battlerAtk, u32 battlerDef, u32 move)
+s32 GetInverseCritChance(u32 battlerAtk, u32 battlerDef, u32 move)
 {
     s32 critChanceIndex = CalcCritChanceStage(battlerAtk, battlerDef, move, FALSE);
-    if(critChanceIndex < 0)
+    if (critChanceIndex < 0)
         return -1;
     else
         return sCriticalHitChance[critChanceIndex];

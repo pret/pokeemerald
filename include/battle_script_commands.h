@@ -17,7 +17,7 @@ struct StatFractions
 };
 
 s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility);
-s8 GetInverseCritChance(u32 battlerAtk, u32 battlerDef, u32 move);
+s32 GetInverseCritChance(u32 battlerAtk, u32 battlerDef, u32 move);
 u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u32 defAbility, u32 atkHoldEffect, u32 defHoldEffect);
 u8 GetBattlerTurnOrderNum(u8 battlerId);
 bool32 NoAliveMonsForEitherParty(void);

@@ -4071,7 +4071,7 @@ static void HandleTurnActionSelectionState(void)
     gBattleCommunication[ACTIONS_CONFIRMED_COUNT] = 0;
     for (battler = 0; battler < gBattlersCount; battler++)
     {
-        u8 position = GetBattlerPosition(battler);
+        u32 position = GetBattlerPosition(battler);
         switch (gBattleCommunication[battler])
         {
         case STATE_TURN_START_RECORD: // Recorded battle related action on start of every turn.
@@ -4084,7 +4084,7 @@ static void HandleTurnActionSelectionState(void)
             {
                 gBattleStruct->aiMoveOrAction[battler] = ComputeBattleAiScores(battler);
             }
-            break;
+            // fallthrough
         case STATE_BEFORE_ACTION_CHOSEN: // Choose an action.
             *(gBattleStruct->monToSwitchIntoId + battler) = PARTY_SIZE;
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI

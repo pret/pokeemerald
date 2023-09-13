@@ -777,7 +777,6 @@ s32 AI_CalcDamageSaveBattlers(u32 move, u32 battlerAtk, u32 battlerDef, u8 *type
 s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, bool32 considerZPower, u32 weather)
 {
     s32 dmg, moveType, critDmg, normalDmg, fixedBasePower, n;
-    s8 critChance;
     uq4_12_t effectivenessMultiplier;
 
     SetBattlerData(battlerAtk);
@@ -801,7 +800,10 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
     effectivenessMultiplier = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, FALSE);
     if (gBattleMoves[move].power)
     {
-        ProteanTryChangeType(battlerAtk, AI_DATA->abilities[battlerAtk], move, moveType);
+        s32 critChance;
+        struct AiLogicData *aiData = AI_DATA;
+
+        ProteanTryChangeType(battlerAtk, aiData->abilities[battlerAtk], move, moveType);
         critChance = GetInverseCritChance(battlerAtk, battlerDef, move);
         // Certain moves like Rollout calculate damage based on values which change during the move execution, but before calling dmg calc.
         switch (gBattleMoves[move].effect)
@@ -817,13 +819,19 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
             fixedBasePower = 0;
             break;
         }
-        normalDmg = CalculateMoveDamageWithEffectiveness(move, battlerAtk, battlerDef, moveType, fixedBasePower, effectivenessMultiplier, FALSE, weather);
-        critDmg = CalculateMoveDamageWithEffectiveness(move, battlerAtk, battlerDef, moveType, fixedBasePower, effectivenessMultiplier, TRUE, weather);
+        normalDmg = CalculateMoveDamageVars(move, battlerAtk, battlerDef, moveType, fixedBasePower,
+                                             effectivenessMultiplier, weather, FALSE,
+                                             aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef],
+                                             aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
+        critDmg = CalculateMoveDamageVars(move, battlerAtk, battlerDef, moveType, fixedBasePower,
+                                             effectivenessMultiplier, weather, TRUE,
+                                             aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef],
+                                             aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
 
         if (critChance == -1)
             dmg = normalDmg;
         else
-            dmg = (critDmg + normalDmg * (critChance - 1)) / critChance;
+            dmg = (critDmg + normalDmg * (critChance - 1)) / (critChance);
 
         if (!gBattleStruct->zmove.active)
         {
@@ -832,23 +840,23 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
             {
             case EFFECT_LEVEL_DAMAGE:
             case EFFECT_PSYWAVE:
-                dmg = gBattleMons[battlerAtk].level * (AI_DATA->abilities[battlerAtk] == ABILITY_PARENTAL_BOND ? 2 : 1);
+                dmg = gBattleMons[battlerAtk].level * (aiData->abilities[battlerAtk] == ABILITY_PARENTAL_BOND ? 2 : 1);
                 break;
             case EFFECT_DRAGON_RAGE:
-                dmg = 40 * (AI_DATA->abilities[battlerAtk] == ABILITY_PARENTAL_BOND ? 2 : 1);
+                dmg = 40 * (aiData->abilities[battlerAtk] == ABILITY_PARENTAL_BOND ? 2 : 1);
                 break;
             case EFFECT_SONICBOOM:
-                dmg = 20 * (AI_DATA->abilities[battlerAtk] == ABILITY_PARENTAL_BOND ? 2 : 1);
+                dmg = 20 * (aiData->abilities[battlerAtk] == ABILITY_PARENTAL_BOND ? 2 : 1);
                 break;
             case EFFECT_MULTI_HIT:
-                dmg *= (AI_DATA->abilities[battlerAtk] == ABILITY_SKILL_LINK ? 5 : 3);
+                dmg *= (aiData->abilities[battlerAtk] == ABILITY_SKILL_LINK ? 5 : 3);
                 break;
             case EFFECT_ENDEAVOR:
                 // If target has less HP than user, Endeavor does no damage
                 dmg = max(0, gBattleMons[battlerDef].hp - gBattleMons[battlerAtk].hp);
                 break;
             case EFFECT_SUPER_FANG:
-                dmg = (AI_DATA->abilities[battlerAtk] == ABILITY_PARENTAL_BOND
+                dmg = (aiData->abilities[battlerAtk] == ABILITY_PARENTAL_BOND
                     ? max(2, gBattleMons[battlerDef].hp * 3 / 4)
                     : max(1, gBattleMons[battlerDef].hp / 2));
                 break;
@@ -1565,7 +1573,7 @@ bool32 ShouldTryOHKO(u32 battlerAtk, u32 battlerDef, u32 atkAbility, u32 defAbil
     {
         u16 odds = accuracy + (gBattleMons[battlerAtk].level - gBattleMons[battlerDef].level);
     #if B_SHEER_COLD_ACC >= GEN_7
-        if (gCurrentMove == MOVE_SHEER_COLD && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE))
+        if (move == MOVE_SHEER_COLD && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE))
             odds -= 10;
     #endif
         if (Random() % 100 + 1 < odds && gBattleMons[battlerAtk].level >= gBattleMons[battlerDef].level)
@@ -2808,17 +2816,17 @@ bool32 AI_CanPutToSleep(u32 battlerAtk, u32 battlerDef, u32 defAbility, u32 move
     return TRUE;
 }
 
-static bool32 AI_CanPoisonType(u32 battlerAttacker, u32 battlerTarget)
+static bool32 AI_CanPoisonType(u32 battlerAttacker, u32 battlerTarget, u32 move)
 {
-    return ((AI_DATA->abilities[battlerAttacker] == ABILITY_CORROSION && gBattleMoves[gCurrentMove].split == SPLIT_STATUS)
+    return ((AI_DATA->abilities[battlerAttacker] == ABILITY_CORROSION && gBattleMoves[move].split == SPLIT_STATUS)
             || !(IS_BATTLER_OF_TYPE(battlerTarget, TYPE_POISON) || IS_BATTLER_OF_TYPE(battlerTarget, TYPE_STEEL)));
 }
 
-static bool32 AI_CanBePoisoned(u32 battlerAtk, u32 battlerDef)
+static bool32 AI_CanBePoisoned(u32 battlerAtk, u32 battlerDef, u32 move)
 {
     u32 ability = AI_DATA->abilities[battlerDef];
 
-    if (!(AI_CanPoisonType(battlerAtk, battlerDef))
+    if (!(AI_CanPoisonType(battlerAtk, battlerDef, move))
      || gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_SAFEGUARD
      || gBattleMons[battlerDef].status1 & STATUS1_ANY
      || ability == ABILITY_IMMUNITY
@@ -2833,7 +2841,7 @@ static bool32 AI_CanBePoisoned(u32 battlerAtk, u32 battlerDef)
 
 bool32 ShouldPoisonSelf(u32 battler, u32 ability)
 {
-    if (AI_CanBePoisoned(battler, battler) && (
+    if (AI_CanBePoisoned(battler, battler, 0) && (
      ability == ABILITY_MARVEL_SCALE
       || ability == ABILITY_POISON_HEAL
       || ability == ABILITY_QUICK_FEET
@@ -2848,7 +2856,7 @@ bool32 ShouldPoisonSelf(u32 battler, u32 ability)
 
 bool32 AI_CanPoison(u32 battlerAtk, u32 battlerDef, u32 defAbility, u32 move, u32 partnerMove)
 {
-    if (!AI_CanBePoisoned(battlerAtk, battlerDef)
+    if (!AI_CanBePoisoned(battlerAtk, battlerDef, move)
       || AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
       || PartnerMoveEffectIsStatusSameTarget(BATTLE_PARTNER(battlerAtk), battlerDef, partnerMove))
