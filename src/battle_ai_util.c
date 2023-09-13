@@ -3066,21 +3066,21 @@ bool32 AnyPartyMemberStatused(u8 battlerId, bool32 checkSoundproof)
     return FALSE;
 }
 
-u16 GetBattlerSideSpeedAverage(u8 battler)
+u32 GetBattlerSideSpeedAverage(u32 battler)
 {
-    u16 speed1 = 0;
-    u16 speed2 = 0;
-    u8 numBattlersAlive = 0;
+    u32 speed1 = 0;
+    u32 speed2 = 0;
+    u32 numBattlersAlive = 0;
 
     if (IsBattlerAlive(battler))
     {
-        speed1 = GetBattlerTotalSpeedStat(battler);
+        speed1 = AI_DATA->speedStats[battler];
         numBattlersAlive++;
     }
 
     if (IsDoubleBattle() && IsBattlerAlive(BATTLE_PARTNER(battler)))
     {
-        speed2 = GetBattlerTotalSpeedStat(BATTLE_PARTNER(battler));
+        speed2 = AI_DATA->speedStats[BATTLE_PARTNER(battler)];
         numBattlersAlive++;
     }
 
@@ -3194,14 +3194,6 @@ u16 GetAllyChosenMove(u8 battlerId)
         return gLastMoves[partnerBattler];
     else
         return gBattleMons[partnerBattler].moves[gBattleStruct->chosenMovePositions[partnerBattler]];
-}
-
-bool32 IsTargetingPartner(u32 battlerAtk, u32 battlerDef)
-{
-    if ((battlerAtk & BIT_SIDE) == (battlerDef & BIT_SIDE))
-        return TRUE;
-
-    return FALSE;
 }
 
 //PARTNER_MOVE_EFFECT_IS_SAME
@@ -3739,8 +3731,8 @@ void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u16 move, s32 *score)
 
     if (AI_CanParalyze(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], move, AI_DATA->partnerMove))
     {
-        u8 atkSpeed = GetBattlerTotalSpeedStat(battlerAtk);
-        u8 defSpeed = GetBattlerTotalSpeedStat(battlerDef);
+        u32 atkSpeed = AI_DATA->speedStats[battlerAtk];
+        u32 defSpeed = AI_DATA->speedStats[battlerDef];
 
         if ((defSpeed >= atkSpeed && defSpeed / 2 < atkSpeed) // You'll go first after paralyzing foe
           || HasMoveEffect(battlerAtk, EFFECT_HEX)

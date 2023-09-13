@@ -726,11 +726,10 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
     u32 i;
     u16 predictedMove = AI_DATA->predictedMoves[battlerDef];
 
-
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
 
-    if (IsTargetingPartner(battlerAtk, battlerDef))
+    if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
         return score;
 
     GET_MOVE_TYPE(move, moveType);
@@ -880,7 +879,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
                 break;
             case ABILITY_DEFIANT:
             case ABILITY_COMPETITIVE:
-                if (IsStatLoweringMoveEffect(moveEffect) && !IsTargetingPartner(battlerAtk, battlerDef))
+                if (IsStatLoweringMoveEffect(moveEffect) && !IS_TARGETING_PARTNER(battlerAtk, battlerDef))
                     RETURN_SCORE_MINUS(8);
                 break;
             case ABILITY_COMATOSE:
@@ -2103,7 +2102,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
 
             // evasion check
             if (gBattleMons[battlerDef].statStages[STAT_EVASION] == MIN_STAT_STAGE
-              || ((AI_DATA->abilities[battlerDef] == ABILITY_CONTRARY) && !IsTargetingPartner(battlerAtk, battlerDef))) // don't want to raise target stats unless its your partner
+              || ((AI_DATA->abilities[battlerDef] == ABILITY_CONTRARY) && !IS_TARGETING_PARTNER(battlerAtk, battlerDef))) // don't want to raise target stats unless its your partner
                 score -= 10;
             break;
 
@@ -2231,27 +2230,27 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
                 score -= 10;
             break;
         case EFFECT_POWER_TRICK:
-            if (IsTargetingPartner(battlerAtk, battlerDef))
+            if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
                 score -= 10;
             else if (gBattleMons[battlerAtk].defense >= gBattleMons[battlerAtk].attack && !HasMoveWithSplit(battlerAtk, SPLIT_PHYSICAL))
                 score -= 10;
             break;
         case EFFECT_POWER_SWAP: // Don't use if attacker's stat stages are higher than opponents
-            if (IsTargetingPartner(battlerAtk, battlerDef))
+            if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
                 score -= 10;
             else if (gBattleMons[battlerAtk].statStages[STAT_ATK] >= gBattleMons[battlerDef].statStages[STAT_ATK]
               && gBattleMons[battlerAtk].statStages[STAT_SPATK] >= gBattleMons[battlerDef].statStages[STAT_SPATK])
                 score -= 10;
             break;
         case EFFECT_GUARD_SWAP: // Don't use if attacker's stat stages are higher than opponents
-            if (IsTargetingPartner(battlerAtk, battlerDef))
+            if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
                 score -= 10;
             else if (gBattleMons[battlerAtk].statStages[STAT_DEF] >= gBattleMons[battlerDef].statStages[STAT_DEF]
               && gBattleMons[battlerAtk].statStages[STAT_SPDEF] >= gBattleMons[battlerDef].statStages[STAT_SPDEF])
                 score -= 10;
             break;
         case EFFECT_SPEED_SWAP:
-            if (IsTargetingPartner(battlerAtk, battlerDef))
+            if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
             {
                 score -= 10;
             }
@@ -2264,7 +2263,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
             }
             break;
         case EFFECT_HEART_SWAP:
-            if (IsTargetingPartner(battlerAtk, battlerDef))
+            if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
             {
                 score -= 10;
             }
@@ -2281,7 +2280,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
             }
             break;
         case EFFECT_POWER_SPLIT:
-            if (IsTargetingPartner(battlerAtk, battlerDef))
+            if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
             {
                 score -= 10;
             }
@@ -2298,7 +2297,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
             }
             break;
         case EFFECT_GUARD_SPLIT:
-            if (IsTargetingPartner(battlerAtk, battlerDef))
+            if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
             {
                 score -= 10;
             }
@@ -2481,14 +2480,14 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
             }
             break;
         case EFFECT_HEAL_PULSE: // and floral healing
-            if (!IsTargetingPartner(battlerAtk, battlerDef)) // Don't heal enemies
+            if (!IS_TARGETING_PARTNER(battlerAtk, battlerDef)) // Don't heal enemies
             {
                 score -= 10;
                 break;
             }
             // fallthrough
         case EFFECT_HIT_ENEMY_HEAL_ALLY:    // pollen puff
-            if (IsTargetingPartner(battlerAtk, battlerDef))
+            if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
             {
                 if (gStatuses3[battlerDef] & STATUS3_HEAL_BLOCK)
                     return 0;
@@ -2505,7 +2504,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
                 score -= 10;
             break;
         case EFFECT_TOPSY_TURVY:
-            if (!IsTargetingPartner(battlerAtk, battlerDef))
+            if (!IS_TARGETING_PARTNER(battlerAtk, battlerDef))
             {
                 u8 targetPositiveStages = CountPositiveStatStages(battlerDef);
                 u8 targetNegativeStages = CountNegativeStatStages(battlerDef);
@@ -2546,7 +2545,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
                 }
                 else if (isDoubleBattle)
                 {
-                    if (!IsTargetingPartner(battlerAtk, battlerDef))
+                    if (!IS_TARGETING_PARTNER(battlerAtk, battlerDef))
                         score -= 10;
                 }
                 else
@@ -2571,7 +2570,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
                 score -= 10;
             break;
         case EFFECT_AFTER_YOU:
-            if (!IsTargetingPartner(battlerAtk, battlerDef)
+            if (!IS_TARGETING_PARTNER(battlerAtk, battlerDef)
               || !isDoubleBattle
               || AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER
               || PartnerMoveIsSameAsAttacker(BATTLE_PARTNER(battlerAtk), battlerDef, move, AI_DATA->partnerMove))
@@ -2703,7 +2702,7 @@ static s32 AI_TryToFaint(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
     u32 movesetIndex = AI_THINKING_STRUCT->movesetIndex;
     bool32 aiFaster;
 
-    if (IsTargetingPartner(battlerAtk, battlerDef))
+    if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
         return score;
 
     if (gBattleMoves[move].power == 0)
@@ -2868,7 +2867,7 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
     } // global move effect check
 
     // check specific target
-    if (IsTargetingPartner(battlerAtk, battlerDef))
+    if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
     {
         if (GetMoveDamageResult(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex) == MOVE_POWER_OTHER)
         {
@@ -3181,7 +3180,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u16 move, s32 score
     bool32 sereneGraceBoost = (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE && (gBattleMoves[move].secondaryEffectChance >= 20 && gBattleMoves[move].secondaryEffectChance < 100));
 
     // Targeting partner, check benefits of doing that instead
-    if (IsTargetingPartner(battlerAtk, battlerDef))
+    if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
         return score;
 
     // check always hits
@@ -4972,7 +4971,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u16 move, s32 score
 // Effects that are encouraged on the first turn of battle
 static s32 AI_SetupFirstTurn(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
 {
-    if (IsTargetingPartner(battlerAtk, battlerDef)
+    if (IS_TARGETING_PARTNER(battlerAtk, battlerDef)
       || gBattleResults.battleTurnCounter != 0)
         return score;
 
@@ -5083,7 +5082,7 @@ static s32 AI_SetupFirstTurn(u32 battlerAtk, u32 battlerDef, u16 move, s32 score
 // Adds score bonus to 'riskier' move effects and high crit moves
 static s32 AI_Risky(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
 {
-    if (IsTargetingPartner(battlerAtk, battlerDef))
+    if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
         return score;
 
     if (gBattleMoves[move].highCritRatio)
@@ -5122,7 +5121,7 @@ static s32 AI_Risky(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
 // Adds score bonus to best powered move
 static s32 AI_PreferStrongestMove(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
 {
-    if (IsTargetingPartner(battlerAtk, battlerDef))
+    if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
         return score;
 
     if (GetMoveDamageResult(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex) == MOVE_POWER_BEST)
@@ -5136,7 +5135,7 @@ static s32 AI_PreferBatonPass(u32 battlerAtk, u32 battlerDef, u16 move, s32 scor
 {
     u32 i;
 
-    if (IsTargetingPartner(battlerAtk, battlerDef)
+    if (IS_TARGETING_PARTNER(battlerAtk, battlerDef)
       || CountUsablePartyMons(battlerAtk) == 0
       || GetMoveDamageResult(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex) != MOVE_POWER_OTHER
       || !HasMoveEffect(battlerAtk, EFFECT_BATON_PASS)
@@ -5195,7 +5194,7 @@ static s32 AI_HPAware(u32 battlerAtk, u32 battlerDef, u16 move, s32 score)
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
 
-    if (IsTargetingPartner(battlerAtk, battlerDef))
+    if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
     {
         if ((effect == EFFECT_HEAL_PULSE || effect == EFFECT_HIT_ENEMY_HEAL_ALLY)
          || (moveType == TYPE_ELECTRIC && AI_DATA->abilities[BATTLE_PARTNER(battlerAtk)] == ABILITY_VOLT_ABSORB)

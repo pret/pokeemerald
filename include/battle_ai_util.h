@@ -50,7 +50,7 @@ bool32 BattlerWillFaintFromWeather(u8 battler, u16 ability);
 bool32 BattlerWillFaintFromSecondaryDamage(u8 battler, u16 ability);
 bool32 ShouldTryOHKO(u32 battlerAtk, u32 battlerDef, u16 atkAbility, u16 defAbility, u16 move);
 bool32 ShouldUseRecoilMove(u32 battlerAtk, u32 battlerDef, u32 recoilDmg, u8 moveIndex);
-u16 GetBattlerSideSpeedAverage(u8 battler);
+u32 GetBattlerSideSpeedAverage(u32 battler);
 bool32 ShouldAbsorb(u32 battlerAtk, u32 battlerDef, u16 move, s32 damage);
 bool32 ShouldRecover(u32 battlerAtk, u32 battlerDef, u16 move, u8 healPercent);
 bool32 ShouldSetScreen(u32 battlerAtk, u32 battlerDef, u16 moveEffect);
@@ -157,6 +157,7 @@ bool32 IsWakeupTurn(u8 battler);
 bool32 AI_IsBattlerAsleepOrComatose(u8 battlerId);
 
 // partner logic
+#define IS_TARGETING_PARTNER(battlerAtk, battlerDef)((battlerAtk) == (battlerDef ^ BIT_FLANK))
 u16 GetAllyChosenMove(u8 battlerId);
 bool32 IsValidDoubleBattle(u32 battlerAtk);
 bool32 IsTargetingPartner(u32 battlerAtk, u32 battlerDef);
