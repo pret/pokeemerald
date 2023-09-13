@@ -336,18 +336,18 @@ void Ai_UpdateFaintData(u32 battler)
     aiMon->isFainted = TRUE;
 }
 
-static void SetBattlerAiData(u32 battler)
+static void SetBattlerAiData(u32 battler, struct AiLogicData *aiData)
 {
     u32 ability, holdEffect;
 
-    ability = AI_DATA->abilities[battler] = AI_GetAbility(battler);
-    AI_DATA->items[battler] = gBattleMons[battler].item;
-    holdEffect = AI_DATA->holdEffects[battler] = AI_GetHoldEffect(battler);
-    AI_DATA->holdEffectParams[battler] = GetBattlerHoldEffectParam(battler);
-    AI_DATA->predictedMoves[battler] = gLastMoves[battler];
-    AI_DATA->hpPercents[battler] = GetHealthPercentage(battler);
-    AI_DATA->moveLimitations[battler] = CheckMoveLimitations(battler, 0, MOVE_LIMITATIONS_ALL);
-    AI_DATA->speedStats[battler] = GetBattlerTotalSpeedStatArgs(battler, ability, holdEffect);
+    ability = aiData->abilities[battler] = AI_GetAbility(battler);
+    aiData->items[battler] = gBattleMons[battler].item;
+    holdEffect = aiData->holdEffects[battler] = AI_GetHoldEffect(battler);
+    aiData->holdEffectParams[battler] = GetBattlerHoldEffectParam(battler);
+    aiData->predictedMoves[battler] = gLastMoves[battler];
+    aiData->hpPercents[battler] = GetHealthPercentage(battler);
+    aiData->moveLimitations[battler] = CheckMoveLimitations(battler, 0, MOVE_LIMITATIONS_ALL);
+    aiData->speedStats[battler] = GetBattlerTotalSpeedStatArgs(battler, ability, holdEffect);
 }
 
 static void SetBattlerAiMovesData(u32 battlerAtk, u32 battlersCount)
@@ -402,7 +402,7 @@ void SetAiLogicDataForTurn(void)
         if (!IsBattlerAlive(battlerAtk))
             continue;
 
-        SetBattlerAiData(battlerAtk);
+        SetBattlerAiData(battlerAtk, AI_DATA);
         SetBattlerAiMovesData(battlerAtk, battlersCount);
     }
 }
