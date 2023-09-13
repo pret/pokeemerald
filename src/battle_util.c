@@ -9818,11 +9818,10 @@ s32 CalculateMoveDamage(u32 move, u32 battlerAtk, u32 battlerDef, u32 moveType, 
                             updateFlags, CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, updateFlags));
 }
 
-// for AI - get move damage and effectiveness with one function call
-s32 CalculateMoveDamageAndEffectiveness(u32 move, u32 battlerAtk, u32 battlerDef, u32 moveType, s32 fixedBasePower, uq4_12_t *typeEffectivenessModifier)
+// for AI so that typeEffectivenessModifier is calculated only once
+s32 CalculateMoveDamageWithEffectiveness(u32 move, u32 battlerAtk, u32 battlerDef, u32 moveType, s32 fixedBasePower, uq4_12_t typeEffectivenessModifier, bool32 isCrit)
 {
-    *typeEffectivenessModifier = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, FALSE);
-    return DoMoveDamageCalc(move, battlerAtk, battlerDef, moveType, fixedBasePower, FALSE, FALSE, FALSE, *typeEffectivenessModifier);
+    return DoMoveDamageCalc(move, battlerAtk, battlerDef, moveType, fixedBasePower, isCrit, FALSE, FALSE, typeEffectivenessModifier);
 }
 
 static inline void MulByTypeEffectiveness(uq4_12_t *modifier, u32 move, u32 moveType, u32 battlerDef, u32 defType, u32 battlerAtk, bool32 recordAbilities)

@@ -109,7 +109,7 @@ bool32 IsHazardMoveEffect(u16 moveEffect);
 bool32 MoveCallsOtherMove(u16 move);
 bool32 MoveRequiresRecharging(u16 move);
 bool32 IsEncoreEncouragedEffect(u16 moveEffect);
-void ProtectChecks(u32 battlerAtk, u32 battlerDef, u16 move, u16 predictedMove, s16 *score);
+void ProtectChecks(u32 battlerAtk, u32 battlerDef, u16 move, u16 predictedMove, s32 *score);
 bool32 ShouldSetSandstorm(u8 battler, u16 ability, u16 holdEffect);
 bool32 ShouldSetHail(u8 battler, u16 ability, u16 holdEffect);
 bool32 ShouldSetSnow(u8 battler, u16 ability, u16 holdEffect);
@@ -178,12 +178,12 @@ bool32 PartyHasMoveSplit(u8 battlerId, u8 split);
 bool32 SideHasMoveSplit(u8 battlerId, u8 split);
 
 // score increases
-void IncreaseStatUpScore(u32 battlerAtk, u32 battlerDef, u8 statId, s16 *score);
-void IncreasePoisonScore(u32 battlerAtk, u32 battlerDef, u16 move, s16 *score);
-void IncreaseBurnScore(u32 battlerAtk, u32 battlerDef, u16 move, s16 *score);
-void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u16 move, s16 *score);
-void IncreaseSleepScore(u32 battlerAtk, u32 battlerDef, u16 move, s16 *score);
-void IncreaseConfusionScore(u32 battlerAtk, u32 battlerDef, u16 move, s16 *score);
-void IncreaseFrostbiteScore(u32 battlerAtk, u32 battlerDef, u16 move, s16 *score);
+void IncreaseStatUpScore(u32 battlerAtk, u32 battlerDef, u8 statId, s32 *score);
+void IncreasePoisonScore(u32 battlerAtk, u32 battlerDef, u16 move, s32 *score);
+void IncreaseBurnScore(u32 battlerAtk, u32 battlerDef, u16 move, s32 *score);
+void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u16 move, s32 *score);
+void IncreaseSleepScore(u32 battlerAtk, u32 battlerDef, u16 move, s32 *score);
+void IncreaseConfusionScore(u32 battlerAtk, u32 battlerDef, u16 move, s32 *score);
+void IncreaseFrostbiteScore(u32 battlerAtk, u32 battlerDef, u16 move, s32 *score);
 
 #endif //GUARD_BATTLE_AI_UTIL_H

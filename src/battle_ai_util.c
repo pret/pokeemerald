@@ -803,6 +803,7 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
 
+    effectivenessMultiplier = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, FALSE);
     if (gBattleMoves[move].power)
     {
         ProteanTryChangeType(battlerAtk, AI_DATA->abilities[battlerAtk], move, moveType);
@@ -821,8 +822,8 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
             fixedBasePower = 0;
             break;
         }
-        normalDmg = CalculateMoveDamageAndEffectiveness(move, battlerAtk, battlerDef, moveType, fixedBasePower, &effectivenessMultiplier);
-        critDmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, fixedBasePower, TRUE, FALSE, FALSE);
+        normalDmg = CalculateMoveDamageWithEffectiveness(move, battlerAtk, battlerDef, moveType, fixedBasePower, effectivenessMultiplier, FALSE);
+        critDmg = CalculateMoveDamageWithEffectiveness(move, battlerAtk, battlerDef, moveType, fixedBasePower, effectivenessMultiplier, TRUE);
 
         if (critChance == -1)
             dmg = normalDmg;
@@ -887,7 +888,6 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
     }
     else
     {
-        effectivenessMultiplier = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, FALSE);
         dmg = 0;
     }
 
@@ -1679,7 +1679,7 @@ bool32 ShouldSetSnow(u8 battler, u16 ability, u16 holdEffect)
     return FALSE;
 }
 
-void ProtectChecks(u32 battlerAtk, u32 battlerDef, u16 move, u16 predictedMove, s16 *score)
+void ProtectChecks(u32 battlerAtk, u32 battlerDef, u16 move, u16 predictedMove, s32 *score)
 {
     // TODO more sophisticated logic
     u16 predictedEffect = gBattleMoves[predictedMove].effect;
@@ -3602,7 +3602,7 @@ bool32 IsRecycleEncouragedItem(u16 item)
 // score increases
 #define STAT_UP_2_STAGE     8
 #define STAT_UP_STAGE       10
-void IncreaseStatUpScore(u32 battlerAtk, u32 battlerDef, u8 statId, s16 *score)
+void IncreaseStatUpScore(u32 battlerAtk, u32 battlerDef, u8 statId, s32 *score)
 {
     if (AI_DATA->abilities[battlerAtk] == ABILITY_CONTRARY)
         return;
@@ -3682,7 +3682,7 @@ void IncreaseStatUpScore(u32 battlerAtk, u32 battlerDef, u8 statId, s16 *score)
     }
 }
 
-void IncreasePoisonScore(u32 battlerAtk, u32 battlerDef, u16 move, s16 *score)
+void IncreasePoisonScore(u32 battlerAtk, u32 battlerDef, u16 move, s32 *score)
 {
     if (((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
     || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_PSN || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_STATUS)
@@ -3706,7 +3706,7 @@ void IncreasePoisonScore(u32 battlerAtk, u32 battlerDef, u16 move, s16 *score)
     }
 }
 
-void IncreaseBurnScore(u32 battlerAtk, u32 battlerDef, u16 move, s16 *score)
+void IncreaseBurnScore(u32 battlerAtk, u32 battlerDef, u16 move, s32 *score)
 {
     if (((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
     || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_BRN || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_STATUS)
@@ -3726,7 +3726,7 @@ void IncreaseBurnScore(u32 battlerAtk, u32 battlerDef, u16 move, s16 *score)
     }
 }
 
-void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u16 move, s16 *score)
+void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u16 move, s32 *score)
 {
     if (((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
     || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_PAR || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_STATUS)
@@ -3748,7 +3748,7 @@ void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u16 move, s16 *score)
     }
 }
 
-void IncreaseSleepScore(u32 battlerAtk, u32 battlerDef, u16 move, s16 *score)
+void IncreaseSleepScore(u32 battlerAtk, u32 battlerDef, u16 move, s32 *score)
 {
     if (((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
     || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_SLP || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_STATUS)
@@ -3767,7 +3767,7 @@ void IncreaseSleepScore(u32 battlerAtk, u32 battlerDef, u16 move, s16 *score)
         (*score)++;
 }
 
-void IncreaseConfusionScore(u32 battlerAtk, u32 battlerDef, u16 move, s16 *score)
+void IncreaseConfusionScore(u32 battlerAtk, u32 battlerDef, u16 move, s32 *score)
 {
     if (((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
     || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_CONFUSION || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_STATUS)
@@ -3786,7 +3786,7 @@ void IncreaseConfusionScore(u32 battlerAtk, u32 battlerDef, u16 move, s16 *score
     }
 }
 
-void IncreaseFrostbiteScore(u32 battlerAtk, u32 battlerDef, u16 move, s16 *score)
+void IncreaseFrostbiteScore(u32 battlerAtk, u32 battlerDef, u16 move, s32 *score)
 {
     if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0))
         return;

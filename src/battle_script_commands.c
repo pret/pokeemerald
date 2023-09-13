@@ -15839,7 +15839,7 @@ static const u16 sParentalBondBannedEffects[] =
     EFFECT_UPROAR,
 };
 
-bool8 IsMoveAffectedByParentalBond(u16 move, u8 battler)
+bool32 IsMoveAffectedByParentalBond(u32 move, u32 battler)
 {
     if (move != MOVE_NONE && move != MOVE_STRUGGLE
         && gBattleMoves[move].split != SPLIT_STATUS
