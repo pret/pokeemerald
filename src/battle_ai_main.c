@@ -698,12 +698,10 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     u32 weather;
     u16 predictedMove = aiData->predictedMoves[battlerDef];
 
-    SetTypeBeforeUsingMove(move, battlerAtk);
-    GET_MOVE_TYPE(move, moveType);
-
     if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
         return score;
 
+    SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
 
     // check non-user target
@@ -3757,10 +3755,9 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
                 if (gLastMoves[battlerDef] != MOVE_NONE
                   && gLastMoves[battlerDef] != 0xFFFF)
                 {
-                    /* TODO predicted moves
                     if (gLastMoves[battlerDef] == predictedMove)
                         score += 3;
-                    else */if (CanMoveFaintBattler(gLastMoves[battlerDef], battlerDef, battlerAtk, 1))
+                    else if (CanTargetMoveFaintAi(gLastMoves[battlerDef], battlerDef, battlerAtk, 1))
                         score += 2; //Disable move that can kill attacker
                 }
             }

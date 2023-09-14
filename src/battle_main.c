@@ -751,7 +751,7 @@ static void SetAllPlayersBerryData(void)
     {
         s32 numPlayers;
         struct BattleEnigmaBerry *src;
-        u8 battler;
+        u32 battler;
 
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
@@ -2268,7 +2268,7 @@ static void EndLinkBattleInSteps(void)
     case 2:
         if (!gPaletteFade.active)
         {
-            u8 battlerCount;
+            u32 battlerCount;
 
             gMain.anyLinkBattlerHasFrontierPass = RecordedBattle_GetFrontierPassFlag();
 
@@ -4021,11 +4021,10 @@ u8 IsRunningFromBattleImpossible(u32 battler)
     return BATTLE_RUN_SUCCESS;
 }
 
-void SwitchPartyOrder(u8 battler)
+void SwitchPartyOrder(u32 battler)
 {
     s32 i;
-    u8 partyId1;
-    u8 partyId2;
+    u32 partyId1, partyId2;
 
     for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
         gBattlePartyCurrentOrder[i] = *(battler * 3 + i + (u8 *)(gBattleStruct->battlerPartyOrders));
@@ -5589,7 +5588,7 @@ void RunBattleScriptCommands(void)
         gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
 }
 
-void SetTypeBeforeUsingMove(u16 move, u32 battlerAtk)
+void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
 {
     u32 moveType, ateType, attackerAbility;
     u16 holdEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
@@ -5728,8 +5727,8 @@ void SetTypeBeforeUsingMove(u16 move, u32 battlerAtk)
 //  var8001 - var8007: stat changes
 void SetTotemBoost(void)
 {
-    u8 battler = gSpecialVar_0x8000;
-    u8 i;
+    u32 battler = gSpecialVar_0x8000;
+    u32 i;
 
     for (i = 0; i < (NUM_BATTLE_STATS - 1); i++)
     {

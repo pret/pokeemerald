@@ -723,47 +723,12 @@ bool32 MovesWithSplitUnusable(u32 attacker, u32 target, u32 split)
         {
             SetTypeBeforeUsingMove(moves[i], attacker);
             GET_MOVE_TYPE(moves[i], moveType);
-            if (CalcTypeEffectivenessMultiplier(moves[i], moveType, attacker, target, FALSE) != 0)
+            if (CalcTypeEffectivenessMultiplier(moves[i], moveType, attacker, target, AI_DATA->abilities[target], FALSE) != 0)
                 usable |= gBitTable[i];
         }
     }
 
     return (usable == 0);
-}
-
-static bool32 AI_GetIfCrit(u32 move, u32 battlerAtk, u32 battlerDef)
-{
-    bool32 isCrit;
-
-    switch (CalcCritChanceStage(battlerAtk, battlerDef, move, FALSE))
-    {
-    case -1:
-    case 0:
-    default:
-        isCrit = FALSE;
-        break;
-    case 1:
-        if (gBattleMoves[move].highCritRatio && (Random() % 5 == 0))
-            isCrit = TRUE;
-        else
-            isCrit = FALSE;
-        break;
-    case 2:
-        if (gBattleMoves[move].highCritRatio && (Random() % 2 == 0))
-            isCrit = TRUE;
-        else if (!(gBattleMoves[move].highCritRatio) && (Random() % 4) == 0)
-            isCrit = TRUE;
-        else
-            isCrit = FALSE;
-        break;
-    case -2:
-    case 3:
-    case 4:
-        isCrit = TRUE;
-        break;
-    }
-
-    return isCrit;
 }
 
 // To save computation time this function has 2 variants. One saves, sets and restores battlers, while the other doesn't.
@@ -776,8 +741,9 @@ s32 AI_CalcDamageSaveBattlers(u32 move, u32 battlerAtk, u32 battlerDef, u8 *type
 
 s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, bool32 considerZPower, u32 weather)
 {
-    s32 dmg, moveType, critDmg, normalDmg, fixedBasePower, n;
+    s32 dmg, moveType;
     uq4_12_t effectivenessMultiplier;
+    struct AiLogicData *aiData = AI_DATA;
 
     SetBattlerData(battlerAtk);
     SetBattlerData(battlerDef);
@@ -797,14 +763,12 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
 
-    effectivenessMultiplier = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, FALSE);
+    effectivenessMultiplier = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, aiData->abilities[battlerDef], FALSE);
     if (gBattleMoves[move].power)
     {
-        s32 critChance;
-        struct AiLogicData *aiData = AI_DATA;
+        s32 critChanceIndex, normalDmg, fixedBasePower, n;
 
         ProteanTryChangeType(battlerAtk, aiData->abilities[battlerAtk], move, moveType);
-        critChance = GetInverseCritChance(battlerAtk, battlerDef, move);
         // Certain moves like Rollout calculate damage based on values which change during the move execution, but before calling dmg calc.
         switch (gBattleMoves[move].effect)
         {
@@ -823,15 +787,22 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
                                              effectivenessMultiplier, weather, FALSE,
                                              aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef],
                                              aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
-        critDmg = CalculateMoveDamageVars(move, battlerAtk, battlerDef, moveType, fixedBasePower,
+
+        critChanceIndex = CalcCritChanceStageArgs(battlerAtk, battlerDef, move, FALSE, aiData->abilities[battlerAtk], aiData->abilities[battlerDef], aiData->holdEffects[battlerAtk]);
+        if (critChanceIndex > 1) // Consider crit damage only if a move has at least +1 crit chance
+        {
+            s32 critDmg = CalculateMoveDamageVars(move, battlerAtk, battlerDef, moveType, fixedBasePower,
                                              effectivenessMultiplier, weather, TRUE,
                                              aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef],
                                              aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
-
-        if (critChance == -1)
-            dmg = normalDmg;
-        else
+            u32 critChance = GetCritHitChance(critChanceIndex);
+            // With critChance getting closer to 1, dmg gets closer to critDmg.
             dmg = (critDmg + normalDmg * (critChance - 1)) / (critChance);
+        }
+        else
+        {
+            dmg = normalDmg;
+        }
 
         if (!gBattleStruct->zmove.active)
         {
@@ -1056,7 +1027,7 @@ uq4_12_t AI_GetTypeEffectiveness(u32 move, u32 battlerAtk, u32 battlerDef)
     gBattleStruct->dynamicMoveType = 0;
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
-    typeEffectiveness = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, FALSE);
+    typeEffectiveness = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], FALSE);
 
     RestoreBattlerData(battlerAtk);
     RestoreBattlerData(battlerDef);
@@ -1191,18 +1162,14 @@ bool32 CanAIFaintTarget(u32 battlerAtk, u32 battlerDef, u32 numHits)
     return FALSE;
 }
 
-bool32 CanMoveFaintBattler(u32 move, u32 battlerDef, u32 battlerAtk, u32 nHits)
+bool32 CanTargetMoveFaintAi(u32 move, u32 battlerDef, u32 battlerAtk, u32 nHits)
 {
-    s32 i, dmg;
-    u8 effectiveness;
-    u32 unusable = AI_DATA->moveLimitations[battlerDef];
-
-    if (move != MOVE_NONE
-      && move != 0xFFFF
-      && !(unusable & gBitTable[i])
-      && AI_CalcDamageSaveBattlers(move, battlerDef, battlerAtk, &effectiveness, FALSE) >= gBattleMons[battlerAtk].hp)
-        return TRUE;
-
+    u32 indexSlot = GetMoveSlot(GetMovesArray(battlerDef), move);
+    if (indexSlot < MAX_MON_MOVES)
+    {
+        if (GetNoOfHitsToKO(AI_DATA->simulatedDmg[battlerDef][battlerAtk][indexSlot], gBattleMons[battlerAtk].hp) <= nHits)
+            return TRUE;
+    }
     return FALSE;
 }
 
@@ -1282,7 +1249,7 @@ s32 AI_GetAbility(u32 battlerId)
     return ABILITY_NONE; // Unknown.
 }
 
-u16 AI_GetHoldEffect(u32 battlerId)
+u32 AI_GetHoldEffect(u32 battlerId)
 {
     u32 holdEffect;
 
