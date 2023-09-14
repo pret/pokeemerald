@@ -6557,19 +6557,18 @@ static u8 TrySetMicleBerry(u32 battler, u32 itemId, bool32 end2)
 static u8 TrySetEnigmaBerry(u32 battler)
 {
     if (IsBattlerAlive(battler)
-     && TARGET_TURN_DAMAGED
      && !DoesSubstituteBlockMove(gBattlerAttacker, battler, gCurrentMove)
+     && ((TARGET_TURN_DAMAGED && gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE) || gBattleScripting.overrideBerryRequirements)
      && !(gBattleScripting.overrideBerryRequirements && gBattleMons[battler].hp == gBattleMons[battler].maxHP)
 #if B_HEAL_BLOCKING >= GEN_5
-     && !(gStatuses3[battler] & STATUS3_HEAL_BLOCK)
+     && !(gStatuses3[battler] & STATUS3_HEAL_BLOCK))
 #endif
-     && gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)
     {
         gBattleScripting.battler = battler;
         gBattleMoveDamage = (gBattleMons[battler].maxHP * 25 / 100) * -1;
         if (GetBattlerAbility(battler) == ABILITY_RIPEN)
             gBattleMoveDamage *= 2;
-        
+
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_ItemHealHP_RemoveItemRet;
         return ITEM_HP_CHANGE;
