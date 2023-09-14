@@ -4034,7 +4034,7 @@ static bool32 TryChangeBattleTerrain(u32 battler, u32 statusFlag, u8 *timer)
 static void ForewarnChooseMove(u32 battler)
 {
     struct Forewarn {
-        u32 battler;
+        u8 battler;
         u8 power;
         u16 moveId;
     };

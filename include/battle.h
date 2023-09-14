@@ -294,7 +294,7 @@ struct AiLogicData
     u8 moveLimitations[MAX_BATTLERS_COUNT];
     bool8 shouldSwitchMon; // Because all available moves have no/little effect. Each bit per battler.
     u8 monToSwitchId[MAX_BATTLERS_COUNT]; // ID of the mon to switch.
-    bool8 weatherHasEffect; // WEATHER_HAS_EFFECT, so it doesn't have to be used all the time
+    bool8 weatherHasEffect; // The same as WEATHER_HAS_EFFECT. Stored here, so it's called only once.
 };
 
 struct AI_ThinkingStruct
