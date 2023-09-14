@@ -9028,6 +9028,27 @@ extern const u32 gItemIconPalette_TeraOrb[];
 extern const u32 gItemIcon_TinyBambooShoot[];
 extern const u32 gItemIconPalette_TinyBambooShoot[];
 
+// Tera Shards
+extern const u32 gItemIcon_TeraShard[];
+extern const u32 gItemIconPalette_NormalTeraShard[];
+extern const u32 gItemIconPalette_FireTeraShard[];
+extern const u32 gItemIconPalette_WaterTeraShard[];
+extern const u32 gItemIconPalette_GrassTeraShard[];
+extern const u32 gItemIconPalette_ElectricTeraShard[];
+extern const u32 gItemIconPalette_IceTeraShard[];
+extern const u32 gItemIconPalette_FightingTeraShard[];
+extern const u32 gItemIconPalette_PoisonTeraShard[];
+extern const u32 gItemIconPalette_GroundTeraShard[];
+extern const u32 gItemIconPalette_FlyingTeraShard[];
+extern const u32 gItemIconPalette_PsychicTeraShard[];
+extern const u32 gItemIconPalette_BugTeraShard[];
+extern const u32 gItemIconPalette_RockTeraShard[];
+extern const u32 gItemIconPalette_GhostTeraShard[];
+extern const u32 gItemIconPalette_DarkTeraShard[];
+extern const u32 gItemIconPalette_DragonTeraShard[];
+extern const u32 gItemIconPalette_SteelTeraShard[];
+extern const u32 gItemIconPalette_FairyTeraShard[];
+
 extern const u32 gItemIcon_AdamantCrystal[];
 extern const u32 gItemIconPalette_AdamantCrystal[];
 extern const u32 gItemIcon_GriseousCore[];
