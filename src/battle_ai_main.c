@@ -4958,6 +4958,10 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
          || gBattleMons[BATTLE_PARTNER(battlerAtk)].status1 & STATUS1_ANY)
             score += 3;
         break;
+    case EFFECT_SALT_CURE:
+        if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_WATER) || IS_BATTLER_OF_TYPE(battlerDef, TYPE_STEEL))
+            score += 2;
+        break;
     } // move effect checks
 
     return score;

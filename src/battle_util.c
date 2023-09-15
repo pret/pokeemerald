@@ -1749,6 +1749,22 @@ u32 TrySetCantSelectMoveBattleScript(u32 battler)
         }
     }
 
+    if (gBattleMoves[move].effect == EFFECT_GIGATON_HAMMER && move == gLastResultingMoves[battler])
+    {
+        gCurrentMove = move;
+        PREPARE_MOVE_BUFFER(gBattleTextBuff1, gCurrentMove);
+        if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+        {
+            gPalaceSelectionBattleScripts[battler] = BattleScript_SelectingNotAllowedCurrentMoveInPalace;
+            gProtectStructs[battler].palaceUnableToUseMove = TRUE;
+        }
+        else
+        {
+            gSelectionBattleScripts[battler] = BattleScript_SelectingNotAllowedCurrentMove;
+            limitations++;
+        }
+    }
+
     gPotentialItemEffectBattler = battler;
     if (HOLD_EFFECT_CHOICE(holdEffect) && *choicedMove != MOVE_NONE && *choicedMove != MOVE_UNAVAILABLE && *choicedMove != move)
     {
@@ -1884,6 +1900,8 @@ u8 CheckMoveLimitations(u8 battler, u8 unusableMoves, u16 check)
             unusableMoves |= gBitTable[i];
         // Gorilla Tactics
         else if (check & MOVE_LIMITATION_CHOICE_ITEM && GetBattlerAbility(battler) == ABILITY_GORILLA_TACTICS && *choicedMove != MOVE_NONE && *choicedMove != MOVE_UNAVAILABLE && *choicedMove != gBattleMons[battler].moves[i])
+            unusableMoves |= gBitTable[i];
+        else if (check & MOVE_LIMITATION_GIGATON_HAMMER && gBattleMoves[gBattleMons[battler].moves[i]].effect == EFFECT_GIGATON_HAMMER && gBattleMons[battler].moves[i] == gLastResultingMoves[battler])
             unusableMoves |= gBitTable[i];
     }
     return unusableMoves;
@@ -2523,6 +2541,7 @@ enum
     ENDTURN_SLOW_START,
     ENDTURN_PLASMA_FISTS,
     ENDTURN_CUD_CHEW,
+    ENDTURN_SALT_CURE,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -3084,6 +3103,22 @@ u8 DoBattlerEndTurnEffects(void)
         case ENDTURN_CUD_CHEW:
             if (GetBattlerAbility(battler) == ABILITY_CUD_CHEW && !gDisableStructs[battler].cudChew && ItemId_GetPocket(GetUsedHeldItem(battler)) == POCKET_BERRIES)
                 gDisableStructs[battler].cudChew = TRUE;
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_SALT_CURE:
+            if (gStatuses4[battler] & STATUS4_SALT_CURE && gBattleMons[battler].hp != 0)
+            {
+                gBattlerTarget = battler;
+                if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_STEEL) || IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_WATER))
+                    gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 4;
+                else
+                    gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 8;
+                if (gBattleMoveDamage == 0)
+                    gBattleMoveDamage = 1;
+                PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_SALT_CURE);
+                BattleScriptExecute(BattleScript_SaltCureExtraDamage);
+                effect++;
+            }
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_BATTLER_COUNT:  // done

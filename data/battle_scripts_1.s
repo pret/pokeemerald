@@ -436,6 +436,32 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCorrosiveGas            @ EFFECT_CORROSIVE_GAS
 	.4byte BattleScript_EffectHit                     @ EFFECT_POPULATION_BOMB
 	.4byte BattleScript_EffectMortalSpin              @ EFFECT_MORTAL_SPIN
+	.4byte BattleScript_EffectHit                     @ EFFECT_GIGATON_HAMMER
+	.4byte BattleScript_EffectSaltCure                @ EFFECT_SALT_CURE
+
+BattleScript_EffectSaltCure:
+	call BattleScript_EffectHit_Ret
+	jumpiffainted BS_TARGET, TRUE, BattleScript_EffectSaltCure_End
+	applysaltcure BS_TARGET
+	printstring STRINGID_TARGETISBEINGSALTCURED
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_EffectSaltCure_End:
+	goto BattleScript_MoveEnd
+
+BattleScript_SaltCureExtraDamage::
+	playanimation BS_TARGET, B_ANIM_SALT_CURE_DAMAGE, NULL
+	waitanimation
+	call BattleScript_HurtTarget_NoString
+	printstring STRINGID_TARGETISHURTBYSALTCURE
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+BattleScript_HurtTarget_NoString:
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	tryfaintmon BS_TARGET
+	return
 
 BattleScript_EffectMortalSpin:
 	call BattleScript_EffectHit_Ret
@@ -6617,8 +6643,7 @@ BattleScript_PursuitDmgOnSwitchOut::
 	waitmessage B_WAIT_TIME_LONG
 	tryfaintmon BS_TARGET
 	moveendfromto MOVEEND_ABILITIES, MOVEEND_CHOICE_MOVE
-	getbattlerfainted BS_TARGET
-	jumpifbyte CMP_EQUAL, gBattleCommunication, FALSE, BattleScript_PursuitDmgOnSwitchOutRet
+	jumpiffainted BS_TARGET, FALSE, BattleScript_PursuitDmgOnSwitchOutRet
 	setbyte sGIVEEXP_STATE, 0
 	getexp BS_TARGET
 BattleScript_PursuitDmgOnSwitchOutRet:
@@ -7131,8 +7156,7 @@ BattleScript_GulpMissileGorging::
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	tryfaintmon BS_ATTACKER
-	getbattlerfainted BS_ATTACKER
-	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_GulpMissileNoSecondEffectGorging
+	jumpiffainted BS_ATTACKER, TRUE, BattleScript_GulpMissileNoSecondEffectGorging
 BattleScript_GulpMissileNoDmgGorging:
 	handleformchange BS_TARGET, 0
 	playanimation BS_TARGET, B_ANIM_FORM_CHANGE
@@ -7160,8 +7184,7 @@ BattleScript_GulpMissileGulping::
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	tryfaintmon BS_ATTACKER
-	getbattlerfainted BS_ATTACKER
-	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_GulpMissileNoSecondEffectGulping
+	jumpiffainted BS_ATTACKER, TRUE, BattleScript_GulpMissileNoSecondEffectGulping
 	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_CLEAR_AMULET, BattleScript_GulpMissileNoSecondEffectGulping
 	jumpifability BS_ATTACKER, ABILITY_CLEAR_BODY, BattleScript_GulpMissileNoSecondEffectGulping
 	jumpifability BS_ATTACKER, ABILITY_FULL_METAL_BODY, BattleScript_GulpMissileNoSecondEffectGulping
@@ -7500,6 +7523,14 @@ BattleScript_MoveUsedHealBlockPrevents::
 
 BattleScript_SelectingNotAllowedMoveHealBlockInPalace::
 	printstring STRINGID_HEALBLOCKPREVENTSUSAGE
+	goto BattleScript_SelectingUnusableMoveInPalace
+
+BattleScript_SelectingNotAllowedCurrentMove::
+	printselectionstring STRINGID_CURRENTMOVECANTSELECT
+	endselectionscript
+
+BattleScript_SelectingNotAllowedCurrentMoveInPalace::
+	printstring STRINGID_CURRENTMOVECANTSELECT
 	goto BattleScript_SelectingUnusableMoveInPalace
 
 BattleScript_WishComesTrue::
@@ -7875,8 +7906,7 @@ BattleScript_CottonDownActivates::
 	savetarget
 	setbyte gBattlerTarget, 0
 BattleScript_CottonDownLoop:
-	getbattlerfainted BS_TARGET
-	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_CottonDownLoopIncrement
+	jumpiffainted BS_TARGET, TRUE, BattleScript_CottonDownLoopIncrement
 	setstatchanger STAT_SPEED, 1, TRUE
 	jumpifbyteequal gBattlerTarget, gEffectBattler, BattleScript_CottonDownLoopIncrement
 	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED, BattleScript_CottonDownTargetSpeedCantGoLower

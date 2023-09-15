@@ -948,6 +948,7 @@ gBattleAnims_General::
 	.4byte General_AffectionHangedOn        @ B_ANIM_AFFECTION_HANGED_ON
 	.4byte General_Snow                     @ B_ANIM_SNOW_CONTINUES
 	.4byte General_UltraBurst               @ B_ANIM_ULTRA_BURST
+	.4byte General_SaltCureDamage           @ B_ANIM_SALT_CURE_DAMAGE
 
 	.align 2
 gBattleAnims_Special::
@@ -27134,6 +27135,9 @@ General_AffectionHangedOn_3Hearts:
 	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 128, -16
 	waitforvisualfinish
 	end
+
+General_SaltCureDamage::
+	goto Status_Freeze
 
 SnatchMoveTrySwapFromSubstitute:
 	createvisualtask AnimTask_IsAttackerBehindSubstitute, 2
