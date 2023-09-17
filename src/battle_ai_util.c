@@ -1127,7 +1127,7 @@ bool32 CanTargetFaintAi(u32 battlerDef, u32 battlerAtk)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && !(unusable & gBitTable[i])
-            && AI_DATA->simulatedDmg[battlerDef][battlerAtk][moves[i]] >= gBattleMons[battlerAtk].hp)
+            && AI_DATA->simulatedDmg[battlerDef][battlerAtk][i] >= gBattleMons[battlerAtk].hp)
         {
             return TRUE;
         }
@@ -2958,7 +2958,7 @@ bool32 AI_CanBeInfatuated(u32 battlerAtk, u32 battlerDef, u32 defAbility)
 u32 ShouldTryToFlinch(u32 battlerAtk, u32 battlerDef, u32 atkAbility, u32 defAbility, u32 move)
 {
     if (((AI_DATA->abilities[battlerAtk] != ABILITY_MOLD_BREAKER && (defAbility == ABILITY_SHIELD_DUST || defAbility == ABILITY_INNER_FOCUS))
-      || AI_GetHoldEffect(battlerDef) == HOLD_EFFECT_COVERT_CLOAK
+      || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_COVERT_CLOAK
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
       || AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER)) // Opponent goes first
     {
@@ -2995,7 +2995,7 @@ bool32 ShouldFakeOut(u32 battlerAtk, u32 battlerDef, u32 move)
     if (!gDisableStructs[battlerAtk].isFirstTurn
     || AI_DATA->abilities[battlerAtk] == ABILITY_GORILLA_TACTICS
     || AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_CHOICE_BAND
-    || AI_GetHoldEffect(battlerDef) == HOLD_EFFECT_COVERT_CLOAK
+    || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_COVERT_CLOAK
     || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
     || (AI_DATA->abilities[battlerAtk] != ABILITY_MOLD_BREAKER
     && (AI_DATA->abilities[battlerDef] == ABILITY_SHIELD_DUST || AI_DATA->abilities[battlerDef] == ABILITY_INNER_FOCUS)))

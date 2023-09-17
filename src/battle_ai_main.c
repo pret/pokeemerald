@@ -4933,6 +4933,10 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
          || gBattleMons[BATTLE_PARTNER(battlerAtk)].status1 & STATUS1_ANY)
             score += 3;
         break;
+    case EFFECT_SALT_CURE:
+        if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_WATER) || IS_BATTLER_OF_TYPE(battlerDef, TYPE_STEEL))
+            score += 2;
+        break;
     } // move effect checks
 
     return score;

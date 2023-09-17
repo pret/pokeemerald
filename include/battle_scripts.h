@@ -214,6 +214,7 @@ extern const u8 BattleScript_WhiteHerbRet[];
 extern const u8 BattleScript_ItemHealHP_RemoveItemRet[];
 extern const u8 BattleScript_ItemHealHP_RemoveItemEnd2[];
 extern const u8 BattleScript_BerryPPHealEnd2[];
+extern const u8 BattleScript_BerryPPHealRet[];
 extern const u8 BattleScript_ItemHealHP_End2[];
 extern const u8 BattleScript_ItemHealHP_Ret[];
 extern const u8 BattleScript_SelectingNotAllowedMoveChoiceItem[];
@@ -474,6 +475,9 @@ extern const u8 BattleScript_BerserkGeneRet[];
 extern const u8 BattleScript_TargetFormChangeWithStringNoPopup[];
 extern const u8 BattleScript_DefDown[];
 extern const u8 BattleScript_UltraBurst[];
+extern const u8 BattleScript_SelectingNotAllowedCurrentMove[];
+extern const u8 BattleScript_SelectingNotAllowedCurrentMoveInPalace[];
+extern const u8 BattleScript_SaltCureExtraDamage[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

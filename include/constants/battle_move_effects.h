@@ -413,7 +413,9 @@
 #define EFFECT_CORROSIVE_GAS                407
 #define EFFECT_POPULATION_BOMB              408
 #define EFFECT_MORTAL_SPIN                  409
+#define EFFECT_GIGATON_HAMMER               410
+#define EFFECT_SALT_CURE                    411
 
-#define NUM_BATTLE_MOVE_EFFECTS             410
+#define NUM_BATTLE_MOVE_EFFECTS             412
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

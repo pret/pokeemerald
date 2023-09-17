@@ -4093,6 +4093,9 @@ static void Cmd_getexp(void)
                 calculatedExp = gSpeciesInfo[gBattleMons[gBattlerFainted].species].expYield * gBattleMons[gBattlerFainted].level / 7;
             #endif
 
+            if (B_TRAINER_EXP_MULTIPLIER <= GEN_7 && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+                calculatedExp = (calculatedExp * 150) / 100;
+
             #if B_SPLIT_EXP < GEN_6
                 if (viaExpShare) // at least one mon is getting exp via exp share
                 {
@@ -4185,14 +4188,9 @@ static void Cmd_getexp(void)
                     {
                         // check if the pokemon doesn't belong to the player
                         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gBattleStruct->expGetterMonId >= 3)
-                        {
                             i = STRINGID_EMPTYSTRING4;
-                        }
                         else
-                        {
-                            gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
                             i = STRINGID_ABOOSTED;
-                        }
                     }
                     else
                     {
@@ -16036,13 +16034,15 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
     else
         holdEffect = ItemId_GetHoldEffect(item);
 
+    if (IsTradedMon(&gPlayerParty[expGetterMonId]))
+        *expAmount = (*expAmount * 150) / 100;
     if (holdEffect == HOLD_EFFECT_LUCKY_EGG)
         *expAmount = (*expAmount * 150) / 100;
-    if (B_TRAINER_EXP_MULTIPLIER <= GEN_7 && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-        *expAmount = (*expAmount * 150) / 100;
+    if (B_UNEVOLVED_EXP_MULTIPLIER >= GEN_6 && IsMonPastEvolutionLevel(&gPlayerParty[expGetterMonId]))
+        *expAmount = (*expAmount * 4915) / 4096;
     if (B_AFFECTION_MECHANICS == TRUE && GetBattlerFriendshipScore(expGetterMonId) >= FRIENDSHIP_50_TO_99)
-        *expAmount = (*expAmount * 120) / 100;
-    if (IsTradedMon(&gPlayerParty[expGetterMonId]))
+        *expAmount = (*expAmount * 4915) / 4096;
+    if (CheckBagHasItem(ITEM_EXP_CHARM, 1)) //is also for other exp boosting Powers if/when implemented
         *expAmount = (*expAmount * 150) / 100;
 
     if (B_SCALED_EXP >= GEN_5 && B_SCALED_EXP != GEN_6)
@@ -16317,4 +16317,13 @@ void BS_JumpIfMotor(void)
         gBattlescriptCurrInstr = cmd->jumpInstr;
     else
         gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_ApplySaltCure(void)
+{
+    NATIVE_ARGS(u8 battler);
+
+    u8 battler = GetBattlerForBattleScript(cmd->battler);
+    gStatuses4[battler] |= STATUS4_SALT_CURE;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }

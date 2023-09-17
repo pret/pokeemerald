@@ -10687,7 +10687,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .priority = 0,
         .split = SPLIT_SPECIAL,
         .zMoveEffect = Z_EFFECT_NONE,
-        .ballisticMove = B_UPDATED_MOVE_FLAGS < GEN_9,
+        .ballisticMove = TRUE,
     },
 
     [MOVE_ANCHOR_SHOT] =
@@ -13218,7 +13218,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SALT_CURE] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_SALT_CURE
+        .effect = EFFECT_SALT_CURE,
         .power = 40,
         .type = TYPE_ROCK,
         .accuracy = 100,
@@ -13639,7 +13639,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_GIGATON_HAMMER] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_GIGATON_HAMMER
+        .effect = EFFECT_GIGATON_HAMMER,
         .power = 160,
         .type = TYPE_STEEL,
         .accuracy = 100,

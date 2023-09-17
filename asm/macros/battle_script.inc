@@ -1311,7 +1311,7 @@
 	callnative BS_CalcMetalBurstDmg
 	.4byte \failInstr
 	.endm
-	
+
 	.macro jumpifcantfling battler:req, jumpInstr:req
 	callnative BS_JumpIfCantFling
 	.byte \battler
@@ -1361,6 +1361,11 @@
 	callnative BS_SetSnow
 	.endm
 
+	.macro applysaltcure battler:req
+	callnative BS_ApplySaltCure
+	.byte \battler
+	.endm
+
 	.macro setzeffect
 	callnative BS_SetZEffect
 	.endm
@@ -1381,7 +1386,7 @@
 	.byte \counter
 	.4byte \ptr
 	.endm
-	
+
 	.macro jumpifcantloseitem battler:req, ptr:req
 	callnative BS_JumpIfCantLoseItem
 	.byte \battler
@@ -2321,4 +2326,10 @@
 	.macro tryrevivalblessing, jumpInstr:req
 	various 0, VARIOUS_TRY_REVIVAL_BLESSING
 	.4byte \jumpInstr
+	.endm
+
+	@ Will jump to script pointer if the specified battler has or has not fainted.
+	.macro jumpiffainted battler:req, value:req, ptr:req
+	getbattlerfainted \battler
+	jumpifbyte CMP_EQUAL, gBattleCommunication, \value, \ptr
 	.endm
