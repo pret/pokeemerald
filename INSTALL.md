@@ -294,7 +294,11 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     ```
 
     The command with gba-dev will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
+<details>
+    <summary><i>Note for users with trouble running 'sudo dkp-pacman -Sy'...</i></summary>
 
+>   Using a VPN may help accesing devkitpro servers.
+</details>
 4. After the tools are installed, devkitARM must now be made accessible from anywhere by the system. To do so, run the following commands:
 
     ```bash
@@ -387,6 +391,13 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
 >   Consider adding an exception for the `pokeemerald` and/or `decomps` folder in Windows Security using
 >   [these instructions](https://support.microsoft.com/help/4028485). This prevents Microsoft Defender from
 >   scanning them which might improve performance while building.
+</details>
+
+<details>
+    <summary><i>Note for macOS users...</i></summary>
+
+>   If make fails, try following
+>   [these instructions](https://support.apple.com/en-us/HT211861) to open Terminal using Rosetta.
 </details>
 
 1. If pokeemerald is not already downloaded (some users may prefer to download pokeemerald via a git client like GitHub Desktop), run:
