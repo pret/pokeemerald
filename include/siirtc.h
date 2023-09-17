@@ -9,6 +9,10 @@
 #define SIIRTCINFO_24HOUR 0x40 // 0: 12-hour mode, 1: 24-hour mode
 #define SIIRTCINFO_POWER  0x80 // power on or power failure occurred
 
+#define DAY_HOURS       24
+#define HOUR_MINUTES    60
+#define MINUTE_SECONDS  60
+
 enum
 {
     MONTH_JAN = 1,
@@ -22,7 +26,8 @@ enum
     MONTH_SEP,
     MONTH_OCT,
     MONTH_NOV,
-    MONTH_DEC
+    MONTH_DEC,
+    MONTH_COUNT = MONTH_DEC
 };
 
 struct SiiRtcInfo
