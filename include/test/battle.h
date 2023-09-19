@@ -837,7 +837,8 @@ void SendOut(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
 #define ABILITY_POPUP(battler, ...) QueueAbility(__LINE__, battler, (struct AbilityEventContext) { __VA_ARGS__ })
 #define ANIMATION(type, id, ...) QueueAnimation(__LINE__, type, id, (struct AnimationEventContext) { __VA_ARGS__ })
 #define HP_BAR(battler, ...) QueueHP(__LINE__, battler, (struct HPEventContext) { APPEND_TRUE(__VA_ARGS__) })
-#define MESSAGE(pattern) QueueMessage(__LINE__, (const u8 []) _(pattern))
+// Static const is needed to make the modern compiler put the pattern variable in the .rodata section, instead of putting it on stack(which can break the game).
+#define MESSAGE(pattern) do {static const u8 msg[] = _(pattern); QueueMessage(__LINE__, msg);} while (0)
 #define STATUS_ICON(battler, status) QueueStatus(__LINE__, battler, (struct StatusEventContext) { status })
 
 enum QueueGroupType
