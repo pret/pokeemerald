@@ -147,7 +147,7 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TERMINATOR_NOP]           = SafariCmdEnd
 };
 
-static void SpriteCB_Null4(void)
+static void UNUSED SpriteCB_Null4(void)
 {
 }
 
@@ -307,7 +307,7 @@ static void SafariBufferExecCompleted(void)
     }
 }
 
-static void CompleteOnFinishedStatusAnimation(void)
+static void UNUSED CompleteOnFinishedStatusAnimation(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].statusAnimActive)
         SafariBufferExecCompleted();

@@ -191,10 +191,10 @@ static const u8 *const sItemStorage_OptionDescriptions[] =
 
 static const struct MenuAction sPlayerPCMenuActions[] =
 {
-    [MENU_ITEMSTORAGE] = { gText_ItemStorage, PlayerPC_ItemStorage },
-    [MENU_MAILBOX]     = { gText_Mailbox,     PlayerPC_Mailbox },
-    [MENU_DECORATION]  = { gText_Decoration,  PlayerPC_Decoration },
-    [MENU_TURNOFF]     = { gText_TurnOff,     PlayerPC_TurnOff }
+    [MENU_ITEMSTORAGE] = { gText_ItemStorage, {PlayerPC_ItemStorage} },
+    [MENU_MAILBOX]     = { gText_Mailbox,     {PlayerPC_Mailbox} },
+    [MENU_DECORATION]  = { gText_Decoration,  {PlayerPC_Decoration} },
+    [MENU_TURNOFF]     = { gText_TurnOff,     {PlayerPC_TurnOff} }
 };
 
 static const u8 sBedroomPC_OptionOrder[] =
@@ -216,10 +216,10 @@ static const u8 sPlayerPC_OptionOrder[] =
 
 static const struct MenuAction sItemStorage_MenuActions[] =
 {
-    [MENU_WITHDRAW] = { gText_WithdrawItem, ItemStorage_Withdraw },
-    [MENU_DEPOSIT]  = { gText_DepositItem,  ItemStorage_Deposit },
-    [MENU_TOSS]     = { gText_TossItem,     ItemStorage_Toss },
-    [MENU_EXIT]     = { gText_Cancel,       ItemStorage_Exit }
+    [MENU_WITHDRAW] = { gText_WithdrawItem, {ItemStorage_Withdraw} },
+    [MENU_DEPOSIT]  = { gText_DepositItem,  {ItemStorage_Deposit} },
+    [MENU_TOSS]     = { gText_TossItem,     {ItemStorage_Toss} },
+    [MENU_EXIT]     = { gText_Cancel,       {ItemStorage_Exit} }
 };
 
 static const struct ItemSlot sNewGamePCItems[] =
@@ -230,10 +230,10 @@ static const struct ItemSlot sNewGamePCItems[] =
 
 const struct MenuAction gMailboxMailOptions[] =
 {
-    { gText_Read,      Mailbox_DoMailRead },
-    { gText_MoveToBag, Mailbox_MoveToBag },
-    { gText_Give2,     Mailbox_Give },
-    { gText_Cancel2,   Mailbox_Cancel }
+    { gText_Read,      {Mailbox_DoMailRead} },
+    { gText_MoveToBag, {Mailbox_MoveToBag} },
+    { gText_Give2,     {Mailbox_Give} },
+    { gText_Cancel2,   {Mailbox_Cancel} }
 };
 
 static const struct WindowTemplate sWindowTemplates_MainMenus[] =

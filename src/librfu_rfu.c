@@ -1400,7 +1400,11 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
 {
     u8 bm_slot_id, sendSlotFlag;
     u8 frameSize;
+#ifdef UBFIX
+    u8 *llFrameSize_p = NULL;
+#else
     u8 *llFrameSize_p;
+#endif
     u8 sending;
     u8 i;
     u16 imeBak;

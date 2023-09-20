@@ -1062,7 +1062,7 @@ static void BerryCrush_SetVBlankCB(void)
     SetVBlankCallback(VBlankCB);
 }
 
-static void BerryCrush_InitVBlankCB(void)
+static void UNUSED BerryCrush_InitVBlankCB(void)
 {
     SetVBlankCallback(NULL);
 }

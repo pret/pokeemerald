@@ -172,7 +172,7 @@ static void Task_RunTimeBasedEvents(u8 taskId)
     if (!ArePlayerFieldControlsLocked())
     {
         RunTimeBasedEvents(data);
-        UpdateAmbientCry(&tAmbientCryState, &tAmbientCryDelay);
+        UpdateAmbientCry(&tAmbientCryState, (u16*) &tAmbientCryDelay);
     }
 }
 

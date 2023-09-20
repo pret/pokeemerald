@@ -2252,7 +2252,7 @@ static void AIStackPushVar(const u8 *var)
     gBattleResources->AI_ScriptsStack->ptr[gBattleResources->AI_ScriptsStack->size++] = var;
 }
 
-static void AIStackPushVar_cursor(void)
+static void UNUSED AIStackPushVar_cursor(void)
 {
     gBattleResources->AI_ScriptsStack->ptr[gBattleResources->AI_ScriptsStack->size++] = gAIScriptPtr;
 }
