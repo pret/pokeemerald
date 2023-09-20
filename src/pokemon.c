@@ -49,7 +49,7 @@
 #include "constants/union_room.h"
 
 #define DAY_EVO_HOUR_BEGIN   12
-#define DAY_EVO_HOUR_END     DAY_HOURS
+#define DAY_EVO_HOUR_END     HOURS_PER_DAY
 
 #define NIGHT_EVO_HOUR_BEGIN 0
 #define NIGHT_EVO_HOUR_END   12
