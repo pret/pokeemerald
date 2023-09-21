@@ -8313,7 +8313,7 @@ static bool32 IsBattlerGrounded2(u8 battler, bool32 considerInverse)
 
 bool32 IsBattlerGrounded(u8 battler)
 {
-    IsBattlerGrounded2(battler, FALSE);
+    return IsBattlerGrounded2(battler, FALSE);
 }
 
 bool32 IsBattlerAlive(u8 battler)
