@@ -281,7 +281,8 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
 3. Run the following command to install libpng.
 
     ```bash
-    brew install libpng
+    brew install libpng # Intel Macs
+    /usr/local/bin/brew install libpng # Apple Silicon (M1) Macs
     ```
     libpng is now installed.
 
