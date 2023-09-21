@@ -309,11 +309,14 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
 
     ```bash
     export DEVKITPRO=/opt/devkitpro
-    echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
+    echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc # Intel Macs
+    echo "export DEVKITPRO=$DEVKITPRO" >> ~/.zshrc # Apple Silicon (M1) Macs
     export DEVKITARM=$DEVKITPRO/devkitARM
-    echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
+    echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc # Intel Macs
+    echo "export DEVKITARM=$DEVKITARM" >> ~/.zshrc # Apple Silicon (M1) Macs
 
-    echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile
+    echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile # Intel Macs
+    echo "if [ -f ~/.zshrc ]; then . ~/.zshrc; fi" >> ~/.zprofile # Apple Silicon (M1) Macs
     ```
 
 ### Choosing where to store pokeemerald (macOS)
