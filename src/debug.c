@@ -150,17 +150,17 @@ enum { // Battle 1 AI FLags
     DEBUG_BATTLE_1_MENU_ITEM_CONTINUE,
 };
 enum { // Battle 2 Terrain
-    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_0,   
-    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_1,   
-    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_2,   
-    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_3,   
-    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_4,   
-    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_5,   
-    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_6,   
-    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_7,   
-    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_8,   
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_0,
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_1,
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_2,
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_3,
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_4,
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_5,
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_6,
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_7,
+    DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_8,
     DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_9,
-};   
+};
 enum { // Give
     DEBUG_GIVE_MENU_ITEM_ITEM_X,
     DEBUG_GIVE_MENU_ITEM_ALLTMS,
@@ -1109,7 +1109,7 @@ static void Debug_InitDebugBattleData(void)
     sDebugBattleData->submenu       = 0;
     sDebugBattleData->battleType    = 0xFF;
     sDebugBattleData->battleTerrain = 0xFF;
-    
+
     for (i = 0; i < AI_FLAG_COUNT; i++)
         sDebugBattleData->aiFlags[i] = FALSE;
 }
@@ -1145,7 +1145,7 @@ static void Debug_RefreshListMenu(u8 taskId)
     // Copy item names for all entries but the last (which is Cancel)
     for(i = 0; i < totalItems; i++)
     {
-        
+
         if (sDebugMenuListData->listId == 1 && sDebugBattleData->submenu > 1)
         {
             u16 species;
@@ -1179,7 +1179,7 @@ static void Debug_RefreshListMenu(u8 taskId)
                     flagResult == 0xFF;
                 name = sDebugMenu_Items_Battle_1[i].name;
             }
-        
+
             if (flagResult == 0xFF)
             {
                 StringCopy(&sDebugMenuListData->itemNames[i][0], name);
@@ -1315,10 +1315,6 @@ static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Debug_DestroyMenu(taskId);
-        
-        ClearStdWindowAndFrame(gTasks[taskId].data[2], TRUE);
-        RemoveWindow(gTasks[taskId].data[2]);
-
         Debug_ReShowMainMenu();
     }
 }
@@ -1356,7 +1352,7 @@ static void DebugTask_HandleMenuInput_Battle(u8 taskId)
     ListMenuGetCurrentItemArrayId(listTaskId, &idx);
 
     if (gMain.newKeys & A_BUTTON)
-    {        
+    {
         PlaySE(SE_SELECT);
 
         switch (sDebugBattleData->submenu)
@@ -1389,7 +1385,7 @@ static void DebugTask_HandleMenuInput_Battle(u8 taskId)
                 sDebugBattleData->aiFlags[idx] = !sDebugBattleData->aiFlags[idx];
                 Debug_RedrawListMenu(taskId);
             }
-                
+
             break;
         case 2: // Terrain
             sDebugBattleData->submenu++;
@@ -1413,7 +1409,7 @@ static void DebugTask_HandleMenuInput_Battle(u8 taskId)
             Debug_ReShowMainMenu();
             break;
         case 2: // Skip AI Flag selection if wild battle
-            if (sDebugBattleData->battleType == DEBUG_BATTLE_0_MENU_ITEM_WILD 
+            if (sDebugBattleData->battleType == DEBUG_BATTLE_0_MENU_ITEM_WILD
              || sDebugBattleData->battleType == DEBUG_BATTLE_0_MENU_ITEM_WILD_DOUBLE)
             {
                 sDebugBattleData->submenu = 0;
@@ -1450,7 +1446,7 @@ static void Debug_InitializeBattle(u8 taskId)
         gBattleTypeFlags = (BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TRAINER | BATTLE_TYPE_INGAME_PARTNER);
         break;
     }
-    
+
     // Set terrain
     gBattleTerrain = sDebugBattleData->battleTerrain;
 
@@ -2401,7 +2397,7 @@ static void DebugAction_FlagsVars_ToggleFlyFlags(u8 taskId)
     else
     {
         PlaySE(SE_PC_LOGIN);
-    
+
         FlagSet(FLAG_VISITED_LITTLEROOT_TOWN);
         FlagSet(FLAG_VISITED_OLDALE_TOWN);
         FlagSet(FLAG_VISITED_DEWFORD_TOWN);
