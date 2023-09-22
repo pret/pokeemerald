@@ -372,24 +372,27 @@ static void DebugAction_Sound_MUS(u8 taskId);
 static void DebugAction_Sound_MUS_SelectId(u8 taskId);
 
 
-extern u8 Debug_FlagsNotSetOverworldConfigMessage[];
-extern u8 Debug_FlagsNotSetBattleConfigMessage[];
-extern u8 Debug_Script_1[];
-extern u8 Debug_Script_2[];
-extern u8 Debug_Script_3[];
-extern u8 Debug_Script_4[];
-extern u8 Debug_Script_5[];
-extern u8 Debug_Script_6[];
-extern u8 Debug_Script_7[];
-extern u8 Debug_Script_8[];
+extern const u8 Debug_FlagsNotSetOverworldConfigMessage[];
+extern const u8 Debug_FlagsNotSetBattleConfigMessage[];
+extern const u8 Debug_Script_1[];
+extern const u8 Debug_Script_2[];
+extern const u8 Debug_Script_3[];
+extern const u8 Debug_Script_4[];
+extern const u8 Debug_Script_5[];
+extern const u8 Debug_Script_6[];
+extern const u8 Debug_Script_7[];
+extern const u8 Debug_Script_8[];
+extern const u8 DebugScript_DaycareMonsNotCompatible[];
+extern const u8 DebugScript_OneDaycareMons[];
+extern const u8 DebugScript_ZeroDaycareMons[];
 
-extern u8 Debug_ShowFieldMessageStringVar4[];
-extern u8 Debug_CheatStart[];
-extern u8 Debug_HatchAnEgg[];
-extern u8 PlayersHouse_2F_EventScript_SetWallClock[];
-extern u8 PlayersHouse_2F_EventScript_CheckWallClock[];
-extern u8 Debug_CheckSaveBlock[];
-extern u8 Debug_BoxFilledMessage[];
+extern const u8 Debug_ShowFieldMessageStringVar4[];
+extern const u8 Debug_CheatStart[];
+extern const u8 Debug_HatchAnEgg[];
+extern const u8 PlayersHouse_2F_EventScript_SetWallClock[];
+extern const u8 PlayersHouse_2F_EventScript_CheckWallClock[];
+extern const u8 Debug_CheckSaveBlock[];
+extern const u8 Debug_BoxFilledMessage[];
 
 #include "data/map_group_count.h"
 
@@ -3467,7 +3470,15 @@ static void DebugAction_Give_MaxBattlePoints(u8 taskId)
 
 static void DebugAction_Give_DayCareEgg(u8 taskId)
 {
-    TriggerPendingDaycareEgg();
+    s32 emptySlot = Daycare_FindEmptySpot(&gSaveBlock1Ptr->daycare);
+    if (emptySlot == 0) // no daycare mons
+        Debug_DestroyMenu_Full_Script(taskId, DebugScript_ZeroDaycareMons);
+    else if (emptySlot == 1) // 1 daycare mon
+        Debug_DestroyMenu_Full_Script(taskId, DebugScript_OneDaycareMons);
+    else if (GetDaycareCompatibilityScore(&gSaveBlock1Ptr->daycare) == PARENTS_INCOMPATIBLE) // not compatible parents
+        Debug_DestroyMenu_Full_Script(taskId, DebugScript_DaycareMonsNotCompatible);
+    else // 2 pokemon which can have a pokemon baby together
+        TriggerPendingDaycareEgg();
 }
 
 // *******************************

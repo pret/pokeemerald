@@ -142,5 +142,29 @@ DebugScript_HatchAnEgg_Text_EmptyParty::
 
 DebugScript_HatchAnEgg_Text_NotAnEgg::
 	.string "That's not a Pokémon Egg.$"
+	
+DebugScript_ZeroDaycareMons::
+	msgbox DebugText_DaycareNoPokemon, MSGBOX_DEFAULT
+	releaseall
+	end
+	
+DebugScript_OneDaycareMons::
+	msgbox DebugText_DaycareOnePokemon, MSGBOX_DEFAULT
+	releaseall
+	end
+	
+DebugScript_DaycareMonsNotCompatible::
+	msgbox DebugText_DaycarePokemonNotCompatible, MSGBOX_DEFAULT
+	releaseall
+	end
+	
+DebugText_DaycareNoPokemon:
+	.string "You have no Pokémon at Daycare.$"
+	
+DebugText_DaycareOnePokemon:
+	.string "You have only one Pokémon at Daycare.$"
+	
+DebugText_DaycarePokemonNotCompatible:
+	.string "Your Pokémon at Daycare can't\nhave babies together!$"
 
 .endif
