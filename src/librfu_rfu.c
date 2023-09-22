@@ -1430,7 +1430,7 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
     else if (gRfuLinkStatus->parentChild == MODE_CHILD)
         llFrameSize_p = &gRfuLinkStatus->remainLLFrameSizeChild[bm_slot_id];
     frameSize = llsf_struct[gRfuLinkStatus->parentChild].frameSize;
-#if UBFIX
+#ifdef UBFIX
     if (llFrameSize_p && (subFrameSize > *llFrameSize_p || subFrameSize <= frameSize))
 #else
     if (subFrameSize > *llFrameSize_p || subFrameSize <= frameSize)
@@ -1472,7 +1472,7 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
             } while (0);
         }
         gRfuLinkStatus->sendSlotNIFlag |= bmSendSlot;
-#if UBFIX
+#ifdef UBFIX
         if (llFrameSize_p)
 #endif
             *llFrameSize_p -= subFrameSize;
@@ -1484,7 +1484,7 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
         slotStatus_UNI->send.bmSlot = bmSendSlot;
         slotStatus_UNI->send.src = src;
         slotStatus_UNI->send.payloadSize = subFrameSize - frameSize;
-#if UBFIX
+#ifdef UBFIX
         if (llFrameSize_p)
 #endif
             *llFrameSize_p -= subFrameSize;
