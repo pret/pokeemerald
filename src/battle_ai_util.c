@@ -507,6 +507,11 @@ void RecordKnownMove(u8 battlerId, u32 move)
     }
 }
 
+void RecordAllMoves(u32 battler)
+{
+    memcpy(AI_PARTY->mons[GetBattlerSide(battler)][gBattlerPartyIndexes[battler]].moves, gBattleMons[battler].moves, MAX_MON_MOVES * sizeof(u16));
+}
+
 void RecordAbilityBattle(u8 battlerId, u16 abilityId)
 {
     BATTLE_HISTORY->abilities[battlerId] = abilityId;

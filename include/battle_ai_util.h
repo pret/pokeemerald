@@ -14,6 +14,7 @@ bool32 BattlerHasAi(u32 battlerId);
 bool32 IsAiBattlerAware(u32 battlerId);
 void ClearBattlerMoveHistory(u8 battlerId);
 void RecordLastUsedMoveBy(u32 battlerId, u32 move);
+void RecordAllMoves(u32 battler);
 void RecordKnownMove(u8 battlerId, u32 move);
 void RecordAbilityBattle(u8 battlerId, u16 abilityId);
 void ClearBattlerAbilityHistory(u8 battlerId);

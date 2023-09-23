@@ -12439,7 +12439,7 @@ static void Cmd_transformdataexecution(void)
     {
         s32 i;
         u8 *battleMonAttacker, *battleMonTarget;
-
+        
         gBattleMons[gBattlerAttacker].status2 |= STATUS2_TRANSFORMED;
         gDisableStructs[gBattlerAttacker].disabledMove = MOVE_NONE;
         gDisableStructs[gBattlerAttacker].disableTimer = 0;
@@ -12464,7 +12464,11 @@ static void Cmd_transformdataexecution(void)
             else
                 gBattleMons[gBattlerAttacker].pp[i] = 5;
         }
-
+        
+        // update AI knowledge
+        RecordAllMoves(gBattlerAttacker);
+        RecordAbilityBattle(gBattlerAttacker, gBattleMons[gBattlerAttacker].ability);
+        
         BtlController_EmitResetActionMoveSelection(gBattlerAttacker, BUFFER_A, RESET_MOVE_SELECTION);
         MarkBattlerForControllerExec(gBattlerAttacker);
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TRANSFORMED;
