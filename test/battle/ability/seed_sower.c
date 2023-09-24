@@ -40,6 +40,10 @@ DOUBLE_BATTLE_TEST("Multi-target moves hit correct battlers after Seed Sower is 
         {
             for (l = 0; l < MAX_BATTLERS_COUNT; l++)
             {
+                if (k == l)
+                    continue; // No tests needed when attacker has Seed Sower
+                if ((k & BIT_SIDE) == (l & BIT_SIDE) && moves[j] == MOVE_HYPER_VOICE)
+                    continue; // No tests needed when partners has Seed Sower and Hyper Voice is used.
                 PARAMETRIZE { attacker = l; usedMove = moves[j]; ABILITY_PARAM(0); ABILITY_PARAM(1); ABILITY_PARAM(2); ABILITY_PARAM(3); }
             }
         }
@@ -63,15 +67,25 @@ DOUBLE_BATTLE_TEST("Multi-target moves hit correct battlers after Seed Sower is 
         // ANIMATION(ANIM_TYPE_MOVE, usedMove);
         if (usedMove == MOVE_HYPER_VOICE) {
             if ((attacker & BIT_SIDE) == B_SIDE_OPPONENT) {
-                MOVE_HIT(playerLeft, B_POSITION_PLAYER_LEFT);
-                MOVE_HIT(playerRight, B_POSITION_PLAYER_RIGHT);
+                if (attacker == B_POSITION_OPPONENT_LEFT) {
+                    MOVE_HIT(playerLeft, B_POSITION_PLAYER_LEFT);
+                    MOVE_HIT(playerRight, B_POSITION_PLAYER_RIGHT);
+                } else {
+                    MOVE_HIT(playerRight, B_POSITION_PLAYER_RIGHT);
+                    MOVE_HIT(playerLeft, B_POSITION_PLAYER_LEFT);
+                }
                 NONE_OF {
                     HP_BAR(opponentLeft);
                     HP_BAR(opponentRight);
                 }
             } else {
-                MOVE_HIT(opponentLeft, B_POSITION_OPPONENT_LEFT);
-                MOVE_HIT(opponentRight, B_POSITION_OPPONENT_RIGHT);
+                if (attacker == B_POSITION_PLAYER_LEFT) {
+                    MOVE_HIT(opponentLeft, B_POSITION_OPPONENT_LEFT);
+                    MOVE_HIT(opponentRight, B_POSITION_OPPONENT_RIGHT);
+                } else {
+                    MOVE_HIT(opponentRight, B_POSITION_OPPONENT_RIGHT);
+                    MOVE_HIT(opponentLeft, B_POSITION_OPPONENT_LEFT);
+                }
                 NONE_OF {
                     HP_BAR(playerLeft);
                     HP_BAR(playerRight);
@@ -98,7 +112,7 @@ DOUBLE_BATTLE_TEST("Multi-target moves hit correct battlers after Seed Sower is 
                 NOT HP_BAR(playerRight);
                 break;
             case B_POSITION_OPPONENT_RIGHT:
-                MOVE_HIT(playerLeft, B_POSITION_OPPONENT_LEFT);
+                MOVE_HIT(playerLeft, B_POSITION_PLAYER_LEFT);
                 MOVE_HIT(opponentLeft, B_POSITION_OPPONENT_LEFT);
                 MOVE_HIT(playerRight, B_POSITION_PLAYER_RIGHT);
                 NOT HP_BAR(opponentRight);
