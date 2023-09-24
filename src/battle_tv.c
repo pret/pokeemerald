@@ -436,7 +436,6 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_COACHING]                   = 0, // TODO: Assign points
     [EFFECT_LASH_OUT]                   = 0, // TODO: Assign points
     [EFFECT_GRASSY_GLIDE]               = 0, // TODO: Assign points
-    [EFFECT_REMOVE_TERRAIN]             = 0, // TODO: Assign points
     [EFFECT_DYNAMAX_DOUBLE_DMG]         = 0, // TODO: Assign points
     [EFFECT_DECORATE]                   = 0, // TODO: Assign points
     [EFFECT_SNIPE_SHOT]                 = 0, // TODO: Assign points
