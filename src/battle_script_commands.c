@@ -11438,8 +11438,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
 {
     bool32 certain = FALSE;
     bool32 notProtectAffected = FALSE;
-    u32 index, battler;
-    u16 battlerAbility;
+    u32 index, battler, battlerAbility, battlerHoldEffect;
     bool32 affectsUser = (flags & MOVE_EFFECT_AFFECTS_USER);
     bool32 mirrorArmored = (flags & STAT_CHANGE_MIRROR_ARMOR);
 
@@ -11449,6 +11448,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
         battler = gBattlerTarget;
 
     battlerAbility = GetBattlerAbility(battler);
+    battlerHoldEffect = GetBattlerHoldEffect(battler, TRUE);
 
     gSpecialStatuses[battler].changedStatsBattlerId = gBattlerAttacker;
 
@@ -11507,13 +11507,13 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
             gBattlescriptCurrInstr = BattleScript_ButItFailed;
             return STAT_CHANGE_DIDNT_WORK;
         }
-        else if ((GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_CLEAR_AMULET
+        else if ((battlerHoldEffect == HOLD_EFFECT_CLEAR_AMULET
                   || battlerAbility == ABILITY_CLEAR_BODY
                   || battlerAbility == ABILITY_FULL_METAL_BODY
                   || battlerAbility == ABILITY_WHITE_SMOKE)
                  && (!affectsUser || mirrorArmored) && !certain && gCurrentMove != MOVE_CURSE)
         {
-            if (GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_CLEAR_AMULET)
+            if (battlerHoldEffect == HOLD_EFFECT_CLEAR_AMULET)
             {
                 RecordItemEffectBattle(battler, HOLD_EFFECT_CLEAR_AMULET);
             }
@@ -11528,7 +11528,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
                 {
                     BattleScriptPush(BS_ptr);
                     gBattleScripting.battler = battler;
-                    if (GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_CLEAR_AMULET)
+                    if (battlerHoldEffect == HOLD_EFFECT_CLEAR_AMULET)
                     {
                         gBattlescriptCurrInstr = BattleScript_ItemNoStatLoss;
                     }
@@ -11598,7 +11598,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
             RecordAbilityBattle(battler, ABILITY_SHIELD_DUST);
             return STAT_CHANGE_DIDNT_WORK;
         }
-        else if (flags == 0 && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_COVERT_CLOAK)
+        else if (flags == 0 && battlerHoldEffect == HOLD_EFFECT_COVERT_CLOAK)
         {
             RecordItemEffectBattle(battler, HOLD_EFFECT_COVERT_CLOAK);
             return STAT_CHANGE_DIDNT_WORK;
@@ -12446,7 +12446,7 @@ static void Cmd_transformdataexecution(void)
     {
         s32 i;
         u8 *battleMonAttacker, *battleMonTarget;
-
+        
         gBattleMons[gBattlerAttacker].status2 |= STATUS2_TRANSFORMED;
         gDisableStructs[gBattlerAttacker].disabledMove = MOVE_NONE;
         gDisableStructs[gBattlerAttacker].disableTimer = 0;
@@ -12471,7 +12471,11 @@ static void Cmd_transformdataexecution(void)
             else
                 gBattleMons[gBattlerAttacker].pp[i] = 5;
         }
-
+        
+        // update AI knowledge
+        RecordAllMoves(gBattlerAttacker);
+        RecordAbilityBattle(gBattlerAttacker, gBattleMons[gBattlerAttacker].ability);
+        
         BtlController_EmitResetActionMoveSelection(gBattlerAttacker, BUFFER_A, RESET_MOVE_SELECTION);
         MarkBattlerForControllerExec(gBattlerAttacker);
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TRANSFORMED;

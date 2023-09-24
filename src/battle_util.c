@@ -5707,8 +5707,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && IS_MOVE_PHYSICAL(gCurrentMove)
              && TARGET_TURN_DAMAGED
-             && (gSideTimers[gBattlerAttacker].toxicSpikesAmount != 2)
-             && IsBattlerAlive(gBattlerTarget))
+             && (gSideTimers[gBattlerAttacker].toxicSpikesAmount != 2))
             {
                 SWAP(gBattlerAttacker, gBattlerTarget, i);
                 BattleScriptPushCursor();
@@ -8289,7 +8288,9 @@ bool32 IsBattlerProtected(u32 battler, u32 move)
 // Only called directly when calculating damage type effectiveness
 static bool32 IsBattlerGrounded2(u32 battler, bool32 considerInverse)
 {
-    if (GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_IRON_BALL)
+    u32 holdEffect = GetBattlerHoldEffect(battler, TRUE);
+
+    if (holdEffect == HOLD_EFFECT_IRON_BALL)
         return TRUE;
     if (gFieldStatuses & STATUS_FIELD_GRAVITY)
         return TRUE;
@@ -8303,7 +8304,7 @@ static bool32 IsBattlerGrounded2(u32 battler, bool32 considerInverse)
         return FALSE;
     if (gStatuses3[battler] & STATUS3_MAGNET_RISE)
         return FALSE;
-    if (GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_AIR_BALLOON)
+    if (holdEffect == HOLD_EFFECT_AIR_BALLOON)
         return FALSE;
     if (GetBattlerAbility(battler) == ABILITY_LEVITATE)
         return FALSE;
@@ -8314,7 +8315,7 @@ static bool32 IsBattlerGrounded2(u32 battler, bool32 considerInverse)
 
 bool32 IsBattlerGrounded(u32 battler)
 {
-    IsBattlerGrounded2(battler, FALSE);
+    return IsBattlerGrounded2(battler, FALSE);
 }
 
 bool32 IsBattlerAlive(u32 battler)

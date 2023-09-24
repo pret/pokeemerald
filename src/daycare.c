@@ -32,7 +32,6 @@ extern const struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
 static void ClearDaycareMonMail(struct DaycareMail *mail);
 static void SetInitialEggData(struct Pokemon *mon, u16 species, struct DayCare *daycare);
-static u8 GetDaycareCompatibilityScore(struct DayCare *daycare);
 static void DaycarePrintMonInfo(u8 windowId, u32 daycareSlotId, u8 y);
 static u8 ModifyBreedingScoreForOvalCharm(u8 score);
 static u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves);
@@ -151,7 +150,7 @@ void InitDaycareMailRecordMixing(struct DayCare *daycare, struct RecordMixingDay
     mixMail->numDaycareMons = numDaycareMons;
 }
 
-static s8 Daycare_FindEmptySpot(struct DayCare *daycare)
+s8 Daycare_FindEmptySpot(struct DayCare *daycare)
 {
     u8 i;
 
@@ -193,7 +192,7 @@ static void TransferEggMoves(void)
             {
                 if (k == i || !GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[k].mon, MON_DATA_SANITY_HAS_SPECIES))
                     continue;
-                
+
                 // Check if you can inherit from them
                 if (GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[k].mon, MON_DATA_SPECIES) != GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[i].mon, MON_DATA_SPECIES)
             #if P_EGG_MOVE_TRANSFER >= GEN_9
@@ -493,7 +492,7 @@ static s32 GetParentToInheritNature(struct DayCare *daycare)
         if (ItemId_GetHoldEffect(GetBoxMonData(&daycare->mons[i].mon, MON_DATA_HELD_ITEM)) == HOLD_EFFECT_PREVENT_EVOLVE
         #if P_NATURE_INHERITANCE == GEN_3
             && (GetBoxMonGender(&daycare->mons[i].mon) == MON_FEMALE || IS_DITTO(GetBoxMonData(&daycare->mons[i].mon, MON_DATA_SPECIES)))
-        #endif 
+        #endif
         ) {
             slot = i;
             numWithEverstone++;
@@ -603,7 +602,7 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
     }
 
     start = 0;
-    if (ItemId_GetHoldEffect(motherItem) == HOLD_EFFECT_POWER_ITEM && 
+    if (ItemId_GetHoldEffect(motherItem) == HOLD_EFFECT_POWER_ITEM &&
         ItemId_GetHoldEffect(fatherItem) == HOLD_EFFECT_POWER_ITEM)
     {
         whichParents[0] = Random() % DAYCARE_MON_COUNT;
@@ -612,14 +611,14 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
         RemoveIVIndexFromList(availableIVs, selectedIvs[0]);
         start++;
     }
-    else if (ItemId_GetHoldEffect(motherItem) == HOLD_EFFECT_POWER_ITEM) 
+    else if (ItemId_GetHoldEffect(motherItem) == HOLD_EFFECT_POWER_ITEM)
     {
         whichParents[0] = 0;
         selectedIvs[0] = ItemId_GetSecondaryId(motherItem);
         RemoveIVIndexFromList(availableIVs, selectedIvs[0]);
         start++;
     }
-    else if (ItemId_GetHoldEffect(fatherItem) == HOLD_EFFECT_POWER_ITEM) 
+    else if (ItemId_GetHoldEffect(fatherItem) == HOLD_EFFECT_POWER_ITEM)
     {
         whichParents[0] = 1;
         selectedIvs[0] = ItemId_GetSecondaryId(fatherItem);
@@ -1230,7 +1229,7 @@ static bool8 EggGroupsOverlap(u16 *eggGroups1, u16 *eggGroups2)
     return FALSE;
 }
 
-static u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
+u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
 {
     u32 i;
     u16 eggGroups[DAYCARE_MON_COUNT][EGG_GROUPS_PER_MON];

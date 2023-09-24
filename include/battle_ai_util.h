@@ -15,6 +15,7 @@ bool32 BattlerHasAi(u32 battlerId);
 bool32 IsAiBattlerAware(u32 battlerId);
 void ClearBattlerMoveHistory(u32 battlerId);
 void RecordLastUsedMoveBy(u32 battlerId, u32 move);
+void RecordAllMoves(u32 battler);
 void RecordKnownMove(u32 battlerId, u32 move);
 void RecordAbilityBattle(u32 battlerId, u32 abilityId);
 void ClearBattlerAbilityHistory(u32 battlerId);
@@ -24,7 +25,6 @@ void SaveBattlerData(u32 battlerId);
 void SetBattlerData(u32 battlerId);
 void RestoreBattlerData(u32 battlerId);
 u16 GetAIChosenMove(u32 battlerId);
-
 u32 GetTotalBaseStat(u32 species);
 bool32 IsTruantMonVulnerable(u32 battlerAI, u32 opposingBattler);
 bool32 AtMaxHp(u32 battler);
