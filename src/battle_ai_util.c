@@ -419,7 +419,7 @@ static const u16 sOtherMoveCallingMoves[] =
 };
 
 // Functions
-u16 GetAIChosenMove(u32 battlerId)
+u32 GetAIChosenMove(u32 battlerId)
 {
     return (gBattleMons[battlerId].moves[gBattleStruct->aiMoveOrAction[battlerId]]);
 }
@@ -1543,7 +1543,7 @@ bool32 ShouldTryOHKO(u32 battlerAtk, u32 battlerDef, u32 atkAbility, u32 defAbil
     }
     else    // test the odds
     {
-        u16 odds = accuracy + (gBattleMons[battlerAtk].level - gBattleMons[battlerDef].level);
+        u32 odds = accuracy + (gBattleMons[battlerAtk].level - gBattleMons[battlerDef].level);
     #if B_SHEER_COLD_ACC >= GEN_7
         if (move == MOVE_SHEER_COLD && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE))
             odds -= 10;
@@ -2508,7 +2508,7 @@ static bool32 PartyBattlerShouldAvoidHazards(u32 currBattler, u32 switchBattler)
     struct Pokemon *mon = GetPartyBattlerPartyData(currBattler, switchBattler);
     u32 ability = GetMonAbility(mon);   // we know our own party data
     u32 holdEffect;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES);
+    u32 species = GetMonData(mon, MON_DATA_SPECIES);
     u32 flags = gSideStatuses[GetBattlerSide(currBattler)] & (SIDE_STATUS_SPIKES | SIDE_STATUS_STEALTH_ROCK | SIDE_STATUS_STICKY_WEB | SIDE_STATUS_TOXIC_SPIKES);
     s32 hazardDamage = 0;
     u32 type1 = gSpeciesInfo[species].types[0];
@@ -2726,7 +2726,7 @@ bool32 ShouldPivot(u32 battlerAtk, u32 battlerDef, u32 defAbility, u32 move, u32
     return DONT_PIVOT;
 }
 
-bool32 CanKnockOffItem(u32 battler, u16 item)
+bool32 CanKnockOffItem(u32 battler, u32 item)
 {
     if (item == ITEM_NONE)
         return FALSE;
@@ -3312,8 +3312,8 @@ bool32 ShouldUseWishAromatherapy(u32 battlerAtk, u32 battlerDef, u32 move)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        u16 currHp = GetMonData(&party[i], MON_DATA_HP);
-        u16 maxHp = GetMonData(&party[i], MON_DATA_MAX_HP);
+        u32 currHp = GetMonData(&party[i], MON_DATA_HP);
+        u32 maxHp = GetMonData(&party[i], MON_DATA_MAX_HP);
 
         if (!GetMonData(&party[i], MON_DATA_IS_EGG, NULL) && currHp > 0)
         {
@@ -3477,7 +3477,7 @@ bool32 PartyHasMoveSplit(u32 battlerId, u32 split)
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
             u32 move = GetMonData(&party[i], MON_DATA_MOVE1 + j, NULL);
-            u16 pp = GetMonData(&party[i], MON_DATA_PP1 + j, NULL);
+            u32 pp = GetMonData(&party[i], MON_DATA_PP1 + j, NULL);
 
             if (pp > 0 && move != MOVE_NONE)
             {
@@ -3532,7 +3532,7 @@ static const u16 sRecycleEncouragedItems[] =
 };
 
 // Its assumed that the berry is strategically given, so no need to check benefits of the berry
-bool32 IsStatBoostingBerry(u16 item)
+bool32 IsStatBoostingBerry(u32 item)
 {
     switch (item)
     {
@@ -3550,7 +3550,7 @@ bool32 IsStatBoostingBerry(u16 item)
     }
 }
 
-bool32 ShouldRestoreHpBerry(u32 battlerAtk, u16 item)
+bool32 ShouldRestoreHpBerry(u32 battlerAtk, u32 item)
 {
     switch (item)
     {
@@ -3570,7 +3570,7 @@ bool32 ShouldRestoreHpBerry(u32 battlerAtk, u16 item)
     }
 }
 
-bool32 IsRecycleEncouragedItem(u16 item)
+bool32 IsRecycleEncouragedItem(u32 item)
 {
     u32 i;
     for (i = 0; i < ARRAY_COUNT(sRecycleEncouragedItems); i++)
@@ -3797,7 +3797,7 @@ bool32 AI_MoveMakesContact(u32 ability, u32 holdEffect, u32 move)
 }
 
 //TODO - this could use some more sophisticated logic
-bool32 ShouldUseZMove(u32 battlerAtk, u32 battlerDef, u16 chosenMove)
+bool32 ShouldUseZMove(u32 battlerAtk, u32 battlerDef, u32 chosenMove)
 {
     // simple logic. just upgrades chosen move to z move if possible, unless regular move would kill opponent
     if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && battlerDef == BATTLE_PARTNER(battlerAtk))

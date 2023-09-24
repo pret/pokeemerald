@@ -28,8 +28,8 @@
 #define AI_ACTION_WATCH         (1 << 2)
 #define AI_ACTION_DO_NOT_ATTACK (1 << 3)
 
-static u8 ChooseMoveOrAction_Singles(u32 battlerAi);
-static u8 ChooseMoveOrAction_Doubles(u32 battlerAi);
+static u32 ChooseMoveOrAction_Singles(u32 battlerAi);
+static u32 ChooseMoveOrAction_Doubles(u32 battlerAi);
 static inline void BattleAI_DoAIProcessing(struct AI_ThinkingStruct *aiThink, u32 battler);
 static bool32 IsPinchBerryItemEffect(u32 holdEffect);
 
@@ -117,7 +117,7 @@ void BattleAI_SetupItems(void)
 
 static u32 GetWildAiFlags(void)
 {
-    u8 avgLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
+    u32 avgLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
     u32 flags;
 
     if (IsDoubleBattle())
@@ -469,7 +469,7 @@ static bool32 AI_ShouldSwitchIfBadMoves(u32 battler, bool32 doubleBattle)
     return FALSE;
 }
 
-static u8 ChooseMoveOrAction_Singles(u32 battlerAi)
+static u32 ChooseMoveOrAction_Singles(u32 battlerAi)
 {
     u8 currentMoveArray[MAX_MON_MOVES];
     u8 consideredMoveArray[MAX_MON_MOVES];
@@ -527,7 +527,7 @@ static u8 ChooseMoveOrAction_Singles(u32 battlerAi)
     return consideredMoveArray[Random() % numOfBestMoves];
 }
 
-static u8 ChooseMoveOrAction_Doubles(u32 battlerAi)
+static u32 ChooseMoveOrAction_Doubles(u32 battlerAi)
 {
     s32 i, j;
     u32 flags;
@@ -686,17 +686,17 @@ static inline void BattleAI_DoAIProcessing(struct AI_ThinkingStruct *aiThink, u3
 static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
     // move data
-    u8 atkPriority = GetMovePriority(battlerAtk, move);
+    s8 atkPriority = GetMovePriority(battlerAtk, move);
     u32 moveEffect = gBattleMoves[move].effect;
     s32 moveType;
     u32 moveTarget = AI_GetBattlerMoveTargetType(battlerAtk, move);
-    u16 accuracy = AI_GetMoveAccuracy(battlerAtk, battlerDef, move);
+    u32 accuracy = AI_GetMoveAccuracy(battlerAtk, battlerDef, move);
     struct AiLogicData *aiData = AI_DATA;
     u32 effectiveness = aiData->effectiveness[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex];
     bool32 isDoubleBattle = IsValidDoubleBattle(battlerAtk);
     u32 i;
     u32 weather;
-    u16 predictedMove = aiData->predictedMoves[battlerDef];
+    u32 predictedMove = aiData->predictedMoves[battlerDef];
 
     if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
         return score;
@@ -2255,10 +2255,10 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             }
             else
             {
-                u8 atkAttack = gBattleMons[battlerAtk].attack;
-                u8 defAttack = gBattleMons[battlerDef].attack;
-                u8 atkSpAttack = gBattleMons[battlerAtk].spAttack;
-                u8 defSpAttack = gBattleMons[battlerDef].spAttack;
+                u32 atkAttack = gBattleMons[battlerAtk].attack;
+                u32 defAttack = gBattleMons[battlerDef].attack;
+                u32 atkSpAttack = gBattleMons[battlerAtk].spAttack;
+                u32 defSpAttack = gBattleMons[battlerDef].spAttack;
 
                 if (atkAttack + atkSpAttack >= defAttack + defSpAttack) // Combined attacker stats are > than combined target stats
                     score -= 10;
@@ -2272,10 +2272,10 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             }
             else
             {
-                u8 atkDefense = gBattleMons[battlerAtk].defense;
-                u8 defDefense = gBattleMons[battlerDef].defense;
-                u8 atkSpDefense = gBattleMons[battlerAtk].spDefense;
-                u8 defSpDefense = gBattleMons[battlerDef].spDefense;
+                u32 atkDefense = gBattleMons[battlerAtk].defense;
+                u32 defDefense = gBattleMons[battlerDef].defense;
+                u32 atkSpDefense = gBattleMons[battlerAtk].spDefense;
+                u32 defSpDefense = gBattleMons[battlerDef].spDefense;
 
                 if (atkDefense + atkSpDefense >= defDefense + defSpDefense) //Combined attacker stats are > than combined target stats
                     score -= 10;
@@ -2475,8 +2475,8 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         case EFFECT_TOPSY_TURVY:
             if (!IS_TARGETING_PARTNER(battlerAtk, battlerDef))
             {
-                u8 targetPositiveStages = CountPositiveStatStages(battlerDef);
-                u8 targetNegativeStages = CountNegativeStatStages(battlerDef);
+                u32 targetPositiveStages = CountPositiveStatStages(battlerDef);
+                u32 targetNegativeStages = CountNegativeStatStages(battlerDef);
 
                 if (targetPositiveStages == 0 //No good stat changes to make bad
                   || PartnerMoveIsSameAsAttacker(BATTLE_PARTNER(battlerAtk), battlerDef, move, aiData->partnerMove))
@@ -2728,18 +2728,18 @@ static s32 AI_TryToFaint(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
     // move data
-    u8 moveType = gBattleMoves[move].type;
-    u16 effect = gBattleMoves[move].effect;
+    u32 moveType = gBattleMoves[move].type;
+    u32 effect = gBattleMoves[move].effect;
     u32 moveTarget = AI_GetBattlerMoveTargetType(battlerAtk, move);
     // ally data
     u32 battlerAtkPartner = BATTLE_PARTNER(battlerAtk);
     struct AiLogicData *aiData = AI_DATA;
-    u16 atkPartnerAbility = aiData->abilities[BATTLE_PARTNER(battlerAtk)];
-    u16 atkPartnerHoldEffect = aiData->holdEffects[BATTLE_PARTNER(battlerAtk)];
+    u32 atkPartnerAbility = aiData->abilities[BATTLE_PARTNER(battlerAtk)];
+    u32 atkPartnerHoldEffect = aiData->holdEffects[BATTLE_PARTNER(battlerAtk)];
     bool32 partnerProtecting = (gBattleMoves[aiData->partnerMove].effect == EFFECT_PROTECT);
     bool32 attackerHasBadAbility = (GetAbilityRating(aiData->abilities[battlerAtk]) < 0);
     bool32 partnerHasBadAbility = (GetAbilityRating(atkPartnerAbility) < 0);
-    u16 predictedMove = aiData->predictedMoves[battlerDef];
+    u32 predictedMove = aiData->predictedMoves[battlerDef];
 
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
@@ -3142,8 +3142,8 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     u32 moveEffect = gBattleMoves[move].effect;
     struct AiLogicData *aiData = AI_DATA;
     u32 effectiveness = aiData->effectiveness[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex];
-    u8 atkPriority = GetMovePriority(battlerAtk, move);
-    u16 predictedMove = aiData->predictedMoves[battlerDef];
+    s8 atkPriority = GetMovePriority(battlerAtk, move);
+    u32 predictedMove = aiData->predictedMoves[battlerDef];
     u32 predictedMoveSlot = GetMoveSlot(GetMovesArray(battlerDef), predictedMove);
     bool32 isDoubleBattle = IsValidDoubleBattle(battlerAtk);
     u32 i;
@@ -3780,8 +3780,8 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         break;
     case EFFECT_PAIN_SPLIT:
         {
-            u16 newHp = (gBattleMons[battlerAtk].hp + gBattleMons[battlerDef].hp) / 2;
-            u16 healthBenchmark = (gBattleMons[battlerAtk].hp * 12) / 10;
+            u32 newHp = (gBattleMons[battlerAtk].hp + gBattleMons[battlerDef].hp) / 2;
+            u32 healthBenchmark = (gBattleMons[battlerAtk].hp * 12) / 10;
             if (newHp > healthBenchmark && ShouldAbsorb(battlerAtk, battlerDef, move, aiData->simulatedDmg[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex]))
                 score += 2;
         }
@@ -4268,7 +4268,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
           && (move != MOVE_RAGE_POWDER || IsAffectedByPowder(battlerDef, aiData->abilities[battlerDef], aiData->holdEffects[battlerDef])) // Rage Powder doesn't affect powder immunities
           && IsBattlerAlive(BATTLE_PARTNER(battlerAtk)))
         {
-            u16 predictedMoveOnPartner = gLastMoves[BATTLE_PARTNER(battlerAtk)];
+            u32 predictedMoveOnPartner = gLastMoves[BATTLE_PARTNER(battlerAtk)];
             if (predictedMoveOnPartner != MOVE_NONE && !IS_MOVE_STATUS(predictedMoveOnPartner))
                 score += 3;
         }
@@ -4409,8 +4409,8 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             score++;
         if (aiData->abilities[battlerAtk] == ABILITY_RIPEN)
         {
-            u16 item = GetUsedHeldItem(battlerAtk);
-            u16 toHeal = (ItemId_GetHoldEffectParam(item) == 10) ? 10 : gBattleMons[battlerAtk].maxHP / ItemId_GetHoldEffectParam(item);
+            u32 item = GetUsedHeldItem(battlerAtk);
+            u32 toHeal = (ItemId_GetHoldEffectParam(item) == 10) ? 10 : gBattleMons[battlerAtk].maxHP / ItemId_GetHoldEffectParam(item);
 
             if (IsStatBoostingBerry(item) && aiData->hpPercents[battlerAtk] > 60)
                 score++;
@@ -4602,8 +4602,8 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     case EFFECT_GUARD_SPLIT:
         {
             // TODO also kind of cheating...
-            u16 newDefense = (gBattleMons[battlerAtk].defense + gBattleMons[battlerDef].defense) / 2;
-            u16 newSpDef = (gBattleMons[battlerAtk].spDefense + gBattleMons[battlerDef].spDefense) / 2;
+            u32 newDefense = (gBattleMons[battlerAtk].defense + gBattleMons[battlerDef].defense) / 2;
+            u32 newSpDef = (gBattleMons[battlerAtk].spDefense + gBattleMons[battlerDef].spDefense) / 2;
 
             if ((newDefense > gBattleMons[battlerAtk].defense && newSpDef >= gBattleMons[battlerAtk].spDefense)
               || (newSpDef > gBattleMons[battlerAtk].spDefense && newDefense >= gBattleMons[battlerAtk].defense))
@@ -4612,8 +4612,8 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         break;
     case EFFECT_POWER_SPLIT:
         {
-            u16 newAttack = (gBattleMons[battlerAtk].attack + gBattleMons[battlerDef].attack) / 2;
-            u16 newSpAtk = (gBattleMons[battlerAtk].spAttack + gBattleMons[battlerDef].spAttack) / 2;
+            u32 newAttack = (gBattleMons[battlerAtk].attack + gBattleMons[battlerDef].attack) / 2;
+            u32 newSpAtk = (gBattleMons[battlerAtk].spAttack + gBattleMons[battlerDef].spAttack) / 2;
 
             if ((newAttack > gBattleMons[battlerAtk].attack && newSpAtk >= gBattleMons[battlerAtk].spAttack)
               || (newSpAtk > gBattleMons[battlerAtk].spAttack && newAttack >= gBattleMons[battlerAtk].attack))
@@ -5162,8 +5162,8 @@ static s32 AI_PreferBatonPass(u32 battlerAtk, u32 battlerDef, u32 move, s32 scor
 
 static s32 AI_HPAware(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
-    u16 effect = gBattleMoves[move].effect;
-    u8 moveType = gBattleMoves[move].type;
+    u32 effect = gBattleMoves[move].effect;
+    u32 moveType = gBattleMoves[move].type;
 
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
@@ -5375,7 +5375,7 @@ static s32 AI_Roaming(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 // Safari pokemon logic
 static s32 AI_Safari(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
-    u8 safariFleeRate = gBattleStruct->safariEscapeFactor * 5; // Safari flee rate, from 0-20.
+    u32 safariFleeRate = gBattleStruct->safariEscapeFactor * 5; // Safari flee rate, from 0-20.
 
     if ((Random() % 100) < safariFleeRate)
         AI_Flee();
