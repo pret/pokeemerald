@@ -277,6 +277,7 @@ struct AIPartyData // Opposing battlers - party mons.
     u8 count[NUM_BATTLE_SIDES];
 };
 
+// Ai Data used when deciding which move to use, computed only once before each turn's start.
 struct AiLogicData
 {
     u16 abilities[MAX_BATTLERS_COUNT];
@@ -286,11 +287,14 @@ struct AiLogicData
     u16 predictedMoves[MAX_BATTLERS_COUNT];
     u8 hpPercents[MAX_BATTLERS_COUNT];
     u16 partnerMove;
+    u16 speedStats[MAX_BATTLERS_COUNT]; // Speed stats for all battles, calculated only once, same way as damages
+    u8 moveDmgResult[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // MOVE_POWER defines for GetMoveDamageResult ; attacker, target, moveIndex
     s32 simulatedDmg[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // attacker, target, moveIndex
     u8 effectiveness[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // attacker, target, moveIndex
     u8 moveLimitations[MAX_BATTLERS_COUNT];
     bool8 shouldSwitchMon; // Because all available moves have no/little effect. Each bit per battler.
     u8 monToSwitchId[MAX_BATTLERS_COUNT]; // ID of the mon to switch.
+    bool8 weatherHasEffect; // The same as WEATHER_HAS_EFFECT. Stored here, so it's called only once.
 };
 
 struct AI_ThinkingStruct
@@ -298,7 +302,7 @@ struct AI_ThinkingStruct
     u8 aiState;
     u8 movesetIndex;
     u16 moveConsidered;
-    s8 score[MAX_MON_MOVES];
+    s32 score[MAX_MON_MOVES];
     u32 funcResult;
     u32 aiFlags;
     u8 aiAction;
@@ -640,7 +644,7 @@ struct BattleStruct
     u16 hpBefore[MAX_BATTLERS_COUNT]; // Hp of battlers before using a move. For Berserk
     bool8 spriteIgnore0Hp;
     struct Illusion illusion[MAX_BATTLERS_COUNT];
-    s8 aiFinalScore[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // AI, target, moves to make debugging easier
+    s32 aiFinalScore[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // AI, target, moves to make debugging easier
     u8 aiMoveOrAction[MAX_BATTLERS_COUNT];
     u8 aiChosenTarget[MAX_BATTLERS_COUNT];
     u8 soulheartBattlerId;

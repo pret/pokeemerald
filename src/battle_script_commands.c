@@ -1753,10 +1753,11 @@ static void Cmd_accuracycheck(void)
 {
     CMD_ARGS(const u8 *failInstr, u16 move);
 
-    u16 type, move = cmd->move;
-    u16 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, move);
-    u16 gBattlerAttackerAbility = GetBattlerAbility(gBattlerAttacker);
-    u8 gBattlerAttackerHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
+    u32 type, move = cmd->move;
+    u32 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, move);
+    u32 abilityAtk = GetBattlerAbility(gBattlerAttacker);
+    u32 abilityDef = GetBattlerAbility(gBattlerTarget);
+    u32 holdEffectAtk = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
 
     if (move == ACC_CURR_MOVE)
         move = gCurrentMove;
@@ -1772,7 +1773,7 @@ static void Cmd_accuracycheck(void)
     }
     else if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_2ND_HIT
         || (gSpecialStatuses[gBattlerAttacker].multiHitOn
-        && (gBattlerAttackerAbility == ABILITY_SKILL_LINK || gBattlerAttackerHoldEffect == HOLD_EFFECT_LOADED_DICE
+        && (abilityAtk == ABILITY_SKILL_LINK || holdEffectAtk == HOLD_EFFECT_LOADED_DICE
         || !(gBattleMoves[move].effect == EFFECT_TRIPLE_KICK || gBattleMoves[move].effect == EFFECT_POPULATION_BOMB))))
     {
         // No acc checks for second hit of Parental Bond or multi hit moves, except Triple Kick/Triple Axel/Population Bomb
@@ -1792,16 +1793,16 @@ static void Cmd_accuracycheck(void)
             gBattlerAttacker,
             gBattlerTarget,
             move,
-            gBattlerAttackerAbility,
-            GetBattlerAbility(gBattlerTarget),
-            gBattlerAttackerHoldEffect,
+            abilityAtk,
+            abilityDef,
+            holdEffectAtk,
             GetBattlerHoldEffect(gBattlerTarget, TRUE)
         );
 
         if (!RandomPercentage(RNG_ACCURACY, accuracy))
         {
             gMoveResultFlags |= MOVE_RESULT_MISSED;
-            if (gBattlerAttackerHoldEffect == HOLD_EFFECT_BLUNDER_POLICY)
+            if (holdEffectAtk == HOLD_EFFECT_BLUNDER_POLICY)
                 gBattleStruct->blunderPolicy = TRUE;    // Only activates from missing through acc/evasion checks
 
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE &&
@@ -1811,7 +1812,7 @@ static void Cmd_accuracycheck(void)
                 gBattleCommunication[MISS_TYPE] = B_MSG_MISSED;
 
             if (gBattleMoves[move].power)
-                CalcTypeEffectivenessMultiplier(move, type, gBattlerAttacker, gBattlerTarget, TRUE);
+                CalcTypeEffectivenessMultiplier(move, type, gBattlerAttacker, gBattlerTarget, abilityDef, TRUE);
         }
         JumpIfMoveFailed(7, move);
     }
@@ -1908,22 +1909,13 @@ static void Cmd_ppreduce(void)
 #endif // B_CRIT_CHANCE
 
 #define BENEFITS_FROM_LEEK(battler, holdEffect)((holdEffect == HOLD_EFFECT_LEEK) && (GET_BASE_SPECIES_ID(gBattleMons[battler].species) == SPECIES_FARFETCHD || gBattleMons[battler].species == SPECIES_SIRFETCHD))
-s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbility)
+s32 CalcCritChanceStageArgs(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, u32 abilityAtk, u32 abilityDef, u32 holdEffectAtk)
 {
     s32 critChance = 0;
-    u32 abilityAtk = GetBattlerAbility(gBattlerAttacker);
-    u32 abilityDef = GetBattlerAbility(gBattlerTarget);
-    u32 holdEffectAtk = GetBattlerHoldEffect(battlerAtk, TRUE);
 
     if (gSideStatuses[battlerDef] & SIDE_STATUS_LUCKY_CHANT
-        || gStatuses3[gBattlerAttacker] & STATUS3_CANT_SCORE_A_CRIT)
+        || gStatuses3[battlerAtk] & STATUS3_CANT_SCORE_A_CRIT)
     {
-        critChance = -1;
-    }
-    else if (abilityDef == ABILITY_BATTLE_ARMOR || abilityDef == ABILITY_SHELL_ARMOR)
-    {
-        if (recordAbility)
-            RecordAbilityBattle(battlerDef, abilityDef);
         critChance = -1;
     }
     else if (gStatuses3[battlerAtk] & STATUS3_LASER_FOCUS
@@ -1935,15 +1927,22 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
     }
     else
     {
-        critChance  = 2 * ((gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY) != 0)
+        critChance  = 2 * ((gBattleMons[battlerAtk].status2 & STATUS2_FOCUS_ENERGY) != 0)
                     + (gBattleMoves[gCurrentMove].highCritRatio)
                     + (holdEffectAtk == HOLD_EFFECT_SCOPE_LENS)
-                    + 2 * (holdEffectAtk == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBattlerAttacker].species == SPECIES_CHANSEY)
+                    + 2 * (holdEffectAtk == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[battlerAtk].species == SPECIES_CHANSEY)
                     + 2 * BENEFITS_FROM_LEEK(battlerAtk, holdEffectAtk)
                 #if B_AFFECTION_MECHANICS == TRUE
-                    + 2 * (GetBattlerFriendshipScore(gBattlerAttacker) >= FRIENDSHIP_200_TO_254)
+                    + 2 * (GetBattlerFriendshipScore(battlerAtk) >= FRIENDSHIP_200_TO_254)
                 #endif
                     + (abilityAtk == ABILITY_SUPER_LUCK);
+
+        if (abilityDef == ABILITY_BATTLE_ARMOR || abilityDef == ABILITY_SHELL_ARMOR)
+        {
+            if (recordAbility && critChance >= 2) // Record ability only if move had at least +1 chance to get a crit.
+                RecordAbilityBattle(battlerDef, abilityDef);
+            critChance = -1;
+        }
 
         if (critChance >= ARRAY_COUNT(sCriticalHitChance))
             critChance = ARRAY_COUNT(sCriticalHitChance) - 1;
@@ -1951,12 +1950,19 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
 
     return critChance;
 }
+
+s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility)
+{
+    u32 abilityAtk = GetBattlerAbility(gBattlerAttacker);
+    u32 abilityDef = GetBattlerAbility(gBattlerTarget);
+    u32 holdEffectAtk = GetBattlerHoldEffect(battlerAtk, TRUE);
+    return CalcCritChanceStageArgs(battlerAtk, battlerDef, move, recordAbility, abilityAtk, abilityDef, holdEffectAtk);
+}
 #undef BENEFITS_FROM_LEEK
 
-s8 GetInverseCritChance(u8 battlerAtk, u8 battlerDef, u32 move)
+s32 GetCritHitChance(s32 critChanceIndex)
 {
-    s32 critChanceIndex = CalcCritChanceStage(battlerAtk, battlerDef, move, FALSE);
-    if(critChanceIndex < 0)
+    if (critChanceIndex < 0)
         return -1;
     else
         return sCriticalHitChance[critChanceIndex];
@@ -2006,7 +2012,7 @@ static void Cmd_typecalc(void)
     u8 moveType;
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
-    CalcTypeEffectivenessMultiplier(gCurrentMove, moveType, gBattlerAttacker, gBattlerTarget, TRUE);
+    CalcTypeEffectivenessMultiplier(gCurrentMove, moveType, gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerTarget), TRUE);
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
@@ -5679,6 +5685,7 @@ static void Cmd_moveend(void)
                     if (!gSpecialStatuses[gBattlerAttacker].dancerUsedMove)
                     {
                         gLastMoves[gBattlerAttacker] = gChosenMove;
+                        RecordKnownMove(gBattlerAttacker, gChosenMove);
                         gLastResultingMoves[gBattlerAttacker] = gCurrentMove;
                     }
                 }
@@ -8197,7 +8204,7 @@ static void RemoveAllTerrains(void)
     }                                                       \
 }
 
-static bool32 TryDefogClear(u8 battlerAtk, bool32 clear)
+static bool32 TryDefogClear(u32 battlerAtk, bool32 clear)
 {
     s32 i;
     for (i = 0; i < 2; i++)
@@ -14703,7 +14710,7 @@ static void Cmd_settypebasedhalvers(void)
         gBattlescriptCurrInstr = cmd->failInstr;
 }
 
-bool32 DoesSubstituteBlockMove(u8 battlerAtk, u8 battlerDef, u32 move)
+bool32 DoesSubstituteBlockMove(u32 battlerAtk, u32 battlerDef, u32 move)
 {
     if (!(gBattleMons[battlerDef].status2 & STATUS2_SUBSTITUTE))
         return FALSE;
@@ -14719,7 +14726,7 @@ bool32 DoesSubstituteBlockMove(u8 battlerAtk, u8 battlerDef, u32 move)
         return TRUE;
 }
 
-bool32 DoesDisguiseBlockMove(u8 battlerAtk, u8 battlerDef, u32 move)
+bool32 DoesDisguiseBlockMove(u32 battlerAtk, u32 battlerDef, u32 move)
 {
     if (gBattleMons[battlerDef].species != SPECIES_MIMIKYU
         || gBattleMons[battlerDef].status2 & STATUS2_TRANSFORMED
@@ -15781,7 +15788,7 @@ static const u16 sParentalBondBannedEffects[] =
     EFFECT_UPROAR,
 };
 
-bool8 IsMoveAffectedByParentalBond(u16 move, u8 battler)
+bool32 IsMoveAffectedByParentalBond(u32 move, u32 battler)
 {
     if (move != MOVE_NONE && move != MOVE_STRUGGLE
         && gBattleMoves[move].split != SPLIT_STATUS
