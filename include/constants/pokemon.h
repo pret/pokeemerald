@@ -269,7 +269,7 @@
 #define EVO_MAPSEC                        25     // Pokémon levels up on specified mapsec
 #define EVO_ITEM_MALE                     26     // specified item is used on a male Pokémon
 #define EVO_ITEM_FEMALE                   27     // specified item is used on a female Pokémon
-#define EVO_LEVEL_RAIN                    28     // Pokémon reaches the specified level while it's raining
+#define EVO_LEVEL_RAIN                    28     // Pokémon reaches the specified level during rain in the overworld
 #define EVO_SPECIFIC_MON_IN_PARTY         29     // Pokémon levels up with a specified Pokémon in party
 #define EVO_LEVEL_DARK_TYPE_MON_IN_PARTY  30     // Pokémon reaches the specified level with a Dark Type Pokémon in party
 #define EVO_TRADE_SPECIFIC_MON            31     // Pokémon is traded for a specified Pokémon
@@ -283,6 +283,7 @@
 #define EVO_ITEM_NIGHT                    39     // specified item is used on Pokémon, is night
 #define EVO_ITEM_DAY                      40     // specified item is used on Pokémon, is day
 #define EVO_ITEM_HOLD                     41     // Pokémon levels up, holds specified item
+#define EVO_LEVEL_FOG                     42     // Pokémon reaches the specified level during fog in the overworld
 
 #define EVOS_PER_MON 10
 
