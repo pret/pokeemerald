@@ -95,6 +95,7 @@ static void InvokeTestFunction(const struct BattleTest *test)
     switch (test->type)
     {
     case BATTLE_TEST_SINGLES:
+    case BATTLE_TEST_WILD:
         InvokeSingleTestFunctionWithStack(STATE->results, STATE->runParameter, &gBattleMons[B_POSITION_PLAYER_LEFT], &gBattleMons[B_POSITION_OPPONENT_LEFT], test->function.singles, &DATA.stack[BATTLE_TEST_STACK_SIZE]);
         break;
     case BATTLE_TEST_DOUBLES:
@@ -236,7 +237,10 @@ static void BattleTest_Run(void *data)
     DATA.recordedBattle.opponentA = TRAINER_LINK_OPPONENT;
 
     DATA.recordedBattle.textSpeed = OPTIONS_TEXT_SPEED_FAST;
-    DATA.recordedBattle.battleFlags = BATTLE_TYPE_RECORDED_IS_MASTER | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_TRAINER | BATTLE_TYPE_IS_MASTER;
+    if (test->type == BATTLE_TEST_WILD)
+        DATA.recordedBattle.battleFlags = BATTLE_TYPE_IS_MASTER;
+    else
+        DATA.recordedBattle.battleFlags = BATTLE_TYPE_RECORDED_IS_MASTER | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_TRAINER | BATTLE_TYPE_IS_MASTER;
     if (test->type == BATTLE_TEST_DOUBLES)
     {
         DATA.recordedBattle.battleFlags |= BATTLE_TYPE_DOUBLE;
@@ -293,7 +297,6 @@ static void BattleTest_Run(void *data)
     }
 
     SetVariablesForRecordedBattle(&DATA.recordedBattle);
-
     if (STATE->trials)
         gMain.savedCallback = CB2_BattleTest_NextTrial;
     else if (STATE->parameters)
@@ -708,6 +711,96 @@ void TestRunner_Battle_RecordHP(u32 battlerId, u32 oldHP, u32 newHP)
     }
 }
 
+static s32 TryExp(s32 i, s32 n, u32 battlerId, u32 oldExp, u32 newExp)
+{
+    struct QueuedExpEvent *event;
+    s32 iMax = i + n;
+    for (; i < iMax; i++)
+    {
+        if (DATA.queuedEvents[i].type != QUEUED_EXP_EVENT)
+            continue;
+
+        event = &DATA.queuedEvents[i].as.exp;
+
+        if (event->battlerId == battlerId)
+        {
+            if (event->address <= 0xFFFF)
+            {
+                switch (event->type)
+                {
+                case EXP_EVENT_NEW_EXP:
+                    if (event->address == newExp)
+                        return i;
+                    break;
+                case EXP_EVENT_DELTA_EXP:
+                    if (event->address == 0)
+                        return i;
+                    else if ((s16)event->address == oldExp - newExp)
+                        return i;
+                    break;
+                }
+            }
+            else
+            {
+                switch (event->type)
+                {
+                case EXP_EVENT_NEW_EXP:
+                    *(u32 *)event->address = newExp;
+                    break;
+                case EXP_EVENT_DELTA_EXP:
+                    *(s32 *)event->address = oldExp - newExp;
+                    break;
+                }
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
+void TestRunner_Battle_RecordExp(u32 battlerId, u32 oldExp, u32 newExp)
+{
+    s32 queuedEvent;
+    s32 match;
+    struct QueuedEvent *event;
+
+    if (DATA.queuedEvent == DATA.queuedEventsCount)
+        return;
+
+    event = &DATA.queuedEvents[DATA.queuedEvent];
+    switch (event->groupType)
+    {
+    case QUEUE_GROUP_NONE:
+    case QUEUE_GROUP_ONE_OF:
+        if (TryExp(DATA.queuedEvent, event->groupSize, battlerId, oldExp, newExp) != -1)
+            DATA.queuedEvent += event->groupSize;
+        break;
+    case QUEUE_GROUP_NONE_OF:
+        queuedEvent = DATA.queuedEvent;
+        do
+        {
+            if ((match = TryExp(queuedEvent, event->groupSize, battlerId, oldExp, newExp)) != -1)
+            {
+                const char *filename = gTestRunnerState.test->filename;
+                u32 line = SourceLine(DATA.queuedEvents[match].sourceLineOffset);
+                Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: Matched EXPERIENCE_BAR", filename, line);
+            }
+
+            queuedEvent += event->groupSize;
+            if (queuedEvent == DATA.queuedEventsCount)
+                break;
+
+            event = &DATA.queuedEvents[queuedEvent];
+            if (event->groupType == QUEUE_GROUP_NONE_OF)
+                continue;
+
+            if (TryExp(queuedEvent, event->groupSize, battlerId, oldExp, newExp) != -1)
+                DATA.queuedEvent = queuedEvent + event->groupSize;
+        } while (FALSE);
+        break;
+    }
+}
+
 static s32 TryMessage(s32 i, s32 n, const u8 *string)
 {
     s32 j, k;
@@ -866,6 +959,7 @@ static const char *const sEventTypeMacros[] =
     [QUEUED_ABILITY_POPUP_EVENT] = "ABILITY_POPUP",
     [QUEUED_ANIMATION_EVENT] = "ANIMATION",
     [QUEUED_HP_EVENT] = "HP_BAR",
+    [QUEUED_EXP_EVENT] = "EXPERIENCE_BAR",
     [QUEUED_MESSAGE_EVENT] = "MESSAGE",
     [QUEUED_STATUS_EVENT] = "STATUS_ICON",
 };
@@ -1274,6 +1368,12 @@ void Status1_(u32 sourceLine, u32 status1)
     INVALID_IF(!DATA.currentMon, "Status1 outside of PLAYER/OPPONENT");
     INVALID_IF(status1 & STATUS1_TOXIC_COUNTER, "Illegal status1: has TOXIC_TURN");
     SetMonData(DATA.currentMon, MON_DATA_STATUS, &status1);
+}
+
+void OTName_(u32 sourceLine, const u8 *otName)
+{
+    INVALID_IF(!DATA.currentMon, "Traded outside of PLAYER/OPPONENT");
+    SetMonData(DATA.currentMon, MON_DATA_OT_NAME, &otName);
 }
 
 static const char *const sBattlerIdentifiersSingles[] =
@@ -1783,6 +1883,48 @@ void QueueHP(u32 sourceLine, struct BattlePokemon *battler, struct HPEventContex
         }},
     };
 }
+
+void QueueExp(u32 sourceLine, struct BattlePokemon *battler, struct ExpEventContext ctx)
+{
+    s32 battlerId = battler - gBattleMons;
+    u32 type;
+    uintptr_t address;
+
+    INVALID_IF(!STATE->runScene, "EXPERIENCE_BAR outside of SCENE");
+    if (DATA.queuedEventsCount == MAX_QUEUED_EVENTS)
+        Test_ExitWithResult(TEST_RESULT_ERROR, "%s:%d: EXPERIENCE_BAR exceeds MAX_QUEUED_EVENTS", gTestRunnerState.test->filename, sourceLine);
+
+    if (ctx.explicitExp)
+    {
+        type = EXP_EVENT_NEW_EXP;
+        address = (u32)ctx.exp;
+    }
+    else if (ctx.explicitCaptureGainedExp)
+    {
+        INVALID_IF(ctx.captureGainedExp == NULL, "captureGainedExp is NULL");
+        type = EXP_EVENT_DELTA_EXP;
+        *ctx.captureGainedExp = 0;
+        address = (uintptr_t)ctx.captureGainedExp;
+    }
+    else
+    {
+        type = EXP_EVENT_DELTA_EXP;
+        address = 0;
+    }
+
+    DATA.queuedEvents[DATA.queuedEventsCount++] = (struct QueuedEvent) {
+        .type = QUEUED_EXP_EVENT,
+        .sourceLineOffset = SourceLineOffset(sourceLine),
+        .groupType = QUEUE_GROUP_NONE,
+        .groupSize = 1,
+        .as = { .exp = {
+            .battlerId = battlerId,
+            .type = type,
+            .address = address,
+        }},
+    };
+}
+
 
 void QueueMessage(u32 sourceLine, const u8 *pattern)
 {
