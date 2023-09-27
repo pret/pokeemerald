@@ -1112,10 +1112,10 @@ static void InitContestResources(void)
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        eContestantStatus[i].nextTurnOrder = 0xFF;
+        eContestantStatus[i].nextTurnOrder = CONTESTANT_NONE;
         eContest.prevTurnOrder[i] = gContestantTurnOrder[i];
     }
-    // Calling this here while all the nextTurnOrder values are 0xFF will actually
+    // Calling this here while all the nextTurnOrder values are CONTESTANT_NONE will actually
     // just reverse the turn order.
     ApplyNextTurnOrder();
     memset(gContestResources->tv, 0, sizeof(*gContestResources->tv) * CONTESTANT_COUNT);
@@ -1189,7 +1189,6 @@ void CB2_StartContest(void)
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 4;
         eContestDebugMode = CONTEST_DEBUG_MODE_OFF;
-        ClearBattleMonForms();
         InitContestResources();
         gMain.state++;
         break;
@@ -1778,8 +1777,6 @@ static void Task_DoAppeals(u8 taskId)
         }
         return;
     case APPEALSTATE_SLIDE_MON_IN:
-        for (i = 0; i < CONTESTANT_COUNT; i++)
-            gBattleMonForms[i] = 0;
         memset(gContestResources->moveAnim, 0, sizeof(*gContestResources->moveAnim));
         SetMoveAnimAttackerData(eContest.currentContestant);
         spriteId = CreateContestantSprite(
@@ -2775,7 +2772,7 @@ static bool8 IsPlayerLinkLeader(void)
 
 void CreateContestMonFromParty(u8 partyIndex)
 {
-    u8 name[20];
+    u8 name[max(PLAYER_NAME_LENGTH + 1, POKEMON_NAME_BUFFER_SIZE)];
     u16 heldItem;
     s16 cool;
     s16 beauty;
@@ -2785,10 +2782,8 @@ void CreateContestMonFromParty(u8 partyIndex)
 
     StringCopy(name, gSaveBlock2Ptr->playerName);
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
-    {
         StripPlayerNameForLinkContest(name);
-    }
-    memcpy(gContestMons[gContestPlayerMonIndex].trainerName, name, 8);
+    memcpy(gContestMons[gContestPlayerMonIndex].trainerName, name, PLAYER_NAME_LENGTH + 1);
     if (gSaveBlock2Ptr->playerGender == MALE)
         gContestMons[gContestPlayerMonIndex].trainerGfxId = OBJ_EVENT_GFX_LINK_BRENDAN;
     else
@@ -2891,7 +2886,7 @@ void SetContestants(u8 contestType, u8 rank)
                 opponents[opponentsCount++] = i;
         }
     }
-    opponents[opponentsCount] = 0xFF;
+    opponents[opponentsCount] = CONTESTANT_NONE;
 
     // Choose three random opponents from the list
     for (i = 0; i < CONTESTANT_COUNT - 1; i++)
@@ -2900,7 +2895,7 @@ void SetContestants(u8 contestType, u8 rank)
         s32 j;
 
         gContestMons[i] = gContestOpponents[opponents[rnd]];
-        for (j = rnd; opponents[j] != 0xFF; j++)
+        for (j = rnd; opponents[j] != CONTESTANT_NONE; j++)
             opponents[j] = opponents[j + 1];
         opponentsCount--;
     }
@@ -2940,7 +2935,7 @@ void SetLinkAIContestants(u8 contestType, u8 rank, bool32 isPostgame)
             || (contestType == CONTEST_CATEGORY_TOUGH && gContestOpponents[i].aiPool_Tough))
             opponents[opponentsCount++] = i;
     }
-    opponents[opponentsCount] = 0xFF;
+    opponents[opponentsCount] = CONTESTANT_NONE;
 
     // Fill remaining contestant slots with random AI opponents from the list
     for (i = 0; i < CONTESTANT_COUNT - gNumLinkContestPlayers; i++)
@@ -2950,7 +2945,7 @@ void SetLinkAIContestants(u8 contestType, u8 rank, bool32 isPostgame)
         gContestMons[gNumLinkContestPlayers + i] = gContestOpponents[opponents[rnd]];
         StripPlayerNameForLinkContest(gContestMons[gNumLinkContestPlayers + i].trainerName);
         StripMonNameForLinkContest(gContestMons[gNumLinkContestPlayers + i].nickname, GAME_LANGUAGE);
-        for (j = rnd; opponents[j] != 0xFF; j++)
+        for (j = rnd; opponents[j] != CONTESTANT_NONE; j++)
             opponents[j] = opponents[j + 1];
         opponentsCount--;
     }
@@ -4367,7 +4362,7 @@ void SortContestants(bool8 useRanking)
         // Note that ranking is calculated so that shared places still take up a ranking
         // space. A ranking like [1, 2, 2, 3] is not possible; it would be [1, 2, 2, 4]
         // instead.
-        memset(scratch, 0xFF, sizeof(scratch));
+        memset(scratch, CONTESTANT_NONE, sizeof(scratch));
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             u8 j = eContestantStatus[i].ranking;
@@ -4375,7 +4370,7 @@ void SortContestants(bool8 useRanking)
             while (1)
             {
                 u8 *ptr = &scratch[j];
-                if (*ptr == 0xFF)
+                if (*ptr == CONTESTANT_NONE)
                 {
                     *ptr = i;
                     gContestantTurnOrder[i] = j;
@@ -4633,7 +4628,7 @@ static void ApplyNextTurnOrder(void)
             // First, look for the first unassigned contestant.
             for (j = 0; j < CONTESTANT_COUNT; j++)
             {
-                if (!isContestantOrdered[j] && eContestantStatus[j].nextTurnOrder == 0xFF)
+                if (!isContestantOrdered[j] && eContestantStatus[j].nextTurnOrder == CONTESTANT_NONE)
                 {
                     nextContestant = j;
                     j++;
@@ -4644,7 +4639,7 @@ static void ApplyNextTurnOrder(void)
             // Then, look for a better candidate, with a higher turn order.
             for (; j < CONTESTANT_COUNT; j++)
             {
-                if (!isContestantOrdered[j] && eContestantStatus[j].nextTurnOrder == 0xFF
+                if (!isContestantOrdered[j] && eContestantStatus[j].nextTurnOrder == CONTESTANT_NONE
                  && gContestantTurnOrder[nextContestant] > gContestantTurnOrder[j])
                     nextContestant = j;
             }
@@ -4658,7 +4653,7 @@ static void ApplyNextTurnOrder(void)
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         eContestAppealResults.turnOrder[i] = newTurnOrder[i];
-        eContestantStatus[i].nextTurnOrder = 0xFF;
+        eContestantStatus[i].nextTurnOrder = CONTESTANT_NONE;
         eContestantStatus[i].turnOrderMod = 0;
         gContestantTurnOrder[i] = newTurnOrder[i];
     }
@@ -5312,8 +5307,6 @@ static void SetMoveSpecificAnimData(u8 contestant)
 
     memset(&gContestResources->moveAnim->species, 0, 20);
     ClearBattleAnimationVars();
-    for (i = 0; i < CONTESTANT_COUNT; i++)
-        gBattleMonForms[i] = 0;
     switch (move)
     {
     case MOVE_CURSE:
@@ -6017,8 +6010,10 @@ static u8 GetMonNicknameLanguage(u8 *nickname)
     if (nickname[0] == EXT_CTRL_CODE_BEGIN && nickname[1] == EXT_CTRL_CODE_JPN)
         return GAME_LANGUAGE;
 
-    if (StringLength(nickname) < PLAYER_NAME_LENGTH - 1)
+    if (StringLength(nickname) <= 5)
     {
+        // Name is short enough that it might be Japanese.
+        // Make sure  all the character values are valid latin name characters.
         while (*nickname != EOS)
         {
             if ((*nickname >= CHAR_A && *nickname <= CHAR_z)
@@ -6036,12 +6031,18 @@ static u8 GetMonNicknameLanguage(u8 *nickname)
                 || *nickname == CHAR_DBL_QUOTE_LEFT
                 || *nickname == CHAR_DBL_QUOTE_RIGHT
                 || *nickname == CHAR_SGL_QUOTE_LEFT
-                || *nickname == CHAR_DBL_QUOTE_LEFT) // Most likely a typo, CHAR_SGL_QUOTE_RIGHT should be here instead.
+#ifdef BUGFIX
+                || *nickname == CHAR_SGL_QUOTE_RIGHT
+#else
+                || *nickname == CHAR_DBL_QUOTE_LEFT // Most likely a typo, CHAR_SGL_QUOTE_RIGHT should be here instead.
+#endif
+                )
             {
                 nickname++;
             }
             else
             {
+                // Invalid latin name character, assume the name was Japanese.
                 ret = LANGUAGE_JAPANESE;
                 break;
             }
@@ -6098,7 +6099,7 @@ void StripPlayerAndMonNamesForLinkContest(struct ContestPokemon *mon, s32 langua
     name = mon->trainerName;
     if (language == LANGUAGE_JAPANESE)
     {
-        name[PLAYER_NAME_LENGTH] = EOS;
+        name[7] = EOS;
         name[6] = name[4];
         name[5] = name[3];
         name[4] = name[2];

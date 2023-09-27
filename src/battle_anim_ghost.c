@@ -233,7 +233,7 @@ static const union AnimCmd sAnim_GrudgeFlame[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const sAnims_GrudgeFlame[] =
+const union AnimCmd *const gAnims_GrudgeFlame[] =
 {
     sAnim_GrudgeFlame,
 };
@@ -243,7 +243,7 @@ const struct SpriteTemplate gGrudgeFlameSpriteTemplate =
     .tileTag = ANIM_TAG_PURPLE_FLAME,
     .paletteTag = ANIM_TAG_PURPLE_FLAME,
     .oam = &gOamData_AffineOff_ObjBlend_16x32,
-    .anims = sAnims_GrudgeFlame,
+    .anims = gAnims_GrudgeFlame,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimGrudgeFlame,
@@ -1080,7 +1080,7 @@ static void AnimTask_CurseStretchingBlackBg_Step1(u8 taskId)
         top = 0;
         bottom = 112;
         selectedPalettes = GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);
-        BeginNormalPaletteFade(selectedPalettes, 0, 16, 16, RGB(0, 0, 0));
+        BeginNormalPaletteFade(selectedPalettes, 0, 16, 16, RGB_BLACK);
         gTasks[taskId].func = AnimTask_CurseStretchingBlackBg_Step2;
     }
 

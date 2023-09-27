@@ -20,6 +20,22 @@ u16 Random2(void);
 void SeedRng(u16 seed);
 void SeedRng2(u16 seed);
 
+void Shuffle8(void *data, size_t n);
+void Shuffle16(void *data, size_t n);
+void Shuffle32(void *data, size_t n);
+void ShuffleN(void *data, size_t n, size_t size);
+
+static inline void Shuffle(void *data, size_t n, size_t size)
+{
+    switch (size)
+    {
+    case 1: Shuffle8(data, n); break;
+    case 2: Shuffle16(data, n); break;
+    case 4: Shuffle32(data, n); break;
+    default: ShuffleN(data, n, size); break;
+    }
+}
+
 /* Structured random number generator.
  * Instead of the caller converting bits from Random() to a meaningful
  * value, the caller provides metadata that is used to return the
@@ -74,6 +90,8 @@ enum RandomTag
     RNG_STATIC,
     RNG_STENCH,
     RNG_TRI_ATTACK,
+    RNG_TRIPLE_ARROWS_DEFENSE_DOWN,
+    RNG_TRIPLE_ARROWS_FLINCH,
 };
 
 #define RandomWeighted(tag, ...) \

@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Magic Bounce bounces back status moves")
 SINGLE_BATTLE_TEST("Magic Bounce bounces back powder moves")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_STUN_SPORE].flags & FLAG_POWDER);
+        ASSUME(gBattleMoves[MOVE_STUN_SPORE].powderMove);
         ASSUME(gBattleMoves[MOVE_STUN_SPORE].effect == EFFECT_PARALYZE);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_ESPEON) { Ability(ABILITY_MAGIC_BOUNCE); }
@@ -40,7 +40,7 @@ SINGLE_BATTLE_TEST("Magic Bounce bounces back powder moves")
 SINGLE_BATTLE_TEST("Magic Bounce cannot bounce back powder moves against Grass Types")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_STUN_SPORE].flags & FLAG_POWDER);
+        ASSUME(gBattleMoves[MOVE_STUN_SPORE].powderMove);
         ASSUME(gSpeciesInfo[SPECIES_ODDISH].types[0] == TYPE_GRASS);
         PLAYER(SPECIES_ODDISH);
         OPPONENT(SPECIES_ESPEON) { Ability(ABILITY_MAGIC_BOUNCE); }

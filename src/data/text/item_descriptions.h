@@ -2406,9 +2406,15 @@ static const u8 sWhiteHerbDesc[] = _(
     "lowered stat.");
 
 static const u8 sExpShareDesc[] = _(
+#if I_EXP_SHARE_ITEM >= GEN_6
+    "This device gives\n"
+    "exp. to other\n"
+    "party members.");
+#else
     "A hold item that\n"
     "gets Exp. points\n"
     "from battles.");
+#endif
 
 static const u8 sQuickClawDesc[] = _(
     "A hold item that\n"

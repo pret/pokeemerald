@@ -60,6 +60,8 @@
 #define AI_FLAG_ACE_POKEMON           (1 << 16)  // AI has an Ace Pokemon. The last Pokemon in the party will not be used until it's the last one remaining.
 #define AI_FLAG_OMNISCIENT            (1 << 17)  // AI has full knowledge of player moves, abilities, hold items
 
+#define AI_FLAG_COUNT                       18
+
 // 'other' ai logic flags
 #define AI_FLAG_ROAMING               (1 << 29)
 #define AI_FLAG_SAFARI                (1 << 30)

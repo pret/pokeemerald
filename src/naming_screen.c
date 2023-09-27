@@ -1067,7 +1067,7 @@ static void SpriteCB_InputArrow(struct Sprite *sprite)
     if (sprite->sDelay == 0 || --sprite->sDelay == 0)
     {
         sprite->sDelay = 8;
-        sprite->sXPosId = (sprite->sXPosId + 1) & (ARRAY_COUNT(x) - 1);
+        sprite->sXPosId = MOD(sprite->sXPosId + 1, ARRAY_COUNT(x));
     }
     sprite->x2 = x[sprite->sXPosId];
 }
@@ -1097,7 +1097,7 @@ static void SpriteCB_Underscore(struct Sprite *sprite)
         sprite->sDelay++;
         if (sprite->sDelay > 8)
         {
-            sprite->sYPosId = (sprite->sYPosId + 1) & (ARRAY_COUNT(y) - 1);
+            sprite->sYPosId = MOD(sprite->sYPosId + 1, ARRAY_COUNT(y));
             sprite->sDelay = 0;
         }
     }
@@ -1712,7 +1712,7 @@ static void DrawMonTextEntryBox(void)
 {
     u8 buffer[32];
 
-    StringCopy(buffer, gSpeciesNames[sNamingScreen->monSpecies]);
+    StringCopy(buffer, GetSpeciesName(sNamingScreen->monSpecies));
     StringAppendN(buffer, sNamingScreen->template->title, 15);
     FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], PIXEL_FILL(1));
     AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], FONT_NORMAL, buffer, 8, 1, 0, 0);

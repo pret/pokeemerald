@@ -446,13 +446,13 @@ bool32 AreBattleTowerLinkSpeciesSame(u16 *speciesList1, u16 *speciesList2)
             {
                 if (numSameSpecies == 0)
                 {
-                    StringCopy(gStringVar1, gSpeciesNames[speciesList1[i]]);
+                    StringCopy(gStringVar1, GetSpeciesName(speciesList1[i]));
                     haveSameSpecies = TRUE;
                 }
 
                 if (numSameSpecies == 1)
                 {
-                    StringCopy(gStringVar2, gSpeciesNames[speciesList1[i]]);
+                    StringCopy(gStringVar2, GetSpeciesName(speciesList1[i]));
                     haveSameSpecies = TRUE;
                 }
 
@@ -725,7 +725,7 @@ void TryContestEModeLinkup(void)
 u8 CreateTask_ReestablishCableClubLink(void)
 {
     if (FuncIsActiveTask(Task_ReestablishLink) != FALSE)
-        return 0xFF;
+        return TASK_NONE;
 
     switch (gSpecialVar_0x8004)
     {

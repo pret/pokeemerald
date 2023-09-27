@@ -548,6 +548,14 @@ static const struct FormChange sMiniorYellowFormChangeTable[] = {
     {FORM_CHANGE_END_BATTLE,        SPECIES_MINIOR_CORE_YELLOW},
     {FORM_CHANGE_TERMINATOR},
 };
+static const struct FormChange sNecrozmaDuskManeFormChangeTable[] = {
+    {FORM_CHANGE_BATTLE_ULTRA_BURST,    SPECIES_NECROZMA_ULTRA, ITEM_ULTRANECROZIUM_Z},
+    {FORM_CHANGE_TERMINATOR},
+};
+static const struct FormChange sNecrozmaDawnWingsFormChangeTable[] = {
+    {FORM_CHANGE_BATTLE_ULTRA_BURST,    SPECIES_NECROZMA_ULTRA, ITEM_ULTRANECROZIUM_Z},
+    {FORM_CHANGE_TERMINATOR},
+};
 #endif
 
 #if P_GEN_8_POKEMON == TRUE

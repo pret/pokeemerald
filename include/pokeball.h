@@ -48,7 +48,7 @@ extern const struct SpriteTemplate gBallSpriteTemplates[];
 #define POKEBALL_PLAYER_SENDOUT     0xFF
 #define POKEBALL_OPPONENT_SENDOUT   0xFE
 
-u8 DoPokeballSendOutAnimation(s16 pan, u8 kindOfThrow);
+u8 DoPokeballSendOutAnimation(u32 battler, s16 pan, u8 kindOfThrow);
 void CreatePokeballSpriteToReleaseMon(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, u8 oamPriority, u8 subpriority, u8 delay, u32 fadePalettes, u16 species);
 u8 CreateTradePokeballSprite(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, u8 oamPriority, u8 subPriority, u8 delay, u32 fadePalettes);
 void StartHealthboxSlideIn(u8 battler);

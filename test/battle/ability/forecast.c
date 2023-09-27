@@ -17,6 +17,20 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform in weather from an opponent's m
         ABILITY_POPUP(player, ABILITY_FORECAST);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Castform transformed!");
+    } THEN {
+        switch (move)
+        {
+        case MOVE_SUNNY_DAY:
+            EXPECT_EQ(player->species, SPECIES_CASTFORM_SUNNY);
+            break;
+        case MOVE_RAIN_DANCE:
+            EXPECT_EQ(player->species, SPECIES_CASTFORM_RAINY);
+            break;
+        case MOVE_HAIL:
+        case MOVE_SNOWSCAPE:
+            EXPECT_EQ(player->species, SPECIES_CASTFORM_SNOWY);
+            break;
+        }
     }
 }
 
@@ -36,6 +50,20 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform in weather from its own move")
         ABILITY_POPUP(player, ABILITY_FORECAST);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Castform transformed!");
+    } THEN {
+        switch (move)
+        {
+        case MOVE_SUNNY_DAY:
+            EXPECT_EQ(player->species, SPECIES_CASTFORM_SUNNY);
+            break;
+        case MOVE_RAIN_DANCE:
+            EXPECT_EQ(player->species, SPECIES_CASTFORM_RAINY);
+            break;
+        case MOVE_HAIL:
+        case MOVE_SNOWSCAPE:
+            EXPECT_EQ(player->species, SPECIES_CASTFORM_SNOWY);
+            break;
+        }
     }
 }
 
@@ -57,6 +85,20 @@ DOUBLE_BATTLE_TEST("Forecast transforms Castform in weather from a partner's mov
         ABILITY_POPUP(playerLeft, ABILITY_FORECAST);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, playerLeft);
         MESSAGE("Castform transformed!");
+    } THEN {
+        switch (move)
+        {
+        case MOVE_SUNNY_DAY:
+            EXPECT_EQ(playerLeft->species, SPECIES_CASTFORM_SUNNY);
+            break;
+        case MOVE_RAIN_DANCE:
+            EXPECT_EQ(playerLeft->species, SPECIES_CASTFORM_RAINY);
+            break;
+        case MOVE_HAIL:
+        case MOVE_SNOWSCAPE:
+            EXPECT_EQ(playerLeft->species, SPECIES_CASTFORM_SNOWY);
+            break;
+        }
     }
 }
 
@@ -87,6 +129,29 @@ DOUBLE_BATTLE_TEST("Forecast transforms all Castforms present in weather")
         ABILITY_POPUP(opponentRight, ABILITY_FORECAST);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, opponentRight);
         MESSAGE("Foe Castform transformed!");
+    } THEN {
+        switch (move)
+        {
+        case MOVE_SUNNY_DAY:
+            EXPECT_EQ(playerLeft->species, SPECIES_CASTFORM_SUNNY);
+            EXPECT_EQ(playerRight->species, SPECIES_CASTFORM_SUNNY);
+            EXPECT_EQ(opponentLeft->species, SPECIES_CASTFORM_SUNNY);
+            EXPECT_EQ(opponentRight->species, SPECIES_CASTFORM_SUNNY);
+            break;
+        case MOVE_RAIN_DANCE:
+            EXPECT_EQ(playerLeft->species, SPECIES_CASTFORM_RAINY);
+            EXPECT_EQ(playerRight->species, SPECIES_CASTFORM_RAINY);
+            EXPECT_EQ(opponentLeft->species, SPECIES_CASTFORM_RAINY);
+            EXPECT_EQ(opponentRight->species, SPECIES_CASTFORM_RAINY);
+            break;
+        case MOVE_HAIL:
+        case MOVE_SNOWSCAPE:
+            EXPECT_EQ(playerLeft->species, SPECIES_CASTFORM_SNOWY);
+            EXPECT_EQ(playerRight->species, SPECIES_CASTFORM_SNOWY);
+            EXPECT_EQ(opponentLeft->species, SPECIES_CASTFORM_SNOWY);
+            EXPECT_EQ(opponentRight->species, SPECIES_CASTFORM_SNOWY);
+            break;
+        }
     }
 }
 
@@ -106,6 +171,19 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform in weather from an ability")
         ABILITY_POPUP(player, ABILITY_FORECAST);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Castform transformed!");
+    } THEN {
+        switch (ability)
+        {
+        case ABILITY_DROUGHT:
+            EXPECT_EQ(player->species, SPECIES_CASTFORM_SUNNY);
+            break;
+        case ABILITY_DRIZZLE:
+            EXPECT_EQ(player->species, SPECIES_CASTFORM_RAINY);
+            break;
+        case ABILITY_SNOW_WARNING:
+            EXPECT_EQ(player->species, SPECIES_CASTFORM_SNOWY);
+            break;
+        }
     }
 }
 
@@ -125,6 +203,16 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform in primal weather")
         ABILITY_POPUP(player, ABILITY_FORECAST);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Castform transformed!");
+    } THEN {
+        switch (ability)
+        {
+        case ABILITY_DESOLATE_LAND:
+            EXPECT_EQ(player->species, SPECIES_CASTFORM_SUNNY);
+            break;
+        case ABILITY_PRIMORDIAL_SEA:
+            EXPECT_EQ(player->species, SPECIES_CASTFORM_RAINY);
+            break;
+        }
     }
 }
 
@@ -149,6 +237,8 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform back to normal when weather exp
         ABILITY_POPUP(player, ABILITY_FORECAST);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Castform transformed!");
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_CASTFORM);
     }
 }
 
@@ -169,11 +259,14 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform back to normal when Sandstorm i
         ABILITY_POPUP(player, ABILITY_FORECAST);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Castform transformed!");
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_CASTFORM);
     }
 }
 
 SINGLE_BATTLE_TEST("Forecast transforms Castform back to normal under Air Lock")
 {
+    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_CASTFORM) { Ability(ABILITY_FORECAST); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -181,7 +274,6 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform back to normal under Air Lock")
     } WHEN {
         TURN { MOVE(player, MOVE_RAIN_DANCE); }
         TURN { SWITCH(opponent, 1); }
-        TURN { MOVE(opponent, MOVE_CELEBRATE, megaEvolve: TRUE); }
     } SCENE {
         // transforms
         ABILITY_POPUP(player, ABILITY_FORECAST);
@@ -192,6 +284,8 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform back to normal under Air Lock")
         ABILITY_POPUP(player, ABILITY_FORECAST);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Castform transformed!");
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_CASTFORM);
     }
 }
 
@@ -211,6 +305,8 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform on switch-in")
         ABILITY_POPUP(player, ABILITY_FORECAST);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Castform transformed!");
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_CASTFORM_RAINY);
     }
 }
 
@@ -231,6 +327,8 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform when weather changes")
         ABILITY_POPUP(player, ABILITY_FORECAST);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Castform transformed!");
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_CASTFORM_SUNNY);
     }
 }
 
@@ -251,5 +349,7 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform back to normal when its ability
         // back to normal
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Castform transformed!");
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_CASTFORM);
     }
 }

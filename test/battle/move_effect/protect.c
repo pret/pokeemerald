@@ -13,10 +13,10 @@ ASSUMPTIONS
     ASSUME(gBattleMoves[MOVE_CRAFTY_SHIELD].effect == EFFECT_PROTECT);
     ASSUME(gBattleMoves[MOVE_BANEFUL_BUNKER].effect == EFFECT_PROTECT);
     ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
-    ASSUME(gBattleMoves[MOVE_TACKLE].flags & FLAG_MAKES_CONTACT);
+    ASSUME(gBattleMoves[MOVE_TACKLE].makesContact);
     ASSUME(gBattleMoves[MOVE_LEER].split == SPLIT_STATUS);
     ASSUME(gBattleMoves[MOVE_WATER_GUN].split == SPLIT_SPECIAL);
-    ASSUME(!(gBattleMoves[MOVE_WATER_GUN].flags & FLAG_MAKES_CONTACT));
+    ASSUME(!(gBattleMoves[MOVE_WATER_GUN].makesContact));
 }
 
 SINGLE_BATTLE_TEST("Protect, Detect, Spiky Shield and Baneful Bunker protect from all moves")
