@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Grass-type Pokémon block powder and spore moves")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_STUN_SPORE].flags & FLAG_POWDER);
+        ASSUME(gBattleMoves[MOVE_STUN_SPORE].powderMove);
         ASSUME(gSpeciesInfo[SPECIES_ODDISH].types[0] == TYPE_GRASS);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_ODDISH);

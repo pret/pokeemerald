@@ -318,7 +318,7 @@ static void Task_RecordMixing_Main(u8 taskId)
         sSentRecord = Alloc(sizeof(*sSentRecord));
         sReceivedRecords = Alloc(sizeof(*sReceivedRecords) * MAX_LINK_PLAYERS);
         SetLocalLinkPlayerId(gSpecialVar_0x8005);
-        VarSet(VAR_TEMP_0, 1);
+        VarSet(VAR_TEMP_MIXED_RECORDS, 1);
         sReadyToReceive = FALSE;
         PrepareExchangePacket();
         CreateRecordMixingLights();
@@ -972,14 +972,14 @@ static void ReceiveGiftItem(u16 *item, u8 multiplayerId)
     {
         if (!CheckBagHasItem(*item, 1) && !CheckPCHasItem(*item, 1) && AddBagItem(*item, 1))
         {
-            VarSet(VAR_TEMP_1, *item);
+            VarSet(VAR_TEMP_RECORD_MIX_GIFT_ITEM, *item);
             StringCopy(gStringVar1, gLinkPlayers[0].name);
             if (*item == ITEM_EON_TICKET)
                 FlagSet(FLAG_ENABLE_SHIP_SOUTHERN_ISLAND);
         }
         else
         {
-            VarSet(VAR_TEMP_1, ITEM_NONE);
+            VarSet(VAR_TEMP_RECORD_MIX_GIFT_ITEM, ITEM_NONE);
         }
     }
 }

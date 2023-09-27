@@ -255,6 +255,7 @@ SINGLE_BATTLE_TEST("Fling - thrown berry's effect activates for the target even 
 
     PARAMETRIZE { item = ITEM_ORAN_BERRY; effect = HOLD_EFFECT_RESTORE_HP; }
     PARAMETRIZE { item = ITEM_SITRUS_BERRY; effect = HOLD_EFFECT_RESTORE_HP; }
+    PARAMETRIZE { item = ITEM_ENIGMA_BERRY; effect = HOLD_EFFECT_ENIGMA_BERRY; }
     PARAMETRIZE { item = ITEM_LEPPA_BERRY; effect = HOLD_EFFECT_RESTORE_PP; }
     PARAMETRIZE { item = ITEM_CHESTO_BERRY; effect = HOLD_EFFECT_CURE_SLP; status1 = STATUS1_SLEEP; }
     PARAMETRIZE { item = ITEM_CHERI_BERRY; effect = HOLD_EFFECT_CURE_PAR; status1 = STATUS1_PARALYSIS; }
@@ -262,6 +263,7 @@ SINGLE_BATTLE_TEST("Fling - thrown berry's effect activates for the target even 
     PARAMETRIZE { item = ITEM_PECHA_BERRY; effect = HOLD_EFFECT_CURE_PSN; status1 = STATUS1_TOXIC_POISON; }
     PARAMETRIZE { item = ITEM_RAWST_BERRY; effect = HOLD_EFFECT_CURE_BRN; status1 = STATUS1_BURN; }
     PARAMETRIZE { item = ITEM_ASPEAR_BERRY; effect = HOLD_EFFECT_CURE_FRZ; status1 = STATUS1_FREEZE; }
+    PARAMETRIZE { item = ITEM_ASPEAR_BERRY; effect = HOLD_EFFECT_CURE_FRZ; status1 = STATUS1_FROSTBITE; }
     PARAMETRIZE { item = ITEM_APICOT_BERRY; effect = HOLD_EFFECT_SP_DEFENSE_UP; statId = STAT_SPDEF; }
     PARAMETRIZE { item = ITEM_MARANGA_BERRY; effect = HOLD_EFFECT_MARANGA_BERRY; statId = STAT_SPDEF; }
     PARAMETRIZE { item = ITEM_GANLON_BERRY; effect = HOLD_EFFECT_DEFENSE_UP; statId = STAT_DEF; }
@@ -282,8 +284,10 @@ SINGLE_BATTLE_TEST("Fling - thrown berry's effect activates for the target even 
         if (effect == HOLD_EFFECT_RESTORE_HP) {
             if (item == ITEM_ORAN_BERRY) {
                 MESSAGE("Foe Wobbuffet's Oran Berry restored health!");
-            } else {
+            } else if (item == ITEM_SITRUS_BERRY) {
                 MESSAGE("Foe Wobbuffet's Sitrus Berry restored health!");
+            } else {
+                MESSAGE("Wobbuffet's Enigma Berry restored health!");
             }
             HP_BAR(opponent);
         }
@@ -297,6 +301,8 @@ SINGLE_BATTLE_TEST("Fling - thrown berry's effect activates for the target even 
                 MESSAGE("Foe Wobbuffet's Chesto Berry woke it from its sleep!");
             } else if (status1 == STATUS1_FREEZE) {
                 MESSAGE("Foe Wobbuffet's Aspear Berry defrosted it!");
+            } else if (status1 == STATUS1_FROSTBITE) {
+                MESSAGE("Foe Wobbuffet's Aspear Berry healed its frostbite!");
             } else if (status1 == STATUS1_PARALYSIS) {
                 MESSAGE("Foe Wobbuffet's Cheri Berry cured paralysis!");
             } else if (status1 == STATUS1_TOXIC_POISON || status1 == STATUS1_POISON) {

@@ -26,7 +26,7 @@ SINGLE_BATTLE_TEST("Contrary raises Attack when Intimidated", s16 damage)
         HP_BAR(player, captureDamage: &results[i].damage);
     }
     FINALLY {
-        EXPECT_MUL_EQ(results[1].damage, Q_4_12(2.125), results[0].damage);
+        EXPECT_MUL_EQ(results[1].damage, Q_4_12(2.25), results[0].damage);
     }
 }
 

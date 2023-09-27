@@ -24,9 +24,9 @@ struct MonIconSpriteTemplate
 static u8 CreateMonIconSprite(struct MonIconSpriteTemplate *, s16, s16, u8);
 static void FreeAndDestroyMonIconSprite_(struct Sprite *sprite);
 
-const u8 *const gMonIconTable[] =
+const u8 *const gMonIconTable[NUM_SPECIES + 1] =
 {
-    [SPECIES_NONE] = gMonIcon_Bulbasaur,
+    [SPECIES_NONE] = gMonIcon_QuestionMark,
     [SPECIES_BULBASAUR] = gMonIcon_Bulbasaur,
     [SPECIES_IVYSAUR] = gMonIcon_Ivysaur,
     [SPECIES_VENUSAUR] = gMonIcon_Venusaur,
@@ -1298,25 +1298,12 @@ const u8 *const gMonIconTable[] =
     [SPECIES_EGG] = gMonIcon_Egg,
 };
 
-const u8 *const gMonIconTableFemale[] =
+// Female icon palette indexes still need to be defined in gMonIconPaletteIndicesFemale, even if they are the same as males.
+const u8 *const gMonIconTableFemale[NUM_SPECIES + 1] =
 {
-    [SPECIES_EEVEE] = gMonIcon_Eevee,
-#if P_GEN_4_POKEMON == TRUE
-    [SPECIES_STARLY] = gMonIcon_Starly,
-    [SPECIES_STARAVIA] = gMonIcon_Staravia,
-    [SPECIES_STARAPTOR] = gMonIcon_Staraptor,
-    [SPECIES_BIDOOF] = gMonIcon_Bidoof,
-    [SPECIES_KRICKETOT] = gMonIcon_Kricketot,
-    [SPECIES_KRICKETUNE] = gMonIcon_Kricketune,
-    [SPECIES_SHINX] = gMonIcon_Shinx,
-    [SPECIES_COMBEE] = gMonIcon_Combee,
-#if P_HIPPO_GENDER_DIFF_ICONS == TRUE
+#if P_GEN_4_POKEMON == TRUE && P_HIPPO_GENDER_DIFF_ICONS == TRUE
     [SPECIES_HIPPOPOTAS] = gMonIcon_HippopotasF,
     [SPECIES_HIPPOWDON] = gMonIcon_HippowdonF,
-#else
-    [SPECIES_HIPPOPOTAS] = gMonIcon_Hippopotas,
-    [SPECIES_HIPPOWDON] = gMonIcon_Hippowdon,
-#endif
 #endif
 #if P_GEN_5_POKEMON == TRUE
     [SPECIES_UNFEZANT] = gMonIcon_UnfezantF,
@@ -2235,7 +2222,7 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_SNEASLER] = 2,
     [SPECIES_OVERQWIL] = 2,
     [SPECIES_ENAMORUS] = 1,
-    [SPECIES_VENUSAUR_MEGA] = 1,
+    [SPECIES_VENUSAUR_MEGA] = 4,
     [SPECIES_CHARIZARD_MEGA_X] = 0,
     [SPECIES_CHARIZARD_MEGA_Y] = 0,
     [SPECIES_BLASTOISE_MEGA] = 2,
@@ -2547,15 +2534,7 @@ const u8 gMonIconPaletteIndices[] =
 
 const u8 gMonIconPaletteIndicesFemale[] =
 {
-    [SPECIES_EEVEE] = 2,
 #if P_GEN_4_POKEMON == TRUE
-    [SPECIES_STARLY] = 0,
-    [SPECIES_STARAVIA] = 0,
-    [SPECIES_BIDOOF] = 2,
-    [SPECIES_KRICKETOT] = 2,
-    [SPECIES_KRICKETUNE] = 2,
-    [SPECIES_SHINX] = 0,
-    [SPECIES_COMBEE] = 0,
     [SPECIES_HIPPOPOTAS] = 1,
     [SPECIES_HIPPOWDON] = 1,
 #endif
@@ -2566,9 +2545,6 @@ const u8 gMonIconPaletteIndicesFemale[] =
 #endif
 #if P_GEN_6_POKEMON == TRUE
     [SPECIES_PYROAR] = 2,
-#endif
-#if P_GEN_8_POKEMON == TRUE
-    [SPECIES_BASCULEGION] = 0,
 #endif
 };
 
@@ -2700,7 +2676,7 @@ u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u
 
     if (species > NUM_SPECIES)
         iconTemplate.paletteTag = POKE_ICON_BASE_PAL_TAG;
-    else if (ShouldShowFemaleDifferences(species, personality))
+    else if (gMonIconTableFemale[species] && IsPersonalityFemale(species, personality))
         iconTemplate.paletteTag = POKE_ICON_BASE_PAL_TAG + gMonIconPaletteIndicesFemale[species];
 
     spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);
@@ -2815,7 +2791,7 @@ void LoadMonIconPalette(u16 species)
 void LoadMonIconPalettePersonality(u16 species, u32 personality)
 {
     u8 palIndex;
-    if (ShouldShowFemaleDifferences(species, personality))
+    if (gMonIconTableFemale[species] != NULL && IsPersonalityFemale(species, personality))
         palIndex = gMonIconPaletteIndicesFemale[species];
     else
         palIndex = gMonIconPaletteIndices[species];
@@ -2856,10 +2832,15 @@ const u8 *GetMonIconTiles(u16 species, u32 personality)
 {
     const u8 *iconSprite;
 
-    if (ShouldShowFemaleDifferences(species, personality))
+    if (species > NUM_SPECIES)
+        species = SPECIES_NONE;
+
+    if (gMonIconTableFemale[species] != NULL && IsPersonalityFemale(species, personality))
         iconSprite = gMonIconTableFemale[species];
-    else
+    else if (gMonIconTable[species] != NULL)
         iconSprite = gMonIconTable[species];
+    else
+        iconSprite = gMonIconTable[SPECIES_NONE];
 
     return iconSprite;
 }

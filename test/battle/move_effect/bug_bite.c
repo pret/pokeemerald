@@ -10,13 +10,13 @@ ASSUMPTIONS
 // Pretty much copy/paste of the Berry Fling Test.
 SINGLE_BATTLE_TEST("Bug Bite eats the target's berry and immediately gains its effect")
 {
-    u16 item;
-    u32 status1 = STATUS1_NONE, effect, statId;
+    u16 item = ITEM_NONE;
+    u32 status1 = STATUS1_NONE, effect = HOLD_EFFECT_NONE, statId = 0;
 
     PARAMETRIZE { item = ITEM_NONE; }
     PARAMETRIZE { item = ITEM_ORAN_BERRY; effect = HOLD_EFFECT_RESTORE_HP; }
     PARAMETRIZE { item = ITEM_SITRUS_BERRY; effect = HOLD_EFFECT_RESTORE_HP; }
-    // PARAMETRIZE { item = ITEM_ENIGMA_BERRY; effect = HOLD_EFFECT_RESTORE_HP; } To do once Enigma Berry's effect is done
+    PARAMETRIZE { item = ITEM_ENIGMA_BERRY; effect = HOLD_EFFECT_ENIGMA_BERRY; }
     PARAMETRIZE { item = ITEM_LEPPA_BERRY; effect = HOLD_EFFECT_RESTORE_PP; }
     PARAMETRIZE { item = ITEM_CHESTO_BERRY; effect = HOLD_EFFECT_CURE_SLP; status1 = STATUS1_SLEEP; }
     PARAMETRIZE { item = ITEM_CHERI_BERRY; effect = HOLD_EFFECT_CURE_PAR; status1 = STATUS1_PARALYSIS; }
@@ -50,13 +50,13 @@ SINGLE_BATTLE_TEST("Bug Bite eats the target's berry and immediately gains its e
         MESSAGE("Wobbuffet used Bug Bite!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BUG_BITE, player);
         HP_BAR(opponent);
-        if (effect == HOLD_EFFECT_RESTORE_HP) {
+        if (effect == HOLD_EFFECT_RESTORE_HP || effect == HOLD_EFFECT_ENIGMA_BERRY) {
             if (item == ITEM_ORAN_BERRY) {
                 MESSAGE("Wobbuffet's Oran Berry restored health!");
             } else if (item == ITEM_SITRUS_BERRY) {
                 MESSAGE("Wobbuffet's Sitrus Berry restored health!");
             } else {
-                // MESSAGE("Wobbuffet's Enigma Berry restored health!");
+                MESSAGE("Wobbuffet's Enigma Berry restored health!");
             }
             HP_BAR(player);
         }

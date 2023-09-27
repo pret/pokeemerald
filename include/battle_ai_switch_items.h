@@ -2,8 +2,8 @@
 #define GUARD_BATTLE_AI_SWITCH_ITEMS_H
 
 void GetAIPartyIndexes(u32 battlerId, s32 *firstId, s32 *lastId);
-void AI_TrySwitchOrUseItem(void);
-u8 GetMostSuitableMonToSwitchInto(void);
-bool32 ShouldSwitch(void);
+void AI_TrySwitchOrUseItem(u32 battler);
+u8 GetMostSuitableMonToSwitchInto(u32 battler);
+bool32 ShouldSwitch(u32 battler);
 
 #endif // GUARD_BATTLE_AI_SWITCH_ITEMS_H

@@ -1285,7 +1285,7 @@ static void Task_SlotMachine(u8 taskId)
 // SLOTTASK_UNFADE
 static bool8 SlotTask_UnfadeScreen(struct Task *task)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB(0, 0, 0));
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     LoadPikaPowerMeter(sSlotMachine->pikaPowerBolts);
     sSlotMachine->state++; // SLOTTASK_WAIT_FADE
     return FALSE;
@@ -1731,7 +1731,7 @@ static bool8 SlotTask_EndGame(struct Task *task)
 {
     SetCoins(sSlotMachine->coins);
     TryPutFindThatGamerOnAir(GetCoins());
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB(0, 0, 0));
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     sSlotMachine->state++; // SLOTTASK_FREE
     return FALSE;
 }
@@ -3904,7 +3904,7 @@ static void Task_InfoBox(u8 taskId)
 
 static void InfoBox_FadeIn(struct Task *task)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB(0, 0, 0));
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     task->tState++;
 }
 
@@ -3928,7 +3928,7 @@ static void InfoBox_AddText(struct Task *task)
 {
     AddTextPrinterParameterized3(1, FONT_NORMAL, 2, 5, sColors_ReeltimeHelp, 0, gText_ReelTimeHelp);
     CopyWindowToVram(1, COPYWIN_FULL);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB(0, 0, 0));
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     task->tState++;
 }
 
@@ -3940,7 +3940,7 @@ static void InfoBox_WaitInput(struct Task *task)
         ClearWindowTilemap(1);
         CopyWindowToVram(1, COPYWIN_MAP);
         RemoveWindow(1);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB(0, 0, 0));
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         task->tState++;
     }
 }
@@ -3961,7 +3961,7 @@ static void InfoBox_CreateDigitalDisplay(struct Task *task)
 static void InfoBox_LoadPikaPowerMeter(struct Task *task)
 {
     LoadPikaPowerMeter(sSlotMachine->pikaPowerBolts);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB(0, 0, 0));
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     task->tState++;
 }
 
@@ -4672,9 +4672,9 @@ static void SpriteCB_DigitalDisplay_Reel(struct Sprite *sprite)
     {
     case 0:
         sprite->x += 4;
-        if (sprite->x >= 0xd0)
+        if (sprite->x >= DISPLAY_WIDTH - 32)
         {
-            sprite->x = 0xd0;
+            sprite->x = DISPLAY_WIDTH - 32;
             sprite->sState++;
         }
         break;
@@ -4684,7 +4684,7 @@ static void SpriteCB_DigitalDisplay_Reel(struct Sprite *sprite)
         break;
     case 2:
         sprite->x += 4;
-        if (sprite->x >= 0x110)
+        if (sprite->x >= DISPLAY_WIDTH + 32)
             sprite->sState++;
         break;
     case 3:
@@ -4700,9 +4700,9 @@ static void SpriteCB_DigitalDisplay_Time(struct Sprite *sprite)
     {
     case 0:
         sprite->x -= 4;
-        if (sprite->x <= 0xd0)
+        if (sprite->x <= DISPLAY_WIDTH - 32)
         {
-            sprite->x = 0xd0;
+            sprite->x = DISPLAY_WIDTH - 32;
             sprite->sState++;
         }
         break;
@@ -4712,7 +4712,7 @@ static void SpriteCB_DigitalDisplay_Time(struct Sprite *sprite)
         break;
     case 2:
         sprite->x -= 4;
-        if (sprite->x <= 0x90)
+        if (sprite->x <= 144)
             sprite->sState++;
         break;
     case 3:
@@ -4738,9 +4738,9 @@ static void SpriteCB_DigitalDisplay_ReelTimeNumber(struct Sprite *sprite)
         break;
     case 2:
         sprite->x += 4;
-        if (sprite->x >= 0xd0)
+        if (sprite->x >= DISPLAY_WIDTH - 32)
         {
-            sprite->x = 0xd0;
+            sprite->x = DISPLAY_WIDTH - 32;
             sprite->sState++;
         }
         break;
@@ -4750,7 +4750,7 @@ static void SpriteCB_DigitalDisplay_ReelTimeNumber(struct Sprite *sprite)
         break;
     case 4:
         sprite->x += 4;
-        if (sprite->x >= 0xf8)
+        if (sprite->x >= DISPLAY_WIDTH + 8)
             sprite->sState++;
         break;
     case 5:
@@ -7853,7 +7853,7 @@ static const u16 sUnusedColors[] =
     RGB(27, 27, 27),
     RGB(8, 11, 26),
     RGB(11, 21, 13),
-    RGB(31, 31, 31),
+    RGB_WHITE,
     RGB(16, 26, 21),
     RGB(0, 22, 31),
     RGB(26, 21, 0),

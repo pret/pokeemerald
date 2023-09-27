@@ -1,4 +1,4 @@
-const struct CompressedSpritePalette gMonShinyPaletteTable[] =
+const struct CompressedSpritePalette gMonShinyPaletteTable[NUM_SPECIES + 1] =
 {
     SPECIES_SHINY_PAL(NONE, gMonShinyPalette_CircledQuestionMark),
     SPECIES_SHINY_PAL(BULBASAUR, gMonShinyPalette_Bulbasaur),
@@ -1335,17 +1335,9 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(EGG, gMonPalette_Egg),
 };
 
-const struct CompressedSpritePalette gMonShinyPaletteTableFemale[] =
+const struct CompressedSpritePalette gMonShinyPaletteTableFemale[NUM_SPECIES + 1] =
 {
-    SPECIES_SHINY_PAL(EEVEE, gMonShinyPalette_Eevee),
 #if P_GEN_4_POKEMON == TRUE
-    SPECIES_SHINY_PAL(STARLY, gMonShinyPalette_Starly),
-    SPECIES_SHINY_PAL(STARAVIA, gMonShinyPalette_Staravia),
-    SPECIES_SHINY_PAL(STARAPTOR, gMonShinyPalette_Staraptor),
-    SPECIES_SHINY_PAL(BIDOOF, gMonShinyPalette_Bidoof),
-    SPECIES_SHINY_PAL(KRICKETOT, gMonShinyPalette_Kricketot),
-    SPECIES_SHINY_PAL(KRICKETUNE, gMonShinyPalette_Kricketune),
-    SPECIES_SHINY_PAL(SHINX, gMonShinyPalette_Shinx),
     SPECIES_SHINY_PAL(COMBEE, gMonShinyPalette_CombeeF),
     SPECIES_SHINY_PAL(HIPPOPOTAS, gMonShinyPalette_HippopotasF),
     SPECIES_SHINY_PAL(HIPPOWDON, gMonShinyPalette_HippowdonF),
@@ -1354,8 +1346,5 @@ const struct CompressedSpritePalette gMonShinyPaletteTableFemale[] =
     SPECIES_SHINY_PAL(UNFEZANT, gMonShinyPalette_UnfezantF),
     SPECIES_SHINY_PAL(FRILLISH, gMonShinyPalette_FrillishF),
     SPECIES_SHINY_PAL(JELLICENT, gMonShinyPalette_JellicentF),
-#endif
-#if P_GEN_6_POKEMON == TRUE
-    SPECIES_SHINY_PAL(PYROAR, gMonShinyPalette_Pyroar),
 #endif
 };

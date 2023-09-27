@@ -80,6 +80,21 @@ SINGLE_BATTLE_TEST("Each hit of a Multi Hit move activates Toxic Debris")
     }
 }
 
+SINGLE_BATTLE_TEST("Toxic Debris activates if user faints after physical hit")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); Ability(ABILITY_TOXIC_DEBRIS); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_TACKLE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        MESSAGE("Wobbuffet fainted!");
+        ABILITY_POPUP(player, ABILITY_TOXIC_DEBRIS);
+        MESSAGE("Poison Spikes were scattered all around the opposing team's feet!");
+    }
+}
+
 SINGLE_BATTLE_TEST("Air Balloon is popped after Toxic Debris activates")
 {
     GIVEN {

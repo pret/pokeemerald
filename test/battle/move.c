@@ -99,7 +99,7 @@ SINGLE_BATTLE_TEST("Critical hits occur at a 1/24 rate")
 SINGLE_BATTLE_TEST("Slash's critical hits occur at a 1/8 rate")
 {
     ASSUME(B_CRIT_CHANCE >= GEN_7);
-    ASSUME(gBattleMoves[MOVE_SLASH].flags & FLAG_HIGH_CRIT);
+    ASSUME(gBattleMoves[MOVE_SLASH].highCritRatio);
     PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);

@@ -87,7 +87,7 @@
  *   SINGLE_BATTLE_TEST("Stun Spore does not affect Grass-types")
  *   {
  *       GIVEN {
- *           ASSUME(gBattleMoves[MOVE_STUN_SPORE].flags & FLAG_POWDER);
+ *           ASSUME(gBattleMoves[MOVE_STUN_SPORE].powderMove);
  *           ASSUME(gSpeciesInfo[SPECIES_ODDISH].types[0] == TYPE_GRASS);
  *           PLAYER(SPECIES_ODDISH); // 1.
  *           OPPONENT(SPECIES_ODDISH); // 2.
@@ -796,6 +796,8 @@ struct MoveContext
     u16 explicitSecondaryEffect:1;
     u16 megaEvolve:1;
     u16 explicitMegaEvolve:1;
+    u16 ultraBurst:1;
+    u16 explicitUltraBurst:1;
     // TODO: u8 zMove:1;
     u16 allowed:1;
     u16 explicitAllowed:1;
@@ -835,7 +837,8 @@ void SendOut(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
 #define ABILITY_POPUP(battler, ...) QueueAbility(__LINE__, battler, (struct AbilityEventContext) { __VA_ARGS__ })
 #define ANIMATION(type, id, ...) QueueAnimation(__LINE__, type, id, (struct AnimationEventContext) { __VA_ARGS__ })
 #define HP_BAR(battler, ...) QueueHP(__LINE__, battler, (struct HPEventContext) { APPEND_TRUE(__VA_ARGS__) })
-#define MESSAGE(pattern) QueueMessage(__LINE__, (const u8 []) _(pattern))
+// Static const is needed to make the modern compiler put the pattern variable in the .rodata section, instead of putting it on stack(which can break the game).
+#define MESSAGE(pattern) do {static const u8 msg[] = _(pattern); QueueMessage(__LINE__, msg);} while (0)
 #define STATUS_ICON(battler, status) QueueStatus(__LINE__, battler, (struct StatusEventContext) { status })
 
 enum QueueGroupType
