@@ -2837,10 +2837,11 @@ static void PrintNotEggInfo(void)
     {
         StringCopy(gStringVar1, &gText_NumberClear01[0]);
     #if P_DEX_FOUR_DIGITS_AMOUNT == TRUE
-        ConvertIntToDecimalStringN(gStringVar2, dexNum, STR_CONV_MODE_LEADING_ZEROS, 4);
-    #else
-        ConvertIntToDecimalStringN(gStringVar2, dexNum, STR_CONV_MODE_LEADING_ZEROS, 3);
+        if (IsNationalPokedexEnabled())
+            ConvertIntToDecimalStringN(gStringVar2, dexNum, STR_CONV_MODE_LEADING_ZEROS, 4);
+        else
     #endif
+            ConvertIntToDecimalStringN(gStringVar2, dexNum, STR_CONV_MODE_LEADING_ZEROS, 3);
         StringAppend(gStringVar1, gStringVar2);
         if (!IsMonShiny(mon))
         {

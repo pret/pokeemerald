@@ -25,7 +25,7 @@
 #define P_SHUCKLE_BERRY_JUICE       TRUE        // In Gen 2, Shuckle had a 1/16 chance of converting Berry that it's holding into Berry Juice. Setting this to TRUE will allow to do this with an Oran Berry, which is the spiritual succesor of the Berry item.
 
 // Pokédex settings
-#define P_DEX_FOUR_DIGITS_AMOUNT    TRUE        // Since Gen 9, Pokédex numbers are four digits long.
+#define P_DEX_FOUR_DIGITS_AMOUNT    TRUE        // Since Gen 9, National Pokédex numbers are four digits long.
 
 // Other settings
 #define P_LEGENDARY_PERFECT_IVS     GEN_LATEST  // Since Gen 6, Legendaries, Mythicals and Ultra Beasts found in the wild or given through gifts have at least 3 perfect IVs.
