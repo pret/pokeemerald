@@ -1431,7 +1431,7 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
         llFrameSize_p = &gRfuLinkStatus->remainLLFrameSizeChild[bm_slot_id];
     frameSize = llsf_struct[gRfuLinkStatus->parentChild].frameSize;
 #ifdef UBFIX
-    if (llFrameSize_p && (subFrameSize > *llFrameSize_p || subFrameSize <= frameSize))
+    if ((llFrameSize_p && subFrameSize > *llFrameSize_p) || subFrameSize <= frameSize)
 #else
     if (subFrameSize > *llFrameSize_p || subFrameSize <= frameSize)
 #endif
