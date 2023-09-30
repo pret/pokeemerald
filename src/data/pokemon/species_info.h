@@ -3375,7 +3375,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_AMORPHOUS, EGG_GROUP_AMORPHOUS},
-        .abilities = {ABILITY_LEVITATE, ABILITY_NEUTRALIZING_GAS, ABILITY_STENCH},
+        #if P_UPDATED_ABILITIES >= GEN_8
+            .abilities = {ABILITY_LEVITATE, ABILITY_NEUTRALIZING_GAS, ABILITY_STENCH},
+        #else
+            .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
+        #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
     },
@@ -3398,7 +3402,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_AMORPHOUS, EGG_GROUP_AMORPHOUS},
-        .abilities = {ABILITY_LEVITATE, ABILITY_NEUTRALIZING_GAS, ABILITY_STENCH},
+        #if P_UPDATED_ABILITIES >= GEN_8
+            .abilities = {ABILITY_LEVITATE, ABILITY_NEUTRALIZING_GAS, ABILITY_STENCH},
+        #else
+            .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
+        #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = TRUE,
     },
@@ -7177,7 +7185,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_GRASS},
-        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_EARLY_BIRD, ABILITY_PICKPOCKET},
+        #if P_UPDATED_ABILITIES >= GEN_9
+            .abilities = {ABILITY_CHLOROPHYLL, ABILITY_WIND_RIDER, ABILITY_PICKPOCKET},
+        #else
+            .abilities = {ABILITY_CHLOROPHYLL, ABILITY_EARLY_BIRD, ABILITY_PICKPOCKET},
+        #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
@@ -9937,7 +9949,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_FIELD},
-        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_DEFIANT},
+        #if P_UPDATED_ABILITIES >= GEN_9
+            .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_COMPETITIVE},
+        #else
+            .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_DEFIANT},
+        #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -9959,7 +9975,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_FIELD},
-        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_DEFIANT},
+        #if P_UPDATED_ABILITIES >= GEN_9
+            .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_COMPETITIVE},
+        #else
+            .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_DEFIANT},
+        #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -9981,7 +10001,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_FIELD},
-        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_DEFIANT},
+        #if P_UPDATED_ABILITIES >= GEN_9
+            .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_COMPETITIVE},
+        #else
+            .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_DEFIANT},
+        #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -11718,7 +11742,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         #else
             .eggGroups = { EGG_GROUP_AMORPHOUS, EGG_GROUP_AMORPHOUS},
         #endif
-        .abilities = {ABILITY_STEADFAST, ABILITY_NONE, ABILITY_JUSTIFIED},
+        #if P_UPDATED_ABILITIES >= GEN_9
+            .abilities = {ABILITY_STEADFAST, ABILITY_SHARPNESS, ABILITY_JUSTIFIED},
+        #else
+            .abilities = {ABILITY_STEADFAST, ABILITY_NONE, ABILITY_JUSTIFIED},
+        #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
     },
