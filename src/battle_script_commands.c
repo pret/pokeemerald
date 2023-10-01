@@ -3773,7 +3773,6 @@ static void Cmd_tryfaintmon(void)
         {
             BattleScriptPop();
             gBattlescriptCurrInstr = cmd->instr;
-            gSideStatuses[GetBattlerSide(battler)] &= ~(SIDE_STATUS_SPIKES_DAMAGED | SIDE_STATUS_TOXIC_SPIKES_DAMAGED | SIDE_STATUS_STEALTH_ROCK_DAMAGED | SIDE_STATUS_STICKY_WEB_DAMAGED);
         }
         else
         {
@@ -6880,7 +6879,7 @@ static void Cmd_switchineffects(void)
             gBattleStruct->storedLunarDance  &= ~(gBitTable[battler]);
         }
     }
-    else if (!(gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SPIKES_DAMAGED)
+    else if (!(gDisableStructs[battler].spikesDone)
         && (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SPIKES)
         && GetBattlerAbility(battler) != ABILITY_MAGIC_GUARD
         && IsBattlerAffectedByHazards(battler, FALSE)
@@ -6891,25 +6890,25 @@ static void Cmd_switchineffects(void)
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
 
-        gSideStatuses[GetBattlerSide(battler)] |= SIDE_STATUS_SPIKES_DAMAGED;
+        gDisableStructs[battler].spikesDone = TRUE;
         SetDmgHazardsBattlescript(battler, B_MSG_PKMNHURTBYSPIKES);
     }
-    else if (!(gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_STEALTH_ROCK_DAMAGED)
+    else if (!(gDisableStructs[battler].stealthRockDone)
         && (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_STEALTH_ROCK)
         && IsBattlerAffectedByHazards(battler, FALSE)
         && GetBattlerAbility(battler) != ABILITY_MAGIC_GUARD)
     {
-        gSideStatuses[GetBattlerSide(battler)] |= SIDE_STATUS_STEALTH_ROCK_DAMAGED;
+        gDisableStructs[battler].stealthRockDone = TRUE;
         gBattleMoveDamage = GetStealthHazardDamage(gBattleMoves[MOVE_STEALTH_ROCK].type, battler);
 
         if (gBattleMoveDamage != 0)
             SetDmgHazardsBattlescript(battler, B_MSG_STEALTHROCKDMG);
     }
-    else if (!(gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_TOXIC_SPIKES_DAMAGED)
+    else if (!(gDisableStructs[battler].toxicSpikesDone)
         && (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_TOXIC_SPIKES)
         && IsBattlerGrounded(battler))
     {
-        gSideStatuses[GetBattlerSide(battler)] |= SIDE_STATUS_TOXIC_SPIKES_DAMAGED;
+        gDisableStructs[battler].toxicSpikesDone = TRUE;
         if (IS_BATTLER_OF_TYPE(battler, TYPE_POISON)) // Absorb the toxic spikes.
         {
             gSideStatuses[GetBattlerSide(battler)] &= ~SIDE_STATUS_TOXIC_SPIKES;
@@ -6940,12 +6939,12 @@ static void Cmd_switchineffects(void)
             }
         }
     }
-    else if (!(gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_STICKY_WEB_DAMAGED)
+    else if (!(gDisableStructs[battler].stickyWebDone)
         && (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_STICKY_WEB)
         && IsBattlerAffectedByHazards(battler, FALSE)
         && IsBattlerGrounded(battler))
     {
-        gSideStatuses[GetBattlerSide(battler)] |= SIDE_STATUS_STICKY_WEB_DAMAGED;
+        gDisableStructs[battler].stickyWebDone = TRUE;
         gBattleScripting.battler = battler;
         SET_STATCHANGER(STAT_SPEED, 1, TRUE);
         BattleScriptPushCursor();
@@ -6984,7 +6983,10 @@ static void Cmd_switchineffects(void)
                 return;
         }
 
-        gSideStatuses[GetBattlerSide(battler)] &= ~(SIDE_STATUS_SPIKES_DAMAGED | SIDE_STATUS_TOXIC_SPIKES_DAMAGED | SIDE_STATUS_STEALTH_ROCK_DAMAGED | SIDE_STATUS_STICKY_WEB_DAMAGED);
+        gDisableStructs[battler].stickyWebDone = FALSE;
+        gDisableStructs[battler].spikesDone = FALSE;
+        gDisableStructs[battler].toxicSpikesDone = FALSE;
+        gDisableStructs[battler].stealthRockDone = FALSE;
 
         for (i = 0; i < gBattlersCount; i++)
         {
