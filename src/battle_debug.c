@@ -857,9 +857,9 @@ static void PutAiInfoText(struct BattleDebugMenu *data)
     {
         if (GetBattlerSide(i) == B_SIDE_PLAYER && IsBattlerAlive(i))
         {
-            u16 ability = AI_GetAbility(i);
-            u16 holdEffect = AI_GetHoldEffect(i);
-            u16 item = gBattleMons[i].item;
+            u16 ability = AI_DATA->abilities[i];
+            u16 holdEffect = AI_DATA->holdEffects[i];
+            u16 item = AI_DATA->items[i];
             u8 x = (i == B_POSITION_PLAYER_LEFT) ? 83 + (i) * 75 : 83 + (i-1) * 75;
             AddTextPrinterParameterized(data->aiMovesWindowId, 0, gAbilityNames[ability], x, 0, 0, NULL);
             AddTextPrinterParameterized(data->aiMovesWindowId, 0, ItemId_GetName(item), x, 15, 0, NULL);
