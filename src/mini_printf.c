@@ -97,7 +97,7 @@ static s32 _putsAscii(char *s, s32 len, void *buf)
 
     if (!buf) 
         return len;
-    
+
     b = buf;
     p0 = b->buffer;
 
@@ -120,7 +120,7 @@ static s32 _putsEncoded(char *s, s32 len, void *buf)
 
     if (!buf) 
         return len;
-    
+
     b = buf;
     p0 = b->buffer;
 

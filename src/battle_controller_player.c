@@ -329,7 +329,7 @@ static void HandleInputChooseAction(void)
     }
 }
 
-static void UnusedEndBounceEffect(void)
+static void UNUSED UnusedEndBounceEffect(void)
 {
     EndBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX);
     EndBounceEffect(gActiveBattler, BOUNCE_MON);
@@ -614,7 +614,7 @@ static void HandleInputChooseMove(void)
     }
 }
 
-static u32 HandleMoveInputUnused(void)
+static u32 UNUSED HandleMoveInputUnused(void)
 {
     u32 var = 0;
 
