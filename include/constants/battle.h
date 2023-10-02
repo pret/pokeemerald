@@ -225,15 +225,13 @@
 #define SIDE_STATUS_SAFEGUARD               (1 << 5)
 #define SIDE_STATUS_FUTUREATTACK            (1 << 6)
 #define SIDE_STATUS_MIST                    (1 << 8)
-#define SIDE_STATUS_SPIKES_DAMAGED          (1 << 9)
+// (1 << 9) previously was SIDE_STATUS_SPIKES_DAMAGED
 #define SIDE_STATUS_TAILWIND                (1 << 10)
 #define SIDE_STATUS_AURORA_VEIL             (1 << 11)
 #define SIDE_STATUS_LUCKY_CHANT             (1 << 12)
 #define SIDE_STATUS_TOXIC_SPIKES            (1 << 13)
 #define SIDE_STATUS_STEALTH_ROCK            (1 << 14)
-#define SIDE_STATUS_STEALTH_ROCK_DAMAGED    (1 << 15)
-#define SIDE_STATUS_TOXIC_SPIKES_DAMAGED    (1 << 16)
-#define SIDE_STATUS_STICKY_WEB_DAMAGED      (1 << 17)
+// Missing flags previously were SIDE_STATUS_TOXIC_SPIKES_DAMAGED, SIDE_STATUS_STEALTH_ROCK_DAMAGED, SIDE_STATUS_STICKY_WEB_DAMAGED
 #define SIDE_STATUS_QUICK_GUARD             (1 << 18)
 #define SIDE_STATUS_WIDE_GUARD              (1 << 19)
 #define SIDE_STATUS_CRAFTY_SHIELD           (1 << 20)

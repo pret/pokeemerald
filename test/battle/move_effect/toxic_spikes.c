@@ -208,3 +208,35 @@ SINGLE_BATTLE_TEST("Toxic Spikes are removed by Poison-types affected by Magnet 
         NOT STATUS_ICON(opponent, poison: TRUE);
     }
 }
+
+SINGLE_BATTLE_TEST("Toxic Spikes inflicts poison on switch in after Primal Reversed mon fainted") // Oddly specific, but encountered during testing
+{
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_MEMENTO].effect == EFFECT_MEMENTO); // Faints the user.
+        PLAYER(SPECIES_WOBBUFFET) {Speed(5); }
+        PLAYER(SPECIES_GROUDON) { Item(ITEM_RED_ORB); Speed(1); }
+        PLAYER(SPECIES_WYNAUT) {Speed(5); }
+        OPPONENT(SPECIES_WOBBUFFET) {Speed(15); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_TOXIC_SPIKES); }
+        TURN { SWITCH(player, 1); }
+        TURN { MOVE(player, MOVE_MEMENTO); SEND_OUT(player, 2); }
+    } SCENE {
+        MESSAGE("Foe Wobbuffet used Toxic Spikes!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC_SPIKES, opponent);
+        MESSAGE("Poison Spikes were scattered all around your team's feet!");
+        // Switch in
+        MESSAGE("Go! Groudon!");
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, player);
+        STATUS_ICON(player, poison: TRUE);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_PRIMAL_REVERSION, player);
+        MESSAGE("Groudon's Primal Reversion! It reverted to its primal form!");
+        // Memento
+        MESSAGE("Groudon used Memento!");
+        MESSAGE("Groudon fainted!");
+        // 2nd switch-in
+        MESSAGE("Go! Wynaut!");
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, player);
+        STATUS_ICON(player, poison: TRUE);
+    }
+}

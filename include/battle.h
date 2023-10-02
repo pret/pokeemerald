@@ -99,6 +99,10 @@ struct DisableStruct
     u8 tarShot:1;
     u8 octolock:1;
     u8 cudChew:1;
+    u8 spikesDone:1;
+    u8 toxicSpikesDone:1;
+    u8 stickyWebDone:1;
+    u8 stealthRockDone:1;
 };
 
 struct ProtectStruct
