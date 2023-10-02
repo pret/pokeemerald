@@ -134,7 +134,7 @@ SINGLE_BATTLE_TEST("Multi hit Moves hit five times 50 Percent of the time with L
     }
 }
 
-SINGLE_BATTLE_TEST("Scale Shot decreses defense and increases speed after final hit")
+SINGLE_BATTLE_TEST("Scale Shot decreases defense and increases speed after final hit")
 {
     GIVEN {
         ASSUME(gBattleMoves[MOVE_SCALE_SHOT].effect == EFFECT_MULTI_HIT);
@@ -156,7 +156,7 @@ SINGLE_BATTLE_TEST("Scale Shot decreses defense and increases speed after final 
     }
 }
 
-SINGLE_BATTLE_TEST("Endure does not prevent multiply hits and stat changes accure at the end of the turn")
+SINGLE_BATTLE_TEST("Endure does not prevent multiple hits and stat changes occur at the end of the turn")
 {
     GIVEN {
         ASSUME(gBattleMoves[MOVE_SCALE_SHOT].effect == EFFECT_MULTI_HIT);
