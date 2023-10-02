@@ -3864,7 +3864,7 @@ static void Blender_AddTextPrinter(u8 windowId, const u8 *string, u8 x, u8 y, s3
     case 0:
     case 3:
 #ifdef UBFIX
-    //default: TodoFix
+    default:
 #endif
         txtColor[0] = TEXT_COLOR_WHITE;
         txtColor[1] = TEXT_COLOR_DARK_GRAY;

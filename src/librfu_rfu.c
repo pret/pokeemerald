@@ -1401,8 +1401,7 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
     u8 bm_slot_id, sendSlotFlag;
     u8 frameSize;
 #ifdef UBFIX
-    u8 *llFrameSize_p;
-    //u8 *llFrameSize_p = NULL; TodoFix
+    u8 *llFrameSize_p = NULL;
 #else
     u8 *llFrameSize_p;
 #endif
@@ -1432,8 +1431,7 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
         llFrameSize_p = &gRfuLinkStatus->remainLLFrameSizeChild[bm_slot_id];
     frameSize = llsf_struct[gRfuLinkStatus->parentChild].frameSize;
 #ifdef UBFIX
-    if (subFrameSize > *llFrameSize_p || subFrameSize <= frameSize)
-    //if ((llFrameSize_p && subFrameSize > *llFrameSize_p) || subFrameSize <= frameSize) TodoFix
+    if ((llFrameSize_p && subFrameSize > *llFrameSize_p) || subFrameSize <= frameSize)
 #else
     if (subFrameSize > *llFrameSize_p || subFrameSize <= frameSize)
 #endif
@@ -1475,7 +1473,7 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
         }
         gRfuLinkStatus->sendSlotNIFlag |= bmSendSlot;
 #ifdef UBFIX
-        //if (llFrameSize_p) TodoFix
+        if (llFrameSize_p)
 #endif
             *llFrameSize_p -= subFrameSize;
         slotStatus_NI->send.state = SLOT_STATE_SEND_START;
@@ -1487,7 +1485,7 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
         slotStatus_UNI->send.src = src;
         slotStatus_UNI->send.payloadSize = subFrameSize - frameSize;
 #ifdef UBFIX
-        //if (llFrameSize_p) TodoFix
+        if (llFrameSize_p)
 #endif
             *llFrameSize_p -= subFrameSize;
         slotStatus_UNI->send.state = SLOT_STATE_SEND_UNI;

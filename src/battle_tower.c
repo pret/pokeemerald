@@ -1843,11 +1843,8 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
     {
     // By mistake Battle Tower's Level 50 challenge number is used to determine the IVs for Battle Factory.
     #ifdef BUGFIX
-        //TodoFix
-        u8 UNUSED lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+        u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
         u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-        //u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-        //u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
         u8 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
     #else
         u8 UNUSED lvlMode = gSaveBlock2Ptr->frontier.lvlMode;

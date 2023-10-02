@@ -624,7 +624,7 @@ static void CreateApprenticeMenu(u8 menu)
         left = 0;
         top = 0;
 #ifdef UBFIX
-        //return; TodoFix
+        return;
 #endif
         break;
     }

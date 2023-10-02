@@ -70,7 +70,7 @@ void AnimTask_BlendBattleAnimPalExclude(u8 taskId)
         // fall through
     case ANIM_ATTACKER:
 #ifdef UBFIX
-    //default: TodoFix
+    default:
 #endif
         animBattlers[0] = gBattleAnimAttacker;
         break;
