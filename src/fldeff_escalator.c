@@ -14,43 +14,43 @@ static void Task_DrawEscalator(u8 taskId);
 #define ESCALATOR_STAGES     3
 #define LAST_ESCALATOR_STAGE (ESCALATOR_STAGES - 1)
 
-static const u16 sEscalatorMetatiles_1F_0[ESCALATOR_STAGES] = {
+static const s16 sEscalatorMetatiles_1F_0[ESCALATOR_STAGES] = {
     METATILE_PokemonCenter_Escalator1F_Tile0_Frame2,
     METATILE_PokemonCenter_Escalator1F_Tile0_Frame1,
     METATILE_PokemonCenter_Escalator1F_Tile0_Frame0
 };
 
-static const u16 sEscalatorMetatiles_1F_1[ESCALATOR_STAGES] = {
+static const s16 sEscalatorMetatiles_1F_1[ESCALATOR_STAGES] = {
     METATILE_PokemonCenter_Escalator1F_Tile1_Frame2,
     METATILE_PokemonCenter_Escalator1F_Tile1_Frame1,
     METATILE_PokemonCenter_Escalator1F_Tile1_Frame0
 };
 
-static const u16 sEscalatorMetatiles_1F_2[ESCALATOR_STAGES] = {
+static const s16 sEscalatorMetatiles_1F_2[ESCALATOR_STAGES] = {
     METATILE_PokemonCenter_Escalator1F_Tile2_Frame2,
     METATILE_PokemonCenter_Escalator1F_Tile2_Frame1,
     METATILE_PokemonCenter_Escalator1F_Tile2_Frame0
 };
 
-static const u16 sEscalatorMetatiles_1F_3[ESCALATOR_STAGES] = {
+static const s16 sEscalatorMetatiles_1F_3[ESCALATOR_STAGES] = {
     METATILE_PokemonCenter_Escalator1F_Tile3_Frame2,
     METATILE_PokemonCenter_Escalator1F_Tile3_Frame1,
     METATILE_PokemonCenter_Escalator1F_Tile3_Frame0
 };
 
-static const u16 sEscalatorMetatiles_2F_0[ESCALATOR_STAGES] = {
+static const s16 sEscalatorMetatiles_2F_0[ESCALATOR_STAGES] = {
     METATILE_PokemonCenter_Escalator2F_Tile0_Frame0,
     METATILE_PokemonCenter_Escalator2F_Tile0_Frame1,
     METATILE_PokemonCenter_Escalator2F_Tile0_Frame2
 };
 
-static const u16 sEscalatorMetatiles_2F_1[ESCALATOR_STAGES] = {
+static const s16 sEscalatorMetatiles_2F_1[ESCALATOR_STAGES] = {
     METATILE_PokemonCenter_Escalator2F_Tile1_Frame0,
     METATILE_PokemonCenter_Escalator2F_Tile1_Frame1,
     METATILE_PokemonCenter_Escalator2F_Tile1_Frame2
 };
 
-static const u16 sEscalatorMetatiles_2F_2[ESCALATOR_STAGES] = {
+static const s16 sEscalatorMetatiles_2F_2[ESCALATOR_STAGES] = {
     METATILE_PokemonCenter_Escalator2F_Tile2_Frame0,
     METATILE_PokemonCenter_Escalator2F_Tile2_Frame1,
     METATILE_PokemonCenter_Escalator2F_Tile2_Frame2

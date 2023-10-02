@@ -778,7 +778,7 @@ static void SpriteCB_Egg_Shake3(struct Sprite *sprite)
     {
         if (++sprite->sTimer > 38)
         {
-            u16 species;
+            u16 UNUSED species;
             sprite->callback = SpriteCB_Egg_WaitHatch;
             sprite->sTimer = 0;
             species = GetMonData(&gPlayerParty[sEggHatchData->eggPartyId], MON_DATA_SPECIES);

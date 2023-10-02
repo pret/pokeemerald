@@ -897,7 +897,7 @@ static void ReloadMoveNames(u32 battler)
     MoveSelectionDisplayMoveType(battler);
 }
 
-static u32 HandleMoveInputUnused(u32 battler)
+static u32 UNUSED HandleMoveInputUnused(u32 battler)
 {
     u32 var = 0;
 

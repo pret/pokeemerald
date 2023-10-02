@@ -740,8 +740,7 @@ void SanitizeMauvilleOldManForRuby(union OldMan * oldMan)
     }
 }
 
-// Unused
-static void SetMauvilleOldManLanguage(union OldMan * oldMan, u32 language1, u32 language2, u32 language3)
+static void UNUSED SetMauvilleOldManLanguage(union OldMan * oldMan, u32 language1, u32 language2, u32 language3)
 {
     s32 i;
 

@@ -69,6 +69,9 @@ void AnimTask_BlendBattleAnimPalExclude(u8 taskId)
         selectedPalettes = 0;
         // fall through
     case ANIM_ATTACKER:
+#ifdef UBFIX
+    default:
+#endif
         animBattlers[0] = gBattleAnimAttacker;
         break;
     case 3:
@@ -807,7 +810,7 @@ void AnimTask_SetAllNonAttackersInvisiblity(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void StartMonScrollingBgMask(u8 taskId, int unused, u16 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u32 *palette)
+void StartMonScrollingBgMask(u8 taskId, int UNUSED unused, u16 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u32 *palette)
 {
     u16 species;
     u8 spriteId, spriteId2;

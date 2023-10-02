@@ -269,8 +269,7 @@ static const struct SpriteTemplate sFlashingCircleImpactSpriteTemplate =
     .callback = AnimFlashingCircleImpact,
 };
 
-// Unused
-static u8 Task_FlashingCircleImpacts(u8 battlerId, bool8 red)
+static u8 UNUSED Task_FlashingCircleImpacts(u8 battlerId, bool8 red)
 {
     u8 battlerSpriteId = gBattlerSpriteIds[battlerId];
     u8 taskId = CreateTask(Task_UpdateFlashingCircleImpacts, 10);

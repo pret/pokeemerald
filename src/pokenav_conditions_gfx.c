@@ -548,7 +548,7 @@ static u32 LoopedTask_CloseMonMarkingsWindow(s32 state)
     return LT_FINISH;
 }
 
-static u8 *UnusedPrintNumberString(u8 *dst, u16 num)
+static u8 UNUSED *UnusedPrintNumberString(u8 *dst, u16 num)
 {
     u8 *txtPtr = ConvertIntToDecimalStringN(dst, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
     txtPtr = StringCopy(txtPtr, gText_Number2);
