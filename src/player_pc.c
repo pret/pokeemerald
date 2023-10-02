@@ -222,10 +222,10 @@ static const struct MenuAction sItemStorage_MenuActions[] =
     [MENU_EXIT]     = { gText_Cancel,       {ItemStorage_Exit} }
 };
 
-static const struct ItemSlot sNewGamePCItems[] =
+static const u16 sNewGamePCItems[][2] =
 {
-    { ITEM_POTION, 1 },
-    { ITEM_NONE, 0 }
+    [ITEM_POTION, 1],
+    [ITEM_NONE, 0]
 };
 
 const struct MenuAction gMailboxMailOptions[] =
