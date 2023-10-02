@@ -3102,7 +3102,7 @@ static void UpdatePokedexForReceivedMon(u8 partyIdx)
 // Functionally nop after commented code
 static void TryEnableNationalDexFromLinkPartner(void)
 {
-    u8 mpId = GetMultiplayerId();
+    u8 UNUSED mpId = GetMultiplayerId();
     // Originally in Ruby but commented out
     /*if (gLinkPlayers[mpId ^ 1].lp_field_2 == 0x8000)
         EnableNationalPokedex();*/

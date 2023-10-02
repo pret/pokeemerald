@@ -936,8 +936,7 @@ void BtlController_EmitGetMonData(u32 battler, u32 bufferId, u8 requestId, u8 mo
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
-// Unused
-static void BtlController_EmitGetRawMonData(u32 battler, u32 bufferId, u8 monId, u8 bytes)
+static void UNUSED BtlController_EmitGetRawMonData(u32 battler, u32 bufferId, u8 monId, u8 bytes)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_GETRAWMONDATA;
     gBattleResources->transferBuffer[1] = monId;
@@ -958,8 +957,7 @@ void BtlController_EmitSetMonData(u32 battler, u32 bufferId, u8 requestId, u8 mo
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 3 + bytes);
 }
 
-// Unused
-static void BtlController_EmitSetRawMonData(u32 battler, u32 bufferId, u8 monId, u8 bytes, void *data)
+static void UNUSED BtlController_EmitSetRawMonData(u32 battler, u32 bufferId, u8 monId, u8 bytes, void *data)
 {
     s32 i;
 
@@ -1032,8 +1030,7 @@ void BtlController_EmitFaintAnimation(u32 battler, u32 bufferId)
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
-// Unused
-static void BtlController_EmitPaletteFade(u32 battler, u32 bufferId)
+static void UNUSED BtlController_EmitPaletteFade(u32 battler, u32 bufferId)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_PALETTEFADE;
     gBattleResources->transferBuffer[1] = CONTROLLER_PALETTEFADE;
@@ -1042,8 +1039,7 @@ static void BtlController_EmitPaletteFade(u32 battler, u32 bufferId)
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
-// Unused
-static void BtlController_EmitSuccessBallThrowAnim(u32 battler, u32 bufferId)
+static void UNUSED BtlController_EmitSuccessBallThrowAnim(u32 battler, u32 bufferId)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_SUCCESSBALLTHROWANIM;
     gBattleResources->transferBuffer[1] = CONTROLLER_SUCCESSBALLTHROWANIM;
@@ -1059,8 +1055,7 @@ void BtlController_EmitBallThrowAnim(u32 battler, u32 bufferId, u8 caseId)
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 2);
 }
 
-// Unused
-static void BtlController_EmitPause(u32 battler, u32 bufferId, u8 toWait, void *data)
+static void UNUSED BtlController_EmitPause(u32 battler, u32 bufferId, u8 toWait, void *data)
 {
     s32 i;
 
@@ -1220,8 +1215,7 @@ void BtlController_EmitChoosePokemon(u32 battler, u32 bufferId, u8 caseId, u8 sl
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 8);  // Only 7 bytes were written.
 }
 
-// Unused
-static void BtlController_EmitCmd23(u32 battler, u32 bufferId)
+static void UNUSED BtlController_EmitCmd23(u32 battler, u32 bufferId)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_23;
     gBattleResources->transferBuffer[1] = CONTROLLER_23;
@@ -1276,8 +1270,7 @@ void BtlController_EmitStatusAnimation(u32 battler, u32 bufferId, bool8 status2,
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 6);
 }
 
-// Unused
-static void BtlController_EmitStatusXor(u32 battler, u32 bufferId, u8 b)
+static void UNUSED BtlController_EmitStatusXor(u32 battler, u32 bufferId, u8 b)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_STATUSXOR;
     gBattleResources->transferBuffer[1] = b;
@@ -1297,8 +1290,7 @@ void BtlController_EmitDataTransfer(u32 battler, u32 bufferId, u16 size, void *d
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, size + 4);
 }
 
-// Unused
-static void BtlController_EmitDMA3Transfer(u32 battler, u32 bufferId, void *dst, u16 size, void *data)
+static void UNUSED BtlController_EmitDMA3Transfer(u32 battler, u32 bufferId, void *dst, u16 size, void *data)
 {
     s32 i;
 
@@ -1314,8 +1306,7 @@ static void BtlController_EmitDMA3Transfer(u32 battler, u32 bufferId, void *dst,
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, size + 7);
 }
 
-// Unused
-static void BtlController_EmitPlayBGM(u32 battler, u32 bufferId, u16 songId, void *data)
+static void UNUSED BtlController_EmitPlayBGM(u32 battler, u32 bufferId, u16 songId, void *data)
 {
     s32 i;
 
@@ -1330,8 +1321,7 @@ static void BtlController_EmitPlayBGM(u32 battler, u32 bufferId, u16 songId, voi
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, songId + 3);
 }
 
-// Unused
-static void BtlController_EmitCmd32(u32 battler, u32 bufferId, u16 size, void *data)
+static void UNUSED BtlController_EmitCmd32(u32 battler, u32 bufferId, u16 size, void *data)
 {
     s32 i;
 
@@ -1383,8 +1373,7 @@ void BtlController_EmitOneReturnValue_Duplicate(u32 battler, u32 bufferId, u16 r
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
-// Unused
-static void BtlController_EmitClearUnkVar(u32 battler, u32 bufferId)
+static void UNUSED BtlController_EmitClearUnkVar(u32 battler, u32 bufferId)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_CLEARUNKVAR;
     gBattleResources->transferBuffer[1] = CONTROLLER_CLEARUNKVAR;
@@ -1393,16 +1382,14 @@ static void BtlController_EmitClearUnkVar(u32 battler, u32 bufferId)
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
-// Unused
-static void BtlController_EmitSetUnkVar(u32 battler, u32 bufferId, u8 b)
+static void UNUSED BtlController_EmitSetUnkVar(u32 battler, u32 bufferId, u8 b)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_SETUNKVAR;
     gBattleResources->transferBuffer[1] = b;
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 2);
 }
 
-// Unused
-static void BtlController_EmitClearUnkFlag(u32 battler, u32 bufferId)
+static void UNUSED BtlController_EmitClearUnkFlag(u32 battler, u32 bufferId)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_CLEARUNKFLAG;
     gBattleResources->transferBuffer[1] = CONTROLLER_CLEARUNKFLAG;
@@ -1411,8 +1398,7 @@ static void BtlController_EmitClearUnkFlag(u32 battler, u32 bufferId)
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
-// Unused
-static void BtlController_EmitToggleUnkFlag(u32 battler, u32 bufferId)
+static void UNUSED BtlController_EmitToggleUnkFlag(u32 battler, u32 bufferId)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_TOGGLEUNKFLAG;
     gBattleResources->transferBuffer[1] = CONTROLLER_TOGGLEUNKFLAG;

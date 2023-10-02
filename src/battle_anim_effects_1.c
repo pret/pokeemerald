@@ -4019,7 +4019,7 @@ static void AnimConstrictBinding(struct Sprite *sprite)
 
 static void AnimConstrictBinding_Step1(struct Sprite *sprite)
 {
-    u8 spriteId;
+    u8 UNUSED spriteId;
 
     if ((u16)gBattleAnimArgs[7] == 0xFFFF)
     {
@@ -4032,7 +4032,7 @@ static void AnimConstrictBinding_Step1(struct Sprite *sprite)
 
 static void AnimConstrictBinding_Step2(struct Sprite *sprite)
 {
-    u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
+    u8 UNUSED spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
     if (!sprite->data[2])
         sprite->data[0] += 11;
     else
@@ -5152,7 +5152,7 @@ static void AnimSlice_Step(struct Sprite *sprite)
     }
 }
 
-static void UnusedFlickerAnim(struct Sprite *sprite)
+static void UNUSED UnusedFlickerAnim(struct Sprite *sprite)
 {
     if (sprite->data[2] > 1)
     {
@@ -6002,7 +6002,7 @@ static void AnimFalseSwipeSlice(struct Sprite *sprite)
 
 static void AnimFalseSwipePositionedSlice(struct Sprite *sprite)
 {
-    sprite->x = sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) + 0xFFD0 + gBattleAnimArgs[0];
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) - 48 + gBattleAnimArgs[0];
     sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
     StartSpriteAnim(sprite, 1);
     sprite->data[0] = 0;
@@ -6185,8 +6185,7 @@ void AnimTask_Conversion2AlphaBlend(u8 taskId)
     }
 }
 
-// Unused
-static void AnimTask_HideBattlersHealthbox(u8 taskId)
+static void UNUSED AnimTask_HideBattlersHealthbox(u8 taskId)
 {
     u8 i;
     for (i = 0; i < gBattlersCount; i++)
@@ -6201,8 +6200,7 @@ static void AnimTask_HideBattlersHealthbox(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-// Unused
-static void AnimTask_ShowBattlersHealthbox(u8 taskId)
+static void UNUSED AnimTask_ShowBattlersHealthbox(u8 taskId)
 {
     u8 i;
     for (i = 0; i < gBattlersCount; i++)

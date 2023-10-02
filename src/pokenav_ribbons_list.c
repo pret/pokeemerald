@@ -227,8 +227,7 @@ static s32 GetRibbonsMonListCount(void)
     return list->monList->listCount;
 }
 
-//unused
-static s32 GetMonRibbonSelectedMonData(void)
+static s32 UNUSED GetMonRibbonSelectedMonData(void)
 {
     struct Pokenav_RibbonsMonList * list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
     s32 idx = PokenavList_GetSelectedIndex();
@@ -343,8 +342,7 @@ static void InsertMonListItem(struct Pokenav_RibbonsMonList *list, struct Pokena
     list->monList->listCount++;
 }
 
-// Unused
-static bool32 PlayerHasRibbonsMon(void)
+static bool32 UNUSED PlayerHasRibbonsMon(void)
 {
     s32 i, j;
 

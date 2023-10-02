@@ -445,8 +445,7 @@ void BattleArena_DeductSkillPoints(u8 battler, u16 stringId)
     }
 }
 
-// Unused
-static void UpdateHPAtStart(u8 battler)
+static void UNUSED UpdateHPAtStart(u8 battler)
 {
     u16 *hpAtStart = gBattleStruct->arenaStartHp;
 

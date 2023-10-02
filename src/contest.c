@@ -3245,8 +3245,7 @@ static void DrawMoveEffectSymbol(u16 move, u8 contestant)
     }
 }
 
-// Unused
-static void DrawMoveEffectSymbols(void)
+static void UNUSED DrawMoveEffectSymbols(void)
 {
     s32 i;
 
@@ -4215,8 +4214,7 @@ static void SpriteCB_EndBlinkContestantBox(struct Sprite *sprite)
     ResetBlendForContestantBoxBlink();
 }
 
-// Unused.
-static void ContestDebugTogglePointTotal(void)
+static void UNUSED ContestDebugTogglePointTotal(void)
 {
     if(eContestDebugMode == CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL)
         eContestDebugMode = CONTEST_DEBUG_MODE_OFF;
@@ -4870,15 +4868,13 @@ static void Task_ShowAndUpdateApplauseMeter(u8 taskId)
     }
 }
 
-// Unused.
-static void HideApplauseMeterNoAnim(void)
+static void UNUSED HideApplauseMeterNoAnim(void)
 {
     gSprites[eContest.applauseMeterSpriteId].x2 = 0;
     gSprites[eContest.applauseMeterSpriteId].invisible = FALSE;
 }
 
-// Unused.
-static void ShowApplauseMeterNoAnim(void)
+static void UNUSED ShowApplauseMeterNoAnim(void)
 {
     gSprites[eContest.applauseMeterSpriteId].invisible = TRUE;
 }

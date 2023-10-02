@@ -4149,7 +4149,7 @@ struct UnusedPacket
 
 // Data packet that's never sent
 // No function to read it either
-static void SendPacket_Unused(u32 data)
+static void UNUSED SendPacket_Unused(u32 data)
 {
     struct UnusedPacket packet;
     packet.id = PACKET_UNUSED;

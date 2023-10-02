@@ -1363,13 +1363,13 @@ static const u8 sBackAnimNatureModTable[NUM_NATURES] =
 static const union AffineAnimCmd sMonAffineAnim_0[] =
 {
     AFFINEANIMCMD_FRAME(256, 256, 0, 0),
-    AFFINEANIMCMDTYPE_END
+    {AFFINEANIMCMDTYPE_END}
 };
 
 static const union AffineAnimCmd sMonAffineAnim_1[] =
 {
     AFFINEANIMCMD_FRAME(-256, 256, 0, 0),
-    AFFINEANIMCMDTYPE_END
+    {AFFINEANIMCMDTYPE_END}
 };
 
 static const union AffineAnimCmd *const sMonAffineAnims[] =
