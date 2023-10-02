@@ -153,6 +153,7 @@ SUPER_RE    = A0
 'ä'         = F4
 'ö'         = F5
 'ü'         = F6
+EMOJI_DIZZYEGG = F7
 TALL_PLUS   = FC 0C FB
 '$'         = FF
 

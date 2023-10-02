@@ -75,5 +75,6 @@
 
 // General settings
 #define EXPANSION_INTRO   TRUE    // If TRUE, a custom RHH intro will play after the vanilla copyright screen.
+#define POKEDEX_PLUS_HGSS FALSE   // If TRUE, enables the custom HGSS style Pokedex.
 
 #endif // GUARD_CONFIG_H
