@@ -5096,9 +5096,15 @@ static void Cmd_playstatchangeanimation(void)
 
     // Handle Contrary and Simple
     if (ability == ABILITY_CONTRARY)
+    {
         flags ^= STAT_CHANGE_NEGATIVE;
+        RecordAbilityBattle(battler, ability);
+    }
     else if (ability == ABILITY_SIMPLE)
+    {
         flags |= STAT_CHANGE_BY_TWO;
+        RecordAbilityBattle(battler, ability);
+    }
 
     if (flags & STAT_CHANGE_NEGATIVE) // goes down
     {
@@ -11422,6 +11428,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
     {
         statValue ^= STAT_BUFF_NEGATIVE;
         gBattleScripting.statChanger ^= STAT_BUFF_NEGATIVE;
+        RecordAbilityBattle(battler, battlerAbility);
         if (flags & STAT_CHANGE_UPDATE_MOVE_EFFECT)
         {
             flags &= ~STAT_CHANGE_UPDATE_MOVE_EFFECT;
