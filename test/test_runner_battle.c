@@ -435,7 +435,7 @@ u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights)
         if (turn && turn->criticalHit)
             return turn->criticalHit - 1;
         else
-            return FALSE;
+            return weights[FALSE] > 0 ? FALSE : TRUE;
 
     case RNG_SECONDARY_EFFECT:
         ASSUME(n == 2);
