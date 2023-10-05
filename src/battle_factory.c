@@ -745,11 +745,11 @@ u8 GetFactoryMonFixedIV(u8 challengeNum, bool8 isLastBattle)
 // or the "elevated" rentals from round 8 (challengeNum+1==8)
 // This happens to land on a number higher than 31, which is interpreted as "random IVs"
 #ifdef BUGFIX
-    if (challengeNum > 7)
+    if (challengeNum >= ARRAY_COUNT(sFixedIVTable))
 #else
-    if (challengeNum > 8)
+    if (challengeNum > ARRAY_COUNT(sFixedIVTable))
 #endif
-        ivSet = 7;
+        ivSet = ARRAY_COUNT(sFixedIVTable) - 1;
     else
         ivSet = challengeNum;
 
