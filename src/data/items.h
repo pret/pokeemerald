@@ -15,7 +15,7 @@
 #endif
 
 #if I_TYPE_BOOST_POWER >= GEN_4 // For non Pokémon-specific type-boosting held items.
-    #define TYPE_BOOST_PARAM 20 
+    #define TYPE_BOOST_PARAM 20
 #else
     #define TYPE_BOOST_PARAM 10
 #endif
