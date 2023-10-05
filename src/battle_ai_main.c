@@ -2461,9 +2461,9 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             break;
         case EFFECT_SOAK:
             if (PartnerMoveIsSameAsAttacker(BATTLE_PARTNER(battlerAtk), battlerDef, move, aiData->partnerMove)
-              || (gBattleMons[battlerDef].type1 == TYPE_WATER
-              && gBattleMons[battlerDef].type2 == TYPE_WATER
-              && gBattleMons[battlerDef].type3 == TYPE_MYSTERY))
+              || (GetBattlerType(battlerDef, 0) == TYPE_WATER
+              && GetBattlerType(battlerDef, 1) == TYPE_WATER
+              && GetBattlerType(battlerDef, 2) == TYPE_MYSTERY))
                 ADJUST_SCORE(-10);    // target is already water-only
             break;
         case EFFECT_THIRD_TYPE:
@@ -2613,9 +2613,9 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         case EFFECT_SYNCHRONOISE:
             //Check holding ring target or is of same type
             if (aiData->holdEffects[battlerDef] == HOLD_EFFECT_RING_TARGET
-              || IS_BATTLER_OF_TYPE(battlerDef, gBattleMons[battlerAtk].type1)
-              || IS_BATTLER_OF_TYPE(battlerDef, gBattleMons[battlerAtk].type2)
-              || IS_BATTLER_OF_TYPE(battlerDef, gBattleMons[battlerAtk].type3))
+              || IS_BATTLER_OF_TYPE(battlerDef, GetBattlerType(battlerAtk, 0))
+              || IS_BATTLER_OF_TYPE(battlerDef, GetBattlerType(battlerAtk, 1))
+              || IS_BATTLER_OF_TYPE(battlerDef, GetBattlerType(battlerAtk, 2)))
                 break;
             else
                 ADJUST_SCORE(-10);
@@ -3045,9 +3045,9 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 break;
             case EFFECT_SOAK:
                 if (atkPartnerAbility == ABILITY_WONDER_GUARD
-                 && (gBattleMons[battlerAtkPartner].type1 != TYPE_WATER
-                 || gBattleMons[battlerAtkPartner].type2 != TYPE_WATER
-                 || gBattleMons[battlerAtkPartner].type3 != TYPE_WATER))
+                 && (GetBattlerType(battlerAtkPartner, 0) != TYPE_WATER
+                 || GetBattlerType(battlerAtkPartner, 1) != TYPE_WATER
+                 || GetBattlerType(battlerAtkPartner, 2) != TYPE_WATER))
                 {
                     RETURN_SCORE_PLUS(1);
                 }
