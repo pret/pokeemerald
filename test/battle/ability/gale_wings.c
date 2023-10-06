@@ -16,9 +16,11 @@ SINGLE_BATTLE_TEST("Gale Wings only grants priority at full HP")
     } SCENE {
         if (hp == 100) {
             MESSAGE("Talonflame used Aerial Ace!");
+            MESSAGE("Foe Wobbuffet used Celebrate!");
         }
         else {
             MESSAGE("Foe Wobbuffet used Celebrate!");
+            MESSAGE("Talonflame used Aerial Ace!");
         }
     }
 }
@@ -39,9 +41,13 @@ SINGLE_BATTLE_TEST("Gale Wings only grants priority to Flying-type moves")
     } SCENE {
         if (move == MOVE_AERIAL_ACE) {
             MESSAGE("Talonflame used Aerial Ace!");
+            MESSAGE("Foe Wobbuffet used Celebrate!");
         }
         else {
             MESSAGE("Foe Wobbuffet used Celebrate!");
+            MESSAGE("Talonflame used Flare Blitz!");
         }
     }
 }
+
+TO_DO_BATTLE_TEST("Gale Wings doesn't increase priority of Flying-type Hidden Power, Natural Gift, Judgment or Tera Blast");
