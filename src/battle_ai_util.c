@@ -383,41 +383,6 @@ static const u16 sIgnoredPowerfulMoveEffects[] =
     IGNORED_MOVES_END
 };
 
-static const u16 sIgnoreMoldBreakerMoves[] =
-{
-    MOVE_MOONGEIST_BEAM,
-    MOVE_SUNSTEEL_STRIKE,
-    MOVE_PHOTON_GEYSER,
-    MOVE_LIGHT_THAT_BURNS_THE_SKY,
-    MOVE_MENACING_MOONRAZE_MAELSTROM,
-    MOVE_SEARING_SUNRAZE_SMASH,
-};
-
-static const u16 sRechargeMoves[] =
-{
-    MOVE_HYPER_BEAM,
-    MOVE_BLAST_BURN,
-    MOVE_HYDRO_CANNON,
-    MOVE_FRENZY_PLANT,
-    MOVE_GIGA_IMPACT,
-    MOVE_ROCK_WRECKER,
-    MOVE_ROAR_OF_TIME,
-    MOVE_PRISMATIC_LASER,
-    MOVE_METEOR_ASSAULT,
-    MOVE_ETERNABEAM,
-};
-
-static const u16 sOtherMoveCallingMoves[] =
-{
-    MOVE_ASSIST,
-    MOVE_COPYCAT,
-    MOVE_ME_FIRST,
-    MOVE_METRONOME,
-    MOVE_MIRROR_MOVE,
-    MOVE_NATURE_POWER,
-    MOVE_SLEEP_TALK,
-};
-
 // Functions
 u32 GetAIChosenMove(u32 battlerId)
 {
@@ -1505,13 +1470,7 @@ bool32 DoesBattlerIgnoreAbilityChecks(u32 atkAbility, u32 move)
     if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_NEGATE_UNAWARE)
         return FALSE;   // AI handicap flag: doesn't understand ability suppression concept
 
-    for (i = 0; i < ARRAY_COUNT(sIgnoreMoldBreakerMoves); i++)
-    {
-        if (move == sIgnoreMoldBreakerMoves[i])
-            return TRUE;
-    }
-
-    if (IsMoldBreakerTypeAbility(atkAbility))
+    if (IsMoldBreakerTypeAbility(atkAbility) || gBattleMoves[move].ignoresTargetAbility)
         return TRUE;
 
     return FALSE;
@@ -2448,28 +2407,6 @@ bool32 IsEncoreEncouragedEffect(u32 moveEffect)
     for (i = 0; i < ARRAY_COUNT(sEncouragedEncoreEffects); i++)
     {
         if (moveEffect == sEncouragedEncoreEffects[i])
-            return TRUE;
-    }
-    return FALSE;
-}
-
-bool32 MoveRequiresRecharging(u32 move)
-{
-    u32 i;
-    for (i = 0; i < ARRAY_COUNT(sRechargeMoves); i++)
-    {
-        if (move == sRechargeMoves[i])
-            return TRUE;
-    }
-    return FALSE;
-}
-
-bool32 MoveCallsOtherMove(u32 move)
-{
-    u32 i;
-    for (i = 0; i < ARRAY_COUNT(sOtherMoveCallingMoves); i++)
-    {
-        if (move == sOtherMoveCallingMoves[i])
             return TRUE;
     }
     return FALSE;
