@@ -38,7 +38,7 @@
 #include "constants/moves.h"
 #include "constants/trainers.h"
 
-#define NUM_LAYOUT_OFFSETS 8 // Assumed to be a power of 2
+#define NUM_LAYOUT_OFFSETS 8
 
 extern const struct MapLayout *const gMapLayouts[];
 
@@ -1479,8 +1479,7 @@ u8 GetTrainerEncounterMusicIdInBattlePyramid(u16 trainerId)
     return TRAINER_ENCOUNTER_MUSIC_MALE;
 }
 
-// Unused
-static void BattlePyramidRetireChallenge(void)
+static void UNUSED BattlePyramidRetireChallenge(void)
 {
     ScriptContext_SetupScript(BattlePyramid_Retire);
 }
@@ -1904,7 +1903,7 @@ static void GetPyramidFloorLayoutOffsets(u8 *layoutOffsets)
 
     for (i = 0; i < NUM_PYRAMID_FLOOR_SQUARES; i++)
     {
-        layoutOffsets[i] = sPyramidFloorTemplates[id].layoutOffsets[rand & (NUM_LAYOUT_OFFSETS - 1)];
+        layoutOffsets[i] = sPyramidFloorTemplates[id].layoutOffsets[MOD(rand, NUM_LAYOUT_OFFSETS)];
         rand >>= 3;
         if (i == 7)
         {

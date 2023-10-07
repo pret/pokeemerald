@@ -278,22 +278,19 @@ int GetNumberRegistered(void)
     return state->numRegistered;
 }
 
-// Unused
-static int GetNumSpecialTrainers(void)
+static int UNUSED GetNumSpecialTrainers(void)
 {
     struct Pokenav_MatchCallMenu *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
     return state->numSpecialTrainers;
 }
 
-// Unused
-static int GetNumNormalTrainers(void)
+static int UNUSED GetNumNormalTrainers(void)
 {
     struct Pokenav_MatchCallMenu *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
     return state->numRegistered - state->numSpecialTrainers;
 }
 
-// Unused
-static int GetNormalTrainerHeaderId(int index)
+static int UNUSED GetNormalTrainerHeaderId(int index)
 {
     struct Pokenav_MatchCallMenu *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
     index += state->numSpecialTrainers;
@@ -468,8 +465,7 @@ int GetIndexDeltaOfNextCheckPageUp(int index)
     return 0;
 }
 
-// Unused
-static bool32 HasRematchEntry(void)
+static bool32 UNUSED HasRematchEntry(void)
 {
     int i;
 

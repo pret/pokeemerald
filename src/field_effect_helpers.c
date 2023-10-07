@@ -1670,7 +1670,7 @@ static void UpdateGrassFieldEffectSubpriority(struct Sprite *sprite, u8 elevatio
         struct ObjectEvent *objectEvent = &gObjectEvents[i];
         if (objectEvent->active)
         {
-            const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId); // Unused
+            const struct ObjectEventGraphicsInfo UNUSED *graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
             struct Sprite *linkedSprite = &gSprites[objectEvent->spriteId];
 
             xhi = sprite->x + sprite->centerToCornerVecX;

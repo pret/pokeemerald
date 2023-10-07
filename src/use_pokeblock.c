@@ -1108,8 +1108,7 @@ static u8 GetSelectionIdFromPartyId(u8 partyId)
     return partyId - numEggs;
 }
 
-// Unused
-static u8 GetPartyIdFromSelectionId_(u8 selectionId)
+static u8 UNUSED GetPartyIdFromSelectionId_(u8 selectionId)
 {
     return GetPartyIdFromSelectionId(selectionId);
 }
