@@ -831,6 +831,10 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_MAGICAL_TORQUE] = _("Magical Torque"),
     [MOVE_PSYBLADE] = _("Psyblade"),
     [MOVE_HYDRO_STEAM] = _("Hydro Steam"),
+    [MOVE_BLOOD_MOON] = _("Blood Moon"),
+    [MOVE_MATCHA_GOTCHA] = _("Matcha Gotcha"),
+    [MOVE_SYRUP_BOMB] = _("Syrup Bomb"),
+    [MOVE_IVY_CUDGEL] = _("Ivy Cudgel"),
 };
 #else
 // 12 letters
@@ -1665,6 +1669,10 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_MAGICAL_TORQUE] = _("MagiclTorque"),
     [MOVE_PSYBLADE] = _("Psyblade"),
     [MOVE_HYDRO_STEAM] = _("Hydro Steam"),
+    [MOVE_BLOOD_MOON] = _("Blood Moon"),
+    [MOVE_MATCHA_GOTCHA] = _("MatchaGotcha"),
+    [MOVE_SYRUP_BOMB] = _("Syrup Bomb"),
+    [MOVE_IVY_CUDGEL] = _("Ivy Cudgel"),
 };
 #endif
 
