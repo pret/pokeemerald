@@ -354,6 +354,28 @@ Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to
 >   [install devkitARM on Arch Linux](#installing-devkitarm-on-arch-linux).
 </details>
 
+### Fedora
+1. Install `gcc`, `g++`, `make`, `git`, `libpng-devel` with
+
+   ```
+   sudo dnf install gcc g++ make git libpng-devel
+   ```
+
+2. Install `devkitPro` [here](https://devkitpro.org/wiki/devkitPro_pacman). You simply need to follow the instructions until the very end. 
+
+   Note: The wikipage will tell you to configure pacman and there will be a warning in red, ignore it proceed.
+
+   Follow the instructions [here](https://devkitpro.org/wiki/devkitPro_pacman) to install devkitPro pacman. As a reminder, the goal is to configure an existing pacman installation to recognize devkitPro's repositories.
+
+3. Once devkitPro pacman is configured. Run the following to sync the `devkitPro` repositories and downloading the neccessary packages:
+
+    ```bash
+    sudo pacman -Sy
+    sudo pacman -S gba-dev
+    ```
+
+    The last command will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
+
 ### Other distributions
 _(Specific instructions for other distributions would be greatly appreciated!)_
 
