@@ -59,7 +59,7 @@ enum MaxMoveEffect
 bool32 IsDynamaxed(u16 battlerId);
 bool32 CanDynamax(u16 battlerId);
 bool32 IsGigantamaxed(u16 battlerId);
-void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon);
+void ApplyDynamaxHPMultiplier(u32 battler, struct Pokemon* mon);
 void PrepareBattlerForDynamax(u16 battlerId);
 u16 GetNonDynamaxHP(u16 battlerId);
 u16 GetNonDynamaxMaxHP(u16 battlerId);
@@ -94,7 +94,7 @@ void DynamaxIndicator_LoadSpriteGfx(void);
 bool32 DynamaxIndicator_ShouldBeInvisible(u32 battlerId);
 u8 DynamaxIndicator_GetSpriteId(u32 healthboxSpriteId);
 void DynamaxIndicator_SetVisibilities(u32 healthboxId, bool32 invisible);
-void DynamaxIndicator_UpdateOamPriorities(u32 healthboxId, u32 oamPriority);
+void DynamaxIndicator_UpdateOamPriority(u32 healthboxId, u32 oamPriority);
 void DynamaxIndicator_UpdateLevel(u32 healthboxId, u32 level);
 void DynamaxIndicator_CreateSprite(u32 battlerId, u32 healthboxSpriteId);
 void DynamaxIndicator_DestroySprite(u32 healthboxSpriteId);

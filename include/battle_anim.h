@@ -2,6 +2,7 @@
 #define GUARD_BATTLE_ANIM_H
 
 #include "battle.h"
+#include "constants/battle.h"
 #include "constants/battle_anim.h"
 #include "task.h"
 
@@ -164,8 +165,6 @@ void Trade_MoveSelectedMonToTarget(struct Sprite *sprite);
 void DestroyAnimVisualTaskAndDisableBlend(u8 taskId);
 void DestroySpriteAndFreeResources_(struct Sprite *sprite);
 void SetBattlerSpriteYOffsetFromOtherYScale(u8 spriteId, u8 otherSpriteId);
-u8 GetBattlerSide(u8 battler);
-u8 GetBattlerPosition(u8 battler);
 u8 GetBattlerAtPosition(u8 position);
 void ConvertPosDataToTranslateLinearData(struct Sprite *sprite);
 void InitAnimFastLinearTranslationWithSpeedAndPos(struct Sprite *sprite);
@@ -204,16 +203,28 @@ u8 GetBattlerSpriteDefault_Y(u8 battlerId);
 u8 GetSubstituteSpriteDefault_Y(u8 battlerId);
 
 // battle_anim_status_effects.c
-#define STAT_ANIM_PLUS1  15
-#define STAT_ANIM_PLUS2  39
-#define STAT_ANIM_MINUS1 22
-#define STAT_ANIM_MINUS2 46
+#define STAT_ANIM_PLUS1  MOVE_EFFECT_ATK_PLUS_1 - 1
+#define STAT_ANIM_PLUS2  MOVE_EFFECT_ATK_PLUS_2 - 1
+#define STAT_ANIM_MINUS1 MOVE_EFFECT_ATK_MINUS_1 - 1
+#define STAT_ANIM_MINUS2 MOVE_EFFECT_ATK_MINUS_2 - 1
 #define STAT_ANIM_MULTIPLE_PLUS1 55
 #define STAT_ANIM_MULTIPLE_PLUS2 56
 #define STAT_ANIM_MULTIPLE_MINUS1 57
 #define STAT_ANIM_MULTIPLE_MINUS2 58
+
+enum {
+    STAT_ANIM_PAL_ATK,
+    STAT_ANIM_PAL_DEF,
+    STAT_ANIM_PAL_ACC,
+    STAT_ANIM_PAL_SPEED,
+    STAT_ANIM_PAL_EVASION,
+    STAT_ANIM_PAL_SPATK,
+    STAT_ANIM_PAL_SPDEF,
+    STAT_ANIM_PAL_MULTIPLE = 0xFF
+};
+
 void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
-extern const union AnimCmd *const sAnims_SpinningSparkle[];
+extern const union AnimCmd *const gAnims_SpinningSparkle[];
 
 // battle_anim_ground.c
 void AnimTask_HorizontalShake(u8 taskId);
@@ -235,6 +246,7 @@ void InitStatsChangeAnimation(u8);
 void StartMonScrollingBgMask(u8 taskId, int unused, u16 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u32 *palette);
 
 // battle_anim_effects_1.c
+void AnimFalseSwipeSlice_Step3(struct Sprite *);
 void SetSpriteNextToMonHead(u8 battler, struct Sprite *sprite);
 void AnimMoveTwisterParticle(struct Sprite *sprite);
 void AnimParticleBurst(struct Sprite *);
@@ -283,6 +295,7 @@ extern const union AnimCmd *const gIngrainRootAnimTable[];
 extern const union AffineAnimCmd *const gSwiftStarAffineAnimTable[];
 extern const union AnimCmd *const gMetronomeThroughtBubbleAnimTable[];
 extern const union AffineAnimCmd *const gStockpileAbsorptionOrbAffineAnimTable[];
+extern const union AnimCmd *const gSlashSliceAnimTable[];
 
 // battle_anim_effects_2.c
 void AnimUproarRing(struct Sprite *sprite);
@@ -301,8 +314,10 @@ extern const union AffineAnimCmd *const gWaterPulseRingAffineAnimTable[];
 extern const union AffineAnimCmd *const gHyperVoiceRingAffineAnimTable[];
 extern const union AnimCmd *const gCoinAnimTable[];
 extern const union AffineAnimCmd *const gHiddenPowerOrbAffineAnimTable[];
+extern const union AffineAnimCmd *const gBulletSeedAffineAnimTable[];
 
 // battle_anim_effects_3.c
+void AnimKnockOffStrike_Step(struct Sprite *sprite);
 void AnimBlackSmoke(struct Sprite *sprite);
 void AnimSweetScentPetal(struct Sprite *sprite);
 void AnimTealAlert(struct Sprite *sprite);
@@ -314,6 +329,10 @@ void AnimFlatterSpotlight_Step(struct Sprite *sprite);
 extern const union AnimCmd *const gOpeningEyeAnimTable[];
 extern const union AnimCmd *const gEclipsingOrbAnimTable[];
 extern const union AffineAnimCmd *const gSpotlightAffineAnimTable[];
+extern const union AffineAnimCmd *const gSmokeBallEscapeCloudAffineAnimTable[];
+extern void AnimSmokeBallEscapeCloud(struct Sprite *sprite);
+extern const union AffineAnimCmd *const gKnockOffStrikeAffineAnimTable[];
+extern const union AnimCmd *const gKnockOffStrikeAnimTable[];
 
 // battle_anim_water.c
 void AnimWaterPulseRing(struct Sprite *sprite);
@@ -337,6 +356,7 @@ extern const union AnimCmd *const gAffineAnims_AirWaveCrescent[];
 extern const union AffineAnimCmd *const gAffineAnims_FlyBallUp[];
 extern const union AffineAnimCmd *const gAffineAnims_FlyBallAttack[];
 extern const union AffineAnimCmd *const gAffineAnims_BounceBallLand[];
+extern const union AnimCmd *const gAnims_FallingFeather[];
 
 // battle_anim_poison.c
 void AnimSludgeBombHitParticle(struct Sprite *);
@@ -352,6 +372,7 @@ void AnimGhostStatusSprite(struct Sprite *sprite);
 void AnimShadowBall(struct Sprite *sprite);
 void AnimTask_GrudgeFlames_Step(u8 taskId);
 extern const union AffineAnimCmd *const gAffineAnims_ShadowBall[];
+extern const union AnimCmd *const gAnims_GrudgeFlame[];
 
 // battle_anim_psychic.c
 extern const union AffineAnimCmd *const gAffineAnims_PsychoBoostOrb[];
@@ -474,6 +495,7 @@ void AnimRaiseSprite(struct Sprite *sprite);
 void AnimFallingRock_Step(struct Sprite *sprite);
 void AnimFlyingSandCrescent(struct Sprite *sprite);
 void AnimRockFragment(struct Sprite *);
+void AnimRockBlastRock(struct Sprite *sprite);
 
 // battle_anim_dark.c
 void AnimClawSlash(struct Sprite *sprite);
@@ -496,6 +518,7 @@ void AnimSwirlingSnowball_Step1(struct Sprite *sprite);
 extern const union AnimCmd *const gAnims_Snowball[];
 extern const union AffineAnimCmd *const gAffineAnims_IceCrystalHit[];
 extern const union AnimCmd *const gAnims_IceCrystalLarge[];
+extern const union AnimCmd *const gAnims_IceCrystalSmall[];
 extern const union AnimCmd *const gAnims_IceBallChunk[];
 extern const union AnimCmd *const gAnims_BlizzardIceCrystal[];
 
@@ -520,6 +543,7 @@ void AnimDragonRageFirePlume(struct Sprite *sprite);
 void AnimDragonFireToTarget(struct Sprite *sprite);
 void AnimDragonDanceOrb(struct Sprite *sprite);
 void AnimOverheatFlame(struct Sprite *sprite);
+void AnimOutrageFlame(struct Sprite *sprite);
 
 // battle_anim_new.c
 void CoreEnforcerLoadBeamTarget(struct Sprite *sprite);

@@ -2,7 +2,7 @@
 #define GET_POINT_COLOR_TYPE(bits) (((bits) >> 1) & 3)
 #define GET_POINT_DELTA(bits)      (((bits) >> 3) & 7)
 
-#define PT(x, y, delta, colorType, offsetDownLeft) x, y, (delta << 3) | (colorType << 1) | offsetDownLeft
+#define PT(x, y, delta, colorType, offsetDownLeft) {x, y, (delta << 3) | (colorType << 1) | offsetDownLeft}
 
 static const u8 sPointillismPoints[][3] = {
     PT( 0, 29, 3, 2, FALSE),

@@ -4,9 +4,7 @@ on:
   push:
     branches:
       - master
-      - battle_engine
-      - pokemon_expansion
-      - item_expansion
+      - upcoming
   pull_request:
 
 jobs:
@@ -50,6 +48,8 @@ jobs:
         run: make -j${nproc} -O all
 
       - name: Test
+        env:
+          TEST: 1
         run: |
           make -j${nproc} -O pokeemerald-test.elf
           make -j${nproc} check

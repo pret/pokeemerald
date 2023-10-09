@@ -53,25 +53,28 @@ void SpriteCB_TrainerThrowObject(struct Sprite *sprite);
 void AnimSetCenterToCornerVecX(struct Sprite *sprite);
 void BeginBattleIntroDummy(void);
 void BeginBattleIntro(void);
-void SwitchInClearSetData(void);
-void FaintClearSetData(void);
+void SwitchInClearSetData(u32 battler);
+void FaintClearSetData(u32 battler);
 void BattleTurnPassed(void);
-u8 IsRunningFromBattleImpossible(void);
-void SwitchPartyOrder(u8 battlerId);
+u8 IsRunningFromBattleImpossible(u32 battler);
+void SwitchPartyOrder(u32 battlerId);
 void SwapTurnOrder(u8 id1, u8 id2);
-u32 GetBattlerTotalSpeedStat(u8 battlerId);
+u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect);
+u32 GetBattlerTotalSpeedStat(u32 battler);
 s8 GetChosenMovePriority(u32 battlerId);
 s8 GetMovePriority(u32 battlerId, u16 move);
-u8 GetWhoStrikesFirst(u8 battlerId1, u8 battlerId2, bool8 ignoreChosenMoves);
+u32 GetWhichBattlerFasterArgs(u32 battler1, u32 battler2, bool32 ignoreChosenMoves, u32 ability1, u32 ability2,
+                              u32 holdEffectBattler1, u32 holdEffectBattler2, u32 speedBattler1, u32 speedBattler2, s32 priority1, s32 priority2);
+u32 GetWhichBattlerFaster(u32 battler1, u32 battler2, bool32 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
-bool8 TryRunFromBattle(u8 battlerId);
 void SpecialStatusesClear(void);
-void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk);
+void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk);
 bool32 IsWildMonSmart(void);
 u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer *trainer, bool32 firstTrainer, u32 battleTypeFlags);
 void ModifyPersonalityForNature(u32 *personality, u32 newNature);
 u32 GeneratePersonalityForGender(u32 gender, u32 species);
+void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon *partyEntry);
 
 extern struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE];
 

@@ -21,7 +21,7 @@
 // the sprite's non-transparent pixels actually are.
 // .size is the dimensions of this drawn pixel area.
 // .y_offset is the number of pixels between the drawn pixel area and the bottom edge.
-const struct MonCoords gMonBackPicCoords[] =
+const struct MonCoords gMonBackPicCoords[NUM_SPECIES + 1] =
 {
     [SPECIES_NONE]                         = { .size = MON_COORDS_SIZE(40, 40), .y_offset = 12 },
     [SPECIES_BULBASAUR]                    = { .size = MON_COORDS_SIZE(56, 40), .y_offset = 13 },
@@ -480,7 +480,7 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_CROAGUNK]                     = { .size = MON_COORDS_SIZE(56, 56), .y_offset =  6 },
     [SPECIES_TOXICROAK]                    = { .size = MON_COORDS_SIZE(56, 56), .y_offset =  6 },
     [SPECIES_CARNIVINE]                    = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  6 },
-    [SPECIES_FINNEON]                      = { .size = MON_COORDS_SIZE(56, 40), .y_offset = 13 },
+    [SPECIES_FINNEON]                      = { .size = MON_COORDS_SIZE(56, 40), .y_offset = 12 },
     [SPECIES_LUMINEON]                     = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  0 },
     [SPECIES_MANTYKE]                      = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  6 },
     [SPECIES_SNOVER]                       = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  6 },
@@ -1013,7 +1013,7 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_GOLEM_ALOLAN]                 = { .size = MON_COORDS_SIZE(64, 48), .y_offset = 13 },
     [SPECIES_GRIMER_ALOLAN]                = { .size = MON_COORDS_SIZE(64, 40), .y_offset = 14 },
     [SPECIES_MUK_ALOLAN]                   = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  6 },
-    [SPECIES_EXEGGUTOR_ALOLAN]             = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  4 },
+    [SPECIES_EXEGGUTOR_ALOLAN]             = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  0 },
     [SPECIES_MAROWAK_ALOLAN]               = { .size = MON_COORDS_SIZE(56, 56), .y_offset =  6 },
     // Galarian Forms
     [SPECIES_MEOWTH_GALARIAN]              = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  8 },

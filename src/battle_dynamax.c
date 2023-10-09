@@ -157,7 +157,7 @@ bool32 IsGigantamaxed(u16 battlerId) {
 }
 
 // Applies the HP Multiplier for Dynamaxed Pokemon and Raid Bosses.
-void ApplyDynamaxHPMultiplier(u16 battlerId, struct Pokemon* mon)
+void ApplyDynamaxHPMultiplier(u32 battler, struct Pokemon* mon)
 {
     if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_SHEDINJA)
         return;
@@ -404,7 +404,7 @@ u8 GetMaxMovePower(u16 move)
 
 static u8 GetMaxPowerTier(u16 move)
 {
-    if (gBattleMoves[move].flags & FLAG_TWO_STRIKES)
+    if (gBattleMoves[move].strikeCount >= 2 && gBattleMoves[move].strikeCount <= 5)
     {
         switch(gBattleMoves[move].power)
         {
@@ -433,7 +433,6 @@ static u8 GetMaxPowerTier(u16 move)
         case EFFECT_TERRAIN_PULSE:
         case EFFECT_PUNISHMENT:
         case EFFECT_TRUMP_CARD:
-        case EFFECT_SCALE_SHOT:
         case EFFECT_SONICBOOM:
         case EFFECT_SPIT_UP:
         case EFFECT_NATURAL_GIFT:
@@ -954,9 +953,9 @@ void BS_TrySetStatus1(void)
     }
     if (effect)
     {
-        gActiveBattler = gEffectBattler = gBattlerTarget;
-        BtlController_EmitSetMonData(BUFFER_A, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[gBattlerTarget].status1), &gBattleMons[gBattlerTarget].status1);
-        MarkBattlerForControllerExec(gActiveBattler);
+        gEffectBattler = gBattlerTarget;
+        BtlController_EmitSetMonData(gBattlerTarget, BUFFER_A, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[gBattlerTarget].status1), &gBattleMons[gBattlerTarget].status1);
+        MarkBattlerForControllerExec(gBattlerTarget);
         gBattlescriptCurrInstr = cmd->nextInstr;
     }   
     else
@@ -1077,7 +1076,7 @@ void BS_TryRecycleBerry(void)
         *usedHeldItem = ITEM_NONE;
         gBattleMons[gBattlerTarget].item = gLastUsedItem;
 
-        BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gBattlerTarget].item), &gBattleMons[gBattlerTarget].item);
+        BtlController_EmitSetMonData(gBattlerTarget, BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gBattlerTarget].item), &gBattleMons[gBattlerTarget].item);
         MarkBattlerForControllerExec(gBattlerTarget);
 
         gBattlescriptCurrInstr = cmd->nextInstr;
@@ -1376,7 +1375,7 @@ void DynamaxIndicator_SetVisibilities(u32 healthboxId, bool32 invisible)
         gSprites[spriteId].invisible = DynamaxIndicator_ShouldBeInvisible(battlerId);
 }
 
-void DynamaxIndicator_UpdateOamPriorities(u32 healthboxId, u32 oamPriority)
+void DynamaxIndicator_UpdateOamPriority(u32 healthboxId, u32 oamPriority)
 {
     u32 i;
     u8 spriteId = DynamaxIndicator_GetSpriteId(healthboxId);

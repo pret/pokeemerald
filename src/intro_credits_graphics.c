@@ -998,13 +998,13 @@ void CycleSceneryPalette(u8 mode)
                 break;
             if (gMain.vblankCounter1 & 4)
             {
-                x = gPlttBufferUnfaded[9];
-                y = gPlttBufferUnfaded[10];
+                x = gPlttBufferUnfaded[BG_PLTT_ID(0) + 9];
+                y = gPlttBufferUnfaded[BG_PLTT_ID(0) + 10];
             }
             else
             {
-                x = gPlttBufferUnfaded[10];
-                y = gPlttBufferUnfaded[9];
+                x = gPlttBufferUnfaded[BG_PLTT_ID(0) + 10];
+                y = gPlttBufferUnfaded[BG_PLTT_ID(0) + 9];
             }
             LoadPalette(&x, BG_PLTT_ID(0) + 9, sizeof(x));
             LoadPalette(&y, BG_PLTT_ID(0) + 10, sizeof(y));
@@ -1148,7 +1148,7 @@ static void SpriteCB_FlygonRightHalf(struct Sprite *sprite)
 }
 
 // In RS these were for Latios/Latias. In Emerald both are replaced with Flygon and now only 1 is used
-static u8 CreateIntroFlygonSprite_Unused(s16 x, s16 y)
+static u8 UNUSED CreateIntroFlygonSprite_Unused(s16 x, s16 y)
 {
     u8 leftSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatios, x - 32, y, 5);
     u8 rightSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatios, x + 32, y, 6);

@@ -129,7 +129,7 @@ u8 GiveMailToMon(struct Pokemon *mon, struct Mail *mail)
     return mailId;
 }
 
-static bool32 DummyMailFunc(void)
+static bool32 UNUSED DummyMailFunc(void)
 {
     return FALSE;
 }

@@ -40,6 +40,8 @@
 #include "constants/battle_frontier.h"
 #include "constants/rgb.h"
 
+#define TAG_BUTTONS 0
+
 // Enough space to hold 2 match info cards worth of trainers and their parties
 #define NUM_INFOCARD_SPRITES ((FRONTIER_PARTY_SIZE + 1) * 4)
 #define NUM_INFOCARD_TRAINERS 2
@@ -56,7 +58,7 @@ struct TourneyTreeLineSection
 {
     u8 x;
     u8 y;
-    u16 src;
+    u16 tile;
 };
 
 #define DOME_TRAINERS gSaveBlock2Ptr->frontier.domeTrainers
@@ -157,8 +159,6 @@ static void BufferLastDomeWinnerName(void);
 static void InitRandomTourneyTreeResults(void);
 static void InitDomeTrainers(void);
 
-EWRAM_DATA u32 gPlayerPartyLostHP = 0; // never read
-static EWRAM_DATA u32 sPlayerPartyMaxHP = 0; // never read
 static EWRAM_DATA struct TourneyTreeInfoCard *sInfoCard = {0};
 static EWRAM_DATA u8 *sTilemapBuffer = NULL;
 
@@ -904,14 +904,14 @@ static const struct ScanlineEffectParams sTourneyTreeScanlineEffectParams =
 
 static const struct CompressedSpriteSheet sTourneyTreeButtonsSpriteSheet[] =
 {
-    {gDomeTourneyTreeButtons_Gfx, 0x0600, 0x0000},
+    {.data = gDomeTourneyTreeButtons_Gfx, .size = 0x0600, .tag = TAG_BUTTONS},
     {},
 };
 
 // Unused
 static const struct CompressedSpritePalette sTourneyTreeButtonsSpritePal[] =
 {
-    {gDomeTourneyTreeButtons_Pal, 0x0000},
+    {.data = gDomeTourneyTreeButtons_Pal, .tag = TAG_BUTTONS},
     {},
 };
 
@@ -1004,7 +1004,7 @@ static const union AnimCmd * const sSpriteAnimTable_TourneyTreePokeball[] =
 // Sprite template for the pokeballs on the tourney tree that act as buttons to view a trainer/match info card
 static const struct SpriteTemplate sTourneyTreePokeballSpriteTemplate =
 {
-    .tileTag = 0x0000,
+    .tileTag = TAG_BUTTONS,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_TourneyTreePokeball,
     .anims = sSpriteAnimTable_TourneyTreePokeball,
@@ -1033,7 +1033,7 @@ static const union AnimCmd * const sSpriteAnimTable_TourneyTreeCancelButton[] =
 
 static const struct SpriteTemplate sCancelButtonSpriteTemplate =
 {
-    .tileTag = 0x0000,
+    .tileTag = TAG_BUTTONS,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_TourneyTreeCloseButton,
     .anims = sSpriteAnimTable_TourneyTreeCancelButton,
@@ -1062,7 +1062,7 @@ static const union AnimCmd * const sSpriteAnimTable_TourneyTreeExitButton[] =
 
 static const struct SpriteTemplate sExitButtonSpriteTemplate =
 {
-    .tileTag = 0x0000,
+    .tileTag = TAG_BUTTONS,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_TourneyTreeCloseButton,
     .anims = sSpriteAnimTable_TourneyTreeExitButton,
@@ -1109,7 +1109,7 @@ static const union AnimCmd * const sSpriteAnimTable_HorizontalScrollArrow[] =
 
 static const struct SpriteTemplate sHorizontalScrollArrowSpriteTemplate =
 {
-    .tileTag = 0x0000,
+    .tileTag = TAG_BUTTONS,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_HorizontalScrollArrow,
     .anims = sSpriteAnimTable_HorizontalScrollArrow,
@@ -1120,7 +1120,7 @@ static const struct SpriteTemplate sHorizontalScrollArrowSpriteTemplate =
 
 static const struct SpriteTemplate sVerticalScrollArrowSpriteTemplate =
 {
-    .tileTag = 0x0000,
+    .tileTag = TAG_BUTTONS,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_VerticalScrollArrow,
     .anims = sSpriteAnimTable_VerticalScrollArrow,
@@ -1482,589 +1482,617 @@ static const u8 sTourneyTreePokeballCoords[DOME_TOURNAMENT_TRAINERS_COUNT + DOME
     {120,  89}, // Final match
 };
 
+// Tile values from tourney_tree.png for the highlighted lines of the tourney tree.
+// These tiles will be used to replace the existing, unhighlighted line tiles on the tourney tree tilemap.
+#define LINE_PAL           (6 << 12)
+#define LINE_H             (LINE_PAL | 0x21) // Horizontal
+#define LINE_CORNER_R      (LINE_PAL | 0x23) // Horizontal into a right-side vertical
+#define LINE_CORNER_L      (LINE_PAL | 0x25) // Horizontal into a left-side vertical
+#define LINE_V_R           (LINE_PAL | 0x27) // Right-side vertical
+#define LINE_V_L           (LINE_PAL | 0x29) // Left-side vertical
+#define LINE_H_BOTTOM      (LINE_PAL | 0x2B) // Horizontal on the bottom of the tree
+#define LINE_H_LOGO1       (LINE_PAL | 0x2C) // Horizontal, logo behind
+#define LINE_H_LOGO2       (LINE_PAL | 0x2D) // Horizontal, logo behind
+#define LINE_H_LOGO3       (LINE_PAL | 0x2E) // Horizontal, logo behind
+#define LINE_H_LOGO4       (LINE_PAL | 0x2F) // Horizontal, logo behind
+#define LINE_V_R_LOGO1     (LINE_PAL | 0x30) // Right-side vertical, logo behind
+#define LINE_V_R_LOGO2     (LINE_PAL | 0x31) // Right-side vertical, logo behind
+#define LINE_V_R_LOGO3     (LINE_PAL | 0x32) // Right-side vertical, logo behind
+#define LINE_V_R_LOGO4     (LINE_PAL | 0x33) // Right-side vertical, logo behind
+#define LINE_V_L_LOGO1     (LINE_PAL | 0x35) // Left-side vertical, logo behind
+#define LINE_V_L_LOGO2     (LINE_PAL | 0x36) // Left-side vertical, logo behind
+#define LINE_V_L_LOGO3     (LINE_PAL | 0x37) // Left-side vertical, logo behind
+#define LINE_V_L_LOGO4     (LINE_PAL | 0x38) // Left-side vertical, logo behind
+#define LINE_V_R_HALF_LOGO (LINE_PAL | 0x3B) // Right-side vertical, half lit from the top, logo behind
+#define LINE_V_L_HALF_LOGO (LINE_PAL | 0x3C) // Left-side vertical, half lit from the top, logo behind
+#define LINE_CORNER_R_HALF (LINE_PAL | 0x43) // Lit horizontal, unlit right-side vertical
+#define LINE_CORNER_L_HALF (LINE_PAL | 0x45) // Lit horizontal, unlit left-side vertical
+#define LINE_V_R_HALF      (LINE_PAL | 0x47) // Right-side vertical, half lit from the top
+#define LINE_V_L_HALF      (LINE_PAL | 0x49) // Left-side vertical, half lit from the top
+
 // Each of these line sections define the position of the advancement line on the tourney tree for the victor of that round
 // The trainers here are numbered by tourney ID (rank/seed) and ordered according to where they start on the tourney tree
-#define LINESECTION_ROUND1_TRAINER1(lastSrc) \
-    {.src = 0x6021,  .y = 0x04, .x = 0x09},  \
-    {.src = 0x6023,  .y = 0x04, .x = 0x0a},  \
-    {.src = 0x6047,  .y = 0x05, .x = 0x0a},  \
-    {.src = lastSrc, .y = 0x05, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER1(lastTile) \
+    {.tile = LINE_H,        .y =  4, .x =  9}, \
+    {.tile = LINE_CORNER_R, .y =  4, .x = 10}, \
+    {.tile = LINE_V_R_HALF, .y =  5, .x = 10}, \
+    {.tile = lastTile,      .y =  5, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER9(lastSrc) \
-    {.src = 0x6021,  .y = 0x06, .x = 0x09},  \
-    {.src = 0x6021,  .y = 0x06, .x = 0x0a},  \
-    {.src = 0x6027,  .y = 0x05, .x = 0x0a},  \
-    {.src = lastSrc, .y = 0x05, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER9(lastTile) \
+    {.tile = LINE_H,   .y =  6, .x =  9}, \
+    {.tile = LINE_H,   .y =  6, .x = 10}, \
+    {.tile = LINE_V_R, .y =  5, .x = 10}, \
+    {.tile = lastTile, .y =  5, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER13(lastSrc) \
-    {.src = 0x6021,  .y = 0x08, .x = 0x09},   \
-    {.src = 0x6023,  .y = 0x08, .x = 0x0a},   \
-    {.src = 0x6047,  .y = 0x09, .x = 0x0a},   \
-    {.src = lastSrc, .y = 0x09, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER13(lastTile) \
+    {.tile = LINE_H,        .y =  8, .x =  9}, \
+    {.tile = LINE_CORNER_R, .y =  8, .x = 10}, \
+    {.tile = LINE_V_R_HALF, .y =  9, .x = 10}, \
+    {.tile = lastTile,      .y =  9, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER5(lastSrc) \
-    {.src = 0x6021,  .y = 0x0a, .x = 0x09},  \
-    {.src = 0x6021,  .y = 0x0a, .x = 0x0a},  \
-    {.src = 0x6027,  .y = 0x09, .x = 0x0a},  \
-    {.src = lastSrc, .y = 0x09, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER5(lastTile) \
+    {.tile = LINE_H,   .y = 10, .x =  9}, \
+    {.tile = LINE_H,   .y = 10, .x = 10}, \
+    {.tile = LINE_V_R, .y =  9, .x = 10}, \
+    {.tile = lastTile, .y =  9, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER8(lastSrc) \
-    {.src = 0x6021,  .y = 0x0c, .x = 0x09},  \
-    {.src = 0x6023,  .y = 0x0c, .x = 0x0a},  \
-    {.src = 0x6047,  .y = 0x0d, .x = 0x0a},  \
-    {.src = lastSrc, .y = 0x0d, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER8(lastTile) \
+    {.tile = LINE_H,        .y = 12, .x =  9}, \
+    {.tile = LINE_CORNER_R, .y = 12, .x = 10}, \
+    {.tile = LINE_V_R_HALF, .y = 13, .x = 10}, \
+    {.tile = lastTile,      .y = 13, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER16(lastSrc) \
-    {.src = 0x6021,  .y = 0x0e, .x = 0x09},   \
-    {.src = 0x6021,  .y = 0x0e, .x = 0x0a},   \
-    {.src = 0x6027,  .y = 0x0d, .x = 0x0a},   \
-    {.src = lastSrc, .y = 0x0d, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER16(lastTile) \
+    {.tile = LINE_H,   .y = 14, .x =  9}, \
+    {.tile = LINE_H,   .y = 14, .x = 10}, \
+    {.tile = LINE_V_R, .y = 13, .x = 10}, \
+    {.tile = lastTile, .y = 13, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER12(lastSrc) \
-    {.src = 0x6021,  .y = 0x10, .x = 0x09},   \
-    {.src = 0x6023,  .y = 0x10, .x = 0x0a},   \
-    {.src = 0x6047,  .y = 0x11, .x = 0x0a},   \
-    {.src = lastSrc, .y = 0x11, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER12(lastTile) \
+    {.tile = LINE_H,        .y = 16, .x =  9}, \
+    {.tile = LINE_CORNER_R, .y = 16, .x = 10}, \
+    {.tile = LINE_V_R_HALF, .y = 17, .x = 10}, \
+    {.tile = lastTile,      .y = 17, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER4(lastSrc) \
-    {.src = 0x602b,  .y = 0x12, .x = 0x09},  \
-    {.src = 0x602b,  .y = 0x12, .x = 0x0a},  \
-    {.src = 0x6027,  .y = 0x11, .x = 0x0a},  \
-    {.src = lastSrc, .y = 0x11, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER4(lastTile) \
+    {.tile = LINE_H_BOTTOM, .y = 18, .x =  9}, \
+    {.tile = LINE_H_BOTTOM, .y = 18, .x = 10}, \
+    {.tile = LINE_V_R,      .y = 17, .x = 10}, \
+    {.tile = lastTile,      .y = 17, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER3(lastSrc) \
-    {.src = 0x6021,  .y = 0x04, .x = 0x14},  \
-    {.src = 0x6025,  .y = 0x04, .x = 0x13},  \
-    {.src = 0x6049,  .y = 0x05, .x = 0x13},  \
-    {.src = lastSrc, .y = 0x05, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER3(lastTile) \
+    {.tile = LINE_H,        .y =  4, .x = 20}, \
+    {.tile = LINE_CORNER_L, .y =  4, .x = 19}, \
+    {.tile = LINE_V_L_HALF, .y =  5, .x = 19}, \
+    {.tile = lastTile,      .y =  5, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER11(lastSrc) \
-    {.src = 0x6021,  .y = 0x06, .x = 0x14},   \
-    {.src = 0x6021,  .y = 0x06, .x = 0x13},   \
-    {.src = 0x6029,  .y = 0x05, .x = 0x13},   \
-    {.src = lastSrc, .y = 0x05, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER11(lastTile) \
+    {.tile = LINE_H,   .y =  6, .x = 20}, \
+    {.tile = LINE_H,   .y =  6, .x = 19}, \
+    {.tile = LINE_V_L, .y =  5, .x = 19}, \
+    {.tile = lastTile, .y =  5, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER15(lastSrc) \
-    {.src = 0x6021,  .y = 0x08, .x = 0x14},   \
-    {.src = 0x6025,  .y = 0x08, .x = 0x13},   \
-    {.src = 0x6049,  .y = 0x09, .x = 0x13},   \
-    {.src = lastSrc, .y = 0x09, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER15(lastTile) \
+    {.tile = LINE_H,        .y =  8, .x = 20}, \
+    {.tile = LINE_CORNER_L, .y =  8, .x = 19}, \
+    {.tile = LINE_V_L_HALF, .y =  9, .x = 19}, \
+    {.tile = lastTile,      .y =  9, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER7(lastSrc) \
-    {.src = 0x6021,  .y = 0x0a, .x = 0x14},  \
-    {.src = 0x6021,  .y = 0x0a, .x = 0x13},  \
-    {.src = 0x6029,  .y = 0x09, .x = 0x13},  \
-    {.src = lastSrc, .y = 0x09, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER7(lastTile) \
+    {.tile = LINE_H,   .y = 10, .x = 20}, \
+    {.tile = LINE_H,   .y = 10, .x = 19}, \
+    {.tile = LINE_V_L, .y =  9, .x = 19}, \
+    {.tile = lastTile, .y =  9, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER6(lastSrc) \
-    {.src = 0x6021,  .y = 0x0c, .x = 0x14},  \
-    {.src = 0x6025,  .y = 0x0c, .x = 0x13},  \
-    {.src = 0x6049,  .y = 0x0d, .x = 0x13},  \
-    {.src = lastSrc, .y = 0x0d, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER6(lastTile) \
+    {.tile = LINE_H,        .y = 12, .x = 20}, \
+    {.tile = LINE_CORNER_L, .y = 12, .x = 19}, \
+    {.tile = LINE_V_L_HALF, .y = 13, .x = 19}, \
+    {.tile = lastTile,      .y = 13, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER14(lastSrc) \
-    {.src = 0x6021,  .y = 0x0e, .x = 0x14},   \
-    {.src = 0x6021,  .y = 0x0e, .x = 0x13},   \
-    {.src = 0x6029,  .y = 0x0d, .x = 0x13},   \
-    {.src = lastSrc, .y = 0x0d, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER14(lastTile) \
+    {.tile = LINE_H,   .y = 14, .x = 20}, \
+    {.tile = LINE_H,   .y = 14, .x = 19}, \
+    {.tile = LINE_V_L, .y = 13, .x = 19}, \
+    {.tile = lastTile, .y = 13, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER10(lastSrc) \
-    {.src = 0x6021,  .y = 0x10, .x = 0x14},   \
-    {.src = 0x6025,  .y = 0x10, .x = 0x13},   \
-    {.src = 0x6049,  .y = 0x11, .x = 0x13},   \
-    {.src = lastSrc, .y = 0x11, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER10(lastTile) \
+    {.tile = LINE_H,        .y = 16, .x = 20}, \
+    {.tile = LINE_CORNER_L, .y = 16, .x = 19}, \
+    {.tile = LINE_V_L_HALF, .y = 17, .x = 19}, \
+    {.tile = lastTile,      .y = 17, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER2(lastSrc) \
-    {.src = 0x602b,  .y = 0x12, .x = 0x14},  \
-    {.src = 0x602b,  .y = 0x12, .x = 0x13},  \
-    {.src = 0x6029,  .y = 0x11, .x = 0x13},  \
-    {.src = lastSrc, .y = 0x11, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER2(lastTile) \
+    {.tile = LINE_H_BOTTOM, .y = 18, .x = 20}, \
+    {.tile = LINE_H_BOTTOM, .y = 18, .x = 19}, \
+    {.tile = LINE_V_L,      .y = 17, .x = 19}, \
+    {.tile = lastTile,      .y = 17, .x = 18},
 
-#define LINESECTION_ROUND2_MATCH1(lastSrc)  \
-    {.src = 0x6027,  .y = 0x06, .x = 0x0b}, \
-    {.src = 0x6047,  .y = 0x07, .x = 0x0b}, \
-    {.src = lastSrc, .y = 0x07, .x = 0x0c},
+#define LINESECTION_ROUND2_MATCH1(lastTile) \
+    {.tile = LINE_V_R,      .y =  6, .x = 11}, \
+    {.tile = LINE_V_R_HALF, .y =  7, .x = 11}, \
+    {.tile = lastTile,      .y =  7, .x = 12},
 
-#define LINESECTION_ROUND2_MATCH2(lastSrc)  \
-    {.src = 0x6027,  .y = 0x08, .x = 0x0b}, \
-    {.src = 0x6027,  .y = 0x07, .x = 0x0b}, \
-    {.src = lastSrc, .y = 0x07, .x = 0x0c},
+#define LINESECTION_ROUND2_MATCH2(lastTile) \
+    {.tile = LINE_V_R, .y =  8, .x = 11}, \
+    {.tile = LINE_V_R, .y =  7, .x = 11}, \
+    {.tile = lastTile, .y =  7, .x = 12},
 
-#define LINESECTION_ROUND2_MATCH3(lastSrc)  \
-    {.src = 0x6027,  .y = 0x0e, .x = 0x0b}, \
-    {.src = 0x6047,  .y = 0x0f, .x = 0x0b}, \
-    {.src = lastSrc, .y = 0x0f, .x = 0x0c},
+#define LINESECTION_ROUND2_MATCH3(lastTile) \
+    {.tile = LINE_V_R,      .y = 14, .x = 11}, \
+    {.tile = LINE_V_R_HALF, .y = 15, .x = 11}, \
+    {.tile = lastTile,      .y = 15, .x = 12},
 
-#define LINESECTION_ROUND2_MATCH4(lastSrc)  \
-    {.src = 0x6027,  .y = 0x10, .x = 0x0b}, \
-    {.src = 0x6027,  .y = 0x0f, .x = 0x0b}, \
-    {.src = lastSrc, .y = 0x0f, .x = 0x0c},
+#define LINESECTION_ROUND2_MATCH4(lastTile) \
+    {.tile = LINE_V_R, .y = 16, .x = 11}, \
+    {.tile = LINE_V_R, .y = 15, .x = 11}, \
+    {.tile = lastTile, .y = 15, .x = 12},
 
-#define LINESECTION_ROUND2_MATCH5(lastSrc)  \
-    {.src = 0x6029,  .y = 0x06, .x = 0x12}, \
-    {.src = 0x6049,  .y = 0x07, .x = 0x12}, \
-    {.src = lastSrc, .y = 0x07, .x = 0x11},
+#define LINESECTION_ROUND2_MATCH5(lastTile) \
+    {.tile = LINE_V_L,      .y =  6, .x = 18}, \
+    {.tile = LINE_V_L_HALF, .y =  7, .x = 18}, \
+    {.tile = lastTile,      .y =  7, .x = 17},
 
-#define LINESECTION_ROUND2_MATCH6(lastSrc)  \
-    {.src = 0x6029,  .y = 0x08, .x = 0x12}, \
-    {.src = 0x6029,  .y = 0x07, .x = 0x12}, \
-    {.src = lastSrc, .y = 0x07, .x = 0x11},
+#define LINESECTION_ROUND2_MATCH6(lastTile) \
+    {.tile = LINE_V_L, .y =  8, .x = 18}, \
+    {.tile = LINE_V_L, .y =  7, .x = 18}, \
+    {.tile = lastTile, .y =  7, .x = 17},
 
-#define LINESECTION_ROUND2_MATCH7(lastSrc)  \
-    {.src = 0x6029,  .y = 0x0e, .x = 0x12}, \
-    {.src = 0x6049,  .y = 0x0f, .x = 0x12}, \
-    {.src = lastSrc, .y = 0x0f, .x = 0x11},
+#define LINESECTION_ROUND2_MATCH7(lastTile) \
+    {.tile = LINE_V_L,      .y = 14, .x = 18}, \
+    {.tile = LINE_V_L_HALF, .y = 15, .x = 18}, \
+    {.tile = lastTile,      .y = 15, .x = 17},
 
-#define LINESECTION_ROUND2_MATCH8(lastSrc)  \
-    {.src = 0x6029,  .y = 0x10, .x = 0x12}, \
-    {.src = 0x6029,  .y = 0x0f, .x = 0x12}, \
-    {.src = lastSrc, .y = 0x0f, .x = 0x11},
+#define LINESECTION_ROUND2_MATCH8(lastTile) \
+    {.tile = LINE_V_L, .y = 16, .x = 18}, \
+    {.tile = LINE_V_L, .y = 15, .x = 18}, \
+    {.tile = lastTile, .y = 15, .x = 17},
 
-#define LINESECTION_SEMIFINAL_TOP_LEFT     \
-    {.src = 0x6027, .y = 0x08, .x = 0x0c}, \
-    {.src = 0x6027, .y = 0x09, .x = 0x0c}, \
-    {.src = 0x6027, .y = 0x0a, .x = 0x0c}, \
-    {.src = 0x603b, .y = 0x0b, .x = 0x0c},
+#define LINESECTION_SEMIFINAL_TOP_LEFT \
+    {.tile = LINE_V_R,           .y =  8, .x = 12}, \
+    {.tile = LINE_V_R,           .y =  9, .x = 12}, \
+    {.tile = LINE_V_R,           .y = 10, .x = 12}, \
+    {.tile = LINE_V_R_HALF_LOGO, .y = 11, .x = 12},
 
-#define LINESECTION_SEMIFINAL_BOTTOM_LEFT  \
-    {.src = 0x6033, .y = 0x0e, .x = 0x0c}, \
-    {.src = 0x6032, .y = 0x0d, .x = 0x0c}, \
-    {.src = 0x6031, .y = 0x0c, .x = 0x0c}, \
-    {.src = 0x6030, .y = 0x0b, .x = 0x0c},
+#define LINESECTION_SEMIFINAL_BOTTOM_LEFT \
+    {.tile = LINE_V_R_LOGO4, .y = 14, .x = 12}, \
+    {.tile = LINE_V_R_LOGO3, .y = 13, .x = 12}, \
+    {.tile = LINE_V_R_LOGO2, .y = 12, .x = 12}, \
+    {.tile = LINE_V_R_LOGO1, .y = 11, .x = 12},
 
-#define LINESECTION_SEMIFINAL_TOP_RIGHT    \
-    {.src = 0x6029, .y = 0x08, .x = 0x11}, \
-    {.src = 0x6029, .y = 0x09, .x = 0x11}, \
-    {.src = 0x6029, .y = 0x0a, .x = 0x11}, \
-    {.src = 0x603c, .y = 0x0b, .x = 0x11},
+#define LINESECTION_SEMIFINAL_TOP_RIGHT \
+    {.tile = LINE_V_L,           .y =  8, .x = 17}, \
+    {.tile = LINE_V_L,           .y =  9, .x = 17}, \
+    {.tile = LINE_V_L,           .y = 10, .x = 17}, \
+    {.tile = LINE_V_L_HALF_LOGO, .y = 11, .x = 17},
 
 #define LINESECTION_SEMIFINAL_BOTTOM_RIGHT \
-    {.src = 0x6038, .y = 0x0e, .x = 0x11}, \
-    {.src = 0x6037, .y = 0x0d, .x = 0x11}, \
-    {.src = 0x6036, .y = 0x0c, .x = 0x11}, \
-    {.src = 0x6035, .y = 0x0b, .x = 0x11},
+    {.tile = LINE_V_L_LOGO4, .y = 14, .x = 17}, \
+    {.tile = LINE_V_L_LOGO3, .y = 13, .x = 17}, \
+    {.tile = LINE_V_L_LOGO2, .y = 12, .x = 17}, \
+    {.tile = LINE_V_L_LOGO1, .y = 11, .x = 17},
 
-#define LINESECTION_FINAL_LEFT             \
-    {.src = 0x602c, .y = 0x0b, .x = 0x0d}, \
-    {.src = 0x602d, .y = 0x0b, .x = 0x0e},
+#define LINESECTION_FINAL_LEFT \
+    {.tile = LINE_H_LOGO1, .y = 11, .x = 13}, \
+    {.tile = LINE_H_LOGO2, .y = 11, .x = 14},
 
-#define LINESECTION_FINAL_RIGHT            \
-    {.src = 0x602f, .y = 0x0b, .x = 0x10}, \
-    {.src = 0x602e, .y = 0x0b, .x = 0x0f},
+#define LINESECTION_FINAL_RIGHT \
+    {.tile = LINE_H_LOGO4, .y = 11, .x = 16}, \
+    {.tile = LINE_H_LOGO3, .y = 11, .x = 15},
 
 
 static const struct TourneyTreeLineSection sLineSectionTrainer1Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER1(0x6043)
+    LINESECTION_ROUND1_TRAINER1(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer1Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER1(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6043)
+    LINESECTION_ROUND1_TRAINER1(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer1Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER1(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6023)
+    LINESECTION_ROUND1_TRAINER1(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer1Final[] =
 {
-    LINESECTION_ROUND1_TRAINER1(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6023)
+    LINESECTION_ROUND1_TRAINER1(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer9Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER9(0x6043)
+    LINESECTION_ROUND1_TRAINER9(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer9Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER9(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6043)
+    LINESECTION_ROUND1_TRAINER9(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer9Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER9(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6023)
+    LINESECTION_ROUND1_TRAINER9(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer9Final[] =
 {
-    LINESECTION_ROUND1_TRAINER9(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6023)
+    LINESECTION_ROUND1_TRAINER9(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer13Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER13(0x6021)
+    LINESECTION_ROUND1_TRAINER13(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer13Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER13(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6043)
+    LINESECTION_ROUND1_TRAINER13(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer13Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER13(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6023)
+    LINESECTION_ROUND1_TRAINER13(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer13Final[] =
 {
-    LINESECTION_ROUND1_TRAINER13(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6023)
+    LINESECTION_ROUND1_TRAINER13(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer5Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER5(0x6021)
+    LINESECTION_ROUND1_TRAINER5(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer5Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER5(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6043)
+    LINESECTION_ROUND1_TRAINER5(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer5Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER5(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6023)
+    LINESECTION_ROUND1_TRAINER5(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer5Final[] =
 {
-    LINESECTION_ROUND1_TRAINER5(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6023)
+    LINESECTION_ROUND1_TRAINER5(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer8Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER8(0x6043)
+    LINESECTION_ROUND1_TRAINER8(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer8Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER8(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER8(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer8Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER8(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER8(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer8Final[] =
 {
-    LINESECTION_ROUND1_TRAINER8(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER8(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer16Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER16(0x6043)
+    LINESECTION_ROUND1_TRAINER16(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer16Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER16(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER16(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer16Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER16(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER16(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer16Final[] =
 {
-    LINESECTION_ROUND1_TRAINER16(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER16(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer12Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER12(0x6021)
+    LINESECTION_ROUND1_TRAINER12(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer12Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER12(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER12(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer12Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER12(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER12(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer12Final[] =
 {
-    LINESECTION_ROUND1_TRAINER12(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER12(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer4Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER4(0x6021)
+    LINESECTION_ROUND1_TRAINER4(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer4Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER4(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER4(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer4Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER4(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER4(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer4Final[] =
 {
-    LINESECTION_ROUND1_TRAINER4(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER4(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer3Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER3(0x6045)
+    LINESECTION_ROUND1_TRAINER3(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer3Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER3(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6045)
+    LINESECTION_ROUND1_TRAINER3(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer3Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER3(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6025)
+    LINESECTION_ROUND1_TRAINER3(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer3Final[] =
 {
-    LINESECTION_ROUND1_TRAINER3(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6025)
+    LINESECTION_ROUND1_TRAINER3(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer11Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER11(0x6045)
+    LINESECTION_ROUND1_TRAINER11(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer11Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER11(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6045)
+    LINESECTION_ROUND1_TRAINER11(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer11Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER11(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6025)
+    LINESECTION_ROUND1_TRAINER11(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer11Final[] =
 {
-    LINESECTION_ROUND1_TRAINER11(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6025)
+    LINESECTION_ROUND1_TRAINER11(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer15Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER15(0x6021)
+    LINESECTION_ROUND1_TRAINER15(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer15Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER15(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6045)
+    LINESECTION_ROUND1_TRAINER15(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer15Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER15(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6025)
+    LINESECTION_ROUND1_TRAINER15(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer15Final[] =
 {
-    LINESECTION_ROUND1_TRAINER15(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6025)
+    LINESECTION_ROUND1_TRAINER15(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer7Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER7(0x6021)
+    LINESECTION_ROUND1_TRAINER7(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer7Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER7(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6045)
+    LINESECTION_ROUND1_TRAINER7(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer7Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER7(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6025)
+    LINESECTION_ROUND1_TRAINER7(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer7Final[] =
 {
-    LINESECTION_ROUND1_TRAINER7(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6025)
+    LINESECTION_ROUND1_TRAINER7(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer6Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER6(0x6045)
+    LINESECTION_ROUND1_TRAINER6(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer6Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER6(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER6(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer6Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER6(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER6(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer6Final[] =
 {
-    LINESECTION_ROUND1_TRAINER6(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER6(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer14Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER14(0x6045)
+    LINESECTION_ROUND1_TRAINER14(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer14Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER14(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER14(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer14Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER14(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER14(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer14Final[] =
 {
-    LINESECTION_ROUND1_TRAINER14(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER14(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer10Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER10(0x6021)
+    LINESECTION_ROUND1_TRAINER10(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer10Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER10(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER10(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer10Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER10(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER10(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer10Final[] =
 {
-    LINESECTION_ROUND1_TRAINER10(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER10(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer2Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER2(0x6021)
+    LINESECTION_ROUND1_TRAINER2(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer2Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER2(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER2(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer2Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER2(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER2(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer2Final[] =
 {
-    LINESECTION_ROUND1_TRAINER2(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER2(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
     LINESECTION_FINAL_RIGHT
 };
@@ -2544,9 +2572,6 @@ static void BufferDomeOpponentName(void)
 
 static void InitDomeOpponentParty(void)
 {
-    gPlayerPartyLostHP = 0;
-    sPlayerPartyMaxHP =  GetMonData(&gPlayerParty[0], MON_DATA_MAX_HP, NULL);
-    sPlayerPartyMaxHP += GetMonData(&gPlayerParty[1], MON_DATA_MAX_HP, NULL);
     CalculatePlayerPartyCount();
     CreateDomeOpponentMons(TrainerIdToTournamentId(gTrainerBattleOpponent_A));
 }
@@ -2973,7 +2998,7 @@ static void SetDomeOpponentGraphicsId(void)
 static void SaveDomeChallenge(void)
 {
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
-    VarSet(VAR_TEMP_0, 0);
+    VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
 }
@@ -4392,11 +4417,11 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     {
         textPrinter.currentY = sSpeciesNameTextYCoords[i];
         if (trainerId == TRAINER_PLAYER)
-            textPrinter.currentChar = gSpeciesNames[DOME_MONS[trainerTourneyId][i]];
+            textPrinter.currentChar = GetSpeciesName(DOME_MONS[trainerTourneyId][i]);
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
-            textPrinter.currentChar = gSpeciesNames[DOME_MONS[trainerTourneyId][i]];
+            textPrinter.currentChar = GetSpeciesName(DOME_MONS[trainerTourneyId][i]);
         else
-            textPrinter.currentChar = gSpeciesNames[gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].species];
+            textPrinter.currentChar = GetSpeciesName(gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].species);
 
         textPrinter.windowId = WIN_TRAINER_MON1_NAME + i + windowId;
         if (i == 1)
@@ -5206,7 +5231,7 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
                 u32 personality = 0;
                 u32 targetSpecies = 0;
                 u32 targetAbility = 0;
-                u32 typeMultiplier = 0;
+                uq4_12_t typeMultiplier = 0;
                 do
                 {
                     personality = Random32();
@@ -5520,7 +5545,7 @@ static void DrawTourneyAdvancementLine(u8 tournamentId, u8 roundId)
     const struct TourneyTreeLineSection *lineSection = sTourneyTreeLineSections[tournamentId][roundId];
 
     for (i = 0; i < sTourneyTreeLineSectionArrayCounts[tournamentId][roundId]; i++)
-        CopyToBgTilemapBufferRect_ChangePalette(1, &lineSection[i].src, lineSection[i].x, lineSection[i].y, 1, 1, 17);
+        CopyToBgTilemapBufferRect_ChangePalette(1, &lineSection[i].tile, lineSection[i].x, lineSection[i].y, 1, 1, 17);
 
     CopyBgTilemapBufferToVram(1);
 }

@@ -232,6 +232,8 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_MINIOR_CORE_VIOLET] = sMiniorVioletFormChangeTable,
     [SPECIES_MINIOR_METEOR_YELLOW] = sMiniorYellowFormChangeTable,
     [SPECIES_MINIOR_CORE_YELLOW] = sMiniorYellowFormChangeTable,
+    [SPECIES_NECROZMA_DUSK_MANE] = sNecrozmaDuskManeFormChangeTable,
+    [SPECIES_NECROZMA_DAWN_WINGS] = sNecrozmaDawnWingsFormChangeTable,
     [SPECIES_MELMETAL] = sMelmetalFormChangeTable,
     [SPECIES_MELMETAL_GMAX] = sMelmetalFormChangeTable,
 #endif

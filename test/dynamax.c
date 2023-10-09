@@ -1,5 +1,5 @@
 #include "global.h"
-#include "test_battle.h"
+#include "test/battle.h"
 
 // ============= DYNAMAX AND MAX MOVE INTERACTIONS ===================
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax increases HP and max HP by 1.5x", u16 hp)
@@ -1352,7 +1352,6 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Chi Strike boosts allies' crit chance")
 {
     s16 damage1, damage2;
     u32 j;
-    KNOWN_FAILING; // Debug printing confirms Machop is at +5 crit stages. Not sure what's broken.
     GIVEN {
         ASSUME(B_CRIT_CHANCE >= GEN_6);
         ASSUME(gBattleMoves[MOVE_G_MAX_CHI_STRIKE].argument == MAX_EFFECT_CRIT_PLUS);

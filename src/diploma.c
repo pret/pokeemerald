@@ -72,7 +72,7 @@ void CB2_ShowDiploma(void)
     ResetSpriteData();
     ResetPaletteFade();
     FreeAllSpritePalettes();
-    LoadPalette(sDiplomaPalettes, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+    LoadPalette(sDiplomaPalettes, BG_PLTT_ID(0), sizeof(sDiplomaPalettes));
     sDiplomaTilemapPtr = Alloc(0x1000);
     InitDiplomaBg();
     InitDiplomaWindow();

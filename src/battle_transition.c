@@ -779,7 +779,7 @@ static const TransitionStateFunc sTransitionIntroFuncs[] =
 
 static const struct SpriteFrameImage sSpriteImage_Pokeball[] =
 {
-    sPokeball_Gfx, sizeof(sPokeball_Gfx)
+    {sPokeball_Gfx, sizeof(sPokeball_Gfx)}
 };
 
 static const union AnimCmd sSpriteAnim_Pokeball[] =
@@ -841,12 +841,12 @@ static const struct OamData sOam_UnusedBrendanLass =
 
 static const struct SpriteFrameImage sImageTable_UnusedBrendan[] =
 {
-    sUnusedBrendan_Gfx, sizeof(sUnusedBrendan_Gfx)
+    {sUnusedBrendan_Gfx, sizeof(sUnusedBrendan_Gfx)}
 };
 
 static const struct SpriteFrameImage sImageTable_UnusedLass[] =
 {
-    sUnusedLass_Gfx, sizeof(sUnusedLass_Gfx)
+    {sUnusedLass_Gfx, sizeof(sUnusedLass_Gfx)}
 };
 
 static const union AnimCmd sSpriteAnim_UnusedBrendanLass[] =
@@ -1017,8 +1017,7 @@ static void CB2_TestBattleTransition(void)
     UpdatePaletteFade();
 }
 
-// Unused
-static void TestBattleTransition(u8 transitionId)
+static void UNUSED TestBattleTransition(u8 transitionId)
 {
     sTestingTransitionId = transitionId;
     SetMainCallback2(CB2_TestBattleTransition);
@@ -1069,7 +1068,7 @@ static void Task_BattleTransition(u8 taskId)
 static bool8 Transition_StartIntro(struct Task *task)
 {
     SetWeatherScreenFadeOut();
-    CpuCopy32(gPlttBufferFaded, gPlttBufferUnfaded, sizeof(gPlttBufferUnfaded));
+    CpuCopy32(gPlttBufferFaded, gPlttBufferUnfaded, PLTT_SIZE);
     if (sTasks_Intro[task->tTransitionId] != NULL)
     {
         CreateTask(sTasks_Intro[task->tTransitionId], 4);
@@ -4498,7 +4497,7 @@ static bool8 FrontierSquares_Shrink(struct Task *task)
         switch (task->tShrinkState)
         {
         case 0:
-            for (i = 250; i < 255; i++)
+            for (i = BG_PLTT_ID(15) + 10; i < BG_PLTT_ID(15) + 15; i++)
             {
                 gPlttBufferUnfaded[i] = RGB_BLACK;
                 gPlttBufferFaded[i] = RGB_BLACK;
