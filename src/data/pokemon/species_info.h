@@ -16944,9 +16944,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         #if P_UPDATED_EGG_GROUPS >= GEN_8
-            .eggGroups = { EGG_GROUP_MONSTER, EGG_GROUP_MONSTER},
-        #else
             .eggGroups = { EGG_GROUP_MONSTER, EGG_GROUP_MINERAL},
+        #else
+            .eggGroups = { EGG_GROUP_MONSTER, EGG_GROUP_MONSTER},
         #endif
         .abilities = {ABILITY_OWN_TEMPO, ABILITY_ICE_BODY, ABILITY_STURDY},
         .bodyColor = BODY_COLOR_BLUE,
@@ -16970,9 +16970,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         #if P_UPDATED_EGG_GROUPS >= GEN_8
-            .eggGroups = { EGG_GROUP_MONSTER, EGG_GROUP_MONSTER},
-        #else
             .eggGroups = { EGG_GROUP_MONSTER, EGG_GROUP_MINERAL},
+        #else
+            .eggGroups = { EGG_GROUP_MONSTER, EGG_GROUP_MONSTER},
         #endif
         .abilities = {ABILITY_OWN_TEMPO, ABILITY_ICE_BODY, ABILITY_STURDY},
         .bodyColor = BODY_COLOR_BLUE,
