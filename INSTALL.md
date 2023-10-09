@@ -358,10 +358,10 @@ Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to
 Install the following packages:
 
 ```
-sudo dnf install `gcc`, `g++`, `make`, `git`, `libpng-dev`
+sudo dnf install gcc g++ make git libpng-dev
 ```
 
-Then install `devkitPro` [here]() simply follow the instructions. Note: When you are asked to configure pacman, simply ignore the warning (it's in red) and proceed anyways.
+Then install `devkitPro` [here](https://devkitpro.org/wiki/devkitPro_pacman) simply follow the instructions. Note: When you are asked to configure pacman, simply ignore the warning (it's in red) and proceed anyways.
 
 Finally, sync the repositories and install `gba-dev`. Just press enter to install everything.
 
@@ -371,6 +371,7 @@ sudo pacman -S gba-dev
 ```
 
 It is very important that you sync the `devkitPro` repositories, otherwise you won't be able to install `gba-dev`. When all goes well, proceed to the [Installation](#installation) section.
+
 ### Other distributions
 
 _(Specific instructions for other distributions would be greatly appreciated!)_
