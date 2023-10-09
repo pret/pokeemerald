@@ -355,28 +355,24 @@ Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to
 </details>
 
 ### Fedora
-1. Install `gcc`, `g++`, `make`, `git`, `libpng-devel` with
+Install the following packages:
 
-   ```
-   sudo dnf install gcc g++ make git libpng-devel
-   ```
+```
+sudo dnf install `gcc`, `g++`, `make`, `git`, `libpng-dev`
+```
 
-2. Install `devkitPro` [here](https://devkitpro.org/wiki/devkitPro_pacman). You simply need to follow the instructions until the very end. 
+Then install `devkitPro` [here]() simply follow the instructions. Note: When you are asked to configure pacman, simply ignore the warning (it's in red) and proceed anyways.
 
-   Note: The wikipage will tell you to configure pacman and there will be a warning in red, ignore it proceed.
+Finally, sync the repositories and install `gba-dev`. Just press enter to install everything.
 
-   Follow the instructions [here](https://devkitpro.org/wiki/devkitPro_pacman) to install devkitPro pacman. As a reminder, the goal is to configure an existing pacman installation to recognize devkitPro's repositories.
+```bash
+sudo pacman -Sy
+sudo pacman -S gba-dev
+```
 
-3. Once devkitPro pacman is configured. Run the following to sync the `devkitPro` repositories and downloading the neccessary packages:
-
-    ```bash
-    sudo pacman -Sy
-    sudo pacman -S gba-dev
-    ```
-
-    The last command will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
-
+It is very important that you sync the `devkitPro` repositories, otherwise you won't be able to install `gba-dev`. When all goes well, proceed to the [Installation](#installation) section.
 ### Other distributions
+
 _(Specific instructions for other distributions would be greatly appreciated!)_
 
 1. Try to find the required software in its repositories:
