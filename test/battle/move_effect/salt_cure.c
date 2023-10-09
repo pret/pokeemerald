@@ -70,3 +70,17 @@ SINGLE_BATTLE_TEST("Salt Cure is removed when the afflicted Pokémon is switched
         }
     }
 }
+
+SINGLE_BATTLE_TEST("If Salt Cure faints the target no status will be applied")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SALT_CURE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SALT_CURE, player);
+        NOT MESSAGE("Foe Wobbuffet is being salt cured!");
+        MESSAGE("Foe Wobbuffet fainted!");
+    }
+}
