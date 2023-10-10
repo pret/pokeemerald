@@ -25,7 +25,7 @@
 static u8 GetMaxPowerTier(u16 move);
 
 // Constant Data
-static const u16 sMaxMoveTable[] =
+static const u16 sMaxMoveTable[NUMBER_OF_MON_TYPES] =
 {
     [TYPE_NORMAL] = MOVE_MAX_STRIKE,
     [TYPE_FIGHTING] = MOVE_MAX_KNUCKLE,
@@ -287,22 +287,28 @@ bool32 ShouldUseMaxMove(u16 battlerId, u16 baseMove)
 static u16 GetTypeBasedMaxMove(u16 battlerId, u16 type)
 {
     // Gigantamax check
+    u32 i;
     u16 species = gBattleMons[battlerId].species;
-    u16 targetSpecies = GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_BATTLE_GIGANTAMAX);
-    if (species >= (SPECIES_VENUSAUR_GIGANTAMAX)
-        && sGMaxMoveTable[species - (SPECIES_VENUSAUR_GIGANTAMAX)].moveType == type)
-    {
-        return sGMaxMoveTable[species - (SPECIES_VENUSAUR_GIGANTAMAX)].gmaxMove;
-    }
-    else if (targetSpecies != SPECIES_NONE
-             && sGMaxMoveTable[targetSpecies - (SPECIES_VENUSAUR_GIGANTAMAX)].moveType == type)
-    {
-        return sGMaxMoveTable[targetSpecies - (SPECIES_VENUSAUR_GIGANTAMAX)].gmaxMove;
-    }
+    u16 targetSpecies = SPECIES_NONE;
 
-    // regular Max Move
-    else
+    if (!gSpeciesInfo[species].gigantamax)
+        targetSpecies = GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_BATTLE_GIGANTAMAX);
+
+    if (targetSpecies != SPECIES_NONE)
+        species = targetSpecies;
+
+    if (gSpeciesInfo[species].gigantamax)
     {
+        for (i = 0; i < ARRAY_COUNT(sGMaxMoveTable); i++)
+        {
+            if (sGMaxMoveTable[i].species == species && sGMaxMoveTable[i].moveType == type)
+                return sGMaxMoveTable[i].gmaxMove;
+        }
+    }
+    else // Regular Max Move
+    {
+        if (sMaxMoveTable[type] == MOVE_NONE) // failsafe
+            return sMaxMoveTable[0];
         return sMaxMoveTable[type];
     }
 }
