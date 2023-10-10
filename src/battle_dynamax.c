@@ -1258,11 +1258,10 @@ bool32 IsDynamaxTriggerSpriteActive(void)
 
 void HideDynamaxTriggerSprite(void)
 {
-    if (gBattleStruct->dynamax.triggerSpriteId != 0xFF)
-    {
-        ChangeDynamaxTriggerSprite(gBattleStruct->dynamax.triggerSpriteId, 0);
-        gSprites[gBattleStruct->dynamax.triggerSpriteId].tHide = TRUE;
-    }
+    if (gBattleStruct->dynamax.triggerSpriteId >= MAX_SPRITES)
+        return;
+    ChangeDynamaxTriggerSprite(gBattleStruct->dynamax.triggerSpriteId, 0);
+    gSprites[gBattleStruct->dynamax.triggerSpriteId].tHide = TRUE;
 }
 
 void DestroyDynamaxTriggerSprite(void)
