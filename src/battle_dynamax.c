@@ -150,8 +150,7 @@ bool32 CanDynamax(u16 battlerId)
 // Returns whether a battler is transformed into a Gigantamax form.
 bool32 IsGigantamaxed(u16 battlerId) {
     // TODO: Incorporate Gigantamax factor.
-    if (gBattleMons[battlerId].species >= (SPECIES_VENUSAUR_GMAX)
-        && gBattleMons[battlerId].species <= (SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GMAX))
+    if ((gSpeciesInfo[gBattleMons[battlerId].species].gigantamax))
         return TRUE;
     return FALSE;
 }
