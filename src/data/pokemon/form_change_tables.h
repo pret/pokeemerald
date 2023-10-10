@@ -1,19 +1,19 @@
 static const struct FormChange sVenusaurFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM,    SPECIES_VENUSAUR_MEGA, ITEM_VENUSAURITE},
-    {FORM_CHANGE_BATTLE_GIGANTAMAX,             SPECIES_VENUSAUR_GMAX},
+    {FORM_CHANGE_BATTLE_GIGANTAMAX,             SPECIES_VENUSAUR_GIGANTAMAX},
     {FORM_CHANGE_TERMINATOR},
 };
 
 static const struct FormChange sCharizardFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM,    SPECIES_CHARIZARD_MEGA_X, ITEM_CHARIZARDITE_X},
     {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM,    SPECIES_CHARIZARD_MEGA_Y, ITEM_CHARIZARDITE_Y},
-    {FORM_CHANGE_BATTLE_GIGANTAMAX,             SPECIES_CHARIZARD_GMAX},
+    {FORM_CHANGE_BATTLE_GIGANTAMAX,             SPECIES_CHARIZARD_GIGANTAMAX},
     {FORM_CHANGE_TERMINATOR},
 };
 
 static const struct FormChange sBlastoiseFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM,    SPECIES_BLASTOISE_MEGA, ITEM_BLASTOISINITE},
-    {FORM_CHANGE_BATTLE_GIGANTAMAX,             SPECIES_BLASTOISE_GMAX},
+    {FORM_CHANGE_BATTLE_GIGANTAMAX,             SPECIES_BLASTOISE_GIGANTAMAX},
     {FORM_CHANGE_TERMINATOR},
 };
 
@@ -39,7 +39,7 @@ static const struct FormChange sSlowbroFormChangeTable[] = {
 
 static const struct FormChange sGengarFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM,    SPECIES_GENGAR_MEGA, ITEM_GENGARITE},
-    {FORM_CHANGE_BATTLE_GIGANTAMAX,             SPECIES_GENGAR_GMAX},
+    {FORM_CHANGE_BATTLE_GIGANTAMAX,             SPECIES_GENGAR_GIGANTAMAX},
     {FORM_CHANGE_TERMINATOR},
 };
 
@@ -608,10 +608,10 @@ static const struct FormChange sEnamorusFormChangeTable[] = {
 #endif
 
 // Gigantamax Forms
-#define GIGANTAMAX_FORM(species)                                                   \
-    {                                                                              \
-        {FORM_CHANGE_BATTLE_GIGANTAMAX,         SPECIES_##species##_GMAX},         \
-        {FORM_CHANGE_TERMINATOR},                                                  \
+#define GIGANTAMAX_FORM(species)                                        \
+    {                                                                   \
+        {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_##species##_GIGANTAMAX},\
+        {FORM_CHANGE_TERMINATOR},                                       \
     };
 
 static const struct FormChange sButterfreeFormChangeTable[] = GIGANTAMAX_FORM(BUTTERFREE)

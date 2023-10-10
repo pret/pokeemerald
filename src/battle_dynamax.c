@@ -56,39 +56,39 @@ struct GMaxMove
 
 static const struct GMaxMove sGMaxMoveTable[] =
 {
-    {SPECIES_VENUSAUR_GMAX,	                    TYPE_GRASS,      MOVE_G_MAX_VINE_LASH},
-    {SPECIES_BLASTOISE_GMAX,                    TYPE_WATER,      MOVE_G_MAX_CANNONADE},
-    {SPECIES_CHARIZARD_GMAX,                    TYPE_FIRE,       MOVE_G_MAX_WILDFIRE},
-    {SPECIES_BUTTERFREE_GMAX,                   TYPE_BUG,        MOVE_G_MAX_BEFUDDLE},
-    {SPECIES_PIKACHU_GMAX,                      TYPE_ELECTRIC,   MOVE_G_MAX_VOLT_CRASH},
-    {SPECIES_MEOWTH_GMAX,                       TYPE_NORMAL,     MOVE_G_MAX_GOLD_RUSH},
-    {SPECIES_MACHAMP_GMAX,                      TYPE_FIGHTING,   MOVE_G_MAX_CHI_STRIKE},
-    {SPECIES_GENGAR_GMAX,                       TYPE_GHOST,      MOVE_G_MAX_TERROR},
-    {SPECIES_KINGLER_GMAX,                      TYPE_WATER,      MOVE_G_MAX_FOAM_BURST},
-    {SPECIES_LAPRAS_GMAX,                       TYPE_ICE,        MOVE_G_MAX_RESONANCE},
-    {SPECIES_EEVEE_GMAX,                        TYPE_NORMAL,     MOVE_G_MAX_CUDDLE},
-    {SPECIES_SNORLAX_GMAX,                      TYPE_NORMAL,     MOVE_G_MAX_REPLENISH},
-    {SPECIES_GARBODOR_GMAX,                     TYPE_POISON,     MOVE_G_MAX_MALODOR},
-    {SPECIES_MELMETAL_GMAX,                     TYPE_STEEL,      MOVE_G_MAX_MELTDOWN},
-    {SPECIES_RILLABOOM_GMAX,                    TYPE_GRASS,      MOVE_G_MAX_DRUM_SOLO},
-    {SPECIES_CINDERACE_GMAX,                    TYPE_FIRE,       MOVE_G_MAX_FIREBALL},
-    {SPECIES_INTELEON_GMAX,                     TYPE_WATER,      MOVE_G_MAX_HYDROSNIPE},
-    {SPECIES_CORVIKNIGHT_GMAX,                  TYPE_FLYING,     MOVE_G_MAX_WIND_RAGE},
-    {SPECIES_ORBEETLE_GMAX,                     TYPE_PSYCHIC,    MOVE_G_MAX_GRAVITAS},
-    {SPECIES_DREDNAW_GMAX,                      TYPE_WATER,      MOVE_G_MAX_STONESURGE},
-    {SPECIES_COALOSSAL_GMAX,                    TYPE_ROCK,       MOVE_G_MAX_VOLCALITH},
-    {SPECIES_FLAPPLE_GMAX,                      TYPE_GRASS,      MOVE_G_MAX_TARTNESS},
-    {SPECIES_APPLETUN_GMAX,                     TYPE_GRASS,      MOVE_G_MAX_SWEETNESS},
-    {SPECIES_SANDACONDA_GMAX,                   TYPE_GROUND,     MOVE_G_MAX_SANDBLAST},
-    {SPECIES_TOXTRICITY_GMAX,                   TYPE_ELECTRIC,   MOVE_G_MAX_STUN_SHOCK},
-    {SPECIES_CENTISKORCH_GMAX,                  TYPE_FIRE,       MOVE_G_MAX_CENTIFERNO},
-    {SPECIES_HATTERENE_GMAX,                    TYPE_FAIRY,      MOVE_G_MAX_SMITE},
-    {SPECIES_GRIMMSNARL_GMAX,                   TYPE_DARK,       MOVE_G_MAX_SNOOZE},
-    {SPECIES_ALCREMIE_GMAX,                     TYPE_FAIRY,      MOVE_G_MAX_FINALE},
-    {SPECIES_COPPERAJAH_GMAX,                   TYPE_STEEL,      MOVE_G_MAX_STEELSURGE},
-    {SPECIES_DURALUDON_GMAX,                    TYPE_DRAGON,     MOVE_G_MAX_DEPLETION},
-    {SPECIES_URSHIFU_GMAX,                      TYPE_DARK,       MOVE_G_MAX_ONE_BLOW},
-    {SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GMAX,   TYPE_WATER,      MOVE_G_MAX_RAPID_FLOW},
+    {SPECIES_VENUSAUR_GIGANTAMAX,	                    TYPE_GRASS,      MOVE_G_MAX_VINE_LASH},
+    {SPECIES_BLASTOISE_GIGANTAMAX,                    TYPE_WATER,      MOVE_G_MAX_CANNONADE},
+    {SPECIES_CHARIZARD_GIGANTAMAX,                    TYPE_FIRE,       MOVE_G_MAX_WILDFIRE},
+    {SPECIES_BUTTERFREE_GIGANTAMAX,                   TYPE_BUG,        MOVE_G_MAX_BEFUDDLE},
+    {SPECIES_PIKACHU_GIGANTAMAX,                      TYPE_ELECTRIC,   MOVE_G_MAX_VOLT_CRASH},
+    {SPECIES_MEOWTH_GIGANTAMAX,                       TYPE_NORMAL,     MOVE_G_MAX_GOLD_RUSH},
+    {SPECIES_MACHAMP_GIGANTAMAX,                      TYPE_FIGHTING,   MOVE_G_MAX_CHI_STRIKE},
+    {SPECIES_GENGAR_GIGANTAMAX,                       TYPE_GHOST,      MOVE_G_MAX_TERROR},
+    {SPECIES_KINGLER_GIGANTAMAX,                      TYPE_WATER,      MOVE_G_MAX_FOAM_BURST},
+    {SPECIES_LAPRAS_GIGANTAMAX,                       TYPE_ICE,        MOVE_G_MAX_RESONANCE},
+    {SPECIES_EEVEE_GIGANTAMAX,                        TYPE_NORMAL,     MOVE_G_MAX_CUDDLE},
+    {SPECIES_SNORLAX_GIGANTAMAX,                      TYPE_NORMAL,     MOVE_G_MAX_REPLENISH},
+    {SPECIES_GARBODOR_GIGANTAMAX,                     TYPE_POISON,     MOVE_G_MAX_MALODOR},
+    {SPECIES_MELMETAL_GIGANTAMAX,                     TYPE_STEEL,      MOVE_G_MAX_MELTDOWN},
+    {SPECIES_RILLABOOM_GIGANTAMAX,                    TYPE_GRASS,      MOVE_G_MAX_DRUM_SOLO},
+    {SPECIES_CINDERACE_GIGANTAMAX,                    TYPE_FIRE,       MOVE_G_MAX_FIREBALL},
+    {SPECIES_INTELEON_GIGANTAMAX,                     TYPE_WATER,      MOVE_G_MAX_HYDROSNIPE},
+    {SPECIES_CORVIKNIGHT_GIGANTAMAX,                  TYPE_FLYING,     MOVE_G_MAX_WIND_RAGE},
+    {SPECIES_ORBEETLE_GIGANTAMAX,                     TYPE_PSYCHIC,    MOVE_G_MAX_GRAVITAS},
+    {SPECIES_DREDNAW_GIGANTAMAX,                      TYPE_WATER,      MOVE_G_MAX_STONESURGE},
+    {SPECIES_COALOSSAL_GIGANTAMAX,                    TYPE_ROCK,       MOVE_G_MAX_VOLCALITH},
+    {SPECIES_FLAPPLE_GIGANTAMAX,                      TYPE_GRASS,      MOVE_G_MAX_TARTNESS},
+    {SPECIES_APPLETUN_GIGANTAMAX,                     TYPE_GRASS,      MOVE_G_MAX_SWEETNESS},
+    {SPECIES_SANDACONDA_GIGANTAMAX,                   TYPE_GROUND,     MOVE_G_MAX_SANDBLAST},
+    {SPECIES_TOXTRICITY_GIGANTAMAX,                   TYPE_ELECTRIC,   MOVE_G_MAX_STUN_SHOCK},
+    {SPECIES_CENTISKORCH_GIGANTAMAX,                  TYPE_FIRE,       MOVE_G_MAX_CENTIFERNO},
+    {SPECIES_HATTERENE_GIGANTAMAX,                    TYPE_FAIRY,      MOVE_G_MAX_SMITE},
+    {SPECIES_GRIMMSNARL_GIGANTAMAX,                   TYPE_DARK,       MOVE_G_MAX_SNOOZE},
+    {SPECIES_ALCREMIE_GIGANTAMAX,                     TYPE_FAIRY,      MOVE_G_MAX_FINALE},
+    {SPECIES_COPPERAJAH_GIGANTAMAX,                   TYPE_STEEL,      MOVE_G_MAX_STEELSURGE},
+    {SPECIES_DURALUDON_GIGANTAMAX,                    TYPE_DRAGON,     MOVE_G_MAX_DEPLETION},
+    {SPECIES_URSHIFU_GIGANTAMAX,                      TYPE_DARK,       MOVE_G_MAX_ONE_BLOW},
+    {SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX,   TYPE_WATER,      MOVE_G_MAX_RAPID_FLOW},
 };
 
 // forward declarations
@@ -288,15 +288,15 @@ static u16 GetTypeBasedMaxMove(u16 battlerId, u16 type)
     // Gigantamax check
     u16 species = gBattleMons[battlerId].species;
     u16 targetSpecies = GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_BATTLE_GIGANTAMAX);
-    if (species >= (SPECIES_VENUSAUR_GMAX)
-        && sGMaxMoveTable[species - (SPECIES_VENUSAUR_GMAX)].moveType == type)
+    if (species >= (SPECIES_VENUSAUR_GIGANTAMAX)
+        && sGMaxMoveTable[species - (SPECIES_VENUSAUR_GIGANTAMAX)].moveType == type)
     {
-        return sGMaxMoveTable[species - (SPECIES_VENUSAUR_GMAX)].gmaxMove;
+        return sGMaxMoveTable[species - (SPECIES_VENUSAUR_GIGANTAMAX)].gmaxMove;
     }
     else if (targetSpecies != SPECIES_NONE
-             && sGMaxMoveTable[targetSpecies - (SPECIES_VENUSAUR_GMAX)].moveType == type)
+             && sGMaxMoveTable[targetSpecies - (SPECIES_VENUSAUR_GIGANTAMAX)].moveType == type)
     {
-        return sGMaxMoveTable[targetSpecies - (SPECIES_VENUSAUR_GMAX)].gmaxMove;
+        return sGMaxMoveTable[targetSpecies - (SPECIES_VENUSAUR_GIGANTAMAX)].gmaxMove;
     }
 
     // regular Max Move

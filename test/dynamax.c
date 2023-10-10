@@ -457,7 +457,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Pokemon with Gigantamax forms change upon Dynamaxi
     } WHEN {
         TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
     } THEN {
-        EXPECT_EQ(player->species, SPECIES_VENUSAUR_GMAX);
+        EXPECT_EQ(player->species, SPECIES_VENUSAUR_GIGANTAMAX);
     }
 }
 

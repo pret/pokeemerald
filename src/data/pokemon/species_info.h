@@ -24836,167 +24836,167 @@ const struct SpeciesInfo gSpeciesInfo[] =
     },
 
     // Gigantamax Forms
-    [SPECIES_VENUSAUR_GMAX] =
+    [SPECIES_VENUSAUR_GIGANTAMAX] =
     {
         VENUSAUR_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_CHARIZARD_GMAX] =
+    [SPECIES_CHARIZARD_GIGANTAMAX] =
     {
         CHARIZARD_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_BLASTOISE_GMAX] =
+    [SPECIES_BLASTOISE_GIGANTAMAX] =
     {
         BLASTOISE_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_BUTTERFREE_GMAX] =
+    [SPECIES_BUTTERFREE_GIGANTAMAX] =
     {
         BUTTERFREE_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_PIKACHU_GMAX] =
+    [SPECIES_PIKACHU_GIGANTAMAX] =
     {
         PIKACHU_MISC_INFO(PERCENT_FEMALE(50), FLIP),
         .gigantamax = TRUE,
     },
-    [SPECIES_MEOWTH_GMAX] =
+    [SPECIES_MEOWTH_GIGANTAMAX] =
     {
         MEOWTH_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_MACHAMP_GMAX] =
+    [SPECIES_MACHAMP_GIGANTAMAX] =
     {
         MACHAMP_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_GENGAR_GMAX] =
+    [SPECIES_GENGAR_GIGANTAMAX] =
     {
         GENGAR_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_KINGLER_GMAX] =
+    [SPECIES_KINGLER_GIGANTAMAX] =
     {
         KINGLER_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_LAPRAS_GMAX] =
+    [SPECIES_LAPRAS_GIGANTAMAX] =
     {
         LAPRAS_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_EEVEE_GMAX] =
+    [SPECIES_EEVEE_GIGANTAMAX] =
     {
         EEVEE_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_SNORLAX_GMAX] =
+    [SPECIES_SNORLAX_GIGANTAMAX] =
     {
         SNORLAX_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_GARBODOR_GMAX] =
+    [SPECIES_GARBODOR_GIGANTAMAX] =
     {
         GARBODOR_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_MELMETAL_GMAX] =
+    [SPECIES_MELMETAL_GIGANTAMAX] =
     {
         MELMETAL_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_RILLABOOM_GMAX] =
+    [SPECIES_RILLABOOM_GIGANTAMAX] =
     {
         RILLABOOM_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_CINDERACE_GMAX] =
+    [SPECIES_CINDERACE_GIGANTAMAX] =
     {
         CINDERACE_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_INTELEON_GMAX] =
+    [SPECIES_INTELEON_GIGANTAMAX] =
     {
         INTELEON_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_CORVIKNIGHT_GMAX] =
+    [SPECIES_CORVIKNIGHT_GIGANTAMAX] =
     {
         CORVIKNIGHT_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_ORBEETLE_GMAX] =
+    [SPECIES_ORBEETLE_GIGANTAMAX] =
     {
         ORBEETLE_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_DREDNAW_GMAX] =
+    [SPECIES_DREDNAW_GIGANTAMAX] =
     {
         DREDNAW_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_COALOSSAL_GMAX] =
+    [SPECIES_COALOSSAL_GIGANTAMAX] =
     {
         COALOSSAL_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_FLAPPLE_GMAX] =
+    [SPECIES_FLAPPLE_GIGANTAMAX] =
     {
         FLAPPLE_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_APPLETUN_GMAX] =
+    [SPECIES_APPLETUN_GIGANTAMAX] =
     {
         APPLETUN_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_SANDACONDA_GMAX] =
+    [SPECIES_SANDACONDA_GIGANTAMAX] =
     {
         SANDACONDA_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_TOXTRICITY_GMAX] =
+    [SPECIES_TOXTRICITY_GIGANTAMAX] =
     {
         TOXTRICITY_MISC_INFO(ABILITY_PLUS),
         .gigantamax = TRUE,
     },
-    [SPECIES_CENTISKORCH_GMAX] =
+    [SPECIES_CENTISKORCH_GIGANTAMAX] =
     {
         CENTISKORCH_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_HATTERENE_GMAX] =
+    [SPECIES_HATTERENE_GIGANTAMAX] =
     {
         HATTERENE_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_GRIMMSNARL_GMAX] =
+    [SPECIES_GRIMMSNARL_GIGANTAMAX] =
     {
         GRIMMSNARL_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_ALCREMIE_GMAX] =
+    [SPECIES_ALCREMIE_GIGANTAMAX] =
     {
         ALCREMIE_MISC_INFO(BODY_COLOR_PINK),
         .gigantamax = TRUE,
     },
-    [SPECIES_COPPERAJAH_GMAX] =
+    [SPECIES_COPPERAJAH_GIGANTAMAX] =
     {
         COPPERAJAH_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_DURALUDON_GMAX] =
+    [SPECIES_DURALUDON_GIGANTAMAX] =
     {
         DURALUDON_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_URSHIFU_GMAX] =
+    [SPECIES_URSHIFU_GIGANTAMAX] =
     {
         URSHIFU_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GMAX] =
+    [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] =
     {
         URSHIFU_RAPID_STRIKE_STYLE_MISC_INFO,
         .gigantamax = TRUE,

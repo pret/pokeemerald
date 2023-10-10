@@ -1,7 +1,7 @@
 static const u16 sVenusaurFormSpeciesIdTable[] = {
     SPECIES_VENUSAUR,
     SPECIES_VENUSAUR_MEGA,
-    SPECIES_VENUSAUR_GMAX,
+    SPECIES_VENUSAUR_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
@@ -9,20 +9,20 @@ static const u16 sCharizardFormSpeciesIdTable[] = {
     SPECIES_CHARIZARD,
     SPECIES_CHARIZARD_MEGA_X,
     SPECIES_CHARIZARD_MEGA_Y,
-    SPECIES_CHARIZARD_GMAX,
+    SPECIES_CHARIZARD_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
 static const u16 sBlastoiseFormSpeciesIdTable[] = {
     SPECIES_BLASTOISE,
     SPECIES_BLASTOISE_MEGA,
-    SPECIES_BLASTOISE_GMAX,
+    SPECIES_BLASTOISE_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
 static const u16 sButterfreeFormSpeciesIdTable[] = {
     SPECIES_BUTTERFREE,
-    SPECIES_BUTTERFREE_GMAX,
+    SPECIES_BUTTERFREE_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
@@ -66,7 +66,7 @@ static const u16 sPikachuFormSpeciesIdTable[] = {
     SPECIES_PIKACHU_ALOLA_CAP,
     SPECIES_PIKACHU_PARTNER_CAP,
     SPECIES_PIKACHU_WORLD_CAP,
-    SPECIES_PIKACHU_GMAX,
+    SPECIES_PIKACHU_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
@@ -116,7 +116,7 @@ static const u16 sMeowthFormSpeciesIdTable[] = {
     SPECIES_MEOWTH,
     SPECIES_MEOWTH_ALOLAN,
     SPECIES_MEOWTH_GALARIAN,
-    SPECIES_MEOWTH_GMAX,
+    SPECIES_MEOWTH_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
@@ -146,7 +146,7 @@ static const u16 sArcanineFormSpeciesIdTable[] = {
 
 static const u16 sMachampFormSpeciesIdTable[] = {
     SPECIES_MACHAMP,
-    SPECIES_MACHAMP_GMAX,
+    SPECIES_MACHAMP_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
@@ -213,14 +213,14 @@ static const u16 sMukFormSpeciesIdTable[] = {
 
 static const u16 sKinglerFormSpeciesIdTable[] = {
     SPECIES_KINGLER,
-    SPECIES_KINGLER_GMAX,
+    SPECIES_KINGLER_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
 static const u16 sGengarFormSpeciesIdTable[] = {
     SPECIES_GENGAR,
     SPECIES_GENGAR_MEGA,
-    SPECIES_GENGAR_GMAX,
+    SPECIES_GENGAR_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
@@ -280,13 +280,13 @@ static const u16 sGyaradosFormSpeciesIdTable[] = {
 
 static const u16 sLaprasFormSpeciesIdTable[] = {
     SPECIES_LAPRAS,
-    SPECIES_LAPRAS_GMAX,
+    SPECIES_LAPRAS_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
 static const u16 sEeveeFormSpeciesIdTable[] = {
     SPECIES_EEVEE,
-    SPECIES_EEVEE_GMAX,
+    SPECIES_EEVEE_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
@@ -298,7 +298,7 @@ static const u16 sAerodactylFormSpeciesIdTable[] = {
 
 static const u16 sSnorlaxFormSpeciesIdTable[] = {
     SPECIES_SNORLAX,
-    SPECIES_SNORLAX_GMAX,
+    SPECIES_SNORLAX_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
@@ -771,7 +771,7 @@ static const u16 sZoroarkFormSpeciesIdTable[] = {
 
 static const u16 sGarbodorFormSpeciesIdTable[] = {
     SPECIES_GARBODOR,
-    SPECIES_GARBODOR_GMAX,
+    SPECIES_GARBODOR_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
@@ -1096,68 +1096,68 @@ static const u16 sMagearnaFormSpeciesIdTable[] = {
 #if P_GEN_8_POKEMON == TRUE
 static const u16 sMelmetalFormSpeciesIdTable[] = {
     SPECIES_MELMETAL,
-    SPECIES_MELMETAL_GMAX,
+    SPECIES_MELMETAL_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
 static const u16 sRillaboomFormSpeciesIdTable[] = {
     SPECIES_RILLABOOM,
-    SPECIES_RILLABOOM_GMAX,
+    SPECIES_RILLABOOM_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
 static const u16 sCinderaceFormSpeciesIdTable[] = {
     SPECIES_CINDERACE,
-    SPECIES_CINDERACE_GMAX,
+    SPECIES_CINDERACE_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
 static const u16 sInteleonFormSpeciesIdTable[] = {
     SPECIES_INTELEON,
-    SPECIES_INTELEON_GMAX,
+    SPECIES_INTELEON_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
 static const u16 sCorviknightFormSpeciesIdTable[] = {
     SPECIES_CORVIKNIGHT,
-    SPECIES_CORVIKNIGHT_GMAX,
+    SPECIES_CORVIKNIGHT_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
 static const u16 sOrbeetleFormSpeciesIdTable[] = {
     SPECIES_ORBEETLE,
-    SPECIES_ORBEETLE_GMAX,
+    SPECIES_ORBEETLE_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
 static const u16 sDrednawFormSpeciesIdTable[] = {
     SPECIES_DREDNAW,
-    SPECIES_DREDNAW_GMAX,
+    SPECIES_DREDNAW_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
 static const u16 sCoalossalFormSpeciesIdTable[] = {
     SPECIES_COALOSSAL,
-    SPECIES_COALOSSAL_GMAX,
+    SPECIES_COALOSSAL_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
 static const u16 sFlappleFormSpeciesIdTable[] = {
     SPECIES_FLAPPLE,
-    SPECIES_FLAPPLE_GMAX,
+    SPECIES_FLAPPLE_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
 static const u16 sAppletunFormSpeciesIdTable[] = {
     SPECIES_APPLETUN,
-    SPECIES_APPLETUN_GMAX,
+    SPECIES_APPLETUN_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
 
 static const u16 sSandacondaFormSpeciesIdTable[] = {
     SPECIES_SANDACONDA,
-    SPECIES_SANDACONDA_GMAX,
+    SPECIES_SANDACONDA_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
@@ -1171,19 +1171,19 @@ static const u16 sCramorantFormSpeciesIdTable[] = {
 static const u16 sToxtricityFormSpeciesIdTable[] = {
     SPECIES_TOXTRICITY,
     SPECIES_TOXTRICITY_LOW_KEY,
-    SPECIES_TOXTRICITY_GMAX,
+    SPECIES_TOXTRICITY_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
 static const u16 sCentiskorchFormSpeciesIdTable[] = {
     SPECIES_CENTISKORCH,
-    SPECIES_CENTISKORCH_GMAX,
+    SPECIES_CENTISKORCH_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
 static const u16 sHattereneFormSpeciesIdTable[] = {
     SPECIES_HATTERENE,
-    SPECIES_HATTERENE_GMAX,
+    SPECIES_HATTERENE_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
@@ -1201,7 +1201,7 @@ static const u16 sPolteageistFormSpeciesIdTable[] = {
 
 static const u16 sGrimmsnarlFormSpeciesIdTable[] = {
     SPECIES_GRIMMSNARL,
-    SPECIES_GRIMMSNARL_GMAX,
+    SPECIES_GRIMMSNARL_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
@@ -1238,13 +1238,13 @@ static const u16 sMorpekoFormSpeciesIdTable[] = {
 
 static const u16 sCopperajahFormSpeciesIdTable[] = {
     SPECIES_COPPERAJAH,
-    SPECIES_COPPERAJAH_GMAX,
+    SPECIES_COPPERAJAH_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
 static const u16 sDuraludonFormSpeciesIdTable[] = {
     SPECIES_DURALUDON,
-    SPECIES_DURALUDON_GMAX,
+    SPECIES_DURALUDON_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
@@ -1269,8 +1269,8 @@ static const u16 sEternatusFormSpeciesIdTable[] = {
 static const u16 sUrshifuFormSpeciesIdTable[] = {
     SPECIES_URSHIFU,
     SPECIES_URSHIFU_RAPID_STRIKE_STYLE,
-    SPECIES_URSHIFU_GMAX,
-    SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GMAX,
+    SPECIES_URSHIFU_GIGANTAMAX,
+    SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX,
     FORM_SPECIES_END,
 };
 
