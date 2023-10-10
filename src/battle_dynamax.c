@@ -680,19 +680,19 @@ void BS_SetMaxMoveEffect(void)
             {
                 case MAX_EFFECT_MISTY_TERRAIN:
                     statusFlag = STATUS_FIELD_MISTY_TERRAIN;
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_MISTY;
                     break;
                 case MAX_EFFECT_GRASSY_TERRAIN:
                     statusFlag = STATUS_FIELD_GRASSY_TERRAIN;
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_GRASSY;
                     break;
                 case MAX_EFFECT_ELECTRIC_TERRAIN:
                     statusFlag = STATUS_FIELD_ELECTRIC_TERRAIN;
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_ELECTRIC;
                     break;
                 case MAX_EFFECT_PSYCHIC_TERRAIN:
                     statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN;
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_PSYCHIC;
                     break;
             }
             if (!(gFieldStatuses & statusFlag) && statusFlag != 0)

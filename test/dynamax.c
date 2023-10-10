@@ -783,18 +783,22 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Rockfall sets up a sandstorm")
 
 SINGLE_BATTLE_TEST("(DYNAMAX) Max Overgrowth sets up Grassy Terrain")
 {
-    KNOWN_FAILING; // Grassy terrain bugged #2820
+    s32 maxHP = 490; // Because of recalculated stats upon Dynamaxing
     GIVEN {
         ASSUME(gBattleMoves[MOVE_MAX_OVERGROWTH].argument == MAX_EFFECT_GRASSY_TERRAIN);
-        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(256); HP(128); };
-        PLAYER(SPECIES_WOBBUFFET) { MaxHP(256); HP(128); };
+        ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].baseHP == 190);
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(maxHP); HP(maxHP / 2); };
+        PLAYER(SPECIES_WOBBUFFET) { MaxHP(maxHP); HP(maxHP / 2); };
     } WHEN {
         TURN { MOVE(player, MOVE_VINE_WHIP, dynamax: TRUE); MOVE(opponent, MOVE_CELEBRATE); }
         TURN { MOVE(player, MOVE_VINE_WHIP); MOVE(opponent, MOVE_CELEBRATE); }
     } SCENE {
         MESSAGE("Wobbuffet used Max Overgrowth!");
-        MESSAGE("Foe Wobbuffet cannot use Celebrate!");
-        HP_BAR(player, damage: -256/16);
+        MESSAGE("Grass grew to cover the battlefield!");
+        MESSAGE("Wobbuffet is healed by the grassy terrain!");
+        HP_BAR(player, damage: -maxHP/16);
+        MESSAGE("Foe Wobbuffet is healed by the grassy terrain!");
+        HP_BAR(opponent, damage: -maxHP/16);
     }
 }
 
