@@ -8907,9 +8907,9 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
         break;
     case ABILITY_RIVALRY:
-        if (AreBattlersOfOppositeGender(battlerAtk, battlerDef))
+        if (AreBattlersOfSameGender(battlerAtk, battlerDef))
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
-        else
+        else if (AreBattlersOfOppositeGender(battlerAtk, battlerDef))
             modifier = uq4_12_multiply(modifier, UQ_4_12(0.75));
         break;
     case ABILITY_ANALYTIC:
@@ -11176,6 +11176,14 @@ bool32 AreBattlersOfOppositeGender(u32 battler1, u32 battler2)
     return (gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS && gender1 != gender2);
 }
 
+bool32 AreBattlersOfSameGender(u32 battler1, u32 battler2)
+{
+    u8 gender1 = GetBattlerGender(battler1);
+    u8 gender2 = GetBattlerGender(battler2);
+
+    return (gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS && gender1 == gender2);
+}
+
 u32 CalcSecondaryEffectChance(u32 battler, u8 secondaryEffectChance)
 {
     if (GetBattlerAbility(battler) == ABILITY_SERENE_GRACE)
@@ -11191,7 +11199,7 @@ bool32 IsAlly(u32 battlerAtk, u32 battlerDef)
 
 bool32 IsGen6ExpShareEnabled(void)
 {
-#if I_EXP_SHARE_ITEM < GEN_6
+#if I_EXP_SHARE_FLAG <= TEMP_FLAGS_END
     return FALSE;
 #else
     return FlagGet(I_EXP_SHARE_FLAG);
