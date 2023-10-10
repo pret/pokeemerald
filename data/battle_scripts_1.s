@@ -8712,28 +8712,6 @@ BattleScript_ActivateTerrainEffects_Increment:
 	restoretarget
 	return
 
-BattleScript_ActivateSwitchInAbilities:
-	copybyte sBATTLER, gBattlerAttacker
-	setbyte gBattlerAttacker, 0
-BattleScript_ActivateSwitchInAbilities_Loop:
-	switchinabilities BS_ATTACKER
-BattleScript_ActivateSwitchInAbilities_Increment:
-	addbyte gBattlerAttacker, 1
-	jumpifbytenotequal gBattlerAttacker, gBattlersCount, BattleScript_ActivateSwitchInAbilities_Loop
-	copybyte gBattlerAttacker, sBATTLER
-	return
-
-BattleScript_ActivateTerrainAbilities:
-	savetarget
-	setbyte gBattlerTarget, 0
-BattleScript_ActivateTerrainAbilities_Loop:
-	activateterrainchangeabilities BS_ATTACKER
-BattleScript_ActivateTerrainAbilities_Increment:
-	addbyte gBattlerTarget, 1
-	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_ActivateTerrainAbilities_Loop
-	restoretarget
-	return
-
 BattleScript_ElectricSurgeActivates::
 	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
@@ -9901,6 +9879,14 @@ BattleScript_MirrorHerbCopyStatChange::
 	call BattleScript_TotemVar_Ret
 	copybyte gBattlerAttacker, sSAVED_BATTLER	@ restore the original attacker just to be safe
 	return
+
+BattleScript_OpportunistCopyStatChange::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_OPPORTUNISTCOPIED
+	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_TotemVar_Ret
+	copybyte gBattlerAttacker, sSAVED_BATTLER	@ restore the original attacker just to be safe
+	end3
 
 BattleScript_TotemVar::
 	call BattleScript_TotemVar_Ret

@@ -5429,6 +5429,12 @@ static void Cmd_moveend(void)
                 effect = TRUE;
             gBattleScripting.moveendState++;
             break;
+        case MOVEEND_OPPORTUNIST:
+            if (AbilityBattleEffects(ABILITYEFFECT_OPPORTUNIST, 0, 0, 0, 0))
+                effect = TRUE; // it loops through all battlers, so we increment after its done with all battlers
+            else
+                gBattleScripting.moveendState++;
+            break;
         case MOVEEND_STATUS_IMMUNITY_ABILITIES: // status immunities
             if (AbilityBattleEffects(ABILITYEFFECT_IMMUNITY, 0, 0, 0, 0))
                 effect = TRUE; // it loops through all battlers, so we increment after its done with all battlers
@@ -6962,6 +6968,8 @@ static void Cmd_switchineffects(void)
         else
         {
             if (DoSwitchInAbilitiesItems(battler))
+                return;
+            else if (AbilityBattleEffects(ABILITYEFFECT_OPPORTUNIST, battler, 0, 0, 0))
                 return;
         }
 
@@ -9062,6 +9070,7 @@ static void Cmd_various(void)
         AbilityBattleEffects(ABILITYEFFECT_NEUTRALIZINGGAS, battler, 0, 0, 0);
         AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, battler, 0, 0, 0);
         AbilityBattleEffects(ABILITYEFFECT_TRACE2, battler, 0, 0, 0);
+        AbilityBattleEffects(ABILITYEFFECT_OPPORTUNIST, battler, 0, 0, 0);
         return;
     }
     case VARIOUS_SAVE_TARGET:
@@ -9883,7 +9892,7 @@ static void Cmd_various(void)
     {
         VARIOUS_ARGS(const u8 *jumpInstr);
         battler = gBattlerAttacker;
-        if (gTotemBoosts[battler].stats == 0)
+        if (gQueuedStatBoosts[battler].stats == 0)
         {
             gBattlescriptCurrInstr = cmd->nextInstr;    // stats done, exit
         }
@@ -9891,19 +9900,19 @@ static void Cmd_various(void)
         {
             for (i = 0; i < (NUM_BATTLE_STATS - 1); i++)
             {
-                if (gTotemBoosts[battler].stats & (1 << i))
+                if (gQueuedStatBoosts[battler].stats & (1 << i))
                 {
-                    if (gTotemBoosts[battler].statChanges[i] <= -1)
-                        SET_STATCHANGER(i + 1, abs(gTotemBoosts[battler].statChanges[i]), TRUE);
+                    if (gQueuedStatBoosts[battler].statChanges[i] <= -1)
+                        SET_STATCHANGER(i + 1, abs(gQueuedStatBoosts[battler].statChanges[i]), TRUE);
                     else
-                        SET_STATCHANGER(i + 1, gTotemBoosts[battler].statChanges[i], FALSE);
+                        SET_STATCHANGER(i + 1, gQueuedStatBoosts[battler].statChanges[i], FALSE);
 
-                    gTotemBoosts[battler].stats &= ~(1 << i);
+                    gQueuedStatBoosts[battler].stats &= ~(1 << i);
                     gBattleScripting.battler = battler;
                     gBattlerTarget = battler;
-                    if (gTotemBoosts[battler].stats & 0x80)
+                    if (gQueuedStatBoosts[battler].stats & 0x80)
                     {
-                        gTotemBoosts[battler].stats &= ~0x80; // set 'aura flared to life' flag
+                        gQueuedStatBoosts[battler].stats &= ~0x80; // set 'aura flared to life' flag
                         gBattlescriptCurrInstr = BattleScript_TotemFlaredToLife;
                     }
                     else
@@ -11617,12 +11626,19 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
             {
                 if (GetBattlerSide(index) == GetBattlerSide(battler))
                     continue; // Only triggers on opposing side
-                if (GetBattlerHoldEffect(index, TRUE) == HOLD_EFFECT_MIRROR_HERB
+                if (GetBattlerAbility(index) == ABILITY_OPPORTUNIST
+                        && gProtectStructs[battler].activateOpportunist == 0) // don't activate opportunist on other mon's opportunist raises
+                {
+                    gProtectStructs[index].activateOpportunist = 2;      // set stats to copy
+                    gQueuedStatBoosts[index].stats |= (1 << (statId - 1));    // -1 to start at atk
+                    gQueuedStatBoosts[index].statChanges[statId - 1] += statValue; // cumulative in case of multiple opponent boosts
+                }
+                else if (GetBattlerHoldEffect(index, TRUE) == HOLD_EFFECT_MIRROR_HERB
                         && gBattleMons[index].statStages[statId] < MAX_STAT_STAGE)
                 {
                     gProtectStructs[index].eatMirrorHerb = 1;
-                    gTotemBoosts[index].stats |= (1 << (statId - 1));    // -1 to start at atk
-                    gTotemBoosts[index].statChanges[statId - 1] = statValue;
+                    gQueuedStatBoosts[index].stats |= (1 << (statId - 1));    // -1 to start at atk
+                    gQueuedStatBoosts[index].statChanges[statId - 1] = statValue;
                 }
             }
         }
