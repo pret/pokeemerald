@@ -14,7 +14,7 @@ SINGLE_BATTLE_TEST("Rocky Payload increases Rock-type move damage", s16 damage)
     PARAMETRIZE { move = MOVE_POWER_GEM; ability = ABILITY_ROCKY_PAYLOAD; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TACKLE].type == TYPE_NORMAL);
+        ASSUME(gBattleMoves[MOVE_TACKLE].type != TYPE_ROCK);
         ASSUME(gBattleMoves[MOVE_ROCK_THROW].type == TYPE_ROCK);
         ASSUME(gBattleMoves[MOVE_POWER_GEM].type == TYPE_ROCK);
         ASSUME(gBattleMoves[MOVE_ROCK_THROW].split == SPLIT_PHYSICAL);

@@ -4,8 +4,8 @@
 SINGLE_BATTLE_TEST("Poison Heal heals from (Toxic) Poison damage")
 {
     u8 status;
-    PARAMETRIZE { status=STATUS1_POISON; }
-    PARAMETRIZE { status=STATUS1_TOXIC_POISON; }
+    PARAMETRIZE { status = STATUS1_POISON; }
+    PARAMETRIZE { status = STATUS1_TOXIC_POISON; }
 
     GIVEN {
         PLAYER(SPECIES_SHROOMISH) { Ability(ABILITY_POISON_HEAL); Status1(status);  HP(1), MaxHP(400); }
@@ -28,8 +28,8 @@ SINGLE_BATTLE_TEST("Poison Heal heals from Toxic Poison damage are constant")
         PLAYER(SPECIES_SHROOMISH) { Ability(ABILITY_POISON_HEAL); Status1(STATUS1_TOXIC_POISON);  HP(1), MaxHP(400); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE); }
-        TURN { MOVE(player, MOVE_CELEBRATE); }
+        TURN { }
+        TURN { }
     } SCENE {
         ABILITY_POPUP(player, ABILITY_POISON_HEAL);
         MESSAGE("The poisoning healed Shroomish a little bit!");
