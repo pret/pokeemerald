@@ -34,6 +34,7 @@
 #undef Q_4_12
 #define Q_4_12(n) (s32)((n) * 4096)
 
+static EWRAM_DATA struct AILogLine sAILogLines[MAX_BATTLERS_COUNT][MAX_MON_MOVES][MAX_AI_LOG_LINES] = {0};
 EWRAM_DATA struct BattleTestRunnerState *gBattleTestRunnerState = NULL;
 
 static void CB2_BattleTest_NextParameter(void);
@@ -937,7 +938,7 @@ static void PrintAiMoveLog(u32 battlerId, u32 moveSlot, u32 moveId, s32 totalSco
     MgbaPrintf_("Score Log for move %S:\n", gMoveNames[moveId]);
     for (i = 0; i < MAX_AI_LOG_LINES; i++)
     {
-        struct AILogLine *log = &DATA.aiLogLines[battlerId][moveSlot][i];
+        struct AILogLine *log = &sAILogLines[battlerId][moveSlot][i];
         if (log->file)
         {
             if (log->set)
@@ -973,7 +974,7 @@ static void ClearAiLog(u32 battlerId)
     u32 i, j;
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        struct AILogLine *logs = DATA.aiLogLines[battlerId][i];
+        struct AILogLine *logs = sAILogLines[battlerId][i];
         for (j = 0; j < MAX_AI_LOG_LINES; j++)
             memset(&logs[j], 0, sizeof(struct AILogLine));
     }
@@ -2551,7 +2552,7 @@ struct AILogLine *GetLogLine(u32 battlerId, u32 moveIndex)
 
     for (i = 0; i < MAX_AI_LOG_LINES; i++)
     {
-        struct AILogLine *log = &DATA.aiLogLines[battlerId][moveIndex][i];
+        struct AILogLine *log = &sAILogLines[battlerId][moveIndex][i];
         if (log->file == NULL)
         {
             return log;
