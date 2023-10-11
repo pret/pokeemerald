@@ -7960,9 +7960,10 @@ BattleScript_DoTurnDmgEnd:
 	end2
 
 BattleScript_PoisonHealActivates::
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
 	printstring STRINGID_POISONHEALHPUP
 	waitmessage B_WAIT_TIME_LONG
-	recordability BS_ATTACKER
 	statusanimation BS_ATTACKER
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
 	healthbarupdate BS_ATTACKER
