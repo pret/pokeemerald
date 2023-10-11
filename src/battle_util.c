@@ -9013,7 +9013,7 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
         break;
     case ABILITY_TRANSISTOR:
         if (moveType == TYPE_ELECTRIC)
-        #if B_TRANSISTOR >= GEN_9
+        #if B_TRANSISTOR_BOOST >= GEN_9
             modifier = uq4_12_multiply(modifier, UQ_4_12(5325 / 4096));
         #else
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
