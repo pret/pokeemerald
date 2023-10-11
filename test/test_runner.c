@@ -88,7 +88,7 @@ static u32 AssignCostToRunner(void)
     u32 minCostProcess;
 
     if (gTestRunnerState.test->runner == &gAssumptionsRunner)
-        return TRUE;
+        return 0;
 
     minCostProcess = MinCostProcess();
 
@@ -188,13 +188,6 @@ void CB2_TestRunner(void)
         REG_TM2CNT_L = UINT16_MAX - (274 * 60); // Approx. 1 second.
         REG_TM2CNT_H = TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_1024CLK;
 
-        // NOTE: Assumes that the compiler interns __FILE__.
-        if (gTestRunnerState.skipFilename == gTestRunnerState.test->filename)
-        {
-            gTestRunnerState.result = TEST_RESULT_ASSUMPTION_FAIL;
-            return;
-        }
-
         sCurrentTest.address = (uintptr_t)gTestRunnerState.test;
         sCurrentTest.state = CURRENT_TEST_STATE_ESTIMATE;
 
@@ -210,9 +203,17 @@ void CB2_TestRunner(void)
         sCurrentTest.state = CURRENT_TEST_STATE_RUN;
         if (gTestRunnerState.test->runner->setUp)
             gTestRunnerState.test->runner->setUp(gTestRunnerState.test->data);
-        gTestRunnerState.test->runner->run(gTestRunnerState.test->data);
+        // NOTE: Assumes that the compiler interns __FILE__.
+        if (gTestRunnerState.skipFilename == gTestRunnerState.test->filename) // Assumption fails for tests in this file.
+        {
+            gTestRunnerState.result = TEST_RESULT_ASSUMPTION_FAIL;
+            return;
+        }
+        else
+        {
+            gTestRunnerState.test->runner->run(gTestRunnerState.test->data);
+        }
         break;
-
     case STATE_REPORT_RESULT:
         REG_TM2CNT_H = 0;
 
@@ -254,7 +255,9 @@ void CB2_TestRunner(void)
         if (gTestRunnerState.test->runner == &gAssumptionsRunner)
         {
             if (gTestRunnerState.result != TEST_RESULT_PASS)
+            {
                 gTestRunnerState.skipFilename = gTestRunnerState.test->filename;
+            }
         }
         else
         {
