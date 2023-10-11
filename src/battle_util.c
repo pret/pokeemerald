@@ -2541,6 +2541,7 @@ enum
     ENDTURN_PLASMA_FISTS,
     ENDTURN_CUD_CHEW,
     ENDTURN_SALT_CURE,
+    ENDTURN_SYRUP_BOMB,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -3112,6 +3113,30 @@ u8 DoBattlerEndTurnEffects(void)
                     gBattleMoveDamage = 1;
                 PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_SALT_CURE);
                 BattleScriptExecute(BattleScript_SaltCureExtraDamage);
+                effect++;
+            }
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_SYRUP_BOMB:
+            if ((gStatuses4[battler] & STATUS4_SYRUP_BOMB) && (gBattleMons[battler].hp != 0))
+            {
+                u16 battlerAbility = GetBattlerAbility(battler);
+                u32 battlerHoldEffect = GetBattlerHoldEffect(battler, TRUE);
+
+                gDisableStructs[battler].syrupBombTimer--;
+                if (gDisableStructs[battler].syrupBombTimer == 0)
+                {
+                    gStatuses4[battler] &= ~STATUS4_SYRUP_BOMB;
+                    PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_SYRUP_BOMB);
+                    gBattlescriptCurrInstr = BattleScript_WrapEnds;
+                }
+                else if (gDisableStructs[battler].syrupBombTimer != 0)
+                {
+                    gBattlerTarget = battler;
+                    PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_SYRUP_BOMB);
+                    gBattlescriptCurrInstr = BattleScript_SyrupBombEndTurn;
+                }
+                BattleScriptExecute(gBattlescriptCurrInstr);
                 effect++;
             }
             gBattleStruct->turnEffectsTracker++;
@@ -11230,7 +11255,7 @@ bool32 IsGen6ExpShareEnabled(void)
 
 
 u8 GetBattlerType(u32 battler, u8 typeIndex)
-{    
+{
     u16 types[3] = {0};
     types[0] = gBattleMons[battler].type1;
     types[1] = gBattleMons[battler].type2;

@@ -5644,6 +5644,10 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
         if (holdEffect == gBattleMoves[move].argument)
             gBattleStruct->dynamicMoveType = ItemId_GetSecondaryId(gBattleMons[battlerAtk].item) | F_DYNAMIC_TYPE_2;
     }
+    else if (gBattleMoves[move].effect == EFFECT_IVY_CUDGEL && holdEffect == HOLD_EFFECT_MASK)
+    {
+        gBattleStruct->dynamicMoveType = ItemId_GetSecondaryId(gBattleMons[battlerAtk].item) | F_DYNAMIC_TYPE_2;
+    }
     else if (gBattleMoves[move].effect == EFFECT_REVELATION_DANCE)
     {
         if (gBattleMons[battlerAtk].type1 != TYPE_MYSTERY)
