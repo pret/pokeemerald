@@ -239,9 +239,9 @@ enum SoundMenu
 struct DebugMonData
 {
     u16 species;
-    u8 level:7;
+    u8 level;
     bool8 isShiny:1;
-    u8 nature:6;
+    u8 nature:5;
     u8 abilityNum:2;
     u8  mon_iv_hp;
     u8  mon_iv_atk;
