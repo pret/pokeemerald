@@ -3,21 +3,23 @@
 
 SINGLE_BATTLE_TEST("Bad poison deals 1/16th cumulative damage per turn")
 {
+    u32 j;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_TOXIC_POISON); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        for (i = 0; i < 4; i++)
+        for (j = 0; j < 4; j++)
             TURN {}
     } SCENE {
         s32 maxHP = GetMonData(&PLAYER_PARTY[0], MON_DATA_MAX_HP);
-        for (i = 0; i < 4; i++)
-            HP_BAR(player, damage: maxHP / 16 * (i + 1));
+        for (j = 0; j < 4; j++)
+            HP_BAR(player, damage: maxHP / 16 * (j + 1));
     }
 }
 
 SINGLE_BATTLE_TEST("Bad poison cumulative damage resets on switch")
 {
+    u32 j;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_TOXIC_POISON); }
         PLAYER(SPECIES_WYNAUT);
@@ -31,9 +33,9 @@ SINGLE_BATTLE_TEST("Bad poison cumulative damage resets on switch")
         TURN {}
     } SCENE {
         s32 maxHP = GetMonData(&PLAYER_PARTY[0], MON_DATA_MAX_HP);
-        for (i = 0; i < 2; i++)
-            HP_BAR(player, damage: maxHP / 16 * (i + 1));
-        for (i = 0; i < 2; i++)
-            HP_BAR(player, damage: maxHP / 16 * (i + 1));
+        for (j = 0; j < 2; j++)
+            HP_BAR(player, damage: maxHP / 16 * (j + 1));
+        for (j = 0; j < 2; j++)
+            HP_BAR(player, damage: maxHP / 16 * (j + 1));
     }
 }

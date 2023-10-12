@@ -472,8 +472,8 @@
 
 enum { BATTLE_TEST_SINGLES, BATTLE_TEST_DOUBLES };
 
-typedef void (*SingleBattleTestFunction)(void *, u32, struct BattlePokemon *, struct BattlePokemon *);
-typedef void (*DoubleBattleTestFunction)(void *, u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *);
+typedef void (*SingleBattleTestFunction)(void *, const u32, struct BattlePokemon *, struct BattlePokemon *);
+typedef void (*DoubleBattleTestFunction)(void *, const u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *);
 
 struct BattleTest
 {
@@ -660,7 +660,7 @@ extern struct BattleTestRunnerState *gBattleTestRunnerState;
 
 #define SINGLE_BATTLE_TEST(_name, ...) \
     struct CAT(Result, __LINE__) { MEMBERS(__VA_ARGS__) }; \
-    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, u32, struct BattlePokemon *, struct BattlePokemon *); \
+    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, const u32, struct BattlePokemon *, struct BattlePokemon *); \
     __attribute__((section(".tests"))) static const struct Test CAT(sTest, __LINE__) = \
     { \
         .name = _name, \
@@ -674,11 +674,11 @@ extern struct BattleTestRunnerState *gBattleTestRunnerState;
             .resultsSize = sizeof(struct CAT(Result, __LINE__)), \
         }, \
     }; \
-    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *results, u32 i, struct BattlePokemon *player, struct BattlePokemon *opponent)
+    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *results, const u32 i, struct BattlePokemon *player, struct BattlePokemon *opponent)
 
 #define DOUBLE_BATTLE_TEST(_name, ...) \
     struct CAT(Result, __LINE__) { MEMBERS(__VA_ARGS__) }; \
-    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *); \
+    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, const u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *); \
     __attribute__((section(".tests"))) static const struct Test CAT(sTest, __LINE__) = \
     { \
         .name = _name, \
@@ -692,7 +692,7 @@ extern struct BattleTestRunnerState *gBattleTestRunnerState;
             .resultsSize = sizeof(struct CAT(Result, __LINE__)), \
         }, \
     }; \
-    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *results, u32 i, struct BattlePokemon *playerLeft, struct BattlePokemon *opponentLeft, struct BattlePokemon *playerRight, struct BattlePokemon *opponentRight)
+    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *results, const u32 i, struct BattlePokemon *playerLeft, struct BattlePokemon *opponentLeft, struct BattlePokemon *playerRight, struct BattlePokemon *opponentRight)
 
 /* Parametrize */
 
