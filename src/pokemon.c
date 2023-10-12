@@ -5781,12 +5781,6 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
     }                                                                                                   \
 }
 
-#if B_X_ITEMS_BUFF >= GEN_7
-    #define X_ITEM_STAGES 2
-#else
-    #define X_ITEM_STAGES 1
-#endif
-
 // EXP candies store an index for this table in their holdEffectParam.
 const u32 sExpCandyExperienceTable[] = {
     [EXP_100 - 1] = 100,
@@ -6359,12 +6353,15 @@ static void BufferStatRoseMessage(s32 statIdx)
 {
     gBattlerTarget = gBattlerInMenuId;
     StringCopy(gBattleTextBuff1, gStatNamesTable[sStatsToRaise[statIdx]]);
-#if B_X_ITEMS_BUFF >= GEN_7
-    StringCopy(gBattleTextBuff2, gText_StatSharply);
-    StringAppend(gBattleTextBuff2, gText_StatRose);
-#else
-    StringCopy(gBattleTextBuff2, gText_StatRose);
-#endif
+    if (B_X_ITEMS_BUFF >= GEN_7)
+    {
+        StringCopy(gBattleTextBuff2, gText_StatSharply);
+        StringAppend(gBattleTextBuff2, gText_StatRose);
+    }
+    else
+    {
+        StringCopy(gBattleTextBuff2, gText_StatRose);
+    }
     BattleStringExpandPlaceholdersToDisplayedString(gText_DefendersStatRose);
 }
 

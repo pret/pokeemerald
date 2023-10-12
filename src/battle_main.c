@@ -3516,11 +3516,10 @@ static void DoBattleIntro(void)
         }
         else // Skip party summary since it is a wild battle.
         {
-        #if B_FAST_INTRO == TRUE
-            *state = 7; // Don't wait for sprite, print message at the same time.
-        #else
-            *state = 6; // Wait for sprite to load.
-        #endif
+            if (B_FAST_INTRO == TRUE)
+                *state = 7; // Don't wait for sprite, print message at the same time.
+            else
+                *state = 6; // Wait for sprite to load.
         }
         break;
     case 5: // draw party summary in trainer battles
@@ -3589,11 +3588,10 @@ static void DoBattleIntro(void)
             }
             else
             {
-            #if B_FAST_INTRO == TRUE
-                *state = 15; // Wait for text to be printed.
-            #else
-                *state = 14; // Wait for text and sprite.
-            #endif
+                if (B_FAST_INTRO == TRUE)
+                    *state = 15; // Wait for text to be printed.
+                else
+                    *state = 14; // Wait for text and sprite.
             }
         }
         break;
@@ -3631,11 +3629,10 @@ static void DoBattleIntro(void)
             BtlController_EmitIntroTrainerBallThrow(battler, BUFFER_A);
             MarkBattlerForControllerExec(battler);
         }
-    #if B_FAST_INTRO == TRUE
-        if (!(gBattleTypeFlags & (BATTLE_TYPE_RECORDED | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_RECORDED_IS_MASTER | BATTLE_TYPE_LINK)))
+        if (B_FAST_INTRO == TRUE
+          && !(gBattleTypeFlags & (BATTLE_TYPE_RECORDED | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_RECORDED_IS_MASTER | BATTLE_TYPE_LINK)))
             *state = 15; // Print at the same time as trainer sends out second mon.
         else
-    #endif
             (*state)++;
         break;
     case 14: // wait for opponent 2 send out
@@ -3655,14 +3652,13 @@ static void DoBattleIntro(void)
                 battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
 
             // A hack that makes fast intro work in trainer battles too.
-        #if B_FAST_INTRO == TRUE
-            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
+            if (B_FAST_INTRO == TRUE
+                && gBattleTypeFlags & BATTLE_TYPE_TRAINER
                 && !(gBattleTypeFlags & (BATTLE_TYPE_RECORDED | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_RECORDED_IS_MASTER | BATTLE_TYPE_LINK))
                 && gSprites[gHealthboxSpriteIds[battler ^ BIT_SIDE]].callback == SpriteCallbackDummy)
             {
                 return;
             }
-        #endif
 
             PrepareStringBattle(STRINGID_INTROSENDOUT, battler);
         }
@@ -3998,10 +3994,8 @@ u8 IsRunningFromBattleImpossible(u32 battler)
 
     if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
         return BATTLE_RUN_SUCCESS;
-    #if B_GHOSTS_ESCAPE >= GEN_6
-        if (IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
-            return BATTLE_RUN_SUCCESS;
-    #endif
+    if (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
+        return BATTLE_RUN_SUCCESS;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         return BATTLE_RUN_SUCCESS;
     if (GetBattlerAbility(battler) == ABILITY_RUN_AWAY)
@@ -4665,11 +4659,7 @@ u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect)
 
     // paralysis drop
     if (gBattleMons[battler].status1 & STATUS1_PARALYSIS && ability != ABILITY_QUICK_FEET)
-    #if B_PARALYSIS_SPEED >= GEN_7
-        speed /= 2;
-    #else
-        speed /= 4;
-    #endif
+        speed /= B_PARALYSIS_SPEED >= GEN_7 ? 2 : 4;
 
     return speed;
 }
@@ -4701,9 +4691,7 @@ s8 GetMovePriority(u32 battler, u16 move)
 
     priority = gBattleMoves[move].priority;
     if (ability == ABILITY_GALE_WINGS
-    #if B_GALE_WINGS >= GEN_7
-        && BATTLER_MAX_HP(battler)
-    #endif
+        && (B_GALE_WINGS < GEN_7 || BATTLER_MAX_HP(battler))
         && gBattleMoves[move].type == TYPE_FLYING)
     {
         priority++;
@@ -5054,9 +5042,8 @@ static bool32 TryDoMegaEvosBeforeMoves(void)
         }
     }
 
-    #if B_MEGA_EVO_TURN_ORDER >= GEN_7
+    if (B_MEGA_EVO_TURN_ORDER >= GEN_7)
         TryChangeTurnOrder(); // This will just do nothing if no mon has mega evolved.
-    #endif
     return FALSE;
 }
 
@@ -5408,9 +5395,8 @@ static void HandleEndTurn_FinishBattle(void)
             TestRunner_Battle_AfterLastTurn();
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
-    #if B_TRAINERS_KNOCK_OFF_ITEMS == TRUE || B_RESTORE_HELD_BATTLE_ITEMS == TRUE
+        if (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE || B_RESTORE_HELD_BATTLE_ITEMS == TRUE)
             TryRestoreHeldItems();
-    #endif
         for (i = 0; i < PARTY_SIZE; i++)
         {
             bool8 changedForm = FALSE;
@@ -5426,11 +5412,9 @@ static void HandleEndTurn_FinishBattle(void)
             gBattleStruct->changedSpecies[B_SIDE_PLAYER][i] = SPECIES_NONE;
             gBattleStruct->changedSpecies[B_SIDE_OPPONENT][i] = SPECIES_NONE;
 
-        #if B_RECALCULATE_STATS >= GEN_5
             // Recalculate the stats of every party member before the end
-            if (!changedForm)
+            if (!changedForm && B_RECALCULATE_STATS >= GEN_5)
                 CalculateMonStats(&gPlayerParty[i]);
-        #endif
         }
         // Clear battle mon species to avoid a bug on the next battle that causes
         // healthboxes loading incorrectly due to it trying to create a Mega Indicator
@@ -5463,10 +5447,9 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
                                   | BATTLE_TYPE_FRONTIER
                                   | BATTLE_TYPE_EREADER_TRAINER
                                   | BATTLE_TYPE_WALLY_TUTORIAL))
-        #if B_EVOLUTION_AFTER_WHITEOUT <= GEN_5
-            && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT)
-        #endif
-        )
+            && (B_EVOLUTION_AFTER_WHITEOUT >= GEN_6
+                || gBattleOutcome == B_OUTCOME_WON
+                || gBattleOutcome == B_OUTCOME_CAUGHT))
         {
             gBattleMainFunc = TrySpecialEvolution;
         }

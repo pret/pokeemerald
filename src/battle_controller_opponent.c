@@ -590,9 +590,8 @@ static void OpponentHandleChooseMove(u32 battler)
                 target = GetBattlerAtPosition(Random() & 2);
             } while (!CanTargetBattler(battler, target, move));
 
-        #if B_WILD_NATURAL_ENEMIES == TRUE
             // Don't bother to loop through table if the move can't attack ally
-            if (!(gBattleMoves[move].target & MOVE_TARGET_BOTH))
+            if (B_WILD_NATURAL_ENEMIES == TRUE && !(gBattleMoves[move].target & MOVE_TARGET_BOTH))
             {
                 u16 i, speciesAttacker, speciesTarget, isPartnerEnemy = FALSE;
                 static const u16 naturalEnemies[][2] =
@@ -622,8 +621,9 @@ static void OpponentHandleChooseMove(u32 battler)
                     BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (target << 8));
             }
             else
-        #endif
+            {
                 BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (target << 8));
+            }
         }
         else
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) << 8));
