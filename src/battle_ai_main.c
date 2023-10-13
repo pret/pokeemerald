@@ -118,7 +118,7 @@ void BattleAI_SetupItems(void)
 static u32 GetWildAiFlags(void)
 {
     u32 avgLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
-    u32 flags;
+    u32 flags = 0;
 
     if (IsDoubleBattle())
         avgLevel = (GetMonData(&gEnemyParty[0], MON_DATA_LEVEL) + GetMonData(&gEnemyParty[1], MON_DATA_LEVEL)) / 2;
@@ -174,7 +174,7 @@ void BattleAI_SetupFlags(void)
 // sBattler_AI set in ComputeBattleAiScores
 void BattleAI_SetupAIData(u8 defaultScoreMoves, u32 battler)
 {
-    s32 i, move, dmg;
+    s32 i;
     u8 moveLimitations;
 
     // Clear AI data but preserve the flags.
@@ -492,7 +492,7 @@ static u32 ChooseMoveOrAction_Singles(u32 battlerAi)
     u8 currentMoveArray[MAX_MON_MOVES];
     u8 consideredMoveArray[MAX_MON_MOVES];
     u32 numOfBestMoves;
-    s32 i, id;
+    s32 i;
     u32 flags = AI_THINKING_STRUCT->aiFlags;
 
     AI_DATA->partnerMove = 0;   // no ally
@@ -721,7 +721,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     u32 moveEffect = gBattleMoves[move].effect;
     s32 moveType;
     u32 moveTarget = AI_GetBattlerMoveTargetType(battlerAtk, move);
-    u32 accuracy = AI_DATA->moveAccuracy[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex];
     struct AiLogicData *aiData = AI_DATA;
     u32 effectiveness = aiData->effectiveness[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex];
     bool32 isDoubleBattle = IsValidDoubleBattle(battlerAtk);
@@ -3141,26 +3140,13 @@ static u32 CompareMoveAccuracies(u32 battlerAtk, u32 battlerDef, u32 moveSlot1, 
     return 2;
 }
 
-static u32 GetAIMostDamagingMoveId(u32 battlerAtk, u32 battlerDef)
-{
-    u32 i, id = 0;
-    u32 mostDmg = 0;
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (AI_DATA->simulatedDmg[battlerAtk][battlerDef][i] > mostDmg)
-            id = i, mostDmg = AI_DATA->simulatedDmg[battlerAtk][battlerDef][i];
-    }
-    return id;
-}
-
 static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
 {
     u32 i;
     bool32 multipleBestMoves = FALSE;
     s32 noOfHits[MAX_MON_MOVES];
     s32 score = 0;
-    s32 leastHits = 1000, leastHitsId = 0;
+    s32 leastHits = 1000;
     u16 *moves = GetMovesArray(battlerAtk);
     bool8 isPowerfulIgnoredEffect[MAX_MON_MOVES];
 
@@ -3172,7 +3158,6 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
             if (noOfHits[i] < leastHits)
             {
                 leastHits = noOfHits[i];
-                leastHitsId = i;
             }
             isPowerfulIgnoredEffect[i] = IsInIgnoredPowerfulMoveEffects(gBattleMoves[moves[i]].effect);
         }

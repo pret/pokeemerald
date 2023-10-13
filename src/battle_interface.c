@@ -754,12 +754,6 @@ static const struct SpriteTemplate sSpriteTemplate_BurstTrigger =
 #define hBar_HealthBoxSpriteId      data[5]
 #define hBar_Data6                  data[6]
 
-static void InitLastUsedBallAssets(void)
-{
-    gBattleStruct->ballSpriteIds[0] = MAX_SPRITES;
-    gBattleStruct->ballSpriteIds[1] = MAX_SPRITES;
-}
-
 // This function is here to cover a specific case - one player's mon in a 2 vs 1 double battle. In this scenario - display singles layout.
 // The same goes for a 2 vs 1 where opponent has only one pokemon.
 u32 WhichBattleCoords(u32 battlerId) // 0 - singles, 1 - doubles
@@ -780,7 +774,7 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
 {
     s16 data6 = 0;
     u8 healthboxLeftSpriteId, healthboxRightSpriteId;
-    u8 healthbarSpriteId, megaIndicatorSpriteId;
+    u8 healthbarSpriteId;
     struct Sprite *healthBarSpritePtr;
 
     if (WhichBattleCoords(battlerId) == 0) // Singles
@@ -1088,7 +1082,7 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
 static void PrintHpOnHealthbox(u32 spriteId, s16 currHp, s16 maxHp, u32 bgColor, u32 rightTile, u32 leftTile)
 {
     u8 *windowTileData;
-    u32 windowId, tilesCount, x, healthboxTileNum;
+    u32 windowId, tilesCount, x;
     u8 text[28], *txtPtr;
     void *objVram = (void *)(OBJ_VRAM0) + gSprites[spriteId].oam.tileNum * TILE_SIZE_4BPP;
 
@@ -1690,7 +1684,6 @@ void MegaIndicator_LoadSpritesGfx(void)
 
 static bool32 MegaIndicator_ShouldBeInvisible(u32 battlerId, struct Sprite *sprite)
 {
-    u32 side = GetBattlerSide(battlerId);
     bool32 megaEvolved = IsBattlerMegaEvolved(battlerId);
     bool32 primalReverted = IsBattlerPrimalReverted(battlerId);
 
@@ -1737,7 +1730,6 @@ static void MegaIndicator_UpdateOamPriority(u32 healthboxId, u32 oamPriority)
 
 static void MegaIndicator_UpdateLevel(u32 healthboxId, u32 level)
 {
-    u32 i;
     s16 xDelta = 0;
     u8 *spriteId = MegaIndicator_GetSpriteId(healthboxId);
 
@@ -1752,7 +1744,7 @@ static void MegaIndicator_UpdateLevel(u32 healthboxId, u32 level)
 static void MegaIndicator_CreateSprite(u32 battlerId, u32 healthboxSpriteId)
 {
     struct SpriteTemplate sprTemplate;
-    u32 position, level;
+    u32 position;
     u8 *spriteId;
     s16 xHealthbox = 0, y = 0;
     s32 x = 0;
@@ -3656,13 +3648,13 @@ static void Task_BounceBall(u8 taskId)
             sprite->callback = SpriteCB_LastUsedBallBounce; //Show and bounce down
             task->sState++;
         }
-        break;     
+        break;
     case 4:  // Destroy Task
         if(!sprite->sMoving)
         {
             sprite->callback = SpriteCB_LastUsedBall;
             DestroyTask(taskId);
-        }        
+        }
     }
     if (!gLastUsedBallMenuPresent)
     {

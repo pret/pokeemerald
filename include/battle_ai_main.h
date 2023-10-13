@@ -24,6 +24,13 @@
         score += val; \
     } while (0) \
 
+#define ADJUST_SCORE_PTR(val) \
+    do \
+    { \
+        TestRunner_Battle_AIAdjustScore(__FILE__, __LINE__, sBattler_AI, AI_THINKING_STRUCT->movesetIndex, val); \
+        (*score) += val; \
+    } while (0) \
+
 #define RETURN_SCORE_PLUS(val)      \
 {                                   \
     ADJUST_SCORE(val);              \
