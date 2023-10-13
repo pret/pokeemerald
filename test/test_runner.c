@@ -88,7 +88,7 @@ static u32 AssignCostToRunner(void)
     u32 minCostProcess;
 
     if (gTestRunnerState.test->runner == &gAssumptionsRunner)
-        return 0;
+        return gTestRunnerI;
 
     minCostProcess = MinCostProcess();
 
