@@ -452,28 +452,15 @@ BattleScript_EffectSyrupBomb::
 	goto BattleScript_MoveEnd
 
 BattleScript_SyrupBombEndTurn::
-	setbyte sSTAT_ANIM_PLAYED, FALSE
-	copybyte sBATTLER, gBattlerTarget
-	jumpifholdeffect BS_TARGET, HOLD_EFFECT_CLEAR_AMULET, BattleScript_SyrupBombItemNoStatLoss
-	jumpifability BS_TARGET, ABILITY_CLEAR_BODY, BattleScript_SyrupBombAbilityNoStatLoss
-	jumpifability BS_TARGET, ABILITY_FULL_METAL_BODY, BattleScript_SyrupBombAbilityNoStatLoss
-	jumpifability BS_TARGET, ABILITY_WHITE_SMOKE, BattleScript_SyrupBombAbilityNoStatLoss
-	jumpifstat BS_TARGET, CMP_GREATER_THAN, BIT_SPEED, MIN_STAT_STAGE, BattleScript_SyrupBombLowerSpeed
-	goto BattleScript_SyrupBombEnd2
-BattleScript_SyrupBombLowerSpeed:
 	playstatchangeanimation BS_ATTACKER, BIT_SPEED, STAT_CHANGE_NEGATIVE
-	setbyte sSTAT_ANIM_PLAYED, TRUE
 	setstatchanger STAT_SPEED, 1, TRUE
-	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_SyrupBombEnd2
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_SyrupBombEnd2
+    statbuffchange STAT_CHANGE_ALLOW_PTR | STAT_CHANGE_NOT_PROTECT_AFFECTED, BattleScript_SyrupBombTurnDmgEnd
+BattleScript_SyrupBombTurnDmgPrintMsg:
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 3, BattleScript_SyrupBombTurnDmgEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 4, BattleScript_SyrupBombTurnDmgEnd
 	printfromtable gStatDownStringIds
 	waitmessage B_WAIT_TIME_LONG
-BattleScript_SyrupBombItemNoStatLoss::
-	call BattleScript_ItemNoStatLoss
-	goto BattleScript_SyrupBombEnd2
-BattleScript_SyrupBombAbilityNoStatLoss::
-	call BattleScript_AbilityNoStatLoss
-BattleScript_SyrupBombEnd2::
+BattleScript_SyrupBombTurnDmgEnd:
 	end2
 
 BattleScript_EffectMatchaGotcha::
@@ -1079,29 +1066,23 @@ BattleScript_EffectOctolock:
 	goto BattleScript_MoveEnd
 
 BattleScript_OctolockEndTurn::
-	setbyte sSTAT_ANIM_PLAYED, FALSE
-	jumpifstat BS_TARGET, CMP_GREATER_THAN, STAT_DEF, MIN_STAT_STAGE, BattleScript_OctolockLowerDef
-	jumpifstat BS_TARGET, CMP_GREATER_THAN, STAT_SPDEF, MIN_STAT_STAGE, BattleScript_OctolockTryLowerSpDef
-	goto BattleScript_OctolockEnd2
-BattleScript_OctolockLowerDef:
-	jumpifability BS_TARGET, ABILITY_BIG_PECKS, BattleScript_OctolockTryLowerSpDef
 	playstatchangeanimation BS_ATTACKER, BIT_DEF | BIT_SPDEF, STAT_CHANGE_NEGATIVE
-	setbyte sSTAT_ANIM_PLAYED, TRUE
 	setstatchanger STAT_DEF, 1, TRUE
-	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_OctolockTryLowerSpDef
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_OctolockTryLowerSpDef
-	printfromtable gStatUpStringIds
+    statbuffchange STAT_CHANGE_ALLOW_PTR | STAT_CHANGE_NOT_PROTECT_AFFECTED, BattleScript_OctolockTryLowerDef
+BattleScript_OctolockTryLowerDef:
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 3, BattleScript_OctolockTryLowerSpDef
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 4, BattleScript_OctolockTryLowerSpDef
+	printfromtable gStatDownStringIds
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_OctolockTryLowerSpDef:
-	jumpifbyte CMP_EQUAL, sSTAT_ANIM_PLAYED, TRUE, BattleScript_OctolockSkipSpDefAnim
-	playstatchangeanimation BS_ATTACKER, BIT_SPDEF, STAT_CHANGE_NEGATIVE
-BattleScript_OctolockSkipSpDefAnim:
 	setstatchanger STAT_SPDEF, 1, TRUE
-	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_OctolockEnd2
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_OctolockEnd2
-	printfromtable gStatUpStringIds
+    statbuffchange STAT_CHANGE_ALLOW_PTR | STAT_CHANGE_NOT_PROTECT_AFFECTED, BattleScript_OctolockTurnDmgPrintMsg
+BattleScript_OctolockTurnDmgPrintMsg:
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 3, BattleScript_OctlockTurnDmgEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 4, BattleScript_OctlockTurnDmgEnd
+	printfromtable gStatDownStringIds
 	waitmessage B_WAIT_TIME_LONG
-BattleScript_OctolockEnd2::
+BattleScript_OctlockTurnDmgEnd:
 	end2
 
 BattleScript_EffectPoltergeist:

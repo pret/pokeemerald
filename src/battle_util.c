@@ -2793,11 +2793,7 @@ u8 DoBattlerEndTurnEffects(void)
         case ENDTURN_OCTOLOCK:
         {
             u16 battlerAbility = GetBattlerAbility(battler);
-            if (gDisableStructs[battler].octolock
-             && !(GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_CLEAR_AMULET
-                  || battlerAbility == ABILITY_CLEAR_BODY
-                  || battlerAbility == ABILITY_FULL_METAL_BODY
-                  || battlerAbility == ABILITY_WHITE_SMOKE))
+            if (gDisableStructs[battler].octolock)
             {
                 gBattlerTarget = battler;
                 BattleScriptExecute(BattleScript_OctolockEndTurn);
@@ -3094,9 +3090,6 @@ u8 DoBattlerEndTurnEffects(void)
         case ENDTURN_SYRUP_BOMB:
             if ((gStatuses4[battler] & STATUS4_SYRUP_BOMB) && (gBattleMons[battler].hp != 0))
             {
-                u16 battlerAbility = GetBattlerAbility(battler);
-                u32 battlerHoldEffect = GetBattlerHoldEffect(battler, TRUE);
-
                 gDisableStructs[battler].syrupBombTimer--;
                 if (gDisableStructs[battler].syrupBombTimer == 0)
                 {
@@ -5760,7 +5753,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
     case ABILITYEFFECT_OPPORTUNIST:
         /* Similar to ABILITYEFFECT_IMMUNITY in that it loops through all battlers.
          * Is called after ABILITYEFFECT_ON_SWITCHIN to copy any boosts
-         * from switch in abilities e.g. intrepid sword, as 
+         * from switch in abilities e.g. intrepid sword, as
          */
         for (battler = 0; battler < gBattlersCount; battler++)
         {
@@ -5836,7 +5829,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                     effect = 4;
                 break;
             }
-            
+
             if (effect != 0)
             {
                 switch (effect)

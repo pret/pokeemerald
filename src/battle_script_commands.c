@@ -3010,7 +3010,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     gBattleMons[gEffectBattler].status1 |= STATUS1_SLEEP_TURN(1 + RandomUniform(RNG_SLEEP_TURNS, 1, 3));
                 else
                     gBattleMons[gEffectBattler].status1 |= STATUS1_SLEEP_TURN(1 + RandomUniform(RNG_SLEEP_TURNS, 2, 5));
-            }            
+            }
             else
             {
                 gBattleMons[gEffectBattler].status1 |= sStatusFlagsForMoveEffects[gBattleScripting.moveEffect];
@@ -11406,11 +11406,6 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
                   || battlerAbility == ABILITY_WHITE_SMOKE)
                  && (!affectsUser || mirrorArmored) && !certain && gCurrentMove != MOVE_CURSE)
         {
-            if (battlerHoldEffect == HOLD_EFFECT_CLEAR_AMULET)
-            {
-                RecordItemEffectBattle(battler, HOLD_EFFECT_CLEAR_AMULET);
-            }
-
             if (flags == STAT_CHANGE_ALLOW_PTR)
             {
                 if (gSpecialStatuses[battler].statLowered)
@@ -11424,6 +11419,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
                     if (battlerHoldEffect == HOLD_EFFECT_CLEAR_AMULET)
                     {
                         gBattlescriptCurrInstr = BattleScript_ItemNoStatLoss;
+                        RecordItemEffectBattle(battler, HOLD_EFFECT_CLEAR_AMULET);
                     }
                     else
                     {
