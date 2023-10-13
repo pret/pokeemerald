@@ -626,7 +626,7 @@ struct BattleTestRunnerState
 };
 
 extern const struct TestRunner gBattleTestRunner;
-extern struct BattleTestRunnerState *gBattleTestRunnerState;
+extern struct BattleTestRunnerState *const gBattleTestRunnerState;
 
 #define MEMBERS(...) VARARG_8(MEMBERS_, __VA_ARGS__)
 #define MEMBERS_0()
