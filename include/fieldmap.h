@@ -22,6 +22,7 @@
 #include "main.h"
 
 extern struct BackupMapLayout gBackupMapLayout;
+extern u16 ALIGNED(4) sBackupMapData[MAX_MAP_DATA_SIZE];
 
 u32 MapGridGetMetatileIdAt(int, int);
 u32 MapGridGetMetatileBehaviorAt(int, int);

@@ -4,6 +4,7 @@
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "characters.h"
+#include "fieldmap.h"
 #include "item_menu.h"
 #include "main.h"
 #include "malloc.h"
@@ -34,8 +35,9 @@
 #undef Q_4_12
 #define Q_4_12(n) (s32)((n) * 4096)
 
-static EWRAM_DATA struct AILogLine sAILogLines[MAX_BATTLERS_COUNT][MAX_MON_MOVES][MAX_AI_LOG_LINES] = {0};
-EWRAM_DATA struct BattleTestRunnerState *gBattleTestRunnerState = NULL;
+// Alias sBackupMapData to avoid using heap.
+struct BattleTestRunnerState *const gBattleTestRunnerState = (void *)sBackupMapData;
+STATIC_ASSERT(sizeof(struct BattleTestRunnerState) <= sizeof(sBackupMapData), sBackupMapDataSpace);
 
 static void CB2_BattleTest_NextParameter(void);
 static void CB2_BattleTest_NextTrial(void);
@@ -147,9 +149,6 @@ static u32 BattleTest_EstimateCost(void *data)
 {
     u32 cost;
     const struct BattleTest *test = data;
-    STATE = AllocZeroed(sizeof(*STATE));
-    if (!STATE)
-        return 0;
     STATE->runRandomly = TRUE;
     InvokeTestFunction(test);
     cost = 1;
@@ -159,23 +158,21 @@ static u32 BattleTest_EstimateCost(void *data)
         cost *= 3;
     else if (STATE->trials > 1)
         cost *= STATE->trials;
-    FREE_AND_SET_NULL(STATE);
     return cost;
 }
 
 static void BattleTest_SetUp(void *data)
 {
     const struct BattleTest *test = data;
-    STATE = AllocZeroed(sizeof(*STATE));
-    if (!STATE)
-        Test_ExitWithResult(TEST_RESULT_ERROR, "OOM: STATE = AllocZerod(%d)", sizeof(*STATE));
+    memset(STATE, 0, sizeof(*STATE));
     InvokeTestFunction(test);
     STATE->parameters = STATE->parametersCount;
     if (STATE->parametersCount == 0 && test->resultsSize > 0)
         Test_ExitWithResult(TEST_RESULT_INVALID, "results without PARAMETRIZE");
-    STATE->results = AllocZeroed(test->resultsSize * STATE->parameters);
-    if (!STATE->results)
-        Test_ExitWithResult(TEST_RESULT_ERROR, "OOM: STATE->results = AllocZerod(%d)", sizeof(test->resultsSize * STATE->parameters));
+    if (sizeof(*STATE) + test->resultsSize * STATE->parameters > sizeof(sBackupMapData))
+        Test_ExitWithResult(TEST_RESULT_ERROR, "OOM: STATE (%d) + STATE->results (%d) too big for sBackupMapData (%d)", sizeof(*STATE), test->resultsSize * STATE->parameters, sizeof(sBackupMapData));
+    STATE->results = (void *)((char *)sBackupMapData + sizeof(struct BattleTestRunnerState));
+    memset(STATE->results, 0, test->resultsSize * STATE->parameters);
     switch (test->type)
     {
     case BATTLE_TEST_SINGLES:
@@ -939,7 +936,7 @@ static void PrintAiMoveLog(u32 battlerId, u32 moveSlot, u32 moveId, s32 totalSco
     MgbaPrintf_("Score Log for move %S:\n", gMoveNames[moveId]);
     for (i = 0; i < MAX_AI_LOG_LINES; i++)
     {
-        struct AILogLine *log = &sAILogLines[battlerId][moveSlot][i];
+        struct AILogLine *log = &DATA.aiLogLines[battlerId][moveSlot][i];
         if (log->file)
         {
             if (log->set)
@@ -975,7 +972,7 @@ static void ClearAiLog(u32 battlerId)
     u32 i, j;
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        struct AILogLine *logs = sAILogLines[battlerId][i];
+        struct AILogLine *logs = DATA.aiLogLines[battlerId][i];
         for (j = 0; j < MAX_AI_LOG_LINES; j++)
             memset(&logs[j], 0, sizeof(struct AILogLine));
     }
@@ -1388,15 +1385,10 @@ static void CB2_BattleTest_NextTrial(void)
 
 static void BattleTest_TearDown(void *data)
 {
-    if (STATE)
-    {
-        // Free resources that aren't cleaned up when the battle was
-        // aborted unexpectedly.
-        if (STATE->tearDownBattle)
-            TearDownBattle();
-        FREE_AND_SET_NULL(STATE->results);
-        FREE_AND_SET_NULL(STATE);
-    }
+    // Free resources that aren't cleaned up when the battle was
+    // aborted unexpectedly.
+    if (STATE->tearDownBattle)
+        TearDownBattle();
 }
 
 static bool32 BattleTest_CheckProgress(void *data)
@@ -2532,8 +2524,6 @@ void QueueStatus(u32 sourceLine, struct BattlePokemon *battler, struct StatusEve
 void ValidateFinally(u32 sourceLine)
 {
     // Defer this error until after estimating the cost.
-    if (STATE->results == NULL)
-        return;
     INVALID_IF(STATE->parametersCount == 0, "FINALLY without PARAMETRIZE");
 }
 
@@ -2550,7 +2540,7 @@ struct AILogLine *GetLogLine(u32 battlerId, u32 moveIndex)
 
     for (i = 0; i < MAX_AI_LOG_LINES; i++)
     {
-        struct AILogLine *log = &sAILogLines[battlerId][moveIndex][i];
+        struct AILogLine *log = &DATA.aiLogLines[battlerId][moveIndex][i];
         if (log->file == NULL)
         {
             return log;
