@@ -10337,7 +10337,7 @@ void RecreateObjectEvent(struct ObjectEvent *objectEvent, struct Sprite *sprite)
     clone = *GetObjectEventTemplateByLocalIdAndMap(objectEvent->localId, objectEvent->mapNum, objectEvent->mapGroup);
     clone.graphicsId = objectEvent->graphicsId;
 
-    objectEvent = &gObjectEvents[TrySpawnObjectEventTemplate(&clone, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, clone.x, clone.y)];
+    objectEvent = &gObjectEvents[TrySpawnObjectEventTemplate(&clone, objectEvent->mapNum, objectEvent->mapGroup, clone.x, clone.y)];
     newSpriteId = objectEvent->spriteId;
     *objectEvent = backupFollower;
     objectEvent->spriteId = newSpriteId;
