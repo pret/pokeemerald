@@ -12008,10 +12008,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
     {
         .baseHP        = 120,
         .baseAttack    = 70,
+#if P_UPDATED_STATS >= GEN_9
+        .baseDefense   = 110,
+#else
         .baseDefense   = 120,
+#endif
         .baseSpeed     = 85,
         .baseSpAttack  = 75,
+#if P_UPDATED_STATS >= GEN_9
+        .baseSpDefense = 120,
+#else
         .baseSpDefense = 130,
+#endif
         .types = { TYPE_PSYCHIC, TYPE_PSYCHIC},
         .catchRate = 3,
         .expYield = 270,
