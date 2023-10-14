@@ -8955,7 +8955,7 @@ void ObjectEventUpdateElevation(struct ObjectEvent *objEvent)
     
     if (gSaveBlock2Ptr->follower.inProgress &&
         objEvent == &gObjectEvents[gSaveBlock2Ptr->follower.objId] &&
-        objEvent->currentCoords.y == gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y - 1)
+        (objEvent->currentCoords.y == gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y - 1 || objEvent->currentCoords.y == gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y + 1))
     {
         curElevation = gObjectEvents[gPlayerAvatar.objectEventId].currentElevation;
     }
