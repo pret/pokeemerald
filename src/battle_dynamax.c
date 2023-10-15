@@ -184,7 +184,7 @@ u16 GetNonDynamaxHP(u16 battlerId)
 }
 
 // Returns the non-Dynamax Max HP of a Pokemon.
-u16 GetNonDynamaxMaxHP(u16 battlerId)
+u16 GetNonDynamaxMaxHP(u32 battlerId)
 {
     if (!IsDynamaxed(battlerId) || gBattleMons[battlerId].species == SPECIES_SHEDINJA)
         return gBattleMons[battlerId].maxHP;
