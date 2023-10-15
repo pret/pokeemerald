@@ -412,7 +412,7 @@ static void Task_AnimateDoor(u8 taskId)
     struct DoorAnimFrame *frames = (struct DoorAnimFrame *)(tFramesHi << 16 | tFramesLo);
     struct DoorGraphics *gfx = (struct DoorGraphics *)(tGfxHi << 16 | tGfxLo);
 
-    if (AnimateDoorFrame(gfx, frames, data) == FALSE)
+    if (AnimateDoorFrame(gfx, frames, gTasks[taskId].data) == FALSE)
         DestroyTask(taskId);
 }
 

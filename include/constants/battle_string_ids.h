@@ -670,21 +670,23 @@
 #define STRINGID_CURRENTMOVECANTSELECT                668
 #define STRINGID_TARGETISBEINGSALTCURED               669
 #define STRINGID_TARGETISHURTBYSALTCURE               670
-#define STRINGID_SHARPSTEELFLOATS                     671
-#define STRINGID_SHARPSTEELDMG                        672
-#define STRINGID_PKMNBLEWAWAYSHARPSTEEL               673
-#define STRINGID_SHARPSTEELDISAPPEAREDFROMTEAM        674
-#define STRINGID_TEAMTRAPPEDWITHVINES                 675
-#define STRINGID_PKMNHURTBYVINES                      676
-#define STRINGID_TEAMCAUGHTINVORTEX                   677
-#define STRINGID_PKMNHURTBYVORTEX                     678
-#define STRINGID_TEAMSURROUNDEDBYFIRE                 679
-#define STRINGID_PKMNBURNINGUP                        680
-#define STRINGID_TEAMSURROUNDEDBYROCKS                681
-#define STRINGID_PKMNHURTBYROCKSTHROWN                682
-#define STRINGID_MOVEBLOCKEDBYDYNAMAX                 683
+#define STRINGID_OPPORTUNISTCOPIED                    671
+#define STRINGID_TARGETCOVEREDINSTICKYCANDYSYRUP      672
+#define STRINGID_SHARPSTEELFLOATS                     673
+#define STRINGID_SHARPSTEELDMG                        674
+#define STRINGID_PKMNBLEWAWAYSHARPSTEEL               675
+#define STRINGID_SHARPSTEELDISAPPEAREDFROMTEAM        676
+#define STRINGID_TEAMTRAPPEDWITHVINES                 677
+#define STRINGID_PKMNHURTBYVINES                      678
+#define STRINGID_TEAMCAUGHTINVORTEX                   679
+#define STRINGID_PKMNHURTBYVORTEX                     680
+#define STRINGID_TEAMSURROUNDEDBYFIRE                 681
+#define STRINGID_PKMNBURNINGUP                        682
+#define STRINGID_TEAMSURROUNDEDBYROCKS                683
+#define STRINGID_PKMNHURTBYROCKSTHROWN                684
+#define STRINGID_MOVEBLOCKEDBYDYNAMAX                 685
 
-#define BATTLESTRINGS_COUNT                           684
+#define BATTLESTRINGS_COUNT                           686
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

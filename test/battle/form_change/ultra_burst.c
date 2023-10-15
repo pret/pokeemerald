@@ -62,7 +62,7 @@ SINGLE_BATTLE_TEST("Ultra Burst affects turn order")
 {
     GIVEN {
         ASSUME(P_GEN_7_POKEMON == TRUE);
-        ASSUME(B_MEGA_EVO_TURN_ORDER);
+        ASSUME(B_MEGA_EVO_TURN_ORDER >= GEN_7);
         PLAYER(SPECIES_NECROZMA_DUSK_MANE) { Item(ITEM_ULTRANECROZIUM_Z); Speed(105); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(106); }
     } WHEN {

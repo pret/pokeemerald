@@ -4844,11 +4844,7 @@ const struct Item gItems[] =
         .name = _("Soul Dew"),
         .price = 0,
         .holdEffect = HOLD_EFFECT_SOUL_DEW,
-        #if B_SOUL_DEW_BOOST >= GEN_7
-            .holdEffectParam = 20,
-        #else
-            .holdEffectParam = 50,
-        #endif
+        .holdEffectParam = B_SOUL_DEW_BOOST >= GEN_7 ? 20 : 50,
         .description = sSoulDewDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -9700,30 +9696,36 @@ const struct Item gItems[] =
     {
         .name = _("CornrstneMask"),
         .price = 0,
+        .holdEffect = HOLD_EFFECT_MASK,
         .description = sCornerstoneMaskDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_ROCK,
     },
 
     [ITEM_WELLSPRING_MASK] =
     {
         .name = _("WellsprngMask"),
         .price = 0,
+        .holdEffect = HOLD_EFFECT_MASK,
         .description = sWellspringMaskDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_WATER,
     },
 
     [ITEM_HEARTHFLAME_MASK] =
     {
         .name = _("HrthflameMask"),
         .price = 0,
+        .holdEffect = HOLD_EFFECT_MASK,
         .description = sHearthflameMaskDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_FIRE,
     },
 
     [ITEM_HEALTH_MOCHI] =
