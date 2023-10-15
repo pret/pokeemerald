@@ -98,7 +98,6 @@ static void SpriteCb_DynamaxIndicator(struct Sprite *);
 // Returns whether a battler is Dynamaxed.
 bool32 IsDynamaxed(u16 battlerId)
 {
-    u8 side = GetBattlerSide(battlerId);
     if (gBattleStruct->dynamax.dynamaxed[battlerId]
         /*|| IsRaidBoss(battlerId)*/)
         return TRUE;
@@ -201,7 +200,6 @@ u16 GetNonDynamaxMaxHP(u16 battlerId)
 void PrepareBattlerForDynamax(u16 battlerId)
 {
     u8 side = GetBattlerSide(battlerId);
-    u16 newSpecies;
 
     gBattleStruct->dynamax.alreadyDynamaxed[side] = TRUE;
     gBattleStruct->dynamax.dynamaxed[battlerId] = TRUE;
@@ -305,12 +303,11 @@ static u16 GetTypeBasedMaxMove(u16 battlerId, u16 type)
                 return sGMaxMoveTable[i].gmaxMove;
         }
     }
-    else // Regular Max Move
-    {
-        if (sMaxMoveTable[type] == MOVE_NONE) // failsafe
-            return sMaxMoveTable[0];
-        return sMaxMoveTable[type];
-    }
+
+    // Regular Max Move
+    if (sMaxMoveTable[type] == MOVE_NONE) // failsafe
+        return sMaxMoveTable[0];
+    return sMaxMoveTable[type];
 }
 
 // Returns the appropriate Max Move or G-Max Move for a battler to use.
@@ -550,6 +547,8 @@ static u32 GetMaxMoveStatusEffect(u16 move)
             return STATUS2_ESCAPE_PREVENTION;
         case MAX_EFFECT_TORMENT_FOES:
             return STATUS2_TORMENT;
+        default:
+            return STATUS1_NONE;
     }
 }
 
@@ -1300,12 +1299,12 @@ static const struct SpritePalette sSpritePalette_DynamaxIndicator =
 
 static const struct SpriteSheet sDynamaxIndicator_SpriteSheet[] =
 {
-    sDynamaxIndicatorGfx, sizeof(sDynamaxIndicatorGfx), TAG_DYNAMAX_INDICATOR_TILE
+    {sDynamaxIndicatorGfx, sizeof(sDynamaxIndicatorGfx), TAG_DYNAMAX_INDICATOR_TILE}
 };
 
 static const struct SpritePalette sDynamaxIndicator_SpritePalette[] =
 {
-    sDynamaxIndicatorPal, TAG_MISC_INDICATOR_PAL
+    {sDynamaxIndicatorPal, TAG_MISC_INDICATOR_PAL}
 };
 
 static const struct OamData sOamData_DynamaxIndicator =
@@ -1371,7 +1370,6 @@ u8 DynamaxIndicator_GetSpriteId(u32 healthboxSpriteId)
 
 void DynamaxIndicator_SetVisibilities(u32 healthboxId, bool32 invisible)
 {
-    u32 i;
     u8 spriteId = DynamaxIndicator_GetSpriteId(healthboxId);
     u32 battlerId = gSprites[healthboxId].hMain_Battler;
 
@@ -1383,14 +1381,12 @@ void DynamaxIndicator_SetVisibilities(u32 healthboxId, bool32 invisible)
 
 void DynamaxIndicator_UpdateOamPriority(u32 healthboxId, u32 oamPriority)
 {
-    u32 i;
     u8 spriteId = DynamaxIndicator_GetSpriteId(healthboxId);
     gSprites[spriteId].oam.priority = oamPriority;
 }
 
 void DynamaxIndicator_UpdateLevel(u32 healthboxId, u32 level)
 {
-    u32 i;
     s16 xDelta = 0;
     u8 spriteId = DynamaxIndicator_GetSpriteId(healthboxId);
 
@@ -1404,7 +1400,7 @@ void DynamaxIndicator_UpdateLevel(u32 healthboxId, u32 level)
 
 void DynamaxIndicator_CreateSprite(u32 battlerId, u32 healthboxSpriteId)
 {
-    u32 position, level;
+    u32 position;
     u8 spriteId;
     s16 xHealthbox = 0, y = 0;
     s32 x = 0;
