@@ -2,9 +2,9 @@
  * parses the output to display human-readable progress.
  *
  * Output lines starting with "GBA Debug: :" are parsed as commands to
- * Hydra, other output lines starting with "GBA Debug: " are parsed as
- * output from the current test, and any other lines are parsed as
- * output from the mgba-rom-test process itself.
+ * Hydra, other output lines starting with "GBA Debug: " or with "GBA: "
+ * are parsed as output from the current test, and any other lines are
+ * parsed as output from the mgba-rom-test process itself.
  *
  * COMMANDS
  * N: Sets the test name to the remainder of the line.
@@ -75,10 +75,17 @@ static void handle_read(int i, struct Runner *runner)
     {
         eol++;
         size_t n = eol - sol;
-        if (runner->input_buffer_size >= strlen("GBA Debug: ")
-         && !strncmp(sol, "GBA Debug: ", strlen("GBA Debug: ")))
+        char *soc;
+        if (runner->input_buffer_size >= strlen("GBA: ")
+         && !strncmp(sol, "GBA: ", strlen("GBA: ")))
         {
-            char *soc = sol + strlen("GBA Debug: ");
+            soc = sol + strlen("GBA: ");
+            goto buffer_output;
+        }
+        else if (runner->input_buffer_size >= strlen("GBA Debug: ")
+              && !strncmp(sol, "GBA Debug: ", strlen("GBA Debug: ")))
+        {
+            soc = sol + strlen("GBA Debug: ");
             if (soc[0] == ':')
             {
                 switch (soc[1])
