@@ -85,6 +85,8 @@
 #define SAFE_DIV(a, b) ((a) / (b))
 #endif
 
+#define IS_POW_OF_TWO(n) (((n) & ((n)-1)) == 0)
+
 // The below macro does a%n, but (to match) will switch to a&(n-1) if n is a power of 2.
 // There are cases where GF does a&(n-1) where we would really like to have a%n, because
 // if n is changed to a value that isn't a power of 2 then a&(n-1) is unlikely to work as
