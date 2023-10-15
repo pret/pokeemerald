@@ -1333,8 +1333,9 @@ void MarkBattlerReceivedLinkData(u32 battler)
     gBattleControllerExecFlags &= ~((1 << 28) << battler);
 }
 
-void CancelMultiTurnMoves(u32 battler)
+const u8* CancelMultiTurnMoves(u32 battler)
 {
+    const u8 *result = NULL;
     gBattleMons[battler].status2 &= ~(STATUS2_MULTIPLETURNS);
     gBattleMons[battler].status2 &= ~(STATUS2_LOCK_CONFUSE);
     gBattleMons[battler].status2 &= ~(STATUS2_UPROAR);
@@ -1389,14 +1390,14 @@ void CancelMultiTurnMoves(u32 battler)
                 else if (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 0)
                 {
                     gBattlerAttacker = otherSkyDropper;
-                    gBattlescriptCurrInstr = BattleScript_ThrashConfuses - 3;
+                    result = BattleScript_ThrashConfuses;
                 }
                 // If this CancelMultiTurnMoves is occuring due to receiving Sleep/Freeze status
                 else if (gBattleScripting.moveEffect <= PRIMARY_STATUS_MOVE_EFFECT)
                 {
                     gBattlerAttacker = otherSkyDropper;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_ThrashConfuses - 1;
+                    result = BattleScript_ThrashConfuses;
                 }
             }
         }
@@ -1411,6 +1412,7 @@ void CancelMultiTurnMoves(u32 battler)
 
     gDisableStructs[battler].rolloutTimer = 0;
     gDisableStructs[battler].furyCutterCounter = 0;
+    return result;
 }
 
 bool32 WasUnableToUseMove(u32 battler)

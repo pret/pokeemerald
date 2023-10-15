@@ -3220,9 +3220,10 @@ void SwitchInClearSetData(u32 battler)
     Ai_UpdateSwitchInData(battler);
 }
 
-void FaintClearSetData(u32 battler)
+const u8* FaintClearSetData(u32 battler)
 {
     s32 i;
+    const u8 *result = NULL;
 
     for (i = 0; i < NUM_BATTLE_STATS; i++)
         gBattleMons[battler].statStages[i] = DEFAULT_STAT_STAGE;
@@ -3356,7 +3357,7 @@ void FaintClearSetData(u32 battler)
                 {
                     gBattleMons[otherSkyDropper].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2);
                     gBattlerAttacker = otherSkyDropper;
-                    gBattlescriptCurrInstr = BattleScript_ThrashConfuses - 2;
+                    result = BattleScript_ThrashConfuses;
                 }
             }
         }
@@ -3366,6 +3367,7 @@ void FaintClearSetData(u32 battler)
     gBattleStruct->zmove.active = FALSE;
     gBattleStruct->zmove.toBeUsed[battler] = MOVE_NONE;
     gBattleStruct->zmove.effect = EFFECT_HIT;
+    return result;
 }
 
 static void DoBattleIntro(void)
