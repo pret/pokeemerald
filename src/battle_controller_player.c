@@ -202,7 +202,7 @@ static void CompleteOnBattlerSpritePosX_0(u32 battler)
 static u16 GetPrevBall(u16 ballId)
 {
     u16 ballPrev;
-    u32 i, j;
+    s32 i, j;
     CompactItemsInBagPocket(&gBagPockets[BALLS_POCKET]);
     for (i = 0; i < gBagPockets[BALLS_POCKET].capacity; i++)
     {
@@ -218,28 +218,29 @@ static u16 GetPrevBall(u16 ballId)
                 }
             }
             i--;
-            return gBagPockets[BALLS_POCKET].itemSlots[i].itemId;
+            break;
         }
     }
+    return gBagPockets[BALLS_POCKET].itemSlots[i].itemId;
 }
 
 static u16 GetNextBall(u16 ballId)
 {
-    u16 ballNext;
-    u32 i;
+    u16 ballNext = 0;
+    s32 i;
     CompactItemsInBagPocket(&gBagPockets[BALLS_POCKET]);
     for (i = 0; i < gBagPockets[BALLS_POCKET].capacity; i++)
     {
         if (ballId == gBagPockets[BALLS_POCKET].itemSlots[i].itemId)
         {
-            i++;
             ballNext = gBagPockets[BALLS_POCKET].itemSlots[i].itemId;
-            if (ballNext == ITEM_NONE)
-                return gBagPockets[BALLS_POCKET].itemSlots[0].itemId; // Zeroth slot
-            else
-                return ballNext;
+            break;
         }
     }
+    if (ballNext == ITEM_NONE)
+        return gBagPockets[BALLS_POCKET].itemSlots[0].itemId; // Zeroth slot
+    else
+        return ballNext;
 }
 
 static void HandleInputChooseAction(u32 battler)
@@ -716,25 +717,26 @@ static void HandleInputChooseMove(u32 battler)
                 canSelectTarget = 0;
             }
 
-        #if B_SHOW_TARGETS == TRUE
-            // Show all available targets for multi-target moves
-            if ((moveTarget & MOVE_TARGET_ALL_BATTLERS) == MOVE_TARGET_ALL_BATTLERS)
+            if (B_SHOW_TARGETS == TRUE)
             {
-                u32 i = 0;
-                for (i = 0; i < gBattlersCount; i++)
-                    TryShowAsTarget(i);
+                // Show all available targets for multi-target moves
+                if ((moveTarget & MOVE_TARGET_ALL_BATTLERS) == MOVE_TARGET_ALL_BATTLERS)
+                {
+                    u32 i = 0;
+                    for (i = 0; i < gBattlersCount; i++)
+                        TryShowAsTarget(i);
 
-                canSelectTarget = 3;
+                    canSelectTarget = 3;
+                }
+                else if (moveTarget & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY))
+                {
+                    TryShowAsTarget(gMultiUsePlayerCursor);
+                    TryShowAsTarget(BATTLE_PARTNER(gMultiUsePlayerCursor));
+                    if (moveTarget & MOVE_TARGET_FOES_AND_ALLY)
+                        TryShowAsTarget(BATTLE_PARTNER(battler));
+                    canSelectTarget = 2;
+                }
             }
-            else if (moveTarget & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY))
-            {
-                TryShowAsTarget(gMultiUsePlayerCursor);
-                TryShowAsTarget(BATTLE_PARTNER(gMultiUsePlayerCursor));
-                if (moveTarget & MOVE_TARGET_FOES_AND_ALLY)
-                    TryShowAsTarget(BATTLE_PARTNER(battler));
-                canSelectTarget = 2;
-            }
-        #endif
         }
 
         switch (canSelectTarget)
@@ -1788,7 +1790,7 @@ static void PlayerHandleDrawTrainerPic(u32 battler)
 {
     bool32 isFrontPic;
     s16 xPos, yPos;
-    u32 trainerPicId, gender;
+    u32 trainerPicId;
 
     trainerPicId = PlayerGetTrainerBackPicId();
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)

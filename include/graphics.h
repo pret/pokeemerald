@@ -6158,6 +6158,7 @@ extern const u8 gMonIcon_PikachuUnovaCap[];
 extern const u8 gMonIcon_PikachuKalosCap[];
 extern const u8 gMonIcon_PikachuAlolaCap[];
 extern const u8 gMonIcon_PikachuPartnerCap[];
+extern const u8 gMonIcon_PikachuWorldCap[];
 extern const u8 gMonIcon_PichuSpikyEared[];
 extern const u8 gMonIcon_UnownB[];
 extern const u8 gMonIcon_UnownC[];

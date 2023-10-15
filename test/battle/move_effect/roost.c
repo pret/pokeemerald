@@ -58,8 +58,8 @@ SINGLE_BATTLE_TEST("Roost fails if the user is under the effects of Heal Block")
 }
 
 SINGLE_BATTLE_TEST("Roost recovers 50% of the user's Max HP")
-{    
-    s16 hp;
+{
+    u16 hp;
 
     KNOWN_FAILING; // All healing is currently rounded down
     GIVEN {
@@ -218,7 +218,7 @@ SINGLE_BATTLE_TEST("Roost, if used by a Mystery/Flying type, treats the user as 
             MESSAGE("It's not very effective…");
             MESSAGE("It doesn't affect Moltres…");
         }
-    } 
+    }
 }
 
 // Tested in ORAS
@@ -230,9 +230,9 @@ DOUBLE_BATTLE_TEST("Roost suppresses the user's not-yet-aquired Flying-type this
         PLAYER(SPECIES_KECLEON) { Speed(40); HP(150); Ability(ABILITY_COLOR_CHANGE); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
         OPPONENT(SPECIES_PIDGEY) { Speed(30); }
-        OPPONENT(SPECIES_SANDSHREW) { Speed(20); }        
+        OPPONENT(SPECIES_SANDSHREW) { Speed(20); }
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_ROOST); 
+        TURN { MOVE(playerLeft, MOVE_ROOST);
                MOVE(opponentLeft, MOVE_GUST, target: playerLeft);
                MOVE(opponentRight, MOVE_EARTHQUAKE, target: playerLeft); }
     } SCENE {
@@ -427,6 +427,6 @@ SINGLE_BATTLE_TEST("Roost does not suppress the ungrounded effect of Telekinesis
 }
 
 // Tested in ORAS
-// Transform does not copy the Roost "status" either. 
+// Transform does not copy the Roost "status" either.
 // Probably better as a Transform test.
 TO_DO_BATTLE_TEST("Roost's suppression does not prevent others who are Transforming into the user from copying its Flying-type");

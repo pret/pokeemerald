@@ -24,8 +24,6 @@ void TestRunner_Battle_CheckBattleRecordActionType(u32 battlerId, u32 recordInde
 
 u32 TestRunner_Battle_GetForcedAbility(u32 side, u32 partyIndex);
 
-s32 MgbaPrintf_(const char *fmt, ...);
-
 #else
 
 #define TestRunner_Battle_RecordAbilityPopUp(...) (void)0
@@ -44,8 +42,6 @@ s32 MgbaPrintf_(const char *fmt, ...);
 #define TestRunner_Battle_CheckBattleRecordActionType(...) (void)0
 
 #define TestRunner_Battle_GetForcedAbility(...) (u32)0
-
-#define MgbaPrintf_(...) (u32)0
 
 #endif
 

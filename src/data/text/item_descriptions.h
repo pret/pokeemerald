@@ -3918,3 +3918,78 @@ static const u8 sBerserkGene[] = _(
     "Sharply boosts\n"
     "Attack, but causes\n"
     "lasting confusion.");
+
+static const u8 sFairyFeatherDesc[] = _(
+    "A hold item that\n"
+    "raises the power of\n"
+    "Fairy-type moves.");
+
+static const u8 sSyrupyAppleDesc[] = _(
+    "A very syrupy apple\n"
+    "that makes certain\n"
+    "Pokémon evolve.");
+
+static const u8 sUnremarkableTeacupDesc[] = _(
+    "A cracked teacup\n"
+    "that makes certain\n"
+    "Pokémon evolve.");
+
+static const u8 sMasterpieceTeacupDesc[] = _(
+    "A chipped teacup\n"
+    "that makes certain\n"
+    "Pokémon evolve.");
+
+static const u8 sCornerstoneMaskDesc[] = _(
+    "Allows Ogerpon to\n"
+    "wield the Rock-\n"
+    "type in battle.");
+
+static const u8 sWellspringMaskDesc[] = _(
+    "Allows Ogerpon to\n"
+    "wield the Water-\n"
+    "type in battle.");
+
+static const u8 sHearthflameMaskDesc[] = _(
+    "Allows Ogerpon to\n"
+    "wield the Fire-\n"
+    "type in battle.");
+
+static const u8 sHealthMochiDesc[] = _(
+    "An item that raises\n"
+    "the base HP of\n"
+    "a Pokémon.");
+
+static const u8 sMuscleMochiDesc[] = _(
+    "An item that raises\n"
+    "the base Attack of\n"
+    "a Pokémon.");
+
+static const u8 sResistMochiDesc[] = _(
+    "An item that raises\n"
+    "the base Defense\n"
+    "of a Pokémon.");
+
+static const u8 sGeniusMochiDesc[] = _(
+    "An item that raises\n"
+    "the base Sp. Atk.\n"
+    "of a Pokémon.");
+
+static const u8 sCleverMochiDesc[] = _(
+    "An item that raises\n"
+    "the base Sp. Def.\n"
+    "of a Pokémon.");
+
+static const u8 sSwiftMochiDesc[] = _(
+    "An item that raises\n"
+    "the base Speed of\n"
+    "a Pokémon.");
+
+static const u8 sFreshStartMochiDesc[] = _(
+    "An item that resets\n"
+    "all base points of\n"
+    "a Pokémon.");
+
+static const u8 sGlimmeringCharmDesc[] = _(
+    "A charm that will\n"
+    "raise the shards\n"
+    "from Tera Raids.");

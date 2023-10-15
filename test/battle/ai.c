@@ -142,10 +142,9 @@ AI_SINGLE_BATTLE_TEST("AI prefers moves which deal more damage instead of moves 
 {
     u8 turns = 0;
     u16 move1 = MOVE_NONE, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE;
-    u16 expectedMove, abilityAtk, abilityDef, expectedMove2;
+    u16 expectedMove, abilityAtk, abilityDef;
 
     abilityAtk = ABILITY_NONE;
-    expectedMove2 = MOVE_NONE;
 
     // Scald and Poison Jab take 3 hits, Waterfall takes 2.
     PARAMETRIZE { move1 = MOVE_WATERFALL; move2 = MOVE_SCALD; move3 = MOVE_POISON_JAB; move4 = MOVE_WATER_GUN; expectedMove = MOVE_WATERFALL; turns = 2; }
@@ -195,7 +194,7 @@ AI_SINGLE_BATTLE_TEST("AI prefers Earthquake over Drill Run if both require the 
 AI_SINGLE_BATTLE_TEST("AI chooses the safest option to faint the target, taking into account accuracy and move effect")
 {
     u16 move1 = MOVE_NONE, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE;
-    u16 expectedMove, abilityAtk = ABILITY_NONE, abilityDef;
+    u16 expectedMove, abilityAtk = ABILITY_NONE;
     u16 expectedMove2 = MOVE_NONE;
 
     // Psychic is not very effective, but always hits. Solarbeam requires a charging turn, Double Edge has recoil and Focus Blast can miss;
@@ -288,7 +287,7 @@ AI_DOUBLE_BATTLE_TEST("AI won't use a Weather changing move if partner already c
 {
     u32 j, k;
     static const u16 weatherMoves[] = {MOVE_SUNNY_DAY, MOVE_HAIL, MOVE_RAIN_DANCE, MOVE_SANDSTORM, MOVE_SNOWSCAPE};
-    u16 weatherMoveLeft, weatherMoveRight;
+    u16 weatherMoveLeft = MOVE_NONE, weatherMoveRight = MOVE_NONE;
 
     for (j = 0; j < ARRAY_COUNT(weatherMoves); j++)
     {
@@ -341,7 +340,7 @@ AI_DOUBLE_BATTLE_TEST("AI will not use Helping Hand if partner does not have any
 AI_DOUBLE_BATTLE_TEST("AI will not use a status move if partner already chose Helping Hand")
 {
     s32 j;
-    u32 statusMove;
+    u32 statusMove = MOVE_NONE;
 
     for (j = MOVE_NONE + 1; j < MOVES_COUNT; j++)
     {

@@ -438,8 +438,51 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_GIGATON_HAMMER
 	.4byte BattleScript_EffectSaltCure                @ EFFECT_SALT_CURE
 
+	.4byte BattleScript_EffectMatchaGotcha            @ EFFECT_MATCHA_GOTCHA
+	.4byte BattleScript_EffectSyrupBomb               @ EFFECT_SYRUP_BOMB
+	.4byte BattleScript_EffectHit                     @ EFFECT_IVY_CUDGEL
+
+BattleScript_EffectSyrupBomb::
+	setmoveeffect MOVE_EFFECT_SYRUP_BOMB
+	call BattleScript_EffectHit_Ret
+	seteffectwithchance
+	tryfaintmon BS_TARGET
+	printstring STRINGID_TARGETCOVEREDINSTICKYCANDYSYRUP
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_SyrupBombEndTurn::
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	copybyte sBATTLER, gBattlerTarget
+	jumpifholdeffect BS_TARGET, HOLD_EFFECT_CLEAR_AMULET, BattleScript_SyrupBombItemNoStatLoss
+	jumpifability BS_TARGET, ABILITY_CLEAR_BODY, BattleScript_SyrupBombAbilityNoStatLoss
+	jumpifability BS_TARGET, ABILITY_FULL_METAL_BODY, BattleScript_SyrupBombAbilityNoStatLoss
+	jumpifability BS_TARGET, ABILITY_WHITE_SMOKE, BattleScript_SyrupBombAbilityNoStatLoss
+	jumpifstat BS_TARGET, CMP_GREATER_THAN, BIT_SPEED, MIN_STAT_STAGE, BattleScript_SyrupBombLowerSpeed
+	goto BattleScript_SyrupBombEnd2
+BattleScript_SyrupBombLowerSpeed:
+	playstatchangeanimation BS_ATTACKER, BIT_SPEED, STAT_CHANGE_NEGATIVE
+	setbyte sSTAT_ANIM_PLAYED, TRUE
+	setstatchanger STAT_SPEED, 1, TRUE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_SyrupBombEnd2
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_SyrupBombEnd2
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_SyrupBombItemNoStatLoss::
+	call BattleScript_ItemNoStatLoss
+	goto BattleScript_SyrupBombEnd2
+BattleScript_SyrupBombAbilityNoStatLoss::
+	call BattleScript_AbilityNoStatLoss
+BattleScript_SyrupBombEnd2::
+	end2
+
+BattleScript_EffectMatchaGotcha::
+	setmoveeffect MOVE_EFFECT_BURN
+	goto BattleScript_EffectAbsorb
+
 BattleScript_EffectSaltCure:
 	call BattleScript_EffectHit_Ret
+	tryfaintmon BS_TARGET
 	jumpiffainted BS_TARGET, TRUE, BattleScript_EffectSaltCure_End
 	applysaltcure BS_TARGET
 	printstring STRINGID_TARGETISBEINGSALTCURED
@@ -3332,6 +3375,7 @@ BattleScript_EffectPoisonHit:
 
 BattleScript_EffectAbsorb::
 	call BattleScript_EffectHit_Ret
+	seteffectwithchance
 	jumpifstatus3 BS_ATTACKER, STATUS3_HEAL_BLOCK, BattleScript_AbsorbHealBlock
 	setdrainedhp
 	manipulatedamage DMG_BIG_ROOT
@@ -3852,6 +3896,7 @@ BattleScript_EffectRest::
 	jumpifuproarwakes BattleScript_RestCantSleep
 	jumpifability BS_TARGET, ABILITY_INSOMNIA, BattleScript_InsomniaProtects
 	jumpifability BS_TARGET, ABILITY_VITAL_SPIRIT, BattleScript_InsomniaProtects
+	jumpifability BS_ATTACKER, ABILITY_PURIFYING_SALT, BattleScript_InsomniaProtects
 .if B_LEAF_GUARD_PREVENTS_REST >= GEN_5
 	jumpifleafguardprotected BS_TARGET, BattleScript_LeafGuardPreventsRest
 .endif
@@ -7959,9 +8004,10 @@ BattleScript_DoTurnDmgEnd:
 	end2
 
 BattleScript_PoisonHealActivates::
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
 	printstring STRINGID_POISONHEALHPUP
 	waitmessage B_WAIT_TIME_LONG
-	recordability BS_ATTACKER
 	statusanimation BS_ATTACKER
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
 	healthbarupdate BS_ATTACKER
@@ -8708,28 +8754,6 @@ BattleScript_ActivateTerrainAbility:
 BattleScript_ActivateTerrainEffects_Increment:
 	addbyte gBattlerTarget, 0x1
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_ActivateTerrainSeed
-	restoretarget
-	return
-
-BattleScript_ActivateSwitchInAbilities:
-	copybyte sBATTLER, gBattlerAttacker
-	setbyte gBattlerAttacker, 0
-BattleScript_ActivateSwitchInAbilities_Loop:
-	switchinabilities BS_ATTACKER
-BattleScript_ActivateSwitchInAbilities_Increment:
-	addbyte gBattlerAttacker, 1
-	jumpifbytenotequal gBattlerAttacker, gBattlersCount, BattleScript_ActivateSwitchInAbilities_Loop
-	copybyte gBattlerAttacker, sBATTLER
-	return
-
-BattleScript_ActivateTerrainAbilities:
-	savetarget
-	setbyte gBattlerTarget, 0
-BattleScript_ActivateTerrainAbilities_Loop:
-	activateterrainchangeabilities BS_ATTACKER
-BattleScript_ActivateTerrainAbilities_Increment:
-	addbyte gBattlerTarget, 1
-	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_ActivateTerrainAbilities_Loop
 	restoretarget
 	return
 
@@ -9900,6 +9924,14 @@ BattleScript_MirrorHerbCopyStatChange::
 	call BattleScript_TotemVar_Ret
 	copybyte gBattlerAttacker, sSAVED_BATTLER	@ restore the original attacker just to be safe
 	return
+
+BattleScript_OpportunistCopyStatChange::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_OPPORTUNISTCOPIED
+	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_TotemVar_Ret
+	copybyte gBattlerAttacker, sSAVED_BATTLER	@ restore the original attacker just to be safe
+	end3
 
 BattleScript_TotemVar::
 	call BattleScript_TotemVar_Ret

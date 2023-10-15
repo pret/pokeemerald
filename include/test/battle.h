@@ -504,8 +504,8 @@
 
 enum { BATTLE_TEST_SINGLES, BATTLE_TEST_DOUBLES, BATTLE_TEST_WILD, BATTLE_TEST_AI_SINGLES, BATTLE_TEST_AI_DOUBLES };
 
-typedef void (*SingleBattleTestFunction)(void *, u32, struct BattlePokemon *, struct BattlePokemon *);
-typedef void (*DoubleBattleTestFunction)(void *, u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *);
+typedef void (*SingleBattleTestFunction)(void *, const u32, struct BattlePokemon *, struct BattlePokemon *);
+typedef void (*DoubleBattleTestFunction)(void *, const u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *);
 
 struct BattleTest
 {
@@ -712,7 +712,7 @@ struct BattleTestRunnerState
 };
 
 extern const struct TestRunner gBattleTestRunner;
-extern struct BattleTestRunnerState *gBattleTestRunnerState;
+extern struct BattleTestRunnerState *const gBattleTestRunnerState;
 
 #define MEMBERS(...) VARARG_8(MEMBERS_, __VA_ARGS__)
 #define MEMBERS_0()
@@ -746,7 +746,7 @@ extern struct BattleTestRunnerState *gBattleTestRunnerState;
 
 #define BATTLE_TEST_ARGS_SINGLE(_name, _type, ...) \
     struct CAT(Result, __LINE__) { MEMBERS(__VA_ARGS__) }; \
-    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, u32, struct BattlePokemon *, struct BattlePokemon *); \
+    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, const u32, struct BattlePokemon *, struct BattlePokemon *); \
     __attribute__((section(".tests"))) static const struct Test CAT(sTest, __LINE__) = \
     { \
         .name = _name, \
@@ -760,11 +760,11 @@ extern struct BattleTestRunnerState *gBattleTestRunnerState;
             .resultsSize = sizeof(struct CAT(Result, __LINE__)), \
         }, \
     }; \
-    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *results, u32 i, struct BattlePokemon *player, struct BattlePokemon *opponent)
+    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *results, const u32 i, struct BattlePokemon *player, struct BattlePokemon *opponent)
 
 #define BATTLE_TEST_ARGS_DOUBLE(_name, _type, ...) \
     struct CAT(Result, __LINE__) { MEMBERS(__VA_ARGS__) }; \
-    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *); \
+    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, const u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *); \
     __attribute__((section(".tests"))) static const struct Test CAT(sTest, __LINE__) = \
     { \
         .name = _name, \
@@ -778,7 +778,7 @@ extern struct BattleTestRunnerState *gBattleTestRunnerState;
             .resultsSize = sizeof(struct CAT(Result, __LINE__)), \
         }, \
     }; \
-    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *results, u32 i, struct BattlePokemon *playerLeft, struct BattlePokemon *opponentLeft, struct BattlePokemon *playerRight, struct BattlePokemon *opponentRight)
+    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *results, const u32 i, struct BattlePokemon *playerLeft, struct BattlePokemon *opponentLeft, struct BattlePokemon *playerRight, struct BattlePokemon *opponentRight)
 
 
 #define SINGLE_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_SINGLE(_name, BATTLE_TEST_SINGLES, __VA_ARGS__)
@@ -894,8 +894,8 @@ enum { TURN_CLOSED, TURN_OPEN, TURN_CLOSING };
 
 #define EXPECT_MOVE(battler, ...) ExpectMove(__LINE__, battler, (struct MoveContext) { APPEND_TRUE(__VA_ARGS__) })
 #define NOT_EXPECT_MOVE(battler, _move) ExpectMove(__LINE__, battler, (struct MoveContext) { .move = _move, .explicitMove = TRUE, .notExpected = TRUE, .explicitNotExpected = TRUE, })
-#define EXPECT_MOVES(battler, ...) ExpectMoves(__LINE__, battler, FALSE, (struct FourMoves) { __VA_ARGS__ })
-#define NOT_EXPECT_MOVES(battler, ...) ExpectMoves(__LINE__, battler, TRUE, (struct FourMoves) { __VA_ARGS__ })
+#define EXPECT_MOVES(battler, ...) ExpectMoves(__LINE__, battler, FALSE, (struct FourMoves) {{ __VA_ARGS__ }})
+#define NOT_EXPECT_MOVES(battler, ...) ExpectMoves(__LINE__, battler, TRUE, (struct FourMoves) {{ __VA_ARGS__ }})
 #define EXPECT_SEND_OUT(battler, partyIndex) ExpectSendOut(__LINE__, battler, partyIndex)
 #define EXPECT_SWITCH(battler, partyIndex) ExpectSwitch(__LINE__, battler, partyIndex)
 #define SCORE_EQ(battler, ...) Score(__LINE__, battler, CMP_EQUAL, FALSE, (struct TestAIScoreStruct) { APPEND_TRUE(__VA_ARGS__) } )

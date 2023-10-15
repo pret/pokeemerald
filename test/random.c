@@ -196,7 +196,6 @@ TEST("RandomElement generates a uniform distribution")
 
 TEST("RandomUniform mul-based faster than mod-based (compile-time)")
 {
-    u32 i;
     struct Benchmark mulBenchmark, modBenchmark;
     u32 mulSum = 0, modSum = 0;
 

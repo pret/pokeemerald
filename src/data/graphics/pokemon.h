@@ -6089,6 +6089,7 @@ const u8 gMonIcon_PikachuUnovaCap[] = INCBIN_U8("graphics/pokemon/pikachu/unova_
 const u8 gMonIcon_PikachuKalosCap[] = INCBIN_U8("graphics/pokemon/pikachu/kalos_cap/icon.4bpp");
 const u8 gMonIcon_PikachuAlolaCap[] = INCBIN_U8("graphics/pokemon/pikachu/alola_cap/icon.4bpp");
 const u8 gMonIcon_PikachuPartnerCap[] = INCBIN_U8("graphics/pokemon/pikachu/partner_cap/icon.4bpp");
+const u8 gMonIcon_PikachuWorldCap[] = INCBIN_U8("graphics/pokemon/pikachu/world_cap/icon.4bpp");
 const u8 gMonIcon_PichuSpikyEared[] = INCBIN_U8("graphics/pokemon/pichu/spiky_eared/icon.4bpp");
 const u8 gMonIcon_UnownB[] = INCBIN_U8("graphics/pokemon/unown/b/icon.4bpp");
 const u8 gMonIcon_UnownC[] = INCBIN_U8("graphics/pokemon/unown/c/icon.4bpp");

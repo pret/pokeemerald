@@ -841,7 +841,7 @@ static const u8 *const sAiInfoItemNames[] =
 
 static void PutAiInfoText(struct BattleDebugMenu *data)
 {
-    u32 i, j, count;
+    u32 i;
     u8 *text = Alloc(0x50);
 
     FillWindowPixelBuffer(data->aiMovesWindowId, 0x11);
