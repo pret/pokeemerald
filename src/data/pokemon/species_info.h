@@ -12036,10 +12036,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
     {
         .baseHP        = 120,
         .baseAttack    = 70,
-        .baseDefense   = 120,
+        .baseDefense   = P_UPDATED_STATS >= GEN_9 ? 110 : 120,
         .baseSpeed     = 85,
         .baseSpAttack  = 75,
-        .baseSpDefense = 130,
+        .baseSpDefense = P_UPDATED_STATS >= GEN_9 ? 120 : 130,
         .types = { TYPE_PSYCHIC, TYPE_PSYCHIC},
         .catchRate = 3,
         .expYield = 270,
@@ -20653,7 +20653,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
     [SPECIES_ZACIAN] =
     {
         .baseHP        = 92,
-        .baseAttack    = 130,
+        .baseAttack    = P_UPDATED_STATS >= GEN_9 ? 120 : 130,
         .baseDefense   = 115,
         .baseSpeed     = 138,
         .baseSpAttack  = 80,
@@ -20676,7 +20676,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
     [SPECIES_ZAMAZENTA] =
     {
         .baseHP        = 92,
-        .baseAttack    = 130,
+        .baseAttack    = P_UPDATED_STATS >= GEN_9 ? 120 : 130,
         .baseDefense   = 115,
         .baseSpeed     = 138,
         .baseSpAttack  = 80,
@@ -24586,7 +24586,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
     [SPECIES_ZACIAN_CROWNED_SWORD] =
     {
         .baseHP        = 92,
-        .baseAttack    = 170,
+        .baseAttack    = P_UPDATED_STATS >= GEN_9 ? 150 : 170,
         .baseDefense   = 115,
         .baseSpeed     = 148,
         .baseSpAttack  = 80,
@@ -24609,11 +24609,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
     [SPECIES_ZAMAZENTA_CROWNED_SHIELD] =
     {
         .baseHP        = 92,
-        .baseAttack    = 130,
-        .baseDefense   = 145,
+        .baseAttack    = P_UPDATED_STATS >= GEN_9 ? 120 : 130,
+        .baseDefense   = P_UPDATED_STATS >= GEN_9 ? 140 : 145,
         .baseSpeed     = 128,
         .baseSpAttack  = 80,
-        .baseSpDefense = 145,
+        .baseSpDefense = P_UPDATED_STATS >= GEN_9 ? 140 : 145,
         .types = { TYPE_FIGHTING, TYPE_STEEL},
         .catchRate = 10,
         .expYield = 360,
