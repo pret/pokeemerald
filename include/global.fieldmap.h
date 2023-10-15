@@ -63,7 +63,7 @@ struct BackupMapLayout
     u16 *map;
 };
 
-struct __attribute__((packed)) ObjectEventTemplate
+struct __attribute__((packed, aligned(4))) ObjectEventTemplate
 {
     /*0x00*/ u8 localId;
     /*0x01*/ u16 graphicsId;

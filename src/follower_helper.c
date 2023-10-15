@@ -290,7 +290,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
     [COND_MSG_BURN] =
     {
     .text = sCondMsg42,
-    .st = {.status STATUS1_BURN},
+    .st = {.status = STATUS1_BURN},
     .stFlags = ST_FLAGS_STATUS,
     .emotion = FOLLOWER_EMOTION_SAD,
     },
