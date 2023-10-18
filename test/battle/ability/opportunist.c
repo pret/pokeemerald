@@ -69,7 +69,7 @@ DOUBLE_BATTLE_TEST("Opportunist raises Attack only once when partner has Intimid
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
             MESSAGE("Mightyena's Intimidate cuts Foe Spinda's attack!");
         }
-        
+
         if ((abilityLeft == ABILITY_CONTRARY && abilityRight != ABILITY_CONTRARY)
                 || (abilityLeft != ABILITY_CONTRARY && abilityRight == ABILITY_CONTRARY)) {
             ABILITY_POPUP(playerRight, ABILITY_OPPORTUNIST);
@@ -82,7 +82,7 @@ DOUBLE_BATTLE_TEST("Opportunist raises Attack only once when partner has Intimid
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
             MESSAGE("Wobbuffet's Attack sharply rose!");
         }
-        
+
         HP_BAR(playerLeft, captureDamage: &results[i].damageLeft);
         HP_BAR(playerRight, captureDamage: &results[i].damageRight);
     } THEN {
