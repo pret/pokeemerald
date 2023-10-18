@@ -112,6 +112,7 @@ BattleScript_ItemSetFocusEnergy::
     setfocusenergy
     playmoveanimation BS_ATTACKER, MOVE_FOCUS_ENERGY
     waitanimation
+	copybyte sBATTLER, gBattlerAttacker
     printstring STRINGID_PKMNUSEDXTOGETPUMPED
     waitmessage B_WAIT_TIME_LONG
     end
@@ -152,6 +153,7 @@ BattleScript_PrintCaughtMonInfo::
     getexp BS_TARGET
     sethword gBattle_BG2_X, 0
 BattleScript_TryPrintCaughtMonInfo:
+    jumpifbattletype BATTLE_TYPE_RECORDED, BattleScript_GiveCaughtMonEnd
     trysetcaughtmondexflags BattleScript_TryNicknameCaughtMon
     printstring STRINGID_PKMNDATAADDEDTODEX
     waitstate

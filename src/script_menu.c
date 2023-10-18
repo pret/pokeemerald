@@ -64,8 +64,7 @@ bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 multichoiceId, bool8
     }
 }
 
-// Unused
-static u16 GetLengthWithExpandedPlayerName(const u8 *str)
+static u16 UNUSED GetLengthWithExpandedPlayerName(const u8 *str)
 {
     u16 length = 0;
 
@@ -118,7 +117,7 @@ static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, bool8 ignoreB
 }
 
 #if I_REPEL_LURE_MENU == TRUE
-void TryDrawRepelMenu(void)
+void TryDrawRepelMenu(struct ScriptContext *ctx)
 {
     static const u16 repelItems[] = {ITEM_REPEL, ITEM_SUPER_REPEL, ITEM_MAX_REPEL};
     struct MenuAction menuItems[ARRAY_COUNT(repelItems) + 1] = {NULL};
@@ -144,7 +143,7 @@ void TryDrawRepelMenu(void)
     gSpecialVar_Result = (count > 1);
 }
 
-void HandleRepelMenuChoice(void)
+void HandleRepelMenuChoice(struct ScriptContext *ctx)
 {
     gSpecialVar_0x8004 = VarGet(VAR_0x8004 + gSpecialVar_Result); // Get item Id;
     VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_0x8004));
@@ -153,7 +152,7 @@ void HandleRepelMenuChoice(void)
 #endif
 }
 
-void TryDrawLureMenu(void)
+void TryDrawLureMenu(struct ScriptContext *ctx)
 {
     static const u16 lureItems[] = {ITEM_LURE, ITEM_SUPER_LURE, ITEM_MAX_LURE};
     struct MenuAction menuItems[ARRAY_COUNT(lureItems) + 1] = {NULL};
@@ -180,7 +179,7 @@ void TryDrawLureMenu(void)
     gSpecialVar_Result = (count > 1);
 }
 
-void HandleLureMenuChoice(void)
+void HandleLureMenuChoice(struct ScriptContext *ctx)
 {
     gSpecialVar_0x8004 = VarGet(VAR_0x8004 + gSpecialVar_Result); // Get item Id;
     VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_0x8004) | REPEL_LURE_MASK);
@@ -274,8 +273,6 @@ static void Task_HandleMultichoiceInput(u8 taskId)
 
 bool8 ScriptMenu_YesNo(u8 left, u8 top)
 {
-    u8 taskId;
-
     if (FuncIsActiveTask(Task_HandleYesNoInput) == TRUE)
     {
         return FALSE;
@@ -284,7 +281,7 @@ bool8 ScriptMenu_YesNo(u8 left, u8 top)
     {
         gSpecialVar_Result = 0xFF;
         DisplayYesNoMenuDefaultYes();
-        taskId = CreateTask(Task_HandleYesNoInput, 0x50);
+        CreateTask(Task_HandleYesNoInput, 0x50);
         return TRUE;
     }
 }

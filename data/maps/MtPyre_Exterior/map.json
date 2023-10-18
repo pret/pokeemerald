@@ -37,8 +37,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MtPyre_Exterior_EventScript_ItemTM48",
-      "flag": "FLAG_ITEM_MT_PYRE_EXTERIOR_TM48"
+      "script": "MtPyre_Exterior_EventScript_ItemTMSkillSwap",
+      "flag": "FLAG_ITEM_MT_PYRE_EXTERIOR_TM_SKILL_SWAP"
     }
   ],
   "warp_events": [

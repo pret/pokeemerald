@@ -257,35 +257,34 @@ const u8 gClockTable[] =
 
 const struct PokemonCrySong gPokemonCrySongTemplate =
 {
-    1, // track count
-    0, // block count
-    255, // priority
-    0, // reverb
-    (struct ToneData *)&voicegroup000,
-    NULL,
-    NULL,
-    0,
-    TUNE, // part 0
-    C_V, // TUNE value
-    GOTO,
-    0, // GOTO target address
-    TUNE, // part 1
-    C_V + 16, // TUNE value
-    {VOICE, 0}, // part 0 jumps here with GOTO
-    VOL,
-    127, // volume
-    {XCMD, 0x0D},
-    0, // unk value
-    {XCMD, xRELE},
-    0, // release
-    PAN,
-    C_V, // PAN value
-    TIE,
-    60, // TIE key (default is Cn3)
-    127, // TIE velocity
-    {XCMD, 0x0C},
-    60, // unk value
-    {EOT, FINE} // end
+    .trackCount = 1,
+    .blockCount = 0,
+    .priority = 255,
+    .reverb = 0,
+    .tone = (struct ToneData *)&voicegroup000,
+    .part = {NULL, NULL},
+    .gap = 0,
+    .part0 = TUNE,
+    .tuneValue = C_V,
+    .gotoCmd = GOTO,
+    .gotoTarget = 0,
+    .part1 = TUNE,
+    .tuneValue2 = C_V + 16,
+    .cont = {VOICE, 0}, // part0 jumps here with gotoCmd
+    .volCmd = VOL,
+    .volumeValue = 127,
+    .unkCmd0D = {XCMD, 0x0D},
+    .unkCmd0DParam = 0,
+    .xreleCmd = {XCMD, xRELE},
+    .releaseValue = 0,
+    .panCmd = PAN,
+    .panValue = C_V,
+    .tieCmd = TIE,
+    .tieKeyValue = 60, // default is Cn3
+    .tieVelocityValue = 127,
+    .unkCmd0C = {XCMD, 0x0C},
+    .unkCmd0CParam = 60,
+    .end = {EOT, FINE}
 };
 
 const XcmdFunc gXcmdTable[] =

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "test_battle.h"
+#include "test/battle.h"
 
 // ============= DYNAMAX AND MAX MOVE INTERACTIONS ===================
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax increases HP and max HP by 1.5x", u16 hp)
@@ -457,7 +457,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Pokemon with Gigantamax forms change upon Dynamaxi
     } WHEN {
         TURN { MOVE(player, MOVE_TACKLE, dynamax: TRUE); }
     } THEN {
-        EXPECT_EQ(player->species, SPECIES_VENUSAUR_GMAX);
+        EXPECT_EQ(player->species, SPECIES_VENUSAUR_GIGANTAMAX);
     }
 }
 
@@ -783,18 +783,22 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Rockfall sets up a sandstorm")
 
 SINGLE_BATTLE_TEST("(DYNAMAX) Max Overgrowth sets up Grassy Terrain")
 {
-    KNOWN_FAILING; // Grassy terrain bugged #2820
+    s32 maxHP = 490; // Because of recalculated stats upon Dynamaxing
     GIVEN {
         ASSUME(gBattleMoves[MOVE_MAX_OVERGROWTH].argument == MAX_EFFECT_GRASSY_TERRAIN);
-        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(256); HP(128); };
-        PLAYER(SPECIES_WOBBUFFET) { MaxHP(256); HP(128); };
+        ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].baseHP == 190);
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(maxHP); HP(maxHP / 2); };
+        PLAYER(SPECIES_WOBBUFFET) { MaxHP(maxHP); HP(maxHP / 2); };
     } WHEN {
         TURN { MOVE(player, MOVE_VINE_WHIP, dynamax: TRUE); MOVE(opponent, MOVE_CELEBRATE); }
         TURN { MOVE(player, MOVE_VINE_WHIP); MOVE(opponent, MOVE_CELEBRATE); }
     } SCENE {
         MESSAGE("Wobbuffet used Max Overgrowth!");
-        MESSAGE("Foe Wobbuffet cannot use Celebrate!");
-        HP_BAR(player, damage: -256/16);
+        MESSAGE("Grass grew to cover the battlefield!");
+        MESSAGE("Wobbuffet is healed by the grassy terrain!");
+        HP_BAR(player, damage: -maxHP/16);
+        MESSAGE("Foe Wobbuffet is healed by the grassy terrain!");
+        HP_BAR(opponent, damage: -maxHP/16);
     }
 }
 
@@ -941,7 +945,6 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Volt Crash paralyzes both opponents")
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Stun Shock paralyzes or poisons both opponents")
 {
     u8 statusAnim;
-    u16 species;
     u32 rng;
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = STATUS1_PARALYSIS; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PSN; rng = STATUS1_POISON; }
@@ -1013,7 +1016,6 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Stun Shock chooses statuses before consideri
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Befuddle paralyzes, poisons, or sleeps both opponents")
 {
     u8 statusAnim;
-    u16 species;
     u32 rng;
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = STATUS1_PARALYSIS; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PSN; rng = STATUS1_POISON; }
@@ -1299,7 +1301,6 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Finale heals allies by 1/6 of their health")
 
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Sweetness cures allies' status conditions")
 {
-    s16 damage1, damage2;
     GIVEN {
         ASSUME(P_GEN_8_POKEMON == TRUE);
         ASSUME(gBattleMoves[MOVE_G_MAX_SWEETNESS].argument == MAX_EFFECT_AROMATHERAPY);
@@ -1321,7 +1322,6 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Sweetness cures allies' status conditions")
 // This test applies to G-Max Sandblast, too.
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Centiferno traps both opponents in Fire Spin")
 {
-    s16 damage1, damage2;
     GIVEN {
         ASSUME(P_GEN_8_POKEMON == TRUE);
         ASSUME(gBattleMoves[MOVE_G_MAX_CENTIFERNO].argument == MAX_EFFECT_FIRE_SPIN_FOES);
@@ -1350,9 +1350,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Centiferno traps both opponents in Fire Spin
 
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Chi Strike boosts allies' crit chance")
 {
-    s16 damage1, damage2;
     u32 j;
-    KNOWN_FAILING; // Debug printing confirms Machop is at +5 crit stages. Not sure what's broken.
     GIVEN {
         ASSUME(B_CRIT_CHANCE >= GEN_6);
         ASSUME(gBattleMoves[MOVE_G_MAX_CHI_STRIKE].argument == MAX_EFFECT_CRIT_PLUS);

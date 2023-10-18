@@ -165,8 +165,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route115_EventScript_ItemTM01",
-      "flag": "FLAG_ITEM_ROUTE_115_TM01"
+      "script": "Route115_EventScript_ItemTMFocusPunch",
+      "flag": "FLAG_ITEM_ROUTE_115_TM_FOCUS_PUNCH"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",

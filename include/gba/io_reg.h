@@ -664,6 +664,7 @@
 #define TIMER_64CLK       0x01
 #define TIMER_256CLK      0x02
 #define TIMER_1024CLK     0x03
+#define TIMER_COUNTUP     0x04
 #define TIMER_INTR_ENABLE 0x40
 #define TIMER_ENABLE      0x80
 
@@ -707,7 +708,7 @@
 #define R_BUTTON        0x0100
 #define L_BUTTON        0x0200
 #define KEYS_MASK       0x03FF
-#define KEY_INTR_ENABLE 0x0400
+#define KEY_INTR_ENABLE 0x4000
 #define KEY_OR_INTR     0x0000
 #define KEY_AND_INTR    0x8000
 #define DPAD_ANY        ((DPAD_RIGHT | DPAD_LEFT | DPAD_UP | DPAD_DOWN))

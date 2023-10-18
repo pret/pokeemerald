@@ -5,7 +5,6 @@
 #include "trig.h"
 #include "constants/rgb.h"
 
-static void AnimOutrageFlame(struct Sprite *);
 static void AnimDragonDanceOrb_Step(struct Sprite *);
 static void AnimOverheatFlame_Step(struct Sprite *);
 static void AnimTask_DragonDanceWaver_Step(u8);
@@ -316,7 +315,7 @@ static void AnimSpinningDracoMeteor(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, AnimSpinningDracoMeteorFinish);
 }
 
-static void AnimOutrageFlame(struct Sprite *sprite)
+void AnimOutrageFlame(struct Sprite *sprite)
 {
     sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);

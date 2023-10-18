@@ -1395,7 +1395,7 @@ _081DD9F6:
 	cmp r6, 0
 	beq _081DDA14
 	ldrb r0, [r4, o_CgbChannel_modify]
-	movs r1, 0x1
+	movs r1, CGB_CHANNEL_MO_VOL
 	orrs r0, r1
 	strb r0, [r4, o_CgbChannel_modify]
 _081DDA14:

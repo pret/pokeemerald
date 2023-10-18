@@ -238,7 +238,7 @@ struct BlockRequest
 };
 
 extern struct Link gLink;
-extern u16 gRecvCmds[MAX_RFU_PLAYERS][CMD_LENGTH];
+extern u16 ALIGNED(4) gRecvCmds[MAX_RFU_PLAYERS][CMD_LENGTH];
 extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE];
 extern u16 gLinkType;
 extern u32 gLinkStatus;

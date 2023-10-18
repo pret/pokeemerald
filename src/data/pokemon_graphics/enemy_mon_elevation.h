@@ -1,6 +1,6 @@
 // This determines how much higher above the usual position the enemy Pokémon
 // is during battle. Species that float or fly have nonzero values.
-const u8 gEnemyMonElevation[NUM_SPECIES] =
+const u8 gEnemyMonElevation[NUM_SPECIES + 1] =
 {
     [SPECIES_BUTTERFREE] = 10,
     [SPECIES_BEEDRILL] = 9,
@@ -9,7 +9,7 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_ZUBAT] = 16,
     [SPECIES_GOLBAT] = 10,
     [SPECIES_VENOMOTH] = 16,
-    [SPECIES_GEODUDE] = 16,
+    [SPECIES_GEODUDE] = 10,
     [SPECIES_MAGNEMITE] = 17,
     [SPECIES_MAGNETON] = 9,
     [SPECIES_GASTLY] = 10,
@@ -268,5 +268,5 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_SINISTEA_ANTIQUE] = 10,
     [SPECIES_POLTEAGEIST_ANTIQUE] = 12,
     [SPECIES_ETERNATUS_ETERNAMAX] = 13,
-    [SPECIES_BUTTERFREE_GMAX] = 10,
+    [SPECIES_BUTTERFREE_GIGANTAMAX] = 10,
 };
