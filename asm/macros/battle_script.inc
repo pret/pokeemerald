@@ -1366,6 +1366,12 @@
 	.byte \battler
 	.endm
 
+	.macro setoctolock battler:req, failInstr:req
+	callnative BS_Octolock
+	.byte \battler
+	.4byte \failInstr
+	.endm
+
 	.macro setzeffect
 	callnative BS_SetZEffect
 	.endm
@@ -2041,11 +2047,6 @@
 
 	.macro checkpoltergeist battler:req, failInstr:req
 	various \battler, VARIOUS_CHECK_POLTERGEIST
-	.4byte \failInstr
-	.endm
-
-	.macro setoctolock battler:req, failInstr:req
-	various \battler, VARIOUS_SET_OCTOLOCK
 	.4byte \failInstr
 	.endm
 
