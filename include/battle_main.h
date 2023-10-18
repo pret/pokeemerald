@@ -54,7 +54,7 @@ void AnimSetCenterToCornerVecX(struct Sprite *sprite);
 void BeginBattleIntroDummy(void);
 void BeginBattleIntro(void);
 void SwitchInClearSetData(u32 battler);
-void FaintClearSetData(u32 battler);
+const u8* FaintClearSetData(u32 battler);
 void BattleTurnPassed(void);
 u8 IsRunningFromBattleImpossible(u32 battler);
 void SwitchPartyOrder(u32 battlerId);
