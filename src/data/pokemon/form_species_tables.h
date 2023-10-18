@@ -1175,7 +1175,7 @@ static const u16 sOinkologneFormSpeciesIdTable[] = {
 
 static const u16 sMausholdFormSpeciesIdTable[] = {
     SPECIES_MAUSHOLD,
-    SPECIES_MAUSHOLD_FAMILY_OF_THREE,
+    SPECIES_MAUSHOLD_FAMILY_OF_FOUR,
     FORM_SPECIES_END,
 };
 

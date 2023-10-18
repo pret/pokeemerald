@@ -611,7 +611,7 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     // Oinkologne
     [SPECIES_OINKOLOGNE_FEMALE] = sOinkologneFormSpeciesIdTable,
     // Maushold
-    [SPECIES_MAUSHOLD_FAMILY_OF_THREE] = sMausholdFormSpeciesIdTable,
+    [SPECIES_MAUSHOLD_FAMILY_OF_FOUR] = sMausholdFormSpeciesIdTable,
     // Squawkabilly
     [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] = sSquawkabillyFormSpeciesIdTable,
     [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] = sSquawkabillyFormSpeciesIdTable,

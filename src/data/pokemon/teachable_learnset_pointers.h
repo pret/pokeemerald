@@ -1449,7 +1449,7 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     // Oinkologne
     [SPECIES_OINKOLOGNE_FEMALE] = sOinkologneFemaleTeachableLearnset,
     // Maushold
-    [SPECIES_MAUSHOLD_FAMILY_OF_THREE] = sMausholdTeachableLearnset,
+    [SPECIES_MAUSHOLD_FAMILY_OF_FOUR] = sMausholdTeachableLearnset,
     // Squawkabilly
     [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] = sSquawkabillyTeachableLearnset,
     [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] = sSquawkabillyTeachableLearnset,

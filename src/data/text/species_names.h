@@ -1451,7 +1451,7 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     // Oinkologne
     [SPECIES_OINKOLOGNE_FEMALE] = _("Oinkologne"),
     // Maushold
-    [SPECIES_MAUSHOLD_FAMILY_OF_THREE] = _("Maushold"),
+    [SPECIES_MAUSHOLD_FAMILY_OF_FOUR] = _("Maushold"),
     // Squawkabilly
     [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] = _("Squawkabil"),
     [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] = _("Squawkabil"),

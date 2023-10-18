@@ -942,7 +942,7 @@ const struct MonCoords gMonFrontPicCoords[NUM_SPECIES + 1] =
     [SPECIES_PAWMOT]                            = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_TANDEMAUS]                         = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_MAUSHOLD]                          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  10 },
-    [SPECIES_MAUSHOLD_FAMILY_OF_THREE]          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  10 },
+    [SPECIES_MAUSHOLD_FAMILY_OF_FOUR]          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  10 },
     [SPECIES_FIDOUGH]                           = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  9 },
     [SPECIES_DACHSBUN]                          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  3 },
     [SPECIES_SMOLIV]                            = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  13 },

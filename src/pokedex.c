@@ -4146,7 +4146,11 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     {
         ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), value, STR_CONV_MODE_LEADING_ZEROS, 4);
         PrintInfoScreenText(str, 0x60, 0x19);
-        name = GetSpeciesName(num);
+        natNum = NationalPokedexNumToSpecies(num);
+        if (natNum)
+            name = GetSpeciesName(natNum);
+        else
+            name = sText_TenDashes2;
         PrintInfoScreenText(name, 0x8A, 0x19);
     }
     else

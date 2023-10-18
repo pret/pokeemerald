@@ -554,7 +554,7 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_PAWMI]                 = {{EVO_LEVEL, 18, SPECIES_PAWMO}},
     [SPECIES_PAWMO]                 = {{EVO_NONE, 0, SPECIES_PAWMOT}},
     [SPECIES_TANDEMAUS]             = {{EVO_NONE, 0, SPECIES_MAUSHOLD},
-                                       {EVO_NONE, 0, SPECIES_MAUSHOLD_FAMILY_OF_THREE}},
+                                       {EVO_NONE, 0, SPECIES_MAUSHOLD_FAMILY_OF_FOUR}},
     [SPECIES_FIDOUGH]               = {{EVO_LEVEL, 26, SPECIES_DACHSBUN}},
     [SPECIES_SMOLIV]                = {{EVO_LEVEL, 25, SPECIES_DOLLIV}},
     [SPECIES_DOLLIV]                = {{EVO_LEVEL, 35, SPECIES_ARBOLIVA}},

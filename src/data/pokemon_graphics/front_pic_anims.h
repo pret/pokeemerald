@@ -13268,7 +13268,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
 #endif
 #if P_GEN_9_POKEMON == TRUE
     [SPECIES_OINKOLOGNE_FEMALE] = sAnims_Oinkologne,
-    [SPECIES_MAUSHOLD_FAMILY_OF_THREE] = sAnims_Maushold,
+    [SPECIES_MAUSHOLD_FAMILY_OF_FOUR] = sAnims_Maushold,
     [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] = sAnims_Squawkabilly,
     [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] = sAnims_Squawkabilly,
     [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE] = sAnims_Squawkabilly,

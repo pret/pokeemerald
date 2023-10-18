@@ -1449,7 +1449,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     // Oinkologne
     [SPECIES_OINKOLOGNE_FEMALE] = sOinkologneFemaleLevelUpLearnset,
     // Maushold
-    [SPECIES_MAUSHOLD_FAMILY_OF_THREE] = sMausholdLevelUpLearnset,
+    [SPECIES_MAUSHOLD_FAMILY_OF_FOUR] = sMausholdLevelUpLearnset,
     // Squawkabilly
     [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] = sSquawkabillyLevelUpLearnset,
     [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] = sSquawkabillyLevelUpLearnset,

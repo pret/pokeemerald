@@ -7352,9 +7352,9 @@ const u32 gMonShinyPalette_Maushold[] = INCBIN_U32("graphics/pokemon/maushold/sh
 const u8 gMonIcon_Maushold[] = INCBIN_U8("graphics/pokemon/maushold/icon.4bpp");
 // const u8 gMonFootprint_Maushold[] = INCBIN_U8("graphics/pokemon/maushold/footprint.1bpp");
 
-const u32 gMonFrontPic_MausholdThree[] = INCBIN_U32("graphics/pokemon/maushold/three/front.4bpp.lz");
-const u32 gMonBackPic_MausholdThree[] = INCBIN_U32("graphics/pokemon/maushold/three/back.4bpp.lz");
-const u8 gMonIcon_MausholdThree[] = INCBIN_U8("graphics/pokemon/maushold/three/icon.4bpp");
+const u32 gMonFrontPic_MausholdFour[] = INCBIN_U32("graphics/pokemon/maushold/four/front.4bpp.lz");
+const u32 gMonBackPic_MausholdFour[] = INCBIN_U32("graphics/pokemon/maushold/four/back.4bpp.lz");
+const u8 gMonIcon_MausholdFour[] = INCBIN_U8("graphics/pokemon/maushold/four/icon.4bpp");
 
 const u32 gMonFrontPic_Fidough[] = INCBIN_U32("graphics/pokemon/fidough/front.4bpp.lz");
 const u32 gMonPalette_Fidough[] = INCBIN_U32("graphics/pokemon/fidough/normal.gbapal.lz");
