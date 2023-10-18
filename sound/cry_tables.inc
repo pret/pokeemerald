@@ -1588,9 +1588,6 @@ gCryTable::
 .else
 	cry Cry_Unown
 .endif
-	@ Paldean Forms
-	cry Cry_Wooper
-	cry Cry_Tauros
 	@ Misc Forms
 	@ Cosplay Pikachu
 	cry Cry_Pikachu
@@ -2375,6 +2372,9 @@ gCryTable::
 .endif
 @ Tauros-Paldea
 cry Cry_Tauros
+cry Cry_Tauros
+@ Paldean Forms
+cry Cry_Wooper
 cry Cry_Tauros
 
 	.align 2
@@ -3967,9 +3967,6 @@ gCryTable_Reverse::
 .else
 	cry_reverse Cry_Unown
 .endif
-	@ Paldean Forms
-	cry_reverse Cry_Wooper
-	cry_reverse Cry_Tauros
 	@ Misc Forms
 	@ Cosplay Pikachu
 	cry_reverse Cry_Pikachu
@@ -4700,4 +4697,7 @@ gCryTable_Reverse::
 .endif
 @ Tauros-Paldea
 cry_reverse Cry_Tauros
+cry_reverse Cry_Tauros
+@ Paldean Forms
+cry_reverse Cry_Wooper
 cry_reverse Cry_Tauros
