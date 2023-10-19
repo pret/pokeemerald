@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    gItems[ITEM_METRONOME].holdEffect == HOLD_EFFECT_METRONOME;
+    ASSUME(gItems[ITEM_METRONOME].holdEffect == HOLD_EFFECT_METRONOME);
 }
 
 const uq4_12_t MetronomeMultipliers[] = {

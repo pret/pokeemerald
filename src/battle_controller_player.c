@@ -202,7 +202,7 @@ static void CompleteOnBattlerSpritePosX_0(u32 battler)
 static u16 GetPrevBall(u16 ballId)
 {
     u16 ballPrev;
-    u32 i, j;
+    s32 i, j;
     CompactItemsInBagPocket(&gBagPockets[BALLS_POCKET]);
     for (i = 0; i < gBagPockets[BALLS_POCKET].capacity; i++)
     {
@@ -218,28 +218,29 @@ static u16 GetPrevBall(u16 ballId)
                 }
             }
             i--;
-            return gBagPockets[BALLS_POCKET].itemSlots[i].itemId;
+            break;
         }
     }
+    return gBagPockets[BALLS_POCKET].itemSlots[i].itemId;
 }
 
 static u16 GetNextBall(u16 ballId)
 {
-    u16 ballNext;
-    u32 i;
+    u16 ballNext = 0;
+    s32 i;
     CompactItemsInBagPocket(&gBagPockets[BALLS_POCKET]);
     for (i = 0; i < gBagPockets[BALLS_POCKET].capacity; i++)
     {
         if (ballId == gBagPockets[BALLS_POCKET].itemSlots[i].itemId)
         {
-            i++;
             ballNext = gBagPockets[BALLS_POCKET].itemSlots[i].itemId;
-            if (ballNext == ITEM_NONE)
-                return gBagPockets[BALLS_POCKET].itemSlots[0].itemId; // Zeroth slot
-            else
-                return ballNext;
+            break;
         }
     }
+    if (ballNext == ITEM_NONE)
+        return gBagPockets[BALLS_POCKET].itemSlots[0].itemId; // Zeroth slot
+    else
+        return ballNext;
 }
 
 static void HandleInputChooseAction(u32 battler)
@@ -1789,7 +1790,7 @@ static void PlayerHandleDrawTrainerPic(u32 battler)
 {
     bool32 isFrontPic;
     s16 xPos, yPos;
-    u32 trainerPicId, gender;
+    u32 trainerPicId;
 
     trainerPicId = PlayerGetTrainerBackPicId();
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)

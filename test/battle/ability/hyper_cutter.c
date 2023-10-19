@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Hyper Cutter prevents intimidate")
         ABILITY_POPUP(player, ABILITY_INTIMIDATE);
         NONE_OF { ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player); }
         ABILITY_POPUP(opponent, ABILITY_HYPER_CUTTER);
-        MESSAGE("Foe Krabby's Hyper Cutter prevents stat loss!");
+        MESSAGE("Foe Krabby's Hyper Cutter prevents Attack loss!");
         HP_BAR(player, captureDamage: &turnTwoHit);
     } THEN {
         EXPECT_EQ(turnOneHit, turnTwoHit);

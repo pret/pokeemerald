@@ -260,12 +260,10 @@ EWRAM_DATA u32 gDebugAIFlags = 0;
 // Define functions
 static void Debug_ReShowMainMenu(void);
 static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate);
-static void Debug_ShowMenuDynamic(u8 taskId);
 static void Debug_DestroyMenu(u8 taskId);
 static void Debug_DestroyMenu_Full(u8 taskId);
 static void DebugAction_Cancel(u8 taskId);
 static void DebugAction_DestroyExtraWindow(u8 taskId);
-static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void Debug_InitDebugBattleData(void);
 static void Debug_RefreshListMenu(u8 taskId);
 static void Debug_RedrawListMenu(u8 taskId);
@@ -282,7 +280,6 @@ static void DebugAction_Util_Script_8(u8 taskId);
 static void DebugAction_OpenUtilitiesMenu(u8 taskId);
 static void DebugAction_OpenScriptsMenu(u8 taskId);
 static void DebugAction_OpenFlagsVarsMenu(u8 taskId);
-static void DebugAction_OpenBattleMenu(u8 taskId);
 static void DebugAction_OpenGiveMenu(u8 taskId);
 static void DebugAction_OpenFillMenu(u8 taskId);
 static void DebugAction_OpenSoundMenu(u8 taskId);
@@ -970,7 +967,6 @@ static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMte
     gTasks[inputTaskId].data[2] = 0;
 
     Debug_RefreshListMenu(inputTaskId);
-    //Debug_ShowMenuDynamic(inputTaskId);
 
     // draw everything
     CopyWindowToVram(windowId, 3);
@@ -1122,10 +1118,8 @@ static void Debug_RefreshListMenu(u8 taskId)
     u16 i;
     const u8 sColor_Red[] = _("{COLOR RED}");
     const u8 sColor_Green[] = _("{COLOR GREEN}");
-    u8 listTaskId = gTasks[taskId].data[0];
-    struct ListMenu *list = (void*) gTasks[listTaskId].data;
-    u8 totalItems, flagResult;
-    u8 const * name;
+    u8 totalItems = 0, flagResult = 0;
+    u8 const *name = NULL;
 
     if (sDebugMenuListData->listId == 0)
     {
@@ -1179,7 +1173,7 @@ static void Debug_RefreshListMenu(u8 taskId)
             {
                 flagResult = sDebugBattleData->aiFlags[i];
                 if (i == totalItems - 1)
-                    flagResult == 0xFF;
+                    flagResult = 0xFF;
                 name = sDebugMenu_Items_Battle_1[i].name;
             }
 
@@ -1347,10 +1341,9 @@ static void DebugTask_HandleBattleMenuReDraw(u8 taskId)
 }
 static void DebugTask_HandleMenuInput_Battle(u8 taskId)
 {
-    void (*func)(u8);
-    u8 listTaskId = gTasks[taskId].data[0];
-    u32 input = ListMenu_ProcessInput(listTaskId);
     u16 idx;
+    u8 listTaskId = gTasks[taskId].data[0];
+    ListMenu_ProcessInput(listTaskId);
 
     ListMenuGetCurrentItemArrayId(listTaskId, &idx);
 
@@ -1549,12 +1542,6 @@ static void DebugAction_OpenFlagsVarsMenu(u8 taskId)
     Debug_ShowMenu(DebugTask_HandleMenuInput_FlagsVars, gMultiuseListMenuTemplate);
 }
 
-static void DebugAction_OpenBattleMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    sDebugMenuListData->listId = 1;
-    Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, sDebugMenu_ListTemplate_Battle_0);
-}
 
 static void DebugAction_OpenGiveMenu(u8 taskId)
 {
@@ -1950,7 +1937,6 @@ static void DebugAction_Util_SetWallClock(u8 taskId)
 }
 static void DebugAction_Util_WatchCredits(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
     Debug_DestroyMenu_Full(taskId);
     SetMainCallback2(CB2_StartCreditsSequence);
 }
@@ -3518,7 +3504,6 @@ static void DebugAction_Fill_PCBoxes_Fast(u8 taskId) //Credit: Sierraffinity
 static void DebugAction_Fill_PCBoxes_Slow(u8 taskId)
 {
     int boxId, boxPosition;
-    u32 personality;
     struct BoxPokemon boxMon;
     u32 species = SPECIES_BULBASAUR;
     bool8 spaceAvailable = FALSE;

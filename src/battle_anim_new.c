@@ -81,8 +81,6 @@ static void SpriteCB_HorizontalSliceStep(struct Sprite *sprite);
 static void SpriteCB_HorizontalSlice(struct Sprite *sprite);
 static void SpriteCB_LashOutStrike(struct Sprite* sprite);
 static void AnimTask_TwinkleTackleLaunchStep(u8 taskId);
-static void SpriteCB_ShellSmashShell(struct Sprite* sprite);
-static void SpriteCB_ShellSmashShell_DestroyDuringFadeOut(struct Sprite* sprite);
 static void SpriteCB_AnimSpriteOnTargetSideCentre(struct Sprite *sprite);
 static void SpriteCB_SpriteOnMonUntilAffineAnimEnds(struct Sprite* sprite);
 static void SpriteCB_MoveSpriteUpwardsForDurationStep(struct Sprite* sprite);
@@ -8727,6 +8725,7 @@ static void SpriteCB_LashOutStrike(struct Sprite* sprite)
 	sprite->callback = AnimKnockOffStrike_Step;
 }
 
+/* TODO - Use the ShellSmash Anim
 //Moves the shells towards the attacker and leaves them there until they fade out
 //arg 0: Initial x-pos
 //arg 1: Final x-pos
@@ -8754,6 +8753,7 @@ static void SpriteCB_ShellSmashShell_DestroyDuringFadeOut(struct Sprite* sprite)
 	if (GetGpuReg(REG_OFFSET_BLDALPHA) >= BLDALPHA_BLEND(0, 8)) //Fade out 1/2 done
 		DestroyAnimSprite(sprite);
 }
+*/
 
 static void SpriteCB_AnimSpriteOnTargetSideCentre(struct Sprite *sprite)
 {

@@ -108,11 +108,17 @@ The pokeemerald Expansion is a feature branch meant to be integrated into existi
 - Feature branches incorporated:
     - [RHH intro credits](https://github.com/Xhyzi/pokeemerald/tree/rhh-intro-credits) by Xhyzi.
         - A small signature from all of us to show the collective effort in the project :)
-    - [Overworld debug]() by TheXaman
+    - [Overworld debug](https://github.com/TheXaman/pokeemerald/tree/tx_debug_system) by TheXaman
+        - May be disabled.
         - Accesible by pressing `R + Start` in the overworld by default.
         - **Additional features**:
             - *Clear Boxes*: cleans every Pokémon from the Boxes.
             - *Hatch an Egg*: lets you choose an Egg in your party and immediatly hatch it.
+    - [HGSS Pokédex](https://github.com/TheXaman/pokeemerald/tree/tx_pokedexPlus_hgss) by TheXaman
+        - May be disabled.
+        - **Additional features**:
+            - *Support for new evolution methods*.
+            - *Dark Mode*.
 - Other features
     - Pressing B while holding a Pokémon drops them like in modern games (configurable).
     - Running indoors (configurable).

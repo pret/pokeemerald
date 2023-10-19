@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("Reflect reduces physical damage", s16 damage)
 
 SINGLE_BATTLE_TEST("Reflect applies for 5 turns")
 {
-    u16 damage[6];
+    s16 damage[6];
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

@@ -311,11 +311,10 @@ static void BuildStartMenuActions(void)
     }
     else
     {
-    #if DEBUG_OVERWORLD_MENU == TRUE && DEBUG_OVERWORLD_IN_MENU == TRUE
-        BuildDebugStartMenu();
-    #else
-        BuildNormalStartMenu();
-    #endif
+        if (DEBUG_OVERWORLD_MENU == TRUE && DEBUG_OVERWORLD_IN_MENU == TRUE)
+            BuildDebugStartMenu();
+        else
+            BuildNormalStartMenu();
     }
 }
 

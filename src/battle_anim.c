@@ -248,6 +248,7 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
     switch (animType)
     {
     case ANIM_TYPE_GENERAL:
+    default:
         animsTable = gBattleAnims_General;
         break;
     case ANIM_TYPE_MOVE:
