@@ -1212,93 +1212,6 @@ u8 GetBattlerForBattleScript(u8 caseId)
     return ret;
 }
 
-void PressurePPLose(u8 target, u8 attacker, u16 move)
-{
-    int moveIndex;
-
-    if (GetBattlerAbility(target) != ABILITY_PRESSURE)
-        return;
-
-    for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
-    {
-        if (gBattleMons[attacker].moves[moveIndex] == move)
-            break;
-    }
-
-    if (moveIndex == MAX_MON_MOVES)
-        return;
-
-    if (gBattleMons[attacker].pp[moveIndex] != 0)
-        gBattleMons[attacker].pp[moveIndex]--;
-
-    if (MOVE_IS_PERMANENT(attacker, moveIndex))
-    {
-        BtlController_EmitSetMonData(attacker, BUFFER_A, REQUEST_PPMOVE1_BATTLE + moveIndex, 0, 1, &gBattleMons[attacker].pp[moveIndex]);
-        MarkBattlerForControllerExec(attacker);
-    }
-}
-
-void PressurePPLoseOnUsingImprison(u8 attacker)
-{
-    int i, j;
-    int imprisonPos = MAX_MON_MOVES;
-    u8 atkSide = GetBattlerSide(attacker);
-
-    for (i = 0; i < gBattlersCount; i++)
-    {
-        if (atkSide != GetBattlerSide(i) && GetBattlerAbility(i) == ABILITY_PRESSURE)
-        {
-            for (j = 0; j < MAX_MON_MOVES; j++)
-            {
-                if (gBattleMons[attacker].moves[j] == MOVE_IMPRISON)
-                    break;
-            }
-            if (j != MAX_MON_MOVES)
-            {
-                imprisonPos = j;
-                if (gBattleMons[attacker].pp[j] != 0)
-                    gBattleMons[attacker].pp[j]--;
-            }
-        }
-    }
-
-    if (imprisonPos != MAX_MON_MOVES && MOVE_IS_PERMANENT(attacker, imprisonPos))
-    {
-        BtlController_EmitSetMonData(attacker, BUFFER_A, REQUEST_PPMOVE1_BATTLE + imprisonPos, 0, 1, &gBattleMons[attacker].pp[imprisonPos]);
-        MarkBattlerForControllerExec(attacker);
-    }
-}
-
-void PressurePPLoseOnUsingPerishSong(u8 attacker)
-{
-    int i, j;
-    int perishSongPos = MAX_MON_MOVES;
-
-    for (i = 0; i < gBattlersCount; i++)
-    {
-        if (GetBattlerAbility(i) == ABILITY_PRESSURE && i != attacker)
-        {
-            for (j = 0; j < MAX_MON_MOVES; j++)
-            {
-                if (gBattleMons[attacker].moves[j] == MOVE_PERISH_SONG)
-                    break;
-            }
-            if (j != MAX_MON_MOVES)
-            {
-                perishSongPos = j;
-                if (gBattleMons[attacker].pp[j] != 0)
-                    gBattleMons[attacker].pp[j]--;
-            }
-        }
-    }
-
-    if (perishSongPos != MAX_MON_MOVES && MOVE_IS_PERMANENT(attacker, perishSongPos))
-    {
-        BtlController_EmitSetMonData(attacker, BUFFER_A, REQUEST_PPMOVE1_BATTLE + perishSongPos, 0, 1, &gBattleMons[attacker].pp[perishSongPos]);
-        MarkBattlerForControllerExec(attacker);
-    }
-}
-
 static void UNUSED MarkAllBattlersForControllerExec(void)
 {
     int i;
@@ -1575,26 +1488,7 @@ bool32 IsHealBlockPreventingMove(u32 battler, u32 move)
     if (!(gStatuses3[battler] & STATUS3_HEAL_BLOCK))
         return FALSE;
 
-    switch (gBattleMoves[move].effect)
-    {
-    case EFFECT_MORNING_SUN:
-    case EFFECT_SYNTHESIS:
-    case EFFECT_MOONLIGHT:
-    case EFFECT_RESTORE_HP:
-    case EFFECT_REST:
-    case EFFECT_ROOST:
-    case EFFECT_HEALING_WISH:
-    case EFFECT_WISH:
-    case EFFECT_HEAL_PULSE:
-    case EFFECT_JUNGLE_HEALING:
-        return TRUE;
-    case EFFECT_ABSORB:
-    case EFFECT_STRENGTH_SAP:
-    case EFFECT_DREAM_EATER:
-        return B_HEAL_BLOCKING >= GEN_6;
-    default:
-        return FALSE;
-    }
+    return gBattleMoves[move].healBlockBanned;
 }
 
 static bool32 IsBelchPreventingMove(u32 battler, u32 move)
@@ -1755,7 +1649,7 @@ u32 TrySetCantSelectMoveBattleScript(u32 battler)
         }
     }
 
-    if (gBattleMoves[move].effect == EFFECT_GIGATON_HAMMER && move == gLastResultingMoves[battler])
+    if (gBattleMoves[move].cantUseTwice && move == gLastResultingMoves[battler])
     {
         gCurrentMove = move;
         PREPARE_MOVE_BUFFER(gBattleTextBuff1, gCurrentMove);
@@ -1910,7 +1804,8 @@ u8 CheckMoveLimitations(u32 battler, u8 unusableMoves, u16 check)
         // Gorilla Tactics
         else if (check & MOVE_LIMITATION_CHOICE_ITEM && GetBattlerAbility(battler) == ABILITY_GORILLA_TACTICS && *choicedMove != MOVE_NONE && *choicedMove != MOVE_UNAVAILABLE && *choicedMove != gBattleMons[battler].moves[i])
             unusableMoves |= gBitTable[i];
-        else if (check & MOVE_LIMITATION_GIGATON_HAMMER && gBattleMoves[gBattleMons[battler].moves[i]].effect == EFFECT_GIGATON_HAMMER && gBattleMons[battler].moves[i] == gLastResultingMoves[battler])
+        // Can't Use Twice flag
+        else if (check & MOVE_LIMITATION_CANT_USE_TWICE && gBattleMoves[gBattleMons[battler].moves[i]].cantUseTwice && gBattleMons[battler].moves[i] == gLastResultingMoves[battler])
             unusableMoves |= gBitTable[i];
     }
     return unusableMoves;
@@ -8305,9 +8200,6 @@ bool32 IsBattlerProtected(u32 battler, u32 move)
     if (gProtectStructs[battler].maxGuarded && IsMoveBlockedByMaxGuard(move))
         return TRUE;
 
-    if (move == MOVE_TEATIME)
-        return FALSE;
-
     // Protective Pads doesn't stop Unseen Fist from bypassing Protect effects, so IsMoveMakingContact() isn't used here.
     // This means extra logic is needed to handle Shell Side Arm.
     if (GetBattlerAbility(gBattlerAttacker) == ABILITY_UNSEEN_FIST
@@ -8315,8 +8207,6 @@ bool32 IsBattlerProtected(u32 battler, u32 move)
         && !gProtectStructs[battler].maxGuarded) // Max Guard cannot be bypassed by Unseen Fist
         return FALSE;
     else if (gBattleMoves[move].ignoresProtect)
-        return FALSE;
-    else if (gBattleMoves[move].effect == EFFECT_FEINT)
         return FALSE;
     else if (gProtectStructs[battler].protected)
         return TRUE;

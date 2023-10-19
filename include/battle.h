@@ -173,7 +173,6 @@ struct SpecialStatus
     u8 lightningRodRedirected:1;
     u8 restoredBattlerSprite: 1;
     u8 traced:1;
-    u8 ppNotAffectedByPressure:1;
     u8 faintedHasReplacement:1;
     u8 focusBanded:1;
     u8 focusSashed:1;
