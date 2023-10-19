@@ -8993,18 +8993,6 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.33));
     }
 
-    if (IsAbilityOnField(ABILITY_VESSEL_OF_RUIN) && atkAbility != ABILITY_VESSEL_OF_RUIN && IS_MOVE_SPECIAL(gCurrentMove))
-        modifier = uq4_12_multiply(modifier, UQ_4_12(0.75));
-
-    if (IsAbilityOnField(ABILITY_SWORD_OF_RUIN) && defAbility != ABILITY_SWORD_OF_RUIN && IS_MOVE_PHYSICAL(gCurrentMove))
-        modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
-
-    if (IsAbilityOnField(ABILITY_TABLETS_OF_RUIN) && atkAbility != ABILITY_TABLETS_OF_RUIN && IS_MOVE_PHYSICAL(gCurrentMove))
-        modifier = uq4_12_multiply(modifier, UQ_4_12(0.75));
-
-    if (IsAbilityOnField(ABILITY_BEADS_OF_RUIN) && defAbility != ABILITY_BEADS_OF_RUIN && IS_MOVE_SPECIAL(gCurrentMove))
-        modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
-
     // attacker partner's abilities
     if (IsBattlerAlive(BATTLE_PARTNER(battlerAtk)))
     {
@@ -9288,6 +9276,13 @@ static inline u32 CalcAttackStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 m
         }
     }
 
+    // field abilities
+    if (IsAbilityOnField(ABILITY_VESSEL_OF_RUIN) && atkAbility != ABILITY_VESSEL_OF_RUIN && IS_MOVE_SPECIAL(move))
+        modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(0.75));
+
+    if (IsAbilityOnField(ABILITY_TABLETS_OF_RUIN) && atkAbility != ABILITY_TABLETS_OF_RUIN && IS_MOVE_PHYSICAL(move))
+        modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(0.75));
+
     // attacker's hold effect
     switch (holdEffectAtk)
     {
@@ -9434,6 +9429,13 @@ static inline u32 CalcDefenseStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 
             break;
         }
     }
+
+    // field abilities
+    if (IsAbilityOnField(ABILITY_SWORD_OF_RUIN) && defAbility != ABILITY_SWORD_OF_RUIN && usesDefStat)
+        modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(0.75));
+
+    if (IsAbilityOnField(ABILITY_BEADS_OF_RUIN) && defAbility != ABILITY_BEADS_OF_RUIN && !usesDefStat)
+        modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(0.75));
 
     // target's hold effects
     switch (holdEffectDef)
