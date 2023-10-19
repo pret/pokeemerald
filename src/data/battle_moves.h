@@ -1,4 +1,4 @@
-const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
+const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 {
     [MOVE_NONE] =
     {
@@ -14331,4 +14331,737 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .split = SPLIT_PHYSICAL,
         .zMoveEffect = 0,
     },
+
+    [MOVE_MAX_GUARD] =
+	{
+		.effect = EFFECT_PROTECT,
+		.power = 0,
+		.type = TYPE_NORMAL,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 0,
+		.target = MOVE_TARGET_USER,
+		.priority = 4,
+		.split = SPLIT_STATUS,
+        .protectionMove = TRUE,
+	},
+
+	[MOVE_MAX_FLARE] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 1,
+		.type = TYPE_FIRE,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_SUN,
+	},
+
+	[MOVE_MAX_FLUTTERBY] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 1,
+		.type = TYPE_BUG,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_LOWER_SP_ATK,
+	},
+
+	[MOVE_MAX_LIGHTNING] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 1,
+		.type = TYPE_ELECTRIC,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_ELECTRIC_TERRAIN,
+	},
+
+	[MOVE_MAX_STRIKE] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 1,
+		.type = TYPE_NORMAL,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_LOWER_SPEED,
+	},
+
+	[MOVE_MAX_KNUCKLE] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 1,
+		.type = TYPE_FIGHTING,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_RAISE_TEAM_ATTACK,
+	},
+
+	[MOVE_MAX_PHANTASM] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 1,
+		.type = TYPE_GHOST,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_LOWER_DEFENSE,
+	},
+
+	[MOVE_MAX_HAILSTORM] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 1,
+		.type = TYPE_ICE,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_HAIL,
+	},
+
+	[MOVE_MAX_OOZE] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 1,
+		.type = TYPE_POISON,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_RAISE_TEAM_SP_ATK,
+	},
+
+	[MOVE_MAX_GEYSER] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 1,
+		.type = TYPE_WATER,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_RAIN,
+	},
+
+	[MOVE_MAX_AIRSTREAM] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 1,
+		.type = TYPE_FLYING,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_RAISE_TEAM_SPEED,
+	},
+
+	[MOVE_MAX_STARFALL] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 1,
+		.type = TYPE_FAIRY,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_MISTY_TERRAIN,
+	},
+
+	[MOVE_MAX_WYRMWIND] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 1,
+		.type = TYPE_DRAGON,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_LOWER_ATTACK,
+	},
+
+	[MOVE_MAX_MINDSTORM] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 1,
+		.type = TYPE_PSYCHIC,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_PSYCHIC_TERRAIN,
+	},
+
+	[MOVE_MAX_ROCKFALL] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 1,
+		.type = TYPE_ROCK,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_SANDSTORM,
+	},
+
+	[MOVE_MAX_QUAKE] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 1,
+		.type = TYPE_GROUND,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_RAISE_TEAM_SP_DEF,
+	},
+
+	[MOVE_MAX_DARKNESS] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 1,
+		.type = TYPE_DARK,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_LOWER_SP_DEF,
+	},
+
+	[MOVE_MAX_OVERGROWTH] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_GRASS,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_GRASSY_TERRAIN,
+	},
+
+	[MOVE_MAX_STEELSPIKE] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_STEEL,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_RAISE_TEAM_DEFENSE,
+	},
+	
+	[MOVE_G_MAX_VINE_LASH] =
+	{	//ANIM TODO
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_GRASS,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_VINE_LASH,
+	},
+	
+	[MOVE_G_MAX_WILDFIRE] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_FIRE,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_WILDFIRE,
+	},
+	
+	[MOVE_G_MAX_CANNONADE] =
+	{	//ANIM TODO
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_WATER,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_CANNONADE,
+	},
+	
+	[MOVE_G_MAX_BEFUDDLE] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_BUG,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_EFFECT_SPORE_FOES,
+	},
+	
+	[MOVE_G_MAX_VOLT_CRASH] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_ELECTRIC,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_PARALYZE_FOES,
+	},
+	
+	[MOVE_G_MAX_GOLD_RUSH] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_NORMAL,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_CONFUSE_FOES_PAY_DAY,
+	},
+	
+	[MOVE_G_MAX_CHI_STRIKE] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_FIGHTING,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_CRIT_PLUS,
+	},
+	
+	[MOVE_G_MAX_TERROR] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_GHOST,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_MEAN_LOOK,
+	},
+	
+	[MOVE_G_MAX_FOAM_BURST] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_WATER,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_LOWER_SPEED_2_FOES,
+	},
+	
+	[MOVE_G_MAX_RESONANCE] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_ICE,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_AURORA_VEIL,
+	},
+	
+	[MOVE_G_MAX_CUDDLE] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_NORMAL,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_INFATUATE_FOES,
+	},
+	
+	[MOVE_G_MAX_REPLENISH] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_NORMAL,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_RECYCLE_BERRIES,
+	},
+	
+	[MOVE_G_MAX_MALODOR] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_POISON,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_POISON_FOES,
+	},
+	
+	[MOVE_G_MAX_MELTDOWN] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_STEEL,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_TORMENT_FOES,
+	},
+	
+	[MOVE_G_MAX_DRUM_SOLO] =
+	{	//ANIM TODO
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_GRASS,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_FIXED_POWER, //EFFECT TODO
+        .ignoresTargetAbility = TRUE,
+	},
+	
+	[MOVE_G_MAX_FIREBALL] =
+	{	//ANIM TODO
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_FIRE,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_FIXED_POWER, //EFFECT TODO
+        .ignoresTargetAbility = TRUE,
+	},
+	
+	[MOVE_G_MAX_HYDROSNIPE] =
+	{	//ANIM TODO
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_WATER,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_FIXED_POWER, //EFFECT TODO
+        .ignoresTargetAbility = TRUE,
+	},
+	
+	[MOVE_G_MAX_WIND_RAGE] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_FLYING,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_DEFOG,
+	},
+	
+	[MOVE_G_MAX_GRAVITAS] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_PSYCHIC,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_GRAVITY,
+	},
+	
+	[MOVE_G_MAX_STONESURGE] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_WATER,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_STEALTH_ROCK,
+	},
+	
+	[MOVE_G_MAX_VOLCALITH] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_ROCK,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_VOLCALITH,
+	},
+	
+	[MOVE_G_MAX_TARTNESS] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_GRASS,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_LOWER_EVASIVENESS_FOES,
+	},
+	
+	[MOVE_G_MAX_SWEETNESS] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_GRASS,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_AROMATHERAPY,
+	},
+	
+	[MOVE_G_MAX_SANDBLAST] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_GROUND,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_SANDBLAST_FOES,
+	},
+	
+	[MOVE_G_MAX_STUN_SHOCK] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_ELECTRIC,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_POISON_PARALYZE_FOES,
+	},
+	
+	[MOVE_G_MAX_CENTIFERNO] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_FIRE,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_FIRE_SPIN_FOES,
+	},
+	
+	[MOVE_G_MAX_SMITE] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_FAIRY,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_CONFUSE_FOES,
+	},
+	
+
+	[MOVE_G_MAX_SNOOZE] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_DARK,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_YAWN_FOE,
+	},
+	
+	[MOVE_G_MAX_FINALE] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_FAIRY,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_HEAL_TEAM,
+	},
+	
+	[MOVE_G_MAX_STEELSURGE] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_STEEL,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_STEELSURGE,
+	},
+	
+	[MOVE_G_MAX_DEPLETION] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_DRAGON,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_SPITE,
+	},
+		
+	[MOVE_G_MAX_ONE_BLOW] =
+	{
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_DARK,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_BYPASS_PROTECT, //EFFECT TODO
+	},
+	
+	[MOVE_G_MAX_RAPID_FLOW] =
+	{	//ANIM TODO
+		.effect = EFFECT_MAX_MOVE,
+		.power = 10,
+		.type = TYPE_WATER,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.split = SPLIT_PHYSICAL,
+		.argument = MAX_EFFECT_BYPASS_PROTECT, //EFFECT TODO
+	},
+	
 };

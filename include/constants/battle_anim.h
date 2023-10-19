@@ -550,6 +550,8 @@
 #define B_ANIM_SNOW_CONTINUES           36
 #define B_ANIM_ULTRA_BURST              37
 #define B_ANIM_SALT_CURE_DAMAGE         38
+#define B_ANIM_DYNAMAX_GROWTH           39
+#define B_ANIM_MAX_SET_WEATHER          40
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
