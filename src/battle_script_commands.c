@@ -11381,16 +11381,15 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
             gBattlescriptCurrInstr = BattleScript_ButItFailed;
             return STAT_CHANGE_DIDNT_WORK;
         }
-        else if ((battlerHoldEffect == HOLD_EFFECT_CLEAR_AMULET
+        else if (((battlerHoldEffect == HOLD_EFFECT_CLEAR_AMULET
                   || battlerAbility == ABILITY_CLEAR_BODY
                   || battlerAbility == ABILITY_FULL_METAL_BODY
-                  || battlerAbility == ABILITY_WHITE_SMOKE
-                  || (battlerAbility == ABILITY_HYPER_CUTTER && statId == STAT_ATK))
+                  || battlerAbility == ABILITY_WHITE_SMOKE)
                   || ((B_UPDATED_INTIMIDATE >= GEN_8) && statId == STAT_ATK
                  && (battlerAbility == ABILITY_INNER_FOCUS
                   || battlerAbility == ABILITY_SCRAPPY
                   || battlerAbility == ABILITY_OWN_TEMPO
-                  || battlerAbility == ABILITY_OBLIVIOUS))
+                  || battlerAbility == ABILITY_OBLIVIOUS)))
                  && (!affectsUser || mirrorArmored) && !certain && gCurrentMove != MOVE_CURSE)
         {
             if (flags == STAT_CHANGE_ALLOW_PTR)
