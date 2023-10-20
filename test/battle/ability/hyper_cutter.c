@@ -111,7 +111,7 @@ SINGLE_BATTLE_TEST("Hyper Cutter doesn't prevent Topsy-Turvy")
     }
 }
 
-SINGLE_BATTLE_TEST("xx Hyper Cutter doesn't prevent Spectral Thief from resetting positive Attack stage changes")
+SINGLE_BATTLE_TEST("Hyper Cutter doesn't prevent Spectral Thief from resetting positive Attack stage changes")
 {
     GIVEN {
         ASSUME(gBattleMoves[MOVE_SWORDS_DANCE].effect == EFFECT_ATTACK_UP_2);
@@ -130,4 +130,24 @@ SINGLE_BATTLE_TEST("xx Hyper Cutter doesn't prevent Spectral Thief from resettin
     }
 }
 
-TO_DO_BATTLE_TEST("Hyper Cutter doesn't prevent receiving negative Attack stage changes from Baton Pass");
+SINGLE_BATTLE_TEST("xx Hyper Cutter doesn't prevent receiving negative Attack stage changes from Baton Pass")
+{
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_GROWL].effect == EFFECT_ATTACK_DOWN);
+        ASSUME(gBattleMoves[MOVE_BATON_PASS].effect == EFFECT_BATON_PASS);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_KRABBY) { Ability(ABILITY_HYPER_CUTTER); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GROWL);
+               MOVE(opponent, MOVE_BATON_PASS);
+               SEND_OUT(opponent, 1);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GROWL, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BATON_PASS, opponent);
+        MESSAGE("2 sent out Krabby!");
+    } THEN {
+        EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 1);
+    }
+}
