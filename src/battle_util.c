@@ -2792,7 +2792,6 @@ u8 DoBattlerEndTurnEffects(void)
             break;
         case ENDTURN_OCTOLOCK:
         {
-            u16 battlerAbility = GetBattlerAbility(battler);
             if (gDisableStructs[battler].octolock)
             {
                 gBattlerTarget = battler;
