@@ -98,7 +98,7 @@ SINGLE_BATTLE_TEST("Clear Body, White Smoke and Full Metal Body prevent Sticky S
             NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
             NOT MESSAGE("Foe Torkoal's Speed fell!");
         }
-        else if (species == SPECIES_SOLGALEO)
+        else
         {
             MESSAGE("Foe Solgaleo got covered in sticky syrup!");
             ABILITY_POPUP(opponent, ABILITY_FULL_METAL_BODY);
@@ -139,8 +139,7 @@ SINGLE_BATTLE_TEST("Sticky syrup will not decrease speed further then minus six"
         TURN { MOVE(player, MOVE_SYRUP_BOMB); }
         TURN {}
     } SCENE {
-        for (j = 0; j < 3; j++)
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_SCARY_FACE, player);
+        for (j = 0; j < 3; j++) { ANIMATION(ANIM_TYPE_MOVE, MOVE_SCARY_FACE, player); }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SYRUP_BOMB, player);
         HP_BAR(opponent);
         MESSAGE("Foe Wobbuffet got covered in sticky syrup!");

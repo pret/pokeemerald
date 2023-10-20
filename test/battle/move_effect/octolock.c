@@ -111,9 +111,10 @@ SINGLE_BATTLE_TEST("Octolock will not decrease Defense and Sp. Def further then 
             TURN {}
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_OCTOLOCK, player);
-        for (j = 0; j < 5; j++)
+        for (j = 0; j < 5; j++) {
             MESSAGE("Foe Wobbuffet's Defense fell!");
             MESSAGE("Foe Wobbuffet's Sp. Def fell!");
+        }
         MESSAGE("Foe Wobbuffet's Defense won't go lower!");
         MESSAGE("Foe Wobbuffet's Sp. Def won't go lower!");
         NOT MESSAGE("Foe Wobbuffet's Defense fell!");

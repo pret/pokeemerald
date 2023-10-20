@@ -130,7 +130,7 @@ SINGLE_BATTLE_TEST("Hyper Cutter doesn't prevent Spectral Thief from resetting p
     }
 }
 
-SINGLE_BATTLE_TEST("xx Hyper Cutter doesn't prevent receiving negative Attack stage changes from Baton Pass")
+SINGLE_BATTLE_TEST("Hyper Cutter doesn't prevent receiving negative Attack stage changes from Baton Pass")
 {
     GIVEN {
         ASSUME(gBattleMoves[MOVE_GROWL].effect == EFFECT_ATTACK_DOWN);
