@@ -1,3 +1,4 @@
+#include "config.h"
 #include "constants/battle.h"
 #include "constants/battle_ai.h"
 #include "constants/abilities.h"
@@ -1926,19 +1927,19 @@ AI_CV_Protect_End:
 @ BUG: Foresight is only encouraged if the user is Ghost type or
 @      has high evasion, but should check target instead
 AI_CV_Foresight:
-.ifdef BUGFIX
+#ifdef BUGFIX
 	get_target_type1
 	if_equal TYPE_GHOST, AI_CV_Foresight2
 	get_target_type2
 	if_equal TYPE_GHOST, AI_CV_Foresight2
 	if_stat_level_more_than AI_TARGET, STAT_EVASION, 8, AI_CV_Foresight3
-.else
+#else
 	get_user_type1
 	if_equal TYPE_GHOST, AI_CV_Foresight2
 	get_user_type2
 	if_equal TYPE_GHOST, AI_CV_Foresight2
 	if_stat_level_more_than AI_USER, STAT_EVASION, 8, AI_CV_Foresight3
-.endif
+#endif
 	score -2
 	goto AI_CV_Foresight_End
 
@@ -2183,13 +2184,13 @@ AI_CV_SemiInvulnerable2:
 	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_SemiInvulnerable_TryEncourage
 	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_SemiInvulnerable_TryEncourage
 	get_weather
-.ifdef BUGFIX
+#ifdef BUGFIX
 	if_equal AI_WEATHER_HAIL, AI_CV_SemiInvulnerable_CheckIceType
 	if_equal AI_WEATHER_SANDSTORM, AI_CV_SemiInvulnerable_CheckSandstormTypes
-.else
+#else
 	if_equal AI_WEATHER_HAIL, AI_CV_SemiInvulnerable_CheckSandstormTypes
 	if_equal AI_WEATHER_SANDSTORM, AI_CV_SemiInvulnerable_CheckIceType
-.endif
+#endif
 	goto AI_CV_SemiInvulnerable5
 
 AI_CV_SemiInvulnerable_CheckSandstormTypes:
@@ -2254,11 +2255,11 @@ AI_CV_Hail_End:
 
 @ BUG: Facade score is increased if the target is statused, but should be if the user is
 AI_CV_Facade:
-.ifdef BUGFIX
+#ifdef BUGFIX
 	if_not_status AI_USER, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, AI_CV_Facade_End
-.else
+#else
 	if_not_status AI_TARGET, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, AI_CV_Facade_End
-.endif
+#endif
 	score +1
 AI_CV_Facade_End:
 	end
@@ -3176,9 +3177,9 @@ AI_HPAware_DiscouragedEffectsWhenTargetLowHP:
 AI_TrySunnyDayStart:
 	if_target_is_ally AI_TryOnAlly
 	if_not_effect EFFECT_SUNNY_DAY, AI_TrySunnyDayStart_End
-.ifndef BUGFIX  @ funcResult has not been set in this script yet, below call is nonsense
+#ifndef BUGFIX  @ funcResult has not been set in this script yet, below call is nonsense
 	if_equal FALSE, AI_TrySunnyDayStart_End
-.endif
+#endif
 	is_first_turn_for AI_USER
 	if_equal FALSE, AI_TrySunnyDayStart_End
 	score +5
