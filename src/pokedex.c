@@ -1591,10 +1591,11 @@ static void ResetPokedexView(struct PokedexView *pokedexView)
 
 void CB2_OpenPokedex(void)
 {
-#if POKEDEX_PLUS_HGSS == TRUE
-    CB2_OpenPokedexPlusHGSS();
-    return;
-#endif
+    if (POKEDEX_PLUS_HGSS)
+    {
+        CB2_OpenPokedexPlusHGSS();
+        return;
+    }
 
     switch (gMain.state)
     {
@@ -3944,11 +3945,10 @@ static void HighlightSubmenuScreenSelectBarItem(u8 a, u16 b)
 u8 DisplayCaughtMonDexPage(u16 dexNum, u32 otId, u32 personality)
 {
     u8 taskId = 0;
-    #if POKEDEX_PLUS_HGSS
+    if (POKEDEX_PLUS_HGSS)
         taskId = CreateTask(Task_DisplayCaughtMonDexPageHGSS, 0);
-    #else
+    else
         taskId = CreateTask(Task_DisplayCaughtMonDexPage, 0);
-    #endif // POKEDEX_PLUS_HGSS
 
     gTasks[taskId].tState = 0;
     gTasks[taskId].tDexNum = dexNum;
