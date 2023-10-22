@@ -161,7 +161,7 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TERMINATOR_NOP]           = WallyCmdEnd
 };
 
-static void SpriteCB_Null7(void)
+static void UNUSED SpriteCB_Null7(void)
 {
 }
 
@@ -417,7 +417,7 @@ static void WallyBufferExecCompleted(void)
     }
 }
 
-static void CompleteOnFinishedStatusAnimation(void)
+static void UNUSED CompleteOnFinishedStatusAnimation(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].statusAnimActive)
         WallyBufferExecCompleted();
