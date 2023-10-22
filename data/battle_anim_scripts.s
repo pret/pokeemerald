@@ -898,7 +898,7 @@ gBattleAnims_Moves::
 	.4byte Move_SOUL_STEALING_7_STAR_STRIKE
 @@@@ MAX MOVES
 	.4byte Move_MAX_GUARD
-	.4byte Move_MAX_STRIKE 
+	.4byte Move_MAX_STRIKE
 	.4byte Move_MAX_KNUCKLE
 	.4byte Move_MAX_AIRSTREAM
 	.4byte Move_MAX_OOZE
@@ -15161,16 +15161,21 @@ Move_SILK_TRAP::
 	clearmonbg ANIM_ATK_PARTNER
 	end
 
-@ Also used by Snow weather. Currently identical with Move_HAIL
+@ Also used by Snow weather. Credits to Dat.H A
 Move_SNOWSCAPE::
-	loadspritegfx ANIM_TAG_HAIL
-	loadspritegfx ANIM_TAG_ICE_CRYSTALS
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 3, 0, 6, RGB_BLACK
+	loadspritegfx ANIM_TAG_SNOWFLAKES
+	playsewithpan SE_M_GUST, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, (F_PAL_BG | F_PAL_BATTLERS), 2, 0, 4, RGB(11, 18, 22)
 	waitforvisualfinish
-	createvisualtask AnimTask_Hail, 5
-	loopsewithpan SE_M_HAIL, 0, 8, 10
+	createvisualtask AnimTask_CreateSnowflakes, 2, 0, 3, 120
+	createvisualtask AnimTask_CreateSnowflakes, 2, 0, 3, 120
+	createvisualtask AnimTask_CreateSnowflakes, 2, 0, 3, 120
+	delay 120
+	playsewithpan SE_M_GUST2, SOUND_PAN_ATTACKER
+	delay 30
 	waitforvisualfinish
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 3, 6, 0, RGB_BLACK
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, (F_PAL_BG | F_PAL_BATTLERS), 2, 4, 0, RGB(11, 18, 22)
+	waitforvisualfinish
 	end
 
 @Credits to Skeli
