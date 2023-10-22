@@ -62,7 +62,11 @@
 #define NIGHT_EVO_HOUR_BEGIN     0
 #define NIGHT_EVO_HOUR_END       12
 
+#if P_FRIENDSHIP_EVO_THRESHOLD >= GEN_9
+#define FRIENDSHIP_EVO_THRESHOLD 160
+#else
 #define FRIENDSHIP_EVO_THRESHOLD 220
+#endif
 
 struct SpeciesItem
 {
