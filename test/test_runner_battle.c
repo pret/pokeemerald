@@ -125,6 +125,7 @@ static u32 BattleTest_EstimateCost(void *data)
 {
     u32 cost;
     const struct BattleTest *test = data;
+    memset(STATE, 0, sizeof(*STATE));
     STATE->runRandomly = TRUE;
     InvokeTestFunction(test);
     cost = 1;
