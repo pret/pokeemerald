@@ -201,6 +201,8 @@ void CB2_TestRunner(void)
     case STATE_RUN_TEST:
         gTestRunnerState.state = STATE_REPORT_RESULT;
         sCurrentTest.state = CURRENT_TEST_STATE_RUN;
+        SeedRng(0);
+        SeedRng2(0);
         if (gTestRunnerState.test->runner->setUp)
             gTestRunnerState.test->runner->setUp(gTestRunnerState.test->data);
         // NOTE: Assumes that the compiler interns __FILE__.

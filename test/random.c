@@ -6,7 +6,7 @@
 // Therefore the maximum error is 8*3584, or 28672.
 #define SHUFFLE_TEST_IMPL \
     u32 i, j, error; \
-    u16 indexSum[7]; \
+    u16 indexSum[8]; \
     memset(indexSum, 0, sizeof(indexSum)); \
     for (i = 0; i < 1024; i++) \
     { \
