@@ -1057,7 +1057,7 @@ BattleScript_EffectOctolock:
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
-	setoctolock BS_TARGET, BattleScript_ButItFailed
+	trysetoctolock BS_TARGET, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_CANTESCAPEBECAUSEOFCURRENTMOVE

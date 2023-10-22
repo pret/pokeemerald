@@ -15697,7 +15697,7 @@ static bool8 IsFinalStrikeEffect(u16 move)
     return FALSE;
 }
 
-static bool8 CanAbilityPreventStatLoss(u16 abilityDef, bool8 isIntimidate)
+static bool8 CanAbilityPreventStatLoss(u16 abilityDef, bool8 byIntimidate)
 {
     switch (abilityDef)
     {
@@ -15709,7 +15709,7 @@ static bool8 CanAbilityPreventStatLoss(u16 abilityDef, bool8 isIntimidate)
     case ABILITY_SCRAPPY:
     case ABILITY_OWN_TEMPO:
     case ABILITY_OBLIVIOUS:
-        if (isIntimidate && (B_UPDATED_INTIMIDATE >= GEN_8))
+        if (byIntimidate && (B_UPDATED_INTIMIDATE >= GEN_8))
             return TRUE;
         break;
     }
@@ -16238,7 +16238,7 @@ void BS_JumpIfTerrainAffected(void)
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-void BS_Octolock(void)
+void BS_TrySetOctolock(void)
 {
     NATIVE_ARGS(u8 battler, const u8 *failInstr);
     u32 battler = GetBattlerForBattleScript(cmd->battler);

@@ -1366,8 +1366,8 @@
 	.byte \battler
 	.endm
 
-	.macro setoctolock battler:req, failInstr:req
-	callnative BS_Octolock
+	.macro trysetoctolock battler:req, failInstr:req
+	callnative BS_TrySetOctolock
 	.byte \battler
 	.4byte \failInstr
 	.endm
