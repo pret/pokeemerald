@@ -5371,7 +5371,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_WOOPER_PALDEAN] =
     {
-        .types = { TYPE_WATER, TYPE_GROUND },
+        .types = { TYPE_POISON, TYPE_GROUND },
         .abilities = {ABILITY_POISON_POINT, ABILITY_WATER_ABSORB, ABILITY_UNAWARE},
         .bodyColor = BODY_COLOR_BROWN,
         WOOPER_MISC_INFO
