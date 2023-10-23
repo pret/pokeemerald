@@ -1896,7 +1896,7 @@ static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i)
 void ModifyPersonalityForNature(u32 *personality, u32 newNature)
 {
     u32 nature = GetNatureFromPersonality(*personality);
-    s32 diff = abs(nature - newNature);
+    s32 diff = abs((s32)nature - (s32)newNature);
     s32 sign = (nature > newNature) ? 1 : -1;
     if (diff > NUM_NATURES / 2)
     {
