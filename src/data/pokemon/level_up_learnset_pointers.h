@@ -1019,7 +1019,8 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_FRIGIBAX] = sFrigibaxLevelUpLearnset,
     [SPECIES_ARCTIBAX] = sArctibaxLevelUpLearnset,
     [SPECIES_BAXCALIBUR] = sBaxcaliburLevelUpLearnset,
-    [SPECIES_GIMMIGHOUL] = sGimmighoulLevelUpLearnset,
+    [SPECIES_GIMMIGHOUL_CHEST] = sGimmighoulLevelUpLearnset,
+    [SPECIES_GIMMIGHOUL_ROAMING] = sGimmighoulLevelUpLearnset,
     [SPECIES_GHOLDENGO] = sGholdengoLevelUpLearnset,
     [SPECIES_WO_CHIEN] = sWoChienLevelUpLearnset,
     [SPECIES_CHIEN_PAO] = sChienPaoLevelUpLearnset,
@@ -1489,10 +1490,6 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_DURALUDON_GIGANTAMAX] = sDuraludonLevelUpLearnset,
     [SPECIES_URSHIFU_SINGLE_STRIKE_STYLE_GIGANTAMAX] = sUrshifuSingleStrikeStyleLevelUpLearnset,
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = sUrshifuRapidStrikeStyleLevelUpLearnset,
-#endif
-#if P_GEN_9_POKEMON == TRUE
-    // Gimmighoul
-    [SPECIES_GIMMIGHOUL_ROAMING] = sGimmighoulLevelUpLearnset,
 #endif
     // Tauros-Paldea
     [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = sTaurosPaldeanBlazeBreedLevelUpLearnset,

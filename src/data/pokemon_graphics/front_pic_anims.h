@@ -13128,7 +13128,8 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_FRIGIBAX]                          = sAnims_Frigibax,
     [SPECIES_ARCTIBAX]                          = sAnims_Arctibax,
     [SPECIES_BAXCALIBUR]                        = sAnims_Baxcalibur,
-    [SPECIES_GIMMIGHOUL]                        = sAnims_Gimmighoul,
+    [SPECIES_GIMMIGHOUL_CHEST]                  = sAnims_Gimmighoul,
+    [SPECIES_GIMMIGHOUL_ROAMING]                = sAnims_Gimmighoul,
     [SPECIES_GHOLDENGO]                         = sAnims_Gholdengo,
     [SPECIES_WO_CHIEN]                          = sAnims_WoChien,
     [SPECIES_CHIEN_PAO]                         = sAnims_ChienPao,
@@ -13500,9 +13501,6 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_CALYREX_SHADOW_RIDER]           = sAnims_Calyrex,
     [SPECIES_ENAMORUS_THERIAN]               = sAnims_EnamorusTherian,
     [SPECIES_BASCULEGION_FEMALE]             = sAnims_Basculegion,
-#endif
-#if P_GEN_9_POKEMON == TRUE
-    [SPECIES_GIMMIGHOUL_ROAMING] = sAnims_Gimmighoul,
 #endif
     [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = sAnims_TaurosPaldean,
     [SPECIES_TAUROS_PALDEAN_AQUA_BREED] = sAnims_TaurosPaldean,

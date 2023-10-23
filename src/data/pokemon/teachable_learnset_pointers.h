@@ -1019,7 +1019,8 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_FRIGIBAX] = sFrigibaxTeachableLearnset,
     [SPECIES_ARCTIBAX] = sArctibaxTeachableLearnset,
     [SPECIES_BAXCALIBUR] = sBaxcaliburTeachableLearnset,
-    [SPECIES_GIMMIGHOUL] = sGimmighoulTeachableLearnset,
+    [SPECIES_GIMMIGHOUL_CHEST] = sGimmighoulTeachableLearnset,
+    [SPECIES_GIMMIGHOUL_ROAMING] = sGimmighoulTeachableLearnset,
     [SPECIES_GHOLDENGO] = sGholdengoTeachableLearnset,
     [SPECIES_WO_CHIEN] = sWoChienTeachableLearnset,
     [SPECIES_CHIEN_PAO] = sChienPaoTeachableLearnset,
@@ -1489,10 +1490,6 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_DURALUDON_GIGANTAMAX] = sDuraludonTeachableLearnset,
     [SPECIES_URSHIFU_SINGLE_STRIKE_STYLE_GIGANTAMAX] = sUrshifuSingleStrikeStyleTeachableLearnset,
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = sUrshifuRapidStrikeStyleTeachableLearnset,
-#endif
-#if P_GEN_9_POKEMON == TRUE
-    // Gimmighoul
-    [SPECIES_GIMMIGHOUL_ROAMING] = sGimmighoulTeachableLearnset,
 #endif
     // Tauros-Paldea
     [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = sTaurosPaldeanBlazeBreedTeachableLearnset,

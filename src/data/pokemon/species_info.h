@@ -27184,42 +27184,42 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
-#define GIMMIGHOUL_MISC_INFO \
-        .types = { TYPE_GHOST, TYPE_GHOST }, \
-        .catchRate = 45, \
-        .expYield = 60, \
-        .evYield_SpAttack = 1, \
-        .genderRatio = MON_GENDERLESS, \
-        .eggCycles = 50, \
-        .friendship = 50, \
-        .growthRate = GROWTH_SLOW, \
+#define GIMMIGHOUL_MISC_INFO                                            \
+        .types = { TYPE_GHOST, TYPE_GHOST },                            \
+        .catchRate = 45,                                                \
+        .expYield = 60,                                                 \
+        .evYield_SpAttack = 1,                                          \
+        .genderRatio = MON_GENDERLESS,                                  \
+        .eggCycles = 50,                                                \
+        .friendship = 50,                                               \
+        .growthRate = GROWTH_SLOW,                                      \
         .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED}, \
         .noFlip = FALSE
 
-    [SPECIES_GIMMIGHOUL] =
+    [SPECIES_GIMMIGHOUL_CHEST] =
     {
-        .baseHP        = 45, \
-        .baseAttack    = 30, \
-        .baseDefense   = 70, \
-        .baseSpeed     = 10, \
-        .baseSpAttack  = 75, \
-        .baseSpDefense = 70, \
-        .abilities = {ABILITY_RATTLED, ABILITY_NONE}, \
-        .bodyColor = BODY_COLOR_BROWN, \
-        GIMMIGHOUL_MISC_INFO
+        .baseHP        = 45,
+        .baseAttack    = 30,
+        .baseDefense   = 70,
+        .baseSpeed     = 10,
+        .baseSpAttack  = 75,
+        .baseSpDefense = 70,
+        .abilities = {ABILITY_RATTLED, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_BROWN,
+        GIMMIGHOUL_MISC_INFO,
     },
 
     [SPECIES_GIMMIGHOUL_ROAMING] =
     {
-        .baseHP        = 45, \
-        .baseAttack    = 30, \
-        .baseDefense   = 25, \
-        .baseSpeed     = 80, \
-        .baseSpAttack  = 75, \
-        .baseSpDefense = 45, \
-        .abilities = {ABILITY_RUN_AWAY, ABILITY_NONE}, \
-        .bodyColor = BODY_COLOR_BLUE, \
-        GIMMIGHOUL_MISC_INFO
+        .baseHP        = 45,
+        .baseAttack    = 30,
+        .baseDefense   = 25,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 75,
+        .baseSpDefense = 45,
+        .abilities = {ABILITY_RUN_AWAY, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_BLUE,
+        GIMMIGHOUL_MISC_INFO,
     },
 
     [SPECIES_GHOLDENGO] =

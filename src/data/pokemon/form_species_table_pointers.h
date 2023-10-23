@@ -191,7 +191,7 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_TATSUGIRI_STRETCHY] = sTatsugiriFormSpeciesIdTable,
     [SPECIES_DUDUNSPARCE_TWO_SEGMENT] = sDudunsparceFormSpeciesIdTable,
     [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = sDudunsparceFormSpeciesIdTable,
-    [SPECIES_GIMMIGHOUL] = sGimmighoulFormSpeciesIdTable,
+    [SPECIES_GIMMIGHOUL_CHEST] = sGimmighoulFormSpeciesIdTable,
 #endif
     // Megas
     [SPECIES_VENUSAUR_MEGA] = sVenusaurFormSpeciesIdTable,

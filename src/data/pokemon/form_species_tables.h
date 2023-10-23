@@ -1356,7 +1356,7 @@ static const u16 sDudunsparceFormSpeciesIdTable[] = {
 };
 
 static const u16 sGimmighoulFormSpeciesIdTable[] = {
-    SPECIES_GIMMIGHOUL,
+    SPECIES_GIMMIGHOUL_CHEST,
     SPECIES_GIMMIGHOUL_ROAMING,
     FORM_SPECIES_END,
 };

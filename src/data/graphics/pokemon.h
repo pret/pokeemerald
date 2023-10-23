@@ -8067,11 +8067,11 @@ const u32 gMonShinyPalette_Baxcalibur[] = INCBIN_U32("graphics/pokemon/baxcalibu
 const u8 gMonIcon_Baxcalibur[] = INCBIN_U8("graphics/pokemon/baxcalibur/icon.4bpp");
 // const u8 gMonFootprint_Baxcalibur[] = INCBIN_U8("graphics/pokemon/baxcalibur/footprint.1bpp");
 
-const u32 gMonFrontPic_Gimmighoul[] = INCBIN_U32("graphics/pokemon/gimmighoul/front.4bpp.lz");
-const u32 gMonPalette_Gimmighoul[] = INCBIN_U32("graphics/pokemon/gimmighoul/normal.gbapal.lz");
-const u32 gMonBackPic_Gimmighoul[] = INCBIN_U32("graphics/pokemon/gimmighoul/back.4bpp.lz");
-const u32 gMonShinyPalette_Gimmighoul[] = INCBIN_U32("graphics/pokemon/gimmighoul/shiny.gbapal.lz");
-const u8 gMonIcon_Gimmighoul[] = INCBIN_U8("graphics/pokemon/gimmighoul/icon.4bpp");
+const u32 gMonFrontPic_GimmighoulChest[] = INCBIN_U32("graphics/pokemon/gimmighoul/front.4bpp.lz");
+const u32 gMonPalette_GimmighoulChest[] = INCBIN_U32("graphics/pokemon/gimmighoul/normal.gbapal.lz");
+const u32 gMonBackPic_GimmighoulChest[] = INCBIN_U32("graphics/pokemon/gimmighoul/back.4bpp.lz");
+const u32 gMonShinyPalette_GimmighoulChest[] = INCBIN_U32("graphics/pokemon/gimmighoul/shiny.gbapal.lz");
+const u8 gMonIcon_GimmighoulChest[] = INCBIN_U8("graphics/pokemon/gimmighoul/icon.4bpp");
 // const u8 gMonFootprint_Gimmighoul[] = INCBIN_U8("graphics/pokemon/gimmighoul/footprint.1bpp");
 
 const u32 gMonFrontPic_GimmighoulRoaming[] = INCBIN_U32("graphics/pokemon/gimmighoul/roaming/front.4bpp.lz");
@@ -8079,7 +8079,6 @@ const u32 gMonPalette_GimmighoulRoaming[] = INCBIN_U32("graphics/pokemon/gimmigh
 const u32 gMonBackPic_GimmighoulRoaming[] = INCBIN_U32("graphics/pokemon/gimmighoul/roaming/back.4bpp.lz");
 const u32 gMonShinyPalette_GimmighoulRoaming[] = INCBIN_U32("graphics/pokemon/gimmighoul/roaming/shiny.gbapal.lz");
 // const u8 gMonIcon_GimmighoulRoaming[] = INCBIN_U8("graphics/pokemon/gimmighoul/icon.4bpp");
-// const u8 gMonFootprint_Gimmighoul[] = INCBIN_U8("graphics/pokemon/gimmighoul/footprint.1bpp");
 
 const u32 gMonFrontPic_Gholdengo[] = INCBIN_U32("graphics/pokemon/gholdengo/front.4bpp.lz");
 const u32 gMonPalette_Gholdengo[] = INCBIN_U32("graphics/pokemon/gholdengo/normal.gbapal.lz");

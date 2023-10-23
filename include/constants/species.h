@@ -1538,7 +1538,8 @@
 #define SPECIES_FRIGIBAX                     GEN9_START + 91
 #define SPECIES_ARCTIBAX                     GEN9_START + 92
 #define SPECIES_BAXCALIBUR                   GEN9_START + 93
-#define SPECIES_GIMMIGHOUL                   GEN9_START + 94
+#define SPECIES_GIMMIGHOUL                   SPECIES_GIMMIGHOUL_CHEST
+#define SPECIES_GIMMIGHOUL_CHEST             GEN9_START + 94
 #define SPECIES_GHOLDENGO                    GEN9_START + 95
 #define SPECIES_WO_CHIEN                     GEN9_START + 96
 #define SPECIES_CHIEN_PAO                    GEN9_START + 97

@@ -1045,7 +1045,7 @@ const struct MonCoords gMonBackPicCoords[NUM_SPECIES + 1] =
     [SPECIES_FRIGIBAX]                          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  11 },
     [SPECIES_ARCTIBAX]                          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  8 },
     [SPECIES_BAXCALIBUR]                        = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  5 },
-    [SPECIES_GIMMIGHOUL]                        = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    [SPECIES_GIMMIGHOUL_CHEST]                  = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_GIMMIGHOUL_ROAMING]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  3 },
     [SPECIES_GHOLDENGO]                         = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_WO_CHIEN]                          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  10 },

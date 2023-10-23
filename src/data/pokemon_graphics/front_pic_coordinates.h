@@ -1023,7 +1023,7 @@ const struct MonCoords gMonFrontPicCoords[NUM_SPECIES + 1] =
     [SPECIES_FRIGIBAX]                          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  5 },
     [SPECIES_ARCTIBAX]                          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  3 },
     [SPECIES_BAXCALIBUR]                        = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
-    [SPECIES_GIMMIGHOUL]                        = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  3 },
+    [SPECIES_GIMMIGHOUL_CHEST]                  = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  3 },
     [SPECIES_GIMMIGHOUL_ROAMING]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  7 },
     [SPECIES_GHOLDENGO]                         = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_WO_CHIEN]                          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },

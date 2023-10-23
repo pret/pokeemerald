@@ -1018,7 +1018,8 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_FRIGIBAX] = _("Frigibax"),
     [SPECIES_ARCTIBAX] = _("Arctibax"),
     [SPECIES_BAXCALIBUR] = _("Baxcalibur"),
-    [SPECIES_GIMMIGHOUL] = _("Gimmighoul"),
+    [SPECIES_GIMMIGHOUL_CHEST] = _("Gimmighoul"),
+    [SPECIES_GIMMIGHOUL_ROAMING] = _("Gimmighoul"),
     [SPECIES_GHOLDENGO] = _("Gholdengo"),
     [SPECIES_WO_CHIEN] = _("Wo-Chien"),
     [SPECIES_CHIEN_PAO] = _("Chien-Pao"),
@@ -1491,10 +1492,6 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_DURALUDON_GIGANTAMAX] = _("Duraludon"),
     [SPECIES_URSHIFU_SINGLE_STRIKE_STYLE_GIGANTAMAX] = _("Urshifu"),
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = _("Urshifu"),
-#endif
-#if P_GEN_9_POKEMON == TRUE
-    // Gimmighoul
-    [SPECIES_GIMMIGHOUL_ROAMING] = _("Gimmighoul"),
 #endif
     // Tauros-Paldea
     [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = _("Tauros"),
