@@ -24956,9 +24956,14 @@ const struct SpeciesInfo gSpeciesInfo[] =
         SANDACONDA_MISC_INFO,
         .gigantamax = TRUE,
     },
-    [SPECIES_TOXTRICITY_GIGANTAMAX] =
+    [SPECIES_TOXTRICITY_AMPED_GIGANTAMAX] =
     {
         TOXTRICITY_MISC_INFO(ABILITY_PLUS),
+        .gigantamax = TRUE,
+    },
+    [SPECIES_TOXTRICITY_LOW_KEY_GIGANTAMAX] =
+    {
+        TOXTRICITY_MISC_INFO(ABILITY_MINUS),
         .gigantamax = TRUE,
     },
     [SPECIES_CENTISKORCH_GIGANTAMAX] =

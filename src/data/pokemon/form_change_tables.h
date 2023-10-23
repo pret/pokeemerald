@@ -607,47 +607,189 @@ static const struct FormChange sEnamorusFormChangeTable[] = {
 
 #endif
 
-// Gigantamax Forms
-#define GIGANTAMAX_FORM(species)                                        \
-    {                                                                   \
-        {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_##species##_GIGANTAMAX},\
-        {FORM_CHANGE_TERMINATOR},                                       \
-    };
+static const struct FormChange sButterfreeFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_BUTTERFREE_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
 
-static const struct FormChange sButterfreeFormChangeTable[] = GIGANTAMAX_FORM(BUTTERFREE)
-static const struct FormChange sPikachuFormChangeTable[] = GIGANTAMAX_FORM(PIKACHU)
-static const struct FormChange sMeowthFormChangeTable[] = GIGANTAMAX_FORM(MEOWTH)
-static const struct FormChange sMachampFormChangeTable[] = GIGANTAMAX_FORM(MACHAMP)
-static const struct FormChange sKinglerFormChangeTable[] = GIGANTAMAX_FORM(KINGLER)
-static const struct FormChange sLaprasFormChangeTable[] = GIGANTAMAX_FORM(LAPRAS)
-static const struct FormChange sEeveeFormChangeTable[] = GIGANTAMAX_FORM(EEVEE)
-static const struct FormChange sSnorlaxFormChangeTable[] = GIGANTAMAX_FORM(SNORLAX)
+static const struct FormChange sPikachuFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_PIKACHU_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sMeowthFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_MEOWTH_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sMachampFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_MACHAMP_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sKinglerFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_KINGLER_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sLaprasFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_LAPRAS_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sEeveeFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_EEVEE_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sSnorlaxFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_SNORLAX_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
 #if P_GEN_5_POKEMON == TRUE
-static const struct FormChange sGarbodorFormChangeTable[] = GIGANTAMAX_FORM(GARBODOR)
+static const struct FormChange sGarbodorFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_GARBODOR_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
 #endif
 #if P_GEN_7_POKEMON == TRUE
-static const struct FormChange sMelmetalFormChangeTable[] = GIGANTAMAX_FORM(MELMETAL)
+static const struct FormChange sMelmetalFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_MELMETAL_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
 #endif
 #if P_GEN_8_POKEMON == TRUE
-static const struct FormChange sRillaboomFormChangeTable[] = GIGANTAMAX_FORM(RILLABOOM)
-static const struct FormChange sCinderaceFormChangeTable[] = GIGANTAMAX_FORM(CINDERACE)
-static const struct FormChange sInteleonFormChangeTable[] = GIGANTAMAX_FORM(INTELEON)
-static const struct FormChange sCorviknightFormChangeTable[] = GIGANTAMAX_FORM(CORVIKNIGHT)
-static const struct FormChange sOrbeetleFormChangeTable[] = GIGANTAMAX_FORM(ORBEETLE)
-static const struct FormChange sDrednawFormChangeTable[] = GIGANTAMAX_FORM(DREDNAW)
-static const struct FormChange sCoalossalFormChangeTable[] = GIGANTAMAX_FORM(COALOSSAL)
-static const struct FormChange sFlappleFormChangeTable[] = GIGANTAMAX_FORM(FLAPPLE)
-static const struct FormChange sAppletunFormChangeTable[] = GIGANTAMAX_FORM(APPLETUN)
-static const struct FormChange sSandacondaFormChangeTable[] = GIGANTAMAX_FORM(SANDACONDA)
-static const struct FormChange sToxtricityFormChangeTable[] = GIGANTAMAX_FORM(TOXTRICITY)
-static const struct FormChange sCentiskorchFormChangeTable[] = GIGANTAMAX_FORM(CENTISKORCH)
-static const struct FormChange sHattereneFormChangeTable[] = GIGANTAMAX_FORM(HATTERENE)
-static const struct FormChange sGrimmsnarlFormChangeTable[] = GIGANTAMAX_FORM(GRIMMSNARL)
-static const struct FormChange sAlcremieFormChangeTable[] = GIGANTAMAX_FORM(ALCREMIE)
-static const struct FormChange sCopperajahFormChangeTable[] = GIGANTAMAX_FORM(COPPERAJAH)
-static const struct FormChange sDuraludonFormChangeTable[] = GIGANTAMAX_FORM(DURALUDON)
-static const struct FormChange sUrshifuFormChangeTable[] = GIGANTAMAX_FORM(URSHIFU)
-static const struct FormChange sUrshifuRapidStrikeFormChangeTable[] = GIGANTAMAX_FORM(URSHIFU_RAPID_STRIKE_STYLE)
+static const struct FormChange sRillaboomFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_RILLABOOM_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sCinderaceFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_CINDERACE_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sInteleonFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_INTELEON_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sCorviknightFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_CORVIKNIGHT_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sOrbeetleFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_ORBEETLE_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sDrednawFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_DREDNAW_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sCoalossalFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_COALOSSAL_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sFlappleFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_FLAPPLE_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sAppletunFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_APPLETUN_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sSandacondaFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_SANDACONDA_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sToxtricityAmpedFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_TOXTRICITY_AMPED_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+static const struct FormChange sToxtricityLowKeyFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_TOXTRICITY_LOW_KEY_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+static const struct FormChange sCentiskorchFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_CENTISKORCH_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sHattereneFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_HATTERENE_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sGrimmsnarlFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_GRIMMSNARL_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sAlcremieFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_ALCREMIE_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sCopperajahFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_COPPERAJAH_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sDuraludonFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_DURALUDON_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sUrshifuFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_URSHIFU_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sUrshifuRapidStrikeFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX},
+    {FORM_CHANGE_TERMINATOR},
+};
+
 #endif
 
 #undef WHEN_LEARNED

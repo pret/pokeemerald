@@ -1007,8 +1007,8 @@ gBattleAnims_General::
 	.4byte General_Snow                     @ B_ANIM_SNOW_CONTINUES
 	.4byte General_UltraBurst               @ B_ANIM_ULTRA_BURST
 	.4byte General_SaltCureDamage           @ B_ANIM_SALT_CURE_DAMAGE
-	.4byte General_DynamaxGrowth			@ B_ANIM_DYNAMAX_GROWTH
-	.4byte General_SetWeather 				@ B_ANIM_MAX_SET_WEATHER
+	.4byte General_DynamaxGrowth            @ B_ANIM_DYNAMAX_GROWTH
+	.4byte General_SetWeather               @ B_ANIM_MAX_SET_WEATHER
 
 	.align 2
 gBattleAnims_Special::

@@ -90,13 +90,4 @@ void HideDynamaxTriggerSprite(void);
 bool32 IsDynamaxTriggerSpriteActive(void);
 void DestroyDynamaxTriggerSprite(void);
 
-void DynamaxIndicator_LoadSpriteGfx(void);
-bool32 DynamaxIndicator_ShouldBeInvisible(u32 battlerId);
-u8 DynamaxIndicator_GetSpriteId(u32 healthboxSpriteId);
-void DynamaxIndicator_SetVisibilities(u32 healthboxId, bool32 invisible);
-void DynamaxIndicator_UpdateOamPriority(u32 healthboxId, u32 oamPriority);
-void DynamaxIndicator_UpdateLevel(u32 healthboxId, u32 level);
-void DynamaxIndicator_CreateSprite(u32 battlerId, u32 healthboxSpriteId);
-void DynamaxIndicator_DestroySprite(u32 healthboxSpriteId);
-
 #endif
