@@ -4693,7 +4693,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     case EFFECT_RELIC_SONG:
         if (!(gBattleMons[battlerAtk].status2 & STATUS2_TRANSFORMED)) // Don't try to change form if it's transformed.
         {
-            if (gBattleMons[battlerAtk].species == SPECIES_MELOETTA && gBattleMons[battlerDef].defense < gBattleMons[battlerDef].spDefense)
+            if (gBattleMons[battlerAtk].species == SPECIES_MELOETTA_ARIA && gBattleMons[battlerDef].defense < gBattleMons[battlerDef].spDefense)
                 ADJUST_SCORE(3); // Change to Pirouette if can do more damage
             else if (gBattleMons[battlerAtk].species == SPECIES_MELOETTA_PIROUETTE && gBattleMons[battlerDef].spDefense < gBattleMons[battlerDef].defense)
                 ADJUST_SCORE(3); // Change to Aria if can do more damage

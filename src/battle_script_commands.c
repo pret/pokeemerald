@@ -1225,7 +1225,7 @@ static bool32 TryAegiFormChange(void)
     {
     default:
         return FALSE;
-    case SPECIES_AEGISLASH: // Shield -> Blade
+    case SPECIES_AEGISLASH_SHIELD: // Shield -> Blade
         if (IS_MOVE_STATUS(gCurrentMove))
             return FALSE;
         gBattleMons[gBattlerAttacker].species = SPECIES_AEGISLASH_BLADE;
@@ -1233,7 +1233,7 @@ static bool32 TryAegiFormChange(void)
     case SPECIES_AEGISLASH_BLADE: // Blade -> Shield
         if (gCurrentMove != MOVE_KINGS_SHIELD)
             return FALSE;
-        gBattleMons[gBattlerAttacker].species = SPECIES_AEGISLASH;
+        gBattleMons[gBattlerAttacker].species = SPECIES_AEGISLASH_SHIELD;
         break;
     }
 
@@ -3551,14 +3551,14 @@ void SetMoveEffect(bool32 primary, u32 certain)
             case MOVE_EFFECT_RELIC_SONG:
                 if (GetBattlerAbility(gBattlerAttacker) != ABILITY_SHEER_FORCE && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED))
                 {
-                    if (gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA)
+                    if (gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA_ARIA)
                     {
                         gBattleMons[gBattlerAttacker].species = SPECIES_MELOETTA_PIROUETTE;
                         BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeMoveEffect);
                     }
                     else if (gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA_PIROUETTE)
                     {
-                        gBattleMons[gBattlerAttacker].species = SPECIES_MELOETTA;
+                        gBattleMons[gBattlerAttacker].species = SPECIES_MELOETTA_ARIA;
                         BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeMoveEffect);
                     }
                 }
@@ -9401,7 +9401,8 @@ static void Cmd_various(void)
     case VARIOUS_TRY_REFLECT_TYPE:
     {
         VARIOUS_ARGS(const u8 *failInstr);
-        if (gBattleMons[gBattlerTarget].species == SPECIES_ARCEUS || gBattleMons[gBattlerTarget].species == SPECIES_SILVALLY)
+        if (GET_BASE_SPECIES_ID(gBattleMons[gBattlerTarget].species) == SPECIES_ARCEUS
+         || GET_BASE_SPECIES_ID(gBattleMons[gBattlerTarget].species) == SPECIES_SILVALLY)
         {
             gBattlescriptCurrInstr = cmd->failInstr;
         }
@@ -14677,7 +14678,7 @@ bool32 DoesSubstituteBlockMove(u32 battlerAtk, u32 battlerDef, u32 move)
 
 bool32 DoesDisguiseBlockMove(u32 battlerAtk, u32 battlerDef, u32 move)
 {
-    if (gBattleMons[battlerDef].species != SPECIES_MIMIKYU
+    if (gBattleMons[battlerDef].species != SPECIES_MIMIKYU_DISGUISED
         || gBattleMons[battlerDef].status2 & STATUS2_TRANSFORMED
         || IS_MOVE_STATUS(move)
         || gHitMarker & HITMARKER_IGNORE_DISGUISE

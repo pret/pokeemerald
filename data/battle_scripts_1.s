@@ -1050,7 +1050,7 @@ BattleScript_EffectPhotonGeyser:
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectAuraWheel: @ Aura Wheel can only be used by Morpeko
-	jumpifspecies BS_ATTACKER, SPECIES_MORPEKO, BattleScript_EffectSpeedUpHit
+	jumpifspecies BS_ATTACKER, SPECIES_MORPEKO_FULL_BELLY, BattleScript_EffectSpeedUpHit
 	jumpifspecies BS_ATTACKER, SPECIES_MORPEKO_HANGRY, BattleScript_EffectSpeedUpHit
 	goto BattleScript_PokemonCantUseTheMove
 
@@ -1163,7 +1163,7 @@ BattleScript_BothCanNoLongerEscape::
 
 BattleScript_EffectHyperspaceFury:
 	jumpifspecies BS_ATTACKER, SPECIES_HOOPA_UNBOUND, BattleScript_EffectHyperspaceFuryUnbound
-	jumpifspecies BS_ATTACKER, SPECIES_HOOPA, BattleScript_ButHoopaCantUseIt
+	jumpifspecies BS_ATTACKER, SPECIES_HOOPA_CONFINED, BattleScript_ButHoopaCantUseIt
 	goto BattleScript_PokemonCantUseTheMove
 
 BattleScript_EffectHyperspaceFuryUnbound::
