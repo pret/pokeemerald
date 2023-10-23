@@ -1027,7 +1027,7 @@ const struct MonCoords gMonBackPicCoords[NUM_SPECIES + 1] =
     [SPECIES_ANNIHILAPE]                        = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  1 },
     [SPECIES_CLODSIRE]                          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  15 },
     [SPECIES_FARIGIRAF]                         = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
-    [SPECIES_DUDUNSPARCE]                       = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  11 },
+    [SPECIES_DUDUNSPARCE_TWO_SEGMENT]           = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  11 },
     [SPECIES_DUDUNSPARCE_THREE_SEGMENT]         = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  11 },
     [SPECIES_KINGAMBIT]                         = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_GREAT_TUSK]                        = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  10 },

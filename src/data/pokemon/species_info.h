@@ -26791,29 +26791,29 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
-#define DUDUNSPARCE_SPECIES_INFO \
-    { \
-        .baseHP        = 125, \
-        .baseAttack    = 100, \
-        .baseDefense   = 80, \
-        .baseSpeed     = 55, \
-        .baseSpAttack  = 85, \
-        .baseSpDefense = 75, \
-        .types = { TYPE_NORMAL, TYPE_NORMAL }, \
-        .catchRate = 45, \
-        .expYield = 182, \
-        .evYield_HP = 2, \
-        .genderRatio = PERCENT_FEMALE(50), \
-        .eggCycles = 20, \
-        .friendship = 50, \
-        .growthRate = GROWTH_MEDIUM_FAST, \
-        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD}, \
+#define DUDUNSPARCE_SPECIES_INFO                                                \
+    {                                                                           \
+        .baseHP        = 125,                                                   \
+        .baseAttack    = 100,                                                   \
+        .baseDefense   = 80,                                                    \
+        .baseSpeed     = 55,                                                    \
+        .baseSpAttack  = 85,                                                    \
+        .baseSpDefense = 75,                                                    \
+        .types = { TYPE_NORMAL, TYPE_NORMAL },                                  \
+        .catchRate = 45,                                                        \
+        .expYield = 182,                                                        \
+        .evYield_HP = 2,                                                        \
+        .genderRatio = PERCENT_FEMALE(50),                                      \
+        .eggCycles = 20,                                                        \
+        .friendship = 50,                                                       \
+        .growthRate = GROWTH_MEDIUM_FAST,                                       \
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},                       \
         .abilities = {ABILITY_SERENE_GRACE, ABILITY_RUN_AWAY, ABILITY_RATTLED}, \
-        .bodyColor = BODY_COLOR_YELLOW, \
-        .noFlip = FALSE, \
+        .bodyColor = BODY_COLOR_YELLOW,                                         \
+        .noFlip = FALSE,                                                        \
     }
 
-    [SPECIES_DUDUNSPARCE] = DUDUNSPARCE_SPECIES_INFO,
+    [SPECIES_DUDUNSPARCE_TWO_SEGMENT]   = DUDUNSPARCE_SPECIES_INFO,
     [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = DUDUNSPARCE_SPECIES_INFO,
 
     [SPECIES_KINGAMBIT] =

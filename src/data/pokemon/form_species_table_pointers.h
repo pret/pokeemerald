@@ -189,7 +189,8 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_TATSUGIRI_CURLY] = sTatsugiriFormSpeciesIdTable,
     [SPECIES_TATSUGIRI_DROOPY] = sTatsugiriFormSpeciesIdTable,
     [SPECIES_TATSUGIRI_STRETCHY] = sTatsugiriFormSpeciesIdTable,
-    [SPECIES_DUDUNSPARCE] = sDudunsparceFormSpeciesIdTable,
+    [SPECIES_DUDUNSPARCE_TWO_SEGMENT] = sDudunsparceFormSpeciesIdTable,
+    [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = sDudunsparceFormSpeciesIdTable,
     [SPECIES_GIMMIGHOUL] = sGimmighoulFormSpeciesIdTable,
 #endif
     // Megas
@@ -651,8 +652,6 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = sUrshifuFormSpeciesIdTable,
 #endif
 #if P_GEN_9_POKEMON == TRUE
-    // Dudunsparce
-    [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = sDudunsparceFormSpeciesIdTable,
     // Gimmighoul
     [SPECIES_GIMMIGHOUL_ROAMING] = sGimmighoulFormSpeciesIdTable,
 #endif

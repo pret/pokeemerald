@@ -1459,7 +1459,7 @@ const struct CompressedSpritePalette gMonPaletteTable[NUM_SPECIES + 1] =
     SPECIES_PAL(ANNIHILAPE, gMonPalette_Annihilape),
     SPECIES_PAL(CLODSIRE, gMonPalette_Clodsire),
     SPECIES_PAL(FARIGIRAF, gMonPalette_Farigiraf),
-    SPECIES_PAL(DUDUNSPARCE, gMonPalette_Dudunsparce),
+    SPECIES_PAL(DUDUNSPARCE_TWO_SEGMENT, gMonPalette_Dudunsparce),
     SPECIES_PAL(DUDUNSPARCE_THREE_SEGMENT, gMonPalette_Dudunsparce),
     SPECIES_PAL(KINGAMBIT, gMonPalette_Kingambit),
     SPECIES_PAL(GREAT_TUSK, gMonPalette_GreatTusk),

@@ -1001,7 +1001,8 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_ANNIHILAPE] = sAnnihilapeTeachableLearnset,
     [SPECIES_CLODSIRE] = sClodsireTeachableLearnset,
     [SPECIES_FARIGIRAF] = sFarigirafTeachableLearnset,
-    [SPECIES_DUDUNSPARCE] = sDudunsparceTeachableLearnset,
+    [SPECIES_DUDUNSPARCE_TWO_SEGMENT] = sDudunsparceTeachableLearnset,
+    [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = sDudunsparceTeachableLearnset,
     [SPECIES_KINGAMBIT] = sKingambitTeachableLearnset,
     [SPECIES_GREAT_TUSK] = sGreatTuskTeachableLearnset,
     [SPECIES_SCREAM_TAIL] = sScreamTailTeachableLearnset,
@@ -1490,8 +1491,6 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = sUrshifuRapidStrikeStyleTeachableLearnset,
 #endif
 #if P_GEN_9_POKEMON == TRUE
-    // Dudunsparce
-    [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = sDudunsparceTeachableLearnset,
     // Gimmighoul
     [SPECIES_GIMMIGHOUL_ROAMING] = sGimmighoulTeachableLearnset,
 #endif

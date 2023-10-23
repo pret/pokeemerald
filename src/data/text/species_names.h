@@ -1000,7 +1000,8 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_ANNIHILAPE] = _("Annihilape"),
     [SPECIES_CLODSIRE] = _("Clodsire"),
     [SPECIES_FARIGIRAF] = _("Farigiraf"),
-    [SPECIES_DUDUNSPARCE] = _("Dudunsparc"),
+    [SPECIES_DUDUNSPARCE_TWO_SEGMENT] = _("Dudunsparc"),
+    [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = _("Dudunsparc"),
     [SPECIES_KINGAMBIT] = _("Kingambit"),
     [SPECIES_GREAT_TUSK] = _("Great Tusk"),
     [SPECIES_SCREAM_TAIL] = _("Scream Tai"),
@@ -1492,8 +1493,6 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = _("Urshifu"),
 #endif
 #if P_GEN_9_POKEMON == TRUE
-    // Dudunsparce
-    [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = _("Dudunsparc"),
     // Gimmighoul
     [SPECIES_GIMMIGHOUL_ROAMING] = _("Gimmighoul"),
 #endif

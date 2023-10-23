@@ -13110,7 +13110,8 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_ANNIHILAPE]                        = sAnims_Annihilape,
     [SPECIES_CLODSIRE]                          = sAnims_Clodsire,
     [SPECIES_FARIGIRAF]                         = sAnims_Farigiraf,
-    [SPECIES_DUDUNSPARCE]                       = sAnims_Dudunsparce,
+    [SPECIES_DUDUNSPARCE_TWO_SEGMENT]           = sAnims_Dudunsparce,
+    [SPECIES_DUDUNSPARCE_THREE_SEGMENT]         = sAnims_Dudunsparce,
     [SPECIES_KINGAMBIT]                         = sAnims_Kingambit,
     [SPECIES_GREAT_TUSK]                        = sAnims_GreatTusk,
     [SPECIES_SCREAM_TAIL]                       = sAnims_ScreamTail,
@@ -13501,7 +13502,6 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_BASCULEGION_FEMALE]             = sAnims_Basculegion,
 #endif
 #if P_GEN_9_POKEMON == TRUE
-    [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = sAnims_Dudunsparce,
     [SPECIES_GIMMIGHOUL_ROAMING] = sAnims_Gimmighoul,
 #endif
     [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = sAnims_TaurosPaldean,

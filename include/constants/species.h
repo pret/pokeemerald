@@ -1520,7 +1520,8 @@
 #define SPECIES_ANNIHILAPE                   GEN9_START + 74
 #define SPECIES_CLODSIRE                     GEN9_START + 75
 #define SPECIES_FARIGIRAF                    GEN9_START + 76
-#define SPECIES_DUDUNSPARCE                  GEN9_START + 77
+#define SPECIES_DUDUNSPARCE                  SPECIES_DUDUNSPARCE_TWO_SEGMENT
+#define SPECIES_DUDUNSPARCE_TWO_SEGMENT      GEN9_START + 77
 #define SPECIES_KINGAMBIT                    GEN9_START + 78
 #define SPECIES_GREAT_TUSK                   GEN9_START + 79
 #define SPECIES_SCREAM_TAIL                  GEN9_START + 80

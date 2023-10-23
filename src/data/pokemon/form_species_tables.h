@@ -1350,7 +1350,7 @@ static const u16 sTatsugiriFormSpeciesIdTable[] = {
 };
 
 static const u16 sDudunsparceFormSpeciesIdTable[] = {
-    SPECIES_DUDUNSPARCE,
+    SPECIES_DUDUNSPARCE_TWO_SEGMENT,
     SPECIES_DUDUNSPARCE_THREE_SEGMENT,
     FORM_SPECIES_END,
 };
