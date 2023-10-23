@@ -9,8 +9,8 @@
 // The purpose of this struct is for outside applications to be
 // able to access parts of the ROM or its save file, like a public API.
 // In vanilla, it was used by Colosseum and XD to access pokemon graphics.
-// 
-// If this struct is rearranged in any way, it defeats the purpose of 
+//
+// If this struct is rearranged in any way, it defeats the purpose of
 // having it at all. Applications like PKHex or streaming HUDs may find
 // these values useful, so there's some potential benefit to keeping it.
 // If there's a compilation problem below, just comment out the assignment
