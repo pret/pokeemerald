@@ -1336,7 +1336,7 @@ const u8 *const gMonIconTable[NUM_SPECIES + 1] =
 #endif
 #if P_GEN_9_POKEMON == TRUE
     [SPECIES_SPRIGATITO] = gMonIcon_Sprigatito,
-    // [SPECIES_FLORAGATO] = gMonIcon_Floragato,
+    [SPECIES_FLORAGATO] = gMonIcon_Floragato,
     [SPECIES_MEOWSCARADA] = gMonIcon_Meowscarada,
     [SPECIES_FUECOCO] = gMonIcon_Fuecoco,
     [SPECIES_CROCALOR] = gMonIcon_Crocalor,
