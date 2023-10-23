@@ -1002,7 +1002,7 @@ const struct MonCoords gMonBackPicCoords[NUM_SPECIES + 1] =
     [SPECIES_ESPATHRA]                          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  11 },
     [SPECIES_TINKATINK]                         = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  12 },
     [SPECIES_TINKATUFF]                         = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  2 },
-    [SPECIES_TINKATON]                          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    [SPECIES_TINKATON]                          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  15 },
     [SPECIES_WIGLETT]                           = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  14 },
     [SPECIES_WUGTRIO]                           = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  11 },
     [SPECIES_BOMBIRDIER]                        = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  4 },
