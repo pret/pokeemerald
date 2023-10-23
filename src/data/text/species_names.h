@@ -927,6 +927,7 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_QUAQUAVAL] = _("Quaquaval"),
     [SPECIES_LECHONK] = _("Lechonk"),
     [SPECIES_OINKOLOGNE_MALE] = _("Oinkologne"),
+    [SPECIES_OINKOLOGNE_FEMALE] = _("Oinkologne"),
     [SPECIES_TAROUNTULA] = _("Tarountula"),
     [SPECIES_SPIDOPS] = _("Spidops"),
     [SPECIES_NYMBLE] = _("Nymble"),
@@ -936,12 +937,16 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_PAWMOT] = _("Pawmot"),
     [SPECIES_TANDEMAUS] = _("Tandemaus"),
     [SPECIES_MAUSHOLD_FAMILY_OF_THREE] = _("Maushold"),
+    [SPECIES_MAUSHOLD_FAMILY_OF_FOUR] = _("Maushold"),
     [SPECIES_FIDOUGH] = _("Fidough"),
     [SPECIES_DACHSBUN] = _("Dachsbun"),
     [SPECIES_SMOLIV] = _("Smoliv"),
     [SPECIES_DOLLIV] = _("Dolliv"),
     [SPECIES_ARBOLIVA] = _("Arboliva"),
-    [SPECIES_SQUAWKABILLY] = _("Squawkabil"),
+    [SPECIES_SQUAWKABILLY_GREEN_PLUMAGE] = _("Squawkabil"),
+    [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] = _("Squawkabil"),
+    [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] = _("Squawkabil"),
+    [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE] = _("Squawkabil"),
     [SPECIES_NACLI] = _("Nacli"),
     [SPECIES_NACLSTACK] = _("Naclstack"),
     [SPECIES_GARGANACL] = _("Garganacl"),
@@ -1484,14 +1489,6 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = _("Urshifu"),
 #endif
 #if P_GEN_9_POKEMON == TRUE
-    // Oinkologne
-    [SPECIES_OINKOLOGNE_FEMALE] = _("Oinkologne"),
-    // Maushold
-    [SPECIES_MAUSHOLD_FAMILY_OF_FOUR] = _("Maushold"),
-    // Squawkabilly
-    [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] = _("Squawkabil"),
-    [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] = _("Squawkabil"),
-    [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE] = _("Squawkabil"),
     // Palafin
     [SPECIES_PALAFIN_HERO] = _("Palafin"),
     // Tatsugiri

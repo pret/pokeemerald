@@ -928,6 +928,7 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_QUAQUAVAL] = sQuaquavalTeachableLearnset,
     [SPECIES_LECHONK] = sLechonkTeachableLearnset,
     [SPECIES_OINKOLOGNE_MALE] = sOinkologneMaleTeachableLearnset,
+    [SPECIES_OINKOLOGNE_FEMALE] = sOinkologneFemaleTeachableLearnset,
     [SPECIES_TAROUNTULA] = sTarountulaTeachableLearnset,
     [SPECIES_SPIDOPS] = sSpidopsTeachableLearnset,
     [SPECIES_NYMBLE] = sNymbleTeachableLearnset,
@@ -937,12 +938,16 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_PAWMOT] = sPawmotTeachableLearnset,
     [SPECIES_TANDEMAUS] = sTandemausTeachableLearnset,
     [SPECIES_MAUSHOLD_FAMILY_OF_THREE] = sMausholdTeachableLearnset,
+    [SPECIES_MAUSHOLD_FAMILY_OF_FOUR] = sMausholdTeachableLearnset,
     [SPECIES_FIDOUGH] = sFidoughTeachableLearnset,
     [SPECIES_DACHSBUN] = sDachsbunTeachableLearnset,
     [SPECIES_SMOLIV] = sSmolivTeachableLearnset,
     [SPECIES_DOLLIV] = sDollivTeachableLearnset,
     [SPECIES_ARBOLIVA] = sArbolivaTeachableLearnset,
-    [SPECIES_SQUAWKABILLY] = sSquawkabillyTeachableLearnset,
+    [SPECIES_SQUAWKABILLY_GREEN_PLUMAGE] = sSquawkabillyTeachableLearnset,
+    [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] = sSquawkabillyTeachableLearnset,
+    [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] = sSquawkabillyTeachableLearnset,
+    [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE] = sSquawkabillyTeachableLearnset,
     [SPECIES_NACLI] = sNacliTeachableLearnset,
     [SPECIES_NACLSTACK] = sNaclstackTeachableLearnset,
     [SPECIES_GARGANACL] = sGarganaclTeachableLearnset,
@@ -1482,14 +1487,6 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = sUrshifuRapidStrikeStyleTeachableLearnset,
 #endif
 #if P_GEN_9_POKEMON == TRUE
-    // Oinkologne
-    [SPECIES_OINKOLOGNE_FEMALE] = sOinkologneFemaleTeachableLearnset,
-    // Maushold
-    [SPECIES_MAUSHOLD_FAMILY_OF_FOUR] = sMausholdTeachableLearnset,
-    // Squawkabilly
-    [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] = sSquawkabillyTeachableLearnset,
-    [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] = sSquawkabillyTeachableLearnset,
-    [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE] = sSquawkabillyTeachableLearnset,
     // Palafin
     [SPECIES_PALAFIN_HERO] = sPalafinTeachableLearnset,
     // Tatsugiri

@@ -1402,7 +1402,7 @@ const struct CompressedSpritePalette gMonPaletteTable[NUM_SPECIES + 1] =
     SPECIES_PAL(SMOLIV, gMonPalette_Smoliv),
     SPECIES_PAL(DOLLIV, gMonPalette_Dolliv),
     SPECIES_PAL(ARBOLIVA, gMonPalette_Arboliva),
-    SPECIES_PAL(SQUAWKABILLY, gMonPalette_SquawkabillyGreenPlumage),
+    SPECIES_PAL(SQUAWKABILLY_GREEN_PLUMAGE, gMonPalette_SquawkabillyGreenPlumage),
     SPECIES_PAL(SQUAWKABILLY_BLUE_PLUMAGE, gMonPalette_SquawkabillyBluePlumage),
     SPECIES_PAL(SQUAWKABILLY_YELLOW_PLUMAGE, gMonPalette_SquawkabillyYellowPlumage),
     SPECIES_PAL(SQUAWKABILLY_WHITE_PLUMAGE, gMonPalette_SquawkabillyWhitePlumage),

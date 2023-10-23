@@ -25619,25 +25619,25 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
-#define SQUAWKABILLY_MISC_INFO                                  \
-        .baseHP        = 82,                                    \
-        .baseAttack    = 96,                                    \
-        .baseDefense   = 51,                                    \
-        .baseSpeed     = 92,                                    \
-        .baseSpAttack  = 45,                                    \
-        .baseSpDefense = 51,                                    \
-        .types = { TYPE_NORMAL, TYPE_FLYING },                  \
-        .catchRate = 190,                                       \
-        .expYield = 146,                                        \
-        .evYield_Attack = 1,                                    \
-        .genderRatio = PERCENT_FEMALE(50),                      \
-        .eggCycles = 15,                                        \
-        .friendship = 50,                                       \
-        .growthRate = GROWTH_ERRATIC,                           \
-        .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING},     \
+#define SQUAWKABILLY_MISC_INFO                              \
+        .baseHP        = 82,                                \
+        .baseAttack    = 96,                                \
+        .baseDefense   = 51,                                \
+        .baseSpeed     = 92,                                \
+        .baseSpAttack  = 45,                                \
+        .baseSpDefense = 51,                                \
+        .types = { TYPE_NORMAL, TYPE_FLYING },              \
+        .catchRate = 190,                                   \
+        .expYield = 146,                                    \
+        .evYield_Attack = 1,                                \
+        .genderRatio = PERCENT_FEMALE(50),                  \
+        .eggCycles = 15,                                    \
+        .friendship = 50,                                   \
+        .growthRate = GROWTH_ERRATIC,                       \
+        .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING}, \
         .noFlip = FALSE
 
-    [SPECIES_SQUAWKABILLY] =
+    [SPECIES_SQUAWKABILLY_GREEN_PLUMAGE] =
     {
         .abilities = {ABILITY_INTIMIDATE, ABILITY_HUSTLE, ABILITY_GUTS},
         .bodyColor = BODY_COLOR_GREEN,

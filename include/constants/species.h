@@ -1466,7 +1466,8 @@
 #define SPECIES_SMOLIV                       GEN9_START + 23
 #define SPECIES_DOLLIV                       GEN9_START + 24
 #define SPECIES_ARBOLIVA                     GEN9_START + 25
-#define SPECIES_SQUAWKABILLY                 GEN9_START + 26
+#define SPECIES_SQUAWKABILLY                 SPECIES_SQUAWKABILLY_GREEN_PLUMAGE
+#define SPECIES_SQUAWKABILLY_GREEN_PLUMAGE   GEN9_START + 26
 #define SPECIES_NACLI                        GEN9_START + 27
 #define SPECIES_NACLSTACK                    GEN9_START + 28
 #define SPECIES_GARGANACL                    GEN9_START + 29

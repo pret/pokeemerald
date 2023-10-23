@@ -7565,7 +7565,7 @@ extern const u8 gMonIcon_MausholdFamilyOfThree[];
 extern const u8 gMonFootprint_Maushold[];
 extern const u32 gMonFrontPic_MausholdFamilyOfFour[];
 extern const u32 gMonBackPic_MausholdFamilyOfFour[];
-extern const u32 gMonIcon_MausholdFamilyOfFour[];
+extern const u8 gMonIcon_MausholdFamilyOfFour[];
 extern const u32 gMonFrontPic_Fidough[];
 extern const u32 gMonPalette_Fidough[];
 extern const u32 gMonBackPic_Fidough[];

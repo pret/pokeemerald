@@ -177,8 +177,13 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
 #endif
 #if P_GEN_9_POKEMON == TRUE
     [SPECIES_OINKOLOGNE_MALE] = sOinkologneFormSpeciesIdTable,
+    [SPECIES_OINKOLOGNE_FEMALE] = sOinkologneFormSpeciesIdTable,
+    [SPECIES_MAUSHOLD_FAMILY_OF_FOUR] = sMausholdFormSpeciesIdTable,
     [SPECIES_MAUSHOLD_FAMILY_OF_THREE] = sMausholdFormSpeciesIdTable,
-    [SPECIES_SQUAWKABILLY] = sSquawkabillyFormSpeciesIdTable,
+    [SPECIES_SQUAWKABILLY_GREEN_PLUMAGE] = sSquawkabillyFormSpeciesIdTable,
+    [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] = sSquawkabillyFormSpeciesIdTable,
+    [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] = sSquawkabillyFormSpeciesIdTable,
+    [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE] = sSquawkabillyFormSpeciesIdTable,
     [SPECIES_PALAFIN] = sPalafinFormSpeciesIdTable,
     [SPECIES_TATSUGIRI] = sTatsugiriFormSpeciesIdTable,
     [SPECIES_DUDUNSPARCE] = sDudunsparceFormSpeciesIdTable,
@@ -643,14 +648,6 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = sUrshifuFormSpeciesIdTable,
 #endif
 #if P_GEN_9_POKEMON == TRUE
-    // Oinkologne
-    [SPECIES_OINKOLOGNE_FEMALE] = sOinkologneFormSpeciesIdTable,
-    // Maushold
-    [SPECIES_MAUSHOLD_FAMILY_OF_FOUR] = sMausholdFormSpeciesIdTable,
-    // Squawkabilly
-    [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] = sSquawkabillyFormSpeciesIdTable,
-    [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] = sSquawkabillyFormSpeciesIdTable,
-    [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE] = sSquawkabillyFormSpeciesIdTable,
     // Palafin
     [SPECIES_PALAFIN_HERO] = sPalafinFormSpeciesIdTable,
     // Tatsugiri
