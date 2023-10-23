@@ -566,6 +566,7 @@ const u8 *const gItemEffectTable[ITEMS_COUNT] =
     [ITEM_METAL_COAT]         = gItemEffect_EvoItem,
     [ITEM_KINGS_ROCK]         = gItemEffect_EvoItem,
     [ITEM_RAZOR_CLAW]         = gItemEffect_EvoItem,
+    [ITEM_RAZOR_FANG]         = gItemEffect_EvoItem,
     [ITEM_AUSPICIOUS_ARMOR]   = gItemEffect_EvoItem,
     [ITEM_MALICIOUS_ARMOR]    = gItemEffect_EvoItem,
     [ITEM_SCROLL_OF_DARKNESS] = gItemEffect_EvoItem,
