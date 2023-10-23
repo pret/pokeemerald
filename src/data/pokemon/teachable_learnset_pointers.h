@@ -995,7 +995,9 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_CETITAN] = sCetitanTeachableLearnset,
     [SPECIES_VELUZA] = sVeluzaTeachableLearnset,
     [SPECIES_DONDOZO] = sDondozoTeachableLearnset,
-    [SPECIES_TATSUGIRI] = sTatsugiriTeachableLearnset,
+    [SPECIES_TATSUGIRI_CURLY] = sTatsugiriTeachableLearnset,
+    [SPECIES_TATSUGIRI_DROOPY] = sTatsugiriTeachableLearnset,
+    [SPECIES_TATSUGIRI_STRETCHY] = sTatsugiriTeachableLearnset,
     [SPECIES_ANNIHILAPE] = sAnnihilapeTeachableLearnset,
     [SPECIES_CLODSIRE] = sClodsireTeachableLearnset,
     [SPECIES_FARIGIRAF] = sFarigirafTeachableLearnset,
@@ -1488,9 +1490,6 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = sUrshifuRapidStrikeStyleTeachableLearnset,
 #endif
 #if P_GEN_9_POKEMON == TRUE
-    // Tatsugiri
-    [SPECIES_TATSUGIRI_DROOPY] = sTatsugiriTeachableLearnset,
-    [SPECIES_TATSUGIRI_STRETCHY] = sTatsugiriTeachableLearnset,
     // Dudunsparce
     [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = sDudunsparceTeachableLearnset,
     // Gimmighoul

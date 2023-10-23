@@ -1453,7 +1453,7 @@ const struct CompressedSpritePalette gMonPaletteTable[NUM_SPECIES + 1] =
     SPECIES_PAL(CETITAN, gMonPalette_Cetitan),
     SPECIES_PAL(VELUZA, gMonPalette_Veluza),
     SPECIES_PAL(DONDOZO, gMonPalette_Dondozo),
-    SPECIES_PAL(TATSUGIRI, gMonPalette_TatsugiriCurly),
+    SPECIES_PAL(TATSUGIRI_CURLY, gMonPalette_TatsugiriCurly),
     SPECIES_PAL(TATSUGIRI_DROOPY, gMonPalette_TatsugiriDroopy),
     SPECIES_PAL(TATSUGIRI_STRETCHY, gMonPalette_TatsugiriStretchy),
     SPECIES_PAL(ANNIHILAPE, gMonPalette_Annihilape),

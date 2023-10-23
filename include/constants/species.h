@@ -1515,7 +1515,8 @@
 #define SPECIES_CETITAN                      GEN9_START + 70
 #define SPECIES_VELUZA                       GEN9_START + 71
 #define SPECIES_DONDOZO                      GEN9_START + 72
-#define SPECIES_TATSUGIRI                    GEN9_START + 73
+#define SPECIES_TATSUGIRI                    SPECIES_TATSUGIRI_CURLY
+#define SPECIES_TATSUGIRI_CURLY              GEN9_START + 73
 #define SPECIES_ANNIHILAPE                   GEN9_START + 74
 #define SPECIES_CLODSIRE                     GEN9_START + 75
 #define SPECIES_FARIGIRAF                    GEN9_START + 76

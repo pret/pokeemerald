@@ -13104,7 +13104,9 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_CETITAN]                           = sAnims_Cetitan,
     [SPECIES_VELUZA]                            = sAnims_Veluza,
     [SPECIES_DONDOZO]                           = sAnims_Dondozo,
-    [SPECIES_TATSUGIRI]                         = sAnims_Tatsugiri,
+    [SPECIES_TATSUGIRI_CURLY]                   = sAnims_Tatsugiri,
+    [SPECIES_TATSUGIRI_DROOPY]                  = sAnims_Tatsugiri,
+    [SPECIES_TATSUGIRI_STRETCHY]                = sAnims_Tatsugiri,
     [SPECIES_ANNIHILAPE]                        = sAnims_Annihilape,
     [SPECIES_CLODSIRE]                          = sAnims_Clodsire,
     [SPECIES_FARIGIRAF]                         = sAnims_Farigiraf,
@@ -13499,8 +13501,6 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_BASCULEGION_FEMALE]             = sAnims_Basculegion,
 #endif
 #if P_GEN_9_POKEMON == TRUE
-    [SPECIES_TATSUGIRI_DROOPY] = sAnims_Tatsugiri,
-    [SPECIES_TATSUGIRI_STRETCHY] = sAnims_Tatsugiri,
     [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = sAnims_Dudunsparce,
     [SPECIES_GIMMIGHOUL_ROAMING] = sAnims_Gimmighoul,
 #endif

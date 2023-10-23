@@ -185,7 +185,10 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] = sSquawkabillyFormSpeciesIdTable,
     [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE] = sSquawkabillyFormSpeciesIdTable,
     [SPECIES_PALAFIN_ZERO] = sPalafinFormSpeciesIdTable,
-    [SPECIES_TATSUGIRI] = sTatsugiriFormSpeciesIdTable,
+    [SPECIES_PALAFIN_HERO] = sPalafinFormSpeciesIdTable,
+    [SPECIES_TATSUGIRI_CURLY] = sTatsugiriFormSpeciesIdTable,
+    [SPECIES_TATSUGIRI_DROOPY] = sTatsugiriFormSpeciesIdTable,
+    [SPECIES_TATSUGIRI_STRETCHY] = sTatsugiriFormSpeciesIdTable,
     [SPECIES_DUDUNSPARCE] = sDudunsparceFormSpeciesIdTable,
     [SPECIES_GIMMIGHOUL] = sGimmighoulFormSpeciesIdTable,
 #endif
@@ -648,11 +651,6 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = sUrshifuFormSpeciesIdTable,
 #endif
 #if P_GEN_9_POKEMON == TRUE
-    // Palafin
-    [SPECIES_PALAFIN_HERO] = sPalafinFormSpeciesIdTable,
-    // Tatsugiri
-    [SPECIES_TATSUGIRI_DROOPY] = sTatsugiriFormSpeciesIdTable,
-    [SPECIES_TATSUGIRI_STRETCHY] = sTatsugiriFormSpeciesIdTable,
     // Dudunsparce
     [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = sDudunsparceFormSpeciesIdTable,
     // Gimmighoul

@@ -1343,7 +1343,7 @@ static const u16 sPalafinFormSpeciesIdTable[] = {
 };
 
 static const u16 sTatsugiriFormSpeciesIdTable[] = {
-    SPECIES_TATSUGIRI,
+    SPECIES_TATSUGIRI_CURLY,
     SPECIES_TATSUGIRI_DROOPY,
     SPECIES_TATSUGIRI_STRETCHY,
     FORM_SPECIES_END,

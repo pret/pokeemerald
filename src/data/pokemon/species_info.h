@@ -26690,31 +26690,40 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
-#define TATSUGIRI_SPECIES_INFO(color) \
-    { \
-        .baseHP        = 68, \
-        .baseAttack    = 50, \
-        .baseDefense   = 60, \
-        .baseSpeed     = 82, \
-        .baseSpAttack  = 120, \
-        .baseSpDefense = 95, \
-        .types = { TYPE_DRAGON, TYPE_WATER }, \
-        .catchRate = 100, \
-        .expYield = 166, \
-        .evYield_SpAttack = 2, \
-        .genderRatio = PERCENT_FEMALE(50), \
-        .eggCycles = 35, \
-        .friendship = 50, \
-        .growthRate = GROWTH_MEDIUM_SLOW, \
-        .eggGroups = { EGG_GROUP_WATER_2, EGG_GROUP_WATER_2}, \
-        .abilities = {ABILITY_COMMANDER, ABILITY_NONE, ABILITY_STORM_DRAIN}, \
-        .bodyColor = color, \
-        .noFlip = FALSE, \
-    }
+#define TATSUGIRI_MISC_INFO                                                 \
+        .baseHP        = 68,                                                \
+        .baseAttack    = 50,                                                \
+        .baseDefense   = 60,                                                \
+        .baseSpeed     = 82,                                                \
+        .baseSpAttack  = 120,                                               \
+        .baseSpDefense = 95,                                                \
+        .types = { TYPE_DRAGON, TYPE_WATER },                               \
+        .catchRate = 100,                                                   \
+        .expYield = 166,                                                    \
+        .evYield_SpAttack = 2,                                              \
+        .genderRatio = PERCENT_FEMALE(50),                                  \
+        .eggCycles = 35,                                                    \
+        .friendship = 50,                                                   \
+        .growthRate = GROWTH_MEDIUM_SLOW,                                   \
+        .eggGroups = { EGG_GROUP_WATER_2, EGG_GROUP_WATER_2},               \
+        .abilities = {ABILITY_COMMANDER, ABILITY_NONE, ABILITY_STORM_DRAIN},\
+        .noFlip = FALSE
 
-    [SPECIES_TATSUGIRI] = TATSUGIRI_SPECIES_INFO(BODY_COLOR_PINK),
-    [SPECIES_TATSUGIRI_DROOPY] = TATSUGIRI_SPECIES_INFO(BODY_COLOR_RED),
-    [SPECIES_TATSUGIRI_STRETCHY] = TATSUGIRI_SPECIES_INFO(BODY_COLOR_YELLOW),
+    [SPECIES_TATSUGIRI_CURLY] =
+    {
+        TATSUGIRI_MISC_INFO,
+        .bodyColor = BODY_COLOR_PINK,
+    },
+    [SPECIES_TATSUGIRI_DROOPY] =
+    {
+        TATSUGIRI_MISC_INFO,
+        .bodyColor = BODY_COLOR_RED,
+    },
+    [SPECIES_TATSUGIRI_STRETCHY] =
+    {
+        TATSUGIRI_MISC_INFO,
+        .bodyColor = BODY_COLOR_YELLOW,
+    },
 
     [SPECIES_ANNIHILAPE] =
     {

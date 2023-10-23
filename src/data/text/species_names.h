@@ -994,7 +994,9 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_CETITAN] = _("Cetitan"),
     [SPECIES_VELUZA] = _("Veluza"),
     [SPECIES_DONDOZO] = _("Dondozo"),
-    [SPECIES_TATSUGIRI] = _("Tatsugiri"),
+    [SPECIES_TATSUGIRI_CURLY] = _("Tatsugiri"),
+    [SPECIES_TATSUGIRI_DROOPY] = _("Tatsugiri"),
+    [SPECIES_TATSUGIRI_STRETCHY] = _("Tatsugiri"),
     [SPECIES_ANNIHILAPE] = _("Annihilape"),
     [SPECIES_CLODSIRE] = _("Clodsire"),
     [SPECIES_FARIGIRAF] = _("Farigiraf"),
@@ -1490,9 +1492,6 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = _("Urshifu"),
 #endif
 #if P_GEN_9_POKEMON == TRUE
-    // Tatsugiri
-    [SPECIES_TATSUGIRI_DROOPY] = _("Tatsugiri"),
-    [SPECIES_TATSUGIRI_STRETCHY] = _("Tatsugiri"),
     // Dudunsparce
     [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = _("Dudunsparc"),
     // Gimmighoul

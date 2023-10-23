@@ -995,7 +995,9 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_CETITAN] = sCetitanLevelUpLearnset,
     [SPECIES_VELUZA] = sVeluzaLevelUpLearnset,
     [SPECIES_DONDOZO] = sDondozoLevelUpLearnset,
-    [SPECIES_TATSUGIRI] = sTatsugiriLevelUpLearnset,
+    [SPECIES_TATSUGIRI_CURLY] = sTatsugiriLevelUpLearnset,
+    [SPECIES_TATSUGIRI_DROOPY] = sTatsugiriLevelUpLearnset,
+    [SPECIES_TATSUGIRI_STRETCHY] = sTatsugiriLevelUpLearnset,
     [SPECIES_ANNIHILAPE] = sAnnihilapeLevelUpLearnset,
     [SPECIES_CLODSIRE] = sClodsireLevelUpLearnset,
     [SPECIES_FARIGIRAF] = sFarigirafLevelUpLearnset,
@@ -1488,9 +1490,6 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = sUrshifuRapidStrikeStyleLevelUpLearnset,
 #endif
 #if P_GEN_9_POKEMON == TRUE
-    // Tatsugiri
-    [SPECIES_TATSUGIRI_DROOPY] = sTatsugiriLevelUpLearnset,
-    [SPECIES_TATSUGIRI_STRETCHY] = sTatsugiriLevelUpLearnset,
     // Dudunsparce
     [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = sDudunsparceLevelUpLearnset,
     // Gimmighoul
