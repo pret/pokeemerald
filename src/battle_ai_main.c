@@ -1442,7 +1442,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 ADJUST_SCORE(-8);
             else if (aiData->hpPercents[battlerAtk] <= 25)
                 ADJUST_SCORE(-10);
-            else if (B_SOUND_SUBSTITUTE >= GEN_6 && HasSoundMove(battlerDef))
+            else if (HasSubstituteIgnoringMove(battlerDef))
                 ADJUST_SCORE(-8);
             break;
         case EFFECT_LEECH_SEED:
@@ -2521,6 +2521,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 
                 if (instructedMove == MOVE_NONE
                   || gBattleMoves[instructedMove].instructBanned
+                  || gBattleMoves[instructedMove].twoTurnMove
                   || gBattleMoves[instructedMove].effect == EFFECT_RECHARGE
                   || IsZMove(instructedMove)
                   || (gLockedMoves[battlerDef] != 0 && gLockedMoves[battlerDef] != 0xFFFF)
@@ -3222,6 +3223,10 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     u32 i;
     // We only check for moves that have a 20% chance or more for their secondary effect to happen because moves with a smaller chance are rather worthless. We don't want the AI to use those.
     bool32 sereneGraceBoost = (aiData->abilities[battlerAtk] == ABILITY_SERENE_GRACE && (gBattleMoves[move].secondaryEffectChance >= 20 && gBattleMoves[move].secondaryEffectChance < 100));
+
+    // The AI should understand that while Dynamaxed, status moves function like Protect.
+    if (IsDynamaxed(battlerAtk) && gBattleMoves[move].split == SPLIT_STATUS)
+        moveEffect = EFFECT_PROTECT;
 
     // Targeting partner, check benefits of doing that instead
     if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
@@ -4688,7 +4693,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     case EFFECT_RELIC_SONG:
         if (!(gBattleMons[battlerAtk].status2 & STATUS2_TRANSFORMED)) // Don't try to change form if it's transformed.
         {
-            if (gBattleMons[battlerAtk].species == SPECIES_MELOETTA && gBattleMons[battlerDef].defense < gBattleMons[battlerDef].spDefense)
+            if (gBattleMons[battlerAtk].species == SPECIES_MELOETTA_ARIA && gBattleMons[battlerDef].defense < gBattleMons[battlerDef].spDefense)
                 ADJUST_SCORE(3); // Change to Pirouette if can do more damage
             else if (gBattleMons[battlerAtk].species == SPECIES_MELOETTA_PIROUETTE && gBattleMons[battlerDef].spDefense < gBattleMons[battlerDef].defense)
                 ADJUST_SCORE(3); // Change to Aria if can do more damage

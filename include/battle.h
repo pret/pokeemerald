@@ -14,6 +14,7 @@
 #include "battle_bg.h"
 #include "pokeball.h"
 #include "battle_debug.h"
+#include "battle_dynamax.h"
 
 // Used to exclude moves learned temporarily by Transform or Mimic
 #define MOVE_IS_PERMANENT(battler, moveSlot)                        \
@@ -94,6 +95,7 @@ struct DisableStruct
     u8 laserFocusTimer;
     u8 throatChopTimer;
     u8 wrapTurns;
+    u8 tormentTimer:4; // used for G-Max Meltdown
     u8 usedMoves:4;
     u8 noRetreat:1;
     u8 tarShot:1;
@@ -104,6 +106,7 @@ struct DisableStruct
     u8 stickyWebDone:1;
     u8 stealthRockDone:1;
     u8 syrupBombTimer;
+    u8 steelSurgeDone:1;
 };
 
 struct ProtectStruct
@@ -148,6 +151,7 @@ struct ProtectStruct
     u16 beakBlastCharge:1;
     u16 quash:1;
     u16 shellTrap:1;
+    u16 maxGuarded:1;
     u16 silkTrapped:1;
     u16 eatMirrorHerb:1;
     u16 activateOpportunist:2; // 2 - to copy stats. 1 - stats copied (do not repeat). 0 - no stats to copy
@@ -169,7 +173,6 @@ struct SpecialStatus
     u8 lightningRodRedirected:1;
     u8 restoredBattlerSprite: 1;
     u8 traced:1;
-    u8 ppNotAffectedByPressure:1;
     u8 faintedHasReplacement:1;
     u8 focusBanded:1;
     u8 focusSashed:1;
@@ -223,11 +226,14 @@ struct SideTimer
     u8 tailwindBattlerId;
     u8 luckyChantTimer;
     u8 luckyChantBattlerId;
+    u8 steelsurgeAmount;
     // Timers below this point are not swapped by Court Change
     u8 followmeTimer;
     u8 followmeTarget:3;
     u8 followmePowder:1; // Rage powder, does not affect grass type pokemon.
     u8 retaliateTimer;
+    u8 damageNonTypesTimer;
+    u8 damageNonTypesType;
 };
 
 struct FieldTimer
@@ -534,6 +540,22 @@ struct ZMoveData
     u8 splits[MAX_BATTLERS_COUNT];
 };
 
+struct DynamaxData
+{
+    bool8 playerSelect;
+    u8 triggerSpriteId;
+    u8 toDynamax; // flags using gBitTable
+    bool8 alreadyDynamaxed[NUM_BATTLE_SIDES];
+    bool8 dynamaxed[MAX_BATTLERS_COUNT];
+    u8 dynamaxTurns[MAX_BATTLERS_COUNT];
+    u8 usingMaxMove[MAX_BATTLERS_COUNT];
+    u8 activeSplit;
+    u8 splits[MAX_BATTLERS_COUNT];
+    u16 baseMove[MAX_BATTLERS_COUNT]; // base move of Max Move
+    u16 lastUsedBaseMove;
+    u16 levelUpHP;
+};
+
 struct LostItem
 {
     u16 originalItem:15;
@@ -640,6 +662,7 @@ struct BattleStruct
     struct MegaEvolutionData mega;
     struct UltraBurstData burst;
     struct ZMoveData zmove;
+    struct DynamaxData dynamax;
     const u8 *trainerSlideMsg;
     bool8 trainerSlideLowHpMsgDone;
     u8 introState;
@@ -680,6 +703,7 @@ struct BattleStruct
     u8 battleBondTransformed[NUM_BATTLE_SIDES]; // Bitfield for each party.
     u8 storedHealingWish:4; // Each battler as a bit.
     u8 storedLunarDance:4; // Each battler as a bit.
+    u8 bonusCritStages[MAX_BATTLERS_COUNT]; // G-Max Chi Strike boosts crit stages of allies.
     uq4_12_t supremeOverlordModifier[MAX_BATTLERS_COUNT];
     u8 itemPartyIndex[MAX_BATTLERS_COUNT];
     u8 itemMoveIndex[MAX_BATTLERS_COUNT];

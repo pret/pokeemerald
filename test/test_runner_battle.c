@@ -149,6 +149,7 @@ static u32 BattleTest_EstimateCost(void *data)
 {
     u32 cost;
     const struct BattleTest *test = data;
+    memset(STATE, 0, sizeof(*STATE));
     STATE->runRandomly = TRUE;
     InvokeTestFunction(test);
     cost = 1;
@@ -1979,6 +1980,9 @@ void MoveGetIdAndSlot(s32 battlerId, struct MoveContext *ctx, u32 *moveId, u32 *
 
     if (ctx->explicitUltraBurst && ctx->ultraBurst)
         *moveSlot |= RET_ULTRA_BURST;
+    
+    if (ctx->explicitDynamax && ctx->dynamax)
+        *moveSlot |= RET_DYNAMAX;
 }
 
 void Move(u32 sourceLine, struct BattlePokemon *battler, struct MoveContext ctx)

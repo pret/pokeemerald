@@ -1020,7 +1020,6 @@ u32 AI_WhichMoveBetter(u32 move1, u32 move2, u32 battlerAtk, u32 battlerDef, s32
             return 0;
     }
 
-
     // Check additional effects.
     effect1 = AI_IsMoveEffectInMinus(battlerAtk, battlerDef, move1, noOfHitsToKo);
     effect2 = AI_IsMoveEffectInMinus(battlerAtk, battlerDef, move2, noOfHitsToKo);
@@ -2359,6 +2358,11 @@ bool32 HasDamagingMoveOfType(u32 battlerId, u32 type)
     return FALSE;
 }
 
+bool32 HasSubstituteIgnoringMove(u32 battler)
+{
+    CHECK_MOVE_FLAG(ignoresSubstitute);
+}
+
 bool32 HasSoundMove(u32 battler)
 {
     CHECK_MOVE_FLAG(soundMove);
@@ -2397,7 +2401,7 @@ static u32 GetLeechSeedDamage(u32 battlerId)
     if ((gStatuses3[battlerId] & STATUS3_LEECHSEED)
      && gBattleMons[gStatuses3[battlerId] & STATUS3_LEECHSEED_BATTLER].hp != 0)
      {
-        damage = gBattleMons[battlerId].maxHP / 8;
+        damage = GetNonDynamaxMaxHP(battlerId) / 8;
         if (damage == 0)
             damage = 1;
      }
@@ -2409,7 +2413,7 @@ static u32 GetNightmareDamage(u32 battlerId)
     u32 damage = 0;
     if ((gBattleMons[battlerId].status2 & STATUS2_NIGHTMARE) && gBattleMons[battlerId].status1 & STATUS1_SLEEP)
     {
-        damage = gBattleMons[battlerId].maxHP / 4;
+        damage = GetNonDynamaxMaxHP(battlerId) / 4;
         if (damage == 0)
             damage = 1;
     }
@@ -2421,7 +2425,7 @@ static u32 GetCurseDamage(u32 battlerId)
     u32 damage = 0;
     if (gBattleMons[battlerId].status2 & STATUS2_CURSED)
     {
-        damage = gBattleMons[battlerId].maxHP / 4;
+        damage = GetNonDynamaxMaxHP(battlerId) / 4;
         if (damage == 0)
             damage = 1;
     }
@@ -2436,9 +2440,9 @@ static u32 GetTrapDamage(u32 battlerId)
     if (gBattleMons[battlerId].status2 & STATUS2_WRAPPED)
     {
         if (holdEffect == HOLD_EFFECT_BINDING_BAND)
-            damage = gBattleMons[battlerId].maxHP / (B_BINDING_DAMAGE >= GEN_6 ? 6 : 8);
+            damage = GetNonDynamaxMaxHP(battlerId) / (B_BINDING_DAMAGE >= GEN_6 ? 6 : 8);
         else
-            damage = gBattleMons[battlerId].maxHP / (B_BINDING_DAMAGE >= GEN_6 ? 8 : 16);
+            damage = GetNonDynamaxMaxHP(battlerId) / (B_BINDING_DAMAGE >= GEN_6 ? 8 : 16);
 
         if (damage == 0)
             damage = 1;
@@ -2509,7 +2513,7 @@ static u32 GetWeatherDamage(u32 battlerId)
           && !(gStatuses3[battlerId] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
           && holdEffect != HOLD_EFFECT_SAFETY_GOGGLES)
         {
-            damage = gBattleMons[battlerId].maxHP / 16;
+            damage = GetNonDynamaxMaxHP(battlerId) / 16;
             if (damage == 0)
                 damage = 1;
         }
@@ -2520,7 +2524,7 @@ static u32 GetWeatherDamage(u32 battlerId)
           && !(gStatuses3[battlerId] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
           && holdEffect != HOLD_EFFECT_SAFETY_GOGGLES)
         {
-            damage = gBattleMons[battlerId].maxHP / 16;
+            damage = GetNonDynamaxMaxHP(battlerId) / 16;
             if (damage == 0)
                 damage = 1;
         }
@@ -3893,9 +3897,9 @@ bool32 ShouldUseZMove(u32 battlerAtk, u32 battlerDef, u32 chosenMove)
     {
         u8 effectiveness;
 
-        if (gBattleMons[battlerDef].ability == ABILITY_DISGUISE && gBattleMons[battlerDef].species == SPECIES_MIMIKYU)
+        if (gBattleMons[battlerDef].ability == ABILITY_DISGUISE && gBattleMons[battlerDef].species == SPECIES_MIMIKYU_DISGUISED)
             return FALSE; // Don't waste a Z-Move busting disguise
-        if (gBattleMons[battlerDef].ability == ABILITY_ICE_FACE && gBattleMons[battlerDef].species == SPECIES_EISCUE && IS_MOVE_PHYSICAL(chosenMove))
+        if (gBattleMons[battlerDef].ability == ABILITY_ICE_FACE && gBattleMons[battlerDef].species == SPECIES_EISCUE_ICE_FACE && IS_MOVE_PHYSICAL(chosenMove))
             return FALSE; // Don't waste a Z-Move busting Ice Face
 
         if (IS_MOVE_STATUS(chosenMove) && !IS_MOVE_STATUS(gBattleStruct->zmove.chosenZMove))
