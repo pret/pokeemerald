@@ -26370,8 +26370,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
     },
 
 #define PALAFIN_MISC_INFO                                   \
-        .baseHP        = 100,                               \
-        .baseSpeed     = 100,                               \
         .types = { TYPE_WATER, TYPE_WATER },                \
         .catchRate = 45,                                    \
         .evYield_HP = 2,                                    \
@@ -26386,8 +26384,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_PALAFIN_ZERO] =
     {
+        .baseHP        = 100,
         .baseAttack    = 70,
         .baseDefense   = 72,
+        .baseSpeed     = 100,
         .baseSpAttack  = 53,
         .baseSpDefense = 62,
         .expYield = 160,
@@ -26396,10 +26396,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_PALAFIN_HERO] =
     {
+        .baseHP        = 100,
         .baseAttack    = 160,
         .baseDefense   = 97,
+        .baseSpeed     = 100,
         .baseSpAttack  = 106,
-        .baseSpDefense = 100,
+        .baseSpDefense = 87,
         .expYield = 228,
         PALAFIN_MISC_INFO,
     },
