@@ -33058,7 +33058,7 @@ static const u16 sWooperPaldeanTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-static const u16 sTaurosPaldeanTeachableLearnset[] = {
+static const u16 sTaurosPaldeanCombatBreedTeachableLearnset[] = {
     MOVE_ATTRACT,
     MOVE_BLIZZARD,
     MOVE_BODY_SLAM,

@@ -149,26 +149,26 @@ const u32 gMonFrontPic_Magmar[] = INCBIN_U32("graphics/pokemon/magmar/anim_front
 const u32 gMonFrontPic_Pinsir[] = INCBIN_U32("graphics/pokemon/pinsir/anim_front.4bpp.lz");
 const u32 gMonFrontPic_Tauros[] = INCBIN_U32("graphics/pokemon/tauros/anim_front.4bpp.lz");
 
-const u32 gMonFrontPic_TaurosCombatBreed[] = INCBIN_U32("graphics/pokemon/tauros/combat/front.4bpp.lz");
-const u32 gMonPalette_TaurosCombatBreed[] = INCBIN_U32("graphics/pokemon/tauros/combat/normal.gbapal.lz");
-const u32 gMonBackPic_TaurosCombatBreed[] = INCBIN_U32("graphics/pokemon/tauros/combat/back.4bpp.lz");
-const u32 gMonShinyPalette_TaurosCombatBreed[] = INCBIN_U32("graphics/pokemon/tauros/combat/shiny.gbapal.lz");
-const u8 gMonIcon_TaurosCombatBreed[] = INCBIN_U8("graphics/pokemon/tauros/combat/icon.4bpp");
-// const u8 gMonFootprint_TaurosCombatBreed[] = INCBIN_U8("graphics/pokemon/tauros/combat/footprint.1bpp");
+const u32 gMonFrontPic_TaurosPaldeanCombatBreed[] = INCBIN_U32("graphics/pokemon/tauros/combat/front.4bpp.lz");
+const u32 gMonPalette_TaurosPaldeanCombatBreed[] = INCBIN_U32("graphics/pokemon/tauros/combat/normal.gbapal.lz");
+const u32 gMonBackPic_TaurosPaldeanCombatBreed[] = INCBIN_U32("graphics/pokemon/tauros/combat/back.4bpp.lz");
+const u32 gMonShinyPalette_TaurosPaldeanCombatBreed[] = INCBIN_U32("graphics/pokemon/tauros/combat/shiny.gbapal.lz");
+const u8 gMonIcon_TaurosPaldeanCombatBreed[] = INCBIN_U8("graphics/pokemon/tauros/combat/icon.4bpp");
+// const u8 gMonFootprint_TaurosPaldeanCombatBreed[] = INCBIN_U8("graphics/pokemon/tauros/combat/footprint.1bpp");
 
-const u32 gMonFrontPic_TaurosBlazeBreed[] = INCBIN_U32("graphics/pokemon/tauros/blaze/front.4bpp.lz");
-const u32 gMonPalette_TaurosBlazeBreed[] = INCBIN_U32("graphics/pokemon/tauros/blaze/normal.gbapal.lz");
-const u32 gMonBackPic_TaurosBlazeBreed[] = INCBIN_U32("graphics/pokemon/tauros/blaze/back.4bpp.lz");
-const u32 gMonShinyPalette_TaurosBlazeBreed[] = INCBIN_U32("graphics/pokemon/tauros/blaze/shiny.gbapal.lz");
-const u8 gMonIcon_TaurosBlazeBreed[] = INCBIN_U8("graphics/pokemon/tauros/blaze/icon.4bpp");
-// const u8 gMonFootprint_TaurosBlazeBreed[] = INCBIN_U8("graphics/pokemon/tauros/blaze/footprint.1bpp");
+const u32 gMonFrontPic_TaurosPaldeanBlazeBreed[] = INCBIN_U32("graphics/pokemon/tauros/blaze/front.4bpp.lz");
+const u32 gMonPalette_TaurosPaldeanBlazeBreed[] = INCBIN_U32("graphics/pokemon/tauros/blaze/normal.gbapal.lz");
+const u32 gMonBackPic_TaurosPaldeanBlazeBreed[] = INCBIN_U32("graphics/pokemon/tauros/blaze/back.4bpp.lz");
+const u32 gMonShinyPalette_TaurosPaldeanBlazeBreed[] = INCBIN_U32("graphics/pokemon/tauros/blaze/shiny.gbapal.lz");
+const u8 gMonIcon_TaurosPaldeanBlazeBreed[] = INCBIN_U8("graphics/pokemon/tauros/blaze/icon.4bpp");
+// const u8 gMonFootprint_TaurosPaldeanBlazeBreed[] = INCBIN_U8("graphics/pokemon/tauros/blaze/footprint.1bpp");
 
-const u32 gMonFrontPic_TaurosAquaBreed[] = INCBIN_U32("graphics/pokemon/tauros/aqua/front.4bpp.lz");
-const u32 gMonPalette_TaurosAquaBreed[] = INCBIN_U32("graphics/pokemon/tauros/aqua/normal.gbapal.lz");
-const u32 gMonBackPic_TaurosAquaBreed[] = INCBIN_U32("graphics/pokemon/tauros/aqua/back.4bpp.lz");
-const u32 gMonShinyPalette_TaurosAquaBreed[] = INCBIN_U32("graphics/pokemon/tauros/aqua/shiny.gbapal.lz");
-const u8 gMonIcon_TaurosAquaBreed[] = INCBIN_U8("graphics/pokemon/tauros/aqua/icon.4bpp");
-// const u8 gMonFootprint_TaurosAquaBreed[] = INCBIN_U8("graphics/pokemon/tauros/aqua/footprint.1bpp");
+const u32 gMonFrontPic_TaurosPaldeanAquaBreed[] = INCBIN_U32("graphics/pokemon/tauros/aqua/front.4bpp.lz");
+const u32 gMonPalette_TaurosPaldeanAquaBreed[] = INCBIN_U32("graphics/pokemon/tauros/aqua/normal.gbapal.lz");
+const u32 gMonBackPic_TaurosPaldeanAquaBreed[] = INCBIN_U32("graphics/pokemon/tauros/aqua/back.4bpp.lz");
+const u32 gMonShinyPalette_TaurosPaldeanAquaBreed[] = INCBIN_U32("graphics/pokemon/tauros/aqua/shiny.gbapal.lz");
+const u8 gMonIcon_TaurosPaldeanAquaBreed[] = INCBIN_U8("graphics/pokemon/tauros/aqua/icon.4bpp");
+// const u8 gMonFootprint_TaurosPaldeanAquaBreed[] = INCBIN_U8("graphics/pokemon/tauros/aqua/footprint.1bpp");
 
 const u32 gMonFrontPic_Magikarp[] = INCBIN_U32("graphics/pokemon/magikarp/anim_front.4bpp.lz");
 const u32 gMonFrontPic_MagikarpF[] = INCBIN_U32("graphics/pokemon/magikarp/anim_frontf.4bpp.lz");

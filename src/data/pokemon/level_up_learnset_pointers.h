@@ -1146,7 +1146,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_DECIDUEYE_HISUIAN] = sDecidueyeHisuianLevelUpLearnset,
 #endif
     [SPECIES_WOOPER_PALDEAN] = sWooperPaldeanLevelUpLearnset,
-    [SPECIES_TAUROS_PALDEAN] = sTaurosPaldeanLevelUpLearnset,
+    [SPECIES_TAUROS_PALDEAN_COMBAT_BREED] = sTaurosPaldeanCombatBreedLevelUpLearnset,
     // Misc Forms
     // Cosplay Pikachu
     [SPECIES_PIKACHU_COSPLAY] = sPikachuLevelUpLearnset,

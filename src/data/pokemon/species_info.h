@@ -4298,7 +4298,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         TAUROS_MISC_INFO
     },
 
-    [SPECIES_TAUROS_PALDEAN] =
+    [SPECIES_TAUROS_PALDEAN_COMBAT_BREED] =
     {
         .types = { TYPE_FIGHTING, TYPE_FIGHTING },
         .evYield_Attack    = 2,
