@@ -85,7 +85,11 @@ ELF = $(ROM:.gba=.elf)
 MAP = $(ROM:.gba=.map)
 SYM = $(ROM:.gba=.sym)
 
+ifeq ($(MODERN),0)
 TEST_OBJ_DIR_NAME := build/test
+else
+TEST_OBJ_DIR_NAME := build/modern-test
+endif
 TESTELF = $(ROM:.gba=-test.elf)
 HEADLESSELF = $(ROM:.gba=-test-headless.elf)
 
