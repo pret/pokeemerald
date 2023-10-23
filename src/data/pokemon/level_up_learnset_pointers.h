@@ -980,7 +980,8 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_WUGTRIO] = sWugtrioLevelUpLearnset,
     [SPECIES_BOMBIRDIER] = sBombirdierLevelUpLearnset,
     [SPECIES_FINIZEN] = sFinizenLevelUpLearnset,
-    [SPECIES_PALAFIN] = sPalafinLevelUpLearnset,
+    [SPECIES_PALAFIN_ZERO] = sPalafinLevelUpLearnset,
+    [SPECIES_PALAFIN_HERO] = sPalafinLevelUpLearnset,
     [SPECIES_VAROOM] = sVaroomLevelUpLearnset,
     [SPECIES_REVAVROOM] = sRevavroomLevelUpLearnset,
     [SPECIES_CYCLIZAR] = sCyclizarLevelUpLearnset,
@@ -1487,8 +1488,6 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = sUrshifuRapidStrikeStyleLevelUpLearnset,
 #endif
 #if P_GEN_9_POKEMON == TRUE
-    // Palafin
-    [SPECIES_PALAFIN_HERO] = sPalafinLevelUpLearnset,
     // Tatsugiri
     [SPECIES_TATSUGIRI_DROOPY] = sTatsugiriLevelUpLearnset,
     [SPECIES_TATSUGIRI_STRETCHY] = sTatsugiriLevelUpLearnset,

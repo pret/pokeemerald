@@ -1337,7 +1337,7 @@ static const u16 sSquawkabillyFormSpeciesIdTable[] = {
 };
 
 static const u16 sPalafinFormSpeciesIdTable[] = {
-    SPECIES_PALAFIN,
+    SPECIES_PALAFIN_ZERO,
     SPECIES_PALAFIN_HERO,
     FORM_SPECIES_END,
 };

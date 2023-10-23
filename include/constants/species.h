@@ -1500,7 +1500,8 @@
 #define SPECIES_WUGTRIO                      GEN9_START + 56
 #define SPECIES_BOMBIRDIER                   GEN9_START + 57
 #define SPECIES_FINIZEN                      GEN9_START + 58
-#define SPECIES_PALAFIN                      GEN9_START + 59
+#define SPECIES_PALAFIN                      SPECIES_PALAFIN_ZERO
+#define SPECIES_PALAFIN_ZERO                 GEN9_START + 59
 #define SPECIES_VAROOM                       GEN9_START + 60
 #define SPECIES_REVAVROOM                    GEN9_START + 61
 #define SPECIES_CYCLIZAR                     GEN9_START + 62

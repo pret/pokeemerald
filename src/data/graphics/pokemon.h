@@ -7800,11 +7800,11 @@ const u32 gMonShinyPalette_Finizen[] = INCBIN_U32("graphics/pokemon/finizen/shin
 const u8 gMonIcon_Finizen[] = INCBIN_U8("graphics/pokemon/finizen/icon.4bpp");
 // const u8 gMonFootprint_Finizen[] = INCBIN_U8("graphics/pokemon/finizen/footprint.1bpp");
 
-const u32 gMonFrontPic_Palafin[] = INCBIN_U32("graphics/pokemon/palafin/front.4bpp.lz");
-const u32 gMonPalette_Palafin[] = INCBIN_U32("graphics/pokemon/palafin/normal.gbapal.lz");
-const u32 gMonBackPic_Palafin[] = INCBIN_U32("graphics/pokemon/palafin/back.4bpp.lz");
-const u32 gMonShinyPalette_Palafin[] = INCBIN_U32("graphics/pokemon/palafin/shiny.gbapal.lz");
-const u8 gMonIcon_Palafin[] = INCBIN_U8("graphics/pokemon/palafin/icon.4bpp");
+const u32 gMonFrontPic_PalafinZero[] = INCBIN_U32("graphics/pokemon/palafin/front.4bpp.lz");
+const u32 gMonPalette_PalafinZero[] = INCBIN_U32("graphics/pokemon/palafin/normal.gbapal.lz");
+const u32 gMonBackPic_PalafinZero[] = INCBIN_U32("graphics/pokemon/palafin/back.4bpp.lz");
+const u32 gMonShinyPalette_PalafinZero[] = INCBIN_U32("graphics/pokemon/palafin/shiny.gbapal.lz");
+const u8 gMonIcon_PalafinZero[] = INCBIN_U8("graphics/pokemon/palafin/icon.4bpp");
 // const u8 gMonFootprint_Palafin[] = INCBIN_U8("graphics/pokemon/palafin/footprint.1bpp");
 
 const u32 gMonFrontPic_PalafinHero[] = INCBIN_U32("graphics/pokemon/palafin/hero/front.4bpp.lz");
@@ -7812,7 +7812,6 @@ const u32 gMonPalette_PalafinHero[] = INCBIN_U32("graphics/pokemon/palafin/hero/
 const u32 gMonBackPic_PalafinHero[] = INCBIN_U32("graphics/pokemon/palafin/hero/back.4bpp.lz");
 const u32 gMonShinyPalette_PalafinHero[] = INCBIN_U32("graphics/pokemon/palafin/hero/shiny.gbapal.lz");
 const u8 gMonIcon_PalafinHero[] = INCBIN_U8("graphics/pokemon/palafin/hero/icon.4bpp");
-// const u8 gMonFootprint_PalafinHero[] = INCBIN_U8("graphics/pokemon/palafin/footprint.1bpp");
 
 const u32 gMonFrontPic_Varoom[] = INCBIN_U32("graphics/pokemon/varoom/front.4bpp.lz");
 const u32 gMonPalette_Varoom[] = INCBIN_U32("graphics/pokemon/varoom/normal.gbapal.lz");

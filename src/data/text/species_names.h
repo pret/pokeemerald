@@ -979,7 +979,8 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_WUGTRIO] = _("Wugtrio"),
     [SPECIES_BOMBIRDIER] = _("Bombirdier"),
     [SPECIES_FINIZEN] = _("Finizen"),
-    [SPECIES_PALAFIN] = _("Palafin"),
+    [SPECIES_PALAFIN_ZERO] = _("Palafin"),
+    [SPECIES_PALAFIN_HERO] = _("Palafin"),
     [SPECIES_VAROOM] = _("Varoom"),
     [SPECIES_REVAVROOM] = _("Revavroom"),
     [SPECIES_CYCLIZAR] = _("Cyclizar"),
@@ -1489,8 +1490,6 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = _("Urshifu"),
 #endif
 #if P_GEN_9_POKEMON == TRUE
-    // Palafin
-    [SPECIES_PALAFIN_HERO] = _("Palafin"),
     // Tatsugiri
     [SPECIES_TATSUGIRI_DROOPY] = _("Tatsugiri"),
     [SPECIES_TATSUGIRI_STRETCHY] = _("Tatsugiri"),

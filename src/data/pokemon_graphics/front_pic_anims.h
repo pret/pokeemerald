@@ -13089,7 +13089,8 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_WUGTRIO]                           = sAnims_Wugtrio,
     [SPECIES_BOMBIRDIER]                        = sAnims_Bombirdier,
     [SPECIES_FINIZEN]                           = sAnims_Finizen,
-    [SPECIES_PALAFIN]                           = sAnims_Palafin,
+    [SPECIES_PALAFIN_ZERO]                      = sAnims_Palafin,
+    [SPECIES_PALAFIN_HERO]                      = sAnims_Palafin,
     [SPECIES_VAROOM]                            = sAnims_Varoom,
     [SPECIES_REVAVROOM]                         = sAnims_Revavroom,
     [SPECIES_CYCLIZAR]                          = sAnims_Cyclizar,
@@ -13498,7 +13499,6 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_BASCULEGION_FEMALE]             = sAnims_Basculegion,
 #endif
 #if P_GEN_9_POKEMON == TRUE
-    [SPECIES_PALAFIN_HERO] = sAnims_Palafin,
     [SPECIES_TATSUGIRI_DROOPY] = sAnims_Tatsugiri,
     [SPECIES_TATSUGIRI_STRETCHY] = sAnims_Tatsugiri,
     [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = sAnims_Dudunsparce,

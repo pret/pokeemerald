@@ -980,7 +980,8 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_WUGTRIO] = sWugtrioTeachableLearnset,
     [SPECIES_BOMBIRDIER] = sBombirdierTeachableLearnset,
     [SPECIES_FINIZEN] = sFinizenTeachableLearnset,
-    [SPECIES_PALAFIN] = sPalafinTeachableLearnset,
+    [SPECIES_PALAFIN_ZERO] = sPalafinTeachableLearnset,
+    [SPECIES_PALAFIN_HERO] = sPalafinTeachableLearnset,
     [SPECIES_VAROOM] = sVaroomTeachableLearnset,
     [SPECIES_REVAVROOM] = sRevavroomTeachableLearnset,
     [SPECIES_CYCLIZAR] = sCyclizarTeachableLearnset,
@@ -1487,8 +1488,6 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = sUrshifuRapidStrikeStyleTeachableLearnset,
 #endif
 #if P_GEN_9_POKEMON == TRUE
-    // Palafin
-    [SPECIES_PALAFIN_HERO] = sPalafinTeachableLearnset,
     // Tatsugiri
     [SPECIES_TATSUGIRI_DROOPY] = sTatsugiriTeachableLearnset,
     [SPECIES_TATSUGIRI_STRETCHY] = sTatsugiriTeachableLearnset,
