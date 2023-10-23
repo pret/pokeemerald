@@ -1459,7 +1459,8 @@
 #define SPECIES_PAWMO                        GEN9_START + 17
 #define SPECIES_PAWMOT                       GEN9_START + 18
 #define SPECIES_TANDEMAUS                    GEN9_START + 19
-#define SPECIES_MAUSHOLD                     GEN9_START + 20
+#define SPECIES_MAUSHOLD                     SPECIES_MAUSHOLD_FAMILY_OF_THREE
+#define SPECIES_MAUSHOLD_FAMILY_OF_THREE     GEN9_START + 20
 #define SPECIES_FIDOUGH                      GEN9_START + 21
 #define SPECIES_DACHSBUN                     GEN9_START + 22
 #define SPECIES_SMOLIV                       GEN9_START + 23

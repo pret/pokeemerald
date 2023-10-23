@@ -7510,16 +7510,16 @@ const u32 gMonShinyPalette_Tandemaus[] = INCBIN_U32("graphics/pokemon/tandemaus/
 const u8 gMonIcon_Tandemaus[] = INCBIN_U8("graphics/pokemon/tandemaus/icon.4bpp");
 // const u8 gMonFootprint_Tandemaus[] = INCBIN_U8("graphics/pokemon/tandemaus/footprint.1bpp");
 
-const u32 gMonFrontPic_Maushold[] = INCBIN_U32("graphics/pokemon/maushold/front.4bpp.lz");
+const u32 gMonFrontPic_MausholdFamilyOfThree[] = INCBIN_U32("graphics/pokemon/maushold/front.4bpp.lz");
 const u32 gMonPalette_Maushold[] = INCBIN_U32("graphics/pokemon/maushold/normal.gbapal.lz");
-const u32 gMonBackPic_Maushold[] = INCBIN_U32("graphics/pokemon/maushold/back.4bpp.lz");
+const u32 gMonBackPic_MausholdFamilyOfThree[] = INCBIN_U32("graphics/pokemon/maushold/back.4bpp.lz");
 const u32 gMonShinyPalette_Maushold[] = INCBIN_U32("graphics/pokemon/maushold/shiny.gbapal.lz");
-const u8 gMonIcon_Maushold[] = INCBIN_U8("graphics/pokemon/maushold/icon.4bpp");
+const u8 gMonIcon_MausholdFamilyOfThree[] = INCBIN_U8("graphics/pokemon/maushold/icon.4bpp");
 // const u8 gMonFootprint_Maushold[] = INCBIN_U8("graphics/pokemon/maushold/footprint.1bpp");
 
-const u32 gMonFrontPic_MausholdFour[] = INCBIN_U32("graphics/pokemon/maushold/four/front.4bpp.lz");
-const u32 gMonBackPic_MausholdFour[] = INCBIN_U32("graphics/pokemon/maushold/four/back.4bpp.lz");
-const u8 gMonIcon_MausholdFour[] = INCBIN_U8("graphics/pokemon/maushold/four/icon.4bpp");
+const u32 gMonFrontPic_MausholdFamilyOfFour[] = INCBIN_U32("graphics/pokemon/maushold/four/front.4bpp.lz");
+const u32 gMonBackPic_MausholdFamilyOfFour[] = INCBIN_U32("graphics/pokemon/maushold/four/back.4bpp.lz");
+const u8 gMonIcon_MausholdFamilyOfFour[] = INCBIN_U8("graphics/pokemon/maushold/four/icon.4bpp");
 
 const u32 gMonFrontPic_Fidough[] = INCBIN_U32("graphics/pokemon/fidough/front.4bpp.lz");
 const u32 gMonPalette_Fidough[] = INCBIN_U32("graphics/pokemon/fidough/normal.gbapal.lz");

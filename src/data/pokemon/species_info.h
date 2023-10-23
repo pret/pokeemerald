@@ -25484,29 +25484,29 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
-#define MAUSHOLD_SPECIES_INFO \
-    { \
-        .baseHP        = 74, \
-        .baseAttack    = 75, \
-        .baseDefense   = 70, \
-        .baseSpeed     = 111, \
-        .baseSpAttack  = 65, \
-        .baseSpDefense = 75, \
-        .types = { TYPE_NORMAL, TYPE_NORMAL }, \
-        .catchRate = 75, \
-        .expYield = 165, \
-        .evYield_Speed = 2, \
-        .genderRatio = MON_GENDERLESS, \
-        .eggCycles = 10, \
-        .friendship = 50, \
-        .growthRate = GROWTH_FAST, \
-        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FAIRY}, \
-        .abilities = {ABILITY_FRIEND_GUARD, ABILITY_CHEEK_POUCH, ABILITY_TECHNICIAN}, \
-        .bodyColor = BODY_COLOR_WHITE, \
-        .noFlip = FALSE, \
+#define MAUSHOLD_SPECIES_INFO                                                           \
+    {                                                                                   \
+        .baseHP        = 74,                                                            \
+        .baseAttack    = 75,                                                            \
+        .baseDefense   = 70,                                                            \
+        .baseSpeed     = 111,                                                           \
+        .baseSpAttack  = 65,                                                            \
+        .baseSpDefense = 75,                                                            \
+        .types = { TYPE_NORMAL, TYPE_NORMAL },                                          \
+        .catchRate = 75,                                                                \
+        .expYield = 165,                                                                \
+        .evYield_Speed = 2,                                                             \
+        .genderRatio = MON_GENDERLESS,                                                  \
+        .eggCycles = 10,                                                                \
+        .friendship = 50,                                                               \
+        .growthRate = GROWTH_FAST,                                                      \
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FAIRY},                               \
+        .abilities = {ABILITY_FRIEND_GUARD, ABILITY_CHEEK_POUCH, ABILITY_TECHNICIAN},   \
+        .bodyColor = BODY_COLOR_WHITE,                                                  \
+        .noFlip = FALSE,                                                                \
     }
 
-    [SPECIES_MAUSHOLD] = MAUSHOLD_SPECIES_INFO,
+    [SPECIES_MAUSHOLD_FAMILY_OF_THREE] = MAUSHOLD_SPECIES_INFO,
     [SPECIES_MAUSHOLD_FAMILY_OF_FOUR] = MAUSHOLD_SPECIES_INFO,
 
     [SPECIES_FIDOUGH] =
