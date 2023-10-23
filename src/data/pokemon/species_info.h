@@ -21094,6 +21094,28 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
+    [SPECIES_URSALUNA_BLOODMOON] =
+    {
+        .baseHP        = 113,
+        .baseAttack    = 70,
+        .baseDefense   = 120,
+        .baseSpeed     = 52,
+        .baseSpAttack  = 135,
+        .baseSpDefense = 65,
+        .types = { TYPE_GROUND, TYPE_NORMAL},
+        .catchRate = 5,
+        .expYield = 275,
+        .evYield_SpAtk    = 3,
+        .genderRatio = MON_MALE
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_MINDS_EYE, ABILITY_MINDS_EYE, ABILITY_MINDS_EYE},
+        .bodyColor = BODY_COLOR_BROWN,
+        .noFlip = FALSE,
+    },
+
     [SPECIES_BASCULEGION_MALE] =
     {
         .baseHP        = 120,

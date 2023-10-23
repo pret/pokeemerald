@@ -12141,5 +12141,89 @@ const struct PokedexEntry gPokedexEntries[] =
         .height = 15,
         .weight = 1250,
     },
+
+    [NATIONAL_DEX_DIPPLIN] =
+    {
+        .description = gDipplinPokedexText,
+        .categoryName = _("Candy Apple"),
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .height = 4,
+        .weight = 44,
+    },
+
+    [NATIONAL_DEX_POLTCHAGEIST] =
+    {
+        .description = gPoltchageistPokedexText,
+        .categoryName = _("Matcha"),
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .height = 1,
+        .weight = 11,
+    },
+
+    [NATIONAL_DEX_SINISTCHA] =
+    {
+        .description = gSinistchaPokedexText,
+        .categoryName = _("Matcha"),
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .height = 2,
+        .weight = 22,
+    },
+
+    [NATIONAL_DEX_OKIDOGI] =
+    {
+        .description = gOkidogiPokedexText,
+        .categoryName = _("Retainer"),
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .height = 18,
+        .weight = 920,
+    },
+
+    [NATIONAL_DEX_MUNKIDORI] =
+    {
+        .description = gMunkidoriPokedexText,
+        .categoryName = _("Retainer"),
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .height = 10,
+        .weight = 122,
+    },
+
+    [NATIONAL_DEX_FEZANDIPITI] =
+    {
+        .description = gFezandipitiPokedexText,
+        .categoryName = _("Retainer"),
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .height = 14,
+        .weight = 301,
+    },
+
+    [NATIONAL_DEX_OGERPON] =
+    {
+        .description = gOgerponPokedexText,
+        .categoryName = _("Mask"),
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .height = 12,
+        .weight = 398,
+    },
 #endif
 };
