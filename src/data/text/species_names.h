@@ -128,6 +128,9 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_MAGMAR] = _("Magmar"),
     [SPECIES_PINSIR] = _("Pinsir"),
     [SPECIES_TAUROS] = _("Tauros"),
+    [SPECIES_TAUROS_PALDEAN_COMBAT_BREED] = _("Tauros"),
+    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = _("Tauros"),
+    [SPECIES_TAUROS_PALDEAN_AQUA_BREED] = _("Tauros"),
     [SPECIES_MAGIKARP] = _("Magikarp"),
     [SPECIES_GYARADOS] = _("Gyarados"),
     [SPECIES_LAPRAS] = _("Lapras"),
@@ -194,6 +197,7 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_SUNFLORA] = _("Sunflora"),
     [SPECIES_YANMA] = _("Yanma"),
     [SPECIES_WOOPER] = _("Wooper"),
+    [SPECIES_WOOPER_PALDEAN] = _("Wooper"),
     [SPECIES_QUAGSIRE] = _("Quagsire"),
     [SPECIES_ESPEON] = _("Espeon"),
     [SPECIES_UMBREON] = _("Umbreon"),
@@ -1158,8 +1162,6 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
 #if P_GEN_7_POKEMON == TRUE
     [SPECIES_DECIDUEYE_HISUIAN] = _("Decidueye"),
 #endif
-    [SPECIES_WOOPER_PALDEAN] = _("Wooper"),
-    [SPECIES_TAUROS_PALDEAN_COMBAT_BREED] = _("Tauros"),
 
     // Cosplay Pikachu
     [SPECIES_PIKACHU_COSPLAY] = _("Pikachu"),
@@ -1493,7 +1495,4 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_URSHIFU_SINGLE_STRIKE_STYLE_GIGANTAMAX] = _("Urshifu"),
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = _("Urshifu"),
 #endif
-    // Tauros-Paldea
-    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = _("Tauros"),
-    [SPECIES_TAUROS_PALDEAN_AQUA_BREED] = _("Tauros"),
 };

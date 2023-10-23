@@ -314,7 +314,7 @@ extern const u32 gMonFrontPic_WooperPaldean[];
 extern const u32 gMonPalette_WooperPaldean[];
 extern const u32 gMonBackPic_WooperPaldean[];
 extern const u32 gMonShinyPalette_WooperPaldean[];
-extern const u8 gMonIcon_WooperPaldean[];
+//extern const u8 gMonIcon_WooperPaldean[];
 extern const u8 gMonFootprint_WooperPaldean[];
 extern const u32 gMonFrontPic_Quagsire[];
 extern const u32 gMonFrontPic_QuagsireF[];

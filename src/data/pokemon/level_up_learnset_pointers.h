@@ -129,6 +129,9 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_MAGMAR] = sMagmarLevelUpLearnset,
     [SPECIES_PINSIR] = sPinsirLevelUpLearnset,
     [SPECIES_TAUROS] = sTaurosLevelUpLearnset,
+    [SPECIES_TAUROS_PALDEAN_COMBAT_BREED] = sTaurosPaldeanCombatBreedLevelUpLearnset,
+    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = sTaurosPaldeanBlazeBreedLevelUpLearnset,
+    [SPECIES_TAUROS_PALDEAN_AQUA_BREED] = sTaurosPaldeanAquaBreedLevelUpLearnset,
     [SPECIES_MAGIKARP] = sMagikarpLevelUpLearnset,
     [SPECIES_GYARADOS] = sGyaradosLevelUpLearnset,
     [SPECIES_LAPRAS] = sLaprasLevelUpLearnset,
@@ -195,6 +198,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_SUNFLORA] = sSunfloraLevelUpLearnset,
     [SPECIES_YANMA] = sYanmaLevelUpLearnset,
     [SPECIES_WOOPER] = sWooperLevelUpLearnset,
+    [SPECIES_WOOPER_PALDEAN] = sWooperPaldeanLevelUpLearnset,
     [SPECIES_QUAGSIRE] = sQuagsireLevelUpLearnset,
     [SPECIES_ESPEON] = sEspeonLevelUpLearnset,
     [SPECIES_UMBREON] = sUmbreonLevelUpLearnset,
@@ -1155,8 +1159,6 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
 #if P_GEN_7_POKEMON == TRUE
     [SPECIES_DECIDUEYE_HISUIAN] = sDecidueyeHisuianLevelUpLearnset,
 #endif
-    [SPECIES_WOOPER_PALDEAN] = sWooperPaldeanLevelUpLearnset,
-    [SPECIES_TAUROS_PALDEAN_COMBAT_BREED] = sTaurosPaldeanCombatBreedLevelUpLearnset,
     // Misc Forms
     // Cosplay Pikachu
     [SPECIES_PIKACHU_COSPLAY] = sPikachuLevelUpLearnset,
@@ -1491,7 +1493,4 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_URSHIFU_SINGLE_STRIKE_STYLE_GIGANTAMAX] = sUrshifuSingleStrikeStyleLevelUpLearnset,
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = sUrshifuRapidStrikeStyleLevelUpLearnset,
 #endif
-    // Tauros-Paldea
-    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = sTaurosPaldeanBlazeBreedLevelUpLearnset,
-    [SPECIES_TAUROS_PALDEAN_AQUA_BREED] = sTaurosPaldeanAquaBreedLevelUpLearnset,
 };

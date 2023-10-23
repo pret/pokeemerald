@@ -1451,140 +1451,125 @@
 #define SPECIES_LECHONK                      GEN9_START + 10
 #define SPECIES_OINKOLOGNE                   SPECIES_OINKOLOGNE_MALE
 #define SPECIES_OINKOLOGNE_MALE              GEN9_START + 11
-#define SPECIES_TAROUNTULA                   GEN9_START + 12
-#define SPECIES_SPIDOPS                      GEN9_START + 13
-#define SPECIES_NYMBLE                       GEN9_START + 14
-#define SPECIES_LOKIX                        GEN9_START + 15
-#define SPECIES_PAWMI                        GEN9_START + 16
-#define SPECIES_PAWMO                        GEN9_START + 17
-#define SPECIES_PAWMOT                       GEN9_START + 18
-#define SPECIES_TANDEMAUS                    GEN9_START + 19
+#define SPECIES_OINKOLOGNE_FEMALE            GEN9_START + 12
+#define SPECIES_TAROUNTULA                   GEN9_START + 13
+#define SPECIES_SPIDOPS                      GEN9_START + 14
+#define SPECIES_NYMBLE                       GEN9_START + 15
+#define SPECIES_LOKIX                        GEN9_START + 16
+#define SPECIES_PAWMI                        GEN9_START + 17
+#define SPECIES_PAWMO                        GEN9_START + 18
+#define SPECIES_PAWMOT                       GEN9_START + 19
+#define SPECIES_TANDEMAUS                    GEN9_START + 20
 #define SPECIES_MAUSHOLD                     SPECIES_MAUSHOLD_FAMILY_OF_THREE
-#define SPECIES_MAUSHOLD_FAMILY_OF_THREE     GEN9_START + 20
-#define SPECIES_FIDOUGH                      GEN9_START + 21
-#define SPECIES_DACHSBUN                     GEN9_START + 22
-#define SPECIES_SMOLIV                       GEN9_START + 23
-#define SPECIES_DOLLIV                       GEN9_START + 24
-#define SPECIES_ARBOLIVA                     GEN9_START + 25
+#define SPECIES_MAUSHOLD_FAMILY_OF_THREE     GEN9_START + 21
+#define SPECIES_MAUSHOLD_FAMILY_OF_FOUR      GEN9_START + 22
+#define SPECIES_FIDOUGH                      GEN9_START + 23
+#define SPECIES_DACHSBUN                     GEN9_START + 24
+#define SPECIES_SMOLIV                       GEN9_START + 25
+#define SPECIES_DOLLIV                       GEN9_START + 26
+#define SPECIES_ARBOLIVA                     GEN9_START + 27
 #define SPECIES_SQUAWKABILLY                 SPECIES_SQUAWKABILLY_GREEN_PLUMAGE
-#define SPECIES_SQUAWKABILLY_GREEN_PLUMAGE   GEN9_START + 26
-#define SPECIES_NACLI                        GEN9_START + 27
-#define SPECIES_NACLSTACK                    GEN9_START + 28
-#define SPECIES_GARGANACL                    GEN9_START + 29
-#define SPECIES_CHARCADET                    GEN9_START + 30
-#define SPECIES_ARMAROUGE                    GEN9_START + 31
-#define SPECIES_CERULEDGE                    GEN9_START + 32
-#define SPECIES_TADBULB                      GEN9_START + 33
-#define SPECIES_BELLIBOLT                    GEN9_START + 34
-#define SPECIES_WATTREL                      GEN9_START + 35
-#define SPECIES_KILOWATTREL                  GEN9_START + 36
-#define SPECIES_MASCHIFF                     GEN9_START + 37
-#define SPECIES_MABOSSTIFF                   GEN9_START + 38
-#define SPECIES_SHROODLE                     GEN9_START + 39
-#define SPECIES_GRAFAIAI                     GEN9_START + 40
-#define SPECIES_BRAMBLIN                     GEN9_START + 41
-#define SPECIES_BRAMBLEGHAST                 GEN9_START + 42
-#define SPECIES_TOEDSCOOL                    GEN9_START + 43
-#define SPECIES_TOEDSCRUEL                   GEN9_START + 44
-#define SPECIES_KLAWF                        GEN9_START + 45
-#define SPECIES_CAPSAKID                     GEN9_START + 46
-#define SPECIES_SCOVILLAIN                   GEN9_START + 47
-#define SPECIES_RELLOR                       GEN9_START + 48
-#define SPECIES_RABSCA                       GEN9_START + 49
-#define SPECIES_FLITTLE                      GEN9_START + 50
-#define SPECIES_ESPATHRA                     GEN9_START + 51
-#define SPECIES_TINKATINK                    GEN9_START + 52
-#define SPECIES_TINKATUFF                    GEN9_START + 53
-#define SPECIES_TINKATON                     GEN9_START + 54
-#define SPECIES_WIGLETT                      GEN9_START + 55
-#define SPECIES_WUGTRIO                      GEN9_START + 56
-#define SPECIES_BOMBIRDIER                   GEN9_START + 57
-#define SPECIES_FINIZEN                      GEN9_START + 58
+#define SPECIES_SQUAWKABILLY_GREEN_PLUMAGE   GEN9_START + 28
+#define SPECIES_SQUAWKABILLY_BLUE_PLUMAGE    GEN9_START + 29
+#define SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE  GEN9_START + 30
+#define SPECIES_SQUAWKABILLY_WHITE_PLUMAGE   GEN9_START + 31
+#define SPECIES_NACLI                        GEN9_START + 32
+#define SPECIES_NACLSTACK                    GEN9_START + 33
+#define SPECIES_GARGANACL                    GEN9_START + 34
+#define SPECIES_CHARCADET                    GEN9_START + 35
+#define SPECIES_ARMAROUGE                    GEN9_START + 36
+#define SPECIES_CERULEDGE                    GEN9_START + 37
+#define SPECIES_TADBULB                      GEN9_START + 38
+#define SPECIES_BELLIBOLT                    GEN9_START + 39
+#define SPECIES_WATTREL                      GEN9_START + 40
+#define SPECIES_KILOWATTREL                  GEN9_START + 41
+#define SPECIES_MASCHIFF                     GEN9_START + 42
+#define SPECIES_MABOSSTIFF                   GEN9_START + 43
+#define SPECIES_SHROODLE                     GEN9_START + 44
+#define SPECIES_GRAFAIAI                     GEN9_START + 45
+#define SPECIES_BRAMBLIN                     GEN9_START + 46
+#define SPECIES_BRAMBLEGHAST                 GEN9_START + 47
+#define SPECIES_TOEDSCOOL                    GEN9_START + 48
+#define SPECIES_TOEDSCRUEL                   GEN9_START + 49
+#define SPECIES_KLAWF                        GEN9_START + 50
+#define SPECIES_CAPSAKID                     GEN9_START + 51
+#define SPECIES_SCOVILLAIN                   GEN9_START + 52
+#define SPECIES_RELLOR                       GEN9_START + 53
+#define SPECIES_RABSCA                       GEN9_START + 54
+#define SPECIES_FLITTLE                      GEN9_START + 55
+#define SPECIES_ESPATHRA                     GEN9_START + 56
+#define SPECIES_TINKATINK                    GEN9_START + 57
+#define SPECIES_TINKATUFF                    GEN9_START + 58
+#define SPECIES_TINKATON                     GEN9_START + 59
+#define SPECIES_WIGLETT                      GEN9_START + 60
+#define SPECIES_WUGTRIO                      GEN9_START + 61
+#define SPECIES_BOMBIRDIER                   GEN9_START + 62
+#define SPECIES_FINIZEN                      GEN9_START + 63
 #define SPECIES_PALAFIN                      SPECIES_PALAFIN_ZERO
-#define SPECIES_PALAFIN_ZERO                 GEN9_START + 59
-#define SPECIES_VAROOM                       GEN9_START + 60
-#define SPECIES_REVAVROOM                    GEN9_START + 61
-#define SPECIES_CYCLIZAR                     GEN9_START + 62
-#define SPECIES_ORTHWORM                     GEN9_START + 63
-#define SPECIES_GLIMMET                      GEN9_START + 64
-#define SPECIES_GLIMMORA                     GEN9_START + 65
-#define SPECIES_GREAVARD                     GEN9_START + 66
-#define SPECIES_HOUNDSTONE                   GEN9_START + 67
-#define SPECIES_FLAMIGO                      GEN9_START + 68
-#define SPECIES_CETODDLE                     GEN9_START + 69
-#define SPECIES_CETITAN                      GEN9_START + 70
-#define SPECIES_VELUZA                       GEN9_START + 71
-#define SPECIES_DONDOZO                      GEN9_START + 72
+#define SPECIES_PALAFIN_ZERO                 GEN9_START + 64
+#define SPECIES_PALAFIN_HERO                 GEN9_START + 65
+#define SPECIES_VAROOM                       GEN9_START + 66
+#define SPECIES_REVAVROOM                    GEN9_START + 67
+#define SPECIES_CYCLIZAR                     GEN9_START + 68
+#define SPECIES_ORTHWORM                     GEN9_START + 69
+#define SPECIES_GLIMMET                      GEN9_START + 70
+#define SPECIES_GLIMMORA                     GEN9_START + 71
+#define SPECIES_GREAVARD                     GEN9_START + 72
+#define SPECIES_HOUNDSTONE                   GEN9_START + 73
+#define SPECIES_FLAMIGO                      GEN9_START + 74
+#define SPECIES_CETODDLE                     GEN9_START + 75
+#define SPECIES_CETITAN                      GEN9_START + 76
+#define SPECIES_VELUZA                       GEN9_START + 77
+#define SPECIES_DONDOZO                      GEN9_START + 78
 #define SPECIES_TATSUGIRI                    SPECIES_TATSUGIRI_CURLY
-#define SPECIES_TATSUGIRI_CURLY              GEN9_START + 73
-#define SPECIES_ANNIHILAPE                   GEN9_START + 74
-#define SPECIES_CLODSIRE                     GEN9_START + 75
-#define SPECIES_FARIGIRAF                    GEN9_START + 76
+#define SPECIES_TATSUGIRI_CURLY              GEN9_START + 79
+#define SPECIES_TATSUGIRI_DROOPY             GEN9_START + 80
+#define SPECIES_TATSUGIRI_STRETCHY           GEN9_START + 81
+#define SPECIES_ANNIHILAPE                   GEN9_START + 82
+#define SPECIES_CLODSIRE                     GEN9_START + 83
+#define SPECIES_FARIGIRAF                    GEN9_START + 84
 #define SPECIES_DUDUNSPARCE                  SPECIES_DUDUNSPARCE_TWO_SEGMENT
-#define SPECIES_DUDUNSPARCE_TWO_SEGMENT      GEN9_START + 77
-#define SPECIES_KINGAMBIT                    GEN9_START + 78
-#define SPECIES_GREAT_TUSK                   GEN9_START + 79
-#define SPECIES_SCREAM_TAIL                  GEN9_START + 80
-#define SPECIES_BRUTE_BONNET                 GEN9_START + 81
-#define SPECIES_FLUTTER_MANE                 GEN9_START + 82
-#define SPECIES_SLITHER_WING                 GEN9_START + 83
-#define SPECIES_SANDY_SHOCKS                 GEN9_START + 84
-#define SPECIES_IRON_TREADS                  GEN9_START + 85
-#define SPECIES_IRON_BUNDLE                  GEN9_START + 86
-#define SPECIES_IRON_HANDS                   GEN9_START + 87
-#define SPECIES_IRON_JUGULIS                 GEN9_START + 88
-#define SPECIES_IRON_MOTH                    GEN9_START + 89
-#define SPECIES_IRON_THORNS                  GEN9_START + 90
-#define SPECIES_FRIGIBAX                     GEN9_START + 91
-#define SPECIES_ARCTIBAX                     GEN9_START + 92
-#define SPECIES_BAXCALIBUR                   GEN9_START + 93
+#define SPECIES_DUDUNSPARCE_TWO_SEGMENT      GEN9_START + 85
+#define SPECIES_DUDUNSPARCE_THREE_SEGMENT    GEN9_START + 86
+#define SPECIES_KINGAMBIT                    GEN9_START + 87
+#define SPECIES_GREAT_TUSK                   GEN9_START + 88
+#define SPECIES_SCREAM_TAIL                  GEN9_START + 89
+#define SPECIES_BRUTE_BONNET                 GEN9_START + 90
+#define SPECIES_FLUTTER_MANE                 GEN9_START + 91
+#define SPECIES_SLITHER_WING                 GEN9_START + 92
+#define SPECIES_SANDY_SHOCKS                 GEN9_START + 93
+#define SPECIES_IRON_TREADS                  GEN9_START + 94
+#define SPECIES_IRON_BUNDLE                  GEN9_START + 95
+#define SPECIES_IRON_HANDS                   GEN9_START + 96
+#define SPECIES_IRON_JUGULIS                 GEN9_START + 97
+#define SPECIES_IRON_MOTH                    GEN9_START + 98
+#define SPECIES_IRON_THORNS                  GEN9_START + 99
+#define SPECIES_FRIGIBAX                     GEN9_START + 100
+#define SPECIES_ARCTIBAX                     GEN9_START + 101
+#define SPECIES_BAXCALIBUR                   GEN9_START + 102
 #define SPECIES_GIMMIGHOUL                   SPECIES_GIMMIGHOUL_CHEST
-#define SPECIES_GIMMIGHOUL_CHEST             GEN9_START + 94
-#define SPECIES_GHOLDENGO                    GEN9_START + 95
-#define SPECIES_WO_CHIEN                     GEN9_START + 96
-#define SPECIES_CHIEN_PAO                    GEN9_START + 97
-#define SPECIES_TING_LU                      GEN9_START + 98
-#define SPECIES_CHI_YU                       GEN9_START + 99
-#define SPECIES_ROARING_MOON                 GEN9_START + 100
-#define SPECIES_IRON_VALIANT                 GEN9_START + 101
-#define SPECIES_KORAIDON                     GEN9_START + 102
-#define SPECIES_MIRAIDON                     GEN9_START + 103
-#define SPECIES_WALKING_WAKE                 GEN9_START + 104
-#define SPECIES_IRON_LEAVES                  GEN9_START + 105
-
-// Oinkologne
-#define SPECIES_OINKOLOGNE_FEMALE            GEN9_START + 106
-
-// Maushold
-#define SPECIES_MAUSHOLD_FAMILY_OF_FOUR      GEN9_START + 107
-
-// Squawkabilly
-#define SPECIES_SQUAWKABILLY_BLUE_PLUMAGE    GEN9_START + 108
-#define SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE  GEN9_START + 109
-#define SPECIES_SQUAWKABILLY_WHITE_PLUMAGE   GEN9_START + 110
-
-// Palafin
-#define SPECIES_PALAFIN_HERO                 GEN9_START + 111
-
-// Tatsugiri
-#define SPECIES_TATSUGIRI_DROOPY             GEN9_START + 112
-#define SPECIES_TATSUGIRI_STRETCHY           GEN9_START + 113
-
-// Dudunsparce
-#define SPECIES_DUDUNSPARCE_THREE_SEGMENT    GEN9_START + 114
-
-// Gimmighoul
-#define SPECIES_GIMMIGHOUL_ROAMING           GEN9_START + 115
-
-// Tauros-Paldea
-#define SPECIES_TAUROS_PALDEAN_COMBAT_BREED  GEN9_START + 116
-#define SPECIES_TAUROS_PALDEAN_BLAZE_BREED   GEN9_START + 117
-#define SPECIES_TAUROS_PALDEAN_AQUA_BREED    GEN9_START + 118
-
+#define SPECIES_GIMMIGHOUL_CHEST             GEN9_START + 103
+#define SPECIES_GIMMIGHOUL_ROAMING           GEN9_START + 104
+#define SPECIES_GHOLDENGO                    GEN9_START + 105
+#define SPECIES_WO_CHIEN                     GEN9_START + 106
+#define SPECIES_CHIEN_PAO                    GEN9_START + 107
+#define SPECIES_TING_LU                      GEN9_START + 108
+#define SPECIES_CHI_YU                       GEN9_START + 109
+#define SPECIES_ROARING_MOON                 GEN9_START + 110
+#define SPECIES_IRON_VALIANT                 GEN9_START + 111
+#define SPECIES_KORAIDON                     GEN9_START + 112
+#define SPECIES_MIRAIDON                     GEN9_START + 113
 // Paldean Forms
-#define SPECIES_WOOPER_PALDEAN               GEN9_START + 119
+#define SPECIES_TAUROS_PALDEAN_COMBAT_BREED  GEN9_START + 114
+#define SPECIES_TAUROS_PALDEAN_BLAZE_BREED   GEN9_START + 115
+#define SPECIES_TAUROS_PALDEAN_AQUA_BREED    GEN9_START + 116
+#define SPECIES_WOOPER_PALDEAN               GEN9_START + 117
+// Scarlet and Violet 1.2.0
+#define SPECIES_WALKING_WAKE                 GEN9_START + 118
+#define SPECIES_IRON_LEAVES                  GEN9_START + 119
 
-#define GIGANTAMAX_START                     SPECIES_WOOPER_PALDEAN
+
+#define GIGANTAMAX_START                     SPECIES_IRON_LEAVES
 
 // Gigantamax Forms
 #define SPECIES_VENUSAUR_GIGANTAMAX                     GIGANTAMAX_START + 1

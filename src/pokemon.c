@@ -2331,6 +2331,7 @@ const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_SUNFLORA - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_YANMA - 1]                        = ANIM_FIGURE_8,
     [SPECIES_WOOPER - 1]                       = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_WOOPER_PALDEAN - 1]               = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_QUAGSIRE - 1]                     = ANIM_H_STRETCH,
     [SPECIES_ESPEON - 1]                       = ANIM_GROW_VIBRATE,
     [SPECIES_UMBREON - 1]                      = ANIM_V_SHAKE,

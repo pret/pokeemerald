@@ -129,6 +129,9 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_MAGMAR] = sMagmarTeachableLearnset,
     [SPECIES_PINSIR] = sPinsirTeachableLearnset,
     [SPECIES_TAUROS] = sTaurosTeachableLearnset,
+    [SPECIES_TAUROS_PALDEAN_COMBAT_BREED] = sTaurosPaldeanCombatBreedTeachableLearnset,
+    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = sTaurosPaldeanBlazeBreedTeachableLearnset,
+    [SPECIES_TAUROS_PALDEAN_AQUA_BREED] = sTaurosPaldeanAquaBreedTeachableLearnset,
     [SPECIES_MAGIKARP] = sMagikarpTeachableLearnset,
     [SPECIES_GYARADOS] = sGyaradosTeachableLearnset,
     [SPECIES_LAPRAS] = sLaprasTeachableLearnset,
@@ -195,6 +198,7 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_SUNFLORA] = sSunfloraTeachableLearnset,
     [SPECIES_YANMA] = sYanmaTeachableLearnset,
     [SPECIES_WOOPER] = sWooperTeachableLearnset,
+    [SPECIES_WOOPER_PALDEAN] = sWooperPaldeanTeachableLearnset,
     [SPECIES_QUAGSIRE] = sQuagsireTeachableLearnset,
     [SPECIES_ESPEON] = sEspeonTeachableLearnset,
     [SPECIES_UMBREON] = sUmbreonTeachableLearnset,
@@ -1155,8 +1159,6 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
 #if P_GEN_7_POKEMON == TRUE
     [SPECIES_DECIDUEYE_HISUIAN] = sDecidueyeHisuianTeachableLearnset,
 #endif
-    [SPECIES_WOOPER_PALDEAN] = sWooperPaldeanTeachableLearnset,
-    [SPECIES_TAUROS_PALDEAN_COMBAT_BREED] = sTaurosPaldeanCombatBreedTeachableLearnset,
     // Misc Forms
     // Cosplay Pikachu
     [SPECIES_PIKACHU_COSPLAY] = sPikachuTeachableLearnset,
@@ -1491,7 +1493,4 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_URSHIFU_SINGLE_STRIKE_STYLE_GIGANTAMAX] = sUrshifuSingleStrikeStyleTeachableLearnset,
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = sUrshifuRapidStrikeStyleTeachableLearnset,
 #endif
-    // Tauros-Paldea
-    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = sTaurosPaldeanBlazeBreedTeachableLearnset,
-    [SPECIES_TAUROS_PALDEAN_AQUA_BREED] = sTaurosPaldeanAquaBreedTeachableLearnset,
 };

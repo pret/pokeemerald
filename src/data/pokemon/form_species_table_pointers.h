@@ -40,6 +40,9 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_MR_MIME] = sMrMimeFormSpeciesIdTable,
     [SPECIES_PINSIR] = sPinsirFormSpeciesIdTable,
     [SPECIES_TAUROS] = sTaurosFormSpeciesIdTable,
+    [SPECIES_TAUROS_PALDEAN_COMBAT_BREED] = sTaurosFormSpeciesIdTable,
+    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = sTaurosFormSpeciesIdTable,
+    [SPECIES_TAUROS_PALDEAN_AQUA_BREED] = sTaurosFormSpeciesIdTable,
     [SPECIES_GYARADOS] = sGyaradosFormSpeciesIdTable,
     [SPECIES_AERODACTYL] = sAerodactylFormSpeciesIdTable,
     [SPECIES_ARTICUNO] = sArticunoFormSpeciesIdTable,
@@ -50,6 +53,7 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_PICHU] = sPichuFormSpeciesIdTable,
     [SPECIES_AMPHAROS] = sAmpharosFormSpeciesIdTable,
     [SPECIES_WOOPER] = sWooperFormSpeciesIdTable,
+    [SPECIES_WOOPER_PALDEAN] = sWooperFormSpeciesIdTable,
     [SPECIES_SLOWKING] = sSlowkingFormSpeciesIdTable,
     [SPECIES_QWILFISH] = sQwilfishFormSpeciesIdTable,
     [SPECIES_SNEASEL] = sSneaselFormSpeciesIdTable,
@@ -192,6 +196,7 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_DUDUNSPARCE_TWO_SEGMENT] = sDudunsparceFormSpeciesIdTable,
     [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = sDudunsparceFormSpeciesIdTable,
     [SPECIES_GIMMIGHOUL_CHEST] = sGimmighoulFormSpeciesIdTable,
+    [SPECIES_GIMMIGHOUL_ROAMING] = sGimmighoulFormSpeciesIdTable,
 #endif
     // Megas
     [SPECIES_VENUSAUR_MEGA] = sVenusaurFormSpeciesIdTable,
@@ -315,8 +320,6 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
 #if P_GEN_7_POKEMON == TRUE
     [SPECIES_DECIDUEYE_HISUIAN] = sDecidueyeFormSpeciesIdTable,
 #endif
-    [SPECIES_WOOPER_PALDEAN] = sWooperFormSpeciesIdTable,
-    [SPECIES_TAUROS_PALDEAN_COMBAT_BREED] = sTaurosFormSpeciesIdTable,
     // Misc Forms
     // Cosplay Pikachu
     [SPECIES_PIKACHU_COSPLAY] = sPikachuFormSpeciesIdTable,
@@ -651,11 +654,4 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_URSHIFU_SINGLE_STRIKE_STYLE_GIGANTAMAX] = sUrshifuFormSpeciesIdTable,
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = sUrshifuFormSpeciesIdTable,
 #endif
-#if P_GEN_9_POKEMON == TRUE
-    // Gimmighoul
-    [SPECIES_GIMMIGHOUL_ROAMING] = sGimmighoulFormSpeciesIdTable,
-#endif
-    // Tauros-Paldea
-    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = sTaurosFormSpeciesIdTable,
-    [SPECIES_TAUROS_PALDEAN_AQUA_BREED] = sTaurosFormSpeciesIdTable,
 };

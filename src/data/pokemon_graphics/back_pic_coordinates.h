@@ -1008,6 +1008,7 @@ const struct MonCoords gMonBackPicCoords[NUM_SPECIES + 1] =
     [SPECIES_BOMBIRDIER]                        = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  4 },
     [SPECIES_FINIZEN]                           = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  15 },
     [SPECIES_PALAFIN_ZERO]                      = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  15 },
+    [SPECIES_PALAFIN_HERO]                      = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  15 },
     [SPECIES_VAROOM]                            = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  13 },
     [SPECIES_REVAVROOM]                         = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  16 },
     [SPECIES_CYCLIZAR]                          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  6 },

@@ -12236,6 +12236,9 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_MAGMAR]                         = sAnims_Magmar,
     [SPECIES_PINSIR]                         = sAnims_Pinsir,
     [SPECIES_TAUROS]                         = sAnims_Tauros,
+    [SPECIES_TAUROS_PALDEAN_COMBAT_BREED]    = sAnims_TaurosPaldean,
+    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED]     = sAnims_TaurosPaldean,
+    [SPECIES_TAUROS_PALDEAN_AQUA_BREED]      = sAnims_TaurosPaldean,
     [SPECIES_MAGIKARP]                       = sAnims_Magikarp,
     [SPECIES_GYARADOS]                       = sAnims_Gyarados,
     [SPECIES_LAPRAS]                         = sAnims_Lapras,
@@ -12303,6 +12306,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_SUNFLORA]                       = sAnims_Sunflora,
     [SPECIES_YANMA]                          = sAnims_Yanma,
     [SPECIES_WOOPER]                         = sAnims_Wooper,
+    [SPECIES_WOOPER_PALDEAN]                 = sAnims_WooperPaldean,
     [SPECIES_QUAGSIRE]                       = sAnims_Quagsire,
     [SPECIES_ESPEON]                         = sAnims_Espeon,
     [SPECIES_UMBREON]                        = sAnims_Umbreon,
@@ -13264,8 +13268,6 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_DECIDUEYE_HISUIAN]              = sAnims_DecidueyeHisuian,
 #endif
     // Ungrouped
-    [SPECIES_WOOPER_PALDEAN]                 = sAnims_WooperPaldean,
-    [SPECIES_TAUROS_PALDEAN_COMBAT_BREED]    = sAnims_TaurosPaldean,
     [SPECIES_PIKACHU_COSPLAY]                = sAnims_PikachuCosplay,
     [SPECIES_PIKACHU_ROCK_STAR]              = sAnims_PikachuRockStar,
     [SPECIES_PIKACHU_BELLE]                  = sAnims_PikachuBelle,
@@ -13502,8 +13504,6 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_ENAMORUS_THERIAN]               = sAnims_EnamorusTherian,
     [SPECIES_BASCULEGION_FEMALE]             = sAnims_Basculegion,
 #endif
-    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] = sAnims_TaurosPaldean,
-    [SPECIES_TAUROS_PALDEAN_AQUA_BREED] = sAnims_TaurosPaldean,
     [SPECIES_VENUSAUR_GIGANTAMAX]            = sAnims_VenusaurGigantamax,
     [SPECIES_CHARIZARD_GIGANTAMAX]           = sAnims_CharizardGigantamax,
     [SPECIES_BLASTOISE_GIGANTAMAX]           = sAnims_BlastoiseGigantamax,
