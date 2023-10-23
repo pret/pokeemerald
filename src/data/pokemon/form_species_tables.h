@@ -1317,7 +1317,7 @@ static const u16 sBasculegionFormSpeciesIdTable[] = {
 
 #if P_GEN_9_POKEMON == TRUE
 static const u16 sOinkologneFormSpeciesIdTable[] = {
-    SPECIES_OINKOLOGNE,
+    SPECIES_OINKOLOGNE_MALE,
     SPECIES_OINKOLOGNE_FEMALE,
     FORM_SPECIES_END,
 };

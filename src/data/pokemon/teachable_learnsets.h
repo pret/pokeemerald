@@ -34142,7 +34142,7 @@ static const u16 sLechonkTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-static const u16 sOinkologneTeachableLearnset[] = {
+static const u16 sOinkologneMaleTeachableLearnset[] = {
     MOVE_BODY_PRESS,
     MOVE_BODY_SLAM,
     MOVE_BULLDOZE,

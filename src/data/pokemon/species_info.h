@@ -25282,7 +25282,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .bodyColor = BODY_COLOR_GRAY,                       \
         .noFlip = FALSE
 
-    [SPECIES_OINKOLOGNE] =
+    [SPECIES_OINKOLOGNE_MALE] =
     {
         .baseHP        = 110,
         .baseAttack    = 100,

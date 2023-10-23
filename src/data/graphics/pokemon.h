@@ -7440,11 +7440,11 @@ const u32 gMonShinyPalette_Lechonk[] = INCBIN_U32("graphics/pokemon/lechonk/shin
 const u8 gMonIcon_Lechonk[] = INCBIN_U8("graphics/pokemon/lechonk/icon.4bpp");
 // const u8 gMonFootprint_Lechonk[] = INCBIN_U8("graphics/pokemon/lechonk/footprint.1bpp");
 
-const u32 gMonFrontPic_Oinkologne[] = INCBIN_U32("graphics/pokemon/oinkologne/front.4bpp.lz");
-const u32 gMonPalette_Oinkologne[] = INCBIN_U32("graphics/pokemon/oinkologne/normal.gbapal.lz");
-const u32 gMonBackPic_Oinkologne[] = INCBIN_U32("graphics/pokemon/oinkologne/back.4bpp.lz");
-const u32 gMonShinyPalette_Oinkologne[] = INCBIN_U32("graphics/pokemon/oinkologne/shiny.gbapal.lz");
-const u8 gMonIcon_Oinkologne[] = INCBIN_U8("graphics/pokemon/oinkologne/icon.4bpp");
+const u32 gMonFrontPic_OinkologneMale[] = INCBIN_U32("graphics/pokemon/oinkologne/front.4bpp.lz");
+const u32 gMonPalette_OinkologneMale[] = INCBIN_U32("graphics/pokemon/oinkologne/normal.gbapal.lz");
+const u32 gMonBackPic_OinkologneMale[] = INCBIN_U32("graphics/pokemon/oinkologne/back.4bpp.lz");
+const u32 gMonShinyPalette_OinkologneMale[] = INCBIN_U32("graphics/pokemon/oinkologne/shiny.gbapal.lz");
+const u8 gMonIcon_OinkologneMale[] = INCBIN_U8("graphics/pokemon/oinkologne/icon.4bpp");
 // const u8 gMonFootprint_Oinkologne[] = INCBIN_U8("graphics/pokemon/oinkologne/footprint.1bpp");
 
 const u32 gMonFrontPic_OinkologneFemale[] = INCBIN_U32("graphics/pokemon/oinkologne/female/front.4bpp.lz");

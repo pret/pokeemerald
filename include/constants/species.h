@@ -1449,7 +1449,8 @@
 #define SPECIES_QUAXWELL                     GEN9_START + 8
 #define SPECIES_QUAQUAVAL                    GEN9_START + 9
 #define SPECIES_LECHONK                      GEN9_START + 10
-#define SPECIES_OINKOLOGNE                   GEN9_START + 11
+#define SPECIES_OINKOLOGNE                   SPECIES_OINKOLOGNE_MALE
+#define SPECIES_OINKOLOGNE_MALE              GEN9_START + 11
 #define SPECIES_TAROUNTULA                   GEN9_START + 12
 #define SPECIES_SPIDOPS                      GEN9_START + 13
 #define SPECIES_NYMBLE                       GEN9_START + 14

@@ -176,7 +176,7 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_BASCULEGION_MALE] = sBasculegionFormSpeciesIdTable,
 #endif
 #if P_GEN_9_POKEMON == TRUE
-    [SPECIES_OINKOLOGNE] = sOinkologneFormSpeciesIdTable,
+    [SPECIES_OINKOLOGNE_MALE] = sOinkologneFormSpeciesIdTable,
     [SPECIES_MAUSHOLD] = sMausholdFormSpeciesIdTable,
     [SPECIES_SQUAWKABILLY] = sSquawkabillyFormSpeciesIdTable,
     [SPECIES_PALAFIN] = sPalafinFormSpeciesIdTable,

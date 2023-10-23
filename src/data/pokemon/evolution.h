@@ -547,7 +547,7 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_CROCALOR]              = {{EVO_LEVEL, 36, SPECIES_SKELEDIRGE}},
     [SPECIES_QUAXLY]                = {{EVO_LEVEL, 16, SPECIES_QUAXWELL}},
     [SPECIES_QUAXWELL]              = {{EVO_LEVEL, 36, SPECIES_QUAQUAVAL}},
-    [SPECIES_LECHONK]               = {{EVO_LEVEL_MALE, 18, SPECIES_OINKOLOGNE},
+    [SPECIES_LECHONK]               = {{EVO_LEVEL_MALE, 18, SPECIES_OINKOLOGNE_MALE},
                                        {EVO_LEVEL_FEMALE, 18, SPECIES_OINKOLOGNE_FEMALE}},
     [SPECIES_TAROUNTULA]            = {{EVO_LEVEL, 15, SPECIES_SPIDOPS}},
     [SPECIES_NYMBLE]                = {{EVO_LEVEL, 24, SPECIES_LOKIX}},
