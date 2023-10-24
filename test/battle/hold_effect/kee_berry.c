@@ -67,7 +67,9 @@ SINGLE_BATTLE_TEST("Kee Berry is not triggered by a special move")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SWIFT, player);
         HP_BAR(opponent);
-        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
-        NOT MESSAGE("Using Kee Berry, the Defense of Foe Wobbuffet rose!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
+            MESSAGE("Using Kee Berry, the Defense of Foe Wobbuffet rose!");
+        }
     }
 }

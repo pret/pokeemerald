@@ -149,8 +149,10 @@ SINGLE_BATTLE_TEST("Teatime does not affect Pokémon in the semi-invulnerable tu
         }
     } SCENE {
         MESSAGE("Wobbuffet used Teatime!");
-        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, player);
-        NOT MESSAGE("Using Liechi Berry, the Attack of Foe Wobbuffet rose!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, player);
+            MESSAGE("Using Liechi Berry, the Attack of Foe Wobbuffet rose!");
+        }
     }
 }
 
@@ -206,7 +208,7 @@ SINGLE_BATTLE_TEST("Teatime triggers Lightning Rod if it has been affected by El
         PLAYER(SPECIES_PIKACHU) { Ability(ABILITY_LIGHTNING_ROD); Item(item); }
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_LIECHI_BERRY); }
     } WHEN {
-        TURN { 
+        TURN {
             MOVE(player, move);
             MOVE(opponent, MOVE_TEATIME);
         }

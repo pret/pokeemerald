@@ -10,7 +10,9 @@ SINGLE_BATTLE_TEST("Limber prevents paralysis")
         TURN { MOVE(opponent, MOVE_THUNDER_SHOCK); }
     } SCENE {
         HP_BAR(player);
-        NONE_OF { ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, player); }
-        NONE_OF { STATUS_ICON(player, paralysis: TRUE); }
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, player);
+            STATUS_ICON(player, paralysis: TRUE);
+        }
     }
 }

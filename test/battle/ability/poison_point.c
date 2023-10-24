@@ -21,10 +21,12 @@ SINGLE_BATTLE_TEST("Poison Point inflicts poison on contact")
             MESSAGE("Wobbuffet was poisoned by Foe Nidoran♂'s Poison Point!");
             STATUS_ICON(player, poison: TRUE);
         } else {
-            NOT ABILITY_POPUP(opponent, ABILITY_POISON_POINT);
-            NOT ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, player);
-            NOT MESSAGE("Wobbuffet was poisoned by Foe Nidoran♂'s Poison Point!");
-            NOT STATUS_ICON(player, poison: TRUE);
+            NONE_OF {
+                ABILITY_POPUP(opponent, ABILITY_POISON_POINT);
+                ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, player);
+                MESSAGE("Wobbuffet was poisoned by Foe Nidoran♂'s Poison Point!");
+                STATUS_ICON(player, poison: TRUE);
+            }
         }
     }
 }

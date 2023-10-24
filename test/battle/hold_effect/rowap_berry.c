@@ -51,7 +51,9 @@ SINGLE_BATTLE_TEST("Rowap Berry is not triggered by a physical move")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
         HP_BAR(opponent);
-        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
-        NOT MESSAGE("Wobbuffet was hurt by Foe Wobbuffet's Rowap Berry!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
+            MESSAGE("Wobbuffet was hurt by Foe Wobbuffet's Rowap Berry!");
+        }
     }
 }
