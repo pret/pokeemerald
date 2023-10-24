@@ -1035,6 +1035,20 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_MIRAIDON] = _("Miraidon"),
     [SPECIES_WALKING_WAKE] = _("Walking Wa"),
     [SPECIES_IRON_LEAVES] = _("Iron Leave"),
+    [SPECIES_DIPPLIN] = _("Dipplin"),
+    [SPECIES_POLTCHAGEIST_COUNTERFEIT] = _("Poltchgeis"),
+    [SPECIES_POLTCHAGEIST_ARTISAN] = _("Poltchgeis"),
+    [SPECIES_SINISTCHA_UNREMARKABLE] = _("Sinistcha"),
+    [SPECIES_SINISTCHA_MASTERPIECE] = _("Sinistcha"),
+    [SPECIES_OKIDOGI] = _("Okidogi"),
+    [SPECIES_MUNKIDORI] = _("Munkidori"),
+    [SPECIES_FEZANDIPITI] = _("Fezandpiti"),
+    [SPECIES_ROARING_MOON] = _("Roaring Mo"),
+    [SPECIES_IRON_VALIANT] = _("Iron Valia"),
+    [SPECIES_KORAIDON] = _("Koraidon"),
+    [SPECIES_MIRAIDON] = _("Miraidon"),
+    [SPECIES_WALKING_WAKE] = _("Walking Wa"),
+    [SPECIES_IRON_LEAVES] = _("Iron Leave"),
 #endif
 
     // Megas

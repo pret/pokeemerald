@@ -10809,6 +10809,13 @@ PLACEHOLDER_ANIM_SINGLE_FRAME(Koraidon);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Miraidon);
 PLACEHOLDER_ANIM_SINGLE_FRAME(WalkingWake);
 PLACEHOLDER_ANIM_SINGLE_FRAME(IronLeaves);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Dipplin);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Sinistcha);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Poltchageist);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Okidogi);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Munkidori);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Fezandipiti);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Ogerpon);
 #endif
 
 #define SINGLE_ANIMATION(name)                      \
@@ -11893,6 +11900,13 @@ SINGLE_ANIMATION(Koraidon);
 SINGLE_ANIMATION(Miraidon);
 SINGLE_ANIMATION(WalkingWake);
 SINGLE_ANIMATION(IronLeaves);
+SINGLE_ANIMATION(Dipplin);
+SINGLE_ANIMATION(Sinistcha);
+SINGLE_ANIMATION(Poltchageist);
+SINGLE_ANIMATION(Okidogi);
+SINGLE_ANIMATION(Munkidori);
+SINGLE_ANIMATION(Fezandipiti);
+SINGLE_ANIMATION(Ogerpon);
 #endif
 SINGLE_ANIMATION(VenusaurMega);
 SINGLE_ANIMATION(CHARIZARD_MEGA_X);
@@ -13145,6 +13159,22 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_MIRAIDON]                          = sAnims_Miraidon,
     [SPECIES_WALKING_WAKE]                      = sAnims_WalkingWake,
     [SPECIES_IRON_LEAVES]                       = sAnims_IronLeaves,
+    [SPECIES_DIPPLIN]                           = sAnims_Dipplin,
+    [SPECIES_POLTCHAGEIST_COUNTERFEIT]          = sAnims_Poltchageist,
+    [SPECIES_POLTCHAGEIST_ARTISAN]              = sAnims_Poltchageist,
+    [SPECIES_SINISTCHA_UNREMARKABLE]            = sAnims_Sinistcha,
+    [SPECIES_SINISTCHA_MASTERPIECE]             = sAnims_Sinistcha,
+    [SPECIES_OKIDOGI]                           = sAnims_Okidogi,
+    [SPECIES_MUNKIDORI]                         = sAnims_Munkidori,
+    [SPECIES_FEZANDIPITI]                       = sAnims_Fezandipiti,
+    [SPECIES_OGERPON_TEAL]                      = sAnims_Ogerpon,
+    [SPECIES_OGERPON_WELLSPRING]                = sAnims_Ogerpon,
+    [SPECIES_OGERPON_HEARTHFLAME]               = sAnims_Ogerpon,
+    [SPECIES_OGERPON_CORNERSTONE]               = sAnims_Ogerpon,
+    [SPECIES_OGERPON_TEAL_TERA]                 = sAnims_Ogerpon,
+    [SPECIES_OGERPON_WELLSPRING_TERA]           = sAnims_Ogerpon,
+    [SPECIES_OGERPON_HEARTHFLAME_TERA]          = sAnims_Ogerpon,
+    [SPECIES_OGERPON_CORNERSTONE_TERA]          = sAnims_Ogerpon,
 #endif
     // Mega/Primal Forms
     [SPECIES_VENUSAUR_MEGA]                  = sAnims_VenusaurMega,

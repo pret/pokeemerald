@@ -21105,13 +21105,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .types = { TYPE_GROUND, TYPE_NORMAL},
         .catchRate = 5,
         .expYield = 275,
-        .evYield_SpAtk    = 3,
-        .genderRatio = MON_MALE
+        .evYield_SpAttack    = 3,
+        .genderRatio = MON_MALE,
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
-        .abilities = {ABILITY_MINDS_EYE, ABILITY_MINDS_EYE, ABILITY_MINDS_EYE},
+        .abilities = {ABILITY_MINDS_EYE, ABILITY_NONE},
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
@@ -27496,5 +27496,178 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
         .flags = SPECIES_FLAG_PARADOX,
     },
+
+    [SPECIES_DIPPLIN] =
+    {
+        .baseHP        = 80,
+        .baseAttack    = 80,
+        .baseDefense   = 110,
+        .baseSpeed     = 40,
+        .baseSpAttack  = 95,
+        .baseSpDefense = 80,
+        .types = { TYPE_GRASS, TYPE_DRAGON },
+        .catchRate = 45,
+        .expYield = 170,
+        .evYield_Defense = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 50,
+        .growthRate = GROWTH_ERRATIC,
+        .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_DRAGON},
+        .abilities = {ABILITY_SUPERSWEET_SYRUP, ABILITY_GLUTTONY, ABILITY_STICKY_HOLD},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+    },
+
+#define POLTCHAGEIST_SPECIES_INFO                                            \
+    {                                                                        \
+        .baseHP        = 40,                                                 \
+        .baseAttack    = 45,                                                 \
+        .baseDefense   = 45,                                                 \
+        .baseSpeed     = 50,                                                 \
+        .baseSpAttack  = 74,                                                 \
+        .baseSpDefense = 54,                                                 \
+        .types = { TYPE_GRASS, TYPE_GHOST},                                  \
+        .catchRate = 120,                                                    \
+        .expYield = 62,                                                      \
+        .evYield_SpAttack  = 1,                                              \
+        .genderRatio = MON_GENDERLESS,                                       \
+        .eggCycles = 20,                                                     \
+        .friendship = 50,                                                    \
+        .growthRate = GROWTH_MEDIUM_FAST,                                    \
+        .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_AMORPHOUS},              \
+        .abilities = {ABILITY_HOSPITALITY, ABILITY_NONE, ABILITY_HEATPROOF}, \
+        .bodyColor = BODY_COLOR_GREEN,                                       \
+        .noFlip = FALSE,                                                     \
+    }
+
+    [SPECIES_POLTCHAGEIST_COUNTERFEIT] = POLTCHAGEIST_SPECIES_INFO,
+    [SPECIES_POLTCHAGEIST_ARTISAN]     = POLTCHAGEIST_SPECIES_INFO,
+
+#define SINISTCHA_SPECIES_INFO                                               \
+    {                                                                        \
+        .baseHP        = 71,                                                 \
+        .baseAttack    = 60,                                                 \
+        .baseDefense   = 106,                                                \
+        .baseSpeed     = 70,                                                 \
+        .baseSpAttack  = 121,                                                \
+        .baseSpDefense = 80,                                                 \
+        .types = { TYPE_GRASS, TYPE_GHOST},                                  \
+        .catchRate = 60,                                                     \
+        .expYield = 178,                                                     \
+        .evYield_SpAttack  = 2,                                              \
+        .genderRatio = MON_GENDERLESS,                                       \
+        .eggCycles = 20,                                                     \
+        .friendship = 50,                                                    \
+        .growthRate = GROWTH_MEDIUM_FAST,                                    \
+        .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_AMORPHOUS},              \
+        .abilities = {ABILITY_HOSPITALITY, ABILITY_NONE, ABILITY_HEATPROOF}, \
+        .bodyColor = BODY_COLOR_GREEN,                                       \
+        .noFlip = FALSE,                                                     \
+    }
+
+    [SPECIES_SINISTCHA_UNREMARKABLE] = SINISTCHA_SPECIES_INFO,
+    [SPECIES_SINISTCHA_MASTERPIECE]  = SINISTCHA_SPECIES_INFO,
+
+    [SPECIES_OKIDOGI] =
+    {
+        .baseHP        = 88,
+        .baseAttack    = 128,
+        .baseDefense   = 115,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 58,
+        .baseSpDefense = 86,
+        .types = { TYPE_POISON, TYPE_FIGHTING },
+        .catchRate = 3,
+        .expYield = 278,
+        .evYield_Attack = 3,
+        .genderRatio = MON_MALE,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_TOXIC_CHAIN, ABILITY_NONE, ABILITY_GUARD_DOG},
+        .bodyColor = BODY_COLOR_BLACK,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_LEGENDARY,
+    },
+
+    [SPECIES_MUNKIDORI] =
+    {
+        .baseHP        = 88,
+        .baseAttack    = 75,
+        .baseDefense   = 66,
+        .baseSpeed     = 106,
+        .baseSpAttack  = 130,
+        .baseSpDefense = 90,
+        .types = { TYPE_POISON, TYPE_PSYCHIC },
+        .catchRate = 3,
+        .expYield = 278,
+        .evYield_SpAttack = 3,
+        .genderRatio = MON_MALE,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_TOXIC_CHAIN, ABILITY_NONE, ABILITY_FRISK},
+        .bodyColor = BODY_COLOR_BLACK,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_LEGENDARY,
+    },
+
+    [SPECIES_FEZANDIPITI] =
+    {
+        .baseHP        = 88,
+        .baseAttack    = 91,
+        .baseDefense   = 82,
+        .baseSpeed     = 99,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 125,
+        .types = { TYPE_POISON, TYPE_FAIRY },
+        .catchRate = 3,
+        .expYield = 278,
+        .evYield_SpDefense = 3,
+        .genderRatio = MON_MALE,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_TOXIC_CHAIN, ABILITY_NONE, ABILITY_TECHNICIAN},
+        .bodyColor = BODY_COLOR_BLACK,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_LEGENDARY,
+    },
+
+#define OGERPON_SPECIES_INFO(type, ability, color)     \
+    {                                                  \
+        .baseHP        = 80,                           \
+        .baseAttack    = 120,                          \
+        .baseDefense   = 84,                           \
+        .baseSpeed     = 110,                          \
+        .baseSpAttack  = 60,                           \
+        .baseSpDefense = 96,                           \
+        .types = { TYPE_GRASS, type },                 \
+        .catchRate = 5,                                \
+        .expYield = 275,                               \
+        .evYield_Attack = 3,                           \
+        .genderRatio = MON_FEMALE,                     \
+        .eggCycles = 10,                               \
+        .friendship = 50,                              \
+        .growthRate = GROWTH_SLOW,                     \
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},           \
+        .abilities = {ability, ABILITY_NONE},          \
+        .bodyColor = color,                            \
+        .noFlip = FALSE,                               \
+        .flags = SPECIES_FLAG_LEGENDARY,               \
+    }
+
+    [SPECIES_OGERPON_TEAL] = OGERPON_SPECIES_INFO(TYPE_GRASS, ABILITY_DEFIANT, BODY_COLOR_GREEN),
+    [SPECIES_OGERPON_WELLSPRING]  = OGERPON_SPECIES_INFO(TYPE_WATER, ABILITY_WATER_ABSORB, BODY_COLOR_BLUE),
+    [SPECIES_OGERPON_HEARTHFLAME] = OGERPON_SPECIES_INFO(TYPE_FIRE, ABILITY_MOLD_BREAKER, BODY_COLOR_RED),
+    [SPECIES_OGERPON_CORNERSTONE]  = OGERPON_SPECIES_INFO(TYPE_ROCK, ABILITY_STURDY, BODY_COLOR_GRAY),
+    [SPECIES_OGERPON_TEAL_TERA] = OGERPON_SPECIES_INFO(TYPE_GRASS, ABILITY_EMBODY_ASPECT_TEAL, BODY_COLOR_GREEN),
+    [SPECIES_OGERPON_WELLSPRING_TERA]  = OGERPON_SPECIES_INFO(TYPE_WATER, ABILITY_EMBODY_ASPECT_WELLSPRING, BODY_COLOR_BLUE),
+    [SPECIES_OGERPON_HEARTHFLAME_TERA] = OGERPON_SPECIES_INFO(TYPE_FIRE, ABILITY_EMBODY_ASPECT_HEARTHFLAME, BODY_COLOR_RED),
+    [SPECIES_OGERPON_CORNERSTONE_TERA]  = OGERPON_SPECIES_INFO(TYPE_ROCK, ABILITY_EMBODY_ASPECT_CORNERSTONE, BODY_COLOR_GRAY),
 #endif
 };

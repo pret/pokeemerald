@@ -6045,9 +6045,9 @@ const u8 gMiraidonPokedexText[] = _(
     "land to ash with its lightning.");
 
 const u8 gWalkingWakePokedexText[] = _(
-    "");
+    "Ecology under research.");
 
 const u8 gIronLeavesPokedexText[] = _(
-    "");
+    "Ecology under research.");
 
 #endif
