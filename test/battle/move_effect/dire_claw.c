@@ -25,11 +25,9 @@ SINGLE_BATTLE_TEST("Dire Claw can inflict poison, paralysis or sleep")
         ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponent);
         if (statusAnim == B_ANIM_STATUS_PRZ) {
             STATUS_ICON(opponent, paralysis: TRUE);
-        }
-        else if (statusAnim == B_ANIM_STATUS_SLP) {
+        } else if (statusAnim == B_ANIM_STATUS_SLP) {
             STATUS_ICON(opponent, sleep: TRUE);
-        }
-        else if (statusAnim == B_ANIM_STATUS_PSN) {
+        } else if (statusAnim == B_ANIM_STATUS_PSN) {
             STATUS_ICON(opponent, poison: TRUE);
         }
     }
@@ -53,12 +51,13 @@ SINGLE_BATTLE_TEST("Dire Claw cannot poison/paralyze poison/electric types respe
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DIRE_CLAW, player);
         HP_BAR(opponent);
-        NOT ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponent);
-        if (statusAnim == B_ANIM_STATUS_PRZ) {
-            NOT STATUS_ICON(opponent, paralysis: TRUE);
-        }
-        else if (statusAnim == B_ANIM_STATUS_PSN) {
-            NOT STATUS_ICON(opponent, poison: TRUE);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponent);
+            if (statusAnim == B_ANIM_STATUS_PRZ) {
+                STATUS_ICON(opponent, paralysis: TRUE);
+            } else if (statusAnim == B_ANIM_STATUS_PSN) {
+                STATUS_ICON(opponent, poison: TRUE);
+            }
         }
     }
 }
@@ -86,15 +85,15 @@ SINGLE_BATTLE_TEST("Dire Claw cannot poison/paralyze/cause to fall asleep pokemo
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DIRE_CLAW, player);
         HP_BAR(opponent);
-        NOT ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponent);
-        if (statusAnim == B_ANIM_STATUS_PRZ) {
-            NOT STATUS_ICON(opponent, paralysis: TRUE);
-        }
-        else if (statusAnim == B_ANIM_STATUS_SLP) {
-            NOT STATUS_ICON(opponent, sleep: TRUE);
-        }
-        else if (statusAnim == B_ANIM_STATUS_PSN) {
-            NOT STATUS_ICON(opponent, poison: TRUE);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponent);
+            if (statusAnim == B_ANIM_STATUS_PRZ) {
+                STATUS_ICON(opponent, paralysis: TRUE);
+            } else if (statusAnim == B_ANIM_STATUS_SLP) {
+                STATUS_ICON(opponent, sleep: TRUE);
+            } else if (statusAnim == B_ANIM_STATUS_PSN) {
+                STATUS_ICON(opponent, poison: TRUE);
+            }
         }
     }
 }
@@ -115,15 +114,15 @@ SINGLE_BATTLE_TEST("Dire Claw cannot poison/paralyze/cause to fall asleep a mon 
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DIRE_CLAW, player);
         HP_BAR(opponent);
-        NOT ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponent);
-        if (statusAnim == B_ANIM_STATUS_PRZ) {
-            NOT STATUS_ICON(opponent, paralysis: TRUE);
-        }
-        else if (statusAnim == B_ANIM_STATUS_SLP) {
-            NOT STATUS_ICON(opponent, sleep: TRUE);
-        }
-        else if (statusAnim == B_ANIM_STATUS_PSN) {
-            NOT STATUS_ICON(opponent, poison: TRUE);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponent);
+            if (statusAnim == B_ANIM_STATUS_PRZ) {
+                STATUS_ICON(opponent, paralysis: TRUE);
+            } else if (statusAnim == B_ANIM_STATUS_SLP) {
+                STATUS_ICON(opponent, sleep: TRUE);
+            } else if (statusAnim == B_ANIM_STATUS_PSN) {
+                STATUS_ICON(opponent, poison: TRUE);
+            }
         }
     }
 }

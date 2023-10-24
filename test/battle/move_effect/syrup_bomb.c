@@ -33,8 +33,10 @@ SINGLE_BATTLE_TEST("Syrup Bomb is prevented by Bulletproof")
     } SCENE {
         ABILITY_POPUP(opponent, ABILITY_BULLETPROOF);
         MESSAGE("Foe Chespin's Bulletproof blocks Syrup Bomb!");
-        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SYRUP_BOMB, player);
-        NOT HP_BAR(opponent);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_SYRUP_BOMB, player);
+            HP_BAR(opponent);
+        }
     }
 }
 
@@ -75,8 +77,10 @@ SINGLE_BATTLE_TEST("Clear Body, White Smoke and Full Metal Body prevent Sticky S
             ABILITY_POPUP(opponent, ABILITY_FULL_METAL_BODY);
             MESSAGE("Foe Solgaleo's Full Metal Body prevents stat loss!");
         }
-        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        NOT MESSAGE("Foe Beldum's Speed fell!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+            MESSAGE("Foe Beldum's Speed fell!");
+        }
     }
 }
 
@@ -92,7 +96,9 @@ SINGLE_BATTLE_TEST("Clear Amulet prevents Sticky Syrup speed reduction")
         HP_BAR(opponent);
         MESSAGE("Foe Wobbuffet got covered in sticky syrup!");
         MESSAGE("Foe Wobbuffet's Speed was not lowered!");
-        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        NOT MESSAGE("Foe Wobbuffet's Speed fell!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+            MESSAGE("Foe Wobbuffet's Speed fell!");
+        }
     }
 }
