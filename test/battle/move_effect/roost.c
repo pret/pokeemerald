@@ -36,8 +36,10 @@ SINGLE_BATTLE_TEST("Roost fails when user is at full HP")
         TURN { MOVE(player, MOVE_ROOST); }
     } SCENE {
         MESSAGE("Wobbuffet's HP is full!");
-        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_ROOST, player);
-        NOT HP_BAR(player);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_ROOST, player);
+            HP_BAR(player);
+        }
     }
 }
 
@@ -52,8 +54,10 @@ SINGLE_BATTLE_TEST("Roost fails if the user is under the effects of Heal Block")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HEAL_BLOCK, opponent);
         MESSAGE("Wobbuffet was prevented from healing!"); // Message when Heal Block is applied
         MESSAGE("Wobbuffet was prevented from healing!"); // Message when trying to heal under Heal Block
-        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_ROOST, player);
-        NOT HP_BAR(player);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_ROOST, player);
+            HP_BAR(player);
+        }
     }
 }
 
@@ -340,8 +344,10 @@ SINGLE_BATTLE_TEST("Roost's suppression prevents Reflect Type from copying any F
         // Turn 3: EQ has no effect
         MESSAGE("Swellow used Earthquake!");
         MESSAGE("It doesn't affect Foe Wobbuffet…");
-        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, player);
-        NOT HP_BAR(opponent);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, player);
+            HP_BAR(opponent);
+        }
     }
 }
 
@@ -357,8 +363,10 @@ SINGLE_BATTLE_TEST("Roost does not suppress the ungrounded effect of Levitate")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ROOST, player);
         MESSAGE("Flygon regained health!");
         MESSAGE("Foe Wobbuffet used Earthquake!");
-        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, opponent);
-        NOT HP_BAR(player);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, opponent);
+            HP_BAR(player);
+        }
     }
 }
 
@@ -374,8 +382,10 @@ SINGLE_BATTLE_TEST("Roost does not suppress the ungrounded effect of Air Balloon
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ROOST, player);
         MESSAGE("Wobbuffet regained health!");
         MESSAGE("Foe Wobbuffet used Earthquake!");
-        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, opponent);
-        NOT HP_BAR(player);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, opponent);
+            HP_BAR(player);
+        }
     }
 }
 
@@ -397,8 +407,10 @@ SINGLE_BATTLE_TEST("Roost does not suppress the ungrounded effect of Magnet Rise
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ROOST, player);
         MESSAGE("Wobbuffet regained health!");
         MESSAGE("Foe Wobbuffet used Earthquake!");
-        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, opponent);
-        NOT HP_BAR(player);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, opponent);
+            HP_BAR(player);
+        }
     }
 }
 
@@ -421,8 +433,10 @@ SINGLE_BATTLE_TEST("Roost does not suppress the ungrounded effect of Telekinesis
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ROOST, player);
         MESSAGE("Wobbuffet regained health!");
         MESSAGE("Foe Wobbuffet used Earthquake!");
-        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, opponent);
-        NOT HP_BAR(player);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, opponent);
+            HP_BAR(player);
+        }
     }
 }
 

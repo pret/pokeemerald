@@ -38,7 +38,9 @@ SINGLE_BATTLE_TEST("Poison cannot be inflicted on Poison and Steel-type Pokémon
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TWINEEDLE, player);
         HP_BAR(opponent);
-        NOT ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);
-        NOT STATUS_ICON(opponent, poison: TRUE);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);
+            STATUS_ICON(opponent, poison: TRUE);
+        }
     }
 }

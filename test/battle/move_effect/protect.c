@@ -93,8 +93,8 @@ SINGLE_BATTLE_TEST("King's Shield, Silk Trap and Obstruct protect from damaging 
         } else {
             NOT ANIMATION(ANIM_TYPE_MOVE, usedMove, player);
             MESSAGE("Foe Wobbuffet protected itself!");
-            NOT HP_BAR(opponent);
             if (usedMove == MOVE_TACKLE) {
+                NOT HP_BAR(opponent);
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
                 if (statId == STAT_ATK) {
                     MESSAGE("Wobbuffet's Attack fell!");
@@ -106,7 +106,10 @@ SINGLE_BATTLE_TEST("King's Shield, Silk Trap and Obstruct protect from damaging 
                     }
                 }
             } else {
-                NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+                NONE_OF {
+                    HP_BAR(opponent);
+                    ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+                }
             }
         }
     } THEN {
@@ -173,11 +176,14 @@ SINGLE_BATTLE_TEST("Baneful Bunker poisons pokemon for moves making contact")
         MESSAGE("Foe Wobbuffet protected itself!");
         NOT ANIMATION(ANIM_TYPE_MOVE, usedMove, player);
         MESSAGE("Foe Wobbuffet protected itself!");
-        NOT HP_BAR(opponent);
         if (usedMove == MOVE_TACKLE) {
+            NOT HP_BAR(opponent);
             STATUS_ICON(player, STATUS1_POISON);
         } else {
-            NOT STATUS_ICON(player, STATUS1_POISON);
+            NONE_OF {
+                HP_BAR(opponent);
+                STATUS_ICON(player, STATUS1_POISON);
+            }
         }
     }
 }
@@ -218,8 +224,10 @@ SINGLE_BATTLE_TEST("Recoil damage is not applied if target was protected")
         ANIMATION(ANIM_TYPE_MOVE, protectMove, opponent);
         MESSAGE("Foe Beautifly protected itself!");
         // MESSAGE("Rapidash used recoilMove!");
-        NOT ANIMATION(ANIM_TYPE_MOVE, recoilMove, player);
-        NOT MESSAGE("Rapidash is hit with recoil!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, recoilMove, player);
+            MESSAGE("Rapidash is hit with recoil!");
+        }
     }
 }
 
@@ -251,16 +259,17 @@ SINGLE_BATTLE_TEST("Multi-hit moves don't hit a protected target and fail only o
         // Each effect happens only once.
         if (move == MOVE_KINGS_SHIELD || move == MOVE_SILK_TRAP || move == MOVE_OBSTRUCT) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        }
-        else if (move == MOVE_SPIKY_SHIELD) {
+        } else if (move == MOVE_SPIKY_SHIELD) {
             HP_BAR(player);
-            NOT HP_BAR(player);
-        }
-        else if (move == MOVE_BANEFUL_BUNKER) {
+        } else if (move == MOVE_BANEFUL_BUNKER) {
             STATUS_ICON(player, STATUS1_POISON);
         }
         NONE_OF {
+            if (move == MOVE_KINGS_SHIELD || move == MOVE_SILK_TRAP || move == MOVE_OBSTRUCT) {
+                ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+            } else if (move == MOVE_SPIKY_SHIELD) {
+                HP_BAR(player);
+            }
             MESSAGE("Hit 2 time(s)!");
             MESSAGE("Hit 3 time(s)!");
             MESSAGE("Hit 4 time(s)!");
