@@ -56,5 +56,5 @@ jobs:
           MODERN: 1
           TEST: 1
         run: |
-          make -j${nproc} -O pokeemerald_modern-test.elf
+          make -j${nproc} -O pokeemerald-test.elf
           make -j${nproc} check
