@@ -40,24 +40,30 @@ SINGLE_BATTLE_TEST("Octolock reduction is prevented by Clear Body, White Smoke a
             MESSAGE("Foe Beldum can no longer escape because of Octolock!");
             ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
             MESSAGE("Foe Beldum's Clear Body prevents stat loss!");
-            NOT MESSAGE("Foe Beldum's Defense fell!");
-            NOT MESSAGE("Foe Beldum's Sp. Def fell!");
+            NONE_OF {
+                MESSAGE("Foe Beldum's Defense fell!");
+                MESSAGE("Foe Beldum's Sp. Def fell!");
+            }
         }
         else if (species == SPECIES_TORKOAL)
         {
             MESSAGE("Foe Torkoal can no longer escape because of Octolock!");
             ABILITY_POPUP(opponent, ABILITY_WHITE_SMOKE);
             MESSAGE("Foe Torkoal's White Smoke prevents stat loss!");
-            NOT MESSAGE("Foe Torkoal's Defense fell!");
-            NOT MESSAGE("Foe Torkoal's Sp. Def fell!");
+            NONE_OF {
+                MESSAGE("Foe Torkoal's Defense fell!");
+                MESSAGE("Foe Torkoal's Sp. Def fell!");
+            }
         }
         else if (species == SPECIES_SOLGALEO)
         {
             MESSAGE("Foe Solgaleo can no longer escape because of Octolock!");
             ABILITY_POPUP(opponent, ABILITY_FULL_METAL_BODY);
             MESSAGE("Foe Solgaleo's Full Metal Body prevents stat loss!");
-            NOT MESSAGE("Foe Solgaleo's Defense fell!");
-            NOT MESSAGE("Foe Solgaleo's Sp. Def fell!");
+            NONE_OF {
+                MESSAGE("Foe Solgaleo's Defense fell!");
+                MESSAGE("Foe Solgaleo's Sp. Def fell!");
+            }
         }
     }
 }
@@ -92,9 +98,11 @@ SINGLE_BATTLE_TEST("Octolock reduction is prevented by Clear Amulet")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_OCTOLOCK, player);
         MESSAGE("Foe Wobbuffet can no longer escape because of Octolock!");
         MESSAGE("Foe Wobbuffet's Clear Amulet prevents its stats from being lowered!");
-        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        NOT MESSAGE("Foe Wobbuffet's Defense fell!");
-        NOT MESSAGE("Foe Wobbuffet's Sp. Def fell!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+            MESSAGE("Foe Wobbuffet's Defense fell!");
+            MESSAGE("Foe Wobbuffet's Sp. Def fell!");
+        }
     }
 }
 
@@ -117,7 +125,9 @@ SINGLE_BATTLE_TEST("Octolock will not decrease Defense and Sp. Def further then 
         }
         MESSAGE("Foe Wobbuffet's Defense won't go lower!");
         MESSAGE("Foe Wobbuffet's Sp. Def won't go lower!");
-        NOT MESSAGE("Foe Wobbuffet's Defense fell!");
-        NOT MESSAGE("Foe Wobbuffet's Sp. Def fell!");
+        NONE_OF {
+            MESSAGE("Foe Wobbuffet's Defense fell!");
+            MESSAGE("Foe Wobbuffet's Sp. Def fell!");
+        }
     }
 }

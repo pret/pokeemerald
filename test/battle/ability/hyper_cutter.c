@@ -69,8 +69,10 @@ SINGLE_BATTLE_TEST("Hyper Cutter is ignored by Mold Breaker")
         MESSAGE("Pinsir breaks the mold!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GROWL, player);
         MESSAGE("Foe Krabby's Attack fell!");
-        NOT ABILITY_POPUP(opponent, ABILITY_HYPER_CUTTER);
-        NOT MESSAGE("Foe Krabby's Hyper Cutter prevents Attack loss!");
+        NONE_OF {
+            ABILITY_POPUP(opponent, ABILITY_HYPER_CUTTER);
+            MESSAGE("Foe Krabby's Hyper Cutter prevents Attack loss!");
+        }
     }
 }
 

@@ -83,7 +83,9 @@ SINGLE_BATTLE_TEST("Clear Amulet prevents secondary effects that reduce stats")
     } WHEN {
         TURN { MOVE(player, move); }
     } SCENE {
-        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        NOT MESSAGE("Foe Wobbuffet's Clear Amulet prevents its stats from being lowered!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+            MESSAGE("Foe Wobbuffet's Clear Amulet prevents its stats from being lowered!");
+        }
     }
 }
