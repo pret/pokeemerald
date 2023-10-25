@@ -74,7 +74,7 @@ DOUBLE_BATTLE_TEST("Flower Gift increases the attack of Cherrim and its allies b
     } WHEN {
         if (sunny)
             TURN { MOVE(playerLeft, MOVE_SUNNY_DAY); }
-        TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft); 
+        TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft);
                MOVE(playerRight, MOVE_TACKLE, target: opponentLeft); }
     } SCENE {
         // sun activates
@@ -123,6 +123,48 @@ DOUBLE_BATTLE_TEST("Flower Gift increases the Sp. Def of Cherrim and its allies 
     } FINALLY {
         EXPECT_MUL_EQ(results[1].damageL, UQ_4_12(1.5), results[0].damageL);
         EXPECT_MUL_EQ(results[1].damageR, UQ_4_12(1.5), results[0].damageR);
+    }
+}
+
+SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back when it switches out")
+{
+    GIVEN {
+        ASSUME(B_WEATHER_FORMS >= GEN_5);
+        PLAYER(SPECIES_CHERRIM) { Ability(ABILITY_FLOWER_GIFT); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SUNNY_DAY); }
+        TURN { SWITCH(player, 1); }
+    } SCENE {
+        // transforms in sun
+        ABILITY_POPUP(player, ABILITY_FLOWER_GIFT);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
+        MESSAGE("Cherrim transformed!");
+        MESSAGE("Cherrim, that's enough! Come back!");
+    } THEN {
+        EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_CHERRIM);
+    }
+}
+
+SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back when it uses a move that forces it to switch out")
+{
+    GIVEN {
+        ASSUME(B_WEATHER_FORMS >= GEN_5);
+        PLAYER(SPECIES_CHERRIM) { Ability(ABILITY_FLOWER_GIFT); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SUNNY_DAY); }
+        TURN { MOVE(player, MOVE_U_TURN); SEND_OUT(player, 1); }
+    } SCENE {
+        // transforms in sun
+        ABILITY_POPUP(player, ABILITY_FLOWER_GIFT);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
+        MESSAGE("Cherrim transformed!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_U_TURN, player);
+    } THEN {
+        EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_CHERRIM);
     }
 }
 
