@@ -32081,6 +32081,10 @@ static const u16 sUrsalunaTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+static const u16 sUrsalunaBloodmoonTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
 static const u16 sBasculegionTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
@@ -37887,6 +37891,34 @@ static const u16 sIronLeavesTeachableLearnset[] = {
     MOVE_TRAILBLAZE,
     MOVE_WILD_CHARGE,
     MOVE_X_SCISSOR,
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sDipplinTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sPoltchageistTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sSinistchaTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sOkidogiTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sMunkidoriTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sFezandipitiTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sOgerponTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 #endif
