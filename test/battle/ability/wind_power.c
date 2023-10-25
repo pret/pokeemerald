@@ -133,8 +133,10 @@ DOUBLE_BATTLE_TEST("Wind Power activates correctly for every battler with the ab
             ABILITY_POPUP(playerRight, ABILITY_WIND_POWER);
             MESSAGE("Being hit by Air Cutter charged Wobbuffet with power!");
         }
-        NOT HP_BAR(opponentLeft);
-        NOT HP_BAR(opponentRight);
+        NONE_OF {
+            HP_BAR(opponentLeft);
+            HP_BAR(opponentRight);
+        }
     }
     THEN {
         EXPECT_NE(playerLeft->hp, playerLeft->maxHP);

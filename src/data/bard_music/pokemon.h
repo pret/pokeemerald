@@ -2884,7 +2884,7 @@ const struct BardSound gBardSounds_Pokemon[NUM_SPECIES][6] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    [SPECIES_CASTFORM] = {
+    [SPECIES_CASTFORM_NORMAL] = {
         { .songLengthId =  0 },
         { .songLengthId = 26 },
         { .songLengthId = 51 },
@@ -3084,7 +3084,7 @@ const struct BardSound gBardSounds_Pokemon[NUM_SPECIES][6] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    [SPECIES_DEOXYS] = {
+    [SPECIES_DEOXYS_NORMAL] = {
         { .songLengthId = 12 },
         { .songLengthId = 27 },
         { .songLengthId = 17 },

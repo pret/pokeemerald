@@ -57,9 +57,9 @@
 #define BATTLE_TYPE_WALLY_TUTORIAL     (1 << 9) // Used in pokefirered as BATTLE_TYPE_OLD_MAN_TUTORIAL.
 #define BATTLE_TYPE_ROAMER             (1 << 10)
 #define BATTLE_TYPE_EREADER_TRAINER    (1 << 11)
-#define BATTLE_TYPE_KYOGRE_GROUDON     (1 << 12)
+#define BATTLE_TYPE_RAID               (1 << 12)
 #define BATTLE_TYPE_LEGENDARY          (1 << 13)
-#define BATTLE_TYPE_REGI               (1 << 14)
+#define BATTLE_TYPE_14                 (1 << 14)
 #define BATTLE_TYPE_TWO_OPPONENTS      (1 << 15) // Used in pokefirered as BATTLE_TYPE_GHOST.
 #define BATTLE_TYPE_DOME               (1 << 16) // Used in pokefirered as BATTLE_TYPE_POKEDUDE.
 #define BATTLE_TYPE_PALACE             (1 << 17) // Used in pokefirered as BATTLE_TYPE_WILD_SCRIPTED.
@@ -73,17 +73,16 @@
 #define BATTLE_TYPE_RECORDED_LINK      (1 << 25)
 #define BATTLE_TYPE_TRAINER_HILL       (1 << 26)
 #define BATTLE_TYPE_SECRET_BASE        (1 << 27)
-#define BATTLE_TYPE_GROUDON            (1 << 28)
-#define BATTLE_TYPE_KYOGRE             (1 << 29)
-#define BATTLE_TYPE_RAYQUAZA           (1 << 30)
+#define BATTLE_TYPE_28                 (1 << 28)
+#define BATTLE_TYPE_29                 (1 << 29)
+#define BATTLE_TYPE_30                 (1 << 30)
 #define BATTLE_TYPE_RECORDED_IS_MASTER (1 << 31)
 #define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID)
 #define BATTLE_TYPE_FRONTIER_NO_PYRAMID     (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE)
 #define BATTLE_TYPE_RECORDED_INVALID        ((BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_FIRST_BATTLE                  \
                                              | BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_ROAMER | BATTLE_TYPE_EREADER_TRAINER    \
-                                             | BATTLE_TYPE_KYOGRE_GROUDON | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI            \
-                                             | BATTLE_TYPE_RECORDED | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE        \
-                                             | BATTLE_TYPE_GROUDON | BATTLE_TYPE_KYOGRE | BATTLE_TYPE_RAYQUAZA))
+                                             | BATTLE_TYPE_LEGENDARY                                                            \
+                                             | BATTLE_TYPE_RECORDED | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE))
 
 #define WILD_DOUBLE_BATTLE ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER))))
 #define RECORDED_WILD_BATTLE ((gBattleTypeFlags & BATTLE_TYPE_RECORDED) && !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FRONTIER)))
@@ -237,8 +236,10 @@
 #define SIDE_STATUS_WIDE_GUARD              (1 << 19)
 #define SIDE_STATUS_CRAFTY_SHIELD           (1 << 20)
 #define SIDE_STATUS_MAT_BLOCK               (1 << 21)
+#define SIDE_STATUS_STEELSURGE              (1 << 22)
+#define SIDE_STATUS_DAMAGE_NON_TYPES        (1 << 23)
 
-#define SIDE_STATUS_HAZARDS_ANY    (SIDE_STATUS_SPIKES | SIDE_STATUS_STICKY_WEB | SIDE_STATUS_TOXIC_SPIKES | SIDE_STATUS_STEALTH_ROCK)
+#define SIDE_STATUS_HAZARDS_ANY    (SIDE_STATUS_SPIKES | SIDE_STATUS_STICKY_WEB | SIDE_STATUS_TOXIC_SPIKES | SIDE_STATUS_STEALTH_ROCK | SIDE_STATUS_STEELSURGE)
 #define SIDE_STATUS_SCREEN_ANY     (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL)
 
 // Field affecting statuses.
@@ -501,5 +502,8 @@
 #define HANDLE_TYPE_MEGA_EVOLUTION 0
 #define HANDLE_TYPE_PRIMAL_REVERSION 1
 #define HANDLE_TYPE_ULTRA_BURST 2
+
+// Constants for Torment
+#define PERMANENT_TORMENT   0xF
 
 #endif // GUARD_CONSTANTS_BATTLE_H

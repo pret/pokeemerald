@@ -104,13 +104,26 @@ Debug_CheckSaveBlock::
 	end
 
 Debug_SaveBlock1Size::
-	.string "SaveBlock1 size: {STR_VAR_1}/{STR_VAR_2}.$"
+	.string "SaveBlock1 size: {STR_VAR_1}b/{STR_VAR_2}b.\n"
+	.string "Free space: {STR_VAR_3}b.$"
 
 Debug_SaveBlock2Size::
-	.string "SaveBlock2 size: {STR_VAR_1}/{STR_VAR_2}.$"
+	.string "SaveBlock2 size: {STR_VAR_1}b/{STR_VAR_2}b.\n"
+	.string "Free space: {STR_VAR_3}b.$"
 
 Debug_PokemonStorageSize::
-	.string "{PKMN}Storage size: {STR_VAR_1}/{STR_VAR_2}.$"
+	.string "{PKMN}Storage size: {STR_VAR_1}b/{STR_VAR_2}b.\n"
+	.string "Free space: {STR_VAR_3}b.$"
+
+Debug_CheckROMSpace::
+	callnative CheckROMSize
+	msgbox Debug_ROMSize, MSGBOX_DEFAULT
+	release
+	end
+
+Debug_ROMSize::
+	.string "ROM size: {STR_VAR_1}MB/32MB.\n"
+	.string "Free space: {STR_VAR_2}MB.$"
 
 Debug_HatchAnEgg::
 	lockall

@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim in harsh sunlight")
 {
     GIVEN {
-        PLAYER(SPECIES_CHERRIM) { Ability(ABILITY_FLOWER_GIFT); }
+        PLAYER(SPECIES_CHERRIM_OVERCAST) { Ability(ABILITY_FLOWER_GIFT); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_SUNNY_DAY); }
@@ -20,7 +20,7 @@ SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim in harsh sunlight")
 SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back to normal when weather changes")
 {
     GIVEN {
-        PLAYER(SPECIES_CHERRIM) { Ability(ABILITY_FLOWER_GIFT); }
+        PLAYER(SPECIES_CHERRIM_OVERCAST) { Ability(ABILITY_FLOWER_GIFT); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_SUNNY_DAY); }
@@ -35,7 +35,7 @@ SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back to normal when weather c
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Cherrim transformed!");
     } THEN {
-        EXPECT_EQ(player->species, SPECIES_CHERRIM);
+        EXPECT_EQ(player->species, SPECIES_CHERRIM_OVERCAST);
     }
 }
 
@@ -43,7 +43,7 @@ SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back to normal when its abili
 {
     GIVEN {
         ASSUME(B_WEATHER_FORMS >= GEN_5);
-        PLAYER(SPECIES_CHERRIM) { Ability(ABILITY_FLOWER_GIFT); }
+        PLAYER(SPECIES_CHERRIM_OVERCAST) { Ability(ABILITY_FLOWER_GIFT); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_SUNNY_DAY); }
@@ -57,7 +57,7 @@ SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back to normal when its abili
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Cherrim transformed!");
     } THEN {
-        EXPECT_EQ(player->species, SPECIES_CHERRIM);
+        EXPECT_EQ(player->species, SPECIES_CHERRIM_OVERCAST);
     }
 }
 
@@ -67,7 +67,7 @@ DOUBLE_BATTLE_TEST("Flower Gift increases the attack of Cherrim and its allies b
     PARAMETRIZE { sunny = FALSE; }
     PARAMETRIZE { sunny = TRUE; }
     GIVEN {
-        PLAYER(SPECIES_CHERRIM) { Ability(ABILITY_FLOWER_GIFT); }
+        PLAYER(SPECIES_CHERRIM_OVERCAST) { Ability(ABILITY_FLOWER_GIFT); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -101,7 +101,7 @@ DOUBLE_BATTLE_TEST("Flower Gift increases the Sp. Def of Cherrim and its allies 
     PARAMETRIZE { sunny = FALSE; }
     PARAMETRIZE { sunny = TRUE; }
     GIVEN {
-        PLAYER(SPECIES_CHERRIM) { Ability(ABILITY_FLOWER_GIFT); }
+        PLAYER(SPECIES_CHERRIM_OVERCAST) { Ability(ABILITY_FLOWER_GIFT); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

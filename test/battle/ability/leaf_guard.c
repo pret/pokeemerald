@@ -25,10 +25,13 @@ SINGLE_BATTLE_TEST("Leaf Guard prevents non-volatile status conditions in sun")
             NOT ANIMATION(ANIM_TYPE_MOVE, move, opponent);
             ABILITY_POPUP(player, ABILITY_LEAF_GUARD);
             MESSAGE("It doesn't affect Leafeon…");
+            NOT STATUS_ICON(player, status);
         } else {
-            NOT ABILITY_POPUP(player, ABILITY_LEAF_GUARD);
+            NONE_OF {
+                ABILITY_POPUP(player, ABILITY_LEAF_GUARD);
+                STATUS_ICON(player, status);
+            }
         }
-        NOT STATUS_ICON(player, status);
     }
 }
 
@@ -65,7 +68,9 @@ SINGLE_BATTLE_TEST("Leaf Guard prevents Rest during sun")
         TURN { MOVE(opponent, MOVE_SUNNY_DAY); MOVE(player, MOVE_REST); }
     } SCENE {
         MESSAGE("But it failed!");
-        NOT STATUS_ICON(player, sleep: TRUE);
-        NONE_OF { HP_BAR(player); }
+        NONE_OF {
+            STATUS_ICON(player, sleep: TRUE);
+            HP_BAR(player);
+        }
     }
 }

@@ -21,7 +21,7 @@ SINGLE_BATTLE_TEST("Ember inflicts burn")
     }
 }
 
-SINGLE_BATTLE_TEST("Ember cannot burn a Fire-type")
+SINGLE_BATTLE_TEST("Ember cannot burn a Fire-type Pokémon")
 {
     GIVEN {
         ASSUME(gSpeciesInfo[SPECIES_CHARMANDER].types[0] == TYPE_FIRE);
@@ -32,7 +32,9 @@ SINGLE_BATTLE_TEST("Ember cannot burn a Fire-type")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EMBER, player);
         HP_BAR(opponent);
-        NOT ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponent);
-        NOT STATUS_ICON(opponent, burn: TRUE);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponent);
+            STATUS_ICON(opponent, burn: TRUE);
+        }
     }
 }
