@@ -292,4 +292,14 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_ENAMORUS_INCARNATE] = sEnamorusFormChangeTable,
     [SPECIES_ENAMORUS_THERIAN] = sEnamorusFormChangeTable,
 #endif
+#if P_GEN_9_POKEMON == TRUE
+    [SPECIES_OGERPON_TEAL] = sOgerponFormChangeTable,
+    [SPECIES_OGERPON_WELLSPRING] = sOgerponFormChangeTable,
+    [SPECIES_OGERPON_HEARTHFLAME] = sOgerponFormChangeTable,
+    [SPECIES_OGERPON_CORNERSTONE] = sOgerponFormChangeTable,
+    [SPECIES_OGERPON_TEAL_TERA] = sOgerponFormChangeTable,
+    [SPECIES_OGERPON_WELLSPRING_TERA] = sOgerponFormChangeTable,
+    [SPECIES_OGERPON_HEARTHFLAME_TERA] = sOgerponFormChangeTable,
+    [SPECIES_OGERPON_CORNERSTONE_TERA] = sOgerponFormChangeTable,
+#endif
 };
