@@ -2360,8 +2360,45 @@ gCryTable::
 .if P_GEN_9_POKEMON == TRUE
 	cry Cry_Unown //Cry_WalkingWake
 	cry Cry_Unown //Cry_IronLeaves
+	cry Cry_Unown //Cry_Dipplin
+	cry Cry_Unown //Cry_Poltchageist
+	cry Cry_Unown //Cry_Poltchageist
+	cry Cry_Unown //Cry_Sinistcha
+	cry Cry_Unown //Cry_Sinistcha
+	cry Cry_Unown //Cry_Okidogi
+	cry Cry_Unown //Cry_Munkidori
+	cry Cry_Unown //Cry_Fezandipiti
+	cry Cry_Unown //Cry_Ogerpon
+	cry Cry_Unown //Cry_Ogerpon
+	cry Cry_Unown //Cry_Ogerpon
+	cry Cry_Unown //Cry_Ogerpon
+	cry Cry_Unown //Cry_Ogerpon
+	cry Cry_Unown //Cry_Ogerpon
+	cry Cry_Unown //Cry_Ogerpon
+	cry Cry_Unown //Cry_Ogerpon
 .else
 	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+.endif
+.if P_GEN_8_POKEMON == TRUE
+	cry Cry_Ursaluna
+.else
 	cry Cry_Unown
 .endif
 @ Gigantamax Forms
@@ -4737,8 +4774,45 @@ gCryTable_Reverse::
 .if P_GEN_9_POKEMON == TRUE
 	cry_reverse Cry_Unown //Cry_WalkingWake
 	cry_reverse Cry_Unown //Cry_IronLeaves
+	cry_reverse Cry_Unown //Cry_Dipplin
+	cry_reverse Cry_Unown //Cry_Poltchageist
+	cry_reverse Cry_Unown //Cry_Poltchageist
+	cry_reverse Cry_Unown //Cry_Sinistcha
+	cry_reverse Cry_Unown //Cry_Sinistcha
+	cry_reverse Cry_Unown //Cry_Okidogi
+	cry_reverse Cry_Unown //Cry_Munkidori
+	cry_reverse Cry_Unown //Cry_Fezandipiti
+	cry_reverse Cry_Unown //Cry_Ogerpon
+	cry_reverse Cry_Unown //Cry_Ogerpon
+	cry_reverse Cry_Unown //Cry_Ogerpon
+	cry_reverse Cry_Unown //Cry_Ogerpon
+	cry_reverse Cry_Unown //Cry_Ogerpon
+	cry_reverse Cry_Unown //Cry_Ogerpon
+	cry_reverse Cry_Unown //Cry_Ogerpon
+	cry_reverse Cry_Unown //Cry_Ogerpon
 .else
 	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+.endif
+.if P_GEN_8_POKEMON == TRUE
+	cry_reverse Cry_Ursaluna
+.else
 	cry_reverse Cry_Unown
 .endif
 	@ Gigantamax Forms
