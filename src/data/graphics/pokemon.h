@@ -8207,27 +8207,27 @@ const u32 gMonShinyPalette_Fezandipiti[] = INCBIN_U32("graphics/pokemon/fezandip
 const u8 gMonIcon_Fezandipiti[] = INCBIN_U8("graphics/pokemon/fezandipiti/icon.4bpp");
 // const u8 gMonFootprint_Fezandipiti[] = INCBIN_U8("graphics/pokemon/fezandipiti/footprint.1bpp");
 
-// const u32 gMonFrontPic_OgerponTeal[] = INCBIN_U32("graphics/pokemon/ogerpon/front.4bpp.lz");
-// const u32 gMonPalette_OgerponTeal[] = INCBIN_U32("graphics/pokemon/ogerpon/normal.gbapal.lz");
-// const u32 gMonBackPic_OgerponTeal[] = INCBIN_U32("graphics/pokemon/ogerpon/back.4bpp.lz");
+const u32 gMonFrontPic_OgerponTeal[] = INCBIN_U32("graphics/pokemon/ogerpon/front.4bpp.lz");
+const u32 gMonPalette_OgerponTeal[] = INCBIN_U32("graphics/pokemon/ogerpon/normal.gbapal.lz");
+const u32 gMonBackPic_OgerponTeal[] = INCBIN_U32("graphics/pokemon/ogerpon/back.4bpp.lz");
 // const u32 gMonShinyPalette_OgerponTeal[] = INCBIN_U32("graphics/pokemon/ogerpon/shiny.gbapal.lz");
-// const u8 gMonIcon_OgerponTeal[] = INCBIN_U8("graphics/pokemon/ogerpon/icon.4bpp");
+const u8 gMonIcon_OgerponTeal[] = INCBIN_U8("graphics/pokemon/ogerpon/icon.4bpp");
 
-// const u32 gMonFrontPic_OgerponWellspring[] = INCBIN_U32("graphics/pokemon/ogerpon/wellspring/front.4bpp.lz");
-// const u32 gMonPalette_OgerponWellspring[] = INCBIN_U32("graphics/pokemon/ogerpon/wellspring/normal.gbapal.lz");
-// const u32 gMonBackPic_OgerponWellspring[] = INCBIN_U32("graphics/pokemon/ogerpon/wellspring/back.4bpp.lz");
+const u32 gMonFrontPic_OgerponWellspring[] = INCBIN_U32("graphics/pokemon/ogerpon/wellspring/front.4bpp.lz");
+const u32 gMonPalette_OgerponWellspring[] = INCBIN_U32("graphics/pokemon/ogerpon/wellspring/normal.gbapal.lz");
+const u32 gMonBackPic_OgerponWellspring[] = INCBIN_U32("graphics/pokemon/ogerpon/wellspring/back.4bpp.lz");
 // const u32 gMonShinyPalette_OgerponWellspring[] = INCBIN_U32("graphics/pokemon/ogerpon/wellspring/shiny.gbapal.lz");
 // const u8 gMonIcon_OgerponWellspring[] = INCBIN_U8("graphics/pokemon/ogerpon/wellspring/icon.4bpp");
 
-// const u32 gMonFrontPic_OgerponHearthflame[] = INCBIN_U32("graphics/pokemon/ogerpon/hearthflame/front.4bpp.lz");
-// const u32 gMonPalette_OgerponHearthflame[] = INCBIN_U32("graphics/pokemon/ogerpon/hearthflame/normal.gbapal.lz");
-// const u32 gMonBackPic_OgerponHearthflame[] = INCBIN_U32("graphics/pokemon/ogerpon/hearthflame/back.4bpp.lz");
+const u32 gMonFrontPic_OgerponHearthflame[] = INCBIN_U32("graphics/pokemon/ogerpon/hearthflame/front.4bpp.lz");
+const u32 gMonPalette_OgerponHearthflame[] = INCBIN_U32("graphics/pokemon/ogerpon/hearthflame/normal.gbapal.lz");
+const u32 gMonBackPic_OgerponHearthflame[] = INCBIN_U32("graphics/pokemon/ogerpon/hearthflame/back.4bpp.lz");
 // const u32 gMonShinyPalette_OgerponHearthflame[] = INCBIN_U32("graphics/pokemon/ogerpon/hearthflame/shiny.gbapal.lz");
 // const u8 gMonIcon_OgerponHearthflame[] = INCBIN_U8("graphics/pokemon/ogerpon/hearthflame/icon.4bpp");
 
-// const u32 gMonFrontPic_OgerponCornerstone[] = INCBIN_U32("graphics/pokemon/ogerpon/cornerstone/front.4bpp.lz");
-// const u32 gMonPalette_OgerponCornerstone[] = INCBIN_U32("graphics/pokemon/ogerpon/cornerstone/normal.gbapal.lz");
-// const u32 gMonBackPic_OgerponCornerstone[] = INCBIN_U32("graphics/pokemon/ogerpon/cornerstone/back.4bpp.lz");
+const u32 gMonFrontPic_OgerponCornerstone[] = INCBIN_U32("graphics/pokemon/ogerpon/cornerstone/front.4bpp.lz");
+const u32 gMonPalette_OgerponCornerstone[] = INCBIN_U32("graphics/pokemon/ogerpon/cornerstone/normal.gbapal.lz");
+const u32 gMonBackPic_OgerponCornerstone[] = INCBIN_U32("graphics/pokemon/ogerpon/cornerstone/back.4bpp.lz");
 // const u32 gMonShinyPalette_OgerponCornerstone[] = INCBIN_U32("graphics/pokemon/ogerpon/cornerstone/shiny.gbapal.lz");
 // const u8 gMonIcon_OgerponCornerstone[] = INCBIN_U8("graphics/pokemon/ogerpon/cornerstone/icon.4bpp");
 
