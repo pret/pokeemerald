@@ -10702,6 +10702,8 @@ static const union AnimCmd sAnim_EnamorusTherian_1[] =
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
+
+PLACEHOLDER_ANIM_SINGLE_FRAME(UrsalunaBloodmoon);
 #endif
 #if P_GEN_9_POKEMON == TRUE
 PLACEHOLDER_ANIM_SINGLE_FRAME(Sprigatito);
@@ -12077,6 +12079,7 @@ SINGLE_ANIMATION(LycanrocDusk);
 #endif
 #if P_GEN_8_POKEMON == TRUE
 SINGLE_ANIMATION(EnamorusTherian);
+SINGLE_ANIMATION(UrsalunaBloodmoon);
 #endif
 // Gigantamax Forms
 SINGLE_ANIMATION(VenusaurGigantamax);
@@ -13533,6 +13536,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_CALYREX_SHADOW_RIDER]           = sAnims_Calyrex,
     [SPECIES_ENAMORUS_THERIAN]               = sAnims_EnamorusTherian,
     [SPECIES_BASCULEGION_FEMALE]             = sAnims_Basculegion,
+    [SPECIES_URSALUNA_BLOODMOON]             = sAnims_UrsalunaBloodmoon,
 #endif
     [SPECIES_VENUSAUR_GIGANTAMAX]            = sAnims_VenusaurGigantamax,
     [SPECIES_CHARIZARD_GIGANTAMAX]           = sAnims_CharizardGigantamax,

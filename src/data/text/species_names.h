@@ -914,6 +914,7 @@ const u8 gSpeciesNames[NUM_SPECIES][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_WYRDEER] = _("Wyrdeer"),
     [SPECIES_KLEAVOR] = _("Kleavor"),
     [SPECIES_URSALUNA] = _("Ursaluna"),
+    [SPECIES_URSALUNA_BLOODMOON] = _("Ursaluna"),
     [SPECIES_BASCULEGION_MALE] = _("Bsculegion"),
     [SPECIES_SNEASLER] = _("Sneasler"),
     [SPECIES_OVERQWIL] = _("Overqwil"),
