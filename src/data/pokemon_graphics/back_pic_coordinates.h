@@ -1068,14 +1068,14 @@ const struct MonCoords gMonBackPicCoords[NUM_SPECIES + 1] =
     [SPECIES_OKIDOGI]                           = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  16 },
     [SPECIES_MUNKIDORI]                         = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_FEZANDIPITI]                       = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  4 },
-    [SPECIES_OGERPON_TEAL]                      = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  16 },
-    [SPECIES_OGERPON_WELLSPRING]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  16 },
-    [SPECIES_OGERPON_HEARTHFLAME]               = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  16 },
-    [SPECIES_OGERPON_CORNERSTONE]               = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  16 },
-    [SPECIES_OGERPON_TEAL_TERA]                 = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
-    [SPECIES_OGERPON_WELLSPRING_TERA]           = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
-    [SPECIES_OGERPON_HEARTHFLAME_TERA]          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
-    [SPECIES_OGERPON_CORNERSTONE_TERA]          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    [SPECIES_OGERPON_TEAL_MASK]                      = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  16 },
+    [SPECIES_OGERPON_WELLSPRING_MASK]                = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  16 },
+    [SPECIES_OGERPON_HEARTHFLAME_MASK]               = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  16 },
+    [SPECIES_OGERPON_CORNERSTONE_MASK]               = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  16 },
+    [SPECIES_OGERPON_TEAL_MASK_TERA]                 = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    [SPECIES_OGERPON_WELLSPRING_MASK_TERA]           = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    [SPECIES_OGERPON_HEARTHFLAME_MASK_TERA]          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    [SPECIES_OGERPON_CORNERSTONE_MASK_TERA]          = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
 
 #endif
 #if P_GEN_5_POKEMON == TRUE

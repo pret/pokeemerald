@@ -1045,15 +1045,14 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_OKIDOGI] = sOkidogiTeachableLearnset,
     [SPECIES_MUNKIDORI] = sMunkidoriTeachableLearnset,
     [SPECIES_FEZANDIPITI] = sFezandipitiTeachableLearnset,
-    [SPECIES_OGERPON_TEAL] = sOgerponTeachableLearnset,
-    [SPECIES_OGERPON_WELLSPRING] = sOgerponTeachableLearnset,
-    [SPECIES_OGERPON_HEARTHFLAME] = sOgerponTeachableLearnset,
-    [SPECIES_OGERPON_CORNERSTONE] = sOgerponTeachableLearnset,
-    [SPECIES_OGERPON_TEAL_TERA] = sOgerponTeachableLearnset,
-    [SPECIES_OGERPON_WELLSPRING_TERA] = sOgerponTeachableLearnset,
-    [SPECIES_OGERPON_HEARTHFLAME_TERA] = sOgerponTeachableLearnset,
-    [SPECIES_OGERPON_CORNERSTONE_TERA] = sOgerponTeachableLearnset,
-
+    [SPECIES_OGERPON_TEAL_MASK] = sOgerponTeachableLearnset,
+    [SPECIES_OGERPON_WELLSPRING_MASK] = sOgerponTeachableLearnset,
+    [SPECIES_OGERPON_HEARTHFLAME_MASK] = sOgerponTeachableLearnset,
+    [SPECIES_OGERPON_CORNERSTONE_MASK] = sOgerponTeachableLearnset,
+    [SPECIES_OGERPON_TEAL_MASK_TERA] = sOgerponTeachableLearnset,
+    [SPECIES_OGERPON_WELLSPRING_MASK_TERA] = sOgerponTeachableLearnset,
+    [SPECIES_OGERPON_HEARTHFLAME_MASK_TERA] = sOgerponTeachableLearnset,
+    [SPECIES_OGERPON_CORNERSTONE_MASK_TERA] = sOgerponTeachableLearnset,
 #endif
     // Megas
     [SPECIES_VENUSAUR_MEGA] = sVenusaurTeachableLearnset,
