@@ -741,7 +741,7 @@ u8 GetFactoryMonFixedIV(u8 challengeNum, bool8 isLastBattle)
     u8 ivSet;
     bool8 useHigherIV = isLastBattle ? TRUE : FALSE;
 
-// The Factory has an out-of-bounds access when generating the rental draft for round 9 (challengeNum==8), 
+// The Factory has an out-of-bounds access when generating the rental draft for round 9 (challengeNum==8),
 // or the "elevated" rentals from round 8 (challengeNum+1==8)
 // This happens to land on a number higher than 31, which is interpreted as "random IVs"
 #ifdef BUGFIX

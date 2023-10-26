@@ -1285,7 +1285,7 @@ static void Leader_HandleCommunication(void)
         if (sTradeMenu->playerSelectStatus == STATUS_READY
          && sTradeMenu->partnerSelectStatus == STATUS_READY)
         {
-            // Both players have selected a pokemon to trade 
+            // Both players have selected a pokemon to trade
             sTradeMenu->callbackId = CB_SET_SELECTED_MONS;
             sTradeMenu->linkData[0] = LINKCMD_SET_MONS_TO_TRADE;
             sTradeMenu->linkData[1] = sTradeMenu->cursorPosition;

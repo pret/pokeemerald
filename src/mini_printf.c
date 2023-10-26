@@ -41,7 +41,7 @@
 
 #ifndef NDEBUG
 
-struct mini_buff 
+struct mini_buff
 {
     char *buffer, *pbuffer;
     u32 buffer_len;
@@ -95,7 +95,7 @@ static s32 _putsAscii(char *s, s32 len, void *buf)
     s32 i;
     struct mini_buff *b;
 
-    if (!buf) 
+    if (!buf)
         return len;
 
     b = buf;
@@ -118,7 +118,7 @@ static s32 _putsEncoded(char *s, s32 len, void *buf)
     s32 i;
     struct mini_buff *b;
 
-    if (!buf) 
+    if (!buf)
         return len;
 
     b = buf;
@@ -159,7 +159,7 @@ static s32 mini_itoa(s32 value, u32 radix, s32 uppercase, bool32 unsig, char *bu
     }
 
     /* This builds the string back to front ... */
-    do 
+    do
     {
         s32 digit = value % radix;
         *(pbuffer++) = (digit < 10 ? '0' + digit : (uppercase ? 'A' : 'a') + digit - 10);
@@ -243,7 +243,7 @@ s32 mini_vpprintf(void* buf, const char *fmt, va_list va)
         {
             len = 1;
             len = _putsAscii(&ch, len, buf);
-        } else 
+        } else
         {
             char pad_char = ' ';
             s32 pad_to = 0;
@@ -270,7 +270,7 @@ s32 mini_vpprintf(void* buf, const char *fmt, va_list va)
                 ch=*(fmt++);
             }
 
-            switch (ch) 
+            switch (ch)
             {
                 case 0:
                     goto end;
