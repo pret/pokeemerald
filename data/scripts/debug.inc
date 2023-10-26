@@ -104,13 +104,26 @@ Debug_CheckSaveBlock::
 	end
 
 Debug_SaveBlock1Size::
-	.string "SaveBlock1 size: {STR_VAR_1}/{STR_VAR_2}.$"
+	.string "SaveBlock1 size: {STR_VAR_1}b/{STR_VAR_2}b.\n"
+	.string "Free space: {STR_VAR_3}b.$"
 
 Debug_SaveBlock2Size::
-	.string "SaveBlock2 size: {STR_VAR_1}/{STR_VAR_2}.$"
+	.string "SaveBlock2 size: {STR_VAR_1}b/{STR_VAR_2}b.\n"
+	.string "Free space: {STR_VAR_3}b.$"
 
 Debug_PokemonStorageSize::
-	.string "{PKMN}Storage size: {STR_VAR_1}/{STR_VAR_2}.$"
+	.string "{PKMN}Storage size: {STR_VAR_1}b/{STR_VAR_2}b.\n"
+	.string "Free space: {STR_VAR_3}b.$"
+
+Debug_CheckROMSpace::
+	callnative CheckROMSize
+	msgbox Debug_ROMSize, MSGBOX_DEFAULT
+	release
+	end
+
+Debug_ROMSize::
+	.string "ROM size: {STR_VAR_1}MB/32MB.\n"
+	.string "Free space: {STR_VAR_2}MB.$"
 
 Debug_HatchAnEgg::
 	lockall
@@ -142,28 +155,28 @@ DebugScript_HatchAnEgg_Text_EmptyParty::
 
 DebugScript_HatchAnEgg_Text_NotAnEgg::
 	.string "That's not a Pokémon Egg.$"
-	
+
 DebugScript_ZeroDaycareMons::
 	msgbox DebugText_DaycareNoPokemon, MSGBOX_DEFAULT
 	releaseall
 	end
-	
+
 DebugScript_OneDaycareMons::
 	msgbox DebugText_DaycareOnePokemon, MSGBOX_DEFAULT
 	releaseall
 	end
-	
+
 DebugScript_DaycareMonsNotCompatible::
 	msgbox DebugText_DaycarePokemonNotCompatible, MSGBOX_DEFAULT
 	releaseall
 	end
-	
+
 DebugText_DaycareNoPokemon:
 	.string "You have no Pokémon at Daycare.$"
-	
+
 DebugText_DaycareOnePokemon:
 	.string "You have only one Pokémon at Daycare.$"
-	
+
 DebugText_DaycarePokemonNotCompatible:
 	.string "Your Pokémon at Daycare can't\nhave babies together!$"
 

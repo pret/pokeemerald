@@ -21,13 +21,12 @@ SINGLE_BATTLE_TEST("Micle Berry raises the holder's accuracy by 1.2 when HP drop
         TURN { MOVE(opponent, move); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, move, opponent);
-        if (move == MOVE_TACKLE)
-        {
-            NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
-            NOT MESSAGE("Wobbuffet boosted the accuracy of its next move using Micle Berry!");
-        }
-        else
-        {
+        if (move == MOVE_TACKLE) {
+            NONE_OF {
+                ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
+                MESSAGE("Wobbuffet boosted the accuracy of its next move using Micle Berry!");
+            }
+        } else {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
             MESSAGE("Wobbuffet boosted the accuracy of its next move using Micle Berry!");
         }
@@ -64,5 +63,3 @@ SINGLE_BATTLE_TEST("Micle Berry raises the holder's accuracy by 1.2")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUBMISSION, player);
     }
 }
-
-

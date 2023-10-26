@@ -149,8 +149,10 @@ SINGLE_BATTLE_TEST("Teatime does not affect Pokémon in the semi-invulnerable tu
         }
     } SCENE {
         MESSAGE("Wobbuffet used Teatime!");
-        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, player);
-        NOT MESSAGE("Using Liechi Berry, the Attack of Foe Wobbuffet rose!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, player);
+            MESSAGE("Using Liechi Berry, the Attack of Foe Wobbuffet rose!");
+        }
     }
 }
 

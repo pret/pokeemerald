@@ -20,10 +20,12 @@ SINGLE_BATTLE_TEST("Flame Body inflicts burn on contact")
             MESSAGE("Foe Magmar's Flame Body burned Wobbuffet!");
             STATUS_ICON(player, burn: TRUE);
         } else {
-            NOT ABILITY_POPUP(opponent, ABILITY_FLAME_BODY);
-            NOT ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, player);
-            NOT MESSAGE("Foe Magmar's Flame Body burned Wobbuffet!");
-            NOT STATUS_ICON(player, burn: TRUE);
+            NONE_OF {
+                ABILITY_POPUP(opponent, ABILITY_FLAME_BODY);
+                ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, player);
+                MESSAGE("Foe Magmar's Flame Body burned Wobbuffet!");
+                STATUS_ICON(player, burn: TRUE);
+            }
         }
     }
 }
