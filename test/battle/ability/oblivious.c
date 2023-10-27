@@ -63,6 +63,6 @@ SINGLE_BATTLE_TEST("Oblivious prevents Intimidate")
         ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
         ABILITY_POPUP(player, ABILITY_OBLIVIOUS);
         NONE_OF { ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player); }
-        MESSAGE("Slowpoke's Attack was not lowered!");
+        MESSAGE("Slowpoke's Oblivious prevents stat loss!");
     }
 }
