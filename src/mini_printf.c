@@ -328,7 +328,7 @@ s32 mini_vpprintf(void* buf, const char *fmt, va_list va)
                     break;
                 case 'S' : // preproc encoded string handler
                     ptr = va_arg(va, char*);
-                    len = StringLength(ptr);
+                    len = StringLength((u8*)ptr);
                     if (pad_to > 0)
                     {
                         len = mini_pad(ptr, len, pad_char, pad_to, bf);

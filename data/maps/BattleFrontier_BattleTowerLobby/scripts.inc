@@ -423,7 +423,7 @@ BattleFrontier_BattleTowerLobby_EventScript_SaveBeforeLinkMultisChallenge::
 	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleTowerLobby_EventScript_CancelChallengeSaveFailed
 @ GAME_STAT_ENTERED_BATTLE_TOWER should not be incremented here, for two reasons:
 @ 1. It is incremented again in BattleFrontier_BattleTowerLobby_EventScript_CableLinkSuccessful or BattleFrontier_BattleTowerLobby_EventScript_WirelessLinkSuccessful
-@ 2. If the player tries to save, but fails, the counter will still be incremented even if the player never enters the tower.
+@ 2. If the player tries to connect, but fails, the counter will still be incremented even if the player never enters the tower.
 .ifndef BUGFIX
 	incrementgamestat GAME_STAT_ENTERED_BATTLE_TOWER
 .endif
