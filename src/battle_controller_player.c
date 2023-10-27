@@ -707,11 +707,8 @@ static void HandleInputChooseMove(u32 battler)
         }
 
         // Status moves turn into Max Guard when Dynamaxed, targets user.
-        if ((IsDynamaxed(battler) || gBattleStruct->dynamax.playerSelect)
-            && gBattleMoves[moveInfo->moves[gMoveSelectionCursor[battler]]].split == SPLIT_STATUS)
-        {
-            moveTarget = MOVE_TARGET_USER;
-        }
+        if ((IsDynamaxed(battler) || gBattleStruct->dynamax.playerSelect))
+            moveTarget = gBattleMoves[GetMaxMove(battler, moveInfo->moves[gMoveSelectionCursor[battler]])].target;
 
         if (moveTarget & MOVE_TARGET_USER)
             gMultiUsePlayerCursor = battler;

@@ -322,7 +322,6 @@ void HandleAction_UseMove(void)
         gCurrentMove = gBattleStruct->zmove.toBeUsed[gBattlerAttacker];
     }
 
-    moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
 
     if (gBattleMons[gBattlerAttacker].hp != 0)
     {
@@ -342,6 +341,8 @@ void HandleAction_UseMove(void)
         gCurrentMove = gChosenMove = GetMaxMove(gBattlerAttacker, gCurrentMove);
         gBattleStruct->dynamax.activeSplit = gBattleStruct->dynamax.splits[gBattlerAttacker];
     }
+
+    moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
 
     // choose target
     side = BATTLE_OPPOSITE(GetBattlerSide(gBattlerAttacker));
@@ -8193,10 +8194,10 @@ bool32 IsBattlerProtected(u32 battler, u32 move)
 
     // Z-Moves and Max Moves bypass protection (except Max Guard).
     if ((IsMaxMove(move) || gBattleStruct->zmove.active)
-         && (!gProtectStructs[battler].maxGuarded 
+         && (!gProtectStructs[battler].maxGuarded
              || gBattleMoves[move].argument == MAX_EFFECT_BYPASS_PROTECT))
         return FALSE;
-    
+
     // Max Guard is silly about the moves it blocks, including Teatime.
     if (gProtectStructs[battler].maxGuarded && IsMoveBlockedByMaxGuard(move))
         return TRUE;
