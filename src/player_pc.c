@@ -222,7 +222,7 @@ static const struct MenuAction sItemStorage_MenuActions[] =
     [MENU_EXIT]     = { gText_Cancel,       {ItemStorage_Exit} }
 };
 
-static const struct ItemSlot sNewGamePCItems[] =
+static const u16 sNewGamePCItems[][2] =
 {
     { ITEM_POTION, 1 },
     { ITEM_NONE, 0 }
@@ -355,16 +355,20 @@ static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMPC_WIN_COUNT
 
 static const u8 sSwapArrowTextColors[] = {TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_DARK_GRAY};
 
-// Macro below is likely a fakematch, equivalent to sNewGamePCItems[i].quantity
-#define GET_QUANTITY(i) ((u16)((u16 *)sNewGamePCItems + 1)[i * 2])
 void NewGameInitPCItems(void)
 {
     u8 i = 0;
     ClearItemSlots(gSaveBlock1Ptr->pcItems, PC_ITEMS_COUNT);
-    for(; sNewGamePCItems[i].itemId != ITEM_NONE && GET_QUANTITY(i) &&
-        AddPCItem(sNewGamePCItems[i].itemId, GET_QUANTITY(i)) == TRUE; i++);
+
+    while (TRUE)
+    {
+        if (sNewGamePCItems[i][0] == ITEM_NONE || sNewGamePCItems[i][1] == 0)
+            break;
+        if (AddPCItem(sNewGamePCItems[i][0], sNewGamePCItems[i][1]) != TRUE)
+            break;
+        i++;
+    }
 }
-#undef GET_QUANTITY
 
 void BedroomPC(void)
 {
