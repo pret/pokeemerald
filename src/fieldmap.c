@@ -681,7 +681,7 @@ bool8 CameraMove(int x, int y)
         {
             DebugPrintfLevel(MGBA_LOG_WARN, "GetIncomingConnection returned an invalid connection inside CameraMove!");
         }
-        
+
     }
     return gCamera.active;
 }

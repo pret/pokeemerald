@@ -604,7 +604,7 @@ static const u8 sSpeciesToBackAnimSet[NUM_SPECIES] =
     [SPECIES_JIRACHI]                      = BACK_ANIM_CONVEX_DOUBLE_ARC,
     [SPECIES_DEOXYS]                       = BACK_ANIM_SHRINK_GROW_VIBRATE,
     [SPECIES_CHIMECHO]                     = BACK_ANIM_CONVEX_DOUBLE_ARC,
-    
+
         // Gen 4
     [SPECIES_TURTWIG]                      = BACK_ANIM_H_SLIDE,
     [SPECIES_GROTLE]                       = BACK_ANIM_H_SLIDE,
@@ -713,7 +713,7 @@ static const u8 sSpeciesToBackAnimSet[NUM_SPECIES] =
     [SPECIES_DARKRAI]                      = BACK_ANIM_SHRINK_GROW_VIBRATE,
     [SPECIES_SHAYMIN]                      = BACK_ANIM_CONCAVE_ARC_SMALL,
     [SPECIES_ARCEUS]                       = BACK_ANIM_GROW,
-        
+
         //Gen 4 Forms
     [SPECIES_DEOXYS_ATTACK]                = BACK_ANIM_GROW_STUTTER,
     [SPECIES_DEOXYS_DEFENSE]               = BACK_ANIM_DIP_RIGHT_SIDE,
@@ -749,7 +749,7 @@ static const u8 sSpeciesToBackAnimSet[NUM_SPECIES] =
     [SPECIES_ARCEUS_DRAGON]                = BACK_ANIM_GROW_STUTTER,
     [SPECIES_ARCEUS_DARK]                  = BACK_ANIM_GROW_STUTTER,
     [SPECIES_ARCEUS_FAIRY]                 = BACK_ANIM_GROW_STUTTER,
-    
+
     // Gen 5
     [SPECIES_VICTINI]                      = BACK_ANIM_H_SHAKE,
     [SPECIES_SNIVY]                        = BACK_ANIM_H_SLIDE,
@@ -812,7 +812,7 @@ static const u8 sSpeciesToBackAnimSet[NUM_SPECIES] =
     [SPECIES_KROKOROK]                     = BACK_ANIM_V_STRETCH,
     [SPECIES_KROOKODILE]                   = BACK_ANIM_V_SHAKE_LOW,
     [SPECIES_DARUMAKA]                     = BACK_ANIM_CONCAVE_ARC_LARGE,
-    [SPECIES_DARMANITAN]                   = BACK_ANIM_V_SHAKE_H_SLIDE, 
+    [SPECIES_DARMANITAN]                   = BACK_ANIM_V_SHAKE_H_SLIDE,
     [SPECIES_MARACTUS]                     = BACK_ANIM_CONCAVE_ARC_LARGE,
     [SPECIES_DWEBBLE]                      = BACK_ANIM_H_SLIDE,
     [SPECIES_CRUSTLE]                      = BACK_ANIM_V_SHAKE_LOW,
@@ -928,7 +928,7 @@ static const u8 sSpeciesToBackAnimSet[NUM_SPECIES] =
     [SPECIES_GENESECT_SHOCK_DRIVE]         = BACK_ANIM_CIRCLE_COUNTERCLOCKWISE,
     [SPECIES_GENESECT_BURN_DRIVE]          = BACK_ANIM_CIRCLE_COUNTERCLOCKWISE,
     [SPECIES_GENESECT_CHILL_DRIVE]         = BACK_ANIM_CIRCLE_COUNTERCLOCKWISE,
-    
+
     //Gen 6
     [SPECIES_CHESPIN]                      = BACK_ANIM_H_SLIDE,
     [SPECIES_QUILLADIN]                    = BACK_ANIM_GROW,
@@ -1002,7 +1002,7 @@ static const u8 sSpeciesToBackAnimSet[NUM_SPECIES] =
     [SPECIES_DIANCIE]                      = BACK_ANIM_CIRCLE_COUNTERCLOCKWISE,
     [SPECIES_HOOPA]                        = BACK_ANIM_CONVEX_DOUBLE_ARC,
     [SPECIES_VOLCANION]                    = BACK_ANIM_SHAKE_GLOW_RED,
-    
+
         //Gen 6 Forms
     [SPECIES_GRENINJA_ASH]                 = BACK_ANIM_SHAKE_GLOW_BLUE,
     [SPECIES_GRENINJA_BATTLE_BOND]         = BACK_ANIM_V_STRETCH,
@@ -1061,7 +1061,7 @@ static const u8 sSpeciesToBackAnimSet[NUM_SPECIES] =
     [SPECIES_ZYGARDE_50_POWER_CONSTRUCT]   = BACK_ANIM_SHAKE_GLOW_GREEN,
     [SPECIES_ZYGARDE_COMPLETE]             = BACK_ANIM_SHAKE_GLOW_GREEN,
     [SPECIES_HOOPA_UNBOUND]                = BACK_ANIM_V_SHAKE_LOW,
-    
+
     //Gen 6 Megas (Thanks Furret/CyanSMP64!)
     [SPECIES_VENUSAUR_MEGA]                = BACK_ANIM_SHAKE_GLOW_GREEN,
     [SPECIES_CHARIZARD_MEGA_X]             = BACK_ANIM_SHAKE_GLOW_BLUE,
@@ -1111,7 +1111,7 @@ static const u8 sSpeciesToBackAnimSet[NUM_SPECIES] =
     [SPECIES_RAYQUAZA_MEGA]                = BACK_ANIM_SHAKE_GLOW_GREEN,
     [SPECIES_KYOGRE_PRIMAL]                = BACK_ANIM_SHAKE_GLOW_BLUE,
     [SPECIES_GROUDON_PRIMAL]               = BACK_ANIM_SHAKE_GLOW_RED,
-    
+
 };
 
 // Equivalent to struct YellowFlashData, but doesn't match as a struct

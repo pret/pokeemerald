@@ -3672,13 +3672,13 @@ static void Task_BounceBall(u8 taskId)
             sprite->callback = SpriteCB_LastUsedBallBounce; //Show and bounce down
             task->sState++;
         }
-        break;     
+        break;
     case 4:  // Destroy Task
         if(!sprite->sMoving)
         {
             sprite->callback = SpriteCB_LastUsedBall;
             DestroyTask(taskId);
-        }        
+        }
     }
     if (!gLastUsedBallMenuPresent)
     {
