@@ -6051,24 +6051,43 @@ const u8 gIronLeavesPokedexText[] = _(
     "Ecology under research.");
 
 const u8 gDipplinPokedexText[] = _(
-    "Ecology under research.");
+    "Dipplin is two creatures in one Pokémon.\n"
+    "Its evolution was triggered by a special\n"
+    "apple grown only in one place.");
 
 const u8 gPoltchageistPokedexText[] = _(
-    "Ecology under research.");
+    "Supposedly, the regrets of a tea\n"
+    "ceremony master who died before\n"
+    "perfecting his craft lingered in some\n"
+    "matcha and became a Pokémon.");
 
 const u8 gSinistchaPokedexText[] = _(
-    "Ecology under research.");
+    "It pretends to be tea, trying to fool\n"
+    "people into drinking it so it can\n"
+    "drain their life-force. Its ruse is\n"
+    "generally unsuccessful.");
 
 const u8 gOkidogiPokedexText[] = _(
-    "Ecology under research.");
+    "After all its muscles were stimulated\n"
+    "by the toxic chain around its neck,\n"
+    "Okidogi transformed and gained\n"
+    "a powerful physique.");
 
 const u8 gMunkidoriPokedexText[] = _(
-    "Ecology under research.");
+    "The chain is made from toxins that\n"
+    "enhance capabilities. It stimulated\n"
+    "Munkidori's brain and caused the\n"
+    "Pokémon's psychic powers to bloom.");
 
 const u8 gFezandipitiPokedexText[] = _(
-    "Ecology under research.");
+    "Fezandipiti owes its beautiful looks and\n"
+    "lovely voice to the toxic stimulants\n"
+    "emanating from the chain wrapped around\n"
+    "its body.");
 
 const u8 gOgerponPokedexText[] = _(
-    "Ecology under research.");
+    "This Pokémon's type changes based on which\n"
+    "mask it's wearing. It confounds its enemies\n"
+    "with nimble movements and kicks.");
 
 #endif
