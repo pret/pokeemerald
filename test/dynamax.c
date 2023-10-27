@@ -1294,8 +1294,8 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Finale heals allies by 1/6 of their health")
         HP_BAR(playerLeft, captureDamage: &damage1);
         HP_BAR(playerRight, captureDamage: &damage2);
     } THEN {
-        EXPECT_MUL_EQ(playerLeft->hp - 1, Q_4_12(6), playerLeft->maxHP); // heals based on Dynamax HP
-        EXPECT_MUL_EQ(playerRight->hp - 1, Q_4_12(6), playerRight->maxHP);
+        EXPECT_MUL_EQ(-damage1, Q_4_12(6), playerLeft->maxHP); // heals based on Dynamax HP
+        EXPECT_MUL_EQ(-damage2, Q_4_12(6), playerRight->maxHP);
     }
 }
 
