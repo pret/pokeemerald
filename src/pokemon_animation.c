@@ -777,7 +777,7 @@ static const u8 sSpeciesToBackAnimSet[NUM_SPECIES] =
     [SPECIES_KROKOROK]                     = BACK_ANIM_V_STRETCH,
     [SPECIES_KROOKODILE]                   = BACK_ANIM_V_SHAKE_LOW,
     [SPECIES_DARUMAKA]                     = BACK_ANIM_CONCAVE_ARC_LARGE,
-    [SPECIES_DARMANITAN_STANDARD_MODE]     = BACK_ANIM_V_SHAKE_H_SLIDE, 
+    [SPECIES_DARMANITAN_STANDARD_MODE]     = BACK_ANIM_V_SHAKE_H_SLIDE,
     [SPECIES_MARACTUS]                     = BACK_ANIM_CONCAVE_ARC_LARGE,
     [SPECIES_DWEBBLE]                      = BACK_ANIM_H_SLIDE,
     [SPECIES_CRUSTLE]                      = BACK_ANIM_V_SHAKE_LOW,
@@ -872,7 +872,7 @@ static const u8 sSpeciesToBackAnimSet[NUM_SPECIES] =
     [SPECIES_KELDEO_ORDINARY]              = BACK_ANIM_JOLT_RIGHT,
     [SPECIES_MELOETTA_ARIA]                = BACK_ANIM_CONVEX_DOUBLE_ARC,
     [SPECIES_GENESECT]                     = BACK_ANIM_CIRCLE_COUNTERCLOCKWISE,
-    
+
     // Gen 6
     [SPECIES_CHESPIN]                      = BACK_ANIM_H_SLIDE,
     [SPECIES_QUILLADIN]                    = BACK_ANIM_GROW,

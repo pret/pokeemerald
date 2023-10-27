@@ -1980,7 +1980,7 @@ void MoveGetIdAndSlot(s32 battlerId, struct MoveContext *ctx, u32 *moveId, u32 *
 
     if (ctx->explicitUltraBurst && ctx->ultraBurst)
         *moveSlot |= RET_ULTRA_BURST;
-    
+
     if (ctx->explicitDynamax && ctx->dynamax)
         *moveSlot |= RET_DYNAMAX;
 }

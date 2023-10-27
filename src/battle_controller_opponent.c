@@ -561,13 +561,13 @@ static void OpponentHandleChooseMove(u32 battler)
                     if (ShouldUseZMove(battler, gBattlerTarget, chosenMove))
                         QueueZMove(battler, chosenMove);
                     // If opponent can Mega Evolve, do it.
-                    if (CanMegaEvolve(battler)) 
+                    if (CanMegaEvolve(battler))
                         BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
                     // If opponent can Ultra Burst, do it.
                     else if (CanUltraBurst(battler))
                         BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_ULTRA_BURST) | (gBattlerTarget << 8));
                     // If opponent can Dynamax and is on final Pokemon, do it.
-                    else if (CanDynamax(battler) && CountAIAliveNonEggMonsExcept(gBattlerPartyIndexes[battler]) == 0) 
+                    else if (CanDynamax(battler) && CountAIAliveNonEggMonsExcept(gBattlerPartyIndexes[battler]) == 0)
                         BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_DYNAMAX) | (gBattlerTarget << 8));
                     else
                         BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
