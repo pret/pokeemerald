@@ -24,24 +24,24 @@
 #define NUMBER_OF_MON_TYPES   18
 
 // Pokemon egg groups
-#define EGG_GROUP_NONE          0
-#define EGG_GROUP_MONSTER       1
-#define EGG_GROUP_WATER_1       2
-#define EGG_GROUP_BUG           3
-#define EGG_GROUP_FLYING        4
-#define EGG_GROUP_FIELD         5
-#define EGG_GROUP_FAIRY         6
-#define EGG_GROUP_GRASS         7
-#define EGG_GROUP_HUMAN_LIKE    8
-#define EGG_GROUP_WATER_3       9
-#define EGG_GROUP_MINERAL       10
-#define EGG_GROUP_AMORPHOUS     11
-#define EGG_GROUP_WATER_2       12
-#define EGG_GROUP_DITTO         13
-#define EGG_GROUP_DRAGON        14
-#define EGG_GROUP_UNDISCOVERED  15
+#define EGG_GROUP_NONE                0
+#define EGG_GROUP_MONSTER             1
+#define EGG_GROUP_WATER_1             2
+#define EGG_GROUP_BUG                 3
+#define EGG_GROUP_FLYING              4
+#define EGG_GROUP_FIELD               5
+#define EGG_GROUP_FAIRY               6
+#define EGG_GROUP_GRASS               7
+#define EGG_GROUP_HUMAN_LIKE          8
+#define EGG_GROUP_WATER_3             9
+#define EGG_GROUP_MINERAL             10
+#define EGG_GROUP_AMORPHOUS           11
+#define EGG_GROUP_WATER_2             12
+#define EGG_GROUP_DITTO               13
+#define EGG_GROUP_DRAGON              14
+#define EGG_GROUP_NO_EGGS_DISCOVERED  15
 
-#define EGG_GROUPS_PER_MON      2
+#define EGG_GROUPS_PER_MON            2
 
 // Pokemon natures
 #define NATURE_HARDY    0
