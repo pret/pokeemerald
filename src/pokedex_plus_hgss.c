@@ -125,12 +125,12 @@ extern const struct PokedexEntry gPokedexEntries[];
 
 // static .rodata strings
 
-static const u8 sText_No000[] = _("{NO}000");
+static const u8 sText_No000[] = _("000");
+static const u8 sText_No0000[] = _("0000");
 static const u8 sCaughtBall_Gfx[] = INCBIN_U8("graphics/pokedex/caught_ball.4bpp");
 static const u8 sText_TenDashes[] = _("----------");
 ALIGNED(4) static const u8 sExpandedPlaceholder_PokedexDescription[] = _("");
 static const u16 sSizeScreenSilhouette_Pal[] = INCBIN_U16("graphics/pokedex/size_silhouette.gbapal");
-static const u8 sText_TenDashes2[] = _("----------");
 
 static const u8 sText_Stats_Buttons[] = _("{A_BUTTON}TOGGLE   {DPAD_UPDOWN}MOVES");
 static const u8 sText_Stats_Buttons_Decapped[] = _("{A_BUTTON}Toggle   {DPAD_UPDOWN}Moves");
@@ -2691,7 +2691,7 @@ static void PrintMonDexNumAndName(u8 windowId, u8 fontId, const u8 *str, u8 left
     color[0] = TEXT_COLOR_TRANSPARENT;
     color[1] = TEXT_DYNAMIC_COLOR_6;
     color[2] = TEXT_COLOR_LIGHT_GRAY;
-    AddTextPrinterParameterized4(windowId, fontId, left * 8, (top * 8) + 1, 0, 0, color, TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized4(windowId, fontId, left * 8 - 4, (top * 8) + 1, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
 static void PrintMonDexNumAndName_2(u8 windowId, u8 fontId, const u8* str, u8 left, u8 top) //offset for closer numer + text
@@ -2701,7 +2701,7 @@ static void PrintMonDexNumAndName_2(u8 windowId, u8 fontId, const u8* str, u8 le
     color[0] = TEXT_COLOR_TRANSPARENT;
     color[1] = TEXT_DYNAMIC_COLOR_6;
     color[2] = TEXT_COLOR_LIGHT_GRAY;
-    AddTextPrinterParameterized4(windowId, fontId, left * 8 - 3, (top * 8) + 1, 0, 0, color, -1, str);
+    AddTextPrinterParameterized4(windowId, fontId, left * 8 - 13, (top * 8) + 1, 0, 0, color, -1, str);
 }
 
 // u16 ignored is passed but never used
@@ -2795,25 +2795,40 @@ static void CreateMonListEntry(u8 position, u16 b, u16 ignored)
 
 static void CreateMonDexNum(u16 entryNum, u8 left, u8 top, u16 unused)
 {
-    u8 text[6];
+#if P_DEX_FOUR_DIGITS_AMOUNT == TRUE
+    u8 text[5];
+#else
+    u8 text[4];
+#endif
     u16 dexNum;
 
-    memcpy(text, sText_No000, ARRAY_COUNT(text));
     dexNum = sPokedexView->pokedexList[entryNum].dexNum;
     if (sPokedexView->dexMode == DEX_MODE_HOENN)
         dexNum = NationalToHoennOrder(dexNum);
+    if (sPokedexView->dexMode == DEX_MODE_HOENN || !P_DEX_FOUR_DIGITS_AMOUNT)
+    {
+        memcpy(text, sText_No000, ARRAY_COUNT(sText_No000));
         text[2] = CHAR_0 + dexNum / 100;
         text[3] = CHAR_0 + (dexNum % 100) / 10;
         text[4] = CHAR_0 + (dexNum % 100) % 10;
+    }
+    else
+    {
+        memcpy(text, sText_No0000, ARRAY_COUNT(sText_No0000));
+        text[0] = CHAR_0 + dexNum / 1000;
+        text[1] = CHAR_0 + (dexNum % 1000) / 100;
+        text[2] = CHAR_0 + (dexNum % 100) / 10;
+        text[3] = CHAR_0 + (dexNum % 10);
+    }
     PrintMonDexNumAndName(0, FONT_NARROW, text, left, top);
 }
 
 static void CreateCaughtBall(bool16 owned, u8 x, u8 y, u16 unused)
 {
     if (owned)
-        BlitBitmapToWindow(0, sCaughtBall_Gfx, x * 8, y * 8, 8, 16);
+        BlitBitmapToWindow(0, sCaughtBall_Gfx, x * 6, y * 8, 8, 16);
     else
-        FillWindowPixelRect(0, PIXEL_FILL(0), x * 8, y * 8, 8, 16);
+        FillWindowPixelRect(0, PIXEL_FILL(0), x * 6, y * 8, 8, 16);
 }
 
 static u8 CreateMonName(u16 num, u8 left, u8 top)
@@ -2831,7 +2846,7 @@ static u8 CreateMonName(u16 num, u8 left, u8 top)
 
 static void ClearMonListEntry(u8 x, u8 y, u16 unused)
 {
-    FillWindowPixelRect(0, PIXEL_FILL(0), x * 8, y * 8, 0x60, 16);
+    FillWindowPixelRect(0, PIXEL_FILL(0), x * 6, y * 8, 0x60, 16);
 }
 
 // u16 ignored is passed but never used
@@ -3150,7 +3165,7 @@ static u32 CreatePokedexMonSprite(u16 num, s16 x, s16 y)
 
 #define sIsDownArrow data[1]
 #define LIST_RIGHT_SIDE_TEXT_X 204
-#define LIST_RIGHT_SIDE_TEXT_X_OFFSET 12
+#define LIST_RIGHT_SIDE_TEXT_X_OFFSET 13
 #define LIST_RIGHT_SIDE_TEXT_Y_OFFSET 13
 static void CreateInterfaceSprites(u8 page)
 {
@@ -3228,7 +3243,7 @@ static void CreateInterfaceSprites(u8 page)
     {
         u16 seenOwnedCount;
         u8 counterXDist  = 6;
-        u8 counterX1s    = LIST_RIGHT_SIDE_TEXT_X + 28 - (sPokedexView->seenCount > 999 ? 0 : 1);
+        u8 counterX1s    = LIST_RIGHT_SIDE_TEXT_X + LIST_RIGHT_SIDE_TEXT_X_OFFSET + 16 - (sPokedexView->seenCount > 999 ? 0 : 1);
         u8 counterX10s   = counterX1s - counterXDist;
         u8 counterX100s  = counterX10s - counterXDist;
         u8 counterX1000s = counterX100s - counterXDist;
@@ -4479,7 +4494,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     if (species)
         name = gSpeciesNames[species];
     else
-        name = sText_TenDashes2;
+        name = sText_TenDashes;
     PrintInfoScreenTextWhite(name, 157, 17);
     if (owned)
     {
