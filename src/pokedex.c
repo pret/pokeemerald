@@ -2891,7 +2891,7 @@ static void CreateInterfaceSprites(u8 page)
         {
             u16 seenOwnedCount;
             // Changes sprite distance based on the seen count (owned count can't ever be bigger than it)
-            u8 counterXDist  = sPokedexView->seenCount > 999 ? 7 : 8;
+            u8 counterXDist  = 7;
             u8 counterX1s    = sPokedexView->seenCount > 999 ? 57 : 56;
             u8 counterX10s   = counterX1s - counterXDist;
             u8 counterX100s  = counterX10s - counterXDist;
