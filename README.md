@@ -28,6 +28,10 @@ There are several branches, each with one main feature (and sometimes some extra
 * WIP interframe-blended lamp lights at night, i.e in Rustboro.
 * HGSS-style alpha-blended shadows for object events.
 
+**just-lighting** branch:
+* `lighting-expanded-id` but with following pokémon code & assets completely removed. (This allows for more than 255 OW graphics)
+* Saves with following pokémon can safely be loaded.
+
 Additional branches  to mention:
 
 * `followers-expanded-id` - like `followers`, but includes backwards-compatible 16-bit graphics IDs for object events.
