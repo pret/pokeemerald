@@ -8834,7 +8834,13 @@ static void UpdateObjectEventElevationAndPriority(struct ObjectEvent *objEvent, 
         // keep subspriteMode synced with player's
         // so that it disappears under bridges when they do
         sprite->subspriteMode |= gSprites[gPlayerAvatar.spriteId].subspriteMode & SUBSPRITES_IGNORE_PRIORITY;
+        if (!objEvent->currentElevation)
+            objEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     }
+    #else
+    // if transitioning between elevations, use the player's elevation
+    if (!objEvent->currentElevation && objEvent->localId == OBJ_EVENT_ID_FOLLOWER)
+        objEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     #endif
 
     sprite->subspriteTableNum = sElevationToSubspriteTableNum[objEvent->previousElevation];
@@ -8887,6 +8893,10 @@ static void ObjectEventUpdateSubpriority(struct ObjectEvent *objEvent, struct Sp
 {
     if (objEvent->fixedPriority)
         return;
+
+    // If transitioning between elevations, use the player's elevation
+    if (!objEvent->currentElevation && objEvent->localId == OBJ_EVENT_ID_FOLLOWER)
+        objEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     SetObjectSubpriorityByElevation(objEvent->previousElevation, sprite, 1);
 }
