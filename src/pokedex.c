@@ -2428,31 +2428,22 @@ static void CreateMonListEntry(u8 position, u16 b, u16 ignored)
 
 static void CreateMonDexNum(u16 entryNum, u8 left, u8 top, u16 unused)
 {
-#if P_DEX_FOUR_DIGITS_AMOUNT == TRUE
     u8 text[7];
-#else
-    u8 text[6];
-#endif
-    u16 dexNum;
+    u16 dexNum, offset = 2;
 
     dexNum = sPokedexView->pokedexList[entryNum].dexNum;
     if (sPokedexView->dexMode == DEX_MODE_HOENN)
         dexNum = NationalToHoennOrder(dexNum);
-    if (sPokedexView->dexMode == DEX_MODE_HOENN || !P_DEX_FOUR_DIGITS_AMOUNT)
+    memcpy(text, sText_No0000, ARRAY_COUNT(sText_No0000));
+    if (NATIONAL_DEX_COUNT > 999)
     {
-        memcpy(text, sText_No000, ARRAY_COUNT(sText_No000));
-        text[2] = CHAR_0 + dexNum / 100;
-        text[3] = CHAR_0 + (dexNum % 100) / 10;
-        text[4] = CHAR_0 + (dexNum % 100) % 10;
-    }
-    else
-    {
-        memcpy(text, sText_No0000, ARRAY_COUNT(sText_No0000));
         text[2] = CHAR_0 + dexNum / 1000;
-        text[3] = CHAR_0 + (dexNum % 1000) / 100;
-        text[4] = CHAR_0 + (dexNum % 100) / 10;
-        text[5] = CHAR_0 + (dexNum % 10);
+        offset++;
     }
+    text[offset] = CHAR_0 + (dexNum % 1000) / 100;
+    text[offset + 1] = CHAR_0 + ((dexNum % 1000) % 100) / 10;
+    text[offset + 2] = CHAR_0 + ((dexNum % 1000) % 100) % 10;
+    text[offset + 3] = EOS;
     PrintMonDexNumAndName(0, FONT_NARROW, text, left, top);
 }
 
@@ -4156,42 +4147,24 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     const u8 *name;
     const u8 *category;
     const u8 *description;
-    bool8 isNational;
+    u8 digitCount = (NATIONAL_DEX_COUNT > 999 && IsNationalPokedexEnabled()) ? 4 : 3; 
 
     if (newEntry)
         PrintInfoScreenText(gText_PokedexRegistration, GetStringCenterAlignXOffset(FONT_NORMAL, gText_PokedexRegistration, DISPLAY_WIDTH), 0);
     if (value == 0)
-    {
-        isNational = FALSE;
         value = NationalToHoennOrder(num);
-    }
     else
-    {
-        isNational = TRUE;
         value = num;
-    }
-    if (P_DEX_FOUR_DIGITS_AMOUNT && isNational)
-    {
-        ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), value, STR_CONV_MODE_LEADING_ZEROS, 4);
-        PrintInfoScreenText(str, 0x60, 0x19);
-        natNum = NationalPokedexNumToSpecies(num);
-        if (natNum)
-            name = GetSpeciesName(natNum);
-        else
-            name = sText_TenDashes2;
-        PrintInfoScreenText(name, 0x8A, 0x19);
-    }
+
+    ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), value, STR_CONV_MODE_LEADING_ZEROS, digitCount);
+    PrintInfoScreenText(str, 0x60, 0x19);
+    natNum = NationalPokedexNumToSpecies(num);
+    if (natNum)
+        name = GetSpeciesName(natNum);
     else
-    {
-        ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), value, STR_CONV_MODE_LEADING_ZEROS, 3);
-        PrintInfoScreenText(str, 0x60, 0x19);
-        natNum = NationalPokedexNumToSpecies(num);
-        if (natNum)
-            name = GetSpeciesName(natNum);
-        else
-            name = sText_TenDashes2;
-        PrintInfoScreenText(name, 0x84, 0x19);
-    }
+        name = sText_TenDashes2;
+    PrintInfoScreenText(name, 114 + (6 * digitCount), 0x19);
+
     if (owned)
     {
         CopyMonCategoryText(num, str2);

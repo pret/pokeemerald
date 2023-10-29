@@ -125,7 +125,6 @@ extern const struct PokedexEntry gPokedexEntries[];
 
 // static .rodata strings
 
-static const u8 sText_No000[] = _("000");
 static const u8 sText_No0000[] = _("0000");
 static const u8 sCaughtBall_Gfx[] = INCBIN_U8("graphics/pokedex/caught_ball.4bpp");
 static const u8 sText_TenDashes[] = _("----------");
@@ -2795,31 +2794,22 @@ static void CreateMonListEntry(u8 position, u16 b, u16 ignored)
 
 static void CreateMonDexNum(u16 entryNum, u8 left, u8 top, u16 unused)
 {
-#if P_DEX_FOUR_DIGITS_AMOUNT == TRUE
     u8 text[5];
-#else
-    u8 text[4];
-#endif
-    u16 dexNum;
+    u16 dexNum, offset = 0;
 
     dexNum = sPokedexView->pokedexList[entryNum].dexNum;
     if (sPokedexView->dexMode == DEX_MODE_HOENN)
         dexNum = NationalToHoennOrder(dexNum);
-    if (sPokedexView->dexMode == DEX_MODE_HOENN || !P_DEX_FOUR_DIGITS_AMOUNT)
+    memcpy(text, sText_No0000, ARRAY_COUNT(sText_No0000));
+    if (NATIONAL_DEX_COUNT > 999)
     {
-        memcpy(text, sText_No000, ARRAY_COUNT(sText_No000));
-        text[2] = CHAR_0 + dexNum / 100;
-        text[3] = CHAR_0 + (dexNum % 100) / 10;
-        text[4] = CHAR_0 + (dexNum % 100) % 10;
-    }
-    else
-    {
-        memcpy(text, sText_No0000, ARRAY_COUNT(sText_No0000));
         text[0] = CHAR_0 + dexNum / 1000;
-        text[1] = CHAR_0 + (dexNum % 1000) / 100;
-        text[2] = CHAR_0 + (dexNum % 100) / 10;
-        text[3] = CHAR_0 + (dexNum % 10);
+        offset = 1;
     }
+    text[offset] = CHAR_0 + (dexNum % 1000) / 100;
+    text[offset + 1] = CHAR_0 + ((dexNum % 1000) % 100) / 10;
+    text[offset + 2] = CHAR_0 + ((dexNum % 1000) % 100) % 10;
+    text[offset + 3] = EOS;
     PrintMonDexNumAndName(0, FONT_NARROW, text, left, top);
 }
 
