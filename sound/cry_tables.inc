@@ -2082,6 +2082,61 @@ gCryTable::
 	cry Cry_CalyrexShadowRider
 	@ Basculegion
 	cry Cry_Basculegion
+	@ Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
+	cry Cry_Alcremie
 .else
 	@ Cramorant
 	cry Cry_Unown
@@ -2093,6 +2148,7 @@ gCryTable::
 	@ Polteageist
 	cry Cry_Unown
 	@ Alcremie
+	cry Cry_Unown
 	cry Cry_Unown
 	cry Cry_Unown
 	cry Cry_Unown
@@ -2121,6 +2177,61 @@ gCryTable::
 	cry Cry_Unown
 	cry Cry_Unown
 	@ Basculegion
+	cry Cry_Unown
+	@ Alcremie
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
+	cry Cry_Unown
 	cry Cry_Unown
 .endif
 @ Gigantamax Forms
@@ -4233,7 +4344,116 @@ gCryTable_Reverse::
 	cry_reverse Cry_CalyrexShadowRider
 	@ Basculegion
 	cry_reverse Cry_Basculegion
+	@ Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
+	cry_reverse Cry_Alcremie
 .else
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
+	cry_reverse Cry_Unown
 	cry_reverse Cry_Unown
 	cry_reverse Cry_Unown
 	cry_reverse Cry_Unown
