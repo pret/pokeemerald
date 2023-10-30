@@ -211,7 +211,7 @@ AI_SINGLE_BATTLE_TEST("AI prefers a weaker move over a one with a downside effec
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { HP(hp); }
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_TYPHLOSION) { Moves(move1, move2); }
+        OPPONENT(SPECIES_TYPHLOSION) { Moves(move1, move2, move3, move4); }
     } WHEN {
         switch (turns)
         {

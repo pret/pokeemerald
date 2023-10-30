@@ -434,7 +434,7 @@ static void PrintInstructionsOnWindow(struct PokemonDebugMenu *data)
         else
             AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructionsSubmenuTwo, x, 0, 0, NULL);
     }
-    CopyWindowToVram(WIN_INSTRUCTIONS, 3);
+    CopyWindowToVram(WIN_INSTRUCTIONS, COPYWIN_FULL);
 
     //Bottom left text
     FillWindowPixelBuffer(WIN_BOTTOM_LEFT, PIXEL_FILL(0));
@@ -496,7 +496,7 @@ static void PrintDigitChars(struct PokemonDebugMenu *data)
     StringCopy(&text[i], GetSpeciesName(species));
 
     FillWindowPixelBuffer(WIN_NAME_NUMBERS, 0x11);
-    AddTextPrinterParameterized(WIN_NAME_NUMBERS, 1, text, 6, 0, 0, NULL);
+    AddTextPrinterParameterized(WIN_NAME_NUMBERS, FONT_NORMAL, text, 6, 0, 0, NULL);
 }
 
 static u32 CharDigitsToValue(u8 *charDigits, u8 maxDigits)
@@ -1060,7 +1060,7 @@ static void ResetPokemonDebugWindows(void)
     {
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
         PutWindowTilemap(i);
-        CopyWindowToVram(i, 3);
+        CopyWindowToVram(i, COPYWIN_FULL);
     }
 }
 

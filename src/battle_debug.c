@@ -719,7 +719,7 @@ void CB2_BattleDebugMenu(void)
         data->currentMainListItemId = 0;
         data->activeWindow = ACTIVE_WIN_MAIN;
         data->secondaryListTaskId = 0xFF;
-        CopyWindowToVram(data->mainListWindowId, 3);
+        CopyWindowToVram(data->mainListWindowId, COPYWIN_FULL);
         gMain.state++;
         break;
     case 5:
@@ -740,7 +740,7 @@ static void PutMovesPointsText(struct BattleDebugMenu *data)
     {
         text[0] = CHAR_SPACE;
         StringCopy(text + 1, gMoveNames[gBattleMons[data->aiBattlerId].moves[i]]);
-        AddTextPrinterParameterized(data->aiMovesWindowId, 1, text, 0, i * 15, 0, NULL);
+        AddTextPrinterParameterized(data->aiMovesWindowId, FONT_NORMAL, text, 0, i * 15, 0, NULL);
         for (count = 0, j = 0; j < MAX_BATTLERS_COUNT; j++)
         {
             if (data->spriteIds.aiIconSpriteIds[j] == 0xFF)
@@ -749,18 +749,18 @@ static void PutMovesPointsText(struct BattleDebugMenu *data)
             ConvertIntToDecimalStringN(text,
                                        gBattleStruct->aiFinalScore[data->aiBattlerId][battlerDef][i],
                                        STR_CONV_MODE_RIGHT_ALIGN, 3);
-            AddTextPrinterParameterized(data->aiMovesWindowId, 1, text, 83 + count * 54, i * 15, 0, NULL);
+            AddTextPrinterParameterized(data->aiMovesWindowId, FONT_NORMAL, text, 83 + count * 54, i * 15, 0, NULL);
 
             ConvertIntToDecimalStringN(text,
                                        AI_DATA->simulatedDmg[data->aiBattlerId][battlerDef][i],
                                        STR_CONV_MODE_RIGHT_ALIGN, 3);
-            AddTextPrinterParameterized(data->aiMovesWindowId, 1, text, 110 + count * 54, i * 15, 0, NULL);
+            AddTextPrinterParameterized(data->aiMovesWindowId, FONT_NORMAL, text, 110 + count * 54, i * 15, 0, NULL);
 
             count++;
         }
     }
 
-    CopyWindowToVram(data->aiMovesWindowId, 3);
+    CopyWindowToVram(data->aiMovesWindowId, COPYWIN_FULL);
     Free(text);
 }
 
@@ -852,7 +852,7 @@ static void PutAiInfoText(struct BattleDebugMenu *data)
     // item names
     for (i = 0; i < ARRAY_COUNT(sAiInfoItemNames); i++)
     {
-        AddTextPrinterParameterized(data->aiMovesWindowId, 1, sAiInfoItemNames[i], 3, i * 15, 0, NULL);
+        AddTextPrinterParameterized(data->aiMovesWindowId, FONT_NORMAL, sAiInfoItemNames[i], 3, i * 15, 0, NULL);
     }
 
     // items info
@@ -864,13 +864,13 @@ static void PutAiInfoText(struct BattleDebugMenu *data)
             u16 holdEffect = AI_DATA->holdEffects[i];
             u16 item = AI_DATA->items[i];
             u8 x = (i == B_POSITION_PLAYER_LEFT) ? 83 + (i) * 75 : 83 + (i-1) * 75;
-            AddTextPrinterParameterized(data->aiMovesWindowId, 0, gAbilityNames[ability], x, 0, 0, NULL);
-            AddTextPrinterParameterized(data->aiMovesWindowId, 0, ItemId_GetName(item), x, 15, 0, NULL);
-            AddTextPrinterParameterized(data->aiMovesWindowId, 0, GetHoldEffectName(holdEffect), x, 30, 0, NULL);
+            AddTextPrinterParameterized(data->aiMovesWindowId, FONT_SMALL, gAbilityNames[ability], x, 0, 0, NULL);
+            AddTextPrinterParameterized(data->aiMovesWindowId, FONT_SMALL, ItemId_GetName(item), x, 15, 0, NULL);
+            AddTextPrinterParameterized(data->aiMovesWindowId, FONT_SMALL, GetHoldEffectName(holdEffect), x, 30, 0, NULL);
         }
     }
 
-    CopyWindowToVram(data->aiMovesWindowId, 3);
+    CopyWindowToVram(data->aiMovesWindowId, COPYWIN_FULL);
     Free(text);
 }
 
@@ -917,7 +917,7 @@ static void PutAiPartyText(struct BattleDebugMenu *data)
         AddTextPrinterParameterized5(data->aiMovesWindowId, FONT_SMALL_NARROW, text, i * 41, 35 + (j + 1) * 15, 0, NULL, 0, 0);
     }
 
-    CopyWindowToVram(data->aiMovesWindowId, 3);
+    CopyWindowToVram(data->aiMovesWindowId, COPYWIN_FULL);
     Free(text);
 }
 
@@ -1180,7 +1180,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
             data->currentSecondaryListItemId = listItemId;
             data->modifyWindowId = AddWindow(&sModifyWindowTemplate);
             PutWindowTilemap(data->modifyWindowId);
-            CopyWindowToVram(data->modifyWindowId, 3);
+            CopyWindowToVram(data->modifyWindowId, COPYWIN_FULL);
             SetUpModifyArrows(data);
             PrintDigitChars(data);
             data->activeWindow = ACTIVE_WIN_MODIFY;
@@ -1264,8 +1264,8 @@ static void PrintOnBattlerWindow(u8 windowId, u8 battlerId)
     StringCopy(&text[4], gBattleMons[battlerId].nickname);
 
     FillWindowPixelBuffer(windowId, 0x11);
-    AddTextPrinterParameterized(windowId, 1, text, 0, 0, 0, NULL);
-    CopyWindowToVram(windowId, 3);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, text, 0, 0, 0, NULL);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void UpdateWindowsOnChangedBattler(struct BattleDebugMenu *data)
@@ -1371,7 +1371,7 @@ static void CreateSecondaryListMenu(struct BattleDebugMenu *data)
     listTemplate.windowId = data->secondaryListWindowId;
 
     data->secondaryListTaskId = ListMenuInit(&listTemplate, 0, 0);
-    CopyWindowToVram(data->secondaryListWindowId, 3);
+    CopyWindowToVram(data->secondaryListWindowId, COPYWIN_FULL);
 }
 
 static void PadString(const u8 *src, u8 *dst)
@@ -1500,7 +1500,7 @@ static void PrintDigitChars(struct BattleDebugMenu *data)
 
     text[i] = EOS;
 
-    AddTextPrinterParameterized(data->modifyWindowId, 1, text, 3, 0, 0, NULL);
+    AddTextPrinterParameterized(data->modifyWindowId, FONT_NORMAL, text, 3, 0, 0, NULL);
 }
 
 static const u32 GetBitfieldToAndValue(u32 currBit, u32 bitsCount)

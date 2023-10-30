@@ -69,28 +69,28 @@ Debug_BoxFilledMessage::
 Debug_BoxFilledMessage_Text:
 	.string "Storage boxes filled!$"
 
-Debug_Script_1::
+Debug_EventScript_Script_1::
 	end
 
-Debug_Script_2::
+Debug_EventScript_Script_2::
 	end
 
-Debug_Script_3::
+Debug_EventScript_Script_3::
 	end
 
-Debug_Script_4::
+Debug_EventScript_Script_4::
 	end
 
-Debug_Script_5::
+Debug_EventScript_Script_5::
 	end
 
-Debug_Script_6::
+Debug_EventScript_Script_6::
 	end
 
-Debug_Script_7::
+Debug_EventScript_Script_7::
 	end
 
-Debug_Script_8::
+Debug_EventScript_Script_8::
 	end
 
 Debug_CheckSaveBlock::
