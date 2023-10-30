@@ -245,7 +245,7 @@ BattleScript_TrainerASlideMsgRet::
 BattleScript_TrainerASlideMsgEnd2::
     call BattleScript_TrainerASlideMsgRet
     end2
-    
+
 BattleScript_TrainerBSlideMsgRet::
     handletrainerslidemsg BS_SCRIPTING, 0
     trainerslidein B_POSITION_OPPONENT_RIGHT

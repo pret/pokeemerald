@@ -1,11 +1,11 @@
 #include "global.h"
 #include "test/battle.h"
- 
+
 ASSUMPTIONS
 {
     ASSUME(gBattleMoves[MOVE_HYDRO_STEAM].effect == EFFECT_HYDRO_STEAM);
 }
- 
+
 SINGLE_BATTLE_TEST("Hydro Steam deals 1.5x damage under both Sunlight and Rain", s16 damage)
 {
     u16 setupMove;
@@ -26,7 +26,7 @@ SINGLE_BATTLE_TEST("Hydro Steam deals 1.5x damage under both Sunlight and Rain",
         EXPECT_MUL_EQ(results[0].damage, Q_4_12(1.5), results[1].damage);
     }
 }
- 
+
 SINGLE_BATTLE_TEST("Hydro Steam is affected by Utility Umbrella", s16 damage)
 {
     u32 itemPlayer;

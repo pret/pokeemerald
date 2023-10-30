@@ -931,6 +931,8 @@ struct MoveContext
     u16 ultraBurst:1;
     u16 explicitUltraBurst:1;
     // TODO: u8 zMove:1;
+    u16 dynamax:1;
+    u16 explicitDynamax:1;
     u16 allowed:1;
     u16 explicitAllowed:1;
     u16 notExpected:1; // Has effect only with EXPECT_MOVE

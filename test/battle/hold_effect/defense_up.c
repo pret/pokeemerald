@@ -21,13 +21,12 @@ SINGLE_BATTLE_TEST("Ganlon Berry raises the holder's Defense by one stage when H
         TURN { MOVE(opponent, move); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, move, opponent);
-        if (move == MOVE_TACKLE)
-        {
-            NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
-            NOT MESSAGE("Using Ganlon Berry, the Defense of Wobbuffet rose!");
-        }
-        else
-        {
+        if (move == MOVE_TACKLE) {
+            NONE_OF {
+                ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
+                MESSAGE("Using Ganlon Berry, the Defense of Wobbuffet rose!");
+            }
+        } else {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
             MESSAGE("Using Ganlon Berry, the Defense of Wobbuffet rose!");
         }

@@ -11,7 +11,7 @@ body:
     attributes:
       label: Description
       description: |
-        Describe the issue you are experiencing. 
+        Describe the issue you are experiencing.
         Attach images/videos if possible.
       placeholder: |
         Please enter a description of the issue. Here you can also attach log screenshots, gifs or a video
