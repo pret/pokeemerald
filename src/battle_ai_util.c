@@ -2063,7 +2063,6 @@ bool32 HasMoveWithSplit(u32 battler, u32 split)
         if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && GetBattleMoveSplit(moves[i]) == split)
             return TRUE;
     }
-
     return FALSE;
 }
 
