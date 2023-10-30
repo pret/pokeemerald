@@ -2717,10 +2717,10 @@ static void DebugAction_Give_Item_SelectId(u8 taskId)
         StringExpandPlaceholders(gStringVar4, sDebugText_ItemID);
         AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
 
-        FreeSpriteTilesByTag(ITEM_TAG);
-        FreeSpritePaletteByTag(ITEM_TAG);
-        FreeSpriteOamMatrix(&gSprites[gTasks[taskId].tSpriteId]);
-        DestroySprite(&gSprites[gTasks[taskId].tSpriteId]);
+        FreeSpriteTilesByTag(ITEM_TAG);                             //Destroy item icon
+        FreeSpritePaletteByTag(ITEM_TAG);                           //Destroy item icon
+        FreeSpriteOamMatrix(&gSprites[gTasks[taskId].tSpriteId]);   //Destroy item icon
+        DestroySprite(&gSprites[gTasks[taskId].tSpriteId]);         //Destroy item icon
         gTasks[taskId].tSpriteId = AddItemIconSprite(ITEM_TAG, ITEM_TAG, gTasks[taskId].tInput);
         gSprites[gTasks[taskId].tSpriteId].x2 = DEBUG_NUMBER_ICON_X+10;
         gSprites[gTasks[taskId].tSpriteId].y2 = DEBUG_NUMBER_ICON_Y+10;
@@ -2743,10 +2743,10 @@ static void DebugAction_Give_Item_SelectId(u8 taskId)
     }
     else if (JOY_NEW(B_BUTTON))
     {
-        FreeSpriteTilesByTag(ITEM_TAG);
-        FreeSpritePaletteByTag(ITEM_TAG);
-        FreeSpriteOamMatrix(&gSprites[gTasks[taskId].tSpriteId]);
-        DestroySprite(&gSprites[gTasks[taskId].tSpriteId]);
+        FreeSpriteTilesByTag(ITEM_TAG);                             //Destroy item icon
+        FreeSpritePaletteByTag(ITEM_TAG);                           //Destroy item icon
+        FreeSpriteOamMatrix(&gSprites[gTasks[taskId].tSpriteId]);   //Destroy item icon
+        DestroySprite(&gSprites[gTasks[taskId].tSpriteId]);         //Destroy item icon
 
         PlaySE(SE_SELECT);
         DebugAction_DestroyExtraWindow(taskId);
@@ -2794,10 +2794,10 @@ static void DebugAction_Give_Item_SelectQuantity(u8 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
-        FreeSpriteTilesByTag(ITEM_TAG);
-        FreeSpritePaletteByTag(ITEM_TAG);
-        FreeSpriteOamMatrix(&gSprites[gTasks[taskId].tSpriteId]);
-        DestroySprite(&gSprites[gTasks[taskId].tSpriteId]);
+        FreeSpriteTilesByTag(ITEM_TAG);                             //Destroy item icon
+        FreeSpritePaletteByTag(ITEM_TAG);                           //Destroy item icon
+        FreeSpriteOamMatrix(&gSprites[gTasks[taskId].tSpriteId]);   //Destroy item icon
+        DestroySprite(&gSprites[gTasks[taskId].tSpriteId]);         //Destroy item icon
 
         PlaySE(MUS_OBTAIN_ITEM);
         AddBagItem(itemId, gTasks[taskId].tInput);
@@ -2805,10 +2805,10 @@ static void DebugAction_Give_Item_SelectQuantity(u8 taskId)
     }
     else if (JOY_NEW(B_BUTTON))
     {
-        FreeSpriteTilesByTag(ITEM_TAG);
-        FreeSpritePaletteByTag(ITEM_TAG);
-        FreeSpriteOamMatrix(&gSprites[gTasks[taskId].tSpriteId]);
-        DestroySprite(&gSprites[gTasks[taskId].tSpriteId]);
+        FreeSpriteTilesByTag(ITEM_TAG);                             //Destroy item icon
+        FreeSpritePaletteByTag(ITEM_TAG);                           //Destroy item icon
+        FreeSpriteOamMatrix(&gSprites[gTasks[taskId].tSpriteId]);   //Destroy item icon
+        DestroySprite(&gSprites[gTasks[taskId].tSpriteId]);         //Destroy item icon
 
         PlaySE(SE_SELECT);
         DebugAction_DestroyExtraWindow(taskId);
