@@ -120,6 +120,7 @@ enum FlagsVarsMenu
     DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKEDEX,
     DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_NATDEX,
     DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKENAV,
+    DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_MATCH_CALL,
     DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RUN_SHOES,
     DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_LOCATIONS,
     DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BADGES_ALL,
@@ -349,6 +350,7 @@ static void DebugAction_FlagsVars_PokedexFlags_Reset(u8 taskId);
 static void DebugAction_FlagsVars_SwitchDex(u8 taskId);
 static void DebugAction_FlagsVars_SwitchNatDex(u8 taskId);
 static void DebugAction_FlagsVars_SwitchPokeNav(u8 taskId);
+static void DebugAction_FlagsVars_SwitchMatchCall(u8 taskId);
 static void DebugAction_FlagsVars_ToggleFlyFlags(u8 taskId);
 static void DebugAction_FlagsVars_ToggleBadgeFlags(u8 taskId);
 static void DebugAction_FlagsVars_ToggleFrontierPass(u8 taskId);
@@ -482,6 +484,7 @@ static const u8 sDebugText_FlagsVars_PokedexFlags_Reset[] =     _("Pokédex Flag
 static const u8 sDebugText_FlagsVars_SwitchDex[] =              _("Toggle {STR_VAR_1}Pokédex");
 static const u8 sDebugText_FlagsVars_SwitchNationalDex[] =      _("Toggle {STR_VAR_1}NatDex");
 static const u8 sDebugText_FlagsVars_SwitchPokeNav[] =          _("Toggle {STR_VAR_1}PokéNav");
+static const u8 sDebugText_FlagsVars_SwitchMatchCall[] =        _("Toggle {STR_VAR_1}Match Call");
 static const u8 sDebugText_FlagsVars_RunningShoes[] =           _("Toggle {STR_VAR_1}Running Shoes");
 static const u8 sDebugText_FlagsVars_ToggleFlyFlags[] =         _("Toggle {STR_VAR_1}Fly Flags");
 static const u8 sDebugText_FlagsVars_ToggleAllBadges[] =        _("Toggle {STR_VAR_1}All badges");
@@ -657,6 +660,7 @@ static const struct ListMenuItem sDebugMenu_Items_FlagsVars[] =
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKEDEX]       = {sDebugText_FlagsVars_SwitchDex,          DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKEDEX},
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_NATDEX]        = {sDebugText_FlagsVars_SwitchNationalDex,  DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_NATDEX},
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKENAV]       = {sDebugText_FlagsVars_SwitchPokeNav,      DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKENAV},
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_MATCH_CALL]    = {sDebugText_FlagsVars_SwitchMatchCall,    DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_MATCH_CALL},
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RUN_SHOES]     = {sDebugText_FlagsVars_RunningShoes,       DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RUN_SHOES},
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_LOCATIONS]     = {sDebugText_FlagsVars_ToggleFlyFlags,     DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_LOCATIONS},
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BADGES_ALL]    = {sDebugText_FlagsVars_ToggleAllBadges,    DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BADGES_ALL},
@@ -799,6 +803,7 @@ static void (*const sDebugMenu_Actions_Flags[])(u8) =
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKEDEX]       = DebugAction_FlagsVars_SwitchDex,
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_NATDEX]        = DebugAction_FlagsVars_SwitchNatDex,
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKENAV]       = DebugAction_FlagsVars_SwitchPokeNav,
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_MATCH_CALL]    = DebugAction_FlagsVars_SwitchMatchCall,
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RUN_SHOES]     = DebugAction_FlagsVars_RunningShoes,
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_LOCATIONS]     = DebugAction_FlagsVars_ToggleFlyFlags,
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BADGES_ALL]    = DebugAction_FlagsVars_ToggleBadgeFlags,
@@ -1099,6 +1104,9 @@ static u8 Debug_CheckToggleFlags(u8 id)
             break;
         case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKENAV:
             result = FlagGet(FLAG_SYS_POKENAV_GET);
+            break;
+        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_MATCH_CALL:
+            result = FlagGet(FLAG_ADDED_MATCH_CALL_TO_POKENAV) && FlagGet(FLAG_HAS_MATCH_CALL);
             break;
         case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RUN_SHOES:
             result = FlagGet(FLAG_SYS_B_DASH);
@@ -1649,24 +1657,6 @@ static void DebugAction_Util_HealParty(u8 taskId)
 
 static void DebugAction_Util_Fly(u8 taskId)
 {
-    FlagSet(FLAG_VISITED_LITTLEROOT_TOWN);
-    FlagSet(FLAG_VISITED_OLDALE_TOWN);
-    FlagSet(FLAG_VISITED_DEWFORD_TOWN);
-    FlagSet(FLAG_VISITED_LAVARIDGE_TOWN);
-    FlagSet(FLAG_VISITED_FALLARBOR_TOWN);
-    FlagSet(FLAG_VISITED_VERDANTURF_TOWN);
-    FlagSet(FLAG_VISITED_PACIFIDLOG_TOWN);
-    FlagSet(FLAG_VISITED_PETALBURG_CITY);
-    FlagSet(FLAG_VISITED_SLATEPORT_CITY);
-    FlagSet(FLAG_VISITED_MAUVILLE_CITY);
-    FlagSet(FLAG_VISITED_RUSTBORO_CITY);
-    FlagSet(FLAG_VISITED_FORTREE_CITY);
-    FlagSet(FLAG_VISITED_LILYCOVE_CITY);
-    FlagSet(FLAG_VISITED_MOSSDEEP_CITY);
-    FlagSet(FLAG_VISITED_SOOTOPOLIS_CITY);
-    FlagSet(FLAG_VISITED_EVER_GRANDE_CITY);
-    FlagSet(FLAG_LANDMARK_POKEMON_LEAGUE);
-    FlagSet(FLAG_LANDMARK_BATTLE_FRONTIER);
     Debug_DestroyMenu_Full(taskId);
     SetMainCallback2(CB2_OpenFlyMap);
 }
@@ -2516,6 +2506,22 @@ static void DebugAction_FlagsVars_SwitchPokeNav(u8 taskId)
     FlagToggle(FLAG_SYS_POKENAV_GET);
 }
 
+static void DebugAction_FlagsVars_SwitchMatchCall(u8 taskId)
+{
+    if (FlagGet(FLAG_ADDED_MATCH_CALL_TO_POKENAV))
+    {
+        PlaySE(SE_PC_OFF);
+        FlagClear(FLAG_ADDED_MATCH_CALL_TO_POKENAV);
+        FlagClear(FLAG_HAS_MATCH_CALL);
+    }
+    else
+    {
+        PlaySE(SE_PC_LOGIN);
+        FlagSet(FLAG_ADDED_MATCH_CALL_TO_POKENAV);
+        FlagSet(FLAG_HAS_MATCH_CALL);
+    }
+}
+
 static void DebugAction_FlagsVars_RunningShoes(u8 taskId)
 {
     if (FlagGet(FLAG_SYS_B_DASH))
@@ -2528,44 +2534,77 @@ static void DebugAction_FlagsVars_RunningShoes(u8 taskId)
 static void DebugAction_FlagsVars_ToggleFlyFlags(u8 taskId)
 {
     if (FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER))
+    {
         PlaySE(SE_PC_OFF);
+        FlagClear(FLAG_VISITED_LITTLEROOT_TOWN);
+        FlagClear(FLAG_VISITED_OLDALE_TOWN);
+        FlagClear(FLAG_VISITED_DEWFORD_TOWN);
+        FlagClear(FLAG_VISITED_LAVARIDGE_TOWN);
+        FlagClear(FLAG_VISITED_FALLARBOR_TOWN);
+        FlagClear(FLAG_VISITED_VERDANTURF_TOWN);
+        FlagClear(FLAG_VISITED_PACIFIDLOG_TOWN);
+        FlagClear(FLAG_VISITED_PETALBURG_CITY);
+        FlagClear(FLAG_VISITED_SLATEPORT_CITY);
+        FlagClear(FLAG_VISITED_MAUVILLE_CITY);
+        FlagClear(FLAG_VISITED_RUSTBORO_CITY);
+        FlagClear(FLAG_VISITED_FORTREE_CITY);
+        FlagClear(FLAG_VISITED_LILYCOVE_CITY);
+        FlagClear(FLAG_VISITED_MOSSDEEP_CITY);
+        FlagClear(FLAG_VISITED_SOOTOPOLIS_CITY);
+        FlagClear(FLAG_VISITED_EVER_GRANDE_CITY);
+        FlagClear(FLAG_LANDMARK_POKEMON_LEAGUE);
+        FlagClear(FLAG_LANDMARK_BATTLE_FRONTIER);
+    }
     else
+    {
         PlaySE(SE_PC_LOGIN);
-
-    FlagToggle(FLAG_VISITED_LITTLEROOT_TOWN);
-    FlagToggle(FLAG_VISITED_OLDALE_TOWN);
-    FlagToggle(FLAG_VISITED_DEWFORD_TOWN);
-    FlagToggle(FLAG_VISITED_LAVARIDGE_TOWN);
-    FlagToggle(FLAG_VISITED_FALLARBOR_TOWN);
-    FlagToggle(FLAG_VISITED_VERDANTURF_TOWN);
-    FlagToggle(FLAG_VISITED_PACIFIDLOG_TOWN);
-    FlagToggle(FLAG_VISITED_PETALBURG_CITY);
-    FlagToggle(FLAG_VISITED_SLATEPORT_CITY);
-    FlagToggle(FLAG_VISITED_MAUVILLE_CITY);
-    FlagToggle(FLAG_VISITED_RUSTBORO_CITY);
-    FlagToggle(FLAG_VISITED_FORTREE_CITY);
-    FlagToggle(FLAG_VISITED_LILYCOVE_CITY);
-    FlagToggle(FLAG_VISITED_MOSSDEEP_CITY);
-    FlagToggle(FLAG_VISITED_SOOTOPOLIS_CITY);
-    FlagToggle(FLAG_VISITED_EVER_GRANDE_CITY);
-    FlagToggle(FLAG_LANDMARK_POKEMON_LEAGUE);
-    FlagToggle(FLAG_LANDMARK_BATTLE_FRONTIER);
+        FlagSet(FLAG_VISITED_LITTLEROOT_TOWN);
+        FlagSet(FLAG_VISITED_OLDALE_TOWN);
+        FlagSet(FLAG_VISITED_DEWFORD_TOWN);
+        FlagSet(FLAG_VISITED_LAVARIDGE_TOWN);
+        FlagSet(FLAG_VISITED_FALLARBOR_TOWN);
+        FlagSet(FLAG_VISITED_VERDANTURF_TOWN);
+        FlagSet(FLAG_VISITED_PACIFIDLOG_TOWN);
+        FlagSet(FLAG_VISITED_PETALBURG_CITY);
+        FlagSet(FLAG_VISITED_SLATEPORT_CITY);
+        FlagSet(FLAG_VISITED_MAUVILLE_CITY);
+        FlagSet(FLAG_VISITED_RUSTBORO_CITY);
+        FlagSet(FLAG_VISITED_FORTREE_CITY);
+        FlagSet(FLAG_VISITED_LILYCOVE_CITY);
+        FlagSet(FLAG_VISITED_MOSSDEEP_CITY);
+        FlagSet(FLAG_VISITED_SOOTOPOLIS_CITY);
+        FlagSet(FLAG_VISITED_EVER_GRANDE_CITY);
+        FlagSet(FLAG_LANDMARK_POKEMON_LEAGUE);
+        FlagSet(FLAG_LANDMARK_BATTLE_FRONTIER);
+    }
 }
 
 static void DebugAction_FlagsVars_ToggleBadgeFlags(u8 taskId)
 {
     if (FlagGet(FLAG_BADGE08_GET))
+    {
         PlaySE(SE_PC_OFF);
+        FlagClear(FLAG_BADGE01_GET);
+        FlagClear(FLAG_BADGE02_GET);
+        FlagClear(FLAG_BADGE03_GET);
+        FlagClear(FLAG_BADGE04_GET);
+        FlagClear(FLAG_BADGE05_GET);
+        FlagClear(FLAG_BADGE06_GET);
+        FlagClear(FLAG_BADGE07_GET);
+        FlagClear(FLAG_BADGE08_GET);
+    }
     else
+    {
         PlaySE(SE_PC_LOGIN);
-    FlagToggle(FLAG_BADGE01_GET);
-    FlagToggle(FLAG_BADGE02_GET);
-    FlagToggle(FLAG_BADGE03_GET);
-    FlagToggle(FLAG_BADGE04_GET);
-    FlagToggle(FLAG_BADGE05_GET);
-    FlagToggle(FLAG_BADGE06_GET);
-    FlagToggle(FLAG_BADGE07_GET);
-    FlagToggle(FLAG_BADGE08_GET);
+        FlagSet(FLAG_BADGE01_GET);
+        FlagSet(FLAG_BADGE02_GET);
+        FlagSet(FLAG_BADGE03_GET);
+        FlagSet(FLAG_BADGE04_GET);
+        FlagSet(FLAG_BADGE05_GET);
+        FlagSet(FLAG_BADGE06_GET);
+        FlagSet(FLAG_BADGE07_GET);
+        FlagSet(FLAG_BADGE08_GET);
+    }
 }
 
 static void DebugAction_FlagsVars_ToggleFrontierPass(u8 taskId)
