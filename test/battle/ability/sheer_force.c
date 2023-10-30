@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Sheer Force boosts power, but removes secondary effects of moves", s16 damage)
 {
     s32 j;
-    u32 ability, move;
+    u32 ability = 0, move = 0;
 
     for (j = 1; j < MOVES_COUNT; j++)
     {
