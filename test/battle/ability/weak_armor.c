@@ -7,6 +7,7 @@ ASSUMPTIONS
     ASSUME(gBattleMoves[MOVE_GUST].power != 0);
     ASSUME(gBattleMoves[MOVE_GUST].split == SPLIT_SPECIAL);
     ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
+    ASSUME(B_WEAK_ARMOR_SPEED >= GEN_7);
 }
 
 SINGLE_BATTLE_TEST("Weak Armor lowers Defense by 1 and boosts Speed by 2 when hit by a physical attack")

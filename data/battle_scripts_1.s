@@ -9113,7 +9113,11 @@ BattleScript_WeakArmorDefAnim:
 	printstring STRINGID_TARGETABILITYSTATLOWER
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_WeakArmorActivatesSpeed:
+.if B_WEAK_ARMOR_SPEED >= GEN_7
 	setstatchanger STAT_SPEED, 2, FALSE
+.else
+	setstatchanger STAT_SPEED, 1, FALSE
+.endif
 	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_WeakArmorActivatesEnd
 	jumpifbyte CMP_LESS_THAN, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_WeakArmorSpeedAnim
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_ROSE_EMPTY, BattleScript_WeakArmorActivatesEnd
