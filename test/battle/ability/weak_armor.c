@@ -133,7 +133,6 @@ SINGLE_BATTLE_TEST("Weak Armor still lowers Defense if Speed can't go any higher
 SINGLE_BATTLE_TEST("Weak Armor doesn't interrupt multi hit moves if Defense can't go any lower")
 {
     u32 j;
-    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_MAGCARGO) { Ability(ABILITY_WEAK_ARMOR); Defense(999); }
         OPPONENT(SPECIES_CLOYSTER) { Ability(ABILITY_SKILL_LINK); }
@@ -156,20 +155,22 @@ SINGLE_BATTLE_TEST("Weak Armor doesn't interrupt multi hit moves if Defense can'
         for (j = 0; j < 2; j++)
         {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FURY_SWIPES, opponent);
-            ABILITY_POPUP(player, ABILITY_WEAK_ARMOR);
-            MESSAGE("Magcargo's Defense won't go lower!");
-            MESSAGE("Slugma's Speed won't go higher!");
+            // Ability doesn't activate if neither stat can be changed.
+            NONE_OF {
+                ABILITY_POPUP(player, ABILITY_WEAK_ARMOR);
+                MESSAGE("Magcargo's Defense won't go lower!");
+                MESSAGE("Magcargo's Speed won't go higher!");
+            }
         }
     } THEN {
         EXPECT_EQ(player->statStages[STAT_DEF], MIN_STAT_STAGE);
-        EXPECT_EQ(player->statStages[STAT_SPEED], DEFAULT_STAT_STAGE + 2);
+        EXPECT_EQ(player->statStages[STAT_SPEED], MAX_STAT_STAGE);
     }
 }
 
 SINGLE_BATTLE_TEST("Weak Armor doesn't interrupt multi hit moves if Speed can't go any higher")
 {
     u32 j;
-    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_MAGCARGO) { Ability(ABILITY_WEAK_ARMOR); Defense(999); }
         OPPONENT(SPECIES_CLOYSTER) { Ability(ABILITY_SKILL_LINK); }
@@ -190,7 +191,7 @@ SINGLE_BATTLE_TEST("Weak Armor doesn't interrupt multi hit moves if Speed can't 
             MESSAGE("Magcargo's Speed won't go higher!");
         }
     } THEN {
-        EXPECT_EQ(player->statStages[STAT_DEF], MIN_STAT_STAGE);
-        EXPECT_EQ(player->statStages[STAT_SPEED], DEFAULT_STAT_STAGE + 2);
+        EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE - 5);
+        EXPECT_EQ(player->statStages[STAT_SPEED], MAX_STAT_STAGE);
     }
 }
