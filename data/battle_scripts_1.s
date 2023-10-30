@@ -1452,6 +1452,7 @@ BattleScript_StrengthSapHp:
 	jumpifstatus3 BS_ATTACKER, STATUS3_HEAL_BLOCK, BattleScript_MoveEnd
 	jumpiffullhp BS_ATTACKER, BattleScript_MoveEnd
 	manipulatedamage DMG_BIG_ROOT
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	printstring STRINGID_PKMNENERGYDRAINED
