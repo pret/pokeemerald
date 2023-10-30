@@ -6048,7 +6048,7 @@ const u8 gWalkingWakePokedexText[] = _(
     "Ecology under research.");
 
 const u8 gIronLeavesPokedexText[] = _(
-    "Ecology under research.");
+    "Ecology under analysis.");
 
 const u8 gDipplinPokedexText[] = _(
     "Dipplin is two creatures in one Pokémon.\n"
