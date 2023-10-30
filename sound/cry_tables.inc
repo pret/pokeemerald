@@ -2358,24 +2358,24 @@ gCryTable::
 	cry Cry_Tauros
 	cry Cry_Wooper
 .if P_GEN_9_POKEMON == TRUE
-	cry Cry_Unown //Cry_WalkingWake
-	cry Cry_Unown //Cry_IronLeaves
-	cry Cry_Unown //Cry_Dipplin
-	cry Cry_Unown //Cry_Poltchageist
-	cry Cry_Unown //Cry_Poltchageist
-	cry Cry_Unown //Cry_Sinistcha
-	cry Cry_Unown //Cry_Sinistcha
-	cry Cry_Unown //Cry_Okidogi
-	cry Cry_Unown //Cry_Munkidori
-	cry Cry_Unown //Cry_Fezandipiti
-	cry Cry_Unown //Cry_Ogerpon
-	cry Cry_Unown //Cry_Ogerpon
-	cry Cry_Unown //Cry_Ogerpon
-	cry Cry_Unown //Cry_Ogerpon
-	cry Cry_Unown //Cry_Ogerpon
-	cry Cry_Unown //Cry_Ogerpon
-	cry Cry_Unown //Cry_Ogerpon
-	cry Cry_Unown //Cry_Ogerpon
+	cry Cry_WalkingWake
+	cry Cry_IronLeaves
+	cry Cry_Dipplin
+	cry Cry_Poltchageist
+	cry Cry_Poltchageist
+	cry Cry_Sinistcha
+	cry Cry_Sinistcha
+	cry Cry_Okidogi
+	cry Cry_Munkidori
+	cry Cry_Fezandipiti
+	cry Cry_Ogerpon
+	cry Cry_Ogerpon
+	cry Cry_Ogerpon
+	cry Cry_Ogerpon
+	cry Cry_Ogerpon
+	cry Cry_Ogerpon
+	cry Cry_Ogerpon
+	cry Cry_Ogerpon
 .else
 	cry Cry_Unown
 	cry Cry_Unown
@@ -4772,24 +4772,24 @@ gCryTable_Reverse::
 	cry_reverse Cry_Tauros
 	cry_reverse Cry_Wooper
 .if P_GEN_9_POKEMON == TRUE
-	cry_reverse Cry_Unown //Cry_WalkingWake
-	cry_reverse Cry_Unown //Cry_IronLeaves
-	cry_reverse Cry_Unown //Cry_Dipplin
-	cry_reverse Cry_Unown //Cry_Poltchageist
-	cry_reverse Cry_Unown //Cry_Poltchageist
-	cry_reverse Cry_Unown //Cry_Sinistcha
-	cry_reverse Cry_Unown //Cry_Sinistcha
-	cry_reverse Cry_Unown //Cry_Okidogi
-	cry_reverse Cry_Unown //Cry_Munkidori
-	cry_reverse Cry_Unown //Cry_Fezandipiti
-	cry_reverse Cry_Unown //Cry_Ogerpon
-	cry_reverse Cry_Unown //Cry_Ogerpon
-	cry_reverse Cry_Unown //Cry_Ogerpon
-	cry_reverse Cry_Unown //Cry_Ogerpon
-	cry_reverse Cry_Unown //Cry_Ogerpon
-	cry_reverse Cry_Unown //Cry_Ogerpon
-	cry_reverse Cry_Unown //Cry_Ogerpon
-	cry_reverse Cry_Unown //Cry_Ogerpon
+	cry_reverse Cry_WalkingWake
+	cry_reverse Cry_IronLeaves
+	cry_reverse Cry_Dipplin
+	cry_reverse Cry_Poltchageist
+	cry_reverse Cry_Poltchageist
+	cry_reverse Cry_Sinistcha
+	cry_reverse Cry_Sinistcha
+	cry_reverse Cry_Okidogi
+	cry_reverse Cry_Munkidori
+	cry_reverse Cry_Fezandipiti
+	cry_reverse Cry_Ogerpon
+	cry_reverse Cry_Ogerpon
+	cry_reverse Cry_Ogerpon
+	cry_reverse Cry_Ogerpon
+	cry_reverse Cry_Ogerpon
+	cry_reverse Cry_Ogerpon
+	cry_reverse Cry_Ogerpon
+	cry_reverse Cry_Ogerpon
 .else
 	cry_reverse Cry_Unown
 	cry_reverse Cry_Unown

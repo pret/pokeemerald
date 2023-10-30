@@ -4778,13 +4778,41 @@ Cry_Koraidon::
 Cry_Miraidon::
     .incbin "sound/direct_sound_samples/cries/miraidon.bin"
 
-//    .align 2
-//Cry_WalkingWake::
-//    .incbin "sound/direct_sound_samples/cries/walkingwake.bin"
+    .align 2
+Cry_WalkingWake::
+    .incbin "sound/direct_sound_samples/cries/walkingwake.bin"
 
-//    .align 2
-//Cry_IronLeaves::
-//    .incbin "sound/direct_sound_samples/cries/ironleaves.bin"
+    .align 2
+Cry_IronLeaves::
+    .incbin "sound/direct_sound_samples/cries/ironleaves.bin"
+
+    .align 2
+Cry_Dipplin::
+    .incbin "sound/direct_sound_samples/cries/dipplin.bin"
+
+    .align 2
+Cry_Poltchageist::
+    .incbin "sound/direct_sound_samples/cries/poltchageist.bin"
+
+    .align 2
+Cry_Sinistcha::
+    .incbin "sound/direct_sound_samples/cries/sinistcha.bin"
+
+    .align 2
+Cry_Okidogi::
+    .incbin "sound/direct_sound_samples/cries/okidogi.bin"
+
+    .align 2
+Cry_Munkidori::
+    .incbin "sound/direct_sound_samples/cries/munkidori.bin"
+
+    .align 2
+Cry_Fezandipiti::
+    .incbin "sound/direct_sound_samples/cries/fezandipiti.bin"
+
+    .align 2
+Cry_Ogerpon::
+    .incbin "sound/direct_sound_samples/cries/ogerpon.bin"
 
 .endif
 
