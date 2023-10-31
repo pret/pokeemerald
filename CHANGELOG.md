@@ -36,8 +36,6 @@
 * Fixed Last Resort not counting Sleep Talk as used for its effect by @DizzyEggg in https://github.com/rh-hideout/pokeemerald-expansion/pull/3378
 
 ## 🎭 Abilities 🎭
-### Added
-* Added config for Synchronize's Gen9 behaviour (as in, not working at all) by @Bassoonian in https://github.com/rh-hideout/pokeemerald-expansion/pull/3455
 ### Changed
 * Removed unused `STATUS3_CANT_SCORE_A_CRIT` by @AlexOn1ine in https://github.com/rh-hideout/pokeemerald-expansion/pull/3377
 * Moved Beads of Ruin and Sword of Ruin damage to the appropiate damage modifier functions by @kittenchilly in https://github.com/rh-hideout/pokeemerald-expansion/pull/3415
