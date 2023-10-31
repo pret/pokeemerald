@@ -167,7 +167,7 @@
 #define EFFECT_MEMENTO                      163
 #define EFFECT_FACADE                       164
 #define EFFECT_FOCUS_PUNCH                  165
-#define EFFECT_SMELLINGSALT                 166
+#define EFFECT_SMELLING_SALTS               166
 #define EFFECT_FOLLOW_ME                    167
 #define EFFECT_NATURE_POWER                 168
 #define EFFECT_CHARGE                       169

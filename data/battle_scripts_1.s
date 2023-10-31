@@ -188,7 +188,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectMemento                 @ EFFECT_MEMENTO
 	.4byte BattleScript_EffectHit                     @ EFFECT_FACADE
 	.4byte BattleScript_EffectFocusPunch              @ EFFECT_FOCUS_PUNCH
-	.4byte BattleScript_EffectSmellingsalt            @ EFFECT_SMELLINGSALT
+	.4byte BattleScript_EffectSmellingsalt            @ EFFECT_SMELLING_SALTS
 	.4byte BattleScript_EffectFollowMe                @ EFFECT_FOLLOW_ME
 	.4byte BattleScript_EffectNaturePower             @ EFFECT_NATURE_POWER
 	.4byte BattleScript_EffectCharge                  @ EFFECT_CHARGE

@@ -1684,10 +1684,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             if (gDisableStructs[battlerAtk].stockpileCounter >= 3)
                 ADJUST_SCORE(-10);
             break;
-        case EFFECT_SPIT_UP:
-            if (gDisableStructs[battlerAtk].stockpileCounter <= 1)
-                ADJUST_SCORE(-10);
-            break;
         case EFFECT_SWALLOW:
             if (gDisableStructs[battlerAtk].stockpileCounter == 0)
             {
@@ -3295,62 +3291,15 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
 
     // check thawing moves
     if ((gBattleMons[battlerAtk].status1 & (STATUS1_FREEZE | STATUS1_FROSTBITE)) && gBattleMoves[move].thawsUser)
-        score += (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) ? 20 : 10;
+        ADJUST_SCORE(10);
 
-    // check burn
-    if (gBattleMons[battlerAtk].status1 & STATUS1_BURN)
+    // check burn / frostbite
+    if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_SMART_SWITCHING && AI_DATA->abilities[battlerAtk] == ABILITY_NATURAL_CURE)
     {
-        switch (aiData->abilities[battlerAtk])
-        {
-        case ABILITY_GUTS:
-            break;
-        case ABILITY_NATURAL_CURE:
-            if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_SMART_SWITCHING
-             && HasOnlyMovesWithSplit(battlerAtk, SPLIT_PHYSICAL, TRUE))
-                score = 90; // Force switch if all your attacking moves are physical and you have Natural Cure.
-            break;
-        default:
-            if (IS_MOVE_PHYSICAL(move) && gBattleMoves[move].effect != EFFECT_FACADE)
-                ADJUST_SCORE(-2);
-            break;
-        }
+        if ((gBattleMons[battlerAtk].status1 & STATUS1_BURN && HasOnlyMovesWithSplit(battlerAtk, SPLIT_PHYSICAL, TRUE))
+        || (gBattleMons[battlerAtk].status1 & STATUS1_FROSTBITE && HasOnlyMovesWithSplit(battlerAtk, SPLIT_SPECIAL, TRUE)))
+            ADJUST_SCORE(-20); // Force switch if all your attacking moves are physical and you have Natural Cure.
     }
-
-    // check frostbite
-    if (gBattleMons[battlerAtk].status1 & STATUS1_FROSTBITE)
-    {
-        switch (aiData->abilities[battlerAtk])
-        {
-        case ABILITY_GUTS:
-            break;
-        case ABILITY_NATURAL_CURE:
-            if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_SMART_SWITCHING
-             && HasOnlyMovesWithSplit(battlerAtk, SPLIT_SPECIAL, TRUE))
-                score = 90; // Force switch if all your attacking moves are special and you have Natural Cure.
-            break;
-        default:
-            if (IS_MOVE_SPECIAL(move) && gBattleMoves[move].effect != EFFECT_FACADE)
-                ADJUST_SCORE(-2);
-            break;
-        }
-    }
-
-    // attacker ability checks
-    switch (aiData->abilities[battlerAtk])
-    {
-    case ABILITY_MOXIE:
-    case ABILITY_BEAST_BOOST:
-    case ABILITY_CHILLING_NEIGH:
-    case ABILITY_GRIM_NEIGH:
-    case ABILITY_AS_ONE_ICE_RIDER:
-    case ABILITY_AS_ONE_SHADOW_RIDER:
-        if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER) // Attacker should go first
-        {
-            if (CanIndexMoveFaintTarget(battlerAtk, battlerDef, movesetIndex, 0))
-                ADJUST_SCORE(8); // prioritize killing target for stat boost
-        }
-        break;
-    } // ability checks
 
     // move effect checks
     switch (moveEffect)
@@ -3363,11 +3312,8 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             IncreaseSleepScore(battlerAtk, battlerDef, move, &score);
         break;
     case EFFECT_ABSORB:
-        if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_BIG_ROOT)
-            ADJUST_SCORE(1);
-        if (effectiveness <= AI_EFFECTIVENESS_x0_5 && AI_RandLessThan(50))
-            ADJUST_SCORE(-3);
-        break;
+        if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_BIG_ROOT && effectiveness >= AI_EFFECTIVENESS_x1)
+            ADJUST_SCORE(2);
     case EFFECT_EXPLOSION:
     case EFFECT_MEMENTO:
         if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_WILL_SUICIDE && gBattleMons[battlerDef].statStages[STAT_EVASION] < 7)
@@ -3581,11 +3527,6 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         if (aiData->hpPercents[battlerAtk] < 90)
             ADJUST_SCORE(-2);
         break;
-    case EFFECT_DREAM_EATER:
-        if (!(gBattleMons[battlerDef].status1 & STATUS1_SLEEP))
-            break;
-        ADJUST_SCORE(1);    // if target is asleep, dream eater is a pretty good move even without draining
-        // fallthrough
     case EFFECT_ACUPRESSURE:
         break;
     case EFFECT_ATTACK_ACCURACY_UP: // hone claws
@@ -3734,20 +3675,12 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
           || HasHighCritRatioMove(battlerAtk))
             ADJUST_SCORE(2);
         break;
-    case EFFECT_CONFUSE_HIT:
-        if (sereneGraceBoost)
-            ADJUST_SCORE(1);
-        //fallthrough
     case EFFECT_CONFUSE:
         IncreaseConfusionScore(battlerAtk, battlerDef, move, &score);
         break;
     case EFFECT_PARALYZE:
         IncreaseParalyzeScore(battlerAtk, battlerDef, move, &score);
         break;
-    case EFFECT_GRAV_APPLE:
-        if (gFieldStatuses & STATUS_FIELD_GRAVITY)
-            ADJUST_SCORE(2);
-        // fall through
     case EFFECT_ATTACK_DOWN_HIT:
     case EFFECT_DEFENSE_DOWN_HIT:
     case EFFECT_SPECIAL_ATTACK_DOWN_HIT:
@@ -4243,14 +4176,6 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         IncreaseStatUpScore(battlerAtk, battlerDef, STAT_DEF, &score);
         IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPDEF, &score);
         break;
-    case EFFECT_SPIT_UP:
-        if (gDisableStructs[battlerAtk].stockpileCounter >= 2)
-            ADJUST_SCORE(1);
-        break;
-    case EFFECT_ROLLOUT:
-        if (gBattleMons[battlerAtk].status2 & STATUS2_DEFENSE_CURL)
-            ADJUST_SCORE(8);
-        break;
     case EFFECT_SWAGGER:
         if (HasMoveEffect(battlerAtk, EFFECT_FOUL_PLAY)
           || HasMoveEffect(battlerAtk, EFFECT_PSYCH_UP)
@@ -4745,11 +4670,8 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             ADJUST_SCORE(2);
         break;
     case EFFECT_PLEDGE:
-        if (isDoubleBattle)
-        {
-            if (HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_PLEDGE))
-                ADJUST_SCORE(3); // Partner might use pledge move
-        }
+        if (isDoubleBattle && HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_PLEDGE))
+            ADJUST_SCORE(3); // Partner might use pledge move
         break;
     case EFFECT_TRICK_ROOM:
         if (!(gFieldStatuses & STATUS_FIELD_TRICK_ROOM) && GetBattlerSideSpeedAverage(battlerAtk) < GetBattlerSideSpeedAverage(battlerDef))
@@ -4952,25 +4874,12 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
                 ADJUST_SCORE(3);
         }
         break;
-    case EFFECT_FLAIL:
-        if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER)  // Ai goes first
-        {
-            if (aiData->hpPercents[battlerAtk] < 20)
-                ADJUST_SCORE(1);
-            else if (aiData->hpPercents[battlerAtk] < 8)
-                ADJUST_SCORE(2);
-        }
-        break;
     case EFFECT_SHORE_UP:
         if ((AI_GetWeather(aiData) & B_WEATHER_SANDSTORM)
           && ShouldRecover(battlerAtk, battlerDef, move, 67))
             ADJUST_SCORE(3);
         else if (ShouldRecover(battlerAtk, battlerDef, move, 50))
             ADJUST_SCORE(2);
-        break;
-    case EFFECT_FACADE:
-        if (gBattleMons[battlerAtk].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON | STATUS1_FROSTBITE))
-            ADJUST_SCORE(1);
         break;
     case EFFECT_FOCUS_PUNCH:
         if (!isDoubleBattle && effectiveness > AI_EFFECTIVENESS_x0_5)
@@ -4980,19 +4889,6 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             else if (gBattleMons[battlerDef].status2 & (STATUS2_INFATUATION | STATUS2_CONFUSION))
                 ADJUST_SCORE(1);
         }
-        break;
-    case EFFECT_SMELLINGSALT:
-        if (gBattleMons[battlerDef].status1 & STATUS1_PARALYSIS)
-            ADJUST_SCORE(2);
-        break;
-    case EFFECT_WAKE_UP_SLAP:
-        if (gBattleMons[battlerDef].status1 & STATUS1_SLEEP)
-            ADJUST_SCORE(2);
-        break;
-    case EFFECT_REVENGE:
-        if (!(gBattleMons[battlerDef].status1 & STATUS1_SLEEP)
-          &&  !(gBattleMons[battlerDef].status2 & (STATUS2_INFATUATION | STATUS2_CONFUSION)))
-            ADJUST_SCORE(2);
         break;
     case EFFECT_ENDEAVOR:
         if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER)  // Opponent faster
