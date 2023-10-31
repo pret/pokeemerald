@@ -4411,6 +4411,10 @@ Cry_Oinkologne::
     .incbin "sound/direct_sound_samples/cries/oinkologne.bin"
 
     .align 2
+Cry_OinkologneFemale::
+    .incbin "sound/direct_sound_samples/cries/oinkologne_female.bin"
+
+    .align 2
 Cry_Tarountula::
     .incbin "sound/direct_sound_samples/cries/tarountula.bin"
 
@@ -4445,6 +4449,10 @@ Cry_Tandemaus::
     .align 2
 Cry_Maushold::
     .incbin "sound/direct_sound_samples/cries/maushold.bin"
+
+    .align 2
+Cry_MausholdFamilyOfFour::
+    .incbin "sound/direct_sound_samples/cries/maushold_family_of_four.bin"
 
     .align 2
 Cry_Fidough::
@@ -4603,6 +4611,10 @@ Cry_Palafin::
     .incbin "sound/direct_sound_samples/cries/palafin.bin"
 
     .align 2
+Cry_PalafinHero::
+    .incbin "sound/direct_sound_samples/cries/palafin_hero.bin"
+
+    .align 2
 Cry_Varoom::
     .incbin "sound/direct_sound_samples/cries/varoom.bin"
 
@@ -4657,6 +4669,14 @@ Cry_Dondozo::
     .align 2
 Cry_Tatsugiri::
     .incbin "sound/direct_sound_samples/cries/tatsugiri.bin"
+
+    .align 2
+Cry_TatsugiriDroopy::
+    .incbin "sound/direct_sound_samples/cries/tatsugiri_droopy.bin"
+
+    .align 2
+Cry_TatsugiriStretchy::
+    .incbin "sound/direct_sound_samples/cries/tatsugiri_stretchy.bin"
 
     .align 2
 Cry_Annihilape::

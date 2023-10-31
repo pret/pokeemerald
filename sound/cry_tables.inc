@@ -2135,7 +2135,7 @@ gCryTable::
 	cry Cry_Quaquaval
 	cry Cry_Lechonk
 	cry Cry_Oinkologne
-	cry Cry_Oinkologne
+	cry Cry_OinkologneFemale
 	cry Cry_Tarountula
 	cry Cry_Spidops
 	cry Cry_Nymble
@@ -2145,7 +2145,7 @@ gCryTable::
 	cry Cry_Pawmot
 	cry Cry_Tandemaus
 	cry Cry_Maushold
-	cry Cry_Maushold
+	cry Cry_MausholdFamilyOfFour
 	cry Cry_Fidough
 	cry Cry_Dachsbun
 	cry Cry_Smoliv
@@ -2188,7 +2188,7 @@ gCryTable::
 	cry Cry_Bombirdier
 	cry Cry_Finizen
 	cry Cry_Palafin
-	cry Cry_Palafin
+	cry Cry_PalafinHero
 	cry Cry_Varoom
 	cry Cry_Revavroom
 	cry Cry_Cyclizar
@@ -2203,8 +2203,8 @@ gCryTable::
 	cry Cry_Veluza
 	cry Cry_Dondozo
 	cry Cry_Tatsugiri
-	cry Cry_Tatsugiri
-	cry Cry_Tatsugiri
+	cry Cry_TatsugiriDroopy
+	cry Cry_TatsugiriStretchy
 	cry Cry_Annihilape
 	cry Cry_Clodsire
 	cry Cry_Farigiraf
@@ -4549,7 +4549,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Quaquaval
 	cry_reverse Cry_Lechonk
 	cry_reverse Cry_Oinkologne
-	cry_reverse Cry_Oinkologne
+	cry_reverse Cry_OinkologneFemale
 	cry_reverse Cry_Tarountula
 	cry_reverse Cry_Spidops
 	cry_reverse Cry_Nymble
@@ -4559,7 +4559,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Pawmot
 	cry_reverse Cry_Tandemaus
 	cry_reverse Cry_Maushold
-	cry_reverse Cry_Maushold
+	cry_reverse Cry_MausholdFamilyOfFour
 	cry_reverse Cry_Fidough
 	cry_reverse Cry_Dachsbun
 	cry_reverse Cry_Smoliv
@@ -4602,7 +4602,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Bombirdier
 	cry_reverse Cry_Finizen
 	cry_reverse Cry_Palafin
-	cry_reverse Cry_Palafin
+	cry_reverse Cry_PalafinHero
 	cry_reverse Cry_Varoom
 	cry_reverse Cry_Revavroom
 	cry_reverse Cry_Cyclizar
@@ -4617,8 +4617,8 @@ gCryTable_Reverse::
 	cry_reverse Cry_Veluza
 	cry_reverse Cry_Dondozo
 	cry_reverse Cry_Tatsugiri
-	cry_reverse Cry_Tatsugiri
-	cry_reverse Cry_Tatsugiri
+	cry_reverse Cry_TatsugiriDroopy
+	cry_reverse Cry_TatsugiriStretchy
 	cry_reverse Cry_Annihilape
 	cry_reverse Cry_Clodsire
 	cry_reverse Cry_Farigiraf
