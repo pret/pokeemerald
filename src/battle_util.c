@@ -5135,6 +5135,9 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 #endif
                 }
             }
+
+            if (effect)
+                gMultiHitCounter = 0; // Prevent multi-hit moves from hitting more than once after move has been absorbed.
         }
         break;
     case ABILITYEFFECT_MOVE_END: // Think contact abilities.

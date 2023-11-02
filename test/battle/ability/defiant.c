@@ -115,3 +115,26 @@ DOUBLE_BATTLE_TEST("Defiant sharply raises opponent's Attack after Intimidate")
         EXPECT_EQ(opponentRight->statStages[STAT_ATK], (abilityRight == ABILITY_DEFIANT) ? DEFAULT_STAT_STAGE + 2 : DEFAULT_STAT_STAGE - 2);
     }
 }
+
+SINGLE_BATTLE_TEST("Defiant activates after Sticky Web lowers Speed")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_MANKEY) { Ability(ABILITY_DEFIANT); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_STICKY_WEB); }
+        TURN { SWITCH(player, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STICKY_WEB, opponent);
+        // Switch-in - Sticky Web activates
+        MESSAGE("Go! Mankey!");
+        MESSAGE("Mankey was caught in a Sticky Web!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Mankey's Speed fell!");
+        // Defiant activates
+        ABILITY_POPUP(player, ABILITY_DEFIANT);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Mankey's Attack sharply rose!");
+    }
+}
