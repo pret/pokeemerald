@@ -363,25 +363,6 @@ static const u16 sEncouragedEncoreEffects[] =
     EFFECT_CAMOUFLAGE,
 };
 
-// For the purposes of determining the most powerful move in a moveset, these
-// moves are treated the same as having a power of 0 or 1
-#define IGNORED_MOVES_END 0xFFFF
-static const u16 sIgnoredPowerfulMoveEffects[] =
-{
-    EFFECT_EXPLOSION,
-    EFFECT_DREAM_EATER,
-    EFFECT_RECHARGE,
-    EFFECT_SKULL_BASH,
-    EFFECT_SOLAR_BEAM,
-    EFFECT_FOCUS_PUNCH,
-    EFFECT_SUPERPOWER,
-    EFFECT_ERUPTION,
-    EFFECT_OVERHEAT,
-    EFFECT_MIND_BLOWN,
-    EFFECT_MAKE_IT_RAIN,
-    IGNORED_MOVES_END
-};
-
 // Functions
 u32 GetAIChosenMove(u32 battlerId)
 {
@@ -980,6 +961,11 @@ static bool32 AI_IsMoveEffectInMinus(u32 battlerAtk, u32 battlerDef, u32 move, s
     switch (gBattleMoves[move].effect)
     {
     case EFFECT_RECHARGE:
+    case EFFECT_SUPERPOWER:
+    case EFFECT_OVERHEAT:
+    case EFFECT_MAKE_IT_RAIN:
+    case EFFECT_MIND_BLOWN:
+    case EFFECT_STEEL_BEAM:
         return TRUE;
     case EFFECT_RECOIL_25:
     case EFFECT_RECOIL_IF_MISS:
@@ -1054,22 +1040,6 @@ u32 GetNoOfHitsToKOBattler(u32 battlerAtk, u32 battlerDef, u32 moveIndex)
     return GetNoOfHitsToKOBattlerDmg(AI_DATA->simulatedDmg[battlerAtk][battlerDef][moveIndex], battlerDef);
 }
 
-bool32 IsInIgnoredPowerfulMoveEffects(u32 effect)
-{
-    u32 i;
-    for (i = 0; sIgnoredPowerfulMoveEffects[i] != IGNORED_MOVES_END; i++)
-    {
-        if (effect == sIgnoredPowerfulMoveEffects[i])
-        {
-            // Don't ingore Solar Beam if doesn't have a charging turn.
-            if (effect == EFFECT_SOLAR_BEAM && (AI_GetWeather(AI_DATA) & B_WEATHER_SUN))
-                break;
-            return TRUE;
-        }
-    }
-    return FALSE;
-}
-
 void SetMovesDamageResults(u32 battlerAtk, u16 *moves)
 {
     s32 i, j, battlerDef, bestId, currId, hp, result;
@@ -1079,7 +1049,7 @@ void SetMovesDamageResults(u32 battlerAtk, u16 *moves)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         u32 move = moves[i];
-        if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || gBattleMoves[move].power == 0 || IsInIgnoredPowerfulMoveEffects(gBattleMoves[move].effect))
+        if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || gBattleMoves[move].power == 0)
             isNotConsidered[i] = TRUE;
         else
             isNotConsidered[i] = FALSE;
@@ -1094,11 +1064,10 @@ void SetMovesDamageResults(u32 battlerAtk, u16 *moves)
 
             if (isNotConsidered[i])
             {
-                result = MOVE_POWER_OTHER; // Move has a power of 0/1, or is in the group sIgnoredPowerfulMoveEffects
+                result = MOVE_POWER_OTHER; // Move has a power of 0/1
             }
             else
             {
-                // Considered move has power and is not in sIgnoredPowerfulMoveEffects
                 // Check all other moves and calculate their power
                 for (j = 0; j < MAX_MON_MOVES; j++)
                 {
@@ -2392,6 +2361,24 @@ bool32 IsEncoreEncouragedEffect(u32 moveEffect)
             return TRUE;
     }
     return FALSE;
+}
+
+bool32 IsChargingMove(u32 battlerAtk, u32 effect)
+{
+    switch (effect)
+    {
+    case EFFECT_SOLAR_BEAM:
+        if (AI_GetWeather(AI_DATA) & B_WEATHER_SUN)
+            return FALSE;
+    case EFFECT_SKULL_BASH:
+    case EFFECT_METEOR_BEAM:
+    case EFFECT_TWO_TURNS_ATTACK:
+        if (AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_POWER_HERB)
+            return FALSE;
+        return TRUE;
+    default:
+        return FALSE;
+    }
 }
 
 static u32 GetLeechSeedDamage(u32 battlerId)

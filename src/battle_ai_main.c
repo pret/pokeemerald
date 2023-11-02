@@ -760,6 +760,9 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         if (IsSemiInvulnerable(battlerDef, move) && moveEffect != EFFECT_SEMI_INVULNERABLE && AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER)
             RETURN_SCORE_MINUS(20);    // if target off screen and we go first, don't use move
 
+        if (IsChargingMove(battlerAtk, moveEffect) && CanTargetFaintAi(battlerDef, battlerAtk))
+            RETURN_SCORE_MINUS(10);
+
         // check if negates type
         switch (effectiveness)
         {
@@ -1356,22 +1359,13 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             }
             break;
         //case EFFECT_BIDE:
-        //case EFFECT_SUPER_FANG:
         //case EFFECT_RECHARGE:
-        case EFFECT_LEVEL_DAMAGE:
-        case EFFECT_PSYWAVE:
         //case EFFECT_COUNTER:
-        //case EFFECT_FLAIL:
-        case EFFECT_RETURN:
         case EFFECT_PRESENT:
-        case EFFECT_FRUSTRATION:
         case EFFECT_SONICBOOM:
         //case EFFECT_MIRROR_COAT:
-        case EFFECT_SKULL_BASH:
         case EFFECT_FOCUS_PUNCH:
-        case EFFECT_SUPERPOWER:
         //case EFFECT_ENDEAVOR:
-        case EFFECT_LOW_KICK:
             // AI_CBM_HighRiskForDamage
             if (aiData->abilities[battlerDef] == ABILITY_WONDER_GUARD && effectiveness < AI_EFFECTIVENESS_x2)
                 ADJUST_SCORE(-10);
@@ -1906,17 +1900,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
               || (gBattleMons[battlerDef].status2 & (STATUS2_TRANSFORMED | STATUS2_SUBSTITUTE))) //Leave out Illusion b/c AI is supposed to be fooled
                 ADJUST_SCORE(-10);
             break;
-        case EFFECT_TWO_TURNS_ATTACK:
-            if (aiData->holdEffects[battlerAtk] != HOLD_EFFECT_POWER_HERB && CanTargetFaintAi(battlerDef, battlerAtk))
-                ADJUST_SCORE(-6);
-            break;
-        case EFFECT_RECHARGE:
-            if (aiData->abilities[battlerDef] == ABILITY_WONDER_GUARD && effectiveness < AI_EFFECTIVENESS_x2)
-                ADJUST_SCORE(-10);
-            else if (aiData->abilities[battlerAtk] != ABILITY_TRUANT
-              && !CanIndexMoveFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex, 0))
-                ADJUST_SCORE(-2);
-            break;
         case EFFECT_SPITE:
         case EFFECT_MIMIC:
             if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER) // Attacker should go first
@@ -2108,13 +2091,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             }
             break;
         case EFFECT_SPECTRAL_THIEF:
-            break;
-        case EFFECT_SOLAR_BEAM:
-            if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_POWER_HERB
-              || ((AI_GetWeather(aiData) & B_WEATHER_SUN) && aiData->holdEffects[battlerAtk] != HOLD_EFFECT_UTILITY_UMBRELLA))
-                break;
-            if (CanTargetFaintAi(battlerDef, battlerAtk)) //Attacker can be knocked out
-                ADJUST_SCORE(-4);
             break;
         case EFFECT_SEMI_INVULNERABLE:
             if (predictedMove != MOVE_NONE
@@ -2674,6 +2650,10 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
              && !BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_SPDEF))
                 ADJUST_SCORE(-10);
             break;
+        case EFFECT_LOW_KICK:
+            if (IsDynamaxed(battlerDef))
+                ADJUST_SCORE(-10);
+            break;
         case EFFECT_PLACEHOLDER:
             return 0;   // cannot even select
     } // move effect checks
@@ -3151,7 +3131,7 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
     s32 score = 0;
     s32 leastHits = 1000;
     u16 *moves = GetMovesArray(battlerAtk);
-    bool8 isPowerfulIgnoredEffect[MAX_MON_MOVES];
+    bool8 isChargingMoveEffect[MAX_MON_MOVES];
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -3163,13 +3143,13 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
                 leastHits = noOfHits[i];
             }
             viableMoveScores[i] = AI_SCORE_DEFAULT;
-            isPowerfulIgnoredEffect[i] = IsInIgnoredPowerfulMoveEffects(gBattleMoves[moves[i]].effect);
+            isChargingMoveEffect[i] = IsChargingMove(battlerAtk, gBattleMoves[moves[i]].effect);
         }
         else
         {
             noOfHits[i] = -1;
             viableMoveScores[i] = 0;
-            isPowerfulIgnoredEffect[i] = FALSE;
+            isChargingMoveEffect[i] = FALSE;
         }
         /*
             MgbaPrintf_("%S: required hits: %d Dmg: %d", gMoveNames[moves[i]], noOfHits[i], AI_DATA->simulatedDmg[battlerAtk][battlerDef][i]);
@@ -3178,7 +3158,7 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
 
     // Priority list:
     // 1. Less no of hits to ko
-    // 2. Not in the powerful but ignored move effects table
+    // 2. Not charging
     // 3. More accuracy
     // 4. Better effect
 
@@ -3193,9 +3173,9 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
             {
                 multipleBestMoves = TRUE;
                 // We need to make sure it's the current move which is objectively better.
-                if (isPowerfulIgnoredEffect[i] && !isPowerfulIgnoredEffect[currId])
+                if (isChargingMoveEffect[i] && !isChargingMoveEffect[currId])
                     viableMoveScores[i] -= 3;
-                else if (!isPowerfulIgnoredEffect[i] && isPowerfulIgnoredEffect[currId])
+                else if (!isChargingMoveEffect[i] && isChargingMoveEffect[currId])
                     viableMoveScores[currId] -= 3;
 
                 switch (CompareMoveAccuracies(battlerAtk, battlerDef, currId, i))
@@ -4847,15 +4827,6 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         IncreasePoisonScore(battlerAtk, battlerDef, move, &score);
         IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPEED, &score);
         break;
-    case EFFECT_SOLAR_BEAM:
-        if (GetNoOfHitsToKOBattler(battlerAtk, battlerDef, movesetIndex) >= 2
-            && HasMoveEffect(battlerAtk, EFFECT_SUNNY_DAY) && (AI_GetWeather(aiData) & B_WEATHER_SUN)) // Use Sunny Day to boost damage.
-            ADJUST_SCORE(-3);
-    case EFFECT_TWO_TURNS_ATTACK:
-    case EFFECT_SKULL_BASH:
-        if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_POWER_HERB)
-            ADJUST_SCORE(2);
-        break;
     case EFFECT_COUNTER:
         if (!IsBattlerIncapacitated(battlerDef, aiData->abilities[battlerDef]) && predictedMove != MOVE_NONE)
         {
@@ -5246,9 +5217,6 @@ static s32 AI_HPAware(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             case EFFECT_BELLY_DRUM:
             case EFFECT_PSYCH_UP:
             case EFFECT_MIRROR_COAT:
-            case EFFECT_SOLAR_BEAM:
-            case EFFECT_TWO_TURNS_ATTACK:
-            case EFFECT_ERUPTION:
             case EFFECT_TICKLE:
             case EFFECT_SUNNY_DAY:
             case EFFECT_SANDSTORM:
