@@ -373,7 +373,6 @@ static const u16 sIgnoredPowerfulMoveEffects[] =
     EFFECT_RECHARGE,
     EFFECT_SKULL_BASH,
     EFFECT_SOLAR_BEAM,
-    EFFECT_SPIT_UP,
     EFFECT_FOCUS_PUNCH,
     EFFECT_SUPERPOWER,
     EFFECT_ERUPTION,
@@ -2063,7 +2062,6 @@ bool32 HasMoveWithSplit(u32 battler, u32 split)
         if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && GetBattleMoveSplit(moves[i]) == split)
             return TRUE;
     }
-
     return FALSE;
 }
 
