@@ -4253,8 +4253,8 @@ static void HandleTurnActionSelectionState(void)
 
                     gBattleStruct->mega.toEvolve &= ~(gBitTable[BATTLE_PARTNER(GetBattlerPosition(battler))]);
                     gBattleStruct->burst.toBurst &= ~(gBitTable[BATTLE_PARTNER(GetBattlerPosition(battler))]);
-                    gBattleStruct->dynamax.toDynamax &= ~(gBitTable[battler]);
-                    gBattleStruct->dynamax.usingMaxMove[battler] = FALSE;
+                    gBattleStruct->dynamax.toDynamax &= ~(gBitTable[BATTLE_PARTNER(GetBattlerPosition(battler))]);
+                    gBattleStruct->dynamax.usingMaxMove[BATTLE_PARTNER(GetBattlerPosition(battler))] = FALSE;
                     gBattleStruct->zmove.toBeUsed[BATTLE_PARTNER(GetBattlerPosition(battler))] = MOVE_NONE;
                     BtlController_EmitEndBounceEffect(battler, BUFFER_A);
                     MarkBattlerForControllerExec(battler);
@@ -4354,7 +4354,7 @@ static void HandleTurnActionSelectionState(void)
                                 gBattleStruct->burst.toBurst |= gBitTable[battler];
                             else if (gBattleResources->bufferB[battler][2] & RET_DYNAMAX)
                                 gBattleStruct->dynamax.toDynamax |= gBitTable[battler];
-                            
+
                             // Max Move check
                             if (ShouldUseMaxMove(battler, gChosenMoveByBattler[battler]))
                             {

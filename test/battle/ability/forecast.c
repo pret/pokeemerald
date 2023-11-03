@@ -353,3 +353,45 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform back to normal when its ability
         EXPECT_EQ(player->species, SPECIES_CASTFORM_NORMAL);
     }
 }
+
+SINGLE_BATTLE_TEST("Forecast transforms Castform back when it switches out")
+{
+    GIVEN {
+        ASSUME(B_WEATHER_FORMS >= GEN_5);
+        PLAYER(SPECIES_CASTFORM) { Ability(ABILITY_FORECAST); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SUNNY_DAY); }
+        TURN { SWITCH(player, 1); }
+    } SCENE {
+        // transforms in sun
+        ABILITY_POPUP(player, ABILITY_FORECAST);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
+        MESSAGE("Castform transformed!");
+        MESSAGE("Castform, that's enough! Come back!");
+    } THEN {
+        EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_CASTFORM);
+    }
+}
+
+SINGLE_BATTLE_TEST("Forecast transforms Castform back when it uses a move that forces it to switch out")
+{
+    GIVEN {
+        ASSUME(B_WEATHER_FORMS >= GEN_5);
+        PLAYER(SPECIES_CASTFORM) { Ability(ABILITY_FORECAST); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SUNNY_DAY); }
+        TURN { MOVE(player, MOVE_U_TURN); SEND_OUT(player, 1); }
+    } SCENE {
+        // transforms in sun
+        ABILITY_POPUP(player, ABILITY_FORECAST);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
+        MESSAGE("Castform transformed!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_U_TURN, player);
+    } THEN {
+        EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_CASTFORM);
+    }
+}

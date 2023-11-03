@@ -8378,19 +8378,22 @@ static const union AnimCmd sAnim_Volcanion_1[] =
 #if P_GEN_7_POKEMON == TRUE
 static const union AnimCmd sAnim_Rowlet_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_Dartrix_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_Decidueye_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 50),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
@@ -8432,19 +8435,25 @@ static const union AnimCmd sAnim_Primarina_1[] =
 
 static const union AnimCmd sAnim_Pikipek_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_Trumbeak_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_Toucannon_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 40),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
@@ -8508,25 +8517,71 @@ static const union AnimCmd sAnim_Oricorio_1[] =
 
 static const union AnimCmd sAnim_Cutiefly_1[] =
 {
+    ANIMCMD_FRAME(1, 1),
     ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 35),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_Ribombee_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(0, 8),
     ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_Rockruff_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 9),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_LycanrocMidday_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 40),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
@@ -8661,13 +8716,15 @@ static const union AnimCmd sAnim_Comfey_1[] =
 
 static const union AnimCmd sAnim_Oranguru_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_Passimian_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
@@ -8741,7 +8798,8 @@ static const union AnimCmd sAnim_Turtonator_1[] =
 
 static const union AnimCmd sAnim_Togedemaru_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
@@ -8759,7 +8817,8 @@ static const union AnimCmd sAnim_Bruxish_1[] =
 
 static const union AnimCmd sAnim_Drampa_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 50),
+    ANIMCMD_FRAME(0, 50),
     ANIMCMD_END,
 };
 
@@ -8771,17 +8830,15 @@ static const union AnimCmd sAnim_Dhelmise_1[] =
 
 static const union AnimCmd sAnim_JANGMO_O_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_FRAME(1, 25),
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_HAKAMO_O_1[] =
 {
-    ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(1, 30),
-    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
@@ -10685,13 +10742,15 @@ static const union AnimCmd sAnim_MimikyuBusted_1[] =
 
 static const union AnimCmd sAnim_LycanrocMidnight_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_LycanrocDusk_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 40),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 #endif
@@ -13009,6 +13068,68 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_RUNERIGUS]                      = sAnims_Runerigus,
     [SPECIES_MILCERY]                        = sAnims_Milcery,
     [SPECIES_ALCREMIE_STRAWBERRY_VANILLA_CREAM] = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_STRAWBERRY_RUBY_CREAM]    = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_STRAWBERRY_MATCHA_CREAM]  = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_STRAWBERRY_MINT_CREAM]    = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_STRAWBERRY_LEMON_CREAM]   = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_STRAWBERRY_SALTED_CREAM]  = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_STRAWBERRY_RUBY_SWIRL]    = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_STRAWBERRY_CARAMEL_SWIRL] = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_STRAWBERRY_RAINBOW_SWIRL] = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_BERRY_VANILLA_CREAM]      = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_BERRY_RUBY_CREAM]         = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_BERRY_MATCHA_CREAM]       = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_BERRY_MINT_CREAM]         = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_BERRY_LEMON_CREAM]        = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_BERRY_SALTED_CREAM]       = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_BERRY_RUBY_SWIRL]         = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_BERRY_CARAMEL_SWIRL]      = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_BERRY_RAINBOW_SWIRL]      = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_LOVE_VANILLA_CREAM]       = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_LOVE_RUBY_CREAM]          = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_LOVE_MATCHA_CREAM]        = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_LOVE_MINT_CREAM]          = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_LOVE_LEMON_CREAM]         = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_LOVE_SALTED_CREAM]        = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_LOVE_RUBY_SWIRL]          = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_LOVE_CARAMEL_SWIRL]       = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_LOVE_RAINBOW_SWIRL]       = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_STAR_VANILLA_CREAM]       = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_STAR_RUBY_CREAM]          = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_STAR_MATCHA_CREAM]        = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_STAR_MINT_CREAM]          = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_STAR_LEMON_CREAM]         = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_STAR_SALTED_CREAM]        = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_STAR_RUBY_SWIRL]          = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_STAR_CARAMEL_SWIRL]       = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_STAR_RAINBOW_SWIRL]       = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_CLOVER_VANILLA_CREAM]     = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_CLOVER_RUBY_CREAM]        = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_CLOVER_MATCHA_CREAM]      = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_CLOVER_MINT_CREAM]        = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_CLOVER_LEMON_CREAM]       = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_CLOVER_SALTED_CREAM]      = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_CLOVER_RUBY_SWIRL]        = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_CLOVER_CARAMEL_SWIRL]     = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_CLOVER_RAINBOW_SWIRL]     = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_FLOWER_VANILLA_CREAM]     = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_FLOWER_RUBY_CREAM]        = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_FLOWER_MATCHA_CREAM]      = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_FLOWER_MINT_CREAM]        = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_FLOWER_LEMON_CREAM]       = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_FLOWER_SALTED_CREAM]      = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_FLOWER_RUBY_SWIRL]        = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_FLOWER_CARAMEL_SWIRL]     = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_FLOWER_RAINBOW_SWIRL]     = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_RIBBON_VANILLA_CREAM]     = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_RIBBON_RUBY_CREAM]        = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_RIBBON_MATCHA_CREAM]      = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_RIBBON_MINT_CREAM]        = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_RIBBON_LEMON_CREAM]       = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_RIBBON_SALTED_CREAM]      = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_RIBBON_RUBY_SWIRL]        = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_RIBBON_CARAMEL_SWIRL]     = sAnims_Alcremie,
+    [SPECIES_ALCREMIE_RIBBON_RAINBOW_SWIRL]     = sAnims_Alcremie,
     [SPECIES_FALINKS]                        = sAnims_Falinks,
     [SPECIES_PINCURCHIN]                     = sAnims_Pincurchin,
     [SPECIES_SNOM]                           = sAnims_Snom,
@@ -13516,14 +13637,6 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_TOXTRICITY_LOW_KEY]             = sAnims_Toxtricity,
     [SPECIES_SINISTEA_ANTIQUE]               = sAnims_Sinistea,
     [SPECIES_POLTEAGEIST_ANTIQUE]            = sAnims_Polteageist,
-    [SPECIES_ALCREMIE_STRAWBERRY_RUBY_CREAM] = sAnims_Alcremie,
-    [SPECIES_ALCREMIE_STRAWBERRY_MATCHA_CREAM] = sAnims_Alcremie,
-    [SPECIES_ALCREMIE_STRAWBERRY_MINT_CREAM] = sAnims_Alcremie,
-    [SPECIES_ALCREMIE_STRAWBERRY_LEMON_CREAM] = sAnims_Alcremie,
-    [SPECIES_ALCREMIE_STRAWBERRY_SALTED_CREAM] = sAnims_Alcremie,
-    [SPECIES_ALCREMIE_STRAWBERRY_RUBY_SWIRL] = sAnims_Alcremie,
-    [SPECIES_ALCREMIE_STRAWBERRY_CARAMEL_SWIRL] = sAnims_Alcremie,
-    [SPECIES_ALCREMIE_STRAWBERRY_RAINBOW_SWIRL] = sAnims_Alcremie,
     [SPECIES_EISCUE_NOICE_FACE]              = sAnims_Eiscue,
     [SPECIES_INDEEDEE_FEMALE]                = sAnims_Indeedee,
     [SPECIES_MORPEKO_HANGRY]                 = sAnims_Morpeko,

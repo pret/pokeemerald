@@ -1315,26 +1315,6 @@
         .bodyColor = BODY_COLOR_PURPLE,                                     \
         .noFlip = FALSE
 
-#define ALCREMIE_MISC_INFO(color)                                           \
-        .baseHP        = 65,                                                \
-        .baseAttack    = 60,                                                \
-        .baseDefense   = 75,                                                \
-        .baseSpeed     = 64,                                                \
-        .baseSpAttack  = 110,                                               \
-        .baseSpDefense = 121,                                               \
-        .types = { TYPE_FAIRY, TYPE_FAIRY},                                 \
-        .catchRate = 100,                                                   \
-        .expYield = 173,                                                    \
-        .evYield_SpDefense = 2,                                             \
-        .genderRatio = MON_FEMALE,                                          \
-        .eggCycles = 20,                                                    \
-        .friendship = STANDARD_FRIENDSHIP,                                  \
-        .growthRate = GROWTH_MEDIUM_FAST,                                   \
-        .eggGroups = { EGG_GROUP_FAIRY, EGG_GROUP_AMORPHOUS},               \
-        .abilities = {ABILITY_SWEET_VEIL, ABILITY_NONE, ABILITY_AROMA_VEIL},\
-        .bodyColor = color,                                                 \
-        .noFlip = FALSE
-
 #define MORPEKO_SPECIES_INFO                               \
     {                                                      \
         .baseHP        = 58,                               \
@@ -20469,8 +20449,93 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
-    [SPECIES_ALCREMIE_STRAWBERRY_VANILLA_CREAM] = { ALCREMIE_MISC_INFO(BODY_COLOR_WHITE) },
+#define ALCREMIE_MISC_INFO(color)                                           \
+        .baseHP        = 65,                                                \
+        .baseAttack    = 60,                                                \
+        .baseDefense   = 75,                                                \
+        .baseSpeed     = 64,                                                \
+        .baseSpAttack  = 110,                                               \
+        .baseSpDefense = 121,                                               \
+        .types = { TYPE_FAIRY, TYPE_FAIRY},                                 \
+        .catchRate = 100,                                                   \
+        .expYield = 173,                                                    \
+        .evYield_SpDefense = 2,                                             \
+        .genderRatio = MON_FEMALE,                                          \
+        .eggCycles = 20,                                                    \
+        .friendship = STANDARD_FRIENDSHIP,                                  \
+        .growthRate = GROWTH_MEDIUM_FAST,                                   \
+        .eggGroups = { EGG_GROUP_FAIRY, EGG_GROUP_AMORPHOUS},               \
+        .abilities = {ABILITY_SWEET_VEIL, ABILITY_NONE, ABILITY_AROMA_VEIL},\
+        .bodyColor = color,                                                 \
+        .noFlip = FALSE
 
+// For later
+#define ALCREMIE_REGULAR_MISC_INFO(color, sweet, cream)                     \
+    ALCREMIE_MISC_INFO(color)
+
+    [SPECIES_ALCREMIE_STRAWBERRY_VANILLA_CREAM] = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_WHITE, Strawberry, VanillaCream), },
+    [SPECIES_ALCREMIE_STRAWBERRY_RUBY_CREAM]    = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_PINK, Strawberry, RubyCream), },
+    [SPECIES_ALCREMIE_STRAWBERRY_MATCHA_CREAM]  = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_GREEN, Strawberry, MatchaCream), },
+    [SPECIES_ALCREMIE_STRAWBERRY_MINT_CREAM]    = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_BLUE, Strawberry, MintCream), },
+    [SPECIES_ALCREMIE_STRAWBERRY_LEMON_CREAM]   = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Strawberry, LemonCream), },
+    [SPECIES_ALCREMIE_STRAWBERRY_SALTED_CREAM]  = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_WHITE, Strawberry, SaltedCream), },
+    [SPECIES_ALCREMIE_STRAWBERRY_RUBY_SWIRL]    = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Strawberry, RubySwirl), },
+    [SPECIES_ALCREMIE_STRAWBERRY_CARAMEL_SWIRL] = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_BROWN, Strawberry, CaramelSwirl), },
+    [SPECIES_ALCREMIE_STRAWBERRY_RAINBOW_SWIRL] = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Strawberry, RainbowSwirl), },
+    [SPECIES_ALCREMIE_BERRY_VANILLA_CREAM]      = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_WHITE, Berry, VanillaCream) },
+    [SPECIES_ALCREMIE_BERRY_RUBY_CREAM]         = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_PINK, Berry, RubyCream) },
+    [SPECIES_ALCREMIE_BERRY_MATCHA_CREAM]       = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_GREEN, Berry, MatchaCream), },
+    [SPECIES_ALCREMIE_BERRY_MINT_CREAM]         = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_BLUE, Berry, MintCream), },
+    [SPECIES_ALCREMIE_BERRY_LEMON_CREAM]        = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Berry, LemonCream), },
+    [SPECIES_ALCREMIE_BERRY_SALTED_CREAM]       = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_WHITE, Berry, SaltedCream), },
+    [SPECIES_ALCREMIE_BERRY_RUBY_SWIRL]         = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Berry, RubySwirl), },
+    [SPECIES_ALCREMIE_BERRY_CARAMEL_SWIRL]      = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_BROWN, Berry, CaramelSwirl), },
+    [SPECIES_ALCREMIE_BERRY_RAINBOW_SWIRL]      = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Berry, RainbowSwirl), },
+    [SPECIES_ALCREMIE_LOVE_VANILLA_CREAM]       = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_WHITE, Love, VanillaCream) },
+    [SPECIES_ALCREMIE_LOVE_RUBY_CREAM]          = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_PINK, Love, RubyCream) },
+    [SPECIES_ALCREMIE_LOVE_MATCHA_CREAM]        = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_GREEN, Love, MatchaCream), },
+    [SPECIES_ALCREMIE_LOVE_MINT_CREAM]          = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_BLUE, Love, MintCream), },
+    [SPECIES_ALCREMIE_LOVE_LEMON_CREAM]         = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Love, LemonCream), },
+    [SPECIES_ALCREMIE_LOVE_SALTED_CREAM]        = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_WHITE, Love, SaltedCream), },
+    [SPECIES_ALCREMIE_LOVE_RUBY_SWIRL]          = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Love, RubySwirl), },
+    [SPECIES_ALCREMIE_LOVE_CARAMEL_SWIRL]       = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_BROWN, Love, CaramelSwirl), },
+    [SPECIES_ALCREMIE_LOVE_RAINBOW_SWIRL]       = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Love, RainbowSwirl), },
+    [SPECIES_ALCREMIE_STAR_VANILLA_CREAM]       = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_WHITE, Star, VanillaCream) },
+    [SPECIES_ALCREMIE_STAR_RUBY_CREAM]          = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_PINK, Star, RubyCream) },
+    [SPECIES_ALCREMIE_STAR_MATCHA_CREAM]        = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_GREEN, Star, MatchaCream), },
+    [SPECIES_ALCREMIE_STAR_MINT_CREAM]          = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_BLUE, Star, MintCream), },
+    [SPECIES_ALCREMIE_STAR_LEMON_CREAM]         = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Star, LemonCream), },
+    [SPECIES_ALCREMIE_STAR_SALTED_CREAM]        = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_WHITE, Star, SaltedCream), },
+    [SPECIES_ALCREMIE_STAR_RUBY_SWIRL]          = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Star, RubySwirl), },
+    [SPECIES_ALCREMIE_STAR_CARAMEL_SWIRL]       = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_BROWN, Star, CaramelSwirl), },
+    [SPECIES_ALCREMIE_STAR_RAINBOW_SWIRL]       = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Star, RainbowSwirl), },
+    [SPECIES_ALCREMIE_CLOVER_VANILLA_CREAM]     = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_WHITE, Clover, VanillaCream) },
+    [SPECIES_ALCREMIE_CLOVER_RUBY_CREAM]        = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_PINK, Clover, RubyCream) },
+    [SPECIES_ALCREMIE_CLOVER_MATCHA_CREAM]      = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_GREEN, Clover, MatchaCream), },
+    [SPECIES_ALCREMIE_CLOVER_MINT_CREAM]        = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_BLUE, Clover, MintCream), },
+    [SPECIES_ALCREMIE_CLOVER_LEMON_CREAM]       = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Clover, LemonCream), },
+    [SPECIES_ALCREMIE_CLOVER_SALTED_CREAM]      = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_WHITE, Clover, SaltedCream), },
+    [SPECIES_ALCREMIE_CLOVER_RUBY_SWIRL]        = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Clover, RubySwirl), },
+    [SPECIES_ALCREMIE_CLOVER_CARAMEL_SWIRL]     = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_BROWN, Clover, CaramelSwirl), },
+    [SPECIES_ALCREMIE_CLOVER_RAINBOW_SWIRL]     = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Clover, RainbowSwirl), },
+    [SPECIES_ALCREMIE_FLOWER_VANILLA_CREAM]     = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_WHITE, Flower, VanillaCream) },
+    [SPECIES_ALCREMIE_FLOWER_RUBY_CREAM]        = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_PINK, Flower, RubyCream) },
+    [SPECIES_ALCREMIE_FLOWER_MATCHA_CREAM]      = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_GREEN, Flower, MatchaCream), },
+    [SPECIES_ALCREMIE_FLOWER_MINT_CREAM]        = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_BLUE, Flower, MintCream), },
+    [SPECIES_ALCREMIE_FLOWER_LEMON_CREAM]       = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Flower, LemonCream), },
+    [SPECIES_ALCREMIE_FLOWER_SALTED_CREAM]      = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_WHITE, Flower, SaltedCream), },
+    [SPECIES_ALCREMIE_FLOWER_RUBY_SWIRL]        = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Flower, RubySwirl), },
+    [SPECIES_ALCREMIE_FLOWER_CARAMEL_SWIRL]     = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_BROWN, Flower, CaramelSwirl), },
+    [SPECIES_ALCREMIE_FLOWER_RAINBOW_SWIRL]     = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Flower, RainbowSwirl), },
+    [SPECIES_ALCREMIE_RIBBON_VANILLA_CREAM]     = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_WHITE, Ribbon, VanillaCream) },
+    [SPECIES_ALCREMIE_RIBBON_RUBY_CREAM]        = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_PINK, Ribbon, RubyCream) },
+    [SPECIES_ALCREMIE_RIBBON_MATCHA_CREAM]      = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_GREEN, Ribbon, MatchaCream), },
+    [SPECIES_ALCREMIE_RIBBON_MINT_CREAM]        = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_BLUE, Ribbon, MintCream), },
+    [SPECIES_ALCREMIE_RIBBON_LEMON_CREAM]       = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Ribbon, LemonCream), },
+    [SPECIES_ALCREMIE_RIBBON_SALTED_CREAM]      = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_WHITE, Ribbon, SaltedCream), },
+    [SPECIES_ALCREMIE_RIBBON_RUBY_SWIRL]        = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Ribbon, RubySwirl), },
+    [SPECIES_ALCREMIE_RIBBON_CARAMEL_SWIRL]     = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_BROWN, Ribbon, CaramelSwirl), },
+    [SPECIES_ALCREMIE_RIBBON_RAINBOW_SWIRL]     = { ALCREMIE_REGULAR_MISC_INFO(BODY_COLOR_YELLOW, Ribbon, RainbowSwirl), },
     [SPECIES_FALINKS] =
     {
         .baseHP        = 65,
@@ -24698,15 +24763,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
     [SPECIES_SINISTEA_ANTIQUE] = SINISTEA_SPECIES_INFO,
 
     [SPECIES_POLTEAGEIST_ANTIQUE] = POLTEAGEIST_SPECIES_INFO,
-
-    [SPECIES_ALCREMIE_STRAWBERRY_RUBY_CREAM]    = { ALCREMIE_MISC_INFO(BODY_COLOR_PINK) },
-    [SPECIES_ALCREMIE_STRAWBERRY_MATCHA_CREAM]  = { ALCREMIE_MISC_INFO(BODY_COLOR_GREEN) },
-    [SPECIES_ALCREMIE_STRAWBERRY_MINT_CREAM]    = { ALCREMIE_MISC_INFO(BODY_COLOR_BLUE) },
-    [SPECIES_ALCREMIE_STRAWBERRY_LEMON_CREAM]   = { ALCREMIE_MISC_INFO(BODY_COLOR_YELLOW) },
-    [SPECIES_ALCREMIE_STRAWBERRY_SALTED_CREAM]  = { ALCREMIE_MISC_INFO(BODY_COLOR_WHITE) },
-    [SPECIES_ALCREMIE_STRAWBERRY_RUBY_SWIRL]    = { ALCREMIE_MISC_INFO(BODY_COLOR_YELLOW) },
-    [SPECIES_ALCREMIE_STRAWBERRY_CARAMEL_SWIRL] = { ALCREMIE_MISC_INFO(BODY_COLOR_BROWN) },
-    [SPECIES_ALCREMIE_STRAWBERRY_RAINBOW_SWIRL] = { ALCREMIE_MISC_INFO(BODY_COLOR_YELLOW) },
 
     [SPECIES_EISCUE_NOICE_FACE] =
     {

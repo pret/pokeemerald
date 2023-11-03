@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax increases HP and max HP by 1.5x", u16 hp)
         }
         MESSAGE("Foe Wobbuffet used Celebrate!");
     } THEN {
-        results[i].hp = player->hp;        
+        results[i].hp = player->hp;
     } FINALLY {
         EXPECT_MUL_EQ(results[0].hp, Q_4_12(1.5), results[1].hp);
     }
@@ -49,7 +49,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax expires after three turns", u16 hp)
         if (dynamax) // Expect to have visual reversion at the end.
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
     } THEN {
-        results[i].hp = player->hp;        
+        results[i].hp = player->hp;
     } FINALLY {
         EXPECT_EQ(results[0].hp, results[1].hp);
     }
@@ -250,7 +250,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can be encored immediately after
         TURN { MOVE(player, MOVE_ARM_THRUST, dynamax: TRUE); }
         TURN { MOVE(player, MOVE_ARM_THRUST); }
         TURN { MOVE(player, MOVE_ARM_THRUST); }
-        TURN { MOVE(opponent, MOVE_ENCORE); MOVE(player, MOVE_TACKLE); } 
+        TURN { MOVE(opponent, MOVE_ENCORE); MOVE(player, MOVE_TACKLE); }
     } SCENE {
         MESSAGE("Wobbuffet used Max Knuckle!");
         MESSAGE("Wobbuffet used Max Knuckle!");
@@ -322,7 +322,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not immune to Knock Off")
         MESSAGE("Wobbuffet used Max Strike!");
         MESSAGE("Foe Wobbuffet used Knock Off!");
         MESSAGE("Foe Wobbuffet knocked off Wobbuffet's Potion!");
-    } THEN { 
+    } THEN {
         EXPECT_EQ(player->item, ITEM_NONE);
     }
 }
@@ -1216,7 +1216,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Wildfire sets a field effect that damages no
         MESSAGE("Foe Wynaut is burning up within G-Max Wildfire's flames!");
         HP_BAR(opponentRight);
         // turn 5
-        NONE_OF { 
+        NONE_OF {
             HP_BAR(opponentRight);
             MESSAGE("Foe Wynaut is burning up within G-Max Wildfire's flames!");
         }
@@ -1294,8 +1294,8 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Finale heals allies by 1/6 of their health")
         HP_BAR(playerLeft, captureDamage: &damage1);
         HP_BAR(playerRight, captureDamage: &damage2);
     } THEN {
-        EXPECT_MUL_EQ(playerLeft->hp - 1, Q_4_12(6), playerLeft->maxHP); // heals based on Dynamax HP
-        EXPECT_MUL_EQ(playerRight->hp - 1, Q_4_12(6), playerRight->maxHP);
+        EXPECT_MUL_EQ(-damage1, Q_4_12(6), playerLeft->maxHP); // heals based on Dynamax HP
+        EXPECT_MUL_EQ(-damage2, Q_4_12(6), playerRight->maxHP);
     }
 }
 
@@ -1387,7 +1387,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Depletion takes away 2 PP from the target's 
         PLAYER(SPECIES_DURALUDON);
         PLAYER(SPECIES_WYNAUT);
         // Dynamax behaves weird with test turn order because stats are recalculated.
-        OPPONENT(SPECIES_SABLEYE) { Ability(ABILITY_PRANKSTER); } 
+        OPPONENT(SPECIES_SABLEYE) { Ability(ABILITY_PRANKSTER); }
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_DRAGON_CLAW, target: opponentLeft, dynamax: TRUE); }

@@ -1968,4 +1968,3 @@ const u8 *const gMaxMoveNames[] =
     [MOVE_G_MAX_ONE_BLOW - FIRST_MAX_MOVE] = sText_G_Max_One_Blow,
     [MOVE_G_MAX_RAPID_FLOW - FIRST_MAX_MOVE] = sText_G_Max_Rapid_Flow,
 };
-    
