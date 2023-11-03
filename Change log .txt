@@ -1,0 +1,384 @@
+Change log: 
+
+New Evolution Methods: 
+Poliwhirl -> Politoed = use Kings Rock on Poliwhirl 
+Kadabara -> Alakazam = Level to 37
+Machop -> Machoke = Level to 37
+Graveler -> Golem = Level to 37
+Slowpoke -> Slowking = use Kings Rock on Slowpoke 
+Haunter -> Gengar = Level to 37
+Onix -> Steelix = Use Metal Coat on Onix 
+Seadra -> Kingdra = Use Dragon Scale on Seadra
+Scyther -> Scizor = Use Metal Coat on Scyther 
+Porygon -> Porygon2 = Use Up Grade on Porygon 
+Eevee -> Espeon = Use Moonstone on Eevee OR High Friendship Levelup during the Night
+Eevee -> Umbreon = Use Sunstone on Eevee OR High Friendship Levelup during the Day
+Feebas -> Milotic = Use Dragon Scale on Feebas OR get Beauty to 170 and level up
+Clamperl -> Huntail = Use Deep Sea Tooth on Clamperl 
+Clamperl -> Gorebyss = Use Deep Sea Scale on Clamperl
+
+Pokemon Changes: 
+	All Gen 1 Pokemon who lost stat points between gen 1 and 2 have had those changes reversed, any other decreases have been reversed, any stat increases 	have been added in (unless they were to stats that were reverted to gen 1 levels). Some pokemon got additional tweaking. 
+	Fairy Type Added as a Special Type and added to all pokemon who received it in Gen 6+.
+	Dark Type is now Physical instead of Special.
+	Ghost Type is now Special instead of Physical.
+	All Pokemon with Genders have their Gender Ratio set to 50/50. 
+	All Pokemon now have two abilities (With a few exceptions like Shedinja)
+	All pokemon now have a common and rare item
+	All wild pokemon will have an item
+
+Blastoise: 
+	Type Change: Water / Steel
+Butterfree:
+	Special Attack: 80 -> 90
+Beedrill: 
+	Attack: 80 -> 90
+Arbok:
+	Attack: 85 -> 95
+Pikachu: 
+	Defense: 30 -> 40
+	Special Defense: 40 -> 50
+	Speed: 90 -> 100
+Raichu:
+	Defense: 55 -> 65
+	Special Defense: 80 -> 90
+	Speed: 100 -> 110
+Sandshrew: 
+	Special Attack: 20 -> 30
+Sandslash: 
+	Special Attack: 55 -> 65
+Nidoqueen:
+	Attack: 82 -> 92
+Nidoking:
+	Attack: 92 -> 102
+Clefable:
+	Special Attack: 85 -> 95
+Vulpix: 
+	Special Attack: 50 -> 65
+Ninetails:
+	Type Change: Fire / Psychic 
+	Special Attack: 81 -> 100
+Wigglytuff:
+	Special Attack: 75 -> 85
+Zubat: 
+	Special Attack: 30 -> 40
+Golbat:
+	Special Attack: 65 -> 75
+Oddish: 
+	Special Defense: 65 -> 75
+Gloom:
+	Special Defense: 75 -> 85
+Vileplume:
+	Special Attack: 100 -> 110
+	Special Defense: 90 -> 100
+Paras:
+	Special Attack: 45 -> 55
+Parasect:
+	Special Attack: 60 -> 70
+Venomoth:
+	Special Defense: 75 -> 90
+Diglett:
+	Special Attack: 35 -> 45
+Dugtrio:
+	Attack: 80 -> 100
+	Special Attack: 50 -> 70
+Psyduck: 
+	Type Changed: Water / Psychic 
+Golduck:
+	Type Changed: Water / Psychic 
+Poliwrath:
+	Attack: 85 -> 95
+Abra:
+	Special Defense: 55 -> 105
+Kadabra: 
+	Special Defense: 70 -> 120
+Alakazam:
+	Special Defense: 85 -> 135
+Bellsprout: 
+	Special Defense: 30 -> 70
+Weepinbell:
+	Special Defense: 45 -> 85
+Victreebel:
+	Special Defense: 60 -> 100
+Tentacool:
+	Special Attack: 50 -> 100
+Tentacruel:
+	Special Attack: 80 -> 120
+Golem:
+	Attack: 110 -> 120
+Magnemite: 
+	Special Defense: 45 -> 95
+Magneton: 
+	Special Defense: 70 -> 120
+Farfetch'd:
+	Attack: 65 -> 90
+Dodrio:
+	Speed: 100 -> 110
+Seel:
+	Special Attack: 45 -> 70
+Dewgong: 
+	Special Attack: 70 -> 95
+Shellder:
+	Special Defense: 25 -> 45
+Cloyster:
+	Special Defense: 45 -> 85
+Ghastly: 
+	Special Defense: 35 -> 100
+Haunter: 
+	Special Defense: 55 -> 110
+Gengar: 
+	Special Defense: 75 -> 130
+Drowzee:
+	Special Attack: 43 -> 90
+Hypno:
+	Special Attack: 73 -> 115
+Electrode: 
+	Speed: 140 -> 150
+Exeggcute:
+	Special Defense: 45 -> 60
+Exeggutor: 
+	Special Defense: 65 -> 125
+Koffing: 
+	Special Defense: 45 -> 60
+Weezing:
+	Special Defense: 70 -> 85
+Chansey:
+	Special Attack: 35 -> 105
+Tangela:
+	Special Defense: 40 -> 100
+Horsea:
+	Special Defense: 25 -> 70
+Seadra: 
+	Special Defense: 45 -> 95
+Goldeen Goldeen Goldeen:
+	Special Attack: 35 -> 50
+Seaking: 
+	Special Attack: 65 -> 80
+Staryu:
+	Special Defense: 55 -> 70
+Starmie:
+	Special Defense: 85 -> 100
+Tauros:
+	Special Attack: 40 -> 70
+Magikarp:
+	Special Attack: 15 -> 20
+Gyarados: 
+	Special Attack: 60 -> 100
+Lapras:
+	Special Attack: 85 -> 95
+Eevee:
+	Special Attack: 45 -> 65
+Vaporeon:
+	Special Attack: 95 -> 110
+Jolteon:
+	Special Defense: 95 -> 110
+Flareon:
+	Special Attack: 95 -> 110
+Omanyte: 
+	Special Defense: 45 -> 90
+Omastar: 
+	Special Defense: 70 -> 115
+Kabutops:
+	Special Attack: 65 -> 70
+Articuno:
+	Special Attack: 95 -> 125
+Zapdos: 
+	Special Defense: 90 -> 125
+Moltres:
+	Special Defense: 80 -> 125
+Mewtwo:
+	Special Defense: 90 -> 154
+Mew:
+	Type Change: Psychic / Fairy
+Noctowl:
+	Special Attack: 76 -> 86
+Ariados:
+	Special Defense: 60 -> 70
+Crobat: 
+	Special Attack: 70 -> 80
+Pichu: 
+	Defense: 15 -> 25
+	Speed: 60 -> 70
+Ampharos:
+	Type Change: Electric / Dragon
+	Defense: 75 -> 85
+Bellosom:
+	Defense: 85 -> 95
+	Special Attack: 90 -> 100
+Azumarill:
+	Special Attack: 50 -> 60
+Jumpluff:
+	Special Defense: 85 -> 95
+Espeon:
+	Special Defense: 95 -> 115
+Umbreon:
+	Special Attack: 60 -> 80
+Quillfish:
+	Defense: 75 -> 85
+Sneasel:
+	Special Attack: 35 -> 95
+Macargo: 
+	HP: 50 -> 60
+	Speical Attack: 80 -> 90
+Corsola:
+	HP: 55 -> 65
+	Defense: 85 -> 95
+	Special Defense: 85 -> 95
+Mantine:
+	HP: 65 -> 85
+Kingdra: 
+	Special Defense: 95 -> 110
+Bissey: 
+	Special Attack: 75 -> 115
+Lugia: (To match Mewtwo)
+	Type Change: Water / Flying
+	HP: 106 -> 120
+	Attack: 90 -> 105
+	Special Attack: 90 -> 105
+Ho-oh: (To match Mewtwo)
+	HP: 106 -> 120
+	Defense: 90 -> 105 
+	Speed: 90 -> 105
+Celebi:
+	Type Change: Fairy / Grass
+Sceptile:
+	Type Change: Grass / Dragon
+Beautifly:
+	Speical Attack: 90 -> 100
+Dustox:
+	Speical Defense: 90 -> 100
+Swellow:
+	Special Attack: 50 -> 75
+Pelipper:
+	Special Attack: 85 -> 95
+Masquerain:
+	Type Change: Bug / Water
+Shedinja: (because I can)
+	Defense: 45 -> 1
+	Special Attack: 30 -> 90
+	Special Defense: 30 -> 1
+	Speed: 40 -> 90
+Exploud:
+	Special Defense: 64 -> 73
+Delcatty:
+	Speed: 70 -> 90
+Volbeat:
+	Defense: 55 -> 75
+	Special Defense: 75 -> 85
+Illumise:
+	Defense: 55 -> 75
+	Special Defense: 75 -> 85
+Trapinch:
+	Type Change: Bug / Ground
+Vibrava:
+	Type Change: Bug / Dragon
+Flygon:
+	Type Change: Bug / Dragon
+Lunatone:
+	HP: 70 -> 90
+Solrock:
+	HP: 70 -> 90
+Chimecho:
+	HP: 65 -> 75
+	Defense: 70 -> 80
+	Special Defense: 80 -> 90
+Regirock:
+	HP: 80 -> 100
+Regice:
+	HP: 80 -> 100
+Registeel:
+	HP: 80 -> 100
+Kyogre:
+	Attack: 100 -> 125
+	Special Attack: 150 -> 165
+	Special Defense: 150 -> 150
+Groudon:
+	Attack: 150 -> 165
+	Defense: 140 -> 150
+	Special Attack: 100 -> 125
+Jirachi:
+	Type Change: Steel / Fairy 
+
+Move Changes: 
+	Added the following as Fairy Type Moves: 
+		Moonblast
+		Disarming Voice
+		Fleur Cannon
+		Draining Kiss
+	Following changes to existing moves: 
+		Made SWORDS DANCE have 20 PP
+		Made CHARM Fairy type
+		Made FLY have 90 power
+		Made BIND have 85% accuracy
+		Made VINE WHIP have 45 power and 25 PP
+		Made JUMP KICK have 100 power and 10 PP
+		Made TACKLE have 50 power and 100% accuracy
+		Made WRAP have 90% accuracy
+		Made THRASH have 120 power and 10 PP
+		Made PIN MISSILE have 25 power and 95% accuracy
+		Made DISABLE have 100% accuracy
+		Made ABSORB have 25 PP
+		Made MEGA DRAIN have 15 PP
+		Made GROWTH have 20 PP
+		Made PETAL DANCE have 120 power and 10 PP
+		Made FIRE SPIN have 35 power and 85% accuracy
+		Made DIG have 100 power
+		Made TOXIC have 90% accuracy
+		Made RECOVER have 10 PP
+		Made MINIMIZE have 10 PP
+		Made BARRIER have 20 PP
+		Made LICK have 30 power
+		Made SMOG have 30 power
+		Made CLAMP have 15 PP and 85% accuracy
+		Made SKULL BASH have 130 power and 10 PP
+		Made HI JUMP KICK have 130 power and 10 PP
+		Made GLARE have 100% accuracy
+		Made POISON GAS have 90% accuracy
+		Made BUBBLE have 40 power
+		Made FLASH have 100% accuracy
+		Made PSYWAVE have 100% accuracy
+		Made ACID ARMOR have 20 PP
+		Made CRABHAMMER have 100 power and 90% accuracy
+		Made THIEF have 60 power and 25 PP
+		Made SNORE have 50 power
+		Made CURSE be GHOST-type
+		Made COTTON SPORE have 100% accuracy
+		Made SCARY FACE have 100% accuracy
+		Made ZAP CANNON have 120 power
+		Made BONE RUSH have 90% accuracy
+		Made OUTRAGE have 120 power and 10 PP
+		Made GIGA DRAIN have 75 power and 10 PP
+		Made FURY CUTTER have 40 power
+		Made FUTURE SIGHT have 120 power, 10 PP and 100% accuracy
+		Made ROCK SMASH have 40 power
+		Made WHIRLPOOL have 35 power and 85% accuracy
+		Made UPROAR have 90 power
+		Made STOCKPILE have 20 PP
+		Made WILL-O-WISP have 85% accuracy
+		Made SMELLINGSALT have 70 power
+		Made KNOCK OFF have 65 power
+		Made DIVE have 100 power
+		Made METEOR MASH have 90 power and 90% accuracy
+		Made AIR CUTTER have 60 power
+		Made OVERHEAT have 130 power
+		Made ROCK TOMB have 60 power, 15 PP and 95% accuracy
+		Made EXTRASENSORY have 20 PP
+		Made SAND TOMB have 35 power and 85% accuracy
+		Made BULLET SEED have 25 power
+		Made ICICLE SPEAR have 25 power
+		Made COVET have 60 power and 25 PP
+		Made LEAF BLADE have 90 power
+		Made ROCK BLAST have 90% accuracy
+		Made DOOM DESIRE have 140 power and 100% accuracy
+
+Trainer Changes: 
+	All trainers now have: 
+		Check Bad Move
+		Try to Faint
+		Check Viability
+		HP Aware 
+		any other AI scripts they had before
+
+Item changes: 
+	All of the confuse berries have been increased to 1/3 of the user's max HP
+	Sitrus berry have been increased to restore 1/4 of the user's max HP 
