@@ -77,9 +77,9 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
                             {EVO_ITEM, ITEM_WATER_STONE, SPECIES_VAPOREON},
                             {EVO_ITEM, ITEM_FIRE_STONE, SPECIES_FLAREON},
                             {EVO_FRIENDSHIP_DAY, 0, SPECIES_ESPEON},
-                            {EVO_ITEM, ITEM_SUN_STONE, SPECIES_ESPEON}
-                            {EVO_FRIENDSHIP_NIGHT, 0, SPECIES_UMBREON}},
-                            {EVO_ITEM, ITEM_MOON_STONE, SPECIES_UMBREON}
+                            {EVO_ITEM, ITEM_SUN_STONE, SPECIES_ESPEON},
+                            {EVO_FRIENDSHIP_NIGHT, 0, SPECIES_UMBREON},
+                            {EVO_ITEM, ITEM_MOON_STONE, SPECIES_UMBREON}},
     [SPECIES_PORYGON]    = {{EVO_ITEM, ITEM_UP_GRADE, SPECIES_PORYGON2}},
     [SPECIES_OMANYTE]    = {{EVO_LEVEL, 40, SPECIES_OMASTAR}},
     [SPECIES_KABUTO]     = {{EVO_LEVEL, 40, SPECIES_KABUTOPS}},

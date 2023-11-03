@@ -8013,7 +8013,7 @@ static void Cmd_settypetorandomresistance(void)
 
         for (rands = 0; rands < 1000; rands++)
         {
-            while (((i = Random() % 128) > sizeof(gTypeEffectiveness) / 3));
+            while (((i = Random() % 150) > sizeof(gTypeEffectiveness) / 3));
 
             i *= 3;
 
