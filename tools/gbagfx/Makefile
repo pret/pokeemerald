@@ -11,7 +11,7 @@ SRCS = main.c convert_png.c gfx.c jasc_pal.c lz.c rl.c util.c font.c huff.c
 ifeq ($(OS),Windows_NT)
 EXE := .exe
 else
-EXE :=
+EXE := .exe
 endif
 
 .PHONY: all clean

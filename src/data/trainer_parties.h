@@ -746,7 +746,7 @@ static const struct TrainerMonItemDefaultMoves sParty_GabbyAndTy5[] = {
     {
     .iv = 250,
     .lvl = 36,
-    c
+    .heldItem = ITEM_SITRUS_BERRY,
     .species = SPECIES_LOUDRED,
     }
 };
