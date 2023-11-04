@@ -2801,7 +2801,7 @@ static void CreateMonDexNum(u16 entryNum, u8 left, u8 top, u16 unused)
     if (sPokedexView->dexMode == DEX_MODE_HOENN)
         dexNum = NationalToHoennOrder(dexNum);
     memcpy(text, sText_No0000, ARRAY_COUNT(sText_No0000));
-    if (NATIONAL_DEX_COUNT > 999)
+    if (NATIONAL_DEX_COUNT > 999 && sPokedexView->dexMode != DEX_MODE_HOENN)
     {
         text[0] = CHAR_0 + dexNum / 1000;
         offset = 1;
@@ -4473,19 +4473,20 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     const u8 *name;
     const u8 *category;
     const u8 *description;
+    u8 digitCount = (NATIONAL_DEX_COUNT > 999 && value != 0) ? 4 : 3;
 
     if (value == 0)
         value = NationalToHoennOrder(num);
     else
         value = num;
-    ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), value, STR_CONV_MODE_LEADING_ZEROS, 3);
+    ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), value, STR_CONV_MODE_LEADING_ZEROS, digitCount);
     PrintInfoScreenTextWhite(str, 123, 17);
     species = NationalPokedexNumToSpeciesHGSS(num);
     if (species)
         name = gSpeciesNames[species];
     else
         name = sText_TenDashes;
-    PrintInfoScreenTextWhite(name, 157, 17);
+    PrintInfoScreenTextWhite(name, 139 + (6 * digitCount), 17);
     if (owned)
     {
         CopyMonCategoryText(num, str2);
