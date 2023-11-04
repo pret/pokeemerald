@@ -6086,8 +6086,9 @@ const u8 gFezandipitiPokedexText[] = _(
     "its body.");
 
 const u8 gOgerponPokedexText[] = _(
-    "This Pokémon's type changes based on which\n"
-    "mask it's wearing. It confounds its enemies\n"
-    "with nimble movements and kicks.");
+    "This Pokémon's type changes based on\n"
+    "which mask it's wearing. It confounds\n"
+    "its enemies with nimble movements\n"
+    "and kicks.");
 
 #endif
