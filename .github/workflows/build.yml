@@ -28,7 +28,9 @@ jobs:
           repository: pret/agbcc
 
       - name: Install binutils
-        run: sudo apt install -y build-essential libpng-dev libelf-dev
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential libpng-dev libelf-dev
         # build-essential, git, and libpng-dev are already installed
         # gcc-arm-none-eabi is only needed for the modern build
         # as an alternative to dkP
