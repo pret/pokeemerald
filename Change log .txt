@@ -380,8 +380,26 @@ Trainer Changes:
 		Check Viability
 		HP Aware 
 		any other AI scripts they had before
+	IN PROGRESS:
+		All Trainer Pokemons have items
+		Trainers teams reworked for increased diffculty
+			done through Roxanne - Testing it now for optimal diffculty
+			Steven Stone frist match is done but not tested
+	TODO:
+		Elite 4 rematch teams
+			Game allows for up to 4 rematch teams without more tinkering
+			Each Elite 4 member and Wallace will have new teams added for those 4 slots 
+			In the base game they just use the same team for each rematch
+		Steven Rematch enabled 
+			I think it should be possible to have a second battle
+			Second Battle will be much harder
+		All rematches reworked for increased and lasting diffculty
 
 Item changes: 
 	All of the confuse berries have been increased to 1/3 of the user's max HP
 	Sitrus berry have been increased to restore 1/4 of the user's max HP 
 	TMs should have infinite use
+
+Other Changes:
+	Loss for white out reduced to 1/10 instead of 1/2
+	Text speed set to fast by default
