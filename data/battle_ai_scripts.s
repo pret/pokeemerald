@@ -949,7 +949,7 @@ AI_CV_DefenseUp_PhysicalTypes:
 	.byte TYPE_FLYING
 	.byte TYPE_ROCK
 	.byte TYPE_BUG
-	.byte TYPE_GHOST
+	.byte TYPE_DARK
 	.byte TYPE_STEEL
 	.byte -1
 
@@ -1020,7 +1020,7 @@ AI_CV_SpDefUp_PhysicalTypes:
 	.byte TYPE_FLYING
 	.byte TYPE_ROCK
 	.byte TYPE_BUG
-	.byte TYPE_GHOST
+	.byte TYPE_DARK
 	.byte TYPE_STEEL
 	.byte -1
 
@@ -1180,7 +1180,8 @@ AI_CV_SpAtkDown_SpecialTypeList:
 	.byte TYPE_PSYCHIC
 	.byte TYPE_ICE
 	.byte TYPE_DRAGON
-	.byte TYPE_DARK
+	.byte TYPE_GHOST
+	.byte TYPE_FAIRY
 	.byte -1
 
 AI_CV_SpDefDown:
@@ -1390,7 +1391,8 @@ AI_CV_LightScreen_SpecialTypeList:
 	.byte TYPE_PSYCHIC
 	.byte TYPE_ICE
 	.byte TYPE_DRAGON
-	.byte TYPE_DARK
+	.byte TYPE_GHOST
+	.byte TYPE_FAIRY
 	.byte -1
 
 AI_CV_Rest:
@@ -1509,7 +1511,7 @@ AI_CV_Reflect_PhysicalTypeList:
 	.byte TYPE_GROUND
 	.byte TYPE_ROCK
 	.byte TYPE_BUG
-	.byte TYPE_GHOST
+	.byte TYPE_DARK
 	.byte TYPE_STEEL
 	.byte -1
 
@@ -1669,7 +1671,7 @@ AI_CV_Counter_PhysicalTypeList:
 	.byte TYPE_GROUND
 	.byte TYPE_ROCK
 	.byte TYPE_BUG
-	.byte TYPE_GHOST
+	.byte TYPE_DARK
 	.byte TYPE_STEEL
 	.byte -1
 
@@ -1850,6 +1852,7 @@ AI_CV_Thief_EncourageItemsToSteal:
 	.byte HOLD_EFFECT_CURE_SLP
 	.byte HOLD_EFFECT_CURE_STATUS
 	.byte HOLD_EFFECT_RESTORE_HP
+	.byte HOLD_EFFECT_RESTORE_LOTS
 	.byte HOLD_EFFECT_EVASION_UP
 	.byte HOLD_EFFECT_LEFTOVERS
 	.byte HOLD_EFFECT_LIGHT_BALL
@@ -2156,7 +2159,8 @@ AI_CV_MirrorCoat_SpecialTypeList:
 	.byte TYPE_PSYCHIC
 	.byte TYPE_ICE
 	.byte TYPE_DRAGON
-	.byte TYPE_DARK
+	.byte TYPE_GHOST
+	.byte TYPE_FAIRY
 	.byte -1
 
 AI_CV_ChargeUpMove:

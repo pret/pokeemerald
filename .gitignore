@@ -39,3 +39,5 @@ prefabs.json
 *.diff
 *.sym
 *.js
+agbcc/
+unchained_emerald.*
