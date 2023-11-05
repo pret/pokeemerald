@@ -26,6 +26,11 @@ Pokemon Changes:
 	All Pokemon now have two abilities (With a few exceptions like Shedinja)
 	All pokemon now have a common and rare item
 	All wild pokemon will have an item
+	TODO:
+		Add future Evolutions for existing pokemon from gen 4 into the game
+		Add future Evolutions for existing pokemon from gen 7 into the game
+		Add future Evolutions for existing pokemon from gen 8 into the game
+		Add future Evolutions for existing pokemon from gen 9 into the game
 
 Blastoise: 
 	Type Change: Water / Steel
