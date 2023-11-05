@@ -372,6 +372,9 @@ Move Changes:
 		Made LEAF BLADE have 90 power
 		Made ROCK BLAST have 90% accuracy
 		Made DOOM DESIRE have 140 power and 100% accuracy
+	TODO:
+		Add more moves to give each type good moves
+		Add animations to new moves
 
 Trainer Changes: 
 	All trainers now have: 
@@ -399,7 +402,18 @@ Item changes:
 	All of the confuse berries have been increased to 1/3 of the user's max HP
 	Sitrus berry have been increased to restore 1/4 of the user's max HP 
 	TMs should have infinite use
+	TODO: 
+		Add items from future generations into this game
+		Additonal TMs for useful moves
 
 Other Changes:
-	Loss for white out reduced to 1/10 instead of 1/2
+	Money loss for white out reduced to 1/10 instead of 1/2
 	Text speed set to fast by default
+
+
+Current Know Issues:
+	Low Priority: 
+		Text for fairy type moves are messed up in the battle menu
+		Text for fairy type filtering in pokedex is bugged (functionality works though)
+	Medium Priority:
+		No Animations for new Fairy type moves (Moves still work as expected)
