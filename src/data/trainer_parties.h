@@ -67,7 +67,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Rick[] = {
     },
     {
     .iv = 0,
-    .lvl = 4,
+    .lvl = 5,
     .species = SPECIES_CATERPIE,
     .heldItem = ITEM_SILK_SCARF,
     },
