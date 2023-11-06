@@ -158,6 +158,7 @@ static void AnimRockPolishSparkle(struct Sprite *);
 static void AnimPoisonJabProjectile(struct Sprite *);
 static void AnimNightSlash(struct Sprite *);
 static void AnimPluck(struct Sprite *);
+static void AnimAcrobaticsSlashes(struct Sprite *);
 
 const union AnimCmd gPowderParticlesAnimCmds[] =
 {
@@ -3004,6 +3005,61 @@ const struct SpriteTemplate gSeedFlareGreenCirclesTemplate =
     .images = NULL,
     .affineAnims = gPowerAbsorptionOrbAffineAnimTable,
     .callback = AnimPowerAbsorptionOrb
+};
+
+const struct SpriteTemplate gSteelBeamBigOrbSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_STEEL_BEAM,
+    .paletteTag = ANIM_TAG_STEEL_BEAM,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
+    .anims = gSolarBeamBigOrbAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSolarBeamBigOrb,
+};
+
+const struct SpriteTemplate gSteelBeamSmallOrbSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_STEEL_BEAM,
+    .paletteTag = ANIM_TAG_STEEL_BEAM,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
+    .anims = gSolarBeamSmallOrbAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSolarBeamSmallOrb,
+};
+
+const struct SpriteTemplate gAcrobaticsSlashesSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_WHITE_STREAK,
+    .paletteTag = ANIM_TAG_WHITE_STREAK,
+    .oam = &gOamData_AffineDouble_ObjBlend_32x8,
+    .anims = gRockPolishStreak_AnimCmds,
+    .images = NULL,
+    .affineAnims = gRockPolishStreak_AffineAnimCmds,
+    .callback = AnimAcrobaticsSlashes,
+};
+
+const struct SpriteTemplate gPsyshockOrbSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_RED_ORB_2,
+    .paletteTag = ANIM_TAG_POISON_JAB,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimPoisonJabProjectile,
+};
+
+const struct SpriteTemplate gPsyshockSmokeSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_GRAY_SMOKE,
+    .paletteTag = ANIM_TAG_WISP_FIRE,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gOctazookaAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSpriteOnMonPos,
 };
 
 // functions
@@ -6971,28 +7027,6 @@ void AnimTask_CompressTargetHorizontally(u8 taskId)
 	task->func = AnimTask_CompressTargetStep;
 }
 
-const struct SpriteTemplate gSteelBeamBigOrbSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_STEEL_BEAM,
-    .paletteTag = ANIM_TAG_STEEL_BEAM,
-    .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = gSolarBeamBigOrbAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimSolarBeamBigOrb,
-};
-
-const struct SpriteTemplate gSteelBeamSmallOrbSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_STEEL_BEAM,
-    .paletteTag = ANIM_TAG_STEEL_BEAM,
-    .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = gSolarBeamSmallOrbAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimSolarBeamSmallOrb,
-};
-
 void AnimTask_CreateSmallSteelBeamOrbs(u8 taskId)
 {
     if (--gTasks[taskId].data[0] == -1)
@@ -7008,4 +7042,13 @@ void AnimTask_CreateSmallSteelBeamOrbs(u8 taskId)
 
     if (gTasks[taskId].data[1] == 15)
         DestroyAnimVisualTask(taskId);
+}
+
+static void AnimAcrobaticsSlashes(struct Sprite *sprite)
+{
+    int affineAnimNum = Random2() % ARRAY_COUNT(gRockPolishStreak_AffineAnimCmds);
+    InitSpritePosToAnimTarget(sprite, TRUE);
+    StartSpriteAffineAnim(sprite, affineAnimNum);
+    StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
+    sprite->callback = RunStoredCallbackWhenAnimEnds;
 }

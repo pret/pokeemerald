@@ -301,16 +301,16 @@
 #define MOVEEND_ATTACKER_VISIBLE                  10
 #define MOVEEND_TARGET_VISIBLE                    11
 #define MOVEEND_ITEM_EFFECTS_TARGET               12
-#define MOVEEND_ITEM_EFFECTS_ALL                  13
-#define MOVEEND_KINGSROCK                         14    // These item effects will occur each strike of a multi-hit move
-#define MOVEEND_SUBSTITUTE                        15
-#define MOVEEND_SKY_DROP_CONFUSE                  16
-#define MOVEEND_UPDATE_LAST_MOVES                 17
-#define MOVEEND_MIRROR_MOVE                       18
-#define MOVEEND_NEXT_TARGET                       19   // Everything up until here is handled for each strike of a multi-hit move
-#define MOVEEND_MULTIHIT_MOVE                     20
-#define MOVEEND_DEFROST                           21
-#define MOVEEND_MOVE_EFFECTS2                     22
+#define MOVEEND_MOVE_EFFECTS2                     13
+#define MOVEEND_ITEM_EFFECTS_ALL                  14
+#define MOVEEND_KINGSROCK                         15    // These item effects will occur each strike of a multi-hit move
+#define MOVEEND_SUBSTITUTE                        16
+#define MOVEEND_SKY_DROP_CONFUSE                  17
+#define MOVEEND_UPDATE_LAST_MOVES                 18
+#define MOVEEND_MIRROR_MOVE                       19
+#define MOVEEND_NEXT_TARGET                       20   // Everything up until here is handled for each strike of a multi-hit move
+#define MOVEEND_MULTIHIT_MOVE                     21
+#define MOVEEND_DEFROST                           22
 #define MOVEEND_RECOIL                            23
 #define MOVEEND_MAGICIAN                          24    // Occurs after final multi-hit strike, and after other items/abilities would activate
 #define MOVEEND_EJECT_BUTTON                      25

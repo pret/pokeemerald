@@ -233,7 +233,7 @@ static u16 GetNextBall(u16 ballId)
     {
         if (ballId == gBagPockets[BALLS_POCKET].itemSlots[i].itemId)
         {
-            ballNext = gBagPockets[BALLS_POCKET].itemSlots[i].itemId;
+            ballNext = gBagPockets[BALLS_POCKET].itemSlots[i+1].itemId;
             break;
         }
     }
