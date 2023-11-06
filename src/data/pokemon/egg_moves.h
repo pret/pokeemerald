@@ -1,3 +1,5 @@
+#include "constants/moves.h"
+
 #define EGG_MOVES_SPECIES_OFFSET 20000
 #define EGG_MOVES_TERMINATOR 0xFFFF
 #define egg_moves(species, moves...) (SPECIES_##species + EGG_MOVES_SPECIES_OFFSET), moves
@@ -4416,11 +4418,276 @@ const u16 gEggMoves[] = {
         MOVE_REFLECT_TYPE),
 #endif
 
+    egg_moves(WOOPER_PALDEAN,
+        MOVE_ACID_SPRAY,
+        MOVE_AFTER_YOU,
+        MOVE_ANCIENT_POWER,
+        MOVE_COUNTER,
+        MOVE_CURSE,
+        MOVE_DOUBLE_KICK,
+        MOVE_HAZE,
+        MOVE_MIST,
+        MOVE_RECOVER,
+        MOVE_SPIT_UP,
+        MOVE_STOCKPILE,
+        MOVE_SWALLOW),
+
+    egg_moves(TAUROS_PALDEAN_COMBAT_BREED,
+        MOVE_CURSE,
+        MOVE_ENDEAVOR),
+
+    egg_moves(TAUROS_PALDEAN_BLAZE_BREED,
+        MOVE_CURSE,
+        MOVE_ENDEAVOR),
+
+    egg_moves(TAUROS_PALDEAN_AQUA_BREED,
+        MOVE_CURSE,
+        MOVE_ENDEAVOR),
+
     egg_moves(INDEEDEE_FEMALE,
         MOVE_PSYCH_UP,
         MOVE_FAKE_OUT,
         MOVE_PSYCHO_SHIFT,
         MOVE_HEAL_PULSE),
+
+#if P_GEN_9_POKEMON == TRUE
+    egg_moves(SPRIGATITO,
+        MOVE_ALLY_SWITCH,
+        MOVE_COPYCAT,
+        MOVE_LEECH_SEED,
+        MOVE_PETAL_BLIZZARD,
+        MOVE_SUCKER_PUNCH),
+
+    egg_moves(FUECOCO,
+        MOVE_BELCH,
+        MOVE_CURSE,
+        MOVE_ENCORE,
+        MOVE_SLACK_OFF),
+
+    egg_moves(QUAXLY,
+        MOVE_DETECT,
+        MOVE_LAST_RESORT,
+        MOVE_RAPID_SPIN,
+        MOVE_ROOST),
+
+    egg_moves(LECHONK,
+        MOVE_ENDEAVOR,
+        MOVE_SPIT_UP,
+        MOVE_STOCKPILE,
+        MOVE_STUFF_CHEEKS,
+        MOVE_SWALLOW),
+
+    egg_moves(TAROUNTULA,
+        MOVE_FIRST_IMPRESSION,
+        MOVE_LUNGE,
+        MOVE_MEMENTO,
+        MOVE_SUCKER_PUNCH),
+
+    egg_moves(NYMBLE,
+        MOVE_COUNTER,
+        MOVE_SKITTER_SMACK),
+
+    egg_moves(PAWMI,
+        MOVE_FAKE_OUT,
+        MOVE_MACH_PUNCH,
+        MOVE_SWEET_KISS,
+        MOVE_WISH),
+
+    egg_moves(TANDEMAUS,
+        MOVE_AFTER_YOU,
+        MOVE_BATON_PASS,
+        MOVE_BITE,
+        MOVE_FEINT,
+        MOVE_SWITCHEROO,
+        MOVE_TICKLE),
+
+    egg_moves(FIDOUGH,
+        MOVE_COPYCAT,
+        MOVE_HOWL,
+        MOVE_SWEET_SCENT,
+        MOVE_WISH,
+        MOVE_YAWN),
+
+    egg_moves(SMOLIV,
+        MOVE_MEMENTO,
+        MOVE_STRENGTH_SAP,
+        MOVE_SYNTHESIS,
+        MOVE_WEATHER_BALL),
+
+    egg_moves(SQUAWKABILLY,
+        MOVE_DOUBLE_EDGE,
+        MOVE_FINAL_GAMBIT,
+        MOVE_FLATTER,
+        MOVE_PARTING_SHOT),
+
+    egg_moves(NACLI,
+        MOVE_ANCIENT_POWER,
+        MOVE_CURSE,
+        MOVE_FISSURE,
+        MOVE_POWER_GEM),
+
+    egg_moves(CHARCADET,
+        MOVE_DESTINY_BOND,
+        MOVE_DISABLE,
+        MOVE_SPITE),
+
+    egg_moves(TADBULB,
+        MOVE_MUDDY_WATER,
+        MOVE_PARABOLIC_CHARGE,
+        MOVE_SOAK),
+
+    egg_moves(WATTREL,
+        MOVE_ENDEAVOR,
+        MOVE_FEATHER_DANCE,
+        MOVE_SPIT_UP,
+        MOVE_STOCKPILE,
+        MOVE_SWALLOW,
+        MOVE_WEATHER_BALL),
+
+    egg_moves(MASCHIFF,
+        MOVE_DESTINY_BOND,
+        MOVE_ENDEAVOR,
+        MOVE_PLAY_ROUGH,
+        MOVE_RETALIATE),
+
+    egg_moves(SHROODLE,
+        MOVE_COPYCAT,
+        MOVE_CROSS_POISON,
+        MOVE_PARTING_SHOT,
+        MOVE_SUPER_FANG,
+        MOVE_SWAGGER,
+        MOVE_TOXIC),
+
+    egg_moves(BRAMBLIN,
+        MOVE_BEAT_UP,
+        MOVE_BLOCK,
+        MOVE_LEECH_SEED,
+        MOVE_SHADOW_SNEAK,
+        MOVE_STRENGTH_SAP),
+
+    egg_moves(TOEDSCOOL,
+        MOVE_ACUPRESSURE,
+        MOVE_KNOCK_OFF,
+        MOVE_LEECH_SEED,
+        MOVE_MIRROR_COAT,
+        MOVE_RAGE_POWDER,
+        MOVE_RAPID_SPIN,
+        MOVE_TICKLE,
+        MOVE_TOXIC),
+
+    egg_moves(KLAWF,
+        MOVE_ANCIENT_POWER,
+        MOVE_CRABHAMMER,
+        MOVE_ENDEAVOR,
+        MOVE_KNOCK_OFF),
+
+    egg_moves(CAPSAKID,
+        MOVE_INGRAIN,
+        MOVE_LEECH_SEED,
+        MOVE_RAGE_POWDER,
+        MOVE_ROLLOUT,
+        MOVE_WORRY_SEED),
+
+    egg_moves(RELLOR,
+        MOVE_COSMIC_POWER,
+        MOVE_MEMENTO,
+        MOVE_RECOVER,
+        MOVE_WEATHER_BALL),
+
+    egg_moves(FLITTLE,
+        MOVE_ALLY_SWITCH,
+        MOVE_HYPNOSIS,
+        MOVE_ROOST),
+
+    egg_moves(TINKATINK,
+        MOVE_FEINT,
+        MOVE_ICE_HAMMER,
+        MOVE_QUASH),
+
+    egg_moves(WIGLETT,
+        MOVE_FINAL_GAMBIT,
+        MOVE_MEMENTO),
+
+    egg_moves(BOMBIRDIER,
+        MOVE_FEATHER_DANCE,
+        MOVE_POWER_TRIP,
+        MOVE_ROOST,
+        MOVE_SKY_ATTACK,
+        MOVE_SUCKER_PUNCH),
+
+    egg_moves(FINIZEN,
+        MOVE_BOOMBURST,
+        MOVE_BOUNCE,
+        MOVE_COUNTER,
+        MOVE_HAZE,
+        MOVE_TICKLE),
+
+    egg_moves(VAROOM,
+        MOVE_HAZE,
+        MOVE_PARTING_SHOT,
+        MOVE_SELF_DESTRUCT,
+        MOVE_TORMENT,
+        MOVE_TOXIC),
+
+    egg_moves(CYCLIZAR,
+        MOVE_AQUA_TAIL,
+        MOVE_IRON_TAIL,
+        MOVE_KNOCK_OFF,
+        MOVE_POWER_WHIP),
+
+    egg_moves(ORTHWORM,
+        MOVE_COIL,
+        MOVE_CURSE,
+        MOVE_METAL_BURST),
+
+    egg_moves(GLIMMET,
+        MOVE_EXPLOSION,
+        MOVE_MEMENTO,
+        MOVE_TOXIC),
+
+    egg_moves(GREAVARD,
+        MOVE_ALLY_SWITCH,
+        MOVE_DESTINY_BOND,
+        MOVE_DISABLE,
+        MOVE_HOWL,
+        MOVE_MEMENTO,
+        MOVE_SHADOW_SNEAK,
+        MOVE_YAWN),
+
+    egg_moves(FLAMIGO,
+        MOVE_DOUBLE_TEAM,
+        MOVE_QUICK_GUARD,
+        MOVE_SKY_ATTACK),
+
+    egg_moves(CETODDLE,
+        MOVE_BELLY_DRUM,
+        MOVE_ENTRAINMENT,
+        MOVE_ICICLE_CRASH,
+        MOVE_SUPERPOWER,
+        MOVE_YAWN),
+
+    egg_moves(VELUZA,
+        MOVE_RECOVER,
+        MOVE_THRASH),
+
+    egg_moves(DONDOZO,
+        MOVE_CURSE,
+        MOVE_FISSURE,
+        MOVE_THRASH,
+        MOVE_YAWN),
+
+    egg_moves(TATSUGIRI,
+        MOVE_BATON_PASS,
+        MOVE_COUNTER,
+        MOVE_RAPID_SPIN),
+
+    egg_moves(FRIGIBAX,
+        MOVE_AQUA_TAIL,
+        MOVE_DRAGON_RUSH,
+        MOVE_FREEZE_DRY,
+        MOVE_ICICLE_SPEAR),
+
+#endif
 
     EGG_MOVES_TERMINATOR
 };

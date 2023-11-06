@@ -1,4 +1,11 @@
-﻿#define PLACEHOLDER_TWO_FRAME_ANIMATION(name)   \
+﻿#define PLACEHOLDER_ANIM_SINGLE_FRAME(name)     \
+static const union AnimCmd sAnim_##name##_1[] = \
+{                                               \
+    ANIMCMD_FRAME(0, 1),                        \
+    ANIMCMD_END,                                \
+}
+
+#define PLACEHOLDER_TWO_FRAME_ANIMATION(name)   \
 static const union AnimCmd sAnim_##name##_1[] = \
 {                                               \
     ANIMCMD_FRAME(0, 30),                       \
@@ -10201,6 +10208,8 @@ static const union AnimCmd sAnim_DecidueyeHisuian_1[] =
     ANIMCMD_END,
 };
 #endif
+PLACEHOLDER_ANIM_SINGLE_FRAME(WooperPaldean);
+PLACEHOLDER_ANIM_SINGLE_FRAME(TaurosPaldean);
 
 static const union AnimCmd sAnim_VenusaurGigantamax_1[] =
 {
@@ -10752,6 +10761,122 @@ static const union AnimCmd sAnim_EnamorusTherian_1[] =
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
+
+PLACEHOLDER_ANIM_SINGLE_FRAME(UrsalunaBloodmoon);
+#endif
+#if P_GEN_9_POKEMON == TRUE
+PLACEHOLDER_ANIM_SINGLE_FRAME(Sprigatito);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Floragato);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Meowscarada);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Fuecoco);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Crocalor);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Skeledirge);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Quaxly);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Quaxwell);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Quaquaval);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Lechonk);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Oinkologne);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Tarountula);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Spidops);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Nymble);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Lokix);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Pawmi);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Pawmo);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Pawmot);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Tandemaus);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Maushold);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Fidough);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Dachsbun);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Smoliv);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Dolliv);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Arboliva);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Squawkabilly);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Nacli);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Naclstack);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Garganacl);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Charcadet);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Armarouge);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Ceruledge);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Tadbulb);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Bellibolt);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Wattrel);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Kilowattrel);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Maschiff);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Mabosstiff);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Shroodle);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Grafaiai);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Bramblin);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Brambleghast);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Toedscool);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Toedscruel);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Klawf);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Capsakid);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Scovillain);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Rellor);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Rabsca);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Flittle);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Espathra);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Tinkatink);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Tinkatuff);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Tinkaton);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Wiglett);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Wugtrio);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Bombirdier);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Finizen);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Palafin);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Varoom);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Revavroom);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Cyclizar);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Orthworm);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Glimmet);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Glimmora);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Greavard);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Houndstone);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Flamigo);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Cetoddle);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Cetitan);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Veluza);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Dondozo);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Tatsugiri);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Annihilape);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Clodsire);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Farigiraf);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Dudunsparce);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Kingambit);
+PLACEHOLDER_TWO_FRAME_ANIMATION(GreatTusk);
+PLACEHOLDER_ANIM_SINGLE_FRAME(ScreamTail);
+PLACEHOLDER_ANIM_SINGLE_FRAME(BruteBonnet);
+PLACEHOLDER_ANIM_SINGLE_FRAME(FlutterMane);
+PLACEHOLDER_ANIM_SINGLE_FRAME(SlitherWing);
+PLACEHOLDER_ANIM_SINGLE_FRAME(SandyShocks);
+PLACEHOLDER_ANIM_SINGLE_FRAME(IronTreads);
+PLACEHOLDER_ANIM_SINGLE_FRAME(IronBundle);
+PLACEHOLDER_ANIM_SINGLE_FRAME(IronHands);
+PLACEHOLDER_ANIM_SINGLE_FRAME(IronJugulis);
+PLACEHOLDER_ANIM_SINGLE_FRAME(IronMoth);
+PLACEHOLDER_ANIM_SINGLE_FRAME(IronThorns);
+PLACEHOLDER_TWO_FRAME_ANIMATION(Frigibax);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Arctibax);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Baxcalibur);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Gimmighoul);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Gholdengo);
+PLACEHOLDER_ANIM_SINGLE_FRAME(WoChien);
+PLACEHOLDER_ANIM_SINGLE_FRAME(ChienPao);
+PLACEHOLDER_ANIM_SINGLE_FRAME(TingLu);
+PLACEHOLDER_ANIM_SINGLE_FRAME(ChiYu);
+PLACEHOLDER_ANIM_SINGLE_FRAME(RoaringMoon);
+PLACEHOLDER_ANIM_SINGLE_FRAME(IronValiant);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Koraidon);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Miraidon);
+PLACEHOLDER_ANIM_SINGLE_FRAME(WalkingWake);
+PLACEHOLDER_ANIM_SINGLE_FRAME(IronLeaves);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Dipplin);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Sinistcha);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Poltchageist);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Okidogi);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Munkidori);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Fezandipiti);
+PLACEHOLDER_ANIM_SINGLE_FRAME(Ogerpon);
 #endif
 
 #define SINGLE_ANIMATION(name)                      \
@@ -11730,6 +11855,120 @@ SINGLE_ANIMATION(Sneasler);
 SINGLE_ANIMATION(Overqwil);
 SINGLE_ANIMATION(EnamorusIncarnate);
 #endif
+#if P_GEN_9_POKEMON == TRUE
+SINGLE_ANIMATION(Sprigatito);
+SINGLE_ANIMATION(Floragato);
+SINGLE_ANIMATION(Meowscarada);
+SINGLE_ANIMATION(Fuecoco);
+SINGLE_ANIMATION(Crocalor);
+SINGLE_ANIMATION(Skeledirge);
+SINGLE_ANIMATION(Quaxly);
+SINGLE_ANIMATION(Quaxwell);
+SINGLE_ANIMATION(Quaquaval);
+SINGLE_ANIMATION(Lechonk);
+SINGLE_ANIMATION(Oinkologne);
+SINGLE_ANIMATION(Tarountula);
+SINGLE_ANIMATION(Spidops);
+SINGLE_ANIMATION(Nymble);
+SINGLE_ANIMATION(Lokix);
+SINGLE_ANIMATION(Pawmi);
+SINGLE_ANIMATION(Pawmo);
+SINGLE_ANIMATION(Pawmot);
+SINGLE_ANIMATION(Tandemaus);
+SINGLE_ANIMATION(Maushold);
+SINGLE_ANIMATION(Fidough);
+SINGLE_ANIMATION(Dachsbun);
+SINGLE_ANIMATION(Smoliv);
+SINGLE_ANIMATION(Dolliv);
+SINGLE_ANIMATION(Arboliva);
+SINGLE_ANIMATION(Squawkabilly);
+SINGLE_ANIMATION(Nacli);
+SINGLE_ANIMATION(Naclstack);
+SINGLE_ANIMATION(Garganacl);
+SINGLE_ANIMATION(Charcadet);
+SINGLE_ANIMATION(Armarouge);
+SINGLE_ANIMATION(Ceruledge);
+SINGLE_ANIMATION(Tadbulb);
+SINGLE_ANIMATION(Bellibolt);
+SINGLE_ANIMATION(Wattrel);
+SINGLE_ANIMATION(Kilowattrel);
+SINGLE_ANIMATION(Maschiff);
+SINGLE_ANIMATION(Mabosstiff);
+SINGLE_ANIMATION(Shroodle);
+SINGLE_ANIMATION(Grafaiai);
+SINGLE_ANIMATION(Bramblin);
+SINGLE_ANIMATION(Brambleghast);
+SINGLE_ANIMATION(Toedscool);
+SINGLE_ANIMATION(Toedscruel);
+SINGLE_ANIMATION(Klawf);
+SINGLE_ANIMATION(Capsakid);
+SINGLE_ANIMATION(Scovillain);
+SINGLE_ANIMATION(Rellor);
+SINGLE_ANIMATION(Rabsca);
+SINGLE_ANIMATION(Flittle);
+SINGLE_ANIMATION(Espathra);
+SINGLE_ANIMATION(Tinkatink);
+SINGLE_ANIMATION(Tinkatuff);
+SINGLE_ANIMATION(Tinkaton);
+SINGLE_ANIMATION(Wiglett);
+SINGLE_ANIMATION(Wugtrio);
+SINGLE_ANIMATION(Bombirdier);
+SINGLE_ANIMATION(Finizen);
+SINGLE_ANIMATION(Palafin);
+SINGLE_ANIMATION(Varoom);
+SINGLE_ANIMATION(Revavroom);
+SINGLE_ANIMATION(Cyclizar);
+SINGLE_ANIMATION(Orthworm);
+SINGLE_ANIMATION(Glimmet);
+SINGLE_ANIMATION(Glimmora);
+SINGLE_ANIMATION(Greavard);
+SINGLE_ANIMATION(Houndstone);
+SINGLE_ANIMATION(Flamigo);
+SINGLE_ANIMATION(Cetoddle);
+SINGLE_ANIMATION(Cetitan);
+SINGLE_ANIMATION(Veluza);
+SINGLE_ANIMATION(Dondozo);
+SINGLE_ANIMATION(Tatsugiri);
+SINGLE_ANIMATION(Annihilape);
+SINGLE_ANIMATION(Clodsire);
+SINGLE_ANIMATION(Farigiraf);
+SINGLE_ANIMATION(Dudunsparce);
+SINGLE_ANIMATION(Kingambit);
+SINGLE_ANIMATION(GreatTusk);
+SINGLE_ANIMATION(ScreamTail);
+SINGLE_ANIMATION(BruteBonnet);
+SINGLE_ANIMATION(FlutterMane);
+SINGLE_ANIMATION(SlitherWing);
+SINGLE_ANIMATION(SandyShocks);
+SINGLE_ANIMATION(IronTreads);
+SINGLE_ANIMATION(IronBundle);
+SINGLE_ANIMATION(IronHands);
+SINGLE_ANIMATION(IronJugulis);
+SINGLE_ANIMATION(IronMoth);
+SINGLE_ANIMATION(IronThorns);
+SINGLE_ANIMATION(Frigibax);
+SINGLE_ANIMATION(Arctibax);
+SINGLE_ANIMATION(Baxcalibur);
+SINGLE_ANIMATION(Gimmighoul);
+SINGLE_ANIMATION(Gholdengo);
+SINGLE_ANIMATION(WoChien);
+SINGLE_ANIMATION(ChienPao);
+SINGLE_ANIMATION(TingLu);
+SINGLE_ANIMATION(ChiYu);
+SINGLE_ANIMATION(RoaringMoon);
+SINGLE_ANIMATION(IronValiant);
+SINGLE_ANIMATION(Koraidon);
+SINGLE_ANIMATION(Miraidon);
+SINGLE_ANIMATION(WalkingWake);
+SINGLE_ANIMATION(IronLeaves);
+SINGLE_ANIMATION(Dipplin);
+SINGLE_ANIMATION(Sinistcha);
+SINGLE_ANIMATION(Poltchageist);
+SINGLE_ANIMATION(Okidogi);
+SINGLE_ANIMATION(Munkidori);
+SINGLE_ANIMATION(Fezandipiti);
+SINGLE_ANIMATION(Ogerpon);
+#endif
 SINGLE_ANIMATION(VenusaurMega);
 SINGLE_ANIMATION(CHARIZARD_MEGA_X);
 SINGLE_ANIMATION(CHARIZARD_MEGA_Y);
@@ -11847,6 +12086,8 @@ SINGLE_ANIMATION(AvaluggHisuian);
 #if P_GEN_7_POKEMON == TRUE
 SINGLE_ANIMATION(DecidueyeHisuian);
 #endif
+SINGLE_ANIMATION(WooperPaldean);
+SINGLE_ANIMATION(TaurosPaldean);
 SINGLE_ANIMATION(PikachuCosplay);
 SINGLE_ANIMATION(PikachuRockStar);
 SINGLE_ANIMATION(PikachuBelle);
@@ -11897,6 +12138,7 @@ SINGLE_ANIMATION(LycanrocDusk);
 #endif
 #if P_GEN_8_POKEMON == TRUE
 SINGLE_ANIMATION(EnamorusTherian);
+SINGLE_ANIMATION(UrsalunaBloodmoon);
 #endif
 // Gigantamax Forms
 SINGLE_ANIMATION(VenusaurGigantamax);
@@ -12070,6 +12312,9 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_MAGMAR]                         = sAnims_Magmar,
     [SPECIES_PINSIR]                         = sAnims_Pinsir,
     [SPECIES_TAUROS]                         = sAnims_Tauros,
+    [SPECIES_TAUROS_PALDEAN_COMBAT_BREED]    = sAnims_TaurosPaldean,
+    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED]     = sAnims_TaurosPaldean,
+    [SPECIES_TAUROS_PALDEAN_AQUA_BREED]      = sAnims_TaurosPaldean,
     [SPECIES_MAGIKARP]                       = sAnims_Magikarp,
     [SPECIES_GYARADOS]                       = sAnims_Gyarados,
     [SPECIES_LAPRAS]                         = sAnims_Lapras,
@@ -12137,6 +12382,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_SUNFLORA]                       = sAnims_Sunflora,
     [SPECIES_YANMA]                          = sAnims_Yanma,
     [SPECIES_WOOPER]                         = sAnims_Wooper,
+    [SPECIES_WOOPER_PALDEAN]                 = sAnims_WooperPaldean,
     [SPECIES_QUAGSIRE]                       = sAnims_Quagsire,
     [SPECIES_ESPEON]                         = sAnims_Espeon,
     [SPECIES_UMBREON]                        = sAnims_Umbreon,
@@ -12921,6 +13167,139 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_OVERQWIL]                       = sAnims_Overqwil,
     [SPECIES_ENAMORUS_INCARNATE]             = sAnims_EnamorusIncarnate,
 #endif
+#if P_GEN_9_POKEMON == TRUE
+    [SPECIES_SPRIGATITO]                        = sAnims_Sprigatito,
+    [SPECIES_FLORAGATO]                         = sAnims_Floragato,
+    [SPECIES_MEOWSCARADA]                       = sAnims_Meowscarada,
+    [SPECIES_FUECOCO]                           = sAnims_Fuecoco,
+    [SPECIES_CROCALOR]                          = sAnims_Crocalor,
+    [SPECIES_SKELEDIRGE]                        = sAnims_Skeledirge,
+    [SPECIES_QUAXLY]                            = sAnims_Quaxly,
+    [SPECIES_QUAXWELL]                          = sAnims_Quaxwell,
+    [SPECIES_QUAQUAVAL]                         = sAnims_Quaquaval,
+    [SPECIES_LECHONK]                           = sAnims_Lechonk,
+    [SPECIES_OINKOLOGNE_MALE]                   = sAnims_Oinkologne,
+    [SPECIES_OINKOLOGNE_FEMALE]                 = sAnims_Oinkologne,
+    [SPECIES_TAROUNTULA]                        = sAnims_Tarountula,
+    [SPECIES_SPIDOPS]                           = sAnims_Spidops,
+    [SPECIES_NYMBLE]                            = sAnims_Nymble,
+    [SPECIES_LOKIX]                             = sAnims_Lokix,
+    [SPECIES_PAWMI]                             = sAnims_Pawmi,
+    [SPECIES_PAWMO]                             = sAnims_Pawmo,
+    [SPECIES_PAWMOT]                            = sAnims_Pawmot,
+    [SPECIES_TANDEMAUS]                         = sAnims_Tandemaus,
+    [SPECIES_MAUSHOLD_FAMILY_OF_THREE]          = sAnims_Maushold,
+    [SPECIES_MAUSHOLD_FAMILY_OF_FOUR]           = sAnims_Maushold,
+    [SPECIES_FIDOUGH]                           = sAnims_Fidough,
+    [SPECIES_DACHSBUN]                          = sAnims_Dachsbun,
+    [SPECIES_SMOLIV]                            = sAnims_Smoliv,
+    [SPECIES_DOLLIV]                            = sAnims_Dolliv,
+    [SPECIES_ARBOLIVA]                          = sAnims_Arboliva,
+    [SPECIES_SQUAWKABILLY_GREEN_PLUMAGE]        = sAnims_Squawkabilly,
+    [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE]         = sAnims_Squawkabilly,
+    [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE]       = sAnims_Squawkabilly,
+    [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE]        = sAnims_Squawkabilly,
+    [SPECIES_NACLI]                             = sAnims_Nacli,
+    [SPECIES_NACLSTACK]                         = sAnims_Naclstack,
+    [SPECIES_GARGANACL]                         = sAnims_Garganacl,
+    [SPECIES_CHARCADET]                         = sAnims_Charcadet,
+    [SPECIES_ARMAROUGE]                         = sAnims_Armarouge,
+    [SPECIES_CERULEDGE]                         = sAnims_Ceruledge,
+    [SPECIES_TADBULB]                           = sAnims_Tadbulb,
+    [SPECIES_BELLIBOLT]                         = sAnims_Bellibolt,
+    [SPECIES_WATTREL]                           = sAnims_Wattrel,
+    [SPECIES_KILOWATTREL]                       = sAnims_Kilowattrel,
+    [SPECIES_MASCHIFF]                          = sAnims_Maschiff,
+    [SPECIES_MABOSSTIFF]                        = sAnims_Mabosstiff,
+    [SPECIES_SHROODLE]                          = sAnims_Shroodle,
+    [SPECIES_GRAFAIAI]                          = sAnims_Grafaiai,
+    [SPECIES_BRAMBLIN]                          = sAnims_Bramblin,
+    [SPECIES_BRAMBLEGHAST]                      = sAnims_Brambleghast,
+    [SPECIES_TOEDSCOOL]                         = sAnims_Toedscool,
+    [SPECIES_TOEDSCRUEL]                        = sAnims_Toedscruel,
+    [SPECIES_KLAWF]                             = sAnims_Klawf,
+    [SPECIES_CAPSAKID]                          = sAnims_Capsakid,
+    [SPECIES_SCOVILLAIN]                        = sAnims_Scovillain,
+    [SPECIES_RELLOR]                            = sAnims_Rellor,
+    [SPECIES_RABSCA]                            = sAnims_Rabsca,
+    [SPECIES_FLITTLE]                           = sAnims_Flittle,
+    [SPECIES_ESPATHRA]                          = sAnims_Espathra,
+    [SPECIES_TINKATINK]                         = sAnims_Tinkatink,
+    [SPECIES_TINKATUFF]                         = sAnims_Tinkatuff,
+    [SPECIES_TINKATON]                          = sAnims_Tinkaton,
+    [SPECIES_WIGLETT]                           = sAnims_Wiglett,
+    [SPECIES_WUGTRIO]                           = sAnims_Wugtrio,
+    [SPECIES_BOMBIRDIER]                        = sAnims_Bombirdier,
+    [SPECIES_FINIZEN]                           = sAnims_Finizen,
+    [SPECIES_PALAFIN_ZERO]                      = sAnims_Palafin,
+    [SPECIES_PALAFIN_HERO]                      = sAnims_Palafin,
+    [SPECIES_VAROOM]                            = sAnims_Varoom,
+    [SPECIES_REVAVROOM]                         = sAnims_Revavroom,
+    [SPECIES_CYCLIZAR]                          = sAnims_Cyclizar,
+    [SPECIES_ORTHWORM]                          = sAnims_Orthworm,
+    [SPECIES_GLIMMET]                           = sAnims_Glimmet,
+    [SPECIES_GLIMMORA]                          = sAnims_Glimmora,
+    [SPECIES_GREAVARD]                          = sAnims_Greavard,
+    [SPECIES_HOUNDSTONE]                        = sAnims_Houndstone,
+    [SPECIES_FLAMIGO]                           = sAnims_Flamigo,
+    [SPECIES_CETODDLE]                          = sAnims_Cetoddle,
+    [SPECIES_CETITAN]                           = sAnims_Cetitan,
+    [SPECIES_VELUZA]                            = sAnims_Veluza,
+    [SPECIES_DONDOZO]                           = sAnims_Dondozo,
+    [SPECIES_TATSUGIRI_CURLY]                   = sAnims_Tatsugiri,
+    [SPECIES_TATSUGIRI_DROOPY]                  = sAnims_Tatsugiri,
+    [SPECIES_TATSUGIRI_STRETCHY]                = sAnims_Tatsugiri,
+    [SPECIES_ANNIHILAPE]                        = sAnims_Annihilape,
+    [SPECIES_CLODSIRE]                          = sAnims_Clodsire,
+    [SPECIES_FARIGIRAF]                         = sAnims_Farigiraf,
+    [SPECIES_DUDUNSPARCE_TWO_SEGMENT]           = sAnims_Dudunsparce,
+    [SPECIES_DUDUNSPARCE_THREE_SEGMENT]         = sAnims_Dudunsparce,
+    [SPECIES_KINGAMBIT]                         = sAnims_Kingambit,
+    [SPECIES_GREAT_TUSK]                        = sAnims_GreatTusk,
+    [SPECIES_SCREAM_TAIL]                       = sAnims_ScreamTail,
+    [SPECIES_BRUTE_BONNET]                      = sAnims_BruteBonnet,
+    [SPECIES_FLUTTER_MANE]                      = sAnims_FlutterMane,
+    [SPECIES_SLITHER_WING]                      = sAnims_SlitherWing,
+    [SPECIES_SANDY_SHOCKS]                      = sAnims_SandyShocks,
+    [SPECIES_IRON_TREADS]                       = sAnims_IronTreads,
+    [SPECIES_IRON_BUNDLE]                       = sAnims_IronBundle,
+    [SPECIES_IRON_HANDS]                        = sAnims_IronHands,
+    [SPECIES_IRON_JUGULIS]                      = sAnims_IronJugulis,
+    [SPECIES_IRON_MOTH]                         = sAnims_IronMoth,
+    [SPECIES_IRON_THORNS]                       = sAnims_IronThorns,
+    [SPECIES_FRIGIBAX]                          = sAnims_Frigibax,
+    [SPECIES_ARCTIBAX]                          = sAnims_Arctibax,
+    [SPECIES_BAXCALIBUR]                        = sAnims_Baxcalibur,
+    [SPECIES_GIMMIGHOUL_CHEST]                  = sAnims_Gimmighoul,
+    [SPECIES_GIMMIGHOUL_ROAMING]                = sAnims_Gimmighoul,
+    [SPECIES_GHOLDENGO]                         = sAnims_Gholdengo,
+    [SPECIES_WO_CHIEN]                          = sAnims_WoChien,
+    [SPECIES_CHIEN_PAO]                         = sAnims_ChienPao,
+    [SPECIES_TING_LU]                           = sAnims_TingLu,
+    [SPECIES_CHI_YU]                            = sAnims_ChiYu,
+    [SPECIES_ROARING_MOON]                      = sAnims_RoaringMoon,
+    [SPECIES_IRON_VALIANT]                      = sAnims_IronValiant,
+    [SPECIES_KORAIDON]                          = sAnims_Koraidon,
+    [SPECIES_MIRAIDON]                          = sAnims_Miraidon,
+    [SPECIES_WALKING_WAKE]                      = sAnims_WalkingWake,
+    [SPECIES_IRON_LEAVES]                       = sAnims_IronLeaves,
+    [SPECIES_DIPPLIN]                           = sAnims_Dipplin,
+    [SPECIES_POLTCHAGEIST_COUNTERFEIT]          = sAnims_Poltchageist,
+    [SPECIES_POLTCHAGEIST_ARTISAN]              = sAnims_Poltchageist,
+    [SPECIES_SINISTCHA_UNREMARKABLE]            = sAnims_Sinistcha,
+    [SPECIES_SINISTCHA_MASTERPIECE]             = sAnims_Sinistcha,
+    [SPECIES_OKIDOGI]                           = sAnims_Okidogi,
+    [SPECIES_MUNKIDORI]                         = sAnims_Munkidori,
+    [SPECIES_FEZANDIPITI]                       = sAnims_Fezandipiti,
+    [SPECIES_OGERPON_TEAL_MASK]                      = sAnims_Ogerpon,
+    [SPECIES_OGERPON_WELLSPRING_MASK]                = sAnims_Ogerpon,
+    [SPECIES_OGERPON_HEARTHFLAME_MASK]               = sAnims_Ogerpon,
+    [SPECIES_OGERPON_CORNERSTONE_MASK]               = sAnims_Ogerpon,
+    [SPECIES_OGERPON_TEAL_MASK_TERA]                 = sAnims_Ogerpon,
+    [SPECIES_OGERPON_WELLSPRING_MASK_TERA]           = sAnims_Ogerpon,
+    [SPECIES_OGERPON_HEARTHFLAME_MASK_TERA]          = sAnims_Ogerpon,
+    [SPECIES_OGERPON_CORNERSTONE_MASK_TERA]          = sAnims_Ogerpon,
+#endif
     // Mega/Primal Forms
     [SPECIES_VENUSAUR_MEGA]                  = sAnims_VenusaurMega,
     [SPECIES_CHARIZARD_MEGA_X]               = sAnims_CHARIZARD_MEGA_X,
@@ -13270,6 +13649,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_CALYREX_SHADOW_RIDER]           = sAnims_Calyrex,
     [SPECIES_ENAMORUS_THERIAN]               = sAnims_EnamorusTherian,
     [SPECIES_BASCULEGION_FEMALE]             = sAnims_Basculegion,
+    [SPECIES_URSALUNA_BLOODMOON]             = sAnims_UrsalunaBloodmoon,
 #endif
     [SPECIES_VENUSAUR_GIGANTAMAX]            = sAnims_VenusaurGigantamax,
     [SPECIES_CHARIZARD_GIGANTAMAX]           = sAnims_CharizardGigantamax,

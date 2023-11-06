@@ -331,6 +331,7 @@
 #define SPECIES_FLAG_ALL_PERFECT_IVS    (1 << 8)
 #define SPECIES_FLAG_CANNOT_BE_TRADED   (1 << 9)
 #define SPECIES_FLAG_ULTRA_BURST        (1 << 10)
+#define SPECIES_FLAG_PARADOX            (1 << 11)
 
 #define LEGENDARY_PERFECT_IV_COUNT 3
 

@@ -4252,27 +4252,57 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
+#define TAUROS_MISC_INFO                                      \
+        .baseHP        = 75,                                  \
+        .baseAttack    = 100,                                 \
+        .baseDefense   = 95,                                  \
+        .baseSpeed     = 110,                                 \
+        .baseSpAttack  = 40,                                  \
+        .baseSpDefense = 70,                                  \
+        .catchRate = 45,                                      \
+        .expYield = 172,                                      \
+        .genderRatio = MON_MALE,                              \
+        .eggCycles = 20,                                      \
+        .friendship = STANDARD_FRIENDSHIP,                    \
+        .growthRate = GROWTH_SLOW,                            \
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},     \
+        .noFlip = FALSE
+
     [SPECIES_TAUROS] =
     {
-        .baseHP        = 75,
-        .baseAttack    = 100,
-        .baseDefense   = 95,
-        .baseSpeed     = 110,
-        .baseSpAttack  = 40,
-        .baseSpDefense = 70,
         .types = { TYPE_NORMAL, TYPE_NORMAL },
-        .catchRate = 45,
-        .expYield = 172,
         .evYield_Attack    = 1,
         .evYield_Speed     = 1,
-        .genderRatio = MON_MALE,
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_SLOW,
-        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
         .abilities = {ABILITY_INTIMIDATE, ABILITY_ANGER_POINT, ABILITY_SHEER_FORCE},
         .bodyColor = BODY_COLOR_BROWN,
-        .noFlip = FALSE,
+        TAUROS_MISC_INFO
+    },
+
+    [SPECIES_TAUROS_PALDEAN_COMBAT_BREED] =
+    {
+        .types = { TYPE_FIGHTING, TYPE_FIGHTING },
+        .evYield_Attack    = 2,
+        .abilities = {ABILITY_INTIMIDATE, ABILITY_ANGER_POINT, ABILITY_CUD_CHEW},
+        .bodyColor = BODY_COLOR_BROWN,
+        TAUROS_MISC_INFO
+    },
+
+    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] =
+    {
+        .types = { TYPE_FIGHTING, TYPE_FIRE },
+        .evYield_Attack    = 2,
+        .abilities = {ABILITY_INTIMIDATE, ABILITY_ANGER_POINT, ABILITY_CUD_CHEW},
+        .bodyColor = BODY_COLOR_BROWN,
+        TAUROS_MISC_INFO
+    },
+
+    [SPECIES_TAUROS_PALDEAN_AQUA_BREED] =
+    {
+        .types = { TYPE_FIGHTING, TYPE_WATER },
+        .evYield_Attack    = 2,
+        .abilities = {ABILITY_INTIMIDATE, ABILITY_ANGER_POINT, ABILITY_CUD_CHEW},
+        .bodyColor = BODY_COLOR_BROWN,
+        TAUROS_MISC_INFO
     },
 
     [SPECIES_MAGIKARP] =
@@ -5710,26 +5740,37 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
+#define WOOPER_MISC_INFO                                                        \
+        .baseHP        = 55,                                                    \
+        .baseAttack    = 45,                                                    \
+        .baseDefense   = 45,                                                    \
+        .baseSpeed     = 15,                                                    \
+        .baseSpAttack  = 25,                                                    \
+        .baseSpDefense = 25,                                                    \
+        .catchRate = 255,                                                       \
+        .expYield = 42,                                                         \
+        .evYield_HP        = 1,                                                 \
+        .genderRatio = PERCENT_FEMALE(50),                                      \
+        .eggCycles = 20,                                                        \
+        .friendship = STANDARD_FRIENDSHIP,                                      \
+        .growthRate = GROWTH_MEDIUM_FAST,                                       \
+        .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_FIELD},                     \
+        .noFlip = FALSE
+
     [SPECIES_WOOPER] =
     {
-        .baseHP        = 55,
-        .baseAttack    = 45,
-        .baseDefense   = 45,
-        .baseSpeed     = 15,
-        .baseSpAttack  = 25,
-        .baseSpDefense = 25,
         .types = { TYPE_WATER, TYPE_GROUND },
-        .catchRate = 255,
-        .expYield = 42,
-        .evYield_HP        = 1,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_FIELD},
         .abilities = {ABILITY_DAMP, ABILITY_WATER_ABSORB, ABILITY_UNAWARE},
         .bodyColor = BODY_COLOR_BLUE,
-        .noFlip = FALSE,
+        WOOPER_MISC_INFO
+    },
+
+    [SPECIES_WOOPER_PALDEAN] =
+    {
+        .types = { TYPE_POISON, TYPE_GROUND },
+        .abilities = {ABILITY_POISON_POINT, ABILITY_WATER_ABSORB, ABILITY_UNAWARE},
+        .bodyColor = BODY_COLOR_BROWN,
+        WOOPER_MISC_INFO
     },
 
     [SPECIES_QUAGSIRE] =
@@ -21118,6 +21159,28 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
+    [SPECIES_URSALUNA_BLOODMOON] =
+    {
+        .baseHP        = 113,
+        .baseAttack    = 70,
+        .baseDefense   = 120,
+        .baseSpeed     = 52,
+        .baseSpAttack  = 135,
+        .baseSpDefense = 65,
+        .types = { TYPE_GROUND, TYPE_NORMAL},
+        .catchRate = 5,
+        .expYield = 275,
+        .evYield_SpAttack    = 3,
+        .genderRatio = MON_MALE,
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_MINDS_EYE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_BROWN,
+        .noFlip = FALSE,
+    },
+
     [SPECIES_BASCULEGION_MALE] =
     {
         .baseHP        = 120,
@@ -25064,5 +25127,2603 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .gigantamax = TRUE,
     },
 
+#endif
+#if P_GEN_9_POKEMON == TRUE
+    [SPECIES_SPRIGATITO] =
+    {
+        .baseHP        = 40,
+        .baseAttack    = 61,
+        .baseDefense   = 54,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 45,
+        .types = { TYPE_GRASS, TYPE_GRASS },
+        .catchRate = 45,
+        .expYield = 62,
+        .evYield_Speed = 1,
+        .genderRatio = PERCENT_FEMALE(12.5),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_GRASS},
+        .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_PROTEAN},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_FLORAGATO] =
+    {
+        .baseHP        = 61,
+        .baseAttack    = 80,
+        .baseDefense   = 63,
+        .baseSpeed     = 83,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 63,
+        .types = { TYPE_GRASS, TYPE_GRASS },
+        .catchRate = 45,
+        .expYield = 144,
+        .evYield_Speed = 2,
+        .genderRatio = PERCENT_FEMALE(12.5),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_GRASS},
+        .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_PROTEAN},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_MEOWSCARADA] =
+    {
+        .baseHP        = 76,
+        .baseAttack    = 110,
+        .baseDefense   = 70,
+        .baseSpeed     = 123,
+        .baseSpAttack  = 81,
+        .baseSpDefense = 70,
+        .types = { TYPE_GRASS, TYPE_DARK },
+        .catchRate = 45,
+        .expYield = 265,
+        .evYield_Speed = 3,
+        .genderRatio = PERCENT_FEMALE(12.5),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_GRASS},
+        .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_PROTEAN},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_FUECOCO] =
+    {
+        .baseHP        = 67,
+        .baseAttack    = 45,
+        .baseDefense   = 59,
+        .baseSpeed     = 36,
+        .baseSpAttack  = 63,
+        .baseSpDefense = 40,
+        .types = { TYPE_FIRE, TYPE_FIRE },
+        .catchRate = 45,
+        .expYield = 62,
+        .evYield_HP = 1,
+        .genderRatio = PERCENT_FEMALE(12.5),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_UNAWARE},
+        .bodyColor = BODY_COLOR_RED,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_CROCALOR] =
+    {
+        .baseHP        = 81,
+        .baseAttack    = 55,
+        .baseDefense   = 78,
+        .baseSpeed     = 49,
+        .baseSpAttack  = 90,
+        .baseSpDefense = 58,
+        .types = { TYPE_FIRE, TYPE_FIRE },
+        .catchRate = 45,
+        .expYield = 144,
+        .evYield_SpAttack = 2,
+        .genderRatio = PERCENT_FEMALE(12.5),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_UNAWARE},
+        .bodyColor = BODY_COLOR_RED,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_SKELEDIRGE] =
+    {
+        .baseHP        = 104,
+        .baseAttack    = 75,
+        .baseDefense   = 100,
+        .baseSpeed     = 66,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 75,
+        .types = { TYPE_FIRE, TYPE_GHOST },
+        .catchRate = 45,
+        .expYield = 265,
+        .evYield_SpAttack = 3,
+        .genderRatio = PERCENT_FEMALE(12.5),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_UNAWARE},
+        .bodyColor = BODY_COLOR_RED,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_QUAXLY] =
+    {
+        .baseHP        = 55,
+        .baseAttack    = 65,
+        .baseDefense   = 45,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 45,
+        .types = { TYPE_WATER, TYPE_WATER },
+        .catchRate = 45,
+        .expYield =  62,
+        .evYield_Attack = 1,
+        .genderRatio = PERCENT_FEMALE(12.5),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_WATER_1},
+        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_MOXIE},
+        .bodyColor = BODY_COLOR_WHITE,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_QUAXWELL] =
+    {
+        .baseHP        = 70,
+        .baseAttack    = 85,
+        .baseDefense   = 65,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 60,
+        .types = { TYPE_WATER, TYPE_WATER },
+        .catchRate = 45,
+        .expYield = 144,
+        .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(12.5),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_WATER_1},
+        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_MOXIE},
+        .bodyColor = BODY_COLOR_BLUE,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_QUAQUAVAL] =
+    {
+        .baseHP        = 85,
+        .baseAttack    = 120,
+        .baseDefense   = 80,
+        .baseSpeed     = 85,
+        .baseSpAttack  = 85,
+        .baseSpDefense = 75,
+        .types = { TYPE_WATER, TYPE_FIGHTING },
+        .catchRate = 45,
+        .expYield = 265,
+        .evYield_Attack = 3,
+        .genderRatio = PERCENT_FEMALE(12.5),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_WATER_1},
+        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_MOXIE},
+        .bodyColor = BODY_COLOR_BLUE,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_LECHONK] =
+    {
+        .baseHP        = 54,
+        .baseAttack    = 45,
+        .baseDefense   = 40,
+        .baseSpeed     = 35,
+        .baseSpAttack  = 35,
+        .baseSpDefense = 45,
+        .types = { TYPE_NORMAL, TYPE_NORMAL },
+        .catchRate = 255,
+        .expYield = 51,
+        .evYield_HP = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_AROMA_VEIL, ABILITY_GLUTTONY, ABILITY_THICK_FAT},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+    },
+
+#define OINKOLOGNE_MISC_INFO                                \
+        .types = { TYPE_NORMAL, TYPE_NORMAL },              \
+        .catchRate = 100,                                   \
+        .expYield = 171,                                    \
+        .evYield_HP = 2,                                    \
+        .eggCycles = 15,                                    \
+        .friendship = STANDARD_FRIENDSHIP,                                   \
+        .growthRate = GROWTH_MEDIUM_FAST,                   \
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},   \
+        .bodyColor = BODY_COLOR_GRAY,                       \
+        .noFlip = FALSE
+
+    [SPECIES_OINKOLOGNE_MALE] =
+    {
+        .baseHP        = 110,
+        .baseAttack    = 100,
+        .baseDefense   = 75,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 59,
+        .baseSpDefense = 80,
+        .genderRatio = PERCENT_FEMALE(0),
+        .abilities = {ABILITY_LINGERING_AROMA, ABILITY_GLUTTONY, ABILITY_THICK_FAT},
+        OINKOLOGNE_MISC_INFO,
+    },
+
+    [SPECIES_OINKOLOGNE_FEMALE] =
+    {
+        .baseHP        = 115,
+        .baseAttack    = 90,
+        .baseDefense   = 70,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 59,
+        .baseSpDefense = 90,
+        .genderRatio = PERCENT_FEMALE(100),
+        .abilities = {ABILITY_AROMA_VEIL, ABILITY_GLUTTONY, ABILITY_THICK_FAT},
+        OINKOLOGNE_MISC_INFO,
+    },
+
+    [SPECIES_TAROUNTULA] =
+    {
+        .baseHP        = 35,
+        .baseAttack    = 41,
+        .baseDefense   = 45,
+        .baseSpeed     = 20,
+        .baseSpAttack  = 29,
+        .baseSpDefense = 40,
+        .types = { TYPE_BUG, TYPE_BUG },
+        .catchRate = 255,
+        .expYield = 42,
+        .evYield_Defense = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_ERRATIC,
+        .eggGroups = { EGG_GROUP_BUG, EGG_GROUP_BUG},
+        .abilities = {ABILITY_INSOMNIA, ABILITY_NONE, ABILITY_STAKEOUT},
+        .bodyColor = BODY_COLOR_WHITE,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_SPIDOPS] =
+    {
+        .baseHP        = 60,
+        .baseAttack    = 79,
+        .baseDefense   = 92,
+        .baseSpeed     = 35,
+        .baseSpAttack  = 52,
+        .baseSpDefense = 86,
+        .types = { TYPE_BUG, TYPE_BUG },
+        .catchRate = 120,
+        .expYield = 141,
+        .evYield_Defense = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_ERRATIC,
+        .eggGroups = { EGG_GROUP_BUG, EGG_GROUP_BUG},
+        .abilities = {ABILITY_INSOMNIA, ABILITY_NONE, ABILITY_STAKEOUT},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_NYMBLE] =
+    {
+        .baseHP        = 33,
+        .baseAttack    = 46,
+        .baseDefense   = 40,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 21,
+        .baseSpDefense = 25,
+        .types = { TYPE_BUG, TYPE_BUG },
+        .catchRate = 190,
+        .expYield = 42,
+        .evYield_Attack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 20,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_BUG, EGG_GROUP_BUG},
+        .abilities = {ABILITY_SWARM, ABILITY_NONE, ABILITY_TINTED_LENS},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_LOKIX] =
+    {
+        .baseHP        = 71,
+        .baseAttack    = 102,
+        .baseDefense   = 78,
+        .baseSpeed     = 92,
+        .baseSpAttack  = 52,
+        .baseSpDefense = 55,
+        .types = { TYPE_BUG, TYPE_DARK },
+        .catchRate = 30,
+        .expYield = 158,
+        .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 0,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_BUG, EGG_GROUP_BUG},
+        .abilities = {ABILITY_SWARM, ABILITY_NONE, ABILITY_TINTED_LENS},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_PAWMI] =
+    {
+        .baseHP        = 45,
+        .baseAttack    = 50,
+        .baseDefense   = 20,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 25,
+        .types = { TYPE_ELECTRIC, TYPE_ELECTRIC },
+        .catchRate = 190,
+        .expYield = 48,
+        .evYield_Speed = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_STATIC, ABILITY_NATURAL_CURE, ABILITY_IRON_FIST},
+        .bodyColor = BODY_COLOR_YELLOW,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_PAWMO] =
+    {
+        .baseHP        = 60,
+        .baseAttack    = 75,
+        .baseDefense   = 40,
+        .baseSpeed     = 85,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 40,
+        .types = { TYPE_ELECTRIC, TYPE_FIGHTING },
+        .catchRate = 80,
+        .expYield = 123,
+        .evYield_Speed = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_VOLT_ABSORB, ABILITY_NATURAL_CURE, ABILITY_IRON_FIST},
+        .bodyColor = BODY_COLOR_YELLOW,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_PAWMOT] =
+    {
+        .baseHP        = 70,
+        .baseAttack    = 115,
+        .baseDefense   = 70,
+        .baseSpeed     = 105,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 60,
+        .types = { TYPE_ELECTRIC, TYPE_FIGHTING },
+        .catchRate = 45,
+        .expYield = 245,
+        .evYield_Attack = 3,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_VOLT_ABSORB, ABILITY_NATURAL_CURE, ABILITY_IRON_FIST},
+        .bodyColor = BODY_COLOR_YELLOW,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_TANDEMAUS] =
+    {
+        .baseHP        = 50,
+        .baseAttack    = 50,
+        .baseDefense   = 45,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 45,
+        .types = { TYPE_NORMAL, TYPE_NORMAL },
+        .catchRate = 150,
+        .expYield = 61,
+        .evYield_Speed = 1,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 10,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_FAST,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FAIRY},
+        .abilities = {ABILITY_RUN_AWAY, ABILITY_PICKUP, ABILITY_OWN_TEMPO},
+        .bodyColor = BODY_COLOR_WHITE,
+        .noFlip = FALSE,
+    },
+
+#define MAUSHOLD_SPECIES_INFO                                                           \
+    {                                                                                   \
+        .baseHP        = 74,                                                            \
+        .baseAttack    = 75,                                                            \
+        .baseDefense   = 70,                                                            \
+        .baseSpeed     = 111,                                                           \
+        .baseSpAttack  = 65,                                                            \
+        .baseSpDefense = 75,                                                            \
+        .types = { TYPE_NORMAL, TYPE_NORMAL },                                          \
+        .catchRate = 75,                                                                \
+        .expYield = 165,                                                                \
+        .evYield_Speed = 2,                                                             \
+        .genderRatio = MON_GENDERLESS,                                                  \
+        .eggCycles = 10,                                                                \
+        .friendship = STANDARD_FRIENDSHIP,                                              \
+        .growthRate = GROWTH_FAST,                                                      \
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FAIRY},                               \
+        .abilities = {ABILITY_FRIEND_GUARD, ABILITY_CHEEK_POUCH, ABILITY_TECHNICIAN},   \
+        .bodyColor = BODY_COLOR_WHITE,                                                  \
+        .noFlip = FALSE,                                                                \
+    }
+
+    [SPECIES_MAUSHOLD_FAMILY_OF_THREE] = MAUSHOLD_SPECIES_INFO,
+    [SPECIES_MAUSHOLD_FAMILY_OF_FOUR] = MAUSHOLD_SPECIES_INFO,
+
+    [SPECIES_FIDOUGH] =
+    {
+        .baseHP        = 37,
+        .baseAttack    = 55,
+        .baseDefense   = 70,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 30,
+        .baseSpDefense = 55,
+        .types = { TYPE_FAIRY, TYPE_FAIRY },
+        .catchRate = 190,
+        .expYield = 62,
+        .evYield_Speed = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_MINERAL},
+        .abilities = {ABILITY_OWN_TEMPO, ABILITY_NONE, ABILITY_KLUTZ},
+        .bodyColor = BODY_COLOR_YELLOW,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_DACHSBUN] =
+    {
+        .baseHP        = 57,
+        .baseAttack    = 80,
+        .baseDefense   = 115,
+        .baseSpeed     = 95,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 80,
+        .types = { TYPE_FAIRY, TYPE_FAIRY },
+        .catchRate = 90,
+        .expYield = 167,
+        .evYield_Speed = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_MINERAL},
+        .abilities = {ABILITY_WELL_BAKED_BODY, ABILITY_NONE, ABILITY_AROMA_VEIL},
+        .bodyColor = BODY_COLOR_BROWN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_SMOLIV] =
+    {
+        .baseHP        = 41,
+        .baseAttack    = 35,
+        .baseDefense   = 45,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 58,
+        .baseSpDefense = 51,
+        .types = { TYPE_GRASS, TYPE_NORMAL },
+        .catchRate = 255,
+        .expYield = 52,
+        .evYield_SpAttack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_GRASS},
+        .abilities = {ABILITY_EARLY_BIRD, ABILITY_NONE, ABILITY_HARVEST},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_DOLLIV] =
+    {
+        .baseHP        = 52,
+        .baseAttack    = 53,
+        .baseDefense   = 60,
+        .baseSpeed     = 33,
+        .baseSpAttack  = 78,
+        .baseSpDefense = 78,
+        .types = { TYPE_GRASS, TYPE_NORMAL },
+        .catchRate = 120,
+        .expYield = 124,
+        .evYield_SpAttack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_GRASS},
+        .abilities = {ABILITY_EARLY_BIRD, ABILITY_NONE, ABILITY_HARVEST},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_ARBOLIVA] =
+    {
+        .baseHP        = 78,
+        .baseAttack    = 69,
+        .baseDefense   = 90,
+        .baseSpeed     = 39,
+        .baseSpAttack  = 125,
+        .baseSpDefense = 109,
+        .types = { TYPE_GRASS, TYPE_NORMAL },
+        .catchRate = 45,
+        .expYield = 255,
+        .evYield_SpAttack = 3,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_GRASS},
+        .abilities = {ABILITY_SEED_SOWER, ABILITY_NONE, ABILITY_HARVEST},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+    },
+
+#define SQUAWKABILLY_MISC_INFO                              \
+        .baseHP        = 82,                                \
+        .baseAttack    = 96,                                \
+        .baseDefense   = 51,                                \
+        .baseSpeed     = 92,                                \
+        .baseSpAttack  = 45,                                \
+        .baseSpDefense = 51,                                \
+        .types = { TYPE_NORMAL, TYPE_FLYING },              \
+        .catchRate = 190,                                   \
+        .expYield = 146,                                    \
+        .evYield_Attack = 1,                                \
+        .genderRatio = PERCENT_FEMALE(50),                  \
+        .eggCycles = 15,                                    \
+        .friendship = STANDARD_FRIENDSHIP,                  \
+        .growthRate = GROWTH_ERRATIC,                       \
+        .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING}, \
+        .noFlip = FALSE
+
+    [SPECIES_SQUAWKABILLY_GREEN_PLUMAGE] =
+    {
+        .abilities = {ABILITY_INTIMIDATE, ABILITY_HUSTLE, ABILITY_GUTS},
+        .bodyColor = BODY_COLOR_GREEN,
+        SQUAWKABILLY_MISC_INFO,
+    },
+
+    [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE] =
+    {
+        .abilities = {ABILITY_INTIMIDATE, ABILITY_HUSTLE, ABILITY_GUTS},
+        .bodyColor = BODY_COLOR_BLUE,
+        SQUAWKABILLY_MISC_INFO,
+    },
+
+    [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE] =
+    {
+        .abilities = {ABILITY_INTIMIDATE, ABILITY_HUSTLE, ABILITY_SHEER_FORCE},
+        .bodyColor = BODY_COLOR_YELLOW,
+        SQUAWKABILLY_MISC_INFO,
+    },
+
+    [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE] =
+    {
+        .abilities = {ABILITY_INTIMIDATE, ABILITY_HUSTLE, ABILITY_SHEER_FORCE},
+        .bodyColor = BODY_COLOR_WHITE,
+        SQUAWKABILLY_MISC_INFO,
+    },
+
+    [SPECIES_NACLI] =
+    {
+        .baseHP        = 55,
+        .baseAttack    = 55,
+        .baseDefense   = 75,
+        .baseSpeed     = 25,
+        .baseSpAttack  = 35,
+        .baseSpDefense = 35,
+        .types = { TYPE_ROCK, TYPE_ROCK },
+        .catchRate = 255,
+        .expYield = 56,
+        .evYield_Defense = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_MINERAL},
+        .abilities = {ABILITY_PURIFYING_SALT, ABILITY_STURDY, ABILITY_CLEAR_BODY},
+        .bodyColor = BODY_COLOR_BROWN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_NACLSTACK] =
+    {
+        .baseHP        = 60,
+        .baseAttack    = 60,
+        .baseDefense   = 100,
+        .baseSpeed     = 35,
+        .baseSpAttack  = 35,
+        .baseSpDefense = 65,
+        .types = { TYPE_ROCK, TYPE_ROCK },
+        .catchRate = 120,
+        .expYield = 124,
+        .evYield_Defense = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_MINERAL},
+        .abilities = {ABILITY_PURIFYING_SALT, ABILITY_STURDY, ABILITY_CLEAR_BODY},
+        .bodyColor = BODY_COLOR_BROWN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_GARGANACL] =
+    {
+        .baseHP        = 100,
+        .baseAttack    = 100,
+        .baseDefense   = 130,
+        .baseSpeed     = 35,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 90,
+        .types = { TYPE_ROCK, TYPE_ROCK },
+        .catchRate = 45,
+        .expYield = 250,
+        .evYield_Defense = 3,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_MINERAL},
+        .abilities = {ABILITY_PURIFYING_SALT, ABILITY_STURDY, ABILITY_CLEAR_BODY},
+        .bodyColor = BODY_COLOR_BROWN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_CHARCADET] =
+    {
+        .baseHP        = 40,
+        .baseAttack    = 50,
+        .baseDefense   = 40,
+        .baseSpeed     = 35,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 40,
+        .types = { TYPE_FIRE, TYPE_FIRE },
+        .catchRate = 90,
+        .expYield = 51,
+        .evYield_SpAttack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 35,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_HUMAN_LIKE, EGG_GROUP_HUMAN_LIKE},
+        .abilities = {ABILITY_FLASH_FIRE, ABILITY_NONE, ABILITY_FLAME_BODY},
+        .bodyColor = BODY_COLOR_RED,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_ARMAROUGE] =
+    {
+        .baseHP        = 85,
+        .baseAttack    = 60,
+        .baseDefense   = 100,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 125,
+        .baseSpDefense = 80,
+        .types = { TYPE_FIRE, TYPE_PSYCHIC },
+        .catchRate = 25,
+        .expYield = 263,
+        .evYield_SpAttack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 35,
+        .friendship = 20,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_HUMAN_LIKE, EGG_GROUP_HUMAN_LIKE},
+        .abilities = {ABILITY_FLASH_FIRE, ABILITY_NONE, ABILITY_WEAK_ARMOR},
+        .bodyColor = BODY_COLOR_RED,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_CERULEDGE] =
+    {
+        .baseHP        = 75,
+        .baseAttack    = 125,
+        .baseDefense   = 80,
+        .baseSpeed     = 85,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 100,
+        .types = { TYPE_FIRE, TYPE_GHOST },
+        .catchRate = 25,
+        .expYield = 263,
+        .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 35,
+        .friendship = 20,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_HUMAN_LIKE, EGG_GROUP_HUMAN_LIKE},
+        .abilities = {ABILITY_FLASH_FIRE, ABILITY_NONE, ABILITY_WEAK_ARMOR},
+        .bodyColor = BODY_COLOR_BLUE,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_TADBULB] =
+    {
+        .baseHP        = 61,
+        .baseAttack    = 31,
+        .baseDefense   = 41,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 59,
+        .baseSpDefense = 35,
+        .types = { TYPE_ELECTRIC, TYPE_ELECTRIC },
+        .catchRate = 190,
+        .expYield = 54,
+        .evYield_HP = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_WATER_1},
+        .abilities = {ABILITY_OWN_TEMPO, ABILITY_STATIC, ABILITY_DAMP},
+        .bodyColor = BODY_COLOR_YELLOW,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_BELLIBOLT] =
+    {
+        .baseHP        = 109,
+        .baseAttack    = 64,
+        .baseDefense   = 91,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 103,
+        .baseSpDefense = 83,
+        .types = { TYPE_ELECTRIC, TYPE_ELECTRIC },
+        .catchRate = 50,
+        .expYield = 173,
+        .evYield_HP = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_WATER_1},
+        .abilities = {ABILITY_ELECTROMORPHOSIS, ABILITY_STATIC, ABILITY_DAMP},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_WATTREL] =
+    {
+        .baseHP        = 40,
+        .baseAttack    = 40,
+        .baseDefense   = 35,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 40,
+        .types = { TYPE_ELECTRIC, TYPE_FLYING },
+        .catchRate = 180,
+        .expYield = 56,
+        .evYield_Speed = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_FLYING},
+        .abilities = {ABILITY_WIND_POWER, ABILITY_VOLT_ABSORB, ABILITY_COMPETITIVE},
+        .bodyColor = BODY_COLOR_BLACK,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_KILOWATTREL] =
+    {
+        .baseHP        = 70,
+        .baseAttack    = 70,
+        .baseDefense   = 60,
+        .baseSpeed     = 125,
+        .baseSpAttack  = 105,
+        .baseSpDefense = 60,
+        .types = { TYPE_ELECTRIC, TYPE_FLYING },
+        .catchRate = 90,
+        .expYield = 172,
+        .evYield_Speed = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_FLYING},
+        .abilities = {ABILITY_WIND_POWER, ABILITY_VOLT_ABSORB, ABILITY_COMPETITIVE},
+        .bodyColor = BODY_COLOR_YELLOW,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_MASCHIFF] =
+    {
+        .baseHP        = 60,
+        .baseAttack    = 78,
+        .baseDefense   = 60,
+        .baseSpeed     = 51,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 51,
+        .types = { TYPE_DARK, TYPE_DARK },
+        .catchRate = 150,
+        .expYield = 68,
+        .evYield_Attack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_INTIMIDATE, ABILITY_RUN_AWAY, ABILITY_STAKEOUT},
+        .bodyColor = BODY_COLOR_BROWN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_MABOSSTIFF] =
+    {
+        .baseHP        = 80,
+        .baseAttack    = 120,
+        .baseDefense   = 90,
+        .baseSpeed     = 85,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 70,
+        .types = { TYPE_DARK, TYPE_DARK },
+        .catchRate = 75,
+        .expYield = 177,
+        .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_INTIMIDATE, ABILITY_GUARD_DOG, ABILITY_STAKEOUT},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_SHROODLE] =
+    {
+        .baseHP        = 40,
+        .baseAttack    = 65,
+        .baseDefense   = 35,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 35,
+        .types = { TYPE_POISON, TYPE_NORMAL },
+        .catchRate = 190,
+        .expYield = 58,
+        .evYield_Speed = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_UNBURDEN, ABILITY_PICKPOCKET, ABILITY_PRANKSTER},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_GRAFAIAI] =
+    {
+        .baseHP        = 63,
+        .baseAttack    = 95,
+        .baseDefense   = 65,
+        .baseSpeed     = 110,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 72,
+        .types = { TYPE_POISON, TYPE_NORMAL },
+        .catchRate = 90,
+        .expYield = 170,
+        .evYield_Speed = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_UNBURDEN, ABILITY_POISON_TOUCH, ABILITY_PRANKSTER},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_BRAMBLIN] =
+    {
+        .baseHP        = 40,
+        .baseAttack    = 65,
+        .baseDefense   = 30,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 35,
+        .types = { TYPE_GRASS, TYPE_GHOST },
+        .catchRate = 190,
+        .expYield = 55,
+        .evYield_Attack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_GRASS},
+        .abilities = {ABILITY_WIND_RIDER, ABILITY_NONE, ABILITY_INFILTRATOR},
+        .bodyColor = BODY_COLOR_BROWN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_BRAMBLEGHAST] =
+    {
+        .baseHP        = 55,
+        .baseAttack    = 115,
+        .baseDefense   = 70,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 70,
+        .types = { TYPE_GRASS, TYPE_GHOST },
+        .catchRate = 45,
+        .expYield = 168,
+        .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_GRASS},
+        .abilities = {ABILITY_WIND_RIDER, ABILITY_NONE, ABILITY_INFILTRATOR},
+        .bodyColor = BODY_COLOR_BROWN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_TOEDSCOOL] =
+    {
+        .baseHP        = 40,
+        .baseAttack    = 40,
+        .baseDefense   = 35,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 100,
+        .types = { TYPE_GROUND, TYPE_GRASS },
+        .catchRate = 190,
+        .expYield = 67,
+        .evYield_SpDefense = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_GRASS},
+        .abilities = {ABILITY_MYCELIUM_MIGHT, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_YELLOW,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_TOEDSCRUEL] =
+    {
+        .baseHP        = 80,
+        .baseAttack    = 70,
+        .baseDefense   = 65,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 120,
+        .types = { TYPE_GROUND, TYPE_GRASS },
+        .catchRate = 90,
+        .expYield = 180,
+        .evYield_SpDefense = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_GRASS},
+        .abilities = {ABILITY_MYCELIUM_MIGHT, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_BLACK,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_KLAWF] =
+    {
+        .baseHP        = 70,
+        .baseAttack    = 100,
+        .baseDefense   = 115,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 35,
+        .baseSpDefense = 55,
+        .types = { TYPE_ROCK, TYPE_ROCK },
+        .catchRate = 120,
+        .expYield = 158,
+        .evYield_Defense = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 35,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_WATER_3, EGG_GROUP_WATER_3},
+        .abilities = {ABILITY_ANGER_SHELL, ABILITY_SHELL_ARMOR, ABILITY_REGENERATOR},
+        .bodyColor = BODY_COLOR_RED,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_CAPSAKID] =
+    {
+        .baseHP        = 50,
+        .baseAttack    = 62,
+        .baseDefense   = 40,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 62,
+        .baseSpDefense = 40,
+        .types = { TYPE_GRASS, TYPE_GRASS },
+        .catchRate = 190,
+        .expYield = 61,
+        .evYield_Attack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_GRASS},
+        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_INSOMNIA, ABILITY_KLUTZ},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_SCOVILLAIN] =
+    {
+        .baseHP        = 65,
+        .baseAttack    = 108,
+        .baseDefense   = 65,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 108,
+        .baseSpDefense = 65,
+        .types = { TYPE_GRASS, TYPE_FIRE },
+        .catchRate = 75,
+        .expYield = 170,
+        .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_GRASS},
+        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_INSOMNIA, ABILITY_MOODY},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_RELLOR] =
+    {
+        .baseHP        = 41,
+        .baseAttack    = 50,
+        .baseDefense   = 60,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 31,
+        .baseSpDefense = 58,
+        .types = { TYPE_BUG, TYPE_BUG },
+        .catchRate = 190,
+        .expYield = 54,
+        .evYield_Defense = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_FAST,
+        .eggGroups = { EGG_GROUP_BUG, EGG_GROUP_BUG},
+        .abilities = {ABILITY_COMPOUND_EYES, ABILITY_NONE, ABILITY_SHED_SKIN},
+        .bodyColor = BODY_COLOR_BROWN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_RABSCA] =
+    {
+        .baseHP        = 75,
+        .baseAttack    = 50,
+        .baseDefense   = 85,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 115,
+        .baseSpDefense = 100,
+        .types = { TYPE_BUG, TYPE_PSYCHIC },
+        .catchRate = 45,
+        .expYield = 165,
+        .evYield_SpAttack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_FAST,
+        .eggGroups = { EGG_GROUP_BUG, EGG_GROUP_BUG},
+        .abilities = {ABILITY_SYNCHRONIZE, ABILITY_NONE, ABILITY_TELEPATHY},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_FLITTLE] =
+    {
+        .baseHP        = 30,
+        .baseAttack    = 35,
+        .baseDefense   = 30,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 30,
+        .types = { TYPE_PSYCHIC, TYPE_PSYCHIC },
+        .catchRate = 120,
+        .expYield = 51,
+        .evYield_Speed = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING},
+        .abilities = {ABILITY_ANTICIPATION, ABILITY_FRISK, ABILITY_SPEED_BOOST},
+        .bodyColor = BODY_COLOR_YELLOW,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_ESPATHRA] =
+    {
+        .baseHP        = 95,
+        .baseAttack    = 60,
+        .baseDefense   = 60,
+        .baseSpeed     = 105,
+        .baseSpAttack  = 101,
+        .baseSpDefense = 60,
+        .types = { TYPE_PSYCHIC, TYPE_PSYCHIC },
+        .catchRate = 60,
+        .expYield = 168,
+        .evYield_Speed = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING},
+        .abilities = {ABILITY_OPPORTUNIST, ABILITY_FRISK, ABILITY_SPEED_BOOST},
+        .bodyColor = BODY_COLOR_YELLOW,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_TINKATINK] =
+    {
+        .baseHP        = 50,
+        .baseAttack    = 45,
+        .baseDefense   = 45,
+        .baseSpeed     = 58,
+        .baseSpAttack  = 35,
+        .baseSpDefense = 64,
+        .types = { TYPE_FAIRY, TYPE_STEEL },
+        .catchRate = 190,
+        .expYield = 59,
+        .evYield_SpDefense = 1,
+        .genderRatio = MON_FEMALE,
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FAIRY, EGG_GROUP_FAIRY},
+        .abilities = {ABILITY_MOLD_BREAKER, ABILITY_OWN_TEMPO, ABILITY_PICKPOCKET},
+        .bodyColor = BODY_COLOR_PINK,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_TINKATUFF] =
+    {
+        .baseHP        = 65,
+        .baseAttack    = 55,
+        .baseDefense   = 55,
+        .baseSpeed     = 78,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 82,
+        .types = { TYPE_FAIRY, TYPE_STEEL },
+        .catchRate = 90,
+        .expYield = 133,
+        .evYield_SpDefense = 2,
+        .genderRatio = MON_FEMALE,
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FAIRY, EGG_GROUP_FAIRY},
+        .abilities = {ABILITY_MOLD_BREAKER, ABILITY_OWN_TEMPO, ABILITY_PICKPOCKET},
+        .bodyColor = BODY_COLOR_PINK,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_TINKATON] =
+    {
+        .baseHP        = 85,
+        .baseAttack    = 75,
+        .baseDefense   = 77,
+        .baseSpeed     = 94,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 105,
+        .types = { TYPE_FAIRY, TYPE_STEEL },
+        .catchRate = 45,
+        .expYield = 253,
+        .evYield_SpDefense = 3,
+        .genderRatio = MON_FEMALE,
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FAIRY, EGG_GROUP_FAIRY},
+        .abilities = {ABILITY_MOLD_BREAKER, ABILITY_OWN_TEMPO, ABILITY_PICKPOCKET},
+        .bodyColor = BODY_COLOR_PINK,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_WIGLETT] =
+    {
+        .baseHP        = 10,
+        .baseAttack    = 55,
+        .baseDefense   = 25,
+        .baseSpeed     = 95,
+        .baseSpAttack  = 35,
+        .baseSpDefense = 25,
+        .types = { TYPE_WATER, TYPE_WATER },
+        .catchRate = 255,
+        .expYield = 49,
+        .evYield_Speed = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_WATER_3, EGG_GROUP_WATER_3},
+        .abilities = {ABILITY_GOOEY, ABILITY_RATTLED, ABILITY_SAND_VEIL},
+        .bodyColor = BODY_COLOR_WHITE,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_WUGTRIO] =
+    {
+        .baseHP        = 35,
+        .baseAttack    = 100,
+        .baseDefense   = 50,
+        .baseSpeed     = 120,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 70,
+        .types = { TYPE_WATER, TYPE_WATER },
+        .catchRate = 50,
+        .expYield = 149,
+        .evYield_Speed = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_WATER_3, EGG_GROUP_WATER_3},
+        .abilities = {ABILITY_GOOEY, ABILITY_RATTLED, ABILITY_SAND_VEIL},
+        .bodyColor = BODY_COLOR_RED,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_BOMBIRDIER] =
+    {
+        .baseHP        = 70,
+        .baseAttack    = 103,
+        .baseDefense   = 85,
+        .baseSpeed     = 82,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 85,
+        .types = { TYPE_FLYING, TYPE_DARK },
+        .catchRate = 25,
+        .expYield = 243,
+        .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 35,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING},
+        .abilities = {ABILITY_BIG_PECKS, ABILITY_KEEN_EYE, ABILITY_ROCKY_PAYLOAD},
+        .bodyColor = BODY_COLOR_WHITE,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_FINIZEN] =
+    {
+        .baseHP        = 70,
+        .baseAttack    = 45,
+        .baseDefense   = 40,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 40,
+        .types = { TYPE_WATER, TYPE_WATER },
+        .catchRate = 200,
+        .expYield = 63,
+        .evYield_Speed = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 40,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_WATER_2},
+        .abilities = {ABILITY_WATER_VEIL, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_BLUE,
+        .noFlip = FALSE,
+    },
+
+#define PALAFIN_MISC_INFO                                   \
+        .types = { TYPE_WATER, TYPE_WATER },                \
+        .catchRate = 45,                                    \
+        .evYield_HP = 2,                                    \
+        .genderRatio = PERCENT_FEMALE(50),                  \
+        .eggCycles = 40,                                    \
+        .friendship = STANDARD_FRIENDSHIP,                  \
+        .growthRate = GROWTH_SLOW,                          \
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_WATER_2}, \
+        .abilities = {ABILITY_ZERO_TO_HERO, ABILITY_NONE},  \
+        .bodyColor = BODY_COLOR_BLUE,                       \
+        .noFlip = FALSE
+
+    [SPECIES_PALAFIN_ZERO] =
+    {
+        .baseHP        = 100,
+        .baseAttack    = 70,
+        .baseDefense   = 72,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 53,
+        .baseSpDefense = 62,
+        .expYield = 160,
+        PALAFIN_MISC_INFO,
+    },
+
+    [SPECIES_PALAFIN_HERO] =
+    {
+        .baseHP        = 100,
+        .baseAttack    = 160,
+        .baseDefense   = 97,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 106,
+        .baseSpDefense = 87,
+        .expYield = 228,
+        PALAFIN_MISC_INFO,
+    },
+
+    [SPECIES_VAROOM] =
+    {
+        .baseHP        = 45,
+        .baseAttack    = 70,
+        .baseDefense   = 63,
+        .baseSpeed     = 47,
+        .baseSpAttack  = 30,
+        .baseSpDefense = 45,
+        .types = { TYPE_STEEL, TYPE_POISON },
+        .catchRate = 190,
+        .expYield = 60,
+        .evYield_Attack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_MINERAL},
+        .abilities = {ABILITY_OVERCOAT, ABILITY_NONE, ABILITY_SLOW_START},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_REVAVROOM] =
+    {
+        .baseHP        = 80,
+        .baseAttack    = 119,
+        .baseDefense   = 90,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 54,
+        .baseSpDefense = 67,
+        .types = { TYPE_STEEL, TYPE_POISON },
+        .catchRate = 75,
+        .expYield = 175,
+        .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_MINERAL},
+        .abilities = {ABILITY_OVERCOAT, ABILITY_NONE, ABILITY_FILTER},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_CYCLIZAR] =
+    {
+        .baseHP        = 70,
+        .baseAttack    = 95,
+        .baseDefense   = 65,
+        .baseSpeed     = 121,
+        .baseSpAttack  = 85,
+        .baseSpDefense = 65,
+        .types = { TYPE_DRAGON, TYPE_NORMAL },
+        .catchRate = 190,
+        .expYield = 175,
+        .evYield_Speed = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 30,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_SHED_SKIN, ABILITY_NONE, ABILITY_REGENERATOR},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_ORTHWORM] =
+    {
+        .baseHP        = 70,
+        .baseAttack    = 85,
+        .baseDefense   = 145,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 55,
+        .types = { TYPE_STEEL, TYPE_STEEL },
+        .catchRate = 25,
+        .expYield = 240,
+        .evYield_Defense = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 35,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_EARTH_EATER, ABILITY_NONE, ABILITY_SAND_VEIL},
+        .bodyColor = BODY_COLOR_PINK,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_GLIMMET] =
+    {
+        .baseHP        = 48,
+        .baseAttack    = 35,
+        .baseDefense   = 42,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 105,
+        .baseSpDefense = 60,
+        .types = { TYPE_ROCK, TYPE_POISON },
+        .catchRate = 70,
+        .expYield = 70,
+        .evYield_SpAttack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 30,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_MINERAL},
+        .abilities = {ABILITY_TOXIC_DEBRIS, ABILITY_NONE, ABILITY_CORROSION},
+        .bodyColor = BODY_COLOR_BLUE,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_GLIMMORA] =
+    {
+        .baseHP        = 83,
+        .baseAttack    = 55,
+        .baseDefense   = 90,
+        .baseSpeed     = 86,
+        .baseSpAttack  = 130,
+        .baseSpDefense = 81,
+        .types = { TYPE_ROCK, TYPE_POISON },
+        .catchRate = 25,
+        .expYield = 184,
+        .evYield_SpAttack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 30,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_MINERAL},
+        .abilities = {ABILITY_TOXIC_DEBRIS, ABILITY_NONE, ABILITY_CORROSION},
+        .bodyColor = BODY_COLOR_BLUE,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_GREAVARD] =
+    {
+        .baseHP        = 50,
+        .baseAttack    = 61,
+        .baseDefense   = 60,
+        .baseSpeed     = 34,
+        .baseSpAttack  = 30,
+        .baseSpDefense = 55,
+        .types = { TYPE_GHOST, TYPE_GHOST },
+        .catchRate = 120,
+        .expYield = 58,
+        .evYield_Attack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_PICKUP, ABILITY_NONE, ABILITY_FLUFFY},
+        .bodyColor = BODY_COLOR_WHITE,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_HOUNDSTONE] =
+    {
+        .baseHP        = 72,
+        .baseAttack    = 101,
+        .baseDefense   = 100,
+        .baseSpeed     = 68,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 97,
+        .types = { TYPE_GHOST, TYPE_GHOST },
+        .catchRate = 60,
+        .expYield = 171,
+        .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_SAND_RUSH, ABILITY_NONE, ABILITY_FLUFFY},
+        .bodyColor = BODY_COLOR_WHITE,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_FLAMIGO] =
+    {
+        .baseHP        = 82,
+        .baseAttack    = 115,
+        .baseDefense   = 74,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 75,
+        .baseSpDefense = 64,
+        .types = { TYPE_FLYING, TYPE_FIGHTING },
+        .catchRate = 100,
+        .expYield = 175,
+        .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING},
+        .abilities = {ABILITY_SCRAPPY, ABILITY_TANGLED_FEET, ABILITY_COSTAR},
+        .bodyColor = BODY_COLOR_PINK,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_CETODDLE] =
+    {
+        .baseHP        = 108,
+        .baseAttack    = 68,
+        .baseDefense   = 45,
+        .baseSpeed     = 43,
+        .baseSpAttack  = 30,
+        .baseSpDefense = 40,
+        .types = { TYPE_ICE, TYPE_ICE },
+        .catchRate = 150,
+        .expYield = 67,
+        .evYield_HP = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 25,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_THICK_FAT, ABILITY_SNOW_CLOAK, ABILITY_SHEER_FORCE},
+        .bodyColor = BODY_COLOR_WHITE,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_CETITAN] =
+    {
+        .baseHP        = 170,
+        .baseAttack    = 113,
+        .baseDefense   = 65,
+        .baseSpeed     = 73,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 55,
+        .types = { TYPE_ICE, TYPE_ICE },
+        .catchRate = 50,
+        .expYield = 182,
+        .evYield_HP = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 25,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_THICK_FAT, ABILITY_SLUSH_RUSH, ABILITY_SHEER_FORCE},
+        .bodyColor = BODY_COLOR_WHITE,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_VELUZA] =
+    {
+        .baseHP        =      90,
+        .baseAttack    =  102,
+        .baseDefense   = 73,
+        .baseSpeed     =   70,
+        .baseSpAttack  =   78,
+        .baseSpDefense =   65,
+        .types = { TYPE_WATER, TYPE_PSYCHIC },
+        .catchRate = 100,
+        .expYield = 167,
+        .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_FAST,
+        .eggGroups = { EGG_GROUP_WATER_2, EGG_GROUP_WATER_2},
+        .abilities = {ABILITY_MOLD_BREAKER, ABILITY_NONE, ABILITY_SHARPNESS},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_DONDOZO] =
+    {
+        .baseHP        = 150,
+        .baseAttack    = 100,
+        .baseDefense   = 115,
+        .baseSpeed     = 35,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 65,
+        .types = { TYPE_WATER, TYPE_WATER },
+        .catchRate = 25,
+        .expYield = 265,
+        .evYield_HP = 3,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 40,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_WATER_2, EGG_GROUP_WATER_2},
+        .abilities = {ABILITY_UNAWARE, ABILITY_OBLIVIOUS, ABILITY_WATER_VEIL},
+        .bodyColor = BODY_COLOR_BLUE,
+        .noFlip = FALSE,
+    },
+
+#define TATSUGIRI_MISC_INFO                                                 \
+        .baseHP        = 68,                                                \
+        .baseAttack    = 50,                                                \
+        .baseDefense   = 60,                                                \
+        .baseSpeed     = 82,                                                \
+        .baseSpAttack  = 120,                                               \
+        .baseSpDefense = 95,                                                \
+        .types = { TYPE_DRAGON, TYPE_WATER },                               \
+        .catchRate = 100,                                                   \
+        .expYield = 166,                                                    \
+        .evYield_SpAttack = 2,                                              \
+        .genderRatio = PERCENT_FEMALE(50),                                  \
+        .eggCycles = 35,                                                    \
+        .friendship = STANDARD_FRIENDSHIP,                                  \
+        .growthRate = GROWTH_MEDIUM_SLOW,                                   \
+        .eggGroups = { EGG_GROUP_WATER_2, EGG_GROUP_WATER_2},               \
+        .abilities = {ABILITY_COMMANDER, ABILITY_NONE, ABILITY_STORM_DRAIN},\
+        .noFlip = FALSE
+
+    [SPECIES_TATSUGIRI_CURLY] =
+    {
+        TATSUGIRI_MISC_INFO,
+        .bodyColor = BODY_COLOR_PINK,
+    },
+    [SPECIES_TATSUGIRI_DROOPY] =
+    {
+        TATSUGIRI_MISC_INFO,
+        .bodyColor = BODY_COLOR_RED,
+    },
+    [SPECIES_TATSUGIRI_STRETCHY] =
+    {
+        TATSUGIRI_MISC_INFO,
+        .bodyColor = BODY_COLOR_YELLOW,
+    },
+
+    [SPECIES_ANNIHILAPE] =
+    {
+        .baseHP        = 110,
+        .baseAttack    = 115,
+        .baseDefense   = 80,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 90,
+        .types = { TYPE_FIGHTING, TYPE_GHOST },
+        .catchRate = 45,
+        .expYield = 268,
+        .evYield_Attack = 3,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_VITAL_SPIRIT, ABILITY_INNER_FOCUS, ABILITY_DEFIANT},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_CLODSIRE] =
+    {
+        .baseHP        = 130,
+        .baseAttack    = 75,
+        .baseDefense   = 60,
+        .baseSpeed     = 20,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 100,
+        .types = { TYPE_POISON, TYPE_GROUND },
+        .catchRate = 90,
+        .expYield = 151,
+        .evYield_HP = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_POISON_POINT, ABILITY_WATER_ABSORB, ABILITY_UNAWARE},
+        .bodyColor = BODY_COLOR_BROWN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_FARIGIRAF] =
+    {
+        .baseHP        = 120,
+        .baseAttack    = 90,
+        .baseDefense   = 70,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 70,
+        .types = { TYPE_NORMAL, TYPE_PSYCHIC },
+        .catchRate = 45,
+        .expYield = 260,
+        .evYield_HP = 3,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},
+        .abilities = {ABILITY_CUD_CHEW, ABILITY_ARMOR_TAIL, ABILITY_SAP_SIPPER},
+        .bodyColor = BODY_COLOR_BROWN,
+        .noFlip = FALSE,
+    },
+
+#define DUDUNSPARCE_SPECIES_INFO                                                \
+    {                                                                           \
+        .baseHP        = 125,                                                   \
+        .baseAttack    = 100,                                                   \
+        .baseDefense   = 80,                                                    \
+        .baseSpeed     = 55,                                                    \
+        .baseSpAttack  = 85,                                                    \
+        .baseSpDefense = 75,                                                    \
+        .types = { TYPE_NORMAL, TYPE_NORMAL },                                  \
+        .catchRate = 45,                                                        \
+        .expYield = 182,                                                        \
+        .evYield_HP = 2,                                                        \
+        .genderRatio = PERCENT_FEMALE(50),                                      \
+        .eggCycles = 20,                                                        \
+        .friendship = STANDARD_FRIENDSHIP,                                      \
+        .growthRate = GROWTH_MEDIUM_FAST,                                       \
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD},                       \
+        .abilities = {ABILITY_SERENE_GRACE, ABILITY_RUN_AWAY, ABILITY_RATTLED}, \
+        .bodyColor = BODY_COLOR_YELLOW,                                         \
+        .noFlip = FALSE,                                                        \
+    }
+
+    [SPECIES_DUDUNSPARCE_TWO_SEGMENT]   = DUDUNSPARCE_SPECIES_INFO,
+    [SPECIES_DUDUNSPARCE_THREE_SEGMENT] = DUDUNSPARCE_SPECIES_INFO,
+
+    [SPECIES_KINGAMBIT] =
+    {
+        .baseHP        = 100,
+        .baseAttack    = 135,
+        .baseDefense   = 120,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 85,
+        .types = { TYPE_DARK, TYPE_STEEL },
+        .catchRate = 25,
+        .expYield = 275,
+        .evYield_Attack = 3,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_HUMAN_LIKE, EGG_GROUP_HUMAN_LIKE},
+        .abilities = {ABILITY_DEFIANT, ABILITY_SUPREME_OVERLORD, ABILITY_PRESSURE},
+        .bodyColor = BODY_COLOR_BLACK,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_GREAT_TUSK] =
+    {
+        .baseHP        = 115,
+        .baseAttack    = 131,
+        .baseDefense   = 131,
+        .baseSpeed     = 87,
+        .baseSpAttack  = 53,
+        .baseSpDefense = 53,
+        .types = { TYPE_GROUND, TYPE_FIGHTING },
+        .catchRate = 30,
+        .expYield = 285,
+        .evYield_Attack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_PROTOSYNTHESIS, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_PURPLE,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_SCREAM_TAIL] =
+    {
+        .baseHP        = 115,
+        .baseAttack    = 65,
+        .baseDefense   = 99,
+        .baseSpeed     = 111,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 115,
+        .types = { TYPE_FAIRY, TYPE_PSYCHIC },
+        .catchRate = 50,
+        .expYield = 285,
+        .evYield_HP = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_PROTOSYNTHESIS, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_PINK,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_BRUTE_BONNET] =
+    {
+        .baseHP        = 111,
+        .baseAttack    = 127,
+        .baseDefense   = 99,
+        .baseSpeed     = 55,
+        .baseSpAttack  = 79,
+        .baseSpDefense = 99,
+        .types = { TYPE_GRASS, TYPE_DARK },
+        .catchRate = 50,
+        .expYield = 285,
+        .evYield_Attack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_PROTOSYNTHESIS, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_FLUTTER_MANE] =
+    {
+        .baseHP        = 55,
+        .baseAttack    = 55,
+        .baseDefense   = 55,
+        .baseSpeed     = 135,
+        .baseSpAttack  = 135,
+        .baseSpDefense = 135,
+        .types = { TYPE_GHOST, TYPE_FAIRY },
+        .catchRate = 30,
+        .expYield = 285,
+        .evYield_Speed = 1,
+        .evYield_SpAttack = 1,
+        .evYield_SpDefense = 1,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_PROTOSYNTHESIS, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_SLITHER_WING] =
+    {
+        .baseHP        = 85,
+        .baseAttack    = 135,
+        .baseDefense   = 79,
+        .baseSpeed     = 81,
+        .baseSpAttack  = 85,
+        .baseSpDefense = 105,
+        .types = { TYPE_BUG, TYPE_FIGHTING },
+        .catchRate = 30,
+        .expYield = 285,
+        .evYield_Attack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_PROTOSYNTHESIS, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_RED,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_SANDY_SHOCKS] =
+    {
+        .baseHP        = 85,
+        .baseAttack    = 81,
+        .baseDefense   = 97,
+        .baseSpeed     = 101,
+        .baseSpAttack  = 121,
+        .baseSpDefense = 85,
+        .types = { TYPE_ELECTRIC, TYPE_GROUND },
+        .catchRate = 30,
+        .expYield = 285,
+        .evYield_SpAttack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_PROTOSYNTHESIS, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_IRON_TREADS] =
+    {
+        .baseHP        = 90,
+        .baseAttack    = 112,
+        .baseDefense   = 120,
+        .baseSpeed     = 106,
+        .baseSpAttack  = 72,
+        .baseSpDefense = 70,
+        .types = { TYPE_GROUND, TYPE_STEEL },
+        .catchRate = 30,
+        .expYield = 285,
+        .evYield_Defense = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_QUARK_DRIVE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_IRON_BUNDLE] =
+    {
+        .baseHP        = 56,
+        .baseAttack    = 80,
+        .baseDefense   = 114,
+        .baseSpeed     = 136,
+        .baseSpAttack  = 124,
+        .baseSpDefense = 60,
+        .types = { TYPE_ICE, TYPE_WATER },
+        .catchRate = 50,
+        .expYield = 285,
+        .evYield_Speed = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_QUARK_DRIVE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_RED,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_IRON_HANDS] =
+    {
+        .baseHP        = 154,
+        .baseAttack    = 140,
+        .baseDefense   = 108,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 68,
+        .types = { TYPE_FIGHTING, TYPE_ELECTRIC },
+        .catchRate = 50,
+        .expYield = 285,
+        .evYield_Attack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_QUARK_DRIVE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_IRON_JUGULIS] =
+    {
+        .baseHP        = 94,
+        .baseAttack    = 80,
+        .baseDefense   = 86,
+        .baseSpeed     = 108,
+        .baseSpAttack  = 122,
+        .baseSpDefense = 80,
+        .types = { TYPE_DARK, TYPE_FLYING },
+        .catchRate = 30,
+        .expYield = 285,
+        .evYield_SpAttack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_QUARK_DRIVE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_BLUE,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_IRON_MOTH] =
+    {
+        .baseHP        = 80,
+        .baseAttack    = 70,
+        .baseDefense   = 60,
+        .baseSpeed     = 110,
+        .baseSpAttack  = 140,
+        .baseSpDefense = 110,
+        .types = { TYPE_FIRE, TYPE_POISON },
+        .catchRate = 30,
+        .expYield = 285,
+        .evYield_SpAttack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_QUARK_DRIVE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_YELLOW,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_IRON_THORNS] =
+    {
+        .baseHP        = 100,
+        .baseAttack    = 134,
+        .baseDefense   = 110,
+        .baseSpeed     = 72,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 84,
+        .types = { TYPE_ROCK, TYPE_ELECTRIC },
+        .catchRate = 30,
+        .expYield = 285,
+        .evYield_Attack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_QUARK_DRIVE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_FRIGIBAX] =
+    {
+        .baseHP        = 65,
+        .baseAttack    = 75,
+        .baseDefense   = 45,
+        .baseSpeed     = 55,
+        .baseSpAttack  = 35,
+        .baseSpDefense = 45,
+        .types = { TYPE_DRAGON, TYPE_ICE },
+        .catchRate = 45,
+        .expYield = 64,
+        .evYield_Attack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 40,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_DRAGON, EGG_GROUP_MINERAL},
+        .abilities = {ABILITY_THERMAL_EXCHANGE, ABILITY_NONE, ABILITY_ICE_BODY},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_ARCTIBAX] =
+    {
+        .baseHP        = 90,
+        .baseAttack    = 95,
+        .baseDefense   = 66,
+        .baseSpeed     = 62,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 65,
+        .types = { TYPE_DRAGON, TYPE_ICE },
+        .catchRate = 25,
+        .expYield = 148,
+        .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 40,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_DRAGON, EGG_GROUP_MINERAL},
+        .abilities = {ABILITY_THERMAL_EXCHANGE, ABILITY_NONE, ABILITY_ICE_BODY},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_BAXCALIBUR] =
+    {
+        .baseHP        = 115,
+        .baseAttack    = 145,
+        .baseDefense   = 92,
+        .baseSpeed     = 87,
+        .baseSpAttack  = 75,
+        .baseSpDefense = 86,
+        .types = { TYPE_DRAGON, TYPE_ICE },
+        .catchRate = 10,
+        .expYield = 300,
+        .evYield_Attack = 3,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 40,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_DRAGON, EGG_GROUP_MINERAL},
+        .abilities = {ABILITY_THERMAL_EXCHANGE, ABILITY_NONE, ABILITY_ICE_BODY},
+        .bodyColor = BODY_COLOR_GRAY,
+        .noFlip = FALSE,
+    },
+
+#define GIMMIGHOUL_MISC_INFO                                            \
+        .types = { TYPE_GHOST, TYPE_GHOST },                            \
+        .catchRate = 45,                                                \
+        .expYield = 60,                                                 \
+        .evYield_SpAttack = 1,                                          \
+        .genderRatio = MON_GENDERLESS,                                  \
+        .eggCycles = 50,                                                \
+        .friendship = STANDARD_FRIENDSHIP,                              \
+        .growthRate = GROWTH_SLOW,                                      \
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED}, \
+        .noFlip = FALSE
+
+    [SPECIES_GIMMIGHOUL_CHEST] =
+    {
+        .baseHP        = 45,
+        .baseAttack    = 30,
+        .baseDefense   = 70,
+        .baseSpeed     = 10,
+        .baseSpAttack  = 75,
+        .baseSpDefense = 70,
+        .abilities = {ABILITY_RATTLED, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_BROWN,
+        GIMMIGHOUL_MISC_INFO,
+    },
+
+    [SPECIES_GIMMIGHOUL_ROAMING] =
+    {
+        .baseHP        = 45,
+        .baseAttack    = 30,
+        .baseDefense   = 25,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 75,
+        .baseSpDefense = 45,
+        .abilities = {ABILITY_RUN_AWAY, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_BLUE,
+        GIMMIGHOUL_MISC_INFO,
+    },
+
+    [SPECIES_GHOLDENGO] =
+    {
+        .baseHP        = 87,
+        .baseAttack    = 60,
+        .baseDefense   = 95,
+        .baseSpeed     = 84,
+        .baseSpAttack  = 133,
+        .baseSpDefense = 91,
+        .types = { TYPE_STEEL, TYPE_GHOST },
+        .catchRate = 45,
+        .expYield = 275,
+        .evYield_SpAttack = 2,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_GOOD_AS_GOLD, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_YELLOW,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_WO_CHIEN] =
+    {
+        .baseHP        = 85,
+        .baseAttack    = 85,
+        .baseDefense   = 100,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 95,
+        .baseSpDefense = 135,
+        .types = { TYPE_DARK, TYPE_GRASS },
+        .catchRate = 6,
+        .expYield = 285,
+        .evYield_SpDefense = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_TABLETS_OF_RUIN, ABILITY_NONE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_BROWN,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_LEGENDARY,
+    },
+
+    [SPECIES_CHIEN_PAO] =
+    {
+        .baseHP        = 80,
+        .baseAttack    = 120,
+        .baseDefense   = 80,
+        .baseSpeed     = 135,
+        .baseSpAttack  = 90,
+        .baseSpDefense = 65,
+        .types = { TYPE_DARK, TYPE_ICE },
+        .catchRate = 6,
+        .expYield = 285,
+        .evYield_Speed = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_SWORD_OF_RUIN, ABILITY_NONE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_WHITE,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_LEGENDARY,
+    },
+
+    [SPECIES_TING_LU] =
+    {
+        .baseHP        = 155,
+        .baseAttack    = 110,
+        .baseDefense   = 125,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 80,
+        .types = { TYPE_DARK, TYPE_GROUND },
+        .catchRate = 6,
+        .expYield = 285,
+        .evYield_Defense = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_VESSEL_OF_RUIN, ABILITY_NONE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_BROWN,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_LEGENDARY,
+    },
+
+    [SPECIES_CHI_YU] =
+    {
+        .baseHP        = 55,
+        .baseAttack    = 80,
+        .baseDefense   = 80,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 135,
+        .baseSpDefense = 120,
+        .types = { TYPE_DARK, TYPE_FIRE },
+        .catchRate = 6,
+        .expYield = 285,
+        .evYield_SpAttack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_BEADS_OF_RUIN, ABILITY_NONE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_RED,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_LEGENDARY,
+    },
+
+    [SPECIES_ROARING_MOON] =
+    {
+        .baseHP        = 105,
+        .baseAttack    = 139,
+        .baseDefense   = 71,
+        .baseSpeed     = 119,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 101,
+        .types = { TYPE_DRAGON, TYPE_DARK },
+        .catchRate = 10,
+        .expYield = 295,
+        .evYield_Attack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_PROTOSYNTHESIS, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_IRON_VALIANT] =
+    {
+        .baseHP        = 74,
+        .baseAttack    = 130,
+        .baseDefense   = 90,
+        .baseSpeed     = 116,
+        .baseSpAttack  = 120,
+        .baseSpDefense = 60,
+        .types = { TYPE_FAIRY, TYPE_FIGHTING },
+        .catchRate = 10,
+        .expYield = 295,
+        .evYield_Attack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_QUARK_DRIVE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_WHITE,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_KORAIDON] =
+    {
+        .baseHP        = 100,
+        .baseAttack    = 135,
+        .baseDefense   = 115,
+        .baseSpeed     = 135,
+        .baseSpAttack  = 85,
+        .baseSpDefense = 100,
+        .types = { TYPE_FIGHTING, TYPE_DRAGON },
+        .catchRate = 3,
+        .expYield = 335,
+        .evYield_Attack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_ORICHALCUM_PULSE, ABILITY_NONE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_RED,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_LEGENDARY | SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_MIRAIDON] =
+    {
+        .baseHP        = 100,
+        .baseAttack    = 85,
+        .baseDefense   = 100,
+        .baseSpeed     = 135,
+        .baseSpAttack  = 135,
+        .baseSpDefense = 115,
+        .types = { TYPE_ELECTRIC, TYPE_DRAGON },
+        .catchRate = 3,
+        .expYield = 335,
+        .evYield_SpAttack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_HADRON_ENGINE, ABILITY_NONE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_BLUE,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_LEGENDARY | SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_WALKING_WAKE] =
+    {
+        .baseHP        = 99,
+        .baseAttack    = 83,
+        .baseDefense   = 91,
+        .baseSpeed     = 109,
+        .baseSpAttack  = 125,
+        .baseSpDefense = 83,
+        .types = { TYPE_WATER, TYPE_DRAGON },
+        .catchRate = 5,
+        .expYield = 295,
+        .evYield_SpAttack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_PROTOSYNTHESIS, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_BLUE,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_IRON_LEAVES] =
+    {
+        .baseHP        = 90,
+        .baseAttack    = 130,
+        .baseDefense   = 88,
+        .baseSpeed     = 104,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 108,
+        .types = { TYPE_GRASS, TYPE_PSYCHIC },
+        .catchRate = 5,
+        .expYield = 295,
+        .evYield_Attack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_QUARK_DRIVE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_PARADOX,
+    },
+
+    [SPECIES_DIPPLIN] =
+    {
+        .baseHP        = 80,
+        .baseAttack    = 80,
+        .baseDefense   = 110,
+        .baseSpeed     = 40,
+        .baseSpAttack  = 95,
+        .baseSpDefense = 80,
+        .types = { TYPE_GRASS, TYPE_DRAGON },
+        .catchRate = 45,
+        .expYield = 170,
+        .evYield_Defense = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_ERRATIC,
+        .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_DRAGON},
+        .abilities = {ABILITY_SUPERSWEET_SYRUP, ABILITY_GLUTTONY, ABILITY_STICKY_HOLD},
+        .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+    },
+
+#define POLTCHAGEIST_SPECIES_INFO                                            \
+    {                                                                        \
+        .baseHP        = 40,                                                 \
+        .baseAttack    = 45,                                                 \
+        .baseDefense   = 45,                                                 \
+        .baseSpeed     = 50,                                                 \
+        .baseSpAttack  = 74,                                                 \
+        .baseSpDefense = 54,                                                 \
+        .types = { TYPE_GRASS, TYPE_GHOST},                                  \
+        .catchRate = 120,                                                    \
+        .expYield = 62,                                                      \
+        .evYield_SpAttack  = 1,                                              \
+        .genderRatio = MON_GENDERLESS,                                       \
+        .eggCycles = 20,                                                     \
+        .friendship = STANDARD_FRIENDSHIP,                                   \
+        .growthRate = GROWTH_MEDIUM_FAST,                                    \
+        .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_AMORPHOUS},              \
+        .abilities = {ABILITY_HOSPITALITY, ABILITY_NONE, ABILITY_HEATPROOF}, \
+        .bodyColor = BODY_COLOR_GREEN,                                       \
+        .noFlip = FALSE,                                                     \
+    }
+
+    [SPECIES_POLTCHAGEIST_COUNTERFEIT] = POLTCHAGEIST_SPECIES_INFO,
+    [SPECIES_POLTCHAGEIST_ARTISAN]     = POLTCHAGEIST_SPECIES_INFO,
+
+#define SINISTCHA_SPECIES_INFO                                               \
+    {                                                                        \
+        .baseHP        = 71,                                                 \
+        .baseAttack    = 60,                                                 \
+        .baseDefense   = 106,                                                \
+        .baseSpeed     = 70,                                                 \
+        .baseSpAttack  = 121,                                                \
+        .baseSpDefense = 80,                                                 \
+        .types = { TYPE_GRASS, TYPE_GHOST},                                  \
+        .catchRate = 60,                                                     \
+        .expYield = 178,                                                     \
+        .evYield_SpAttack  = 2,                                              \
+        .genderRatio = MON_GENDERLESS,                                       \
+        .eggCycles = 20,                                                     \
+        .friendship = STANDARD_FRIENDSHIP,                                   \
+        .growthRate = GROWTH_MEDIUM_FAST,                                    \
+        .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_AMORPHOUS},              \
+        .abilities = {ABILITY_HOSPITALITY, ABILITY_NONE, ABILITY_HEATPROOF}, \
+        .bodyColor = BODY_COLOR_GREEN,                                       \
+        .noFlip = FALSE,                                                     \
+    }
+
+    [SPECIES_SINISTCHA_UNREMARKABLE] = SINISTCHA_SPECIES_INFO,
+    [SPECIES_SINISTCHA_MASTERPIECE]  = SINISTCHA_SPECIES_INFO,
+
+    [SPECIES_OKIDOGI] =
+    {
+        .baseHP        = 88,
+        .baseAttack    = 128,
+        .baseDefense   = 115,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 58,
+        .baseSpDefense = 86,
+        .types = { TYPE_POISON, TYPE_FIGHTING },
+        .catchRate = 3,
+        .expYield = 278,
+        .evYield_Attack = 3,
+        .genderRatio = MON_MALE,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_TOXIC_CHAIN, ABILITY_NONE, ABILITY_GUARD_DOG},
+        .bodyColor = BODY_COLOR_BLACK,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_LEGENDARY,
+    },
+
+    [SPECIES_MUNKIDORI] =
+    {
+        .baseHP        = 88,
+        .baseAttack    = 75,
+        .baseDefense   = 66,
+        .baseSpeed     = 106,
+        .baseSpAttack  = 130,
+        .baseSpDefense = 90,
+        .types = { TYPE_POISON, TYPE_PSYCHIC },
+        .catchRate = 3,
+        .expYield = 278,
+        .evYield_SpAttack = 3,
+        .genderRatio = MON_MALE,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_TOXIC_CHAIN, ABILITY_NONE, ABILITY_FRISK},
+        .bodyColor = BODY_COLOR_BLACK,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_LEGENDARY,
+    },
+
+    [SPECIES_FEZANDIPITI] =
+    {
+        .baseHP        = 88,
+        .baseAttack    = 91,
+        .baseDefense   = 82,
+        .baseSpeed     = 99,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 125,
+        .types = { TYPE_POISON, TYPE_FAIRY },
+        .catchRate = 3,
+        .expYield = 278,
+        .evYield_SpDefense = 3,
+        .genderRatio = MON_MALE,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_TOXIC_CHAIN, ABILITY_NONE, ABILITY_TECHNICIAN},
+        .bodyColor = BODY_COLOR_BLACK,
+        .noFlip = FALSE,
+        .flags = SPECIES_FLAG_LEGENDARY,
+    },
+
+#define OGERPON_SPECIES_INFO(type, ability, color)     \
+    {                                                  \
+        .baseHP        = 80,                           \
+        .baseAttack    = 120,                          \
+        .baseDefense   = 84,                           \
+        .baseSpeed     = 110,                          \
+        .baseSpAttack  = 60,                           \
+        .baseSpDefense = 96,                           \
+        .types = { TYPE_GRASS, type },                 \
+        .catchRate = 5,                                \
+        .expYield = 275,                               \
+        .evYield_Attack = 3,                           \
+        .genderRatio = MON_FEMALE,                     \
+        .eggCycles = 10,                               \
+        .friendship = STANDARD_FRIENDSHIP,             \
+        .growthRate = GROWTH_SLOW,                     \
+        .eggGroups = { EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},           \
+        .abilities = {ability, ABILITY_NONE},          \
+        .bodyColor = color,                            \
+        .noFlip = FALSE,                               \
+        .flags = SPECIES_FLAG_LEGENDARY,               \
+    }
+
+    [SPECIES_OGERPON_TEAL_MASK] = OGERPON_SPECIES_INFO(TYPE_GRASS, ABILITY_DEFIANT, BODY_COLOR_GREEN),
+    [SPECIES_OGERPON_WELLSPRING_MASK]  = OGERPON_SPECIES_INFO(TYPE_WATER, ABILITY_WATER_ABSORB, BODY_COLOR_BLUE),
+    [SPECIES_OGERPON_HEARTHFLAME_MASK] = OGERPON_SPECIES_INFO(TYPE_FIRE, ABILITY_MOLD_BREAKER, BODY_COLOR_RED),
+    [SPECIES_OGERPON_CORNERSTONE_MASK]  = OGERPON_SPECIES_INFO(TYPE_ROCK, ABILITY_STURDY, BODY_COLOR_GRAY),
+    [SPECIES_OGERPON_TEAL_MASK_TERA] = OGERPON_SPECIES_INFO(TYPE_GRASS, ABILITY_EMBODY_ASPECT_TEAL, BODY_COLOR_GREEN),
+    [SPECIES_OGERPON_WELLSPRING_MASK_TERA]  = OGERPON_SPECIES_INFO(TYPE_WATER, ABILITY_EMBODY_ASPECT_WELLSPRING, BODY_COLOR_BLUE),
+    [SPECIES_OGERPON_HEARTHFLAME_MASK_TERA] = OGERPON_SPECIES_INFO(TYPE_FIRE, ABILITY_EMBODY_ASPECT_HEARTHFLAME, BODY_COLOR_RED),
+    [SPECIES_OGERPON_CORNERSTONE_MASK_TERA]  = OGERPON_SPECIES_INFO(TYPE_ROCK, ABILITY_EMBODY_ASPECT_CORNERSTONE, BODY_COLOR_GRAY),
 #endif
 };
