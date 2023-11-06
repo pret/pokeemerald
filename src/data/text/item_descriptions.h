@@ -345,12 +345,12 @@ static const u8 sFluffyTailDesc[] = _(
 // Field items
 static const u8 sSuperRepelDesc[] = _(
     "Repels weak wild\n"
-    "POKéMON for 200\n"
+    "POKéMON for 255\n"
     "steps.");
 
 static const u8 sMaxRepelDesc[] = _(
     "Repels weak wild\n"
-    "POKéMON for 250\n"
+    "POKéMON for 255\n"
     "steps.");
 
 static const u8 sEscapeRopeDesc[] = _(
@@ -360,7 +360,7 @@ static const u8 sEscapeRopeDesc[] = _(
 
 static const u8 sRepelDesc[] = _(
     "Repels weak wild\n"
-    "POKéMON for 100\n"
+    "POKéMON for 255\n"
     "steps.");
 
 // Evolution stones
