@@ -315,13 +315,13 @@ static const struct TrainerMonItemDefaultMoves sParty_Haley1[] = {
 static const struct TrainerMonItemDefaultMoves sParty_GinaAndMia1[] = {
     {
     .iv = 0,
-    .lvl = 10,
+    .lvl = 11,
     .species = SPECIES_SEEDOT,
     .heldItem = ITEM_ORAN_BERRY,
     },
     {
     .iv = 0,
-    .lvl = 10,
+    .lvl = 11,
     .species = SPECIES_LOTAD,
     .heldItem = ITEM_MIRACLE_SEED,
     }
@@ -364,6 +364,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Josh[] = {
     },
 };
 
+// Double Battle with Marc
 static const struct TrainerMonItemDefaultMoves sParty_Tommy[] = {
     {
     .iv = 110,
@@ -385,6 +386,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Tommy[] = {
     },
 };
 
+// Double Battle with Tommy
 static const struct TrainerMonItemDefaultMoves sParty_Marc[] = {
     {
     .iv = 110,
@@ -406,7 +408,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Marc[] = {
     },
 };
 
-// GYM LEADER - Roxanne
+// GYM LEADER 1 - Roxanne
 static const struct TrainerMonItemCustomMoves sParty_Roxanne1[] = {
     {
     .iv = 100,
@@ -438,8 +440,115 @@ static const struct TrainerMonItemCustomMoves sParty_Roxanne1[] = {
     }
 };
 
+// All trainers from Gym 1 onwards should have 3 or more pokemon, double battles should be 4. Gym 1 and 2 should have 4 pokemon
 
+// All Trainers from Gym 2 onwards should have 4 or more pokemon, double battles should be 6.
+    // Certain trainers can optionally be treated as double battles. All such trainers should be treated as double battlers
 
+// All Trainers from Gym 3 onwards should have 5 or more pokemon, double battles should be 6. Gym 3 and 4 should have 5 pokemon
+
+// All trainers after Gym 4 should have full teams of 6 pokemon including Gym 5 and onward.
+    // with the exception of optional double battles
+
+// Gym 1 max level = 17
+// Gym 2 max level = 23
+// Gym 3 max level = 29
+// Gym 4 max level = 35
+// Gym 5 max level = 41
+// Gym 6 max level = 47
+// Gym 7 max level = 53
+// Gym 8 max level = 59
+// Elite 4 member 1 = 65
+// Elite 4 member 2 = 67
+// Elite 4 member 3 = 69
+// Elite 4 member 4 = 71
+// Elite 4 Champion = 73
+// Steven = 81
+
+// Rematch plans (max levels): 
+// Gym 1:
+//      Match 2: 37 /w 5 Pokemon 
+//      Match 3: 57 /w 6
+//      Match 4: 77
+//      Match 5: 100
+
+// Gym 2: 
+//      Match 2: 38 /w 5 Pokemon 
+//      Match 3: 58 /w 6
+//      Match 4: 78
+//      Match 5: 100
+
+// Gym 3: 
+//      Match 2: 41 /w 6 Pokemon
+//      Match 3: 61
+//      Match 4: 81
+//      Match 5: 100
+
+// Gym 4: 
+//      Match 2: 42 /w 6 Pokemon
+//      Match 3: 62
+//      Match 4: 82
+//      Match 5: 100
+
+// Gym 5: 
+//      Match 2: 47
+//      Match 3: 63
+//      Match 4: 83
+//      Match 5: 100
+
+// Gym 6: 
+//      Match 2: 50
+//      Match 3: 65
+//      Match 4: 84
+//      Match 5: 100
+
+// Gym 7: 
+//      Match 2: 50
+//      Match 3: 65
+//      Match 4: 85
+//      Match 5: 100
+
+// Gym 7: 
+//      Match 2: 55
+//      Match 3: 70
+//      Match 4: 86
+//      Match 5: 100
+
+// Gym 8: 
+//      Match 2: 56
+//      Match 3: 71
+//      Match 4: 87
+//      Match 5: 100
+
+// Elite 4 Member 1: 
+//      Match 2: 70
+//      Match 3: 77
+//      Match 4: 84
+//      Match 5: 100
+
+// Elite 4 Member 2: 
+//      Match 2: 72
+//      Match 3: 79
+//      Match 4: 86
+//      Match 5: 100
+
+// Elite 4 Member 3: 
+//      Match 2: 74
+//      Match 3: 81
+//      Match 4: 88
+//      Match 5: 100
+
+// Elite 4 Member 4: 
+//      Match 2: 76
+//      Match 3: 83
+//      Match 4: 90
+//      Match 5: 100
+
+// Elite 4 Champion: 
+//      Match 2: 78
+//      Match 3: 85
+//      Match 4: 92
+//      Match 5: 100
 
 
 static const struct TrainerMonItemDefaultMoves sParty_Sawyer1[] = {
