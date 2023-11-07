@@ -535,28 +535,30 @@ Route105_Text_JosuePostBattle:
 	.string "match than the sea.$"
 
 Route106_Text_ElliotIntro:
-	.string "Which do you prefer, fishing in the\n"
-	.string "sea or a stream?$"
+	.string "Hey you, Pikachu I want\n"
+	.string "You on my team!\n"
+	.string "Your shocking 'lectric powers\n"
+	.string "Complement my water theme!$"
 
 Route106_Text_ElliotDefeated:
-	.string "Like in deep-sea fishing, I lost\n"
-	.string "spectacularly!$"
+	.string "Oh no! My Gyarados ate the Pikachu!\n"
+	.string "I've got to go find him!$"
 
 Route106_Text_ElliotPostBattle:
-	.string "Fishing is the greatest whether it's\n"
-	.string "in the sea or a stream.\l"
-	.string "You agree with me, right?$"
+	.string "Have you seen my Gyarados around?\n"
+	.string "I hope that Pikachu is okay.\l"
+	.string "Tell me if you see him.?$"
 
 Route106_Text_ElliotRegister:
-	.string "Fishing's great, but so is battling.\n"
-	.string "If you don't mind, can we meet again?$"
+	.string "I still haven't found my Gyarados...\n"
+	.string "Can you give me a call if you spot him?$"
 
 Route106_Text_ElliotRematchIntro:
-	.string "I caught a bunch of POKéMON fishing.\n"
-	.string "I'll show you an impressive battle!$"
+	.string "I finally found my Gyarados!\n"
+	.string "The Pikachu was okay too!$"
 
 Route106_Text_ElliotRematchDefeated:
-	.string "I lost again spectacularly!$"
+	.string "My Gyarados has run off again!$"
 
 Route106_Text_ElliotRematchPostBattle:
 	.string "Win or lose, POKéMON are the greatest!\n"
@@ -2183,8 +2185,10 @@ Route116_Text_ClarkPostBattle:
 	.string "To a HIKER, mountains are roads!$"
 
 Route116_Text_JoeyIntro:
-	.string "My POKéMON rule!\n"
-	.string "Check them out!$"
+	.string "My POKéMON rule, check them out!\n"
+	.string "Especially my Rattata!\n"
+	.string "It's in the top percentage!\n"
+	.string "of Rattata!$"
 
 Route116_Text_JoeyDefeat:
 	.string "Ouch! A scrape!\n"

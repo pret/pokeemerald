@@ -32,27 +32,14 @@ struct MonCoords
 #define GET_MON_COORDS_WIDTH(size)((size >> 4) * 8)
 #define GET_MON_COORDS_HEIGHT(size)((size & 0xF) * 8)
 
-struct TrainerMonNoItemDefaultMoves
-{
-    u16 iv;
-    u8 lvl;
-    u16 species;
-};
-
 struct TrainerMonItemDefaultMoves
 {
     u16 iv;
     u8 lvl;
     u16 species;
     u16 heldItem;
-};
-
-struct TrainerMonNoItemCustomMoves
-{
-    u16 iv;
-    u8 lvl;
-    u16 species;
-    u16 moves[MAX_MON_MOVES];
+    u16 ev;
+    u16 ability;
 };
 
 struct TrainerMonItemCustomMoves
@@ -61,6 +48,24 @@ struct TrainerMonItemCustomMoves
     u8 lvl;
     u16 species;
     u16 heldItem;
+    u16 moves[MAX_MON_MOVES];
+    u16 ev;
+    u16 ability;
+};
+
+// NO LONGER USED
+struct TrainerMonNoItemDefaultMoves
+{
+    u16 iv;
+    u8 lvl;
+    u16 species;
+};
+
+struct TrainerMonNoItemCustomMoves
+{
+    u16 iv;
+    u8 lvl;
+    u16 species;
     u16 moves[MAX_MON_MOVES];
 };
 
