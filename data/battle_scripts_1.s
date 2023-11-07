@@ -2113,7 +2113,7 @@ BattleScript_EffectFinalGambit:
 BattleScript_EffectHitSwitchTarget:
 	call BattleScript_EffectHit_Ret
 	tryfaintmon BS_TARGET
-	moveendall
+	jumpiffainted BS_TARGET, TRUE, BattleScript_MoveEnd
 	jumpifability BS_TARGET, ABILITY_SUCTION_CUPS, BattleScript_AbilityPreventsPhasingOut
 	jumpifstatus3 BS_TARGET, STATUS3_ROOTED, BattleScript_PrintMonIsRooted
 	jumpiftargetdynamaxed BattleScript_HitSwitchTargetDynamaxed

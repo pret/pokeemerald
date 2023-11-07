@@ -155,6 +155,24 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by phazing move
     }
 }
 
+SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by phazing moves but no block message is printed if they faint")
+{
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_DRAGON_TAIL].effect == EFFECT_HIT_SWITCH_TARGET);
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); };
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_DRAGON_TAIL); MOVE(player, MOVE_TACKLE, dynamax: TRUE); SEND_OUT(player, 1); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Max Strike!");
+        MESSAGE("Foe Wobbuffet used Dragon Tail!");
+        HP_BAR(player);
+        MESSAGE("Wobbuffet fainted!");
+        NOT MESSAGE("The move was blocked by the power of Dynamax!");
+    }
+}
+
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by Red Card")
 {
     GIVEN {
