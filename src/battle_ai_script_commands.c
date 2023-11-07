@@ -13,16 +13,13 @@
 #include "constants/abilities.h"
 #include "constants/battle_ai.h"
 #include "constants/battle_move_effects.h"
+#include "constants/items.h"
 #include "constants/moves.h"
 
-#define AI_ACTION_DONE          0x0001
-#define AI_ACTION_FLEE          0x0002
-#define AI_ACTION_WATCH         0x0004
-#define AI_ACTION_DO_NOT_ATTACK 0x0008
-#define AI_ACTION_UNK5          0x0010
-#define AI_ACTION_UNK6          0x0020
-#define AI_ACTION_UNK7          0x0040
-#define AI_ACTION_UNK8          0x0080
+#define AI_ACTION_DONE          (1 << 0)
+#define AI_ACTION_FLEE          (1 << 1)
+#define AI_ACTION_WATCH         (1 << 2)
+#define AI_ACTION_DO_NOT_ATTACK (1 << 3)
 
 #define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(gBattleResources->ai))
 #define BATTLE_HISTORY ((struct BattleHistory *)(gBattleResources->battleHistory))
@@ -283,7 +280,6 @@ static const u16 sIgnoredPowerfulMoveEffects[] =
     IGNORED_MOVES_END
 };
 
-// code
 void BattleAI_HandleItemUseBeforeAISetup(u8 defaultScoreMoves)
 {
     s32 i;
@@ -302,7 +298,7 @@ void BattleAI_HandleItemUseBeforeAISetup(u8 defaultScoreMoves)
     {
         for (i = 0; i < MAX_TRAINER_ITEMS; i++)
         {
-            if (gTrainers[gTrainerBattleOpponent_A].items[i] != 0)
+            if (gTrainers[gTrainerBattleOpponent_A].items[i] != ITEM_NONE)
             {
                 BATTLE_HISTORY->trainerItems[BATTLE_HISTORY->itemsNo] = gTrainers[gTrainerBattleOpponent_A].items[i];
                 BATTLE_HISTORY->itemsNo++;
@@ -482,9 +478,9 @@ static u8 ChooseMoveOrAction_Doubles(void)
         else
         {
             if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
-                BattleAI_SetupAIData(gBattleStruct->palaceFlags >> 4);
+                BattleAI_SetupAIData(gBattleStruct->palaceFlags >> MAX_BATTLERS_COUNT);
             else
-                BattleAI_SetupAIData((1 << MAX_MON_MOVES) - 1);
+                BattleAI_SetupAIData(ALL_MOVES_MASK);
 
             gBattlerTarget = i;
 
@@ -1488,7 +1484,13 @@ static void Cmd_get_highest_type_effectiveness(void)
 
         if (gCurrentMove != MOVE_NONE)
         {
+            // TypeCalc does not assign to gMoveResultFlags, Cmd_typecalc does
+            // This makes the check for gMoveResultFlags below always fail
+#ifdef BUGFIX
+            gMoveResultFlags = TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
+#else
             TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
+#endif
 
             if (gBattleMoveDamage == 120) // Super effective STAB.
                 gBattleMoveDamage = AI_EFFECTIVENESS_x2;
@@ -1523,7 +1525,16 @@ static void Cmd_if_type_effectiveness(void)
     gBattleMoveDamage = AI_EFFECTIVENESS_x1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
 
+    // TypeCalc does not assign to gMoveResultFlags, Cmd_typecalc does
+    // This makes the check for gMoveResultFlags below always fail
+    // This is how you get the "dual non-immunity" glitch, where AI 
+    // will use ineffective moves on immune pokémon if the second type
+    // has a non-neutral, non-immune effectiveness
+#ifdef BUGFIX
+    gMoveResultFlags = TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
+#else
     TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
+#endif
 
     if (gBattleMoveDamage == 120) // Super effective STAB.
         gBattleMoveDamage = AI_EFFECTIVENESS_x2;
@@ -2256,7 +2267,7 @@ static void AIStackPushVar(const u8 *var)
     gBattleResources->AI_ScriptsStack->ptr[gBattleResources->AI_ScriptsStack->size++] = var;
 }
 
-static void AIStackPushVar_cursor(void)
+static void UNUSED AIStackPushVar_cursor(void)
 {
     gBattleResources->AI_ScriptsStack->ptr[gBattleResources->AI_ScriptsStack->size++] = gAIScriptPtr;
 }

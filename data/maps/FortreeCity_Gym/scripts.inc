@@ -11,6 +11,7 @@ FortreeCity_Gym_OnWarp:
 	map_script_2 VAR_TEMP_0, VAR_TEMP_0, FortreeCity_Gym_EventScript_InitRotatingGates
 	end_map_script_table
 
+@ NOTE: This rotating gate puzzle makes use of VAR_TEMP_0 - VAR_TEMP_3
 FortreeCity_Gym_EventScript_InitRotatingGates::
 	special RotatingGate_InitPuzzleAndGraphics
 	end

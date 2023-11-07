@@ -186,7 +186,7 @@ static void CompleteOnBattlerSpriteCallbackDummy(void)
         RecordedOpponentBufferExecCompleted();
 }
 
-static void CompleteOnBankSpriteCallbackDummy2(void)
+static void UNUSED CompleteOnBankSpriteCallbackDummy2(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         RecordedOpponentBufferExecCompleted();
@@ -542,7 +542,7 @@ static u32 CopyRecordedOpponentMonData(u8 monId, u8 *dst)
 {
     struct BattlePokemon battleMon;
     struct MovePpInfo moveData;
-    u8 nickname[20];
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
     u8 *src;
     s16 data16;
     u32 data32;

@@ -743,37 +743,36 @@ EventScript_TradeCenter_Chair3::
 	waitstate
 	end
 
-@ VAR_TEMP_1 for below scripts set by ReceiveGiftItem
 EventScript_RecordCenter_Spot0::
 	setvar VAR_0x8005, 0
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	goto_if_ne VAR_TEMP_1, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
+	goto_if_ne VAR_TEMP_RECORD_MIX_GIFT_ITEM, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 EventScript_RecordCenter_Spot1::
 	setvar VAR_0x8005, 1
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	goto_if_ne VAR_TEMP_1, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
+	goto_if_ne VAR_TEMP_RECORD_MIX_GIFT_ITEM, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 EventScript_RecordCenter_Spot2::
 	setvar VAR_0x8005, 2
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	goto_if_ne VAR_TEMP_1, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
+	goto_if_ne VAR_TEMP_RECORD_MIX_GIFT_ITEM, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 EventScript_RecordCenter_Spot3::
 	setvar VAR_0x8005, 3
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	goto_if_ne VAR_TEMP_1, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
+	goto_if_ne VAR_TEMP_RECORD_MIX_GIFT_ITEM, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 RecordCorner_EventScript_ReceivedGiftItem::
-	bufferitemname STR_VAR_2, VAR_TEMP_1
+	bufferitemname STR_VAR_2, VAR_TEMP_RECORD_MIX_GIFT_ITEM
 	message RecordCorner_Text_PlayerSentOverOneX
 	waitmessage
 	waitbuttonpress
@@ -814,7 +813,7 @@ TradeCenter_EventScript_Attendant::
 	end
 
 RecordCorner_EventScript_Attendant::
-	goto_if_ne VAR_TEMP_0, 0, RecordCorner_EventScript_AlreadyMixed
+	goto_if_ne VAR_TEMP_MIXED_RECORDS, 0, RecordCorner_EventScript_AlreadyMixed
 	special Script_FacePlayer
 	message RecordCorner_Text_TakeSeatAndWait
 	waitmessage

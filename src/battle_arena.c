@@ -651,8 +651,7 @@ void BattleArena_DeductSkillPoints(u8 battler, u16 stringId)
     }
 }
 
-// Unused
-static void UpdateHPAtStart(u8 battler)
+static void UNUSED UpdateHPAtStart(u8 battler)
 {
     u16 *hpAtStart = gBattleStruct->arenaStartHp;
 
@@ -737,7 +736,7 @@ static void SetArenaData(void)
 static void SaveArenaChallenge(void)
 {
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
-    VarSet(VAR_TEMP_0, 0);
+    VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
 }

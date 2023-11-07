@@ -408,7 +408,7 @@ static bool32 AnimateDoorFrame(struct DoorGraphics *gfx, struct DoorAnimFrame *f
 
 static void Task_AnimateDoor(u8 taskId)
 {
-    u16 *data = gTasks[taskId].data;
+    u16 *data = (u16*) gTasks[taskId].data;
     struct DoorAnimFrame *frames = (struct DoorAnimFrame *)(tFramesHi << 16 | tFramesLo);
     struct DoorGraphics *gfx = (struct DoorGraphics *)(tGfxHi << 16 | tGfxLo);
 
@@ -502,8 +502,8 @@ static s8 GetDoorSoundType(const struct DoorGraphics *gfx, u32 x, u32 y)
         return gfx->sound;
 }
 
-// Unused. Debug? Same as FieldAnimateDoorOpen but doesnt return or check if metatile is actually a door
-static void Debug_FieldAnimateDoorOpen(u32 x, u32 y)
+// Debug? Same as FieldAnimateDoorOpen but doesnt return or check if metatile is actually a door
+static void UNUSED Debug_FieldAnimateDoorOpen(u32 x, u32 y)
 {
     StartDoorOpenAnimation(sDoorAnimGraphicsTable, x, y);
 }

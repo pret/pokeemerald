@@ -1285,7 +1285,7 @@ static void Leader_HandleCommunication(void)
         if (sTradeMenu->playerSelectStatus == STATUS_READY
          && sTradeMenu->partnerSelectStatus == STATUS_READY)
         {
-            // Both players have selected a pokemon to trade 
+            // Both players have selected a pokemon to trade
             sTradeMenu->callbackId = CB_SET_SELECTED_MONS;
             sTradeMenu->linkData[0] = LINKCMD_SET_MONS_TO_TRADE;
             sTradeMenu->linkData[1] = sTradeMenu->cursorPosition;
@@ -1864,7 +1864,7 @@ static void SetSelectedMon(u8 cursorPosition)
 static void DrawSelectedMonScreen(u8 whichParty)
 {
     s8 nameStringWidth;
-    u8 nickname[20];
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
     u8 movesString[56];
     u8 i;
     u8 partyIdx;
@@ -1900,7 +1900,7 @@ static void DrawSelectedMonScreen(u8 whichParty)
         StoreSpriteCallbackInData6(&gSprites[sTradeMenu->partySpriteIds[selectedMonParty][partyIdx]], SpriteCB_MonIcon);
         sTradeMenu->drawSelectedMonState[whichParty]++;
         Trade_MoveSelectedMonToTarget(&gSprites[sTradeMenu->partySpriteIds[selectedMonParty][partyIdx]]);
-        
+
         CopyToBgTilemapBufferRect_ChangePalette(1, sTradePartyBoxTilemap, whichParty * 15, 0, 15, 17, 0);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(0);
@@ -1950,7 +1950,7 @@ static void DrawSelectedMonScreen(u8 whichParty)
 
 static u8 GetMonNicknameWidth(u8 *str, u8 whichParty, u8 partyIdx)
 {
-    u8 nickname[POKEMON_NAME_LENGTH];
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
 
     if (whichParty == TRADE_PLAYER)
         GetMonData(&gPlayerParty[partyIdx], MON_DATA_NICKNAME, nickname);
@@ -2006,8 +2006,8 @@ static void PrintPartyMonNickname(u8 whichParty, u8 windowId, u8 *nickname)
 static void PrintPartyNicknames(u8 whichParty)
 {
     u8 i;
-    u8 nickname[20];
-    u8 str[32];
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
+    u8 str[max(32, POKEMON_NAME_BUFFER_SIZE)];
     struct Pokemon *party = (whichParty == TRADE_PLAYER) ? gPlayerParty : gEnemyParty;
 
     for (i = 0; i < sTradeMenu->partyCounts[whichParty]; i++)
@@ -2023,7 +2023,7 @@ static void PrintLevelAndGender(u8 whichParty, u8 monIdx, u8 x, u8 y, u8 width, 
     u8 level;
     u32 symbolTile;
     u8 gender;
-    u8 nickname[POKEMON_NAME_LENGTH];
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
 
     CopyToBgTilemapBufferRect_ChangePalette(1, gTradeMenuMonBox_Tilemap, width, height, 6, 3, 0);
     CopyBgTilemapBufferToVram(1);
@@ -3093,7 +3093,7 @@ static void UpdatePokedexForReceivedMon(u8 partyIdx)
 // Functionally nop after commented code
 static void TryEnableNationalDexFromLinkPartner(void)
 {
-    u8 mpId = GetMultiplayerId();
+    u8 UNUSED mpId = GetMultiplayerId();
     // Originally in Ruby but commented out
     /*if (gLinkPlayers[mpId ^ 1].lp_field_2 == 0x8000)
         EnableNationalPokedex();*/
@@ -3330,7 +3330,7 @@ static void LoadTradeSequenceSpriteSheetsAndPalettes(void)
 static void BufferTradeSceneStrings(void)
 {
     u8 mpId;
-    u8 name[20];
+    u8 name[POKEMON_NAME_BUFFER_SIZE];
     const struct InGameTrade *ingameTrade;
 
     if (sTradeAnim->isLinkTrade)
@@ -4539,7 +4539,7 @@ u16 GetInGameTradeSpeciesInfo(void)
 
 static void BufferInGameTradeMonName(void)
 {
-    u8 nickname[32];
+    u8 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
     const struct InGameTrade *inGameTrade = &sIngameTrades[gSpecialVar_0x8004];
     GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
     StringCopy_Nickname(gStringVar1, nickname);

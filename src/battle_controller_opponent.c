@@ -561,7 +561,7 @@ static u32 GetOpponentMonData(u8 monId, u8 *dst)
 {
     struct BattlePokemon battleMon;
     struct MovePpInfo moveData;
-    u8 nickname[20];
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
     u8 *src;
     s16 data16;
     u32 data32;
@@ -1555,7 +1555,7 @@ static void OpponentHandleChooseMove(void)
         if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER))
         {
 
-            BattleAI_SetupAIData(0xF);
+            BattleAI_SetupAIData(ALL_MOVES_MASK);
             chosenMoveId = BattleAI_ChooseMoveOrAction();
 
             switch (chosenMoveId)
@@ -1588,7 +1588,7 @@ static void OpponentHandleChooseMove(void)
             u16 move;
             do
             {
-                chosenMoveId = Random() & 3;
+                chosenMoveId = MOD(Random(), MAX_MON_MOVES);
                 move = moveInfo->moves[chosenMoveId];
             } while (move == MOVE_NONE);
 
