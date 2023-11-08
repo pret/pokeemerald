@@ -381,8 +381,8 @@ static void SetShopItemsForSale(const u16 *items)
     sMartInfo.itemList = items;
     sMartInfo.itemCount = 0;
 
-    // Read items until ITEM_NONE / DECOR_NONE is reached
-    while (sMartInfo.itemList[i])
+    // Read items until POKEMART_LIST_END is reached
+    while (sMartInfo.itemList[i] != POKEMART_LIST_END)
     {
         sMartInfo.itemCount++;
         i++;
