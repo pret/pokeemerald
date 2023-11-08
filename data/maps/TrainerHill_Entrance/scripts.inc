@@ -265,7 +265,7 @@ TrainerHill_Entrance_Pokemart_Basic:
 	.2byte ITEM_DIRE_HIT
 	.2byte ITEM_GUARD_SPEC
 	.2byte ITEM_X_ACCURACY
-	.2byte ITEM_NONE
+	.2byte POKEMART_LIST_END
 	release
 	end
 
@@ -289,7 +289,7 @@ TrainerHill_Entrance_Pokemart_Expanded:
 	.2byte ITEM_DIRE_HIT
 	.2byte ITEM_GUARD_SPEC
 	.2byte ITEM_X_ACCURACY
-	.2byte ITEM_NONE
+	.2byte POKEMART_LIST_END
 	release
 	end
 

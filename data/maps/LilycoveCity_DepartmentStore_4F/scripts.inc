@@ -29,7 +29,7 @@ LilycoveCity_DepartmentStore_4F_Pokemart_AttackTMs:
 	.2byte ITEM_TM_THUNDER
 	.2byte ITEM_TM_BLIZZARD
 	.2byte ITEM_TM_HYPER_BEAM
-	.2byte ITEM_NONE
+	.2byte POKEMART_LIST_END
 	release
 	end
 
@@ -49,7 +49,7 @@ LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs:
 	.2byte ITEM_TM_SAFEGUARD
 	.2byte ITEM_TM_REFLECT
 	.2byte ITEM_TM_LIGHT_SCREEN
-	.2byte ITEM_NONE
+	.2byte POKEMART_LIST_END
 	release
 	end
 

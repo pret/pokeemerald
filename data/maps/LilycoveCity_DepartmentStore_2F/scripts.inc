@@ -36,7 +36,7 @@ LilycoveCity_DepartmentStore_2F_Pokemart1:
 	.2byte ITEM_ICE_HEAL
 	.2byte ITEM_AWAKENING
 	.2byte ITEM_FLUFFY_TAIL
-	.2byte ITEM_NONE
+	.2byte POKEMART_LIST_END
 	release
 	end
 
@@ -62,7 +62,7 @@ LilycoveCity_DepartmentStore_2F_Pokemart2:
 	.2byte ITEM_MAX_REPEL
 	.2byte ITEM_WAVE_MAIL
 	.2byte ITEM_MECH_MAIL
-	.2byte ITEM_NONE
+	.2byte POKEMART_LIST_END
 	release
 	end
 

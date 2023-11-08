@@ -423,6 +423,9 @@
 // Its icon is defined at ITEMS_COUNT as the "return to field" arrow
 #define ITEM_LIST_END 0xFFFF
 
+// List terminator for PokéMarts.
+#define POKEMART_LIST_END 0
+
 // Range of berries given out by various NPCS
 #define FIRST_BERRY_MASTER_BERRY      ITEM_POMEG_BERRY
 #define LAST_BERRY_MASTER_BERRY       ITEM_NOMEL_BERRY

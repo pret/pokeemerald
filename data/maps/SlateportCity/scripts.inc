@@ -154,7 +154,7 @@ SlateportCity_Pokemart_EnergyGuru:
 	.2byte ITEM_ZINC
 	.2byte ITEM_CALCIUM
 	.2byte ITEM_HP_UP
-	.2byte ITEM_NONE
+	.2byte POKEMART_LIST_END
 	release
 	end
 
@@ -568,7 +568,7 @@ SlateportCity_EventScript_PowerTMClerk::
 SlateportCity_Pokemart_PowerTMs:
 	.2byte ITEM_TM_HIDDEN_POWER
 	.2byte ITEM_TM_SECRET_POWER
-	.2byte ITEM_NONE
+	.2byte POKEMART_LIST_END
 	release
 	end
 

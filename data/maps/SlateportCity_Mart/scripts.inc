@@ -22,7 +22,7 @@ SlateportCity_Mart_Pokemart:
 	.2byte ITEM_ESCAPE_ROPE
 	.2byte ITEM_REPEL
 	.2byte ITEM_HARBOR_MAIL
-	.2byte ITEM_NONE
+	.2byte POKEMART_LIST_END
 	release
 	end
 

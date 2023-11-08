@@ -24,7 +24,7 @@ VerdanturfTown_Mart_Pokemart:
 	.2byte ITEM_REPEL
 	.2byte ITEM_X_SPECIAL
 	.2byte ITEM_FLUFFY_TAIL
-	.2byte ITEM_NONE
+	.2byte POKEMART_LIST_END
 	release
 	end
 
