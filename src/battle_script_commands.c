@@ -9151,6 +9151,7 @@ static void Cmd_various(void)
             case ABILITY_SCHOOLING:         case ABILITY_COMATOSE:
             case ABILITY_SHIELDS_DOWN:      case ABILITY_DISGUISE:
             case ABILITY_RKS_SYSTEM:        case ABILITY_TRACE:
+            case ABILITY_ZERO_TO_HERO:
                 break;
             default:
                 gBattleStruct->tracedAbility[gBattlerAbility] = gBattleMons[battler].ability; // re-using the variable for trace

@@ -800,6 +800,12 @@ static const struct FormChange sUrshifuRapidStrikeFormChangeTable[] =
     {FORM_CHANGE_TERMINATOR},
 };
 
+static const struct FormChange sPalafinZeroFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_SWITCH, SPECIES_PALAFIN_HERO},
+    {FORM_CHANGE_TERMINATOR},
+};
+
 #endif
 
 #undef WHEN_LEARNED

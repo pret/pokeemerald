@@ -459,6 +459,7 @@ extern const u8 BattleScript_RuinAbilityActivates[];
 extern const u8 BattleScript_CudChewActivates[];
 extern const u8 BattleScript_SupremeOverlordActivates[];
 extern const u8 BattleScript_CostarActivates[];
+extern const u8 BattleScript_ZeroToHeroActivates[];
 extern const u8 BattleScript_ToxicDebrisActivates[];
 extern const u8 BattleScript_EarthEaterActivates[];
 extern const u8 BattleScript_MimicryActivates_End3[];

@@ -355,6 +355,8 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_ENAMORUS_THERIAN] = sEnamorusFormChangeTable,
 #endif
 #if P_GEN_9_POKEMON == TRUE
+    [SPECIES_PALAFIN_ZERO] = sPalafinZeroFormChangeTable,
+    [SPECIES_PALAFIN_HERO] = sPalafinZeroFormChangeTable,
     [SPECIES_OGERPON_TEAL_MASK] = sOgerponFormChangeTable,
     [SPECIES_OGERPON_WELLSPRING_MASK] = sOgerponFormChangeTable,
     [SPECIES_OGERPON_HEARTHFLAME_MASK] = sOgerponFormChangeTable,
