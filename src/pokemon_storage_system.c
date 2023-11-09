@@ -9492,7 +9492,7 @@ void CreateBoxMonAt(u8 boxId, u8 boxPosition, u16 species, u8 level, u8 fixedIV,
                      level,
                      fixedIV,
                      hasFixedPersonality, personality,
-                     otIDType, otID);
+                     otIDType, otID, 0);
     }
 }
 

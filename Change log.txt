@@ -26,13 +26,53 @@ Pokemon Changes:
 	All Pokemon now have two abilities (With a few exceptions like Shedinja)
 	All pokemon now have a common and rare item
 	All wild pokemon will have an item
+	EVs cap at 252 instead of 255
+	All EVs can be maxed to 252 like in generation 1 and 2
 	IN PROGRESS:
 		Wild pokemon encounters expanded to allow catching all pokemon
 	TODO:
-		Add future Evolutions for existing pokemon from gen 4 into the game
-		Add future Evolutions for existing pokemon from gen 7 into the game
-		Add future Evolutions for existing pokemon from gen 8 into the game
-		Add future Evolutions for existing pokemon from gen 9 into the game
+		Add future Evolutions for existing pokemon from future gens into the game
+		Gen 4 Sprites: 
+			Budew
+			Roserade
+			Ambipom
+			Mismagius
+			Honchkrow
+			Chingling
+			Bonsly
+			Mime Jr.
+			Happiny
+			Munchlax
+			Mantyke 
+			Weevile
+			Lickilicky
+			Rhyperior 
+			Tangrowth
+			Electrivire
+			Magmortar
+			Togekiss
+			Yanmega
+			Leafeon
+			Glaceon
+			Gliscor 
+			Mamoswine
+			Porygon-Z
+			Gallade
+			Probopass
+			Dusknoir
+			Frosslass
+			Regigigas 
+		New Sprite Work?:
+			Sylveon
+			Regieleki
+			Regidrago
+			Wyrdeer
+			Kleavor
+			Ursaluna
+			Annihilape
+			Farigiraf
+			Dudunspace
+			Kingambit
 
 Blastoise: 
 	Type Change: Water / Steel
@@ -404,6 +444,8 @@ Trainer Changes:
 			I think it should be possible to have a second battle
 			Second Battle will be much harder
 		All rematches reworked for increased and lasting diffculty
+		Add configurability for EVs in NPC Teams
+		Add configurability for Abilties in NPC Teams
 
 Item changes: 
 	All of the confuse berries have been increased to 1/3 of the user's max HP
