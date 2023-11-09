@@ -4288,7 +4288,7 @@ Cry_HoopaUnbound::
 .if P_GEN_7_POKEMON == TRUE
 	.align 2
 Cry_OricorioPomPom::
-	.incbin "sound/direct_sound_samples/cries/oricorio_pom_pom.bin"
+	.incbin "sound/direct_sound_samples/cries/uncomp_oricorio_pom_pom.bin"
 
 	.align 2
 Cry_OricorioPau::
