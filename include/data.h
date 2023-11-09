@@ -61,6 +61,7 @@ struct TrainerMonNoItemDefaultMoves
     u16 species;
 };
 
+// NO LONGER USED
 struct TrainerMonNoItemCustomMoves
 {
     u16 iv;

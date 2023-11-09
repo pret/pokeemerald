@@ -412,6 +412,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Marc[] = {
 static const struct TrainerMonItemCustomMoves sParty_Roxanne1[] = {
     {
     .iv = 200,
+    .ev = 50,
     .lvl = 14,
     .species = SPECIES_GEODUDE,
     .heldItem = ITEM_HARD_STONE,
@@ -419,6 +420,7 @@ static const struct TrainerMonItemCustomMoves sParty_Roxanne1[] = {
     },
     {
     .iv = 200,
+    .ev = 50,
     .lvl = 14,
     .species = SPECIES_LARVITAR,
     .heldItem = ITEM_HARD_STONE,
@@ -426,6 +428,7 @@ static const struct TrainerMonItemCustomMoves sParty_Roxanne1[] = {
     },
     {
     .iv = 200,
+    .ev = 50,
     .lvl = 14,
     .species = SPECIES_ONIX,
     .heldItem = ITEM_SILK_SCARF,
@@ -433,6 +436,7 @@ static const struct TrainerMonItemCustomMoves sParty_Roxanne1[] = {
     },
     {
     .iv = 200,
+    .ev = 50,
     .lvl = 17,
     .species = SPECIES_NOSEPASS,
     .heldItem = ITEM_LEFTOVERS,
@@ -902,16 +906,19 @@ static const struct TrainerMonItemDefaultMoves sParty_Laura[] = {
     .iv = 150,
     .lvl = 17,
     .species = SPECIES_MEDITITE,
+    .heldItem = ITEM_TWISTED_SPOON,
     },
     {
     .iv = 100,
     .lvl = 17,
     .species = SPECIES_MACHOP,
+    .heldItem = ITEM_BLACK_BELT,
     },
     {
     .iv = 127,
     .lvl = 17,
     .species = SPECIES_MANKEY,
+    .heldItem = ITEM_FOCUS_BAND,
     },
 };
 
@@ -921,35 +928,41 @@ static const struct TrainerMonItemDefaultMoves sParty_Lilith[] = {
     .iv = 100,
     .lvl = 17,
     .species = SPECIES_MEDITITE,
+    .heldItem = ITEM_TWISTED_SPOON,
     },
     {
     .iv = 127,
     .lvl = 17,
     .species = SPECIES_MACHOP,
+    .heldItem = ITEM_BLACK_BELT,
     },
     {
     .iv = 150,
     .lvl = 17,
     .species = SPECIES_HERACROSS,
+    .heldItem = ITEM_SILVER_POWDER,
     }
 };
 
 // Double Battle with Lilith
 static const struct TrainerMonItemDefaultMoves sParty_Brenden[] = {
     {
-    .iv = 100,
-    .lvl = 17,
-    .species = SPECIES_MACHOP,
-    },
-    {
     .iv = 127,
     .lvl = 17,
     .species = SPECIES_MEDITITE,
+    .heldItem = ITEM_TWISTED_SPOON,
+    },
+    {
+    .iv = 100,
+    .lvl = 17,
+    .species = SPECIES_MACHOP,
+    .heldItem = ITEM_BLACK_BELT,
     },
     {
     .iv = 150,
     .lvl = 17,
     .species = SPECIES_HITMONCHAN,
+    .heldItem = ITEM_FOCUS_BAND,
     },
 };
 
@@ -958,16 +971,19 @@ static const struct TrainerMonItemDefaultMoves sParty_Takao[] = {
     .iv = 100,
     .lvl = 17,
     .species = SPECIES_MACHOP,
+    .heldItem = ITEM_BLACK_BELT,
     },
     {
     .iv = 127,
     .lvl = 17,
     .species = SPECIES_MEDITITE,
+    .heldItem = ITEM_TWISTED_SPOON,
     },
     {
     .iv = 150,
     .lvl = 17,
     .species = SPECIES_HITMONCHAN,
+    .heldItem = ITEM_FOCUS_BAND,
     },
 };
 
@@ -976,16 +992,19 @@ static const struct TrainerMonItemDefaultMoves sParty_Cristian[] = {
     .iv = 150,
     .lvl = 17,
     .species = SPECIES_MAKUHITA,
+    .heldItem = ITEM_FOCUS_BAND,
     },
     {
     .iv = 127,
     .lvl = 17,
     .species = SPECIES_MACHOP,
+    .heldItem = ITEM_BLACK_BELT,
     },
     {
     .iv = 150,
     .lvl = 17,
     .species = SPECIES_MEDITITE,
+    .heldItem = ITEM_TWISTED_SPOON,
     },
 };
 
@@ -994,16 +1013,19 @@ static const struct TrainerMonItemDefaultMoves sParty_Jocelyn[] = {
     .iv = 127,
     .lvl = 17,
     .species = SPECIES_MEDITITE,
+    .heldItem = ITEM_TWISTED_SPOON,
     },
     {
     .iv = 127,
     .lvl = 17,
     .species = SPECIES_MACHOP,
+    .heldItem = ITEM_BLACK_BELT,
     },
     {
     .iv = 127,
     .lvl = 17,
     .species = SPECIES_MANKEY,
+    .heldItem = ITEM_FOCUS_BAND,
     },
 };
 
@@ -1011,6 +1033,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Jocelyn[] = {
 static const struct TrainerMonItemCustomMoves sParty_Brawly1[] = {
     {
     .iv = 200,
+    .ev = 50,
     .lvl = 19,
     .species = SPECIES_MACHOP,
     .heldItem = ITEM_BLACK_BELT,
@@ -1018,13 +1041,15 @@ static const struct TrainerMonItemCustomMoves sParty_Brawly1[] = {
     },
     {
     .iv = 200,
+    .ev = 50,
     .lvl = 19,
     .species = SPECIES_COMBUSKEN,
     .heldItem = ITEM_CHARCOAL,
-    .moves = {MOVE_KARATE_CHOP, MOVE_LOW_KICK, MOVE_SEISMIC_TOSS, MOVE_BULK_UP}
+    .moves = {MOVE_EMBER, MOVE_BRICK_BREAK, MOVE_QUICK_ATTACK, MOVE_BULK_UP}
     },
     {
     .iv = 200,
+    .ev = 50,
     .lvl = 19,
     .species = SPECIES_MEDITITE,
     .heldItem = ITEM_TWISTED_SPOON,
@@ -1032,6 +1057,7 @@ static const struct TrainerMonItemCustomMoves sParty_Brawly1[] = {
     },
     {
     .iv = 200,
+    .ev = 50,
     .lvl = 24,
     .species = SPECIES_HARIYAMA,
     .heldItem = ITEM_SITRUS_BERRY,

@@ -64,21 +64,12 @@ Pokemon Changes:
 			Regigigas 
 		New Sprite Work?:
 			Sylveon
-			Obstagoon
-			Perrserker
-			Cursola
-			Sirfetch'd
-			Mr.Rime
-			Runeringus
 			Regieleki
 			Regidrago
 			Wyrdeer
 			Kleavor
 			Ursaluna
-			Sneasler
-			Overqwill
 			Annihilape
-			Clodsire
 			Farigiraf
 			Dudunspace
 			Kingambit
