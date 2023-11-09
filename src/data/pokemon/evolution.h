@@ -204,7 +204,7 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_PORYGON2]              = {{EVO_TRADE_ITEM, ITEM_DUBIOUS_DISC, SPECIES_PORYGON_Z},
                                        {EVO_ITEM, ITEM_DUBIOUS_DISC, SPECIES_PORYGON_Z}},
 #endif
-#if P_GEN_9_POKEMON == TRUE
+#if P_GEN_8_POKEMON == TRUE
     [SPECIES_STANTLER]              = {{EVO_MOVE, MOVE_PSYSHIELD_BASH, SPECIES_WYRDEER}},
 #endif
     [SPECIES_TYROGUE]               = {{EVO_LEVEL_ATK_LT_DEF, 20, SPECIES_HITMONCHAN},
