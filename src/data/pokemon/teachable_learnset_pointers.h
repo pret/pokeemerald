@@ -1540,8 +1540,12 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_LAPRAS_GIGANTAMAX] = sLaprasTeachableLearnset,
     [SPECIES_EEVEE_GIGANTAMAX] = sEeveeTeachableLearnset,
     [SPECIES_SNORLAX_GIGANTAMAX] = sSnorlaxTeachableLearnset,
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_GARBODOR_GIGANTAMAX] = sGarbodorTeachableLearnset,
+#endif
+#if P_GEN_7_POKEMON == TRUE
     [SPECIES_MELMETAL_GIGANTAMAX] = sMelmetalTeachableLearnset,
+#endif
     [SPECIES_RILLABOOM_GIGANTAMAX] = sRillaboomTeachableLearnset,
     [SPECIES_CINDERACE_GIGANTAMAX] = sCinderaceTeachableLearnset,
     [SPECIES_INTELEON_GIGANTAMAX] = sInteleonTeachableLearnset,

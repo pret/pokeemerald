@@ -1105,14 +1105,15 @@ static const u16 sMagearnaFormSpeciesIdTable[] = {
     SPECIES_MAGEARNA_ORIGINAL_COLOR,
     FORM_SPECIES_END,
 };
-#endif
 
-#if P_GEN_8_POKEMON == TRUE
 static const u16 sMelmetalFormSpeciesIdTable[] = {
     SPECIES_MELMETAL,
     SPECIES_MELMETAL_GIGANTAMAX,
     FORM_SPECIES_END,
 };
+#endif
+
+#if P_GEN_8_POKEMON == TRUE
 
 static const u16 sRillaboomFormSpeciesIdTable[] = {
     SPECIES_RILLABOOM,

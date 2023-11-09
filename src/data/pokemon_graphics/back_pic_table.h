@@ -1102,7 +1102,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[NUM_SPECIES + 1] =
     SPECIES_SPRITE(GOODRA_HISUIAN, gMonBackPic_GoodraHisuian),
     SPECIES_SPRITE(AVALUGG_HISUIAN, gMonBackPic_AvaluggHisuian),
 #endif
-#if P_GEN_8_POKEMON == TRUE
+#if P_GEN_7_POKEMON == TRUE
     SPECIES_SPRITE(DECIDUEYE_HISUIAN, gMonBackPic_DecidueyeHisuian),
 #endif
 

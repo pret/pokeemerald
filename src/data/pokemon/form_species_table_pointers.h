@@ -684,8 +684,12 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_LAPRAS_GIGANTAMAX] = sLaprasFormSpeciesIdTable,
     [SPECIES_EEVEE_GIGANTAMAX] = sEeveeFormSpeciesIdTable,
     [SPECIES_SNORLAX_GIGANTAMAX] = sSnorlaxFormSpeciesIdTable,
+#if P_GEN_5_POKEMON == TRUE
     [SPECIES_GARBODOR_GIGANTAMAX] = sGarbodorFormSpeciesIdTable,
+#endif
+#if P_GEN_7_POKEMON == TRUE
     [SPECIES_MELMETAL_GIGANTAMAX] = sMelmetalFormSpeciesIdTable,
+#endif
     [SPECIES_RILLABOOM_GIGANTAMAX] = sRillaboomFormSpeciesIdTable,
     [SPECIES_CINDERACE_GIGANTAMAX] = sCinderaceFormSpeciesIdTable,
     [SPECIES_INTELEON_GIGANTAMAX] = sInteleonFormSpeciesIdTable,
