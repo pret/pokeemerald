@@ -223,8 +223,7 @@ AI_SINGLE_BATTLE_TEST("AI prefers a weaker move over a one with a downside effec
             TURN { EXPECT_MOVE(opponent, expectedMove); SEND_OUT(player, 1); }
             break;
         }
-    }
-    SCENE {
+    } SCENE {
         MESSAGE("Wobbuffet fainted!");
     }
 }
@@ -248,7 +247,7 @@ AI_SINGLE_BATTLE_TEST("AI can choose a status move that boosts the attack by two
 {
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET) { HP(250); };
+        PLAYER(SPECIES_WOBBUFFET) { HP(278); };
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_KANGASKHAN) { Moves(MOVE_STRENGTH, MOVE_HORN_ATTACK, MOVE_SWORDS_DANCE); }
     } WHEN {

@@ -24,12 +24,6 @@
 #define AI_EFFECTIVENESS_x0_125 1
 #define AI_EFFECTIVENESS_x0     0
 
-// get_how_powerful_move_is
-#define MOVE_POWER_OTHER  0
-#define MOVE_POWER_BEST   1
-#define MOVE_POWER_GOOD   2 // Similar dmg range with best.
-#define MOVE_POWER_WEAK   3 // Significantly lower than best and good.
-
 // AI Flags. Most run specific functions to update score, new flags are used for internal logic in other scripts
 #define AI_FLAG_CHECK_BAD_MOVE        (1 << 0)
 #define AI_FLAG_TRY_TO_FAINT          (1 << 1)
