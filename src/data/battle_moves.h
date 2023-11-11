@@ -3824,7 +3824,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_TAIL_GLOW] =
     {
-        .effect = EFFECT_SPECIAL_ATTACK_UP_2,
+        .effect = EFFECT_SPECIAL_ATTACK_UP_3,
         .power = 0,
         .type = TYPE_BUG,
         .accuracy = 100,
