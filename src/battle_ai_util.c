@@ -3366,32 +3366,16 @@ void FreeRestoreBattleMons(struct BattlePokemon *savedBattleMons)
 }
 
 // party logic
-s32 AI_CalcPartyMonBestMoveDamage(u32 battlerAtk, u32 battlerDef, struct Pokemon *attackerMon, struct Pokemon *targetMon)
+s32 AI_CalcPartyMonDamage(u32 move, u32 battlerAtk, u32 battlerDef, struct BattlePokemon switchinCandidate, bool8 isPartyMonAttacker)
 {
-    s32 i, move, bestDmg, dmg = 0;
+    s32 dmg;
     u8 effectiveness;
     struct BattlePokemon *savedBattleMons = AllocSaveBattleMons();
-
-    if (attackerMon != NULL)
-        PokemonToBattleMon(attackerMon, &gBattleMons[battlerAtk]);
-    if (targetMon != NULL)
-        PokemonToBattleMon(targetMon, &gBattleMons[battlerDef]);
-
-    for (bestDmg = 0, i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (BattlerHasAi(battlerAtk))
-            move = GetMonData(attackerMon, MON_DATA_MOVE1 + i);
-        else
-            move = AI_PARTY->mons[GetBattlerSide(battlerAtk)][gBattlerPartyIndexes[battlerAtk]].moves[i];
-
-        if (move != MOVE_NONE && gBattleMoves[move].power != 0)
-        {
-            dmg = AI_CalcDamageSaveBattlers(move, battlerAtk, battlerDef, &effectiveness, FALSE);
-            if (dmg > bestDmg)
-                bestDmg = dmg;
-        }
-    }
-
+    if(isPartyMonAttacker)
+        gBattleMons[battlerAtk] = switchinCandidate;
+    else
+        gBattleMons[battlerDef] = switchinCandidate;
+    dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness, FALSE, AI_GetWeather(AI_DATA));
     FreeRestoreBattleMons(savedBattleMons);
     return dmg;
 }

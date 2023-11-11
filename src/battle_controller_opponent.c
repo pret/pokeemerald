@@ -656,7 +656,7 @@ static void OpponentHandleChoosePokemon(u32 battler)
     // Switching out
     else if (*(gBattleStruct->AI_monToSwitchIntoId + battler) == PARTY_SIZE)
     {
-        chosenMonId = GetMostSuitableMonToSwitchInto(battler);
+        chosenMonId = GetMostSuitableMonToSwitchInto(battler, TRUE);
         if (chosenMonId == PARTY_SIZE)
         {
             s32 battler1, battler2, firstId, lastId;

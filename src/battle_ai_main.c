@@ -416,7 +416,7 @@ void SetAiLogicDataForTurn(struct AiLogicData *aiData)
 
 static bool32 AI_SwitchMonIfSuitable(u32 battler)
 {
-    u32 monToSwitchId = GetMostSuitableMonToSwitchInto(battler);
+    u32 monToSwitchId = AI_DATA->mostSuitableMonId;
     if (monToSwitchId != PARTY_SIZE)
     {
         AI_DATA->shouldSwitchMon |= gBitTable[battler];

@@ -174,7 +174,6 @@ bool32 ShouldUseWishAromatherapy(u32 battlerAtk, u32 battlerDef, u32 move);
 // party logic
 struct BattlePokemon *AllocSaveBattleMons(void);
 void FreeRestoreBattleMons(struct BattlePokemon *savedBattleMons);
-s32 AI_CalcPartyMonBestMoveDamage(u32 battlerAtk, u32 battlerDef, struct Pokemon *attackerMon, struct Pokemon *targetMon);
 s32 CountUsablePartyMons(u32 battlerId);
 bool32 IsPartyFullyHealedExceptBattler(u32 battler);
 bool32 PartyHasMoveSplit(u32 battlerId, u32 split);
@@ -188,5 +187,7 @@ void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
 void IncreaseSleepScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
 void IncreaseConfusionScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
 void IncreaseFrostbiteScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
+
+s32 AI_CalcPartyMonDamage(u32 move, u32 battlerAtk, u32 battlerDef, struct BattlePokemon switchinCandidate, bool8 isPartyMonAttacker);
 
 #endif //GUARD_BATTLE_AI_UTIL_H
