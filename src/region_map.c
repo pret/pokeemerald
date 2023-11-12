@@ -2017,7 +2017,9 @@ static void CB_ExitFlyMap(void)
             }
             else
             {
-                SetMainCallback2(CB2_ReturnToPartyMenuFromFlyMap);
+                // todo(jrc) - Check somehow if came from party menu or main menu?
+                // SetMainCallback2(CB2_ReturnToPartyMenuFromFlyMap);
+                SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
             }
             TRY_FREE_AND_SET_NULL(sFlyMap);
             FreeAllWindowBuffers();

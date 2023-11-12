@@ -29,6 +29,7 @@
 #include "party_menu.h"
 #include "pokedex.h"
 #include "pokenav.h"
+#include "region_map.h"
 #include "safari_zone.h"
 #include "save.h"
 #include "scanline_effect.h"
@@ -62,7 +63,9 @@ enum
     MENU_ACTION_PLAYER_LINK,
     MENU_ACTION_REST_FRONTIER,
     MENU_ACTION_RETIRE_FRONTIER,
-    MENU_ACTION_PYRAMID_BAG
+    MENU_ACTION_PYRAMID_BAG,
+    MENU_ACTION_FLY,
+    MENU_ACTION_DIG
 };
 
 // Save status
@@ -91,6 +94,8 @@ EWRAM_DATA static bool8 sSavingComplete = FALSE;
 EWRAM_DATA static u8 sSaveInfoWindowId = 0;
 
 // Menu action callbacks
+static bool8 StartMenuFlyCallback(void);
+static bool8 StartMenuDigCallback(void);
 static bool8 StartMenuPokedexCallback(void);
 static bool8 StartMenuPokemonCallback(void);
 static bool8 StartMenuBagCallback(void);
@@ -193,7 +198,9 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_PLAYER_LINK]     = {gText_MenuPlayer,  {.u8_void = StartMenuLinkModePlayerNameCallback}},
     [MENU_ACTION_REST_FRONTIER]   = {gText_MenuRest,    {.u8_void = StartMenuSaveCallback}},
     [MENU_ACTION_RETIRE_FRONTIER] = {gText_MenuRetire,  {.u8_void = StartMenuBattlePyramidRetireCallback}},
-    [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}}
+    [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}},
+    [MENU_ACTION_FLY]             = {gText_MenuFly,     {.u8_void = StartMenuFlyCallback}},
+    [MENU_ACTION_DIG]             = {gText_MenuDig,     {.u8_void = StartMenuDigCallback}}
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -329,6 +336,13 @@ static void BuildNormalStartMenu(void)
     {
         AddStartMenuAction(MENU_ACTION_POKENAV);
     }
+
+    // Add fly if outdoors, dig if indoors
+    if (IsMapTypeOutdoors(GetCurrentMapType()) == TRUE)
+        AddStartMenuAction(MENU_ACTION_FLY);
+    else
+        AddStartMenuAction(MENU_ACTION_DIG);
+    
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
@@ -630,6 +644,36 @@ static bool8 HandleStartMenuInput(void)
     {
         RemoveExtraStartMenuWindows();
         HideStartMenu();
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+static bool8 StartMenuFlyCallback(void)
+{
+    if (!gPaletteFade.active)
+    {
+        PlayRainStoppingSoundEffect();
+        RemoveExtraStartMenuWindows();
+        CleanupOverworldWindowsAndTilemaps();
+        SetMainCallback2(CB2_OpenFlyMap);
+
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+static bool8 StartMenuDigCallback(void)
+{
+    if (!gPaletteFade.active)
+    {
+        PlayRainStoppingSoundEffect();
+        RemoveExtraStartMenuWindows();
+        CleanupOverworldWindowsAndTilemaps();
+        SetMainCallback2(CB2_OpenFlyMap);
+
         return TRUE;
     }
 
