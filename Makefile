@@ -164,8 +164,6 @@ MAKEFLAGS += --no-print-directory
 .SECONDARY:
 # Delete files that weren't built properly
 .DELETE_ON_ERROR:
-# Secondary expansion is required for dependency variables in object rules.
-.SECONDEXPANSION:
 
 RULES_NO_SCAN += libagbsyscall clean clean-assets tidy tidymodern tidynonmodern generated clean-generated
 .PHONY: all rom modern compare
@@ -330,7 +328,10 @@ endef
 # Calls SCANINC to find dependencies
 define C_SCANINC
 ifneq ($(NODEP),1)
-$1.o: $2 $$(shell $(SCANINC) $(INCLUDE_SCANINC_ARGS) -I tools/agbcc/include -I gflib $2)
+$1.o: $1.d
+$1.d: $2
+	$(SCANINC) -M $1.d $(INCLUDE_SCANINC_ARGS) -I tools/agbcc/include -I gflib $2
+include $1.d
 endif
 endef
 
@@ -359,7 +360,10 @@ endef
 
 define ASM_SCANINC
 ifneq ($(NODEP),1)
-$1.o: $2 $$(shell $(SCANINC) $(INCLUDE_SCANINC_ARGS) -I "" $2)
+$1.o: $1.d
+$1.d: $2
+	$(SCANINC) -M $1.d $(INCLUDE_SCANINC_ARGS) -I "" $2
+include $1.d
 endif
 endef
 
