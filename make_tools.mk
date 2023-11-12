@@ -9,7 +9,9 @@ TOOL_NAMES := aif2pcm bin2c gbafix gbagfx jsonproc mapjson mid2agb preproc ramsc
 
 TOOLDIRS := $(TOOL_NAMES:%=$(TOOLS_DIR)/%)
 
-.PHONY: tools check-tools clean-tools $(TOOLDIRS) $(CHECKTOOLDIRS)
+# Tool making doesnt require a pokeemerald dependency scan.
+RULES_NO_SCAN += tools check-tools clean-tools $(TOOLDIRS) $(CHECKTOOLDIRS)
+.PHONY: $(RULES_NO_SCAN)
 
 tools: $(TOOLDIRS)
 check-tools: $(CHECKTOOLDIRS)
