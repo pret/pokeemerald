@@ -105,4 +105,6 @@
 // - No parameters
 #define FORM_CHANGE_BATTLE_GIGANTAMAX           17
 
+#define FORM_CHANGE_ITEM_USE_MULTICHOICE        18
+
 #endif // GUARD_CONSTANTS_FORM_CHANGE_TYPES_H

@@ -94,6 +94,14 @@ enum {
     MENU_TRADE1,
     MENU_TRADE2,
     MENU_TOSS,
+    MENU_CATALOG_BULB,
+    MENU_CATALOG_OVEN,
+    MENU_CATALOG_WASHING,
+    MENU_CATALOG_FRIDGE,
+    MENU_CATALOG_FAN,
+    MENU_CATALOG_MOWER,
+    MENU_CHANGE_FORM,
+    MENU_CHANGE_ABILITY,
     MENU_FIELD_MOVES
 };
 
@@ -113,6 +121,8 @@ enum {
     ACTIONS_TRADE,
     ACTIONS_SPIN_TRADE,
     ACTIONS_TAKEITEM_TOSS,
+    ACTIONS_ROTOM_CATALOG,
+    ACTIONS_ZYGARDE_CUBE,
 };
 
 // In CursorCb_FieldMove, field moves <= FIELD_MOVE_WATERFALL are assumed to line up with the badge flags.
@@ -475,6 +485,14 @@ static void CursorCb_Trade1(u8);
 static void CursorCb_Trade2(u8);
 static void CursorCb_Toss(u8);
 static void CursorCb_FieldMove(u8);
+static void CursorCb_CatalogBulb(u8);
+static void CursorCb_CatalogOven(u8);
+static void CursorCb_CatalogWashing(u8);
+static void CursorCb_CatalogFridge(u8);
+static void CursorCb_CatalogFan(u8);
+static void CursorCb_CatalogMower(u8);
+static void CursorCb_ChangeForm(u8);
+static void CursorCb_ChangeAbility(u8);
 static bool8 SetUpFieldMove_Surf(void);
 static bool8 SetUpFieldMove_Fly(void);
 static bool8 SetUpFieldMove_Waterfall(void);
@@ -2498,6 +2516,9 @@ void DisplayPartyMenuStdMessage(u32 stringId)
         case PARTY_MSG_ALREADY_HOLDING_ONE:
             *windowPtr = AddWindow(&sAlreadyHoldingOneMsgWindowTemplate);
             break;
+        case PARTY_MSG_WHICH_APPLIANCE:
+            *windowPtr = AddWindow(&sOrderWhichApplianceMsgWindowTemplate);
+            break;
         default:
             *windowPtr = AddWindow(&sDefaultPartyMsgWindowTemplate);
             break;
@@ -2553,6 +2574,12 @@ static u8 DisplaySelectionWindow(u8 windowType)
         break;
     case SELECTWINDOW_MAIL:
         window = sMailReadTakeWindowTemplate;
+        break;
+    case SELECTWINDOW_CATALOG:
+        window = sCatalogSelectWindowTemplate;
+        break;
+    case SELECTWINDOW_ZYGARDECUBE:
+        window = sZygardeCubeSelectWindowTemplate;
         break;
     default: // SELECTWINDOW_MOVES
         window = sMoveSelectWindowTemplate;
@@ -5685,6 +5712,66 @@ void ItemUseCB_EvolutionStone(u8 taskId, TaskFunc task)
 #define tAnimWait       data[2]
 #define tNextFunc       3
 
+void FormChangeTeachMove(u8 taskId, u32 move, u32 slot)
+{
+    struct Pokemon *mon;
+
+    gPartyMenu.data1 = move;
+    gPartyMenu.learnMoveState = 0;
+
+    PlaySE(SE_SELECT);
+    mon = &gPlayerParty[slot];
+    GetMonNickname(mon, gStringVar1);
+    StringCopy(gStringVar2, gMoveNames[move]);
+
+    if (GiveMoveToMon(mon, move) != MON_HAS_MAX_MOVES)
+    {
+        gTasks[taskId].func = Task_LearnedMove;
+    }
+    else
+    {
+        DisplayLearnMoveMessage(gText_PkmnNeedsToReplaceMove);
+        gTasks[taskId].func = Task_ReplaceMoveYesNo;
+    }
+}
+
+void DeleteMove(struct Pokemon *mon, u32 move)
+{
+    struct BoxPokemon *boxMon = &mon->box;
+    u32 i, j;
+
+    if (move != MOVE_NONE)
+    {
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            u32 existingMove = GetBoxMonData(boxMon, MON_DATA_MOVE1 + i, NULL);
+            if (existingMove == move)
+            {
+                SetMonMoveSlot(mon, MOVE_NONE, i);
+                RemoveMonPPBonus(mon, i);
+                for (j = i; j < MAX_MON_MOVES - 1; j++)
+                    ShiftMoveSlot(mon, j, j + 1);
+                break;
+            }
+        }
+    }
+}
+
+bool32 DoesMonHaveAnyMoves(struct Pokemon *mon)
+{
+    struct BoxPokemon *boxMon = &mon->box;
+    u32 i;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u32 existingMove = GetBoxMonData(boxMon, MON_DATA_MOVE1 + i, NULL);
+        if (existingMove != MOVE_NONE)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+
 static void SpriteCB_FormChangeIconMosaic(struct Sprite *sprite)
 {
     u8 taskId = sprite->data[2];
@@ -5766,8 +5853,24 @@ static void Task_TryItemUseFormChange(u8 taskId)
         break;
     case 6:
         if (!IsPartyMenuTextPrinterActive())
-            gTasks[taskId].tState++;
+        {
+            if (gSpecialVar_ItemId == ITEM_ROTOM_CATALOG) //only for rotom currently
+            {
+                u32 i;
+                for (i = 0; i < ARRAY_COUNT(sRotomFormChangeMoves); i++)
+                    DeleteMove(mon, sRotomFormChangeMoves[i]);
 
+                if (gSpecialVar_0x8000 == MOVE_THUNDER_SHOCK)
+                {
+                    if (!DoesMonHaveAnyMoves(mon))
+                        FormChangeTeachMove(taskId, gSpecialVar_0x8000, gPartyMenu.slotId);
+                }
+                else
+                    FormChangeTeachMove(taskId, gSpecialVar_0x8000, gPartyMenu.slotId);
+            }
+
+            gTasks[taskId].tState++;
+        }
         break;
     case 7:
         gTasks[taskId].func = (void *)GetWordTaskArg(taskId, tNextFunc);
@@ -5811,6 +5914,111 @@ void ItemUseCB_FormChange_ConsumedOnUse(u8 taskId, TaskFunc task)
     if (TryItemUseFormChange(taskId, task))
         RemoveBagItem(gSpecialVar_ItemId, 1);
 }
+
+void ItemUseCB_RotomCatalog(u8 taskId, TaskFunc task)
+{
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+    SetPartyMonSelectionActions(gPlayerParty, gPartyMenu.slotId, ACTIONS_ROTOM_CATALOG);
+    DisplaySelectionWindow(SELECTWINDOW_CATALOG);
+    DisplayPartyMenuStdMessage(PARTY_MSG_WHICH_APPLIANCE);
+    gTasks[taskId].data[0] = 0xFF;
+    gTasks[taskId].func = Task_HandleSelectionMenuInput;
+}
+
+bool32 TryMultichoiceFormChange(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u32 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_CHANGE_ITEM_USE_MULTICHOICE, gSpecialVar_ItemId);
+
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+
+    if (targetSpecies != SPECIES_NONE)
+    {
+        gPartyMenuUseExitCallback = TRUE;
+        SetWordTaskArg(taskId, tNextFunc, (u32)Task_ClosePartyMenuAfterText);
+        gTasks[taskId].func = Task_TryItemUseFormChange;
+        gTasks[taskId].tState = 0;
+        gTasks[taskId].tTargetSpecies = targetSpecies;
+        gTasks[taskId].tAnimWait = 0;
+        return TRUE;
+    }
+    else
+    {
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        return FALSE;
+    }
+}
+
+static void CursorCb_CatalogBulb(u8 taskId)
+{
+    gSpecialVar_Result = 0;
+    gSpecialVar_0x8000 = MOVE_THUNDER_SHOCK;
+    TryMultichoiceFormChange(taskId);
+}
+
+static void CursorCb_CatalogOven(u8 taskId)
+{
+    gSpecialVar_Result = 1;
+    gSpecialVar_0x8000 = MOVE_OVERHEAT;
+    TryMultichoiceFormChange(taskId);
+}
+
+static void CursorCb_CatalogWashing(u8 taskId)
+{
+    gSpecialVar_Result = 2;
+    gSpecialVar_0x8000 = MOVE_HYDRO_PUMP;
+    TryMultichoiceFormChange(taskId);
+}
+
+static void CursorCb_CatalogFridge(u8 taskId)
+{
+    gSpecialVar_Result = 3;
+    gSpecialVar_0x8000 = MOVE_BLIZZARD;
+    TryMultichoiceFormChange(taskId);
+}
+
+static void CursorCb_CatalogFan(u8 taskId)
+{
+    gSpecialVar_Result = 4;
+    gSpecialVar_0x8000 = MOVE_AIR_SLASH;
+    TryMultichoiceFormChange(taskId);
+}
+
+static void CursorCb_CatalogMower(u8 taskId)
+{
+    gSpecialVar_Result = 5;
+    gSpecialVar_0x8000 = MOVE_LEAF_STORM;
+    TryMultichoiceFormChange(taskId);
+}
+
+void ItemUseCB_ZygardeCube(u8 taskId, TaskFunc task)
+{
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+    SetPartyMonSelectionActions(gPlayerParty, gPartyMenu.slotId, ACTIONS_ZYGARDE_CUBE);
+    DisplaySelectionWindow(SELECTWINDOW_ZYGARDECUBE);
+    gTasks[taskId].data[0] = 0xFF;
+    gTasks[taskId].func = Task_HandleSelectionMenuInput;
+}
+
+static void CursorCb_ChangeForm(u8 taskId)
+{
+    gSpecialVar_Result = 0;
+    TryMultichoiceFormChange(taskId);
+}
+
+static void CursorCb_ChangeAbility(u8 taskId)
+{
+    gSpecialVar_Result = 1;
+    TryMultichoiceFormChange(taskId);
+}
+
 void TryItemHoldFormChange(struct Pokemon *mon)
 {
     u16 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_CHANGE_ITEM_HOLD, 0);

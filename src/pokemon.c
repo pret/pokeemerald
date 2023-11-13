@@ -9064,6 +9064,13 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
                         }
                     }
                     break;
+                case FORM_CHANGE_ITEM_USE_MULTICHOICE:
+                    if (arg == formChanges[i].param1)
+                    {
+                        if (formChanges[i].param2 == gSpecialVar_Result)
+                            targetSpecies = formChanges[i].targetSpecies;
+                    }
+                    break;
                 case FORM_CHANGE_MOVE:
                     if (BoxMonKnowsMove(boxMon, formChanges[i].param1) != formChanges[i].param2)
                         targetSpecies = formChanges[i].targetSpecies;
