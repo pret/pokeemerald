@@ -9289,6 +9289,24 @@ u32 GetMonFriendshipScore(struct Pokemon *pokemon)
     return FRIENDSHIP_NONE;
 }
 
+u32 GetMonAffectionHearts(struct Pokemon *pokemon)
+{
+    u32 friendship = GetMonData(pokemon, MON_DATA_FRIENDSHIP, NULL);
+
+    if (friendship == MAX_FRIENDSHIP)
+        return AFFECTION_FIVE_HEARTS;
+    if (friendship >= 220)
+        return AFFECTION_FOUR_HEARTS;
+    if (friendship >= 180)
+        return AFFECTION_THREE_HEARTS;
+    if (friendship >= 130)
+        return AFFECTION_TWO_HEARTS;
+    if (friendship >= 80)
+        return AFFECTION_ONE_HEART;
+
+    return AFFECTION_NO_HEARTS;
+}
+
 void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality)
 {
     struct PokemonSubstruct0 *old0, *new0;
