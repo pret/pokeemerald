@@ -43,6 +43,7 @@
 #include "pokemon_storage_system.h"
 #include "random.h"
 #include "region_map.h"
+#include "rtc.h"
 #include "script.h"
 #include "script_pokemon_util.h"
 #include "sound.h"
@@ -2120,6 +2121,9 @@ static void DebugAction_Util_Clear_Boxes(u8 taskId)
 
 static void DebugAction_Util_CheatStart(u8 taskId)
 {
+    if (!FlagGet(FLAG_SYS_CLOCK_SET))
+        RtcInitLocalTimeOffset(0, 0);
+
     InitTimeBasedEvents();
     Debug_DestroyMenu_Full_Script(taskId, Debug_CheatStart);
 }
