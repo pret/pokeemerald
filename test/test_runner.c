@@ -162,17 +162,18 @@ void CB2_TestRunner(void)
         break;
 
     case STATE_ASSIGN_TEST:
-        if (gTestRunnerState.test == __stop_tests)
+        while (1)
         {
-            gTestRunnerState.state = STATE_EXIT;
-            return;
-        }
-
-        if (gTestRunnerState.test->runner != &gAssumptionsRunner
-          && !PrefixMatch(gTestRunnerArgv, gTestRunnerState.test->name))
-        {
-            gTestRunnerState.state = STATE_NEXT_TEST;
-            return;
+            if (gTestRunnerState.test == __stop_tests)
+            {
+                gTestRunnerState.state = STATE_EXIT;
+                return;
+            }
+            if (gTestRunnerState.test->runner != &gAssumptionsRunner
+              && !PrefixMatch(gTestRunnerArgv, gTestRunnerState.test->name))
+                ++gTestRunnerState.test;
+            else
+                break;
         }
 
         MgbaPrintf_(":N%s", gTestRunnerState.test->name);
