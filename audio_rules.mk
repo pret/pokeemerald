@@ -1,6 +1,28 @@
 # This file contains rules for making assemblies for most music in the game.
 
-MID_ASM_DIR = $(MID_SUBDIR)
+CRY_SUBDIR := sound/direct_sound_samples/cries
+
+MID_ASM_DIR := $(MID_SUBDIR)
+CRY_BIN_DIR := $(CRY_SUBDIR)
+SOUND_BIN_DIR := sound
+
+SPECIAL_OUTDIRS := $(MID_ASM_DIR) $(CRY_BIN_DIR) 
+SPECIAL_OUTDIRS += $(SOUND_BIN_DIR) $(SOUND_BIN_DIR)/direct_sound_samples/phonemes $(SOUND_BIN_DIR)/direct_sound_samples/cries
+$(shell mkdir -p $(SPECIAL_OUTDIRS) )
+
+# Assembly song compilation
+$(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
+	$(AS) $(ASFLAGS) -I sound -o $@ $<
+$(MID_BUILDDIR)/%.o: $(MID_ASM_DIR)/%.s
+	$(AS) $(ASFLAGS) -I sound -o $@ $<
+
+# Compressed cries
+$(CRY_BIN_DIR)/%.bin: $(CRY_SUBDIR)/%.aif 
+	$(AIF) $< $@ --compress
+
+# Uncompressed sounds
+$(SOUND_BIN_DIR)/%.bin: sound/%.aif 
+	$(AIF) $< $@
 
 # For each line in midi.cfg, we do some trickery to convert it into a make rule for the `.mid` file described on the line
 # Data following the colon in said file corresponds to arguments passed into mid2agb

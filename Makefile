@@ -86,8 +86,6 @@ DATA_SRC_SUBDIR = src/data
 DATA_ASM_SUBDIR = data
 SONG_SUBDIR = sound/songs
 MID_SUBDIR = sound/songs/midi
-SAMPLE_SUBDIR = sound/direct_sound_samples
-CRY_SUBDIR = sound/direct_sound_samples/cries
 
 C_BUILDDIR = $(OBJ_DIR)/$(C_SUBDIR)
 GFLIB_BUILDDIR = $(OBJ_DIR)/$(GFLIB_SUBDIR)
@@ -263,7 +261,7 @@ include graphics_file_rules.mk
 include map_data_rules.mk
 include spritesheet_rules.mk
 include json_data_rules.mk
-include songs.mk
+include audio_rules.mk
 
 %.s: ;
 %.png: ;
@@ -277,8 +275,6 @@ include songs.mk
 %.gbapal: %.png ; $(GFX) $< $@
 %.lz: % ; $(GFX) $< $@
 %.rl: % ; $(GFX) $< $@
-$(CRY_SUBDIR)/%.bin: $(CRY_SUBDIR)/%.aif ; $(AIF) $< $@ --compress
-sound/%.bin: sound/%.aif ; $(AIF) $< $@
 
 
 ifeq ($(MODERN),0)
@@ -392,9 +388,6 @@ else
 $(foreach src, $(REGULAR_DATA_ASM_SRCS), $(eval $(call SRC_ASM_DATA_DEP,$(patsubst $(DATA_ASM_SUBDIR)/%.s,$(DATA_ASM_BUILDDIR)/%.o, $(src)),$(src))))
 endif
 endif
-
-$(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
-	$(AS) $(ASFLAGS) -I sound -o $@ $<
 
 $(OBJ_DIR)/sym_bss.ld: sym_bss.txt
 	$(RAMSCRGEN) .bss $< ENGLISH > $@
