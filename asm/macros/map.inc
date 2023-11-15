@@ -19,19 +19,13 @@
 	.4byte \script
 	.endm
 
-	@ Defines an object event template for map data, to be used by a normal object. Mirrors the struct layout of ObjectEventTemplate in include/global.fieldmap.h
 	.macro object_event index:req, gfx:req, x:req, y:req, elevation:req, movement_type:req, x_radius:req, y_radius:req, trainer_type:req, sight_radius_tree_etc:req, script:req, event_flag:req
 	.byte \index
-	.byte \gfx
 	.byte OBJ_KIND_NORMAL
-	.space 1  @ Padding
+	.2byte \gfx
 	.2byte \x, \y
-	.byte \elevation
-	.byte \movement_type
-	.byte ((\y_radius << 4) | \x_radius)
-	.space 1  @ Padding
-	.2byte \trainer_type
-	.2byte \sight_radius_tree_etc
+	.byte \elevation, \movement_type, ((\y_radius << 4) | \x_radius), 0
+    .2byte \trainer_type, \sight_radius_tree_etc
 	.4byte \script
 	.2byte \event_flag
 	.space 2  @ Padding

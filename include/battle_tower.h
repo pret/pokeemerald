@@ -34,9 +34,9 @@ struct FacilityMon
 };
 
 extern const u8 gTowerMaleFacilityClasses[30];
-extern const u8 gTowerMaleTrainerGfxIds[30];
+extern const u16 gTowerMaleTrainerGfxIds[30];
 extern const u8 gTowerFemaleFacilityClasses[20];
-extern const u8 gTowerFemaleTrainerGfxIds[20];
+extern const u16 gTowerFemaleTrainerGfxIds[20];
 extern const u16 gBattleFrontierHeldItems[];
 extern const struct FacilityMon gBattleFrontierMons[];
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
@@ -54,7 +54,7 @@ void CallBattleTowerFunc(void);
 u16 GetRandomScaledFrontierTrainerId(u8 challengeNum, u8 battleNum);
 void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId);
 void SetEReaderTrainerGfxId(void);
-u8 GetBattleFacilityTrainerGfxId(u16 trainerId);
+u16 GetBattleFacilityTrainerGfxId(u16 trainerId);
 void PutNewBattleTowerRecord(struct EmeraldBattleTowerRecord *newRecordEm);
 u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
 u8 GetFrontierOpponentClass(u16 trainerId);
@@ -81,7 +81,7 @@ void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId);
 u8 SetFacilityPtrsGetLevel(void);
 u8 GetFrontierEnemyMonLevel(u8 lvlMode);
 s32 GetHighestLevelInPlayerParty(void);
-u8 FacilityClassToGraphicsId(u8 facilityClass);
+u16 FacilityClassToGraphicsId(u8 facilityClass);
 bool32 ValidateBattleTowerRecord(u8 recordId); // unused
 void TrySetLinkBattleTowerEnemyPartyLevel(void);
 

@@ -628,9 +628,9 @@ const struct SpriteFrameImage sPicTable_RowapBerryTree[] = {
 
 const u8 gBerryTreePaletteSlotTable_Rowap[] = {3, 4, 5, 5, 5};
 
-const u8 gDeadBerryTreeObjectEventGraphicsIdTable[] = {OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES};
+const u16 gDeadBerryTreeObjectEventGraphicsIdTable[] = {OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES};
 
-const u8 gBerryTreeObjectEventGraphicsIdTable[] = {OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES, OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES, OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES};
+const u16 gBerryTreeObjectEventGraphicsIdTable[] = {OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES, OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES, OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES};
 
 const struct SpriteFrameImage *const gBerryTreePicTablePointers[] = {
     [ITEM_CHERI_BERRY - FIRST_BERRY_INDEX]            = sPicTable_CheriBerryTree,
@@ -774,7 +774,7 @@ const u8 *const gBerryTreePaletteSlotTablePointers[] = {
     [ITEM_ENIGMA_BERRY_E_READER - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Durin,
 };
 
-const u8 *const gBerryTreeObjectEventGraphicsIdTablePointers[] = {
+const u16 *const gBerryTreeObjectEventGraphicsIdTablePointers[] = {
     [ITEM_CHERI_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
     [ITEM_CHESTO_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
     [ITEM_PECHA_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
