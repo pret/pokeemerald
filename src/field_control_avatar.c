@@ -29,6 +29,7 @@
 #include "trainer_see.h"
 #include "trainer_hill.h"
 #include "wild_encounter.h"
+#include "follow_me.h"
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
 #include "constants/field_poison.h"
@@ -118,7 +119,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
     {
         if (tileTransitionState == T_TILE_CENTER && runningState == MOVING)
             input->tookStep = TRUE;
-        if (forcedMove == FALSE && tileTransitionState == T_TILE_CENTER)
+        if (forcedMove == FALSE && tileTransitionState == T_TILE_CENTER && !gPlayerAvatar.preventStep)
             input->checkStandardWildEncounter = TRUE;
     }
 
@@ -165,9 +166,18 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     {
         IncrementGameStat(GAME_STAT_STEPS);
         IncrementBirthIslandRockStepCount();
+        
         if (TryStartStepBasedScript(&position, metatileBehavior, playerDirection) == TRUE)
             return TRUE;
     }
+    else if(gSaveBlock2Ptr->follower.inProgress && gSaveBlock2Ptr->follower.createSurfBlob != 2)
+    {
+        // Keep the follower bouncing, unless we're dealing with a follower coming out of a pokeball after a scripted warp.
+        // Need to stop bouncing to run the grow-out-of-pokeball animation
+        ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gSaveBlock2Ptr->follower.objId]);
+        ObjectEventSetHeldMovement(&gObjectEvents[gSaveBlock2Ptr->follower.objId], 0x9E);
+    }
+    
     if (input->checkStandardWildEncounter && CheckStandardWildEncounter(metatileBehavior) == TRUE)
         return TRUE;
     if (input->heldDirection && input->dpadDirection == playerDirection)
@@ -325,6 +335,13 @@ static const u8 *GetInteractedObjectEventScript(struct MapPosition *position, u8
 
     if (InTrainerHill() == TRUE)
         script = GetTrainerHillTrainerScript();
+    else if (objectEventId == GetFollowerObjectId())//(gObjectEvents[objectEventId].localId == OBJ_EVENT_ID_FOLLOWER)
+    {
+        if(gObjectEvents[objectEventId].invisible == FALSE)
+            script = GetFollowerScriptPointer();
+        else
+            return NULL;
+    }
     else
         script = GetObjectEventScriptPointerByObjectEventId(objectEventId);
 

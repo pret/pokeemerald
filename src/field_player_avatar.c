@@ -20,6 +20,7 @@
 #include "strings.h"
 #include "task.h"
 #include "tv.h"
+#include "follow_me.h"
 #include "wild_encounter.h"
 #include "constants/abilities.h"
 #include "constants/event_objects.h"
@@ -610,6 +611,9 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
     {
         if (collision == COLLISION_LEDGE_JUMP)
         {
+            if (gSaveBlock2Ptr->follower.inProgress && gObjectEvents[gSaveBlock2Ptr->follower.objId].invisible == TRUE)
+                gSaveBlock2Ptr->follower.delayedState = MOVEMENT_ACTION_JUMP_2_DOWN;
+            FollowerPokeballSparkle();
             PlayerJumpLedge(direction);
             return;
         }
@@ -637,12 +641,14 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER) && (heldKeys & B_BUTTON) && FlagGet(FLAG_SYS_B_DASH)
      && IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) == 0)
     {
+        FollowerPokeballSparkle();
         PlayerRun(direction);
         gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
         return;
     }
     else
     {
+        FollowerPokeballSparkle();
         PlayerWalkNormal(direction);
     }
 }
@@ -1387,6 +1393,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     gPlayerAvatar.spriteId = objectEvent->spriteId;
     gPlayerAvatar.gender = gender;
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_CONTROLLABLE | PLAYER_AVATAR_FLAG_ON_FOOT);
+    CreateFollowerAvatar();
 }
 
 void SetPlayerInvisibility(bool8 invisible)

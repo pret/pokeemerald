@@ -103,6 +103,9 @@ static void RecordCyclingRoadResults(u32, u8);
 static void LoadLinkPartnerObjectEventSpritePalette(u16, u8, u8);
 static void Task_PetalburgGymSlideOpenRoomDoors(u8);
 static void PetalburgGymSetDoorMetatiles(u8, u16);
+// static void LoadLinkPartnerObjectEventSpritePalette(u16 graphicsId, u8 localEventId, u8 paletteNum);
+// static void Task_PetalburgGymSlideOpenRoomDoors(u8 taskId);
+// static void PetalburgGymSetDoorMetatiles(u8 roomNumber, u16 metatileId);
 static void Task_PCTurnOnEffect(u8);
 static void PCTurnOnEffect(struct Task *);
 static void PCTurnOnEffect_SetMetatile(s16, s8, s8);
@@ -1543,6 +1546,21 @@ u8 GetLeadMonIndex(void)
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG
          && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE)
             return i;
+    }
+    return 0;
+}
+
+u8 GetLeadMonNotFaintedIndex(void)
+{
+    u8 i;
+    u8 partyCount = CalculatePlayerPartyCount();
+    for(i = 0; i < partyCount; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != 0
+            && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0)
+        {
+            return i;    
+        }
     }
     return 0;
 }

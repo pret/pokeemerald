@@ -468,3 +468,10 @@ void InitRamScript_NoObjectEvent(u8 *script, u16 scriptSize)
         scriptSize = sizeof(gSaveBlock1Ptr->ramScript.data.script);
     InitRamScript(script, scriptSize, MAP_GROUP(UNDEFINED), MAP_NUM(UNDEFINED), NO_OBJECT);
 }
+
+u8* ReadWord(u8 index)
+{
+    struct ScriptContext *ctx = &sGlobalScriptContext;
+    
+    return (T1_READ_PTR(&ctx->data[index]));
+}

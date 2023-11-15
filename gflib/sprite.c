@@ -2,6 +2,8 @@
 #include "sprite.h"
 #include "main.h"
 #include "palette.h"
+#include "global.fieldmap.h"
+#include "constants/event_objects.h"
 
 #define MAX_SPRITE_COPY_REQUESTS 64
 
@@ -913,6 +915,57 @@ void ContinueAnim(struct Sprite *sprite)
     }
 }
 
+bool8 IsFlyingPokemonGraphic(u16 graphicsId)
+{
+    switch(graphicsId)
+    {
+        case OBJ_EVENT_GFX_BUTTERFREE:
+        case OBJ_EVENT_GFX_BEEDRILL:
+        case OBJ_EVENT_GFX_PIDGEOTTO:
+        case OBJ_EVENT_GFX_PIDGEOT:
+        case OBJ_EVENT_GFX_FEAROW:
+        case OBJ_EVENT_GFX_ZUBAT:
+        case OBJ_EVENT_GFX_GOLBAT:
+        case OBJ_EVENT_GFX_VENOMOTH:
+        case OBJ_EVENT_GFX_AERODACTYL:
+        case OBJ_EVENT_GFX_ARTICUNO:
+        case OBJ_EVENT_GFX_ZAPDOS:
+        case OBJ_EVENT_GFX_MOLTRES:
+        case OBJ_EVENT_GFX_DRAGONITE:
+        case OBJ_EVENT_GFX_NOCTOWL:
+        case OBJ_EVENT_GFX_LEDYBA:
+        case OBJ_EVENT_GFX_LEDIAN:
+        case OBJ_EVENT_GFX_CROBAT:
+        case OBJ_EVENT_GFX_TOGETIC:
+        case OBJ_EVENT_GFX_HOPPIP:
+        case OBJ_EVENT_GFX_SKIPLOOM:
+        case OBJ_EVENT_GFX_JUMPLUFF:
+        case OBJ_EVENT_GFX_YANMA:
+        case OBJ_EVENT_GFX_MANTINE:
+        case OBJ_EVENT_GFX_SKARMORY:
+        case OBJ_EVENT_GFX_LUGIA_FOLLOWER:
+        case OBJ_EVENT_GFX_HOOH_FOLLOWER:
+        case OBJ_EVENT_GFX_CELEBI:
+        case OBJ_EVENT_GFX_BEAUTIFLY:
+        case OBJ_EVENT_GFX_DUSTOX:
+        case OBJ_EVENT_GFX_SWELLOW:
+        case OBJ_EVENT_GFX_WINGULL_FOLLOWER:
+        case OBJ_EVENT_GFX_PELIPPER:
+        case OBJ_EVENT_GFX_MASQUERAIN:
+        case OBJ_EVENT_GFX_FLYGON:
+        case OBJ_EVENT_GFX_SWABLU:
+        case OBJ_EVENT_GFX_ALTARIA:
+        case OBJ_EVENT_GFX_VOLBEAT:
+        case OBJ_EVENT_GFX_ILLUMISE:
+        case OBJ_EVENT_GFX_KYOGRE:
+        case OBJ_EVENT_GFX_LATIAS_FOLLOWER:
+        case OBJ_EVENT_GFX_LATIOS_FOLLOWER:
+            return TRUE;
+        default:
+            return FALSE;
+    }
+}
+
 void AnimCmd_frame(struct Sprite *sprite)
 {
     s16 imageValue;
@@ -930,6 +983,15 @@ void AnimCmd_frame(struct Sprite *sprite)
 
     sprite->animDelayCounter = duration;
 
+    if(sprite == &gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId] && gSaveBlock2Ptr->follower.inProgress && sprite->y2 >= -1
+    && !IsFlyingPokemonGraphic(gObjectEvents[gSaveBlock2Ptr->follower.objId].graphicsId) && !sprite->oam.affineMode)
+    {
+        if(sprite->animCmdIndex % 2 == 1)
+            sprite->y2 = 0;
+        else
+            sprite->y2 = -1;
+    }
+    
     if (!(sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK))
         SetSpriteOamFlipBits(sprite, hFlip, vFlip);
 
@@ -963,6 +1025,15 @@ void AnimCmd_jump(struct Sprite *sprite)
         duration--;
 
     sprite->animDelayCounter = duration;
+    
+    if(sprite == &gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId] && gSaveBlock2Ptr->follower.inProgress && sprite->y2 >= -1
+    && !IsFlyingPokemonGraphic(gObjectEvents[gSaveBlock2Ptr->follower.objId].graphicsId) && !sprite->oam.affineMode)
+    {
+        if(sprite->animCmdIndex % 2 == 1)
+            sprite->y2 = 0;
+        else
+            sprite->y2 = -1;
+    }
 
     if (!(sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK))
         SetSpriteOamFlipBits(sprite, hFlip, vFlip);

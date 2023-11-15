@@ -1,8 +1,10 @@
 #include "global.h"
 #include "decompress.h"
+#include "event_data.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
 #include "field_control_avatar.h"
+#include "field_door.h"
 #include "field_effect.h"
 #include "field_effect_helpers.h"
 #include "field_player_avatar.h"
@@ -26,6 +28,7 @@
 #include "trainer_pokemon_sprites.h"
 #include "trig.h"
 #include "util.h"
+#include "follow_me.h"
 #include "constants/field_effects.h"
 #include "constants/event_object_movement.h"
 #include "constants/metatile_behaviors.h"
@@ -35,9 +38,11 @@
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 
 EWRAM_DATA s32 gFieldEffectArguments[8] = {0};
+EWRAM_DATA u16 gReflectionPaletteBuffer[0x10] = {0};
 
 // Static type declarations
 
+extern void FollowMe_WarpSetEnd(void);
 static void Task_PokecenterHeal(u8 taskId);
 static void PokecenterHealEffect_Init(struct Task *);
 static void PokecenterHealEffect_WaitForBallPlacement(struct Task *);
@@ -782,6 +787,7 @@ void FieldEffectScript_LoadFadedPalette(u8 **script)
 {
     struct SpritePalette *palette = (struct SpritePalette *)FieldEffectScript_ReadWord(script);
     LoadSpritePalette(palette);
+    UpdatePaletteGammaType(IndexOfSpritePaletteTag(palette->tag), COLOR_MAP_DARK_CONTRAST);
     UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(palette->tag));
     (*script) += 4;
 }
@@ -1364,8 +1370,32 @@ static void Task_UseFly(u8 taskId)
             gFieldEffectArguments[0] = 0;
 
         FieldEffectStart(FLDEFF_USE_FLY);
+
+    #if FAST_FOLLOWERS == TRUE
+        if (FlagGet(FLAG_FOLLOWER_IN_BUILDING))
+        {
+            // In case the player just exited a building and the follower has not exited the building
+            FlagClear(FLAG_FOLLOWER_IN_BUILDING);
+            gSaveBlock2Ptr->follower.comeOutDoorStairs = 0;
+            gSaveBlock2Ptr->follower.warpEnd = 0;
+            FieldAnimateDoorClose(gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y - 1);
+        }
+        else
+            FollowerIntoPokeball();
+    #else
+        if (gSaveBlock2Ptr->follower.inProgress)
+        {
+            // In case the player just exited a building and the follower has not exited the building
+            gSaveBlock2Ptr->follower.comeOutDoorStairs = 0;
+            gSaveBlock2Ptr->follower.warpEnd = 0;
+            
+            FollowerIntoPokeball();
+        }
+    #endif
+
         task->data[0]++;
     }
+    
     if (!FieldEffectActiveListContains(FLDEFF_USE_FLY))
     {
         Overworld_ResetStateAfterFly();
@@ -1544,6 +1574,8 @@ static bool8 FallWarpEffect_End(struct Task *task)
     UnfreezeObjectEvents();
     InstallCameraPanAheadCallback();
     DestroyTask(FindTaskIdByFunc(Task_FallWarpFieldEffect));
+    //FollowMe_WarpSetEnd();
+    gSaveBlock2Ptr->follower.warpEnd = 0;
     return FALSE;
 }
 
@@ -1595,6 +1627,7 @@ static bool8 EscalatorWarpOut_WaitForPlayer(struct Task *task)
         task->tState++;
         task->data[2] = 0;
         task->data[3] = 0;
+        EscalatorMoveFollower(task->data[1]);
         if ((u8)task->tGoingUp == FALSE)
         {
             task->tState = 4; // jump to EscalatorWarpOut_Down_Ride
@@ -1892,6 +1925,7 @@ static bool8 WaterfallFieldEffect_ContinueRideOrEnd(struct Task *task, struct Ob
     gPlayerAvatar.preventStep = FALSE;
     DestroyTask(FindTaskIdByFunc(Task_UseWaterfall));
     FieldEffectActiveListRemove(FLDEFF_USE_WATERFALL);
+    FollowMe_WarpSetEnd();
     return FALSE;
 }
 
@@ -2278,6 +2312,31 @@ static void EscapeRopeWarpOutEffect_Spin(struct Task *task)
         else if (task->tSpinDelay == 0 || (--task->tSpinDelay) == 0)
         {
             ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(spinDirections[objectEvent->facingDirection]));
+            
+            if (gSaveBlock2Ptr->follower.inProgress)
+            {
+                ObjectEventClearHeldMovement(&gObjectEvents[gSaveBlock2Ptr->follower.objId]);
+                switch(objectEvent->facingDirection)
+                {
+                    case DIR_SOUTH:
+                        gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId].x2 = 0;
+                        ObjectEventSetHeldMovement(&gObjectEvents[gSaveBlock2Ptr->follower.objId], 25);
+                        break;
+                    case DIR_NORTH:
+                        gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId].x2 = 0;
+                        ObjectEventSetHeldMovement(&gObjectEvents[gSaveBlock2Ptr->follower.objId], 26);
+                        break;
+                    case DIR_WEST:
+                        gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId].x2 = 8;
+                        ObjectEventSetHeldMovement(&gObjectEvents[gSaveBlock2Ptr->follower.objId], 27);
+                        break;
+                    case DIR_EAST:
+                        gSprites[gObjectEvents[gSaveBlock2Ptr->follower.objId].spriteId].x2 = -8;
+                        ObjectEventSetHeldMovement(&gObjectEvents[gSaveBlock2Ptr->follower.objId], 28);
+                        break;
+                }
+            }
+            
             if (task->tNumTurns < 12)
                 task->tNumTurns++;
             task->tSpinDelay = 8 >> (task->tNumTurns >> 2);
@@ -3019,6 +3078,28 @@ static void SurfFieldEffect_FieldMovePose(struct Task *task)
         SetPlayerAvatarFieldMove();
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->tState++;
+        
+    #if FAST_FOLLOWERS == TRUE
+        if (FlagGet(FLAG_FOLLOWER_IN_BUILDING))
+        {
+            // in case the follower hasn't left a warp yet
+            FlagClear(FLAG_FOLLOWER_IN_BUILDING);
+            gSaveBlock2Ptr->follower.comeOutDoorStairs = 0;
+            gSaveBlock2Ptr->follower.warpEnd = 0;
+            FieldAnimateDoorClose(gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y - 1);
+        }
+        else
+            FollowerIntoPokeball();
+    #else
+        if (gSaveBlock2Ptr->follower.inProgress)
+        {
+            // in case the follower hasn't left a warp yet
+            gSaveBlock2Ptr->follower.comeOutDoorStairs = 0;
+            gSaveBlock2Ptr->follower.warpEnd = 0;
+            
+            FollowerIntoPokeball();
+        }
+    #endif
     }
 }
 
@@ -3112,10 +3193,13 @@ u8 FldEff_RayquazaSpotlight(void)
 
 u8 FldEff_NPCFlyOut(void)
 {
-    u8 spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_BIRD], 0x78, 0, 1);
-    struct Sprite *sprite = &gSprites[spriteId];
+    u8 spriteId;
+    struct Sprite *sprite;
 
-    sprite->oam.paletteNum = 0;
+    LoadFieldEffectPalette(FLDEFFOBJ_BIRD);
+    spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_BIRD], 0x78, 0, 1);
+    sprite = &gSprites[spriteId];
+
     sprite->oam.priority = 1;
     sprite->callback = SpriteCB_NPCFlyOut;
     sprite->data[1] = gFieldEffectArguments[0];
@@ -3295,9 +3379,10 @@ static u8 CreateFlyBirdSprite(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
+
+    LoadFieldEffectPalette(FLDEFFOBJ_BIRD);
     spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_BIRD], 0xff, 0xb4, 0x1);
     sprite = &gSprites[spriteId];
-    sprite->oam.paletteNum = 0;
     sprite->oam.priority = 1;
     sprite->callback = SpriteCB_FlyBirdLeaveBall;
     return spriteId;

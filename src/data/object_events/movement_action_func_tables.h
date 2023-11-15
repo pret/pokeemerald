@@ -261,6 +261,15 @@ u8 MovementAction_FlyUp_Step1(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_Fly_Finish(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_FlyDown_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_FlyDown_Step1(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_FollowingPokemon_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_FollowingPokemon_FaceSouth_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_FollowingPokemon_FaceNorth_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_FollowingPokemon_FaceWest_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_FollowingPokemon_FaceEast_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_FollowingPokemon_Shrink_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_FollowingPokemon_Shrink_Step1(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_FollowingPokemon_Grow_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_FollowingPokemon_Grow_Step1(struct ObjectEvent *, struct Sprite *);
 
 u8 (*const gMovementActionFuncs_FaceDown[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_FaceUp[])(struct ObjectEvent *, struct Sprite *);
@@ -420,6 +429,14 @@ u8 (*const gMovementActionFuncs_StopLevitateAtTop[])(struct ObjectEvent *, struc
 u8 (*const gMovementActionFuncs_Figure8[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_FlyUp[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_FlyDown[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_FlyDown[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_FollowingPokemon[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_FollowingPokemon_FaceSouth[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_FollowingPokemon_FaceNorth[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_FollowingPokemon_FaceWest[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_FollowingPokemon_FaceEast[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_FollowingPokemon_Shrink[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_FollowingPokemon_Grow[])(struct ObjectEvent *, struct Sprite *);
 
 u8 (*const *const gMovementActionFuncs[])(struct ObjectEvent *, struct Sprite *) = {
     [MOVEMENT_ACTION_FACE_DOWN] = gMovementActionFuncs_FaceDown,
@@ -580,6 +597,13 @@ u8 (*const *const gMovementActionFuncs[])(struct ObjectEvent *, struct Sprite *)
     [MOVEMENT_ACTION_FIGURE_8] = gMovementActionFuncs_Figure8,
     [MOVEMENT_ACTION_FLY_UP] = gMovementActionFuncs_FlyUp,
     [MOVEMENT_ACTION_FLY_DOWN] = gMovementActionFuncs_FlyDown,
+    [MOVEMENT_ACTION_FOLLOWING_POKEMON] = gMovementActionFuncs_FollowingPokemon,
+    [MOVEMENT_ACTION_FOLLOWING_POKEMON_FACESOUTH] = gMovementActionFuncs_FollowingPokemon_FaceSouth,
+    [MOVEMENT_ACTION_FOLLOWING_POKEMON_FACENORTH] = gMovementActionFuncs_FollowingPokemon_FaceNorth,
+    [MOVEMENT_ACTION_FOLLOWING_POKEMON_FACEWEST] = gMovementActionFuncs_FollowingPokemon_FaceWest,
+    [MOVEMENT_ACTION_FOLLOWING_POKEMON_FACEEAST] = gMovementActionFuncs_FollowingPokemon_FaceEast,
+    [MOVEMENT_ACTION_FOLLOWING_POKEMON_SHRINK] = gMovementActionFuncs_FollowingPokemon_Shrink,
+    [MOVEMENT_ACTION_FOLLOWING_POKEMON_GROW] = gMovementActionFuncs_FollowingPokemon_Grow,
 };
 
 u8 (*const gMovementActionFuncs_FaceDown[])(struct ObjectEvent *, struct Sprite *) = {
@@ -710,11 +734,15 @@ static const s16 sJumpInitDisplacements[] = {
     [JUMP_DISTANCE_IN_PLACE] = 0,
     [JUMP_DISTANCE_NORMAL] = 1,
     [JUMP_DISTANCE_FAR] = 1,
+    [JUMP_DISTANCE_FAR_QUICK] = 1,
+    [JUMP_DISTANCE_FAR_QUICKER] = 1,
 };
 static const s16 sJumpDisplacements[] = {
     [JUMP_DISTANCE_IN_PLACE] = 0,
     [JUMP_DISTANCE_NORMAL] = 0,
     [JUMP_DISTANCE_FAR] = 1,
+    [JUMP_DISTANCE_FAR_QUICK] = 1,
+    [JUMP_DISTANCE_FAR_QUICKER] = 1,
 };
 
 u8 (*const gMovementActionFuncs_Jump2Down[])(struct ObjectEvent *, struct Sprite *) = {

@@ -682,6 +682,7 @@ static void CB2_EndWildBattle(void)
     {
         SetMainCallback2(CB2_ReturnToField);
         gFieldCallback = FieldCB_ReturnToFieldNoScriptCheckMusic;
+        UpdateFollowerPokemonGraphic();
     }
 }
 
@@ -700,6 +701,7 @@ static void CB2_EndScriptedWildBattle(void)
     else
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        UpdateFollowerPokemonGraphic();
     }
 }
 
@@ -1393,6 +1395,7 @@ static void CB2_EndTrainerBattle(void)
     else
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        UpdateFollowerPokemonGraphic();
         if (!InBattlePyramid() && !InTrainerHillChallenge())
         {
             RegisterTrainerInMatchCall();
@@ -1414,6 +1417,7 @@ static void CB2_EndRematchBattle(void)
     else
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        UpdateFollowerPokemonGraphic();
         RegisterTrainerInMatchCall();
         SetBattledTrainersFlags();
         HandleRematchVarsOnBattleEnd();
