@@ -35,15 +35,15 @@
 #include "confetti_util.h"
 #include "constants/rgb.h"
 
-#define HALL_OF_FAME_MAX_TEAMS 50
+#define HALL_OF_FAME_MAX_TEAMS 30
 #define TAG_CONFETTI 1001
 
 struct HallofFameMon
 {
     u32 tid;
     u32 personality;
-    u16 species:9;
-    u16 lvl:7;
+    u16 species;
+    u8 lvl;
     u8 nickname[POKEMON_NAME_LENGTH];
 };
 
@@ -929,7 +929,7 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
             if (currMon->species == SPECIES_EGG)
                 posY += 10;
 
-            spriteId = CreateMonPicSprite_HandleDeoxys(currMon->species, currMon->tid, currMon->personality, TRUE, posX, posY, i, TAG_NONE);
+            spriteId = CreateMonPicSprite(currMon->species, currMon->tid, currMon->personality, TRUE, posX, posY, i, TAG_NONE);
             gSprites[spriteId].oam.priority = 1;
             gTasks[taskId].tMonSpriteId(i) = spriteId;
         }
@@ -1161,7 +1161,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
         AddTextPrinterParameterized3(0, FONT_NORMAL, width, 1, sMonInfoTextColors, TEXT_SKIP_DRAW, text);
 
         text[0] = CHAR_SLASH;
-        stringPtr = StringCopy(text + 1, gSpeciesNames[currMon->species]);
+        stringPtr = StringCopy(text + 1, GetSpeciesName(currMon->species));
 
         if (currMon->species != SPECIES_NIDORAN_M && currMon->species != SPECIES_NIDORAN_F)
         {

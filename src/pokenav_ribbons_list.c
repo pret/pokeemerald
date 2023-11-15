@@ -668,7 +668,7 @@ static void DrawListIndexNumber(s32 windowId, s32 index, s32 max)
     u8 strbuf[16];
     u32 x;
 
-    u8 * ptr = strbuf;
+    u8 *ptr = strbuf;
     ptr = ConvertIntToDecimalStringN(ptr, index, STR_CONV_MODE_RIGHT_ALIGN, 3);
     *ptr++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(ptr, max, STR_CONV_MODE_RIGHT_ALIGN, 3);
@@ -695,12 +695,12 @@ static void CreateRibbonMonsList(void)
 }
 
 // Buffers the "Nickname gender/level" text for the ribbon mon list
-static void BufferRibbonMonInfoText(struct PokenavListItem * listItem, u8 * dest)
+static void BufferRibbonMonInfoText(struct PokenavListItem * listItem, u8 *dest)
 {
     u8 gender;
     u8 level;
-    u8 * s;
-    const u8 * genderStr;
+    u8 *s;
+    const u8 *genderStr;
     struct PokenavMonListItem * item = (struct PokenavMonListItem *)listItem;
 
     // Mon is in party

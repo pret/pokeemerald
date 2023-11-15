@@ -21,6 +21,7 @@
 #include "util.h"
 #include "constants/songs.h"
 #include "constants/battle_arena.h"
+#include "constants/battle_move_effects.h"
 #include "constants/battle_string_ids.h"
 #include "constants/battle_frontier.h"
 #include "constants/frontier_util.h"
@@ -47,232 +48,6 @@ enum {
     ANIM_ICON_TRIANGLE, // Tie
     ANIM_ICON_CIRCLE,   // Player won
     ANIM_ICON_LINE,     // Line segment for separating the score total at the bottom
-};
-
-// This table holds the number of points to add to the 'mind' score for each move.
-// All moves with power != 0 give 1 point, with the following exceptions:
-//    - Counter, Mirror Coat, and Bide give 0 points
-//    - Fake Out subtracts 1 point
-// All moves with power == 0 give 0 points, with the following exceptions:
-//    - Protect, Detect, and Endure subtract 1 point
-static const s8 sMindRatings[MOVES_COUNT] =
-{
-    [MOVE_POUND] = 1,
-    [MOVE_KARATE_CHOP] = 1,
-    [MOVE_DOUBLE_SLAP] = 1,
-    [MOVE_COMET_PUNCH] = 1,
-    [MOVE_MEGA_PUNCH] = 1,
-    [MOVE_PAY_DAY] = 1,
-    [MOVE_FIRE_PUNCH] = 1,
-    [MOVE_ICE_PUNCH] = 1,
-    [MOVE_THUNDER_PUNCH] = 1,
-    [MOVE_SCRATCH] = 1,
-    [MOVE_VICE_GRIP] = 1,
-    [MOVE_GUILLOTINE] = 1,
-    [MOVE_RAZOR_WIND] = 1,
-    [MOVE_CUT] = 1,
-    [MOVE_GUST] = 1,
-    [MOVE_WING_ATTACK] = 1,
-    [MOVE_FLY] = 1,
-    [MOVE_BIND] = 1,
-    [MOVE_SLAM] = 1,
-    [MOVE_VINE_WHIP] = 1,
-    [MOVE_STOMP] = 1,
-    [MOVE_DOUBLE_KICK] = 1,
-    [MOVE_MEGA_KICK] = 1,
-    [MOVE_JUMP_KICK] = 1,
-    [MOVE_ROLLING_KICK] = 1,
-    [MOVE_HEADBUTT] = 1,
-    [MOVE_HORN_ATTACK] = 1,
-    [MOVE_FURY_ATTACK] = 1,
-    [MOVE_HORN_DRILL] = 1,
-    [MOVE_TACKLE] = 1,
-    [MOVE_BODY_SLAM] = 1,
-    [MOVE_WRAP] = 1,
-    [MOVE_TAKE_DOWN] = 1,
-    [MOVE_THRASH] = 1,
-    [MOVE_DOUBLE_EDGE] = 1,
-    [MOVE_POISON_STING] = 1,
-    [MOVE_TWINEEDLE] = 1,
-    [MOVE_PIN_MISSILE] = 1,
-    [MOVE_BITE] = 1,
-    [MOVE_SONIC_BOOM] = 1,
-    [MOVE_ACID] = 1,
-    [MOVE_EMBER] = 1,
-    [MOVE_FLAMETHROWER] = 1,
-    [MOVE_WATER_GUN] = 1,
-    [MOVE_HYDRO_PUMP] = 1,
-    [MOVE_SURF] = 1,
-    [MOVE_ICE_BEAM] = 1,
-    [MOVE_BLIZZARD] = 1,
-    [MOVE_PSYBEAM] = 1,
-    [MOVE_BUBBLE_BEAM] = 1,
-    [MOVE_AURORA_BEAM] = 1,
-    [MOVE_HYPER_BEAM] = 1,
-    [MOVE_PECK] = 1,
-    [MOVE_DRILL_PECK] = 1,
-    [MOVE_SUBMISSION] = 1,
-    [MOVE_LOW_KICK] = 1,
-    [MOVE_SEISMIC_TOSS] = 1,
-    [MOVE_STRENGTH] = 1,
-    [MOVE_ABSORB] = 1,
-    [MOVE_MEGA_DRAIN] = 1,
-    [MOVE_RAZOR_LEAF] = 1,
-    [MOVE_SOLAR_BEAM] = 1,
-    [MOVE_PETAL_DANCE] = 1,
-    [MOVE_DRAGON_RAGE] = 1,
-    [MOVE_FIRE_SPIN] = 1,
-    [MOVE_THUNDER_SHOCK] = 1,
-    [MOVE_THUNDERBOLT] = 1,
-    [MOVE_THUNDER] = 1,
-    [MOVE_ROCK_THROW] = 1,
-    [MOVE_EARTHQUAKE] = 1,
-    [MOVE_FISSURE] = 1,
-    [MOVE_DIG] = 1,
-    [MOVE_CONFUSION] = 1,
-    [MOVE_PSYCHIC] = 1,
-    [MOVE_QUICK_ATTACK] = 1,
-    [MOVE_RAGE] = 1,
-    [MOVE_NIGHT_SHADE] = 1,
-    [MOVE_SELF_DESTRUCT] = 1,
-    [MOVE_EGG_BOMB] = 1,
-    [MOVE_LICK] = 1,
-    [MOVE_SMOG] = 1,
-    [MOVE_SLUDGE] = 1,
-    [MOVE_BONE_CLUB] = 1,
-    [MOVE_FIRE_BLAST] = 1,
-    [MOVE_WATERFALL] = 1,
-    [MOVE_CLAMP] = 1,
-    [MOVE_SWIFT] = 1,
-    [MOVE_SKULL_BASH] = 1,
-    [MOVE_SPIKE_CANNON] = 1,
-    [MOVE_CONSTRICT] = 1,
-    [MOVE_HI_JUMP_KICK] = 1,
-    [MOVE_DREAM_EATER] = 1,
-    [MOVE_BARRAGE] = 1,
-    [MOVE_LEECH_LIFE] = 1,
-    [MOVE_SKY_ATTACK] = 1,
-    [MOVE_BUBBLE] = 1,
-    [MOVE_DIZZY_PUNCH] = 1,
-    [MOVE_PSYWAVE] = 1,
-    [MOVE_CRABHAMMER] = 1,
-    [MOVE_EXPLOSION] = 1,
-    [MOVE_FURY_SWIPES] = 1,
-    [MOVE_BONEMERANG] = 1,
-    [MOVE_ROCK_SLIDE] = 1,
-    [MOVE_HYPER_FANG] = 1,
-    [MOVE_TRI_ATTACK] = 1,
-    [MOVE_SUPER_FANG] = 1,
-    [MOVE_SLASH] = 1,
-    [MOVE_STRUGGLE] = 1,
-    [MOVE_TRIPLE_KICK] = 1,
-    [MOVE_THIEF] = 1,
-    [MOVE_FLAME_WHEEL] = 1,
-    [MOVE_SNORE] = 1,
-    [MOVE_FLAIL] = 1,
-    [MOVE_AEROBLAST] = 1,
-    [MOVE_REVERSAL] = 1,
-    [MOVE_POWDER_SNOW] = 1,
-    [MOVE_PROTECT] = -1,
-    [MOVE_MACH_PUNCH] = 1,
-    [MOVE_FAINT_ATTACK] = 1,
-    [MOVE_SLUDGE_BOMB] = 1,
-    [MOVE_MUD_SLAP] = 1,
-    [MOVE_OCTAZOOKA] = 1,
-    [MOVE_ZAP_CANNON] = 1,
-    [MOVE_ICY_WIND] = 1,
-    [MOVE_DETECT] = -1,
-    [MOVE_BONE_RUSH] = 1,
-    [MOVE_OUTRAGE] = 1,
-    [MOVE_GIGA_DRAIN] = 1,
-    [MOVE_ENDURE] = -1,
-    [MOVE_ROLLOUT] = 1,
-    [MOVE_FALSE_SWIPE] = 1,
-    [MOVE_SPARK] = 1,
-    [MOVE_FURY_CUTTER] = 1,
-    [MOVE_STEEL_WING] = 1,
-    [MOVE_RETURN] = 1,
-    [MOVE_PRESENT] = 1,
-    [MOVE_FRUSTRATION] = 1,
-    [MOVE_SACRED_FIRE] = 1,
-    [MOVE_MAGNITUDE] = 1,
-    [MOVE_DYNAMIC_PUNCH] = 1,
-    [MOVE_MEGAHORN] = 1,
-    [MOVE_DRAGON_BREATH] = 1,
-    [MOVE_PURSUIT] = 1,
-    [MOVE_RAPID_SPIN] = 1,
-    [MOVE_IRON_TAIL] = 1,
-    [MOVE_METAL_CLAW] = 1,
-    [MOVE_VITAL_THROW] = 1,
-    [MOVE_HIDDEN_POWER] = 1,
-    [MOVE_CROSS_CHOP] = 1,
-    [MOVE_TWISTER] = 1,
-    [MOVE_CRUNCH] = 1,
-    [MOVE_EXTREME_SPEED] = 1,
-    [MOVE_ANCIENT_POWER] = 1,
-    [MOVE_SHADOW_BALL] = 1,
-    [MOVE_FUTURE_SIGHT] = 1,
-    [MOVE_ROCK_SMASH] = 1,
-    [MOVE_WHIRLPOOL] = 1,
-    [MOVE_BEAT_UP] = 1,
-    [MOVE_FAKE_OUT] = -1,
-    [MOVE_UPROAR] = 1,
-    [MOVE_SPIT_UP] = 1,
-    [MOVE_HEAT_WAVE] = 1,
-    [MOVE_FACADE] = 1,
-    [MOVE_FOCUS_PUNCH] = 1,
-    [MOVE_SMELLING_SALT] = 1,
-    [MOVE_SUPERPOWER] = 1,
-    [MOVE_REVENGE] = 1,
-    [MOVE_BRICK_BREAK] = 1,
-    [MOVE_KNOCK_OFF] = 1,
-    [MOVE_ENDEAVOR] = 1,
-    [MOVE_ERUPTION] = 1,
-    [MOVE_SECRET_POWER] = 1,
-    [MOVE_DIVE] = 1,
-    [MOVE_ARM_THRUST] = 1,
-    [MOVE_LUSTER_PURGE] = 1,
-    [MOVE_MIST_BALL] = 1,
-    [MOVE_BLAZE_KICK] = 1,
-    [MOVE_ICE_BALL] = 1,
-    [MOVE_NEEDLE_ARM] = 1,
-    [MOVE_HYPER_VOICE] = 1,
-    [MOVE_POISON_FANG] = 1,
-    [MOVE_CRUSH_CLAW] = 1,
-    [MOVE_BLAST_BURN] = 1,
-    [MOVE_HYDRO_CANNON] = 1,
-    [MOVE_METEOR_MASH] = 1,
-    [MOVE_ASTONISH] = 1,
-    [MOVE_WEATHER_BALL] = 1,
-    [MOVE_AIR_CUTTER] = 1,
-    [MOVE_OVERHEAT] = 1,
-    [MOVE_ROCK_TOMB] = 1,
-    [MOVE_SILVER_WIND] = 1,
-    [MOVE_WATER_SPOUT] = 1,
-    [MOVE_SIGNAL_BEAM] = 1,
-    [MOVE_SHADOW_PUNCH] = 1,
-    [MOVE_EXTRASENSORY] = 1,
-    [MOVE_SKY_UPPERCUT] = 1,
-    [MOVE_SAND_TOMB] = 1,
-    [MOVE_SHEER_COLD] = 1,
-    [MOVE_MUDDY_WATER] = 1,
-    [MOVE_BULLET_SEED] = 1,
-    [MOVE_AERIAL_ACE] = 1,
-    [MOVE_ICICLE_SPEAR] = 1,
-    [MOVE_DRAGON_CLAW] = 1,
-    [MOVE_FRENZY_PLANT] = 1,
-    [MOVE_BOUNCE] = 1,
-    [MOVE_MUD_SHOT] = 1,
-    [MOVE_POISON_TAIL] = 1,
-    [MOVE_COVET] = 1,
-    [MOVE_VOLT_TACKLE] = 1,
-    [MOVE_MAGICAL_LEAF] = 1,
-    [MOVE_LEAF_BLADE] = 1,
-    [MOVE_ROCK_BLAST] = 1,
-    [MOVE_SHOCK_WAVE] = 1,
-    [MOVE_WATER_PULSE] = 1,
-    [MOVE_DOOM_DESIRE] = 1,
-    [MOVE_PSYCHO_BOOST] = 1,
 };
 
 static const struct OamData sOam_JudgmentIcon =
@@ -582,7 +357,26 @@ void BattleArena_InitPoints(void)
 
 void BattleArena_AddMindPoints(u8 battler)
 {
-    gBattleStruct->arenaMindPoints[battler] += sMindRatings[gCurrentMove];
+// All moves with power != 0 give 1 point, with the following exceptions:
+//    - Counter, Mirror Coat, and Bide give 0 points
+//    - Fake Out subtracts 1 point
+// All moves with power == 0 give 0 points, with the following exceptions:
+//    - Protect, Detect, and Endure subtract 1 point
+
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_FAKE_OUT
+     || gBattleMoves[gCurrentMove].effect == EFFECT_PROTECT
+     || gBattleMoves[gCurrentMove].effect == EFFECT_ENDURE)
+    {
+        gBattleStruct->arenaMindPoints[battler]--;
+    }
+    else if (gBattleMoves[gCurrentMove].power != 0
+          && gBattleMoves[gCurrentMove].effect != EFFECT_COUNTER
+          && gBattleMoves[gCurrentMove].effect != EFFECT_MIRROR_COAT
+          && gBattleMoves[gCurrentMove].effect != EFFECT_METAL_BURST
+          && gBattleMoves[gCurrentMove].effect != EFFECT_BIDE)
+    {
+        gBattleStruct->arenaMindPoints[battler]++;
+    }
 }
 
 void BattleArena_AddSkillPoints(u8 battler)

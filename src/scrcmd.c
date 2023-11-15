@@ -51,7 +51,7 @@
 #include "constants/event_objects.h"
 
 typedef u16 (*SpecialFunc)(void);
-typedef void (*NativeFunc)(void);
+typedef void (*NativeFunc)(struct ScriptContext *ctx);
 
 EWRAM_DATA const u8 *gRamScriptRetAddr = NULL;
 static EWRAM_DATA u32 sAddressOffset = 0; // For relative addressing in vgoto etc., used by saved scripts (e.g. Mystery Event)
@@ -62,6 +62,7 @@ static EWRAM_DATA u16 sMovingNpcMapNum = 0;
 static EWRAM_DATA u16 sFieldEffectScriptId = 0;
 
 static u8 sBrailleWindowId;
+static bool8 gIsScriptedWildDouble;
 
 extern const SpecialFunc gSpecials[];
 extern const u8 *gStdScripts[];
@@ -84,7 +85,7 @@ static const u8 sScriptConditionTable[6][3] =
     {1, 0, 1}, // !=
 };
 
-static u8 * const sScriptStringVars[] =
+static u8 *const sScriptStringVars[] =
 {
     gStringVar1,
     gStringVar2,
@@ -135,7 +136,7 @@ bool8 ScrCmd_callnative(struct ScriptContext *ctx)
 {
     NativeFunc func = (NativeFunc)ScriptReadWord(ctx);
 
-    func();
+    func(ctx);
     return FALSE;
 }
 
@@ -1551,7 +1552,7 @@ bool8 ScrCmd_bufferspeciesname(struct ScriptContext *ctx)
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 species = VarGet(ScriptReadHalfword(ctx));
 
-    StringCopy(sScriptStringVars[stringVarIndex], gSpeciesNames[species]);
+    StringCopy(sScriptStringVars[stringVarIndex], GetSpeciesName(species));
     return FALSE;
 }
 
@@ -1562,7 +1563,7 @@ bool8 ScrCmd_bufferleadmonspeciesname(struct ScriptContext *ctx)
     u8 *dest = sScriptStringVars[stringVarIndex];
     u8 partyIndex = GetLeadMonIndex();
     u32 species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES, NULL);
-    StringCopy(dest, gSpeciesNames[species]);
+    StringCopy(dest, GetSpeciesName(species));
     return FALSE;
 }
 
@@ -1871,15 +1872,33 @@ bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
     u16 species = ScriptReadHalfword(ctx);
     u8 level = ScriptReadByte(ctx);
     u16 item = ScriptReadHalfword(ctx);
+    u16 species2 = ScriptReadHalfword(ctx);
+    u8 level2 = ScriptReadByte(ctx);
+    u16 item2 = ScriptReadHalfword(ctx);
 
-    CreateScriptedWildMon(species, level, item);
+    if(species2 == SPECIES_NONE)
+    {
+        CreateScriptedWildMon(species, level, item);
+        gIsScriptedWildDouble = FALSE;
+    }
+    else
+    {
+        CreateScriptedDoubleWildMon(species, level, item, species2, level2, item2);
+        gIsScriptedWildDouble = TRUE;
+    }
+
     return FALSE;
 }
 
 bool8 ScrCmd_dowildbattle(struct ScriptContext *ctx)
 {
-    BattleSetup_StartScriptedWildBattle();
+    if (gIsScriptedWildDouble == FALSE)
+        BattleSetup_StartScriptedWildBattle();
+    else
+        BattleSetup_StartScriptedDoubleWildBattle();
+
     ScriptContext_Stop();
+
     return TRUE;
 }
 

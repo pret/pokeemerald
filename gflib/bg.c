@@ -928,7 +928,7 @@ void CopyToBgTilemapBufferRect(u8 bg, const void *src, u8 destX, u8 destY, u8 wi
         }
         case BG_TYPE_AFFINE:
         {
-            const u8 * srcCopy = src;
+            const u8 *srcCopy = src;
             mode = GetBgMetricAffineMode(bg, 0x1);
             for (destY16 = destY; destY16 < (destY + height); destY16++)
             {

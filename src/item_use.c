@@ -1,6 +1,7 @@
 #include "global.h"
 #include "item_use.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "berry.h"
@@ -17,6 +18,7 @@
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
 #include "field_weather.h"
+#include "fldeff.h"
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
@@ -66,10 +68,14 @@ static void Task_ShowTMHMContainedMessage(u8);
 static void UseTMHMYesNo(u8);
 static void UseTMHM(u8);
 static void Task_StartUseRepel(u8);
+static void Task_StartUseLure(u8 taskId);
 static void Task_UseRepel(u8);
+static void Task_UseLure(u8 taskId);
 static void Task_CloseCantUseKeyItemMessage(u8);
 static void SetDistanceOfClosestHiddenItem(u8, s16, s16);
 static void CB2_OpenPokeblockFromBag(void);
+static void ItemUseOnFieldCB_Honey(u8 taskId);
+static bool32 CannotUseBagBattleItem(u16 itemId);
 
 // EWRAM variables
 EWRAM_DATA static void(*sItemUseOnFieldCB)(u8 taskId) = NULL;
@@ -81,9 +87,10 @@ EWRAM_DATA static void(*sItemUseOnFieldCB)(u8 taskId) = NULL;
 // Never occurs in vanilla, but can occur with improperly created items
 static const MainCallback sItemUseCallbacks[] =
 {
-    [ITEM_USE_PARTY_MENU - 1]  = CB2_ShowPartyMenuForItemUse,
-    [ITEM_USE_FIELD - 1]       = CB2_ReturnToField,
-    [ITEM_USE_PBLOCK_CASE - 1] = NULL,
+    [ITEM_USE_PARTY_MENU - 1]       = CB2_ShowPartyMenuForItemUse,
+    [ITEM_USE_FIELD - 1]            = CB2_ReturnToField,
+    [ITEM_USE_PBLOCK_CASE - 1]      = NULL,
+    [ITEM_USE_PARTY_MENU_MOVES - 1] = CB2_ShowPartyMenuForItemUse,
 };
 
 static const u8 sClockwiseDirections[] = {DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST};
@@ -98,7 +105,7 @@ static const struct YesNoFuncTable sUseTMHMYesNoFuncTable =
 static void SetUpItemUseCallback(u8 taskId)
 {
     u8 type;
-    if (gSpecialVar_ItemId == ITEM_ENIGMA_BERRY)
+    if (gSpecialVar_ItemId == ITEM_ENIGMA_BERRY_E_READER)
         type = gTasks[taskId].tEnigmaBerryType - 1;
     else
         type = ItemId_GetType(gSpecialVar_ItemId) - 1;
@@ -191,6 +198,33 @@ void ItemUseOutOfBattle_Mail(u8 taskId)
 {
     gBagMenu->newScreenCallback = CB2_CheckMail;
     Task_FadeAndCloseBagMenu(taskId);
+}
+
+STATIC_ASSERT(I_EXP_SHARE_ITEM < GEN_6 || I_EXP_SHARE_FLAG > TEMP_FLAGS_END, YouNeedToSetAFlagToUseGen6ExpShare);
+
+void ItemUseOutOfBattle_ExpShare(u8 taskId)
+{
+#if I_EXP_SHARE_ITEM >= GEN_6
+    if (IsGen6ExpShareEnabled())
+    {
+        PlaySE(SE_PC_OFF);
+        if (!gTasks[taskId].data[2]) // to account for pressing select in the overworld
+            DisplayItemMessageOnField(taskId, gText_ExpShareOff, Task_CloseCantUseKeyItemMessage);
+        else
+            DisplayItemMessage(taskId, FONT_NORMAL, gText_ExpShareOff, CloseItemMessage);
+    }
+    else
+    {
+        PlaySE(SE_EXP_MAX);
+        if (!gTasks[taskId].data[2]) // to account for pressing select in the overworld
+            DisplayItemMessageOnField(taskId, gText_ExpShareOn, Task_CloseCantUseKeyItemMessage);
+        else
+            DisplayItemMessage(taskId, FONT_NORMAL, gText_ExpShareOn, CloseItemMessage);
+    }
+    FlagToggle(I_EXP_SHARE_FLAG);
+#else
+    DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+#endif
 }
 
 void ItemUseOutOfBattle_Bike(u8 taskId)
@@ -749,6 +783,18 @@ void ItemUseOutOfBattle_Medicine(u8 taskId)
     SetUpItemUseCallback(taskId);
 }
 
+void ItemUseOutOfBattle_AbilityCapsule(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_AbilityCapsule;
+    SetUpItemUseCallback(taskId);
+}
+
+void ItemUseOutOfBattle_AbilityPatch(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_AbilityPatch;
+    SetUpItemUseCallback(taskId);
+}
+
 void ItemUseOutOfBattle_ReduceEV(u8 taskId)
 {
     gItemUseCB = ItemUseCB_ReduceEV;
@@ -833,7 +879,7 @@ static void RemoveUsedItem(void)
 
 void ItemUseOutOfBattle_Repel(u8 taskId)
 {
-    if (VarGet(VAR_REPEL_STEP_COUNT) == 0)
+    if (REPEL_STEP_COUNT == 0)
         gTasks[taskId].func = Task_StartUseRepel;
     else if (!InBattlePyramid())
         DisplayItemMessage(taskId, FONT_NORMAL, gText_RepelEffectsLingered, CloseItemMessage);
@@ -858,12 +904,66 @@ static void Task_UseRepel(u8 taskId)
     if (!IsSEPlaying())
     {
         VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_ItemId));
+    #if VAR_LAST_REPEL_LURE_USED != 0
+        VarSet(VAR_LAST_REPEL_LURE_USED, gSpecialVar_ItemId);
+    #endif
         RemoveUsedItem();
         if (!InBattlePyramid())
             DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, gStringVar4, Task_CloseBattlePyramidBagMessage);
     }
+}
+void HandleUseExpiredRepel(struct ScriptContext *ctx)
+{
+#if VAR_LAST_REPEL_LURE_USED != 0
+    VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(VarGet(VAR_LAST_REPEL_LURE_USED)));
+#endif
+}
+
+void ItemUseOutOfBattle_Lure(u8 taskId)
+{
+    if (LURE_STEP_COUNT == 0)
+        gTasks[taskId].func = Task_StartUseLure;
+    else if (!InBattlePyramid())
+        DisplayItemMessage(taskId, FONT_NORMAL, gText_LureEffectsLingered, CloseItemMessage);
+    else
+        DisplayItemMessageInBattlePyramid(taskId, gText_LureEffectsLingered, Task_CloseBattlePyramidBagMessage);
+}
+
+static void Task_StartUseLure(u8 taskId)
+{
+    s16* data = gTasks[taskId].data;
+
+    if (++data[8] > 7)
+    {
+        data[8] = 0;
+        PlaySE(SE_REPEL);
+        gTasks[taskId].func = Task_UseLure;
+    }
+}
+
+static void Task_UseLure(u8 taskId)
+{
+    if (!IsSEPlaying())
+    {
+        VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_ItemId) | REPEL_LURE_MASK);
+    #if VAR_LAST_REPEL_LURE_USED != 0
+        VarSet(VAR_LAST_REPEL_LURE_USED, gSpecialVar_ItemId);
+    #endif
+        RemoveUsedItem();
+        if (!InBattlePyramid())
+            DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
+        else
+            DisplayItemMessageInBattlePyramid(taskId, gStringVar4, Task_CloseBattlePyramidBagMessage);
+    }
+}
+
+void HandleUseExpiredLure(struct ScriptContext *ctx)
+{
+#if VAR_LAST_REPEL_LURE_USED != 0
+    VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(VarGet(VAR_LAST_REPEL_LURE_USED)) | REPEL_LURE_MASK);
+#endif
 }
 
 static void Task_UsedBlackWhiteFlute(u8 taskId)
@@ -907,7 +1007,12 @@ void Task_UseDigEscapeRopeOnField(u8 taskId)
 static void ItemUseOnFieldCB_EscapeRope(u8 taskId)
 {
     Overworld_ResetStateAfterDigEscRope();
-    RemoveUsedItem();
+    #if I_KEY_ESCAPE_ROPE < GEN_8
+        RemoveUsedItem();
+    #else
+        CopyItemName(gSpecialVar_ItemId, gStringVar2);
+        StringExpandPlaceholders(gStringVar4, gText_PlayerUsedVar2);
+    #endif
     gTasks[taskId].data[0] = 0;
     DisplayItemMessageOnField(taskId, gStringVar4, Task_UseDigEscapeRopeOnField);
 }
@@ -939,22 +1044,70 @@ void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
     SetUpItemUseCallback(taskId);
 }
 
+static u32 GetBallThrowableState(void)
+{
+    if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
+     && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
+        return BALL_THROW_UNABLE_TWO_MONS;
+    else if (IsPlayerPartyAndPokemonStorageFull() == TRUE)
+        return BALL_THROW_UNABLE_NO_ROOM;
+#if B_SEMI_INVULNERABLE_CATCH >= GEN_4
+    else if (gStatuses3[GetCatchingBattler()] & STATUS3_SEMI_INVULNERABLE)
+        return BALL_THROW_UNABLE_SEMI_INVULNERABLE;
+#endif
+    else if (FlagGet(B_FLAG_NO_CATCHING))
+        return BALL_THROW_UNABLE_DISABLED_FLAG;
+
+    return BALL_THROW_ABLE;
+}
+
+bool32 CanThrowBall(void)
+{
+    return (GetBallThrowableState() == BALL_THROW_ABLE);
+}
+
+static const u8 sText_CantThrowPokeBall_TwoMons[] = _("Cannot throw a ball!\nThere are two Pokémon out there!\p");
+static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a ball!\nThere's no Pokémon in sight!\p");
+static const u8 sText_CantThrowPokeBall_Disabled[] = _("POKé BALLS cannot be used\nright now!\p");
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
-    if (IsPlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
+    switch (GetBallThrowableState())
     {
+    case BALL_THROW_ABLE:
+    default:
         RemoveBagItem(gSpecialVar_ItemId, 1);
         if (!InBattlePyramid())
             Task_FadeAndCloseBagMenu(taskId);
         else
             CloseBattlePyramidBag(taskId);
+        break;
+    case BALL_THROW_UNABLE_TWO_MONS:
+        if (!InBattlePyramid())
+            DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_TwoMons, CloseItemMessage);
+        else
+            DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_TwoMons, Task_CloseBattlePyramidBagMessage);
+        break;
+    case BALL_THROW_UNABLE_NO_ROOM:
+        if (!InBattlePyramid())
+            DisplayItemMessage(taskId, FONT_NORMAL, gText_BoxFull, CloseItemMessage);
+        else
+            DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, Task_CloseBattlePyramidBagMessage);
+        break;
+#if B_SEMI_INVULNERABLE_CATCH >= GEN_4
+    case BALL_THROW_UNABLE_SEMI_INVULNERABLE:
+        if (!InBattlePyramid())
+            DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_SemiInvulnerable, CloseItemMessage);
+        else
+            DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_SemiInvulnerable, Task_CloseBattlePyramidBagMessage);
+        break;
+#endif
+    case BALL_THROW_UNABLE_DISABLED_FLAG:
+        if (!InBattlePyramid())
+            DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_Disabled, CloseItemMessage);
+        else
+            DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_Disabled, Task_CloseBattlePyramidBagMessage);
+        break;
     }
-    else if (!InBattlePyramid())
-    {
-        DisplayItemMessage(taskId, FONT_NORMAL, gText_BoxFull, CloseItemMessage);
-    }
-    else
-        DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, Task_CloseBattlePyramidBagMessage);
 }
 
 static void Task_CloseStatIncreaseMessage(u8 taskId)
@@ -981,25 +1134,6 @@ static void Task_UseStatIncreaseItem(u8 taskId)
     }
 }
 
-// e.g. X Attack, Guard Spec
-void ItemUseInBattle_StatIncrease(u8 taskId)
-{
-    u16 partyId = gBattlerPartyIndexes[gBattlerInMenuId];
-
-    if (ExecuteTableBasedItemEffect(&gPlayerParty[partyId], gSpecialVar_ItemId, partyId, 0) != FALSE)
-    {
-        if (!InBattlePyramid())
-            DisplayItemMessage(taskId, FONT_NORMAL, gText_WontHaveEffect, CloseItemMessage);
-        else
-            DisplayItemMessageInBattlePyramid(taskId, gText_WontHaveEffect, Task_CloseBattlePyramidBagMessage);
-    }
-    else
-    {
-        gTasks[taskId].func = Task_UseStatIncreaseItem;
-        gTasks[taskId].data[8] = 0;
-    }
-}
-
 static void ItemUseInBattle_ShowPartyMenu(u8 taskId)
 {
     if (!InBattlePyramid())
@@ -1014,40 +1148,119 @@ static void ItemUseInBattle_ShowPartyMenu(u8 taskId)
     }
 }
 
-void ItemUseInBattle_Medicine(u8 taskId)
+void ItemUseInBattle_PartyMenu(u8 taskId)
 {
-    gItemUseCB = ItemUseCB_Medicine;
+    gItemUseCB = ItemUseCB_BattleScript;
     ItemUseInBattle_ShowPartyMenu(taskId);
 }
 
-// Unused. Sacred Ash cannot be used in battle
-void ItemUseInBattle_SacredAsh(u8 taskId)
+void ItemUseInBattle_PartyMenuChooseMove(u8 taskId)
 {
-    gItemUseCB = ItemUseCB_SacredAsh;
+    gItemUseCB = ItemUseCB_BattleChooseMove;
     ItemUseInBattle_ShowPartyMenu(taskId);
 }
 
-void ItemUseInBattle_PPRecovery(u8 taskId)
+// Returns whether an item can be used in battle and sets the fail text.
+static bool32 CannotUseBagBattleItem(u16 itemId)
 {
-    gItemUseCB = ItemUseCB_PPRecovery;
-    ItemUseInBattle_ShowPartyMenu(taskId);
-}
+    u8 cannotUse = FALSE;
+    u16 battleUsage = ItemId_GetBattleUsage(itemId);
+    const u8* failStr = NULL;
 
-// Fluffy Tail / Poke Doll
-void ItemUseInBattle_Escape(u8 taskId)
-{
-
-    if((gBattleTypeFlags & BATTLE_TYPE_TRAINER) == FALSE)
+    // Embargo Check
+    if ((gPartyMenu.slotId == 0 && gStatuses3[B_POSITION_PLAYER_LEFT] & STATUS3_EMBARGO)
+        || (gPartyMenu.slotId == 1 && gStatuses3[B_POSITION_PLAYER_RIGHT] & STATUS3_EMBARGO))
     {
-        RemoveUsedItem();
+        return TRUE;
+    }
+    // X-Items
+    if (battleUsage == EFFECT_ITEM_INCREASE_STAT
+        && gBattleMons[gBattlerInMenuId].statStages[gItemEffectTable[itemId][1]] == MAX_STAT_STAGE)
+    {
+        cannotUse++;
+    }
+    // Dire Hit
+    if (battleUsage == EFFECT_ITEM_SET_FOCUS_ENERGY
+        && (gBattleMons[gBattlerInMenuId].status2 & STATUS2_FOCUS_ENERGY))
+    {
+        cannotUse++;
+    }
+    // Guard Spec
+    if (battleUsage == EFFECT_ITEM_SET_MIST
+        && gSideStatuses[GetBattlerSide(gBattlerInMenuId)] & SIDE_STATUS_MIST)
+    {
+        cannotUse++;
+    }
+    // Escape Items
+    if (battleUsage == EFFECT_ITEM_ESCAPE
+        && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    {
+        cannotUse++;
+    }
+    // Poke Balls
+    if (battleUsage == EFFECT_ITEM_THROW_BALL)
+    {
+        switch (GetBallThrowableState())
+        {
+            case BALL_THROW_UNABLE_TWO_MONS:
+                failStr = sText_CantThrowPokeBall_TwoMons;
+                cannotUse++;
+                break;
+            case BALL_THROW_UNABLE_NO_ROOM:
+                failStr = gText_BoxFull;
+                cannotUse++;
+                break;
+        #if B_SEMI_INVULNERABLE_CATCH >= GEN_4
+            case BALL_THROW_UNABLE_SEMI_INVULNERABLE:
+                failStr = sText_CantThrowPokeBall_SemiInvulnerable;
+                cannotUse++;
+                break;
+        #endif
+            case BALL_THROW_UNABLE_DISABLED_FLAG:
+                failStr = sText_CantThrowPokeBall_Disabled;
+                cannotUse++;
+                break;
+        }
+    }
+    // Max Mushrooms
+    if (battleUsage == EFFECT_ITEM_INCREASE_ALL_STATS)
+    {
+        u32 i;
+        for (i = 1; i < NUM_STATS; i++)
+        {
+            if (CompareStat(gBattlerInMenuId, i, MAX_STAT_STAGE, CMP_EQUAL))
+            {
+                cannotUse++;
+                break;
+            }
+        }
+    }
+
+    if (failStr != NULL)
+        StringExpandPlaceholders(gStringVar4, failStr);
+    else
+        StringExpandPlaceholders(gStringVar4, gText_WontHaveEffect);
+    return cannotUse;
+}
+
+void ItemUseInBattle_BagMenu(u8 taskId)
+{
+    if (CannotUseBagBattleItem(gSpecialVar_ItemId))
+    {
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, Task_FadeAndCloseBagMenu);
+            DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
         else
-            DisplayItemMessageInBattlePyramid(taskId, gStringVar4, CloseBattlePyramidBag);
+            DisplayItemMessageInBattlePyramid(taskId, gStringVar4, Task_CloseBattlePyramidBagMessage);
     }
     else
     {
-        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+        PlaySE(SE_SELECT);
+        RemoveUsedItem();
+        ScheduleBgCopyTilemapToVram(2);
+        if (!InBattlePyramid())
+            gTasks[taskId].func = Task_FadeAndCloseBagMenu;
+        else
+            gTasks[taskId].func = CloseBattlePyramidBag;
     }
 }
 
@@ -1059,7 +1272,7 @@ void ItemUseOutOfBattle_EnigmaBerry(u8 taskId)
     case ITEM_EFFECT_CURE_POISON:
     case ITEM_EFFECT_CURE_SLEEP:
     case ITEM_EFFECT_CURE_BURN:
-    case ITEM_EFFECT_CURE_FREEZE:
+    case ITEM_EFFECT_CURE_FREEZE_FROSTBITE:
     case ITEM_EFFECT_CURE_PARALYSIS:
     case ITEM_EFFECT_CURE_ALL_STATUS:
     case ITEM_EFFECT_ATK_EV:
@@ -1095,31 +1308,41 @@ void ItemUseOutOfBattle_EnigmaBerry(u8 taskId)
     }
 }
 
-void ItemUseInBattle_EnigmaBerry(u8 taskId)
+void ItemUseOutOfBattle_FormChange(u8 taskId)
 {
-    switch (GetItemEffectType(gSpecialVar_ItemId))
-    {
-    case ITEM_EFFECT_X_ITEM:
-        ItemUseInBattle_StatIncrease(taskId);
-        break;
-    case ITEM_EFFECT_HEAL_HP:
-    case ITEM_EFFECT_CURE_POISON:
-    case ITEM_EFFECT_CURE_SLEEP:
-    case ITEM_EFFECT_CURE_BURN:
-    case ITEM_EFFECT_CURE_FREEZE:
-    case ITEM_EFFECT_CURE_PARALYSIS:
-    case ITEM_EFFECT_CURE_ALL_STATUS:
-    case ITEM_EFFECT_CURE_CONFUSION:
-    case ITEM_EFFECT_CURE_INFATUATION:
-        ItemUseInBattle_Medicine(taskId);
-        break;
-    case ITEM_EFFECT_HEAL_PP:
-        ItemUseInBattle_PPRecovery(taskId);
-        break;
-    default:
-        ItemUseOutOfBattle_CannotUse(taskId);
-        break;
-    }
+    gItemUseCB = ItemUseCB_FormChange;
+    gTasks[taskId].data[0] = FALSE;
+    SetUpItemUseCallback(taskId);
+}
+
+void ItemUseOutOfBattle_FormChange_ConsumedOnUse(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_FormChange_ConsumedOnUse;
+    gTasks[taskId].data[0] = TRUE;
+    SetUpItemUseCallback(taskId);
+}
+
+void Task_UseHoneyOnField(u8 taskId)
+{
+    //ResetInitialPlayerAvatarState();
+    StartSweetScentFieldEffect();
+    DestroyTask(taskId);
+}
+
+static void ItemUseOnFieldCB_Honey(u8 taskId)
+{
+    Overworld_ResetStateAfterDigEscRope();
+    RemoveUsedItem();
+    gTasks[taskId].data[0] = 0;
+    DisplayItemMessageOnField(taskId, gStringVar4, Task_UseHoneyOnField);
+}
+
+void ItemUseOutOfBattle_Honey(u8 taskId)
+{
+    sItemUseOnFieldCB = ItemUseOnFieldCB_Honey;
+    gFieldCallback = FieldCB_UseItemOnField;
+    gBagMenu->newScreenCallback = CB2_ReturnToField;
+    Task_FadeAndCloseBagMenu(taskId);
 }
 
 void ItemUseOutOfBattle_CannotUse(u8 taskId)

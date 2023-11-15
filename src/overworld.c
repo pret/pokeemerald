@@ -358,7 +358,9 @@ static void (*const sMovementStatusHandler[])(struct LinkPlayerObjectEvent *, st
 void DoWhiteOut(void)
 {
     RunScriptImmediately(EventScript_WhiteOut);
+    #if B_WHITEOUT_MONEY == GEN_3
     SetMoney(&gSaveBlock1Ptr->money, GetMoney(&gSaveBlock1Ptr->money) / 2);
+    #endif
     HealPlayerParty();
     Overworld_ResetStateAfterWhiteOut();
     SetWarpDestinationToLastHealLocation();
@@ -396,6 +398,25 @@ void Overworld_ResetStateAfterDigEscRope(void)
     FlagClear(FLAG_SYS_USE_FLASH);
 }
 
+#if B_RESET_FLAGS_VARS_AFTER_WHITEOUT  == TRUE
+    void Overworld_ResetBattleFlagsAndVars(void)
+{
+    #if VAR_TERRAIN != 0
+        VarSet(VAR_TERRAIN, 0);
+    #endif
+
+    #if B_VAR_WILD_AI_FLAGS != 0
+        VarSet(B_VAR_WILD_AI_FLAGS,0);
+    #endif
+
+    FlagClear(B_FLAG_INVERSE_BATTLE);
+    FlagClear(B_FLAG_FORCE_DOUBLE_WILD);
+    FlagClear(B_SMART_WILD_AI_FLAG);
+    FlagClear(B_FLAG_NO_BAG_USE);
+    FlagClear(B_FLAG_NO_CATCHING);
+}
+#endif
+
 static void Overworld_ResetStateAfterWhiteOut(void)
 {
     ResetInitialPlayerAvatarState();
@@ -404,6 +425,9 @@ static void Overworld_ResetStateAfterWhiteOut(void)
     FlagClear(FLAG_SYS_SAFARI_MODE);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
+#if B_RESET_FLAGS_VARS_AFTER_WHITEOUT  == TRUE
+    Overworld_ResetBattleFlagsAndVars();
+#endif
     // If you were defeated by Kyogre/Groudon and the step counter has
     // maxed out, end the abnormal weather.
     if (VarGet(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1)
@@ -529,12 +553,9 @@ static void InitMapView(void)
     InitTilesetAnimations();
 }
 
-const struct MapLayout *GetMapLayout(void)
+const struct MapLayout *GetMapLayout(u16 mapLayoutId)
 {
-    u16 mapLayoutId = gSaveBlock1Ptr->mapLayoutId;
-    if (mapLayoutId)
-        return gMapLayouts[mapLayoutId - 1];
-    return NULL;
+    return gMapLayouts[mapLayoutId - 1];
 }
 
 void ApplyCurrentWarp(void)
@@ -591,13 +612,13 @@ static void LoadCurrentMapData(void)
     sLastMapSectionId = gMapHeader.regionMapSectionId;
     gMapHeader = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
     gSaveBlock1Ptr->mapLayoutId = gMapHeader.mapLayoutId;
-    gMapHeader.mapLayout = GetMapLayout();
+    gMapHeader.mapLayout = GetMapLayout(gMapHeader.mapLayoutId);
 }
 
 static void LoadSaveblockMapHeader(void)
 {
     gMapHeader = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
-    gMapHeader.mapLayout = GetMapLayout();
+    gMapHeader.mapLayout = GetMapLayout(gMapHeader.mapLayoutId);
 }
 
 static void SetPlayerCoordsFromWarp(void)
@@ -993,7 +1014,7 @@ u8 GetFlashLevel(void)
 void SetCurrentMapLayout(u16 mapLayoutId)
 {
     gSaveBlock1Ptr->mapLayoutId = mapLayoutId;
-    gMapHeader.mapLayout = GetMapLayout();
+    gMapHeader.mapLayout = GetMapLayout(mapLayoutId);
 }
 
 void SetObjectEventLoadFlag(u8 flag)

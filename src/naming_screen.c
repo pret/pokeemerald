@@ -1418,7 +1418,7 @@ static void NamingScreen_CreateMonIcon(void)
     u8 spriteId;
 
     LoadMonIconPalettes();
-    spriteId = CreateMonIcon(sNamingScreen->monSpecies, SpriteCallbackDummy, 56, 40, 0, sNamingScreen->monPersonality, 1);
+    spriteId = CreateMonIcon(sNamingScreen->monSpecies, SpriteCallbackDummy, 56, 40, 0, sNamingScreen->monPersonality);
     gSprites[spriteId].oam.priority = 3;
 }
 
@@ -1712,7 +1712,7 @@ static void DrawMonTextEntryBox(void)
 {
     u8 buffer[32];
 
-    StringCopy(buffer, gSpeciesNames[sNamingScreen->monSpecies]);
+    StringCopy(buffer, GetSpeciesName(sNamingScreen->monSpecies));
     StringAppendN(buffer, sNamingScreen->template->title, 15);
     FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], PIXEL_FILL(1));
     AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], FONT_NORMAL, buffer, 8, 1, 0, 0);

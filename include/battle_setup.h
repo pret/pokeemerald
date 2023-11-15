@@ -19,15 +19,19 @@ extern u16 gTrainerBattleOpponent_B;
 extern u16 gPartnerTrainerId;
 
 void BattleSetup_StartWildBattle(void);
+void BattleSetup_StartDoubleWildBattle(void);
 void BattleSetup_StartBattlePikeWildBattle(void);
 void BattleSetup_StartRoamerBattle(void);
 void StartWallyTutorialBattle(void);
 void BattleSetup_StartScriptedWildBattle(void);
+void BattleSetup_StartScriptedDoubleWildBattle(void);
 void BattleSetup_StartLatiBattle(void);
 void BattleSetup_StartLegendaryBattle(void);
 void StartGroudonKyogreBattle(void);
 void StartRegiBattle(void);
 u8 BattleSetup_GetTerrainId(void);
+u8 GetWildBattleTransition(void);
+u8 GetTrainerBattleTransition(void);
 u8 GetSpecialBattleTransition(s32 id);
 void ChooseStarter(void);
 void ResetTrainerOpponentIds(void);
@@ -63,5 +67,8 @@ bool8 ShouldTryRematchBattle(void);
 bool8 IsTrainerReadyForRematch(void);
 void ShouldTryGetTrainerScript(void);
 u16 CountBattledRematchTeams(u16 trainerId);
+
+void DoStandardWildBattle_Debug(void);
+void BattleSetup_StartTrainerBattle_Debug(void);
 
 #endif // GUARD_BATTLE_SETUP_H

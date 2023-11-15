@@ -69,8 +69,8 @@ struct MailRead
     /*0x021c*/ u8 monIconSpriteId;
     /*0x021d*/ u8 language;
     /*0x021e*/ bool8 international;
-    /*0x0220*/ u8 * (*parserSingle)(u8 *dest, u16 word);
-    /*0x0224*/ u8 * (*parserMultiple)(u8 *dest, const u16 *src, u16 length1, u16 length2);
+    /*0x0220*/ u8 *(*parserSingle)(u8 *dest, u16 word);
+    /*0x0224*/ u8 *(*parserMultiple)(u8 *dest, const u16 *src, u16 length1, u16 length2);
     /*0x0228*/ const struct MailLayout *layout;
     /*0x022c*/ u8 bg1TilemapBuffer[0x1000];
     /*0x122c*/ u8 bg2TilemapBuffer[0x1000];
@@ -601,11 +601,11 @@ static bool8 MailReadBuildGraphics(void)
             {
             case ICON_TYPE_BEAD:
                 LoadMonIconPalette(icon);
-                sMailRead->monIconSpriteId = CreateMonIconNoPersonality(icon, SpriteCallbackDummy, 96, 128, 0, FALSE);
+                sMailRead->monIconSpriteId = CreateMonIconNoPersonality(icon, SpriteCallbackDummy, 96, 128, 0);
                 break;
             case ICON_TYPE_DREAM:
                 LoadMonIconPalette(icon);
-                sMailRead->monIconSpriteId = CreateMonIconNoPersonality(icon, SpriteCallbackDummy, 40, 128, 0, FALSE);
+                sMailRead->monIconSpriteId = CreateMonIconNoPersonality(icon, SpriteCallbackDummy, 40, 128, 0);
                 break;
             }
             break;

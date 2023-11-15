@@ -464,6 +464,7 @@ extern const u8 gText_MailMessageWillBeLost[];
 extern const u8 gText_MailTakenFromPkmn[];
 extern const u8 gText_NoMoreThanVar1Pkmn[];
 extern const u8 gText_PkmnCantBeTradedNow[];
+extern const u8 gText_PkmnCantBeTraded[];
 extern const u8 gText_EggCantBeTradedNow[];
 extern const u8 gText_OnlyPkmnForBattle[];
 extern const u8 gJPText_AreYouSureYouWantToSpinTradeMon[];
@@ -474,9 +475,11 @@ extern const u8 gText_EscapeFromHere[];
 extern const u8 gText_PkmnCuredOfPoison[];
 extern const u8 gText_PkmnWokeUp2[];
 extern const u8 gText_PkmnBurnHealed[];
+extern const u8 gText_PkmnFrostbiteHealed[];
 extern const u8 gText_PkmnThawedOut[];
 extern const u8 gText_PkmnCuredOfParalysis[];
 extern const u8 gText_PkmnGotOverInfatuation[];
+extern const u8 gText_PkmnTransformed[];
 extern const u8 gText_PkmnBecameHealthy[];
 extern const u8 gText_HP3[];
 extern const u8 gText_SpAtk3[];
@@ -498,6 +501,8 @@ extern const u8 gText_12PoofForgotMove[];
 extern const u8 gText_StopLearningMove2[];
 extern const u8 gText_MoveNotLearned[];
 extern const u8 gText_PkmnElevatedToLvVar2[];
+extern const u8 gText_PkmnGainedExp[];
+extern const u8 gText_PkmnGainedExpAndElevatedToLvVar3[];
 extern const u8 gText_RemoveMailBeforeItem[];
 extern const u8 gText_PkmnHoldingItemCantHoldMail[];
 extern const u8 gText_MailTransferredFromMailbox[];
@@ -934,6 +939,7 @@ extern const u8 gText_BootedUpTM[];
 extern const u8 gText_TMHMContainedVar1[];
 extern const u8 gText_PlayerUsedVar2[];
 extern const u8 gText_RepelEffectsLingered[];
+extern const u8 gText_LureEffectsLingered[];
 extern const u8 gText_UsedVar2WildLured[];
 extern const u8 gText_UsedVar2WildRepelled[];
 extern const u8 gText_BoxFull[];
@@ -1020,6 +1026,8 @@ extern const u8 gText_ThrowInPremierBall[];
 extern const u8 gText_ShopBuy[];
 extern const u8 gText_ShopSell[];
 extern const u8 gText_ShopQuit[];
+extern const u8 gText_ThatItemIsSoldOut[];
+extern const u8 gText_SoldOut[];
 
 extern const u8 gText_OhABite[];
 extern const u8 gText_PokemonOnHook[];
@@ -3025,5 +3033,9 @@ extern const u8 gText_YourName[];
 extern const u8 gText_BoxName[];
 extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_TellHimTheWords[];
+
+// Exp. Share
+extern const u8 gText_ExpShareOn[];
+extern const u8 gText_ExpShareOff[];
 
 #endif // GUARD_STRINGS_H

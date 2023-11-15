@@ -1549,7 +1549,7 @@ static void OpenContextMenu(u8 taskId)
         gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_BerryBlenderCrush);
         break;
     case ITEMMENULOCATION_APPRENTICE:
-        if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY)
+        if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY_E_READER)
         {
             gBagMenu->contextMenuItemsPtr = sContextMenuItems_Apprentice;
             gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_Apprentice);
@@ -1561,7 +1561,7 @@ static void OpenContextMenu(u8 taskId)
         }
         break;
     case ITEMMENULOCATION_FAVOR_LADY:
-        if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY)
+        if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY_E_READER)
         {
             gBagMenu->contextMenuItemsPtr = sContextMenuItems_FavorLady;
             gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_FavorLady);
@@ -1573,7 +1573,7 @@ static void OpenContextMenu(u8 taskId)
         }
         break;
     case ITEMMENULOCATION_QUIZ_LADY:
-        if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY)
+        if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY_E_READER)
         {
             gBagMenu->contextMenuItemsPtr = sContextMenuItems_QuizLady;
             gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_QuizLady);
@@ -1985,11 +1985,18 @@ static void ItemMenu_Cancel(u8 taskId)
 
 static void ItemMenu_UseInBattle(u8 taskId)
 {
-    if (ItemId_GetBattleFunc(gSpecialVar_ItemId))
-    {
-        RemoveContextWindow();
-        ItemId_GetBattleFunc(gSpecialVar_ItemId)(taskId);
-    }
+    // Safety check
+    u16 type = ItemId_GetType(gSpecialVar_ItemId);
+    if (!ItemId_GetBattleUsage(gSpecialVar_ItemId))
+        return;
+
+    RemoveContextWindow();
+    if (type == ITEM_USE_BAG_MENU)
+        ItemUseInBattle_BagMenu(taskId);
+    else if (type == ITEM_USE_PARTY_MENU)
+        ItemUseInBattle_PartyMenu(taskId);
+    else if (type == ITEM_USE_PARTY_MENU_MOVES)
+        ItemUseInBattle_PartyMenuChooseMove(taskId);
 }
 
 void CB2_ReturnToBagMenuPocket(void)
@@ -2068,7 +2075,7 @@ static void Task_ItemContext_Sell(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (ItemId_GetPrice(gSpecialVar_ItemId) == 0)
+    if (ItemId_GetPrice(gSpecialVar_ItemId) == 0 || ItemId_GetImportance(gSpecialVar_ItemId))
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar2);
         StringExpandPlaceholders(gStringVar4, gText_CantBuyKeyItem);

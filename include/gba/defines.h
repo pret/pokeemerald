@@ -22,6 +22,9 @@
 #define INTR_CHECK     (*(u16 *)0x3007FF8)
 #define INTR_VECTOR    (*(void **)0x3007FFC)
 
+#define ROM_START 0x8000000
+#define ROM_END 0xA000000
+
 #define EWRAM_START 0x02000000
 #define EWRAM_END   (EWRAM_START + 0x40000)
 #define IWRAM_START 0x03000000

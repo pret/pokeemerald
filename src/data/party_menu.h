@@ -789,8 +789,8 @@ static const u8 *const sUnionRoomTradeMessages[] =
 {
     [UR_TRADE_MSG_NOT_MON_PARTNER_WANTS - 1]       = gText_NotPkmnOtherTrainerWants,
     [UR_TRADE_MSG_NOT_EGG - 1]                     = gText_ThatIsntAnEgg,
-    [UR_TRADE_MSG_MON_CANT_BE_TRADED_1 - 1]        = gText_PkmnCantBeTradedNow,
-    [UR_TRADE_MSG_MON_CANT_BE_TRADED_2 - 1]        = gText_PkmnCantBeTradedNow,
+    [UR_TRADE_MSG_MON_CANT_BE_TRADED_NOW - 1]      = gText_PkmnCantBeTradedNow,
+    [UR_TRADE_MSG_MON_CANT_BE_TRADED - 1]          = gText_PkmnCantBeTraded,
     [UR_TRADE_MSG_PARTNERS_MON_CANT_BE_TRADED - 1] = gText_OtherTrainersPkmnCantBeTraded,
     [UR_TRADE_MSG_EGG_CANT_BE_TRADED -1]           = gText_EggCantBeTradedNow,
     [UR_TRADE_MSG_PARTNER_CANT_ACCEPT_MON - 1]     = gText_OtherTrainerCantAcceptPkmn,
@@ -1054,7 +1054,7 @@ static const union AnimCmd sSpriteAnim_StatusFaint[] =
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_Blank[] =
+static const union AnimCmd sSpriteAnim_StatusFrostbite[] =
 {
     ANIMCMD_FRAME(28, 0),
     ANIMCMD_END
@@ -1069,7 +1069,7 @@ static const union AnimCmd *const sSpriteTemplate_StatusCondition[] =
     sSpriteAnim_StatusBurn,
     sSpriteAnim_StatusPokerus,
     sSpriteAnim_StatusFaint,
-    sSpriteAnim_Blank
+    sSpriteAnim_StatusFrostbite
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_StatusIcons =
@@ -1082,7 +1082,7 @@ static const struct CompressedSpritePalette sSpritePalette_StatusIcons =
     gStatusPal_Icons, TAG_STATUS_ICONS
 };
 
-static const struct SpriteTemplate sSpriteTemplate_StatusIcons =
+const struct SpriteTemplate gSpriteTemplate_StatusIcons =
 {
     .tileTag = TAG_STATUS_ICONS,
     .paletteTag = TAG_STATUS_ICONS,
@@ -1091,20 +1091,6 @@ static const struct SpriteTemplate sSpriteTemplate_StatusIcons =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
-};
-
-// Mask for the partners party in a multi battle. TRUE if in the partners party, FALSE otherwise
-// The 7th slot is Cancel, and the 8th slot is unreachable
-// Used only to determine whether or not to show the Deoxys form icon sprite
-static const bool8 sMultiBattlePartnersPartyMask[PARTY_SIZE + 2] =
-{
-    FALSE,
-    TRUE,
-    FALSE,
-    FALSE,
-    TRUE,
-    TRUE,
-    FALSE
 };
 
 static const u8 *const sUnused_StatStrings[] =
@@ -1116,18 +1102,3 @@ static const u8 *const sUnused_StatStrings[] =
     gText_SpDef4,
     gText_Speed2
 };
-
-/* Expands to:
- * static const u16 sTMHMMoves[] =
- * {
- *     MOVE_FOCUS_PUNCH,
- *     ...
- *     MOVE_CUT,
- *     ...
- * }; */
-#define TMHM_MOVE(id) CAT(MOVE_, id),
-static const u16 sTMHMMoves[] =
-{
-    FOREACH_TMHM(TMHM_MOVE)
-};
-#undef TMHM_MOVE

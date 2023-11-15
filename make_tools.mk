@@ -1,4 +1,3 @@
-
 MAKEFLAGS += --no-print-directory
 
 # Inclusive list. If you don't want a tool to be built, don't add it here.

@@ -24,8 +24,8 @@ struct GFRomHeader
     const struct CompressedSpriteSheet * monBackPics;
     const struct CompressedSpritePalette * monNormalPalettes;
     const struct CompressedSpritePalette * monShinyPalettes;
-    const u8 * const * monIcons;
-    const u8 * monIconPaletteIds;
+    const u8 *const * monIcons;
+    const u8 *monIconPaletteIds;
     const struct SpritePalette * monIconPalettes;
     const u8 (* monSpeciesNames)[];
     const u8 (* moveNames)[];
@@ -71,7 +71,7 @@ struct GFRomHeader
     u32 unk18;
     const struct SpeciesInfo * speciesInfo;
     const u8 (* abilityNames)[];
-    const u8 * const * abilityDescriptions;
+    const u8 *const * abilityDescriptions;
     const struct Item * items;
     const struct BattleMove * moves;
     const struct CompressedSpriteSheet * ballGfx;
@@ -89,7 +89,7 @@ struct GFRomHeader
     u32 giftRibbonsOffset;
     u32 enigmaBerryOffset;
     u32 enigmaBerrySize;
-    const u8 * moveDescriptions;
+    const u8 *moveDescriptions;
     u32 unk20;
 };
 
@@ -113,8 +113,8 @@ static const struct GFRomHeader sGFRomHeader = {
     .flagsOffset = offsetof(struct SaveBlock1, flags),
     .varsOffset = offsetof(struct SaveBlock1, vars),
     .pokedexOffset = offsetof(struct SaveBlock2, pokedex),
-    .seen1Offset = offsetof(struct SaveBlock1, seen1),
-    .seen2Offset = offsetof(struct SaveBlock1, seen2),
+    .seen1Offset = offsetof(struct SaveBlock1, dexSeen),
+    .seen2Offset = offsetof(struct SaveBlock1, dexSeen), // dex flags are combined, just provide the same pointer
     .pokedexVar = VAR_NATIONAL_DEX - VARS_START,
     .pokedexFlag = FLAG_RECEIVED_POKEDEX_FROM_BIRCH,
     .mysteryEventFlag = FLAG_SYS_MYSTERY_EVENT_ENABLE,

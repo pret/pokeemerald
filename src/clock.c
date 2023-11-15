@@ -15,7 +15,7 @@
 static void UpdatePerDay(struct Time *localTime);
 static void UpdatePerMinute(struct Time *localTime);
 
-static void InitTimeBasedEvents(void)
+void InitTimeBasedEvents(void)
 {
     FlagSet(FLAG_SYS_CLOCK_SET);
     RtcCalcLocalTime();

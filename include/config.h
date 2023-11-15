@@ -45,7 +45,7 @@
 #endif
 
 // Uncomment to fix some identified minor bugs
-//#define BUGFIX
+#define BUGFIX
 
 // Various undefined behavior bugs may or may not prevent compilation with
 // newer compilers. So always fix them when using a modern compiler.
@@ -54,5 +54,26 @@
 #define UBFIX
 #endif
 #endif
+
+// Compatibility definition for other projects to detect pokeemerald-expansion
+#define RHH_EXPANSION
+
+// Legacy branch-based defines included for backwards compatibility
+#define BATTLE_ENGINE
+#define POKEMON_EXPANSION
+#define ITEM_EXPANSION
+
+// Generation constants used in configs to define behavior
+#define GEN_3 0
+#define GEN_4 1
+#define GEN_5 2
+#define GEN_6 3
+#define GEN_7 4
+#define GEN_8 5
+#define GEN_9 6
+#define GEN_LATEST GEN_9
+
+// General settings
+#define EXPANSION_INTRO   TRUE    // If TRUE, a custom RHH intro will play after the vanilla copyright screen.
 
 #endif // GUARD_CONFIG_H

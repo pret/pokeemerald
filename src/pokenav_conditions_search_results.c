@@ -688,12 +688,12 @@ static void CreateSearchResultsList(void)
     CreatePokenavList(&sConditionSearchResultBgTemplates[1], &template, 0);
 }
 
-static void BufferSearchMonListItem(struct PokenavMonListItem * item, u8 * dest)
+static void BufferSearchMonListItem(struct PokenavMonListItem * item, u8 *dest)
 {
     u8 gender;
     u8 level;
-    u8 * s;
-    const u8 * genderStr;
+    u8 *s;
+    const u8 *genderStr;
 
     // Mon is in party
     if (item->boxId == TOTAL_BOXES_COUNT)

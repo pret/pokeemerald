@@ -10,18 +10,48 @@
 // Arguments for 'xStart, yStart, xEnd, yEnd' in HandleBattleWindow
 #define YESNOBOX_X_Y 24, 8, 29, 13
 
-void AI_CalcDmg(u8 battlerIdAtk, u8 battlerIdDef);
-u8 TypeCalc(u16 move, u8 battlerIdAtk, u8 battlerIdDef);
-u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility);
+struct StatFractions
+{
+    u8 dividend;
+    u8 divisor;
+};
+
+s32 CalcCritChanceStageArgs(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, u32 abilityAtk, u32 abilityDef, u32 holdEffectAtk);
+s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility);
+s32 GetCritHitChance(s32 critChanceIndex);
+u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u32 defAbility, u32 atkHoldEffect, u32 defHoldEffect);
 u8 GetBattlerTurnOrderNum(u8 battlerId);
-void SetMoveEffect(bool8 primary, u8 certain);
+bool32 NoAliveMonsForEitherParty(void);
+void SetMoveEffect(bool32 primary, u32 certain);
+bool32 CanBattlerSwitch(u32 battlerId);
 void BattleDestroyYesNoCursorAt(u8 cursorPosition);
 void BattleCreateYesNoCursorAt(u8 cursorPosition);
 void BufferMoveToLearnIntoBattleTextBuff2(void);
 void HandleBattleWindow(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags);
 bool8 UproarWakeUpCheck(u8 battlerId);
+bool32 DoesSubstituteBlockMove(u32 battlerAtk, u32 battlerDef, u32 move);
+bool32 DoesDisguiseBlockMove(u32 battlerAtk, u32 battlerDef, u32 move);
+bool32 CanPoisonType(u8 battlerAttacker, u8 battlerTarget);
+bool32 CanParalyzeType(u8 battlerAttacker, u8 battlerTarget);
+bool32 CanUseLastResort(u8 battlerId);
+u32 IsFlowerVeilProtected(u32 battler);
+u32 IsLeafGuardProtected(u32 battler);
+bool32 IsShieldsDownProtected(u32 battler);
+u32 IsAbilityStatusProtected(u32 battler);
+bool32 TryResetBattlerStatChanges(u8 battler);
+bool32 CanCamouflage(u8 battlerId);
+u16 GetNaturePowerMove(void);
+u16 GetSecretPowerMoveEffect(void);
+void StealTargetItem(u8 battlerStealer, u8 battlerItem);
+u8 GetCatchingBattler(void);
+u32 GetHighestStatId(u32 battlerId);
+bool32 ProteanTryChangeType(u32 battler, u32 ability, u32 move, u32 moveType);
+bool32 DoSwitchInAbilitiesItems(u32 battlerId);
+u8 GetFirstFaintedPartyIndex(u8 battlerId);
+bool32 IsMoveAffectedByParentalBond(u32 move, u32 battler);
 
 extern void (* const gBattleScriptingCommandsTable[])(void);
 extern const u8 gBattlePalaceNatureToMoveGroupLikelihood[NUM_NATURES][4];
+extern const struct StatFractions gAccuracyStageRatios[];
 
 #endif // GUARD_BATTLE_SCRIPT_COMMANDS_H

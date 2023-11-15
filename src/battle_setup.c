@@ -73,11 +73,9 @@ struct TrainerBattleParameter
 // this file's functions
 static void DoBattlePikeWildBattle(void);
 static void DoSafariBattle(void);
-static void DoStandardWildBattle(void);
+static void DoStandardWildBattle(bool32 isDouble);
 static void CB2_EndWildBattle(void);
 static void CB2_EndScriptedWildBattle(void);
-static u8 GetWildBattleTransition(void);
-static u8 GetTrainerBattleTransition(void);
 static void TryUpdateGymLeaderRematchFromWild(void);
 static void TryUpdateGymLeaderRematchFromTrainer(void);
 static void CB2_GiveStarter(void);
@@ -382,6 +380,41 @@ static void CreateBattleStartTask(u8 transition, u16 song)
     PlayMapChosenOrBattleBGM(song);
 }
 
+static void Task_BattleStart_Debug(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    switch (tState)
+    {
+    case 0:
+        if (!FldEffPoison_IsActive()) // is poison not active?
+        {
+            BattleTransition_StartOnField(tTransition);
+            ClearMirageTowerPulseBlendEffect();
+            tState++; // go to case 1.
+        }
+        break;
+    case 1:
+        if (IsBattleTransitionDone() == TRUE)
+        {
+            CleanupOverworldWindowsAndTilemaps();
+            SetMainCallback2(CB2_InitBattle);
+            RestartWildEncounterImmunitySteps();
+            ClearPoisonStepCounter();
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}
+
+static void CreateBattleStartTask_Debug(u8 transition, u16 song)
+{
+    u8 taskId = CreateTask(Task_BattleStart_Debug, 1);
+
+    gTasks[taskId].tTransition = transition;
+    PlayMapChosenOrBattleBGM(song);
+}
+
 #undef tState
 #undef tTransition
 
@@ -390,7 +423,12 @@ void BattleSetup_StartWildBattle(void)
     if (GetSafariZoneFlag())
         DoSafariBattle();
     else
-        DoStandardWildBattle();
+        DoStandardWildBattle(FALSE);
+}
+
+void BattleSetup_StartDoubleWildBattle(void)
+{
+    DoStandardWildBattle(TRUE);
 }
 
 void BattleSetup_StartBattlePikeWildBattle(void)
@@ -398,7 +436,28 @@ void BattleSetup_StartBattlePikeWildBattle(void)
     DoBattlePikeWildBattle();
 }
 
-static void DoStandardWildBattle(void)
+static void DoStandardWildBattle(bool32 isDouble)
+{
+    LockPlayerFieldControls();
+    FreezeObjectEvents();
+    StopPlayerAvatar();
+    gMain.savedCallback = CB2_EndWildBattle;
+    gBattleTypeFlags = 0;
+    if (isDouble)
+        gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
+    if (InBattlePyramid())
+    {
+        VarSet(VAR_TEMP_E, 0);
+        gBattleTypeFlags |= BATTLE_TYPE_PYRAMID;
+    }
+    CreateBattleStartTask(GetWildBattleTransition(), 0);
+    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    IncrementGameStat(GAME_STAT_WILD_BATTLES);
+    IncrementDailyWildBattles();
+    TryUpdateGymLeaderRematchFromWild();
+}
+
+void DoStandardWildBattle_Debug(void)
 {
     LockPlayerFieldControls();
     FreezeObjectEvents();
@@ -410,11 +469,11 @@ static void DoStandardWildBattle(void)
         VarSet(VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0);
         gBattleTypeFlags |= BATTLE_TYPE_PYRAMID;
     }
-    CreateBattleStartTask(GetWildBattleTransition(), 0);
-    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
-    IncrementGameStat(GAME_STAT_WILD_BATTLES);
-    IncrementDailyWildBattles();
-    TryUpdateGymLeaderRematchFromWild();
+    CreateBattleStartTask_Debug(GetWildBattleTransition(), 0);
+    //IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    //IncrementGameStat(GAME_STAT_WILD_BATTLES);
+    //IncrementDailyWildBattles();
+    //TryUpdateGymLeaderRematchFromWild();
 }
 
 void BattleSetup_StartRoamerBattle(void)
@@ -490,6 +549,18 @@ void BattleSetup_StartScriptedWildBattle(void)
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = 0;
+    CreateBattleStartTask(GetWildBattleTransition(), 0);
+    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    IncrementGameStat(GAME_STAT_WILD_BATTLES);
+    IncrementDailyWildBattles();
+    TryUpdateGymLeaderRematchFromWild();
+}
+
+void BattleSetup_StartScriptedDoubleWildBattle(void)
+{
+    LockPlayerFieldControls();
+    gMain.savedCallback = CB2_EndScriptedWildBattle;
+    gBattleTypeFlags = BATTLE_TYPE_DOUBLE;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -741,52 +812,21 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
     u8 i;
     u8 sum;
     u32 count = numMons;
+    const struct TrainerMon *party;
 
     if (gTrainers[opponentId].partySize < count)
         count = gTrainers[opponentId].partySize;
 
     sum = 0;
 
-    switch (gTrainers[opponentId].partyFlags)
-    {
-    case 0:
-        {
-            const struct TrainerMonNoItemDefaultMoves *party;
-            party = gTrainers[opponentId].party.NoItemDefaultMoves;
-            for (i = 0; i < count; i++)
-                sum += party[i].lvl;
-        }
-        break;
-    case F_TRAINER_PARTY_CUSTOM_MOVESET:
-        {
-            const struct TrainerMonNoItemCustomMoves *party;
-            party = gTrainers[opponentId].party.NoItemCustomMoves;
-            for (i = 0; i < count; i++)
-                sum += party[i].lvl;
-        }
-        break;
-    case F_TRAINER_PARTY_HELD_ITEM:
-        {
-            const struct TrainerMonItemDefaultMoves *party;
-            party = gTrainers[opponentId].party.ItemDefaultMoves;
-            for (i = 0; i < count; i++)
-                sum += party[i].lvl;
-        }
-        break;
-    case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
-        {
-            const struct TrainerMonItemCustomMoves *party;
-            party = gTrainers[opponentId].party.ItemCustomMoves;
-            for (i = 0; i < count; i++)
-                sum += party[i].lvl;
-        }
-        break;
-    }
+    party = gTrainers[opponentId].party;
+    for (i = 0; i < count; i++)
+        sum += party[i].lvl;
 
     return sum;
 }
 
-static u8 GetWildBattleTransition(void)
+u8 GetWildBattleTransition(void)
 {
     u8 transitionType = GetBattleTransitionTypeByMap();
     u8 enemyLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
@@ -808,7 +848,7 @@ static u8 GetWildBattleTransition(void)
     }
 }
 
-static u8 GetTrainerBattleTransition(void)
+u8 GetTrainerBattleTransition(void)
 {
     u8 minPartyCount;
     u8 transitionType;
@@ -1101,7 +1141,8 @@ void SetMapVarsToTrainer(void)
 
 const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
 {
-    InitTrainerBattleVariables();
+    if (TrainerBattleLoadArg8(data) != TRAINER_BATTLE_SET_TRAINER_B)
+        InitTrainerBattleVariables();
     sTrainerBattleMode = TrainerBattleLoadArg8(data);
 
     switch (sTrainerBattleMode)
@@ -1158,10 +1199,10 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         return EventScript_TryDoNormalTrainerBattle;
     case TRAINER_BATTLE_SET_TRAINER_A:
         TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
-        return NULL;
+        return sTrainerBattleEndScript;
     case TRAINER_BATTLE_SET_TRAINER_B:
         TrainerBattleLoadArgs(sTrainerBOrdinaryBattleParams, data);
-        return NULL;
+        return sTrainerBattleEndScript;
     case TRAINER_BATTLE_HILL:
         if (gApproachingTrainerId == 0)
         {
@@ -1319,6 +1360,19 @@ void BattleSetup_StartTrainerBattle(void)
         DoBattlePyramidTrainerHillBattle();
     else
         DoTrainerBattle();
+
+    ScriptContext_Stop();
+}
+
+void BattleSetup_StartTrainerBattle_Debug(void)
+{
+    sNoOfPossibleTrainerRetScripts = gNoOfApproachingTrainers;
+    gNoOfApproachingTrainers = 0;
+    sShouldCheckTrainerBScript = FALSE;
+    gWhichTrainerToFaceAfterBattle = 0;
+    gMain.savedCallback = CB2_EndTrainerBattle;
+
+    CreateBattleStartTask_Debug(GetWildBattleTransition(), 0);
 
     ScriptContext_Stop();
 }

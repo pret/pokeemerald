@@ -2,6 +2,7 @@ ENTRY(Start)
 
 gNumMusicPlayers = 4;
 gMaxLines = 0;
+gInitialMainCB2 = CB2_InitCopyrightScreenAfterBootup;
 
 SECTIONS {
     . = 0x2000000;
@@ -17,7 +18,7 @@ SECTIONS {
         gflib/*.o(ewram_data);
 
         . = 0x40000;
-}
+    }
 
     . = 0x3000000;
 
@@ -121,12 +122,6 @@ SECTIONS {
         data/multiboot_ereader.o(.rodata);
         data/multiboot_berry_glitch_fix.o(.rodata);
         data/multiboot_pokemon_colosseum.o(.rodata);
-    } =0
-
-    anim_mon_front_pic_data :
-    ALIGN(4)
-    {
-        src/anim_mon_front_pics.o(.rodata);
     } =0
 
     gfx_data :

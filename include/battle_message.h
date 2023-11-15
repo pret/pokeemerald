@@ -5,7 +5,8 @@
 // that have explicit sizes are listed below to ensure it can contain them.
 #define TEXT_BUFF_ARRAY_COUNT   max(16, \
                                 max(MOVE_NAME_LENGTH + 2, /* +2 to hold the "!" and EOS. */ \
-                                    POKEMON_NAME_LENGTH + 1))
+                                max(POKEMON_NAME_LENGTH + 1, \
+                                    ABILITY_NAME_LENGTH + 1)))
 
 // for 0xFD
 #define B_TXT_BUFF1 0x0
@@ -26,7 +27,7 @@
 #define B_TXT_ATK_NAME_WITH_PREFIX 0xF
 #define B_TXT_DEF_NAME_WITH_PREFIX 0x10
 #define B_TXT_EFF_NAME_WITH_PREFIX 0x11 // EFF = short for gEffectBank
-#define B_TXT_ACTIVE_NAME_WITH_PREFIX 0x12
+// #define B_TXT_ACTIVE_NAME_WITH_PREFIX 0x12 - removed
 #define B_TXT_SCR_ACTIVE_NAME_WITH_PREFIX 0x13
 #define B_TXT_CURRENT_MOVE 0x14
 #define B_TXT_LAST_MOVE 0x15
@@ -61,6 +62,15 @@
 #define B_TXT_PARTNER_CLASS 0x32
 #define B_TXT_PARTNER_NAME 0x33
 #define B_TXT_BUFF3 0x34
+#define B_TXT_ATK_TRAINER_NAME 0x35
+#define B_TXT_ATK_TRAINER_CLASS 0x36
+#define B_TXT_ATK_TEAM1 0x37 // Your/The opposing
+#define B_TXT_ATK_TEAM2 0x38 // your/the opposing
+#define B_TXT_DEF_NAME 0x39
+#define B_TXT_DEF_TEAM1 0x3A // Your/The opposing
+#define B_TXT_DEF_TEAM2 0x3B // your/the opposing
+// #define B_TXT_SELECTION_NAME 0x3C - removed
+// #define B_TXT_SELECTION_NAME2 0x3D no Illusion check - removed
 
 // for B_TXT_BUFF1, B_TXT_BUFF2 and B_TXT_BUFF3
 
@@ -100,7 +110,8 @@
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                                  \
     textVar[1] = B_BUFF_ABILITY;                                            \
     textVar[2] = abilityId;                                                 \
-    textVar[3] = B_BUFF_EOS;                                                \
+    textVar[3] = (abilityId & 0xFF00) >> 8;                                 \
+    textVar[4] = B_BUFF_EOS;                                                \
 }
 
 #define PREPARE_TYPE_BUFFER(textVar, typeId)                                \
@@ -149,7 +160,7 @@
 {                                                               \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                      \
     textVar[1] = B_BUFF_STRING;                                 \
-    textVar[2] = stringId;                                      \
+    textVar[2] = stringId & 0xFF;                               \
     textVar[3] = (stringId & 0xFF00) >> 8;                      \
     textVar[4] = B_BUFF_EOS;                                    \
 }
@@ -204,22 +215,39 @@ struct BattleMsgData
     u16 currentMove;
     u16 originallyUsedMove;
     u16 lastItem;
-    u8 lastAbility;
+    u16 lastAbility;
     u8 scrActive;
     u8 bakScriptPartyIdx;
     u8 hpScale;
     u8 itemEffectBattler;
     u8 moveType;
-    u8 abilities[MAX_BATTLERS_COUNT];
+    u16 abilities[MAX_BATTLERS_COUNT];
     u8 textBuffs[3][TEXT_BUFF_ARRAY_COUNT];
 };
 
-void BufferStringBattle(u16 stringID);
+enum
+{
+    TRAINER_SLIDE_LAST_SWITCHIN,
+    TRAINER_SLIDE_LAST_LOW_HP,
+    TRAINER_SLIDE_FIRST_DOWN,
+    TRAINER_SLIDE_LAST_HALF_HP,
+    TRAINER_SLIDE_FIRST_CRITICAL_HIT,
+    TRAINER_SLIDE_FIRST_SUPER_EFFECTIVE_HIT,
+    TRAINER_SLIDE_FIRST_STAB_MOVE,
+    TRAINER_SLIDE_PLAYER_MON_UNAFFECTED,
+    TRAINER_SLIDE_MEGA_EVOLUTION,
+    TRAINER_SLIDE_Z_MOVE,
+    TRAINER_SLIDE_BEFORE_FIRST_TURN,
+};
+
+void BufferStringBattle(u16 stringID, u32 battler);
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src);
 u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst);
 void BattlePutTextOnWindow(const u8 *text, u8 windowId);
-void SetPpNumbersPaletteInMoveSelection(void);
+void SetPpNumbersPaletteInMoveSelection(u32 battler);
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
+u32 ShouldDoTrainerSlide(u32 battler, u32 which); // return 1 for TrainerA, 2 forTrainerB
+void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
 extern struct BattleMsgData *gBattleMsgDataPtr;
 
@@ -271,6 +299,7 @@ extern const u8 gText_BattleWallyName[];
 extern const u8 gText_Win[];
 extern const u8 gText_Loss[];
 extern const u8 gText_Draw[];
+extern const u8 gText_StatSharply[];
 extern const u8 gText_StatRose[];
 extern const u8 gText_DefendersStatRose[];
 extern const u8 gText_PkmnGettingPumped[];
@@ -294,6 +323,6 @@ extern const u8 gText_BattleRecordedOnPass[];
 extern const u8 gText_BattleTourney[];
 
 extern const u16 gMissStringIds[];
-extern const u16 gTrappingMoves[];
+extern const u16 gStatUpStringIds[];
 
 #endif // GUARD_BATTLE_MESSAGE_H

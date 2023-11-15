@@ -181,7 +181,7 @@ static void RemoveUnionRoomPlayerObjectEvent(u32 leaderId)
     RemoveObjectEventByLocalIdAndMap(sUnionRoomLocalIds[leaderId], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
-static bool32 SetUnionRoomPlayerEnterExitMovement(u32 leaderId, const u8 * movement)
+static bool32 SetUnionRoomPlayerEnterExitMovement(u32 leaderId, const u8 *movement)
 {
     u8 objectId;
     struct ObjectEvent * object;
@@ -390,7 +390,7 @@ void DestroyUnionRoomPlayerObjects(void)
     DestroyTask_AnimateUnionRoomPlayers();
 }
 
-void CreateUnionRoomPlayerSprites(u8 * spriteIds, s32 leaderId)
+void CreateUnionRoomPlayerSprites(u8 *spriteIds, s32 leaderId)
 {
     s32 memberId;
     for (memberId = 0; memberId < MAX_RFU_PLAYERS; memberId++)
@@ -405,7 +405,7 @@ void CreateUnionRoomPlayerSprites(u8 * spriteIds, s32 leaderId)
     }
 }
 
-void DestroyUnionRoomPlayerSprites(u8 * spriteIds)
+void DestroyUnionRoomPlayerSprites(u8 *spriteIds)
 {
     s32 i;
     for (i = 0; i < NUM_UNION_ROOM_SPRITES; i++)

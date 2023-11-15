@@ -24,6 +24,7 @@
 #include "trig.h"
 #include "window.h"
 #include "constants/songs.h"
+#include "constants/battle_move_effects.h"
 #include "gba/io_reg.h"
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
@@ -807,7 +808,11 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     }
     AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, str, 106, 41, TEXT_SKIP_DRAW, NULL);
 
-    str = gMoveDescriptionPointers[chosenMove - 1];
+    if (move->effect != EFFECT_PLACEHOLDER)
+        str = gMoveDescriptionPointers[chosenMove - 1];
+    else
+        str = gNotDoneYetDescription;
+
     AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NARROW, str, 0, 65, 0, NULL);
 }
 
@@ -933,7 +938,7 @@ static u8 *GetConditionMenuMonString(u8 *dst, u16 boxId, u16 monId)
         level = GetLevelFromBoxMonExp(boxMon);
     }
 
-    if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && !StringCompare(dst, gSpeciesNames[species]))
+    if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && !StringCompare(dst, GetSpeciesName(species)))
         gender = MON_GENDERLESS;
 
     for (str = dst; *str != EOS; str++)
@@ -1075,7 +1080,7 @@ void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u16 boxId, u16 monId, 
         u32 trainerId = GetBoxOrPartyMonData(boxId, monId, MON_DATA_OT_ID, NULL);
         u32 personality = GetBoxOrPartyMonData(boxId, monId, MON_DATA_PERSONALITY, NULL);
 
-        LoadSpecialPokePic(&gMonFrontPicTable[species], tilesDst, species, personality, TRUE);
+        LoadSpecialPokePic(tilesDst, species, personality, TRUE);
         LZ77UnCompWram(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), palDst);
     }
 }

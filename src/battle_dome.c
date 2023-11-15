@@ -159,8 +159,6 @@ static void BufferLastDomeWinnerName(void);
 static void InitRandomTourneyTreeResults(void);
 static void InitDomeTrainers(void);
 
-EWRAM_DATA u32 gPlayerPartyLostHP = 0; // never read
-static EWRAM_DATA u32 sPlayerPartyMaxHP = 0; // never read
 static EWRAM_DATA struct TourneyTreeInfoCard *sInfoCard = {0};
 static EWRAM_DATA u8 *sTilemapBuffer = NULL;
 
@@ -179,7 +177,7 @@ static const u8 sBattleStyleMovePoints[MOVES_COUNT][NUM_MOVE_POINT_TYPES] =
     [MOVE_ICE_PUNCH]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
     [MOVE_THUNDER_PUNCH] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
     [MOVE_SCRATCH]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_VICE_GRIP]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
+    [MOVE_VISE_GRIP]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
     [MOVE_GUILLOTINE]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_LOW_PP] = 1},
     [MOVE_RAZOR_WIND]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
     [MOVE_SWORDS_DANCE]  = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_POPULAR] = 1},
@@ -304,7 +302,7 @@ static const u8 sBattleStyleMovePoints[MOVES_COUNT][NUM_MOVE_POINT_TYPES] =
     [MOVE_AMNESIA]       = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_DEF] = 1},
     [MOVE_KINESIS]       = {[MOVE_POINTS_STAT_LOWER] = 1},
     [MOVE_SOFT_BOILED]   = {[MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_HI_JUMP_KICK]  = {[MOVE_POINTS_DMG] = 1},
+    [MOVE_HIGH_JUMP_KICK]  = {[MOVE_POINTS_DMG] = 1},
     [MOVE_GLARE]         = {[MOVE_POINTS_STAT_LOWER] = 1},
     [MOVE_DREAM_EATER]   = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_RARE] = 1, [MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1},
     [MOVE_POISON_GAS]    = {[MOVE_POINTS_STATUS] = 1},
@@ -353,7 +351,7 @@ static const u8 sBattleStyleMovePoints[MOVES_COUNT][NUM_MOVE_POINT_TYPES] =
     [MOVE_PROTECT]       = {[MOVE_POINTS_DEF] = 1, [MOVE_POINTS_POPULAR] = 1},
     [MOVE_MACH_PUNCH]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
     [MOVE_SCARY_FACE]    = {0},
-    [MOVE_FAINT_ATTACK]  = {[MOVE_POINTS_DMG] = 1},
+    [MOVE_FEINT_ATTACK]  = {[MOVE_POINTS_DMG] = 1},
     [MOVE_SWEET_KISS]    = {0},
     [MOVE_BELLY_DRUM]    = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STAT_RAISE] = 1},
     [MOVE_SLUDGE_BOMB]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
@@ -433,7 +431,7 @@ static const u8 sBattleStyleMovePoints[MOVES_COUNT][NUM_MOVE_POINT_TYPES] =
     [MOVE_MEMENTO]       = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
     [MOVE_FACADE]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
     [MOVE_FOCUS_PUNCH]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_SMELLING_SALT] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
+    [MOVE_SMELLING_SALTS] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
     [MOVE_FOLLOW_ME]     = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
     [MOVE_NATURE_POWER]  = {[MOVE_POINTS_DMG] = 1},
     [MOVE_CHARGE]        = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_ACCURATE] = 1},
@@ -2574,9 +2572,6 @@ static void BufferDomeOpponentName(void)
 
 static void InitDomeOpponentParty(void)
 {
-    gPlayerPartyLostHP = 0;
-    sPlayerPartyMaxHP =  GetMonData(&gPlayerParty[0], MON_DATA_MAX_HP, NULL);
-    sPlayerPartyMaxHP += GetMonData(&gPlayerParty[1], MON_DATA_MAX_HP, NULL);
     CalculatePlayerPartyCount();
     CreateDomeOpponentMons(TrainerIdToTournamentId(gTrainerBattleOpponent_A));
 }
@@ -2804,7 +2799,7 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
     int i = 0;
     int typePower = TYPE_x1;
 
-    if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || gBattleMoves[move].power == 0)
+    if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || IS_MOVE_STATUS(move))
         return 0;
 
     defType1 = gSpeciesInfo[targetSpecies].types[0];
@@ -2826,32 +2821,15 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
     }
     else
     {
-        // Calculate a "type power" value to determine the benefit of using this type move against the target.
-        // This value will then be used to get the number of points to assign to the move.
-        while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
-        {
-            if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
-            {
-                i += 3;
-                continue;
-            }
-            if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
-            {
-                // BUG: the value of TYPE_x2 does not exist in gTypeEffectiveness, so if defAbility is ABILITY_WONDER_GUARD, the conditional always fails
-                #ifndef BUGFIX
-                    #define WONDER_GUARD_EFFECTIVENESS TYPE_x2
-                #else
-                    #define WONDER_GUARD_EFFECTIVENESS TYPE_MUL_SUPER_EFFECTIVE
-                #endif
-                if (TYPE_EFFECT_DEF_TYPE(i) == defType1)
-                    if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == WONDER_GUARD_EFFECTIVENESS) || defAbility != ABILITY_WONDER_GUARD)
-                        typePower = (typePower * TYPE_EFFECT_MULTIPLIER(i)) / 10;
-                if (TYPE_EFFECT_DEF_TYPE(i) == defType2 && defType1 != defType2)
-                    if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == WONDER_GUARD_EFFECTIVENESS) || defAbility != ABILITY_WONDER_GUARD)
-                        typePower = (typePower * TYPE_EFFECT_MULTIPLIER(i)) / 10;
-            }
-            i += 3;
-        }
+        u32 typeEffectiveness1 = UQ_4_12_TO_INT(GetTypeModifier(moveType, defType1) * 2) * 5;
+        u32 typeEffectiveness2 = UQ_4_12_TO_INT(GetTypeModifier(moveType, defType2) * 2) * 5;
+
+        typePower = (typeEffectiveness1 * typePower) / 10;
+        if (defType2 != defType1)
+            typePower = (typeEffectiveness2 * typePower) / 10;
+
+        if (defAbility == ABILITY_WONDER_GUARD && typeEffectiveness1 != TYPE_x1 && typeEffectiveness2 != TYPE_x1)
+            typePower = 0;
     }
 
     switch (mode)
@@ -4357,7 +4335,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sInfoTrainerMonX[i],
                                                                   y + sInfoTrainerMonY[i],
-                                                                  0, 0, TRUE);
+                                                                  0, 0);
             gSprites[sInfoCard->spriteIds[2 + i + arrId]].oam.priority = 0;
         }
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
@@ -4366,7 +4344,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sInfoTrainerMonX[i],
                                                                   y + sInfoTrainerMonY[i],
-                                                                  0, 0, TRUE);
+                                                                  0, 0);
             gSprites[sInfoCard->spriteIds[2 + i + arrId]].oam.priority = 0;
         }
         else
@@ -4375,7 +4353,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sInfoTrainerMonX[i],
                                                                   y + sInfoTrainerMonY[i],
-                                                                  0, 0, TRUE);
+                                                                  0, 0);
             gSprites[sInfoCard->spriteIds[2 + i + arrId]].oam.priority = 0;
         }
 
@@ -4439,11 +4417,11 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     {
         textPrinter.currentY = sSpeciesNameTextYCoords[i];
         if (trainerId == TRAINER_PLAYER)
-            textPrinter.currentChar = gSpeciesNames[DOME_MONS[trainerTourneyId][i]];
+            textPrinter.currentChar = GetSpeciesName(DOME_MONS[trainerTourneyId][i]);
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
-            textPrinter.currentChar = gSpeciesNames[DOME_MONS[trainerTourneyId][i]];
+            textPrinter.currentChar = GetSpeciesName(DOME_MONS[trainerTourneyId][i]);
         else
-            textPrinter.currentChar = gSpeciesNames[gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].species];
+            textPrinter.currentChar = GetSpeciesName(gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].species);
 
         textPrinter.windowId = WIN_TRAINER_MON1_NAME + i + windowId;
         if (i == 1)
@@ -4620,7 +4598,6 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
             // If 2 good stats have been found already, choose which to use
             if (i == 2)
             {
-
                 if (allocatedArray[6] < allocatedArray[k])
                 {
                     if (allocatedArray[7] < allocatedArray[k])
@@ -4846,7 +4823,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sLeftTrainerMonX[i],
                                                                   y + sLeftTrainerMonY[i],
-                                                                  0, 0, TRUE);
+                                                                  0, 0);
             gSprites[sInfoCard->spriteIds[2 + i + arrId]].oam.priority = 0;
         }
         else if (trainerIds[0] == TRAINER_FRONTIER_BRAIN)
@@ -4855,7 +4832,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sLeftTrainerMonX[i],
                                                                   y + sLeftTrainerMonY[i],
-                                                                  0, 0, TRUE);
+                                                                  0, 0);
             gSprites[sInfoCard->spriteIds[2 + i + arrId]].oam.priority = 0;
         }
         else
@@ -4864,7 +4841,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sLeftTrainerMonX[i],
                                                                   y + sLeftTrainerMonY[i],
-                                                                  0, 0, TRUE);
+                                                                  0, 0);
             gSprites[sInfoCard->spriteIds[2 + i + arrId]].oam.priority = 0;
         }
 
@@ -4886,7 +4863,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sRightTrainerMonX[i],
                                                                   y + sRightTrainerMonY[i],
-                                                                  0, 0, TRUE);
+                                                                  0, 0);
             gSprites[sInfoCard->spriteIds[5 + i + arrId]].oam.priority = 0;
         }
         else if (trainerIds[1] == TRAINER_FRONTIER_BRAIN)
@@ -4895,7 +4872,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sRightTrainerMonX[i],
                                                                   y + sRightTrainerMonY[i],
-                                                                  0, 0, TRUE);
+                                                                  0, 0);
             gSprites[sInfoCard->spriteIds[5 + i + arrId]].oam.priority = 0;
         }
         else
@@ -4904,7 +4881,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sRightTrainerMonX[i],
                                                                   y + sRightTrainerMonY[i],
-                                                                  0, 0, TRUE);
+                                                                  0, 0);
             gSprites[sInfoCard->spriteIds[5 + i + arrId]].oam.priority = 0;
         }
 
@@ -5251,28 +5228,28 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
 
             for (k = 0; k < FRONTIER_PARTY_SIZE; k++)
             {
-                u32 var = 0;
-                u16 targetSpecies = SPECIES_NONE;
-                u16 targetAbility = ABILITY_NONE;
+                u32 personality = 0;
+                u32 targetSpecies = 0;
+                u32 targetAbility = 0;
+                uq4_12_t typeMultiplier = 0;
                 do
                 {
-                    var = Random32();
-                } while (gFacilityTrainerMons[DOME_MONS[loserTournamentId][k]].nature != GetNatureFromPersonality(var));
+                    personality = Random32();
+                } while (gFacilityTrainerMons[DOME_MONS[loserTournamentId][k]].nature != GetNatureFromPersonality(personality));
 
                 targetSpecies = gFacilityTrainerMons[DOME_MONS[loserTournamentId][k]].species;
-                if (var & 1)
+
+                if (personality & 1)
                     targetAbility = gSpeciesInfo[targetSpecies].abilities[1];
                 else
                     targetAbility = gSpeciesInfo[targetSpecies].abilities[0];
 
-                var = AI_TypeCalc(moveIds[i * MAX_MON_MOVES + j], targetSpecies, targetAbility);
-                if (var & MOVE_RESULT_NOT_VERY_EFFECTIVE && var & MOVE_RESULT_SUPER_EFFECTIVE)
-                    moveScores[i * MAX_MON_MOVES + j] += movePower;
-                else if (var & MOVE_RESULT_NO_EFFECT)
+                typeMultiplier = CalcPartyMonTypeEffectivenessMultiplier(moveIds[i * 4 + j], targetSpecies, targetAbility);
+                if (typeMultiplier == UQ_4_12(0))
                     moveScores[i * MAX_MON_MOVES + j] += 0;
-                else if (var & MOVE_RESULT_SUPER_EFFECTIVE)
+                else if (typeMultiplier >= UQ_4_12(2))
                     moveScores[i * MAX_MON_MOVES + j] += movePower * 2;
-                else if (var & MOVE_RESULT_NOT_VERY_EFFECTIVE)
+                else if (typeMultiplier <= UQ_4_12(0.5))
                     moveScores[i * MAX_MON_MOVES + j] += movePower / 2;
                 else
                     moveScores[i * MAX_MON_MOVES + j] += movePower;
