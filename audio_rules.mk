@@ -2,9 +2,9 @@
 
 CRY_SUBDIR := sound/direct_sound_samples/cries
 
-MID_ASM_DIR := $(MID_SUBDIR)
-CRY_BIN_DIR := $(CRY_SUBDIR)
-SOUND_BIN_DIR := sound
+MID_ASM_DIR := $(BUILD_ASSETS_DIR)/$(MID_SUBDIR)
+CRY_BIN_DIR := $(BUILD_ASSETS_DIR)/$(CRY_SUBDIR)
+SOUND_BIN_DIR := $(BUILD_ASSETS_DIR)/sound
 
 SPECIAL_OUTDIRS := $(MID_ASM_DIR) $(CRY_BIN_DIR) 
 SPECIAL_OUTDIRS += $(SOUND_BIN_DIR) $(SOUND_BIN_DIR)/direct_sound_samples/phonemes $(SOUND_BIN_DIR)/direct_sound_samples/cries
