@@ -565,9 +565,9 @@ static const u32 sDuplicateGfx[] = INCBIN_U32("build/assets/graphics/dodrio_berr
                                      "build/assets/graphics/dodrio_berry_picking/status.4bpp.lz",
                                      "build/assets/graphics/dodrio_berry_picking/cloud.4bpp.lz",
                                      "build/assets/graphics/dodrio_berry_picking/dodrio.4bpp.lz",
-                                     "graphics/dodrio_berry_picking/bg.bin.lz",
-                                     "graphics/dodrio_berry_picking/tree_border_right.bin.lz",
-                                     "graphics/dodrio_berry_picking/tree_border_left.bin.lz");
+                                     "build/assets/graphics/dodrio_berry_picking/bg.bin.lz",
+                                     "build/assets/graphics/dodrio_berry_picking/tree_border_right.bin.lz",
+                                     "build/assets/graphics/dodrio_berry_picking/tree_border_left.bin.lz");
 
 
 static const u8 sBerryFallDelays[][3] =
@@ -3598,9 +3598,9 @@ static const u32 sTreeBorder_Gfx[]          = INCBIN_U32("build/assets/graphics/
 static const u32 sStatus_Gfx[]              = INCBIN_U32("build/assets/graphics/dodrio_berry_picking/status.4bpp.lz");
 static const u32 sCloud_Gfx[]               = INCBIN_U32("build/assets/graphics/dodrio_berry_picking/cloud.4bpp.lz");
 static const u32 sDodrio_Gfx[]              = INCBIN_U32("build/assets/graphics/dodrio_berry_picking/dodrio.4bpp.lz");
-static const u32 sBg_Tilemap[]              = INCBIN_U32("graphics/dodrio_berry_picking/bg.bin.lz");
-static const u32 sTreeBorderRight_Tilemap[] = INCBIN_U32("graphics/dodrio_berry_picking/tree_border_right.bin.lz");
-static const u32 sTreeBorderLeft_Tilemap[]  = INCBIN_U32("graphics/dodrio_berry_picking/tree_border_left.bin.lz");
+static const u32 sBg_Tilemap[]              = INCBIN_U32("build/assets/graphics/dodrio_berry_picking/bg.bin.lz");
+static const u32 sTreeBorderRight_Tilemap[] = INCBIN_U32("build/assets/graphics/dodrio_berry_picking/tree_border_right.bin.lz");
+static const u32 sTreeBorderLeft_Tilemap[]  = INCBIN_U32("build/assets/graphics/dodrio_berry_picking/tree_border_left.bin.lz");
 
 static const struct OamData sOamData_Dodrio =
 {

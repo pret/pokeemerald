@@ -66,7 +66,7 @@ static const u16 sCaveTransitionPalette_Black[] = INCBIN_U16("build/assets/graph
 
 static const u16 sCaveTransitionPalette_Enter[] = INCBIN_U16("build/assets/graphics/cave_transition/enter.gbapal");
 static const u16 sCaveTransitionPalette_Exit[] = INCBIN_U16("build/assets/graphics/cave_transition/exit.gbapal");
-static const u32 sCaveTransitionTilemap[] = INCBIN_U32("graphics/cave_transition/tilemap.bin.lz");
+static const u32 sCaveTransitionTilemap[] = INCBIN_U32("build/assets/graphics/cave_transition/tilemap.bin.lz");
 static const u32 sCaveTransitionTiles[] = INCBIN_U32("build/assets/graphics/cave_transition/tiles.4bpp.lz");
 
 bool8 SetUpFieldMove_Flash(void)

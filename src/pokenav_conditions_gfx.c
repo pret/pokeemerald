@@ -27,7 +27,7 @@ static u8 sInitialLoadId; // Never read
 const u16 gConditionGraphData_Pal[] = INCBIN_U16("build/assets/graphics/pokenav/condition/graph_data.gbapal");
 const u16 gConditionText_Pal[] = INCBIN_U16("build/assets/graphics/pokenav/condition/text.gbapal");
 static const u32 sConditionGraphData_Gfx[] = INCBIN_U32("build/assets/graphics/pokenav/condition/graph_data.4bpp.lz");
-static const u32 sConditionGraphData_Tilemap[] = INCBIN_U32("graphics/pokenav/condition/graph_data.bin.lz");
+static const u32 sConditionGraphData_Tilemap[] = INCBIN_U32("build/assets/graphics/pokenav/condition/graph_data.bin.lz");
 static const u16 sMonMarkings_Pal[] = INCBIN_U16("build/assets/graphics/pokenav/condition/mon_markings.gbapal");
 
 static const struct BgTemplate sMenuBgTemplates[3] =

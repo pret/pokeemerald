@@ -76,12 +76,12 @@ static const u8 sPictureFrameTiles_Cute[]        = INCBIN_U8("build/assets/graph
 static const u8 sPictureFrameTiles_Smart[]       = INCBIN_U8("build/assets/graphics/picture_frame/smart.4bpp.rl");
 static const u8 sPictureFrameTiles_Tough[]       = INCBIN_U8("build/assets/graphics/picture_frame/tough.4bpp.rl");
 static const u8 sPictureFrameTiles_HallLobby[]   = INCBIN_U8("build/assets/graphics/picture_frame/lobby.4bpp.rl");
-static const u8 sPictureFrameTilemap_Cool[]      = INCBIN_U8("graphics/picture_frame/cool_map.bin.rl");
-static const u8 sPictureFrameTilemap_Beauty[]    = INCBIN_U8("graphics/picture_frame/beauty_map.bin.rl");
-static const u8 sPictureFrameTilemap_Cute[]      = INCBIN_U8("graphics/picture_frame/cute_map.bin.rl");
-static const u8 sPictureFrameTilemap_Smart[]     = INCBIN_U8("graphics/picture_frame/smart_map.bin.rl");
-static const u8 sPictureFrameTilemap_Tough[]     = INCBIN_U8("graphics/picture_frame/tough_map.bin.rl");
-static const u8 sPictureFrameTilemap_HallLobby[] = INCBIN_U8("graphics/picture_frame/lobby_map.bin.rl");
+static const u8 sPictureFrameTilemap_Cool[]      = INCBIN_U8("build/assets/graphics/picture_frame/cool_map.bin.rl");
+static const u8 sPictureFrameTilemap_Beauty[]    = INCBIN_U8("build/assets/graphics/picture_frame/beauty_map.bin.rl");
+static const u8 sPictureFrameTilemap_Cute[]      = INCBIN_U8("build/assets/graphics/picture_frame/cute_map.bin.rl");
+static const u8 sPictureFrameTilemap_Smart[]     = INCBIN_U8("build/assets/graphics/picture_frame/smart_map.bin.rl");
+static const u8 sPictureFrameTilemap_Tough[]     = INCBIN_U8("build/assets/graphics/picture_frame/tough_map.bin.rl");
+static const u8 sPictureFrameTilemap_HallLobby[] = INCBIN_U8("build/assets/graphics/picture_frame/lobby_map.bin.rl");
 
 static const u8 *const sContestCategoryNames_Unused[] =
 {

@@ -79,7 +79,7 @@ static const LoopedTask sConditionSearchLoopedTaskFuncs[] =
 
 static const u16 sConditionSearchResultFramePal[] = INCBIN_U16("build/assets/graphics/pokenav/condition/search_results.gbapal");
 static const u32 sConditionSearchResultTiles[] = INCBIN_U32("build/assets/graphics/pokenav/condition/search_results.4bpp.lz");
-static const u32 sConditionSearchResultTilemap[] = INCBIN_U32("graphics/pokenav/condition/search_results.bin.lz");
+static const u32 sConditionSearchResultTilemap[] = INCBIN_U32("build/assets/graphics/pokenav/condition/search_results.bin.lz");
 static const u16 sListBg_Pal[] = INCBIN_U16("build/assets/graphics/pokenav/condition/search_results_list.gbapal");
 
 static const struct BgTemplate sConditionSearchResultBgTemplates[] =

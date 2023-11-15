@@ -586,9 +586,9 @@ static const u32 sCrusherBase_Gfx[]     = INCBIN_U32("build/assets/graphics/berr
 static const u32 sImpact_Gfx[]          = INCBIN_U32("build/assets/graphics/berry_crush/impact.4bpp.lz");
 static const u32 sSparkle_Gfx[]         = INCBIN_U32("build/assets/graphics/berry_crush/sparkle.4bpp.lz");
 static const u32 sTimerDigits_Gfx[]     = INCBIN_U32("build/assets/graphics/berry_crush/timer_digits.4bpp.lz");
-static const u8 sCrusherTop_Tilemap[]   = INCBIN_U8("graphics/berry_crush/crusher_top.bin.lz");
-static const u8 sContainerCap_Tilemap[] = INCBIN_U8("graphics/berry_crush/container_cap.bin.lz");
-static const u8 sBg_Tilemap[]           = INCBIN_U8("graphics/berry_crush/bg.bin.lz");
+static const u8 sCrusherTop_Tilemap[]   = INCBIN_U8("build/assets/graphics/berry_crush/crusher_top.bin.lz");
+static const u8 sContainerCap_Tilemap[] = INCBIN_U8("build/assets/graphics/berry_crush/container_cap.bin.lz");
+static const u8 sBg_Tilemap[]           = INCBIN_U8("build/assets/graphics/berry_crush/bg.bin.lz");
 
 // Takes the number of players - 2 and a player id and returns the
 // index into sPlayerCoords where that player should be seated

@@ -239,7 +239,6 @@ clean-d:
 
 clean-assets:
 	rm -rf $(BUILD_ASSETS_DIR)
-	find . \( -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
 	
 clean-old:
 	rm -f $(MID_SUBDIR)/*.s

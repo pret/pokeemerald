@@ -8,8 +8,6 @@
 *.sa1
 *.ss[0-9]
 *.sg1
-*.lz
-*.rl
 tools/agbcc
 *.map
 *.bat

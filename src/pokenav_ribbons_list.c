@@ -74,7 +74,7 @@ static const LoopedTask sMonRibbonListLoopTaskFuncs[] =
 
 static const u16 sMonRibbonListFramePal[] = INCBIN_U16("build/assets/graphics/pokenav/ribbons/list_bg.gbapal");
 static const u32 sMonRibbonListFrameTiles[] = INCBIN_U32("build/assets/graphics/pokenav/ribbons/list_bg.4bpp.lz");
-static const u32 sMonRibbonListFrameTilemap[] = INCBIN_U32("graphics/pokenav/ribbons/list_bg.bin.lz");
+static const u32 sMonRibbonListFrameTilemap[] = INCBIN_U32("build/assets/graphics/pokenav/ribbons/list_bg.bin.lz");
 static const u16 sMonRibbonListUi_Pal[] = INCBIN_U16("build/assets/graphics/pokenav/ribbons/list_ui.gbapal");
 
 static const struct BgTemplate sMonRibbonListBgTemplates[] =

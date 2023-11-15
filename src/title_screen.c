@@ -61,7 +61,7 @@ static void SpriteCB_PokemonLogoShine(struct Sprite *sprite);
 static const u16 sUnusedUnknownPal[] = INCBIN_U16("build/assets/graphics/title_screen/unused.gbapal");
 
 static const u32 sTitleScreenRayquazaGfx[] = INCBIN_U32("build/assets/graphics/title_screen/rayquaza.4bpp.lz");
-static const u32 sTitleScreenRayquazaTilemap[] = INCBIN_U32("graphics/title_screen/rayquaza.bin.lz");
+static const u32 sTitleScreenRayquazaTilemap[] = INCBIN_U32("build/assets/graphics/title_screen/rayquaza.bin.lz");
 static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("build/assets/graphics/title_screen/logo_shine.4bpp.lz");
 static const u32 sTitleScreenCloudsGfx[] = INCBIN_U32("build/assets/graphics/title_screen/clouds.4bpp.lz");
 
