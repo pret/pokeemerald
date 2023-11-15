@@ -1,29 +1,35 @@
-*.exe
-*.o
-*.i
-*.elf
-*.gba
-!data/*.gba
+# OS
+.DS_Store
+Thumbs.db
+.fuse_hidden*
+
+# Tools
+.idea/
+.vscode/
+porymap*
+
+# Emulation Files
 *.sgm
 *.sa1
 *.ss[0-9]
 *.sg1
-tools/agbcc
-*.map
-*.bat
-*.dump
 *.sa*
-Thumbs.db
+
+# Build artifacts
 build/
-.DS_Store
-*.ddump
-.idea/
-porymap*
-prefabs.json
-.vscode/
-*.a
-.fuse_hidden*
+tools/agbcc
+*.gba
+!data/*.gba
+*.elf
+*.map
+*.exe
+*.sym
+*.dump
+
+# Other
+*.bat
 *.sna
 *.diff
-*.sym
 *.js
+*.ddump
+prefabs.json
