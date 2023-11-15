@@ -259,12 +259,12 @@ tidymodern:
 	rm -rf $(MODERN_OBJ_DIR_NAME)
 
 # Other rules
-include graphics_file_rules.mk
+include graphics_special_rules.mk
 include map_data_rules.mk
 include spritesheet_rules.mk
 include json_data_rules.mk
 include songs.mk
-include graphics.mk
+include graphics_rules.mk
 
 $(CRY_SUBDIR)/%.bin: $(CRY_SUBDIR)/%.aif ; $(AIF) $< $@ --compress
 sound/%.bin: sound/%.aif ; $(AIF) $< $@
