@@ -29,7 +29,7 @@ build/
 .DS_Store
 *.ddump
 .idea/
-porymap.*.cfg
+porymap*
 prefabs.json
 .vscode/
 *.a
