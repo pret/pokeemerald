@@ -579,13 +579,13 @@ static const u32 sPressingSpeedConversionTable[] =
       390625  //  0.390625
 };
 
-static const u16 sCrusherBase_Pal[]     = INCBIN_U16("graphics/berry_crush/crusher_base.gbapal");
-static const u16 sEffects_Pal[]         = INCBIN_U16("graphics/berry_crush/effects.gbapal");
-static const u16 sTimerDigits_Pal[]     = INCBIN_U16("graphics/berry_crush/timer_digits.gbapal");
-static const u32 sCrusherBase_Gfx[]     = INCBIN_U32("graphics/berry_crush/crusher_base.4bpp.lz");
-static const u32 sImpact_Gfx[]          = INCBIN_U32("graphics/berry_crush/impact.4bpp.lz");
-static const u32 sSparkle_Gfx[]         = INCBIN_U32("graphics/berry_crush/sparkle.4bpp.lz");
-static const u32 sTimerDigits_Gfx[]     = INCBIN_U32("graphics/berry_crush/timer_digits.4bpp.lz");
+static const u16 sCrusherBase_Pal[]     = INCBIN_U16("build/assets/graphics/berry_crush/crusher_base.gbapal");
+static const u16 sEffects_Pal[]         = INCBIN_U16("build/assets/graphics/berry_crush/effects.gbapal");
+static const u16 sTimerDigits_Pal[]     = INCBIN_U16("build/assets/graphics/berry_crush/timer_digits.gbapal");
+static const u32 sCrusherBase_Gfx[]     = INCBIN_U32("build/assets/graphics/berry_crush/crusher_base.4bpp.lz");
+static const u32 sImpact_Gfx[]          = INCBIN_U32("build/assets/graphics/berry_crush/impact.4bpp.lz");
+static const u32 sSparkle_Gfx[]         = INCBIN_U32("build/assets/graphics/berry_crush/sparkle.4bpp.lz");
+static const u32 sTimerDigits_Gfx[]     = INCBIN_U32("build/assets/graphics/berry_crush/timer_digits.4bpp.lz");
 static const u8 sCrusherTop_Tilemap[]   = INCBIN_U8("graphics/berry_crush/crusher_top.bin.lz");
 static const u8 sContainerCap_Tilemap[] = INCBIN_U8("graphics/berry_crush/container_cap.bin.lz");
 static const u8 sBg_Tilemap[]           = INCBIN_U8("graphics/berry_crush/bg.bin.lz");

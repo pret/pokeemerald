@@ -635,7 +635,7 @@ static const struct SubspriteTable sStatusSummaryBar_SubspriteTable_Exit[] =
 };
 
 // unused unknown image
-static const u8 sUnusedStatusSummary[] = INCBIN_U8("graphics/battle_interface/unused_status_summary.4bpp");
+static const u8 sUnusedStatusSummary[] = INCBIN_U8("build/assets/graphics/battle_interface/unused_status_summary.4bpp");
 
 static const struct CompressedSpriteSheet sStatusSummaryBarSpriteSheet =
 {

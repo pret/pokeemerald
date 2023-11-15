@@ -67,12 +67,12 @@ static EWRAM_DATA struct PokedexCryScreen *sDexCryScreen = NULL;
 static EWRAM_DATA u8 *sCryWaveformWindowTiledata = NULL;
 static EWRAM_DATA struct PokedexCryMeterNeedle *sCryMeterNeedle = NULL;
 
-static const u16 sCryMeterNeedle_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter_needle.gbapal");
-static const u8 sCryMeterNeedle_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter_needle.4bpp");
+static const u16 sCryMeterNeedle_Pal[] = INCBIN_U16("build/assets/graphics/pokedex/cry_meter_needle.gbapal");
+static const u8 sCryMeterNeedle_Gfx[] = INCBIN_U8("build/assets/graphics/pokedex/cry_meter_needle.4bpp");
 
 static const u16 sCryMeter_Tilemap[] = INCBIN_U16("graphics/pokedex/cry_meter_map.bin"); // Unused
-static const u16 sCryMeter_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal");
-static const u8 sCryMeter_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
+static const u16 sCryMeter_Pal[] = INCBIN_U16("build/assets/graphics/pokedex/cry_meter.gbapal");
+static const u8 sCryMeter_Gfx[] = INCBIN_U8("build/assets/graphics/pokedex/cry_meter.4bpp.lz");
 
 static const u16 sWaveformOffsets[][72] =
 {
@@ -159,8 +159,8 @@ static const u16 sWaveformOffsets[][72] =
     }
 };
 
-static const u16 sCryScreenBg_Pal[] = INCBIN_U16("graphics/pokedex/cry_screen_bg.gbapal");
-static const u8 sCryScreenBg_Gfx[] = INCBIN_U8("graphics/pokedex/cry_screen_bg.4bpp");
+static const u16 sCryScreenBg_Pal[] = INCBIN_U16("build/assets/graphics/pokedex/cry_screen_bg.gbapal");
+static const u8 sCryScreenBg_Gfx[] = INCBIN_U8("build/assets/graphics/pokedex/cry_screen_bg.4bpp");
 
 static const u8 sWaveformTileDataNybbleMasks[] = {0xF0, 0x0F};
 

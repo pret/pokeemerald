@@ -8,17 +8,8 @@
 *.sa1
 *.ss[0-9]
 *.sg1
-*.1bpp
-*.4bpp
-*.8bpp
-*.gbapal
 *.lz
 *.rl
-*.latfont
-*.hwjpnfont
-*.fwjpnfont
-sound/**/*.bin
-sound/songs/midi/*.s
 tools/agbcc
 *.map
 *.bat

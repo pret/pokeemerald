@@ -68,10 +68,10 @@ static const u8 sFontHalfRowOffsets[] =
     0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00
 };
 
-static const u8 sDownArrowTiles[] = INCBIN_U8("graphics/fonts/down_arrow.4bpp");
-static const u8 sDarkDownArrowTiles[] = INCBIN_U8("graphics/fonts/down_arrow_alt.4bpp");
-static const u8 sUnusedFRLGBlankedDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_blanked_down_arrow.4bpp");
-static const u8 sUnusedFRLGDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_down_arrow.4bpp");
+static const u8 sDownArrowTiles[] = INCBIN_U8("build/assets/graphics/fonts/down_arrow.4bpp");
+static const u8 sDarkDownArrowTiles[] = INCBIN_U8("build/assets/graphics/fonts/down_arrow_alt.4bpp");
+static const u8 sUnusedFRLGBlankedDownArrow[] = INCBIN_U8("build/assets/graphics/fonts/unused_frlg_blanked_down_arrow.4bpp");
+static const u8 sUnusedFRLGDownArrow[] = INCBIN_U8("build/assets/graphics/fonts/unused_frlg_down_arrow.4bpp");
 static const u8 sDownArrowYCoords[] = { 0, 1, 2, 1 };
 static const u8 sWindowVerticalScrollSpeeds[] = {
     [OPTIONS_TEXT_SPEED_SLOW] = 1,
@@ -114,7 +114,7 @@ struct
     [CHAR_DPAD_NONE]      = { 0x22,  8, 12 }
 };
 
-static const u8 sKeypadIconTiles[] = INCBIN_U8("graphics/fonts/keypad_icons.4bpp");
+static const u8 sKeypadIconTiles[] = INCBIN_U8("build/assets/graphics/fonts/keypad_icons.4bpp");
 
 static const struct FontInfo sFontInfos[] =
 {
@@ -234,7 +234,7 @@ static const u8 sMenuCursorDimensions[][2] =
     [FONT_BOLD]         = {}
 };
 
-static const u16 sFontBoldJapaneseGlyphs[] = INCBIN_U16("graphics/fonts/bold.hwjpnfont");
+static const u16 sFontBoldJapaneseGlyphs[] = INCBIN_U16("build/assets/graphics/fonts/bold.hwjpnfont");
 
 static void SetFontsPointer(const struct FontInfo *fonts)
 {

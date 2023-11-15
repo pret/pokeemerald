@@ -3267,17 +3267,17 @@ void DoDeoxysRockInteraction(void)
 }
 
 static const u16 sDeoxysRockPalettes[DEOXYS_ROCK_LEVELS][16] = {
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_1.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_2.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_3.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_4.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_5.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_6.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_7.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_8.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_9.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_10.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_11.gbapal"),
+    INCBIN_U16("build/assets/graphics/field_effects/palettes/deoxys_rock_1.gbapal"),
+    INCBIN_U16("build/assets/graphics/field_effects/palettes/deoxys_rock_2.gbapal"),
+    INCBIN_U16("build/assets/graphics/field_effects/palettes/deoxys_rock_3.gbapal"),
+    INCBIN_U16("build/assets/graphics/field_effects/palettes/deoxys_rock_4.gbapal"),
+    INCBIN_U16("build/assets/graphics/field_effects/palettes/deoxys_rock_5.gbapal"),
+    INCBIN_U16("build/assets/graphics/field_effects/palettes/deoxys_rock_6.gbapal"),
+    INCBIN_U16("build/assets/graphics/field_effects/palettes/deoxys_rock_7.gbapal"),
+    INCBIN_U16("build/assets/graphics/field_effects/palettes/deoxys_rock_8.gbapal"),
+    INCBIN_U16("build/assets/graphics/field_effects/palettes/deoxys_rock_9.gbapal"),
+    INCBIN_U16("build/assets/graphics/field_effects/palettes/deoxys_rock_10.gbapal"),
+    INCBIN_U16("build/assets/graphics/field_effects/palettes/deoxys_rock_11.gbapal"),
 };
 
 static const u8 sDeoxysRockCoords[DEOXYS_ROCK_LEVELS][2] = {

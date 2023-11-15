@@ -328,9 +328,9 @@ static const struct SpriteTemplate sSpriteTemplate_HofConfetti =
     .callback = SpriteCB_HofConfetti
 };
 
-static const u16 sHallOfFame_Pal[] = INCBIN_U16("graphics/misc/japanese_hof.gbapal");
+static const u16 sHallOfFame_Pal[] = INCBIN_U16("build/assets/graphics/misc/japanese_hof.gbapal");
 
-static const u32 sHallOfFame_Gfx[] = INCBIN_U32("graphics/misc/japanese_hof.4bpp.lz");
+static const u32 sHallOfFame_Gfx[] = INCBIN_U32("build/assets/graphics/misc/japanese_hof.4bpp.lz");
 
 static const struct HallofFameMon sDummyFameMon =
 {

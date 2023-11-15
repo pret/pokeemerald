@@ -62,24 +62,24 @@ static void WCSS_AddTextPrinterParameterized(u8, u8, const u8 *, u8, u8, u8);
 static bool32 UpdateCommunicationCounts(u32 *, u32 *, u32 *, u8);
 
 static const u16 sPalettes[][16] = {
-    INCBIN_U16("graphics/wireless_status_screen/default.gbapal"),
+    INCBIN_U16("build/assets/graphics/wireless_status_screen/default.gbapal"),
     {}, // All black. Never read
-    INCBIN_U16("graphics/wireless_status_screen/anim_00.gbapal"),
-    INCBIN_U16("graphics/wireless_status_screen/anim_01.gbapal"),
-    INCBIN_U16("graphics/wireless_status_screen/anim_02.gbapal"),
-    INCBIN_U16("graphics/wireless_status_screen/anim_03.gbapal"),
-    INCBIN_U16("graphics/wireless_status_screen/anim_04.gbapal"),
-    INCBIN_U16("graphics/wireless_status_screen/anim_05.gbapal"),
-    INCBIN_U16("graphics/wireless_status_screen/anim_06.gbapal"),
-    INCBIN_U16("graphics/wireless_status_screen/anim_07.gbapal"),
-    INCBIN_U16("graphics/wireless_status_screen/anim_08.gbapal"),
-    INCBIN_U16("graphics/wireless_status_screen/anim_09.gbapal"),
-    INCBIN_U16("graphics/wireless_status_screen/anim_10.gbapal"),
-    INCBIN_U16("graphics/wireless_status_screen/anim_11.gbapal"),
-    INCBIN_U16("graphics/wireless_status_screen/anim_12.gbapal"),
-    INCBIN_U16("graphics/wireless_status_screen/anim_13.gbapal")
+    INCBIN_U16("build/assets/graphics/wireless_status_screen/anim_00.gbapal"),
+    INCBIN_U16("build/assets/graphics/wireless_status_screen/anim_01.gbapal"),
+    INCBIN_U16("build/assets/graphics/wireless_status_screen/anim_02.gbapal"),
+    INCBIN_U16("build/assets/graphics/wireless_status_screen/anim_03.gbapal"),
+    INCBIN_U16("build/assets/graphics/wireless_status_screen/anim_04.gbapal"),
+    INCBIN_U16("build/assets/graphics/wireless_status_screen/anim_05.gbapal"),
+    INCBIN_U16("build/assets/graphics/wireless_status_screen/anim_06.gbapal"),
+    INCBIN_U16("build/assets/graphics/wireless_status_screen/anim_07.gbapal"),
+    INCBIN_U16("build/assets/graphics/wireless_status_screen/anim_08.gbapal"),
+    INCBIN_U16("build/assets/graphics/wireless_status_screen/anim_09.gbapal"),
+    INCBIN_U16("build/assets/graphics/wireless_status_screen/anim_10.gbapal"),
+    INCBIN_U16("build/assets/graphics/wireless_status_screen/anim_11.gbapal"),
+    INCBIN_U16("build/assets/graphics/wireless_status_screen/anim_12.gbapal"),
+    INCBIN_U16("build/assets/graphics/wireless_status_screen/anim_13.gbapal")
 };
-static const u32 sBgTiles_Gfx[] = INCBIN_U32("graphics/wireless_status_screen/bg.4bpp.lz");
+static const u32 sBgTiles_Gfx[] = INCBIN_U32("build/assets/graphics/wireless_status_screen/bg.4bpp.lz");
 static const u32 sBgTiles_Tilemap[] = INCBIN_U32("graphics/wireless_status_screen/bg.bin.lz");
 
 static const struct BgTemplate sBgTemplates[] = {

@@ -258,22 +258,22 @@ static struct FactorySwapScreen *sFactorySwapScreen;
 
 u8 (*gFactorySelect_CurrentOptionFunc)(void);
 
-static const u16 sPokeballGray_Pal[]         = INCBIN_U16("graphics/battle_frontier/factory_screen/pokeball_gray.gbapal");
-static const u16 sPokeballSelected_Pal[]     = INCBIN_U16("graphics/battle_frontier/factory_screen/pokeball_selected.gbapal");
-static const u16 sInterface_Pal[]            = INCBIN_U16("graphics/battle_frontier/factory_screen/interface.gbapal"); // Arrow, menu/action highlights, action box, etc
-static const u8 sPokeball_Gfx[]              = INCBIN_U8( "graphics/battle_frontier/factory_screen/pokeball.4bpp"); // Unused, gPokeballSelection_Gfx used instead
-static const u8 sArrow_Gfx[]                 = INCBIN_U8( "graphics/battle_frontier/factory_screen/arrow.4bpp");
-static const u8 sMenuHighlightLeft_Gfx[]     = INCBIN_U8( "graphics/battle_frontier/factory_screen/menu_highlight_left.4bpp");
-static const u8 sMenuHighlightRight_Gfx[]    = INCBIN_U8( "graphics/battle_frontier/factory_screen/menu_highlight_right.4bpp");
-static const u8 sActionBoxLeft_Gfx[]         = INCBIN_U8( "graphics/battle_frontier/factory_screen/action_box_left.4bpp");
-static const u8 sActionBoxRight_Gfx[]        = INCBIN_U8( "graphics/battle_frontier/factory_screen/action_box_right.4bpp");
-static const u8 sActionHighlightLeft_Gfx[]   = INCBIN_U8( "graphics/battle_frontier/factory_screen/action_highlight_left.4bpp");
-static const u8 sActionHighlightMiddle_Gfx[] = INCBIN_U8( "graphics/battle_frontier/factory_screen/action_highlight_middle.4bpp");
-static const u8 sActionHighlightRight_Gfx[]  = INCBIN_U8( "graphics/battle_frontier/factory_screen/action_highlight_right.4bpp");
-static const u8 sMonPicBgAnim_Gfx[]          = INCBIN_U8( "graphics/battle_frontier/factory_screen/mon_pic_bg_anim.4bpp");
+static const u16 sPokeballGray_Pal[]         = INCBIN_U16("build/assets/graphics/battle_frontier/factory_screen/pokeball_gray.gbapal");
+static const u16 sPokeballSelected_Pal[]     = INCBIN_U16("build/assets/graphics/battle_frontier/factory_screen/pokeball_selected.gbapal");
+static const u16 sInterface_Pal[]            = INCBIN_U16("build/assets/graphics/battle_frontier/factory_screen/interface.gbapal"); // Arrow, menu/action highlights, action box, etc
+static const u8 sPokeball_Gfx[]              = INCBIN_U8( "build/assets/graphics/battle_frontier/factory_screen/pokeball.4bpp"); // Unused, gPokeballSelection_Gfx used instead
+static const u8 sArrow_Gfx[]                 = INCBIN_U8( "build/assets/graphics/battle_frontier/factory_screen/arrow.4bpp");
+static const u8 sMenuHighlightLeft_Gfx[]     = INCBIN_U8( "build/assets/graphics/battle_frontier/factory_screen/menu_highlight_left.4bpp");
+static const u8 sMenuHighlightRight_Gfx[]    = INCBIN_U8( "build/assets/graphics/battle_frontier/factory_screen/menu_highlight_right.4bpp");
+static const u8 sActionBoxLeft_Gfx[]         = INCBIN_U8( "build/assets/graphics/battle_frontier/factory_screen/action_box_left.4bpp");
+static const u8 sActionBoxRight_Gfx[]        = INCBIN_U8( "build/assets/graphics/battle_frontier/factory_screen/action_box_right.4bpp");
+static const u8 sActionHighlightLeft_Gfx[]   = INCBIN_U8( "build/assets/graphics/battle_frontier/factory_screen/action_highlight_left.4bpp");
+static const u8 sActionHighlightMiddle_Gfx[] = INCBIN_U8( "build/assets/graphics/battle_frontier/factory_screen/action_highlight_middle.4bpp");
+static const u8 sActionHighlightRight_Gfx[]  = INCBIN_U8( "build/assets/graphics/battle_frontier/factory_screen/action_highlight_right.4bpp");
+static const u8 sMonPicBgAnim_Gfx[]          = INCBIN_U8( "build/assets/graphics/battle_frontier/factory_screen/mon_pic_bg_anim.4bpp");
 static const u8 sMonPicBg_Tilemap[]          = INCBIN_U8( "graphics/battle_frontier/factory_screen/mon_pic_bg.bin");
-static const u16 sMonPicBg_Gfx[]             = INCBIN_U16("graphics/battle_frontier/factory_screen/mon_pic_bg.4bpp");
-static const u16 sMonPicBg_Pal[]             = INCBIN_U16("graphics/battle_frontier/factory_screen/mon_pic_bg.gbapal");
+static const u16 sMonPicBg_Gfx[]             = INCBIN_U16("build/assets/graphics/battle_frontier/factory_screen/mon_pic_bg.4bpp");
+static const u16 sMonPicBg_Pal[]             = INCBIN_U16("build/assets/graphics/battle_frontier/factory_screen/mon_pic_bg.gbapal");
 
 static const struct SpriteSheet sSelect_SpriteSheets[] =
 {
@@ -405,7 +405,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-static const u16 sSelectText_Pal[] = INCBIN_U16("graphics/battle_frontier/factory_screen/text.gbapal");
+static const u16 sSelectText_Pal[] = INCBIN_U16("build/assets/graphics/battle_frontier/factory_screen/text.gbapal");
 static const u8 sMenuOptionTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT};
 static const u8 sSpeciesNameTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_TRANSPARENT};
 
@@ -1031,7 +1031,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-static const u16 sSwapText_Pal[] = INCBIN_U16("graphics/battle_frontier/factory_screen/text.gbapal"); // Identical to sSelectText_Pal
+static const u16 sSwapText_Pal[] = INCBIN_U16("build/assets/graphics/battle_frontier/factory_screen/text.gbapal"); // Identical to sSelectText_Pal
 static const u8 sSwapMenuOptionsTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT};
 static const u8 sSwapSpeciesNameTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_TRANSPARENT};
 

@@ -77,8 +77,8 @@ static u32 LoopedTask_ExitRegionMap(s32);
 extern const u16 gRegionMapCityZoomTiles_Pal[];
 extern const u32 gRegionMapCityZoomText_Gfx[];
 
-static const u16 sMapSecInfoWindow_Pal[] = INCBIN_U16("graphics/pokenav/region_map/info_window.gbapal");
-static const u32 sRegionMapCityZoomTiles_Gfx[] = INCBIN_U32("graphics/pokenav/region_map/zoom_tiles.4bpp.lz");
+static const u16 sMapSecInfoWindow_Pal[] = INCBIN_U16("build/assets/graphics/pokenav/region_map/info_window.gbapal");
+static const u32 sRegionMapCityZoomTiles_Gfx[] = INCBIN_U32("build/assets/graphics/pokenav/region_map/zoom_tiles.4bpp.lz");
 
 #include "data/region_map/city_map_tilemaps.h"
 

@@ -93,8 +93,8 @@ static u32 LoopedTask_EraseListForCheckPage(s32);
 static u32 LoopedTask_ReshowListFromCheckPage(s32);
 static u32 LoopedTask_PrintCheckPageInfo(s32);
 
-static const u16 sListArrow_Pal[] = INCBIN_U16("graphics/pokenav/list_arrows.gbapal");
-static const u32 sListArrow_Gfx[] = INCBIN_U32("graphics/pokenav/list_arrows.4bpp.lz");
+static const u16 sListArrow_Pal[] = INCBIN_U16("build/assets/graphics/pokenav/list_arrows.gbapal");
+static const u32 sListArrow_Gfx[] = INCBIN_U32("build/assets/graphics/pokenav/list_arrows.4bpp.lz");
 
 static EWRAM_DATA u32 sMoveWindowDownIndex = 0; // Read, but pointlessly
 

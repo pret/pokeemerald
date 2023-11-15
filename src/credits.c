@@ -86,8 +86,8 @@ EWRAM_DATA bool8 gHasHallOfFameRecords = 0;
 static EWRAM_DATA bool8 sUsedSpeedUp = 0; // Never read
 static EWRAM_DATA struct CreditsData *sCreditsData = {0};
 
-static const u16 sCredits_Pal[] = INCBIN_U16("graphics/credits/credits.gbapal");
-static const u32 sCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/the_end_copyright.4bpp.lz");
+static const u16 sCredits_Pal[] = INCBIN_U16("build/assets/graphics/credits/credits.gbapal");
+static const u32 sCreditsCopyrightEnd_Gfx[] = INCBIN_U32("build/assets/graphics/credits/the_end_copyright.4bpp.lz");
 
 static void SpriteCB_CreditsMonBg(struct Sprite *);
 static void Task_WaitPaletteFade(u8);

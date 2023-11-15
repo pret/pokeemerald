@@ -305,10 +305,10 @@ static const struct SpriteTemplate sSpriteTemplate_RedArrowCursor =
     .callback = SpriteCallback_RedArrowCursor,
 };
 
-static const u16 sRedInterface_Pal[]    = INCBIN_U16("graphics/interface/red.gbapal"); // Shared by all of the below gfx
-static const u32 sScrollIndicator_Gfx[] = INCBIN_U32("graphics/interface/scroll_indicator.4bpp.lz");
-static const u32 sOutlineCursor_Gfx[]   = INCBIN_U32("graphics/interface/outline_cursor.4bpp.lz");
-static const u32 sArrowCursor_Gfx[]     = INCBIN_U32("graphics/interface/arrow_cursor.4bpp.lz");
+static const u16 sRedInterface_Pal[]    = INCBIN_U16("build/assets/graphics/interface/red.gbapal"); // Shared by all of the below gfx
+static const u32 sScrollIndicator_Gfx[] = INCBIN_U32("build/assets/graphics/interface/scroll_indicator.4bpp.lz");
+static const u32 sOutlineCursor_Gfx[]   = INCBIN_U32("build/assets/graphics/interface/outline_cursor.4bpp.lz");
+static const u32 sArrowCursor_Gfx[]     = INCBIN_U32("build/assets/graphics/interface/arrow_cursor.4bpp.lz");
 
 // code
 static void ListMenuDummyTask(u8 taskId)

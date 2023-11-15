@@ -116,16 +116,16 @@ static void CB_FadeInFlyMap(void);
 static void CB_HandleFlyMapInput(void);
 static void CB_ExitFlyMap(void);
 
-static const u16 sRegionMapCursorPal[] = INCBIN_U16("graphics/pokenav/region_map/cursor.gbapal");
-static const u32 sRegionMapCursorSmallGfxLZ[] = INCBIN_U32("graphics/pokenav/region_map/cursor_small.4bpp.lz");
-static const u32 sRegionMapCursorLargeGfxLZ[] = INCBIN_U32("graphics/pokenav/region_map/cursor_large.4bpp.lz");
-static const u16 sRegionMapBg_Pal[] = INCBIN_U16("graphics/pokenav/region_map/map.gbapal");
-static const u32 sRegionMapBg_GfxLZ[] = INCBIN_U32("graphics/pokenav/region_map/map.8bpp.lz");
+static const u16 sRegionMapCursorPal[] = INCBIN_U16("build/assets/graphics/pokenav/region_map/cursor.gbapal");
+static const u32 sRegionMapCursorSmallGfxLZ[] = INCBIN_U32("build/assets/graphics/pokenav/region_map/cursor_small.4bpp.lz");
+static const u32 sRegionMapCursorLargeGfxLZ[] = INCBIN_U32("build/assets/graphics/pokenav/region_map/cursor_large.4bpp.lz");
+static const u16 sRegionMapBg_Pal[] = INCBIN_U16("build/assets/graphics/pokenav/region_map/map.gbapal");
+static const u32 sRegionMapBg_GfxLZ[] = INCBIN_U32("build/assets/graphics/pokenav/region_map/map.8bpp.lz");
 static const u32 sRegionMapBg_TilemapLZ[] = INCBIN_U32("graphics/pokenav/region_map/map.bin.lz");
-static const u16 sRegionMapPlayerIcon_BrendanPal[] = INCBIN_U16("graphics/pokenav/region_map/brendan_icon.gbapal");
-static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCBIN_U8("graphics/pokenav/region_map/brendan_icon.4bpp");
-static const u16 sRegionMapPlayerIcon_MayPal[] = INCBIN_U16("graphics/pokenav/region_map/may_icon.gbapal");
-static const u8 sRegionMapPlayerIcon_MayGfx[] = INCBIN_U8("graphics/pokenav/region_map/may_icon.4bpp");
+static const u16 sRegionMapPlayerIcon_BrendanPal[] = INCBIN_U16("build/assets/graphics/pokenav/region_map/brendan_icon.gbapal");
+static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCBIN_U8("build/assets/graphics/pokenav/region_map/brendan_icon.4bpp");
+static const u16 sRegionMapPlayerIcon_MayPal[] = INCBIN_U16("build/assets/graphics/pokenav/region_map/may_icon.gbapal");
+static const u8 sRegionMapPlayerIcon_MayGfx[] = INCBIN_U8("build/assets/graphics/pokenav/region_map/may_icon.4bpp");
 
 #include "data/region_map/region_map_layout.h"
 #include "generated/data/region_map/region_map_entries.h"
@@ -280,11 +280,11 @@ static const u8 sMapSecIdsOffMap[] =
     MAPSEC_NAVEL_ROCK
 };
 
-static const u16 sRegionMapFramePal[] = INCBIN_U16("graphics/pokenav/region_map/frame.gbapal");
-static const u32 sRegionMapFrameGfxLZ[] = INCBIN_U32("graphics/pokenav/region_map/frame.4bpp.lz");
+static const u16 sRegionMapFramePal[] = INCBIN_U16("build/assets/graphics/pokenav/region_map/frame.gbapal");
+static const u32 sRegionMapFrameGfxLZ[] = INCBIN_U32("build/assets/graphics/pokenav/region_map/frame.4bpp.lz");
 static const u32 sRegionMapFrameTilemapLZ[] = INCBIN_U32("graphics/pokenav/region_map/frame.bin.lz");
-static const u16 sFlyTargetIcons_Pal[] = INCBIN_U16("graphics/pokenav/region_map/fly_target_icons.gbapal");
-static const u32 sFlyTargetIcons_Gfx[] = INCBIN_U32("graphics/pokenav/region_map/fly_target_icons.4bpp.lz");
+static const u16 sFlyTargetIcons_Pal[] = INCBIN_U16("build/assets/graphics/pokenav/region_map/fly_target_icons.gbapal");
+static const u32 sFlyTargetIcons_Gfx[] = INCBIN_U32("build/assets/graphics/pokenav/region_map/fly_target_icons.4bpp.lz");
 
 static const u8 sMapHealLocations[][3] =
 {

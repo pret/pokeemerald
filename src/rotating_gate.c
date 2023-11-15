@@ -224,14 +224,14 @@ static const struct RotatingGatePuzzle sRotatingGate_TrickHousePuzzleConfig[] =
 // something else, using vars that persist when exiting the map could softlock the puzzle.
 STATIC_ASSERT(MAX_GATES <= (2 * NUM_TEMP_VARS), TooManyRotatingGates)
 
-static const u8 sRotatingGateTiles_1[] = INCBIN_U8("graphics/rotating_gates/l1.4bpp");
-static const u8 sRotatingGateTiles_2[] = INCBIN_U8("graphics/rotating_gates/l2.4bpp");
-static const u8 sRotatingGateTiles_3[] = INCBIN_U8("graphics/rotating_gates/l3.4bpp");
-static const u8 sRotatingGateTiles_4[] = INCBIN_U8("graphics/rotating_gates/l4.4bpp");
-static const u8 sRotatingGateTiles_5[] = INCBIN_U8("graphics/rotating_gates/t1.4bpp");
-static const u8 sRotatingGateTiles_6[] = INCBIN_U8("graphics/rotating_gates/t2.4bpp");
-static const u8 sRotatingGateTiles_7[] = INCBIN_U8("graphics/rotating_gates/t3.4bpp");
-static const u8 sRotatingGateTiles_8[] = INCBIN_U8("graphics/rotating_gates/t4.4bpp");
+static const u8 sRotatingGateTiles_1[] = INCBIN_U8("build/assets/graphics/rotating_gates/l1.4bpp");
+static const u8 sRotatingGateTiles_2[] = INCBIN_U8("build/assets/graphics/rotating_gates/l2.4bpp");
+static const u8 sRotatingGateTiles_3[] = INCBIN_U8("build/assets/graphics/rotating_gates/l3.4bpp");
+static const u8 sRotatingGateTiles_4[] = INCBIN_U8("build/assets/graphics/rotating_gates/l4.4bpp");
+static const u8 sRotatingGateTiles_5[] = INCBIN_U8("build/assets/graphics/rotating_gates/t1.4bpp");
+static const u8 sRotatingGateTiles_6[] = INCBIN_U8("build/assets/graphics/rotating_gates/t2.4bpp");
+static const u8 sRotatingGateTiles_7[] = INCBIN_U8("build/assets/graphics/rotating_gates/t3.4bpp");
+static const u8 sRotatingGateTiles_8[] = INCBIN_U8("build/assets/graphics/rotating_gates/t4.4bpp");
 
 static const struct OamData sOamData_RotatingGateLarge =
 {

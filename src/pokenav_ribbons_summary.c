@@ -144,14 +144,14 @@ struct
 #include "data/text/ribbon_descriptions.h"
 #include "data/text/gift_ribbon_descriptions.h"
 
-static const u16 sRibbonIcons1_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/icons1.gbapal");
-static const u16 sRibbonIcons2_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/icons2.gbapal");
-static const u16 sRibbonIcons3_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/icons3.gbapal");
-static const u16 sRibbonIcons4_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/icons4.gbapal");
-static const u16 sRibbonIcons5_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/icons5.gbapal");
-static const u16 sMonInfo_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/mon_info.gbapal"); // palette for Pokémon's name/gender/level text
-static const u32 sRibbonIconsSmall_Gfx[] = INCBIN_U32("graphics/pokenav/ribbons/icons.4bpp.lz");
-static const u32 sRibbonIconsBig_Gfx[] = INCBIN_U32("graphics/pokenav/ribbons/icons_big.4bpp.lz");
+static const u16 sRibbonIcons1_Pal[] = INCBIN_U16("build/assets/graphics/pokenav/ribbons/icons1.gbapal");
+static const u16 sRibbonIcons2_Pal[] = INCBIN_U16("build/assets/graphics/pokenav/ribbons/icons2.gbapal");
+static const u16 sRibbonIcons3_Pal[] = INCBIN_U16("build/assets/graphics/pokenav/ribbons/icons3.gbapal");
+static const u16 sRibbonIcons4_Pal[] = INCBIN_U16("build/assets/graphics/pokenav/ribbons/icons4.gbapal");
+static const u16 sRibbonIcons5_Pal[] = INCBIN_U16("build/assets/graphics/pokenav/ribbons/icons5.gbapal");
+static const u16 sMonInfo_Pal[] = INCBIN_U16("build/assets/graphics/pokenav/ribbons/mon_info.gbapal"); // palette for Pokémon's name/gender/level text
+static const u32 sRibbonIconsSmall_Gfx[] = INCBIN_U32("build/assets/graphics/pokenav/ribbons/icons.4bpp.lz");
+static const u32 sRibbonIconsBig_Gfx[] = INCBIN_U32("build/assets/graphics/pokenav/ribbons/icons_big.4bpp.lz");
 
 static const struct BgTemplate sBgTemplates[] =
 {

@@ -33,8 +33,8 @@ static void CB2_ShowTrainerHillRecords(void);
 EWRAM_DATA u8 gRecordsWindowId = 0;
 EWRAM_DATA static u8 *sTilemapBuffer = NULL;
 
-static const u32 sTrainerHillWindowTileset[] = INCBIN_U32("graphics/trainer_hill/records_window.4bpp");
-static const u16 sTrainerHillWindowPalette[] = INCBIN_U16("graphics/trainer_hill/records_window.gbapal");
+static const u32 sTrainerHillWindowTileset[] = INCBIN_U32("build/assets/graphics/trainer_hill/records_window.4bpp");
+static const u16 sTrainerHillWindowPalette[] = INCBIN_U16("build/assets/graphics/trainer_hill/records_window.gbapal");
 static const u32 sTrainerHillWindowTilemap[] = INCBIN_U32("graphics/trainer_hill/records_window.bin");
 
 static const struct BgTemplate sTrainerHillRecordsBgTemplates[] =

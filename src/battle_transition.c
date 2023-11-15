@@ -295,45 +295,45 @@ static struct RectangularSpiralLine sRectangularSpiralLines[4];
 
 EWRAM_DATA static struct TransitionData *sTransitionData = NULL;
 
-static const u32 sBigPokeball_Tileset[] = INCBIN_U32("graphics/battle_transitions/big_pokeball.4bpp");
-static const u32 sPokeballTrail_Tileset[] = INCBIN_U32("graphics/battle_transitions/pokeball_trail.4bpp");
-static const u8 sPokeball_Gfx[] = INCBIN_U8("graphics/battle_transitions/pokeball.4bpp");
-static const u32 sEliteFour_Tileset[] = INCBIN_U32("graphics/battle_transitions/elite_four_bg.4bpp");
-static const u8 sUnusedBrendan_Gfx[] = INCBIN_U8("graphics/battle_transitions/unused_brendan.4bpp");
-static const u8 sUnusedLass_Gfx[] = INCBIN_U8("graphics/battle_transitions/unused_lass.4bpp");
-static const u32 sShrinkingBoxTileset[] = INCBIN_U32("graphics/battle_transitions/shrinking_box.4bpp");
-static const u16 sEvilTeam_Palette[] = INCBIN_U16("graphics/battle_transitions/evil_team.gbapal");
-static const u32 sTeamAqua_Tileset[] = INCBIN_U32("graphics/battle_transitions/team_aqua.4bpp.lz");
+static const u32 sBigPokeball_Tileset[] = INCBIN_U32("build/assets/graphics/battle_transitions/big_pokeball.4bpp");
+static const u32 sPokeballTrail_Tileset[] = INCBIN_U32("build/assets/graphics/battle_transitions/pokeball_trail.4bpp");
+static const u8 sPokeball_Gfx[] = INCBIN_U8("build/assets/graphics/battle_transitions/pokeball.4bpp");
+static const u32 sEliteFour_Tileset[] = INCBIN_U32("build/assets/graphics/battle_transitions/elite_four_bg.4bpp");
+static const u8 sUnusedBrendan_Gfx[] = INCBIN_U8("build/assets/graphics/battle_transitions/unused_brendan.4bpp");
+static const u8 sUnusedLass_Gfx[] = INCBIN_U8("build/assets/graphics/battle_transitions/unused_lass.4bpp");
+static const u32 sShrinkingBoxTileset[] = INCBIN_U32("build/assets/graphics/battle_transitions/shrinking_box.4bpp");
+static const u16 sEvilTeam_Palette[] = INCBIN_U16("build/assets/graphics/battle_transitions/evil_team.gbapal");
+static const u32 sTeamAqua_Tileset[] = INCBIN_U32("build/assets/graphics/battle_transitions/team_aqua.4bpp.lz");
 static const u32 sTeamAqua_Tilemap[] = INCBIN_U32("graphics/battle_transitions/team_aqua.bin.lz");
-static const u32 sTeamMagma_Tileset[] = INCBIN_U32("graphics/battle_transitions/team_magma.4bpp.lz");
+static const u32 sTeamMagma_Tileset[] = INCBIN_U32("build/assets/graphics/battle_transitions/team_magma.4bpp.lz");
 static const u32 sTeamMagma_Tilemap[] = INCBIN_U32("graphics/battle_transitions/team_magma.bin.lz");
-static const u32 sRegis_Tileset[] = INCBIN_U32("graphics/battle_transitions/regis.4bpp");
-static const u16 sRegice_Palette[] = INCBIN_U16("graphics/battle_transitions/regice.gbapal");
-static const u16 sRegisteel_Palette[] = INCBIN_U16("graphics/battle_transitions/registeel.gbapal");
-static const u16 sRegirock_Palette[] = INCBIN_U16("graphics/battle_transitions/regirock.gbapal");
+static const u32 sRegis_Tileset[] = INCBIN_U32("build/assets/graphics/battle_transitions/regis.4bpp");
+static const u16 sRegice_Palette[] = INCBIN_U16("build/assets/graphics/battle_transitions/regice.gbapal");
+static const u16 sRegisteel_Palette[] = INCBIN_U16("build/assets/graphics/battle_transitions/registeel.gbapal");
+static const u16 sRegirock_Palette[] = INCBIN_U16("build/assets/graphics/battle_transitions/regirock.gbapal");
 static const u32 sRegice_Tilemap[] = INCBIN_U32("graphics/battle_transitions/regice.bin");
 static const u32 sRegisteel_Tilemap[] = INCBIN_U32("graphics/battle_transitions/registeel.bin");
 static const u32 sRegirock_Tilemap[] = INCBIN_U32("graphics/battle_transitions/regirock.bin");
-static const u16 sUnused_Palette[] = INCBIN_U16("graphics/battle_transitions/unused.gbapal");
-static const u32 sKyogre_Tileset[] = INCBIN_U32("graphics/battle_transitions/kyogre.4bpp.lz");
+static const u16 sUnused_Palette[] = INCBIN_U16("build/assets/graphics/battle_transitions/unused.gbapal");
+static const u32 sKyogre_Tileset[] = INCBIN_U32("build/assets/graphics/battle_transitions/kyogre.4bpp.lz");
 static const u32 sKyogre_Tilemap[] = INCBIN_U32("graphics/battle_transitions/kyogre.bin.lz");
-static const u32 sGroudon_Tileset[] = INCBIN_U32("graphics/battle_transitions/groudon.4bpp.lz");
+static const u32 sGroudon_Tileset[] = INCBIN_U32("build/assets/graphics/battle_transitions/groudon.4bpp.lz");
 static const u32 sGroudon_Tilemap[] = INCBIN_U32("graphics/battle_transitions/groudon.bin.lz");
-static const u16 sKyogre1_Palette[] = INCBIN_U16("graphics/battle_transitions/kyogre_pt1.gbapal");
-static const u16 sKyogre2_Palette[] = INCBIN_U16("graphics/battle_transitions/kyogre_pt2.gbapal");
-static const u16 sGroudon1_Palette[] = INCBIN_U16("graphics/battle_transitions/groudon_pt1.gbapal");
-static const u16 sGroudon2_Palette[] = INCBIN_U16("graphics/battle_transitions/groudon_pt2.gbapal");
-static const u16 sRayquaza_Palette[] = INCBIN_U16("graphics/battle_transitions/rayquaza.gbapal");
-static const u32 sRayquaza_Tileset[] = INCBIN_U32("graphics/battle_transitions/rayquaza.4bpp");
+static const u16 sKyogre1_Palette[] = INCBIN_U16("build/assets/graphics/battle_transitions/kyogre_pt1.gbapal");
+static const u16 sKyogre2_Palette[] = INCBIN_U16("build/assets/graphics/battle_transitions/kyogre_pt2.gbapal");
+static const u16 sGroudon1_Palette[] = INCBIN_U16("build/assets/graphics/battle_transitions/groudon_pt1.gbapal");
+static const u16 sGroudon2_Palette[] = INCBIN_U16("build/assets/graphics/battle_transitions/groudon_pt2.gbapal");
+static const u16 sRayquaza_Palette[] = INCBIN_U16("build/assets/graphics/battle_transitions/rayquaza.gbapal");
+static const u32 sRayquaza_Tileset[] = INCBIN_U32("build/assets/graphics/battle_transitions/rayquaza.4bpp");
 static const u32 sRayquaza_Tilemap[] = INCBIN_U32("graphics/battle_transitions/rayquaza.bin");
-static const u16 sFrontierLogo_Palette[] = INCBIN_U16("graphics/battle_transitions/frontier_logo.gbapal");
-static const u32 sFrontierLogo_Tileset[] = INCBIN_U32("graphics/battle_transitions/frontier_logo.4bpp.lz");
+static const u16 sFrontierLogo_Palette[] = INCBIN_U16("build/assets/graphics/battle_transitions/frontier_logo.gbapal");
+static const u32 sFrontierLogo_Tileset[] = INCBIN_U32("build/assets/graphics/battle_transitions/frontier_logo.4bpp.lz");
 static const u32 sFrontierLogo_Tilemap[] = INCBIN_U32("graphics/battle_transitions/frontier_logo.bin.lz");
-static const u16 sFrontierSquares_Palette[] = INCBIN_U16("graphics/battle_transitions/frontier_squares_blanktiles.gbapal");
-static const u32 sFrontierSquares_FilledBg_Tileset[] = INCBIN_U32("graphics/battle_transitions/frontier_square_1.4bpp.lz");
-static const u32 sFrontierSquares_EmptyBg_Tileset[] = INCBIN_U32("graphics/battle_transitions/frontier_square_2.4bpp.lz");
-static const u32 sFrontierSquares_Shrink1_Tileset[] = INCBIN_U32("graphics/battle_transitions/frontier_square_3.4bpp.lz");
-static const u32 sFrontierSquares_Shrink2_Tileset[] = INCBIN_U32("graphics/battle_transitions/frontier_square_4.4bpp.lz");
+static const u16 sFrontierSquares_Palette[] = INCBIN_U16("build/assets/graphics/battle_transitions/frontier_squares_blanktiles.gbapal");
+static const u32 sFrontierSquares_FilledBg_Tileset[] = INCBIN_U32("build/assets/graphics/battle_transitions/frontier_square_1.4bpp.lz");
+static const u32 sFrontierSquares_EmptyBg_Tileset[] = INCBIN_U32("build/assets/graphics/battle_transitions/frontier_square_2.4bpp.lz");
+static const u32 sFrontierSquares_Shrink1_Tileset[] = INCBIN_U32("build/assets/graphics/battle_transitions/frontier_square_3.4bpp.lz");
+static const u32 sFrontierSquares_Shrink2_Tileset[] = INCBIN_U32("build/assets/graphics/battle_transitions/frontier_square_4.4bpp.lz");
 static const u32 sFrontierSquares_Tilemap[] = INCBIN_U32("graphics/battle_transitions/frontier_squares.bin");
 
 // All battle transitions use the same intro
@@ -882,17 +882,17 @@ static const struct SpriteTemplate sSpriteTemplate_UnusedLass =
     .callback = SpriteCB_MugshotTrainerPic
 };
 
-static const u16 sFieldEffectPal_Pokeball[] = INCBIN_U16("graphics/field_effects/palettes/pokeball.gbapal");
+static const u16 sFieldEffectPal_Pokeball[] = INCBIN_U16("build/assets/graphics/field_effects/palettes/pokeball.gbapal");
 
 const struct SpritePalette gSpritePalette_Pokeball = {sFieldEffectPal_Pokeball, FLDEFF_PAL_TAG_POKEBALL_TRAIL};
 
-static const u16 sMugshotPal_Sidney[] = INCBIN_U16("graphics/battle_transitions/sidney_bg.gbapal");
-static const u16 sMugshotPal_Phoebe[] = INCBIN_U16("graphics/battle_transitions/phoebe_bg.gbapal");
-static const u16 sMugshotPal_Glacia[] = INCBIN_U16("graphics/battle_transitions/glacia_bg.gbapal");
-static const u16 sMugshotPal_Drake[] = INCBIN_U16("graphics/battle_transitions/drake_bg.gbapal");
-static const u16 sMugshotPal_Champion[] = INCBIN_U16("graphics/battle_transitions/wallace_bg.gbapal");
-static const u16 sMugshotPal_Brendan[] = INCBIN_U16("graphics/battle_transitions/brendan_bg.gbapal");
-static const u16 sMugshotPal_May[] = INCBIN_U16("graphics/battle_transitions/may_bg.gbapal");
+static const u16 sMugshotPal_Sidney[] = INCBIN_U16("build/assets/graphics/battle_transitions/sidney_bg.gbapal");
+static const u16 sMugshotPal_Phoebe[] = INCBIN_U16("build/assets/graphics/battle_transitions/phoebe_bg.gbapal");
+static const u16 sMugshotPal_Glacia[] = INCBIN_U16("build/assets/graphics/battle_transitions/glacia_bg.gbapal");
+static const u16 sMugshotPal_Drake[] = INCBIN_U16("build/assets/graphics/battle_transitions/drake_bg.gbapal");
+static const u16 sMugshotPal_Champion[] = INCBIN_U16("build/assets/graphics/battle_transitions/wallace_bg.gbapal");
+static const u16 sMugshotPal_Brendan[] = INCBIN_U16("build/assets/graphics/battle_transitions/brendan_bg.gbapal");
+static const u16 sMugshotPal_May[] = INCBIN_U16("build/assets/graphics/battle_transitions/may_bg.gbapal");
 
 static const u16 *const sOpponentMugshotsPals[MUGSHOTS_COUNT] =
 {
@@ -909,7 +909,7 @@ static const u16 *const sPlayerMugshotsPals[GENDER_COUNT] =
     [FEMALE] = sMugshotPal_May
 };
 
-static const u16 sUnusedTrainerPalette[] = INCBIN_U16("graphics/battle_transitions/unused_trainer.gbapal");
+static const u16 sUnusedTrainerPalette[] = INCBIN_U16("build/assets/graphics/battle_transitions/unused_trainer.gbapal");
 static const struct SpritePalette sSpritePalette_UnusedTrainer = {sUnusedTrainerPalette, PALTAG_UNUSED_MUGSHOT};
 
 static const u16 sBigPokeball_Tilemap[] = INCBIN_U16("graphics/battle_transitions/big_pokeball_map.bin");

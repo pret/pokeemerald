@@ -684,7 +684,7 @@ static const struct SpriteTemplate sSpriteTemplate_JudgeSpeechBubble =
     .callback = SpriteCallbackDummy
 };
 
-static const u16 sText_Pal[] = INCBIN_U16("graphics/contest/text.gbapal");
+static const u16 sText_Pal[] = INCBIN_U16("build/assets/graphics/contest/text.gbapal");
 
 #include "data/contest_text_tables.h"
 

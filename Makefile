@@ -239,7 +239,7 @@ clean-d:
 
 clean-assets:
 	rm -rf $(BUILD_ASSETS_DIR)
-	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
+	find . \( -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
 	
 clean-old:
 	rm -f $(MID_SUBDIR)/*.s

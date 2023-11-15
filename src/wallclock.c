@@ -71,8 +71,8 @@ enum {
     WIN_BUTTON_LABEL,
 };
 
-static const u32 sHand_Gfx[] = INCBIN_U32("graphics/wallclock/hand.4bpp.lz");
-static const u16 sTextPrompt_Pal[] = INCBIN_U16("graphics/wallclock/text_prompt.gbapal"); // for "Cancel" or "Confirm"
+static const u32 sHand_Gfx[] = INCBIN_U32("build/assets/graphics/wallclock/hand.4bpp.lz");
+static const u16 sTextPrompt_Pal[] = INCBIN_U16("build/assets/graphics/wallclock/text_prompt.gbapal"); // for "Cancel" or "Confirm"
 
 static const struct WindowTemplate sWindowTemplates[] =
 {

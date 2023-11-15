@@ -182,10 +182,10 @@ struct NamingScreenData
 
 EWRAM_DATA static struct NamingScreenData *sNamingScreen = NULL;
 
-static const u8 sPCIconOff_Gfx[] = INCBIN_U8("graphics/naming_screen/pc_icon_off.4bpp");
-static const u8 sPCIconOn_Gfx[] = INCBIN_U8("graphics/naming_screen/pc_icon_on.4bpp");
-static const u16 sKeyboard_Pal[] = INCBIN_U16("graphics/naming_screen/keyboard.gbapal");
-static const u16 sRival_Pal[] = INCBIN_U16("graphics/naming_screen/rival.gbapal"); // Unused, leftover from FRLG rival
+static const u8 sPCIconOff_Gfx[] = INCBIN_U8("build/assets/graphics/naming_screen/pc_icon_off.4bpp");
+static const u8 sPCIconOn_Gfx[] = INCBIN_U8("build/assets/graphics/naming_screen/pc_icon_on.4bpp");
+static const u16 sKeyboard_Pal[] = INCBIN_U16("build/assets/graphics/naming_screen/keyboard.gbapal");
+static const u16 sRival_Pal[] = INCBIN_U16("build/assets/graphics/naming_screen/rival.gbapal"); // Unused, leftover from FRLG rival
 
 static const u8 *const sTransferredToPCMessages[] =
 {

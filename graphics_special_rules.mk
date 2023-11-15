@@ -27,25 +27,25 @@ contest_types := cool beauty cute smart tough
 castform_types := normal sunny rainy snowy
 
 # Output folders
-TILESET_OUTDIR      := $(TILESETGFXDIR)
-BATINT_OUTDIR       := $(BATINTGFXDIR)
-BATTRANS_OUTDIR     := $(BATTRANSGFXDIR)
-BTLANMSPR_OUTDIR    := $(BTLANMSPRGFXDIR)
-CASTFORM_OUTDIR     := $(CASTFORMGFXDIR)
-FONT_OUTDIR         := $(FONTGFXDIR)
-JPCONTEST_OUTDIR    := $(JPCONTESTGFXDIR)
-MISC_OUTDIR         := $(MISCGFXDIR)
-NAMING_OUTDIR       := $(NAMINGGFXDIR)
-PKNAV_OUTDIR        := $(PKNAVGFXDIR)
-PKNAVOPTIONS_OUTDIR := $(PKNAVOPTIONSGFXDIR)
-POKEDEX_OUTDIR      := $(POKEDEXGFXDIR)
-RAYQUAZA_OUTDIR     := $(RAYQUAZAGFXDIR)
-ROULETTE_OUTDIR     := $(ROULETTEGFXDIR)
-SLOTMACHINE_OUTDIR  := $(SLOTMACHINEGFXDIR)
-SPINDA_OUTDIR       := $(SPINDAGFXDIR)
-TYPES_OUTDIR        := $(TYPESGFXDIR)
-UNUSED_OUTDIR       := $(UNUSEDGFXDIR)
-WALLPAPER_OUTDIR    := $(WALLPAPERGFXDIR)
+TILESET_OUTDIR      := $(BUILD_ASSETS_DIR)/$(TILESETGFXDIR)
+BATINT_OUTDIR       := $(BUILD_ASSETS_DIR)/$(BATINTGFXDIR)
+BATTRANS_OUTDIR     := $(BUILD_ASSETS_DIR)/$(BATTRANSGFXDIR)
+BTLANMSPR_OUTDIR    := $(BUILD_ASSETS_DIR)/$(BTLANMSPRGFXDIR)
+CASTFORM_OUTDIR     := $(BUILD_ASSETS_DIR)/$(CASTFORMGFXDIR)
+FONT_OUTDIR         := $(BUILD_ASSETS_DIR)/$(FONTGFXDIR)
+JPCONTEST_OUTDIR    := $(BUILD_ASSETS_DIR)/$(JPCONTESTGFXDIR)
+MISC_OUTDIR         := $(BUILD_ASSETS_DIR)/$(MISCGFXDIR)
+NAMING_OUTDIR       := $(BUILD_ASSETS_DIR)/$(NAMINGGFXDIR)
+PKNAV_OUTDIR        := $(BUILD_ASSETS_DIR)/$(PKNAVGFXDIR)
+PKNAVOPTIONS_OUTDIR := $(BUILD_ASSETS_DIR)/$(PKNAVOPTIONSGFXDIR)
+POKEDEX_OUTDIR      := $(BUILD_ASSETS_DIR)/$(POKEDEXGFXDIR)
+RAYQUAZA_OUTDIR     := $(BUILD_ASSETS_DIR)/$(RAYQUAZAGFXDIR)
+ROULETTE_OUTDIR     := $(BUILD_ASSETS_DIR)/$(ROULETTEGFXDIR)
+SLOTMACHINE_OUTDIR  := $(BUILD_ASSETS_DIR)/$(SLOTMACHINEGFXDIR)
+SPINDA_OUTDIR       := $(BUILD_ASSETS_DIR)/$(SPINDAGFXDIR)
+TYPES_OUTDIR        := $(BUILD_ASSETS_DIR)/$(TYPESGFXDIR)
+UNUSED_OUTDIR       := $(BUILD_ASSETS_DIR)/$(UNUSEDGFXDIR)
+WALLPAPER_OUTDIR    := $(BUILD_ASSETS_DIR)/$(WALLPAPERGFXDIR)
 
 # TODO: A nicer way to create the directory tree
 SPECIAL_OUTDIRS := $(CASTFORM_OUTDIR) $(patsubst %,$(CASTFORM_OUTDIR)/%,$(castform_types)) 
@@ -530,7 +530,7 @@ $(UNUSED_OUTDIR)/obi2.4bpp: $(UNUSED_OUTDIR)/old_bulbasaur2.4bpp \
                            $(UNUSED_OUTDIR)/old_battle_interface_3.4bpp
 	cat $^ >$@
 
-$(UNUSED_OUTDIR)/color_frames.4bpp: %.4bpp: %.png
+$(UNUSED_OUTDIR)/color_frames.4bpp: $(UNUSEDGFXDIR)/color_frames.png
 	$(GFX) $< $@ -num_tiles 353 -Wnum_tiles
 
 unused_frames := red_frame yellow_frame green_frame blank_frame
@@ -620,87 +620,87 @@ $(WALLPAPER_OUTDIR)/friends_frame2.4bpp: $(WALLPAPERGFXDIR)/friends_frame2.png
 	$(GFX) $< $@ -num_tiles 57 -Wnum_tiles
 
 #### Compound wallpapers
+$(WALLPAPER_OUTDIR)/zigzagoon/tiles.4bpp: $(WALLPAPER_OUTDIR)/friends_frame1.4bpp $(WALLPAPER_OUTDIR)/zigzagoon/bg.4bpp
+	@cat $^ >$@
+
+$(WALLPAPER_OUTDIR)/screen/tiles.4bpp: $(WALLPAPER_OUTDIR)/friends_frame1.4bpp $(WALLPAPER_OUTDIR)/screen/bg.4bpp
+	@cat $^ >$@
+
+$(WALLPAPER_OUTDIR)/horizontal/tiles.4bpp: $(WALLPAPER_OUTDIR)/friends_frame1.4bpp $(WALLPAPER_OUTDIR)/horizontal/bg.4bpp
+	@cat $^ >$@
+
+$(WALLPAPER_OUTDIR)/diagonal/tiles.4bpp: $(WALLPAPER_OUTDIR)/friends_frame1.4bpp $(WALLPAPER_OUTDIR)/diagonal/bg.4bpp
+	@cat $^ >$@
+
+$(WALLPAPER_OUTDIR)/block/tiles.4bpp: $(WALLPAPER_OUTDIR)/friends_frame1.4bpp $(WALLPAPER_OUTDIR)/block/bg.4bpp
+	@cat $^ >$@
+
+$(WALLPAPER_OUTDIR)/ribbon/tiles.4bpp: $(WALLPAPER_OUTDIR)/friends_frame1.4bpp $(WALLPAPER_OUTDIR)/ribbon/bg.4bpp
+	@cat $^ >$@
+
+$(WALLPAPER_OUTDIR)/pokecenter2/tiles.4bpp: $(WALLPAPER_OUTDIR)/friends_frame1.4bpp $(WALLPAPER_OUTDIR)/pokecenter2/bg.4bpp
+	@cat $^ >$@
+
+$(WALLPAPER_OUTDIR)/frame/tiles.4bpp: $(WALLPAPER_OUTDIR)/friends_frame1.4bpp $(WALLPAPER_OUTDIR)/frame/bg.4bpp
+	@cat $^ >$@
+
+$(WALLPAPER_OUTDIR)/blank/tiles.4bpp: $(WALLPAPER_OUTDIR)/friends_frame1.4bpp $(WALLPAPER_OUTDIR)/blank/bg.4bpp
+	@cat $^ >$@
+
+$(WALLPAPER_OUTDIR)/circles/tiles.4bpp: $(WALLPAPER_OUTDIR)/friends_frame1.4bpp $(WALLPAPER_OUTDIR)/circles/bg.4bpp
+	@cat $^ >$@
+
+$(WALLPAPER_OUTDIR)/azumarill/tiles.4bpp: $(WALLPAPER_OUTDIR)/friends_frame2.4bpp $(WALLPAPER_OUTDIR)/azumarill/bg.4bpp
+	@cat $^ >$@
+
+$(WALLPAPER_OUTDIR)/pikachu/tiles.4bpp: $(WALLPAPER_OUTDIR)/friends_frame2.4bpp $(WALLPAPER_OUTDIR)/pikachu/bg.4bpp
+	@cat $^ >$@
+
+$(WALLPAPER_OUTDIR)/legendary/tiles.4bpp: $(WALLPAPER_OUTDIR)/friends_frame2.4bpp $(WALLPAPER_OUTDIR)/legendary/bg.4bpp
+	@cat $^ >$@
+
+$(WALLPAPER_OUTDIR)/dusclops/tiles.4bpp: $(WALLPAPER_OUTDIR)/friends_frame2.4bpp $(WALLPAPER_OUTDIR)/dusclops/bg.4bpp
+	@cat $^ >$@
+
+$(WALLPAPER_OUTDIR)/ludicolo/tiles.4bpp: $(WALLPAPER_OUTDIR)/friends_frame2.4bpp $(WALLPAPER_OUTDIR)/ludicolo/bg.4bpp
+	@cat $^ >$@
+
+$(WALLPAPER_OUTDIR)/whiscash/tiles.4bpp: $(WALLPAPER_OUTDIR)/friends_frame2.4bpp $(WALLPAPER_OUTDIR)/whiscash/bg.4bpp
+	@cat $^ >$@
+
 $(WALLPAPER_OUTDIR)/%/tiles.4bpp: $(WALLPAPER_OUTDIR)/%/frame.4bpp $(WALLPAPER_OUTDIR)/%/bg.4bpp
 	@mkdir -p $(@D)
 	cat $^ >$@
 
-$(WALLPAPERGFXDIR)/zigzagoon/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame1.4bpp $(WALLPAPERGFXDIR)/zigzagoon/bg.4bpp
-	@cat $^ >$@
-
-$(WALLPAPERGFXDIR)/screen/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame1.4bpp $(WALLPAPERGFXDIR)/screen/bg.4bpp
-	@cat $^ >$@
-
-$(WALLPAPERGFXDIR)/horizontal/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame1.4bpp $(WALLPAPERGFXDIR)/horizontal/bg.4bpp
-	@cat $^ >$@
-
-$(WALLPAPERGFXDIR)/diagonal/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame1.4bpp $(WALLPAPERGFXDIR)/diagonal/bg.4bpp
-	@cat $^ >$@
-
-$(WALLPAPERGFXDIR)/block/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame1.4bpp $(WALLPAPERGFXDIR)/block/bg.4bpp
-	@cat $^ >$@
-
-$(WALLPAPERGFXDIR)/ribbon/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame1.4bpp $(WALLPAPERGFXDIR)/ribbon/bg.4bpp
-	@cat $^ >$@
-
-$(WALLPAPERGFXDIR)/pokecenter2/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame1.4bpp $(WALLPAPERGFXDIR)/pokecenter2/bg.4bpp
-	@cat $^ >$@
-
-$(WALLPAPERGFXDIR)/frame/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame1.4bpp $(WALLPAPERGFXDIR)/frame/bg.4bpp
-	@cat $^ >$@
-
-$(WALLPAPERGFXDIR)/blank/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame1.4bpp $(WALLPAPERGFXDIR)/blank/bg.4bpp
-	@cat $^ >$@
-
-$(WALLPAPERGFXDIR)/circles/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame1.4bpp $(WALLPAPERGFXDIR)/circles/bg.4bpp
-	@cat $^ >$@
-
-$(WALLPAPERGFXDIR)/azumarill/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame2.4bpp $(WALLPAPERGFXDIR)/azumarill/bg.4bpp
-	@cat $^ >$@
-
-$(WALLPAPERGFXDIR)/pikachu/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame2.4bpp $(WALLPAPERGFXDIR)/pikachu/bg.4bpp
-	@cat $^ >$@
-
-$(WALLPAPERGFXDIR)/legendary/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame2.4bpp $(WALLPAPERGFXDIR)/legendary/bg.4bpp
-	@cat $^ >$@
-
-$(WALLPAPERGFXDIR)/dusclops/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame2.4bpp $(WALLPAPERGFXDIR)/dusclops/bg.4bpp
-	@cat $^ >$@
-
-$(WALLPAPERGFXDIR)/ludicolo/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame2.4bpp $(WALLPAPERGFXDIR)/ludicolo/bg.4bpp
-	@cat $^ >$@
-
-$(WALLPAPERGFXDIR)/whiscash/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame2.4bpp $(WALLPAPERGFXDIR)/whiscash/bg.4bpp
-	@cat $^ >$@
-
 ### Miscellaneous ###
-graphics/interface/outline_cursor.4bpp: graphics/interface/outline_cursor.png
+$(BUILD_ASSETS_DIR)/graphics/interface/outline_cursor.4bpp: graphics/interface/outline_cursor.png
 	mkdir -p $(@D)
 	$(GFX) $< $@ -num_tiles 8 -Wnum_tiles
 
-graphics/battle_anims/masks/unused_level_up.4bpp: graphics/battle_anims/masks/unused_level_up.png
+$(BUILD_ASSETS_DIR)/graphics/battle_anims/masks/unused_level_up.4bpp: graphics/battle_anims/masks/unused_level_up.png
 	mkdir -p $(@D)
 	$(GFX) $< $@ -num_tiles 14 -Wnum_tiles
 
-graphics/party_menu/bg.4bpp: graphics/party_menu/bg.png
+$(BUILD_ASSETS_DIR)/graphics/party_menu/bg.4bpp: graphics/party_menu/bg.png
 	mkdir -p $(@D)
 	$(GFX) $< $@ -num_tiles 62 -Wnum_tiles
 
-graphics/title_screen/pokemon_logo.gbapal: graphics/title_screen/pokemon_logo.pal
+$(BUILD_ASSETS_DIR)/graphics/title_screen/pokemon_logo.gbapal: graphics/title_screen/pokemon_logo.pal
 	mkdir -p $(@D)
 	$(GFX) $< $@ -num_colors 224
 
-graphics/pokemon_jump/bg.4bpp: graphics/pokemon_jump/bg.png
+$(BUILD_ASSETS_DIR)/graphics/pokemon_jump/bg.4bpp: graphics/pokemon_jump/bg.png
 	mkdir -p $(@D)
 	$(GFX) $< $@ -num_tiles 63 -Wnum_tiles
 
-graphics/bag/menu.4bpp: graphics/bag/menu.png
+$(BUILD_ASSETS_DIR)/graphics/bag/menu.4bpp: graphics/bag/menu.png
 	mkdir -p $(@D)
 	$(GFX) $< $@ -num_tiles 53 -Wnum_tiles
 
-graphics/picture_frame/lobby.4bpp: graphics/picture_frame/lobby.png
+$(BUILD_ASSETS_DIR)/graphics/picture_frame/lobby.4bpp: graphics/picture_frame/lobby.png
 	mkdir -p $(@D)
 	$(GFX) $< $@ -num_tiles 86 -Wnum_tiles
 
-graphics/birch_speech/unused_beauty.4bpp: graphics/birch_speech/unused_beauty.png
+$(BUILD_ASSETS_DIR)/graphics/birch_speech/unused_beauty.4bpp: graphics/birch_speech/unused_beauty.png
 	mkdir -p $(@D)
 	$(GFX) $< $@ -num_tiles 822 -Wnum_tiles

@@ -295,7 +295,7 @@ static const struct WindowTemplate sDecorationWindowTemplates[WINDOW_COUNT] =
     }
 };
 
-static const u16 sDecorationMenuPalette[] = INCBIN_U16("graphics/decorations/decoration_menu.gbapal");
+static const u16 sDecorationMenuPalette[] = INCBIN_U16("build/assets/graphics/decorations/decoration_menu.gbapal");
 
 static const struct ListMenuTemplate sDecorationItemsListMenuTemplate =
 {
@@ -434,9 +434,9 @@ static const u16 sDecorShapeSizes[] = {
     [DECORSHAPE_3x2] = 32,
 };
 
-static const u16 sBrendanPalette[] = INCBIN_U16("graphics/decorations/brendan.gbapal");
+static const u16 sBrendanPalette[] = INCBIN_U16("build/assets/graphics/decorations/brendan.gbapal");
 
-static const u16 sMayPalette[] = INCBIN_U16("graphics/decorations/may.gbapal");
+static const u16 sMayPalette[] = INCBIN_U16("build/assets/graphics/decorations/may.gbapal");
 
 static const struct YesNoFuncTable sReturnDecorationYesNoFunctions =
 {
@@ -450,7 +450,7 @@ static const struct YesNoFuncTable sStopPuttingAwayDecorationsYesNoFunctions =
     .noFunc = ContinuePuttingAwayDecorations,
 };
 
-static const u8 sDecorationPuttingAwayCursor[] = INCBIN_U8("graphics/decorations/put_away_cursor.4bpp");
+static const u8 sDecorationPuttingAwayCursor[] = INCBIN_U8("build/assets/graphics/decorations/put_away_cursor.4bpp");
 
 static const struct SpritePalette sSpritePal_PuttingAwayCursorBrendan =
 {
