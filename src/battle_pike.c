@@ -17,7 +17,7 @@
 #include "constants/battle_frontier.h"
 #include "constants/frontier_util.h"
 #include "constants/abilities.h"
-#include "constants/layouts.h"
+#include "generated/constants/layouts.h"
 #include "constants/rgb.h"
 #include "constants/trainers.h"
 #include "constants/moves.h"

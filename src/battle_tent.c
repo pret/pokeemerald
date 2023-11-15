@@ -15,7 +15,7 @@
 #include "constants/battle_tent_trainers.h"
 #include "constants/battle_tent_mons.h"
 #include "constants/items.h"
-#include "constants/layouts.h"
+#include "generated/constants/layouts.h"
 #include "constants/region_map_sections.h"
 #include "constants/trainers.h"
 

@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_MAPS_H
 #define GUARD_CONSTANTS_MAPS_H
 
-#include "map_groups.h"
+#include "generated/constants/map_groups.h"
 
 // Warps using this map will instead use the warp data stored in gSaveBlock1Ptr->dynamicWarp.
 // Used for warps that need to change destinations, e.g. when stepping off an elevator.

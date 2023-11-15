@@ -33,7 +33,7 @@
 #include "constants/event_object_movement.h"
 #include "constants/frontier_util.h"
 #include "constants/items.h"
-#include "constants/layouts.h"
+#include "generated/constants/layouts.h"
 #include "constants/metatile_labels.h"
 #include "constants/moves.h"
 #include "constants/trainers.h"

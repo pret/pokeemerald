@@ -17,5 +17,5 @@
 
 	.section .rodata
 
-	.include "data/maps/events.inc"
+	.include "build/assets/data/maps/events.inc"
 

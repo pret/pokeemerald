@@ -19,7 +19,7 @@
 #include "constants/abilities.h"
 #include "constants/game_stat.h"
 #include "constants/items.h"
-#include "constants/layouts.h"
+#include "generated/constants/layouts.h"
 #include "constants/weather.h"
 
 extern const u8 EventScript_RepelWoreOff[];

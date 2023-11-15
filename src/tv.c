@@ -39,7 +39,7 @@
 #include "constants/decorations.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
-#include "constants/layouts.h"
+#include "generated/constants/layouts.h"
 #include "constants/lilycove_lady.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/metatile_labels.h"

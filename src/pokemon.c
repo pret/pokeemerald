@@ -42,7 +42,7 @@
 #include "constants/hold_effects.h"
 #include "constants/item_effects.h"
 #include "constants/items.h"
-#include "constants/layouts.h"
+#include "generated/constants/layouts.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"

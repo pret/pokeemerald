@@ -13,7 +13,7 @@
 #include "task.h"
 #include "text.h"
 #include "constants/battle_frontier.h"
-#include "constants/layouts.h"
+#include "generated/constants/layouts.h"
 #include "constants/region_map_sections.h"
 #include "constants/weather.h"
 

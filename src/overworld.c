@@ -60,7 +60,7 @@
 #include "wild_encounter.h"
 #include "frontier_util.h"
 #include "constants/abilities.h"
-#include "constants/layouts.h"
+#include "generated/constants/layouts.h"
 #include "constants/map_types.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"

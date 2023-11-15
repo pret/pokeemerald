@@ -26,7 +26,7 @@
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
-#include "constants/layouts.h"
+#include "generated/constants/layouts.h"
 #include "constants/moves.h"
 #include "constants/trainers.h"
 #include "constants/trainer_hill.h"
