@@ -296,6 +296,7 @@ void FreeOamMatrix(u8 matrixNum);
 void InitSpriteAffineAnim(struct Sprite *sprite);
 void SetOamMatrixRotationScaling(u8 matrixNum, s16 xScale, s16 yScale, u16 rotation);
 u16 LoadSpriteSheet(const struct SpriteSheet *sheet);
+u16 LoadSpriteSheetByTemplate(const struct SpriteTemplate *template, u8 frame);
 void LoadSpriteSheets(const struct SpriteSheet *sheets);
 u16 AllocTilesForSpriteSheet(struct SpriteSheet *sheet);
 void AllocTilesForSpriteSheets(struct SpriteSheet *sheets);
