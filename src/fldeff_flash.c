@@ -93,7 +93,6 @@ bool8 SetUpFieldMove_Flash(void)
 static void FieldCallback_Flash(void)
 {
     u8 taskId = CreateFieldMoveTask();
-    gFieldEffectArguments[0] = GetCursorSelectionMonId();
     gTasks[taskId].data[8] = (uintptr_t)FldEff_UseFlash >> 16;
     gTasks[taskId].data[9] = (uintptr_t)FldEff_UseFlash;
 }

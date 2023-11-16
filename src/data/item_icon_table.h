@@ -844,6 +844,13 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_LINKING_CORD] = {gItemIcon_LinkingCord, gItemIconPalette_LinkingCord},
     [ITEM_PEAT_BLOCK] = {gItemIcon_PeatBlock, gItemIconPalette_PeatBlock},
     [ITEM_BERSERK_GENE] = {gItemIcon_BerserkGene, gItemIconPalette_BerserkGene},
+    // HM Items
+    [ITEM_SURFBOARD] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
+	[ITEM_AXE] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
+	[ITEM_HAMMER] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
+	[ITEM_DIVING_SUIT] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
+	[ITEM_LANTERN] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
+	[ITEM_POWER_GLOVE] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
     // Return to field arrow
     [ITEMS_COUNT] = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
 };

@@ -15,6 +15,7 @@
 #include "event_scripts.h"
 #include "fieldmap.h"
 #include "field_effect.h"
+#include "field_control_avatar.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
 #include "field_weather.h"
@@ -32,6 +33,7 @@
 #include "party_menu.h"
 #include "pokeblock.h"
 #include "pokemon.h"
+#include "region_map.h"
 #include "script.h"
 #include "sound.h"
 #include "strings.h"
@@ -42,6 +44,7 @@
 #include "constants/event_objects.h"
 #include "constants/item_effects.h"
 #include "constants/items.h"
+#include "constants/map_types.h"
 #include "constants/songs.h"
 
 static void SetUpItemUseCallback(u8);
@@ -76,6 +79,13 @@ static void SetDistanceOfClosestHiddenItem(u8, s16, s16);
 static void CB2_OpenPokeblockFromBag(void);
 static void ItemUseOnFieldCB_Honey(u8 taskId);
 static bool32 CannotUseBagBattleItem(u16 itemId);
+static void ItemUseOnFieldCB_Surfboard(u8);
+static void ItemUseOnFieldCB_Axe(u8);
+static void ItemUseOnFieldCB_Hammer(u8);
+static void ItemUseOnFieldCB_DivingSuitAboveWater(u8);
+static void ItemUseOnFieldCB_DivingSuitUnderwater(u8);
+static void ItemUseOnFieldCB_Lantern(u8);
+static void ItemUseOnFieldCB_PowerGlove(u8);
 
 // EWRAM variables
 EWRAM_DATA static void(*sItemUseOnFieldCB)(u8 taskId) = NULL;
@@ -1348,6 +1358,130 @@ void ItemUseOutOfBattle_Honey(u8 taskId)
 void ItemUseOutOfBattle_CannotUse(u8 taskId)
 {
     DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+}
+
+void ItemUseOutOfBattle_Surfboard(u8 taskId)
+{
+    if (IsPlayerFacingSurfableFishableWater())
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_Surfboard;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+}
+
+static void ItemUseOnFieldCB_Surfboard(u8 taskId)
+{
+	LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_UseSurf);
+    DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_Axe(u8 taskId)
+{
+    if (SetUpFieldMove_Cut())
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_Axe;
+		SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+}
+
+static void ItemUseOnFieldCB_Axe(u8 taskId)
+{
+	LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_UseCut);
+    DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_Hammer(u8 taskId)
+{
+    if (SetUpFieldMove_RockSmash())
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_Hammer;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+}
+
+static void ItemUseOnFieldCB_Hammer(u8 taskId)
+{
+	LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_UseRockSmash);
+    DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_DivingSuit(u8 taskId)
+{
+    if (TrySetDiveWarp() == 2)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_DivingSuitAboveWater;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && TrySetDiveWarp() == 1)
+	{
+		sItemUseOnFieldCB = ItemUseOnFieldCB_DivingSuitUnderwater;
+        SetUpItemUseOnFieldCallback(taskId);
+	}
+	else
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+}
+
+static void ItemUseOnFieldCB_DivingSuitAboveWater(u8 taskId)
+{
+	LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_UseDive);
+    DestroyTask(taskId);
+}
+
+static void ItemUseOnFieldCB_DivingSuitUnderwater(u8 taskId)
+{
+	LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_UseDiveUnderwater);
+    DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_Lantern(u8 taskId)
+{
+    if (SetUpFieldMove_Flash())
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_Lantern;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+}
+
+static void ItemUseOnFieldCB_Lantern(u8 taskId)
+{
+    LockPlayerFieldControls();
+    PlaySE(SE_M_REFLECT);
+    FlagSet(FLAG_SYS_USE_FLASH);
+    ScriptContext_SetupScript(EventScript_UseFlash);
+    gFieldCallback2 = NULL;
+    gPostMenuFieldCallback = NULL;
+    DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_PowerGlove(u8 taskId)
+{
+    if (SetUpFieldMove_Strength())
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_PowerGlove;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+}
+
+static void ItemUseOnFieldCB_PowerGlove(u8 taskId)
+{
+	LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_UseStrength);
+    DestroyTask(taskId);
 }
 
 #undef tUsingRegisteredKeyItem

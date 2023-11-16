@@ -37,6 +37,12 @@ void ItemUseInBattle_PartyMenuChooseMove(u8 taskId);
 void Task_UseDigEscapeRopeOnField(u8 taskId);
 u8 CanUseDigOrEscapeRopeOnCurMap(void);
 u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
+void ItemUseOutOfBattle_Surfboard(u8);
+void ItemUseOutOfBattle_Axe(u8);
+void ItemUseOutOfBattle_Hammer(u8);
+void ItemUseOutOfBattle_DivingSuit(u8);
+void ItemUseOutOfBattle_Lantern(u8);
+void ItemUseOutOfBattle_PowerGlove(u8);
 
 enum {
     BALL_THROW_UNABLE_TWO_MONS,

@@ -9647,4 +9647,76 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
     },
+    // HM Items
+    [ITEM_SURFBOARD] =
+    {
+        .name = _("SURFBOARD"),
+        .itemId = ITEM_SURFBOARD,
+        .price = 0,
+		.importance = 1,
+        .description = sSurfboardDesc,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_Surfboard,
+    },
+
+	[ITEM_AXE] =
+    {
+        .name = _("AXE"),
+        .itemId = ITEM_AXE,
+        .price = 0,
+		.importance = 1,
+        .description = sAxeDesc,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_Axe,
+    },
+
+	[ITEM_HAMMER] =
+    {
+        .name = _("HAMMER"),
+        .itemId = ITEM_HAMMER,
+        .price = 0,
+		.importance = 1,
+        .description = sHammerDesc,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_Hammer,
+    },
+
+	[ITEM_DIVING_SUIT] =
+    {
+        .name = _("DIVING SUIT"),
+        .itemId = ITEM_DIVING_SUIT,
+        .price = 0,
+		.importance = 1,
+        .description = sDivingSuitDesc,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_DivingSuit,
+    },
+
+	[ITEM_LANTERN] =
+    {
+        .name = _("LANTERN"),
+        .itemId = ITEM_LANTERN,
+        .price = 0,
+		.importance = 1,
+        .description = sLanternDesc,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_Lantern,
+    },
+
+	[ITEM_POWER_GLOVE] =
+    {
+        .name = _("POWER GLOVE"),
+        .itemId = ITEM_POWER_GLOVE,
+        .price = 0,
+		.importance = 1,
+        .description = sPowerGloveDesc,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_PowerGlove,
+    },
 };
