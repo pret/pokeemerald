@@ -3038,6 +3038,11 @@ extern const u8 gText_BoxName[];
 extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_TellHimTheWords[];
 
+extern const u8 gMenuText_Move[];
+extern const u8 gText_MoveItemWhere[];
+extern const u8 gText_XsYAnd[];
+extern const u8 gText_XsYWereSwapped[];
+
 // Exp. Share
 extern const u8 gText_ExpShareOn[];
 extern const u8 gText_ExpShareOff[];

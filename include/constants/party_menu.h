@@ -79,6 +79,7 @@
 #define PARTY_MSG_DO_WHAT_WITH_ITEM         24
 #define PARTY_MSG_DO_WHAT_WITH_MAIL         25
 #define PARTY_MSG_ALREADY_HOLDING_ONE       26
+#define PARTY_MSG_MOVE_ITEM_WHERE           27
 #define PARTY_MSG_NONE                      127
 
 // IDs for DisplayPartyPokemonDescriptionText, to display a message in the party pokemon's box
