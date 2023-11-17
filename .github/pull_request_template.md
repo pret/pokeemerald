@@ -1,4 +1,16 @@
-Please go the the `Preview` tab and select the appropriate sub-template:
+<!--- Provide a general summary of your changes in the Title above -->
 
-* [Group A](?expand=1&template=pull_request_template.md)
-* [Group B](?expand=1&template=pull_request_template_2.md)
+## Description
+<!--- Describe your changes in detail -->
+
+## Images
+<!-- Please provide with relevant GIFs or images to make it easier for reviewers to accept your PR quicker.-->
+<!-- If it doesn't apply, feel free to remove this section. -->
+
+## Issue(s) that this PR fixes
+<!-- Format: "Fixes #2345, fixes #4523, fixes #2222." -->
+<!-- If it doesn't apply, feel free to remove this section. -->
+
+## **Discord contact info**
+<!--- formatted as name#numbers, e.g. Lunos#4026 -->
+<!--- Contributors must join https://discord.gg/6CzjAG6GZk -->
