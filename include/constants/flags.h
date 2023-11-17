@@ -45,7 +45,7 @@
 #define FLAG_FOLLOWER_ACTIVE                     0x20 // Reveals the follower object
 #define FLAG_FOLLOWER_IN_BUILDING                0x21 // Used for speeding up follower door exiting
 
-#define FLAG_UNUSED_0x022    0x22 // Unused Flag
+#define FLAG_CLEANSE_TAG     0x22 // Cleanse Tag Flag
 #define FLAG_UNUSED_0x023    0x23 // Unused Flag
 #define FLAG_UNUSED_0x024    0x24 // Unused Flag
 #define FLAG_UNUSED_0x025    0x25 // Unused Flag
