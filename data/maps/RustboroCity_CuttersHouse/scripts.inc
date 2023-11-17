@@ -9,6 +9,7 @@ RustboroCity_CuttersHouse_EventScript_Cutter::
 	giveitem ITEM_HM_CUT
 	setflag FLAG_RECEIVED_HM_CUT
 	msgbox RustboroCity_CuttersHouse_Text_ExplainCut, MSGBOX_DEFAULT
+	giveitem ITEM_AXE, 1
 	release
 	end
 
@@ -36,13 +37,10 @@ RustboroCity_CuttersHouse_Text_YouCanPutThisHMToGoodUse:
 RustboroCity_CuttersHouse_Text_ExplainCut:
 	.string "That HIDDEN MACHINE, or HM for\n"
 	.string "short, is CUT.\p"
-	.string "An HM move is one that can be used\n"
-	.string "by POKéMON outside of battle.\p"
-	.string "Any POKéMON that's learned CUT can\n"
-	.string "chop down thin trees if the TRAINER\l"
-	.string "has earned the STONE BADGE.\p"
-	.string "And, unlike a TM, an HM can be used\n"
-	.string "more than once.$"
+	.string "An HM contains a powerful move\n"
+	.string "used by a POKéMON.\p"
+	.string "Please also take this AXE with you,\n"
+	.string "so you can chop down thin trees.$"
 
 RustboroCity_CuttersHouse_Text_DadHelpedClearLandOfTrees:
 	.string "When they were expanding the city of\n"
