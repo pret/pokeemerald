@@ -49,7 +49,7 @@ Text_CantCut:
 @ Interact with smashable rock
 EventScript_RockSmash::
 	lockall
-	checkitem ITEM_HAMMER, 1
+	checkitem ITEM_PICKAXE, 1
 	compare VAR_RESULT, 0
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSmashRock
 	msgbox Text_PlayerUsedHammer, MSGBOX_DEFAULT
@@ -97,11 +97,11 @@ EventScript_CancelSmash::
 	end
 
 Text_CantSmash:
-	.string "It's a rugged rock, but a HAMMER\n"
+	.string "It's a rugged rock, but a PICKAXE\n"
 	.string "may be able to smash it.$"
 
 Text_PlayerUsedHammer:
-	.string "{PLAYER} used the HAMMER!$"	
+	.string "{PLAYER} used the PICKAXE!$"	
 
 EventScript_StrengthBoulder::
 	lockall
@@ -175,7 +175,7 @@ Text_PlayerUsedWaterfall:
 	
 EventScript_DiveSpot::
 	lockall
-	checkitem ITEM_DIVING_SUIT, 1
+	checkitem ITEM_SCUBA_GEAR, 1
 	goto_if_eq VAR_RESULT, 0, EventScript_CantDive
 	msgbox Text_PlayerUsedDive, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_DIVE
@@ -199,7 +199,7 @@ EventScript_EndDive::
 
 EventScript_UseDiveUnderwater::
 	lockall
-	checkitem ITEM_DIVING_SUIT, 1
+	checkitem ITEM_SCUBA_GEAR, 1
 	goto_if_eq VAR_RESULT, 0, EventScript_CantSurface
 	msgbox Text_Surfaced, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_DIVE
@@ -217,11 +217,11 @@ EventScript_EndSurface::
 	end
 
 Text_CantDive:
-	.string "The sea is deep here. A SUIT\n"
-	.string "may be able to go underwater.$"
+	.string "The sea is deep here. GEAR\n"
+	.string "may help you go underwater.$"
 
 Text_PlayerUsedDive:
-	.string "{PLAYER} put on the DIVING SUIT!$"
+	.string "{PLAYER} used the SCUBA GEAR!$"
 	
 Text_Surfaced:
 	.string "{PLAYER} surfaced!$"

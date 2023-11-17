@@ -845,12 +845,12 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_PEAT_BLOCK] = {gItemIcon_PeatBlock, gItemIconPalette_PeatBlock},
     [ITEM_BERSERK_GENE] = {gItemIcon_BerserkGene, gItemIconPalette_BerserkGene},
     // HM Items
-    [ITEM_SURFBOARD] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
-	[ITEM_AXE] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
-	[ITEM_HAMMER] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
-	[ITEM_DIVING_SUIT] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
-	[ITEM_LANTERN] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
-	[ITEM_POWER_GLOVE] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
+    [ITEM_SURFBOARD] = {gItemIcon_Surfboard, gItemIconPalette_Surfboard},
+	[ITEM_AXE] = {gItemIcon_Axe, gItemIconPalette_Axe},
+	[ITEM_PICKAXE] = {gItemIcon_Pickaxe, gItemIconPalette_Pickaxe},
+	[ITEM_SCUBA_GEAR] = {gItemIcon_ScubaGear, gItemIconPalette_ScubaGear},
+	[ITEM_LANTERN] = {gItemIcon_Lantern, gItemIconPalette_Lantern},
+	[ITEM_POWER_GLOVE] = {gItemIcon_PowerGlove, gItemIconPalette_PowerGlove},
 
     [ITEM_INFINITY_CANDY] = {gItemIcon_RareCandy, gItemIconPalette_GoldTeeth},
     // Return to field arrow
