@@ -3931,12 +3931,12 @@ static const u8 sAxeDesc[] = _(
     "clearing bushes.");
 
 static const u8 sHammerDesc[] = _(
-	"A small rubber\n"
-    "mallet. It may can\n"
+	"A small iron\n"
+    "pickaxe. It may can\n"
     "smash rocks.");
 
 static const u8 sDivingSuitDesc[] = _(
-	"Portable suit made\n"
+	"Scuba gear made\n"
     "for diving from\n"
     "the SURFBOARD.");
 

@@ -64,6 +64,7 @@ RusturfTunnel_EventScript_ClearTunnelScene::
 	call_if_eq VAR_TEMP_1, 3, RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer
 	giveitem ITEM_HM_STRENGTH
 	setflag FLAG_RECEIVED_HM_STRENGTH
+	giveitem ITEM_POWER_GLOVE, 1
 	msgbox RusturfTunnel_Text_ExplainStrength, MSGBOX_DEFAULT
 	closemessage
 	call_if_eq VAR_TEMP_1, 1, RusturfTunnel_EventScript_BoyfriendApproachWanda1
@@ -499,7 +500,10 @@ RusturfTunnel_Text_ExplainStrength:
 	.string "That HM contains STRENGTH.\p"
 	.string "If a muscular POKéMON were to learn\n"
 	.string "that, it would be able to move even\l"
-	.string "large boulders.$"
+	.string "large boulders.\p"
+	.string "Those gloves I gave you will\n"
+	.string "help you move boulders\n"
+	.string "just like your POKéMON!$"
 
 RusturfTunnel_Text_WandaReunion:
 	.string "WANDA!\n"

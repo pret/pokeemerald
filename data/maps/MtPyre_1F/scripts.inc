@@ -32,8 +32,8 @@ MtPyre_1F_Text_TakeThisForYourOwnGood:
 	.string "Take this. It's for your own good.$"
 
 MtPyre_1F_Text_ExplainCleanseTag:
-	.string "Have a POKéMON hold that\n"
-	.string "CLEANSE TAG.\p"
+	.string "Activate this from your bag\n"
+	.string "or register it to use quickly.\p"
 	.string "It will help ward off wild POKéMON.$"
 
 MtPyre_1F_Text_ComeToPayRespects:

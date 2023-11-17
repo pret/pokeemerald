@@ -43,6 +43,7 @@ MossdeepCity_StevensHouse_EventScript_StevenGivesDive::
 	giveitem ITEM_HM_DIVE
 	setflag FLAG_RECEIVED_HM_DIVE
 	setflag FLAG_OMIT_DIVE_FROM_STEVEN_LETTER
+	giveitem ITEM_SCUBA_GEAR, 1
 	msgbox MossdeepCity_StevensHouse_Text_ExplainDive, MSGBOX_DEFAULT
 	closemessage
 	delay 20
@@ -161,12 +162,12 @@ MossdeepCity_StevensHouse_Text_YouveEarnedHMDive:
 	.string "this HM.$"
 
 MossdeepCity_StevensHouse_Text_ExplainDive:
-	.string "STEVEN: While you're using SURF, you\n"
+	.string "STEVEN: While you're surfing, you\n"
 	.string "should notice dark patches of water.\p"
-	.string "Use DIVE if you come to deep water\n"
-	.string "like it. You'll drop to the seafloor.\p"
+	.string "Use the Scuba Gear if you come to deep\n"
+	.string "water like it. You'll drop to the seafloor.\p"
 	.string "When you want to come back up, use\n"
-	.string "DIVE again.\p"
+	.string "the Scuba Gear again.\p"
 	.string "In some places, it won't be possible\n"
 	.string "for you to surface, though.$"
 
