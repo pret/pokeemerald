@@ -9714,4 +9714,15 @@ const struct Item gItems[] =
         .type = ITEM_USE_FIELD,
         .fieldUseFunc = ItemUseOutOfBattle_PowerGlove,
     },
+
+    [ITEM_INFINITY_CANDY] =
+    {
+        .name = _("Forever Candy"),
+        .price = 0,
+        .description = sInfinityCandyDesc,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
+        .flingPower = 30,
+    },
 };

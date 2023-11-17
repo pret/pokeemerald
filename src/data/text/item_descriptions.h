@@ -3949,3 +3949,8 @@ static const u8 sPowerGloveDesc[] = _(
 	"A special glove\n"
     "that makes moving\n"
     "heavy rocks easy.");
+
+static const u8 sInfinityCandyDesc[] = _(
+    "Reusable. Raises a\n"
+    "Pokémon's level\n"
+    "by one.");

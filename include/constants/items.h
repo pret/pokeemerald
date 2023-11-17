@@ -922,7 +922,9 @@
 #define ITEM_LANTERN 803
 #define ITEM_POWER_GLOVE 804
 
-#define ITEMS_COUNT 805
+#define ITEM_INFINITY_CANDY 805
+
+#define ITEMS_COUNT 806
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
