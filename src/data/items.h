@@ -5716,12 +5716,13 @@ const struct Item gItems[] =
     [ITEM_CLEANSE_TAG] =
     {
         .name = _("Cleanse Tag"),
-        .price = 5000,
+        .price = 0,
         .holdEffect = HOLD_EFFECT_REPEL,
         .description = sCleanseTagDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .importance = 0,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_CleanseTag,
         .flingPower = 30,
     },
 
@@ -9712,5 +9713,16 @@ const struct Item gItems[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
         .fieldUseFunc = ItemUseOutOfBattle_PowerGlove,
+    },
+
+    [ITEM_INFINITY_CANDY] =
+    {
+        .name = _("Forever Candy"),
+        .price = 0,
+        .description = sInfinityCandyDesc,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
+        .flingPower = 30,
     },
 };

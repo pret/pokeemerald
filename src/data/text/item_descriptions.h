@@ -2449,9 +2449,9 @@ static const u8 sAmuletCoinDesc[] = _(
     "holder takes part.");
 
 static const u8 sCleanseTagDesc[] = _(
-    "A hold item that\n"
-    "helps repel wild\n"
-    "Pokémon.");
+    "A toggleable item\n"
+    "that fully repels\n"
+    "wild Pokémon.");
 
 static const u8 sSmokeBallDesc[] = _(
     "A hold item that\n"
@@ -3949,3 +3949,8 @@ static const u8 sPowerGloveDesc[] = _(
 	"A special glove\n"
     "that makes moving\n"
     "heavy rocks easy.");
+
+static const u8 sInfinityCandyDesc[] = _(
+    "Reusable. Raises a\n"
+    "Pokémon's level\n"
+    "by one.");

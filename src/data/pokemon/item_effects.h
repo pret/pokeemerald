@@ -515,6 +515,7 @@ const u8 *const gItemEffectTable[ITEMS_COUNT] =
     [ITEM_EXP_CANDY_M]        = gItemEffect_RareCandy,
     [ITEM_EXP_CANDY_L]        = gItemEffect_RareCandy,
     [ITEM_EXP_CANDY_XL]       = gItemEffect_RareCandy,
+    [ITEM_INFINITY_CANDY]     = gItemEffect_RareCandy,
     //[ITEM_DYNAMAX_CANDY]      = gItemEffect_DynamaxCandy, // Todo
 
     // Medicinal Flutes
