@@ -13777,7 +13777,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_MORTAL_SPIN] =
     {
-        .effect = EFFECT_MORTAL_SPIN,
+        .effect = EFFECT_HIT,
         .power = 30,
         .type = TYPE_POISON,
         .accuracy = 100,
@@ -13789,6 +13789,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .zMoveEffect = Z_EFFECT_NONE,
         .sheerForceBoost = TRUE,
         .makesContact = TRUE,
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT_SELF(MOVE_EFFECT_RAPIDSPIN),
+            SECONDARY_EFFECT(MOVE_EFFECT_POISON, 100)
+        )
     },
 
     [MOVE_DOODLE] =

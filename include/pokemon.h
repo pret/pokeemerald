@@ -399,20 +399,21 @@ struct BattleMove
     const struct AdditionalEffect *additionalEffects;
 };
 
+// for some reason struct arguments are counted as 2?
 #define ADDITIONAL_EFFECTS(...)\
-    .numAdditionalEffects = NARG_8(__VA_ARGS__) - 1,\
+    .numAdditionalEffects = NARG_8(__VA_ARGS__) / 2,\
     .additionalEffects = (const struct AdditionalEffect[]){\
         VARARG_8(ADDITIONAL_EFFECTS_, __VA_ARGS__)\
     }
 #define ADDITIONAL_EFFECTS_0()
-#define ADDITIONAL_EFFECTS_1(a) a,
-#define ADDITIONAL_EFFECTS_2(a, b) a, b,
-#define ADDITIONAL_EFFECTS_3(a, b, c) a, b, c,
+#define ADDITIONAL_EFFECTS_2(a, b) a, b
+#define ADDITIONAL_EFFECTS_4(a, b, c, d) a, b, c, d
+#define ADDITIONAL_EFFECTS_6(a, b, c, d, e, f) a, b, c, d, e, f
 
-#define PRIMARY_EFFECT(_moveEffect, ...) {.moveEffect = _moveEffect}
-#define PRIMARY_EFFECT_SELF(_moveEffect, ...) {.self = TRUE, .moveEffect = _moveEffect}
-#define SECONDARY_EFFECT(_moveEffect, _chance, ...) {.chance = _chance, .moveEffect = _moveEffect}
-#define SECONDARY_EFFECT_SELF(_moveEffect, _chance, ...) {.self = TRUE, .chance = _chance, .moveEffect = _moveEffect}
+#define PRIMARY_EFFECT(_moveEffect, ...){.moveEffect = _moveEffect}
+#define PRIMARY_EFFECT_SELF(_moveEffect, ...){.self = TRUE, .moveEffect = _moveEffect}
+#define SECONDARY_EFFECT(_moveEffect, _chance, ...){.chance = _chance, .moveEffect = _moveEffect}
+#define SECONDARY_EFFECT_SELF(_moveEffect, _chance, ...){.self = TRUE, .chance = _chance, .moveEffect = _moveEffect}
 
 struct AdditionalEffect
 {

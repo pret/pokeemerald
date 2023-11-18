@@ -3576,7 +3576,6 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     case EFFECT_TOXIC:
     case EFFECT_POISON:
     case EFFECT_BARB_BARRAGE:
-    case EFFECT_MORTAL_SPIN:
         IncreasePoisonScore(battlerAtk, battlerDef, move, &score);
         break;
     case EFFECT_LIGHT_SCREEN:
@@ -4881,6 +4880,20 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             ADJUST_SCORE(2);
         break;
     } // move effect checks
+
+    // check move additional effects
+    for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
+    {
+        if (gBattleMoves[move].additionalEffects[i].self)
+            continue;
+
+        switch (gBattleMoves[move].additionalEffects[i].moveEffect)
+        {
+            case MOVE_EFFECT_POISON:
+                IncreasePoisonScore(battlerAtk, battlerDef, move, &score);
+            break;
+        }
+    }
 
     return score;
 }
