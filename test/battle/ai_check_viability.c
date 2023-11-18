@@ -4,7 +4,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_BODY_SLAM].effect == EFFECT_PARALYZE_HIT);
+    ASSUME(gBattleMoves[MOVE_BODY_SLAM].additionalEffects[0].moveEffect == MOVE_EFFECT_PARALYSIS);
 }
 
 AI_SINGLE_BATTLE_TEST("AI sees increased base power of Facade")

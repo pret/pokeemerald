@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_THUNDER_SHOCK].effect == EFFECT_PARALYZE_HIT);
+    ASSUME(gBattleMoves[MOVE_THUNDER_SHOCK].additionalEffects[0].moveEffect == MOVE_EFFECT_PARALYSIS);
 }
 
 SINGLE_BATTLE_TEST("Thunder Shock inflicts paralysis")

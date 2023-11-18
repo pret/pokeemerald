@@ -3663,6 +3663,22 @@ static void Cmd_seteffectwithchance(void)
 
     gBattleScripting.moveEffect = 0;
     gBattleScripting.multihitMoveEffect = 0;
+
+    // Set any move effects in this move's ADDITIONAL_EFFECTS
+    if (gBattleMoves[gCurrentMove].numAdditionalEffects > 0)
+    {
+        u8 i, percentChance;
+        for (i = gBattleMoves[gCurrentMove].numAdditionalEffects; i > 0; i--)
+        {
+            percentChance = gBattleMoves[gCurrentMove].additionalEffects[i - 1].chance;
+            if (percentChance == 0 || RandomPercentage(RNG_SECONDARY_EFFECT, percentChance))
+            {
+                gBattleScripting.moveEffect = gBattleMoves[gCurrentMove].additionalEffects[i - 1].moveEffect;
+                SetMoveEffect(percentChance == 0, 0);
+            }
+
+        }
+    }
 }
 
 static void Cmd_seteffectprimary(void)

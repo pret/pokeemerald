@@ -393,7 +393,48 @@ struct BattleMove
     u32 instructBanned:1;
     u32 encoreBanned:1;
     u32 parentalBondBanned:1;
+    u32 numAdditionalEffects:2; // limited to 3 - don't want to get too crazy
+
+    // primary/secondary effects
+    const struct AdditionalEffect *additionalEffects;
 };
+
+#define ADDITIONAL_EFFECTS(...)\
+    .numAdditionalEffects = NARG_8(__VA_ARGS__) - 1,\
+    .additionalEffects = (const struct AdditionalEffect[]){\
+        VARARG_8(ADDITIONAL_EFFECTS_, __VA_ARGS__)\
+    }
+#define ADDITIONAL_EFFECTS_0()
+#define ADDITIONAL_EFFECTS_1(a) a,
+#define ADDITIONAL_EFFECTS_2(a, b) a, b,
+#define ADDITIONAL_EFFECTS_3(a, b, c) a, b, c,
+
+#define PRIMARY_EFFECT(_moveEffect, ...) {.moveEffect = _moveEffect}
+#define PRIMARY_EFFECT_SELF(_moveEffect, ...) {.self = TRUE, .moveEffect = _moveEffect}
+#define SECONDARY_EFFECT(_moveEffect, _chance, ...) {.chance = _chance, .moveEffect = _moveEffect}
+#define SECONDARY_EFFECT_SELF(_moveEffect, _chance, ...) {.self = TRUE, .chance = _chance, .moveEffect = _moveEffect}
+
+struct AdditionalEffect
+{
+    bool8 self;
+    u8 chance; // 0% = effect certain, primary effect
+    u16 moveEffect;
+    // union {
+    //     u32 data; // status effect etc. (not sure what to call this)
+    //     // struct StatChange *statChange; // will include when stat changer overhaul is merged
+    // };
+};
+
+// struct StatChange
+// {
+//     s8 atk;
+//     s8 def;
+//     s8 spa;
+//     s8 spd;
+//     s8 spe;
+//     s8 acc;
+//     s8 eva;
+// };
 
 #define SPINDA_SPOT_WIDTH 16
 #define SPINDA_SPOT_HEIGHT 16
