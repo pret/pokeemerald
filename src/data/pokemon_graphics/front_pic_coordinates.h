@@ -663,7 +663,7 @@ const struct MonCoords gMonFrontPicCoords[NUM_SPECIES + 1] =
     [SPECIES_GENESECT]                     = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  0 },
 #endif
 #if P_GEN_6_POKEMON == TRUE
-    [SPECIES_CHESPIN]                      = { .size = MON_COORDS_SIZE(40, 48), .y_offset = 10 },
+    [SPECIES_CHESPIN]                      = { .size = MON_COORDS_SIZE(40, 48), .y_offset =  5 },
     [SPECIES_QUILLADIN]                    = { .size = MON_COORDS_SIZE(48, 48), .y_offset = 10 },
     [SPECIES_CHESNAUGHT]                   = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  4 },
     [SPECIES_FENNEKIN]                     = { .size = MON_COORDS_SIZE(40, 48), .y_offset = 10 },
@@ -711,7 +711,7 @@ const struct MonCoords gMonFrontPicCoords[NUM_SPECIES + 1] =
     [SPECIES_HELIOLISK]                    = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  4 },
     [SPECIES_TYRUNT]                       = { .size = MON_COORDS_SIZE(48, 48), .y_offset = 11 },
     [SPECIES_TYRANTRUM]                    = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
-    [SPECIES_AMAURA]                       = { .size = MON_COORDS_SIZE(32, 56), .y_offset =  8 },
+    [SPECIES_AMAURA]                       = { .size = MON_COORDS_SIZE(32, 56), .y_offset =  0 },
     [SPECIES_AURORUS]                      = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_SYLVEON]                      = { .size = MON_COORDS_SIZE(48, 56), .y_offset =  4 },
     [SPECIES_HAWLUCHA]                     = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  8 },
