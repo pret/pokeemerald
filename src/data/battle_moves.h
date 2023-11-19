@@ -13862,7 +13862,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_RAGING_BULL] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_RAGING_BULL
+        .effect = EFFECT_RAGING_BULL,
         .power = 90,
         .type = TYPE_NORMAL,
         .accuracy = 100,

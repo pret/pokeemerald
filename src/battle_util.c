@@ -4112,7 +4112,9 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
 {
     u32 effect = 0;
     u32 moveType, move;
+    u32 side;
     u32 i, j;
+    struct Pokemon *mon;
 
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
         return 0;
@@ -4700,12 +4702,15 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             }
             break;
         case ABILITY_ZERO_TO_HERO:
+            side = GetBattlerSide(battler);
+            mon = &GetSideParty(side)[gBattlerPartyIndexes[battler]];
+
             if (!gSpecialStatuses[battler].switchInAbilityDone
-             && gBattleMons[battler].species == SPECIES_PALAFIN_HERO
-             && !gBattleStruct->transformZeroToHero[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)])
+             && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_PALAFIN_HERO
+             && !gBattleStruct->transformZeroToHero[gBattlerPartyIndexes[battler]][side])
             {
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
-                gBattleStruct->transformZeroToHero[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)] = TRUE;
+                gBattleStruct->transformZeroToHero[gBattlerPartyIndexes[battler]][side] = TRUE;
                 BattleScriptPushCursorAndCallback(BattleScript_ZeroToHeroActivates);
                 effect++;
             }
@@ -5258,6 +5263,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 case ABILITY_STANCE_CHANGE:
                 case ABILITY_WONDER_GUARD:
                 case ABILITY_ZEN_MODE:
+                case ABILITY_ZERO_TO_HERO:
                     break;
                 default:
                     if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_ABILITY_SHIELD)

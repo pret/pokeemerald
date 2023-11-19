@@ -123,6 +123,46 @@ SINGLE_BATTLE_TEST("Role Play, Skill Swap, and Entrainment fail if either Pokém
     }
 }
 
+SINGLE_BATTLE_TEST("Transform doesn't apply the heroic transformation message when copying Palafin")
+{
+    GIVEN {
+        PLAYER(SPECIES_PALAFIN_ZERO) { Ability(ABILITY_ZERO_TO_HERO); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { SWITCH(player, 1); }
+        TURN { SWITCH(player, 0); MOVE(opponent, MOVE_TRANSFORM); }
+    } SCENE {
+        ABILITY_POPUP(player, ABILITY_ZERO_TO_HERO);
+        MESSAGE("Palafin underwent a heroic transformation!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TRANSFORM, opponent);
+        MESSAGE("Foe Wobbuffet transformed into Palafin!");
+        NOT ABILITY_POPUP(opponent, ABILITY_ZERO_TO_HERO);
+    } THEN { EXPECT_EQ(player->species, SPECIES_PALAFIN_HERO); }
+}
+
+SINGLE_BATTLE_TEST("Imposter doesn't apply the heroic transformation message when copying Palafin")
+{
+    GIVEN {
+        PLAYER(SPECIES_PALAFIN_ZERO) { Ability(ABILITY_ZERO_TO_HERO); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_DITTO) { Ability(ABILITY_IMPOSTER); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { SWITCH(player, 1); SWITCH(opponent, 1); }
+        TURN { SWITCH(player, 0); SWITCH(opponent, 0); }
+    } SCENE {
+        ABILITY_POPUP(player, ABILITY_ZERO_TO_HERO);
+        MESSAGE("Palafin underwent a heroic transformation!");
+        ABILITY_POPUP(opponent, ABILITY_IMPOSTER);
+        MESSAGE("Foe Ditto transformed into Palafin using Imposter!");
+        NONE_OF {
+            ABILITY_POPUP(opponent, ABILITY_ZERO_TO_HERO);
+            MESSAGE("Foe Ditto underwent a heroic transformation!");
+        }
+    } THEN { EXPECT_EQ(player->species, SPECIES_PALAFIN_HERO); }
+}
+
 // Write Trace test and move this one to that file (including every other ability that can't be copied)
 SINGLE_BATTLE_TEST("Zero to Hero cannot be copied by Trace")
 {
