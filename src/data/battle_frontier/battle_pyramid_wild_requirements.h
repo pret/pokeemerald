@@ -57,7 +57,7 @@ static const u16 sPoisoningMoves[] = {
     MOVE_TOXIC_THREAD,
 };
 
-// EFFECT_BURN_HIT, EFFECT_WILL_O_WISP
+// MOVE_EFFECT_BURN, EFFECT_WILL_O_WISP
 static const u16 sBurningMoves[] = {
     MOVE_WILL_O_WISP,
     //MOVE_EMBER,
@@ -169,7 +169,7 @@ static const struct BattlePyramidRequirement sBattlePyramidRequirementsByRound[]
     {
         .type = TYPE_ICE,
     },
-    
+
     [7] = /* pokemon with explosion effects */
     {
         .type = TYPE_MYSTERY,

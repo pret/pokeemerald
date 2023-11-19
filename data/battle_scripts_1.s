@@ -26,7 +26,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSleep                   @ EFFECT_SLEEP
 	.4byte BattleScript_EffectPoisonHit               @ EFFECT_POISON_HIT
 	.4byte BattleScript_EffectAbsorb                  @ EFFECT_ABSORB
-	.4byte BattleScript_EffectBurnHit                 @ EFFECT_BURN_HIT
+	.4byte BattleScript_EffectHit                     @ EFFECT_BURN_HIT
 	.4byte BattleScript_EffectFreezeHit               @ EFFECT_FREEZE_HIT
 	.4byte BattleScript_EffectParalyzeHit             @ EFFECT_PARALYZE_HIT
 	.4byte BattleScript_EffectExplosion               @ EFFECT_EXPLOSION
@@ -426,7 +426,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectFrostbiteHit            @ EFFECT_FROSTBITE_HIT
 	.4byte BattleScript_EffectSnow                    @ EFFECT_SNOWSCAPE
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_399
-	.4byte BattleScript_EffectInfernalParade          @ EFFECT_INFERNAL_PARADE
+	.4byte BattleScript_EffectHit                     @ EFFECT_INFERNAL_PARADE
 	.4byte BattleScript_EffectTakeHeart               @ EFFECT_TAKE_HEART
 	.4byte BattleScript_EffectAxeKick                 @ EFFECT_AXE_KICK
 	.4byte BattleScript_EffectHit                     @ EFFECT_COLLISION_COURSE
@@ -3372,11 +3372,6 @@ BattleScript_AbsorbTryFainting::
 BattleScript_AbsorbHealBlock::
 	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
-
-BattleScript_EffectInfernalParade::
-BattleScript_EffectBurnHit::
-	setmoveeffect MOVE_EFFECT_BURN
-	goto BattleScript_EffectHit
 
 BattleScript_EffectFrostbiteHit::
 	setmoveeffect MOVE_EFFECT_FROSTBITE

@@ -355,6 +355,7 @@ static bool32 ChangeOrderTargetAfterAttacker(void);
 void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBattler);
 static void RemoveAllTerrains(void);
 static bool8 CanAbilityPreventStatLoss(u16 abilityDef, bool8 isIntimidate);
+static bool8 CanBurnHitThaw(u16 move);
 
 static void Cmd_attackcanceler(void);
 static void Cmd_accuracycheck(void);
@@ -5286,8 +5287,7 @@ static void Cmd_moveend(void)
             if (gBattleMons[gBattlerTarget].status1 & STATUS1_FREEZE
                 && gBattleMons[gBattlerTarget].hp != 0
                 && gBattlerAttacker != gBattlerTarget
-                && (moveType == TYPE_FIRE
-                    || (B_BURN_HIT_THAW >= GEN_6 && gBattleMoves[gCurrentMove].effect == EFFECT_BURN_HIT))
+                && (moveType == TYPE_FIRE || CanBurnHitThaw(gCurrentMove))
                 && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
             {
                 gBattleMons[gBattlerTarget].status1 &= ~STATUS1_FREEZE;
@@ -15668,6 +15668,21 @@ static bool8 CanAbilityPreventStatLoss(u16 abilityDef, bool8 byIntimidate)
         if (byIntimidate && (B_UPDATED_INTIMIDATE >= GEN_8))
             return TRUE;
         break;
+    }
+    return FALSE;
+}
+
+static bool8 CanBurnHitThaw(u16 move)
+{
+    u8 i;
+
+    if (B_BURN_HIT_THAW >= GEN_6)
+    {
+        for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
+        {
+            if (gBattleMoves[move].additionalEffects[i].moveEffect == MOVE_EFFECT_BURN)
+                return TRUE;
+        }
     }
     return FALSE;
 }
