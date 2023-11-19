@@ -436,7 +436,6 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_POPULATION_BOMB
 	.4byte BattleScript_EffectMortalSpin              @ EFFECT_MORTAL_SPIN
 	.4byte BattleScript_EffectSaltCure                @ EFFECT_SALT_CURE
-	.4byte BattleScript_EffectMatchaGotcha            @ EFFECT_MATCHA_GOTCHA
 	.4byte BattleScript_EffectSyrupBomb               @ EFFECT_SYRUP_BOMB
 	.4byte BattleScript_EffectHit                     @ EFFECT_IVY_CUDGEL
 	.4byte BattleScript_EffectMaxMove                 @ EFFECT_MAX_MOVE
@@ -468,10 +467,6 @@ BattleScript_SyrupBombEndTurn::
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_SyrupBombTurnDmgEnd:
 	end2
-
-BattleScript_EffectMatchaGotcha::
-	setmoveeffect MOVE_EFFECT_BURN
-	goto BattleScript_EffectAbsorb
 
 BattleScript_EffectSaltCure:
 	call BattleScript_EffectHit_Ret

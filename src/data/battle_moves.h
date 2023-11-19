@@ -14406,12 +14406,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_MATCHA_GOTCHA] =
     {
-        .effect = EFFECT_MATCHA_GOTCHA,
+        .effect = EFFECT_ABSORB,
         .power = 80,
         .type = TYPE_GRASS,
         .accuracy = 90,
         .pp = 15,
-        .secondaryEffectChance = 20,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
         .split = SPLIT_SPECIAL,
@@ -14419,6 +14418,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .thawsUser = TRUE,
         .metronomeBanned = TRUE,
         .healBlockBanned = B_EXTRAPOLATED_MOVE_FLAGS,
+        ADDITIONAL_EFFECTS(
+            SECONDARY_EFFECT(MOVE_EFFECT_BURN, 20)
+        )
     },
 
     [MOVE_SYRUP_BOMB] =

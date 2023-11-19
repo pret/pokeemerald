@@ -3,7 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_MATCHA_GOTCHA].effect == EFFECT_MATCHA_GOTCHA);
+    ASSUME(gBattleMoves[MOVE_MATCHA_GOTCHA].effect == EFFECT_ABSORB);
+    ASSUME(gBattleMoves[MOVE_MATCHA_GOTCHA].additionalEffects[0].moveEffect == MOVE_EFFECT_BURN);
 }
 
 SINGLE_BATTLE_TEST("Matcha Gotcha inflicts burn 20% of the time")
