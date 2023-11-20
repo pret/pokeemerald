@@ -310,8 +310,7 @@ u8 GetTimeOfDay(void)
         return TIME_DUSK;
     else if (IsBetweenHours(gLocalTime.hours, NIGHT_EVO_HOUR_BEGIN, NIGHT_EVO_HOUR_END))
         return TIME_NIGHT;
-    else
-        return TIME_DAY;
+    return TIME_DAY;
 }
 
 void RtcInitLocalTimeOffset(s32 hour, s32 minute)
