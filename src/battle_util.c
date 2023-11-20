@@ -6099,7 +6099,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
         break;
     }
 
-    if (effect && gLastUsedAbility != 0xFF)
+    if (effect && gLastUsedAbility != 0xFFFF)
         RecordAbilityBattle(battler, gLastUsedAbility);
     if (effect && caseID <= ABILITYEFFECT_MOVE_END)
         gBattlerAbility = battler;
