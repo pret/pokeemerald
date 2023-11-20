@@ -214,7 +214,11 @@ static const u8 sDisableDescription[] = _(
 
 static const u8 sAcidDescription[] = _(
     "Sprays a hide-melting acid.\n"
+#if B_UPDATED_MOVE_DATA >= GEN_4
+    "May lower Sp. Def.");
+#else
     "May lower Defense.");
+#endif
 
 static const u8 sEmberDescription[] = _(
     "A weak fire attack that may\n"
@@ -986,7 +990,11 @@ static const u8 sSunnyDayDescription[] = _(
 
 static const u8 sCrunchDescription[] = _(
     "Crunches with sharp fangs.\n"
+#if B_UPDATED_MOVE_DATA >= GEN_4
     "May lower Defense.");
+#else
+    "May lower Sp. Def.");
+#endif
 
 static const u8 sMirrorCoatDescription[] = _(
     "Counters the foe's special\n"
