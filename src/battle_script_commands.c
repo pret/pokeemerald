@@ -3078,13 +3078,17 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 }
                 break;
             case MOVE_EFFECT_FLINCH:
-                if (battlerAbility == ABILITY_INNER_FOCUS
-                    && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
+                if (battlerAbility == ABILITY_INNER_FOCUS)
                 {
-                    gLastUsedAbility = ABILITY_INNER_FOCUS;
-                    gBattlerAbility = gEffectBattler;
-                    RecordAbilityBattle(gEffectBattler, ABILITY_INNER_FOCUS);
-                    gBattlescriptCurrInstr = BattleScript_FlinchPrevention;
+                    // Inner Focus ALWAYS prevents flinching but only activates
+                    // on a move that's supposed to flinch, like Fake Out
+                    if (primary == TRUE || certain == MOVE_EFFECT_CERTAIN)
+                    {
+                        gLastUsedAbility = ABILITY_INNER_FOCUS;
+                        gBattlerAbility = gEffectBattler;
+                        RecordAbilityBattle(gEffectBattler, ABILITY_INNER_FOCUS);
+                        gBattlescriptCurrInstr = BattleScript_FlinchPrevention;
+                    }
                 }
                 else if (GetBattlerTurnOrderNum(gEffectBattler) > gCurrentTurnActionNumber
                          && !IsDynamaxed(gEffectBattler))
@@ -3596,26 +3600,6 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     gBattlescriptCurrInstr = BattleScript_SpikesActivates;
                 }
                 break;
-            case MOVE_EFFECT_TRIPLE_ARROWS:
-                {
-                    u8 randomLowerDefenseChance = RandomPercentage(RNG_TRIPLE_ARROWS_DEFENSE_DOWN, CalcSecondaryEffectChance(gBattlerAttacker, 50));
-                    u8 randomFlinchChance = RandomPercentage(RNG_TRIPLE_ARROWS_FLINCH, CalcSecondaryEffectChance(gBattlerAttacker, 30));
-
-                    if (randomFlinchChance && battlerAbility != ABILITY_INNER_FOCUS && GetBattlerTurnOrderNum(gEffectBattler) > gCurrentTurnActionNumber)
-                        gBattleMons[gEffectBattler].status2 |= sStatusFlagsForMoveEffects[MOVE_EFFECT_FLINCH];
-
-                    if (randomLowerDefenseChance)
-                    {
-                        BattleScriptPush(gBattlescriptCurrInstr + 1);
-                        gBattlescriptCurrInstr = BattleScript_DefDown;
-                    }
-                    else
-                    {
-                        gBattlescriptCurrInstr++;
-                    }
-                }
-
-                break;
             case MOVE_EFFECT_SYRUP_BOMB:
                 if (!(gStatuses4[gEffectBattler] & STATUS4_SYRUP_BOMB))
                 {
@@ -3669,12 +3653,15 @@ static void Cmd_seteffectwithchance(void)
     // In reverse array order so that effects are applied in correct order
     for (i = gBattleMoves[gCurrentMove].numAdditionalEffects; i > 0; i--)
     {
-        percentChance = gBattleMoves[gCurrentMove].additionalEffects[i - 1].chance;
+        percentChance = CalcSecondaryEffectChance(
+            gBattlerAttacker,
+            gBattleMoves[gCurrentMove].additionalEffects[i - 1].chance
+        );
         // Each effect needs its own RNG_SECONDARY_EFFECT tag
         if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + i - 1, percentChance))
         {
             gBattleScripting.moveEffect = gBattleMoves[gCurrentMove].additionalEffects[i - 1].moveEffect;
-            SetMoveEffect((percentChance == 0), 0);
+            SetMoveEffect((percentChance == 0), gBattleMoves[gCurrentMove].additionalEffects[i - 1].chance == 100);
         }
     }
 }

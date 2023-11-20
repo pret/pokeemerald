@@ -843,6 +843,22 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, u32 move, s3
     u32 abilityDef = AI_DATA->abilities[battlerDef];
     u32 abilityAtk = AI_DATA->abilities[battlerAtk];
 
+    // check ADDITIONAL_EFFECTS
+    for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
+    {
+        // Obviously ignore moves that target self
+        if (gBattleMoves[move].additionalEffects[i].self)
+            continue;
+
+        switch (gBattleMoves[move].additionalEffects[i].moveEffect)
+        {
+            case MOVE_EFFECT_PARALYSIS:
+                if (AI_CanParalyze(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE))
+                    return TRUE;
+                break;
+        }
+    }
+
     switch (gBattleMoves[move].effect)
     {
     case EFFECT_HIT:
@@ -947,22 +963,6 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, u32 move, s3
     }
 
     return FALSE;
-
-    // check ADDITIONAL_EFFECTS
-    for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
-    {
-        // Obviously ignore moves that target self
-        if (gBattleMoves[move].additionalEffects[i].self)
-            continue;
-
-        switch (gBattleMoves[move].additionalEffects[i].moveEffect)
-        {
-            case MOVE_EFFECT_PARALYSIS:
-                if (AI_CanParalyze(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE))
-                    return TRUE;
-                break;
-        }
-    }
 }
 
 static bool32 AI_IsMoveEffectInMinus(u32 battlerAtk, u32 battlerDef, u32 move, s32 noOfHitsToKo)

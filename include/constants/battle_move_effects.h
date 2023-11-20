@@ -402,7 +402,7 @@
 #define EFFECT_REVIVAL_BLESSING             396
 #define EFFECT_FROSTBITE_HIT                397
 #define EFFECT_SNOWSCAPE                    398
-#define EFFECT_TRIPLE_ARROWS                399
+#define EFFECT_UNUSED_399                   399
 #define EFFECT_INFERNAL_PARADE              400
 #define EFFECT_TAKE_HEART                   401
 #define EFFECT_AXE_KICK                     402

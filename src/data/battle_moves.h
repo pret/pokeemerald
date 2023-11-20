@@ -13385,16 +13385,19 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
             .power = 50,
             .pp = 15,
         #endif
-        .effect = EFFECT_TRIPLE_ARROWS,
+        .effect = EFFECT_HIT,
         .type = TYPE_FIGHTING,
         .accuracy = 100,
-        .secondaryEffectChance = 100, // 50% Defense down, 30% Flinch. Can be modified in 'SetMoveEffect'
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .split = SPLIT_PHYSICAL,
         .zMoveEffect = Z_EFFECT_NONE,
         .highCritRatio = TRUE,
         .sheerForceBoost = TRUE,
+        ADDITIONAL_EFFECTS(
+            SECONDARY_EFFECT(MOVE_EFFECT_DEF_MINUS_1, 50),
+            SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
+        )
     },
 
     [MOVE_INFERNAL_PARADE] =

@@ -4881,10 +4881,11 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         break;
     } // move effect checks
 
-    // check move additional effects
+    // check move additional effects that are certain/100% likely to happen
     for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
     {
-        if (gBattleMoves[move].additionalEffects[i].self)
+        if (gBattleMoves[move].additionalEffects[i].self
+         || gBattleMoves[move].additionalEffects[i].chance % 100)
             continue;
 
         switch (gBattleMoves[move].additionalEffects[i].moveEffect)

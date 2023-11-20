@@ -5680,7 +5680,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && !IS_MOVE_STATUS(move)
              && gBattleMoves[gCurrentMove].effect != EFFECT_FLINCH_HIT
              && gBattleMoves[gCurrentMove].effect != EFFECT_FLINCH_STATUS
-             && gBattleMoves[gCurrentMove].effect != EFFECT_TRIPLE_ARROWS)
+             && !MoveHasMoveEffect(gCurrentMove, MOVE_EFFECT_FLINCH))
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_FLINCH;
                 BattleScriptPushCursor();
@@ -11134,6 +11134,17 @@ bool32 IsGen6ExpShareEnabled(void)
 #else
     return FlagGet(I_EXP_SHARE_FLAG);
 #endif
+}
+
+bool32 MoveHasMoveEffect(u16 move, u16 moveEffect)
+{
+    u8 i;
+    for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
+    {
+        if (gBattleMoves[move].additionalEffects[i].moveEffect == moveEffect)
+            return TRUE;
+    }
+    return FALSE;
 }
 
 

@@ -425,7 +425,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectRevivalBlessing         @ EFFECT_REVIVAL_BLESSING
 	.4byte BattleScript_EffectFrostbiteHit            @ EFFECT_FROSTBITE_HIT
 	.4byte BattleScript_EffectSnow                    @ EFFECT_SNOWSCAPE
-	.4byte BattleScript_EffectTripleArrows            @ EFFECT_TRIPLE_ARROWS
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_399
 	.4byte BattleScript_EffectInfernalParade          @ EFFECT_INFERNAL_PARADE
 	.4byte BattleScript_EffectTakeHeart               @ EFFECT_TAKE_HEART
 	.4byte BattleScript_EffectAxeKick                 @ EFFECT_AXE_KICK
@@ -564,10 +564,6 @@ BattleScript_EffectTakeHeart::
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPATK, MAX_STAT_STAGE, BattleScript_CalmMindStatRaise
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPDEF, MAX_STAT_STAGE, BattleScript_CalmMindStatRaise
 	goto BattleScript_CantRaiseMultipleStats
-
-BattleScript_EffectTripleArrows::
-	setmoveeffect MOVE_EFFECT_TRIPLE_ARROWS
-	goto BattleScript_EffectHit
 
 BattleScript_EffectRevivalBlessing::
 	attackcanceler

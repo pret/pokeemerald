@@ -21,7 +21,7 @@ SINGLE_BATTLE_TEST("Accuracy controls the proportion of misses")
     }
 }
 
-SINGLE_BATTLE_TEST("AdditionalEffect.effect controls the proportion of secondary effects")
+SINGLE_BATTLE_TEST("AdditionalEffect.chance controls the proportion of secondary effects")
 {
     u32 move;
     PARAMETRIZE { move = MOVE_THUNDER_SHOCK; }
