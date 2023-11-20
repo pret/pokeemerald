@@ -9072,13 +9072,11 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
                     switch (formChanges[i].param1)
                     {
                     case DAY:
-                        RtcCalcLocalTime();
-                        if (gLocalTime.hours >= DAY_EVO_HOUR_BEGIN && gLocalTime.hours < DAY_EVO_HOUR_END)
+                        if (GetTimeOfDay() != TIME_NIGHT)
                             targetSpecies = formChanges[i].targetSpecies;
                         break;
                     case NIGHT:
-                        RtcCalcLocalTime();
-                        if (gLocalTime.hours >= NIGHT_EVO_HOUR_BEGIN && gLocalTime.hours < NIGHT_EVO_HOUR_END)
+                        if (GetTimeOfDay() == TIME_NIGHT)
                             targetSpecies = formChanges[i].targetSpecies;
                         break;
                     }
