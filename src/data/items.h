@@ -9063,11 +9063,11 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_OAKS_PARCEL] =
+    [ITEM_PARCEL] =
     {
-        .name = _("Oak's Parcel"),
+        .name = _("Parcel"),
         .price = 0,
-        .description = sOaksParcelDesc,
+        .description = sParcelDesc,
         .importance = 2,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
