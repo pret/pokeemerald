@@ -42,11 +42,9 @@ void UpdateMirageRnd(u16 days)
 bool8 IsMirageIslandPresent(void)
 {
     u16 rnd = GetMirageRnd() >> 16;
-    int i;
 
-    for (i = 0; i < PARTY_SIZE; i++)
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && (GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY) & 0xFFFF) == rnd)
-            return TRUE;
+    if (rnd <= 8,192)
+    return TRUE;
 
     return FALSE;
 }

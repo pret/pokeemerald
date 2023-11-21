@@ -97,7 +97,7 @@ struct ShopData
     u16 itemsShowed;
     u16 selectedRow;
     u16 scrollOffset;
-    u8 maxQuantity;
+    u16 maxQuantity;
     u8 scrollIndicatorsTaskId;
     u8 iconSlot;
     u8 itemSpriteIds[2];
@@ -1161,8 +1161,15 @@ static void Task_ReturnToItemListAfterItemPurchase(u8 taskId)
     {
         PlaySE(SE_SELECT);
 
-        // Purchasing 10+ Poke Balls gets the player a Premier Ball
-        if (tItemId == ITEM_POKE_BALL && tItemCount >= 10 && AddBagItem(ITEM_PREMIER_BALL, 1) == TRUE)
+        if ((tItemId == ITEM_POKE_BALL || tItemId == ITEM_GREAT_BALL || tItemId == ITEM_ULTRA_BALL
+            || tItemId == ITEM_HEAL_BALL || tItemId == ITEM_NET_BALL || tItemId == ITEM_NEST_BALL
+            || tItemId == ITEM_DIVE_BALL || tItemId == ITEM_DUSK_BALL || tItemId == ITEM_TIMER_BALL
+            || tItemId == ITEM_QUICK_BALL || tItemId == ITEM_REPEAT_BALL || tItemId == ITEM_LUXURY_BALL
+            || tItemId == ITEM_LEVEL_BALL || tItemId == ITEM_LURE_BALL || tItemId == ITEM_MOON_BALL
+            || tItemId == ITEM_FRIEND_BALL || tItemId == ITEM_LOVE_BALL || tItemId == ITEM_FAST_BALL
+            || tItemId == ITEM_HEAVY_BALL || tItemId == ITEM_DREAM_BALL || tItemId == ITEM_SPORT_BALL
+            || tItemId == ITEM_CHERISH_BALL) 
+            && tItemCount >= 5 && AddBagItem(ITEM_PREMIER_BALL, (tItemCount / 5)) == TRUE)
             BuyMenuDisplayMessage(taskId, gText_ThrowInPremierBall, BuyMenuReturnToItemList);
         else
             BuyMenuReturnToItemList(taskId);

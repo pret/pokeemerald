@@ -264,6 +264,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ChooseJohtoStarter::
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter
 	waitmovement 0
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_CompletedDexChoosePokemon, MSGBOX_DEFAULT
+	giveitem ITEM_SHINY_CHARM, 1
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveShinyCharm, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5
 	releaseall
 	end
@@ -895,11 +897,18 @@ LittlerootTown_ProfessorBirchsLab_Text_CompletedDexChoosePokemon:
 	.string "You really have completed the HOENN\n"
 	.string "region's POKéDEX.\p"
 	.string "That's more than just impressive.\p"
-	.string "I have a gift for you.\p"
+	.string "I have two gifts for you.\p"
 	.string "Consider it my show of appreciation\n"
-	.string "for the fantastic work you've done.\p"
-	.string "My gift is a rare POKéMON only found\n"
-	.string "in another region!\p"
+	.string "for the fantastic work you've done.$"
+	
+LittlerootTown_ProfessorBirchsLab_Text_GiveShinyCharm:
+	.string "This is the Shiny Charm.\p"
+	.string "Rumor has it that it will increase\n"
+	.string "the odds of finding rare-colored\n"
+	.string "POKéMON in the wild!\p"
+	.string "… … … … … …\p"
+	.string "My final gift is a rare POKéMON only\n"
+	.string "found in another region!\p"
 	.string "You can have any one of these\n"
 	.string "three POKéMON!$"
 
