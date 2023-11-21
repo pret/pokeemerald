@@ -1953,7 +1953,7 @@ static u8 *GetLimitedMessageStartPtr(void)
     for (i = 0; i < numChars; i++)
     {
         if (*str == CHAR_EXTRA_SYMBOL)
-            *str++;
+            str++;
 
         str++;
     }
@@ -3115,9 +3115,6 @@ static void DrawKeyboardWindow(void)
 static void LoadTextEntryWindow(void)
 {
     int i;
-    u8 unused[2];
-    unused[0] = 0;
-    unused[1] = 0xFF;
 
     // Pointless, cleared below. The tiles are nonsense anyway, see LoadChatWindowGfx.
     for (i = 0; i < MAX_MESSAGE_LENGTH; i++)

@@ -324,7 +324,7 @@ void AnimateSprites(void)
 void BuildOamBuffer(void)
 {
     bool32 oamLoadDisabled;
-    u32 i, stride;
+    u32 i;
     u8 oamIndex;
 
     // All attributes which affect sorting packed into a single u32:

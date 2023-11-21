@@ -47,6 +47,7 @@ struct TestRunnerState
     u8 expectedResult;
     bool8 expectLeaks:1;
     bool8 inBenchmark:1;
+    bool8 tearDown:1;
     u32 timeoutSeconds;
 };
 

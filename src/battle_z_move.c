@@ -52,7 +52,6 @@ static void ZMoveSelectionDisplayPpNumber(u32 battler);
 static void ZMoveSelectionDisplayPower(u16 move, u16 zMove);
 static void ShowZMoveTriggerSprite(u8 battleId);
 static bool32 AreStatsMaxed(u8 battler, u8 n);
-static u8 GetZMoveScore(u8 battlerAtk, u8 battlerDef, u16 baseMove, u16 zMove);
 static void ZMoveSelectionDisplayMoveType(u16 zMove, u32 battler);
 
 // Const Data
@@ -71,12 +70,11 @@ static const struct SignatureZMove sSignatureZMoves[] =
     {SPECIES_KOMMO_O,               ITEM_KOMMONIUM_Z,          MOVE_CLANGING_SCALES,     MOVE_CLANGOROUS_SOULBLAZE},
     {SPECIES_LUNALA,                ITEM_LUNALIUM_Z,           MOVE_MOONGEIST_BEAM,      MOVE_MENACING_MOONRAZE_MAELSTROM},
     {SPECIES_NECROZMA_DAWN_WINGS,   ITEM_LUNALIUM_Z,           MOVE_MOONGEIST_BEAM,      MOVE_MENACING_MOONRAZE_MAELSTROM},
-    {SPECIES_LYCANROC,              ITEM_LYCANIUM_Z,           MOVE_STONE_EDGE,          MOVE_SPLINTERED_STORMSHARDS},
+    {SPECIES_LYCANROC_MIDDAY,       ITEM_LYCANIUM_Z,           MOVE_STONE_EDGE,          MOVE_SPLINTERED_STORMSHARDS},
     {SPECIES_LYCANROC_MIDNIGHT,     ITEM_LYCANIUM_Z,           MOVE_STONE_EDGE,          MOVE_SPLINTERED_STORMSHARDS},
-
     {SPECIES_LYCANROC_DUSK,         ITEM_LYCANIUM_Z,           MOVE_STONE_EDGE,          MOVE_SPLINTERED_STORMSHARDS},
     {SPECIES_MARSHADOW,             ITEM_MARSHADIUM_Z,         MOVE_SPECTRAL_THIEF,      MOVE_SOUL_STEALING_7_STAR_STRIKE},
-    {SPECIES_MIMIKYU,               ITEM_MIMIKIUM_Z,           MOVE_PLAY_ROUGH,          MOVE_LETS_SNUGGLE_FOREVER},
+    {SPECIES_MIMIKYU_DISGUISED,     ITEM_MIMIKIUM_Z,           MOVE_PLAY_ROUGH,          MOVE_LETS_SNUGGLE_FOREVER},
     {SPECIES_MIMIKYU_BUSTED,        ITEM_MIMIKIUM_Z,           MOVE_PLAY_ROUGH,          MOVE_LETS_SNUGGLE_FOREVER},
     {SPECIES_PIKACHU_ORIGINAL_CAP,  ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
     {SPECIES_PIKACHU_HOENN_CAP,     ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
@@ -158,15 +156,10 @@ void QueueZMove(u8 battler, u16 baseMove)
 
 bool32 IsViableZMove(u8 battler, u16 move)
 {
-    struct Pokemon *mon;
-    u8 battlerPosition = GetBattlerPosition(battler);
-    u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battler));
     u32 item;
     u16 holdEffect;
-    u16 species;
     int moveSlotIndex;
 
-    species = gBattleMons[battler].species;
     item = gBattleMons[battler].item;
 
     for (moveSlotIndex = 0; moveSlotIndex < MAX_MON_MOVES; moveSlotIndex++)
@@ -236,6 +229,8 @@ bool32 TryChangeZIndicator(u8 battler, u8 moveIndex)
         HideZMoveTriggerSprite();   // Was a viable z move, now is not -> slide out
     else if (!gBattleStruct->zmove.viable && viableZMove)
         ShowZMoveTriggerSprite(battler);   // Was not a viable z move, now is -> slide back in
+
+    return viableZMove;
 }
 
 #define SINGLES_Z_TRIGGER_POS_X_OPTIMAL     (29)
@@ -267,7 +262,7 @@ void CreateZMoveTriggerSprite(u8 battler, bool8 viable)
     else
     {
         x = gSprites[gHealthboxSpriteIds[battler]].x - SINGLES_Z_TRIGGER_POS_X_SLIDE;
-        y = gSprites[gHealthboxSpriteIds[battler]].y - SINGLES_Z_TRIGGER_POS_Y_DIFF, 0;
+        y = gSprites[gHealthboxSpriteIds[battler]].y - SINGLES_Z_TRIGGER_POS_Y_DIFF;
     }
 
     if (gBattleStruct->zmove.triggerSpriteId == 0xFF)
@@ -350,7 +345,6 @@ void HideZMoveTriggerSprite(void)
 
 static void ShowZMoveTriggerSprite(u8 battler)
 {
-    struct Sprite *sprite = &gSprites[gBattleStruct->zmove.triggerSpriteId];
     gBattleStruct->zmove.viable = TRUE;
     CreateZMoveTriggerSprite(battler, TRUE);
 }
@@ -535,13 +529,11 @@ static void ZMoveSelectionDisplayPower(u16 move, u16 zMove)
 static void ZMoveSelectionDisplayPpNumber(u32 battler)
 {
     u8 *txtPtr;
-    struct ChooseMoveStruct *moveInfo;
 
     if (gBattleResources->bufferA[battler][2] == TRUE) // Check if we didn't want to display pp number
         return;
 
     SetPpNumbersPaletteInMoveSelection(battler);
-    moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
     txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, 1, STR_CONV_MODE_RIGHT_ALIGN, 2);
     *(txtPtr)++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(txtPtr, 1, STR_CONV_MODE_RIGHT_ALIGN, 2);
@@ -551,7 +543,6 @@ static void ZMoveSelectionDisplayPpNumber(u32 battler)
 static void ZMoveSelectionDisplayMoveType(u16 zMove, u32 battler)
 {
     u8 *txtPtr;
-    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
     u8 zMoveType;
 
     GET_MOVE_TYPE(zMove, zMoveType);

@@ -33,7 +33,9 @@ SINGLE_BATTLE_TEST("Thunder Shock cannot paralyze an Electric-type")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDER_SHOCK, player);
         HP_BAR(opponent);
-        NOT ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponent);
-        NOT STATUS_ICON(opponent, paralysis: TRUE);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponent);
+            STATUS_ICON(opponent, paralysis: TRUE);
+        }
     }
 }

@@ -114,18 +114,15 @@ SINGLE_BATTLE_TEST("Bug Bite eats the target's berry and immediately gains its e
     }
 }
 
-// To verify in the actual games.
-// Bulbapedia - The effect of a Jaboca Berry will activate before the Berry can be stolen.
-// Showdown - Jaboca Berry is stolen and eaten and nothing happens. This is how it currently works on expansion.
-TO_DO_BATTLE_TEST("Bug Bite interaction with Jaboca Berry.");
-
 SINGLE_BATTLE_TEST("Tanga Berry activates before Bug Bite")
 {
     GIVEN {
+        ASSUME(gItems[ITEM_TANGA_BERRY].holdEffect == HOLD_EFFECT_RESIST_BERRY);
+        ASSUME(gItems[ITEM_TANGA_BERRY].holdEffectParam == TYPE_BUG);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) {Item(ITEM_TANGA_BERRY); }
     } WHEN {
-            TURN { MOVE(player, MOVE_BUG_BITE); }
+        TURN { MOVE(player, MOVE_BUG_BITE); }
     } SCENE {
         MESSAGE("Wobbuffet used Bug Bite!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);

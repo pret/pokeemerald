@@ -107,7 +107,7 @@ SINGLE_BATTLE_TEST("Wind Power sets up Charge for opponent when hit by a wind mo
 
 DOUBLE_BATTLE_TEST("Wind Power activates correctly for every battler with the ability when hit by a 2/3 target move")
 {
-    u16 move, abilityLeft, abilityRight;
+    u16 abilityLeft, abilityRight;
 
     PARAMETRIZE {abilityLeft = ABILITY_NONE, abilityRight = ABILITY_WIND_POWER;}
     PARAMETRIZE {abilityLeft = ABILITY_WIND_POWER, abilityRight = ABILITY_NONE; }
@@ -133,8 +133,10 @@ DOUBLE_BATTLE_TEST("Wind Power activates correctly for every battler with the ab
             ABILITY_POPUP(playerRight, ABILITY_WIND_POWER);
             MESSAGE("Being hit by Air Cutter charged Wobbuffet with power!");
         }
-        NOT HP_BAR(opponentLeft);
-        NOT HP_BAR(opponentRight);
+        NONE_OF {
+            HP_BAR(opponentLeft);
+            HP_BAR(opponentRight);
+        }
     }
     THEN {
         EXPECT_NE(playerLeft->hp, playerLeft->maxHP);

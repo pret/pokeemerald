@@ -24,20 +24,6 @@
 #define AI_EFFECTIVENESS_x0_125 1
 #define AI_EFFECTIVENESS_x0     0
 
-// ai weather
-#define AI_WEATHER_NONE 0
-#define AI_WEATHER_SUN 1
-#define AI_WEATHER_RAIN 2
-#define AI_WEATHER_SANDSTORM 3
-#define AI_WEATHER_HAIL 4
-#define AI_WEATHER_SNOW 5
-
-// get_how_powerful_move_is
-#define MOVE_POWER_OTHER  0
-#define MOVE_POWER_BEST   1
-#define MOVE_POWER_GOOD   2 // Similar dmg range with best.
-#define MOVE_POWER_WEAK   3 // Significantly lower than best and good.
-
 // AI Flags. Most run specific functions to update score, new flags are used for internal logic in other scripts
 #define AI_FLAG_CHECK_BAD_MOVE        (1 << 0)
 #define AI_FLAG_TRY_TO_FAINT          (1 << 1)
@@ -59,6 +45,7 @@
 #define AI_FLAG_SMART_SWITCHING       (1 << 15)  // AI includes a lot more switching checks
 #define AI_FLAG_ACE_POKEMON           (1 << 16)  // AI has an Ace Pokemon. The last Pokemon in the party will not be used until it's the last one remaining.
 #define AI_FLAG_OMNISCIENT            (1 << 17)  // AI has full knowledge of player moves, abilities, hold items
+#define AI_FLAG_SMART_MON_CHOICES     (1 << 18)  // AI will make smarter decisions when choosing which mon to send out mid-battle and after a KO, which are separate decisions. Pairs very well with AI_FLAG_SMART_SWITCHING.
 
 #define AI_FLAG_COUNT                       18
 
@@ -66,5 +53,7 @@
 #define AI_FLAG_ROAMING               (1 << 29)
 #define AI_FLAG_SAFARI                (1 << 30)
 #define AI_FLAG_FIRST_BATTLE          (1 << 31)
+
+#define AI_SCORE_DEFAULT 100 // Default score for all AI moves.
 
 #endif // GUARD_CONSTANTS_BATTLE_AI_H

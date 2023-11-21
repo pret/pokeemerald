@@ -108,11 +108,17 @@ The pokeemerald Expansion is a feature branch meant to be integrated into existi
 - Feature branches incorporated:
     - [RHH intro credits](https://github.com/Xhyzi/pokeemerald/tree/rhh-intro-credits) by Xhyzi.
         - A small signature from all of us to show the collective effort in the project :)
-    - [Overworld debug]() by TheXaman
+    - [Overworld debug](https://github.com/TheXaman/pokeemerald/tree/tx_debug_system) by TheXaman
+        - May be disabled.
         - Accesible by pressing `R + Start` in the overworld by default.
         - **Additional features**:
             - *Clear Boxes*: cleans every Pokémon from the Boxes.
             - *Hatch an Egg*: lets you choose an Egg in your party and immediatly hatch it.
+    - [HGSS Pokédex](https://github.com/TheXaman/pokeemerald/tree/tx_pokedexPlus_hgss) by TheXaman
+        - May be disabled.
+        - **Additional features**:
+            - *Support for new evolution methods*.
+            - *Dark Mode*.
 - Other features
     - Pressing B while holding a Pokémon drops them like in modern games (configurable).
     - Running indoors (configurable).
@@ -139,7 +145,7 @@ With this, you'll get the latest version of the Expansion, plus a couple of bugf
 
 ## **How do I update my version of the pokeemerald Expansion?**
 - If you haven't set up a remote, run the command `git remote add RHH https://github.com/rh-hideout/pokeemerald-expansion`.
-- Once you have your remote set up, run the command `git pull RHH expansion/1.6.0`.
+- Once you have your remote set up, run the command `git pull RHH expansion/1.6.2`.
 
 ### Please consider crediting the entire [list of contributors](https://github.com/rh-hideout/pokeemerald-expansion/wiki/Credits) in your project, as they have all worked hard to develop this project :)
 

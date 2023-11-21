@@ -209,46 +209,44 @@
 #define VARIOUS_TRY_ACTIVATE_BATTLE_BOND             116
 #define VARIOUS_CONSUME_BERRY                        117
 #define VARIOUS_JUMP_IF_CANT_REVERT_TO_PRIMAL        118
-#define VARIOUS_APPLY_PLASMA_FISTS                   119
-#define VARIOUS_JUMP_IF_SPECIES                      120
-#define VARIOUS_UPDATE_ABILITY_POPUP                 121
-#define VARIOUS_JUMP_IF_WEATHER_AFFECTED             122
-#define VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED         123
-#define VARIOUS_SET_ATTACKER_STICKY_WEB_USER         124
-#define VARIOUS_PHOTON_GEYSER_CHECK                  125
-#define VARIOUS_SHELL_SIDE_ARM_CHECK                 126
-#define VARIOUS_TRY_NO_RETREAT                       127
-#define VARIOUS_TRY_TAR_SHOT                         128
-#define VARIOUS_CAN_TAR_SHOT_WORK                    129
-#define VARIOUS_CHECK_POLTERGEIST                    130
-#define VARIOUS_SET_OCTOLOCK                         131
-#define VARIOUS_CUT_1_3_HP_RAISE_STATS               132
-#define VARIOUS_TRY_END_NEUTRALIZING_GAS             133
-#define VARIOUS_JUMP_IF_UNDER_200                    134
-#define VARIOUS_SET_SKY_DROP                         135
-#define VARIOUS_CLEAR_SKY_DROP                       136
-#define VARIOUS_SKY_DROP_YAWN                        137
-#define VARIOUS_JUMP_IF_HOLD_EFFECT                  138
-#define VARIOUS_CURE_CERTAIN_STATUSES                139
-#define VARIOUS_TRY_RESET_NEGATIVE_STAT_STAGES       140
-#define VARIOUS_JUMP_IF_LAST_USED_ITEM_BERRY         141
-#define VARIOUS_JUMP_IF_LAST_USED_ITEM_HOLD_EFFECT   142
-#define VARIOUS_SAVE_BATTLER_ITEM                    143
-#define VARIOUS_RESTORE_BATTLER_ITEM                 144
-#define VARIOUS_BATTLER_ITEM_TO_LAST_USED_ITEM       145
-#define VARIOUS_SET_BEAK_BLAST                       146
-#define VARIOUS_SWAP_SIDE_STATUSES                   147
-#define VARIOUS_SWAP_STATS                           148
-#define VARIOUS_TEATIME_INVUL                        149
-#define VARIOUS_TEATIME_TARGETS                      150
-#define VARIOUS_TRY_WIND_RIDER_POWER                 151
-#define VARIOUS_ACTIVATE_WEATHER_CHANGE_ABILITIES    152
-#define VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES    153
-#define VARIOUS_STORE_HEALING_WISH                   154
-#define VARIOUS_HIT_SWITCH_TARGET_FAILED             155
-#define VARIOUS_TRY_REVIVAL_BLESSING                 156
-#define VARIOUS_TRY_TRAINER_SLIDE_MSG_Z_MOVE         157
-#define VARIOUS_TRY_TRAINER_SLIDE_MSG_MEGA_EVOLUTION 158
+#define VARIOUS_JUMP_IF_SPECIES                      119
+#define VARIOUS_UPDATE_ABILITY_POPUP                 120
+#define VARIOUS_JUMP_IF_WEATHER_AFFECTED             121
+#define VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED         122
+#define VARIOUS_SET_ATTACKER_STICKY_WEB_USER         123
+#define VARIOUS_PHOTON_GEYSER_CHECK                  124
+#define VARIOUS_SHELL_SIDE_ARM_CHECK                 125
+#define VARIOUS_TRY_NO_RETREAT                       126
+#define VARIOUS_TRY_TAR_SHOT                         127
+#define VARIOUS_CAN_TAR_SHOT_WORK                    128
+#define VARIOUS_CHECK_POLTERGEIST                    129
+#define VARIOUS_CUT_1_3_HP_RAISE_STATS               130
+#define VARIOUS_TRY_END_NEUTRALIZING_GAS             131
+#define VARIOUS_JUMP_IF_UNDER_200                    132
+#define VARIOUS_SET_SKY_DROP                         133
+#define VARIOUS_CLEAR_SKY_DROP                       134
+#define VARIOUS_SKY_DROP_YAWN                        135
+#define VARIOUS_JUMP_IF_HOLD_EFFECT                  136
+#define VARIOUS_CURE_CERTAIN_STATUSES                137
+#define VARIOUS_TRY_RESET_NEGATIVE_STAT_STAGES       138
+#define VARIOUS_JUMP_IF_LAST_USED_ITEM_BERRY         139
+#define VARIOUS_JUMP_IF_LAST_USED_ITEM_HOLD_EFFECT   140
+#define VARIOUS_SAVE_BATTLER_ITEM                    141
+#define VARIOUS_RESTORE_BATTLER_ITEM                 142
+#define VARIOUS_BATTLER_ITEM_TO_LAST_USED_ITEM       143
+#define VARIOUS_SET_BEAK_BLAST                       144
+#define VARIOUS_SWAP_SIDE_STATUSES                   145
+#define VARIOUS_SWAP_STATS                           146
+#define VARIOUS_TEATIME_INVUL                        147
+#define VARIOUS_TEATIME_TARGETS                      148
+#define VARIOUS_TRY_WIND_RIDER_POWER                 149
+#define VARIOUS_ACTIVATE_WEATHER_CHANGE_ABILITIES    150
+#define VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES    151
+#define VARIOUS_STORE_HEALING_WISH                   152
+#define VARIOUS_HIT_SWITCH_TARGET_FAILED             153
+#define VARIOUS_TRY_REVIVAL_BLESSING                 154
+#define VARIOUS_TRY_TRAINER_SLIDE_MSG_Z_MOVE         155
+#define VARIOUS_TRY_TRAINER_SLIDE_MSG_MEGA_EVOLUTION 156
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
@@ -302,16 +300,16 @@
 #define MOVEEND_ATTACKER_VISIBLE                  10
 #define MOVEEND_TARGET_VISIBLE                    11
 #define MOVEEND_ITEM_EFFECTS_TARGET               12
-#define MOVEEND_ITEM_EFFECTS_ALL                  13
-#define MOVEEND_KINGSROCK                         14    // These item effects will occur each strike of a multi-hit move
-#define MOVEEND_SUBSTITUTE                        15
-#define MOVEEND_SKY_DROP_CONFUSE                  16
-#define MOVEEND_UPDATE_LAST_MOVES                 17
-#define MOVEEND_MIRROR_MOVE                       18
-#define MOVEEND_NEXT_TARGET                       19   // Everything up until here is handled for each strike of a multi-hit move
-#define MOVEEND_MULTIHIT_MOVE                     20
-#define MOVEEND_DEFROST                           21
-#define MOVEEND_MOVE_EFFECTS2                     22
+#define MOVEEND_MOVE_EFFECTS2                     13
+#define MOVEEND_ITEM_EFFECTS_ALL                  14
+#define MOVEEND_KINGSROCK                         15    // These item effects will occur each strike of a multi-hit move
+#define MOVEEND_SUBSTITUTE                        16
+#define MOVEEND_SKY_DROP_CONFUSE                  17
+#define MOVEEND_UPDATE_LAST_MOVES                 18
+#define MOVEEND_MIRROR_MOVE                       19
+#define MOVEEND_NEXT_TARGET                       20   // Everything up until here is handled for each strike of a multi-hit move
+#define MOVEEND_MULTIHIT_MOVE                     21
+#define MOVEEND_DEFROST                           22
 #define MOVEEND_RECOIL                            23
 #define MOVEEND_MAGICIAN                          24    // Occurs after final multi-hit strike, and after other items/abilities would activate
 #define MOVEEND_EJECT_BUTTON                      25
@@ -323,8 +321,9 @@
 #define MOVEEND_DANCER                            31
 #define MOVEEND_EMERGENCY_EXIT                    32
 #define MOVEEND_SYMBIOSIS                         33
-#define MOVEEND_CLEAR_BITS                        34
-#define MOVEEND_COUNT                             35
+#define MOVEEND_OPPORTUNIST                       34    // Occurs after other stat change items/abilities to try and copy the boosts
+#define MOVEEND_CLEAR_BITS                        35
+#define MOVEEND_COUNT                             36
 
 // switch cases
 #define B_SWITCH_NORMAL     0

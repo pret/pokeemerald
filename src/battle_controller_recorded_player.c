@@ -427,25 +427,7 @@ static void RecordedPlayerHandleMoveAnimation(u32 battler)
 
 static void RecordedPlayerHandlePrintString(u32 battler)
 {
-    u16 *stringId;
-
-    gBattle_BG0_X = 0;
-    gBattle_BG0_Y = 0;
-    stringId = (u16 *)(&gBattleResources->bufferA[battler][2]);
-    BufferStringBattle(*stringId, battler);
-
-    if (gTestRunnerEnabled)
-    {
-        TestRunner_Battle_RecordMessage(gDisplayedStringBattle);
-        if (gTestRunnerHeadless)
-        {
-            RecordedPlayerBufferExecCompleted(battler);
-            return;
-        }
-    }
-
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
-    gBattlerControllerFuncs[battler] = Controller_WaitForString;
+    BtlController_HandlePrintString(battler, FALSE, FALSE);
 }
 
 static void ChooseActionInBattlePalace(u32 battler)

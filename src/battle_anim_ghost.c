@@ -1447,7 +1447,6 @@ static void AnimPoltergeistItem(struct Sprite *sprite)
 void AnimTask_PulverizingPancakeWhiteShadow(u8 taskId)
 {
     struct Task *task;
-    s16 battler;
     u8 spriteId;
     s16 baseX, baseY;
     s16 x, y;

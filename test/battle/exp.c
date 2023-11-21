@@ -26,7 +26,7 @@ WILD_BATTLE_TEST("Pokemon gain exp after catching a Pokemon")
 
 #endif // B_EXP_CATCH
 
-WILD_BATTLE_TEST("Higher leveled Pokemon give more exp", u32 exp)
+WILD_BATTLE_TEST("Higher leveled Pokemon give more exp", s32 exp)
 {
     u8 level = 0;
 
@@ -47,7 +47,7 @@ WILD_BATTLE_TEST("Higher leveled Pokemon give more exp", u32 exp)
     }
 }
 
-WILD_BATTLE_TEST("Lucky Egg boosts gained exp points by 50%", u32 exp)
+WILD_BATTLE_TEST("Lucky Egg boosts gained exp points by 50%", s32 exp)
 {
     u32 item = 0;
 
@@ -70,7 +70,7 @@ WILD_BATTLE_TEST("Lucky Egg boosts gained exp points by 50%", u32 exp)
 
 #if (B_SCALED_EXP == GEN_5 || B_SCALED_EXP >= GEN_7)
 
-WILD_BATTLE_TEST("Exp is scaled to player and opponent's levels", u32 exp)
+WILD_BATTLE_TEST("Exp is scaled to player and opponent's levels", s32 exp)
 {
     u8 level = 0;
 
@@ -93,7 +93,7 @@ WILD_BATTLE_TEST("Exp is scaled to player and opponent's levels", u32 exp)
 
 #endif
 
-WILD_BATTLE_TEST("Large exp gains are supported", u32 exp) // #1455
+WILD_BATTLE_TEST("Large exp gains are supported", s32 exp) // #1455
 {
     u8 level = 0;
 

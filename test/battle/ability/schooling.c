@@ -9,8 +9,8 @@ SINGLE_BATTLE_TEST("Schooling switches Level 20+ Wishiwashi's form when HP is 25
 
     GIVEN {
         ASSUME(P_GEN_7_POKEMON == TRUE);
-        ASSUME(gSpeciesInfo[SPECIES_WISHIWASHI].baseHP == gSpeciesInfo[SPECIES_WISHIWASHI_SCHOOL].baseHP);
-        PLAYER(SPECIES_WISHIWASHI)
+        ASSUME(gSpeciesInfo[SPECIES_WISHIWASHI_SOLO].baseHP == gSpeciesInfo[SPECIES_WISHIWASHI_SCHOOL].baseHP);
+        PLAYER(SPECIES_WISHIWASHI_SOLO)
         {
             Level(level);
             HP(GetMonData(&PLAYER_PARTY[0], MON_DATA_MAX_HP) / 2);
@@ -34,7 +34,7 @@ SINGLE_BATTLE_TEST("Schooling switches Level 20+ Wishiwashi's form when HP is 25
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         }
     } THEN {
-        EXPECT_EQ(player->species, SPECIES_WISHIWASHI);
+        EXPECT_EQ(player->species, SPECIES_WISHIWASHI_SOLO);
     }
 }
 
@@ -49,8 +49,8 @@ SINGLE_BATTLE_TEST("Schooling switches Level 20+ Wishiwashi's form when HP is ov
 
     GIVEN {
         ASSUME(P_GEN_7_POKEMON == TRUE);
-        ASSUME(gSpeciesInfo[SPECIES_WISHIWASHI].baseHP == gSpeciesInfo[SPECIES_WISHIWASHI_SCHOOL].baseHP);
-        PLAYER(SPECIES_WISHIWASHI)
+        ASSUME(gSpeciesInfo[SPECIES_WISHIWASHI_SOLO].baseHP == gSpeciesInfo[SPECIES_WISHIWASHI_SCHOOL].baseHP);
+        PLAYER(SPECIES_WISHIWASHI_SOLO)
         {
             Level(level);
             HP(GetMonData(&PLAYER_PARTY[0], MON_DATA_MAX_HP) / (overQuarterHP ? 2 : 4));
@@ -71,7 +71,7 @@ SINGLE_BATTLE_TEST("Schooling switches Level 20+ Wishiwashi's form when HP is ov
         if (level >= 20 && overQuarterHP)
             EXPECT_EQ(player->species, SPECIES_WISHIWASHI_SCHOOL);
         else
-            EXPECT_EQ(player->species, SPECIES_WISHIWASHI);
+            EXPECT_EQ(player->species, SPECIES_WISHIWASHI_SOLO);
     }
 }
 
@@ -83,8 +83,8 @@ SINGLE_BATTLE_TEST("Schooling switches Level 20+ Wishiwashi's form when HP is he
 
     GIVEN {
         ASSUME(P_GEN_7_POKEMON == TRUE);
-        ASSUME(gSpeciesInfo[SPECIES_WISHIWASHI].baseHP == gSpeciesInfo[SPECIES_WISHIWASHI_SCHOOL].baseHP);
-        PLAYER(SPECIES_WISHIWASHI)
+        ASSUME(gSpeciesInfo[SPECIES_WISHIWASHI_SOLO].baseHP == gSpeciesInfo[SPECIES_WISHIWASHI_SCHOOL].baseHP);
+        PLAYER(SPECIES_WISHIWASHI_SOLO)
         {
             Level(level);
             HP(GetMonData(&PLAYER_PARTY[0], MON_DATA_MAX_HP) / 4);
@@ -106,6 +106,6 @@ SINGLE_BATTLE_TEST("Schooling switches Level 20+ Wishiwashi's form when HP is he
         if (level >= 20)
             EXPECT_EQ(player->species, SPECIES_WISHIWASHI_SCHOOL);
         else
-            EXPECT_EQ(player->species, SPECIES_WISHIWASHI);
+            EXPECT_EQ(player->species, SPECIES_WISHIWASHI_SOLO);
     }
 }

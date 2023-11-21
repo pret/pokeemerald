@@ -1409,8 +1409,8 @@ static void Task_RaiseCurtainAtStart(u8 taskId)
         break;
     case 3:
     {
-        u16 bg0Cnt = GetGpuReg(REG_OFFSET_BG0CNT);
-        u16 bg2Cnt = GetGpuReg(REG_OFFSET_BG2CNT);
+        u32 bg0Cnt = GetGpuReg(REG_OFFSET_BG0CNT);
+        u32 bg2Cnt = GetGpuReg(REG_OFFSET_BG2CNT);
         ((struct BgCnt *)&bg0Cnt)->priority = 0;
         ((struct BgCnt *)&bg2Cnt)->priority = 0;
         SetGpuReg(REG_OFFSET_BG0CNT, bg0Cnt);
@@ -2630,8 +2630,8 @@ static void Task_UpdateContestantBoxOrder(u8 taskId)
 
 static void Task_TryStartNextRoundOfAppeals(u8 taskId)
 {
-    vu16 sp0 = GetGpuReg(REG_OFFSET_BG0CNT);
-    vu16 sp2 = GetGpuReg(REG_OFFSET_BG2CNT);
+    vu32 sp0 = GetGpuReg(REG_OFFSET_BG0CNT);
+    vu32 sp2 = GetGpuReg(REG_OFFSET_BG2CNT);
     ((vBgCnt *)&sp0)->priority = 0;
     ((vBgCnt *)&sp2)->priority = 0;
     SetGpuReg(REG_OFFSET_BG0CNT, sp0);
@@ -5055,7 +5055,7 @@ bool8 IsContestantAllowedToCombo(u8 contestant)
 static void SetBgForCurtainDrop(void)
 {
     s32 i;
-    u16 bg0Cnt, bg1Cnt, bg2Cnt;
+    u32 bg0Cnt, bg1Cnt, bg2Cnt;
 
     bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
     ((vBgCnt *)&bg1Cnt)->priority = 0;
@@ -5093,7 +5093,7 @@ static void SetBgForCurtainDrop(void)
 static void UpdateContestantBoxOrder(void)
 {
     s32 i;
-    u16 bg1Cnt;
+    u32 bg1Cnt;
 
     RequestDma3Fill(0,(void *)(BG_CHAR_ADDR(2)), 0x2000, 1);
     CpuFill32(0, gContestResources->contestBgTilemaps[1], 0x1000);
@@ -5296,7 +5296,6 @@ static u16 SanitizeSpecies(u16 species)
 
 static void SetMoveSpecificAnimData(u8 contestant)
 {
-    s32 i;
     u16 move = SanitizeMove(eContestantStatus[contestant].currMove);
     u16 species = SanitizeSpecies(gContestMons[contestant].species);
     u8 targetContestant;

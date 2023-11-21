@@ -11,7 +11,7 @@ body:
     attributes:
       label: Description
       description: |
-        Describe the issue you are experiencing. 
+        Describe the issue you are experiencing.
         Attach images/videos if possible.
       placeholder: |
         Please enter a description of the issue. Here you can also attach log screenshots, gifs or a video
@@ -23,16 +23,15 @@ body:
       label: Version
       description: What version of pokeemerald-expansion are you using as a base?
       options:
-        - 1.5.3 (Default)
+        - 1.6.2 (Default)
         - upcoming (Edge)
+        - 1.6.1
+        - 1.6.0
+        - 1.5.3
         - 1.5.2
         - 1.5.1
         - 1.5.0
-        - 1.4.3
-        - 1.4.2
-        - 1.4.1
-        - 1.4.0
-        - pre-1.4.0
+        - pre-1.5.0
     validations:
       required: true
   - type: input

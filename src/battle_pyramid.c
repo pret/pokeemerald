@@ -27,6 +27,7 @@
 #include "overworld.h"
 #include "event_scripts.h"
 #include "graphics.h"
+#include "wild_encounter.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_pyramid.h"
 #include "constants/event_objects.h"
@@ -101,8 +102,13 @@ static bool8 TrySetPyramidObjectEventPositionAtCoords(bool8, u8, u8, u8 *, u8, u
 // Const rom data.
 #define ABILITY_RANDOM 2 // For wild mons data.
 
-#include "data/battle_frontier/battle_pyramid_level_50_wild_mons.h"
-#include "data/battle_frontier/battle_pyramid_open_level_wild_mons.h"
+#if BATTLE_PYRAMID_RANDOM_ENCOUNTERS == TRUE
+    #include "data/battle_frontier/battle_pyramid_wild_requirements.h"
+#else
+    #include "data/battle_frontier/battle_pyramid_level_50_wild_mons.h"
+    #include "data/battle_frontier/battle_pyramid_open_level_wild_mons.h"
+#endif
+
 
 static const struct PyramidFloorTemplate sPyramidFloorTemplates[] =
 {
@@ -1340,6 +1346,205 @@ static void MarkPyramidTrainerAsBattled(u16 trainerId)
     gObjectEvents[gSelectedObjectEvent].initialCoords.y = gObjectEvents[gSelectedObjectEvent].currentCoords.y;
 }
 
+#if BATTLE_PYRAMID_RANDOM_ENCOUNTERS == TRUE
+// check if given species evolved from a specific evolutionary stone
+// if nItems is passed as 0, it will check for any EVO_ITEM case
+extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
+static bool32 CheckBattlePyramidEvoRequirement(u16 species, const u16 *evoItems, u8 nItems)
+{
+    u32 i, j, k;
+    for (i = 0; i < NUM_SPECIES; i++)
+    {
+        for (j = 0; j < EVOS_PER_MON; j++)
+        {
+            if (gEvolutionTable[i][j].targetSpecies == species
+                    && (gEvolutionTable[i][j].method == EVO_ITEM || gEvolutionTable[i][j].method == EVO_ITEM_MALE || gEvolutionTable[i][j].method == EVO_ITEM_FEMALE))
+            {
+                if (nItems == 0)
+                {
+                    // Any EVO_ITEM case will do
+                    return TRUE;
+                }
+                else
+                {
+                    // Otherwise, need to match specific set provided
+                    for (k = 0; k < nItems; k++) {
+                        if (gEvolutionTable[i][j].param == evoItems[k]) {
+                            return TRUE;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return FALSE;
+}
+
+extern u32 GetTotalBaseStat(u32 species);
+void GenerateBattlePyramidWildMon(void)
+{
+    u8 name[POKEMON_NAME_LENGTH + 1];
+    int i, j;
+    u32 id;
+    u32 lvl = gSaveBlock2Ptr->frontier.lvlMode;
+    u16 round = (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvl] / 7) % TOTAL_PYRAMID_ROUNDS;
+    const struct BattlePyramidRequirement *reqs = &sBattlePyramidRequirementsByRound[round];
+    u16 species;
+    u32 bstLim;
+    u16 *moves = NULL;
+    u16 *abilities = NULL;
+    int moveCount = 0, abilityCount = 0;
+
+    if (reqs->nMoves != 0)
+        moves = AllocZeroed(sizeof(u16) * reqs->nMoves);
+    
+    if (reqs->nAbilities != 0)
+        abilities = AllocZeroed(sizeof(u16) * reqs->nAbilities);
+
+    if (round >= TOTAL_PYRAMID_ROUNDS)
+        round = TOTAL_PYRAMID_ROUNDS - 1;
+    
+    id = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL) - 1;   // index in table (0-11) -> higher index is lower probability
+    bstLim = 450 + (25*round) + (5*id);                             // higher BST limit for 'rarer' wild mon rolls
+
+    while (1)
+    {
+        species = Random() % FORMS_START;
+        // check type
+        if (reqs->type != TYPE_MYSTERY && gSpeciesInfo[species].types[0] != reqs->type && gSpeciesInfo[species].types[1] != reqs->type)
+            continue;
+        
+        // check base stat total
+        if (GetTotalBaseStat(species) > bstLim)
+            continue;
+        
+        // check moves
+        if (reqs->nMoves != 0)
+        {
+            moveCount = 0;
+            // get list of moves that can be learned
+            for (i = 0; i < reqs->nMoves; i++)
+            {
+                if (CanLearnTeachableMove(species, reqs->moves[i]))
+                {
+                    moves[moveCount] = reqs->moves[i];
+                    moveCount++;
+                }
+            }
+            if (moveCount == 0)
+                continue;
+        }
+        
+        // check abilities
+        if (reqs->nAbilities != 0)
+        {
+            abilityCount = 0;
+            // get list of moves that can be learned
+            for (i = 0; i < reqs->nAbilities; i++)
+            {
+                for (j = 0; j < NUM_ABILITY_SLOTS; j++)
+                {
+                    if (gSpeciesInfo[species].abilities[j] == reqs->abilities[i])
+                    {
+                        abilities[abilityCount] = reqs->abilities[i];
+                        abilityCount++;
+                        break;
+                    }
+                }
+            }
+            if (abilityCount == 0)
+                continue;
+        }
+        // check evos
+        if (reqs->evoItems[0] != 0 && !CheckBattlePyramidEvoRequirement(species, reqs->evoItems, reqs->nEvoItems))
+            continue;
+        
+        // we found a species we can use!
+        break;
+    }
+
+    // Set species, name
+    SetMonData(&gEnemyParty[0], MON_DATA_SPECIES, &species);
+    StringCopy(name, gSpeciesNames[species]);
+    SetMonData(&gEnemyParty[0], MON_DATA_NICKNAME, &name);
+    
+    // set level
+    if (lvl != FRONTIER_LVL_50)
+    {
+        lvl = SetFacilityPtrsGetLevel();
+        lvl -= (5 + (Random() % (TOTAL_PYRAMID_ROUNDS - round)/2));
+    }
+    else
+    {
+        lvl = 50 - (5 + (Random() % (TOTAL_PYRAMID_ROUNDS - round)/4));
+    }
+    SetMonData(&gEnemyParty[0],
+               MON_DATA_EXP,
+               &gExperienceTables[gSpeciesInfo[species].growthRate][lvl]);
+
+    // Give initial moves and replace one with desired move
+    GiveBoxMonInitialMoveset(&gEnemyParty[0].box);
+    if (moves != NULL)
+    {
+        // get a random move to give
+        i = 0;
+        while (1)
+        {
+            id = moves[Random() % moveCount];
+            if (!MonKnowsMove(&gEnemyParty[0], id))
+            {
+                // replace random move
+                SetMonData(&gEnemyParty[0], MON_DATA_MOVE1 + Random() % MAX_MON_MOVES, &id);
+                break;
+            }
+            i++;
+            if (i == 20)
+                break;
+        }
+        Free(moves);
+    }
+    
+    // Initialize a random ability num
+    if (gSpeciesInfo[species].abilities[1])
+    {
+        i = GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY, NULL) % 2;
+        SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &i);
+    }
+    else
+    {
+        i = 0;
+        SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &i);
+    }
+    
+    // Try to replace with desired ability
+    if (abilities != NULL)
+    {
+        i = 0;
+        while (1)
+        {
+            id = abilities[Random() % abilityCount];
+            for (j = 0; j < NUM_ABILITY_SLOTS; j++)
+            {
+                if (id == gSpeciesInfo[species].abilities[j])
+                {
+                    // Set this ability num
+                    SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &id);
+                }
+            }
+        }
+        Free(abilities);
+    }
+    
+    if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[gSaveBlock2Ptr->frontier.lvlMode] >= 140)
+    {
+        id = (Random() % 17) + 15;
+        for (i = 0; i < NUM_STATS; i++)
+            SetMonData(&gEnemyParty[0], MON_DATA_HP_IV + i, &id);
+    }
+
+    CalculateMonStats(&gEnemyParty[0]);
+}
+#else
 void GenerateBattlePyramidWildMon(void)
 {
     u8 name[POKEMON_NAME_LENGTH + 1];
@@ -1412,6 +1617,7 @@ void GenerateBattlePyramidWildMon(void)
     }
     CalculateMonStats(&gEnemyParty[0]);
 }
+#endif
 
 u8 GetPyramidRunMultiplier(void)
 {

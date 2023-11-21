@@ -62,6 +62,7 @@ SECTIONS {
     {
         src/rom_header.o(.text);
         src/rom_header_gf.o(.text.*);
+        src/rom_header_rhh.o(.text.*);
         src/*.o(.text);
         gflib/*.o(.text);
     } =0
@@ -113,6 +114,8 @@ SECTIONS {
         test/*.o(.text);
         test/*.o(.rodata*);
     } =0
+
+    __rom_end = .;
 
     /* DWARF debug sections.
        Symbols in the DWARF debugging sections are relative to the beginning

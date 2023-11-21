@@ -151,7 +151,7 @@ SINGLE_BATTLE_TEST("Toxic Spikes do not affect Steel-types")
     }
 }
 
-SINGLE_BATTLE_TEST("Toxic Spikes are removed by grounded Poison-types")
+SINGLE_BATTLE_TEST("Toxic Spikes are removed by grounded Poison-type Pokémon on switch in")
 {
     u32 species;
     u32 item = ITEM_NONE;
@@ -190,7 +190,7 @@ SINGLE_BATTLE_TEST("Toxic Spikes are removed by grounded Poison-types")
 // A Pokémon that gets passed magnet rise should still remove the Toxic
 // Spikes even though it is airborne.
 // The test currently fails, because we don't incorporate this bug.
-SINGLE_BATTLE_TEST("Toxic Spikes are removed by Poison-types affected by Magnet Rise")
+SINGLE_BATTLE_TEST("Toxic Spikes are removed by Poison-type Pokémon affected by Magnet Rise on switch in")
 {
     KNOWN_FAILING;
     GIVEN {
