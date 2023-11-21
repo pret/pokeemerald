@@ -487,6 +487,52 @@ bool8 CheckPCHasItem(u16 itemId, u16 count)
     return FALSE;
 }
 
+bool8 CheckPCHasSpace(u16 itemId, u16 count)
+{
+    u8 i;
+    u16 ownedCount = 0;
+
+    if (InBattlePyramid() || FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE)
+    {
+        return FALSE;
+    }
+
+    for (i = 0; i < PC_ITEMS_COUNT; i++)  // Get owned count
+    {
+        if (gSaveBlock1Ptr->pcItems[i].itemId == itemId)
+            ownedCount = GetPCItemQuantity(&gSaveBlock1Ptr->pcItems[i].quantity);
+    }
+
+    if (ownedCount + count <= MAX_PC_ITEM_CAPACITY)  // If there's room in already existing slot
+    {
+        return TRUE;
+    }
+
+    // Check space in empty item slots
+    if (count > 0)
+    {
+        for (i = 0; i < PC_ITEMS_COUNT; i++)
+        {
+            if (gSaveBlock1Ptr->pcItems[i].itemId == ITEM_NONE)
+            {
+                if (count > PC_ITEMS_COUNT)
+                {
+                    count -= PC_ITEMS_COUNT;
+                }
+                else
+                {
+                    count = 0; //should be return TRUE, but that doesn't match
+                    break;
+                }
+            }
+        }
+        if (count > 0)
+            return FALSE; // No more item slots. The bag is full
+    }
+
+    return TRUE;
+}
+
 bool8 AddPCItem(u16 itemId, u16 count)
 {
     u8 i;
