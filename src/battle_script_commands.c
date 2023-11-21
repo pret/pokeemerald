@@ -2076,7 +2076,9 @@ END:
     }
     if (gSpecialStatuses[gBattlerAttacker].gemBoost
         && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-        && gBattleMons[gBattlerAttacker].item)
+        && gBattleMons[gBattlerAttacker].item
+        && gBattleMoves[gCurrentMove].effect != EFFECT_PLEDGE
+        && gCurrentMove != MOVE_STRUGGLE)
     {
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_GemActivates;
@@ -3598,8 +3600,8 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             case MOVE_EFFECT_TRIPLE_ARROWS:
                 {
-                    u8 randomLowerDefenseChance = RandomPercentage(RNG_TRIPLE_ARROWS_DEFENSE_DOWN, CalcSecondaryEffectChance(gBattlerAttacker, 50));
-                    u8 randomFlinchChance = RandomPercentage(RNG_TRIPLE_ARROWS_FLINCH, CalcSecondaryEffectChance(gBattlerAttacker, 30));
+                    u8 randomLowerDefenseChance = RandomPercentage(RNG_TRIPLE_ARROWS_DEFENSE_DOWN, CalcSecondaryEffectChance(gBattlerAttacker, 50, EFFECT_DEFENSE_DOWN_HIT));
+                    u8 randomFlinchChance = RandomPercentage(RNG_TRIPLE_ARROWS_FLINCH, CalcSecondaryEffectChance(gBattlerAttacker, 30, EFFECT_FLINCH_HIT));
 
                     if (randomFlinchChance && battlerAbility != ABILITY_INNER_FOCUS && GetBattlerTurnOrderNum(gEffectBattler) > gCurrentTurnActionNumber)
                         gBattleMons[gEffectBattler].status2 |= sStatusFlagsForMoveEffects[MOVE_EFFECT_FLINCH];
@@ -3639,7 +3641,7 @@ static void Cmd_seteffectwithchance(void)
 {
     CMD_ARGS();
 
-    u32 percentChance = CalcSecondaryEffectChance(gBattlerAttacker, gBattleMoves[gCurrentMove].secondaryEffectChance);
+    u32 percentChance = CalcSecondaryEffectChance(gBattlerAttacker, gBattleMoves[gCurrentMove].secondaryEffectChance, gBattleMoves[gCurrentMove].effect);
 
     if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
      && gBattleScripting.moveEffect)
@@ -8322,8 +8324,6 @@ static void CourtChangeSwapSideStatuses(void)
     struct SideTimer *sideTimerOpp = &gSideTimers[B_SIDE_OPPONENT];
     u32 temp;
 
-    // TODO: add Pledge-related effects
-
     // Swap timers and statuses
     COURTCHANGE_SWAP(SIDE_STATUS_REFLECT, reflectTimer, temp)
     COURTCHANGE_SWAP(SIDE_STATUS_LIGHTSCREEN, lightscreenTimer, temp)
@@ -8339,6 +8339,10 @@ static void CourtChangeSwapSideStatuses(void)
     COURTCHANGE_SWAP(SIDE_STATUS_STICKY_WEB, stickyWebAmount, temp);
     COURTCHANGE_SWAP(SIDE_STATUS_STEELSURGE, steelsurgeAmount, temp);
     COURTCHANGE_SWAP(SIDE_STATUS_DAMAGE_NON_TYPES, damageNonTypesTimer, temp);
+    // Track Pledge effect side
+    COURTCHANGE_SWAP(SIDE_STATUS_RAINBOW, rainbowTimer, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_SEA_OF_FIRE, seaOfFireTimer, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_SWAMP, swampTimer, temp);
 
     // Change battler IDs of swapped effects. Needed for the correct string when they expire
     // E.g. "Foe's Reflect wore off!"
@@ -16284,4 +16288,116 @@ void BS_TryRelicSong(void)
     }
     else
         gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+
+void BS_SetPledge(void)
+{
+    NATIVE_ARGS(const u8 *jumpInstr);
+
+    u32 partner = BATTLE_PARTNER(gBattlerAttacker);
+    u32 partnerMove = gBattleMons[partner].moves[gBattleStruct->chosenMovePositions[partner]];
+    u32 i = 0;
+    u32 k = 0;
+
+    if (gBattleStruct->pledgeMove)
+    {
+        PrepareStringBattle(STRINGID_USEDMOVE, gBattlerAttacker);
+        gHitMarker |= HITMARKER_ATTACKSTRING_PRINTED;
+
+        if ((gCurrentMove == MOVE_GRASS_PLEDGE && partnerMove == MOVE_WATER_PLEDGE)
+         || (gCurrentMove == MOVE_WATER_PLEDGE && partnerMove == MOVE_GRASS_PLEDGE))
+        {
+            gCurrentMove = MOVE_GRASS_PLEDGE;
+            gBattlescriptCurrInstr = BattleScript_EffectCombinedPledge_Grass;
+        }
+        else if ((gCurrentMove == MOVE_FIRE_PLEDGE && partnerMove == MOVE_GRASS_PLEDGE)
+              || (gCurrentMove == MOVE_GRASS_PLEDGE && partnerMove == MOVE_FIRE_PLEDGE))
+        {
+            gCurrentMove = MOVE_FIRE_PLEDGE;
+            gBattlescriptCurrInstr = BattleScript_EffectCombinedPledge_Fire;
+        }
+        else if ((gCurrentMove == MOVE_WATER_PLEDGE && partnerMove == MOVE_FIRE_PLEDGE)
+              || (gCurrentMove == MOVE_FIRE_PLEDGE && partnerMove == MOVE_WATER_PLEDGE))
+        {
+            gCurrentMove = MOVE_WATER_PLEDGE;
+            gBattlescriptCurrInstr = BattleScript_EffectCombinedPledge_Water;
+        }
+
+        gBattleCommunication[MSG_DISPLAY] = 0;
+    }
+    else if ((gChosenActionByBattler[partner] == B_ACTION_USE_MOVE)
+          && gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+          && IsBattlerAlive(partner)
+          && gCurrentMove != partnerMove
+          && gBattleMoves[partnerMove].effect == EFFECT_PLEDGE)
+    {
+        u32 currPledgeUser = 0;
+        u32 newTurnOrder[] = {0xFF, 0xFF};
+
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            if (gBattlerByTurnOrder[i] == gBattlerAttacker)
+            {
+                currPledgeUser = i + 1; // Current battler going after attacker
+                break;
+            }
+        }
+        for (i = currPledgeUser; i < gBattlersCount; i++)
+        {
+            if (gBattlerByTurnOrder[i] != partner)
+            {
+                newTurnOrder[k] = gBattlerByTurnOrder[i];
+                k++;
+            }
+        }
+
+        gBattlerByTurnOrder[currPledgeUser] = partner;
+        currPledgeUser++;
+
+        for (i = 0; newTurnOrder[i] != 0xFF && i < 2; i++)
+        {
+            gBattlerByTurnOrder[currPledgeUser] = newTurnOrder[i];
+            currPledgeUser++;
+        }
+
+        gBattleStruct->pledgeMove = TRUE;
+        gBattleScripting.battler = partner;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+    else
+    {
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+
+    }
+}
+
+void BS_SetPledgeStatus(void)
+{
+    NATIVE_ARGS(u8 battler, u32 sideStatus);
+
+    u32 battler = GetBattlerForBattleScript(cmd->battler);
+    u32 side = GetBattlerSide(battler);
+
+    gBattleStruct->pledgeMove = FALSE;
+    if (!(gSideStatuses[side] & cmd->sideStatus))
+    {
+        gSideStatuses[side] |= cmd->sideStatus;
+
+        switch (cmd->sideStatus)
+        {
+        case SIDE_STATUS_RAINBOW:
+            gSideTimers[side].rainbowTimer = 4;
+            break;
+        case SIDE_STATUS_SEA_OF_FIRE:
+            gSideTimers[side].seaOfFireTimer = 4;
+            break;
+        case SIDE_STATUS_SWAMP:
+            gSideTimers[side].swampTimer = 4;
+        }
+
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+    else
+        gBattlescriptCurrInstr = BattleScript_MoveEnd;
 }

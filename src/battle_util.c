@@ -373,6 +373,7 @@ void HandleAction_UseMove(void)
                  || (GetBattlerAbility(battler) == ABILITY_STORM_DRAIN && moveType == TYPE_WATER))
                 && GetBattlerTurnOrderNum(battler) < var
                 && gBattleMoves[gCurrentMove].effect != EFFECT_SNIPE_SHOT
+                && gBattleMoves[gCurrentMove].effect != EFFECT_PLEDGE
                 && (GetBattlerAbility(gBattlerAttacker) != ABILITY_PROPELLER_TAIL
                  || GetBattlerAbility(gBattlerAttacker) != ABILITY_STALWART))
             {
@@ -865,7 +866,7 @@ void HandleAction_ActionFinished(void)
     gBattleResources->battleScriptsStack->size = 0;
     gBattleStruct->dynamax.usingMaxMove[gBattlerAttacker] = 0;
 
-    if (B_RECALC_TURN_AFTER_ACTIONS >= GEN_8 && !afterYouActive)
+    if (B_RECALC_TURN_AFTER_ACTIONS >= GEN_8 && !afterYouActive && !gBattleStruct->pledgeMove)
     {
         // i starts at `gCurrentTurnActionNumber` because we don't want to recalculate turn order for mon that have already
         // taken action. It's been previously increased, which we want in order to not recalculate the turn of the mon that just finished its action
@@ -1926,6 +1927,9 @@ enum
     ENDTURN_RETALIATE,
     ENDTURN_WEATHER_FORM,
     ENDTURN_STATUS_HEAL,
+    ENDTURN_RAINBOW,
+    ENDTURN_SEA_OF_FIRE,
+    ENDTURN_SWAMP,
     ENDTURN_FIELD_COUNT,
 };
 
@@ -2433,6 +2437,95 @@ u8 DoFieldEndTurnEffects(void)
             }
             gBattleStruct->turnCountersTracker++;
             break;
+        case ENDTURN_RAINBOW:
+            while (gBattleStruct->turnSideTracker < 2)
+            {
+                side = gBattleStruct->turnSideTracker;
+                if (gSideStatuses[side] & SIDE_STATUS_RAINBOW)
+                {
+                    for (gBattlerAttacker = 0; gBattlerAttacker < gBattlersCount; gBattlerAttacker++)
+                    {
+                        if (GetBattlerSide(gBattlerAttacker) == side)
+                            break;
+                    }
+
+                    if (gSideTimers[side].rainbowTimer > 0 && --gSideTimers[side].rainbowTimer == 0)
+                    {
+                        gSideStatuses[side] &= ~SIDE_STATUS_RAINBOW;
+                        BattleScriptExecute(BattleScript_TheRainbowDisappeared);
+                        effect++;
+                    }
+                }
+                gBattleStruct->turnSideTracker++;
+                if (effect != 0)
+                    break;
+            }
+            if (!effect)
+            {
+                gBattleStruct->turnCountersTracker++;
+                gBattleStruct->turnSideTracker = 0;
+            }
+            break;
+        case ENDTURN_SEA_OF_FIRE:
+            while (gBattleStruct->turnSideTracker < 2)
+            {
+                side = gBattleStruct->turnSideTracker;
+
+                if (gSideStatuses[side] & SIDE_STATUS_SEA_OF_FIRE)
+                {
+                    for (gBattlerAttacker = 0; gBattlerAttacker < gBattlersCount; gBattlerAttacker++)
+                    {
+                        if (GetBattlerSide(gBattlerAttacker) == side)
+                            break;
+                    }
+
+                    if (gSideTimers[side].seaOfFireTimer > 0 && --gSideTimers[side].seaOfFireTimer == 0)
+                    {
+                        gSideStatuses[side] &= ~SIDE_STATUS_SEA_OF_FIRE;
+                        BattleScriptExecute(BattleScript_TheSeaOfFireDisappeared);
+                        effect++;
+                    }
+                }
+                gBattleStruct->turnSideTracker++;
+                if (effect != 0)
+                    break;
+            }
+            if (!effect)
+            {
+                gBattleStruct->turnCountersTracker++;
+                gBattleStruct->turnSideTracker = 0;
+            }
+            break;
+        case ENDTURN_SWAMP:
+            while (gBattleStruct->turnSideTracker < 2)
+            {
+                side = gBattleStruct->turnSideTracker;
+
+                if (gSideStatuses[side] & SIDE_STATUS_SWAMP)
+                {
+                    for (gBattlerAttacker = 0; gBattlerAttacker < gBattlersCount; gBattlerAttacker++)
+                    {
+                        if (GetBattlerSide(gBattlerAttacker) == side)
+                            break;
+                    }
+
+                    if (gSideTimers[side].swampTimer > 0 && --gSideTimers[side].swampTimer == 0)
+                    {
+                        gSideStatuses[side] &= ~SIDE_STATUS_SWAMP;
+                        BattleScriptExecute(BattleScript_TheSwampDisappeared);
+                        effect++;
+                    }
+                }
+                gBattleStruct->turnSideTracker++;
+                if (effect != 0)
+                    break;
+            }
+            if (!effect)
+            {
+                gBattleStruct->turnCountersTracker++;
+                gBattleStruct->turnSideTracker = 0;
+            }
+            break;
         case ENDTURN_FIELD_COUNT:
             effect++;
             break;
@@ -2483,6 +2576,7 @@ enum
     ENDTURN_SALT_CURE,
     ENDTURN_SYRUP_BOMB,
     ENDTURN_DYNAMAX,
+    ENDTURN_SEA_OF_FIRE_DAMAGE,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -3065,6 +3159,17 @@ u8 DoBattlerEndTurnEffects(void)
                 gBattleScripting.battler = battler;
 	            UndoDynamax(battler);
                 BattleScriptExecute(BattleScript_DynamaxEnds);
+                effect++;
+            }
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_SEA_OF_FIRE_DAMAGE:
+            if (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SEA_OF_FIRE)
+            {
+                gBattleMoveDamage = gBattleMons[battler].maxHP / 8;
+                BtlController_EmitStatusAnimation(battler, BUFFER_A, FALSE, STATUS1_BURN);
+                MarkBattlerForControllerExec(battler);
+                BattleScriptExecute(BattleScript_HurtByTheSeaOfFire);
                 effect++;
             }
             gBattleStruct->turnEffectsTracker++;
@@ -7610,6 +7715,8 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                 u16 ability = GetBattlerAbility(gBattlerAttacker);
                 if (B_SERENE_GRACE_BOOST >= GEN_5 && ability == ABILITY_SERENE_GRACE)
                     atkHoldEffectParam *= 2;
+                if (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_RAINBOW && gCurrentMove != MOVE_SECRET_POWER)
+                    atkHoldEffectParam *= 2;
                 if (gBattleMoveDamage != 0  // Need to have done damage
                     && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                     && TARGET_TURN_DAMAGED
@@ -8525,7 +8632,8 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
     switch (gBattleMoves[move].effect)
     {
     case EFFECT_PLEDGE:
-        // todo
+        if (gBattleStruct->pledgeMove)
+            basePower = 150;
         break;
     case EFFECT_FLING:
         basePower = GetFlingPowerFromItemId(gBattleMons[battlerAtk].item);
@@ -9504,7 +9612,9 @@ static inline uq4_12_t GetParentalBondModifier(u32 battlerAtk)
 
 static inline uq4_12_t GetSameTypeAttackBonusModifier(u32 battlerAtk, u32 moveType, u32 move, u32 abilityAtk)
 {
-    if (!IS_BATTLER_OF_TYPE(battlerAtk, moveType) || move == MOVE_STRUGGLE || move == MOVE_NONE)
+    if (gBattleStruct->pledgeMove && IS_BATTLER_OF_TYPE(BATTLE_PARTNER(battlerAtk), moveType))
+        return (abilityAtk == ABILITY_ADAPTABILITY) ? UQ_4_12(2.0) : UQ_4_12(1.5);
+    else if (!IS_BATTLER_OF_TYPE(battlerAtk, moveType) || move == MOVE_STRUGGLE || move == MOVE_NONE)
         return UQ_4_12(1.0);
     return (abilityAtk == ABILITY_ADAPTABILITY) ? UQ_4_12(2.0) : UQ_4_12(1.5);
 }
@@ -11122,9 +11232,17 @@ bool32 AreBattlersOfSameGender(u32 battler1, u32 battler2)
     return (gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS && gender1 == gender2);
 }
 
-u32 CalcSecondaryEffectChance(u32 battler, u8 secondaryEffectChance)
+u32 CalcSecondaryEffectChance(u32 battler, u8 secondaryEffectChance, u16 moveEffect)
 {
-    if (GetBattlerAbility(battler) == ABILITY_SERENE_GRACE)
+    bool8 hasSereneGrace = (GetBattlerAbility(battler) == ABILITY_SERENE_GRACE);
+    bool8 hasRainbow = (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_RAINBOW) != 0;
+
+    if (hasRainbow && hasSereneGrace && moveEffect == EFFECT_FLINCH_HIT)
+        return secondaryEffectChance *= 2;
+
+    if (hasSereneGrace)
+        secondaryEffectChance *= 2;
+    if (hasRainbow && moveEffect != EFFECT_SECRET_POWER)
         secondaryEffectChance *= 2;
 
     return secondaryEffectChance;
@@ -11166,4 +11284,3 @@ u8 GetBattlerType(u32 battler, u8 typeIndex)
 
     return types[typeIndex];
 }
-

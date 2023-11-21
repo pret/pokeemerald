@@ -53,7 +53,6 @@ AI_SINGLE_BATTLE_TEST("AI prefers Water Gun over Bubble if it knows that foe has
 
     PARAMETRIZE { abilityAI = ABILITY_MOXIE; }
     PARAMETRIZE { abilityAI = ABILITY_MOLD_BREAKER; } // Mold Breaker ignores Contrary.
-
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_SHUCKLE) { Ability(ABILITY_CONTRARY); }

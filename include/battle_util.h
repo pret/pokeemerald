@@ -247,7 +247,7 @@ void RemoveConfusionStatus(u32 battler);
 u8 GetBattlerGender(u32 battler);
 bool32 AreBattlersOfOppositeGender(u32 battler1, u32 battler2);
 bool32 AreBattlersOfSameGender(u32 battler1, u32 battler2);
-u32 CalcSecondaryEffectChance(u32 battler, u8 secondaryEffectChance);
+u32 CalcSecondaryEffectChance(u32 battler, u8 secondaryEffectChance, u16 moveEffect);
 u8 GetBattlerType(u32 battler, u8 typeIndex);
 
 #endif // GUARD_BATTLE_UTIL_H

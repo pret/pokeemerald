@@ -231,7 +231,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCalmMind                @ EFFECT_CALM_MIND
 	.4byte BattleScript_EffectDragonDance             @ EFFECT_DRAGON_DANCE
 	.4byte BattleScript_EffectCamouflage              @ EFFECT_CAMOUFLAGE
-	.4byte BattleScript_EffectHit                     @ EFFECT_PLEDGE
+	.4byte BattleScript_EffectPledge                  @ EFFECT_PLEDGE
 	.4byte BattleScript_EffectFling                   @ EFFECT_FLING
 	.4byte BattleScript_EffectNaturalGift             @ EFFECT_NATURAL_GIFT
 	.4byte BattleScript_EffectWakeUpSlap              @ EFFECT_WAKE_UP_SLAP
@@ -471,6 +471,90 @@ BattleScript_SyrupBombTurnDmgEnd:
 BattleScript_EffectMatchaGotcha::
 	setmoveeffect MOVE_EFFECT_BURN
 	goto BattleScript_EffectAbsorb
+
+BattleScript_EffectPledge::
+	attackcanceler
+	setpledge BattleScript_HitFromAccCheck
+	attackstring
+	pause B_WAIT_TIME_MED
+	ppreduce
+	printstring STRINGID_WAITINGFORPARTNERSMOVE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectCombinedPledge_Water::
+	call BattleScript_EffectHit_Pledge
+	setpledgestatus BS_ATTACKER, SIDE_STATUS_RAINBOW
+	pause B_WAIT_TIME_SHORTEST
+	printstring STRINGID_ARAINBOWAPPEAREDONSIDE
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_ATTACKER, B_ANIM_RAINBOW
+	waitanimation
+	goto BattleScript_MoveEnd
+
+BattleScript_TheRainbowDisappeared::
+	printstring STRINGID_THERAINBOWDISAPPEARED
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+BattleScript_EffectCombinedPledge_Fire::
+	call BattleScript_EffectHit_Pledge
+	setpledgestatus BS_TARGET, SIDE_STATUS_SEA_OF_FIRE
+	pause B_WAIT_TIME_SHORTEST
+	printstring STRINGID_SEAOFFIREENVELOPEDSIDE
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_TARGET, B_ANIM_SEA_OF_FIRE
+	waitanimation
+	goto BattleScript_MoveEnd
+
+BattleScript_HurtByTheSeaOfFire::
+	printstring STRINGID_HURTBYTHESEAOFFIRE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_DoTurnDmg
+
+BattleScript_TheSeaOfFireDisappeared::
+	printstring STRINGID_THESEAOFFIREDISAPPEARED
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+BattleScript_EffectCombinedPledge_Grass::
+	call BattleScript_EffectHit_Pledge
+	setpledgestatus BS_TARGET, SIDE_STATUS_SWAMP
+	pause B_WAIT_TIME_SHORTEST
+	printstring STRINGID_SWAMPENVELOPEDSIDE
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_TARGET, B_ANIM_SWAMP
+	waitanimation
+	goto BattleScript_MoveEnd
+
+BattleScript_TheSwampDisappeared::
+	printstring STRINGID_THESWAMPDISAPPEARED
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+BattleScript_EffectHit_Pledge::
+	pause B_WAIT_TIME_MED
+	printstring STRINGID_THETWOMOVESBECOMEONE
+	waitmessage B_WAIT_TIME_LONG
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	ppreduce
+	critcalc
+	damagecalc
+	adjustdamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	seteffectwithchance
+	tryfaintmon BS_TARGET
+	return
 
 BattleScript_EffectSaltCure:
 	call BattleScript_EffectHit_Ret

@@ -11510,6 +11510,11 @@ extern const u16 gSlotMachineReelTimePikachu_Pal[];
 extern const u32 gBattleAnimBgTilemap_Sandstorm[];
 extern const u32 gBattleAnimBgImage_Sandstorm[];
 
+// Pledge Effect field status - Rainbow
+extern const u32 gBattleAnimBgImage_Rainbow[];
+extern const u32 gBattleAnimBGPalette_Rainbow[];
+extern const u32 gBattleAnimBgTilemap_Rainbow[];
+
 // Pokedex Area Screen
 extern const u32 gPokedexAreaScreenAreaUnknown_Gfx[];
 extern const u16 gPokedexAreaScreenAreaUnknown_Pal[];

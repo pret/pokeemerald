@@ -578,6 +578,7 @@ static u32 ChooseMoveOrAction_Doubles(u32 battlerAi)
             AI_THINKING_STRUCT->aiLogicId = 0;
             AI_THINKING_STRUCT->movesetIndex = 0;
             flags = AI_THINKING_STRUCT->aiFlags;
+
             while (flags != 0)
             {
                 if (flags & 1)

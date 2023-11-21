@@ -1010,6 +1010,9 @@ gBattleAnims_General::
 	.4byte General_DynamaxGrowth            @ B_ANIM_DYNAMAX_GROWTH
 	.4byte General_SetWeather               @ B_ANIM_MAX_SET_WEATHER
 	.4byte General_SyrupBombSpeedDrop       @ B_ANIM_SYRUP_BOMB_SPEED_DROP
+	.4byte General_Rainbow                  @ B_ANIM_RAINBOW
+	.4byte General_SeaOfFire                @ B_ANIM_SEA_OF_FIRE
+	.4byte General_Swamp                    @ B_ANIM_SWAMP
 
 	.align 2
 gBattleAnims_Special::
@@ -27060,6 +27063,10 @@ General_HangedOn:
 	end
 
 General_Rain:
+	call RainDrops
+	end
+
+RainDrops:
 	loadspritegfx ANIM_TAG_RAIN_DROPS
 	playsewithpan SE_M_RAIN_DANCE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, (F_PAL_BG | F_PAL_BATTLERS), 2, 0, 4, RGB_BLACK
@@ -27070,7 +27077,7 @@ General_Rain:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, (F_PAL_BG | F_PAL_BATTLERS), 2, 4, 0, RGB_BLACK
 	waitforvisualfinish
-	end
+	return
 
 General_Sun:
 	goto Move_SUNNY_DAY
@@ -27514,6 +27521,75 @@ General_AffectionHangedOn_3Hearts:
 
 General_SaltCureDamage::
 	goto Status_Freeze
+
+General_Rainbow::
+	call RainDrops
+	delay 30
+	loadspritegfx ANIM_TAG_SUNLIGHT
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, (F_PAL_BG | F_PAL_BATTLERS), 1, 0, 6, RGB_WHITE
+	waitforvisualfinish
+	panse_adjustnone SE_M_PETAL_DANCE, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +1, 0
+	call SunnyDayLightRay
+	call SunnyDayLightRay
+	call SunnyDayLightRay
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, (F_PAL_BG | F_PAL_BATTLERS), 1, 6, 0, RGB_WHITE
+	waitforvisualfinish
+	delay 30
+	fadetobg BG_RAINBOW
+	panse_adjustnone SE_M_ABSORB_2, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +1, 0
+	delay 90
+	blendoff
+	restorebg
+	waitbgfadein
+	clearmonbg ANIM_ATK_PARTNER
+	end
+
+General_SeaOfFire::
+	loadspritegfx ANIM_TAG_SMALL_EMBER
+	monbg ANIM_DEF_PARTNER
+	splitbgprio ANIM_TARGET
+	playsewithpan SE_M_SACRED_FIRE2, SOUND_PAN_TARGET
+	call SeaOfFireTwisterDos
+	delay 3
+	call SeaOfFireTwisterTres
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	end
+
+SeaOfFireTwisterDos:
+	createsprite gTwisterEmberSpriteTemplate, ANIM_TARGET, 2, 45, 90, 5, 70, 30
+	delay 2
+	createsprite gTwisterEmberSpriteTemplate, ANIM_TARGET, 2, 50, 85, 6, 60, 30
+	delay 1
+	createsprite gTwisterEmberSpriteTemplate, ANIM_TARGET, 2, 47, 77, 7, 60, 30
+	delay 2
+	createsprite gTwisterEmberSpriteTemplate, ANIM_TARGET, 2, 40, 86, 8, 50, 30
+	delay 3
+	createsprite gTwisterEmberSpriteTemplate, ANIM_TARGET, 2, 42, 82, 7, 45, 30
+	delay 1
+	createsprite gTwisterEmberSpriteTemplate, ANIM_TARGET, 2, 47, 83, 5, 38, 30
+	delay 2
+	return
+
+SeaOfFireTwisterTres:
+	createsprite gTwisterEmberSpriteTemplate, ANIM_TARGET, 2, 45, 90, 3, 45, 30
+	delay 2
+	createsprite gTwisterEmberSpriteTemplate, ANIM_TARGET, 2, 50, 85, 4, 39, 30
+	delay 1
+	createsprite gTwisterEmberSpriteTemplate, ANIM_TARGET, 2, 47, 77, 5, 39, 30
+	delay 2
+	createsprite gTwisterEmberSpriteTemplate, ANIM_TARGET, 2, 40, 86, 6, 32, 30
+	delay 3
+	createsprite gTwisterEmberSpriteTemplate, ANIM_TARGET, 2, 42, 82, 5, 27, 30
+	delay 1
+	createsprite gTwisterEmberSpriteTemplate, ANIM_TARGET, 2, 47, 83, 3, 24, 30
+	delay 2
+	return
+
+General_Swamp:: @ To do
+	goto Move_HAZE
 
 SnatchMoveTrySwapFromSubstitute:
 	createvisualtask AnimTask_IsAttackerBehindSubstitute, 2

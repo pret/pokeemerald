@@ -235,6 +235,9 @@ struct SideTimer
     u8 retaliateTimer;
     u8 damageNonTypesTimer;
     u8 damageNonTypesType;
+    u8 rainbowTimer;
+    u8 seaOfFireTimer;
+    u8 swampTimer;
 };
 
 struct FieldTimer
@@ -726,6 +729,7 @@ struct BattleStruct
     u32 aiDelayTimer; // Counts number of frames AI takes to choose an action.
     u32 aiDelayFrames; // Number of frames it took to choose an action.
     bool8 transformZeroToHero[PARTY_SIZE][NUM_BATTLE_SIDES];
+    u8 pledgeMove:1;
 };
 
 // The palaceFlags member of struct BattleStruct contains 1 flag per move to indicate which moves the AI should consider,
