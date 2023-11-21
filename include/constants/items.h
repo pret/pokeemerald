@@ -924,7 +924,9 @@
 
 #define ITEM_INFINITY_CANDY 805
 
-#define ITEMS_COUNT 806
+#define ITEM_FORM_CHANGER 806
+
+#define ITEMS_COUNT 807
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
