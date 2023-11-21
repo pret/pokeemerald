@@ -5739,10 +5739,18 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
     dst->status2 = 0;
 }
 
-void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
+void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex, bool8 resetStats)
 {
+    s32 i;
     PokemonToBattleMon(&gPlayerParty[partyIndex], &gBattleMons[battlerId]);
     gBattleStruct->hpOnSwitchout[GetBattlerSide(battlerId)] = gBattleMons[battlerId].hp;
+    if (resetStats)
+    {
+        for (i = 0; i < NUM_BATTLE_STATS; i++)
+            gBattleMons[battlerId].statStages[i] = DEFAULT_STAT_STAGE;
+
+        gBattleMons[battlerId].status2 = 0;
+    }
     UpdateSentPokesToOpponentValue(battlerId);
     ClearTemporarySpeciesSpriteData(battlerId, FALSE);
 }
