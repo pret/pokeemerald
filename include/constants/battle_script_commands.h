@@ -245,8 +245,6 @@
 #define VARIOUS_STORE_HEALING_WISH                   152
 #define VARIOUS_HIT_SWITCH_TARGET_FAILED             153
 #define VARIOUS_TRY_REVIVAL_BLESSING                 154
-#define VARIOUS_TRY_TRAINER_SLIDE_MSG_Z_MOVE         155
-#define VARIOUS_TRY_TRAINER_SLIDE_MSG_MEGA_EVOLUTION 156
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

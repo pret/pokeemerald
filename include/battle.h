@@ -726,6 +726,7 @@ struct BattleStruct
     bool8 trainerSlideMegaEvolutionMsgDone;
     bool8 trainerSlideZMoveMsgDone;
     bool8 trainerSlideBeforeFirstTurnMsgDone;
+    bool8 trainerSlideDynamaxMsgDone;
     u32 aiDelayTimer; // Counts number of frames AI takes to choose an action.
     u32 aiDelayFrames; // Number of frames it took to choose an action.
     bool8 transformZeroToHero[PARTY_SIZE][NUM_BATTLE_SIDES];
