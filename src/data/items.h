@@ -9729,7 +9729,6 @@ const struct Item gItems[] =
     [ITEM_FORM_CHANGER] = 
     {
         .name = _("Form Changer"),
-        .itemId = ITEM_FORM_CHANGER,
         .price = 0,
         .importance = 1,
         .description = sFormChangerDesc,
