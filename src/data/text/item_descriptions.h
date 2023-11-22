@@ -3954,3 +3954,8 @@ static const u8 sInfinityCandyDesc[] = _(
     "Reusable. Raises a\n"
     "Pokémon's level\n"
     "by one.");
+
+static const u8 sFormChangerDesc[] = _(
+	"A special item\n"
+    "that can change the\n"
+    "form of a Pokémon.");

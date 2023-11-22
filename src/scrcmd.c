@@ -512,6 +512,15 @@ bool8 ScrCmd_checkitemspace(struct ScriptContext *ctx)
     return FALSE;
 }
 
+bool8 ScrCmd_checkpcspace(struct ScriptContext *ctx)
+{
+    u16 itemId = VarGet(ScriptReadHalfword(ctx));
+    u32 quantity = VarGet(ScriptReadHalfword(ctx));
+
+    gSpecialVar_Result = CheckPCHasSpace(itemId, (u8)quantity);
+    return FALSE;
+}
+
 bool8 ScrCmd_checkitem(struct ScriptContext *ctx)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));

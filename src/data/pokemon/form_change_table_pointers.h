@@ -130,6 +130,23 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_ARCEUS_DRAGON] = sArceusFormChangeTable,
     [SPECIES_ARCEUS_DARK] = sArceusFormChangeTable,
     [SPECIES_ARCEUS_FAIRY] = sArceusFormChangeTable,
+    [SPECIES_DEOXYS] = sDeoxysFormChangeTable,
+    [SPECIES_DEOXYS_ATTACK] = sDeoxysFormChangeTable,
+    [SPECIES_DEOXYS_DEFENSE] = sDeoxysFormChangeTable,
+    [SPECIES_DEOXYS_SPEED] = sDeoxysFormChangeTable,
+    [SPECIES_ROTOM] = sRotomFormChangeTable,
+    [SPECIES_ROTOM_HEAT]  = sRotomFormChangeTable,
+    [SPECIES_ROTOM_WASH]  = sRotomFormChangeTable,
+    [SPECIES_ROTOM_FROST] = sRotomFormChangeTable,
+    [SPECIES_ROTOM_FAN]   = sRotomFormChangeTable,
+    [SPECIES_ROTOM_MOW]   = sRotomFormChangeTable,
+    [SPECIES_NECROZMA] = sNecrozmaFormChangeTable,
+    [SPECIES_NECROZMA_DUSK_MANE] = sNecrozmaFormChangeTable,
+    [SPECIES_NECROZMA_DAWN_WINGS] = sNecrozmaFormChangeTable,
+    [SPECIES_NECROZMA_ULTRA] = sNecrozmaFormChangeTable,
+    [SPECIES_KYUREM] = sKyuremFormChangeTable,
+    [SPECIES_KYUREM_WHITE] = sKyuremFormChangeTable,
+    [SPECIES_KYUREM_BLACK] = sKyuremFormChangeTable,
 #endif
 #if P_GEN_5_POKEMON == TRUE
     [SPECIES_AUDINO] = sAudinoFormChangeTable,
@@ -210,8 +227,6 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_MINIOR_CORE_VIOLET] = sMiniorVioletFormChangeTable,
     [SPECIES_MINIOR_METEOR_YELLOW] = sMiniorYellowFormChangeTable,
     [SPECIES_MINIOR_CORE_YELLOW] = sMiniorYellowFormChangeTable,
-    [SPECIES_NECROZMA_DUSK_MANE] = sNecrozmaDuskManeFormChangeTable,
-    [SPECIES_NECROZMA_DAWN_WINGS] = sNecrozmaDawnWingsFormChangeTable,
 #endif
 #if P_GEN_8_POKEMON == TRUE
     [SPECIES_CRAMORANT] = sCramorantFormChangeTable,

@@ -853,6 +853,8 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
 	[ITEM_POWER_GLOVE] = {gItemIcon_PowerGlove, gItemIconPalette_PowerGlove},
 
     [ITEM_INFINITY_CANDY] = {gItemIcon_RareCandy, gItemIconPalette_GoldTeeth},
+
+    [ITEM_FORM_CHANGER] = {gItemIcon_DowsingMachine, gItemIconPalette_DowsingMachine},
     // Return to field arrow
     [ITEMS_COUNT] = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
 };

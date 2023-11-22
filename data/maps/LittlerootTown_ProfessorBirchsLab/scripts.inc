@@ -581,10 +581,6 @@ LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer:
 	walk_in_place_faster_left
 	step_end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_Machine::
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_SeriousLookingMachine, MSGBOX_SIGN
-	end
-
 LittlerootTown_ProfessorBirchsLab_EventScript_Rival::
 	lock
 	faceplayer
@@ -669,6 +665,405 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ScottAboardSSTidalCall::
 	clearflag FLAG_SCOTT_CALL_BATTLE_FRONTIER
 	releaseall
 	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine::
+	lock
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_WouldYouLikeToRestoreAFossil, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_LetsDoIt
+	release
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_LetsDoIt::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_LetsDoIt, MSGBOX_SIGN
+	scrollingmultichoice 1, 2, 3, 5, TRUE
+	goto_if_eq VAR_RESULT, 0, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Helix
+	goto_if_eq VAR_RESULT, 1, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Dome
+	goto_if_eq VAR_RESULT, 2, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Amber
+	goto_if_eq VAR_RESULT, 3, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Root
+	goto_if_eq VAR_RESULT, 4, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Claw
+	goto_if_eq VAR_RESULT, 5, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Armor
+	goto_if_eq VAR_RESULT, 6, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Skull
+	goto_if_eq VAR_RESULT, 7, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Cover
+	goto_if_eq VAR_RESULT, 8, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Plume
+	goto_if_eq VAR_RESULT, 9, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Jaw
+	goto_if_eq VAR_RESULT, 10, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Sail
+	return
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Helix::
+	checkitem ITEM_HELIX_FOSSIL
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_DontHaveFossil
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveHelix
+	return
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveHelix::
+	removeitem ITEM_HELIX_FOSSIL
+	bufferspeciesname STR_VAR_1, SPECIES_OMANYTE
+	setvar VAR_TEMP_1, SPECIES_OMANYTE
+	givemon SPECIES_OMANYTE, 5
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_HelixParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_HelixPC
+	goto Common_EventScript_NoMoreRoomForPokemon
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_HelixParty::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveHelix, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_HelixPC::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveHelix, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	call Common_EventScript_NameReceivedBoxMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Dome::
+	checkitem ITEM_DOME_FOSSIL
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_DontHaveFossil
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveDome
+	return
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveDome::
+	removeitem ITEM_DOME_FOSSIL
+	bufferspeciesname STR_VAR_1, SPECIES_KABUTO
+	setvar VAR_TEMP_1, SPECIES_KABUTO
+	givemon SPECIES_KABUTO, 5
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_DomeParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_DomePC
+	goto Common_EventScript_NoMoreRoomForPokemon
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_DomeParty::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveDome, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_DomePC::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveDome, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	call Common_EventScript_NameReceivedBoxMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Amber::
+	checkitem ITEM_OLD_AMBER
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_DontHaveFossil
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveAmber
+	return
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveAmber::
+	removeitem ITEM_OLD_AMBER
+	bufferspeciesname STR_VAR_1, SPECIES_AERODACTYL
+	setvar VAR_TEMP_1, SPECIES_AERODACTYL
+	givemon SPECIES_AERODACTYL, 5
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_AmberParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_AmberPC
+	goto Common_EventScript_NoMoreRoomForPokemon
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_AmberParty::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveAmber, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_AmberPC::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveAmber, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	call Common_EventScript_NameReceivedBoxMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Root::
+	checkitem ITEM_ROOT_FOSSIL
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_DontHaveFossil
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveRoot
+	return
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveRoot::
+	removeitem ITEM_ROOT_FOSSIL
+	bufferspeciesname STR_VAR_1, SPECIES_LILEEP
+	setvar VAR_TEMP_1, SPECIES_LILEEP
+	givemon SPECIES_LILEEP, 5
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_RootParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_RootPC
+	goto Common_EventScript_NoMoreRoomForPokemon
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_RootParty::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveRoot, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_RootPC::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveRoot, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	call Common_EventScript_NameReceivedBoxMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Claw::
+	checkitem ITEM_CLAW_FOSSIL
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_DontHaveFossil
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveClaw
+	return
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveClaw::
+	removeitem ITEM_CLAW_FOSSIL
+	bufferspeciesname STR_VAR_1, SPECIES_ANORITH
+	setvar VAR_TEMP_1, SPECIES_ANORITH
+	givemon SPECIES_ANORITH, 5
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_ClawParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_ClawPC
+	goto Common_EventScript_NoMoreRoomForPokemon
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_ClawParty::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveClaw, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Armor::
+	checkitem ITEM_ARMOR_FOSSIL
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_DontHaveFossil
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveArmor
+	return
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveArmor::
+	removeitem ITEM_ARMOR_FOSSIL
+	bufferspeciesname STR_VAR_1, SPECIES_SHIELDON
+	setvar VAR_TEMP_1, SPECIES_SHIELDON
+	givemon SPECIES_SHIELDON, 5
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_ArmorParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_ArmorPC
+	goto Common_EventScript_NoMoreRoomForPokemon
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_ArmorParty::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveArmor, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_ArmorPC::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveArmor, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	call Common_EventScript_NameReceivedBoxMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_ClawPC::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveClaw, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	call Common_EventScript_NameReceivedBoxMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Skull::
+	checkitem ITEM_SKULL_FOSSIL
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_DontHaveFossil
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveSkull
+	return
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveSkull::
+	removeitem ITEM_SKULL_FOSSIL
+	bufferspeciesname STR_VAR_1, SPECIES_CRANIDOS
+	setvar VAR_TEMP_1, SPECIES_CRANIDOS
+	givemon SPECIES_CRANIDOS, 5
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_SkullParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_SkullPC
+	goto Common_EventScript_NoMoreRoomForPokemon
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_SkullParty::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveSkull, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_SkullPC::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveSkull, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	call Common_EventScript_NameReceivedBoxMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Cover::
+	checkitem ITEM_COVER_FOSSIL
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_DontHaveFossil
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveCover
+	return
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveCover::
+	removeitem ITEM_COVER_FOSSIL
+	bufferspeciesname STR_VAR_1, SPECIES_TIRTOUGA
+	setvar VAR_TEMP_1, SPECIES_TIRTOUGA
+	givemon SPECIES_TIRTOUGA, 5
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_CoverParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_CoverPC
+	goto Common_EventScript_NoMoreRoomForPokemon
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_CoverParty::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveCover, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_CoverPC::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveCover, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	call Common_EventScript_NameReceivedBoxMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Plume::
+	checkitem ITEM_PLUME_FOSSIL
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_DontHaveFossil
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GivePlume
+	return
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GivePlume::
+	removeitem ITEM_PLUME_FOSSIL
+	bufferspeciesname STR_VAR_1, SPECIES_ARCHEN
+	setvar VAR_TEMP_1, SPECIES_ARCHEN
+	givemon SPECIES_ARCHEN, 5
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_PlumeParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_PlumePC
+	goto Common_EventScript_NoMoreRoomForPokemon
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_PlumeParty::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GivePlume, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_PlumePC::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GivePlume, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	call Common_EventScript_NameReceivedBoxMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Jaw::
+	checkitem ITEM_JAW_FOSSIL
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_DontHaveFossil
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveJaw
+	return
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveJaw::
+	removeitem ITEM_JAW_FOSSIL
+	bufferspeciesname STR_VAR_1, SPECIES_TYRUNT
+	setvar VAR_TEMP_1, SPECIES_TYRUNT
+	givemon SPECIES_TYRUNT, 5
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_JawParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_JawPC
+	goto Common_EventScript_NoMoreRoomForPokemon
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_JawParty::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveJaw, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_JawPC::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveJaw, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	call Common_EventScript_NameReceivedBoxMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_Sail::
+	checkitem ITEM_SAIL_FOSSIL
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_DontHaveFossil
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveSail
+	return
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_GiveSail::
+	removeitem ITEM_SAIL_FOSSIL
+	bufferspeciesname STR_VAR_1, SPECIES_AMAURA
+	setvar VAR_TEMP_1, SPECIES_AMAURA
+	givemon SPECIES_AMAURA, 5
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_SailParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_SailPC
+	goto Common_EventScript_NoMoreRoomForPokemon
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_SailParty::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveSail, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_SailPC::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GiveSail, MSGBOX_SIGN
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	call Common_EventScript_NameReceivedBoxMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachine::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_ThankYou, MSGBOX_SIGN
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_ThankyouForUsingFossilMachinePC::
+	call Common_EventScript_TransferredToPC
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_ThankYou, MSGBOX_SIGN
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_FossilMachine_DontHaveFossil::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_DontHaveFossil, MSGBOX_SIGN
+	return
 
 LittlerootTown_ProfessorBirchsLab_Text_BirchAwayOnFieldwork:
 	.string "Hunh? PROF. BIRCH?\p"
@@ -1013,3 +1408,73 @@ LittlerootTown_ProfessorBirchsLab_Text_ScottAboardSSTidalCall:
 	.string "we meet. I'll be waiting!\p"
 	.string "… … … … … …\n"
 	.string "… … … … … Click!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_WouldYouLikeToRestoreAFossil::
+    .string "Do you want to restore\n"
+	.string "a fossil?$"
+
+LittlerootTown_ProfessorBirchsLab_Text_LetsDoIt::
+    .string "Please place your\n"
+    .string "fossil in the machine.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_DontHaveFossil::
+	.string "You don't have that fossil!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_GiveHelix::
+	.string "Your fossil turned into an\n"
+	.string "Omanyte!\p"
+	.string "Congratulations!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_GiveDome::
+	.string "Your fossil turned into a\n"
+	.string "Kabuto!\p"
+	.string "Congratulations!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_GiveAmber::
+	.string "Your fossil turned into an\n"
+	.string "Aerodactyl!\p"
+	.string "Congratulations!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_GiveRoot::
+	.string "Your fossil turned into a\n"
+	.string "Lileep!\p"
+	.string "Congratulations!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_GiveClaw::
+	.string "Your fossil turned into an\n"
+	.string "Anorith!\p"
+	.string "Congratulations!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_GiveArmor::
+	.string "Your fossil turned into a\n"
+	.string "Shieldon!\p"
+	.string "Congratulations!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_GiveSkull::
+	.string "Your fossil turned into a\n"
+	.string "Cranidos!\p"
+	.string "Congratulations!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_GiveCover::
+	.string "Your fossil turned into a\n"
+	.string "Tirtouga!\p"
+	.string "Congratulations!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_GivePlume::
+	.string "Your fossil turned into an\n"
+	.string "Archen!\p"
+	.string "Congratulations!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_GiveJaw::
+	.string "Your fossil turned into a\n"
+	.string "Tyrunt!\p"
+	.string "Congratulations!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_GiveSail::
+	.string "Your fossil turned into an\n"
+	.string "Amaura!\p"
+	.string "Congratulations!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_ThankYou::
+	.string "Thank you for using the\n"
+	.string "Birch Fossil Restorer! Bye now.$"

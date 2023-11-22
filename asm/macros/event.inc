@@ -1170,6 +1170,16 @@
 	.byte \disable
 	.endm
 
+	.macro scrollingmultichoice id:req, x:req, y:req, show:req, b:req
+	setvar VAR_0x8004, \id,
+	setvar VAR_0x8005, \x,
+	setvar VAR_0x8006, \y,
+	setvar VAR_0x8007, \show,
+	setvar VAR_0x8008, \b,
+	callnative ScriptMenu_ScrollingMultichoice
+	waitstate
+	.endm
+
 	@ Subtracts value from the player's money. If the player has less than 'value' money, their money is set to 0.
 	@ If 'disable' is set to anything but 0 then this command does nothing.
 	.macro removemoney value:req, disable=0
@@ -1755,6 +1765,14 @@
 	@ checks if you have a follower. returns the result to VAR_RESULT
 	.macro checkfollower
 	.byte 0xe6
+	.endm
+
+	@ Checks if the player has enough space in their PC to hold quantity more of the specified item. Sets VAR_RESULT to
+	@ TRUE if there is room, or FALSE is there is no room.
+	.macro checkpcspace itemId:req, quantity=1
+	.byte 0xe3
+	.2byte \itemId
+	.2byte \quantity
 	.endm
 
 
