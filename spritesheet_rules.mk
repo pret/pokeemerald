@@ -2076,6 +2076,9 @@ $(OBJEVENTGFXDIR)/pokemon/followers/shaymin_sky.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/pokemon/followers/arceus.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
+$(OBJEVENTGFXDIR)/pokemon/followers/victini.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
 
 
 $(OBJEVENTGFXDIR)/berry_trees/aguav.4bpp: %.4bpp: %.png
