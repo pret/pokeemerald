@@ -859,27 +859,6 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, u32 move, s3
         if (AI_CanConfuse(battlerAtk, battlerDef, abilityDef, BATTLE_PARTNER(battlerAtk), move, MOVE_NONE))
             return TRUE;
         break;
-    case EFFECT_FLINCH_STATUS:
-        switch (gBattleMoves[move].argument)
-        {
-        case STATUS1_PARALYSIS:
-            if (AI_CanParalyze(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE))
-                return TRUE;
-            break;
-        case STATUS1_BURN:
-            if (AI_CanBurn(battlerAtk, battlerDef, abilityDef, BATTLE_PARTNER(battlerAtk), move, MOVE_NONE))
-                return TRUE;
-            break;
-        case STATUS1_FREEZE:
-            if (AI_CanGetFrostbite(battlerDef, abilityDef))
-                return TRUE;
-            break;
-        }
-        // fallthrough
-    case EFFECT_FLINCH_HIT:
-        if (ShouldTryToFlinch(battlerAtk, battlerDef, abilityAtk, abilityDef, move))
-            return TRUE;
-        break;
     case EFFECT_HIT_ESCAPE:
         if (CountUsablePartyMons(battlerAtk) != 0 && ShouldPivot(battlerAtk, battlerDef, abilityDef, move, AI_THINKING_STRUCT->movesetIndex))
             return TRUE;
@@ -955,6 +934,15 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, u32 move, s3
                 break;
             case MOVE_EFFECT_BURN:
                 if (AI_CanBurn(battlerAtk, battlerDef, abilityDef, BATTLE_PARTNER(battlerAtk), move, MOVE_NONE))
+                    return TRUE;
+                break;
+            case MOVE_EFFECT_FREEZE:
+            case MOVE_EFFECT_FROSTBITE:
+                if (AI_CanGetFrostbite(battlerDef, abilityDef))
+                    return TRUE;
+                break;
+            case MOVE_EFFECT_FLINCH:
+                if (ShouldTryToFlinch(battlerAtk, battlerDef, abilityAtk, abilityDef, move))
                     return TRUE;
                 break;
         }

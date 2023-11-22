@@ -308,7 +308,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCloseCombat             @ EFFECT_CLOSE_COMBAT
 	.4byte BattleScript_EffectLastResort              @ EFFECT_LAST_RESORT
 	.4byte BattleScript_EffectHit                     @ EFFECT_RECOIL_33_STATUS
-	.4byte BattleScript_EffectFlinchStatus            @ EFFECT_FLINCH_STATUS
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_282
 	.4byte BattleScript_EffectHit                     @ EFFECT_RECOIL_50
 	.4byte BattleScript_EffectShellSmash              @ EFFECT_SHELL_SMASH
 	.4byte BattleScript_EffectShiftGear               @ EFFECT_SHIFT_GEAR
@@ -3775,13 +3775,6 @@ BattleScript_EffectConversion::
 BattleScript_EffectFlinchHit::
 	setmoveeffect MOVE_EFFECT_FLINCH
 	goto BattleScript_EffectHit
-
-BattleScript_EffectFlinchStatus:
-	setmoveeffect MOVE_EFFECT_FLINCH
-	call BattleScript_EffectHit_Ret
-	argumentstatuseffect
-	tryfaintmon BS_TARGET
-	goto BattleScript_MoveEnd
 
 BattleScript_EffectRestoreHp::
 	attackcanceler

@@ -285,7 +285,7 @@
 #define EFFECT_CLOSE_COMBAT                 279
 #define EFFECT_LAST_RESORT                  280
 #define EFFECT_RECOIL_33_STATUS             281
-#define EFFECT_FLINCH_STATUS                282
+#define EFFECT_UNUSED_282                   282
 #define EFFECT_RECOIL_50                    283
 #define EFFECT_SHELL_SMASH                  284
 #define EFFECT_SHIFT_GEAR                   285

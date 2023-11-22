@@ -369,7 +369,6 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_CLOSE_COMBAT]               = 0, // TODO: Assign points
     [EFFECT_LAST_RESORT]                = 0, // TODO: Assign points
     [EFFECT_RECOIL_33_STATUS]           = 0, // TODO: Assign points
-    [EFFECT_FLINCH_STATUS]              = 0, // TODO: Assign points
     [EFFECT_RECOIL_50]                  = 0, // TODO: Assign points
     [EFFECT_SHELL_SMASH]                = 0, // TODO: Assign points
     [EFFECT_SHIFT_GEAR]                 = 0, // TODO: Assign points

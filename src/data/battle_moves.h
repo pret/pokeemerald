@@ -7491,12 +7491,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_THUNDER_FANG] =
     {
-        .effect = EFFECT_FLINCH_STATUS,
+        .effect = EFFECT_HIT,
         .power = 65,
         .type = TYPE_ELECTRIC,
         .accuracy = 95,
         .pp = 15,
-        .secondaryEffectChance = 10,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .split = SPLIT_PHYSICAL,
@@ -7505,21 +7504,19 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .bitingMove = TRUE,
+        ADDITIONAL_EFFECTS(
+            SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 10),
+            SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 10)
+        )
     },
 
     [MOVE_ICE_FANG] =
     {
-        #if B_USE_FROSTBITE == TRUE
-            .argument = STATUS1_FROSTBITE,
-        #else
-            .argument = STATUS1_FREEZE,
-        #endif
-        .effect = EFFECT_FLINCH_STATUS,
+        .effect = EFFECT_HIT,
         .power = 65,
         .type = TYPE_ICE,
         .accuracy = 95,
         .pp = 15,
-        .secondaryEffectChance = 10,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .split = SPLIT_PHYSICAL,
@@ -7527,16 +7524,19 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .bitingMove = TRUE,
+        ADDITIONAL_EFFECTS(
+            SECONDARY_EFFECT(B_USE_FROSTBITE ? MOVE_EFFECT_FROSTBITE : MOVE_EFFECT_FREEZE, 10),
+            SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 10)
+        )
     },
 
     [MOVE_FIRE_FANG] =
     {
-        .effect = EFFECT_FLINCH_STATUS,
+        .effect = EFFECT_HIT,
         .power = 65,
         .type = TYPE_FIRE,
         .accuracy = 95,
         .pp = 15,
-        .secondaryEffectChance = 10,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .split = SPLIT_PHYSICAL,
@@ -7545,6 +7545,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .bitingMove = TRUE,
+        ADDITIONAL_EFFECTS(
+            SECONDARY_EFFECT(MOVE_EFFECT_BURN, 10),
+            SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 10)
+        )
     },
 
     [MOVE_SHADOW_SNEAK] =
