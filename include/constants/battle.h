@@ -389,8 +389,9 @@
 
 #define NUM_MOVE_EFFECTS                78
 
-#define MOVE_EFFECT_AFFECTS_USER        0x4000
-#define MOVE_EFFECT_CERTAIN             0x8000
+#define MOVE_EFFECT_AFFECTS_USER        0x2000
+#define MOVE_EFFECT_CERTAIN             0x4000
+#define MOVE_EFFECT_CONTINUE            0x8000
 
 // Battle terrain defines for gBattleTerrain.
 #define BATTLE_TERRAIN_GRASS            0
