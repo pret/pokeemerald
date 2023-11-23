@@ -103,6 +103,8 @@ struct DisableStruct
     u8 toxicSpikesDone:1;
     u8 stickyWebDone:1;
     u8 stealthRockDone:1;
+    u8 weatherAbilityDone:1;
+    u8 terrainAbilityDone:1;
 };
 
 struct ProtectStruct
@@ -193,8 +195,6 @@ struct SpecialStatus
     u8 dancerUsedMove:1;
     u8 dancerOriginalTarget:3;
     // End of byte
-    u8 weatherAbilityDone:1;
-    u8 terrainAbilityDone:1;
     u8 emergencyExited:1;
     u8 afterYou:1;
 };

@@ -85,3 +85,50 @@ SINGLE_BATTLE_TEST("Protosynthesis either boosts Defense or Special Defense, not
             EXPECT_EQ(damage[0], damage[1]);
     }
 }
+
+SINGLE_BATTLE_TEST("Protosynthesis ability pop up activates only once during the duration of sunny day")
+{
+    u16 turns;
+
+    GIVEN {
+        PLAYER(SPECIES_BELLSPROUT) { Ability(ABILITY_PROTOSYNTHESIS); }
+        OPPONENT(SPECIES_NINETALES) { Ability(ABILITY_DROUGHT); };
+    } WHEN {
+        for (turns = 0; turns < 5; turns++)
+            TURN {}
+        TURN { MOVE(opponent, MOVE_SUNNY_DAY); }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_DROUGHT);
+        ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
+        MESSAGE("The harsh sunlight activated Bellsprout's Protosynthesis!");
+        MESSAGE("Bellsprout's Attack was heightened!");
+        NONE_OF {
+            for (turns = 0; turns < 4; turns++) {
+                ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
+                MESSAGE("The harsh sunlight activated Bellsprout's Protosynthesis!");
+                MESSAGE("Bellsprout's Attack was heightened!");
+            }
+        }
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SUNNY_DAY, opponent);
+        ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
+        MESSAGE("The harsh sunlight activated Bellsprout's Protosynthesis!");
+        MESSAGE("Bellsprout's Attack was heightened!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Protosynthesis activates on switch-in")
+{
+    KNOWN_FAILING; // Fails because of wrong species
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_BELLSPROUT) { Ability(ABILITY_PROTOSYNTHESIS); }
+        OPPONENT(SPECIES_NINETALES) { Ability(ABILITY_DROUGHT); };
+    } WHEN {
+        TURN { SWITCH(player, 1); }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_DROUGHT);
+        ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
+        MESSAGE("The harsh sunlight activated Bellsprout's Protosynthesis!");
+        MESSAGE("Bellsprout's Attack was heightened!");
+    }
+}
