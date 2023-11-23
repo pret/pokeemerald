@@ -3,12 +3,11 @@ ENTRY(Start)
 gNumMusicPlayers = 4;
 gMaxLines = 0;
 
-/* Memory Spaces */
 MEMORY
 {
     EWRAM (rwx) : ORIGIN = 0x2000000, LENGTH = 256K
     IWRAM (rwx) : ORIGIN = 0x3000000, LENGTH = 32K
-    ROM    (rx) : ORIGIN = 0x8000000, LENGTH = 16M
+    ROM    (rx) : ORIGIN = 0x8000000, LENGTH = 32M
 }
 
 SECTIONS {
@@ -16,10 +15,8 @@ SECTIONS {
     ewram 0x2000000 (NOLOAD) :
     ALIGN(4)
     {
-        *(__EWRAM_HEAP);
-
-        src/*.o(ewram_data);    /**/
-        gflib/*.o(ewram_data);  /**/
+        src/*.o(ewram_data);
+        gflib/*.o(ewram_data);
     } > EWRAM
 
     iwram 0x3000000 (NOLOAD) :
@@ -31,13 +28,11 @@ SECTIONS {
         *libc.a:*.o(.bss*);
         *libnosys.a:*.o(.bss*);
 
-        /* .bss.code starts at 0x3001AA8 */
         src/m4a.o(.bss.code);
 
-        /* COMMON starts at 0x30022A8 */
-        src/*.o(COMMON);            /**/
-        gflib/*.o(COMMON);          /**/
-        *libc.a:*.o(COMMON);        
+        src/*.o(COMMON);
+        gflib/*.o(COMMON);
+        *libc.a:*.o(COMMON);
         *libnosys.a:*.o(COMMON);
     } > IWRAM
 

@@ -4,7 +4,7 @@
 static void *sHeapStart;
 static u32 sHeapSize;
 
-__attribute__((section("__EWRAM_HEAP"))) u8 gHeap[HEAP_SIZE] = {0};
+EWRAM_DATA u8 gHeap[HEAP_SIZE] = {0};
 
 #define MALLOC_SYSTEM_ID 0xA3A3
 

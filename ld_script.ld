@@ -7,7 +7,7 @@ MEMORY
 {
     EWRAM (rwx) : ORIGIN = 0x2000000, LENGTH = 256K
     IWRAM (rwx) : ORIGIN = 0x3000000, LENGTH = 32K
-    ROM    (rx) : ORIGIN = 0x8000000, LENGTH = 16M
+    ROM    (rx) : ORIGIN = 0x8000000, LENGTH = 32M
 }
 
 /* Modify the following load addresses as needed to make more room. Alternately, delete both the
@@ -21,11 +21,9 @@ SECTIONS {
     ewram 0x2000000 (NOLOAD) :
     ALIGN(4)
     {
-        *(__EWRAM_HEAP);
-
         INCLUDE "sym_ewram.ld"
-        src/*.o(ewram_data);        /**/
-        gflib/*.o(ewram_data);      /**/
+        src/*.o(ewram_data);
+        gflib/*.o(ewram_data);
 
         *libc.a:impure.o(.data);
         *libc.a:locale.o(.data);
