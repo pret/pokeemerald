@@ -158,7 +158,6 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_ACCURACY_DOWN_HIT]          = 1,
     [EFFECT_EVASION_DOWN_HIT]           = 1,
 //    [EFFECT_SKY_ATTACK]               = 4,
-    [EFFECT_CONFUSE_HIT]                = 1,
 //    [EFFECT_TWINEEDLE]                = 1,
     [EFFECT_VITAL_THROW]                = 1,
     [EFFECT_SUBSTITUTE]                 = 4,

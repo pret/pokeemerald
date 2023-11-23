@@ -76,7 +76,7 @@
 #define EFFECT_ACCURACY_DOWN_HIT            72
 #define EFFECT_EVASION_DOWN_HIT             73
 #define EFFECT_TWO_TURNS_ATTACK             74
-#define EFFECT_CONFUSE_HIT                  75
+#define EFFECT_UNUSED_75                    75
 #define EFFECT_VITAL_THROW                  76
 #define EFFECT_SUBSTITUTE                   77
 #define EFFECT_RECHARGE                     78
@@ -411,7 +411,7 @@
 #define EFFECT_MAKE_IT_RAIN                 405
 #define EFFECT_CORROSIVE_GAS                406
 #define EFFECT_POPULATION_BOMB              407
-#define EFFECT_MORTAL_SPIN                  408
+#define EFFECT_UNUSED_408                   408
 #define EFFECT_SALT_CURE                    409
 #define EFFECT_SYRUP_BOMB                   410
 #define EFFECT_IVY_CUDGEL                   411

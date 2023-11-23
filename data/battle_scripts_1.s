@@ -97,7 +97,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectAccuracyDownHit         @ EFFECT_ACCURACY_DOWN_HIT
 	.4byte BattleScript_EffectHit                     @ EFFECT_EVASION_DOWN_HIT
 	.4byte BattleScript_EffectTwoTurnsAttack          @ EFFECT_TWO_TURNS_ATTACK
-	.4byte BattleScript_EffectConfuseHit              @ EFFECT_CONFUSE_HIT
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_75
 	.4byte BattleScript_EffectHit                     @ EFFECT_VITAL_THROW
 	.4byte BattleScript_EffectSubstitute              @ EFFECT_SUBSTITUTE
 	.4byte BattleScript_EffectRecharge                @ EFFECT_RECHARGE
@@ -434,7 +434,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectMakeItRain              @ EFFECT_MAKE_IT_RAIN
 	.4byte BattleScript_EffectCorrosiveGas            @ EFFECT_CORROSIVE_GAS
 	.4byte BattleScript_EffectHit                     @ EFFECT_POPULATION_BOMB
-	.4byte BattleScript_EffectMortalSpin              @ EFFECT_MORTAL_SPIN
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_408
 	.4byte BattleScript_EffectSaltCure                @ EFFECT_SALT_CURE
 	.4byte BattleScript_EffectSyrupBomb               @ EFFECT_SYRUP_BOMB
 	.4byte BattleScript_EffectHit                     @ EFFECT_IVY_CUDGEL
@@ -492,15 +492,6 @@ BattleScript_HurtTarget_NoString:
 	datahpupdate BS_TARGET
 	tryfaintmon BS_TARGET
 	return
-
-BattleScript_EffectMortalSpin:
-	call BattleScript_EffectHit_Ret
-	rapidspinfree
-	setmoveeffect MOVE_EFFECT_POISON
-	seteffectwithchance
-	tryfaintmon BS_TARGET
-	moveendall
-	end
 
 BattleScript_EffectCorrosiveGas:
 	attackcanceler
