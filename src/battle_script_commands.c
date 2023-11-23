@@ -3624,22 +3624,44 @@ static void Cmd_seteffectwithchance(void)
     u8 i;
     u32 percentChance = CalcSecondaryEffectChance(gBattlerAttacker, gBattleMoves[gCurrentMove].secondaryEffectChance);
 
-    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-     && gBattleScripting.moveEffect)
+    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
     {
-        if (gBattleScripting.moveEffect & MOVE_EFFECT_CERTAIN
-         || percentChance >= 100)
+        if (gBattleScripting.moveEffect)
         {
-            gBattleScripting.moveEffect &= ~MOVE_EFFECT_CERTAIN;
-            SetMoveEffect(FALSE, MOVE_EFFECT_CERTAIN);
-        }
-        else if (RandomPercentage(RNG_SECONDARY_EFFECT, percentChance))
-        {
-            SetMoveEffect(FALSE, 0);
+            if (gBattleScripting.moveEffect & MOVE_EFFECT_CERTAIN
+            || percentChance >= 100)
+            {
+                gBattleScripting.moveEffect &= ~MOVE_EFFECT_CERTAIN;
+                SetMoveEffect(FALSE, MOVE_EFFECT_CERTAIN);
+            }
+            else if (RandomPercentage(RNG_SECONDARY_EFFECT, percentChance))
+            {
+                SetMoveEffect(FALSE, 0);
+            }
+            else
+            {
+                gBattlescriptCurrInstr = cmd->nextInstr;
+            }
         }
         else
         {
-            gBattlescriptCurrInstr = cmd->nextInstr;
+            bool32 effectHappened = FALSE;
+            for (i = gBattleMoves[gCurrentMove].numAdditionalEffects; i > 0; i--)
+            {
+                percentChance = CalcSecondaryEffectChance(
+                    gBattlerAttacker,
+                    gBattleMoves[gCurrentMove].additionalEffects[i - 1].chance
+                );
+                if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + i - 1, percentChance))
+                {
+                    effectHappened = TRUE;
+                    gBattleScripting.moveEffect = gBattleMoves[gCurrentMove].additionalEffects[i - 1].moveEffect
+                        | MOVE_EFFECT_AFFECTS_USER * (gBattleMoves[gCurrentMove].additionalEffects[i - 1].self);
+                    SetMoveEffect((percentChance == 0), gBattleMoves[gCurrentMove].additionalEffects[i - 1].chance == 100);
+                }
+            }
+            if (effectHappened == FALSE)
+                gBattlescriptCurrInstr = cmd->nextInstr;
         }
     }
     else
@@ -3649,22 +3671,6 @@ static void Cmd_seteffectwithchance(void)
 
     gBattleScripting.moveEffect = 0;
     gBattleScripting.multihitMoveEffect = 0;
-
-    // Set any move effects in this move's ADDITIONAL_EFFECTS
-    // In reverse array order so that effects are applied in correct order
-    for (i = gBattleMoves[gCurrentMove].numAdditionalEffects; i > 0; i--)
-    {
-        percentChance = CalcSecondaryEffectChance(
-            gBattlerAttacker,
-            gBattleMoves[gCurrentMove].additionalEffects[i - 1].chance
-        );
-        // Each effect needs its own RNG_SECONDARY_EFFECT tag
-        if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + i - 1, percentChance))
-        {
-            gBattleScripting.moveEffect = gBattleMoves[gCurrentMove].additionalEffects[i - 1].moveEffect;
-            SetMoveEffect((percentChance == 0), gBattleMoves[gCurrentMove].additionalEffects[i - 1].chance == 100);
-        }
-    }
 }
 
 static void Cmd_seteffectprimary(void)
