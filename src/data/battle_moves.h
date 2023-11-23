@@ -12172,7 +12172,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_JAW_LOCK] =
     {
-        .effect = EFFECT_JAW_LOCK,
+        .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_DARK,
         .accuracy = 100,
@@ -12184,6 +12184,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .zMoveEffect = Z_EFFECT_NONE,
         .makesContact = TRUE,
         .bitingMove = TRUE,
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT(MOVE_EFFECT_TRAP_BOTH)
+        )
     },
 
     [MOVE_STUFF_CHEEKS] =
@@ -13705,18 +13708,20 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_AXE_KICK] =
     {
-        .effect = EFFECT_AXE_KICK,
+        .effect = EFFECT_RECOIL_IF_MISS,
         .power = 120,
         .type = TYPE_FIGHTING,
         .accuracy = 90,
         .pp = 10,
-        .secondaryEffectChance = 30,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .split = SPLIT_PHYSICAL,
         .zMoveEffect = Z_EFFECT_NONE,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
+        ADDITIONAL_EFFECTS(
+            SECONDARY_EFFECT(MOVE_EFFECT_CONFUSION, 30)
+        )
     },
 
     [MOVE_LAST_RESPECTS] =
@@ -13802,7 +13807,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_SPIN_OUT] =
     {
-        .effect = EFFECT_SPIN_OUT,
+        .effect = EFFECT_HIT,
         .power = 100,
         .type = TYPE_STEEL,
         .accuracy = 100,
@@ -13813,6 +13818,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .split = SPLIT_PHYSICAL,
         .zMoveEffect = Z_EFFECT_NONE,
         .makesContact = TRUE,
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT_SELF(MOVE_EFFECT_SPD_MINUS_2)
+        )
     },
 
     [MOVE_POPULATION_BOMB] =

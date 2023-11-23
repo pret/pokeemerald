@@ -393,7 +393,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectPhotonGeyser            @ EFFECT_PHOTON_GEYSER
 	.4byte BattleScript_EffectShellSideArm            @ EFFECT_SHELL_SIDE_ARM
 	.4byte BattleScript_EffectHit                     @ EFFECT_TERRAIN_PULSE
-	.4byte BattleScript_EffectJawLock                 @ EFFECT_JAW_LOCK
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_367
 	.4byte BattleScript_EffectNoRetreat               @ EFFECT_NO_RETREAT
 	.4byte BattleScript_EffectTarShot                 @ EFFECT_TAR_SHOT
 	.4byte BattleScript_EffectPoltergeist             @ EFFECT_POLTERGEIST
@@ -428,9 +428,9 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_399
 	.4byte BattleScript_EffectHit                     @ EFFECT_INFERNAL_PARADE
 	.4byte BattleScript_EffectTakeHeart               @ EFFECT_TAKE_HEART
-	.4byte BattleScript_EffectAxeKick                 @ EFFECT_AXE_KICK
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_402
 	.4byte BattleScript_EffectHit                     @ EFFECT_COLLISION_COURSE
-	.4byte BattleScript_EffectSpinOut                 @ EFFECT_SPIN_OUT
+	.4byte BattleScript_EffectHit                     @ EFFECT_HIT_404
 	.4byte BattleScript_EffectMakeItRain              @ EFFECT_MAKE_IT_RAIN
 	.4byte BattleScript_EffectCorrosiveGas            @ EFFECT_CORROSIVE_GAS
 	.4byte BattleScript_EffectHit                     @ EFFECT_POPULATION_BOMB
@@ -528,14 +528,6 @@ BattleScript_MakeItRainContinuous:
 BattleScript_MakeItRainDoubles:
 	jumpifword CMP_NO_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING | HITMARKER_NO_PPDEDUCT, BattleScript_NoMoveEffect
 	goto BattleScript_MakeItRainContinuous
-
-BattleScript_EffectSpinOut::
-	setmoveeffect MOVE_EFFECT_SPD_MINUS_2 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
-	goto BattleScript_EffectHit
-
-BattleScript_EffectAxeKick::
-	setmoveeffect MOVE_EFFECT_CONFUSION
-	goto BattleScript_EffectRecoilIfMiss
 
 BattleScript_EffectTakeHeart::
 	attackcanceler
@@ -1116,10 +1108,6 @@ BattleScript_EffectNoRetreat:
 	printstring STRINGID_CANTESCAPEDUETOUSEDMOVE
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
-
-BattleScript_EffectJawLock:
-	setmoveeffect MOVE_EFFECT_TRAP_BOTH | MOVE_EFFECT_CERTAIN
-	goto BattleScript_EffectHit
 
 BattleScript_BothCanNoLongerEscape::
 	printstring STRINGID_BOTHCANNOLONGERESCAPE

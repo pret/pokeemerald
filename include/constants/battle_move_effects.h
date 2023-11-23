@@ -370,7 +370,7 @@
 #define EFFECT_PHOTON_GEYSER                364
 #define EFFECT_SHELL_SIDE_ARM               365
 #define EFFECT_TERRAIN_PULSE                366
-#define EFFECT_JAW_LOCK                     367
+#define EFFECT_UNUSED_367                   367
 #define EFFECT_NO_RETREAT                   368
 #define EFFECT_TAR_SHOT                     369
 #define EFFECT_POLTERGEIST                  370
@@ -405,9 +405,9 @@
 #define EFFECT_UNUSED_399                   399
 #define EFFECT_INFERNAL_PARADE              400
 #define EFFECT_TAKE_HEART                   401
-#define EFFECT_AXE_KICK                     402
+#define EFFECT_UNUSED_402                   402
 #define EFFECT_COLLISION_COURSE             403
-#define EFFECT_SPIN_OUT                     404
+#define EFFECT_HIT_404                      404
 #define EFFECT_MAKE_IT_RAIN                 405
 #define EFFECT_CORROSIVE_GAS                406
 #define EFFECT_POPULATION_BOMB              407

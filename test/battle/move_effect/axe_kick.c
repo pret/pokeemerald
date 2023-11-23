@@ -3,7 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_AXE_KICK].effect == EFFECT_AXE_KICK);
+    ASSUME(gBattleMoves[MOVE_AXE_KICK].effect == EFFECT_RECOIL_IF_MISS);
+    ASSUME(gBattleMoves[MOVE_AXE_KICK].additionalEffects[0].moveEffect == MOVE_EFFECT_CONFUSION);
 }
 
 SINGLE_BATTLE_TEST("Axe Kick confuses the target")

@@ -448,7 +448,6 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_PHOTON_GEYSER]              = 0, // TODO: Assign points
     [EFFECT_SHELL_SIDE_ARM]             = 0, // TODO: Assign points
     [EFFECT_TERRAIN_PULSE]              = 0, // TODO: Assign points
-    [EFFECT_JAW_LOCK]                   = 0, // TODO: Assign points
     [EFFECT_NO_RETREAT]                 = 0, // TODO: Assign points
     [EFFECT_TAR_SHOT]                   = 0, // TODO: Assign points
     [EFFECT_POLTERGEIST]                = 0, // TODO: Assign points
