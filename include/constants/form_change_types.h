@@ -11,6 +11,7 @@
 #define DAY    1
 #define NIGHT  2
 
+#define FUSION_TERMINATOR                       0xFF
 #define FORM_CHANGE_TERMINATOR                  0
 
 // Form change that activates when the specified item is given to or taken from the selected Pokémon.

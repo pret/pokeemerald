@@ -426,6 +426,19 @@ struct FormChange
     u16 param3;
 };
 
+struct Fusion
+{
+    u16 fusionStorageIndex;
+    u16 itemId;
+    u16 targetSpecies1;
+    u16 targetSpecies2;
+    u16 fusingIntoMon;
+    u16 fusionMove;
+    u16 unfuseForgetMove;
+};
+
+extern const struct Fusion *const gFusionTablePointers[NUM_SPECIES];
+
 #define NUM_UNOWN_FORMS 28
 
 #define GET_UNOWN_LETTER(personality) ((   \

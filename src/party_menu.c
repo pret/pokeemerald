@@ -247,7 +247,9 @@ void (*gItemUseCB)(u8, TaskFunc);
 
 static void ResetPartyMenu(void);
 static void CB2_InitPartyMenu(void);
+static void CB2_ReloadPartyMenu(void);
 static bool8 ShowPartyMenu(void);
+static bool8 ReloadPartyMenu(void);
 static void SetPartyMonsAllowedInMinigame(void);
 static void ExitPartyMenu(void);
 static bool8 AllocPartyMenuBg(void);
@@ -552,6 +554,25 @@ static void InitPartyMenu(u8 menuType, u8 layout, u8 partyAction, bool8 keepCurs
     }
 }
 
+static void RefreshPartyMenu(void) //Refreshes the party menu without restarting tasks
+{
+    u16 i;
+
+    sPartyMenuInternal->exitCallback = NULL;
+    sPartyMenuInternal->lastSelectedSlot = 0;
+    sPartyMenuInternal->spriteIdConfirmPokeball = 0x7F;
+    sPartyMenuInternal->spriteIdCancelPokeball = 0x7F;
+
+    for (i = 0; i < ARRAY_COUNT(sPartyMenuInternal->data); i++)
+        sPartyMenuInternal->data[i] = 0;
+    for (i = 0; i < ARRAY_COUNT(sPartyMenuInternal->windowId); i++)
+        sPartyMenuInternal->windowId[i] = WINDOW_NONE;
+
+    gTextFlags.autoScroll = 0;
+    CalculatePlayerPartyCount();
+    SetMainCallback2(CB2_ReloadPartyMenu);
+}
+
 static void CB2_UpdatePartyMenu(void)
 {
     RunTasks();
@@ -573,6 +594,15 @@ static void CB2_InitPartyMenu(void)
     while (TRUE)
     {
         if (MenuHelpers_ShouldWaitForLinkRecv() == TRUE || ShowPartyMenu() == TRUE || MenuHelpers_IsLinkActive() == TRUE)
+            break;
+    }
+}
+
+static void CB2_ReloadPartyMenu(void)
+{
+    while (TRUE)
+    {
+        if (MenuHelpers_ShouldWaitForLinkRecv() == TRUE || ReloadPartyMenu() == TRUE || MenuHelpers_IsLinkActive() == TRUE)
             break;
     }
 }
@@ -691,6 +721,119 @@ static bool8 ShowPartyMenu(void)
         break;
     case 22:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        gMain.state++;
+        break;
+    default:
+        SetVBlankCallback(VBlankCB_PartyMenu);
+        SetMainCallback2(CB2_UpdatePartyMenu);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+static bool8 ReloadPartyMenu(void)
+{
+    switch (gMain.state)
+    {
+    case 0:
+        SetVBlankHBlankCallbacksToNull();
+        ClearScheduledBgCopiesToVram();
+        gMain.state++;
+        break;
+    case 1:
+        ScanlineEffect_Stop();
+        gMain.state++;
+        break;
+    case 2:
+        ResetPaletteFade();
+        gPaletteFade.bufferTransferDisabled = TRUE;
+        gMain.state++;
+        break;
+    case 3:
+        ResetSpriteData();
+        gMain.state++;
+        break;
+    case 4:
+        FreeAllSpritePalettes();
+        gMain.state++;
+        break;
+    case 5:
+        SetPartyMonsAllowedInMinigame();
+        gMain.state++;
+        break;
+    case 6:
+        if (!AllocPartyMenuBg())
+        {
+            ExitPartyMenu();
+            return TRUE;
+        }
+        else
+        {
+            sPartyMenuInternal->data[0] = 0;
+            gMain.state++;
+        }
+        break;
+    case 7:
+        if (AllocPartyMenuBgGfx())
+            gMain.state++;
+        break;
+    case 8:
+        InitPartyMenuWindows(gPartyMenu.layout);
+        gMain.state++;
+        break;
+    case 9:
+        InitPartyMenuBoxes(gPartyMenu.layout);
+        sPartyMenuInternal->data[0] = 0;
+        gMain.state++;
+        break;
+    case 10:
+        LoadHeldItemIcons();
+        gMain.state++;
+        break;
+    case 11:
+        LoadPartyMenuPokeballGfx();
+        gMain.state++;
+        break;
+    case 12:
+        LoadPartyMenuAilmentGfx();
+        gMain.state++;
+        break;
+    case 13:
+        LoadMonIconPalettes();
+        gMain.state++;
+        break;
+    case 14:
+        if (CreatePartyMonSpritesLoop())
+        {
+            sPartyMenuInternal->data[0] = 0;
+            gMain.state++;
+        }
+        break;
+    case 15:
+        if (RenderPartyMenuBoxes())
+        {
+            sPartyMenuInternal->data[0] = 0;
+            gMain.state++;
+        }
+        break;
+    case 16:
+        CreateCancelConfirmPokeballSprites();
+        gMain.state++;
+        break;
+    case 17:
+        CreateCancelConfirmWindows(sPartyMenuInternal->chooseHalf);
+        gMain.state++;
+        break;
+    case 18:
+        gMain.state++;
+        break;
+    case 19:
+        BlendPalettes(PALETTES_ALL, 16, RGB_WHITEALPHA);
+        gPaletteFade.bufferTransferDisabled = FALSE;
+        gMain.state++;
+        break;
+    case 20:
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITEALPHA);
         gMain.state++;
         break;
     default:
@@ -5707,10 +5850,43 @@ void ItemUseCB_EvolutionStone(u8 taskId, TaskFunc task)
     }
 }
 
+#define FUSE_MON        1
+#define UNFUSE_MON      2
+#define SECOND_FUSE_MON 3
+
 #define tState          data[0]
 #define tTargetSpecies  data[1]
 #define tAnimWait       data[2]
 #define tNextFunc       3
+
+#define fusionType           data[7]
+#define firstFusion          data[8]
+#define firstFusionSlot      data[9]
+#define fusionResult         data[10]
+#define secondFusionSlot     data[11]
+#define unfuseSecondMon      data[12]
+#define moveToLearn          data[13]
+#define forgetMove           data[14]
+#define storageIndex         data[15]
+
+static void Task_TryItemUseFusionChange(u8 taskId);
+static void SpriteCB_FormChangeIconMosaic(struct Sprite *sprite);
+
+u8 IsFusionMon(u16 species)
+{
+    u16 i;
+    const struct Fusion *itemFusion = gFusionTablePointers[species];
+    for (i = 0; itemFusion[i].fusionStorageIndex != FUSION_TERMINATOR; i++)
+    {
+        if (itemFusion[i].fusingIntoMon == species)
+            return UNFUSE_MON;
+        else if (itemFusion[i].targetSpecies1 == species)
+            return FUSE_MON;
+        else if (itemFusion[i].targetSpecies2 == species)
+            return SECOND_FUSE_MON;
+    }
+    return FALSE;
+}
 
 void FormChangeTeachMove(u8 taskId, u32 move, u32 slot)
 {
@@ -5771,6 +5947,250 @@ bool32 DoesMonHaveAnyMoves(struct Pokemon *mon)
     return FALSE;
 }
 
+bool32 TryItemUseFusionChange(u8 taskId, TaskFunc task)
+{
+    u16 targetSpecies = gTasks[taskId].fusionResult;
+    s8 *slotPtr = GetCurrentPartySlotPtr();
+    *slotPtr = gTasks[taskId].firstFusionSlot;
+    if (gTasks[taskId].fusionType == FUSE_MON)
+        AnimatePartySlot(gTasks[taskId].secondFusionSlot, 0);
+    AnimatePartySlot(*slotPtr, 1);
+
+    if (targetSpecies != SPECIES_NONE)
+    {
+        gPartyMenuUseExitCallback = TRUE;
+        SetWordTaskArg(taskId, tNextFunc, (u32)task);
+        gTasks[taskId].func = Task_TryItemUseFusionChange;
+        gTasks[taskId].tState = 0;
+        gTasks[taskId].tTargetSpecies = targetSpecies;
+        gTasks[taskId].tAnimWait = 0;
+        return TRUE;
+    }
+    else
+    {
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
+        return FALSE;
+    }
+}
+
+static void Task_TryItemUseFusionChange(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gTasks[taskId].firstFusionSlot];
+    struct Sprite *icon = &gSprites[sPartyMenuBoxes[gTasks[taskId].firstFusionSlot].monSpriteId];
+    struct Pokemon *mon2;
+    struct Sprite *icon2 = &gSprites[sPartyMenuBoxes[gTasks[taskId].secondFusionSlot].monSpriteId];
+    u16 targetSpecies;
+
+    switch (gTasks[taskId].tState)
+    {
+    case 0:
+        if (gTasks[taskId].fusionType == FUSE_MON)
+        {
+            mon2 = &gPlayerParty[gTasks[taskId].secondFusionSlot];
+            CopyMon(&gPokemonStoragePtr->fusions[gTasks[taskId].storageIndex], mon2, sizeof(*mon2));
+            ZeroMonData(&gPlayerParty[gTasks[taskId].secondFusionSlot]);
+        }
+        else
+        {
+            mon2 = &gPokemonStoragePtr->fusions[gTasks[taskId].storageIndex];
+            GiveMonToPlayer(mon2);
+            ZeroMonData(&gPokemonStoragePtr->fusions[gTasks[taskId].storageIndex]);
+        }
+        targetSpecies = gTasks[taskId].tTargetSpecies;
+        SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
+        CalculateMonStats(mon);
+        CompactPartySlots();
+        CalculatePlayerPartyCount();
+        gTasks[taskId].tState++;
+        PlaySE(SE_M_TELEPORT);
+        break;
+    case 1:
+        targetSpecies = gTasks[taskId].tTargetSpecies;
+        if (gTasks[taskId].tAnimWait == 0)
+        {
+            icon->oam.mosaic = TRUE;
+            icon->data[0] = 10;
+            icon->data[1] = 1;
+            icon->data[2] = taskId;
+            icon->callback = SpriteCB_FormChangeIconMosaic;
+            SetGpuReg(REG_OFFSET_MOSAIC, (icon->data[0] << 12) | (icon->data[1] << 8));
+            if (gTasks[taskId].fusionType == FUSE_MON)
+            {
+                icon2->oam.mosaic = TRUE;
+                icon2->data[0] = 10;
+                icon2->data[1] = 1;
+                icon2->data[2] = taskId;
+                icon2->callback = SpriteCB_FormChangeIconMosaic;
+                SetGpuReg(REG_OFFSET_MOSAIC, (icon2->data[0] << 12) | (icon2->data[1] << 8));
+            }
+        }
+
+        if (++gTasks[taskId].tAnimWait == 60)
+        {
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITEALPHA);
+            gTasks[taskId].tState++;
+        }
+        break;
+    case 2:
+        if (gPaletteFade.active)
+            break;
+        if (gTasks[taskId].fusionType == FUSE_MON && gTasks[taskId].firstFusionSlot > gTasks[taskId].secondFusionSlot)
+        {
+            gTasks[taskId].firstFusionSlot--;
+            gPartyMenu.slotId--;
+        }
+        RefreshPartyMenu();
+        gTasks[taskId].tState++;
+        break;
+    case 3:
+        BeginNormalPaletteFade(PALETTES_ALL, 16, 0, 0, RGB_WHITEALPHA);
+        gTasks[taskId].tState++;
+        break;
+    case 4:
+        targetSpecies = gTasks[taskId].tTargetSpecies;
+        PlayCry_Normal(targetSpecies, 0);
+        gTasks[taskId].tState++;
+        break;
+    case 5:
+        if (IsCryFinished())
+        {
+            GetMonNickname(mon, gStringVar1);
+            StringExpandPlaceholders(gStringVar4, gText_PkmnTransformed);
+            DisplayPartyMenuMessage(gStringVar4, FALSE);
+            ScheduleBgCopyTilemapToVram(2);
+            gTasks[taskId].tState++;
+        }
+        break;
+    case 6:
+        if (!IsPartyMenuTextPrinterActive())
+        {
+            if (gTasks[taskId].moveToLearn != 0)
+            {
+                if (gTasks[taskId].fusionType == FUSE_MON)
+                    FormChangeTeachMove(taskId, gTasks[taskId].moveToLearn, gTasks[taskId].firstFusionSlot);
+                else
+                {
+                    DeleteMove(mon, gTasks[taskId].forgetMove);
+                    if (!DoesMonHaveAnyMoves(mon))
+                        FormChangeTeachMove(taskId, gTasks[taskId].moveToLearn, gTasks[taskId].firstFusionSlot);
+                }
+            }
+            gTasks[taskId].tState++;
+        }
+        break;
+    case 7:
+        gTasks[taskId].func = (void *)GetWordTaskArg(taskId, tNextFunc);
+        break;
+    }
+}
+
+void ItemUseCB_Fusion(u8 taskId, TaskFunc taskFunc)
+{
+    u16 i;
+    struct Task *task = &gTasks[taskId];
+    u16 species = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES);
+    const struct Fusion *itemFusion = gFusionTablePointers[species];
+
+    PlaySE(SE_SELECT);
+    switch (IsFusionMon(species))
+    {
+        case FALSE: // Cancel if Not a Fuse Mon
+            break;
+        case UNFUSE_MON:
+            if (task->fusionType == FUSE_MON) // Cancel if An already Fused Mon Is Chosen For The Second Fusion Mon
+                break;
+            if (gPlayerPartyCount == PARTY_SIZE)
+            {
+                gPartyMenuUseExitCallback = FALSE;
+                DisplayPartyMenuMessage(gText_YourPartysFull, TRUE);
+                ScheduleBgCopyTilemapToVram(2);
+                task->func = taskFunc;
+                return;
+            }
+            for (i = 0; itemFusion[i].fusionStorageIndex != FUSION_TERMINATOR; i++) // Loops through fusion table and checks if the mon can be unfused
+            {
+                if (gPokemonStoragePtr->fusions[itemFusion[i].fusionStorageIndex].level == 0)
+                    continue;
+                if (itemFusion[i].itemId == gSpecialVar_ItemId && GetMonData(&gPokemonStoragePtr->fusions[itemFusion[i].fusionStorageIndex], MON_DATA_SPECIES) == itemFusion[i].targetSpecies2)
+                {
+                    task->fusionType = UNFUSE_MON;
+                    task->firstFusion = species;
+                    task->firstFusionSlot = gPartyMenu.slotId;
+                    task->storageIndex = itemFusion[i].fusionStorageIndex;
+                    task->fusionResult = itemFusion[i].targetSpecies1;
+                    task->unfuseSecondMon = itemFusion[i].targetSpecies2;
+                    task->moveToLearn = itemFusion[i].unfuseForgetMove;
+                    task->forgetMove = itemFusion[i].fusionMove;
+                    TryItemUseFusionChange(taskId, taskFunc);
+                    return;
+                }
+            }
+            break;
+        case FUSE_MON:
+            if (task->fusionType == FUSE_MON) // Cancel If Second Mon is Another First Fusion Mon
+                break;
+            for (i = 0; itemFusion[i].fusionStorageIndex != FUSION_TERMINATOR; i++) // Run through the Fusion table for each species and check if the item matches one of the entries
+            {
+                if (itemFusion[i].itemId == gSpecialVar_ItemId)
+                {
+                    task->fusionType = FUSE_MON;
+                    task->firstFusion = species;
+                    task->firstFusionSlot = gPartyMenu.slotId;
+                    task->storageIndex = itemFusion[i].fusionStorageIndex;
+                    task->func = Task_HandleChooseMonInput;
+                    gPartyMenuUseExitCallback = FALSE;
+                    sPartyMenuInternal->exitCallback = NULL;
+                    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+                    DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_SECOND_FUSION);
+                    return;
+                }
+            }
+            break;
+        case SECOND_FUSE_MON:
+            if (task->fusionType != FUSE_MON) // Cancel if Secondary Fusion Mon Chosen First
+                break;
+            for (i = 0; itemFusion[i].fusionStorageIndex != FUSION_TERMINATOR; i++) // run through fusion table and check if the fusion works
+            {
+                if (gPokemonStoragePtr->fusions[itemFusion[i].fusionStorageIndex].level != 0)
+                    continue;
+                if (itemFusion[i].itemId == gSpecialVar_ItemId && itemFusion[i].targetSpecies1 == task->firstFusion)
+                {
+                    task->storageIndex = itemFusion[i].fusionStorageIndex;
+                    task->fusionResult = itemFusion[i].fusingIntoMon;
+                    task->secondFusionSlot = gPartyMenu.slotId;
+                    task->moveToLearn = itemFusion[i].fusionMove;
+                    // Start Fusion
+                    TryItemUseFusionChange(taskId, taskFunc);
+                    return;
+                }
+            }
+            break;
+    }
+    // No Effect Exit
+    gPartyMenuUseExitCallback = FALSE;
+    DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+    ScheduleBgCopyTilemapToVram(2);
+    task->func = taskFunc;
+    return;
+}
+
+#undef FUSE_MON
+#undef UNFUSE_MON
+#undef SECOND_FUSE_MON
+
+#undef fusionType
+#undef firstFusion
+#undef firstFusionSlot
+#undef fusionResult
+#undef secondFusionSlot
+#undef unfuseSecondMon
+#undef moveToLearn
+#undef forgetMove
+#undef storageIndex
 
 static void SpriteCB_FormChangeIconMosaic(struct Sprite *sprite)
 {
