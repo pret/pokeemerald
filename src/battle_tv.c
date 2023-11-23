@@ -88,11 +88,8 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
 {
     [EFFECT_HIT]                        = 1,
     [EFFECT_SLEEP]                      = 1,
-    [EFFECT_POISON_HIT]                 = 1,
     [EFFECT_ABSORB]                     = 4,
-    [EFFECT_BURN_HIT]                   = 1,
     [EFFECT_FREEZE_HIT]                 = 1,
-    // [EFFECT_PARALYZE_HIT]               = 1, // same as EFFECT_HIT so who cares
     [EFFECT_EXPLOSION]                  = 0,
     [EFFECT_DREAM_EATER]                = 5,
     [EFFECT_MIRROR_MOVE]                = 1,

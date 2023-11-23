@@ -3,11 +3,11 @@
 
 #define EFFECT_HIT                          0
 #define EFFECT_SLEEP                        1
-#define EFFECT_POISON_HIT                   2
+#define EFFECT_UNUSED_2                     2
 #define EFFECT_ABSORB                       3
-#define EFFECT_BURN_HIT                     4
+#define EFFECT_UNUSED_4                     4
 #define EFFECT_FREEZE_HIT                   5
-#define EFFECT_PARALYZE_HIT                 6
+#define EFFECT_UNUSED_6                     6
 #define EFFECT_EXPLOSION                    7
 #define EFFECT_DREAM_EATER                  8
 #define EFFECT_MIRROR_MOVE                  9

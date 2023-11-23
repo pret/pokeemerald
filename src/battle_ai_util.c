@@ -846,7 +846,6 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, u32 move, s3
 
     switch (gBattleMoves[move].effect)
     {
-    case EFFECT_POISON_HIT:
     case EFFECT_POISON_FANG:
         if (AI_CanPoison(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE))
             return TRUE;
@@ -928,8 +927,9 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, u32 move, s3
 
         switch (gBattleMoves[move].additionalEffects[i].moveEffect)
         {
-            case MOVE_EFFECT_PARALYSIS:
-                if (AI_CanParalyze(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE))
+            case MOVE_EFFECT_POISON:
+            case MOVE_EFFECT_TOXIC:
+                if (AI_CanPoison(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE))
                     return TRUE;
                 break;
             case MOVE_EFFECT_BURN:
@@ -939,6 +939,10 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, u32 move, s3
             case MOVE_EFFECT_FREEZE:
             case MOVE_EFFECT_FROSTBITE:
                 if (AI_CanGetFrostbite(battlerDef, abilityDef))
+                    return TRUE;
+                break;
+            case MOVE_EFFECT_PARALYSIS:
+                if (AI_CanParalyze(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE))
                     return TRUE;
                 break;
             case MOVE_EFFECT_FLINCH:

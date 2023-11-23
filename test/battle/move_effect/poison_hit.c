@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_POISON_STING].effect == EFFECT_POISON_HIT);
-    ASSUME(gBattleMoves[MOVE_TWINEEDLE].effect == EFFECT_POISON_HIT);
+    ASSUME(gBattleMoves[MOVE_POISON_STING].additionalEffects[0].moveEffect == MOVE_EFFECT_POISON);
+    ASSUME(gBattleMoves[MOVE_TWINEEDLE].additionalEffects[0].moveEffect == MOVE_EFFECT_POISON);
 }
 
 SINGLE_BATTLE_TEST("Poison Sting inflicts poison")

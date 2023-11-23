@@ -24,11 +24,11 @@
 gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_HIT
 	.4byte BattleScript_EffectSleep                   @ EFFECT_SLEEP
-	.4byte BattleScript_EffectPoisonHit               @ EFFECT_POISON_HIT
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_2
 	.4byte BattleScript_EffectAbsorb                  @ EFFECT_ABSORB
-	.4byte BattleScript_EffectHit                     @ EFFECT_BURN_HIT
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_4
 	.4byte BattleScript_EffectFreezeHit               @ EFFECT_FREEZE_HIT
-	.4byte BattleScript_EffectParalyzeHit             @ EFFECT_PARALYZE_HIT
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_6
 	.4byte BattleScript_EffectExplosion               @ EFFECT_EXPLOSION
 	.4byte BattleScript_EffectDreamEater              @ EFFECT_DREAM_EATER
 	.4byte BattleScript_EffectMirrorMove              @ EFFECT_MIRROR_MOVE
@@ -421,7 +421,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_HYDRO_STEAM
 	.4byte BattleScript_EffectHitSetEntryHazard       @ EFFECT_HIT_SET_ENTRY_HAZARD
 	.4byte BattleScript_EffectDireClaw                @ EFFECT_DIRE_CLAW
-	.4byte BattleScript_EffectBarbBarrage             @ EFFECT_BARB_BARRAGE
+	.4byte BattleScript_EffectHit                     @ EFFECT_BARB_BARRAGE
 	.4byte BattleScript_EffectRevivalBlessing         @ EFFECT_REVIVAL_BLESSING
 	.4byte BattleScript_EffectFrostbiteHit            @ EFFECT_FROSTBITE_HIT
 	.4byte BattleScript_EffectSnow                    @ EFFECT_SNOWSCAPE
@@ -3343,11 +3343,6 @@ BattleScript_CantMakeAsleep::
 	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectBarbBarrage:
-BattleScript_EffectPoisonHit:
-	setmoveeffect MOVE_EFFECT_POISON
-	goto BattleScript_EffectHit
-
 BattleScript_EffectAbsorb::
 	call BattleScript_EffectHit_Ret
 	jumpifstatus3 BS_ATTACKER, STATUS3_HEAL_BLOCK, BattleScript_AbsorbHealBlock
@@ -3383,10 +3378,6 @@ BattleScript_EffectSleepHit::
 
 BattleScript_EffectFreezeHit::
 	setmoveeffect MOVE_EFFECT_FREEZE
-	goto BattleScript_EffectHit
-
-BattleScript_EffectParalyzeHit::
-	setmoveeffect MOVE_EFFECT_PARALYSIS
 	goto BattleScript_EffectHit
 
 BattleScript_EffectExplosion_AnimDmgRet:
