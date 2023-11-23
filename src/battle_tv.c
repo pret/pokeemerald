@@ -117,7 +117,6 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_ROAR]                       = 5,
     [EFFECT_MULTI_HIT]                  = 1,
     [EFFECT_CONVERSION]                 = 3,
-    [EFFECT_FLINCH_HIT]                 = 1,
     [EFFECT_RESTORE_HP]                 = 3,
     [EFFECT_TOXIC]                      = 5,
     [EFFECT_PAY_DAY]                    = 1,

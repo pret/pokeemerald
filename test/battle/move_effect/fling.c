@@ -206,12 +206,12 @@ SINGLE_BATTLE_TEST("Fling applies special effects when throwing specific Items")
 {
     u16 item, effect;
 
-    PARAMETRIZE {item = ITEM_FLAME_ORB; effect = EFFECT_WILL_O_WISP; }
-    PARAMETRIZE {item = ITEM_TOXIC_ORB; effect = EFFECT_TOXIC; }
-    PARAMETRIZE {item = ITEM_POISON_BARB; effect = EFFECT_POISON; }
-    PARAMETRIZE {item = ITEM_LIGHT_BALL; effect = EFFECT_PARALYZE; }
-    PARAMETRIZE {item = ITEM_RAZOR_FANG; effect = EFFECT_FLINCH_HIT; }
-    PARAMETRIZE {item = ITEM_KINGS_ROCK; effect = EFFECT_FLINCH_HIT; }
+    PARAMETRIZE {item = ITEM_FLAME_ORB; effect = MOVE_EFFECT_BURN; }
+    PARAMETRIZE {item = ITEM_TOXIC_ORB; effect = MOVE_EFFECT_TOXIC; }
+    PARAMETRIZE {item = ITEM_POISON_BARB; effect = MOVE_EFFECT_POISON; }
+    PARAMETRIZE {item = ITEM_LIGHT_BALL; effect = MOVE_EFFECT_PARALYSIS; }
+    PARAMETRIZE {item = ITEM_RAZOR_FANG; effect = MOVE_EFFECT_FLINCH; }
+    PARAMETRIZE {item = ITEM_KINGS_ROCK; effect = MOVE_EFFECT_FLINCH; }
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(item); }
@@ -224,23 +224,23 @@ SINGLE_BATTLE_TEST("Fling applies special effects when throwing specific Items")
         HP_BAR(opponent);
         switch (effect)
         {
-        case EFFECT_WILL_O_WISP:
+        case MOVE_EFFECT_BURN:
             MESSAGE("Foe Wobbuffet was burned!");
             STATUS_ICON(opponent, STATUS1_BURN);
             break;
-        case EFFECT_PARALYZE:
+        case MOVE_EFFECT_PARALYSIS:
             MESSAGE("Foe Wobbuffet is paralyzed! It may be unable to move!");
             STATUS_ICON(opponent, STATUS1_PARALYSIS);
             break;
-        case EFFECT_POISON:
+        case MOVE_EFFECT_POISON:
             MESSAGE("Foe Wobbuffet was poisoned!");
             STATUS_ICON(opponent, STATUS1_POISON);
             break;
-        case EFFECT_TOXIC:
+        case MOVE_EFFECT_TOXIC:
             MESSAGE("Foe Wobbuffet is badly poisoned!");
             STATUS_ICON(opponent, STATUS1_TOXIC_POISON);
             break;
-        case EFFECT_FLINCH_HIT:
+        case MOVE_EFFECT_FLINCH:
             MESSAGE("Foe Wobbuffet flinched!");
             break;
         }

@@ -1962,14 +1962,30 @@ bool32 HasMoveWithType(u32 battler, u32 type)
     return FALSE;
 }
 
-bool32 HasMoveEffect(u32 battlerId, u32 moveEffect)
+bool32 HasMoveEffect(u32 battlerId, u32 effect)
 {
     s32 i;
     u16 *moves = GetMovesArray(battlerId);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && gBattleMoves[moves[i]].effect == moveEffect)
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE
+            && gBattleMoves[moves[i]].effect == effect)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool32 HasMoveWithMoveEffect(u32 battlerId, u32 moveEffect, u32 effectHitOnly)
+{
+    s32 i;
+    u16 *moves = GetMovesArray(battlerId);
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE
+            && MoveHasMoveEffect(moves[i], moveEffect, effectHitOnly))
             return TRUE;
     }
 
@@ -3693,7 +3709,7 @@ void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
 
         if ((defSpeed >= atkSpeed && defSpeed / 2 < atkSpeed) // You'll go first after paralyzing foe
           || HasMoveEffect(battlerAtk, EFFECT_HEX)
-          || HasMoveEffect(battlerAtk, EFFECT_FLINCH_HIT)
+          || HasMoveWithMoveEffect(battlerAtk, MOVE_EFFECT_FLINCH, TRUE) // filter out Fake Out
           || gBattleMons[battlerDef].status2 & STATUS2_INFATUATION
           || gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
             ADJUST_SCORE_PTR(4);
@@ -3733,7 +3749,7 @@ void IncreaseConfusionScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score
     {
         if (gBattleMons[battlerDef].status1 & STATUS1_PARALYSIS
           || gBattleMons[battlerDef].status2 & STATUS2_INFATUATION
-          || (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE && HasMoveEffect(battlerAtk, EFFECT_FLINCH_HIT)))
+          || (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE && HasMoveWithMoveEffect(battlerAtk, MOVE_EFFECT_FLINCH, TRUE)))
             ADJUST_SCORE_PTR(3);
         else
             ADJUST_SCORE_PTR(2);

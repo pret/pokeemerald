@@ -3657,7 +3657,7 @@ static void Cmd_seteffectwithchance(void)
 
                 SetMoveEffect(
                     percentChance == 0, // a primary effect
-                    percentChance == 100 // certain to happen
+                    percentChance >= 100 // certain to happen
                 );
             }
             else

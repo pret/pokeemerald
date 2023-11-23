@@ -3532,9 +3532,6 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         if (!IS_BATTLER_OF_TYPE(battlerAtk, gBattleMoves[gBattleMons[battlerAtk].moves[0]].type))
             ADJUST_SCORE(1);
         break;
-    case EFFECT_FLINCH_HIT:
-        score += ShouldTryToFlinch(battlerAtk, battlerDef, aiData->abilities[battlerAtk], aiData->abilities[battlerDef], move);
-        break;
     case EFFECT_SWALLOW:
         if (gDisableStructs[battlerAtk].stockpileCounter == 0)
         {
@@ -4881,11 +4878,21 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         break;
     } // move effect checks
 
-    // check move additional effects that are certain/100% likely to happen
+    // check move additional effects that are likely to happen
     for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
     {
-        if (gBattleMoves[move].additionalEffects[i].self
-         || gBattleMoves[move].additionalEffects[i].chance % 100)
+        if (gBattleMoves[move].additionalEffects[i].self)
+            continue;
+
+        switch (gBattleMoves[move].additionalEffects[i].moveEffect)
+        {
+            case MOVE_EFFECT_FLINCH:
+                score += ShouldTryToFlinch(battlerAtk, battlerDef, aiData->abilities[battlerAtk], aiData->abilities[battlerDef], move);
+                break;
+        }
+
+        // Only consider the below if they're certain to happen
+        if (gBattleMoves[move].additionalEffects[i].chance % 100)
             continue;
 
         switch (gBattleMoves[move].additionalEffects[i].moveEffect)
