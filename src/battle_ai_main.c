@@ -850,7 +850,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                     RETURN_SCORE_MINUS(10);
                 break;
             case ABILITY_FLOWER_VEIL:
-                if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_GRASS) && (IsNonVolatileStatusMoveEffect(moveEffect) || IsStatLoweringMoveEffect(moveEffect)))
+                if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_GRASS) && (IsNonVolatileStatusMoveEffect(moveEffect) || IsStatLoweringEffect(moveEffect)))
                     RETURN_SCORE_MINUS(10);
                 break;
             case ABILITY_MAGIC_BOUNCE:
@@ -858,13 +858,13 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                     RETURN_SCORE_MINUS(20);
                 break;
             case ABILITY_CONTRARY:
-                if (IsStatLoweringMoveEffect(moveEffect))
+                if (IsStatLoweringEffect(moveEffect))
                     RETURN_SCORE_MINUS(20);
                 break;
             case ABILITY_CLEAR_BODY:
             case ABILITY_FULL_METAL_BODY:
             case ABILITY_WHITE_SMOKE:
-                if (IsStatLoweringMoveEffect(moveEffect))
+                if (IsStatLoweringEffect(moveEffect))
                     RETURN_SCORE_MINUS(10);
                 break;
             case ABILITY_HYPER_CUTTER:
@@ -886,7 +886,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 break;
             case ABILITY_DEFIANT:
             case ABILITY_COMPETITIVE:
-                if (IsStatLoweringMoveEffect(moveEffect) && !IS_TARGETING_PARTNER(battlerAtk, battlerDef))
+                if (IsStatLoweringEffect(moveEffect) && !IS_TARGETING_PARTNER(battlerAtk, battlerDef))
                     RETURN_SCORE_MINUS(8);
                 break;
             case ABILITY_COMATOSE:
@@ -927,7 +927,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                         RETURN_SCORE_MINUS(20);
                     break;
                 case ABILITY_FLOWER_VEIL:
-                    if ((IS_BATTLER_OF_TYPE(battlerDef, TYPE_GRASS)) && (IsNonVolatileStatusMoveEffect(moveEffect) || IsStatLoweringMoveEffect(moveEffect)))
+                    if ((IS_BATTLER_OF_TYPE(battlerDef, TYPE_GRASS)) && (IsNonVolatileStatusMoveEffect(moveEffect) || IsStatLoweringEffect(moveEffect)))
                         RETURN_SCORE_MINUS(10);
                     break;
                 case ABILITY_AROMA_VEIL:

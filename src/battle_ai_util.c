@@ -1422,30 +1422,6 @@ bool32 IsConfusionMoveEffect(u32 moveEffect)
     }
 }
 
-bool32 IsStatLoweringMoveEffect(u32 moveEffect)
-{
-    switch (moveEffect)
-    {
-    case EFFECT_ATTACK_DOWN:
-    case EFFECT_DEFENSE_DOWN:
-    case EFFECT_SPEED_DOWN:
-    case EFFECT_SPECIAL_ATTACK_DOWN:
-    case EFFECT_SPECIAL_DEFENSE_DOWN:
-    case EFFECT_ACCURACY_DOWN:
-    case EFFECT_EVASION_DOWN:
-    case EFFECT_ATTACK_DOWN_2:
-    case EFFECT_DEFENSE_DOWN_2:
-    case EFFECT_SPEED_DOWN_2:
-    case EFFECT_SPECIAL_ATTACK_DOWN_2:
-    case EFFECT_SPECIAL_DEFENSE_DOWN_2:
-    case EFFECT_ACCURACY_DOWN_2:
-    case EFFECT_EVASION_DOWN_2:
-        return TRUE;
-    default:
-        return FALSE;
-    }
-}
-
 bool32 IsHazardMoveEffect(u32 moveEffect)
 {
     switch (moveEffect)
@@ -2055,6 +2031,8 @@ bool32 IsHealingMoveEffect(u32 effect)
     case EFFECT_HEAL_PULSE:
     case EFFECT_REST:
     case EFFECT_JUNGLE_HEALING:
+    case EFFECT_ABSORB:
+    case EFFECT_DREAM_EATER:
         return TRUE;
     default:
         return FALSE;
