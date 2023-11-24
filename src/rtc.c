@@ -304,11 +304,11 @@ bool8 IsBetweenHours(s32 hours, s32 begin, s32 end)
 u8 GetTimeOfDay(void)
 {
     RtcCalcLocalTime();
-    if (IsBetweenHours(gLocalTime.hours, MORNING_EVO_HOUR_BEGIN, MORNING_EVO_HOUR_END))
+    if (IsBetweenHours(gLocalTime.hours, MORNING_HOUR_BEGIN, MORNING_HOUR_END))
         return TIME_MORNING;
-    else if (IsBetweenHours(gLocalTime.hours, DUSK_EVO_HOUR_BEGIN, DUSK_EVO_HOUR_END))
-        return TIME_DUSK;
-    else if (IsBetweenHours(gLocalTime.hours, NIGHT_EVO_HOUR_BEGIN, NIGHT_EVO_HOUR_END))
+    else if (IsBetweenHours(gLocalTime.hours, EVENING_HOUR_BEGIN, EVENING_HOUR_END))
+        return TIME_EVENING;
+    else if (IsBetweenHours(gLocalTime.hours, NIGHT_HOUR_BEGIN, NIGHT_HOUR_END))
         return TIME_NIGHT;
     return TIME_DAY;
 }
