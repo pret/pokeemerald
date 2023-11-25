@@ -5876,6 +5876,8 @@ u8 IsFusionMon(u16 species)
 {
     u16 i;
     const struct Fusion *itemFusion = gFusionTablePointers[species];
+    if (itemFusion == NULL)
+        return FALSE;
     for (i = 0; itemFusion[i].fusionStorageIndex != FUSION_TERMINATOR; i++)
     {
         if (itemFusion[i].fusingIntoMon == species)
@@ -6157,7 +6159,7 @@ void ItemUseCB_Fusion(u8 taskId, TaskFunc taskFunc)
             {
                 if (gPokemonStoragePtr->fusions[itemFusion[i].fusionStorageIndex].level != 0)
                     continue;
-                if (itemFusion[i].itemId == gSpecialVar_ItemId && itemFusion[i].targetSpecies1 == task->firstFusion)
+                if (itemFusion[i].itemId == gSpecialVar_ItemId && itemFusion[i].targetSpecies1 == task->firstFusion && itemFusion[i].targetSpecies2 == species)
                 {
                     task->storageIndex = itemFusion[i].fusionStorageIndex;
                     task->fusionResult = itemFusion[i].fusingIntoMon;
