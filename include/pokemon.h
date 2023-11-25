@@ -399,43 +399,21 @@ struct BattleMove
     const struct AdditionalEffect *additionalEffects;
 };
 
-// for some reason struct arguments are counted as 2?
-#define ADDITIONAL_EFFECTS(...)\
-    .numAdditionalEffects = NARG_8(__VA_ARGS__) / 2,\
-    .additionalEffects = (const struct AdditionalEffect[]){\
-        VARARG_8(ADDITIONAL_EFFECTS_, __VA_ARGS__)\
-    }
-#define ADDITIONAL_EFFECTS_0()
-#define ADDITIONAL_EFFECTS_2(a, b) a, b
-#define ADDITIONAL_EFFECTS_4(a, b, c, d) a, b, c, d
-#define ADDITIONAL_EFFECTS_6(a, b, c, d, e, f) a, b, c, d, e, f
+#define ADDITIONAL_EFFECTS(...) \
+  .numAdditionalEffects = NARG_8(__VA_ARGS__) / 3, \
+  .additionalEffects = (const struct AdditionalEffect[]) { __VA_ARGS__ }
 
-#define PRIMARY_EFFECT(_moveEffect, ...){.moveEffect = _moveEffect}
-#define PRIMARY_EFFECT_SELF(_moveEffect, ...){.self = TRUE, .moveEffect = _moveEffect}
-#define SECONDARY_EFFECT(_moveEffect, _chance, ...){.chance = _chance, .moveEffect = _moveEffect}
-#define SECONDARY_EFFECT_SELF(_moveEffect, _chance, ...){.self = TRUE, .chance = _chance, .moveEffect = _moveEffect}
+#define PRIMARY_EFFECT(_moveEffect) {.self = FALSE, .chance = 0, .moveEffect = _moveEffect}
+#define PRIMARY_EFFECT_SELF(_moveEffect) {.self = TRUE, .chance = 0, .moveEffect = _moveEffect}
+#define SECONDARY_EFFECT(_moveEffect, _chance) {.self = FALSE, .chance = _chance, .moveEffect = _moveEffect}
+#define SECONDARY_EFFECT_SELF(_moveEffect, _chance) {.self = TRUE, .chance = _chance, .moveEffect = _moveEffect}
 
 struct AdditionalEffect
 {
     bool8 self;
     u8 chance; // 0% = effect certain, primary effect
     u16 moveEffect;
-    // union {
-    //     u32 data; // status effect etc. (not sure what to call this)
-    //     // struct StatChange *statChange; // will include when stat changer overhaul is merged
-    // };
 };
-
-// struct StatChange
-// {
-//     s8 atk;
-//     s8 def;
-//     s8 spa;
-//     s8 spd;
-//     s8 spe;
-//     s8 acc;
-//     s8 eva;
-// };
 
 #define SPINDA_SPOT_WIDTH 16
 #define SPINDA_SPOT_HEIGHT 16

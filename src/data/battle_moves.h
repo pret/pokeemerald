@@ -12176,9 +12176,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .zMoveEffect = Z_EFFECT_NONE,
         .makesContact = TRUE,
         .bitingMove = TRUE,
-        // ADDITIONAL_EFFECTS( // broke it oops
-        //     PRIMARY_EFFECT(MOVE_EFFECT_TRAP_BOTH),
-        // )
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT(MOVE_EFFECT_TRAP_BOTH),
+        ),
     },
 
     [MOVE_STUFF_CHEEKS] =
