@@ -4,6 +4,7 @@
 ASSUMPTIONS
 {
     ASSUME(gBattleMoves[MOVE_RELIC_SONG].effect == EFFECT_RELIC_SONG);
+    ASSUME(gBattleMoves[MOVE_RELIC_SONG].additionalEffects[0].moveEffect == MOVE_EFFECT_SLEEP);
     ASSUME(P_GEN_5_POKEMON == TRUE);
 }
 

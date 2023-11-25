@@ -3584,6 +3584,8 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     gBattleScripting.moveEffect = RandomElement(RNG_DIRE_CLAW, sDireClawEffects);
                     SetMoveEffect(TRUE, 0);
                 }
+                else
+                    gBattlescriptCurrInstr++;
                 break;
             case MOVE_EFFECT_STEALTH_ROCK:
                 if (!(gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_STEALTH_ROCK))
@@ -3592,6 +3594,8 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_StealthRockActivates;
                 }
+                else
+                    gBattlescriptCurrInstr++;
                 break;
             case MOVE_EFFECT_SPIKES:
                 if (gSideTimers[GetBattlerSide(gEffectBattler)].spikesAmount < 3)
@@ -3600,6 +3604,8 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_SpikesActivates;
                 }
+                else
+                    gBattlescriptCurrInstr++;
                 break;
             case MOVE_EFFECT_SYRUP_BOMB:
                 if (!(gStatuses4[gEffectBattler] & STATUS4_SYRUP_BOMB))
@@ -9713,12 +9719,6 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = cmd->nextInstr;
         }
         return;
-    }
-    case VARIOUS_ARGUMENT_TO_MOVE_EFFECT:
-    {
-        VARIOUS_ARGS();
-        gBattleScripting.moveEffect = gBattleMoves[gCurrentMove].argument;
-        break;
     }
     case VARIOUS_JUMP_IF_NOT_GROUNDED:
     {

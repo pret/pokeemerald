@@ -32,7 +32,7 @@
 #define EFFECT_ROAR                         28
 #define EFFECT_MULTI_HIT                    29
 #define EFFECT_CONVERSION                   30
-#define EFFECT_FLINCH_HIT                   31
+#define EFFECT_UNUSED_31                    31
 #define EFFECT_RESTORE_HP                   32
 #define EFFECT_TOXIC                        33
 #define EFFECT_PAY_DAY                      34
@@ -387,7 +387,7 @@
 #define EFFECT_EXTREME_EVOBOOST             381
 #define EFFECT_HIT_SET_REMOVE_TERRAIN       382 // genesis supernova
 #define EFFECT_DARK_VOID                    383
-#define EFFECT_SLEEP_HIT                    384
+#define EFFET_UNUSED_384                    384
 #define EFFECT_DOUBLE_SHOCK                 385
 #define EFFECT_SPECIAL_ATTACK_UP_HIT        386
 #define EFFECT_VICTORY_DANCE                387
@@ -397,7 +397,7 @@
 #define EFFECT_PSYBLADE                     391
 #define EFFECT_HYDRO_STEAM                  392
 #define EFFECT_HIT_SET_ENTRY_HAZARD         393
-#define EFFECT_DIRE_CLAW                    394
+#define EFFECT_UNUSED_394                   394
 #define EFFECT_BARB_BARRAGE                 395
 #define EFFECT_REVIVAL_BLESSING             396
 #define EFFECT_UNUSED_397                   397
@@ -407,7 +407,7 @@
 #define EFFECT_TAKE_HEART                   401
 #define EFFECT_UNUSED_402                   402
 #define EFFECT_COLLISION_COURSE             403
-#define EFFECT_HIT_404                      404
+#define EFFECT_UNUSED_404                   404
 #define EFFECT_MAKE_IT_RAIN                 405
 #define EFFECT_CORROSIVE_GAS                406
 #define EFFECT_POPULATION_BOMB              407

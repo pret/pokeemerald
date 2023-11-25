@@ -53,7 +53,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectRoar                    @ EFFECT_ROAR
 	.4byte BattleScript_EffectHit                     @ EFFECT_MULTI_HIT
 	.4byte BattleScript_EffectConversion              @ EFFECT_CONVERSION
-	.4byte BattleScript_EffectFlinchHit               @ EFFECT_FLINCH_HIT
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_31
 	.4byte BattleScript_EffectRestoreHp               @ EFFECT_RESTORE_HP
 	.4byte BattleScript_EffectToxic                   @ EFFECT_TOXIC
 	.4byte BattleScript_EffectPayDay                  @ EFFECT_PAY_DAY
@@ -406,7 +406,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectExtremeEvoboost         @ EFFECT_EXTREME_EVOBOOST
 	.4byte BattleScript_EffectHitSetRemoveTerrain     @ EFFECT_HIT_SET_REMOVE_TERRAIN
 	.4byte BattleScript_EffectDarkVoid                @ EFFECT_DARK_VOID
-	.4byte BattleScript_EffectSleepHit                @ EFFECT_SLEEP_HIT
+	.4byte BattleScript_EffectHit                     @ EFFET_UNUSED_384
 	.4byte BattleScript_EffectDoubleShock             @ EFFECT_DOUBLE_SHOCK
 	.4byte BattleScript_EffectSpecialAttackUpHit      @ EFFECT_SPECIAL_ATTACK_UP_HIT
 	.4byte BattleScript_EffectVictoryDance            @ EFFECT_VICTORY_DANCE
@@ -415,8 +415,8 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectShellTrap               @ EFFECT_SHELL_TRAP
 	.4byte BattleScript_EffectHit                     @ EFFECT_PSYBLADE
 	.4byte BattleScript_EffectHit                     @ EFFECT_HYDRO_STEAM
-	.4byte BattleScript_EffectHitSetEntryHazard       @ EFFECT_HIT_SET_ENTRY_HAZARD
-	.4byte BattleScript_EffectDireClaw                @ EFFECT_DIRE_CLAW
+	.4byte BattleScript_EffectHit                     @ EFFECT_HIT_SET_ENTRY_HAZARD
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_394
 	.4byte BattleScript_EffectHit                     @ EFFECT_BARB_BARRAGE
 	.4byte BattleScript_EffectRevivalBlessing         @ EFFECT_REVIVAL_BLESSING
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_397
@@ -426,7 +426,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectTakeHeart               @ EFFECT_TAKE_HEART
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_402
 	.4byte BattleScript_EffectHit                     @ EFFECT_COLLISION_COURSE
-	.4byte BattleScript_EffectHit                     @ EFFECT_HIT_404
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_404
 	.4byte BattleScript_EffectMakeItRain              @ EFFECT_MAKE_IT_RAIN
 	.4byte BattleScript_EffectCorrosiveGas            @ EFFECT_CORROSIVE_GAS
 	.4byte BattleScript_EffectHit                     @ EFFECT_POPULATION_BOMB
@@ -562,14 +562,6 @@ BattleScript_StealthRockActivates::
 	printfromtable gDmgHazardsStringIds
 	waitmessage B_WAIT_TIME_LONG
 	return
-
-BattleScript_EffectDireClaw::
-	setmoveeffect MOVE_EFFECT_DIRE_CLAW
-	goto BattleScript_EffectHit
-
-BattleScript_EffectHitSetEntryHazard::
-	argumenttomoveeffect
-	goto BattleScript_EffectHit
 
 BattleScript_SpikesActivates::
 	trysetspikes BattleScript_MoveEnd
@@ -862,7 +854,6 @@ BattleScript_SkyDropTurn2:
 	setbyte sB_ANIM_TURN, 0x1
 	clearstatusfromeffect BS_ATTACKER
 	orword gHitMarker, HITMARKER_NO_PPDEDUCT
-	argumenttomoveeffect
 	clearsemiinvulnerablebit
 	attackstring
 	clearskydrop BattleScript_SkyDropChangedTarget
@@ -1315,7 +1306,6 @@ BattleScript_NoMoveEffect:
 	goto BattleScript_EffectHit
 
 BattleScript_EffectRelicSong:
-	setmoveeffect MOVE_EFFECT_SLEEP
 	call BattleScript_EffectHit_Ret
 	tryfaintmon BS_TARGET
 	moveendall
@@ -3343,10 +3333,6 @@ BattleScript_AbsorbHealBlock::
 	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectSleepHit::
-	setmoveeffect MOVE_EFFECT_SLEEP
-	goto BattleScript_EffectHit
-
 BattleScript_EffectExplosion_AnimDmgRet:
 	jumpifbyte CMP_NO_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_MISSED, BattleScript_ExplosionAnimRet
 	call BattleScript_PreserveMissedBitDoMoveAnim
@@ -3730,10 +3716,6 @@ BattleScript_EffectConversion::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectFlinchHit::
-	setmoveeffect MOVE_EFFECT_FLINCH
-	goto BattleScript_EffectHit
-
 BattleScript_EffectRestoreHp::
 	attackcanceler
 	attackstring
@@ -3873,7 +3855,6 @@ BattleScript_TwoTurnMovesSecondTurn::
 	setbyte sB_ANIM_TURN, 1
 	clearstatusfromeffect BS_ATTACKER
 	orword gHitMarker, HITMARKER_NO_PPDEDUCT
-	argumenttomoveeffect
 	goto BattleScript_HitFromAccCheck
 
 BattleScriptFirstChargingTurn::
@@ -5307,7 +5288,6 @@ BattleScript_SecondTurnSemiInvulnerable::
 	setbyte sB_ANIM_TURN, 1
 	clearstatusfromeffect BS_ATTACKER
 	orword gHitMarker, HITMARKER_NO_PPDEDUCT
-	argumenttomoveeffect
 BattleScript_SemiInvulnerableTryHit::
 	accuracycheck BattleScript_SemiInvulnerableMiss, ACC_CURR_MOVE
 	clearsemiinvulnerablebit
@@ -5354,7 +5334,6 @@ BattleScript_AlreadyAtFullHp::
 BattleScript_EffectFakeOut::
 	attackcanceler
 	jumpifnotfirstturn BattleScript_FailedFromAtkString
-	setmoveeffect MOVE_EFFECT_FLINCH
 	goto BattleScript_EffectHit
 
 BattleScript_FailedFromAtkCanceler::
