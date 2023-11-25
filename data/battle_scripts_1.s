@@ -27,7 +27,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_2
 	.4byte BattleScript_EffectAbsorb                  @ EFFECT_ABSORB
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_4
-	.4byte BattleScript_EffectFreezeHit               @ EFFECT_FREEZE_HIT
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_5
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_6
 	.4byte BattleScript_EffectExplosion               @ EFFECT_EXPLOSION
 	.4byte BattleScript_EffectDreamEater              @ EFFECT_DREAM_EATER
@@ -283,11 +283,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHealPulse               @ EFFECT_HEAL_PULSE
 	.4byte BattleScript_EffectQuash                   @ EFFECT_QUASH
 	.4byte BattleScript_EffectIonDeluge               @ EFFECT_ION_DELUGE
-#if B_USE_FROSTBITE == TRUE
-	.4byte BattleScript_EffectFrostbiteHit            @ EFFECT_FREEZE_DRY
-#else
-	.4byte BattleScript_EffectFreezeHit               @ EFFECT_FREEZE_DRY
-#endif
+	.4byte BattleScript_EffectHit                     @ EFFECT_FREEZE_DRY
 	.4byte BattleScript_EffectTopsyTurvy              @ EFFECT_TOPSY_TURVY
 	.4byte BattleScript_EffectMistyTerrain            @ EFFECT_MISTY_TERRAIN
 	.4byte BattleScript_EffectGrassyTerrain           @ EFFECT_GRASSY_TERRAIN
@@ -423,7 +419,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDireClaw                @ EFFECT_DIRE_CLAW
 	.4byte BattleScript_EffectHit                     @ EFFECT_BARB_BARRAGE
 	.4byte BattleScript_EffectRevivalBlessing         @ EFFECT_REVIVAL_BLESSING
-	.4byte BattleScript_EffectFrostbiteHit            @ EFFECT_FROSTBITE_HIT
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_397
 	.4byte BattleScript_EffectSnow                    @ EFFECT_SNOWSCAPE
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_399
 	.4byte BattleScript_EffectHit                     @ EFFECT_INFERNAL_PARADE
@@ -3347,16 +3343,8 @@ BattleScript_AbsorbHealBlock::
 	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectFrostbiteHit::
-	setmoveeffect MOVE_EFFECT_FROSTBITE
-	goto BattleScript_EffectHit
-
 BattleScript_EffectSleepHit::
 	setmoveeffect MOVE_EFFECT_SLEEP
-	goto BattleScript_EffectHit
-
-BattleScript_EffectFreezeHit::
-	setmoveeffect MOVE_EFFECT_FREEZE
 	goto BattleScript_EffectHit
 
 BattleScript_EffectExplosion_AnimDmgRet:

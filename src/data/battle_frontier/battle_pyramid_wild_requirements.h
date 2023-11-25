@@ -79,7 +79,7 @@ static const u16 sBurningMoves[] = {
     MOVE_BLAZING_TORQUE,
 };
 
-// EFFECT_FREEZE, EFFECT_FREEZE_HIT
+// EFFECT_FREEZE, MOVE_EFFECT_FREEZE_OR_FROSTBITE
 static const u16 sFrostbiteMoves[] = {
     MOVE_ICE_PUNCH,
     MOVE_ICE_BEAM,

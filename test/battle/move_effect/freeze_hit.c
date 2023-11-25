@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_POWDER_SNOW].effect == EFFECT_FREEZE_HIT);
+    ASSUME(gBattleMoves[MOVE_POWDER_SNOW].additionalEffects[0].moveEffect == MOVE_EFFECT_FREEZE_OR_FROSTBITE);
     ASSUME(gBattleMoves[MOVE_BLIZZARD].accuracy == 70);
 }
 

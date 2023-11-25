@@ -6,7 +6,7 @@
 #define EFFECT_UNUSED_2                     2
 #define EFFECT_ABSORB                       3
 #define EFFECT_UNUSED_4                     4
-#define EFFECT_FREEZE_HIT                   5
+#define EFFECT_UNUSED_5                     5
 #define EFFECT_UNUSED_6                     6
 #define EFFECT_EXPLOSION                    7
 #define EFFECT_DREAM_EATER                  8
@@ -400,7 +400,7 @@
 #define EFFECT_DIRE_CLAW                    394
 #define EFFECT_BARB_BARRAGE                 395
 #define EFFECT_REVIVAL_BLESSING             396
-#define EFFECT_FROSTBITE_HIT                397
+#define EFFECT_UNUSED_397                   397
 #define EFFECT_SNOWSCAPE                    398
 #define EFFECT_UNUSED_399                   399
 #define EFFECT_INFERNAL_PARADE              400
