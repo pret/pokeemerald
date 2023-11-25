@@ -108,6 +108,8 @@ struct DisableStruct
     u8 syrupBombTimer;
     u8 syrupBombIsShiny:1;
     u8 steelSurgeDone:1;
+    u8 weatherAbilityDone:1;
+    u8 terrainAbilityDone:1;
 };
 
 struct ProtectStruct
@@ -199,8 +201,6 @@ struct SpecialStatus
     u8 dancerUsedMove:1;
     u8 dancerOriginalTarget:3;
     // End of byte
-    u8 weatherAbilityDone:1;
-    u8 terrainAbilityDone:1;
     u8 emergencyExited:1;
     u8 afterYou:1;
 };

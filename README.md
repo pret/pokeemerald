@@ -2,10 +2,10 @@
 
 ## What is the pokeemerald Expansion?
 
-The pokeemerald Expansion is a feature branch meant to be integrated into existing Pokémon Emerald hacks based off pret's [pokeemerald](https://github.com/pret/pokeemerald) decompilation project. This is ***NOT*** a standalone romhack, and as such, most features will be unavailable and/or unbalanced if played as is.
+The pokeemerald Expansion is a decomp hack base project based off pret's [pokeemerald](https://github.com/pret/pokeemerald) decompilation project. It's recommended that any new projects that plan on using it, to clone this repository instead of pret's vanilla repository, as we regurlarly incorporate pret's documentation changes. This is ***NOT*** a standalone romhack, and as such, most features will be unavailable and/or unbalanced if played as is.
 
 ## What features are included?
-- Configuration files that allows you to choose generation-specific behaviors. Full contents here:
+- ***IMPORTANT*❗❗ Read through these to learn what features you can toggle**:
     - [Battle configurations](/include/config/battle.h)
     - [Pokémon configurations](/include/config/pokemon.h)
     - [Item configurations](/include/config/item.h)
