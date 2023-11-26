@@ -1256,6 +1256,11 @@ bool32 ProteanTryChangeType(u32 battler, u32 ability, u32 move, u32 moveType)
     return FALSE;
 }
 
+bool32 IsMoveNotAllowedInSkyBattles(u32 move)
+{
+    return ((gBattleStruct->isSkyBattle) && (gBattleMoves[gCurrentMove].skyBattleBanned));
+}
+
 static void Cmd_attackcanceler(void)
 {
     CMD_ARGS();
@@ -1363,9 +1368,10 @@ static void Cmd_attackcanceler(void)
     }
 
     gHitMarker |= HITMARKER_OBEYS;
-    // Check if no available target present on the field.
-    if (NoTargetPresent(gBattlerAttacker, gCurrentMove)
+    // Check if no available target present on the field or if Sky Battles ban the move
+    if ((NoTargetPresent(gBattlerAttacker, gCurrentMove)
         && (!gBattleMoves[gCurrentMove].twoTurnMove || (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)))
+        || (IsMoveNotAllowedInSkyBattles(gCurrentMove)))
     {
         if (gBattleMoves[gCurrentMove].effect == EFFECT_FLING) // Edge case for removing a mon's item when there is no target available after using Fling.
             gBattlescriptCurrInstr = BattleScript_FlingFailConsumeItem;
@@ -3595,7 +3601,11 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 {
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SPIKESSCATTERED;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_SpikesActivates;
+
+                    if (gBattleStruct->isSkyBattle)
+                        gBattlescriptCurrInstr++;
+                    else
+                        gBattlescriptCurrInstr = BattleScript_SpikesActivates;
                 }
                 break;
             case MOVE_EFFECT_TRIPLE_ARROWS:
@@ -4324,7 +4334,7 @@ static bool32 NoAliveMonsForPlayerAndPartner(void)
     return (HP_count == 0);
 }
 
-static bool32 NoAliveMonsForPlayer(void)
+bool32 NoAliveMonsForPlayer(void)
 {
     u32 i;
     u32 HP_count = 0;

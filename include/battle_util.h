@@ -249,5 +249,7 @@ bool32 AreBattlersOfOppositeGender(u32 battler1, u32 battler2);
 bool32 AreBattlersOfSameGender(u32 battler1, u32 battler2);
 u32 CalcSecondaryEffectChance(u32 battler, u8 secondaryEffectChance, u16 moveEffect);
 u8 GetBattlerType(u32 battler, u8 typeIndex);
+bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon);
+bool8 IsMonBannedFromSkyBattles(u16 species);
 
 #endif // GUARD_BATTLE_UTIL_H

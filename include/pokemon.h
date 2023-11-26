@@ -393,6 +393,7 @@ struct BattleMove
     u32 instructBanned:1;
     u32 encoreBanned:1;
     u32 parentalBondBanned:1;
+    u32 skyBattleBanned:1;
 };
 
 #define SPINDA_SPOT_WIDTH 16
