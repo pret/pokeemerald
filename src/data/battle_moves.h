@@ -96,16 +96,18 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_PAY_DAY] =
     {
-        .effect = EFFECT_PAY_DAY,
+        .effect = EFFECT_HIT,
         .power = 40,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 20,
-        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .split = SPLIT_PHYSICAL,
         .zMoveEffect = Z_EFFECT_NONE,
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT(MOVE_EFFECT_PAYDAY)
+        ),
     },
 
     [MOVE_FIRE_PUNCH] =
@@ -2893,17 +2895,19 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_TRI_ATTACK] =
     {
-        .effect = EFFECT_TRI_ATTACK,
+        .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 10,
-        .secondaryEffectChance = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .split = SPLIT_SPECIAL,
         .zMoveEffect = Z_EFFECT_NONE,
         .sheerForceBoost = TRUE,
+        ADDITIONAL_EFFECTS(
+            SECONDARY_EFFECT(MOVE_EFFECT_TRI_ATTACK, 20)
+        ),
     },
 
     [MOVE_SUPER_FANG] =
@@ -3119,7 +3123,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .thawsUser = TRUE,
         ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 10)
-        )
+        ),
     },
 
     [MOVE_SNORE] =
@@ -8811,13 +8815,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 15,
-        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .split = SPLIT_SPECIAL,
         .zMoveEffect = Z_EFFECT_NONE,
         .ignoresSubstitute = B_UPDATED_MOVE_FLAGS >= GEN_6,
         .soundMove = TRUE,
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT(MOVE_EFFECT_ROUND)
+        ),
     },
 
     [MOVE_ECHOED_VOICE] =
@@ -8854,16 +8860,18 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_CLEAR_SMOG] =
     {
-        .effect = EFFECT_CLEAR_SMOG,
+        .effect = EFFECT_HIT,
         .power = 50,
         .type = TYPE_POISON,
         .accuracy = 0,
         .pp = 15,
-        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .split = SPLIT_SPECIAL,
         .zMoveEffect = Z_EFFECT_NONE,
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT(MOVE_EFFECT_CLEAR_SMOG)
+        ),
     },
 
     [MOVE_STORED_POWER] =
@@ -9847,18 +9855,20 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_V_CREATE] =
     {
-        .effect = EFFECT_V_CREATE,
+        .effect = EFFECT_HIT,
         .power = 180,
         .type = TYPE_FIRE,
         .accuracy = 95,
         .pp = 5,
-        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .split = SPLIT_PHYSICAL,
         .zMoveEffect = Z_EFFECT_NONE,
         .makesContact = TRUE,
         .metronomeBanned = TRUE,
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT_SELF(MOVE_EFFECT_V_CREATE)
+        ),
     },
 
     [MOVE_FUSION_FLARE] =
@@ -11410,16 +11420,18 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_CORE_ENFORCER] =
     {
-        .effect = EFFECT_CORE_ENFORCER,
+        .effect = EFFECT_HIT,
         .power = 100,
         .type = TYPE_DRAGON,
         .accuracy = 100,
         .pp = 10,
-        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .split = SPLIT_SPECIAL,
         .zMoveEffect = Z_EFFECT_NONE,
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT(MOVE_EFFECT_CORE_ENFORCER)
+        ),
     },
 
     [MOVE_TROP_KICK] =
@@ -11670,12 +11682,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_SPECTRAL_THIEF] =
     {
-        .effect = EFFECT_SPECTRAL_THIEF,
+        .effect = EFFECT_HIT,
         .power = 90,
         .type = TYPE_GHOST,
         .accuracy = 100,
         .pp = 10,
-        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .split = SPLIT_PHYSICAL,
@@ -11683,6 +11694,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .ignoresSubstitute = TRUE,
         .makesContact = TRUE,
         .metronomeBanned = TRUE,
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT(MOVE_EFFECT_SPECTRAL_THIEF)
+        ),
     },
 
     [MOVE_SUNSTEEL_STRIKE] =

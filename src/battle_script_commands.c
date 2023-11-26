@@ -3584,8 +3584,6 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     gBattleScripting.moveEffect = RandomElement(RNG_DIRE_CLAW, sDireClawEffects);
                     SetMoveEffect(TRUE, 0);
                 }
-                else
-                    gBattlescriptCurrInstr++;
                 break;
             case MOVE_EFFECT_STEALTH_ROCK:
                 if (!(gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_STEALTH_ROCK))
@@ -3594,8 +3592,6 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_StealthRockActivates;
                 }
-                else
-                    gBattlescriptCurrInstr++;
                 break;
             case MOVE_EFFECT_SPIKES:
                 if (gSideTimers[GetBattlerSide(gEffectBattler)].spikesAmount < 3)
@@ -3604,8 +3600,6 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_SpikesActivates;
                 }
-                else
-                    gBattlescriptCurrInstr++;
                 break;
             case MOVE_EFFECT_SYRUP_BOMB:
                 if (!(gStatuses4[gEffectBattler] & STATUS4_SYRUP_BOMB))
@@ -3648,12 +3642,13 @@ static void Cmd_seteffectwithchance(void)
             }
             gBattleScripting.moveEffect = 0;
         }
-        else if (gBattleMoves[gCurrentMove].numAdditionalEffects > 0)
+        else if (gBattleMoves[gCurrentMove].numAdditionalEffects > gBattleStruct->additionalEffectsCounter)
         {
             u32 percentChance = CalcSecondaryEffectChance(
                 gBattlerAttacker,
                 gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter].chance
             );
+            const u8 *currentPtr = gBattlescriptCurrInstr;
 
             // Activate effect if it's primary (chance == 0) or if RNGesus says so
             if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + gBattleStruct->additionalEffectsCounter, percentChance))
@@ -3666,7 +3661,9 @@ static void Cmd_seteffectwithchance(void)
                     percentChance >= 100 // certain to happen
                 );
             }
-            else
+
+            // Move script along if we haven't jumped elsewhere
+            if (gBattlescriptCurrInstr == currentPtr)
                 gBattlescriptCurrInstr = cmd->nextInstr;
 
             // Call seteffectwithchance again in the case of a move with multiple effects
@@ -3676,7 +3673,7 @@ static void Cmd_seteffectwithchance(void)
                 gBattleScripting.moveEffect = MOVE_EFFECT_CONTINUE;
             }
             else
-                gBattleStruct->additionalEffectsCounter = gBattleScripting.moveEffect = 0;
+                gBattleScripting.moveEffect = 0;
         }
         else
         {
@@ -6064,6 +6061,7 @@ static void Cmd_moveend(void)
             gBattleStruct->zmove.effect = EFFECT_HIT;
             gBattleStruct->hitSwitchTargetFailed = FALSE;
             gBattleStruct->isAtkCancelerForCalledMove = FALSE;
+            gBattleStruct->additionalEffectsCounter = 0;
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_COUNT:

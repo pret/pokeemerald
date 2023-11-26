@@ -56,9 +56,9 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_31
 	.4byte BattleScript_EffectRestoreHp               @ EFFECT_RESTORE_HP
 	.4byte BattleScript_EffectToxic                   @ EFFECT_TOXIC
-	.4byte BattleScript_EffectPayDay                  @ EFFECT_PAY_DAY
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_34
 	.4byte BattleScript_EffectLightScreen             @ EFFECT_LIGHT_SCREEN
-	.4byte BattleScript_EffectTriAttack               @ EFFECT_TRI_ATTACK
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_36
 	.4byte BattleScript_EffectRest                    @ EFFECT_REST
 	.4byte BattleScript_EffectOHKO                    @ EFFECT_OHKO
 	.4byte BattleScript_EffectHit                     @ EFFECT_FUSION_COMBO
@@ -247,7 +247,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_GYRO_BALL
 	.4byte BattleScript_EffectHit                     @ EFFECT_ECHOED_VOICE
 	.4byte BattleScript_EffectHit                     @ EFFECT_PAYBACK
-	.4byte BattleScript_EffectRound                   @ EFFECT_ROUND
+	.4byte BattleScript_EffectHit                     @ EFFECT_ROUND
 	.4byte BattleScript_EffectHit                     @ EFFECT_BRINE
 	.4byte BattleScript_EffectHit                     @ EFFECT_VENOSHOCK
 	.4byte BattleScript_EffectHit                     @ EFFECT_RETALIATE
@@ -312,7 +312,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectNobleRoar               @ EFFECT_NOBLE_ROAR
 	.4byte BattleScript_EffectVenomDrench             @ EFFECT_VENOM_DRENCH
 	.4byte BattleScript_EffectToxicThread             @ EFFECT_TOXIC_THREAD
-	.4byte BattleScript_EffectClearSmog               @ EFFECT_CLEAR_SMOG
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_290
 	.4byte BattleScript_EffectHitSwitchTarget         @ EFFECT_HIT_SWITCH_TARGET
 	.4byte BattleScript_EffectFinalGambit             @ EFFECT_FINAL_GAMBIT
 	.4byte BattleScript_EffectHit                     @ EFFECT_CHANGE_TYPE_ON_ITEM
@@ -343,11 +343,11 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSpAtkUpHit              @ EFFECT_SP_ATTACK_UP_HIT
 	.4byte BattleScript_EffectHit                     @ EFFECT_BELCH
 	.4byte BattleScript_EffectPartingShot             @ EFFECT_PARTING_SHOT
-	.4byte BattleScript_EffectSpectralThief           @ EFFECT_SPECTRAL_THIEF
-	.4byte BattleScript_EffectVCreate                 @ EFFECT_V_CREATE
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_321
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_322
 	.4byte BattleScript_EffectMatBlock                @ EFFECT_MAT_BLOCK
 	.4byte BattleScript_EffectHit                     @ EFFECT_STOMPING_TANTRUM
-	.4byte BattleScript_EffectCoreEnforcer            @ EFFECT_CORE_ENFORCER
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_325
 	.4byte BattleScript_EffectInstruct                @ EFFECT_INSTRUCT
 	.4byte BattleScript_EffectThroatChop              @ EFFECT_THROAT_CHOP
 	.4byte BattleScript_EffectLaserFocus              @ EFFECT_LASER_FOCUS
@@ -1468,10 +1468,6 @@ BattleScript_MoveEffectBugBite::
 	restoretarget
 	return
 
-BattleScript_EffectCoreEnforcer:
-	setmoveeffect MOVE_EFFECT_CORE_ENFORCER | MOVE_EFFECT_CERTAIN
-	goto BattleScript_EffectHit
-
 BattleScript_MoveEffectCoreEnforcer::
 	setgastroacid BattleScript_CoreEnforcerRet
 	printstring STRINGID_PKMNSABILITYSUPPRESSED
@@ -1492,10 +1488,6 @@ BattleScript_EffectLaserFocus:
 	printstring STRINGID_LASERFOCUS
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
-
-BattleScript_EffectVCreate:
-	setmoveeffect MOVE_EFFECT_V_CREATE | MOVE_EFFECT_AFFECTS_USER
-	goto BattleScript_EffectHit
 
 BattleScript_VCreateStatLoss::
 	jumpifstat BS_ATTACKER, CMP_GREATER_THAN, STAT_DEF, MIN_STAT_STAGE, BattleScript_VCreateStatAnim
@@ -1531,10 +1523,6 @@ BattleScript_SpectralThiefSteal::
 	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	spectralthiefprintstats
 	return
-
-BattleScript_EffectSpectralThief:
-	setmoveeffect MOVE_EFFECT_SPECTRAL_THIEF
-	goto BattleScript_EffectHit
 
 BattleScript_EffectPartingShot::
 	attackcanceler
@@ -2088,10 +2076,6 @@ BattleScript_HitSwitchTargetForceRandomSwitchFailed:
 	hitswitchtargetfailed
 	setbyte sSWITCH_CASE, B_SWITCH_NORMAL
 	goto BattleScript_MoveEnd
-
-BattleScript_EffectClearSmog:
-	setmoveeffect MOVE_EFFECT_CLEAR_SMOG
-	goto BattleScript_EffectHit
 
 BattleScript_EffectToxicThread:
 	setstatchanger STAT_SPEED, 2, TRUE
@@ -3066,10 +3050,6 @@ BattleScript_EffectPlaceholder:
 	printstring STRINGID_NOTDONEYET
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectRound:
-	setmoveeffect MOVE_EFFECT_ROUND
-	goto BattleScript_EffectHit
-
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
 	attackcanceler
@@ -3771,10 +3751,6 @@ BattleScript_ImmunityProtected::
 	call BattleScript_PSNPrevention
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectPayDay::
-	setmoveeffect MOVE_EFFECT_PAYDAY
-	goto BattleScript_EffectHit
-
 BattleScript_EffectAuroraVeil:
 	attackcanceler
 	attackstring
@@ -3788,10 +3764,6 @@ BattleScript_EffectLightScreen::
 	ppreduce
 	setlightscreen
 	goto BattleScript_PrintReflectLightScreenSafeguardString
-
-BattleScript_EffectTriAttack::
-	setmoveeffect MOVE_EFFECT_TRI_ATTACK
-	goto BattleScript_EffectHit
 
 BattleScript_EffectRest::
 	attackcanceler

@@ -35,9 +35,9 @@
 #define EFFECT_UNUSED_31                    31
 #define EFFECT_RESTORE_HP                   32
 #define EFFECT_TOXIC                        33
-#define EFFECT_PAY_DAY                      34
+#define EFFECT_UNUSED_34                    34
 #define EFFECT_LIGHT_SCREEN                 35
-#define EFFECT_TRI_ATTACK                   36
+#define EFFECT_UNUSED_36                    36
 #define EFFECT_REST                         37
 #define EFFECT_OHKO                         38
 #define EFFECT_FUSION_COMBO                 39
@@ -293,7 +293,7 @@
 #define EFFECT_NOBLE_ROAR                   287
 #define EFFECT_VENOM_DRENCH                 288
 #define EFFECT_TOXIC_THREAD                 289
-#define EFFECT_CLEAR_SMOG                   290
+#define EFFECT_UNUSED_290                   290
 #define EFFECT_HIT_SWITCH_TARGET            291
 #define EFFECT_FINAL_GAMBIT                 292
 #define EFFECT_CHANGE_TYPE_ON_ITEM          293
@@ -324,11 +324,11 @@
 #define EFFECT_SP_ATTACK_UP_HIT             318
 #define EFFECT_BELCH                        319
 #define EFFECT_PARTING_SHOT                 320
-#define EFFECT_SPECTRAL_THIEF               321
-#define EFFECT_V_CREATE                     322
+#define EFFECT_UNUSED_321                   321
+#define EFFECT_UNUSED_322                   322
 #define EFFECT_MAT_BLOCK                    323
 #define EFFECT_STOMPING_TANTRUM             324
-#define EFFECT_CORE_ENFORCER                325
+#define EFFECT_UNUSED_325                   325
 #define EFFECT_INSTRUCT                     326
 #define EFFECT_THROAT_CHOP                  327
 #define EFFECT_LASER_FOCUS                  328

@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_TRI_ATTACK].effect == EFFECT_TRI_ATTACK);
+    ASSUME(gBattleMoves[MOVE_TRI_ATTACK].additionalEffects[0].moveEffect == MOVE_EFFECT_TRI_ATTACK);
 }
 
 SINGLE_BATTLE_TEST("Tri Attack can inflict paralysis, burn or freeze")

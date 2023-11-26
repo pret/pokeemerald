@@ -2089,8 +2089,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 }
             }
             break;
-        case EFFECT_SPECTRAL_THIEF:
-            break;
         case EFFECT_SEMI_INVULNERABLE:
             if (predictedMove != MOVE_NONE
               && AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER
@@ -2177,8 +2175,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
               || IsEntrainmentTargetOrSimpleBeamBannedAbility(aiData->abilities[battlerDef])
               || aiData->holdEffects[battlerAtk] == HOLD_EFFECT_ABILITY_SHIELD)
                 ADJUST_SCORE(-10);
-            break;
-        case EFFECT_CORE_ENFORCER:
             break;
         case EFFECT_SIMPLE_BEAM:
             if (aiData->abilities[battlerDef] == ABILITY_SIMPLE
@@ -3215,7 +3211,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     u32 predictedMove = aiData->predictedMoves[battlerDef];
     u32 predictedMoveSlot = GetMoveSlot(GetMovesArray(battlerDef), predictedMove);
     bool32 isDoubleBattle = IsValidDoubleBattle(battlerAtk);
-    u32 i;
+    u32 i = 0;
     // We only check for moves that have a 20% chance or more for their secondary effect to happen because moves with a smaller chance are rather worthless. We don't want the AI to use those.
     bool32 sereneGraceBoost = (aiData->abilities[battlerAtk] == ABILITY_SERENE_GRACE && (gBattleMoves[move].secondaryEffectChance >= 20 && gBattleMoves[move].secondaryEffectChance < 100));
 
@@ -3511,16 +3507,18 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     case EFFECT_HAZE:
         if (AnyStatIsRaised(BATTLE_PARTNER(battlerAtk))
           || PartnerHasSameMoveEffectWithoutTarget(BATTLE_PARTNER(battlerAtk), move, aiData->partnerMove))
+          {
             ADJUST_SCORE(-3);
             break;
-        // fallthrough
+          }
+        goto SHOULD_USE_PHAZING_MOVE;
     case EFFECT_ROAR:
-    case EFFECT_CLEAR_SMOG:
-        if (isDoubleBattle)
-            score += min(CountPositiveStatStages(battlerDef) + CountPositiveStatStages(BATTLE_PARTNER(battlerDef)), 7);
-        else
-            score += min(CountPositiveStatStages(battlerDef), 4);
-        break;
+        if (aiData->abilities[battlerDef] == ABILITY_SOUNDPROOF || aiData->abilities[battlerDef] == ABILITY_SUCTION_CUPS)
+        {
+            ADJUST_SCORE(-3);
+            break;
+        }
+        goto SHOULD_USE_PHAZING_MOVE;
     case EFFECT_MULTI_HIT:
     case EFFECT_TRIPLE_KICK:
         if (AI_MoveMakesContact(aiData->abilities[battlerAtk], aiData->holdEffects[battlerAtk], move)
@@ -4067,36 +4065,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             score += (MAX_STAT_STAGE - gBattleMons[battlerAtk].statStages[STAT_ATK]);
         break;
     case EFFECT_PSYCH_UP:
-    case EFFECT_SPECTRAL_THIEF:
-        // Want to copy positive stat changes
-        for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
-        {
-            if (gBattleMons[battlerDef].statStages[i] > gBattleMons[battlerAtk].statStages[i])
-            {
-                switch (i)
-                {
-                case STAT_ATK:
-                    if (HasMoveWithSplit(battlerAtk, SPLIT_PHYSICAL))
-                        ADJUST_SCORE(1);
-                    break;
-                case STAT_SPATK:
-                    if (HasMoveWithSplit(battlerAtk, SPLIT_SPECIAL))
-                        ADJUST_SCORE(1);
-                    break;
-                case STAT_ACC:
-                case STAT_EVASION:
-                case STAT_SPEED:
-                    ADJUST_SCORE(1);
-                    break;
-                case STAT_DEF:
-                case STAT_SPDEF:
-                    if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_STALL)
-                        ADJUST_SCORE(1);
-                    break;
-                }
-            }
-        }
-        break;
+        goto SHOULD_USE_STAT_COPY_MOVE;
     case EFFECT_SEMI_INVULNERABLE:
         ADJUST_SCORE(1);
         if (predictedMove != MOVE_NONE && !isDoubleBattle)
@@ -4140,7 +4109,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     case EFFECT_SWAGGER:
         if (HasMoveEffect(battlerAtk, EFFECT_FOUL_PLAY)
           || HasMoveEffect(battlerAtk, EFFECT_PSYCH_UP)
-          || HasMoveEffect(battlerAtk, EFFECT_SPECTRAL_THIEF))
+          || HasMoveWithMoveEffect(battlerAtk, MOVE_EFFECT_SPECTRAL_THIEF, FALSE))
             ADJUST_SCORE(1);
 
         if (aiData->abilities[battlerDef] == ABILITY_CONTRARY)
@@ -4150,7 +4119,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         break;
     case EFFECT_FLATTER:
         if (HasMoveEffect(battlerAtk, EFFECT_PSYCH_UP)
-          || HasMoveEffect(battlerAtk, EFFECT_SPECTRAL_THIEF))
+          || HasMoveWithMoveEffect(battlerAtk, MOVE_EFFECT_SPECTRAL_THIEF, FALSE))
             ADJUST_SCORE(2);
 
         if (aiData->abilities[battlerDef] == ABILITY_CONTRARY)
@@ -4899,7 +4868,45 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         {
             case MOVE_EFFECT_POISON:
                 IncreasePoisonScore(battlerAtk, battlerDef, move, &score);
-            break;
+                break;
+            case MOVE_EFFECT_CLEAR_SMOG:
+                SHOULD_USE_PHAZING_MOVE:
+                if (isDoubleBattle)
+                    score += min(CountPositiveStatStages(battlerDef) + CountPositiveStatStages(BATTLE_PARTNER(battlerDef)), 7);
+                else
+                    score += min(CountPositiveStatStages(battlerDef), 4);
+                break;
+            case MOVE_EFFECT_SPECTRAL_THIEF:
+                SHOULD_USE_STAT_COPY_MOVE:
+                // Want to copy positive stat changes
+                for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
+                {
+                    if (gBattleMons[battlerDef].statStages[i] > gBattleMons[battlerAtk].statStages[i])
+                    {
+                        switch (i)
+                        {
+                        case STAT_ATK:
+                            if (HasMoveWithSplit(battlerAtk, SPLIT_PHYSICAL))
+                                ADJUST_SCORE(1);
+                            break;
+                        case STAT_SPATK:
+                            if (HasMoveWithSplit(battlerAtk, SPLIT_SPECIAL))
+                                ADJUST_SCORE(1);
+                            break;
+                        case STAT_ACC:
+                        case STAT_EVASION:
+                        case STAT_SPEED:
+                            ADJUST_SCORE(1);
+                            break;
+                        case STAT_DEF:
+                        case STAT_SPDEF:
+                            if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_STALL)
+                                ADJUST_SCORE(1);
+                            break;
+                        }
+                    }
+                }
+                break;
         }
     }
 
