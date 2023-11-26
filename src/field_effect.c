@@ -31,6 +31,7 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/map_types.h"
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 
@@ -230,6 +231,12 @@ static void CreateDeoxysRockFragments(struct Sprite *);
 static void SpriteCB_DeoxysRockFragment(struct Sprite *sprite);
 
 static void Task_MoveDeoxysRock(u8 taskId);
+
+static void Task_FldEffUseVsSeeker(u8 taskId);
+static void UseVsSeeker_StopPlayerMovement(struct Task *task);
+static void UseVsSeeker_DoPlayerAnimation(struct Task *task);
+static void UseVsSeeker_ResetPlayerGraphics(struct Task *task);
+static void UseVsSeeker_CleanUpFieldEffect(struct Task *task);
 
 // Static RAM declarations
 
@@ -3911,3 +3918,68 @@ static void Task_MoveDeoxysRock(u8 taskId)
 #undef tVelocityY
 #undef tMoveSteps
 #undef tObjEventId
+
+static void (*const sUseVsSeekerEffectFuncs[])(struct Task *task) = {
+    UseVsSeeker_StopPlayerMovement,
+    UseVsSeeker_DoPlayerAnimation,
+    UseVsSeeker_ResetPlayerGraphics,
+    UseVsSeeker_CleanUpFieldEffect
+};
+
+u32 FldEff_UseVsSeeker(void)
+{
+    CreateTask(Task_FldEffUseVsSeeker, 0xFF);
+    return 0;
+}
+
+static void Task_FldEffUseVsSeeker(u8 taskId)
+{
+    sUseVsSeekerEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+static void UseVsSeeker_StopPlayerMovement(struct Task *task)
+{
+    LockPlayerFieldControls();
+    FreezeObjectEvents();
+    gPlayerAvatar.preventStep = TRUE;
+    task->data[0]++;
+}
+
+static void UseVsSeeker_DoPlayerAnimation(struct Task *task)
+{
+    struct ObjectEvent * playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if ((ObjectEventIsMovementOverridden(playerObj) && (!(ObjectEventClearHeldMovementIfFinished(playerObj)))))
+        return;
+
+    if (gMapHeader.mapType != MAP_TYPE_UNDERWATER)
+    {
+        SetPlayerAvatarFieldMove();
+        ObjectEventSetHeldMovement(playerObj, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+    }
+    task->data[0]++;
+}
+
+static void UseVsSeeker_ResetPlayerGraphics(struct Task *task) {
+    struct ObjectEvent* playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+
+    if (!ObjectEventClearHeldMovementIfFinished(playerObj))
+        return;
+
+    if (gMapHeader.mapType != MAP_TYPE_UNDERWATER)
+    {
+        ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByCurrentState());
+        ObjectEventForceSetHeldMovement(playerObj, GetFaceDirectionMovementAction(playerObj->facingDirection));
+    }
+    task->data[0]++;
+}
+
+static void UseVsSeeker_CleanUpFieldEffect(struct Task *task)
+{
+    struct ObjectEvent * playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (!ObjectEventClearHeldMovementIfFinished(playerObj))
+        return;
+
+    gPlayerAvatar.preventStep = FALSE;
+    FieldEffectActiveListRemove(FLDEFF_USE_VS_SEEKER);
+    DestroyTask(FindTaskIdByFunc(Task_FldEffUseVsSeeker));
+}
