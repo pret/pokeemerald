@@ -276,7 +276,6 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_TEETER_DANCE]               = 6,
 //    [EFFECT_BLAZE_KICK]               = 1,
     [EFFECT_MUD_SPORT]                  = 4,
-    [EFFECT_POISON_FANG]                = 1,
     [EFFECT_WEATHER_BALL]               = 1,
     [EFFECT_OVERHEAT]                   = 3,
     [EFFECT_TICKLE]                     = 1,

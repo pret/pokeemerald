@@ -846,10 +846,6 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, u32 move, s3
 
     switch (gBattleMoves[move].effect)
     {
-    case EFFECT_POISON_FANG:
-        if (AI_CanPoison(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE))
-            return TRUE;
-        break;
     case EFFECT_HIT_ESCAPE:
         if (CountUsablePartyMons(battlerAtk) != 0 && ShouldPivot(battlerAtk, battlerDef, abilityDef, move, AI_THINKING_STRUCT->movesetIndex))
             return TRUE;

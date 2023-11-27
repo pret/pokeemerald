@@ -198,7 +198,7 @@
 #define EFFECT_TEETER_DANCE                 194
 #define EFFECT_HIT_ESCAPE                   195
 #define EFFECT_MUD_SPORT                    196
-#define EFFECT_POISON_FANG                  197
+#define EFFECT_UNUSED_197                   197
 #define EFFECT_WEATHER_BALL                 198
 #define EFFECT_OVERHEAT                     199
 #define EFFECT_TICKLE                       200
