@@ -749,10 +749,10 @@ BattleScript_TeatimeLoop:
 	jumpifabsorbaffected BS_TARGET, BattleScript_Teatimesorb
 	jumpifmotoraffected BS_TARGET, BattleScript_Teatimemotor
 	jumpifteainvulnerable BS_TARGET, BattleScript_Teatimevul @ in semi-invulnerable state OR held item is not a Berry
-	orword gHitMarker, HITMARKER_NO_ANIMATIONS | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE
+	orword gHitMarker, HITMARKER_DISABLE_ANIMATION | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE
 	setbyte sBERRY_OVERRIDE, TRUE   @ override the requirements for eating berries
 	consumeberry BS_TARGET, TRUE  @ consume the berry, then restore the item from changedItems
-	bicword gHitMarker, HITMARKER_NO_ANIMATIONS | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE
+	bicword gHitMarker, HITMARKER_DISABLE_ANIMATION | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE
 	setbyte sBERRY_OVERRIDE, FALSE
 	removeitem BS_TARGET
 	moveendto MOVEEND_NEXT_TARGET
@@ -1052,9 +1052,9 @@ BattleScript_EffectFlingConsumeBerry:
 	savebattleritem BS_TARGET
 	battleritemtolastuseditem BS_TARGET
 	setbyte sBERRY_OVERRIDE, 1 @ override the requirements for eating berries
-	orword gHitMarker, HITMARKER_NO_ANIMATIONS
+	orword gHitMarker, HITMARKER_DISABLE_ANIMATION
 	consumeberry BS_TARGET, TRUE
-	bicword gHitMarker, HITMARKER_NO_ANIMATIONS
+	bicword gHitMarker, HITMARKER_DISABLE_ANIMATION
 	setbyte sBERRY_OVERRIDE, 0
 	restorebattleritem BS_TARGET
 BattleScript_FlingEnd:
@@ -1327,9 +1327,9 @@ BattleScript_EffectStuffCheeks::
 	waitanimation
 BattleScript_StuffCheeksEatBerry:
 	setbyte sBERRY_OVERRIDE, 1
-	orword gHitMarker, HITMARKER_NO_ANIMATIONS
+	orword gHitMarker, HITMARKER_DISABLE_ANIMATION
 	consumeberry BS_ATTACKER, TRUE
-	bicword gHitMarker, HITMARKER_NO_ANIMATIONS
+	bicword gHitMarker, HITMARKER_DISABLE_ANIMATION
 	setbyte sBERRY_OVERRIDE, 0
 	removeitem BS_ATTACKER
 	setstatchanger STAT_DEF, 2, FALSE
@@ -1593,11 +1593,11 @@ BattleScript_MoveEffectIncinerate::
 BattleScript_MoveEffectBugBite::
 	printstring STRINGID_BUGBITE
 	waitmessage B_WAIT_TIME_LONG
-	orword gHitMarker, HITMARKER_NO_ANIMATIONS
+	orword gHitMarker, HITMARKER_DISABLE_ANIMATION
 	setbyte sBERRY_OVERRIDE, 1   @ override the requirements for eating berries
 	savetarget
 	consumeberry BS_ATTACKER, FALSE
-	bicword gHitMarker, HITMARKER_NO_ANIMATIONS
+	bicword gHitMarker, HITMARKER_DISABLE_ANIMATION
 	setbyte sBERRY_OVERRIDE, 0
 	trysymbiosis
 	restoretarget
