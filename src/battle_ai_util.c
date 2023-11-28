@@ -868,35 +868,6 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, u32 move, s3
         if (BattlerStatCanRise(battlerAtk, abilityAtk, STAT_SPATK))
             return TRUE;
         break;
-    case EFFECT_ATTACK_DOWN_HIT:
-        if (ShouldLowerStat(battlerDef, abilityDef, STAT_ATK) && abilityDef != ABILITY_HYPER_CUTTER && noOfHitsToKo != 1)
-            return TRUE;
-        break;
-    case EFFECT_DEFENSE_DOWN_HIT:
-        if (ShouldLowerStat(battlerDef, abilityDef, STAT_DEF) && noOfHitsToKo != 1)
-            return TRUE;
-        break;
-    case EFFECT_SPEED_DOWN_HIT:
-        if (ShouldLowerStat(battlerDef, abilityDef, STAT_SPEED) && noOfHitsToKo != 1)
-            return TRUE;
-        break;
-    case EFFECT_SPECIAL_ATTACK_DOWN_HIT:
-        if (ShouldLowerStat(battlerDef, abilityDef, STAT_SPATK) && noOfHitsToKo != 1)
-            return TRUE;
-        break;
-    case EFFECT_SPECIAL_DEFENSE_DOWN_HIT:
-    case EFFECT_SPECIAL_DEFENSE_DOWN_HIT_2:
-        if (ShouldLowerStat(battlerDef, abilityDef, STAT_SPDEF) && noOfHitsToKo != 1)
-            return TRUE;
-        break;
-    case EFFECT_ACCURACY_DOWN_HIT:
-        if (ShouldLowerStat(battlerDef, abilityDef, STAT_ACC) && noOfHitsToKo != 1)
-            return TRUE;
-        break;
-    case EFFECT_EVASION_DOWN_HIT:
-        if (ShouldLowerStat(battlerDef, abilityDef, STAT_EVASION) && noOfHitsToKo != 1)
-            return TRUE;
-        break;
     case EFFECT_ALL_STATS_UP_HIT:
         for (i = STAT_ATK; i <= NUM_STATS; i++)
         {
@@ -940,6 +911,26 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, u32 move, s3
                 if (ShouldTryToFlinch(battlerAtk, battlerDef, abilityAtk, abilityDef, move))
                     return TRUE;
                 break;
+            case MOVE_EFFECT_ATK_MINUS_1:
+            case MOVE_EFFECT_DEF_MINUS_1:
+            case MOVE_EFFECT_SPD_MINUS_1:
+            case MOVE_EFFECT_SP_ATK_MINUS_1:
+            case MOVE_EFFECT_SP_DEF_MINUS_1:
+            case MOVE_EFFECT_ACC_MINUS_1:
+            case MOVE_EFFECT_EVS_MINUS_1:
+                if (ShouldLowerStat(battlerDef, abilityDef, STAT_ATK + (gBattleMoves[move].additionalEffects[i].moveEffect - MOVE_EFFECT_ATK_MINUS_1)) && noOfHitsToKo != 1)
+                    return TRUE;
+                break;
+            case MOVE_EFFECT_ATK_MINUS_2:
+            case MOVE_EFFECT_DEF_MINUS_2:
+            case MOVE_EFFECT_SPD_MINUS_2:
+            case MOVE_EFFECT_SP_ATK_MINUS_2:
+            case MOVE_EFFECT_SP_DEF_MINUS_2:
+            case MOVE_EFFECT_ACC_MINUS_2:
+            case MOVE_EFFECT_EVS_MINUS_2:
+                if (ShouldLowerStat(battlerDef, abilityDef, STAT_ATK + (gBattleMoves[move].additionalEffects[i].moveEffect - MOVE_EFFECT_ATK_MINUS_2)) && noOfHitsToKo != 1)
+                    return TRUE;
+                break;
         }
     }
 
@@ -950,6 +941,7 @@ static bool32 AI_IsMoveEffectInMinus(u32 battlerAtk, u32 battlerDef, u32 move, s
 {
     u32 abilityAtk = AI_DATA->abilities[battlerAtk];
     u32 abilityDef = AI_DATA->abilities[battlerDef];
+    u8 i;
 
     switch (gBattleMoves[move].effect)
     {
@@ -968,14 +960,23 @@ static bool32 AI_IsMoveEffectInMinus(u32 battlerAtk, u32 battlerDef, u32 move, s
         if (AI_IsDamagedByRecoil(battlerAtk))
             return TRUE;
         break;
-    case EFFECT_SPEED_DOWN_HIT:
-    case EFFECT_ATTACK_DOWN_HIT:
-    case EFFECT_DEFENSE_DOWN_HIT:
-    case EFFECT_SPECIAL_ATTACK_DOWN_HIT:
-    case EFFECT_SPECIAL_DEFENSE_DOWN_HIT:
-    case EFFECT_SPECIAL_DEFENSE_DOWN_HIT_2:
-        if (noOfHitsToKo != 1 && abilityDef == ABILITY_CONTRARY && !IsMoldBreakerTypeAbility(abilityAtk))
-            return TRUE;
+    default:
+        for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
+        {
+            switch (gBattleMoves[move].additionalEffects[i].moveEffect)
+            {
+                case MOVE_EFFECT_ATK_MINUS_1:
+                case MOVE_EFFECT_DEF_MINUS_1:
+                case MOVE_EFFECT_SPD_MINUS_1:
+                case MOVE_EFFECT_SP_ATK_MINUS_1:
+                case MOVE_EFFECT_SP_DEF_MINUS_1:
+                case MOVE_EFFECT_SP_DEF_MINUS_2:
+                    if ((gBattleMoves[move].additionalEffects[i].self && GetBattlerAbility(battlerAtk) != ABILITY_CONTRARY)
+                        || (noOfHitsToKo != 1 && abilityDef == ABILITY_CONTRARY && !IsMoldBreakerTypeAbility(abilityAtk)))
+                        return TRUE;
+                    break;
+            }
+        }
         break;
     }
     return FALSE;
@@ -1713,13 +1714,19 @@ bool32 ShouldLowerStat(u32 battler, u32 battlerAbility, u32 stat)
          || battlerAbility == ABILITY_FULL_METAL_BODY)
             return FALSE;
 
-        // If AI is faster and doesn't have any mons left, lowering speed doesn't give any
-        if (stat == STAT_SPEED)
+        switch (stat)
         {
-            if (AI_WhoStrikesFirst(sBattler_AI, battler, AI_THINKING_STRUCT->moveConsidered) == AI_IS_FASTER
-                && CountUsablePartyMons(sBattler_AI) == 0
-                && !HasMoveEffect(sBattler_AI, EFFECT_ELECTRO_BALL))
-                return FALSE;
+            case STAT_ATK:
+                return !(battlerAbility == ABILITY_HYPER_CUTTER);
+            case STAT_DEF:
+                return !(battlerAbility == ABILITY_BIG_PECKS);
+            case STAT_SPEED:
+                // If AI is faster and doesn't have any mons left, lowering speed doesn't give any
+                return !(AI_WhoStrikesFirst(sBattler_AI, battler, AI_THINKING_STRUCT->moveConsidered) == AI_IS_FASTER
+                    && CountUsablePartyMons(sBattler_AI) == 0
+                    && !HasMoveEffect(sBattler_AI, EFFECT_ELECTRO_BALL));
+            case STAT_ACC:
+                return !(battlerAbility == ABILITY_KEEN_EYE || (B_ILLUMINATE_EFFECT >= GEN_9 && battlerAbility == ABILITY_ILLUMINATE));
         }
         return TRUE;
     }

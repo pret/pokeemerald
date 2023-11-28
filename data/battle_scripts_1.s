@@ -89,12 +89,12 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectReflect                 @ EFFECT_REFLECT
 	.4byte BattleScript_EffectPoison                  @ EFFECT_POISON
 	.4byte BattleScript_EffectParalyze                @ EFFECT_PARALYZE
-	.4byte BattleScript_EffectAttackDownHit           @ EFFECT_ATTACK_DOWN_HIT
-	.4byte BattleScript_EffectDefenseDownHit          @ EFFECT_DEFENSE_DOWN_HIT
-	.4byte BattleScript_EffectSpeedDownHit            @ EFFECT_SPEED_DOWN_HIT
-	.4byte BattleScript_EffectSpecialAttackDownHit    @ EFFECT_SPECIAL_ATTACK_DOWN_HIT
-	.4byte BattleScript_EffectSpecialDefenseDownHit   @ EFFECT_SPECIAL_DEFENSE_DOWN_HIT
-	.4byte BattleScript_EffectAccuracyDownHit         @ EFFECT_ACCURACY_DOWN_HIT
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_67
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_68
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_69
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_70
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_71
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_72
 	.4byte BattleScript_EffectHit                     @ EFFECT_EVASION_DOWN_HIT
 	.4byte BattleScript_EffectTwoTurnsAttack          @ EFFECT_TWO_TURNS_ATTACK
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_75
@@ -277,7 +277,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectMetalBurst              @ EFFECT_METAL_BURST
 	.4byte BattleScript_EffectLuckyChant              @ EFFECT_LUCKY_CHANT
 	.4byte BattleScript_EffectSuckerPunch             @ EFFECT_SUCKER_PUNCH
-	.4byte BattleScript_EffectSpecialDefenseDownHit2  @ EFFECT_SPECIAL_DEFENSE_DOWN_HIT_2
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_255
 	.4byte BattleScript_EffectSimpleBeam              @ EFFECT_SIMPLE_BEAM
 	.4byte BattleScript_EffectEntrainment             @ EFFECT_ENTRAINMENT
 	.4byte BattleScript_EffectHealPulse               @ EFFECT_HEAL_PULSE
@@ -364,7 +364,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectFairyLock               @ EFFECT_FAIRY_LOCK
 	.4byte BattleScript_EffectAllySwitch              @ EFFECT_ALLY_SWITCH
 	.4byte BattleScript_EffectRelicSong               @ EFFECT_RELIC_SONG
-	.4byte BattleScript_EffectAttackerDefenseDownHit  @ EFFECT_ATTACKER_DEFENSE_DOWN_HIT
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_342
 	.4byte BattleScript_EffectHit                     @ EFFECT_BODY_PRESS
 	.4byte BattleScript_EffectEerieSpell              @ EFFECT_EERIE_SPELL
 	.4byte BattleScript_EffectJungleHealing           @ EFFECT_JUNGLE_HEALING
@@ -376,7 +376,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_SNIPE_SHOT
 	.4byte BattleScript_EffectRecoilHP25              @ EFFECT_RECOIL_HP_25
 	.4byte BattleScript_EffectStuffCheeks             @ EFFECT_STUFF_CHEEKS
-	.4byte BattleScript_EffectDefenseDownHit          @ EFFECT_GRAV_APPLE
+	.4byte BattleScript_EffectHit                     @ EFFECT_GRAV_APPLE
 	.4byte BattleScript_EffectEvasionUpHit            @ EFFECT_EVASION_UP_HIT
 	.4byte BattleScript_EffectGlitzyGlow              @ EFFECT_GLITZY_GLOW
 	.4byte BattleScript_EffectBaddyBad                @ EFFECT_BADDY_BAD
@@ -1297,10 +1297,6 @@ BattleScript_JungleHealingTryRestoreAlly:
 	setallytonexttarget JungleHealing_RestoreTargetHealth
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectAttackerDefenseDownHit:
-	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING | HITMARKER_NO_PPDEDUCT, BattleScript_NoMoveEffect
-	setmoveeffect MOVE_EFFECT_DEF_MINUS_1 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
-	goto BattleScript_EffectHit
 BattleScript_NoMoveEffect:
 	setmoveeffect 0
 	goto BattleScript_EffectHit
@@ -4129,34 +4125,6 @@ BattleScript_LimberProtected::
 	setbyte cMULTISTRING_CHOOSER, B_MSG_ABILITY_PREVENTS_MOVE_STATUS
 	call BattleScript_PRLZPrevention
 	goto BattleScript_MoveEnd
-
-BattleScript_EffectAttackDownHit::
-	setmoveeffect MOVE_EFFECT_ATK_MINUS_1
-	goto BattleScript_EffectHit
-
-BattleScript_EffectDefenseDownHit::
-	setmoveeffect MOVE_EFFECT_DEF_MINUS_1
-	goto BattleScript_EffectHit
-
-BattleScript_EffectSpeedDownHit::
-	setmoveeffect MOVE_EFFECT_SPD_MINUS_1
-	goto BattleScript_EffectHit
-
-BattleScript_EffectSpecialAttackDownHit::
-	setmoveeffect MOVE_EFFECT_SP_ATK_MINUS_1
-	goto BattleScript_EffectHit
-
-BattleScript_EffectSpecialDefenseDownHit::
-	setmoveeffect MOVE_EFFECT_SP_DEF_MINUS_1
-	goto BattleScript_EffectHit
-
-BattleScript_EffectSpecialDefenseDownHit2::
-	setmoveeffect MOVE_EFFECT_SP_DEF_MINUS_2
-	goto BattleScript_EffectHit
-
-BattleScript_EffectAccuracyDownHit::
-	setmoveeffect MOVE_EFFECT_ACC_MINUS_1
-	goto BattleScript_EffectHit
 
 BattleScript_PowerHerbActivation:
 	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT

@@ -3638,24 +3638,6 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     case EFFECT_PARALYZE:
         IncreaseParalyzeScore(battlerAtk, battlerDef, move, &score);
         break;
-    case EFFECT_ATTACK_DOWN_HIT:
-    case EFFECT_DEFENSE_DOWN_HIT:
-    case EFFECT_SPECIAL_ATTACK_DOWN_HIT:
-    case EFFECT_SPECIAL_DEFENSE_DOWN_HIT:
-    case EFFECT_ACCURACY_DOWN_HIT:
-    case EFFECT_EVASION_DOWN_HIT:
-        if (sereneGraceBoost && aiData->abilities[battlerDef] != ABILITY_CONTRARY)
-            ADJUST_SCORE(2);
-        break;
-    case EFFECT_SPEED_DOWN_HIT:
-        if (ShouldLowerSpeed(battlerAtk, battlerDef, aiData->abilities[battlerDef]))
-        {
-            if (sereneGraceBoost && aiData->abilities[battlerDef] != ABILITY_CONTRARY)
-                ADJUST_SCORE(5);
-            else
-                ADJUST_SCORE(2);
-        }
-        break;
     case EFFECT_SUBSTITUTE:
         if (gStatuses3[battlerDef] & STATUS3_PERISH_SONG)
             ADJUST_SCORE(3);
@@ -4856,6 +4838,24 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             case MOVE_EFFECT_FLINCH:
                 score += ShouldTryToFlinch(battlerAtk, battlerDef, aiData->abilities[battlerAtk], aiData->abilities[battlerDef], move);
                 break;
+            case MOVE_EFFECT_ATK_MINUS_1:
+            case MOVE_EFFECT_DEF_MINUS_1:
+            case MOVE_EFFECT_SP_ATK_MINUS_1:
+            case MOVE_EFFECT_SP_DEF_MINUS_1:
+            case MOVE_EFFECT_ACC_MINUS_1:
+            case MOVE_EFFECT_EVS_MINUS_1:
+                if (sereneGraceBoost && aiData->abilities[battlerDef] != ABILITY_CONTRARY)
+                    ADJUST_SCORE(2);
+                break;
+            case MOVE_EFFECT_SPD_MINUS_1:
+                if (ShouldLowerSpeed(battlerAtk, battlerDef, aiData->abilities[battlerDef]))
+                {
+                    if (sereneGraceBoost && aiData->abilities[battlerDef] != ABILITY_CONTRARY)
+                        ADJUST_SCORE(5);
+                    else
+                        ADJUST_SCORE(2);
+                }
+                break;
         }
 
         // Only consider the below if they're certain to happen
@@ -4907,6 +4907,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
                 break;
         }
     }
+    DebugPrintf("%S score: %d", gMoveNames[move], score);
 
     return score;
 }
