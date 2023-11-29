@@ -10532,6 +10532,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .priority = 0,
         .split = SPLIT_STATUS,
         .zMoveEffect = Z_EFFECT_RESET_STATS,
+        .argument = MOVE_EFFECT_FLORAL_HEALING,
         .magicCoatAffected = TRUE,
     },
 
