@@ -492,7 +492,7 @@ static void Task_HandleScrollingMultichoiceInput(u8 taskId)
     case LIST_CANCEL:
         if (!gTasks[taskId].data[1])
         {
-            gSpecialVar_Result = 0x7F;
+            gSpecialVar_Result = MULTI_B_PRESSED;
             done = TRUE;
         }
         break;
