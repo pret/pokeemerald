@@ -841,8 +841,7 @@ static void Debug_DrawNumber(s16 number, u16 *dest, bool8 unk)
     }
 }
 
-// Unused
-static void Debug_DrawNumberPair(s16 number1, s16 number2, u16 *dest)
+static void UNUSED Debug_DrawNumberPair(s16 number1, s16 number2, u16 *dest)
 {
     dest[4] = 0x1E;
     Debug_DrawNumber(number2, dest, FALSE);
@@ -2459,9 +2458,8 @@ static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32
     return filledPixels;
 }
 
-// Unused
 // These two functions seem as if they were made for testing the health bar.
-static s16 Debug_TestHealthBar(struct TestingBar *barInfo, s32 *currValue, u16 *dest, s32 unused)
+static s16 UNUSED Debug_TestHealthBar(struct TestingBar *barInfo, s32 *currValue, u16 *dest, s32 unused)
 {
     s16 ret, var;
 
