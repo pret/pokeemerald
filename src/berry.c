@@ -23,6 +23,8 @@ static u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water);
 static u8 CalcBerryYield(struct BerryTree *tree);
 static u8 GetBerryCountByBerryTreeId(u8 id);
 static u16 GetStageDurationByBerryType(u8);
+static void SetTreeMutations(u8 id, u8 berry);
+static u8 GetTreeMutationValue(u8 id);
 
 //.rodata
 static const u8 sBerryDescriptionPart1_Cheri[] = _("Blooms with delicate pretty flowers.");
@@ -1627,6 +1629,8 @@ void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 allowGrowth)
     // allowGrowth is always true for berry trees the player has planted
     if (!allowGrowth)
         tree->stopGrowth = TRUE;
+
+    SetTreeMutations(id, berry);
 }
 
 void RemoveBerryTree(u8 id)
@@ -1787,6 +1791,15 @@ void ObjectEventInteractionGetBerryCountString(void)
     u8 berry = GetBerryTypeByBerryTreeId(treeId);
     u8 count = GetBerryCountByBerryTreeId(treeId);
     GetBerryCountStringByBerryType(berry, gStringVar1, count);
+    berry = GetTreeMutationValue(treeId);
+    if (berry > 0)
+    {
+        count = 1;
+        GetBerryCountStringByBerryType(berry, gStringVar3, count);
+        gSpecialVar_Result = TRUE;
+    }
+    else
+        gSpecialVar_Result = FALSE;
 }
 
 void Bag_ChooseBerry(void)
@@ -1806,8 +1819,19 @@ void ObjectEventInteractionPickBerryTree(void)
 {
     u8 id = GetObjectEventBerryTreeId(gSelectedObjectEvent);
     u8 berry = GetBerryTypeByBerryTreeId(id);
+    u8 mutation = GetTreeMutationValue(id);
 
-    gSpecialVar_0x8004 = AddBagItem(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id));
+    if (!OW_BERRY_MUTATIONS || mutation == 0)
+    {
+        gSpecialVar_0x8004 = AddBagItem(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id));
+        return;
+    }
+    gSpecialVar_0x8004 = (CheckBagHasSpace(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id)) && CheckBagHasSpace(BerryTypeToItemId(mutation), 1)) + 2;
+    if (gSpecialVar_0x8004 == 3)
+    {
+        AddBagItem(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id));
+        AddBagItem(BerryTypeToItemId(mutation), 1);
+    }
 }
 
 void ObjectEventInteractionRemoveBerryTree(void)
@@ -1848,4 +1872,110 @@ void SetBerryTreesSeen(void)
                 AllowBerryTreeGrowth(gObjectEvents[i].trainerRange_berryTreeId);
         }
     }
+}
+
+// Berry mutations
+#if OW_BERRY_MUTATIONS == TRUE
+#define BERRY_MUTATION_CHANCE 25
+
+static const u8 sBerryMutations[][3] = {
+    {ITEM_TO_BERRY(ITEM_IAPAPA_BERRY), ITEM_TO_BERRY(ITEM_MAGO_BERRY),   ITEM_TO_BERRY(ITEM_POMEG_BERRY)},
+    {ITEM_TO_BERRY(ITEM_CHESTO_BERRY), ITEM_TO_BERRY(ITEM_PERSIM_BERRY), ITEM_TO_BERRY(ITEM_KELPSY_BERRY)},
+    {ITEM_TO_BERRY(ITEM_ORAN_BERRY),   ITEM_TO_BERRY(ITEM_PECHA_BERRY),  ITEM_TO_BERRY(ITEM_QUALOT_BERRY)},
+    {ITEM_TO_BERRY(ITEM_CHESTO_BERRY), ITEM_TO_BERRY(ITEM_PERSIM_BERRY), ITEM_TO_BERRY(ITEM_KELPSY_BERRY)},
+    {ITEM_TO_BERRY(ITEM_ASPEAR_BERRY), ITEM_TO_BERRY(ITEM_LEPPA_BERRY),  ITEM_TO_BERRY(ITEM_HONDEW_BERRY)},
+    {ITEM_TO_BERRY(ITEM_AGUAV_BERRY),  ITEM_TO_BERRY(ITEM_FIGY_BERRY),   ITEM_TO_BERRY(ITEM_GREPA_BERRY)},
+    {ITEM_TO_BERRY(ITEM_LUM_BERRY),    ITEM_TO_BERRY(ITEM_SITRUS_BERRY), ITEM_TO_BERRY(ITEM_TAMATO_BERRY)},
+    {ITEM_TO_BERRY(ITEM_HONDEW_BERRY), ITEM_TO_BERRY(ITEM_YACHE_BERRY),  ITEM_TO_BERRY(ITEM_LIECHI_BERRY)},
+    {ITEM_TO_BERRY(ITEM_QUALOT_BERRY), ITEM_TO_BERRY(ITEM_TANGA_BERRY),  ITEM_TO_BERRY(ITEM_GANLON_BERRY)},
+    {ITEM_TO_BERRY(ITEM_GREPA_BERRY),  ITEM_TO_BERRY(ITEM_ROSELI_BERRY), ITEM_TO_BERRY(ITEM_SALAC_BERRY)},
+    {ITEM_TO_BERRY(ITEM_POMEG_BERRY),  ITEM_TO_BERRY(ITEM_KASIB_BERRY),  ITEM_TO_BERRY(ITEM_PETAYA_BERRY)},
+    {ITEM_TO_BERRY(ITEM_KELPSY_BERRY), ITEM_TO_BERRY(ITEM_WACAN_BERRY),  ITEM_TO_BERRY(ITEM_APICOT_BERRY)},
+    {ITEM_TO_BERRY(ITEM_GANLON_BERRY), ITEM_TO_BERRY(ITEM_LIECHI_BERRY), ITEM_TO_BERRY(ITEM_KEE_BERRY)},
+    {ITEM_TO_BERRY(ITEM_SALAC_BERRY),  ITEM_TO_BERRY(ITEM_PETAYA_BERRY), ITEM_TO_BERRY(ITEM_MARANGA_BERRY)},
+};
+
+static u8 GetMutationOutcome(u8 berry1, u8 berry2)
+{
+    u8 i;
+    for(i = 0; i < ARRAY_COUNT(sBerryMutations); i++)
+    {
+        if ((sBerryMutations[i][0] == berry1 && sBerryMutations[i][1] == berry2)
+          ||(sBerryMutations[i][0] == berry2 && sBerryMutations[i][1] == berry1))
+            return sBerryMutations[i][2];
+    }
+    return 0;
+}
+
+static u8 TryForMutation(u8 berryTreeId, u8 berry)
+{
+    u8 i, j;
+    s16 x1, x2, y1, y2;
+
+    // Get location of current tree
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].trainerRange_berryTreeId == berryTreeId && gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
+        break;
+    }
+    if (i == OBJECT_EVENTS_COUNT)
+        return 0;
+
+    x1 = gObjectEvents[i].currentCoords.x;
+    y1 = gObjectEvents[i].currentCoords.y;
+
+    // Try mutation for each adjacent tree
+    for (j = 0; j < OBJECT_EVENTS_COUNT; j++)
+    {
+        if (gObjectEvents[j].active && gObjectEvents[j].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH && GetStageByBerryTreeId(GetObjectEventBerryTreeId(j)) != BERRY_STAGE_NO_BERRY && j != i)
+        {
+            x2 = gObjectEvents[j].currentCoords.x;
+            y2 = gObjectEvents[j].currentCoords.y;
+            if (Random() % 100 < BERRY_MUTATION_CHANCE && (
+                (x1 == x2 && y1 == y2 - 1) ||
+                (x1 == x2 && y1 == y2 + 1) ||
+                (x1 == x2 - 1 && y1 == y2) ||
+                (x1 == x2 + 1 && y1 == y2)))
+                return GetMutationOutcome(berry, gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(j)].berry);
+        }
+    }
+    return 0;
+}
+#endif
+
+struct TreeMutationBitfield {
+  u8 a: 2;
+  u8 b: 2;
+  u8 c: 3;
+  u8 unused: 1;
+};
+
+union TreeMutation {
+  u8 value;
+  struct TreeMutationBitfield asField;
+};
+
+static u8 GetTreeMutationValue(u8 id)
+{
+    struct BerryTree *tree = GetBerryTreeInfo(id);
+    union TreeMutation myMutation;
+    if (!OW_BERRY_MUTATIONS || tree->stopGrowth) // Pre-generated trees shouldn't have mutations
+        return 0;
+    myMutation.asField.a = tree->mutationA;
+    myMutation.asField.b = tree->mutationB;
+    myMutation.asField.c = tree->mutationC;
+    return myMutation.value;
+}
+
+static void SetTreeMutations(u8 id, u8 berry)
+{
+#if OW_BERRY_MUTATIONS == TRUE
+    struct BerryTree *tree = GetBerryTreeInfo(id);
+    union TreeMutation myMutation;
+
+    myMutation.value = TryForMutation(id, berry);
+    tree->mutationA = myMutation.asField.a;
+    tree->mutationB = myMutation.asField.b;
+    tree->mutationC = myMutation.asField.c;
+#endif
 }

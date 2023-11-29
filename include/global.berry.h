@@ -62,16 +62,24 @@ struct BattleEnigmaBerry
 
 struct BerryTree
 {
-    u8 berry;
-    u8 stage:7;
+    u8 berry:7;
+    u8 weeds:1;
+    u8 stage:3;
+    u8 mulch:4;
     u8 stopGrowth:1;
-    u16 minutesUntilNextStage;
-    u8 berryYield;
+    u16 minutesUntilNextStage:14;
+    u16 mutationA:2;
+    u8 berryYield:5;
+    u8 pests:1;
+    u8 mutationB:2;
     u8 regrowthCount:4;
     u8 watered1:1;
     u8 watered2:1;
     u8 watered3:1;
     u8 watered4:1;
+    u16 moistureLevel:7;
+    u16 moistureClock:6;
+    u16 mutationC:3;
 };
 
 #endif // GUARD_GLOBAL_BERRY_H
