@@ -28,6 +28,7 @@ static bool8 ShouldUseItem(u32 battler);
 static bool32 AiExpectsToFaintPlayer(u32 battler);
 static bool32 AI_ShouldHeal(u32 battler, u32 healAmount);
 static bool32 AI_OpponentCanFaintAiWithMod(u32 battler, u32 healAmount);
+static u32 GetSwitchinHazardsDamage(u32 battler, struct BattlePokemon *battleMon);
 
 static void InitializeSwitchinCandidate(struct Pokemon *mon)
 {
@@ -774,6 +775,153 @@ static bool8 FindMonWithFlagsAndSuperEffective(u32 battler, u16 flags, u8 modulo
     return FALSE;
 }
 
+static bool32 CanMonSurviveHazardSwitchin(u32 battler)
+{
+    u32 battlerIn1, battlerIn2;
+    u32 hazardDamage = 0, battlerHp = gBattleMons[battler].hp;
+    u32 ability = GetBattlerAbility(battler), aiMove;
+    s32 firstId, lastId, i, j;
+    struct Pokemon *party;
+
+    if (ability == ABILITY_REGENERATOR)
+        battlerHp = (battlerHp * 133) / 100; // Account for Regenerator healing
+    
+    hazardDamage = GetSwitchinHazardsDamage(battler, &gBattleMons[battler]);
+
+    // Battler will faint to hazards, check to see if another mon can clear them
+    if (hazardDamage > battlerHp)
+    {
+        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        {
+            battlerIn1 = battler;
+            if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battler)))])
+                battlerIn2 = battler;
+            else
+                battlerIn2 = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battler)));
+        }
+        else
+        {
+            battlerIn1 = battler;
+            battlerIn2 = battler;
+        }
+
+        GetAIPartyIndexes(battler, &firstId, &lastId);
+        party = GetBattlerParty(battler);
+
+        for (i = firstId; i < lastId; i++)
+        {
+            if (!IsValidForBattle(&party[i]))
+                continue;
+            if (i == gBattlerPartyIndexes[battlerIn1])
+                continue;
+            if (i == gBattlerPartyIndexes[battlerIn2])
+                continue;
+            if (i == *(gBattleStruct->monToSwitchIntoId + battlerIn1))
+                continue;
+            if (i == *(gBattleStruct->monToSwitchIntoId + battlerIn2))
+                continue;
+            if (IsAceMon(battler, i))
+                continue;
+
+            for (j = 0; j < MAX_MON_MOVES; j++)
+            {
+                aiMove = GetMonData(&party[i], MON_DATA_MOVE1 + j, NULL);
+                if (aiMove == MOVE_RAPID_SPIN || aiMove == MOVE_DEFOG || aiMove == MOVE_MORTAL_SPIN || aiMove == MOVE_TIDY_UP)
+                {
+                    // Have a mon that can clear the hazards, so switching out is okay
+                    return TRUE;
+                }
+            }
+        }
+        // Faints to hazards and party can't clear them, don't switch out
+        return FALSE;
+    }
+    return TRUE;
+}
+
+static bool32 ShouldSwitchIfEncored(u32 battler)
+{   
+    // Only use this if AI_FLAG_SMART_SWITCHING is set for the trainer
+    if (!(AI_THINKING_STRUCT->aiFlags & AI_FLAG_SMART_SWITCHING))
+        return FALSE;
+
+    // If not Encored or if no good switchin, don't switch
+    if (gDisableStructs[battler].encoredMove == MOVE_NONE || AI_DATA->mostSuitableMonId == PARTY_SIZE)
+        return FALSE;
+
+    // Otherwise 50% chance to switch out
+    if (Random() & 1)
+    {
+        *(gBattleStruct->AI_monToSwitchIntoId + battler) = PARTY_SIZE;
+        BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SWITCH, 0);
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+// AI should switch if it's become setup fodder and has something better to switch to
+static bool8 AreAttackingStatsLowered(u32 battler)
+{
+    s8 attackingStage = gBattleMons[battler].statStages[STAT_ATK];
+    s8 spAttackingStage = gBattleMons[battler].statStages[STAT_SPATK];
+
+    // Only use this if AI_FLAG_SMART_SWITCHING is set for the trainer
+    if (!(AI_THINKING_STRUCT->aiFlags & AI_FLAG_SMART_SWITCHING))
+        return FALSE;
+
+    // Physical attacker
+    if (gBattleMons[battler].attack > gBattleMons[battler].spAttack)
+    {
+        // Don't switch if attack isn't below -1
+        if (attackingStage > DEFAULT_STAT_STAGE - 2)
+            return FALSE;
+        // 50% chance if attack at -2 and have a good candidate mon
+        else if (attackingStage == DEFAULT_STAT_STAGE - 2)
+        {
+            if (AI_DATA->mostSuitableMonId != PARTY_SIZE && (Random() & 1))
+            {
+                *(gBattleStruct->AI_monToSwitchIntoId + battler) = PARTY_SIZE;
+                BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SWITCH, 0);
+                return TRUE;
+            }
+        }
+        // If at -3 or worse, switch out regardless
+        else if (attackingStage < DEFAULT_STAT_STAGE - 2)
+        {
+            *(gBattleStruct->AI_monToSwitchIntoId + battler) = PARTY_SIZE;
+            BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SWITCH, 0);
+            return TRUE;
+        }
+    }
+
+    // Special attacker
+    else
+    {
+        // Don't switch if attack isn't below -1
+        if (spAttackingStage > DEFAULT_STAT_STAGE - 2)
+            return FALSE;
+        // 50% chance if attack at -2 and have a good candidate mon
+        else if (spAttackingStage == DEFAULT_STAT_STAGE - 2)
+        {
+            if (AI_DATA->mostSuitableMonId != PARTY_SIZE && (Random() & 1))
+            {
+                *(gBattleStruct->AI_monToSwitchIntoId + battler) = PARTY_SIZE;
+                BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SWITCH, 0);
+                return TRUE;
+            }
+        }
+        // If at -3 or worse, switch out regardless
+        else if (spAttackingStage < DEFAULT_STAT_STAGE - 2)
+        {
+            *(gBattleStruct->AI_monToSwitchIntoId + battler) = PARTY_SIZE;
+            BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SWITCH, 0);
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 bool32 ShouldSwitch(u32 battler)
 {
     u8 battlerIn1, battlerIn2;
@@ -857,11 +1005,17 @@ bool32 ShouldSwitch(u32 battler)
         return TRUE;
 
     //These Functions can prompt switch to generic pary members
+    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_SMART_SWITCHING) && (CanMonSurviveHazardSwitchin(battler) == FALSE))
+        return FALSE;
     if (ShouldSwitchIfAllBadMoves(battler))
         return TRUE;
     if (ShouldSwitchIfAbilityBenefit(battler))
         return TRUE;
     if (HasBadOdds(battler))
+        return TRUE;
+    if (ShouldSwitchIfEncored(battler))
+        return TRUE;
+    if (AreAttackingStatsLowered(battler))
         return TRUE;
 
     //Removing switch capabilites under specific conditions
@@ -1108,7 +1262,7 @@ static u32 GetSwitchinHazardsDamage(u32 battler, struct BattlePokemon *battleMon
     {
         // Stealth Rock
         if ((hazardFlags & SIDE_STATUS_STEALTH_ROCK) && heldItemEffect != HOLD_EFFECT_HEAVY_DUTY_BOOTS)
-            hazardDamage += GetStealthHazardDamageByTypesAndHP(gBattleMoves[MOVE_STEALTH_ROCK].type, defType1, defType2, battleMon->hp);
+            hazardDamage += GetStealthHazardDamageByTypesAndHP(gBattleMoves[MOVE_STEALTH_ROCK].type, defType1, defType2, battleMon->maxHP);
         // Spikes
         if ((hazardFlags & SIDE_STATUS_SPIKES) && IsMonGrounded(heldItemEffect, ability, defType1, defType2))
         {
