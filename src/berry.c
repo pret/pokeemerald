@@ -1566,11 +1566,22 @@ static bool32 BerryTreeGrow(struct BerryTree *tree)
         tree->watered4 = 0;
         tree->berryYield = 0;
         tree->stage = BERRY_STAGE_SPROUTED;
-        if (++tree->regrowthCount == 10)
+        if (++tree->regrowthCount == ((tree->mulch == ITEM_TO_MULCH(ITEM_GOOEY_MULCH)) ? 15 : 10))
             *tree = gBlankBerryTree;
         break;
     }
     return TRUE;
+}
+
+static u16 GetMulchAffectedGrowthRate(u16 berryDuration, u8 mulch, u8 stage)
+{
+    if (stage == BERRY_STAGE_BERRIES)
+        return berryDuration;
+    if (mulch == ITEM_TO_MULCH(ITEM_GROWTH_MULCH))
+        return berryDuration / 4 * 3;
+    if (mulch == ITEM_TO_MULCH(ITEM_DAMP_MULCH))
+        return berryDuration / 2 * 3;
+    return berryDuration;
 }
 
 void BerryTreeTimeUpdate(s32 minutes)
@@ -1600,11 +1611,11 @@ void BerryTreeTimeUpdate(s32 minutes)
                         break;
                     }
                     time -= tree->minutesUntilNextStage;
-                    tree->minutesUntilNextStage = GetStageDurationByBerryType(tree->berry);
+                    tree->minutesUntilNextStage = GetMulchAffectedGrowthRate(GetStageDurationByBerryType(tree->berry), tree->mulch, tree->stage);
                     if (!BerryTreeGrow(tree))
                         break;
                     if (tree->stage == BERRY_STAGE_BERRIES)
-                        tree->minutesUntilNextStage *= 4;
+                        tree->minutesUntilNextStage *= ((tree->mulch == ITEM_TO_MULCH(ITEM_STABLE_MULCH)) ? 6 : 4);
                 }
             }
         }
@@ -1615,14 +1626,13 @@ void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 allowGrowth)
 {
     struct BerryTree *tree = GetBerryTreeInfo(id);
 
-    *tree = gBlankBerryTree;
     tree->berry = berry;
-    tree->minutesUntilNextStage = GetStageDurationByBerryType(berry);
+    tree->minutesUntilNextStage = GetMulchAffectedGrowthRate(GetStageDurationByBerryType(berry), tree->mulch, stage);
     tree->stage = stage;
     if (stage == BERRY_STAGE_BERRIES)
     {
         tree->berryYield = CalcBerryYield(tree);
-        tree->minutesUntilNextStage *= 4;
+        tree->minutesUntilNextStage *= ((tree->mulch == ITEM_TO_MULCH(ITEM_STABLE_MULCH)) ? 6 : 4);
     }
 
     // Stop growth, to keep tree at this stage until the player has seen it
@@ -1646,6 +1656,11 @@ u8 GetBerryTypeByBerryTreeId(u8 id)
 u8 GetStageByBerryTreeId(u8 id)
 {
     return gSaveBlock1Ptr->berryTrees[id].stage;
+}
+
+u8 GetMulchByBerryTreeId(u8 id)
+{
+    return gSaveBlock1Ptr->berryTrees[id].mulch;
 }
 
 u8 ItemIdToBerryType(u16 item)
@@ -1742,8 +1757,11 @@ static u8 CalcBerryYield(struct BerryTree *tree)
     const struct Berry *berry = GetBerryInfo(tree->berry);
     u8 min = berry->minYield;
     u8 max = berry->maxYield;
+    u8 result = CalcBerryYieldInternal(max, min, BerryTreeGetNumStagesWatered(tree));
+    if (tree->mulch == ITEM_TO_MULCH(ITEM_RICH_MULCH) || tree->mulch == ITEM_TO_MULCH(ITEM_AMAZE_MULCH))
+        result += 2;
 
-    return CalcBerryYieldInternal(max, min, BerryTreeGetNumStagesWatered(tree));
+    return result;
 }
 
 static u8 GetBerryCountByBerryTreeId(u8 id)
@@ -1909,7 +1927,7 @@ static u8 GetMutationOutcome(u8 berry1, u8 berry2)
 
 static u8 TryForMutation(u8 berryTreeId, u8 berry)
 {
-    u8 i, j;
+    u8 i, j, mulch;
     s16 x1, x2, y1, y2;
 
     // Get location of current tree
@@ -1924,6 +1942,8 @@ static u8 TryForMutation(u8 berryTreeId, u8 berry)
     x1 = gObjectEvents[i].currentCoords.x;
     y1 = gObjectEvents[i].currentCoords.y;
 
+    mulch = GetMulchByBerryTreeId(GetObjectEventBerryTreeId(i));
+
     // Try mutation for each adjacent tree
     for (j = 0; j < OBJECT_EVENTS_COUNT; j++)
     {
@@ -1931,7 +1951,7 @@ static u8 TryForMutation(u8 berryTreeId, u8 berry)
         {
             x2 = gObjectEvents[j].currentCoords.x;
             y2 = gObjectEvents[j].currentCoords.y;
-            if (Random() % 100 < BERRY_MUTATION_CHANCE && (
+            if (Random() % 100 < (BERRY_MUTATION_CHANCE * (mulch == ITEM_TO_MULCH(ITEM_SURPRISE_MULCH) || mulch == ITEM_TO_MULCH(ITEM_AMAZE_MULCH))) && (
                 (x1 == x2 && y1 == y2 - 1) ||
                 (x1 == x2 && y1 == y2 + 1) ||
                 (x1 == x2 - 1 && y1 == y2) ||

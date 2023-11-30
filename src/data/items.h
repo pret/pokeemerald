@@ -2167,7 +2167,8 @@ const struct Item gItems[] =
         .description = sGrowthMulchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = ITEM_TO_MULCH(ITEM_GROWTH_MULCH),
         .flingPower = 30,
     },
 
@@ -2178,7 +2179,8 @@ const struct Item gItems[] =
         .description = sDampMulchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = ITEM_TO_MULCH(ITEM_DAMP_MULCH),
         .flingPower = 30,
     },
 
@@ -2189,7 +2191,8 @@ const struct Item gItems[] =
         .description = sStableMulchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = ITEM_TO_MULCH(ITEM_STABLE_MULCH),
         .flingPower = 30,
     },
 
@@ -2200,7 +2203,8 @@ const struct Item gItems[] =
         .description = sGooeyMulchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = ITEM_TO_MULCH(ITEM_GOOEY_MULCH),
         .flingPower = 30,
     },
 
@@ -2211,7 +2215,8 @@ const struct Item gItems[] =
         .description = sRichMulchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = ITEM_TO_MULCH(ITEM_RICH_MULCH),
         .flingPower = 30,
     },
 
@@ -2222,7 +2227,8 @@ const struct Item gItems[] =
         .description = sSurpriseMulchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = ITEM_TO_MULCH(ITEM_SURPRISE_MULCH),
         .flingPower = 30,
     },
 
@@ -2233,7 +2239,8 @@ const struct Item gItems[] =
         .description = sBoostMulchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = ITEM_TO_MULCH(ITEM_BOOST_MULCH),
         .flingPower = 30,
     },
 
@@ -2244,7 +2251,8 @@ const struct Item gItems[] =
         .description = sAmazeMulchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = ITEM_TO_MULCH(ITEM_AMAZE_MULCH),
         .flingPower = 30,
     },
 
