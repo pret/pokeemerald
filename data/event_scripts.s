@@ -1002,27 +1002,17 @@ Common_EventScript_LegendaryFlewAway::
 	end
 
 EventScript_DoWonderTrade::
+	getpartysize
+	goto_if_eq VAR_RESULT, 0, EventScript_End
 	special ChoosePartyMon
 	waitstate
-	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge EventScript_End
+	goto_if_ge VAR_0x8004, PARTY_SIZE, EventScript_End
 	copyvar VAR_0x8005, VAR_0x8004
 	special CreateWonderTradePokemon
 	special DoInGameTradeScene
 	waitstate
-	msgbox EventScript_DoWonderTrade_Text_WannaDoAnotherWonderTrade, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq EventScript_DoWonderTrade
-	msgbox EventScript_DoWonderTrade_Text_Done, MSGBOX_DEFAULT
-	closemessage
 EventScript_End:
 	end
-
-EventScript_DoWonderTrade_Text_WannaDoAnotherWonderTrade:
-	.string "Do you want to do\nanother Wonder Trade?$"
-
-EventScript_DoWonderTrade_Text_Done:
-	.string "Enjoy your new Pokémon.$"
 
 	.include "data/scripts/pc_transfer.inc"
 	.include "data/scripts/questionnaire.inc"

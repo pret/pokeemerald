@@ -252,7 +252,7 @@ const u8 maleWTNames[][PLAYER_NAME_LENGTH + 1] = {
     [250] = _("TUCKER"),
 };
 
-const u8 femaleWTNames[][7 + 1] = {
+const u8 femaleWTNames[][PLAYER_NAME_LENGTH + 1] = {
     [0] = _("EMILY"),
     [1] = _("EMMA"),
     [2] = _("MADISON"),
