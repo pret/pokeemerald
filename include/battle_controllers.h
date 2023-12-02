@@ -99,6 +99,26 @@ enum {
 // Special return values in gBattleBufferB from Battle Controller functions.
 #define RET_VALUE_LEVELED_UP   11
 
+#ifndef UBFIX
+#define SetMonData16(mon, type, arg) SetMonData(mon, type, arg)
+#define SetMonData32(mon, type, arg) SetMonData(mon, type, arg)
+#else
+#define SetMonData16(mon, type, arg) \
+{        \
+    u8 *data = arg; \
+    u16 value = (data[0]) | (data[1] << 8); \
+    SetMonData(mon, type, &value); \
+}
+
+#define SetMonData32(mon, type, arg) \
+{\
+    u8 *data = arg; \
+    u16 value = (data[0]) | (data[1] << 8) | (data[2] << 16) | (data[3] << 24); \
+    SetMonData(mon, type, &value); \
+}
+
+#endif
+
 struct UnusedControllerStruct
 {
     u8 unk:7;
