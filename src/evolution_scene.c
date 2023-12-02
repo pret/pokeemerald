@@ -551,6 +551,7 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon *mon)
     if (gEvolutionTable[preEvoSpecies][0].method == EVO_LEVEL_NINJASK && gPlayerPartyCount < PARTY_SIZE)
     {
         s32 i;
+#ifndef UBFIX
         struct Pokemon *shedinja = &gPlayerParty[gPlayerPartyCount];
 
         CopyMon(&gPlayerParty[gPlayerPartyCount], mon, sizeof(struct Pokemon));
@@ -568,6 +569,28 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon *mon)
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_STATUS, &data);
         data = MAIL_NONE;
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_MAIL, &data);
+#else
+        u16 data2 = 0;
+        u8 data3 = 0;
+        struct Pokemon *shedinja = &gPlayerParty[gPlayerPartyCount];
+
+        CopyMon(shedinja, mon, sizeof(struct Pokemon));
+        SetMonData(shedinja, MON_DATA_NICKNAME, gSpeciesNames[gEvolutionTable[preEvoSpecies][1].targetSpecies]);
+        SetMonData(shedinja, MON_DATA_HELD_ITEM, &data2);
+        SetMonData(shedinja, MON_DATA_MARKINGS, &data3);
+        SetMonData(shedinja, MON_DATA_ENCRYPT_SEPARATOR, &data);
+
+        for (i = MON_DATA_COOL_RIBBON; i < MON_DATA_COOL_RIBBON + CONTEST_CATEGORIES_COUNT; i++)
+            SetMonData(shedinja, i, &data3);
+        for (i = MON_DATA_CHAMPION_RIBBON; i <= MON_DATA_UNUSED_RIBBONS; i++)
+            SetMonData(shedinja, i, &data3);
+
+        SetMonData(shedinja, MON_DATA_STATUS, &data);
+        data2 = MAIL_NONE;
+        SetMonData(shedinja, MON_DATA_MAIL, &data);
+#endif
+
+        CalculateMonStats(shedinja);
 
         CalculateMonStats(&gPlayerParty[gPlayerPartyCount]);
         CalculatePlayerPartyCount();
