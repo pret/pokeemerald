@@ -157,7 +157,7 @@ struct InGameTrade {
     u32 personality;
     u16 heldItem;
     u8 mailNum;
-    u8 otName[11];
+    u8 otName[TRAINER_NAME_LENGTH + 1];
     u8 otGender;
     u8 sheen;
     u16 requestedSpecies;
