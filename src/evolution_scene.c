@@ -551,6 +551,7 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon *mon)
     if (gEvolutionTable[preEvoSpecies][0].method == EVO_LEVEL_NINJASK && gPlayerPartyCount < PARTY_SIZE)
     {
         s32 i;
+        struct Pokemon *shedinja = &gPlayerParty[gPlayerPartyCount];
 #ifndef UBFIX
         CopyMon(&gPlayerParty[gPlayerPartyCount], mon, sizeof(struct Pokemon));
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_SPECIES, &gEvolutionTable[preEvoSpecies][1].targetSpecies);
@@ -570,7 +571,6 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon *mon)
 #else
         u16 data2 = 0;
         u8 data3 = 0;
-        struct Pokemon *shedinja = &gPlayerParty[gPlayerPartyCount];
 
         CopyMon(shedinja, mon, sizeof(struct Pokemon));
         SetMonData(shedinja, MON_DATA_NICKNAME, gSpeciesNames[gEvolutionTable[preEvoSpecies][1].targetSpecies]);
