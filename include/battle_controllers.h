@@ -103,20 +103,19 @@ enum {
 #define SetMonData16(mon, type, arg) SetMonData(mon, type, arg)
 #define SetMonData32(mon, type, arg) SetMonData(mon, type, arg)
 #else
-#define SetMonData16(mon, type, arg) \
-{        \
-    u8 *data = arg; \
+#define SetMonData16(mon, type, arg)            \
+{                                           \
+    u8 *data = arg;                         \
     u16 value = (data[0]) | (data[1] << 8); \
-    SetMonData(mon, type, &value); \
+    SetMonData(mon, type, &value);          \
 }
 
-#define SetMonData32(mon, type, arg) \
-{\
-    u8 *data = arg; \
+#define SetMonData32(mon, type, arg)                                                \
+{                                                                               \
+    u8 *data = arg;                                                             \
     u16 value = (data[0]) | (data[1] << 8) | (data[2] << 16) | (data[3] << 24); \
-    SetMonData(mon, type, &value); \
+    SetMonData(mon, type, &value);                                              \
 }
-
 #endif
 
 struct UnusedControllerStruct
