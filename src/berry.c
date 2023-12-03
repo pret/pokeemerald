@@ -1553,7 +1553,7 @@ static bool32 BerryTreeGrow(struct BerryTree *tree)
     case BERRY_STAGE_NO_BERRY:
         return FALSE;
     case BERRY_STAGE_FLOWERING:
-        tree->berryYield = CalcBerryYield(tree);
+        tree->berryYield = tree->berryYield + CalcBerryYield(tree);
     case BERRY_STAGE_PLANTED:
     case BERRY_STAGE_SPROUTED:
     case BERRY_STAGE_TALLER:
@@ -1631,7 +1631,7 @@ void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 allowGrowth)
     tree->stage = stage;
     if (stage == BERRY_STAGE_BERRIES)
     {
-        tree->berryYield = CalcBerryYield(tree);
+        tree->berryYield = tree->berryYield + CalcBerryYield(tree);
         tree->minutesUntilNextStage *= ((tree->mulch == ITEM_TO_MULCH(ITEM_STABLE_MULCH)) ? 6 : 4);
     }
 
