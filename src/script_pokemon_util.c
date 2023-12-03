@@ -150,7 +150,7 @@ void CreateScriptedWildMon(u16 species, u8 level, u16 item)
     CreateMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0);
     if (item)
     {
-#ifdef UBFIX
+#ifndef UBFIX
         u8 heldItem[2];
         heldItem[0] = item;
         heldItem[1] = item >> 8;
