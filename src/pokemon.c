@@ -2162,6 +2162,7 @@ void ZeroBoxMonData(struct BoxPokemon *boxMon)
 
 void ZeroMonData(struct Pokemon *mon)
 {
+#ifndef UBFIX
     u32 arg;
     ZeroBoxMonData(&mon->box);
     arg = 0;
@@ -2176,6 +2177,11 @@ void ZeroMonData(struct Pokemon *mon)
     SetMonData(mon, MON_DATA_SPDEF, &arg);
     arg = MAIL_NONE;
     SetMonData(mon, MON_DATA_MAIL, &arg);
+#else
+    u16 mail = MAIL_NONE;
+    memset(mon, 0, sizeof(*mon));
+    SetMonData(mon, MON_DATA_MAIL, &mail);
+#endif
 }
 
 void ZeroPlayerPartyMons(void)
