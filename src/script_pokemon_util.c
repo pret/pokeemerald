@@ -239,4 +239,3 @@ void ReducePlayerPartyToSelectedMons(void)
 
     CalculatePlayerPartyCount();
 }
-
