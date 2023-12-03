@@ -113,7 +113,7 @@ enum {
 #define SetMonData32(mon, type, arg)                                                \
 {                                                                               \
     u8 *data = arg;                                                             \
-    u16 value = (data[0]) | (data[1] << 8) | (data[2] << 16) | (data[3] << 24); \
+    u32 value = (data[0]) | (data[1] << 8) | (data[2] << 16) | (data[3] << 24); \
     SetMonData(mon, type, &value);                                              \
 }
 #endif
