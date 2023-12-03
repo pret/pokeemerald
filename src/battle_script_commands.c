@@ -9309,26 +9309,6 @@ static void Cmd_various(void)
         gLastUsedAbility = gBattleMons[battler].ability;
         break;
     }
-    case VARIOUS_TRY_HEAL_PULSE:
-    {
-        VARIOUS_ARGS(const u8 *failInstr);
-        if (BATTLER_MAX_HP(battler))
-        {
-            gBattlescriptCurrInstr = cmd->failInstr;
-        }
-        else
-        {
-            if (GetBattlerAbility(gBattlerAttacker) == ABILITY_MEGA_LAUNCHER && gBattleMoves[gCurrentMove].pulseMove)
-                gBattleMoveDamage = -(GetNonDynamaxMaxHP(battler) * 75 / 100);
-            else
-                gBattleMoveDamage = -(GetNonDynamaxMaxHP(battler) / 2);
-
-            if (gBattleMoveDamage == 0)
-                gBattleMoveDamage = -1;
-            gBattlescriptCurrInstr = cmd->nextInstr;
-        }
-        return;
-    }
     case VARIOUS_TRY_QUASH:
     {
         VARIOUS_ARGS(const u8 *failInstr);
@@ -16430,4 +16410,27 @@ void BS_TryTrainerSlideDynamaxMsg(void)
     }
     else
         gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_TryHealPulse(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+
+    if (BATTLER_MAX_HP(gBattlerTarget))
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+    else
+    {
+        if (GetBattlerAbility(gBattlerAttacker) == ABILITY_MEGA_LAUNCHER && gBattleMoves[gCurrentMove].pulseMove)
+            gBattleMoveDamage = -(GetNonDynamaxMaxHP(gBattlerTarget) * 75 / 100);
+        else if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && gBattleMoves[gCurrentMove].argument == MOVE_EFFECT_FLORAL_HEALING)
+            gBattleMoveDamage = -(GetNonDynamaxMaxHP(gBattlerTarget) * 2 / 3);
+        else
+            gBattleMoveDamage = -(GetNonDynamaxMaxHP(gBattlerTarget) / 2);
+
+        if (gBattleMoveDamage == 0)
+            gBattleMoveDamage = -1;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
 }
