@@ -1008,6 +1008,11 @@ static const u8 sAmazeMulchDesc[] = _(
     "Surprising and\n"
     "Boosting as well.");
 
+static const u8 sGenericMulchDesc[] = _(
+    "A fertilizer that\n"
+    "is unsuitable for\n"
+    "local soil.");
+
 // Apricorns
 static const u8 sRedApricornDesc[] = _(
     "A red apricorn.\n"

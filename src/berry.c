@@ -1758,7 +1758,7 @@ static u8 CalcBerryYield(struct BerryTree *tree)
     u8 min = berry->minYield;
     u8 max = berry->maxYield;
     u8 result = CalcBerryYieldInternal(max, min, BerryTreeGetNumStagesWatered(tree));
-    if (tree->mulch == ITEM_TO_MULCH(ITEM_RICH_MULCH) || tree->mulch == ITEM_TO_MULCH(ITEM_AMAZE_MULCH))
+    if (OW_MULCH_USAGE && (tree->mulch == ITEM_TO_MULCH(ITEM_RICH_MULCH) || tree->mulch == ITEM_TO_MULCH(ITEM_AMAZE_MULCH)))
         result += 2;
 
     return result;
@@ -1907,6 +1907,8 @@ void SetBerryTreesSeen(void)
 
 bool8 PlayerHasMulch(void)
 {
+    if (!OW_MULCH_USAGE)
+        return FALSE;
     if (CheckBagHasItem(ITEM_GROWTH_MULCH, 1))
         return TRUE;
     if (CheckBagHasItem(ITEM_DAMP_MULCH, 1))

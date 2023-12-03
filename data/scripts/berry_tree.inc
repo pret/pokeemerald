@@ -40,12 +40,15 @@ BerryTree_EventScript_WantToPlant::
 	end
 
 BerryTree_EventScript_WantToMulch::
+.if OW_MULCH_USAGE == TRUE
 	msgbox BerryTree_Text_WantToMulch, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_ChooseMulchToUse
 	goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_CancelPlanting
+.endif
 	end
 
 BerryTree_EventScript_WantToPlantMulch::
+.if OW_MULCH_USAGE == TRUE
 	message BerryTree_Text_ItsSoftLoamySoil
 	waitmessage
 	multichoice 0, 0, MULTI_BERRY_PLOT, FALSE
@@ -55,15 +58,6 @@ BerryTree_EventScript_WantToPlantMulch::
 	case 2, BerryTree_EventScript_CancelPlanting
 	case MULTI_B_PRESSED, BerryTree_EventScript_CancelPlanting
 
-BerryTree_EventScript_ChooseBerryToPlant::
-	fadescreen FADE_TO_BLACK
-	closemessage
-	special Bag_ChooseBerry
-	waitstate
-	goto_if_eq VAR_ITEM_ID, 0, BerryTree_EventScript_CancelPlanting
-	removeitem VAR_ITEM_ID
-	call BerryTree_EventScript_PlantBerry
-
 BerryTree_EventScript_ChooseMulchToUse::
 	fadescreen FADE_TO_BLACK
 	closemessage
@@ -72,6 +66,16 @@ BerryTree_EventScript_ChooseMulchToUse::
 	goto_if_eq VAR_ITEM_ID, 0, BerryTree_EventScript_CancelPlanting
 	removeitem VAR_ITEM_ID
 	call BerryTree_EventScript_UseMulch
+.endif
+
+BerryTree_EventScript_ChooseBerryToPlant::
+	fadescreen FADE_TO_BLACK
+	closemessage
+	special Bag_ChooseBerry
+	waitstate
+	goto_if_eq VAR_ITEM_ID, 0, BerryTree_EventScript_CancelPlanting
+	removeitem VAR_ITEM_ID
+	call BerryTree_EventScript_PlantBerry
 
 BerryTree_EventScript_CancelPlanting::
 	release
@@ -223,13 +227,6 @@ BerryTree_EventScript_PlantBerry::
 	waitbuttonpress
 	return
 
-BerryTree_EventScript_UseMulch::
-	special ObjectEventInteractionApplyMulch
-	message BerryTree_Text_ScatteredMulch
-	waitmessage
-	waitbuttonpress
-	return
-
 BerryTree_Text_ItsSoftLoamySoil:
 	.string "It's soft, loamy soil.$"
 
@@ -237,17 +234,9 @@ BerryTree_Text_WantToPlant:
 	.string "It's soft, loamy soil.\n"
 	.string "Want to plant a BERRY?$"
 
-BerryTree_Text_WantToMulch:
-	.string "It's soft, loamy soil.\n"
-	.string "Put down some fertilizer?$"
-
 BerryTree_Text_PlantedOneBerry:
 	.string "{PLAYER} planted one {STR_VAR_1} in\n"
 	.string "the soft, loamy soil.$"
-
-BerryTree_Text_ScatteredMulch:
-	.string "{PLAYER} scattered the {STR_VAR_1}\n"
-	.string "on the soft, loamy soil.$"
 
 BerryTree_Text_BerryGrowthStage1:
 	.string "One {STR_VAR_1} was planted here.$"
@@ -364,5 +353,21 @@ BerryTree_Text_PutAwayBerry_Mutation:
 	.string "BERRIES POCKET.\p"
 	.string "The soil returned to its soft and\n"
 	.string "loamy state.$"
+.endif
 
+.if OW_MULCH_USAGE == TRUE
+BerryTree_EventScript_UseMulch::
+	special ObjectEventInteractionApplyMulch
+	message BerryTree_Text_ScatteredMulch
+	waitmessage
+	waitbuttonpress
+	return
+
+BerryTree_Text_WantToMulch:
+	.string "It's soft, loamy soil.\n"
+	.string "Put down some fertilizer?$"
+
+BerryTree_Text_ScatteredMulch:
+	.string "{PLAYER} scattered the {STR_VAR_1}\n"
+	.string "on the soft, loamy soil.$"
 .endif

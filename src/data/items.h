@@ -2164,7 +2164,7 @@ const struct Item gItems[] =
     {
         .name = _("Growth Mulch"),
         .price = 200,
-        .description = sGrowthMulchDesc,
+        .description = OW_MULCH_USAGE ? sGrowthMulchDesc : sGenericMulchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -2176,7 +2176,7 @@ const struct Item gItems[] =
     {
         .name = _("Damp Mulch"),
         .price = 200,
-        .description = sDampMulchDesc,
+        .description = OW_MULCH_USAGE ? sDampMulchDesc : sGenericMulchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -2188,7 +2188,7 @@ const struct Item gItems[] =
     {
         .name = _("Stable Mulch"),
         .price = 200,
-        .description = sStableMulchDesc,
+        .description = OW_MULCH_USAGE ? sStableMulchDesc : sGenericMulchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -2200,7 +2200,7 @@ const struct Item gItems[] =
     {
         .name = _("Gooey Mulch"),
         .price = 200,
-        .description = sGooeyMulchDesc,
+        .description = OW_MULCH_USAGE ? sGooeyMulchDesc : sGenericMulchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -2212,7 +2212,7 @@ const struct Item gItems[] =
     {
         .name = _("Rich Mulch"),
         .price = 200,
-        .description = sRichMulchDesc,
+        .description = OW_MULCH_USAGE ? sRichMulchDesc : sGenericMulchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -2224,7 +2224,7 @@ const struct Item gItems[] =
     {
         .name = _("SurprseMulch"),
         .price = 200,
-        .description = sSurpriseMulchDesc,
+        .description = OW_MULCH_USAGE ? sSurpriseMulchDesc : sGenericMulchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -2236,7 +2236,7 @@ const struct Item gItems[] =
     {
         .name = _("Boost Mulch"),
         .price = 200,
-        .description = sBoostMulchDesc,
+        .description = OW_MULCH_USAGE ? sBoostMulchDesc : sGenericMulchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -2248,7 +2248,7 @@ const struct Item gItems[] =
     {
         .name = _("Amaze Mulch"),
         .price = 200,
-        .description = sAmazeMulchDesc,
+        .description = OW_MULCH_USAGE ? sAmazeMulchDesc : sGenericMulchDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
