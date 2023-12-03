@@ -327,7 +327,6 @@ BerryTree_EventScript_BerryPocketFull_Mutation::
 	end
 
 BerryTree_EventScript_PickBerry_Mutation::
-	@ add items
 	special IncrementDailyPickedBerries
 	special ObjectEventInteractionRemoveBerryTree
 	message BerryTree_Text_PickedTheBerry_Mutation
