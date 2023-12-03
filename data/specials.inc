@@ -540,3 +540,6 @@ gSpecials::
 	def_special GetSprayId
 	def_special GetLastUsedSprayType
 	def_special TrySkyBattle
+	def_special PlayerHasMulch
+	def_special Bag_ChooseMulch
+	def_special ObjectEventInteractionApplyMulch

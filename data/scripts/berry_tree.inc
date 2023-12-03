@@ -23,6 +23,8 @@ BerryTree_EventScript_CheckSoil::
 	faceplayer
 	specialvar VAR_RESULT, PlayerHasBerries
 	goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_WantToPlant
+	specialvar VAR_RESULT, PlayerHasMulch
+	goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_WantToMulch
 	message BerryTree_Text_ItsSoftLoamySoil
 	waitmessage
 	waitbuttonpress
@@ -30,10 +32,28 @@ BerryTree_EventScript_CheckSoil::
 	end
 
 BerryTree_EventScript_WantToPlant::
+	specialvar VAR_RESULT, PlayerHasMulch
+	goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_WantToPlantMulch
 	msgbox BerryTree_Text_WantToPlant, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_ChooseBerryToPlant
 	goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_CancelPlanting
 	end
+
+BerryTree_EventScript_WantToMulch::
+	msgbox BerryTree_Text_WantToMulch, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_ChooseMulchToUse
+	goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_CancelPlanting
+	end
+
+BerryTree_EventScript_WantToPlantMulch::
+	message BerryTree_Text_ItsSoftLoamySoil
+	waitmessage
+	multichoice 0, 0, MULTI_BERRY_PLOT, FALSE
+	switch VAR_RESULT
+	case 0, BerryTree_EventScript_ChooseMulchToUse
+	case 1, BerryTree_EventScript_ChooseBerryToPlant
+	case 2, BerryTree_EventScript_CancelPlanting
+	case MULTI_B_PRESSED, BerryTree_EventScript_CancelPlanting
 
 BerryTree_EventScript_ChooseBerryToPlant::
 	fadescreen FADE_TO_BLACK
@@ -43,6 +63,15 @@ BerryTree_EventScript_ChooseBerryToPlant::
 	goto_if_eq VAR_ITEM_ID, 0, BerryTree_EventScript_CancelPlanting
 	removeitem VAR_ITEM_ID
 	call BerryTree_EventScript_PlantBerry
+
+BerryTree_EventScript_ChooseMulchToUse::
+	fadescreen FADE_TO_BLACK
+	closemessage
+	special Bag_ChooseMulch
+	waitstate
+	goto_if_eq VAR_ITEM_ID, 0, BerryTree_EventScript_CancelPlanting
+	removeitem VAR_ITEM_ID
+	call BerryTree_EventScript_UseMulch
 
 BerryTree_EventScript_CancelPlanting::
 	release
@@ -194,6 +223,13 @@ BerryTree_EventScript_PlantBerry::
 	waitbuttonpress
 	return
 
+BerryTree_EventScript_UseMulch::
+	special ObjectEventInteractionApplyMulch
+	message BerryTree_Text_ScatteredMulch
+	waitmessage
+	waitbuttonpress
+	return
+
 BerryTree_Text_ItsSoftLoamySoil:
 	.string "It's soft, loamy soil.$"
 
@@ -201,9 +237,17 @@ BerryTree_Text_WantToPlant:
 	.string "It's soft, loamy soil.\n"
 	.string "Want to plant a BERRY?$"
 
+BerryTree_Text_WantToMulch:
+	.string "It's soft, loamy soil.\n"
+	.string "Put down some fertilizer?$"
+
 BerryTree_Text_PlantedOneBerry:
 	.string "{PLAYER} planted one {STR_VAR_1} in\n"
 	.string "the soft, loamy soil.$"
+
+BerryTree_Text_ScatteredMulch:
+	.string "{PLAYER} scattered the {STR_VAR_1}\n"
+	.string "on the soft, loamy soil.$"
 
 BerryTree_Text_BerryGrowthStage1:
 	.string "One {STR_VAR_1} was planted here.$"

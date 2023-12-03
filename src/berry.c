@@ -1825,12 +1825,25 @@ void Bag_ChooseBerry(void)
     SetMainCallback2(CB2_ChooseBerry);
 }
 
+void Bag_ChooseMulch(void)
+{
+    SetMainCallback2(CB2_ChooseMulch);
+}
+
 void ObjectEventInteractionPlantBerryTree(void)
 {
     u8 berry = ItemIdToBerryType(gSpecialVar_ItemId);
 
     PlantBerryTree(GetObjectEventBerryTreeId(gSelectedObjectEvent), berry, BERRY_STAGE_PLANTED, TRUE);
     ObjectEventInteractionGetBerryTreeData();
+}
+
+void ObjectEventInteractionApplyMulch(void)
+{
+    u8 mulch = ITEM_TO_MULCH(gSpecialVar_ItemId);
+
+    gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].mulch = mulch;
+    StringExpandPlaceholders(gStringVar1, gItems[gSpecialVar_ItemId].name);
 }
 
 void ObjectEventInteractionPickBerryTree(void)
@@ -1890,6 +1903,27 @@ void SetBerryTreesSeen(void)
                 AllowBerryTreeGrowth(gObjectEvents[i].trainerRange_berryTreeId);
         }
     }
+}
+
+bool8 PlayerHasMulch(void)
+{
+    if (CheckBagHasItem(ITEM_GROWTH_MULCH, 1))
+        return TRUE;
+    if (CheckBagHasItem(ITEM_DAMP_MULCH, 1))
+        return TRUE;
+    if (CheckBagHasItem(ITEM_STABLE_MULCH, 1))
+        return TRUE;
+    if (CheckBagHasItem(ITEM_GOOEY_MULCH, 1))
+        return TRUE;
+    if (CheckBagHasItem(ITEM_RICH_MULCH, 1))
+        return TRUE;
+    if (CheckBagHasItem(ITEM_SURPRISE_MULCH, 1))
+        return TRUE;
+    if (CheckBagHasItem(ITEM_BOOST_MULCH, 1))
+        return TRUE;
+    if (CheckBagHasItem(ITEM_AMAZE_MULCH, 1))
+        return TRUE;
+    return FALSE;
 }
 
 // Berry mutations
