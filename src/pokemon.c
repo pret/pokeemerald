@@ -5133,10 +5133,10 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                 if (dataUnsigned != CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), temp2))
                                 {
                                     dataUnsigned += itemEffect[itemEffectParam];
-                                    //moveId = GetMonData(mon, MON_DATA_MOVE1 + temp2, NULL); // Redundant
+                                    moveId = GetMonData(mon, MON_DATA_MOVE1 + temp2, NULL); // Redundant
                                     if (dataUnsigned > CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), temp2))
                                     {
-                                        //moveId = GetMonData(mon, MON_DATA_MOVE1 + temp2, NULL); // Redundant
+                                        moveId = GetMonData(mon, MON_DATA_MOVE1 + temp2, NULL); // Redundant
                                         dataUnsigned = CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), temp2);
                                     }
                                     SetMonData(mon, MON_DATA_PP1 + temp2, &dataUnsigned);
@@ -5159,10 +5159,10 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             if (dataUnsigned != CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex))
                             {
                                 dataUnsigned += itemEffect[itemEffectParam++];
-                                //moveId = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL); // Redundant
+                                moveId = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL); // Redundant
                                 if (dataUnsigned > CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex))
                                 {
-                                    //moveId = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL); // Redundant
+                                    moveId = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL); // Redundant
                                     dataUnsigned = CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
                                 }
                                 SetMonData(mon, MON_DATA_PP1 + moveIndex, &dataUnsigned);
