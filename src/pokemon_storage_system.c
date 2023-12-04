@@ -550,8 +550,8 @@ struct PokemonStorageSystemData
     u16 *displayMonTilePtr;
     struct Sprite *displayMonSprite;
     u16 displayMonPalBuffer[0x40];
-    u8 tileBuffer[MON_PIC_SIZE * 4]; // 4x the size of a 'Mon sprite to account for Castform
-    u8 itemIconBuffer[0x800];
+    u8 ALIGNED(4) tileBuffer[MON_PIC_SIZE * MAX_MON_PIC_FRAMES];
+    u8 ALIGNED(4) itemIconBuffer[0x800];
     u8 wallpaperBgTilemapBuffer[0x1000];
     u8 displayMenuTilemapBuffer[0x800];
 };
@@ -1370,8 +1370,7 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
     RemoveWindow(windowId);
 }
 
-// Unused
-static void UnusedDrawTextWindow(const u8 *string, void *dst, u16 offset, u8 bgColor, u8 fgColor, u8 shadowColor)
+static void UNUSED UnusedDrawTextWindow(const u8 *string, void *dst, u16 offset, u8 bgColor, u8 fgColor, u8 shadowColor)
 {
     u32 tilesSize;
     u8 windowId;
@@ -1486,8 +1485,7 @@ u8 *StringCopyAndFillWithSpaces(u8 *dst, const u8 *src, u16 n)
     return str;
 }
 
-// Unused
-static void UnusedWriteRectCpu(u16 *dest, u16 dest_left, u16 dest_top, const u16 *src, u16 src_left, u16 src_top, u16 dest_width, u16 dest_height, u16 src_width)
+static void UNUSED UnusedWriteRectCpu(u16 *dest, u16 dest_left, u16 dest_top, const u16 *src, u16 src_left, u16 src_top, u16 dest_width, u16 dest_height, u16 src_width)
 {
     u16 i;
 
@@ -1502,8 +1500,7 @@ static void UnusedWriteRectCpu(u16 *dest, u16 dest_left, u16 dest_top, const u16
     }
 }
 
-// Unused
-static void UnusedWriteRectDma(u16 *dest, u16 dest_left, u16 dest_top, u16 width, u16 height)
+static void UNUSED UnusedWriteRectDma(u16 *dest, u16 dest_left, u16 dest_top, u16 width, u16 height)
 {
     u16 i;
 
@@ -1697,8 +1694,7 @@ static void CB2_ExitPokeStorage(void)
     SetMainCallback2(CB2_ReturnToField);
 }
 
-// Unused
-static s16 StorageSystemGetNextMonIndex(struct BoxPokemon *box, s8 startIdx, u8 stopIdx, u8 mode)
+static s16 UNUSED StorageSystemGetNextMonIndex(struct BoxPokemon *box, s8 startIdx, u8 stopIdx, u8 mode)
 {
     s16 i;
     s16 direction;
@@ -4430,7 +4426,7 @@ static u8 GetMonIconPriorityByCursorPos(void)
 static void CreateMovingMonIcon(void)
 {
     u32 personality = GetMonData(&sStorage->movingMon, MON_DATA_PERSONALITY);
-    u16 species = GetMonData(&sStorage->movingMon, MON_DATA_SPECIES2);
+    u16 species = GetMonData(&sStorage->movingMon, MON_DATA_SPECIES_OR_EGG);
     u8 priority = GetMonIconPriorityByCursorPos();
 
     sStorage->movingMonSprite = CreateMonIconSprite(species, personality, 0, 0, priority, 7);
@@ -4452,7 +4448,7 @@ static void InitBoxMonSprites(u8 boxId)
     {
         for (j = 0; j < IN_BOX_COLUMNS; j++)
         {
-            species = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_SPECIES2);
+            species = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_SPECIES_OR_EGG);
             if (species != SPECIES_NONE)
             {
                 personality = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_PERSONALITY);
@@ -4480,7 +4476,7 @@ static void InitBoxMonSprites(u8 boxId)
 
 static void CreateBoxMonIconAtPos(u8 boxPosition)
 {
-    u16 species = GetCurrentBoxMonData(boxPosition, MON_DATA_SPECIES2);
+    u16 species = GetCurrentBoxMonData(boxPosition, MON_DATA_SPECIES_OR_EGG);
 
     if (species != SPECIES_NONE)
     {
@@ -4714,7 +4710,7 @@ static void GetIncomingBoxMonData(u8 boxId)
     {
         for (j = 0; j < IN_BOX_COLUMNS; j++)
         {
-            sStorage->boxSpecies[boxPosition] = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_SPECIES2);
+            sStorage->boxSpecies[boxPosition] = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_SPECIES_OR_EGG);
             if (sStorage->boxSpecies[boxPosition] != SPECIES_NONE)
                 sStorage->boxPersonalities[boxPosition] = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_PERSONALITY);
             boxPosition++;
@@ -4742,14 +4738,14 @@ static void SetBoxMonIconObjMode(u8 boxPosition, u8 objMode)
 static void CreatePartyMonsSprites(bool8 visible)
 {
     u16 i, count;
-    u16 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES2);
+    u16 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES_OR_EGG);
     u32 personality = GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY);
 
     sStorage->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
     count = 1;
     for (i = 1; i < PARTY_SIZE; i++)
     {
-        species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+        species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
         if (species != SPECIES_NONE)
         {
             personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
@@ -5490,7 +5486,7 @@ static void InitBoxTitle(u8 boxId)
 
     tagIndex = IndexOfSpritePaletteTag(PALTAG_BOX_TITLE);
     sStorage->boxTitlePalOffset = OBJ_PLTT_ID(tagIndex) + 14;
-    sStorage->wallpaperPalBits |= 0x10000 << tagIndex;
+    sStorage->wallpaperPalBits |= (1 << 16) << tagIndex;
 
     // The below seems intended to have separately tracked
     // the incoming wallpaper title's palette, but as they now
@@ -5498,7 +5494,7 @@ static void InitBoxTitle(u8 boxId)
     // this is redundant along with the use of boxTitleAltPalOffset
     tagIndex = IndexOfSpritePaletteTag(PALTAG_BOX_TITLE);
     sStorage->boxTitleAltPalOffset = OBJ_PLTT_ID(tagIndex) + 14;
-    sStorage->wallpaperPalBits |= 0x10000 << tagIndex;
+    sStorage->wallpaperPalBits |= (1 << 16) << tagIndex;
 
     StringCopyPadded(sStorage->boxTitleText, GetBoxNamePtr(boxId), 0, BOX_NAME_LENGTH);
     DrawTextWindowAndBufferTiles(sStorage->boxTitleText, sStorage->boxTitleTiles, 0, 0, 2);
@@ -5616,9 +5612,9 @@ static void CycleBoxTitleColor(void)
     u8 boxId = StorageGetCurrentBox();
     u8 wallpaperId = GetBoxWallpaper(boxId);
     if (sStorage->boxTitleCycleId == 0)
-        CpuCopy16(sBoxTitleColors[wallpaperId], gPlttBufferUnfaded + sStorage->boxTitlePalOffset, 4);
+        CpuCopy16(sBoxTitleColors[wallpaperId], &gPlttBufferUnfaded[sStorage->boxTitlePalOffset], PLTT_SIZEOF(2));
     else
-        CpuCopy16(sBoxTitleColors[wallpaperId], gPlttBufferUnfaded + sStorage->boxTitleAltPalOffset, 4);
+        CpuCopy16(sBoxTitleColors[wallpaperId], &gPlttBufferUnfaded[sStorage->boxTitleAltPalOffset], PLTT_SIZEOF(2));
 }
 
 static s16 GetBoxTitleBaseX(const u8 *string)
@@ -6867,7 +6863,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     {
         struct Pokemon *mon = (struct Pokemon *)pokemon;
 
-        sStorage->displayMonSpecies = GetMonData(mon, MON_DATA_SPECIES2);
+        sStorage->displayMonSpecies = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
         if (sStorage->displayMonSpecies != SPECIES_NONE)
         {
             sanityIsBadEgg = GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG);
@@ -6890,7 +6886,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     {
         struct BoxPokemon *boxMon = (struct BoxPokemon *)pokemon;
 
-        sStorage->displayMonSpecies = GetBoxMonData(pokemon, MON_DATA_SPECIES2);
+        sStorage->displayMonSpecies = GetBoxMonData(pokemon, MON_DATA_SPECIES_OR_EGG);
         if (sStorage->displayMonSpecies != SPECIES_NONE)
         {
             u32 otId = GetBoxMonData(boxMon, MON_DATA_OT_ID);
@@ -7893,8 +7889,7 @@ static void StartCursorAnim(u8 animNum)
     StartSpriteAnim(sStorage->cursorSprite, animNum);
 }
 
-// Unused
-static u8 GetMovingMonOriginalBoxId(void)
+static u8 UNUSED GetMovingMonOriginalBoxId(void)
 {
     return sMovingMonOrigBoxId;
 }
@@ -8438,7 +8433,7 @@ static void MultiMove_DeselectRow(u8 row, u8 minColumn, u8 maxColumn)
 static void MultiMove_SetIconToBg(u8 x, u8 y)
 {
     u8 position = x + (IN_BOX_COLUMNS * y);
-    u16 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES2);
+    u16 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES_OR_EGG);
     u32 personality = GetCurrentBoxMonData(position, MON_DATA_PERSONALITY);
 
     if (species != SPECIES_NONE)
@@ -8463,7 +8458,7 @@ static void MultiMove_SetIconToBg(u8 x, u8 y)
 static void MultiMove_ClearIconFromBg(u8 x, u8 y)
 {
     u8 position = x + (IN_BOX_COLUMNS * y);
-    u16 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES2);
+    u16 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES_OR_EGG);
 
     if (species != SPECIES_NONE)
     {
@@ -8746,8 +8741,7 @@ static void CreateItemIconSprites(void)
             LoadCompressedSpriteSheet(&spriteSheet);
             sStorage->itemIcons[i].tiles = GetSpriteTileStartByTag(spriteSheet.tag) * TILE_SIZE_4BPP + (void *)(OBJ_VRAM0);
             sStorage->itemIcons[i].palIndex = AllocSpritePalette(PALTAG_ITEM_ICON_0 + i);
-            sStorage->itemIcons[i].palIndex *= 16;
-            sStorage->itemIcons[i].palIndex += 0x100;
+            sStorage->itemIcons[i].palIndex = OBJ_PLTT_ID(sStorage->itemIcons[i].palIndex);
             spriteTemplate.tileTag = GFXTAG_ITEM_ICON_0 + i;
             spriteTemplate.paletteTag = PALTAG_ITEM_ICON_0 + i;
             spriteId = CreateSprite(&spriteTemplate, 0, 0, 11);
@@ -9393,14 +9387,14 @@ static void SpriteCB_ItemIcon_HideParty(struct Sprite *sprite)
 //------------------------------------------------------------------------------
 
 
-// Unused, leftover from FRLG
-static void BackupPokemonStorage(void/*struct PokemonStorage * dest*/)
+// Leftover from FRLG
+static void UNUSED BackupPokemonStorage(void/*struct PokemonStorage * dest*/)
 {
     //*dest = *gPokemonStoragePtr;
 }
 
-// Unused, leftover from FRLG
-static void RestorePokemonStorage(void/*struct PokemonStorage * src*/)
+// Leftover from FRLG
+static void UNUSED RestorePokemonStorage(void/*struct PokemonStorage * src*/)
 {
     //*gPokemonStoragePtr = *src;
 }
@@ -9792,8 +9786,7 @@ static void TilemapUtil_Free(void)
     Free(sTilemapUtil);
 }
 
-// Unused
-static void TilemapUtil_UpdateAll(void)
+static void UNUSED TilemapUtil_UpdateAll(void)
 {
     s32 i;
 
@@ -9857,8 +9850,7 @@ static void TilemapUtil_SetMap(u8 id, u8 bg, const void *tilemap, u16 width, u16
     sTilemapUtil[id].active = TRUE;
 }
 
-// Unused
-static void TilemapUtil_SetSavedMap(u8 id, const void *tilemap)
+static void UNUSED TilemapUtil_SetSavedMap(u8 id, const void *tilemap)
 {
     if (id >= sNumTilemapUtilIds)
         return;
@@ -10008,8 +10000,7 @@ static void UnkUtil_Run(void)
     }
 }
 
-// Unused
-static bool8 UnkUtil_CpuAdd(u8 *dest, u16 dLeft, u16 dTop, const u8 *src, u16 sLeft, u16 sTop, u16 width, u16 height, u16 unkArg)
+static bool8 UNUSED UnkUtil_CpuAdd(u8 *dest, u16 dLeft, u16 dTop, const u8 *src, u16 sLeft, u16 sTop, u16 width, u16 height, u16 unkArg)
 {
     struct UnkUtilData *data;
 
@@ -10039,8 +10030,7 @@ static void UnkUtil_CpuRun(struct UnkUtilData *data)
     }
 }
 
-// Unused
-static bool8 UnkUtil_DmaAdd(void *dest, u16 dLeft, u16 dTop, u16 width, u16 height)
+static bool8 UNUSED UnkUtil_DmaAdd(void *dest, u16 dLeft, u16 dTop, u16 width, u16 height)
 {
     struct UnkUtilData *data;
 

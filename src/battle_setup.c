@@ -407,7 +407,7 @@ static void DoStandardWildBattle(void)
     gBattleTypeFlags = 0;
     if (InBattlePyramid())
     {
-        VarSet(VAR_TEMP_E, 0);
+        VarSet(VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0);
         gBattleTypeFlags |= BATTLE_TYPE_PYRAMID;
     }
     CreateBattleStartTask(GetWildBattleTransition(), 0);
@@ -724,7 +724,7 @@ static u16 GetSumOfPlayerPartyLevel(u8 numMons)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        u32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+        u32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
 
         if (species != SPECIES_EGG && species != SPECIES_NONE && GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0)
         {
@@ -1248,7 +1248,7 @@ static void SetBattledTrainersFlags(void)
     FlagSet(GetTrainerAFlag());
 }
 
-static void SetBattledTrainerFlag(void)
+static void UNUSED SetBattledTrainerFlag(void)
 {
     FlagSet(GetTrainerAFlag());
 }
@@ -1277,7 +1277,7 @@ void BattleSetup_StartTrainerBattle(void)
 
     if (InBattlePyramid())
     {
-        VarSet(VAR_TEMP_E, 0);
+        VarSet(VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0);
         gBattleTypeFlags |= BATTLE_TYPE_PYRAMID;
 
         if (gNoOfApproachingTrainers == 2)

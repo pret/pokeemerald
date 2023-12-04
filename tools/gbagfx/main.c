@@ -25,6 +25,9 @@ void ConvertGbaToPng(char *inputPath, char *outputPath, struct GbaToPngOptions *
 {
     struct Image image;
 
+    image.bitDepth = options->bitDepth;
+    image.tilemap.data.affine = NULL;
+
     if (options->paletteFilePath != NULL)
     {
         char *paletteFileExtension = GetFileExtensionAfterDot(options->paletteFilePath);
@@ -45,21 +48,24 @@ void ConvertGbaToPng(char *inputPath, char *outputPath, struct GbaToPngOptions *
         image.hasPalette = false;
     }
 
-    if (options->tilemapFilePath != NULL)
+    if (options->isTiled)
     {
-        int fileSize;
-        image.tilemap.data.affine = ReadWholeFile(options->tilemapFilePath, &fileSize);
-        if (options->isAffineMap && options->bitDepth != 8)
-            FATAL_ERROR("affine maps are necessarily 8bpp\n");
-        image.isAffine = options->isAffineMap;
-        image.tilemap.size = fileSize;
+        if (options->tilemapFilePath != NULL)
+        {
+            int fileSize;
+            image.tilemap.data.affine = ReadWholeFile(options->tilemapFilePath, &fileSize);
+            if (options->isAffineMap && options->bitDepth != 8)
+                FATAL_ERROR("affine maps are necessarily 8bpp\n");
+            image.isAffine = options->isAffineMap;
+            image.tilemap.size = fileSize;
+        }
+        ReadTileImage(inputPath, options->width, options->metatileWidth, options->metatileHeight, &image, !image.hasPalette);
     }
     else
     {
-        image.tilemap.data.affine = NULL;
+        image.width = options->width;
+        ReadPlainImage(inputPath, options->dataWidth, &image, !image.hasPalette);
     }
-
-    ReadImage(inputPath, options->width, options->bitDepth, options->metatileWidth, options->metatileHeight, &image, !image.hasPalette);
 
     image.hasTransparency = options->hasTransparency;
 
@@ -77,7 +83,10 @@ void ConvertPngToGba(char *inputPath, char *outputPath, struct PngToGbaOptions *
 
     ReadPng(inputPath, &image);
 
-    WriteImage(outputPath, options->numTilesMode, options->numTiles, options->bitDepth, options->metatileWidth, options->metatileHeight, &image, !image.hasPalette);
+    if (options->isTiled)
+        WriteTileImage(outputPath, options->numTilesMode, options->numTiles, options->metatileWidth, options->metatileHeight, &image, !image.hasPalette);
+    else
+        WritePlainImage(outputPath, options->dataWidth, &image, !image.hasPalette);
 
     FreeImage(&image);
 }
@@ -94,6 +103,8 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
     options.metatileHeight = 1;
     options.tilemapFilePath = NULL;
     options.isAffineMap = false;
+    options.isTiled = true;
+    options.dataWidth = 1;
 
     for (int i = 3; i < argc; i++)
     {
@@ -162,6 +173,22 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
         {
             options.isAffineMap = true;
         }
+        else if (strcmp(option, "-plain") == 0)
+        {
+            options.isTiled = false;
+        }
+        else if (strcmp(option, "-data_width") == 0)
+        {
+            if (i + 1 >= argc)
+                FATAL_ERROR("No data width value following \"-data_width\".\n");
+            i++;
+
+            if (!ParseNumber(argv[i], NULL, 10, &options.dataWidth))
+                FATAL_ERROR("Failed to parse data width.\n");
+
+            if (options.dataWidth < 1)
+                FATAL_ERROR("Data width must be positive.\n");
+        }
         else
         {
             FATAL_ERROR("Unrecognized option \"%s\".\n", option);
@@ -177,15 +204,16 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
 void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **argv)
 {
     char *outputFileExtension = GetFileExtensionAfterDot(outputPath);
-    int bitDepth = outputFileExtension[0] - '0';
     struct PngToGbaOptions options;
     options.numTilesMode = NUM_TILES_IGNORE;
     options.numTiles = 0;
-    options.bitDepth = bitDepth;
+    options.bitDepth = outputFileExtension[0] - '0';
     options.metatileWidth = 1;
     options.metatileHeight = 1;
     options.tilemapFilePath = NULL;
     options.isAffineMap = false;
+    options.isTiled = true;
+    options.dataWidth = 1;
 
     for (int i = 3; i < argc; i++)
     {
@@ -235,6 +263,22 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
 
             if (options.metatileHeight < 1)
                 FATAL_ERROR("metatile height must be positive.\n");
+        }
+        else if (strcmp(option, "-plain") == 0)
+        {
+            options.isTiled = false;
+        }
+        else if (strcmp(option, "-data_width") == 0)
+        {
+            if (i + 1 >= argc)
+                FATAL_ERROR("No data width value following \"-data_width\".\n");
+            i++;
+
+            if (!ParseNumber(argv[i], NULL, 10, &options.dataWidth))
+                FATAL_ERROR("Failed to parse data width.\n");
+
+            if (options.dataWidth < 1)
+                FATAL_ERROR("Data width must be positive.\n");
         }
         else
         {
@@ -403,7 +447,7 @@ void HandleLZCompressCommand(char *inputPath, char *outputPath, int argc, char *
         else if (strcmp(option, "-search") == 0)
         {
             if (i + 1 >= argc)
-                FATAL_ERROR("No size following \"-overflow\".\n");
+                FATAL_ERROR("No size following \"-search\".\n");
 
             i++;
 

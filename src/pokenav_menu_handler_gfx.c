@@ -470,14 +470,14 @@ static u32 LoopedTask_OpenMenu(s32 state)
             return LT_PAUSE;
         DecompressAndCopyTileDataToVram(2, sPokenavDeviceBgTiles, 0, 0, 0);
         DecompressAndCopyTileDataToVram(2, sPokenavDeviceBgTilemap, 0, 0, 1);
-        CopyPaletteIntoBufferUnfaded(sPokenavDeviceBgPal, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
+        CopyPaletteIntoBufferUnfaded(sPokenavDeviceBgPal, BG_PLTT_ID(2), sizeof(sPokenavDeviceBgPal));
         return LT_INC_AND_PAUSE;
     case 2:
         if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
         DecompressAndCopyTileDataToVram(3, sPokenavBgDotsTiles, 0, 0, 0);
         DecompressAndCopyTileDataToVram(3, sPokenavBgDotsTilemap, 0, 0, 1);
-        CopyPaletteIntoBufferUnfaded(sPokenavBgDotsPal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
+        CopyPaletteIntoBufferUnfaded(sPokenavBgDotsPal, BG_PLTT_ID(3), sizeof(sPokenavBgDotsPal));
         if (GetPokenavMenuType() == POKENAV_MENU_TYPE_CONDITION || GetPokenavMenuType() == POKENAV_MENU_TYPE_CONDITION_SEARCH)
             ChangeBgDotsColorToPurple();
         return LT_INC_AND_PAUSE;

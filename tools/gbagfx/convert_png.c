@@ -130,7 +130,6 @@ void ReadPng(char *path, struct Image *image)
             FATAL_ERROR("Bit depth of image must be 1, 2, 4, or 8.\n");
         image->pixels = ConvertBitDepth(image->pixels, bit_depth, image->bitDepth, image->width * image->height);
         free(src);
-        image->bitDepth = bit_depth;
     }
 }
 

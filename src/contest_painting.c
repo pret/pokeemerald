@@ -248,7 +248,7 @@ static void HoldContestPainting(void)
         if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON)))
         {
             sHoldState++;
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB(0, 0, 0));
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         }
 
         if (sVarsInitialized)

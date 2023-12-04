@@ -24,24 +24,24 @@
 #define NUMBER_OF_MON_TYPES   18
 
 // Pokemon egg groups
-#define EGG_GROUP_NONE          0
-#define EGG_GROUP_MONSTER       1
-#define EGG_GROUP_WATER_1       2
-#define EGG_GROUP_BUG           3
-#define EGG_GROUP_FLYING        4
-#define EGG_GROUP_FIELD         5
-#define EGG_GROUP_FAIRY         6
-#define EGG_GROUP_GRASS         7
-#define EGG_GROUP_HUMAN_LIKE    8
-#define EGG_GROUP_WATER_3       9
-#define EGG_GROUP_MINERAL       10
-#define EGG_GROUP_AMORPHOUS     11
-#define EGG_GROUP_WATER_2       12
-#define EGG_GROUP_DITTO         13
-#define EGG_GROUP_DRAGON        14
-#define EGG_GROUP_UNDISCOVERED  15
+#define EGG_GROUP_NONE                0
+#define EGG_GROUP_MONSTER             1
+#define EGG_GROUP_WATER_1             2
+#define EGG_GROUP_BUG                 3
+#define EGG_GROUP_FLYING              4
+#define EGG_GROUP_FIELD               5
+#define EGG_GROUP_FAIRY               6
+#define EGG_GROUP_GRASS               7
+#define EGG_GROUP_HUMAN_LIKE          8
+#define EGG_GROUP_WATER_3             9
+#define EGG_GROUP_MINERAL             10
+#define EGG_GROUP_AMORPHOUS           11
+#define EGG_GROUP_WATER_2             12
+#define EGG_GROUP_DITTO               13
+#define EGG_GROUP_DRAGON              14
+#define EGG_GROUP_NO_EGGS_DISCOVERED  15
 
-#define EGG_GROUPS_PER_MON      2
+#define EGG_GROUPS_PER_MON            2
 
 // Pokemon natures
 #define NATURE_HARDY    0
@@ -190,6 +190,9 @@
 #define FRIENDSHIP_200_TO_254  5
 #define FRIENDSHIP_MAX         6
 
+// Friendship value that the majority of species use. This was changed in Generation 8 to 50.
+#define STANDARD_FRIENDSHIP 70
+
 #define MAX_FRIENDSHIP  255
 #define MAX_SHEEN       255
 #define MAX_CONDITION   255
@@ -259,6 +262,14 @@
 #define MON_PIC_WIDTH 64
 #define MON_PIC_HEIGHT 64
 #define MON_PIC_SIZE (MON_PIC_WIDTH * MON_PIC_HEIGHT / 2)
+
+// Most pokemon have 2 frames (a default and an alternate for their animation).
+// There are 4 exceptions:
+// - Castform has 4 frames, 1 for each form
+// - Deoxys has 2 frames, 1 for each form
+// - Spinda has 1 frame, presumably to avoid the work of animating its spots
+// - Unown has 1 frame, presumably to avoid the work of animating all 28 of its forms
+#define MAX_MON_PIC_FRAMES 4
 
 #define BATTLE_ALIVE_EXCEPT_ACTIVE  0
 #define BATTLE_ALIVE_ATK_SIDE       1

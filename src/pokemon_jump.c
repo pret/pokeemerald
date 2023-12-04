@@ -2354,7 +2354,7 @@ void IsPokemonJumpSpeciesInParty(void)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES))
         {
-            u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+            u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
             if (IsSpeciesAllowedInPokemonJump(species))
             {
                 gSpecialVar_Result = TRUE;
@@ -2714,7 +2714,7 @@ static void CreateJumpMonSprite(struct PokemonJumpGfx *jumpGfx, struct PokemonJu
     u8 spriteId;
 
     spriteTemplate = sSpriteTemplate_JumpMon;
-    buffer = Alloc(0x2000);
+    buffer = Alloc(MON_PIC_SIZE * MAX_MON_PIC_FRAMES);
     unusedBuffer = Alloc(MON_PIC_SIZE);
     if (multiplayerId == GetPokeJumpMultiplayerId())
         subpriority = 3;
@@ -3968,7 +3968,7 @@ struct UnusedPacket
 
 // Data packet that's never sent
 // No function to read it either
-static void SendPacket_Unused(u32 data)
+static void UNUSED SendPacket_Unused(u32 data)
 {
     struct UnusedPacket packet;
     packet.id = PACKET_UNUSED;

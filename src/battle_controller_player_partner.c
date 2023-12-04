@@ -634,7 +634,7 @@ static u32 CopyPlayerPartnerMonData(u8 monId, u8 *dst)
 {
     struct BattlePokemon battleMon;
     struct MovePpInfo moveData;
-    u8 nickname[20];
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
     u8 *src;
     s16 data16;
     u32 data32;
@@ -1515,7 +1515,7 @@ static void PlayerPartnerHandleChooseMove(void)
     u8 chosenMoveId;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
 
-    BattleAI_SetupAIData(0xF);
+    BattleAI_SetupAIData(ALL_MOVES_MASK);
     chosenMoveId = BattleAI_ChooseMoveOrAction();
 
     if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED))

@@ -621,7 +621,7 @@ bool8 LoadRegionMapGfx(void)
 void BlendRegionMap(u16 color, u32 coeff)
 {
     BlendPalettes(0x380, coeff, color);
-    CpuCopy16(gPlttBufferFaded + 0x70, gPlttBufferUnfaded + 0x70, 0x60);
+    CpuCopy16(&gPlttBufferFaded[BG_PLTT_ID(7)], &gPlttBufferUnfaded[BG_PLTT_ID(7)], 3 * PLTT_SIZE_4BPP);
 }
 
 void FreeRegionMapIconResources(void)
@@ -1419,7 +1419,7 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
             sRegionMap->cursorSprite->y = 8 * sRegionMap->cursorPosY + 4;
         }
         sRegionMap->cursorSprite->data[1] = 2;
-        sRegionMap->cursorSprite->data[2] = (IndexOfSpritePaletteTag(paletteTag) << 4) + 0x101;
+        sRegionMap->cursorSprite->data[2] = OBJ_PLTT_ID(IndexOfSpritePaletteTag(paletteTag)) + 1;
         sRegionMap->cursorSprite->data[3] = TRUE;
     }
 }
@@ -1434,14 +1434,12 @@ static void FreeRegionMapCursorSprite(void)
     }
 }
 
-// Unused
-static void SetUnkCursorSpriteData(void)
+static void UNUSED SetUnkCursorSpriteData(void)
 {
     sRegionMap->cursorSprite->data[3] = TRUE;
 }
 
-// Unused
-static void ClearUnkCursorSpriteData(void)
+static void UNUSED ClearUnkCursorSpriteData(void)
 {
     sRegionMap->cursorSprite->data[3] = FALSE;
 }

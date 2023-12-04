@@ -36,7 +36,7 @@ static u32 GetGlyphWidth_Narrow(u16, bool32);
 static u32 GetGlyphWidth_SmallNarrow(u16, bool32);
 
 static EWRAM_DATA struct TextPrinter sTempTextPrinter = {0};
-static EWRAM_DATA struct TextPrinter sTextPrinters[NUM_TEXT_PRINTERS] = {0};
+static EWRAM_DATA struct TextPrinter sTextPrinters[WINDOWS_MAX] = {0};
 
 static u16 sFontHalfRowLookupTable[0x51];
 static u16 sLastTextBgColor;
@@ -244,7 +244,7 @@ static void SetFontsPointer(const struct FontInfo *fonts)
 void DeactivateAllTextPrinters(void)
 {
     int printer;
-    for (printer = 0; printer < NUM_TEXT_PRINTERS; ++printer)
+    for (printer = 0; printer < WINDOWS_MAX; ++printer)
         sTextPrinters[printer].active = FALSE;
 }
 
@@ -322,7 +322,7 @@ void RunTextPrinters(void)
 
     if (!gDisableTextPrinters)
     {
-        for (i = 0; i < NUM_TEXT_PRINTERS; ++i)
+        for (i = 0; i < WINDOWS_MAX; ++i)
         {
             if (sTextPrinters[i].active)
             {
@@ -554,8 +554,7 @@ void DecompressGlyphTile(const void *src_, void *dest_)
     *(dest++) = ((sFontHalfRowLookupTable[sFontHalfRowOffsets[temp & 0xFF]]) << 16) | (sFontHalfRowLookupTable[sFontHalfRowOffsets[temp >> 8]]);
 }
 
-// Unused
-static u8 GetLastTextColor(u8 colorType)
+static u8 UNUSED GetLastTextColor(u8 colorType)
 {
     switch (colorType)
     {
@@ -1224,8 +1223,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
     return RENDER_FINISH;
 }
 
-// Unused
-static u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
+static u32 UNUSED GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
 {
     int i;
     u8 width;

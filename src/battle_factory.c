@@ -269,7 +269,7 @@ static void SetBattleFactoryData(void)
 static void SaveFactoryChallenge(void)
 {
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
-    VarSet(VAR_TEMP_0, 0);
+    VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
 }
@@ -525,13 +525,13 @@ static void GenerateInitialRentalMons(void)
     gFacilityTrainers = gBattleFrontierTrainers;
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        species[i] = 0;
+        species[i] = SPECIES_NONE;
         monIds[i] = 0;
-        heldItems[i] = 0;
+        heldItems[i] = ITEM_NONE;
     }
     lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / 7;
+    challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
     if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
         factoryBattleMode = FRONTIER_MODE_DOUBLES;
     else
@@ -582,7 +582,7 @@ static void GenerateInitialRentalMons(void)
         // Cannot have two same held items.
         for (j = firstMonId; j < firstMonId + i; j++)
         {
-            if (heldItems[j] != 0 && heldItems[j] == gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId])
+            if (heldItems[j] != ITEM_NONE && heldItems[j] == gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId])
             {
                 if (gFacilityTrainerMons[monId].species == currSpecies)
                     currSpecies = SPECIES_NONE;
@@ -741,8 +741,15 @@ u8 GetFactoryMonFixedIV(u8 challengeNum, bool8 isLastBattle)
     u8 ivSet;
     bool8 useHigherIV = isLastBattle ? TRUE : FALSE;
 
-    if (challengeNum > 8)
-        ivSet = 7;
+// The Factory has an out-of-bounds access when generating the rental draft for round 9 (challengeNum==8),
+// or the "elevated" rentals from round 8 (challengeNum+1==8)
+// This happens to land on a number higher than 31, which is interpreted as "random IVs"
+#ifdef BUGFIX
+    if (challengeNum >= ARRAY_COUNT(sFixedIVTable))
+#else
+    if (challengeNum > ARRAY_COUNT(sFixedIVTable))
+#endif
+        ivSet = ARRAY_COUNT(sFixedIVTable) - 1;
     else
         ivSet = challengeNum;
 
@@ -761,7 +768,7 @@ void FillFactoryBrainParty(void)
 
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u8 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / 7;
+    u8 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
     fixedIV = GetFactoryMonFixedIV(challengeNum + 2, FALSE);
     monLevel = SetFacilityPtrsGetLevel();
     i = 0;
@@ -890,7 +897,7 @@ u32 GetAiScriptsInBattleFactory(void)
     else
     {
         int battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-        int challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / 7;
+        int challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
 
         if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
             return AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY;

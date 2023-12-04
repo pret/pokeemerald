@@ -158,8 +158,7 @@ static const TaskFunc sStaticCountdownFuncs[][4] =
 #define sId             data[4] // Never read
 #define sNumberSpriteId data[5] // Never read
 
-// Unused
-static u32 CreateStaticCountdownTask(u8 funcSetId, u8 taskPriority)
+static u32 UNUSED CreateStaticCountdownTask(u8 funcSetId, u8 taskPriority)
 {
     u8 taskId = CreateTask(Task_StaticCountdown, taskPriority);
     struct Task *task = &gTasks[taskId];
@@ -170,7 +169,7 @@ static u32 CreateStaticCountdownTask(u8 funcSetId, u8 taskPriority)
     return taskId;
 }
 
-static bool32 StartStaticCountdown(void)
+static bool32 UNUSED StartStaticCountdown(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_StaticCountdown);
     if (taskId == TASK_NONE)
@@ -180,7 +179,7 @@ static bool32 StartStaticCountdown(void)
     return TRUE;
 }
 
-static bool32 IsStaticCountdownRunning(void)
+static bool32 UNUSED IsStaticCountdownRunning(void)
 {
     return FuncIsActiveTask(Task_StaticCountdown);
 }

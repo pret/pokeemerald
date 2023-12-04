@@ -702,8 +702,10 @@ static const u8 sTextColors[][3] =
     {0, 7, 8}
 };
 
-static const u8 sAButton_Gfx[] = INCBIN_U8("graphics/summary_screen/a_button.4bpp");
-static const u8 sBButton_Gfx[] = INCBIN_U8("graphics/summary_screen/b_button.4bpp");
+static const u8 sButtons_Gfx[][4 * TILE_SIZE_4BPP] = {
+    INCBIN_U8("graphics/summary_screen/a_button.4bpp"),
+    INCBIN_U8("graphics/summary_screen/b_button.4bpp"),
+};
 
 static void (*const sTextPrinterFunctions[])(void) =
 {
@@ -1384,7 +1386,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
     {
     case 0:
         sum->species = GetMonData(mon, MON_DATA_SPECIES);
-        sum->species2 = GetMonData(mon, MON_DATA_SPECIES2);
+        sum->species2 = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
         sum->exp = GetMonData(mon, MON_DATA_EXP);
         sum->level = GetMonData(mon, MON_DATA_LEVEL);
         sum->abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM);
@@ -2790,8 +2792,13 @@ static void PrintGenderSymbol(struct Pokemon *mon, u16 species)
 
 static void PrintAOrBButtonIcon(u8 windowId, bool8 bButton, u32 x)
 {
-    // sBButton_Gfx - sizeof(sBButton_Gfx) = sAButton_Gfx
-    BlitBitmapToWindow(windowId, (bButton) ? sBButton_Gfx : sBButton_Gfx - sizeof(sBButton_Gfx), x, 0, 16, 16);
+    const u8 *button;
+    if (!bButton)
+        button = sButtons_Gfx[0];
+    else
+        button = sButtons_Gfx[1];
+
+    BlitBitmapToWindow(windowId, button, x, 0, 16, 16);
 }
 
 static void PrintPageNamesAndStats(void)
@@ -3984,8 +3991,7 @@ static void SummaryScreen_DestroyAnimDelayTask(void)
     }
 }
 
-// unused
-static bool32 IsMonAnimationFinished(void)
+static bool32 UNUSED IsMonAnimationFinished(void)
 {
     if (gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].callback == SpriteCallbackDummy)
         return FALSE;
