@@ -371,3 +371,17 @@ BerryTree_Text_ScatteredMulch:
 	.string "{PLAYER} scattered the {STR_VAR_1}\n"
 	.string "on the soft, loamy soil.$"
 .endif
+
+.if OW_BERRY_WEEDS == TRUE
+BerryTree_Text_WeedIsGrowing:
+	.string "A weed is growing here.\n"
+	.string "Do you want to pull it out?$"
+
+BerryTree_Text_PulledOutTheWeed:
+	.string "{PLAYER} pulled out the weed!$"
+.endif
+
+.if OW_BERRY_PESTS == TRUE
+BerryTree_Text_APokemonAppeared:
+	.string "A Pokémon appeared!$"
+.endif
