@@ -13,8 +13,12 @@
 #define OW_PC_JAPAN_WALDA_ICONS     TRUE       // In the US release of Emerald, the Cross, Bolt, and Plusle icons for Walda's wallpapers were left blank from the Japan release. Setting this to TRUE will restore them.
 
 // Berry settings
-#define OW_BERRY_MUTATIONS          FALSE      // If enabled, Berry plants can mutate based on berries planted next to them.
-#define OW_MULCH_USAGE              TRUE       // If enabled, Mulch can be used on soil to fertilize it. Otherwise, it is considered unusable.
+#define OW_BERRY_MUTATIONS           FALSE      // If enabled, Berry plants can mutate based on berries planted next to them.
+#define OW_BERRY_MULCH_USAGE         TRUE       // If enabled, Mulch can be used on soil to fertilize it. Otherwise, it is considered unusable.
+#define OW_BERRY_WEEDS               FALSE      // If enabled, weeds may grow on Berry plants that the player needs to take care of.
+#define OW_BERRY_PESTS               FALSE      // If enabled, pests may approach Berry plants that the player needs to take care of.
+#define OW_BERRY_MOISTURE            FALSE      // If enabled, Berry watering is not a matter of watering it once per stage, but rather of keeping the soil moist.
+#define OW_BERRY_VARIABLE_DRAIN_RATE FALSE      // If moisture is enabled, this setting uses the Gen4 drain rates for different berries
 
 // Out-of-battle Ability effects
 #define OW_SYNCHRONIZE_NATURE       GEN_LATEST // In Gen8, if a Pokémon with Synchronize is leading the party, it's 100% guaranteed that wild Pokémon will have the same Nature, as opposed to 50% previously. Stationary Pokémon are excluded in Gen3. In Gen6, all No Eggs Discovered gift Pokémon will have the same Nature, while in Gen7 all gift Pokémon will, regardless of Egg Group - In Gen 8, no gift Pokémon are affected. In Gen9, this ability has no out-of-battle effect.

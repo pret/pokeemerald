@@ -168,6 +168,7 @@ const struct Berry gBerries[] =
     {
         .name = _("Cheri"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_RED,
         .size = 20,
         .maxYield = 3,
         .minYield = 2,
@@ -180,12 +181,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 25,
+        .drainRate = 15,
     },
 
     [ITEM_CHESTO_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Chesto"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
+        .color = BERRY_COLOR_PURPLE,
         .size = 80,
         .maxYield = 3,
         .minYield = 2,
@@ -198,12 +201,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 25,
+        .drainRate = 15,
     },
 
     [ITEM_PECHA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Pecha"),
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
+        .color = BERRY_COLOR_PINK,
         .size = 40,
         .maxYield = 3,
         .minYield = 2,
@@ -216,12 +221,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 25,
+        .drainRate = 15,
     },
 
     [ITEM_RAWST_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Rawst"),
         .firmness = BERRY_FIRMNESS_HARD,
+        .color = BERRY_COLOR_GREEN,
         .size = 32,
         .maxYield = 3,
         .minYield = 2,
@@ -234,12 +241,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 0,
         .smoothness = 25,
+        .drainRate = 15,
     },
 
     [ITEM_ASPEAR_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Aspear"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
+        .color = BERRY_COLOR_YELLOW,
         .size = 50,
         .maxYield = 3,
         .minYield = 2,
@@ -252,12 +261,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 10,
         .smoothness = 25,
+        .drainRate = 15,
     },
 
     [ITEM_LEPPA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Leppa"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
+        .color = BERRY_COLOR_RED,
         .size = 28,
         .maxYield = 3,
         .minYield = 2,
@@ -270,12 +281,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 10,
         .smoothness = 20,
+        .drainRate = 15,
     },
 
     [ITEM_ORAN_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Oran"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
+        .color = BERRY_COLOR_BLUE,
         .size = 35,
         .maxYield = 3,
         .minYield = 2,
@@ -288,12 +301,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 10,
         .smoothness = 20,
+        .drainRate = 15,
     },
 
     [ITEM_PERSIM_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Persim"),
         .firmness = BERRY_FIRMNESS_HARD,
+        .color = BERRY_COLOR_PINK,
         .size = 47,
         .maxYield = 3,
         .minYield = 2,
@@ -306,12 +321,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 10,
         .smoothness = 20,
+        .drainRate = 15,
     },
 
     [ITEM_LUM_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Lum"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
+        .color = BERRY_COLOR_GREEN,
         .size = 34,
         .maxYield = 2,
         .minYield = 1,
@@ -324,12 +341,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 10,
         .smoothness = 20,
+        .drainRate = 8,
     },
 
     [ITEM_SITRUS_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Sitrus"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
+        .color = BERRY_COLOR_YELLOW,
         .size = 95,
         .maxYield = 3,
         .minYield = 2,
@@ -342,12 +361,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 10,
         .smoothness = 20,
+        .drainRate = 7,
     },
 
     [ITEM_FIGY_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Figy"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_RED,
         .size = 100,
         .maxYield = 3,
         .minYield = 2,
@@ -360,12 +381,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 25,
+        .drainRate = 10,
     },
 
     [ITEM_WIKI_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Wiki"),
         .firmness = BERRY_FIRMNESS_HARD,
+        .color = BERRY_COLOR_PURPLE,
         .size = 115,
         .maxYield = 3,
         .minYield = 2,
@@ -378,12 +401,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 25,
+        .drainRate = 10,
     },
 
     [ITEM_MAGO_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Mago"),
         .firmness = BERRY_FIRMNESS_HARD,
+        .color = BERRY_COLOR_PINK,
         .size = 126,
         .maxYield = 3,
         .minYield = 2,
@@ -396,12 +421,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 25,
+        .drainRate = 10,
     },
 
     [ITEM_AGUAV_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Aguav"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
+        .color = BERRY_COLOR_GREEN,
         .size = 64,
         .maxYield = 3,
         .minYield = 2,
@@ -414,12 +441,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 0,
         .smoothness = 25,
+        .drainRate = 10,
     },
 
     [ITEM_IAPAPA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Iapapa"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_YELLOW,
         .size = 223,
         .maxYield = 3,
         .minYield = 2,
@@ -432,12 +461,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 10,
         .smoothness = 25,
+        .drainRate = 10,
     },
 
     [ITEM_RAZZ_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Razz"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
+        .color = BERRY_COLOR_RED,
         .size = 120,
         .maxYield = 6,
         .minYield = 3,
@@ -450,12 +481,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 20,
+        .drainRate = 35,
     },
 
     [ITEM_BLUK_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Bluk"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_PURPLE,
         .size = 108,
         .maxYield = 6,
         .minYield = 3,
@@ -468,12 +501,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 20,
+        .drainRate = 35,
     },
 
     [ITEM_NANAB_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Nanab"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
+        .color = BERRY_COLOR_PINK,
         .size = 77,
         .maxYield = 6,
         .minYield = 3,
@@ -486,12 +521,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 0,
         .smoothness = 20,
+        .drainRate = 35,
     },
 
     [ITEM_WEPEAR_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Wepear"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
+        .color = BERRY_COLOR_GREEN,
         .size = 74,
         .maxYield = 6,
         .minYield = 3,
@@ -504,12 +541,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 10,
         .smoothness = 20,
+        .drainRate = 35,
     },
 
     [ITEM_PINAP_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Pinap"),
         .firmness = BERRY_FIRMNESS_HARD,
+        .color = BERRY_COLOR_YELLOW,
         .size = 80,
         .maxYield = 6,
         .minYield = 3,
@@ -522,12 +561,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 10,
         .smoothness = 20,
+        .drainRate = 35,
     },
 
     [ITEM_POMEG_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Pomeg"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
+        .color = BERRY_COLOR_RED,
         .size = 135,
         .maxYield = 6,
         .minYield = 2,
@@ -540,12 +581,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 0,
         .smoothness = 20,
+        .drainRate = 8,
     },
 
     [ITEM_KELPSY_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Kelpsy"),
         .firmness = BERRY_FIRMNESS_HARD,
+        .color = BERRY_COLOR_BLUE,
         .size = 150,
         .maxYield = 6,
         .minYield = 2,
@@ -558,12 +601,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 10,
         .smoothness = 20,
+        .drainRate = 8,
     },
 
     [ITEM_QUALOT_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Qualot"),
         .firmness = BERRY_FIRMNESS_HARD,
+        .color = BERRY_COLOR_YELLOW,
         .size = 110,
         .maxYield = 6,
         .minYield = 2,
@@ -576,12 +621,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 10,
         .smoothness = 20,
+        .drainRate = 8,
     },
 
     [ITEM_HONDEW_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Hondew"),
         .firmness = BERRY_FIRMNESS_HARD,
+        .color = BERRY_COLOR_GREEN,
         .size = 162,
         .maxYield = 6,
         .minYield = 2,
@@ -594,12 +641,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 0,
         .smoothness = 20,
+        .drainRate = 8,
     },
 
     [ITEM_GREPA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Grepa"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_YELLOW,
         .size = 149,
         .maxYield = 6,
         .minYield = 2,
@@ -612,12 +661,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 10,
         .smoothness = 20,
+        .drainRate = 8,
     },
 
     [ITEM_TAMATO_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Tamato"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_RED,
         .size = 200,
         .maxYield = 4,
         .minYield = 2,
@@ -630,12 +681,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 30,
+        .drainRate = 8,
     },
 
     [ITEM_CORNN_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Cornn"),
         .firmness = BERRY_FIRMNESS_HARD,
+        .color = BERRY_COLOR_PURPLE,
         .size = 75,
         .maxYield = 4,
         .minYield = 2,
@@ -648,12 +701,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 30,
+        .drainRate = 10,
     },
 
     [ITEM_MAGOST_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Magost"),
         .firmness = BERRY_FIRMNESS_HARD,
+        .color = BERRY_COLOR_PINK,
         .size = 140,
         .maxYield = 4,
         .minYield = 2,
@@ -666,12 +721,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 0,
         .smoothness = 30,
+        .drainRate = 10,
     },
 
     [ITEM_RABUTA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Rabuta"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_GREEN,
         .size = 226,
         .maxYield = 4,
         .minYield = 2,
@@ -684,12 +741,14 @@ const struct Berry gBerries[] =
         .bitter = 20,
         .sour = 10,
         .smoothness = 30,
+        .drainRate = 10,
     },
 
     [ITEM_NOMEL_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Nomel"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
+        .color = BERRY_COLOR_YELLOW,
         .size = 285,
         .maxYield = 4,
         .minYield = 2,
@@ -702,12 +761,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 20,
         .smoothness = 30,
+        .drainRate = 10,
     },
 
     [ITEM_SPELON_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Spelon"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_RED,
         .size = 133,
         .maxYield = 2,
         .minYield = 1,
@@ -720,12 +781,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 70,
+        .drainRate = 8,
     },
 
     [ITEM_PAMTRE_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Pamtre"),
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
+        .color = BERRY_COLOR_PURPLE,
         .size = 244,
         .maxYield = 2,
         .minYield = 1,
@@ -738,12 +801,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 70,
+        .drainRate = 8,
     },
 
     [ITEM_WATMEL_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Watmel"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_PINK,
         .size = 250,
         .maxYield = 2,
         .minYield = 1,
@@ -756,12 +821,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 0,
         .smoothness = 70,
+        .drainRate = 8,
     },
 
     [ITEM_DURIN_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Durin"),
         .firmness = BERRY_FIRMNESS_HARD,
+        .color = BERRY_COLOR_GREEN,
         .size = 280,
         .maxYield = 2,
         .minYield = 1,
@@ -774,12 +841,14 @@ const struct Berry gBerries[] =
         .bitter = 40,
         .sour = 10,
         .smoothness = 70,
+        .drainRate = 8,
     },
 
     [ITEM_BELUE_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Belue"),
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
+        .color = BERRY_COLOR_PURPLE,
         .size = 300,
         .maxYield = 2,
         .minYield = 1,
@@ -792,12 +861,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 40,
         .smoothness = 70,
+        .drainRate = 8,
     },
 
     [ITEM_CHILAN_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Chilan"),
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
+        .color = BERRY_COLOR_YELLOW,
         .size = 34,
         .maxYield = 5,
         .minYield = 2,
@@ -810,12 +881,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 35,
+        .drainRate = 6,
     },
 
     [ITEM_OCCA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Occa"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
+        .color = BERRY_COLOR_RED,
         .size = 90,
         .maxYield = 5,
         .minYield = 2,
@@ -828,12 +901,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 30,
+        .drainRate = 6,
     },
 
     [ITEM_PASSHO_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Passho"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_BLUE,
         .size = 33,
         .maxYield = 5,
         .minYield = 2,
@@ -846,12 +921,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 0,
         .smoothness = 30,
+        .drainRate = 6,
     },
 
     [ITEM_WACAN_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Wacan"),
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
+        .color = BERRY_COLOR_YELLOW,
         .size = 250,
         .maxYield = 5,
         .minYield = 2,
@@ -864,12 +941,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 10,
         .smoothness = 30,
+        .drainRate = 6,
     },
 
     [ITEM_RINDO_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Rindo"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_GREEN,
         .size = 156,
         .maxYield = 5,
         .minYield = 2,
@@ -882,12 +961,14 @@ const struct Berry gBerries[] =
         .bitter = 15,
         .sour = 0,
         .smoothness = 30,
+        .drainRate = 6,
     },
 
     [ITEM_YACHE_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Yache"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
+        .color = BERRY_COLOR_BLUE,
         .size = 135,
         .maxYield = 5,
         .minYield = 2,
@@ -900,12 +981,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 15,
         .smoothness = 30,
+        .drainRate = 6,
     },
 
     [ITEM_CHOPLE_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Chople"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_RED,
         .size = 77,
         .maxYield = 5,
         .minYield = 2,
@@ -918,12 +1001,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 0,
         .smoothness = 30,
+        .drainRate = 6,
     },
 
     [ITEM_KEBIA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Kebia"),
         .firmness = BERRY_FIRMNESS_HARD,
+        .color = BERRY_COLOR_GREEN,
         .size = 90,
         .maxYield = 5,
         .minYield = 2,
@@ -936,12 +1021,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 10,
         .smoothness = 30,
+        .drainRate = 6,
     },
 
     [ITEM_SHUCA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Shuca"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_YELLOW,
         .size = 42,
         .maxYield = 5,
         .minYield = 2,
@@ -954,12 +1041,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 30,
+        .drainRate = 6,
     },
 
     [ITEM_COBA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Coba"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
+        .color = BERRY_COLOR_BLUE,
         .size = 278,
         .maxYield = 5,
         .minYield = 2,
@@ -972,12 +1061,14 @@ const struct Berry gBerries[] =
         .bitter = 15,
         .sour = 0,
         .smoothness = 30,
+        .drainRate = 6,
     },
 
     [ITEM_PAYAPA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Payapa"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_PURPLE,
         .size = 252,
         .maxYield = 5,
         .minYield = 2,
@@ -990,12 +1081,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 15,
         .smoothness = 30,
+        .drainRate = 6,
     },
 
     [ITEM_TANGA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Tanga"),
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
+        .color = BERRY_COLOR_GREEN,
         .size = 42,
         .maxYield = 5,
         .minYield = 2,
@@ -1008,12 +1101,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 10,
         .smoothness = 35,
+        .drainRate = 6,
     },
 
     [ITEM_CHARTI_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Charti"),
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
+        .color = BERRY_COLOR_YELLOW,
         .size = 28,
         .maxYield = 5,
         .minYield = 2,
@@ -1026,12 +1121,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 35,
+        .drainRate = 6,
     },
 
     [ITEM_KASIB_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Kasib"),
         .firmness = BERRY_FIRMNESS_HARD,
+        .color = BERRY_COLOR_PURPLE,
         .size = 144,
         .maxYield = 5,
         .minYield = 2,
@@ -1044,12 +1141,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 35,
+        .drainRate = 6,
     },
 
     [ITEM_HABAN_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Haban"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_RED,
         .size = 23,
         .maxYield = 5,
         .minYield = 2,
@@ -1062,12 +1161,14 @@ const struct Berry gBerries[] =
         .bitter = 20,
         .sour = 0,
         .smoothness = 35,
+        .drainRate = 6,
     },
 
     [ITEM_COLBUR_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Colbur"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
+        .color = BERRY_COLOR_PURPLE,
         .size = 39,
         .maxYield = 5,
         .minYield = 2,
@@ -1080,12 +1181,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 20,
         .smoothness = 35,
+        .drainRate = 6,
     },
 
     [ITEM_BABIRI_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Babiri"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
+        .color = BERRY_COLOR_GREEN,
         .size = 265,
         .maxYield = 5,
         .minYield = 2,
@@ -1098,12 +1201,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 35,
+        .drainRate = 6,
     },
 
     [ITEM_ROSELI_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Roseli"),
         .firmness = BERRY_FIRMNESS_HARD,
+        .color = BERRY_COLOR_PINK,
         .size = 35,
         .maxYield = 5,
         .minYield = 2,
@@ -1116,12 +1221,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 0,
         .smoothness = 35,
+        .drainRate = 6,
     },
 
     [ITEM_LIECHI_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Liechi"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
+        .color = BERRY_COLOR_RED,
         .size = 111,
         .maxYield = 2,
         .minYield = 1,
@@ -1134,12 +1241,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 10,
         .smoothness = 80,
+        .drainRate = 4,
     },
 
     [ITEM_GANLON_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Ganlon"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
+        .color = BERRY_COLOR_PURPLE,
         .size = 33,
         .maxYield = 2,
         .minYield = 1,
@@ -1152,12 +1261,14 @@ const struct Berry gBerries[] =
         .bitter = 40,
         .sour = 0,
         .smoothness = 80,
+        .drainRate = 4,
     },
 
     [ITEM_SALAC_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Salac"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
+        .color = BERRY_COLOR_GREEN,
         .size = 95,
         .maxYield = 2,
         .minYield = 1,
@@ -1170,12 +1281,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 40,
         .smoothness = 80,
+        .drainRate = 4,
     },
 
     [ITEM_PETAYA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Petaya"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
+        .color = BERRY_COLOR_PINK,
         .size = 237,
         .maxYield = 2,
         .minYield = 1,
@@ -1188,12 +1301,14 @@ const struct Berry gBerries[] =
         .bitter = 40,
         .sour = 0,
         .smoothness = 80,
+        .drainRate = 4,
     },
 
     [ITEM_APICOT_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Apicot"),
         .firmness = BERRY_FIRMNESS_HARD,
+        .color = BERRY_COLOR_BLUE,
         .size = 75,
         .maxYield = 2,
         .minYield = 1,
@@ -1206,12 +1321,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 40,
         .smoothness = 80,
+        .drainRate = 4,
     },
 
     [ITEM_LANSAT_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Lansat"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_RED,
         .size = 97,
         .maxYield = 2,
         .minYield = 1,
@@ -1224,12 +1341,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 10,
         .smoothness = 30,
+        .drainRate = 4,
     },
 
     [ITEM_STARF_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Starf"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
+        .color = BERRY_COLOR_GREEN,
         .size = 153,
         .maxYield = 2,
         .minYield = 1,
@@ -1242,12 +1361,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 10,
         .smoothness = 30,
+        .drainRate = 4,
     },
 
     [ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Enigma"),
         .firmness = BERRY_FIRMNESS_HARD,
+        .color = BERRY_COLOR_PURPLE,
         .size = 155,
         .maxYield = 5,
         .minYield = 2,
@@ -1260,12 +1381,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 60,
+        .drainRate = 7,
     },
 
     [ITEM_MICLE_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Micle"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_GREEN,
         .size = 41,
         .maxYield = 5,
         .minYield = 2,
@@ -1278,12 +1401,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 0,
         .smoothness = 60,
+        .drainRate = 7,
     },
 
     [ITEM_CUSTAP_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Custap"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
+        .color = BERRY_COLOR_RED,
         .size = 267,
         .maxYield = 5,
         .minYield = 2,
@@ -1296,12 +1421,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 0,
         .smoothness = 60,
+        .drainRate = 7,
     },
 
     [ITEM_JABOCA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Jaboca"),
         .firmness = BERRY_FIRMNESS_SOFT,
+        .color = BERRY_COLOR_YELLOW,
         .size = 33,
         .maxYield = 5,
         .minYield = 2,
@@ -1314,12 +1441,14 @@ const struct Berry gBerries[] =
         .bitter = 40,
         .sour = 10,
         .smoothness = 60,
+        .drainRate = 7,
     },
 
     [ITEM_ROWAP_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Rowap"),
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
+        .color = BERRY_COLOR_BLUE,
         .size = 52,
         .maxYield = 5,
         .minYield = 2,
@@ -1332,12 +1461,14 @@ const struct Berry gBerries[] =
         .bitter = 0,
         .sour = 40,
         .smoothness = 60,
+        .drainRate = 7,
     },
 
     [ITEM_KEE_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Kee"),
         .firmness = BERRY_FIRMNESS_UNKNOWN,
+        .color = BERRY_COLOR_YELLOW,
         .size = 0,
         .maxYield = 5,
         .minYield = 2,
@@ -1350,12 +1481,14 @@ const struct Berry gBerries[] =
         .bitter = 10,
         .sour = 10,
         .smoothness = 60,
+        .drainRate = 7,
     },
 
     [ITEM_MARANGA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("Marnga"), // "Maranga" is too long
         .firmness = BERRY_FIRMNESS_UNKNOWN,
+        .color = BERRY_COLOR_BLUE,
         .size = 0,
         .maxYield = 5,
         .minYield = 2,
@@ -1368,12 +1501,14 @@ const struct Berry gBerries[] =
         .bitter = 30,
         .sour = 10,
         .smoothness = 60,
+        .drainRate = 7,
     },
 
     [ITEM_ENIGMA_BERRY_E_READER - FIRST_BERRY_INDEX] =
     {
         .name = _("Enigma"),
         .firmness = BERRY_FIRMNESS_UNKNOWN,
+        .color = BERRY_COLOR_PURPLE,
         .size = 0,
         .maxYield = 2,
         .minYield = 1,
@@ -1386,6 +1521,7 @@ const struct Berry gBerries[] =
         .bitter = 40,
         .sour = 40,
         .smoothness = 40,
+        .drainRate = 7,
     },
 };
 
@@ -1758,7 +1894,7 @@ static u8 CalcBerryYield(struct BerryTree *tree)
     u8 min = berry->minYield;
     u8 max = berry->maxYield;
     u8 result = CalcBerryYieldInternal(max, min, BerryTreeGetNumStagesWatered(tree));
-    if (OW_MULCH_USAGE && (tree->mulch == ITEM_TO_MULCH(ITEM_RICH_MULCH) || tree->mulch == ITEM_TO_MULCH(ITEM_AMAZE_MULCH)))
+    if (OW_BERRY_MULCH_USAGE && (tree->mulch == ITEM_TO_MULCH(ITEM_RICH_MULCH) || tree->mulch == ITEM_TO_MULCH(ITEM_AMAZE_MULCH)))
         result += 2;
 
     return result;
@@ -1907,7 +2043,7 @@ void SetBerryTreesSeen(void)
 
 bool8 PlayerHasMulch(void)
 {
-    if (!OW_MULCH_USAGE)
+    if (!OW_BERRY_MULCH_USAGE)
         return FALSE;
     if (CheckBagHasItem(ITEM_GROWTH_MULCH, 1))
         return TRUE;
@@ -2035,3 +2171,32 @@ static void SetTreeMutations(u8 id, u8 berry)
     tree->mutationC = myMutation.asField.c;
 #endif
 }
+
+#if OW_BERRY_PESTS == TRUE
+static u16 GetBerryPestSpecies(u8 berryId)
+{
+    const struct Berry *berry = GetBerryInfo(berryId);
+    switch(berry->color)
+    {
+        case BERRY_COLOR_RED:
+            return SPECIES_LEDYBA;
+            break;
+        case BERRY_COLOR_BLUE:
+            return SPECIES_VOLBEAT;
+            break;
+        case BERRY_COLOR_PURPLE:
+            return SPECIES_ILLUMISE;
+            break;
+        case BERRY_COLOR_GREEN:
+            return SPECIES_BURMY_PLANT_CLOAK;
+            break;
+        case BERRY_COLOR_YELLOW:
+            return SPECIES_COMBEE;
+            break;
+        case BERRY_COLOR_PINK:
+            return SPECIES_SPEWPA;
+            break;
+    }
+    return SPECIES_NONE;
+}
+#endif

@@ -40,7 +40,7 @@ BerryTree_EventScript_WantToPlant::
 	end
 
 BerryTree_EventScript_WantToMulch::
-.if OW_MULCH_USAGE == TRUE
+.if OW_BERRY_MULCH_USAGE == TRUE
 	msgbox BerryTree_Text_WantToMulch, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_ChooseMulchToUse
 	goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_CancelPlanting
@@ -48,7 +48,7 @@ BerryTree_EventScript_WantToMulch::
 	end
 
 BerryTree_EventScript_WantToPlantMulch::
-.if OW_MULCH_USAGE == TRUE
+.if OW_BERRY_MULCH_USAGE == TRUE
 	message BerryTree_Text_ItsSoftLoamySoil
 	waitmessage
 	multichoice 0, 0, MULTI_BERRY_PLOT, FALSE
@@ -355,7 +355,7 @@ BerryTree_Text_PutAwayBerry_Mutation:
 	.string "loamy state.$"
 .endif
 
-.if OW_MULCH_USAGE == TRUE
+.if OW_BERRY_MULCH_USAGE == TRUE
 BerryTree_EventScript_UseMulch::
 	special ObjectEventInteractionApplyMulch
 	message BerryTree_Text_ScatteredMulch
