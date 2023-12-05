@@ -76,10 +76,10 @@ struct BerryTree
     u8 pests:1;
     u8 mutationB:2;
     u8 regrowthCount:4;
-    u8 watered:4;
+    u8 watered:4; // Used to keep track of yield lost to drought in case of Gen4 watering
     u16 moistureLevel:7;
-    u16 moistureClock:6;
-    u16 padding:3;
+    u16 moistureClock:7;
+    u16 padding:2;
 };
 
 #endif // GUARD_GLOBAL_BERRY_H

@@ -373,6 +373,18 @@ BerryTree_Text_ScatteredMulch:
 .endif
 
 .if OW_BERRY_WEEDS == TRUE
+BerryTree_EventScript_WeedIsGrowing::
+	msgbox BerryTree_Text_WeedIsGrowing, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_PullOutWeed
+	return
+
+BerryTree_EventScript_PullOutWeed::
+	special ObjectEventInteractionPullBerryWeed
+	message BerryTree_Text_PulledOutTheWeed
+	waitmessage
+	waitbuttonpress
+	return
+
 BerryTree_Text_WeedIsGrowing:
 	.string "A weed is growing here.\n"
 	.string "Do you want to pull it out?$"

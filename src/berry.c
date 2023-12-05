@@ -23,8 +23,11 @@ static u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water);
 static u8 CalcBerryYield(struct BerryTree *tree);
 static u8 GetBerryCountByBerryTreeId(u8 id);
 static u16 GetStageDurationByBerryType(u8);
+static u16 GetDrainRateByBerryType(u8);
 static void SetTreeMutations(u8 id, u8 berry);
 static u8 GetTreeMutationValue(u8 id);
+static void TryForWeeds(struct BerryTree *tree);
+static void TryForPests(struct BerryTree *tree);
 
 //.rodata
 static const u8 sBerryDescriptionPart1_Cheri[] = _("Blooms with delicate pretty flowers.");
@@ -1633,7 +1636,10 @@ struct BerryTree *GetBerryTreeInfo(u8 id)
 bool32 ObjectEventInteractionWaterBerryTree(void)
 {
     struct BerryTree *tree = GetBerryTreeInfo(GetObjectEventBerryTreeId(gSelectedObjectEvent));
-
+#if OW_BERRY_MOISTURE == TRUE
+    tree->moistureLevel = 100;
+    return TRUE;
+#else
     switch (tree->stage)
     {
     case BERRY_STAGE_PLANTED:
@@ -1652,6 +1658,7 @@ bool32 ObjectEventInteractionWaterBerryTree(void)
         return FALSE;
     }
     return TRUE;
+#endif
 }
 
 bool8 IsPlayerFacingEmptyBerryTreePatch(void)
@@ -1699,6 +1706,7 @@ static bool32 BerryTreeGrow(struct BerryTree *tree)
         tree->watered = 0;
         tree->berryYield = 0;
         tree->stage = BERRY_STAGE_SPROUTED;
+        tree->moistureLevel = 100;
         if (++tree->regrowthCount == ((tree->mulch == ITEM_TO_MULCH(ITEM_GOOEY_MULCH)) ? 15 : 10))
             *tree = gBlankBerryTree;
         break;
@@ -1720,6 +1728,7 @@ static u16 GetMulchAffectedGrowthRate(u16 berryDuration, u8 mulch, u8 stage)
 void BerryTreeTimeUpdate(s32 minutes)
 {
     int i;
+    u8 drainVal;
     struct BerryTree *tree;
 
     for (i = 0; i < BERRY_TREES_COUNT; i++)
@@ -1735,6 +1744,35 @@ void BerryTreeTimeUpdate(s32 minutes)
             else
             {
                 s32 time = minutes;
+
+                // Check moisture gradient, pests and weeds
+                while (time > 0)
+                {
+                    tree->moistureClock += 1;
+                    time -= 1;
+                    if (tree->moistureClock % 60 == 0)
+                    {
+                        if (OW_BERRY_MOISTURE == TRUE)
+                        {
+                            drainVal = OW_BERRY_VARIABLE_DRAIN_RATE ? GetDrainRateByBerryType(tree->berry) : 4;
+                            if (tree->moistureLevel == 0 || (!OW_BERRY_VARIABLE_DRAIN_RATE && tree->moistureLevel == 4)) // Without variable drain rate, this needs to trigger after 24 hours, hence the extra check
+                                tree->watered++;
+                            else if (tree->moistureLevel <= drainVal)
+                                tree->moistureLevel = 0;
+                            else
+                                tree->moistureLevel -= drainVal;
+                        }
+                        if (tree->moistureClock == 120)
+                        {
+                            TryForWeeds(tree);
+                            TryForPests(tree);
+                            tree->moistureClock = 0;
+                        }
+                    }
+                }
+
+                // Check Berry growth
+                time = minutes;
 
                 while (time != 0)
                 {
@@ -1762,6 +1800,7 @@ void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 allowGrowth)
     tree->berry = berry;
     tree->minutesUntilNextStage = GetMulchAffectedGrowthRate(GetStageDurationByBerryType(berry), tree->mulch, stage);
     tree->stage = stage;
+    tree->moistureLevel = 100;
     if (stage == BERRY_STAGE_BERRIES)
     {
         tree->berryYield = tree->berryYield + CalcBerryYield(tree);
@@ -1907,6 +1946,11 @@ static u16 GetStageDurationByBerryType(u8 berry)
     return GetBerryInfo(berry)->stageDuration * 60;
 }
 
+static u16 GetDrainRateByBerryType(u8 berry)
+{
+    return GetBerryInfo(berry)->drainRate;
+}
+
 void ObjectEventInteractionGetBerryTreeData(void)
 {
     u8 id;
@@ -2004,6 +2048,16 @@ void ObjectEventInteractionRemoveBerryTree(void)
     SetBerryTreeJustPicked(gSpecialVar_LastTalked, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
+void ObjectEventInteractionPullBerryWeed(void)
+{
+    gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].weeds = FALSE;
+}
+
+void ObjectEventInteractionClearBerryPests(void)
+{
+    gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].pests = FALSE;
+}
+
 bool8 PlayerHasBerries(void)
 {
     return IsBagPocketNonEmpty(POCKET_BERRIES);
@@ -2061,7 +2115,6 @@ bool8 PlayerHasMulch(void)
     return FALSE;
 }
 
-// Berry mutations
 #if OW_BERRY_MUTATIONS == TRUE
 #define BERRY_MUTATION_CHANCE 25
 
@@ -2199,3 +2252,26 @@ static u16 GetBerryPestSpecies(u8 berryId)
     return SPECIES_NONE;
 }
 #endif
+
+#define BERRY_WEEDS_CHANCE 15
+#define BERRY_PESTS_CHANCE 15
+
+static void TryForWeeds(struct BerryTree *tree)
+{
+    if (!OW_BERRY_WEEDS)
+        return;
+    if (tree->weeds == TRUE)
+        return;
+    if (Random() % 100 < BERRY_WEEDS_CHANCE)
+        tree->weeds = TRUE;
+}
+
+static void TryForPests(struct BerryTree *tree)
+{
+    if (!OW_BERRY_WEEDS)
+        return;
+    if (tree->pests == TRUE)
+        return;
+    if (Random() % 100 < BERRY_PESTS_CHANCE && tree->stage > BERRY_STAGE_PLANTED)
+        tree->pests = TRUE;
+}
