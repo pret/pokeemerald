@@ -9,6 +9,7 @@
 #include "item_menu.h"
 #include "main.h"
 #include "random.h"
+#include "script_pokemon_util.h"
 #include "string_util.h"
 #include "text.h"
 #include "constants/event_object_movement.h"
@@ -26,6 +27,7 @@ static u16 GetStageDurationByBerryType(u8);
 static u16 GetDrainRateByBerryType(u8);
 static void SetTreeMutations(u8 id, u8 berry);
 static u8 GetTreeMutationValue(u8 id);
+static u16 GetBerryPestSpecies(u8 berryId);
 static void TryForWeeds(struct BerryTree *tree);
 static void TryForPests(struct BerryTree *tree);
 
@@ -1746,7 +1748,7 @@ void BerryTreeTimeUpdate(s32 minutes)
                 s32 time = minutes;
 
                 // Check moisture gradient, pests and weeds
-                while (time > 0)
+                while (time > 0 && tree->stage != BERRY_STAGE_BERRIES)
                 {
                     tree->moistureClock += 1;
                     time -= 1;
@@ -2063,6 +2065,24 @@ bool8 PlayerHasBerries(void)
     return IsBagPocketNonEmpty(POCKET_BERRIES);
 }
 
+bool8 ObjectEventInteractionBerryHasWeed(void)
+{
+    return gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].weeds;
+}
+
+bool8 ObjectEventInteractionBerryHasPests(void)
+{
+    u16 species;
+    if (!OW_BERRY_PESTS || !gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].pests)
+        return FALSE;
+    species = GetBerryPestSpecies(gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].berry);
+    if (species == SPECIES_NONE)
+        return FALSE;
+    CreateScriptedWildMon(species, 14 + Random() % 3, ITEM_NONE);
+    gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].pests = FALSE;
+    return TRUE;
+}
+
 // Berry tree growth is frozen at their initial stage (usually, fully grown) until the player has seen the tree
 // For all berry trees on screen, allow normal growth
 void SetBerryTreesSeen(void)
@@ -2224,9 +2244,9 @@ static void SetTreeMutations(u8 id, u8 berry)
 #endif
 }
 
-#if OW_BERRY_PESTS == TRUE
 static u16 GetBerryPestSpecies(u8 berryId)
 {
+#if OW_BERRY_PESTS == TRUE
     const struct Berry *berry = GetBerryInfo(berryId);
     switch(berry->color)
     {
@@ -2249,9 +2269,9 @@ static u16 GetBerryPestSpecies(u8 berryId)
             return SPECIES_SPEWPA;
             break;
     }
+#endif
     return SPECIES_NONE;
 }
-#endif
 
 #define BERRY_WEEDS_CHANCE 15
 #define BERRY_PESTS_CHANCE 15

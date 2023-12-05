@@ -190,6 +190,12 @@ BerryTree_EventScript_ItemUsePlantBerry::
 	end
 
 BerryTree_EventScript_WantToWater::
+.if OW_BERRY_PESTS == TRUE
+	call BerryTree_EventScript_CheckForPests
+.endif
+.if OW_BERRY_WEEDS == TRUE
+	call BerryTree_EventScript_CheckForWeed
+.endif
 	checkitem ITEM_WAILMER_PAIL
 	goto_if_eq VAR_RESULT, FALSE, BerryTree_EventScript_DontWater
 	special ObjectEventInteractionGetBerryName
@@ -373,6 +379,11 @@ BerryTree_Text_ScatteredMulch:
 .endif
 
 .if OW_BERRY_WEEDS == TRUE
+BerryTree_EventScript_CheckForWeed::
+	specialvar VAR_RESULT, ObjectEventInteractionBerryHasWeed
+	call_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_WeedIsGrowing
+	return
+
 BerryTree_EventScript_WeedIsGrowing::
 	msgbox BerryTree_Text_WeedIsGrowing, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_PullOutWeed
@@ -394,6 +405,18 @@ BerryTree_Text_PulledOutTheWeed:
 .endif
 
 .if OW_BERRY_PESTS == TRUE
+BerryTree_EventScript_CheckForPests::
+	specialvar VAR_RESULT, ObjectEventInteractionBerryHasPests
+	call_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_EncounterPests
+	return
+
+BerryTree_EventScript_EncounterPests::
+	message BerryTree_Text_APokemonAppeared
+	waitmessage
+	waitbuttonpress
+	dowildbattle
+	return
+
 BerryTree_Text_APokemonAppeared:
 	.string "A Pokémon appeared!$"
 .endif

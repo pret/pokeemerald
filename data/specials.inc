@@ -545,3 +545,5 @@ gSpecials::
 	def_special ObjectEventInteractionApplyMulch
 	def_special ObjectEventInteractionPullBerryWeed
 	def_special ObjectEventInteractionClearBerryPests
+	def_special ObjectEventInteractionBerryHasWeed
+	def_special ObjectEventInteractionBerryHasPests
