@@ -76,10 +76,7 @@ struct BerryTree
     u8 pests:1;
     u8 mutationB:2;
     u8 regrowthCount:4;
-    u8 watered1:1;
-    u8 watered2:1;
-    u8 watered3:1;
-    u8 watered4:1;
+    u8 watered:4;
     u16 moistureLevel:7;
     u16 moistureClock:6;
     u16 padding:3;

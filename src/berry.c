@@ -1637,16 +1637,16 @@ bool32 ObjectEventInteractionWaterBerryTree(void)
     switch (tree->stage)
     {
     case BERRY_STAGE_PLANTED:
-        tree->watered1 = TRUE;
+        tree->watered |= (1 << 0);
         break;
     case BERRY_STAGE_SPROUTED:
-        tree->watered2 = TRUE;
+        tree->watered |= (1 << 1);
         break;
     case BERRY_STAGE_TALLER:
-        tree->watered3 = TRUE;
+        tree->watered |= (1 << 2);
         break;
     case BERRY_STAGE_FLOWERING:
-        tree->watered4 = TRUE;
+        tree->watered |= (1 << 3);
         break;
     default:
         return FALSE;
@@ -1696,10 +1696,7 @@ static bool32 BerryTreeGrow(struct BerryTree *tree)
         tree->stage++;
         break;
     case BERRY_STAGE_BERRIES:
-        tree->watered1 = 0;
-        tree->watered2 = 0;
-        tree->watered3 = 0;
-        tree->watered4 = 0;
+        tree->watered = 0;
         tree->berryYield = 0;
         tree->stage = BERRY_STAGE_SPROUTED;
         if (++tree->regrowthCount == ((tree->mulch == ITEM_TO_MULCH(ITEM_GOOEY_MULCH)) ? 15 : 10))
@@ -1839,13 +1836,13 @@ static u8 BerryTreeGetNumStagesWatered(struct BerryTree *tree)
 {
     u8 count = 0;
 
-    if (tree->watered1)
+    if (tree->watered & (1 << 0))
         count++;
-    if (tree->watered2)
+    if (tree->watered & (1 << 1))
         count++;
-    if (tree->watered3)
+    if (tree->watered & (1 << 2))
         count++;
-    if (tree->watered4)
+    if (tree->watered & (1 << 3))
         count++;
     return count;
 }
