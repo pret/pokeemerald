@@ -2083,6 +2083,7 @@ static const u8 sBerryMutations[][3] = {
     {ITEM_TO_BERRY(ITEM_KELPSY_BERRY), ITEM_TO_BERRY(ITEM_WACAN_BERRY),  ITEM_TO_BERRY(ITEM_APICOT_BERRY)},
     {ITEM_TO_BERRY(ITEM_GANLON_BERRY), ITEM_TO_BERRY(ITEM_LIECHI_BERRY), ITEM_TO_BERRY(ITEM_KEE_BERRY)},
     {ITEM_TO_BERRY(ITEM_SALAC_BERRY),  ITEM_TO_BERRY(ITEM_PETAYA_BERRY), ITEM_TO_BERRY(ITEM_MARANGA_BERRY)},
+    // Up to one more Mutation can be added here for a total of 15 (only 4 bits are allocated)
 };
 
 static u8 GetMutationOutcome(u8 berry1, u8 berry2)
@@ -2092,7 +2093,7 @@ static u8 GetMutationOutcome(u8 berry1, u8 berry2)
     {
         if ((sBerryMutations[i][0] == berry1 && sBerryMutations[i][1] == berry2)
           ||(sBerryMutations[i][0] == berry2 && sBerryMutations[i][1] == berry1))
-            return sBerryMutations[i][2];
+            return (i + 1);
     }
     return 0;
 }
@@ -2138,8 +2139,7 @@ static u8 TryForMutation(u8 berryTreeId, u8 berry)
 struct TreeMutationBitfield {
   u8 a: 2;
   u8 b: 2;
-  u8 c: 3;
-  u8 unused: 1;
+  u8 unused: 4;
 };
 
 union TreeMutation {
@@ -2149,14 +2149,17 @@ union TreeMutation {
 
 static u8 GetTreeMutationValue(u8 id)
 {
+#if OW_BERRY_MUTATIONS
     struct BerryTree *tree = GetBerryTreeInfo(id);
     union TreeMutation myMutation;
-    if (!OW_BERRY_MUTATIONS || tree->stopGrowth) // Pre-generated trees shouldn't have mutations
+    if (tree->stopGrowth) // Pre-generated trees shouldn't have mutations
         return 0;
     myMutation.asField.a = tree->mutationA;
     myMutation.asField.b = tree->mutationB;
-    myMutation.asField.c = tree->mutationC;
-    return myMutation.value;
+    return sBerryMutations[myMutation.value - 1][2];
+#else
+    return 0;
+#endif
 }
 
 static void SetTreeMutations(u8 id, u8 berry)
@@ -2168,7 +2171,6 @@ static void SetTreeMutations(u8 id, u8 berry)
     myMutation.value = TryForMutation(id, berry);
     tree->mutationA = myMutation.asField.a;
     tree->mutationB = myMutation.asField.b;
-    tree->mutationC = myMutation.asField.c;
 #endif
 }
 
