@@ -5276,14 +5276,30 @@ static bool8 CalculateMoves(void)
             {
                 sStatsMovesTMHM_ID[numTMHMMoves] = (ITEM_TM01 + j);
                 numTMHMMoves++;
+
+                sStatsMoves[movesTotal] = move;
+                movesTotal++;
                 break;
             }
         }
-        if (j >= NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES)
-            numTutorMoves++;
+    }
 
-        sStatsMoves[movesTotal] = move;
-        movesTotal++;
+    for (i = 0; gTeachableLearnsets[species][i] != MOVE_UNAVAILABLE; i++)
+    {
+        move = gTeachableLearnsets[species][i];
+        for (j = 0; j < NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES; j++)
+        {
+            if (ItemIdToBattleMoveId(ITEM_TM01 + j) == move)
+                break;
+        }
+
+        if (j >= NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES)
+        {
+            numTutorMoves++;
+            
+            sStatsMoves[movesTotal] = move;
+            movesTotal++;
+        }
     }
 
     sPokedexView->numEggMoves = numEggMoves;
