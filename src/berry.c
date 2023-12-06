@@ -16,7 +16,6 @@
 #include "constants/items.h"
 
 static u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry);
-static bool32 BerryTreeGrow(struct BerryTree *tree);
 static u16 BerryTypeToItemId(u16 berry);
 static u8 BerryTreeGetNumStagesWatered(struct BerryTree *tree);
 static u8 GetNumStagesWateredByBerryTreeId(u8 id);
@@ -1688,7 +1687,7 @@ void ClearBerryTrees(void)
         gSaveBlock1Ptr->berryTrees[i] = gBlankBerryTree;
 }
 
-static bool32 BerryTreeGrow(struct BerryTree *tree)
+bool32 BerryTreeGrow(struct BerryTree *tree)
 {
     if (tree->stopGrowth)
         return FALSE;
@@ -2177,7 +2176,7 @@ static u8 TryForMutation(u8 berryTreeId, u8 berry)
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         if (gObjectEvents[i].trainerRange_berryTreeId == berryTreeId && gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
-        break;
+            break;
     }
     if (i == OBJECT_EVENTS_COUNT)
         return 0;
