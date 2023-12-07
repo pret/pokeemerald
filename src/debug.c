@@ -4694,7 +4694,7 @@ static void DebugAction_BerryFunctions_Ready(u8 taskId)
             tree = &gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(i)];
             if (tree->stage != BERRY_STAGE_NO_BERRY)
             {
-                tree->stage = BERRY_STAGE_FLOWERING;
+                tree->stage = BERRY_STAGE_BERRIES - 1;
                 BerryTreeGrow(tree);
             }
         }
