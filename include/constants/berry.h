@@ -30,6 +30,8 @@
 #define BERRY_STAGE_TALLER      3
 #define BERRY_STAGE_FLOWERING   4
 #define BERRY_STAGE_BERRIES     5
+#define BERRY_STAGE_TRUNK       6 // These follow BERRY_STAGE_BERRIES to preserve save compatibility
+#define BERRY_STAGE_BUDDING     7
 #define BERRY_STAGE_SPARKLING   255
 
 // Berries can be watered in the following stages:

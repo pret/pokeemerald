@@ -6,6 +6,8 @@ BerryTreeScript::
 	case BERRY_STAGE_PLANTED, BerryTree_EventScript_CheckBerryStage1
 	case BERRY_STAGE_SPROUTED, BerryTree_EventScript_CheckBerryStage2
 	case BERRY_STAGE_TALLER, BerryTree_EventScript_CheckBerryStage3
+	case BERRY_STAGE_TRUNK, BerryTree_EventScript_CheckBerryStageTrunk
+	case BERRY_STAGE_BUDDING, BerryTree_EventScript_CheckBerryStageBudding
 	case BERRY_STAGE_FLOWERING, BerryTree_EventScript_CheckBerryStage4
 	case BERRY_STAGE_BERRIES, BerryTree_EventScript_CheckBerryFullyGrown
 	end
@@ -101,6 +103,22 @@ BerryTree_EventScript_CheckBerryStage3::
 	lockall
 	special ObjectEventInteractionGetBerryName
 	message BerryTree_Text_BerryGrowthStage3
+	waitmessage
+	waitbuttonpress
+	goto BerryTree_EventScript_WantToWater
+
+BerryTree_EventScript_CheckBerryStageTrunk::
+	lockall
+	special ObjectEventInteractionGetBerryName
+	message BerryTree_Text_BerryGrowthStageTrunk
+	waitmessage
+	waitbuttonpress
+	goto BerryTree_EventScript_WantToWater
+
+BerryTree_EventScript_CheckBerryStageBudding::
+	lockall
+	special ObjectEventInteractionGetBerryName
+	message BerryTree_Text_BerryGrowthStageBudding
 	waitmessage
 	waitbuttonpress
 	goto BerryTree_EventScript_WantToWater
@@ -245,17 +263,39 @@ BerryTree_Text_PlantedOneBerry:
 	.string "the soft, loamy soil.$"
 
 BerryTree_Text_BerryGrowthStage1:
+.if OW_BERRY_SIX_STAGES == TRUE
+	.string "This is where you planted the\n{STR_VAR_1} BERRY!$"
+.else
 	.string "One {STR_VAR_1} was planted here.$"
+.endif
 
 BerryTree_Text_BerryGrowthStage2:
+.if OW_BERRY_SIX_STAGES == TRUE
+	.string "The {STR_VAR_1} is sprouting!$"
+.else
 	.string "{STR_VAR_1} has sprouted.$"
+.endif
 
 BerryTree_Text_BerryGrowthStage3:
+.if OW_BERRY_SIX_STAGES == TRUE
+	.string "The {STR_VAR_1}'s seedling is growing well!$"
+.else
 	.string "This {STR_VAR_1} plant is growing taller.$"
+.endif
+
+BerryTree_Text_BerryGrowthStageTrunk:
+	.string "The {STR_VAR_1}'s trunk is getting bigger!$"
+
+BerryTree_Text_BerryGrowthStageBudding:
+	.string "The {STR_VAR_1} tree has buds!$"
 
 BerryTree_Text_BerryGrowthStage4:
+.if OW_BERRY_SIX_STAGES == TRUE
+	.string "The {STR_VAR_1} tree is in bloom!$"
+.else
 	.string "These {STR_VAR_1} flowers are blooming\n"
 	.string "{STR_VAR_2}.$"
+.endif
 
 BerryTree_Text_CareAdverbGreat:
 	.string "very beautifully$"

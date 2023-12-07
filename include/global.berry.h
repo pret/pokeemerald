@@ -14,7 +14,7 @@ struct Berry
     u8 minYield;
     const u8 *description1;
     const u8 *description2;
-    u8 stageDuration;
+    u8 growthDuration;
     u8 spicy;
     u8 dry;
     u8 sweet;
@@ -36,7 +36,7 @@ struct Berry2
     u8 minYield;
     u8 *description1;
     u8 *description2;
-    u8 stageDuration;
+    u8 growthDuration;
     u8 spicy;
     u8 dry;
     u8 sweet;

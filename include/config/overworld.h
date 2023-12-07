@@ -18,7 +18,8 @@
 #define OW_BERRY_WEEDS               FALSE      // If enabled, weeds may grow on Berry plants that the player needs to take care of.
 #define OW_BERRY_PESTS               FALSE      // If enabled, pests may approach Berry plants that the player needs to take care of.
 #define OW_BERRY_MOISTURE            FALSE      // If enabled, Berry watering is not a matter of watering it once per stage, but rather of keeping the soil moist.
-#define OW_BERRY_VARIABLE_DRAIN_RATE FALSE      // If moisture is enabled, this setting uses the Gen4 drain rates for different berries
+#define OW_BERRY_VARIABLE_DRAIN_RATE FALSE      // If moisture is enabled, this setting uses the Gen4 drain rates for different berries.
+#define OW_BERRY_SIX_STAGES          FALSE      // In XY, Berries go through six stages instead of four. This toggle does not affect the time it takes for a tree to be ready for harvest. Without OW_BERRY_MOISTURE, the two extra stages count as BERRY_STAGE_TALLER for watering purposes.
 
 // Out-of-battle Ability effects
 #define OW_SYNCHRONIZE_NATURE       GEN_LATEST // In Gen8, if a Pokémon with Synchronize is leading the party, it's 100% guaranteed that wild Pokémon will have the same Nature, as opposed to 50% previously. Stationary Pokémon are excluded in Gen3. In Gen6, all No Eggs Discovered gift Pokémon will have the same Nature, while in Gen7 all gift Pokémon will, regardless of Egg Group - In Gen 8, no gift Pokémon are affected. In Gen9, this ability has no out-of-battle effect.
